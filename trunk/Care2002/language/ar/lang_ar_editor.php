@@ -38,7 +38,7 @@ $LDWrittenOn=' „  «·ﬂ «»… ﬁÌ:';
 $LDWrittenFrom='„‰ ÿ—›:';
 
 $LDArticleSaved=' „ Õ›Ÿ «·„ﬁ«·…. √‰   —Ï «·⁄—÷.';
-$LDBackTxt='Back';
+$LDBackTxt=' —«Ã⁄';
 
 $LDQuickInfo='„⁄·Ê„«  Œ«’…';
 $LDPhonePolice='«·‘—ÿ…';
@@ -56,10 +56,10 @@ $LDCafenews ='«·ﬂ› Ì—Ì«';
 $LDAdmission ='«·ﬁ»Ê·';
 $LDExhibition ='«·„ƒÀ„—« ';
 $LDEducation ='«· ⁄·Ì„';
-$LDAdvStudies ='«·œ—«”…';
+$LDAdvStudies ='«·œ—«”« ';
 $LDPhyTherapy ='«·⁄·«Ã «·ÿ»Ì⁄Ì';
 $LDCalendar ='«· ﬁÊÌ„';
-$LDHelp='„”«⁄œ…';
+$LDHelp=' ⁄·Ì„« ';
 $LDMore='≈÷«›… ··„ﬁ«·…';
 
 $LDCafeNews='√Œ»«— «·ﬂ«›Ì Ì—Ì«';
@@ -70,7 +70,7 @@ $LDNewsDummy=array(1=>'√Ê·',
 4=>'—«»⁄');
 $LDMenuToday='ﬁ«∆„… «·ÌÊ„';
 $LDMenuAll='ﬁ«∆„… Œ«’… <br> &nbsp;»√Ì«„ √Œ—Ï';
-$LDPrices='Prices';
+$LDPrices='«·«”⁄«—';
 $LDNoMenu='«·ﬁ«∆„… €Ì—<br> „ Ê›—….';
 $LDWhatToDo='„«–«  —Ìœ √‰  Õ——ø';
 $LDPlsMarkSelection='√Œ «— ŒÌ«— Ê«Õœ, À„ √÷€ÿ \'≈” „—«—...\'.';
@@ -78,7 +78,13 @@ $LDMenuEdit=' Õ—Ì— «·ﬁ«∆„…';
 $LDPriceEdit=' Õ—Ì— «·”⁄—';
 $LDNewsEdit=' Õ—Ì— «·√Œ»«— √Ê ›ﬁ—… „⁄·Ê„« ';
 
-$dayname=array('Mo','Tu','We','Th','Fr','Sa','Su');
+$dayname=array('√À',
+'À·',
+'√—',
+'Œ„',
+'Ã„',
+'”»',
+'√Õ');
 $LDCafeMenu='ﬁ«∆„… «·ﬂ«›Ì Ì—Ì«';
 $LDMenu='«·ﬁ«∆„…';
 $LDThisWeek='Â–« «·«”»Ê⁄';
@@ -87,8 +93,8 @@ $LD3rdWeek='«·«”»Ê⁄ «·À«·À';
 $LDBack2CafeNews='—ÃÊ⁄ ·√Œ»«— «·ﬂ«›Ì Ì—Ì«';
 
 $LDProdName='√”„ «·„‰ Ã';
-$LDPriceDM='Price DM';
-$LDPriceEuro='Price Ä';
+$LDPriceDM='«·”⁄— DM';
+$LDPriceEuro='«·”⁄— Ä';
 $LDPrice='«·”⁄—';
 $LDNoPrice='ﬁ«∆„… «·«”⁄«— €Ì— „ Ê›—… Õ«·Ì«.';
 $LDSorry='‰Õ‰ √”›Ê‰. Õ«Ê· „—… √Œ—Ï ›Ì„« »⁄œ.';
@@ -127,7 +133,7 @@ $LD_ddpMMpyyyy='dd.mm.yyyy';
 $LD_yyyyhMMhdd='yyyy-mm-dd';
 $LD_MMsddsyyyy='mm/dd/yyyy';
 /* 2003-02-11*/
-$LDSubmitNews='√—”· «·«Œ»«—';
+$LDSubmitNews=' Õ—Ì— «·«Œ»«—';
 $LDDelete='Õ–›';
 $LDDeleteCurrency='Â· √‰  „ «ﬂœ „‰ —€» ﬂ ›Ì Õ–› Â–Â «·⁄„·…ø';
 $LDNoMainDelete='·« Ì„ﬂ‰ﬂ Õ–› «·⁄„·… «·—∆Ì”Ì…. \nÕœœ ⁄„·… —∆Ì”Ì… √Œ—Ï √Ê·«.';

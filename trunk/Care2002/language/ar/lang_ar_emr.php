@@ -23,5 +23,4 @@ $LDProblem='ÇáãÔÇßá';
 $LDDevelopment='ÊØæÑ ÇáÍÇáÉ';
 $LDAllergy='ÇáÍÓÇÓíÉ';
 $LDDietPlan='ãÎØØ ÇÇáÊÛÏíÉ';
-$LDPrintPDFDocAllReport='PDF document of all reports';
 ?>

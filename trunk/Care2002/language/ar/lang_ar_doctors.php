@@ -15,11 +15,22 @@ $Dez='ֿם׃דָׁ';
 /**
 * Note: the first element of $monat is set to empty string
 */
-$monat=array('',$Jan,$Feb,$Mae,$Apr,$Mai,$Jun,$Jul,$Aug,$Sep,$Okt,$Nov,$Dez);
+$monat=array('',$Jan,
+$Feb,
+$Mae,
+$Apr,
+$Mai,
+$Jun,
+$Jul,
+$Aug,
+$Sep,
+$Okt,
+$Nov,
+$Dez);
 
 $LDDoctors='ַבֳ״ֱַָ';
-$LDQView='DOC Quickview';  // DOC = doctor on call
-$LDQViewTxt='Quickview of today\'s DOC (doctor-on-call) schedule';
+$LDQView='Úׁײ ׃ׁםÚ ב״ָםָ Úבל ַבוַÊÝ';  // DOC = doctor on call
+$LDQViewTxt='Úׁײ ׃ׁםÚ בּֿזב ַבָזד ב״ָםָ Úבל ַבוַÊÝ';
 $LDDutyPlan='Ê־״ם״ זֿׁםֹ';
 $LDDutyPlanTxt='Ê־״ם״ זֿׁםֹ, Úׁײ, Êֽֿםֻ, ֽ׀Ý, ֵַֹֿׁ, ֵב־.';
 $LDDocsList='Þֶַדֹ ַבֳ״ֱַָ';
@@ -31,22 +42,23 @@ $LDNewsTxt='ֵÚַֿֿ, ֵ״בַÚ, Êֽׁםׁ ַבַ־ַָׁ';
 $LDMemo='Memo';
 $LDMemoTxt='Compose, read, edit memo';
 $LDCloseAlt='ֳÛבÞ הַÝ׀ֹ ַבַ״ֱַָ ז ַבַּֽׁםה';
-$LDDocsOnDuty='Doctors on Call';
+$LDDocsOnDuty='ַ״ֱַָ Úבל ַבוַÊÝ';
 
 $LDTabElements=array('ַבÞ׃ד',
-'DOC 1',								'ַבוַÊÝ/ּוַׂ ַבהֱַֿ',
-'DOC 2',
+'״ָםָ Úבל ַבוַÊÝ 1',
+'ַבוַÊÝ/ּוַׂ ַבהֱַֿ',
+'״ָםָ Úבל ַבוַÊÝ 2',
 'ַבוַÊÝ/ּוַׂ ַבהֱַֿ',
 'ד־״״ ַבזֿׁםֹ'
 								 );
 $LDShowActualPlan='Show actual duty plan';
-$LDShortDay=array('Su',
-								'Mo',
-								'Th',
-								'We',
-								'Tr',
-								'Fr',
-								'Sa'
+$LDShortDay=array('ֳֽ',
+								'ֳֻ',
+								'Êב',
+								'ַׁ',
+								'ּד',
+								'ּד',
+								'׃ָ'
 								);
 $LDFullDay=array('ַבַֽֿ',
 								'ַבַֻהםה',
@@ -56,21 +68,21 @@ $LDFullDay=array('ַבַֽֿ',
 								'ַבּדÚֹ',
 								'ַב׃ָÊ'
 								);
-$LDDoc1='Doctor-On-Call 1';
-$LDDoc2='Doctor-On-Call 2';
+$LDDoc1='״ָםָ Úבל ַבוַÊÝ 1';
+$LDDoc2='״ָםָ Úבל ַבוַÊÝ 2';
 $LDClosePlan='ֳÛבÞ ו׀ַ ַבד־״״';
 $LDNewPlan='ֵהװֱַ ד־״״ ּֿםֿ';
 $LDBack='ÊַּׁÚ';
-$LDHelp='ד׃ַÚֹֿ';
+$LDHelp='ÊÚבםדַÊ';
 $LDMakeDutyPlan='ֵהװֱַ ד־״״ זֿׁםֹ';
 $LDClk2Plan='ֳײÛ״ בÝÊֽ Þֶַדֹ ַבדזÙÝםה';
 $LDInfo4Duty='דÚבזדַÊ';
-$LDStayIn='Stay-in duty';
-$LDOnCall='On call duty';
+$LDStayIn='דהַזָ';
+$LDOnCall='דהַזָֹ Úבל ַבוַÊÝ';
 $LDPhone='ַבוַÊÝ';
 $LDBeeper='ּוַׂ ַבהֱַֿ';
 $LDMoreInfo='דÚבזדַÊ ֳײַÝםֹ';
-$LDOn='on';
+$LDOn='Ýם';
 $LDCloseWindow='ֳÛבÞ ַבהַÝ׀ֹ';
 $LDMonth='ַבװוׁ';
 $LDYear='ַב׃הֹ';
@@ -88,16 +100,16 @@ $LDCreatePersonList='ֵהװֱַ Þֶַדֹ בבדזÙÝםה';
 $LDNoPersonList='בד םÊד Êßזםה Þֶַדֹ ַָבדזÙÝםה ָÚֿ.';
 $LDShow='ֵײוַׁ';
 
-$LDDOCS='DOC Scheduler';
-$LDDOCSTxt='Doctor On Call Scheduler, plan, view, update, edit, etc.';
-$LDDOCSR='DOCSR';
-$LDDOCSRTxt='Doctor On Call Schedule Requester';
+$LDDOCS='ּֿזב ״ָםָ Úבל ַבוַÊÝ';
+$LDDOCSTxt='ּֿזבֹ ״ָםָ Úבל ַבוַÊÝ, Ê־״ם״, Úׁײ, Êֽֿםֻ, Êֽׁםׁ, ַב־.';
+$LDDOCSR='״בָ ּֿזבֹ ״ָםָ Úבל ַבוַÊÝ';
+$LDDOCSRTxt='״ַבָ ּֿזבֹ ״ָםָ Úבל ַבוַÊÝ';
 /* 2002-09-15 EL */
 $LDTestRequest='״בָ Êֽבםב';
 /* 2003-03-16 EL */
 $LDContactInfo='דÚבזדַÊ ַÊױַב';
 $LDPersonalContactInfo='דÚבזדַÊ ַÊױַב װ־ױםֹ';
-$LDOnCallContactInfo='On-Call Contact Info';
+$LDOnCallContactInfo='דÚבזדַÊ ַבַÊױַב Úבל ַבוַÊÝ';
 $LDPlsSelectDept='ֳ־Êַׁ ַבÞ׃ד';
 $LDCreateDoctorsList='ֵהװֱַ Þֶַדֹ בבֳ״ֱַָ';
 $LDPlsCreateList='ßזה ַבÞֶַדֹ ֳזבַ';

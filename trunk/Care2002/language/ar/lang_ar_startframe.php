@@ -1,18 +1,18 @@
 <?php
-$LDMainTitle='ﬂÌ— 2002 ‰Ÿ«„ „⁄·Ê„«  „ ﬂ«„· ··„” ‘›Ì«  Ê «·„—«ﬂ“ «·⁄·«ÃÌ…';
+$LDMainTitle='⁄‰«Ì… 2002 ‰Ÿ«„ „⁄·Ê„«  „ ﬂ«„· ··„” ‘›Ì«  Ê «·„—«ﬂ“ «·’ÕÌ…';
 
 /*$LDMainTitle='Marienhospital a virtual Integrated Hospital Information System in Internet';
 */
-$LDInviteAskMe='√œŒ· «· ”«∆Ê·';
+$LDInviteAskMe='√œŒ· ≈” ⁄·«„';
 $LDTipsLink=': ·„ÌÕ« ';
 $LDTipsAskMe='Ã—» ﬂ·„… „—«œ›…';
 $LDTipsImgAlt='√÷€ÿ Â‰« ··Õ’Ê· ⁄·Ï  ·„ÌÕ«  ÕÊ· ﬂÌ›Ì… Õ’Ê·ﬂ ⁄·Ï «›÷· «·‰ «∆Ã';
-$LDSubmitBut='√—”· «· ”«∆Ê·';
+$LDSubmitBut='√—”· «·«” ⁄·«„';
 
-$LDQuickInfo='„⁄·Ê„«  Œ«’…';
+$LDQuickInfo='„⁄·Ê„«  ”—Ì⁄…';
 $LDPhonePolice='«·‘—ÿ…';
 $LDPhoneFire='«·«ÿ›«¡';
-$LDAmbulance='«·ÿÊ«—Ì';
+$LDAmbulance='«·«”⁄«›';
 $LDPhone='«·Â« ›';
 $LDFax='«·›«ﬂ”';
 $LDAddress='«·⁄‰Ê«‰';
@@ -25,11 +25,11 @@ $LDCafenews ='«·ﬂ› Ì—Ì«';
 $LDAdmission ='«·ﬁ»Ê·';
 $LDExhibition ='«·„Ê∆ „—« ';
 $LDEducation ='«· ⁄·Ì„';
-$LDAdvStudies ='«·œ—«”…';
+$LDAdvStudies ='«·œ—«”« ';
 $LDPhyTherapy ='«·⁄·«Ã «·ÿ»Ì⁄Ì';
 $LDHealthTips =' ·„ÌÕ«  ’ÕÌ…';
 $LDCalendar =' ﬁÊÌ„';
-$LDHelp='„”«⁄œ…';
+$LDHelp=' ⁄·Ì„« ';
 $LDMore='«÷«›… ··„ﬁ«·…';
 
 $LDEditTitle='⁄‰Ê«‰ «·„ﬁ«·…';
@@ -40,7 +40,7 @@ $LDNewsDummy=array(1=>'√Ê·',
 
 $LDNoFrame='This website uses frames for optimal functioning. Please install a proper browser.  Please activate the Javascript (JScript) and	turn on the automatic cookie reception';
 						
-$LDClk2Write='√÷€ÿ Â‰« ··«—”«·';
+$LDClk2Write='√÷€ÿ Â‰« ·· Õ—Ì—';
 
 $LDAlertOldBrowser='Your browser version is older than 5.0!<br> We recommend the version 5.0 or later. <br> Using older versions might lead to functional unreliability of the program.';
 
@@ -55,12 +55,12 @@ $LDCookieRef='If you want to know more about cookies you can read the following 
 $LDPrivPolicy='≈–« —€»  ›Ì ﬁ—«¡«… ”Ì«” ‰« «·Œ«’… <a href=\'language/en/en_privacy.htm\' target=\'pp\'>:«÷€ÿ Â‰«</a>';
 
 $LDOurPrivPolicy='”Ì«” ‰« «·Œ«’…';
-$LDSubmitNews='√—”· «·«Œ»«—';
-$LDEditNews='Õ—— Ê √—”· «·«Œ»«— ⁄‰ ÿ—Ìﬁ «·Œÿ «·„»«‘—';
+$LDSubmitNews=' Õ—Ì—«·«Œ»«—';
+$LDEditNews='Õ—— Ê √—”· «·«Œ»«— „»«‘—«';
 /* 2002-10-17 EL */
 $LDCredits='√’Õ«» «·›÷·';
 /* 2003-05-24 EL */
 $LDPublicItems='»Ì«‰«  ⁄«„…';
 # 2003-08-28 EL
-$LDHeadline='«·⁄‰Ê«‰';
+$LDHeadline='«·⁄‰«ÊÌ‰ «·—∆Ì”Ì…';
 ?>

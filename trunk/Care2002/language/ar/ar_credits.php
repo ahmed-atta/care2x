@@ -1,7 +1,11 @@
-<html dir=rtl>
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require_once('./roots.php');
+require_once($root_path.'include/inc_environment_global.php');
+?>
+<html>
 <head>
-<!-- <meta http-equiv="Content-Type" content="text/html; charset=28596">
- --><meta http-equiv="Content-Type" content="text/html; charset=windows-1256">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1256">
 <title>√’Õ«» «·›÷·</title>
 </head>
 <body onLoad="if(window.focus) window.focus()"><font face="verdana,arial" size=6 color="#0000ff"> 
@@ -10,29 +14,9 @@
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
         <TR>
-          <TD vAlign=top align=right><font face="verdana,arial" size=2>
-			<img src="../../fotos/credits/walid_fathalla.jpg"  border=0  align=left  vspace=10>
-			
-			<b>Walid Murad Fathalla (LY)</b>
-			<p>
-			Arabic translations<br>
-			Template redesign for arabic layout<p>
-			Education and qualification<br>
-			Bachelor of science - Computer engineering - 1999<br>
-			AL Fateh university - Faculty of engineering<br>
-			Tripoli, Libya
-		
-
-			<P><a href="mailto:fathalla_w@hotmail.com"><u>Walid Fathalla can be contacted here.</u></a>
-</TD></TR></TBODY></TABLE>
-
-<hr>
-<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
-        <TBODY>
-        <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P align="right"><img src="../../fotos/credits/elpidio_latorilla_3.jpg" border=0  align=left vspace=10> 
-          <b>√Ê· ‰”Œ…  Ã—Ì»Ì… „‰ ﬂÌ— 2X ﬁ«„ »€‰‘«∆Â« ≈·»ÌœÌÊ ·« Ê—Ì«·</b> 
+          <b>√Ê· ‰”Œ…  Ã—Ì»Ì… „‰ ﬂÌ— 2002 ﬁ«„ »€‰‘«∆Â« ≈·»ÌœÌÊ ·« Ê—Ì«·</b> 
         <p align="right">:«·„Â‰…<br>
           „»—„Ã, „„—÷ Ã—«Õ…,  ﬁ‰Ì «·ﬂ —Ê‰Ì«  Ê « ’«·«  
         <p align="right"> :„Ã«· «·«Â „«„ <br>
@@ -76,7 +60,7 @@
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P align="right"><img src="../../fotos/credits/giuseppe_scarpi.jpg"  border=0  width=135 height=170 align=left vspace=10> 
-          <b>Giuseppe Scarpi (IT) translated CARE 2X to italian.</b> 
+          <b>Giuseppe Scarpi (IT) translated Care 2002 to italian.</b> 
         <p align="right"> Giuseppe Scarpi was born in Rome, Italy, 35 years ago. 
         <p align="right">He has a degree in Electronic Engineering and has worked 
           for several companies in the biomedical sector, where he developed an 
@@ -116,7 +100,7 @@
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P align="right"><img src="../../fotos/credits/daniel_zilli.jpg"  border=0  align=left vspace=10> 
-          <b>Daniel Zilli (BR) translated CARE 2X and www.care2x.com website 
+          <b>Daniel Zilli (BR) translated Care 2002 and www.care2x.com website 
           to brazilian-portuguese.</b> 
         <p align="right"> Daniel is a nice guy who loves to live a happy life. 
           He likes computers, football, and good music. He loves computers and 
@@ -131,7 +115,7 @@
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P align="right"><img src="../../fotos/credits/muhammad_panji.png"  border=0  align=left vspace=10> 
-          <b>Muhammad Panji (ID) cotranslated CARE 2X and www.care2x.com website 
+          <b>Muhammad Panji (ID) cotranslated Care 2002 and www.care2x.com website 
           to indonesian.</b> 
         <P align="right"><a href="mailto:sumodirjo@users.sourceforge.net"><u>Muhammad 
           Panji can be contacted here.</u></a> </TD></TR></TBODY></TABLE>
@@ -142,7 +126,7 @@
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P align="right"><img src="../../fotos/credits/agus_mr.jpg"  border=0  align=left vspace=10> 
-          <b>Agus Muhammad Ramdan (ID) translated CARE 2X and www.care2x.com 
+          <b>Agus Muhammad Ramdan (ID) translated Care 2002 and www.care2x.com 
           website to indonesian.</b> 
         <P align="right"><a href="mailto:agusmr@mweb.co.id"><u>Agus M. Ramdan 
           can be contacted here.</u></a> </TD></TR></TBODY></TABLE>
@@ -226,7 +210,7 @@
         <TR>
           
       <TD vAlign=top><font face="verdana,arial" size=2> <div align="right"><b>Matej 
-          Hausenblas (FR) did the french translations of CARE 2X</b> </div>
+          Hausenblas (FR) did the french translations of Care 2002</b> </div>
         <p align="right"> Matej Hausenblas was born in Prague, Czech Republic, 
           in 1981. He is a student on a math-informatics-physics university. After 
           several years of using Windows he decided to have a look at Linux, as 
@@ -271,7 +255,7 @@
         <TR>
           
       <TD vAlign=top><font face="verdana,arial" size=2> <div align="right"><b>Daniele 
-          Frijia (DE) checked the security aspects of CARE 2X.</b> <br>
+          Frijia (DE) checked the security aspects of Care 2002.</b> <br>
           A few of his many contributions:</div>
         <p align="right"> <font size=1> Advice on security<br>
           Consultations on php matters<br>
