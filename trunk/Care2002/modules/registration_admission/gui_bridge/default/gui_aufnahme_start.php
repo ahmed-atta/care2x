@@ -335,7 +335,7 @@ echo $addr_zip.' '.$addr_citytown_name.'<br>';
 </td>
 <td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">
 <?php
-if($insurance_classes){
+if(is_object($encounter_classes)){
     while($result=$encounter_classes->FetchRow()) {
 ?>
 <input name="encounter_class_nr" type="radio"  value="<?php echo $result['class_nr']; ?>" onClick="hidecat()" <?php if($encounter_class_nr==$result['class_nr']) echo 'checked'; ?>>
@@ -402,7 +402,7 @@ if(!empty($ward_info)&&$ward_info->RecordCount()){
 <td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">
 
 <?php
-if($insurance_classes!=false){
+if(is_object($insurance_classes)){
     while($result=$insurance_classes->FetchRow()) {
 ?>
 <input name="insurance_class_nr" type="radio"  value="<?php echo $result['class_nr']; ?>" onClick="hidecat()" <?php if($insurance_class_nr==$result['class_nr']) echo 'checked'; ?>>

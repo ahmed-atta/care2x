@@ -450,10 +450,10 @@ class Encounter extends Core {
 		global $db;
 		//if(empty($key)) return false;
 		$sql="SELECT e.encounter_nr, e.encounter_class_nr, p.pid, p.name_last, p.name_first, p.date_birth 
-				FROM $this->tb_enc AS e, $this->tb_person AS p";
+				FROM $this->tb_enc AS e LEFT JOIN $this->tb_person AS p ON e.pid=p.pid";
 		if(is_numeric($key)){
 			$key=(int)$key;
-			$sql.=" WHERE e.encounter_nr = $key AND NOT e.is_discharged AND e.pid=p.pid";
+			$sql.=" WHERE e.encounter_nr = $key AND NOT e.is_discharged";
 		}else{
 			$sql.=" WHERE (e.encounter_nr LIKE '$key%' 
 						OR p.pid LIKE '$key%'
@@ -461,8 +461,7 @@ class Encounter extends Core {
 						OR p.name_first LIKE '$key%'
 						OR p.date_birth LIKE '$key%')";
 			if($enc_class) $sql.="	AND e.encounter_class_nr=$enc_class";
-			$sql.="  AND NOT e.is_discharged
-						AND e.pid=p.pid ".$add_opt;
+			$sql.="  AND NOT e.is_discharged ".$add_opt;
 		}
 		//echo $sql;
 	    if ($this->result=$db->Execute($sql)) {
@@ -482,7 +481,7 @@ class Encounter extends Core {
 		return $this->_searchAdmissionBasicInfo($key,2); // 2 = outpatient (encounter class)
 	}
 	function searchEncounterBasicInfo($key){
-		return $this->_searchAdmissionBasicInfo($key,0); // 2 = outpatient (encounter class)
+		return $this->_searchAdmissionBasicInfo($key,0); // 0 = all kinds of admission
 	}
 	function searchInpatientNotInWardBasicInfo($key){
 		return $this->_searchAdmissionBasicInfo($key,1,'AND NOT in_ward'); // 2 = outpatient (encounter class)
