@@ -144,8 +144,8 @@ if(isset($$LD_var)&&$$LD_var) echo $$LD_var;
   </tr> 
   <tr>
     <td class=pblock align=right bgColor="#eeeeee"><?php echo $LDRecordStatus ?>: </td>
-    <td class=pblock>	<input type="radio" name="status" value="" <?php if($status!='hidden') echo 'checked'; ?>> <?php echo $LDVisible ?> 
-    <td class=pblock>	<input type="radio" name="status" value="hidden" <?php if($status) echo 'checked'; ?>> <?php echo $LDHidden ?>
+    <td class=pblock>	<input type="radio" name="status" value="visible" <?php if($status!='hidden') echo 'checked'; ?>> <?php echo $LDVisible ?>
+    <td class=pblock>	<input type="radio" name="status" value="hidden" <?php if($status=='hidden') echo 'checked'; ?>> <?php echo $LDHidden ?>
 	</td>
   </tr> 
 
