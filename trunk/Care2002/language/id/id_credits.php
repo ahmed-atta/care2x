@@ -12,10 +12,6 @@ require_once('../../include/inc_vars_resolve.php');
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
         <TR>
-          <TD><IMG height=15 
-            src="../../gui/img/common/default/pixel.gif" 
-            width=5 border=0></TD></TR>
-        <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/agus_mr.jpg"  border=0  align=right vspace=10>
 			<b>Versi Indonesia Care 2002  dan www.care2x.com telah dikembangkan oleh Agus Muhammad Ramdan.</b>
@@ -26,12 +22,8 @@ require_once('../../include/inc_vars_resolve.php');
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
         <TR>
-          <TD><IMG height=15 
-            src="../../gui/img/common/default/pixel.gif" 
-            width=5 border=0></TD></TR>
-        <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-            <P><img src="../../gui/img/control/default/id/id_x-blank.gif" width=135  border=0  align=right vspace=10>
+            <P><img src="../../fotos/credits/muhammad_panji.png" width=135  border=0  align=right vspace=10>
 			<b>Versi Indonesia Care 2002  telah dikembangkan oleh Muhammad Panji.</b>
 			
 			<P><a href="mailto:sumodirjo@yahoo.co.uk"><u>Muhammad Panji dapat di hubungi disini.</u></a>
@@ -39,10 +31,6 @@ require_once('../../include/inc_vars_resolve.php');
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
-        <TR>
-          <TD><IMG height=15 
-            src="../../gui/img/common/default/pixel.gif" 
-            width=5 border=0></TD></TR>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/giuseppe_scarpi.jpg" width=135  border=0  align=right vspace=10>

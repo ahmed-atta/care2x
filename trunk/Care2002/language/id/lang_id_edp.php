@@ -1,4 +1,6 @@
 <?php
+/* Translation to indonesian by Agus Muhammad Ramdan */
+/* Translation to indonesian by Muhammad Panji <sumodirjo@users.sourceforge.net> 2003-04-16 */
 $LDClose='Tutup';
 $LDCancel='Batal';
 $LDResetEntry='Hapus masukan';
@@ -8,8 +10,8 @@ $LDReset='Reset';
 $LDEnterData='Klik untuk memasukkan data';
 $LDClk2See='Klik untuk melihat data';
 $LDFoundPatient='pencarian menemukan <b>~nr~</b> Pasien';
-$LDWildCards='apa wildcards dan bagaimana menggunakannya';
-$LDNewSearch='Pencarian terbaru';
+$LDWildCards='Apa itu wildcards dan bagaimana menggunakannya';
+$LDNewSearch='Pencarian baru';
 $LDSearch='Pencarian';
 
 $LDOClock='tepat';
@@ -20,9 +22,9 @@ $LDOn='di';
 $LDAt='Pada';
 $LDClk2Edit='Klik untuk mengedit laporan';
 
-$LDNew='baru';
+$LDNew='Baru';
 $LDEdit='Edit';
-$LDCreate='buat';
+$LDCreate='Buat';
 $LDValue='nilai';
 
 $LDNews='berita';
@@ -37,8 +39,6 @@ $LDPastAll='Semua';
 $LDSelect='pilih';
 
 $LDOrderArchive='Arsip';
-
-
 
 $LDNoDataFound='Pencarian menemukan<font color=red><b>Tidak ada</b></font> data.';
 $LDClk2SeeInfo='silakan klik bagian kanan untuk informasi selengkapnya';
@@ -104,12 +104,12 @@ $LDFfActualAccess='Berikut ini Izin Akses Aktua;.';
 
 $LDAccessIndex=array(
 				'Nama',
-			 	'Nama Login',    
+			 	'Nama Login',
 			 	'Kata Kunci',
 				'',
 			 	'Area yang diijinkan',
 			 	'Tanggal/Waktu',
-			 	'Encoder', 
+			 	'Encoder',
 			 	'Pilihan'
 			 	);
 $LDChange='Rubah';
@@ -121,7 +121,7 @@ $LDInitUnlock='B';
 $LDDelete='Hapus';
 $LDInitDelete='H';
 $LDUpdateRight='Pemutakhiran Izin Akses';
-$LDInputError='Entri anda mengandung kesalahan atau beberapa data hilangg.<br> Field input yang dimerahkan harus diisi atau masukan data perlu diperbaiki.';
+$LDInputError='Entri anda mengandung kesalahan atau beberapa data hilang.<br> Field input yang dimerahkan harus diisi atau masukan data perlu diperbaiki.';
 $LDAccessRight='Izin Akses';
 $LDSureLock='Anda yakin ingin MENGUNCI izin akses ini?';
 $LDSureUnlock='Anda yakin ingin membuka kunci izin akses ini?';
@@ -142,7 +142,7 @@ $LDDateFormats=array('dd.MM.yyyy','yyyy-MM-dd','MM/dd/yyyy');
 $LDDateFormatsTxt= array('Sebagai contoh: 01.10.2002 (01 Oktober 2002)',
                                      'Sebagai contoh: 2002-10-01 (2002 Oktober 01)',
                                      'Sebagai contoh: 10/01/2002 (Oktober 01, 2002)');
- 
+
 $LDNewDateFormatSaved='Format tanggal yang baru sekarang berefek';
 $LDSetCurrency='Set mata uang';
 $LDNewCurrencySet='Mata uang baru sekarang aktif.';
@@ -150,7 +150,7 @@ $LDPlsSelectCurrency='Silahkan memilih mata uang.';
 $LDAddCurrency='Tambah tipe mata uang baru';
 $LDPlsAddCurrency='Silahkan masukan informasi tentang mata uang. Lalu klik \'Save\'.';
 $LDAddedNewCurrency='Informasi tentang mata uang baru telah disimpan.';
- 
+
 $LDmain='Utama'; // you able using 'main' or 'Utama'. we have to see contex of this word will used for.
 $LDClk2AddCurrency='Untuk memasukan tipe mata uang baru, silahkan klik disini.';
 $LDCurrencyShortName='Simbol mata uang atau singkatan:';
@@ -171,70 +171,70 @@ $LD_ddpMMpyyyy='hh.bb.tttt';
 $LD_yyyyhMMhdd='tttt-bb-hh';
 $LD_MMsddsyyyy='bb/hh/ttttt';
 /* 2002-10-22 EL */
-$LDUserInfoSaved='The user access was successfully created';
-$LDUserInfoNoSave='The access creation failed. Please check the entered information';
-$LDNoAreas='You have not selected any area!';
-$LDUserDouble='The access creation failed. Please use a different user login name.';
-$LDEnterNewUser='Create a new user access';
+$LDUserInfoSaved='Akses Pengguna telah dibuat dengan sukses';
+$LDUserInfoNoSave='Pembuatan Akses gagal. Silakan cek informasi yang dimasukkan';
+$LDNoAreas='Anda belum memilih area manapun!';
+$LDUserDouble='Pembuatan akses gagal. Silakan gunakan sebuah nama login pengguna yang lain.';
+$LDEnterNewUser='Buat sebuah akses pengguna baru';
 /* 2002-11-22 EL*/
-$LDDeleteCurrency='Are you sure, you really want to delete this currency?';
-$LDNoMainDelete='You cannot delete a main currency. \nPlease set a different main currency first.';
-$LDCurrencyExisting='This currency exists already!';
+$LDDeleteCurrency='Apakah anda yakin, Anda benar-benar mau menghapus mata uang ini?';
+$LDNoMainDelete='Anda tidak bisa menghapus mata uang utama. \nSilakan set dahulu sebuah mata uang utama yang berbeda.';
+$LDCurrencyExisting='mata uang ini sudah ada!';
 /* 2003-02-21 EL*/
 $LDMenuItem='Menu item';
-$LDOrderNr='Sort nr.';
+$LDOrderNr='No Pengurutan.';
 $LDStatus='Status';
-$LDHideBy='Hide by:';
-$LDPath='Path';
-$LDVisible='Visible';
-$LDFrameResizable='Frame is resizable';
-$LDBorderColor='Border color';
-$LDBorderWidth='Border width';
-$LDFrameWidth='Frame width';
-$LDNo='No';
-$LDYes='Yes';
-$LDAllowMultiLang='Allow multiple language choice';
-$LDDefaultLang='Default language (if multi-language is not allowed)';
+$LDHideBy='Disembunyikan oleh:';
+$LDPath='Jejak';
+$LDVisible='Tampak';
+$LDFrameResizable='Bingkai bisa diubah ukurannya';
+$LDBorderColor='Warna Tepian';
+$LDBorderWidth='Lebar tepian';
+$LDFrameWidth='Lebar bingkai';
+$LDNo='Tidak';
+$LDYes='Ya';
+$LDAllowMultiLang='Ijinkan pemilihan multibahasa';
+$LDDefaultLang='Bahasa Default(jika dukungan multi bahasa tidak diijinkan)';
 /* 2003-02-22 EL*/
-$LDMainMenuItems='Main menu items';
-$LDMainMenuDisplay='Main menu display';
-$LDDataEntryForms='Data entry forms';
-$LDControlButImg='Control buttons & images\' theme';
-$LDSampleButtons='Sample buttons';
-$LDTheme='Theme';
+$LDMainMenuItems='Item menu utama';
+$LDMainMenuDisplay='Penampilan manu utama';
+$LDDataEntryForms='Form pemasukan data';
+$LDControlButImg='Tombol kontrol & Tema gambar';
+$LDSampleButtons='Tombol contoh';
+$LDTheme='Tema';
 $LDItem='Item';
 /* 2003-02-26- EL*/
-$LDDeptAdmin='Department Administration';
-$LDNewDept='Create and configure new departments';
-$LDShowDeptInfo ='Department Profiles';
-$LDShowDeptInfoTxt='Display profile information of existing active departments';
-$LDConfigOptions='Configuration options';
-$LDDeptConfigOptions='Configuration, update info, deactivate, activate, hide and unhide departments';
-$LDDescription='Description';
+$LDDeptAdmin='Administrasi Departemen';
+$LDNewDept='Buat dan konfigurasikan departemen baru';
+$LDShowDeptInfo ='Profil Departemen';
+$LDShowDeptInfoTxt='Tampilkan informasi profil departemen yang aktif saat ini';
+$LDConfigOptions='Opsi Konfigurasi';
+$LDDeptConfigOptions='konfigurasi, pemutakhiran info, pentidakaktifan, Pengaktifan, Sembunyi dam munculkan departemen';
+$LDDescription='Deskripsi';
 /* 2003-023-01 EL*/
-$LDFormalName='Formal Name';
-$LDInternalID='Internal ID Code';
-$LDPlsSelect='Please select one';
-$LDTypeDept='Type of Department';
-$LDIsSubDept='Is department a sub-department ?';
-$LDParentDept='Parent Department';
-$LDLangVariable='Language variable';
-$LDShortName='Short Name';
-$LDAlternateName='Altenate Name';
-$LDAdmitsOutpatients='Admits outpatients ?';
-$LDAdmitsInpatients='Admits inpatients ?';
-$LDBelongsToInst='Belongs to this institution ?';
-$LDWorkHrs='Working hours';
-$LDConsultationHrs='Consultation Hours';
-$LDSigLine='Signature Line';
-$LDSigStampTxt='Signature Stamp Text';
-$LDDeptLogo='Department\'s Logo';
-$LDHidden='Hidden';
+$LDFormalName='Nama Resmi';
+$LDInternalID='Kode ID internal';
+$LDPlsSelect='Silakan pilih satu';
+$LDTypeDept='Tipe Departemen';
+$LDIsSubDept='Departemen atau sub-departemen ?';
+$LDParentDept='Departemen Induk';
+$LDLangVariable='Variabel bahasa';
+$LDShortName='Nama Pendek';
+$LDAlternateName='Nama calon pengganti';
+$LDAdmitsOutpatients='Menerima pasien keluar?';
+$LDAdmitsInpatients='Menerima pasien masuk ?';
+$LDBelongsToInst='Mengacu pada institusi ini ?';
+$LDWorkHrs='Jam Kerja';
+$LDConsultationHrs='Jam Konsultasi';
+$LDSigLine='Baris tanda tangan';
+$LDSigStampTxt='Teks stempel tanda tangan';
+$LDDeptLogo='Logo Departemen';
+$LDHidden='Tersembunyi';
 $LDNormal='Normal';
-$LDInactive='Inactive';
-$LDActive='Active';
-$LDDeptStatus='Department\'s status';
+$LDInactive='tidak Aktif';
+$LDActive='Aktif';
+$LDDeptStatus='status Departemen';
 $LDRecordStatus='Record\'s status';
 /* 2003-03-30 EL*/
-$LDConfigOptions='Configuration Options';
+$LDConfigOptions='Pilihan Konfigurasi';
 ?>

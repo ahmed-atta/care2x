@@ -469,4 +469,7 @@ $LDGotMedAdvice='Did patient receive medical advice?';
 /* 2003-03-15 EL */
 $LDShowDocList='Show document list';
 $LDScheduleNewAppointment='Schedule New Appointment';
+/* 2003-04-04 EL */
+$LDNoPendingApptThisDay='There is no pending appointment for this day.';
+$LDNoPendingApptToday='There is no pending appointment today.';
 ?>
