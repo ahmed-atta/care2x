@@ -1,8 +1,31 @@
 <!-- Creates the tabs for the patient registration module  -->
 <?php
 if(!isset($notabs)||!$notabs){
+//$tab_bot_line='#00009c';
 ?>
 <!-- Tabs  -->
+<!-- 
+<tr  bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
+<td>
+
+<table border=0 cellpadding=5 cellspacing=0>
+  <tr>
+    <td bgcolor=<?php echo $tab_bot_line ?>><font color='white'><?php echo $LDAdmit; ?></td>
+    <td>&nbsp;</td>
+    <td bgcolor=<?php echo $tab_bot_line ?>><font color='white'><?php echo $LDSearch; ?></td>
+    <td>&nbsp;</td>
+    <td bgcolor=<?php echo $tab_bot_line ?>><font color='white'><?php echo $LDArchive; ?></td>
+    <td>&nbsp;&nbsp;&nbsp;</td>
+    <td bgcolor=<?php echo $tab_bot_line ?>><font color='white'><?php echo $LDRegisterNewPerson; ?></td>
+  </tr>
+</table>
+
+
+</td>
+</tr> 
+
+ --><!-- Tabs  -->
+
 <tr  bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
 <td colspan=3><?php if($target=="entry")  $img='admit-blue.gif'; //echo '<img '.createLDImgSrc($root_path,'admit-blue.gif','0').' alt="'.$LDAdmit.'">';
 								else{ $img='admit-gray.gif';}
@@ -14,9 +37,10 @@ if(!isset($notabs)||!$notabs){
 								else{$img='arch-gray.gif'; }
 							echo '<a href="aufnahme_list.php'.URL_APPEND.'&target=archiv"><img '.createLDImgSrc($root_path,$img,'0').' alt="'.$LDArchive.'" ';if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';
 						?><img src="<?php echo $cfg['top_bgcolor']; ?>gui/img/common/default/pixel.gif" height=1 width=25><?php 
-						echo '<a href="patient_register.php'.URL_APPEND.'&target=entry"><img '.createLDImgSrc($root_path,'register_gray.gif','0').' alt="'.$LDAdmit.'" '; if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>'; ?></td>
+						echo '<a href="patient_register.php'.URL_APPEND.'&target=entry"><img '.createLDImgSrc($root_path,'register_gray.gif','0').' alt="'.$LDRegisterNewPerson.'" '; if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>'; ?></td>
 </tr>
-<?php
+
+ <?php
 }
 ?>
 <!--  Horizontal blue line below the tabs -->

@@ -12,7 +12,7 @@ define('LANG_FILE','or.php');
 $local_user='ck_op_pflegelogbuch_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-$dbtable='care_nursing_op_logbook';
+$dbtable='care_encounter_op';
 $thisfile="op-pflege-graph-getinfo.php";
 
 switch($winid)

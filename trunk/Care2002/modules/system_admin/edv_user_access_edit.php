@@ -22,7 +22,7 @@ require_once($root_path.'include/inc_config_color.php');
 */
 require($root_path.'include/inc_accessplan_areas_functions.php');
 
-$breakfile='edv.php'.URL_APPEND;
+$breakfile='edv-system-admi-welcome.php'.URL_APPEND;
 $returnfile=$HTTP_SESSION_VARS['sess_file_return'].URL_APPEND;
 $HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
 
@@ -91,7 +91,7 @@ if($mode!= '')
 						 (
 						   "'.addslashes($username).'",
 						   "'.addslashes($userid).'",
-						   "'.addslashes($pass).'",
+						   "'.md5($pass).'",
 						   "'.$p_areas.'",
 						   "'.$personell_nr.'",
 						   "'.date('Y-m-d').'",
@@ -174,8 +174,8 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 
 	<table width=100% border=0 cellspacing=0>
 	<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="45"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG> &nbsp; <?php echo "$LDEDP $LDManageAccess" ?></STRONG></FONT></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
+<STRONG> &nbsp; <?php echo "$LDManageAccess" ?></STRONG></FONT></td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
 <?php if($cfg['dhtml'])echo'<a href="'.$returnfile.'"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('edp.php','access','<?php echo $mode ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>

@@ -51,7 +51,7 @@ switch($g)
 	default:{header("Location: invalid-access-warning.php?mode=close"); exit;}; 
 }
 //echo $g;
-$dbtable='care_nursing_op_logbook';
+$dbtable='care_encounter_op';
 
 /* Establish db connection */
 if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');

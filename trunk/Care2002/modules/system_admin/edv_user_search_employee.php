@@ -16,8 +16,6 @@ $local_user='ck_edv_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_date_format_functions.php');
 
-require_once($root_path.'include/inc_config_color.php');
-
 $toggle=0;
 $breakfile= 'edv_user_access_edit.php'.URL_APPEND.'&target='.$target;
  /* Set color values for the search mask */

@@ -11,7 +11,7 @@ require($root_path.'include/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 # Default value for the maximum nr of rows per block displayed, define this to the value you wish
-# In normal cases this value is derived from the db table "care_config_global" using the "insurance_list_max_block_rows" element.
+# In normal cases this value is derived from the db table "care_config_global" using the "pagin_insurance_list_max_block_rows" element.
 define('MAX_BLOCK_ROWS',30); 
 
 $lang_tables[]='search.php';
@@ -65,7 +65,7 @@ if($srcword!=''||$mode=='paginate'){
 								 d.name_formal,
 								 d.LD_var
 					FROM  (
-								care_nursing_op_logbook AS o,
+								care_encounter_op AS o,
 								care_encounter AS e,
 								care_person AS p)
 								LEFT JOIN care_address_citytown AS t ON t.nr=p.addr_citytown_nr
@@ -105,9 +105,9 @@ if($srcword!=''||$mode=='paginate'){
 	include_once($root_path.'include/care_api_classes/class_globalconfig.php');
 	$glob_obj=new GlobalConfig($GLOBAL_CONFIG);	
 	# Get the max nr of rows from global config
-	$glob_obj->getConfig('patient_search_max_block_rows');
-	if(empty($GLOBAL_CONFIG['patient_search_max_block_rows'])) $pagen->setMaxCount(MAX_BLOCK_ROWS); # Last resort, use the default defined at the start of this page
-		else $pagen->setMaxCount($GLOBAL_CONFIG['patient_search_max_block_rows']);
+	$glob_obj->getConfig('pagin_patient_search_max_block_rows');
+	if(empty($GLOBAL_CONFIG['pagin_patient_search_max_block_rows'])) $pagen->setMaxCount(MAX_BLOCK_ROWS); # Last resort, use the default defined at the start of this page
+		else $pagen->setMaxCount($GLOBAL_CONFIG['pagin_patient_search_max_block_rows']);
 	
 	# Detect what type of sort item
 	if($oitem=='encounter_nr') $tab='e';
@@ -139,7 +139,7 @@ if($srcword!=''||$mode=='paginate'){
 
 			}else{
 				$sql2="SELECT o.nr,o.op_nr,o.dept_nr,o.op_room,o.op_date, e.encounter_nr, p.pid, p.name_last, p.name_first, p.date_birth, p.sex
-						FROM care_nursing_op_logbook AS o,
+						FROM care_encounter_op AS o,
 								care_encounter AS e,
 								care_person AS p
 						WHERE (o.op_nr LIKE '$srcword%'

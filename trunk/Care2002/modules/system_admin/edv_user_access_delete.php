@@ -16,9 +16,9 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 require_once($root_path.'include/inc_config_color.php');
 
-$breakfile='edv.php'.URL_APPEND;
-$returnfile=$HTTP_SESSION_VARS['sess_file_return'].URL_APPEND;
-$HTTP_SESSION_VARS['sess_file_return']='edv.php';
+$breakfile='edv-system-admi-welcome.php'.URL_APPEND;
+$returnfile='edv_user_access_list.php'.URL_APPEND;
+//$HTTP_SESSION_VARS['sess_file_return']='edv.php';
 
 /* Establish db connection */
 if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');

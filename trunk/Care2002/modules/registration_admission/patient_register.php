@@ -12,10 +12,11 @@ require($root_path.'include/inc_environment_global.php');
 */
 $lang_tables[]='emr.php';
 $lang_tables[]='person.php';
+$lang_tables[]='date_time.php';
 define('LANG_FILE','aufnahme.php');
 
 $local_user='aufnahme_user';
-require_once($root_path.'include/inc_front_chain_lang.php');
+require($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_date_format_functions.php');
 require_once($root_path.'include/care_api_classes/class_insurance.php');
 require_once($root_path.'include/care_api_classes/class_person.php');
@@ -45,9 +46,12 @@ $dbtable='care_person';
 $insure_private=1;
 $insure_public=2;
 	    
-/* Default path for fotos. Make sure that this directory exists! */
+# Default path for fotos. Make sure that this directory exists!
 $default_photo_path='fotos/registration';
+
 if(!isset($photo_filename)||empty($photo_filename)) $photo_filename='nopic';
+# Assume first that image is not uploaded
+$valid_image=FALSE;
 
 if(!isset($user_id) || !$user_id) {
     $user_id=$local_user.$sid;
@@ -64,7 +68,7 @@ if($dblink_ok) {
 	$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 	$glob_obj->getConfig('person_%');
 	
-    /* Check whether config foto path exists, else use default path */			
+    # Check whether config foto path exists, else use default path			
     $photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $default_photo_path;
 
     if (($mode=='save') || ($mode=='forcesave')) {
@@ -92,22 +96,17 @@ if($dblink_ok) {
             /* Save the old filename for testing */
             $old_fn=$photo_filename;
          
-		    /* Prepare the uploaded image */
-            // if a pic file is uploaded move it to the right dir
-            if(is_uploaded_file($HTTP_POST_FILES['photo_filename']['tmp_name']) && $HTTP_POST_FILES['photo_filename']['size']) {
-                $picext=substr($HTTP_POST_FILES['photo_filename']['name'],strrpos($HTTP_POST_FILES['photo_filename']['name'],'.')+1);
-                // if(stristr($picext,'jpg')||stristr($picext,'gif')||stristr($picext,'bmp'))
-                if (eregi($picext,'gif,jpg,png,bmp')) {
-                    /* Load the string cleaner function */				
-                    include_once($root_path.'include/inc_string_cleaner.php');
-                    /* Now create the new filename for the image */				
-                    $photo_filename=cleanString($name_last).'_'.cleanString($name_first).'_'.formatDate2STD($date_birth,$date_format).'.'.$picext;
-
-                    @ copy($HTTP_POST_FILES['photo_filename']['tmp_name'],$root_path.$photo_path.'/'.$photo_filename);
-					$HTTP_POST_VARS['photo_filename']=$photo_filename;
-                }
-            }
-  
+		 	# Create image object
+			include_once($root_path.'include/care_api_classes/class_image.php');
+			$img_obj=& new Image;
+			
+			# Check the uploaded image file if exists and valid
+			if($img_obj->isValidUploadedImage($HTTP_POST_FILES['photo_filename'])){
+				$valid_image=TRUE;
+				# Get the file extension
+				$picext=$img_obj->UploadedImageMimeType();
+			}
+					
             if(($update)) {
 				
                 //echo formatDate2STD($geburtsdatum,$date_format);
@@ -141,8 +140,16 @@ if($dblink_ok) {
 						 ethnic_orig="'.$ethnic_orig.'",
 						 date_update="'.date('Y-m-d H:i:s').'",';
 						 
-			   if ($old_fn!=$photo_filename) $sql.=' photo_filename="'.$photo_filename.'",';
-			  
+			   //if ($old_fn!=$photo_filename){
+			   if ($valid_image){
+					# Compose the new filename
+					$photo_filename=$pid.'.'.$picext;
+					# Save the file
+					$img_obj->saveUploadedImage($HTTP_POST_FILES['photo_filename'],$root_path.$photo_path.'/',$photo_filename);
+			   		# add to the sql query
+					$sql.=' photo_filename="'.$photo_filename.'",';
+				}
+			  # complete the sql query
 			   $sql.=' history=CONCAT(history," Update '.date('Y-m-d H:i:s').' '.$user_id."\n".'"), modify_id="'.$user_id.'" WHERE pid='.$pid;
 			
 			  $db->BeginTrans();
@@ -183,7 +190,7 @@ if($dblink_ok) {
 			  }
             } else {
                  $from='entry';
-				 /* Prepare internal data to be stored together with the user input data */
+				 # Prepare internal data to be stored together with the user input data
 				 if(!$person_obj->InitPIDExists($GLOBAL_CONFIG['person_id_nr_init'])) $HTTP_POST_VARS['pid']=$GLOBAL_CONFIG['person_id_nr_init'];
 				 $HTTP_POST_VARS['date_birth']=@formatDate2Std($date_birth,$date_format);
 				 $HTTP_POST_VARS['date_reg']=date('Y-m-d H:i:s');
@@ -197,11 +204,19 @@ if($dblink_ok) {
 	            
 				 if($person_obj->insertDataFromInternalArray())
 	             { 
-		              //* If data was newly inserted, get the insert id = patient number */
+		              # If data was newly inserted, get the insert id = PID
 		               if(!$update) $pid=$db->Insert_ID();
 					   
-				  /* Update the insurance data */
-				  /* Lets detect if the data is already existing */
+					   # Save the a valid uploaded photo
+					   if($valid_image){
+							# Compose the new filename
+							$photo_filename=$pid.'.'.$picext;
+							# Save the file
+							$img_obj->saveUploadedImage($HTTP_POST_FILES['photo_filename'],$root_path.$photo_path.'/',$photo_filename);
+					   }
+					   
+				  # Update the insurance data
+				  # Lets detect if the data is already existing
 				  if($insurance_show) {
 				      if($insurance_item_nr) {
 				          if(!empty($insurance_nr) && !empty($insurance_firm_name) && $insurance_firm_id) {  
@@ -234,7 +249,7 @@ if($dblink_ok) {
         } // end of if(!$error)
 
      }elseif(isset($pid) && ($pid!='')){
-		 /* Get the person's data */
+		 # Get the person's data
          if($data_obj=&$person_obj->getAllInfoObject())
          {
 	         $zeile=$data_obj->FetchRow();

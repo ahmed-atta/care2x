@@ -52,7 +52,7 @@ $surgery_arr=&$dept_obj->getAllActiveWithSurgery();
 # Load the date formatter 
 require_once($root_path.'include/inc_date_format_functions.php');
 	
-$dbtable='care_nursing_op_logbook';
+$dbtable='care_encounter_op';
 			
 $sql="SELECT o.*,e.encounter_class_nr, p.name_last, p.name_first, p.date_birth, p.addr_str, p.addr_str_nr, p.addr_zip, t.name AS citytown_name
 			FROM $dbtable AS o, care_encounter AS e, care_person AS p

@@ -12,7 +12,7 @@ require($root_path.'include/inc_environment_global.php');
 */
 
 # Default value for the maximum nr of rows per block displayed, define this to the value you wish
-# In normal cases this value is derived from the db table "care_config_global" using the "insurance_list_max_block_rows" element.
+# In normal cases this value is derived from the db table "care_config_global" using the "pagin_insurance_list_max_block_rows" element.
 define('MAX_BLOCK_ROWS',30); 
 
 $lang_tables=array('personell.php');
@@ -44,9 +44,9 @@ $GLOBAL_CONFIG=array();
 # Get the max nr of rows from global config
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
-$glob_obj->getConfig('personell_list_max_block_rows');
-if(empty($GLOBAL_CONFIG['personell_list_max_block_rows'])) $pagen->setMaxCount(MAX_BLOCK_ROWS); # Last resort, use the default defined at the start of this page
-	else $pagen->setMaxCount($GLOBAL_CONFIG['personell_list_max_block_rows']);
+$glob_obj->getConfig('pagin_personell_list_max_block_rows');
+if(empty($GLOBAL_CONFIG['pagin_personell_list_max_block_rows'])) $pagen->setMaxCount(MAX_BLOCK_ROWS); # Last resort, use the default defined at the start of this page
+	else $pagen->setMaxCount($GLOBAL_CONFIG['pagin_personell_list_max_block_rows']);
 
 
 if(empty($oitem)) $oitem='name_last';			
@@ -160,7 +160,7 @@ if ($linecount) echo str_replace("~nr~",$totalcount,$LDSearchFound).' '.$LDShowi
 	  <?php 
 	  	if($oitem=='pid') $flag=TRUE;
 			else $flag=FALSE; 
-		echo $pagen->SortLink($LDRegistryNr,'pid',$odir,$flag); 
+		echo $pagen->SortLink($LDPersonellNr,'pid',$odir,$flag); 
 			 ?></b></td>
       <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
 	  <?php 

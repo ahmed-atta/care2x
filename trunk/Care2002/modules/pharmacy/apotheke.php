@@ -64,9 +64,9 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <table width=100% border=0 cellspacing=0 height=100%>
 
 <tr valign=top height=10>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="45"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
 <STRONG> &nbsp; <?php echo $LDPharmacy ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right>
 <?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('submenu1.php','<?php echo $LDPharmacy ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
 <tr valign=top >
@@ -141,7 +141,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
                   face="Verdana,Helvetica,Arial" size=2><B>
 				 <a href="http://www.bnf.org/bnf/index.html">BNF 45</a> 
 				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" size=2>British National Formulary</FONT></TD></TR> 
+                <TD><FONT face="Verdana,Helvetica,Arial" size=2>British National Formulary (needs internet line)</FONT></TD></TR> 
    
  			   <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 

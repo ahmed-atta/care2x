@@ -68,6 +68,17 @@ require($root_path.'include/inc_css_a_hilitebu.php');
               <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'lockfolder.gif','0') ?>></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B><nobr>
+				 <a href="edv-main-pass.php?sid=<?php echo $sid."&lang=$lang"; ?>&target=adminlogin"><?php echo $LDManageAccess ?></a>
+				  </nobr></B></FONT></TD>
+                <TD><FONT face="Verdana,Helvetica,Arial" 
+                  size=2><?php echo $LDManageAccessTxt ?></FONT></TD>
+              <TR bgColor=#dddddd height=1>
+                <TD colSpan=3><IMG height=1 
+                  src="../../gui/img/common/default/pixel.gif" 
+                  width=5></TD></TR> 
+<!--               <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'lockfolder.gif','0') ?>></td>
+                <TD vAlign=top ><FONT 
+                  face="Verdana,Helvetica,Arial" size=2><B><nobr>
 				 <a href="edv_user_access_pass.php?sid=<?php echo $sid."&lang=$lang"; ?>"><?php echo $LDManageAccess ?></a>
 				  </nobr></B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
@@ -76,7 +87,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
                 <TD colSpan=3><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
                   width=5></TD></TR> 
-              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'storage.gif','0') ?>></td>
+ -->              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'storage.gif','0') ?>></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B> 
    				<a href="edv-main-pass.php?sid=<?php echo $sid."&lang=$lang"; ?>&target=sqldb"><?php echo $LDSqlDb ?></a></B></FONT></TD>

@@ -140,7 +140,7 @@ if (strlen($md)==1) $md="0".$md;
 
 setcookie(firstentry,'1');
 
-$dbtable='care_nursing_op_logbook';
+$dbtable='care_encounter_op';
 
 $selectfrom="SELECT o.*,
 								e.encounter_class_nr,
@@ -153,7 +153,7 @@ $selectfrom="SELECT o.*,
 								 t.name AS citytown_name,
 								 d.name_formal,
 								 d.LD_var
-					FROM  (care_nursing_op_logbook AS o,
+					FROM  (care_encounter_op AS o,
 								care_encounter AS e,
 								care_person AS p)
 								LEFT JOIN care_address_citytown AS t ON t.nr=p.addr_citytown_nr

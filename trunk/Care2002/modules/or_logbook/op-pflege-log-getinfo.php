@@ -55,7 +55,7 @@ $thisfile=basename(__FILE__);
 if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
 if($dblink_ok){	
 	// get data if exists
-	$dbtable='care_nursing_op_logbook';
+	$dbtable='care_encounter_op';
 	$sql="SELECT $element,encoding FROM $dbtable
 					 WHERE encounter_nr='$enc_nr'
 					 AND dept_nr='$dept_nr'
@@ -75,7 +75,7 @@ if($dblink_ok){
 				
 		if($mode=='save')
 		{
-					$dbtable='care_nursing_op_logbook';
+					$dbtable='care_encounter_op';
 
 					//$encoder=$ck_op_pflegelogbuch_user; 
 		
@@ -129,7 +129,7 @@ if($dblink_ok){
 								{
 									mysql_data_seek($ergebnis,0);
 									$result=$ergebnis->FetchRow();		
-									$dbtable='care_nursing_op_logbook';
+									$dbtable='care_encounter_op';
 									$sql="INSERT INTO $dbtable 
 										(
 										year,

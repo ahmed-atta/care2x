@@ -12,12 +12,12 @@ require($root_path.'include/inc_environment_global.php');
 */
 
 # Default value for the maximum nr of rows per block displayed, define this to the value you wish
-# In normal cases this value is derived from the db table "care_config_global" using the "insurance_list_max_block_rows" element.
+# In normal cases this value is derived from the db table "care_config_global" using the "pagin_insurance_list_max_block_rows" element.
 define('MAX_BLOCK_ROWS',30); 
 
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
-require_once($root_path.'include/inc_front_chain_lang.php');
+require($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_date_format_functions.php');
 
 $thisfile=basename(__FILE__);
@@ -70,9 +70,9 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 		$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 
 		# Get the max nr of rows from global config
-		$glob_obj->getConfig('person_search_max_block_rows');
-		if(empty($GLOBAL_CONFIG['person_search_max_block_rows'])) $pagen->setMaxCount(MAX_BLOCK_ROWS); # Last resort, use the default defined at the start of this page
-			else $pagen->setMaxCount($GLOBAL_CONFIG['person_search_max_block_rows']);
+		$glob_obj->getConfig('pagin_patient_search_max_block_rows');
+		if(empty($GLOBAL_CONFIG['pagin_patient_search_max_block_rows'])) $pagen->setMaxCount(MAX_BLOCK_ROWS); # Last resort, use the default defined at the start of this page
+			else $pagen->setMaxCount($GLOBAL_CONFIG['pagin_patient_search_max_block_rows']);
 		
 	   	$searchkey=trim($searchkey);
 		$suchwort=$searchkey;

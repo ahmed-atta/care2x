@@ -136,6 +136,8 @@ $dbtable='care_encounter';
 			$dept_obj=new Department;
 			//$current_dept_name=$dept_obj->FormalName($current_dept_nr);
 			$current_dept_LDvar=$dept_obj->LDvar($current_dept_nr);
+			if(isset($$current_dept_LDvar)&&!empty($$current_dept_LDvar)) $current_dept_name=$$current_dept_LDvar;
+				else $current_dept_name=$dept_obj->FormalName($current_dept_nr);
 		}
 
 	}

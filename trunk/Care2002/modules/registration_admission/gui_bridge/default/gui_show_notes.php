@@ -73,8 +73,14 @@ if($parent_admit) echo ($HTTP_SESSION_VARS['sess_full_en']);
 ?>)</font>
 </td>
 
+<?php
+# Patch 2003-11-20 
+if($parent_admit) $retbuf='&encounter_nr='.$HTTP_SESSION_VARS['sess_full_en'];
+	else $retbuf='&pid='.$HTTP_SESSION_VARS['sess_pid'];
+?>
+
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
-<a href="<?php echo $returnfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=show&type_nr='.$type_nr; ?>" ><img 
+<a href="<?php echo $returnfile.URL_APPEND.$retbuf.'&target='.$target.'&mode=show&type_nr='.$type_nr; ?>" ><img 
 <?php echo createLDImgSrc($root_path,'back2.gif','0'); ?> <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';?>><a 
 href="javascript:gethelp('notes_router.php','<?php echo $notestype; ?>','<?php echo strtr($subtitle,' ','+'); ?>','<?php echo $mode; ?>','<?php echo $rows; ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
 if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo "startframe.php?sid=".$sid."&lang=".$lang; 

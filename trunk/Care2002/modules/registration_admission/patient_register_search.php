@@ -12,12 +12,22 @@ require($root_path.'include/inc_environment_global.php');
 */
 
 # Default value for the maximum nr of rows per block displayed, define this to the value you wish
-# In normal cases this value is derived from the db table "care_config_global" using the "insurance_list_max_block_rows" element.
+# In normal cases this value is derived from the db table "care_config_global" using the "pagin_insurance_list_max_block_rows" element.
 define('MAX_BLOCK_ROWS',30); 
 
+# Define to TRUE if you want to show the option to select  inclusion of the first name in universal searches
+# This would give the user a chance to shut the search for first names and makes the search faster, but the user has one element more to consider
+# If defined to FALSE the option will be hidden and both last name and first names will be searched, resulting to slower search
+define('SHOW_FIRSTNAME_CONTROLLER',TRUE);
+
+# Define to TRUE if you want the sql query to be displayed at the top of the page.
+# Useful for debugging or optimizing the query
+define('SHOW_SQLQUERY',0);
+
+# The language table
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
-require_once($root_path.'include/inc_front_chain_lang.php');
+require($root_path.'include/inc_front_chain_lang.php');
 
 $dbtable='care_person';
 $toggle=0;
@@ -61,24 +71,26 @@ if($mode=='paginate'){
 require_once($root_path.'include/care_api_classes/class_paginator.php');
 $pagen=new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
 
+require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
+$glob_obj->getConfig('person_id_%');
+
+# Get the max nr of rows from global config
+$glob_obj->getConfig('pagin_person_search_max_block_rows');
+if(empty($GLOBAL_CONFIG['pagin_person_search_max_block_rows'])) $pagen->setMaxCount(MAX_BLOCK_ROWS); # Last resort, use the default defined at the start of this page
+	else $pagen->setMaxCount($GLOBAL_CONFIG['pagin_person_search_max_block_rows']);
+
+
 if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($searchkey)){
 	
 	include_once($root_path.'include/inc_date_format_functions.php');
 
-	if($mode!='paginate'){
-		$HTTP_SESSION_VARS['sess_searchkey']=$searchkey;
-	}	
+	if($mode=='paginate'){
+		$fromwhere=$HTTP_SESSION_VARS['sess_searchkey'];
+	}else{
 		# convert * and ? to % and &
 		$searchkey=strtr($searchkey,'*?','%_');
             
-		include_once($root_path.'include/care_api_classes/class_globalconfig.php');
-		$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
-		$glob_obj->getConfig('person_id_%');
-
-		# Get the max nr of rows from global config
-		$glob_obj->getConfig('person_search_max_block_rows');
-		if(empty($GLOBAL_CONFIG['person_search_max_block_rows'])) $pagen->setMaxCount(MAX_BLOCK_ROWS); # Last resort, use the default defined at the start of this page
-			else $pagen->setMaxCount($GLOBAL_CONFIG['person_search_max_block_rows']);
 		
 	   	$searchkey=trim($searchkey);
 		$suchwort=$searchkey;
@@ -93,7 +105,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 			if(empty($oitem)) $oitem='pid';			
 			if(empty($odir)) $odir='DESC'; # default, latest pid at top
 			
-			$sql2='	WHERE ( pid="'.$suchwort.'"  OR pid = "'.$suchbuffer.'" )';
+			$sql2='	WHERE pid="'.$suchwort.'" OR pid = "'.$suchbuffer.'" ';
 			
 	    } else {
 			# Try to detect if searchkey is composite of first name + last name
@@ -122,36 +134,68 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 				$ln=$comp[1];
 				$bd=$comp[2];
 			}
-			//echo sizeof($comp);
 			# Check the size of the comp
 			if(sizeof($comp)>1){
-				$sql2='	WHERE ( name_last LIKE "'.strtr($ln,'+',' ').'%" 
-			                		AND name_first LIKE "'.strtr($fn,'+',' ').'%") ';
-				if($bd){ $sql2.='
-			                		AND( date_birth = "'.formatDate2STD($bd,$date_format).'"
-			                		OR date_birth LIKE "%'.$bd.'%")';
+				$sql2='	WHERE (name_last LIKE "'.strtr($ln,'+',' ').'%" AND name_first LIKE "'.strtr($fn,'+',' ').'%") ';
+				if(!empty($bd)){ 
+					$DOB=formatDate2STD($bd,$date_format);
+				echo $DOB;
+					if($DOB=='') {
+						$sql2.=' AND date_birth LIKE "'.$bd.'%" ';
+					}else{
+						$sql2.=' AND date_birth = "'.$DOB.'" ';
+					}
 				}
 					
-				if(empty($oitem)) $oitem='name_last';			
-				if(empty($odir)) $odir='DESC'; # default, latest birth at top
+				//if(empty($oitem)) $oitem='name_last';			
+				//if(empty($odir)) $odir='ASC'; # default, ascending alphabetic
 		
 			}else{
-			
-				$sql2='	WHERE (name_last LIKE "'.strtr($suchwort,'+',' ').'%" 
-			                		OR name_first LIKE "'.strtr($suchwort,'+',' ').'%"
-			                		OR date_birth = "'.formatDate2STD($suchwort,$date_format).'"
-			                		OR date_birth LIKE "%'.$suchwort.'%"
-									)';
-				if(empty($oitem)) $oitem='name_last';			
-				if(empty($odir)) $odir='ASC'; # default, ascending alphabetic
+				# Check if * or %
+				if($suchwort=='%'||$suchwort=='%%'){
+					$sql2=' WHERE 1';
+				}else{
+					# Check if it is a complete DOB
+					$DOB=formatDate2STD($suchwort,$date_format);
+					echo $DOB;
+					if($DOB=='') {
+						if(defined('SHOW_FIRSTNAME_CONTROLLER')&&SHOW_FIRSTNAME_CONTROLLER){
+							if(isset($HTTP_POST_VARS['firstname_too'])&&$HTTP_POST_VARS['firstname_too']){
+								$sql2='	WHERE name_last LIKE "'.strtr($suchwort,'+',' ').'%" OR name_first LIKE "'.strtr($suchwort,'+',' ').'%"';
+								$firstname_too=1;
+							}else{
+								$sql2='	WHERE name_last LIKE "'.strtr($suchwort,'+',' ').'%" ';
+								$firstname_too=0;
+							}
+						}else{
+							$sql2='	WHERE name_last LIKE "'.strtr($suchwort,'+',' ').'%" OR name_first LIKE "'.strtr($suchwort,'+',' ').'%"';
+							$firstname_too=1;
+						}
+					}else{
+						$sql2='	WHERE date_birth = "'.$DOB.'"';
+					}
+				}
+									
+				//if(empty($oitem)) $oitem='name_last';			
+				//if(empty($odir)) $odir='ASC'; # default, ascending alphabetic
 			}
+		 }
+			$fromwhere=$dbtable.$sql2;
+			# Save the query for pagination
+			$HTTP_SESSION_VARS['sess_searchkey']=$fromwhere;
 		}
 			 
-			$sql2.=' AND status NOT IN ("void","hidden","deleted","inactive")  ORDER BY '.$oitem.' '.$odir;
+			//$sql2.=' AND status NOT IN ("void","hidden","deleted","inactive")  ORDER BY '.$oitem.' '.$odir;
+			
+			
+			# Set the sorting directive
+			if(isset($oitem)&&!empty($oitem)) $sql3 =" ORDER BY $oitem $odir";
+			
 						
-			$sql='SELECT pid, name_last, name_first, date_birth, addr_zip, sex, death_date FROM '.$dbtable.$sql2;
-			//echo $sql;
+			//$sql='SELECT * FROM '.$dbtable.$sql2;
 
+			$sql='SELECT pid, name_last, name_first, date_birth, addr_zip, sex, death_date, status FROM '.$fromwhere.$sql3;
+			
 			if($ergebnis=$db->SelectLimit($sql,$pagen->MaxCount(),$pagen->BlockStartIndex()))
        		{
 				if ($linecount=$ergebnis->RecordCount()) 
@@ -163,6 +207,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 						exit;
 					}
 					
+
 					$pagen->setTotalBlockCount($linecount);
 					
 					# If more than one count all available
@@ -170,7 +215,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 						$pagen->setTotalDataCount($totalcount);
 					}else{
 						# Count total available data
-						$sql='SELECT COUNT(pid) AS maxnr FROM '.$dbtable.$sql2;
+						$sql='SELECT COUNT(pid) AS maxnr FROM '.$fromwhere;
 						
 						if($result=$db->Execute($sql)){
 							if ($result->RecordCount()) {
@@ -184,6 +229,8 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 					$pagen->setSortItem($oitem);
 					$pagen->setSortDirection($odir);
 				}
+				
+				if(defined('SHOW_SQLQUERY')&&SHOW_SQLQUERY) echo $sql;
 				
 			}
 			 else {echo "<p>".$sql."<p>$LDDbNoRead";};
@@ -229,9 +276,8 @@ require('./gui_bridge/default/gui_tabs_patreg.php');
 ?>
 
 </table>
-
 <ul>
-
+<FONT  SIZE=-1  FACE="Arial">
 <?php 
 /* If the origin is admission link, show the search prompt */
 if(isset($origin) && $origin=='pass')
@@ -244,15 +290,14 @@ if(isset($origin) && $origin=='pass')
     <td><img <?php echo createMascot($root_path,'mascot1_l.gif','0','absmiddle') ?>></td>
   </tr>
 </table>
-
-
 <?php 
 }
+
+echo '<a href="javascript:gethelp(\'person_search_tips.php\')">'.$LDTipsTricks.'</a>';
+       
 ?>
 
-<FONT    SIZE=-1  FACE="Arial">
-
-		 <table border=0 cellpadding=10 bgcolor="<?php echo $entry_border_bgcolor ?>">
+	 <table border=0 cellpadding=10 bgcolor="<?php echo $entry_border_bgcolor ?>">
      <tr>
        <td>
 	   <?php
@@ -269,6 +314,9 @@ if(isset($origin) && $origin=='pass')
 <p>
 
 <?php
+
+# Create append data
+$append="&firstname_too=$firstname_too";
 
 //echo $mode;
 if($parent_admit) $bgimg='tableHeaderbg3.gif';
@@ -292,47 +340,37 @@ if ($linecount){
 ?>
       <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
 	  <?php 
-	  	if($oitem=='pid') $flag=TRUE;
-			else $flag=FALSE; 
-		echo $pagen->SortLink($LDRegistryNr,'pid',$odir,$flag); 
+		echo $pagen->makeSortLink($LDRegistryNr,'pid',$oitem,$odir,$append); 
 			 ?></b></td>
       <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
 	  <?php 
-	  	if($oitem=='sex') $flag=TRUE;
-			else $flag=FALSE; 
-		echo $pagen->SortLink($LDSex,'sex',$odir,$flag); 
+		echo $pagen->makeSortLink($LDSex,'sex',$oitem,$odir,$append); 
 			 ?></b></td>
       <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
 	  <?php 
-	  	if($oitem=='name_last') $flag=TRUE;
-			else $flag=FALSE; 
-		echo $pagen->SortLink($LDLastName,'name_last',$odir,$flag); 
+		echo $pagen->makeSortLink($LDLastName,'name_last',$oitem,$odir,$append); 
 			 ?></b></td>
       <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
 	  <?php 
-	  	if($oitem=='name_first') $flag=TRUE;
-			else $flag=FALSE; 
-		echo $pagen->SortLink($LDFirstName,'name_first',$odir,$flag); 
+		echo $pagen->makeSortLink($LDFirstName,'name_first',$oitem,$odir,$append); 
 			 ?></b></td>
       <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
 	  <?php 
-	  	if($oitem=='date_birth') $flag=TRUE;
-			else $flag=FALSE; 
-		echo $pagen->SortLink($LDBday,'date_birth',$odir,$flag); 
+		echo $pagen->makeSortLink($LDBday,'date_birth',$oitem,$odir,$append); 
 			 ?></b></td>
       <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
 	  <?php 
-	  	if($oitem=='addr_zip') $flag=TRUE;
-			else $flag=FALSE;
-		 echo $pagen->SortLink($LDZipCode,'addr_zip',$odir,$flag); 
+		 echo $pagen->makeSortLink($LDZipCode,'addr_zip',$oitem,$odir,$append); 
 		 	
 		?></b></td>
       <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>&nbsp;&nbsp;<?php echo $LDOptions; ?></b></td>
 <?php						
-					echo"</tr>";
+				echo"</tr>";
 
-					while($zeile=$ergebnis->FetchRow())
-					{
+				while($zeile=$ergebnis->FetchRow())
+				{
+						
+					if($zeile['status']==''||$zeile['status']=='normal'){
 						echo "
 							<tr bgcolor=";
 						if($toggle) { echo "#efefef>"; $toggle=0;} else {echo "#ffffff>"; $toggle=1;};
@@ -378,11 +416,12 @@ if ($linecount){
 			               echo "<img src='".$root_path."classes/barcode/image.php?code=".$zeile['pid']."&style=68&type=I25&width=145&height=50&xres=2&font=5&label=2' border=0 width=0 height=0>";
 		               }
 						echo '</td></tr>';
-
 					}
-					echo '
-						<tr><td colspan=6><font face=arial size=2>'.$pagen->makePrevLink($LDPrevious).'</td>
-						<td align=right><font face=arial size=2>'.$pagen->makeNextLink($LDNext).'</td>
+
+				}
+				echo '
+						<tr><td colspan=6><font face=arial size=2>'.$pagen->makePrevLink($LDPrevious,$append).'</td>
+						<td align=right><font face=arial size=2>'.$pagen->makeNextLink($LDNext,$append).'</td>
 						</tr>
 						</table>';
 					if($linecount>$pagen->MaxCount())

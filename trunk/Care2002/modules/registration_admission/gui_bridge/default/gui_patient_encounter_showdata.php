@@ -214,12 +214,18 @@ if ($addr_country) echo $addr_country.'<br>';
 <?php 
 # Suggested by Dr. Sarat Nayak to emphasize the OUTPATIENT encounter type
 if (isset($$encounter_class['LD_var'])&&!empty($$encounter_class['LD_var'])){
-	$eclass='<b>'.strtoupper($$encounter_class['LD_var']).'</b>';
+	$eclass=$$encounter_class['LD_var'];
 	$fcolor='red';
 }else{
 	$eclass= $encounter_class['name'];
-	$fcolor='#000000';
 } 
+
+if($encounter_class_nr==1){
+	$fcolor='#000000';
+}else{
+	$fcolor='red';
+	$eclass='<b>'.strtoupper($eclass).'</b>';
+}
 ?>
 <td colspan=2   bgcolor="#eeeeee">
 <FONT SIZE=-1  FACE="Arial" color="<?php echo $fcolor ?>">&nbsp;<?php echo $eclass ?>
@@ -256,7 +262,7 @@ if($encounter_class_nr==1){
 	}else{
 		echo $$current_dept_LDvar;
 	}
-*/echo '<a href="'.$root_path.'modules/ambulatory/'.strtr('amb_clinic_patients_pass.php'.URL_APPEND.'&rt=pflege&edit=1&dept='.$$current_dept_LDvar.'&location_id='.$$current_dept_LDvar.'&dept_nr='.$current_dept_nr,' ',' ').'">'.$$current_dept_LDvar.'</a>';
+*/echo '<a href="'.$root_path.'modules/ambulatory/'.strtr('amb_clinic_patients_pass.php'.URL_APPEND.'&rt=pflege&edit=1&dept='.$$current_dept_LDvar.'&location_id='.$$current_dept_LDvar.'&dept_nr='.$current_dept_nr,' ',' ').'">'.$current_dept_name.'</a>';
 ?>
 </td>
 </tr>

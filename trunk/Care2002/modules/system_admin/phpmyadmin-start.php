@@ -23,7 +23,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 		<font size=3 face="verdana,arial" color="#990000">
 		<center>
 		<img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"><b><?php echo $LDMySQLManage ?></b><p>
-		<form action="<?php echo $root_path; ?>modules/phpmyadmin/index.php3" method="post">
+		<form action="<?php echo $root_path; ?>modules/phpmyadmin/index.php" method="post">
 			<input type="hidden" name="lang" value="<?php echo $lang ?>">
 			<input type="hidden" name="sid" value="<?php echo $sid; ?>">
 			<input type="submit" value="<?php echo $LDContinue ?>">

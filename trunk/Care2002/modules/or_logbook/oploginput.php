@@ -12,7 +12,7 @@ require($root_path.'include/inc_environment_global.php');
 */
 
 # Default value for the maximum nr of rows per block displayed, define this to the value you wish
-# In normal cases this value is derived from the db table "care_config_global" using the "insurance_list_max_block_rows" element.
+# In normal cases this value is derived from the db table "care_config_global" using the "pagin_insurance_list_max_block_rows" element.
 define('MAX_BLOCK_ROWS',30); 
 # Define to 1 if the search the returns single result should be automatically redirect to user input page
 define('REDIRECT_SINGLERESULT',1);
@@ -68,9 +68,9 @@ if($mode=='search'||$mode=='paginate'){
 		$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 
 		# Get the max nr of rows from global config
-		$glob_obj->getConfig('or_patient_search_max_block_rows');
-		if(empty($GLOBAL_CONFIG['or_patient_search_max_block_rows'])) $pagen->setMaxCount(MAX_BLOCK_ROWS); # Last resort, use the default defined at the start of this page
-			else $pagen->setMaxCount($GLOBAL_CONFIG['or_patient_search_max_block_rows']);
+		$glob_obj->getConfig('pagin_or_patient_search_max_block_rows');
+		if(empty($GLOBAL_CONFIG['pagin_or_patient_search_max_block_rows'])) $pagen->setMaxCount(MAX_BLOCK_ROWS); # Last resort, use the default defined at the start of this page
+			else $pagen->setMaxCount($GLOBAL_CONFIG['pagin_or_patient_search_max_block_rows']);
 		
 		# Save the search keyword for eventual pagination routines
 		if($mode=='search'){
@@ -115,7 +115,7 @@ if($mode=='search'||$mode=='paginate'){
 		
 			case 'save':	
 		
-				$dbtable='care_nursing_op_logbook';
+				$dbtable='care_encounter_op';
 				
 				# check if entry is already existing
 				$sql="SELECT nr,entry_out,cut_close,encoding FROM $dbtable 
@@ -175,7 +175,7 @@ if($mode=='search'||$mode=='paginate'){
 							}
 						}else{	# else create new entry
 							# first get the last op number
-	  						$dbtable='care_nursing_op_logbook';
+	  						$dbtable='care_encounter_op';
 							
 		 					$sql="SELECT op_nr FROM $dbtable WHERE dept_nr='$dept_nr'	AND op_room='$saal' ORDER BY op_nr DESC";
 							//echo $sql;
@@ -271,7 +271,7 @@ if($mode=='search'||$mode=='paginate'){
 				$fname=$pdata['name_first'];
 				$bdate=$pdata['date_birth'];
 			}
-	  		$dbtable='care_nursing_op_logbook';
+	  		$dbtable='care_encounter_op';
 		 	$sql="SELECT * FROM $dbtable 
 					WHERE dept_nr='$dept_nr' 
 						AND op_room='$saal' 
@@ -615,9 +615,9 @@ if($datafound) {
     href="javascript:openDRGComposite()"><img <?php echo createLDImgSrc($root_path,'drg.gif','0','absmiddle') ?> 
 	alt="<?php echo $LDDRG ?>"></a><A onClick="document.oppflegepatinfo.xx2.value='material'"
     href="op-logbuch-material-parentframe.php?sid=<?php echo "$sid&lang=$lang&op_nr=$op_nr&enc_nr=".$pdata['encounter_nr']."&dept_nr=$dept_nr&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>" target="OPLOGMAIN"><img <?php echo createLDImgSrc($root_path,'material.gif','0','absmiddle') ?> 
-	alt="<?php echo $LDUsedMaterial ?>"></a><A onClick="document.oppflegepatinfo.xx2.value='container'"
+	alt="<?php echo $LDUsedMaterial ?>"></a><!-- <A onClick="document.oppflegepatinfo.xx2.value='container'"
     href="op-logbuch-material-parentframe.php?sid=<?php echo "$sid&lang=$lang&mode=cont&op_nr=$op_nr&enc_nr=".$pdata['encounter_nr']."&dept_nr=$dept_nr&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>" target="OPLOGMAIN"><img <?php echo createLDImgSrc($root_path,'instrument.gif','0','absmiddle') ?> 
-	alt="<?php echo $LDContainer ?>"></a><?php } ?><a href="javascript:gethelp('oplog.php','create','<?php echo $mode ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?> 
+	alt="<?php echo $LDContainer ?>"></a><?php } ?> --><a href="javascript:gethelp('oplog.php','create','<?php echo $mode ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?> 
 	alt="<?php echo $LDHelp ?>"></a><a href="javascript:if(!window.parent.opener.closed)window.parent.opener.focus();window.parent.close();"><img <?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?> 
 	alt="<?php echo $LDClose ?>"></a><br>
 </td>

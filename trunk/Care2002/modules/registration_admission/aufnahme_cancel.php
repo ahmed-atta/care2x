@@ -16,18 +16,29 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 # Do some filtering
 if(isset($mode)&&($mode=='cancel')&&isset($encounter_nr)&&$encounter_nr){
 
-	$is_cancelled=0;
-	include_once($root_path.'include/care_api_classes/class_encounter.php');
-	$encounter=new Encounter;
-	if($encounter->Cancel($encounter_nr,$cby)){
-		header("location:".basename(__FILE__).URL_REDIRECT_APPEND."&is_cancelled=1");
-		exit;
+	include_once($root_path.'include/care_api_classes/class_access.php');
+	# Create user access object
+	$user=& new Access($cby,$pw);
+	
+	if($user->isKnown()&&$user->hasValidPassword()&&$user->isNotLocked()){
+		$is_cancelled=0;
+		include_once($root_path.'include/care_api_classes/class_encounter.php');
+		$encounter=new Encounter;
+		//if($encounter->Cancel($encounter_nr,$cby)){
+		if($encounter->Cancel($encounter_nr,$user->Name())){
+			header("location:".basename(__FILE__).URL_REDIRECT_APPEND."&is_cancelled=1");
+			exit;
+		}else{
+			echo $LDDbNoSave.'<p>'.$encounter->getLastQuery();
+		}
 	}else{
-		echo $LDDbNoSave.'<p>'.$encounter->getLastQuery();
+		$error_msg=$LDWrongLoginPW;
 	}
 }elseif(!isset($is_cancelled)||!$is_cancelled){
 	header("location:aufnahme_daten_zeigen.php".URL_REDIRECT_APPEND."&encounter_nr=$encounter_nr");
 	exit;
+}else{
+	$error_msg=$LDTellEdpIfPersist;
 }
 ?>
 
@@ -67,7 +78,7 @@ if(isset($is_cancelled)&&$is_cancelled){
 <table border=0 align=center>
   <tr>
     <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0'); ?>></td>
-    <td><font size=4 face="verdana,arial" color="red"><?php echo "$LDCancelError<br>$LDTellEdpIfPersist"; ?></td>
+    <td><font size=4 face="verdana,arial" color="red"><?php echo "$LDCancelError<br>$error_msg"; ?></td>
   </tr>
   <tr>
     <td></td>

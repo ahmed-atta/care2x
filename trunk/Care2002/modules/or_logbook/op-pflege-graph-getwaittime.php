@@ -27,7 +27,7 @@ switch($winid)
 	default:{header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 }
 
-$dbtable='care_nursing_op_logbook';
+$dbtable='care_encounter_op';
 
 /* Establish db connection */
 if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');

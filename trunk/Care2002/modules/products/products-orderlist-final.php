@@ -39,26 +39,21 @@ $breakfile=$root_path.$breakfile.URL_APPEND;
 $rows=0;
 $count=0;
 
-/* Load the date formatter */
+# Load the date formatter
 require_once($root_path.'include/inc_date_format_functions.php');
 
 if(($mode=='send') && isset($order_nr) && $order_nr){
 
+	#Check authenticity of validator person
 	   
-	   /* Check password of the validator */
+	include_once($root_path.'include/care_api_classes/class_access.php');
+	$user = & new Access($validator,$vpw);
 	   
-	   $sql='SELECT password FROM care_users WHERE login_id="'.$validator.'"';
-	   
-	   if($ergebnis=$db->Execute($sql)){
-			
-		  if($ergebnis->RecordCount())
-		  {
-		     $result=$ergebnis->FetchRow();
+	if($user->isKnown()){
+		  
+		if($user->hasValidPassword()&&$user->isNotLocked()){
 			 
-			 if ($result['password'] == $vpw)
-			 {
-			 
-		         $sql='UPDATE '.$dbtable.' SET 										
+			$sql='UPDATE '.$dbtable.' SET 										
 							 		validator="'.$validator.'",
 									priority="'.$prior.'",
 									status="pending",
@@ -66,29 +61,20 @@ if(($mode=='send') && isset($order_nr) && $order_nr){
 							   		WHERE order_nr="'.$order_nr.'"
 									AND dept_nr="'.$dept_nr.'"';		// save aux data to the order list
 		
-		         if($ergebnis=$db->Execute($sql))
-		         {
+			if($ergebnis=$db->Execute($sql)){
 				//echo $sql;
-					$ofinal=true;
-				    $sendok=true;			
-			    }	
+  				$ofinal=true;
+				$sendok=true;			
+			}	
 			//echo $sql;
-			}
-			else
-			{
-			    $error='password';
-			    $mode='';
-			}
-		 }
-		 else
-		 { 
-			$error='validator';
+		}else{
+			$error='password';
 			$mode='';
-		 } 
-	  }
-	  else
-	  { echo "$sql<br>$LDDbNoRead<br>"; } 
-
+		}
+	}else{ 
+		$error='validator';
+		$mode='';
+	} 
 }
 ?>
 <html>
@@ -100,7 +86,7 @@ function popinfo(b)
 {
 	urlholder="products-bestellkatalog-popinfo.php<?php echo URL_APPEND; ?>&cat=<?php echo $cat; ?>&keyword="+b+"&mode=search";
 	ordercatwin=window.open(urlholder,"ordercat","width=850,height=550,menubar=no,resizable=yes,scrollbars=yes");
-	}
+}
 function checkform(d)
 {
 	if (d.validator.value=="") 
@@ -268,7 +254,7 @@ for($n=0;$n<sizeof($artikeln);$n++)
 			';
 		}else{
 			echo '
-				<p><font face=Verdana,Arial size=1 color="#000080"><a href="'.$breakfile.URL_APPEND.'" target="_parent">
+				<p><font face=Verdana,Arial size=1 color="#000080"><a href="'.$breakfile.'" target="_parent">
 				<img '.createComIcon($root_path,'arrow-blu.gif','0').'> '.$LDEndOrder.'</a>
 				<p>
 				<a href="products-bestellung.php'.URL_APPEND.'&dept_nr='.$dept_nr.'&cat='.$cat.'&userck='.$userck.'" target="_parent"><img '.createComIcon($root_path,'arrow-blu.gif','0').'> '.$LDCreateBasket.'</a>

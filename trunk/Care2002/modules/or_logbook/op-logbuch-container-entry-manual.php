@@ -11,7 +11,7 @@ $globdata="sid=$sid&lang=$lang&op_nr=$op_nr&dept_nr=$dept_nr&saal=$saal&enc_nr=$
 if(($mode=='force_add')&&$containername&&$pcs){
 	if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
 	if($dblink_ok){	
-	  	$dbtable='care_nursing_op_logbook';
+	  	$dbtable='care_encounter_op';
 		$sql="SELECT container_codedlist FROM $dbtable 
 					WHERE dept_nr='$dept_nr'
 					AND op_room='$saal'
@@ -47,7 +47,7 @@ if(($mode=='force_add')&&$containername&&$pcs){
 						
 						$matlist[0]=strtr($matlist[0]," ","+");
 						
-						$dbtable='care_nursing_op_logbook';
+						$dbtable='care_encounter_op';
 						$sql="UPDATE $dbtable SET container_codedlist='$matlist[0]'
 								WHERE dept_nr='$dept_nr'
 								AND op_room='$saal'

@@ -56,7 +56,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 
 <tr>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php echo $LDPatientRegister.' - '.$LDArchive ?></STRONG></FONT>
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php echo $LDPatientRegister.' - '.$LDAdvancedSearch ?></STRONG></FONT>
 </td>
 
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
@@ -156,8 +156,9 @@ $img_male=createComIcon($root_path,'spm.gif','0');
 $img_female=createComIcon($root_path,'spf.gif','0');
  
  $toggle=0;
- while($result=$ergebnis->FetchRow())
- {
+ while($result=$ergebnis->FetchRow()){
+	if($result['status']==''||$result['status']=='normal'){
+	
  	echo'
   <tr ';
   if($toggle){ echo "bgcolor=#efefef"; $toggle=0;} else {echo "bgcolor=#ffffff"; $toggle=1;}
@@ -188,7 +189,9 @@ $img_female=createComIcon($root_path,'spf.gif','0');
   <td colspan=8 height=1><img src="../../gui/img/common/default/pixel.gif" border=0 width=1 height=1></td>
   </tr>';
   
-  }
+	} 
+ }
+ 
 		echo '
 			<tr><td colspan=6><font face=arial size=2>'.$pagen->makePrevLink($LDPrevious).'</td>
 			<td align=right><font face=arial size=2>'.$pagen->makeNextLink($LDNext).'</td>

@@ -206,6 +206,9 @@ require($root_path.'include/inc_css_a_hilitebu.php');
     		<tr>
       			<td><font face=arial color="#990000" size=4><?php echo $LDSelectORoomNr; ?></td>
     		</tr>
+			<tr>
+			<td>
+			<table  cellpadding="2" cellspacing=0 border="0">
 		<?php
 		if(is_object($ORNrs)){
 			$toggler=0;
@@ -224,6 +227,13 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 				if($saal==$room['room_nr']) echo ' checked';
 				echo '>&nbsp;<font face="verdana,arial" size="2" >&nbsp;'.$bold;
 				echo $LDORoom.' '.$room['room_nr'];
+				
+				echo '&nbsp;</td>';
+				
+				echo '<td ><font face="verdana,arial" size="2" >&nbsp;';
+
+				echo $LDORoom.' '.$room['info'];
+				
 				echo '&nbsp;</td>
 						</tr>
 						';
@@ -231,6 +241,9 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 			}
 		}
 		?>
+		</table>
+		</td>
+		</tr>
 		</table>	
 	<!--  End of the OR room numbers block -->
 	</td>

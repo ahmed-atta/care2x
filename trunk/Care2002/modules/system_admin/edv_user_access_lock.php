@@ -15,17 +15,14 @@ $local_user='ck_edv_user';
 
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-$breakfile='edv.php'.URL_APPEND;
-$updatereturn=$HTTP_SESSION_VARS['sess_file_return'];
-$returnfile=$updatereturn.URL_APPEND;
+$breakfile='edv_user_access_list.php'.URL_APPEND;
+$updatereturn='edv_user_access_list.php';
+//$updatereturn='edv_user_access_list.php';
+$returnfile=$HTTP_SESSION_VARS['sess_file_return'].URL_APPEND;
 
-$HTTP_SESSION_VARS['sess_file_return']='edv.php';
+//$HTTP_SESSION_VARS['sess_file_return']='edv.php';
 
-/* Establish db connection */
-if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
 
-if($dblink_ok)
-{
     $sql='SELECT name, login_id, lockflag FROM care_users WHERE login_id="'.addslashes($itemname).'"';
 	
 	if($ergebnis=$db->Execute($sql,$link)) {	
@@ -42,11 +39,12 @@ if($dblink_ok)
 			if ($db->Execute($sql)) {
 				header("Location: ".$updatereturn.URL_REDIRECT_APPEND."&itemname=$itemname&remark=lockchanged"); 
                 exit;
-			}//else {echo "Ändern  der Daten gescheitert."}
+			}else { 
+				echo "$LDDbNoSave<p>$sql"; 
+			} 
 		}
 	}
-}
-  else { echo "$LDDbNoLink<br>$sql"; } 
+
   
 ?>
 

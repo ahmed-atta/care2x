@@ -20,8 +20,9 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 */
 require($root_path.'include/inc_accessplan_areas_functions.php');
 
-$breakfile='edv.php?sid='.$sid.'&lang='.$lang;
-$returnfile=$HTTP_SESSION_VARS['sess_file_return'].URL_APPEND;
+$breakfile='edv-system-admi-welcome.php'.URL_APPEND;
+//$returnfile=$HTTP_SESSION_VARS['sess_file_return'].URL_APPEND;
+$returnfile='edv_user_access_edit.php'.URL_APPEND;
 $HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
 
 /* Establish db connection */
@@ -54,11 +55,10 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 
 
 
-<table width=100% border=0 cellpadding=5 cellspacing=0>
+<table width=100% border=0  cellspacing=0>
 <tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="45"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG><?php echo "$LDEDP $LDListActual" ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php echo "$LDListActual" ?></STRONG></FONT></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right>
 <?php if($cfg['dhtml'])echo'<a href="'.$returnfile.'"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('edp.php','access','list')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
 

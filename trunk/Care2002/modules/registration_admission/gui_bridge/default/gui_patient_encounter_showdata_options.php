@@ -34,7 +34,10 @@ function cancelEnc(){
 	if(confirm("<?php echo $LDSureToCancel ?>")){
 		usr=prompt("<?php echo $LDPlsEnterFullName ?>","");
 		if(usr&&usr!=""){
-			window.location.href="aufnahme_cancel.php<?php echo URL_REDIRECT_APPEND ?>&mode=cancel&encounter_nr=<?php echo $HTTP_SESSION_VARS['sess_en'] ?>&cby="+usr;
+			pw=prompt("Please enter your password.","");
+			if(pw&&pw!=""){
+				window.location.href="aufnahme_cancel.php<?php echo URL_REDIRECT_APPEND ?>&mode=cancel&encounter_nr=<?php echo $HTTP_SESSION_VARS['sess_en'] ?>&cby="+usr+"&pw="+pw;
+			}
 		}
 	}
 }

@@ -28,7 +28,7 @@ switch($target)
 								break;
 	case 'adminlogin':	$title=$LDSystemLogin;
 								//$userck='ck_edv_admin_user';
-								$fileforward='edv-system-admi-menu.php?lang='.$lang.'&sid='.$sid;
+								$fileforward='edv_system_admin_mframe.php?lang='.$lang.'&sid='.$sid;
 								break;
 	case 'currency_admin':	$title=$LDSystemLogin;
 								//$userck='ck_edv_admin_user';
