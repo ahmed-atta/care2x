@@ -67,9 +67,15 @@ if(defined('USE_PAGE_GEN_TIME')&&USE_PAGE_GEN_TIME){
 	$pgt->start();
 }
 
+$TP_ALIGN='left'; # template variable for document direction
 # Function to generate the html or html dir-rtl tag
 function html_rtl($lang){
-	if(($lang=='ar')||($lang=='fa')) echo '<HTML dir=rtl>';
-		else echo '<HTML>';
+	global $TP_ALIGN;
+	if(($lang=='ar')||($lang=='fa')){
+		echo '<HTML dir=rtl>';
+		$TP_ALIGN='right';
+		}else{
+			echo '<HTML>';
+		}
 }
 ?>
