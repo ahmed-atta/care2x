@@ -8,6 +8,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+require_once("../include/inc_vars_resolve.php"); // globalize POST, GET, & COOKIE  vars
 require("../include/inc_config_color.php"); // load color preferences
 
 /**

@@ -57,6 +57,8 @@ function configNew(&$bn,&$bv,&$f,$i,&$uid)
 		$f="CFG".$uid.".cfg";
 }	
 
+require_once("include/inc_vars_resolve.php"); // globalize POST, GET, & COOKIE  vars
+
 /**
 * Create simple session id (sid), save a encrpyted  sid to a cookie with a dynamic name 
 * consisting of concatenating "ck_sid" and the sid itself.
