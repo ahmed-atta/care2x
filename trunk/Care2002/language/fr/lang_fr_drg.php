@@ -1,41 +1,41 @@
 <?php
 $LDIcd10="ICD-10"; // ICD = International Codes of Diseases  !! Do not translate !!
 $LDOps301="OPS-301"; // OPS = Opertionenschlüssel - German code for surgical operations !! Do not Translate !!
-$LDBack2Logbook="Go back to logbook";
-$LDIcd10Search="ICD-10 Search";
-$LDSearch4ICD10="Search for ICD-10 Codes";
-$LDSearch4OPS301="Search for OPS-301 Codes";
+$LDBack2Logbook="Retourner au journal";
+$LDIcd10Search="Recherche dans ICD-10";
+$LDSearch4ICD10="Rechercher des codes de ICD-10";
+$LDSearch4OPS301="Rechercher des codes de OPS-301";
 $LDDescription="Description";
-$LDMainAuxDiag="Main/Auxiliary";
+$LDMainAuxDiag="Principal/Auxilliaire";
 $LDMainAuxOp="Main/Auxiliary operation";
-$LDDiagBy="Diagnosed by";
-$LDDoneBy="Done by";
+$LDDiagBy="Diagnostique par";
+$LDDoneBy="Fait par";
 $LDInclusive="Inclusions";
 $LDExclusive="Exclusions";
 $LDNotes="Notes";
-$LDRemarks="Remarks";
-$LDExtraCodes="Extra codes or coding";
-$LDAddCodes="Additional notes or codes";
-$LDApplySelection="Apply selections";
+$LDRemarks="Remarques";
+$LDExtraCodes="Codes ou codages extra";
+$LDAddCodes="Notes ou codes supplémentaires";
+$LDApplySelection="Appliquer sélections";
 $LDSGBV="SGB-V";  // !! Do not translate !!
 $LDLocalization="Loc.";
 $LDOpsIntern="Code";
-$LDSearchCodes="Search codes";
-$LDQuickList="Quicklist";
+$LDSearchCodes="Rechercher les codes";
+$LDQuickList="Liste rapide";
 $LDConvert2IcdOps="-> ICD/OPS";  // !! Do not translate !!
 
-$LDSearch="Search";
-$LDOperation="Operation";
-$LDAlertSureDelete="Are you sure you want to delete this entry?";
+$LDSearch="Rechercher";
+$LDOperation="Opération";
+$LDAlertSureDelete="Êtes-vous sur de vouloir effacer cette entrée?";
 
 $LDAux="A";   // A = Auxiliary
 $LDMain="M"; // M = Main
-$LDRight="R"; // R = Right
-$LDLeft="L";   // L = Left
+$LDRight="D"; // R = Right
+$LDLeft="G";   // L = Left
 $LDBoth="B";  // B = Both or (both sides)
 
-$LDDeleteEntry="Delete entry";
-$LDNoQuickList="The quicklist is empty at the moment.";
-$LDClick2Search="Please click here to go to search.";
-$LDPossibleCodes="Possible ICD & OPS Codes";
+$LDDeleteEntry="Effacer l'entrée";
+$LDNoQuickList="La liste rapide est vide pour le moment.";
+$LDClick2Search="Veuillez cliquer ici afin d'aller à la recherche.";
+$LDPossibleCodes="Codes ICD & OPS possibles";
 ?>

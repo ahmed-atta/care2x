@@ -1,126 +1,126 @@
 <?php
-$LDWhereTo='Where do you want to post the article?';
-$LDPlsSelect='Please select the number based on the sample graphic, then press \'Continue...\'.';
-$LDContinueBut='Continue...';
-$LDCancelBut='Cancel';
-$LDBackBut='Back';
-$LDSaveBut='Save';
-$LDFinishBut='Finish';
-$LDArticle1='First (1) article';
+$LDWhereTo='Où voulez-vous poster cet article?';
+$LDPlsSelect='Veuillez sélectionner le numéro basé sur le graphique type et puis appuyer \'Continuer...\'.';
+$LDContinueBut='Continuer...';
+$LDCancelBut='Annuler';
+$LDBackBut='Retour';
+$LDSaveBut='Enregistrer';
+$LDFinishBut='Terminer';
+$LDArticle1='Premier (1) article';
 $LDArticle2='Second (2) article';
-$LDArticle3='Third (3) article';
-$LDArticle4='Fourth (4) article';
-$LDArticle5='Secondary (5) article';
+$LDArticle3='Troisième (3) article';
+$LDArticle4='Quatrième (4) article';
+$LDArticle5='Article (5) secondaire';
 
 $LDArticleTxt='Article';
 
-$LDTitleTag='Title';
+$LDTitleTag='Titre';
 $LDTitleMaxNote='Maximum 50';
-$LDHeader='Header';
+$LDHeader='Entête';
 $LDHeaderMaxNote='Maximum 50';
-$LDNews='News article';
+$LDNews='Article des nouvelles';
 /**
 * Do not translate the '<font size=1>' and '</font>'
 */
-$LDPicFile='Picture <font size=1>(maximum file size 1MB)</font>';
-$LDAuthor='Author';
+$LDPicFile='Image <font size=1>(taille maximale du fichier 1MB)</font>';
+$LDAuthor='Auteur';
 /**
 * Do not translate the '<font size=1>' and '</font>'
 */
-$LDPublishDate='Publish date <font size=1>(\'T\' for today)</font>';
+$LDPublishDate='Date de publication <font size=1>(\'T\' pour aujourd\'hui)</font>';
 
-$LDAlertTitle='Please supply a title';
-$LDAlertNews='Please type the news article';
-$LDAlertAuthor='Please supply an author';
-$LDAlertDate='Please supply a publish date';
+$LDAlertTitle='Veuillez entrer un titre';
+$LDAlertNews='Veuillez écrire l\'article de nouvelles';
+$LDAlertAuthor='Veuillez entrer l\'auteur';
+$LDAlertDate='Veuillez entrer la date de publication';
 
-$LDWrittenOn='Written on:';
-$LDWrittenFrom='By:';
+$LDWrittenOn='Écrit le:';
+$LDWrittenFrom='Par:';
 
-$LDArticleSaved='The article is saved. You are seeing a preview.';
-$LDBackTxt='Back';
+$LDArticleSaved='Cet article est enregistré. Vous voyez un aperçu.';
+$LDBackTxt='Retour';
 
-$LDQuickInfo='Quick Informer';
+$LDQuickInfo='Informations rapides';
 $LDPhonePolice='Police';
-$LDPhoneFire='Fire Dept.';
-$LDAmbulance='Emergency';
-$LDPhone='Phone (Hospital)';
+$LDPhoneFire='Pumpiers';
+$LDAmbulance='Urgence';
+$LDPhone='Télephone (Hospital)';
 $LDFax='Fax';
-$LDAddress='Address';
+$LDAddress='Addresse';
 $LDEmail='Email';
 
-$LDOpenTimes ='Admission Hours';
+$LDOpenTimes ='Les horaires d\'admission';
 $LDManagement ='Management';
-$LDDept ='Departments';
-$LDCafenews ='Cafeteria News';
+$LDDept ='Départements';
+$LDCafenews ='Nouvelles de cafeteria';
 $LDAdmission ='Admission';
-$LDExhibition ='Exhibitions';
-$LDEducation ='Education';
-$LDAdvStudies ='Studies';
-$LDPhyTherapy ='Physical Therapy';
-$LDCalendar ='Calendar';
-$LDHelp='Help';
-$LDMore='more to article';
+$LDExhibition ='Expositions';
+$LDEducation ='Éducation';
+$LDAdvStudies ='Études';
+$LDPhyTherapy ='Thérapie physique';
+$LDCalendar ='Calendrier';
+$LDHelp='Aide';
+$LDMore='Plus sur l\'article';
 
-$LDCafeNews='cafeteria news';
-$LDConfirmEdit='Do you want to edit the data in the cafeteria news?';
-$LDNewsDummy=array(1=>'first',2=>'second',3=>'third',4=>'fourth');
-$LDMenuToday='Today\'s menu';
-$LDMenuAll='Menu for <br> &nbsp;other days';
-$LDPrices='Prices';
-$LDNoMenu='Menu is not<br> available.';
-$LDWhatToDo='What do you want to edit?';
-$LDPlsMarkSelection='Please select one option, then click \'Continue...\'.';
-$LDMenuEdit='Edit menu';
-$LDPriceEdit='Edit prices';
-$LDNewsEdit='Edit news or information article';
+$LDCafeNews='Nouvelles de cafeteria';
+$LDConfirmEdit='Voulez-vous modifier les données dans les nouvelles de cafeteria?';
+$LDNewsDummy=array(1=>'premier',2=>'second',3=>'troisième',4=>'quatrième');
+$LDMenuToday='Menu d\'aujourd\'hui';
+$LDMenuAll='Menu pour <br> &nbsp;autres jours';
+$LDPrices='Prix';
+$LDNoMenu='Menu n\'est pas <br> disponible.';
+$LDWhatToDo='Que souhaitez-vous modifier?';
+$LDPlsMarkSelection='Sélectionnez une option et puis cliquez sur \'Continuer...\'.';
+$LDMenuEdit='Modifier le menu';
+$LDPriceEdit='Modifier les prix';
+$LDNewsEdit='Modifier un article de nouvelles ou d\'informations';
 
-$dayname=array('Mo','Tu','We','Th','Fr','Sa','Su');
-$LDCafeMenu='Cafeteria Menu';
+$dayname=array('Lu','Ma','Me','Je','Ve','Sa','Di');
+$LDCafeMenu='Menu de cafeteria';
 $LDMenu='Menu';
-$LDThisWeek='This week';
-$LDNextWeek='Next week';
-$LD3rdWeek='Third week';
-$LDBack2CafeNews='Back to cafeteria news';
+$LDThisWeek='Cette semaine';
+$LDNextWeek='La semaine prochaine';
+$LD3rdWeek='La troisième semaine';
+$LDBack2CafeNews='Retour aux nouvelles de cafeteria';
 
-$LDProdName='Productname';
-$LDPriceDM='Price DM';
-$LDPriceEuro='Price €';
-$LDPrice='Price';
-$LDNoPrice='The price list is not available at the moment.';
-$LDSorry='We are sorry. Please try again later.';
-$LDCafePrices='cafeteria price list';
+$LDProdName='Nom du produit';
+$LDPriceDM='Prix DM';
+$LDPriceEuro='Prix EUR';
+$LDPrice='Prix';
+$LDNoPrice='La liste des prix n\'est pas encore disponible pour le moment';
+$LDSorry='Nous sommes navré. Essayez plutard à nouveau.';
+$LDCafePrices='Liste des prix de la cafeteria';
 
-$LDCreateGroup='Create a new group of products';
-$LDCreateGroupPrompt='You must create a new group of products. Please click \'Continue...\'.';
+$LDCreateGroup='Créer nouveau groupe de produits';
+$LDCreateGroupPrompt='Vous devez créer un nouveau groupe de produits. Veuillez cliquer sur \'Continuer...\'.';
 /**
 * Do not translate the '<font color=\'#000000\'>' and '</font>'
 */
-$LDMarkGroup='You must select a product group to edit.<br> Then click  \'<font color=\'#000000\'>Continue...</font>\'';
-$LDEnterGroup='Enter the name of the new group.<br>Then click \'<font color=\'#000000\'>Continue...</font>\'';
-$LDProdGroup='Product group';
-$LDClk2End='To finish please click this >> ';
-$LDPriceSaved='The following product(s) and price(s) are saved.';
+$LDMarkGroup='Vous devez sélectionner un groupe de produits à éditer. <br> Cliquez ensuite sur  \'<font color=\'#000000\'>Continuer...</font>\'';
+$LDEnterGroup='Entrer le nom du nouveau groupe.<br>Cliquez ensuite sur  \'<font color=\'#000000\'>Continuer...</font>\'';
+$LDProdGroup='Groupe de produits';
+$LDClk2End='Pour terminer cliquez ici >> ';
+$LDPriceSaved='Le(s) produit(s) suivant(s) et prix sont enregistrés.';
 
-$LDMarkWeek='Please select the week.';
-$LDClkContinue='Then click \'Continue...\'.';
-$LDPlsEnter='Type the menu here...';
-$LDClk2Edit='Click me to edit';
-$LDPreviewPic='Preview Picture';
-$LDCafeEditorial='Cafenews Editor';
-$LDHealthTips='Health Tips';
-$LDClk2Write='Click here to start the editor';
+$LDMarkWeek='Veuillez sélectionner la semaine.';
+$LDClkContinue='Cliquez ensuite sur \'Continuer...\'.';
+$LDPlsEnter='Entrez le menu ici...';
+$LDClk2Edit='Cliquez ici pour éditer';
+$LDPreviewPic='Image d\'aperçu';
+$LDCafeEditorial='Editeur des nouvelles de cafeteria';
+$LDHealthTips='Tips de santé';
+$LDClk2Write='Cliquez ici pour lancer l\'éditeur';
 
-$LDOr='Or';
-$LDSetCurrency='Set currency';
-$LDNewCurrencySet='The new currency is now active.';
-$LDPlsSelectCurrency='Please select currency.';
-$LDmain='main';
-$LDClk2AddCurrency='To enter new currency type, please click here. (Note: You are going to leave cafenews!)';
+$LDOr='Ou';
+$LDSetCurrency='Entrer la monnaie';
+$LDNewCurrencySet='La nouvelle monnaie est maintenant active.';
+$LDPlsSelectCurrency='Veuillez sélectionner la monnaie.';
+$LDmain='principal';
+$LDClk2AddCurrency='Pour entrer un nouveau type de monnaie, cliquez ici s\'il vous plaît. (NB: Vous allez quitter les nouvelles de cafeteria!)';
 
-$LDMenuSaved='The menu is saved.';
+$LDMenuSaved='Le menu est enregistré.';
 /* 2002-10-13 EL */
-$LD_ddpMMpyyyy='dd.mm.yyyy';
-$LD_yyyyhMMhdd='yyyy-mm-dd';
-$LD_MMsddsyyyy='mm/dd/yyyy';
+$LD_ddpMMpyyyy='jj.mm.aaaa';
+$LD_yyyyhMMhdd='aaaa-mm-jj';
+$LD_MMsddsyyyy='mm/jj/aaaa';
 ?>

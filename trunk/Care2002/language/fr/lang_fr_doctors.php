@@ -18,10 +18,10 @@ $Dez="Décembre";
 $monat=array("",$Jan,$Feb,$Mae,$Apr,$Mai,$Jun,$Jul,$Aug,$Sep,$Okt,$Nov,$Dez);
 
 $LDDoctors="Docteurs";
-$LDQView="L'apperçu rapide de DOC";  // DOC = doctor on call
-$LDQViewTxt="L'apperçu rapide du planning d'aujourd'hui de DOC (docteur en permanence)";
+$LDQView="L'aperçu rapide de DOC";  // DOC = doctor on call
+$LDQViewTxt="L'aperçu rapide du planning d'aujourd'hui de DOC (docteur en permanence)";
 $LDDutyPlan="Planning des devoirs";
-$LDDutyPlanTxt="Planning des devoirs, apperçu, mise à jour, effacement, gestion, etc.";
+$LDDutyPlanTxt="Planning des devoirs, aperçu, mise à jour, effacement, gestion, etc.";
 $LDDocsList="La liste des docteurs";
 $LDDocsListTxt="Créer ou mettre à jour la liste des docteurs, entrer des données, etc..";
 $LDDocsForum="Forum";
@@ -90,7 +90,7 @@ $LDNoPersonList="La liste du personnel n'est pas encore créée. Veuillez créer d'
 $LDShow="Montrer";
 
 $LDDOCS="Horaire des DOC";
-$LDDOCSTxt="Horaire des docteurs en permanence, planning, apperçu, mise à jour, éditer, etc.";
+$LDDOCSTxt="Horaire des docteurs en permanence, planning, aperçu, mise à jour, éditer, etc.";
 $LDDOCSR="DOCSR";
 $LDDOCSRTxt="Requête du horaire des docteurs en permanence";
 /* 2002-09-15 EL */
