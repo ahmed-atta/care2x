@@ -11,19 +11,20 @@
 <blockquote>
 <img <?php echo createComIcon('../','butft2_d.gif') ?>><p>
 <b>Erste Schritte mit <br>
-CARE 2002</b><p>
-Mit dem CARE 2002 und dem Internet bzw. Intranet können Sie Informationen über alles und jeden in Ihrer Organization finden und anzeigen. Klicken Sie einfach auf die oben aufgeführten Themen, um zu beginnen. In den Hilfethemen finden Sie weitere Informationen, die Ihnen dabei helfen, 
-mit CARE 2002 über Internet bwz. Intranet zu arbeiten. 
+CARE 2X</b><p>
+Mit dem CARE 2X und dem Internet bzw. Intranet können Sie Informationen über alles und jeden in Ihrer Organization finden und anzeigen. Klicken Sie einfach auf die oben aufgeführten Themen, um zu beginnen. In den Hilfethemen finden Sie weitere Informationen, die Ihnen dabei helfen, 
+mit CARE 2X über Internet bwz. Intranet zu arbeiten. 
 <p>
-<a href="#"><u>Grundlegende Einrichtung</u></a><br>
+<a href="../help/en/help_en_basic_usage.php"><u>Grundlegende Einrichtung</u></a><br>
 <p>
-<a href="#"><u>Einrichten einer Berechtigung</u></a><p>
-<a href="#"><u>Informationen zu CARE 2002.</u></a><br>
-Wenn das CARE 2002 System für Sie neu ist, finden Sie hier die Informationen, die Sie benötigen. 
+<a href="../help/en/help_en_setpermit.php"><u>Einrichten einer Berechtigung</u></a><p>
+<a href="../help/en/help_en_onlineman.php"><u>Benutzung des online Handbuches</u></a><p>
+<a href="http://care2x.org/index.php?lang=<?php echo $lang ?>"><u>Informationen zu CARE 2X.</u></a><br>
+Wenn das CARE 2X System für Sie neu ist, finden Sie hier die Informationen, die Sie benötigen. 
 <p>
-<a href="#"><u>Einführung in das CARE 2002</u></a><br>
-<a href="#"><u>Lernen, schneller und einfacher die Arbeit mit CARE 2002 zu machen.</u></a><br>
-<a href="#"><u>Suchen nach benötigten Informationen</u></a><br>
+<!-- <a href="#"><u>Einführung in das CARE 2X</u></a><br>
+<a href="#"><u>Lernen, schneller und einfacher die Arbeit mit CARE 2X zu machen.</u></a><br>
+<a href="#"><u>Suchen nach benötigten Informationen</u></a><br> -->
 </font>
 </blockquote>
 </body>
