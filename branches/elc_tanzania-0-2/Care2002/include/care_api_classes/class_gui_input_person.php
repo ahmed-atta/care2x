@@ -692,6 +692,28 @@ class GuiInputPerson {
 			$sBGBuffer.='>';
 			$this->smarty->assign('sBGOInput',$sBGBuffer);
 			$this->smarty->assign('LDO',$LDO);
+			
+			/**
+			* Changes by RM starts here
+			*/
+			$sBGBuffer='
+				<input name="blood_rh" type="radio" value="pos" ';
+			if($blood_group=='pos') $sBGBuffer.='checked';
+			$sBGBuffer.='>';
+			$this->smarty->assign('sBRHposInput',$sBGBuffer);
+			$this->smarty->assign('RHpos',$LDRHpos);
+
+			$sBGBuffer='
+				<input name="blood_rh" type="radio" value="neg" ';
+			if($blood_group=='neg') $sBGBuffer.='checked';
+			$sBGBuffer.='>';
+			$this->smarty->assign('sBRHnegInput',$sBGBuffer);
+			$this->smarty->assign('RHneg',$LDRHneg);
+			
+			$this->smarty->assign('RHfactor',$LDRHfactor);
+      /**
+      * Changes by RM ends here
+      */			
 		}
 		// KB: make civil status hideable
 		if (!$GLOBAL_CONFIG['person_civilstatus_hide']){

@@ -82,10 +82,12 @@
 				</td>
 				<td colspan=2 class="reg_input">
 					{{$sBGAInput}}{{$LDA}}  &nbsp;&nbsp; {{$sBGBInput}}{{$LDB}} &nbsp;&nbsp; {{$sBGABInput}}{{$LDAB}}  &nbsp;&nbsp; {{$sBGOInput}}{{$LDO}}
+          &nbsp;&nbsp;
+					| {{$RHfactor}} {{$sBRHposInput}}{{$RHpos}}  &nbsp;&nbsp; {{$sBRHnegInput}}{{$RHneg}}
+					<br>
 				</td>
 				</tr>
 			{{/if}}
-
 			{{if $LDCivilStatus}}
 				<tr>
 				<td class="reg_item">
