@@ -10,7 +10,8 @@ require_once($root_path.'include/inc_vars_resolve.php');
 <title>Créditos</title>
 </head>
 <body onLoad="if(window.focus) window.focus()">
-<font face="verdana,arial" size=6 color="#0000ff">Créditos</fonts>
+<font face="verdana,arial" size=6 color="#0000ff">Créditos</font><BR>
+<FONT FACE="Verdana" SIZE=2>Sorted alphabetically by first name</FONT>
 <hr>
 
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
