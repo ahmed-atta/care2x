@@ -1,4 +1,8 @@
 <?php
+
+$LDNeuesModulanlegen='Modulgenerator';
+$LDNeuesModulanlegenTxt='erstellt ein neues Modul, <strong>Infos</strong>, Zusatzprogramme';
+
 $LDClose='Schliessen';
 $LDCancel='Abbrechen';
 $LDResetEntry='Eingabe löschen';
@@ -78,7 +82,7 @@ $LDNoBack='Nein, Zurück';
 
 $LDOK='OK';
 $LDManageAccess='Berechtigungen verwalten';
-$LDManageAccessTxt='Erstellen, sperren, ändern, löschen, u.s.w.';
+$LDManageAccessTxt='erstellen, sperren, ändern, löschen, u.s.w.';
 $LDSqlDb='SQL Datenbank';
 $LDSqlDbTxt='Manuelle SQL verarbeitung <b>ACHTUNG</b> nur für Experten';
 $LDSysOpLogin='SysOp Login';

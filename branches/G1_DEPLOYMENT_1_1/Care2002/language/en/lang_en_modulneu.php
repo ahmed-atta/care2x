@@ -1,11 +1,6 @@
 <?PHP
 
-//Variablen allgemein
-$LDja="    Ja    ";
-$LDnein="  Nein  ";
-
 //Variablen für sub_modul_neu.php
-$LDNeuesModulanlegen = 'Create';
 $LD_sub_NeuesModulAnlegenTxt= "creates a new module with your own defaults";
 $LD_Hinweise="references";
 $LD_HinweiseTxt="references for the supply of a login within the new module";
@@ -51,7 +46,7 @@ $nenne_tabelle="specify the table name";
 $nenne_tabelle2="<strong>(the same like in the memo field!)</strong>";
 $nenne_suchfeld="specify the search field (normally \"id\")";
 $nenne_tab_bezeichner="specify a string name for the table headline";
-$nenne_anzeigefeld="specify the field shown in the search list (e.g. name/firstname)";
+$nenne_anzeigefeld="specify the field shown in the search list (e.g. name, firstname)";
 $nenne_server="specify the database server";
 $fertig="create table and finish module $ModulNeuBez.";
 
@@ -68,8 +63,9 @@ $err_mainpass_copy="Copying the main-pass-file failed!";
 $err_kopieren="Error accured while copying ";
 $err_fehlgeschlagen=" .<br/>";
 
-//Variablen aus Schlusssatz.php
+/Variablen aus Schlusssatz.php
 $ld_gratulation="Congratulation, the module <strong> $ModulNeuBez</strong>is finish.";
 
 
 ?>
+

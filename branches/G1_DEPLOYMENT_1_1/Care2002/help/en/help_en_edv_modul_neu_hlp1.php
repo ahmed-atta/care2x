@@ -17,7 +17,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 <font face="Verdana, Arial" size=2>
 <!-- empty text line, you can insert text instead of this comment -->
 <ul>
-<li><b> point 1</b> : The module generator is widely selfexplanatory. If you have any questions or helpful suggestions, please send an <a href=mailto:xanef@web.de>email to the generators' author</a>.<p>
+<li><b> point 1</b> : The module generator is widely selfexplanatory. If you have any questions or helpful suggestions, please send an <a href=mailto:schenk@mail.fh-ulm.de>email to the generators' author</a>.<p>
 
 </ul>
 

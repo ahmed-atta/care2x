@@ -1,11 +1,6 @@
 <?PHP
 
-//Variablen allgemein
-$LDja="    Ja    ";
-$LDnein="  Nein  ";
-
 //Variablen für sub_modul_neu.php
-$LDNeuesModulanlegen = 'Erstellen';
 $LD_sub_NeuesModulAnlegenTxt= "erstellt ein neues Modul nach Ihren Vorgaben";
 $LD_Hinweise="Hinweise";
 $LD_HinweiseTxt="Hinweise für die Bereitstellung von Login mit einem neuen Modul";
@@ -49,9 +44,9 @@ $setback_fields="Felder zurücksetzen";
 //Variablen für radio_tabwahl.php  U N D  radio1_memofeld.php
 $nenne_tabelle="Bitte hier den Tabellennamen angeben";
 $nenne_tabelle2="<strong>(denselben wie im Memofeld!)</strong>";
-$nenne_suchfeld="Bitte hier das Suchfeld, (i.d.R. \"id\") angeben";
-$nenne_tab_bezeichner="Bitte hier eine Überschrift angeben";
-$nenne_anzeigefeld="Bitte eine Tabellenspalte zum Füllen des Suchfeldes angeben ";
+$nenne_suchfeld="Bitte hier das Suchfeld (i.d.R. \"id\")angeben";
+$nenne_tab_bezeichner="Bitte hier eine Bezeichnung für die Tabelle angeben";
+$nenne_anzeigefeld="Bitte hier ein Anzeigefeld (name, vorname) angeben";
 $nenne_server="Bitte hier den Datenbankserver angeben";
 $fertig="Tabelle und Modul $ModulNeuBez fertigstellen";
 

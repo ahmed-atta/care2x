@@ -1,4 +1,7 @@
 <?php
+$LDNeuesModulanlegen='Create new module';
+$LDNeuesModulanlegenTxt='creates a new module';
+
 $LDClose='Close';
 $LDCancel='Cancel';
 $LDResetEntry='Erase entries';
