@@ -17,6 +17,20 @@ require_once('../../include/inc_vars_resolve.php');
             width=5 border=0></TD></TR>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
+            <P><img src="../../gui/img/common/default/pixel.gif"  border=0  align=right vspace=10 width=135>
+			<b>Alfredo Rodrigues (PT) traduziu o Care 2002  para Português.</b>
+			
+			<P><a href="mailto:ajcrodm@yahoo.com"><u>Alfredo Rodrigues pode ser contactado aqui.</u></a>
+</TD></TR></TBODY></TABLE>
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD><IMG height=15 
+            src="../../gui/img/common/default/pixel.gif" 
+            width=5 border=0></TD></TR>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/elpidio_latorilla_3.jpg" border=0  align=right vspace=10>
 			<b>A primeira versão beta do CARE 2002 foi criada por Elpidio Latorilla:</b>
 			<p>
@@ -242,10 +256,6 @@ O Daniel tem uma empresa onde trabalha com produtos para ensino de informática, 
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Thomas Wiedmann (DE)</font></nobr>&nbsp;</td>
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Testes, depuração e validações de scripts</font></td>
-  </tr>
-  <tr>
-    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Alfredo Rodrigues (PT)</font></nobr>&nbsp;</td>
-    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Tradução para Português</font></td>
   </tr>
 </table>
 
