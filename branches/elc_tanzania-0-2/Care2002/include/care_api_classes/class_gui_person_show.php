@@ -238,7 +238,6 @@ class GuiPersonShow {
 
 		# Start Smarty templating here
 		# Create smarty object without initiliazing the GUI (2nd param = FALSE)
-
 		include_once($root_path.'gui/smarty_template/smarty_care.class.php');
 		$this->smarty = new smarty_care('common',FALSE);
 		
@@ -376,13 +375,17 @@ class GuiPersonShow {
 			}
 		}
 		if (!$GLOBAL_CONFIG['person_phone_1_nr_hide']&&$phone_1_nr){
-			$this->smarty->assign('sPhone1',$this->createTR($LDPhone.' 1',$phone_1_nr,2));
+			//$this->smarty->assign('sPhone1',$this->createTR($LDPhone.' 1',$phone_1_nr,2));
+			// by RM:
+			$this->smarty->assign('sPhone1',$this->createTR($LDPhone,$phone_1_nr,2));
 		}
 		if (!$GLOBAL_CONFIG['person_phone_2_nr_hide']&&$phone_2_nr){
 			$this->smarty->assign('sPhone2',$this->createTR($LDPhone.' 2',$phone_2_nr,2));
 		}
 		if (!$GLOBAL_CONFIG['person_cellphone_1_nr_hide']&&$cellphone_1_nr){
-			$this->smarty->assign('sCellPhone1',$this->createTR($LDCellPhone.' 1',$cellphone_1_nr,2));
+			//$this->smarty->assign('sCellPhone1',$this->createTR($LDCellPhone.' 1',$cellphone_1_nr,2));
+			// by RM:
+			$this->smarty->assign('sCellPhone1',$this->createTR($LDCellPhone,$cellphone_1_nr,2));
 		}
 		if (!$GLOBAL_CONFIG['person_cellphone_2_nr_hide']&&$cellphone_2_nr){
 			$this->smarty->assign('sCellPhone2',$this->createTR($LDCellPhone.' 2',$cellphone_2_nr,2));

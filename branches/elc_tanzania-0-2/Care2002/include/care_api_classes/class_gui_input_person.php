@@ -157,8 +157,11 @@ class GuiInputPerson {
 				if (trim($name_last)=='') { $errornamelast=1; $error++;}
 				if(trim($name_first)=='') { $errornamefirst=1; $error++; }
 				if (trim($date_birth)=='') { $errordatebirth=1; $error++;}
-				if (trim($addr_str)=='') { $errorstreet=1; $error++;}
-				if (trim($addr_str_nr)=='') { $errorstreetnr=1; $error++;}
+				//**
+				// Commented by RM
+				// if (trim($addr_str)=='') { $errorstreet=1; $error++;}
+        // if (trim($addr_str_nr)=='') { $errorstreetnr=1; $error++;}
+        //*
 				if ($addr_citytown_nr&&(trim($addr_citytown_name)=='')) { $errortown=1; $error++;}
 				if ($sex=='') { $errorsex=1; $error++;}
 				if($insurance_show) {
@@ -453,15 +456,23 @@ class GuiInputPerson {
 			}else if(d.sex[0]&&d.sex[1]&&!d.sex[0].checked&&!d.sex[1].checked){
 				alert("<?php echo $LDPlsSelectSex; ?>");
 				return false;
-			}else if(d.addr_str.value==""){
-				alert("<?php echo $LDPlsEnterStreetName; ?>");
-				d.addr_str.focus();
-				return false;
-			}else if(d.addr_str_nr.value==""){
-				alert("<?php echo $LDPlsEnterBldgNr; ?>");
-				d.addr_str_nr.focus();
-				return false;
-			}else if(d.addr_zip.value==""){
+			}
+			//**
+			// Commented by RM
+			//  else if(d.addr_str.value==""){
+			//	alert("<?php echo $LDPlsEnterStreetName; ?>");
+			//	d.addr_str.focus();
+			//	return false;
+			//}
+			//
+			//else if(d.addr_str_nr.value==""){
+      //alert("<?php echo $LDPlsEnterBldgNr; ?>");
+			//	d.addr_str_nr.focus();
+			//	return false;
+			//}
+			//**
+			
+			else if(d.addr_zip.value==""){
 				alert("<?php echo $LDPlsEnterZip; ?>");
 				d.addr_zip.focus();
 				return false;
@@ -619,6 +630,7 @@ class GuiInputPerson {
 			$sBdayBuffer = formatDate2Local(date('Y-m-d'),$date_format);
 		}*/
 
+
 		$sDateJS= 'onFocus="this.select();"
 				onBlur="IsValidDate(this,\''.$date_format.'\')"
 				onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\')">
@@ -718,11 +730,13 @@ class GuiInputPerson {
 		if ($erroraddress) $this->smarty->assign('LDAddress',"<font color=red>$LDAddress</font>:");
 			else $this->smarty->assign('LDAddress',"$LDAddress:");
 
+    /**
+    // Commented by RM
 		if ($errorstreet) $this->smarty->assign('LDStreet',"<font color=red><font color=#ff0000>*</font> $LDStreet</font>:");
 			else $this->smarty->assign('LDStreet',"<font color=#ff0000>*</font> $LDStreet:");
 
 		$this->smarty->assign('sStreetInput','<input name="addr_str" type="text" size="35" value="'.$addr_str.'">');
-
+    **/
 		if ($errorstreetnr) $this->smarty->assign('LDStreetNr',"<font color=red><font color=#ff0000>*</font> $LDStreetNr</font>:");
 				else $this->smarty->assign('LDStreetNr',"<font color=#ff0000>*</font> $LDStreetNr:");
 
@@ -780,13 +794,23 @@ class GuiInputPerson {
 			}
 		}
 		if (!$GLOBAL_CONFIG['person_phone_1_nr_hide']){
-			$this->smarty->assign('sPhone1',$this->createTR($errorphone1, 'phone_1_nr', $LDPhone.' 1',$phone_1_nr,2));
+		  //**
+		  // Changed by RM:
+			//$this->smarty->assign('sPhone1',$this->createTR($errorphone1, 'phone_1_nr', $LDPhone.' 1',$phone_1_nr,2));
+			$this->smarty->assign('sPhone1',$this->createTR($errorphone1, 'phone_1_nr', $LDPhone,$phone_1_nr,2));
+			// End of Change
+			//**
 		}
 		if (!$GLOBAL_CONFIG['person_phone_2_nr_hide']){
 			$this->smarty->assign('sPhone2',$this->createTR($errorphone2, 'phone_2_nr', $LDPhone.' 2',$phone_2_nr,2));
 		}
 		if (!$GLOBAL_CONFIG['person_cellphone_1_nr_hide']){
-			$this->smarty->assign('sCellPhone1',$this->createTR($errorcell1, 'cellphone_1_nr', $LDCellPhone.' 1',$cellphone_1_nr,2));
+		  //**
+		  // Change by RM:
+			// $this->smarty->assign('sCellPhone1',$this->createTR($errorcell1, 'cellphone_1_nr', $LDCellPhone.' 1',$cellphone_1_nr,2));
+			$this->smarty->assign('sCellPhone1',$this->createTR($errorcell1, 'cellphone_1_nr', $LDCellPhone,$cellphone_1_nr,2));
+			// End of Change
+			//**
 		}
 		if (!$GLOBAL_CONFIG['person_cellphone_2_nr_hide']){
 			$this->smarty->assign('sCellPhone2',$this->createTR($errorcell2, 'cellphone_2_nr', $LDCellPhone.' 2',$cellphone_2_nr,2));

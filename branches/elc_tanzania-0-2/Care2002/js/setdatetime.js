@@ -17,7 +17,7 @@
 */
 function setDate(elindex, date_format, lang){
 
-    var make_time = 0;
+   var make_time = 0;
 	var actual = '';
 	
     /* Prepare the language dependent shortcuts */

@@ -17,7 +17,7 @@
 function IsValidDate(objDate,sFormat)
 {
    sDate=objDate.value;  /* EL140802 */
-
+    
    if((sDate == "" )||(sDate==" ")) return; /* EL140802 */
 
    var sLang = ""; /* Language type */
@@ -60,6 +60,28 @@ function IsValidDate(objDate,sFormat)
    /* DE dmmyy, dmmyyyy, d.mm.yyyy       */
    /* DE8601 ymmdd, yyymmdd, yyy-mm-dd   */
    /* EN mddyy, mddyyyy, m/dd/yyyy       */
+   
+   if (nSize==4) {
+    if ( sLang == "DE" )  /* german */
+     { sDate = "01.07." + sDate; }
+     else if ( sLang == "DE8601" ) /* german ISO8601 */
+     { sDate = sDate + "07-01"; }
+     else if ( sLang == "EN") /* english */
+     { sDate = "07/01/" + sDate; }
+     else if (sLang == "ID") /* Indonesian */
+     { sDate = "01/07/" + sDate; }
+     else
+       {// if (bDebug)
+         { //alert("wrong sFormat");
+    	   sErrorMsg+= errDateFormat + "\n"; /* EL140802 */
+         }
+         bOk = false;
+       }
+    nSize = sDate.length;
+    //document.aufnahmeform.date_birth.value = '';
+   }
+
+   
    if(nSize<5) 
    {
    	bOk = false;
