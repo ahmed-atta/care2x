@@ -7,6 +7,10 @@ $LDA='A';
 $LDB='B';
 $LDAB='AB';
 $LDO='O';
+# these are rhesus-factors:
+$LDRHfactor='Rhesus: ';
+$LDRHpos='pos';
+$LDRHneg='neg';
 # 2003-08-28 EL
 $LDPlsEnterLastName='Please enter the family name';
 $LDPlsEnterFirstName='Please enter the first name';
