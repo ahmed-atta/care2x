@@ -34,7 +34,7 @@ if(!isset($HTTP_SESSION_VARS['sess_file_break']) || empty($HTTP_SESSION_VARS['se
 
 # Filter dept_nr if available save to session, else use default department = 1, public relations headline news
 if(isset($dept_nr)&&$dept_nr) $HTTP_SESSION_VARS['sess_dept_nr']=$dept_nr;
-	else $HTTP_SESSION_VARS['sess_dept_nr']=1; # Headline news
+	elseif(!$HTTP_SESSION_VARS['sess_dept_nr']) $HTTP_SESSION_VARS['sess_dept_nr']=1; # Headline news
 # Filter title, if no supplied, use session stored title
 $title= (empty($title)) ? $HTTP_SESSION_VARS['sess_title'] : $title ; 
    
