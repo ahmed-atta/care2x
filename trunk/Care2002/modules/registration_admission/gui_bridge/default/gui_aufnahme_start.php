@@ -99,7 +99,7 @@ if(onLoad="if (window.focus) window.focus();loadcat();"
 
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
 <a href="javascript:gethelp('admission_how2new.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
-if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo "startframe.php?sid=".$sid."&lang=".$lang; 
+if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo 'startframe.php'.URL_APPEND; 
 	else echo "aufnahme_pass.php?sid=$sid&target=entry&lang=$lang"; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </td>
 </tr>
@@ -225,9 +225,7 @@ if($error)
 </td>
 <td bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial" color="#800000">
 <?php 
-
-    echo @formatDate2Local(date('Y-m-d'),$date_format); 
-
+    if(isset($encounter_nr)&&$encounter_nr) echo @formatDate2Local(date('Y-m-d'),$date_format); 
 ?>
 </td>
 </tr>
@@ -235,15 +233,14 @@ if($error)
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDAdmitTime ?>:
 </td>
-<td bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo @convertTimeToLocal(date('H:i:s')); ?>
+<td bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial" color="#800000">
+<?php if(isset($encounter_nr)&&$encounter_nr) echo @convertTimeToLocal(date('H:i:s')); ?>
 </td>
 </tr>
-
 <tr>
 <td colspan=2><FONT SIZE=-1  FACE="Arial">&nbsp;
 </td>
 </tr>
-
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDTitle ?>:
 </td>
@@ -338,7 +335,7 @@ echo $addr_zip.' '.$addr_citytown_name.'<br>';
 if(is_object($encounter_classes)){
     while($result=$encounter_classes->FetchRow()) {
 ?>
-<input name="encounter_class_nr" type="radio"  value="<?php echo $result['class_nr']; ?>" onClick="hidecat()" <?php if($encounter_class_nr==$result['class_nr']) echo 'checked'; ?>>
+<input name="encounter_class_nr" type="radio"  value="<?php echo $result['class_nr']; ?>" <?php if($encounter_class_nr==$result['class_nr']) echo 'checked'; ?>>
 <?php 
         $LD=$result['LD_var'];
         if(isset($$LD)&&!empty($$LD)) echo $$LD; else echo $result['name'];
@@ -373,25 +370,25 @@ if(!empty($ward_info)&&$ward_info->RecordCount()){
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php if ($errordiagnose) echo "<font color=red>"; ?><?php echo $LDDiagnosis ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input name="referrer_diagnosis" type="text" size="60" value="<?php echo $referrer_diagnosis; ?>" onFocus=hidecat()>
+<td colspan=2 bgcolor="#eeeeee"><input name="referrer_diagnosis" type="text" size="60" value="<?php echo $referrer_diagnosis; ?>">
 </td>
 </tr>
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php if ($errorreferrer) echo "<font color=red>"; ?><?php echo $LDRecBy ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input name="referrer_dr" type="text" size="60" value="<?php echo $referrer_dr; ?>" onFocus=hidecat()><a href="#"><img <?php echo createComIcon($root_path,'l-arrowgrnlrg.gif','0') ?>></a>
+<td colspan=2 bgcolor="#eeeeee"><input name="referrer_dr" type="text" size="60" value="<?php echo $referrer_dr; ?>"><a href="#"><img <?php echo createComIcon($root_path,'l-arrowgrnlrg.gif','0') ?>></a>
 </td>
 </tr>
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php if ($errortherapie) echo "<font color=red>"; ?><?php echo $LDTherapy ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input name="referrer_recom_therapy" type="text" size="60" value="<?php echo $referrer_recom_therapy; ?>" onFocus=hidecat()>
+<td colspan=2 bgcolor="#eeeeee"><input name="referrer_recom_therapy" type="text" size="60" value="<?php echo $referrer_recom_therapy; ?>">
 </td>
 </tr>
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php if ($errorbesonder) echo "<font color=red>"; ?><?php echo $LDSpecials ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input name="referrer_notes" type="text" size="60" value="<?php echo $referrer_notes; ?>" onFocus=hidecat()>
+<td colspan=2 bgcolor="#eeeeee"><input name="referrer_notes" type="text" size="60" value="<?php echo $referrer_notes; ?>">
 </td>
 </tr>
 
@@ -405,7 +402,7 @@ if(!empty($ward_info)&&$ward_info->RecordCount()){
 if(is_object($insurance_classes)){
     while($result=$insurance_classes->FetchRow()) {
 ?>
-<input name="insurance_class_nr" type="radio"  value="<?php echo $result['class_nr']; ?>" onClick="hidecat()" <?php if($insurance_class_nr==$result['class_nr']) echo 'checked'; ?>>
+<input name="insurance_class_nr" type="radio"  value="<?php echo $result['class_nr']; ?>" <?php if($insurance_class_nr==$result['class_nr']) echo 'checked'; ?>>
 <?php 
         $LD=$result['LD_var'];
         if(isset($$LD)&&!empty($$LD)) echo $$LD; else echo $result['name'];
@@ -420,13 +417,13 @@ if(is_object($insurance_classes)){
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php if ($error_ins_nr) echo "<font color=red>"; ?><?php echo $LDInsuranceNr ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input name="insurance_nr" type="text" size="60" value="<?php if(isset($insurance_nr)) echo $insurance_nr; ?>" onFocus=hidecat()> 
+<td colspan=2 bgcolor="#eeeeee"><input name="insurance_nr" type="text" size="60" value="<?php if(isset($insurance_nr)) echo $insurance_nr; ?>"> 
 </td>
 </tr>
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php if ($error_ins_co) echo "<font color=red>"; ?><?php echo $LDInsuranceCo ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input name="insurance_firm_name" type="text" size="60" value="<?php  if(isset($insurance_firm_name))echo $insurance_firm_name; ?>" onFocus=hidecat()><a href="javascript:popSearchWin('insurance','aufnahmeform.insurance_firm_id','aufnahmeform.insurance_firm_name')"><img <?php echo createComIcon($root_path,'l-arrowgrnlrg.gif','0') ?>></a>
+<td colspan=2 bgcolor="#eeeeee"><input name="insurance_firm_name" type="text" size="60" value="<?php  if(isset($insurance_firm_name))echo $insurance_firm_name; ?>"><a href="javascript:popSearchWin('insurance','aufnahmeform.insurance_firm_id','aufnahmeform.insurance_firm_name')"><img <?php echo createComIcon($root_path,'l-arrowgrnlrg.gif','0') ?>></a>
 </td>
 </tr>
 
@@ -526,7 +523,7 @@ while($buffer=$att_dr_service->FetchRow())
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDAdmitBy ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input  name="encoder" type="text" value=<?php if ($encoder!='') echo '"'.$encoder.'"' ; else echo '"'.$HTTP_COOKIE_VARS[$local_user.$sid].'"' ?> size="28" onFocus=hidecat()>
+<td colspan=2 bgcolor="#eeeeee"><input  name="encoder" type="text" value=<?php if ($encoder!='') echo '"'.$encoder.'"' ; else echo '"'.$HTTP_COOKIE_VARS[$local_user.$sid].'"' ?> size="28">
 </nobr>
 </td>
 </tr>
@@ -543,11 +540,11 @@ while($buffer=$att_dr_service->FetchRow())
 
 
 <?php if($update) echo '<input type="hidden" name=update value=1>'; ?>
-<input  type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?> onClick=hidecat() alt="<?php echo $LDSaveData ?>" align="absmiddle"> 
-<a href="<?php echo 'aufnahme_start.php'.URL_APPEND; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDResetData ?>" onClick=hidecat()  align="absmiddle"></a>
+<input  type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?> alt="<?php echo $LDSaveData ?>" align="absmiddle"> 
+<a href="<?php echo 'aufnahme_start.php'.URL_APPEND; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDResetData ?>"  align="absmiddle"></a>
 <!-- Note: uncomment the ff: line if you want to have a reset button  -->
 <!-- 
-<a href="javascript:document.aufnahmeform.reset()"><img <?php echo createLDImgSrc($root_path,'reset.gif','0') ?> alt="<?php echo $LDResetData ?>" onClick=hidecat()  align="absmiddle"></a> 
+<a href="javascript:document.aufnahmeform.reset()"><img <?php echo createLDImgSrc($root_path,'reset.gif','0') ?> alt="<?php echo $LDResetData ?>"  align="absmiddle"></a> 
 -->
 <?php if($error==1) 
 echo '<input type="hidden" name="forcesave" value="1">
@@ -570,7 +567,7 @@ echo '<input type="hidden" name="forcesave" value="1">
 <input type="hidden" name=sid value=<?php echo $sid; ?>>
 <input type="hidden" name=patnum value="">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
-<input type=submit value="<?php echo $LDNewForm ?>" onClick=hidecat()>
+<input type=submit value="<?php echo $LDNewForm ?>">
 </form>
 <?php endif; ?>
 <p>
