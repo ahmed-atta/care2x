@@ -48,37 +48,38 @@ switch($winid)
 							break;
 }
 
-$dbtable='care_nursing_station_patients_curve';
+//$dbtable='care_nursing_station_patients_curve';
 
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok){	
-	/* Load date formatter */
-    include_once($root_path.'include/inc_date_format_functions.php');
+/* Load date formatter */
+require_once($root_path.'include/inc_date_format_functions.php');
 
-	if($mode=='save'&&$sformat&&(trim($short_notes)=='')) $mode='';
-	if($mode=='save'&&!$sformat&&(trim($notes)=='')) $mode='';
+if($mode=='save'&&$sformat&&(trim($short_notes)=='')) $mode='';
+if($mode=='save'&&!$sformat&&(trim($notes)=='')) $mode='';
 	
-	if($mode=='save'){
-		$HTTP_POST_VARS['encounter_nr']=$pn;
-		$HTTP_POST_VARS['date']=date('Y-m-d',mktime(0,0,0,$mo,$dy,$yr));
-		$HTTP_POST_VARS['personell_name']=$HTTP_SESSION_VARS['sess_user_name'];
-		if($charts_obj->saveChartNotesFromArray($HTTP_POST_VARS,$notes_type_nr)){
-			header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=1&pn=$pn&station=$station&winid=$winid&yr=$yr&mo=$mo&dy=$dy&dystart=$dystart&dyname=$dyname&sformat=$sformat");
-		}
-	}else{// end of if(mode==save)
- 	
-		$count=0;
-		$chartnotes=$charts_obj->getDayChartNotes($pn,$notes_type_nr,date('Y-m-d',mktime(0,0,0,$mo,$dy,$yr)));		
-		if(is_object($chartnotes)){
-			$count=$chartnotes->RecordCount();
-			include_once($root_path.'include/inc_editor_fx.php');
-			include_once($root_path.'include/inc_date_format_functions.php');
-		}	
+if($mode=='save'){
+	$HTTP_POST_VARS['encounter_nr']=$pn;
+	$HTTP_POST_VARS['date']=date('Y-m-d',mktime(0,0,0,$mo,$dy,$yr));
+	$HTTP_POST_VARS['personell_name']=$HTTP_SESSION_VARS['sess_user_name'];
+	if($charts_obj->saveChartNotesFromArray($HTTP_POST_VARS,$notes_type_nr)){
+		header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=1&pn=$pn&station=$station&winid=$winid&yr=$yr&mo=$mo&dy=$dy&dystart=$dystart&dyname=$dyname&sformat=$sformat");
 	}
-}else{ echo "$LDDbNoLink<br>$sql<br>"; }
+}else{// end of if(mode==save)
+ 	
+	$count=0;
+	$chartnotes=$charts_obj->getDayChartNotes($pn,$notes_type_nr,date('Y-m-d',mktime(0,0,0,$mo,$dy,$yr)));		
+	if(is_object($chartnotes)){
+		$count=$chartnotes->RecordCount();
+		include_once($root_path.'include/inc_editor_fx.php');
+		include_once($root_path.'include/inc_date_format_functions.php');
+	}	
+}
 
-
+# Set the input name
+if($sformat){
+	$input_name='short_notes';
+}else{
+	$input_name='notes';
+}
 ?>
 
 <HTML>
@@ -88,7 +89,6 @@ if($dblink_ok){
 <?php
 require($root_path.'include/inc_js_gethelp.php');
 require($root_path.'include/inc_css_a_hilitebu.php');
-
 ?>
 
 <script language="javascript">
@@ -98,7 +98,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 	}
 
   function pruf(d){
-	if(d.notes.value=="") return false;
+	if(d.<?php echo $input_name; ?>.value=="") return false;
 	else return true
 	}
  function parentrefresh(){
@@ -124,7 +124,7 @@ div.box { border: double; border-width: thin; width: 100%; border-color: black; 
 
 </HEAD>
 <BODY  bgcolor="#99ccff" TEXT="#000000" LINK="#0000FF" VLINK="#800080"  topmargin="0" marginheight="0" 
-onLoad="<?php if($saved) echo "parentrefresh();"; ?>if (window.focus) window.focus(); document.infoform.notes.focus();" >
+onLoad="<?php if($saved) echo "parentrefresh();"; ?>if (window.focus) window.focus(); document.infoform.<?php echo $input_name; ?>.focus();" >
 <table border=0 width="100%">
   <tr>
     <td><b><font face=verdana,arial size=5 color=maroon>
