@@ -8,13 +8,13 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("MODERATE_NEWS",0);  // define to 1 if news is moderated
-define("LANG_FILE","newscolumns.php");
+define('MODERATE_NEWS',0);  // define to 1 if news is moderated
+define('LANG_FILE','newscolumns.php');
 define('NO_2LEVEL_CHK',1);
 require_once('../include/inc_front_chain_lang.php');
 
 require_once('../include/inc_config_color.php');
-$breakfile="startframe.php?sid=".$sid."&lang=".$lang; // default return path if cancel button pressed
+$breakfile='startframe.php?sid='.$sid.'&lang='.$lang; // default return path if cancel button pressed
 
 // reset all 2nd level lock cookies
 require('../include/inc_2level_reset.php'); 
@@ -24,11 +24,11 @@ $subtitle=$LDSubTitle[$target];
 /* Set the return paths */
 switch($target)
 {
-	case "radiology" : $breakfile="radiolog.php?sid=".$sid."&lang=".$lang; break;
-	case "pharmacy" : $breakfile="apotheke.php?sid=".$sid."&lang=".$lang;break;
-	case "edp" : $breakfile="edv.php?sid=".$sid."&lang=".$lang;break;
-	case "doctors" : $breakfile="aerzte.php?sid=".$sid."&lang=".$lang;break;
-	case "nursing" : $breakfile="pflege.php?sid=".$sid."&lang=".$lang;break;
+	case 'radiology' : $breakfile='radiolog.php?sid='.$sid.'&lang='.$lang; break;
+	case 'pharmacy' : $breakfile='apotheke.php?sid='.$sid.'&lang='.$lang;break;
+	case 'edp' : $breakfile='edv.php?sid='.$sid.'&lang='.$lang;break;
+	case 'doctors' : $breakfile='aerzte.php?sid='.$sid.'&lang='.$lang;break;
+	case 'nursing' : $breakfile='pflege.php?sid='.$sid.'&lang='.$lang;break;
 	
 	default: $title=$LDTitleTag[$target];
 
@@ -36,8 +36,8 @@ switch($target)
 
 switch($user_origin)
 {
-    case 'amb': $breakfile="ambulatory.php?sid=".$sid."&lang=".$lang;break;
-	case 'dept': $breakfile="abteilung.php?sid=".$sid."&lang=".$lang;break;
+    case 'amb': $breakfile='ambulatory.php?sid='.$sid.'&lang='.$lang;break;
+	case 'dept': $breakfile='abteilung.php?sid='.$sid.'&lang='.$lang;break;
 }
 
 if(!$subtitle) $subtitle=$subtitle=$LDSubTitle['SBDefault'];
@@ -57,17 +57,19 @@ else
 
 $readerpath="editor-4plus1-read.php?sid=$sid&target=$target&lang=$lang&title=".strtr($title," ","+")."&file=";
 
-$today=date("Y-m-d");
+$today=date('Y-m-d');
 
 
 /* Establish db connection */
 require('../include/inc_db_makelink.php');
 if($link&&$DBLink_OK) 
-	{	
+{	
+    include_once('../include/inc_date_format_functions.php');
+	
         $dbtable='care_news_article';
 		$news_category=$target;  // set the news category
 		$news_num_stop=5;
-		include("../include/inc_news_get.php"); // now get the current news
+		include('../include/inc_news_get.php'); // now get the current news
 
 
         /* Now set the sql query for article # 5 or the achived news */
@@ -205,10 +207,10 @@ for($i=1;$i<5;$i++)
     </tr>
 <?php while($artikel=mysql_fetch_array($ergebnis))
 {
-echo '<tr bgcolor="#ffffff"><td><a href="#"><a href="'.$readerpath.$artikel[main_file].'&picfile='.$artikel[pic_file].'"><font face=verdana,arial size=2> '.$artikel[title].'</a></td>
-		<td><font face=verdana,arial size=2><a href="'.$readerpath.$artikel[main_file].'&picfile='.$artikel[pic_file].'"><img '.createComIcon('../','info.gif','0').' alt="'.$LDClk2Read.'"></a></td>		
-		<td><font face=verdana,arial size=2> '.$artikel[author].'</td>
-		<td><font face=verdana,arial size=2><nobr> '.$artikel[encode_date].'</td></tr>';
+echo '<tr bgcolor="#ffffff"><td><a href="#"><a href="'.$readerpath.$artikel['main_file'].'&picfile='.$artikel['pic_file'].'"><font face=verdana,arial size=2> '.$artikel['title'].'</a></td>
+		<td><font face=verdana,arial size=2><a href="'.$readerpath.$artikel['main_file'].'&picfile='.$artikel['pic_file'].'"><img '.createComIcon('../','info.gif','0').' alt="'.$LDClk2Read.'"></a></td>		
+		<td><font face=verdana,arial size=2> '.$artikel['author'].'</td>
+		<td><font face=verdana,arial size=2><nobr> '.formatDate2Local($artikel['encode_date'],$date_format,1).' </td></tr>';
 echo "\r\n";
 }
 ?>
