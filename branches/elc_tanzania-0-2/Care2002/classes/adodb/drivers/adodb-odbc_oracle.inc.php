@@ -1,6 +1,6 @@
 <?php
 /* 
-V2.50 14 Nov 2002  (c) 2000-2002 John Lim (jlim@natsoft.com.my). All rights reserved.
+V4.21 20 Mar 2004  (c) 2000-2004 John Lim (jlim@natsoft.com.my). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence. 
@@ -63,7 +63,10 @@ class  ADODB_odbc_oracle extends ADODB_odbc {
 				$fld->name = $rs->fields[0];
 				$fld->type = $rs->fields[1];
 				$fld->max_length = $rs->fields[2];
-				$retarr[strtoupper($fld->name)] = $fld;	
+				
+				
+				if ($ADODB_FETCH_MODE == ADODB_FETCH_NUM) $retarr[] = $fld;	
+				else $retarr[strtoupper($fld->name)] = $fld;
 				
 				$rs->MoveNext();
 			}
@@ -104,9 +107,9 @@ class  ADORecordSet_odbc_oracle extends ADORecordSet_odbc {
 	
 	var $databaseType = 'odbc_oracle';
 	
-	function ADORecordSet_odbc_oracle($id)
+	function ADORecordSet_odbc_oracle($id,$mode=false)
 	{
-		return $this->ADORecordSet_odbc($id);
+		return $this->ADORecordSet_odbc($id,$mode);
 	}
 }
 ?>

@@ -1,6 +1,6 @@
 <?php
 /*
-V2.50 14 Nov 2002  (c) 2000-2002 John Lim. All rights reserved.
+V4.21 20 Mar 2004  (c) 2000-2004 John Lim. All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence.
@@ -22,15 +22,27 @@ include_once(ADODB_DIR.'/drivers/adodb-oci8.inc.php');
 class ADODB_oci8po extends ADODB_oci8 {
 	var $databaseType = 'oci8po';
 	var $dataProvider = 'oci8';
+	var $metaColumnsSQL = "select lower(cname),coltype,width, SCALE, PRECISION, NULLS, DEFAULTVAL from col where tname='%s' order by colno"; //changed by smondino@users.sourceforge. net
+	var $metaTablesSQL = "select lower(table_name),table_type from cat where table_type in ('TABLE','VIEW')";
 	
-	function Prepare($sql)
+	function ADODB_oci8po()
+	{
+		$this->ADODB_oci8();
+	}
+	
+	function Param($name)
+	{
+		return '?';
+	}
+	
+	function Prepare($sql,$cursor=false)
 	{
 		$sqlarr = explode('?',$sql);
 		$sql = $sqlarr[0];
 		for ($i = 1, $max = sizeof($sqlarr); $i < $max; $i++) {
 			$sql .=  ':'.($i-1) . $sqlarr[$i];
 		} 
-		return ADODB_oci8::Prepare($sql);
+		return ADODB_oci8::Prepare($sql,$cursor);
 	}
 	
 	// emulate handling of parameters ? ?, replacing with :bind0 :bind1
@@ -52,7 +64,6 @@ class ADODB_oci8po extends ADODB_oci8 {
 		}
 		return ADODB_oci8::_query($sql,$inputarr);
 	}
-
 }
 
 /*--------------------------------------------------------------------------------------
@@ -63,9 +74,9 @@ class ADORecordset_oci8po extends ADORecordset_oci8 {
 
 	var $databaseType = 'oci8po';
 	
-		function ADORecordset_oci8po($queryID)
+		function ADORecordset_oci8po($queryID,$mode=false)
 		{
-			$this->ADORecordset_oci8($queryID);
+			$this->ADORecordset_oci8($queryID,$mode);
 		}
 
 		function Fields($colname)
@@ -81,7 +92,7 @@ class ADORecordset_oci8po extends ADORecordset_oci8 {
 			}
 			 return $this->fields[$this->bind[strtoupper($colname)]];
 		}
-	
+		
 		// lowercase field names...
  		function &_FetchField($fieldOffset = -1)
 		{
@@ -101,13 +112,20 @@ class ADORecordset_oci8po extends ADORecordset_oci8 {
 	// 10% speedup to move MoveNext to child class
 	function MoveNext() 
 	{
+	
 		if (!$this->EOF) {		
 			$this->_currentRow++;
 			if(@OCIfetchinto($this->_queryID,$this->fields,$this->fetchMode)) {
+			global $ADODB_ANSI_PADDING_OFF;
+	
 				if ($this->fetchMode & OCI_ASSOC) $this->_updatefields();
+				if (!empty($ADODB_ANSI_PADDING_OFF)) {
+					foreach($this->fields as $k => $v) {
+						if (is_string($v)) $this->fields[$k] = rtrim($v);
+					}
+				}
 				return true;
 			}
-			
 			$this->EOF = true;
 		}
 		return false;
@@ -132,13 +150,22 @@ class ADORecordset_oci8po extends ADORecordset_oci8 {
 		return $results;
 	}
 
-	// Uggh - a useless slowdown
+	// Create associative array
 	function _updatefields()
 	{
+		if (ADODB_ASSOC_CASE == 2) return; // native
+	
 		$arr = array();
-		foreach ($this->fields as $k => $v) {
+		$lowercase = (ADODB_ASSOC_CASE == 0);
+		
+		foreach($this->fields as $k => $v) {
 			if (is_integer($k)) $arr[$k] = $v;
-			else $arr[strtolower($k)] = $v;
+			else {
+				if ($lowercase)
+					$arr[strtolower($k)] = $v;
+				else
+					$arr[strtoupper($k)] = $v;
+			}
 		}
 		$this->fields = $arr;
 	}
@@ -146,7 +173,16 @@ class ADORecordset_oci8po extends ADORecordset_oci8 {
 	function _fetch() 
 	{
 		$ret = @OCIfetchinto($this->_queryID,$this->fields,$this->fetchMode);
-		if ($ret && $this->fetchMode & OCI_ASSOC) $this->_updatefields();
+		if ($ret) {
+		global $ADODB_ANSI_PADDING_OFF;
+	
+				if ($this->fetchMode & OCI_ASSOC) $this->_updatefields();
+				if (!empty($ADODB_ANSI_PADDING_OFF)) {
+					foreach($this->fields as $k => $v) {
+						if (is_string($v)) $this->fields[$k] = rtrim($v);
+					}
+				}
+		}
 		return $ret;
 	}
 	

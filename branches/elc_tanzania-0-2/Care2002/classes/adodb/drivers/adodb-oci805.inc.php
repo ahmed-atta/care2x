@@ -1,6 +1,6 @@
 <?php
 /** 
- * @version V2.50 14 Nov 2002 (c) 2000-2002 John Lim (jlim@natsoft.com.my). All rights reserved.
+ * @version V4.21 20 Mar 2004 (c) 2000-2004 John Lim (jlim@natsoft.com.my). All rights reserved.
  * Released under both BSD license and Lesser GPL library license. 
  * Whenever there is any discrepancy between the two licenses, 
  * the BSD license will take precedence. 
@@ -23,7 +23,7 @@ class ADODB_oci805 extends ADODB_oci8 {
 		$this->ADODB_oci8();
 	}
 	
-	function &SelectLimit($sql,$nrows=-1,$offset=-1, $inputarr=false,$arg3=false,$secs2cache=0)
+	function &SelectLimit($sql,$nrows=-1,$offset=-1, $inputarr=false,$secs2cache=0)
 	{
 		// seems that oracle only supports 1 hint comment in 8i
 		if (strpos($sql,'/*+') !== false)
@@ -42,15 +42,15 @@ class ADODB_oci805 extends ADODB_oci8 {
 		}
 		*/
 
-		return ADOConnection::SelectLimit($sql,$nrows,$offset,$inputarr,$arg3,$secs2cache);
+		return ADOConnection::SelectLimit($sql,$nrows,$offset,$inputarr,$secs2cache);
 	}
 }
 
 class ADORecordset_oci805 extends ADORecordset_oci8 {	
 	var $databaseType = "oci805";
-	function ADORecordset_oci805($id)
+	function ADORecordset_oci805($id,$mode=false)
 	{
-		$this->ADORecordset_oci8($id);
+		$this->ADORecordset_oci8($id,$mode);
 	}
 }
 ?>

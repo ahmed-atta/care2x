@@ -179,7 +179,7 @@ ul {
 	border-bottom: 1px solid silver;
 }
 .reg_list_titlebar{
-	background-color: #eeeeee;
+	background-image: url(../../../gui/img/skin/default/backbrushed.gif);
 	color: #000066;
 }
 .adm_item{
@@ -230,6 +230,22 @@ hr {
 	background-color: white;
 	padding-left: 6px;
 	padding-right:6px;
+}
+/*----- Registration search mask */
+.reg_searchmask{
+	background-image:url(../mac2/mac_bg2.gif);
+}
+/*----- Registration search bordering block */
+.reg_searchmask_border{
+	background-image: url(../../../gui/img/skin/default/backbrushed.gif);
+}
+/*----- Admission search mask */
+.admit_searchmask{
+	background-color: #f3f3f3;
+}
+/*----- Admission search bordering block */
+.admit_searchmask_border{
+	background-color: #6666ee;
 }
 a:link {color:#546D8F; text-decoration:none}
 a:visited {color:#546D8F; text-decoration:none}

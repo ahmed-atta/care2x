@@ -29,9 +29,9 @@ if(empty($lang)) $lang='en';
 if(isset($HTTP_POST_VARS['mode'])&&!empty($HTTP_POST_VARS['mode'])&&$HTTP_POST_VARS['mode']=='save'){
 	$error_msg='';
 	if($pw1==$pw2){
-		$sql="INSERT INTO care_users (name, login_id, password, permission, lockflag, exc,history, modify_id, modify_time, create_id,create_time)
-				VALUES ('".addslashes($name)."','$username','".md5($pw1)."','System_Admin',0,1,'Created by script ".date('Y-m-d H:i:s')."',
-								'script','".date('YmdHis')."','script','".date('YmdHis')."')";
+		$sql="INSERT INTO care_users (name, login_id, password, permission, lockflag, exc,status,history, modify_id, modify_time, create_id,create_time)
+				VALUES ('".addslashes($name)."','$username','".md5($pw1)."','System_Admin',0,1,'normal','Created by script ".date('Y-m-d H:i:s')."',
+								'script',".date('YmdHis').",'script',".date('YmdHis').")";
 		$db->BeginTrans();
         $ok=$db->Execute($sql);
         if($ok) {
@@ -40,7 +40,7 @@ if(isset($HTTP_POST_VARS['mode'])&&!empty($HTTP_POST_VARS['mode'])&&$HTTP_POST_V
         } else {
 	        $db->RollbackTrans();
 			$error_msg=$LDLoginExists;
-			//echo $sql;
+			echo $sql;
 	    }
 
 	}else{
