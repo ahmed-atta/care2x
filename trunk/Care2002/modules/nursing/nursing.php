@@ -21,27 +21,17 @@ require_once($root_path.'include/inc_config_color.php');
 
 $toggler=0;
 $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
-/* Establish db connection */
-
-/*$dbtable='care_nursing_station';
-
-if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
-if($dblink_ok) {
-         $sql="SELECT item, station, dept FROM $dbtable ORDER BY station";
-		if($ergebnis=$db->Execute($sql)) {
-            $rows=$ergebnis->RecordCount();
-        } else echo "$sql<br>$LDDbNoRead"; 
-} else { 
-    echo "$LDDbNoLink<br>"; 
-} */
 
 require_once($root_path.'include/care_api_classes/class_ward.php');
 // Load the wards info 
 $ward_obj=new Ward;
-$items='nr,ward_id';
+$items='nr,ward_id,name';
 $ward_info=&$ward_obj->getAllWardsItemsObject($items);
 
 $HTTP_SESSION_VARS['sess_file_return']=$top_dir.basename(__FILE__);
+/* Set this file as the referer */
+$HTTP_SESSION_VARS['sess_path_referer']=$top_dir.basename(__FILE__);
+$HTTP_SESSION_VARS['sess_user_origin']='dept';
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>

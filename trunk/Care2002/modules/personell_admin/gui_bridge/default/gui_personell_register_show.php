@@ -24,12 +24,11 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 
 <tr>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php echo $LDPersonellData.' ('.$full_pnr.')'; ?></STRONG></FONT>
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+1  FACE="Arial"><STRONG> &nbsp;<?php echo "$LDPersonnelManagement :: $LDPersonellData ($full_pnr)"; ?></STRONG></FONT>
 </td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
 <a href="javascript:gethelp('')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
-if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) echo 'startframe.php?sid='.$sid.'&lang='.$lang; 
-	else echo "personell_admin_pass.php?sid=$sid&target=entry&lang=$lang"; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
+ echo $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </td>
 </tr>
 
@@ -85,13 +84,13 @@ if(empty($is_discharged)){
 <td bgcolor="#eeeeee">
 <FONT SIZE=-1  FACE="Arial" ><FONT SIZE=-1  FACE="Arial" color="#800000">&nbsp;<b><?php echo $full_pnr; ?></b><br>
 <?php #
-if(file_exists($root_path.'cache/barcodes/en_'.$full_pnr.'.png')) echo '<img src="'.$root_path.'cache/barcodes/en_'.$full_pnr.'.png" border=0 width=145 height=35>';
+if(file_exists($root_path.'cache/barcodes/en_'.$full_pnr.'.png')) echo '<img src="'.$root_path.'cache/barcodes/en_'.$full_pnr.'.png" border=0 width=180 height=35>';
   else 
   {
 
-    echo "<img src='".$root_path."classes/barcode/image.php?code=".$full_pnr."&style=68&type=I25&width=145&height=50&xres=2&font=5&label=2&form_file=en' border=0 width=0 height=0>";
+    echo "<img src='".$root_path."classes/barcode/image.php?code=".$full_pnr."&style=68&type=I25&width=180&height=50&xres=2&font=5&label=2&form_file=en' border=0 width=0 height=0>";
 
-    echo "<img src='".$root_path."classes/barcode/image.php?code=".$full_pnr."&style=68&type=I25&width=145&height=40&xres=2&font=5' border=0>";
+    echo "<img src='".$root_path."classes/barcode/image.php?code=".$full_pnr."&style=68&type=I25&width=180&height=40&xres=2&font=5' border=0>";
   }
 ?>
 </td>
@@ -252,7 +251,7 @@ if ($addr_country) echo $addr_country.'<br>';
 <tr bgcolor="white">
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $LDInternalRevenueCode ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $id_code; ?>
+<td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $ir_code; ?>
 </td>
 </tr>
 <tr bgcolor="white">
@@ -324,12 +323,7 @@ if ($addr_country) echo $addr_country.'<br>';
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="aufnahme_list.php<?php echo URL_APPEND; ?>&newdata=1"><?php echo $LDAdmWantArchive ?></a><br>
 <p>
  -->&nbsp;
-<?php
-
-echo '
-		<a href="personell_admin_pass.php'.URL_APPEND.'&target=person_reg">';
-?>
-<img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a>
+<a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a>
 <p>
 
 <?php

@@ -116,7 +116,6 @@ if($dblink_ok){
 }
 
 ?>
-
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
@@ -514,7 +513,8 @@ for ($i=$ward_info['room_nr_start'];$i<=$ward_info['room_nr_end'];$i++){
     }
 	echo '
 			</td><td align=center><font face="verdana,arial" size="2" >&nbsp;';
-	if ($bed['encounter_nr']) echo ($bed['encounter_nr']+$GLOBAL_CONFIG['patient_inpatient_nr_adder']);
+	//if ($bed['encounter_nr']) echo ($bed['encounter_nr']+$GLOBAL_CONFIG['patient_inpatient_nr_adder']);
+	if ($bed['encounter_nr']) echo $bed['encounter_nr'];
 	echo "\r\n";
 	echo '
 			</td><td ><font face="verdana,arial" size="2" >&nbsp;';

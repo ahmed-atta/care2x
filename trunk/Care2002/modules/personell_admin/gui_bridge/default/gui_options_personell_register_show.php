@@ -47,7 +47,7 @@ function Spacer()
               <TR bgColor=#eeeeee>  <td align=center><img <?php echo createComIcon($root_path,'violet_phone.gif','0') ?>></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2> 
-			 <a href="javascript:alert('Function not  available yet');"><?php echo $LDAddPhoneInfo ?></a>
+			 <a href="<?php echo $root_path.'modules/phone_directory/phone_edit.php'.URL_APPEND.'&user_origin=pers&nr='.$personell_nr; ?>"><?php echo $LDAddPhoneInfo ?></a>
 				   </FONT></TD>
                 </TR>				 
 			   
@@ -70,6 +70,14 @@ function Spacer()
 				  </nobr> </FONT></TD>
                 </TR>
 			   
+           <?php Spacer(); ?>
+				  
+				  <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'document.gif','0') ?>></td>
+                <TD vAlign=top ><FONT 
+                  face="Verdana,Helvetica,Arial" size=2> <nobr>
+				 <a href="<?php echo "person_register_show.php".URL_REDIRECT_APPEND."&pid=$pid&from=$from"; ?>"><?php echo $LDShowPersonalData ?></a>
+				  </nobr> </FONT></TD>
+                </TR>
     							</TBODY>
 		</TABLE>
 		</TD></TR>

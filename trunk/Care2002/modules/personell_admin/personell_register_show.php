@@ -22,7 +22,8 @@ require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 $GLOBAL_CONFIG=array();
 
 $thisfile=basename(__FILE__);
-$breakfile='personell_admin_pass.php'.URL_APPEND;
+if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
+	else $breakfile='personell_admin_pass.php'.URL_APPEND.'&target='.$target;
 
 $personell_obj=new Personell();
 //$person_obj=new Person();
@@ -105,7 +106,8 @@ $HTTP_SESSION_VARS['sess_pid']=$pid;
 //$HTTP_SESSION_VARS['sess_full_en']=$full_en;
 $HTTP_SESSION_VARS['sess_parent_mod']='admission';
 $HTTP_SESSION_VARS['sess_pnr']=$personell_nr;
-$full_pnr=$personell_nr+$GLOBAL_CONFIG['personell_nr_adder'];
+//$full_pnr=$personell_nr+$GLOBAL_CONFIG['personell_nr_adder'];
+$full_pnr=$personell_nr;
 $HTTP_SESSION_VARS['sess_full_pnr']=$full_pnr;
 $HTTP_SESSION_VARS['sess_user_origin']='personell_admin';
 

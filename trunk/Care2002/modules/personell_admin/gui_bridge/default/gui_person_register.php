@@ -104,7 +104,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 
 <tr>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+1  FACE="Arial"><STRONG> &nbsp;<?php echo $LDPersonRegister ?></STRONG></FONT>
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+1  FACE="Arial"><STRONG> &nbsp;<?php echo "$LDPersonnelManagement :: $LDPersonRegister" ?></STRONG></FONT>
 </td>
 
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
@@ -312,13 +312,12 @@ if($insurance_show) {
 </td>
 <td colspan=2><FONT SIZE=-1  FACE="Arial"><?php if ($errorinsuranceclass) echo '<font color="'.$error_fontcolor.'">'; ?>
 <?php
-if($insurance_classes!=false){
+if(is_object($insurance_classes)){
     while($result=$insurance_classes->FetchRow()) {
 ?>
 <input name="insurance_class_nr" type="radio"  value="<?php echo $result['class_nr']; ?>" onClick="hidecat()" <?php if($insurance_class_nr==$result['class_nr']) echo 'checked'; ?>>
 <?php 
-        $LD=$result['LD_var'];
-        if(isset($$LD)&&!empty($$LD)) echo $$LD; else echo $result['name'];
+        if(isset($$result['LD_var'])&&!empty($$result['LD_var'])) echo $$result['LD_var']; else echo $result['name'];
         echo '&nbsp;';
 	}
 } else echo "no insurance class";
@@ -446,12 +445,11 @@ createTR($errorethnicorig, 'ethnic_orig', $LDEthnicOrigin,$ethnic_orig,2);
 
 <?php if (!$newdata) : ?>
 
-<form action=<?php echo $thisfile; ?> method=post>
-<input type=hidden name=sid value=<?php echo $sid; ?>>
-<input type=hidden name=patnum value="">
+<form action="<?php echo $thisfile; ?>" method="post">
+<input type=hidden name="sid" value="<?php echo $sid; ?>">
 <input type=hidden name="lang" value="<?php echo $lang; ?>">
 <input type=hidden name="date_format" value="<?php echo $date_format; ?>">
-<input type=submit value="<?php echo $LDNewForm ?>" onClick=hidecat()>
+<input type=submit value="<?php echo $LDNewForm ?>">
 </form>
 <?php endif; ?>
 
@@ -470,17 +468,11 @@ createTR($errorethnicorig, 'ethnic_orig', $LDEthnicOrigin,$ethnic_orig,2);
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="patient_register_archive.php<?php echo URL_APPEND; ?>&newdata=1&from=entry"><?php echo $LDArchive ?></a><br>
 
 <p>
- --><a href="
-<?php if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo 'startframe.php';
-	else echo 'aufnahme_pass.php';
-	echo "?sid=".$sid."&lang=".$lang;
-?>
-"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
+ --><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
 </ul>
 <p>
-
 <?php
-echo StdCopyright();
+require($root_path.'include/inc_load_copyrite.php');
 ?>
 </FONT>
 <?php

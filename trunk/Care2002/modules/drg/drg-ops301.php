@@ -162,7 +162,7 @@ else  echo 'topmargin=2 marginheight=2';
 <?php
 if (is_object($drg)) { 
 	# Load the diagnosis categories
-	if($cat_obj=&$DRG_obj->DiagnosisCategories()) $cat_ok=true;
+	if($cat_obj=&$DRG_obj->ProcedureCategories()) $cat_ok=true;
 		else $cat_ok=false;
 	# Load the localization types
 	if($loc_obj=&$DRG_obj->LocalizationTypes()) $loc_ok=true;
@@ -180,9 +180,9 @@ if (is_object($drg)) {
 		<td><font face=arial size=2  color="'.$fcolor.'">';
 		if($procedure['category_nr']=="1"){
 			if(defined('CATEGORY_NAME_FULL')&&CATEGORY_NAME_FULL){
-			 echo "<b>$LDMostResponsible</b>";
+			 echo "<b>$LDMain</b>";
 			}else{
-				echo  "<b>$LDMostResp_s</b>";
+				echo  "<b>$LDMain_s</b>";
 			}
 		}elseif($display=="composite"){
 ?>

@@ -10,6 +10,7 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+$lang_tables=array('departments.php');
 define('LANG_FILE','edp.php');
 $local_user='ck_edv_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
@@ -57,21 +58,19 @@ div.pcont{ margin-left: 3; }
 <table width=100% border=0 cellpadding="0" cellspacing=0>
 <tr>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp; <?php echo "$LDDept" ?></STRONG></FONT></td>
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp; <?php echo "$LDDepartment :: $LDList" ?></STRONG></FONT></td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('nursing_ward_mng.php','new')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
+<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp()"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
 <tr valign=top >
 <td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
  <ul>
 <?php if($rows) : ?>
-
 <img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"><font face="Verdana, Arial" size=3 color="#880000">
 <b><?php echo str_replace("~station~",strtoupper($station),$LDStationExists) ?></b></font><p>
 <?php endif ?>
-<font face="Verdana, Arial" size=-1><?php echo $LDEnterAllFields ?>
 
-<table border=0>
+<table border=0 cellpadding=3>
   <tr>
 <!-- 	<td bgcolor="#e9e9e9"></td>
  -->    <td class=pblock align=center bgColor="#eeeeee"><?php echo $LDDept ?></td>
@@ -79,12 +78,17 @@ div.pcont{ margin-left: 3; }
  </tr> 
   
 <?php
-while(list($x,$v)=each($deptarray)){
+while(list($x,$dept)=each($deptarray)){
 ?>
   <tr>
 <!-- 	<td bgcolor="#e9e9e9"><img <?php echo createComIcon($root_path,'arrow_blueW.gif','0'); ?>></td>
- -->    <td class=pblock  bgColor="#eeeeee"><a href="dept_info.php<?php echo URL_APPEND."&dept_nr=".$v['nr']; ?>"><?php echo $v['name_formal']; ?></a> </td>
-    <td class=pblock  bgColor="#eeeeee"><?php echo nl2br($v['description']); ?> </td>
+ -->    <td class=pblock  bgColor="#eeeeee"><a href="dept_info.php<?php echo URL_APPEND."&dept_nr=".$dept['nr']; ?>">
+ <?php 
+		if(isset($$dept['LD_var'])&&!empty($$dept['LD_var'])) echo $$dept['LD_var'];
+				else echo $dept['name_formal'];
+ ?>
+ </a> </td>
+    <td class=pblock  bgColor="#eeeeee"><?php echo nl2br($dept['description']); ?> </td>
  </tr> 
 <?php
 }

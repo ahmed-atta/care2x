@@ -27,7 +27,7 @@ $returnfile=$root_path.$HTTP_SESSION_VARS['sess_path_referer'].URL_APPEND;
 $HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
 $HTTP_SESSION_VARS['sess_user_origin']='it';
 /* Set this file as the referer */
-$HTTP_SESSION_VARS['sess_path_referer']=substr($top_dir,1).'/'.basename(__FILE__);
+$HTTP_SESSION_VARS['sess_path_referer']=$top_dir.basename(__FILE__);
 // reset all 2nd level lock cookies
 
 
@@ -36,20 +36,9 @@ $HTTP_SESSION_VARS['sess_path_referer']=substr($top_dir,1).'/'.basename(__FILE__
 <HTML>
 <HEAD>
 <?php echo setCharSet(); ?>
-
-<script language="javascript" >
-<!-- 
-function gethelp(x,s,x1,x2,x3)
-{
-	if (!x) x="";
-	urlholder="<?php echo $root_path; ?>help-router.php<?php echo URL_REDIRECT_APPEND ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
-	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
-	window.helpwin.moveTo(0,0);
-}
-// -->
-</script> 
  
 <?php 
+require($root_path.'include/inc_js_gethelp.php');
 require($root_path.'include/inc_css_a_hilitebu.php');
 ?>
 </HEAD>

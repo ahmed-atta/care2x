@@ -10,6 +10,7 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+$lang_tables=array('actions.php');
 define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
@@ -322,9 +323,10 @@ if($edit) {
 		
 		<td><font face="verdana,arial" size="2" ><?php echo $LDNursingReport ?>:<br>&nbsp;<textarea rows="4" cols="25" name="berichtput"><?php if(!$saved) echo $berichtput; ?></textarea><br>
 		<input type="checkbox" name="warn" <?php if((!$saved)&&($warn)) echo "checked"; ?> value="warn"> <img <?php echo createComIcon($root_path,'warn.gif','0','top') ?>>
-		 <font size=1 face=arial><?php echo $LDInsertSymbol ?><br>
-		 &nbsp;<a href="javascript:sethilite(document.berichtform.berichtput)"><img <?php echo createComIcon($root_path,'hilite-s.gif','0') ?>></a>
-		<a href="javascript:endhilite(document.berichtform.berichtput)"><img <?php echo createComIcon($root_path,'hilite-e.gif','0') ?>></a>
+		 <font size=1 face=arial><?php echo $LDInsertSymbol ?><br><font size=2 face=arial><b>
+		 &nbsp;<a href="javascript:sethilite(document.berichtform.berichtput)"><img <?php echo createComIcon($root_path,'color_marker_yellow.gif','0') ?>> <?php echo $LDStart ?></a>
+		<a href="javascript:endhilite(document.berichtform.berichtput)"><img <?php echo createComIcon($root_path,'color_marker_yellow.gif','0') ?>> <?php echo $LDEnd ?></a>
+		</b>
 		</td>
 		
 		<td valign="top"><font face="verdana,arial" size="2" ><?php echo $LDSignature ?>:<br><input type=text size="3" name="author" onFocus=this.select() value="<?php if(!$saved) echo $author; ?>">
@@ -341,9 +343,10 @@ if($edit) {
 		
 		<td><font face="verdana,arial" size="2" ><?php echo $LDEffectReport ?>:<br>&nbsp;<textarea rows="4" cols="25"  name="berichtput2"><?php if(!$saved) echo $berichtput2; ?></textarea><br>
 		<input type="checkbox" name="warn2" <?php if((!$saved)&&($warn2)) echo "checked"; ?> value="warn"> <img <?php echo createComIcon($root_path,'warn.gif','0','top') ?>> 
-		<font size=1 face=arial><?php echo $LDInsertSymbol ?><br>
-		 &nbsp;<a href="javascript:sethilite(document.berichtform.berichtput2)"><img <?php echo createComIcon($root_path,'hilite-s.gif','0') ?>></a>
-		<a href="javascript:endhilite(document.berichtform.berichtput2)"><img <?php echo createComIcon($root_path,'hilite-e.gif','0') ?>></a>
+		<font size=1 face=arial><?php echo $LDInsertSymbol ?><br><font size=2 face=arial><b>
+		 &nbsp;<a href="javascript:sethilite(document.berichtform.berichtput2)"><img <?php echo createComIcon($root_path,'color_marker_yellow.gif','0') ?>> <?php echo $LDStart ?></a>
+		<a href="javascript:endhilite(document.berichtform.berichtput2)"><img <?php echo createComIcon($root_path,'color_marker_yellow.gif','0') ?>> <?php echo $LDEnd ?></a>
+		</b>
 		</td>
 		<td valign="top"><font face="verdana,arial" size="2" ><?php echo $LDSignature ?>:<br><input type=text size="3" name="author2" onFocus=this.select() value="<?php if(!$saved) echo $author2; ?>">
 		</td>

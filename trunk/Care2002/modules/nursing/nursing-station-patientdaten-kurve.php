@@ -23,7 +23,7 @@ require_once($root_path.'classes/datetimemanager/class.dateTimeManager.php');
 $dateshifter=new dateTimeManager();
 
 $thisfile=basename(__FILE__);
-$breakfile="nursing-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$pn&edit=$edit";
+$breakfile="nursing-station-patientdaten.php".URL_APPEND."&station=$station&pn=$pn&edit=$edit";
 
 if(!$kmonat) $kmonat=date('n');
 
@@ -95,7 +95,7 @@ if($dblink_ok){
 	$enc_obj->where=" encounter_nr=$pn";
 	// Preload the patient encounter object
 	if( $enc_obj->loadEncounterData($pn)) {
-		switch ($enc_obj->EncounterClass())
+/*		switch ($enc_obj->EncounterClass())
 		{
 		    case '1': $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
 		                   break;
@@ -103,7 +103,9 @@ if($dblink_ok){
 							break;
 			default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
 		}						
-
+*/
+		$full_en=$pn;
+		
 		if( $enc_obj->is_loaded){
 			$result=&$enc_obj->encounter;		
 			$rows=$enc_obj->record_count;	
@@ -350,13 +352,15 @@ var dblclk=0;
 
 <form name="berichtform">
 <?php
-//****************************** Allergy ********************************
 
+//****************************** Encounter number ********************************
 echo '
 		<table   cellpadding="0" cellspacing=1 border="0" >
 		<tr  >
 		<td bgcolor="aqua" class=pblock><font size="2" ><div class=pcont><b>'.$full_en.'</b></div></td>
 		<td bgcolor="white" >';
+		
+//****************************** Allergy ********************************
 		if($edit){
 			echo '
 			<a href="javascript:popgetinfowin(\'allergy\',\''.$pn.'\',\''.$jahr.'\',\''.$kmonat.'\',\''.$tag.'\',\''.$tag.'\',\''.$tagname.'\')">

@@ -1,105 +1,107 @@
-<form>
-<table border=0 cellpadding=0 cellspacing=0 bgcolor="#ff9966" width=450>
-  <tr>
-    <td>
-		<table border=0 cellspacing=1 cellpadding=0 width=100%>
-  		<tr >
-    	<td bgcolor="#ff9966">
-			<table border=0 cellspacing=1 width=100% cellpadding=0>
-    			<tr bgcolor="#ffffcc">
-      		 		<td><FONT    SIZE=2  FACE="Arial" color="#ff9966">&nbsp;AOK</td>
-      		 		<td><FONT    SIZE=2  FACE="Arial" color="#ff9966">&nbsp;BKK</td>
-      		 		<td><FONT    SIZE=2  FACE="Arial" color="#ff9966">&nbsp;KKH</td>
-      		 		<td><FONT    SIZE=2  FACE="Arial" color="#ff9966">&nbsp;TKK</td>
-      		 		<td><FONT    SIZE=2  FACE="Arial" color="#ff9966">&nbsp;HKH</td>
-      		 		<td><FONT    SIZE=2  FACE="Arial" color="#ff9966">&nbsp;BGG</td>
-    			</tr>
-    			<tr bgcolor="#ffffcc">
-      		 		<td colspan=6><FONT    SIZE=2  FACE="Arial">&nbsp;
-			 		<?php echo $encounter['insurance_nr']; ?>
-			 		</td>
-    			</tr>
-    			<tr bgcolor="#ffffcc">
-      		 		<td colspan=6><FONT    SIZE=2  FACE="Arial">&nbsp;
-			 		<?php echo $encounter['insurers_name']; ?>
-			 		</td>
-    			</tr>
-    			<tr bgcolor="#ffffcc">
-      				<td colspan=6><FONT    SIZE=2  FACE="Arial">&nbsp;<br>&nbsp;
-					<?php echo $title; ?><br>&nbsp;
-					<?php echo $name_last; ?>, <?php echo $name_first; ?><br>&nbsp;
-					<?php  echo formatDate2Local($date_birth,$date_format) ?>
-					<p>
-					</td>
-    			</tr>
-  			</table>
-  		
-		</td>
-    	<td bgcolor="#ffffcc" valign="top"><FONT    SIZE=3  FACE="Arial" color="#ff9966">
-		<center>
-		<?php echo $LDSickReport; ?></font><br><FONT    SIZE=2  FACE="Arial">
-		<img src="../../gui/img/common/default/care_logo.gif" border=0 width=115 height=61 align="right">
-		Care Hospital<br>
-		Virtualstr. 89-3 A<br>
-		D-7833 Cyberia
-		</font>
-		</font>
-		</center>
-		<p>
-		<FONT    SIZE=1  FACE="Arial" color="#ff9966">
-		<?php echo $LDSickConfirm; ?>
-		</font>
-		</td>
-  		</tr>
-		
-  		<tr bgcolor="#ffffcc">
-	    <td colspan=1><FONT    SIZE=2  FACE="Arial" color="#ff9966">&nbsp;
+<script language="javascript">
+<!-- Script Begin
+function chkSickForm(f) {
+	v=document.newform.dept_nr.value;
+	if(v==""){
+		alert("<?php echo $LDPlsSelectDept; ?>");
+		return false;
+	}else if(f.date_end.value==""){
+		alert("<?php echo $LDPlsEnterEndDate; ?>");
+		f.date_end.focus();
+		return false;
+	}else if(f.date_start.value==""){
+		alert("<?php echo $LDPlsEnterStartDate; ?>");
+		f.date_start.focus();
+		return false;
+	}else if(f.date_confirm.value==""){
+		alert("<?php echo $LDPlsEnterConfirmDate; ?>");
+		f.date_confirm.focus();
+		return false;
+	}else if(f.diagnosis.value==""){
+		alert("<?php echo $LDPlsEnterDiagnosis; ?>");
+		f.diagnosis.focus();
+		return false;
+	}else{
+		f.dept_nr.value=v;
+		return true;
+	}
+}
+function chkNewForm(v) {
+	if(v==""||v=="<?php echo $dept_nr; ?>"){
+		return false;
+	}else{
+		return true;
+	}
+}
+//  Script End -->
+</script>
 
-		<?php echo $LDSickUntil; ?>:<br>&nbsp;
-		<input type="text" name="sday" size=2 maxlength=2>
-		<input type="text" name="smonth" size=2 maxlength=2>
-		<input type="text" name="syear" size=4 maxlength=4>
-		<br>&nbsp;
-  		<?php echo $LDStartingFrom; ?>:
-		<br>&nbsp;
-		<input type="text" name="eday" size=2 maxlength=2>
-		<input type="text" name="emonth" size=2 maxlength=2>
-		<input type="text" name="eyear" size=4 maxlength=4>
-		<br>&nbsp;
-		<?php echo $LDConfirmedOn; ?>:
-  		<br>&nbsp;
-		<input type="text" name="dday" size=2 maxlength=2>
-		<input type="text" name="dmonth" size=2 maxlength=2>
-		<input type="text" name="dyear" size=4 maxlength=4>		
-		</td>
-    	<td bgcolor="#ffffcc" valign="bottom" align="right"><FONT    SIZE=2  FACE="Arial">
-		<?php echo nl2br($dept_sigstamp); ?>
-		</td>
-		</tr>
-		
-    	<tr bgcolor="#ffffcc">
-      	<td colspan=2 valign="top"><FONT    SIZE=1  FACE="Arial" color="#ff9966">&nbsp;
-		<?php echo $LDInsurersCopy; ?>
-		</font>
-		<br>&nbsp;
-		<FONT    SIZE=2  FACE="Arial" color="#ff9966"><?php echo $LDDiagnosis2; ?>:<br>&nbsp;
-		<textarea name="sick_reason" cols=40 rows=5 wrap="physical"></textarea>
-  
-		&nbsp;
-		</td>
-    	</tr>
-		</table>	
-	</td>
-  </tr>
-</table>
+<form name="sickform" onSubmit="return chkSickForm(this)" method="post">
+<?php 
+# Prepare some values for the template
+$TP_insco_1='AOK';
+$TP_insco_2='BKK';
+$TP_insco_3='KKH';
+$TP_insco_4='TKK';
+$TP_insco_5='HKH';
+$TP_insco_6='BGG';
+
+if($insurance){
+	$TP_enc_insurance_name=$insurance['name']; 
+	$TP_enc_insurance_nr=$insurance['insurance_nr']; 
+	$TP_enc_insurance_subarea=$insurance['sub_area']; 
+}
+
+$TP_date_birth=formatDate2Local($date_birth,$date_format);
+$TP_dept_sigstamp=nl2br($dept_sigstamp); 
+$TP_care_logo=createLogo($root_path,'care_logo.gif','0','right');
+
+$date_checker='onBlur="IsValidDate(this,\''.$date_format.'\')" onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\')"';
+
+$TP_date_end='<input type="text" name="date_end" size=10 maxlength=10 '.$date_checker.'>';
+$TP_date_start='<input type="text" name="date_start" size=10 maxlength=10 '.$date_checker.'>';
+$TP_date_confirm='<input type="text" name="date_confirm" size=10 maxlength=10 '.$date_checker.'>';
+
+$TP_diagnosis='<textarea name="diagnosis" cols=40 rows=5 wrap="physical"></textarea>';
+
+# Signature stamp of the department
+$TP_dept_sigstamp=nl2br($dept['sig_stamp']); 
+# Logo of the department
+if(file_exists($root_path.'gui/img/logos_dept/dept_'.$dept_nr.'.'.$dept['logo_mime_type'])){
+	$TP_dept_logo=$root_path.'gui/img/logos_dept/dept_'.$dept_nr.'.'.$dept['logo_mime_type']; 
+}else{
+	$TP_dept_logo=$root_path.'gui/img/common/default/pixel.gif'; # Else output a transparent pixel
+}
+
+
+# Get the address of the hospital from the global config table
+$glob_obj->getConfig('main_info_address');
+$TP_main_address=nl2br($GLOBAL_CONFIG['main_info_address']);
+
+# Load the template
+$TP_sickform=&$TP_obj->load('registration_admission/tp_show_sick_confirm.htm');
+# Output template
+eval("echo $TP_sickform;");
+?>
+<input type="hidden" name="sid" value="<?php echo $sid; ?>">
+<input type="hidden" name="lang" value="<?php echo $lang; ?>">
+<input type="hidden" name="dept_nr" value="<?php echo $dept_nr; ?>">
+<input type="hidden" name="mode" value="create">
+<input type="hidden" name="target" value="<?php echo $target; ?>">
+<input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0'); ?>>
 </form>
 <p>
 
-<form method="post" name="newform"><img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle'); ?>> Create a form for <select name="deptnr">
+<form method="post" name="newform" onSubmit="return chkNewForm(this.dept_nr.value)">
+<img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle'); ?>> 
+<?php echo $LDCreateNewForm; ?>
+<select name="dept_nr">
 	<option value=""></option>
 	<?php
 		while(list($x,$v)=each($dept_med)){
-			echo '<option value="'.$v['nr'].'">';
+			echo '<option value="'.$v['nr'].'" ';
+			if($v['nr']==$dept_nr) echo 'selected';
+			echo '>';
 			if(isset($$v['LD_var'])&&$$v['LD_var']) echo $$v['LD_var'];
 				else echo $v['name_formal'];
 			echo '</option>

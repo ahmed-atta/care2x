@@ -73,10 +73,10 @@ if($dblink_ok){/* Load date formatter */
 	}else{echo "$sql<br>$LDDbNoRead";} 
 	
 	// Get the today's occupancy
-	$sql="SELECT  location_nr, COUNT(*) AS maxoccbed	FROM $dbtable AS w, care_encounter_location AS l  ";
-	$sql.=" WHERE NOT w.is_temp_closed  AND w.status NOT IN ('hide','delete','void','inactive')   AND w.date_create<='$s_date'  AND l.group_nr=w.nr AND l.type_nr=5 ";
-	if($is_today) $sql.=" AND l.date_from<='$s_date' AND l.date_to IN ('0000-00-00','$s_date')";
+	$sql="SELECT  COUNT(l.location_nr) AS maxoccbed, w.nr AS ward_nr	FROM $dbtable AS w LEFT JOIN care_encounter_location AS l ON   l.group_nr=w.nr AND l.type_nr=5 ";
+	if($is_today) $sql.=" AND l.date_from<='$s_date' AND l.date_to IN ('0000-00-00','')";
 		else $sql.=" AND l.date_from<='$s_date' AND (l.date_to<='$s_date' OR l.date_to='0000-00-00')";
+	$sql.=" WHERE NOT w.is_temp_closed  AND w.status NOT IN ('hide','delete','void','inactive')   AND w.date_create<='$s_date' ";
 	$sql.="	GROUP BY w.nr ORDER BY w.nr";
 	if($occbed=$db->Execute($sql))
      {
@@ -203,15 +203,14 @@ $frei=0;
 
 srand(time());
 
-while ($result=$wards->FetchRow())
-	{
-		$maxbed=$result['room_nr_end']-$result['room_nr_start'];
+while ($result=$wards->FetchRow()){
 		
-		$roomrow=$rooms->FetchRow();
-		$bedrow=$occbed->FetchRow();
+	$maxbed=$result['room_nr_end']-$result['room_nr_start'];
+		
+	$roomrow=$rooms->FetchRow();
+	$bedrow=$occbed->FetchRow();
 		$freebeds=$roomrow['maxbed']-$bedrow['maxoccbed'];
-		
-	$frei=floor(($freebeds/$roomrow['maxbed'])*10);
+		$frei=floor(($freebeds/$roomrow['maxbed'])*10);
 	if ($toggler==0) 
 		{ $bgc='ffffcc'; $toggler=1;} 
 		else {$bgc='dfdfdf'; $toggler=0;}
@@ -226,7 +225,9 @@ while ($result=$wards->FetchRow())
 						<td align=center><font face="verdana,arial" size="2" >
 						'.$freebeds.'&nbsp;&nbsp;&nbsp;</td>
 						<td align=center><font face="verdana,arial" size="2" color="'.PIE_CHART_USED_COLOR.'">
-						'.$bedrow['maxoccbed'].'&nbsp;&nbsp;&nbsp;</td>
+						';
+	if($bedrow['maxoccbed']) echo $bedrow['maxoccbed'];
+	echo '&nbsp;&nbsp;&nbsp;</td>
 						';
 	echo '
 						<td align="center">';

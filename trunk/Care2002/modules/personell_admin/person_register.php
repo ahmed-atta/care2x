@@ -25,14 +25,15 @@ $person_obj=new Person($pid);
 $pinsure_obj=new PersonInsurance($pid);
 
 $thisfile=basename(__FILE__);
-$breakfile='personell_admin_pass.php'.URL_APPEND.'&target=person_reg';
+if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
+	else $breakfile='personell_admin_pass.php'.URL_APPEND.'&target='.$target;
 
 if(!session_is_registered('sess_pid')) session_register('sess_pid');
 if(!isset($insurance_show)) $insurance_show=true;
 
 $data_array=array();
 $newdata=1;
-$target='person_reg';
+//$target='person_reg';
 $error=0;
 $dbtable='care_person';
 $insure_private=1;
@@ -90,13 +91,14 @@ if($dblink_ok) {
             if(is_uploaded_file($HTTP_POST_FILES['photo_filename']['tmp_name']) && $HTTP_POST_FILES['photo_filename']['size']) {
                 $picext=substr($HTTP_POST_FILES['photo_filename']['name'],strrpos($HTTP_POST_FILES['photo_filename']['name'],'.')+1);
                 // if(stristr($picext,'jpg')||stristr($picext,'gif')||stristr($picext,'bmp'))
-                if (eregi($picext,'gif jpg bmp')) {
+                if (eregi($picext,'gif jpg bmp png')) {
                     /* Load the string cleaner function */				
                     include_once($root_path.'include/inc_string_cleaner.php');
                     /* Now create the new filename for the image */				
                     $photo_filename=cleanString($name_last).'_'.cleanString($name_first).'_'.formatDate2STD($date_birth,$date_format).'.'.$picext;
 
                     @ copy($HTTP_POST_FILES['photo_filename']['tmp_name'],$root_path.$photo_path.'/'.$photo_filename);
+					$HTTP_POST_VARS['photo_filename']=$photo_filename;
                 }
             }
   
@@ -177,6 +179,8 @@ if($dblink_ok) {
                  $from='entry';
 				 
 				 /* Prepare internal data to be stored together with the user input data */
+				 if(!$person_obj->InitPIDExists($GLOBAL_CONFIG['person_id_nr_init'])) $HTTP_POST_VARS['pid']=$GLOBAL_CONFIG['person_id_nr_init'];
+
 				 $HTTP_POST_VARS['date_birth']=@formatDate2Std($date_birth,$date_format);
 				 $HTTP_POST_VARS['date_reg']=date('Y-m-d H:i:s');
 				 $HTTP_POST_VARS['status']='normal';
@@ -191,7 +195,29 @@ if($dblink_ok) {
 	             { 
 		              //* If data was newly inserted, get the insert id = patient number */
 		               if(!$update) $pid=$db->Insert_ID();
-			
+				  /* Update the insurance data */
+				  /* Lets detect if the data is already existing */
+				  if($insurance_show) {
+				      if($insurance_item_nr) {
+				          if(!empty($insurance_nr) && !empty($insurance_firm_name) && $insurance_firm_id) {  
+						  
+						      $insure_data=array('insurance_nr'=>$insurance_nr,
+						                                'firm_id'=>$insurance_firm_id,
+														'class_nr'=>$insurance_class_nr);
+														
+						      $pinsure_obj->updateDataFromArray($insure_data,$insurance_item_nr);
+						  
+						  }
+				      } elseif ($insurance_nr && $insurance_firm_name  && $insurance_class_nr) {
+	
+						   $insure_data=array('insurance_nr'=>$insurance_nr,
+						                                'firm_id'=>$insurance_firm_id,
+														'pid'=>$pid,
+														'class_nr'=>$insurance_class_nr);
+														
+							$pinsure_obj->insertDataFromArray($insure_data);
+					  }
+                 }				
 			          $newdata=1;
 			
 			          header("Location: person_register_show.php".URL_REDIRECT_APPEND."&pid=$pid&from=$from&newdata=1&target=person_reg");
@@ -209,8 +235,9 @@ if($dblink_ok) {
          {
 	         $zeile=$data_obj->FetchRow();
 	 
-             while(list($x,$v)=each($zeile))	$$x=$v;            
-			       
+             //while(list($x,$v)=each($zeile))	$$x=$v;            
+			 extract($zeile);
+			     
 			 /* Get the related insurance data */
 			 $p_insurance=&$pinsure_obj->getPersonInsuranceObject($pid);
 			 if($p_insurance==false) {
@@ -220,7 +247,8 @@ if($dblink_ok) {
 				    $insurance_show=true;
 				} elseif ($p_insurance->RecordCount()==1){
 				    $buffer= $p_insurance->FetchRow();
-					while(list($x,$v)=each($buffer)) {$$x=$v; }
+					//while(list($x,$v)=each($buffer)) {$$x=$v; }
+					extract($buffer);
 				    $insurance_show=true;
 				    $insurance_firm_name=$pinsure_obj->getFirmName($insurance_firm_id); 
 				} else { $insurance_show=false;}

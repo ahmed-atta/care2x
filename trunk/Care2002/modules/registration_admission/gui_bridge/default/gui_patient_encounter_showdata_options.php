@@ -1,21 +1,3 @@
-<?php
-
-function Spacer()
-{
-/*?>
-<TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>
-<?php
-*/}
-?>
-<img <?php echo createComIcon($root_path,'angle_left.gif',0); ?>>
-<br>
-<FONT face="Verdana,Helvetica,Arial" size=2 color="#cc0000">
-<?php echo $LDOptsForPatient ?>
-</font>
-
 <script language="javascript" >
 <!-- 
 function openDRGComposite()
@@ -35,163 +17,45 @@ function openDRGComposite()
 } 
 //-->
 </script>
+<?php
 
-<TABLE cellSpacing=0 cellPadding=0 bgColor=#999999 border=0>
-        <TBODY>
-        <TR>
-          <TD>
-            <TABLE cellSpacing=1 cellPadding=2 bgColor=#999999 
-            border=0>
-              <TBODY>
-				  
-               <TR bgColor=#eeeeee> <td align=center><img <?php echo createComIcon($root_path,'post_discussion.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2>
-				 <a href="show_sick_confirm.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&target=<?php echo $target ?>"><?php echo $LDSickReport; ?></a>
-				   </FONT></TD>
-                </TR>
-			   
-           <?php Spacer(); ?>
-				  
-             <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'discussions.gif','0') ?>></td>
-                <TD vAlign=top width=150><FONT 
-                  face="Verdana,Helvetica,Arial" size=2> 
-				<a href="javascript:alert('Function not  available yet');"><?php echo $LDAnamnesisForm; ?></a>
-				   </FONT></TD>
-                </TR>
-			   
-           <?php Spacer(); ?>
+if(!is_object($TP_obj)){
+	include_once($root_path.'include/care_api_classes/class_template.php');
+	$TP_obj=new Template($root_path);
+}
 
-				  
-              <TR bgColor=#eeeeee>  <td align=center><img <?php echo createComIcon($root_path,'waiting.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2> 
-			 <a href="javascript:alert('Function not  available yet');"><?php echo $LDConsentDec ?></a>
-				   </FONT></TD>
-                </TR>				 
-			   
- 			   
-           <?php Spacer(); ?>
-				  
-               <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'bubble.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2> 
-				  <a href="show_diagnostics_result.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&target=<?php echo $target ?>"><?php echo $LDDiagXResults ?></a>
-				   </FONT></TD>
-                </TR>
-			   
-           <?php Spacer(); ?>
-				  
-				  <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'eye_s.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2> <nobr>
-				 <a href="show_diagnosis.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&target=<?php echo $target ?>"><?php echo $LDDiagnoses ?></a>				
-				  </nobr> </FONT></TD>
-                </TR>
-			   
-           <?php Spacer(); ?>
 
-               <TR bgColor=#eeeeee> <td align=center><img <?php echo createComIcon($root_path,'discussions.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2> <nobr>
-				 <a href="show_procedure.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&target=<?php echo $target ?>"><?php echo $LDProcedures ?></a>
-				  </nobr> </FONT></TD>
-                </TR>
-           <?php Spacer(); ?>
+$TP_href_1="show_sick_confirm.php".URL_APPEND ."&pid=$pid&target=$target";
+$TP_href_2="javascript:alert('Function not  available yet')";
+$TP_href_3="javascript:alert('Function not  available yet');";
+$TP_href_4="show_diagnostics_result.php".URL_APPEND."&pid=$pid&target=$target";
+$TP_href_5="show_diagnosis.php".URL_APPEND."&pid=$pid&target=$target";
+$TP_href_6="show_procedure.php".URL_APPEND."&pid=$pid&target=$target";
+$TP_href_7="javascript:openDRGComposite()";
+$TP_href_8="show_prescription.php".URL_APPEND."&pid=$pid&target=$target";
+$TP_href_9="show_notes.php".URL_APPEND."&pid=$pid&target=$target&type_nr=21";
+$TP_href_10="show_notes.php".URL_APPEND."&pid=$pid&target=$target";
+$TP_href_11="show_immunization.php".URL_APPEND."&pid=$pid&target=$target";
+$TP_href_12="show_weight_height.php".URL_APPEND."&pid=$pid&target=$target";
+
+# If the sex is female, show the pregnancies option link
+if($sex=='f') {
+	$TP_preg_AS="<a href=\"show_pregnancy.php".URL_APPEND."&pid=$pid&target=$target \">";
+	$TP_preg_AE='</a>';
+}else{
+	$TP_img_src_13='';
+	$TP_href_13='';
+}
 				  
-				  <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'eye_s.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2> <nobr>
-				 <a href="javascript:openDRGComposite()"><?php echo $LDDRG ?></a>
-				  </nobr> </FONT></TD>
-                </TR>
-			   
-           <?php Spacer(); ?>
-				  
-              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'prescription.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2> <nobr>
-				 <a href="show_prescription.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&target=<?php echo $target ?>"><?php echo $LDPrescriptions ?></a>
-				  </nobr> </FONT></TD>
-               </TR>
-			   
-			   
-      <?php Spacer(); ?>
-				  
-              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'new_group.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2> <nobr>
-				 <a href="show_notes.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&target=<?php echo $target ?>&type_nr=21"><?php echo $LDPatientDev.' '.$LDNotes ?></a>
-				  </nobr> </FONT></TD>
-                </TR>
-				
-      <?php Spacer(); ?>
-				  
-              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'new_group.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2> <nobr>
-				 <a href="show_notes.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&target=<?php echo $target ?>"><?php echo "$LDNotes $LDAndSym $LDReports" ?></a>
-				  </nobr> </FONT></TD>
-                </TR>
-			   
-           <?php Spacer(); ?>
-				  
-				  <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'people_search_online.gif','0') ?>></td>
-                <TD vAlign=top width=150><FONT 
-                  face="Verdana,Helvetica,Arial" size=2> 
-				<a href="show_immunization.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&target=<?php echo $target ?>"><?php echo $LDImmunization ?></a>
-				   </FONT></TD>
-                </TR>
-			   
-           <?php Spacer(); ?>
-				  
-				  <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'people_search_online.gif','0') ?>></td>
-                <TD vAlign=top width=150><FONT 
-                  face="Verdana,Helvetica,Arial" size=2> 
-				<a href="show_weight_height.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&target=<?php echo $target ?>"><?php echo $LDWtHt ?></a>
-				   </FONT></TD>
-                </TR>
-			
-		  <?php
-		  /* If the sex is female, show the pregnancies option link */
-		   if($sex=='f') { 
-		   ?>
-           <?php Spacer(); ?>
-				  
-				  <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'man-whi.gif','0') ?>></td>
-                <TD vAlign=top width=150><FONT 
-                  face="Verdana,Helvetica,Arial" size=2> 
-				<a href="show_pregnancy.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&target=<?php echo $target ?>"><?php echo $LDPregnancies ?></a>
-				   </FONT></TD>
-                </TR>				  
-		  <?php } ?>
-		  
-           <?php Spacer(); ?>
-				  
-				  <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'new_address.gif','0') ?>></td>
-                <TD vAlign=top width=150><FONT 
-                  face="Verdana,Helvetica,Arial" size=2> 
-				<a href="show_birthdetail.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&target=<?php echo $target ?>"><?php echo $LDBirthDetails ?></a>
-				   </FONT></TD>
-                </TR>					
-			
-           <?php Spacer(); ?>
-				  
-				  <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'people_search_online.gif','0') ?>></td>
-                <TD vAlign=top width=150><FONT 
-                  face="Verdana,Helvetica,Arial" size=2> 
-				<a href="patient_register.php<?php echo URL_APPEND; ?>&pid=<?php echo $pid ?>&update=1"><?php echo  $LDUpdate.' '.$LDPatientRegister ?></a>
-				   </FONT></TD>
-                </TR>					
-          <?php Spacer(); ?>
-				  
-				  <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'new_address.gif','0') ?>></td>
-                <TD vAlign=top width=150><FONT 
-                  face="Verdana,Helvetica,Arial" size=2> 
-				<a href="javascript:popRecordHistory('care_encounter',<?php echo $HTTP_SESSION_VARS['sess_en']; ?>)"><?php echo $LDRecordsHistory ?></a>
-				   </FONT></TD>
-                </TR>									</TBODY>
-		</TABLE>
-		</TD></TR>
-		</TBODY>
-		</TABLE>
+$TP_img_src_14=createComIcon($root_path,'new_address.gif','0');
+$TP_href_14="show_birthdetail.php".URL_APPEND."&pid=$pid&target=$target";
+$TP_img_src_15=createComIcon($root_path,'people_search_online.gif','0');
+$TP_href_15="patient_register.php".URL_APPEND."&pid=$pid&update=1";
+$TP_img_src_16=createComIcon($root_path,'new_address.gif','0');
+$TP_href_16="javascript:popRecordHistory('care_encounter',".$HTTP_SESSION_VARS['sess_en'].")";
+
+# Load the template
+$TP_options=$TP_obj->load('registration_admission/tp_pat_admit_options.htm');
+eval("echo $TP_options;");
+
+?>

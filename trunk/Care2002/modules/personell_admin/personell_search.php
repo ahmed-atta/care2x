@@ -21,10 +21,11 @@ $keyword=strtr($keyword,'%',' ');
 $keyword=trim($keyword);
 
 $toggle=0;
-$breakfile= 'personell_admin_pass.php'.URL_APPEND.'&target='.$target;
+if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
+	else $breakfile='personell_admin_pass.php'.URL_APPEND.'&target='.$target;
  /* Set color values for the search mask */
 $searchmask_bgcolor='#f3f3f3';
-$searchprompt=$LDEntryPrompt;
+$searchprompt=$LDEnterEmployeeSearchKey;
 $entry_block_bgcolor='#fff3f3';
 $entry_border_bgcolor='#6666ee';
 $entry_body_bgcolor='#ffffff';
@@ -43,10 +44,10 @@ if(($mode=='search')and($searchkey))
            include('../include/inc_get_global_config.php');
 */
 
-		include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+/*		include_once($root_path.'include/care_api_classes/class_globalconfig.php');
         $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
         $glob_obj->getConfig('personell_%');
-
+*/
 			$suchwort=trim($searchkey);
 			if(is_numeric($suchwort))
 			{
@@ -108,7 +109,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 
 <tr>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+1  FACE="Arial"><STRONG> &nbsp;<?php echo "$LDPersonellData :: $LDSearch" ?></STRONG></FONT>
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+1  FACE="Arial"><STRONG> &nbsp;<?php echo "$LDPersonnelManagement :: $LDPersonellData :: $LDSearch" ?></STRONG></FONT>
 </td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
 <a href="javascript:gethelp('')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
@@ -183,8 +184,9 @@ if($mode=='search'){
 							<tr bgcolor=";
 						if($toggle) { echo "#efefef>"; $toggle=0;} else {echo "#ffffff>"; $toggle=1;};
 						echo"<td><font face=arial size=2>";
-                        echo '&nbsp;'.($zeile['nr']+$GLOBAL_CONFIG['personell_nr_adder']);
-                        echo "</td>";	
+                       // echo '&nbsp;'.($zeile['nr']+$GLOBAL_CONFIG['personell_nr_adder']);
+                         echo '&nbsp;'.$zeile['nr'];
+                       echo "</td>";	
 						echo"<td><font face=arial size=2>";
 						echo "&nbsp;".ucfirst($zeile['name_last']);
                         echo "</td>";	
@@ -200,9 +202,9 @@ if($mode=='search'){
 							<a href="personell_register_show.php'.URL_APPEND.'&from=such&personell_nr='.$zeile['nr'].'&target=personell_search">
 							<img '.$img_options.' alt="'.$LDShowData.'"></a>&nbsp;';
 							
-                       if(!file_exists($root_path.'cache/barcodes/en_'.$full_en.'.png'))
+                       if(!file_exists($root_path.'cache/barcodes/en_'.$zeile['nr'].'.png'))
 	      		       {
-			               echo "<img src='".$root_path."classes/barcode/image.php?code=".($zeile['nr']+$GLOBAL_CONFIG['personell_nr_adder'])."&style=68&type=I25&width=145&height=50&xres=2&font=5&label=2&form_file=en' border=0 width=0 height=0>";
+			               echo "<img src='".$root_path."classes/barcode/image.php?code=".$zeile['nr']."&style=68&type=I25&width=180&height=50&xres=2&font=5&label=2&form_file=en' border=0 width=0 height=0>";
 		               }
 						echo '</td></tr>';
 

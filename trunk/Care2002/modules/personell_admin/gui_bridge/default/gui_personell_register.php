@@ -94,13 +94,12 @@ if(onLoad="if (window.focus) window.focus();loadcat();"
 
 <tr>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+1  FACE="Arial"><STRONG> &nbsp;<?php echo $LDPersonellData; if($full_nr) echo $full_pnr; ?></STRONG></FONT>
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+1  FACE="Arial"><STRONG> &nbsp;<?php echo "$LDPersonnelManagement :: $LDNewEmployee "; if($full_nr) echo $full_pnr; ?></STRONG></FONT>
 </td>
 
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
 <a href="javascript:gethelp('')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
-if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo "startframe.php?sid=".$sid."&lang=".$lang; 
-	else echo "aufnahme_pass.php?sid=$sid&target=entry&lang=$lang"; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
+ echo $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </td>
 </tr>
 
@@ -147,7 +146,7 @@ if(!$pid&&!$personell_nr)
 /* Set color values for the search mask */
 
 $searchmask_bgcolor="#f3f3f3";
-$searchprompt=$LDEntryPrompt;
+$searchprompt=$LDEnterPersonSearchKey;
 $entry_block_bgcolor='#fff3f3';
 $entry_border_bgcolor='#6666ee';
 $entry_body_bgcolor='#ffffff';
@@ -369,7 +368,7 @@ if($GLOBAL_CONFIG['patient_name_middle_show'])
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDLocalPremiumID ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input name="local_premium_id" type="text" size="30" value="<?php echo $local_premium_nr; ?>" >
+<td colspan=2 bgcolor="#eeeeee"><input name="local_premium_id" type="text" size="30" value="<?php echo $local_premium_id; ?>" >
 </td>
 </tr>
 <tr>
@@ -439,7 +438,7 @@ if($GLOBAL_CONFIG['patient_name_middle_show'])
 
 <?php if($update) echo '<input type="hidden" name=update value=1>'; ?>
 <input  type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?> onClick=hidecat() alt="<?php echo $LDSaveData ?>" align="absmiddle"> 
-<a href="<?php echo 'aufnahme_start.php'.URL_APPEND; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDResetData ?>" onClick=hidecat()  align="absmiddle"></a>
+<a href="<?php echo $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDResetData ?>" onClick=hidecat()  align="absmiddle"></a>
 <!-- Note: uncomment the ff: line if you want to have a reset button  -->
 <!-- 
 <a href="javascript:document.aufnahmeform.reset()"><img <?php echo createLDImgSrc($root_path,'reset.gif','0') ?> alt="<?php echo $LDResetData ?>" onClick=hidecat()  align="absmiddle"></a> 
@@ -497,7 +496,7 @@ if(defined('MASCOT_SHOW') && MASCOT_SHOW==1)
 ?>
 
 <p>
-<a href="<?php echo 'personell_admin_pass.php'.URL_APPEND.'&target='.$target; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
+<a href="<?php echo $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
 </ul>
 <p>
 

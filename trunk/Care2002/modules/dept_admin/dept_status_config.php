@@ -10,6 +10,7 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+$lang_tables=array('departments.php');
 define('LANG_FILE','edp.php');
 $local_user='ck_edv_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
@@ -52,8 +53,7 @@ if($mode)
 
 $depttypes=$dept_obj->getTypes();
 $dept=$dept_obj->getDeptAllInfo($dept_nr);
-while(list($x,$v)=each($dept)) $$x=$v;
-						
+extract($dept);					
 ?>
 
 
@@ -116,15 +116,19 @@ div.pcont{ margin-left: 3; }
 	$backimg='close2.gif';
 ?>
 <img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="middle"><font face="Verdana, Arial" size=3 color="#880000">
-<b><?php echo $LDUpdateOk; ?></b></font><p>
+<b><?php echo $LDUpdateOk; ?></b></font>
 
 <?php 
 }else{
 	$backimg='cancel.gif';
 } ?>
-
-
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><?php echo $name_formal ?></font>
+&nbsp;
+<br>
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
+<?php 
+if(isset($$LD_var)&&$$LD_var) echo $$LD_var;
+			else echo $name_formal; 
+?></font>
 
 <font face="Verdana, Arial" size=-1><?php echo $LDEnterAllFields ?>
 
@@ -146,6 +150,7 @@ div.pcont{ margin-left: 3; }
   </tr> 
 
 </table>
+<p>
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
 <input type="hidden" name="edit" value="<?php echo $edit ?>">
 <input type="hidden" name="lang" value="<?php echo $lang ?>">

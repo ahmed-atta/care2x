@@ -8,8 +8,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 /**
 * If the script call comes from the op module replace the user cookie with the user info from op module
 */
-if(isset($op_shortcut)&&$op_shortcut)
-{
+if(isset($op_shortcut)&&$op_shortcut){
 	$HTTP_COOKIE_VARS['ck_pflege_user'.$sid]=$op_shortcut;
 	setcookie('ck_pflege_user'.$sid,$op_shortcut,0,'/');
 	$edit=1;
@@ -51,7 +50,7 @@ if($dblink_ok)
 	include_once($root_path.'include/inc_date_format_functions.php');
 		$enc_obj->where=" encounter_nr=$pn";
 	    if( $enc_obj->loadEncounterData($pn)) {
-			switch ($enc_obj->EncounterClass())
+/*			switch ($enc_obj->EncounterClass())
 			{
 		    	case '1': $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
 		                   break;
@@ -59,7 +58,9 @@ if($dblink_ok)
 							break;
 				default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
 			}						
-
+*/
+			$full_en=$pn;
+			
 			if( $enc_obj->is_loaded){
 				$result=&$enc_obj->encounter;		
 				$rows=$enc_obj->record_count;	
@@ -209,13 +210,13 @@ if($dblink_ok)
 					}
 			   }
 			} // end of if($rows)
-	  } // end of if ($ergebnis)
-	   else {echo "<p>$sql$LDDbNoRead"; exit;}
-        
-    
+	  }else{ // end of if ($ergebnis)
+	  	echo "<p>$sql$LDDbNoRead"; 
+		exit;
+	}
+}else{
+	echo "$LDDbNoLink<br>$sql<br>"; 
 }
-	else 
-		{ echo "$LDDbNoLink<br>$sql<br>"; }
 		
 $fr=strtolower(str_replace('.','-',($result['encounter_nr'].'_'.$result['name_last'].'_'.$result['name_first'].'_'.$result['date_birth'])));
 
@@ -427,7 +428,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 		<input type="button" value="'.$LDRootData.'"><input 
 		type="button" value="'.$LDNursingPlan.'"><input 
 		type="button" onClick="javascript:window.location.href=\''.$root_path.'modules/laboratory/labor_datalist_noedit.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&user_origin=$user_origin&edit='.$edit.'\'" value="'.$LDLabReports.'"><input 
-		type="button" onClick="javascript:enlargewin();window.location.href=\''.$root_path.'main/fotos-start.php'.URL_REDIRECT_APPEND.'&pn='.$pn.'&station='.$station.'&fileroot='.$fr.'&edit='.$edit.'\'" value="'.$LDPhotos.'">';
+		type="button" onClick="javascript:enlargewin();window.location.href=\''.$root_path.'modules/fotolab/fotos-start.php'.URL_REDIRECT_APPEND.'&pn='.$pn.'&station='.$station.'&fileroot='.$fr.'&edit='.$edit.'\'" value="'.$LDPhotos.'">';
 		
 		
 		/* Create the select  menu in edit mode */

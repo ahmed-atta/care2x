@@ -62,11 +62,11 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 			<?php if ($ck_thispc_station) $mode="show"; ?>
 			<a href="nursing-station-info.php?sid=<?php echo "$sid&lang=$lang&mode=$mode&station=$ck_thispc_station" ?>"><b><?php echo $LDShowStationData ?></b></a><br>
 			<?php echo $LDShowStationDataTxt ?><p>
-			<a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><b><?php echo $LDLockBed ?></b></a><br>
+<!-- 			<a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><b><?php echo $LDLockBed ?></b></a><br>
 			<?php echo $LDLockBedTxt ?><p>
 			<a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><b><?php echo $LDAccessRights ?></b></a><br>
 			<?php echo $LDAccessRightsTxt ?>
-			</td>
+ -->			</td>
       <td></td>
     </tr>
   </table>
@@ -74,7 +74,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 </FONT>
 <p>
 <ul>
-<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>" border="0"></a>
+<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> border="0"></a>
 </ul>
 </td>
 </tr>
@@ -84,17 +84,12 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <?php
 require($root_path.'include/inc_load_copyrite.php');
 ?>
-
 </td>
 </tr>
 </table>        
 &nbsp;
 
-
-
-
 </FONT>
-
 
 </BODY>
 </HTML>

@@ -59,7 +59,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 
 <tr>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php echo $LDPersonRegister ?></STRONG> <font size=+2>(<?php echo ($pid+$GLOBAL_CONFIG['person_id_nr_adder']) ?>)</font></FONT>
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+1  FACE="Arial"><STRONG> &nbsp;<?php echo "$LDPersonnelManagement :: $LDPersonData" ?></STRONG> (<?php echo $pid ?>)</FONT>
 </td>
 
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
@@ -85,7 +85,7 @@ require('./gui_bridge/default/gui_tabs_personell_reg.php');
 <tr>
 <td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php echo $LDRegistryNr ?>:
 </td>
-<td width="30%"  bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo $pid+$GLOBAL_CONFIG['person_id_nr_adder']; ?>
+<td width="30%"  bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo $pid; ?>
 </td>
 
 <td valign="top" rowspan=7 align="center" bgcolor="#ffffee" ><FONT SIZE=-1  FACE="Arial"><img <?php echo $img_source; ?> width=137>
@@ -244,7 +244,7 @@ if (!$GLOBAL_CONFIG['person_phone_2_nr_hide'])
 createTR($LDPhone.' 2',$phone_2_nr,2);
 }
 
-if (!$GLOBAL_CONFIG['person_cellphone_1__nr_hide'])
+if (!$GLOBAL_CONFIG['person_cellphone_1_nr_hide'])
 {
 createTR($LDCellPhone.' 1',$cellphone_1_nr,2);
 }
@@ -348,17 +348,12 @@ createTR($LDEthnicOrigin,$ethnic_orig,2);
  
 <p>
 -->
-<a href="
-<?php if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) echo 'startframe.php'.URL_APPEND;
-	else echo $breakfile.URL_APPEND;
-	echo ;
-?>
-"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
+<a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
 
 <p>
-<hr>
+</ul>
 <?php
-StdCopyright();
+require($root_path.'include/inc_load_copyrite.php');
 ?>
 </FONT>
 <?php

@@ -22,7 +22,7 @@ $keyword=trim($keyword);
 $dbtable='care_person';
 $toggle=0;
 $searchmask_bgcolor="#f3f3f3";
-$searchprompt=$LDEntryPrompt;
+$searchprompt=$LDEnterEmployeeSearchKey;
 
 if(empty($target)) $target='search';
 
@@ -31,7 +31,9 @@ $entry_block_bgcolor='#fff3f3';
 $entry_border_bgcolor='#66ee66';
 $entry_body_bgcolor='#ffffff';
 
-$breakfile='personell_admin_pass.php'.URL_APPEND.'&target=personell_search';
+if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
+	else $breakfile='personell_admin_pass.php'.URL_APPEND.'&target='.$target;
+
 $GLOBAL_CONFIG=array();
 
 if(isset($mode)&&($mode=='search')&&isset($searchkey)&&($searchkey))
@@ -78,7 +80,7 @@ if(isset($mode)&&($mode=='search')&&isset($searchkey)&&($searchkey))
 					if(($linecount==1)&&$numeric)
 					{
 						$zeile=$ergebnis->FetchRow();
-						header("location:patient_register_show.php?sid=".$sid."&lang=".$lang."&pid=".$zeile['pid']."&edit=1&status=".$status."&user_origin=".$user_origin."&noresize=1&mode=");
+						header("location:person_register_show.php?sid=".$sid."&lang=".$lang."&pid=".$zeile['pid']."&edit=1&status=".$status."&user_origin=".$user_origin."&noresize=1&mode=");
 						exit;
 					}
 				}
@@ -198,8 +200,8 @@ if ($linecount)
 						echo "
 							<tr bgcolor=";
 						if($toggle) { echo "#efefef>"; $toggle=0;} else {echo "#ffffff>"; $toggle=1;};
-						echo"<td><font face=arial size=2>";
-						echo "&nbsp;".(ucfirst($zeile['pid'])+$GLOBAL_CONFIG['person_id_nr_adder']);
+						echo'<td align="right"><font face=arial size=2>';
+						echo "&nbsp;".$zeile['pid'];
                         echo "</td>";	
 						echo"<td><font face=arial size=2>";
 						echo "&nbsp;".ucfirst($zeile['name_last']);
@@ -269,15 +271,11 @@ if(isset($origin) && $origin=='pass')
 
 <p>
 
-<table border=0 bgcolor="<?php echo $cfg['bot_bgcolor']; ?>">
-  <tr>
-    <td>
+
 <?php
 require($root_path.'include/inc_load_copyrite.php');
 ?>
-</td>
-  </tr>
-</table>
+
 
 </FONT>
 </BODY>

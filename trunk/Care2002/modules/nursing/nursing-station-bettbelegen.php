@@ -228,8 +228,8 @@ if($mode=='search'){
 
     <td><font face=arial size=2 color="#ffffff"><b><?php echo $LDCaseNr; ?></b></td>
     <td><font face=arial size=2 color="#ffffff"><b><?php echo $LDLastName; ?></td>
-    <td><font face=arial size=2 color="#ffffff"><b><?php echo $LDFirstName; ?></td>
-    <td><font face=arial size=2 color="#ffffff"><b><?php echo $LDBday; ?></td>
+    <td><font face=arial size=2 color="#ffffff"><b><?php echo $LDName; ?></td>
+    <td><font face=arial size=2 color="#ffffff"><b><?php echo $LDBirthDate; ?></td>
     <td><font face=arial size=2 color="#ffffff"><b><?php echo $LDOptions; ?></td>
 
 <?php

@@ -166,9 +166,10 @@ if(!$usenum){
  $toggle=0;
  while($result=$ergebnis->FetchRow())
  {
-	if($result['encounter_class_nr']==2) $full_enr=$result['encounter_nr']+$GLOBAL_CONFIG['patient_outpatient_nr_adder'];
+/*	if($result['encounter_class_nr']==2) $full_enr=$result['encounter_nr']+$GLOBAL_CONFIG['patient_outpatient_nr_adder'];
 		else  $full_enr=$result['encounter_nr']+$GLOBAL_CONFIG['patient_inpatient_nr_adder'];
-		
+*/		
+	$full_enr=$result['encounter_nr'];
  	echo'
   <tr ';
   	if($toggle){ 

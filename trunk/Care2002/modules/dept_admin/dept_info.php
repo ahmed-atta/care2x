@@ -10,13 +10,14 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+$lang_tables=array('departments.php');
 define('LANG_FILE','edp.php');
 $local_user='ck_edv_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_department.php');
 require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
-$breakfile='nursing.php?sid='.$sid.'&lang='.$lang;
+$breakfile='dept_manage.php'.URL_APPEND;
 
 if($pday=='') $pday=date('d');
 if($pmonth=='') $pmonth=date('m');
@@ -61,9 +62,14 @@ div.pcont{ margin-left: 3; }
 <table width=100% border=0 cellpadding="0" cellspacing=0>
 <tr>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp; <?php echo $dept['name_formal'].' '.$LDDept; ?></STRONG></FONT></td>
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp; 
+<?php 
+	echo $LDDepartment.' :: ';
+	if(isset($$dept['LD_var'])&&!empty($$dept['LD_var'])) echo $$dept['LD_var'];
+		else echo $dept['name_formal'];
+?></STRONG></FONT></td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('nursing_ward_mng.php','new')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
+<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp()"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
 <tr valign=top >
 <td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
@@ -80,7 +86,11 @@ div.pcont{ margin-left: 3; }
 <table border=0 cellpadding=4>
   <tr>
     <td class=pblock align=right bgColor="#eeeeee"></font><?php echo $LDFormalName ?>: </td>
-    <td class=pblock><?php echo $dept['name_formal'] ?>
+    <td class=pblock>
+	<?php 	
+		if(isset($$dept['LD_var'])&&!empty($$dept['LD_var'])) echo $$dept['LD_var'];
+				else echo $dept['name_formal'];
+ 	?>
 </td>
   </tr> 
   <tr>
@@ -100,7 +110,7 @@ div.pcont{ margin-left: 3; }
   
   
   <tr>
-    <td class=pblock align=right bgColor="#eeeeee">Description<?php echo $LDDescription ?>: </td>
+    <td class=pblock align=right bgColor="#eeeeee"><?php echo $LDDescription ?>: </td>
     <td class=pblock><?php echo $dept['description'] ?>
 </td>
   </tr>
@@ -118,7 +128,8 @@ div.pcont{ margin-left: 3; }
     <td class=pblock><?php 
 								if($dept['is_sub_dept']){
 									$info=$dept_obj->getDeptAllInfo($dept['parent_dept_nr']);
-									echo $info['name_formal'];
+									if(isset($$info['LD_var'])&&!empty($$info['LD_var'])) echo $$info['LD_var'];
+										else echo $info['name_formal'];
 								}
 							?>
 </td>
@@ -137,6 +148,15 @@ div.pcont{ margin-left: 3; }
   <tr>
     <td class=pblock align=right bgColor="#eeeeee"><?php echo $LDAlternateName ?>: </td>
     <td class=pblock><?php echo $dept['name_alternate'] ?>
+</td>
+  </tr> 
+  
+  <tr>
+    <td class=pblock align=right bgColor="#eeeeee"></font><?php echo $LDDoesSurgeryOp ?>: </td>
+    <td class=pblock><?php 
+								if($dept['does_surgery']) echo $LDYes;
+									else echo $LDNo;
+							?>
 </td>
   </tr> 
   
@@ -194,7 +214,7 @@ div.pcont{ margin-left: 3; }
   <tr>
     <td class=pblock align=right bgColor="#eeeeee"><?php echo $LDDeptLogo ?>: </td>
     <td class=pblock><?php
-									if(file_exists('./logos/'.$dept['logo_file'])) echo '<img src="./logos/'.$dept['logo_file'].'">'; 
+									if(file_exists($root_path.'gui/img/logos_dept/dept_'.$dept_nr.'.'.$dept['logo_mime_type'])) echo '<img src="'.$root_path.'gui/img/logos_dept/dept_'.$dept_nr.'.'.$dept['logo_mime_type'].'">'; 
 							?>
 </td>
   </tr> 
@@ -205,7 +225,7 @@ div.pcont{ margin-left: 3; }
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
 <input type="hidden" name="dept_nr" value="<?php echo $dept['nr']; ?>">
 <input type="hidden" name="mode" value="select">
-<input type="submit" value="<?php echo $LDUpdateData.' '.$LDDept.' '.$LDInfo; ?>">
+<input type="submit" value="<?php echo $LDUpdateData; ?>">
 </form>
 <p>
 

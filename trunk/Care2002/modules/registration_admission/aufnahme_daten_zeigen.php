@@ -5,8 +5,8 @@ require($root_path.'include/inc_environment_global.php');
 /*
 CARE 2002 Integrated Information System beta 1.0.04 - 2003-03-31 for Hospitals and Health Care Organizations and Services
 Copyright (C) 2002  Elpidio Latorilla & Intellin.org	
-
-GNU GPL. For details read file "copy_notice.txt".
+GNU GPL. 
+For details read file "copy_notice.txt".
 */
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
@@ -17,6 +17,8 @@ require_once($root_path.'include/care_api_classes/class_person.php');
 require_once($root_path.'include/care_api_classes/class_insurance.php');
 require_once($root_path.'include/care_api_classes/class_ward.php');
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+
+if(!session_is_registered('sess_parent_mod')) session_register('sess_parent_mod');
 
 $GLOBAL_CONFIG=array();
 
@@ -131,13 +133,12 @@ if($dblink_ok) {
 /* Prepare text and resolve the numbers */
 require_once($root_path.'include/inc_patient_encounter_type.php');		 
 
-if(!session_is_registered('sess_parent_mod')) session_register('sess_parent_mod');
-
 /* Save encounter nrs to session */
 $HTTP_SESSION_VARS['sess_pid']=$pid;
 $HTTP_SESSION_VARS['sess_en']=$encounter_nr;
 $HTTP_SESSION_VARS['sess_full_en']=$full_en;
 $HTTP_SESSION_VARS['sess_parent_mod']='admission';
+$HTTP_SESSION_VARS['sess_user_origin']='admission';
 
 /* Prepare the photo filename */
 require_once($root_path.'include/inc_photo_filename_resolve.php');

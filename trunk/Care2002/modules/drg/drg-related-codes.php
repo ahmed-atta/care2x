@@ -56,13 +56,15 @@ if($mode=='save')
 	$hidselector='icd_px';
 	$lastindex=$last_icd_index;
 	
-	$noheader=1; # Disable the redirect 
+	$noheader=true; # Disable the redirect 
 	include($root_path.'include/inc_drg_entry_save.php');
 	# Save the related procedure codes
+	# Clean first not needed data
 	unset($qlist);
+	if(isset($data)) unset($data);
 	$linebuf='';
 	
-	$noheader=0; # Enable the redirect
+	$noheader=false; # Enable the redirect
 	$target='ops301';
 	$element='ops_code';
 	$element_related='related_ops';

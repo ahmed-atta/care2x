@@ -26,14 +26,16 @@ $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('person_%');
 		
 $thisfile=basename(__FILE__);
-$breakfile='personell_admin_pass.php'.URL_APPEND.'&target='.$target;
+if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
+	else $breakfile='personell_admin_pass.php'.URL_APPEND.'&target='.$target;
+	
 $admissionfile='aufnahme_start.php'.URL_APPEND;
 
 if((!isset($pid)||!$pid)&&$HTPP_SESSION_VARS['sess_pid']) $pid=$HTPP_SESSION_VARS['sess_pid'];
 
 $HTTP_SESSION_VARS['sess_path_referer']=$top_dir.$thisfile;
 $HTTP_SESSION_VARS['sess_pid']=$pid;
-$HTTP_SESSION_VARS['sess_full_pid']=$pid+$GLOBAL_CONFIG['person_id_nr_adder'];
+$HTTP_SESSION_VARS['sess_full_pid']=$pid;
 $HTTP_SESSION_VARS['sess_parent_mod']='registration';
 
 $dbtable='care_person';
@@ -63,7 +65,9 @@ if($dblink_ok) {
          {
 	        $zeile=$data_obj->FetchRow();
 	 
-            while(list($x,$v)=each($zeile))	$$x=$v;       
+            //while(list($x,$v)=each($zeile))	$$x=$v;
+			extract($zeile);
+			       
 			/* Get related insurance data*/
 			$p_insurance=&$pinsure_obj->getPersonInsuranceObject($pid);
 			if($p_insurance==false) {
@@ -73,7 +77,9 @@ if($dblink_ok) {
 					$insurance_show=true;
 				} elseif ($p_insurance->RecordCount()==1){
 					$buffer= $p_insurance->FetchRow();
-					while(list($x,$v)=each($buffer)) {$$x=$v; }
+					//while(list($x,$v)=each($buffer)) {$$x=$v; }
+					extract($buffer);
+					
 					$insurance_show=true;
 			        /*Get insurace firm name */
 					$insurance_firm_name=$pinsure_obj->getFirmName($insurance_firm_id); 

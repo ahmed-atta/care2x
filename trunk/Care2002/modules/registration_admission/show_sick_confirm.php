@@ -10,36 +10,67 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-$thisfile=basename(__FILE__);
-if(!isset($mode)){
-	$mode='show';
-} elseif($mode=='create'||$mode=='update') {
-	include_once($root_path.'include/care_api_classes/class_prescription.php');
-	if(!isset($obj)) $obj=new Prescription;
-	include_once($root_path.'include/inc_date_format_functions.php');
-	$HTTP_POST_VARS['prescribe_date']=@formatDate2STD($HTTP_POST_VARS['prescribe_date'],$date_format);
-	//echo 	$HTTP_POST_VARS['prescribe_date'];
 
-	//include('./include/save_prescription.inc.php');
-	include('./include/save_admission_data.inc.php');
+$logo_ht_limit=50; # Maximum deparment logo's height in pixels
+
+# Load the encounter class
+require_once($root_path.'include/care_api_classes/class_encounter.php');
+$enc_obj=new Encounter($HTTP_SESSION_VARS['sess_full_en']);
+$thisfile=basename(__FILE__);
+
+if(!isset($mode)||empty($mode)){
+	
+	$sickconfirm_obj=&$enc_obj->allSicknessConfirm();
+	if($rows=$enc_obj->LastRecordCount()){
+		$mode='show';
+		# If $get_nr is non-empty, get the  single record 
+		if(isset($get_nr)&&$get_nr){
+			if(!$single_obj=&$enc_obj->getSicknessConfirm($get_nr)) $get_nr=0;
+		}else{
+			$get_nr=0;
+		}
+	}else{
+		$mode='';
+	}
+	
+}elseif($mode=='create'||$mode=='update') {
+
+	include_once($root_path.'include/inc_date_format_functions.php');
+	# Convert date to standard format
+	$HTTP_POST_VARS['date_end']=formatDate2STD($HTTP_POST_VARS['date_end'],$date_format);
+	$HTTP_POST_VARS['date_start']=formatDate2STD($HTTP_POST_VARS['date_start'],$date_format);
+	$HTTP_POST_VARS['date_confirm']=formatDate2STD($HTTP_POST_VARS['date_confirm'],$date_format);
+	
+	$HTTP_POST_VARS['encounter_nr']=$HTTP_SESSION_VARS['sess_en'];
+	$HTTP_POST_VARS['history']="Create ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
+	$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+	$HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+	$HTTP_POST_VARS['create_time']='NULL';
+
+	
+	if($enc_obj->saveSicknessConfirm($HTTP_POST_VARS)) {
+		$get_nr=$db->Insert_ID();
+		header("location:".$thisfile.URL_REDIRECT_APPEND."&get_nr=$get_nr&dept_nr=$dept_nr&target=$target&type_nr=$type_nr&pid=".$HTTP_SESSION_VARS['sess_pid']);
+		exit;
+	} else echo "$obj->sql<br>$LDDbNoSave";
 }
 
-$lang_tables=array('departments.php','legal.php');
+if($mode=='new'){
+	# Load the department class 
+	include_once($root_path.'include/care_api_classes/class_department.php');
+	$dept_obj=new Department($dept_nr);
+	$dept=&$dept_obj->getDeptAllInfo($dept_nr);
+}
+# Get the insurance data of the encounter
+if($insure_obj=$enc_obj->EncounterInsuranceData()){
+	$insurance=$insure_obj->FetchRow();
+}else{
+	$insurance=false;
+}
+
+$lang_tables=array('departments.php','legal.php','prompt.php');
 require('./include/init_show.php');
 
-$sql="SELECT e.insurance_nr,e.current_dept_nr,f.name AS insurers_name 
-		FROM 	care_encounter AS e
-		LEFT JOIN
-					care_insurance_firm AS f ON e.insurance_firm_id=f.firm_id
-		WHERE  e.encounter_nr=".$HTTP_SESSION_VARS['sess_en'];
-		
-if($result=$db->Execute($sql)){
-	if($rows=$result->RecordCount()){
-		$encounter=$result->FetchRow();
-	}
-}else{
-	echo $sql;
-}
 $subtitle=$LDSickReport;
 
 $buffer=str_replace('~tag~',$title.' '.$name_last,$LDNoRecordFor);
@@ -51,9 +82,6 @@ require_once($root_path.'include/care_api_classes/class_department.php');
 $dept_obj=new Department;
 $dept_med=$dept_obj->getAllMedical();
 
-if(isset($deptnr)&&!empty($deptnr)) $encounter['current_dept_nr']=$deptnr;
-$dept_address=$dept_obj->Address($encounter['current_dept_nr']);
-$dept_sigstamp=$dept_obj->SignatureStamp($encounter['current_dept_nr']);
 /* Load GUI page */
 require('./gui_bridge/default/gui_show.php');
 ?>

@@ -19,6 +19,7 @@ $thisfile=basename(__FILE__);
 require_once($root_path.'include/care_api_classes/class_ward.php');
 $ward_obj=new Ward($ward_nr);
 
+$rows=0;
 	
 /* Establish db connection */
 if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
@@ -29,65 +30,85 @@ if($dblink_ok){
 	switch($mode){	
 		
 		case 'show': 
-							if($ward=&$ward_obj->getWardInfo($ward_nr)){
-								$rooms=&$ward_obj->getAllActiveRoomsInfo();
-								$rows=true;
-								// Get all medical departments
-								/* Load the dept object */
-/*								if($edit){
-									include_once($root_path.'include/care_api_classes/class_department.php');
-									$dept=new Department;							
-									$depts=&$dept->getAllMedical();
-								}
+		{
+			if($ward=&$ward_obj->getWardInfo($ward_nr)){
+				$rooms=&$ward_obj->getAllActiveRoomsInfo();
+				$rows=true;
+				// Get all medical departments
+				/* Load the dept object */
+/*				if($edit){
+					include_once($root_path.'include/care_api_classes/class_department.php');
+					$dept=new Department;							
+					$depts=&$dept->getAllMedical();
+				}
 */							
-							}else{
-								header('location:nursing-station-info.php'.URL_REDIRECT_APPEND);
-								exit;
-							}
+			}else{
+				header('location:nursing-station-info.php'.URL_REDIRECT_APPEND);
+				exit;
+			}
 							
-							$breakfile='nursing-station-info.php?sid='.$sid.'&lang='.$lang;
-							break;
-					
+			$breakfile='nursing-station-info.php?sid='.$sid.'&lang='.$lang;
+			break;
+		}
+		
 		case 'update':
-							$HTTP_POST_VARS['nr']=$HTTP_POST_VARS['ward_nr'];
-							if($ward_obj->updateWard($ward_nr,$HTTP_POST_VARS)){
-								header("location:nursing-station-info.php".URL_REDIRECT_APPEND."&edit=0&mode=show&ward_id=$station&ward_nr=$ward_nr");
-								exit;
-							}else{
-								echo $ward_obj->getLastQuery()."<br>$LDDbNoSave";
-							}
+		{
+			$HTTP_POST_VARS['nr']=$HTTP_POST_VARS['ward_nr'];
+			if($ward_obj->updateWard($ward_nr,$HTTP_POST_VARS)){
+				header("location:nursing-station-info.php".URL_REDIRECT_APPEND."&edit=0&mode=show&ward_id=$station&ward_nr=$ward_nr");
+				exit;
+			}else{
+				echo $ward_obj->getLastQuery()."<br>$LDDbNoSave";
+			}
 							
-							break;
+			break;
+		}
+		
 		case 'close_ward':
-							if($ward_obj->hasPatient($ward_nr)){
-								header("location:nursing-station-noclose.php".URL_REDIRECT_APPEND."&ward_id=$ward_id&ward_nr=$ward_nr");
-								exit;
-							}else{
-								switch($close_type)
-								{
-									case 'temporary':		
-																$ward_obj->closeWardTemporary($ward_nr);
-																break;
-									case 'nonreversible':	
-																$ward_obj->closeWardNonReversible($ward_nr);
-																break;
-									case 're_open':	
-																$ward_obj->reOpenWard($ward_nr);
-								}
-								header("location:nursing-station-info.php".URL_REDIRECT_APPEND);
-								exit;
-							}
+		{
+			if($ward_obj->hasPatient($ward_nr)){
+				header("location:nursing-station-noclose.php".URL_REDIRECT_APPEND."&ward_id=$ward_id&ward_nr=$ward_nr");
+				exit;
+			}else{
+				switch($close_type)
+				{
+					case 'temporary':		
+					{
+						$ward_obj->closeWardTemporary($ward_nr);
+						break;
+					}
+					
+					case 'nonreversible':	
+					{
+						$ward_obj->closeWardNonReversible($ward_nr);
+						break;
+					}
+					
+					case 're_open':	
+					{
+						$ward_obj->reOpenWard($ward_nr);
+					}
+				}
+				
+				header("location:nursing-station-info.php".URL_REDIRECT_APPEND);
+				exit;
+			}
+		}
 							
 		default:					
-							if($wards=&$ward_obj->getAllActiveWards($ward_nr)){
-								// Get all medical departments
-								$rows=$wards->RecordCount();
-								$rooms=$ward_obj->countCreatedRooms();
-								if($rows==1) $ward=$wards->FetchRow();
-							}else echo "$sql<br>$LDDbNoRead";
+		{
+			if($wards=&$ward_obj->getAllActiveWards()){
+				// Get all medical departments
+				$rows=$wards->RecordCount();
+				$rooms=$ward_obj->countCreatedRooms();
+				if($rows==1) $ward=$wards->FetchRow();
+			}else{
+			 	//echo $ward_obj->getLastQuery()."<br>$LDDbNoRead";
+			}
 							
-							$breakfile='nursing-station-manage.php?sid='.$sid.'&lang='.$lang;
-	}			
+			$breakfile='nursing-station-manage.php?sid='.$sid.'&lang='.$lang;
+		}
+	} # End of switch($mode)
 }else{ 
 	echo "$LDDbNoLink<br>";
 } 
@@ -134,7 +155,6 @@ function checkClose(f){
 <?php
 require($root_path.'include/inc_js_gethelp.php');
 require($root_path.'include/inc_css_a_hilitebu.php');
-
 ?>
 <style type="text/css" name="formstyle">
 td.pblock{ font-family: verdana,arial; font-size: 12; background-color: #ffffff}
@@ -162,12 +182,16 @@ div.pcont{ margin-left: 3; }
 <tr valign=top >
 <td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
  <ul>
-<?php if($rows==1) : ?>
+<?php
+if($rows==1) {
+?>
 <p><br>
 <?php 	
 
 $bgc=$root_path.'gui/img/skin/default/tableHeaderbg3.gif';
 $bgc2='#abcdef';
+
+
 ?>
 
 
@@ -290,7 +314,7 @@ $bgc2='#abcdef';
                      </td>
   </tr>
   <tr>
-    <td class=pv colspan=3>
+    <td class=pv colspan=3>&nbsp;
                      </td>
   </tr>
   
@@ -399,7 +423,10 @@ if($rows>1)
 ?>
 
 <p>
-<?php elseif($rows) : ?><font face="Verdana, Arial" size=2><p><br>
+<?php 
+}elseif($rows){
+ ?>
+ <font face="Verdana, Arial" size=2><p><br>
 <font color="#0000cc"><b><?php echo $LDExistStations ?></b></font><p>
 <table border=0 cellpadding=4 cellspacing=1>
 
@@ -407,10 +434,10 @@ if($rows>1)
 $bgc=$root_path.'gui/img/skin/default/tableHeaderbg3.gif';
 echo '<tr>
 		<td background="'.$bgc.'"></td>
-		<td background="'.$bgc.'"><font face="verdana,arial" size="2" >&nbsp;<b>'.$LDStation.'</b></td>
-		<td background="'.$bgc.'"><font face="verdana,arial" size="2" >&nbsp;<nobr><b>'.$LDWard_ID.'</b></nobr></td>
-		<td background="'.$bgc.'"><font face="verdana,arial" size="2" > <b>&nbsp; '.$LDDescription.' &nbsp;</b></td>
-		<td background="'.$bgc.'"><font face="verdana,arial" size="2" > <b>&nbsp; '.$LDStatus.' &nbsp;</b></td>
+		<td background="'.$bgc.'"><font face="verdana,arial" size="2" ><b>&nbsp;'.$LDStation.'</b></td>
+		<td background="'.$bgc.'"><font face="verdana,arial" size="2" ><nobr><b>&nbsp;'.$LDWard_ID.'</b></nobr></td>
+		<td background="'.$bgc.'"><font face="verdana,arial" size="2" ><b>&nbsp;'.$LDDescription.'&nbsp;</b></td>
+		<td background="'.$bgc.'"><font face="verdana,arial" size="2" ><b>&nbsp;'.$LDStatus.'&nbsp;</b></td>
 		</tr>';
 		
 $toggle=0;
@@ -448,14 +475,18 @@ $room=array();
 </table>
 <p>
 <a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?> border="0"></a>
+<?php
+}else{
 
-<?php endif ?>
+# If no wards available 
+echo '<p><font size=2 face="verdana,arial,helvetica">'.$LDNoWardsYet.'<br><img '.createComIcon($root_path,'redpfeil.gif','0','absmiddle').'> <a href="nursing-station-new.php'.URL_APPEND.'">'.$LDClk2CreateWard.'</a></font>';
 
-</FONT>
+}
+ ?>
+
 
 </ul>
 
-<p>
 </td>
 </tr>
 </table>        

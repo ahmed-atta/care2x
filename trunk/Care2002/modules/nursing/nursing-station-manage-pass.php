@@ -49,15 +49,10 @@ require($root_path.'include/inc_passcheck_head.php');
 <p><!-- 
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo "$LDIntro2 $LDNursingManage" ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo "$LDWhat2Do $LDNursingManage" ?></a><br>
- --><HR>
-
+ -->
 <?php
 require($root_path.'include/inc_load_copyrite.php');
 ?>
-
-
 </FONT>
-
-
 </BODY>
 </HTML>

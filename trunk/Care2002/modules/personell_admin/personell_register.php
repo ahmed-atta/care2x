@@ -31,7 +31,9 @@ require_once($root_path.'include/care_api_classes/class_ward.php');
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 require_once($root_path.'include/care_api_classes/class_personell.php');
 
-$breakfile='personell_admin_pass.php'.URL_APPEND.'&target='.$target;
+if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
+	else $breakfile='personell_admin_pass.php'.URL_APPEND.'&target='.$target;
+
 $thisfile=basename(__FILE__);
 $returnfile=$breakfile;
    
@@ -123,6 +125,9 @@ if($pid||$personell_nr){
 								    }
 					  }	else{
 					  	    $newdata=1;
+
+									 if(!$personell_obj->InitPersonellNrExists($GLOBAL_CONFIG['personell_nr_init'])) $HTTP_POST_VARS['nr']=$GLOBAL_CONFIG['personell_nr_init'];
+
 									if($HTTP_POST_VARS['date_join']) $HTTP_POST_VARS['date_join']=@formatDate2STD($HTTP_POST_VARS['date_join'],$date_format);
 									if($HTTP_POST_VARS['date_exit']) $HTTP_POST_VARS['date_exit']=@formatDate2STD($HTTP_POST_VARS['date_exit'],$date_format);
 									if($HTTP_POST_VARS['contract_start']) $HTTP_POST_VARS['contract_start']=@formatDate2STD($HTTP_POST_VARS['contract_start'],$date_format);
@@ -147,7 +152,8 @@ if($pid||$personell_nr){
 			else{
 				$person_obj->setPID($pid);
 				if($data=&$person_obj->BasicDataArray($pid)){
-					while(list($x,$v)=each($data))	$$x=$v;      
+					//while(list($x,$v)=each($data))	$$x=$v;
+					extract($data);      
 				}     
 				/* Get the citytown name */
 				$addr_citytown_name=$person_obj->CityTownName($addr_citytown_nr);
@@ -158,12 +164,11 @@ if($pid||$personell_nr){
 			  if($personell_obj->is_loaded) {
 		          $zeile=&$personell_obj->personell_data;
 					//load data
-                  while(list($x,$v)=each($zeile)) {
-				  		$$x=$v; //echo $v;
-				  }
+                  //while(list($x,$v)=each($zeile)) {$$x=$v; //echo $v; }
+				  extract($zeile);
                   /* Get insurance firm name*/
 			      $insurance_firm_name=$pinsure_obj->getFirmName($insurance_firm_id);
-				  $full_pnr=$personell_nr+$GLOBAL_CONFIG['personell_nr_adder'];
+				  $full_pnr=$personell_nr;
 			  }
 			  /* GEt the patient's services classes */
         } 	

@@ -62,13 +62,32 @@ if(isset($mode)&&$mode=='save_beds'){
 
 <script language="javascript">
 <!-- 
+function checkForm(f){
+	var i;
+	var v;
+	var ret=true;
+	for(i=<?php echo $ward['room_nr_start']; ?>;i<=<?php echo $ward['room_nr_end']; ?>;i++){
+		eval("v=f.beds"+i+".value;");
+		if(isNaN(v)||v==""||v==" "||v=="  "||v<1||!v){
+			ret=false;
+			break;
+		}
+	}
+	if(ret){
+		return true;
+	}else{
+		alert("<?php echo $LDNrOfBedsRoom.' '.$ward['roomprefix']; ?> "+i+" <?php echo $LDIsNotANumber; ?>!");
+		eval("f.beds"+i+".focus();");
+		eval("f.beds"+i+".select();");
+		return false;
+	}
+}
 // -->
 </script>
 
 <?php
 require($root_path.'include/inc_js_gethelp.php');
 require($root_path.'include/inc_css_a_hilitebu.php');
-
 ?>
 <style type="text/css" name="formstyle">
 td.pblock{ font-family: verdana,arial; font-size: 12}
@@ -106,7 +125,7 @@ $bgc=$root_path.'gui/img/skin/default/tableHeaderbg3.gif';
 $bgc2='#eeeeee';
 
 ?>
-<form action="nursing-station-new-createbeds.php" method="post" name="newbeds">
+<form action="nursing-station-new-createbeds.php" method="post" name="newbeds" onSubmit="return checkForm(this)">
 
 <table border=0 cellpadding=2 cellspacing=1>
   <tr>

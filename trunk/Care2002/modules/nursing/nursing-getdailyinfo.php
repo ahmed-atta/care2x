@@ -98,7 +98,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 	}
 
   function pruf(d){
-	if(!d.newdata.value) return false;
+	if(d.notes.value=="") return false;
 	else return true
 	}
  function parentrefresh(){
@@ -124,7 +124,7 @@ div.box { border: double; border-width: thin; width: 100%; border-color: black; 
 
 </HEAD>
 <BODY  bgcolor="#99ccff" TEXT="#000000" LINK="#0000FF" VLINK="#800080"  topmargin="0" marginheight="0" 
-onLoad="<?php if($saved) echo "parentrefresh();"; ?>if (window.focus) window.focus(); window.focus();document.infoform.newdata.focus();" >
+onLoad="<?php if($saved) echo "parentrefresh();"; ?>if (window.focus) window.focus(); document.infoform.notes.focus();" >
 <table border=0 width="100%">
   <tr>
     <td><b><font face=verdana,arial size=5 color=maroon>
