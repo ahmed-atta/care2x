@@ -112,7 +112,12 @@ echo '</TD></TR>';
 <select name="lang";>
 	<?php if($lang!='pt-br') : ?>
 	<option value="pt-br"> Brazilian</option>
-    <?php endif ?>
+        <?php endif ?>
+	
+	<?php if($lang!='cs-iso') : ?>
+	<option value="cs-iso"> Czech</option>
+	<?php endif ?>
+
 	<?php if($lang!='en') : ?>
 	<option value="en"> English</option>
 	<?php endif ?>
