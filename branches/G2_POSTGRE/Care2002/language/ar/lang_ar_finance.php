@@ -1,0 +1,41 @@
+<?php
+/* 2003-04-27 EL */
+$LDInsuranceCo='ÔÑßÉ ÇáÊÃãíä';
+$LDInsuranceCoName='ÃÓã ÔÑßÉ ÇáÊÃãíä';
+$LDInsuranceCoID='ÑÞã ÔÑßÉ ÇáÊÃãíä';
+$LDMainPhoneNr='ÑÞã ÇáåÇÊÝ'; 
+$LDMainFaxNr='ÑÞã ÇáÝÇßÓ';
+$LDAuxPhoneNr='ÑÞã ÇáåÇÊÝ (ÃÖÇÝí)'; 
+$LDAuxFaxNr='ÑÞã ÇáÝÇßÓ (ÃÖÇÝí)';
+$LDAddress='ÇáÚäæÇä ÇáÑÆíÓí';
+$LDEmailAddress='ÇáÈÑíÏ ÇáÃáßÊÑæäí';
+$LDMailingAddress='ÇáÚäæÇä ÇáÈÑíÏí';
+$LDBillingAddress='ÚäæÇä ÇáÏÝÚ';
+$LDContactPerson='ÇáÔÎÕ ÇáãÓÆæá';
+$LDContactPersonPhoneNr='ÑÞã åÇÊÝ ÇáÔÎÕ ÇáãÓÆæá';
+$LDContactPersonFaxNr='ÑÞã ÝÇßÓ ÇáÔÎÕ ÇáãÓÆæá';
+$LDContactPersonEmailAddr='ÇáÈÑíÏ ÇáÇáßÊÑæäí ááÔÎÕ ÇáãÓÆæá';
+$LDPlsEnterInfo='ÃÏÎá ÇáãÚáæãÇÊ';
+$LDAlertFirmID='ÑÞã ÔÑßÉ ÇáÊÃãíä ãÝÞæÏ!';
+$LDAlertFirmName='ÃÓã ÔÑßÉ ÇáÊÃãíä ãÝÞæÏ!';
+$LDAlertBillingAddress='ÚäæÇä ÇáÏÝÚ ãÝÞæÏ!';
+$LDAlertMailingAddress='ÇáÚäæÇä ÇáÈÑíÏí ãÝÞæÏ!';
+$LDEnterAllFields='ÅãáÇÁ ßá ÇáÍÞæá ÇáãÚáãÉ ÈæÇÓØÉ <font color="red"><b>*</b></font>';
+$LDFirmID='ÑÞã ÊÚÑíÝ ÇáÔÑßÉ';
+$LDNeedEmptyFormPls='ÃÍÊÇÌ áäãæÐÌ ÝÇÑÛ.';
+$LDData='ÇáÊÇÑíÎ';
+$LDNewData='ÊÇÑíÎ ÌÏíÏ';
+$LDUpdateData='ÊÍÏíË ÇáÊÇÑíÎ';
+$LDListAll='ÞÇÆãÉ Çáßá';
+$LDFirmExists='ÑÞã ÊÚÑíÝ ÔÑßÉ ÇáÊÃãíä ãæÌæÏ Ýí ÞÇÚÏÉ ÇáÈíÇäÇÊ.';
+$LDDataNoSave='áÇ íãßä ÍÝÙ ÇáÈíÇäÇÊ ÇáãÏÎáÉ.';
+$LDPlsChangeFirmID='ÇÏÎá ÑÞã ÊÚÑíÝ ÔÑßÉ ãÎÊáÝ';
+$LDFirmInfoSaved='Êã ÍÝÙ ÈíÇäÇÊ ÇáÔÑßÉ ÈäÌÇÍ.';
+$LDPlsCheckData='ÊÃßÏ ãä ÇáÊÇÑíÎ';
+$LDManager='ÇáãÏíÑ';
+$LDNewDataTxt='ÇÏÎá ÈíÇäÇÊ ÔÑßÉ ÊÃãíä ÌÏíÏÉ';
+$LDListAllTxt='ÇÚÑÖ ßá ÔÑßÇÊ ÇáÊÃãíä ÇáãæÌæÏÉ';
+$LDSearch='ÈÍË';
+$LDSearchTxt='ÈÍË Úä ÔÑßÉ ÊÃãíä';
+$LDSearchPrompt='ÇÏÎá ÇÓã ÇáÔÑßÉ, ÑÞã ÇáÊÚÑíÝ, Çæ ÚäæÇä ÇáÈÑíÏ ÇáÇáßÊÑæäí';
+?>
