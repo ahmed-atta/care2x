@@ -57,7 +57,7 @@ class Net_HL7_Segment {
     // Is the name 3 upper case characters?
     //
     if ((! $name) || (strlen($name) != 3) || (strtoupper($name) != $name)) {
-      return NULL;
+      trigger_error("Name should be 3 characters, uppercase", E_USER_ERROR);
     }
 
     $this->_FIELDS = array();

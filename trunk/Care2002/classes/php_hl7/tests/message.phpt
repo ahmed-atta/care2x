@@ -16,8 +16,8 @@ $seg1->setField(2, "Foo");
 $msg->addSegment(new Net_HL7_Segments_MSH());
 $msg->addSegment($seg1);
 
-$seg0 = $msg->getSegmentByIndex(0);
-$seg1 = $msg->getSegmentByIndex(1);
+$seg0 =& $msg->getSegmentByIndex(0);
+$seg1 =& $msg->getSegmentByIndex(1);
 
 $seg0->setField(3, "XXX");
 
@@ -26,16 +26,18 @@ ok($seg1->getName() == "PID", "Segment 1 name PID");
 ok($seg0->getField(3) == "XXX", "3d field of MSH");
 ok($seg1->getField(2) == "Foo", "2nd field of PID");
 
+// Check references
+$segX =& $msg->getSegmentByIndex(0);
+ok($segX->getField(3) == "XXX", "3d field of MSH");
+
 $msg = new Net_HL7_Message("MSH|^~\\&|1|\rPID|||xxx|\r");
 
-$seg0 = $msg->getSegmentByIndex(0);
+$seg0 =& $msg->getSegmentByIndex(0);
 
 ok($msg->toString() == "MSH|^~\\&|1|\rPID|||xxx|\r", "String representation of message");
 
 ok($msg->toString(1) == "MSH|^~\\&|1|\nPID|||xxx|\n", "Pretty print representation of message");
 ok($seg0->getField(2) == "^~\\&", "Encoding characters (MSH(2))");
-
-exit;
 
 # Constructor with components and subcomponents
 #
@@ -53,44 +55,51 @@ $msg = new Net_HL7_Message("MSH*^~\\&*1\rPID***xxx\r");
 
 ok($msg->toString() == "MSH*^~\\&*1*\rPID***xxx*\r", "String representation of message with * as field separator");
 
-/**
-ok($msg->getSegmentByIndex(0)->getField(3) == "1", "3d field of MSH");
+$seg0 = $msg->getSegmentByIndex(0);
+
+ok($seg0->getField(3) == "1", "3d field of MSH");
 
 # Trying different field sep and control chars
 #
-$msg = new Net_HL7_Message("MSH*.%#\@*1\rPID***x.x\@y\@z.z\r");
+$msg = new Net_HL7_Message("MSH*.%#@*1\rPID***x.x@y@z.z\r");
 
-$seg1 = $msg->getSegmentByIndex(1);
+$seg1 =& $msg->getSegmentByIndex(1);
 $comps = $seg1->getField(3);
 
 ok($comps[0] == "x", "Composed field with . as separator");
-ok($comps[1]->[1] == "y", "Subcomposed field with @ as separator");
+ok($comps[1][1] == "y", "Subcomposed field with @ as separator");
 
 # Faulty constuctor
 #
 //ok(! defined(new Net::HL7::Message("MSH|^~\\&*1\rPID|||xxx\r")), "Field separator not repeated");
 
-$seg2 = new Net_HL7_Segment("XXX");
+$seg2 =& new Net_HL7_Segment("XXX");
 
 $msg->addSegment($seg2);
 
 $msg->removeSegmentByIndex(1);
 
-ok($msg->getSegmentByIndex(1)->getName() == $seg2->getName(), "Add/remove segment");
+$seg1 =& $msg->getSegmentByIndex(1);
 
-$seg3 = new Net_HL7_Segment("YYY");
-$seg4 = new Net_HL7_Segment("ZZZ");
+ok($seg1->getName() == $seg2->getName(), "Add/remove segment");
+
+$seg3 =& new Net_HL7_Segment("YYY");
+$seg4 =& new Net_HL7_Segment("ZZZ");
 
 $msg->insertSegment($seg3, 1);
 $msg->insertSegment($seg4, 1);
 
-ok($msg->getSegmentByIndex(3)->getName() == $seg2->getName(), "Insert segment");
+$seg3 =& $msg->getSegmentByIndex(3);
+
+$seg4 =& $msg->getSegmentByIndex(4);
+
+ok($seg3->getName() == $seg2->getName(), "Insert segment");
 
 $msg->removeSegmentByIndex(1);
 $msg->removeSegmentByIndex(1);
 $msg->removeSegmentByIndex(6);
 
-$seg5 = new Net_HL7_Segment("ZZ1");
+$seg5 =& new Net_HL7_Segment("ZZ1");
 
 # This shouldn't be possible
 $msg->insertSegment($seg5, 3);
@@ -99,35 +108,36 @@ ok(! $msg->getSegmentByIndex(3), "Erroneous insert");
 
 $msg->insertSegment($seg5, 2);
 
-ok($msg->getSegmentByIndex(2)->getName() == $seg5->getName(), "Insert segment");
+$seg2 = $msg->getSegmentByIndex(2); 
+
+ok($seg2->getName() == $seg5->getName(), "Insert segment");
 
 $msg->setSegment($seg3, 2);
 
-ok($msg->getSegmentByIndex(2)->getName() == $seg3->getName(), "Set segment");
+$seg2 = $msg->getSegmentByIndex(2); 
 
-$msg->setSegment($seg5);
+ok($seg2->getName() == $seg3->getName(), "Set segment");
 
-ok($msg->getSegmentByIndex(2)->getName() == $seg3->getName(), "Erroneous set segment");
+ok(count($msg->getSegmentsByName("MSH")) == 1, "Number of MSH segments");
 
-ok($msg->getSegmentsByName("MSH") == 1, "Number of MSH segments");
-
-$msh2 = new Net_HL7_Segments_MSH();
+$msh2 =& new Net_HL7_Segments_MSH();
 
 $msg->addSegment($msh2);
 
-ok($msg->getSegmentsByName("MSH") == 2, "Added MSH segment, now two in message");
+ok(count($msg->getSegmentsByName("MSH")) == 2, "Added MSH segment, now two in message");
 
 
 # Fumble 'round with ctrl chars
 #
-$msg = new Net_HL7_Message();
+$msg =& new Net_HL7_Message();
 
-$msh = new Net_HL7_Segments_MSH(array());
+$msh =& new Net_HL7_Segments_MSH(array());
 
 $msh->setField(1, "*");
 $msh->setField(2, "abcd");
 
 $msg->addSegment($msh);
+
 ok($msg->toString() == "MSH*abcd*\r", "Creating separate MSH");
 
 $msh->setField(1, "|");
@@ -135,7 +145,7 @@ $msh->setField(2, "^~\\&");
 
 ok($msg->toString() == "MSH|^~\\&|\r", "Change MSH after add");
 
-$msh = new Net_HL7_Segments_MSH(array());
+$msh =& new Net_HL7_Segments_MSH(array());
 
 $msh->setField(1, "*");
 $msh->setField(2, "abcd");
@@ -145,8 +155,8 @@ ok($msg->toString() == "MSH*abcd*\r", "New MSH with setSegment");
 
 $str = 'MSH|^~\&|CodeRyte HL7|CodeRyte HQ|VISION|MISYS|200404061744||DFT^P03|TC-2743|P^T|2.3|||AL|NE||ASCII||| |';
 
-$msg = new Net_HL7_Message($str);
+$msg =& new Net_HL7_Message($str);
 
 ok($msg->toString(1) == "$str\n", "Message from string and to string with subcomponents");
-*/
+
 ?>
