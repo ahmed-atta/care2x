@@ -11,10 +11,10 @@
 # --------------------------------------------------------
 
 #
-# Tabellenstruktur für Tabelle 'icd10_en'
+# Tabellenstruktur für Tabelle 'care_icd10_en'
 #
 
-CREATE TABLE icd10_en (
+CREATE TABLE care_icd10_en (
    diagnosis_code varchar(12) NOT NULL,
    description text NOT NULL,
    class_sub varchar(5) NOT NULL,

@@ -11,11 +11,11 @@
 # --------------------------------------------------------
 
 #
-# Tabellenstruktur für Tabelle 'ops301_de'
+# Tabellenstruktur für Tabelle 'care_ops301_de'
 #
 
 
-CREATE TABLE ops301_de (
+CREATE TABLE care_ops301_de (
    code varchar(12) NOT NULL,
    description text NOT NULL,
    inclusive text NOT NULL,
