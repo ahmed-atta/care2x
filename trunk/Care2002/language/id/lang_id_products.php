@@ -207,4 +207,8 @@ $LDDepotOrderBot='Medibot';
 /* 2002-10-15 EL */
 $LDCreatedOn='Created on';
 $LDTime='Time';
+/* 2002-11-5 EL */
+$LDInvalidPassword='Invalid password!';
+$LDUnknownValidator='Validator unknown!';
+$LDPlsEnterInfo='Please enter the correct info.';
 ?>

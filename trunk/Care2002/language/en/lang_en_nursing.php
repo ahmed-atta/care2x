@@ -327,23 +327,25 @@ $LDNoWardsYet='There are no nursing wards yet.';
 $LDClk2CreateWard='To create a ward, please click here.';
 /* 2002-10-12 EL */
 $LDToCreateNewList='To create a new list';
-$LD_ddpMMpyyyy="dd.mm.yyyy";
-$LD_yyyyhMMhdd="yyyy-mm-dd";
-$LD_MMsddsyyyy="mm/dd/yyyy";
+$LD_ddpMMpyyyy='dd.mm.yyyy';
+$LD_yyyyhMMhdd='yyyy-mm-dd';
+$LD_MMsddsyyyy='mm/dd/yyyy';
 /* 2002-10-23 EL*/
 $LDQueryDoctor='Query to doctor';
 $LDDoctorInfo='Doctor\'s info, instructions';
 $LDDiagnosticsReport='Diagnostics report arrived';
 $LDInfusionTherapy='Infusion therapy/program';
-$LDMonitorFluidDischarge='Monitor fluids discharge';
+$LDMonitorFluidDischarge='Fluids discharge/Diuretic';
 $LDBloodProgram='Blood sample/transfusion';
 $LDVitalStatistics='Vital statistics';
 $LDAntibioticsProgram='Antibiotics therapy/program';
 $LDAnticoagProgram='Anticoagulants';
 $LDSpecialCare='Special care, vital statistics';
 $LDTestConsultRequested='Test/Consult requested';
-$LDNurseReport='Nurse report (new)';
+$LDNurseReport='New nurse report';
 $LDDaily='Daily';
 $LDSaveChanges='Save changes';
+/* 2002-12-07*/
+$LDNoDiagReport='No diagnostic report available.';
 
 ?>
