@@ -19,3 +19,4 @@ if($target!='generic'){
 <input type="hidden" name="user_origin" value="<?php echo $user_origin ?>">
 <input type="hidden" name="status" value="pending">
 <input type="hidden" name="mode" value="<?php if($mode=="edit") echo "update"; else echo $mode ?>">
+<input type="hidden" name="formtitle" value="<?php echo $formtitle; ?>">

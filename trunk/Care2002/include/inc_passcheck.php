@@ -14,34 +14,21 @@ if (eregi('inc_passcheck.php',$PHP_SELF))
 */
 
 
-function validarea(&$zeile2, $permit_type_all = 1)
-{
+function validarea(&$zeile2, $permit_type_all = 1){
     global $allowedarea;
 	
-	if(ereg('System_Admin', $zeile2))  // if System_admin return true
-	{ 
+	if(ereg('System_Admin', $zeile2)){  // if System_admin return true
 	   return 1;
-	}
-	elseif (in_array('no_allow_type_all', $allowedarea)) // check if the type "all" is blocked, if so return false
-	{
+	}elseif(in_array('no_allow_type_all', $allowedarea)){ // check if the type "all" is blocked, if so return false
 	     return 0;
+	}elseif($permit_type_all && ereg('_a_0_all', $zeile2)){ // if type "all" , return true
+		return 1;
+	}else{                                                                  // else scan the permission
+		for($j=0;$j<sizeof($allowedarea);$j++){
+			if(ereg($allowedarea[$j],$zeile2)) return 1; 
+		}
 	}
-	elseif ($permit_type_all && ereg('_a_0_all', $zeile2)) // if type "all" , return true
-	   {
-	       return 1;
-	   }
-	    else                                                                    // else scan the permissions
-	   {
-	
-          for($j=0;$j<sizeof($allowedarea);$j++)
-          {
-
-              if(ereg($allowedarea[$j],$zeile2)) return 1; 
-
-          }
-	   }
-	   
-    return 0;           // otherwise the user has no access permission in the area, return false
+	return 0;           // otherwise the user has no access permission in the area, return false
 }
 
 function logentry(&$userid,$key,$report,&$remark1,&$remark2)
@@ -79,7 +66,9 @@ if($dblink_ok)
 		{
 			$dec_login = new Crypt_HCEMD5($key_login,'');
 			$keyword = $dec_login->DecodeMimeSelfRand($HTTP_COOKIE_VARS['ck_login_pw'.$sid]);
-    	}
+    	}else{
+			$checkintern=false;
+		}
 		
 		if (($zeile['password']==$keyword)&&($zeile['login_id']==$userid)) 
 		{	
@@ -108,7 +97,7 @@ if($dblink_ok)
 					//setcookie($userck.$sid,$zeile['name']);	
 					//echo $fileforward;
 					$HTTP_SESSION_VARS['sess_user_name']=$zeile['name'];
-					header('Location:'.strtr($fileforward,' ','+'));
+					header('Location:'.strtr($fileforward,' ','+').'&checkintern='.$checkintern);
 					exit;
 					
 				}else {$passtag=2;};

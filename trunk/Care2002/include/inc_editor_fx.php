@@ -17,4 +17,9 @@ function deactivateHotHtml($str)
 	return $str;
 }
 
+function hilite($str)
+{
+	$sbuf=str_replace('**','</span>',$str);
+	return str_replace('*','<span style="background:yellow">',$sbuf);
+}
 ?>

@@ -51,7 +51,7 @@ print '
 else print '<p>';
 ?>
 <FONT  SIZE=-1 FACE="Arial">&nbsp;<br>
-	&nbsp;<A HREF="open-time.php?<?php echo URL_APPEND; ?>"><?php echo $LDOpenTimes ?></A>
+	&nbsp;<A HREF="open-time.php<?php echo URL_APPEND; ?>"><?php echo $LDOpenTimes ?></A>
 	<br>
 	&nbsp;<A HREF="newscolumns.php<?php echo URL_APPEND; ?>&dept_nr=28"><?php echo $LDManagement ?></A>
 	<br>
@@ -71,7 +71,7 @@ else print '<p>';
 	<br>
 	&nbsp;<A HREF="newscolumns.php<?php echo URL_APPEND; ?>&dept_nr=32"><?php echo $LDHealthTips ?></A>
 	<br>
-	&nbsp;<A HREF="calendar.php<?php print URL_APPEND.'&retpath=home'; ?>"><?php echo $LDCalendar ?></A>
+	&nbsp;<A HREF="<?php echo $root_path; ?>modules/calendar/calendar.php<?php print URL_APPEND.'&retpath=home'; ?>"><?php echo $LDCalendar ?></A>
 	<br>
 	&nbsp;<A HREF="javascript:gethelp()"><?php echo $LDHelp ?></A>
 	<br>

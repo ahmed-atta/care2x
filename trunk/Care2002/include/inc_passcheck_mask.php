@@ -77,7 +77,7 @@ if($not_trans_id) {
 <input type="hidden" name="subtarget" value="<?php echo $subtarget ?>">
 <input type="hidden" name="user_origin" value="<?php echo $user_origin ?>">
 <input type="hidden" name="title" value="<?php print $title; ?>">
-<?php if(!isset($minimal) || !$minimal) : ?>
+<?php if(!isset($minimal) || !$minimal) { ?>
 <input type="hidden" name="dept" value="<?php echo $dept ?>">
 <input type="hidden" name="dept_nr" value="<?php echo $dept_nr ?>">
 <input type="hidden" name="retpath" value="<?php echo $retpath ?>">
@@ -86,13 +86,14 @@ if($not_trans_id) {
 <input type="hidden" name="pyear" value="<?php echo $pyear ?>">
 <input type="hidden" name="pday" value="<?php print $pday; ?>">
 <input type="hidden" name="station" value="<?php echo $station ?>">
+<input type="hidden" name="ward_nr" value="<?php echo $ward_nr ?>">
 <input type="hidden" name="ipath" value="<?php echo $ipath ?>">
-<?php endif ?>
-<?php if(isset($c_flag)&&$c_flag) : ?>
+<?php } ?>
+<?php if(isset($c_flag)&&$c_flag) { ?>
 <input type="hidden" name="cmonth" value="<?php echo $cmonth ?>">
 <input type="hidden" name="cyear" value="<?php echo $cyear ?>">
 <input type="hidden" name="cday" value="<?php print $cday; ?>">
-<?php endif ?>
+<?php } ?>
 </font></nobr><p>
 <INPUT type="image"  <?php echo createLDImgSrc($root_path,'continue.gif','0') ?>>&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="<?php print $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>>

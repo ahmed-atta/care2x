@@ -36,7 +36,7 @@ define('SIGNAL_COLOR_NURSE_REPORT','blue');             // color to be set for s
 define('SIGNAL_COLOR_ANTIBIOTIC','green_pale');    // color to be set for signalling the prescription of antibiotics
 define('SIGNAL_COLOR_DIURETIC','yellow_pale');             // color to be set for signalling the prescription of diuretics
 define('SIGNAL_COLOR_ANTICOAG','violet');             // color to be set for signalling the prescription of anticoagulants
-define('SIGNAL_COLOR_IV','red');             // color to be set for signalling the prescription of anticoagulants
+define('SIGNAL_COLOR_IV','pink');             // color to be set for signalling the prescription of anticoagulants
 
 /* ****************** Do not edit the following functions **************************/
 
@@ -45,7 +45,8 @@ function setEventSignalColor($pn, $color, $status = SIGNAL_COLOR_LEVEL_FULL )
    	global $db,  $LDDbNoSave;
 	$nogo=false;
 	
-	$event_table='care_nursing_station_patients_event_signaller'; 
+	//$event_table='care_nursing_station_patients_event_signaller'; 
+	$event_table='care_encounter_event_signaller'; 
 	
 	$sql="SELECT encounter_nr FROM $event_table WHERE encounter_nr=$pn";
    	if($ergebnis=$db->Execute($sql))
@@ -63,7 +64,7 @@ function setEventSignalColor($pn, $color, $status = SIGNAL_COLOR_LEVEL_FULL )
    	}else{
    		$nogo=true;
 	}	   
-	
+	//echo $sql;
 	if($nogo){
 	    $sql="INSERT INTO ".$event_table." ( encounter_nr, ".$color.") VALUES ( ".$pn.", ".$status.")";
         $db->Execute($sql);
