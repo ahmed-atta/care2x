@@ -18,8 +18,8 @@ require($root_path.'include/inc_2level_reset.php');
 
 require_once($root_path.'include/inc_config_color.php');
 
-
-$breakfile=$root_path.$HTTP_SESSION_VARS['sess_path_referer'].URL_APPEND;
+if(file_exists($root_path.$HTTP_SESSION_VARS['sess_path_referer']))	$breakfile=$root_path.$HTTP_SESSION_VARS['sess_path_referer'].URL_APPEND;
+		else $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 
 $dbtable='care_phone';
 
