@@ -16,11 +16,13 @@ class Measurement extends Core {
 	var $is_preloaded=false;
 	var $dept_count;
 	var $tabfields=array('nr',
-									'date',
+									'msr_date',
+									'msr_time',
 									'encounter_nr',
-									'type',
+									'msr_type_nr',
 									'value',
 									'unit_nr',
+									'unit_type_nr',
 									'notes',
 									'measured_by',
 									'status',
