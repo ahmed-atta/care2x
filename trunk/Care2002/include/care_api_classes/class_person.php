@@ -17,10 +17,11 @@ class Person {
 	var $row;
 	var $person=array();
 	var $is_preloaded=false;
-	var $basic_list='title,name_first,name_last,name_2,name_3,name_middle,name_maiden,name_others,date_birth,
+	var $basic_list='pid,title,name_first,name_last,name_2,name_3,name_middle,name_maiden,name_others,date_birth,
 				           sex,addr_str,addr_str_nr,addr_zip,addr_citytown_nr,photo_filename';
 						   
 	var  $elems_array=array(
+				'pid',
 				 'title',
 				 'date_reg',
 				 'name_last',
@@ -34,7 +35,7 @@ class Person {
 				 'name_others',
 				 'date_birth',
 				 'addr_str',
-				 'addr_nr',
+				 'addr_str_nr',
 				 'addr_zip',
 				 'addr_citytown_nr',
 				 'phone_1_code',
@@ -86,8 +87,16 @@ class Person {
 			return true;
 		}
 	}
-
-    function prepInsertArray(){
+	function InitPIDExists($init_nr){
+		global $db;
+		$this->sql="SELECT pid FROM $this->tb_person WHERE pid=$init_nr";
+		if($this->result=$db->Execute($this->sql)){
+			if($this->result->RecordCount()){
+				return true;
+			} else { return false; }
+		} else { return false; }
+	}
+	   function prepInsertArray(){
         global $HTTP_POST_VARS;
 		$x='';
 		$v='';
@@ -127,7 +136,7 @@ class Person {
 		    $values=substr_replace($values,'',(strlen($values))-1);
 
         $this->sql="INSERT INTO $this->tb_person ($index) VALUES ($values)";		
-
+		//echo $this->sql;
 		return $this->Transact();
 	}
 	
