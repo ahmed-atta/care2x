@@ -89,7 +89,7 @@ $LDScrubNurse='Scrub nurse';
 $LDOpRoom='OP room';
 $LDResetAll='Erase all entries';
 $LDUpdateData='Update data';
-$LDStartNewDocu='Start a new document';
+$LDStartNewDocu='Create a new document';
 $LDSearchKeyword='Search keyword: eg. given name or family name';
 
 $LDSrcListElements=array(
@@ -209,7 +209,7 @@ $LDFunction='Function';
 $LDCurrentEntries='Current entries';
 $LDDeleteEntry='Delete entry';
 $LDSearchNewPerson='Search a new ~tagword~';
-$LDSorryNotFound='Sorry. I have not found anything. Please try a different keyword.';
+$LDSorryNotFound='Sorry. I did not find anything. Please try a different keyword.';
 $LDSearchPerson='Search ~tagword~';
 $LDJobId='Profession';
 $LDSearchResult='Search results';
@@ -249,7 +249,7 @@ $LDSearchElements=array(
 									'&nbsp;',
 									'Art.nr.',
     								'Art.name',
-    								'Description;',
+    								'Description',
  									'&nbsp;',
    									'Generic',
     								'License.Nr.'
@@ -273,7 +273,7 @@ $LDSelectArticle='Click to select this article';
 $LDDbInfo='Info from the databank';
 $LDRemoveArticle='Remove article from this list';
 $LDArticleNoList='Article not listed in the databank';
-$LDPromptSearch='Please enter a search keyword.<br>Like for example a given name, family name, or a birthdate, etc.	(Read also the  <a href=\'ucons.php\'>Tips</a>.)';
+$LDPromptSearch='Please enter a search keyword.<br>Like for example a given name, family name, or a birthdate, etc.	(See also "Help")';
 $LDKeyword='Keyword';
 $LDOtherFunctions='Other functions';
 $LDInfoNotFound='The needed information is not found!';
@@ -312,7 +312,7 @@ $LDAlertNotSavedYet='The latest entry is not saved yet. Do you want to save firs
 $LDPhone='Phone';
 $LDBeeper='Beeper';
 $LDOn='on';
-$LDNoPersonList='The list of personell is not yet created.';
+$LDNoPersonList='The list of personnel is not yet created.';
 $LDNoEntryFound='No entry in plan found!';
 $LDShow='Show';
 $LDShowPrevLog='Show the previous log entries';

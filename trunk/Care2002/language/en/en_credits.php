@@ -217,6 +217,7 @@ and after some time, he decided to participate on the Open Source projects to
 improve some skills and also to return something back and to see how things 
 work in this kind of community.
 			<P><a href="mailto:matejh@users.sourceforge.net"><u>Matej Hausenblas can be contacted here.</u></a>
+</TD></TR></TBODY></TABLE>
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>

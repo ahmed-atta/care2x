@@ -192,7 +192,7 @@ $LDReset='Eingabe verwerfen';
 $LDNoLabReport='Kein Laborbefund vorhanden!';
 $LDFeverCurve='Patientenkurve';
 $LDNursingReport='Pflegebericht';
-$LDDocsPrescription='Ärtzliche Anordnung';
+$LDDocsPrescription='Arztanordnung';
 $LDNursingPlan='Pflegeplanung';
 $LDRootData='Stammblatt';
 $LDReports='Befund';
@@ -390,4 +390,7 @@ $LDOwnPatient='Eigener Patient';
 $LDNonOwnPatient='Fremder Patient';
 # 2003-08-04 EL
 $LDShowClinicOnly='Nur diese Ambulanz';
+# 2003-09-16 EL
+$LDAdmissionData='Aufnahmedaten';
+$LDShowPhoto='Bild zeigen';
 ?>

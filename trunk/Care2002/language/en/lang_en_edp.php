@@ -136,12 +136,38 @@ $LDForeWord='You now have the highest access privileges.<br>The following functi
 
 $LDSetDateFormat='Set Date Format';
 $LDSelectDateFormat='Please select the needed date format:';
-/* Do not translate $LDDateFormats */
-$LDDateFormats=array('dd.MM.yyyy','yyyy-MM-dd','MM/dd/yyyy');
+
+# Date formats
+# Add additional date formats as array element.
+# Do not forget to add the correspondign sample text in the $LDDateFormatsTxt array.
+# Do not translate $LDDateFormats 
+$LDDateFormats=array('dd.MM.yyyy','yyyy-MM-dd','MM/dd/yyyy','dd/MM/yyyy');
 
 $LDDateFormatsTxt= array('For example: 01.10.2002 (01 October 2002)',
                                          'For example: 2002-10-01 (2002 October 01)',
-										 'For example: 10/01/2002 (October 01, 2002)');
+										 'For example: 10/01/2002 (October 01, 2002)',
+										 'For example: 01/10/2002 (01 October , 2002)'
+										 );					 
+/**
+* The following lines must be modified according to the examples:
+* english:
+* day = d , month = m, year = y
+* result => dd.mm.yyyy
+*
+* german:
+* day = t, month = m, year = j
+* result => tt.mm.jjjj
+*
+* indonesian:
+* day = h, month = b, year = t
+* result => hh.bb.tttt
+* 
+* BEGIN */
+$LD_ddpMMpyyyy='dd.mm.yyyy';
+$LD_yyyyhMMhdd='yyyy-mm-dd';
+$LD_MMsddsyyyy='mm/dd/yyyy';
+$LD_ddsMMsyyyy='dd/mm/yyyy';
+/* END */
 
 $LDNewDateFormatSaved='The new date format is now in effect.';
 									
@@ -164,25 +190,7 @@ $LDPlsEnterUpdate='Please edit the currency information. Then press "Update".';
 $LDEditInfo='Edit';
 $LDCurrencyAdmin='Currency administration';
 
-/**
-* The following lines must be modified according to the examples:
-* english:
-* day = d , month = m, year = y
-* result => dd.mm.yyyy
-*
-* german:
-* day = t, month = m, year = j
-* result => tt.mm.jjjj
-*
-* indonesian:
-* day = h, month = b, year = t
-* result => hh.bb.tttt
-* 
-* BEGIN */
-$LD_ddpMMpyyyy='dd.mm.yyyy';
-$LD_yyyyhMMhdd='yyyy-mm-dd';
-$LD_MMsddsyyyy='mm/dd/yyyy';
-/* END */
+
 /* 2002-10-22 EL */
 $LDUserInfoSaved='The user access was successfully created';
 $LDUserInfoNoSave='The access creation failed. Please check the entered information';
@@ -229,11 +237,11 @@ $LDFormalName='Formal Name';
 $LDInternalID='Internal ID Code';
 $LDPlsSelect='Please select one';
 $LDTypeDept='Type of Department';
-$LDIsSubDept='Is department a sub-department ?';
+$LDIsSubDept='Is this a sub-department ?';
 $LDParentDept='Parent Department';
 $LDLangVariable='Language variable';
 $LDShortName='Short Name';
-$LDAlternateName='Altenate Name';
+$LDAlternateName='Alternate Name';
 $LDAdmitsOutpatients='Admits outpatients ?';
 $LDAdmitsInpatients='Admits inpatients ?';
 $LDBelongsToInst='Belongs to this institution ?';

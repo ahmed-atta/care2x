@@ -50,4 +50,8 @@ $LDSelectDept='Select department';
 $LDPlsSelectDept='Please select a department';
 $LD_AllMedicalDept='____All medical departments_____';
 $LDClinic='Clinic';
+#2003-10-23 EL
+$LDPlsNameFormal='Please enter the formal name';
+$LDPlsDeptID='Please enter the department\'s ID';
+$LDPlsSelectType='Please select the type';
 ?>

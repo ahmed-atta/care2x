@@ -410,4 +410,7 @@ $LDOwnPatient='Paciente propio';
 $LDNonOwnPatient='No es paciente propio';
 # 2003-08-04 EL
 $LDShowClinicOnly='Solamente a esta clínica';
+# 2003-09-16 EL
+$LDAdmissionData='Admission data';
+$LDShowPhoto='Show photo';
 ?>

@@ -145,7 +145,7 @@ $LD_ddpMMpyyyy='dd.mm.yyyy';
 $LD_yyyyhMMhdd='yyyy-mm-dd';
 $LD_MMsddsyyyy='mm/dd/yyyy';
 /* 2002-10-13 EL */
-$LDPlsSelectPatientFirst='Please find the person first.';
+$LDPlsSelectPatientFirst='Please find the patient first.';
 /* 2002-11-30 EL */
 $LDPatientRegister='Person registration';
 $LDRegDate='Registration date';
@@ -350,7 +350,7 @@ $LDPatientIsDischarged='This patient is already discharged';
 $LDShow='Show';
 $LDPlannedEncType='Planned admission type';
 # 2003-08-01 EL
-$LDListEncounters='Admissions\' list';
+$LDListEncounters='Encounters\' list';
 $LDDischarged='Discharged';
 $LDDischargeDate='Discharge date';
 # 2003-08-04 EL
@@ -368,4 +368,11 @@ $LDPlsEnterRefererNotes='Please enter referer\'s notes';
 $LDPlsSelectAdmissionType='Please select admission type';
 $LDForInpatient='For inpatient';
 $LDForOutpatient='For outpatient';
+#2003-09-18 EL
+$LDPersonSearch='Search a person';
+#2003-09-24 EL
+$LDShowing='Showing';
+$LDPrevious='Previous';
+$LDNext='Next';
+$LDAdvancedSearch='Advanced search';
 ?>

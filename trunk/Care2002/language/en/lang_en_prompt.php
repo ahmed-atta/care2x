@@ -15,7 +15,7 @@ $LDErrorOccured='An error occured.';
 $LDTryOrNotifyEDP='Please try again or notify your EDP department if the problem persists. Thank you.';
 # 2003-07-30 EL
 $LDPlsEnterDate='Please enter a date';
-$LDPlsEnterDoctor='Please enter a  physician\'s name';
+$LDPlsEnterDoctor='Please enter a  physician\'s or surgeon\'s name';
 $LDPlsEnterPurpose='Please enter the purpose';
 $LDAppointNotToday='This appointment is NOT scheduled for today!';
 $LDSureAdmitAppoint='Are you sure you want to admit this appointment for today?';
@@ -69,4 +69,18 @@ $LDIsCorrect='Is that correct?';
 $LDProceedSave='Do you want to proceed save?';
 #2003-08-28 EL
 $LDPlsSelectWard='Please select a ward or station';
+# 2003-09-20 EL
+$LDPlsEnterTherapy='Please enter the therapy.';
+$LDPlsMedicalAdvice='Please specify whether the patient got medical advice or not.';
+# 2003-09-23 EL
+$LDPlsEnterJobFunction='Please enter the job function.';
+#2003-04-10 EL
+$LDPlsFillInfo='Please fill in the fields marked red';
+$LDPlsEnterLocalization='Please enter the localization';
+$LDPlsEnterNotes='Please enter notes';
+$LDPlsEnterClassification='Please enter the classifications';
+$LDPlsEnterStartTime='Please enter start time';
+$LDPlsEnterEndTime='Please enter end time';
+$LDPlsEnterScrubNurse='Please enter scrub nurse info';
+$LDPlsEnterORNr='Please enter the OR ID or number';
 ?>

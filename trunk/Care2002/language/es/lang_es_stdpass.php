@@ -85,7 +85,7 @@ $LDDept='Departamento';
 $LDWard='Planta';
 $LDWardOR='Habitación o No. de quirófano';
 $LDPhoneNr='Número de teléfono de la/las habitaciones';
-$LDIntercomNr='Número de intercomunicador en la/las habitaciónes';
+$LDIntercomNr='Número de intercomunicador en la/las habitaciones';
 $LDPcIP='Dirección IP de esta computadora';
 $LDSave='Guardar cambios';
 $LDNoChange='No cambie la configuración actual';
@@ -131,9 +131,9 @@ $LDPlsTryAgain='Por favor, intente nuevamente';
 $LDAdministration='Gerencia';
 $LDOutpatientClinic='Clínica de dia';
 
-$LDUploadDicom='Upload DICOM images';
-$LDViewDicom='View DICOM images';
+$LDUploadDicom='Guardar imágenes DICOM en el servidor';
+$LDViewDicom='Ver las imágenes DICOM';
 # 2003-08-22 EL
-$LDYellowList='Yellow List';
-$LDRedList='Red List';
+$LDYellowList='Lista Amarilla';
+$LDRedList='Lista Roja';
 ?>

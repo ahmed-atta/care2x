@@ -18,7 +18,7 @@ require_once('../../include/inc_vars_resolve.php');
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/thomas_wiedmann.jpg"  border=0   align=right vspace=10>
 			<b>Thomas Wiedmann (DE) </b><br>
-			Aktivste Debugger und trägt u.a. noch folgendes dazu bei:
+			Aktivster Debugger und trägt u.a. noch folgendes dazu bei:
 			<p><font size=1>
 		     Javascripts zur Validierung von Datum & Zahlen<br>
 			Testing (ganz durch)<br>
@@ -42,7 +42,7 @@ require_once('../../include/inc_vars_resolve.php');
 <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 		  <P><img src="../../fotos/credits/wilfried_goedert.jpg" border=0  align=right vspace=10 >
-			<P><b>Dr. med Wilfried Gödert (DE)</b><br>
+			<P><b>Wilfried Gödert (DE)</b><br>
 			Trägt u.a. folgendes zu dem Projekt bei:
 			<p><font size=1>
 		     Verwaltung und Hosting von:<br>

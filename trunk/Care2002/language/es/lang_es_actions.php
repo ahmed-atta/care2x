@@ -22,9 +22,9 @@ $LDArchive='Archivo';
 $LDStart='Iniciar';
 $LDEnd='Finalizar';
 # 2003-07-29 EL
-$LDListApptByDept='Mostrar la lista de citas según Departamento';
+$LDListApptByDept='Mostrar la lista de citas por Departamento';
 $LDListApptByDoc='Mostrar la lista de citas según el Tratante';
 $LDdone='Hecho';
 $LDOk='Ok';
-$LDSelect='Select';
+$LDSelect='Seleccionar';
 ?>

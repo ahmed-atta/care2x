@@ -85,7 +85,7 @@ $LDTakeOver='Reiniciar';
 $LDJustReset='Resetear';
 $LDMaximum='Maximo';
 
-$LDSpexFunctions='Funciones especiales';
+$LDSpexFunctions='Herramientas y funciones especiales';
 $LDDutyPlanOrg='Organizador del plan de actividades';
 $LDDutyPlanOrgTxt='Planificador y organizador, controlador Bundy de horas trabajadas';
 $LDStandbyDuty='Actividades en espera';
@@ -149,7 +149,7 @@ $LDDocsOnDuty='Médicos de guardia';
 $LDORLogbook='O libro de operaciones (Documentar nueva operación)';
 $LDORLogbookArch='O libro de operaciones (Archivo)';
 $LDORLogbookSearch='O libro de cirugías (Buscar pacientes operados)';
-$LDPresent='Presente';
+$LDPresent='La';
 
 $LDBgColor='Color de fondo';
 $LDTxtColor='Color de texto';
@@ -227,15 +227,15 @@ $LDGUITemplateTxt='Elegir la plantilla de la interfaz gráfica del usuario)';
 $LDGUITheme='Tema interfaz gráfica del usuario';
 $LDTheme='Tema';
 # 2002-08-10
-$LDLastName='Family name';
-$LDWantUpload='I want to upload';
-$LDImage='image(s)';
+$LDLastName='Apellido';
+$LDWantUpload='Deseo subir un archivo';
+$LDImage='imagen(es)';
 # 2002-01-18 EL
-$LDTicketedSupport='Ticketed Support';
-$LDTicketedSupportTxt='Send a ticketed request to the project\'s online support';
-$LDNewsgroup='Newsgroup';
-$LDNewsgroupTxt='Newsgroup mirroring the developers\' mailing list.';
+$LDTicketedSupport='Soporte mediante tiquetes';
+$LDTicketedSupportTxt='Envíe una solicitud de tiquetes al grupo de soporte técnico del proyecto';
+$LDNewsgroup='Grupo de noticias';
+$LDNewsgroupTxt='Grupo de noticias con duplicación de la lista de correos de los desarrolladores.';
 # 2002-08-19 EL
-$LDPharmaIndex='Pharma Index';
-$LDPharmaIndexTxt='Pharmaceutical indexes like Redlist, Yellowlist, IFAP, NIMS, or PIMS';
+$LDPharmaIndex='Índice farmacéutico';
+$LDPharmaIndexTxt='Índices farmacéuticos tales como los vademécum de PLM, PDR, etc.';
 ?>

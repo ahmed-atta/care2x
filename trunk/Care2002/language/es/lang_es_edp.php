@@ -141,33 +141,16 @@ $LDForeWord='Usted tiene los privilegios de acceso más altos.<br>Las siguientes 
 
 $LDSetDateFormat='Marque el formato de la fecha';
 $LDSelectDateFormat='Por favor, selecciones el formato de fecha necesario:';
-/* Do not translate $LDDateFormats */
-$LDDateFormats=array('dd.MM.yyyy','yyyy-MM-dd','MM/dd/yyyy');
+# Date formats
+# Add additional date formats as array element.
+# Do not forget to add the correspondign sample text in the $LDDateFormatsTxt array.
+# Do not translate $LDDateFormats 
+$LDDateFormats=array('dd.MM.yyyy','yyyy-MM-dd','MM/dd/yyyy','dd/MM/yyyy');
 
 $LDDateFormatsTxt= array('Por ejemplo: 01.10.2004 (01 octubre 2004)',
                                          'Por ejemplo: 2002-10-04 (2004 octubre 01)',
-										 'Por ejemplo: 10/01/2004 (octubre 01, 2004)');
-
-$LDNewDateFormatSaved='El nuevo formato de fecha se encuentra habilitado.';
-									
-$LDSetCurrency='Fijar el tipo de moneda';
-$LDNewCurrencySet='El nuevo tipo de moneda se encuentra habilitado.';
-$LDPlsSelectCurrency='Por favor, seleccione el tipo de moneda.';
-$LDAddCurrency='Añada un nuevo tipo de moneda';
-$LDPlsAddCurrency='Por favor, ingrese la información acerca de este tipo de moneda. Luego, dé clic en "Guardar".';
-$LDAddedNewCurrency='La información acerca del nuevo tipo de moneda ha sido guardado.';
-$LDmain='principal';
-$LDClk2AddCurrency='Para ingresar un nuevo tipo de moneda, por favor, dé clic aquí.';
-$LDCurrencyShortName='Nombre corto o símbolo de la moneda:';
-$LDCurrencyLongName='Nombre descriptivo de la moneda:';
-$LDCurrencyInfo='Información adicional:';
-$LDClk2SetCurrency='Para fijar la moneda principal, por favor dé clic aquí.';
-$LDCurrencyUpdated='La información de la moneda ha sido actualizada.';
-$LDUpdateCurrencyInfo='Edite la información de la moneda';
-$LDPlsEnterUpdate='Por favor, edite la información de la moneda. Luego dé clic en "Actualizar".';
-
-$LDEditInfo='Editar';
-$LDCurrencyAdmin='Administración de la moneda';
+										 'Por ejemplo: 10/01/2004 (octubre 01, 2004)',
+										 'Por ejemplo: 01/10/2004 (01 octubre, 2004)');
 
 /**
 * Las siguientes líneas deben ser modificadas de acuerdo con los ejemplos:
@@ -191,7 +174,29 @@ $LDCurrencyAdmin='Administración de la moneda';
 $LD_ddpMMpyyyy='dd.mm.aaaa';
 $LD_yyyyhMMhdd='aaaa-mm-dd';
 $LD_MMsddsyyyy='mm/dd/aaaa';
+$LD_ddsMMsyyyy='dd/mm/aaaa';
 /* END */
+
+$LDNewDateFormatSaved='El nuevo formato de fecha se encuentra habilitado.';
+									
+$LDSetCurrency='Fijar el tipo de moneda';
+$LDNewCurrencySet='El nuevo tipo de moneda se encuentra habilitado.';
+$LDPlsSelectCurrency='Por favor, seleccione el tipo de moneda.';
+$LDAddCurrency='Añada un nuevo tipo de moneda';
+$LDPlsAddCurrency='Por favor, ingrese la información acerca de este tipo de moneda. Luego, dé clic en "Guardar".';
+$LDAddedNewCurrency='La información acerca del nuevo tipo de moneda ha sido guardado.';
+$LDmain='principal';
+$LDClk2AddCurrency='Para ingresar un nuevo tipo de moneda, por favor, dé clic aquí.';
+$LDCurrencyShortName='Nombre corto o símbolo de la moneda:';
+$LDCurrencyLongName='Nombre descriptivo de la moneda:';
+$LDCurrencyInfo='Información adicional:';
+$LDClk2SetCurrency='Para fijar la moneda principal, por favor dé clic aquí.';
+$LDCurrencyUpdated='La información de la moneda ha sido actualizada.';
+$LDUpdateCurrencyInfo='Edite la información de la moneda';
+$LDPlsEnterUpdate='Por favor, edite la información de la moneda. Luego dé clic en "Actualizar".';
+
+$LDEditInfo='Editar';
+$LDCurrencyAdmin='Administración de la moneda';
 /* 2002-10-22 EL */
 $LDUserInfoSaved='El acceso para el usuario fue creado exitosamente';
 $LDUserInfoNoSave='La creación de acceso falló.  Por favor, revise la información que ingresó';

@@ -445,7 +445,7 @@ $LDAlertNoNegativeOrder='El valor negativo al momento no está permitido';
 $LDYellowList='Listado amarillo';
 
 $LDYellowListTxt='Índice de productos farmacéuticos en Alemania (requiere conexión al internet)';
-$LDClickSelectDept='Please click this to select a department.';
+$LDClickSelectDept='Por favor, dé clic aquí para seleccionar un Departamento';
 
 ?>
 

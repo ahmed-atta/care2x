@@ -200,7 +200,7 @@ $LDDisplay2Txt='Switch over to the display with the menu in a floating frame. ';
 
 $LDNewPwDiffer='The new passwords differ from each other.<br> Please enter the new password again.';
 /* 2003-03-22 EL*/
-$LDPersonellMngmnt='Personnel Management';
+$LDPersonellMngmnt='Personnel Manager';
 $LDPersonellMngmntTxt='Tools and functions for managing personnel';
 /* 2003-04-25 EL */
 $LDBilling='eCombill';

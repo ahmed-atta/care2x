@@ -42,5 +42,7 @@ $LDSpanish='Spanisch';
 $LDDutch='Holländisch';
 # 2003-08-04 EL
 $LDPerson='Person';
+# 2003-09-05 EL
+$LDUser='User';
 
 ?>

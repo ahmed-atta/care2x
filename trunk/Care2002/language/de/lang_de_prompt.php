@@ -69,5 +69,19 @@ $LDIsCorrect='Is that correct?';
 $LDProceedSave='Do you want to proceed save?';
 #2003-08-28 EL
 $LDPlsSelectWard='Bitte wählen Sie eine Station aus.';
+# 2003-09-20 EL
+$LDPlsEnterTherapy='Bitte geben Sie die Therapie ein.';
+$LDPlsMedicalAdvice='Bitte bestätigen Sie ob der Patient aufgeklärt ist.';
+# 2003-09-23 EL
+$LDPlsEnterJobFunction='Bitte geben Sie die Jobbezeichnung ein.';
+#2003-04-10 EL
+$LDPlsFillInfo='Bitte geben Sie Daten in die rot markierte Felder ein.';
+$LDPlsEnterLocalization='Bitte geben Sie die Lokalisation ein.';
+$LDPlsEnterNotes='Bitte geben Sie die Besonderheiten ein.';
+$LDPlsEnterClassification='Bitte geben Sie die Klassifikation ein.';
+$LDPlsEnterStartTime='Bitte geben Sie die Anfangszeit ein.';
+$LDPlsEnterEndTime='Bitte geben Sie die Endezeit ein.';
+$LDPlsEnterScrubNurse='Bitte geben Sie die instrumentierende Schwester ein.';
+$LDPlsEnterORNr='Bitte geben Sie die OP Saal Nummer ein.';
 
 ?>

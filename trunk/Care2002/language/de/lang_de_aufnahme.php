@@ -367,4 +367,11 @@ $LDPlsEnterRefererNotes='Bitte geben Sie die Überweisungsangabe ein.';
 $LDPlsSelectAdmissionType='Bitte wählen Sie die Aufnahmeart aus.';
 $LDForInpatient='Für stationäre Aufnahme';
 $LDForOutpatient='Für ambulante Aufnahme';
+#2003-09-18 EL
+$LDPersonSearch='Eine Person suchen';
+#2003-09-24 EL
+$LDShowing='Zeige';
+$LDPrevious='Vorher';
+$LDNext='Nächste';
+$LDAdvancedSearch='Fortgeschrittene Suche';
 ?>

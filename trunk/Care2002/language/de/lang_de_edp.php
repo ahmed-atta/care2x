@@ -130,12 +130,35 @@ $LDForeWord='Sie haben jetzt die oberste Zugangsberechtigung. <br>Folgende Funkt
 $LDSetDateFormat='Datumsformat einstellen';
 $LDSelectDateFormat='Bitte wählen Sie das gewünschte Format aus:';
 
-/* Do not translate $LDDateFormats */
-$LDDateFormats=array('dd.MM.yyyy','yyyy-MM-dd','MM/dd/yyyy');
+# Date formats
+# Add additional date formats as array element.
+# Do not forget to add the correspondign sample text in the $LDDateFormatsTxt array.
+# Do not translate $LDDateFormats 
+$LDDateFormats=array('dd.MM.yyyy','yyyy-MM-dd','MM/dd/yyyy','dd/MM/yyyy');
 
 $LDDateFormatsTxt= array('Zum Beispiel: 01.10.2002 (01 Oktober 2002)',
                                          'Zum Beispiel: 2002-10-01 (2002 Oktober 01)',
-										 'Zum Beispiel: 10/01/2002 (Oktober 01, 2002)');
+										 'Zum Beispiel: 10/01/2002 (Oktober 01, 2002)',
+										 'Zum Beispiel: 01/10/2002 (01 Oktober, 2002)');
+
+/**
+* The following lines must be modified according to the examples:
+* english:
+* day = d , month = m, year = y
+* result => dd.mm.yyyy
+*
+* german:
+* day = t, month = m, year = j
+* result => tt.mm.jjjj
+*
+* indonesian:
+* day = h, month = b, year = t
+* result => hh.bb.tttt
+*/
+$LD_ddpMMpyyyy='TT.MM.JJJJ';
+$LD_yyyyhMMhdd='JJJJ-MM-TT';
+$LD_MMsddsyyyy='MM/TT/JJJJ';
+$LD_ddsMMsyyyy='TT/MM/JJJJ';
 										 
 $LDNewDateFormatSaved='Das neue Datumsformat wurde übernommen.';
 

@@ -17,7 +17,7 @@ $LDNursingStations='Nursing wards';
 $LDQuickViewTxt='Quick view of today\'s occupancy of the nursing wards.';
 $LDSearchPatientTxt='Search the wards for an admitted patient.';
 $LDArchiveTxt='Research in the wards\' archived files.';
-$LDStationManTxt='Create a ward, initialize parameters like number of beds, personell, etc.';
+$LDStationManTxt='Create a ward, initialize parameters like number of beds, personnel, etc.';
 $LDNewsTxt='Read, compose, or edit a news article.';
 $LDMemoTxt='Read, compose, or edit a memo.';
 $LDNursingForumTxt='Discussions forum about nursing.';
@@ -189,7 +189,7 @@ $LDRegularRelease='Regular discharge';
 $LDSelfRelease='Patient left hospital on his own will';
 $LDEmRelease='Emergency discharge';
 $LDAlertNoName='Please enter your name.';
-$LDAlertNoDate='Enter the date in the ff: format: dd.mm.YYYY.';
+$LDAlertNoDate='Enter the date in this format:';
 $LDAlertNoTime='Enter the time in the ff: format: HH.mm.';
 $LDPatDataFolder='Patient\'s charts folder';
 
@@ -400,4 +400,7 @@ $LDOwnPatient='Own\'s patient';
 $LDNonOwnPatient='Non-own\'s patient';
 # 2003-08-04 EL
 $LDShowClinicOnly='This clinic only';
+# 2003-09-16 EL
+$LDAdmissionData='Admission data';
+$LDShowPhoto='Show photo';
 ?>

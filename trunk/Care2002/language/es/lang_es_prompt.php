@@ -109,24 +109,38 @@ $LDCachedInfo='Esta información proviene del caché y podría no ser actual!';
 $LDClkNoCache='Dé clic >>aquí<< para obtener la información fuera del caché.';
 
 # 2003-08-25 EL
-$LDPlsEnterReport='Please enter your report or notes';
-$LDPlsEnterDosage='Please enter the dosage';
-$LDPlsEnterMedicine='Please enter the name of medicine';
-$LDPlsEnterMedType='Please enter the type of medicine';
-$LDPlsSelectAppType='Please select the type of application';
-$LDPlsSelectPrescType='Please select the type of prescription';
-$LDPlsEnterValue='Please enter a value';
-$LDPlsSelectUnitMsr='Please select unit of measure';
+$LDPlsEnterReport='Por favor, ingrese su reporte o apuntes';
+$LDPlsEnterDosage='Por favor, ingrese la dosis';
+$LDPlsEnterMedicine='Por favor, ingrese el nombre del medicamento';
+$LDPlsEnterMedType='Por favor, ingrese el tipo de medicamento';
+$LDPlsSelectAppType='Por favor, seleccione el tipo de aplicación';
+$LDPlsSelectPrescType='Por favor, seleccione el tipo de receta';
+$LDPlsEnterValue='Por favor, ingrese un valor';
+$LDPlsSelectUnitMsr='Por favor, seleccione una unidad de medida';
 
 # 2003-08-26 EL
-$LDEntryInvalidChar='An entry has an invalid value!';
-$LDNotNegValue='Negative value is not allowed!';
-$LDOptional='Optional';
-$LDSaveAnyway='Do you really want to save data anyway';
+$LDEntryInvalidChar='¡Uno de los datos se escribió incorrectamente!';
+$LDNotNegValue='¡No se permiten valores negativos!';
+$LDOptional='Opcional';
+$LDSaveAnyway='De todos modos, ¿desea conservar estos datos?';
 #2003-08-27 EL
-$LDDeathDateIs='The entered date of death is';
-$LDIsCorrect='Is that correct?';
-$LDProceedSave='Do you want to proceed save?';
+$LDDeathDateIs='La fecha de defunción es';
+$LDIsCorrect='¿Está eso correcto?';
+$LDProceedSave='¿Desea guardar?';
 #2003-08-28 EL
-$LDPlsSelectWard='Please select a ward or station';
+$LDPlsSelectWard='Por favor, seleccione un pabellón o estación';
+# 2003-09-20 EL
+$LDPlsEnterTherapy='Please enter the therapy.';
+$LDPlsMedicalAdvice='Please specify whether the patient got medical advice or not.';
+# 2003-09-23 EL
+$LDPlsEnterJobFunction='Please enter the job function.';
+#2003-04-10 EL
+$LDPlsFillInfo='Please fill in the fields marked red';
+$LDPlsEnterLocalization='Please enter the localization';
+$LDPlsEnterNotes='Please enter notes';
+$LDPlsEnterClassification='Please enter the classifications';
+$LDPlsEnterStartTime='Please enter start time';
+$LDPlsEnterEndTime='Please enter end time';
+$LDPlsEnterScrubNurse='Please enter scrub nurse info';
+$LDPlsEnterORNr='Please enter the OR ID or number';
 ?>

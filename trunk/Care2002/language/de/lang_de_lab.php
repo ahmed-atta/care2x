@@ -71,9 +71,9 @@ $LDAlertTestDate='Bitte geben Sie das Untersuchungsdatum ein!';
 /* 2002-09-01 EL */
 $LDTestRequest='Anforderung';
 $LDFillUpSend='Anforderung ';
-$LDTestRequestPathoTxt=$LDFillUpSend.' einer pathologishen/histologischen Untersuchung';
+$LDTestRequestPathoTxt=$LDFillUpSend.' einer pathologischen/histologischen Untersuchung';
 $LDTestRequestBacterioTxt=$LDFillUpSend.' einer bakteriologischen Untersuchung';
-$LDTestRequestChemLabTxt=$LDFillUpSend.'von Bluttests bzw  chemischen Untersuchung';
+$LDTestRequestChemLabTxt=$LDFillUpSend.'von Bluttests bzw.  chemischen Untersuchung';
 $LDBloodBank='Blutzentrale';
 $LDBloodRequest='Blutkonserven';
 $LDBloodRequestTxt=$LDFillUpSend.'Blutkonserven bzw. -präparaten';

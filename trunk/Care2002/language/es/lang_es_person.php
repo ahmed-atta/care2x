@@ -14,4 +14,7 @@ $LDPlsEnterDateBirth='Please enter the date of birth';
 $LDPlsSelectSex='Please select the sex';
 $LDPlsEnterStreetName='Please enter the street name';
 $LDPlsEnterBldgNr='Please enter the house or building number';
+#2003-10-03 EL
+$LDPlsEnterZip='Please enter the zip code';
+$LDPlsEnterFullName='Please enter your full name';
 ?>

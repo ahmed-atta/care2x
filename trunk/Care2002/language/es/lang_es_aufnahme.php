@@ -259,7 +259,7 @@ $LDNoRecordFor='Aún no existen registros ~obj~ para ~tag~.';
 $LDRegistrationNr='Número de registro.';
 $LDDate='Fecha';
 $LDType='Tipo';
-$LDMedicine='Medicina';
+$LDMedicine='Medicamento';
 $LDTiter='Titulación';
 $LDRefreshDate='Actualizar la fecha';
 $LDReportingDept='Departamento de reportes';
@@ -272,7 +272,7 @@ $LDNrOfFetus='Número de fetos';
 $LDDetails='Detalles';
 /* 2003-03-02 */
 $LDDosage='Dosis';
-$LDAppType='Tipo de aplicación';
+$LDAppType='Forma de administración';
 $LDAppBy='Aplicación por';
 $LDNotes='Apuntes';
 $LDEnterNewRecord='Ingrese un nuevo registro';
@@ -353,25 +353,48 @@ $LDChartsRecords='Carpeta de tablas gráficas';
 $LDMode='Mode';
 $LDPatientIsDischarged='¡Este paciente ya recibió el alta!';
 $LDShow='Mostrar';
-$LDPlannedEncType='Tipo de adminisión planificada';
+$LDPlannedEncType='Tipo de admisión planificada';
 # 2003-08-01 EL
 $LDListEncounters='Lista de admisiones';
 $LDDischarged='El paciente recibió el alta';
 $LDDischargeDate='Fecha del alta';
 # 2003-08-04 EL
-$LDCancelThisAdmission='Cancelar esta admisión';
-$LDInsShortID[1]='PRIV';  # privately paid insurance
-$LDInsShortID[2]='COM'; # Common state sponsored insurance
-$LDInsShortID[3]='SP';    # self pay, direct pay
+$LDCancelThisAdmission='Cancelar este ingreso';
+$LDInsShortID[1]='PRIV';  # seguro privado
+$LDInsShortID[2]='COM'; # seguro social
+$LDInsShortID[3]='SP';    # los gastos serán asumidos por el paciente
 # 2003-08-26 EL
-$LDMeasurements='Measurements';
+$LDMeasurements='Mediciones';
 #2003-08-28 eL
-$LDPlsEnterReferer='Please enter refering physician';
-$LDPlsEnterRefererDiagnosis='Please enter referal diagnosis';
-$LDPlsEnterRefererTherapy='Please enter referer\'s recommended therapy';
-$LDPlsEnterRefererNotes='Please enter referer\'s notes';
-$LDPlsSelectAdmissionType='Please select admission type';
-$LDForInpatient='For inpatient';
-$LDForOutpatient='For outpatient';
+$LDPlsEnterReferer='Por favor, ingrese el médico que lo refirió';
+$LDPlsEnterRefererDiagnosis='Por favor, ingrese el diagnóstico de referencia';
+$LDPlsEnterRefererTherapy='Por favor, ingrese la terapia recomendada por el médico que lo refirió';
+$LDPlsEnterRefererNotes='Por favor, ingrese los apuntes de quien lo refirió';
+$LDPlsSelectAdmissionType='Por favor, seleccione el tipo de admisión';
+$LDForInpatient='Para pacientes hospitalizados';
+$LDForOutpatient='Para pacientes no hospitalizados';
+
+# 2003-10-14 NDHC
+$LDITA='Anestesia intratraqueal';
+$LDLA='Anestesia aplicada localmente';
+$LDAS='Sedación analgésica';
+$LDOral='Vía oral';
+$LDAnticoagulant='Anticoagulante';
+$LDHemolytic='Hemolítico';
+$LDDiuretic='Diurético';
+$LDAntibiotic='Antibiótico';
+$LDMask='Mascarilla';
+$LDIntravenous='Intravenoso';
+$LDSubcutaneous='Subcutáneo';
+$LDPreAdmission='PreIngreso';
+
+#2003-09-18 EL
+$LDPersonSearch='Search a person';
+#2003-09-24 EL
+$LDShowing='Showing';
+$LDPrevious='Previous';
+$LDNext='Next';
+$LDAdvancedSearch='Advanced search';
+
 
 ?>

@@ -21,4 +21,6 @@ $LDWeek='Woche';
 $LDNoon='Nachmittag';
 $LDEvening='Abend';
 $LDNight='Nacht';
+
+
 ?>
