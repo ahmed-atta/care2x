@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@latorilla.com
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -29,7 +29,7 @@ $HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
 /* Load the date formatter */
 include_once($root_path.'include/inc_date_format_functions.php');
 
-$sql='SELECT * FROM care_users';
+$sql='SELECT * FROM care_users ORDER BY login_id';
 
 if($ergebnis=$db->Execute($sql)) {
 

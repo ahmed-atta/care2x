@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -21,7 +21,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 	 else $dept='plop';//default is plop dept
 }*/
 
-$thisfile='products-bestellkorb.php';
+$thisfile=basename(__FILE__);
 
 if($cat=='pharma'){
  	$dbtable='care_pharma_orderlist';
@@ -31,7 +31,9 @@ if($cat=='pharma'){
 	$title=$LDMedDepot;
 }
  
-$encbuf=$HTTP_COOKIE_VARS[$local_user.$sid];
+$encbuf=$HTTP_SESSION_VARS['sess_user_name'];
+
+//$db->debug=1;
 
 // define the content array
 $rows=0;
@@ -47,11 +49,9 @@ require_once($root_path.'include/care_api_classes/class_product.php');
 $product_obj=new Product;
 
 if($mode!=''){
-	if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-		if($dblink_ok)
-		{		$sql='SELECT * FROM '.$dbtable.' 
-							WHERE order_nr="'.$order_nr.'"
-							AND dept_nr="'.$dept_nr.'"';
+			$sql="SELECT * FROM $dbtable
+							WHERE order_nr='$order_nr'
+							AND dept_nr='$dept_nr'";
 							
         	if($ergebnis=$db->Execute($sql))
 			{
@@ -78,21 +78,21 @@ if($mode!=''){
 			    $trash=array_splice($artikeln,$idx-1,1);
 			    $content['articles']=implode(' ',$artikeln);
 			
-			    $sql='UPDATE '.$dbtable.' SET 
-							 		order_date="'.$content['order_date'].'",
-							  		articles="'.$content['articles'].'",
-									extra1="'.$content['extra1'].'",
-									extra2="'.$content['extra2'].'",
-									validator="'.$content['validator'].'",
-									order_time="'.$content['order_time'].'",
-									sent_datetime="'.$content['sent_datetime'].'",
-									ip_addr="'.$content['ip_addr'].'",
-									priority="'.$content['priority'].'",
-									modify_id="'.$HTTP_COOKIE_VARS[$local_user.$sid].'"
-							   		WHERE order_nr="'.$content['order_nr'].'"
-									AND dept_nr="'.$dept_nr.'"';
+			    $sql="UPDATE $dbtable SET
+							 		order_date='".$content['order_date']."',
+							  		articles='".$content['articles']."',
+									extra1='".$content['extra1']."',
+									extra2='".$content['extra2']."',
+									validator='".$content['validator']."',
+									order_time='".$content['order_time']."',
+									sent_datetime='".$content['sent_datetime']."',
+									ip_addr='".$content['ip_addr']."',
+									priority='".$content['priority']."',
+									modify_id= '".$HTTP_COOKIE_VARS[$local_user.$sid]."'
+							   		WHERE order_nr='".$content['order_nr']."'
+									AND dept_nr='$dept_nr'";
 									
-			     if(!$ergebnis=$db->Execute($sql)) { echo "$sql<br>$LDDbNoSave<br>"; } 
+			     if(!$ergebnis=$product_obj->Transact($sql)) { echo "$sql<br>$LDDbNoSave<br>"; }
 		  	}	
 		}
 
@@ -112,7 +112,7 @@ if($mode!=''){
 					if(!$$o) continue;
 					$b='bestellnum'.$i; 
 					// get the needed info from the main pharma db
-					$sql='SELECT artikelname, minorder, maxorder, proorder FROM '.$dbtable.' WHERE bestellnum="'.$$b.'"';
+					$sql="SELECT artikelname, minorder, maxorder, proorder FROM $dbtable WHERE bestellnum='".$$b."'";
         			if($ergeb=$db->Execute($sql))
 					{
 						$result=$ergeb->FetchRow();
@@ -151,24 +151,22 @@ if($mode!=''){
 			if($rows)
 			{
 
-			    $sql='UPDATE '.$dbtable.' SET articles="'.$tart.'", 	
-				                                            modify_id="'.$encbuf.'"
-							   		                        WHERE order_nr="'.$content['order_nr'].'" AND dept_nr="'.$dept_nr.'"';            
+			    $sql="UPDATE $dbtable SET articles='$tart',  modify_id='$encbuf'
+							   		                        WHERE order_nr='".$content['order_nr']."' AND dept_nr='$dept_nr'";
 			}
 			else 
 			{
-				$sql="INSERT INTO ".$dbtable." 
-						(	
+				$sql="INSERT INTO $dbtable
+						(
 							dept_nr,
 							order_date,
 							articles,
 							order_time,
 							ip_addr,
 							status,
-							modify_id,
 							create_id,
 							create_time
-							) 
+							)
 						VALUES (
 							'$dept_nr',
 							'".date('Y-m-d')."',
@@ -177,40 +175,34 @@ if($mode!=''){
 							'".$REMOTE_ADDR."',
 							'draft',
 							'".$encbuf."',
-							'".$encbuf."',
-							NULL
+							".date('YmdHis')."
 							)";
 			}
-        		if($ergebnis=$db->Execute($sql))
+        		if($ergebnis=$product_obj->Transact($sql))
 				{
 				    // echo $sql;
-					if(!$rows) $order_nr=mysql_insert_id($link); // if the last action was insert get the last id
-				
+					if(!$rows){
+						$oid=$db->Insert_ID(); // if the last action was insert get the last id
+						$product_obj->coretable=$dbtable;
+						$order_nr=$product_obj->LastInsertPK('order_nr',$oid);
+						//echo $order_nr;
+					}
 				   /**
 				   * The following routine will increase the "hit" count of a product and update it in the catalog list
 				   */
-				    if($cat=='pharma') $cat_table='care_pharma_ordercatalog';
-			          else $cat_table='care_med_ordercatalog';
+					if($cat=='pharma') $cat_table='care_pharma_ordercatalog';
+						else $cat_table='care_med_ordercatalog';
 					for($i=1;$i<=$maxcount;$i++)
-			       {
-					 $b='bestellnum'.$i; 
-				    	// get the needed info from the main pharma db
-					 $sql='SELECT hit FROM '.$cat_table.' WHERE bestellnum="'.$$b.'" AND dept_nr=\''.$dept_nr.'\'';
-        			 if($ergeb=$db->Execute($sql))
-					 {
-					 	$resulthit=$ergeb->FetchRow();
-					    $sql='UPDATE '.$cat_table.' SET hit='.($resulthit['hit']+1).' WHERE bestellnum="'.$$b.'" AND dept_nr=\''.$dept_nr.'\'';
-        			    $db->Execute($sql);
-					 }
-					 /* end of routine */
-                   }
+					{
+						$b='bestellnum'.$i;
+ 						$sql="UPDATE $cat_table SET hit= hit +1  WHERE bestellnum='".$$b."' AND dept_nr='$dept_nr'";
+						$product_obj->Transact($sql);
+					}
 					$saveok=true;
 				}
-				else { echo "$sql<br>$LDDbNoSave<br>"; } 
+				else { echo "$sql<br>$LDDbNoSave<br>"; }
 		}// end of if ($mode=="add")
 //++++++++++++++++++++++++++++++++++++++++
-	}
-  	 else { echo "$LDDbNoLink<br>"; } 
 }
 
 // echo $sql;
@@ -219,14 +211,14 @@ $rows=0;
 $wassent=false;
 
 
-$sql='SELECT * FROM '.$dbtable.' WHERE order_nr="'.$order_nr.'"	AND dept_nr="'.$dept_nr.'"';
+$sql="SELECT * FROM $dbtable WHERE order_nr='$order_nr' AND dept_nr='$dept_nr'";
 
 if($ergebnis=$db->Execute($sql)){
 	//reset result
 	if ($rows=$ergebnis->RecordCount())	{
 		// check status again to be sure that the list is not sent by somebody else
 	   $content=$ergebnis->FetchRow();
-		if(($content['sent_datetime']>0)||($content['validator']!='')){
+		if(($content['sent_datetime']>DBF_NODATETIME)||($content['validator']!='')){
 			$wassent=true;
 			 $rows=0;
 		} // if sent_stamp or validator filled then reject this data
@@ -265,8 +257,8 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <?php 
 switch($mode)
 {
-	case "add":echo ' onLoad="location.replace(\'#bottom\')"   '; break;
-	case "delete":echo ' onLoad="location.replace(\'#'.($idx-1).'\')"   '; break;
+	case "add"://echo ' onLoad="location.replace(\'#bottom\')"   '; break;
+	case "delete"://echo ' onLoad="location.replace(\'#'.($idx-1).'\')"   '; break;
 }
 echo "bgcolor=".$cfg['body_bgcolor']; if (!$cfg['dhtml']){ echo ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
 <?php // foreach($argv as $v) echo "$v<br>"; ?>
@@ -339,9 +331,6 @@ for($n=0;$n<sizeof($artikeln);$n++)
    			</form>	';
 
 
-}elseif($wassent){
-	echo '
-			<script language="javascript">window.parent.location.replace(\'apotheke-bestellung.php?sid='.$sid.'&lang='.$lang.'&itwassent=1&userck='.$userck.'\')</script>';
 }else{
 	if($itwassent)
 	echo '
@@ -352,20 +341,7 @@ for($n=0;$n<sizeof($artikeln);$n++)
 // get all lists that are not sent
 
     $rows=0;
-    
-/*	$sql='SELECT * FROM '.$dbtable.' 
-						WHERE (sent_datetime="" OR sent_datetime="0000-00-00 00:00:00")
-						AND validator="" 
-						AND (status="draft" OR status="")
-						AND dept_nr="'.$dept_nr.'"
-						ORDER BY order_date ';
 
-					
-	if($ergebnis=$db->Execute($sql)){
-		$rows=$ergebnis->RecordCount();
-	}else{ echo "$LDDbNoRead<br>"; } 
-*/			
-	
 	$ergebnis=&$product_obj->OrderDrafts($dept_nr,$cat);
 	$rows=$product_obj->LastRecordCount();
 

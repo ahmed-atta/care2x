@@ -3,16 +3,21 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
 define('LANG_FILE','or.php');
 $local_user='ck_op_pflegelogbuch_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
+
+require_once($root_path.'include/care_api_classes/class_core.php');
+$core = & new Core;
+
+//$db->debug=1;
 
 $parsedstr=array();
 $globdata="sid=$sid&lang=$lang&op_nr=$op_nr&dept_nr=$dept_nr&saal=$saal&enc_nr=$enc_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear";
@@ -21,10 +26,6 @@ $material_nr=strtr($material_nr,"§%&?/\+*~#';:,!$","                ");// conver
 $material_nr=trim($material_nr);
 //$material_nr=str_replace(" ","",$material_nr);
 
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok)
-	{	
 	  	$dbtable='care_encounter_op';
 		$sql="SELECT material_codedlist FROM $dbtable 
 					WHERE dept_nr='$dept_nr'
@@ -66,12 +67,12 @@ if($dblink_ok)
 				{ 
 					if(strlen($material_nr)>3) $material_nr="%".$material_nr;
 		 			$sql="SELECT bestellnum,artikelnum,artikelname,industrynum,generic,description FROM $dbtable 
-							WHERE artikelnum LIKE '$material_nr%'
-							OR bestellnum  LIKE '$material_nr%'
-							OR artikelname  LIKE '$material_nr%'
-							OR generic  LIKE '$material_nr%'
-							OR description  LIKE '$material_nr%'
-							OR industrynum  LIKE '$material_nr%'
+							WHERE artikelnum $sql_LIKE '$material_nr%'
+							OR bestellnum  $sql_LIKE '$material_nr%'
+							OR artikelname  $sql_LIKE '$material_nr%'
+							OR generic  $sql_LIKE '$material_nr%'
+							OR description  $sql_LIKE '$material_nr%'
+							OR industrynum  $sql_LIKE '$material_nr%'
 							";
 					$nonumeric=1;
 				}
@@ -83,8 +84,9 @@ if($dblink_ok)
 				if($ergebnis=$db->Execute($sql))
        			{
 					$art_avail=0;
-					while( $pdata=$ergebnis->FetchRow()) $art_avail++;
-					if($art_avail)	mysql_data_seek($ergebnis,0); //reset the variable
+					//while( $pdata=$ergebnis->FetchRow()) $art_avail++;
+					//if($art_avail)	$ergebnis->Move(); //reset the variable
+					$art_avail = $ergebnis->RecordCount();
 						//$datafound=1;
 					if(($art_avail==1)&&(!$nonumeric))
 					{
@@ -100,7 +102,7 @@ if($dblink_ok)
 								if((int)$parsedstr[b]==$material_nr)
 								{
 									 $parsedstr[c]=$parsedstr[c]+1;
-									 $matbuf[$i]="b=$parsedstr[b]&a=$parsedstr[a]&n=$parsedstr[n]&g=$parsedstr[g]&i=$parsedstr[i]&c=$parsedstr[c]\r\n";
+									 $matbuf[$i]="b=$parsedstr[b]&a=".$parsedstr['a']."&n=$parsedstr[n]&g=$parsedstr[g]&i=$parsedstr[i]&c=$parsedstr[c]\r\n";
 									 $item_idx=$i;
 									 //echo $i."found ".$matbuf[$i]."<br>";
 									 $listchg=1;
@@ -131,10 +133,9 @@ if($dblink_ok)
 								AND encounter_nr='$enc_nr'";
 						
 						//echo $sql;
-						
-						if($mat_result=$db->Execute($sql))
+
+						if($mat_result=$core->Transact($sql))
 						{
-							
   							header("location:op-logbuch-material-list.php?$globdata&item_idx=$item_idx&chg=1");
 							exit;
 						}	else { echo "$LDDbNoSave<br>"; } 
@@ -145,23 +146,30 @@ if($dblink_ok)
 					//else echo "<p>".$sql."<p>Multiple entries found pls notify the edv."; 
 				}
 				else 
-				{ echo "$LDDbNoRead<br>"; } 
+				{
+					echo "$LDDbNoRead<br>";
+				}
 				
 				break;
 				
 		case "delete":
 			//echo "hello delete".$art_idx;
+
 			$matbuf=explode("~",$matlist[0]);
 			array_splice($matbuf,$art_idx,1);
 			$matlist[0]=implode("~",$matbuf);
-			$sql="UPDATE $dbtable SET material_codedlist='$matlist[0]'
+			$sql="UPDATE $dbtable SET 
+							material_codedlist='$matlist[0]',
+							history = ".$core->ConcatHistory("Material deleted ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
+							modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+							modify_time = '".date('YmdHis')."'
 								WHERE dept_nr='$dept_nr'
 								AND op_room='$saal'
 								AND op_nr='$op_nr'
 								AND op_src_date='$pyear$pmonth$pday'
 								AND encounter_nr='$enc_nr'";
 			//echo $sql;
-			if($mat_result=$db->Execute($sql))
+			if($mat_result=$core->Transact($sql))
 			{
 				
   				header("location:op-logbuch-material-list.php?$globdata");
@@ -178,12 +186,16 @@ if($dblink_ok)
 					$pcs="pcs".$i;
 					reset($parsedstr);
 					parse_str(trim($matbuf[$i]),$parsedstr);
-					$matbuf[$i]="b=$parsedstr[b]&a=$parsedstr[a]&n=$parsedstr[n]&g=$parsedstr[g]&i=$parsedstr[i]&c=".$$pcs."\r\n";
+					$matbuf[$i]="b=$parsedstr[b]&a=".$parsedstr['a']."&n=$parsedstr[n]&g=$parsedstr[g]&i=$parsedstr[i]&c=".$$pcs."\r\n";
 				}
 				
 			$matlist[0]=implode("~",$matbuf);
 			
-			$sql="UPDATE $dbtable SET material_codedlist='$matlist[0]'
+			$sql="UPDATE $dbtable SET
+							material_codedlist='$matlist[0]',
+							history = ".$core->ConcatHistory("Material updated ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
+							modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+							modify_time = '".date('YmdHis')."'
 								WHERE dept_nr='$dept_nr'
 								AND op_room='$saal'
 								AND op_nr='$op_nr'
@@ -191,7 +203,7 @@ if($dblink_ok)
 								AND encounter_nr='$enc_nr'";
 			//echo "update ".$sql;
 			
-			if($mat_result=$db->Execute($sql))
+			if($mat_result=$core->Transact($sql))
 			{
 				
   				header("location:op-logbuch-material-list.php?$globdata");
@@ -202,9 +214,6 @@ if($dblink_ok)
 			 
 			break;
 		} //end of switch($mode
-}
-  else { echo "$LDDbNoLink<br>"; } 
-
 
 ?>
 <?php html_rtl($lang); ?>
@@ -214,7 +223,7 @@ if($dblink_ok)
  <style type="text/css" name="s2">
 .v12{ font-family:verdana,arial; color:#000000; font-size:12;}
 .v12b{ font-family:verdana,arial; color:#cc0000; font-size:12;}
-.v12g{ font-family:verdana,arial; color:#9f9f9f; font-size:12;}
+.v12g{ font-family:verdana,arial; color:#9f9f9f; font-size:12; }
 </style>
 
 <script language="javascript">
@@ -291,7 +300,7 @@ if(empty($material_nr)||(($art_avail==1)&&(!$nonumeric))){
 		for($i=0;$i<$rows;$i++){
 			reset($parsedstr);
 			parse_str(trim($matbuf[$i]),$parsedstr);
-			if(strstr($parsedstr[a],"?")) $f_class="v12g"; else $f_class="v12";
+			if(strstr($parsedstr['a'],"?")) $f_class="v12g"; else $f_class="v12";
 			echo'
  			<tr ';
  			if (($chg)&&($i==$item_idx)) echo 'bgcolor="#00cccc"';
@@ -300,7 +309,7 @@ if(empty($material_nr)||(($art_avail==1)&&(!$nonumeric))){
     		<td class="'.$f_class.'">&nbsp;'.$parsedstr[n].'&nbsp;</td>
     		<td class="'.$f_class.'">&nbsp;';
 			if($f_class=="v12") echo '<a href="javascript:popinfo('.$parsedstr[b].')"><img '.createComIcon($root_path,'info3.gif','0').' alt="'.$LDDbInfo.'"></a>';
-				else echo '<a href="#"><img '.createComIcon($root_path,'info3-pale.gif','0').' alt="'.$LDArticleNoList.'"></a>';
+				else echo '<a href="#"><img '.createComIcon($root_path,'info3-pale.gif','0').' alt="'.$LDArticleNoList.'" title="'.$LDArticleNoList.'"></a>';
 			echo '
 			&nbsp;</td>
     		<td class="'.$f_class.'">&nbsp;'.$parsedstr[g].'&nbsp;</td>

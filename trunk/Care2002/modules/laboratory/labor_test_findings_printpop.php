@@ -3,14 +3,14 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-
+$lang_tables[] = 'departments.php';
 define('LANG_FILE','konsil.php');
 
 /* Globalize the variables */
@@ -41,33 +41,36 @@ switch($user_origin){
 //$local_user='ck_lab_user';
 
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
 $thisfile="labor_test_findings_".$subtarget.".php";
 
 switch ($subtarget)
 {
-    case "patho": $bgc1="#cde1ec"; break;
+    case "patho":
+		$bgc1="#cde1ec";
+		$formtitle = $LDPathology;
+		break;
 	
-	case 'radio':  $bgc1="#ffffff"; break;
+	case 'radio':
+		$bgc1="#ffffff";
+		$formtitle = $LDRadiology;
+		break;
 	
-	case "baclabor":  $bgc1='#fff3f3'; break;
+	case "baclabor":
+		$bgc1='#fff3f3';
+		$formtitle = $LDBacteriologicalLaboratory;
+		break;
 }
- 
-$abtname=get_meta_tags($root_path."global_conf/$lang/konsil_tag_dept.pid");
+
 $edit=0; /* Set to no edit */
 
 //$konsil="patho";
-$formtitle=$abtname[$subtarget];
+
 $db_request_table=$subtarget;
 
 						
 /* Here begins the real work */
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok)
-{	
-   
+
    require_once($root_path.'include/inc_date_format_functions.php');
    
 
@@ -157,11 +160,7 @@ if($dblink_ok)
 			 default:	$mode="";
 			 		 
 		  }// end of switch($mode)
-  
-    
-}
-else 
- { echo "$LDDbNoLink<br>$sql<br>"; }
+
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">

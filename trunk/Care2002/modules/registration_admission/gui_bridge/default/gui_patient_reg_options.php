@@ -34,7 +34,7 @@ function Spacer()
                 </TR>
 			   
 			<?php
-			}elseif(!$death_date||$death_date=='0000-00-00'){
+			}elseif(!$death_date||$death_date==$dbf_nodate){
 			?>
                <TR bgColor=#eeeeee> <td align=center><img <?php echo createComIcon($root_path,'post_discussion.gif','0') ?>></td>
                 <TD vAlign=top ><FONT 

@@ -1,12 +1,12 @@
 <?php
-//error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -17,8 +17,6 @@ define('NO_2LEVEL_CHK',1);
 
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-
-require_once($root_path.'include/inc_config_color.php');
 if(!session_is_registered('sess_path_referer')) session_register('sess_path_referer');
 
 $HTTP_SESSION_VARS['sess_user_origin']='dept';
@@ -30,31 +28,25 @@ $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 
 $HTTP_SESSION_VARS['sess_path_referer']=$top_dir.basename(__FILE__);
 
-if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
-if($dblink_ok) {
-
+//$db->debug=1;
     /* dept type = 1 = medical */
 
-    $sql='SELECT dept.nr, dept.name_formal, dept.LD_var,
+    $sql="SELECT dept.nr, dept.name_formal, dept.LD_var AS \"LD_var\",
 	                    dept.work_hours, dept.consult_hours, 
 						reg.news_start_script 
 						FROM care_department as dept LEFT JOIN care_registry AS reg ON dept.id=reg.registry_id 
-						WHERE type=1 AND is_inactive=0 ORDER BY sort_order';
-						
+						WHERE dept.type=1 AND dept.is_inactive IN ('',0) ORDER BY sort_order";
+
     //$sql='SELECT nr, name_formal, work_hours, consult_hours, url_news FROM care_department WHERE  is_inactive=0 ORDER BY sort_order';
 	
 	if ($result = $db->Execute($sql)) {
 	
 	    $rows = $result->RecordCount();
 	}
-}
-else {
-    echo "$LDDbNoLink<p>";
-}
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
+<HTML>
 <HEAD>
 <?php echo setCharSet(); ?>
  <TITLE><?php echo $LDPageTitle ?></TITLE>
@@ -62,7 +54,9 @@ else {
 <?php
 require($root_path.'include/inc_js_gethelp.php');
 require($root_path.'include/inc_css_a_hilitebu.php');
+
 ?>
+
 </HEAD>
 
 <BODY  topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
@@ -71,13 +65,13 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 
 <table width=100% border=0 cellspacing=0 cellpadding="0" height=100%>
 
-<tr valign=top height=45>
+<tr valign=top >
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" >
 <FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
 <STRONG>&nbsp; &nbsp;<?php echo $LDPageTitle ?></STRONG></FONT></td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
 <?php if($cfg['dhtml'])echo'<a href="#" onClick=history.back()><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a>';?>
-<a href="javascript:gethelp('departments.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td></tr>
+<a href="javascript:gethelp()"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td></tr>
 <tr valign=top >
 <td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2><p><br>
 <ul>
@@ -140,7 +134,7 @@ echo "\r\n";
 </tr>
 
 <tr valign=top>
-<td bgcolor="<?php echo $cfg['bot_bgcolor']; ?>" colspan=2> 
+<td bgcolor="<?php echo $cfg['bot_bgcolor']; ?>" colspan=2>
 <?php
 require($root_path.'include/inc_load_copyrite.php');
 ?></td>

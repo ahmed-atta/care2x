@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -22,7 +22,7 @@ require_once($root_path.'include/inc_diagnostics_report_fx.php');
 $breakfile='labor.php'.URL_APPEND;
 $returnfile='labor_test_request_admin_'.$subtarget.'.php'.URL_APPEND.'&target='.$target.'&subtarget='.$subtarget.'&user_origin='.$user_origin;
 
-$thisfile='labor_test_findings_'.$subtarget.'.php';
+$thisfile=basename(__FILE__);
 
 $bgc1='#cde1ec'; 
 $edit=1; /* Assume to edit first */
@@ -30,197 +30,177 @@ $edit=1; /* Assume to edit first */
 $formtitle=$LDPathology;
 $dept_nr=8; // 8 = department nr. of pathology
 
-$db_request_table=$subtarget;
+//$db_request_table=$subtarget;
+$db_request_table='patho';
 
-						
+//$db->debug=1;
+
+require_once($root_path.'include/care_api_classes/class_encounter.php');
+$enc_obj=new Encounter;
+
 /* Here begins the real work */
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok)
-{	
-   
-   include_once($root_path.'include/inc_date_format_functions.php');
-     /* Check for the patient number = $pn. If available get the patients data, otherwise set edit to 0 */
-     if(isset($pn)&&$pn)
-	 {		
-		include_once($root_path.'include/care_api_classes/class_encounter.php');
-		$enc_obj=new Encounter;
-	    if( $enc_obj->loadEncounterData($pn)) {
-		
-			include_once($root_path.'include/care_api_classes/class_globalconfig.php');
-			$GLOBAL_CONFIG=array();
-			$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
-			$glob_obj->getConfig('patient_%');	
-			switch ($enc_obj->EncounterClass())
-			{
-		    	case '1': $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
+
+require_once($root_path.'include/inc_date_format_functions.php');
+
+/* Check for the patient number = $pn. If available get the patients data, otherwise set edit to 0 */
+if(isset($pn)&&$pn){
+
+	if( $enc_obj->loadEncounterData($pn)) {
+
+		include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+		$GLOBAL_CONFIG=array();
+		$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
+		$glob_obj->getConfig('patient_%');
+		switch ($enc_obj->EncounterClass())
+		{
+	    	case '1': $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
 		                   break;
-				case '2': $full_en = ($pn + $GLOBAL_CONFIG['patient_outpatient_nr_adder']);
+			case '2': $full_en = ($pn + $GLOBAL_CONFIG['patient_outpatient_nr_adder']);
 							break;
-				default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-			}						
+			default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
+		}
 
-			$result=&$enc_obj->encounter;
+		$result=&$enc_obj->encounter;
 
-			$sql="SELECT * FROM care_test_request_".$subtarget." WHERE batch_nr='".$batch_nr."'";
-			if($ergebnis=$db->Execute($sql)){
-				if($editable_rows=$ergebnis->RecordCount()){
-					$stored_request=$ergebnis->FetchRow();
-					$edit_form=1;
-				}
-            }else{
-				echo "<p>$sql<p>$LDDbNoRead"; 
-			}	
-		}		
-     }
-	   
-	 if(!isset($mode) && $batch_nr && $pn)   $mode="edit";
-		
-		  switch($mode)
-		  {
-				     case 'save':
-							
-                                 $sql="INSERT INTO care_test_findings_".$db_request_table." 
+		$sql="SELECT * FROM care_test_request_".$subtarget." WHERE batch_nr='$batch_nr'";
+		if($ergebnis=$db->Execute($sql)){
+			if($editable_rows=$ergebnis->RecordCount()){
+				$stored_request=$ergebnis->FetchRow();
+				$edit_form=1;
+			}
+		}else{
+			echo "<p>$sql<p>$LDDbNoRead";
+		}
+	}
+}
+
+if(!isset($mode) && $batch_nr && $pn)   $mode="edit";
+
+switch($mode)
+{
+	case 'save':
+	{
+		$sql="INSERT INTO care_test_findings_".$db_request_table."
 								          (
-										   batch_nr, encounter_nr, dept_nr, 
-										   material, macro, 
+										   batch_nr, encounter_nr, dept_nr,
+										   material, macro,
 										   micro, findings, diagnosis,
-										   doctor_id, findings_date, findings_time, 
-										   status, history, modify_id,create_id, create_time) 
-										   VALUES 
+										   doctor_id, findings_date, findings_time,
+										   status, history, 
+										   create_id, create_time)
+										   VALUES
 										   (
-										   '".$batch_nr."','".$pn."','".$dept_nr."', 
+										   '".$batch_nr."','".$pn."','".$dept_nr."',
 										   '".addslashes(htmlspecialchars($material))."','".addslashes(htmlspecialchars($macro))."',
 										   '".addslashes(htmlspecialchars($micro))."','".addslashes(htmlspecialchars($findings))."','".addslashes(htmlspecialchars($diagnosis))."',
 										   '".addslashes($doctor_id)."', '".formatDate2Std($findings_date,$date_format)."', '".date('H:i:s')."',
 										   'initial', 'Create: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n',
-										   '".$HTTP_SESSION_VARS['sess_user_name']."', '".$HTTP_SESSION_VARS['sess_user_name']."', NULL
+											'".$HTTP_SESSION_VARS['sess_user_name']."', 
+											'".date('YmdHis')."'
 										   )";
 
+		if($ergebnis=$enc_obj->Transact($sql)){
 
-							      if($ergebnis=$db->Execute($sql))
-       							  {
-								     signalNewDiagnosticsReportEvent($findings_date);
-									//echo $sql;
-									 header("location:$thisfile".URL_REDIRECT_APPEND."&edit=$edit&saved=insert&mode=edit&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=$target&subtarget=$subtarget&noresize=$noresize&batch_nr=$batch_nr&entry_date=$entry_date");
-									 exit;
-								  }
-								  else 
-								  {
-								     echo "<p>$sql<p>$LDDbNoSave"; 
-									 $mode="";
-								  }
-								
-								break; // end of case 'save'
-								
-		     case 'update':
-			 
-							      $sql="UPDATE care_test_findings_".$db_request_table." SET 
-										   material='".addslashes(htmlspecialchars($material))."', macro='".addslashes(htmlspecialchars($macro))."', 
-										   micro='".addslashes(htmlspecialchars($micro))."', findings='".addslashes(htmlspecialchars($findings))."', 
+			signalNewDiagnosticsReportEvent($findings_date);
+			//echo $sql;
+			header("location:$thisfile".URL_REDIRECT_APPEND."&edit=$edit&saved=insert&mode=edit&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=$target&subtarget=$subtarget&noresize=$noresize&batch_nr=$batch_nr&entry_date=$entry_date");
+			exit;
+		} else {
+			echo "<p>$sql<p>$LDDbNoSave";
+			$mode="";
+		}
+		break; // end of case 'save'
+	}
+	
+	case 'update':
+	{
+		$sql="UPDATE care_test_findings_".$db_request_table." SET
+										   material='".addslashes(htmlspecialchars($material))."', macro='".addslashes(htmlspecialchars($macro))."',
+										   micro='".addslashes(htmlspecialchars($micro))."', findings='".addslashes(htmlspecialchars($findings))."',
 										   diagnosis='".addslashes(htmlspecialchars($diagnosis))."',
-										   doctor_id='".addslashes($doctor_id)."', findings_date='".formatDate2Std($findings_date,$date_format)."', 
-										   findings_time='".date('H:i:s')."', 
-										   history=CONCAT(history,'Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n'),
-										   modify_id = '".$HTTP_COOKIE_VARS[$local_user.$sid]."'
+										   doctor_id='".addslashes($doctor_id)."', findings_date='".formatDate2Std($findings_date,$date_format)."',
+										   findings_time='".date('H:i:s')."',
+										   history=".$enc_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
+										   modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+										   modify_time='".date('YmdHis')."'
 										   WHERE batch_nr = '".$batch_nr."'";
-										  							
-							      if($ergebnis=$db->Execute($sql))
-       							  {
-								     signalNewDiagnosticsReportEvent($findings_date);
-									//echo $sql;
-									
-									 header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=insert&mode=edit&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=$target&subtarget=$subtarget&noresize=$noresize&batch_nr=$batch_nr&entry_date=$entry_date");
-									 exit;
-								  }
-								  else
-								   {
-								      echo "<p>$sql<p>$LDDbNoSave"; 
-								      $mode="";
-								   }
-								
-								break; // end of case 'save'
-								
-		     case 'done':
-			 
-							      $sql="UPDATE care_test_findings_".$db_request_table." SET 
-										   status='done', 
-										   history=CONCAT(history,'Done: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n'),
-										   modify_id = '".$HTTP_COOKIE_VARS[$local_user.$sid]."'
+
+		if($ergebnis=$enc_obj->Transact($sql)) {
+			signalNewDiagnosticsReportEvent($findings_date);
+			//echo $sql;
+
+			header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=insert&mode=edit&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=$target&subtarget=$subtarget&noresize=$noresize&batch_nr=$batch_nr&entry_date=$entry_date");
+			exit;
+		}else{
+			echo "<p>$sql<p>$LDDbNoSave";
+			$mode="";
+		}
+		break; // end of case 'save'
+	}
+	
+	case 'done':
+	{
+		$sqlbuffer =" SET		status='done',
+										   history=".$enc_obj->ConcatHistory("Done: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
+										   modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+										   modify_time='".date('YmdHis')."'
 										   WHERE batch_nr = '".$batch_nr."'";
-										  							
-							      if($ergebnis=$db->Execute($sql))
-       							  {
-									//echo $sql;
-							          $sql="UPDATE care_test_request_".$db_request_table." SET 
-										   status='done', 
-										   history=CONCAT(history,'Done: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n'),
-										   modify_id = '".$HTTP_COOKIE_VARS[$local_user.$sid]."'
-										   WHERE batch_nr = '".$batch_nr."'";
-							          if($ergebnis=$db->Execute($sql))
-       							      {
-								  		// Load the visual signalling functions
-										include_once($root_path.'include/inc_visual_signalling_fx.php');
-										// Set the visual signal 
-										setEventSignalColor($pn,SIGNAL_COLOR_DIAGNOSTICS_REPORT);									
-									     
-									     header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=insert&mode=edit&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=$target&subtarget=$subtarget&noresize=$noresize&batch_nr=$batch_nr&entry_date=$entry_date");
-									     exit;
-								       }
-								       else
-								       {
-								          echo "<p>$sql<p>$LDDbNoSave"; 
-								          $mode="save";
-								        }								 
-									}
-								  else
-								   {
-								      echo "<p>$sql<p>$LDDbNoSave"; 
-								      $mode="save";
-								   }
-								
-								break; // end of case 'save'
-								
-								
-	        /* If mode is edit, get the stored test findings 
-			*/
-			case 'edit':
 
-			           $sql="SELECT * FROM care_test_findings_".$db_request_table." WHERE batch_nr='".$batch_nr."'";
-		                if($ergebnis=$db->Execute($sql))
-       		            {
-				            if($editable_rows=$ergebnis->RecordCount())
-					        {
-							
-     					       $stored_findings=$ergebnis->FetchRow();
-							   
-							   if($stored_findings['status']=="done") $edit=0; /* Inhibit editing of the findings */
-							   
-							   $edit_form=1;
+		# Update the findings record first
 
-					         }
-							 else
-							 {
-							    $mode="save";
-						     }
-			             }
-						 else
-						 {
-						    $mode="save";
-						  }
-						 
-						 break; ///* End of case 'edit': */
-						 
-			 default:	$mode="";
-			 
-		  }// end of switch($mode)
+		if($ergebnis=$enc_obj->Transact("UPDATE care_test_findings_".$db_request_table.$sqlbuffer)){
+			//echo $sql;
+			
+			# Then update the request record
 
-		  		  
-if($edit) $returnfile.='&batch_nr='.$batch_nr.'&pn='.$pn.'&tracker='.$tracker; 
-  
-}
-else 
- { echo "$LDDbNoLink<br>$sql<br>"; }
+			if($ergebnis=$enc_obj->Transact("UPDATE care_test_request_".$db_request_table.$sqlbuffer)){
+				// Load the visual signalling functions
+				include_once($root_path.'include/inc_visual_signalling_fx.php');
+				// Set the visual signal
+				setEventSignalColor($pn,SIGNAL_COLOR_DIAGNOSTICS_REPORT);
+
+				header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=insert&mode=edit&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=$target&subtarget=$subtarget&noresize=$noresize&batch_nr=$batch_nr&entry_date=$entry_date");
+				exit;
+			} else {
+				echo "<p>$sql<p>$LDDbNoSave";
+				$mode="save";
+			}
+		}else{
+			echo "<p>$sql<p>$LDDbNoSave";
+			$mode="save";
+		}
+		break; // end of case 'save'
+	}
+		/* If mode is edit, get the stored test findings
+		*/
+	case 'edit':
+	{
+		$sql="SELECT * FROM care_test_findings_".$db_request_table." WHERE batch_nr='$batch_nr'";
+		
+		if($ergebnis=$db->Execute($sql)){
+			if($editable_rows=$ergebnis->RecordCount()){
+
+				$stored_findings=$ergebnis->FetchRow();
+				
+				if($stored_findings['status']=="done") $edit=0; /* Inhibit editing of the findings */
+
+				$edit_form=1;
+
+			}else{
+				$mode="save";
+			}
+		}else{
+			$mode="save";
+		}
+		break; ///* End of case 'edit': */
+	}
+	
+	default:	$mode="";
+
+}// end of switch($mode)
+
+if($edit) $returnfile.='&batch_nr='.$batch_nr.'&pn='.$pn.'&tracker='.$tracker;
+
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">

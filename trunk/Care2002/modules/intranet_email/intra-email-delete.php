@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -28,6 +28,8 @@ if(!isset($delok)||!$delok) {
     header("location:intra-email.php".URL_REDIRECT_APPEND."&mode=listmail"); exit;}
 }
 
+//$db->debug=1;
+
 require_once($root_path.'include/inc_config_color.php'); // load color preferences
 //echo $del0;
 $thisfile=basename(__FILE__);
@@ -37,10 +39,7 @@ $dbtable='care_mail_private_users';
 $linecount=0;
 $modetypes=array('sendmail','listmail');
 
-/* Establish db connection */
-if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
-if($dblink_ok) {
-							$sql='SELECT '.$folder.', lastcheck FROM '.$dbtable.' WHERE  email="'.$HTTP_COOKIE_VARS[$local_user.$sid].'"';
+							$sql="SELECT $folder, lastcheck FROM $dbtable WHERE  email='".$HTTP_COOKIE_VARS[$local_user.$sid]."'";
 							if($ergebnis=$db->Execute($sql)) 
 							{			
 								if($ergebnis->RecordCount())
@@ -64,8 +63,8 @@ if($dblink_ok) {
 										}
 									}
 									$result[$folder]=implode("_",$inb);
-									$sql="UPDATE $dbtable SET $folder=\"".$result[$folder]."\", lastcheck=\"".$result['lastcheck']."\"  
-																		WHERE email=\"".$HTTP_COOKIE_VARS[$local_user.$sid]."\"";	
+									$sql="UPDATE $dbtable SET $folder='".$result[$folder]."', lastcheck='".$result['lastcheck']."'
+																		WHERE email='".$HTTP_COOKIE_VARS[$local_user.$sid]."'";
 
 								    $db->BeginTrans();
 								    $ok=$db->Execute($sql);
@@ -74,7 +73,7 @@ if($dblink_ok) {
 										// update the recyle folder 
 										if($folder!='trash')
 										{
-											$sql='SELECT trash, lastcheck FROM '.$dbtable.' WHERE  email="'.$HTTP_COOKIE_VARS[$local_user.$sid].'"';
+											$sql="SELECT trash, lastcheck FROM $dbtable WHERE  email='".$HTTP_COOKIE_VARS[$local_user.$sid]."'";
 											if($ergebnis=$db->Execute($sql)) 
 											{			
 												if($ergebnis->RecordCount())
@@ -90,8 +89,8 @@ if($dblink_ok) {
 														if($result['trash']=="") $result['trash']=$delbuf2."\r\n";
 														else $result['trash'].="_".$delbuf2."\r\n";
 													}
-													$sql="UPDATE $dbtable SET trash=\"".$result['trash']."\", lastcheck=\"".$result['lastcheck']."\"  
-																		WHERE email=\"".$HTTP_COOKIE_VARS[$local_user.$sid]."\"";	
+													$sql="UPDATE $dbtable SET trash='".$result['trash']."', lastcheck='".$result['lastcheck']."'
+																		WHERE email='".$HTTP_COOKIE_VARS[$local_user.$sid]."'";
   								                   $db->BeginTrans();
 								                   $ok=$db->Execute($sql);
 								                   if($ok) {
@@ -111,6 +110,4 @@ if($dblink_ok) {
 									} 
 								}
 				}else { echo "$LDDbNoRead<br>$sql"; } 
-	}
-  		else { echo "$LDDbNoLink<br>$sql"; } 
 ?>

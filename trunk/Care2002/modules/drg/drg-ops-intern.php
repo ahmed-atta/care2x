@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -20,6 +20,8 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_date_format_functions.php');
 require_once($root_path.'include/care_api_classes/class_drg.php');
 $enc_obj = new DRG($pn);
+
+//$db->debug=true;
 
 if(isset($mode)&&$mode=='save_group'&&isset($group_nr)&&$group_nr){
 	$enc_obj->groupNonGroupedItems($group_nr);
@@ -41,11 +43,14 @@ if(isset($mode)&&$mode=='delete'&&$item){
 $non_grouped=false;
 if(!isset($group_nr)) $group_nr=0;
 
-# Get the patient's basic data 
+# Get the patient`s basic data
 if($enc=&$enc_obj->getBasic4Data()){
+
 	$encounter=$enc->FetchRow();
+
 	# Get the internal drg groups for the encounter
 	$drg_rows=&$enc_obj->InternDRGGroups();
+
 	# Check for non grouped entries
 	if($enc_obj->nongroupedDiagnosisExists()){
 		$non_grouped=true; 
@@ -176,9 +181,9 @@ if(isset($is_discharged)&&$is_discharged){
 <?php
 }
 
-echo "$ln, $fn ".formatDate2Local($bd,$date_format)." - $pn";
+//echo "$ln, $fn ".formatDate2Local($bd,$date_format)." - $pn";
 //if($opnr) echo" - OP# $opnr"; 
-//echo $encounter['name_last'].", ".$encounter['name_first']." ".formatDate2Local($encounter['date_birth'],$date_format)." - $pn";
+echo $encounter['name_last'].", ".$encounter['name_first']." ".formatDate2Local($encounter['date_birth'],$date_format)." - $pn";
 if($opnr) echo" - OP# $opnr - $dept_nr OP $oprm"; 
 ?>
 <?php if($display!="composite") : ?>

@@ -11,7 +11,6 @@ require("../language/".$lang."/lang_".$lang."_or.php");
 define('LANG_FILE','or.php');
 $local_user='ck_op_pflegelogbuch_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
 $thisfile="op-pflege-graph-getwaittime.php";
 
@@ -29,15 +28,11 @@ switch($winid)
 
 $dbtable='care_encounter_op';
 
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok)
-	{	
-	// get orig data
+if($mode=='save'){
+	
+	require_once($root_path.'include/care_api_classes/class_core.php');
+	$core = & new Core;
 
-		if($mode=='save')
-		{
-					
 				// check if entry is already existing
 				$sql="SELECT nr,$element FROM $dbtable 
 						WHERE encounter_nr='$enc_nr' 
@@ -74,7 +69,7 @@ if($dblink_ok)
 											AND op_room='$saal'
 											AND op_nr='$op_nr'";
 */											
-							if($ergebnis=$db->Execute($sql))
+							if($ergebnis=$core->Transact($sql))
        							{
 									//echo $sql." new update <br>";
 									
@@ -88,10 +83,9 @@ if($dblink_ok)
 						}// end of if rows
 				}
 				else { echo "$LDDbNoRead<br>"; } 
-		 }// end of if(mode==save)
-		 else
-		 {
-		 	$sql="SELECT $element FROM $dbtable 
+}// end of if(mode==save)
+ else{
+		 	$sql="SELECT $element FROM $dbtable
 						WHERE encounter_nr='$enc_nr' 
 						AND dept_nr='$dept_nr' 
 						AND op_room='$saal' 
@@ -105,12 +99,10 @@ if($dblink_ok)
 					$result=$ergebnis->FetchRow();
 					//echo $sql."<br>file found!";
 				}
+			}else{
+				echo "$LDDbNoRead<br>";
 			}
-				else { echo "$LDDbNoRead<br>"; } 
-	 	}
 }
-  else { echo "$LDDbNoLink<br>"; } 
-
 
 ?>
 

@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -37,7 +37,7 @@ $entry_body_bgcolor='#ffffff';
 if(!isset($searchkey)) $searchkey='';
 if(!isset($mode)) $mode='';
 
-# Initialize page's control variables
+# Initialize page´s control variables
 if($mode=='paginate'){
 	$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
 }else{
@@ -50,7 +50,7 @@ if($mode=='paginate'){
 #Load and create paginator object
 require_once($root_path.'include/care_api_classes/class_paginator.php');
 $pagen=new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
-
+//$db->debug=true;
 if(($mode=='search'||$mode=='paginate')&&($searchkey))
 {
 	$searchkey=strtr($searchkey,'*?','%_');
@@ -75,7 +75,7 @@ if(($mode=='search'||$mode=='paginate')&&($searchkey))
 				$suchbuffer=$suchwort;
 			}
 			
-			$sql='SELECT enc.encounter_nr, 
+			$sql='SELECT enc.encounter_nr,
 								enc.encounter_class_nr, 
 								enc.is_discharged,
 								reg.pid,
@@ -85,20 +85,19 @@ if(($mode=='search'||$mode=='paginate')&&($searchkey))
 								reg.sex,
 								reg.death_date';
 			$dbtable ='
-			          FROM 	care_encounter as enc,
-					  			care_person as reg
+			          FROM 	care_encounter AS enc,
+					  			care_person AS reg
 					  WHERE  ';
 
-			if($numeric) $sql2.=' enc.encounter_nr LIKE "'.addslashes($suchbuffer).'"';
-				else $sql2.= '( reg.name_last LIKE "'.addslashes($suchwort).'%" 
-			              OR reg.name_first LIKE "'.addslashes($suchwort).'%")';
+			if($numeric) $sql2.=" enc.encounter_nr $sql_LIKE '".addslashes($suchbuffer)."'";
+				else $sql2.= "( reg.name_last $sql_LIKE '".addslashes($suchwort)."%'
+			              OR reg.name_first $sql_LIKE '".addslashes($suchwort)."%')";
 			
-			$sql2.='  AND enc.pid=reg.pid  
-					  AND enc.encounter_status<>"cancelled"
-					  AND NOT enc.is_discharged
-					  AND (enc.in_ward OR enc.in_dept)
-					  AND enc.status NOT IN ("void","hidden","deleted","inactive")
-			          ORDER BY ';
+			$sql2.="  AND enc.pid=reg.pid
+					  AND enc.encounter_status<>'cancelled'
+					  AND  enc.is_discharged IN ('',0)
+					  AND (enc.in_ward  NOT IN ('',0) OR enc.in_dept NOT IN ('',0))
+					  AND enc.status NOT IN ('void','hidden','deleted','inactive') ";
 /*			$sql2= '
 			          WHERE
 					  (
@@ -114,12 +113,12 @@ if(($mode=='search'||$mode=='paginate')&&($searchkey))
 					  AND enc.status NOT IN ("void","hidden","deleted","inactive")
 			          ORDER BY ';
 */					  
-		if($oitem=='encounter_nr') $sql2.="enc.$oitem $odir";	
-			else $sql2.="reg.$oitem $odir";	
+		if($oitem=='encounter_nr') $sql3 =" ORDER BY enc.$oitem $odir";
+			else $sql3=" ORDER BY reg.$oitem $odir";
 				
 		//echo $sql.$dbtable.$sql2;
 			  
-		if($ergebnis=$db->SelectLimit($sql.$dbtable.$sql2,$pagen->MaxCount(),$pagen->BlockStartIndex())){			
+		if($ergebnis=$db->SelectLimit($sql.$dbtable.$sql2.$sql3,$pagen->MaxCount(),$pagen->BlockStartIndex())){
 				
 				if ($linecount=$ergebnis->RecordCount())
 				{ 
@@ -138,12 +137,14 @@ if(($mode=='search'||$mode=='paginate')&&($searchkey))
 					}else{
 						# Count total available data
 						$sql='SELECT COUNT(enc.encounter_nr) AS maxnr '.$dbtable.$sql2;
+						//$sql='SELECT enc.encounter_nr '.$dbtable.$sql2;
 						//echo $sql;
 						if($result=$db->Execute($sql)){
 							if ($result->RecordCount()) {
 								$rescount=$result->FetchRow();
     								$totalcount=$rescount['maxnr'];
-    						}
+    							}
+							//$totalcount=$result->RecordCount();
 						}
 						$pagen->setTotalDataCount($totalcount);
 						//echo $totalcount;
@@ -282,9 +283,9 @@ if($mode=='search'||$mode=='paginate'){
                         echo "</td>";	
 						echo"<td><font face=arial size=2>";
 						echo "&nbsp;".ucfirst($zeile['name_first']);
-						
+
 						# If person is dead show a black cross
-						if($zeile['death_date']&&$zeile['death_date']!='0000-00-00') echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0','absmiddle').'>';
+						if($zeile['death_date']&&$zeile['death_date']!=$dbf_nodate) echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0','absmiddle').'>';
 						
 						
                         echo "</td>";	

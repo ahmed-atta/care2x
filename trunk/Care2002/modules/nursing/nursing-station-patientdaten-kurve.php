@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -21,6 +21,8 @@ require_once($root_path.'include/inc_editor_fx.php');
 /* Load the data time shifter and create object */
 require_once($root_path.'classes/datetimemanager/class.dateTimeManager.php');
 $dateshifter=new dateTimeManager();
+
+//$db->debug=true;
 
 $thisfile=basename(__FILE__);
 $breakfile="nursing-station-patientdaten.php".URL_APPEND."&station=$station&pn=$pn&edit=$edit";
@@ -111,13 +113,15 @@ $date_end=$dateshifter->shift_dates($date_start,-6,'d');
 			include_once($root_path.'include/care_api_classes/class_charts.php');
 			$charts_obj= new Charts;
 		
-			// get Allergy notes
+			// get Allergy notes  type = 22
 			$allergy=&$charts_obj->getChartNotes($pn,22);
-			// get Diagnosis notes
+			// get Diagnosis notes  type = 12
 			$diagnosis=&$charts_obj->getChartNotes($pn,12);
-			// get extra diagnosis notes
+			// get extra diagnosis notes   type = 14
 			$x_diagnosis=&$charts_obj->getChartNotes($pn,14);
-			// get additional notes
+            // get anticoag notes   type = 10
+            $anticoag_notes=&$charts_obj->getChartNotes($pn,10);
+			// get additional notes   type = 11
 			$lot_mat=&$charts_obj->getChartNotes($pn,11);
 			// get daily Diet plans
 			$diet=&$charts_obj->getChartDailyDietPlans($pn,$date_start,$date_end);
@@ -167,7 +171,7 @@ function getdata($info,$d,$m,$y,$short=0){
 			}
 		}
 		$info->MoveFirst();
-		return $content;
+		return trim($content);
 	}else{return false;}
 }
 
@@ -563,15 +567,29 @@ echo '
 		<tr   valign="top">';
 
 // ************** anticoag  ************************
+if(is_object($anticoag_notes)){
+   $reccount=$anticoag_notes->RecordCount();
+}else{
+   $reccount=FALSE;
+}
 echo '
 		<td bgcolor=';
-		if($content[anticoag]) echo 'aqua'; else echo "#ffffff";
-echo '  colspan="2">
-		<font size=1 face="verdana,arial">'.$LDAntiCoag;
-if($edit) echo '
-		<a href="javascript:popgetinfowin(\'anticoag\',\''.$pn.'\',\''.$jahr.'\',\''.$kmonat.'\',\''.$tag.'\',\''.$tag.'\',\''.$tagname.'\')"><img '.createComIcon($root_path,'clip2.gif','0').' alt="'.str_replace("~tagword~",$LDAntiCoag,$LDClk2Enter).'" ></a>';
-echo hilite(nl2br($content[anticoag])).'</td>';
-		
+		if($reccount) echo 'aqua colspan="2">'; else echo '#ffffff colspan="2">';
+echo ' <font size=1 face="verdana,arial">';
+if($edit){
+    echo '<font size=1 face="verdana,arial">
+         <a href="javascript:popgetinfowin(\'anticoag\',\''.$pn.'\',\''.$jahr.'\',\''.$kmonat.'\',\''.$tag.'\',\''.$tag.'\',\''.$tagname.'\')">'.$LDAntiCoag.'
+        <img '.createComIcon($root_path,'clip2.gif','0').' alt="'.str_replace("~tagword~",$LDAntiCoag,$LDClk2Enter).'" ></a>';
+}else{
+    echo $LDAntiCoag;
+}
+        if($reccount){
+            while($buff=$anticoag_notes->FetchRow()){
+                echo ' '.hilite($buff['notes']);
+            }
+        }
+echo '</font></td>';
+
 // ************** anticoag dailydose ************************
 $actmonat=$kmonat;
 $actjahr=$jahr;
@@ -581,12 +599,12 @@ for ($i=$tag,$acttag=$tag,$d=0;$i<($tag+7);$i++,$d++,$acttag++)
 	$r=&getdata($daily_anticoag,$i,$kmonat,$jahr,1);
 	echo '
 	<td ';
-	if($r) echo "bgcolor=aqua"; else echo "bgcolor=white";
+	if(!empty($r)) echo "bgcolor=aqua"; else echo "bgcolor=white";
 	echo '><font face="verdana,arial" size="1" color="#000000">';
 	if($edit) echo '
 	<a href="javascript:popgetdailyinfo(\'anticoag_dailydose\',\''.$pn.'\',\''.$actjahr.'\',\''.$actmonat.'\',\''.$acttag.'\',\''.($d+$tagnamebuf).'\',\''.$jahr.'\',\''.$kmonat.'\',\''.$tag.'\',\''.$tagname.'\')" title="'.str_replace("~tagword~",$LDAntiCoag,$LDClk2EnterDaily).'" >';
 
-	if($r) 
+	if(!empty($r))
 	 echo $r;
 	else 
 	  if($edit) echo '<img src="p.gif" width="95" height="12"  align="absmiddle"  border=0 alt="'.str_replace("~tagword~",$LDAntiCoag,$LDClk2EnterDaily).'" >';

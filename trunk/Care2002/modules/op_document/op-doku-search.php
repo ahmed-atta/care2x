@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -14,8 +14,10 @@ require($root_path.'include/inc_environment_global.php');
 # In normal cases this value is derived from the db table "care_config_global" using the "pagin_insurance_list_max_block_rows" element.
 define('MAX_BLOCK_ROWS',30); 
 
+$lang_tables[]='departments.php';
 $lang_tables[]='doctors.php';
 $lang_tables[]='search.php';
+$lang_tables[]='actions.php';
 define('LANG_FILE','or.php');
 $local_user='ck_opdoku_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
@@ -30,6 +32,8 @@ if(!isset($dept_nr)||!$dept_nr){
 		exit;
 	}
 }
+
+//$db->debug=1;
 
 # Init as no patient found
 $patientselected=FALSE;
@@ -72,7 +76,7 @@ require_once($root_path.'include/inc_date_format_functions.php');
 
 if($mode=='match'||$mode=='search'||$mode=='paginate'){
 
-	# Initialize page's control variables
+	# Initialize page´s control variables
 	if($mode=='paginate'){
 		$matchcode=$HTTP_SESSION_VARS['sess_searchkey'];
 		//$searchkey='USE_SESSION_SEARCHKEY';
@@ -115,12 +119,12 @@ if($mode=='match'||$mode=='search'||$mode=='paginate'){
 								$matchcode=addslashes($matchcode);
 							}
 							
-							$select_sql='SELECT o.*, e.encounter_class_nr, p.name_last, p.name_first, p.date_birth,p.sex,d.name_formal,d.LD_var';
+							$select_sql="SELECT o.*, e.encounter_class_nr, p.name_last, p.name_first, p.date_birth,p.sex,d.name_formal,d.LD_var AS \"LD_var\"";
 							
-							$from_sql=' FROM '.$dbtable.' AS o,
+							$from_sql=" FROM $dbtable AS o,
 												care_encounter AS e,
 												care_person AS p,
-												care_department AS d ';
+												care_department AS d ";
 												
 							$and_sql=' AND o.encounter_nr=e.encounter_nr
 											AND e.pid=p.pid
@@ -128,9 +132,9 @@ if($mode=='match'||$mode=='search'||$mode=='paginate'){
 							
 							if(!isset($all_depts)||$all_depts=='false') $and_sql.=' AND o.dept_nr='.$dept_nr;
 
-							$sql2=$from_sql.' WHERE o.encounter_nr = "'.$matchcode.'%" '.$and_sql;
+							$sql2= "$from_sql WHERE o.encounter_nr $sql_LIKE '$matchcode%' $and_sql";
 							
-							$sql=$select_sql.$sql2."	ORDER BY $prefx.$oitem $odir";;
+							$sql=$select_sql.$sql2."	ORDER BY $prefx.$oitem $odir";
 							
 							//if(!isset($all_depts)||$all_depts=='false') $sql.=' AND o.dept_nr='.$dept_nr;
 
@@ -139,12 +143,23 @@ if($mode=='match'||$mode=='search'||$mode=='paginate'){
 								if(!$rows=$ergebnis->RecordCount())
 								{ 
 								    // if not found find similar
-								    $sql2=$from_sql.'	WHERE ( o.nr LIKE "'.trim($matchcode).'%" 
-											OR o.encounter_nr LIKE "'.trim($matchcode).'%" 
-											OR p.name_last LIKE "'.trim($matchcode).'%" 
-											OR p.name_first LIKE "'.trim($matchcode).'%" 
-											OR p.date_birth LIKE "'.trim($matchcode).'%" ) '.$and_sql;
+								    $sql2 = " $from_sql WHERE ( ";
+									# Try if numeric
+									if(is_numeric($matchcode)){
+										$sql2.=" o.nr $sql_LIKE '".trim($matchcode)."%'
+											OR o.encounter_nr $sql_LIKE '".trim($matchcode)."%'
+											OR ";
+									}
+									$sql2.="p.name_last $sql_LIKE '".trim($matchcode)."%'
+											OR p.name_first $sql_LIKE '".trim($matchcode)."%'";
+									# Try DOB
+									$DOB = formatDate2STD($matchcode,$date_format);
+									if(!empty($DOB)){
 											
+											$sql2.=" OR p.date_birth = '$DOB'";
+
+									}
+									$sql2.= ") $and_sql";
 									//if(!isset($all_depts)||$all_depts=='false') $sql.=' AND o.dept_nr='.$dept_nr;
 									//echo $all_depts;
 									$sql2.="	ORDER BY $prefx.$oitem $odir";
@@ -178,7 +193,7 @@ if($mode=='match'||$mode=='search'||$mode=='paginate'){
 			
 	$dbtable='care_op_med_doc';
 							
-	$sql='SELECT * FROM '.$dbtable.' WHERE nr="'.$nr.'"';
+	$sql="SELECT * FROM $dbtable WHERE nr='$nr'";
 							
 	if($ergebnis=$db->Execute($sql)) {			
 		if($rows=$ergebnis->RecordCount()){

@@ -83,7 +83,7 @@ if($parent_admit) $retbuf='&encounter_nr='.$HTTP_SESSION_VARS['sess_full_en'];
 <a href="<?php echo $returnfile.URL_APPEND.$retbuf.'&target='.$target.'&mode=show&type_nr='.$type_nr; ?>" ><img 
 <?php echo createLDImgSrc($root_path,'back2.gif','0'); ?> <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';?>><a 
 href="javascript:gethelp('notes_router.php','<?php echo $notestype; ?>','<?php echo strtr($subtitle,' ','+'); ?>','<?php echo $mode; ?>','<?php echo $rows; ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
-if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo "startframe.php?sid=".$sid."&lang=".$lang; 
+if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo $root_path."main/startframe.php?sid=".$sid."&lang=".$lang; 
 	else echo $breakfile."?sid=$sid&target=entry&lang=$lang"; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </td>
 </tr>
@@ -169,7 +169,7 @@ if($parent_admit) echo ($HTTP_SESSION_VARS['sess_full_en']) ;
 <td bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial" color="#990000"><b><?php echo $name_first; ?></b>
 <?php
 # If person is dead show a black cross
-if($death_date&&$death_date!='0000-00-00') echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0').'>';
+if($death_date&&$death_date!=$dbf_nodate) echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0').'>';
 ?>
 </td>
 </tr>
@@ -208,7 +208,7 @@ createTR($LDNameOthers,$name_others);
 <b><?php       echo @formatDate2Local($date_birth,$date_format);  ?></b>
 <?php
 # If person is dead show a black cross
-if($death_date&&$death_date!='0000-00-00'){
+if($death_date&&$death_date!=$dbf_nodate){
 	echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0').'>&nbsp;<font color="#000000">'.formatDate2Local($death_date,$date_format).'</font>';
 }
 ?>
@@ -448,8 +448,8 @@ function Spacer()
               <TBODY>
 <?php
 while(list($x,$v)=each($types)){
-?>				  
-				  
+?>
+
                <TR bgColor=#eeeeee> <td align=center>
 			   <img <?php 
 						   	# Type nr 3 = discharge summary/notes
@@ -462,7 +462,7 @@ while(list($x,$v)=each($types)){
                   face="Verdana,Helvetica,Arial" size=2>
 				 <a href="show_notes.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&target=<?php echo $target ?>&type_nr=<?php echo $v['nr'] ?>">
 				 <?php 
-				 	if(isset($$v['LD_var'])&&!empty($$v['LD_var'])) echo $$v['LD_var']; else echo $v['name'] 
+				 	if(isset($$v['LD_var'])&&!empty($$v['LD_var'])) echo $$v['LD_var']; else echo $v['name']
 				 ?>
 				 </a>
 				   </FONT></TD>

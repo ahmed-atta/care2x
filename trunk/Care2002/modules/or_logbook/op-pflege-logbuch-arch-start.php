@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -16,6 +16,8 @@ define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 if (!$internok&&!$HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+
+//$db->debug=1;
 
 /* Load the date formatter */
 require_once($root_path.'include/inc_date_format_functions.php');
@@ -152,12 +154,18 @@ $selectfrom="SELECT o.*,
 								 p.addr_zip,
 								 t.name AS citytown_name,
 								 d.name_formal,
-								 d.LD_var
+								 d.LD_var";
+			/*
 					FROM  (care_encounter_op AS o,
 								care_encounter AS e,
 								care_person AS p)
 								LEFT JOIN care_address_citytown AS t ON t.nr=p.addr_citytown_nr
 								LEFT JOIN care_department AS d ON d.nr=o.dept_nr";
+			*/
+$selectfrom  = $selectfrom . " FROM  care_encounter_op AS o LEFT JOIN care_department AS d ON d.nr= o.dept_nr
+								 LEFT JOIN care_encounter AS e ON e.encounter_nr = o.encounter_nr
+								LEFT JOIN care_person AS p ON p.pid = e.pid
+								LEFT JOIN care_address_citytown AS t ON t.nr=p.addr_citytown_nr";
 
 $sql=$selectfrom."	WHERE  o.dept_nr='$dept_nr'
 								AND o.op_room='$saal'
@@ -369,7 +377,7 @@ if($datafound)
 			}
 			echo '</font>';
 		}
-
+/*
 	 $eo=explode("~",$pdata[entry_out]);
 	for($i=0;$i<sizeof($eo);$i++)
 	{
@@ -382,15 +390,26 @@ if($datafound)
 	parse_str($cc[$i],$ccbuf);
 	if(trim($ccbuf[s])) break;
 	}
-
+*/
 			
 	echo '
 	</td>
 	<td valign=top><font face="verdana,arial" size="1" >';
-	
+
+	 $cc=explode("~",$pdata['cut_close']);
+	for($i=0;$i<sizeof($cc);$i++)
+	{
+		$xbug=trim($cc[$i]);
+		if(empty($xbug)) continue;
+		parse_str($cc[$i],$ccbuf);
+		echo '<font face="verdana,arial" size="1" color="#cc0000">'.$LDOpCut.':</font><br>'.strtr($ccbuf['s'],'.',':').'<br>
+		<font face="verdana,arial" size="1" color="#cc0000">'.$LDOpClose.':</font><br>'.strtr($ccbuf['e'],'.',':').'<br>';
+		if(trim($ccbuf['s'])=='') break;
+	}
+/*
 	echo '<font face="verdana,arial" size="1" color="#cc0000">'.$LDOpCut.':</font><br>'.convertTimeToLocal($ccbuf[s]).'<p>
 	<font face="verdana,arial" size="1" color="#cc0000">'.$LDOpClose.':</font><br>'.convertTimeToLocal($ccbuf[e]).'</td>';
-	
+*/
 	echo '
 	<td valign=top><font face="verdana,arial" size="1" color="#cc0000">'.$LDOpMainElements[therapy].':<font color=black><br>'.nl2br($pdata['op_therapy']).'</td>';
 	
@@ -401,10 +420,22 @@ if($datafound)
 	
 	echo '
 	<td valign=top><font face="verdana,arial" size="1" >';
-	
+
+	 $eo=explode("~",$pdata['entry_out']);
+	for($i=0;$i<sizeof($eo);$i++)
+	{
+		$xbug=trim($eo[$i]);
+		if(empty($xbug)) continue;
+		parse_str($eo[$i],$eobuf);
+		echo '<font face="verdana,arial" size="1" color="#cc0000">'.$LDOpIn.':</font><br>'.strtr($eobuf['s'],'.',':').'<br>
+		<font face="verdana,arial" size="1" color="#cc0000">'.$LDOpOut.':</font><br>'.strtr($eobuf['e'],'.',':').'<br>';
+		if(trim($eobuf['s'])=='') break;
+	}
+
+	/*
 	echo '<font face="verdana,arial" size="1" color="#cc0000">'.$LDOpIn.':</font><br>'.convertTimeToLocal($eobuf[s]).'<p>
 	<font face="verdana,arial" size="1" color="#cc0000">'.$LDOpOut.':</font><br>'.convertTimeToLocal($eobuf[e]).'</td>';
-	
+*/
 	echo '
 	</tr>';
 
@@ -507,7 +538,7 @@ echo '
 				}
 				?>
 			</select>
-			<input type="text" name="sdate" size=8 maxlength=8 value="<?php if($thisday) echo formatDate2Local($thisday,$date_format); ?>" onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+			<input type="text" name="sdate" size=8 maxlength=10 value="<?php if($thisday) echo formatDate2Local($thisday,$date_format); ?>" onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
 	 	 <a href="javascript:show_calendar('chgdept.sdate','<?php echo $date_format; ?>')"><img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
    
 			</nobr>

@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@latorilla.com
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -20,29 +20,21 @@ $breakfile='edv-system-admi-welcome.php'.URL_APPEND;
 $returnfile='edv_user_access_list.php'.URL_APPEND;
 //$HTTP_SESSION_VARS['sess_file_return']='edv.php';
 
+require_once($root_path.'include/care_api_classes/class_access.php');
+$user = & new Access($itemname);
 
-    $sql="SELECT name, login_id FROM care_users WHERE login_id='$itemname'";
+if($user->UserExists()){
 
-    if($ergebnis=$db->Execute($sql)) {
+	if ($finalcommand=='delete') {
 
-	    if ($finalcommand=='delete') {
-
-		    $sql="DELETE FROM care_users WHERE login_id='$itemname'";
-
-			$db->BeginTrans();
-			$ok=$db->Execute($sql);
-			if($ok&&$db->CommitTrans()) {
-                header("Location: edv_user_access_list.php?sid=$sid&lang=$lang&remark=itemdelete");
-				exit;
-            } else {
-			    $db->RollbackTrans();
-				echo '<p>'.$LDDbNoDelete.'<p>';
-			}
-        }
-        elseif ($ergebnis->RecordCount()) {
-            $zeile=$ergebnis->FetchRow();
-        }
-    }
+		if($user->Delete()) {
+                	header("Location: edv_user_access_list.php?sid=$sid&lang=$lang&remark=itemdelete");
+			exit;
+		} else {
+			echo '<p>'.$LDDbNoDelete.'<p>'.$user->getLastQuery();
+		}
+	}
+}
 ?>
 <?php html_rtl($lang); ?>
 <HEAD>
@@ -90,7 +82,7 @@ function gethelp(x,s,x1,x2,x3)
 <td align=right><font face=verdana,arial size=2 color=#000080><?php echo $LDName ?>:
 </td><td><font face=verdana,arial size=2 color=#800000>
 <?php
-echo $zeile['name'];
+echo $user->Name();
 ?>
 </td>
 </tr>
@@ -98,7 +90,7 @@ echo $zeile['name'];
 <td align=right><font face=verdana,arial size=2 color=#000080><?php echo $LDUserId ?>:</td>
 <td><font face=verdana,arial size=2 color=#800000>
 <?php
-echo $zeile['login_id'];
+echo $user->LoginName();
 ?>
 </td>
 </tr>

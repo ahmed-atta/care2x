@@ -186,35 +186,35 @@ if ($addr_country) echo $addr_country.'<br>';
 <tr bgcolor="white">
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $LDDateJoin ?>: 
 </td>
-<td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php  if($date_join!='0000-00-00')   echo formatDate2Local($date_join,$date_format); ?>
+<td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php  if($date_join != DBF_NODATE)   echo formatDate2Local($date_join,$date_format); ?>
 </td>
 </tr>
 
 <tr bgcolor="white">
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $LDDateExit ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php   if($date_exit!='0000-00-00') echo formatDate2Local($date_exit,$date_format,1,1); ?></td>
+<td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php   if($date_exit != DBF_NODATE) echo formatDate2Local($date_exit,$date_format,1,1); ?></td>
 </tr>
 
 
 <tr bgcolor="white">
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $LDContractClass ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php	echo $contract_class; ?>
+<td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php if($contract_class) echo $contract_class; ?>
 </td>
 </tr>
 
 <tr bgcolor="white">
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $LDContractStart ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php  if($contract_start!='0000-00-00') echo formatDate2Local($contract_start,$date_format,1,1); ?>
+<td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php  if($contract_start != DBF_NODATE) echo formatDate2Local($contract_start,$date_format,1,1); ?>
 </td>
 </tr>
 
 <tr bgcolor="white">
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $LDContractEnd ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php  if($contract_end!='0000-00-00') echo formatDate2Local($contract_end,$date_format,1,1); ?>
+<td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php  if($contract_end != DBF_NODATE) echo formatDate2Local($contract_end,$date_format,1,1); ?>
 </td>
 </tr>
 

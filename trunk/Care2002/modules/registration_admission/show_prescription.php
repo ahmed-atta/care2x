@@ -3,13 +3,16 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+
+//$db->debug=1;
+
 $thisfile=basename(__FILE__);
 if(!isset($mode)){
 	$mode='show';
@@ -17,9 +20,13 @@ if(!isset($mode)){
 	include_once($root_path.'include/care_api_classes/class_prescription.php');
 	if(!isset($obj)) $obj=new Prescription;
 	include_once($root_path.'include/inc_date_format_functions.php');
+	
 	if($HTTP_POST_VARS['prescribe_date']) $HTTP_POST_VARS['prescribe_date']=@formatDate2STD($HTTP_POST_VARS['prescribe_date'],$date_format);
 	else $HTTP_POST_VARS['prescribe_date']=date('Y-m-d');
 
+	$HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+
+	//$db->debug=true;
 	# Check the important items
 	if($article&&$dosage&&$application_type_nr&&$prescriber){
 		//include('./include/save_prescription.inc.php');
@@ -30,14 +37,14 @@ if(!isset($mode)){
 require('./include/init_show.php');
 
 if($parent_admit){
-$sql="SELECT pr.*, e.encounter_class_nr FROM care_encounter AS e, care_person AS p, care_encounter_prescription AS pr 
+	$sql="SELECT pr.*, e.encounter_class_nr FROM care_encounter AS e, care_person AS p, care_encounter_prescription AS pr
 		WHERE p.pid=".$HTTP_SESSION_VARS['sess_pid']." 
 			AND p.pid=e.pid 
 			AND e.encounter_nr=".$HTTP_SESSION_VARS['sess_en']." 
 			AND e.encounter_nr=pr.encounter_nr 
 		ORDER BY pr.modify_time DESC";
 }else{
-$sql="SELECT pr.*, e.encounter_class_nr FROM care_encounter AS e, care_person AS p, care_encounter_prescription AS pr 
+	$sql="SELECT pr.*, e.encounter_class_nr FROM care_encounter AS e, care_person AS p, care_encounter_prescription AS pr
 		WHERE p.pid=".$HTTP_SESSION_VARS['sess_pid']." AND p.pid=e.pid AND e.encounter_nr=pr.encounter_nr 
 		ORDER BY pr.modify_time DESC";
 }

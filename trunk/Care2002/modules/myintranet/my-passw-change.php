@@ -3,13 +3,14 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+$lang_tables[]='stdpass.php';
 define('LANG_FILE','specials.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
@@ -86,10 +87,19 @@ $errbuf=$title;
 
 switch($passtag)
 {
-case 1:$errbuf="$errbuf $LDWrongEntry"; print '<img '.createLDImgSrc($root_path,'cat-fe.gif','0').'>';break;
-case 2:$errbuf="$errbuf $LDNoAuth"; print '<img '.createLDImgSrc($root_path,'cat-noacc.gif','0').'>';break;
-default:$errbuf="$errbuf $LDAuthLocked"; print '<img '.createLDImgSrc($root_path,'cat-sperr.gif','0').'>'; 
+	case 1:$errbuf="$errbuf $LDWrongEntry";
+				print '<img '.createMascot($root_path,'mascot3_r.gif','0').'> '." $LDWrongEntry <font size=2 color=\"#000000\">$LDPlsTryAgain</font>";
+				//echo '<img '.createLDImgSrc($root_path,'cat-fe.gif','0','left').'>';
+				break;
+	case 2:$errbuf="$errbuf $LDNoAuth";
+				print '<img '.createMascot($root_path,'mascot3_r.gif','0').'>'."$LDNoAuth  <font size=2 color=\"#000000\">$LDPlsContactEDP</font>";
+				//echo '<img '.createLDImgSrc($root_path,'cat-noacc.gif','0','left').'>';
+				break;
+	default:$errbuf="$errbuf $LDAuthLocked";
+				print '<img '.createMascot($root_path,'mascot3_r.gif','0').'>'."$LDAuthLocked  <font size=2 color=\"#000000\">$LDPlsContactEDP</font>";
+				//echo '<img '.createLDImgSrc($root_path,'cat-sperr.gif','0','left').'>';
 }
+
 
 logentry($userid,$keyword,$errbuf,$thisfile,$fileforward);
 

@@ -3,14 +3,15 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-$lang_tables=array('departments.php');
+$lang_tables[]='departments.php';
+$lang_tables[] = 'actions.php';
 define('LANG_FILE','or.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
@@ -185,7 +186,10 @@ echo '
 	echo '
 			</td>
 			<td colspan=1 align=middle>
-			<a href="javascript:gethelp(\'oplog.php\',\'create\',\'logmain\')"><img '.createComIcon($root_path,'frage.gif','0','absmiddle').' alt="'.$LDHelp.'"></a></td>
+			<form>
+			<a href="javascript:gethelp(\'oplog.php\',\'create\',\'logmain\')"><img '.createComIcon($root_path,'frage.gif','0','absmiddle').' alt="'.$LDHelp.'"></a>
+			<input type="button" value="'.$LDRefreshWindow.'" title="'.$LDRefreshWindow.'" onclick="window.location.reload()"></form>
+			</td>
 			<td colspan=1 align=right>';
 
 if($thisday!=$today){
@@ -278,36 +282,39 @@ while($pdata=$ergebnis->FetchRow())
 			}
 			echo '</font>';
 		}
-		
-	 $eo=explode("~",$pdata[entry_out]);
-	for($i=0;$i<sizeof($eo);$i++)
-	{
-	parse_str($eo[$i],$eobuf);
-	if(trim($eobuf[s])) break;
-	}
-	 $cc=explode("~",$pdata[cut_close]);
-	for($i=0;$i<sizeof($cc);$i++)
-	{
-	parse_str($cc[$i],$ccbuf);
-	if(trim($ccbuf[s])) break;
-	}
-
 
 	echo '
 	</td>
 	<td valign=top><font face="verdana,arial" size="1" >';
-	echo '<font face="verdana,arial" size="1" color="#cc0000">'.$LDOpCut.':</font><br>'.convertTimeToLocal($ccbuf[s]).'<p>
-	<font face="verdana,arial" size="1" color="#cc0000">'.$LDOpClose.':</font><br>'.convertTimeToLocal($ccbuf[e]).'</td>';
+
+	 $cc=explode("~",$pdata['cut_close']);
+	for($i=0;$i<sizeof($cc);$i++)
+	{
+		parse_str($cc[$i],$ccbuf);
+		echo '<font face="verdana,arial" size="1" color="#cc0000">'.$LDOpCut.':</font><br>'.strtr($ccbuf['s'],'.',':').'<br>
+		<font face="verdana,arial" size="1" color="#cc0000">'.$LDOpClose.':</font><br>'.strtr($ccbuf['e'],'.',':').'<br>';
+		if(trim($ccbuf['s'])=='') break;
+	}
 	echo '
+	</td>
 	<td valign=top><font face="verdana,arial" size="1" color="#cc0000">'.$LDOpMainElements['therapy'].':<font color=black><br>'.nl2br($pdata['op_therapy']).'</td>';
 	echo '
 	<td valign=top><nobr><font face="verdana,arial" size="1" color="#cc0000">'.$LDOpMainElements[result].':<br>';
 	echo '<font color=black>'.nl2br($pdata['result_info']).'</td>';
 	echo '
 	<td valign=top><font face="verdana,arial" size="1" >';
-	echo '<font face="verdana,arial" size="1" color="#cc0000">'.$LDOpIn.':</font><br>'.convertTimeToLocal($eobuf[s]).'<p>
-	<font face="verdana,arial" size="1" color="#cc0000">'.$LDOpOut.':</font><br>'.convertTimeToLocal($eobuf[e]).'</td>';
+	
+	 $eo=explode("~",$pdata['entry_out']);
+	for($i=0;$i<sizeof($eo);$i++)
+	{
+		parse_str($eo[$i],$eobuf);
+		echo '<font face="verdana,arial" size="1" color="#cc0000">'.$LDOpIn.':</font><br>'.strtr($eobuf['s'],'.',':').'<br>
+		<font face="verdana,arial" size="1" color="#cc0000">'.$LDOpOut.':</font><br>'.strtr($eobuf['e'],'.',':').'<br>';
+		if(trim($eobuf['s'])=='') break;
+	}
+
 	echo '
+	</td>
 	</tr>';
 
 	}

@@ -71,6 +71,8 @@ function popSearchWin(target,obj_val,obj_name){
    <tr bgcolor="#f6f6f6">
      <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDRefreshDate; ?></td>
      <td><input type="text" name="refresh_date" size=10 maxlength=10 onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+	 	 <a href="javascript:show_calendar('reportform.refresh_date','<?php echo $date_format; ?>')"><img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
+	 
 	 </td>
    </tr>
    <tr bgcolor="#f6f6f6">

@@ -6,10 +6,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -19,6 +19,8 @@ $local_user='ck_lab_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 $thisfile=basename(__FILE__);
+
+//$db->debug=true;
 
 # Create lab object
 require_once($root_path.'include/care_api_classes/class_lab.php');
@@ -45,7 +47,7 @@ if($mode=='save'){
 	if(!$HTTP_POST_VARS['hi_toxic']) $HTTP_POST_VARS['hi_toxic']='NULL';
 */	
 	$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-	$HTTP_POST_VARS['history']="CONCAT(history,'Update ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n')";
+	$HTTP_POST_VARS['history']=$lab_obj->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
 	# Set to use the test params
 	$lab_obj->useTestParams();
 	# Point to the data array
@@ -74,7 +76,7 @@ $pitems=array('name','msr_unit','median','hi_bound','lo_bound','hi_critical','lo
 # Get the test parameter values
 if($tparam=&$lab_obj->getTestParam($nr)){
 	$tp=$tparam->FetchRow();
-	$parameters=$paralistarray[$tp['group_id']];					
+	$parameters=$paralistarray[$tp['group_id']];
 }else{
 	$tp=false;
 }

@@ -86,16 +86,9 @@ include('./gui_bridge/default/gui_tabs_personell_reg.php')
 <ul>
 
 <?php 
-/* If the origin is admission link, show the search prompt */
-if(!$pid&&!$personell_nr)
-{
-/* Set color values for the search mask */
 
-$searchmask_bgcolor="#f3f3f3";
-$searchprompt=$LDEnterPersonSearchKey;
-$entry_block_bgcolor='#fff3f3';
-$entry_border_bgcolor='#6666ee';
-$entry_body_bgcolor='#ffffff';
+# If the origin is admission link, show the search prompt
+if(!$pid&&!$personell_nr){
 
 ?>
 <table border=0>
@@ -106,24 +99,33 @@ $entry_body_bgcolor='#ffffff';
   </tr>
 </table>
 
- <table border=0 cellpadding=10 bgcolor="<?php echo $entry_border_bgcolor ?>">
-     <tr>
-       <td>
-	   <?php
-	        /* set the script for searching */
-	       $search_script='personell_register_search.php';
-		   $user_origin='admit';
-		   
-            include($root_path.'include/inc_patient_searchmask.php');
-       
-	   ?>
-</td>
-     </tr>
-   </table>
-<?php 
-}
-else
-{
+<?php
+
+	$user_origin='admit';
+	
+	require_once($root_path.'include/care_api_classes/class_gui_search_person.php');
+	$psearch = & new GuiSearchPerson;
+
+	$psearch->setSearchFile('personell_register_search.php');
+
+	$psearch->setTargetFile('person_register_show.php');
+
+	$psearch->setCancelFile($root_path.'main/spediens.php');
+
+	# Set to TRUE if you want to auto display a single result
+	//$psearch->auto_show_byalphanumeric =TRUE;
+	# Set to TRUE if you want to auto display a single result based on a numeric keyword
+	# usually in the case of barcode scanner data
+	$psearch->auto_show_bynumeric = TRUE;
+
+	$psearch->setPrompt($LDEnterPersonSearchKey);
+
+	$psearch->pretext=$sTemp;
+
+	$psearch->display();
+
+}else{
+
 ?>
 
 <FONT    SIZE=-1  FACE="Arial">
@@ -139,9 +141,9 @@ if($error)
 ?>
 <tr>
 <td colspan=4><center>
-<font face=arial color=#7700ff size=4>
+<font face=arial color="#ff0000" size=4>
 <img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle">
-	<?php if ($errornum>1) echo $LDErrorS; else echo $LDError; ?>
+	<?php echo $LDDataNoSaved; ?>
 </center>
 </td>
 </tr>
@@ -254,25 +256,29 @@ if($GLOBAL_CONFIG['patient_name_middle_show'])
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDShortID; ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input name="short_id" type="text" size="30" value="<?php echo $short_id; ?>" >
+<td colspan=2 bgcolor="#eeeeee"><input name="short_id" type="text" size="30"  maxlength="10" value="<?php echo $short_id; ?>" >
 </td>
 </tr>
+
+<!--
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDJobNr; ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php //echo $LDJobNr; ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input name="job_type_nr" type="text" size="30" value="<?php if($job_type_nr) echo $job_type_nr; ?>" >
+<td colspan=2 bgcolor="#eeeeee"><input name="job_type_nr" type="text" size="30" maxlength="3" value="<?php if($job_type_nr) echo $job_type_nr; ?>" >
 </td>
 </tr>
+-->
+
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDJobFunction; ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input name="job_function_title" type="text" size="30" value="<?php echo $job_function_title; ?>" >
+<td colspan=2 bgcolor="#eeeeee"><input name="job_function_title" type="text" size="30"  maxlength="60" value="<?php echo $job_function_title; ?>" >
 </td>
 </tr>
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDDateJoin; ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input name="date_join" type="text"  size="12" maxlength=10  value="<?php  if(isset($date_join)&&$date_join!='0000-00-00')   echo formatDate2Local($date_join,$date_format); ?>" 
+<td colspan=2 bgcolor="#eeeeee"><input name="date_join" type="text"  size="12" maxlength=10  value="<?php  if(isset($date_join)&&$date_join!=DBF_NODATE)   echo formatDate2Local($date_join,$date_format); ?>" 
  onFocus="this.select();"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
 <a href="javascript:show_calendar('aufnahmeform.date_join','<?php echo $date_format ?>')">
  <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a> 
@@ -285,7 +291,7 @@ if($GLOBAL_CONFIG['patient_name_middle_show'])
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDDateExit ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input name="date_exit" type="text"  size="12" maxlength=10  value="<?php if(isset($date_exit)&&$date_exit!='0000-00-00')   echo formatDate2Local($date_exit,$date_format); ?>" 
+<td colspan=2 bgcolor="#eeeeee"><input name="date_exit" type="text"  size="12" maxlength=10  value="<?php if(isset($date_exit)&&$date_exit!=DBF_NODATE)   echo formatDate2Local($date_exit,$date_format); ?>" 
  onFocus="this.select();"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
 <a href="javascript:show_calendar('aufnahmeform.date_exit','<?php echo $date_format ?>')">
  <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a> 
@@ -298,13 +304,13 @@ if($GLOBAL_CONFIG['patient_name_middle_show'])
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDContractClass ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input name="contract_class" type="text" size="30" value="<?php echo $contract_class; ?>" >
+<td colspan=2 bgcolor="#eeeeee"><input name="contract_class" type="text" size="30" maxlength="35" value="<?php if($contract_class) echo $contract_class; ?>" >
 </td>
 </tr>
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDContractStart ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input name="contract_start" type="text"  size="12" maxlength=10  value="<?php  if(isset($contract_start)&&$contract_start!='0000-00-00')   echo formatDate2Local($contract_start,$date_format); ?>" 
+<td colspan=2 bgcolor="#eeeeee"><input name="contract_start" type="text"  size="12" maxlength=10  value="<?php  if(isset($contract_start)&&$contract_start!=DBF_NODATE)   echo formatDate2Local($contract_start,$date_format); ?>" 
  onFocus="this.select();"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
 <a href="javascript:show_calendar('aufnahmeform.contract_start','<?php echo $date_format ?>')">
  <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a> 
@@ -317,7 +323,7 @@ if($GLOBAL_CONFIG['patient_name_middle_show'])
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDContractEnd ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input name="contract_end" type="text" size="12" maxlength=10 value="<?php  if(isset($contract_end)&&$contract_end!='0000-00-00')   echo formatDate2Local($contract_end,$date_format); ?>" 
+<td colspan=2 bgcolor="#eeeeee"><input name="contract_end" type="text" size="12" maxlength=10 value="<?php  if(isset($contract_end)&&$contract_end!=DBF_NODATE)   echo formatDate2Local($contract_end,$date_format); ?>" 
  onFocus="this.select();"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
 <a href="javascript:show_calendar('aufnahmeform.contract_end','<?php echo $date_format ?>')">
  <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a> 
@@ -329,55 +335,99 @@ if($GLOBAL_CONFIG['patient_name_middle_show'])
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDPayClass ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input name="pay_class" type="text" size="30" value="<?php echo $pay_class; ?>" >
+<td colspan=2 bgcolor="#eeeeee"><input name="pay_class" type="text" size="30" maxlength="25" value="<?php echo $pay_class; ?>" >
 </td>
 </tr>
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDPaySubClass ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input name="pay_class_sub" type="text" size="30" value="<?php echo $pay_class_sub; ?>" >
+<td colspan=2 bgcolor="#eeeeee"><input name="pay_class_sub" type="text" size="30" maxlength="25" value="<?php echo $pay_class_sub; ?>" >
 </td>
 </tr>
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDLocalPremiumID ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input name="local_premium_id" type="text" size="30" value="<?php echo $local_premium_id; ?>" >
+<td colspan=2 bgcolor="#eeeeee"><input name="local_premium_id" type="text" size="30" maxlength="5" value="<?php echo $local_premium_id; ?>" >
 </td>
 </tr>
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDTaxAccountNr ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input name="tax_account_nr" type="text" size="30" value="<?php echo $tax_account_nr; ?>" >
+<td colspan=2 bgcolor="#eeeeee"><input name="tax_account_nr" type="text" size="30" maxlength="60" value="<?php echo $tax_account_nr; ?>" >
 </td>
 </tr>
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDInternalRevenueCode ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input name="ir_code" type="text" size="30" value="<?php echo $ir_code; ?>" >
+<td colspan=2 bgcolor="#eeeeee"><input name="ir_code" type="text" size="30" maxlength="25" value="<?php echo $ir_code; ?>" >
 </td>
 </tr>
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDNrWorkDay ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input name="nr_workday" type="text" size="30" value="<?php if($nr_workday) echo $nr_workday; ?>" >
+<td colspan=2 bgcolor="#eeeeee">
+<select name="nr_workday">
+	<?php 
+		for($x=0; $x<11;$x++){
+			echo "<option value=\"$x\" ";
+			if($nr_workday==$x) echo 'selected';
+			echo "> $x </option>";
+		}
+	?>
+</select>
+
+<!-- <input name="nr_workday" type="text" size="30" value="<?php // if($nr_workday) echo $nr_workday; ?>" > -->
 </td>
 </tr>
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDNrWeekHour ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input name="nr_weekhour" type="text" size="30" value="<?php if($nr_weekhour>0) echo $nr_weekhour; ?>" >
+<td colspan=2 bgcolor="#eeeeee">
+<select name="nr_weekhour">
+	<?php 
+		for($x=0; $x<61;$x++){
+			echo "<option value=\"$x\" ";
+			if($nr_weekhour==$x) echo 'selected';
+			echo "> $x </option>";
+		}
+	?>
+</select>
+
+<!-- <input name="nr_weekhour" type="text" size="30" value="<?php //if($nr_weekhour>0) echo $nr_weekhour; ?>" > -->
 </td>
 </tr>
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDNrVacationDay ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input name="nr_vacation_day" type="text" size="30" value="<?php if($nr_vacation_day) echo $nr_vacation_day; ?>" >
+<td colspan=2 bgcolor="#eeeeee">
+<select name="nr_vacation_day">
+	<?php 
+		for($x=0; $x<60;$x++){
+			echo "<option value=\"$x\" ";
+			if($nr_vacation_day==$x) echo 'selected';
+			echo "> $x </option>";
+		}
+	?>
+</select>
+
+<!-- <input name="nr_vacation_day" type="text" size="30" value="<?php // if($nr_vacation_day) echo $nr_vacation_day; ?>" > -->
 </td>
 </tr>
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDNrDependent ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input name="nr_dependent" type="text" size="30" value="<?php if($nr_dependent) echo $nr_dependent; ?>" >
+<td colspan=2 bgcolor="#eeeeee">
+<select name="nr_dependent">
+	<?php 
+		for($x=0; $x<20;$x++){
+			echo "<option value=\"$x\" ";
+			if($nr_dependent==$x) echo 'selected';
+			echo "> $x </option>";
+		}
+	?>
+</select>
+
+<!-- <input name="nr_dependent" type="text" size="30" value="<?php //if($nr_dependent) echo $nr_dependent; ?>" > -->
 </td>
 </tr>
 

@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -14,10 +14,9 @@ require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
 $thisfile=basename(__FILE__);
-
+//$db->debug=true;
 if(!isset($prescriber)||empty($prescriber)) $prescriber=$HTTP_COOKIE_VARS[$local_user.$sid];
 
 $title="$LDMedication/$LDDosage";
@@ -26,9 +25,7 @@ $maxelement=5; // set to default maximum nr of elements for entry
 require_once($root_path.'include/care_api_classes/class_charts.php');
 $charts_obj= new Charts;
 
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok){	
+
 	if($mode=='save'){
 		/* Reset colorbar flags */
 		$mark_antibiotic=0;
@@ -51,7 +48,8 @@ if($dblink_ok){
 				$data_array['color_marker']=$$cdx;
 				$data_array['dosage']=$$ddx;
 				$data_array['article']=$$tdx;
-				
+                $data_array['prescriber']=$prescriber;
+
 				switch($$cdx)
 				{
 					case 'a': $mark_antibiotic =1; break;
@@ -59,8 +57,8 @@ if($dblink_ok){
 					case 'c': $mark_anticoag=1; break;
 					case 'i': $mark_iv=1; break;
 				}
-				
-				if($charts_obj->savePrescriptionFromArray($data_array)) $saved=true;
+
+                if($charts_obj->savePrescriptionFromArray($data_array)) $saved=true;
 				
 			}else{
 				continue;
@@ -80,15 +78,10 @@ if($dblink_ok){
 	}
 	 // end of if(mode==save)
 	$count=0;
-	$medis=$charts_obj->getAllCurrentPrescription($pn);		
+	$medis=$charts_obj->getAllCurrentPrescription($pn);
 	if(is_object($medis)){
 		$count=$medis->RecordCount();
-	}	
-}else{
-	echo "$LDDbNoLink<br>$sql<br>";
-}
-
-
+	}
 ?>
 
 <?php html_rtl($lang); ?>

@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'/include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -19,9 +19,11 @@ require_once($root_path.'include/inc_date_format_functions.php');
 $thisfile=basename(__FILE__);
 $breakfile='technik-report-arch.php'.URL_APPEND;
 $returnfile=$breakfile;
-//init db parameters
-$dbtable='care_tech_repair_done'; 
-// define the content array
+
+#init db parameters
+$dbtable='care_tech_repair_done';
+
+# define the content array
 $rows=0;
 $count=0;
 ?>
@@ -31,12 +33,12 @@ $count=0;
 <?php echo setCharSet(); ?>
  <TITLE> Technik - Bericht</TITLE>
 
-<?php 
+<?php
 require($root_path.'include/inc_js_gethelp.php');
 require($root_path.'include/inc_css_a_hilitebu.php');
 ?></HEAD>
 
-<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
+<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0
 <?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
 <?php echo $test ?>
 <?php //foreach($argv as $v) echo "$v "; ?>
@@ -54,41 +56,42 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <p><br>
   <?php
 $rows=0;
-	/* Establish db connection */
-if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
-if($dblink_ok) {
+
     if(isset($markseen)&&$markseen) {
-					$sql='UPDATE '.$dbtable.' SET  tid="'.$tid.'", seen=1
-							WHERE dept="'.$dept.'" 
-								AND reporter="'.$reporter.'" 
-								AND tdate="'.$tdate.'"
-								AND ttime="'.$ttime.'"
-								AND tid="'.$tid.'"';
-					if($db->Execute($sql))
+	
+		include_once($root_path.'include/care_api_classes/class_core.php');
+		$core = & new Core;
+
+					$sql="UPDATE $dbtable SET seen=1
+							WHERE dept='$dept'
+								AND reporter='$reporter'
+								AND tdate='$tdate'
+								AND ttime='$ttime'
+								AND tid='$tid'";
+					if($core->Transact($sql))
 					{
 						if(isset($job_id)&&$job_id)
 						{
-							$sql='UPDATE care_tech_repair_job SET  tid="'.$job_id.'", done=1
-								WHERE  tid="'.$job_id.'"';
-    						if(!$db->Execute($sql))	 {echo "<p>".$sql."$LDDbNoSave<br>"; };
+							$sql="UPDATE care_tech_repair_job SET done=1 WHERE  tid='$job_id'";
+    						if(!$core->Transact($sql))	 {echo "<p>".$sql."$LDDbNoSave<br>"; }
 						}
 					}
 					else echo "$sql $db_sqlquery_fail<br>";
 				}
-				$sql='SELECT * FROM '.$dbtable.' 
-							WHERE dept="'.$dept.'" 
-								AND reporter="'.$reporter.'" 
-								AND tdate="'.$tdate.'"
-								AND ttime="'.$ttime.'"
-								AND tid="'.$tid.'"';
+				$sql="SELECT * FROM $dbtable
+							WHERE dept='$dept'
+								AND reporter='$reporter'
+								AND tdate='$tdate'
+								AND ttime='$ttime'
+								AND tid='$tid'";
         		if($ergebnis=$db->Execute($sql))
 				{
 					//count rows=linecount
 					$rows=$ergebnis->RecordCount();					
-				}else {echo "<p>".$sql."$LDDbNoRead<br>"; };
-} else { echo "$LDDbNoLink<br>"; } 
-	
-	
+				}else {
+					echo "<p>".$sql."$LDDbNoRead<br>"; 
+				}
+
 if($rows)
 {
 //++++++++++++++++++++++++ show general info about the list +++++++++++++++++++++++++++
@@ -119,7 +122,8 @@ echo '</font>
 //++++++++++++++++++++++++ show the actual list +++++++++++++++++++++++++++
 
 }
-if(!isset($content['seen'])||!$content['seen'])
+if(!isset($content['seen'])||!$content['seen']){
+
 echo '
   <form action="'.$thisfile.'" method="post">
 <input type="hidden" name="sid" value="'.$sid.'">
@@ -137,6 +141,9 @@ echo '
 
 </form>
 ';
+}else{
+	echo '<p><a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'back2.gif','0','absmiddle').'</a>&nbsp;&nbsp;&nbsp;';
+}
  ?>
 
 </table>
@@ -161,13 +168,6 @@ require($root_path.'include/inc_load_copyrite.php');
 </td>
 </tr>
 </table>        
-&nbsp;
-
-
-
-
 </FONT>
-
-
 </BODY>
 </HTML>

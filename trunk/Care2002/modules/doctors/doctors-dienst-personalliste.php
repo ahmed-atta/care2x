@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -20,6 +20,7 @@ $lang_tables[]='departments.php';
 define('LANG_FILE','doctors.php');
 if($HTTP_SESSION_VARS['sess_user_origin']=='personell_admin'){
 	$local_user='aufnahme_user';
+	$bShowSearchEntry = FALSE;
 	if(!isset($saved)||!$saved){
 		$mode='search';
 		$searchkey=$nr;
@@ -28,6 +29,7 @@ if($HTTP_SESSION_VARS['sess_user_origin']=='personell_admin'){
 }else{
 	$local_user='ck_doctors_dienstplan_user';
 	$breakfile='javascript:history.back()';
+	$bShowSearchEntry = TRUE;
 }
 require_once($root_path.'include/inc_front_chain_lang.php');
 
@@ -68,15 +70,17 @@ $entry_body_bgcolor='#ffffff';
 if(!isset($searchkey)) $searchkey='';
 if(!isset($mode)) $mode='';
 
-switch($ipath)
-{
-	case 'menu': $breakfile="doctors.php".URL_APPEND; break;
-	case 'qview': $breakfile="doctors-dienst-schnellsicht.php".URL_APPEND."&hilitedept=$dept_nr"; break;
-	case 'plan': $breakfile="doctors-dienstplan-planen.php".URL_APPEND."&dept_nr=$dept_nr&pmonth=$pmonth&pyear=$pyear&retpath=$retpath"; break;
-	default: $breakfile="javascript:window.history.back()";
+if(!empty($ipath)){
+	switch($ipath)
+	{
+		case 'menu': $breakfile="doctors.php".URL_APPEND; break;
+		case 'qview': $breakfile="doctors-dienst-schnellsicht.php".URL_APPEND."&hilitedept=$dept_nr"; break;
+		case 'plan': $breakfile="doctors-dienstplan-planen.php".URL_APPEND."&dept_nr=$dept_nr&pmonth=$pmonth&pyear=$pyear&retpath=$retpath"; break;
+		default: $breakfile="javascript:window.history.back()";
+	}
 }
 
-$append='&retpath='.$retpath.'&ipath='.$ipath;		
+$append='&retpath='.$retpath.'&ipath='.$ipath;
 
 # Initialize page's control variables
 if($mode=='paginate'){
@@ -186,20 +190,21 @@ function deleteItem(nr){
 <BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 bgcolor="silver" alink="navy" vlink="navy"  >
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0" >
-<tr valign=top>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" ><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG><?php echo $LDDocsList ?> <font color="<?php echo $cfg['top_txtcolor']; ?>">::
-<?php 
-$buf=$dept_obj->LDvar();
-if(isset($$buf)&&!empty($$buf)) echo $$buf;
-	else echo $dept_obj->FormalName(); 
-?></font>
-</STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right><a href="<?php echo $breakfile ?>"><img 
-<?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a><a href="javascript:gethelp('docs_personallist_edit.php')"><img 
-<?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>></a><a href="<?php echo $breakfile ?>"><img 
-<?php echo createLDImgSrc($root_path,'close2.gif','0') ?>></a></td>
-</tr>
+	<tr valign=top height=20>
+	<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" ><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
+		<STRONG><?php echo $LDDocsList ?> <font color="<?php echo $cfg['top_txtcolor']; ?>">::
+		<?php
+			$buf=$dept_obj->LDvar();
+			if(isset($$buf)&&!empty($$buf)) echo $$buf;
+				else echo $dept_obj->FormalName();
+		?></font>
+		</STRONG></FONT></td>
+	<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right><a href="<?php echo $breakfile ?>"><img
+		<?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a><a href="javascript:gethelp('docs_personallist_edit.php')"><img
+		<?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>></a><a href="<?php echo $breakfile ?>"><img
+		<?php echo createLDImgSrc($root_path,'close2.gif','0') ?>></a>
+	</td>
+	</tr>
 <tr>
 <td bgcolor=#cde1ec valign=top colspan=2><p>
 <ul>
@@ -271,6 +276,9 @@ if(is_object($doctors)&&$doctors->RecordCount()){
     </tr>
   </table>';
 }
+
+if($bShowSearchEntry){
+
 ?>
 <hr>
 <font face="arial,verdana,helvetica" size=3 color="#990000"><b><?php echo "$LDAddDoctorToList $LDPlsSearchDoctor"; ?></b></font>
@@ -287,21 +295,26 @@ if(is_object($doctors)&&$doctors->RecordCount()){
     </tr>
    </table>
 <?php
+
+}
+
 if($mode=='search'||$mode=='paginate'){
-	if ($linecount) echo str_replace("~nr~",$totalcount,$LDSearchFound).' '.$LDShowing.' '.$pagen->BlockStartNr().' '.$LDTo.' '.$pagen->BlockEndNr().'.';
-		else echo str_replace('~nr~','0',$LDSearchFound); 
+	if($bShowSearchEntry){
+		if ($linecount) echo str_replace("~nr~",$totalcount,$LDSearchFound).' '.$LDShowing.' '.$pagen->BlockStartNr().' '.$LDTo.' '.$pagen->BlockEndNr().'.';
+			else echo str_replace('~nr~','0',$LDSearchFound);
+	}
 		  
 	if (is_object($pers_obj)&&$linecount) { 
 
-	# Load the common icons
-	//$img_options_add=createComIcon($root_path,'add.gif','0');
-	$img_options_add=createLDImgSrc($root_path,'add2list_sm.gif','0');
-	$img_male=createComIcon($root_path,'spm.gif','0');
-	$img_female=createComIcon($root_path,'spf.gif','0');
-	$bgimg='tableHeaderbg3.gif';
-	$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
+		# Load the common icons
+		//$img_options_add=createComIcon($root_path,'add.gif','0');
+		$img_options_add=createLDImgSrc($root_path,'add2list_sm.gif','0');
+		$img_male=createComIcon($root_path,'spm.gif','0');
+		$img_female=createComIcon($root_path,'spf.gif','0');
+		$bgimg='tableHeaderbg3.gif';
+		$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
 
-	echo '
+	echo '<p>
 			<table border=0 cellpadding=2 cellspacing=1> <tr bgcolor="#0000aa" background="'.createBgSkin($root_path,'tableHeaderbg.gif').'">';
 			
 ?>

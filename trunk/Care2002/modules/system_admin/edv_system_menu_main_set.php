@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -14,6 +14,8 @@ $lang_tables=array('indexframe.php');
 define('LANG_FILE','edp.php');
 $local_user='ck_edv_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
+require_once($root_path.'include/care_api_classes/class_core.php');
+$core = & new Core();
 
 $breakfile='edv-system-admi-welcome.php'.URL_APPEND;
 if($from=='add') $returnfile='edv_system_format_menu_item_add.php'.URL_APPEND.'&from=set';
@@ -28,18 +30,23 @@ if(isset($mode)&&($mode=='save')){
 	for($i=1;$i<=$max_items;$i++){
 		$sort_nr='sort_nr_'.$i;
 		$is_visible='hide_it_'.$i;
-		$sql="UPDATE care_menu_main SET sort_nr=".$$sort_nr.",is_visible='".$$is_visible."',hide_by='' WHERE nr=$i";
-		$db->Execute($sql);
+		$core->sql="UPDATE care_menu_main SET sort_nr=".$$sort_nr.",is_visible='".$$is_visible."',hide_by='' WHERE nr=$i";
+		//$sql="UPDATE care_menu_main SET sort_nr=".$$sort_nr.",is_visible='".$$is_visible."',hide_by='' WHERE nr=$i";
+		//$db->Execute($sql);
+		$core->Transact();
 	}
 	
 	header('location:'.$thisfile.URL_REDIRECT_APPEND.'&mode=0');
 	exit;
 }
-
-if($result=$db->Execute("SELECT nr,sort_nr,name,LD_var,status,url,hide_by,is_visible FROM care_menu_main WHERE 1 ORDER BY sort_nr")){
+/*
+if($result=$db->Execute("SELECT nr,sort_nr,name,LD_var AS \"LD_var\",status,url,hide_by,is_visible FROM care_menu_main  ORDER BY sort_nr")){
 	$row=$result->RecordCount();
-}	
-
+}
+*/
+if($result=$db->Execute("SELECT *, LD_var AS \"LD_var\"  FROM care_menu_main   ORDER BY sort_nr")){
+	$row=$result->RecordCount();
+}
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>
@@ -94,7 +101,7 @@ while($menu_item=$result->FetchRow())
 	if(isset($$menu_item['LD_var'])&&!empty($$menu_item['LD_var'])) echo $$menu_item['LD_var'];
 		else echo $menu_item['name'];
 	echo '</b> </FONT></td>
-	<td bgcolor="#e9e9e9"><FONT  color="#0000cc" FACE="verdana,arial" size=2><input type="text" name="sort_nr_'.$menu_item['nr'].'" size=2 maxlength=2 value="'.$menu_item['sort_nr'].'"></FONT></td>
+	<td bgcolor="#e9e9e9"><FONT  color="#0000cc" FACE="verdana,arial" size=2><input type="text" name="sort_nr_'.$menu_item['nr'].'" size=2 maxlength=3 value="'.$menu_item['sort_nr'].'"></FONT></td>
 	<td bgcolor="#e9e9e9" align="center"><FONT  color="#0000cc" FACE="verdana,arial" size=2>	<input type="checkbox" name="hide_it_'.$menu_item['nr'].'" value="1" ';
 	if($menu_item['is_visible']) echo 'checked';
 	echo '><br></FONT></td>

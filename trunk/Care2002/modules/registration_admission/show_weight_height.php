@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -39,10 +39,11 @@ if(!isset($mode)){
 	# Non standard time format
 	$HTTP_POST_VARS['msr_time']=date('H.i');
 	$HTTP_POST_VARS['create_time']=date('YmdHis'); # Create the timestamp to group the values
-	//include('./include/save_prescription.inc.php');
+	$HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+
 	if($weight||$height||$head_c){
 		# Set to no redirect
-		$no_redirect=true;
+		$no_redirect=TRUE;
 		
 		if($weight){
 			$HTTP_POST_VARS['value']=$weight;
@@ -101,13 +102,20 @@ if($mode=='show'){
 		}
 	}
 }
+# set your default unit of msrmnt type, default 6 = kilogram
+if(!isset($wt_unit_nr)||!$wt_unit_nr) $wt_unit_nr=6;
 
-if(!isset($wt_unit_nr)||!$wt_unit_nr) $wt_unit_nr=6; # set your default unit of msrmnt type, default 6 = kilogram
-if(!isset($ht_unit_nr)||!$ht_unit_nr) $ht_unit_nr=7; # set your default unit of msrmnt type, default 7 = centimeter
-if(!isset($hc_unit_nr)||!$hc_unit_nr) $hc_unit_nr=7; # set your default unit of msrmnt type, default 7 = centimeter
+# set your default unit of msrmnt type, default 7 = centimeter
+if(!isset($ht_unit_nr)||!$ht_unit_nr) $ht_unit_nr=7;
+
+# set your default unit of msrmnt type, default 7 = centimeter
+if(!isset($hc_unit_nr)||!$hc_unit_nr) $hc_unit_nr=7;
 
 $subtitle=$LDMeasurements;
+
+# Set the type of "notes"
 $notestype='msr';
+
 $HTTP_SESSION_VARS['sess_file_return']=$thisfile;
 
 $buffer=str_replace('~tag~',$title.' '.$name_last,$LDNoRecordFor);

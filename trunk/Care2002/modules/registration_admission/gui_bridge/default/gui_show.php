@@ -72,7 +72,7 @@ if($parent_admit) echo ($HTTP_SESSION_VARS['sess_full_en']);
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
 <a href="<?php echo $returnfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=show&type_nr='.$type_nr; ?>" ><img 
 <?php echo createLDImgSrc($root_path,'back2.gif','0'); ?> <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';?>><a href="javascript:gethelp('notes_router.php','<?php echo $notestype; ?>','<?php echo strtr($subtitle,' ','+'); ?>','<?php echo $mode; ?>','<?php echo $rows; ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
-if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo "startframe.php?sid=".$sid."&lang=".$lang; 
+if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo $root_path."main/startframe.php?sid=".$sid."&lang=".$lang; 
 	else echo $breakfile."?sid=$sid&target=entry&lang=$lang"; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </td>
 </tr>
@@ -157,7 +157,7 @@ if($parent_admit) echo ($HTTP_SESSION_VARS['sess_full_en']) ;
 <td bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial" color="#990000"><b><?php echo $name_first; ?></b>
 <?php
 # If person is dead show a black cross
-if($death_date&&$death_date!='0000-00-00') echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0').'>';
+if($death_date&&$death_date!=$dbf_nodate) echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0').'>';
 ?>
 </td>
 </tr>
@@ -188,6 +188,7 @@ if (!$GLOBAL_CONFIG['person_name_others_hide']&&$name_others)
 {
 createTR($LDNameOthers,$name_others);
 }
+
 ?>
 
 <tr>
@@ -197,7 +198,7 @@ createTR($LDNameOthers,$name_others);
 <b><?php       echo @formatDate2Local($date_birth,$date_format);  ?></b>
 <?php
 # If person is dead show a black cross
-if($death_date&&$death_date!='0000-00-00'){
+if($death_date&&$death_date!=$dbf_nodate){
 	echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0').'>&nbsp;<font color="#000000">'.formatDate2Local($death_date,$date_format).'</font>';
 }
 ?>
@@ -260,7 +261,7 @@ if($mode=='show'){
   <tr>
     <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','absmiddle') ?>></td>
     <td><font color="#000099" SIZE=3  FACE="verdana,Arial"> <b>
-	<?php 
+	<?php
 		echo $norecordyet;
 	?></b></font>
 	</td>
@@ -269,8 +270,8 @@ if($mode=='show'){
     <td>&nbsp;</td>
     <td>  
   <?php
-
-	if($parent_admit&&!$is_discharged&&$thisfile!='show_diagnostics_result.php'){
+     
+	if($parent_admit && !$is_discharged && $thisfile!='show_diagnostics_result.php'){
 
   ?>
 

@@ -8,19 +8,21 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 /*if(!session_is_registered('sess_opfclic_rt')) session_register('sess_opfclic_rt');
 if(!session_is_registered('sess_opfclic_filename')) session_register('sess_opfclic_filename');
-if(!session_is_registered('sess_comdat')) session_register('sess_comdat');
 */
+if(!session_is_registered('sess_comdat')) session_register('sess_comdat');
+
 $template=array();
 
 //setcookie(opfclic_rt,"timebar");
 //setcookie(opfclic_filename,$filename);
 $imgsrc=$root_path."main/imgcreator/log-timebar.php?sid=$sid&lang=$lang&winid=$winid&enc_nr=$enc_nr&op_nr=$op_nr&dept_nr=$dept_nr&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday";
-setcookie(ck_comdat,"enc_nr=$enc_nr&op_nr=$op_nr&dept_nr=$dept_nr&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday");
+//setcookie(ck_comdat,"enc_nr=$enc_nr&op_nr=$op_nr&dept_nr=$dept_nr&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday");
 
 /*$HTTP_SESSION_VARS['sess_opfclic_rt']='timebar';
 $HTTP_SESSION_VARS['sess_opfclic_filename']=$filename;
-$HTTP_SESSION_VARS['sess_comdat']="enc_nr=$enc_nr&op_nr=$op_nr&dept_nr=$dept_nr&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday";
 */
+$HTTP_SESSION_VARS['sess_comdat']="&enc_nr=$enc_nr&op_nr=$op_nr&dept_nr=$dept_nr&saal=$saal&thisday=$pyear-$pmonth-$pday&pyear=$pyear&pmonth=$pmonth&pday=$pday";
+
 $hi=90;
 $wid=3000;
 $min=($wid*100)/(24*12);
@@ -138,11 +140,11 @@ $group=array("e","c","w","b","r");
 
 for($n=$tabrows,$m=0;$n<$hi;$n+=$tabrows,$m++)
 {
-	echo '<AREA SHAPE="RECT" COORDS="0,'.$n.','.($min2-1).','.($n+$tabrows-1).'" href="javascript:s(\''.$hr.'\',\'0\',\''.$group[$m].'\')">';
+	echo '<AREA SHAPE="RECT" COORDS="0,'.$n.','.($min2-1).','.($n+$tabrows-1).'" title="'.$hr.':'.$minute.'" href="javascript:s(\''.$hr.'\',\'0\',\''.$group[$m].'\')">';
 	echo "\r\n";
 	while($i<$wid)
 	{
-		$line='<AREA SHAPE="RECT" COORDS="'.$i.','.$n.','.(($i+$min)-1).','.($n+$tabrows-1).'" href="javascript:s(\''.$hr.'\',\''.$minute.'\',\''.$group[$m].'\')">';
+		$line='<AREA SHAPE="RECT" COORDS="'.$i.','.$n.','.(($i+$min)-1).','.($n+$tabrows-1).'" title="'.$hr.':'.$minute.'" href="javascript:s(\''.$hr.'\',\''.$minute.'\',\''.$group[$m].'\')">';
 
 		echo $line;
 		echo "\n";

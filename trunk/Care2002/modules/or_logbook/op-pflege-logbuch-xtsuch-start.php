@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -34,8 +34,12 @@ if($srcword!=''||$mode=='paginate'){
 	
     # Load the date formatter
     include_once($root_path.'include/inc_date_format_functions.php');
-	
-	# Initialize page's control variables
+
+
+	//$db->debug=1;
+
+
+	# Initialize page´s control variables
 	if($mode=='paginate'){
 		$sql2=$HTTP_SESSION_VARS['sess_searchkey'];
 	}else{
@@ -51,50 +55,64 @@ if($srcword!=''||$mode=='paginate'){
 			# Convert other wildcards
 			$srcword=strtr($srcword,'*&','%_');
 		}
-
-		$selectfrom="SELECT o.*,
+		
+		# Try converting keyword to DOB
+		$DOB = formatDate2STD($srcword,$date_format);
+		
+		$select="SELECT  o.*,
 								e.encounter_class_nr,
-								 p.name_last, 
-								 p.name_first, 
-								 p.date_birth, 
+								p.pid,
+								 p.name_last,
+								 p.name_first,
+								 p.date_birth,
 								 p.addr_str,
 								 p.addr_str_nr,
 								 p.sex,
 								 p.addr_zip,
 								 t.name AS citytown_name,
 								 d.name_formal,
-								 d.LD_var
-					FROM  (
-								care_encounter_op AS o,
-								care_encounter AS e,
-								care_person AS p)
+								 d.LD_var AS \"LD_var\" ";
+
+
+		// Old mysql query
+		/*
+				$selectfrom.=" FROM  ( care_encounter_op AS o,
+								 care_encounter AS e,
+								care_person AS p )
 								LEFT JOIN care_address_citytown AS t ON t.nr=p.addr_citytown_nr
-								LEFT JOIN care_department AS d ON d.nr=o.dept_nr";		
-								
+								LEFT JOIN care_department AS d ON d.nr= o.dept_nr";
+		*/
+		$selectfrom= " FROM  care_encounter_op AS o LEFT JOIN care_department AS d ON d.nr= o.dept_nr
+								 LEFT JOIN care_encounter AS e ON e.encounter_nr = o.encounter_nr
+								LEFT JOIN care_person AS p ON p.pid = e.pid
+								LEFT JOIN care_address_citytown AS t ON t.nr=p.addr_citytown_nr";
+
 		# If the search is directed to a single patient
 		if($mode=='get'||$mode=='getbypid'||$mode=='getbyenc'){
 			if($mode=='get'){
-				$sql2=$selectfrom."	WHERE o.nr='$nr'
-								AND o.encounter_nr=e.encounter_nr
+				$sql2=$selectfrom."	WHERE  o.nr='$nr'
+								AND  o.encounter_nr=e.encounter_nr
 								AND e.pid=p.pid ";
 			}elseif($mode=='getbypid'){
 				$sql2=$selectfrom."	WHERE p.pid='$nr'
-								AND o.encounter_nr=e.encounter_nr
+								AND  o.encounter_nr=e.encounter_nr
 								AND e.pid=p.pid ";
 			}else{
 				$sql2=$selectfrom."	WHERE o.encounter_nr='$nr'
-								AND o.encounter_nr=e.encounter_nr
+								AND  o.encounter_nr=e.encounter_nr
 								AND e.pid=p.pid ";
 			}
 		}else{
-		
-			$sql2=$selectfrom."	WHERE (o.op_nr = '$srcword'
-								OR e.encounter_nr = '$srcword'
-								OR p.name_last = '$srcword'
-								OR p.name_first = '$srcword'
-								OR p.date_birth = '$srcword')
-								AND o.encounter_nr=e.encounter_nr
-								AND e.pid=p.pid ";
+
+			$sql2=$selectfrom."	WHERE o.encounter_nr=e.encounter_nr
+											AND e.pid=p.pid 
+											AND (p.name_last = '$srcword'
+											OR p.name_first = '$srcword'";
+			if($DOB) $sql2.=" OR p.date_birth = '$srcword' ";
+			if(is_numeric($srcword)){
+				 $sql2.=" OR o.op_nr = $srcword OR e.encounter_nr = $srcword";
+			 }
+			$sql2.=")";
 		}
 	}
 	#Load and create paginator object
@@ -108,7 +126,7 @@ if($srcword!=''||$mode=='paginate'){
 	$glob_obj->getConfig('pagin_patient_search_max_block_rows');
 	if(empty($GLOBAL_CONFIG['pagin_patient_search_max_block_rows'])) $pagen->setMaxCount(MAX_BLOCK_ROWS); # Last resort, use the default defined at the start of this page
 		else $pagen->setMaxCount($GLOBAL_CONFIG['pagin_patient_search_max_block_rows']);
-	
+
 	# Detect what type of sort item
 	if($oitem=='encounter_nr') $tab='e';
 		elseif(stristr($oitem,'op_')) $tab='o';
@@ -117,7 +135,7 @@ if($srcword!=''||$mode=='paginate'){
 	# If the search is directed to a single patient
 	if($mode=='get'||$mode=='getbypid'||$mode=='getbyenc'){
 	
-		$sql=$sql2."ORDER BY o.op_date DESC";
+		$sql=$select.$sql2."ORDER BY o.op_date DESC";
 
 		if($ergebnis=$db->Execute($sql)){
 			if($rows=$ergebnis->RecordCount()){
@@ -129,32 +147,33 @@ if($srcword!=''||$mode=='paginate'){
 	}else{
 		
 		#  Start searching 
-		$sql=$sql2." ORDER BY $tab.$oitem $odir";
+		$sql=$select.$sql2." ORDER BY $tab.$oitem $odir";
 					
 		if($ergebnis=$db->SelectLimit($sql,$pagen->MaxCount(),$pgx)){
 			if($rows=$ergebnis->RecordCount()){
 				if($rows==1) $datafound=1;
 						
-				$HTTP_SESSION_VARS['sess_searchkey']=$sql2;		
+				$HTTP_SESSION_VARS['sess_searchkey']=$select.$sql2;
 
 			}else{
-				$sql2="SELECT o.nr,o.op_nr,o.dept_nr,o.op_room,o.op_date, e.encounter_nr, p.pid, p.name_last, p.name_first, p.date_birth, p.sex
-						FROM care_encounter_op AS o,
-								care_encounter AS e,
-								care_person AS p
-						WHERE (o.op_nr LIKE '$srcword%'
-								OR e.encounter_nr LIKE '$srcword%'
-								OR p.name_last LIKE '$srcword%'
-								OR p.name_first LIKE '$srcword%'
-								OR p.date_birth LIKE '$srcword%')
-								AND o.encounter_nr=e.encounter_nr
-								AND e.pid=p.pid";
-								
-				$sql=$sql2." ORDER BY $tab.$oitem $odir";
+				$select="SELECT o.nr,o.op_nr,o.dept_nr,o.op_room,o.op_date, e.encounter_nr, p.pid, p.name_last, p.name_first, p.date_birth, p.sex";
+				$sql2 =" FROM
+									care_encounter_op AS o,
+									care_encounter AS e,
+									care_person AS p
+								WHERE o.encounter_nr=e.encounter_nr
+									AND e.pid=p.pid
+									AND ( p.name_last $sql_LIKE '$srcword%'
+									OR p.name_first $sql_LIKE '$srcword%'";
+				if(is_numeric($srcword)) $sql2.=" OR  o.op_nr $sql_LIKE '$srcword%' OR e.encounter_nr $sql_LIKE '$srcword%'";
+				if($DOB) $sql2.=" OR p.date_birth $sql_LIKE '$srcword%'";
+				$sql2.=")";
+
+				$sql=$select.$sql2." ORDER BY $tab.$oitem $odir";
 				
 				if($ergebnis=$db->SelectLimit($sql,$pagen->MaxCount(),$pgx)){
 					$rows=$ergebnis->RecordCount();
-					$HTTP_SESSION_VARS['sess_searchkey']=$sql2;		
+					$HTTP_SESSION_VARS['sess_searchkey']=$select.$sql2;
 	           	}else{ echo "$LDDbNoRead<br>$sql"; }
 			}
 		}else{
@@ -172,9 +191,11 @@ if($srcword!=''||$mode=='paginate'){
 				}else{
 					# Count total available data
 					//$sql="$sql $tab.$oitem $odir";
-						
-					if($result=$db->Execute($sql2)){
-						$totalcount=$result->RecordCount();
+					$sql = "SELECT COUNT(o.nr) AS maxcount ".$sql2;
+					if($result=$db->Execute($sql)){
+						//$totalcount=$result->RecordCount();
+						$row = $result->FetchRow();
+						$totalcount = $row['maxcount'];
 					}
 					$pagen->setTotalDataCount($totalcount);
 				}
@@ -569,7 +590,7 @@ echo '
 				<input type="hidden" name="sid" value="<?php echo $sid; ?>"> 
 				<input type="hidden" name="lang" value="<?php echo $lang; ?>"> 
 				<input type="hidden" name="dept_nr" value="<?php echo $dept_nr; ?>"> 
-				<input type="hidden" name="saal" value="<?php echo $saal; ?>"> 
+				<input type="hidden" name="saal" value="<?php echo $saal; ?>">
 				<input type="hidden" name="child" value="<?php echo $child; ?>"> 
 				<input type="hidden" name="user" value="<?php echo str_replace(" ","+",$HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]); ?>">
     			<input type="hidden" name="mode" value="search">

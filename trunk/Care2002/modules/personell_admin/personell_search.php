@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -19,6 +19,8 @@ define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_date_format_functions.php');
+
+//$db->debug=true;
 
 # If a forwarded nr is available, convert it to searchkey and set mode to "search"
 if(isset($fwd_nr)&&$fwd_nr){
@@ -43,7 +45,7 @@ if(!isset($searchkey)) $searchkey='';
 if(!isset($mode)) $mode='';
 
 
-# Initialize page's control variables
+# Initialize page´s control variables
 if($mode=='paginate'){
 	$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
 }else{
@@ -91,7 +93,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 			if(empty($oitem)) $oitem='nr';			
 			if(empty($odir)) $odir='DESC'; # default, latest pid at top
 			
-			$sql2='	WHERE ( ps.nr="'.$suchwort.'"  OR ps.nr = "'.$suchbuffer.'" )';
+			$sql2=" WHERE ( ps.nr='$suchwort'  OR ps.nr = '$suchbuffer' )";
 			
 	    } else {
 			# Try to detect if searchkey is composite of first name + last name
@@ -121,40 +123,42 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 				$bd=$comp[2];
 			}
 			
-			if(empty($oitem)) $oitem='name_last';			
+			if(empty($oitem)) $oitem='name_last';
 			
 			# Check the size of the comp
 			if(sizeof($comp)>1){
-				$sql2='	WHERE ( p.name_last LIKE "'.strtr($ln,'+',' ').'%" 
-			                		AND p.name_first LIKE "'.strtr($fn,'+',' ').'%") ';
-				if($bd){ $sql2.='
-			                		AND( p.date_birth = "'.formatDate2STD($bd,$date_format).'"
-			                		OR p.date_birth LIKE "%'.$bd.'%")';
+				
+				$DOB=formatDate2STD($suchwort,$date_format);
+
+				$sql2=" WHERE ( p.name_last $sql_LIKE '".strtr($ln,'+',' ')."%'
+			                		AND p.name_first $sql_LIKE '".strtr($fn,'+',' ')."%')";
+				if($bd && $DOB){ $sql2.=" AND p.date_birth = '$DOB' )";
+				}else{
+					$sql2.=')';
 				}
-					
+
 				if(empty($odir)) $odir='DESC'; # default, latest birth at top
-		
+
 			}else{
-			
-				$sql2='	WHERE (p.name_last LIKE "'.strtr($suchwort,'+',' ').'%" 
-			                		OR p.name_first LIKE "'.strtr($suchwort,'+',' ').'%"
-			                		OR p.date_birth = "'.formatDate2STD($suchwort,$date_format).'"
-			                		OR p.date_birth LIKE "%'.$suchwort.'%"
-									)';
+
+				$sql2=" WHERE (p.name_last $sql_LIKE '".strtr($suchwort,'+',' ')."%'
+			                		OR p.name_first $sql_LIKE '".strtr($suchwort,'+',' ')."%'";
+				if($DOB) $sql2.=" OR p.date_birth = '$DOB' ";
+					else $sql2.=')';
 				if(empty($odir)) $odir='ASC'; # default, ascending alphabetic
 			}
 		}
-			 
-			$sql2.=' AND ps.status NOT IN ("void","hidden","deleted","inactive") 
-						AND NOT ps.is_discharged
-					  	AND ps.pid=p.pid    ORDER BY ';
+
+			$sql2.=" AND ps.status NOT IN ('void','hidden','deleted','inactive')
+						AND ps.is_discharged IN ('',0)
+					  	AND ps.pid=p.pid ";
 			# Filter if it is personnel nr
-			if($oitem=='nr') $sql2.='ps.'.$oitem.' '.$odir;
-				else $sql2.='p.'.$oitem.' '.$odir;
+			if($oitem=='nr') $sql3.='ORDER BY ps.'.$oitem.' '.$odir;
+				else $sql3 ='ORDER BY p.'.$oitem.' '.$odir;
 
 			$dbtable='FROM care_personell as ps,care_person as p ';
 
-			$sql='SELECT ps.nr, ps.is_discharged, p.name_last, p.name_first, p.date_birth, p.addr_zip, p.sex,p.photo_filename '.$dbtable.$sql2;
+			$sql='SELECT ps.nr, ps.is_discharged, p.name_last, p.name_first, p.date_birth, p.addr_zip, p.sex,p.photo_filename '.$dbtable.$sql2.$sql3;
 			//echo $sql;
 
 			if($ergebnis=$db->SelectLimit($sql,$pagen->MaxCount(),$pagen->BlockStartIndex()))
@@ -174,6 +178,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 					if(isset($totalcount)&&$totalcount){
 						$pagen->setTotalDataCount($totalcount);
 					}else{
+
 						# Count total available data
 						$sql='SELECT COUNT(ps.nr) AS count '.$dbtable.$sql2;
 						
@@ -257,6 +262,7 @@ $target='personell_search';
 
 <?php
 if($mode=='search'||$mode=='paginate'){
+
 	if ($linecount) echo '<hr width=80% align=left>'.str_replace("~nr~",$totalcount,$LDSearchFound).' '.$LDShowing.' '.$pagen->BlockStartNr().' '.$LDTo.' '.$pagen->BlockEndNr().'.';
 		else echo str_replace('~nr~','0',$LDSearchFound); 
 		  

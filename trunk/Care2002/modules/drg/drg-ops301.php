@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /*
-CARE 2X Integrated Information System version deployment 1.1 (mysql) 2004-01-11 for Hospitals and Health Care Organizations and Services
+CARE2X Integrated Information System beta 2.0.0 - 2004-05-16 for Hospitals and Health Care Organizations and Services
 Copyright (C) 2002  Elpidio Latorilla & Intellin.org	
 GNU GPL. For details read file "copy_notice.txt".
 */
@@ -16,6 +16,8 @@ require_once('drg_inc_local_user.php');
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_drg.php');
 $DRG_obj=new DRG($pn); // Create a drg object
+
+//$db->debug=1;
 
 $toggle=0;
 $thisfile=basename(__FILE__);

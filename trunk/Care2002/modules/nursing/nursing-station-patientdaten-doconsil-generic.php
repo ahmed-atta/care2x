@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@care2x.net, elpidio@care2x.org
@@ -38,6 +38,8 @@ $bgc1='#bbdbc4'; // <= Set the background color of the form here
 $abtname=get_meta_tags($root_path."global_conf/$lang/konsil_tag_dept.pid");
 
 $target='generic';
+
+//$db->debug=1;
 
 $db_request_table=$target;
 
@@ -102,7 +104,8 @@ if($dblink_ok){
 										 order_patient, diagnosis_quiry, send_date, 
 										 send_doctor, status, 
 										 history,
-										 modify_id,create_id, create_time
+										 create_id,
+										  create_time
 										 ) 
 										 VALUES 
 										 (
@@ -110,15 +113,15 @@ if($dblink_ok){
 										 '".$order_patient."','".addslashes($diagnosis_quiry)."','".formatDate2Std($send_date,$date_format)."',
 										 '".addslashes($send_doctor)."', 'pending',
 										 'Create: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n',
-										 '".$HTTP_SESSION_VARS['sess_user_name']."', '".$HTTP_SESSION_VARS['sess_user_name']."',NULL
+										 '".$HTTP_SESSION_VARS['sess_user_name']."','".date('YmdHis')."'
 										 )";
 
-								if($ergebnis=$db->Execute($sql))
+								if($ergebnis=$dept_obj->Transact($sql))
        							  {
 								  	// Load the visual signalling functions
 									include_once($root_path.'include/inc_visual_signalling_fx.php');
 									// Set the visual signal 
-									setEventSignalColor($pn,SIGNAL_COLOR_DIAGNOSTICS_REQUEST);									
+									setEventSignalColor($pn,SIGNAL_COLOR_DIAGNOSTICS_REQUEST);
 									//echo $sql;
 									 header("location:".$root_path."modules/laboratory/labor_test_request_aftersave.php?sid=".$sid."&lang=".$lang."&edit=".$edit."&saved=insert&pn=".$pn."&station=".$station."&user_origin=".$user_origin."&status=".$status."&target=".$target."&dept_nr=".$dept_nr."&noresize=".$noresize."&batch_nr=".$batch_nr);
 									 exit;
@@ -141,12 +144,13 @@ if($dblink_ok){
 											send_date = '".formatDate2Std($send_date,$date_format)."', 
 											send_doctor = '".$send_doctor."', 
 											status = '".$status."', 
-										    history=CONCAT(history,'Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n'),									   								   
-										    modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."'
+										    history=".$dept_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
+										    modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+											modify_time='".date('YmdHis')."'
 											WHERE batch_nr = '".$batch_nr."' ";						 
 
 									  							
-							      if($ergebnis=$db->Execute($sql))
+							      if($ergebnis=$dept_obj->Transact($sql))
        							  {
 								  	// Load the visual signalling functions
 									include_once($root_path.'include/inc_visual_signalling_fx.php');
@@ -183,8 +187,8 @@ if($dblink_ok){
 	
 	/* Get a new batch number */
 	if(!$mode){
-		$sql="SELECT batch_nr FROM care_test_request_".$db_request_table." ORDER BY batch_nr DESC LIMIT 1";
-		if($ergebnis=$db->Execute($sql)){
+		$sql="SELECT batch_nr FROM care_test_request_".$db_request_table." ORDER BY batch_nr DESC";
+		if($ergebnis=$db->SelectLimit($sql,1)){
 			if($batchrows=$ergebnis->RecordCount()){
 				$bnr=$ergebnis->FetchRow();
 				$batch_nr=$bnr['batch_nr'];
@@ -398,7 +402,7 @@ elseif(!$read_form && !$no_proc_assist)
 <?php
 
         if($edit){
-		   echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php'.URL_APPEND.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
+		   echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php'.URL_REDIRECT_APPEND.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
 		}elseif($pn==''){
 		    $searchmask_bgcolor='#ffffff';
             include($root_path.'include/inc_test_request_searchmask.php');

@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@care2x.net, elpidio@care2x.org
@@ -92,8 +92,12 @@ while(list($x,$v)=each($deptarray)){
 		if(isset($$v['LD_var'])&&$$v['LD_var']) echo $$v['LD_var'];
 			else echo $v['name_formal']; 
 	?></a> </td>
-    <td class=pblock  bgColor="#eeeeee"><?php if($v['is_inactive']) echo '<font color="red">'.$LDInactive.'</font>'; else echo $LDActive ?> </td>
-    <td class=pblock  bgColor="#eeeeee"><?php if($v['status']=='hidden') echo '<font color="red">'.$LDHidden.'</font>'; else echo $LDVisible ?> </td>
+    <td class=pblock  bgColor="#eeeeee"><?php if($v['is_inactive']) echo '<font color="red">'.$LDInactive.'</font>'; else echo $LDActive ?> 
+[<a href="dept_status.php<?php echo URL_APPEND; ?>&nr=<?PHP echo $v['nr']."&active=".$v['is_inactive']; ?>">x</a>]
+</td>
+    <td class=pblock  bgColor="#eeeeee"><?php if($v['status']=='hidden') echo '<font color="red">'.$LDHidden.'</font>'; else echo $LDVisible ?> 
+[<a href="dept_status.php<?php echo URL_APPEND; ?>&nr=<?PHP echo $v['nr']; ?>&status=<?PHP if($v['status']=='hidden') echo 'visible'; else echo "hidden"; ?>">x</a>]
+</td>
  	<td class=pblock  bgColor="#eeeeee"><a href="dept_status_config.php<?php echo URL_APPEND."&dept_nr=".$v['nr']; ?>"><?php echo $LDChange; ?></a> </td>
  </tr> 
 <?php

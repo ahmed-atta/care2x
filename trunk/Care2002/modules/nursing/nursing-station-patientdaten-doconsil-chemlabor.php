@@ -4,7 +4,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@care2x.net, elpidio@care2x.org
@@ -272,8 +272,8 @@ if(isset($pn)&&$pn) {
   
           if(!$mode) /* Get a new batch number */
 		  {
-		                $sql="SELECT batch_nr FROM care_test_request_".$db_request_table."  ORDER BY batch_nr DESC LIMIT 1";
-		                if($ergebnis=$db->Execute($sql))
+		                $sql="SELECT batch_nr FROM care_test_request_".$db_request_table."  ORDER BY batch_nr DESC";
+		                if($ergebnis=$db->SelectLimit($sql,1))
        		            {
 				            if($batchrows=$ergebnis->RecordCount())
 					        {
@@ -769,7 +769,7 @@ elseif(!$read_form && !$no_proc_assist)
 
       if($edit)
         {
-		    echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid=$sid&lang=$lang&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
+		    echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
 		}
         elseif(empty($pn))
 		{
@@ -787,6 +787,7 @@ elseif(!$read_form && !$no_proc_assist)
 <!--  Block for the casenumber codes -->  
  <table border=0 cellspacing=0 cellpadding=0>
 <?php
+
 for($n=0;$n<8;$n++)
 {
 
@@ -881,7 +882,10 @@ for($n=0;$n<8;$n++)
 	
 <table border=0 cellpadding=0 cellspacing=0 width=745 bgcolor="<?php echo $bgc1 ?>">
  <?php
- 
+
+# Start buffering the output
+ob_start();
+
     $tdcount=0; /* $tdcount limits the number of  columns (7) for test elements */
 
     while(list($x,$v)=each($LD_Elements))
@@ -891,9 +895,10 @@ for($n=0;$n<8;$n++)
 	  <tr class="lab">';
 	  
 	   /* If test element is part of emergency program change bgcolor */
-	   if(eregi("_emx_",$x)) $tdbgcolor='bgcolor="#f9def9"'; else  $tdbgcolor="";
-	   
-	  if(eregi("tx_",$x))
+
+	   if(strpos($x,"_emx_")!==FALSE) $tdbgcolor='bgcolor="#f9def9"'; else  $tdbgcolor="";
+
+	  if(strpos($x,"tx_")!==FALSE)
 	  {
 	    echo '
 		                  <td bgcolor="#ee6666" width=104 colspan=2><font color="white">&nbsp;<b>'.$v.'</b></font></td>';
@@ -902,8 +907,8 @@ for($n=0;$n<8;$n++)
 	  {
 		 
 		 $inp_v=0; /* Initialize input value to 0 */
-		 
-	     if(eregi("_x_",$x)) /* Check if the element has two marker fields */
+
+	     if(strpos($x,"_x_")!==FALSE) /* Check if the element has two marker fields */
 		 {
 		    $elem_index=explode("_x_",$x);
 			
@@ -990,7 +995,8 @@ for($n=0;$n<8;$n++)
 			echo $v.'</td>';
 			
 		   /* Check for the code of telephone then show telephone icon*/
-		   if(eregi("_telx_",$x))
+
+		   if(strpos($x,"_telx_")!==FALSE)
 		   {
 		      echo '
 			          <td align="right" '.$tdbgcolor.'><img '.createComIcon($root_path,'violet_phone.gif','0','absmiddle').'></td>';
@@ -1021,6 +1027,9 @@ for($n=0;$n<8;$n++)
 		 $tdcount++;
 	   }
 	}
+//$sTemp=ob_get_contents();
+ob_end_flush();
+//echo $sTemp;
 ?>
   <tr>
     <td colspan=9><input type="text" name="doctor_sign" size=40 maxlength=40 value="<?php if($edit_form||$read_form) echo stripslashes($stored_request['doctor_sign']); ?>"></td>

@@ -3,30 +3,32 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
 define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
+
 $thisfile=basename(__FILE__);
 /* Load the ward object */
 require_once($root_path.'include/care_api_classes/class_ward.php');
 $ward_obj=new Ward($ward_nr);
 
 $rows=0;
-	
+
+//$db->debug=1;
+
 /* Establish db connection */
 if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
 if($dblink_ok){
     /* Load the date formatter */
     include_once($root_path.'include/inc_date_format_functions.php');
-	
+
 	switch($mode){	
 		
 		case 'show': 
@@ -46,8 +48,7 @@ if($dblink_ok){
 				header('location:nursing-station-info.php'.URL_REDIRECT_APPEND);
 				exit;
 			}
-							
-			$breakfile='nursing-station-info.php?sid='.$sid.'&lang='.$lang;
+			$breakfile='nursing-station-info.php'.URL_APPEND;
 			break;
 		}
 		
@@ -98,10 +99,17 @@ if($dblink_ok){
 		default:					
 		{
 			if($wards=&$ward_obj->getAllActiveWards()){
-				// Get all medical departments
+				# Count wards
 				$rows=$wards->RecordCount();
-				$rooms=$ward_obj->countCreatedRooms();
-				if($rows==1) $ward=$wards->FetchRow();
+
+				if($rows==1){
+					# If only one ward, fetch the ward
+					$ward=$wards->FetchRow();
+					# Get ward´s active rooms info
+					$rooms=&$ward_obj->getAllActiveRoomsInfo($ward['nr']);
+				}else{
+					$rooms=$ward_obj->countCreatedRooms();
+				}
 			}else{
 			 	//echo $ward_obj->getLastQuery()."<br>$LDDbNoRead";
 			}
@@ -442,14 +450,13 @@ echo '<tr>
 		
 $toggle=0;
 $room=array();
-
-	while($result=$wards->FetchRow()){
-		if(is_object($rooms)){
-			while($room=$rooms->FetchRow()){
-				if($room['nr']==$result['nr'])	break;
-			}
-			$rooms->MoveFirst();
+	# Align the nr of rooms to their respective ward numbers
+	if(is_object($rooms)){
+		while($room=$rooms->FetchRow()){
+			$wbuf[$room['nr']]=$room['nr_rooms'];
 		}
+	}
+	while($result=$wards->FetchRow()){
 		if($toggle)	$trc='#dedede';
 			else $trc='#efefef';
 		$toggle=!$toggle;
@@ -463,10 +470,10 @@ $room=array();
 	<td><font face="Verdana, Arial" size=2 >';
 	if($result['is_temp_closed']){
 		echo '<font  color="red">'.$LDTemporaryClosed.'</font>';
-	}elseif(empty($room['nr_rooms'])){
+	}elseif(empty($wbuf[$result['nr']])){
 		echo $LDRoomNotCreated.'<a href="nursing-station-new-createbeds.php'.URL_APPEND.'&ward_nr='.$result['nr'].'"> '.$LDCreate.'>></a>';
 	}else{
-		echo $room['nr_rooms'].' '.$LDRoom;
+		echo $wbuf[$result['nr']].' '.$LDRoom;
 	}
 	echo '&nbsp;</td>  
 	</tr>';
@@ -489,7 +496,7 @@ echo '<p><font size=2 face="verdana,arial,helvetica">'.$LDNoWardsYet.'<br><img '
 
 </td>
 </tr>
-</table>        
+</table>
 <p>
 <?php
 require($root_path.'include/inc_load_copyrite.php');

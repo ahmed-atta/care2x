@@ -4,7 +4,7 @@ require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 //error_reporting(E_ALL);
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@care2x.net, elpidio@care2x.org
@@ -13,6 +13,7 @@ require($root_path.'include/inc_environment_global.php');
 */
 
 /* Start initializations */
+$lang_tables[] = 'departments.php';
 define('LANG_FILE','konsil.php');
 
 /* We need to differentiate from where the user is coming: 
@@ -42,107 +43,104 @@ if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_baclabor.php
 $thisfile="labor_test_request_admin_baclabor.php";
 
 $bgc1='#fff3f3'; /* The main background color of the form */
-$abtname=get_meta_tags($root_path."global_conf/$lang/konsil_tag_dept.pid");
+
 $edit_form=0; /* Set form to non-editable*/
 $read_form=1; /* Set form to read */
 $edit=0; /* Set script mode to no edit*/
 
-$formtitle=$abtname[$subtarget];
+$formtitle=$LDBacteriologicalLaboratory;
 
 $db_request_table=$subtarget;
 
 /* Here begins the real work */
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok)
-{	
-	if(!isset($mode))   $mode="";
-	/* Get the pending test requests */	  
-    if(!$mode) {
-		$sql="SELECT batch_nr,encounter_nr,send_date,dept_nr FROM care_test_request_".$db_request_table." 
-				WHERE status='pending' ORDER BY  send_date DESC";
-		if($requests=$db->Execute($sql)){
-			/* If request is available, load the date format functions */
-			require_once($root_path.'include/inc_date_format_functions.php');
-			$batchrows=$requests->RecordCount();
-			if($batchrows && (!isset($batch_nr) || !$batch_nr)) {
-				$test_request=$requests->FetchRow();
-				/* Check for the patietn number = $pn. If available get the patients data */
-				$pn=$test_request['encounter_nr'];
-				$batch_nr=$test_request['batch_nr'];
-			}
-		}else{
-			echo "<p>$sql<p>$LDDbNoRead"; 
-			exit;
-		}
-		$mode="show";   
-	}	
-		       
-	   
-     /* Check for the patietn number = $pn. If available get the patients data */
-     if($batchrows && $pn)
-	 {		
-		include_once($root_path.'include/care_api_classes/class_encounter.php');
-		$enc_obj=new Encounter;
-	    if( $enc_obj->loadEncounterData($pn)) {
+
+/* Get the pending test requests */
+if(!isset($mode) || empty($mode)) {
 		
-			include_once($root_path.'include/care_api_classes/class_globalconfig.php');
-			$GLOBAL_CONFIG=array();
-			$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
-			$glob_obj->getConfig('patient_%');	
-			switch ($enc_obj->EncounterClass())
-			{
-		    	case '1': $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-		                   break;
-				case '2': $full_en = ($pn + $GLOBAL_CONFIG['patient_outpatient_nr_adder']);
-							break;
-				default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-			}						
-
-			$result=&$enc_obj->encounter;
-
-			$sql="SELECT * FROM care_test_request_".$db_request_table." WHERE batch_nr='".$batch_nr."'";
-		    if($ergebnis=$db->Execute($sql)){
-				if($editable_rows=$ergebnis->RecordCount()){
-					$stored_request=$ergebnis->FetchRow();
-					 /* parse the material type */
-					if($stored_request['material']!=''){
-						parse_str($stored_request['material'],$stored_material);
-					}
-					 /* parse the test type */
-					if($stored_request['test_type']!=''){
-						parse_str($stored_request['test_type'],$stored_test_type);
-					}
-					$edit_form=1;
-				}
-			}else{
-				echo "<p>$sql<p>$LDDbNoRead"; 
-		  }					
+	$sql="SELECT batch_nr,encounter_nr,send_date,dept_nr FROM care_test_request_".$db_request_table."
+				WHERE status='pending' ORDER BY  send_date DESC";
+	
+	if($requests=$db->Execute($sql)){
+		/* If request is available, load the date format functions */
+		require_once($root_path.'include/inc_date_format_functions.php');
+		$batchrows=$requests->RecordCount();
+		if($batchrows && (!isset($batch_nr) || !$batch_nr)) {
+			$test_request=$requests->FetchRow();
+			/* Check for the patietn number = $pn. If available get the patients data */
+			$pn=$test_request['encounter_nr'];
+			$batch_nr=$test_request['batch_nr'];
 		}
-				
-		$sql="SELECT * FROM care_test_findings_".$db_request_table." WHERE batch_nr='".$batch_nr."'";
+	}else{
+		echo "<p>$sql<p>$LDDbNoRead";
+		exit;
+	}
+	$mode="show";
+}else{
+	$mode='';
+}
+
+/* Check for the patietn number = $pn. If available get the patients data */
+if($batchrows && $pn){
+		
+	include_once($root_path.'include/care_api_classes/class_encounter.php');
+	$enc_obj=new Encounter;
+	if( $enc_obj->loadEncounterData($pn)) {
+
+		include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+		$GLOBAL_CONFIG=array();
+		$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
+		$glob_obj->getConfig('patient_%');
+		switch ($enc_obj->EncounterClass())
+		{
+			case '1': $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
+							break;
+			case '2': $full_en = ($pn + $GLOBAL_CONFIG['patient_outpatient_nr_adder']);
+							break;
+			default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
+		}
+
+		$result=&$enc_obj->encounter;
+
+		$sql="SELECT * FROM care_test_request_".$db_request_table." WHERE batch_nr='".$batch_nr."'";
+	    
 		if($ergebnis=$db->Execute($sql)){
 			if($editable_rows=$ergebnis->RecordCount()){
-				$stored_findings=$ergebnis->FetchRow();
-				parse_str($stored_findings['type_general'],$parsed_type);
-				parse_str($stored_findings['resist_anaerob'],$parsed_resist_anaerob);
-				parse_str($stored_findings['resist_aerob'],$parsed_resist_aerob);
-				parse_str($stored_findings['findings'],$parsed_findings);
-						   
-				if($stored_findings['status']=='done') $edit_findings=0; /* Inhibit editing of the findings */
-							   
-				$mode='update';
+				$stored_request=$ergebnis->FetchRow();
+				 /* parse the material type */
+				if($stored_request['material']!=''){
+					parse_str($stored_request['material'],$stored_material);
+				}
+				/* parse the test type */
+				if($stored_request['test_type']!=''){
+					parse_str($stored_request['test_type'],$stored_test_type);
+				}
 				$edit_form=1;
 			}
+		}else{
+			echo "<p>$sql<p>$LDDbNoRead";
 		}
-				
-	}else{
-		$mode='';
-		$pn='';
-	}		
+	}
+
+	$sql="SELECT * FROM care_test_findings_".$db_request_table." WHERE batch_nr='".$batch_nr."'";
+	if($ergebnis=$db->Execute($sql)){
+		if($editable_rows=$ergebnis->RecordCount()){
+			$stored_findings=$ergebnis->FetchRow();
+			parse_str($stored_findings['type_general'],$parsed_type);
+			parse_str($stored_findings['resist_anaerob'],$parsed_resist_anaerob);
+			parse_str($stored_findings['resist_aerob'],$parsed_resist_aerob);
+			parse_str($stored_findings['findings'],$parsed_findings);
+
+			if($stored_findings['status']=='done') $edit_findings=0; /* Inhibit editing of the findings */
+
+			$mode='update';
+			$edit_form=1;
+		}
+	}
 }else{
-	echo "$LDDbNoLink<br>$sql<br>";
+	$mode='';
+	$pn='';
 }
+
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -275,20 +273,20 @@ require($root_path.'include/inc_test_request_lister_fx.php');
    <!--  Right frame containing the form -->
     <td>
         
-		<form name="form_test_request" method="post" action="<?php echo $thisfile ?>" onSubmit="return chkForm(this)">
+		<!--<form name="form_test_request" method="post" action="<?php echo $thisfile ?>" onSubmit="return chkForm(this)">  -->
 
-		<input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0','absmiddle') ?> title="<?php echo $LDSaveEntry ?>"> 
-        <a href="javascript:printOut()"><img <?php echo createLDImgSrc($root_path,'printout.gif','0','absmiddle') ?> alt="<?php echo $LDPrintOut ?>"></a>
+		<!--<input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0','absmiddle') ?> title="<?php // echo $LDSaveEntry ?>">-->
+		<a href="javascript:printOut()"><img <?php echo createLDImgSrc($root_path,'printout.gif','0','absmiddle') ?> alt="<?php echo $LDPrintOut ?>"></a>
         <a href="<?php echo 'labor_test_findings_'.$subtarget.'.php?sid='.$sid.'&lang='.$lang.'&batch_nr='.$batch_nr.'&pn='.$pn.'&entry_date='.$stored_request['entry_date'].'&target='.$target.'&subtarget='.$subtarget.'&user_origin='.$user_origin.'&tracker='.$tracker; ?>"><img <?php echo createLDImgSrc($root_path,'enter_result.gif','0','absmiddle') ?> alt="<?php echo $LDEnterResult ?>"></a>
 
 <?php
 
 require($root_path.'include/inc_test_findings_form_baclabor.php');
 
-require($root_path.'include/inc_test_request_hiddenvars.php');
+//require($root_path.'include/inc_test_request_hiddenvars.php');
 
-?>	
-     </form>
+?>
+		<!--</form>-->
 </td>
 
 </tr>

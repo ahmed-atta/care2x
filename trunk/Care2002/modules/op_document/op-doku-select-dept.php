@@ -3,18 +3,20 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-$lang_tables=array('or.php');
+$lang_tables[]='departments.php';
+$lang_tables[]='or.php';
 define('LANG_FILE','doctors.php');
 $local_user='ck_opdoku_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
+
+//$db->debug=1;
 
 /*
 switch($retpath)
@@ -125,7 +127,10 @@ while(list($x,$v)=each($dept_DOC)){
 		if ($toggler==0) 
 			{ echo '<tr bgcolor="#cfcfcf">'; $toggler=1;} 
 				else { echo '<tr bgcolor="#f6f6f6">'; $toggler=0;}
-	echo '<td ><font face="verdana,arial" size="2" >&nbsp;'.$bold.$v['name_formal'].$boldx.'&nbsp;</td>';
+	echo '<td ><font face="verdana,arial" size="2" >&nbsp;'.$bold;
+	if(isset($$v['LD_var']) && !empty($$v['LD_var'] )) echo  $$v['LD_var'];
+		else echo $v['name_formal'];
+	echo $boldx.'&nbsp;</td>';
 	echo '<td >&nbsp; <a href="'.$fileforward.'&dept_nr='.$v['nr'].'&target='.$target.'">
 	<img '.createLDImgSrc($root_path,'ok_small.gif','0','absmiddle').' alt="'.$LDShowActualPlan.'" ></a> </td></tr>';
 	echo "\n";

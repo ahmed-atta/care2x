@@ -3,16 +3,17 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@care2x.net, elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+$lang_tables[]='departments.php';
 define('LANG_FILE','konsil.php');
 
-/* We need to differentiate from where the user is coming: 
+/* We need to differentiate from where the user is coming:
 *  $user_origin != lab ;  from patient charts folder
 *  $user_origin == lab ;  from the laboratory
 *  and set the user cookie name and break or return filename
@@ -30,34 +31,42 @@ else
 
 require_once($root_path.'include/inc_front_chain_lang.php');
 
+ /**
+ * LOAD Smarty
+ */
+
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('nursing');
+
 $thisfile='nursing-station-patientdaten-doconsil-patho.php';
 
 $bgc1='#cde1ec'; 
-$abtname=get_meta_tags($root_path."global_conf/$lang/konsil_tag_dept.pid");
-
 //$konsil="patho";
-$formtitle=$abtname[$target];
-$db_request_table=$target;
-define('_BATCH_NR_INIT_',20000000); 
+$formtitle=$LDPathology;
+
+$db_request_table='patho';
+
+//$db->debug=1;
+
+define('_BATCH_NR_INIT_',20000000);
 /*
 *  The following are  batch nr inits for each type of test request
 *   chemlabor = 10000000; patho = 20000000; baclabor = 30000000; blood = 40000000; generic = 50000000;
 */
 						
 /* Here begins the real work */
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok)
-{	
-   
-   require_once($root_path.'include/inc_date_format_functions.php');
-   
+
+require_once($root_path.'include/inc_date_format_functions.php');
+
+require_once($root_path.'include/care_api_classes/class_encounter.php');
+$enc_obj=new Encounter;
 
      /* Check for the patient number = $pn. If available get the patients data, otherwise set edit to 0 */
      if(isset($pn)&&$pn)
 	 {		
-		include_once($root_path.'include/care_api_classes/class_encounter.php');
-		$enc_obj=new Encounter;
+
 	    if( $enc_obj->loadEncounterData($pn)) {
 /*		
 			include_once($root_path.'include/care_api_classes/class_globalconfig.php');
@@ -100,7 +109,7 @@ if($dblink_ok)
 										   gyn_hysterectomy, gyn_contraceptive, 
 										   gyn_iud, gyn_hormone_therapy, 
 										   doctor_sign, op_date, send_date,
-										   status, history, modify_id,create_id, create_time) 
+										   status, history, create_id, create_time)
 										   VALUES 
 										   (
 										   '".$batch_nr."','".$pn."','".$dept_nr."', '".$quick_cut."', 
@@ -113,11 +122,11 @@ if($dblink_ok)
 										   '".addslashes($doctor_sign)."', '".formatDate2Std($op_date,$date_format)."', '".date('Y-m-d H:i:s')."',
 										   '".$status."',
 										   'Create: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n',
-										   '".$HTTP_SESSION_VARS['sess_user_name']."', '".$HTTP_SESSION_VARS['sess_user_name']."', NULL
+										   '".$HTTP_SESSION_VARS['sess_user_name']."', '".date('YmdHis')."'
 										   )";
 
 
-							      if($ergebnis=$db->Execute($sql))
+							      if($ergebnis=$enc_obj->Transact($sql))
        							  {
 									//echo $sql;
 								  	// Load the visual signalling functions
@@ -140,20 +149,33 @@ if($dblink_ok)
 			 
 							      $sql="UPDATE care_test_request_".$db_request_table." SET 
 								          dept_nr = '".$dept_nr."', 
-										  quick_cut = '".$quick_cut."', qc_phone = '".$qc_phone."', quick_diagnosis = '".$quick_diagnosis."', 
-										  qd_phone = '".$qd_phone."', material_type = '".$material_type."', 
-										  material_desc = '".htmlspecialchars($material_desc)."', localization = '".htmlspecialchars($localization)."', 
-										  clinical_note = '".htmlspecialchars($clinical_note)."', extra_note = '".htmlspecialchars($extra_note)."', repeat_note = '".htmlspecialchars($repeat_note)."', 
-										  gyn_last_period = '".htmlspecialchars($gyn_last_period)."', gyn_period_type = '".htmlspecialchars($gyn_period_type)."', gyn_gravida = '".htmlspecialchars($gyn_gravida)."', 
-										  gyn_menopause_since = '".htmlspecialchars($gyn_menopause_since)."', gyn_hysterectomy = '".htmlspecialchars($hysterectomy)."', 
-										  gyn_contraceptive = '".htmlspecialchars($gyn_contraceptive)."', gyn_iud = '".htmlspecialchars($gyn_iud)."', gyn_hormone_therapy = '".htmlspecialchars($gyn_hormone_therapy)."', 
-										  doctor_sign = '".htmlspecialchars($doctor_sign)."', op_date = '".formatDate2STD($op_date,$date_format)."', 
+										  quick_cut = '".$quick_cut."', 
+										  qc_phone = '".$qc_phone."', 
+										  quick_diagnosis = '".$quick_diagnosis."',
+										  qd_phone = '".$qd_phone."', 
+										  material_type = '".$material_type."',
+										  material_desc = '".htmlspecialchars($material_desc)."', 
+										  localization = '".htmlspecialchars($localization)."',
+										  clinical_note = '".htmlspecialchars($clinical_note)."', 
+										  extra_note = '".htmlspecialchars($extra_note)."', 
+										  repeat_note = '".htmlspecialchars($repeat_note)."',
+										  gyn_last_period = '".htmlspecialchars($gyn_last_period)."', 
+										  gyn_period_type = '".htmlspecialchars($gyn_period_type)."', 
+										  gyn_gravida = '".htmlspecialchars($gyn_gravida)."',
+										  gyn_menopause_since = '".htmlspecialchars($gyn_menopause_since)."', 
+										  gyn_hysterectomy = '".htmlspecialchars($gyn_hysterectomy)."',
+										  gyn_contraceptive = '".htmlspecialchars($gyn_contraceptive)."', 
+										  gyn_iud = '".htmlspecialchars($gyn_iud)."', 
+										  gyn_hormone_therapy = '".htmlspecialchars($gyn_hormone_therapy)."',
+										  doctor_sign = '".htmlspecialchars($doctor_sign)."', 
+										  op_date = '".formatDate2STD($op_date,$date_format)."',
 										  status = '".$status."', 
-										  history = CONCAT(history,'Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n'),
-										  modify_id = '".$HTTP_COOKIE_VARS[$local_user.$sid]."'
+										  history = ".$enc_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
+										  modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+										  modify_time='".date('YmdHis')."'
 										   WHERE batch_nr = '".$batch_nr."'";
 										  							
-							      if($ergebnis=$db->Execute($sql))
+							      if($ergebnis=$enc_obj->Transact($sql))
        							  {
 									//echo $sql;
 								  	// Load the visual signalling functions
@@ -202,8 +224,8 @@ if($dblink_ok)
   
           if(!$mode) /* Get a new batch number */
 		  {
-		                $sql="SELECT batch_nr FROM care_test_request_".$db_request_table." ORDER BY batch_nr DESC LIMIT 1";
-		                if($ergebnis=$db->Execute($sql))
+		                $sql="SELECT batch_nr FROM care_test_request_".$db_request_table." ORDER BY batch_nr DESC";
+		                if($ergebnis=$db->SelectLimit($sql,1))
        		            {
 				            if($batchrows=$ergebnis->RecordCount())
 					        {
@@ -217,32 +239,78 @@ if($dblink_ok)
 					          }
 			             }
 			               else {echo "<p>$sql<p>$LDDbNoRead"; exit;}
-						 $mode="save";   
-		   }	    
-}
-else 
- { echo "$LDDbNoLink<br>$sql<br>"; }
-?>
+						 $mode="save";
+		   }
 
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
- <TITLE><?php echo "$LDDiagnosticTest $station" ?></TITLE>
+# Start the smarty templating
 
-<style type="text/css">
-div.fva2_ml10 {font-family: verdana,arial; font-size: 12; margin-left: 10;}
-div.fa2_ml10 {font-family: arial; font-size: 12; margin-left: 10;}
-div.fva2_ml3 {font-family: verdana; font-size: 12; margin-left: 3; }
-div.fa2_ml3 {font-family: arial; font-size: 12; margin-left: 3; }
-.fva2_ml10 {font-family: verdana,arial; font-size: 12; margin-left: 10; color:#000099;}
-.fva2b_ml10 {font-family: verdana,arial; font-size: 12; margin-left: 10; color:#000000;}
-.fva0_ml10 {font-family: verdana,arial; font-size: 10; margin-left: 10; color:#000099;}
-.fvag_ml10 {font-family: verdana,arial; font-size: 10; margin-left: 10; color:#969696;}
-</style>
+ /**
+ * HEAD META definition
+ */
+ $smarty->assign('setCharSet',setCharSet());
 
+ /**
+ * Toolbar
+ */
+
+ if(!isset($edit) || empty($edit)) $smarty->assign('edit',FALSE);
+
+ # Added for the html tag direction
+ $smarty->assign('HTMLtag',html_ret_rtl($lang));
+
+ # Set colors
+ $smarty->assign('top_txtcolor',$cfg['top_txtcolor']);
+ $smarty->assign('top_bgcolor',$cfg['top_bgcolor']);
+ $smarty->assign('body_bgcolor',$cfg['body_bgcolor']);
+ $smarty->assign('body_txtcolor',$cfg['body_txtcolor']);
+ $smarty->assign('bgc1',$bgc1);
+
+ $smarty->assign('gifHilfeR',createLDImgSrc($root_path,'hilfe-r.gif','0') );
+ $smarty->assign('LDCloseAlt',$LDCloseAlt );
+ $smarty->assign('gifClose2',createLDImgSrc($root_path,'close2.gif','0') );
+
+# Added for the common header top block
+
+ $smarty->assign('sToolbarTitle',"$LDDiagnosticTest ::  $formtitle");
+
+ if($user_origin=='lab'){
+	$smarty->assign('pbAux1',$thisfile."?sid=$sid&lang=$lang&station=$station&user_origin=$user_origin&status=$status&target=patho&noresize=$noresize");
+	$smarty->assign('gifAux1',createLDImgSrc($root_path,'newpat2.gif','0') );
+ }
+
+ $smarty->assign('pbBack','javascript:window.history.back()');
+ $smarty->assign('gifBack2',createLDImgSrc($root_path,'back2.gif','0') );
+
+
+ # Added for the common header top block
+ $smarty->assign('pbHelp','javascript:gethelp(\'request_patho.php\',\''.$pn.'\')');
+
+ $smarty->assign('breakfile',$breakfile);
+
+ if($cfg['dhtml']) {
+  $smarty->assign('dhtml','style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"');
+ } else {
+  $smarty->assign('dhtml','');
+ }
+
+
+ # Window bar title
+ $smarty->assign('title',$LDDiagnosticTest);
+ $smarty->assign('Name',$station);
+ 
+ # Space gif for the input blocks
+ 
+ $smarty->assign('gifVSpacer','<img src="'.$root_path.'gui/img/common/default/pixel.gif" border=0 width=20 height=45 align="left">');
+
+ /**
+ * collect JavaScript for Smarty
+ */
+
+ ob_start();
+
+ ?>
 <script language="javascript">
-<!-- 
+<!--
 
 function chkForm(d){
 
@@ -302,285 +370,245 @@ function printOut()
 <script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
 <script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
+
 <?php
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
 
-?>
-</HEAD>
+ require($root_path.'include/inc_js_gethelp.php');
+ require($root_path.'include/inc_css_a_hilitebu.php');
 
-<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> 
-onLoad="if (window.focus) window.focus(); 
-<?php if($pn=="") echo "document.searchform.searchkey.focus();" ?>" 
-topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+ $sTemp = ob_get_contents();
+ ob_end_clean();
+ $smarty->assign('JavaScript',$sTemp);
 
-<?php if(!$noresize)
-{
-?>
+# Set  document body attributes
 
-<script>	
+$smarty->assign('bgcolor','bgcolor='.$cfg['body_bgcolor']);
+
+$jsbuffer='onLoad="if (window.focus) window.focus(); ';
+
+if($pn=="") $smarty->assign('sOnLoadJs',$jsbuffer.' document.searchform.searchkey.focus();"');
+	else $smarty->assign('sOnLoadJs',$jsbuffer.'"');
+
+if (!$cfg['dhtml']) $smarty->assign('sLinkColors','link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']);
+	else $smarty->assign('sLinkColors','');
+
+# Set the javascript resizer code
+if(!$noresize){
+	$smarty->assign('js_noresize','
+<script>
       window.moveTo(0,0);
 	 window.resizeTo(1000,740);
-</script>
-
-<?php 
+</script>');
+}else{
+	$smarty->assign('js_noresize','');
 }
-?>
 
-<table width=100% border=0 cellpadding="5" cellspacing=0>
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php echo "$LDDiagnosticTest ::  $formtitle"; // if($user_origin!="lab") echo "(".$station.")"; ?></STRONG></FONT>
-</td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right ><nobr>
-<?php 
-if($user_origin=='lab')
-{
-?>
-<a href="<?php echo $thisfile."?sid=$sid&lang=$lang&station=$station&user_origin=$user_origin&status=$status&target=patho&noresize=$noresize"; ?>"><img <?php echo createLDImgSrc($root_path,'newpat2.gif','0') ?><?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';?>></a>
-&nbsp;
-<?php
-}
-?><a href="javascript:gethelp('request_patho.php','<?php echo $pn ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
-</tr>
-<tr>
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> colspan=2>
- <ul>
-
-<?php
 if($edit){
-?>
-	<form name="form_test_request" method="post" action="<?php echo $thisfile ?>" onSubmit="return chkForm(this)">
-<?php
 
+$smarty->assign('edit',TRUE);
+
+# collect output to buffer
+ob_start();
+
+?>
+		<form name="form_test_request" method="post" action="<?php echo $thisfile ?>" onSubmit="return chkForm(this)">
+<?php
 /* If in edit mode display the control buttons */
 
 $controls_table_width=700;
 
 require($root_path.'include/inc_test_request_controls.php');
 
+ $sTemp = ob_get_contents();
+ ob_end_clean();
+ $smarty->assign('form_headers',$sTemp);
+
+}elseif(!$read_form && !$no_proc_assist){
+
+
+
+	$smarty->assign('imgAngledown','<img '.createComIcon($root_path,'angle_down_l.gif','0').'>');
+    $smarty->assign('LDPlsSelectPatientFirst',$LDPlsSelectPatientFirst);
+    $smarty->assign('imgMascot','<img '.createMascot($root_path,'mascot1_l.gif','0','absmiddle').'>');
+
 }
-elseif(!$read_form && !$no_proc_assist)
-{
-?>
 
-<table border=0>
-  <tr>
-    <td valign="bottom"><img <?php echo createComIcon($root_path,'angle_down_l.gif','0') ?>></td>
-    <td><font color="#000099" SIZE=3  FACE="verdana,Arial"> <b><?php echo $LDPlsSelectPatientFirst ?></b></font></td>
-    <td><img <?php echo createMascot($root_path,'mascot1_l.gif','0','absmiddle') ?>></td>
-  </tr>
-</table>
-<?php
+if($edit){
+	$smarty->assign('barcode_label_single_large','<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php'.URL_REDIRECT_APPEND.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>');
+}elseif($pn==""){
+	$smarty->assign('show_searchmask',TRUE);
+	# Collect buffer output
+	ob_start();
+		$searchmask_bgcolor="#f3f3f3";
+		include($root_path.'include/inc_test_request_searchmask.php');
+		$sTemp = ob_get_contents();
+	ob_end_clean();
+	$smarty->assign('searchmask',$sTemp);
 }
-?>
 
-		<table   cellpadding="0" cellspacing=1 border="0" width=700>
+ $smarty->assign('formtitle',$formtitle);
+ $smarty->assign('LDTel',$LDTel);
+ $smarty->assign('LDEntryDate',$LDEntryDate);
+ $smarty->assign('LDJournalNumber',$LDJournalNumber);
+ $smarty->assign('LDBlockNumber',$LDBlockNumber);
+ $smarty->assign('LDDeepCuts',$LDDeepCuts);
+ $smarty->assign('LDSpecialDye',$LDSpecialDye);
+ $smarty->assign('LDImmuneHistoChem',$LDImmuneHistoChem);
+ $smarty->assign('LDHormoneReceptors',$LDHormoneReceptors);
+ $smarty->assign('LDSpecials',$LDSpecials);
 
-		<tr  valign="top" bgcolor="<?php echo $bgc1 ?>">
-		<td>
-		<?php
-		
-        if($edit)
-        {
-		   echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php'.URL_REDIRECT_APPEND.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
-		}
-        elseif($pn=="")
-		{
-		    $searchmask_bgcolor="#f3f3f3";
-            include($root_path.'include/inc_test_request_searchmask.php');
-        }
-        ?>
-     </td> 
-		<td class=fva2_ml10><div class="fva2_ml10">
+ $tpbuffer='<input type="checkbox" name="quick_cut" value="1"';
+ if($mode=="edit" && $stored_request['quick_cut'])  $tpbuffer.=' checked';
+ $smarty->assign('input_quick_cut',$tpbuffer.'>');
 
-		<table border=0  cellpadding=0 cellspacing=0 width=100%>
-    <tr>
-      <td rowspan=8 align="left" valign="top"><font size=5 color="#0000ff"><b><?php echo $formtitle ?></b></font><br>
-	  <font size=1 color="#000099"><?php echo $LDTel ?>
-	  </td>
-      <td class="fvag_ml10" align="right"><?php echo $LDEntryDate ?> &nbsp;</td>
-      <td><img src="../../gui/img/common/default/pixel.gif" border=0 width=50 height=20></td>
-    </tr>
-    <tr>
-      <td class="fvag_ml10" align="right"><?php echo $LDJournalNumber ?> &nbsp;</td>
-      <td><img src="../../gui/img/common/default/pixel.gif" border=0 width=50 height=20></td>
-    </tr>
-    <tr>
-      <td class="fvag_ml10" align="right"><?php echo $LDBlockNumber ?> &nbsp;</td>
-      <td><img src="../../gui/img/common/default/pixel.gif" border=0 width=50 height=20></td>
-    </tr>
-    <tr>
-      <td class="fvag_ml10" align="right"><?php echo $LDDeepCuts ?> &nbsp;</td>
-      <td><img src="../../gui/img/common/default/pixel.gif" border=0 width=50 height=20></td>
-    </tr>
-    <tr>
-      <td class="fvag_ml10" align="right"><?php echo $LDSpecialDye ?> &nbsp;</td>
-      <td><img src="../../gui/img/common/default/pixel.gif" border=0 width=50 height=20></td>
-    </tr>
-    <tr>
-      <td class="fvag_ml10" align="right"><?php echo $LDImmuneHistoChem ?> &nbsp;</td>
-      <td><img src="../../gui/img/common/default/pixel.gif" border=0 width=50 height=20></td>
-    </tr>
-    <tr>
-      <td class="fvag_ml10" align="right"><?php echo $LDHormoneReceptors ?> &nbsp;</td>
-      <td><img src="../../gui/img/common/default/pixel.gif" border=0 width=50 height=20></td>
-    </tr>
-    <tr>
-      <td class="fvag_ml10" align="right"><?php echo $LDSpecials ?> &nbsp;</td>
-      <td><img src="../../gui/img/common/default/pixel.gif" border=0 width=50 height=20></td>
-    </tr>
-  </table>
-  		</div>
-		</td></tr>
+ $smarty->assign('LDSpeedCut',$LDSpeedCut);
+ $smarty->assign('LDRelayResult',$LDRelayResult);
+ 
+ $tpbuffer= '';
+ if($mode=="edit") $tpbuffer.=$stored_request['qc_phone'];
+ $smarty->assign('input_qc_phone',$tpbuffer);
 
+ $smarty->assign('batch_nr',$batch_nr);
+ $smarty->assign('gifBatchBarcode',"<img src='".$root_path."classes/barcode/image.php?code=$batch_nr&style=68&type=I25&width=145&height=40&xres=2&font=5' border=0>");
+ 
+ $tpbuffer='<input type="checkbox" name="quick_diagnosis" value="1"';
+ if($mode=="edit" && $stored_request['quick_diagnosis']) $tpbuffer.=' checked';
+ $smarty->assign('input_quick_diagnosis',$tpbuffer.'>');
 
-<!-- Second row  -->
-	<tr bgcolor="<?php echo $bgc1 ?>">
-		<td  valign="top" colspan=2><font color="#000099">	   
-		
-		<table border=0 cellspacing=0 cellpadding=0 width=100%>
-    <tr>
-      <td><div class=fva0_ml10><input type="checkbox" name="quick_cut" value="1" <?php if($mode=="edit" && $stored_request['quick_cut']) echo "checked" ?>> <?php echo "<b>$LDSpeedCut</b>" ?></td>
-      <td><div class=fva0_ml10><?php echo $LDRelayResult ?>&nbsp;<input type="text" name="qc_phone" size=20 maxlength=25  value="<?php if($mode=="edit") echo $stored_request['qc_phone'] ?>"></td>
-      <td rowspan=2 align="right" >
-	  <?php 
-	  echo '<font size=1 color="#000099" face="verdana,arial">'.$batch_nr.'</font>&nbsp;&nbsp;<br>';
-          echo "<img src='".$root_path."classes/barcode/image.php?code=$batch_nr&style=68&type=I25&width=145&height=40&xres=2&font=5' border=0>";
-     ?>&nbsp;&nbsp;</td>
-    </tr>
-    <tr>
-      <td><div class=fva0_ml10><input type="checkbox" name="quick_diagnosis" value="1" <?php if($mode=="edit" && $stored_request['quick_diagnosis']) echo "checked" ?>> <?php echo "<b>$LDSpeedTest</b>" ?> </td>
-      <td><div class=fva0_ml10><?php echo $LDRelayResult ?>&nbsp;<input type="text" name="qd_phone" size=20 maxlength=25  value="<?php if($mode=="edit") echo $stored_request['qd_phone'] ?>"></td>
-    </tr>
-  </table>
-  </div></td>
-<!-- 			<td  valign=top><div class=fva0_ml10><font color="#000099">
-		 <?php echo $LDSpecialNotice ?>:<br>
-		<input type="text" name="specials" size=55 maxlength=60>
-		
-  </div></td> -->
-</tr>
-	<tr bgcolor="<?php echo $bgc1 ?>">
-		<td valign=top>
-		<div class=fva2_ml10><p><br>
-		<b><?php echo $LDMatType ?>:</b><br>
-			<input type="radio" name="material_type" value="pe" <?php if($mode=="edit" && $stored_request['material_type']=="pe") echo "checked" ?>> <?php echo $LDPE ?><br>
-  	<input type="radio" name="material_type" value="op_specimen" <?php if($mode=="edit" && $stored_request['material_type']=="op_specimen") echo "checked" ?>> <?php echo $LDSpecimen ?><br>
-  	<input type="radio" name="material_type" value="shave" <?php if($mode=="edit" && $stored_request['material_type']=="shave") echo "checked" ?>> <?php echo $LDShave ?><br>
-  	<input type="radio" name="material_type" value="cytology" <?php if($mode=="edit" && $stored_request['material_type']=="cytology") echo "checked" ?>> <?php echo $LDCytology ?><br>
-		</td>
-		<td><textarea name="material_desc" cols=46 rows=8 wrap="physical"><?php if($mode=="edit") echo stripslashes($stored_request['material_desc']) ?></textarea>
-				</td>
-		</tr>	
-</tr>
+ $smarty->assign('LDSpeedTest',$LDSpeedTest);
+ $smarty->assign('LDRelayResult',$LDRelayResult);
+ 
+ $tpbuffer='';
+ if($mode=="edit") $tpbuffer.=$stored_request['qd_phone'];
+ $smarty->assign('input_qd_phone',$tpbuffer);
 
-	<tr bgcolor="<?php echo $bgc1 ?>">
-		<td  valign="top" colspan=2><div class="fva0_ml10"><font color="#000099">	 
-		<b><?php echo $LDLocalization ?><b><br> 
-		<textarea name="localization" cols=82 rows=2 wrap="physical"><?php if($mode=="edit") echo stripslashes($stored_request['localization']) ?></textarea>
-  </div></td>
-</tr>
-	
-	<tr bgcolor="<?php echo $bgc1 ?>">
-		<td  valign="top" colspan=2 ><div class=fva0_ml10><font color="#000099">	 
-		<b><?php echo $LDClinicalQuestions ?></b><br>
-		<textarea name="clinical_note" cols=82 rows=2 wrap="physical"><?php if($mode=="edit") echo stripslashes($stored_request['clinical_note']) ?></textarea>
-  </div></td>
-</tr>
+ $smarty->assign('LDSpecialNotice',$LDSpecialNotice);
+ $smarty->assign('LDMatType',$LDMatType);
+ 
+ $tpbuffer='<input type="radio" name="material_type" value="pe"';
+ if($mode=="edit" && $stored_request['material_type']=="pe") $tpbuffer.= "checked";
+ $smarty->assign('input_material_type_pe',$tpbuffer.'>');
+ $smarty->assign('LDPE',$LDPE);
+ 
+ $tpbuffer='<input type="radio" name="material_type" value="op_specimen"';
+ if($mode=="edit" && $stored_request['material_type']=="op_specimen") $tpbuffer.=" checked";
+ $smarty->assign('input_material_type_op_specimen',$tpbuffer.'>');
+ $smarty->assign('LDSpecimen',$LDSpecimen);
 
-	<tr bgcolor="<?php echo $bgc1 ?>">
-		<td  valign="top" colspan=2 ><div class=fva0_ml10><font color="#000099">	 
-		<b><?php echo $LDExtraInfo ?></b><font size=1 face="arial"> <?php echo $LDExtraInfoSample ?><br>
-		<textarea name="extra_note" cols=82 rows=2 wrap="physical"><?php if($mode=="edit") echo stripslashes($stored_request['extra_note']) ?></textarea>
-  </div></td>
-</tr>
+ $tpbuffer='<input type="radio" name="material_type" value="shave"';
+ if($mode=="edit" && $stored_request['material_type']=="shave") $tpbuffer.= " checked";
+ $smarty->assign('input_material_type_shave',$tpbuffer.'>');
+ $smarty->assign('LDShave',$LDShave);
+ 
+ $tpbuffer='<input type="radio" name="material_type" value="cytology"';
+ if($mode=="edit" && $stored_request['material_type']=="cytology") $tpbuffer.= " checked";
+ $smarty->assign('input_material_type_cytology',$tpbuffer.'>');
+ $smarty->assign('LDCytology',$LDCytology);
 
-	<tr bgcolor="<?php echo $bgc1 ?>">
-		<td  valign="top" colspan=2 ><div class=fva0_ml10><font color="#000099">	 
-		<b><?php echo $LDRepeatedTest ?></b><font size=1 face="arial"> <?php echo $LDRepeatedTestPls ?><br>
-		<input type="text" name="repeat_note" size=110 maxlength=100 value="<?php if($mode=="edit") echo stripslashes($stored_request['repeat_note']) ?>">
-  </div></td>
-</tr>
+ if($mode=="edit") $smarty->assign('val_material_desc', stripslashes($stored_request['material_desc']));
 
-	<tr bgcolor="<?php echo $bgc1 ?>">
-		<td  valign="top" colspan=2 ><div class=fva0_ml10><font color="#000099">	 
-		<b><?php echo $LDForGynTests ?></b>
-		
-		<table border=0 cellpadding=1 cellspacing=1 width=100%>
-    <tr>
-      <td align="right"><div class=fva0_ml10><?php echo $LDLastPeriod ?></td>
-      <td><input type="text" name="gyn_last_period" size=15 maxlength=25 value="<?php if($mode=="edit") echo stripslashes($stored_request['gyn_last_period']) ?>"></td>
-      <td align="right"><div class=fva0_ml10><?php echo $LDMenopauseSince ?></td>
-      <td><input type="text" name="gyn_menopause_since" size=15 maxlength=25 value="<?php if($mode=="edit") echo stripslashes($stored_request['gyn_menopause_since']) ?>"></td>
-      <td align="right"><div class=fva0_ml10><?php echo $LDHormoneTherapy ?></td>
-      <td><input type="text" name="gyn_hormone_therapy" size=15 maxlength=25 value="<?php if($mode=="edit") echo stripslashes($stored_request['gyn_hormone_therapy']) ?>">&nbsp;</td>
-    </tr>
-    <tr>
-      <td align="right"><div class=fva0_ml10><?php echo $LDPeriodType ?></td>
-      <td><input type="text" name="gyn_period_type" size=15 maxlength=25 value="<?php if($mode=="edit") echo stripslashes($stored_request['gyn_period_type']) ?>"></td>
-      <td align="right"><div class=fva0_ml10><?php echo $LDHysterectomy ?></td>
-      <td><input type="text" name="gyn_hysterectomy" size=15 maxlength=25 value="<?php if($mode=="edit") echo stripslashes($stored_request['gyn_hysterectomy']) ?>"></td>
-      <td align="right"><div class=fva0_ml10><?php echo $LDIUD ?></td>
-      <td><input type="text" name="gyn_iud" size=15 maxlength=25 value="<?php if($mode=="edit") echo stripslashes($stored_request['gyn_iud']) ?>">&nbsp;</td>
-    </tr>
-    <tr>
-      <td align="right"><div class=fva0_ml10><?php echo $LDGravidity ?></td>
-      <td><input type="text" name="gyn_gravida" size=15 maxlength=25 value="<?php if($mode=="edit") echo stripslashes($stored_request['gyn_gravida']) ?>"></td>
-      <td align="right"><div class=fva0_ml10><?php echo $LDContraceptive ?></td>
-      <td><input type="text" name="gyn_contraceptive" size=15 maxlength=25 value="<?php if($mode=="edit") echo stripslashes($stored_request['gyn_contraceptive']) ?>"></td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-    </tr>
-  </table>
-  
-  </div></td>
-</tr>
+ $smarty->assign('LDLocalization',$LDLocalization);
+ if($mode=="edit") $smarty->assign('val_localization', stripslashes($stored_request['localization']));
 
-	<tr bgcolor="<?php echo $bgc1 ?>">
-		<td ><div class=fva2_ml10><font color="#000099">
-		 <?php echo $LDOpDate ?>:
-		<input type="text" name="op_date"  value="<?php  if($mode=="edit") echo formatDate2Local($stored_request['op_date'],$date_format); else echo formatDate2Local(date('Y-m-d'),$date_format) ?>" size=10 maxlength=10 onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-	  	<a href="javascript:show_calendar('form_test_request.op_date','<?php echo $date_format ?>')">
- 		<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
+ $smarty->assign('LDClinicalQuestions',$LDClinicalQuestions);
+ if($mode=="edit") $smarty->assign('val_clinical_note', stripslashes($stored_request['clinical_note']));
 
-  </div></td>
-			<td align="right"><div class=fva2_ml10><font color="#000099">
-		<?php echo "$LDDoctor/$LDDept" ?>:
-		<input type="text" name="doctor_sign" size=40 maxlength=60 value="<?php if($mode=="edit") echo stripslashes($stored_request['doctor_sign']) ?>">
-		
-  </div></td>
-</tr>
+ $smarty->assign('LDExtraInfo',$LDExtraInfo);
+ $smarty->assign('LDExtraInfoSample',$LDExtraInfoSample);
+ if($mode=="edit") $smarty->assign('val_extra_note', stripslashes($stored_request['extra_note']));
 
-		</table>
-<p>
+ $smarty->assign('LDRepeatedTest',$LDRepeatedTest);
+ $smarty->assign('LDRepeatedTestPls',$LDRepeatedTestPls);
 
-<?php
-if($edit)
-{
+ if($mode=="edit") $smarty->assign('val_repeat_note', stripslashes($stored_request['repeat_note']));
+
+ $smarty->assign('LDForGynTests',$LDForGynTests);
+ $smarty->assign('LDLastPeriod',$LDLastPeriod);
+
+ $tpbuffer='';
+ if($mode=="edit") $tpbuffer= stripslashes($stored_request['gyn_last_period']);
+ $smarty->assign('val_gyn_last_period',$tpbuffer);
+
+ $smarty->assign('LDMenopauseSince',$LDMenopauseSince);
+ $tpbuffer='';
+ if($mode=="edit") $tpbuffer= stripslashes($stored_request['gyn_menopause_since']);
+ $smarty->assign('val_gyn_menopause_since',$tpbuffer);
+
+ $smarty->assign('LDHormoneTherapy',$LDHormoneTherapy);
+ $tpbuffer='';
+ if($mode=="edit") $tpbuffer= stripslashes($stored_request['gyn_hormone_therapy']);
+ $smarty->assign('val_gyn_hormone_therapy',$tpbuffer);
+
+ $smarty->assign('LDPeriodType',$LDPeriodType);
+ $tpbuffer='';
+ if($mode=="edit") $tpbuffer= stripslashes($stored_request['gyn_period_type']);
+ $smarty->assign('val_gyn_period_type',$tpbuffer);
+
+ $smarty->assign('LDHysterectomy',$LDHysterectomy);
+ $tpbuffer='';
+ if($mode=="edit") $tpbuffer= stripslashes($stored_request['gyn_hysterectomy']);
+ $smarty->assign('val_gyn_hysterectomy',$tpbuffer);
+
+ $smarty->assign('LDIUD',$LDIUD);
+ $tpbuffer='';
+ if($mode=="edit") $tpbuffer= stripslashes($stored_request['gyn_iud']);
+ $smarty->assign('val_gyn_iud',$tpbuffer);
+
+ $smarty->assign('LDGravidity',$LDGravidity);
+ $tpbuffer='';
+ if($mode=="edit") $tpbuffer= stripslashes($stored_request['gyn_gravida']);
+ $smarty->assign('val_gyn_gravida',$tpbuffer);
+
+ $smarty->assign('LDContraceptive',$LDContraceptive);
+ $tpbuffer='';
+ if($mode=="edit") $tpbuffer= stripslashes($stored_request['gyn_contraceptive']);
+ $smarty->assign('val_gyn_contraceptive',$tpbuffer);
+
+ $smarty->assign('LDOpDate',$LDOpDate);
+ $tpbuffer='<input type="text" name="op_date"  value="';
+ if($mode=="edit") $tpbuffer.= formatDate2Local($stored_request['op_date'],$date_format).'"';
+ 	else $tpbuffer.= formatDate2Local(date('Y-m-d'),$date_format).'" size=10 maxlength=10 onBlur="IsValidDate(this,\''.$date_format.'\')" onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\')"';
+ $smarty->assign('inputOpDate',$tpbuffer.'>');
+ 
+ $smarty->assign('gifOpCalendar',"<a href=\"javascript:show_calendar('form_test_request.op_date','$date_format')\">
+ 		<img ".createComIcon($root_path,'show-calendar.gif','0','absmiddle')."></a>");
+
+  $smarty->assign('LDDoctor',$LDDoctor);
+  $smarty->assign('LDDept',$LDDept);
+  if($mode=="edit") $smarty->assign('val_doctor_sign',stripslashes($stored_request['doctor_sign']));
+
+if($edit){
+
+# Collect buffer output
+ob_start();
 
 /* If in edit mode display the control buttons */
 require($root_path.'include/inc_test_request_controls.php');
 
 require($root_path.'include/inc_test_request_hiddenvars.php');
 
-?>
-</form>
-<?php
+echo '</form>';
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+$smarty->assign('form_footers',$sTemp);
 }
+
+
+ /**
+ * show Copyright
+ * managed in smarty_care.class.php
+ */
+
+ $smarty->assign('sCopyright',$smarty->Copyright());
+ $smarty->assign('sPageTime',$smarty->Pagetime());
+
+ /**
+ * show Template
+ */
+
+ $smarty->display('laboratory/request_pathology.tpl');
+ // $smarty->display('debug.tpl');
+
 ?>
 
-</FONT>
-
-</ul>
-<p>
-</td>
-</tr>
-</table>        
-<p>
-
-<?php
-require($root_path.'include/inc_load_copyrite.php');?>
-</BODY>
-</HTML>

@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /*
-CARE 2X Integrated Information System version deployment 1.1 (mysql) 2004-01-11 for Hospitals and Health Care Organizations and Services
+CARE2X Integrated Information System beta 2.0.0 - 2004-05-16 for Hospitals and Health Care Organizations and Services
 Copyright (C) 2002  Elpidio Latorilla & Intellin.org	
 GNU GPL. 
 For details read file "copy_notice.txt".
@@ -44,6 +44,7 @@ $photo_filename='nopic';
 
 $dbtable='care_encounter';
 
+//$db->debug=1;
 
 /*		$sql='SELECT * FROM '.$dbtable.' AS enc LEFT JOIN care_person AS reg ON reg.pid = enc.pid
 		         WHERE enc.encounter_nr="'.$encounter_nr.'"';
@@ -136,6 +137,7 @@ $dbtable='care_encounter';
 			$dept_obj=new Department;
 			//$current_dept_name=$dept_obj->FormalName($current_dept_nr);
 			$current_dept_LDvar=$dept_obj->LDvar($current_dept_nr);
+
 			if(isset($$current_dept_LDvar)&&!empty($$current_dept_LDvar)) $current_dept_name=$$current_dept_LDvar;
 				else $current_dept_name=$dept_obj->FormalName($current_dept_nr);
 		}

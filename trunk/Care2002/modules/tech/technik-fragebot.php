@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'/include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -18,33 +18,37 @@ $thisfile=basename(__FILE__);
 if(!isset($mode)) $mode='';
 $dbtable='care_tech_questions';
 
+//$db->debug=1;
+
 $rows=0;
-/* Establish db connection */
-if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
-if($dblink_ok) {
 
     /* Load the date formatter */
     include_once($root_path.'include/inc_date_format_functions.php');
-    
-	switch($mode)
+    include_once($root_path.'include/care_api_classes/class_core.php');
+	$core = & new Core;
+
+$db->debug=1;
+
+switch($mode)
 	{
         case 'answer':
 				{
-				$sql='UPDATE '.$dbtable.' SET  tid="'.$tid.'", reply="'.htmlspecialchars($reply).'", answered=1, ansby="'.htmlspecialchars($von).'", astamp="'.date('Y-m-d H:i:s').'"
-							WHERE dept="'.$dept.'" 
-								AND inquirer="'.$inquirer.'" 
-								AND tdate="'.$tdate.'"
-								AND ttime="'.$ttime.'"
-								AND tid="'.$tid.'"';
-								
-					if($db->Execute($sql)) 
+				$sql="UPDATE $dbtable SET  reply='".htmlspecialchars($reply)."', answered=1, ansby='".htmlspecialchars($von)."',
+								astamp='".date('Y-m-d H:i:s')."'
+							WHERE dept='$dept'
+								AND inquirer='$inquirer'
+								AND tdate='$tdate'
+								AND ttime='$ttime'
+								AND tid='$tid'";
+
+					if($core->Transact($sql))
 					{
-							$sql='SELECT * FROM '.$dbtable.' 
-							WHERE dept="'.$dept.'" 
-								AND inquirer="'.$inquirer.'" 
-								AND tdate="'.$tdate.'"
-								AND ttime="'.$ttime.'"
-								AND tid="'.$tid.'"';
+							$sql="SELECT * FROM $dbtable
+							WHERE dept='$dept'
+								AND inquirer='$inquirer'
+								AND tdate='$tdate'
+								AND ttime='$ttime'
+								AND tid='$tid'";
 								
 							if($ergebnis=$db->Execute($sql)) 
 							{
@@ -58,12 +62,12 @@ if($dblink_ok) {
 				}
 			case 'read':
 				{
-					$sql='SELECT * FROM '.$dbtable.' 
-							WHERE dept="'.$dept.'" 
-								AND inquirer="'.$inquirer.'" 
-								AND tdate="'.$tdate.'"
-								AND ttime="'.$ttime.'"
-								AND tid="'.$tid.'"';
+					$sql="SELECT * FROM $dbtable
+							WHERE dept='$dept'
+								AND inquirer='$inquirer'
+								AND tdate='$tdate'
+								AND ttime='$ttime'
+								AND tid='$tid'";
 								
 					if($ergebnis=$db->Execute($sql)) 
 					{
@@ -75,26 +79,24 @@ if($dblink_ok) {
 				}
 			case 'archive':
 				{
-				    $sql='UPDATE '.$dbtable.' SET  tid="'.$tid.'", archive=1
-							WHERE dept="'.$dept.'" 
-								AND inquirer="'.$inquirer.'" 
-								AND tdate="'.$tdate.'"
-								AND ttime="'.$ttime.'"
-								AND tid="'.$tid.'"';
-					if(!$db->Execute($sql)) {echo "<p>".$sql."$LDDbNoUpdate<br>"; };
+				    $sql="UPDATE $dbtable SET archive=1
+							WHERE dept='$dept'
+								AND inquirer='$inquirer'
+								AND tdate='$tdate'
+								AND ttime='$ttime'
+								AND tid='$tid'";
+					if(!$core->Transact($sql)) {echo "<p>".$sql."$LDDbNoUpdate<br>"; };
 					 break;
 				}// end of case "archive":
 
 		 	}// end of switch(mode)
 
-				$sql='SELECT * FROM '.$dbtable.' WHERE archive<>1 ORDER BY tid DESC';;
+				$sql="SELECT * FROM $dbtable WHERE archive<>1 ORDER BY tid DESC";
         		if($ergebnis=$db->Execute($sql))
 				{
 					$rows=$ergebnis->RecordCount();
 				}else {echo "<p>".$sql."$LDDbNoRead<br>"; };
 			//echo $sql;
-		}
-  		 else { echo "$LDDbNoLink<br>"; } 
 ?>
 <?php html_rtl($lang); ?>
 <head>

@@ -3,14 +3,15 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-parse_str($ck_comdat,$varia);
+//parse_str($ck_comdat,$varia);
+parse_str($HTTP_SESSION_VARS['sess_comdat'],$varia);
 $fileforward="oplogtimebar.php?sid=$sid&lang=$lang&enc_nr=".$varia['enc_nr']."&op_nr=".$varia['op_nr']."&dept_nr=".$varia['dept_nr']."&saal=".$varia['saal']."&pyear=".$varia['pyear']."&pmonth=".$varia['pmonth']."&pday=".$varia['pday']."&scrolltab=$time";
 //echo $g;
 //echo $fileforward;
@@ -51,12 +52,12 @@ switch($g)
 	default:{header("Location: invalid-access-warning.php?mode=close"); exit;}; 
 }
 //echo $g;
+
+require($root_path.'include/care_api_classes/class_core.php');
+$core = & new Core;
+
 $dbtable='care_encounter_op';
 
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok)
-{	
 			// check if entry is already existing
 				$sql="SELECT $element FROM $dbtable 
 						WHERE encounter_nr='".$varia['enc_nr']."' 
@@ -157,7 +158,7 @@ if($dblink_ok)
 										AND op_room='".$varia['saal']."' 
 										AND op_nr='".$varia['op_nr']."'";
 											
-							if($ergebnis=$db->Execute($sql))
+							if($ergebnis=$core->Transact($sql))
        							{
 									//echo $sql." new update <br> resetmain= $resetmainput";
 									
@@ -168,9 +169,9 @@ if($dblink_ok)
 								}
 								else
 								{
-									echo "Patient ist noch nicht im Log Buch eingetragen. Bitte Schliessen Sie dieses Fenster
-										und öffnen Sie das Log Buch wieder. Falls dieses weiterhin besteht, benachrichtigen
-										Sie bitte die EDV Abteilung.";
+									echo $sql;
+									echo "<p>Something wrong happened here. The patient seems to be non-existent in the OR journal. Plese close this
+									module and reopen it again. If this problem persists please notify your IT department or <a \"mailto:info@care2x.net\". Thank you.";
 									exit;
 								}//end of else
 						
@@ -178,14 +179,12 @@ if($dblink_ok)
 		 				else
 		 				{
 							echo $sql;
-		 						echo "Patient ist noch nicht im Log Buch eingetragen. Bitte Schliessen Sie dieses Fenster
-										und öffnen Sie das Log Buch wieder. Falls dieses weiterhin besteht, benachrichtigen
-										Sie bitte die EDV Abteilung.";
+									echo "<p>Something wrong happened here. The patient seems to be non-existent in the OR journal. Plese close this
+									module and reopen it again. If this problem persists please notify your IT department or <a \"mailto:info@care2x.net\". Thank you.";
 									exit;
 							}
 				
 	 			}else echo "<p>".$sql."<p>$LDDbNoRead"; 
 
-  } else { echo "$LDDbNoLink $sql<br>"; }
 header("Location: $fileforward");
 ?>

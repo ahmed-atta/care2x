@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@care2x.net, elpidio@care2x.org
@@ -266,7 +266,7 @@ while ($patient=$opat_obj->FetchRow()){
 			</td>
 			<td align=center><font face="verdana,arial" size="2" >';
 	# If patient, show images by sex
-	$occ_list.='<a href="javascript:popPic(\''.$patient['name_last'].', '.$patient['name_first'].' '.formatDate2Local($patient['date_birth'],$date_format).'\',\''.$patient['photo_filename'].'\')" title="'.$LDShowPhoto.'">';
+	$occ_list.='<a href="javascript:popPic(\''.$patient['pid'].'\')" title="'.$LDShowPhoto.'">';
 		switch(strtolower($patient['sex']))
 		{
 			case 'f': $occ_list.='<img '.createComIcon($root_path,'spf.gif','0'); $females++; break;

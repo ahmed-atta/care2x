@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@care2x.net, elpidio@care2x.org
@@ -12,6 +12,7 @@ require($root_path.'include/inc_environment_global.php');
 */
 
 /* Start initializations */ 
+$lang_tables[]='departments.php';
 define('LANG_FILE','konsil.php');
 
 /* We need to differentiate from where the user is coming: 
@@ -31,36 +32,37 @@ if($user_origin=='lab'){
 }
 
 require_once($root_path.'include/inc_front_chain_lang.php'); ///* invoke the script lock*/
-require_once($root_path.'include/inc_config_color.php'); ///* load color preferences*/
+
 require_once($root_path.'global_conf/inc_global_address.php');
 
-$thisfile='labor_test_request_admin_radio.php';
+$thisfile= basename(__FILE__);
 
 $bgc1='#ffffff'; /* The main background color of the form */
-$abtname=get_meta_tags($root_path."global_conf/$lang/konsil_tag_dept.pid");
 $edit_form=0; /* Set form to non-editable*/
 $read_form=1; /* Set form to read */
 $edit=0; /* Set script mode to no edit*/
 
-$formtitle=$abtname[$subtarget];
+$formtitle=$LDRadiology;
 
-$db_request_table=$subtarget;
+//$db_request_table=$subtarget;
+$db_request_table='radio';
+
+//$db->debug=1;
 
 /* Here begins the real work */
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok)
-{	
-
-  require_once($root_path.'include/inc_date_format_functions.php');
+require_once($root_path.'include/inc_date_format_functions.php');
   
 
-	 if(!isset($mode))   $mode='';
-		
-		  switch($mode)
-		  {
-		     case 'update':
-							      $sql="UPDATE care_test_request_".$db_request_table." SET 
+if(!isset($mode))   $mode='';
+
+switch($mode){
+	case 'update':
+	{
+		# Create a core object
+		include_once($root_path.'include/inc_front_chain_lang.php');
+		$core = & new Core;
+
+		$sql="UPDATE care_test_request_".$db_request_table." SET
 										  xray_nr='".$xray_nr."',
 										  r_cm_2='".$r_cm_2."',
 										  mtr='".$mtr."',
@@ -69,87 +71,79 @@ if($dblink_ok)
                                           results_date='".formatDate2Std($results_date,$date_format)."',
 										  results_doctor='".htmlspecialchars($results_doctor)."',
 										  status='received',
-										  modify_id = '".$HTTP_COOKIE_VARS[$local_user.$sid]."'
-										   WHERE batch_nr = '".$batch_nr."'";
-							      if($ergebnis=$db->Execute($sql))
-       							  {
-									//echo $sql;
-									
-									 header("location:".$thisfile."?sid=$sid&lang=$lang&edit=$edit&saved=update&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=$target&subtarget=$subtarget&batch_nr=$batch_nr&noresize=$noresize");
-									 exit;
-								  }
-								  else
-								   {
-								      echo "<p>$sql<p>$LDDbNoSave"; 
-								      $mode='';
-								   }
-								break; // end of case 'save'
-			 default: $mode='';
-						   
-		  }// end of switch($mode)
-  
-          if(!$mode) /* Get the pending test requests */
-		  {
-		                $sql="SELECT batch_nr,encounter_nr,send_date,dept_nr FROM care_test_request_".$subtarget." 
-						         WHERE status='pending' OR status='received' ORDER BY  send_date DESC";
-		                if($requests=$db->Execute($sql))
-       		            {
-				            $batchrows=$requests->RecordCount();
-	                        if($batchrows && (!isset($batch_nr) || !$batch_nr)) 
-					        {
-						       $test_request=$requests->FetchRow();
-                               /* Check for the patietn number = $pn. If available get the patients data */
-		                       $pn=$test_request['encounter_nr'];
-						       $batch_nr=$test_request['batch_nr'];
-							}
-			             }
-			               else {echo "<p>$sql<p>$LDDbNoRead"; exit;}
-						 $mode='update';   
-		   }	
-		       
-	   
-     /* Check for the patietn number = $pn. If available get the patients data */
-     if($batchrows && $pn)
-	 {		
-		include_once($root_path.'include/care_api_classes/class_encounter.php');
-		$enc_obj=new Encounter;
-	    if( $enc_obj->loadEncounterData($pn)) {
-		
-			include_once($root_path.'include/care_api_classes/class_globalconfig.php');
-			$GLOBAL_CONFIG=array();
-			$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
-			$glob_obj->getConfig('patient_%');	
-			switch ($enc_obj->EncounterClass())
-			{
-		    	case '1': $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
+										  history=".$core->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
+										  modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+										  modify_time='".date('YmdHis')."'
+					WHERE batch_nr = '".$batch_nr."'";
+
+		if($ergebnis=$core->Transact($sql)){
+			//echo $sql;
+			header("location:".$thisfile."?sid=$sid&lang=$lang&edit=$edit&saved=update&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=$target&subtarget=$subtarget&batch_nr=$batch_nr&noresize=$noresize");
+			exit;
+		} else {
+			echo "<p>$sql<p>$LDDbNoSave";
+			$mode='';
+		}
+		break; // end of case 'save'
+	}
+	default: $mode='';
+}// end of switch($mode)
+
+/* Get the pending test requests */
+if(!$mode) {
+	$sql="SELECT batch_nr,encounter_nr,send_date,dept_nr FROM care_test_request_".$db_request_table."
+				WHERE status='pending' OR status='received' ORDER BY  send_date DESC";
+	if($requests=$db->Execute($sql)){
+		$batchrows=$requests->RecordCount();
+	 	if($batchrows && (!isset($batch_nr) || !$batch_nr)){
+			$test_request=$requests->FetchRow();
+			/* Check for the patietn number = $pn. If available get the patients data */
+		 	$pn=$test_request['encounter_nr'];
+			$batch_nr=$test_request['batch_nr'];
+		}
+	}else{
+		echo "<p>$sql<p>$LDDbNoRead";
+		exit;
+	}
+	$mode='update';
+}
+
+/* Check for the patient number = $pn. If available get the patients data */
+if($batchrows && $pn){
+	include_once($root_path.'include/care_api_classes/class_encounter.php');
+	$enc_obj=new Encounter;
+	if( $enc_obj->loadEncounterData($pn)) {
+
+		include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+		$GLOBAL_CONFIG=array();
+		$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
+		$glob_obj->getConfig('patient_%');
+		switch ($enc_obj->EncounterClass())
+		{
+			case '1': $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
 		                   break;
-				case '2': $full_en = ($pn + $GLOBAL_CONFIG['patient_outpatient_nr_adder']);
+			case '2': $full_en = ($pn + $GLOBAL_CONFIG['patient_outpatient_nr_adder']);
 							break;
-				default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-			}						
+			default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
+		}
 
-			if( $enc_obj->is_loaded){
-				$result=&$enc_obj->encounter;
+		if( $enc_obj->is_loaded){
+			$result=&$enc_obj->encounter;
 
-				$sql="SELECT * FROM care_test_request_".$subtarget." WHERE batch_nr='".$batch_nr."'";
-		        if($ergebnis=$db->Execute($sql)){
-					if($editable_rows=$ergebnis->RecordCount()){
-						$stored_request=$ergebnis->FetchRow();
-						 $edit_form=1;
-					}
-				}else{
-					echo "<p>$sql<p>$LDDbNoRead"; 
-				}					
+			$sql="SELECT * FROM care_test_request_".$db_request_table." WHERE batch_nr='".$batch_nr."'";
+			if($ergebnis=$db->Execute($sql)){
+				if($editable_rows=$ergebnis->RecordCount()){
+					$stored_request=$ergebnis->FetchRow();
+					$edit_form=1;
+				}
+			}else{
+				echo "<p>$sql<p>$LDDbNoRead";
 			}
-		}else{
-		  $mode='';
-		  $pn='';
-	   }		
-     }		   
-		   
-		   
-}else{
-	echo "$LDDbNoLink<br>$sql<br>";
+		}
+	}else{
+		$mode='';
+		$pn='';
+	}
 }
 ?>
 
@@ -268,7 +262,7 @@ require($root_path.'include/inc_test_request_lister_fx.php');
  <?php
         if($edit || $read_form)
         {
-		   echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid=$sid&lang=$lang&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
+		   echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
 		}
 		?></td>
       <td bgcolor="<?php echo $bgc1 ?>"  class=fva2_ml10><div   class=fva2_ml10><font size=5 color="#0000ff"><b><?php echo $formtitle ?></b></font>
@@ -336,12 +330,12 @@ require($root_path.'include/inc_test_request_lister_fx.php');
 		 
 	<tr bgcolor="<?php echo $bgc1 ?>">
 		<td colspan=2><div class=fva2_ml10><?php echo $LDClinicalInfo ?>:<p><img src="../../gui/img/common/default/pixel.gif" border=0 width=20 height=45 align="left">
-		<font face="courier" size=2 color="#000000">&nbsp;&nbsp;<?php echo stripslashes($stored_request['clinical_info']) ?></font>
+		<font face="courier" size=2 color="#000099">&nbsp;&nbsp;<?php echo stripslashes($stored_request['clinical_info']) ?></font>
 				</td>
 		</tr>	
 	<tr bgcolor="<?php echo $bgc1 ?>">
 		<td colspan=2><div class=fva2_ml10><?php echo $LDReqTest ?>:<p><img src="../../gui/img/common/default/pixel.gif" border=0 width=20 height=45 align="left">
-		<font face="courier" size=2 color="#000000">&nbsp;&nbsp;<?php echo stripslashes($stored_request['test_request']) ?></font>
+		<font face="courier" size=2 color="#000099">&nbsp;&nbsp;<?php echo stripslashes($stored_request['test_request']) ?></font>
 				</td>
 		</tr>	
 
@@ -376,9 +370,9 @@ require($root_path.'include/inc_test_request_lister_fx.php');
 		<input type="text" name="xray_date" 
 		value="<?php 
 		
-		            if($read_form && $stored_request['xray_date']!='0000-00-00')
+		            if($read_form && $stored_request['xray_date'] != DBF_NODATE)
 					{
-					  echo formatDate2Local($stored_request['xray_date'],$date_format); 
+					  echo formatDate2Local($stored_request['xray_date'],$date_format);
 					}
 					else
 					{
@@ -402,8 +396,7 @@ require($root_path.'include/inc_test_request_lister_fx.php');
 		 <?php echo $LDDate ?>
         <input type="text" name="results_date" 
 		value="<?php 
-		
-		            if($read_form && $stored_request['results_date']!='0000-00-00')
+		            if($read_form && $stored_request['results_date']!=DBF_NODATE)
 					{
 					  echo formatDate2Local($stored_request['results_date'],$date_format); 
 					}

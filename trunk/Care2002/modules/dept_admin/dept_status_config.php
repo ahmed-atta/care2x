@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -15,7 +15,6 @@ define('LANG_FILE','edp.php');
 $local_user='ck_edv_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_department.php');
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
 $breakfile='dept_list_config.php'.URL_APPEND;
 
@@ -23,37 +22,32 @@ if(!isset($mode)) $mode='';
 
 $dept_obj=new Department;
 
+//$db->debug=1;
 
-if($mode)
-{
-	
-	if(!isset($db)||!$db) include_once($root_path.'include/inc_db_makelink.php');
-	if($dblink_ok)
-		{
-			switch($mode)
-			{	
-				case 'update': 
-									$HTTP_POST_VARS['history']=" CONCAT(history,'Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n"."')";
+if($mode){
+			switch($mode){
+				
+				case 'update':
+									$HTTP_POST_VARS['history']=$dept_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n");
 									$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+									$HTTP_POST_VARS['modify_time']=date('YmdHis');
 									$dept_obj->setTable('care_department');
 									$dept_obj->setDataArray($HTTP_POST_VARS);
 									$dept_obj->where=' nr='.$dept_nr;
-									if($dept_obj->updateDataFromInternalArray($dept_nr)) 
-										{
-											header("location:dept_status_config.php".URL_REDIRECT_APPEND."&edit=1&updateok=1&dept_nr=$dept_nr");
-											exit;
-										}
-										else echo "$sql<br>$LDDbNoSave";
+									if($dept_obj->updateDataFromInternalArray($dept_nr)){
+										header("location:dept_status_config.php".URL_REDIRECT_APPEND."&edit=1&updateok=1&dept_nr=$dept_nr");
+										exit;
+									}else{
+										echo "$sql<br>$LDDbNoSave";
+									}
 									break;
 									
 			}// end of switch
-		}
-  		 else { echo "$LDDbNoLink<br>"; } 
 }
 
 $depttypes=$dept_obj->getTypes();
 $dept=$dept_obj->getDeptAllInfo($dept_nr);
-extract($dept);					
+extract($dept);
 ?>
 
 
@@ -144,8 +138,8 @@ if(isset($$LD_var)&&$$LD_var) echo $$LD_var;
   </tr> 
   <tr>
     <td class=pblock align=right bgColor="#eeeeee"><?php echo $LDRecordStatus ?>: </td>
-    <td class=pblock>	<input type="radio" name="status" value="" <?php if($status!='hidden') echo 'checked'; ?>> <?php echo $LDVisible ?> 
-    <td class=pblock>	<input type="radio" name="status" value="hidden" <?php if($status) echo 'checked'; ?>> <?php echo $LDHidden ?>
+    <td class=pblock>	<input type="radio" name="status" value="visible" <?php if($status!='hidden') echo 'checked'; ?>> <?php echo $LDVisible ?>
+    <td class=pblock>	<input type="radio" name="status" value="hidden" <?php if($status=='hidden') echo 'checked'; ?>> <?php echo $LDHidden ?>
 	</td>
   </tr> 
 

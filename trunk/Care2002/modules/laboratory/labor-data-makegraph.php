@@ -6,10 +6,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -18,7 +18,7 @@ define('LANG_FILE','lab.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-if($user_origin=='lab'){
+if($user_origin=='lab'||$user_origin=='lab_mgmt'){
 	$local_user='ck_lab_user';
 	//$breakfile=$root_path.'modules/laboratory/labor.php'.URL_APPEND;
   	if(isset($from)&&$from=='input') $breakfile=$root_path.'modules/laboratory/labor_datalist_noedit.php'.URL_APPEND.'&encounter_nr='.$encounter_nr.'&job_id='.$job_id.'&parameterselect='.$parameterselect.'&allow_update='.$allow_update.'&user_origin='.$user_origin.'&from=input';
@@ -249,7 +249,7 @@ while(list($group_id,$param_group)=each($paralistarray)){
 
 			//$txt.=$records[$job_id][$group_id][$param];
 				
-			# Print the row	
+			# Print the row
 			 echo $txt.'<td colspan="'.$cols.'"><img  src="'.$root_path.'main/imgcreator/labor-datacurve.php?sid='.$sid.'&lang='.$lang.'&cols='.$cols.'&lo='.$tp[$param]['lo_bound'].'&hi='.$tp[$param]['hi_bound'].'&d='.$sessbuf.'" border=0>
 			</td></tr>';
 		}
@@ -263,25 +263,16 @@ while(list($group_id,$param_group)=each($paralistarray)){
 </td></tr>
 </table>
 </form>
-
 <ul>
 <p>
 <a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDBack ?>"></a>
-
-
 </UL>
-
 </FONT>
-
 <?php
 require($root_path.'include/inc_load_copyrite.php');
 ?>
-
-
 </td>
 </tr>
-</table>        
-
-
+</table>
 </BODY>
 </HTML>

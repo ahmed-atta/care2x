@@ -3,13 +3,15 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+$lang_tables[] = 'departments.php';
+$lang_tables[] = 'konsil.php';
 define('LANG_FILE','lab.php');
 /* We need to differentiate from where the user is coming: 
 *  $user_origin != lab ;  from patient charts folder
@@ -29,11 +31,21 @@ else
 }
 
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
 
-$thisfile='labor_test_request_aftersave.php';
+ /**
+ * LOAD Smarty
+ */
+
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('nursing');
+
+$thisfile=basename(__FILE__);
 
 $db_request_table=$target;
+
+//$db->debug=1;
 
  /* Check for the patietn number = $pn. If available get the patients data, */
 if(isset($pn)&&$pn) {	
@@ -60,11 +72,6 @@ if(isset($pn)&&$pn) {
 }
 
 /* Here begins the real work */
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok)
-{	
-
      require_once($root_path.'include/inc_date_format_functions.php');
      
 	   
@@ -89,7 +96,7 @@ if($dblink_ok)
 								   elseif($target=='chemlabor')
 								   {
 								       if($stored_request['parameters']!='') parse_str($stored_request['parameters'],$stored_param);
-								   }							   					      
+								   }
 							   $read_form=1;
 							   $printmode=1;
 							}
@@ -97,51 +104,124 @@ if($dblink_ok)
 						else
 					     {
 						     echo "<p>$sql<p>$LDDbNoRead"; 
-						  }					
-				}   
-	}
-	else 
-		{ echo "$LDDbNoLink<br>$sql<br>"; }
-		
-require_once($root_path.'include/care_api_classes/class_department.php');
-$dept_obj=new Department;
-if($dept_obj->preloadDept($stored_request['testing_dept'])){
-	$buffer=$dept_obj->LDvar();
-	if(isset($$buffer)&&!empty($$buffer)) $formtitle=$$buffer;
-		else $formtitle=$dept_obj->FormalName();
-}
-?>
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
+						  }
+				}
 
-<style type="text/css">
-div.fva2_ml10 {font-family: verdana,arial; font-size: 12; margin-left: 10;}
-div.fa2_ml10 {font-family: arial; font-size: 12; margin-left: 10;}
-div.fva2_ml3 {font-family: verdana; font-size: 12; margin-left: 3; }
-div.fa2_ml3 {font-family: arial; font-size: 12; margin-left: 3; }
-.fva2_ml10 {font-family: verdana,arial; font-size: 12; margin-left: 10; color:#000099;}
-.fva2b_ml10 {font-family: verdana,arial; font-size: 12; margin-left: 10; color:#000000;}
-.fva0_ml10 {font-family: verdana,arial; font-size: 10; margin-left: 10; color:#000099;}
-.fvag_ml10 {font-family: verdana,arial; font-size: 10; margin-left: 10; color:#969696;}
+# Detect the type of form
+# $bgc1 = The main background color of the form
 
-<?php if($target=='baclabor') 
-{
-?>
-.lab {font-family: arial; font-size: 9; color:#ee6666;}
-<?php 
+switch($target){
+	case 'radio':
+		$formtitle = $LDRadiology;
+		$bgc1='#ffffff';
+		break;
+	case 'generic':
+		include_once($root_path.'include/care_api_classes/class_department.php');
+		$dept_obj=new Department;
+		if($dept_obj->preloadDept($stored_request['testing_dept'])){
+			$buffer=$dept_obj->LDvar();
+			if(isset($$buffer)&&!empty($$buffer)) $formtitle=$$buffer;
+				else $formtitle=$dept_obj->FormalName();
+		}
+		$bgc1='#bbdbc4';
+		break;
+	case 'chemlabor':
+		$formtitle = $LDChemicallaboratory;
+		$bgc1='#fff3f3';
+		if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_chemlabor.php')){
+			include_once($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_chemlabor.php');
+		}else{
+			include_once($root_path.'language/en/lang_en_konsil_chemlabor.php');
+		}
+		break;
+	case 'baclabor':
+		$formtitle = $LDBacteriologicalLaboratory;
+		$bgc1='#fff3f3';
+		break;
+	case 'blood':
+		$formtitle = $LDBloodBank;
+		$bgc1='#99ffcc';
+		break;
+	case 'patho':
+		$formtitle = $LDPathology;
+		$bgc1='#cde1ec';
+		break;
+	default:  $bgc1='#ffffff';
 }
-else
-{
-?>
-.lab {font-family: arial; font-size: 9; color:purple;}
-<?php
-}
-?>
 
-.lmargin {margin-left: 5;}
-</style>
+
+# Start the smarty templating
+
+ /**
+ * HEAD META definition
+ */
+ $smarty->assign('setCharSet',setCharSet());
+
+ /**
+ * Toolbar
+ */
+
+ if(!isset($edit) || empty($edit)) $smarty->assign('edit',FALSE);
+ 
+ # Set it to be purely printout
+ $smarty->assign('printmode',TRUE);
+
+ # Added for the html tag direction
+ $smarty->assign('HTMLtag',html_ret_rtl($lang));
+
+ # Set colors
+ $smarty->assign('top_txtcolor',$cfg['top_txtcolor']);
+ $smarty->assign('top_bgcolor',$cfg['top_bgcolor']);
+ $smarty->assign('body_bgcolor',$cfg['body_bgcolor']);
+ $smarty->assign('body_txtcolor',$cfg['body_txtcolor']);
+ $smarty->assign('bgc1',$bgc1);
+
+ $smarty->assign('gifHilfeR',createLDImgSrc($root_path,'hilfe-r.gif','0') );
+ $smarty->assign('LDCloseAlt',$LDCloseAlt );
+ $smarty->assign('gifClose2',createLDImgSrc($root_path,'close2.gif','0') );
+
+# Added for the common header top block
+
+ $smarty->assign('sToolbarTitle',"$LDTestRequest ::  $formtitle");
+
+ $smarty->assign('pbBack','javascript:window.history.back()');
+ $smarty->assign('gifBack2',createLDImgSrc($root_path,'back2.gif','0') );
+
+ # Added for the common header top block
+ $smarty->assign('pbHelp','javascript:gethelp(\'request_aftersave.php\')');
+
+ $smarty->assign('breakfile',$breakfile);
+
+ if($cfg['dhtml']) {
+  $smarty->assign('dhtml','style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"');
+ } else {
+  $smarty->assign('dhtml','');
+ }
+
+
+ # Window bar title
+ $smarty->assign('title',$LDTestRequest);
+ $smarty->assign('Name',$station);
+
+
+
+if($target=='baclabor'){
+
+ $smarty->assign('css_lab','.lab {font-family: arial; font-size: 9; color:#ee6666;}');
+
+}else{
+
+ $smarty->assign('css_lab','.lab {font-family: arial; font-size: 9; color:purple;}');
+
+}
+
+ /**
+ * collect JavaScript for Smarty
+ */
+
+ ob_start();
+
+?>
 
 <script language="javascript">
 <!-- 
@@ -156,95 +236,73 @@ function printOut()
 <?php 
 require($root_path.'include/inc_js_gethelp.php');
 require($root_path.'include/inc_css_a_hilitebu.php');
-?>  
-</HEAD>
 
-<BODY topmargin=0 leftmargin=0 marginheight=0 marginwidth=0 bgcolor=<?php echo $cfg['bot_bgcolor'];?>>
- 
+ $sTemp = ob_get_contents();
+ ob_end_clean();
+ $smarty->assign('JavaScript',$sTemp);
 
-<table width=100% border=0 cellspacing=0>
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="45"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG> <?php echo $LDTestRequest ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').' style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('request_aftersave.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
-</tr>
-<tr>
-<td bgcolor=<?php echo $cfg['body_bgcolor'];?> colspan=2>
-<br><ul>
-<p>
+$smarty->assign('gifMascot','<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'>');
 
+if($status=="draft") $smarty->assign('sAfterSavePrompt',$LDFormSaved[$saved]);
+	else $smarty->assign('sAfterSavePrompt',$LDRequestSent[$saved]);
 
-<table border=0>
-  <tr valign="top">
-    <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','absmiddle') ?>></td>
-    <td><FONT    SIZE=4  FACE="verdana,Arial" color="#990000">
-	<?php 
-	    if($status=="draft") echo $LDFormSaved[$saved]; else echo $LDRequestSent[$saved]; 
-		echo $LDWhatToDo;
-	?><p>
-<FONT    SIZE=2  FACE="verdana,Arial" color="#990000">
-           <a href="javascript:printOut()"><img <?php echo createComIcon($root_path,'bul_arrowgrnsm.gif','0','absmiddle') ?>> <?php echo $LDPrintForm ?></a><br>
-           <a href="<?php echo $root_path ?>modules/nursing/nursing-station-patientdaten-doconsil-<?php echo $target ?>.php<?php echo URL_APPEND ?>&pn=<?php echo $pn ?>&edit=<?php echo $edit ?>&station=<?php echo $station ?>&target=<?php echo $target ?>&dept_nr=<?php echo $dept_nr ?>&user_origin=<?php echo $user_origin ?>&noresize=<?php echo $noresize ?>&mode=edit&batch_nr=<?php echo $batch_nr ?>"><img <?php echo createComIcon($root_path,'bul_arrowgrnsm.gif','0','absmiddle') ?>> <?php echo $LDEditForm ?></a><br>
-	       <a href="<?php echo $root_path ?>modules/nursing/nursing-station-patientdaten-doconsil-<?php echo $target ?>.php<?php echo URL_APPEND ?>&pn=<?php echo $pn ?>&edit=<?php echo $edit ?>&station=<?php echo $station ?>&target=<?php echo $target ?>&dept_nr=<?php echo $dept_nr ?>&user_origin=<?php echo $user_origin ?>&noresize=<?php echo $noresize ?>&mode="><img <?php echo createComIcon($root_path,'bul_arrowgrnsm.gif','0','absmiddle') ?>> <?php echo $LDNewFormSamePatient ?></a><br>
-           <?php
-		   if($user_origin=='lab')
-		   {
-		   ?>
-		   <a href="<?php echo $root_path ?>modules/nursing/nursing-station-patientdaten-doconsil-<?php echo $target ?>.php<?php echo URL_APPEND ?>&edit=0&station=<?php echo $station ?>&target=<?php echo $target ?>&dept_nr=<?php echo $dept_nr ?>&user_origin=<?php echo $user_origin ?>&noresize=<?php echo $noresize ?>"><img <?php echo createComIcon($root_path,'bul_arrowgrnsm.gif','0','absmiddle') ?>> <?php echo $LDNewFormOtherPatient ?></a><br>
-           <?php
-		   }
-		   ?>
-           <a href="<?php echo $breakfile ?>"><img <?php echo createComIcon($root_path,'bul_arrowgrnsm.gif','0','absmiddle') ?>> <?php echo $LDEndTestRequest ?></a><p>
-        </td>
-  </tr>
-</table>
+$smarty->assign('LDWhatToDo',$LDWhatToDo);
+$smarty->assign('pbPrintOut','javascript:printOut()');
+$smarty->assign('gifGrnArrow','<img '.createComIcon($root_path,'bul_arrowgrnsm.gif','0','absmiddle').'>');
+$smarty->assign('LDPrintForm',$LDPrintForm);
+$smarty->assign('pbEditForm',$root_path."modules/nursing/nursing-station-patientdaten-doconsil-".$target.".php".URL_APPEND."&pn=$pn&edit=$edit&station=$station&target=$target&dept_nr=$dept_nr&user_origin=$user_origin&noresize=$noresize&mode=edit&batch_nr=$batch_nr");
+$smarty->assign('LDEditForm',$LDEditForm);
+$smarty->assign('pbNewSamePatient',$root_path."modules/nursing/nursing-station-patientdaten-doconsil-".$target.".php".URL_APPEND."&pn=$pn&edit=$edit&station=$station&target=$target&dept_nr=$dept_nr&user_origin=$user_origin&noresize=$noresize&mode=");
+$smarty->assign('LDNewFormSamePatient',$LDNewFormSamePatient);
 
+if($user_origin=='lab'){
+	$smarty->assign('user_origin_lab',TRUE);
+	$smarty->assign('pbNewForm',$root_path."modules/nursing/nursing-station-patientdaten-doconsil-".$target.".php".URL_APPEND."&edit=0&station=$station&target=$target&dept_nr=$dept_nr&user_origin=$user_origin&noresize=$noresize");
+	$smarty->assign('LDNewFormOtherPatient',$LDNewFormOtherPatient);
 
-
-<?php
-/* The main background color of the form */
-switch($target)
-{ 
-  case 'generic':         $bgc1='#bbdbc4'; break;
-  case 'patho':         $bgc1='#cde1ec'; break;
-  case 'radio':          $bgc1='#ffffff'; break;
-  case 'blood':          $bgc1='#99ffcc'; break;
-  case 'baclabor':          $bgc1='#fff3f3'; break;
-  case 'chemlabor':   $bgc1='#fff3f3';
-                               if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_chemlabor.php'))
-							   {
-							      include_once($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_chemlabor.php');
-							    }
-								else
-								{ 
-								   include_once($root_path.'language/en/lang_en_konsil_chemlabor.php');
-								}
-                               break;
-  default:  $bgc1='#ffffff'; break; 
 }
-/*$abtname=get_meta_tags($root_path."global_conf/$lang/konsil_tag_dept.pid");
-$formtitle=$abtname[$target];
-*/
+$smarty->assign('breakfile',$breakfile);
+$smarty->assign('LDEndTestRequest',$LDEndTestRequest);
+
 require_once($root_path.'include/inc_test_request_printout_fx.php');
 
-if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil.php')){  
-   include_once($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil.php');
-}else{  
-   include_once($root_path.'language/en/lang_en_konsil.php');
-}
-/* Load the form for printing out */
+/* Load the form for printing out 
+* This is a hybrid compromise as long as not all forms are converted to smarty
+* templates. In this case, when the form is pathology, the smarty assignments are done
+* otherwise the output is buffered
+*/
 $edit=0;
-if($target=='baclabor') include($root_path.'include/inc_test_findings_form_baclabor.php');
- else include($root_path.'include/inc_test_request_printout_'.$target.'.php');
-?>  
-</ul>
-</td>
-</tr>
-</table>        
-<p>
-<?php
-require($root_path.'include/inc_load_copyrite.php');
+if($target=='patho'){
+
+	$smarty->assign('patho',TRUE);
+	include($root_path.'include/inc_test_request_printout_patho.php');
+
+}else{
+
+	# Collect output buffer
+	ob_start();
+		if($target=='baclabor'){
+			include($root_path.'include/inc_test_findings_form_baclabor.php');
+		}else{
+			include($root_path.'include/inc_test_request_printout_'.$target.'.php');
+		}
+ 	$sTemp = ob_get_contents();
+ 	ob_end_clean();
+ 	$smarty->assign('printout_form',$sTemp);
+}
+
+ /**
+ * show Copyright
+ * managed in smarty_care.class.php
+ */
+
+ $smarty->assign('sCopyright',$smarty->Copyright());
+ $smarty->assign('sPageTime',$smarty->Pagetime());
+
+ /**
+ * show Template
+ */
+
+ $smarty->display('laboratory/request_aftersave.tpl');
+ // $smarty->display('debug.tpl');
 ?>
-</BODY>
-</HTML>

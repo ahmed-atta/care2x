@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -24,6 +24,8 @@ require($root_path.'include/inc_2level_reset.php');
 
 $dbtable='care_mail_private_users';
 
+//$db->debug=1;
+
 $linecount=0;
 $onError='';
 if(!isset($mode)) $mode='';
@@ -33,11 +35,9 @@ if(!isset($username)) $username='';
 
 if($mode!='')
 {
-	if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
-    if($dblink_ok) {	
-		if(($mode=='access')&&($password!='')&&($username!='')&&($dept!='')) 
+		if(($mode=='access')&&($password!='')&&($username!='')&&($dept!=''))
 			{
-				$sql='SELECT * FROM '.$dbtable.' WHERE email="'.$username.'@'.$dept.'"';
+				$sql="SELECT * FROM $dbtable WHERE email='$username@$dept'";
 				if($ergebnis=$db->Execute($sql))
 				{ 
 					if($ergebnis->RecordCount())
@@ -65,7 +65,7 @@ if($mode!='')
 						// if last check data not available 
 						$newuser=1;
 					}
-				}else { echo "$LDDbNoSave<br>$sql"; } 
+				}else { echo "$LDDbNoRead<br>$sql"; }
 			}// end of if password...
 			
 		if($mode=='register')
@@ -78,7 +78,7 @@ if($mode!='')
 			if(!isset($pw2)) $pw2='';
 			if(!isset($name)) $name='';
 			
-			$sql='SELECT * FROM '.$dbtable.' WHERE email="'.$addr.'@'.$dept.'"';
+			$sql="SELECT * FROM $dbtable WHERE email='$addr@$dept'";
 			if($ergebnis=$db->Execute($sql))
 			{ 
 				if($ergebnis->RecordCount())
@@ -144,8 +144,6 @@ if($mode!='')
 		   } // end of if($regError)
 		   $newuser=1;
 		}
-	}
-  		else { echo "$LDDbNoLink<br>"; } 
 } // end of if mode!=""
 
 if(($mode=='access')&&(($username=='')||($password=='')))  $onError=$LDErrorIncomplete;

@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -43,10 +43,13 @@ if(isset($mode)&&$mode=='save'){
 	$HTTP_POST_VARS['timeout_time']=date('His',mktime($HTTP_POST_VARS['thours'],$HTTP_POST_VARS['tmins'],$HTTP_POST_VARS['tsecs'],1,1,1971));
 	
 	$filter='timeout_'; # The index filter
+
 	$numeric=FALSE; # Values are not strictly numeric
 	$addslash=FALSE; # Slashes should be added to the stored values
+
 	# Save the configuration
 	$glob_obj->saveConfigArray($HTTP_POST_VARS,$filter,$numeric,'',$addslash);
+
 	# Loop back to self to get the newly stored values
 	header("location:$thisfile".URL_REDIRECT_APPEND."&save_ok=1");
 	exit;

@@ -4,10 +4,10 @@ require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 //error_reporting(E_WARNING);
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -45,11 +45,21 @@ switch($user_origin)
 }
 
 /* Start initializations */
+$lang_tables[] = 'departments.php';
 if($subtarget=='chemlabor') define('LANG_FILE','konsil_chemlabor.php');
  else define('LANG_FILE','konsil.php');
 
 require_once($root_path.'include/inc_front_chain_lang.php'); ///* invoke the script lock*/
-require_once($root_path.'include/inc_config_color.php'); ///* load color preferences*/
+
+ /**
+ * LOAD Smarty
+ */
+
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('laboratory');
+
 
 $thisfile='labor_test_request_printpop.php';
 
@@ -62,12 +72,28 @@ else
 {
     switch($subtarget)
     {
-         case 'generic':  $bgc1='#bbdbc4'; break;
-         case 'patho': $bgc1='#cde1ec'; break;
-         case 'radio':  $bgc1='#ffffff'; break;
-         case 'blood':  $bgc1='#99ffcc'; break;
-         case 'chemlabor':  $bgc1='#fff3f3'; break;
-         case 'baclabor':  $bgc1='#fff3f3'; 
+         case 'generic':
+		 	$bgc1='#bbdbc4';
+			break;
+         case 'patho':
+		 	$bgc1='#cde1ec';
+			$formtitle = $LDPathology;
+			break;
+         case 'radio':
+		 	$bgc1='#ffffff';
+			$formtitle = $LDRadiology;
+			break;
+         case 'blood':
+		 	$bgc1='#99ffcc';
+			$formtitle= $LDBloodBank;
+			break;
+         case 'chemlabor':
+		 	$bgc1='#fff3f3';
+			$formtitle = $LDChemicalLaboratory;
+			break;
+         case 'baclabor':
+		 	$formtitle = $LDBacteriologicalLaboratory;
+			$bgc1='#fff3f3';
                                    /* Load additional language table */
                                   if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_baclabor.php')) include_once($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_baclabor.php');
                                       else include_once($root_path.'language/'.LANG_DEFAULT.'/lang_'.LANG_DEFAULT.'_konsil_baclabor.php');
@@ -76,12 +102,12 @@ else
 			           break;
     }
 }
-$abtname=get_meta_tags($root_path."global_conf/$lang/konsil_tag_dept.pid");
+//$abtname=get_meta_tags($root_path."global_conf/$lang/konsil_tag_dept.pid");
 $edit_form=0; /* Set form to non-editable*/
 $read_form=1; /* Set form to read */
 $edit=0; /* Set script mode to no edit*/
-    
-$formtitle=$abtname[$subtarget];
+
+//$formtitle=$abtname[$subtarget];
 
 
 if ($target=='generic')
@@ -121,11 +147,7 @@ if(isset($pn)&&$pn) {
 	}	
 }
 /* Here begins the real work */
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok)
-{	
-     /* Load date formatter */
+/* Load date formatter */
      include_once($root_path.'include/inc_date_format_functions.php');
      
      /* Load editor functions */
@@ -169,9 +191,7 @@ if($dblink_ok)
 						     echo "<p>$sql<p>$LDDbNoRead"; 
 						  }					
 				}
-}else{
-	echo "$LDDbNoLink<br>$sql<br>";
-}
+
 require_once($root_path.'include/care_api_classes/class_department.php');	
 $dept_obj=new Department;
 if($dept_obj->preloadDept($stored_request['testing_dept'])){
@@ -231,12 +251,22 @@ if($show_print_button) echo '<a href="javascript:window.print()"><img '.createLD
 
 
 /* Load the form for printing out */
-if($subtarget=='chemlabor' || $subtarget=='baclabor')
-{
+if($subtarget=='chemlabor' || $subtarget=='baclabor'){
+
     echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'&batch_nr='.$batch_nr.'&child_img=1&subtarget='.$subtarget.'" >';
-}
-else
-{
+
+}elseif($subtarget=='patho'){
+
+	$smarty->assign('bgc1',$bgc1);
+	$smarty->assign('printmode',TRUE);
+
+	$read_form=TRUE;
+
+	include($root_path.'include/inc_test_request_printout_'.$formfile.'.php');
+	
+	$smarty->display('forms/pathology.tpl');
+
+}else{
     include($root_path.'include/inc_test_request_printout_'.$formfile.'.php');
 }
 ?>

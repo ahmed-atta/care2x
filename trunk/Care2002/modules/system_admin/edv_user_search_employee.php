@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@care2x.net, elpidio@care2x.org
@@ -28,39 +28,27 @@ $entry_body_bgcolor='#ffffff';
 if(!isset($searchkey)) $searchkey='';
 if(!isset($mode)) $mode='';
 
+$db->debug=1;
 
-if(($mode=='search')and($searchkey))
-{
-			
+if(($mode=='search')and($searchkey)){	
 	/* Load global config */
-	include_once($root_path.'include/care_api_classes/class_globalconfig.php');
-	$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
-    $glob_obj->getConfig('personell_%');
 	$suchwort=trim($searchkey);
 	
 	if(is_numeric($suchwort)){
-		$suchwort=(int) $suchwort;
+		$suchbuffer=(int) $suchwort;
 		$numeric=1;
-		if($suchwort < $GLOBAL_CONFIG['personell_nr_adder']) $suchbuffer=$suchwort; 
-			else $suchbuffer=($suchwort-$GLOBAL_CONFIG['personell_nr_adder']); 
 	}else{
 		$suchbuffer=$suchwort;
 	}
 			
-	$sql='SELECT ps.nr, ps.is_discharged, p.name_last, p.name_first, p.date_birth,u.login_id
-		          FROM (care_personell as ps,care_person as p) 
-				  	LEFT JOIN care_users AS u ON u.personell_nr=ps.nr
-		          WHERE
-				  (
-		               p.name_last LIKE "'.addslashes($suchwort).'%" 
-		              OR p.name_first LIKE "'.addslashes($suchwort).'%"
-		              OR p.date_birth LIKE "'.@formatDate2Std($suchwort,$date_format).'%"
-		              OR ps.nr LIKE "'.(int)$suchbuffer.'"
-				  )
-				  AND NOT ps.is_discharged
-				  AND ps.pid=p.pid  
-		          ORDER BY p.name_last ';
-				  
+	$sql="SELECT ps.nr, ps.is_discharged, p.name_last, p.name_first, p.date_birth,u.login_id
+		          FROM care_person as p, care_personell as ps
+				  	LEFT JOIN care_users AS u ON u.personell_nr=ps.nr ";
+	if($numeric) $sql.="WHERE ps.nr $sql_LIKE '%".$suchbuffer."'";
+		else $sql.= "WHERE (p.name_last $sql_LIKE '".addslashes($suchwort)."%'
+		              OR p.name_first LIKE '".addslashes($suchwort)."%') ";
+	$sql.=" AND ps.is_discharged IN ('',0) AND ps.pid=p.pid ORDER BY p.name_last ";
+
 	if($ergebnis=$db->Execute($sql)){
 			
 		if ($linecount=$ergebnis->RecordCount()){ 

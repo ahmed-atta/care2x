@@ -3,27 +3,29 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
 define('LANG_FILE','nursing.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
 
 $breakfile=$root_path."modules/nursing/nursing-station-patientdaten.php".URL_REDIRECT_APPEND."&edit=$edit&station=$station&pn=$pn";
 
 require($root_path.'global_conf/inc_remoteservers_conf.php');
 
 if($disc_pix_mode){
-	$final_path="$root_path$fotoserver_localpath$pn/"; 
+	$final_path="$root_path$fotoserver_localpath$pn/";
 }else{
 	$final_path="$fotoserver_http$pn/";
 }
+
+//$db->debug=1;
+
 /* Load date formatter */
 include_once($root_path.'include/inc_date_format_functions.php');
 
@@ -90,11 +92,12 @@ echo $pn;
 
 if(is_object($encounter)){
 	$fn=$encounter->PhotoFilename();
-	if(file_exists($root_path.'fotos/registration/'.$fn)){
+	if(!empty($fn)&&file_exists($root_path.'fotos/registration/'.$fn)){
 		# If main photo ID exists, show it
-		echo '<br><a href="'.$root_path.'main/pop_reg_pic.php'.URL_APPEND.'&fn='.$fn.'" target="FOTOS_PREVIEW" title="'.$LDClk2Preview.'">
+		echo '<br><a href="'.$root_path.'main/pop_reg_pic.php'.URL_APPEND.'&pid='.$encounter->PID().'&fn='.$fn.'" target="FOTOS_PREVIEW" title="'.$LDClk2Preview.'">
 	 		<img src="';
-		echo  $root_path.'main/imgcreator/thumbnail.php?mx=80&my=100&imgfile=fotos/registration/'.$fn;
+		echo $root_path.'main/imgcreator/thumbnail.php?mx=80&my=100&imgfile=fotos/registration/'.$fn;
+				
 		echo '" border=0></a>';
 
 	}
@@ -133,7 +136,7 @@ if(is_object($all_image)){
 				echo $final_path.$image['nr'].'.'.$image['mime_type'].'" border=0  width=80></a> </td>
    				</tr>';
 			}else{
-				echo  $root_path.'main/imgcreator/thumbnail.php?mx=80&my=100&imgfile=/'.$fotoserver_localpath.$pn.'/'.$image['nr'].'.'.$image['mime_type'].'" border=0></a> </td>
+				echo  $root_path.'main/imgcreator/thumbnail.php?mx=80&my=100&imgfile='.$fotoserver_localpath.$pn.'/'.$image['nr'].'.'.$image['mime_type'].'" border=0></a> </td>
    				</tr>';
 			}
    		}

@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -16,12 +16,14 @@ define('DEFAULT_NR_OF_BEDS',2); // Define here the default number of beds if the
 define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
+
 $thisfile=basename(__FILE__);
 $breakfile='nursing-station-info.php?sid='.$sid.'&lang='.$lang;
 /* Load the ward object */
 require_once($root_path.'include/care_api_classes/class_ward.php');
 $ward_obj=new Ward($ward_nr);
+
+//$db->debug=1;
 
 if(isset($mode)&&$mode=='save_beds'){
 	$saved_ok=false;
@@ -29,19 +31,20 @@ if(isset($mode)&&$mode=='save_beds'){
 	// Set the values common to all rooms 
 	$HTTP_POST_VARS['date_create']=date('Y-m-d');
 	$HTTP_POST_VARS['history']="Created: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
-	$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+	//$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
 	$HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
 	$HTTP_POST_VARS['create_time']=date('YmdHis');
-	
+	//$db->debug=1;
 	for($i=$room_nr_start;$i<=$room_nr_end;$i++){
-	
+
 		if(!$ward_obj->RoomExists($i)){
 			$beds='beds'.$i;
 			$info='info'.$i;
 			$HTTP_POST_VARS['room_nr']=$i;
 			if(empty($$beds)) $$beds=DEFAULT_NR_OF_BEDS;
 			$HTTP_POST_VARS['nr_of_beds']=$$beds;
-			$HTTP_POST_VARS['info']=$$info;
+			if(empty($$info)) $HTTP_POST_VARS['info'] = ' ';
+				else $HTTP_POST_VARS['info']=$$info;
 			if($ward_obj->saveWardRoomInfoFromArray($HTTP_POST_VARS)) $saved_ok=true;
 			//echo $ward_obj->getLastQuery().'<p>';
 		}
@@ -165,7 +168,7 @@ $toggle=0;
 	<td>&nbsp;<font color="#ff0000"><b>*</b><input type="text" name="beds'.$i.'" size=2 maxlength=2 value="2">
      &nbsp;  
 	</td> 
-	<td>&nbsp; <input type="text" name="info'.$i.'" size=60 maxlength=100>
+	<td>&nbsp; <input type="text" name="info'.$i.'" size=60 maxlength=100 value="">
 	</td> 
 	</tr>';
 	}

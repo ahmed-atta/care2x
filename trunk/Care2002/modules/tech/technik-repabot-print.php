@@ -3,16 +3,20 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'/include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
 define('LANG_FILE','tech.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
+require_once($root_path.'include/care_api_classes/class_core.php');
+$core = & new Core;
+
+//$db->debug=1;
 
 if(isset($tid)&&$tid&&isset($dept)&&$dept)
 {
@@ -21,9 +25,7 @@ if(isset($tid)&&$tid&&isset($dept)&&$dept)
     $stat2seen=false;
     $mov2arc=false;
     $deltodo=false;
-	
-    if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
-    if($dblink_ok) {
+
         /* Load the date formatter */
         include_once($root_path.'include/inc_date_format_functions.php');
         
@@ -35,13 +37,13 @@ if(isset($tid)&&$tid&&isset($dept)&&$dept)
 		 {
 			case 'ack_print':
 				{
-				$sql='UPDATE care_tech_repair_job SET seen=1, tid="'.$tid.'" 
-							WHERE dept="'.$dept.'" 
-								AND tdate="'.$tdate.'"
-								AND ttime="'.$ttime.'"
-								AND tid="'.$tid.'"';
+				$sql="UPDATE care_tech_repair_job SET seen=1, tid='$tid'
+							WHERE dept='$dept'
+								AND tdate='$tdate'
+								AND ttime='$ttime'
+								AND tid='$tid'";
 								
-					if($ergebnis=$db->Execute($sql)) {
+					if($ergebnis=$core->Transact($sql)) {
 						$stat2seen=true;
 					} else {echo "<p>".$sql."$LDDbNoUpdate<br>"; };
 					break;
@@ -49,13 +51,13 @@ if(isset($tid)&&$tid&&isset($dept)&&$dept)
 				
 			case 'archive':
 				{
-				    $sql='UPDATE care_tech_repair_job SET archive=1, tid="'.$tid.'" 
-							WHERE dept="'.$dept.'" 
-								AND tdate="'.$tdate.'"
-								AND ttime="'.$ttime.'"
-								AND tid="'.$tid.'"';
+				    $sql="UPDATE care_tech_repair_job SET archive=1, tid='$tid'
+							WHERE dept='$dept'
+								AND tdate='$tdate'
+								AND ttime='$ttime'
+								AND tid='$tid'";
 								
-					if($ergebnis=$db->Execute($sql)) {
+					if($ergebnis=$core->Transact($sql)) {
 						$deltodo=true;
 					}
 					else {echo "<p>".$sql."$LDDbNoUpdate<br>"; };
@@ -65,11 +67,11 @@ if(isset($tid)&&$tid&&isset($dept)&&$dept)
 				
 				$dbtable='care_tech_repair_job';
 
-				$sql='SELECT * FROM '.$dbtable.' 
-										WHERE dept="'.$dept.'" 
-											AND tdate="'.$tdate.'"
-											AND ttime="'.$ttime.'"
-											AND tid="'.$tid.'"';
+				$sql="SELECT * FROM $dbtable
+										WHERE dept='$dept'
+											AND tdate='$tdate'
+											AND ttime='$ttime'
+											AND tid='$tid'";
 
 							
         		if($ergebnis=$db->Execute($sql)) {
@@ -78,8 +80,6 @@ if(isset($tid)&&$tid&&isset($dept)&&$dept)
 					$rows=$ergebnis->RecordCount();
 				}else {echo "<p>".$sql."$LDDbNoRead<br>"; };
 			//echo $sql;
-		}
-  		 else { echo "$LDDbNoLink<br>"; } 
 }
 ?>
 
@@ -169,7 +169,7 @@ if($rows>0)
 									<input type="button" value="GO" onClick="ack_print()"> '.$LDAckecho.'<p>';
 
     }
-    else
+    elseif(!$content['archive'])
     { 
             echo '<p>
 									<input type="button" value="GO" onClick="window.print()"> <b>'.$LDPrintRequest.'</b><p>

@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -75,8 +75,8 @@ if(!isset($order_nr) || !$order_nr)
 <frameset rows="33,*">
   <frame name="BHEADER" src="products-bestell-hf.php<?php echo "?sid=$sid&lang=$lang&cat=$cat&userck=$userck" ?>" scrolling="no" frameborder="yes" >
   <frameset cols="50%,*">
-    <frame name="BESTELLKORB" src="products-bestellkorb.php?sid=<?php echo "$sid&lang=$lang&dept_nr=$dept_nr&order_nr=$order_nr&itwassent=$itwassent&cat=$cat&userck=$userck"; ?>" scrolling="auto" frameborder="yes">
-    <frame name="BESTELLKATALOG" src="products-bestellkatalog.php?sid=<?php echo "$sid&lang=$lang&dept_nr=$dept_nr&order_nr=$order_nr&cat=$cat&userck=$userck"; ?>" scrolling="auto" frameborder="yes">
+	<frame name="BESTELLKORB" src="products-bestellkorb.php?sid=<?php echo "$sid&lang=$lang&dept_nr=$dept_nr&order_nr=$order_nr&itwassent=$itwassent&cat=$cat&userck=$userck"; ?>" scrolling="auto" frameborder="yes">
+     <frame name="BESTELLKATALOG" src="products-bestellkatalog.php?sid=<?php echo "$sid&lang=$lang&dept_nr=$dept_nr&order_nr=$order_nr&cat=$cat&userck=$userck"; ?>" scrolling="auto" frameborder="yes">
   </frameset>
 <noframes>
 </noframes>

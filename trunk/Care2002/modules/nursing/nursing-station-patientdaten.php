@@ -10,6 +10,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 /**
 * If the script call comes from the op module replace the user cookie with the user info from op module
 */
+//$db->debug=true;
 if(isset($op_shortcut)&&$op_shortcut){
 	$HTTP_COOKIE_VARS['ck_pflege_user'.$sid]=$op_shortcut;
 	setcookie('ck_pflege_user'.$sid,$op_shortcut,0,'/');
@@ -87,30 +88,30 @@ if($dblink_ok)
 					   {
 					       $buf='rose_'.$i;
 						   
-						   $sql_buf.=$buf.'="'.$$buf.'", ';
+						   $sql_buf.=$buf." ='".$$buf."', ";
 					   }
-					   
+
 					   /* prepare the green_x part */
-					   
+
 					   for ($i=1;$i<8;$i++)
 					   {
 					       $buf='green_'.$i;
-						   
-						   $sql_buf.=$buf.'="'.$$buf.'", ';
+
+						   $sql_buf.=$buf."='".$$buf."', ";
 					   }
 					   
 					   /* append the additional color event signallers */
 					   
-					   $sql_buf.='yellow="'.$yellow.'", black="'.$black.'", blue_pale="'.$blue_pale.'", brown="'.$brown.'", 
-					                   pink="'.$pink.'", yellow_pale="'.$yellow_pale.'", red="'.$red.'", green_pale="'.$green_pale.'",
-									   violet="'.$violet.'", blue="'.$blue.'", biege="'.$biege.'", orange="'.$orange.'"';
+					   $sql_buf.="yellow='$yellow', black='$black', blue_pale='$blue_pale', brown='$brown',
+					                   pink='$pink', yellow_pale='$yellow_pale', red='$red', green_pale='$green_pale',
+									   violet='$violet', blue='$blue', biege='$biege', orange='$orange'";
 					   
 					   
-					   $sql='UPDATE '.$event_table.' SET '.$sql_buf.' WHERE encounter_nr="'.$pn.'"';
+					   $sql = "UPDATE $event_table SET $sql_buf WHERE encounter_nr='$pn'";
 					 
 					 //  echo $sql; 
 
-					   if ($event_result=$db->Execute($sql))
+					   if ($event_result=$enc_obj->Transact($sql))
 					   {
 					     if (!$db->Affected_Rows())
 					      {
@@ -127,39 +128,39 @@ if($dblink_ok)
 					          $buf='rose_'.$i;
 							  
 							  $set_str.=$buf.', ';
-						   
-						       $sql_buf.='"'.$$buf.'", ';
+
+						       $sql_buf.="'".$$buf."', ";
 					       }
-					   
+
 					       /* prepare the green_x part */
-					   
+
 					       for ($i=1;$i<8;$i++)
 					      {
 					          $buf='green_'.$i;
-							  
+
 							  $set_str.=$buf.', ';
-						   
-						       $sql_buf.='"'.$$buf.'", ';
+
+						       $sql_buf.="'".$$buf."', ";
 					       }
-							
+
 					   /* append the additional color event signallers */
-					   
-					   $set_str.='yellow, black, blue_pale, brown, 
+
+					   $set_str.='yellow, black, blue_pale, brown,
 					                   pink, yellow_pale, red, green_pale,
 									   violet, blue, biege, orange';
-									   
+
 					   /* prepare the values part */
-					   
-					   $sql_buf.='"'.$yellow.'", "'.$black.'", "'.$blue_pale.'", "'.$brown.'", 
-					                   "'.$pink.'", "'.$yellow_pale.'", "'.$red.'", "'.$green_pale.'",
-									   "'.$violet.'", "'.$blue.'", "'.$biege.'", "'.$orange.'"';
-									
-						$sql='INSERT INTO '.$event_table.' (encounter_nr, '.$set_str.') VALUES ("'.$pn.'", '.$sql_buf.')';
-						
-					    if($event_result=$db->Execute($sql))
+
+					   $sql_buf.="'$yellow', '$black', '$blue_pale', '$brown',
+					                   '$pink', '$yellow_pale', '$red', '$green_pale',
+									   '$violet', '$blue', '$biege', '$orange'";
+
+						$sql = "INSERT INTO $event_table (encounter_nr, $set_str) VALUES ('$pn', $sql_buf)";
+
+					    if($event_result=$enc_obj->Transact($sql))
 					    {
 					       $event=&$HTTP_POST_VARS;
-						   
+
 						   $mode='changes_saved';
 						    //echo "ok insertd $sql";
 					    }
@@ -284,7 +285,10 @@ function xmakekonsil(v)
 function makekonsil(d)
 { 
 	if(d!=""){
-	   location.href="nursing-station-patientdaten-doconsil-router.php?sid=<?php echo "$sid&lang=$lang&edit=$edit&station=$station&pn=$pn&dept_nr="; ?>"+d;
+	   location.href="nursing-station-patientdaten-doconsil-router.php?sid=<?php 
+	   //echo "$sid&lang=$lang&edit=$edit&station=$station&pn=$pn&dept_nr=";
+	   echo "$sid&lang=$lang&edit=$edit&station=$station&pn=$pn&dept_id=";
+	   ?>"+d;
 	}
 }
 function pullbar(cb)
@@ -508,8 +512,10 @@ function rx(){
 			<option value="">'.$LDChkUpRequests.'</option>';
 
 			while(list($x,$v)=each($medical_depts)){
+				//echo'
+				//<option value="'.$v['nr'].'">';
 				echo'
-				<option value="'.$v['nr'].'">';
+				<option value="'.$v['nr'].'~'.$v['id'].'">';
 				$buffer=$v['LD_var'];
 				if(isset($$buffer)&&!empty($$buffer)) echo $$buffer;
 					else echo $v['name_formal'];
@@ -572,7 +578,7 @@ echo '</ul>';
 
 //..................... START...... PATIENT_INFO_IMAGE
 
-echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid=$sid&lang=$lang&fen='.$full_en.'&en='.$pn.'" width=282 height=178 align="left" hspace=5 vspace=5>';
+echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178 align="left" hspace=5 vspace=5>';
 
 //..................... END....... PATIENT_INFO_IMAGE
 
@@ -714,7 +720,7 @@ if($edit){
 <?php
 }
 
-  echo '<a href="javascript:winClose()"><img '.createLDImgSrc($root_path,'close2.gif','0','absmiddle').'></a>';
+  //echo '<a href="javascript:winClose()"><img '.createLDImgSrc($root_path,'close2.gif','0','absmiddle').'></a>';
 ?>
 
 

@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -33,11 +33,7 @@ $dbtable='care_mail_private_users';
 $linecount=0;
 $modetypes=array('sendmail','listmail');
 
-/* Establish db connection */
-if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
-if($dblink_ok) {	
-	
-				$sql='SELECT addr_book, lastcheck FROM '.$dbtable.' WHERE  email="'.$HTTP_COOKIE_VARS[$local_user.$sid].'"';
+				$sql="SELECT addr_book, lastcheck FROM $dbtable WHERE  email='".$HTTP_COOKIE_VARS[$local_user.$sid]."'";
 				if($ergebnis=$db->Execute($sql))
 				{ 
 					if($rows=$ergebnis->RecordCount())
@@ -53,18 +49,18 @@ if($dblink_ok) {
 						//		$content[addr_book]=trim($content[addr_book]);
 								if($content['addr_book']=="") $content['addr_book']=$buf;
 									else  $content[addr_book].="_".$buf;
-								$sql="UPDATE $dbtable SET addr_book=\"".$content['addr_book']."\" , lastcheck=\"".$content['lastcheck']."\" 
-																	WHERE email=\"".$HTTP_COOKIE_VARS[$local_user.$sid]."\"";	
+								$sql="UPDATE $dbtable SET addr_book='".$content['addr_book']."' , lastcheck='".$content['lastcheck']."'
+																	WHERE email='".$HTTP_COOKIE_VARS[$local_user.$sid]."'";
 								$db->BeginTrans();
 								$ok=$db->Execute($sql);
 								if($ok&&$db->CommitTrans())
-								 { 
-									header("location:intra-email-addrbook.php".URL_REDIRECT_APPEND."&l2h=$l2h&folder=$folder"); 
+								 {
+									header("location:intra-email-addrbook.php".URL_REDIRECT_APPEND."&l2h=$l2h&folder=$folder");
 									exit;
-								 } else { 
+								 } else {
 								     $db->RollbackTrans();
-									 echo "$LDDbNoUpdate<br>$sql"; 
-								 } 
+									 echo "$LDDbNoUpdate<br>$sql";
+								 }
 								 break;
 							}
 							// if mode is delete entry
@@ -90,8 +86,8 @@ if($dblink_ok) {
 										}
 									}
 									$content['addr_book']=implode('_',$inb);
-									$sql="UPDATE $dbtable SET addr_book=\"".$content['addr_book']."\", lastcheck=\"".$content['lastcheck']."\"  
-																		WHERE email=\"".$HTTP_COOKIE_VARS[$local_user.$sid]."\"";	
+									$sql="UPDATE $dbtable SET addr_book='".trim($content['addr_book'])."', lastcheck='".$content['lastcheck']."'
+																		WHERE email='".$HTTP_COOKIE_VARS[$local_user.$sid]."'";
 								    $db->BeginTrans();
 								    $ok=$db->Execute($sql);
 								    if($ok&&$db->CommitTrans()) { 
@@ -107,8 +103,6 @@ if($dblink_ok) {
 						
 					} //end of if rows
 				}else { echo "$LDDbNoRead<br>$sql"; } 
-	}
-  		else { echo "$LDDbNoLink<br>$sql"; } 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>
@@ -226,7 +220,7 @@ href="javascript:gethelp('intramail.php','address','<?php echo $mode ?>','<?php 
     <td><FONT face="Verdana,Helvetica,Arial" size=2 color="#800000"><b>@</b>
 	 <select name="dept" size=1>
                                                                             	
-	<?php require("/include/inc_email_domains_options.php"); 
+	<?php require($root_path."include/inc_email_domains_options.php");
 		for ($j=0;$j<sizeof($email_domains);$j++)
 	{
 		 echo '
@@ -288,6 +282,7 @@ href="javascript:gethelp('intramail.php','address','<?php echo $mode ?>','<?php 
 	for($i=0;$i<sizeof($arrlist);$i++)
 	   {
 	    parse_str(trim($arrlist[$i]),$minfo);
+		if(!isset($minfo['e'])) continue;
 		//$buf="intra-email-read.php?sid=$sid&ua=$ck_intra_email_user&s_stamp=$minfo[t]&read=$minfo[r]&from=$minfo[f]&subj=".strtr($minfo[s]," ","+")."&date=".strtr($minfo[d]," ","+")."&size=$minfo[z]&l2h=$l2h&folder=$folder";
  		$delbuf="n=$minfo[n]&a=$minfo[a]&e=$minfo[e]";
      	echo ' <tr bgcolor="#ffffff">

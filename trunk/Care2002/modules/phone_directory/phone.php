@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'/include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -16,8 +16,6 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 // reset all 2nd level lock cookies
 require($root_path.'include/inc_2level_reset.php');
 
-require_once($root_path.'include/inc_config_color.php');
-
 if(isset($HTTP_SESSION_VARS['sess_personell_nr'])&&$HTTP_SESSION_VARS['sess_user_origin']=='personell_admin'){
 	$breakfile=$root_path.'modules/personell_admin/personell_admin_pass.php'.URL_APPEND.'&fwd_nr='.$HTTP_SESSION_VARS['sess_personell_nr'].'&target=personell_search';
 }elseif(file_exists($root_path.$HTTP_SESSION_VARS['sess_path_referer'])){
@@ -25,6 +23,8 @@ if(isset($HTTP_SESSION_VARS['sess_personell_nr'])&&$HTTP_SESSION_VARS['sess_user
 }else{
 	$breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 }
+
+//$db->debug=1;
 
 # Change the user origin
 $HTTP_SESSION_VARS['sess_user_origin']='phonedir';
@@ -41,17 +41,12 @@ $keyword=trim($keyword);
 
 if(($keyword)&&($keyword!=' ')) {
 
-    if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
-    if($dblink_ok) {
-
-			$sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE name LIKE "'.$keyword.'%" OR vorname LIKE "'.$keyword.'%" ORDER BY name';
+			$sql="SELECT $fielddata FROM $dbtable WHERE name $sql_LIKE '$keyword%' OR vorname $sql_LIKE '$keyword%' ORDER BY name";
 
 			if($ergebnis=$db->Execute($sql)) {
 				$linecount=$ergebnis->RecordCount();
 			}
 			 else {echo "<p>".$sql."<p>$LDDbNoRead";};
-	}
-  	 else { echo "$LDDbNoLink<br>"; } 
 }
 
 ?>

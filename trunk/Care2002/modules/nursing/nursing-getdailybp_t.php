@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -14,8 +14,7 @@ $lang_tables=array('date_time.php');
 define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
-
+//$db->debug=true;
 $thisfile=basename(__FILE__);
 /* Create charts object */
 require_once($root_path.'include/care_api_classes/class_charts.php');
@@ -24,9 +23,6 @@ $charts_obj= new Charts;
 $title=$LDBpTemp;
 $maxelement=10;
 
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok){	
 	/* Load date formatter */
       include_once($root_path.'include/inc_date_format_functions.php');
 	// get orig data
@@ -34,6 +30,7 @@ if($dblink_ok){
 		$saved=0;
 		$data_array=array();
 		$data_array['encounter_nr']=$pn;
+        $data_array['measured_by']=$HTTP_SESSION_VARS['sess_user_name'];
 		$data_array['unit_nr']=14; // 14 = mmHg unit of measurement , must be set to local standards
 		$data_array['msr_date']=date('Y-m-d',mktime(0,0,0,$mo,$dy,$yr)); 
 		// Save the blood pressure data
@@ -42,7 +39,7 @@ if($dblink_ok){
 			$tdx="btime".$i;$ddx="bdata".$i;
 			if(empty($$tdx) || empty($$ddx)) continue;
 			//$bbuf=$bbuf."B".$$tdx."b".$$ddx;
-			$data_array['msr_time']=$$tdx;
+			$data_array['msr_time']=strtr($$tdx,':,;-/_','......');
 			$data_array['value']=$$ddx;
 			//echo $$ddx.$$tdx;
 			if($charts_obj->saveBPFromArray($data_array)) $saved=1;
@@ -54,7 +51,7 @@ if($dblink_ok){
 			$tdx="ttime".$i;$ddx="tdata".$i;
 			if(empty($$tdx) || empty($$ddx)) continue;
 			//$bbuf=$bbuf."B".$$tdx."b".$$ddx;
-			$data_array['msr_time']=$$tdx;
+			$data_array['msr_time']=strtr($$tdx,':,;-/_','......');
 			$data_array['value']=$$ddx;
 			if($charts_obj->saveTemperatureFromArray($data_array)) $saved=1;
 		}
@@ -90,9 +87,6 @@ if($dblink_ok){
 			}
 				else {echo "<p>$sql$LDDbNoRead";}*/
 	 }
-}else{
-	echo "$LDDbNoLink<br>$sql<br>";
-}
 ?>
 <?php html_rtl($lang); ?>
 <HEAD>

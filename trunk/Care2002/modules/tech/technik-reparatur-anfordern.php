@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'/include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -24,6 +24,8 @@ $breakfile='technik.php'.URL_APPEND;
 $returnfile=$HTTP_SESSION_VARS['sess_file_return'].URL_APPEND;
 $HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
 
+//$db->debug=1;
+
 if(!isset($HTTP_COOKIE_VARS['ck_login_username'.$sid])) $HTTP_COOKIE_VARS['ck_login_username'.$sid]='';
 
 if(!isset($dept)) $dept='';
@@ -32,8 +34,6 @@ if(isset($job)&&!empty($job)) {
 
     $dbtable='care_tech_repair_job';
 
-    if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
-    if($dblink_ok) {
         $sql="INSERT INTO ".$dbtable." 
 						(	dept,
 							job,
@@ -42,10 +42,14 @@ if(isset($job)&&!empty($job)) {
 							tphone,
 							tdate,
 							ttime,
+							tid,
 							done,
 							d_idx,
-							status
-							 ) 
+							status,
+							history,
+							create_id,
+							create_time
+							 )
 						VALUES 
 						(
 							'".htmlspecialchars($dept)."',
@@ -55,21 +59,23 @@ if(isset($job)&&!empty($job)) {
 							'".htmlspecialchars($tphone)."',
 							'$tdate', 
 							'$ttime', 
+							'".date('YmdHis')."',
 							'0',
 							'".date('Ymd')."',
-							'pending'
+							'pending',
+							'Create ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n',
+							'".$HTTP_SESSION_VARS['sess_user_name']."',
+							'".date('YmdHis')."'
 							)";
 							
         $db->BeginTrans();
         $ok=$db->Execute($sql);
-        if($ok && $db->CommitTrans()) { 
+        if($ok && $db->CommitTrans()) {
             header("Location: technik-reparatur-empfang.php".URL_REDIRECT_APPEND."&repair=ask&dept=$dept&reporter=$reporter&tdate=$tdate&ttime=$ttime"); exit;
         } else {
             $db->RollbackTrans();
             echo "<p>".$sql."$LDDbNoSave<br>"; 
         };
-	}
-  	 else { echo "$LDDbNoLink<br>"; } 
 }
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -122,7 +128,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
 <tr valign=top>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="45"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>"  height="10"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
 <STRONG> &nbsp; <?php echo $LDTechSupport ?></STRONG></FONT></td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
 <?php if($cfg['dhtml'])echo'<a href="'.$returnfile.'"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('tech.php','request')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>

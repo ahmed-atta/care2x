@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@latorilla.com
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -137,7 +137,7 @@ if(!empty($mode)){
   </tr>
   <tr>
     <td class=pblock align=right background="<?php echo $bgc ?>"></font><?php echo $LDUNECEModifier ?>: </td>
-    <td class=pblock bgcolor="<?php echo $bgc2 ?>" ><input type="text" name="unece_modifier"   size=50 maxlength=60 value="<?php echo $unece_modifier ?>"></td>
+    <td class=pblock bgcolor="<?php echo $bgc2 ?>" ><input type="text" name="unece_modifier"   size=50 maxlength=2 value="<?php echo $unece_modifier ?>"></td>
   </tr>
   <tr>
     <td class=pblock align=right background="<?php echo $bgc ?>"></font><?php echo $LDUNECELocalCodeType ?>: </td>

@@ -3,22 +3,27 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
 
 # If cache must be deactivated, set $force_no_cache to true
-$force_no_cache=true;
+$force_no_cache=0;
 
 $lang_tables[]='departments.php';
 $lang_tables[]='prompt.php';
 define('LANG_FILE','doctors.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
+
+require_once($root_path.'include/care_api_classes/class_core.php');
+$core=new Core;
+
+//$db->debug=1;
 
 switch($retpath)
 {
@@ -41,26 +46,33 @@ if(!$hilitedept)
 	if($dept_nr) $hilitedept=$dept_nr;
 }
 
+#
 # Prepare the date. We need to consider the early morning hours or until the DOC_CHANGE_TIME value has passed
+#
+
+$plan_yesterday=date('Y-m-d',mktime(0,0,0,date('m'),date('d')-1,date('Y')));
+
 if(date('H.i')<DOC_CHANGE_TIME){
-	$plan_date=date('Y-m-d',mktime(0,0,0,date('m'),date('d')-1,date('Y')));
+	$plan_date=$plan_yesterday;
 	$plan_day=date('d',mktime(0,0,0,date('m'),date('d')-1,date('Y')));
 }else{
 	$plan_date=date('Y-m-d');
 	$plan_day=date('d');
-}
 
+	#
+	# If plan date is today, attempt to delete the cached plan of yesterday
+	#
+	$core->deleteDBCache('DOCS_'.$plan_yesterday);
+}
 //echo "$plan_date $plan_day";
  
-# Get the cached plan
-if(!$force_no_cache){
-	include_once($root_path.'include/care_api_classes/class_core.php');
-	$core=new Core;
+	# Get the cached plan
+
 	$cached_plan='';
 	if(!$is_cached=$core->getDBCache('DOCS_'.$plan_date,$cached_plan)) $force_no_cache=true;
-}	
 
-if($force_no_cache){
+
+if($force_no_cache || (!$force_no_cache && !$is_cached)){
 	if(!$hilitedept){
 		if($dept_nr) $hilitedept=$dept_nr;
 	}
@@ -151,11 +163,11 @@ if(!$force_no_cache&&$is_cached){
 		if($dutyplan=$pers_obj->getDOCDutyplan($v['nr'],$pyear,$pmonth)){
 	
 			$a=unserialize($dutyplan['duty_1_txt']);	
-			$r=unserialize($dutyplan['duty_2_txt']);	
+			$r=unserialize($dutyplan['duty_2_txt']);
 			$ha=unserialize($dutyplan['duty_1_pnr']);	
 			$hr=unserialize($dutyplan['duty_2_pnr']);	
-			$DOC_1=$pers_obj->getPersonellInfo($ha['ha'.($plan_day-1)]);
-			$DOC_2=$pers_obj->getPersonellInfo($hr['hr'.($plan_day-1)]);
+			if($ha['ha'.($plan_day-1)]) $DOC_1=$pers_obj->getPersonellInfo($ha['ha'.($plan_day-1)]);
+			if($hr['hr'.($plan_day-1)]) $DOC_2=$pers_obj->getPersonellInfo($hr['hr'.($plan_day-1)]);
 		}
 	
 	}else{
@@ -211,7 +223,7 @@ if(!$force_no_cache&&$is_cached){
 	
 }
 # Save in cache 
-$dept_obj->saveDBCache('DOCS_'.date('Y-m-d'),addslashes($temp_out));
+if(!$force_no_cache || ($force_no_cache && !$is_cached)) $dept_obj->saveDBCache('DOCS_'.date('Y-m-d'),addslashes($temp_out));
 # Display list
 $temp_out=str_replace('URLAPPEND',URL_APPEND,$temp_out);
 $temp_out=str_replace('IMGALT',$LDShowActualPlan,$temp_out);

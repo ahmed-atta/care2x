@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@care2x.net, elpidio@care2x.org
@@ -12,6 +12,7 @@ require($root_path.'include/inc_environment_global.php');
 */
 
 /* Start initializations */
+$lang_tables[] = 'departments.php';
 define('LANG_FILE','konsil.php');
 
 /* We need to differentiate from where the user is coming: 
@@ -32,15 +33,24 @@ if($user_origin=='lab'){
 
 require_once($root_path.'include/inc_front_chain_lang.php'); # call the script lock
 
+ /**
+ * LOAD Smarty
+ */
+
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('laboratory');
+
 $thisfile=basename(__FILE__);
 
 $bgc1='#cde1ec'; /* The main background color of the form */
-$abtname=get_meta_tags($root_path."/global_conf/$lang/konsil_tag_dept.pid");
+
 $edit_form=0; /* Set form to non-editable*/
 $read_form=1; /* Set form to read */
 $edit=0; /* Set script mode to no edit*/
 
-$formtitle=$abtname[$subtarget];
+$formtitle=$LDPathology;
 
 $db_request_table=$subtarget;
 
@@ -173,8 +183,8 @@ function chkForm(d)
 { 
 /*  if(d.journal_nr.value=="" && d.blocks_nr.value=="" && d.deep_cuts.value=="" && d.special_dye.value=="" && d.immune_histochem.value=="" && d.hormone_receptors.value=="" && d.specials.value=="" ) return false;
 */
-    if(d.journal_nr.value=="" && d.blocks_nr.value=="" ) return false;
-    else return true; 
+    if(d.journal_nr.value=="") return false;
+    else return true;
 }
 
 
@@ -230,254 +240,34 @@ require($root_path.'include/inc_test_request_lister_fx.php');
 ?></td>
 <!--  right frame for the request form -->
     <td >
+
         <form name="form_test_request" method="post" action="<?php echo $thisfile ?>" onSubmit="return chkForm(this)">
-		
-		<input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0','absmiddle') ?> title="<?php echo $LDSaveEntry ?>"> 
+
+		<!--         Control buttons save, print         -->
+		<input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0','absmiddle') ?> title="<?php echo $LDSaveEntry ?>">
         <a href="javascript:printOut()"><img <?php echo createLDImgSrc($root_path,'printout.gif','0','absmiddle') ?> alt="<?php echo $LDPrintOut ?>"></a>
+
+	   <!--   Control button enter findings   -->
 <?php
-if($stored_request['entry_date'] && $stored_request['entry_date']!="0000-00-00")	
+if($stored_request['entry_date'] && $stored_request['entry_date'] != DBF_NODATE)	
 {
 ?>	
 		
         <a href="<?php echo 'labor_test_findings_'.$subtarget.'.php?sid='.$sid.'&lang='.$lang.'&batch_nr='.$batch_nr.'&pn='.$pn.'&entry_date='.$stored_request['entry_date'].'&target='.$target.'&subtarget='.$subtarget.'&user_origin='.$user_origin.'&tracker='.$tracker; ?>"><img <?php echo createLDImgSrc($root_path,'enter_result.gif','0','absmiddle') ?> alt="<?php echo $LDEnterResult ?>"></a>
 <?php
 }
-?>
 
-		<table   cellpadding="0" cellspacing=1 border="0" width=700>
+	$smarty->assign('bgc1',$bgc1);
+	$smarty->assign('printmode',FALSE);
+	$smarty->assign('edit',FALSE);
+	$smarty->assign('read_form',TRUE);
 
-		<tr  valign="top" bgcolor="<?php echo $bgc1 ?>">
-		<td  width=40%>
-		<?php
-        if($edit || $read_form)
-        {
-		   echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php'.URL_REDIRECT_APPEND.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
-		}
-        ?>
-     </td> 
-		<td class=fva2_ml10><div class="fva2_ml10">
-		
-		<table border=0  cellpadding=0 cellspacing=0 width=100%>
-    <tr>
-      <td rowspan=8 align="left" valign="top"><font size=4 color="#0000ff"><b><?php echo $formtitle ?></b></font><br>
-	  <font size=1 color="#000099"><?php echo $LDTel ?>
-	  </td>
-      <td class="fvag_ml10" align="right"><?php echo $LDEntryDate ?> 
-	  <?php
-	  if($stored_request['status']=='pending')
-		   {
-		?>
-			   	<a href="javascript:show_calendar('form_test_request.entry_date','<?php echo $date_format ?>')">
-				<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
+	$read_form=TRUE;
+	//$edit = FALSE;
 
-		<?php	           
-		}
-		?>
-	  </td>
-      <td>
-	  <?php 
-	    
+	include($root_path.'include/inc_test_request_printout_patho.php');
 
-		   if($stored_request['status']=='pending')
-		   {
-				echo '
-	                   <input type="text" name="entry_date" size=10 maxlength=10 value="';
-					   
-			   if($stored_request['entry_date'] && $stored_request['entry_date']!="0000-00-00") echo formatDate2Local($stored_request['entry_date'],$date_format);
-			    else echo formatDate2Local(date('Y-m-d'),$date_format);
-			   
-			   echo '" onBlur="IsValidDate(this,\''.$date_format.'\')" onKeyUp="setDate(this,\''.$date_format.'\',\''. $lang.'\')">&nbsp;';
-	
-		    }
-			else 
-			{
-			   echo '<font face="verdana" size=2 color="#000000">'.$stored_request['entry_date'].'</font>&nbsp;';
-			}
-
-	  ?>
-			   </td>
-    </tr>
-    <tr>
-      <td class="fvag_ml10" align="right"><?php echo $LDJournalNumber ?> &nbsp;</td>
-      <td>
-	  <?php printLabInterns('journal_nr'); ?></td>
-    </tr>
-    <tr>
-      <td class="fvag_ml10" align="right"><?php echo $LDBlockNumber ?> &nbsp;</td>
-      <td>
-	  <?php printLabInterns('blocks_nr'); ?></td>
-    </tr>
-    <tr>
-      <td class="fvag_ml10" align="right"><?php echo $LDDeepCuts ?> &nbsp;</td>
-      <td>
-	  <?php printLabInterns('deep_cuts'); ?></td>
-    </tr>
-    <tr>
-      <td class="fvag_ml10" align="right"><?php echo $LDSpecialDye ?> &nbsp;</td>
-      <td>
-	  <?php printLabInterns('special_dye'); ?></td>
-    </tr>
-    <tr>
-      <td class="fvag_ml10" align="right"><?php echo $LDImmuneHistoChem ?> &nbsp;</td>
-      <td>
-	  <?php printLabInterns('immune_histochem'); ?></td>
-    </tr>
-    <tr>
-      <td class="fvag_ml10" align="right"><?php echo $LDHormoneReceptors ?> &nbsp;</td>
-      <td>
-	  <?php printLabInterns('hormone_receptors'); ?></td>
-    </tr>
-    <tr>
-      <td class="fvag_ml10" align="right"><?php echo $LDSpecials ?> &nbsp;</td>
-      <td>
-	  <?php printLabInterns('specials'); ?></td>
-    </tr>
-  </table>
-  		</div>
-		</td></tr>
-
-
-<!-- Second row  -->
-	<tr bgcolor="<?php echo $bgc1 ?>">
-		<td  valign="top" colspan=2><font color="#000099">	   
-		
-		<table border=0 cellspacing=0 cellpadding=0 width=100%>
-    <tr>
-      <td><div class=fva0_ml10><?php 
-	    if($stored_request['quick_cut']) echo '<img '.createComIcon($root_path,'chkbox_chk.gif','0','absmiddle').'>'; 
-	      else echo '<img '.createComIcon($root_path,'chkbox_blk.gif','0','absmiddle').'>';  
-		echo '&nbsp;<b>'.$LDSpeedCut.'</b>'; 
-		?></td>
-      <td><div class=fva0_ml10><?php 
-	  echo $LDRelayResult ?>&nbsp;<font face="courier" size=2 color="#000000"><?php echo $stored_request['qc_phone'] ?></font></td>
-      <td rowspan=2 align="right" >
-	  <?php 
-	  echo '<font size=1 color="#000099" face="verdana,arial">'.$batch_nr.'</font>&nbsp;&nbsp;<br>';
-          echo "<img src='".$root_path."classes/barcode/image.php?code=$batch_nr&style=68&type=I25&width=145&height=40&xres=2&font=5' border=0>";
-     ?>&nbsp;&nbsp;</td>
-    </tr>
-    <tr>
-      <td><div class=fva0_ml10> <?php
-	    if($stored_request['quick_diagnosis']) echo '<img '.createComIcon($root_path,'chkbox_chk.gif','0').' '; 
-	      else echo '<img '.createComIcon($root_path,'chkbox_blk.gif','0').' ';  
-		echo 'align="absmiddle">&nbsp;<b>'.$LDSpeedTest.'</b>'; 	  
-	  ?> </td>
-      <td><div class=fva0_ml10><?php echo $LDRelayResult ?>&nbsp;<font face="courier" size=2 color="#000000"><?php echo $stored_request['qd_phone'] ?></font></td>
-    </tr>
-  </table>
-  </div></td>
-<!-- 			<td  valign=top><div class=fva0_ml10><font color="#000099">
-		 <?php echo $LDSpecialNotice ?>:<br>
-		<input type="text" name="specials" size=55 maxlength=60>
-		
-  </div></td> -->
-</tr>
-	<tr bgcolor="<?php echo $bgc1 ?>">
-		<td valign="top" width=40%>
-		<div class=fva2_ml10><p><br>
-		<b><?php echo $LDMatType ?>:</b><br>
-			<?php
-	    if($stored_request['material_type']=="pe") echo '<img '.createComIcon($root_path,'radio_chk.gif','0','absmiddle').'> '; 
-	      else echo '<img '.createComIcon($root_path,'radio_blk.gif','0','absmiddle').'> ';  
-		echo '&nbsp;'.$LDPE.'</b>'; 	  
-	?><br>
-  	<?php 
-	    if($stored_request['material_type']=="op_specimen") echo '<img '.createComIcon($root_path,'radio_chk.gif','0','absmiddle').'> '; 
-	      else echo '<img '.createComIcon($root_path,'radio_blk.gif','0','absmiddle').'> ';  
-		echo '&nbsp;'.$LDSpecimen.'</b>'; 	  
-	?><br>
-	<?php 
-	    if($stored_request['material_type']=="shave") echo '<img '.createComIcon($root_path,'radio_chk.gif','0','absmiddle').'> '; 
-	      else echo '<img '.createComIcon($root_path,'radio_blk.gif','0','absmiddle').'> ';  
-		echo '&nbsp;'.$LDShave.'</b>'; 	  
-	?><br>
-  	 <?php
-	    if($stored_request['material_type']=="cytology") echo '<img '.createComIcon($root_path,'radio_chk.gif','0','absmiddle').'> '; 
-	      else echo '<img '.createComIcon($root_path,'radio_blk.gif','0','absmiddle').'> ';  
-		echo '&nbsp;'.$LDCytology.'</b>'; 	  
-	 ?><br>
-		</td>
-		<td valign="top"><font face="courier" size=2><?php  echo nl2br(stripslashes($stored_request['material_desc']))?></font>
-				</td>
-		</tr>	
-</tr>
-
-	<tr bgcolor="<?php echo $bgc1 ?>">
-		<td  colspan=2><div class="fva0_ml10"><font color="#000099">	 
-		<b><?php echo $LDLocalization ?></b><br><img src="../../gui/img/common/default/pixel.gif" border=0 width=20 height=45 align="left">
-		<font face="courier" size=2 color="#000000"><?php echo nl2br(stripslashes($stored_request['localization'])); ?></font>
-  </div></td>
-</tr>
-	
-	<tr bgcolor="<?php echo $bgc1 ?>">
-		<td  valign="top" colspan=2 ><div class=fva0_ml10><font color="#000099">	 
-		<b><?php echo $LDClinicalQuestions ?></b><br><img src="../../gui/img/common/default/pixel.gif" border=0 width=20 height=45 align="left">
-		<font face="courier" size=2 color="#000000"><?php echo  nl2br(stripslashes($stored_request['clinical_note'])); ?></font>
-  </div></td>
-</tr>
-
-	<tr bgcolor="<?php echo $bgc1 ?>">
-		<td  valign="top" colspan=2 ><div class=fva0_ml10><font color="#000099">	 
-		<b><?php echo $LDExtraInfo ?></b><font size=1 face="arial"> <?php echo $LDExtraInfoSample ?><br><img src="../../gui/img/common/default/pixel.gif" border=0 width=20 height=45 align="left">
-		<font face="courier" size=2 color="#000000"><?php echo  nl2br(stripslashes($stored_request['extra_note'])); ?></font>
-  </div></td>
-</tr>
-
-	<tr bgcolor="<?php echo $bgc1 ?>">
-		<td  valign="top" colspan=2 ><div class=fva0_ml10><font color="#000099">	 
-		<b><?php echo $LDRepeatedTest ?></b><font size=1 face="arial"> <?php echo $LDRepeatedTestPls ?><br><img src="../../gui/img/common/default/pixel.gif" border=0 width=20 height=30 align="left">
-		<font face="courier" size=2 color="#000000"><?php echo  nl2br(stripslashes($stored_request['repeat_note'])); ?></font>
-  </div></td>
-</tr>
-
-	<tr bgcolor="<?php echo $bgc1 ?>">
-		<td  valign="top" colspan=2 ><div class=fva0_ml10><font color="#000099">	 
-		<b><?php echo $LDForGynTests ?></b>
-		
-		<table border=0 cellpadding=1 cellspacing=1 width=100%>
-    <tr>
-      <td align="right"><div class=fva0_ml10><?php echo $LDLastPeriod ?></td>
-      <td><font face="courier" size=2 color="#000000"><?php if($stored_request['gyn_last_period']) echo stripslashes($stored_request['gyn_last_period']) ?></font></td>
-      <td align="right"><div class=fva0_ml10><?php echo $LDMenopauseSince ?></td>
-      <td><font face="courier" size=2 color="#000000"><?php if($stored_request['gyn_menopause_since']) echo stripslashes($stored_request['gyn_menopause_since']) ?></font></td>
-      <td align="right"><div class=fva0_ml10><?php echo $LDHormoneTherapy ?></td>
-      <td><font face="courier" size=2 color="#000000"><?php if($stored_request['gyn_hormone_therapy']) echo stripslashes($stored_request['gyn_hormone_therapy']) ?></font>&nbsp;</td>
-    </tr>
-    <tr>
-      <td align="right"><div class=fva0_ml10><?php echo $LDPeriodType ?></td>
-      <td><font face="courier" size=2 color="#000000"><?php if($stored_request['gyn_period_type']) echo stripslashes($stored_request['gyn_period_type']) ?></font></td>
-      <td align="right"><div class=fva0_ml10><?php echo $LDHysterectomy ?></td>
-      <td><font face="courier" size=2 color="#000000"><?php if($stored_request['gyn_hysterectomy']) echo stripslashes($stored_request['gyn_hysterectomy']) ?></font></td>
-      <td align="right"><div class=fva0_ml10><?php echo $LDIUD ?></td>
-      <td><font face="courier" size=2 color="#000000"><?php if($stored_request['gyn_iud']) echo stripslashes($stored_request['gyn_iud']) ?></font>&nbsp;</td>
-    </tr>
-    <tr>
-      <td align="right"><div class=fva0_ml10><?php echo $LDGravidity ?></td>
-      <td><font face="courier" size=2 color="#000000"><?php if($stored_request['gyn_gravida']) echo stripslashes($stored_request['gyn_gravida']) ?></font></td>
-      <td align="right"><div class=fva0_ml10><?php echo $LDContraceptive ?></td>
-      <td><font face="courier" size=2 color="#000000"><?php if($stored_request['gyn_contraceptive']) echo stripslashes($stored_request['gyn_contraceptive']) ?></td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-    </tr>
-  </table>
-  
-  </div></td>
-</tr>
-
-	<tr bgcolor="<?php echo $bgc1 ?>">
-		<td width=40%><div class=fva2_ml10><font color="#000099">
-		 <?php echo $LDOpDate ?>:
-		<font face="courier" size=2 color="#000000"><?php  echo formatDate2Local($stored_request['op_date'],$date_format); ?></font>
-  </div></td>
-			<td align="right"><div class=fva2_ml10><font color="#000099">
-		<?php echo $LDDoctor."/".$LDDept ?>:
-		<font face="courier" size=2 color="#000000"><?php echo stripslashes($stored_request['doctor_sign']) ?></font>
-		&nbsp;
-  </div></td>
-</tr>
-
-		</table>
-<?php
+	$smarty->display('forms/pathology.tpl');
 
 require($root_path.'include/inc_test_request_hiddenvars.php');
 
@@ -485,7 +275,7 @@ require($root_path.'include/inc_test_request_hiddenvars.php');
 		<input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0','absmiddle') ?> title="<?php echo $LDSaveEntry ?>"> 
         <a href="javascript:printOut()"><img <?php echo createLDImgSrc($root_path,'printout.gif','0','absmiddle') ?> alt="<?php echo $LDPrintOut ?>"></a>
 <?php
-if($stored_request['entry_date'] && $stored_request['entry_date']!="0000-00-00")	
+if($stored_request['entry_date'] && $stored_request['entry_date'] != DBF_NODATE)
 {
 ?>	
 		

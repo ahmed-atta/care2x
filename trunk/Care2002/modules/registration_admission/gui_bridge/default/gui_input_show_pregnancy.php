@@ -91,7 +91,7 @@ $TP_NR_FETUSES=$LD['nr_of_fetuses'];
 if($pregnancy['nr_of_fetuses']) $TP_NFETUS=$pregnancy['nr_of_fetuses'];
 # Child enc nr.
 $TP_CHILD_ENR=$LD['child_encounter_nr'];
-$TP_SEPARATE=$LD['sepspace'].
+$TP_SEPARATE=$LD['sepspace'];
 $TP_CH_ENR=$pregnancy['child_encounter_nr'];
 # Delivery mode
 if(!isset($pregnancy['delivery_mode'])) $pregnancy['delivery_mode']=1;

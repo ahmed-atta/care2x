@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -17,6 +17,8 @@ require_once('drg_inc_local_user.php');
 if (!$pn) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;}; 
 
 require_once($root_path.'include/inc_front_chain_lang.php');
+
+$db->debug=true;
 
 if(!isset($saveok)) $saveok=false;
 if(!isset($mode)) $mode='';
@@ -36,9 +38,9 @@ $thisfile=basename(__FILE__);
 if(isset($mode)){
 	/* Prepare the common data */
 	$HTTP_POST_VARS['history']="Create ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
-	$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+	//$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
 	$HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
-	$HTTP_POST_VARS['create_time']='NULL';
+	$HTTP_POST_VARS['create_time']=date('YmdHis');
 
 	switch($mode){
 	
@@ -47,7 +49,8 @@ if(isset($mode)){
 			$DRG_obj->useInternalDRGCodes(); // Set the core variables
 			$DRG_obj->setDataArray($HTTP_POST_VARS); // transfer the data
 			if($DRG_obj->insertDataFromInternalArray()){
-				$group_nr=$db->Insert_ID(); // Get the insert ID
+				$oid=$db->Insert_ID(); // Get the insert ID
+				$group_nr=$DRG_obj->LastInsertPK('nr',$oid);
 				$saveok=true;
 				//header("location:$thisfile?sid=$sid&lang=$lang&saveok=1&pn=$pn&opnr=$opnr&group_nr=$group_nr&ln=$ln&fn=$fn&bd=$bd&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&target=$target");
 				//exit;
@@ -68,6 +71,7 @@ if(isset($mode)){
 					$DRG_obj->groupNonGroupedItems($group_nr);
 					$saveok=true;
 				}
+				exit;
 			}
 		}
 	}
@@ -81,8 +85,7 @@ if($saveok&&$mode=='linkgroup'){
     //window.opener.parent.INTERN.location.reload();
     window.close();
    </script>
-   
-<?php   
+ <?php
 	exit; 
 }
 ?>
@@ -90,7 +93,7 @@ if($saveok&&$mode=='linkgroup'){
 <?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
- <TITLE><?php echo "$LDQuickList $title" ?></TITLE>
+ <TITLE><?php echo $LDCreateInternDRGGroup ?></TITLE>
   <script language="javascript" src="../js/showhide-div.js">
 </script>
   <script language="javascript">
@@ -174,7 +177,7 @@ eval("echo $tp;");
 <input type="hidden" name="oprm" value="<?php echo $oprm; ?>">
 <input type="hidden" name="display" value="<?php echo $display; ?>">
 <input type="hidden" name="target" value="<?php echo $target; ?>">
-
+ 
 </form>
 
 </ul>

@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -19,6 +19,8 @@ if(!isset($dept_nr)||!$dept_nr){
 	header('Location:doctors-select-dept.php'.URL_REDIRECT_APPEND.'&retpath='.$retpath);
 	exit;
 }
+
+//$db->debug=1;
 
 $thisfile=basename(__FILE__);
 $breakfile="doctors-dienstplan.php".URL_APPEND."&dept_nr=$dept_nr&pmonth=$pmonth&pyear=$pyear&retpath=$retpath";
@@ -74,7 +76,7 @@ if($dblink_ok)
 					$ref_buffer['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
 					
 					if($dpoc_nr=$pers_obj->DOCDutyplanExists($dept_nr,$pyear,$pmonth)){
-						$ref_buffer['history']="CONCAT(history,'Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n')";
+						$ref_buffer['history']=$pers_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n");
 						// Point to the internal data array
 						$pers_obj->setDataArray($ref_buffer);
 															
@@ -92,7 +94,7 @@ if($dblink_ok)
 					{
 						$ref_buffer['history']="Create: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n";
 						$ref_buffer['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
-						$ref_buffer['create_time']='NULL';
+						$ref_buffer['create_time']=date('YmdHis');
 						// Point to the internal data array
 						$pers_obj->setDataArray($ref_buffer);
 
@@ -113,7 +115,13 @@ if($dblink_ok)
 		 }// end of if(mode==save)
 		 else
 		 {
-		 	$dutyplan=&$pers_obj->getDOCDutyplan($dept_nr,$pyear,$pmonth);
+		 	if($dutyplan=&$pers_obj->getDOCDutyplan($dept_nr,$pyear,$pmonth)){
+			
+				$aelems=unserialize($dutyplan['duty_1_txt']);
+				$relems=unserialize($dutyplan['duty_2_txt']);
+				$a_pnr=unserialize($dutyplan['duty_1_pnr']);
+				$r_pnr=unserialize($dutyplan['duty_2_pnr']);
+			}
 	 	}
 }
   else { echo "$LDDbNoLink<br>"; } 
@@ -271,6 +279,9 @@ for ($i=2000;$i<2016;$i++)
 </td><td></td><td><div class=a3><font face=arial size=2 color=white><b><?php echo $LDDoc2 ?></b></div></td>
 <td></td></tr>
 <?php
+
+
+
 for ($i=1,$n=0,$wd=$firstday;$i<=$maxdays;$i++,$n++,$wd++)
 {
 	switch ($wd){
@@ -278,11 +289,6 @@ for ($i=1,$n=0,$wd=$firstday;$i<=$maxdays;$i++,$n++,$wd++)
 		case 0: $backcolor="bgcolor=#ffff00";break;
 		default: $backcolor="bgcolor=white";
 		}
-	
-	$aelems=unserialize($dutyplan['duty_1_txt']);
-	$relems=unserialize($dutyplan['duty_2_txt']);
-	$a_pnr=unserialize($dutyplan['duty_1_pnr']);
-	$r_pnr=unserialize($dutyplan['duty_2_pnr']);
 
 	echo '
 	<tr >

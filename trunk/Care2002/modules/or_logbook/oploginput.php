@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -21,8 +21,11 @@ $lang_tables[]='search.php';
 define('LANG_FILE','or.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
+
 # Added intrusion trap
-if (!$internok&&!$HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+if (!$internok&&!$HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;};
+
+//$db->debug=true;
 
 # initializations
 $thisfile=basename(__FILE__);
@@ -47,7 +50,7 @@ require_once($root_path.'include/inc_date_format_functions.php');
 # Consider search and paginate modes separately
 if($mode=='search'||$mode=='paginate'){
 
-		# Initialize page's control variables
+		# Initialize page´s control variables
 		if($mode=='paginate'){
 			$sk=$HTTP_SESSION_VARS['sess_searchkey'];
 			//$searchkey='USE_SESSION_SEARCHKEY';
@@ -109,12 +112,11 @@ if($mode=='search'||$mode=='paginate'){
 		$pagen->setSortItem($oitem);
 		$pagen->setSortDirection($odir);
 
-	}else{
-		# Switch any futher modes
+}else{
+		# Switch any further modes
 		switch($mode){
-		
-			case 'save':	
-		
+			case 'save':
+			{
 				$dbtable='care_encounter_op';
 				
 				# check if entry is already existing
@@ -135,69 +137,81 @@ if($mode=='search'||$mode=='paginate'){
 							
 							$content[encoding].=' ~e='.$encoder.'&d='.date('Y-m-d').'&t='.date('H:i:s');
 							
+							# create empty item update name
+							$updateitem='';
+							
 							if($entry_time||$content['entry_out']){
 								$dbuf=explode('~',$content['entry_out']);
 								sort($dbuf,SORT_REGULAR);
-								if(trim($entry_time)) $dbuf[0]='s='.$entry_time.'&e='.$exit_time; 
+								if(trim($entry_time)) $dbuf[0]=strtr('s='.$entry_time.'&e='.$exit_time,':','.');
 									else array_splice($dbuf,0,1);
-								$content['entry_out']=implode('~',$dbuf); 
+								$content['entry_out']=implode('~',$dbuf);
 							}
 							if($cut_time||$content['cut_close']){
 								$dbuf=explode('~',$content['cut_close']);
 								sort($dbuf,SORT_REGULAR);
-								if(trim($cut_time)) $dbuf[0]='s='.$cut_time.'&e='.$close_time;
+								if(trim($cut_time)) $dbuf[0]=strtr('s='.$cut_time.'&e='.$close_time,':','.');
 									else array_splice($dbuf,0,1);
 								$content['cut_close']=implode('~',$dbuf);
 							}
 
+
 							$sql="UPDATE $dbtable 
 									SET encoding='".$content['encoding']."'";
 							if(!empty($diagnosis)){
-								$sql.=",diagnosis=CONCAT(diagnosis,'".htmlspecialchars($diagnosis)."\n')";
+								$sql.=",diagnosis=".$enc_obj->ConcatFieldString('diagnosis',htmlspecialchars($diagnosis)."\n");
+								$updateitem .= ' diagnosis;';
 							}
 							$sql.=",anesthesia='$anesthesia',
 									entry_out='".$content['entry_out']."',
 									cut_close='".$content['cut_close']."'";
 							if(!empty($op_therapy)){
-								$sql.=",op_therapy=CONCAT(op_therapy,'".htmlspecialchars($op_therapy)."\n')";
+								$sql.=",op_therapy=".$enc_obj->ConcatFieldString('op_therapy',htmlspecialchars($op_therapy)."\n");
+								$updateitem .=' op_therapy;';
 							}
 							if(!empty($result_info)){
-								$sql.=",result_info=CONCAT(result_info,'".htmlspecialchars($result_info)."\n')";
+								$sql.=",result_info=".$enc_obj->ConcatFieldString('result_info',htmlspecialchars($result_info)."\n");
+								$updateitem.=' result_info;';
 							}
 							
+							# Append update item names to history
+							$sql.= ",history = ".$enc_obj->ConcatHistory("Updated ".$updateitem." ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
+
 							$sql.="	WHERE nr=".$item['nr']; 
 											
-							if($ergebnis=$db->Execute($sql)){
+							if($ergebnis=$enc_obj->Transact($sql)){
 								//echo $sql." new update <br>";
 								header("location:$thisfile?sid=$sid&lang=$lang&mode=saveok&enc_nr=$enc_nr&dept_nr=$dept_nr&saal=$saal&thisday=$thisday&op_nr=$op_nr");
+								exit;
 							}else{
 								echo "$sql<br>$LDDbNoSave<br>";
 							}
-						}else{	# else create new entry
+					}else{ //  Else no record yet, create new entry
 							# first get the last op number
 	  						$dbtable='care_encounter_op';
 							
-		 					$sql="SELECT op_nr FROM $dbtable WHERE dept_nr='$dept_nr'	AND op_room='$saal' ORDER BY op_nr DESC";
+		 					$sql="SELECT op_nr FROM $dbtable WHERE dept_nr='$dept_nr' AND op_room='$saal' ORDER BY op_nr DESC";
 							//echo $sql;
 							
 							if($ergebnis=$db->Execute($sql)){
 
 								if($rows=$ergebnis->RecordCount()){
 									$pdata=$ergebnis->FetchRow();
-									$op_nr=$pdata[op_nr]+1;
+									$op_nr=$pdata['op_nr']+1;
 									//echo $sql."<br>";
 								}else{
 									$op_nr=1;
 								}
 							}else{
-								echo "$LDDbNoRead<br>";exit;
+								echo "$LDDbNoRead<br>";
+								exit;
 							} 
 							
-							
+
 							if($entry_time) $eobuf="s=$entry_time&e=$exit_time";
 							if($cut_time) $ccbuf="s=$cut_time&e=$close_time";
 							
-   						    $sql="INSERT INTO $dbtable 
+							$sql="INSERT INTO $dbtable
 										(
 										year,
 										dept_nr,
@@ -214,7 +228,10 @@ if($mode=='search'||$mode=='paginate'){
 										cut_close,
 										encoding,
 										doc_date,
-										doc_time
+										doc_time,
+										history,
+										create_id,
+										create_time
 										)
 									 	VALUES
 										(
@@ -229,78 +246,83 @@ if($mode=='search'||$mode=='paginate'){
 										'$anesthesia',
 										'".htmlspecialchars($op_therapy)."\n',
 										'".htmlspecialchars($result_info)."\n',
-										'$eobuf',
-										'$ccbuf',
+										'".strtr($eobuf,':','.')."',
+										'".strtr($ccbuf,':','.')."',
 										'e=".$encoder."&d=".date('Y-m-d')."&t=".date('H:i:s')."',
 										'".date('Y-m-d')."',
-										'".date('H:i:s')."'
+										'".date('H:i:s')."',
+										'Create ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n',
+										'".$HTTP_SESSION_VARS['sess_user_name']."',
+										'".date('YmdHis')."'
 										)";
 
-							if($ergebnis=$db->Execute($sql)){
+							if($ergebnis=$enc_obj->Transact($sql)){
 								//echo $sql." new insert <br>";
-									
 								header("location:$thisfile?sid=$sid&lang=$lang&mode=saveok&enc_nr=$enc_nr&dept_nr=$dept_nr&saal=$saal&thisday=$thisday&op_nr=$op_nr");
 							}else{
 								echo "$sql<br>$LDDbNoSave<br>";
 							} 
-						}//end of else
-					} // end of if ergebnis
-
-			 break;
+					} //end of else
+				} // end of if ergebnis
+				break;
+			} // end of case 'save'
 			 
-	  case 'get':
-			if($enc_obj->loadEncounterData($enc_nr)){
-				$rows=$enc_obj->record_count;
-				$pdata=$enc_obj->encounter;
-				$lname=$pdata['name_last'];
-				$fname=$pdata['name_first'];
-				$bdate=$pdata['date_birth'];
-				//$datafound=1;
-				$patientfound=TRUE;
-					//echo $sql."<br>";
-			}
-			break;// end of case search
-
-	  default:
-	 	 if(($mode=='saveok')||($mode=='edit')||($mode=='notimereset'))
-	      {
-			if($enc_obj->loadEncounterData($enc_nr)){
-				$rows=$enc_obj->record_count;
-				$pdata=$enc_obj->encounter;
-				$lname=$pdata['name_last'];
-				$fname=$pdata['name_first'];
-				$bdate=$pdata['date_birth'];
-			}
-	  		$dbtable='care_encounter_op';
-		 	$sql="SELECT * FROM $dbtable 
-					WHERE dept_nr='$dept_nr' 
-						AND op_room='$saal' 
-						AND encounter_nr='$enc_nr'
-						AND op_nr='$op_nr'";
-
-			if($ergebnis=$db->Execute($sql)){
-				$rows=$ergebnis->RecordCount();
-				if($rows==1){
-					$arr=$ergebnis->FetchRow();
-					$pdata=array_merge($pdata,$arr);
-					$datafound=TRUE;
+			case 'get':
+			{
+				if($enc_obj->loadEncounterData($enc_nr)){
+					$rows=$enc_obj->record_count;
+					$pdata=$enc_obj->encounter;
+					$lname=$pdata['name_last'];
+					$fname=$pdata['name_first'];
+					$bdate=$pdata['date_birth'];
+					//$datafound=1;
 					$patientfound=TRUE;
 					//echo $sql."<br>";
-				}else{
-					echo "<p>".$sql."<p>Multiple entries found pls notify the edv.";
-				} 
-			}else{
-				echo "$LDDbNoRead<br>";
-			} 
-		}
-	 		break;
-	  } // end of switch mode
+				}
+				break;// end of case search
+			}
+			
+			default:
+			{
+				if(($mode=='saveok')||($mode=='edit')||($mode=='notimereset')){
+					if($enc_obj->loadEncounterData($enc_nr)){
+						$rows=$enc_obj->record_count;
+						$pdata=$enc_obj->encounter;
+						$lname=$pdata['name_last'];
+						$fname=$pdata['name_first'];
+						$bdate=$pdata['date_birth'];
+					}
+					$dbtable='care_encounter_op';
+		 			$sql="SELECT * FROM $dbtable
+								WHERE dept_nr='$dept_nr'
+								AND op_room='$saal'
+								AND encounter_nr='$enc_nr'
+								AND op_nr='$op_nr'";
+
+					if($ergebnis=$db->Execute($sql)){
+						$rows=$ergebnis->RecordCount();
+						if($rows==1){
+							$arr=$ergebnis->FetchRow();
+							$pdata=array_merge($pdata,$arr);
+							$datafound=TRUE;
+							$patientfound=TRUE;
+							//echo $sql."<br>";
+						}else{
+							echo "<p>".$sql."<p>Multiple entries found pls notify the edv.";
+						}
+					}else{
+						echo "$LDDbNoRead<br>";
+					}
+				}
+				break;
+			}
+		} // end of switch mode
 }
 
 if(!session_is_registered('sess_comdat')) session_register('sess_comdat');
 # Set the user origin
 $HTTP_SESSION_VARS['sess_user_origin']='op_room';
-$HTTP_SESSION_VARS['sess_comdat']="&dept_nr=$dept_nr&saal=$saal&thisday=$pyear-$pmonth-$pday&op_nr=$op_nr&pyear=$pyear&pmonth=$pmonth&pday=$pday";
+$HTTP_SESSION_VARS['sess_comdat']="&enc_nr=".$pdata['encounter_nr']."&dept_nr=$dept_nr&saal=$saal&thisday=$pyear-$pmonth-$pday&op_nr=$op_nr&pyear=$pyear&pmonth=$pmonth&pday=$pday";
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -347,13 +369,14 @@ function isnum(val,idx)
 		xval3="";
 		for(i=0;i<val.length;i++)
 		{
-		xval2=val.slice(i,i+1);
-		//if (!isNaN(xval3 + xval2)) {xval3=xval3 + xval2;}
-		if (isNaN(xval2))
-		 {
-			xdoc.elements[idx].value=xval2;
-			setTime(xdoc.elements[idx]);
-			return;
+			xval2=val.slice(i,i+1);
+			//if (!isNaN(xval3 + xval2)) {xval3=xval3 + xval2;}
+
+			if (isNaN(xval2))
+			{
+				xdoc.elements[idx].value=xval2;
+				setTime(xdoc.elements[idx]);
+				return;
 			}
 		}
 		xdoc.elements[idx].value=xval3;
@@ -408,7 +431,7 @@ function isvalnum(val,idx)
 		for(i=0;i<val.length;i++)
 		{
 		xval2=val.slice(i,i+1);
-		if (!isNaN(xval2)) 
+		if (!isNaN(xval2))
 			{
 				xval3=xval3 + xval2;
 				/*
@@ -893,44 +916,53 @@ if($datafound)
 <table cellpadding="0" cellspacing="0" border=0 width=100% class="v10_n"> 
 <tr>
 <td>
-<?php $eo=explode("~",$pdata[entry_out]);
+<?php
+/*
+	$eo=explode("~",$pdata['entry_out']);
+	parse_str($eo[0],$eobuf);
+
+	 $cc=explode("~",$pdata['cut_close']);
+	parse_str($cc[0],$ccbuf);
+*/
+	$eo=explode("~",$pdata['entry_out']);
 	for($i=0;$i<sizeof($eo);$i++)
 	{
-	parse_str($eo[$i],$eobuf);
-	if(trim($eobuf[s])) break;
+		parse_str($eo[$i],$eobuf);
+		if(trim($eobuf['s'])) break;
 	}
-	 $cc=explode("~",$pdata[cut_close]);
+	 
+	 $cc=explode("~",$pdata['cut_close']);
 	for($i=0;$i<sizeof($cc);$i++)
 	{
-	parse_str($cc[$i],$ccbuf);
-	if(trim($ccbuf[s])) break;
+		parse_str($cc[$i],$ccbuf);
+		if(trim($ccbuf['s'])) break;
 	}
 ?>
 
 <font face=verdana,arial size=1 color="<?php if($datafound) echo "#0000cc"; else echo "#3f3f3f"; ?>">
 	<?php echo $LDOpCut ?>:
 	<?php if($datafound) : ?>
-	<br><INPUT NAME="cut_time" TYPE="text" VALUE="<?php echo convertTimeToLocal($ccbuf['s']); ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)"> 
+	<br><INPUT NAME="cut_time" TYPE="text" VALUE="<?php echo strtr($ccbuf['s'],':','.'); ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)">
 	<?php else : ?>
 	<p>
 	<?php endif ?>
 	<BR>
 	<?php echo $LDOpClose ?>:
 	<?php if($datafound) : ?>
-	<br><INPUT NAME="close_time" TYPE="text" VALUE="<?php echo convertTimeToLocal($ccbuf['e']); ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)">
+	<br><INPUT NAME="close_time" TYPE="text" VALUE="<?php echo strtr($ccbuf['e'],':','.'); ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)">
 	<?php endif ?>
 </td>
 <td><font face=verdana,arial size=1 color="<?php if($datafound) echo "#0000cc"; else echo "#3f3f3f"; ?>">
 	<?php echo $LDOpInFull ?>:
 	<?php if($datafound) : ?>
-	<br><INPUT NAME="entry_time" TYPE="text" VALUE="<?php echo convertTimeToLocal($eobuf['s']); ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)"> 
+	<br><INPUT NAME="entry_time" TYPE="text" VALUE="<?php echo strtr($eobuf['s'],':','.'); ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)">
 	<?php else : ?>
 	<p>
 	<?php endif ?>
 	<BR>
 	<?php echo $LDOpOutFull ?>:
 	<?php if($datafound) : ?>
-	<br><INPUT NAME="exit_time" TYPE="text" VALUE="<?php echo convertTimeToLocal($eobuf['e']); ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)">
+	<br><INPUT NAME="exit_time" TYPE="text" VALUE="<?php echo strtr($eobuf['e'],':','.'); ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)">
 	<?php endif ?>
 </td>
 </tr>

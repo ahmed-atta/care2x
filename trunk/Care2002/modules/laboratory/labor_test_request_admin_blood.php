@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@care2x.net, elpidio@care2x.org
@@ -35,7 +35,7 @@ if($user_origin=='lab')
 require_once($root_path.'include/inc_front_chain_lang.php'); ///* invoke the script lock*/
 require_once($root_path.'include/inc_diagnostics_report_fx.php');
 
-$thisfile='labor_test_request_admin_blood.php';
+$thisfile=basename(__FILE__);
 
 $bgc1='#99ffcc'; /* The main background color of the form */
 $edit_form=0; /* Set form to non-editable*/
@@ -46,13 +46,15 @@ $formtitle=$LDBloodBank;
 $dept_nr=43; // 43 = department nr. of blood bank
 
 $db_request_table='blood';
-						
+
+//$db->debug=1;
+
+require_once($root_path.'include/care_api_classes/class_encounter.php');
+$enc_obj=new Encounter;
+
 /* Here begins the real work */
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok)
-{	
-    /* Load date formatter */
+ 
+/* Load date formatter */
     include_once($root_path.'include/inc_date_format_functions.php');
     
 	
@@ -77,14 +79,23 @@ if($dblink_ok)
 								   x_test_2_name = '".htmlspecialchars($x_test_2_name)."', x_test_2_count = '".$x_test_2_count."', x_test_2_price = '".$x_test_2_price."', 
 								   x_test_3_code = '".$x_test_3_code."', x_test_3_name = '".htmlspecialchars($x_test_3_name)."', x_test_3_count = '".$x_test_3_count."', 
 								   x_test_3_price = '".$x_test_3_price."', lab_stamp = '".$lab_stamp."', release_via = '".htmlspecialchars($release_via)."', 
-								   receipt_ack = '".htmlspecialchars($receipt_ack)."', mainlog_nr = '".htmlspecialchars($mainlog_nr)."', lab_nr = '".htmlspecialchars($lab_nr)."', 
-								   mainlog_date = '".formatDate2STD($mainlog_date,$date_format)."', lab_date = '".formatDate2STD($lab_date,$date_format)."', 
-								   mainlog_sign = '".htmlspecialchars($mainlog_sign)."', lab_sign = '".htmlspecialchars($lab_sign)."', 
-								   history = CONCAT(history,'Ack: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n'),
-								   modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."'
+								   receipt_ack = '".htmlspecialchars($receipt_ack)."', mainlog_nr = '".htmlspecialchars($mainlog_nr)."', lab_nr = '".htmlspecialchars($lab_nr)."'";
+							
+							$lab_date=formatDate2STD($lab_date,$date_format);
+							if(!empty($lab_date)){
+								$sql.=", lab_date = '".$lab_date."'";
+							}
+							$mainlog_date=formatDate2STD($mainlog_date,$date_format);
+							if(!empty($mainlog_date)){
+								$sql.=", mainlog_date = '".$mainlog_date."'";
+							}
+								   $sql.= ",  mainlog_sign = '".htmlspecialchars($mainlog_sign)."', lab_sign = '".htmlspecialchars($lab_sign)."',
+								   history = ".$enc_obj->ConcatHistory("Ack: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
+								   modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+									modify_time='".date('YmdHis')."'
 								  WHERE batch_nr = '".$batch_nr."'";
 								  
-							      if($ergebnis=$db->Execute($sql)){
+							      if($ergebnis=$enc_obj->Transact($sql)){
 									//echo $sql;
 								     signalNewDiagnosticsReportEvent('','labor_test_request_printpop.php');
 									 header("location:".$thisfile."?sid=$sid&lang=$lang&edit=$edit&saved=update&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=$target&subtarget=$subtarget&batch_nr=$batch_nr&noresize=$noresize");
@@ -98,10 +109,12 @@ if($dblink_ok)
 		     case 'done':
 							      $sql="UPDATE care_test_request_blood SET 
 								  status = 'done',
-								  history = CONCAT(history,'Done: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n')
+								  history = ".$enc_obj->ConcatHistory("Done ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
+								   modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+									modify_time='".date('YmdHis')."'
 								  WHERE batch_nr = '".$batch_nr."'";
 								  
-							      if($ergebnis=$db->Execute($sql)){
+							      if($ergebnis=$enc_obj->Transact($sql)){
 									//echo $sql;
 								  	// Load the visual signalling functions
 									include_once($root_path.'include/inc_visual_signalling_fx.php');
@@ -140,8 +153,7 @@ if($dblink_ok)
      /* Check for the patietn number = $pn. If available get the patients data */
      if($batchrows && $pn)
 	 {		
-		include_once($root_path.'include/care_api_classes/class_encounter.php');
-		$enc_obj=new Encounter;
+
 	    if( $enc_obj->loadEncounterData($pn)) {
 		
 			include_once($root_path.'include/care_api_classes/class_globalconfig.php');
@@ -176,9 +188,6 @@ if($dblink_ok)
 			$pn='';
 		}		
      }		   
-}else{ 
-	echo "$LDDbNoLink<br>$sql<br>";
-}
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -333,7 +342,7 @@ if ($stored_request['release_via']!='' && $stored_request['mainlog_sign']!='' &&
 
 if($edit  || $read_form)
         {
-		   echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid=$sid&lang=$lang&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
+		   echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
 		}
 
 		?>
@@ -403,7 +412,7 @@ if($edit  || $read_form)
      </tr>
      <tr>
        <td><div class=fva2b_ml10><font size=1><?php echo $LDTransfusionDate ?></font></div></td>
-       <td><font face="arial" size=2 color="#0000ff"><?php  if($stored_request['transfusion_date'] && $stored_request['transfusion_date']!="0000-00-00") echo formatDate2Local($stored_request['transfusion_date'],$date_format); ?></font></td>
+       <td><font face="arial" size=2 color="#0000ff"><?php  if($stored_request['transfusion_date'] && $stored_request['transfusion_date']!=DBF_NODATE) echo formatDate2Local($stored_request['transfusion_date'],$date_format); ?></font></td>
      </tr>
      <tr>
        <td colspan=2><div class=fva2b_ml10><b><?php echo $LDDiagnosis ?></b><br><img src="../../gui/img/common/default/pixel.gif" border=0 width=10 height=30 align="left">
@@ -478,12 +487,12 @@ if($edit  || $read_form)
            <td colspan=4>&nbsp;<font size=2 face="verdana,arial"><b><?php echo $LDLabServices ?></b></font></td>
            <td colspan=4 rowspan=4 width=50%>&nbsp;<font size=1 face="arial"><?php echo $LDLabTimeStamp ?></font><br>
 		   &nbsp;<font size=2 face="verdana,arial"><?php 
-		   if($stored_request['lab_stamp'] && $stored_request['lab_stamp']!="0000-00-00 00:00:00") echo formatDate2Local($stored_request['lab_stamp'],$date_format).' '.convertTimeToLocal(formatDate2Local($stored_request['lab_stamp'],$date_format,0,1));
+		   if($stored_request['lab_stamp'] && $stored_request['lab_stamp']!=DBF_NODATETIME) echo formatDate2Local($stored_request['lab_stamp'],$date_format).' '.convertTimeToLocal(formatDate2Local($stored_request['lab_stamp'],$date_format,0,1));
 		     else echo formatDate2Local(date('Y-m-d H:i:s'),$date_format).' '.convertTimeToLocal(formatDate2Local(date('Y-m-d H:i:s'),$date_format,0,1)); 
 			 ?></font>
 
 			 <input type="hidden" name="lab_stamp" value="<?php 
-		   if($stored_request['lab_stamp'] && $stored_request['lab_stamp']!="0000-00-00 00:00:00") echo $stored_request['lab_stamp'];
+		   if($stored_request['lab_stamp'] && $stored_request['lab_stamp']!=DBF_NODATETIME) echo $stored_request['lab_stamp'];
 		     else echo date('Y-m-d H:i:s'); 
 			 ?>">
     
@@ -562,12 +571,12 @@ if($edit  || $read_form)
            <td><input type="text" name="x_test_2_count" size=5 maxlength=5 <?php  if($stored_request['x_test_2_count']) echo 'value="'.$stored_request['x_test_2_count'].'"'; ?>></td>
            <td><input type="text" name="x_test_2_price" size=7 maxlength=7 <?php  echo 'value="'.$stored_request['x_test_2_price'].'"'; ?>></td>
            <td>&nbsp;<font size=1 face="arial"><?php echo $LDBookedOn ?></td>
-           <td><input type="text" name="mainlog_date" size=8 maxlength=10  value="<?php  if($stored_request['mainlog_date']!="0000-00-00") echo formatDate2Local($stored_request['mainlog_date'],$date_format); ?>"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')"  onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+           <td><input type="text" name="mainlog_date" size=8 maxlength=10  value="<?php  if($stored_request['mainlog_date']!=DBF_NODATE) echo formatDate2Local($stored_request['mainlog_date'],$date_format); ?>"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')"  onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
 		   <a href="javascript:show_calendar('form_test_request.mainlog_date','<?php echo $date_format ?>')">
 			<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a><font size=1 face="arial">
 		   </td>
            <td>&nbsp;<font size=1 face="arial"><?php echo $LDDate ?></td>
-           <td><input type="text" name="lab_date" size=8 maxlength=10  value="<?php  if($stored_request['lab_date']!="0000-00-00") echo formatDate2Local($stored_request['lab_date'],$date_format); ?>"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')"   onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+           <td><input type="text" name="lab_date" size=8 maxlength=10  value="<?php  if($stored_request['lab_date']!=DBF_NODATE) echo formatDate2Local($stored_request['lab_date'],$date_format); ?>"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')"   onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
 		   <a href="javascript:show_calendar('form_test_request.lab_date','<?php echo $date_format ?>')">
 			<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
 		   </td>

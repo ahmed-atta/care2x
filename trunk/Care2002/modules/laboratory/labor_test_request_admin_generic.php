@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@care2x.net, elpidio@care2x.org
@@ -47,7 +47,7 @@ require_once($root_path.'include/inc_diagnostics_report_fx.php');
 $thisfile='labor_test_request_admin_generic.php';
 
 $bgc1='#bbdbc4'; /* The main background color of the form */
-$abtname=get_meta_tags($root_path.'global_conf/'.$lang.'/konsil_tag_dept.pid');
+
 $edit_form=0; /* Set form to non-editable*/
 $read_form=1; /* Set form to read */
 $edit=0; /* Set script mode to no edit*/
@@ -55,27 +55,29 @@ $edit=0; /* Set script mode to no edit*/
 $db_request_table=$target;
 $dept_nr=$subtarget;
 
+//$db->debug=1;
+
+require_once($root_path.'include/care_api_classes/class_department.php');
+$dept_obj=new Department;
+
 /* Here begins the real work */
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok)
-{	
-     require_once($root_path.'include/inc_date_format_functions.php');
-	 if(!isset($mode))   $mode='';
-		
-		  switch($mode)
+require_once($root_path.'include/inc_date_format_functions.php');
+	 
+if(!isset($mode))   $mode='';
+
+	switch($mode)
 		  {
 		     case 'update':
 							      $sql="UPDATE care_test_request_".$db_request_table." SET 
                                           result='".htmlentities(addslashes($result))."',
 										  result_date='".formatDate2Std($result_date,$date_format)."',
 										  result_doctor='".$result_doctor."',
-										   history=CONCAT(history,'Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n'),									   								   
-										   modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."'
+										   history=".$dept_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
+										   modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+										   modify_time = '".date('YmdHis')."'
 										   WHERE batch_nr = '".$batch_nr."'";
 										   
-							      if($ergebnis=$db->Execute($sql))
-       							  {
+							      if($ergebnis=$dept_obj->Transact($sql)){
 									/* If the findings are succesfully saved, make an entry into the care_nursing_station_patients_diagnostics_report table
 									*  for signalling purposes
 									*/
@@ -95,10 +97,11 @@ if($dblink_ok)
 		     case 'done':
 							      $sql="UPDATE care_test_request_".$db_request_table." SET 
                                           status='done',
-										   history=CONCAT(history,'Done: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n'),									   								   
-										   modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."'
+										   history=".$dept_obj->ConcatHistory("Done: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
+										   modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+										   modify_time = '".date('YmdHis')."'
 										   WHERE batch_nr = '".$batch_nr."'";
-							      if($ergebnis=$db->Execute($sql))
+							      if($ergebnis=$dept_obj->Transact($sql))
        							  {
 									//echo $sql;
 								  	// Load the visual signalling functions
@@ -178,13 +181,9 @@ if($dblink_ok)
 		  $pn='';
 	   }		
      }		   
-		   
-		   
-}else{
-	echo "$LDDbNoLink<br>$sql<br>";
-}
-require_once($root_path.'include/care_api_classes/class_department.php');
-$dept_obj=new Department;
+
+# Load the department info
+
 if($dept_obj->preloadDept($stored_request['testing_dept'])){
 	$buffer=$dept_obj->LDvar();
 	if(isset($$buffer)&&!empty($$buffer)) $formtitle=$$buffer;
@@ -323,7 +322,7 @@ if (($stored_request['result']!='') && $stored_request['status']!='done')
 	if($stored_request['result']) $TP_result=stripslashes($stored_request['result']);
 		else $TP_result='';
 	$TP_report_date='<input type="text" name="result_date" value="';
-	if($stored_request['result_date'] != '0000-00-00') $TP_report_date.=formatDate2Local($stored_request['result_date'],$date_format).'"';
+	if($stored_request['result_date'] != DBF_NODATE) $TP_report_date.=formatDate2Local($stored_request['result_date'],$date_format).'"';
 		else $TP_report_date.=formatDate2Local(date('Y-m-d'),$date_format).'"'; 
 	$TP_report_date.=' size=10 maxlength=10 onFocus="this.select()" onBlur="IsValidDate(this,\''.$date_format.'\')" onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\')">';
 	

@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@care2x.net, elpidio@care2x.org
@@ -59,12 +59,10 @@ function prepareSampleDate()
 								return date('Y')."-".$smon."-".$sday;
 }
 
+$lang_tables[] = 'departments.php';
 define('LANG_FILE','konsil.php');
 
-/* Globalize the variables */
-
-
-/* We need to differentiate from where the user is coming: 
+/* We need to differentiate from where the user is coming:
 *  $user_origin != lab ;  from patient charts folder
 *  $user_origin == lab ;  from the laboratory
 *  and set the user cookie name and break or return filename
@@ -81,32 +79,31 @@ else
   $breakfile=$root_path."modules/nursing/nursing-station-patientdaten.php".URL_APPEND."&edit=$edit&station=$station&pn=$pn";
 }
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
+
+//$db->debug=1;
 
 $thisfile=basename(__FILE__);
 
 $bgc1='#fff3f3'; 
-$abtname=get_meta_tags($root_path."global_conf/$lang/konsil_tag_dept.pid");
 
-$db_request_table=$target;
+$db_request_table='baclabor';
 
-$formtitle=$abtname[$target];
-define('_BATCH_NR_INIT_',30000000); 
+$formtitle=$LDBacteriologicalLaboratory;
+
+require_once($root_path.'include/care_api_classes/class_encounter.php');
+$enc_obj=new Encounter;
+
+define('_BATCH_NR_INIT_',30000000);
 /*
 *  The following are  batch nr inits for each type of test request
 *   chemlabor = 10000000; patho = 20000000; baclabor = 30000000; blood = 40000000; generic = 50000000;
 */
 						
 /* Here begins the real work */
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok)
-{	
      /* Check for the patietn number = $pn. If available get the patients data, otherwise set edit to 0 */
      if(isset($pn)&&$pn)
-	 {		
-		include_once($root_path.'include/care_api_classes/class_encounter.php');
-		$enc_obj=new Encounter;
+	 {
+
 	    if( $enc_obj->loadEncounterData($pn)) {
 /*		
 			include_once($root_path.'include/care_api_classes/class_globalconfig.php');
@@ -145,20 +142,19 @@ if($dblink_ok)
 							  {
 							     $sql="INSERT INTO care_test_request_".$db_request_table."
 										(
-										batch_nr,	   
-										encounter_nr,		
-										dept_nr,		  
+										batch_nr,
+										encounter_nr,
+										dept_nr,
 										material,
-										test_type,	
+										test_type,
 										material_note,
 										diagnosis_note,
 										immune_supp,
-										send_date,	
-										sample_date,	
-										status,		 
-										history,		 
-										modify_id, 
-										create_id, 
+										send_date,
+										sample_date,
+										status,
+										history,
+										create_id,
 										create_time
 										)
 									 	VALUES
@@ -174,13 +170,12 @@ if($dblink_ok)
 										'".date('Y-m-d')."',
 										'".date('Y-m-d')."',
 										'".$status."',  
-										'Create: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."', 
-										'".$HTTP_SESSION_VARS['sess_user_name']."', 
-										'".$HTTP_SESSION_VARS['sess_user_name']."', 
-										NULL
+										'Create: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n',
+										'".$HTTP_SESSION_VARS['sess_user_name']."',
+										'".date('YmdHis')."'
 										)";
 
-							      if($ergebnis=$db->Execute($sql))
+							      if($ergebnis=$enc_obj->Transact($sql))
        							  {
 									//echo $sql;
 								  	// Load the visual signalling functions
@@ -207,18 +202,19 @@ if($dblink_ok)
 							  if($material_type_list || $test_type_list)
 							  {
 							     $sql="UPDATE care_test_request_".$db_request_table." SET
-										  dept_nr='".$dept_nr."',	
-										  material='".$material_type_list."',  
-										  test_type='".$test_type_list."',	
+										  dept_nr='".$dept_nr."',
+										  material='".$material_type_list."',
+										  test_type='".$test_type_list."',
 										  material_note='".htmlspecialchars($material_note)."',        
 										  diagnosis_note='".htmlspecialchars($diagnosis_note)."',
-										  immune_supp='".$immune_supp."',							
-										  status='".$status."',		 
-										  history=CONCAT(history,'Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."'), 
-										  modify_id='".$HTTP_COOKIE_VARS[$local_user.$sid]."'
+										  immune_supp='".$immune_supp."',
+										  status='".$status."',
+										  history=".$enc_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
+										  modify_id='".$HTTP_COOKIE_VARS[$local_user.$sid]."',
+										  modify_time='".date('YmdHis')."'
 										  WHERE batch_nr='".$batch_nr."'";
-										
-							      if($ergebnis=$db->Execute($sql))
+
+							      if($ergebnis=$enc_obj->Transact($sql))
        							  {
 									//echo $sql;
 								  	// Load the visual signalling functions
@@ -281,8 +277,8 @@ if($dblink_ok)
   
           if(!$mode) /* Get a new batch number */
 		  {
-		                $sql="SELECT batch_nr FROM care_test_request_".$db_request_table." ORDER BY batch_nr DESC LIMIT 1";
-		                if($ergebnis=$db->Execute($sql))
+		                $sql="SELECT batch_nr FROM care_test_request_".$db_request_table." ORDER BY batch_nr DESC";
+		                if($ergebnis=$db->SelectLimit($sql,1))
        		            {
 				            if($batchrows=$ergebnis->RecordCount())
 					        {
@@ -299,11 +295,6 @@ if($dblink_ok)
 						 $mode="save";   
 		   }	    
 
-	   //include_once($root_path.'include/inc_date_format_functions.php');	
-       //
-}else{ 
-	echo "$LDDbNoLink<br>$sql<br>";
-}
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -621,7 +612,7 @@ elseif(!$read_form && !$no_proc_assist)
                  /* The patient label */
  if($edit)
         {
-		   echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid=$sid&lang=$lang&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
+		   echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
 		}
         elseif($pn=="")
 		{

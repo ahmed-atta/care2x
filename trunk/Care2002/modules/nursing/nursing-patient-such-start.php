@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -68,9 +68,9 @@ if($mode=='such'||$mode=='paginate')
 		$usenum=true;
 		
 		if($srcword>$GLOBAL_CONFIG['patient_inpatient_nr_adder']){
-			$cond.="e.encounter_nr LIKE '%".(int)substr($srcword,2)."'"; // set the offset here
+			$cond.="e.encounter_nr $sql_LIKE '%".(int)substr($srcword,2)."'"; // set the offset here
 		}else{
-			$cond.="e.encounter_nr LIKE '%".(int)$srcword."'";
+			$cond.="e.encounter_nr $sql_LIKE '%".(int)$srcword."'";
 		}
 	}else{
 		$usenum=false;
@@ -81,7 +81,7 @@ if($mode=='such'||$mode=='paginate')
 			if(!empty($cond)){
 				$cond.=' OR ';
 			}
-			$cond.="p.name_last LIKE '".$wx[$i]."%' OR p.name_first LIKE '".$wx[$i]."%' OR p.date_birth LIKE '".$wx[$i]."%'";
+			$cond.="p.name_last $sql_LIKE '".$wx[$i]."%' OR p.name_first $sql_LIKE '".$wx[$i]."%' OR p.date_birth $sql_LIKE '".$wx[$i]."%'";
 		}
 		$cond="($cond)";
 		
@@ -89,19 +89,26 @@ if($mode=='such'||$mode=='paginate')
 	
 	$cond.=" AND l.encounter_nr=e.encounter_nr";
 	
-	if(!$arch) $cond.=' AND NOT e.is_discharged';
+	if(!$arch) $cond.=" AND e.is_discharged IN ('',0) AND p.pid=e.pid ";
 	
-	if($usenum) $cond.=' GROUP BY r.location_nr';
-		else $cond.=' AND p.pid=e.pid GROUP BY r.location_nr';
-	
+	$gbuf="l.location_nr,p.name_last, p.name_first,p.date_birth,
+					e.encounter_nr, e.encounter_class_nr,e.in_ward,
+					w.name,w.roomprefix,
+					l.date_from,
+					r.location_nr";
+
+//if($usenum) $cond.=" GROUP BY $gbuf";
+		//else $cond.=" AND p.pid=e.pid GROUP BY $gbuf";
+//	if($usenum) $cond.=' GROUP BY r.location_nr';
+//		else $cond.=' AND p.pid=e.pid GROUP BY r.location_nr';
+	$db->debug=1;
 	if(!isset($db)||!$db)include($root_path.'include/inc_db_makelink.php');
 	if($dblink_ok){			
-		$sqlselect="SELECT p.name_last, p.name_first,p.date_birth,
+		$sqlselect="SELECT r.location_nr AS room_nr, p.name_last, p.name_first,p.date_birth,
 					e.encounter_nr, e.encounter_class_nr,e.in_ward,
 					w.name AS ward_name,w.roomprefix,
-					l.location_nr AS  ward_nr,l.date_from AS ward_date,
-					r.location_nr AS room_nr ";
-					
+					l.location_nr AS  ward_nr,l.date_from AS ward_date";
+
 		if($usenum){
 			$sqlfrom=" FROM $tb_encounter as e LEFT JOIN $tb_person AS p ON p.pid=e.pid";
 		}else{

@@ -3,36 +3,36 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
 define('LANG_FILE','products.php');
 $local_user='ck_prod_db_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
+
 //require_once($root_path.'include/inc_editor_fx.php');
 
 /* Load the date formatter */
 require_once($root_path.'include/inc_date_format_functions.php');
 
+# Create a core object
+require_once($root_path.'include/care_api_classes/class_core.php');
+$core = & new Core;
 
 $thisfile='medlager-report.php';
 
 if($mode=='sent') $breakfile=$thisfile; else $breakfile='medlager-datenbank-functions.php';
 
-
+//$db->debug=1;
 
 if(($report!=NULL)||($mode!=''))
 {
 	$dbtable='care_med_report';
 
-	if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-	if($dblink_ok)
-		{
 			switch($mode)
 			{
 				case 'save':
@@ -45,7 +45,6 @@ if(($report!=NULL)||($mode!=''))
 							report_time,
 							status,
 							history,
-							modify_id,
 							create_id,
 							create_time
 							 ) 
@@ -57,15 +56,16 @@ if(($report!=NULL)||($mode!=''))
 							'$report_date', 
 							'$report_time', 
 							'pending',
-							'Created: ".$HTTP_COOKIE_VARS[$local_user.$sid]." ".date('Y-m-d H:i:s')."\n\r',
-							'".$HTTP_COOKIE_VARS[$local_user.$sid]."',
-							'".$HTTP_COOKIE_VARS[$local_user.$sid]."',
-							NULL
+							'Created: ".$HTTP_SESSION_VARS['sess_user_name']." ".date('Y-m-d H:i:s')."\n\r',
+							'".$HTTP_SESSION_VARS['sess_user_name']."',
+							'".date('YmdHis')."'
 						)";
 						
-						if($db->Execute($sql))
+						if($core->Transact($sql))
 						{ 
-						    $report_nr=$db->Insert_ID();
+						    $oid=$db->Insert_ID();
+							$core->coretable=$dbtable;
+							$report_nr = $core->LastInsertPK('report_nr',$oid);
 							header("Location: $thisfile".URL_REDIRECT_APPEND."&userck=$userck&dept=$dept&report_nr=$report_nr&mode=sent"); exit;
 							
 							exit;
@@ -74,8 +74,8 @@ if(($report!=NULL)||($mode!=''))
    						break;
 						
 				case 'sent':
-								$sql='SELECT report_nr, report, reporter, report_date, report_time FROM '.$dbtable.' 
-										WHERE report_nr="'.$report_nr.'"';
+								$sql="SELECT report_nr, report, reporter, report_date, report_time FROM $dbtable
+										WHERE report_nr='$report_nr'";
 										
         						if($ergebnis=$db->Execute($sql))
 								{
@@ -85,10 +85,6 @@ if(($report!=NULL)||($mode!=''))
 								
 						break;
 			} // end of switch
-
-	}
-  	 else 
-		{ echo "$LDDbNoLink<br>"; }
 }
 
 ?>
@@ -134,7 +130,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
 <tr valign=top>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="45">
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>"  height="10" >
 <FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php echo "$LDMedDepot - $LDReport" ?></STRONG></FONT></td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
 <a href="#" onClick=history.back(1)><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a 

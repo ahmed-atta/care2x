@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'/include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -26,6 +26,8 @@ if(!isset($mode)) $mode='';
 require_once($root_path.'include/inc_resolve_dept.php');
 # Resolve ward
 require_once($root_path.'include/inc_resolve_ward.php');
+
+//$db->debug=1;
 
 if(!isset($inquirer)||empty($inquirer))
 {
@@ -59,7 +61,13 @@ if($dblink_ok) {
 							tphone,
 							tdate,
 							ttime,
-							answered ) 
+							tid,
+							answered,
+							status,
+							history,
+							create_id,
+							create_time
+							 )
 						VALUES 
 						(
 							'$dept',
@@ -68,16 +76,24 @@ if($dblink_ok) {
 							'".$HTTP_POST_VARS['tphone']."', 
 							'".$HTTP_POST_VARS['tdate']."', 
 							'".$HTTP_POST_VARS['ttime']."', 
-							'0'	)";
-						if($db->Execute($sql))
-						{ 
-						    $inquirer=strtr($inquirer,' ','+');
-							header("Location: technik-questions.php".URL_REDIRECT_APPEND."&dept=$dept&inquirer=$inquirer"); 
-							exit;
-						}
-			 			else {echo "<p>".$sql."$LDDbNoSave<br>"; };
-    }
-						
+							'".date('YmdHis')."',
+							'0',
+							'pending',
+							'Create ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n',
+							'".$HTTP_SESSION_VARS['sess_user_name']."',
+							'".date('YmdHis')."'
+							)";
+        $db->BeginTrans();
+        $ok=$db->Execute($sql);
+        if($ok && $db->CommitTrans()) {
+			$inquirer=strtr($inquirer,' ','+');
+			header("Location: technik-questions.php".URL_REDIRECT_APPEND."&dept=$dept&inquirer=$inquirer");
+			exit;
+		}else {
+			$db->RollbackTrans();
+			echo "<p>".$sql."$LDDbNoSave<br>"; };
+    	}
+
     if($mode=='read') {
 /*        $sql="SELECT tdate,ttime,inquirer,query,answered,reply,ansby,astamp FROM $dbtable
 							 WHERE inquirer='$inquirer'
@@ -87,15 +103,14 @@ if($dblink_ok) {
 									AND tid='".$HTTP_GET_VARS['tid']."'
 									LIMIT 0,10"; 
 */        $sql="SELECT tdate,ttime,inquirer,query,answered,reply,ansby,astamp FROM $dbtable
-							 WHERE batch_nr='".$HTTP_GET_VARS['batch_nr']."'
-									LIMIT 0,10"; 
-        if($result=$db->Execute($sql)) {
+							 WHERE batch_nr='".$HTTP_GET_VARS['batch_nr']."'";
+        if($result=$db->SelectLimit($sql,10)) {
             $inhalt=$result->FetchRow();		
         } else {echo "<p>$sql $LDDbNoSave<br>"; };
     }
 			
-    $sql="SELECT batch_nr,dept,tdate,ttime,inquirer,tid,query,answered FROM $dbtable WHERE inquirer='$inquirer'  ORDER BY tid DESC LIMIT 0,6 "; 
-    if($ergebnis=$db->Execute($sql)) {
+    $sql="SELECT batch_nr,dept,tdate,ttime,inquirer,tid,query,answered FROM $dbtable WHERE inquirer='$inquirer'  ORDER BY tid DESC";
+    if($ergebnis=$db->SelectLimit($sql,6)) {
         $rows = $ergebnis->RecordCount();
     } else {echo '<p>'.$sql.$LDDbNoRead.'<br>'; };
 } else { echo "$LDDbNoLink<br>"; } 
@@ -150,7 +165,7 @@ td.vn { font-family:verdana,arial; color:#000088; font-size:10;background-color:
 <?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="45"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" ><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
 <STRONG> &nbsp; <?php echo $LDTechSupport ?></STRONG></FONT></td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
 <?php if($cfg['dhtml'])echo'<a href="'.$returnfile.'"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('tech.php','queries')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>

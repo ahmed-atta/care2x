@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -16,7 +16,7 @@ require_once('drg_inc_local_user.php');
 
 require_once($root_path.'include/inc_front_chain_lang.php');
 if (!isset($pn)||!$pn) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;}; 
-
+//$db->debug=true;
 if($saveok) { ?>
 
  <script language="javascript" >
@@ -69,30 +69,29 @@ if($mode=='save')
 		exit;
 	}
 }elseif(isset($group_nr)&&$group_nr){
-	 
-	/* Load the date formatter */
-	include_once($root_path.'include/inc_date_format_functions.php');
+
 	/* Load related codes */
 	$diag_obj=&$DRG_obj->RelatedDiagnoses($group_nr);
  	$proc_obj=&$DRG_obj->RelatedProcedures($group_nr);
-           
+
+}
+
+# Load the date formatter
+include_once($root_path.'include/inc_date_format_functions.php');
+
+# Get the patient`s basic data
+if($enc=&$DRG_obj->getBasic4Data()){
+	$encounter=$enc->FetchRow();
 }
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
- <TITLE><?php echo "$LDQuickList $title" ?></TITLE>
+ <TITLE><?php echo "$LDPossibleCodes" ?></TITLE>
 <script language="javascript" src="../js/showhide-div.js"></script>
 <script language="javascript">
 <!-- 
-function gethelp(x,s,x1,x2,x3)
-{
-	if (!x) x="";
-	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
-	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
-	window.helpwin.moveTo(0,0);
-}
 function subsearch(k)
 {
 	//window.location.href='drg-icd10-search.php?sid=<?php echo "sid=$sid&lang=$lang&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&dept_nr=$dept_nr&oprm=$oprm&display=$display" ?>&keyword='+k;
@@ -135,9 +134,13 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <?php if (!$cfg['dhtml']){ echo ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 <a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> align="right"></a>
 <FONT    SIZE=2  FACE="verdana,Arial" >
-<?php echo "$ln, $fn ".formatDate2Local($bd,$date_format)." - $pn";
-	if($opnr) echo" - OP# $opnr - $dept_nr OP $oprm"; 
+
+<?php 
+//echo "$ln, $fn ".formatDate2Local($bd,$date_format)." - $pn";
+echo $encounter['name_last'].", ".$encounter['name_first']." ".formatDate2Local($encounter['date_birth'],$date_format)." - $pn";
+if($opnr) echo" - OP# $opnr - $dept_nr OP $oprm";
 ?>
+
 </font><p>
 <ul>
 <FONT    SIZE=3  FACE="Arial" color="<?php echo $rowcolor ?>">

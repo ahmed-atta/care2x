@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /*
-CARE 2X Integrated Information System version deployment 1.1 (mysql) 2004-01-11 for Hospitals and Health Care Organizations and Services
+CARE2X Integrated Information System beta 2.0.0 - 2004-05-16 for Hospitals and Health Care Organizations and Services
 Copyright (C) 2002  Elpidio Latorilla & Intellin.org	
 
 GNU GPL. For details read file "copy_notice.txt".
@@ -21,7 +21,9 @@ require_once($root_path.'include/inc_date_format_functions.php');
 <HEAD>
  <TITLE>
  <?php 
- 	echo "$ln, $fn ".formatDate2Local($bd,$date_format)." - $pn";
+ 	if(!empty($ln) && !empty($fn)) echo "$ln, $fn";
+	if(!empty($bd)) echo formatDate2Local($bd,$date_format);
+	echo " - $pn";
 	if($opnr) echo" - OP# $opnr"; 
 	$targetbuf="$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&group_nr=$group_nr&dept_nr=$dept_nr&edit=$edit&is_discharged=$is_discharged&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=$newsave";
 ?>	

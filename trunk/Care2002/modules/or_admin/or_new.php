@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -34,6 +34,8 @@ $dept_obj=& new Department;
 $OR_obj= & new OPRoom;
 # Create the ward object
 $ward_obj=& new Ward;
+
+//$db->debug=1;
 
 # Validate 3 most important inputs
 if(isset($mode)&&!empty($mode)&&$mode!='select'){
@@ -70,15 +72,17 @@ if(!empty($mode)&&!$inputerror){
 				$HTTP_POST_VARS['type_nr']=$OR_obj->ORTypeNr(); # 2 = operating room
 				$HTTP_POST_VARS['history']="Create: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']." ".$udata."\n";
 				$HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
-				$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+				//$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
 				$HTTP_POST_VARS['create_time']=date('YmdHis');
 				$HTTP_POST_VARS['modify_time']=date('YmdHis');
 				
 				$OR_obj->setDataArray($HTTP_POST_VARS);
 				
 				if($OR_obj->insertDataFromInternalArray()){
+					
+					# Get the last insert primary key as op room nr.
 				
-					$nr=$db->Insert_ID();
+					$nr=$OR_obj->LastInsertPK('nr',$db->Insert_ID());
 							
 					header("location:or_info.php".URL_REDIRECT_APPEND."&edit=1&mode=newdata&nr=$nr");
 					exit;
@@ -92,7 +96,7 @@ if(!empty($mode)&&!$inputerror){
 		case 'update':
 		{ 
 			
-			$HTTP_POST_VARS['history']=" CONCAT(history,'Update: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']." $udata\n"."')";
+			$HTTP_POST_VARS['history']=$OR_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']." $udata\n");
 			$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
 			$HTTP_POST_VARS['modify_time']=date('YmdHis');
 			
@@ -109,7 +113,7 @@ if(!empty($mode)&&!$inputerror){
 		}
 		case 'select':
 		{
-			# Get department's information
+			# Get department´s information
 			if(isset($nr)&&$nr){
 				$OR_Info=$OR_obj->ORRecordInfo($nr);
 			}elseif(isset($OR_nr)&&$OR_nr){
@@ -122,15 +126,16 @@ if(!empty($mode)&&!$inputerror){
 				$ORoom=$OR_Info->FetchRow();
 				extract($ORoom);
 			}
-		
-		}	
+		}
 	}// end of switch
 }
 
 # Load all active medical departments available
 $deptarray=$dept_obj->getAllMedical('name_formal');
+
 # Set ward items for loading
 $witem='nr, ward_id, name';
+
 # Load the active wards available
 $wardsarray=$ward_obj->getAllWardsItemsArray($witem);
 
@@ -269,11 +274,11 @@ echo $LDEnterInfo;
 	?>
 	<input type="text" name="date_create" size=10 maxlength=10  
 	 	 value="<?php
-		 	if($inputerror){
+		 	if(isset($inputerror) && $inputerror){
 				echo $date_create;
 			}else{
 		  		if(!isset($date_create)||empty($date_create)) $date_create=date('Y-m-d');
-				echo formatDate2Local($date_create,$date_format); 
+				echo formatDate2Local($date_create,$date_format);
 			}
 		?>" 
 	 	onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">

@@ -1,4 +1,4 @@
-<?php 
+<?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
@@ -14,9 +14,9 @@ if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
 
 switch($table)
 {
-    case 'care_person':  $sql="SELECT name_last AS LastName, name_first AS FirstName, history FROM care_person WHERE pid=$pid";
+    case 'care_person':  $sql="SELECT name_last AS \"LastName\", name_first AS \"FirstName\", history FROM care_person WHERE pid=$pid";
 						  break;
-    case 'care_encounter':  $sql=$sql="SELECT p.name_last AS LastName, p.name_first AS FirstName, e.history 
+    case 'care_encounter':  $sql=$sql="SELECT p.name_last AS  \"LastName\", p.name_first AS  \"FirstName\", e.history 
 	                                                    FROM care_person AS p, care_encounter AS e WHERE p.pid=e.pid AND e.encounter_nr=$pid";
 						  break;
 }

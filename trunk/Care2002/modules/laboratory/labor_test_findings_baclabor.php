@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -30,6 +30,8 @@ $returnfile='labor_test_request_admin_'.$subtarget.'.php?sid='.$sid.'&lang='.$la
 
 $thisfile='labor_test_findings_'.$subtarget.'.php';
 
+//$db->debug=1;
+
 $bgc1='#fff3f3'; 
 $edit=0; /* Assume to not edit first */
 $read_form=1;
@@ -39,14 +41,16 @@ $edit_findings=1;
 $formtitle=$LDBacteriologicalLaboratory;
 $dept_nr=25; // 25 = department nr. of bacteriological lab
 $db_request_table=$subtarget;
+
+require_once($root_path.'include/care_api_classes/class_encounter.php');
+$enc_obj=new Encounter;
 						
 /* Here begins the real work */
 /* Establish db connection */
 require_once($root_path.'include/inc_date_format_functions.php');
     /* Check for the patient number = $pn. If available get the patients data, otherwise set edit to 0 */
     if(isset($pn)&&$pn){		
-		include_once($root_path.'include/care_api_classes/class_encounter.php');
-		$enc_obj=new Encounter;
+
 	    if( $enc_obj->loadEncounterData($pn)) {
 		
 			include_once($root_path.'include/care_api_classes/class_globalconfig.php');
@@ -112,7 +116,8 @@ require_once($root_path.'include/inc_date_format_functions.php');
 										  type_general, resist_anaerob, 
 										  resist_aerob, findings, doctor_id, findings_date, 
 										  findings_time, status, history,
-										  modify_id,create_id, create_time
+										  create_id,
+										  create_time
 										  )
 										  VALUES 
 										  (
@@ -121,12 +126,13 @@ require_once($root_path.'include/inc_date_format_functions.php');
 										   '".$findings_final."','".$entry_nr."','".formatDate2Std($rec_date,$date_format)."',
 										   '".$type_general."','".$resist_anaerob."',
 										   '".$resist_aerob."','".$findings."','".$doctor_id."','".date('Y-m-d')."',
-										   '".date('H:i')."','initial','Create: ".date('Y-m.d H:i:s')." = ".$HTTP_COOKIE_VARS[$local_user.$sid]."\n',
-										   '".$HTTP_SESSION_VARS['sess_user_name']."', '".$HTTP_SESSION_VARS['sess_user_name']."', NULL
+										   '".date('H:i')."','initial','Create: ".date('Y-m.d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n',
+										   '".$HTTP_SESSION_VARS['sess_user_name']."',
+										   '".date('YmdHis')."'
 										   )";						 
 
 
-							      if($ergebnis=$db->Execute($sql))
+							      if($ergebnis=$enc_obj->Transact($sql))
        							  {
 								     signalNewDiagnosticsReportEvent();
 									//echo $sql;
@@ -149,11 +155,12 @@ require_once($root_path.'include/inc_date_format_functions.php');
 										   type_general = '".$type_general."', resist_anaerob ='".$resist_anaerob."', resist_aerob = '".$resist_aerob."', 
 										   findings = '".$findings."', doctor_id = '', findings_date = '".date('Y-m-d')."', 
 										   findings_time = '".date('H:i')."',  
-										   history =CONCAT(history,'Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n'),
-										   modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."'
+										   history =".$enc_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
+										   modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+										   modify_time='".date('YmdHis')."'
 										   WHERE batch_nr = '$batch_nr'";	
 										   							  							
-							      if($ergebnis=$db->Execute($sql))
+							      if($ergebnis=$enc_obj->Transact($sql))
        							  {
 								     signalNewDiagnosticsReportEvent();
 									//echo $sql;
@@ -172,19 +179,21 @@ require_once($root_path.'include/inc_date_format_functions.php');
 			 
 							      $sql="UPDATE care_test_findings_".$db_request_table." SET 
 										   status='done', 
-										   history =CONCAT(history,'Done: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n'),
-										   modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."'
+										   history =".$enc_obj->ConcatHistory("Done: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
+										   modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+										   modify_time='".date('YmdHis')."'
 										   WHERE batch_nr = '".$batch_nr."'";
 										  							
-							      if($ergebnis=$db->Execute($sql))
+							      if($ergebnis=$enc_obj->Transact($sql))
        							  {
 									//echo $sql;
 							          $sql="UPDATE care_test_request_".$db_request_table." SET 
-										   status='done', 
-										   history =CONCAT(history,'Done: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n'),
-										   modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."'
+										   status='done',
+										   history =".$enc_obj->ConcatHistory("Done: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
+										   modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+										   modify_time='".date('YmdHis')."'
 										   WHERE batch_nr = '".$batch_nr."'";
-							          if($ergebnis=$db->Execute($sql))
+							          if($ergebnis=$enc_obj->Transact($sql))
        							      {
 								  		// Load the visual signalling functions
 										include_once($root_path.'include/inc_visual_signalling_fx.php');
@@ -206,10 +215,8 @@ require_once($root_path.'include/inc_date_format_functions.php');
 								   }
 								
 								break; // end of case 'save'
-								
-								
-	        /* If mode is edit, get the stored test findings 
-			*/
+	        
+			/* If mode is edit, get the stored test findings */
 			case 'edit_findings':
 
 			           $sql="SELECT * FROM care_test_findings_".$db_request_table." WHERE batch_nr='".$batch_nr."'";

@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -40,7 +40,8 @@ if(!isset($mode)){
 	# Prevent redirection
 	$redirect=false;
 	include('./include/save_admission_data.inc.php');
-	$HTTP_POST_VARS['ref_notes_nr']=$db->Insert_ID();
+	$insid=$db->Insert_ID();
+	$HTTP_POST_VARS['ref_notes_nr']=$obj->LastInsertPK('nr',$insid);
 	$HTTP_POST_VARS['notes']=$HTTP_POST_VARS['text_therapy'];
 	$HTTP_POST_VARS['type_nr']=13; // 13 = text_therapy
 	$HTTP_POST_VARS['short_notes']='';
@@ -73,8 +74,8 @@ if(empty($encounter_nr)&&!empty($HTTP_SESSION_VARS['sess_en'])){
 if($mode=='show') 
 {
 	$sql="SELECT e.encounter_nr,e.is_discharged,nd.nr, nd.notes AS diagnosis,nd.short_notes, nd.date,nd.personell_nr,nd.personell_name, nt.notes AS therapy
-		FROM 	(care_encounter AS e, 
-					care_encounter_notes AS nd)
+		FROM 	care_encounter AS e,
+					care_encounter_notes AS nd
 					LEFT JOIN care_encounter_notes AS nt ON nt.ref_notes_nr=nd.nr
 		WHERE  e.encounter_nr=".$encounter_nr."
 			AND e.encounter_nr=nd.encounter_nr 
@@ -97,7 +98,7 @@ if($mode=='show')
 			}
 		}
 	}else{
-		echo $sql;
+		echo "$LDDbNoRead<p>$sql";
 	}
 }elseif(($mode=='details')&&!empty($nr)){
 	$sql="SELECT nd.notes AS diagnosis,

@@ -3,18 +3,20 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
 define('LANG_FILE','phone.php');
 if(isset($user_origin)&&$user_origin=='pers'){
 	$local_user='aufnahme_user';
+	$sBreakUrl = $root_path.'modules/personell_admin/personell_register_show.php'.URL_APPEND.'&personell_nr='.$nr;
 }else{
 	$local_user='phonedir_user';
+	$sBreakUrl = 'phone.php'.URL_APPEND;
 }
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_personell.php');
@@ -26,71 +28,64 @@ if(!isset($mode)) $mode='';
 if(!isset($name)) $name='';
 if(!isset($vorname)) $vorname='';
 
+//$db->debug=true;
+
 $newdata=1;
 $dbtable='care_phone';
 $curdate=date('Y-m-d');
 $curtime=date('H:i:s');
 
-if ($mode=='save'){
+if ($mode=='save' || ($mode=='update' && !empty($nr)) ){
 	   // start checking input data
-	if (($name!='') || ($vorname!='')) {	
+	if (!empty($name) && !empty($vorname)) {
 	
-		$sql="INSERT INTO ".$dbtable." 
-						(	
-							title,
-							name,
-							vorname,
-							personell_nr,
-							beruf,
-							bereich1,
-							bereich2,
-							inphone1,
-							inphone2,
-							inphone3,
-							exphone1,
-							exphone2,
-							funk1,
-							funk2,
-							roomnr,
-							date,
-							time,
-							create_id,
-							create_time
-							 ) 
-						VALUES (
-							'$anrede',
-							'$name', 
-							'$vorname',
-							'$personell_nr', 
-							'$beruf', 
-							'$bereich1', 
-							'$bereich2', 
-							'$inphone1', 
-							'$inphone2', 
-							'$inphone3', 
-							'$exphone1', 
-							'$exphone2', 
-							'$funk1', 
-							'$funk2', 
-							'$zimmerno',
-							'$curdate', 
-							'$curtime',
-							'".$HTTP_COOKIE_VARS[$local_user.$sid]."',
-							NULL
-							)";
-				
- 						if($db->Execute($sql))
-						{ 
-							header('location:phone_list.php'.URL_REDIRECT_APPEND.'&user_origin='.$user_origin);
-							exit;
-						}
-			 			else {echo "<p>".$sql."<p>$LDDbNoSave.";};
-    }else{
-		$error=1;
-	}
+		$bSaveOk = FALSE;
 
-}elseif($user_origin=='pers'&&$nr){
-	if(!$employee->loadPersonellData($nr)) $mode='';
+         # Create comm object
+         include_once($root_path.'include/care_api_classes/class_comm.php');
+         $phone = & new Comm;
+
+        # Correctly map some indexes
+        $HTTP_POST_VARS['roomnr']=$HTTP_POST_VARS['zimmerno'];
+        $HTTP_POST_VARS['date'] = $curdate;
+        $HTTP_POST_VARS['time'] = $curtime;
+        $HTTP_POST_VARS['title'] = $HTTP_POST_VARS['anrede'];
+		
+		if($mode=='save'){
+			$HTTP_POST_VARS['create_id'] = $HTTP_SESSION_VARS['sess_user_name'];
+			$HTTP_POST_VARS['create_time'] = date('YmdHis');
+			$HTTP_POST_VARS['history'] = "Add ".date('Y-m-d H:i:S')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
+			$phone->setDataArray($HTTP_POST_VARS);
+			//))if($db->Execute($sql))
+			if($phone->insertDataFromInternalArray()){
+				$bSaveOk = TRUE;
+			}
+		}else{
+                $HTTP_POST_VARS['modify_id'] = $HTTP_SESSION_VARS['sess_user_name'];
+                $HTTP_POST_VARS['modify_time'] = date('YmdHis');
+                $HTTP_POST_VARS['history'] = $phone->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
+
+                $phone->setWhereCondition("personell_nr='$nr'");
+                $phone->setDataArray($HTTP_POST_VARS);
+
+ 				if($phone->updateDataFromInternalArray($nr)){
+					$bSaveOk = TRUE;
+				}
+			}
+		if($bSaveOk){
+			header('location:phone_list.php'.URL_REDIRECT_APPEND.'&user_origin='.$user_origin.'&nr='.$nr);
+			exit;
+	    }else{
+			echo "<p>".$phone->getLastQuery()."<p>$LDDbNoSave.";
+		}
+    }else{
+        $error=1;
+    }
+}
+
+if($user_origin=='pers'&&$nr){
+	if(!$employee->loadPersonellData($nr)) $mode='save';
+		elseif($employee->PhoneKey()) $mode = 'update';
 }
 ?>
 
@@ -183,7 +178,7 @@ if($user_origin=='pers'&&$employee->isPreLoaded()){
 <td colspan=2>
 <FONT    SIZE=-1  FACE="Arial">
 <?php echo $LDEditFields[4] ?>&nbsp;
-<input type=text name=beruf size="20" value="" maxlength=25><br>
+<input type=text name=beruf size="20" value="<?php echo $employee->Profession(); ?>" maxlength=25><br>
 </td>
 </tr>
 
@@ -227,17 +222,17 @@ if($user_origin=='pers'&&$employee->isPreLoaded()){
 <?php echo $LDEditFields[5] ?>
 <br>
 
-<input type=text name=bereich1 size="20" maxlength=25  value=""><br>
+<input type=text name=bereich1 size="20" maxlength=25  value="<?php echo $employee->Dept1(); ?>"><br>
 </td>
 <td><FONT    SIZE=-1  FACE="Arial">
 <?php echo $LDEditFields[6] ?>
 <br>
-<input type=text name=bereich2 size="20" maxlength=25 value=""><br>
+<input type=text name=bereich2 size="20" maxlength=25 value="<?php echo $employee->Dept2(); ?>"><br>
 </td>
 <td >
 <FONT    SIZE=-1  FACE="Arial">
 <?php echo $LDEditFields[14] ?><br>
-<input type=text name=zimmerno size="20" maxlength=10 value=""><br>
+<input type=text name=zimmerno size="20" maxlength=10 value="<?php echo $employee->RoomNr(); ?>"><br>
 </td>
 </tr>
 
@@ -250,7 +245,7 @@ if($user_origin=='pers'&&$employee->isPreLoaded()){
 </td>
 <td><FONT    SIZE=-1  FACE="Arial">
 <?php echo $LDEditFields[10] ?><br>
-<input type=text name=exphone1 size="20"  maxlength=25 value=""><br>
+<input type=text name=exphone1 size="20"  maxlength=25 value="<?php echo $employee->ExPhone1() ?>"><br>
 </td>
 <td><FONT    SIZE=-1  FACE="Arial">
 <?php echo $LDEditFields[12] ?><br>
@@ -267,7 +262,7 @@ if($user_origin=='pers'&&$employee->isPreLoaded()){
 </td>
 <td><FONT    SIZE=-1  FACE="Arial">
 <?php echo $LDEditFields[11] ?><br>
-<input type=text name=exphone2 size="20" value="" maxlength=25><br>
+<input type=text name=exphone2 size="20" value="<?php echo $employee->ExPhone2() ?>" maxlength=25><br>
 </td>
 <td >
 <FONT    SIZE=-1  FACE="Arial">
@@ -281,7 +276,7 @@ if($user_origin=='pers'&&$employee->isPreLoaded()){
 <FONT    SIZE=-1  FACE="Arial">
 <?php echo $LDEditFields[9] ?>
 <br>
-<input type=text name=inphone3 size="20" maxlength=15<?php echo $employee->InPhone3() ?>><br>
+<input type=text name=inphone3 size="20" maxlength=15 value="<?php echo $employee->InPhone3() ?>"><br>
 </td>
 <td>&nbsp;
 </td>
@@ -294,16 +289,18 @@ if($user_origin=='pers'&&$employee->isPreLoaded()){
 <p>
 <input type="hidden" name="sid" value="<?php echo $sid; ?>">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
-<input type="hidden" name="mode" value="save">
+<input type="hidden" name="mode" value="<?php if(!empty($mode)) echo $mode; else echo 'save'; ?>">
+<input type="hidden" name="user_origin" value="<?php echo $user_origin ?>">
 <input type="hidden" name="edit" value="<?php echo $edit ?>">
 <input type="hidden" name="newvalues" value="1">
 <input type="submit" value="<?php echo $LDSave ?>">
 <input type="reset" name="erase" value="<?php echo $LDReset ?>">
-<input type="hidden" name="user_origin" value="<?php echo $user_origin ?>">
+
 <?php 
 if($user_origin=='pers'&&$employee->isPreLoaded()){
 ?>
 <input type="hidden" name="personell_nr" value="<?php echo $nr; ?>">
+<input type="hidden" name="nr" value="<?php echo $nr ?>">
 <?php
 }
 ?>
@@ -317,7 +314,7 @@ if($user_origin=='pers'&&$employee->isPreLoaded()){
 </form>
 <FONT    SIZE=-1  FACE="Arial">
 <p>
-<a href="phone.php<?php echo URL_APPEND; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0'); ?>></a>
+<a href="<?php echo $sBreakUrl; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0'); ?>></a>
 <p>
 </FONT>
 </ul>

@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -30,10 +30,13 @@ if(isset($pn)&&$pn){
 	/* Create image object */
 	include_once($root_path.'include/care_api_classes/class_image.php');
 	$img_obj=new Image();
-
+	//$db->debug=true;
 	if(isset($mode)&&$mode=='save'){
-		$HTTP_POST_VARS['history']="CONCAT(history,'Notes ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n')";
+
+		#$HTTP_POST_VARS['history']="CONCAT(history,'Notes ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n')";
+		$HTTP_POST_VARS['history']=$img_obj->ConcatHistory("Notes ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
 		$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		$HTTP_POST_VARS['modify_time']=date('YmdHis');
 		//$img_obj->setDataArray($HTTP_POST_VARS);
 		if($img_obj->updateImageNotes($HTTP_POST_VARS)){
 			header('Location:'.basename(__FILE__).URL_REDIRECT_APPEND.'&pn='.$pn.'&nr='.$nr);

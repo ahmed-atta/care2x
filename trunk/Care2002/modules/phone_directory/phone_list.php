@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /*
-CARE 2X Integrated Information System version deployment 1.1 (mysql) 2004-01-11 for Hospitals and Health Care Organizations and Services
+CARE2X Integrated Information System beta 2.0.0 - 2004-05-16 for Hospitals and Health Care Organizations and Services
 Copyright (C) 2002  Elpidio Latorilla & Intellin.org	
 
 GNU GPL. For details read file "copy_notice.txt".
@@ -12,23 +12,30 @@ define('LANG_FILE','phone.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 
+if(isset($user_origin)&&$user_origin=='pers'){
+	$sBreakUrl = 'phone_edit.php'.URL_APPEND.'&user_origin='.$user_origin.'&nr='.$nr;
+}else{
+	$sBreakUrl = 'phone.php'.URL_APPEND;
+}
+
 $dbtable='care_phone';
 # Filter invalid display size and set to default
 if(empty($displaysize)||!is_numeric($displaysize)) $displaysize=10;
 
+# Load the date formatter
+include_once($root_path.'include/inc_date_format_functions.php');
 
-    /* Load the date formatter */
-    include_once($root_path.'include/inc_date_format_functions.php');
+$fielddata='item_nr, title, name, vorname, beruf, bereich1, bereich2,  inphone1, inphone2, inphone3, exphone1, exphone2, funk1, funk2,  roomnr';
 
-   $fielddata='item_nr, title, name, vorname, beruf, bereich1, bereich2,  inphone1, inphone2, inphone3, exphone1, exphone2, funk1, funk2, roomnr';
+if ($edit){
+   $fielddata.=', date, time';
+}
 
-   if ($edit) $fielddata.=', date, time';
+$sql='SELECT '.$fielddata.' FROM '.$dbtable.' ORDER BY name';
 
-	$sql='SELECT '.$fielddata.' FROM '.$dbtable.' ORDER BY name';
-    if( $ergebnis=$db->Execute($sql))
-	{
-		$rows=$ergebnis->RecordCount();
-	}
+if( $ergebnis=$db->Execute($sql)){
+   $rows=$ergebnis->RecordCount();
+}
 ?>
 
 <?php html_rtl($lang); ?>
@@ -71,12 +78,9 @@ echo '></a>'; } ?><img <?php echo createLDImgSrc($root_path,'phonedir-b.gif','0'
 
 <FONT    SIZE=1  FACE="Arial">
 
-<?php if($rows)
-{
-		//$colnum=mysql_num_fields($ergebnis);
-		
-		//if(!$edit) $colstop=$colnum-3; else $colstop=$colnum;
-		
+<?php
+if($rows){
+
 		$colstop=$ergebnis->FieldCount();
 
 		if(!$batchnum)
@@ -202,7 +206,7 @@ echo '></a>'; } ?><img <?php echo createLDImgSrc($root_path,'phonedir-b.gif','0'
 <p>
 <?php else : ?>
 <p>
-<a href="phone.php<?php echo URL_APPEND; ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0'); ?>></a>
+<a href="<?php echo $sBreakUrl; ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0'); ?>></a>
 
 <?php endif; ?>
 

@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -15,7 +15,9 @@ require($root_path.'include/inc_environment_global.php');
 # In normal cases this value is derived from the db table "care_config_global" using the "pagin_insurance_list_max_block_rows" element.
 define('MAX_BLOCK_ROWS',30); 
 
-$lang_tables=array('doctors.php');
+$lang_tables[]='departments.php';
+$lang_tables[]='doctors.php';
+$lang_tables[]='actions.php';
 define('LANG_FILE','or.php');
 $local_user='ck_opdoku_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
@@ -30,6 +32,8 @@ if(!isset($dept_nr)||!$dept_nr){
 		exit;
 	}
 }
+
+//$db->debug=1;
 
 $thisfile=basename(__FILE__);
 $breakfile=$root_path.'main/op-doku.php'.URL_APPEND;
@@ -55,7 +59,7 @@ $patientselected=FALSE;
 function clean_it(&$d)
 {
 	$d=strtr($d,"°!§$&/()=?`´+'#{}[]\^","~~~~~~~~~~~~~~~~~~~~~");
-	$d=str_replace("\"","~",$d);
+	$d=str_replace("\"","~",$d);   //"
 	$d=str_replace("~","",$d);
 	return trim($d);
 }
@@ -65,7 +69,7 @@ require_once($root_path.'include/inc_date_format_functions.php');
     
 
 if($mode=='search'||$mode=='paginate'){
-	# Initialize page's control variables
+	# Initialize page´s control variables
 	if($mode!='paginate'){
 		# Reset paginator variables
 		$pgx=0;
@@ -106,18 +110,18 @@ if($mode=='search'||$mode=='paginate'){
 							
 						
 							$s2="";
-							if (clean_it(&$name)) $s2.=" p.name_last=\"".addslashes($name)."\"";
+							if (clean_it(&$name)) $s2.=" p.name_last $sql_LIKE '".addslashes($name)."%'";
 							if (clean_it(&$vorname))
-								if($s2) $s2.=" AND p.name_first=\"".addslashes($vorname)."\""; else $s2.=" p.name_first=\"".addslashes($vorname)."\"";
+								if($s2) $s2.=" AND p.name_first $sql_LIKE '".addslashes($vorname)."%'"; else $s2.=" p.name_first $sql_LIKE '".addslashes($vorname)."%'";
 							if($gebdatum)
 							{
 							    $gebdatum=formatDate2STD($gebdatum,$date_format);
-								if($s2) $s2.=" AND p.date_birth=\"".addslashes($gebdatum)."\""; else $s2.=" p.date_birth=\"".addslashes($gebdatum)."\"";
+								if($s2) $s2.=" AND p.date_birth='$gebdatum'"; else $s2.=" p.date_birth='$gebdatum'";
 							}
 							if($op_date)
 							{
 							    $op_date=formatDate2STD($op_date,$date_format);
-								if($s2) $s2.=" AND o.op_date=\"".addslashes($op_date)."\""; else $s2.=" o.op_date=\"".addslashes($op_date)."\"";
+								if($s2) $s2.=" AND o.op_date='$op_date'"; else $s2.=" o.op_date='$op_date'";
 							}
 							if (clean_it(&$patnum))
 							{
@@ -125,29 +129,29 @@ if($mode=='search'||$mode=='paginate'){
 								if($s2) $s2.=" AND o.encounter_nr=$patnum"; else $s2.=" o.encounter_nr=$patnum";
 							}
 							if(clean_it(&$operator))
-								if($s2) $s2.=" AND o.operator=\"".addslashes($operator)."\""; else $s2.=" o.operator=\"".addslashes($operator)."\"";
+								if($s2) $s2.=" AND o.operator='".addslashes($operator)."'"; else $s2.=" o.operator='".addslashes($operator)."'";
 							if ($status)
-								if($s2) $s2.=" AND e.encounter_class_nr=\"$status\""; else $s2.=" e.encounter_class_nr=\"$status\"";
+								if($s2) $s2.=" AND e.encounter_class_nr='$status'"; else $s2.=" e.encounter_class_nr='$status'";
 							if ($kasse)
-								if($s2) $s2.=" AND e.insurance_firm_id=\"$kasse\""; else $s2.=" e.insurance_firm_id=\"$kasse\"";
+								if($s2) $s2.=" AND e.insurance_firm_id='$kasse'"; else $s2.=" e.insurance_firm_id='$kasse'";
 							if(clean_it(&$diagnosis))
-								if($s2) $s2.=" AND o.diagnosis LIKE \"%$diagnosis%\""; else $s2.=" o.diagnosis LIKE \"%$diagnosis%\"";
+								if($s2) $s2.=" AND o.diagnosis $sql_LIKE '%$diagnosis%'"; else $s2.=" o.diagnosis $sql_LIKE '%$diagnosis%'";
 							if(clean_it(&$localize))
-								if($s2) $s2.=" AND o.localize LIKE \"%$localize%\""; else $s2.=" o.localize LIKE \"%$localize%\"";
+								if($s2) $s2.=" AND o.localize $sql_LIKE '%$localize%'"; else $s2.=" o.localize $sql_LIKE '%$localize%'";
 							if(clean_it(&$therapy))
-								if($s2) $s2.=" AND o.therapy LIKE \"%$therapy%\""; else $s2.=" o.therapy LIKE \"%$therapy%\"";
+								if($s2) $s2.=" AND o.therapy $sql_LIKE '%$therapy%'"; else $s2.=" o.therapy $sql_LIKE '%$therapy%'";
 							if(clean_it(&$special))
-								if($s2) $s2.=" AND o.special LIKE \"%$special%\""; else $s2.=" o.special LIKE \"%$special%\"";
+								if($s2) $s2.=" AND o.special $sql_LIKE '%$special%'"; else $s2.=" o.special $sql_LIKE '%$special%'";
 							if(clean_it(&$klas_s))
-								if($s2) $s2.=" AND o.class_s LIKE $klas_s"; else $s2.=" o.class_s LIKE $klas_s";
+								if($s2) $s2.=" AND o.class_s = '$klas_s'"; else $s2.=" o.class_s = '$klas_s'";
 							if(clean_it(&$klas_m))
-								if($s2) $s2.=" AND o.class_m LIKE $klas_m"; else $s2.=" o.class_m LIKE $klas_m";
+								if($s2) $s2.=" AND o.class_m = '$klas_m'"; else $s2.=" o.class_m = '$klas_m'";
 							if(clean_it(&$klas_l))
-								if($s2) $s2.=" AND o.class_l LIKE $klas_l"; else $s2.=" o.class_l LIKE $klas_l";
+								if($s2) $s2.=" AND o.class_l = '$klas_l'"; else $s2.=" o.class_l = '$klas_l'";
 							if(clean_it(&$inst))
-								if($s2) $s2.=" AND o.scrub_nurse=\"".addslashes($inst)."\""; else $s2.=" o.scrub_nurse=\"".addslashes($inst)."\"";
+								if($s2) $s2.=" AND o.scrub_nurse='".addslashes($inst)."'"; else $s2.=" o.scrub_nurse='".addslashes($inst)."'";
 							if(clean_it(&$opsaal))
-								if($s2) $s2.=" AND o.op_room=\"".addslashes($opsaal)."\""; else $s2.=" o.op_room=\"".addslashes($opsaal)."\"";
+								if($s2) $s2.=" AND o.op_room='".addslashes($opsaal)."'"; else $s2.=" o.op_room='".addslashes($opsaal)."'";
 
 							$s2=trim($s2);
 							if($s2=="")
@@ -159,7 +163,7 @@ if($mode=='search'||$mode=='paginate'){
 		$HTTP_SESSION_VARS['sess_searchkey']=$s2;
 	}
 														
-	$select_sql="SELECT o.*, e.encounter_class_nr, p.name_last, p.name_first, p.date_birth, p.sex, d.name_formal, d.LD_var";
+	$select_sql="SELECT o.*,  e.encounter_class_nr, p.name_last, p.name_first, p.date_birth, p.sex, d.name_formal, d.LD_var  AS \"LD_var\"";
 	$from_sql="	FROM $dbtable AS o, care_encounter AS e, care_person AS p, care_department AS d WHERE ";
 	$order_sql=" ORDER BY $prefx.$oitem $odir";
 							
@@ -174,9 +178,9 @@ if($mode=='search'||$mode=='paginate'){
 								if(!$rows)
 								{
 									//echo $sql;
-									$s2=str_replace("=\""," LIKE ~",$s2);
-									$s2=str_replace("\"","%\"",$s2);
-									$s2=str_replace("~","\"",$s2);
+									$s2=str_replace("='"," $sql_LIKE ~",$s2);
+									$s2=str_replace("'","%'",$s2);
+									$s2=str_replace("~","'",$s2);
 									#Save the search condition for pagination routines
 									$HTTP_SESSION_VARS['sess_searchkey']=$s2;
 									$sql2=$from_sql.$s2." AND o.encounter_nr=e.encounter_nr AND e.pid=p.pid AND o.dept_nr=d.nr";
@@ -222,7 +226,7 @@ if($mode=='search'||$mode=='paginate'){
 			
 							$dbtable='care_op_med_doc';
 							
-							$sql='SELECT * FROM '.$dbtable.' WHERE nr="'.$nr.'"';
+							$sql="SELECT * FROM $dbtable WHERE nr='$nr'";
 							
 							if($ergebnis=$db->Execute($sql)) 
 							{			
@@ -628,9 +632,39 @@ if($row[class_s]) echo "$row[class_s] $LDMinor  &nbsp; ";
 	echo " $LDOperation";
 ?>
 <?php else : ?>
- <input name="klas_s" type="text" size="2" value="<?php echo $row[class_s].$klas_s ?>" ><?php echo $LDMinor ?>&nbsp;
-<input name="klas_m" type="text" size="2" value="<?php echo $row[class_m].$klas_m ?>" ><?php echo $LDMiddle ?>&nbsp;
-<input name="klas_l" type="text" size="2" value="<?php echo $row[class_l].$klas_l ?>" ><?php echo "$LDMajor $LDOperation" ?>
+
+<select name="klas_s">
+			<option value="0"> </option>
+<?php
+	for($i=1;$i<9;$i++){
+		echo "
+			<option value=\"$i\">$i</option>";
+	}
+?>
+</select>
+<?php echo $LDMinor ?>&nbsp;
+<select name="klas_m">
+			<option value="0"> </option>
+<?php
+	for($i=1;$i<9;$i++){
+		echo "
+			<option value=\"$i\">$i</option>";
+	}
+?>
+?>
+</select>
+<?php echo $LDMiddle ?>&nbsp;
+<select name="klas_l">
+			<option value="0"> </option>
+<?php
+	for($i=1;$i<9;$i++){
+		echo "
+			<option value=\"$i\">$i</option>";
+	}
+?>
+</select>
+<?php echo "$LDMajor $LDOperation" ?>
+
 <?php endif ?>
 </td>
 </tr>

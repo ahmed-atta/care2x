@@ -3,15 +3,16 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
 $lang_tables[]='departments.php';
 $lang_tables[]='prompt.php';
+$lang_tables[]='help.php';
 $lang_tables[]='person.php';
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
@@ -34,9 +35,12 @@ require_once($root_path.'include/care_api_classes/class_encounter.php');
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 
 $thisfile=basename(__FILE__);
-if($origin=='patreg_reg') $returnfile='patient_register_show.php'.URL_APPEND.'&pid='.$pid;
-   
-$breakfile=$root_path.$HTTP_SESSION_VARS['sess_path_referer'].URL_APPEND.'&pid='.$pid;
+if($origin=='patreg_reg') $breakfile = 'patient_register_show.php'.URL_APPEND.'&pid='.$pid;
+	elseif($HTTP_COOKIE_VARS["ck_login_logged".$sid]) $breakfile = $root_path.'main/startframe.php'.URL_APPEND;
+		elseif(!empty($HTTP_SESSION_VARS['sess_path_referer'])) $breakfile=$root_path.$HTTP_SESSION_VARS['sess_path_referer'].URL_APPEND.'&pid='.$pid;
+			else $breakfile = "aufnahme_pass.php".URL_APPEND."&target=entry";
+
+//$db->debug=1;
 
 $newdata=1;
 
@@ -63,7 +67,7 @@ $dbtable='care_encounter'; // The table of admission data
 /* Create new person's insurance object */
 $pinsure_obj=new PersonInsurance($pid);	 
 /* Get the insurance classes */
-$insurance_classes=&$pinsure_obj->getInsuranceClassInfoObject('class_nr,name,LD_var');
+$insurance_classes=&$pinsure_obj->getInsuranceClassInfoObject('class_nr,name,LD_var AS "LD_var"');
 
 /* Create new person object */
 $person_obj=new Person($pid);
@@ -72,10 +76,7 @@ $encounter_obj=new Encounter($encounter_nr);
 /* Get all encounter classes */
 $encounter_classes=$encounter_obj->AllEncounterClassesObject();
 
-if($pid!='' || $encounter_nr!='')
-{
-    if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
-    if($dblink_ok) {
+if($pid!='' || $encounter_nr!=''){
 
 	   	/* Get the patient global configs */
         $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
@@ -116,7 +117,6 @@ if($pid!='' || $encounter_nr!='')
 				    $insurance_show=true;
 				} elseif ($p_insurance->RecordCount()==1){
 				    $buffer= $p_insurance->FetchRow();
-					//while(list($x,$v)=each($buffer)) {$$x=$v; }
 					extract($buffer);
 				    $insurance_show=true;
 				    $insurance_firm_name=$pinsure_obj->getFirmName($insurance_firm_id); 
@@ -137,7 +137,7 @@ if($pid!='' || $encounter_nr!='')
 					  if($encoder=='') $encoder=$HTTP_SESSION_VARS['sess_user_name'];
 					  
 	                  $referrer_diagnosis=trim($referrer_diagnosis);
-					  if ($referrer_diagnosis=='') { $errordiagnose=1; $error=1; $errornum++;};
+					  if ($referrer_diagnosis=='') { $errordiagnose=1; $error=1; $errornum++; };
 					  
 	                  $referrer_dr=trim($referrer_dr);
 					  if ($referrer_dr=='') { $errorreferrer=1; $error=1; $errornum++;};
@@ -159,7 +159,7 @@ if($pid!='' || $encounter_nr!='')
 				
 
                  if(!$error) 
-	             {	
+	             {	$db->debug=0;
 					
 						if(!$GLOBAL_CONFIG['patient_service_care_hide']){
 						    if(!empty($sc_care_start)) $sc_care_start=formatDate2Std($sc_care_start,$date_format);
@@ -182,7 +182,11 @@ if($pid!='' || $encounter_nr!='')
 							//echo formatDate2STD($geburtsdatum,$date_format);
 					      $itemno=$itemname;		
 									$HTTP_POST_VARS['modify_id']=$encoder;
-									$HTTP_POST_VARS['history']= "CONCAT(history,\"\n Update: ".date('Y-m-d H:i:s')." = $encoder\")";
+									if($dbtype=='mysql'){
+										$HTTP_POST_VARS['history']= "CONCAT(history,\"\n Update: ".date('Y-m-d H:i:s')." = $encoder\")";
+									}else{
+										$HTTP_POST_VARS['history']= "(history || '\n Update: ".date('Y-m-d H:i:s')." = $encoder')";
+									}
 									if(isset($HTTP_POST_VARS['encounter_nr'])) unset($HTTP_POST_VARS['encounter_nr']);		
 									if(isset($HTTP_POST_VARS['pid'])) unset($HTTP_POST_VARS['pid']);		
 												
@@ -220,9 +224,9 @@ if($pid!='' || $encounter_nr!='')
 							
 									$HTTP_POST_VARS['encounter_date']=date('Y-m-d H:i:s');
 									$HTTP_POST_VARS['modify_id']=$encoder;
-									$HTTP_POST_VARS['modify_time']='NULL';
+									//$HTTP_POST_VARS['modify_time']='NULL';
 									$HTTP_POST_VARS['create_id']=$encoder;
-									$HTTP_POST_VARS['create_time']=date('Y-m-d H:i:s');
+									$HTTP_POST_VARS['create_time']=date('YmdHis');
 									$HTTP_POST_VARS['history']='Create: '.date('Y-m-d H:i:s').' = '.$encoder;
 									//if(isset($HTTP_POST_VARS['encounter_nr'])) unset($HTTP_POST_VARS['encounter_nr']);					
 									
@@ -231,7 +235,11 @@ if($pid!='' || $encounter_nr!='')
 									if($encounter_obj->insertDataFromInternalArray())
 									{
 									    /* Get last insert id */
-										$encounter_nr=$db->Insert_ID();	
+								if($dbtype=='mysql'){
+									$encounter_nr=$db->Insert_ID();
+								}else{
+									$encounter_nr=$encounter_obj->postgre_Insert_ID($dbtable,'encounter_nr',$db->Insert_ID());
+								}
 									    /* Save the service classes */									   
 								/*	    if(!$GLOBAL_CONFIG['patient_service_care_hide']){
 										    $encounter_obj->saveCareServiceClass($care_class);
@@ -264,13 +272,11 @@ if($pid!='' || $encounter_nr!='')
 			  if($encounter_obj->is_loaded) {
 		          $zeile=&$encounter_obj->encounter;
 					//load data
-                  //while(list($x,$v)=each($zeile)) $$x=$v;
 				  extract($zeile);
 				  
-                  /* Get insurance firm name*/
+                  // Get insurance firm name
 			      $insurance_firm_name=$pinsure_obj->getFirmName($insurance_firm_id);
-				  
-			  
+
 			  /* GEt the patient's services classes */
 			  
 			  if(!empty($GLOBAL_CONFIG['patient_financial_class_single_result'])) $encounter_obj->setSingleResult(true);
@@ -278,7 +284,6 @@ if($pid!='' || $encounter_nr!='')
 				if(!$GLOBAL_CONFIG['patient_service_care_hide']){
                 	if($buff=&$encounter_obj->CareServiceClass()){
 					    while($care_class=$buff->FetchRow()){
-							//while(list($x,$v)=each($care_class))	$$x=$v;
 							extract($care_class);
 						}   
 						reset($care_class);
@@ -287,7 +292,6 @@ if($pid!='' || $encounter_nr!='')
 				if(!$GLOBAL_CONFIG['patient_service_room_hide']){
                 	if($buff=&$encounter_obj->RoomServiceClass()){
 					    while($room_class=$buff->FetchRow()){
-							//while(list($x,$v)=each($room_class))	$$x=$v;
 							extract($room_class);
 						}   
 						reset($room_class);
@@ -296,7 +300,6 @@ if($pid!='' || $encounter_nr!='')
 				if(!$GLOBAL_CONFIG['patient_service_att_dr_hide']){
                 	if($buff=&$encounter_obj->AttDrServiceClass()){
 					    while($att_dr_class=$buff->FetchRow()){
-							//while(list($x,$v)=each($att_dr_class))	$$x=$v;
 							extract($att_dr_class);
 						}   
 						reset($att_dr_class);
@@ -306,11 +309,6 @@ if($pid!='' || $encounter_nr!='')
 
 		}
 
-	}
-    else 
-    { 
-         echo "$LDDbNoLink<br>"; 
-    }
     if(!$encounter_nr||$encounter_class_nr==1){
 		# Load all  wards info 
 		$ward_obj=new Ward;
@@ -335,7 +333,6 @@ if($pid!='' || $encounter_nr!='')
 	/* Get the citytown name */
 	$addr_citytown_name=$person_obj->CityTownName($addr_citytown_nr);
 
-	 
 }
 # Prepare text and resolve the numbers
 include_once($root_path.'include/inc_patient_encounter_type.php');		 

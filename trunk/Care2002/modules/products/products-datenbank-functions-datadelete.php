@@ -3,21 +3,24 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
 define('LANG_FILE','products.php');
 $local_user='ck_prod_db_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
+
+require_once($root_path.'include/care_api_classes/class_core.php');
+$core = & new Core;
 
 $thisfile=basename(__FILE__);
-switch($cat)
-{
+
+switch($cat){
+
 	case "pharma":
 							$title=$LDPharmacy;
 							$dbtable="care_pharma_products_main";
@@ -30,35 +33,28 @@ switch($cat)
 							$imgpath=$root_path."med_depot/img/";
 							$breakfile=$root_path."modules/med_depot/medlager-datenbank-functions.php?sid=$sid&lang=$lang&userck=$userck";
 							break;
-	default:  {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+	
+	default:  {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;};
+
 }
 
-if(($mode=='delete')&&($sure)&&($keyword!='')&&($keytype!="")) 
-{
+if(($mode=='delete')&&($sure)&&($keyword!='')&&($keytype!='')) {
+	
+	$deleteok=false;
 
-$deleteok=false;
+    $sql="DELETE  FROM $dbtable WHERE  $keytype='$keyword'";
 
-
-//init db parameters
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
- 	if($dblink_ok) 
-		{
-
-    				$sql='DELETE LOW_PRIORITY FROM '.$dbtable.' WHERE  '.$keytype.'="'.$keyword.'"';
-        		if($ergebnis=$db->Execute($sql))
-				{
-					header ("location:products-datenbank-functions-manage.php".URL_REDIRECT_APPEND."&from=deleteok&cat=$cat&userck=$userck");
-					$deleteok=true;
-				}
-			echo $sql;
-		}
-  		 else { echo "$LDDbNoLink<br>"; } 
+	if($ergebnis=$core->Transact($sql)){
+		header ("location:products-datenbank-functions-manage.php".URL_REDIRECT_APPEND."&from=deleteok&cat=$cat&userck=$userck");
+		$deleteok=true;
+	}
+	//echo $sql;
 }
 
-	//simulate update to search the keyword
-	$update=true;
- 	require($root_path."include/inc_products_search_mod.php");
+//simulate update to search the keyword
+$update=true;
+
+require($root_path."include/inc_products_search_mod.php");
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">

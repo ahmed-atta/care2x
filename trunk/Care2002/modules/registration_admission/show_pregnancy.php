@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -19,14 +19,15 @@ $obj->usePregnancy();
 require_once($root_path.'include/care_api_classes/class_measurement.php');
 $msr=new Measurement;
 
-if(!isset($allow_update)) $allow_update=false;
+
+if(!isset($allow_update)) $allow_update=FALSE;
 
 if(!isset($mode)){
 	$mode='show';
 }elseif($mode=='newdata') {
 	
 	include_once($root_path.'include/inc_date_format_functions.php');
-	$saved=false;
+	$saved=FALSE;
 
 	# Prepare additional info saving
 	$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
@@ -35,8 +36,10 @@ if(!isset($mode)){
 		else $HTTP_POST_VARS['delivery_date']=@formatDate2STD($HTTP_POST_VARS['delivery_date'],$date_format);
 	if(empty($HTTP_POST_VARS['delivery_time'])) $HTTP_POST_VARS['delivery_time']=date('H:i:s');
 		else $HTTP_POST_VARS['delivery_time']=@convertTimeToStandard($HTTP_POST_VARS['delivery_time']);
+
+	//if(empty($HTTP_POST_VARS['blood_loss'])) $HTTP_POST_VARS['blood_loss_unit']=0;
 		
-	 
+
 	if($allow_update){
 		$obj->setWhereCondition('nr='.$HTTP_POST_VARS['rec_nr']);
 		$obj->setDataArray($HTTP_POST_VARS);

@@ -3,17 +3,17 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
 $thisfile=basename(__FILE__);
 require_once($root_path.'include/care_api_classes/class_appointment.php');
 $obj=new Appointment();
-
+//$db->debug=true;
 if(!isset($mode)){
 	$mode='show';
 } else{
@@ -25,9 +25,14 @@ if(!isset($mode)){
 			if(!isset($HTTP_POST_VARS['remind_mail'])) $HTTP_POST_VARS['remind_mail']='0';
 			if(!isset($HTTP_POST_VARS['remind_email'])) $HTTP_POST_VARS['remind_email']='0';
 			if(!isset($HTTP_POST_VARS['remind_phone'])) $HTTP_POST_VARS['remind_phone']='0';
-			$HTTP_POST_VARS['history']="CONCAT(history,'Update: ".date('Y-m-d H:i:s')." : ".$HTTP_SESSION_VARS['sess_user_name']."\n')";
+            $HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+            $HTTP_POST_VARS['modify_time'] = date('YmdHis');
+			$HTTP_POST_VARS['history']= $obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." : ".$HTTP_SESSION_VARS['sess_user_name']."\n");
 		}else{
 			$HTTP_POST_VARS['appt_status']='pending';
+            $HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+            $HTTP_POST_VARS['create_time'] = date('YmdHis');
+            $HTTP_POST_VARS['history'] = "Created: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
 		}
 		include('./include/save_admission_data.inc.php');
 	}elseif(($mode=='select')&&!empty($nr)){
@@ -36,9 +41,11 @@ if(!isset($mode)){
 			while(list($x,$v)=each($appt_row)) $$x=$v;
 		}
 	}elseif($mode=='appt_cancel'&&!empty($nr)){
-			$HTTP_POST_VARS['history']="CONCAT(history,'Cancel: ".date('Y-m-d H:i:s')." : ".$HTTP_SESSION_VARS['sess_user_name']."\n')";
+			$HTTP_POST_VARS['history']=$obj->ConcatHistory("Cancel: ".date('Y-m-d H:i:s')." : ".$HTTP_SESSION_VARS['sess_user_name']."\n");
 			$HTTP_POST_VARS['appt_status']='cancelled';
 			$HTTP_POST_VARS['cancel_reason']=$reason;
+            $HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+            $HTTP_POST_VARS['modify_time'] = date('YmdHis');
 			$mode='update';
 		include('./include/save_admission_data.inc.php');
 	}

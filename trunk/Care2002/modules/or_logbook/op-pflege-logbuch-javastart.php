@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -35,13 +35,14 @@ function makelogbuch()
 {
 <?php if($cfg['dhtml'])
 	echo '
-			w=window.parent.screen.width;
-			h=window.parent.screen.height;';
+	w=window.parent.screen.width;
+	h=window.parent.screen.height;';
 	else
 	echo '
-			w=800;
-			h=650;';
+	w=800;
+	h=650;';
 ?>
+
 	logbuchwin=window.open("<?php echo $root_path.$top_dir; ?>op-pflege-logbuch-start.php?sid=<?php echo "$sid&lang=$lang&internok=$internok&dept_nr=$dept_nr&saal=$saal"; ?>","logbuchwin<?php echo $sid ?>","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=" + (h-60));
 	window.logbuchwin.moveTo(0,0);
 	window.location.replace('<?php if($retpath=="calendar_opt") echo $root_path."calendar/calendar-options.php?sid=$sid&lang=$lang&day=$pday&month=$pmonth&year=$pyear"; else echo $root_path."main/op-doku.php?sid=".$sid."&lang=".$lang;?>&forcestation=1&nofocus=1&nointern=1');

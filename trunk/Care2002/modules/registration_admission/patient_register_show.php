@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -15,16 +15,8 @@ $lang_tables[]='person.php';
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_date_format_functions.php');
-require_once($root_path.'include/care_api_classes/class_person.php');
-require_once($root_path.'include/care_api_classes/class_insurance.php');
 
-//* Get the global config for person's registration form*/
-require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 
-$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
-$glob_obj->getConfig('person_%');
-		
 $thisfile=basename(__FILE__);
 $breakfile='patient.php';
 $admissionfile='aufnahme_start.php'.URL_APPEND;
@@ -42,61 +34,19 @@ $HTTP_SESSION_VARS['sess_user_origin']='registration';
 # Reset the encounter number
 $HTTP_SESSION_VARS['sess_en']=0;
 
-$dbtable='care_person';
+# Create the person show GUI
+require_once($root_path.'include/care_api_classes/class_gui_person_show.php');
+$person = & new GuiPersonShow;
 
-/* Default path for fotos. Make sure that this directory exists! */
-$default_photo_path=$root_path.'fotos/registration';
-$photo_filename='nopic';
+# Set PID to load the data
+$person->setPID($pid);
 
+# Import the current encounter number
+$current_encounter = $person->CurrentEncounter();
 
-if(!isset($user_id) || !$user_id)
-{
-    $user_id=$local_user.$sid;
-    $user_id=$$user_id;
-}
+# Import the death date
+$death_date = $person->DeathDate();
 
-    if(isset($pid) && ($pid!='')) {
-
-
-		$person_obj=new Person($pid);
-		$pinsure_obj=new PersonInsurance($pid);
-		
-		
-         if($data_obj=&$person_obj->getAllInfoObject())
-         {
-	        $zeile=$data_obj->FetchRow();
-	 		extract($zeile);
-            //while(list($x,$v)=each($zeile))	$$x=$v;       
-			/* Get related insurance data*/
-			$p_insurance=&$pinsure_obj->getPersonInsuranceObject($pid);
-			if($p_insurance==false) {
-				$insurance_show=true;
-			} else {
-				if(!$p_insurance->RecordCount()) {
-					$insurance_show=true;
-				} elseif ($p_insurance->RecordCount()==1){
-					$buffer= $p_insurance->FetchRow();
-					extract($buffer);
-					//while(list($x,$v)=each($buffer)) {$$x=$v; }
-					$insurance_show=true;
-			        /*Get insurace firm name */
-					$insurance_firm_name=$pinsure_obj->getFirmName($insurance_firm_id); 
-				} else { $insurance_show=false;}
-			} 
-			
-			$insurance_class_info=$pinsure_obj->getInsuranceClassInfo($insurance_class_nr);
-			# Check if person is currently admitted
-			$current_encounter=$person_obj->CurrentEncounter($pid);
-			# update the record's history 
-			if(empty($newdata)) @$person_obj->setHistorySeen($HTTP_SESSION_VARS['sess_user_name']);
-        }
-
-        /* Check whether config foto path exists, else use default path */			
-        $photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $default_photo_path;
-     }
-
-require_once($root_path.'include/inc_photo_filename_resolve.php');
-
-/* Load GUI page */
-require('./gui_bridge/default/gui_person_reg_show.php');
+# Load GUI page
+include('./gui_bridge/default/gui_person_reg_show.php');
 ?>

@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -106,9 +106,10 @@ if($maxpic){
 		$data=array('encounter_nr'=>$patnum,
 									'upload_date'=>date('Y-m-d'),
 									'history'=>"Upload ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n",
-									'modify_id'=>$HTTP_SESSION_VARS['sess_user_name'],
+									'modify_id'=>'',
+									'modify_time'=>0,
 									'create_id'=>$HTTP_SESSION_VARS['sess_user_name'],
-									'create_time'=>'NULL');
+									'create_time'=>date('YmdHis'));
 		
 		for ($i=0;$i<$maxpic;$i++)
 		{
@@ -128,8 +129,13 @@ if($maxpic){
 				$data['shot_nr']=$$shotnr;
 				$data['mime_type']=$picext;
 									
-				if($picnr=$img->saveImageData($data)){
-			   		$picfilename[$i]=$picnr.'.'.$picext;
+				if($insid=$img->saveImageData($data)){
+
+			 	# Get the last inserted primary key
+				
+				$picnr = $img->LastInsertPK('nr',$insid);
+
+				$picfilename[$i]=$picnr.'.'.$picext;
 		
 		      		echo '<tr><td>'.$HTTP_POST_FILES[$picfile]['name'].'</td><td> <img '.createComIcon($root_path,'fwd.gif','0','absmiddle').'> ';
 		       		if($disc_pix_mode)

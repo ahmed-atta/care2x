@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -110,9 +110,7 @@ if (isset($mode) && ($mode=='search'||$mode=='paginate')){
 							$buffer='';
 							if(($date_start)&&($date_end))
 								{
-									//$buffer=" ((date_reg > '$date_start%' OR date_reg $sql_LIKE '$date_start%') AND (date_reg <  '$date_end%' OR date_reg $sql_LIKE '$date_end%'))";
-									$buffer=" date_reg >= '$date_start 00:00:00' AND date_reg <= '$date_end 00:00:00'";
-									//if($s2) $s2.=" AND ((date_reg > '$date_start' OR date_reg $sql_LIKE '$date_start %') AND (date_reg <  '$date_end' OR date_reg $sql_LIKE '$date_end %'))"; else $s2.=" ((date_reg > '$date_start' OR date_reg $sql_LIKE '$date_start %') AND (date_reg <  '$date_end' OR date_reg $sql_LIKE '$date_end %'))";
+									$buffer=" date_reg >= '$date_start 00:00:00' AND date_reg <= '$date_end 23:59:59'";
 								}
 								elseif($date_start)
 								{

@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -14,6 +14,7 @@ define('LANG_FILE','drg.php');
 
 require_once('drg_inc_local_user.php');
 
+//$db->debug=1;
 
 require_once($root_path.'include/inc_front_chain_lang.php');
 
@@ -36,6 +37,7 @@ if($saveok)
    exit; 
  }
 
+//$db->debug=true;
 $toggle=0;
 
 $thisfile='drg-ops-intern-search.php';
@@ -54,7 +56,7 @@ if($mode=='save')
 			$linecount=$drg->RecordCount();
 		}
 	}
-}	
+}
 
 /* Preset the images */
 
@@ -70,7 +72,7 @@ $img['t2']=createComIcon($root_path,'t2-blue.gif','0');
 <?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
- <TITLE><?php echo $LDOps301 ?></TITLE>
+ <TITLE><?php echo $LDInternalCodeNr ?></TITLE>
   <script language="javascript" src="<?php echo $root_path ?>js/showhide-div.js">
 </script>
   <script language="javascript">
@@ -121,7 +123,8 @@ document.searchdata.keyword.select();document.searchdata.keyword.focus();
 <FONT    SIZE=3  FACE="verdana,Arial" color="#660000"><b><?php echo $LDOpsIntern ?></b>&nbsp;
 </font>
 <font size=3>
-<INPUT type="text" name="keyword" size="50" maxlength="60" onfocus=this.select() value="<?php echo $keyword ?>"></font> 
+<INPUT type="text" name="keyword" size="50" maxlength="60" onfocus=this.select() value="<?php echo $keyword ?>"></font>
+<br>
 <INPUT type="submit" name="versand" value="<?php echo $LDSearch ?>">
 <?php else : ?>
 <input type="hidden" name="keyword" value="">
@@ -285,7 +288,7 @@ if ($drg){
 ?>
 
 </table>
-<?php if(!$showonly&&($linecount>0)) : ?>
+<?php if(!$showonly&&($linecount>0)) { ?>
 <input type="hidden" name="lastindex" value="<?php echo $idx ?>">
 <input type="submit" value="<?php echo $LDApplySelection ?>">
 <input type="hidden" name="sid" value="<?php echo $sid; ?>">
@@ -304,17 +307,25 @@ if ($drg){
 <input type="hidden" name="mode" value="save">
 
 </form>
-<?php else : ?>
+<?php 
+}else{
+/*
+
+?>
 <p>
 <a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>></a>
-<?php endif ?>
-<?php if(($linecount>15)&&!$showonly) : ?>
+<?php 
+*/
+}
+?>
+<?php if(($linecount>15)&&!$showonly) { ?>
 
 						<p>
 <FORM action="<?php echo $thisfile ?>" method="post" onSubmit="return pruf(this)" name="form2">
 <a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> align="right"></a>
 <font face="Arial,Verdana"  color="#000000" size=-1>
-<INPUT type="text" name="keyword" size="14" maxlength="25" value="<?php echo $keyword ?>"> 
+<INPUT type="text" name="keyword" size="14" maxlength="25" value="<?php echo $keyword ?>">
+<br>
 <INPUT type="submit" name="versand" value="<?php echo $LDSearch ?>">
 <input type="hidden" name="sid" value="<?php echo $sid; ?>">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
@@ -331,7 +342,7 @@ if ($drg){
 <input type="hidden" name="display" value="<?php echo $display; ?>">
 </font></FORM>			
 						<p>
-<?php endif ?>
+<?php } ?>
 </ul>
 &nbsp;
 </FONT>

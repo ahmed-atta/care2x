@@ -3,15 +3,15 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
 
-$logo_ht_limit=50; # Maximum deparment logo's height in pixels
+$logo_ht_limit=50; # Maximum deparment logo´s height in pixels
 
 # Load the encounter class
 require_once($root_path.'include/care_api_classes/class_encounter.php');
@@ -34,7 +34,7 @@ if(!isset($mode)||empty($mode)){
 	}
 	
 }elseif($mode=='create'||$mode=='update') {
-
+	//$db->debug=true;
 	include_once($root_path.'include/inc_date_format_functions.php');
 	# Convert date to standard format
 	$HTTP_POST_VARS['date_end']=formatDate2STD($HTTP_POST_VARS['date_end'],$date_format);
@@ -45,7 +45,7 @@ if(!isset($mode)||empty($mode)){
 	$HTTP_POST_VARS['history']="Create ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
 	$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
 	$HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
-	$HTTP_POST_VARS['create_time']='NULL';
+	$HTTP_POST_VARS['create_time']=date('YmdHis');
 
 	
 	if($enc_obj->saveSicknessConfirm($HTTP_POST_VARS)) {

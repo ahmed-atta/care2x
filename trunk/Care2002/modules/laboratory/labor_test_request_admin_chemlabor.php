@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@care2x.net, elpidio@care2x.org
@@ -20,6 +20,8 @@ define('LANG_FILE','konsil_chemlabor.php');
 *  $user_origin == lab ;  from the laboratory
 *  and set the user cookie name and break or return filename
 */
+
+//$db->debug=1;
 
 if($user_origin=='lab'){
 	$local_user='ck_lab_user';
@@ -44,20 +46,25 @@ $formtitle=$LDChemicalLaboratory;
 $dept_nr=24; // 24 = department Nr. chemical lab
 
 $subtarget='chemlabor';
-						
+
+require_once($root_path.'include/care_api_classes/class_encounter.php');
+$enc_obj=new Encounter;
+
 /* Here begins the real work */
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok){	
-	   
+
 	if(!isset($mode))   $mode='';
 		
 	switch($mode)
 	{
 		     case 'done':
-							      $sql="UPDATE care_test_request_".$subtarget." SET status = 'done'  WHERE batch_nr = '".$batch_nr."'";
-								  
-							      if($ergebnis=$db->Execute($sql))
+							      $sql="UPDATE care_test_request_".$subtarget." 
+											SET status = 'done',
+													history=".$enc_obj->ConcatHistory("Done: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
+													modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+													modify_time = '".date('YmdHis')."'
+											WHERE batch_nr = '".$batch_nr."'";
+
+							      if($ergebnis=$enc_obj->Transact($sql))
        							  {
 								  	include_once($root_path.'include/inc_diagnostics_report_fx.php');
 									//echo $sql;
@@ -98,8 +105,7 @@ if($dblink_ok){
 		          
      /* Check for the patietn number = $pn. If available get the patients data */
      if($batchrows && $pn){		
-		include_once($root_path.'include/care_api_classes/class_encounter.php');
-		$enc_obj=new Encounter;
+
 	    if( $enc_obj->loadEncounterData($pn)) {
 		
 			include_once($root_path.'include/care_api_classes/class_globalconfig.php');
@@ -132,9 +138,7 @@ if($dblink_ok){
 			}	
 		}				
 	}	   
-}else { 
-	echo "$LDDbNoLink<br>$sql<br>"; 
-}
+
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">

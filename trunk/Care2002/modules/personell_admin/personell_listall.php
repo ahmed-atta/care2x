@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -21,13 +21,14 @@ $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_date_format_functions.php');
 
+//$db->debug=true;
 
 if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
 	else $breakfile='personell_admin_pass.php'.URL_APPEND.'&target='.$target;
 
 $thisfile=basename(__FILE__);
 
-# Initialize page's control variables
+# Initialize page´s control variables
 if($mode!='paginate'){
 	# Reset paginator variables
 	$pgx=0;
@@ -59,11 +60,12 @@ $toggle=0;
 		
 $sql='SELECT ps.nr, ps.is_discharged, p.name_last, p.name_first, p.date_birth, p.addr_zip, p.sex, p.photo_filename';
 			  
-$sql2= ' FROM care_personell as ps,care_person as p WHERE (NOT ps.is_discharged)  AND ps.pid=p.pid  
-	          ORDER BY p.'.$oitem.' '.$odir;
+$sql2= " FROM care_personell as ps,care_person as p WHERE  ps.is_discharged IN ('',0)  AND ps.pid=p.pid";
+
+$sql3=" ORDER BY p.$oitem $odir";
 
 			  
-if($ergebnis=$db->SelectLimit($sql.$sql2,$pagen->MaxCount(),$pagen->BlockStartIndex())){
+if($ergebnis=$db->SelectLimit($sql.$sql2.$sql3,$pagen->MaxCount(),$pagen->BlockStartIndex())){
 	if ($linecount=$ergebnis->RecordCount()){ 
 		if(($linecount==1)&&$numeric){
 			$zeile=$ergebnis->FetchRow();
@@ -74,13 +76,12 @@ if($ergebnis=$db->SelectLimit($sql.$sql2,$pagen->MaxCount(),$pagen->BlockStartIn
 	
 	$pagen->setTotalBlockCount($linecount);
 					
-	
 	# If more than one count all available
 	if(isset($totalcount)&&$totalcount){
 		$pagen->setTotalDataCount($totalcount);
 	}else{
 		# Count total available data
-		$sql='SELECT COUNT(p.pid) AS count '.$sql2;
+		$sql="SELECT COUNT(p.pid) AS count $sql2";
 			
 		if($result=$db->Execute($sql)){
 			if ($result->RecordCount()) {
@@ -92,9 +93,9 @@ if($ergebnis=$db->SelectLimit($sql.$sql2,$pagen->MaxCount(),$pagen->BlockStartIn
 	}
 
 	
-}else{echo "<p>$sql<p>$LDDbNoRead";};
-
-
+}else{
+	echo "<p>$sql<p>$LDDbNoRead";
+}
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">

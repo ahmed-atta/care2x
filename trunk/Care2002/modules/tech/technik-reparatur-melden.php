@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'/include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -17,6 +17,8 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 $breakfile='technik.php'.URL_APPEND;
 $returnfile=$HTTP_SESSION_VARS['sess_file_return'].URL_APPEND;
 $HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
+
+//$db->debug=1;
 
 if(isset($job)&&!empty($job)){
 $dbtable='care_tech_repair_done';
@@ -32,9 +34,15 @@ $dbtable='care_tech_repair_done';
 							id,
 							tdate,
 							ttime,
+							tid,
 							seen,
-							d_idx ) 
-						VALUES 
+							d_idx,
+							status,
+							history,
+							create_id,
+							create_time
+							 )
+						VALUES
 						(
 							'".htmlspecialchars($HTTP_POST_VARS['dept'])."',
 							'".htmlspecialchars($HTTP_POST_VARS['job'])."',
@@ -42,15 +50,25 @@ $dbtable='care_tech_repair_done';
 							'".htmlspecialchars($HTTP_POST_VARS['reporter'])."',
 							'".htmlspecialchars($HTTP_POST_VARS['id'])."', 
 							'".$HTTP_POST_VARS['tdate']."', 
-							'".$HTTP_POST_VARS['ttime']."', 
+							'".$HTTP_POST_VARS['ttime']."',
+							'".date('YmdHis')."',
 							0,
-							'".date('Ymd')."'	
+							'".date('Ymd')."',
+							'pending',
+							'Create ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n',
+							'".$HTTP_SESSION_VARS['sess_user_name']."',
+							'".date('YmdHis')."'
 							)";
-        if($db->Execute($sql)) { 
-            header("Location: technik-reparatur-empfang.php".URL_REDIRECT_APPEND."&dept=".$HTTP_POST_VARS['dept']."&reporter=".$HTTP_POST_VARS['reporter']."&tdate=".$HTTP_POST_VARS['tdate']."&ttime=".$HTTP_POST_VARS['ttime']); 
+        $db->BeginTrans();
+        $ok=$db->Execute($sql);
+        if($ok && $db->CommitTrans()) {
+		    header("Location: technik-reparatur-empfang.php".URL_REDIRECT_APPEND."&dept=".$HTTP_POST_VARS['dept']."&reporter=".$HTTP_POST_VARS['reporter']."&tdate=".$HTTP_POST_VARS['tdate']."&ttime=".$HTTP_POST_VARS['ttime']);
 		    exit;
-         } else {echo '<p>'.$sql.$LDDbNoSave.'<br>'; };
-	} else { echo "$LDDbNoLink<br>"; } 
+         } else {
+			$db->RollbackTrans();
+		 	echo '<p>'.$sql.$LDDbNoSave.'<br>';
+		}
+	} else { echo "$LDDbNoLink<br>"; }
 }
 
 ?>
@@ -100,7 +118,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
 <tr valign=top>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="45"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
 <STRONG> &nbsp; <?php echo $LDTechSupport ?></STRONG></FONT></td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
 <?php if($cfg['dhtml'])echo'<a href="'.$returnfile.'"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('tech.php','report')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>

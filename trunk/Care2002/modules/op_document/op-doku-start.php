@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -41,13 +41,16 @@ function createElement($item,$err, $f_size=7, $mx=5)
 	}
 	return $ret_str;
 }
-
+$lang_tables[]='departments.php';
 $lang_tables[]='doctors.php';
 $lang_tables[]='search.php';
 $lang_tables[]='prompt.php';
+$lang_tables[]='actions.php';
 define('LANG_FILE','or.php');
 $local_user='ck_opdoku_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
+
+//$db->debug=1;
 
 # Check if department nr and OR nr are available from user config
 if(!isset($dept_nr)||!$dept_nr){
@@ -81,9 +84,6 @@ $glob_obj->getConfig('patient_%');
 
 
 if ((substr($matchcode,0,1)=='%')||(substr($matchcode,0,1)=='&')) {header("Location:'.$root_path.'language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
-
 
 $breakfile=$root_path.'main/op-doku.php'.URL_APPEND;
 $thisfile=basename(__FILE__);
@@ -121,11 +121,7 @@ if($mode=='save')
 	if($err_data) $mode='?';
 	
 }
-	
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok)
-{
+
     /* Load date formatter */
     include_once($root_path.'include/inc_date_format_functions.php');
     
@@ -150,7 +146,7 @@ if($dblink_ok)
 	# Filter the search and paginate modes
 	if($mode=='search'||$mode=='paginate'){
 
-		# Initialize page's control variables
+		# Initialize page´s control variables
 		if($mode=='paginate'){
 			$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
 			//$searchkey='USE_SESSION_SEARCHKEY';
@@ -213,7 +209,7 @@ if($dblink_ok)
 			
 							$dbtable='care_op_med_doc';
 							
-							$sql='SELECT * FROM '.$dbtable.' WHERE  nr="'.$nr.'"';
+							$sql="SELECT * FROM $dbtable WHERE  nr='$nr'";
 																			
 							if($ergebnis=$db->Execute($sql)) 
 							{			
@@ -253,24 +249,25 @@ if($dblink_ok)
 					{
 					  
 						$sql="UPDATE $dbtable SET
-									op_date=\"".formatDate2STD($op_date,$date_format)."\",
-									operator=\"$operator\",
-									diagnosis=\"$diagnosis\",
-									localize=\"$localize\",
-									therapy=\"$therapy\",
-									special=\"$special\",
-									class_s=\"$class_s\",
-									class_m=\"$class_m\",
-									class_l=\"$class_l\",
-									op_start=\"$op_start\",
-									op_end=\"$op_end\",
-									scrub_nurse=\"$scrub_nurse\",
-									op_room=\"$op_room\",
-									history=CONCAT(history,'Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n'),
-									modify_id=\"".$HTTP_SESSION_VARS['sess_user_name']."\"
-									WHERE nr=\"$nr\"";
+									op_date='".formatDate2STD($op_date,$date_format)."',
+									operator='$operator',
+									diagnosis='$diagnosis',
+									localize='$localize',
+									therapy='$therapy',
+									special='$special',
+									class_s='$class_s',
+									class_m='$class_m',
+									class_l='$class_l',
+									op_start='$op_start',
+									op_end='$op_end',
+									scrub_nurse='$scrub_nurse',
+									op_room='$op_room',
+									history=".$enc_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
+									modify_id='".$HTTP_SESSION_VARS['sess_user_name']."',
+									modify_time='".date('YmdHis')."'
+									WHERE nr='$nr'";
 									
-						if($ergebnis=$db->Execute($sql))
+						if($ergebnis=$enc_obj->Transact($sql))
 						{
 								header("location:op-doku-start.php?sid=$sid&lang=$lang&target=$target&mode=saveok&pn=$pn&nr=$nr&dept_nr=$dept_nr");
 								exit;
@@ -296,7 +293,6 @@ if($dblink_ok)
 									scrub_nurse,
 									op_room,
 									history,
-									modify_id,
 									create_id,
 									create_time
 									 ) 
@@ -318,13 +314,14 @@ if($dblink_ok)
 									'$op_room',
 									'Create: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n',
 									'".$HTTP_SESSION_VARS['sess_user_name']."',
-									'".$HTTP_SESSION_VARS['sess_user_name']."',
-									NULL
+									'".date('YmdHis')."'
 								)";
 								//echo $sql;
-								if($ergebnis=$db->Execute($sql)) 
-								{			
-		                                $nr=$db->Insert_ID();
+								if($ergebnis=$enc_obj->Transact($sql))
+								{
+		                                $oid=$db->Insert_ID();
+										$enc_obj->coretable=$dbtable;
+										$nr = $enc_obj->LastInsertPK('nr',$oid);
 							  			
 										header("location:op-doku-start.php?sid=$sid&lang=$lang&target=$target&mode=saveok&pn=$pn&nr=$nr&dept_nr=$dept_nr");
 										exit;
@@ -357,7 +354,6 @@ if($dblink_ok)
 					
 		} // end of switch
 	}
-}else { echo "$LDDbNoLink<br>"; }
 
 ?>
 
@@ -473,13 +469,15 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 ?>
 </HEAD>
 
-<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 bgcolor=<?php echo $cfg['body_bgcolor']; ?> onLoad="if(window.focus) window.focus(); 
-<?php if(!isset($mode)||empty($mode)||($mode=='search'&&!$rows)) {
+<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 bgcolor=<?php echo $cfg['body_bgcolor']; ?>
+<?php
+
+ if(!isset($mode) || empty($mode) || $mode=='dummy' || ($mode=='search'&&!$rows)) {
 ?>
-document.searchform.searchkey.focus();
+ onLoad="document.searchform.searchkey.focus();"
 <?php
 }
-?>">
+?>>
 
 <table width=100% border=0 cellspacing=0 cellpadding=0>
 <tr>
@@ -572,7 +570,7 @@ while($enc_row=$encounter->FetchRow()){
 	echo '</td>';
 	echo '</tr>
   <tr bgcolor=#0000ff>
-  <td colspan=5 height=1><img src="'.$root_path.'gui/img/common/default/pixel.gif" border=0 width=1 height=1 align="absmiddle"></td>
+  <td colspan=6 height=1><img src="'.$root_path.'gui/img/common/default/pixel.gif" border=0 width=1 height=1 align="absmiddle"></td>
   </tr>';
 }
 
@@ -833,9 +831,46 @@ echo createElement('special',$special,60,100);
 else
 {
 ?>
- <input name="class_s" type="text" size="2" value="<?php if($err_data) echo $class_s; else echo $opdoc['class_s']; echo '"'; if(mode=='') echo ''; ?>><?php echo $LDMinor ?>&nbsp;
-<input name="class_m" type="text" size="2" value="<?php if($err_data) echo $class_m; else echo $opdoc['class_m']; echo '"'; if(mode=='') echo ''; ?>><?php echo $LDMiddle ?>&nbsp;
-<input name="class_l" type="text" size="2" value="<?php if($err_data) echo $class_l; else echo $opdoc['class_l']; echo '"'; if(mode=='') echo ''; ?>><?php echo "$LDMajor $LDOperation" ?>
+<select name="class_s">
+			<option value="0"> </option>
+<?php
+	for($i=1;$i<9;$i++){
+		echo "
+			<option value=\"$i\"";
+		if($err_data) $buf= $class_s; else $buf = $opdoc['class_s'];
+		if($i == $buf) echo 'selected';
+		echo ">$i</option>";
+	}
+?>
+</select>
+<?php echo $LDMinor ?>&nbsp;
+<select name="class_m">
+			<option value="0"> </option>
+<?php
+	for($i=1;$i<9;$i++){
+		echo "
+			<option value=\"$i\"";
+		if($err_data) $buf= class_m; else $buf = $opdoc['class_m'];
+		if($i == $buf) echo 'selected';
+		echo ">$i</option>";
+	}
+?>
+?>
+</select>
+<?php echo $LDMiddle ?>&nbsp;
+<select name="class_l">
+			<option value="0"> </option>
+<?php
+	for($i=1;$i<9;$i++){
+		echo "
+			<option value=\"$i\"";
+		if($err_data) $buf= class_l; else $buf = $opdoc['class_l'];
+		if($i == $buf) echo 'selected';
+		echo ">$i</option>";
+	}
+?>
+</select>
+<?php echo "$LDMajor $LDOperation" ?>
 <?php
 }
 ?>

@@ -3,17 +3,18 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
 define('LANG_FILE','intramail.php');
 $local_user='ck_intra_email_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
+
+//$db->debug=1;
 
 /**
 * The getMailNum() function counts the number of mails in different boxes (inbox,sent,drafts,trash)
@@ -31,7 +32,7 @@ function getMailNum($element_name,$username)
 	global $db; // the db connection object created with ADODB
 	global $dbtable;
 	
-    $sql="SELECT $element_name FROM $dbtable WHERE  email=\"".addslashes($username)."\"";
+    $sql="SELECT $element_name FROM $dbtable WHERE  email='".addslashes($username)."'";
 	if($ergebnis=$db->Execute($sql)) {
         if($ergebnis->RecordCount()) {
             $cont=$ergebnis->FetchRow();
@@ -71,7 +72,7 @@ if(in_array($mode,$modetypes))
 			case 'sendmail';
 			{
 						$uid=uniqid('');
-						$sdate=date(YmdHis);
+						$sdate=date('YmdHis');
 						$sql="INSERT INTO $dbtable
 						(	recipient,
 							sender,
@@ -113,7 +114,7 @@ if(in_array($mode,$modetypes))
 							'1', 
 							'',
 							'".date('Y-m-d H:i:s')."',
-							'$sdate',
+							'".date('Y-m-d H:i:s')."',
 							'$uid'
 							)";
 					  /// the send_stamp is left out to force its auto update
@@ -127,22 +128,22 @@ if(in_array($mode,$modetypes))
 						//	if($folder=="inbox") $folder="sent";
 							//echo "q ok ".$sql;
 							$dbtable='care_mail_private_users';
-							$sql="SELECT $folder, lastcheck FROM $dbtable WHERE email=\"".$HTTP_COOKIE_VARS[$local_user.$sid]. "\"";
+							$sql="SELECT $folder, lastcheck FROM $dbtable WHERE email='".$HTTP_COOKIE_VARS[$local_user.$sid]. "'";
 							if($ergebnis=$db->Execute($sql))
 							{
 								$content=$ergebnis->FetchRow();
 								if(strlen($subject)>30) $sub=substr($subject,0,30).'...';
 									else $sub=$subject;
-								$buf="t=$sdate&r=1&f=$recipient&s=$sub&d=".strftime("%d.%m.%Y %H.%M")."&z=".strlen($body_txt)."&u=$uid\r\n";
+								$buf="t=".date('Y-m-d H:i:s')."&r=1&f=$recipient&s=$sub&d=".date('Y-m-d H:i:s')."&z=".strlen($body_txt)."&u=$uid\r\n";
 								if($content[$folder]=='') $content[$folder]=$buf;
 									else  $content[$folder].='_'.$buf;
-									
-								$sql="UPDATE $dbtable SET $folder=\"$content[$folder]\" , lastcheck=\"$content[lastcheck]\" 
-																WHERE email=\"".$HTTP_COOKIE_VARS[$local_user.$sid]. "\"";	
+								if(empty($content['lastcheck'])) $content['lastcheck']='0001-01-01 00:00:00';
+								$sql="UPDATE $dbtable SET $folder='".$content[$folder]."' , lastcheck='".$content['lastcheck']."'
+																WHERE email='".$HTTP_COOKIE_VARS[$local_user.$sid]. "'";
 							    $db->BeginTrans();
 						        $ok=$db->Execute($sql);
 						        if($ok&&$db->CommitTrans()) { 
-								    echo "$LDDbNoUpdate<br>$sql"; 
+								    //echo "$LDDbNoUpdate<br>$sql"; 
 						        }else { 
 							        $db->RollbackTrans();
 						            echo "$LDDbNoSave<br>$sql"; 
@@ -162,7 +163,7 @@ if(in_array($mode,$modetypes))
 				// set dbtable to users
 				$dbtable='care_mail_private_users';
 				// get the last check timestamp
-				$sql='SELECT '.$folder.', lastcheck FROM '.$dbtable.' WHERE email="'.$HTTP_COOKIE_VARS[$local_user.$sid].'"';
+				$sql="SELECT $folder, lastcheck FROM $dbtable WHERE email='".$HTTP_COOKIE_VARS[$local_user.$sid]."'";
 				
 				if($ergebnis=$db->Execute($sql))
 				{ 
@@ -171,14 +172,14 @@ if(in_array($mode,$modetypes))
 					  $content=$ergebnis->FetchRow();
 					  
 					  if($folder=='inbox')
-					  {	
+					  {
 						// if last check time stamp found check for  new mails
 						$dbtable='care_mail_private';
-						
-						$sql="SELECT * FROM $dbtable WHERE ( recipient LIKE \"%".$HTTP_COOKIE_VARS[$local_user.$sid]."%\" 
-																	OR cc LIKE \"%".$HTTP_COOKIE_VARS[$local_user.$sid]."%\" 
-																	OR bcc LIKE \"%".$HTTP_COOKIE_VARS[$local_user.$sid]."%\")
-																	AND send_stamp>".$content['lastcheck'];
+						if(empty($content['lastcheck'])) $content['lastcheck']=DBF_NODATETIME;
+						$sql="SELECT * FROM $dbtable WHERE ( recipient $sql_LIKE '%".$HTTP_COOKIE_VARS[$local_user.$sid]."%'
+																	OR cc $sql_LIKE '%".$HTTP_COOKIE_VARS[$local_user.$sid]."%'
+																	OR bcc $sql_LIKE '%".$HTTP_COOKIE_VARS[$local_user.$sid]."%')
+																	AND send_stamp > '".$content['lastcheck']."'";
 						//echo $sql;
 						if($ergebnis=$db->Execute($sql))
 							{ 
@@ -197,7 +198,7 @@ if(in_array($mode,$modetypes))
 									
 									$dbtable='care_mail_private_users';
 									
-									$sql="UPDATE $dbtable SET inbox=\"$content[inbox]\" WHERE email=\"".$HTTP_COOKIE_VARS[$local_user.$sid]. "\"";	
+									$sql="UPDATE $dbtable SET inbox='".$content['inbox']."', lastcheck ='".date('Y-m-d H:i:s')."' WHERE email='".$HTTP_COOKIE_VARS[$local_user.$sid]. "'";
 							        $db->BeginTrans();
 						            $ok=$db->Execute($sql);
 						            if($ok) {
@@ -251,9 +252,9 @@ if(in_array($mode,$modetypes))
 				// set dbtable to users
 				$dbtable='care_mail_private_users';
 				
-				$sql="SELECT addr_quick FROM $dbtable WHERE  email=\"".$HTTP_COOKIE_VARS[$local_user.$sid]. "\"";
-				
-					if($ergebnis=$db->Execute($sql)) 
+				$sql="SELECT addr_quick FROM $dbtable WHERE  email='".$HTTP_COOKIE_VARS[$local_user.$sid]. "'";
+
+					if($ergebnis=$db->Execute($sql))
 					{
 						if($ergebnis->RecordCount())
 						{
@@ -268,12 +269,12 @@ if(in_array($mode,$modetypes))
 	 	$dbtable='care_mail_private';
 		
 		if($reply<2)   $sql='SELECT subject, body '; else $sql='SELECT * ';
-		
-		$sql.='FROM '.$dbtable.' WHERE  recipient="'.$recipient.'" 
-																AND sender="'.$sender.'" 
-																AND reply2="'.$reply2.'" 
-																AND send_dt="'.$send_dt.'" 
-																AND send_stamp="'.$send_stamp.'"'; 
+
+		$sql.="FROM $dbtable WHERE  recipient='$recipient'
+																AND sender='$sender'
+																AND reply2='$reply2'
+																AND send_dt='$send_dt'
+																AND send_stamp='$send_stamp'";
 																
 				if($ergebnis=$db->Execute($sql))
 				{ 

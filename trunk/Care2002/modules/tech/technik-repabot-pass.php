@@ -50,7 +50,7 @@ if ($versand=="Abschicken")
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
+<HTML>
 <HEAD>
 <?php echo setCharSet(); ?>
  <TITLE>Repabot Aktivieren</TITLE>

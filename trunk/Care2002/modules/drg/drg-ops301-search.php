@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -17,8 +17,13 @@ require_once('drg_inc_local_user.php');
 require_once($root_path.'include/inc_front_chain_lang.php');
 //if (!$opnr) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 
-if($saveok)
-{
+//$db->debug=true;
+
+# Create drg object
+require_once($root_path.'include/care_api_classes/class_drg.php');
+$drg= & new DRG;
+
+if($saveok){
 ?>
 
  <script language="javascript" >
@@ -31,13 +36,10 @@ if($saveok)
   exit;
 }
 
-require_once($root_path.'include/inc_config_color.php');
-
 $toggle=0;
 $thisfile='drg-ops301-search.php';
 
-if($mode=='save')
-{
+if($mode=='save'){
     /* Initialiase control elements */
 	$target='ops301';
 	$element='ops_code';
@@ -46,48 +48,42 @@ if($mode=='save')
 	$itemselector='sel';
 	$hidselector='ops_px';
 	include($root_path.'include/inc_drg_entry_save.php');
-}
-else
-{
-  $fielddata='code,description,sub_level,inclusive,exclusive,notes,remarks';
+}else{
+	$fielddata='code,description,sub_level,inclusive,exclusive,notes,remarks';
 
-  $keyword=trim($keyword);
+	$keyword=trim($keyword);
 
-  if(($keyword)&&($keyword!=" "))
-  {
-	
-	if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-	if($dblink_ok){
-		    
-        /* Check if table exists otherwise use default table */
-	 	$dbtable=checkTableExist('care_ops301_'.$lang, 'care_ops301_de');	
+	if(($keyword)&&($keyword!=" ")){
 
-	 
-		if(strlen($keyword)<3)
-			$sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE (code LIKE "%'.$keyword.'%" OR description LIKE "'.$keyword.'%")  LIMIT 0,100';
-			else
-				$sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE (code LIKE "%'.$keyword.'%" OR description LIKE "%'.$keyword.'%")  LIMIT 0,100';
-        	$ergebnis=$db->Execute($sql);
-			if($ergebnis)
-       		{
-				$linecount=0;
-				//if ($zeile=$ergebnis->FetchRow())
-				if ($linecount=$ergebnis->RecordCount())
-				{
-				 	//$linecount++;
-					if(strlen($keyword)<3)
-						$advsql='SELECT sub_level FROM '.$dbtable.' WHERE (code LIKE "%'.$keyword.'%" OR description LIKE "'.$keyword.'%") LIMIT 0,100';
-						else
-							$advsql='SELECT sub_level FROM '.$dbtable.' WHERE (code LIKE "%'.$keyword.'%" OR description LIKE "%'.$keyword.'%") LIMIT 0,100';
-        			$adv=$db->Execute($advsql);
+        ##### Check if table exists otherwise use default table #####
+
+	 	//$dbtable=checkTableExist('care_ops301_'.$lang, 'care_ops301_de');
+
+
+		if(strlen($keyword)<3){
+			$sql="SELECT $fielddata FROM $drg->tb_proc_codes WHERE (code $sql_LIKE '%$keyword%' OR description $sql_LIKE '$keyword%')";
+		}else{
+			$sql="SELECT $fielddata FROM $drg->tb_proc_codes  WHERE (code $sql_LIKE '%$keyword%' OR description $sql_LIKE '%$keyword%')";
+		}
+
+		$ergebnis=$db->SelectLimit($sql,100);
+		if($ergebnis){
+			$linecount=0;
+			//if ($zeile=$ergebnis->FetchRow())
+			if ($linecount=$ergebnis->RecordCount()){
+				//$linecount++;
+				if(strlen($keyword)<3){
+					$advsql="SELECT sub_level FROM $drg->tb_proc_codes WHERE (code $sql_LIKE '%$keyword%' OR description $sql_LIKE '$keyword%')";
+				}else{
+					$advsql="SELECT sub_level FROM $drg->tb_proc_codes WHERE (code $sql_LIKE '%$keyword%' OR description $sql_LIKE '%$keyword%')";
 				}
+     			$adv=$db->SelectLimit($advsql,100);
 			}
-			 else {echo "<p>".$sql."<p>$LDDbNoRead";};
-	 }
-  }
+		} else {
+			echo "<p>".$sql."<p>$LDDbNoRead";
+		}
+	}
 }
-
-
 $img['delete']=createComIcon($root_path,'delete2.gif','0','right');
 $img['arrow']=createComIcon($root_path,'l_arrowgrnsm.gif','0','absmiddle');
 $img['warn']=createComIcon($root_path,'warn.gif','0','absmiddle');
@@ -97,7 +93,6 @@ $img['blue']=createComIcon($root_path,'l2-blue.gif','0');
 $img['t2']=createComIcon($root_path,'t2-blue.gif','0');
 $img['plus']=createComIcon($root_path,'plus2.gif','0','absmiddle');
 $img['reset']=createComIcon($root_path,'button_reset.gif','0','absmiddle');
-
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>
@@ -161,7 +156,8 @@ document.searchdata.keyword.select();document.searchdata.keyword.focus();
 <FONT    SIZE=3  FACE="verdana,Arial" color="#006600"><b><?php echo $LDOps301 ?></b>&nbsp;
 </font>
 <font size=3>
-<INPUT type="text" name="keyword" size="50" maxlength="60" onfocus=this.select() value="<?php echo $keyword ?>"></font> 
+<INPUT type="text" name="keyword" size="50" maxlength="60" onfocus=this.select() value="<?php echo $keyword ?>"></font>
+<br>
 <INPUT type="submit" name="versand" value="<?php echo $LDSearch ?>">
 <?php else : ?>
 <input type="hidden" name="keyword" value="">
@@ -370,8 +366,8 @@ function drawdata(&$data,&$advdata)
 							if(!$parent[$parentcode])
 							{
 								//echo "parent";
-								$sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE code LIKE "'.$parentcode.'%"  LIMIT 1';
-        						$lines=$db->Execute($sql);
+								$sql="SELECT $fielddata FROM $drg->tb_proc_codes WHERE code $sql_LIKE '$parentcode%'";
+        						$lines=$db->SelectLimit($sql,1);
 								if($lines)
 								{
 									if($lines->RecordCount())
@@ -396,7 +392,11 @@ function drawdata(&$data,&$advdata)
 ?>
 
 </table>
-<?php if(!$showonly&&($linecount>0)) : ?>
+<?php 
+
+if(!$showonly&&($linecount>0)) { 
+
+?>
 <input type="hidden" name="lastindex" value="<?php echo $idx ?>">
 <input type="submit" value="<?php echo $LDApplySelection ?>">
 <input type="hidden" name="sid" value="<?php echo $sid; ?>">
@@ -415,17 +415,28 @@ function drawdata(&$data,&$advdata)
 <input type="hidden" name="target" value="<?php echo $target; ?>">
 <input type="hidden" name="mode" value="save">
 </form>
-<?php else : ?>
+<?php 
+
+}else{
+/*
+?>
 <p>
 <a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>></a>
-<?php endif ?>
-<?php if(($linecount>15)&&!$showonly) : ?>
+
+
+<?php
+*/
+}
+?>
+
+<?php if(($linecount>15)&&!$showonly) { ?>
 
 <p>
 <FORM action="drg-ops301-search.php" method="post" onSubmit="return pruf(this)" name="form2">
 <a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> align="right"></a>
 <font face="Arial,Verdana"  color="#000000" size=-1>
-<INPUT type="text" name="keyword" size="14" maxlength="25" value="<?php echo $keyword ?>"> 
+<INPUT type="text" name="keyword" size="14" maxlength="25" value="<?php echo $keyword ?>">
+<br>
 <INPUT type="submit" name="versand" value="<?php echo $LDSearch ?>">
 <input type="hidden" name="sid" value="<?php echo $sid; ?>">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
@@ -442,16 +453,12 @@ function drawdata(&$data,&$advdata)
 <input type="hidden" name="showonly" value="<?php echo $showonly; ?>">
 <input type="hidden" name="target" value="<?php echo $target; ?>">
 </font>
-</FORM>			
+</FORM>
 <p>
-<?php endif ?>
+<?php } ?>
 </ul>
 &nbsp;
 </FONT>
-
-
 </FONT>
-
-
 </BODY>
 </HTML>

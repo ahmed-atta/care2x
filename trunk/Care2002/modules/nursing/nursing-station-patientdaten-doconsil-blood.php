@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@care2x.net, elpidio@care2x.org
@@ -12,9 +12,8 @@ require($root_path.'include/inc_environment_global.php');
 */
 
 $lang_tables[]='lab.php';
+$lang_tables[]='departments.php';
 define('LANG_FILE','konsil.php');
-
-/* Globalize the variables */
 
 
 /* We need to differentiate from where the user is coming: 
@@ -35,13 +34,15 @@ else
 }
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-$thisfile='nursing-station-patientdaten-doconsil-blood.php';
+$thisfile=basename(__FILE__);
+
+//$db->debug=1;
 
 $bgc1='#99ffcc'; 
-$abtname=get_meta_tags($root_path."global_conf/$lang/konsil_tag_dept.pid");
+
 $db_request_table='blood';
 
-$formtitle=$abtname['blood'];
+$formtitle=$LDBloodBank;
 define('_BATCH_NR_INIT_',40000000); 
 /*
 *  The following are  batch nr inits for each type of test request
@@ -49,17 +50,14 @@ define('_BATCH_NR_INIT_',40000000);
 */
 
 /* Here begins the real work */
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok){	
 	/* Load the date format functions and get the local format */
-	require_once($root_path.'include/inc_date_format_functions.php');
-   
+require_once($root_path.'include/inc_date_format_functions.php');
+require_once($root_path.'include/care_api_classes/class_encounter.php');
+$enc_obj=new Encounter;
 
     /* Check for the patient number = $pn. If available get the patients data, otherwise set edit to 0 */
-	if(isset($pn)&&$pn){		
-		include_once($root_path.'include/care_api_classes/class_encounter.php');
-		$enc_obj=new Encounter;
+	if(isset($pn)&&$pn){
+
 	    if( $enc_obj->loadEncounterData($pn)) {
 /*		
 			include_once($root_path.'include/care_api_classes/class_globalconfig.php');
@@ -98,7 +96,7 @@ if($dblink_ok){
 										   transfusion_date, diagnosis, notes, send_date, 
 										   doctor, phone_nr, status, 
 										   history,
-										   modify_id, create_id, create_time) 
+										   create_id, create_time)
 										   VALUES 
 										   (
 										   '".$batch_nr."','".$pn."','".$dept_nr."', 
@@ -109,9 +107,11 @@ if($dblink_ok){
 										   '".formatDate2Std($transfusion_date,$date_format)."','".htmlspecialchars($diagnosis)."','".htmlspecialchars($notes)."','".formatDate2Std($send_date,$date_format)."',
 										   '".$doctor."','".$phone_nr."','pending',
 										   'Create: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n',
-										   '".$HTTP_SESSION_VARS['sess_user_name']."','".$HTTP_SESSION_VARS['sess_user_name']."',NULL)";
+										   '".$HTTP_SESSION_VARS['sess_user_name']."',
+										   '".date('YmdHis')."'
+										   )";
 										   
-							      if($ergebnis=$db->Execute($sql))
+							      if($ergebnis=$enc_obj->Transact($sql))
        							  {
 								  	// Load the visual signalling functions
 									include_once($root_path.'include/inc_visual_signalling_fx.php');
@@ -155,11 +155,12 @@ if($dblink_ok){
 										   doctor='".$doctor."', 
 										   phone_nr='".$phone_nr."', 
 										   status='".$status."', 
-										   history=CONCAT(history,'Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n'),
-										   modify_id='".$HTTP_COOKIE_VARS[$local_user.$sid]."'
+										   history=".$enc_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
+										   modify_id='".$HTTP_COOKIE_VARS[$local_user.$sid]."',
+										   modify_time='".date('YmdHis')."'
                                            WHERE batch_nr = '".$batch_nr."'";
 									  							
-							      if($ergebnis=$db->Execute($sql))
+							      if($ergebnis=$enc_obj->Transact($sql))
        							  {
 								  	// Load the visual signalling functions
 									include_once($root_path.'include/inc_visual_signalling_fx.php');
@@ -202,8 +203,9 @@ if($dblink_ok){
   
           if(!$mode) /* Get a new batch number */
 		  {
-		                $sql="SELECT batch_nr FROM care_test_request_".$db_request_table." ORDER BY batch_nr DESC LIMIT 1";
-		                if($ergebnis=$db->Execute($sql))
+		                $sql="SELECT batch_nr FROM care_test_request_".$db_request_table." ORDER BY batch_nr DESC";
+
+		                if($ergebnis=$db->SelectLimit($sql,1))
        		            {
 				            if($batchrows=$ergebnis->RecordCount())
 					        {
@@ -219,9 +221,6 @@ if($dblink_ok){
 			               else {echo "<p>$sql<p>$LDDbNoRead"; exit;}
 						 $mode="save";   
 		   }	    
-}
-else 
- { echo "$LDDbNoLink<br>$sql<br>"; }
 
 ?>
 
@@ -391,7 +390,7 @@ if($edit){
 		<td width=50% bgcolor="<?php echo $bgc1 ?>"  class=fva2_ml10><div   class=fva2_ml10><?php echo $LDToBloodBank."</b></font><br>".$LDTelephone ?><br>
 <?php
 	  echo '<font size=1 color="#000099" face="verdana,arial">'.$batch_nr.'</font>&nbsp;<br>';
-          echo "<img src='".$root_path."classes/barcode/image.php?code=$batch_nr&style=68&type=I25&width=145&height=40&xres=2&font=5' border=0>";
+          echo "<img src='".$root_path."classes/barcode/image.php?code=$batch_nr&style=68&type=I25&width=180&height=40&xres=2&font=5' border=0>";
 ?>
       </td>
 		<td class=fva2_ml10><div   class=fva2_ml10><font size=3 color="#0000ff"><b><?php  echo $LDTestRequestFor.$LDTestType[$target];  ?></b></font>
@@ -419,9 +418,17 @@ if($edit){
           <td>
 		     <table border=0 bgcolor="<?php echo $bgc1 ?>" cellpadding=4 width=100%>
              <tr  class=fva2_ml10>
-              <td><?php echo $LDBloodGroup ?><br><input type="text" name="blood_group" size=7 maxlength=10 value="<?php  if($edit_form || $read_form) echo $stored_request['blood_group']; ?>"></td>
-			   <td><?php echo $LDRhFactor ?><br><input type="text" name="rh_factor" size=7 maxlength=10 value="<?php  if($edit_form || $read_form) echo $stored_request['rh_factor']; ?>"></td>
-			   <td><?php echo $LDKell ?><br><input type="text" name="kell" size=7 maxlength=10 value="<?php  if($edit_form || $read_form) echo $stored_request['kell']; ?>"></td>
+              <td><b><font color="red" face="verdana" size=2>*</font></b><?php echo $LDBloodGroup ?><br>
+			  <input type="text" name="blood_group" size=7 maxlength=10 value="<?php  
+				//if($edit_form || $read_form) {
+					if(isset($stored_request['blood_group'])) echo $stored_request['blood_group'];
+						else echo $enc_obj->BloodGroup();
+				//}
+			  ?>"></td>
+			   <td><b><font color="red" face="verdana" size=2>*</font></b><?php echo $LDRhFactor ?><br>
+			   <input type="text" name="rh_factor" size=7 maxlength=10 value="<?php  if($edit_form || $read_form) echo $stored_request['rh_factor']; ?>"></td>
+			   <td><b><font color="red" face="verdana" size=2>*</font></b><?php echo $LDKell ?><br>
+			   <input type="text" name="kell" size=7 maxlength=10 value="<?php  if($edit_form || $read_form) echo $stored_request['kell']; ?>"></td>
               </tr>
               <tr class=fva0_ml10>
               <td colspan=3><?php echo $LDDateProtNumber ?><br><input type="text" name="date_protoc_nr" size=45 maxlength=45 value="<?php  if($edit_form || $read_form) echo $stored_request['date_protoc_nr']; ?>"></td>
@@ -437,7 +444,7 @@ if($edit){
 <?php
 
 if($edit){
-	echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid=$sid&lang=$lang&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
+	echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
 }elseif($pn==''){
 	$searchmask_bgcolor='#ffffff';
 	include($root_path.'include/inc_test_request_searchmask.php');
@@ -508,7 +515,7 @@ if($edit){
        <td colspan=2 bgcolor="#000000"><img src="<?php echo $root_path ?>gui/img/common/default/pixel.gif" border=0 width=1 height=2 align="absmiddle"></td>
      </tr>
      <tr>
-       <td><div class=fva2b_ml10><font size=1><?php echo $LDTransfusionDate ?></font></div></td>
+       <td><div class=fva2b_ml10><b><font color="red" face="verdana" size=2>*</font></b><font size=1><?php echo $LDTransfusionDate ?></font></div></td>
        <td><input type="text" name="transfusion_date" size=20 maxlength=10  value="<?php  if($mode=='edit') echo formatDate2Local($stored_request['transfusion_date'],$date_format); ?>"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
 	   <a href="javascript:show_calendar('form_test_request.transfusion_date','<?php echo $date_format ?>')">
  		<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a><font size=1 face="arial">
@@ -524,14 +531,14 @@ if($edit){
        <td></td>
      </tr>
      <tr>
-       <td align="right"><div class=fva2b_ml10><font size=1><?php echo $LDDate ?>:&nbsp;</font></div></td>
+       <td align="right"><div class=fva2b_ml10><b><font color="red" face="verdana" size=2>*</font></b><font size=1><?php echo $LDDate ?>:&nbsp;</font></div></td>
        <td><input type="text" name="send_date" size=20 maxlength=10  value="<?php  if($mode=="edit") echo formatDate2Local($stored_request['send_date'],$date_format); else echo formatDate2Local(date("Y-m-d"),$date_format) ?>" onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
 	   	   <a href="javascript:show_calendar('form_test_request.send_date','<?php echo $date_format ?>')">
  		<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a><font size=1 face="arial">
 		</td>
      </tr>
      <tr>
-       <td align="right"><div class=fva2b_ml10><font size=1><?php echo $LDDoctor ?>:&nbsp;</font></div></td>
+       <td align="right"><div class=fva2b_ml10><b><font color="red" face="verdana" size=2>*</font></b><font size=1><?php echo $LDDoctor ?>:&nbsp;</font></div></td>
        <td><input type="text" name="doctor" size=20 maxlength=20 value="<?php  if($edit_form || $read_form) echo $stored_request['doctor']; ?>"></td>
      </tr>
      <tr>

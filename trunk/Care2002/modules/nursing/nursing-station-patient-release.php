@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@care2x.net, elpidio@care2x.org
@@ -15,16 +15,16 @@ define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'global_conf/inc_remoteservers_conf.php');
-
+//$db->debug=true;
 if(!$encoder) $encoder=$HTTP_COOKIE_VARS[$local_user.$sid];
 
 $breakfile="nursing-station.php".URL_APPEND."&edit=1&station=$station&ward_nr=$ward_nr";
 $thisfile=basename(__FILE__);
 
-	  # Load date formatter 
-	include_once($root_path.'include/inc_date_format_functions.php');
-	include_once($root_path.'include/care_api_classes/class_encounter.php');
-	$enc_obj=new Encounter;
+# Load date formatter
+require_once($root_path.'include/inc_date_format_functions.php');
+require_once($root_path.'include/care_api_classes/class_encounter.php');
+$enc_obj=new Encounter;
 	
 if( $enc_obj->loadEncounterData($pn)) {
 
@@ -154,7 +154,7 @@ function pruf(d)
 <BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> onLoad="if (window.focus) window.focus()" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
 <?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 
-<table width=100% border=0 cellpadding="5" cellspacing=0>
+<table width=100% border=0  cellspacing=0>
 <tr>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
 <FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2 FACE="Arial"><STRONG><?php echo $LDReleasePatient ?> </STRONG></FONT>
@@ -164,6 +164,7 @@ function pruf(d)
 </tr>
 <tr>
 <td bgcolor="<?php echo $cfg['body_bgcolor']; ?>" colspan=2>
+<p></p>
  <ul>
 <?php
 if(0){
@@ -215,7 +216,7 @@ else
 	else
 	{
 		//**************** ftp check of main pix ************************
-
+		# Notes as of 2004-04-10: This will not be supported anymore and the priority will shift to using HXP protocol
 		// set up basic connection
 		//$ftp_server="192.168.0.2";   // configured in the file ..include/inc_remoteservers_conf.php
 		//$ftp_user="maryhospital_fotodepot";
@@ -272,7 +273,7 @@ if($patient_ok){
   <tr>
     <td colspan=2>
 	<?php
-		echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid=$sid&lang=$lang&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
+		echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
 	?>
 	<img <?php echo $img_source; ?> align="top">
 	</td>
@@ -321,17 +322,19 @@ if($patient_ok){
 	}else{ 
 		$init=1;
 		while($dis_type=$discharge_types->FetchRow()){
-			echo '&nbsp;';
-			echo '<input type="radio" name="relart" value="'.$dis_type['nr'].'"';
-			if($init){
-				echo ' checked';
-				$init=0;
-			}
-			echo '>';
-			if(isset($$dis_type['LD_var'])&&!empty($$dis_type['LD_var'])) echo $$dis_type['LD_var'];
-				else echo $dis_type['name'];
-			echo '<br>
-			';
+              # We will display only discharge types 1 to 7
+              if($dis_type['nr']<8){
+			     echo '&nbsp;';
+			     echo '<input type="radio" name="relart" value="'.$dis_type['nr'].'"';
+			     if($init){
+				    echo ' checked';
+				    $init=0;
+		         }
+			     echo '>';
+			     if(isset($$dis_type['LD_var'])&&!empty($$dis_type['LD_var'])) echo $$dis_type['LD_var'];
+				    else echo $dis_type['name'];
+			     echo '<br>';
+              }
 		}
 			
 /*	echo '	

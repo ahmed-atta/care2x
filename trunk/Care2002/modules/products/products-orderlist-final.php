@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@latorilla.com
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -21,6 +21,7 @@ $dept_obj=new Department;
 $sendok=false;
 $ofinal=false;
 
+//$db->debug=1;
 
 if($cat=='pharma') {
  	$dbtable='care_pharma_orderlist';
@@ -60,11 +61,11 @@ if(($mode=='send') && isset($order_nr) && $order_nr){
 							   		WHERE order_nr='$order_nr'
 									AND dept_nr='$dept_nr'";// save aux data to the order list
 		
-			if($ergebnis=$db->Execute($sql)){
+			if($ergebnis=$user->Transact($sql)){
 				//echo $sql;
   				$ofinal=true;
-				$sendok=true;			
-			}	
+				$sendok=true;
+			}
 			//echo $sql;
 		}else{
 			$error='password';
@@ -156,7 +157,7 @@ if($cat=='pharma') $dbtable='care_pharma_orderlist';
 	else $dbtable=$dbtable='care_med_orderlist';
 
 
-$sql='SELECT * FROM '.$dbtable.' WHERE order_nr="'.$order_nr.'"	AND dept_nr="'.$dept_nr.'"';
+$sql="SELECT * FROM $dbtable WHERE order_nr='$order_nr' AND dept_nr='$dept_nr'";
 						
 if($ergebnis=$db->Execute($sql)){
 	$rows=$ergebnis->RecordCount();

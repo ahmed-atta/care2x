@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -15,11 +15,13 @@ define('LANG_FILE','drg.php');
 require_once('drg_inc_local_user.php');
 
 require_once($root_path.'include/inc_front_chain_lang.php');
-//if (!isset($opnr) || !$opnr) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+//if (!isset($opnr) || !$opnr) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;};
 
 # Create drg object
 require_once($root_path.'include/care_api_classes/class_drg.php');
 $drg=& new DRG;
+
+//$db->debug=true;
 
 if($saveok){
 ?>
@@ -55,21 +57,21 @@ if($mode=='save'){
 		# Search routine starts here
 	
 		if(strlen($keyword)<3){
-			$sql='SELECT '.$fielddata.' FROM '.$drg->tb_diag_codes.' WHERE (diagnosis_code LIKE "%'.$keyword.'%" OR description LIKE "'.$keyword.'%") AND type <> "table" LIMIT 0,50';
+			$sql="SELECT $fielddata FROM $drg->tb_diag_codes WHERE (diagnosis_code $sql_LIKE '%$keyword%' OR description $sql_LIKE '$keyword%') AND type <> 'table'";
 			}else{
-				$sql='SELECT '.$fielddata.' FROM '.$drg->tb_diag_codes.' WHERE (diagnosis_code LIKE "%'.$keyword.'%" OR description LIKE "%'.$keyword.'%") AND type <> "table" LIMIT 0,50';
+				$sql="SELECT $fielddata FROM $drg->tb_diag_codes WHERE (diagnosis_code $sql_LIKE '%$keyword%' OR description $sql_LIKE '%$keyword%') AND type <> 'table'";
 			}
-     	//echo $sql;
-		$ergebnis=$db->Execute($sql);
+//echo $sql;
+		$ergebnis=$db->SelectLimit($sql,50);
 		if($ergebnis){
 			$linecount=0;
 			if ($linecount=$ergebnis->RecordCount()){
 				if(strlen($keyword)<3){
-					$advsql='SELECT sub_level FROM '.$drg->tb_diag_codes.' WHERE (diagnosis_code LIKE "%'.$keyword.'%" OR description LIKE "'.$keyword.'%") AND type <> "table" LIMIT 0,50';
+					$advsql="SELECT sub_level FROM $drg->tb_diag_codes WHERE (diagnosis_code $sql_LIKE '%$keyword%' OR description $sql_LIKE '$keyword%') AND type <> 'table'";
 				}else{
-					$advsql='SELECT sub_level FROM '.$drg->tb_diag_codes.' WHERE (diagnosis_code LIKE "%'.$keyword.'%" OR description LIKE "%'.$keyword.'%") AND type <> "table" LIMIT 0,50';
+					$advsql="SELECT sub_level FROM $drg->tb_diag_codes WHERE (diagnosis_code $sql_LIKE '%$keyword%' OR description $sql_LIKE '%$keyword%') AND type <> 'table'";
 				}
-        		$adv=$db->Execute($advsql);
+        		$adv=$db->SelectLimit($advsql,50);
 			}
 		}else {echo "<p>".$sql."<p>$LDDbNoRead"; };
 	}
@@ -149,6 +151,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <FONT    SIZE=3  FACE="verdana,Arial" color="#0000aa"><b><?php echo $LDIcd10 ?></b>&nbsp;
 </font>
 <font size=3><INPUT type="text" name="keyword" size="50" maxlength="60" onfocus="this.select()" value="<?php echo $keyword ?>"></font> 
+<br>
 <INPUT type="submit" name="versand" value="<?php echo $LDSearch ?>">
 <?php else : ?>
 <input type="hidden" name="keyword" value="">
@@ -363,8 +366,8 @@ function drawdata(&$data,&$advdata)
 							if(!$grandpa[$grandcode])
 							{
 								//echo "grand";
-								$sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE (diagnosis_code LIKE "%'.$grandcode.'0-%" OR diagnosis_code LIKE "%'.$parentcode.'-%")  AND type <> "table" LIMIT 1';
-        						$result=$db->Execute($sql);
+								$sql="SELECT $fielddata FROM $drg->tb_diag_codes  WHERE  type <> 'table'  AND (diagnosis_code  $sql_LIKE '%".$grandcode."0-%' OR diagnosis_code  $sql_LIKE '%".$parentcode."-%') ";
+        						$result=$db->SelectLimit($sql,1);
 								if($result)
 								{
 									if($granddata=$result->FetchRow())
@@ -381,8 +384,8 @@ function drawdata(&$data,&$advdata)
 							if(!$parent[$parentcode])
 							{
 								//echo "parent";
-								$sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE diagnosis_code LIKE "'.$parentcode.'.-%" AND type <> "table" LIMIT 1';
-        						$lines=$db->Execute($sql);
+								$sql="SELECT $fielddata FROM $drg->tb_diag_codes  WHERE diagnosis_code $sql_LIKE '".$parentcode.".-%' AND type <> 'table'";
+        						$lines=$db->SelectLimit($sql,1);
 								if($lines)
 								{
 									if($lines->RecordCount())
@@ -404,7 +407,12 @@ function drawdata(&$data,&$advdata)
 ?>
 
 </table>
-<?php if(!$showonly&&($linecount>0)) : ?>
+
+<?php
+
+if(!$showonly&&($linecount>0)) { 
+
+?>
 <input type="hidden" name="lastindex" value="<?php echo $idx ?>">
 <input type="submit" value="<?php echo $LDApplySelection ?>">
 <input type="hidden" name="sid" value="<?php echo $sid; ?>">
@@ -422,10 +430,20 @@ function drawdata(&$data,&$advdata)
 <input type="hidden" name="target" value="<?php echo $target; ?>">
 <input type="hidden" name="mode" value="save">
 
-<?php else : ?>
+<?php 
+
+}else{
+ /*
+ ?>
+
 <p>
 <a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>></a>
-<?php endif ?>
+
+<?php
+
+*/
+}
+?>
 
 </form>
 
@@ -435,7 +453,8 @@ function drawdata(&$data,&$advdata)
 <FORM action="drg-icd10-search.php" method="post" onSubmit="return pruf(this)" name="form2">
 <a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> align="right"></a>
 <font face="Arial,Verdana"  color="#000000" size=-1>
-<INPUT type="text" name="keyword" size="14" maxlength="25" value="<?php echo $keyword ?>"> 
+<INPUT type="text" name="keyword" size="14" maxlength="25" value="<?php echo $keyword ?>">
+<br>
 <INPUT type="submit" name="versand" value="<?php echo $LDSearch ?>">
 <input type="hidden" name="sid" value="<?php echo $sid; ?>">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
@@ -451,8 +470,8 @@ function drawdata(&$data,&$advdata)
 <input type="hidden" name="display" value="<?php echo $display; ?>">
 <input type="hidden" name="showonly" value="<?php echo $showonly; ?>">
 <input type="hidden" name="target" value="<?php echo $target; ?>">
-</font></FORM>			
-						<p>
+</font></FORM>
+<p>
 <?php endif ?>
 </ul>
 &nbsp;

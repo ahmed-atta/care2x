@@ -2,72 +2,65 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
+
 define('LANG_FILE','or.php');
 $local_user='ck_op_pflegelogbuch_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 $globdata="sid=$sid&lang=$lang&op_nr=$op_nr&dept_nr=$dept_nr&saal=$saal&enc_nr=$enc_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear";
 
-if(($mode=="force_add")&&$artikelname&&$pcs)
-{
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok)
-	{	
-	  	$dbtable='care_encounter_op';
-		$sql="SELECT material_codedlist FROM $dbtable 
+require_once($root_path.'include/care_api_classes/class_core.php');
+$core = & new Core;
+
+//$db->debug=1;
+
+if(($mode=="force_add") && !empty($artikelname) && !empty($pcs)){
+	
+	$dbtable='care_encounter_op';
+	$sql="SELECT material_codedlist FROM $dbtable
 					WHERE dept_nr='$dept_nr'
 					AND op_room='$saal'
 					AND op_nr='$op_nr'
 					AND op_src_date='$pyear$pmonth$pday'
 					AND encounter_nr='$enc_nr'";
-		if($mat_result=$db->Execute($sql))
-       	{
-			if($matrows=$mat_result->RecordCount())
-			{
-				$matlist=$mat_result->FetchRow();
-						//$datafound=1;
-						//$pdata=$ergebnis->FetchRow();
-						//echo $sql."<br>";
-						//echo $rows;
-			}
-					//else echo "<p>".$sql."<p>Multiple entries found pls notify the edv."; 
-		}
-		else { echo "$LDDbNoRead<br>$sql"; } 
 
-		$newmat="b=?&a=?$artikelnum&n=$artikelname&g=$generic&i=$industrynum&c=$pcs\r\n";
-		
-						if(($matrows==1)&&($matlist[0]!=""))
-						{
-							$matlist[0]=$matlist[0]."~".$newmat;
-							$item_idx=substr_count($matlist[0],"~");
-						}
-						else
-						{
-							$matlist[0]=$newmat;
-							$item_idx=0;
-						}
-						
-						$matlist[0]=strtr($matlist[0]," ","+");
-						
-						$dbtable='care_encounter_op';
-						$sql="UPDATE $dbtable SET material_codedlist='$matlist[0]'
+	if($mat_result=$db->Execute($sql)){
+		if($matrows=$mat_result->RecordCount()){
+			$matlist=$mat_result->FetchRow();
+		}
+	}else{
+		echo "$LDDbNoRead<br>$sql";
+	}
+
+	$newmat="b=?&a=?$artikelnum&n=$artikelname&g=$generic&i=$industrynum&c=$pcs\r\n";
+
+	if(($matrows==1)&&($matlist[0]!="")){
+		$matlist[0]=$matlist[0]."~".$newmat;
+		$item_idx=substr_count($matlist[0],"~");
+	}else{
+		$matlist[0]=$newmat;
+		$item_idx=0;
+	}
+
+	$matlist[0]=strtr($matlist[0]," ","+");
+	$dbtable='care_encounter_op';
+	$sql="UPDATE $dbtable SET
+							material_codedlist='$matlist[0]',
+							history = ".$core->ConcatHistory("Material added ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
+							modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+							modify_time = '".date('YmdHis')."'
 								WHERE dept_nr='$dept_nr'
 								AND op_room='$saal'
 								AND op_nr='$op_nr'
 								AND op_src_date='$pyear$pmonth$pday'
 								AND encounter_nr='$enc_nr'";
 						//echo $sql;
-						if($mat_result=$db->Execute($sql))
-						{
-  							header("location:op-logbuch-material-list.php?$globdata&item_idx=$item_idx&chg=1");
-							exit;
-						}	else { echo "$LDDbNoSave<br>$sql"; } 
-						
-						//echo $sql."<br>";
-						//echo $rows;
+	if($mat_result=$core->Transact($sql)){
+		header("location:op-logbuch-material-list.php?$globdata&item_idx=$item_idx&chg=1");
+		exit;
+	}else{
+		echo "$LDDbNoSave<br>$sql";
 	}
-  	else { echo "$LDDbNoLink<br>"; } 
 }
 
 ?>

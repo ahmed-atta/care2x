@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -131,7 +131,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php echo $LDPharmaDbTxt ?></FONT></TD></TR>
-<!-- 				  
+  <!--				  
 				<TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
@@ -142,19 +142,19 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 				 <a href="http://www.bnf.org/bnf/index.html">BNF 45</a> 
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" size=2>British National Formulary (needs internet line)</FONT></TD></TR> 
-   
+
  			   <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
+                <TD colSpan=3><IMG height=1
+                  src="../../gui/img/common/default/pixel.gif"
                   width=5></TD></TR>
                <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'yellowlist.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
+                <TD vAlign=top ><FONT
                   face="Verdana,Helvetica,Arial" size=2><B>
 				  <a href="yellowlist_pass.php<?php echo URL_APPEND ?>"><?php echo $LDYellowList ?></a>
 				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
+                <TD><FONT face="Verdana,Helvetica,Arial"
                   size=2><?php echo $LDYellowListTxt ?></FONT></TD></TR>
- -->				  
+-->
  			   <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 

@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -26,6 +26,7 @@ require_once($root_path.'include/care_api_classes/class_encounter.php');
 $enc_obj=new Encounter;
 	
 if($enc_obj->loadEncounterData($pn)){		
+	//$db->debug=1;
 
 	if(($mode=='release')&&!(isset($lock)||$lock)){
 		$date=(empty($x_date))?date('Y-m-d'):formatDate2STD($x_date,$date_format);
@@ -37,7 +38,7 @@ if($enc_obj->loadEncounterData($pn)){
 							//$enc_obj->ResetAllCurrentPlaces($pn,0);
 						}
 						 break;
-			default: $released=$enc_obj->Discharge($pn,$relart,$date,$time); 
+			default: $released=$enc_obj->Discharge($pn,$relart,$date,$time);
 		}	
 		if($released){
 			# If discharge note present
@@ -51,12 +52,14 @@ if($enc_obj->loadEncounterData($pn)){
 			}
 			
 			# If patient died
+			//$db->debug=1;
 			if($relart==7){
 				include_once($root_path.'include/care_api_classes/class_person.php');
 				$person=new Person;
 				$death['death_date']=$date;
 				$death['death_encounter_nr']=$pn;
-				$death['history']="CONCAT(history,'Discharged ".date('Y-m-d H:i:s')." $encoder\n')";
+				if($dbtype=='mysql') $death['history']="CONCAT(history,'Discharged ".date('Y-m-d H:i:s')." $encoder\n')";
+					else $death['history']="history || 'Discharged ".date('Y-m-d H:i:s')." $encoder\n' ";
 				$death['modify_id']=$encoder;
 				$death['modify_time']=date('YmdHis');
 				@$person->setDeathInfo($enc_obj->PID(),$death);
@@ -171,7 +174,7 @@ function pruf(d)
     <tr>
       <td>
 	  <?php
-		echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid=$sid&lang=$lang&fen='.$pn.'&en='.$pn.'" width=282 height=178 >';
+		echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$pn.'&en='.$pn.'" width=282 height=178 >';
 		?><br>
 	</td>
       <td valign=top align=center><img <?php echo $img_source; ?> align="top"></td>

@@ -28,7 +28,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 </td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
 <a href="javascript:gethelp('admission_show.php','<?php echo $from ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
-if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) echo 'startframe.php?sid='.$sid.'&lang='.$lang; 
+if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) echo $root_path.'main/startframe.php?sid='.$sid.'&lang='.$lang; 
 	else echo "aufnahme_pass.php?sid=$sid&target=entry&lang=$lang"; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </td>
 </tr>

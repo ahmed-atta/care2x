@@ -13,7 +13,10 @@ switch($mode){
 										//echo "$obj->getLastQuery<br>$LDDbNoSave";
 										exit;
 									}
-								} else echo "$obj->getLastQuery<br>$LDDbNoSave";
+								} else{
+                                   echo "$obj->getLastQuery<br>$LDDbNoSave";
+                                   $error=TRUE;
+                                }
 								break;
 		case 'update': 
 								$obj->where=' nr='.$nr;
@@ -23,7 +26,10 @@ switch($mode){
 										//echo "$obj->sql<br>$LDDbNoUpdate";
 										exit;
 									}
-								} else echo "$obj->getLastQuery<br>$LDDbNoUpdate";
+								} else{
+                                  echo "$obj->getLastQuery<br>$LDDbNoUpdate";
+                                  $error=TRUE;
+                                }
 								break;
 }// end of switch
 

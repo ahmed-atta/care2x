@@ -1,9 +1,9 @@
-<?php 
+<?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /*
-CARE 2X Integrated Information System version deployment 1.1 (mysql) 2004-01-11 for Hospitals and Health Care Organizations and Services
+CARE2X Integrated Information System beta 2.0.0 - 2004-05-16 for Hospitals and Health Care Organizations and Services
 Copyright (C) 2002  Elpidio Latorilla & Intellin.org	
 
 GNU GPL. For details read file "copy_notice.txt".
@@ -11,48 +11,42 @@ GNU GPL. For details read file "copy_notice.txt".
 define('LANG_FILE','phone.php');
 $local_user='phonedir_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
-
-$dbtable='care_phone';
+//$db->debug=true;
+//$dbtable='care_phone';
 $forwardfile='phone_list.php';
 $breakfile='phone_list.php';
 $thisfile=basename(__FILE__);
 
-if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
-if($dblink_ok) {
+# Load the Comm class and create comm (phone) object
+require_once($root_path.'include/care_api_classes/class_comm.php');
+$phone = & new Comm;
 
-    /* Load the date formatter */
-    include_once($root_path.'include/inc_date_format_functions.php');
-    
+/* Load the date formatter */
+include_once($root_path.'include/inc_date_format_functions.php');
 
-    if ($finalcommand=='delete')
-    {		
-            $sql='DELETE FROM '.$dbtable.' WHERE item_nr="'.$itemname.'"';	
-			
-            if (!$db->Execute($sql)) echo $sql."<br>$LDDbNoDelete";										
-        
-		    // check if the pagecount is reduced
-            $buffer=($pagecount-1)*$displaysize;
-		
-            if (($buffer+1)==$linecount)
-           { 
-		        $pagecount--;	
-			    if($batchnum>1)  $batchnum--; 			
-		   }			
-            
-			$linecount--;
-            header("Location: phone_list.php".URL_REDIRECT_APPEND."&route=validroute&remark=itemdelete&batchnum=$batchnum&displaysize=$displaysize&linecount=$linecount&pagecount=$pagecount&edit=$edit");
-            exit;
-        }
-		else 
-        {
-            $sql='SELECT * FROM '.$dbtable.' WHERE item_nr="'.$itemname.'"';
-            $ergebnis=$db->Execute($sql);
-            if($ergebnis->RecordCount()) $zeile=$ergebnis->FetchRow(); 
-                else echo "$LDDbNoRead<br>$sql<br>";
-        }
+if ($finalcommand=='delete'){
+    if ($phone->deleteData($itemname)){
+	    # check if the pagecount is reduced
+        $buffer=($pagecount-1)*$displaysize;
+        if (($buffer+1)==$linecount){
+		        $pagecount--;
+			    if($batchnum>1)  $batchnum--;
+		}
+        $linecount--;
+        header("Location: phone_list.php".URL_REDIRECT_APPEND."&route=validroute&remark=itemdelete&batchnum=$batchnum&displaysize=$displaysize&linecount=$linecount&pagecount=$pagecount&edit=$edit");
+        exit;
+    }else{
+        echo $phone->getLastQuery()."<br>$LDDbNoDelete";
+    }
+}else{
+
+    $fielddata='item_nr, title, name, vorname, beruf, bereich1, bereich2,  inphone1, inphone2, inphone3, exphone1, exphone2, funk1, funk2,  roomnr';
+
+    if(!$zeile=$phone->getData($itemname,$fielddata)){
+        $zeile=array();
+        echo $phone->getLastQuery()."<br>$LDDbNoRead<br>";
+    }
 }
-   else echo "$LDDbNoLink<br>"; 
 ?>
 
 <?php html_rtl($lang); ?>
@@ -156,7 +150,6 @@ $colstop=sizeof($LDEditFields);
 <p>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo $LDHowManage ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo $LDHowEnter ?></a><br>
-<HR>
 <p>
 <?php
 require($root_path.'include/inc_load_copyrite.php');

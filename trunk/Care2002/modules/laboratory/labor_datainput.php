@@ -1,15 +1,14 @@
 <?php
-
 define('ROW_MAX',15); # define here the maximum number of rows for displaying the parameters
 
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -17,7 +16,7 @@ $lang_tables=array('chemlab_groups.php','chemlab_params.php');
 define('LANG_FILE','lab.php');
 $local_user='ck_lab_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-
+//$db->debug=true;
 if(!$encounter_nr) {header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 
 
 if(!isset($user_origin)||empty($user_origin)) $user_origin='lab';
@@ -84,12 +83,14 @@ if($mode=='save'){
 		
 		$dbuf['history']="Create ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
 		$dbuf['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
-		$dbuf['create_time']='NULL';
+		$dbuf['create_time']=date('YmdHis');
 		# Insert new job record
 		$lab_obj->setDataArray($dbuf);
 		if($lab_obj->insertDataFromInternalArray()){
-			//echo $sql." new insert <br>";				
-			$batch_nr=$db->Insert_ID();
+			//echo $sql." new insert <br>";
+
+			$pk_nr=$db->Insert_ID();
+            $batch_nr=$lab_obj->LastInsertPK('batch_nr',$pk_nr);
 			$saved=true;
 		}else{echo "<p>".$lab_obj->getLastQuery()."$LDDbNoSave";}
 		

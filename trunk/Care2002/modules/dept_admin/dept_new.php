@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -29,6 +29,8 @@ if(!isset($mode)) $mode='';
 $dept_obj=new Department;
 #create com object
 $comm=new Comm;
+
+//$db->debug=1;
 
 # Validate 3 most important inputs
 if(isset($mode)&&!empty($mode)&&$mode!='select'){
@@ -62,7 +64,11 @@ if(!empty($mode)&&!$inputerror){
 			$HTTP_POST_VARS['modify_time']=date('YmdHis');
 			$dept_obj->setDataArray($HTTP_POST_VARS);
 			if($dept_obj->insertDataFromInternalArray()){
-				$dept_nr=$db->Insert_ID();
+				
+				# Get the inserted primary key as department nr.
+				$oid=$db->Insert_ID();
+				$dept_nr=$dept_obj->LastInsertPK('nr',$oid);
+
 				# If telephone/beeper info available, save into the phone table
 				if($HTTP_POST_VARS['inphone1']
 					||$HTTP_POST_VARS['inphone2']
@@ -90,7 +96,7 @@ if(!empty($mode)&&!$inputerror){
 		}	
 		case 'update':
 		{ 
-			$HTTP_POST_VARS['history']=" CONCAT(history,'Update: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n"."')";
+			$HTTP_POST_VARS['history']=$dept_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
 			$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
 			$HTTP_POST_VARS['modify_time']=date('YmdHis');
 			$dept_obj->setTable('care_department');
@@ -135,7 +141,7 @@ if(!empty($mode)&&!$inputerror){
 		}
 		case 'select':
 		{
-			# Get department's information
+			# Get department´s information
 			$dept=$dept_obj->getDeptAllInfo($dept_nr);
 			//while(list($x,$v)=each($dept)) $$x=$v;
 			extract($dept);

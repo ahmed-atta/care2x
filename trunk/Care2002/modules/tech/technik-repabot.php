@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'/include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -16,9 +16,6 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 $dbtable='care_tech_repair_job';
 
-/* Establish db connection */
-if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
-if($dblink_ok) {
     /* Load the date formatter */
     include_once($root_path.'include/inc_date_format_functions.php');
     	
@@ -29,13 +26,13 @@ if($dblink_ok) {
     if($ergebnis=$db->Execute($sql)) {
         $rows=$ergebnis->RecordCount();
     }else {echo "<p>$sq $LDDbNoRead<br>"; };
-} else { echo "$LDDbNoLink<br>"; } 
+
 ?>
 
 <?php html_rtl($lang); ?>
 <head>
 <?php echo setCharSet(); ?>
-<meta http-equiv="refresh" content="30, url: technik-repabot.php">
+<meta http-equiv="refresh" content="15, url: technik-repabot.php?<?php echo "sid=$sid&lang=$lang" ?>">
 <title><?php echo $LDRepabotActivate ?></title>
 <script language=javascript>
 function goactive()
