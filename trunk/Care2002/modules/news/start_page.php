@@ -35,7 +35,7 @@ if(!isset($news_headline_max_display)||!$news_headline_max_display) $news_num_st
     else $news_num_stop=$news_headline_max_display;  // The maximum number of news article to be displayed
 	
 //include($root_path.'include/inc_news_get.php'); // now get the current news
-
+$thisfile=basename(__FILE__);
 require_once($root_path.'include/care_api_classes/class_news.php');
 $newsobj=new News;
 $news=&$newsobj->getHeadlinesPreview($dept_nr,$news_num_stop);
@@ -44,13 +44,14 @@ $news=&$newsobj->getHeadlinesPreview($dept_nr,$news_num_stop);
 if(!session_is_registered('sess_file_editor')) session_register('sess_file_editor');
 if(!session_is_registered('sess_file_reader')) session_register('sess_file_reader');
 
-$HTTP_SESSION_VARS['sess_file_break']=basename(__FILE__);
-$HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
+$HTTP_SESSION_VARS['sess_file_break']=$thisfile;
+$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
 $HTTP_SESSION_VARS['sess_file_editor']='headline-edit-select-art.php';
 $HTTP_SESSION_VARS['sess_file_reader']='headline-read.php';
 $HTTP_SESSION_VARS['sess_dept_nr']='1'; // 1= press relations dept
 $HTTP_SESSION_VARS['sess_title']=$LDEditTitle.'::'.$LDSubmitNews;
 $HTTP_SESSION_VARS['sess_user_origin']='main_start';
+$HTTP_SESSION_VARS['sess_path_referer']=$top_dir.$thisfile;
 
 $readerpath='headline-read.php'.URL_APPEND;
 
