@@ -32,7 +32,7 @@ if($mode=='such'||$mode=='paginate')
 	$tb_location='care_encounter_location';
 	$tb_ward='care_ward';
 
-	# Initialize page's control variables
+	# Initialize page´s control variables
 	if($mode=='paginate'){
 		$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
 	}else{
@@ -101,7 +101,9 @@ if($mode=='such'||$mode=='paginate')
 		//else $cond.=" AND p.pid=e.pid GROUP BY $gbuf";
 //	if($usenum) $cond.=' GROUP BY r.location_nr';
 //		else $cond.=' AND p.pid=e.pid GROUP BY r.location_nr';
-	$db->debug=1;
+	
+	//$db->debug=1;
+
 	if(!isset($db)||!$db)include($root_path.'include/inc_db_makelink.php');
 	if($dblink_ok){			
 		$sqlselect="SELECT r.location_nr AS room_nr, p.name_last, p.name_first,p.date_birth,
