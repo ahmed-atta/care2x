@@ -86,6 +86,13 @@ class GuiSearchPerson {
 	var $cancelfile = 'main/startframe.php';
 	var $targetfile = '';
 	var $searchfile = '';
+	
+	# smarty template
+	var $smarty;
+
+	# Flag for output or returning form data
+	var $bReturnOnly = FALSE;
+
 	/**
 	* Constructor
 	*/
@@ -143,7 +150,7 @@ class GuiSearchPerson {
 	function display($skey=''){
 		global 	$db, $searchkey, $root_path,  $firstname_too, $HTTP_POST_VARS, $HTTP_GET_VARS,
 				$sid, $lang, $mode,$totalcount, $pgx, $odir, $oitem, $HTTP_SESSION_VARS,
-				$dbf_nodate,  $user_origin, $parent_admit, $status, $target;
+				$dbf_nodate,  $user_origin, $parent_admit, $status, $target, $origin;
 
 		$this->thisfile = $filename;
 		$this->searchkey = $skey;
@@ -284,43 +291,97 @@ class GuiSearchPerson {
 		$searchmask_bgcolor= $this->searchmask_bgcolor;
 
 
-		# Here starts the html output
+		##############  Here starts the html output
+		
+		# Start Smarty templating here
+		# Create smarty object without initiliazing the GUI (2nd param = FALSE)
+
+		include_once($root_path.'gui/smarty_template/smarty_care.class.php');
+		$this->smarty = new smarty_care('common',FALSE);
+
 		# Output any existing text before the search block
-		if(!empty($this->pretext)) echo $this->pretext;
+		if(!empty($this->pretext)) $this->smarty->assign('sPretext',$this->pretext);
 
 		# Show tips and tricks link and the javascript
 		if($this->showtips){
-			include_once($root_path.'include/inc_js_gethelp.php');
-			echo '<font size="2" face="arial,verdana,">';
-			echo '<a href="javascript:gethelp(\'person_search_tips.php\')">'.$LDTipsTricks.'</a>';
-			echo '</font>';
+			ob_start();
+				include_once($root_path.'include/inc_js_gethelp.php');
+				$sTemp = ob_get_contents();
+				$this->smarty->assign('sJSGetHelp',$sTemp);
+			ob_end_clean();
+
+			$this->smarty->assign('LDTipsTricks','<a href="javascript:gethelp(\'person_search_tips.php\')">'.$LDTipsTricks.'</a>');
 		}
-		echo '
-			<table border=0 cellpadding=10 bgcolor="'.$entry_border_bgcolor.'">
-			  <tr>
-			    <td>';
+
+		#
+		# Prepare the javascript validator
+		#
+		if(!isset($searchform_count) || !$searchform_count){
+			$this->smarty->assign('sJSFormCheck','<script language="javascript">
+			<!--
+				function chkSearch(d){
+					if((d.searchkey.value=="") || (d.searchkey.value==" ")){
+						d.searchkey.focus();
+						return false;
+					}else	{
+						return true;
+					}
+				}
+			// -->
+			</script>');
+		}
+
+		#
+		# Prepare the search file
+		#
+		if(empty($this->searchfile)) $search_script = $this->thisfile;
+			else $search_script = $this->searchfile;
+
+		#
+		# Prepare the form params
+		#
+		$sTemp = 'method="post" name="searchform';
+		if($searchform_count) $sTemp = $sTemp."_".$searchform_count;
+		$sTemp = $sTemp.'" onSubmit="return chkSearch(this)"';
+		 if(isset($search_script) && $search_script!='') $sTemp = $sTemp.' action="'.$search_script.'"';
+		$this->smarty->assign('sFormParams',$sTemp);
+
 		if(empty($this->prompt)) $searchprompt=$LDEntryPrompt;
 			else $searchprompt=$this->prompt;
 		//$searchprompt=$LDEnterEmployeeSearchKey;
-		
-		if(empty($this->searchfile)) $search_script = $this->thisfile;
-			else $search_script = $this->searchfile;
-		
-		# Displays the search input block
-		
-		include($root_path.'include/inc_patient_searchmask.php');
-?>
-			</td>
-			</tr>
-			</table>
+		$this->smarty->assign('searchprompt',$searchprompt);
 
-			<p>
-			<a href="<?php	echo $this->cancelfile.URL_APPEND; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a>
-			<p>
-<?php
+		#
+		# Prepare the checkbox input
+		#
+		if(defined('SHOW_FIRSTNAME_CONTROLLER')&&SHOW_FIRSTNAME_CONTROLLER){
+			if(isset($firstname_too)&&$firstname_too) $sTemp= 'checked';
+			$this->smarty->assign('sCheckBoxFirstName','<input type="checkbox" name="firstname_too" '.$sTemp.'>');
+			$this->smarty->assign('LDIncludeFirstName',$LDIncludeFirstName);
+		}
 
-		# Create append data
-		$this->targetappend.="&firstname_too=$firstname_too";
+		#
+		# Prepare the hidden inputs
+		#
+		$this->smarty->assign('sHiddenInputs','<input type="image" '.createLDImgSrc($root_path,'searchlamp.gif','0','absmiddle').'>
+				<input type="hidden" name="sid" value="'.$sid.'">
+				<input type="hidden" name="lang" value="'.$lang.'">
+				<input type="hidden" name="noresize" value="'.$noresize.'">
+				<input type="hidden" name="target" value="'.$target.'">
+				<input type="hidden" name="user_origin" value="'.$user_origin.'">
+				<input type="hidden" name="origin" value="'.$origin.'">
+				<input type="hidden" name="retpath" value="'.$retpath.'">
+				<input type="hidden" name="aux1" value="'.$aux1.'">
+				<input type="hidden" name="ipath" value="'.$ipath.'">
+				<input type="hidden" name="mode" value="search">');
+
+		$this->smarty->assign('sCancelButton','<a href="'.$this->cancelfile.URL_APPEND.'"><img '.createLDImgSrc($root_path,'cancel.gif','0').'></a>');
+
+		//include($root_path.'include/inc_patient_searchmask.php');
+		#
+		# Create append data for previous and next page links
+		#
+		$this->targetappend.="&firstname_too=$firstname_too&origin=$origin";
 
 		//echo $mode;
 		if($parent_admit) $bgimg='tableHeaderbg3.gif';
@@ -328,128 +389,110 @@ class GuiSearchPerson {
 		$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
 
 		if($mode=='search'||$mode=='paginate'){
-			echo '<font size="2" face="arial,verdana,">';
-			if ($linecount) echo '<hr width=80% align=left>'.str_replace("~nr~",$totalcount,$LDSearchFound).' '.$LDShowing.' '.$pagen->BlockStartNr().' '.$LDTo.' '.$pagen->BlockEndNr().'.';
-				else echo str_replace('~nr~','0',$LDSearchFound);
-			echo '</font>';
+			if ($linecount) $this->smarty->assign('LDSearchFound',str_replace("~nr~",$totalcount,$LDSearchFound).' '.$LDShowing.' '.$pagen->BlockStartNr().' '.$LDTo.' '.$pagen->BlockEndNr().'.');
+				else $this->smarty->assign('LDSearchFound',str_replace('~nr~','0',$LDSearchFound));
 		}
 
 		if ($linecount){
+			
+			$this->smarty->assign('bShowResult',TRUE);
 
 			$img_male=createComIcon($root_path,'spm.gif','0');
 			$img_female=createComIcon($root_path,'spf.gif','0');
 
-			echo '
-			<p>
-			<table border=0 cellpadding=2 cellspacing=1>
-			  <tr class="reg_list_titlebar">';
-?>
-			    <td><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
-<?php
-			echo $pagen->makeSortLink($LDRegistryNr,'pid',$oitem,$odir,$this->targetappend);
-?>
-			    </b>
-			    </td>
-			    <td><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
-<?php
-			echo $pagen->makeSortLink($LDSex,'sex',$oitem,$odir,$this->targetappend);
- ?>
- 			    </b>
-			    </td>
-			    <td><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
-<?php
-			echo $pagen->makeSortLink($LDLastName,'name_last',$oitem,$odir,$this->targetappend);
-?>
-			    </b>
-			    </td>
-			   <td><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
-<?php
-			echo $pagen->makeSortLink($LDFirstName,'name_first',$oitem,$odir,$this->targetappend);
-?>
-			    </b>
-			    </td>
-			    <td><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
-<?php
-			echo $pagen->makeSortLink($LDBday,'date_birth',$oitem,$odir,$this->targetappend);
-?>
-			    </b>
-			    </td>
-			    <td><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
-<?php
-			echo $pagen->makeSortLink($LDZipCode,'addr_zip',$oitem,$odir,$this->targetappend);
-?>
-			    </b>
-			    </td>
-<?php
+			$this->smarty->assign('LDRegistryNr',$pagen->makeSortLink($LDRegistryNr,'pid',$oitem,$odir,$this->targetappend));
+			$this->smarty->assign('LDSex',$pagen->makeSortLink($LDSex,'sex',$oitem,$odir,$this->targetappend));
+			$this->smarty->assign('LDLastName',$pagen->makeSortLink($LDLastName,'name_last',$oitem,$odir,$this->targetappend));
+			$this->smarty->assign('LDFirstName',$pagen->makeSortLink($LDFirstName,'name_first',$oitem,$odir,$this->targetappend));
+			$this->smarty->assign('LDBday',$pagen->makeSortLink($LDBday,'date_birth',$oitem,$odir,$this->targetappend));
+			$this->smarty->assign('LDZipCode',$pagen->makeSortLink($LDZipCode,'addr_zip',$oitem,$odir,$this->targetappend));
 			if(!empty($this->targetfile)){
-?>
-			    <td><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>&nbsp;&nbsp;<?php echo $LDOptions; ?></b>
-			    </td>
-			  </tr>
-<?php
+				$this->smarty->assign('LDOptions',$LDOptions);
 			}
+
+			#
+			# Generate the resulting list rows using the reg_search_list_row.tpl template
+			#
+			$sTemp = '';
+			$toggle=0;
 			while($zeile=$ergebnis->FetchRow()){
 						
-				if($zeile['status']==''||$zeile['status']=='normal'){
+				if($zeile['status']=='' || $zeile['status']=='normal'){
 
-					echo "<tr ";
-					if($toggle) {
-						echo 'class="wardlistrow2">';
-						$toggle=0;
-					} else {
-						echo 'class="wardlistrow1">';
-						$toggle=1;
-					};
-					
-					echo '<td align="right"><font face=arial size=2>';
-					echo "&nbsp;".$zeile['pid'];
-					echo "&nbsp;</td>";
+					$this->smarty->assign('toggle',$toggle);
+					$toggle = !$toggle;
 
-					echo '<td>';
+					$this->smarty->assign('sRegistryNr',$zeile['pid']);
+
 					switch(strtolower($zeile['sex'])){
-						case 'f': echo '<img '.$img_female.'>'; break;
-						case 'm': echo '<img '.$img_male.'>'; break;
-						default: echo '&nbsp;'; break;
+						case 'f': $this->smarty->assign('sSex','<img '.$img_female.'>'); break;
+						case 'm': $this->smarty->assign('sSex','<img '.$img_male.'>'); break;
+						default: $this->smarty->assign('sSex','&nbsp;'); break;
 					}
-					
-					echo '</td>
-						';	
-					echo "<td><font face=arial size=2>";
-					echo "&nbsp;".ucfirst($zeile['name_last']);
-					echo "</td>";
-					echo "<td><font face=arial size=2>";
-					echo "&nbsp;".ucfirst($zeile['name_first']);
+					$this->smarty->assign('sLastName',ucfirst($zeile['name_last']));
+					$this->smarty->assign('sFirstName',ucfirst($zeile['name_first']));
+					#
 					# If person is dead show a black cross
-					if($zeile['death_date']&&$zeile['death_date']!=$dbf_nodate) echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0','absmiddle').'>';
-					echo "</td>";
-					echo "<td><font face=arial size=2>";
-					echo "&nbsp;".formatDate2Local($zeile['date_birth'],$date_format);
-					echo "</td>";
-					echo "<td><font face=arial size=2>";
-					echo "&nbsp;".$zeile['addr_zip'];
-					echo "</td>";
+					#
+					if($zeile['death_date']&&$zeile['death_date']!=$dbf_nodate) $this->smarty->assign('sCrossIcon','<img '.createComIcon($root_path,'blackcross_sm.gif','0','absmiddle').'>');
+						else $this->smarty->assign('sCrossIcon','');
+					
+					$this->smarty->assign('sBday',formatDate2Local($zeile['date_birth'],$date_format));
+
+					$this->smarty->assign('sZipCode',$zeile['addr_zip']);
+
 					if($withtarget){
-						echo '
-							<td><font face=arial size=2>&nbsp;';
-						echo "
-							<a href=\"$this->targetfile".URL_APPEND."&pid=".$zeile['pid']."&edit=1&status=".$status."&target=".$target."&user_origin=".$user_origin."&noresize=1&mode=\">";
-						echo '
-							<img '.createLDImgSrc($root_path,'ok_small.gif','0').' title="'.$LDShowDetails.'"></a>&nbsp;
-							</td>';
-						}
-					if(!file_exists($root_path.'cache/barcodes/pn_'.$zeile['pid'].'.png')){
-						echo "<img src='".$root_path."classes/barcode/image.php?code=".$zeile['pid']."&style=68&type=I25&width=180&height=50&xres=2&font=5&label=2' border=0 width=0 height=0>";
+
+						$sTarget = "<a href=\"$this->targetfile".URL_APPEND."&pid=".$zeile['pid']."&edit=1&status=".$status."&target=".$target."&user_origin=".$user_origin."&noresize=1&mode=\">";
+						$sTarget=$sTarget.'<img '.createLDImgSrc($root_path,'ok_small.gif','0').' title="'.$LDShowDetails.'"></a>';
+						$this->smarty->assign('sOptions',$sTarget);
 					}
-					echo '</tr>';
+					if(!file_exists($root_path.'cache/barcodes/pn_'.$zeile['pid'].'.png')){
+						$this->smarty->assign('sHiddenBarcode',"<img src='".$root_path."classes/barcode/image.php?code=".$zeile['pid']."&style=68&type=I25&width=180&height=50&xres=2&font=5&label=2' border=0 width=0 height=0>");
+					}
+					#
+					# Generate the row in buffer and append as string
+					#
+					ob_start();
+						$this->smarty->display('registration_admission/reg_search_list_row.tpl');
+						$sTemp = $sTemp.ob_get_contents();
+					ob_end_clean();
 				}
 			}
-			echo '
-					<tr><td colspan='.$navcolspan.'><font face=arial size=2>'.$pagen->makePrevLink($LDPrevious,$this->targetappend).'</td>
-					<td align=right><font face=arial size=2>'.$pagen->makeNextLink($LDNext,$this->targetappend).'</td>
-					</tr>
-					</table>';
-			if(!empty($this->posttext)) echo $this->posttext;
+			#
+			# Assign the rows string to template
+			#
+			$this->smarty->assign('sResultListRows',$sTemp);
+
+			$this->smarty->assign('sPreviousPage',$pagen->makePrevLink($LDPrevious,$this->targetappend));
+			$this->smarty->assign('sNextPage',$pagen->makeNextLink($LDNext,$this->targetappend));
+		}
+		#
+		# Add eventual appending text block
+		#
+		if(!empty($this->posttext)) $this->smarty->assign('sPostText',$this->posttext);
+		
+		#
+		# Displays the search page
+		#
+		if($this->bReturnOnly){
+			ob_start();
+				$this->smarty->display('registration_admission/reg_search_main.tpl');
+				$sTemp=ob_get_contents();
+			ob_end_clean();
+			return $sTemp;
+		}else{
+			# show Template
+			$this->smarty->display('registration_admission/reg_search_main.tpl');
 		}
 	} // end of function display()
+
+	/**
+	* Generates the search page contents but will not output it. Instead it will buffer the output and return it as a string.
+	*/
+	function create($skey=''){
+		$this->bReturnOnly = TRUE;
+		return $this->display($skey);
+	}
 } // end of class
 ?>

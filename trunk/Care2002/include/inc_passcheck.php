@@ -8,7 +8,7 @@ if (eregi('inc_passcheck.php',$PHP_SELF))
 * CARE 2002 Integrated Hospital Information System
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
-* elpidio@care2x.org, elpidio@care2x.net
+* elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
 */

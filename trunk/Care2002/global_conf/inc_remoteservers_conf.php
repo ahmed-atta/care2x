@@ -3,13 +3,13 @@
 # Main domain or ip address
 # for example, default is "localhost"
 #
-$main_domain="192.168.0.10";
+//$main_domain="192.168.0.9";
 
 # 
 # main ip addres of foto server 
 # for example , default is "localhost"
 #
-$fotoserver_ip="192.168.0.10";
+//$fotoserver_ip="192.168.0.9";
 
 #
 # Http protocol, either http or https for ssl layer. Default is http (normal).

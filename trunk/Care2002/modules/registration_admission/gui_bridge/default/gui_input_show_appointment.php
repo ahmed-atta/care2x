@@ -23,7 +23,13 @@ function chkForm(d) {
 }
 //  Script End -->
 </script>
+<?php
+#
+# If date was in the past, show error message
+#
+if($bPastDateError) echo '<font class="warnprompt">'.$LDInvalidDate.' '.$LDNoPastDate.'</font>';
 
+?>
 <form method="post" name="appt_form" onSubmit="return chkForm(this)">
  <table border=0 cellpadding=2 width=100%>
    <tr bgcolor="#f6f6f6">

@@ -1,136 +1,106 @@
 <?php
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (eregi('inc_passcheck_mask.php',$PHP_SELF)) 
+if (eregi('inc_passcheck_mask.php',$PHP_SELF))
 	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
-?>
-<tr>
-<td class="passborder" colspan=3>&nbsp;</td>
-</tr>
 
-<tr>
-<td class="passborder" width=1%></td>
-<td class="passbody">
+$bShowThisPage = FALSE;
 
-<p><br>
-<center>
-
-<?php if (isset($pass)&&($pass=='check')&&($passtag)) 
-{
-
-switch($passtag)
-{
-	case 1:$errbuf="$errbuf $LDWrongEntry"; 
-				$err_msg="<div class=\"warnprompt\">$LDWrongEntry</div><br>$LDPlsTryAgain";
-				//echo '<img '.createLDImgSrc($root_path,'cat-fe.gif','0','left').'>';
-				break;
-	case 2:$errbuf="$errbuf $LDNoAuth"; 
-				$err_msg="<div class=\"warnprompt\">$LDNoAuth</div><br>$LDPlsContactEDP";
-				//echo '<img '.createLDImgSrc($root_path,'cat-noacc.gif','0','left').'>';
-				break;
-	default:$errbuf="$errbuf $LDAuthLocked"; 
-				$err_msg="<div class=\"warnprompt\">$LDAuthLocked</div><br>$LDPlsContactEDP";
-				//echo '<img '.createLDImgSrc($root_path,'cat-sperr.gif','0','left').'>'; 
+#
+# Create a smarty object if it is not yet available, without initializing the gui
+#
+if(!isset($smarty) || !is_object($smarty)){
+	$bShowThisPage = TRUE;
+	require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+	$smarty = new smarty_care('common',FALSE);
 }
 
-logentry($userid,"PW ($keyword)","$REMOTE_ADDR $errbuf",$thisfile,$fileforward);
+#
+# If authentication error, show prompt
+#
+if (isset($pass)&&($pass=='check')&&($passtag)){
 
-?>
+	switch($passtag){
+		case 1:$errbuf="$errbuf $LDWrongEntry";
+					$err_msg="<div class=\"warnprompt\">$LDWrongEntry</div><br>$LDPlsTryAgain";
+					//echo '<img '.createLDImgSrc($root_path,'cat-fe.gif','0','left').'>';
+					break;
+		case 2:$errbuf="$errbuf $LDNoAuth";
+					$err_msg="<div class=\"warnprompt\">$LDNoAuth</div><br>$LDPlsContactEDP";
+					//echo '<img '.createLDImgSrc($root_path,'cat-noacc.gif','0','left').'>';
+					break;
+		default:$errbuf="$errbuf $LDAuthLocked";
+					$err_msg="<div class=\"warnprompt\">$LDAuthLocked</div><br>$LDPlsContactEDP";
+					//echo '<img '.createLDImgSrc($root_path,'cat-sperr.gif','0','left').'>';
+	}
+	#
+	# Log auth attempt
+	#
+	logentry($userid,"PW ($keyword)","$REMOTE_ADDR $errbuf",$thisfile,$fileforward);
+	
+	$smarty->assign('bShowErrorPrompt',TRUE);
 
-<table border=0>
-  <tr>
-    <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0') ?>></td>
-    <td align="center"><?php echo $err_msg ?></td>
-  </tr>
-</table>
-
-<?php
+	$smarty->assign('sMascotImg','<img '.createMascot($root_path,'mascot1_r.gif','0').'>');
+	$smarty->assign('sErrorMsg',$err_msg);
 }
-?>
 
+if(!$passtag) $smarty->assign('sMascotColumn','<td><img '.createMascot($root_path,'mascot3_r.gif','0').'></td>');
 
-<table border=0 cellpadding=0  cellspacing=0>
-<tr>
-<?php if(!$passtag) echo '
-<td><img '.createMascot($root_path,'mascot3_r.gif','0').'></td>
-';
-?>
-<td valign=top>
-<table cellspacing=0 class="passmaskframe">
-<tr>
-<td>
-<table cellpadding=20 cellspacing=0 class="passmask">
-<tr>
-<td>
-<p>
-<FORM action="<?php echo $thisfile; ?>" method="post" name="passwindow" onSubmit="return pruf(this);">
-<div class="prompt">
-<b><?php echo $LDPwNeeded ?>!</b><p>
-</div>
-<nobr><?php echo $LDUserPrompt ?>:</nobr>
-<br>
-<INPUT type="text" name="userid" size="14" maxlength="25"> <p>
+#
+# Prepare the auth entry form elements
+#
+$smarty->assign('sPassFormParams','action="'.$thisfile.'" method="post" name="passwindow" onSubmit="return pruf(this);"');
+$smarty->assign('LDPwNeeded',$LDPwNeeded);
+$smarty->assign('LDUserPrompt',$LDUserPrompt);
+$smarty->assign('LDPwPrompt',$LDPwPrompt);
 
-<nobr><?php echo $LDPwPrompt ?>:<br>
-<INPUT type="password" name="keyword" size="14" maxlength="25"> 
-<input type=hidden name=direction value="<?php print $direction; ?>">
+#
+# Prepare the hidden inputs
+#
+$sHiddenTemp = '<input type=hidden name=direction value="'.$direction.'">
 <input type=hidden name="pass" value="check">
 <input type="hidden" name="nointern" value="1">
-<?php 
-if($not_trans_id) { 
-	echo '<input type="hidden" name="sid" value="'.$sid.'">';
-} ?>
-<input type="hidden" name="lang" value="<?php echo $lang ?>">
-<input type="hidden" name="mode" value="<?php echo $mode; ?>">
-<input type="hidden" name="target" value="<?php echo $target ?>">
-<input type="hidden" name="subtarget" value="<?php echo $subtarget ?>">
-<input type="hidden" name="user_origin" value="<?php echo $user_origin ?>">
-<input type="hidden" name="title" value="<?php echo $title; ?>">
-<input type="hidden" name="fwd_nr" value="<?php echo $fwd_nr; ?>">
-<?php if(!isset($minimal) || !$minimal) { ?>
-<input type="hidden" name="dept" value="<?php echo $dept ?>">
-<input type="hidden" name="dept_nr" value="<?php echo $dept_nr ?>">
-<input type="hidden" name="retpath" value="<?php echo $retpath ?>">
-<input type="hidden" name="edit" value="<?php echo $edit ?>">
-<input type="hidden" name="pmonth" value="<?php echo $pmonth ?>">
-<input type="hidden" name="pyear" value="<?php echo $pyear ?>">
-<input type="hidden" name="pday" value="<?php print $pday; ?>">
-<input type="hidden" name="station" value="<?php echo $station ?>">
-<input type="hidden" name="ward_nr" value="<?php echo $ward_nr ?>">
-<input type="hidden" name="ipath" value="<?php echo $ipath ?>">
-<?php } ?>
-<?php if(isset($c_flag)&&$c_flag) { ?>
-<input type="hidden" name="cmonth" value="<?php echo $cmonth ?>">
-<input type="hidden" name="cyear" value="<?php echo $cyear ?>">
-<input type="hidden" name="cday" value="<?php echo $cday; ?>">
-<?php } ?>
-</nobr><p>
-<INPUT type="image"  <?php echo createLDImgSrc($root_path,'continue.gif','0') ?>>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="<?php print $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>>
-</a>
-</form>
+<input type="hidden" name="lang" value="'.$lang.'">
+<input type="hidden" name="mode" value="'.$mode.'">
+<input type="hidden" name="target" value="'.$target.'">
+<input type="hidden" name="subtarget" value="'.$subtarget.'">
+<input type="hidden" name="user_origin" value="'.$user_origin.'">
+<input type="hidden" name="title" value="'.$title.'">
+<input type="hidden" name="fwd_nr" value="'.$fwd_nr.'">';
 
-</td>
-</tr>
-</table>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-</table>        
+if($not_trans_id) {
+	$sHiddenTemp = $sHiddenTemp.'<input type="hidden" name="sid" value="'.$sid.'">';
+} 
 
-<p><br>
+if(!isset($minimal) || !$minimal) { 
 
-</center>
+	$sHiddenTemp = $sHiddenTemp.'
+	<input type="hidden" name="dept" value="'.$dept.'">
+	<input type="hidden" name="dept_nr" value="'.$dept_nr.'">
+	<input type="hidden" name="retpath" value="'.$retpath.'">
+	<input type="hidden" name="edit" value="'.$edit.'">
+	<input type="hidden" name="pmonth" value="'.$pmonth.'">
+	<input type="hidden" name="pyear" value="'.$pyear.'">
+	<input type="hidden" name="pday" value="'.$pday.'">
+	<input type="hidden" name="station" value="'.$station.'">
+	<input type="hidden" name="ward_nr" value="'.$ward_nr.'">
+	<input type="hidden" name="ipath" value="'.$ipath.'">';
+}
 
-</td>
-<td class="passborder">&nbsp;</td>
-</tr>
+if(isset($c_flag)&&$c_flag) {
+	$sHiddenTemp = $sHiddenTemp.'
+	<input type="hidden" name="cmonth" value="'.$cmonth.'">
+	<input type="hidden" name="cyear" value="'.$cyear.'">
+	<input type="hidden" name="cday" value="'.$cday.'">';
+}
 
-<tr >
-<td class="passborder" colspan=3>&nbsp;</td>
-</tr>
-</table>      
+$smarty->assign('sPassHiddenInputs',$sHiddenTemp);
 
+$smarty->assign('sPassSubmitButton','<INPUT type="image"  '.createLDImgSrc($root_path,'continue.gif','0').'>');
+$smarty->assign('sCancelButton','<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'cancel.gif','0').'></a>');
 
+#
+# Display this page if necessary
+#
+if($bShowThisPage) $smarty->display('main/passcheck_entry_mask.tpl');
+?>

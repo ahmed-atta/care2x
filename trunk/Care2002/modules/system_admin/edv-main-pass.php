@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
 * Copyright 2002,2003,2004,2005 Elpidio Latorilla
-* elpidio@care2x.org, elpidio@care2x.net
+* elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -62,10 +62,8 @@ require($root_path.'include/inc_passcheck_head.php');
  if (!$cfg['dhtml']){ echo ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } 
 ?>>
 
-<p>
-<FONT    SIZE=-1  FACE="Arial">
-
 <P>
+<img src="../../gui/img/common/default/kwheel.gif" border=0 align="middle">
 <FONT  COLOR="<?php echo $cfg[top_txtcolor] ?>"  SIZE=5  FACE="verdana"> <b><?php echo $title ?></b></font>
 <p>
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
@@ -75,11 +73,11 @@ require($root_path.'include/inc_passcheck_head.php');
 <p>
 <!-- <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo "$LDIntro2 $title " ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo "$LDWhat2Do $title " ?>?</a><br>
- --><HR>
+ -->
 <p>
 <?php
 require($root_path.'include/inc_load_copyrite.php');
 ?>
-</FONT>
+
 </BODY>
 </HTML>

@@ -6,12 +6,22 @@ if(!isset($notabs)||!$notabs){
 
 	#
 	# Starting at version 2.0.2, the button is named "new patient"
+	# It can be reverted to "new person" by defining the ADMISSION_EXT_TABS constant to TRUE
+	# at the /include/inc_enviroment_global.php script
 	#
-	//if($target=="entry") $img='register_green.gif'; //echo '<img '.createLDImgSrc($root_path,'register_green.gif','0').' alt="'.$LDAdmit.'">';
-	//							else{ $img='register_gray.gif';}
+	if(defined('ADMISSION_EXT_TABS') && ADMISSION_EXT_TABS){
+		#
+		# User "register new person" button
+		#
+		$sNewPatientButton ='register_green.gif';
+		$sNewPatientButtonGray ='register_gray.gif';
+	}else{
+		$sNewPatientButton ='new_patient_green.gif';
+		$sNewPatientButtonGray ='admit-gray.gif';
+	}
 
-	if($target=="entry") $img='new_patient_green.gif'; //echo '<img '.createLDImgSrc($root_path,'register_green.gif','0').' alt="'.$LDAdmit.'">';
-								else{ $img='admit-gray.gif';}
+	if($target=="entry") $img=$sNewPatientButton; //echo '<img '.createLDImgSrc($root_path,'register_green.gif','0').' alt="'.$LDAdmit.'">';
+								else{ $img=$sNewPatientButtonGray;}
 	$pbBuffer='<a href="patient_register.php'.URL_APPEND.'&target=entry"><img '.createLDImgSrc($root_path,$img,'0').' alt="'.$LDRegisterNewPerson.'"  title="'.$LDRegisterNewPerson.'"';
 	if($cfg['dhtml']) $pbBuffer.='style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';
 	$pbBuffer.=' align=middle></a>';
