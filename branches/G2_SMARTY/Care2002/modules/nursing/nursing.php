@@ -12,16 +12,19 @@
  * See the file "copy_notice.txt" for the licence notice
  */
  
- /**
- * LOAD Smarty
- */
- require_once($root_path.'gui/smarty_template/smarty_care.class.php');
- $smarty = new smarty_care('nursing');
  
  define('LANG_FILE','nursing.php');
  define('NO_2LEVEL_CHK',1);
  require_once($root_path.'include/inc_front_chain_lang.php');
  
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so 
+ # that the smarty script can use the user configured template theme
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('nursing');
+
  // reset all 2nd level lock cookies
  require($root_path.'include/inc_2level_reset.php');
  
@@ -57,7 +60,7 @@
  
 
  /**
- * show available wards 
+ * available wards, create the data
  */
  $sWardInfo = "<table border=0 cellpadding=1 cellspacing=1>";   
  if(is_object($ward_info))
@@ -163,13 +166,15 @@
  $smarty->assign('bot_bgcolor',$cfg['bot_bgcolor']);
  
  /**
- * show Copyrigth
+ * show Copyright
  */
- ob_start();
+/* ob_start();
  require($root_path.'include/inc_load_copyrite.php');
  $sTemp = ob_get_contents();
  ob_end_clean();
- $smarty->assign('sCopyright',$sTemp);
+*/ 
+	
+ $smarty->assign('sCopyright',$smarty->Copyright());
  
  /**
  * show Template
