@@ -5,7 +5,7 @@ $sysadmin='System_Admin';
 
 $allow_area=array(
 
-'admit'=>array('_a_1_admissionwrite'),
+'admit'=>array('_a_1_admissionwrite','_a_1_medocswrite'),
 
 'cafe'=>array('_a_1_newsallwrite', '_a_1_newscafewrite'),
 
