@@ -1,57 +1,57 @@
 <?php
-$LDClose='Close';
-$LDCancel='Cancel';
-$LDResetEntry='Erase entries';
-$LDSave='Save';
-$LDReset='Reset';
+$LDClose='Fermer';
+$LDCancel='Annuler';
+$LDResetEntry='Effacer ces entrées';
+$LDSave='Sauvegarder';
+$LDReset='Réinitialiser';
 
 
-$LDNewSearch='New search';
-$LDSearch='Search';
+$LDNewSearch='Nouvelle recherche';
+$LDSearch='Rechercher';
 
-$LDContinue='Continue';
-$LDBack='Go back';
+$LDContinue='Continuer';
+$LDBack='Retour';
 
-$LDOn='On';
-$LDAt='At';
+$LDOn='Sur';
+$LDAt='A';
 
-$LDNew='New';
-$LDEdit='Edit';
-$LDCreate='Create';
+$LDNew='Nouveau';
+$LDEdit='Editer';
+$LDCreate='Crèer';
 
-$LDPastAll='All';
-$LDSelect='Select';
+$LDPastAll='Tous';
+$LDSelect='Selectionner';
 
-$LDOrderArchive='Archive';
+$LDOrderArchive='Historique';
 
-$LDGoodMorning='Good morning';
-$LDGoodDay='Hello, nice to see you';
-$LDGoodEvening='Good evening';
+$LDGoodMorning='Bonjour';
+$LDGoodDay='Bonjour, ravi de vous voir';
+$LDGoodEvening='Bonsoir';
 
 $LDDate='Date';
-$LDDept='Department';
-$LDPrio='Priority';
+$LDDept='Départment';
+$LDPrio='Priorité';
 
 
-$LDPageTop='Back to top.';
-$LDPreview='Preview';
-$LDUpdateData='Update or edit';
+$LDPageTop='Haut de page.';
+$LDPreview='Prévisualisation';
+$LDUpdateData='Mettre à jour ou éditer';
 
-$LDNoBack='No. Go back.';
+$LDNoBack='Non. Retour.';
 $LDOK='OK';
-$LDName='Name';
-$LDPassword='Password';
-$LDUserId='User login name';
-$LDChange='Change';
-$LDLock='Lock';
-$LDUnlock='Unlock';
-$LDDelete='Delete';
-$LDYesSure='Yes, I\'m sure.';
-$LDKeywordPrompt='Enter a search keyword';
-$LDWelcome='Welcome';
+$LDName='Nom';
+$LDPassword='Mot de passe';
+$LDUserId='Nom d\'utilisateur';
+$LDChange='Modifier';
+$LDLock='Verrouiller';
+$LDUnlock='Déverrouiller';
+$LDDelete='Effacer';
+$LDYesSure='Oui, je suis sur.';
+$LDKeywordPrompt='Entrez un mot clef';
+$LDWelcome='Bienvenu';
 
-$LDErrorLogin='Wrong login or password. Please enter correct data.';
-$LDErrorForm='The form is not completely filled up. Please complete it.';
+$LDErrorLogin='Mot de passe ou Nom d\'utilisateur incorrect. Svp, vérifiez ces données.';
+$LDErrorForm='Le formulaire n\'est pas complètement rempli. Svp, complètez les.';
 $LDErrorPassword='The entered passwords are not the same! <br>Please correct it. The passwords must be the same.';
 $LDErrorIncomplete='The entered data is not complete!  Please enter complete information.';
 
