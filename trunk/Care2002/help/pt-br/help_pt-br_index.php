@@ -15,9 +15,14 @@
 <a href="#" target="HELPINFOFRAME">Dicas e Truques</a><br>
 <a href="#" target="HELPINFOFRAME">Introduções</a></b>
  --><p>
-<a href="http://care2x.net/docswiki/index.php?UM - English" target="HELPINFOFRAME"> Manual Online</a></b>
-
+ <p>
+ <b>
+<font color=#ff0000><b>*</b></font><a href="http://care2x.net/docswiki/index.php?UM - English" target="HELPINFOFRAME">Online Manual</a>
+<p>
+<font color=#ff0000><b>*</b></font><a href="http://care2x.net/docswiki/index.php?Workflow%20Charts" target="HELPINFOFRAME">Workflow charts</a>
+</b>
 </font>
+ (<font size=1>needs Internet connection</font><font color=#ff0000><b>*</b></font>)
 
 </body>
 </html>

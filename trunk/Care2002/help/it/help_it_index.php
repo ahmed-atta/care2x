@@ -9,11 +9,18 @@
 <font face="Arial" color="#cc0000" size=3><b>Aiuto</b></font><p>
 <font face="Verdana, Arial" size=2><b>
 <a href="../main/help-info.php" target="HELPINFOFRAME">Primi passi</a><br>
-<a href="#">Sommario</a><br>
+<!-- <a href="#">Sommario</a><br>
 <a href="#">Indice analitico</a><br>
 <a href="#">Ricerca</a><br>
 <a href="#">Suggerimenti</a><br>
-<a href="#">Presentazioni</a></b></font>
-
+<a href="#">Presentazioni</a></b></font> -->
+<p>
+ <p>
+ <b>
+<font color=#ff0000><b>*</b></font><a href="http://care2x.net/docswiki/index.php?UM - English" target="HELPINFOFRAME">Online Manual</a>
+<p>
+<font color=#ff0000><b>*</b></font><a href="http://care2x.net/docswiki/index.php?Workflow%20Charts" target="HELPINFOFRAME">Workflow charts</a>
+</b>
+ (<font size=1>needs Internet connection</font><font color=#ff0000><b>*</b></font>)
 </body>
 </html>
