@@ -94,6 +94,7 @@ if($not_trans_id) {
 <input type="hidden" name="subtarget" value="<?php echo $subtarget ?>">
 <input type="hidden" name="user_origin" value="<?php echo $user_origin ?>">
 <input type="hidden" name="title" value="<?php echo $title; ?>">
+<input type="hidden" name="fwd_nr" value="<?php echo $fwd_nr; ?>">
 <?php if(!isset($minimal) || !$minimal) { ?>
 <input type="hidden" name="dept" value="<?php echo $dept ?>">
 <input type="hidden" name="dept_nr" value="<?php echo $dept_nr ?>">
