@@ -42,18 +42,18 @@ $LDPast3Days='Les trois derniers jours';
 $LDPast3Months='Les trois mois suivant';
 $LDPastAll='Tous';
 $LDSelect='Selectionner';
-$LDShootDate='Date du "cliché"';
+$LDShootDate='Date du \"cliché\"';
 $LDFullScreen='Afficher en plein écran';
 $LDEditXrayDiag='Editer un rapport de diagnostic';
 $LDReadDiag='Lire les diagnostics';
 $LDWriteDiag='Ecrire les diagnostics';
 $LDPreviewReport='Prévisualisation/Diagnostics';
 /* 2002-09-08 EL*/
-$LDTestRequestRadio='Requête des épreuves';
-$LDTestRequestRadioTxt='Requête pour un épreuve radiologique';
+$LDTestRequestRadio='Demande d\'une épreuve';
+$LDTestRequestRadioTxt='Demande d\'épreuve radiologique';
 /* 2002-09-10 EL */
-$LDTestReception='Requête en suspens';
-$LDTestReceptionTxt='Reçevoir & executer des requêtes d'épreuve, rédiger un
+$LDTestReception='Demande en suspens';
+$LDTestReceptionTxt='Reçevoir & executer des demandes d\'épreuve, rédiger un
 resultat/diagnostic';
 # 2003-08-08 EL
 $LDDicomImages='Images DICOM';
@@ -62,7 +62,7 @@ $LDUploadDate='Mettre à jour la date';
 $LDViewImage='Afficher ici';
 $LDViewInWindow='Afficher dans la fenêtre';
 $LDNrImages='Numéro de la tranche';
-$LDDicomViewer='Visualisateur d'image  DICOM';
+$LDDicomViewer='Visualisateur d\'image  DICOM';
 $LDViewInFrame='Afficher dans cet frame';
 $LDUploadDicom='Mettre à jour DICOM';
 $LDUploadDicomTxt='Mettre à jour le diagnostic en images au format
@@ -83,3 +83,4 @@ $LDRAIMJAVA='RAIMJAVA©';
 $LDNoImageSaved='Aucune image sauvegardée!';
 $LDImageNotes='Image notes';
 ?>
+	

@@ -2,7 +2,7 @@
 /* 2002-10-02 EL */
 $LDDepartments='Ambulatoire';
 $LDPendingRequest='Demande en attente';
-$LDPendingRequestTxt='Réception, Liste, Imprimer, Entrer découvertes & résultats';
+$LDPendingRequestTxt='Recevoir, Afficher, Imprimer, Editer les découvertes & résultats';
 $LDGeneralSurgery='Ambulatoire générale';
 $LDInternalMed='Ambulatoire médecine interne';
 $LDEmergency='Urgence ambulatoire';
@@ -14,9 +14,9 @@ $LDNews='Nouvelles';
 $LDNewsTxt='Nouvelles spécifiques de la clinique, mémo, info, etc.';
 # 2003-08-01 EL
 $LDAppointments='Rendez-vous';
-$LDAppointmentsTxt='Rendez-vous des patients pour ce département';
+$LDAppointmentsTxt='Rendez-vous pour ce département';
 $LDPatientWaitingList='Liste des patients en attente';
-$LDPWListTxt='Patient admis à la clinique aujourd'hui';
+$LDPWListTxt='Patients admis à la clinique aujourd\'hui';
 $LDOutpatientClinic='Externat';
 $LDGeneralAmbulatory='Ambulatoire Générale';
 $LDAmbulatory='Ambulatoire';

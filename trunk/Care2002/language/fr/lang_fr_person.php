@@ -1,5 +1,5 @@
 <?php
-$LDPerson='Person';
+$LDPerson='Personne';
 $LDPatient='Patient';
 $LDBloodGroup='Groupe Sanguin';
 # these are blood groups

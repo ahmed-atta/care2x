@@ -56,7 +56,7 @@ $LDPrio="Priorité";
 $LDSearchIn="Rechercher après";
 
 
-$LDPlsEnterMore="Please enter some more information and try it again.";
+$LDPlsEnterMore="Svp, entrez plus d\'information et essayez de nouveau.";
 $LDNoSingleChar="A single character will be ignored.";
 
 $LDPlsInformDept="Please notify the ~tagword~ department and eventually the EDP department. Thank you.";
@@ -86,19 +86,19 @@ $LDClk2Ack="Click the arrow button to acknowledge and/or print the order list.";
 $LDOK="OK";
 $LDManageAccess="Access rights";
 $LDManageAccessTxt="Manage, create, lock, remove, update, or change, etc.";
-$LDSqlDb="SQL Databank";
-$LDSqlDbTxt="Direct SQL access. <b>ATTENTION</b> only for experts";
-$LDSysOpLogin="SysOp Login";
-$LDSysOpLoginTxt="Login as system operator";
+$LDSqlDb="Base de donnée SQL";
+$LDSqlDbTxt="Direct SQL acess. <b>ATTENTION</b> seulement pur les experts";
+$LDSysOpLogin="SysOp Connexion";
+$LDSysOpLoginTxt='Connexion en tant qu\'administrateur système';
 $LDEDP="EDP";
-$LDNewAccess="Create new access right";
-$LDListActual="List actual access rights";
-$LDName="Name";
-$LDPassword="Password";
-$LDUserId="User login name";
-$LDArea="Area";
-$LDAllowedArea="Allowed areas are:";
-$LDActualAccess="Actual access rights";
+$LDNewAccess="Crèer de nouveaux droits d\'accès";
+$LDListActual="List des droits d\'accès actuel";
+$LDName="Nom";
+$LDPassword="Mot de pase";
+$LDUserId="Nom d\'utilisateur";
+$LDArea="Lieu";
+$LDAllowedArea="Les lieux disponibles sont:";
+$LDActualAccess="Droits d\'accès actuel";
 $LDAccessDeleted="The access right was deleted successfully.";
 $LDFfActualAccess="Following are the actual access rights.";
 

@@ -38,7 +38,7 @@ Les causes possibles de ce problème:
 </FONT><p>
 <font size=2 face="verdana,arial">
 <img <?php echo createComIcon('../../','achtung.gif') ?>>
-Vous avez peut-être utilisé les touches standard "Rétour" ou "Avancer" de votre navigateur. Veuillez évitez de les utiliser.<br>
+Vous avez peut-être utilisé les touches standard "Retour" ou "Suivant" de votre navigateur. Veuillez évitez de les utiliser.<br>
 <img <?php echo createComIcon('../../','achtung.gif') ?>>
 Vous avez peut-être rejeté une cookie. Le programme dépend des cookies pour fonctionner correctement. Veuillez accepter les cookies.
 <br>

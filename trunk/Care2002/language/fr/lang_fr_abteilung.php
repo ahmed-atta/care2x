@@ -1,6 +1,6 @@
 <?php
-$LDPageTitle='D&eacute;partements';
-$LDDeptTxt='D&eacute;partement';
+$LDPageTitle='Départements';
+$LDDeptTxt='Département';
 $LDOpenHrsTxt='Horaires de travail';
 $LDChkHrsTxt='Les horaires d\'examens m&eacute;dicaux';
 $LDClk4Info='Cliquez pour plus d\'informations';

@@ -26,9 +26,9 @@ $LDSpecials='Remarques spéciales';
 $LDPatientSearch='Rechercher des données du patient';
 $LDAdmit='Admission';
 $LDSearch='Chercher';
-$LDArchive='Chercher l\'archive';
+$LDArchive='Chercher dans l\'archive';
 $LDCatPls='Je voudrais bien voir le CAT!';
-$LDGoodMorning='Bon matin!';
+$LDGoodMorning='Bonjour!';
 $LDGoodDay='Bonjour! Ravi de vous voir!';
 $LDGoodAfternoon='Bonjour!';
 $LDGoodEvening='Bonsoir';
@@ -48,7 +48,7 @@ $LDError='Il manque des informations dans un champs marqué en <font color=red>ro
 $LDErrorS='Il manque quelques données dans les champs marqués en <font color=red>rouge</font>!';
 
 $fieldname=array('Patient no.','Nom de famille','Prénom','Date de naissance','Options');
-$LDEntryPrompt='Entrez le mot pour la recherche.Par exemple: nom de famille ou prénom, ou date de naissance, etc.';
+$LDEntryPrompt='Entrez le mot pour la recherche. Par exemple: nom de famille ou prénom, ou date de naissance, etc.';
 $LDSEARCH='Chercher';
 $LDAdmWantEntry='J\'ai besoin d\'admettre un patient';
 $LDAdmWantSearch='Je cherche un patient';
@@ -122,7 +122,7 @@ $LDAdmitType='Type d\'admission';
 $LDCivilStat='État civile';
 $LDInsuranceNr='No d\'assurance';
 $LDNameAddr='Nom & Adresse';
-$LDBillInfo='Info de factration';
+$LDBillInfo='Info de facturation';
 $LDAdmitDiagnosis='Diagnostic d\'admission';
 $LDInfo2='Info à';
 $LDPrintDate='Date d\'impression';
@@ -131,7 +131,7 @@ $LDTherapyType='Type de thérapie';
 $LDTherapyOpt='Options de thérapie';
 $LDServiceType='Type de service';
 
-$LDClick2Print='Cliquez sur l' étiquette code-barre pour l\'imprimer';
+$LDClick2Print='Cliquez sur l\'étiquette code-barre pour l\'imprimer';
 
 $LDEnterDiagnosisNote='Attacher des liens aux remarques concernant le
 diagnostic et les publications:';
@@ -178,13 +178,13 @@ $LDEmail='Email';
 $LDZipCode='Code postal';
 $LDPhoto='Photo';
 /* 2002-12-02 EL*/
-$LDPatientRegisterTxt='Inscrire patient, rechercher les registrations, recherche dans l\'archive';
+$LDPatientRegisterTxt='Inscrire patient, rechercher les inscriptions, rechercher dans l\'archive';
 $LDAdmitNr='No. d\'admission';
 $LDPatient='Patient';
 $LDVisit='Visite';
 $LDVisitTxt='Admission ambulatoire ou consultation externe';
 $LDAdmissionTxt='Admission consultation interne, recherche';
-$LDImmunization='Immunisation';
+$LDImmunization='Vaccination';
 $LDESE='Entrer, chercher, éditer';
 $LDImmunizationTxt=$LDESE.' rapport immunisation';
 $LDDRG='GAD';
@@ -305,7 +305,7 @@ $LDRemindPatient='Rappeler le patient';
 $LDRemindBy='Rappeler par';
 $LDMail='Poste';
 $LDPurpose='Intention';
-$LDClinician='Médecin';
+$LDClinician='Clinicien';
 $LDPhysician='Médecin';
 $LDBackToOptions='Rétour aux options';
 $LDStatus='Situation';
@@ -316,7 +316,7 @@ $LDPriority='Priorité';
 $LDUrgent='Urgent';
 $LDEmergency='Urgence';
 /* 2003-03-09 EL*/
-$LDCancelReason='Raison d\'annulation';
+$LDCancelReason='Raison de l\'annulation';
 $LDSureCancelAppt='Etes-vous sûr de vouloir annuler ce rendez-vous?';
 $LDEnterCancelReason='Entrez une raison d\'annulation';
 $LDpending='en suspens';
@@ -362,7 +362,7 @@ $LDInsShortID[1]='PRIV';  // privately paid insurance
 $LDInsShortID[2]='COM'; // Common state sponsored insurance
 $LDInsShortID[3]='SP';    // self pay, direct pay
 # 2003-08-26 EL
-$LDMeasurements='Mésures';
+$LDMeasurements='Mensurations';
 #2003-08-28 eL
 $LDPlsEnterReferer='Veuillez entrer le médecin traitant';
 $LDPlsEnterRefererDiagnosis='Veuillez entrer les diagnostics de réference';
