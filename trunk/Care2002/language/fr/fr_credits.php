@@ -20,12 +20,12 @@ require_once($root_path.'include/inc_vars_resolve.php');
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/elpidio_latorilla_3.jpg" border=0  align=right vspace=10>
-			<b>The first beta version of CARE 2002 was created by Elpidio Latorilla:</b>
+			<b>La première version b&ecirc;ta de CARE 2002 était écrite par Elpidio Latorilla:</b>
 			<p>
-			Professions: <br>Programmer, Surgery Nurse, Electronics & telecommunications technician
+			Professions: <br>Programmeur, infirmier en urgences, technicien électronique et en communications
 			<p>
-			Areas of interest: <br>C, C++, PHP, Javascript, SQL, TCL/TK, HTML, Perl, ASP, Java
-			<P><a href="mailto:elpidio@latorilla.com"><u>Elpidio Latorilla can be contacted here.</u></a>
+			Champs d'intér&ecirc;t: <br>C, C++, PHP, Javascript, SQL, TCL/TK, HTML, Perl, ASP, Java
+			<P><a href="mailto:elpidio@latorilla.com"><u>Elpidio Latorilla peut &ecirc;tre contacté ici.</u></a>
 </TD></TR></TBODY></TABLE>
 <hr>
 <table cellSpacing=0 cellPadding=0 border=0 width=100%>
@@ -38,27 +38,28 @@ require_once($root_path.'include/inc_vars_resolve.php');
           <td vAlign=top><font face="verdana,arial" size=2>
 			<p><img src="../../fotos/credits/lopo_l_almeida.jpg"  
                                 width=135 height=170 border=0  align=right vspace=10>
-			<b>Lopo Lencastre de Almeida (PT)</b> is one of the most productive developers. 
-			Some of his contributions to the project are:
+			<b>Lopo Lencastre de Almeida (PT)</b> est un des promoteurs les plus productifs.
+			Quelques de ses contributions au projet sont:
                         <p><font size=1>
-			Marketing, Promotion and Public Relations<br>
-			Web and Logo design<br>
-			Implementation &amp; maintenance of several web tools (Bugtracker, Forum, FAQ, etc.)<br>
-			Implementation &amp; maintenance of the new web site (almost done)<br>
-			Forum moderation and administration<br>
-			Code finder/digger<br>
-			Consultations on PHP<br>
-			Advises on security<br>
-			Abstraction Layers Advisor (DB, Template, etc.)<br>
-			Debugging<br>
-			Ideas, discussions, hints, tips, etc.
+			Marketing, publicité et relations publiques<br>
+			Design du web et des logo<br>
+			Implémentation &amp; maintenance de certains outils web (Bugtracker, Forum, FAQ, etc.)<br>
+			Implémentation &amp; maintenance du nouveau site web (quasiment terminé)<br>
+			Modération et administration des forums<br>
+			Fouilles/recherches du code<br>
+			Consultations de PHP<br>
+			Conseils de sécurité<br>
+			Conseiller des couches abstraites (DB, patron, etc.)<br>
+			Déboggage<br>
+			Idées, discussions, indications, tuyaux, etc.
 			</font><p>
-			Lopo L. de Almeida was born in Angola in 1966. He is working in the computer sector - ranging from commercial automation 
-			to industrial automation - as a software developer and interface designer for more than 16 years now . During the last 5 years he 
-			worked mostly  in web development and company management. He is the CEO/CTO of HumanEasy - a 
-			partner of Care2002 project in charge of its <b>Public Relations and Marketing Management</b>.<br>
-			He is also involved in many other GNU/GPL projects; some of them are in use at Care2x's site.<br>
-			<p><a href="http://www.humaneasy.com" target="_blank"><u>Lopo L. de Almeida can be contacted here.</u></a>
+			Lopo L. de Almeida est né à Angola en 1966. Il travaille dans le secteur d'informatique - depuis l'automatisation commerciale
+			jusqu'à l'automatisation industrielle - en tant que développeur de logiciels et modéliste d'interfaces pour plus de seize ans maintennant.
+			Pendant les 5 dernières années il a travaillé dans la plupart dans le développement du web et administration de compagnie.
+			Il est CEO/CTO de HumanEasy - un partenaire du projet Care2002 en charge de ses <b>relations publiques et
+			management du marketing</b>.<br>
+			Il est également engagé dans de nombreux projets GNU/GPL; certains parmi eux sont utilisés sur le site de Care2x.<br>
+			<p><a href="http://www.humaneasy.com" target="_blank"><u>Lopo L. de Almeida peut être contacté ici.</u></a>
 </td></tr></tbody></table>
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
@@ -70,16 +71,16 @@ require_once($root_path.'include/inc_vars_resolve.php');
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/giuseppe_scarpi.jpg"  border=0  width=135 height=170 align=right vspace=10>
-			<b>Giuseppe Scarpi (IT) translated Care 2002 to italian.</b>
+			<b>Giuseppe Scarpi (IT) a traduit Care2002 en italien.</b>
 			<p>
-			Giuseppe Scarpi was born in Rome, Italy, 35 years ago. 
-			<p>He has a degree in Electronic Engineering and has worked for several companies in the biomedical sector, 
-			where he developed an understanding about the relationships between medical and informatics worlds.<br>
-He uses and appreciates both Linux and Windows, "<i>as both are the result of a great human work that must be respected</i>".<p>
-He decided to actively join open source because: <br><i>"Such an ideal world can survive only if perfectly balanced. If you take something,
- you should also give back in proportion."</i>
+			Giuseppe Scarpi est né à Rome, Italie, il y a 35 ans.
+			<p>Il a un diplôme d'ingénieur en électronique et il a travaillé pour plusieures companies dans le secteur biomédical,
+			où il a développé une compréhension de la relation entre le monde de l'informatique et médecine.<br>
+Il utilise et apprécie les deux, Linux et Windows, "<i>en tant que résultat d'un grand travail humain qui doit être respecté</i>".<p>
+Il a décidé de joindre activement la source libre car:<br><i>"Un tel monde idéal peut survivre uniquement s'il est parfaitement équilibré.
+Si vous prenez quelque chose, vous devriez rendre quelque chose en proportion."</i>
 
-			<P><a href="mailto:kalbun@inwind.it"><u>Giuseppe Scarpi can be contacted here.</u></a>
+			<P><a href="mailto:kalbun@inwind.it"><u>Giuseppe Scarpi peut être contacté ici.</u></a>
 </TD></TR></TBODY></TABLE>
 
 <hr>
@@ -92,20 +93,16 @@ He decided to actively join open source because: <br><i>"Such an ideal world can
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/gabriele_cicala.jpg"  border=0  align=right vspace=10>
-			<b>Gabriele Cicala (IT) translated most of the the www.care2x.com website to italian.</b>
+			<b>Gabriele Cicala (IT) a traduit la plupart du site web de www.care2x.com en italien.</b>
 			<p>
-			Gabriele Cicala was born in Rossano, in Calabria southern Italy, in 1970.
-He has obtained a degree in Telecommunications Engineering from the Politecnico
-di Torino. Currently, he is working as a consultant for an informatics company. <p>Since
-he has known Linux and the
-open-source environment, he is very interested in every kind of project
-of this movement. Despite the
-fact that he is neither working in medical nor in health sector, he decided
-to join the Care project because
-he believes in the same things that the Care's creator and contributors
-believe.
+			Gabriele Cicala est né à Rossano, en Calabria, Italie du sud, en 1970.
+Il a obtenu son dipl&ocirc;me en ingénierie de télecommunications à Politecnico di Torino.
+Il travaille en tant que conseiller pour une entreprise informatique. <p>
+Depuis qu'il a connu Linux et l'environnement open-source il est très intéressé à toute sorte de projet de ce mouvement. Malgré le fait
+qu'il ne travaille ni dans le secteur médical ni de santé, il a décidé de joindre le projet Care car il croit les memes principes que le fondateur
+et les contributeurs.
 			
-			<P><a href="mailto:gabcicala@tiscali.it"><u>Gabriele Cicala can be contacted here.</u></a>
+			<P><a href="mailto:gabcicala@tiscali.it"><u>Gabriele Cicala peut être contacté ici.</u></a>
 </TD></TR></TBODY></TABLE>
 
 <hr>
