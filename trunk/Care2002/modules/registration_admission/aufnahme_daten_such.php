@@ -150,7 +150,7 @@ if($mode=='search'){
 	if ($linecount) { 
 
 	/* Load the common icons */
-	$img_options=createComIcon($root_path,'statbel2.gif','0');
+	$img_options=createComIcon($root_path,'pdata.gif','0');
 
 	echo '
 			<table border=0 cellpadding=2 cellspacing=1> <tr bgcolor="#0000aa" background="'.createBgSkin($root_path,'tableHeaderbg.gif').'">';
