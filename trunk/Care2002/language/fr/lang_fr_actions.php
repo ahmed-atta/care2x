@@ -9,8 +9,8 @@ $LDBack='Retour';
 $LDOpen='Ouvrir';
 $LDClose='Fermer';
 
-$LDRegister='Registrer';
-$LDRegistration='Registration';
+$LDRegister='Inscrire';
+$LDRegistration='Inscription';
 $LDAdmission='Admission';
 $LDAdmit='Admettre';
 $LDArchive='Archive';
