@@ -200,4 +200,11 @@ $LDNewPwDiffer="La nuova password e quella di controllo non coincidono: inserirl
 /* 2003-03-22 EL*/
 $LDPersonellMngmnt='Personell Management';
 $LDPersonellMngmntTxt='Tools and functions for managing personell';
+/* 2003-04-25 EL */
+$LDBilling='eCombill';
+$LDBillingTxt='Bill patient, create billable items, generate bill reports, etc.';
+$LDInsuranceCoMngr='Gestione  Compagnie Assicurative';
+$LDInsuranceCoMngrTxt='Enter new, edit insurance company data';
+$LDAddressMngr='Gestione Indirizzi';
+$LDAddressMngrTxt='Enter, list, edit, & update address data';
 ?>

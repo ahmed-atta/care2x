@@ -173,11 +173,12 @@ $LDConfirmUnlock='Si vuole veramente liberare il letto \'+b+\' della stanza \'+r
 $LDConfirmDelete='Si vuole veramente cancellare \'+t+\' \'+n+\' dalla stanza \'+r+b+\'?';
 $LDConfirmLock='Si vuole veramente bloccare questo letto?';
 $LDClk2Occupy='Selezionare per occupare il letto';
-$LDInsurance=array(
+/*$LDInsurance=array(
 								x=>'A proprio carico',
 								privat=>'Privato',
 								kasse=>'Generale'
 								);
+*/
 $LDSave='Salva';
 $LDNurse='Infermiere';
 $LDYesSure='Sì, dimetti il paziente.';
@@ -356,6 +357,15 @@ $LDSaveChanges='Save changes';
 /* 2002-12-07*/
 $LDNoDiagReport='No diagnostic report available.';
 /* 2003-03-23 EL */
-$LDNursesList='Nurses\' List';
+$LDNursesList='Elenco Personal Infermieristico';
 $LDNursesListTxt='List, View, Create, & Edit Nurses\' List';
+/* 2003-04-18 */
+$LDInsurance='Generale';
+$LDPrivate='Privato';
+$LDSelfPay='A propio carico';
+/* 2003-04-21 EL */
+$LDRoom='Room';
+$LDAdm_Nr='Adm.Nr.';
+$LDStatus='Status';
+$LDInWard='In Ward';
 ?>

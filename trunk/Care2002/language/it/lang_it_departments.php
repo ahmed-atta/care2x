@@ -35,4 +35,11 @@ $LDTechnicalMaintenance='Servizi tecnici';
 $LDITDepartment='IT Department';
 $LDGeneralAmbulatory='Day Clinic General';
 $LDBloodBank='Banca del Sangue';
+$LDNursing='Infermiere';
+/* 2003-04-27 EL */
+$LDMedical='Medical';
+$LDSupport='Non-medical';
+$LDNews='News';
+$LDDepartment='Department';
+$LDPressRelations='Press Relations';
 ?>

@@ -33,11 +33,14 @@ $LDMore='more to article';
 $LDEditTitle='Sommario';
 $LDNewsDummy=array(1=>'primo',2=>'secondo',3=>'terzo',4=>'quarto');
 
-$LDNoFrame='Questo sito utilizza i frame: occorre installare un browser che li supporta.
+/*$LDNoFrame='Questo sito utilizza i frame: occorre installare un browser che li supporta.
 						Si raccomanda per esempio Microsoft Internet Explorer versione 5.0 o superiore.
 						Occorre anche attivare il supporto per Javascript (JScript) ed abilitare la
 						ricezione automatica dei cookie';
-						
+*/						
+$LDNoFrame='Questo sito utilizza i frame: occorre installare un browser che li supporta.
+						Occorre anche attivare il supporto per Javascript (JScript) ed abilitare la
+						ricezione automatica dei cookie'; // Removed the MSIE ref. 2003-04-25 Elpidio
 $LDClk2Write='Selezionare qui per modificare';
 
 $LDAlertOldBrowser='La versione del browser è precedente alla 5.0<br>Si raccomanda di utilizzare la versione 5.0 o superiori, perché una versione precedente potrebbe avere effetti imprevisti sull\'applicativo';

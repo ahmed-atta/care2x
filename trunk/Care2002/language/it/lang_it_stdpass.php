@@ -111,8 +111,13 @@ $LDBloodOrder='Richiesta scorte di sangue';
 /* 2002-09-22 EL */
 $LDPendingRequest='Richiesta in coda';
 /* 2002-10-06 EL*/
-$LDLoggedOut='Logged out';
+$LDLoggedOut='Non connesso';
 /* 2003-03-18 EL */
-$LDNursesList='Nurses\' List';
+$LDNursesList='Elenco Personale Infermieristico';
 $LDAppointments='Appointments';
+/* 2003-04-27 */
+$LDInsuranceCoManager='Gestione Compagnie Assicurative';
+$LDAddressMngr='Gestioni Indirizzi';
+/* 2003-04-30 EL*/
+$LDBilling='eComBill';
 ?>
