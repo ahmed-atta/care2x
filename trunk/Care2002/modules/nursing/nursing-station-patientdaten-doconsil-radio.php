@@ -66,7 +66,7 @@ if($dblink_ok)
 		include_once($root_path.'include/care_api_classes/class_encounter.php');
 		$enc_obj=new Encounter;
 	    if( $enc_obj->loadEncounterData($pn)) {
-		
+/*		
 			include_once($root_path.'include/care_api_classes/class_globalconfig.php');
 			$GLOBAL_CONFIG=array();
 			$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
@@ -79,6 +79,7 @@ if($dblink_ok)
 							break;
 				default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
 			}						
+*/			$full_en=$pn;
 			$result=&$enc_obj->encounter;
 		}
 	   else 

@@ -67,7 +67,7 @@ if($dblink_ok){
 		$enc_obj=new Encounter;
 	    if( $enc_obj->loadEncounterData($pn)) {
 		
-			include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+/*			include_once($root_path.'include/care_api_classes/class_globalconfig.php');
 			$GLOBAL_CONFIG=array();
 			$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 			$glob_obj->getConfig('patient_%');	
@@ -79,7 +79,7 @@ if($dblink_ok){
 							break;
 				default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
 			}						
-
+*/			$full_en=$pn;
 			$result=&$enc_obj->encounter;
 		}
 	   else 
@@ -260,7 +260,7 @@ function sendLater()
 
 function printOut()
 {
-	urlholder="labor_test_request_printpop.php?sid=<?php echo $sid ?>&lang=<?php echo $lang ?>&user_origin=<?php echo $user_origin ?>&target=<?php echo $target ?>&subtarget=<?php echo $stored_request['testing_dept'] ?>&batch_nr=<?php echo $batch_nr ?>&pn=<?php echo $stored_request['patnum'] ?>";
+	urlholder="labor_test_request_printpop.php?sid=<?php echo $sid ?>&lang=<?php echo $lang ?>&user_origin=<?php echo $user_origin ?>&target=<?php echo $target ?>&subtarget=<?php echo $stored_request['testing_dept'] ?>&batch_nr=<?php echo $batch_nr ?>&pn=<?php echo $pn; ?>";
 	testprintout<?php echo $sid ?>=window.open(urlholder,"testprintout<?php echo $sid ?>","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
     testprintout<?php echo $sid ?>.print();
 }

@@ -136,7 +136,7 @@ if(isset($pn)&&$pn) {
 	
 	if($enc_obj->loadEncounterData($pn)){
 		$edit=true;
-		include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+/*		include_once($root_path.'include/care_api_classes/class_globalconfig.php');
 		$GLOBAL_CONFIG=array();
 		$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 		$glob_obj->getConfig('patient_%');	
@@ -147,7 +147,8 @@ if(isset($pn)&&$pn) {
 			case '2': $full_en = ($pn + $GLOBAL_CONFIG['patient_outpatient_nr_adder']);
 							break;
 			default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-		}						
+		}	
+*/		$full_en=$pn;					
 		$HTTP_SESSION_VARS['sess_en']=$pn;	
 		$HTTP_SESSION_VARS['sess_full_en']=$full_en;	
 		
@@ -379,7 +380,7 @@ function printOut()
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
 //-->
 </script>
-<script language="javascript" src="../js/setdatetime.js">
+<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js">
 </script>
 
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js">
