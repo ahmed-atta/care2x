@@ -2,15 +2,23 @@
 /* 2002-10-02 EL */
 $LDDepartments='Ambulatoire';
 $LDPendingRequest='Demande en attente';
-$LDPendingRequestTxt='R&eacute;ception, Liste, Imprimer, Entrer d&eacute;couvertes & r&eacute;sultats';
-$LDGeneralSurgery='Ambulatoire g&eacute;n&eacute;ral';
-$LDInternalMed='Ambulatoire m&eacute;decine interne';
+$LDPendingRequestTxt='Réception, Liste, Imprimer, Entrer découvertes & résultats';
+$LDGeneralSurgery='Ambulatoire général';
+$LDInternalMed='Ambulatoire médecine interne';
 $LDEmergency='Urgence ambulatoire';
 $LDSonography='Sonographie';
-$LDNuclearMed='Diagnostiques Nucl&eacute;aires';
+$LDNuclearMed='Diagnostiques Nucléaires';
 $LDAdmission='Admission';
 $LDAdmissionTxt='Admission/renvoi de l\'ambulatoire, recherche, archive';
 $LDNews='Nouvelles';
-$LDNewsTxt='Nouvelles sp&eacute;cifiques pour la clinique, m&eacute;mo, info, etc.';
+$LDNewsTxt='Nouvelles spécifiques pour la clinique, mémo, info, etc.';
+# 2003-08-01 EL
+$LDAppointments='Appointments';
+$LDAppointmentsTxt='Patient appointments with this department';
+$LDPatientWaitingList='Patient waiting list';
+$LDPWListTxt='Today\'s admitted patients in the clinic';
+$LDOutpatientClinic='Outpatient clinic';
+$LDGeneralAmbulatory='General Ambulatory';
+$LDAmbulatory='Ambulatory';
 
 ?>
