@@ -18,10 +18,7 @@
 //
 // $Id$
 
-require_once 'Net_HL7_Response.php';
-
-
-//use IO::Socket;
+require_once 'Net/HL7/Response.php';
 
 
 /**
@@ -63,10 +60,10 @@ require_once 'Net_HL7_Response.php';
  */
 class Net_HL7_Connection {
 
-
-  var $MESSAGE_PREFIX = "\013";
-  var $MESSAGE_SUFFIX = "\034\015";
-  var $MAX_READ = 2048;
+  var $_HANDLE;
+  var $_MESSAGE_PREFIX;
+  var $_MESSAGE_SUFFIX;
+  var $_MAX_READ;
 
   /**
    * Creates a connection to a HL7 server, or returns undef when a
@@ -74,55 +71,54 @@ class Net_HL7_Connection {
    */
   function Net_HL7_Connection($host, $port) {
     
-    $self->_HANDLE = $self->_connect($host, $port);
+    $this->_HANDLE = $this->_connect($host, $port);
+    $this->_MESSAGE_PREFIX = "\013";
+    $this->_MESSAGE_SUFFIX = "\034\015";
+    $this->_MAX_READ       = 8192;
   }
 
 
   function _connect($host, $port) {
     
-    set_time_limit(10);
+    $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+    if ($socket < 0) {
+      echo "socket_create() failed: reason: " . socket_strerror($socket) . "\n";
+    }
 
-    /* Turn on implicit output flushing so we see what we're getting
-     * as it comes in. */
-    ob_implicit_flush();
-    
-    if (($sock = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)) < 0) {
-      echo "socket_create() failed: reason: " . socket_strerror($sock) . "\n";
+    $result = socket_connect($socket, $host, $port);
+
+    if ($result < 0) {
+      echo "socket_connect() failed.\nReason: ($result) " . socket_strerror($result) . "\n";
     }
-    
-    if (($ret = socket_bind($sock, $host, $port)) < 0) {
-      echo "socket_bind() failed: reason: " . socket_strerror($ret) . "\n";
-    }
-    
-    if (($ret = socket_listen($sock, 5)) < 0) {
-      echo "socket_listen() failed: reason: " . socket_strerror($ret) . "\n";
-    }
-    
-    return $sock;
+
+    return $socket;
   }
 
 
-
   /**
-   * Sends a L<Net::HL7::Request|Net::HL7::Request> object over this
-   * connection.
+   * Sends a Net_HL7_Request object over this connection.
    */
   function send($req) {
 
-    $buff;
-    $handle = $self->_HANDLE;
+    $handle = $this->_HANDLE;
     $hl7Msg = $req->toString();
     
-    socket_write($handle, $MESSAGE_PREFIX . $hl7Msg . $MESSAGE_SUFFIX);
-    
-    // Read response in slurp mode
-    $buff = socket_read($handle, $MAXLINE);
+    socket_write($handle, $this->_MESSAGE_PREFIX . $hl7Msg . $this->_MESSAGE_SUFFIX);
+
+    $data = "";
+
+    while(($buf = socket_read($handle, 256, PHP_BINARY_READ)) !== false) {
+      $data .= $buf;
+
+      if(preg_match("/" . $this->_MESSAGE_SUFFIX . "$/", $buf))
+	break;
+    }
 
     # Remove message prefix and suffix
-    preg_replace("/^$MESSAGE_PREFIX/", "", $buff);
-    preg_replace("/$MESSAGE_SUFFIX$/", "", $biff);
+    $data = preg_replace("/^" . $this->_MESSAGE_PREFIX . "/", "", $data);
+    $data = preg_replace("/" . $this->_MESSAGE_SUFFIX . "$/", "", $data);
 
-    return new Net_HL7_Response($buff);
+    return new Net_HL7_Response($data);
   }
 
 
@@ -131,7 +127,7 @@ class Net_HL7_Connection {
    */
   function close() {
 
-    $self->_HANDLE->close();
+    socket_close($this->_HANDLE);
   }
 }
 ?>
