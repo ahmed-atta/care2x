@@ -12,13 +12,13 @@ $LDAdmitBy='Admis par';
 $LDSex='Sexe';
 $LDMale='masculin';
 $LDFemale='féminin';
-$LDAddress='Addresse';
+$LDAddress='Adresse';
 $LDAmbulant='Patient ambulatoire';
 $LDStationary='Patient hospitalisé';
 $LDSelfPay='Patient payant seul';
 $LDPrivate='Privé';
 $LDInsurance='Assurance';
-$LDDiagnosis='Diagnose';
+$LDDiagnosis='Diagnostic';
 $LDRecBy='Recommendé par';
 $LDTherapy='Thérapie proposée';
 $LDSpecials='Remarques spéciales';
@@ -37,8 +37,8 @@ $LDNewForm='j\'ai besoin d\'un formulaire vide, s\'il vous plaît.';
 
 $LDForceSave='Enregistrer quand même';
 $LDSaveData='Enregistrer les données';
-$LDResetData='Reseter les données';
-$LDReset='Reset';
+$LDResetData='Réinitialiser les données';
+$LDReset='Réinitialiser';
 $LDSave='Enregistrer';
 $LDCancel='Annuler';
 
@@ -49,13 +49,13 @@ $LDErrorS='Il manque quelques données dans les champs marqués en <font color=red
 
 $fieldname=array('Patient no.','Nom de famille','Prénom','Date de naissance','Options');
 $LDEntryPrompt='Entrez le mot pour la recherche.Par exemple: nom de famille ou prénom, ou date de naissance, etc.';
-$LDSEARCH='CHERCHER';
+$LDSEARCH='Chercher';
 $LDAdmWantEntry='J\'ai besoin d\'admettre un patient';
 $LDAdmWantSearch='Je cherche un patient';
 $LDAdmWantArchive='J\'ai besoin de chercher dans l\'archive';
 
 /**************** note the ' ~nr~ ' must not be erased it will be replaced by the script with the number of search results ******/
-$LDSearchFound='La recherche a trouvée <font color=red><b>~nr~</b></font> de données pertinentes sur le patient.';
+$LDSearchFound='La recherche a trouvée <font color=red><b>~nr~</b></font> données pertinentes sur le patient.';
 
 $LDShowData='Afficher les données';
 $LDPatientData='Données du patient';
@@ -70,9 +70,10 @@ $LDNewArchive='Nouvelle recherche dans l\'archive';
 $LDAdmArchive='Admission - Archive';
 
 /************** note: do not erase the ' ~nr~ ' it will be replaced by the script with a number **************/
-$LDFoundData='J\'ai trouvé ~nr~ de données pertinentes!<br>Veuillez cliquer sur le correct.';
+$LDFoundData='J\'ai trouvé ~nr~ données pertinentes!<br>Veuillez
+ en selectionner une.';
 
-$LDClk2Show='Cliquer pour afficher les données';
+$LDClk2Show='Cliquez pour afficher les données';
 
 $LDElements=array(
 								'',
@@ -82,11 +83,11 @@ $LDElements=array(
 								'Patient no.',
 								'Date d\'admission'
 								);
-$LDSearchKeyword='Chercher un mot clé ou condition';
+$LDSearchKeyword='Chercher un mot clé ou une condition';
 $LDMEDOCS='Système de documentation médicale (Medocs)';
 $LDMedocsSearchTitle='Medocs - Recherche de documents';
 $LDHideCat='Cliquez pour cacher le CAT';
-$LDNewDocu='Documenter le patient suivant';
+$LDNewDocu='Renseigner le patient suivant';
 $LDExtraInfo='Extra informations';
 $LDMedAdvice='Avis médical';
 $LDMedocs='Medocs';
@@ -95,7 +96,7 @@ $LDYes='Oui';
 $LDNo='Non';
 
 $LDEditOn='Documenté le';
-$LDEditBy='Documente par';
+$LDEditBy='Documenté par';
 $LDKeyNr='Numéro de clé';
 $LDDocSearch='Chercher un document medocs';
 
@@ -111,8 +112,8 @@ $LDMedocsElements=array(
 								'Date',
 								'Heure'
 								);
-$LDStartNewDoc='Lancer un nouveau document medocs';
-$LDNoMedocsFound='Pas de document medocs du patient trouvé!';
+$LDStartNewDoc='Crèer un nouveau document medocs';
+$LDNoMedocsFound='Pas de document medocs pour le patient selectionné!';
 $LDAt='à';
 
 $LDDept='dép.';
@@ -122,7 +123,7 @@ $LDCivilStat='État civile';
 $LDInsuranceNr='No d\'assurance';
 $LDNameAddr='Nom & Adresse';
 $LDBillInfo='Info de factration';
-$LDAdmitDiagnosis='Diagnostique d\'admission';
+$LDAdmitDiagnosis='Diagnostic d\'admission';
 $LDInfo2='Info à';
 $LDPrintDate='Date d\'impression';
 $LDReligion='Réligion';
@@ -130,16 +131,18 @@ $LDTherapyType='Type de thérapie';
 $LDTherapyOpt='Options de thérapie';
 $LDServiceType='Type de service';
 
-$LDClick2Print='Cliquez le étiquettes en code-barre pour imprimer';
+$LDClick2Print='Cliquez sur l' étiquette code-barre pour l\'imprimer';
 
-$LDEnterDiagnosisNote='Attacher des liens aux remarques en rapport au diagnostique et publications:';
-$LDEnterTherapyNote='Attacher des liens aux remarques en rapport à la thérapie et publications:';
-$LDSeeDiagnosisNote='Remarques en rapport au diagnostique et publications:';
-$LDSeeTherapyNote='Remarques en rapport à la thérapie et publications:';
-$LDMakeBarcodeLabels='Créer des étiquettes en code-barre';
+$LDEnterDiagnosisNote='Attacher des liens aux remarques concernant le
+diagnostic et les publications:';
+$LDEnterTherapyNote='Attacher des liens aux remarques concernant la thérapie et
+les publications:';
+$LDSeeDiagnosisNote='Remarques concernant le diagnostic et les publications:';
+$LDSeeTherapyNote='Remarques concernant la thérapie et les publications:';
+$LDMakeBarcodeLabels='Créer des étiquettes code-barre';
 
 $LDPlsEnterDept='<b>Veuillez entrer votre département, clinique ou le secteur de travail.</b><br>(par exple. PLOP, Med2 interne, ou M4A, etc.)';
-$LDOkSaveNow='OK enregistrer maintenant';
+$LDOkSaveNow='OK, enregistrez maintenant';
 
 $LD_ddpMMpyyyy='jj.mm.aaaa';
 $LD_yyyyhMMhdd='aaaa-mm-jj';
@@ -147,12 +150,12 @@ $LD_MMsddsyyyy='mm/jj/aaaa';
 /* 2002-10-13 EL */
 $LDPlsSelectPatientFirst='Trouvez le patient en premier, s\'il vous plaît.';
 /* 2002-11-30 EL */
-$LDPatientRegister='Registration du patient';
+$LDPatientRegister='Inscription du patient';
 $LDRegDate='Date d\'inscription';
 $LDRegTime='Heure d\'inscription';
 $LDRegBy='Inscrit par';
 $LDName2='Second prénom';
-$LDName3='Third prénom';
+$LDName3='Troisième prénom';
 $LDNameMid='Second prénom';
 $LDNameMaiden='Nom de jeune fille';
 $LDNameOthers='Autres noms';
@@ -162,7 +165,7 @@ $LDTownCity='Ville/cité';
 $LDProvState='Province/Etat';
 $LDRegion='Région';
 $LDCountry='Pays';
-$LDCitizenship='Citoyennetté';
+$LDCitizenship='Citoyenneté';
 $LDCivilStatus='Etat civil'; /* Etat civil = marié, célibataire, divorcé, veuve */
 $LDSingle='Célibataire';
 $LDMarried='Marié';
@@ -192,11 +195,11 @@ $LDPrescriptions='Ordonnances';
 $LDPrescriptionsTxt=$LDESE.' Ordonnances';
 /* 2002-12-03 EL*/
 $LDDiagXResults='Résultats du diagnostic';
-$LDDiagXResultsTxt='Chercher, rechercher, afficher résulats du diagnostic ou des rapports';
+$LDDiagXResultsTxt='Chercher, afficher les résulats du diagnostic ou des rapports';
 $LDAppointments='Rendez-vous';
 $LDAppointmentsTxt=$LDESE.', rechercher dans les rendez-vous ou horaires';
 $LDPatientDev='Développement';
-$LDPatientDevTxt=$LDESE.', afficher rapports du développement du patient';
+$LDPatientDevTxt=$LDESE.', afficher le rapports du développement du patient';
 $LDWtHt='Poids et tailles';
 $LDWtHtTxt=$LDESE.' données des poids & tailles';
 $LDPregnancies='Grossesses';
@@ -214,7 +217,7 @@ $LDClickImgToPrint='Cliquez sur l\'image pour l\'imprimer.';
 $LDPrintPortraitFormat='Mettez votre imprimante en format paysage.';
 /* 2002-12-14 EL */
 $LDRegistryNr='No. PID';
-$LDRedirectToRegistry='Nb: Votre recherche va être redirigée vers le module d\'inscriptions!';
+$LDRedirectToRegistry='Nb: Votre recherche va être redirigée vers le module d\'inscription!';
 /* 2002-12-24 EL */
 $LDSSSNr='No. SSS';
 $LDNatIdNr='No. national ID';
@@ -225,7 +228,7 @@ $LDSendBill='Envoyer la facture à';
 $LDContactPerson='Personne de contact';
 $LDOptsForPerson='Options pour cette personne';
 $LDSickReport='Confirmation d\'incapacité de travailler';
-$LDAnamnesisForm='Forme d\'anamnésie';
+$LDAnamnesisForm='Forme d\'amnésie';
 $LDConsentDec='Déclaration de consentement';
 $LDUpdate='Mise à jour';
 /* 2002-12-29 EL */
@@ -238,7 +241,7 @@ $LDAdmitClass='Catégorie d\'entrée';
 $LDEnterSearchKeyword='Veuillez entrer un mot clef pour la recherche';
 $LDSearchFoundData='La recherche a trouvée <font color=red><b>~nr~</b></font> données pertinentes.';
 $LDQuickList='Liste rapide';
-$LDSeveralInsurances='Le patient a plusieures assurances. Cliquez ici afin d\'éditer.';
+$LDSeveralInsurances='Le patient a plusieurs assurances. Cliquez ici afin d\'éditer.';
 $LDTop='Haut';
 $LDInsuranceClass='Catégorie d\'assurance';
 $LDRecordsHistory='Historique des entrées de la DB';
@@ -251,19 +254,19 @@ $LDSearchFoundAdmit='J\'ai trouvé <font color=red><b>~nr~</b></font> données per
 $LDPatientNr='No. de patient';
 $LDNoRecordYet='~tag~ n\'a pas encore ~obj~ .';
 $LDNoRecordFor='Pas d\'enregistrement de ~obj~ pour ~tag~ .';
-$LDRegistrationNr='Registration No.';
+$LDRegistrationNr='No. d\'inscription';
 $LDDate='Date';
 $LDType='Type';
 $LDMedicine='Médecine';
-$LDTiter='Titer';
+$LDTiter='Titre';
 $LDRefreshDate='Rafraîchir la date';
 $LDReportingDept='Dépt. de report';
-$LDReportNr='Report No.';
+$LDReportNr='Numéro de Rapport';
 $LDDelivery='Accouchement';
 $LDTime='Heure';
 $LDClass='Catégorie';
 $LDOutcome='Résultat';
-$LDNrOfFetus='No. des foetus';
+$LDNrOfFetus='No. des nouveaux-nés';
 $LDDetails='Détails';
 /* 2003-03-02 */
 $LDDosage='Dosage';
@@ -271,7 +274,7 @@ $LDAppType='Type d\'application';
 $LDAppBy='Candidature de';
 $LDNotes='Notes';
 $LDEnterNewRecord='Entrez une nouvelle entrée';
-$LDPrescription='Préscription';
+$LDPrescription='Prescription';
 $LDDrugClass='Catégorie de médicaments';
 $LDPrescribedBy='Préscrit par';
 $LDPharmOrderNr='Numéro d\'ordonnance de pharmacie';
@@ -291,14 +294,14 @@ $LDBy='Par';
 $LDSendCopyTo='Envoyer une copie à';
 /* 2003-03-05 EL*/
 $LDAndSym='&';
-$LDReports='Reports';
+$LDReports='Rapports';
 $LDRefererDiagnosis='Diagnostic d\'arbitraire';
 $LDRefererRecomTherapy='Thérapie recommendée par l\'arbitre';
 $LDShortNotes='Remarques courtes';
 /* 2003-03-08 EL */
 $LDCreateNewAppointment='Créer un nouveau rendez-vous';
 $LDDepartment='Département';
-$LDRemindPatient='Rappeler patient';
+$LDRemindPatient='Rappeler le patient';
 $LDRemindBy='Rappeler par';
 $LDMail='Poste';
 $LDPurpose='Intention';
@@ -329,7 +332,7 @@ $LDNoPendingApptToday='il n\'y a pas de rendez-vous en suspens aujourd\'hui.';
 /* 2003-04-27 EL */
 $LDOptsForPatient='Options pour ce patient';
 /* 2003-05-06 EL */
-$LDRegisterNewPerson='Registrer une nouvelle personne';
+$LDRegisterNewPerson='Inscrire une nouvelle personne';
 /* 2003-05-17 EL */
 $LDEnterPersonSearchKey='Entrez un mot clef: par exemple PID, prénom ou nom de famille';
 $LDPersonData='Données personnelles';
@@ -338,15 +341,15 @@ $LDDiagnoses='Diagnostics';
 $LDCreateNewForm='Créer un formulaire pour';
 $LDOtherRecords='Autres enregistrements';
 /*2003-06-17 El*/
-$LDFullForm='Plein formulaire';
-$LDAllContents='Tout contenu';
-$LDAllText='Uniquement contenu dynamique';
-$LDDataOnly='Rencontrer les données pertinentes uniquement';
+$LDFullForm='Formulaire complet';
+$LDAllContents='Tout le contenu';
+$LDAllText='Uniquement le contenu dynamique';
+$LDDataOnly='Afficher les données pertinentes uniquement';
 /*2003-06-21 EL*/
 $LDChartsRecords='Répertoire des tableaux';
 # 2003-07-26 EL
 $LDMode='Mode';
-$LDPatientIsDischarged='Ce patient est déjà renvoyé';
+$LDPatientIsDischarged='Ce patient a déjà été renvoyé';
 $LDShow='Montrer';
 $LDPlannedEncType='Type d\'admission prévu';
 # 2003-08-01 EL
@@ -366,8 +369,8 @@ $LDPlsEnterRefererDiagnosis='Veuillez entrer les diagnostics de réference';
 $LDPlsEnterRefererTherapy='Veuillez entrer la thérapie conseillée par le médecin';
 $LDPlsEnterRefererNotes='Veuillez entrer les notes du médecin';
 $LDPlsSelectAdmissionType='Veuillez choisir le type d\'admission';
-$LDForInpatient='Pour patient hospitalisé';
-$LDForOutpatient='Pour patient externe';
+$LDForInpatient='Pour le patient hospitalisé';
+$LDForOutpatient='Pour le patient externe';
 #2003-09-18 EL
 $LDPersonSearch='Chercher un patient';
 #2003-09-24 EL
@@ -376,6 +379,6 @@ $LDPrevious='Précédent';
 $LDNext='Suivant';
 $LDAdvancedSearch='Recherche avancée';
 #2003-10-28 EL
-$LDIncludeFirstName='Search for first names too.';
-$LDTipsTricks='Tips & tricks';
+$LDIncludeFirstName='Rechercher les noms propres également.';
+$LDTipsTricks='Trucs et astuces';
 ?>

@@ -9,8 +9,8 @@ $LDBack='Retour';
 $LDOpen='Ouvrir';
 $LDClose='Fermer';
 
-$LDRegister='Registrer';
-$LDRegistration='Registration';
+$LDRegister='Inscrire';
+$LDRegistration='Inscription';
 $LDAdmission='Admission';
 $LDAdmit='Admettre';
 $LDArchive='Archive';
@@ -19,7 +19,7 @@ $LDEnd='Fin';
 # 2003-07-29 EL
 $LDListApptByDept='Afficher les rendez-vous par d&eacute;partement';
 $LDListApptByDoc='Afficher les rendez-vous par m&eacute;decin';
-$LDdone='Fini';
+$LDdone='Terminé';
 $LDOk='Ok';
 $LDSelect='Choisir';
 ?>
