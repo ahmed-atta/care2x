@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -13,8 +13,6 @@ require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','edp.php');
 $local_user='ck_edv_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-
-require_once($root_path.'include/inc_config_color.php');
 
 $breakfile='edv-system-admi-welcome.php'.URL_APPEND;
 $returnfile='edv_user_access_list.php'.URL_APPEND;
@@ -35,41 +33,39 @@ if($user->UserExists()){
 		}
 	}
 }
+
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('system_admin');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',"$LDEDP::$LDAccessRight::$LDDelete");
+
+ # hide return button
+ $smarty->assign('pbBack',$returnfile);
+
+# href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('edp.php','access','delete')");
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',"$LDEDP::$LDAccessRight::$LDDelete");
+
+ # Buffer page output
+
+ ob_start();
 ?>
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
-<?php
-require($root_path.'include/inc_css_a_hilitebu.php');
-?>
-<script language="javascript">
-<!-- 
 
-function gethelp(x,s,x1,x2,x3)
-{
-	if (!x) x="";
-	urlholder="<?php echo $root_path; ?>help-router.php<?php echo URL_REDIRECT_APPEND ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
-	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
-	window.helpwin.moveTo(0,0);
-}
-// -->
-</script>
-</HEAD>
+<p>
 
-<BODY topmargin=0 leftmargin=0 marginheight=0 marginwidth=0 bgcolor=<?php echo $cfg['bot_bgcolor'];?>>
-<FONT    SIZE=-1  FACE="Arial">
-<P>
-<table width=100% border=0 cellspacing=0>
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="45"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG> <?php echo "$LDEDP $LDAccessRight $LDDelete"; ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])echo'<a href="'.$returnfile.'"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('edp.php','access','delete')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
-</tr>
-<tr>
-<td bgcolor=<?php echo $cfg['body_bgcolor'];?> colspan=2>
-
-<p><br>
 <center>
 <table width=50% border=1 cellpadding="20">
 <tr>
@@ -120,16 +116,17 @@ echo $zeile['password'];
 </tr>
 </table>        
 
-<p><br>
-
-</td>
-</tr>
-</table>        
-
-<p>
 <?php
-require($root_path.'include/inc_load_copyrite.php');
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+# Assign page output to the mainframe template
+
+$smarty->assign('sMainFrameBlockData',$sTemp);
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
 ?>
-</FONT>
-</BODY>
-</HTML>

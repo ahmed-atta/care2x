@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -31,8 +31,6 @@ $breakfile='newscolumns.php'.URL_APPEND;
 <head>
 <?php echo setCharSet(); ?>
 <title></title>
-
-
 
 <script language="javascript">
 <!-- 
@@ -64,12 +62,14 @@ var _editor_url="<?php echo $root_path.'js/html_editor/'; ?>";
 <script language="javascript" src="<?php echo $root_path ?>js/setdatetime.js"></script>
 <script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
+<?php require($root_path.'include/inc_css_a_hilitebu.php'); ?>
+
 </head>
 <body onLoad="HTMLArea.replace('newsbody');document.selectform.newstitle.focus()">
 
 <form ENCTYPE="multipart/form-data" name="selectform"  id="selectform" method="post" action="editor-4plus1-save.php" onSubmit="return chkForm()">
-<FONT  SIZE=6 COLOR="#cc6600" FACE="verdana,Arial">
-<b><?php echo $title ?></b></FONT><font FACE="verdana,Arial" size=3> <?php echo $LDArticleTxt ?> #<?php echo $artopt ?></font>
+<FONT  SIZE=6 COLOR="#cc6600">
+<b><?php echo $title ?></b></FONT><font size=3> <?php echo $LDArticleTxt ?> #<?php echo $artopt ?></font>
 <hr>
 <table border=0>
   <tr >
@@ -77,27 +77,27 @@ var _editor_url="<?php echo $root_path.'js/html_editor/'; ?>";
     <td valign=top><img <?php echo createLDImgSrc($root_path,'x-blank.gif','0') ?>  id="headpic"><br>
   </td>
 
-    <td bgcolor="efefef" colspan=2><FONT FACE="verdana,Arial" color="#0000cc" size=3><b><?php echo $LDTitleTag ?>:</b><br>
+    <td class="submenu" colspan=2><FONT color="#0000cc" size=3><b><?php echo $LDTitleTag ?>:</b><br>
 	<font size=1><?php echo $LDTitleMaxNote ?><br>
 	<input type="text" name="newstitle" size=50 maxlength=255><br>
-	<FONT FACE="verdana,Arial" color="#0000cc" size=3><b><?php echo $LDHeader ?>:</b><br>
+	<FONT color="#0000cc" size=3><b><?php echo $LDHeader ?>:</b><br>
 	<font size=1><?php echo $LDHeaderMaxNote ?><br>
 	
 	<textarea name="preface" cols=50 rows=5 wrap="physical" id="preface"></textarea><br>
 	
-	<FONT FACE="verdana,Arial" color="#0000cc" size=3><b><?php echo $LDNews ?>:</b><br>
+	<FONT color="#0000cc" size=3><b><?php echo $LDNews ?>:</b><br>
 	
 	<textarea name="newsbody" cols=50 rows=14 wrap="physical" id="newsbody"></textarea><br>
 	
-  	<FONT FACE="verdana,Arial" color="#0000cc" size=2><b><?php echo $LDPicFile ?>:</b><br>
+  	<FONT color="#0000cc" size=2><b><?php echo $LDPicFile ?>:</b><br>
 	<input type="file" name="pic" onChange="showpic(this)" ><br>
      <input type="button" value="<?php echo $LDPreviewPic ?>" onClick="showpic(document.selectform.pic)"><br>
- 	<FONT FACE="verdana,Arial" color="#0000cc" size=2><b><?php echo $LDAuthor ?>:</b><br>
+ 	<FONT color="#0000cc" size=2><b><?php echo $LDAuthor ?>:</b><br>
 	<input type="text" name="author" size=30 maxlength=40><br>
-  	<FONT FACE="verdana,Arial" color="#0000cc" size=2><b><?php echo $LDPublishDate ?>:</b><br>
+  	<FONT color="#0000cc" size=2><b><?php echo $LDPublishDate ?>:</b><br>
 	<input type="text" name="publishdate" size=10 maxlength=10 onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
   	<a href="javascript:show_calendar('selectform.publishdate','<?php echo $date_format ?>')">
-	<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
+	<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle',TRUE); ?>></a>
 
 <!-- 	<input type="text" name="publishdate" size=10 maxlength=10 onKeyUp="setDate(this)">
  

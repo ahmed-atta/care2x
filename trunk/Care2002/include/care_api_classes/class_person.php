@@ -10,8 +10,8 @@ require_once($root_path.'include/care_api_classes/class_core.php');
 *
 * Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
-* @version beta 2.0.0
-* @copyright 2002,2003,2004,2005 Elpidio Latorilla
+* @version beta 2.0.1
+* @copyright 2002,2003,2004,2005,2005 Elpidio Latorilla
 * @package care_api
 */
 class Person extends Core {
@@ -194,7 +194,9 @@ class Person extends Core {
 	*/
 	function InitPIDExists($init_nr){
 		global $db;
-		$this->sql="SELECT pid FROM $this->tb_person WHERE pid=$init_nr";
+		// Patch for db where the pid does not start with the predefined init
+		//$this->sql="SELECT pid FROM $this->tb_person WHERE pid=$init_nr";
+		$this->sql="SELECT pid FROM $this->tb_person";
 		if($this->result=$db->Execute($this->sql)){
 			if($this->result->RecordCount()){
 				return true;
@@ -632,6 +634,91 @@ class Person extends Core {
 	*/
 	function DeathCause() {
         return  $this->getValue('death_cause');
+	}
+	/**
+	 * returns a list of other hospital numbers
+	 *
+	 * Added by Kurt Brauchli
+	 * @access public
+	 * @return Associative array
+	 */
+	function OtherHospNrList(){
+		global $db;
+		if($this->pid){
+			$sql = "SELECT * FROM care_person_other_number WHERE pid=".$this->pid." AND status NOT IN ($this->dead_stat)";
+			$result = $db->Execute($sql);
+			if( !$result )
+				return false;
+
+			unset($other_hosp_no);
+			while( $row = $result->FetchRow() ){
+				$other_hosp_no[$row['org']] = $row['other_nr'];
+			}
+			return $other_hosp_no;
+		}else{
+			return FALSE;
+		}
+	}
+	/**
+	 * Sets the number for other hospitals (orgs)
+	 *
+	 * Added by Kurt Brauchli. Enhanced by Elpidio Latorilla 2004-05-23
+	 * @access public
+	 * @param string The other hospital, org , or institution
+	 * @param int The other number
+	 * @param string User id
+	 * @return Boolean
+	 */
+	function OtherHospNrSet($org='',$other_nr='',$user='system'){
+		global $db;
+
+		if(empty($org)) return FALSE;
+		if(empty($other_nr)){
+			// if number field is empty, delete other number
+			//$this->sql = "DELETE FROM care_person_other_number  WHERE org='$org' AND pid=".$this->pid;
+			// We do not delete the record but instead set its status to "deleted"
+			$this->sql = "UPDATE care_person_other_number
+							SET status='deleted',
+								history=".$this->ConcatHistory("Deleted ".date('Y-m-d H:i:s')." ".$user."\n").",
+								modify_id='$user',
+								modify_time='".date('YmdHis')."'
+							WHERE org='$org' AND pid=".$this->pid;
+		}else{
+			$this->sql = "SELECT other_nr FROM care_person_other_number  WHERE org='$org' AND pid='$this->pid'";
+
+			if($result = $db->Execute( $this->sql )){
+				if( $row = $result->FetchRow() ){
+					$this->sql = "UPDATE care_person_other_number ";
+
+					# If old number equals new number, we just set the status to "normal"
+					# else change the number but document the old number in history
+
+					if($row['other_nr']==$other_nr){
+						$this->sql.="SET status='normal',
+									history=".$this->ConcatHistory("Reactivated ".date('Y-m-d H:i:s')." ".$user."\n").", ";
+					}else{
+						$this->sql.="SET other_nr='$other_nr',
+									status='normal',
+									history=".$this->ConcatHistory("Changed (".$row['other_nr'].") -> ($other_nr) ".date('Y-m-d H:i:s')." ".$user."\n").", ";
+					}
+
+					$this->sql.=" modify_id='$user', modify_time='".date('YmdHis')."' WHERE org='$org' AND pid=".$this->pid;
+
+				}else{
+					$this->sql = "INSERT INTO care_person_other_number (pid,other_nr,org,status,history,create_id,create_time) ".
+								" VALUES( ".$this->pid.",
+										'$other_nr',
+										'$org',
+										'normal',
+										'Created ".date('Y-m-d H:i:s')." ".$user."\n',
+										'$user',
+										'".date('YmdHis')."'
+										)";
+				}
+			}
+		}
+		//$db->Execute($sql);
+		return $this->Transact($this->sql);
 	}
 	/**
 	* Returns table record's technical status.

@@ -5,7 +5,7 @@ require($root_path.'include/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.net, elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -60,10 +60,7 @@ $dept_obj= new Department;
 $medical_depts=$dept_obj->getAllMedical();
 
 /* Here begins the real work */
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok){	
-    /* Load the date format functions and get the local format */
+/* Load the date format functions and get the local format */
 	require_once($root_path.'include/inc_date_format_functions.php');
      /* Check for the patient number = $pn. If available get the patients data, otherwise set edit to 0 */
 	if(isset($pn)&&$pn){		
@@ -201,21 +198,59 @@ if($dblink_ok){
 			exit;
 		}
 		$mode="save";   
-	}	    
-}else{
-	echo "$LDDbNoLink<br>$sql<br>";
-}
+	}
+
+# Start the smarty templating
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+ # param 2 = initialize gui
+ # param 3 = display copyright footer
+ # param 4 = load standard javascripts
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('nursing');
+
+ if(!isset($edit) || empty($edit)) $smarty->assign('edit',FALSE);
+
+ $smarty->assign('bgc1',$bgc1);
+
+# Added for the common header top block
+
+ $smarty->assign('sToolbarTitle',$LDDiagnosticTest);
+
+ # Prepare start new form button and href
+ if($user_origin=='lab' && $edit){
+	$smarty->assign('pbAux1',$thisfile.URL_APPEND."&station=$station&user_origin=$user_origin&status=$status&target=$target&noresize=$noresize");
+	$smarty->assign('gifAux1',createLDImgSrc($root_path,'newpat2.gif','0') );
+ }
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('request_generic.php')");
+
+ # hide return button
+ $smarty->assign('pbBack',FALSE);
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',$LDDiagnosticTest);
+
+ # Prepare Body onLoad javascript code
+$sTemp = 'onLoad="if (window.focus) window.focus();';
+if($pn=="") $sTemp = $sTemp .'document.searchform.searchkey.focus();';
+
+$smarty->assign('sOnLoadJs',$sTemp .'"');
+
+ /**
+ * collect JavaScript for Smarty
+ */
+ ob_start();
 ?>
 
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
- <TITLE><?php echo "$LDDiagnosticTest $station" ?></TITLE>
-<?php
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-?>
 <style type="text/css">
 
 div.fva2_ml10 {font-family: verdana,arial; font-size: 12; margin-left: 10;}
@@ -277,16 +312,21 @@ function printOut()
 <script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
 <script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
-</HEAD>
+<?php
 
-<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> 
-onLoad="if (window.focus) window.focus(); 
-<?php if($pn=="") echo "document.searchform.searchkey.focus();" ?>" 
-topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+$sTemp = ob_get_contents();
+ob_end_clean();
 
-<?php if(!$noresize)
-{
+$smarty->append('JavaScript',$sTemp);
+
+# Buffer page output
+
+ob_start();
+
+# Show actual form
+
+if(!$noresize){
+
 ?>
 
 <script>	
@@ -298,30 +338,11 @@ topmargin=0 leftmargin=0 marginwidth=0 marginheight=0
 }
 ?>
 
-<table width=100% border=0 cellpadding="5" cellspacing=0>
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php echo $LDDiagnosticTest; // if($user_origin!="lab") echo " (".$station.")"; ?></STRONG></FONT>
-</td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr>
-<?php 
-if($user_origin=='lab')
-{
-?>
-<a href="<?php echo $thisfile."?sid=".$sid."&lang=".$lang."&station=".$station."&user_origin=".$user_origin."&status=".$status."&target=".$target."&noresize=".$noresize; ?>"><img <?php echo createLDImgSrc($root_path,'newpat2.gif','0') ?>></a>
-&nbsp;
-<?php
-}
-?><a href="javascript:gethelp('request_generic.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
-</tr>
-<tr>
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> colspan=2>
  <ul>
 
 <?php
 
-if($edit)
-{
+if($edit){
 
 ?>
 <form name="form_test_request" method="post" action="<?php echo $thisfile ?>" onSubmit="return chkForm(this)">
@@ -329,6 +350,7 @@ if($edit)
 
 /* If in edit mode display the control buttons */
 
+# Set the table width
 $controls_table_width=700;
 
 require($root_path.'include/inc_test_request_controls.php');
@@ -344,7 +366,7 @@ elseif(!$read_form && !$no_proc_assist)
   <tr>
     <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"></td>
     <td><font color="#000099" SIZE=3  FACE="verdana,Arial"> <b><?php echo $LDPlsSelectPatientFirst ?></b></font></td>
-    <td valign="bottom"><img <?php echo createComIcon($root_path,'angle_down_r.gif','0'); ?>></td>
+    <td valign="bottom"><img <?php echo createComIcon($root_path,'angle_down_r.gif','0','',TRUE); ?>></td>
   </tr>
 </table>
 <?php
@@ -426,7 +448,7 @@ elseif(!$read_form && !$no_proc_assist)
 					?>"
 		   size=10 maxlength=10 onBlur="IsValidDate(this,'<?php echo $date_format ?>')"  onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
 		<a href="javascript:show_calendar('form_test_request.send_date','<?php echo $date_format ?>')">
- 		<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
+ 		<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle',TRUE); ?>></a>
 
   </div></td>
 			<td align="right"><div class=fva2_ml10><font color="#000099">
@@ -437,32 +459,37 @@ elseif(!$read_form && !$no_proc_assist)
 
 	<tr bgcolor="<?php echo $bgc1 ?>">
 		<td colspan=2><div class=fva2_ml10>&nbsp;<br><font color="#969696"><?php echo $LDDeptReport ?><br>
-		<img <?php echo createComIcon($root_path,'gray_pixel.gif','0'); ?>></div><br>
+		<img src="../../gui/img/common/default/gray_pixel.gif" height=75 width=<?php echo $controls_table_width-25; ?>></div><br>
 				</td>
 		</tr>	
 		</table>
 <p>
 <?php
 if($edit){
-/* If in edit mode display the control buttons */
-require($root_path.'include/inc_test_request_controls.php');
-require($root_path.'include/inc_test_request_hiddenvars.php');
+	/* If in edit mode display the control buttons */
+	include($root_path.'include/inc_test_request_controls.php');
+	include($root_path.'include/inc_test_request_hiddenvars.php');
 ?>
 
 </form>
 <?php
 }
 ?>
-</FONT>
+
 </ul>
-<p>
-</td>
-</tr>
-</table>        
-<p>
+
 <?php
-require($root_path.'include/inc_load_copyrite.php');
+
+$sTemp = ob_get_contents();
+ ob_end_clean();
+
+# Assign the page output to main frame template
+
+ $smarty->assign('sMainFrameBlockData',$sTemp);
+
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
 ?>
-<a name="bottom"></a>
-</BODY>
-</HTML>

@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -121,10 +121,10 @@ echo '
 <table  cellpadding="3" cellspacing="1" border="0" width="100%">';	
 		
 echo '
-		<tr bgcolor=#999999><td colspan=2><nobr>
+		<tr class="wardlisttitlerow"><td colspan=2><nobr>
 		<a href="oplogmain.php?sid='.$sid.'&lang='.$lang.'&internok='.$internok.'&thisday='.$yesday.'&dept_nr='.$dept_nr.'&saal='.$saal.'" title="'.formatDate2Local($yesday,$date_format).'">
-		<FONT  COLOR="white"  SIZE=2  FACE="Arial">&lt;&lt; '.$LDPrevDay.'</a></td>
-		<td colspan=3 align=center><FONT  COLOR="white"  SIZE=4  FACE="Arial"> 
+		&lt;&lt; '.$LDPrevDay.'</a></td>
+		<td colspan=3 align=center><FONT  SIZE=+1>
 		<b>';
 		$buffer=$dept_obj->LDvar();
 		if(isset($$buffer)&&!empty($$buffer)) echo $$buffer;
@@ -194,7 +194,7 @@ echo '
 
 if($thisday!=$today){
 	echo '
-		<a href="oplogmain.php?sid='.$sid.'&lang='.$lang.'&internok='.$internok.'&thisday='.$tomorow.'&dept_nr='.$dept_nr.'&saal='.$saal.'" title="'.formatDate2Local($tomorow,$date_format).'"><FONT  COLOR="white"  SIZE=2  FACE="Arial"><nobr>'.$LDNextDay.' &gt;&gt;</a>';
+		<a href="oplogmain.php?sid='.$sid.'&lang='.$lang.'&internok='.$internok.'&thisday='.$tomorow.'&dept_nr='.$dept_nr.'&saal='.$saal.'" title="'.formatDate2Local($tomorow,$date_format).'"><nobr>'.$LDNextDay.' &gt;&gt;</a>';
 }
 
 echo '

@@ -10,8 +10,8 @@ require_once($root_path.'include/care_api_classes/class_encounter.php');
 *  Ward methods.
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance.
 * @author Elpidio Latorilla
-* @version beta 2.0.0
-* @copyright 2002,2003,2004,2005 Elpidio Latorilla
+* @version beta 2.0.1
+* @copyright 2002,2003,2004,2005,2005 Elpidio Latorilla
 * @package care_api
 */
 class Ward extends Encounter {
@@ -102,7 +102,7 @@ class Ward extends Encounter {
 	* Constructor 
 	* @param int Ward number
 	*/
-	function Ward($ward_nr) {
+	function Ward($ward_nr=0) {
 	    $this->ward_nr=$ward_nr;
 		$this->Encounter();
 	}	

@@ -27,7 +27,7 @@ function chkform(d) {
      <td>
 	 	<input type="text" name="date" size=10 maxlength=10  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
 	 	<a href="javascript:show_calendar('notes_form.date','<?php echo $date_format ?>')">
- 		<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a> 
+ 		<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle',TRUE); ?>></a> 
  		<font size=1>[ <?php   
  		$dfbuffer="LD_".strtr($date_format,".-/","phs");
   		echo $$dfbuffer;

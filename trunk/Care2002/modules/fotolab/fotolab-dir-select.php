@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -21,17 +21,37 @@ if(!isset($maxpic)||!$maxpic) $maxpic=4;
 
 $thisfile=basename(__FILE__);
 $breakfile="javascript:window.parent.location.replace('".$root_path."main/spediens.php?sid=$sid&lang=$lang')";
+
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('system_admin');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',$LDFotoLab);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('fotolab.php','input','')");
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',$LDFotoLab);
+  
+ # Body Onload js
+ if(!$same_pat) $smarty->assign('sOnLoadJs','onLoad="window.parent.PREVIEWFRAME.location.replace(\'fotolab-preview.php?sid='.$sid.'&lang='.$lang.'\');"');
+	else $smarty->assign('sOnLoadJs','onLoad="window.parent.PREVIEWFRAME.location.replace(\'fotolab-preview.php?sid='.$sid.'&lang='.$lang.'\');" ');
+
+# Collect js code
+
+ob_start();
 ?>
-
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
- <style type="text/css" name="s2">
-.indx{ font-family:verdana,arial; color:#ffffff; font-size:12; background-color:#6666ff}
-</style>
-
-
 
 <script language="javascript">
 <!-- 
@@ -87,8 +107,6 @@ function chkform(d)
 }
 
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
-
-
 // -->
 </script>
 
@@ -96,29 +114,24 @@ function chkform(d)
 <script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
 <script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
-<?php 
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-?></HEAD>
+<?php
 
-<BODY  topmargin=0 leftmargin=0  marginwidth=0 marginheight=0 bgcolor=<?php echo $cfg['body_bgcolor'] ?> <?php if(!$same_pat) echo ' onLoad="window.parent.PREVIEWFRAME.location.replace(\'fotolab-preview.php?sid='.$sid.'&lang='.$lang.'\');" ';
-else echo ' onLoad="window.parent.PREVIEWFRAME.location.replace(\'fotolab-preview.php?sid='.$sid.'&lang='.$lang.'\');" '; ?> 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+$smarty->append('JavaScript',$sTemp);
+
+# Buffer page output
+
+ob_start();
+
+?>
 
 <table width=100% border=0 cellspacing=0 >
 
-<tr valign=top height=10>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" >
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG>&nbsp;<?php echo $LDFotoLab ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();"><img 
-<?php echo createLDImgSrc($root_path,'back2.gif','0','absmiddle') ?> 
-style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a 
-href="javascript:gethelp('fotolab.php','input','')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a></td>
-</tr>
-
 <!-- Tabs  -->
-<tr  bgcolor="<?php echo $cfg['top_bgcolor']; ?>" valign=top >
-<td colspan=2>
+<tr valign=top >
+<td colspan=2 style="border-bottom: 2px solid gray">
 <?php 
 	if($target=="search") $img='such-b.gif'; //echo '<img '.createLDImgSrc($root_path,'such-b.gif','0').' alt="'.$LDSearch.'">';
 		else{ $img='such-gray.gif'; }
@@ -129,12 +142,12 @@ href="javascript:gethelp('fotolab.php','input','')"><img <?php echo createLDImgS
 
 
 <tr valign=top >
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
-<font face="verdana,arial" size=2 >
+<td valign=top colspan=2>
+
 <?php 	echo "[$patnum] $lastname, $firstname (".formatDate2Local($bday,$date_format).")<p>"; ?>
 
 <p>
-<font face=verdana,arial size=1 color="#cc0000">
+<font size=1 color="#cc0000">
 <?php if($nopatdata) echo '
 	<img '.createMascot($root_path,'mascot1_r.gif','0','bottom').'> <font size=2>'.$LDAlertNoPatientData.'<br></font>';
 ?>
@@ -184,7 +197,7 @@ echo '&nbsp;&nbsp;'.$LDNr.'
 
 <p>
 </FONT>
-<FONT size=2 face="verdana,arial">
+
 <form action="<?php echo $thisfile ?>" method="post" name="setmaxpic">
 <?php echo $LDWantUpload ?> <input type="text" name="maxpic" size=1 maxlength=2 value="<?php echo $maxpic ?>"> <?php echo $LDImage ?> <input type="submit" value="<?php echo $LDGO ?>">
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
@@ -197,9 +210,20 @@ echo '&nbsp;&nbsp;'.$LDNr.'
 <input type="hidden" name="same_pat" value="1">
 </form>
 
-</FONT>
 </td>
 </tr>
-</table>        
-</BODY>
-</HTML>
+</table>
+<?php
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+# Assign page output to the mainframe template
+
+$smarty->assign('sMainFrameBlockData',$sTemp);
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
+?>

@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -174,11 +174,14 @@ function aligndate(&$ad,&$am,&$ay)
 .v18{ font-family:verdana,arial; color:#d6d6d6; font-size:18}
 .v18_b{ font-family:verdana,arial; color:#000066; font-size:18}
 </style>
+
+<?php require($root_path.'include/inc_css_a_hilitebu.php'); ?>
+
 </head>
 
 <body onLoad="document.menuform.menuplan.focus()">
 
-<FONT  SIZE=8 COLOR="#cc6600" FACE="verdana,Arial">
+<FONT  SIZE=8 COLOR="#cc6600">
 <img <?php echo createComIcon($root_path,'basket.gif','0') ?>><b><?php echo $LDCafeMenu ?></b></FONT>
 <form action="cafenews-edit-menu.php" method="post" name="menuform"><hr>
 <table border=0 bgcolor="#000000" cellspacing=0 cellpadding=0>
@@ -188,7 +191,7 @@ function aligndate(&$ad,&$am,&$ay)
 <table border=0 cellspacing=1 cellpadding=5>
   <tr>
     <td colspan=7 bgcolor="#ccffff">
-	<FONT  SIZE=4 COLOR="#0000cc" FACE="verdana,Arial">
+	<FONT  SIZE=4 COLOR="#0000cc">
 <?php switch($week)
 	{
 		case 1: echo $LDThisWeek; break;
@@ -213,7 +216,7 @@ function aligndate(&$ad,&$am,&$ay)
 	if ($spot)  echo ' bgcolor="yellow">';
 		else echo ' bgcolor="#ccffff">';
 	echo '<a href="';
-	if($spot) echo "#\""; else echo 'cafenews-edit-menu.php'.URL_APPEND.'&week='.$week.'&myear='.$year.'&mmonth='.$month.'&mday='.$acttag.'" ';
+	if($spot) echo '#"'; else echo 'cafenews-edit-menu.php'.URL_APPEND.'&week='.$week.'&myear='.$year.'&mmonth='.$month.'&mday='.$acttag.'" ';
 	echo ' title="'.formatDate2Local($year.'-'.$month.'-'.$acttag,$date_format).'">';
 	if($spot) echo '<font color="#0000cc">';else echo '<font color="#d6d6d6">';
 	echo '<b>'.$dayname[$dyidx].'</b>';
@@ -240,17 +243,17 @@ if($mode=="saveok") {
 <p>
 <table border=0 cellspacing=0>
   <tr bgcolor="#ccffff" >
-    <td colspan=3><FONT  SIZE=2  FACE="verdana,Arial"><b><?php echo $LDMenu ?>:</b><br><font size=1><?php echo $LDPlsEnter ?>.<br>
+    <td colspan=3><b><?php echo $LDMenu ?>:</b><br><font size=1><?php echo $LDPlsEnter ?>.<br>
 	<textarea name="menuplan" cols=35 rows=10 wrap="physical"><?php echo $content['menu'] ?></textarea>
  </td>
   </tr>
 
  <tr>
-    <td ><p><br><FONT FACE="verdana,Arial">
+    <td ><p><br>
 	<a href="<?php echo $returnfile ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>
     <input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?>>
   </td>
-    <td align=right ><p><br><FONT FACE="verdana,Arial">&nbsp;&nbsp;
+    <td align=right ><p><br>&nbsp;&nbsp;
 	<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a>
   </td>
   </tr>

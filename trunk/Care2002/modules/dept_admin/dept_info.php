@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -36,48 +36,62 @@ $dept=$dept_obj->getDeptAllInfo($dept_nr);
 $dept_info=$dept_obj->getTypeInfo($dept['type']);
 # Get department phone infos
 $phone=$dept_obj->getPhoneInfo($dept_nr);
+
+# Prepare title
+$sTitle = "$LDDepartment :: ";
+if(isset($$dept['LD_var'])&&!empty($$dept['LD_var'])) $sTitle = $sTitle.$$dept['LD_var'];
+	else $sTitle = $sTitle.$dept['name_formal'];
+
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('system_admin');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',$sTitle);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('dept_info.php')");
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',$sTitle);
+
+# Buffer page output
+
+ob_start();
+
 ?>
 
-
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
-
-<?php
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-?>
 <style type="text/css" name="formstyle">
+
 td.pblock{ font-family: verdana,arial; font-size: 12}
-
 div.box { border: solid; border-width: thin; width: 100% }
-
 div.pcont{ margin-left: 3; }
 
 </style>
 
-</HEAD>
+<?php
 
-<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> onLoad="if (window.focus) window.focus()" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+$sTemp = ob_get_contents();
+ob_end_clean();
 
+$smarty->append('JavaScript',$sTemp);
 
-<table width=100% border=0 cellpadding="0" cellspacing=0>
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp; 
-<?php 
-	echo $LDDepartment.' :: ';
-	if(isset($$dept['LD_var'])&&!empty($$dept['LD_var'])) echo $$dept['LD_var'];
-		else echo $dept['name_formal'];
-?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('dept_info.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
-</tr>
-<tr valign=top >
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
- <ul>
+# Buffer page output
+
+ob_start();
+
+?>
+
+<ul>
 <?php if($rows) : ?>
 
 <img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"><font face="Verdana, Arial" size=3 color="#880000">
@@ -88,6 +102,7 @@ div.pcont{ margin-left: 3; }
 <form action="dept_new.php" method="post" name="newstat">
 
 <table border=0 cellpadding=4>
+<tbody class="submenu">
   <tr>
     <td class=pblock align=right bgColor="#eeeeee"></font><?php echo $LDFormalName ?>: </td>
     <td class=pblock>
@@ -250,10 +265,9 @@ div.pcont{ margin-left: 3; }
     <td class=pblock><?php
 									if(file_exists($root_path.'gui/img/logos_dept/dept_'.$dept_nr.'.'.$dept['logo_mime_type'])) echo '<img src="'.$root_path.'gui/img/logos_dept/dept_'.$dept_nr.'.'.$dept['logo_mime_type'].'">'; 
 							?>
-</td>
-  </tr> 
-
- 
+	</td>
+  </tr>
+</tbody>
 </table>
 <input type="hidden" name="sid" value="<?php echo $sid; ?>">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
@@ -264,19 +278,20 @@ div.pcont{ margin-left: 3; }
 <p>
 
 <a href="javascript:history.back()"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> border="0"></a>
-</FONT>
 
 </ul>
 
-<p>
-</td>
-</tr>
-</table>        
-<p>
-
 <?php
-require($root_path.'include/inc_load_copyrite.php');
-?>
 
-</BODY>
-</HTML>
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+# Assign page output to the mainframe template
+
+$smarty->assign('sMainFrameBlockData',$sTemp);
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
+?>

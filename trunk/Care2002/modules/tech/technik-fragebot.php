@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'/include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -26,8 +26,6 @@ $rows=0;
     include_once($root_path.'include/inc_date_format_functions.php');
     include_once($root_path.'include/care_api_classes/class_core.php');
 	$core = & new Core;
-
-$db->debug=1;
 
 switch($mode)
 	{
@@ -145,7 +143,7 @@ td.vn { font-family:verdana,arial; color:#000088; font-size:12;background-color:
 </style>
 
 </head>
-<body <?php 	if($rows) echo " bgcolor=#ffffee  onLoad=goactive() "; else echo " bgcolor=#006600"; ?>>
+<body <?php 	if($rows) echo " bgcolor=#ffffee  onLoad=goactive() "; else echo " bgcolor=#ffffff"; ?>>
 <?php if(($mode!="")&&($saved))
 	{	
 		echo '<table cellspacing=0 cellpadding=1 border=0 bgcolor="#999999" align=center>

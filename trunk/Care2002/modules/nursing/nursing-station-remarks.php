@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -66,13 +66,44 @@ if($mode=='save'){
 		echo $obj->getLastQuery();
 	}
 }
-?>
 
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
- <TITLE> <?php echo "$LDNotes $station" ?> </TITLE>
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('nursing');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle', $LDNotes.' :: '.$station.' ('.formatDate2Local($s_date,$date_format).')');
+
+   # hide back button
+ $smarty->assign('pbBack',FALSE);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('patient_remarks.php','','','$station','$LDNotes')");
+
+ # href for close button
+ $smarty->assign('breakfile','javascript:window.close()');
+
+
+ # OnLoad Javascript code
+  if(($mode=='save')&&($occup)||$saved) $sTemp = "window.opener.location.reload();";
+  	else $sTemp = '';
+
+ $smarty->assign('sOnLoadJs','onLoad="'.$sTemp.' if (window.focus) window.focus();"');
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',$LDNotes.' :: '.$station.' ('.formatDate2Local($s_date,$date_format).')');
+
+ # Collect extra javascript code
+
+ ob_start();
+?>
 
 <script language="javascript">
 <!-- 
@@ -86,76 +117,56 @@ function setChg()
 {
 	n=true;
 }
-function gethelp(x,s,x1,x2,x3)
-{
-	if (!x) x="";
-	urlholder="<?php echo $root_path; ?>help-router.php<?php echo URL_REDIRECT_APPEND ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
-	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
-	window.helpwin.moveTo(0,0);
-}
 // -->
 </script>
 
-<?php
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-
-?>
-
 <style type="text/css" name="s2">
 td.vn { font-family:verdana,arial; color:#000088; font-size:10}
-
 </style>
-</HEAD>
 
-<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?>  onLoad="if (window.focus) window.focus();<?php if(($mode=='save')&&($occup)||$saved) echo "window.opener.location.reload();window.focus();"; ?>" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
-
-<table width=100% border=0 cellpadding="0" cellspacing=0>
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=4  FACE="Arial"><STRONG> &nbsp;&nbsp; <?php echo $LDNotes.' :: '.$station.' ('.formatDate2Local($s_date,$date_format).')'; ?> </STRONG></FONT>
-</td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr>
-<a href="javascript:gethelp('patient_remarks.php','','','<?php echo $station ?>','<?php echo $LDNotes ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  
-<?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:window.close()" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
-</nobr>
-</td></tr>
-<tr valign=top >
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
- 
 <?php
+
+$sTemp = ob_get_contents();
+
+ob_end_clean();
+
+$smarty->append('JavaScript',$sTemp);
+
+ob_start();
+
 if($occup){
 	$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/tableHeaderbg3.gif"';
 ?>
  <table border=0 cellpadding=4 cellspacing=1 width=100%>
-  <tr bgcolor="#f6f6f6">
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDate; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDTime; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDNotes; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDCreatedBy; ?></td>
+  <tr class="adm_item">
+    <td><FONT color="#000066"><?php echo $LDDate; ?></td>
+    <td><FONT color="#000066"><?php echo $LDTime; ?></td>
+    <td><FONT color="#000066"><?php echo $LDNotes; ?></td>
+    <td><FONT color="#000066"><?php echo $LDCreatedBy; ?></td>
   </tr>
 <?php
 	$toggle=0;
 	while($row=$d_notes->FetchRow()){
 		if($toggle) $bgc='#efefef';
 			else $bgc='#f0f0f0';
+		if($toggle) $sRowClass='wardlistrow2';
+			else $sRowClass='wardlistrow1';
 		$toggle=!$toggle;
 		if(!empty($row['short_notes'])) $bgc='yellow';
 	
 ?>
 
 
-  <tr  bgcolor="<?php echo $bgc; ?>"  valign="top">
-    <td><FONT SIZE=-1  FACE="Arial"><?php if(!empty($row['date'])) echo @formatDate2Local($row['date'],$date_format); ?></td>
-    <td><FONT SIZE=-1  FACE="Arial"><?php if($row['time']) echo $row['time']; ?></td>
-    <td><FONT SIZE=-1  FACE="Arial" color="#000033">
+  <tr  class="<?php echo $sRowClass ?>"  valign="top">
+    <td><?php if(!empty($row['date'])) echo @formatDate2Local($row['date'],$date_format); ?></td>
+    <td><?php if($row['time']) echo $row['time']; ?></td>
+    <td><FONT color="#000033">
 	<?php 
 		if(!empty($row['notes'])) echo deactivateHotHtml(nl2br($row['notes'])); 
 		if(!empty($row['short_notes'])) echo '<br>[ '.deactivateHotHtml($row['short_notes']).' ]';
 	?>
 	</td>
-    <td><FONT SIZE=-1  FACE="Arial"><?php if($row['personell_name']) echo $row['personell_name']; ?></td>
+    <td><?php if($row['personell_name']) echo $row['personell_name']; ?></td>
   </tr>
 
 <?php
@@ -168,12 +179,6 @@ if($occup){
 
  <ul>
  
- <font face="Verdana, Arial" color=#800000>
-<?php if($occup)
-{
-	//echo "<font color=0> ".$LDPatListElements[0].":  $helper[r] $helper[b] - </font>".ucfirst($buf['ln']).", ".ucfirst($buf['fn'])." ".formatDate2Local($buf[g],$date_format); 
-}
-?>
 <form method="post" name=remform action="nursing-station-remarks.php" onSubmit="return checkForm(this)">
 <textarea name="notes" cols=60 rows=5 wrap="physical" onKeyup="setChg()"></textarea>
 <input type="text" name="personell_name" size=60 maxlength=60 value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>" readonly>
@@ -186,23 +191,24 @@ if($occup){
 <input type="hidden" name="dept_nr" value="<?php echo $dept_nr ?>">
 <p>
  <input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif') ?>>
- 
 </form>
 
-</font>
 <p>
 <a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>></a>
 </ul>
 
-<p>
-</td>
-</tr>
-</table>        
-<p>
-
 <?php
-require($root_path.'include/inc_load_copyrite.php');
-?>
 
-</BODY>
-</HTML>
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+# Assign the page output to the mainframe center block
+
+ $smarty->assign('sMainFrameBlockData',$sTemp);
+
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
+ ?>

@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -181,17 +181,53 @@ if($ergebnis=$db->Execute($sql)){
 	}
 }else{
 	echo "<p>".$sql."<p>$LDDbNoRead";
-} 		
+}
+
 $validyr=true;
+
+# Prepate title
+$sTitle = "$LDOrLogBook::$LDArchive - ";
+$buffer=$dept_obj->LDvar();
+if(isset($$buffer)&&!empty($$buffer)) $sTitle = $sTitle.$$buffer;
+	else $sTitle = $sTitle.$dept_obj->FormalName();
+$sTitle = $sTitle." $LDRoom $saal";
+
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('nursing');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',$sTitle);
+
+ # hide return button
+ $smarty->assign('pbBack',FALSE);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('oplog.php','arch','$dif','$lastlog','$datafound')");
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',$sTitle);
+
+ # Body Onload js
+ if(!$nofocus) $smarty->assign('sOnLoadJs','onLoad="if (window.focus) window.focus();"');
+
+# Collect js code
+
+ob_start();
+
 ?>
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
- <TITLE><?php echo "$LDArchive - $LDOrLogBook" ?></TITLE>
 
 <script  language="javascript">
-<!-- 
+<!--
 function pruf(d)
 {
 	if((d.dept_nr.value=="<?php echo $dept_nr;?>")&&(d.saal.value=="<?php echo $saal;?>")&&(d.sdate.value=="<?php echo formatDate2Local($thisday,$date_format);?>")){
@@ -222,11 +258,6 @@ function getinfo(pid,pdata){
 // -->
 </script>
 
-<?php 
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-?>
-
 <script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
 <script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
@@ -238,67 +269,48 @@ div.cats{
 	top: 80;
 }
 </style>
-</HEAD>
-
-<BODY   topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php  echo  ' bgcolor='.$cfg['body_bgcolor']; 
- if (!$cfg['dhtml']){ echo ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; }
- if(!$nofocus) echo ' onLoad="if (window.focus) window.focus();"';
-?>>
-
-<table width=100% border=0 cellspacing="0"  cellpadding=0>
-
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+1  FACE="Arial"><STRONG> &nbsp;<?php echo "$LDOrLogBook::$LDArchive " ?>- </STRONG>
-<font size=+1><?php 
-$buffer=$dept_obj->LDvar();
-if(isset($$buffer)&&!empty($$buffer)) echo $$buffer;
-	else echo $dept_obj->FormalName();
-echo " $LDRoom $saal"; ?></font></font>
-</td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr>
-<!-- <a href="javascript:window.history.back()"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a> --><a href="javascript:gethelp('oplog.php','arch','<?php echo $dif ?>','<?php echo $lastlog ?>','<?php echo $datafound ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
-</nobr>
-</td>
-</tr>
-<tr>
-<td colspan=3  bgcolor=<?php echo $cfg['body_bgcolor']; ?>>
-<FONT    SIZE=-1  FACE="Arial">
 
 <?php
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+$smarty->append('JavaScript',$sTemp);
+
+# Buffer page output
+
+ob_start();
 
 echo '
 		<table cellpadding=0 cellspacing=0 border=0 bgcolor="#999999" width="100%">
 		<tr><td>
 		<table  cellpadding="3" cellspacing="1" border="0" width="100%">';	
 echo '
-		<tr bgcolor="#999999"><td colspan=2   background="'.$root_path.'gui/img/common/default/tableHeaderbg.gif"><nobr>';
+		<tr class="wardlisttitlerow"><td colspan=2   ><nobr>';
  	
 echo '
 			<a href="op-pflege-logbuch-arch-start.php?sid='.$sid.'&lang='.$lang.'&nogetlast=1&dept_nr='.$dept_nr.'&saal='.$saal.'&thisday='.$yesday.'&noseek=1" 
 			title="'.formatDate2Local($yesday,$date_format).'">
-			<FONT  COLOR="white"  SIZE=2  FACE="Arial">&lt;&lt; '.$LDPrevDay.'</a>';
+			&lt;&lt; '.$LDPrevDay.'</a>';
 
 echo '				
-		</td><td colspan=5 align=center background="'.$root_path.'gui/img/common/default/tableHeaderbg.gif"><FONT  COLOR="white"  SIZE=4  FACE="Arial"> 
+		</td><td colspan=5 align=center ><FONT  SIZE=4>
 		<b>';
 		
 list($ty,$tm,$td)=explode('-',$thisday);
 
 echo $tage[(date("w",mktime(0,0,0,$tm,$td,$ty)))].' ('.formatDate2Local($thisday,$date_format).')</b> </td>
-		<td colspan=2 align=right background="'.$root_path.'gui/img/common/default/tableHeaderbg.gif">';
+		<td colspan=2 align=right >';
 
 if($thisday!=$today) echo '
 					<a href="op-pflege-logbuch-arch-start.php?sid='.$sid.'&lang='.$lang.'&nogetlast=1&dept_nr='.$dept_nr.'&saal='.$saal.'&thisday='.$tomorow.'&noseek=1" 
 					title="'.formatDate2Local($tomorow,$date_format).'">
-					<FONT  COLOR="white"  SIZE=2  FACE="Arial"><nobr>'.$LDNextDay.' &gt;&gt;</a></td></tr>';
+					<nobr>'.$LDNextDay.' &gt;&gt;</a></td></tr>';
 echo '
 		<tr bgcolor="#f9f9f9" >';
 	while(list($x,$v)=each($LDOpMainElements))
 	{
-		echo '		
-		<td  background="'.$root_path.'gui/img/common/default/tableHeaderbg3.gif"><font face="verdana,arial" size="1" ><b>'.$v.'</b></td>';	
+		echo '
+		<td class="wardlisttitlerow">'.$v.'</td>';
 	}
 echo '
 		</tr>';
@@ -317,7 +329,7 @@ if($datafound)
 	list($iyear,$imonth,$iday)=explode('-',$pdata['op_date']);
 	
 	echo '
-			<td valign=top><font face="verdana,arial" size="1" ><font size=2 color=red><b>'.$pdata['op_nr'].'</b></font><hr>'.formatDate2Local($pdata['op_date'],$date_format).'<br>
+			<td valign=top><font size="1" ><font size=2 color=red><b>'.$pdata['op_nr'].'</b></font><hr>'.formatDate2Local($pdata['op_date'],$date_format).'<br>
 			'.$tage[date("w",mktime(0,0,0,$imonth,$iday,$iyear))].'<br>
 			<a href="op-pflege-logbuch-start.php?sid='.$sid.'&lang='.$lang.'&mode=saveok&enc_nr='.$pdata['encounter_nr'].'&op_nr='.$pdata['op_nr'].'&dept_nr='.$pdata['dept_nr'].'&saal='.$pdata['op_room'].'&thisday='.$pdata['op_date'].'" ';
 	
@@ -327,7 +339,7 @@ if($datafound)
 			<img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0').' alt="'.str_replace("~tagword~",$pdata['name_last'],$LDEditPatientData).'"></a>
 			</td>';
 	echo '
-			<td valign=top><nobr><font face="verdana,arial" size="1" color=blue>
+			<td valign=top><nobr><font size="1" color=blue>
 			<a href="javascript:getinfo(\''.$pdata[encounter_nr].'\',\''.$pdata[dept_nr].'\')">
 			<img '.createComIcon($root_path,'info2.gif','0').' alt="'.str_replace("~tagword~",$pdata['name_last'],$LDOpenPatientFolder).'"></a>&nbsp; ';
 
@@ -336,13 +348,13 @@ if($datafound)
 			<font color=black><b>'.$pdata['name_last'].', '.$pdata['name_first'].'</b><br>'.formatDate2Local($pdata['date_birth'],$date_format).'<p>
 			<font color="#000000">'.$pdata['addr_str'].' '.$pdata['addr_str_nr'].'<br>'.$pdata['addr_zip'].' '.$pdata['citytown_name'].'</font><br></td>';
 	echo '
-			<td valign=top><font face="verdana,arial" size="1" >';
+			<td valign=top><font size="1" >';
 	echo '
 			<font color="#cc0000">Diagnose:</font><br>';
 	echo nl2br($pdata['diagnosis']);
 	echo '
 			</td>
-			<td valign=top><font face="verdana,arial" size="1" ><nobr>';
+			<td valign=top><font size="1" ><nobr>';
 	
 	$ebuf=array('operator','assistant','scrub_nurse','rotating_nurse');
 	//$tbuf=array("O","A","I","S");
@@ -364,7 +376,7 @@ if($datafound)
 	
 	echo '
 	</td>
-	<td valign=top><font face="verdana,arial" size="1" >'.$LDAnaTypes[$pdata['anesthesia']].'<p>';
+	<td valign=top><font size="1" >'.$LDAnaTypes[$pdata['anesthesia']].'<p>';
 	if($pdata[an_doctor])
 		{ 
 			echo '<font color="#cc0000">'.$LDAnaDoc.'</font><br><font color="#000000">';
@@ -394,7 +406,7 @@ if($datafound)
 			
 	echo '
 	</td>
-	<td valign=top><font face="verdana,arial" size="1" >';
+	<td valign=top><font size="1" >';
 
 	 $cc=explode("~",$pdata['cut_close']);
 	for($i=0;$i<sizeof($cc);$i++)
@@ -402,24 +414,24 @@ if($datafound)
 		$xbug=trim($cc[$i]);
 		if(empty($xbug)) continue;
 		parse_str($cc[$i],$ccbuf);
-		echo '<font face="verdana,arial" size="1" color="#cc0000">'.$LDOpCut.':</font><br>'.strtr($ccbuf['s'],'.',':').'<br>
-		<font face="verdana,arial" size="1" color="#cc0000">'.$LDOpClose.':</font><br>'.strtr($ccbuf['e'],'.',':').'<br>';
+		echo '<font size="1" color="#cc0000">'.$LDOpCut.':</font><br>'.strtr($ccbuf['s'],'.',':').'<br>
+		<font size="1" color="#cc0000">'.$LDOpClose.':</font><br>'.strtr($ccbuf['e'],'.',':').'<br>';
 		if(trim($ccbuf['s'])=='') break;
 	}
 /*
-	echo '<font face="verdana,arial" size="1" color="#cc0000">'.$LDOpCut.':</font><br>'.convertTimeToLocal($ccbuf[s]).'<p>
-	<font face="verdana,arial" size="1" color="#cc0000">'.$LDOpClose.':</font><br>'.convertTimeToLocal($ccbuf[e]).'</td>';
+	echo '<font size="1" color="#cc0000">'.$LDOpCut.':</font><br>'.convertTimeToLocal($ccbuf[s]).'<p>
+	<font size="1" color="#cc0000">'.$LDOpClose.':</font><br>'.convertTimeToLocal($ccbuf[e]).'</td>';
 */
 	echo '
-	<td valign=top><font face="verdana,arial" size="1" color="#cc0000">'.$LDOpMainElements[therapy].':<font color=black><br>'.nl2br($pdata['op_therapy']).'</td>';
+	<td valign=top><font size="1" color="#cc0000">'.$LDOpMainElements[therapy].':<font color=black><br>'.nl2br($pdata['op_therapy']).'</td>';
 	
 	echo '
-	<td valign=top><nobr><font face="verdana,arial" size="1" color="#cc0000">'.$LDOpMainElements[result].':<br>';
+	<td valign=top><nobr><font size="1" color="#cc0000">'.$LDOpMainElements[result].':<br>';
 	
 	echo '<font color=black>'.nl2br($pdata['result_info']).'</td>';
 	
 	echo '
-	<td valign=top><font face="verdana,arial" size="1" >';
+	<td valign=top><font size="1" >';
 
 	 $eo=explode("~",$pdata['entry_out']);
 	for($i=0;$i<sizeof($eo);$i++)
@@ -427,14 +439,14 @@ if($datafound)
 		$xbug=trim($eo[$i]);
 		if(empty($xbug)) continue;
 		parse_str($eo[$i],$eobuf);
-		echo '<font face="verdana,arial" size="1" color="#cc0000">'.$LDOpIn.':</font><br>'.strtr($eobuf['s'],'.',':').'<br>
-		<font face="verdana,arial" size="1" color="#cc0000">'.$LDOpOut.':</font><br>'.strtr($eobuf['e'],'.',':').'<br>';
+		echo '<font size="1" color="#cc0000">'.$LDOpIn.':</font><br>'.strtr($eobuf['s'],'.',':').'<br>
+		<font size="1" color="#cc0000">'.$LDOpOut.':</font><br>'.strtr($eobuf['e'],'.',':').'<br>';
 		if(trim($eobuf['s'])=='') break;
 	}
 
 	/*
-	echo '<font face="verdana,arial" size="1" color="#cc0000">'.$LDOpIn.':</font><br>'.convertTimeToLocal($eobuf[s]).'<p>
-	<font face="verdana,arial" size="1" color="#cc0000">'.$LDOpOut.':</font><br>'.convertTimeToLocal($eobuf[e]).'</td>';
+	echo '<font size="1" color="#cc0000">'.$LDOpIn.':</font><br>'.convertTimeToLocal($eobuf[s]).'<p>
+	<font size="1" color="#cc0000">'.$LDOpOut.':</font><br>'.convertTimeToLocal($eobuf[e]).'</td>';
 */
 	echo '
 	</tr>';
@@ -492,12 +504,10 @@ echo '
 		
 ?>
 
-
-</FONT>
 <p>
         
 <ul>
-<FONT    SIZE=2  FACE="Arial">
+
 <form action="op-pflege-logbuch-arch-start.php" method="post" name="chgdept" onSubmit="return pruf(this)">
 
 <input type="hidden" name="sid" value="<?php echo $sid; ?>">
@@ -554,14 +564,18 @@ echo '
 <p>
 <a href="javascript:window.close();"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>  alt="<?php echo $LDCancel ?>"></a>
  --></ul>
-<p>
-<?php
-require($root_path.'include/inc_load_copyrite.php');
-?>
-</FONT>
 
-</td>
-</tr>
-</table>
-</BODY>
-</HTML>
+<?php
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+# Assign page output to the mainframe template
+
+$smarty->assign('sMainFrameBlockData',$sTemp);
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
+?>

@@ -3,7 +3,7 @@
 if(!isset($notabs)||!$notabs){
 ?>
 <!-- Tabs  -->
-<tr  bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
+<tr>
 <td colspan=3>
 <?php 
 	if($target=="search") $img='such-b.gif'; //echo '<img '.createLDImgSrc($root_path,'such-b.gif','0').' alt="'.$LDSearch.'">';
@@ -17,6 +17,6 @@ if(!isset($notabs)||!$notabs){
 ?>
 <!--  Horizontal blue line below the tabs -->
 <tr>
-<td colspan=3  bgcolor=#00009c><img src="p.gif" border=0 width=1 height=5></td>
+<td class="wardlisttitlerow"><img src="p.gif" border=0 width=1 height=5></td>
 </tr>
 

@@ -5,7 +5,7 @@ require($root_path.'include/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.net, elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -126,31 +126,53 @@ $enc_obj=new Encounter;
 			$sql="SELECT * FROM care_test_request_".$subtarget." WHERE batch_nr='".$batch_nr."'";
 			if($ergebnis=$db->Execute($sql)){
 				if($editable_rows=$ergebnis->RecordCount()){
-							
+
 					$stored_request=$ergebnis->FetchRow();
-							   
+
 					//echo $stored_request['parameters'];
 					parse_str($stored_request['parameters'],$stored_param);
 					$edit_form=1;
 				}
             }else{
-				echo "<p>$sql<p>$LDDbNoRead"; 
-			}	
-		}				
-	}	   
+				echo "<p>$sql<p>$LDDbNoRead";
+			}
+		}
+	}
 
+# Prepare title
+$sTitle = $LDPendingTestRequest;
+if($batchrows) $sTitle = $sTitle." (".$batch_nr.")";
+
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',$sTitle);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('pending_chemlab.php')");
+
+ # hide return  button
+ $smarty->assign('pbBack',FALSE);
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',$sTitle);
+
+ # collect extra javascript code
+ ob_start();
 ?>
 
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
- <TITLE><?php echo "$LDDiagnosticTest $station" ?></TITLE>
-<?php
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-
-?>
 <style type="text/css">
 .lab {font-family: arial; font-size: 9; color:purple;}
 .lmargin {margin-left: 5;}
@@ -231,52 +253,47 @@ function printOut()
 }
 
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
+
 //-->
 </script>
-<script language="javascript" src="../js/setdatetime.js">
-</script>
-
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js">
-</script>
-</HEAD>
-
-<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> 
-onLoad="if (window.focus) window.focus(); " 
-topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
-
-<table width=100% border=0 cellpadding="5" cellspacing=0>
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php echo $LDPendingTestRequest." (".$batch_nr.")"; ?></STRONG></FONT>
-</td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp('pending_chemlab.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
-</tr>
-<tr>
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> colspan=2>
+<script language="javascript" src="../js/setdatetime.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
 
 <?php
-if($batchrows)
-{
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+$smarty->append('JavaScript',$sTemp);
+
+# Buffer page output
+
+ob_start();
+
+# If pending request available, show list and actual form
+
+if($batchrows){
+
 ?>
 
 <table border=0>
-  <tr valign="top">
-  <!-- Left block for the request list  -->
-    <td><FONT  SIZE=1  FACE="verdana">  
-<?php 
-
+	<tr valign="top">
+		<!-- Left block for the request list  -->
+		<td>
+<?php
+;
 /* The following routine creates the list of pending requests */
 require($root_path.'include/inc_test_request_lister_fx.php');
 
-?></td>
-<!-- right block for the form -->
-    <td>
-	
-<!-- Here begins the form  -->	
+?>
+		</td>
+		<!-- right block for the form -->
+		<td>
+
+		<!-- Here begins the form  -->
         
      <a href="javascript:printOut()"><img <?php echo createLDImgSrc($root_path,'printout.gif','0','absmiddle') ?> alt="<?php echo $LDPrintOut ?>"></a>
-     <a href="<?php echo 'labor_datainput.php'.URL_APPEND.'&encounter_nr='.$pn.'&job_id='.$batch_nr.'&mode='.$mode.'&update=1&user_origin=lab_mgmt'; ?>"><img <?php echo createLDImgSrc($root_path,'enterresults.gif','0','absmiddle') ?> alt="<?php echo $LDDone ?>"></a>
+     <a href="<?php echo 'labor_datainput.php'.URL_APPEND.'&encounter_nr='.$pn.'&job_id='.$batch_nr.'&mode='.$mode.'&update=1&user_origin=lab_mgmt'; ?>"><img <?php echo createLDImgSrc($root_path,'enterresults.gif','0','absmiddle') ?> alt="<?php echo $LDEnterResult ?>"></a>
      <a href="<?php echo $thisfile.URL_APPEND."&edit=".$edit."&mode=done&target=".$target."&subtarget=".$subtarget."&batch_nr=".$batch_nr."&pn=".$pn."&formtitle=".$formtitle."&user_origin=".$user_origin."&noresize=".$noresize; ?>"><img <?php echo createLDImgSrc($root_path,'done.gif','0','absmiddle') ?> alt="<?php echo $LDDone ?>"></a>
 
 <?php
@@ -284,12 +301,11 @@ require_once($root_path.'include/inc_test_request_printout_chemlabor.php');
 ?>
 
      <a href="javascript:printOut()"><img <?php echo createLDImgSrc($root_path,'printout.gif','0','absmiddle') ?> alt="<?php echo $LDPrintOut ?>"></a>
-     <a href="<?php echo 'labor_datainput.php'.URL_APPEND.'&encounter_nr='.$pn.'&job_id='.$batch_nr.'&mode='.$mode.'&update=1&user_origin=lab_mgmt'; ?>"><img <?php echo createLDImgSrc($root_path,'enterresults.gif','0','absmiddle') ?> alt="<?php echo $LDDone ?>"></a>
+     <a href="<?php echo 'labor_datainput.php'.URL_APPEND.'&encounter_nr='.$pn.'&job_id='.$batch_nr.'&mode='.$mode.'&update=1&user_origin=lab_mgmt'; ?>"><img <?php echo createLDImgSrc($root_path,'enterresults.gif','0','absmiddle') ?> alt="<?php echo $LDEnterResult ?>"></a>
      <a href="<?php echo $thisfile.URL_APPEND."&edit=".$edit."&mode=done&target=".$target."&subtarget=".$subtarget."&batch_nr=".$batch_nr."&pn=".$pn."&formtitle=".$formtitle."&user_origin=".$user_origin."&noresize=".$noresize; ?>"><img <?php echo createLDImgSrc($root_path,'done.gif','0','absmiddle') ?> alt="<?php echo $LDDone ?>"></a>
 
-</td>
-
-</tr>
+		</td>
+	</tr>
 </table>     
 
 <?php
@@ -302,16 +318,17 @@ else
 <a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>
 <?php
 }
-?>   	
-	
-	</td>
-  </tr>
-</table>
 
-<p>
+$sTemp = ob_get_contents();
+ ob_end_clean();
 
-<?php
-require($root_path.'include/inc_load_copyrite.php');?>
-<a name="bottom"></a>
-</BODY>
-</HTML>
+# Assign the page output to main frame template
+
+ $smarty->assign('sMainFrameBlockData',$sTemp);
+
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
+?>

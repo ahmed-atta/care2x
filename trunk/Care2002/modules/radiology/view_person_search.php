@@ -2,9 +2,9 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
-/*** CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+/*** CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file 'copy_notice.txt' for the licence notice
@@ -49,12 +49,46 @@ switch($HTTP_SESSION_VARS['sess_dicom_viewer']){
 				# Default viewer
 }
 
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('nursing');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',"$LDDicomImages - $LDSearchPat");
+
+  # hide back button
+ //$smarty->assign('pbBack',FALSE);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('dicom_search.php')");
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',"$LDDicomImages - $LDSearchPat");
+
+ # Create select viewer button
+
+ $smarty->assign('pbAux1',"javascript:popSelectDicomViewer('$sid','$lang')");
+ $smarty->assign('gifAux1',createLDImgSrc($root_path,'select_viewer.gif','0'));
+
+# Body onLoad javascript code
+
+$smarty->assign('sOnLoadJs','onLoad="document.srcform.searchkey.select();" onFocus="document.srcform.searchkey.select();"');
+
+ # Collect extra javascript code
+
+ ob_start();
 ?>
 
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
  <style type="text/css" name="s2">
 .indx{ font-family:verdana,arial; color:#ffffff; font-size:12; background-color:#6666ff}
 .v12{ font-family:verdana,arial; color:#000000; font-size:12;}
@@ -95,26 +129,17 @@ function chkform(d){
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
 
 <?php 
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-?></HEAD>
 
-<BODY  topmargin=0 leftmargin=0  marginwidth=0 marginheight=0 bgcolor=<?php echo $cfg['body_bgcolor']; ?> onLoad="document.srcform.searchkey.select();" onFocus="document.srcform.searchkey.select();" 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+$sTemp = ob_get_contents();
 
-<table width=100% border=0 cellspacing=0 >
+ob_end_clean();
 
-<tr valign=top height=15>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="15" >
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php echo "$LDDicomImages - $LDSearchPat" ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="15" align=right><nobr><a href="javascript:popSelectDicomViewer('<?php echo $sid ?>','<?php echo $lang ?>')" ><img <?php echo createLDImgSrc($root_path,'select_viewer.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';?>></a>
-<a href="javascript:window.history.back()"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('dicom_search.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
-</nobr>
-</td>
-</tr>
-<tr valign=top >
+$smarty->append('JavaScript',$sTemp);
 
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
+ob_start();
+
+?>
+
 <form action="<?php echo $thisfile ?>" method="get" onSubmit="return chkform(this)" name="srcform">
 <table border=0>
   <tr>
@@ -245,14 +270,17 @@ if($mode=='search'&&$rows)
 ?>
   </table>
 
+<?php
 
-</FONT>
+$sTemp = ob_get_contents();
+ob_end_clean();
 
-</td>
-</tr>
+# Assign to page template object
+$smarty->assign('sMainFrameBlockData',$sTemp);
 
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
 
-</table>        
-
-</BODY>
-</HTML>
+ ?>

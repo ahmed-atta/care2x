@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -29,80 +29,69 @@ $news=&$newsobj->getNews($nr);
 
 require_once($root_path.'include/inc_news_display_config.php');
 
-?>
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
 
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?><TITLE><?php echo $title ?></TITLE>
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
 
-<?php if($cfg['dhtml'])
-{ echo' <STYLE TYPE="text/css">
+ # Hide the title bar
+ $smarty->assign('bHideTitleBar',TRUE);
 
-	A:link  {text-decoration: none; color: '.$cfg['idx_txtcolor'].';}
-	A:hover {text-decoration: underline; color: '.$cfg['body_hover'].';}
-	A:active {text-decoration: none; color: '.$cfg['body_alink'].';}
-	A:visited {text-decoration: none; color: '.$cfg['idx_txtcolor'].';}
-	A:visited:active {text-decoration: none; color: '.$cfg['body_alink'].';}
-	A:visited:hover {text-decoration: underline; color: '.$cfg['body_hover'].';}
-	</style>';
+ # Window title
+ $smarty->assign('title',$title);
+
+ $smarty->assign('news_normal_display_width',$news_normal_display_width);
+
+ # Headline title
+ $smarty->assign('LDHeadline',$LDHeadline);
+
+
+if($mode=="preview4saved"){
+
+	$smarty->assign('bShowPrompt',TRUE);
+
+	$smarty->assign('sMascotImg','<img '.createMascot($root_path,'mascot1_r.gif','0').'>');
+    $smarty->assign('LDArticleSaved', $LDArticleSaved);
 }
-?>
-
-</HEAD>
-<BODY bgcolor=<?php if ($cfg) 
-{	echo $cfg['body_bgcolor']; 
-	 if (!$cfg['dhtml']){ echo ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } 
- }else echo '"#ffffff"';
-?>>
-<!-- 
-<img src="../img/groupcopy2.jpg" width="598" height="70" border="0"> -->
-
-<?php if($mode=="preview4saved") : ?>
-<table border=0>
-  <tr>
-    <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0') ?>></td>
-    <td colspan=2>
-	<FONT FACE="verdana,Arial"><FONT  SIZE=3 COLOR="#000066" FACE="verdana,Arial"><?php echo $LDArticleSaved ?></font>
-<hr>
-</td>
-  </tr>
-</table>
-<?php endif ?>
-
-<TABLE CELLSPACING=5 cellpadding=0 border="0" width="<?php echo $news_normal_display_width ?>">
-
-<TR >
-<TD WIDTH=80% VALIGN="top" >
-<img <?php echo (isset($news_type)&&($news_type='headline')) ?  createLDImgSrc($root_path,'headline4.png','0') :  createComIcon($root_path,'news.png','0')?>>
-<br>
-<?php 
 
 require($root_path.'include/inc_news_display_one.php');
 
-?>
-<p>
-<a href="<?php echo ($mode=='preview4saved') ? $returnfile : $breakfile; ?>"><img <?php echo createComIcon($root_path,'l-arrowgrnlrg.gif','0') ?>> <font face="arial" color="#006600"><?php echo $LDBackTxt ?></a>
+if(!isset($picalign) || empty($picalign)) {
+	$smarty->assign('sNewsBodyTemplate','news/headline_newslist_item.tpl');
+}else{
+	if(!($news['art_num']%2)) $smarty->assign('sNewsBodyTemplate','news/headline_newslist_item2.tpl');
+		else $smarty->assign('sNewsBodyTemplate','news/headline_newslist_item.tpl');
+}
 
-</TD>
-	
-<td valign=top width="1" bgcolor="<?php echo $cfg['idx_txtcolor']; ?>" ><img src="../../gui/img/common/default/pixel.gif" width="1" height="1" border=0>
-</td>
 
-<TD WIDTH=20% VALIGN="top" >
-<?php 
-	require($root_path.'include/inc_rightcolumn_menu.php'); 
-?>
-</TD>
-</TR>
+# Collect html for the submenu blocks
 
-<tr>
-<td colspan=3>
-<?php
-require($root_path.'include/inc_load_copyrite.php');
+ob_start();
+
+	include($root_path.'include/inc_rightcolumn_menu.php');
+
+	# Stop buffering, get contents
+
+	$sTemp = ob_get_contents();
+ob_end_clean();
+
+# assign contents to subframe
+
+$smarty->assign('sSubMenuBlock',$sTemp);
+
+# Assign the subframe template file name to mainframe
+
+$smarty->assign('sMainBlockIncludeFile','news/headline_news.tpl');
+
+  /**
+ * show Template
+ */
+
+ $smarty->display('common/mainframe.tpl');
+
 ?>
-</td>
-</tr>
-</TABLE>
-</BODY>
-</HTML>

@@ -6,9 +6,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -38,23 +38,46 @@ $pitems=array('msr_unit','median','lo_bound','hi_bound','lo_critical','hi_critic
 # Load the date formatter */
 include_once($root_path.'include/inc_date_format_functions.php');
     
-	//echo $lab_obj->getLastQuery();
-			
-	# Get the test test groups
-	$tgroups=&$lab_obj->TestGroups();
-	# Get the test parameter values
-	$tparams=&$lab_obj->TestParams($parameterselect);
+//echo $lab_obj->getLastQuery();
 
-	$breakfile="labor.php".URL_APPEND;
+# Get the test test groups
+$tgroups=&$lab_obj->TestGroups();
+
+# Get the test parameter values
+$tparams=&$lab_obj->TestParams($parameterselect);
+
+$breakfile="labor.php".URL_APPEND;
 
 // echo "from table ".$linecount;
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
 
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',$LDTestParameters);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('lab_param_config.php')");
+
+ # hide return  button
+ $smarty->assign('pbBack',FALSE);
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',$LDTestParameters);
+
+ # collect extra javascript code
+ ob_start();
 ?>
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
- <TITLE>Laborwerte Eingabe</TITLE>
 
 <script language="javascript" name="j1">
 <!--        
@@ -73,77 +96,47 @@ function editParam(nr)
 // -->
 </script>
 
-<?php 
-require($root_path.'include/inc_js_gethelp.php'); 
-require($root_path.'include/inc_css_a_hilitebu.php');
-?>
-<style type="text/css" name="1">
-.va12_n{font-family:verdana,arial; font-size:12; color:#000099}
-.a10_b{font-family:arial; font-size:10; color:#000000}
-.a12_b{font-family:arial; font-size:12; color:#000000}
-.a10_n{font-family:arial; font-size:10; color:#000099}
-</style>
-</HEAD>
-
-<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
 <?php
 
-/*if($newid) echo ' onLoad="document.datain.test_date.focus();" ';*/
- if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } 
- ?>>
+$sTemp = ob_get_contents();
+ob_end_clean();
 
-<table width=100% border=0 cellspacing=0 cellpadding=0>
+$smarty->append('JavaScript',$sTemp);
 
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php  echo $LDTestParameters; ?></STRONG></FONT>
-</td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp('lab_param_config.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
-</tr>
-<tr>
-<td  bgcolor=#dde1ec colspan=2>
+# Assign elements
 
-<FONT    SIZE=-1  FACE="Arial">
+$smarty->assign('sParamGroup',$parametergruppe[$parameterselect]);
+$smarty->assign('LDParameter',$LDParameter);
+$smarty->assign('LDMsrUnit',$LDMsrUnit);
+$smarty->assign('LDMedian',$LDMedian);
+$smarty->assign('LDLowerBound',$LDLowerBound);
+$smarty->assign('LDUpperBound',$LDUpperBound);
+$smarty->assign('LDLowerCritical',$LDLowerCritical);
+$smarty->assign('LDUpperCritical',$LDUpperCritical);
+$smarty->assign('LDLowerToxic',$LDLowerToxic);
+$smarty->assign('LDUpperToxic',$LDUpperToxic);
 
+$smarty->assign('sFormAction',$thisfile);
+$smarty->assign('LDSelectParamGroup',$LDSelectParamGroup);
+$smarty->assign('LDParamGroup',$LDParamGroup);
 
-<table border=0 bgcolor=#ffdddd cellspacing=1 cellpadding=1 width="100%">
-<tr>
-<td  bgcolor=#ff0000 colspan=2><FONT SIZE=2  FACE="Verdana,Arial" color="#ffffff">
-<b><?php echo $parametergruppe[$parameterselect]; ?></b>
-</td>
-</tr>
-<tr>
-<td  colspan=2>
+# Generate and buffer parameter rows
 
+ob_start();
 
-<table border="0" cellpadding=2 cellspacing=1>
-
-<tr>
-<td class="a12_b" bgcolor="#fefefe">&nbsp;<?php echo $LDParameter ?></td>
-<td  class="a12_b" bgcolor="#fefefe">&nbsp;<?php echo $LDMsrUnit ?></td>
-<td  class="a12_b" bgcolor="#fefefe">&nbsp;<?php echo $LDMedian ?></td>
-<td  class="a12_b" bgcolor="#fefefe">&nbsp;<?php echo $LDLowerBound ?></td>
-<td  class="a12_b" bgcolor="#fefefe">&nbsp;<?php echo $LDUpperBound ?></td>
-<td  class="a12_b" bgcolor="#fefefe">&nbsp;<?php echo $LDLowerCritical ?></td>
-<td  class="a12_b" bgcolor="#fefefe">&nbsp;<?php echo $LDUpperCritical ?></td>
-<td  class="a12_b" bgcolor="#fefefe">&nbsp;<?php echo $LDLowerToxic ?></td>
-<td  class="a12_b" bgcolor="#fefefe">&nbsp;<?php echo $LDUpperToxic ?></td>
-<td  bgcolor="#fefefe">&nbsp;</td>
-
-</tr>
-	
-<?php 
-	
 $toggle=0;
-if(is_object($tparams)){
-while($tp=$tparams->FetchRow()){
-	echo '
-	<tr>';
 
-	if($toggle) $bgc='#ffffee'; else $bgc='#efefef';
+if(is_object($tparams)){
+ while($tp=$tparams->FetchRow()){
+
+	//if($toggle) $bgc='#ffffee'; else $bgc='#efefef';
+	if($toggle) $bgc='wardlistrow1'; else $bgc='wardlistrow2';
 	$toggle=!$toggle;
+
+	echo '
+	<tr class="'.$bgc.'">
+	<td ><nobr>&nbsp;';
 	
-	echo '<td bgcolor="'.$bgc.'" class="a12_b"><nobr>&nbsp;';
 	if(isset($parameters[$tp['id']])&&!empty($parameters[$tp['id']])) echo $parameters[$tp['id']];
 		else echo $tp['name'];
 	
@@ -151,7 +144,7 @@ while($tp=$tparams->FetchRow()){
 
 	while(list($x,$v)=each($pitems)){
 		echo '
-			<td bgcolor="'.$bgc.'"  class="a12_b">';
+			<td>';
 		if($x){
 			if($tp[$v]>0) echo $tp[$v];
 		}else{
@@ -163,74 +156,48 @@ while($tp=$tparams->FetchRow()){
 	reset($pitems);
 	
 	echo '
-			<td bgcolor="'.$bgc.'"  class="a12_b">
+			<td>
 			<a href="javascript:editParam('.$tp['nr'].')"><img '.createLDImgSrc($root_path,'edit_sm.gif','0').'></a>
 			</td>';
 	echo '
 		</tr>';
  }
- }
+}
+
+$sTemp = ob_get_contents();
+
+ob_end_clean();
+
+$smarty->assign('sTestParamsRows',$sTemp);
+
+# Create the parameter group select
+
+$sTemp = '<select name="parameterselect" size=1>';
+
+while($tg=$tgroups->FetchRow()){
+	$sTemp = $sTemp.'<option value="'.$tg['group_id'].'"';
+	if($parameterselect==$tg['group_id']) $sTemp = $sTemp.' selected';
+	$sTemp = $sTemp.'>';
+	if(isset($parametergruppe[$tg['group_id']])&&!empty($parametergruppe[$tg['group_id']])) $sTemp = $sTemp.$parametergruppe[$tg['group_id']];
+		else $sTemp = $sTemp.$tg['name'];
+	$sTemp = $sTemp.'</option>';
+	$sTemp = $sTemp."\n";
+}
+$sTemp = $sTemp.'</select>';
+
+$smarty->assign('sParamGroupSelect',$sTemp);
+
+# Assign the parameter group hidden and submit inputs
+
+$smarty->assign('sSubmitSelect','<input type=hidden name="sid" value="'.$sid.'">
+	<input type=hidden name="lang" value="'.$lang.'">
+	<input  type="image" '.createLDImgSrc($root_path,'auswahl2.gif','0').'>');
+
+ $smarty->assign('sMainBlockIncludeFile','laboratory/test_params.tpl');
+
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
 ?>
-</table>
-</td>
-</tr>
-
-</table>
-
-
-<form action=<?php echo $thisfile; ?> method=post onSubmit="return chkselect(this)" name="paramselect">
-<table border=0>
-<tr>
-<td colspan=3><FONT SIZE=-1  FACE="Arial"><b><?php echo $LDSelectParamGroup ?></b>
-</td>
-</tr>
-
-<tr>
-<td><FONT SIZE=-1  FACE="Arial"><?php echo $LDParamGroup ?>:
-</td>
-
-<td >
-<select name="parameterselect" size=1>
-<?php 
-
-	while($tg=$tgroups->FetchRow())
-      {
-		echo '<option value="'.$tg['group_id'].'"';
-		if($parameterselect==$tg['group_id']) echo ' selected';
-		echo '>';
-		if(isset($parametergruppe[$tg['group_id']])&&!empty($parametergruppe[$tg['group_id']])) echo $parametergruppe[$tg['group_id']];
-			else echo $tg['name'];
-		echo '</option>';
-		echo "\n";
-	  }	
-
-?>
-</select>
-</td>
-
-<td>
-<input type=hidden name="sid" value="<?php echo $sid; ?>">
-<input type=hidden name="lang" value="<?php echo $lang; ?>">
-<FONT SIZE=-1  FACE="Arial">&nbsp;<input  type="image" <?php echo createLDImgSrc($root_path,'auswahl2.gif','0') ?>>
-</td>
-</tr>
-</tr>
-
-</table>
-
-</form>
-
-</FONT>
-<p>
-</td>
-
-</tr>
-</table>        
-<p>
-
-<?php
-require($root_path.'include/inc_load_copyrite.php');
-?>
-
-</BODY>
-</HTML>

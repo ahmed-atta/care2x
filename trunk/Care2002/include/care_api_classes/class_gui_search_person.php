@@ -16,8 +16,8 @@
 * /include/inc_date_format_functions.php
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
-* @version beta 2.0.0
-* @copyright 2002,2003,2004,2005 Elpidio Latorilla
+* @version beta 2.0.1
+* @copyright 2002,2003,2004,2005,2005 Elpidio Latorilla
 * @package care_api
 */
 
@@ -158,7 +158,7 @@ class GuiSearchPerson {
 		}
 
 		if(!empty($skey)) $searchkey = $skey;
-
+		
 		# Load the language tables
 		$lang_tables =$this->langfile;
 		include($root_path.'include/inc_load_lang_tables.php');
@@ -201,13 +201,16 @@ class GuiSearchPerson {
 		if(!defined('SHOW_FIRSTNAME_CONTROLLER')) define('SHOW_FIRSTNAME_CONTROLLER',$this->show_firstname_controller);
 
 		if(SHOW_FIRSTNAME_CONTROLLER){
-			if(isset($HTTP_POST_VARS['firstname_too'])&&$HTTP_POST_VARS['firstname_too']){
-				$firstname_too=1;
-			}elseif($mode=='paginate'&&isset($HTTP_GET_VARS['firstname_too'])&&$HTTP_GET_VARS['firstname_too']){
-				$firstname_too=1;
-			}else{
-				$firstname_too=0;
+			if(isset($HTTP_POST_VARS['firstname_too'])){
+				if($HTTP_POST_VARS['firstname_too']){
+					$firstname_too=1;
+				}elseif($mode=='paginate'&&isset($HTTP_GET_VARS['firstname_too'])&&$HTTP_GET_VARS['firstname_too']){
+					$firstname_too=1;
+				}
+			}elseif($mode!='search'){
+				$firstname_too=TRUE;
 			}
+
 		}
 		if(($this->mode=='search' || $this->mode=='paginate') && !empty($searchkey)){
 			
@@ -339,39 +342,39 @@ class GuiSearchPerson {
 			echo '
 			<p>
 			<table border=0 cellpadding=2 cellspacing=1>
-			  <tr bgcolor="#66ee66" background="'.$root_path.'gui/img/common/default/tableHeaderbg.gif">';
+			  <tr class="reg_list_titlebar">';
 ?>
-			    <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
+			    <td><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
 <?php
 			echo $pagen->makeSortLink($LDRegistryNr,'pid',$oitem,$odir,$this->targetappend);
 ?>
 			    </b>
 			    </td>
-			    <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
+			    <td><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
 <?php
 			echo $pagen->makeSortLink($LDSex,'sex',$oitem,$odir,$this->targetappend);
  ?>
  			    </b>
 			    </td>
-			    <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
+			    <td><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
 <?php
 			echo $pagen->makeSortLink($LDLastName,'name_last',$oitem,$odir,$this->targetappend);
 ?>
 			    </b>
 			    </td>
-			   <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
+			   <td><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
 <?php
 			echo $pagen->makeSortLink($LDFirstName,'name_first',$oitem,$odir,$this->targetappend);
 ?>
 			    </b>
 			    </td>
-			    <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
+			    <td><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
 <?php
 			echo $pagen->makeSortLink($LDBday,'date_birth',$oitem,$odir,$this->targetappend);
 ?>
 			    </b>
 			    </td>
-			    <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
+			    <td><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
 <?php
 			echo $pagen->makeSortLink($LDZipCode,'addr_zip',$oitem,$odir,$this->targetappend);
 ?>
@@ -380,7 +383,7 @@ class GuiSearchPerson {
 <?php
 			if(!empty($this->targetfile)){
 ?>
-			    <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>&nbsp;&nbsp;<?php echo $LDOptions; ?></b>
+			    <td><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>&nbsp;&nbsp;<?php echo $LDOptions; ?></b>
 			    </td>
 			  </tr>
 <?php
@@ -389,8 +392,14 @@ class GuiSearchPerson {
 						
 				if($zeile['status']==''||$zeile['status']=='normal'){
 
-					echo "<tr bgcolor=";
-					if($toggle) { echo "#efefef>"; $toggle=0;} else {echo "#ffffff>"; $toggle=1;};
+					echo "<tr ";
+					if($toggle) {
+						echo 'class="wardlistrow2">';
+						$toggle=0;
+					} else {
+						echo 'class="wardlistrow1">';
+						$toggle=1;
+					};
 					
 					echo '<td align="right"><font face=arial size=2>';
 					echo "&nbsp;".$zeile['pid'];

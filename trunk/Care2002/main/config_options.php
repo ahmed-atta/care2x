@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -15,85 +15,84 @@ define('LANG_FILE','specials.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
-?>
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
-<?php 
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-?></HEAD>
 
-<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
 
-<?php //foreach($argv as $v) echo "$v "; ?>
-<table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
-<tr valign=top>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+1  FACE="Arial"><STRONG> &nbsp; <?php echo $LDUserConfigOpt; ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('config_user.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
-</tr>
-<tr valign=top >
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
-  <p><br>
-  
-  <table border=0 cellpadding=5>
-    <tr>
-      <td>&nbsp;&nbsp;<a href="colorchg.php<?php echo URL_APPEND; ?>"><img <?php  echo createComIcon($root_path,'fileman.gif','0'); ?>></a></td>
-      <td><FONT face="Verdana,Helvetica,Arial" size=2 >
-	  		<a href="colorchg.php<?php echo URL_APPEND; ?>"><b><font color="#990000"><?php echo $LDColorOpt; ?></font></b></a><br>
-	  		<?php echo $LDColorOptTxt ?></td>
-    </tr>
-    <tr>
-      <td>&nbsp;&nbsp;<a href="excolorchg.php<?php echo URL_APPEND; ?>"><img <?php  echo createComIcon($root_path,'password.gif','0'); ?>></a></td>
-      <td><FONT face="Verdana,Helvetica,Arial" size=2 >
-	  		<a href="excolorchg.php<?php echo URL_APPEND; ?>"><b><font color="#990000"><?php echo $LDColorOptExt ?></font></b></a><br>
-			<?php echo $LDColorOptExtTxt ?></td>
-    </tr>
-    <tr>
-      <td>&nbsp;&nbsp;<a href="config_options_mascot.php<?php echo URL_APPEND; ?>"><img <?php  echo createComIcon($root_path,'forum.gif','0'); ?>></a></td>
-      <td><FONT face="Verdana,Helvetica,Arial" size=2 >
-	  		<a href="config_options_mascot.php<?php echo URL_APPEND; ?>"><b><font color="#990000"><?php echo $LDMascotOpt ?></font></b></a><br>
-			<?php echo $LDMascotOptTxt ?></td>
-    </tr>
-    <tr>
-      <td>&nbsp;&nbsp;<a href="config_options_gui_template.php<?php echo URL_APPEND; ?>"><img <?php  echo createComIcon($root_path,'ftpmanager.gif','0'); ?>></a></td>
-      <td><FONT face="Verdana,Helvetica,Arial" size=2 >
-	  		<a href="config_options_gui_template.php<?php echo URL_APPEND; ?>"><b><font color="#990000"><?php echo $LDGUITemplate ?></font></b></a><br>
-			<?php echo $LDGUITemplateTxt ?></td>
-    </tr>
-    <tr>
-      <td>&nbsp;&nbsp;<a href="<?php echo $root_path.'index.php'.URL_APPEND;
-				 				 if(($cfg['mask']==1)||($cfg['mask']=='')) echo '&mask=2'; else echo '&mask=1';?>" target="_top"><img <?php  echo createComIcon($root_path,'redirects.gif','0'); ?>></a></td>
-      <td><FONT face="Verdana,Helvetica,Arial" size=2 >
-	  		<a href="<?php echo $root_path.'index.php'.URL_APPEND;
-				 				 if(($cfg['mask']==1)||($cfg['mask']=='')) echo '&mask=2'; else echo '&mask=1';?>" target="_top">
-							<b><font color="#990000"><?php if(($cfg['mask']==1)||($cfg['mask']=='')) echo $LDDisplay2; else echo $LDDisplay1;?></font></b></a> 
-				  <br>
-			<?php if(($cfg['mask']==1)||($cfg['mask']=='')) echo $LDDisplay2Txt; else echo $LDDisplay1Txt; ?></td>
-    </tr>
-  </table>
-  
-  
-</FONT>
-<p>
-<ul>
-<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> border="0"></a>
-</ul>
-</td>
-</tr>
-<tr>
-<td bgcolor=<?php echo $cfg['bot_bgcolor']; ?>  colspan=2>
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
 
-<?php
-require($root_path.'include/inc_load_copyrite.php');
-?>
-</td>
-</tr>
-</table>        
-&nbsp;
-</BODY>
-</HTML>
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
+
+# Toolbar title
+
+ $smarty->assign('sToolbarTitle',$LDUserConfigOpt);
+
+# href for the  button
+ $smarty->assign('pbHelp',"javascript:gethelp('config_user.php')");
+
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('title',$LDUserConfigOpt);
+ 
+ # Prepare the alternative window url param
+  if(($cfg['mask']==1)||($cfg['mask']=='')){
+		$sMask = '&mask=2';
+	}else{
+		$sMask = '&mask=1';
+	}
+
+ # Assign the options links
+
+ $smarty->assign('LDColorOpt','<a href="colorchg.php'.URL_APPEND.'">'.$LDColorOpt.'</a>');
+ $smarty->assign('LDColorOptExt','<a href="excolorchg.php'.URL_APPEND.'">'.$LDColorOptExt.'</a>');
+ $smarty->assign('LDMascotOpt','<a href="config_options_mascot.php'.URL_APPEND.'">'.$LDMascotOpt.'</a>');
+ $smarty->assign('LDGUITemplate','<a href="config_options_gui_template.php'.URL_APPEND.'">'.$LDGUITemplate.'</a>');
+ $smarty->assign('LDControlButtons','<a href="config_options_control_buttons.php'.URL_APPEND.'">'.$LDControlButtons.'</a>');
+ $smarty->assign('LDComIcons','<a href="config_options_icons.php'.URL_APPEND.'">'.$LDComIcons.'</a>');
+ $smarty->assign('LDCssThemes','<a href="config_options_css.php'.URL_APPEND.'">'.$LDCssThemes.'</a>');
+ $smarty->assign('LDSmartyTemplate','<a href="config_options_smarty.php'.URL_APPEND.'">'.$LDSmartyTemplate.'</a>');
+
+ if(($cfg['mask']==1)||($cfg['mask']==''))  $smarty->assign('LDDisplay','<a href="'.$root_path.'index.php'.URL_APPEND.$sMask.'" target="_top">'.$LDDisplay2.'</a>');
+ 	else $smarty->assign('LDDisplay','<a href="'.$root_path.'index.php'.URL_APPEND.$sMask.'" target="_top">'.$LDDisplay1.'</a>');
+
+# Assign the description text
+
+ $smarty->assign('LDColorOptTxt',$LDColorOptTxt);
+ $smarty->assign('LDColorOptExtTxt',$LDColorOptExtTxt);
+ $smarty->assign('LDMascotOptTxt',$LDMascotOptTxt);
+ $smarty->assign('LDGUITemplateTxt',$LDGUITemplateTxt);
+ $smarty->assign('LDControlButtonsTxt',$LDControlButtonsTxt);
+ $smarty->assign('LDComIconsTxt',$LDComIconsTxt);
+ $smarty->assign('LDCssThemesTxt',$LDCssThemesTxt);
+ $smarty->assign('LDSmartyTemplateTxt',$LDSmartyTemplateTxt);
+
+  if(($cfg['mask']==1)||($cfg['mask']==''))  $smarty->assign('LDDisplayTxt',$LDDisplay2Txt);
+ 	else $smarty->assign('LDDisplayTxt',$LDDisplay1Txt);
+
+# Assign the description text
+
+ $smarty->assign('LDColorOptImg','<a href="colorchg.php'.URL_APPEND.'"><img '.createComIcon($root_path,'fileman.gif','0','',FALSE).'></a>');
+ $smarty->assign('LDColorOptExtImg','<a href="excolorchg.php'.URL_APPEND.'"><img '.createComIcon($root_path,'password.gif','0','',FALSE).'></a>');
+ $smarty->assign('LDMascotOptImg','<a href="config_options_mascot.php'.URL_APPEND.'"><img '.createComIcon($root_path,'smiley2.gif','0','',FALSE).'></a>');
+ $smarty->assign('LDGUITemplateImg','<a href="config_options_gui_template.php'.URL_APPEND.'"><img '.createComIcon($root_path,'ftpmanager.gif','0','',FALSE).'></a>');
+ $smarty->assign('LDControlButtonsImg','<a href="config_options_control_buttons.php'.URL_APPEND.'"><img '.createComIcon($root_path,'ftpmanager.gif','0','',FALSE).'></a>');
+ $smarty->assign('LDComIconsImg','<a href="config_options_icons.php'.URL_APPEND.'"><img '.createComIcon($root_path,'forum.gif','0','',FALSE).'></a>');
+ $smarty->assign('LDCssThemesImg','<a href="config_options_css.php'.URL_APPEND.'"><img '.createComIcon($root_path,'password.gif','0','',FALSE).'></a>');
+ $smarty->assign('LDSmartyTemplateImg','<a href="config_options_smarty.php'.URL_APPEND.'"><img '.createComIcon($root_path,'fileman.gif','0','',FALSE).'></a>');
+
+  if(($cfg['mask']==1)||($cfg['mask']==''))  $smarty->assign('LDDisplayImg','<a href="'.$root_path.'index.php'.URL_APPEND.$sMask.'" target="_top"><img '.createComIcon($root_path,'redirects.gif','0','',FALSE).'></a>');
+ 	else $smarty->assign('LDDisplayImg','<a href="'.$root_path.'index.php'.URL_APPEND.$sMask.'" target="_top"><img '.createComIcon($root_path,'redirects.gif','0','',FALSE).'></a>');
+
+$smarty->assign('sMainBlockIncludeFile','main/config_options.tpl');
+ /**
+ * show Template
+ */
+
+$smarty->display('common/mainframe.tpl');
+
+ ?>

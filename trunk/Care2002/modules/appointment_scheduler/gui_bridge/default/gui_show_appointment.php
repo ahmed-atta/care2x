@@ -29,7 +29,7 @@ function checkApptDate(d,e,n){
 </script>
 
 <table border=0 cellpadding=3 cellspacing=1 width=100%>
-  <tr bgcolor="#f6f6f6">
+  <tr class="wardlisttitlerow">
     <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo "$LDDate/$LDTime/$LDDetails"; ?></td>
     <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDPatient; ?></td>
     <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDAppointments; ?></td>
@@ -40,10 +40,10 @@ $toggle=0;
 /* Get department info */
 while($row=$result->FetchRow()){
 	if(($row['urgency']==7)&&($row['appt_status']=='pending')){
-		$bgc='yellow';
+		$bgc='hilite';
 	}else{
-		if($toggle) $bgc='#f3f3f3';
-			else $bgc='#f6f6f6';
+		if($toggle) $bgc='wardlistrow2';
+			else $bgc='wardlistrow1';
 	}
 	$toggle=!$toggle;
 	$dept=$dept_obj->getDeptAllInfo($row['to_dept_nr']);
@@ -51,16 +51,16 @@ while($row=$result->FetchRow()){
 		else $tc='';
 ?>
 
-  <tr   bgcolor="<?php echo $bgc; ?>" >
+  <tr   class="<?php echo $bgc; ?>" >
     <td><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>"><?php echo @formatDate2Local($row['date'],$date_format); ?></td>
     <td rowspan=4 valign="top"><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>"><font color="<?php if(empty($tc)) echo '#0000cc'; else echo $tc; ?>"><b>
-	<a href="<?php echo $root_path.'modules/registration_admission/patient_register_show.php'.URL_APPEND.'&pid='.$row['pid']; ?>">
+	<a href="<?php echo $root_path.'modules/registration_admission/patient_register_show.php'.URL_APPEND.'&pid='.$row['pid']; ?>" title="<?php echo "$LDRegistration: $LDClk2Show" ?>">
 	<?php 
 		echo ucfirst($row['name_last']).'</b></font>, '.ucfirst($row['name_first']).'<br>';
 		echo @formatDate2Local($row['date_birth'],$date_format);
-		
-		if($row['death_date']&&$row['death_date']!='0000-00-00'){
-			echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0').'>&nbsp;'.@formatDate2Local($row['death_date'],$date_format).'</font>';
+
+		if($row['death_date']&&$row['death_date']!=DBF_NODATE){
+			echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0','',TRUE).'>&nbsp;'.@formatDate2Local($row['death_date'],$date_format).'</font>';
 		}
 		
 		echo '<br>';
@@ -89,7 +89,7 @@ while($row=$result->FetchRow()){
 		}else{
 			$urg_img='level_'.$row['urgency'].'.gif';
 		}
-		echo '<img '.createComIcon($root_path,$urg_img,'0','absmiddle').'>'; 
+		echo '<img '.createComIcon($root_path,$urg_img,'0','absmiddle',TRUE).'>'; 
 	?>
 <?php 
 		if($row['appt_status']=='done' && $row['encounter_nr']){
@@ -104,7 +104,7 @@ while($row=$result->FetchRow()){
     <td rowspan=4 valign="top"> 
 	<?php
 		if($row['appt_status']=='pending'){
-			if(!$row['death_date']||$row['death_date']=='0000-00-00'){
+			if(!$row['death_date']||$row['death_date']==DBF_NODATE){
 	?>
 	<a href="<?php echo $editorfile.URL_APPEND.'&pid='.$row['pid'].'&target=&mode=select&nr='.$row['nr']; ?>"><img <?php echo createLDImgSrc($root_path,'edit_sm.gif','0'); ?>></a> <br>
 <!-- 	<a href="<?php echo $root_path.'modules/registration_admission/aufnahme_start.php'.URL_APPEND; ?>&pid=<?php echo $row['pid'] ?>&origin=patreg_reg&encounter_class_nr=<?php echo $row['encounter_class_nr']; ?>&appt_nr=<?php echo $row['nr']; ?>"><img <?php echo createLDImgSrc($root_path,'admit_sm.gif','0'); ?>></a> <br>
@@ -121,7 +121,7 @@ while($row=$result->FetchRow()){
 	?>
 	</td>  
   </tr>
-  <tr   bgcolor="<?php echo $bgc; ?>" >
+  <tr   class="<?php echo $bgc; ?>" >
     <td><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>"><?php echo $row['time']; ?></td>
     <td><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>">
 		<?php 
@@ -130,7 +130,7 @@ while($row=$result->FetchRow()){
 		?>
 	</td>
 	</tr>
-  <tr  bgcolor="<?php echo $bgc; ?>" >
+  <tr  class="<?php echo $bgc; ?>" >
     <td><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>">
 	<?php 
 		if(isset($$dept['LD_var'])&&!empty($$dept['LD_var'])) echo $$dept['LD_var']; 
@@ -139,13 +139,13 @@ while($row=$result->FetchRow()){
     <td><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>">
 	<?php 
 		if($row['remind']&&$row['appt_status']=='pending'){
-			if($row['remind_email']) echo '<img '.createComIcon($root_path,'email.gif','0').'> ';
-			if($row['remind_mail']) echo '<img '.createComIcon($root_path,'print.gif','0').'> ';
-			if($row['remind_phone']) echo '<img '.createComIcon($root_path,'violet_phone_2.gif','0').'> ';
+			if($row['remind_email']) echo '<img '.createComIcon($root_path,'email.gif','0','',TRUE).'> ';
+			if($row['remind_mail']) echo '<img '.createComIcon($root_path,'print.gif','0','',TRUE).'> ';
+			if($row['remind_phone']) echo '<img '.createComIcon($root_path,'violet_phone_2.gif','0','',TRUE).'> ';
 		}
 		 ?></td>
   </tr>
-  <tr  bgcolor="<?php echo $bgc; ?>" >
+  <tr  class="<?php echo $bgc; ?>" >
     <td><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>"><?php echo $row['to_personell_name']; ?></td>
     <td><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>">
 	<?php
@@ -160,7 +160,4 @@ while($row=$result->FetchRow()){
 }
 ?>
 </table>
-<img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle'); ?>>
-<a href="<?php echo $root_path.'modules/registration_admission/patient_register_pass.php'.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target=search'; ?>"> 
-<font size=+1 color="#000066" face="verdana,arial"><?php echo $LDScheduleNewAppointment; ?></font>
-</a>
+

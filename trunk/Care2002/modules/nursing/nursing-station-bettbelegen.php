@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -17,10 +17,10 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 /* Load date formatter */
 require_once($root_path.'include/inc_date_format_functions.php');
 
-
 $datum=date('Y-m-d');
 $zeit=date('H:m:s');
 $toggler=0;
+
 // init sql dbase 
 
 $dbtable='care_admission_patient';
@@ -40,13 +40,39 @@ if(isset($mode)&&$mode=='search'&&!empty($searchkey)){
 	$glob_obj->getConfig('patient_%');	
 }
 
-?>
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
- <TITLE><?php echo $LDAssignOcc ?></TITLE>
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
 
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('nursing');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',"$LDAssignOcc $s");
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('nursing_station.php','assign','','$s','$LDAssignOcc')");
+
+ # href for close button
+ $smarty->assign('breakfile',"javascript:window.close();");
+
+ # OnLoad Javascript code
+ $smarty->assign('sOnLoadJs','onLoad="if (window.focus) window.focus(); document.psearch.searchkey.select();"');
+
+ # Window bar title
+ $smarty->assign('title',"$LDAssignOcc $s");
+ 
+ # Hide Copyright footer
+ $smarty->assign('bHideCopyright',TRUE);
+
+ # Collect extra javascript code
+
+ ob_start();
+?>
 
 <script language="javascript">
 <!-- 
@@ -88,29 +114,30 @@ function pruf(d){
 <script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
 
 <?php 
-require($root_path.'include/inc_js_gethelp.php'); 
-require($root_path.'include/inc_css_a_hilitebu.php');
+
+$sTemp = ob_get_contents();
+
+ob_end_clean();
+
+$smarty->append('JavaScript',$sTemp);
+
+# Buffer page output
+
+ob_start();
+
 ?>
 
-</HEAD>
-
-<BODY bgcolor=white  topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 link="#800080" vlink="#800080" onLoad="if (window.focus) window.focus();document.psearch.searchkey.select();">
 <table width=100% border=0 cellpadding="5" cellspacing=0 >
+
 <tr>
-<td bgcolor="<?php echo "#".$tb; ?>" >
-<FONT  COLOR="<?php echo "#".$tt; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php echo "$LDAssignOcc $s"; ?></STRONG></FONT>
-</td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp('nursing_station.php','assign','','<?php echo $s ?>','<?php echo $LDAssignOcc ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:window.close();" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
-</tr>
-<tr>
-<td colspan=2>
+<td>
 <font face=verdana,arial ><?php echo $LDPatListElements[0] ?>: <b><?php echo $rm; ?></b> &nbsp;<?php echo $LDPatListElements[1] ?>: <b><?php echo $bd; ?></b>&nbsp;
-<a href="javascript:belegen('lock')" title="<?php echo $LDClk2LockBed ?>"><img <?php echo createComIcon($root_path,'delete2.gif','0','absmiddle') ?> alt="<?php echo $LDClk2LockBed ?>"> <?php echo $LDLockThisBed ?></a>
+<a href="javascript:belegen('lock')" title="<?php echo $LDClk2LockBed ?>"><img <?php echo createComIcon($root_path,'delete2.gif','0','absmiddle',TRUE) ?> alt="<?php echo $LDClk2LockBed ?>"> <?php echo $LDLockThisBed ?></a>
 <p>
  <ul>
  
  <form action="nursing-station-bettbelegen.php" method="post" name="psearch" onSubmit="return pruf(this)">
- <font face="verdana,arial" size=3 color="#990000"><b><?php echo $LDSearchPatient; ?></b></font>
+ <div class="prompt"><?php echo $LDSearchPatient; ?></div>
  <table border=0 cellspacing=0 cellpadding=1>
    <tr>
      <td bgcolor=#0>
@@ -118,21 +145,18 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 	 <table border=0 bgcolor=#ffffcc cellspacing=0 cellpadding=10>
 		<tr>
 		    <td colspan=2><font face=verdana,arial size=2><?php echo $LDSearchPrompt ?></td>
- 	 </tr>		
-	 <tr>
- 		   <td><input type="text" name="searchkey" size=40 maxlength=40 value=<?php echo $searchkey; ?>>
-  	      </td>		  
-			 <td>&nbsp;
-	       </td>
- 	 </tr>
-
-	  <tr>
- 	   <td><input type="image" <?php echo createLDImgSrc($root_path,'searchlamp.gif','0','absmiddle') ?> alt="<?php echo $LDSearchPatient ?>" > </td>
-		   <td> <a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a>
-	       </td>
-	  </tr>
+		</tr>
+		<tr>
+			<td><input type="text" name="searchkey" size=40 maxlength=40 value=<?php echo $searchkey; ?>></td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td><input type="image" <?php echo createLDImgSrc($root_path,'searchlamp.gif','0','absmiddle') ?> alt="<?php echo $LDSearchPatient ?>" > </td>
+			<td> <a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a></td>
+		</tr>
 	</table>
-</td>
+	
+	</td>
    </tr>
  </table>
   
@@ -243,7 +267,7 @@ if($mode=='search'){
 						if($toggle) { echo "#efefef>"; $toggle=0;} else {echo "#ffffff>"; $toggle=1;};
 						echo"<td><font face=arial size=2>";
                         echo '&nbsp;'.$full_en;
-						if($row['encounter_class_nr']=='amb') echo ' <img '.createComIcon($root_path,'redflag.gif').'> <font size=1 color="red">'.$LDAmbulant.'</font>';
+						if($row['encounter_class_nr']=='amb') echo ' <img '.createComIcon($root_path,'redflag.gif','0','',TRUE).'> <font size=1 color="red">'.$LDAmbulant.'</font>';
                         echo "</td>";	
 						echo"<td><font face=arial size=2>";
 						echo "&nbsp;".ucfirst($row['name_last']);
@@ -278,10 +302,22 @@ if($mode=='search'){
 
 ?>
 
-<p>
 </td>
 </tr>
 </table>        
 
-</BODY>
-</HTML>
+<?php
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+# Assign the page output to the mainframe center block
+
+ $smarty->assign('sMainFrameBlockData',$sTemp);
+
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
+ ?>

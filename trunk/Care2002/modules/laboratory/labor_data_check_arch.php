@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -43,10 +43,13 @@ if (!$linecount) {
 <?php echo setCharSet(); ?>
  <TITLE>Labor Check Archive</TITLE>
  <style type="text/css" name="1">
-.va12_w{font-family:verdana,arial; font-size:12; color:#ffffff}
-.a10_b{font-family:arial; font-size:10; color:#000000}
-.a10_n{font-family:arial; font-size:10; color:#000099}
+.va12_w{color:#ffffff}
 </style>
+
+<?php 
+require($root_path.'include/inc_js_gethelp.php');
+require($root_path.'include/inc_css_a_hilitebu.php');
+?>
 
 </HEAD>
 
@@ -66,7 +69,6 @@ if (!$linecount) {
 <td bgcolor=#333399>&nbsp;</td>
 <td valign=top><p><br>
 <ul>
-<FONT    SIZE=-1  FACE="Arial">
 
 <?php 
 if($linecount>1) echo "<p>$LDReportFoundMany";
@@ -94,25 +96,25 @@ if($linecount>1) echo "<br> $LDIfWantEditMany<p>";
 						$abuf=array_pop($abuf);
 						parse_str(trim($abuf),$last);
 						
-					    echo '<tr bgcolor=';
+					    echo '<tr class=';
 						
-						if($toggle) { echo "#dfdfdf>"; $toggle=0;} else {echo "#ffffff>"; $toggle=1;};
+						if($toggle) { echo "wardlistrow2>"; $toggle=0;} else {echo "wardlistrow1>"; $toggle=1;};
 	
 	                    $fwd_url = 'labor_datainput.php'.URL_APPEND.'&encounter_nr='.$encounter_nr.'&job_id='.$zeile['job_id'].'&parameterselect='.$zeile['group_id'].'&mode='.$mode.'&update=1';
 	                     
 						     /* Print the job id or batch nr., test date and time */
 							echo'
-							<td><font face=arial size=2>
+							<td>
 							&nbsp;<a href='.$fwd_url.'>'.$zeile['job_id'].'</a>
 							</td>
-							<td><font face=arial size=2>
+							<td>
 							&nbsp;<a href='.$fwd_url.'>'.$parametergruppe[$zeile['group_id']].'</a>
 							</td>
-							<td><font face=arial size=2>&nbsp;'.formatDate2Local($zeile['test_date'],$date_format).'
+							<td>&nbsp;'.formatDate2Local($zeile['test_date'],$date_format).'
 							</td>
-							<td><font face=arial size=2>&nbsp;'.convertTimeToLocal($zeile['test_time']).'
+							<td>&nbsp;'.convertTimeToLocal($zeile['test_time']).'
 							</td>';
-						    echo'<td><font face=arial size=2>&nbsp';
+						    echo'<td>&nbsp';
 						
 						    /* Create the link button */
 					        echo '<a href='.$fwd_url.'><img 
@@ -122,7 +124,7 @@ if($linecount>1) echo "<br> $LDIfWantEditMany<p>";
 					echo "</table>";
 
 ?><p>
-<form action="labor_datainput.php" method="get"><font face=verdana,arial size=4>
+<form action="labor_datainput.php" method="get"><font size=4>
 <b><?php echo $LDNewJob ?></b></font><br>
 <?php echo "$LDNew $LDJobIdNr" ?>:<br>
 <input type="text" name="job_id" size=15 maxlength=15>

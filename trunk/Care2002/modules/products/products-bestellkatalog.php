@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -127,33 +127,33 @@ if (isset($mode)&&($mode=='search')&&($keyword!=''))
 	/**
 	* The following routine displays the search results
 	*/	
-				echo "<p><font face=verdana,arial size=1>".str_replace("~nr~",$linecount,$LDFoundNrData)."<br>
+				echo "<p><font size=1>".str_replace("~nr~",$linecount,$LDFoundNrData)."<br>
 						$LDClk2SeeInfo</font><br>";
 
 					$ergebnis->MoveFirst();
 					echo '<table border=0 cellpadding=3 cellspacing=1> 
-					  		<tr bgcolor="#ffffee">';
+					  		<tr class="wardlisttitlerow">';
 					for ($i=0;$i<sizeof($LDGenindex);$i++)
 					echo '
-							<td><font face=Verdana,Arial size=1 color="#000080">'.$LDGenindex[$i].'</td>';
+							<td><font color="#000080">'.$LDGenindex[$i].'</td>';
 					echo '</tr>';	
 
 					while($zeile=$ergebnis->FetchRow())
 					{
-						echo "<tr bgcolor=";
-						if($toggle) { echo "#dfdfdf>"; $toggle=0;} else {echo "#fefefe>"; $toggle=1;};
+						echo '<tr class="';
+						if($toggle) { echo 'wardlistrow2">'; $toggle=0;} else {echo 'wardlistrow1">'; $toggle=1;};
 						echo '
 									<td valign="top"><a href="'.$thisfile.URL_APPEND.'&order_nr='.$order_nr.'&dept_nr='.$dept_nr.'&mode=save&cat='.$cat.'&artikelname='.str_replace("&","%26",strtr($zeile['artikelname']," ","+")).'&bestellnum='.$zeile['bestellnum'].'&minorder='.$zeile['minorder'].'&maxorder='.$zeile['maxorder'].'&proorder='.str_replace(" ","+",$zeile['proorder']).'&hit=0&userck='.$userck.'" onClick="add_update(\''.$zeile['bestellnum'].'\')"><img '.$img_leftarrow.' alt="'.$LDPut2BasketAway.'"></a></td>		
 									<td valign="top"><a href="'.$thisfile.URL_APPEND.'&order_nr='.$order_nr.'&dept_nr='.$dept_nr.'&mode=save&cat='.$cat.'&artikelname='.str_replace("&","%26",strtr($zeile['artikelname']," ","+")).'&bestellnum='.$zeile['bestellnum'].'&minorder='.$zeile['minorder'].'&maxorder='.$zeile['maxorder'].'&proorder='.str_replace(" ","+",$zeile[proorder]).'&hit=0&userck='.$userck.'"><img '.$img_dwnarrow.' alt="'.$LDPut2Catalog.'"></a></td>		
 									<td valign="top"><a href="javascript:popinfo(\''.$zeile['bestellnum'].'\')" ><img '.$img_info.' alt="'.$complete_info.$zeile['artikelname'].' - '.$LDClk2See.'"></a></td>
-									<td valign="top"><a href="javascript:popinfo(\''.$zeile['bestellnum'].'\')" ><font face=verdana,arial size=1 color="#800000">'.$zeile['artikelname'].'</font></a></td>
-									<td valign="top"><font face=verdana,arial size=1>'.$zeile['generic'].'</td>
-									<td valign="top"><font face=verdana,arial size=1>';
+									<td valign="top"><a href="javascript:popinfo(\''.$zeile['bestellnum'].'\')" ><font color="#800000">'.$zeile['artikelname'].'</font></a></td>
+									<td valign="top"><font size=1>'.$zeile['generic'].'</td>
+									<td valign="top"><font size=1>';
 						if(strlen($zeile['description'])>40) echo substr($zeile['description'],0,40)."...";
 							else echo $zeile['description'];
 						echo '
 									</td>
-									<td valign="top"><font face=verdana,arial size=1>'.$zeile['bestellnum'].'</td>';
+									<td valign="top"><font size=1>'.$zeile['bestellnum'].'</td>';
 						echo    '
 									</tr>';
 					}
@@ -177,7 +177,7 @@ if($rows){
 			<form name="curcatform" onSubmit="return checkform(this)">';
 $tog=1;
 echo '
-		<font face="Verdana, Arial" size=2 color="#800000">'.$LDCatalog.' :: ';
+		<font color="#800000">'.$LDCatalog.' :: ';
 		$buff=$dept_obj->LDvar($dept_nr);
 		
 		if(isset($$buff)&&!empty($$buff)) echo $$buff;
@@ -185,12 +185,16 @@ echo '
 
 		echo '</font>
 		<table border=0 cellspacing=1 cellpadding=3 width="100%">
-  		<tr bgcolor="#ffffee">';
+  		<tr class="wardlisttitlerow">';
 	for ($i=0;$i<sizeof($LDCindex);$i++)
 	echo '
-		<td><font face=Verdana,Arial size=1 color="#000080">'.$LDCindex[$i].'</td>';
-	echo '<td></td><td></td></tr>';	
-
+		<td><font color="#000080">'.$LDCindex[$i].'</td>';
+/*	echo '<td>
+		</td>
+		<td>
+		</td>
+		</tr>';
+*/
 $i=1;
 $mi=2;
 $mx=10;
@@ -198,16 +202,17 @@ $mx=10;
 
 # The following routine displays the contents of the current catalog
 
+$tog=1;
 
 while($content=$ergebnis->FetchRow())
 {
 	if($tog)
-	{ echo '<tr bgcolor="#dddddd">'; $tog=0; }else{ echo '<tr bgcolor="#efefff">'; $tog=1; }
+	{ echo '<tr class="wardlistrow1">'; $tog=0; }else{ echo '<tr class="wardlistrow2">'; $tog=1; }
 	echo'
     			<td><a href="javascript:add2basket(\''.$content['bestellnum'].'\',\''.$i.'\')"><img '.$img_leftarrow.' alt="'.$LDPut2BasketAway.'"></a></td>
   				 <td><input type="checkbox" name="order'.$i.'" value="1">
 				 		<input type="hidden" name="bestellnum'.$i.'" value="'.$content['bestellnum'].'"></td>		
-				<td><font face=Verdana,Arial size=1>'.$content['artikelname'].'</td>
+				<td><font size=1>'.$content['artikelname'].'</td>
 				 <td><input type="text" onBlur="validate_min(this,'.$content['minorder'].')"  onKeyUp="validate_value(this,'.$content['minorder'].','.$content['maxorder'].')" name="p'.$i.'" size=3 maxlength=3 ';
 	$o="order".$i;
 	$pc="p".$i;
@@ -220,8 +225,8 @@ while($content=$ergebnis->FetchRow())
 	}
 	echo '
 				</td>
-				<td ><font face=Verdana,Arial size=1><nobr>&nbsp;X '.$content['proorder'].'</nobr></td>
-				<td><font face=Verdana,Arial size=1>'.$content['bestellnum'].'</td>
+				<td ><font size=1><nobr>&nbsp;X '.$content['proorder'].'</nobr></td>
+				<td><font size=1>'.$content['bestellnum'].'</td>
 				<td><a href="javascript:popinfo(\''.$content['bestellnum'].'\')" ><img '.$img_info.' alt="'.$complete_info.$content['artikelname'].'"></a></td>
 				<td><a href="'.$thisfile.URL_APPEND.'&dept_nr='.$dept_nr.'&order_nr='.$order_nr.'&mode=delete&cat='.$cat.'&keyword='.$content['item_no'].'&userck='.$userck.'" ><img '.$img_delete.' alt="'.$LDRemoveArticle.'"></a></td>
 				</tr>';

@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -69,13 +69,32 @@ while ($n<35)
 	$n++;
 }
 
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
 
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('system_admin');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',$LDCalendar);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('calendar.php')");
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',$LDCalendar);
+
+# Buffer page output
+
+ob_start();
 ?>
-
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
 
 <script language="javascript" >
 <!-- 
@@ -119,43 +138,32 @@ function optionwin(d,m,y)
 </script>
 
 <?php
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+$smarty->append('JavaScript',$sTemp);
+
+# Buffer page output
+
+ob_start();
 
 ?>
 
-
-</HEAD>
-
-<BODY  alink=navy vlink=navy topmargin=0 leftmargin=0  marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
-
-<table width=100% border=0 cellspacing=0 height=100%>
-
-<tr valign=top height=10>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>"  height="35"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG>
- &nbsp;<?php echo "$LDCalendar"; ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();"><img 
-<?php echo createLDImgSrc($root_path,'back2.gif','0','absmiddle') ?> 
-style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a 
-href="javascript:gethelp('calendar.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a></td>
-</tr>
-<tr valign=top >
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2><p><br>
 <ul>
 
 <?php 
 echo '<table cellspacing=0 cellpadding=0 border=0>
 		<tr><td align=left>';
 echo '<a href="calendar.php'.URL_APPEND.'&pmonth=';
-if($pmonth<2) echo '12&pyear='.($pyear-1).'" title="'.$LDPrevMonth.'"><FONT  SIZE=4 FACE="verdana,Arial" color=silver><b>&lt;'.$monat[12];
-else echo ($pmonth-1).'&pyear='.$pyear.'" title="'.$LDPrevMonth.'"><FONT  SIZE=4 FACE="verdana,Arial" color=silver><b>&lt;'.$monat[$pmonth-1];
+if($pmonth<2) echo '12&pyear='.($pyear-1).'" title="'.$LDPrevMonth.'"><FONT  SIZE=4 color=silver><b>&lt;'.$monat[12];
+else echo ($pmonth-1).'&pyear='.$pyear.'" title="'.$LDPrevMonth.'"><FONT  SIZE=4 color=silver><b>&lt;'.$monat[$pmonth-1];
 echo '</a></td><td  align=center>';
-echo '<FONT  SIZE=6 FACE="verdana,Arial" color=navy><b>'.$monat[(int)$pmonth].' '.$pyear.'</b></font>';
-echo '</td><td align=right><FONT  SIZE=4 FACE="verdana,Arial" color=silver><b>';
+echo '<FONT  SIZE=6 color=navy><b>'.$monat[(int)$pmonth].' '.$pyear.'</b></font>';
+echo '</td><td align=right><FONT  SIZE=4 color=silver><b>';
 echo '<a href="calendar.php'.URL_APPEND.'&pmonth=';
-if($pmonth>11) echo '1&pyear='.($pyear+1).'" title="'.$LDNextMonth.'"><FONT  SIZE=4 FACE="verdana,Arial" color=silver><b>'.$monat[1];
-else echo ($pmonth+1).'&pyear='.$pyear.'" title="'.$LDNextMonth.'"><FONT  SIZE=4 FACE="verdana,Arial" color=silver><b>'.$monat[$pmonth+1];
+if($pmonth>11) echo '1&pyear='.($pyear+1).'" title="'.$LDNextMonth.'"><FONT  SIZE=4 color=silver><b>'.$monat[1];
+else echo ($pmonth+1).'&pyear='.$pyear.'" title="'.$LDNextMonth.'"><FONT  SIZE=4 color=silver><b>'.$monat[$pmonth+1];
 echo '&gt;</a></td></tr><tr><td bgcolor=black colspan=3>';
 
 echo '<table border="0" cellspacing=1 cellpadding=5 width="100%">';
@@ -163,9 +171,9 @@ echo '<table border="0" cellspacing=1 cellpadding=5 width="100%">';
 echo '<tr>';
 for($n=0;$n<6;$n++)
 	{
-		echo '<td bgcolor=white><FONT    SIZE=4  FACE="Arial" ><b>'.$tagename[$n].'</b></td>';
+		echo '<td bgcolor=white><FONT  SIZE=4 ><b>'.$tagename[$n].'</b></td>';
 	}
-echo '<td bgcolor="#ffffcc"><FONT    SIZE=4  FACE="Arial" color=red ><b>'.$tagename[6].'</b></td>';
+echo '<td bgcolor="#ffffcc"><FONT SIZE=4 color=red ><b>'.$tagename[6].'</b></td>';
 echo '</tr>';
 
 $j=0;
@@ -187,7 +195,7 @@ echo '</table>';
 echo '</td></tr></table>';
 ?>
 
-<br><FONT    SIZE=-1  FACE="Arial" color=navy>
+<br><FONT color=navy>
 
 <form name="direct" method=get onSubmit="return update()" >
 <b><?php echo $LDDirectDial ?>:</b>&nbsp;&nbsp;<?php echo $LDMonth ?> <select name="month" size="1"> 
@@ -213,17 +221,18 @@ else echo'<input  type="button" value="+1" onClick=cxjahr(\'1\')> <input  type="
 <input type="hidden" name="lang" value="<?php echo $lang ?>">
 </form>
 </ul>
-</FONT>
-</td>
-</tr>
-<tr valign=top >
-<td bgcolor=<?php echo $cfg['bot_bgcolor']; ?> height=70 colspan=2>
+
 <?php
-require($root_path.'include/inc_load_copyrite.php');
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+# Assign page output to the mainframe template
+
+$smarty->assign('sMainFrameBlockData',$sTemp);
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
 ?>
-</td>
-</tr>
-</table>        
-&nbsp;
-</BODY>
-</HTML>

@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -22,6 +22,9 @@ require_once($root_path.'include/inc_date_format_functions.php');
 
 $thisfile=basename(__FILE__);
 $toggle=0;
+
+if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
+	else $breakfile='aufnahme_pass.php'.URL_APPEND.'&target=entry';
 
 # Set color values for the search mask 
 $searchmask_bgcolor='#f3f3f3';
@@ -201,60 +204,60 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 			}
 			 else {echo "<p>".$sql."<p>$LDDbNoRead";};
 }
-?>
 
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
- <TITLE></TITLE>
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
 
-<?php 
-require($root_path.'include/inc_js_gethelp.php'); 
-require($root_path.'include/inc_css_a_hilitebu.php');
-?>
-</HEAD>
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
 
-<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0  onLoad="document.searchform.searchkey.select()" bgcolor=<?php echo $cfg['body_bgcolor']; 
- if (!$cfg['dhtml']){ echo ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+# Title in the toolbar
+ //$smarty->assign('sToolbarTitle',$LDPatientSearch);
+ $smarty->assign('sToolbarTitle',"$LDAdmission :: $LDSearch");
 
-<table width=100% border=0 cellspacing="0" cellpadding=0>
+ $smarty->assign('breakfile',$breakfile);
 
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+1  FACE="Arial"><STRONG> &nbsp;<?php echo $LDPatientSearch ?></STRONG></FONT>
-</td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
-<a href="javascript:gethelp('admission_how2search.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
-if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo $root_path."main/startframe.php?sid=".$sid."&lang=".$lang; 
-	else echo "aufnahme_pass.php?sid=$sid&target=entry&lang=$lang"; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
-</td>
-</tr>
+ # Window bar title
+ $smarty->assign('title',$LDPatientSearch);
 
-<!-- Load tabs -->
-<?php
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('admission_how2search.php','$from')");
+
+  # Onload Javascript code
+ $smarty->assign('sOnLoadJs','onLoad="document.searchform.searchkey.select()"');
+
+ # Hide the return button
+ $smarty->assign('pbBack',FALSE);
+
+// Load tabs
 
 $target='search';
- include('./gui_bridge/default/gui_tabs_patadmit.php') 
+$parent_admit = TRUE;
 
+include('./gui_bridge/default/gui_tabs_patadmit.php');
+
+ # Start buffering
+
+ ob_start();
 ?>
 
-</table>
-<ul>
+&nbsp;
+<br>
 
-<FONT    SIZE=-1  FACE="Arial">
+	<table border=0 cellpadding=10 bgcolor="<?php echo $entry_border_bgcolor ?>">
+		<tr>
+			<td>
+				<?php
 
+				include($root_path.'include/inc_patient_searchmask.php');
 
-		 <table border=0 cellpadding=10 bgcolor="<?php echo $entry_border_bgcolor ?>">
-     <tr>
-       <td>
-	   <?php
-
-            include($root_path.'include/inc_patient_searchmask.php');
-       
-	   ?>
-</td>
-     </tr>
+				?>
+			</td>
+		</tr>
    </table>
 
 
@@ -267,84 +270,72 @@ if($mode=='search'||$mode=='paginate'){
 	if ($linecount) echo '<hr width=80% align=left>'.str_replace("~nr~",$totalcount,$LDSearchFound).' '.$LDShowing.' '.$pagen->BlockStartNr().' '.$LDTo.' '.$pagen->BlockEndNr().'.';
 		else echo str_replace('~nr~','0',$LDSearchFound); 
 		  
-	if ($linecount) { 
+	if ($linecount) {
 
-	# Load the common icons and images
-	$img_options=createComIcon($root_path,'pdata.gif','0');
-	$img_male=createComIcon($root_path,'spm.gif','0');
-	$img_female=createComIcon($root_path,'spf.gif','0');
+		# Load the common icons and images
+		$img_options=createComIcon($root_path,'pdata.gif','0');
+		$img_male=createComIcon($root_path,'spm.gif','0');
+		$img_female=createComIcon($root_path,'spf.gif','0');
 
-	$bgimg='tableHeaderbg3.gif';
-	$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
+		$bgimg='tableHeaderbg3.gif';
+		//$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
 
-	echo '
-			<table border=0 cellpadding=2 cellspacing=1> <tr bgcolor="#abcdef" background="'.createBgSkin($root_path,'tableHeaderbg.gif').'">';
+		echo '
+			<table border=0 cellpadding=2 cellspacing=1>
+			<tr class="wardlisttitlerow">';
 			
 ?>
 
-      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+      <td><b>
 	  <?php 
 	  	if($oitem=='encounter_nr') $flag=TRUE;
 			else $flag=FALSE; 
 		echo $pagen->SortLink($LDCaseNr,'encounter_nr',$odir,$flag); 
 			 ?></b></td>
-      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+      <td><b>
 	  <?php 
 	  	if($oitem=='sex') $flag=TRUE;
 			else $flag=FALSE; 
 		echo $pagen->SortLink($LDSex,'sex',$odir,$flag); 
 			 ?></b></td>
-      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+      <td><b>
 	  <?php 
 	  	if($oitem=='name_last') $flag=TRUE;
 			else $flag=FALSE; 
 		echo $pagen->SortLink($LDLastName,'name_last',$odir,$flag); 
 			 ?></b></td>
-      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+      <td><b>
 	  <?php 
 	  	if($oitem=='name_first') $flag=TRUE;
 			else $flag=FALSE; 
 		echo $pagen->SortLink($LDFirstName,'name_first',$odir,$flag); 
 			 ?></b></td>
-      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+      <td><b>
 	  <?php 
 	  	if($oitem=='date_birth') $flag=TRUE;
 			else $flag=FALSE; 
 		echo $pagen->SortLink($LDBday,'date_birth',$odir,$flag); 
 			 ?></b></td>
-      <td <?php echo $tbg; ?> align='center'><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+      <td align='center'><b>
 	  <?php 
 	  	if($oitem=='addr_zip') $flag=TRUE;
 			else $flag=FALSE;
 		 echo $pagen->SortLink($LDZipCode,'addr_zip',$odir,$flag); 
 		 	
 		?></b></td>
-    <td background="<?php echo createBgSkin($root_path,'tableHeaderbg.gif'); ?>"><font face=arial size=2 color="#ffffff"><b><?php echo $LDOptions; ?></td>
+		<td background="<?php echo createBgSkin($root_path,'tableHeaderbg.gif'); ?>"><font color="#ffffff"><b><?php echo $LDOptions; ?></td>
 
 <?php
-/*				for($i=0;$i<sizeof($fieldname);$i++) {
-						echo'
-						<td><font face=arial size=2 color="#ffffff"><b>'.$fieldname[$i].'</b></td>';
-		
-					}*/					
+
 					echo"</tr>";
 
 					while($zeile=$ergebnis->FetchRow())
 					{
-/*						switch ($zeile['encounter_class_nr'])
-						{
-						    case '1': $full_en = ($zeile['encounter_nr'] + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-							            break;
-							case '2': $full_en = ($zeile['encounter_nr'] + $GLOBAL_CONFIG['patient_outpatient_nr_adder']);
-										break;
-						    default: $full_en = ($zeile['encounter_nr'] + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-						}						
-*/						
 						$full_en=$zeile['encounter_nr'];
 						echo "
-							<tr bgcolor=";
-						if($toggle) { echo "#efefef>"; $toggle=0;} else {echo "#ffffff>"; $toggle=1;};
-						echo '<td><font face=arial size=2>';
+							<tr class=";
+						if($toggle) { echo "wardlistrow2>"; $toggle=0;} else {echo "wardlistrow1>"; $toggle=1;};
+						echo '<td>';
                         echo '&nbsp;'.$full_en;
 						if($zeile['encounter_class_nr']==2) echo ' <img '.createComIcon($root_path,'redflag.gif').'> <font size=1 color="red">'.$LDAmbulant.'</font>';
                         echo '&nbsp;</td>';	
@@ -356,22 +347,22 @@ if($mode=='search'||$mode=='paginate'){
 							default: echo '&nbsp;'; break;
 						}				
                         echo '</td>
-						';	
+						';
 
-						echo '<td><font face=arial size=2>';
+						echo '<td>';
 						echo '&nbsp;'.ucfirst($zeile['name_last']);
                         echo '</td>';	
-						echo '<td><font face=arial size=2>';
+						echo '<td>';
 						echo '&nbsp;'.ucfirst($zeile['name_first']);
                         echo '</td>';	
-						echo '<td><font face=arial size=2>';
+						echo '<td>';
 						echo '&nbsp;'.formatDate2Local($zeile['date_birth'],$date_format);
                         echo '</td>';	
                         echo '</td>
-					    <td align=right><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;'.$zeile['addr_zip'].'</td>';	
+					    <td align=right>&nbsp; &nbsp;'.$zeile['addr_zip'].'</td>';
 
 					    if($HTTP_COOKIE_VARS[$local_user.$sid]) echo '
-						<td><font face=arial size=2>&nbsp;
+						<td>&nbsp;
 							<a href=aufnahme_daten_zeigen.php'.URL_APPEND.'&from=such&encounter_nr='.$zeile['encounter_nr'].'&target=search>
 							<img '.$img_options.' alt="'.$LDShowData.'"></a>&nbsp;';
 							
@@ -383,8 +374,8 @@ if($mode=='search'||$mode=='paginate'){
 
 					}
 					echo '
-						<tr><td colspan=6><font face=arial size=2>'.$pagen->makePrevLink($LDPrevious).'</td>
-						<td align=right><font face=arial size=2>'.$pagen->makeNextLink($LDNext).'</td>
+						<tr><td colspan=6>'.$pagen->makePrevLink($LDPrevious).'</td>
+						<td align=right>'.$pagen->makeNextLink($LDNext).'</td>
 						</tr>
 						</table>';
 					if($linecount>$pagen->MaxCount())
@@ -392,18 +383,18 @@ if($mode=='search'||$mode=='paginate'){
 					    /* Set the appending nr for the searchform */
 					    $searchform_count=2;
 					?>
-			<p>
-		 <table border=0 cellpadding=10 bgcolor="<?php echo $entry_border_bgcolor ?>">
-     <tr>
-       <td>
-	   <?php
-            include($root_path.'include/inc_patient_searchmask.php');
-	   ?>
-</td>
-     </tr>
-   </table>
-		<?php
-			}
+						<p>
+		 				<table border=0 cellpadding=10 bgcolor="<?php echo $entry_border_bgcolor ?>">
+							<tr>
+								<td>
+<?php
+								include($root_path.'include/inc_patient_searchmask.php');
+?>
+								</td>
+							</tr>
+						</table>
+<?php
+					}
 	}
 }
 ?>
@@ -411,19 +402,20 @@ if($mode=='search'||$mode=='paginate'){
 <hr width=80% align=left><p>
 <a href="aufnahme_start.php<?php echo URL_APPEND; ?>&mode=?"><?php echo $LDAdmWantEntry ?></a><br>
 <a href="aufnahme_list.php<?php echo URL_APPEND; ?>"><?php echo $LDAdmWantArchive ?></a>
-</ul>
-&nbsp;
-</FONT>
 <p>
 
-</ul>
-<p>
 <?php
-require($root_path.'include/inc_load_copyrite.php');
+
+# Stop buffering, assign contents and display template
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+$smarty->assign('sMainDataBlock',$sTemp);
+
+$smarty->assign('sMainBlockIncludeFile','registration_admission/admit_plain.tpl');
+
+$smarty->display('common/mainframe.tpl');
+
 ?>
 
-</FONT>
-
-
-</BODY>
-</HTML>

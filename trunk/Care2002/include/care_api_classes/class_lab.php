@@ -9,8 +9,8 @@ require_once($root_path.'include/care_api_classes/class_encounter.php');
 *  Laboratory methods. 
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
-* @version beta 2.0.0
-* @copyright 2002,2003,2004,2005 Elpidio Latorilla
+* @version beta 2.0.1
+* @copyright 2002,2003,2004,2005,2005 Elpidio Latorilla
 * @package care_api
 */
 class Lab extends Encounter {
@@ -325,23 +325,28 @@ class Lab extends Encounter {
 	* @return mixed adodb record object or boolean
 	*/
 	function searchEncounterLabResults($key='',$add_opt='',$limit=FALSE,$len=30,$so=0){
-		global $db;
+		global $db, $sql_LIKE;
 		if(empty($key)) return FALSE;
-		$this->sql="SELECT e.encounter_nr, e.encounter_class_nr, p.pid, p.name_last, p.name_first, p.date_birth, p.sex
-				FROM ( $this->tb_enc AS e, $this->tb_find_chemlab AS f ) LEFT JOIN $this->tb_person AS p ON e.pid=p.pid";
+		$this->sql="SELECT f.encounter_nr, e.encounter_class_nr, p.pid, p.name_last, p.name_first, p.date_birth, p.sex
+				FROM $this->tb_find_chemlab AS f 
+				LEFT JOIN $this->tb_enc AS e ON e.encounter_nr = f.encounter_nr 
+				LEFT JOIN $this->tb_person AS p ON p.pid = e.pid";
 		if(is_numeric($key)){
 			$key=(int)$key;
 			$this->sql.=" WHERE e.encounter_nr = $key";
 		}else{
-			$this->sql.=" WHERE (e.encounter_nr LIKE '$key%' 
-						OR p.pid LIKE '$key%'
-						OR p.name_last LIKE '$key%'
-						OR p.name_first LIKE '$key%'
-						OR p.date_birth LIKE '$key%')";
+			$this->sql.=" WHERE e.encounter_nr = f.encounter_nr
+						AND f.status NOT IN ($this->dead_stat)
+						AND
+						(e.encounter_nr $sql_LIKE '$key%'
+						OR p.pid $sql_LIKE '$key%'
+						OR p.name_last $sql_LIKE '$key%'
+						OR p.name_first $sql_LIKE '$key%'
+						OR p.date_birth $sql_LIKE '$key%') ";
 			if($enc_class) $sql.="	AND e.encounter_class_nr=$enc_class";
 		}
 		# Append the common condition
-		$this->sql.=" AND NOT e.is_discharged AND e.encounter_nr=f.encounter_nr GROUP BY e.encounter_nr $add_opt";
+		$this->sql.=" GROUP BY f.encounter_nr, e.encounter_class_nr, p.pid, p.name_last, p.name_first, p.date_birth, p.sex  $add_opt";
 		//echo $this->sql;
 		if($limit){
 	    	$this->res['selr']=$db->SelectLimit($this->sql,$len,$so);

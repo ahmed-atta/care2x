@@ -8,6 +8,7 @@
 //require_once($root_path.'include/care_api_classes/class_core.php');
 /**
 *  GUI input form for person registration methods.
+*
 * Dependencies:
 * assumes the following files are in the given path
 * /include/care_api_classes/class_person.php
@@ -16,8 +17,9 @@
 * /include/inc_date_format_functions.php
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
-* @version beta 2.0.0
-* @copyright 2002,2003,2004,2005 Elpidio Latorilla
+* @version beta 2.0.1
+* @copyright 2002,2003,2004,2005,2005 Elpidio Latorilla
+* @KB by Kurt Brauchli
 * @package care_api
 */
 
@@ -50,6 +52,13 @@ class GuiInputPerson {
 	
 	# filename for displaying the data after saving
 	var $displayfile='';
+	
+	# smarty template
+	var $smarty;
+	
+	# Flag for output or returning form data
+	var $bReturnOnly = FALSE;
+
 	/**
 	* Constructor
 	*/
@@ -74,22 +83,27 @@ class GuiInputPerson {
 	* Create a row of input element in the form
 	*/
 	function createTR($error_handler, $input_name, $ld_text, $input_val, $colspan = 1, $input_size = 35,$red=FALSE){
-		echo '<tr>
-				<td><FONT SIZE=-1  FACE="Arial,verdana,sans serif">';
-		if ($error_handler || $red) echo "<font color=\"$this->error_fontcolor\">$ld_text</font>";
-			else echo $ld_text;
-		echo '</td>
-				<td colspan='.$colspan.'><input name="'.$input_name.'" type="text" size="'.$input_size.'" value="'.$input_val.'" >
-				</td>
-			</tr>';
-		$this->toggle=!$this->toggle;
+
+		ob_start();
+			if ($error_handler || $red) $sBuffer="<font color=\"$this->error_fontcolor\">* $ld_text</font>";
+				else $sBuffer=$ld_text;
+			$this->smarty->assign('sItem',$sBuffer);
+			$this->smarty->assign('sColSpan2',"colspan=$colspan");
+			$this->smarty->assign('sInput','<input name="'.$input_name.'" type="text" size="'.$input_size.'" value="'.$input_val.'" >');
+			$this->smarty->display('registration_admission/reg_row.tpl');
+			$sBuffer = ob_get_contents();
+		ob_end_clean();
+
+		//$this->toggle=!$this->toggle;
+
+		return $sBuffer;
 	}
 
 	/**
 	* Displays the GUI input form
 	*/
 	function display(){
-		global $db, $sid, $lang, $root_path, $pid, $insurance_show, $user_id, $mode, $dbtype,
+		global $db, $sid, $lang, $root_path, $pid, $insurance_show, $user_id, $mode, $dbtype, $breakfile, $cfg,
 				$update, $photo_filename, $HTTP_POST_VARS,  $HTTP_POST_FILES, $HTTP_SESSION_VARS;
 
 		extract($HTTP_POST_VARS);
@@ -97,6 +111,9 @@ class GuiInputPerson {
 		# Load the language tables
 		$lang_tables =$this->langfiles;
 		include($root_path.'include/inc_load_lang_tables.php');
+		
+		# Load the other hospitals array
+		include_once($root_path.'global_conf/other_hospitals.php');
 
 		include_once($root_path.'include/inc_date_format_functions.php');
 		include_once($root_path.'include/care_api_classes/class_insurance.php');
@@ -126,7 +143,7 @@ class GuiInputPerson {
 		$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 		$glob_obj->getConfig('person_%');
 		
-		extract($GLOBAL_CONFIG);
+		//extract($GLOBAL_CONFIG);
 
 		# Check whether config foto path exists, else use default path
 		$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $this->default_photo_path;
@@ -246,6 +263,12 @@ class GuiInputPerson {
 							}
 						}
 						$newdata=1;
+						//$db->debug=1;
+						// KB: save other_his_no
+						if( isset($_POST['other_his_org']) && !empty($_POST['other_his_org'])){
+							$person_obj->OtherHospNrSet($_POST['other_his_org'], $_POST['other_his_no'], $_SESSION['sess_user_name'] );
+						}
+
 						if(file_exists($this->displayfile)){
 							header("Location: $this->displayfile".URL_REDIRECT_APPEND."&pid=$pid&from=$from&newdata=1&target=entry");
 							exit;
@@ -285,18 +308,22 @@ class GuiInputPerson {
 
 					if(!$error_person_exists||$mode=='forcesave'){
 						if($person_obj->insertDataFromInternalArray()){
-							# If data was newly inserted, get the insert id if mysq, else get the pid number)
+							
+							# If data was newly inserted, get the insert id if mysql, 
+							# else get the pid number from the latest primary key
+							
 							if(!$update){
 								$oid = $db->Insert_ID();
 								$pid=$person_obj->LastInsertPK('pid',$oid);
-								/*
-								if($dbtype=='mysql'){
-									$pid=$db->Insert_ID();
-								}else{
-									$pid=$person_obj->postgre_Insert_ID($dbtable,'pid',$db->Insert_ID());
-								}*/
+								//EL: set the new pid
+								$person_obj->setPID($pid);
 							}
-							//if(!$update) $pid=$db->Insert_ID();
+
+							// KB: save other_his_no
+							if( isset($_POST['other_his_org']) && !empty($_POST['other_his_org'])){
+								$person_obj->OtherHospNrSet($_POST['other_his_org'], $_POST['other_his_no'], $_SESSION['sess_user_name'] );
+							}
+							
 							# Save the valid uploaded photo
 							if($valid_image){
 								# Compose the new filename by joining the pid number and the file extension with "."
@@ -307,6 +334,7 @@ class GuiInputPerson {
 									$person_obj->setPhotoFilename($pid,$photo_filename);
 								}
 							}
+
 							//echo $pid;
 							# Update the insurance data
 							# Lets detect if the data is already existing
@@ -370,14 +398,27 @@ class GuiInputPerson {
 		$insurance_classes=&$pinsure_obj->getInsuranceClassInfoObject('class_nr,name,LD_var AS "LD_var"');
 
 		include_once($root_path.'include/inc_photo_filename_resolve.php');
-
-		########  Here starts the GUI output #######################################################
 		
+		#
+		#
+		########  Here starts the GUI output #######################################################
+		#
+		#
+		
+		# Start Smarty templating here
+		# Create smarty object without initiliazing the GUI (2nd param = FALSE)
+
+		include_once($root_path.'gui/smarty_template/smarty_care.class.php');
+		$this->smarty = new smarty_care('common',FALSE);
+
 		$img_male=createComIcon($root_path,'spm.gif','0');
 		$img_female=createComIcon($root_path,'spf.gif','0');
-		$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/tableHeader_gr.gif"';
-		
-		if(!empty($this->pretext)) echo $this->pretext;
+
+		if(!empty($this->pretext)) $this->smarty->assign('pretext',$this->pretext);
+
+		# Collect extay javascript code
+		$sTemp='';
+		ob_start();
 ?>
 		<script  language="javascript">
 		<!--
@@ -387,6 +428,7 @@ class GuiInputPerson {
 		}
 
 		function showpic(d){
+			if(d.value) document.images.headpic.src=d.value;
 			if(d.value) document.images.headpic.src=d.value;
 		}
 
@@ -432,393 +474,387 @@ class GuiInputPerson {
 			}
 		}
 
-<?php 
+<?php
 		require($root_path.'include/inc_checkdate_lang.php'); 
 ?>
 		-->
 		</script>
-
 		<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
 		<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
 		<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
-
-		<FONT    SIZE=-1  FACE="Arial">
-
-		<form method="post" action="<?php echo $thisfile; ?>" name="aufnahmeform" ENCTYPE="multipart/form-data" onSubmit="return chkform(this)">
-
-		<table border=0 cellspacing=0 cellpadding=0>
 <?php
+		$sTemp = ob_get_contents();
+		ob_end_clean();
+		
+		$this->smarty->assign('sRegFormJavaScript',$sTemp);
+
+		$this->smarty->assign('thisfile',$thisfile);
+
 		if($error) {
-?>
-			<tr bgcolor=#ffffee>
-			<td colspan=3>
-			<center>
-				<font face=arial color=#7700ff size=4>
-				<img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle">
-<?php 
-		if ($error>1) echo $LDErrorS; 
-			else echo $LDError; 
-?>
-			</center>
-			</td>
-			</tr>
-<?php
+			$this->smarty->assign('error',TRUE);
+			$this->smarty->assign('sErrorImg','<img '.createMascot($root_path,'mascot1_r.gif','0','bottom').' align="absmiddle">');
+			if ($error>1) $this->smarty->assign('sErrorText',$LDErrorS);
+				else $this->smarty->assign('sErrorText',$LDError);
+		
 		}elseif($error_person_exists){
-?>
-			<tr bgcolor=#ffffee>
-			<td colspan=3>
-			<center>
-				<table border=0>
-				<tr>
-				<td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"></td>
-				<td><font face=arial color=#7700ff size=4>
-<?php
-			echo $LDPersonDuplicate;
-			if($duperson->RecordCount()>1) echo " $LDSimilarData2 $LDPlsCheckFirst2";
-				else echo " $LDSimilarData $LDPlsCheckFirst";
-			echo '
-				</td>
-				</tr>
-				</table>
-			</center>
-			</td>
-			</tr>
-			
-			<tr>
-			<td colspan=3>
+			$this->smarty->assign('errorDupPerson',TRUE);
+			$this->smarty->assign('sErrorImg','<img '.createMascot($root_path,'mascot1_r.gif','0','bottom').' align="absmiddle">');
+			$this->smarty->assign('LDPersonDuplicate',$LDPersonDuplicate);
+			if($duperson->RecordCount()>1) $this->smarty->assign('sErrorText',"$LDSimilarData2 $LDPlsCheckFirst2");
+				else $this->smarty->assign('sErrorText',"$LDSimilarData $LDPlsCheckFirst");
 
-				<table border=0 cellspacing=0 cellpadding=1 bgcolor="#000000" width=100%>	
-				<tr>
-				<td>
-					<table border=0 cellspacing=0 width=100% bgcolor="#ffffff">';
-
-			echo '
-		 			<tr bgcolor="#66ee66" background="'.$root_path.'gui/img/common/default/tableHeaderbg.gif">';
-			echo "
-					<td $tbg><FONT  SIZE=-1  FACE=\"Arial\" color=\"#000066\"><b>
+			$this->smarty->assign('sDupDataColNameRow',"<tr class=\"reg_div\">
+					<td><FONT  SIZE=-1  FACE=\"Arial\" color=\"#000066\"><b>
 						$LDRegistryNr</b></td>
-					<td $tbg><FONT  SIZE=-1  FACE=\"Arial\" color=\"#000066\"><b>
+					<td><FONT  SIZE=-1  FACE=\"Arial\" color=\"#000066\"><b>
 						$LDLastName</b></td>
-					<td $tbg><FONT  SIZE=-1  FACE=\"Arial\" color=\"#000066\"><b>
+					<td><FONT  SIZE=-1  FACE=\"Arial\" color=\"#000066\"><b>
 						$LDFirstName</b></td>
-					<td $tbg><FONT  SIZE=-1  FACE=\"Arial\" color=\"#000066\"><b>
+					<td><FONT  SIZE=-1  FACE=\"Arial\" color=\"#000066\"><b>
 						$LDBday</b></td>
-					<td $tbg><FONT  SIZE=-1  FACE=\"Arial\" color=\"#000066\"><b>
+					<td><FONT  SIZE=-1  FACE=\"Arial\" color=\"#000066\"><b>
 						$LDSex</b></td>
-					<td $tbg><FONT  SIZE=-1  FACE=\"Arial\" color=\"#000066\"><b>
+					<td><FONT  SIZE=-1  FACE=\"Arial\" color=\"#000066\"><b>
 						$LDOptions</b></td>
-					</tr>";
-			# Show the probable same person
+					</tr>");
+
+			# List and show the probable same person(s)
+
+			$toggler=FALSE;
+			$sTemp='';
 			while($dup=$duperson->FetchRow()){
-				echo '
-					<tr>
-					<td><font face=arial color=#000000 size=2>'.$dup['pid'].'</td>
-					<td><font face=arial color=#000000 size=2>'.$dup['name_last'].'</td>
-					<td><font face=arial color=#000000 size=2>'.$dup['name_first'].'</td>
-					<td><font face=arial color=#000000 size=2>'.formatDate2Local($dup['date_birth'],$date_format).'</td>
+				if($toggler) $sRowClass='wardlistrow2';
+					else $sRowClass='wardlistrow1';
+				$toggler = !$toggler;
+				$sTemp= $sTemp."\n".'
+					<tr class="'.$sRowClass.'">
+					<td>'.$dup['pid'].'</td>
+					<td>'.$dup['name_last'].'</td>
+					<td>'.$dup['name_first'].'</td>
+					<td>'.formatDate2Local($dup['date_birth'],$date_format).'</td>
 					<td>';
 				switch($dup['sex']){
-					case 'f': echo '<img '.$img_female.'>'; break;
-					case 'm': echo '<img '.$img_male.'>'; break;
-					default: echo '&nbsp;'; break;
+					case 'f': $sTemp = $sTemp.'<img '.$img_female.'>'; break;
+					case 'm': $sTemp = $sTemp.'<img '.$img_male.'>'; break;
+					default: $sTemp = $sTemp.'&nbsp;';
 				}
-				echo '
+				$sTemp = $sTemp.'
 					</td>
-					<td><font face=arial color=#000000 size=2>:: <a href="person_reg_showdetail.php'.URL_APPEND.'&pid='.$dup['pid'].'&from=$from&newdata=1&target=entry" target="_blank">'.$LDShowDetails.'</a> ::
+					<td>:: <a href="person_reg_showdetail.php'.URL_APPEND.'&pid='.$dup['pid'].'&from=$from&newdata=1&target=entry" target="_blank">'.$LDShowDetails.'</a> ::
 					<a href="patient_register.php'.URL_APPEND.'&pid='.$dup['pid'].'&update=1">'.$LDUpdate.'</a>
 					</td>
-   					</tr>';
+					</tr>';
 			}
-			echo '
-					</table>
-				</td>
-				</tr>
-				</table>';
+			$this->smarty->assign('sDupDataRows',$sTemp);
 		}
-?>
-			</td>
-			</tr>
+		
+		if($pid) $this->smarty->assign('LDRegistryNr',$LDRegistryNr);
+		$this->smarty->assign('pid',$pid);
+		$this->smarty->assign('img_source',$img_source);
+		$this->smarty->assign('LDPhoto',$LDPhoto);
+		if(isset($photo_filename)) $pfile= $photo_filename;
+			else $pfile='';
+		$this->smarty->assign('sFileBrowserInput','<input name="photo_filename" type="file" size="15"   onChange="showpic(this)" value="'.$pfile.'">');
+		
+		# iRowSpanCount counts the rows on the left of the photo image. Begin with 5 because there are 5 static rows.
+		$iRowSpanCount = 5;
 
-			<tr>
-			<td>
-				<FONT SIZE=-1  FACE="Arial"><?php if($pid) echo $LDRegistryNr ?>
-			</td>
-			<td >
-				<FONT SIZE=-1  FACE="Arial" color="#800000"><?php if($pid) echo $pid+$person_id_nr_adder ?>&nbsp;
-			</td>
-			<td  rowspan=6 >
-				<FONT SIZE=-1  FACE="Arial">
-				<a href="#"  onClick="showpic(document.aufnahmeform.photo_filename)"><img <?php echo $img_source; ?> id="headpic" name="headpic"></a>
-				<br>
-				<?php echo $LDPhoto ?>
-				<br><input name="photo_filename" type="file" size="15"   onChange="showpic(this)" value="<?php if(isset($photo_filename)) echo $photo_filename ?>">
+		$this->smarty->assign('LDRegDate',$LDRegDate);
+		$this->smarty->assign('sRegDate',formatDate2Local($date_reg,$date_format).'<input name="date_reg" type="hidden" value="'.$date_reg.'">');
 
-			</td>
-			</tr>
+		//$iRowSpanCount++;
+		$this->smarty->assign('LDRegTime',$LDRegTime);
+		$this->smarty->assign('sRegTime',convertTimeToLocal(formatDate2Local($date_reg,$date_format,0,1)));
 
-			<tr>
-			<td>
-				<FONT SIZE=-1  FACE="Arial"><font color=#ff0000><?php echo $LDRegDate ?></font>:
-			</td>
-			<td>
-				<FONT SIZE=-1  FACE="Arial" color="#800000">
-				<?php     echo formatDate2Local($date_reg,$date_format); ?>
-				<input name="date_reg" type="hidden" value="<?php echo $date_reg ?>">
-			</td>
-			</tr>
-
-			<tr>
-			<td>
-				<FONT SIZE=-1  FACE="Arial"><?php echo $LDRegTime ?>:
-			</td>
-			<td>
-				<FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo convertTimeToLocal(formatDate2Local($date_reg,$date_format,0,1)); ?>
-			</td>
-			</tr>
-
-			<tr>
-			<td>
-				<FONT SIZE=-1  FACE="Arial"><?php echo $LDTitle ?>:
-			</td>
-			<td >
-				<input type="text" name="title" size=14 maxlength=25 value="<?php echo $title ?>" onFocus="this.select();">
-			</td>
-			</tr>
-<?php
-		$this->createTR($errornamelast, 'name_last', $LDLastName,$name_last,'','',TRUE);
-		$this->createTR($errornamefirst, 'name_first', $LDFirstName,$name_first,'','',TRUE);
-
-		if (!$person_name_2_hide){
-			$this->createTR($errorname2, 'name_2', $LDName2,$name_2);
+		// Made hideable as suggested by Kurt brauchli
+		if (!$GLOBAL_CONFIG['person_title_hide']){
+			$this->smarty->assign('sPersonTitle',$this->createTR( $errortitle, 'title', $LDTitle, $title, '', 14 ));
+			$iRowSpanCount++;
 		}
 
-		if (!$person_name_3_hide){
-			$this->createTR($errorname3, 'name_3', $LDName3,$name_3);
+		$this->smarty->assign('sNameLast',$this->createTR($errornamelast, 'name_last', $LDLastName,$name_last,'',35,TRUE));
+		//$iRowSpanCount++;
+		$this->smarty->assign('sNameFirst',$this->createTR($errornamefirst, 'name_first', $LDFirstName,$name_first,'',35,TRUE));
+		//$iRowSpanCount++;
+		
+		if (!$GLOBAL_CONFIG['person_name_2_hide']){
+			$this->smarty->assign('sName2',$this->createTR($errorname2, 'name_2', $LDName2,$name_2));
+			$iRowSpanCount++;
 		}
 
-		if (!$person_name_middle_hide){
-			$this->createTR($errornamemid, 'name_middle', $LDNameMid,$name_middle);
+		if (!$GLOBAL_CONFIG['person_name_3_hide']){
+			$this->smarty->assign('sName3',$this->createTR($errorname3, 'name_3', $LDName3,$name_3));
+			$iRowSpanCount++;
 		}
 
-		if (!$person_name_maiden_hide){
-			$this->createTR($errornamemaiden, 'name_maiden', $LDNameMaiden,$name_maiden);
+		if (!$GLOBAL_CONFIG['person_name_middle_hide']){
+			$this->smarty->assign('sNameMiddle',$this->createTR($errornamemid, 'name_middle', $LDNameMid,$name_middle));
+			$iRowSpanCount++;
 		}
 
-		if (!$person_name_others_hide){
-			$this->createTR($errornameothers, 'name_others', $LDNameOthers,$name_others);
+		if (!$GLOBAL_CONFIG['person_name_maiden_hide']){
+			$this->smarty->assign('sNameMaiden',$this->createTR($errornamemaiden, 'name_maiden', $LDNameMaiden,$name_maiden));
+			$iRowSpanCount++;
 		}
-?>
 
-			<tr>
-			<td>
-				<FONT SIZE=-1  FACE="Arial"><?php if ($errordatebirth) echo "<font color=red>"; ?><font color=#ff0000>* <?php echo $LDBday ?></font>:
-			</td>
-			<td>
-				<FONT SIZE=-1  FACE="Arial">
-				<input name="date_birth" type="text" size="15" maxlength=10 value="<?php
+		if (!$GLOBAL_CONFIG['person_name_others_hide']){
+			$this->smarty->assign('sNameOthers',$this->createTR($errornameothers, 'name_others', $LDNameOthers,$name_others));
+			$iRowSpanCount++;
+		}
+
+		# Set the rowspan value for the photo image <td>
+		$this->smarty->assign('sPicTdRowSpan',"rowspan=$iRowSpanCount");
+
+
+		if ($errordatebirth) $this->smarty->assign('LDBday',"<font color=red>* $LDBday</font>:");
+			else $this->smarty->assign('LDBday',"<font color=red>*</font> $LDBday:");
+
 		if($date_birth){
-			if($mode=='save'||$error||$error_person_exists) echo $date_birth;
-				else echo formatDate2Local($date_birth,$date_format);
+			if($mode=='save'||$error||$error_person_exists) $sBdayBuffer = $date_birth;
+				else $sBdayBuffer = formatDate2Local($date_birth,$date_format);
 		}
 		# Uncomment the following when the current date must be inserted
 		# automatically at the start of each document
 		/*else{
-			echo formatDate2Local(date('Y-m-d'),$date_format);
+			$sBdayBuffer = formatDate2Local(date('Y-m-d'),$date_format);
 		}*/
- ?>"
- 				onFocus="this.select();"  
-				onBlur="IsValidDate(this,'<?php echo $date_format ?>')" 
-				onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-				<a href="javascript:show_calendar('aufnahmeform.date_birth','<?php echo $date_format ?>')">
-				<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
-				<font size=1>[ 
-<?php
-					$dfbuffer="LD_".strtr($date_format,".-/","phs");
-					echo $$dfbuffer;
-?>
-				 ] </font>
-			</td>
-			<td>
-			<FONT SIZE=-1  FACE="Arial">
-<?php
-		if ($errorsex) echo "<font color=#ff0000>";
-		echo '<font color=#ff0000>* '.$LDSex.'</font>';
-?>: 
-			<input name="sex" type="radio" value="m"  <?php if($sex=="m") echo "checked"; ?>><?php echo $LDMale ?>&nbsp;&nbsp;
-			<input name="sex" type="radio" value="f"  <?php if($sex=="f") echo "checked"; ?>>
-<?php
-		echo $LDFemale;
-		if ($errorsex) echo "</font>";
-		
+
+		$sDateJS= 'onFocus="this.select();"
+				onBlur="IsValidDate(this,\''.$date_format.'\')"
+				onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\')">
+				<a href="javascript:show_calendar(\'aufnahmeform.date_birth\',\''.$date_format.' \')">
+				<img '.createComIcon($root_path,'show-calendar.gif','0','absmiddle').'></a>
+				<font size=1>[';
+
+		$dfbuffer="LD_".strtr($date_format,".-/","phs");
+		$sDateJS = $sDateJS.$$dfbuffer.']';
+
+		$this->smarty->assign('sBdayInput','<input name="date_birth" type="text" size="15" maxlength=10 value="'.$sBdayBuffer.'" '.$sDateJS);
+
+		if ($errorsex) $this->smarty->assign('LDSex', "<font color=#ff0000>* $LDSex</font>:");
+			else $this->smarty->assign('LDSex', "<font color=#ff0000>*</font> $LDSex:");
+
+		$sSexMBuffer='<input name="sex" type="radio" value="m"  ';
+		if($sex=="m") $sSexMBuffer.=' checked>';
+			else $sSexMBuffer.='>';
+		$this->smarty->assign('sSexM',$sSexMBuffer);
+		$this->smarty->assign('LDMale',$LDMale);
+
+		$sSexFBuffer ='<input name="sex" type="radio" value="f"  ';
+		if($sex=="f") $sSexFBuffer.='checked>';
+			else $sSexFBuffer.='>';
+		$this->smarty->assign('sSexF',$sSexFBuffer);
+		$this->smarty->assign('LDFemale',$LDFemale);
+
 		# But patch 2004-03-10
 		# Clean blood group
 		$blood_group = trim($blood_group);
 
- ?>
-			</td>
-			</tr>
+		//  Made hideable as suggested by Kurt Brauchli
+		if (!$GLOBAL_CONFIG['person_bloodgroup_hide'] ){
+			$this->smarty->assign('LDBloodGroup',$LDBloodGroup);
+			$sBGBuffer='
+				<input name="blood_group" type="radio" value="A" ';
+			if($blood_group=='A') $sBGBuffer.='checked';
+			$sBGBuffer.='>';
+			$this->smarty->assign('sBGAInput',$sBGBuffer);
+			$this->smarty->assign('LDA',$LDA);
 
-			<tr>
-			<td>
-				<FONT SIZE=-1  FACE="Arial"><?php echo $LDBloodGroup ?>:
-			</td>
-			<td colspan=2>
-				<FONT SIZE=-1  FACE="Arial">
-				<input name="blood_group" type="radio" value="A"  <?php if($blood_group=='A') echo 'checked'; ?>><?php echo $LDA ?>&nbsp;&nbsp;
-				<input name="blood_group" type="radio" value="B"  <?php if($blood_group=='B') echo 'checked'; ?>><?php echo $LDB ?>&nbsp;&nbsp;
-				<input name="blood_group" type="radio" value="AB"  <?php if($blood_group=='AB') echo 'checked'; ?>><?php echo $LDAB ?>&nbsp;&nbsp;
-				<input name="blood_group" type="radio" value="O"  <?php if($blood_group=='O') echo 'checked'; ?>><?php echo $LDO ?>
-			</td>
-			</tr>
+			$sBGBuffer='
+				<input name="blood_group" type="radio" value="B" ';
+			if($blood_group=='B') $sBGBuffer.='checked';
+			$sBGBuffer.='>';
+			$this->smarty->assign('sBGBInput',$sBGBuffer);
+			$this->smarty->assign('LDB',$LDB);
+			
+			$sBGBuffer='
+				<input name="blood_group" type="radio" value="AB" ';
+			if($blood_group=='AB') $sBGBuffer.='checked';
+			$sBGBuffer.='>';
+			$this->smarty->assign('sBGABInput',$sBGBuffer);
+			$this->smarty->assign('LDAB',$LDAB);
+			
+			$sBGBuffer='
+				<input name="blood_group" type="radio" value="O" ';
+			if($blood_group=='O') $sBGBuffer.='checked';
+			$sBGBuffer.='>';
+			$this->smarty->assign('sBGOInput',$sBGBuffer);
+			$this->smarty->assign('LDO',$LDO);
+		}
+		// KB: make civil status hideable
+		if (!$GLOBAL_CONFIG['person_civilstatus_hide']){
+			$this->smarty->assign('LDCivilStatus',$LDCivilStatus);
+			$sCSInput='<input name="civil_status" type="radio" ';
 
-			<tr>
-			<td>
-				<FONT SIZE=-1  FACE="Arial"><?php if ($errorcivil) echo "<font color=red>"; ?> <?php echo $LDCivilStatus ?></font>:
-			</td>
-			<td colspan=2>
-				<FONT SIZE=-1  FACE="Arial"> <input name="civil_status" type="radio" value="single"  <?php if($civil_status=="single") echo "checked"; ?>><?php echo $LDSingle ?>&nbsp;&nbsp;
-				<input name="civil_status" type="radio" value="married"  <?php if($civil_status=="married") echo "checked"; ?>><?php echo $LDMarried ?>
-				<FONT SIZE=-1  FACE="Arial"> <input name="civil_status" type="radio" value="divorced"  <?php if($civil_status=="divorced") echo "checked"; ?>><?php echo $LDDivorced ?>&nbsp;&nbsp;
-				<input name="civil_status" type="radio" value="widowed"  <?php if($civil_status=="widowed") echo "checked"; ?>><?php echo $LDWidowed ?>
-				<FONT SIZE=-1  FACE="Arial"> <input name="civil_status" type="radio" value="separated"  <?php if($civil_status=="separated") echo "checked"; ?>><?php echo $LDSeparated ?>&nbsp;&nbsp;
-			</td>
-			</tr>
+			$sCSBuffer = $sCSInput.'value="single" ';
+			if($civil_status=="single") $sCSBuffer.='checked';
+			$this->smarty->assign('sCSSingleInput',$sCSBuffer.'>');
 
-			<tr>
-			<td colspan=2>
-				<FONT SIZE=-1  FACE="Arial"><?php if ($erroraddress) echo "<font color=red>"; ?><?php echo $LDAddress ?></font>:
-			</td>
-			</tr>
+			$sCSBuffer = $sCSInput.'value="married" ';
+			if($civil_status=="married") $sCSBuffer.='checked';
+			$this->smarty->assign('sCSMarriedInput',$sCSBuffer.'>');
 
-			<tr>
-			<td>
-				<FONT SIZE=-1  FACE="Arial"><?php if ($errorstreet) echo "<font color=red>"; ?><font color=#ff0000>* <?php echo $LDStreet ?></font>:
-			</td>
-			<td>
-				<input name="addr_str" type="text" size="35" value="<?php echo $addr_str; ?>" >
-			</td>
-			<td>
-				&nbsp;&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if ($errorstreetnr) echo "<font color=red>"; ?><font color=#ff0000>* <?php echo $LDStreetNr ?></font>:<input name="addr_str_nr" type="text" size="10" value="<?php echo $addr_str_nr; ?>" >
-			</td>
-			</tr>
 
-			<tr>
-			<td>
-				<FONT SIZE=-1  FACE="Arial"><?php if ($errortown) echo "<font color=red>"; ?><?php echo $LDTownCity ?>:
-			</td>
-			<td>
-				<input name="addr_citytown_name" type="text" size="35" value="<?php echo $addr_citytown_name; ?>" ><a href="javascript:popSearchWin('citytown','aufnahmeform.addr_citytown_nr','aufnahmeform.addr_citytown_name')"><img <?php echo createComIcon($root_path,'b-write_addr.gif','0') ?>></a>
-			</td>
-			<td>
-				&nbsp;&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if ($errorzip) echo "<font color=red>"; ?><font color=#ff0000>* <?php echo $LDZipCode ?>:<input name="addr_zip" type="text" size="10" value="<?php echo $addr_zip; ?>" >
-			</td>
-			</tr>
+			$sCSBuffer = $sCSInput.'value="divorced" ';
+			if($civil_status=="divorced") $sCSBuffer.='checked';
+			$this->smarty->assign('sCSDivorcedInput',$sCSBuffer.'>');
+			
 
-<?php
-		if($insurance_show) {
-			if (!$person_insurance_1_nr_hide) {
-				$this->createTR($errorinsurancenr, 'insurance_nr', $LDInsuranceNr.' 1',$insurance_nr,2);
-?>
-			<tr>
-			<td>
-				&nbsp;
-			</td>
-			<td colspan=2><FONT SIZE=-1  FACE="Arial"><?php if ($errorinsuranceclass) echo '<font color="'.$error_fontcolor.'">'; ?>
-<?php
-				if($insurance_classes!=false){
-					while($result=$insurance_classes->FetchRow()) {
-?>
-						<input name="insurance_class_nr" type="radio"  value="<?php echo $result['class_nr']; ?>"  <?php if($insurance_class_nr==$result['class_nr']) echo 'checked'; ?>>
-<?php
-						$LD=$result['LD_var'];
-        					if(isset($$LD)&&!empty($$LD)) echo $$LD; else echo $result['name'];
-						echo '&nbsp;';
+			$sCSBuffer = $sCSInput.'value="widowed" ';
+			if($civil_status=="widowed") $sCSBuffer.='checked';
+			$this->smarty->assign('sCSWidowedInput',$sCSBuffer.'>');
+			
+			$sCSBuffer = $sCSInput.'value="separated" ';
+			if($civil_status=="separated") $sCSBuffer.='checked';
+			$this->smarty->assign('sCSSeparatedInput',$sCSBuffer.'>');
+
+			$this->smarty->assign('LDSingle',$LDSingle);
+			$this->smarty->assign('LDMarried',$LDMarried);
+			$this->smarty->assign('LDDivorced',$LDDivorced);
+			$this->smarty->assign('LDWidowed',$LDWidowed);
+			$this->smarty->assign('LDSeparated',$LDSeparated);
+		}
+		
+		if ($erroraddress) $this->smarty->assign('LDAddress',"<font color=red>$LDAddress</font>:");
+			else $this->smarty->assign('LDAddress',"$LDAddress:");
+
+		if ($errorstreet) $this->smarty->assign('LDStreet',"<font color=red><font color=#ff0000>*</font> $LDStreet</font>:");
+			else $this->smarty->assign('LDStreet',"<font color=#ff0000>*</font> $LDStreet:");
+
+		$this->smarty->assign('sStreetInput','<input name="addr_str" type="text" size="35" value="'.$addr_str.'">');
+
+		if ($errorstreetnr) $this->smarty->assign('LDStreetNr',"<font color=red><font color=#ff0000>*</font> $LDStreetNr</font>:");
+				else $this->smarty->assign('LDStreetNr',"<font color=#ff0000>*</font> $LDStreetNr:");
+
+		$this->smarty->assign('sStreetNrInput','<input name="addr_str_nr" type="text" size="10" value="'.$addr_str_nr.'">');
+
+		if ($errortown) $this->smarty->assign('LDStreet',"<font color=red>$LDTownCity</font>:");
+			else $this->smarty->assign('LDTownCity',"$LDTownCity:");
+		$this->smarty->assign('sTownCityInput','<input name="addr_citytown_name" type="text" size="35" value="'.$addr_citytown_name.'">');
+		$this->smarty->assign('sTownCityMiniCalendar',"<a href=\"javascript:popSearchWin('citytown','aufnahmeform.addr_citytown_nr','aufnahmeform.addr_citytown_name')\"><img ".createComIcon($root_path,'b-write_addr.gif','0')."></a>");
+
+		 if ($errorzip) $this->smarty->assign('LDZipCode',"<font color=red><font color=#ff0000>*</font> $LDZipCode</font> :");
+		 	else  $this->smarty->assign('LDZipCode',"<font color=#ff0000>*</font> $LDZipCode :");
+		 $this->smarty->assign('sZipCodeInput','<input name="addr_zip" type="text" size="10" value="'.$addr_zip.'">');
+
+
+		// KB: make insurance completely hideable
+		if (!$GLOBAL_CONFIG['person_insurance_hide']){
+			if($insurance_show) {
+				if (!$person_insurance_1_nr_hide) {
+
+					$this->smarty->assign('bShowInsurance',TRUE);
+
+					$this->smarty->assign('sInsuranceNr',$this->createTR($errorinsurancenr, 'insurance_nr', $LDInsuranceNr.' 1',$insurance_nr,2));
+
+					if ($errorinsuranceclass) $this->smarty->assign('sErrorInsClass',"<font color=\"$error_fontcolor\">");
+
+					if($insurance_classes!=false){
+						$sInsClassBuffer='';
+						while($result=$insurance_classes->FetchRow()) {
+
+							$sInsClassBuffer.='<input name="insurance_class_nr" type="radio"  value="'.$result['class_nr'].'" ';
+							if($insurance_class_nr==$result['class_nr']) $sInsClassBuffer.='checked';
+							$sInsClassBuffer.='>';
+
+							$LD=$result['LD_var'];
+							if(isset($$LD)&&!empty($$LD)) $sInsClassBuffer.=$$LD; else $sInsClassBuffer.=$result['name'];
+							$sInsClassBuffer.='&nbsp;';
+						}
+
+						$this->smarty->append('sInsClasses',$sInsClassBuffer);
+
+					} else {
+						$this->smarty->assign('sInsClasses','no insurance class');
 					}
-				} else {
-					echo "no insurance class";
+					
+					if ($errorinsurancecoid) $this->smarty->assign('LDInsuranceCo',"<font color=red>$LDInsuranceCo</font> :");
+						else  $this->smarty->assign('LDInsuranceCo',"$LDInsuranceCo :");
+
+					$this->smarty->assign('sInsCoNameInput','<input name="insurance_firm_name" type="text" size="35" value="'.$insurance_firm_name.'">');
+					$this->smarty->assign('sInsCoMiniCalendar',"<a href=\"javascript:popSearchWin('insurance','aufnahmeform.insurance_firm_id','aufnahmeform.insurance_firm_name')\"><img ".createComIcon($root_path,'b-write_addr.gif','0')."></a>");
 				}
-?>
-			</td>
-			</tr>
-
-			<tr>
-			<td>
-				<FONT SIZE=-1  FACE="Arial"><?php if ($errorinsurancecoid) echo '<font color="'.$error_fontcolor.'">'; ?><?php echo $LDInsuranceCo ?>:
-			</td>
-				<td colspan=2>
-				<input name="insurance_firm_name" type="text" size="35" value="<?php echo $insurance_firm_name; ?>" ><a href="javascript:popSearchWin('insurance','aufnahmeform.insurance_firm_id','aufnahmeform.insurance_firm_name')"><img <?php echo createComIcon($root_path,'b-write_addr.gif','0') ?>></a>
-			</td>
-			</tr>
-<?php
+			} else {
+				$this->smarty->assign('bNoInsurance',TRUE);
+				$this->smarty->assign('LDSeveralInsurances','<a href="#">$LDSeveralInsurances <img '.createComIcon($root_path,'frage.gif','0').'></a>');
 			}
-		} else {
-?>
-			<tr>
-			<td colspan=2>
-				<a><?php echo $LDSeveralInsurances; ?><img <?php echo createComIcon($root_path,'frage.gif','0') ?>></a>
-			</td>
-			</tr>
-<?php
+		}
+		if (!$GLOBAL_CONFIG['person_phone_1_nr_hide']){
+			$this->smarty->assign('sPhone1',$this->createTR($errorphone1, 'phone_1_nr', $LDPhone.' 1',$phone_1_nr,2));
+		}
+		if (!$GLOBAL_CONFIG['person_phone_2_nr_hide']){
+			$this->smarty->assign('sPhone2',$this->createTR($errorphone2, 'phone_2_nr', $LDPhone.' 2',$phone_2_nr,2));
+		}
+		if (!$GLOBAL_CONFIG['person_cellphone_1_nr_hide']){
+			$this->smarty->assign('sCellPhone1',$this->createTR($errorcell1, 'cellphone_1_nr', $LDCellPhone.' 1',$cellphone_1_nr,2));
+		}
+		if (!$GLOBAL_CONFIG['person_cellphone_2_nr_hide']){
+			$this->smarty->assign('sCellPhone2',$this->createTR($errorcell2, 'cellphone_2_nr', $LDCellPhone.' 2',$cellphone_2_nr,2));
+		}
+		if (!$GLOBAL_CONFIG['person_fax_hide']){
+			$this->smarty->assign('sFax',$this->createTR($errorfax, 'fax', $LDFax,$fax,2));
+		}
+		if (!$GLOBAL_CONFIG['person_email_hide']){
+			$this->smarty->assign('sEmail',$this->createTR($erroremail, 'email', $LDEmail,$email,2));
+		}
+		if (!$GLOBAL_CONFIG['person_citizenship_hide']){
+			$this->smarty->assign('sCitzenship',$this->createTR($errorcitizen, 'citizenship', $LDCitizenship,$citizenship,2));
+		}
+		if (!$GLOBAL_CONFIG['person_sss_nr_hide']){
+			$this->smarty->assign('sSSSNr',$this->createTR($errorsss, 'sss_nr', $LDSSSNr,$sss_nr,2));
+		}
+		if (!$GLOBAL_CONFIG['person_nat_id_nr_hide']){
+			$this->smarty->assign('sNatIdNr',$this->createTR($errornatid, 'nat_id_nr', $LDNatIdNr,$nat_id_nr,2));
+		}
+		if (!$GLOBAL_CONFIG['person_religion_hide']){
+			$this->smarty->assign('sReligion',$this->createTR($errorreligion, 'religion', $LDReligion,$religion,2));
+		}
+		if (!$GLOBAL_CONFIG['person_ethnic_orig_hide']){
+
+			/** Add by Jean-Philippe LIOT 13/05/2004 **/
+			$this->smarty->assign('LDEthnicOrig',$LDEthnicOrigin);
+			$this->smarty->assign('sEthnicOrigInput','<input name="ethnic_orig_txt" type="text" size="35" value="'.$ethnic_orig_txt.'" >');
+			$this->smarty->assign('sEthnicOrigMiniCalendar',"<a href=\"javascript:popSearchWin('ethnic_orig')\"><img ".createComIcon($root_path,'b-write_addr.gif','0')."></a>");
+		}
+		// KB: add a field for other HIS nr
+		if (!$GLOBAL_CONFIG['person_other_his_nr_hide']){
+			$this->smarty->assign('bShowOtherHospNr',TRUE);
+
+			$this->smarty->assign('LDOtherHospitalNr',$LDOtherHospitalNr);
+
+			$other_hosp_list = $person_obj->OtherHospNrList();
+			$sOtherNrBuffer='';
+			foreach( $other_hosp_list as $k=>$v ){
+				$sOtherNrBuffer.="<b>".$kb_other_his_array[$k].":</b> ".$v."<br />\n";
+			}
+
+			$this->smarty->assign('sOtherNr',$sOtherNrBuffer);
+			
+			$sOtherNrBuffer='';
+			$sOtherNrBuffer.="<SELECT name=\"other_his_org\">".
+						"<OPTION value=\"\">--</OPTION>";
+			foreach( $kb_other_his_array as $k=>$v ){
+				$sOtherNrBuffer.="<OPTION value=\"$k\" $check>$v</OPTION>";
+			}
+			$sOtherNrBuffer.="</SELECT>\n".
+					"&nbsp;&nbsp;".
+					"$LDNr:<INPUT name=\"other_his_no\" size=20><br />\n";
+
+			$sOtherNrBuffer.="($LDSelectOtherHospital - $LDNoNrNoDelete)".
+						"<br />\n";
+			$sOtherNrBuffer.="</TD></TR>\n\n";
+
+			$this->smarty->assign('sOtherNrSelect',$sOtherNrBuffer);
 		}
 
-		if (!$person_phone_1_nr_hide){
-			$this->createTR($errorphone1, 'phone_1_nr', $LDPhone.' 1',$phone_1_nr,2);
-		}
-		if (!$person_phone_2_nr_hide){
-			$this->createTR($errorphone2, 'phone_2_nr', $LDPhone.' 2',$phone_2_nr,2);
-		}
-		if (!$person_cellphone_1_nr_hide){
-			$this->createTR($errorcell1, 'cellphone_1_nr', $LDCellPhone.' 1',$cellphone_1_nr,2);
-		}
-		if (!$person_cellphone_2_nr_hide){
-			$this->createTR($errorcell2, 'cellphone_2_nr', $LDCellPhone.' 2',$cellphone_2_nr,2);
-		}
-		if (!$person_fax_hide){
-			$this->createTR($errorfax, 'fax', $LDFax,$fax,2);
-		}
-		if (!$person_email_hide){
-			$this->createTR($erroremail, 'email', $LDEmail,$email,2);
-		}
-		if (!$person_citizenship_hide){
-			$this->createTR($errorcitizen, 'citizenship', $LDCitizenship,$citizenship,2);
-		}
-		if (!$person_sss_nr_hide){
-			$this->createTR($errorsss, 'sss_nr', $LDSSSNr,$sss_nr,2);
-		}
-		if (!$person_nat_id_nr_hide){
-			$this->createTR($errornatid, 'nat_id_nr', $LDNatIdNr,$nat_id_nr,2);
-		}
-		if (!$person_religion_hide){
-			$this->createTR($errorreligion, 'religion', $LDReligion,$religion,2);
-		}
-		if (!$person_ethnic_orig_hide){
+		$this->smarty->assign('LDRegBy',$LDRegBy);
+		if(isset($user_id) && $user_id) $buffer=$user_id; else  $buffer = $HTTP_SESSION_VARS['sess_user_name'];
+		$this->smarty->assign('sRegByInput','<input  name="user_id" type="text" value="'.$buffer.'"  size="35" readonly>');
 
-		/** Add by Jean-Philippe LIOT 13/05/2004 **/
+		# Collect the hidden inputs
+		
+		ob_start();
 ?>
-			<tr>
-			<td>
-				<FONT SIZE=-1  FACE="Arial"><?php if ($errortown) echo "<font color=red>"; ?><?php echo $LDEthnicOrigin ?>:
-			</td>
-			<td>
-				<input name="ethnic_orig_txt" type="text" size="35" value="<?php echo $ethnic_orig_txt; ?>" ><a href="javascript:popSearchWin('ethnic_orig')"><img <?php echo createComIcon($root_path,'b-write_addr.gif','0') ?>></a>
-			</td>
-			</tr>
-<?php
-}
-?>
-			<tr>
-			<td >
-				<FONT SIZE=-1  FACE="Arial" ><FONT  SIZE=2  FACE="Arial"><font color=#ff0000><?php echo $LDRegBy ?></font>
-			</td>
-			<td colspan=2>
-				<FONT SIZE=-1  FACE="Arial"><nobr>
-				<input  name="user_id" type="text" value="<?php if(isset($user_id) && $user_id) echo $user_id; else  echo $HTTP_SESSION_VARS['sess_user_name'] ?>"  size="35" readonly>
-				</nobr>
-			</td>
-			</tr>
-
-			</table>
-			<p>
 			<INPUT TYPE="hidden" name="MAX_FILE_SIZE" value="1000000">
 			<input type="hidden" name="itemname" value="<?php echo $itemname; ?>">
 			<input type="hidden" name="sid" value="<?php echo $sid; ?>">
@@ -832,19 +868,20 @@ class GuiInputPerson {
 			<input type="hidden" name="ethnic_orig" value="<?php echo $ethnic_orig; ?>">
 <?php
 		if($update){
-			echo '<input type="hidden" name="update" value=1>';
-			echo '<input type="hidden" name="pid" value="'.$pid.'">';
+			$this->smarty->assign('sUpdateHiddenInputs','<input type="hidden" name="update" value=1><input type="hidden" name="pid" value="'.$pid.'">');
 		}
-?>
-			<input  type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?>  alt="<?php echo $LDSaveData ?>" align="absmiddle">
-				<a href="javascript:document.aufnahmeform.reset()"><img <?php echo createLDImgSrc($root_path,'reset.gif','0') ?> alt="<?php echo $LDResetData ?>"   align="absmiddle"></a>
-<?php
-		if($error||$error_person_exists) echo '<input  type="button" value="'.$LDForceSave.'" onClick="forceSave()">'; 
-?>
-		</form>
-<?php
+
+		$sTemp= ob_get_contents();
+		ob_end_clean();
+		$this->smarty->assign('sHiddenInputs',$sTemp);
+
+		$this->smarty->assign('pbSubmit','<input  type="image" '.createLDImgSrc($root_path,'savedisc.gif','0').'  alt="'.$LDSaveData.'" align="absmiddle">');
+		$this->smarty->assign('pbReset','<a href="javascript:document.aufnahmeform.reset()"><img '.createLDImgSrc($root_path,'reset.gif','0').' alt="'.$LDResetData.'"   align="absmiddle"></a>');
+
+		if($error||$error_person_exists) $this->smarty->assign('pbForceSave','<input  type="button" value="'.$LDForceSave.'" onClick="forceSave()">');
 
 		if (!$newdata){
+			ob_start();
 ?>
 			<form action=<?php echo $thisfile; ?> method=post>
 				<input type=hidden name=sid value=<?php echo $sid; ?>>
@@ -854,7 +891,29 @@ class GuiInputPerson {
 				<input type=submit value="<?php echo $LDNewForm ?>" >
 			</form>
 <?php
+			$sTemp= ob_get_contents();
+			ob_end_clean();
+			$this->smarty->assign('sNewDataForm',$sTemp);
+		}
+
+		# Set the form template as form
+		$this->smarty->assign('bSetAsForm',TRUE);
+
+		if($this->bReturnOnly){
+			ob_start();
+				$this->smarty->display('registration_admission/reg_form.tpl');
+				$sTemp=ob_get_contents();
+			ob_end_clean();
+			return $sTemp;
+		}else{
+			# show Template
+			$this->smarty->display('registration_admission/reg_form.tpl');
 		}
 	} // end of function
+
+	function create(){
+		$this->bReturnOnly = TRUE;
+		return $this->display();
+	}
 } // end of class
 ?>

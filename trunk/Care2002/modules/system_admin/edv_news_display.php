@@ -3,13 +3,15 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+
+//$db->debug=1;
 
 # Define here the default values to be used if the input is invalid
 define('NEWS_TITLE_COLOR','#006600');
@@ -68,17 +70,35 @@ if(isset($mode)&&$mode=='save'){
 }else{ 
 	$glob_obj->getConfig('news_%');
 }
-?>
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
-<?php 
-require($root_path.'include/inc_js_gethelp.php'); 
-require($root_path.'include/inc_css_a_hilitebu.php');
-?> 
 
- 
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('system_admin');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',$LDNewsDisplay);
+
+# href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('newsdisplay.php')");
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',$LDNewsDisplay);
+
+ # Collect javascript code
+
+ ob_start();
+
+?>
+
 <script language="javascript">
 <!-- Script Begin
 function useDefault() {
@@ -105,38 +125,37 @@ function useDefault() {
 </script>
 <!-- Link script file to the HTML document in the header -->
 <script language=JavaScript src="<?php echo $root_path; ?>js/tigra_colorpicker/picker.js"></script>
-</HEAD>
 
-<BODY topmargin=0 leftmargin=0 marginheight=0 marginwidth=0 bgcolor=<?php echo $cfg['body_bgcolor'];?>>
-
-
-<table width=100% border=0 cellspacing=0>
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG> <?php echo $LDNewsDisplay ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right>
-<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('newsdisplay.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
-</tr>
-<tr>
-<td bgcolor=<?php echo $cfg['body_bgcolor'];?> colspan=2>
-<br>
-<ul>
-<FONT    SIZE=2  FACE="verdana,Arial">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-</FONT><FONT    SIZE=3 color=#800000 FACE="Arial"><p>
 <?php
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+$smarty->append('JavaScript',$sTemp);
+
+# Buffer page output
+
+ob_start();
+
+?>
+
+<ul>
+<FONT  class="prompt"><p>
+<?php
+
 if(isset($save_ok)&&$save_ok) echo '<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'>'.$LDDataSaved.'<p>';
 
 echo $LDEnterInfo;
-?></font><br>
-<FONT    SIZE=2 color=#000000 FACE="verdana,arial"><?php echo $LDNoteDefault ?></font>
-<p>
-<FONT    SIZE=-1  FACE="Arial">
+
+?>
+</font>
+<br>
+<?php echo $LDNoteDefault ?>
 <form action="<?php echo $thisfile ?>" method="post" name="newsdisplay">
 <table border=0 cellspacing=1 cellpadding=5>  
 <tr>
-	<td bgcolor="#e9e9e9" align="right"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><?php echo $LDTitleFontSize ?></b> </FONT></td>
-	<td bgcolor="#f9f9f9"><FONT  FACE="verdana,arial" size=2>
+	<td class="wardlisttitlerow" align="right"><FONT  color="#0000cc"><b><?php echo $LDTitleFontSize ?></b> </FONT></td>
+	<td class="submenu">
 	 <select name="news_headline_title_font_size">
       	<option value="1" <?php if($GLOBAL_CONFIG['news_headline_title_font_size']==1) echo 'selected'; ?>> 1</option>
       	<option value="2" <?php if($GLOBAL_CONFIG['news_headline_title_font_size']==2) echo 'selected'; ?>> 2</option>
@@ -151,26 +170,26 @@ echo $LDEnterInfo;
 	  </td>  
 	</tr>
 <tr>
-	<td bgcolor="#e9e9e9" align="right"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><?php echo $LDTitleFont ?></b> </FONT></td>
-	<td bgcolor="#f9f9f9"><input type="text" name="news_headline_title_font_face" size=40 maxlength=100 value="<?php echo $GLOBAL_CONFIG['news_headline_title_font_face'] ?>">
+	<td class="wardlisttitlerow" align="right"><FONT  color="#0000cc"><b><?php echo $LDTitleFont ?></b> </FONT></td>
+	<td class="submenu"><input type="text" name="news_headline_title_font_face" size=40 maxlength=100 value="<?php echo $GLOBAL_CONFIG['news_headline_title_font_face'] ?>">
       </td>  
 	</tr>
 <tr>
-	<td bgcolor="#e9e9e9" align="right"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><?php echo $LDTitleFontColor ?></b> </FONT></td>
-	<td bgcolor="#f9f9f9"><input type="text" name="news_headline_title_font_color" size=40 maxlength=10 value="<?php echo $GLOBAL_CONFIG['news_headline_title_font_color'] ?>">
+	<td class="wardlisttitlerow" align="right"><FONT  color="#0000cc"><b><?php echo $LDTitleFontColor ?></b> </FONT></td>
+	<td class="submenu"><input type="text" name="news_headline_title_font_color" size=40 maxlength=10 value="<?php echo $GLOBAL_CONFIG['news_headline_title_font_color'] ?>">
      <a href="javascript:TCP.popup(document.forms['newsdisplay'].elements['news_headline_title_font_color'],'','<?php echo $root_path; ?>js/tigra_colorpicker/')"><img width="18" height="18" border="0" alt="<?php echo $LDClkPickColor ?>"  title="<?php echo $LDClkPickColor ?>" <?php echo createComIcon($root_path,'colorcube_s.gif','0'); ?>></a>
 	  </td>  
 	</tr>
 <tr>
-	<td bgcolor="#e9e9e9" align="right"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><?php echo $LDTitleFontBold ?></b> </FONT></td>
-	<td bgcolor="#f9f9f9"><FONT  FACE="verdana,arial" size=2>
+	<td class="wardlisttitlerow" align="right"><FONT  color="#0000cc"><b><?php echo $LDTitleFontBold ?></b> </FONT></td>
+	<td class="submenu">
 		<input type="radio" name="news_headline_title_font_bold" value="1" <?php  if($GLOBAL_CONFIG['news_headline_title_font_bold']) echo 'checked'; ?>><?php echo $LDBold ?> 
-		<input type="radio" name="news_headline_title_font_bold" value="" <?php  if(!$GLOBAL_CONFIG['news_headline_title_font_bold']) echo 'checked'; ?>><?php echo $LDNormal ?> 
+		<input type="radio" name="news_headline_title_font_bold" value="0" <?php  if(!$GLOBAL_CONFIG['news_headline_title_font_bold']) echo 'checked'; ?>><?php echo $LDNormal ?>
       </td>  
 	</tr>
 <tr>
-	<td bgcolor="#e9e9e9" align="right"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><?php echo $LDPrefaceFontSize ?></b> </FONT></td>
-	<td bgcolor="#f9f9f9"><FONT  FACE="verdana,arial" size=2>
+	<td class="wardlisttitlerow" align="right"><FONT  color="#0000cc"><b><?php echo $LDPrefaceFontSize ?></b> </FONT></td>
+	<td class="submenu">
 		 <select name="news_headline_preface_font_size">
       	<option value="1" <?php if($GLOBAL_CONFIG['news_headline_preface_font_size']==1) echo 'selected'; ?>> 1</option>
       	<option value="2" <?php if($GLOBAL_CONFIG['news_headline_preface_font_size']==2) echo 'selected'; ?>> 2</option>
@@ -184,27 +203,27 @@ echo $LDEnterInfo;
       </td>  
 	</tr>
 <tr>
-	<td bgcolor="#e9e9e9" align="right"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><?php echo $LDPrefaceFont ?></b> </FONT></td>
-	<td bgcolor="#f9f9f9"><input type="text" name="news_headline_preface_font_face" size=40 maxlength=40 value="<?php echo $GLOBAL_CONFIG['news_headline_preface_font_face'] ?>">
+	<td class="wardlisttitlerow" align="right"><FONT  color="#0000cc"><b><?php echo $LDPrefaceFont ?></b> </FONT></td>
+	<td class="submenu"><input type="text" name="news_headline_preface_font_face" size=40 maxlength=40 value="<?php echo $GLOBAL_CONFIG['news_headline_preface_font_face'] ?>">
       </td>  
 	</tr>
 <tr>
-	<td bgcolor="#e9e9e9" align="right"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><?php echo $LDPrefaceFontColor ?></b> </FONT></td>
-	<td bgcolor="#f9f9f9"><input type="text" name="news_headline_preface_font_color" size=40 maxlength=40 value="<?php echo $GLOBAL_CONFIG['news_headline_preface_font_color'] ?>">
+	<td class="wardlisttitlerow" align="right"><FONT  color="#0000cc"><b><?php echo $LDPrefaceFontColor ?></b> </FONT></td>
+	<td class="submenu"><input type="text" name="news_headline_preface_font_color" size=40 maxlength=40 value="<?php echo $GLOBAL_CONFIG['news_headline_preface_font_color'] ?>">
      <a href="javascript:TCP.popup(document.forms['newsdisplay'].elements['news_headline_preface_font_color'],'','<?php echo $root_path; ?>js/tigra_colorpicker/')"><img width="18" height="18" border="0" alt="<?php echo $LDClkPickColor ?>"  title="<?php echo $LDClkPickColor ?>" <?php echo createComIcon($root_path,'colorcube_s.gif','0'); ?>></a>
       </td>  
 	</tr>
 <tr>
-	<td bgcolor="#e9e9e9" align="right"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><?php echo $LDPrefaceFontBold ?></b> </FONT></td>
-	<td bgcolor="#f9f9f9"><FONT  FACE="verdana,arial" size=2>
+	<td class="wardlisttitlerow" align="right"><FONT  color="#0000cc"><b><?php echo $LDPrefaceFontBold ?></b> </FONT></td>
+	<td class="submenu">
 		<input type="radio" name="news_headline_preface_font_bold" value="1" <?php  if($GLOBAL_CONFIG['news_headline_preface_font_bold']) echo 'checked'; ?>><?php echo $LDBold ?> 
-		<input type="radio" name="news_headline_preface_font_bold" value="" <?php  if(!$GLOBAL_CONFIG['news_headline_preface_font_bold']) echo 'checked'; ?>><?php echo $LDNormal ?> 
+		<input type="radio" name="news_headline_preface_font_bold" value="0" <?php  if(!$GLOBAL_CONFIG['news_headline_preface_font_bold']) echo 'checked'; ?>><?php echo $LDNormal ?>
       </td>  
 	</tr>
 <tr>
-	<td bgcolor="#e9e9e9" align="right"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><?php echo $LDBodyFontSize ?></b> </FONT></td>
-	<td bgcolor="#f9f9f9">
-	  <FONT  FACE="verdana,arial" size=2>
+	<td class="wardlisttitlerow" align="right"><FONT  color="#0000cc"><b><?php echo $LDBodyFontSize ?></b> </FONT></td>
+	<td class="submenu">
+	  
 		 <select name="news_headline_body_font_size">
       	<option value="1" <?php if($GLOBAL_CONFIG['news_headline_body_font_size']==1) echo 'selected'; ?>> 1</option>
       	<option value="2" <?php if($GLOBAL_CONFIG['news_headline_body_font_size']==2) echo 'selected'; ?>> 2</option>
@@ -217,29 +236,29 @@ echo $LDEnterInfo;
 	  </td>  
 	</tr>
 <tr>
-	<td bgcolor="#e9e9e9" align="right"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><?php echo $LDBodyFont ?></b> </FONT></td>
-	<td bgcolor="#f9f9f9"><input type="text" name="news_headline_body_font_face" size=40 maxlength=60 value="<?php echo $GLOBAL_CONFIG['news_headline_body_font_face'] ?>">
+	<td class="wardlisttitlerow" align="right"><FONT  color="#0000cc"><b><?php echo $LDBodyFont ?></b> </FONT></td>
+	<td class="submenu"><input type="text" name="news_headline_body_font_face" size=40 maxlength=60 value="<?php echo $GLOBAL_CONFIG['news_headline_body_font_face'] ?>">
       </td>  
 	</tr>
 <tr>
-	<td bgcolor="#e9e9e9" align="right"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><?php echo $LDBodyFontColor ?></b> </FONT></td>
-	<td bgcolor="#f9f9f9"><input type="text" name="news_headline_body_font_color" size=40 maxlength=60 value="<?php echo $GLOBAL_CONFIG['news_headline_body_font_color'] ?>">
+	<td class="wardlisttitlerow" align="right"><FONT  color="#0000cc"><b><?php echo $LDBodyFontColor ?></b> </FONT></td>
+	<td class="submenu"><input type="text" name="news_headline_body_font_color" size=40 maxlength=60 value="<?php echo $GLOBAL_CONFIG['news_headline_body_font_color'] ?>">
      <a href="javascript:TCP.popup(document.forms['newsdisplay'].elements['news_headline_body_font_color'],'','<?php echo $root_path; ?>js/tigra_colorpicker/')"><img width="18" height="18" border="0" alt="<?php echo $LDClkPickColor ?>"  title="<?php echo $LDClkPickColor ?>" <?php echo createComIcon($root_path,'colorcube_s.gif','0'); ?>></a>
       </td>  
 	</tr>
 <tr>
-	<td bgcolor="#e9e9e9" align="right"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><?php echo $LDPreviewMaxlen ?></b> </FONT></td>
-	<td bgcolor="#f9f9f9"><input type="text" name="news_normal_preview_maxlen" size=40 maxlength=60 value="<?php echo $GLOBAL_CONFIG['news_normal_preview_maxlen'] ?>">
+	<td class="wardlisttitlerow" align="right"><FONT  color="#0000cc"><b><?php echo $LDPreviewMaxlen ?></b> </FONT></td>
+	<td class="submenu"><input type="text" name="news_normal_preview_maxlen" size=40 maxlength=60 value="<?php echo $GLOBAL_CONFIG['news_normal_preview_maxlen'] ?>">
       </td>  
 	</tr>
 <tr>
-	<td bgcolor="#e9e9e9" align="right"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><?php echo $LDDisplayWidth ?></b> </FONT></td>
-	<td bgcolor="#f9f9f9"><input type="text" name="news_normal_display_width" size=40 maxlength=60 value="<?php echo $GLOBAL_CONFIG['news_normal_display_width'] ?>">
+	<td class="wardlisttitlerow" align="right"><FONT  color="#0000cc"><b><?php echo $LDDisplayWidth ?></b> </FONT></td>
+	<td class="submenu"><input type="text" name="news_normal_display_width" size=40 maxlength=60 value="<?php echo $GLOBAL_CONFIG['news_normal_display_width'] ?>">
       </td>  
 	</tr>
 <tr>
-	<td bgcolor="#f9f9f9" align="right">&nbsp;</td>
-	<td bgcolor="#f9f9f9"><input type="button" value="<?php echo $LDUseDefault ?>" onClick="useDefault()">
+	<td class="submenu" align="right">&nbsp;</td>
+	<td class="submenu"><input type="button" value="<?php echo $LDUseDefault ?>" onClick="useDefault()">
       </td>  
 	</tr>
 </table>
@@ -257,15 +276,17 @@ echo $LDEnterInfo;
 <p>
 </ul>
 
-</FONT>
-<p>
-</td>
-</tr>
-</table>        
-<p>
 <?php
-require($root_path.'include/inc_load_copyrite.php');
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+# Assign page output to the mainframe template
+
+$smarty->assign('sMainFrameBlockData',$sTemp);
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
 ?>
-</FONT>
-</BODY>
-</HTML>

@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -31,7 +31,7 @@ if(!isset($dept_nr)||!$dept_nr){
 	}
 }
 
-
+//$db->debug=1;
 /**
 * if order nr is not available,   get the highest item number in the db and add 1
 */
@@ -49,8 +49,9 @@ if(!isset($order_nr) || !$order_nr)
      }
  
 
-	$sql='SELECT order_nr FROM '.$dbtable.' ORDER BY order_nr DESC LIMIT 1';
-						
+	//$sql="SELECT order_nr FROM $dbtable ORDER BY order_nr DESC";
+	$sql="SELECT MAX(order_nr) AS order_nr FROM $dbtable";
+    // if($ergebnis=$db->SelectLimit($sql,1)){
      if($ergebnis=$db->Execute($sql)){
 		//reset result
 		if ($rows=$ergebnis->RecordCount())	{
@@ -64,28 +65,28 @@ if(!isset($order_nr) || !$order_nr)
 		exit;
 	} 
 }
+
+/**
+ * LOAD Smarty
+ */
+
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common',TRUE,FALSE,FALSE);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle','');
+
+# Assign frameset source file
+
+$smarty->assign('sHeaderSource',"src=\"products-bestell-hf.php?sid=$sid&lang=$lang&cat=$cat&userck=$userck\"");
+$smarty->assign('sBasketSource',"src=\"products-bestellkorb.php?sid=$sid&lang=$lang&dept_nr=$dept_nr&order_nr=$order_nr&itwassent=$itwassent&cat=$cat&userck=$userck\"");
+$smarty->assign('sCatalogSource',"src=\"products-bestellkatalog.php?sid=$sid&lang=$lang&dept_nr=$dept_nr&order_nr=$order_nr&cat=$cat&userck=$userck\"");
+
+$smarty->assign('sBaseFramesetTemplate','products/ordering_frameset.tpl');
+
+$smarty->display('common/baseframe.tpl');
 ?>
-<?php html_rtl($lang); ?>
-<head>
-<?php echo setCharSet(); ?>
-<title></title>
-</head>
 
-
-<frameset rows="33,*">
-  <frame name="BHEADER" src="products-bestell-hf.php<?php echo "?sid=$sid&lang=$lang&cat=$cat&userck=$userck" ?>" scrolling="no" frameborder="yes" >
-  <frameset cols="50%,*">
-	<frame name="BESTELLKORB" src="products-bestellkorb.php?sid=<?php echo "$sid&lang=$lang&dept_nr=$dept_nr&order_nr=$order_nr&itwassent=$itwassent&cat=$cat&userck=$userck"; ?>" scrolling="auto" frameborder="yes">
-     <frame name="BESTELLKATALOG" src="products-bestellkatalog.php?sid=<?php echo "$sid&lang=$lang&dept_nr=$dept_nr&order_nr=$order_nr&cat=$cat&userck=$userck"; ?>" scrolling="auto" frameborder="yes">
-  </frameset>
-<noframes>
-</noframes>
-
-
-<body>
-
-</body>
-</noframes>
-</frameset>
-
-</html>

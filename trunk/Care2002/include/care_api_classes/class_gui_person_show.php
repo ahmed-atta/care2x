@@ -12,8 +12,8 @@
 *
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
-* @version beta 2.0.0
-* @copyright 2002,2003,2004,2005 Elpidio Latorilla
+* @version beta 2.0.1
+* @copyright 2002,2003,2004,2005,2005 Elpidio Latorilla
 * @package care_api
 */
 
@@ -21,7 +21,7 @@ $thisfile = basename($HTTP_SERVER_VARS['PHP_SELF']);
 
 class GuiPersonShow {
 	# Language files to be loaded
-	var $langfile=array('prompt.php','person.php','aufnahme.php');
+	var $langfiles=array('prompt.php','person.php','aufnahme.php');
 
 	# Filename of script to run in fallback state (when something goes wrong)
 	var $fallbackfile = '';
@@ -53,6 +53,12 @@ class GuiPersonShow {
 	
 	# Flag if data is loaded
 	var $is_loaded;
+	
+	# Flag if the data is to be returned only as string
+	var $bReturnOnly = FALSE;
+	
+	# Internal smarty object
+	var $smarty;
 	
 	/**
 	* Constructor
@@ -94,7 +100,7 @@ class GuiPersonShow {
 			else return $this->person_obj->DeathDate();
 	}
 	/**
-	* # Gets the encounter number if person is currently admitted
+	*  Gets the encounter number if person is currently admitted
 	*/
 	function CurrentEncounter(){
 		global $root_path;
@@ -108,7 +114,7 @@ class GuiPersonShow {
 	* (pre)Loads the person registration data.
 	*
 	* Can be checked if data is loaded with the $this->is_loaded variable
-	* @private
+	* @access private
 	*/
 	function _load(){
 		if($this->data_obj=&$this->person_obj->getAllInfoObject()){
@@ -121,29 +127,46 @@ class GuiPersonShow {
 	/**
 	* Function to generate demographic data dynamically depending on the global config
 	*/
-	function createTR($ld_text, $input_val, $colspan = 1){
+	function createTR($ld_text, $input_val, $colspan = 1, $vidata = FALSE){
 
+		ob_start();
+			if($vidata) $input_val="<div class=\"vi_data\">$input_val</div>";
+			$sBuffer=$ld_text;
+			$this->smarty->assign('sItem',$sBuffer);
+			$this->smarty->assign('sColSpan2',"colspan=$colspan");
+			$this->smarty->assign('sInput',$input_val);
+			$this->smarty->display('registration_admission/reg_row.tpl');
+			$sBuffer = ob_get_contents();
+		ob_end_clean();
+
+		//$this->toggle=!$this->toggle;
+
+		return $sBuffer;
+/*
 		echo '<tr>
 				<td bgColor="#eeeeee" ><FONT SIZE=-1  FACE="Arial,verdana,sans serif">'.$ld_text.':
 				</td>
 				<td colspan='.$colspan.' bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial,verdana,sans serif">'.$input_val.'
 				</td>
-			</tr>';
+			</tr>';*/
 	}
 
 	/**
 	* Displays the GUI showing the data
 	*/
-	function display($pid){
-		global $HTTP_SESSION_VARS, $root_path, $dbf_nodate, $newdata;
-		
+	function display($pid=0){
+		global $HTTP_SESSION_VARS, $root_path, $dbf_nodate, $newdata, $kb_other_his_array, $lang;
+
 		$validdata = TRUE;
 
 		if(!empty($pid)) $this->pid=$pid;
 
 		# Load the language tables
-		$lang_tables =$this->langfile;
+		$lang_tables =$this->langfiles;
 		include($root_path.'include/inc_load_lang_tables.php');
+
+		# Load the other hospitals array
+		include_once($root_path.'global_conf/other_hospitals.php');
 
 		include_once($root_path.'include/inc_date_format_functions.php');
 
@@ -212,257 +235,230 @@ class GuiPersonShow {
 		include_once($root_path.'include/inc_photo_filename_resolve.php');
 
 		############ Here starts the GUI output ##################
-?>
-		<table border=0 cellspacing=1 cellpadding=3>
-		<tr>
-		<td bgColor="#eeeeee">
-			<FONT SIZE=-1  FACE="Arial"><?php echo $LDRegistryNr ?>:
-		</td>
-		<td width="30%"  bgcolor="#ffffee">
-			<FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo $pid; ?><br>
-<?php
 
-if(file_exists($root_path.'cache/barcodes/pn_'.$pid.'.png')){
-	echo '<img src="'.$root_path.'cache/barcodes/pn_'.$pid.'.png" border=0 width=180 height=35>';
-}else{
-			echo "<img src='".$root_path."classes/barcode/image.php?code=".$pid."&style=68&type=I25&width=180&height=50&xres=2&font=5&label=2&form_file=pn' border=0 width=0 height=0>";
-			echo "<img src='".$root_path."classes/barcode/image.php?code=".$pid."&style=68&type=I25&width=180&height=50&xres=2&font=5' border=0 width=180  height=35>";
-  }
+		# Start Smarty templating here
+		# Create smarty object without initiliazing the GUI (2nd param = FALSE)
 
-?>
-		</td>
-		<td valign="top" rowspan=6 align="center" bgcolor="#ffffee" >
-			<FONT SIZE=-1  FACE="Arial"><img <?php echo $img_source; ?>>
-		</td>
-		</tr>
-
-		<tr>
-		<td  bgColor="#eeeeee">
-			<FONT SIZE=-1  FACE="Arial"><?php echo $LDRegTime ?>:
-		</td>
-		<td  bgcolor="#ffffee">
-			<FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo convertTimeToLocal(formatDate2Local($date_reg,$date_format,0,1)); ?>
-		</td>
-		</tr>
-
-		<tr>
-		<td bgColor="#eeeeee">
-			<FONT SIZE=-1  FACE="Arial">
-			<?php echo $LDRegDate ?>:
-		</td>
-		<td bgcolor="#ffffee">
-			<FONT SIZE=-1  FACE="Arial" color="#800000">
-			<?php echo formatDate2Local($date_reg,$date_format); ?>
-			<input name="date_reg" type="hidden" value="<?php echo $date_reg ?>">
-		</td>
-		</tr>
-
-		<tr>
-		<td bgColor="#eeeeee">
-			<FONT SIZE=-1  FACE="Arial"><?php echo $LDTitle ?>:
-		</td>
-		<td  bgcolor="#ffffee">
-			<FONT SIZE=-1  FACE="Arial">
-			<?php echo $title ?>
-		</td>
-		</tr>
+		include_once($root_path.'gui/smarty_template/smarty_care.class.php');
+		$this->smarty = new smarty_care('common',FALSE);
 		
-		<tr>
-		<td bgColor="#eeeeee">
-			<FONT SIZE=-1  FACE="Arial">
-			<?php  echo $LDLastName ?>:
-		</td>
-		<td  bgcolor="#ffffee">
-			<FONT SIZE=-1  FACE="Arial" color="#990000">
-			<b><?php echo $name_last; ?></b>
-		</td>
-		</tr>
+		# Set from width
+		$this->smarty->assign('sFormWidth','width="100%"');
+
+		$img_male=createComIcon($root_path,'spm.gif','0');
+		$img_female=createComIcon($root_path,'spf.gif','0');
+
+		if(!empty($this->pretext)) $this->smarty->assign('pretext',$this->pretext);
+
+		$this->smarty->assign('LDRegistryNr',$LDRegistryNr);
+		$this->smarty->assign('pid',$pid);
+
+		if(file_exists($root_path.'cache/barcodes/pn_'.$pid.'.png')){
+			$this->smarty->assign('sBarcodeImg','<img src="'.$root_path.'cache/barcodes/pn_'.$pid.'.png" border=0 width=180 height=35>');
+		}else{
+			$this->smarty->assign('sBarcodeImg',"<img src='".$root_path."classes/barcode/image.php?code=".$pid."&style=68&type=I25&width=180&height=50&xres=2&font=5&label=2&form_file=pn' border=0 width=0 height=0>");
+			$this->smarty->assign('sBarcodeImg',"<img src='".$root_path."classes/barcode/image.php?code=".$pid."&style=68&type=I25&width=180&height=50&xres=2&font=5' border=0 width=180  height=35>");
+		}
+
+		$this->smarty->assign('img_source',$img_source);
 		
-		<tr>
-		<td bgColor="#eeeeee">
-			<FONT SIZE=-1  FACE="Arial">
-			<?php echo $LDFirstName ?>:
-		</td>
-		<td bgcolor="#ffffee">
-			<FONT SIZE=-1  FACE="Arial" color="#990000">
-			<b><?php echo $name_first; ?></b>
-<?php
+		# iRowSpanCount counts the rows on the left of the photo image. Begin with 5 because there are 5 static rows.
+		$iRowSpanCount = 5;
+
+		$this->smarty->assign('LDRegDate',$LDRegDate);
+		$this->smarty->assign('sRegDate',@formatDate2Local($date_reg,$date_format).'<input name="date_reg" type="hidden" value="'.$date_reg.'"');
+
+		//$iRowSpanCount++;
+		$this->smarty->assign('LDRegTime',$LDRegTime);
+		$this->smarty->assign('sRegTime',convertTimeToLocal(@formatDate2Local($date_reg,$date_format,0,1)));
+
+		if (!$GLOBAL_CONFIG['person_title_hide']){
+			$this->smarty->assign('sPersonTitle',$this->createTR( $LDTitle, $title));
+			$iRowSpanCount++;
+		}
+
+		$this->smarty->assign('sNameLast',$this->createTR($LDLastName,$name_last,1,TRUE));
+		//$iRowSpanCount++;
+
 		# If person is dead show a black cross
-		if($death_date&&$death_date!=$dbf_nodate) echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0').'>';
-?>
-		</td>
-		</tr>
-<?php
+		if($death_date&&$death_date!=$dbf_nodate) $sCross = '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0','',TRUE).'>';
+			else $sCross ='';
+
+		$this->smarty->assign('sNameFirst',$this->createTR($LDFirstName,$name_first.$sCross,1,TRUE));
 
 		if (!$GLOBAL_CONFIG['person_name_2_hide']&&$name_2){
-			$this->createTR($LDName2,$name_2);
+			$this->smarty->assign('sName2',$this->createTR($LDName2,$name_2));
+			$iRowSpanCount++;
 		}
 		if (!$GLOBAL_CONFIG['person_name_3_hide']&&$name_3){
-			$this->createTR( $LDName3,$name_3);
+			$this->smarty->assign('sName3',$this->createTR($LDName3,$name_3));
+			$iRowSpanCount++;
 		}
 		if (!$GLOBAL_CONFIG['person_name_middle_hide']&&$name_middle){
-			$this->createTR($LDNameMid,$name_middle);
+			$this->smarty->assign('sNameMiddle',$this->createTR($LDNameMid,$name_middle));
+			$iRowSpanCount++;
 		}
 		if (!$GLOBAL_CONFIG['person_name_maiden_hide']&&$name_maiden){
-			$this->createTR($LDNameMaiden,$name_maiden);
+			$this->smarty->assign('sNameMaiden',$this->createTR($LDNameMaiden,$name_maiden));
+			$iRowSpanCount++;
 		}
 		if (!$GLOBAL_CONFIG['person_name_others_hide']&&$name_others){
-			$this->createTR($LDNameOthers,$name_others);
+			$this->smarty->assign('sNameOthers',$this->createTR($LDNameOthers,$name_others));
+			$iRowSpanCount++;
 		}
-?>
-		<tr>
-		<td bgColor="#eeeeee">
-			<FONT SIZE=-1  FACE="Arial">
-			<?php echo $LDBday ?>:
-		</td>
-		<td  bgcolor="#ffffee">
-			<FONT SIZE=-1  FACE="Arial"  color="#990000">
-			<b><?php  echo formatDate2Local($date_birth,$date_format);  ?></b>
-<?php
-		# If person is dead show a black cross
+		
+		# Set the rowspan value for the photo image <td>
+		$this->smarty->assign('sPicTdRowSpan',"rowspan=$iRowSpanCount");
+
+		$this->smarty->assign('LDBday',"$LDBday:");
+
 		if($death_date&&$death_date!=$dbf_nodate){
-			echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0').'>&nbsp;<font color="#000000">'.formatDate2Local($death_date,$date_format).'</font>';
+			$this->smarty->assign('sCrossImg',$sCross);
+			$this->smarty->assign('sDeathDate','<font color="#000000">'.@formatDate2Local($death_date,$date_format).'</font>');
 		}
-?>
-		</td>
-		<td bgcolor="#ffffee">
-			<FONT SIZE=-1  FACE="Arial">
-			<?php  echo $LDSex ?>: <?php if($sex=="m") echo  $LDMale; elseif($sex=="f") echo $LDFemale ?>
-		</td>
-		</tr>
+		$this->smarty->assign('sBdayInput','<div class="vi_data">'.@formatDate2Local($date_birth,$date_format).'</div>');
+		
+		$this->smarty->assign('LDSex', "$LDSex:");
 
-		<tr>
-		<td bgColor="#eeeeee">
-			<FONT SIZE=-1  FACE="Arial"><?php echo $LDBloodGroup ?>:
-		</td>
-		<td colspan=2 bgcolor="#ffffee">
-			<FONT SIZE=-1  FACE="Arial">
-<?php
-		$buf='LD'.trim($blood_group);
-		echo $$buf;
-?>
-		</td>
-		</tr>
+		if($sex=="m") $this->smarty->assign('LDMale','<div class="vi_data">'.$LDMale.'</div>');
+			elseif($sex=="f") $this->smarty->assign('LDFemale','<div class="vi_data">'.$LDFemale.'</div>');
 
-		<tr>
-		<td bgColor="#eeeeee">
-			<FONT SIZE=-1  FACE="Arial">
-			<?php echo $LDCivilStatus ?>:
-		</td>
-		<td colspan=2 bgcolor="#ffffee">
-			<FONT SIZE=-1  FACE="Arial">
-<?php
-		if($civil_status=="single") echo $LDSingle;
-		  elseif($civil_status=="married") echo  $LDMarried;
-		    elseif($civil_status=="divorced") echo  $LDDivorced;
-		      elseif($civil_status=="widowed") echo $LDWidowed;
-			elseif($civil_status=="separated") echo  $LDSeparated ?>
-		</td>
-		</tr>
+		if (!$GLOBAL_CONFIG['person_bloodgroup_hide'] && trim($blood_group)) {
+			// KB: make blood group hideable
+			$this->smarty->assign('LDBloodGroup',$LDBloodGroup);
+			$buf='LD'.trim($blood_group);
+			$this->smarty->assign('sBGAInput',$$buf);
+		}
 
-		<tr>
-		<td colspan=3>
-			<FONT SIZE=-1  FACE="Arial">
-			<?php echo $LDAddress ?>:
-		</td>
-		</tr>
+		if (!$GLOBAL_CONFIG['person_civilstatus_hide'] && trim($civil_status)) {
+			$this->smarty->assign('LDCivilStatus',$LDCivilStatus);
 
-		<tr>
-		<td bgColor="#eeeeee">
-			<FONT SIZE=-1  FACE="Arial">
-			&nbsp;&nbsp;&nbsp;<?php echo $LDStreet ?>:
-		</td>
-		<td bgcolor="#ffffee">
-			<FONT SIZE=-1  FACE="Arial">
-			<?php echo $addr_str; ?>
-		</td>
-		<td bgcolor="#ffffee">
-			<FONT SIZE=-1  FACE="Arial">
-			&nbsp;&nbsp;&nbsp;<?php echo $LDStreetNr ?>: <?php echo $addr_str_nr; ?>
-		</td>
-		</tr>
+			if($civil_status=="single") $sCSBuffer =  $LDSingle;
+				elseif($civil_status=="married") $sCSBuffer =  $LDMarried;
+					elseif($civil_status=="divorced") $sCSBuffer =  $LDDivorced;
+						elseif($civil_status=="widowed") $sCSBuffer = $LDWidowed;
+							elseif($civil_status=="separated") $sCSBuffer =  $LDSeparated;
 
-		<tr>
-		<td bgColor="#eeeeee">
-			<FONT SIZE=-1  FACE="Arial">
-			&nbsp;&nbsp;&nbsp;<?php echo $LDTownCity ?>:
-		</td>
-		<td bgcolor="#ffffee">
-			<FONT SIZE=-1  FACE="Arial">
-			<?php echo $addr_citytown_name; ?>
-		</td>
-		<td bgcolor="#ffffee">
-			<FONT SIZE=-1  FACE="Arial">
-			&nbsp;&nbsp;&nbsp;<?php echo $LDZipCode ?>: <?php echo $addr_zip; ?>
-		</td>
-		</tr>
- <?php
-		if (!$GLOBAL_CONFIG['person_insurance_1_nr_hide']&&$insurance_show&&$insurance_nr){
-			$this->createTR($LDInsuranceNr,$insurance_nr,2);
-			$buffer=$insurance_class_info['LD_var'];
-			if(isset($$buffer)&&!empty($$buffer)) $this->createTR($LDInsuranceClass,$$buffer,2);
-    				else $this->createTR($LDInsuranceClass,$insurance_class_info['name'],2);
-			$this->createTR($LDInsuranceCo.' 1',$insurance_firm_name,2);
+			$this->smarty->assign('sCSSingleInput',$sCSBuffer);
+		}
+		
+		$this->smarty->assign('LDAddress',"$LDAddress:");
+
+		$this->smarty->assign('LDStreet',"$LDStreet:");
+
+		$this->smarty->assign('sStreetInput',$addr_str);
+
+		$this->smarty->assign('LDStreetNr',"$LDStreetNr:");
+
+		$this->smarty->assign('sStreetNrInput',$addr_str_nr);
+
+		$this->smarty->assign('LDTownCity',"$LDTownCity:");
+		$this->smarty->assign('sTownCityInput',$addr_citytown_name);
+
+		$this->smarty->assign('LDZipCode',"$LDZipCode :");
+		$this->smarty->assign('sZipCodeInput',$addr_zip);
+
+		if (!$GLOBAL_CONFIG['person_insurance_hide']) {
+			if (!$GLOBAL_CONFIG['person_insurance_1_nr_hide']&&$insurance_show&&$insurance_nr){
+				
+				$this->smarty->assign('bShowInsurance',TRUE);
+
+				$this->smarty->assign('sInsuranceNr',$this->createTR($LDInsuranceNr,$insurance_nr,2));
+
+				$buffer=$insurance_class_info['LD_var'];
+				if(isset($$buffer)&&!empty($$buffer)) $this->smarty->append('sInsClasses',$$buffer);
+    				else $this->smarty->append('sInsClasses',$insurance_class_info['name']);
+
+				$this->smarty->assign('LDInsuranceCo',$LDInsuranceCo);
+				$this->smarty->assign('sInsCoNameInput',$insurance_firm_name);
+
+				$this->createTR($LDInsuranceCo.' 1',$insurance_firm_name,2);
+			}
 		}
 		if (!$GLOBAL_CONFIG['person_phone_1_nr_hide']&&$phone_1_nr){
-			$this->createTR($LDPhone.' 1',$phone_1_nr,2);
+			$this->smarty->assign('sPhone1',$this->createTR($LDPhone.' 1',$phone_1_nr,2));
 		}
 		if (!$GLOBAL_CONFIG['person_phone_2_nr_hide']&&$phone_2_nr){
-			$this->createTR($LDPhone.' 2',$phone_2_nr,2);
+			$this->smarty->assign('sPhone2',$this->createTR($LDPhone.' 2',$phone_2_nr,2));
 		}
 		if (!$GLOBAL_CONFIG['person_cellphone_1_nr_hide']&&$cellphone_1_nr){
-			$this->createTR($LDCellPhone.' 1',$cellphone_1_nr,2);
+			$this->smarty->assign('sCellPhone1',$this->createTR($LDCellPhone.' 1',$cellphone_1_nr,2));
 		}
 		if (!$GLOBAL_CONFIG['person_cellphone_2_nr_hide']&&$cellphone_2_nr){
-			$this->createTR($LDCellPhone.' 2',$cellphone_2_nr,2);
+			$this->smarty->assign('sCellPhone2',$this->createTR($LDCellPhone.' 2',$cellphone_2_nr,2));
 		}
 		if (!$GLOBAL_CONFIG['person_fax_hide']&&$fax){
-			$this->createTR($LDFax,$fax,2);
+			$this->smarty->assign('sFax',$this->createTR($LDFax,$fax,2));
 		}
 		if (!$GLOBAL_CONFIG['person_email_hide']&&$email){
-?>
-		<tr>
-		<td bgColor="#eeeeee">
-			<FONT SIZE=-1  FACE="Arial">
-			<?php echo $LDEmail ?>:
-		</td>
-		<td bgcolor="#ffffee" colspan=2>
-			<FONT SIZE=-1  FACE="Arial">
-			<a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a>
-		</td>
-		</tr>
-<?php
+			$this->smarty->assign('sEmail',$this->createTR($LDEmail,"<a href=\"mailto:$email\">$email</a>",2));
 		}
 
 		if (!$GLOBAL_CONFIG['person_citizenship_hide']&&$citizenship){
-			$this->createTR($LDCitizenship,$citizenship,2);
+			$this->smarty->assign('sCitzenship',$this->createTR($LDCitizenship,$citizenship,2));
 		}
 		if (!$GLOBAL_CONFIG['person_sss_nr_hide']&&$sss_nr){
-			$this->createTR($LDSSSNr,$sss_nr,2);
+			$this->smarty->assign('sSSSNr',$this->createTR($LDSSSNr,$sss_nr,2));
 		}
 		if (!$GLOBAL_CONFIG['person_nat_id_nr_hide']&&$nat_id_nr){
-			$this->createTR($LDNatIdNr,$nat_id_nr,2);
+			$this->smarty->assign('sNatIdNr',$this->createTR($LDNatIdNr,$nat_id_nr,2));
 		}
 		if (!$GLOBAL_CONFIG['person_religion_hide']&&$religion){
-			$this->createTR($LDReligion,$religion,2);
+			$this->smarty->assign('sReligion',$this->createTR($LDReligion,$religion,2));
 		}
 		if (!$GLOBAL_CONFIG['person_ethnic_orig_hide']&&$ethnic_orig){
-			$this->createTR($LDEthnicOrigin,$ethnic_orig_txt,2);
+			$this->smarty->assign('LDEthnicOrig',$LDEthnicOrigin);
+			$this->smarty->assign('sEthnicOrigInput',$ethnic_orig_txt);
 		}
-?>
-		<tr>
-		<td bgcolor="#eeeeee">
-			<nobr><FONT  SIZE=2  FACE="Arial"><?php echo $LDRegBy ?>:</nobr>
-		</td>
-		<td colspan=2 bgcolor="#ffffee">
-			<FONT  SIZE=2  FACE="Arial"><?php echo $modify_id ?> </FONT>
-		</td>
-		</tr>
-		</table>
-<?php
+
+		if (!$GLOBAL_CONFIG['person_other_his_nr_hide']){
+			$other_hosp_list = $this->person_obj->OtherHospNrList();
+			$iHospCount = sizeof($other_hosp_list);
+			
+			if($iHospCount) {
+				$this->smarty->assign('bShowOtherHospNr',TRUE);
+
+				$this->smarty->assign('LDOtherHospitalNr',$LDOtherHospitalNr);
+
+				$sOtherNrBuffer='';
+				if(is_array($other_hosp_list) && $iHospCount){
+
+					foreach( $other_hosp_list as $k=>$v ){
+						$sOtherNrBuffer.="<b>".$kb_other_his_array[$k].":</b> ".$v."<br />\n";
+					}
+				}
+				$this->smarty->assign('sOtherNr',$sOtherNrBuffer);
+			}
+		}
+		
+		$this->smarty->assign('LDRegBy',$LDRegBy);
+		if(empty($modify_id)) $buffer=$create_id; else $buffer=$modify_id;
+
+		$this->smarty->assign('sRegByInput',$buffer);
+
 		}else{
-			echo 'Invalid PID number or the data is not available from the databank! Please report this to <a  href="mailto:info@care2x.org">info@care2x.org</a>. Thank you.';
+			$this->smarty->assign('pretext','Invalid PID number or the data is not available from the databank! Please report this to <a  href="mailto:info@care2x.org">info@care2x.org</a>. Thank you.');
+		}
+		
+		# If data is to be returned only, buffer output, get the buffer contents, end and clean buffer and return contents.
+		if($this->bReturnOnly){
+			ob_start();
+				$this->smarty->display('registration_admission/reg_form.tpl');
+			$sTemp = ob_get_contents();
+			ob_end_clean();
+			return $sTemp;
+		}else{
+			$this->smarty->display('registration_admission/reg_form.tpl');
+			return TRUE;
 		}
 	} // end of function
+	
+	/**
+	* Creates the  data but returns it as a string instead of outputting it
+	*/
+	function create(){
+		$this->bReturnOnly=TRUE;
+		return $this->display();
+	}
 } // end of class
 ?>

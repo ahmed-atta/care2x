@@ -3,8 +3,8 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /*
-CARE2X Integrated Information System beta 2.0.0 - 2004-05-16 for Hospitals and Health Care Organizations and Services
-Copyright (C) 2002  Elpidio Latorilla & Intellin.org	
+CARE2X Integrated Information System beta 2.0.1 - 2004-07-04 for Hospitals and Health Care Organizations and Services
+Copyright (C) 2002,2003,2004,2005  Elpidio Latorilla & Intellin.org	
 GNU GPL. For details read file "copy_notice.txt".
 */
 define('CATEGORY_NAME_FULL',1); // 1= the category names are to be displayed in full, 0 = only short codes are displayed 
@@ -61,7 +61,7 @@ if($display=='composite'){
 	$drg=&$DRG_obj->OPProcedureCodes($opnr);
 }
 /* Load the icon images */
-$img_delete=createComIcon($root_path,'delete2.gif','0','right');
+$img_delete=createComIcon($root_path,'delete2.gif','0','right',TRUE);
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -142,13 +142,13 @@ else  echo 'topmargin=2 marginheight=2';
     <td width=100% valign="top">
 	<table border=0 cellpadding=1 cellspacing=1 width=100%> 
 		<tr bgcolor="#009900">
- 		<td><font face=arial size=2 color=#ffffff><b><nobr><?php echo $LDOps301 ?></nobr></b></td>
- 		<td ><font face=arial size=2 color=#ffffff><b><?php echo $LDDescription ?></b></td>
- 		<td ><font face=arial size=2 color=#ffffff><nobr><b><?php echo $LDCategory ?></b> <a href="javascript:gethelp('drg_proc_cat.php')" ><img <?php echo createComIcon($root_path,'frage.gif','0','absmiddle') ?>></a></nobr></td>
- 		<td ><font face=arial size=2 color=#ffffff><nobr><b><?php echo $LDLocalization ?> <a href="javascript:gethelp('drg_proc_loc.php')" ><img <?php echo createComIcon($root_path,'frage.gif','0','absmiddle') ?>></a></nobr></b></td>
- 		<td><font face=arial size=2 color=#ffffff><b><?php echo $LDDoneBy ?></b></td>
+ 		<td><font size=2 color=#ffffff><b><nobr><?php echo $LDOps301 ?></nobr></b></td>
+ 		<td ><font size=2 color=#ffffff><b><?php echo $LDDescription ?></b></td>
+ 		<td ><font size=2 color=#ffffff><nobr><b><?php echo $LDCategory ?></b> <a href="javascript:gethelp('drg_proc_cat.php')" ><img <?php echo createComIcon($root_path,'frage.gif','0','absmiddle',TRUE) ?>></a></nobr></td>
+ 		<td ><font size=2 color=#ffffff><nobr><b><?php echo $LDLocalization ?> <a href="javascript:gethelp('drg_proc_loc.php')" ><img <?php echo createComIcon($root_path,'frage.gif','0','absmiddle',TRUE) ?>></a></nobr></b></td>
+ 		<td><font size=2 color=#ffffff><b><?php echo $LDDoneBy ?></b></td>
 <?php if($display=='composite') : ?>
- 		<td><font face=arial size=2 color=#ffffff>&nbsp;</td>
+ 		<td><font size=2 color=#ffffff>&nbsp;</td>
 <?php endif ?>
     	</tr>
 
@@ -163,14 +163,14 @@ if (is_object($drg)) {
 	
 	while($procedure=$drg->FetchRow()){
 		if($procedure['category_nr']=="1") $fcolor="#006600"; else $fcolor="#000000";
-		echo "<tr bgcolor=";
-		if($toggle) { echo "#efefef>"; $toggle=0;} else {echo "#ffffff>"; $toggle=1;};
+		echo "<tr class=";
+		if($toggle) { echo "wardlistrow2>"; $toggle=0;} else {echo "wardlistrow1>"; $toggle=1;};
 		echo '
-		<td><font face=arial size=2><a href="javascript:openOPSsearch(\''.$procedure['code'].'\',\'1\')">'.$procedure['code'].'</a>
+		<td><font size=2><a href="javascript:openOPSsearch(\''.$procedure['code'].'\',\'1\')">'.$procedure['code'].'</a>
 		</td>	
-		<td><font face=arial size=2 color="'.$fcolor.'">'.$procedure['parent_desc'].' <b>'.$procedure['description'].'</b>
+		<td><font size=2 color="'.$fcolor.'">'.$procedure['parent_desc'].' <b>'.$procedure['description'].'</b>
 		</td>
-		<td><font face=arial size=2  color="'.$fcolor.'">';
+		<td><font size=2  color="'.$fcolor.'">';
 		if($procedure['category_nr']=="1"){
 			if(defined('CATEGORY_NAME_FULL')&&CATEGORY_NAME_FULL){
 			 echo "<b>$LDMain</b>";
@@ -235,7 +235,7 @@ if (is_object($drg)) {
 			}
 		}
 		echo '</td>
-				<td><font face=arial size=2  color="'.$fcolor.'">';
+				<td><font size=2  color="'.$fcolor.'">';
 		if($display!='composite'){
 			if(defined('LOCALIZATION_NAME_FULL')&&LOCALIZATION_NAME_FULL){
 				if(isset($$procedure['loc_LD_var'])&&!empty($$procedure['loc_LD_var']))  echo $$procedure['loc_LD_var'];
@@ -296,7 +296,7 @@ if (is_object($drg)) {
 <?php       
 		}
 		echo '</td>
-				<td><font face=arial size=2>'.stripslashes($procedure['responsible_clinician']).' - '.$procedure['responsible_dept_nr'].'
+				<td><font size=2>'.stripslashes($procedure['responsible_clinician']).' - '.$procedure['responsible_dept_nr'].'
 				</td>';
 		if($display=="composite"){
 			echo '
@@ -316,7 +316,7 @@ if (is_object($drg)) {
 	
 	</td>
 	<?php if($display=="composite") { ?> 	 
-	<td valign="top" bgcolor="#009900"><font face=arial size=2 color=#ffffff>
+	<td valign="top" bgcolor="#009900"><font size=2 color=#ffffff>
   		<?php
 			if($edit){
 		?>

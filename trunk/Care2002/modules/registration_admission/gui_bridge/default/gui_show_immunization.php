@@ -8,14 +8,14 @@ function popImmNotes(nr) {
 -->
 </script>
 
-<table border=0 cellpadding=4 cellspacing=1 width=100%>
+<table border=0 cellpadding=4 cellspacing=1 width=100% class="frame">
   <tr bgcolor="#f6f6f6">
     <td <?php echo $tbg; ?>></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDate; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDType; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDMedicine; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDTiter; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDRefreshDate; ?></td>
+    <td <?php echo $tbg; ?>><FONT  color="#000066"><?php echo $LDDate; ?></td>
+    <td <?php echo $tbg; ?>><FONT  color="#000066"><?php echo $LDType; ?></td>
+    <td <?php echo $tbg; ?>><FONT  color="#000066"><?php echo $LDMedicine; ?></td>
+    <td <?php echo $tbg; ?>><FONT  color="#000066"><?php echo $LDTiter; ?></td>
+    <td <?php echo $tbg; ?>><FONT  color="#000066"><?php echo $LDRefreshDate; ?></td>
   </tr>
 <?php
 $toggle=0;
@@ -28,20 +28,20 @@ while($row=$result->FetchRow()){
   <tr bgcolor="<?php echo $bgc; ?>">
     <td rowspan=2 valign="top">
 	<?php if(!empty($row['notes'])) { ?>
-	<a href="javascript:popImmNotes(<?php echo $row['nr']; ?>)"><img <?php echo createComIcon($root_path,'info3.gif','0'); ?>></a>
+	<a href="javascript:popImmNotes(<?php echo $row['nr']; ?>)"><img <?php echo createComIcon($root_path,'info3.gif','0','',TRUE); ?>></a>
 	<?php } ?>
 	</td>
-    <td rowspan=2 valign="top"><FONT SIZE=-1  FACE="Arial"><?php echo @formatDate2Local($row['date'],$date_format); ?></td>
-    <td rowspan=2 valign="top"><FONT SIZE=-1  FACE="Arial" color="#006600"><b><?php echo $row['type']; ?></b></td>
-    <td rowspan=2 valign="top"><FONT SIZE=-1  FACE="Arial"><?php echo $row['medicine']; ?></td>
-    <td rowspan=2 valign="top"><FONT SIZE=-1  FACE="Arial"><?php echo $row['titer']; ?></td>
-    <td><FONT SIZE=-1  FACE="Arial">
+    <td rowspan=2 valign="top"><?php echo @formatDate2Local($row['date'],$date_format); ?></td>
+    <td rowspan=2 valign="top"><FONT  color="#006600"><b><?php echo $row['type']; ?></b></td>
+    <td rowspan=2 valign="top"><?php echo $row['medicine']; ?></td>
+    <td rowspan=2 valign="top"><?php echo $row['titer']; ?></td>
+    <td>
 	<?php 
 		if($row['refresh_date']!='0000-00-00') echo @formatDate2Local($row['refresh_date'],$date_format);
 			else echo '&nbsp;'; ?></td>
   </tr>
   <tr bgcolor="<?php echo $bgc; ?>">
-    <td><FONT SIZE=1  FACE="Arial" >
+    <td><FONT SIZE=1>
 	<FONT  color="#660000"><?php echo $LDDosage; ?></font><br>
 	<?php echo $row['dosage']; ?><br>
 	<FONT  color="#660000"><?php echo $LDAppType; ?></font><br>

@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -30,10 +30,12 @@ if(!isset($mode)){
 	$editmode=TRUE;
 }
 	
+//$db->debug=1;
+
 $keyword=trim($keyword);
 $toggle=0;
 
-# Initialize page's control variables
+# Initialize page´s control variables
 if($mode=='paginate'){
 	$keyword=$HTTP_SESSION_VARS['sess_searchkey'];
 }else{
@@ -111,8 +113,8 @@ if($search&&!empty($keyword)){
 <HEAD>
 <?php echo setCharSet(); ?>
 
-<?php 
-require($root_path.'include/inc_js_gethelp.php'); 
+<?php
+require($root_path.'include/inc_js_gethelp.php');
 require($root_path.'include/inc_css_a_hilitebu.php');
 ?>
 
@@ -133,28 +135,28 @@ function checkForm(v) {
 
 <BODY onLoad="document.sform.keyword.select()">
 
-<img <?php echo createComIcon($root_path,'micros.gif','0','absmiddle') ?>><FONT  COLOR="<?php echo $cfg[top_txtcolor] ?>"  SIZE=5  FACE="verdana"> <b><?php echo "$LDMedLab - "; if($editmode) echo "$LDNewData"; else echo "$LDSeeData"; ?></b></font>
+<img <?php echo createComIcon($root_path,'micros.gif','0','absmiddle') ?>><FONT  COLOR="<?php echo $cfg[top_txtcolor] ?>"  SIZE=5> <b><?php echo "$LDMedLab - "; if($editmode) echo "$LDNewData"; else echo "$LDSeeData"; ?></b></font>
 <table width=100% border=0 cellpadding="0" cellspacing="0">
 <tr>
 <td colspan=3><img <?php echo createLDImgSrc($root_path,'such-b.gif') ?>></td>
 </tr>
 <tr >
 <td bgcolor=#333399 colspan=3>
-<FONT  SIZE=1  FACE="Arial"><STRONG> &nbsp; </STRONG></FONT>
+&nbsp;
 </td>
 </tr>
 <tr bgcolor="#DDE1EC" >
 <td bgcolor=#333399>&nbsp;</td>
 <td valign=top><p><br>
 <ul>
-<FONT    SIZE=-1  FACE="Arial">
 
 <!-- This is the search entry mask -->
 
 <FORM action="<?php echo $thisfile; ?>" method="post" name="sform" onSubmit="return checkForm(sform.keyword)">
-<font face="Arial,Verdana"  color="#000000" size=-1>
+
 <B><?php echo $LDSearchWordPrompt ?></B></font><p>
-<font size=3><INPUT type="text" name="keyword" size="20" maxlength="40" value="<?php echo $keyword ?>"></font> 
+<font size=3>
+<INPUT type="text" name="keyword" size="20" maxlength="40" value="<?php echo $keyword ?>"></font>
 <input type=hidden name="search" value=1>
 <input type=hidden name="sid" value=<?php echo $sid ?>>
 <input type=hidden name="lang" value=<?php echo $lang ?>>
@@ -179,25 +181,25 @@ if($linecount){
 
 	$append="&search=1&editmode=$editmode";
 
-	$img_male=createComIcon($root_path,'spm.gif','0');
-	$img_female=createComIcon($root_path,'spf.gif','0');
+	$img_male=createComIcon($root_path,'spm.gif','0','',TRUE);
+	$img_female=createComIcon($root_path,'spf.gif','0','',TRUE);
 	$bgimg='tableHeaderbg3.gif';
 	$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
 
 	# Create the column descriptors 
 ?>	
 	<table border=0 cellpadding=3 cellspacing=1> 
-	<tr bgcolor=#9f9f9f>
+	<tr class="wardlisttitlerow">
 
-     <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+     <td><b>
 	  <?php echo $pagen->makeSortLink($LDCaseNr,'encounter_nr',$oitem,$odir,$append);  ?></b></td>
-      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+      <td ><b>
 	  <?php echo $pagen->makeSortLink($LDSex,'sex',$oitem,$odir,$append);  ?></b></td>
-      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+      <td><b>
 	  <?php echo $pagen->makeSortLink($LDLastName,'name_last',$oitem,$odir,$append);  ?></b></td>
-      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+      <td><b>
 	  <?php echo $pagen->makeSortLink($LDName,'name_first',$oitem,$odir,$append);  ?></b></td>
-      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+      <td><b>
 	  <?php echo $pagen->makeSortLink($LDBday,'date_birth',$oitem,$odir,$append);  ?></b></td>
     	<td background="<?php echo createBgSkin($root_path,'tableHeaderbg.gif'); ?>" align=center><font face=arial size=2 color="#ffffff"><b><?php echo $LDSelect; ?></td>
 	</tr>
@@ -218,12 +220,12 @@ if($linecount){
 			$dcount++;
 
 			echo '
-			<tr bgcolor=';
-			if($toggle) { echo '#efefef>';} else {echo '#ffffff>';}
+			<tr class=';
+			if($toggle) { echo 'wardlistrow2>';} else {echo 'wardlistrow1>';}
 			$toggle=!$toggle;
-			echo '<td><font face=arial size=2>';
+			echo '<td>';
 			echo '&nbsp;'.$zeile['encounter_nr'];
-			if($zeile['encounter_class_nr']==2) echo ' <img '.createComIcon($root_path,'redflag.gif').'> <font size=1 color="red">'.$LDAmbulant.'</font>';
+			if($zeile['encounter_class_nr']==2) echo ' <img '.createComIcon($root_path,'redflag.gif','0','',TRUE).'> <font size=1 color="red">'.$LDAmbulant.'</font>';
         	echo '</td>';
 			
 						echo '<td>';
@@ -233,13 +235,13 @@ if($linecount){
 							default: echo '&nbsp;'; break;
 						}
 			
-			echo '</td><td><font face=arial size=2>';
+			echo '</td><td>';
 			echo '&nbsp;'.ucfirst($zeile['name_last']);
 			echo '</td>
-					<td><font face=arial size=2>';
+					<td>';
 			echo '&nbsp;'.ucfirst($zeile['name_first']);
 			echo '</td>
-					<td><font face=arial size=2>';
+					<td>';
 			echo '&nbsp;'.formatDate2Local($zeile['date_birth'],$date_format);
 			echo '</td>';	
 						
@@ -248,15 +250,15 @@ if($linecount){
 			#  if mode is not edit, create button linked to labor_datalist_noedit.php (read only list)
 
 			echo'
-				<td><font face=arial size=2>&nbsp';
+				<td>&nbsp';
 						
 			if($editmode){ 
 				echo'<a href="labor_data_check_arch.php'.URL_APPEND.'&mode=edit&encounter_nr='.$zeile['encounter_nr'].'&update=1"  title="'.$LDEnterData.'">
-					<button onClick="javascript:window.location.href=\'labor_data_check_arch.php'.URL_REDIRECT_APPEND.'&mode=edit&encounter_nr='.$zeile['encounter_nr'].'&update=1\'"><img '.createComIcon($root_path,'update2.gif','0','absmiddle').' alt="'.$LDEnterData.'"><font size=1> '.$LDNewData;
+					<button onClick="javascript:window.location.href=\'labor_data_check_arch.php'.URL_REDIRECT_APPEND.'&mode=edit&encounter_nr='.$zeile['encounter_nr'].'&update=1\'"><img '.createComIcon($root_path,'update2.gif','0','absmiddle',FALSE).' alt="'.$LDEnterData.'"><font size=1> '.$LDNewData;
 			}else{
 				echo'
 					<a href="labor_datalist_noedit.php'.URL_APPEND.'&encounter_nr='.$zeile['encounter_nr'].'&noexpand=1&nostat=1&user_origin=lab"  title="'.$LDClk2See.'">
-					<button onClick="javascript:window.location.href=\'labor_datalist_noedit.php'.URL_REDIRECT_APPEND.'&encounter_nr='.$zeile['encounter_nr'].'&noexpand=1&nostat=1&user_origin=lab\'"><img '.createComIcon($root_path,'update2.gif','0','absmiddle').' alt="'.$LDClk2See.'"><font size=1> '.$LDLabReport;
+					<button onClick="javascript:window.location.href=\'labor_datalist_noedit.php'.URL_REDIRECT_APPEND.'&encounter_nr='.$zeile['encounter_nr'].'&noexpand=1&nostat=1&user_origin=lab\'"><img '.createComIcon($root_path,'update2.gif','0','absmiddle',FALSE).' alt="'.$LDClk2See.'"><font size=1> '.$LDLabReport;
 			}
 						
 			echo '</font></button></a>&nbsp;
@@ -266,8 +268,8 @@ if($linecount){
 	}
 	if($totalcount>$pagen->MaxCount()){
 		echo '
-			<tr><td colspan=5><font face=arial size=2>'.$pagen->makePrevLink($LDPrevious,$append).'</td>
-						<td align=right><font face=arial size=2>'.$pagen->makeNextLink($LDNext,$append).'</td>
+			<tr><td colspan=5>'.$pagen->makePrevLink($LDPrevious,$append).'</td>
+						<td align=right>'.$pagen->makeNextLink($LDNext,$append).'</td>
 			</tr>';
 	}
 	echo '</table>';
@@ -277,14 +279,13 @@ if($linecount){
 		echo '
 				<p><font color=red><B>'.$LDNewSearch.':</font>
 				<FORM action="'.$thisfile.'" method="post" name="form2" onSubmit="return checkForm(form2.keyword)">
-				<font face="Arial,Verdana"  color="#000000" size=-1>
 				'.$LDSearchWordPrompt.'</B><p>
 				<INPUT type="text" name="keyword" size="20" maxlength="40" value="'.$keyword.'"> 
 				<input type=hidden name="search" value=1>
 				<input type=hidden name="sid" value="'.$sid.'">
 				<input type=hidden name="lang" value="'.$lang.'">
 				<input type=hidden name="editmode" value="'.$editmode.'">
-				<INPUT type="image"  '.createLDImgSrc($root_path,'searchlamp.gif','0','absmiddle').'></font></FORM>
+				<INPUT type="image"  '.createLDImgSrc($root_path,'searchlamp.gif','0','absmiddle').'></FORM>
 				<p>';
 	}
 }

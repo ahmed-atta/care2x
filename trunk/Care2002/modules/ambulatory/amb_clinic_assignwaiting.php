@@ -3,14 +3,14 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-$lang_tables=array('aufnahme.php','prompt.php','departments.php');
+$lang_tables=array('aufnahme.php','prompt.php','departments.php','person.php');
 define('LANG_FILE','nursing.php');
 //define('NO_2LEVEL_CHK',1);
 $local_user='ck_pflege_user';
@@ -25,7 +25,6 @@ if(empty($HTTP_COOKIE_VARS[$local_user.$sid])){
 */
 
 if(!isset($mode)) $mode='';
-
 
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 #Create encounter object and load encounter info
@@ -79,12 +78,42 @@ if(($mode=='')||($mode=='fresh')){
 	}
 }
 
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('nursing');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle', $LDAmbulant);
+
+  # hide back button
+ $smarty->assign('pbBack',FALSE);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('nursing_station.php','$mode','$occup','$station','$LDStation')");
+
+ # href for close button
+ $smarty->assign('breakfile',"javascript:window.close();");
+
+ # OnLoad Javascript code
+ $smarty->assign('sOnLoadJs','onLoad="if (window.focus) window.focus();"');
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',$LDAmbulant);
+
+ # Hide Copyright footer
+ $smarty->assign('bHideCopyright',TRUE);
+
+ # Collect extra javascript code
+
+ ob_start();
 ?>
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<title><?php echo $TP_TITLE; ?></title>
-<?php echo setCharSet(); ?>
 
 <script language="javascript">
 <!-- 
@@ -104,127 +133,77 @@ function admitOutpatient(){
 }
 // -->
 </script>
-
-<?php
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-?>
-
 <style type="text/css" name="s2">
 td.vn { font-family:verdana,arial; color:#000088; font-size:10}
-
 </style>
-</HEAD>
 
-<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="if (window.focus) window.focus()"
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
-
-
-<table width=100% border=0 cellpadding="0" cellspacing=0>
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=3  FACE="Arial"><STRONG> &nbsp;&nbsp; <?php echo $LDAmbulant ?> </STRONG></FONT>
-</td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr>
-<a href="javascript:gethelp('nursing_station.php','<?php echo $mode ?>','<?php echo $occup ?>','<?php echo $station ?>','<?php echo "$LDStation" ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
-</nobr>
-</td></tr>
-<tr valign=top >
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
-
-<!-- Patients basic admission info -->
-<table border=0 cellspacing=1 cellpadding=0 width=100%>
-
-<tr bgcolor="#ffffff">
-<td  valign="top">
-
-<table border=0 width=100% cellspacing=1>
-<tr>
-<td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial">
-<?php 
-echo $LDAdmitNr;
-?>
-</td>
-<td width="30%"  bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial" color="#800000">
-<?php 
-echo $pn ;
-?>
-</td>
-
-<td valign="top" rowspan=5 align="center" bgcolor="#ffffee" ><FONT SIZE=-1  FACE="Arial"><img <?php echo $img_source; ?>>
-</td>
-</tr>
-
-<tr>
-<td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php echo "$LDTitle $LDLastName, $LDFirstName" ?>:
-</td>
-<td  bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial">
-<?php echo $encounter['title'].' '.$encounter['name_last'].', '.$encounter['name_first'] ?>
-</td>
-
-</tr>
-<tr>
-<td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php  echo $LDBday ?>:
-</td>
-<td  bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial">
-<?php if($encounter['date_birth']) echo @formatDate2Local($encounter['date_birth'],$date_format);  ?>
-</td>
-</tr>
-<tr>
-<td bgColor="#eeeeee" ><FONT SIZE=-1  FACE="Arial"><?php  echo $LDSex ?>: 
-</td>
-<td bgcolor="#ffffee" ><FONT SIZE=-1  FACE="Arial"><?php if($encounter['sex']=="m") echo  $LDMale; elseif($encounter['sex']=="f") echo $LDFemale ?>
-</td>
-</tr>
-<tr>
-<td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php echo $LDBillType ?>:
-</td>
-<td  bgcolor="#ffffee" ><FONT SIZE=-1  FACE="Arial"  color="#990000">
-<b>
-<?php if (isset($$billing_type['LD_var'])&&!empty($$billing_type['LD_var'])) echo $$billing_type['LD_var']; 
-    else echo  $billing_type['name']; 
-?>
-</b>
-</td>
-</tr>
-
-<tr>
-<td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php echo $LDDiagnosis ?>:
-</td>
-<td  bgcolor="#ffffee" colspan=2 ><FONT SIZE=-1  FACE="Arial">
 <?php
-	echo nl2br($encounter['referrer_diagnosis']);
+
+$sTemp = ob_get_contents();
+
+ob_end_clean();
+
+$smarty->append('JavaScript',$sTemp);
+
+$smarty->assign('sClassItem','class="reg_item"');
+$smarty->assign('sClassInput','class="reg_input"');
+
+$smarty->assign('LDCaseNr',$LDAdmitNr);
+
+$smarty->assign('sEncNrPID',$pn);
+
+$smarty->assign('img_source',"<img $img_source>");
+
+$smarty->assign('LDTitle',$LDTitle);
+$smarty->assign('title',$encounter['title']);
+$smarty->assign('LDLastName',$LDLastName);
+$smarty->assign('name_last',$encounter['name_last']);
+$smarty->assign('LDFirstName',$LDFirstName);
+$smarty->assign('name_first',$encounter['name_first']);
+
+# If person is dead show a black cross and assign death date
+
+if($encounter['death_date'] && $encounter['death_date'] != DBF_NODATE){
+	$smarty->assign('sCrossImg','<img '.createComIcon($root_path,'blackcross_sm.gif','0').'>');
+	$smarty->assign('sDeathDate',@formatDate2Local($encounter['death_date'],$date_format));
+}
+
+# Set a row span counter, initialize with 5
+$iRowSpan = 5;
+
+if(trim($encounter['blood_group'])){
+	$smarty->assign('LDBloodGroup',$LDBloodGroup);
+	$buf=trim('LD'.$encounter['blood_group']);
+	$smarty->assign('blood_group',$$buf);
+	$iRowSpan++;
+}
+
+$smarty->assign('sRowSpan',"rowspan=\"$iRowSpan\"");
+
+$smarty->assign('LDBday',$LDBday);
+$smarty->assign('sBdayDate',@formatDate2Local($encounter['date_birth'],$date_format));
+
+$smarty->assign('LDSex',$LDSex);
+if($encounter['sex']=='m') $smarty->assign('sSexType',$LDMale);
+	elseif($encounter['sex']=='f') $smarty->assign('sSexType',$LDFemale);
+
+$smarty->assign('LDBillType',$LDBillType);
+if (isset($$billing_type['LD_var'])&&!empty($$billing_type['LD_var'])) $smarty->assign('billing_type',$$billing_type['LD_var']);
+    else $smarty->assign('billing_type',$billing_type['name']);
+
+$smarty->assign('LDDiagnosis',$LDDiagnosis);
+$smarty->assign('referrer_diagnosis',$encounter['referrer_diagnosis']);
+$smarty->assign('LDTherapy',$LDTherapy);
+$smarty->assign('referrer_recom_therapy',$encounter['referrer_recom_therapy']);
+$smarty->assign('LDSpecials',$LDSpecials);
+$smarty->assign('referrer_notes',$encounter['referrer_notes']);
+
+# Buffer page output
+
+ob_start();
+
+$smarty->display('nursing/basic_data_admit.tpl');
 ?>
-</td>
-</tr>
-
-<tr>
-<td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php echo $LDTherapy ?>:
-</td>
-<td  bgcolor="#ffffee" colspan=2 ><FONT SIZE=-1  FACE="Arial">
-<?php
-	echo nl2br($encounter['referrer_recom_therapy']);
-?>
-</td>
-</tr>
-
-<tr>
-<td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php echo $LDSpecials ?>:
-</td>
-<td  bgcolor="#ffffee"  colspan=2><FONT SIZE=-1  FACE="Arial">
-<?php
-	echo nl2br($encounter['referrer_notes']);
-?>
-</td>
-</tr>
-
-</table>
-
-
-</td>
-</tr>
-</table>
-<!-- End of Patients basic admission info -->
 
 <!--  Show stop sign and warn if the initial ward assignment is different from this ward -->
 <?php
@@ -235,7 +214,7 @@ if($encounter['current_dept_nr']!=$dept_nr){
 <table border=0>
   <tr>
     <td><img <?php 	echo createLDImgSrc($root_path,'stop.png','0'); ?>></td>
-    <td><FONT SIZE=2  FACE="Arial"><?php 	echo str_replace('~dept_id~',$dept,$LDChkClinicConflict); ?></a>
+    <td><?php 	echo str_replace('~dept_id~',$dept,$LDChkClinicConflict); ?></a>
 	</td>
   </tr>
 </table>
@@ -261,13 +240,18 @@ if($encounter['current_dept_nr']!=$dept_nr){
 <input type="hidden" name="mode" value="save">
 </form>
 
+<?php
 
-</FONT>
-<p>
-</td>
-</tr>
-</table>        
-<p>
+$sTemp = ob_get_contents();
+ob_end_clean();
 
-</BODY>
-</HTML>
+# Assign the page output to the mainframe center block
+
+ $smarty->assign('sMainFrameBlockData',$sTemp);
+
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
+ ?>

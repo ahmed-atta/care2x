@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -36,55 +36,53 @@ if($ergebnis=$db->Execute($sql)) {
 	$rows=$ergebnis->RecordCount();
 }
 
-?>
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
-<?php 
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-?>
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
 
-</HEAD>
-<BODY BGCOLOR="<?php echo $cfg['bot_bgcolor']; ?>" TEXT="#000000" LINK="#0000FF" VLINK="#800080" topmargin=0 leftmargin=0 marginheight=0 marginwidth=0>
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('system_admin');
 
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',$LDListActual);
 
+ # href for return button
+ $smarty->assign('pbBack',$returnfile);
 
-<table width=100% border=0  cellspacing=0>
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php echo "$LDListActual" ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right>
-<?php if($cfg['dhtml'])echo'<a href="'.$returnfile.'"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('edp.php','access','list')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
-</tr>
+# href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('edp.php','access','list')");
 
-<tr bgcolor="<?php echo $cfg['body_bgcolor']; ?>"><FONT    SIZE=-1  FACE="Arial">
-<td colspan=2><p>
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
 
+ # Window bar title
+ $smarty->assign('sWindowTitle',$LDListActual);
 
-<?php
-if ($remark=='itemdelete') echo '<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'><FONT SIZE=3  FACE="verdana,Arial" color="#990000"> '.$LDAccessDeleted.'<br>'.$LDFfActualAccess.' </font>';
-?>
-<p>
+ # Buffer page output
 
-<FONT    SIZE=1  FACE="Arial">
+ ob_start();
 
-<?php
+if ($remark=='itemdelete') echo '<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'><FONT class="warnprompt"> '.$LDAccessDeleted.'<br>'.$LDFfActualAccess.' </font><p>';
 
         echo '
-				<table border=0 bgcolor=#999999 cellpadding=0 cellspacing=0>
-				<tr><td>
+				<table border=0 class="frame" cellpadding=0 cellspacing=0>
+				<tr>
+				<td>
 				<table border="0" cellpadding="5" cellspacing="1">';
-        echo "
-					<tr bgcolor=#dddddd >";
+        echo '
+					<tr class="submenu">';
 		echo "
-					<td colspan=8><FONT SIZE=1  FACE=verdana,Arial color=\"#800000\"><b>$LDActualAccess</b></td>";
+					<td colspan=8><FONT color=\"#800000\"><b>$LDActualAccess</b></td>";
         echo "
 					</tr>"; 
-        echo "	
-					<tr bgcolor=#dfdfdf>";
+        echo '
+					<tr class="wardlisttitlerow">';
 		for($i=0;$i<sizeof($LDAccessIndex);$i++)
 			echo "
-			<td><FONT    SIZE=1  FACE=verdana,Arial><b>".$LDAccessIndex[$i]."</b></td>";
+			<td><b>".$LDAccessIndex[$i]."</b></td>";
             echo "</tr>"; 
 
 		/* Load common icons */	
@@ -95,29 +93,29 @@ if ($remark=='itemdelete') echo '<img '.createMascot($root_path,'mascot1_r.gif',
 		{  
 			if($zeile['exc']) continue;
 			 echo "
-						<tr  bgcolor=#efefef>\n";
+						<tr class=\"wardlistrow1\">\n";
 			echo "
-						<td><FONT    SIZE=1  FACE=Arial>".$zeile['name']."</td>\n
-						<td><FONT    SIZE=1  FACE=Arial>".$zeile['login_id']."</td>\n
-						<td><FONT    SIZE=1  FACE=Arial>*****</td><td>\n";
+						<td>".$zeile['name']."</td>\n
+						<td>".$zeile['login_id']."</td>\n
+						<td>*****</td><td>\n";
 			if ($zeile['lockflag'])
 				   echo '
 				   		<img '.$img_padlock.'>'; else echo '<img '.$img_arrow.'>';
 			echo "
-						</td>\n <td><FONT    SIZE=1  FACE=Arial>";
+						</td>\n <td>";
 			
 			/* Display the permitted areas */
 			$area=explode(' ',$zeile['permission']);
 			for($n=0;$n<sizeof($area);$n++) echo $area_opt[$area[$n]].'<br>';
 														
 			echo '</td>
-					<td><FONT    SIZE=1  FACE=Arial> '.formatDate2Local($zeile['s_date'],$date_format).' / '.convertTimeToLocal($zeile['s_time']).' </td>';
+					<td> '.formatDate2Local($zeile['s_date'],$date_format).' / '.convertTimeToLocal($zeile['s_time']).' </td>';
 	
 			echo '
-					<td><FONT    SIZE=1  FACE=Arial>'.$zeile['create_id'].'</td>';
+					<td>'.$zeile['create_id'].'</td>';
 					
             echo "
-					<td><FONT    SIZE=1  FACE=verdana,Arial>
+					<td>
 					<a href=edv_user_access_edit.php?sid=$sid&lang=$lang&mode=edit&userid=".str_replace(' ','+',$zeile['login_id'])." title=\"$LDChange\"> $LDInitChange</a> \n
 			<a href=edv_user_access_lock.php?sid=$sid&lang=$lang&itemname=".str_replace(' ','+',$zeile['login_id'])." ";
 			if ($zeile['lockflag']) echo "title=\"$LDUnlock\" > $LDInitUnlock"; else echo "title=\"$LDLock\"> $LDInitLock";
@@ -127,31 +125,33 @@ if ($remark=='itemdelete') echo '<img '.createMascot($root_path,'mascot1_r.gif',
         };
         echo "
 					</table>
-				</td></tr>
-				</table>";
-
- 
-
+				</td>
+			</tr>
+		</table>";
 ?>
 
-</td>
-
-</tr>
-</table>
-
 <p>
-<FORM method="post" action="<?php if($ck_edvzugang_src=="listpass") echo "edv-accessplan-list-pass.php"; else echo "edv_user_access_edit.php"; ?>" >
-<input type=hidden name="sid" value="<?php echo $sid; ?>">
-<input type=hidden name="lang" value="<?php echo $lang; ?>">
-<input type=hidden name="remark" value="fromlist">
-<INPUT type="submit"  value=" <?php echo $LDOK ?> "></font></FORM>
 
-</FONT>
+<FORM method="post" action="<?php if($ck_edvzugang_src=="listpass") echo "edv-accessplan-list-pass.php"; else echo "edv_user_access_edit.php"; ?>" >
+	<input type=hidden name="sid" value="<?php echo $sid; ?>">
+	<input type=hidden name="lang" value="<?php echo $lang; ?>">
+	<input type=hidden name="remark" value="fromlist">
+	<INPUT type="submit"  value=" <?php echo $LDOK ?> ">
+</FORM>
+
 <p>
 
 <?php
-require($root_path.'include/inc_load_copyrite.php');
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+# Assign page output to the mainframe template
+
+$smarty->assign('sMainFrameBlockData',$sTemp);
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
 ?>
-    
-</BODY>
-</HTML>

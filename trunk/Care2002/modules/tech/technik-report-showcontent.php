@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'/include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -26,33 +26,40 @@ $dbtable='care_tech_repair_done';
 # define the content array
 $rows=0;
 $count=0;
+
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('system_admin');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',$LDTechSupport);
+
+ # href for return button
+ $smarty->assign('pbBack',$breakfile);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('tech.php','showarch')");
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',$LDTechSupport);
+
+ # Buffer page output
+
+ob_start();
+
 ?>
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
- <TITLE> Technik - Bericht</TITLE>
 
-<?php
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-?></HEAD>
-
-<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
-<?php echo $test ?>
-<?php //foreach($argv as $v) echo "$v "; ?>
-<table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
-<tr valign=top>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="45"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG> &nbsp; <?php echo $LDTechSupport ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])echo'<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('tech.php','showarch')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
-</tr>
-<tr valign=top >
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
 <ul>
-<FONT face="Verdana,Helvetica,Arial" size=2>
+
 <p><br>
   <?php
 $rows=0;
@@ -97,26 +104,30 @@ if($rows)
 //++++++++++++++++++++++++ show general info about the list +++++++++++++++++++++++++++
 $tog=1;
 $content=$ergebnis->FetchRow();
-echo '</font>
-		<table cellpadding=0 cellspacing=0 border=0 bgcolor="#666666"><tr><td><table border=0 cellspacing=1 cellpadding=3>
-  		<tr bgcolor="#ffffff">';
+echo '
+		<table cellpadding=0 cellspacing=0 border=0 bgcolor="#666666">
+		<tr>
+		<td>
+		<table border=0 cellspacing=1 cellpadding=3>
+  		<tr class="wardlisttitlerow">';
 	for ($i=0;$i<sizeof($blistindex);$i++)
 	echo '
-		<td><font face=Verdana,Arial size=2 color="#0000ff">'.$blistindex[$i].'</td>';
+		<td>'.$blistindex[$i].'</td>';
 	echo '</tr>
 			<tr bgcolor=#f6f6f6>
-				 <td><font face=Verdana,Arial size=2>'.$content['reporter'].'</td>
-				<td ><font face=Verdana,Arial size=2>'.formatDate2Local($content['tdate'],$date_format).'</td>
-				<td><font face=Verdana,Arial size=2>'.convertTimeToLocal($content['ttime'],$lang).'</td>
-				<td><font face=Verdana,Arial size=2>'.$content['dept'].'</td>
-				<td><font face=Verdana,Arial size=2>';
+				 <td>'.$content['reporter'].'</td>
+				<td >'.formatDate2Local($content['tdate'],$date_format).'</td>
+				<td>'.convertTimeToLocal($content['ttime'],$lang).'</td>
+				<td>'.$content['dept'].'</td>
+				<td>';
 	if(isset($content['job_id'])&&$content['job_id']) echo $content['job_id']; else echo "&nbsp;";
 	echo '</td>
 				</tr>
 			<tr bgcolor=#ffffff>
-				 <td colspan=5><p><br><font face=Verdana,Arial size=2><ul><i>" '.nl2br($content['job']).' "</i></ul></td>
-				</tr></table></td></tr>
-
+				 <td colspan=5><p><br><ul><i>" '.nl2br($content['job']).' "</i></ul></td>
+				</tr>
+				</table>
+				</td></tr>
 				</table>';
 
 //++++++++++++++++++++++++ show the actual list +++++++++++++++++++++++++++
@@ -146,28 +157,19 @@ echo '
 }
  ?>
 
-</table>
-
-		
-	
-
 </ul>
 
-</FONT>
-<p>
-</td>
-</tr>
-
-<tr>
-<td bgcolor=<?php echo $cfg['bot_bgcolor']; ?> height=70 colspan=2>
-
 <?php
-require($root_path.'include/inc_load_copyrite.php');
-?>
 
-</td>
-</tr>
-</table>        
-</FONT>
-</BODY>
-</HTML>
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+# Assign page output to the mainframe template
+
+$smarty->assign('sMainFrameBlockData',$sTemp);
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
+?>

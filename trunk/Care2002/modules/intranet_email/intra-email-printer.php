@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -60,49 +60,56 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 </HEAD>
 
 <BODY bgcolor="#ffffff" onLoad="if (window.focus) window.focus()">
-<table border=0 cellpadding=1 cellspacing=1>
+<table border=0 cellpadding=1 cellspacing=1 bgcolor="white" width="100%">
   <tr>
-    <td><pre><?php echo $LDFrom; ?></td>
-    <td><pre><b><?php echo $content['sender']; ?></b></td>
+    <td><pre><?php echo $LDFrom; ?></pre></td>
+    <td><pre><b><?php echo $content['sender']; ?></b></pre></td>
   </tr>
   <tr>
-    <td><pre><?php echo $LDReply2; ?></td>
-    <td><pre><b><?php echo $content['reply2']; ?></b></td>
+    <td><pre><?php echo $LDReply2; ?></pre></td>
+    <td><pre><b><?php echo $content['reply2']; ?></b></pre></td>
   </tr>
   <tr>
-    <td><pre><?php echo $LDTo; ?></td>
-    <td><pre><b><?php echo $content['recipient']; ?></b></td>
+    <td><pre><?php echo $LDTo; ?></pre></td>
+    <td><pre><b><?php echo $content['recipient']; ?></b></pre></td>
   </tr>
   <tr>
-    <td><pre>CC</td>
-    <td><pre><b><?php echo $content['cc']; ?></b></td>
+    <td><pre>CC</pre></td>
+    <td><pre><b><?php echo $content['cc']; ?></b></pre></td>
   </tr>
   <tr>
-    <td><pre>BCC</td>
-    <td><pre><b><?php echo $content['bcc']; ?></b></td>
+    <td><pre>BCC</pre></td>
+    <td><pre><b><?php echo $content['bcc']; ?></b></pre></td>
   </tr>
   <tr>
-    <td><pre><?php echo $LDSubject; ?></td>
-    <td><pre><b><?php echo $content['subject']; ?></b></td>
+    <td><pre><?php echo $LDSubject; ?></pre></td>
+    <td><pre><b><?php echo $content['subject']; ?></b></pre></td>
   </tr>
 <!--   <tr>
-    <td><pre><?php echo $LDAttach; ?></td>
-    <td><pre></td>
+    <td><pre><?php echo $LDAttach; ?></pre></td>
+    <td><pre></pre></td>
   </tr>
- -->  <tr>
-    <td><pre><?php echo $LDDate.':'.$LDTime; ?></td>
-    <td><pre><?php echo '<b>'.formatDate2Local($content['send_dt'],$date_format).' '.convertTimeToLocal(formatDate2Local($content['send_dt'],$date_format,0,1)).'</b>'; ?></td>
+ -->  
+ <tr>
+    <td><pre><?php echo $LDDate.':'.$LDTime; ?></pre></td>
+    <td><pre><?php echo '<b>'.formatDate2Local($content['send_dt'],$date_format).' '.convertTimeToLocal(formatDate2Local($content['send_dt'],$date_format,0,1)).'</b>'; ?></pre></td>
   </tr>
+ <tr>
+    <td colspan="2">
+		<hr><pre>
+<?php
+	//$content[body]=chunk_split($content[body],100);
+	echo nl2br($content['body']);
+?></pre>
+<hr>
+		</td>
+  </tr>
+
 </table>
 
-<pre>
-<hr>
-<?php
-//$content[body]=chunk_split($content[body],100);
-echo nl2br($content['body']);
-?>
-<hr>
-</pre><p><FONT face="verdana,Arial" size=2 >
+
+
+<p><FONT face="verdana,Arial" size=2 >
 <b>< <a href="javascript:window.print()"><?php echo $LDPrint ?></a> ></b><p>
 <b>< <a href="javascript:window.close()"><?php echo $LDClose ?></a> ></b>
 </FONT>

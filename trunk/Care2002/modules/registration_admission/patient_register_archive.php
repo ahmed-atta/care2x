@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -22,7 +22,7 @@ require($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_date_format_functions.php');
 
 $thisfile=basename(__FILE__);
-$breakfile='patient.php';
+$breakfile='patient.php'.URL_APPEND;
 
 $newdata=1;
 
@@ -32,7 +32,7 @@ $target='archiv';
 
 $error=0;
 
-# Initialize page's control variables
+# Initialize page´s control variables
 if($mode=='paginate'){
 	$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
 	//$searchkey='USE_SESSION_SEARCHKEY';
@@ -229,6 +229,35 @@ if (isset($mode) && ($mode=='search'||$mode=='paginate')){
 		}
 	}
 }
+
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
+
+# Added for the common header top block
+
+ $smarty->assign('sToolbarTitle',$LDPatientRegister.' - '.$LDAdvancedSearch);
+
+ # Added for the common header top block
+ $smarty->assign('pbHelp',"javascript:gethelp('submenu1.php','$LDPatientRegister.' - '.$LDAdvancedSearch')");
+
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('title',$$LDPatientRegister.' - '.$LDAdvancedSearch);
+
+ $smarty->assign('sOnLoadJs','onLoad="if (window.focus) window.focus();"');
+
+ $smarty->assign('pbHelp',"javascript:gethelp('person_archive.php')");
+
+ $smarty->assign('pbBack',FALSE);
 
 # Load GUI page
 require('./gui_bridge/default/gui_person_reg_archive.php');

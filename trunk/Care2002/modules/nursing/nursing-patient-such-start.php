@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -189,11 +189,37 @@ if($mode=='such'||$mode=='paginate')
 		}else{echo "$sql<br>$LDDbNoRead";} 
 	}else { echo "$LDDbNoLink<br>"; } 
 }
+
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('nursing');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle', "$LDNursing - $LDSearchPatient");
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('nursing_how2search.php','$mode','$rows','search')");
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+ 
+ # OnLoad Javascript code
+ $smarty->assign('sOnLoadJs','onLoad="if (window.focus) window.focus(); document.suchlogbuch.searchkey.select();"');
+
+ # Window bar title
+ $smarty->assign('title',"$LDNursing - $LDSearchPatient");
+
+ # Collect extra javascript code
+
+ ob_start();
 ?>
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
 
 <script language="javascript">
 <!-- 
@@ -218,114 +244,121 @@ var urlholder;
 </script>
 
 <?php
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
+
+$sTemp = ob_get_contents();
+
+ob_end_clean();
+
+$smarty->append('JavaScript',$sTemp);
+
+ob_start();
+
 ?>
-
-</HEAD>
-
-<BODY  topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="if (window.focus) window.focus();document.suchlogbuch.searchkey.select();"
-<?php 
- echo  ' bgcolor='.$cfg['body_bgcolor']; 
- if (!$cfg['dhtml']){ echo ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } 
-  ?>>
- 
- 
-
-<table width=100% border=0 cellspacing="0">
-
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp; <?php echo "$LDNursing - $LDSearchPatient" ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('nursing_how2search.php','<?php echo $mode ?>','<?php echo $rows ?>','search')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
-</tr>
-<tr>
-<td colspan=3  bgcolor="<?php echo $cfg['body_bgcolor']; ?>"><p><br>
 
 <ul>
-<FONT    SIZE=-1  FACE="Arial">
-<?php if($rows){ ?>
-<table border=0>
-  <tr>
-    <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"></td>
-    <td><FONT  SIZE=3 FACE="verdana,Arial" color=#800000>
-<b><?php echo "$LDSearchKeyword <font color=#0000ff>\"$searchkey\"</font> ".str_replace("~rows~",$totalcount,$LDWasFound).' '.$LDShowing.' '.$pagen->BlockStartNr().' '.$LDTo.' '.$pagen->BlockEndNr().'.'; ?> <br>
-<?php echo $LDPlsClk ?></b></font></td>
-  </tr>
-</table>
 
-<table border=0 cellpadding=0 cellspacing=0>
-  <tr>
+<?php 
 
-<?php
-$bgimg='tableHeaderbg3.gif';
-//$bgimg='tableHeader_gr.gif';
-$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
-
-$append="&usenum=$usenum&arch=$arch";
-
-if($usenum){
-
-
+if($rows){ 
 
 ?>
-     <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
-	  <?php 
-		echo $pagen->makeSortLink($LDAdm_Nr,'encounter_nr',$oitem,$odir,$append); 
-			 ?></b></td>
-<?php
-}
-?>
-			 <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
-	  <?php 
-		echo $pagen->makeSortLink($LDLastName,'name_last',$oitem,$odir,$append); 
-			 ?></b></td>
-			 <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
-	  <?php 
-		echo $pagen->makeSortLink($LDName,'name_first',$oitem,$odir,$append); 
-			 ?></b></td>
-			 <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
-	  <?php 
-		echo $pagen->makeSortLink($LDBirthDate,'date_birth',$oitem,$odir,$append); 
-			 ?></b></td>
+	<table border=0>
+		<tr>
+			<td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"></td>
+			<td class="prompt">
+				<?php echo "$LDSearchKeyword <font color=#0000ff>\"$searchkey\"</font> ".str_replace("~rows~",$totalcount,$LDWasFound).' '.$LDShowing.' '.$pagen->BlockStartNr().' '.$LDTo.' '.$pagen->BlockEndNr().'.'; ?> <br>
+				<?php echo $LDPlsClk ?>
+			</td>
+		</tr>
+	</table>
+
+	<table border=0 cellpadding=0 cellspacing=0>
+		<tr class="adm_item">
 
 <?php
-if(!$usenum){
-?>
-			 <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
-	  <?php 
-		echo $pagen->makeSortLink($LDAdm_Nr,'encounter_nr',$oitem,$odir,$append); 
-			 ?></b></td>
-<?php
-}
-?>
-			 <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
-	  <?php 
-		echo $pagen->makeSortLink($LDStation,'ward_nr',$oitem,$odir,$append); 
-			 ?></b></td>
-			 <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
-	  <?php 
-		echo $pagen->makeSortLink($LDRoom,'room_nr',$oitem,$odir,$append); 
-			 ?></b></td>
-			 <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
-	  <?php 
-		echo $pagen->makeSortLink($LDDate,'ward_date',$oitem,$odir,$append); 
-			 ?></b></td>
 
-     <td bgcolor=#000066><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; <?php echo $LDStatus ?></b></td>
- </tr>
- <?php 
- $toggle=0;
- while($result=$ergebnis->FetchRow())
- {
+	$bgimg='tableHeaderbg3.gif';
+	//$bgimg='tableHeader_gr.gif';
+	$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
+
+	$append="&usenum=$usenum&arch=$arch";
+
+	if($usenum){
+
+?>
+			<td><b>
+<?php
+				echo $pagen->makeSortLink($LDAdm_Nr,'encounter_nr',$oitem,$odir,$append);
+?>
+			</b>
+			</td>
+<?php
+	}
+?>
+			 <td><b>
+<?php
+				echo $pagen->makeSortLink($LDLastName,'name_last',$oitem,$odir,$append);
+?>
+				</b>
+			</td>
+			<td><b>
+<?php
+		echo $pagen->makeSortLink($LDName,'name_first',$oitem,$odir,$append);
+?>			</b>
+			</td>
+			<td><b>
+<?php
+		echo $pagen->makeSortLink($LDBirthDate,'date_birth',$oitem,$odir,$append);
+ ?>
+ 				</b>
+			</td>
+
+<?php
+	if(!$usenum){
+?>
+			 <td><b>
+<?php
+		echo $pagen->makeSortLink($LDAdm_Nr,'encounter_nr',$oitem,$odir,$append);
+?>
+				</b>
+			</td>
+<?php
+	}
+?>
+			 <td><b>
+<?php
+		echo $pagen->makeSortLink($LDStation,'ward_nr',$oitem,$odir,$append);
+?>
+				</b>
+			</td>
+			<td><b>
+<?php
+		echo $pagen->makeSortLink($LDRoom,'room_nr',$oitem,$odir,$append);
+?>
+				</b>
+			</td>
+			<td><b>
+<?php
+		echo $pagen->makeSortLink($LDDate,'ward_date',$oitem,$odir,$append);
+?>
+				</b>
+			</td>
+
+			<td><b>&nbsp; <?php echo $LDStatus ?></b></td>
+		</tr>
+
+<?php
+	
+	$toggle=0;
+	while($result=$ergebnis->FetchRow()){
+
 /*	if($result['encounter_class_nr']==2) $full_enr=$result['encounter_nr']+$GLOBAL_CONFIG['patient_outpatient_nr_adder'];
 		else  $full_enr=$result['encounter_nr']+$GLOBAL_CONFIG['patient_inpatient_nr_adder'];
 */		
-	$full_enr=$result['encounter_nr'];
- 	echo'
-  <tr ';
-  	if($toggle){ 
+		$full_enr=$result['encounter_nr'];
+	echo'
+		<tr ';
+  	if($toggle){
   		echo "bgcolor=#efefef";
 		$toggle=0;
 	}else{
@@ -343,31 +376,31 @@ if(!$usenum){
   
   echo '>';
 /*  echo '
-    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">';
+    <td>&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">';
 	if($result['s_date'] <> (date('Y-m-d'))) echo '<img '.createComIcon($root_path,'bul_arrowblusm.gif','0').'>';
 		else echo '<img '.createComIcon($root_path,'r_arrowgrnsm.gif','0').'>';
 	echo'
 	</a></td>';
 */	if($usenum){
 	echo '
-    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.$full_enr.'</a>&nbsp;</td>';
+    <td>&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.$full_enr.'</a>&nbsp;</td>';
 	}
 	echo '
-    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.$result['name_last'].'</a>&nbsp;</td>
-    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.$result['name_first'].'</a>&nbsp;</td>
-    <td><FONT  SIZE=-1  FACE="Arial">&nbsp;'.formatDate2Local($result['date_birth'],$date_format).'</td>';
+    <td>&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.$result['name_last'].'</a>&nbsp;</td>
+    <td>&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.$result['name_first'].'</a>&nbsp;</td>
+    <td>&nbsp;'.formatDate2Local($result['date_birth'],$date_format).'</td>';
 	if(!$usenum){
 	echo '
-    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;'.$full_enr.'&nbsp;</td>';
+    <td>&nbsp; &nbsp;'.$full_enr.'&nbsp;</td>';
 	}
 	
 	echo '
-    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.$result['ward_name'].'</a>&nbsp;</td>
-    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;';
+    <td>&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.$result['ward_name'].'</a>&nbsp;</td>
+    <td>&nbsp; &nbsp;';
 	if($result['room_nr']) echo $result['roomprefix'].' '.$result['room_nr'];
 	echo '&nbsp;</td>
-    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; '.formatDate2Local($result['ward_date'],$date_format).'</td>
-    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; ';
+    <td>&nbsp; '.formatDate2Local($result['ward_date'],$date_format).'</td>
+    <td>&nbsp; ';
 	if($result['in_ward']) echo $LDInWard;
 	echo '</td>
   </tr>
@@ -377,8 +410,8 @@ if(!$usenum){
   }
 	
 	echo '
-		<tr><td colspan=7><font face=arial size=2>'.$pagen->makePrevLink($LDPrevious,$append).'</td>
-		<td align=right><font face=arial size=2>'.$pagen->makeNextLink($LDNext,$append).'</td>
+		<tr><td colspan=7>'.$pagen->makePrevLink($LDPrevious,$append).'</td>
+		<td align=right>'.$pagen->makeNextLink($LDNext,$append).'</td>
 		</tr>';
  ?>
 </table>
@@ -390,46 +423,40 @@ if(!$usenum){
 }
 ?>
 
-	<?php echo $LDSearchPrompt ?>
+<?php echo $LDSearchPrompt ?>
 	
 <form action="nursing-patient-such-start.php" method="get" name="suchlogbuch" >
 <table border=0 cellspacing=0 cellpadding=1 bgcolor="#999999">
-  <tr>
-    <td>
-		<table border=0 cellspacing=0 cellpadding=5 bgcolor="#eeeeee">
-    <tr>
-      <td>	<font color=maroon size=2><b><?php echo $LDSrcKeyword ?>:</b></font><br>
-          		<input type="text" name="searchkey" size=40 maxlength=100 value="<?php if ($srcword!='') echo $srcword; ?>">
-				<input type="hidden" name="sid" value="<?php echo $sid; ?>">
-  				<input type="hidden" name="lang" value="<?php echo $lang; ?>">
-  			<input type="hidden" name="mode" value="such"><br>
-				<font size=2><input type="checkbox" name="arch" value="1" <?php if($arch) echo "checked"; ?>> <?php echo $LDSearchArchive ?></font><br>
-    			 
-    
-           	</td>
-	   </tr>
-    <tr>
-      <td align=right>	
+	<tr>
+		<td>
+			<table border=0 cellspacing=0 cellpadding=5 bgcolor="#eeeeee">
+			<tr>
+				<td class="prompt"><?php echo $LDSrcKeyword ?>:<br>
+					<input type="text" name="searchkey" size=40 maxlength=100 value="<?php if ($srcword!='') echo $srcword; ?>">
+					<input type="hidden" name="sid" value="<?php echo $sid; ?>">
+					<input type="hidden" name="lang" value="<?php echo $lang; ?>">
+					<input type="hidden" name="mode" value="such"><br>
+					<font size=2>
+					<input type="checkbox" name="arch" value="1" <?php if($arch) echo "checked"; ?>> <?php echo $LDSearchArchive ?>
+					</font>
+				</td>
+			</tr>
+			<tr>
+				<td align=right>
 				<input type="submit" value="<?php echo $LDSearch ?>" align="right">
-              	</td>
-	   </tr>
-  </table>
-
-	</td>
-  </tr>
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
 </table>
-  	</form>
+</form>
 
 </ul>
 
-</FONT>
-<p>
-</td>
-</tr>
-</table>        
 <p>
 <ul>
-<FONT    SIZE=2  FACE="Arial">
+
 <b><?php echo $LDMoreFunctions ?>:</b><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="nursing-station-archiv.php?sid=<?php echo "$sid&lang=$lang";?>&user=<?php echo str_replace(" ","+",$user);?>"><?php echo $LDArchive ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="javascript:gethelp('nursing_how2search.php','<?php echo $mode ?>','<?php echo $rows ?>','search')"><?php echo $LDHow2Search ?></a><br>
@@ -437,13 +464,19 @@ if(!$usenum){
 <p>
 <a href="nursing.php<?php echo URL_APPEND; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>  alt="<?php echo $LDCancel ?>"></a>
 </ul>
-<p>
-<hr>
+
 <?php
-require($root_path.'include/inc_load_copyrite.php');
-?>
-</FONT>
 
+$sTemp = ob_get_contents();
+ob_end_clean();
 
-</BODY>
-</HTML>
+# Assign the page output to the mainframe center block
+
+ $smarty->assign('sMainFrameBlockData',$sTemp);
+
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
+ ?>

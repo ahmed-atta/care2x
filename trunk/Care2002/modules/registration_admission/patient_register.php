@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -35,54 +35,40 @@ if(!isset($insurance_show)) $insurance_show=true;
 $newdata=1;
 $target='entry';
 
-# Start buffering the text above  the search block
-ob_start();
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
 
-require('./gui_bridge/default/gui_std_tags.php');
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
 
-echo StdHeader();
-echo setCharSet();
-?>
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
 
-<TITLE><?php echo $LDPatientRegister ?></TITLE>
+# Title in the toolbar
 
-<?php
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-?>
+ $smarty->assign('sToolbarTitle',$LDPatientRegister);
 
-</HEAD>
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('submenu1.php','$LDPatientRegister')");
 
+ $smarty->assign('breakfile',$breakfile);
 
-<BODY bgcolor="<?php echo $cfg['bot_bgcolor'];?>" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="if (window.focus) window.focus();"
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+ # Window bar title
+ $smarty->assign('title',$LDPatientRegister);
 
+ $smarty->assign('sOnLoadJs',"if (window.focus) window.focus();");
 
-<table width=100% border=0 cellspacing="0" cellpadding=0>
-  <tr>
-    <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
-      <FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php echo $LDPatientRegister ?></STRONG></FONT>
-    </td>
-    <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
-      <a href="javascript:gethelp('person_reg_newform.php','<?php echo $error; ?>','<?php echo $error_person_exists; ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php
-      echo $breakfile;  ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
-    </td>
-  </tr>
+ $smarty->assign('pbHelp',"javascript:gethelp('person_reg_newform.php','".$error."','".$error_person_exists."')");
 
-<?php
+ # Hide the return button
+ $smarty->assign('pbBack',FALSE);
+
 /* Create the tabs */
 $tab_bot_line='#66ee66';
 require('./gui_bridge/default/gui_tabs_patreg.php');
-?>
 
-  <tr>
-    <td colspan=3   bgcolor="<?php echo $cfg['body_bgcolor']; ?>">
-    <ul>
-
-<?php
-
- $sTemp = ob_get_contents();
- ob_end_clean();
 
 require_once($root_path.'include/care_api_classes/class_gui_input_person.php');
 
@@ -92,38 +78,23 @@ $inperson->setPID($pid);
 $inperson->pretext = $sTemp;
 $inperson->setDisplayFile('patient_register_show.php');
 
-$inperson->Display();
+$sRegForm=$inperson->create();
 
-?>
+$smarty->assign('sRegForm',$sRegForm);
 
-</ul>
+$smarty->assign('sSearchLink','<img '.createComIcon($root_path,'varrow.gif','0').'> <a href="patient_register_search.php'.URL_APPEND.'">'.$LDPatientSearch.'</a>');
+$smarty->assign('sArchiveLink','<img '.createComIcon($root_path,'varrow.gif','0').'> <a href="patient_register_archive.php'.URL_APPEND.'&newdata=1&from=entry">'.$LDArchive.'</a>');
 
-</FONT>
-<p>
-</td>
-</tr>
-</table>
-<p>
-<ul>
-<FONT    SIZE=2  FACE="Arial">
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="patient_register_search.php<?php echo URL_APPEND; ?>"><?php echo $LDPatientSearch ?></a><br>
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="patient_register_archive.php<?php echo URL_APPEND; ?>&newdata=1&from=entry"><?php echo $LDArchive ?></a><br>
+$sCancel="<a href=";
+if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $sCancel.=$breakfile;
+	else $sCancel.='aufnahme_pass.php';
+$sCancel.=URL_APPEND.'><img '.createLDImgSrc($root_path,'cancel.gif','0').' alt="'.$LDCancelClose.'"></a>';
 
-<p>
-<a href="
-<?php if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) echo $breakfile;
-	else echo 'aufnahme_pass.php';
-	echo URL_APPEND;
-?>
-"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
-</ul>
-<p>
+$smarty->assign('pbCancel',$sCancel);
 
-<?php
-require($root_path.'include/inc_load_copyrite.php');
-?>
-</FONT>
-<?php
-echo StdFooter();
+$smarty->assign('sMainBlockIncludeFile','registration_admission/reg_input.tpl');
+
+$smarty->display('common/mainframe.tpl');
+
 ?>
 

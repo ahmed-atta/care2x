@@ -9,8 +9,8 @@ require_once($root_path.'include/care_api_classes/class_core.php');
 *  Personnel methods. 
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
-* @version beta 2.0.0
-* @copyright 2002,2003,2004,2005 Elpidio Latorilla
+* @version beta 2.0.1
+* @copyright 2002,2003,2004,2005,2005 Elpidio Latorilla
 * @package care_api
 */
 class Personell extends Core {
@@ -282,17 +282,10 @@ class Personell extends Core {
 		if(!$role_nr||!$dept_nr||!$year||!$month){
 			return FALSE;
 		}else{
-			$this->sql="SELECT nr FROM $this->tb_dpoc WHERE role_nr=$role_nr AND dept_nr=$dept_nr AND year=$year AND month=$month";
-	    	if ($this->res['_ocdpe']=$db->Execute($this->sql)) {
-		    	if ($this->res['_ocdpe']->RecordCount()) {
-					$this->row=$this->res['_ocdpe']->FetchRow();
-					//echo $this->sql;
-		    		return $this->row['nr'];
-				} else {
-					return FALSE;
-				}
+	    	if ($this->row= $this->_getOCDutyPlan($role_nr,$dept_nr,$year,$month,'nr')) {
+				return $this->row['nr'];
 			}else {
-		   	 return FALSE;
+				return FALSE;
 			}
 		}
 	}
@@ -344,7 +337,7 @@ class Personell extends Core {
 		if(!$role_nr||!$dept_nr||!$year||!$month){
 			return FALSE;
 		}else{
-			$this->sql="SELECT $elems FROM $this->tb_dpoc WHERE role_nr='$role_nr' AND dept_nr='$dept_nr' AND year='$year' AND month='$month'";
+			$this->sql="SELECT $elems FROM $this->tb_dpoc WHERE role_nr=$role_nr AND dept_nr=$dept_nr AND year=$year AND month  IN ('$month','".(int)$month."',".(int)$month.")" ;
 	    	if ($this->res['_godp']=$db->Execute($this->sql)) {
 		    	if ($this->rec_count=$this->res['_godp']->RecordCount()) {
 					return $this->res['_godp']->FetchRow();

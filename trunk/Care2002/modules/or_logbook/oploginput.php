@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -564,10 +564,8 @@ function openDRGComposite()
 //-->
 </script>
 
-<script language="javascript" src="<?php echo $root_path; ?>js/showhide-div.js">
-</script>
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js">
-</script>
+<script language="javascript" src="<?php echo $root_path; ?>js/showhide-div.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
 <style type="text/css">
 .v10_n{font-family:verdana;font-size:10;color=#0000cc;}
 </style>
@@ -582,7 +580,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 switch($mode)
 {
 	case 'saveok': echo 'resetall();';
-						//echo 'resettimebars();resettimeframe();reseteditmain();';			
+						//echo 'resettimebars();resettimeframe();reseteditmain();';
 						break;
 	//case 'save': echo 'resetall();';break;
 	case "fresh": echo 'resetlogdisplays();cleartimeframes();';break;
@@ -599,33 +597,32 @@ if(!$patientfound) echo 'document.oppflegepatinfo.enc_nr.focus();';
 <FORM METHOD="post" ACTION="oploginput.php?mode=save" name="oppflegepatinfo" onSubmit="return checksubmit()">
 
 <TABLE  CELLPADDING=0 CELLSPACING=0 border=0 width=100%>
-<TR>
-<TD bgcolor=navy>
+<TR class="wardlisttitlerow">
+<TD>
 
-<font face=verdana,arial size=1 color="#ffffff">
+<font size=1>
 <?php if($op_nr) : ?>
-	<?php echo $LDOpNr ?> <FONT face=arial COLOR="yellow"  SIZE="3" ><b> <?php echo $op_nr; ?> </b></FONT>
+	<?php echo $LDOpNr ?> <FONT SIZE="3" ><b> <?php echo $op_nr; ?> </b></FONT>
 <?php endif ?>
 
 <?php echo $LDDate ?>: 
 
 <?php
-	echo '
-			<font size="2" face="arial">'.formatDate2Local($thisday,$date_format).'</font>'; 
+	echo formatDate2Local($thisday,$date_format);
 ?>
 
 &nbsp;
 <?php
 if($datafound||$patientfound){
 ?>
-<!--  <input type="submit" value="save" name="versand"> -->
+
 <a href="javascript:document.oppflegepatinfo.submit()"><img <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?> width=99 height=24 align=absmiddle alt="<?php echo $LDSaveLatest ?>"></a>
 <?php
 }
 ?>
 </TD>
 
-<td align=right bgcolor="navy" >
+<td align=right>
 <?php 
 if($op_nr) { 
 ?>
@@ -640,14 +637,14 @@ if($datafound) {
     href="op-logbuch-material-parentframe.php?sid=<?php echo "$sid&lang=$lang&op_nr=$op_nr&enc_nr=".$pdata['encounter_nr']."&dept_nr=$dept_nr&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>" target="OPLOGMAIN"><img <?php echo createLDImgSrc($root_path,'material.gif','0','absmiddle') ?> 
 	alt="<?php echo $LDUsedMaterial ?>"></a><!-- <A onClick="document.oppflegepatinfo.xx2.value='container'"
     href="op-logbuch-material-parentframe.php?sid=<?php echo "$sid&lang=$lang&mode=cont&op_nr=$op_nr&enc_nr=".$pdata['encounter_nr']."&dept_nr=$dept_nr&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>" target="OPLOGMAIN"><img <?php echo createLDImgSrc($root_path,'instrument.gif','0','absmiddle') ?> 
-	alt="<?php echo $LDContainer ?>"></a><?php } ?> --><a href="javascript:gethelp('oplog.php','create','<?php echo $mode ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?> 
+	alt="<?php echo $LDContainer ?>"></a>--><?php } ?> <a href="javascript:gethelp('oplog.php','create','<?php echo $mode ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?>
 	alt="<?php echo $LDHelp ?>"></a><a href="javascript:if(!window.parent.opener.closed)window.parent.opener.focus();window.parent.close();"><img <?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?> 
 	alt="<?php echo $LDClose ?>"></a><br>
 </td>
 </TR>
 
-<tr>
-<td colspan=2 align=right bgcolor=navy>
+<tr class="wardlisttitlerow">
+<td colspan=2 align=right>
 <?php 
 if($datafound) { 
 ?>
@@ -668,7 +665,6 @@ if($datafound) {
 
 </TABLE>
 
-<FONT  SIZE=2  FACE="verdana,Arial">
 <?php
 if(($mode=='search'||$mode=='paginate')&&!$datafound){
 	
@@ -686,7 +682,7 @@ if(($mode=='search'||$mode=='paginate')&&!$datafound){
 
 	if ($linecount) echo str_replace("~nr~",$totalcount,$LDSearchFound).' '.$LDShowing.' '.$pagen->BlockStartNr().' '.$LDTo.' '.$pagen->BlockEndNr().'.';
 		else echo str_replace('~nr~','0',$LDSearchFound); 
-	echo ' <font  face=verdana,arial><font color="#800000" size=3>'.$LDPlsClk1.'</font><font size=2 ><br>';
+	echo ' <font  class="prompt">'.$LDPlsClk1.'</font><br>';
 
 ?>
 
@@ -697,23 +693,23 @@ if(($mode=='search'||$mode=='paginate')&&!$datafound){
 			<img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?>>
 			</td>
 				<td valign=top>
-				<table cellpadding=1 cellspacing=0 border=0>
+				<table cellpadding=1 cellspacing=0 border=0 class="frame">
 				
 				<tr>
-				<td bgcolor="#999999">
-				<table cellpadding=2 cellspacing=0 border=0 bgcolor="#eeeeee">
+				<td>
+				<table cellpadding=2 cellspacing=0 border=0 class="submenu">
 
-				<tr bgcolor="#abcdef">				
+				<tr class="wardlisttitlerow">
 
-    			 <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+    			 <td><b>
 	  			<?php echo $pagen->makeSortLink($LDPatientNr,'encounter_nr',$oitem,$odir,$append);  ?></b></td>
-      			<td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+      			<td><b>
 	  			<?php echo $pagen->makeSortLink($LDSex,'sex',$oitem,$odir,$append);  ?></b></td>
-      			<td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+      			<td><b>
 	  			<?php echo $pagen->makeSortLink($LDLastName,'name_last',$oitem,$odir,$append);  ?></b></td>
-      			<td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+      			<td><b>
 	  			<?php echo $pagen->makeSortLink($LDName,'name_first',$oitem,$odir,$append);  ?></b></td>
-      			<td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+      			<td><b>
 	  			<?php echo $pagen->makeSortLink($LDBday,'date_birth',$oitem,$odir,$append);  ?></b></td>
 				</tr>
 				
@@ -724,9 +720,9 @@ if(($mode=='search'||$mode=='paginate')&&!$datafound){
    		while($pdata=$result->FetchRow()){
 			$ahref="<a href=\"oploginput.php".URL_APPEND."&mode=get&enc_nr=".$pdata['encounter_nr']."&dept_nr=$dept_nr&saal=$saal&op_nr=$op_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear\">";
 			
-			echo '<tr ><td><FONT  SIZE=2  FACE="verdana,Arial">'.$ahref;
+			echo '<tr ><td><FONT  SIZE=2>'.$ahref;
 			if($sk&&stristr($pdata['encounter_nr'],$sk)) echo '<u><b><span style="background:yellow"> '.$pdata['encounter_nr'].'</span></b></u>';
- 					else echo $pdata['encounter_nr'];				
+ 					else echo $pdata['encounter_nr'];
 			echo '</a></td><td>';
 			echo $ahref;
 			switch($pdata['sex']){
@@ -735,23 +731,23 @@ if(($mode=='search'||$mode=='paginate')&&!$datafound){
 					default: echo '&nbsp;'; break;
 			}	
 				
-			echo '</a></td><td><FONT  SIZE=2  FACE="verdana,Arial">'.$ahref;
+			echo '</a></td><td><FONT  SIZE=2>'.$ahref;
 				if($sk&&stristr($pdata['name_last'],$sk)) echo '<u><b><span style="background:yellow"> '.$pdata['name_last'].'</span></b></u>';
  					else echo $pdata['name_last'];				
-			echo '</a></td><td><FONT  SIZE=2  FACE="verdana,Arial">'.$ahref;
+			echo '</a></td><td><FONT  SIZE=2>'.$ahref;
 				if($sk&&stristr($pdata['name_first'],$sk)) echo '<u><b><span style="background:yellow"> '.$pdata['name_first'].'</span></b></u>';
  					else echo $pdata['name_first'];				
-			echo '</a></td><td><FONT  SIZE=2  FACE="verdana,Arial">';
+			echo '</a></td><td><FONT  SIZE=2>';
 				if($sk&&stristr($pdata['date_birth'],$sk)) echo '<u><b><span style="background:yellow"> '.formatDate2Local($pdata['date_birth'],$date_format).'</span></b></u>';
  					else echo formatDate2Local($pdata['date_birth'],$date_format);				
  				echo '</td></tr> ';
 		}	
 			echo '
-						<tr><td colspan=4><font face=arial size=2>'.$pagen->makePrevLink($LDPrevious,$append).'</td>
-						<td align=right><font face=arial size=2>'.$pagen->makeNextLink($LDNext,$append).'</td>
+						<tr><td colspan=4><font size=2>'.$pagen->makePrevLink($LDPrevious,$append).'</td>
+						<td align=right><font size=2>'.$pagen->makeNextLink($LDNext,$append).'</td>
 						</tr>';
 	}else{
-		echo '<font  face=verdana,arial>
+		echo '
 			<font color="#800000" size=4>'.$LDPatientNotFound.'</font>
 			<font size=2 ><br>'.$LDPlsEnoughData;
 	}
@@ -786,7 +782,7 @@ if(($mode=='search'||$mode=='paginate')&&!$datafound){
 
 <TABLE  CELLPADDING=1 CELLSPACING=1 border=0 class="v10_n">
 <tr bgcolor="#fefefe" height=180>
-	<TD valign="top" width=150><font face=verdana,arial size=1>
+	<TD valign="top" width=150><font  size=1>
 
 <?php
 if($pdata['encounter_nr']=='')
@@ -818,7 +814,7 @@ if($pdata['encounter_nr']=='')
 ?> 
 	</TD>
 
-<TD valign="top" width=130><font face=verdana,arial size=1  color="<?php if($datafound) echo "#0000cc"; else echo "#3f3f3f"; ?>">
+<TD valign="top" width=130><font  size=1  color="<?php if($datafound) echo "#0000cc"; else echo "#3f3f3f"; ?>">
 
 <?php 
 if($datafound){
@@ -837,7 +833,7 @@ if($datafound){
 if($datafound) 
 {
 	echo'
-	<font face=verdana,arial size=1 color="#000000">';
+	<font  size=1 color="#000000">';
 
 	$ebuf=array("operator","assistant","scrub_nurse","rotating_nurse");
 	$jbuf=array("operator","assist","scrub","rotating");
@@ -860,7 +856,7 @@ if($datafound)
  else
  {
 	echo '
-	<font face=verdana,arial size=1 color="#3f3f3f">';
+	<font  size=1 color="#3f3f3f">';
 		while(list($x,$v)=each($cbuf)) echo "$v<p>";
 }
 ?>
@@ -868,7 +864,7 @@ if($datafound)
 </TD>
 
 <TD valign=top width=150>
-<font face=verdana,arial size=1  color="<?php if($datafound) echo "#0000cc"; else echo "#3f3f3f"; ?>">
+<font  size=1  color="<?php if($datafound) echo "#0000cc"; else echo "#3f3f3f"; ?>">
 <?php if($datafound) : ?>
 <?php echo $LDAna ?><br>
 	<select NAME="anesthesia"   SIZE="1">
@@ -939,7 +935,7 @@ if($datafound)
 	}
 ?>
 
-<font face=verdana,arial size=1 color="<?php if($datafound) echo "#0000cc"; else echo "#3f3f3f"; ?>">
+<font  size=1 color="<?php if($datafound) echo "#0000cc"; else echo "#3f3f3f"; ?>">
 	<?php echo $LDOpCut ?>:
 	<?php if($datafound) : ?>
 	<br><INPUT NAME="cut_time" TYPE="text" VALUE="<?php echo strtr($ccbuf['s'],':','.'); ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)">
@@ -952,7 +948,7 @@ if($datafound)
 	<br><INPUT NAME="close_time" TYPE="text" VALUE="<?php echo strtr($ccbuf['e'],':','.'); ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)">
 	<?php endif ?>
 </td>
-<td><font face=verdana,arial size=1 color="<?php if($datafound) echo "#0000cc"; else echo "#3f3f3f"; ?>">
+<td><font  size=1 color="<?php if($datafound) echo "#0000cc"; else echo "#3f3f3f"; ?>">
 	<?php echo $LDOpInFull ?>:
 	<?php if($datafound) : ?>
 	<br><INPUT NAME="entry_time" TYPE="text" VALUE="<?php echo strtr($eobuf['s'],':','.'); ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)">
@@ -973,7 +969,7 @@ if($datafound)
 </TD>
 
 
-<TD valign="top" width=160><font face=verdana,arial size=1 
+<TD valign="top" width=160><font  size=1 
 color="<?php if($datafound) echo "#0000cc"; else echo "#3f3f3f"; ?>">
 <?php if($datafound) 
 	{
@@ -986,7 +982,7 @@ color="<?php if($datafound) echo "#0000cc"; else echo "#3f3f3f"; ?>">
 ?>
 </TD>
 
-<TD valign="top" width=140><font face=verdana,arial size=1 color="<?php if($datafound) echo "#0000cc"; else echo "#3f3f3f"; ?>"><?php echo $LDOpMainElements[result] ?><br>
+<TD valign="top" width=140><font  size=1 color="<?php if($datafound) echo "#0000cc"; else echo "#3f3f3f"; ?>"><?php echo $LDOpMainElements[result] ?><br>
 <?php if($datafound) echo '
 <TEXTAREA NAME="result_info" Content-Type="text/html"
 	COLS="18" ROWS="8"></TEXTAREA>';

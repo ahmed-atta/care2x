@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -65,7 +65,7 @@ if($display=='composite'){
 }
 $uid="$dept_$oprm_$pn_$opnr"; 
 /* Load the icon images */
-$img_delete=createComIcon($root_path,'delete2.gif','0','right');
+$img_delete=createComIcon($root_path,'delete2.gif','0','right',TRUE);
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>
@@ -144,14 +144,14 @@ else  echo 'topmargin=2 marginheight=2';
     <td width=100% valign="top">
 	<table border=0 cellpadding=1 cellspacing=1 width=100%> 
 		<tr bgcolor="#0000aa">
- 		<td><font face=arial size=2 color=#ffffff><b><?php echo $LDIcd10 ?></b></td>
-<!--  		<td><font face=arial size=2 color=#ffffff><b><?php echo $LDSGBV ?></b></td>
- --> 		<td><font face=arial size=2 color=#ffffff><b><?php echo $LDDescription ?></b></td>
- 		<td><font face=arial size=2 color=#ffffff><nobr><b><?php echo $LDCategory ?></b> <a href="javascript:gethelp('drg_diag_cat.php')" ><img <?php echo createComIcon($root_path,'frage.gif','0','absmiddle') ?>></a></nobr></td>
- 		<td><font face=arial size=2 color=#ffffff><nobr><b><?php echo $LDLocalization ?></b> <a href="javascript:gethelp('drg_diag_loc.php')" ><img <?php echo createComIcon($root_path,'frage.gif','0','absmiddle') ?>></a></nobr></td>
- 		<td><font face=arial size=2 color=#ffffff><b><?php echo $LDBy ?></b></td>
+ 		<td><font size=2 color=#ffffff><b><?php echo $LDIcd10 ?></b></td>
+<!--  		<td><font size=2 color=#ffffff><b><?php echo $LDSGBV ?></b></td>
+ --> 		<td><font size=2 color=#ffffff><b><?php echo $LDDescription ?></b></td>
+ 		<td><font size=2 color=#ffffff><nobr><b><?php echo $LDCategory ?></b> <a href="javascript:gethelp('drg_diag_cat.php')" ><img <?php echo createComIcon($root_path,'frage.gif','0','absmiddle',TRUE) ?>></a></nobr></td>
+ 		<td><font size=2 color=#ffffff><nobr><b><?php echo $LDLocalization ?></b> <a href="javascript:gethelp('drg_diag_loc.php')" ><img <?php echo createComIcon($root_path,'frage.gif','0','absmiddle',TRUE) ?>></a></nobr></td>
+ 		<td><font size=2 color=#ffffff><b><?php echo $LDBy ?></b></td>
 <?php if($display=="composite") : ?>
- 		<td><font face=arial size=2 color=#ffffff>&nbsp;</td>
+ 		<td><font size=2 color=#ffffff>&nbsp;</td>
 <?php endif ?>
     	</tr>
 
@@ -169,17 +169,17 @@ if (is_object($drg)) {
 
 		# Start creating the display
 		if($icd['category_nr']=="1") $fcolor="#0000ff"; else $fcolor="#000000";
-		echo "<tr bgcolor=";
-		if($toggle) { echo "#efefef>"; $toggle=0;} else {echo "#ffffff>"; $toggle=1;};
+		echo "<tr class=";
+		if($toggle) { echo "wardlistrow2>"; $toggle=0;} else {echo "wardlistrow1>"; $toggle=1;};
 		echo '
-		<td><font face=arial size=2><a href="javascript:openICDsearch(\''.$icd['code'].'\',\'1\')">'.$icd['code'].'</a>
+		<td><font size=2><a href="javascript:openICDsearch(\''.$icd['code'].'\',\'1\')">'.$icd['code'].'</a>
 		</td>';
-/*		<td><font face=arial size=2 color="'.$fcolor.'">
+/*		<td><font size=2 color="'.$fcolor.'">
 		</td>
 */		echo '
-		<td><font face=arial size=2 color="'.$fcolor.'">'.$icd['parent_desc'].': <b>'.$icd['description'].'</b>
+		<td><font size=2 color="'.$fcolor.'">'.$icd['parent_desc'].': <b>'.$icd['description'].'</b>
 		</td>
-		<td><font face=arial size=2  color="'.$fcolor.'">';
+		<td><font size=2  color="'.$fcolor.'">';
 		if($icd['category_nr']=='1'){
 			if(defined('CATEGORY_NAME_FULL')&&CATEGORY_NAME_FULL){
 			 echo "<b>$LDMostResponsible</b>";
@@ -248,7 +248,7 @@ if (is_object($drg)) {
 			}
 		}
 		echo '</td>
-				<td><font face=arial size=2  color="'.$fcolor.'">';
+				<td><font size=2  color="'.$fcolor.'">';
 		#Start creating the localization column
 		if($display!='composite'){
 			if(defined('LOCALIZATION_NAME_FULL')&&LOCALIZATION_NAME_FULL){
@@ -311,7 +311,7 @@ if (is_object($drg)) {
 
 		}
 		echo '</td>
-				<td><font face=arial size=2>'.stripslashes($icd['diagnosing_clinician']).' - '.$icd['diagnosing_dept_nr'].'
+				<td><font size=2>'.stripslashes($icd['diagnosing_clinician']).' - '.$icd['diagnosing_dept_nr'].'
 				</td>';
 		if($display=="composite"){
 			echo '
@@ -331,7 +331,7 @@ if (is_object($drg)) {
 	
 	</td>
 	<?php if($display=='composite'&&$edit) { ?>   
-	 <td valign="top" bgcolor="#0000aa"><font face=arial size=2 color=#ffffff>
+	 <td valign="top" bgcolor="#0000aa"><font size=2 color=#ffffff>
 	<input type="button" value="<?php echo $LDSearch ?>" onClick="javascript:openICDsearch('','0')">&nbsp;
  	<p><input type="button" value="<?php echo $LDQuickList ?>" onClick="javascript:openQuicklist('diagnosis')"><p>
 	</td>

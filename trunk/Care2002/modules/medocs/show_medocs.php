@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -18,6 +18,8 @@ require_once($root_path.'include/care_api_classes/class_notes.php');
 $obj=new Notes;
 $types=$obj->getAllTypesSort('name');
 $this_type=$obj->getType($type_nr);
+
+//$db->debug=1;
 
 if(!isset($mode)){
 	$mode='show';
@@ -32,6 +34,10 @@ if(!isset($mode)){
 	}else{
 		$HTTP_POST_VARS['date']=@formatDate2STD($HTTP_POST_VARS['date'],$date_format);
 	}
+	
+	# Prune the aux_notes  data to max 255
+		$HTTP_POST_VARS['aux_notes']=substr($HTTP_POST_VARS['aux_notes'],0,255);
+
 	# Prepare history
 	$HTTP_POST_VARS['history']='Entry: '.date('Y-m-d H:i:s').' '.$HTTP_SESSION_VARS['sess_user_name'];
 	$HTTP_POST_VARS['time']=date('H:i:s');

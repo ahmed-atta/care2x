@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -22,7 +22,7 @@ define('LANG_FILE','edp.php');
 $local_user='ck_edv_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-$breakfile='edv-system-admi-welcome.php'.URL_APPEND.'&target=currency_admin';
+$breakfile='edv-system-admi-welcome.php'.URL_APPEND;
 $thisfile=basename(__FILE__);
 
 $GLOBAL_CONFIG=array();
@@ -62,63 +62,67 @@ if(isset($mode)&&$mode=='save'){
 	$tmins=substr($buffer,-4,2);
 	$tsecs=substr($buffer,-2);
 }
+
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('system_admin');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',$LDTimeOut);
+
+# href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('timeout.php')");
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',$LDTimeOut);
+
+ # Buffer page output
+
+ ob_start();
 ?>
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php 
-echo setCharSet(); 
-?>
-<?php 
-require($root_path.'include/inc_js_gethelp.php'); 
-require($root_path.'include/inc_css_a_hilitebu.php');
-?> 
-
- 
-</HEAD>
-
-<BODY topmargin=0 leftmargin=0 marginheight=0 marginwidth=0 bgcolor=<?php echo $cfg['body_bgcolor'];?>>
 
 
-<table width=100% border=0 cellspacing=0>
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG> <?php echo $LDTimeOut ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right>
-<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('timeout.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
-</tr>
-<tr>
-<td bgcolor=<?php echo $cfg['body_bgcolor'];?> colspan=2>
-<br>
 <ul>
-<FONT    SIZE=2  FACE="verdana,Arial">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-</FONT><FONT    SIZE=3 color=#000000 FACE="Arial"><p>
+<FONT class="prompt">
+<p>
 <?php
-if(isset($save_ok)&&$save_ok) echo '<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'><FONT    SIZE=3 color=#800000 FACE="Arial">'.$LDDataSaved.'<p></font>';
+
+if(isset($save_ok)&&$save_ok) echo '<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'>'.$LDDataSaved.'<p>';
 
 echo $LDEnterInfo;
-?></font><p>
-<FONT    SIZE=-1  FACE="Arial">
+
+?>
+</font>
+<p>
+
 <form action="<?php echo $thisfile ?>" method="post" name="quickinfo">
 <table border=0 cellspacing=1 cellpadding=5>  
 <tr valign=top>
-	<td bgcolor="#e9e9e9" align="right"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><nobr><?php echo $LDTimeOutActive ?></nobr></b> </FONT></td>
-	<td bgcolor="#f9f9f9"><FONT  color="#000000" FACE="verdana,arial" size=2>
+	<td class="wardlisttitlerow" align="right"><FONT  color="#0000cc"><b><nobr><?php echo $LDTimeOutActive ?></nobr></b> </FONT></td>
+	<td class="wardlistrow1">
 		<input type="radio" name="timeout_inactive" value="0" <?php if(!$GLOBAL_CONFIG['timeout_inactive']) echo 'checked' ?>> <nobr><?php echo $LDYes ?>&nbsp;&nbsp;&nbsp;
 		<input type="radio" name="timeout_inactive" value="1" <?php if($GLOBAL_CONFIG['timeout_inactive']) echo 'checked' ?>> <?php echo $LDNo ?></nobr>
 	</td>  
-	<td bgcolor="#e9e9e9" ><FONT  FACE="verdana,arial" size=2><?php echo $LDTimeOutTxt ?></FONT></td>
+	<td class="wardlistrow2"><?php echo $LDTimeOutTxt ?></td>
 	</tr>
 <tr valign=top>
-	<td bgcolor="#e9e9e9" align="right"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><nobr><?php echo $LDTimeOutTime ?></nobr></b> </FONT></td>
-	<td bgcolor="#f9f9f9"><FONT  FACE="verdana,arial" size=2><nobr>
+	<td  class="wardlisttitlerow"  align="right"><FONT  color="#0000cc"><b><nobr><?php echo $LDTimeOutTime ?></nobr></b> </FONT></td>
+	<td class="wardlistrow1"><nobr>
 	<input type="text" name="thours" size=2 maxlength=2 value=<?php echo $thours ?>> <?php echo $LDHours ?>&nbsp;
  	<input type="text" name="tmins" size=2 maxlength=2 value=<?php echo $tmins ?>> <?php echo $LDMinutes ?>&nbsp;
 	<input type="text" name="tsecs" size=2 maxlength=2 value=<?php echo $tsecs ?>> <?php echo $LDSeconds ?></nobr>
 
 	</td>  
-	<td bgcolor="#e9e9e9"><FONT   FACE="verdana,arial" size=2><?php echo $LDTimeOutTimeTxt ?></FONT></td>
+	<td class="wardlistrow2"><?php echo $LDTimeOutTimeTxt ?></td>
 	</tr>
 </table>
 <p>
@@ -135,15 +139,17 @@ echo $LDEnterInfo;
 <p>
 </ul>
 
-</FONT>
-<p>
-</td>
-</tr>
-</table>        
-<p>
 <?php
-require($root_path.'include/inc_load_copyrite.php');
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+# Assign page output to the mainframe template
+
+$smarty->assign('sMainFrameBlockData',$sTemp);
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
 ?>
-</FONT>
-</BODY>
-</HTML>

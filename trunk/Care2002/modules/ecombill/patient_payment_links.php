@@ -21,8 +21,19 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 $breakfile='patientbill.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='.$full_en;
 
+# Check if final bill is available, if yes hide new  payment menu item
+
+$chkfinalquery="SELECT * from care_billing_final WHERE final_encounter_nr='$full_en'";
+/*$chkfinalresult=mysql_query($chkfinalquery);
+$chkexists=mysql_num_rows($chkfinalresult);
+*/
+$chkfinalresult=$db->Execute($chkfinalquery);
+
+if(is_object($chkfinalresult)) $chkexists=$chkfinalresult->RecordCount();
+
 # Extract the language variable
 extract($TXT);
+
 ?>
 
 <?php html_rtl($lang); ?>
@@ -58,7 +69,7 @@ function showreceipt(receiptid)
     	<tr><td colspan=2><hr></td></tr>
     
     	<tr>
-    	<td><a href=javascript:show()><?php echo $MakeaNewPayment ?></a></td>    
+    	<td><a href=javascript:show()><?php if(!$chkexists) echo $MakeaNewPayment ?></a></td>
     	</tr>	
     	
     	<?php

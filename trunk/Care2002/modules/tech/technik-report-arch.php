@@ -3,9 +3,9 @@
 require('./roots.php');
 require($root_path.'/include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -50,49 +50,75 @@ if(isset($mode)&&($mode=='search'))
 $linecount=0;
 $dbtable='care_tech_repair_done';
 
-# this is the search module
-if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
-if($dblink_ok) {
-	if($mode=='search') {
-				$sql='SELECT * FROM '.$dbtable.' WHERE ';
-				if($tech) $sql.=" reporter LIKE '$tech%' ";
-				if($dept)
-				{
-					if($tech) $sql.=" AND dept LIKE '$dept%' "; else $sql.=" dept LIKE '$dept%' ";
-				}
-				$buf='';
-				
-				if($sdate)
-				{
-					if($edate) $buf=" tdate>='$sdate' AND tdate<='$edate' ";
-					 else $buf=" tdate='$sdate' ";
-				}
-				else
-				{
-					if($edate) $buf=" tdate<='$edate' ";
-				}
-				
-				if($buf)
-				{
-					if(($dept)||($tech)) $sql.=" AND $buf "; else $sql.=$buf;
-				}
-			  //echo $sql;
-			}
-			else $sql='SELECT * FROM '.$dbtable.' WHERE seen=0 ORDER BY tid DESC';
-								
-        		if($ergebnis=$db->Execute($sql))
-				{
-					$linecount=$ergebnis->RecordCount();
-				} else {echo "<p>".$sql."$LDDbNoRead<br>"; };
-} else { echo "$LDDbNoLink<br>"; } 
+if($mode=='search') {
+
+	$sql='SELECT * FROM '.$dbtable.' WHERE ';
+	
+	if($tech) $sql.=" reporter LIKE '$tech%' ";
+	
+	if($dept)
+	{
+		if($tech) $sql.=" AND dept LIKE '$dept%' "; else $sql.=" dept LIKE '$dept%' ";
+	}
+	$buf='';
+
+	if($sdate)
+	{
+		if($edate) $buf=" tdate>='$sdate' AND tdate<='$edate' ";
+		else $buf=" tdate='$sdate' ";
+	}
+	else
+	{
+		if($edate) $buf=" tdate<='$edate' ";
+	}
+
+	if($buf)
+	{
+		if(($dept)||($tech)) $sql.=" AND $buf "; else $sql.=$buf;
+	}
+//echo $sql;
+}else{
+	$sql='SELECT * FROM '.$dbtable.' WHERE seen=0 ORDER BY tid DESC';
+}
+
+if($ergebnis=$db->Execute($sql)){
+	$linecount=$ergebnis->RecordCount();
+}else{
+	echo "<p>".$sql."$LDDbNoRead<br>"; 
+}
+
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('system_admin');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',$LDTechSupport);
+
+ # href for return button
+ $smarty->assign('pbBack',$returnfile);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('tech.php','arch')");
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',$LDTechSupport);
+
+ # Collect js code
+
+ob_start();
 
 ?>
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
- <TITLE> Technik - Bericht</TITLE>
- <script language="javascript" >
+
+<script language="javascript" >
 <!-- 
 function show_order(d,D,t,r,i)
 {
@@ -110,45 +136,39 @@ function show_order(d,D,t,r,i)
 <script language="javascript" src="/js/checkdate.js" type="text/javascript"></script>
 <script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
-<?php 
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-?></HEAD>
+<?php
 
-<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="document.suchform.tech.focus()"
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
-<?php //echo $test ?>
-<?php //foreach($argv as $v) echo "$v "; ?>
-<table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
-<tr valign=top>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="45"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG> &nbsp; <?php echo $LDTechSupport ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])echo'<a href="'.$returnfile.'"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('tech.php','arch')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
-</tr>
-<tr valign=top >
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
+$sTemp = ob_get_contents();
+ob_end_clean();
+$smarty->append('JavaScript',$sTemp);
+
+# Buffer page output
+
+ob_start();
+
+?>
+
 <ul>
-<FONT face="Verdana,Helvetica,Arial" size=2>
+
 <p>
   <form action="<?php echo $thisfile?>" method="get" name="suchform">
   <table border=0 cellspacing=2 cellpadding=3>
     <tr bgcolor=#ffffdd>
-      <td  colspan=2 background="<?php echo $root_path; ?>gui/img/common/default/tableHeaderbg3.gif"><FONT face="Verdana,Helvetica,Arial" size=2 color="#000080"><?php echo $LDSearchReport ?>:</td>
+      <td  colspan=2 class="wardlisttitlerow"><?php echo $LDSearchReport ?>:</td>
     </tr>
     <tr bgcolor=#ffffdd>
-      <td align=right><FONT face="Verdana,Helvetica,Arial" size=2><?php echo $LDTechnician ?>:</td>
+      <td align=right><?php echo $LDTechnician ?>:</td>
       <td><input type="text" name="tech" size=25 maxlength=40>
           </td>
     </tr>
     <tr bgcolor=#ffffdd>
-      <td align=right><FONT face="Verdana,Helvetica,Arial" size=2><?php echo $LDDept ?>:</td>
+      <td align=right><?php echo $LDDept ?>:</td>
       <td><input type="text" name="dept" size=25 maxlength=40>
           </td>
     </tr>
     <tr bgcolor=#ffffdd>
-      <td align=right><FONT face="Verdana,Helvetica,Arial" size=2 ><?php echo "$LDDate $LDFrom" ?>:</td>
-      <td><FONT face="Verdana,Helvetica,Arial" size=2><input type="text" name="sdate" size=10 maxlength=10   onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+      <td align=right><?php echo "$LDDate $LDFrom" ?>:</td>
+      <td><input type="text" name="sdate" size=10 maxlength=10   onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
 	  		<a href="javascript:show_calendar('suchform.sdate','<?php echo $date_format ?>')">
 			<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
   
@@ -173,7 +193,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <?php if($linecount>0)
 {
 	echo '
-			<font face=Verdana,Arial size=2>
+			
 			<p> ';
 			if ($linecount>1) echo $LDReportListMany; else echo $LDReportList;
 		if($mode!="")
@@ -190,10 +210,10 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 		echo '
 				<table border=0 cellspacing=0 cellpadding=0 bgcolor="#666666"><tr><td >
 				<table border=0 cellspacing=1 cellpadding=3>
-  				<tr bgcolor="#ffffff"  background="'.$root_path.'gui/img/common/default/tableHeaderbg3.gif">';
+  				<tr>';
 		for ($i=0;$i<sizeof($bcatindex);$i++)
 		echo '
-				<td  background="'.$root_path.'gui/img/common/default/tableHeaderbg3.gif"><font face=Verdana,Arial size=2 color="#000080">'.$bcatindex[$i].'</td>';
+				<td  class="wardlisttitlerow">'.$bcatindex[$i].'</td>';
 		echo '
 				</tr>';	
 
@@ -205,16 +225,16 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 		while($content=$ergebnis->FetchRow())
  		{
 			if($tog)
-			{ echo '<tr bgcolor="#dddddd">'; $tog=0; }else{ echo '<tr bgcolor="#efefff">'; $tog=1; }
+			{ echo '<tr class="wardlistrow1">'; $tog=0; }else{ echo '<tr class="wardlistrow2">'; $tog=1; }
 			echo'
-				<td><font face=Verdana,Arial size=2>'.$i.'</td>
+				<td>'.$i.'</td>
 				<td><a href="javascript:show_order(\''.$content['dept'].'\',\''.$content['tdate'].'\',\''.$content['ttime'].'\',\''.$content['reporter'].'\',\''.$content['tid'].'\')">
 				<img '.$img_uparrow.' alt="'.$LDClk2Read.'"></a></td>
-				 <td><font face=Verdana,Arial size=2>'.$content['reporter'].'</td>
-				<td ><font face=Verdana,Arial size=2>'.strtoupper($content['dept']).'</td>
-				<td><font face=Verdana,Arial size=2>'.@formatDate2Local($content['tdate'],$date_format).'</td>
-				 <td><font face=Verdana,Arial size=2>'.@convertTimeToLocal($content['ttime']).'</td>
-				<td><font face=Verdana,Arial size=2>';
+				 <td>'.$content['reporter'].'</td>
+				<td >'.strtoupper($content['dept']).'</td>
+				<td>'.@formatDate2Local($content['tdate'],$date_format).'</td>
+				 <td>'.@convertTimeToLocal($content['ttime']).'</td>
+				<td>';
 	if($content['seen']) echo '<img '.createComIcon($root_path,'check-r.gif','0').'>'; else echo "&nbsp;";
 	echo '</td>
 				</tr>';
@@ -278,41 +298,28 @@ if($mode=='search') echo '
 	<table border=0>
    <tr>
      <td><img '.createMascot($root_path,'mascot1_r.gif','0','middle').'></td>
-     <td><font face=Verdana,Arial size=2 color="#660000">'.$LDNoFound.'</font></td>
+     <td class="warnprompt">'.$LDNoFound.'</td>
    </tr>
  </table>';
  
 	
 }
-/*
-if($invalid) echo'
 
-	<table border=0>
-   <tr>
-     <td> <img src="../img/nedr.gif" width=100 height=138 border=0 align=middle>
-		</td>
-     <td><font face=Verdana,Arial size=2>Die Eingabe von einem einzigen Zeichen ist nicht zulässig. <br>Bitte versuchen Sie es noch mal und geben Sie etwas ausführlicheres ein. Vielen Dank.
-</td>
-   </tr>
- </table>';
- */
-	 ?>
+?>
 <p><br>
  <a> <?php echo'<a href="technik.php'.URL_APPEND.'"><img '.createLDImgSrc($root_path,'back2.gif','0').'>';?></a>
 </ul>
-</FONT>
-<p>
-</td>
-</tr>
-<tr>
-<td bgcolor=<?php echo $cfg['bot_bgcolor']; ?> height=70 colspan=2>
 <?php
-require($root_path.'include/inc_load_copyrite.php');
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+# Assign page output to the mainframe template
+
+$smarty->assign('sMainFrameBlockData',$sTemp);
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
 ?>
-</td>
-</tr>
-</table>        
-&nbsp;
-</FONT>
-</BODY>
-</HTML>

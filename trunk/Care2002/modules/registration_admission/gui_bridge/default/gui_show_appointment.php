@@ -34,21 +34,21 @@ function checkApptDate(d,e,n){
 //  Script End -->
 </script>
 
-<table border=0 cellpadding=3 cellspacing=1 width=100%>
-  <tr bgcolor="#f6f6f6">
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo "$LDDate/$LDTime/$LDDetails"; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDAppointments; ?></td>
-    <td <?php echo $tbg; ?> colspan=2><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDStatus; ?></td>
+<table border=0 cellpadding=3 cellspacing=1 width=100% class="frame">
+  <tr class="reg_list_titlebar">
+    <td><?php echo "$LDDate/$LDTime/$LDDetails"; ?></td>
+    <td><?php echo $LDAppointments; ?></td>
+    <td colspan=2><?php echo $LDStatus; ?></td>
   </tr>
 <?php
 $toggle=0;
 /* Get department info */
 while($row=$result->FetchRow()){
 	if(($row['urgency']==7)&&($row['appt_status']=='pending')){
-		$bgc='yellow';
+		$bgc='hilite';
 	}else{
-		if($toggle) $bgc='#f3f3f3';
-			else $bgc='#fefefe';
+		if($toggle) $bgc='wardlistrow2';
+			else $bgc='wardlistrow1';
 	}
 	$toggle=!$toggle;
 	$dept=$dept_obj->getDeptAllInfo($row['to_dept_nr']);
@@ -56,7 +56,7 @@ while($row=$result->FetchRow()){
 		else $tc='#000000';
 ?>
 
-  <tr   bgcolor="<?php echo $bgc; ?>" >
+  <tr   class="<?php echo $bgc; ?>" >
     <td><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>"><?php echo @formatDate2Local($row['date'],$date_format); ?></td>
     <td rowspan=4 valign="top"><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>">
 	<?php 
@@ -74,7 +74,7 @@ while($row=$result->FetchRow()){
 		}else{
 			$urg_img='level_'.$row['urgency'].'.gif';
 		}
-		echo '<img '.createComIcon($root_path,$urg_img,'0','absmiddle').'>'; 
+		echo '<img '.createComIcon($root_path,$urg_img,'0','absmiddle',TRUE).'>'; 
 	?>
 <?php 
 		if($row['appt_status']=='done' && $row['encounter_nr']){
@@ -104,7 +104,7 @@ while($row=$result->FetchRow()){
 	</td>
   </tr>
 
-  <tr   bgcolor="<?php echo $bgc; ?>" >
+  <tr   class="<?php echo $bgc; ?>" >
     <td><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>"><?php echo $row['time']; ?></td>
     <td><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>">
 		<?php 
@@ -113,7 +113,7 @@ while($row=$result->FetchRow()){
 		?>
 	</td>
   </tr>
-  <tr  bgcolor="<?php echo $bgc; ?>" >
+  <tr  class="<?php echo $bgc; ?>" >
     <td><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>">
 	<?php 
 		if(isset($$dept['LD_var'])&&!empty($$dept['LD_var'])) echo $$dept['LD_var']; 
@@ -122,13 +122,13 @@ while($row=$result->FetchRow()){
     <td><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>">
 	<?php 
 		if($row['remind']&&$row['appt_status']=='pending'){
-			if($row['remind_email']) echo '<img '.createComIcon($root_path,'email.gif','0').'> ';
-			if($row['remind_mail']) echo '<img '.createComIcon($root_path,'print.gif','0').'> ';
-			if($row['remind_phone']) echo '<img '.createComIcon($root_path,'violet_phone_2.gif','0').'> ';
+			if($row['remind_email']) echo '<img '.createComIcon($root_path,'email.gif','0','',TRUE).'> ';
+			if($row['remind_mail']) echo '<img '.createComIcon($root_path,'print.gif','0','',TRUE).'> ';
+			if($row['remind_phone']) echo '<img '.createComIcon($root_path,'violet_phone_2.gif','0','',TRUE).'> ';
 		}
 		 ?></td>
   </tr>
-  <tr  bgcolor="<?php echo $bgc; ?>" >
+  <tr  class="<?php echo $bgc; ?>" >
     <td><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>"><?php echo $row['to_personell_name']; ?></td>
     <td><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>">
 	<?php
@@ -147,9 +147,9 @@ while($row=$result->FetchRow()){
 </table>
 <?php
 
-if(!$death_date||$death_date=='0000-00-00'){
+if(!$death_date||$death_date == DBF_NODATE){
 ?>
-<img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle'); ?>>
+<img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle',TRUE); ?>>
 <a href="<?php echo $thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new'; ?>"> 
 <?php echo $LDScheduleNewAppointment; ?>
 </a>

@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'/include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -32,155 +32,122 @@ $returnfile=$breakfile;
 $HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
 $HTTP_SESSION_VARS['sess_path_referer']=str_replace($doc_root.'/','',__FILE__);
 
-
 if(!isset($stb)) $stb=0;
-?>
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php  echo setCharSet();  ?>
- <script language="javascript" >
-<!-- 
-<?php  if($stb)
-echo '
-		function startbot(d)
-		{
-		if(d=="r") repabotwin=window.open("technik-repabot.php'.URL_REDIRECT_APPEND.'","repabotwin","width=300,height=150,menubar=no,resizable=yes,scrollbars=yes");
-		else if(d=="f") fragebotwin=window.open("technik-fragebot.php'.URL_REDIRECT_APPEND.'","fragebotwin","width=300,height=150,menubar=no,resizable=yes,scrollbars=yes");
 
-		}
-		';
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
+
+ # Create a helper smarty object without reinitializing the GUI
+ $smarty2 = new smarty_care('common', FALSE);
+
+# Added for the common header top block
+
+ $smarty->assign('sToolbarTitle',$LDTechSupport);
+
+ # Added for the common header top block
+ $smarty->assign('pbHelp',"javascript:gethelp('submenu1.php','$LDTechSupport')");
+
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('title',$LDTechSupport);
+
+  # Add the bot onLoad code
+ if(isset($stb)){
+ 	if($stb==1) $smarty->assign('sOnLoadJs','onLoad="startbot(\'r\')"');
+ 	else if($stb==2) $smarty->assign('sOnLoadJs','onLoad="startbot(\'f\')"');
+ }
+ 
+ # Collect extra javascript code
+
+ ob_start();
+
+?>
+
+<script language="javascript" >
+<!--
+<?php  
+
+if($stb)
+echo '
+function startbot(d)
+{
+	if(d=="r") repabotwin=window.open("technik-repabot.php'.URL_REDIRECT_APPEND.'","repabotwin","width=300,height=150,menubar=no,resizable=yes,scrollbars=yes");
+	else if(d=="f") fragebotwin=window.open("technik-fragebot.php'.URL_REDIRECT_APPEND.'","fragebotwin","width=300,height=150,menubar=no,resizable=yes,scrollbars=yes");
+}
+';
 ?>
 // -->
-</script> 
+</script>
 
 <?php
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-?></HEAD>
 
-<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php 
-if($stb==1) echo 'onLoad="startbot(\'r\')" ';
- else if($stb==2) echo 'onLoad="startbot(\'f\')" ';
-if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+	$sTemp = ob_get_contents();
+ob_end_clean();
+$smarty->append('JavaScript',$sTemp);
 
-<table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
-<tr valign=top>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="45"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG> &nbsp; <?php echo $LDTechSupport ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])echo'<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('submenu1.php','<?php echo $LDTechSupport ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
-</tr>
-<tr valign=top >
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2><p><br>
-<ul>
+ # Prepare the submenu icons
 
-    <TABLE cellSpacing=0 cellPadding=0  bgColor=#999999 border=0>
-        <TBODY>
-        <TR>
-          <TD>
-            <TABLE cellSpacing=1 cellPadding=3  bgColor=#999999 
-            border=0>
-              <TBODY>
-              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'settings_tree.gif','0') ?>></td>
-                <TD vAlign=top width=150><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B><nobr>
-				 <a href="technik-reparatur-anfordern.php<?php echo URL_APPEND ?>"><?php echo $LDReRepair ?></a>
-				  </nobr></B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDReRepairTxt ?></FONT></TD>
-              <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  <?php echo createComIcon($root_path,'pixel.gif','0'); ?> 
-                  width=5></TD></TR>
-              <TR bgColor=#eeeeee> <td align=center><img <?php echo createComIcon($root_path,'sitemap_animator.gif','0') ?>></td>
-                <TD vAlign=top width=150><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B><nobr>
-				<a href="technik-bot-pass.php<?php echo URL_APPEND ?>&mode=repabot"><?php echo $LDRepabotActivate ?></a></nobr>
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><nobr><?php echo $LDRepabotActivateTxt ?></nobr></FONT></TD></TR>
-              <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  <?php echo createComIcon($root_path,'pixel.gif','0'); ?>
-                  width=5></TD></TR>
-              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'icn_rad.gif','0') ?>></td>
-                <TD vAlign=top width=150><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B> 
-   				<a href="technik-reparatur-melden.php<?php echo URL_APPEND ?>"><?php echo $LDRepairReport ?></B></a></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><nobr><?php echo $LDRepairReportTxt ?></nobr></FONT></TD></TR>
-              
-              <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  <?php echo createComIcon($root_path,'pixel.gif','0'); ?>
-                  width=5></TD></TR>
-				  
-               <TR bgColor=#eeeeee> <td align=center><img <?php echo createComIcon($root_path,'eyeglass.gif','0') ?>></td>
-                <TD vAlign=top width=150><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B><nobr>
-				<a href="technik-report-arch.php<?php echo URL_APPEND ?>"><?php echo $LDReportsArchive ?></a></nobr>
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><nobr><?php echo $LDReportsArchiveTxt ?></nobr></FONT></TD></TR>
-              <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  <?php echo createComIcon($root_path,'pixel.gif','0'); ?>
-                  width=5></TD></TR>
-				  
-             <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'discussions.gif','0') ?>></td>
-                <TD vAlign=top width=150><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B>
-				<a href="technik-questions.php<?php echo URL_APPEND ?>"><nobr><?php echo $LDQuestions ?></nobr></a>
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDQuestionsTxt ?></FONT></TD></TR>
-              <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  <?php echo createComIcon($root_path,'pixel.gif','0'); ?>
-                  width=5></TD></TR>
-               <TR bgColor=#eeeeee> <td align=center><img <?php echo createComIcon($root_path,'sitemap_animator.gif','0') ?>></td>
-                <TD vAlign=top width=150><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B><nobr>
-				<a href="technik-bot-pass.php<?php echo URL_APPEND ?>&mode=fragebot"><?php echo $LDQBotActivate ?></a></nobr>
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><nobr><?php echo $LDQBotActivateTxt ?></nobr></FONT></TD></TR>
-<!--               <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  <?php echo createComIcon($root_path,'pixel.gif','0'); ?>
-                  width=5></TD></TR>
-             <TR bgColor=#eeeeee>  <td align=center><img <?php echo createComIcon($root_path,'info2.gif','0') ?>></td>
-                <TD vAlign=top width=150><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B>
-			 <nobr><a href="technik-info.php<?php echo URL_APPEND ?>"><?php echo $LDInfo ?></a></nobr>
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDInfoTxt ?></FONT></TD></TR>
- -->                         
-		</TBODY>
-		</TABLE>
-		</TD></TR>
-		</TBODY>
-		</TABLE>
-<p>
-<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  alt="<?php echo $LDClose ?>" align="middle"></a>
-<p>
-</ul>
+ $aSubMenuIcon=array(createComIcon($root_path,'settings_tree.gif','0'),
+										createComIcon($root_path,'sitemap_animator.gif','0'),
+										createComIcon($root_path,'icn_rad.gif','0'),
+										createComIcon($root_path,'eyeglass.gif','0'),
+										createComIcon($root_path,'discussions.gif','0'),
+										createComIcon($root_path,'sitemap_animator.gif','0')
+										);
 
-</FONT>
-<p>
-</td>
-</tr>
-<tr>
-<td bgcolor=<?php echo $cfg['bot_bgcolor']; ?> height=70 colspan=2>
-<?php
-require($root_path.'include/inc_load_copyrite.php');
+# Prepare the submenu item descriptions
+
+$aSubMenuText=array($LDReRepairTxt,
+										$LDRepabotActivateTxt,
+										$LDRepairReportTxt,
+										$LDReportsArchiveTxt,
+										$LDQuestionsTxt,
+										$LDQBotActivateTxt
+										);
+
+# Prepare the submenu item links indexed by their template tags
+
+$aSubMenuItem=array('LDPharmaOrder' => "<a href=\"technik-reparatur-anfordern.php".URL_APPEND."\">$LDReRepair</a>",
+										'LDHow2Order' => "<a href=\"technik-bot-pass.php".URL_APPEND."&mode=repabot\">$LDRepabotActivate</a>",
+										'LDOrderCat' => "<a href=\"technik-reparatur-melden.php".URL_APPEND."\">$LDRepairReport</a>",
+										'LDOrderArchive' => "<a href=\"technik-report-arch.php".URL_APPEND."\">$LDReportsArchive</a>",
+										'LDPharmaDb' => "<a href=\"technik-questions.php".URL_APPEND."\">$LDQuestions</a>",
+										'LDOrderBotActivate' => "<a href=\"technik-bot-pass.php".URL_APPEND."&mode=fragebot\">$LDQBotActivate</a>",
+										);
+
+# Create the submenu rows
+
+$iRunner = 0;
+
+while(list($x,$v)=each($aSubMenuItem)){
+	$sTemp='';
+	ob_start();
+		if($cfg['icons'] != 'no_icon') $smarty2->assign('sIconImg','<img '.$aSubMenuIcon[$iRunner].'>');
+		$smarty2->assign('sSubMenuItem',$v);
+		$smarty2->assign('sSubMenuText',$aSubMenuText[$iRunner]);
+		$smarty2->display('common/submenu_row.tpl');
+ 		$sTemp = ob_get_contents();
+ 	ob_end_clean();
+	$iRunner++;
+	$smarty->assign($x,$sTemp);
+}
+
+# Assign the submenu to the mainframe center block
+
+ $smarty->assign('sMainBlockIncludeFile','tech/submenu_technik.tpl');
+
+  /**
+ * show Template
+ */
+
+ $smarty->display('common/mainframe.tpl');
 ?>
-</td>
-</tr>
-</table>        
-</FONT>
-</BODY>
-</HTML>

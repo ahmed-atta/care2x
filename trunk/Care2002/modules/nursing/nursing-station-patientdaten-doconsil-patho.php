@@ -5,7 +5,7 @@ require($root_path.'include/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.net, elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -30,15 +30,6 @@ else
 }
 
 require_once($root_path.'include/inc_front_chain_lang.php');
-
- /**
- * LOAD Smarty
- */
-
- # Note: it is advisable to load this after the inc_front_chain_lang.php so
- # that the smarty script can use the user configured template theme
- require_once($root_path.'gui/smarty_template/smarty_care.class.php');
- $smarty = new smarty_care('nursing');
 
 $thisfile='nursing-station-patientdaten-doconsil-patho.php';
 
@@ -68,20 +59,7 @@ $enc_obj=new Encounter;
 	 {		
 
 	    if( $enc_obj->loadEncounterData($pn)) {
-/*		
-			include_once($root_path.'include/care_api_classes/class_globalconfig.php');
-			$GLOBAL_CONFIG=array();
-			$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
-			$glob_obj->getConfig('patient_%');	
-			switch ($enc_obj->EncounterClass())
-			{
-		    	case '1': $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-		                   break;
-				case '2': $full_en = ($pn + $GLOBAL_CONFIG['patient_outpatient_nr_adder']);
-							break;
-				default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-			}		
-*/			$full_en=$pn;				
+			$full_en=$pn;
 			if($enc_obj->is_loaded){
 				$result=&$enc_obj->encounter;
 			}
@@ -243,63 +221,44 @@ $enc_obj=new Encounter;
 		   }
 
 # Start the smarty templating
-
  /**
- * HEAD META definition
+ * LOAD Smarty
  */
- $smarty->assign('setCharSet',setCharSet());
 
- /**
- * Toolbar
- */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+ # param 2 = initialize gui
+ # param 3 = display copyright footer
+ # param 4 = load standard javascripts
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('nursing');
 
  if(!isset($edit) || empty($edit)) $smarty->assign('edit',FALSE);
 
- # Added for the html tag direction
- $smarty->assign('HTMLtag',html_ret_rtl($lang));
-
- # Set colors
- $smarty->assign('top_txtcolor',$cfg['top_txtcolor']);
- $smarty->assign('top_bgcolor',$cfg['top_bgcolor']);
- $smarty->assign('body_bgcolor',$cfg['body_bgcolor']);
- $smarty->assign('body_txtcolor',$cfg['body_txtcolor']);
  $smarty->assign('bgc1',$bgc1);
 
- $smarty->assign('gifHilfeR',createLDImgSrc($root_path,'hilfe-r.gif','0') );
- $smarty->assign('LDCloseAlt',$LDCloseAlt );
- $smarty->assign('gifClose2',createLDImgSrc($root_path,'close2.gif','0') );
-
-# Added for the common header top block
+# Title in toolbar
 
  $smarty->assign('sToolbarTitle',"$LDDiagnosticTest ::  $formtitle");
 
- if($user_origin=='lab'){
+ if($user_origin=='lab' && $edit){
 	$smarty->assign('pbAux1',$thisfile."?sid=$sid&lang=$lang&station=$station&user_origin=$user_origin&status=$status&target=patho&noresize=$noresize");
 	$smarty->assign('gifAux1',createLDImgSrc($root_path,'newpat2.gif','0') );
  }
 
- $smarty->assign('pbBack','javascript:window.history.back()');
- $smarty->assign('gifBack2',createLDImgSrc($root_path,'back2.gif','0') );
+ # href for help button
+ $smarty->assign('pbHelp','javascript:gethelp(\'request_patho.php\')');
 
-
- # Added for the common header top block
- $smarty->assign('pbHelp','javascript:gethelp(\'request_patho.php\',\''.$pn.'\')');
-
+ # href for close button
  $smarty->assign('breakfile',$breakfile);
 
- if($cfg['dhtml']) {
-  $smarty->assign('dhtml','style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"');
- } else {
-  $smarty->assign('dhtml','');
- }
-
-
  # Window bar title
- $smarty->assign('title',$LDDiagnosticTest);
+ $smarty->assign('sWindowTitle',"$LDDiagnosticTest ::  $formtitle");
  $smarty->assign('Name',$station);
- 
+
  # Space gif for the input blocks
- 
+
  $smarty->assign('gifVSpacer','<img src="'.$root_path.'gui/img/common/default/pixel.gif" border=0 width=20 height=45 align="left">');
 
  /**
@@ -363,7 +322,6 @@ function printOut()
 	testprintout<?php echo $sid ?>=window.open(urlholder,"testprintout<?php echo $sid ?>","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
     testprintout<?php echo $sid ?>.print();
 }
-
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
 //-->
 </script>
@@ -373,24 +331,15 @@ function printOut()
 
 <?php
 
- require($root_path.'include/inc_js_gethelp.php');
- require($root_path.'include/inc_css_a_hilitebu.php');
+$sTemp = ob_get_contents();
+ob_end_clean();
 
- $sTemp = ob_get_contents();
- ob_end_clean();
- $smarty->assign('JavaScript',$sTemp);
-
-# Set  document body attributes
-
-$smarty->assign('bgcolor','bgcolor='.$cfg['body_bgcolor']);
+$smarty->append('JavaScript',$sTemp);
 
 $jsbuffer='onLoad="if (window.focus) window.focus(); ';
 
 if($pn=="") $smarty->assign('sOnLoadJs',$jsbuffer.' document.searchform.searchkey.focus();"');
 	else $smarty->assign('sOnLoadJs',$jsbuffer.'"');
-
-if (!$cfg['dhtml']) $smarty->assign('sLinkColors','link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']);
-	else $smarty->assign('sLinkColors','');
 
 # Set the javascript resizer code
 if(!$noresize){
@@ -405,28 +354,27 @@ if(!$noresize){
 
 if($edit){
 
-$smarty->assign('edit',TRUE);
+	$smarty->assign('edit',TRUE);
 
-# collect output to buffer
-ob_start();
+	# collect output to buffer
+	ob_start();
 
 ?>
 		<form name="form_test_request" method="post" action="<?php echo $thisfile ?>" onSubmit="return chkForm(this)">
 <?php
-/* If in edit mode display the control buttons */
+	
+	/* If in edit mode display the control buttons */
+	$controls_table_width=700;
 
-$controls_table_width=700;
+	require($root_path.'include/inc_test_request_controls.php');
 
-require($root_path.'include/inc_test_request_controls.php');
-
- $sTemp = ob_get_contents();
- ob_end_clean();
- $smarty->assign('form_headers',$sTemp);
+ 	$sTemp = ob_get_contents();
+ 	ob_end_clean();
+ 	$smarty->assign('form_headers',$sTemp);
 
 }elseif(!$read_form && !$no_proc_assist){
 
-
-
+	$smarty->assign('show_selectprompt',TRUE);
 	$smarty->assign('imgAngledown','<img '.createComIcon($root_path,'angle_down_l.gif','0').'>');
     $smarty->assign('LDPlsSelectPatientFirst',$LDPlsSelectPatientFirst);
     $smarty->assign('imgMascot','<img '.createMascot($root_path,'mascot1_l.gif','0','absmiddle').'>');
@@ -579,36 +527,27 @@ if($edit){
 
 if($edit){
 
-# Collect buffer output
-ob_start();
+	# Collect buffer output
+	ob_start();
 
-/* If in edit mode display the control buttons */
-require($root_path.'include/inc_test_request_controls.php');
+	/* If in edit mode display the control buttons */
+	include($root_path.'include/inc_test_request_controls.php');
 
-require($root_path.'include/inc_test_request_hiddenvars.php');
+	include($root_path.'include/inc_test_request_hiddenvars.php');
 
-echo '</form>';
+	echo '</form>';
 
-$sTemp = ob_get_contents();
-ob_end_clean();
-$smarty->assign('form_footers',$sTemp);
+	$sTemp = ob_get_contents();
+	ob_end_clean();
+	$smarty->assign('form_footers',$sTemp);
 }
-
-
- /**
- * show Copyright
- * managed in smarty_care.class.php
- */
-
- $smarty->assign('sCopyright',$smarty->Copyright());
- $smarty->assign('sPageTime',$smarty->Pagetime());
 
  /**
  * show Template
  */
 
- $smarty->display('laboratory/request_pathology.tpl');
+ $smarty->assign('sMainBlockIncludeFile','laboratory/request_pathology.tpl');
  // $smarty->display('debug.tpl');
 
+ $smarty->display('common/mainframe.tpl');
 ?>
-

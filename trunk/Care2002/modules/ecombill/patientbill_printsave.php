@@ -14,7 +14,9 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_core.php');
 $core= new Core;
 
-	ob_start();
+//$db->debug=1;
+
+	//ob_start();
 	/*include('includes/condb.php');
 	error_reporting(0);
 	connect_db();*/
@@ -27,9 +29,10 @@ $core= new Core;
 	
 		
 	/* $billquery="INSERT INTO care_billing_bill (bill_bill_no, bill_encounter_nr, bill_date_time, bill_amount, bill_outstanding) VALUES ($billno,$patientno,'$presdatetime',$total,$outstanding)";*/
-	
-	echo $billquery="INSERT INTO care_billing_bill (bill_bill_no, bill_encounter_nr, bill_date_time, bill_amount, bill_outstanding) VALUES ($billno,$patientno,'$presdate',$total,$outstanding)";
-	
+	$billquery="INSERT INTO care_billing_bill (bill_bill_no, bill_encounter_nr, bill_date_time, bill_amount, bill_outstanding) VALUES ($billno,$patientno,'$presdate',$total,$outstanding)";
+
+	//echo $billquery="INSERT INTO care_billing_bill (bill_bill_no, bill_encounter_nr, bill_date_time, bill_amount, bill_outstanding) VALUES ($billno,$patientno,'$presdate',$total,$outstanding)";
+
 		
 	$core->Transact($billquery);
 

@@ -1,11 +1,11 @@
 <?php
-error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+//error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -27,415 +27,128 @@ $HTTP_SESSION_VARS['sess_title']=$LDEditTitle.'::'.$LDSubmitNews;
 //$HTTP_SESSION_VARS['sess_user_origin']='main_start';
 $HTTP_SESSION_VARS['sess_path_referer']=$top_dir.$thisfile;
 $HTTP_SESSION_VARS['sess_dept_nr']=0; // reset the department number used in the session
-?>
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
 
-<script language="javascript">
-<!-- 
-var urlholder;
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
 
-  function bdienstwin(){
-	winspecs="width=800,height=600,menubar=no,resizable=yes,scrollbars=yes";
-	urlholder="spediens-bdienst-zeit-erfassung.php<?php echo URL_APPEND; ?>";
-	stationwin=window.open(urlholder,"bdienst",winspecs);
-	}
-function closewin()
-{
-	location.href='startframe.php<?php echo URL_APPEND; ?>';
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
+
+ # Create a helper smarty object without reinitializing the GUI
+ $smarty2 = new smarty_care('common', FALSE);
+
+# Toolbar title
+
+ $smarty->assign('sToolbarTitle',$LDSpexFunctions);
+
+ # href for the help button
+ $smarty->assign('pbHelp',"javascript:gethelp('submenu1.php','$LDSpexFunctions')");
+
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('title',$LDSpexFunctions);
+
+ # Prepare the submenu icons
+
+ $aSubMenuIcon=array(createComIcon($root_path,'notepad.gif','0'),
+										createComIcon($root_path,'dollarsign.gif','0'),
+										createComIcon($root_path,'man-gr.gif','0'),
+										createComIcon($root_path,'lockfolder.gif','0'),
+										createComIcon($root_path,'home2.gif','0'),
+										createComIcon($root_path,'camera_s.gif','0'),
+										createComIcon($root_path,'video.gif','0'),
+										createComIcon($root_path,'post_discussion.gif','0'),
+										createComIcon($root_path,'calmonth.gif','0'),
+										createComIcon($root_path,'bubble.gif','0'),
+										createComIcon($root_path,'calendar.gif','0'),
+										createComIcon($root_path,'settings_tree.gif','0'),
+										createComIcon($root_path,'padlock.gif','0'),
+										createComIcon($root_path,'discussions.gif','0')
+										);
+
+# Prepare the submenu item descriptions
+
+$aSubMenuText=array($LDPluginsTxt,
+										$LDBillingTxt,
+										$LDPersonellMngmntTxt,
+										$LDInsuranceCoMngrTxt,
+										$LDAddressMngrTxt,
+										$LDPhotoLabTxt,
+										$LDWebCamTxt,
+										$LDStandbyDutyTxt,
+										$LDCalendarTxt,
+										$LDNewsTxt,
+										$LDCalcTxt,
+										$LDUserConfigOptTxt,
+										$LDAccessPwTxt,
+										$LDNewsgroupTxt
+										);
+
+# Prepare the submenu item links indexed by their template tags
+
+$aSubMenuItem=array('LDPlugins' => '<a href="'.$root_path.'plugins/plugins.php'.URL_APPEND.'">'.$LDPlugins.'</a>',
+										'LDBilling' => '<a href="'.$root_path.'modules/ecombill/ecombill_pass.php'.URL_APPEND.'">'. $LDBilling.'</a>',
+										'LDPersonellMngmnt' => '<a href="'.$root_path.'modules/personell_admin/personell_admin_pass.php'.URL_APPEND.'&retpath=spec&target=personell_reg">'.$LDPersonellMngmnt.'</a>',
+										'LDInsuranceCoMngr' => '<a href="'.$root_path.'modules/insurance_co/insurance_co_manage_pass.php'.URL_APPEND.'">'. $LDInsuranceCoMngr.'</a>',
+										'LDAddressMngr' => '<a href="'.$root_path.'modules/address/address_manage_pass.php'.URL_APPEND.'">'. $LDAddressMngr.'</a>',
+										'LDPhotoLab' => '<a href="'.$root_path.'modules/fotolab/fotolab_pass.php'.URL_APPEND.'&ck_config='.$ck_config.'">'.$LDPhotoLab.'</a>',
+										'LDWebCam' => '<a href="../modules/video_monitor/video_monitoring.php'.URL_APPEND.'">'.$LDWebCam.'</a>',
+										'LDStandbyDuty' => '<a href="'.$root_path.'main/spediens-bdienst-zeit-erfassung.php'.URL_APPEND.'&retpath=spec">'.$LDStandbyDuty.'</a>',
+										'LDCalendar' => '<a href="'.$root_path.'modules/calendar/calendar.php'.URL_APPEND.'">'. $LDCalendar.'</a>',
+										'LDNews' => '<a href="'.$root_path.'modules/news/editor-pass.php'.URL_APPEND.'&dept_nr=1&title='.$LDEditTitle.'">'.$LDNews.'</a>',
+										'LDCalc' => '<a href="'.$root_path.'modules/tools/calculator.php'.URL_APPEND.'">'. $LDCalc.'</a>',
+										'LDUserConfigOpt' => '<a href="config_options.php'.URL_APPEND.'">'. $LDUserConfigOpt.'</a>',
+										'LDAccessPw' => '<a href="'.$root_path.'modules/myintranet/my-passw-change.php'.URL_APPEND.'">'. $LDAccessPw.'</a>',
+										'LDNewsgroup' => '<a href="http://www.mail-archive.com/care2002-developers@lists.sourceforge.net/">'.$LDNewsgroup.'</a>'
+										);
+
+# Create the submenu rows
+
+$iRunner = 0;
+
+while(list($x,$v)=each($aSubMenuItem)){
+	$sTemp='';
+	ob_start();
+		if($cfg['icons'] != 'no_icon') $smarty2->assign('sIconImg','<img '.$aSubMenuIcon[$iRunner].'>');
+		$smarty2->assign('sSubMenuItem',$v);
+		$smarty2->assign('sSubMenuText',$aSubMenuText[$iRunner]);
+		$smarty2->display('common/submenu_row.tpl');
+ 		$sTemp = ob_get_contents();
+ 	ob_end_clean();
+	$iRunner++;
+	$smarty->assign($x,$sTemp);
 }
-// -->
-</script>
 
-<?php 
-require_once($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-?>
+# Create conditional submenu items
 
-</HEAD>
+if(($cfg['bname']=="msie")&&($cfg['bversion']>4)){
+	$sTemp='';
+	ob_start();
+		if($cfg['icons'] != 'no_icon') $smarty2->assign('sIconImg','<img '.createComIcon($root_path,'uhr.gif','0').'>');
+		$smarty2->assign('sSubMenuItem','<a href="'.$root_path.'modules/tools/clock.php?sid='.$sid.'&lang='.$lang.'">'.$LDClock.'</a>');
+		$smarty2->assign('sSubMenuText',$LDDigitalClock);
+		$smarty2->display('common/submenu_row.tpl');
+ 		$sTemp = ob_get_contents();
+ 	ob_end_clean();
 
-<BODY  topmargin=0 leftmargin=0  marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } 
-?> >
+	$smarty->assign('LDClock',$sTemp);
+	$smarty->assign('bShowClock',TRUE);
+}
 
+# Assign the submenu to the mainframe center block
 
-<table width=100% border=0 cellspacing=0 height=100%>
+ $smarty->assign('sMainBlockIncludeFile','common/submenu_specialtools.tpl');
 
-<tr valign=top height=10>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" >
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG>&nbsp;<?php echo $LDSpexFunctions ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right><?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a 
-href="javascript:gethelp('submenu1.php','<?php echo $LDSpexFunctions ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?> <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
-</tr>
-<tr valign=top >
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colSpan=3><p><br>
-<ul>
+ /**
+ * show Template
+ */
 
-
-      <TABLE cellSpacing=0 cellPadding=0  bgColor=#999999 border=0>
-        <TBODY>
-        <TR>
-          <TD>
-            <TABLE cellSpacing=1 cellPadding=3  bgColor=#999999 
-            border=0>
-              <TBODY>
-
-              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'dollarsign.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B><nobr>
-				  <a href="<?php echo $root_path ?>modules/ecombill/ecombill_pass.php<?php echo URL_APPEND; ?>"><?php echo $LDBilling ?></a>
-				  </nobr></B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDBillingTxt ?></FONT></TD>
-				 </tr>
-              <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>
-
-              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'man-gr.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B><nobr>
-				  <a href="<?php echo $root_path ?>modules/personell_admin/personell_admin_pass.php<?php echo URL_APPEND; ?>&retpath=spec&target=personell_reg"><?php echo $LDPersonellMngmnt ?></a>
-				  </nobr></B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDPersonellMngmntTxt ?></FONT></TD>
-				 </tr>
-              <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>
-
-              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'lockfolder.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B><nobr>
-				  <a href="<?php echo $root_path ?>modules/insurance_co/insurance_co_manage_pass.php<?php echo URL_APPEND; ?>"><?php echo $LDInsuranceCoMngr ?></a>
-				  </nobr></B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDInsuranceCoMngrTxt ?></FONT></TD>
-				 </tr>
-              <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>
-				  			  			  			  
-              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'home2.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B><nobr>
-				  <a href="<?php echo $root_path ?>modules/address/address_manage_pass.php<?php echo URL_APPEND; ?>"><?php echo $LDAddressMngr ?></a>
-				  </nobr></B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDAddressMngrTxt ?></FONT></TD>
-				 </tr>
-				 
-              <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>
-              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'camera_s.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B>
-				 <a href="<?php echo $root_path ?>modules/fotolab/fotolab_pass.php<?php echo URL_APPEND."&ck_config=$ck_config";?>"><?php echo $LDPhotoLab ?></a> 
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDPhotoLabTxt ?> </FONT></TD></TR>
-
-<!--               <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>
-              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'video.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B>
-				 <a href="http://www.care2x.info/care-cam/login.php?ret_link=%2Fcare-cam%2Fswitchboard.php%3Fs_switchboard_name%3D1&type=notLogged">CARE-CAM</a> 
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2>Sven Köchel's advance camera monitoring system</FONT></TD></TR>				  
- -->				  
-              <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>
-              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'video.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B>
-				 <a href="../modules/video_monitor/video_monitoring.php<?php echo URL_APPEND;?>"><?php echo $LDWebCam ?></a> 
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDWebCamTxt ?></FONT></TD></TR>				  
-				  
-<!--               <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>				  			  			  			  
-              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'timeplan.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B><nobr>
-				  <a href="<?php echo $root_path ?>main/spediens-ado.php?sid=<?php echo "$sid&lang=$lang" ?>&retpath=spec"><?php echo $LDDutyPlanOrg ?></a>
-				  </nobr></B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDDutyPlanOrgTxt ?></FONT></TD>
-              </td>
-			  </tr> -->
-			  
-			  <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>
-			<TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'post_discussion.gif','0') ?> border=0 width=20 height=20></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B><nobr>
-				  <a href="<?php echo $root_path ?>main/spediens-bdienst-zeit-erfassung.php?sid=<?php echo "$sid&lang=$lang" ?>&retpath=spec"><?php echo $LDStandbyDuty ?></a>
-				  </nobr></B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDStandbyDutyTxt ?></FONT></TD>
-              </td>
-			  </tr>
-			  
-			  <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>              
-<!-- 			<TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'thum_upr.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B> 
-   				<a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><nobr><?php echo $LDHandStat ?></nobr></a></B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDHandStatTxt ?></FONT></TD></TR>
-              </td><TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>
- -->              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'calmonth.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B>
-				<a href="<?php echo $root_path ?>modules/calendar/calendar.php<?php echo URL_APPEND; ?>"><?php echo $LDCalendar ?></a></B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDCalendarTxt ?></FONT></TD></TR>
-              <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>
-              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'bubble.gif','0') ?> border=0 width=15 height=14></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B>
-				  <a href="<?php echo $root_path ?>modules/news/editor-pass.php?sid=<?php echo "$sid&lang=$lang" ?>&dept_nr=1&title=<?php echo $LDEditTitle ?>"><?php echo $LDNews ?></a>
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDNewsTxt ?></FONT></TD></TR>
-              <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>
-<!--               <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'mail.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B>
-			 <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo $LDMemo ?></a>
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDMemoTxt ?></FONT></TD></TR>
-              <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>
-              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'task_tree.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B>
-				    <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><nobr><?php echo $LDBlackBoard ?></nobr></a>
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDBlackBoardTxt ?></FONT></TD></TR>
-            <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>
- --> 
-  <!--               <TR bgColor=#eeeeee><td align=center><img src="../img/new_group.gif" border=0 width=20 height=20></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B>
-				<a href="../forum/index.php?lang=en"><?php echo $LDForum ?></a>
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><nobr><?php echo $LDForumTxt ?></nobr></FONT></TD></TR>
-              <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>
- -->
-               <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'calendar.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B><a href="<?php echo $root_path ?>modules/tools/calculator.php<?php echo URL_APPEND; ?>"><?php echo $LDCalc ?></a>
-				   </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" size=2><?php echo $LDCalcTxt ?></FONT></TD></TR>
-				 <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>
-				  <?php if(($cfg['bname']=="msie")&&($cfg['bversion']>4))
-					{ 
-				?>
-							<TR bgColor="#eeeeee"> <TD><img <?php echo createComIcon($root_path,'uhr.gif','0') ?>></td>
-                			<TD vAlign=top ><FONT 
-                  			face="Verdana,Helvetica,Arial" size=2><B>
-				<?php			
-    					echo '		<a href="'.$root_path.'modules/tools/clock.php?sid='.$sid.'&lang='.$lang.'">'.$LDClock.'</a></td>
-								<TD><FONT face="Verdana,Helvetica,Arial" size=2>'.$LDDigitalClock.'</FONT>';	
-				?>
-				</TD></TR>
-              <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>				
-				<?php
-				   }
-				?> 
-
-
-              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'settings_tree.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B>
-				<a href="config_options.php<?php echo URL_APPEND; ?>"><?php echo $LDUserConfigOpt ?></a>
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDUserConfigOptTxt ?></FONT></TD></TR>
-<!-- 	              <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>
-			  
-              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'settings_tree.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B>
-				<a href="colorchg.php?uid=<?php echo $r; ?>&sid=<?php echo "$sid&lang=$lang";?>"><?php echo $LDColorOpt ?></a>
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDColorOptTxt ?></FONT></TD></TR>
-              <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>
-				  
-				  <?php if($cfg['dhtml'])
-					{ echo '<TR bgColor=#eeeeee>
-   								 <td align=center><img '.createComIcon($root_path,'settings_tree.gif','0').'></td>
-								<TD vAlign=top ><FONT face="Verdana,Helvetica,Arial" size=2><B>
-    							<a href="excolorchg.php?&sid='.$sid.'&lang='.$lang.'"><nobr>'.$LDColorOptExt.'</nobr></a></B></FONT></TD>
-                				<TD><FONT face="Verdana,Helvetica,Arial" 
-                  				size=2>'.$LDColorOptExtTxt.'</FONT></TD></TR>';
- 					}
-				?>
-      
-              <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>
-              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'mem_tree.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B>
-				 <a href="<?php echo $root_path; ?>modules/myintranet/myintranet.php<?php echo URL_APPEND; ?>"><?php echo $LDMyIntranet ?></a> 
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDMyIntranetTxt ?></FONT></TD></TR>
--->               
-			<TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>
-              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'padlock.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B>
-				 <a href="<?php echo $root_path; ?>modules/myintranet/my-passw-change.php<?php echo URL_APPEND; ?>"><?php echo $LDAccessPw ?></a> 
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" size=2><?php echo $LDAccessPwTxt ?></FONT></TD></TR>
-
-<!--				<TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>
-				  
-              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'templates.gif','0') ?> align="absmiddle"></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B>
-				 <a href="http://www.bnf.org/bnf/index.html">BNF 45</a> 
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" size=2>British National Formulary</FONT></TD></TR> 
-
-				<TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>
-              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'redlist.gif','0') ?> align="absmiddle"></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B>
-				 <a href="pharmaindex.php<?php  echo URL_APPEND;  ?>"><?php  echo $LDPharmaIndex;  ?></a> 
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php  echo $LDPharmaIndexTxt;  ?></FONT></TD></TR> 
-
-               <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>
-              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'templates.gif','0') ?> align="absmiddle"></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B>
-				 <a href="<?php echo $root_path.'index.php'.URL_APPEND;
-				 				 if(($cfg['mask']==1)||($cfg['mask']=='')) echo '&mask=2'; else echo '&mask=1';?>" target="_top">
-				<?php if(($cfg['mask']==1)||($cfg['mask']=='')) echo $LDDisplay2; else echo $LDDisplay1;?></a> 
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php if(($cfg['mask']==1)||($cfg['mask']=='')) echo $LDDisplay2Txt; else echo $LDDisplay1Txt; ?></FONT></TD></TR> -->
-<!--
-              <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1
-                  src="../../gui/img/common/default/pixel.gif"
-                  width=5></TD></TR>
-              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'top_help.gif','0') ?> align="absmiddle"></td>
-                <TD vAlign=top ><FONT
-                  face="Verdana,Helvetica,Arial" size=2><B>
-				 <a href="http://care2x.de/otrs/customer.pl">
-				<?php  echo $LDTicketedSupport; ?></a>
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial"
-                  size=2><?php  echo $LDTicketedSupportTxt;  ?></FONT></TD></TR>
- -->
-              <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>
-              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'discussions.gif','0') ?> align="absmiddle"></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B>
-				 <a href="http://www.arzt-seite.info/newsgroup/gotodoc.medizin.care2002.dev/thread_frameset.php3?name=gotodoc.medizin.care2002.dev">
-				<?php  echo $LDNewsgroup; ?></a> 
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php  echo $LDNewsgroupTxt;  ?></FONT></TD></TR> 
-		</TBODY>
-		</TABLE>
-		</TD></TR>
-		</TBODY>
-		</TABLE>
-<p>
-<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  alt="<?php echo $LDClose ?>" align="middle"></a>
-
-<p>
-</ul>
-
-</td>
-</tr>
-
-<tr valign=top >
-<td bgcolor="<?php echo $cfg['body_bgcolor']; ?>" colSpan=3> 
-<?php
-require($root_path.'include/inc_load_copyrite.php');
-?>
-</td>
-</tr>
-</table>        
-&nbsp;
-
-</BODY>
-</HTML>
+ $smarty->display('common/mainframe.tpl');
+ // $smarty->display('debug.tpl');
+ ?>

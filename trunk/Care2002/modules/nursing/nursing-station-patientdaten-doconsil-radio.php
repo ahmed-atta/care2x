@@ -5,7 +5,7 @@ require($root_path.'include/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.net, elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -214,21 +214,55 @@ $core = & new Core;
 						     echo "<p>$sql<p>$LDDbNoRead";
 						   }
 						 $mode="save";   
-		   }	    
+		   }
+		   
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('nursing');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle', "$LDDiagnosticTest :: $formtitle");
+
+  # hide back button
+ $smarty->assign('pbBack',FALSE);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('request_radio.php','$pn')");
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',"$LDDiagnosticTest :: $formtitle");
+
+ # Create start new button if user comes from lab
+  if($user_origin=='lab'){
+	$smarty->assign('pbAux1',$thisfile.URL_APPEND."&station=$station&user_origin=$user_origin&status=$status&target=$target&noresize=$noresize");
+	$smarty->assign('gifAux1',createLDImgSrc($root_path,'newpat2.gif','0'));
+}
+
+ if(!$noresize){
+	$sOnLoadJs= 'if (window.focus) window.focus();window.moveTo(0,0); window.resizeTo(1000,740)';
+}else{
+ 	$sOnLoadJs='if (window.focus) window.focus();';
+}
+if($pn=="") $sOnLoadJs = $sOnLoadJs.'document.searchform.searchkey.focus()';
+
+$smarty->assign('sOnLoadJs','onLoad="'.$sOnLoadJs.'"');
+
+ # Collect extra javascript code
+
+ ob_start();
 ?>
 
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
- <TITLE><?php echo "$LDDiagnosticTest $station" ?></TITLE>
-<?php
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-
-?>
 <style type="text/css">
-
 div.fva2_ml10 {font-family: verdana,arial; font-size: 12; margin-left: 10;}
 div.fa2_ml10 {font-family: arial; font-size: 12; margin-left: 10;}
 div.fva2_ml3 {font-family: verdana; font-size: 12; margin-left: 3; }
@@ -284,46 +318,19 @@ function printOut()
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
 <script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
-</HEAD>
-
-<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> 
-onLoad="if (window.focus) window.focus(); 
-<?php if($pn=="") echo "document.searchform.searchkey.focus();" ?>" 
-topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
-
-<?php if(!$noresize)
-{
-?>
-
-<script>	
-      window.moveTo(0,0);
-	 window.resizeTo(1000,740);
-</script>
-
-<?php 
-}
-?>
-
-<table width=100% border=0 cellpadding="5" cellspacing=0>
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php echo "$LDDiagnosticTest :: $formtitle"; //if($user_origin!="lab") echo " (".$station.")"; ?></STRONG></FONT>
-</td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr>
-<?php 
-if($user_origin=='lab')
-{
-?>
-<a href="<?php echo $thisfile."?sid=$sid&lang=$lang&station=$station&user_origin=$user_origin&status=$status&target=$target&noresize=$noresize"; ?>"><img <?php echo createLDImgSrc($root_path,'newpat2.gif','0') ?> <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';?>></a>
-&nbsp;
 <?php
-}
-?><a href="javascript:gethelp('request_radio.php','<?php echo $pn ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';?>></a><a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';?>></a></nobr></td>
-</tr>
-<tr>
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> colspan=2>
- <ul>
+
+$sTemp = ob_get_contents();
+
+ob_end_clean();
+
+$smarty->append('JavaScript',$sTemp);
+
+ob_start();
+
+?>
+
+<ul>
 
 <?php
 if($edit){
@@ -543,16 +550,19 @@ require($root_path.'include/inc_test_request_hiddenvars.php');
 }
 ?>
 
-</FONT>
-
 </ul>
-<p>
-</td>
-</tr>
-</table>        
-<p>
+
 <?php
-require($root_path.'include/inc_load_copyrite.php');
-?>
-</BODY>
-</HTML>
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+# Assign to page template object
+$smarty->assign('sMainFrameBlockData',$sTemp);
+
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
+ ?>

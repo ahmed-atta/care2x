@@ -5,7 +5,7 @@ require($root_path.'include/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.net, elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -107,25 +107,52 @@ if($dblink_ok)
 }else{
 	echo "$LDDbNoLink<br>$sql<br>";
 }
+
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('nursing');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',"$LDNursingReport $station");
+
+ # hide return button
+ $smarty->assign('pbBack',FALSE);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('nursing_report.php','','','$station','$LDNursingReport')");
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',"$LDNursingReport $station");
+
+ # Body Onload JS
+ $sOnLoadJs ='onLoad="if (window.focus) window.focus();';
+if((($mode=='save')||($saved))&&$edit) $sOnLoadJs =$sOnLoadJs.";window.location.href='#bottom';document.berichtform.berichtput.focus()";
+$smarty->assign('sOnLoadJs',$sOnLoadJs.'"');
+
+
+# Collect javascript code
+
+ob_start();
 ?>
 
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
-<?php
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-?>
 <style type="text/css">
-div.fva2_ml10 {font-family: verdana,arial; font-size: 12; margin-left: 10;}
-div.fa2_ml10 {font-family: arial; font-size: 12; margin-left: 10;}
-div.fva2_ml3 {font-family: verdana; font-size: 12; margin-left: 3; }
-div.fa2_ml3 {font-family: arial; font-size: 12; margin-left: 3; }
+div.fva2_ml10 {font-size: 12; margin-left: 10;}
+div.fa2_ml10 {font-size: 12; margin-left: 10;}
+div.fva2_ml3 {font-size: 12; margin-left: 3; }
+div.fa2_ml3 {font-size: 12; margin-left: 3; }
 </style>
 
 <script language="javascript">
-<!-- 
+<!--
   var urlholder;
   var focusflag=0;
   var formsaved=0;
@@ -179,25 +206,19 @@ function endhilite(d){
 <script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
 <script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
-</HEAD>
+<?php
 
-<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> 
-onLoad="if (window.focus) window.focus(); 
-<?php if((($mode=='save')||($saved))&&$edit) echo ";window.location.href='#bottom';document.berichtform.berichtput.focus()"; ?>"  
-topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+$sTemp = ob_get_contents();
+ob_end_clean();
+$smarty->append('JavaScript',$sTemp);
 
+# Buffer page output
 
-<table width=100% border=0 cellpadding="2" cellspacing=0>
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php echo "$LDNursingReport $station"; ?></STRONG></FONT>
-</td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp('nursing_report.php','','','<?php echo $station ?>','<?php echo $LDNursingReport ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
-</tr>
-<tr>
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> colspan=2>
- <ul>
+ob_start();
+
+?>
+
+<ul>
 
 <form name="berichtform" method="post" action="<?php echo $thisfile ?>" onSubmit="return pruf(this)">
 <table   cellpadding="0" cellspacing=1 border="0"  width="650">
@@ -218,7 +239,7 @@ echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid
 
 <?php
 
-echo '<font size="6"  >'.$LDNursingReport.' <p><font size=2>'.$LDPage.' 1/1
+echo '<font size="6">'.$LDNursingReport.' <p><font size=2>'.$LDPage.' 1/1
 		<br><font size=1>'.$LDFrom.'</font> ';
 		if($neff_date_range['fe_date']) echo formatDate2Local($neff_date_range['fe_date'],$date_format);
 		echo ' <font size=1>'.$LDTo.'</font> ';
@@ -268,7 +289,7 @@ if($cnt){
 			<td><div class=fa2_ml3>'.$buf['time'].'</div>
 			</td>
 			<td><div class=fva2_ml3><i>';
-			if(stristr($buf['aux_notes'],'warn')) echo '<img '.createComIcon($root_path,'warn.gif','0','absmiddle').'> ';
+			if(stristr($buf['aux_notes'],'warn')) echo '<img '.createComIcon($root_path,'warn.gif','0','absmiddle',TRUE).'> ';
 			$strbuf=str_replace('~~','</span>',stripcslashes(nl2br($buf['notes'])));	
 			echo str_replace('~','<span style="background:yellow">',$strbuf).'</i></div>
 			</td>
@@ -283,7 +304,7 @@ if($cnt){
 				echo '&nbsp;</div>
 				</td>
 				<td><div class=fva2_ml3><i>';
-				if(stristr($buf['eff_aux_notes'],'warn')) echo '<img '.createComIcon($root_path,'warn.gif','0','absmiddle').'> ';
+				if(stristr($buf['eff_aux_notes'],'warn')) echo '<img '.createComIcon($root_path,'warn.gif','0','absmiddle',TRUE).'> ';
 				$strbuf=str_replace('~~','</span>',stripcslashes(nl2br($buf['eff_notes'])));	
 				echo str_replace('~','<span style="background:yellow">',$strbuf).'</i></div>
 				</td>
@@ -302,15 +323,15 @@ if($edit) {
 		</tr>
 		
 		<tr bgcolor="#99ccff">
-<!-- 		<td valign="top"><font face="verdana,arial" size="2" ><?php echo $LDDate ?>:<br>
+<!-- 		<td valign="top"><?php echo $LDDate ?>:<br>
 		<input type=text size="8" name="dateput" onKeyUp=setDate(this) onFocus=this.select() value="<?php if(!$saved) echo $dateput; ?>"><br>
 		<a href="javascript:document.berichtform.dateput.value='h';setDate(document.berichtform.dateput);"><img <?php echo createComIcon($root_path,'arrow-t.gif','0') ?> alt="<?php echo $LDInsertDate ?>"></a>
 		</td>
  -->		
-        <td valign="top"><font face="verdana,arial" size="2" ><?php echo $LDDate ?>:<br>
+        <td valign="top"><?php echo $LDDate ?>:<br>
 		<input type=text size=10 maxlength=10 name="dateput" value="<?php echo formatDate2Local(date('Y-m-d'),$date_format); ?>" onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onFocus="this.select()" value="<?php if(!$saved) echo $dateput; ?>" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"><br>
 <a href="javascript:show_calendar('berichtform.dateput','<?php echo $date_format ?>')">
- <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a><font size=1 face="arial">[<?php   
+ <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle',TRUE); ?>></a><font size=1 face="arial">[<?php
  $dfbuffer="LD_".strtr($date_format,".-/","phs");
   echo $$dfbuffer;
  ?>]</font>
@@ -319,30 +340,30 @@ if($edit) {
  -->		
          </td>
 		 
-		<td valign="top"><font face="verdana,arial" size="2" ><?php echo $LDClockTime ?>:<br>
+		<td valign="top"><?php echo $LDClockTime ?>:<br>
 		<input type=text size=4 maxlength=5 name="timeput"  value="<?php echo date('H:i'); ?>" onKeyUp=setTime(this,'<?php echo $lang ?>') onFocus=this.select()><br>
 <!-- 		<a href="javascript:document.berichtform.timeput.value='j';setTime(document.berichtform.timeput);"><img <?php echo createComIcon($root_path,'arrow-t.gif','0') ?> alt="<?php echo $LDInsertTimeNow ?>"></a>
  -->		</td>
 		
-		<td><font face="verdana,arial" size="2" ><?php echo $LDNursingReport ?>:<br>&nbsp;<textarea rows="4" cols="25" name="berichtput"><?php if(!$saved) echo $berichtput; ?></textarea><br>
-		<input type="checkbox" name="warn" <?php if((!$saved)&&($warn)) echo "checked"; ?> value="warn"> <img <?php echo createComIcon($root_path,'warn.gif','0','top') ?>>
+		<td><?php echo $LDNursingReport ?>:<br>&nbsp;<textarea rows="4" cols="25" name="berichtput"><?php if(!$saved) echo $berichtput; ?></textarea><br>
+		<input type="checkbox" name="warn" <?php if((!$saved)&&($warn)) echo "checked"; ?> value="warn"> <img <?php echo createComIcon($root_path,'warn.gif','0','top',TRUE) ?>>
 		 <font size=1 face=arial><?php echo $LDInsertSymbol ?><br><font size=2 face=arial><b>
-		 &nbsp;<a href="javascript:sethilite(document.berichtform.berichtput)"><img <?php echo createComIcon($root_path,'color_marker_yellow.gif','0') ?>> <?php echo $LDStart ?></a>
-		<a href="javascript:endhilite(document.berichtform.berichtput)"><img <?php echo createComIcon($root_path,'color_marker_yellow.gif','0') ?>> <?php echo $LDEnd ?></a>
+		 &nbsp;<a href="javascript:sethilite(document.berichtform.berichtput)"><img <?php echo createComIcon($root_path,'color_marker_yellow.gif','0','',TRUE) ?>> <?php echo $LDStart ?></a>
+		<a href="javascript:endhilite(document.berichtform.berichtput)"><img <?php echo createComIcon($root_path,'color_marker_yellow.gif','0','',TRUE) ?>> <?php echo $LDEnd ?></a>
 		</b>
 		</td>
 		
-		<td valign="top"><font face="verdana,arial" size="2" ><?php echo $LDSignature ?>:<br><input type=text size="3" name="author" onFocus=this.select() value="<?php if(!$saved) echo $author; ?>">
+		<td valign="top"><?php echo $LDSignature ?>:<br><input type=text size="3" name="author" onFocus=this.select() value="<?php if(!$saved) echo $author; ?>">
 		</td>
 		
-<!-- 		<td valign="top"><font face="verdana,arial" size="2" ><?php echo $LDDate ?>:<br><input type=text size="8" name="dateput2" value="<?php if(!$saved) echo $dateput2; ?>" onKeyUp="setDate(this)" onFocus="this.select()"><br>
+<!-- 		<td valign="top"><?php echo $LDDate ?>:<br><input type=text size="8" name="dateput2" value="<?php if(!$saved) echo $dateput2; ?>" onKeyUp="setDate(this)" onFocus="this.select()"><br>
 		<a href="javascript:document.berichtform.dateput2.value='h';setDate(document.berichtform.dateput2);"><img <?php echo createComIcon($root_path,'arrow-t.gif','0') ?> alt="<?php echo $LDInsertDate ?>"></a>
 		</td>
  -->		
-		<td valign="top"><font face="verdana,arial" size="2" ><?php echo $LDDate ?>:<br>
+		<td valign="top"><?php echo $LDDate ?>:<br>
 		<input type=text size=10 maxlength=10 name="dateput2" value="<?php echo formatDate2Local(date('Y-m-d'),$date_format); ?>" onBlur="IsValidDate(this,'<?php echo $date_format ?>')"  onFocus="this.select()" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"><br>
 <a href="javascript:show_calendar('berichtform.dateput2','<?php echo $date_format ?>')">
- <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a><font size=1 face="arial">[<?php   
+ <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle',TRUE); ?>></a><font size=1 face="arial">[<?php
  $dfbuffer="LD_".strtr($date_format,".-/","phs");
   echo $$dfbuffer;
  ?>]</font>
@@ -351,22 +372,21 @@ if($edit) {
  -->		
         </td>
 		
-		<td><font face="verdana,arial" size="2" ><?php echo $LDEffectReport ?>:<br>&nbsp;<textarea rows="4" cols="25"  name="berichtput2"><?php if(!$saved) echo $berichtput2; ?></textarea><br>
-		<input type="checkbox" name="warn2" <?php if((!$saved)&&($warn2)) echo "checked"; ?> value="warn"> <img <?php echo createComIcon($root_path,'warn.gif','0','top') ?>> 
-		<font size=1 face=arial><?php echo $LDInsertSymbol ?><br><font size=2 face=arial><b>
-		 &nbsp;<a href="javascript:sethilite(document.berichtform.berichtput2)"><img <?php echo createComIcon($root_path,'color_marker_yellow.gif','0') ?>> <?php echo $LDStart ?></a>
-		<a href="javascript:endhilite(document.berichtform.berichtput2)"><img <?php echo createComIcon($root_path,'color_marker_yellow.gif','0') ?>> <?php echo $LDEnd ?></a>
+		<td><?php echo $LDEffectReport ?>:<br>&nbsp;<textarea rows="4" cols="25"  name="berichtput2"><?php if(!$saved) echo $berichtput2; ?></textarea><br>
+		<input type="checkbox" name="warn2" <?php if((!$saved)&&($warn2)) echo "checked"; ?> value="warn"> <img <?php echo createComIcon($root_path,'warn.gif','0','top',TRUE) ?>>
+		<font size=1><?php echo $LDInsertSymbol ?><br><font size=2><b>
+		 &nbsp;<a href="javascript:sethilite(document.berichtform.berichtput2)"><img <?php echo createComIcon($root_path,'color_marker_yellow.gif','0','',TRUE) ?>> <?php echo $LDStart ?></a>
+		<a href="javascript:endhilite(document.berichtform.berichtput2)"><img <?php echo createComIcon($root_path,'color_marker_yellow.gif','0','',TRUE) ?>> <?php echo $LDEnd ?></a>
 		</b>
 		</td>
-		<td valign="top"><font face="verdana,arial" size="2" ><?php echo $LDSignature ?>:<br><input type=text size="3" name="author2" onFocus=this.select() value="<?php if(!$saved) echo $author2; ?>">
+		<td valign="top"><?php echo $LDSignature ?>:<br><input type=text size="3" name="author2" onFocus=this.select() value="<?php if(!$saved) echo $author2; ?>">
 		</td>
 		</tr>
 		
-<?php 
+<?php
 } 
 ?>
 		</table>
-
 
 <p>
 
@@ -387,10 +407,9 @@ if($edit) {
 <!--<a href="<?php //echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDClose ?>"></a>-->
 
 </td>
-
-
 </tr>
 </table>
+
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
 <input type="hidden" name="lang" value="<?php echo $lang ?>">
 <input type="hidden" name="station" value="<?php echo $station ?>">
@@ -398,16 +417,19 @@ if($edit) {
 <input type="hidden" name="edit" value="<?php echo $edit ?>">
 <input type="hidden" name="mode" value="save">
 </form>
-</FONT>
+
 </ul>
-<p>
-</td>
-</tr>
-</table>        
-<p>
 <?php
-require($root_path.'include/inc_load_copyrite.php');
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+# Assign page output to the mainframe template
+
+$smarty->assign('sMainFrameBlockData',$sTemp);
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
 ?>
-<a name="bottom"></a>
-</BODY>
-</HTML>

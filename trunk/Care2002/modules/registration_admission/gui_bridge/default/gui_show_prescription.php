@@ -1,4 +1,4 @@
-<table border=0 cellpadding=4 cellspacing=1 width=100%>
+<table border=0 cellpadding=4 cellspacing=1 width=100% class="frame">
 <?php
 $toggle=0;
 while($row=$result->FetchRow()){

@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -17,20 +17,20 @@ define('MAX_BLOCK_ROWS',30);
 define('AUTOSHOW_ONERESULT',1); # Defining to 1 will automatically show the admission data if the search result is one, otherwise the single result will be listed
 
 function Cond($item,$k){
-	global $where,$tab,$HTTP_POST_VARS;
+	global $where,$tab,$HTTP_POST_VARS, $sql_LIKE;
 	if(empty($HTTP_POST_VARS[$item])) return false;
 	else{
-		$buf=" $tab.$item LIKE '".$HTTP_POST_VARS[$item]."%'";
+		$buf=" $tab.$item $sql_LIKE '".$HTTP_POST_VARS[$item]."%'";
 		if(!empty($where)) $where.=' AND '.$buf;
 		 else $where=$buf;
 	}
 }
 	
 function fCond($item,$k){
-	global $orwhere,$tab,$HTTP_POST_VARS;
+	global $orwhere,$tab,$HTTP_POST_VARS, $sql_LIKE;
 	if(empty($HTTP_POST_VARS[$item])) return false;
 	else{
-		$buf=" f.class_nr LIKE '".$HTTP_POST_VARS[$item]."%'";
+		$buf=" f.class_nr $sql_LIKE '".$HTTP_POST_VARS[$item]."%'";
 		if(!empty($orwhere)) $orwhere.=' OR '.$buf;
 		 else $orwhere=$buf;
 	}
@@ -42,7 +42,9 @@ $local_user='aufnahme_user';
 require($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_date_format_functions.php');
 
-# Initialize page's control variables
+//$db->debug=1;
+
+# Initialize page´s control variables
 if($mode=='paginate'){
 	$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
 }else{
@@ -86,7 +88,7 @@ if (isset($mode) && ($mode=='search'||$mode=='paginate')){
 		$datecond='';	# date condition
 	 
 		# Walk the arrays in the function to preprocess the search condition data
-		$parray=array('name_last','name_first','date_birth','sex');
+		$parray=array('name_last','name_first','sex');
 		$tab='p';
 		array_walk($parray,'Cond');
 		$earray=array('encounter_nr','encounter_class_nr','current_ward_nr','referrer_diagnosis','referrer_dr','referrer_recom_therapy','referrer_notes','insurance_class_nr');
@@ -102,14 +104,17 @@ if (isset($mode) && ($mode=='search'||$mode=='paginate')){
 	
 		if($date_start){
 			if($date_end){
-				$datecond="(e.encounter_date LIKE '$date_start%' OR e.encounter_date>'$date_start') AND (e.encounter_date<'$date_end' OR e.encounter_date LIKE '$date_end%')";
+				$datecond="(e.encounter_date $sql_LIKE '$date_start%' OR e.encounter_date>'$date_start') AND (e.encounter_date<'$date_end' OR e.encounter_date $sql_LIKE '$date_end%')";
 			}else{
-				$datecond="e.encounter_date LIKE '$date_start%'";
+				$datecond="e.encounter_date $sql_LIKE '$date_start%'";
 			}
 		}elseif($date_end){
-			$datecond="(e.encounter_date< '$date_end' OR e.encounter_date LIKE '$date_end%')";
+			$datecond="(e.encounter_date< '$date_end' OR e.encounter_date $sql_LIKE '$date_end%')";
 		}
 
+		if($date_birth){
+			$datecond="(p.date_birth $sql_LIKE '$date_birth%')";
+		}
 	
 		if(!empty($datecond)){
 			if(empty($where)) $where=$datecond;
@@ -226,7 +231,7 @@ if(!isset($rows)||!$rows) {
 	# Get all encounter classes
 	$encounter_classes=$encounter_obj->AllEncounterClassesObject();
 	# Get the insurance classes */
-	# Create new person's insurance object */
+	# Create new person´s insurance object */
 	$insurance_obj=new Insurance;	 
 	$insurance_classes=&$insurance_obj->getInsuranceClassInfoObject('class_nr,LD_var,name');
 
@@ -241,7 +246,7 @@ if(!isset($rows)||!$rows) {
 	if(!$GLOBAL_CONFIG['patient_service_att_dr_hide']){
 		# Get the attending doctor service classes 
 		$att_dr_service=$encounter_obj->AllAttDrServiceClassesObject();
-	}			
+	}
 }
 # Load GUI page
 require('./gui_bridge/default/gui_aufnahme_list.php');

@@ -3,8 +3,8 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /*
-CARE2X Integrated Information System beta 2.0.0 - 2004-05-16 for Hospitals and Health Care Organizations and Services
-Copyright (C) 2002  Elpidio Latorilla & Intellin.org	
+CARE2X Integrated Information System beta 2.0.1 - 2004-07-04 for Hospitals and Health Care Organizations and Services
+Copyright (C) 2002,2003,2004,2005  Elpidio Latorilla & Intellin.org	
 
 GNU GPL. For details read file "copy_notice.txt".
 */
@@ -62,37 +62,35 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 
 
-<FONT    SIZE=-1  FACE="Arial">
-
-<FONT  COLOR="<?php echo $cfg[top_txtcolor] ?>"  SIZE=6  FACE="verdana"> <b><?php echo $LDPhoneDir ?></b></font>
+<FONT  COLOR="<?php echo $cfg[top_txtcolor] ?>"  SIZE=6> <b><?php echo $LDPhoneDir ?></b></font>
 
 <table width=100% border=1>
 <tr>
-<td bgcolor="navy" >
-<FONT  COLOR="white"  SIZE=+2  FACE="Arial"><STRONG>&nbsp;<?php echo $LDDeleteEntry ?></STRONG></FONT>
+<td class="wardlisttitlerow">
+<FONT  COLOR="white"  SIZE=+2><STRONG>&nbsp;<?php echo $LDDeleteEntry ?></STRONG></FONT>
 </td>
 </tr>
 <tr>
-<td bgcolor="#DDE1EC">
+<td>
 <p><br>
 <center>
 <table  border=1 cellpadding="20" >
 <tr nowrap>
-<td bgcolor="#ffffaa">
-<p><FONT SIZE=2  FACE=Arial>
+<td class="submenu">
+<p>
 <?php echo $LDReallyDelete ?><p>
 
 <table border="0" cellpadding="2" cellspacing="1">
-<tr bgcolor="#0000cc" nowrap>
+<tr class="wardlisttitlerow" nowrap>
 <?php
 	for($i=0;$i<(sizeof($LDEditFields));$i++) 
  	{	
 		if($zeile[$i]!="") 	
-		echo "<td nowrap><FONT color=\"#fffff\" SIZE=2  FACE=Arial><b>".$LDEditFields[$i]."</b></td>\n";
+		echo "<td nowrap>".$LDEditFields[$i]."</td>\n";
    	}
 ?>
 </tr>
-<tr bgcolor="#f9f9f9" nowrap>
+<tr class="wardlistrow2" nowrap>
 <?php
 
 $colstop=sizeof($LDEditFields);
@@ -101,7 +99,7 @@ $colstop=sizeof($LDEditFields);
  	{	
 		if($zeile[$i]!="") 	
 		{
-		    echo "<td nowrap><FONT color=\"#000000\" SIZE=2  FACE=Arial><nobr>";
+		    echo "<td nowrap><nobr>";
 		
 		    if($i == ($colstop-3)) echo formatDate2Local($zeile[$i],$date_format);
 			 elseif($i==($colstop-2)) echo  convertTimeToLocal($zeile[$i]);
@@ -126,7 +124,8 @@ $colstop=sizeof($LDEditFields);
 <input type="hidden" name=linecount value="<?php echo $linecount ?>">
 <input type="hidden" name=pagecount value="<?php echo $pagecount ?>">
 <input type="hidden" name=edit value="<?php echo $edit ?>">
-<INPUT type="submit" name="versand" value="<?php echo $LDYesDelete ?>"></font></FORM>
+<INPUT type="submit" name="versand" value="<?php echo $LDYesDelete ?>">
+</FORM>
 
 <FORM  method=post action="<?php echo $breakfile ?>" >
 <input type="hidden" name=route value="validroute">
@@ -137,7 +136,8 @@ $colstop=sizeof($LDEditFields);
 <input type="hidden" name=linecount value="<?php echo $linecount ?>">
 <input type="hidden" name=pagecount value="<?php echo $pagecount ?>">
 <input type="hidden" name=edit value="<?php echo $edit ?>">
-<INPUT type="submit"  value="<?php echo $LDNoCancel ?>"></font></FORM>
+<INPUT type="submit"  value="<?php echo $LDNoCancel ?>">
+</FORM>
 
 </center>
 </td>
@@ -148,9 +148,7 @@ $colstop=sizeof($LDEditFields);
 </tr>
 </table>        
 <p>
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo $LDHowManage ?></a><br>
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo $LDHowEnter ?></a><br>
-<p>
+
 <?php
 require($root_path.'include/inc_load_copyrite.php');
 ?>

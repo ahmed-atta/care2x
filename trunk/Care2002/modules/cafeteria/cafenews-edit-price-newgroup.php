@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -21,20 +21,14 @@ $dbtable='care_cafe_prices';
 
 if(($groupname)&&($mode=='save'))
 {
-	if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
+	$sql="INSERT INTO $dbtable (lang,article,description) VALUES ('$lang','$groupname','group')";
 
-    if($dblink_ok)
-    {
-
-		 	$sql="INSERT INTO $dbtable (lang,article,description) VALUES ('$lang','$groupname','group')";
-
-			if($ergebnis=$db->Execute($sql))
-       		{
-				header("Location: cafenews-edit-price.php?sid=$sid&lang=$lang&mode=saved_newgroup&groupname=$groupname"); exit;
-			}
-				else echo "<p>".$sql."<p>$LDDbNoSave"; 
-
-  	} else { echo "$LDDbNoLink<br> $sql<br>"; }
+	if($ergebnis=$db->Execute($sql))
+	{
+		header("Location: cafenews-edit-price.php?sid=$sid&lang=$lang&mode=saved_newgroup&groupname=$groupname");
+		exit;
+	}
+		else echo "<p>".$sql."<p>$LDDbNoSave";
 }
 
 ?>
@@ -54,23 +48,24 @@ function chkForm(d)
 }
 </script>
 
+<?php require($root_path.'include/inc_css_a_hilitebu.php'); ?>
 
 </head>
 <body>
-<FONT  SIZE=8 COLOR="#cc6600" FACE="verdana,Arial">
+<FONT  SIZE=8 COLOR="#cc6600">
 <a href="javascript:editcafe()"><img <?php echo createComIcon($root_path,'basket.gif','0') ?>></a> <b><?php echo $LDCafePrices ?></b></FONT>
 <hr>
 <form name="selectform" action="cafenews-edit-price-newgroup.php" onSubmit="return chkForm(this)">
 <table border=0>
   <tr>
     <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0') ?>></td>
-    <td colspan=2><FONT  SIZE=4 COLOR="#000066" FACE="verdana,Arial">
+    <td colspan=2><FONT  SIZE=4 COLOR="#000066">
 			<?php echo $LDEnterGroup ?>
 	</td>
   </tr>
 
     <td>&nbsp;</td>
-    <td bgcolor="ccffff" colspan=2><FONT FACE="verdana,Arial">
+    <td bgcolor="ccffff" colspan=2>
 		&nbsp;<?php echo $LDProdGroup ?>:<br>
 		&nbsp;<input type="text" name="groupname" size=40 maxlength=40>
   <br><p>

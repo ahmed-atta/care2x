@@ -36,58 +36,42 @@
 
 			<tr>
 			<td class="fvag_ml10" align="right">{{$LDEntryDate}} &nbsp;{{$miniCalendar}}</td>
-			<td class=fva0_ml10>
-					{{$entry_date}}
-			</td>
+			<td class=fva0_ml10>{{$entry_date}}</td>
 			</tr>
 
 			<tr>
 			<td class="fvag_ml10" align="right">{{$LDJournalNumber}} &nbsp;</td>
-			<td>
-				{{$val_journal_nr}}
-			</td>
+			<td>	{{$val_journal_nr}}</td>
 			</tr>
 
 			<tr>
 			<td class="fvag_ml10" align="right">{{$LDBlockNumber}} &nbsp;</td>
-			<td>
-				{{$val_blocks_nr}}
-			</td>
+			<td>{{$val_blocks_nr}}</td>
 			</tr>
 
 			<tr>
 			<td class="fvag_ml10" align="right">{{$LDDeepCuts}} &nbsp;</td>
-			<td>
-				{{$val_deep_cuts}}
-			</td>
+			<td>{{$val_deep_cuts}}</td>
 			</tr>
 
 			<tr>
 			<td class="fvag_ml10" align="right">{{$LDSpecialDye}} &nbsp;</td>
-			<td>
-				{{$val_special_dye}}
-			</td>
+			<td>{{$val_special_dye}}	</td>
 			</tr>
 
 			<tr>
 			<td class="fvag_ml10" align="right">{{$LDImmuneHistoChem}} &nbsp;</td>
-			<td>
-				{{$val_immune_histochem}}
-			</td>
+			<td>{{$val_immune_histochem}}</td>
 			</tr>
 
 			<tr>
 			<td class="fvag_ml10" align="right">{{$LDHormoneReceptors}} &nbsp;</td>
-			<td>
-				{{$val_hormone_receptors}}
-			</td>
+			<td>{{$val_hormone_receptors}}</td>
 			</tr>
 
 			<tr>
 			<td class="fvag_ml10" align="right">{{$LDSpecials}} &nbsp;</td>
-			<td>
-				{{$val_specials}}
-			</td>
+			<td>{{$val_specials}}</td>
 			</tr>
 
 		</table>

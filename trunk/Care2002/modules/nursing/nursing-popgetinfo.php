@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -14,21 +14,15 @@ $lang_tables=array('date_time.php');
 define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-$db->debug=true;
+
+//$db->debug=true;
+
 $thisfile=basename(__FILE__);
 
 /* Create charts object */
 require_once($root_path.'include/care_api_classes/class_charts.php');
 $charts_obj= new Charts;
 
-
-
-//$dbtable='care_nursing_station_patients_curve';
-
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok){	
-	// get orig data
 	switch($winid)
 	{
 		case 'diag_ther': $title=$LDDiagnosisTherapy;
@@ -73,10 +67,6 @@ if($dblink_ok){
 			include_once($root_path.'include/inc_date_format_functions.php');
 		}	
 	}
-}else{
-	echo "$LDDbNoLink<br>$sql<br>";
-}
-
 
 ?>
 

@@ -12,8 +12,8 @@ require_once($root_path.'include/care_api_classes/class_encounter.php');
 * Note this class should be instantiated only after a "$db" adodb  connector object
 * has been established by an adodb instance
 * @author Elpidio Latorilla
-* @version beta 2.0.0
-* @copyright 2002,2003,2004,2005 Elpidio Latorilla
+* @version beta 2.0.1
+* @copyright 2002,2003,2004,2005,2005 Elpidio Latorilla
 * @package care_api
 */
 class DRG extends Encounter{
@@ -218,7 +218,7 @@ class DRG extends Encounter{
 	* Language codes that have corresponding ICD tables
 	* @var string
 	*/
-	var $tb_lang_icd='en,de,pt-br,es';
+	var $tb_lang_icd='en,de,pt-br,es,bs';
 	/**
 	* Language codes that have corresponding OPS/ICPM tables
 	* @var string
@@ -991,20 +991,13 @@ class DRG extends Encounter{
 		}
 		
 		$this->sql="SELECT e.encounter_nr,e.encounter_date,e.is_discharged  
-						FROM   $this->tb_enc AS e,
-									$this->tb_enc_drg AS i,
-									$this->tb_diagnosis AS d,
-									$this->tb_procedure AS p
+						FROM   $this->tb_enc AS e
+						LEFT JOIN $this->tb_enc_drg AS i ON  i.encounter_nr=e.encounter_nr AND i.status  NOT  IN ($this->dead_stat)
+						LEFT JOIN $this->tb_diagnosis AS d ON d.encounter_nr=e.encounter_nr AND d.status NOT IN ($this->dead_stat)
+						LEFT JOIN $this->tb_procedure AS p ON p.encounter_nr=e.encounter_nr AND p.status NOT IN ($this->dead_stat)
 						WHERE e.$disc=$nr
-							AND e.status NOT IN ($this->dead_stat) 
-							AND (
-									(i.encounter_nr=e.encounter_nr AND i.status NOT IN ($this->dead_stat))
-									OR 
-									(d.encounter_nr=e.encounter_nr AND d.status NOT IN ($this->dead_stat))
-									OR 
-									(p.encounter_nr=e.encounter_nr AND p.status NOT IN ($this->dead_stat))
-								)
-						GROUP BY e.encounter_nr
+							AND e.status NOT IN ($this->dead_stat)
+						GROUP BY e.encounter_nr,e.encounter_date, e.is_discharged
 						ORDER BY e.encounter_date DESC";
 		//echo $this->sql;
         if($this->res['_gmed']=$db->Execute($this->sql)) {

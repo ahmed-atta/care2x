@@ -5,7 +5,7 @@ require($root_path.'include/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.net, elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -28,57 +28,65 @@ $dept_obj=new Department;
 
 $deptarray=$dept_obj->getAllNoCondition('name_formal');
 
-?>
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
 
-<?php
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',"$LDDepartment :: $LDList");
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('dept_config.php')");
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',"$LDDepartment :: $LDList");
+
+ # Buffer page output
+ ob_start();
+
 ?>
+
 <style type="text/css" name="formstyle">
+
 td.pblock{ font-family: verdana,arial; font-size: 12}
-
 div.box { border: solid; border-width: thin; width: 100% }
-
 div.pcont{ margin-left: 3; }
 
 </style>
 
-</HEAD>
+<?php 
 
-<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> onLoad="if (window.focus) window.focus()" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+$sTemp = ob_get_contents();
+ob_end_clean();
 
+$smarty->append('JavaScript',$sTemp);
 
-<table width=100% border=0 cellpadding="0" cellspacing=0>
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp; <?php echo "$LDDepartment :: $LDList" ?>
-</STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right>
-<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('dept_config.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
-</tr>
-<tr valign=top >
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
+# Buffer page output
+ob_start();
+
+?>
+
  <ul>
-<?php if($rows) { ?>
 
-<img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"><font face="Verdana, Arial" size=3 color="#880000">
-<b><?php echo str_replace("~station~",strtoupper($station),$LDStationExists) ?></b></font><p>
-<?php } ?>
-<font face="Verdana, Arial" size=-1><?php echo $LDEnterAllFields ?>
+<?php echo $LDEnterAllFields ?>
 
 <table border=0>
-  <tr>
+  <tr class="wardlisttitlerow">
 <!-- 	<td bgcolor="#e9e9e9"></td>
  -->    
- 	<td class=pblock align=center bgColor="#eeeeee"><?php echo $LDDept ?></td>
-    <td class=pblock align=center bgColor="#eeeeee"><?php echo $LDDeptStatus ?></td>
-    <td class=pblock align=center bgColor="#eeeeee"><?php echo $LDRecordStatus ?></td>
-    <td class=pblock align=center bgColor="#eeeeee"></td>
+ 	<td class=pblock align=center><?php echo $LDDept ?></td>
+    <td class=pblock align=center><?php echo $LDDeptStatus ?></td>
+    <td class=pblock align=center><?php echo $LDRecordStatus ?></td>
+    <td class=pblock align=center></td>
  </tr> 
   
 <?php
@@ -109,19 +117,20 @@ while(list($x,$v)=each($deptarray)){
 <p>
 
 <a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> border="0"></a>
-</FONT>
 
 </ul>
-
-<p>
-</td>
-</tr>
-</table>        
-<p>
-
 <?php
-require($root_path.'include/inc_load_copyrite.php');
-?>
 
-</BODY>
-</HTML>
+$sTemp = ob_get_contents();
+ ob_end_clean();
+
+# Assign the data  to the main frame template
+
+ $smarty->assign('sMainFrameBlockData',$sTemp);
+
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
+?>

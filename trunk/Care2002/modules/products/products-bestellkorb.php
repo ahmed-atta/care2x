@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -151,8 +151,7 @@ if($mode!=''){
 			if($rows)
 			{
 
-			    $sql="UPDATE $dbtable SET articles='$tart',  modify_id='$encbuf'
-							   		                        WHERE order_nr='".$content['order_nr']."' AND dept_nr='$dept_nr'";
+			    $sql="UPDATE $dbtable SET articles='$tart',  modify_id='$encbuf' WHERE order_nr='".$content['order_nr']."' AND dept_nr='$dept_nr'";
 			}
 			else 
 			{
@@ -278,20 +277,21 @@ if($rows>0){
 $tog=1;
 //$content=$ergebnis->FetchRow();
 echo '<form name=actlist>
-		<font face="Verdana, Arial" size=2 color="#800000">'.$LDActualOrder.':</font>
-		<font face="Arial" size=1> ('.$LDOn.': ';
+		<font size=2 color="#800000">'.$LDActualOrder.':</font>
+		<font size=1> ('.$LDOn.': ';
 		
 		echo formatDate2Local($content['order_date'],$date_format);
 
 		echo ' '.$LDTime.': '.str_replace('24','00',convertTimeToLocal($content['order_time'])).')</font>
 		<table border=0 cellspacing=1 cellpadding=3 width="100%">
-  		<tr bgcolor="#ffffee">';
+  		<tr class="wardlisttitlerow">';
 	for ($i=0;$i<sizeof($LDcatindex);$i++)
 	echo '
-		<td><font face=Verdana,Arial size=1 color="#000080">'.$LDcatindex[$i].'</td>';
+		<td>'.$LDcatindex[$i].'</td>';
 	echo '</tr>';	
 
 $i=1;
+
 $artikeln=explode(" ",$content['articles']);
 for($n=0;$n<sizeof($artikeln);$n++)
  	{
@@ -300,18 +300,18 @@ for($n=0;$n<sizeof($artikeln);$n++)
 	if(!$r['minorder']) $r['minorder']=0;
 	if(!$r['maxorder']) $r['maxorder']=0;
 	if($tog)
-	{ echo '<tr bgcolor="#dddddd">'; $tog=0; }else{ echo '<tr bgcolor="#efefff">'; $tog=1; }
+	{ echo '<tr class="wardlistrow1">'; $tog=0; }else{ echo '<tr class="wardlistrow2">'; $tog=1; }
 	echo'
 				<td>';
 	if($mode=='delete') echo '<a name="'.$i.'"></a>';
 	echo'	
-				<font face=Arial size=1 color="#000080">'.$i.'</td>
-				<td><font face=Verdana,Arial size=1>'.$r['artikelname'].'</td>';
+				<font ize=1 color="#000080">'.$i.'</td>
+				<td><font size=1>'.$r['artikelname'].'</td>';
 /*				 <td><input type="text"  onBlur="validate_min(this,'.$r['minorder'].')"  onKeyUp="validate_value(this,'.$r['maxorder'].')" name="order_v'.$i.'" size=3 maxlength=3 value="'.$r[pcs].'"></td>
 */				 
-    echo '<td><font face=Verdana,Arial size=1>'.$r['pcs'].'</td>
-				<td ><font face=Verdana,Arial size=1><nobr>X '.$r['proorder'].'</nobr></td>
-				<td><font face=Verdana,Arial size=1>'.$r['bestellnum'].'</td>
+    echo '<td><font size=1>'.$r['pcs'].'</td>
+				<td ><font size=1><nobr>X '.$r['proorder'].'</nobr></td>
+				<td><font size=1>'.$r['bestellnum'].'</td>
 				<td><a href="javascript:popinfo(\''.$r['bestellnum'].'\')" ><img '.$img_info.' alt="'.$complete_info.$r['artikelname'].'"></a></td>
 				<td><a href="'.$thisfile.URL_APPEND.'&dept_nr='.$dept_nr.'&order_nr='.$order_nr.'&mode=delete&cat='.$cat.'&idx='.$i.'&userck='.$userck.'" ><img '.$img_delete.' alt="'.$LDRemoveArticle.'"></a></td>
 				</tr>';
@@ -329,14 +329,10 @@ for($n=0;$n<sizeof($artikeln);$n++)
    			<input type="hidden" name="userck" value="'.$userck.'">
 			<input type="submit" value="'.$LDFinalizeList.'">   
    			</form>	';
-
-
 }else{
-	if($itwassent)
-	echo '
-		<font face="Verdana,Arial" size=2>'.$LDWasSent.'<p></font>';
+	if($itwassent) echo '<font size=2>'.$LDWasSent.'<p></font>';
 
-	echo '<img '.createMascot($root_path,'mascot1_r.gif','0','middle').'><font face=Verdana,Arial size=2>'.$LDBasketEmpty.'<p>';
+	echo '<img '.createMascot($root_path,'mascot1_r.gif','0','middle').'><font size=2>'.$LDBasketEmpty.'<p>';
 
 // get all lists that are not sent
 
@@ -356,35 +352,35 @@ for($n=0;$n<sizeof($artikeln);$n++)
 
 		$tog=1;
 		echo '
-		<font face="Verdana, Arial" size=2 color="#800000">'.$last_orderlist.$dept_obj->FormalName($dept_nr).':</font>
+		<font size=2 color="#800000">'.$last_orderlist.$dept_obj->FormalName($dept_nr).':</font>
 		<table border=0 cellspacing=1 cellpadding=3 width="100%">
-  		<tr bgcolor="#ffffee">';
+  		<tr class="wardlisttitlerow">';
 		//for ($i=0;$i<sizeof($LDListindex);$i++)
 		echo '
-			<td><font face=Verdana,Arial size=1 color="#000080">'.$LDOrderNr.'</td>
-			<td><font face=Verdana,Arial size=1 color="#000080">'.$LDEditList.'</td>
-			<td><font face=Verdana,Arial size=1 color="#000080">'.$LDListindex[2].'</td>
-			<td><font face=Verdana,Arial size=1 color="#000080">'.$LDListindex[3].'</td>
-			<td><font face=Verdana,Arial size=1 color="#000080">'.$LDListindex[4].'</td>
-			<td><font face=Verdana,Arial size=1 color="#000080">'.$LDListindex[5].'</td>
+			<td>'.$LDOrderNr.'</td>
+			<td>'.$LDEditList.'</td>
+			<td>'.$LDListindex[2].'</td>
+			<td>'.$LDListindex[3].'</td>
+			<td>'.$LDListindex[4].'</td>
+			<td>'.$LDListindex[5].'</td>
 			';
-		echo '</tr>';	
+		echo '</tr>';
 
 		$i=1;
 
 		while($content=$ergebnis->FetchRow())
  		{
 			if($tog)
-			{ echo '<tr bgcolor="#dddddd">'; $tog=0; }else{ echo '<tr bgcolor="#efefff">'; $tog=1; }
-			echo'
-				<td><font face=Verdana,Arial size=1>'.$content['order_nr'].'</td>
+			{ echo '<tr class="wardlistrow1">'; $tog=0; }else{ echo '<tr class="wardlistrow2">'; $tog=1; }
+			echo '
+				<td><font size=1>'.$content['order_nr'].'</td>
 				<td align="center"><a href="products-bestellung.php'.URL_APPEND.'&dept_nr='.$dept_nr.'&cat='.$cat.'&order_nr='.$content['order_nr'].'&userck='.$userck.'"  target="_parent" ><img '.$img_uparrow.' alt="'.$LDEditList.'"></a></td>
-				<td><font face=Verdana,Arial size=1>'.formatDate2Local($content['order_date'],$date_format);
+				<td><font size=1>'.formatDate2Local($content['order_date'],$date_format);
 				
 			echo '</td>
-				 <td><font face=Verdana,Arial size=1>'.convertTimeToLocal(str_replace('24','00',$content['order_time'])).'</td>
-				<td ><font face=Verdana,Arial size=1>'.$content['modify_id'].'</td>
-				<td align="center"><font face=Verdana,Arial size=1><img '.$img_warn.' alt="'.$LDNotSent.'">
+				 <td><font size=1>'.convertTimeToLocal(str_replace('24','00',$content['order_time'])).'</td>
+				<td ><font size=1>'.$content['modify_id'].'</td>
+				<td align="center"><font size=1><img '.$img_warn.' alt="'.$LDNotSent.'">
 			 	</td>
 				</tr>';
 			$i++;

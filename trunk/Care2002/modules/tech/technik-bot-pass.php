@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'/include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -65,12 +65,13 @@ require($root_path.'include/inc_passcheck_head.php');
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
 
 <?php require($root_path.'include/inc_passcheck_mask.php') ?>  
+<!--
 <FONT  COLOR="<?php echo $cfg[body_txtcolor] ?>"  SIZE=2  FACE="arial,verdana">
 <p>
 <img <?php echo createComIcon($root_path,'small_help.gif','0') ?>> <a href="<?php echo $root_path ?>main/ucons.php<?php echo "?lang=$lang" ?>"><?php echo "$LDIntro2 $title"; ?></a><br>
 <img <?php echo createComIcon($root_path,'small_help.gif','0') ?>> <a href="<?php echo $root_path ?>main/ucons.php<?php echo "?lang=$lang" ?>"><?php echo "$LDWhat2Do $title"; ?>?</a><br>
 </font>
-<HR>
+<HR>-->
 <p>
 
 <?php

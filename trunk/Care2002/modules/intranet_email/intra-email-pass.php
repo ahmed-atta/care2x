@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -147,19 +147,47 @@ if($mode!='')
 } // end of if mode!=""
 
 if(($mode=='access')&&(($username=='')||($password=='')))  $onError=$LDErrorIncomplete;
-?>
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
- <script language="javascript" >
+
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',$LDIntraEmail);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('intramail.php','pass','$newuser')");
+
+ # href for close button
+ //$smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('title',$LDIntraEmail);
+
+ # Body onLoad javascript code
+ if($onError) $smarty->assign('sOnLoadJs','onLoad="document.loginform.username.focus();document.loginform.username.select();"');
+	else if(!$newuser) $smarty->assign('sOnLoadJs','onLoad="document.loginform.username.focus()"');
+
+if($regError) $smarty->assign('sOnLoadJs','onLoad="document.regform.pw1.focus()"');
+ elseif($nameError) $smarty->assign('sOnLoadJs','onLoad="document.regform.addr.focus()"');
+  elseif ($mode=='register') $smarty->assign('sOnLoadJs','onLoad="document.regform.name.focus()"');
+
+# Collect extra javascript code
+
+$sTemp = '<script language="javascript" >
 <!-- 
 
-function pruf(d)
-{
+function pruf(d){
 	pw=d.password;
 	usr=d.username;
-	var p=pw.value; 
+	var p=pw.value;
 	var u=usr.value;
 	if((u=="")||(u==" "))
 	{
@@ -174,41 +202,18 @@ function pruf(d)
 	return true;
 	}
 }
+
 // -->
-</script> 
+</script>';
 
-<?php 
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
+
+$smarty->append('JavaScript',$sTemp);
+
+# Start buffering page output
+
+ob_start();
+
 ?>
-
-</HEAD>
-
-<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if($onError) echo ' onLoad="document.loginform.username.focus();document.loginform.username.select();"';
-	else if(!$newuser) echo ' onLoad="document.loginform.username.focus()"';
-	
-if($regError) echo ' onLoad="document.regform.pw1.focus()"';
- elseif($nameError) echo ' onLoad="document.regform.addr.focus()"';
-  elseif ($mode='register') echo ' onLoad="document.regform.name.focus()"';
-  
-if (!$cfg['dhtml']){ echo ' ink='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } 
-
-?>>
-<?php //foreach($argv as $v) echo "$v "; ?>
-<table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
-<tr valign=top>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="30"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG> <?php echo "$LDIntraEmail" ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();"><img 
-<?php echo createLDImgSrc($root_path,'back2.gif','0','absmiddle') ?> 
-style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a 
-href="javascript:gethelp('intramail.php','pass','<?php echo $newuser ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a></td>
-</tr>
-<tr valign=top >
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
-
-<FONT face="Verdana,Helvetica,Arial" size=2>
 
 <p><br><ul>
 <?php if($onError!="") echo '
@@ -321,24 +326,19 @@ if ($regError) echo $regError;
 <a href="'.$thisfile.''.URL_APPEND.'&newuser=1">'.$LDNewReg.' <img '.createComIcon($root_path,'bul_arrowgrnsm.gif','0','bottom').'></a>
 ';
 ?>
-  </ul>
- </table>
-</FONT>
-<p>
-</td>
-</tr>
-
-<tr>
-<td bgcolor=<?php echo $cfg['bot_bgcolor']; ?> height=70 colspan=2>
+</ul>
 
 <?php
-require($root_path.'include/inc_load_copyrite.php');
-?>
 
-</td>
-</tr>
-</table>        
-&nbsp;
-</FONT>
-</BODY>
-</HTML>
+ $sTemp = ob_get_contents();
+ ob_end_clean();
+
+ # Assign to main template object
+	$smarty->assign('sMainFrameBlockData',$sTemp);
+
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
+ ?>

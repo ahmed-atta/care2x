@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -125,38 +125,39 @@ if(($mode=='edit')&&$item_no)
 	   $item_no='';
 	   echo "<p>$sql<p>$LDDbNoRead";
 	}
-
 }
-?>
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php 
-echo setCharSet(); 
-?>
-<?php 
-require($root_path.'include/inc_js_gethelp.php'); 
-require($root_path.'include/inc_css_a_hilitebu.php');
-?> 
 
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('system_admin');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',$LDCurrencyAdmin);
+
+# href for return button
+ $smarty->assign('pbBack',$returnfile);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('')");
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',$LDCurrencyAdmin);
  
-</HEAD>
+ # Body OnLoad Javascript
+ if(!$item_no) $smarty->assign('sOnLoadJs','onLoad="document.c_form.short_name.focus()"');
+ 
+ # Buffer page output
+ ob_start();
 
-<BODY topmargin=0 leftmargin=0 marginheight=0 marginwidth=0 bgcolor=<?php echo $cfg['body_bgcolor'];?> 
-<?php if(!$item_no) : ?> onLoad="document.c_form.short_name.focus()" <?php endif ?>>
-
-
-<table width=100% border=0 cellspacing=0>
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG> <?php echo "$LDCurrencyAdmin" ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right>
-<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
-</tr>
-<tr>
-<td bgcolor=<?php echo $cfg['body_bgcolor'];?> colspan=2>
-
-<?php 
 if($info_exist)
 {
 ?>
@@ -170,31 +171,31 @@ if($info_exist)
 ?>
 
 <br>
-
-
 <ul>
-<FONT    SIZE=2  FACE="verdana,Arial">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<?php if($item_no) echo $LDUpdateCurrencyInfo; else echo $LDAddCurrency ?> </FONT><FONT    SIZE=3 color=#800000 FACE="Arial"><p>
+
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2>
+<?php if($item_no) echo $LDUpdateCurrencyInfo; else echo $LDAddCurrency ?> </FONT><FONT class="prompt"><p>
 <?php
 if(($mode=='save')&&$new_currency_ok) echo '<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'> '.$saved_msg.'<p>';
 if($item_no) echo $LDPlsEnterUpdate; else echo $LDPlsAddCurrency;
-?></font><p>
-<FONT    SIZE=-1  FACE="Arial">
+?>
+</font>
+<p>
+
 <form action="<?php echo $thisfile ?>" method="post" name="c_form">
 <table border=0 cellspacing=1 cellpadding=5>  
 <tr>
-	<td bgcolor="#e9e9e9" align="right"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><?php echo $LDCurrencyShortName ?></b> </FONT></td>
+	<td bgcolor="#e9e9e9" align="right"><FONT  color="#0000cc"><b><?php echo $LDCurrencyShortName ?></b> </FONT></td>
 	<td bgcolor="#f9f9f9"><input type="text" name="short_name" size=10 maxlength=40 value="<?php echo $short_name ?>">
       </td>  
 	</tr>
 <tr>
-	<td bgcolor="#e9e9e9" align="right"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><?php echo $LDCurrencyLongName ?></b> </FONT></td>
+	<td bgcolor="#e9e9e9" align="right"><FONT  color="#0000cc"><b><?php echo $LDCurrencyLongName ?></b> </FONT></td>
 	<td bgcolor="#f9f9f9"><input type="text" name="long_name" size=40 maxlength=10 value="<?php echo $long_name ?>">
       </td>  
 	</tr>
 <tr>
-	<td bgcolor="#e9e9e9" align="right"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><?php echo $LDCurrencyInfo ?></b> </FONT></td>
+	<td bgcolor="#e9e9e9" align="right"><FONT  color="#0000cc"><b><?php echo $LDCurrencyInfo ?></b> </FONT></td>
 	<td bgcolor="#f9f9f9"><input type="text" name="info" size=40 maxlength=60 value="<?php echo $info ?>">
       </td>  
 	</tr>
@@ -221,15 +222,17 @@ if($item_no) echo $LDPlsEnterUpdate; else echo $LDPlsAddCurrency;
 
 </ul>
 
-</FONT>
-<p>
-</td>
-</tr>
-</table>        
-<p>
 <?php
-require($root_path.'include/inc_load_copyrite.php');
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+# Assign page output to the mainframe template
+
+$smarty->assign('sMainFrameBlockData',$sTemp);
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
 ?>
-</FONT>
-</BODY>
-</HTML>

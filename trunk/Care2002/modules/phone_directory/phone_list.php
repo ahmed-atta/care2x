@@ -3,8 +3,8 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /*
-CARE2X Integrated Information System beta 2.0.0 - 2004-05-16 for Hospitals and Health Care Organizations and Services
-Copyright (C) 2002  Elpidio Latorilla & Intellin.org	
+CARE2X Integrated Information System beta 2.0.1 - 2004-07-04 for Hospitals and Health Care Organizations and Services
+Copyright (C) 2002,2003,2004,2005  Elpidio Latorilla & Intellin.org	
 
 GNU GPL. For details read file "copy_notice.txt".
 */
@@ -67,16 +67,13 @@ echo '></a>'; } ?><img <?php echo createLDImgSrc($root_path,'phonedir-b.gif','0'
 </tr>
 
 <tr>
-<td bgcolor=#333399 colspan=3>
-<FONT  COLOR="white"  SIZE=2  FACE="Arial"><STRONG> &nbsp;</STRONG></FONT>
+<td  class="passborder" colspan=3>
+&nbsp;
 </td>
 </tr>
-<tr bgcolor="#DDE1EC">
-<td bgcolor=#333399>&nbsp;</td>
+<tr>
+<td  class="passborder">&nbsp;</td>
 <td ><br>
-
-
-<FONT    SIZE=1  FACE="Arial">
 
 <?php
 if($rows){
@@ -103,12 +100,12 @@ if($rows){
         echo "<tr nowrap >";
 		echo "<td colspan=";
 		if($currentuser=="") echo $colstop; else echo $colstop+1;
-		echo "><FONT    SIZE=-1  FACE=Arial>&nbsp;<b> $LDActualDir</b> ( $LDMaxItem: ".($linecount)." )</font> </td>";
+		echo ">&nbsp;<b> $LDActualDir</b> ( $LDMaxItem: ".($linecount)." )</font> </td>";
        	echo "</tr>"; 
-        echo "<tr nowrap bgcolor=#ffffee>";
+        echo '<tr nowrap class="wardlisttitlerow">';
 		for($i=2;$i<$colstop;$i++) 
  		{	
- 		    echo '<td nowrap><FONT  SIZE=1  FACE=Arial color="#0000cc"><b>'.$LDExtFields[$i].'</b></td>';
+ 		    echo '<td nowrap>&nbsp;'.$LDExtFields[$i].'</td>';
          }
 		if ($edit) echo "<td>&nbsp;</td>";	
 		echo "</tr>"; 
@@ -121,7 +118,7 @@ if($rows){
 		
 		while (($zeile=$ergebnis->FetchRow())and($datacount<$displaysize))
 			{  
-					if($toggle) {echo "<tr nowrap bgcolor=#efefef>\n";$toggle=0;} else { echo "<tr  nowrap bgcolor=#ffffff>\n";$toggle=1;};
+					if($toggle) {echo "<tr nowrap class=\"wardlistrow2\">\n";$toggle=0;} else { echo "<tr  nowrap class=\"wardlistrow1\">\n";$toggle=1;};
 
 					$datacount++;
 	
@@ -129,8 +126,8 @@ if($rows){
 					{
 					echo "<td nowrap>";
 					
-					  if (($update)&&($zeile[item]==$itemname)) echo "<FONT SIZE=1 color=red  FACE=Arial>";
-						  else echo "<FONT SIZE=1  FACE=Arial>";
+					  if (($update)&&($zeile[item]==$itemname)) echo "<FONT SIZE=1 color=red>";
+						  else echo "<FONT SIZE=1>";
 					echo '<nobr>&nbsp;';
 					
 					if($edit)
@@ -150,7 +147,7 @@ if($rows){
 					}
 					if ($edit)
 					{
-						echo "<td nowrap><FONT FACE=Arial size=1><nobr>
+						echo "<td nowrap><FONT size=1><nobr>
 							<a href=\"phone_entry_update.php".URL_APPEND."&from=list&itemname=".$zeile['item_nr']."&batchnum=$batchnum&displaysize=$displaysize&linecount=$linecount&pagecount=$pagecount&edit=$edit\">
 						$LDEdit</a> \n";
 						echo "<a href=\"phone_entry_delete.php".URL_APPEND."&from=list&itemname=".$zeile['item_nr']."&batchnum=$batchnum&displaysize=$displaysize&linecount=$linecount&pagecount=$pagecount&edit=$edit\">
@@ -165,7 +162,7 @@ if($rows){
 		if($pagecount>1)
 		 {  	
 			if ($batchnum=="") $batchnum=1;
-			echo "<FONT SIZE=-1  FACE=Arial> $LDMoreInfo: &nbsp;&nbsp;\n"; 
+			echo " $LDMoreInfo: &nbsp;&nbsp;\n";
 			if ($batchnum>1)
 			echo '<a href=phone_list.php'.URL_APPEND.'&pagecount='.$pagecount.'&linecount='.$linecount.'&batchnum='.($batchnum-1).'&displaysize='.$displaysize.'&edit='.$edit.'><font color=red ><img src="../../gui/img/common/default/l-arrowgrnlrg.gif" border=0></font></a> - ';
 			for($i=1;$i<=$pagecount;$i++)
@@ -178,9 +175,9 @@ if($rows){
 		
 		 }
 
-		//echo "<p><FONT SIZE=-1  FACE=Arial>$LDMaxItem: ".($linecount)."</font>\n";
+		//echo "<p>$LDMaxItem: ".($linecount)."</font>\n";
 		echo "<p><FORM method=post action=phone_list.php>
-				<FONT SIZE=-1  FACE=Arial>
+				
 				<input type=hidden name=route value=validroute>
 				<input type=hidden name=remark value=fromlist>
 				<input type=hidden name=sid value=\"$sid\">
@@ -193,7 +190,6 @@ if($rows){
 		//echo "<INPUT type=submit  value=\"$LDShow\".></font></FORM>";		
 }// end of if(rows)
 ?>
-<FONT    SIZE=-1  FACE=Arial>
 
 <?php if ($edit) : ?>
 <p>
@@ -210,12 +206,11 @@ if($rows){
 
 <?php endif; ?>
 
-</FONT>
 </td>
-<td bgcolor=#333399>&nbsp;</td>
+<td  class="passborder">&nbsp;</td>
 </tr>
 <tr >
-<td bgcolor="#333399" colspan=3><font size=1>
+<td  class="passborder" colspan=3><font size=1>
 &nbsp; 
 </td>
 </tr>

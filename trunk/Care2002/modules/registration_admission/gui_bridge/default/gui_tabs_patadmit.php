@@ -1,52 +1,48 @@
-<!-- Creates the tabs for the patient registration module  -->
 <?php
+/* Creates the tabs for the patient registration module  */
 if(!isset($notabs)||!$notabs){
-//$tab_bot_line='#00009c';
-?>
-<!-- Tabs  -->
-<!-- 
-<tr  bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
-<td>
 
-<table border=0 cellpadding=5 cellspacing=0>
-  <tr>
-    <td bgcolor=<?php echo $tab_bot_line ?>><font color='white'><?php echo $LDAdmit; ?></td>
-    <td>&nbsp;</td>
-    <td bgcolor=<?php echo $tab_bot_line ?>><font color='white'><?php echo $LDSearch; ?></td>
-    <td>&nbsp;</td>
-    <td bgcolor=<?php echo $tab_bot_line ?>><font color='white'><?php echo $LDArchive; ?></td>
-    <td>&nbsp;&nbsp;&nbsp;</td>
-    <td bgcolor=<?php echo $tab_bot_line ?>><font color='white'><?php echo $LDRegisterNewPerson; ?></td>
-  </tr>
-</table>
+	$smarty->assign('bShowTabs',TRUE);
 
-
-</td>
-</tr> 
-
- --><!-- Tabs  -->
-
-<tr  bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
-<td colspan=3><?php if($target=="entry")  $img='admit-blue.gif'; //echo '<img '.createLDImgSrc($root_path,'admit-blue.gif','0').' alt="'.$LDAdmit.'">';
+	if($target=="entry") $img='admit-blue.gif';
 								else{ $img='admit-gray.gif';}
-							echo'<a href="aufnahme_start.php'.URL_APPEND.'&target=entry"><img '.createLDImgSrc($root_path,$img,'0').' alt="'.$LDAdmit.'"'; if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';
-							if($target=="search") $img='such-b.gif'; //echo '<img '.createLDImgSrc($root_path,'such-b.gif','0').' alt="'.$LDSearch.'">';
-								else{ $img='such-gray.gif'; }
-							echo '<a href="aufnahme_daten_such.php'.URL_APPEND.'&target=search"><img '.createLDImgSrc($root_path,$img,'0').' alt="'.$LDSearch.'" ';if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';
-							if($target=="archiv") $img='arch-blu.gif'; //echo '<img '.createLDImgSrc($root_path,'arch-blu.gif','0').'  alt="'.$LDArchive.'">';
-								else{$img='arch-gray.gif'; }
-							echo '<a href="aufnahme_list.php'.URL_APPEND.'&target=archiv"><img '.createLDImgSrc($root_path,$img,'0').' alt="'.$LDArchive.'" ';if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';
-						?><img src="<?php echo $cfg['top_bgcolor']; ?>gui/img/common/default/pixel.gif" height=1 width=25><?php 
-						echo '<a href="patient_register.php'.URL_APPEND.'&target=entry"><img '.createLDImgSrc($root_path,'register_gray.gif','0').' alt="'.$LDRegisterNewPerson.'" '; if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>'; ?></td>
-</tr>
+	$pbBuffer='<a href="aufnahme_start.php'.URL_APPEND.'&target=entry"><img '.createLDImgSrc($root_path,$img,'0').' alt="'.$LDAdmit.'"  title="'.$LDAdmit.'"';
+	if($cfg['dhtml']) $pbBuffer.='style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';
+	$pbBuffer.=' align=middle></a>';
+	$smarty->assign('pbNew',$pbBuffer);
 
- <?php
+	
+	if($target=="search") $img='such-b.gif'; //echo '<img '.createLDImgSrc($root_path,'search_green.gif','0').' alt="'.$LDSearch.'">';
+								else{ $img='such-gray.gif';}
+	$pbBuffer='<a href="aufnahme_daten_such.php'.URL_APPEND.'&target=search"><img '.createLDImgSrc($root_path,$img,'0').' alt="'.$LDSearch.'" title="'.$LDSearch.'"';
+	if($cfg['dhtml']) $pbBuffer.='style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';
+	$pbBuffer.=' align=middle></a>';
+	$smarty->assign('pbSearch',$pbBuffer);
+
+	if($target=="archiv") $img='arch-blu.gif'; //echo '<img '.createLDImgSrc($root_path,'archive_green.gif','0').'  alt="'.$LDArchive.'">';
+								else{$img='arch-gray.gif'; }
+	$pbBuffer='<a href="aufnahme_list.php'.URL_APPEND.'&target=archiv"><img '.createLDImgSrc($root_path,$img,'0').' alt="'.$LDArchive.'" title="'.$LDArchive.'" ';
+	if($cfg['dhtml']) $pbBuffer.='style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';
+	$pbBuffer.=' align=middle></a>';
+	$smarty->assign('pbAdvSearch',$pbBuffer);
+
+	$smarty->assign('sHSpacer','<img src="'.$root_path.'gui/img/common/default/pixel.gif" height=1 width=25>');
+//	$pbBuffer='<a href="patient_register.php'.URL_APPEND.'&target=entry"><img '.createLDImgSrc($root_path,'register_gray.gif','0').' alt="'.$LDRegisterNewPerson.'"  title="'.$LDRegisterNewPerson.'" ';
+	$pbBuffer='<a href="patient_register.php'.URL_APPEND.'&target=entry"><img '.createLDImgSrc($root_path,'admit-gray.gif','0').' alt="'.$LDRegisterNewPerson.'"  title="'.$LDRegisterNewPerson.'" ';
+	if($cfg['dhtml']) $pbBuffer.='style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';
+	$pbBuffer.=' align=middle></a>';
+	$smarty->assign('pbSwitchMode',$pbBuffer);
 }
+
+#  Horizontal  line below the tabs
+
+//if($tab_bot_line) $sDivClass = $tab_bot_line; else $sDivClass = '#333399';
+
+if($parent_admit) $sDivClass =  'class="adm_div"'; else $sDivClass = 'class="reg_div"';
+
+$smarty->assign('sRegDividerClass',$sDivClass);
+
+if(!empty($subtitle)) $smarty->assign('sSubTitle',":: $subtitle");
+
 ?>
-<!--  Horizontal blue line below the tabs -->
-<tr>
-<td colspan=3  bgcolor=#00009c><img src="p.gif" border=0 width=1 height=5><?php
-if(!empty($subtitle)) echo '<font color="#fefefe" SIZE=3  FACE="verdana,Arial"><b>:: '.$subtitle.'</b>';
-?></td>
-</tr>
 

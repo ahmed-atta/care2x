@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -84,15 +84,15 @@ if($mode=='save'){
 		}
 	}
 }
-$img['delete']=createComIcon($root_path,'delete2.gif','0','right');
-$img['arrow']=createComIcon($root_path,'l_arrowgrnsm.gif','0','absmiddle');
-$img['warn']=createComIcon($root_path,'warn.gif','0','absmiddle');
-$img['info']=createComIcon($root_path,'button_info.gif','0','absmiddle');
-$img['bubble']=createComIcon($root_path,'bubble2.gif','0','absmiddle');
-$img['blue']=createComIcon($root_path,'l2-blue.gif','0');
-$img['t2']=createComIcon($root_path,'t2-blue.gif','0');
-$img['plus']=createComIcon($root_path,'plus2.gif','0','absmiddle');
-$img['reset']=createComIcon($root_path,'button_reset.gif','0','absmiddle');
+$img['delete']=createComIcon($root_path,'delete2.gif','0','right',TRUE);
+$img['arrow']=createComIcon($root_path,'l_arrowgrnsm.gif','0','absmiddle',TRUE);
+$img['warn']=createComIcon($root_path,'warn.gif','0','absmiddle',TRUE);
+$img['info']=createComIcon($root_path,'button_info.gif','0','absmiddle',TRUE);
+$img['bubble']=createComIcon($root_path,'bubble2.gif','0','absmiddle',TRUE);
+$img['blue']=createComIcon($root_path,'l2-blue.gif','0','',TRUE);
+$img['t2']=createComIcon($root_path,'t2-blue.gif','0','',TRUE);
+$img['plus']=createComIcon($root_path,'plus2.gif','0','absmiddle',TRUE);
+$img['reset']=createComIcon($root_path,'button_reset.gif','0','absmiddle',TRUE);
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>
@@ -188,9 +188,9 @@ document.searchdata.keyword.select();document.searchdata.keyword.focus();
 <img <?php echo $img['delete'] ?> alt="<?php echo $LDReset ?>" onClick="javascript:document.ops301.reset()">
 <?php endif ?>
 </td>
-<td><font face=arial size=2 color=#ffffff>&nbsp;<b><nobr><?php echo $LDOps301 ?></nobr></b>&nbsp;</td>
+<td><font size=2 color=#ffffff>&nbsp;<b><nobr><?php echo $LDOps301 ?></nobr></b>&nbsp;</td>
 
-<td colspan=7><font face=arial size=2 color=#ffffff>&nbsp;&nbsp;&nbsp;<b><?php echo $LDDescription ?></b>
+<td colspan=7><font size=2 color=#ffffff>&nbsp;&nbsp;&nbsp;<b><?php echo $LDDescription ?></b>
 </td>
 		
 </tr>
@@ -215,7 +215,7 @@ function drawAdditional($tag,&$codebuf,&$databuf,$bkcolor,&$alttag)
         								<TR>
 										<TD bgColor="#'.$bkcolor.'">
 										<a href="javascript:hsm()"><img '.$img['delete'].' alt="'.$LDClose.'"></a>
-										<font face=arial size=2><b><font color="#003300">'.$alttag.':</font></b><br>'.$databuf.'
+										<font size=2><b><font color="#003300">'.$alttag.':</font></b><br>'.$databuf.'
 										</TD></TR></TABLE></TD></TR></TBODY></TABLE></div>';
 }
 
@@ -225,9 +225,9 @@ function drawdata(&$data,&$advdata)
  	global $idx,$iscolor,$keyword,$showonly,$parentdata, $img;
 	
 						echo "
-						<tr bgcolor=";
-						if($priocolor||$iscolor) echo "#99ffee>";
-						elseif($toggle) { echo "#efefef>"; $toggle=0;} else {echo "#ffffff>"; $toggle=1;};
+						<tr class=";
+						if($priocolor||$iscolor) echo "hilite>";
+						elseif($toggle) { echo "wardlistrow2>"; $toggle=0;} else {echo "wardlistrow1>"; $toggle=1;};
 						echo '
 						<td>';
 						if($priocolor) echo "&nbsp;"; elseif(!$showonly)
@@ -241,7 +241,7 @@ function drawdata(&$data,&$advdata)
 							}
 						echo '
 							</td>
-							<td><font face=arial size=2><nobr>';
+							<td><font size=2><nobr>';
 						//echo " *$parentcode +$grandcode";
 						
 						if($priocolor&&($data['code']!=$keyword)) echo '<u><a href="javascript:subsearch(\''.$data['code'].'\')">'.$data['code'].'</a></U>';
@@ -284,8 +284,8 @@ function drawdata(&$data,&$advdata)
 													<td>&nbsp;';
 											break;
 							}
-						//echo '<font face=arial size=2>'.trim($data[description]);
-						echo '<font face=arial size=2>';
+						//echo '<font size=2>'.trim($data[description]);
+						echo '<font size=2>';
 						if($priocolor&&($data['code']!=$keyword)) echo '<u><a href="javascript:subsearch(\''.$data['code'].'\')">'.$data[description].'</a></U>';
 						else echo $data['description'].'&nbsp;';		
 						

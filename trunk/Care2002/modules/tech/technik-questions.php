@@ -1,11 +1,11 @@
 <?php
-error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+//error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'/include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -47,8 +47,6 @@ if(!isset($inquirer)||empty($inquirer))
 
 $dbtable='care_tech_questions';
 
-if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
-if($dblink_ok) {
     /* Load the date formatter */
     include_once($root_path.'include/inc_date_format_functions.php');
     
@@ -113,15 +111,40 @@ if($dblink_ok) {
     if($ergebnis=$db->SelectLimit($sql,6)) {
         $rows = $ergebnis->RecordCount();
     } else {echo '<p>'.$sql.$LDDbNoRead.'<br>'; };
-} else { echo "$LDDbNoLink<br>"; } 
+
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
+
+# Toolbar title
+
+ $smarty->assign('sToolbarTitle',$LDTechSupport);
+
+ # href for the return button
+ $smarty->assign('pbBack',$returnfile);
+
+# href for the  button
+ $smarty->assign('pbHelp',"javascript:gethelp('tech.php','queries')");
+
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('title',$LDTechSupport);
+
+ # Collect extra javascrit code
+
+ ob_start();
 
 ?>
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
 
- <script language="javascript" >
+<script language="javascript" >
 <!-- 
 
 function checkform(d)
@@ -143,169 +166,97 @@ function checkform(d)
 		}
 	return true;
 }
-function gethelp(x,s,x1,x2,x3)
-{
-	if (!x) x="";
-	urlholder="<?php echo $root_path; ?>main/help-router.php<?php echo URL_APPEND ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
-helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
-	window.helpwin.moveTo(0,0);
-}
+
 // -->
 </script> 
 
-<?php 
-require($root_path.'include/inc_css_a_hilitebu.php');
-?>
 <style type="text/css" name="s2">
 td.vn { font-family:verdana,arial; color:#000088; font-size:10;background-color:#dedede}
 </style>
-</HEAD>
 
-<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+<?php 
 
-<table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" ><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG> &nbsp; <?php echo $LDTechSupport ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])echo'<a href="'.$returnfile.'"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('tech.php','queries')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
-</tr>
-<tr valign=top >
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2><p><br>
-<ul>
+$sTemp = ob_get_contents();
+ob_end_clean();
 
-<?php if (($mode=='read'))
-	{
-		echo '<table cellspacing=0 cellpadding=1 border=0 bgcolor="#999999" >
-				<tr>
-				<td>
-				<table  cellspacing=0 cellpadding=2 >
-				<tr><td bgcolor=#999999 >	<FONT  SIZE=2 FACE="verdana,Arial" color=white>';
-		echo "<b>$LDInquiry $LDFrom ".$inhalt['inquirer']." $LDOn ".formatDate2Local($inhalt['tdate'],$date_format)." $LDAt ".convertTimeToLocal($inhalt['ttime'])." $LDOClock:</b>";
-		echo '	</td>
-				</tr>
-				<tr><td class="vn">';
-		echo "	\" ".nl2br($inhalt['query'])." \"</td></tr> ";
-		
-		if(isset($inhalt['answered'])&&$inhalt['answered'])
-		{
-			echo '	<tr><td bgcolor="#999999" >	<FONT  SIZE=2 FACE="verdana,Arial" color=white>';
+$smarty->append('JavaScript',$sTemp);
 
-			echo "	<b>$LDReply $LDFrom ".$inhalt['ansby']." $LDOn ".formatDate2Local($inhalt['astamp'],$date_format,1)." $LDOClock:</b>";
-			echo '	</td>
-					</tr>
-					<tr><td  bgcolor="#ffffcc" ><FONT  SIZE=1 FACE="verdana,Arial" >';
-			echo "	\" ".nl2br($inhalt['reply'])." \" ";
-			echo '</td> 
-				</tr>';
+if (($mode=='read')){
+
+	$smarty->assign('bShowInquiry',TRUE);
+
+	$smarty->assign('sInquirerData',"$LDInquiry $LDFrom ".$inhalt['inquirer']." $LDOn ".@formatDate2Local($inhalt['tdate'],$date_format)." $LDAt ".convertTimeToLocal($inhalt['ttime'])." $LDOClock:");
+	$smarty->assign('sInquiry','" '.nl2br($inhalt['query']).' "');
+
+	if(isset($inhalt['answered'])&&$inhalt['answered']){
+		$smarty->assign('bShowAnswer',TRUE);
+
+		$smarty->assign('sReplyData',"$LDReply $LDFrom ".$inhalt['ansby']." $LDOn ".@formatDate2Local($inhalt['astamp'],$date_format,1)." $LDOClock:");
+		$smarty->assign('sReply','" '.nl2br($inhalt['reply']).' "');
+
 		}
-		echo '
-				</table>
-				</td>
-				</tr>
-				</table>';
-		echo "<hr>";
-	}
-?>
-<form action="technik-questions.php">
-<table cellspacing=0 cellpadding=1 border=0 bgcolor="#999999" align=right width=20%>
-<tr>
-<td>
-
-<table  cellspacing=0 cellpadding=2 >
-<tr><td bgcolor=#999999 align=center colspan=2>	<FONT  SIZE=2 FACE="verdana,Arial" color=white>
-<b><?php echo str_replace('~tagword~',$rows,$LDLastQuestions) ?></b>
-</td>
-</tr>
-<tr><td class="vn">
-<?php if($rows)
-while ($content=$ergebnis->FetchRow()) 
-{
-	//echo "&nbsp;<b>".formatDate2Local($content['tdate'],$date_format).":</b> <a href=\"$thisfile".URL_APPEND."&mode=read&dept=".$content['dept']."&tdate=".$content['tdate']."&ttime=".$content['ttime']."&inquirer=".$content['inquirer']."&tid=".$content['tid']."\">".substr($content[query],0,40)."...";
-	echo "&nbsp;<b>".formatDate2Local($content['tdate'],$date_format).":</b> <a href=\"$thisfile".URL_APPEND."&mode=read&batch_nr=".$content['batch_nr']."&dept_nr=".$dept_nr."&inquirer=".strtr($inquirer,' ','+')."\">".substr($content[query],0,40)."...";
-	if(isset($content['answered'])&&!empty($content['answered'])) echo '<img '.createComIcon($root_path,'warn.gif','0').'>';
-	echo '</a><p>';
 }
 
-?>
-<center>
-<?php echo $LDFrom ?>:
-<input type="hidden" name="sid" value="<?php echo $sid ?>">
-<input type="text" name="inquirer" size=19 maxlength=40 value="<?php echo $inquirer ?>">
-<input type="hidden" name="lang" value= "<?php echo $lang ?>">
-<input type="submit" value="<?php echo $LDLogIn ?>">
-</center>
-</td> 
-</td>
-</tr>
-</table>
+# Inquiries list minibox
 
-</td>
-</tr>
-</table>
-</form>
-<FONT    SIZE=4  FACE="Arial" color=#00cc00>
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>>
-<b><?php echo $LDQuestions ?></b></FONT> <font size="2" face="arial"><br>
-<u><a href="technik-reparatur-anfordern.php<?php echo URL_APPEND ?>"><?php echo $LDPlsNoRequest ?></u></a></font><p>
+$smarty->assign('LDLastQuestions',str_replace('~tagword~',$rows,$LDLastQuestions));
 
+$sTemp = '';
 
-<form ENCTYPE="multipart/form-data" action="technik-questions.php" method="post" onSubmit="return checkform(this)"> 
-<table cellpadding="5" border="0" cellspacing=1>
-<tr>
-<td bgcolor=#dddddd ><FONT    SIZE=-1  FACE="Arial">
-<p><?php echo $LDEnterQuestion ?>:<br>
-<TEXTAREA NAME="query" Content-Type="text/html"
-	COLS="50" ROWS="10"></TEXTAREA>
-<p>
-</td>
-</tr>
-<tr>
+if($rows){
+	while ($content=$ergebnis->FetchRow()){
+		//echo "&nbsp;<b>".formatDate2Local($content['tdate'],$date_format).":</b> <a href=\"$thisfile".URL_APPEND."&mode=read&dept=".$content['dept']."&tdate=".$content['tdate']."&ttime=".$content['ttime']."&inquirer=".$content['inquirer']."&tid=".$content['tid']."\">".substr($content[query],0,40)."...";
+		$sTemp = $sTemp."&nbsp;<b>".@formatDate2Local($content['tdate'],$date_format).":</b> <a href=\"$thisfile".URL_APPEND."&mode=read&batch_nr=".$content['batch_nr']."&dept_nr=".$dept_nr."&inquirer=".strtr($inquirer,' ','+')."\">".substr($content[query],0,40)."...";
+		if(isset($content['answered'])&&!empty($content['answered'])) $sTemp = $sTemp.'<img '.createComIcon($root_path,'warn.gif','0').'>';
+		$sTemp = $sTemp.'</a><p>';
+	}
+}
 
-<td bgcolor=#dddddd ><FONT    SIZE=-1  FACE="Arial">
+$smarty->assign('sInquiryList',$sTemp);
+$smarty->assign('LDFrom',$LDFrom);
+$smarty->assign('sListboxHiddenInputs','
+		<input type="hidden" name="sid" value="'.$sid.'">
+		<input type="text" name="inquirer" size=19 maxlength=40 value="'.$inquirer.'">
+		<input type="hidden" name="lang" value= "'.$lang.'">');
 
-<input type="hidden" name="tdate" value="<?php echo date('Y-m-d') ?>" >
-<input type="hidden" name="ttime" value= "<?php echo date('H:i:s') ?>">
-<input type="hidden" name="sid" value= "<?php echo $sid ?>">
-<input type="hidden" name="lang" value= "<?php echo $lang ?>">
-<input type="hidden" name="mode" value="save">
-<?php echo $LDName ?>:<br><input type="text" name="inquirer" size="30"  value="<?php if($inquirer) echo $inquirer; elseif(isset($HTTP_SESSION_VARS['sess_user_name'])) echo $HTTP_SESSION_VARS['sess_user_name'] ?>"> <br>
-<?php echo $LDDept ?>:<br><input type="text" name="dept" size="30" value="<?php echo $dept_name ?>">
-</td>
-</tr>
+$smarty->assign('sListboxSubmit','<input type="submit" value="'.$LDLogIn.'">');
 
-</table>
-<p>
+$smarty->assign('sButton','<img '.createComIcon($root_path,'varrow.gif','0').'>');
 
-<input type="image"  <?php echo createLDImgSrc($root_path,'abschic.gif','0','middle') ?> >&nbsp;&nbsp;&nbsp;<a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc($root_path,'cancel.gif','0','middle') ?> alt="<?php echo $LDCancel ?>" align="middle"></a>
+$smarty->assign('sFormTag','<form ENCTYPE="multipart/form-data" action="technik-questions.php" method="post" onSubmit="return checkform(this)">');
 
-</form>
+$smarty->assign('LDQuestions',$LDQuestions);
 
-</FONT>
-<p>
+$smarty->assign('LDEnterQuestion',$LDEnterQuestion);
 
-<FONT    SIZE=-1  FACE="Arial">
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>>
-<a href="technik-reparatur-anfordern.php<?php echo URL_APPEND ?>"><?php echo $LDReRepairTxt ?></a><br>
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>>
-<a href="technik-reparatur-melden.php<?php echo URL_APPEND ?>"><?php echo $LDRepairReportTxt ?></a><br>
-<!-- <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>>
-<a href="technik-info.php<?php echo URL_APPEND ?>"><?php echo $LDInfoTxt ?></a><br>
- --></FONT>
-</ul>
-</FONT>
-<p>
-</td>
-</tr>
-<tr>
-<td bgcolor=<?php echo $cfg['bot_bgcolor']; ?> height=70 colspan=2>
-<?php
-require($root_path.'include/inc_load_copyrite.php');
-?>
-</td>
-</tr>
-</table>        
+$smarty->assign('LDPlsNoRequest','<a href="technik-reparatur-anfordern.php'.URL_APPEND.'">'.$LDPlsNoRequest.'</a>');
 
-</FONT>
-</BODY>
-</HTML>
+$smarty->assign('LDName',$LDName);
+$smarty->assign('LDDept',$LDDept);
+
+if($inquirer) $smarty->assign('sInquirer',$inquirer);
+	elseif(isset($HTTP_SESSION_VARS['sess_user_name'])) $smarty->assign('sInquirer',$HTTP_SESSION_VARS['sess_user_name']);
+
+$smarty->assign('dept_name',$dept_name);
+
+$smarty->assign('sHiddenInputs','<input type="hidden" name="tdate" value="'.date('Y-m-d').'" >
+		<input type="hidden" name="ttime" value= "'.date('H:i:s').'">
+		<input type="hidden" name="sid" value= "'.$sid.'">
+		<input type="hidden" name="lang" value= "'.$lang.'">
+		<input type="hidden" name="mode" value="save">');
+
+$smarty->assign('pbSubmit','<input type="image"  '.createLDImgSrc($root_path,'abschic.gif','0','middle').'>');
+$smarty->assign('pbCancel','<a href="'.$breakfile.'" ><img '.createLDImgSrc($root_path,'cancel.gif','0','middle').' title="'.$LDCancel.'" align="middle"></a>');
+
+$smarty->assign('sReportLink','<a href="technik-reparatur-melden.php'.URL_APPEND.'">'.$LDRepairReportTxt.'</a>');
+$smarty->assign('sRepairLink','<a href="technik-reparatur-anfordern.php'.URL_APPEND.'">'.$LDReRepairTxt.'</a>');
+
+$smarty->assign('sMainBlockIncludeFile','tech/send_inquiry.tpl');
+
+ /**
+ * show Template
+ */
+
+ $smarty->display('common/mainframe.tpl');
+ // $smarty->display('debug.tpl');
+ ?>

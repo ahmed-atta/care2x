@@ -15,7 +15,7 @@ require($root_path.'include/inc_environment_global.php');
 //define('NO_CHAIN',1);
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require($root_path.'include/care_api_classes/class_core.php');
+require_once($root_path.'include/care_api_classes/class_core.php');
 $core=new Core;
 
 /*	include('includes/condb.php');

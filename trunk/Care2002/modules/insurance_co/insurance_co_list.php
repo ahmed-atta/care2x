@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -26,7 +26,7 @@ $ins_obj=new Insurance;
 $breakfile='insurance_co_manage.php'.URL_APPEND;
 $thisfile=basename(__FILE__);
 
-# Initialize page's control variables
+# Initialize page´s control variables
 if($mode!='paginate'){
 	# Reset paginator variables
 	$pgx=0;
@@ -65,75 +65,58 @@ $pagen->setSortItem($oitem);
 $pagen->setSortDirection($odir);
 
 
-$bgc=$root_path.'gui/img/skin/default/tableHeaderbg3.gif';
-$bgc2='#eeeeee';
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('system_admin');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',"$LDInsuranceCo :: $LDListAll");
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('insurance_list.php')");
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',"$LDInsuranceCo :: $LDListAll");
+
+# Buffer page output
+
+ob_start();
 
 ?>
 
+<ul>
 
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
-
-<script language="javascript">
-<!-- 
-// -->
-</script>
-
-<?php
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-
-?>
-<style type="text/css" name="formstyle">
-td.pblock{ font-family: verdana,arial; font-size: 12}
-
-div.box { border: solid; border-width: thin; width: 100% }
-
-div.pcont{ margin-left: 3; }
-
-</style>
-
-</HEAD>
-
-<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> onLoad="if (window.focus) window.focus()" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
-
-
-<table width=100% border=0 cellpadding="0" cellspacing=0>
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp; <?php echo "$LDInsuranceCo :: $LDListAll" ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('insurance_list.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
-</tr>
-<tr valign=top >
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
- <ul>
-<FONT  SIZE=2  FACE="verdana,Arial">
 <?php 
 if(is_object($firms)){
 	
 	if ($linecount) echo str_replace("~nr~",$totalcount,$LDSearchFound).' '.$LDShowing.' '.$pagen->BlockStartNr().' '.$LDTo.' '.$pagen->BlockEndNr().'.';
-		else echo str_replace('~nr~','0',$LDSearchFound); 
+		else echo str_replace('~nr~','0',$LDSearchFound);
 
 ?>
 <table border=0 cellpadding=2 cellspacing=1>
-  <tr>
-      <td  class=pblock background="<?php echo $bgc ?>"><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
+  <tr class="wardlisttitlerow">
+      <td><b>
 	  <?php echo $pagen->makeSortLink($LDFirmID,'firm_id',$oitem,$odir);  ?></b>
 	</td>
-      <td  class=pblock background="<?php echo $bgc ?>"><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
+      <td><b>
 	  <?php echo $pagen->makeSortLink($LDInsuranceCoName,'name',$oitem,$odir);  ?></b>
 	</td>
-      <td  class=pblock background="<?php echo $bgc ?>"><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
+      <td><b>
 	  <?php echo $pagen->makeSortLink($LDMainPhoneNr,'phone_main',$oitem,$odir);  ?></b>
 	</td>
-      <td  class=pblock background="<?php echo $bgc ?>"><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
+      <td><b>
 	  <?php echo $pagen->makeSortLink($LDMainFaxNr,'fax_main',$oitem,$odir);  ?></b>
 	</td>
-      <td  class=pblock background="<?php echo $bgc ?>"><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
+      <td><b>
 	  <?php echo $pagen->makeSortLink($LDEmailAddress,'addr_email',$oitem,$odir);  ?></b>
 	</td>
   </tr> 
@@ -145,41 +128,45 @@ if(is_object($firms)){
 		$toggle=!$toggle;
 ?>
   <tr  bgcolor="<?php echo $bgc ?>">
-    <td class=pblock><a href="insurance_co_info.php<?php echo URL_APPEND.'&retpath=list&firm_id='.$firm['firm_id']; ?>"><?php echo $firm['firm_id']; ?></a></td>
-    <td class=pblock><a href="insurance_co_info.php<?php echo URL_APPEND.'&retpath=list&firm_id='.$firm['firm_id']; ?>"><?php echo $firm['name']; ?></a></td>
-    <td class=pblock><?php echo $firm['phone_main']; ?></td>
-    <td class=pblock><?php echo $firm['fax_main']; ?></td>
-    <td class=pblock><?php if($firm['addr_email']){ echo '<img '.createComIcon($root_path,'email.gif','0').'>'; ?> <a href="mailto:<?php echo $firm['addr_email']; ?>"><?php echo $firm['addr_email']; ?></a><?php } ?></td>
+    <td><a href="insurance_co_info.php<?php echo URL_APPEND.'&retpath=list&firm_id='.$firm['firm_id']; ?>"><?php echo $firm['firm_id']; ?></a></td>
+    <td><a href="insurance_co_info.php<?php echo URL_APPEND.'&retpath=list&firm_id='.$firm['firm_id']; ?>"><?php echo $firm['name']; ?></a></td>
+    <td><?php echo $firm['phone_main']; ?></td>
+    <td><?php echo $firm['fax_main']; ?></td>
+    <td><?php if($firm['addr_email']){ echo '<img '.createComIcon($root_path,'email.gif','0').'>'; ?> <a href="mailto:<?php echo $firm['addr_email']; ?>"><?php echo $firm['addr_email']; ?></a><?php } ?></td>
 </td>
   </tr> 
 <?php
 	}
 	echo '
-	<tr><td colspan=4><font face=arial size=2>'.$pagen->makePrevLink($LDPrevious).'</td>
-	<td align=right><font face=arial size=2>'.$pagen->makeNextLink($LDNext).'</td>
+	<tr><td colspan=4>'.$pagen->makePrevLink($LDPrevious).'</td>
+	<td align=right>'.$pagen->makeNextLink($LDNext).'</td>
 	</tr>';
 ?>
   </table>
 <?php
+}else{
+	 echo str_replace('~nr~','0',$LDSearchFound);
 }
 ?>
 <p>
-</FONT>
 <form action="insurance_co_new.php" method="post">
 <input type="hidden" name="lang" value="<?php echo $lang ?>">
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
 <input type="submit" value="<?php echo $LDNeedEmptyFormPls ?>">
 </form>
 </ul>
-<p>
-</td>
-</tr>
-</table>        
-<p>
 
 <?php
-require($root_path.'include/inc_load_copyrite.php');
-?>
 
-</BODY>
-</HTML>
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+# Assign page output to the mainframe template
+
+$smarty->assign('sMainFrameBlockData',$sTemp);
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
+?>

@@ -1,15 +1,13 @@
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 {{$HTMLtag}}
 <HEAD>
- <TITLE>{{$title}} - {{$Name}}</TITLE>
- <!-- <TITLE>CARE 2x Integrated Hospital Information System</TITLE> -->
- <meta name="Description" content="Virtual Integrated Information System of a Hospital powered by CARE 2x">
- <meta name="Author" content="Elpidio Latorilla">
- <meta name="Generator" content="AceHTML 4 Freeware">
-
+ <TITLE>{{$sWindowTitle}} - {{$Name}}</TITLE>
+ {{include file="common/metaheaders.tpl"}}
  {{$setCharSet}}
- 
- {{$JavaScript}}
+
+ {{foreach from=$JavaScript item=currentJS}}
+ 	{{$currentJS}}
+ {{/foreach}}
 
 </HEAD>
-<BODY  {{$bgcolor}} topmargin=0 leftmargin=0  marginwidth=0 marginheight=0  {{$sLinkColors}} {{$sOnLoadJs}}>
+<BODY  {{$bgcolor}} {{$sLinkColors}} {{$sOnLoadJs}} {{$sOnUnloadJs}}>

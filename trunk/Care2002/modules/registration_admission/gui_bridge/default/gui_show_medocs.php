@@ -16,11 +16,11 @@ if($rows){
 			$aref=$root_path.'modules/medocs/show_medocs.php'.URL_APPEND.'&edit='.$buf.'&encounter_nr='.$row['encounter_nr'].'&is_discharged='.$row['is_discharged'];
 ?>
   <tr bgcolor="#fefefe" valign="top">
-    <td><FONT SIZE=-1  FACE="Arial"><?php if($buf) echo '<img '.createComIcon($root_path,'check2.gif','0').'>'; else echo '&nbsp;'; ?></td>
+    <td><FONT SIZE=-1  FACE="Arial"><?php if($buf) echo '<img '.createComIcon($root_path,'check2.gif','0','',TRUE).'>'; else echo '&nbsp;'; ?></td>
     <td><FONT SIZE=-1  FACE="Arial"><?php if($row['date']) echo @formatDate2Local($row['date'],$date_format); else echo '?'; ?></td>
     <td><FONT SIZE=-1  FACE="Arial"><a href="<?php echo $aref; ?>"><?php echo $row['encounter_nr']; ?></a></td>
     <td><FONT SIZE=-1  FACE="Arial"><a href="<?php echo $aref; ?>"><?php echo nl2br(substr($row['notes'],0,50)); ?></a></td>
-    <td><a href="<?php echo $aref ?>"><img <?php echo createComIcon($root_path,'info2.gif','0'); ?>></a></td>
+    <td><a href="<?php echo $aref ?>"><img <?php echo createComIcon($root_path,'info2.gif','0','',TRUE); ?>></a></td>
   </tr>
 
 <?php

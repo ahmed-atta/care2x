@@ -5,9 +5,6 @@
 {{*            :  "input.." alias for a <INPUT> .. </INPUT> element *}}
 {{*            :  "val.." alias for a value attribute of an <INPUT> .. </INPUT> element *}}
 
-{{config_load file=test.conf section="setup"}}
-
-{{include file="common/header.tpl" title=""}}
 
 <!-- This is a temporary local css, will be discarded once a global template is implemented -->
 <style type="text/css">
@@ -26,12 +23,7 @@ div.fa2_ml3 {font-family: arial; font-size: 12; margin-left: 3; }
 {{* Do not move the ff: one line *}}
 {{$js_noresize}}
 
-{{include file="common/header_topblock.tpl"}}
-
-<table width=100% border=0 cellpadding="5" cellspacing=0>
-<tr>
-<td bgcolor={{$body_bgcolor}} colspan=2>
- <ul>
+<ul>
 
 {{if $edit}}
 	{{$form_headers}}
@@ -54,15 +46,4 @@ div.fa2_ml3 {font-family: arial; font-size: 12; margin-left: 3; }
 
 {{$form_footers}}
 
-</FONT>
-
 </ul>
-<p>
-</td>
-</tr>
-</table>
-
-<p>
-
-{{include file="common/copyright.tpl"}}
-{{include file="common/footer.tpl"}}

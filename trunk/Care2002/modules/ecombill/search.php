@@ -13,6 +13,8 @@ $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_date_format_functions.php');
 
+//$db->debug=1;
+
 $toggle=0;
 
  /* Set color values for the search mask */
@@ -25,7 +27,7 @@ $entry_body_bgcolor='#ffffff';
 if(!isset($searchkey)) $searchkey='';
 if(!isset($mode)) $mode='';
 
-# Initialize page's control variables
+# Initialize page´s control variables
 if($mode=='paginate'){
 	$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
 	
@@ -75,9 +77,10 @@ if(($mode=='search'||$mode=='paginate')&&!empty($searchkey)){
 	$sqlfrom ="	FROM care_encounter as enc,care_person as reg ";
 	
 	$sqlwhere2= " AND enc.pid=reg.pid  
-						AND NOT enc.is_discharged
-						AND enc.status  IN ('','normal')
-						ORDER BY $oprep.$oitem $odir";
+						AND enc.is_discharged NOT IN ('',0)
+						AND enc.status  IN ('','normal')";
+	
+	$orderby = " ORDER BY $oprep.$oitem $odir";
 			
 	if(is_numeric($suchwort)){
 	
@@ -88,35 +91,20 @@ if(($mode=='search'||$mode=='paginate')&&!empty($searchkey)){
 	}else{
 			
 		$sqlwhere1="WHERE (
-			            	reg.name_last LIKE '".addslashes($suchwort)."%' 
-							OR reg.name_first LIKE '".addslashes($suchwort)."%'";
+			            	reg.name_last $sql_LIKE '".addslashes($suchwort)."%' 
+							OR reg.name_first $sql_LIKE '".addslashes($suchwort)."%'";
 		# Try converting the keyword to a proper date format
 		$DOB=formatDate2Std($suchwort,$date_format);
 		
-		if(!empty($DOB)&&$DOB!='--') $sqlwhere1.="	OR reg.date_birth LIKE '$DOB' ";
+		if(!empty($DOB)&&$DOB!='--') $sqlwhere1.="	OR reg.date_birth $sql_LIKE '$DOB' ";
 	
 		$sqlwhere1.=")";
 	
 	}
 		# Compose final sql query
-		$sql=$sqlselect.$sqlfrom.$sqlwhere1.$sqlwhere2;
+		$sql=$sqlselect.$sqlfrom.$sqlwhere1.$sqlwhere2.$orderby;
 	
-/*			
-	$sql="SELECT enc.encounter_nr, reg.name_last, reg.name_first, reg.date_birth, enc.encounter_class_nr, enc.is_discharged
-			FROM care_encounter as enc,care_person as reg 
-			WHERE
-						(
-			            	reg.name_last LIKE '".addslashes($suchwort)."%' 
-							OR reg.name_first LIKE '".addslashes($suchwort)."%'
-							OR reg.date_birth LIKE '".formatDate2Std($suchwort,$date_format)."%'
-							OR enc.encounter_nr LIKE '".addslashes($suchbuffer)."'
-						)
-						AND enc.pid=reg.pid  
-						AND NOT enc.is_discharged
-						AND enc.status NOT IN ('deleted','inactive','closed','hidden','void')
-			ORDER BY enc.encounter_nr ";
-					  
-*/	if($ergebnis=$db->SelectLimit($sql,$pagen->MaxCount(),$pgx)){
+	if($ergebnis=$db->SelectLimit($sql,$pagen->MaxCount(),$pgx)){
 	
 		if(defined('SHOW_SQLQUERY')&&SHOW_SQLQUERY) echo $sql;
 		
@@ -132,7 +120,7 @@ if(($mode=='search'||$mode=='paginate')&&!empty($searchkey)){
 		if(isset($totalcount)&&$totalcount){
 			$pagen->setTotalDataCount($totalcount);
 		}else{
-			if($result=$db->Execute("SELECT COUNT(enc.encounter_nr) AS max_nr".$sqlfrom.$sqlwhere1.$sqlwhere2)){			
+			if($result=$db->Execute("SELECT COUNT(enc.encounter_nr) AS max_nr".$sqlfrom.$sqlwhere1.$sqlwhere2)){
 				$row=$result->FetchRow();
 				$totalcount=$row['max_nr'];
 				$pagen->setTotalDataCount($totalcount);
@@ -196,9 +184,9 @@ if($mode=='search'||$mode=='paginate'){
 	if ($linecount) { 
 
 	# Load the common icons
-	$img_options=createComIcon($root_path,'dollarsign.gif','0');
-	$img_male=createComIcon($root_path,'spm.gif','0');
-	$img_female=createComIcon($root_path,'spf.gif','0');
+	$img_options=createComIcon($root_path,'dollarsign.gif','0','',TRUE);
+	$img_male=createComIcon($root_path,'spm.gif','0','',TRUE);
+	$img_female=createComIcon($root_path,'spf.gif','0','',TRUE);
 	$bgimg='tableHeaderbg3.gif';
 	$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
 

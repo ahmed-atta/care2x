@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -38,12 +38,39 @@ require_once($root_path.'include/care_api_classes/class_image.php');
 $img=new Image();
 $all_image=$img->getAllImageData($pn);
 
-?>
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
 
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('nursing',TRUE,FALSE);
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',$LDPhotos);
+
+ # hide return button
+ $smarty->assign('pbBack',FALSE);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('encounter_photos.php','fotos','','$station','$LDPhotos')");
+
+ # href for close button
+ $smarty->assign('breakfile',"javascript:window.parent.location.replace('$breakfile');");
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',$LDPhotos);
+
+ # Body Onload js
+ $smarty->assign('sOnLoadJs','onLoad="if (window.focus) window.focus(); window.resizeTo(1000,740);"');
+
+# Collect js code
+
+ob_start();
+
+?>
 
 <style type="text/css">
 	.a12_w {font-family: arial; color: navy; font-size:12; background-color:#ffffff}
@@ -66,27 +93,21 @@ function preview(n)
 }
 </script>
 <?php
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+$smarty->append('JavaScript',$sTemp);
+
+# Buffer page output
+
+ob_start();
+
 ?>
-</HEAD>
 
-<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 bgcolor="silver" alink="navy" vlink="navy" onLoad="if (window.focus) window.focus(); window.resizeTo(1000,740);">
-
-
-<table width=100% border=0 height=100% cellpadding="0" cellspacing="0" >
-<tr valign=top>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php echo "$LDPhotos"; ?></STRONG></FONT>
-</td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp('encounter_photos.php','fotos','','<?php echo $station ?>','<?php echo "$LDPhotos"; ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:window.parent.location.replace('<?php echo $breakfile ?>');" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
-</tr>
-
-<tr>
-<td bgcolor=#cde1ec valign=top colspan=2><p><br>
+<p>
 <ul>
+<font class="prompt">
 <?php
-echo "<font face=arial font size=3 color=maroon><font size=5 >";
 
 echo $pn;
 
@@ -111,7 +132,6 @@ if(is_object($encounter)){
 <tr>
 <td>
 <nobr>
-<FONT    SIZE=-1  FACE="Arial">
 
 <?php 
 
@@ -164,25 +184,17 @@ if(is_object($all_image)){
 <p>
 </ul>
 
-
-
-
-<p>
-</td>
-</tr>
-
-<tr>
-<td bgcolor=silver height=70 colspan=2>
 <?php
-//require($root_path.'include/inc_load_copyrite.php');
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+# Assign page output to the mainframe template
+
+$smarty->assign('sMainFrameBlockData',$sTemp);
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
 ?>
-</td>
-</tr>
-</table>        
-&nbsp;
-
-</FONT>
-
-
-</BODY>
-</HTML>

@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -64,8 +64,13 @@ if ($mode=='save'){
 <?php echo setCharSet(); ?>
 <TITLE></TITLE>
 <STYLE TYPE="text/css">
-	.va12_b {font-family:verdana,arial;font-size:12;text-decoration: none; color: #0000cc;}
+	.va12_b {text-decoration: none; color: #0000cc;}
 </style>
+<?php 
+require($root_path.'include/inc_js_gethelp.php');
+require($root_path.'include/inc_css_a_hilitebu.php');
+?>
+
 </HEAD>
 
 	<BODY >
@@ -73,19 +78,19 @@ if ($mode=='save'){
 
 	<table width=100% border=1>
 	<tr>
-	<td bgcolor=navy>
-	<FONT  COLOR=white  SIZE=+1  FACE=Arial><STRONG>&nbsp;<?php echo $LDUpdate ?></STRONG></FONT>
+	<td class="wardlisttitlerow">
+	<FONT SIZE=+1><STRONG>&nbsp;<?php echo $LDUpdate ?></STRONG></FONT>
 	</td>
 	</tr>
-	<tr bgcolor="#DDE1EC">
+	<tr>
 	<td ><p><br>
 	<ul>
 <?php if (($error==1)and($newvalues!="")) echo "<FONT  COLOR=maroon  SIZE=+1  FACE=Arial>$LDNoData<p>";
 ?>
 <form method="post" action="phone_entry_update.php">
-<table bgcolor="#f9f9f9" border="1" cellpadding="5" cellspacing="1">
+<table class="submenu" border="1" cellpadding="5" cellspacing="1">
 <tr>
-<td colspan="3"><FONT    SIZE=-1  FACE="Arial">
+<td colspan="3">
 <b><?php  echo str_replace("~nr~",$zeile[item],$LDDirData); ?> </b>
 </td>
 <td >
@@ -197,7 +202,7 @@ if ($mode=='save'){
 </table>
 </form>
 
-<FONT    SIZE=-1  FACE="Arial">
+
 <p>
 <FORM action="phone_list.php" method="post">
 <input type="hidden" name="linecount" value="<?php echo $linecount ?>">

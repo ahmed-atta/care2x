@@ -227,22 +227,42 @@ if($dblink_ok)
 		
 $fr=strtolower(str_replace('.','-',($result['encounter_nr'].'_'.$result['name_last'].'_'.$result['name_first'].'_'.$result['date_birth'])));
 
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('nursing');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',"$LDPatDataFolder $station");
+
+ # hide return button
+ $smarty->assign('pbBack',FALSE);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('patient_folder.php','$nodoc','','$station','Main folder')");
+
+ # href for close button
+ $smarty->assign('breakfile','javascript:window.close()');
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',ucfirst($result[name_last]).",".ucfirst($result[name_first])." ".$result[date_birth]." ".$LDPatDataFolder);
+
+ # Body Onload js
+ $sOnLoadJs = 'onLoad="initwindow();';
+ if($mode=='changes_saved') $sOnLoadJs = $sOnLoadJs.'window.opener.location.reload();';
+ $sOnLoadJs = $sOnLoadJs.'"';
+ $smarty->assign('sOnLoadJs',$sOnLoadJs);
+
+# Collect js code
+
+ob_start();
+
 ?>
-
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<META http-equiv='Cache-Control' content='no-cache, must-revalidate'>
-<META http-equiv='Pragma: no-cache'>
-<HEAD>
-<?php echo setCharSet(); ?>
- <TITLE><?php echo ucfirst($result[name_last]).",".ucfirst($result[name_first])." ".$result[date_birth]." ".$LDPatDataFolder ?></TITLE>
-
-<style type="text/css">
-	A:link  {text-decoration: none; }
-	A:hover { color: red }
-	A:active {text-decoration: none;}
-	A:visited {text-decoration: none;}
-</style>
 
 <script language="javascript">
 <!-- 
@@ -378,25 +398,18 @@ function openDRGComposite(){
 //-->
 </script>
 <?php
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+$smarty->append('JavaScript',$sTemp);
+
+# Buffer page output
+
+ob_start();
+
 ?>
-</HEAD>
 
-<BODY bgcolor=#cde1ec onLoad="initwindow(); <?php if($mode=='changes_saved') echo 'window.opener.location.reload();' ?>" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 link="#800080" vlink="#800080">
-
-<table width=100% border=0 cellpadding="5" cellspacing=0>
-<tr>
-<td  bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php echo "$LDPatDataFolder $station"; ?></STRONG></FONT>
-</td>
-<!-- <td bgcolor="navy" height="10" align=right></a><a href="javascript:gethelp('patient_folder.php','<?php echo $nodoc ?>','','<?php echo $station ?>','Main folder')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?> alt="<?php echo $LDHelp ?>"></a><a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"></a></td>
- -->
- <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp('patient_folder.php','<?php echo $nodoc ?>','','<?php echo $station ?>','Main folder')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:window.close()" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
-</tr>
-<tr>
-<td colspan=2>
- <ul><p><br>
+<ul><p><br>
 
  <form  method="post" name="patient_folder" onSubmit="return isColorBarUpdated()">
  
@@ -723,19 +736,20 @@ if($edit){
   //echo '<a href="javascript:winClose()"><img '.createLDImgSrc($root_path,'close2.gif','0','absmiddle').'></a>';
 ?>
 
-
 </form>
 
-<p>
-</FONT>
 </ul>
-<p>
-</td>
-</tr>
-</table>        
-<p>
 <?php
-require($root_path.'include/inc_load_copyrite.php');
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+# Assign page output to the mainframe template
+
+$smarty->assign('sMainFrameBlockData',$sTemp);
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
 ?>
-</BODY>
-</HTML>

@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -55,7 +55,7 @@ $modetypes=array('sendmail','listmail');
 								$ok=$db->Execute($sql);
 								if($ok&&$db->CommitTrans())
 								 {
-									header("location:intra-email-addrbook.php".URL_REDIRECT_APPEND."&l2h=$l2h&folder=$folder");
+									header("location:intra-email-addrbook.php".URL_REDIRECT_APPEND."&l2h=$l2h&folder=$folder&mode=$mode");
 									exit;
 								 } else {
 								     $db->RollbackTrans();
@@ -91,7 +91,7 @@ $modetypes=array('sendmail','listmail');
 								    $db->BeginTrans();
 								    $ok=$db->Execute($sql);
 								    if($ok&&$db->CommitTrans()) { 
-									    header("location:intra-email-addrbook.php".URL_REDIRECT_APPEND."&l2h=$l2h&folder=$folder"); 
+									    header("location:intra-email-addrbook.php".URL_REDIRECT_APPEND."&l2h=$l2h&folder=$folder&mode=$mode");
 										exit;
 								    } else { 
 								        $db->RollbackTrans();
@@ -103,13 +103,40 @@ $modetypes=array('sendmail','listmail');
 						
 					} //end of if rows
 				}else { echo "$LDDbNoRead<br>$sql"; } 
-?>
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
+				
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
 
- <script language="javascript" >
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',"$LDIntraEmail - $LDAddrBook");
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('intramail.php','address','$mode','$folder')");
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('title',"$LDIntraEmail - $LDAddrBook");
+
+ # Set body onLoad javascript
+ if($task=="newadd") $smarty->assign('sOnLoadJs','onLoad="document.newform.name.focus();"');
+
+# Collect extra javascript code
+
+ob_start();
+
+?>
+
+<script language="javascript" >
 <!-- 
 	
 function newAddr()
@@ -122,7 +149,7 @@ function chkAddress(d)
 {
 	if(d.addr.value=="") 
 	{
-		alert("<?php $LDNoEmailAddress; ?>");
+		alert("<?php echo $LDNoEmailAddress; ?>");
 		d.addr.focus();
 		return false;
 	}
@@ -140,7 +167,7 @@ function chkDelete(d,m)
 											break;
 										}
 							}
-	return false;		
+	return false;
 }
 
 function selectAll(s,m)
@@ -154,50 +181,23 @@ function selectAll(s,m)
 </script> 
 
 <?php 
-require_once($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-?>
 
-</HEAD>
+$sTemp = ob_get_contents();
+ob_end_clean();
 
-<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php 
-if($mode=="newadd") echo ' onLoad="document.newform.name.focus()"';
- if (!$cfg['dhtml']){ echo ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
-<?php echo $test ?>
+$smarty->append('JavaScript',$sTemp);
 
-<table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
-<tr valign=top>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="30"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG> <?php echo "$LDIntraEmail - $LDAddrBook" ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();"><img 
-<?php echo createLDImgSrc($root_path,'back2.gif','0','absmiddle') ?> 
-style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a 
-href="javascript:gethelp('intramail.php','address','<?php echo $mode ?>','<?php echo $folder ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a></td>
-</tr>
-<tr valign=top >
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
+# Start buffering page output
 
-<FONT face="Verdana,Helvetica,Arial" size=2>
-<?php
+ob_start();
+
  echo '
-<FONT face="Verdana,Helvetica,Arial" size=2>
-  &nbsp; <b><a href="intra-email.php'.URL_APPEND.'&mode=listmail">'.$LDInbox.'</a> | 
+  &nbsp; <b><a href="intra-email.php'.URL_APPEND.'&mode=listmail">'.$LDInbox.'</a> |
   <a href="intra-email.php'.URL_APPEND.'&mode=compose">'.$LDNewEmail.'</a> | '.$LDAddrBook.' |
    <a href="javascript:gethelp(\'intramail.php\',\'address\',\''.$mode.'\',\''.$folder.'\')">'.$LDHelp.'</a>| 
 	<a href="intra-email-pass.php'.URL_APPEND.'">'.$LDLogout.'</a></b>
   <hr color=#000080>
    &nbsp; <FONT  color="#800000">'.$HTTP_COOKIE_VARS[$local_user.$sid].'</font>';
-/* echo '
-<FONT face="Verdana,Helvetica,Arial" size=2>
-  &nbsp; <b><a href="intra-email.php'.URL_APPEND.'&mode=listmail">'.$LDInbox.'</a> | 
-  <a href="intra-email.php'.URL_APPEND.'&mode=compose">'.$LDNewEmail.'</a> | '.$LDAddrBook.' |
-   <a href="intra-email-options.php'.URL_APPEND.'">'.$LDOptions.'</a> | 
-   <a href="javascript:gethelp(\'intramail.php\',\'address\',\''.$mode.'\',\''.$folder.'\')">'.$LDHelp.'</a>| 
-	<a href="intra-email-pass.php'.URL_APPEND.'">'.$LDLogout.'</a></b>
-  <hr color=#000080>
-   &nbsp; <FONT  color="#800000">'.$HTTP_COOKIE_VARS[$local_user.$sid].'</font>';
-*/
 ?>
 
 <?php if($task=="newadd") : ?>
@@ -206,17 +206,17 @@ href="javascript:gethelp('intramail.php','address','<?php echo $mode ?>','<?php 
 <FONT face="Verdana,Helvetica,Arial" size=2 color="#000080"><b><?php echo $LDSaveNewAddr ?></b></font>
 <table border=0>
   <tr bgcolor=#f9f9f9>
-    <td><FONT face="Verdana,Helvetica,Arial" size=2>&nbsp;<?php echo "$LDName, $LDFirstName" ?>:</td>
-    <td colspan=2><FONT face="Verdana,Helvetica,Arial" size=2><input type="text" name="name" size=25 maxlength=40 value="<?php echo $name ?>">
+    <td>&nbsp;<?php echo "$LDName, $LDFirstName" ?>:</td>
+    <td colspan=2><input type="text" name="name" size=25 maxlength=40 value="<?php echo $name ?>">
                                                               </td>
   </tr>
   <tr bgcolor=#f9f9f9>
-    <td><FONT face="Verdana,Helvetica,Arial" size=2>&nbsp;<?php echo "$LDAlias/$LDShortName" ?>:</td>
-    <td colspan=2><FONT face="Verdana,Helvetica,Arial" size=2><input type="text" name="alias" size=25 maxlength=40 value="<?php echo $alias ?>" ></td>
+    <td>&nbsp;<?php echo "$LDAlias/$LDShortName" ?>:</td>
+    <td colspan=2><input type="text" name="alias" size=25 maxlength=40 value="<?php echo $alias ?>" ></td>
   </tr>
   <tr bgcolor=#f9f9f9>
-    <td><FONT face="Verdana,Helvetica,Arial" size=2>&nbsp;<?php echo $LDEmailAddr ?>:<br></td>
-    <td><FONT face="Verdana,Helvetica,Arial" size=2><input type="text" name="addr" size=25 maxlength=40 value="<?php echo $addr ?>"></td>
+    <td>&nbsp;<?php echo $LDEmailAddr ?>:<br></td>
+    <td><input type="text" name="addr" size=25 maxlength=40 value="<?php echo $addr ?>"></td>
     <td><FONT face="Verdana,Helvetica,Arial" size=2 color="#800000"><b>@</b>
 	 <select name="dept" size=1>
                                                                             	
@@ -263,21 +263,21 @@ href="javascript:gethelp('intramail.php','address','<?php echo $mode ?>','<?php 
 		<form name="addrlist" action="intra-email-addrbook.php" method="post"  onSubmit="return chkDelete(this,'.sizeof($arrlist).')">
 	';
 	if ($maxrow>6) echo '
-  	<input type="submit" value="'.$LDDelete.'"> &nbsp;  &nbsp; <input type="button" value="'.$LDNewAddr.'" onClick="newAddr()">
+  	<input type="submit" value="'.$LDDelete.'"> &nbsp;  &nbsp; <input type="button" value="'.$LDAddNewAddr.'" onClick="newAddr()">
 	<br>';
 	echo '	<table border=0 cellspacing=0 width=100% cellpadding=0>
 	<tr ><td  colspan=6 height=1><img src="'.$root_path.'gui/img/common/default/pixel.gif" border=0 height=3 width=1></td></tr>
-     <tr bgcolor="#0060ae">
+     <tr class="adm_list_titlebar">
        <td>&nbsp;</td>
        <td>	<input type="checkbox" name="sel_all" value="1" onClick="selectAll(this,'.$maxrow.')"><br>
            </td>
-       <td><FONT face="Verdana,Helvetica,Arial" size=2 >';
+       <td>';
 	   if($l2h) echo '<a href="'.$thisfile.''.URL_APPEND.'&l2h=0&mode='.$mode.'&folder='.$folder.'" title="'.$LDSortName.'"><img src="'.$root_path.'gui/img/common/default/arw_down.gif" '; else echo '<a href="'.$thisfile.''.URL_APPEND.'&l2h=1&mode='.$mode.'&folder='.$folder.'" title="'.$LDSortName.'"><img src="'.$root_path.'gui/img/common/default/arw_up.gif" ';
 	   echo '
-	   width=12 height=20 border=0 align=absmiddle alt="'.$LDSortName.'"><font color="#ffffff"> &nbsp;<b>'.$LDName.','.$LDFirstName.':</b></td>
-       <td><FONT face="Verdana,Helvetica,Arial" size=2 color="#ffffff">&nbsp;&nbsp;<b>'.$LDAlias.'/'.$LDShortName.':
-		</b></td>
-		<td><FONT face="Verdana,Helvetica,Arial" size=2 color="#ffffff"> <b>'.$LDEmailAddr.':</b></font></a></td>
+	   width=12 height=20 border=0 align=absmiddle alt="'.$LDSortName.'">&nbsp;'.$LDName.','.$LDFirstName.':</td>
+       <td>&nbsp;&nbsp;'.$LDAlias.'/'.$LDShortName.':
+		</td>
+		<td>'.$LDEmailAddr.':</font></a></td>
 	        </tr>';
 	for($i=0;$i<sizeof($arrlist);$i++)
 	   {
@@ -289,9 +289,9 @@ href="javascript:gethelp('intramail.php','address','<?php echo $mode ?>','<?php 
        		<td>&nbsp;</td>
 			<td>	<input type="checkbox" name="del'.$i.'" value="'.strtr($delbuf," ","+").'"><br>
            	</td>
-       		<td><FONT face="Verdana,Helvetica,Arial" size=1>&nbsp; &nbsp; &nbsp; <a href="#" title="'.$LDMoreInfo.'">'.ucwords($minfo[n]).'</a></td>
-       		<td><FONT face="Verdana,Helvetica,Arial" size=1>&nbsp;&nbsp;'.$minfo[a].'</td>
-       		<td><FONT face="Verdana,Helvetica,Arial" size=1>&nbsp;&nbsp;'.$minfo[e].'</td>
+       		<td>&nbsp; &nbsp; &nbsp; <a href="#" title="'.$LDMoreInfo.'">'.ucwords($minfo[n]).'</a></td>
+       		<td>&nbsp;&nbsp;'.$minfo[a].'</td>
+       		<td>&nbsp;&nbsp;'.$minfo[e].'</td>
 	    	</tr>
 			<tr ><td bgcolor="#66aace" colspan=6 height=1><img src="'.$root_path.'gui/img/common/default/pixel.gif" border=0 height=1 width=1></td></tr>';
 		}
@@ -324,20 +324,16 @@ if($mode=="compose") echo $LDWriteEmail;
 		}
 echo '</a></font>';
  
+
+ $sTemp = ob_get_contents();
+ ob_end_clean();
+
+ # Assign to main template object
+	$smarty->assign('sMainFrameBlockData',$sTemp);
+
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
 ?>
- </FONT>
-<p>
-</td>
-</tr>
-<tr>
-<td bgcolor=<?php echo $cfg['bot_bgcolor']; ?>  colspan=2>
-<?php
-require($root_path.'include/inc_load_copyrite.php');
-?>
-</td>
-</tr>
-</table>        
-&nbsp;
-</FONT>
-</BODY>
-</HTML>

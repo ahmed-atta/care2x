@@ -1,21 +1,18 @@
  {{* Toolbar - Topblock  *}}
-<table border="0" width="100%" cellspacing="0" cellpadding="0">
- <tr valign=top>
+<table cellspacing="0"  class="titlebar" border=0>
+ <tr valign=top  class="titlebar" >
   <td bgcolor="{{$top_bgcolor}}" >
-   <FONT  COLOR="{{$top_txtcolor}}"  SIZE=+2  FACE="Arial">
-    <STRONG> &nbsp; {{$LDNursing}}{{$sToolbarTitle}}
+    &nbsp;{{$sTitleImage}}&nbsp;<font color="{{$top_txtcolor}}">{{$sToolbarTitle}}</font>
      {{if $Subtitle}}
       - {{$Subtitle}}
      {{/if}}
-    </STRONG>
-   </FONT>
   </td>
   <td bgcolor="{{$top_bgcolor}}" align=right>{{if $pbAux2}}<a
    href="{{$pbAux2}}"><img {{$gifAux2}} alt="" {{$dhtml}} ></a>{{/if}}{{if $pbAux1}}<a
-   href="{{$pbAux1}}"><img {{$gifAux1}} alt="" {{$dhtml}} ></a>{{/if}}<a
-   href="{{$pbBack}}"><img {{$gifBack2}} alt="" {{$dhtml}} ></a><a
-   href="{{$pbHelp}}"><img {{$gifHilfeR}} alt="" {{$dhtml}}></a><a 
-   href="{{$breakfile}}"><img {{$gifClose2}} alt="{{$LDCloseAlt}}" {{$dhtml}}></a>
+   href="{{$pbAux1}}"><img {{$gifAux1}} alt="" {{$dhtml}} ></a>{{/if}}{{if $pbBack}}<a
+   href="{{$pbBack}}"><img {{$gifBack2}} alt="" {{$dhtml}} ></a>{{/if}}{{if $pbHelp}}<a
+   href="{{$pbHelp}}"><img {{$gifHilfeR}} alt="" {{$dhtml}}></a>{{/if}}{{if $breakfile}}<a
+   href="{{$breakfile}}" {{$sCloseTarget}}><img {{$gifClose2}} alt="{{$LDCloseAlt}}" {{$dhtml}}></a>{{/if}}
   </td>
  </tr>
  </table>

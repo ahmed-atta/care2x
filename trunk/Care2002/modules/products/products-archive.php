@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -13,14 +13,8 @@ require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','products.php');
 $local_user='ck_prod_arch_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
 
-/*if(!isset($dept)||!$dept)
-{
-	if(isset($HTTP_COOKIE_VARS['ck_thispc_dept'])&&!empty($HTTP_COOKIE_VARS['ck_thispc_dept'])) $dept=$HTTP_COOKIE_VARS['ck_thispc_dept'];
-	 else $dept='plop';//default is plop dept
-}
-*/
+//$db->debug=1;
 
 if(!isset($mode)) $mode='';
 if(!isset($keyword)) $keyword='';
@@ -45,7 +39,8 @@ switch($cat)
 if($mode=='search')
 {
 	$keyword=trim($keyword);
-	if(($keyword=='')||($keyword=='%')||($keyword=='_')||(strlen($keyword)<2)) { header("location:$thisfile".URL_REDIRECT_APPEND."&invalid=1&cat=$cat&userck=$userck"); exit;}
+	//if(($keyword=='')||($keyword=='%')||($keyword=='_')||(strlen($keyword)<2)) { header("location:$thisfile".URL_REDIRECT_APPEND."&invalid=1&cat=$cat&userck=$userck"); exit;}
+	if(($keyword=='')||($keyword=='%')||($keyword=='_')) { header("location:$thisfile".URL_REDIRECT_APPEND."&invalid=1&cat=$cat&userck=$userck"); exit;}
 	if($lang=='de')
 	{
 		if(eregi($keyword,'eilig')) $keyword='urgent';
@@ -57,101 +52,137 @@ if($mode=='search')
 $linecount=0;
 
 //this is the search module
-if((($mode=='search')||$update)&&($keyword!='')) 
+if((($mode=='search')||$update)&&($keyword!=''))
 {
-	if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-	if($dblink_ok)		{
-		      /* Load date & time formatter */
-              include_once($root_path.'include/inc_date_format_functions.php');
-              
-	
-				if($such_date)
-				{
-				    switch(strtolower($date_format))
-					{
-					    case 'yyyy-mm-dd' : $separator='-'; break;
-						case 'mm/dd/yyyy' : $separator='/'; break;
-						case 'dd.mm.yyyy' : $separator='.';
-					}
-				
-					$pc=substr_count($keyword,$separator);
-						//echo $pc;
-					if($pc)
-					{
-/*				  	     switch($pc)
-					    {
-						    case 1:$sdt='%'.implode('.%',array_reverse(explode('.',$keyword)));break;
-						    case 2:$sdt='%'.implode('.%',array_reverse(explode('.',$keyword)));break;
-						    default:$sdt='%$keyword';
-					     }
-*/		  
-    	                $sdt='%'.formatDate2Std($keyword,$date_format);
-					}
-					elseif(strlen($keyword)>2) 
-					{    
-					     $sdt=$keyword;
-					}
-					else
-					{
-					     $sdt="________$keyword"; // 8 x _ to fill yyyy.mm.
-					}
-					
-				}
-				else
-				{
-				     $sdt='';
-			    }
-				
-				($such_dept)? $sdp=$keyword : $sdp='';
-				
-				($such_prio)?  $spr=$keyword : $spr='';
-				
-						$sql='SELECT o.* FROM '.$dbtable.' AS o  LEFT JOIN care_department AS d  ON o.dept_nr=d.nr
-													WHERE (o.order_date = "'.$sdt.'" 
-																OR o.dept_nr = "'.$sdp.'" 
-																OR ((d.name_formal = "'.$sdp.'" OR d.id = "'.$sdp.'") AND d.nr=o.dept_nr)
-																OR o.priority = "'.$spr.'" )
-																AND o.status="archive"
-																ORDER BY o.order_date DESC,  o.order_time DESC
-																LIMIT '.$ofset.', '.$nrows;
-				//echo $sql;
-						
-        		if($ergebnis=$db->Execute($sql)) $linecount=$ergebnis->RecordCount();			//count rows=linecount		
-				//reset result
-				if(!$linecount) 
-					{
-						($such_date)? $sdt.='%' : $sdt='';
-						($such_dept)? $sdp.='%' : $sdp='';
-						($such_prio)?  $spr.='%' : $spr='';
-						
-						$sql='SELECT o.* FROM '.$dbtable.' AS o  LEFT JOIN care_department AS d ON o.dept_nr=d.nr
-													WHERE (o.order_date LIKE "'.$sdt.'" 
-																OR o.dept_nr LIKE "'.$sdp.'" 
-																OR ((d.name_formal LIKE "'.$sdp.'%" OR d.id LIKE "'.$sdp.'%") AND d.nr=o.dept_nr)
-																OR o.priority LIKE "'.$spr.'" )
-																AND o.status="archive"
-																ORDER BY o.order_date DESC,  o.order_time DESC
-																LIMIT '.$ofset.', '.$nrows;
-						$linecount=0;
-        				if($ergebnis=$db->Execute($sql)) {
-							$linecount=$ergebnis->RecordCount();        
-						}				
-					}
-			//echo $sql;
+	/* Load date & time formatter */
+	include_once($root_path.'include/inc_date_format_functions.php');
+
+
+	if($such_date)
+	{
+		switch(strtolower($date_format))
+		{
+			case 'yyyy-mm-dd' : $separator='-'; break;
+			case 'mm/dd/yyyy' : $separator='/'; break;
+			case 'dd.mm.yyyy' : $separator='.';
+			default: $separator='';
+		}
+
+		$pc=substr_count($keyword,$separator);
+			//echo $pc;
+		if($pc)
+		{
+		/*
+		switch($pc)
+			{
+				case 1:$sdt='%'.implode('.%',array_reverse(explode('.',$keyword)));break;
+				case 2:$sdt='%'.implode('.%',array_reverse(explode('.',$keyword)));break;
+				default:$sdt='%$keyword';
+			}
+		*/
+		/*
+			$sdt=formatDate2Std($keyword,$date_format);
+			if(!empty($sdt)) $sdt='%'.$sdt;
+		*/
+		}
+		elseif(strlen($keyword)>2)
+		{
+			$sdt=$keyword;
+		}
+		else
+		{
+			$sdt="________$keyword"; // 8 x _ to fill yyyy.mm.
+		}
+
+			$sdt=formatDate2Std($keyword,$date_format);
+			if(!empty($sdt)) $sdt='%'.$sdt;
+
 	}
-  	 else { echo "$LDDbNoLink<br>"; } 
+	else
+	{
+		$sdt='';
+	}
+
+	($such_dept)? $sdp=$keyword : $sdp='';
+
+	($such_prio)?  $spr=$keyword : $spr='';
+
+	$sql="SELECT o.* FROM $dbtable AS o  LEFT JOIN care_department AS d  ON o.dept_nr=d.nr
+								WHERE (";
+	if($sdt) $sql = $sql."o.order_date = '$sdt'
+											OR";
+	$sql = $sql." o.dept_nr = ".(int)$sdp."
+											OR ((d.name_formal = '$sdp' OR d.id = '$sdp') AND d.nr=o.dept_nr)
+											OR o.priority = '$spr' )
+											AND o.status='archive'
+											ORDER BY o.order_date DESC,  o.order_time DESC";
+											//LIMIT $ofset, $nrows";
+	//echo $sql;
+
+	if($ergebnis=$db->SelectLimit($sql,$nrows,$ofset)) $linecount=$ergebnis->RecordCount();			//count rows=linecount
+	//reset result
+	if(!$linecount)
+	{
+		($such_date && $dt)? $sdt.='%' : $sdt='';
+		($such_dept)? $sdp.='%' : $sdp='';
+		($such_prio)?  $spr.='%' : $spr='';
+
+		$sql="SELECT o.* FROM $dbtable AS o  LEFT JOIN care_department AS d ON o.dept_nr=d.nr
+									WHERE (";
+		if($sdt) $sql = $sql."o.order_date $sql_LIKE '$sdt'
+												OR";
+		$sql = $sql." o.dept_nr $sql_LIKE '$sdp'
+												OR ((d.name_formal $sql_LIKE '$sdp%' OR d.id $sql_LIKE '$sdp%') AND d.nr=o.dept_nr)
+												OR o.priority $sql_LIKE '$spr')
+												AND o.status='archive'
+												ORDER BY o.order_date DESC,  o.order_time DESC";
+												//LIMIT $ofset, $nrows";
+		$linecount=0;
+		if($ergebnis=$db->SelectLimit($sql,$nrows,$ofset)) {
+			$linecount=$ergebnis->RecordCount();
+		}
+	}
+	//echo $sql;
 }// end of if(mode==search)
 
 //echo $sql;
 
-$abt=array("PLOP","GYN","Anästhesie","Unfall");
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
+
+ # Title in the title bar
+ $smarty->assign('sToolbarTitle',$title);
+
+ # href for the back button
+// $smarty->assign('pbBack',$returnfile);
+
+ # href for the help button
+ $smarty->assign('pbHelp',"javascript:gethelp('products.php','arch','','$cat')");
+
+ # href for the close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',$title);
+
+ # Assign Body Onload javascript code
+ $smarty->assign('sOnLoadJs','onLoad="document.suchform.keyword.select()"');
+
+ # Collect javascript code
+ ob_start()
+
 ?>
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
- <script language="javascript" >
-<!-- 
+
+<script language="javascript" >
+<!--
 
 function pruf(d)
 {
@@ -176,26 +207,20 @@ function show_order(d,o)
 </script> 
 
 <?php 
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-?></HEAD>
 
-<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="document.suchform.keyword.select()"
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
-<?php echo $test ?>
-<?php //foreach($argv as $v) echo "$v "; ?>
-<table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
-<tr valign=top>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="45">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG> &nbsp; <?php echo $title ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('products.php','arch','','<?php echo $cat ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
-</tr>
-<tr valign=top >
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+$smarty->append('JavaScript',$sTemp);
+
+# Buffer page output
+
+ob_start();
+
+?>
+
 <ul>
-<FONT face="Verdana,Helvetica,Arial" size=3 color="#990000">
+<FONT size=3 color="#990000">
 <?php if($from=="archivepass")
 {
 echo '<img '.createMascot($root_path,'mascot1_r.gif','0','bottom','absmiddle').'>';
@@ -211,7 +236,7 @@ echo ' '.$HTTP_COOKIE_VARS[$local_user.$sid];
 
 <?php require($root_path.'include/inc_products_archive_search_form.php'); ?>
 
-<hr width=80% align=left>
+<hr width=80%>
 <?php 
 if($linecount>0){
 
@@ -225,7 +250,6 @@ if($linecount>0){
 	}
 
 	echo '
-			<font face=Verdana,Arial size=2>
 			<p> ';
 			if ($linecount>1) echo $LDListFoundMany; else echo $LDListFound; 
 			 
@@ -233,12 +257,14 @@ if($linecount>0){
 
 		$tog=1;
 		echo '
-				<table border=0 cellspacing=0 cellpadding=0 bgcolor="#666666"><tr><td colspan=2>
+				<table border=0 cellspacing=0 cellpadding=0 class="frame">
+				<tr>
+				<td colspan=2>
 				<table border=0 cellspacing=1 cellpadding=3>
-  				<tr bgcolor="#ffffff">';
+  				<tr class="wardlisttitlerow">';
 		for ($i=0;$i<sizeof($LDArchindex);$i++)
 		echo '
-				<td><font face=Verdana,Arial size=2 color="#000080">'.$LDArchindex[$i].'</td>';
+				<td><font color="#000080">'.$LDArchindex[$i].'</td>';
 		echo '
 				</tr>';	
 
@@ -247,18 +273,18 @@ if($linecount>0){
 		while($content=$ergebnis->FetchRow())
  		{
 			if($tog)
-			{ echo '<tr bgcolor="#dddddd">'; $tog=0; }else{ echo '<tr bgcolor="#efefff">'; $tog=1; }
+			{ echo '<tr class="wardlistrow2">'; $tog=0; }else{ echo '<tr  class="wardlistrow1">'; $tog=1; }
 			
 /*			echo'
-				<td><font face=Verdana,Arial size=2>'.$i.'</td>
+				<td>'.$i.'</td>
 				<td><a href="javascript:show_order(\''.$content['dept'].'\',\''.$content['order_nr'].'\')"><img '.createComIcon($root_path,'uparrowgrnlrg.gif','0').' alt="'.$LDClk2SeeEdit.'"></a></td>
-				<td ><font face=Verdana,Arial size=2>'.strtoupper($content['dept']).'</td>
-				<td><font face=Verdana,Arial size=2>';
+				<td >'.strtoupper($content['dept']).'</td>
+				<td>';
 */			
             echo'
-				<td><font face=Verdana,Arial size=2>'.$i.'</td>
+				<td>'.$i.'</td>
 				<td><a href="products-archive-orderlist-showcontent.php'.URL_APPEND.'&userck='.$userck.'&cat='.$cat.'&dept_nr='.$content['dept_nr'].'&order_nr='.$content['order_nr'].'"><img '.createComIcon($root_path,'uparrowgrnlrg.gif','0').' alt="'.$LDClk2SeeEdit.'"></a></td>
-				<td ><font face=Verdana,Arial size=2>';
+				<td >';
 				
 				$buffer=$dept[$content['dept_nr']]['LD_var'];
 				if(isset($$buffer)&&!empty($$buffer)) 	echo $$buffer;
@@ -266,11 +292,11 @@ if($linecount>0){
 				
 				echo '
 				</td>
-				<td><font face=Verdana,Arial size=2>';
+				<td>';
 				
 			echo formatDate2Local($content['order_date'],$date_format).'</td>
 			
-				 <td><font face=Verdana,Arial size=2>'.convertTimeToLocal(str_replace('24','00',$content['order_time'])).'</td>
+				 <td>'.convertTimeToLocal(str_replace('24','00',$content['order_time'])).'</td>
 				<td align="center">';
 				
 			if($content['status']=='normal')
@@ -281,8 +307,8 @@ if($linecount>0){
 					</td>';
 
 			echo '
-				 <td><font face=Verdana,Arial size=2>'.str_replace('24','00',formatDate2Local($content['process_datetime'],$date_format)).' '.convertTimeToLocal(formatDate2Local($content['process_datetime'],$date_format,1,1)).'</td>
-				 <td><font face=Verdana,Arial size=2>'.$content['modify_id'].'</td>
+				 <td>'.str_replace('24','00',formatDate2Local($content['process_datetime'],$date_format)).' '.convertTimeToLocal(formatDate2Local($content['process_datetime'],$date_format,1,1)).'</td>
+				 <td>'.$content['modify_id'].'</td>
 				</tr>';
 			$i++;
 
@@ -344,7 +370,7 @@ if($mode=='search') echo '
 	<table border=0>
    <tr>
      <td><img '.createMascot($root_path,'mascot1_r.gif','0','middle').'></td>
-     <td><font face=Verdana,Arial size=2>'.$LDNoDataFound.'<br>'.$LDPlsEnterMore.'</td>
+     <td>'.$LDNoDataFound.'<br>'.$LDPlsEnterMore.'</td>
    </tr>
  </table>';
  
@@ -356,39 +382,28 @@ if($invalid) echo'
    <tr>
      <td> <img '.createMascot($root_path,'mascot1_r.gif','0','middle').'>
 		</td>
-     <td><font face=Verdana,Arial size=2>'.$LDNoSingleChar.'<br>'.$LDPlsEnterMore.'
+     <td>'.$LDNoSingleChar.'<br>'.$LDPlsEnterMore.'
 </td>
    </tr>
  </table>';
 	 ?>
 <p><br>
 
-<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  alt="<?php echo $LDClose ?>" align="middle"></a>
-
-	
+<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  alt="<?php echo $LDClose ?>"></a>
 
 </ul>
 
-</FONT>
-<p>
-</td>
-</tr>
-
-<tr>
-<td bgcolor=<?php echo $cfg['bot_bgcolor']; ?> height=70 colspan=2>
 <?php
-require($root_path.'include/inc_load_copyrite.php');
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+# Assign the form template to mainframe
+
+ $smarty->assign('sMainFrameBlockData',$sTemp);
+
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
 ?>
-</td>
-</tr>
-</table>        
-&nbsp;
-
-
-
-
-</FONT>
-
-
-</BODY>
-</HTML>

@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -22,7 +22,7 @@ $dbtable='care_mail_private';
 
 $linecount=0;
 $modetypes=array('sendmail','listmail');
-$breakfile="intra-email.php.?sid=$sid&lang=$lang&mode=listmail";
+$breakfile="intra-email.php".URL_APPEND."&mode=listmail";
 		
 		switch($folder)
 		{
@@ -83,13 +83,36 @@ $breakfile="intra-email.php.?sid=$sid&lang=$lang&mode=listmail";
 						$mailok=0;
 					}
 				}else { echo "$LDDbNoRead<br>$sql"; } 
-?>
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
+				
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
 
- <script language="javascript" >
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',"$LDIntraEmail - $LDRead");
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('intramail.php','read','$mode','$folder')");
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('title',"$LDIntraEmail - $LDRead");
+
+ # Collect extra javascript code
+
+ob_start();
+?>
+
+<script language="javascript" >
 <!-- 
 
 function submitForm(r)
@@ -111,33 +134,27 @@ function printer_v()
 </script> 
 
 <?php 
-require_once($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+$smarty->append('JavaScript',$sTemp);
+
+# Start buffering page output
+
+ob_start();
+
 ?>
 
-</HEAD>
-
-<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
-<?php if(isset($test)) echo $test; ?>
-<?php //foreach($argv as $v) echo "$v "; ?>
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
-<tr valign=top>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="30"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG> <?php echo "$LDIntraEmail - $LDRead" ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();"><img 
-<?php echo createLDImgSrc($root_path,'back2.gif','0','absmiddle') ?> 
-style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a 
-href="javascript:gethelp('intramail.php','read','<?php echo $mode ?>','<?php echo $folder ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a></td>
-</tr>
+
 <tr valign=top >
 <td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
 
-<FONT face="Verdana,Helvetica,Arial" size=2>
+
 <?php
 if(!isset($mode)) $mode='';
  echo '
-<FONT face="Verdana,Helvetica,Arial" size=2>
   &nbsp; <b><a href="intra-email.php'.URL_APPEND.'&mode=listmail">'.$LDInbox.'</a> | <a href="intra-email.php'.URL_APPEND.'&mode=compose">'.$LDNewEmail.'</a> | <a href="intra-email-addrbook.php'.URL_APPEND.'&mode='.$mode.'&folder='.$folder.'">'.$LDAddrBook.'</a> | <a href="intra-email-options.php'.URL_APPEND.'">'.$LDOptions.'</a> | <a href="javascript:gethelp(\'intramail.php\',\'read\',\''.$mode.'\',\''.$folder.'\')">'.$LDHelp.'</a></b>
   <hr color=#000080>
    &nbsp; <FONT  color="#800000">'.$HTTP_COOKIE_VARS[$local_user.$sid].'</font> &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
@@ -157,35 +174,35 @@ if(1)
 echo '<ul><form name="mailform" action="intra-email.php" method="post">  
 	<table border=0 cellspacing=1 cellpadding=3>
     <tr>
-      <td bgcolor="#f9f9f9" align=right><FONT face="Verdana,Helvetica,Arial" size=1 color="#000080">'.$LDFrom.':</td>
-      <td   bgcolor="#f9f9f9"><FONT face="Verdana,Helvetica,Arial" size=1 >'.$content['sender'].'
+      <td bgcolor="#f9f9f9" align=right><FONT size=1 color="#000080">'.$LDFrom.':</td>
+      <td   bgcolor="#f9f9f9"><FONT size=1 >'.$content['sender'].'
           </td>
     </tr>
     <tr>
-      <td bgcolor="#f9f9f9" align=right><FONT face="Verdana,Helvetica,Arial" size=1 color="#000080">'.$LDReply2.':</td>
-      <td   bgcolor="#f9f9f9"><FONT face="Verdana,Helvetica,Arial" size=1 >'.$content['reply2'].'
+      <td bgcolor="#f9f9f9" align=right><FONT size=1 color="#000080">'.$LDReply2.':</td>
+      <td   bgcolor="#f9f9f9"><FONT size=1 >'.$content['reply2'].'
           </td>
     </tr>
     <tr>
-      <td bgcolor="#f9f9f9" align=right><FONT face="Verdana,Helvetica,Arial" size=1 color="#000080">'.$LDTo.':</td>
-      <td   bgcolor="#f9f9f9"><FONT face="Verdana,Helvetica,Arial" size=1 >'.$content['recipient'].'
+      <td bgcolor="#f9f9f9" align=right><FONT size=1 color="#000080">'.$LDTo.':</td>
+      <td   bgcolor="#f9f9f9"><FONT size=1 >'.$content['recipient'].'
           </td>
     </tr>
-      <td bgcolor="#f9f9f9" align=right><FONT face="Verdana,Helvetica,Arial" size=1 color="#000080">'.$LDCC.' (CC)</td>
-      <td  bgcolor="#f9f9f9"><FONT face="Verdana,Helvetica,Arial" size=1 >'.$content['cc'].'</td>
+      <td bgcolor="#f9f9f9" align=right><FONT size=1 color="#000080">'.$LDCC.' (CC)</td>
+      <td  bgcolor="#f9f9f9"><FONT size=1 >'.$content['cc'].'</td>
     </tr>
     <tr>
-      <td bgcolor="#f9f9f9" align=right><FONT face="Verdana,Helvetica,Arial" size=1 color="#000080">'.$LDBCC.' <a href="#" title="'.$LDBCCTxt.'"><font color=#0000ff><u>(BCC)</u></font></a></td>
-      <td  bgcolor="#f9f9f9"><FONT face="Verdana,Helvetica,Arial" size=1 >'.$content['bcc'].'</td>
+      <td bgcolor="#f9f9f9" align=right><FONT size=1 color="#000080">'.$LDBCC.' <a href="#" title="'.$LDBCCTxt.'"><font color=#0000ff><u>(BCC)</u></font></a></td>
+      <td  bgcolor="#f9f9f9"><FONT size=1 >'.$content['bcc'].'</td>
     </tr>
     <tr>
-      <td bgcolor="#f9f9f9" align=right><FONT face="Verdana,Helvetica,Arial" size=1 color="#000080">'.$LDSubject.':</td>
-      <td  bgcolor="#f9f9f9"><FONT face="Verdana,Helvetica,Arial" size=1 >'.$content['subject'].'</td>
+      <td bgcolor="#f9f9f9" align=right><FONT size=1 color="#000080">'.$LDSubject.':</td>
+      <td  bgcolor="#f9f9f9"><FONT size=1 >'.$content['subject'].'</td>
     </tr>';
 	/*
     <tr>
-      <td bgcolor="#f9f9f9" align=right><FONT face="Verdana,Helvetica,Arial" size=1 color="#000080">Anhang:</td>
-      <td  bgcolor="#f9f9f9"><FONT face="Verdana,Helvetica,Arial" size=1 color="#000080"><a href="#">Zeigen <img src="../img/bul_arrowgrnsm.gif" width=12 height=12 border=0 align=absmiddle></a></td>
+      <td bgcolor="#f9f9f9" align=right><FONT size=1 color="#000080">Anhang:</td>
+      <td  bgcolor="#f9f9f9"><FONT size=1 color="#000080"><a href="#">Zeigen <img src="../img/bul_arrowgrnsm.gif" width=12 height=12 border=0 align=absmiddle></a></td>
     </tr>
 	*/
 echo '
@@ -231,7 +248,7 @@ echo '
  
 ?>
   
-</FONT>
+
 <p>
 </td>
 </tr>
@@ -245,18 +262,19 @@ echo nl2br($content['body']);
 </ul>
 </td>
 </tr>
-<tr>
-<td bgcolor=<?php echo $cfg['bot_bgcolor']; ?>  colspan=2>
+</table>
 
 <?php
-require($root_path.'include/inc_load_copyrite.php');
+
+ $sTemp = ob_get_contents();
+ ob_end_clean();
+
+ # Assign to main template object
+	$smarty->assign('sMainFrameBlockData',$sTemp);
+
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
 ?>
-
-</td>
-</tr>
-</table>        
-&nbsp;
-</FONT>
-
-</BODY>
-</HTML>

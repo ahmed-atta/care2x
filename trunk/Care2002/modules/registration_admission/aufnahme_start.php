@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -39,8 +39,6 @@ if($origin=='patreg_reg') $breakfile = 'patient_register_show.php'.URL_APPEND.'&
 	elseif($HTTP_COOKIE_VARS["ck_login_logged".$sid]) $breakfile = $root_path.'main/startframe.php'.URL_APPEND;
 		elseif(!empty($HTTP_SESSION_VARS['sess_path_referer'])) $breakfile=$root_path.$HTTP_SESSION_VARS['sess_path_referer'].URL_APPEND.'&pid='.$pid;
 			else $breakfile = "aufnahme_pass.php".URL_APPEND."&target=entry";
-
-//$db->debug=1;
 
 $newdata=1;
 
@@ -152,14 +150,14 @@ if($pid!='' || $encounter_nr!=''){
 					  if ($encounter_class_nr=='') { $errorstatus=1; $error=1; $errornum++;};
 	
 			          if($insurance_show) {
-                          if(trim($insurance_nr) && (trim($insurance_firm_name)=='')) { $errorinsnr=1; $error=1; $errornum++;}
+                          if(trim($insurance_nr) &&  trim($insurance_firm_name)=='') { $error_ins_co=1; $error=1; $errornum++;}
 		              }
 	              }
  				
-				
+
 
                  if(!$error) 
-	             {	$db->debug=0;
+	             {	
 					
 						if(!$GLOBAL_CONFIG['patient_service_care_hide']){
 						    if(!empty($sc_care_start)) $sc_care_start=formatDate2Std($sc_care_start,$date_format);
@@ -335,7 +333,521 @@ if($pid!='' || $encounter_nr!=''){
 
 }
 # Prepare text and resolve the numbers
-include_once($root_path.'include/inc_patient_encounter_type.php');		 
+include_once($root_path.'include/inc_patient_encounter_type.php');
 
-require('./gui_bridge/default/gui_aufnahme_start.php');
+# Prepare the title
+if($encounter_nr) $headframe_title = "$headframe_title $headframe_append ";
+
+# Prepare onLoad JS code
+if(!$encounter_nr && !$pid) $sOnLoadJs ='onLoad="if(document.searchform.searchkey.focus) document.searchform.searchkey.focus();"';
+
+
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
+
+# Title in the toolbar
+ $smarty->assign('sToolbarTitle',$headframe_title);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('admission_how2new.php')");
+
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('title',$headframe_title);
+
+ # Onload Javascript code
+ $smarty->assign('sOnLoadJs',$sOnLoadJs);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('person_admit.php')");
+
+ # Hide the return button
+ $smarty->assign('pbBack',FALSE);
+
+
+ # Start collectiong extra Javascript code
+ ob_start();
+
+# If  pid exists, output the form checker javascript
+if(isset($pid) && $pid){
+
+?>
+
+<script  language="javascript">
+<!--
+
+function chkform(d) {
+	encr=<?php if ($encounter_class_nr) {echo $encounter_class_nr; } else {echo '0';} ?>;
+	if(d.encounter_class_nr[0]&&d.encounter_class_nr[1]&&!d.encounter_class_nr[0].checked&&!d.encounter_class_nr[1].checked){
+		alert("<?php echo $LDPlsSelectAdmissionType; ?>");
+		return false;
+	}else if(d.encounter_class_nr[0]&&d.encounter_class_nr[0].checked&&!d.current_ward_nr.value){
+		alert("<?php echo $LDPlsSelectWard; ?>");
+		d.current_ward_nr.focus();
+		return false;
+	}else if(d.encounter_class_nr[1]&&d.encounter_class_nr[1].checked&&!d.current_dept_nr.value){
+		alert("<?php echo $LDPlsSelectDept; ?>");
+		d.current_dept_nr.focus();
+		return false;
+	}else if(!d.encounter_class_nr[0]&&encr==1&&!d.current_ward_nr.value){
+		alert("<?php echo $LDPlsSelectWard; ?>");
+		d.current_ward_nr.focus();
+		return false;
+	}else if(!d.encounter_class_nr[1]&&encr==2&&!d.current_dept_nr.value){
+		alert("<?php echo $LDPlsSelectDept; ?>");
+		d.current_dept_nr.focus();
+		return false;
+	}else if(d.referrer_diagnosis.value==""){
+		alert("<?php echo $LDPlsEnterRefererDiagnosis; ?>");
+		d.referrer_diagnosis.focus();
+		return false;
+	}else if(d.referrer_dr.value==""){
+		alert("<?php echo $LDPlsEnterReferer; ?>");
+		d.referrer_dr.focus();
+		return false;
+	}else if(d.referrer_recom_therapy.value==""){
+		alert("<?php echo $LDPlsEnterRefererTherapy; ?>");
+		d.referrer_recom_therapy.focus();
+		return false;
+	}else if(d.referrer_notes.value==""){
+		alert("<?php echo $LDPlsEnterRefererNotes; ?>");
+		d.referrer_notes.focus();
+		return false;
+	}else if(d.encoder.value==""){
+		alert("<?php echo $LDPlsEnterFullName; ?>");
+		d.encoder.focus();
+		return false;
+	}else{
+		return true;
+	}
+}
+function resolveLoc(){
+	d=document.aufnahmeform;
+	if(d.encounter_class_nr[0].checked==true) d.current_dept_nr.selectedIndex=0;
+		else d.current_ward_nr.selectedIndex=0;
+}
+
+<?php require($root_path.'include/inc_checkdate_lang.php'); ?>
+
+-->
+</script>
+<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
+
+<?php
+
+} // End of if(isset(pid))
+
+require('./include/js_popsearchwindow.inc.php');
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+$smarty->append('JavaScript',$sTemp);
+
+# Load tabs
+$target='entry';
+
+$parent_admit = TRUE;
+
+include('./gui_bridge/default/gui_tabs_patadmit.php');
+
+# If the origin is admission link, show the search prompt
+if(!isset($pid) || !$pid){
+
+	# Set color values for the search mask
+	$searchmask_bgcolor="#f3f3f3";
+	$searchprompt=$LDEntryPrompt;
+	$entry_block_bgcolor='#fff3f3';
+	$entry_body_bgcolor='#ffffff';
+	
+	$smarty->assign('entry_border_bgcolor','#6666ee');
+
+	$smarty->assign('sSearchPromptImg','<img '.createComIcon($root_path,'angle_down_l.gif','0','',TRUE).'>');
+
+	$smarty->assign('LDPlsSelectPatientFirst',$LDPlsSelectPatientFirst);
+	$smarty->assign('sMascotImg','<img '.createMascot($root_path,'mascot1_l.gif','0','absmiddle').'>');
+
+	# Start buffering the searchmask
+
+	ob_start();
+
+	$search_script='patient_register_search.php';
+	$user_origin='admit';
+	include($root_path.'include/inc_patient_searchmask.php');
+	
+	$sTemp = ob_get_contents();
+	
+	ob_end_clean();
+
+	$smarty->assign('sSearchMask',$sTemp);
+	$smarty->assign('sWarnIcon','<img '.createComIcon($root_path,'warn.gif','0','absmiddle',TRUE).'>');
+	$smarty->assign('LDRedirectToRegistry',$LDRedirectToRegistry);
+
+}else{
+
+	$smarty->assign('bSetAsForm',TRUE);
+
+	if($error){
+		$smarty->assign('error',TRUE);
+		$smarty->assign('sMascotImg','<img '.createMascot($root_path,'mascot1_r.gif','0','bottom').' align="absmiddle">');
+
+		 if ($errornum>1) $smarty->assign('LDError',$LDErrorS);
+		 	else 	$smarty->assign('LDError',$LDError);
+	}
+
+	$smarty->assign('LDCaseNr',$LDCaseNr);
+	if(isset($encounter_nr)&&$encounter_nr) 	$smarty->assign('encounter_nr',$encounter_nr);
+		else  $smarty->assign('encounter_nr','<font color="red">'.$LDNotYetAdmitted.'</font>');
+
+	$smarty->assign('img_source',"<img $img_source>");
+
+	$smarty->assign('LDAdmitDate',$LDAdmitDate);
+
+	 if(isset($encounter_nr)&&$encounter_nr) 	$smarty->assign('sAdmitDate',@formatDate2Local(date('Y-m-d'),$date_format));
+
+	$smarty->assign('LDAdmitTime',$LDAdmitTime);
+
+	if(isset($encounter_nr)&&$encounter_nr)  $smarty->assign('sAdmitTime',@convertTimeToLocal(date('H:i:s')));
+
+	$smarty->assign('LDTitle',$LDTitle);
+	$smarty->assign('title',$title);
+	$smarty->assign('LDLastName',$LDLastName);
+	$smarty->assign('name_last',$name_last);
+	$smarty->assign('LDFirstName',$LDFirstName);
+	$smarty->assign('name_first',$name_first);
+	
+	# Set a row span counter, initialize with 6
+	$iRowSpan = 6;
+
+	if($GLOBAL_CONFIG['patient_name_2_show']&&$name_2){
+		$smarty->assign('LDName2',$LDName2);
+		$smarty->assign('name_2',$name_2);
+		$iRowSpan++;
+	}
+
+	if($GLOBAL_CONFIG['patient_name_3_show']&&$name_3){
+		$smarty->assign('LDName3',$LDName3);
+		$smarty->assign('name_3',$name_3);
+		$iRowSpan++;
+	}
+
+	if($GLOBAL_CONFIG['patient_name_middle_show']&&$name_middle){
+		$smarty->assign('LDNameMid',$LDNameMid);
+		$smarty->assign('name_middle',$name_middle);
+		$iRowSpan++;
+	}
+		$smarty->assign('sRowSpan',"rowspan=\"$iRowSpan\"");
+
+		$smarty->assign('LDBday',$LDBday);
+		$smarty->assign('sBdayDate',@formatDate2Local($date_birth,$date_format));
+
+		$smarty->assign('LDSex',$LDSex);
+		if($sex=='m') $smarty->assign('sSexType',$LDMale);
+			elseif($sex=='f') $smarty->assign('sSexType',$LDFemale);
+
+		$smarty->assign('LDBloodGroup',$LDBloodGroup);
+		if($blood_group){
+				$buf='LD'.$blood_group;
+			$smarty->assign('blood_group',$$buf);
+		}
+
+		$smarty->assign('LDAddress',$LDAddress);
+
+		$smarty->assign('addr_str',$addr_str);
+		$smarty->assign('addr_str_nr',$addr_str_nr);
+		$smarty->assign('addr_zip',$addr_zip);
+		$smarty->assign('addr_citytown',$addr_citytown_name);
+		
+		$smarty->assign('LDAdmitClass',$LDAdmitClass);
+
+			if(is_object($encounter_classes)){
+				$sTemp = '';
+				while($result=$encounter_classes->FetchRow()) {
+					$LD=$result['LD_var'];
+					//if($in_ward && ($encounter_class_nr==$result['class_nr'])){ # If in ward, freeze encounter class
+					if($encounter_nr ){ # If admitted, freeze encounter class
+						if ($encounter_class_nr==$result['class_nr']){
+							if(isset($$LD)&&!empty($$LD)) $sTemp = $sTemp.$$LD; 
+								else $sTemp = $sTemp.$result['name'];
+							$sTemp = $sTemp.'<input name="encounter_class_nr" type="hidden"  value="'.$encounter_class_nr.'">';
+							break;
+						}
+					}else{
+						$sTemp = $sTemp.'<input name="encounter_class_nr" onClick="resolveLoc()" type="radio"  value="'.$result['class_nr'].'" ';
+						if($encounter_class_nr==$result['class_nr']) $sTemp = $sTemp.'checked';
+						$sTemp = $sTemp.'>';
+
+						if(isset($$LD)&&!empty($$LD)) $sTemp = $sTemp.$$LD;
+							else $sTemp = $sTemp.$result['name'];
+					}
+				}
+				$smarty->assign('sAdmitClassInput',$sTemp);
+			}
+
+			# If no encounter nr or inpatient, show ward/station info, 1 = inpatient
+			if(!$encounter_nr||$encounter_class_nr==1){
+
+				if ($errorward||$encounter_class_nr==1) $smarty->assign('LDWard',"<font color=red>$LDWard</font>");
+					$smarty->assign('LDWard',$LDWard);
+				$sTemp = '';
+				if($in_ward){
+
+					while($station=$ward_info->FetchRow()){
+						if(isset($current_ward_nr)&&($current_ward_nr==$station['nr'])){
+							$sTemp = $sTemp.$station['name'];
+							$sTemp = $sTemp.'<input name="current_ward_nr" type="hidden"  value="'.$current_ward_nr.'">';
+							break;
+						}
+					}
+				}else{
+					$sTemp = $sTemp.'<select name="current_ward_nr">
+								<option value=""></option>';
+					if(!empty($ward_info)&&$ward_info->RecordCount()){
+						while($station=$ward_info->FetchRow()){
+							$sTemp = $sTemp.'
+								<option value="'.$station['nr'].'" ';
+							if(isset($current_ward_nr)&&($current_ward_nr==$station['nr'])) $sTemp = $sTemp.'selected';
+							$sTemp = $sTemp.'>'.$station['name'].'</option>';
+						}
+					}
+					$sTemp = $sTemp.'</select>
+							<font size=1><img '.createComIcon($root_path,'redpfeil_l.gif','0','',TRUE).'> '.$LDForInpatient.'</font>';
+				}
+				$smarty->assign('sWardInput',$sTemp);
+			} //  End of if no encounter nr
+
+			# If no encounter nr or outpatient, show clinic/department info, 2 = outpatient
+			if(!$encounter_nr||$encounter_class_nr==2){
+
+				if ($errorward||$encounter_class_nr==2) $smarty->assign('LDDepartment',"<font color=red>$LDClinic/$LDDepartment</font>");
+					else $smarty->assign('LDDepartment',"$LDClinic/$LDDepartment");
+				$sTemp = '';
+				if($in_dept){
+					while($deptrow=$all_meds->FetchRow()){
+						if(isset($current_dept_nr)&&($current_dept_nr==$deptrow['nr'])){
+							$sTemp = $sTemp.$deptrow['name_formal'];
+							$sTemp = $sTemp.'<input name="current_dept_nr" type="hidden"  value="'.$current_dept_nr.'">';
+							break;
+						}
+					}
+				}else{
+					$sTemp = $sTemp.'<select name="current_dept_nr">
+							<option value=""></option>';
+							
+					if(is_object($all_meds)){
+						while($deptrow=$all_meds->FetchRow()){
+							$sTemp = $sTemp.'
+								<option value="'.$deptrow['nr'].'" ';
+							if(isset($current_dept_nr)&&($current_dept_nr==$deptrow['nr'])) $sTemp = $sTemp.'selected';
+							$sTemp = $sTemp.'>';
+							if($$deptrow['LD_var']!='') $sTemp = $sTemp.$$deptrow['LD_var'];
+								else $sTemp = $sTemp.$deptrow['name_formal'];
+									$sTemp = $sTemp.'</option>';
+						}
+					}
+					$sTemp = $sTemp.'</select><font size=1><img '.createComIcon($root_path,'redpfeil_l.gif','0','',TRUE).'> '.$LDForOutpatient.'</font>';
+				}
+				$smarty->assign('sDeptInput',$sTemp);
+			} // End of if no encounter nr
+
+			$smarty->assign('LDDiagnosis',$LDDiagnosis);
+			$smarty->assign('referrer_diagnosis','<input name="referrer_diagnosis" type="text" size="60" value="'.$referrer_diagnosis.'">');
+			$smarty->assign('LDRecBy',$LDRecBy);
+			$smarty->assign('referrer_dr','<input name="referrer_dr" type="text" size="60" value="'.$referrer_dr.'">');
+			$smarty->assign('LDTherapy',$LDTherapy);
+			$smarty->assign('referrer_recom_therapy','<input name="referrer_recom_therapy" type="text" size="60" value="'.$referrer_recom_therapy.'">');
+			$smarty->assign('LDSpecials',$LDSpecials);
+			$smarty->assign('referrer_notes','<input name="referrer_notes" type="text" size="60" value="'.$referrer_notes.'">');
+
+			if ($errorinsclass) $smarty->assign('LDBillType',"<font color=red>$LDBillType</font>");
+				else  $smarty->assign('LDBillType',$LDBillType);
+
+			$sTemp = '';
+			if(is_object($insurance_classes)){
+				while($result=$insurance_classes->FetchRow()) {
+
+					$sTemp = $sTemp.'<input name="insurance_class_nr" type="radio"  value="'.$result['class_nr'].'" ';
+					if($insurance_class_nr==$result['class_nr']) $sTemp = $sTemp.'checked';
+					$sTemp = $sTemp.'>';
+
+					$LD=$result['LD_var'];
+					if(isset($$LD)&&!empty($$LD)) $sTemp = $sTemp.$$LD;
+						else $sTemp = $sTemp.$result['name'];
+				}
+			}
+			$smarty->assign('sBillTypeInput',$sTemp);
+			$sTemp = '';
+			if ($error_ins_nr) $smarty->assign('LDInsuranceNr',"<font color=red>$LDInsuranceNr</font>");
+				else  $smarty->assign('LDInsuranceNr',$LDInsuranceNr);
+			 if(isset($insurance_nr)&&$insurance_nr) $sTemp = $insurance_nr;
+			$smarty->assign('insurance_nr','<input name="insurance_nr" type="text" size="60" value="'.$sTemp.'">');
+
+			$sTemp = '';
+			 if(isset($insurance_firm_name)) $sTemp = $insurance_firm_name;
+			if ($error_ins_co) $smarty->assign('LDInsuranceCo',"<font color=red>$LDInsuranceCo</font>");
+				else $smarty->assign('LDInsuranceCo',$LDInsuranceCo);
+
+			$sBuffer ="<a href=\"javascript:popSearchWin('insurance','aufnahmeform.insurance_firm_id','aufnahmeform.insurance_firm_name')\"><img ".createComIcon($root_path,'l-arrowgrnlrg.gif','0','',TRUE)."></a>";
+			$smarty->assign('insurance_firm_name','<input name="insurance_firm_name" type="text" size="60" value="'.$sTemp.'">'.$sBuffer);
+
+			if (!$GLOBAL_CONFIG['patient_service_care_hide']&& is_object($care_service)){
+				$smarty->assign('LDCareServiceClass',$LDCareServiceClass);
+				$sTemp = '';
+
+				$sTemp = $sTemp.'<select name="sc_care_class_nr" >';
+
+				while($buffer=$care_service->FetchRow()){
+					$sTemp = $sTemp.'
+						<option value="'.$buffer['class_nr'].'" ';
+					if($sc_care_class_nr==$buffer['class_nr']) $sTemp = $sTemp.'selected';
+					$sTemp = $sTemp.'>';
+					if(empty($$buffer['LD_var'])) $sTemp = $sTemp.$buffer['name'];
+						else $sTemp = $sTemp.$$buffer['LD_var'];
+					$sTemp = $sTemp.'</option>';
+				}
+				$sTemp = $sTemp.'</select>';
+
+				$smarty->assign('sCareServiceInput',$sTemp);
+
+				$smarty->assign('LDFrom',$LDFrom);
+				$sTemp = '';
+				 if(!empty($sc_care_start)) $sTemp = @formatDate2Local($sc_care_start,$date_format);
+
+				$smarty->assign('sCSFromInput','<input type="text" name="sc_care_start"  value="'.$sTemp.'" size=9 maxlength=10   onBlur="IsValidDate(this,\''.$date_format.'\')" onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\')">');
+				$smarty->assign('LDTo',$LDTo);
+				$sTemp = '';
+				 if(!empty($sc_care_end)) $sTemp = @formatDate2Local($sc_care_end,$date_format);
+				$smarty->assign('sCSToInput','<input type="text" name="sc_care_end"  value="'.$sTemp.'"  size=9 maxlength=10   onBlur="IsValidDate(this,\''.$date_format.'\')" onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\')">');
+				$smarty->assign('sCSHidden','<input type="hidden" name="sc_care_nr" value="'.$sc_care_nr.'">');
+
+			}
+
+			if (!$GLOBAL_CONFIG['patient_service_room_hide']&& is_object($room_service)){
+				$smarty->assign('LDRoomServiceClass',$LDRoomServiceClass);
+				$sTemp = '';
+
+				$sTemp = $sTemp.'<select name="sc_room_class_nr" >';
+
+				while($buffer=$room_service->FetchRow()){
+					$sTemp = $sTemp.'
+						<option value="'.$buffer['class_nr'].'" ';
+					if($sc_room_class_nr==$buffer['class_nr']) $sTemp = $sTemp.'selected';
+					$sTemp = $sTemp.'>';
+					if(empty($$buffer['LD_var'])) $sTemp = $sTemp.$buffer['name'];
+						else $sTemp = $sTemp.$$buffer['LD_var'];
+					$sTemp = $sTemp.'</option>';
+				}
+				$sTemp = $sTemp.'</select>';
+
+				$smarty->assign('sCareRoomInput',$sTemp);
+
+				//$smarty->assign('LDFrom',$LDFrom);
+				$sTemp = '';
+				 if(!empty($sc_room_start)) $sTemp = @formatDate2Local($sc_room_start,$date_format);
+
+				$smarty->assign('sRSFromInput','<input type="text" name="sc_room_start"  value="'.$sTemp.'" size=9 maxlength=10   onBlur="IsValidDate(this,\''.$date_format.'\')" onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\')">');
+				//$smarty->assign('LDTo',$LDTo);
+				$sTemp = '';
+				 if(!empty($sc_room_end)) $sTemp = @formatDate2Local($sc_room_end,$date_format);
+				$smarty->assign('sRSToInput','<input type="text" name="sc_room_end"  value="'.$sTemp.'"  size=9 maxlength=10   onBlur="IsValidDate(this,\''.$date_format.'\')" onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\')">');
+				$smarty->assign('sRSHidden','<input type="hidden" name="sc_room_nr" value="'.$sc_room_nr.'">');
+
+			}
+
+			if (!$GLOBAL_CONFIG['patient_service_att_dr_hide']&& is_object($att_dr_service)){
+				$smarty->assign('LDAttDrServiceClass',$LDAttDrServiceClass);
+				$sTemp = '';
+
+				$sTemp = $sTemp.'<select name="sc_att_dr_class_nr" >';
+
+				while($buffer=$att_dr_service->FetchRow()){
+					$sTemp = $sTemp.'
+						<option value="'.$buffer['class_nr'].'" ';
+					if($sc_att_dr_class_nr==$buffer['class_nr']) $sTemp = $sTemp.'selected';
+					$sTemp = $sTemp.'>';
+					if(empty($$buffer['LD_var'])) $sTemp = $sTemp.$buffer['name'];
+						else $sTemp = $sTemp.$$buffer['LD_var'];
+					$sTemp = $sTemp.'</option>';
+				}
+				$sTemp = $sTemp.'</select>';
+
+				$smarty->assign('sCareDrInput',$sTemp);
+
+				//$smarty->assign('LDFrom',$LDFrom);
+				$sTemp = '';
+				 if(!empty($sc_att_dr_start)) $sTemp = @formatDate2Local($sc_att_dr_start,$date_format);
+
+				$smarty->assign('sDSFromInput','<input type="text" name="sc_att_dr_start"  value="'.$sTemp.'" size=9 maxlength=10   onBlur="IsValidDate(this,\''.$date_format.'\')" onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\')">');
+				//$smarty->assign('LDTo',$LDTo);
+				$sTemp = '';
+				 if(!empty($sc_att_dr_end)) $sTemp = @formatDate2Local($sc_att_dr_end,$date_format);
+				$smarty->assign('sDSToInput','<input type="text" name="sc_att_dr_end"  value="'.$sTemp.'"  size=9 maxlength=10   onBlur="IsValidDate(this,\''.$date_format.'\')" onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\')">');
+				$smarty->assign('sDSHidden','<input type="hidden" name="sc_att_dr_nr" value="'.$sc_att_dr_nr.'">');
+
+			}
+
+			$smarty->assign('LDAdmitBy',$LDAdmitBy);
+			if (empty($encoder)) $encoder = $HTTP_COOKIE_VARS[$local_user.$sid];
+			$smarty->assign('encoder','<input  name="encoder" type="text" value="'.$encoder.'" size="28" readonly>');
+
+			$sTemp = '<input type="hidden" name="pid" value="'.$pid.'">
+				<input type="hidden" name="encounter_nr" value="'.$encounter_nr.'">
+				<input type="hidden" name="appt_nr" value="'.$appt_nr.'">
+				<input type="hidden" name="sid" value="'.$sid.'">
+				<input type="hidden" name="lang" value="'.$lang.'">
+				<input type="hidden" name="mode" value="save">
+				<input type="hidden" name="insurance_firm_id" value="'.$insurance_firm_id.'">
+				<input type="hidden" name="insurance_show" value="'.$insurance_show.'">';
+
+			if($update) $sTemp = $sTemp.'<input type="hidden" name=update value=1>';
+
+			$smarty->assign('sHiddenInputs',$sTemp);
+
+			$smarty->assign('pbSave','<input  type="image" '.createLDImgSrc($root_path,'savedisc.gif','0').' title="'.$LDSaveData.'" align="absmiddle">');
+
+			$smarty->assign('pbRegData','<a href="patient_register_show.php'.URL_APPEND.'&pid='.$pid.'"><img '.createLDImgSrc($root_path,'reg_data.gif','0').'  title="'.$LDRegistration.'"  align="absmiddle"></a>');
+			$smarty->assign('pbCancel','<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'cancel.gif','0').'  title="'.$LDCancel.'"  align="absmiddle"></a>');
+			//<!-- Note: uncomment the ff: line if you want to have a reset button  -->
+			/*<!--
+			$smarty->assign('pbRefresh','<a href="javascript:document.aufnahmeform.reset()"><img '.createLDImgSrc($root_path,'reset.gif','0').' alt="'.$LDResetData.'"  align="absmiddle"></a>');
+			-->
+			*/
+			
+			if($error==1)
+				$smarty->assign('sErrorHidInputs','<input type="hidden" name="forcesave" value="1">
+				<input  type="submit" value="'.$LDForceSave.'">');
+
+	if (!($newdata)) {
+
+		$sTemp = '
+		<form action='.$thisfile.' method=post>
+		<input type="hidden" name=sid value='.$sid.'>
+		<input type="hidden" name=patnum value="">
+		<input type="hidden" name="lang" value="'.$lang.'">
+		<input type=submit value="'.$LDNewForm.'">
+		</form>';
+		
+		$smarty->assign('sNewDataForm',$sTemp);
+	}
+
+}  // end of if !isset($pid...
+
+# Prepare shortcut links to other functions
+
+$smarty->assign('sSearchLink','<img '.createComIcon($root_path,'varrow.gif','0').'> <a href="aufnahme_daten_such.php'.URL_APPEND.'">'.$LDPatientSearch.'</a>');
+$smarty->assign('sArchiveLink','<img '.createComIcon($root_path,'varrow.gif','0').'> <a href="aufnahme_list.php'.URL_APPEND.'&newdata=1&from=entry">'.$LDArchive.'</a>');
+
+$smarty->assign('sMainBlockIncludeFile','registration_admission/admit_input.tpl');
+
+$smarty->display('common/mainframe.tpl');
 ?>

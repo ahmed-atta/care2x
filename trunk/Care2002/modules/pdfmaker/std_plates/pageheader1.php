@@ -1,4 +1,5 @@
 <?php
+
 if (eregi('pageheader1.php',$PHP_SELF)){
 	die('<meta http-equiv="refresh" content="0; url=../../../">');
 }

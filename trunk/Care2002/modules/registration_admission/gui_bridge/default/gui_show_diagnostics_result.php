@@ -1,11 +1,11 @@
-<table border=0 cellpadding=4 cellspacing=1 width=100%>
+<table border=0 cellpadding=4 cellspacing=1 width=100% class="frame">
   <tr bgcolor="#f6f6f6">
     <td <?php echo $tbg; ?>></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDReportNr; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDReportingDept; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDAdmitNr; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDate; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDTime; ?></td>
+    <td <?php echo $tbg; ?>><FONT color="#000066"><?php echo $LDReportNr; ?></td>
+    <td <?php echo $tbg; ?>><FONT color="#000066"><?php echo $LDReportingDept; ?></td>
+    <td <?php echo $tbg; ?>><FONT color="#000066"><?php echo $LDAdmitNr; ?></td>
+    <td <?php echo $tbg; ?>><FONT color="#000066"><?php echo $LDDate; ?></td>
+    <td <?php echo $tbg; ?>><FONT color="#000066"><?php echo $LDTime; ?></td>
   </tr>
 <?php
 while($row=$result->FetchRow()){
@@ -17,9 +17,9 @@ while($row=$result->FetchRow()){
 
 
   <tr bgcolor="#fefefe">
-    <td><a href="<?php echo $buf; ?>&user_origin=patreg" target="_new"><img <?php echo createComIcon($root_path,'info3.gif','0'); ?>></a></td>
-    <td><FONT SIZE=-1  FACE="Arial"><?php echo $row['report_nr']; ?></td>
-    <td><FONT SIZE=-1  FACE="Arial" color="#006600"><b>
+    <td><a href="<?php echo $buf; ?>&user_origin=patreg" target="_new"><img <?php echo createComIcon($root_path,'info3.gif','0','',TRUE); ?>></a></td>
+    <td><?php echo $row['report_nr']; ?></td>
+    <td><FONT color="#006600"><b>
 	<?php 
 		$deptnr_ok=false;
 		while(list($x,$v)=each($depts_array)){
@@ -37,9 +37,9 @@ while($row=$result->FetchRow()){
 		}
 	 ?></b>
 	</td>
-    <td><FONT SIZE=-1  FACE="Arial"><?php echo $full_en; ?></td>
-    <td><FONT SIZE=-1  FACE="Arial"><?php echo @formatDate2Local($row['report_date'],$date_format); ?></td>
-    <td><FONT SIZE=-1  FACE="Arial"><?php echo $row['report_time']; ?></td>
+    <td><?php echo $full_en; ?></td>
+    <td><?php echo @formatDate2Local($row['report_date'],$date_format); ?></td>
+    <td><?php echo $row['report_time']; ?></td>
   </tr>
 
 <?php

@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -201,13 +201,37 @@ switch($mode)
 
 if($edit) $returnfile.='&batch_nr='.$batch_nr.'&pn='.$pn.'&tracker='.$tracker;
 
-?>
+# Prepare title
+$sTitle = $LDDiagnosticTest." (".$batch_nr.")";
 
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
- <TITLE><?php echo "$LDDiagnosticTest $station" ?></TITLE>
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',$sTitle);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('pending_patho_findings.php')");
+
+ # href for return  button
+ $smarty->assign('pbBack',$returnfile);
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',$sTitle);
+
+ # collect extra javascript code
+ ob_start();
+?>
 
 <style type="text/css">
 div.fva2_ml10 {font-family: verdana,arial; font-size: 12; margin-left: 10;}
@@ -270,33 +294,20 @@ function printOut()
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
 <script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 <?php
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-?>
-</HEAD>
 
-<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> 
-onLoad="if (window.focus) window.focus(); " 
-topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+$sTemp = ob_get_contents();
+ob_end_clean();
 
-<table width=100% border=0 cellpadding="5" cellspacing=0>
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php echo $LDDiagnosticTest; echo " (#".$batch_nr.")"; ?></STRONG></FONT>
-</td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr>
-<a href="<?php echo $returnfile; ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('pending_patho_findings.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
-</tr>
-<tr>
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> colspan=2>
- <ul>
+$smarty->append('JavaScript',$sTemp);
 
-<?php if ($edit)
-{
-?>
-<form name="form_test_request" method="post" action="<?php echo $thisfile ?>" onSubmit="return chkForm(this)">
-<?php
+# Buffer page output
+
+ob_start();
+
+echo '<ul>';
+
+if ($edit){
+	echo '<form name="form_test_request" method="post" action="'.$thisfile.'" onSubmit="return chkForm(this)">';
 }
 
 require_once($root_path.'include/inc_test_findings_form_patho.php');
@@ -306,40 +317,35 @@ if ($edit){
    echo'
          <input type="image" '.createLDImgSrc($root_path,'savedisc.gif').'>';
 }
-?>
-  
-         <a href="javascript:printOut()"><img <?php echo createLDImgSrc($root_path,'printout.gif','0') ?>></a>
-<?php
-if (isset($stored_findings['status']) && $stored_findings['status']!='done')
-{
+ 
+echo '<a href="javascript:printOut()"><img '.createLDImgSrc($root_path,'printout.gif','0').'></a>';
+
+if (isset($stored_findings['status']) && $stored_findings['status']!='done'){
+
   echo'
          <a href="'. $thisfile.'?sid='.$sid.'&lang='.$lang.'&edit='.$edit.'&mode=done&target='.$target.'&subtarget='.$subtarget.'&batch_nr='.$batch_nr.'&pn='.$pn.'&user_origin='.$user_origin.'&entry_date='.$entry_date.'"><img '.createLDImgSrc($root_path,'done.gif','0').' alt="'.$LDDone.'"></a>';
 }
-?>
 
-<?php
-if ($edit)
-{
-require($root_path.'include/inc_test_request_hiddenvars.php');
+if ($edit){
 
-?>
-<input type="hidden" name="entry_date" value="<?php echo $entry_date ?>">
-
-</form>
-<?php
+	include($root_path.'include/inc_test_request_hiddenvars.php');
+	
+	echo '<input type="hidden" name="entry_date" value="'.$entry_date.'">
+	</form>';
 }
+
+echo '</ul>';
+
+$sTemp = ob_get_contents();
+ ob_end_clean();
+
+# Assign the page output to main frame template
+
+ $smarty->assign('sMainFrameBlockData',$sTemp);
+
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
 ?>
-
-</FONT>
-
-</ul>
-<p>
-</td>
-</tr>
-</table>        
-<p>
-
-<?php
-require($root_path.'include/inc_load_copyrite.php');?>
-</BODY>
-</HTML>

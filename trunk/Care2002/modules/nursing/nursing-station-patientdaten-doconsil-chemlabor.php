@@ -6,7 +6,7 @@ require($root_path.'include/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.net, elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -95,13 +95,10 @@ define('LANG_FILE','konsil_chemlabor.php');
 *  and set the user cookie name and break or return filename
 */
 
-if($user_origin=='lab')
-{
+if($user_origin=='lab'){
   $local_user='ck_lab_user';
   $breakfile=$root_path."modules/laboratory/labor.php".URL_APPEND;
-}
-else
-{
+}else{
   $local_user='ck_pflege_user';
   $breakfile=$root_path."modules/nursing/nursing-station-patientdaten.php".URL_APPEND."&edit=$edit&station=$station&pn=$pn";
 }
@@ -288,22 +285,52 @@ if(isset($pn)&&$pn) {
 			             }
 			               else {echo "<p>$sql<p>$LDDbNoRead"; exit;}
 						 $mode="save";   
-		   }	    
-		
-if(!isset($edit)) $edit=FALSE;	
-		
+		   }
+
+if(!isset($edit)) $edit=FALSE;
+
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle', "$LDDiagnosticTest :: $LDCentralLab");
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('request_chemlab.php','$pn')");
+
+ # hide return  button
+ $smarty->assign('pbBack',FALSE);
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle', "$LDDiagnosticTest :: $LDCentralLab");
+
+ # Prepare new form start button
+ if($user_origin=='lab' && $pn){
+ 	$smarty->assign('gifAux1',createLDImgSrc($root_path,'newpat2.gif','0'));
+	$smarty->assign('pbAux1',$thisfile.URL_APPEND."&station=$station&user_origin=$user_origin&status=$status&target=$target&noresize=$noresize");
+}
+
+# Prepare Body onLoad javascript code
+$sTemp = 'onLoad="if (window.focus) window.focus(); loadM(\'form_test_request\');';
+if($pn=="") $sTemp = $sTemp .'document.searchform.searchkey.focus();';
+
+$smarty->assign('sOnLoadJs',$sTemp .'"');
+
+ # collect extra javascript code
+ ob_start();
 ?>
 
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
- <TITLE><?php echo "$LDDiagnosticTest $station" ?></TITLE>
-<?php
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-
-?>
 <style type="text/css">
 .lab {font-family: arial; font-size: 9; color:purple;}
 .lmargin {margin-left: 5;}
@@ -312,13 +339,11 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <script language="javascript">
 <!-- 
 
-function chkForm(d)
-{ 
+function chkForm(d){
    return true 
 }
 
-function loadM(fn)
-{
+function loadM(fn){
 	mBlank=new Image();
 	mBlank.src="b.gif";
 	mFilled=new Image();
@@ -327,33 +352,25 @@ function loadM(fn)
 	form_name=fn;
 }
 
-function setM(m)
-{
+function setM(m){
     eval("marker=document.images."+m);
 	eval("element=document."+form_name+"."+m);
 	
-    if(marker.src!=mFilled.src)
-	{
+    if(marker.src!=mFilled.src)	{
 	   marker.src=mFilled.src;
 	   element.value='1';
 	  // alert(element.name+element.value);
-	}
-	 else 
-	 {
+	}else{
 	    marker.src=mBlank.src;
 		element.value='0';
 	  // alert(element.name+element.value);
 	 }
 }
 
-
-function setThis(prep,elem,begin,end,step)
-{
-  for(i=begin;i<end;i=i+step)
-  {
+function setThis(prep,elem,begin,end,step){
+  for(i=begin;i<end;i=i+step)  {
      x=prep + i;
-     if(elem!=i)
-     {
+     if(elem!=i)     {
        eval("marker=document.images."+x);
 	   if(marker.src==mFilled.src)  setM(x);
      }
@@ -361,38 +378,39 @@ function setThis(prep,elem,begin,end,step)
   setM(prep+elem);
 }
 
-function sendLater()
-{
+function sendLater(){
    document.form_test_request.status.value="draft";
    if(chkForm(document.form_test_request)) document.form_test_request.submit(); 
 }
 
-function printOut()
-{
+function printOut(){
 	urlholder="<?php echo $root_path; ?>modules/laboratory/labor_test_request_printpop.php?sid=<?php echo $sid ?>&lang=<?php echo $lang ?>&user_origin=<?php echo $user_origin ?>&subtarget=chemlabor&batch_nr=<?php echo $batch_nr ?>&pn=<?php echo $pn; ?>";
 	testprintout<?php echo $sid ?>=window.open(urlholder,"testprintout<?php echo $sid ?>","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
     testprintout<?php echo $sid ?>.print();
 }
 
-
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
+
 //-->
 </script>
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js">
-</script>
+<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
+ 
+<?php
 
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js">
-</script>
-</HEAD>
+$sTemp = ob_get_contents();
+ob_end_clean();
 
-<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> 
-onLoad="if (window.focus) window.focus(); loadM('form_test_request');  
-<?php if($pn=="") echo "document.searchform.searchkey.focus();" ?>" 
-topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+$smarty->append('JavaScript',$sTemp);
 
-<?php if(!$noresize)
-{
+# Buffer page output
+
+ob_start();
+
+# Show list and actual form
+
+ if(!$noresize){
+
 ?>
 
 <script>	
@@ -404,29 +422,11 @@ topmargin=0 leftmargin=0 marginwidth=0 marginheight=0
 }
 ?>
 
-<table width=100% border=0 cellpadding="5" cellspacing=0>
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php echo "$LDDiagnosticTest :: $LDCentralLab";; //if($user_origin!="lab") echo " (".$station.")"; ?></STRONG></FONT>
-</td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right ><nobr>
-<?php 
-if($user_origin=='lab' && $pn)
-{
-?>
-<a href="<?php echo $thisfile."?sid=$sid&lang=$lang&station=$station&user_origin=$user_origin&status=$status&target=$target&noresize=$noresize"; ?>"><img <?php echo createLDImgSrc($root_path,'newpat2.gif','0') ?> <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';?>></a>
-&nbsp;
+<ul>
 <?php
-}
-?>
-<a href="javascript:gethelp('request_chemlab.php','<?php echo $pn ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';?>></a><a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';?>></a></nobr></td>
-</tr>
-<tr>
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> colspan=2>
- <ul>
-<?php
-if($edit)
-{
+
+if($edit){
+
 ?>
 <form name="form_test_request" method="post" action="<?php echo $thisfile ?>">
 <?php
@@ -437,16 +437,15 @@ $controls_table_width=745;
 
 require($root_path.'include/inc_test_request_controls.php');
 
-}
-elseif(!$read_form && !$no_proc_assist)
-{
+}elseif(!$read_form && !$no_proc_assist){
+
 ?>
 
 <table border=0>
   <tr>
     <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','absmiddle') ?>></td>
-    <td><font color="#000099" SIZE=3  FACE="verdana,Arial"> <b><?php echo $LDPlsSelectPatientFirst ?></b></font></td>
-    <td valign="bottom"><img <?php echo createComIcon($root_path,'angle_down_r.gif','0') ?>></td>
+    <td class="prompt"><?php echo $LDPlsSelectPatientFirst ?></td>
+    <td valign="bottom"><img <?php echo createComIcon($root_path,'angle_down_r.gif','0','',TRUE) ?>></td>
   </tr>
 </table>
 <?php
@@ -999,7 +998,7 @@ ob_start();
 		   if(strpos($x,"_telx_")!==FALSE)
 		   {
 		      echo '
-			          <td align="right" '.$tdbgcolor.'><img '.createComIcon($root_path,'violet_phone.gif','0','absmiddle').'></td>';
+			          <td align="right" '.$tdbgcolor.'><img '.createComIcon($root_path,'violet_phone.gif','0','absmiddle',TRUE).'></td>';
 	        }
 			else
 			{ 
@@ -1036,7 +1035,7 @@ ob_end_flush();
     <td colspan=11><input type="text" name="notes" size=65 maxlength=60 value="<?php if($edit_form||$read_form) echo stripslashes($stored_request['notes']); ?>"></td>
   </tr>
   <tr>
-    <td colspan=20><font size=2 face="verdana,arial" color="purple">&nbsp;<?php echo $LDEmergencyProgram.' &nbsp;&nbsp;&nbsp;<img '.createComIcon($root_path,'violet_phone.gif','0','absmiddle').'> '.$LDPhoneOrder ?></td>
+    <td colspan=20><font size=2 face="verdana,arial" color="purple">&nbsp;<?php echo $LDEmergencyProgram.' &nbsp;&nbsp;&nbsp;<img '.createComIcon($root_path,'violet_phone.gif','0','absmiddle',TRUE).'> '.$LDPhoneOrder ?></td>
   </tr>
 
 </table><!-- End of the main table holding the form -->
@@ -1067,18 +1066,20 @@ require($root_path.'include/inc_test_request_hiddenvars.php');
 }
 ?>
 
-</FONT>
 </ul>
-<p>
-</td>
-
-</tr>
-</table>        
-<p>
 
 <?php
-require($root_path.'include/inc_load_copyrite.php');
+
+$sTemp = ob_get_contents();
+ ob_end_clean();
+
+# Assign the page output to main frame template
+
+ $smarty->assign('sMainFrameBlockData',$sTemp);
+
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
 ?>
-<a name="bottom"></a>
-</BODY>
-</HTML>

@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -30,29 +30,17 @@ $returnfile='cafenews-edit-select.php'.URL_APPEND;
 
 $dbtable='care_cafe_prices';
 
-/* Establish db connection */
-if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
+$sql="SELECT article FROM $dbtable WHERE description='group'";
 
-if($dblink_ok)
-{
-		 	$sql="SELECT article FROM $dbtable WHERE description='group'";	
+if(defined('LANG_DEPENDENT') && (LANG_DEPENDENT==1)){
+	$sql.="' AND lang='".$lang."'";
+}
 			
-            if(defined('LANG_DEPENDENT') && (LANG_DEPENDENT==1))
-            {
-	            $sql.="' AND lang='".$lang."'";
-            }
-			
-			if($ergebnis=$db->Execute($sql))
-       		{
-				
-				$rows=$ergebnis->RecordCount();
-			}
-				else echo "<p>".$sql."<p>$LDDbNoRead"; 
-
-} 
-else { 
-    echo "$LDDbNoLink<br> $sql<br>"; }
-
+if($ergebnis=$db->Execute($sql)){
+	$rows=$ergebnis->RecordCount();
+}else{
+	echo "<p>".$sql."<p>$LDDbNoRead";
+}
 
 ?>
 <?php html_rtl($lang); ?>
@@ -91,16 +79,19 @@ function chkRadioButton(e){
 	if(e) e.checked=true;
 }
 </SCRIPT>
+
+<?php require($root_path.'include/inc_css_a_hilitebu.php'); ?>
+
 </head>
 <body>
-<FONT  SIZE=8 COLOR="#cc6600" FACE="verdana,Arial">
+<FONT  SIZE=8 COLOR="#cc6600">
 <a href="javascript:editcafe()"><img <?php echo createComIcon($root_path,'basket.gif','0') ?>></a> <b><?php echo $LDCafePrices ?></b></FONT>
 <hr>
 <form name="selectform" action="cafenews-edit-price-select.php" <?php if($rows) echo 'onSubmit="return chkForm(this)"'; ?>>
 <table border=0>
   <tr>
     <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0') ?>></td>
-    <td colspan=2><FONT  SIZE=4 COLOR="#000066" FACE="verdana,Arial">
+    <td colspan=2><FONT  SIZE=4 COLOR="#000066">
 <?php if ($rows) : ?>
 			<?php echo $LDMarkGroup ?>
 <?php else : ?>
@@ -113,7 +104,7 @@ function chkRadioButton(e){
 	echo '
   <tr>
     <td>&nbsp;</td>
-    <td bgcolor="ccffff" colspan=2><FONT FACE="verdana,Arial"><p><br>';
+    <td bgcolor="ccffff" colspan=2><p><br>';
 	for($i=0;$i<$rows;$i++)
 	{
 		$ginfo=$ergebnis->FetchRow();
@@ -126,14 +117,14 @@ function chkRadioButton(e){
   </tr>
   <tr>
     <td >&nbsp;</td>
-    <td colspan=2><FONT  SIZE=4 COLOR="#000066" FACE="verdana,Arial">'.$LDOr.'...</td>
+    <td colspan=2><FONT  SIZE=4 COLOR="#000066">'.$LDOr.'...</td>
   </tr>
 	';
 }
  ?>
 
     <td>&nbsp;</td>
-    <td bgcolor="ccffff" colspan=2><FONT FACE="verdana,Arial"><p><br>
+    <td bgcolor="ccffff" colspan=2><p><br>
 		<input type="radio" name="groupopt" value="newgroup" <?php if (!$rows) echo "checked"; ?>> 
 		<a href="#" <?php 
 			if(!$rows) $i=0;
@@ -143,10 +134,10 @@ function chkRadioButton(e){
   </tr>
   <tr>
     <td >&nbsp;</td>
-    <td colspan=2><FONT  SIZE=4 COLOR="#000066" FACE="verdana,Arial"><?php echo $LDOr ?>...</td>
+    <td colspan=2><FONT  SIZE=4 COLOR="#000066"><?php echo $LDOr ?>...</td>
   </tr>
     <td>&nbsp;</td>
-    <td bgcolor="ccffff" colspan=2><p><br><FONT FACE="verdana,Arial">
+    <td bgcolor="ccffff" colspan=2><p><br>
 		<input type="radio" name="groupopt" value="set_currency" <?php if (!$rows) echo "checked"; ?>> 
  		<a href="#" <?php 
 		if(!$rows) $i=1; else $i++;

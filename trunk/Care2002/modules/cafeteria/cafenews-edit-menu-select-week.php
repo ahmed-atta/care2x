@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -31,22 +31,24 @@ function chkForm(d)
 }
 </script>
 
+<?php require($root_path.'include/inc_css_a_hilitebu.php'); ?>
+
 </head>
 <body>
-<FONT  SIZE=6 COLOR="#cc6600" FACE="verdana,Arial">
+<FONT  SIZE=8 COLOR="#cc6600">
 <img <?php echo createComIcon($root_path,'basket.gif','0') ?>><b><?php echo $LDCafeMenu ?></b></FONT>
 <hr>
 <form name="selectform" action="cafenews-edit-menu.php" onSubmit="return chkForm(this)">
 <table border=0>
   <tr>
     <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0') ?>></td>
-    <td ><FONT FACE="verdana,Arial"><FONT  SIZE=5 COLOR="#000066" FACE="verdana,Arial">
+    <td ><FONT  SIZE=5 COLOR="#000066">
 		<?php echo $LDMarkWeek ?></font><p>
 			<font size=2><?php echo $LDClkContinue ?></td>
   </tr>
   <tr>
     <td>&nbsp;</td>
-    <td bgcolor="ccffff"><FONT FACE="verdana,Arial"><p><br>
+    <td bgcolor="ccffff"><p><br>
 		<input type="radio" name="week" value="1"> <a href="#" onClick="document.selectform.week[0].checked=true"><?php echo $LDThisWeek ?></a><br>
     	<input type="radio" name="week" value="2"> <a href="#" onClick="document.selectform.week[1].checked=true"><?php echo $LDNextWeek ?></a><br>
     	<input type="radio" name="week" value="3"> <a href="#" onClick="document.selectform.week[2].checked=true"><?php echo $LD3rdWeek ?></a><br><p>

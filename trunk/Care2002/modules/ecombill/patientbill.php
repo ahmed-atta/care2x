@@ -15,16 +15,46 @@ define('LANG_FILE','billing.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
+//$db->debug=1;
 
     /* include('includes/condb.php');
     error_reporting(0);
-    connect_db(); */   
+    connect_db(); */
     if($patnum==""){
     	$patient_no=$patientno;
     }else{
         $patient_no=$patnum;
     }
 $breakfile='search.php'.URL_APPEND;
+
+# Check if final bill is available, if yes hide new entry of bills and make payment menu items
+
+$chkexists = 0;
+$chkfinalquery="SELECT final_id from care_billing_final WHERE final_encounter_nr='$patient_no'";
+//$chkfinalquery="SELECT * from care_billing_final WHERE final_encounter_nr='$patient_no'";
+/*$chkfinalresult=mysql_query($chkfinalquery);
+$chkexists=mysql_num_rows($chkfinalresult);
+*/
+$chkfinalresult=$db->Execute($chkfinalquery);
+
+if(is_object($chkfinalresult)) $chkexists=$chkfinalresult->RecordCount();
+
+# Check if bill(s) exist, if yes show view bill and generate final bill menu items
+
+$billexists = 0;
+$billsquery="SELECT bill_item_id FROM care_billing_bill_item WHERE bill_item_encounter_nr='$patient_no'";
+if($billqueryresult=$db->Execute($billsquery)){
+	$billexists = $billqueryresult->RecordCount();
+}
+
+# Check if payment(s) exist, if yes show view payment menu item
+
+$payexists = 0;
+$payquery="SELECT payment_id FROM care_billing_payment WHERE payment_encounter_nr='$patient_no'";
+if($payqueryresult=$db->Execute($payquery)){
+	$payexists = $payqueryresult->RecordCount();
+}
+
 # Extract the language variable
 extract($TXT);
 ?>
@@ -92,26 +122,20 @@ function finalbill()
     <table border="1" width="585" height="11" bordercolor="#000000" style="border-style: solid">
       <tr>
         <td width="348" height="155" valign="top" bordercolor="#FFFFFF">
-          <a href="javascript:subHS()"><?php echo $SelectHospitalServices; ?></a>
+          <a href="javascript:subHS()"><?php if(!$chkexists) echo $SelectHospitalServices; ?></a>
 
-          <p><a href="javascript:subLT()"><?php echo $SelectLaboratoryTests; ?></a></p>
+          <p><a href="javascript:subLT()"><?php if(!$chkexists) echo $SelectLaboratoryTests; ?></a></p>
 
 
 
-<p><a href=javascript:subbill()><?php echo $ViewBill; ?></a>
-<p><a href=javascript:subpayment()><?php echo $ViewPayment; ?></a>
-<p><a href=javascript:show()><?php echo $MakeNewPayment; ?></a>
+<p><a href=javascript:subbill()><?php if($billexists || $chkexists)  echo $ViewBill; ?></a>
+<p><a href=javascript:subpayment()><?php if ($payexists  || $chkexists) echo $ViewPayment; ?></a>
+<p><a href=javascript:show()><?php if(!$chkexists && $billexists) echo $MakeNewPayment; ?></a>
 
 <?php
 
-$chkfinalquery="SELECT * from care_billing_final WHERE final_encounter_nr='$patient_no'";
-/*$chkfinalresult=mysql_query($chkfinalquery);
-$chkexists=mysql_num_rows($chkfinalresult);    
-*/
-$chkfinalresult=$db->Execute($chkfinalquery);
-if(is_object($chkfinalresult)) $chkexists=$chkfinalresult->RecordCount();    
 //if($chkexists<1)
-if(!$chkexists)
+if(!$chkexists && $billexists)
 {
 	echo "<p><a href=javascript:finalbill()>$GenerateFinalBill</a></p>";
 }

@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -96,15 +96,16 @@ if($user_origin=='pers'&&$nr){
 <?php echo setCharSet(); ?>
  	<TITLE></TITLE>
 	 
-<?php 
+<?php
 require($root_path.'include/inc_js_gethelp.php');
 require($root_path.'include/inc_css_a_hilitebu.php');
-?>	</HEAD>
+?> 
+</HEAD>
 
-	<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?>
+<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?>
 <?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 
-	<FONT  COLOR="<?php echo $cfg[top_txtcolor] ?>" SIZE=6  FACE="verdana"> <b><?php echo "$LDPhoneDir $LDNewData" ?></b></font>
+	<FONT  COLOR="<?php echo $cfg[top_txtcolor] ?>" SIZE=6 > <b><?php echo "$LDPhoneDir $LDNewData" ?></b></font>
 
 	<table width=100% border=0 cellspacing=0 cellpadding=0>
 	<tr>
@@ -112,8 +113,8 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 	<a href="phone_list.php<?php echo URL_APPEND.'&edit=$edit'; ?>"><img <?php echo createLDImgSrc($root_path,'phonedir-gray.gif','0') ?> <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><img <?php echo createLDImgSrc($root_path,'newdata-b.gif','0') ?>></nobr></td>
 	</tr>
 	<tr>
-	<td bgcolor=#333399 colspan=3 >
-	<FONT  SIZE=2  FACE=verdana,Arial color="#ffffff">&nbsp;<b>
+	<td class="wardlisttitlerow" colspan=3 >
+	&nbsp;<b>
    <?php
    	   if(($newvalues=='')&&($remark!='fromlist')) 
 		{
@@ -128,14 +129,14 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 	</td>
 	</tr>
 	
-	<tr bgcolor="#DDE1EC">
+	<tr>
 	
-	<td bgcolor=#333399>&nbsp;</td>
+	<td class="wardlisttitlerow" >&nbsp;</td>
 
 	<td><br>
 	<ul>
 	
-<FONT    SIZE=-1  FACE="Arial">
+
 <FORM action="phone_list.php" method="post" name="newentry">
 <input type="hidden" name="sid" value="<?php echo $sid; ?>">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
@@ -151,15 +152,15 @@ echo "<img ".createMascot($root_path,'mascot1_r.gif','0','absmiddle')."><FONT  C
 ?>
 <form method="post" action="phone_edit.php" enctype="" name="entryform">
 <table border="0" cellpadding="5" cellspacing="1">
-<tr bgcolor="#cceeff">
-<td colspan="4"><FONT    SIZE=-1  FACE="Arial">
+<tr class="submenu">
+<td colspan="4">
 <?php echo $LDNewPhoneEntry ?>:
 </td>
 </tr>
 
-<tr bgcolor="#cceeff">
+<tr class="submenu">
 <td colspan=2>
-<FONT    SIZE=-1  FACE="Arial">
+
 <?php echo $LDEditFields[1] ?>&nbsp;
 <?php 
 if($user_origin=='pers'&&$employee->isPreLoaded()){
@@ -176,15 +177,15 @@ if($user_origin=='pers'&&$employee->isPreLoaded()){
 
 </td>
 <td colspan=2>
-<FONT    SIZE=-1  FACE="Arial">
+
 <?php echo $LDEditFields[4] ?>&nbsp;
 <input type=text name=beruf size="20" value="<?php echo $employee->Profession(); ?>" maxlength=25><br>
 </td>
 </tr>
 
-<tr bgcolor="#cceeff">
+<tr class="submenu">
 <td colspan=2>
-<FONT    SIZE=-1  FACE="Arial"><b>
+<b>
 <?php echo $LDEditFields[2] ?>&nbsp;
 <?php 
 if($user_origin=='pers'&&$employee->isPreLoaded()){
@@ -200,7 +201,7 @@ if($user_origin=='pers'&&$employee->isPreLoaded()){
 ?>
 </b>
 </td>
-<td colspan=2><FONT    SIZE=-1  FACE="Arial"><b>
+<td colspan=2><b>
 <?php echo $LDEditFields[3] ?>&nbsp;
 <?php 
 if($user_origin=='pers'&&$employee->isPreLoaded()){
@@ -217,63 +218,63 @@ if($user_origin=='pers'&&$employee->isPreLoaded()){
 </b>
 </td>
 </tr>
-<tr bgcolor="#cceeff">
-<td colspan=2><FONT    SIZE=-1  FACE="Arial">
+<tr class="submenu">
+<td colspan=2>
 <?php echo $LDEditFields[5] ?>
 <br>
 
 <input type=text name=bereich1 size="20" maxlength=25  value="<?php echo $employee->Dept1(); ?>"><br>
 </td>
-<td><FONT    SIZE=-1  FACE="Arial">
+<td>
 <?php echo $LDEditFields[6] ?>
 <br>
 <input type=text name=bereich2 size="20" maxlength=25 value="<?php echo $employee->Dept2(); ?>"><br>
 </td>
 <td >
-<FONT    SIZE=-1  FACE="Arial">
+
 <?php echo $LDEditFields[14] ?><br>
 <input type=text name=zimmerno size="20" maxlength=10 value="<?php echo $employee->RoomNr(); ?>"><br>
 </td>
 </tr>
 
-<tr bgcolor="#cceeff">
-<td colspan=2><FONT    SIZE=-1  FACE="Arial">
+<tr class="submenu">
+<td colspan=2>
 <?php echo $LDEditFields[7] ?>
 <br>
 
 <input type=text name=inphone1 size="20" maxlength=15  value="<?php echo $employee->InPhone1() ?>"><br>
 </td>
-<td><FONT    SIZE=-1  FACE="Arial">
+<td>
 <?php echo $LDEditFields[10] ?><br>
 <input type=text name=exphone1 size="20"  maxlength=25 value="<?php echo $employee->ExPhone1() ?>"><br>
 </td>
-<td><FONT    SIZE=-1  FACE="Arial">
+<td>
 <?php echo $LDEditFields[12] ?><br>
 <input type=text name=funk1 size="20" maxlength=15 value="<?php echo $employee->Beeper1() ?>"><br>
 </td>
 </tr>
 
-<tr bgcolor="#cceeff">
+<tr class="submenu">
 <td colspan=2>
-<FONT    SIZE=-1  FACE="Arial">
+
 <?php echo $LDEditFields[8] ?>
 <br>
 <input type=text name=inphone2 size="20" value="<?php echo $employee->InPhone2() ?>" maxlength=15><br>
 </td>
-<td><FONT    SIZE=-1  FACE="Arial">
+<td>
 <?php echo $LDEditFields[11] ?><br>
 <input type=text name=exphone2 size="20" value="<?php echo $employee->ExPhone2() ?>" maxlength=25><br>
 </td>
 <td >
-<FONT    SIZE=-1  FACE="Arial">
+
 <?php echo $LDEditFields[13] ?><br>
 <input type=text name=funk2 size="20" value="<?php echo $employee->Beeper2() ?>" maxlength=15><br>
 </td>
 </tr>
 
-<tr bgcolor="#cceeff">
+<tr class="submenu">
 <td colspan=2>
-<FONT    SIZE=-1  FACE="Arial">
+
 <?php echo $LDEditFields[9] ?>
 <br>
 <input type=text name=inphone3 size="20" maxlength=15 value="<?php echo $employee->InPhone3() ?>"><br>
@@ -285,7 +286,7 @@ if($user_origin=='pers'&&$employee->isPreLoaded()){
 </tr>
 
 <tr>
-<td colspan=3><FONT    SIZE=-1  FACE="Arial">
+<td colspan=3>
 <p>
 <input type="hidden" name="sid" value="<?php echo $sid; ?>">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
@@ -312,7 +313,7 @@ if($user_origin=='pers'&&$employee->isPreLoaded()){
 </tr>
 </table>
 </form>
-<FONT    SIZE=-1  FACE="Arial">
+
 <p>
 <a href="<?php echo $sBreakUrl; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0'); ?>></a>
 <p>
@@ -320,10 +321,10 @@ if($user_origin=='pers'&&$employee->isPreLoaded()){
 </ul>
 <p>
 </td>
-<td bgcolor=#333399>&nbsp;</td>
+<td class="wardlisttitlerow" >&nbsp;</td>
 </tr>
 <tr >
-<td bgcolor="#333399" colspan=3><font size=1>
+<td class="wardlisttitlerow"  colspan=3>
 &nbsp; 
 </td>
 </tr>

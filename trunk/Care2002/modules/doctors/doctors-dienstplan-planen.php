@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -74,14 +74,15 @@ if($dblink_ok)
 					$ref_buffer['year']=$pyear;
 					$ref_buffer['month']=$pmonth;
 					$ref_buffer['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-					
+
 					if($dpoc_nr=$pers_obj->DOCDutyplanExists($dept_nr,$pyear,$pmonth)){
 						$ref_buffer['history']=$pers_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n");
+						$ref_buffer['modify_time']=date('YmdHis');
 						// Point to the internal data array
 						$pers_obj->setDataArray($ref_buffer);
 															
 						if($pers_obj->updateDataFromInternalArray($dpoc_nr)){
-						
+
 							# Remove the cache plan
 							if(date('Yn')=="$pyear$pmonth"){
 								$pers_obj->deleteDBCache('DOCS_'.date('Y-m-d'));
@@ -145,30 +146,46 @@ function makefwdpath($path,$dpt,$mo,$yr,$saved)
 	}
 	else return "doctors-dienstplan-checkpoint.php";
 }
+
+# Prepare page title
+ $sTitle = "$LDMakeDutyPlan :: ";
+ $LDvar=$dept_obj->LDvar();
+ if(isset($$LDvar)&&$$LDvar) $sTitle = $sTitle.$$LDvar;
+   else $sTitle = $sTitle.$dept_obj->FormalName();
+
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',$sTitle);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('docs_dutyplan_edit.php','$mode','$rows')");
+
+# href for return button
+ $smarty->assign('pbBack','javascript:history.back();killchild();');
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Body onLoad javascript
+ $smarty->assign('sOnLoadJs','onUnload="killchild()"');
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',$sTitle);
+
+ # Collect extra javascript
+
+ ob_start();
 ?>
-
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
-
-<style type="text/css">
-	A:link  {text-decoration: none; }
-	A:hover {text-decoration: underline; color: red; }
-
-	A:visited {text-decoration: none;}
-
-div.a3 {font-family: arial; font-size: 14; margin-left: 3; margin-right:3; }
-
-.infolayer {
-	position:static;
-	visibility: hide;
-	left: 10;
-	top: 10;
-
-}
-
-</style>
 
 <script language="javascript">
 
@@ -201,14 +218,46 @@ function cal_update()
 }
 </script>
 <?php 
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
+
+ $sTemp=ob_get_contents();
+ ob_end_clean();
+ $smarty->append('JavaScript',$sTemp);
+
+  $smarty->assign('LDStandbyPerson',$LDDoc1);
+ $smarty->assign('LDOnCall',$LDDoc2);
+
+# Prepare the date selectors
+$smarty->assign('LDMonth',$LDMonth);
+$sBuffer = '<select name="month" size="1" onChange="cal_update()">';
+
+for ($i=1;$i<13;$i++){
+	 $sBuffer = $sBuffer.'<option  value="'.$i.'" ';
+	 if (($pmonth)==$i)  $sBuffer = $sBuffer.'selected';
+	  $sBuffer = $sBuffer.'>'.$monat[$i].'</option>';
+	  $sBuffer = $sBuffer."\n";
+}
+$sBuffer = $sBuffer.'</select>';
+$smarty->assign('sMonthSelect',$sBuffer);
+
+$smarty->assign('LDYear',$LDYear);
+$sBuffer = '<select name="jahr" size="1" onChange="cal_update()">';
+
+for ($i=2000;$i<2016;$i++){
+	 $sBuffer = $sBuffer.'<option  value="'.$i.'" ';
+	 if ($pyear==$i) $sBuffer = $sBuffer.'selected';
+	 $sBuffer = $sBuffer.'>'.$i.'</option>';
+  	 $sBuffer = $sBuffer."\n";
+}
+$sBuffer = $sBuffer.'</select>';
+$smarty->assign('sYearSelect',$sBuffer);
+
+$smarty->assign('sFormAction','action="doctors-dienstplan-planen.php"');
+
+ # collect hidden inputs
+
+ ob_start();
 ?>
-</HEAD>
 
-<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 bgcolor="silver" alink="navy" vlink="navy" onUnload="killchild()">
-
-<form name="dienstplan" action="doctors-dienstplan-planen.php" method="post">
 <input type="hidden" name="mode" value="save">
 <input type="hidden" name="dept" value="<?php echo $dept_obj->ID(); ?>">
 <input type="hidden" name="dept_nr" value="<?php echo $dept_nr; ?>">
@@ -221,145 +270,69 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
 <input type="hidden" name="sid" value="<?php echo $sid; ?>">
 
-<table width=100% border=0 height=100% cellpadding="0" cellspacing="0" >
-<tr valign=top>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" ><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+1  FACE="Arial">
-<STRONG> &nbsp; <?php echo $LDMakeDutyPlan ?>::<font color="<?php echo $cfg['top_txtcolor']; ?>">
-<?php 
-$LDvar=$dept_obj->LDvar();
-if(isset($$LDvar)&&$$LDvar) echo $$LDvar;
-	else echo $dept_obj->FormalName();
-?>
-</font></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();killchild();"><img <?php echo createLDImgSrc($root_path,'back2.gif','0','absmiddle') ?>></a><a href="javascript:gethelp('docs_dutyplan_edit.php','<?php echo $mode ?>','<?php echo $rows ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?>></a><a href="<?php echo $breakfile ?>" onClick=killchild()><img <?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?>></a></td></tr>
-
-<tr>
-<td bgcolor="<?php echo $cfg['body_bgcolor']; ?>" valign=top colspan=2><p><br>
-<ul>
-<font size=5>
-
-<?php echo $LDMonth ?>: <select name="month" size="1" onChange="cal_update()">
-<?php
-for ($i=1;$i<13;$i++)
-	{
-	 echo '<option  value="'.$i.'" ';
-	 if (($pmonth)==$i) echo 'selected';
-	 echo '>'.$monat[$i].'</option>';
-  	 echo "\n";
-	}
-?>
-</select>
-
-&nbsp;<?php echo $LDYear ?>: <select name="jahr" size="1" onChange="cal_update()">
-<?php
-for ($i=2000;$i<2016;$i++)
-	{
-	 echo '<option  value="'.$i.'" ';
-	 if ($pyear==$i) echo 'selected';
-	 echo '>'.$i.'</option>';
-  	 echo "\n";
-	}
-
-?>
-</select>
-</font>
-
-<FONT    SIZE=-1  FACE="Arial">
-
-<table>
-<tr><td>
-
-
-<table border=0 cellpadding="0" cellspacing=0>
-<tr>
-<td bgcolor="#6f6f6f">
-
-<table border=0 cellpadding=0 cellspacing=1>
-<tr><td colspan="2"></td><td><div class=a3><font face=arial size=2 color=white><b><?php echo $LDDoc1 ?></b></div>
-</td><td></td><td><div class=a3><font face=arial size=2 color=white><b><?php echo $LDDoc2 ?></b></div></td>
-<td></td></tr>
 <?php
 
+ $sTemp=ob_get_contents();
+ ob_end_clean();
+ $smarty->assign('sHiddenInputs',$sTemp);
 
+ if($saved) $sBuffer = createLDImgSrc($root_path,'close2.gif','0');
+ 	else $sBuffer = createLDImgSrc($root_path,'cancel.gif','0');
+
+ # Assign control links
+$smarty->assign('sSave','<input type="image" '.createLDImgSrc($root_path,'savedisc.gif','0').'"></a>');
+$smarty->assign('sClose',"<a href=\"$breakfile\" onUnload=\"killchild()\"><img ".$sBuffer." alt=\"$LDClosePlan\"></a>");
+
+$sTemp='';
 
 for ($i=1,$n=0,$wd=$firstday;$i<=$maxdays;$i++,$n++,$wd++)
 {
 	switch ($wd){
-		case 6: $backcolor="bgcolor=#ffffcc";break;
-		case 0: $backcolor="bgcolor=#ffff00";break;
-		default: $backcolor="bgcolor=white";
+		//case 6: $backcolor="bgcolor=#ffffcc";break;
+		//case 0: $backcolor="bgcolor=#ffff00";break;
+		//default: $backcolor="bgcolor=white";
+		case 6: $smarty->assign('sRowClass','class="saturday"');break;
+		case 0: $smarty->assign('sRowClass','class="sunday"');break;
+		default: $smarty->assign('sRowClass','class="weekday"');
 		}
 
-	echo '
-	<tr >
-	<td  height=5 '.$backcolor.'><div class="a3"><font face="arial" size=2>'.$i.'</div>
-	</td>
-	<td height=5 '.$backcolor.'><div class=a3><font face=arial size=2>';
-	if (!$wd) echo '<font color=red>';
-	echo $LDShortDay[$wd].'</div>
-	</td>
-	<td height=5 '.$backcolor.'><div class="a3"><font face="arial" size=2>';
-	if ($aelems['a'.$n]=="") echo '<img '.createComIcon($root_path,'warn.gif','0').'>'; else echo '<img '.createComIcon($root_path,'mans-gr.gif','0').'>';
-	echo '&nbsp;
-	<input type="hidden" name="ha'.$n.'" value="'.$a_pnr['ha'.$n].'">
-	<input type="text" name="a'.$n.'" size="15" onFocus=this.select() value="'.$aelems['a'.$n].'"> </div>
-	</td>
-	<td height=5 width=60 '.$backcolor.'>&nbsp;<a href="javascript:popselect(\''.$n.'\',\'a\')">
-	<button onclick="javascript:popselect(\''.$n.'\',\'a\')"><img '.createComIcon($root_path,'patdata.gif','0').' alt="'.$LDClk2Plan.'"></button></a>
-	</td>
-	<td height=5 '.$backcolor.'><div class=a3><font face=arial size=2>';
-	if ($relems['r'.$n]=="") echo '<img '.createComIcon($root_path,'warn.gif','0').'>'; else echo '<img '.createComIcon($root_path,'mans-red.gif','0').'>';
-	echo '&nbsp;
-	<input type="hidden" name="hr'.$n.'" value="'.$r_pnr['hr'.$n].'">
-	<input type="text" size="15" name="r'.$n.'" onFocus=this.select() value="'.$relems['r'.$n].'"></div>
-	</td>
-	<td height=5 width=60 '.$backcolor.'>&nbsp;<a href="javascript:popselect(\''.$n.'\',\'r\')">
-	<button onclick="javascript:popselect(\''.$n.'\',\'r\')"><img '.createComIcon($root_path,'patdata.gif','0').' alt="'.$LDClk2Plan.'"></button></a>
-	</td>
-	</tr>';
+	$smarty->assign('iDayNr',$i);
+	$smarty->assign('LDShortDay',$LDShortDay[$wd]);
+
+	if ($aelems['a'.$n]=="") $smarty->assign('sIcon1','<img '.createComIcon($root_path,'warn.gif','0').'>');
+		else $smarty->assign('sIcon1','<img '.createComIcon($root_path,'mans-gr.gif','0').'>');
+	$smarty->assign('sInput1','<input type="hidden" name="ha'.$n.'" value="'.$a_pnr['ha'.$n].'">
+		<input type="text" name="a'.$n.'" size="15" onFocus=this.select() value="'.$aelems['a'.$n].'">');
+
+	$smarty->assign('sPopWin1','<a href="javascript:popselect(\''.$n.'\',\'a\')">
+	<button onclick="javascript:popselect(\''.$n.'\',\'a\')"><img '.createComIcon($root_path,'patdata.gif','0').' alt="'.$LDClk2Plan.'"></button></a>');
+
+	if ($relems['r'.$n]=="") $smarty->assign('sIcon2','<img '.createComIcon($root_path,'warn.gif','0').'>');
+		else $smarty->assign('sIcon2','<img '.createComIcon($root_path,'mans-red.gif','0').'>');
+	$smarty->assign('sInput2','<input type="hidden" name="hr'.$n.'" value="'.$r_pnr['hr'.$n].'">
+	<input type="text" size="15" name="r'.$n.'" onFocus=this.select() value="'.$relems['r'.$n].'">');
+
+	$smarty->assign('sPopWin2','<a href="javascript:popselect(\''.$n.'\',\'r\')">
+	<button onclick="javascript:popselect(\''.$n.'\',\'r\')"><img '.createComIcon($root_path,'patdata.gif','0').' alt="'.$LDClk2Plan.'"></button></a>');
 	if($wd==6) $wd=-1;
-	}
-?>
-
-</table>
-
-</td>
-</tr>
-</table>
 	
-</td>
-<td valign="top" align="left">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?>><p>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<?php echo $breakfile; ?>" onUnload=killchild()><img <?php if($saved) echo createLDImgSrc($root_path,'close2.gif','0'); else echo createLDImgSrc($root_path,'cancel.gif','0'); ?>></a>
+	# Buffer each row and collect to a string
+	
+	ob_start();
+		$smarty->display('common/duty_plan_entry_row.tpl');
+		$sTemp = $sTemp.ob_get_contents();
+	ob_end_clean();
+}
 
-</td>
-</tr>
-</table>
+# Assign the duty entry rows to the subframe template
 
-<p>
-<input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?>>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="<?php echo $breakfile; ?>" onUnload=killchild()><img <?php if($saved) echo createLDImgSrc($root_path,'close2.gif','0'); else echo createLDImgSrc($root_path,'cancel.gif','0'); ?>></a>
-<p>
-</ul>
+ $smarty->assign('sDutyRows',$sTemp);
 
-</FONT>
-<p>
-</td>
-</tr>
 
-<tr>
-<td bgcolor=silver height=70 colspan=2>
-<?php
-require($root_path.'include/inc_load_copyrite.php');
+$smarty->assign('sMainBlockIncludeFile','common/duty_plan_entry_frame.tpl');
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
 ?>
-</td>
-</tr>
-</table>        
-&nbsp;
-
-</form>
-
-</FONT>
-
-</BODY>
-</HTML>

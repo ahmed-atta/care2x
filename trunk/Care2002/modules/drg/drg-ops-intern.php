@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -60,7 +60,7 @@ if($enc=&$enc_obj->getBasic4Data()){
 }
 
 # Preload the icon images 
-$img_delete=createComIcon($root_path,'delete2.gif','0','right');
+$img_delete=createComIcon($root_path,'delete2.gif','0','right',TRUE);
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>
@@ -175,7 +175,7 @@ if(isset($is_discharged)&&$is_discharged){
 ?>
 <table border=0 cellspacing=0 cellpadding=1 width="100%">
   <tr>
-    <td bgcolor="red">&nbsp;<FONT    SIZE=2  FACE="verdana,Arial" color="#ffffff"><img <?php echo createComIcon($root_path,'warn.gif','0','absmiddle'); ?>> <b><?php echo $LDPatientIsDischarged; ?></b></font></td>
+    <td bgcolor="red">&nbsp;<FONT    SIZE=2  FACE="verdana,Arial" color="#ffffff"><img <?php echo createComIcon($root_path,'warn.gif','0','absmiddle',TRUE); ?>> <b><?php echo $LDPatientIsDischarged; ?></b></font></td>
   </tr>
 </table>
 <?php
@@ -200,10 +200,10 @@ if($opnr) echo" - OP# $opnr - $dept_nr OP $oprm";
     <td width=100% valign="top">
 	<table border=0 cellpadding=1 cellspacing=1 width=100%> 
 		<tr bgcolor="#990000">
- 		<td align="center"><font face=arial size=2 color=#ffffff><b><?php echo $LDSelect ?></b></td>
- 		<td width="15%"><font face=arial size=2 color=#ffffff><b><?php echo $LDOpsIntern ?></b></td>
- 		<td ><font face=arial size=2 color=#ffffff><b><?php echo $LDOperation ?></b></td>
- 		<td><font face=arial size=2 color=#ffffff><b><?php echo $LDOptions ?></b></td>
+ 		<td align="center"><font size=2 color=#ffffff><b><?php echo $LDSelect ?></b></td>
+ 		<td width="15%"><font size=2 color=#ffffff><b><?php echo $LDOpsIntern ?></b></td>
+ 		<td ><font size=2 color=#ffffff><b><?php echo $LDOperation ?></b></td>
+ 		<td><font size=2 color=#ffffff><b><?php echo $LDOptions ?></b></td>
  		<td>&nbsp;</td>
    	</tr>
 
@@ -213,23 +213,23 @@ if(is_object($drg_rows)){
 	while($drg=$drg_rows->FetchRow()){
 							
 						
-		echo '<tr bgcolor=';
+		echo '<tr class="';
 								
-		if($toggle) { echo '#efefef>'; $toggle=0;} else {echo '#ffffff>'; $toggle=1;};
+		if($toggle) { echo 'wardlistrow2">'; $toggle=0;} else {echo 'wardlistrow1">'; $toggle=1;};
 								
 		echo '
-				<td align="center"><font face=arial size=2><input type="radio" name="grp_nr" onClick="javascript:showItems(this,\''.$drg['group_nr'].'\')" ';
+				<td align="center"><font size=2><input type="radio" name="grp_nr" onClick="javascript:showItems(this,\''.$drg['group_nr'].'\')" ';
 		if($group_nr==$drg['group_nr']) echo 'checked';
 		
 		echo '>
 				</td>
-				<td><font face=arial size=2>'.$drg['code'].'
+				<td><font size=2>'.$drg['code'].'
 				</td>
-				<td><font face=arial size=2>'.$drg['description'].'
+				<td><font size=2>'.$drg['description'].'
 				</td>
-				<td><font face=arial size=2>';
+				<td><font size=2>';
 		if($non_grouped&&$edit) echo '
-				<a href="javascript:useThisGroup(\''.$drg['group_nr'].'\')"><img '.createComIcon($root_path,'l_arrowgrnsm.gif','0').'> '.$LDUseToGroupItems.'</a>';
+				<a href="javascript:useThisGroup(\''.$drg['group_nr'].'\')"><img '.createComIcon($root_path,'l_arrowgrnsm.gif','0','',TRUE).'> '.$LDUseToGroupItems.'</a>';
 		echo '
 				</td>
 				<td>';
@@ -242,20 +242,20 @@ if(is_object($drg_rows)){
 	}
 }
 if($non_grouped){
-		echo '<tr bgcolor="yellow">';
+		echo '<tr class="hilite">';
 								
 		//if($toggle) { echo '#efefef>'; $toggle=0;} else {echo '#ffffff>'; $toggle=1;};
 					echo '
-					<td align="center"><font face=arial size=2><input type="radio" name="grp_nr" onClick="javascript:showItems(this,\'0\')"';
+					<td align="center"><font size=2><input type="radio" name="grp_nr" onClick="javascript:showItems(this,\'0\')"';
 		if(!$group_nr) echo 'checked';
 		echo '>
 					</td>
-					<td><font face=arial size=2 color="#ee0000">'.$LDQMarks.'
+					<td><font size=2 color="#ee0000">'.$LDQMarks.'
 					</td>
-					<td ><font face=arial size=2 color="#ee0000">'.$LDNonSpecifiedGroup.'</td>
+					<td ><font size=2 color="#ee0000">'.$LDNonSpecifiedGroup.'</td>
 					<td colspan=2>';
-		if($edit) echo '<font face=arial size=2>
-					<a href="javascript:openOPSsearch(\'1\')"><img '.createComIcon($root_path,'l_arrowgrnsm.gif','0').'> '.$LDSpecifyGroup.'</a> <a href="javascript:createNewGroupName()"><img '.createComIcon($root_path,'l_arrowgrnsm.gif','0').'> '.$LDCreateGroupName.'</a>';
+		if($edit) echo '<font size=2>
+					<a href="javascript:openOPSsearch(\'1\')"><img '.createComIcon($root_path,'l_arrowgrnsm.gif','0','',TRUE).'> '.$LDSpecifyGroup.'</a> <a href="javascript:createNewGroupName()"><img '.createComIcon($root_path,'l_arrowgrnsm.gif','0','',TRUE).'> '.$LDCreateGroupName.'</a>';
 		echo '
 					</td>
 					';
@@ -266,11 +266,11 @@ if($non_grouped){
 	</table>
 	</td>
 	<?php if($display!='composite') { ?>   
-	 <td valign="top" bgcolor="#990000"><font face=arial size=2 color=#ffffff>
+	 <td valign="top" bgcolor="#990000"><font size=2 color=#ffffff>
 	<a href="javascript:window.history.back()" ><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?> width=110 height=24></a>
 	</td>
 	<?php }elseif($edit){ ?>
-	 <td valign="top" bgcolor="#990000"><font face=arial size=2 color=#ffffff>
+	 <td valign="top" bgcolor="#990000"><font size=2 color=#ffffff>
 	<input type="button" value="<?php echo $LDSearch ?>" onClick="javascript:openOPSsearch('0')">&nbsp;
  	<p><input type="button" value="<?php echo $LDQuickList ?>" onClick="javascript:openQuicklist('drg_intern')">
  	<p><input type="button" value="<?php echo $LDConvert2IcdOps ?>" onClick="javascript:openRelatedCodes()"><p>

@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -141,11 +141,36 @@ $wardsarray=$ward_obj->getAllWardsItemsArray($witem);
 
 $newORnr=$OR_obj->NewORNr();
 
+# Prepare title
+$sTitle = "$LDOR :: ";
+if($mode=='select') $sTitle = $sTitle.$LDUpdate;
+	else $sTitle = $sTitle.$LDCreate;
+
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('system_admin');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',$sTitle);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('or_create.php')");
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',$sTitle);
+
+ # Collect javascript code
+ ob_start();
 ?>
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
 
 <script language="javascript">
 <!-- 
@@ -183,40 +208,24 @@ function newORnr(){
 <script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
 <?php
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+$smarty->append('JavaScript',$sTemp);
+
+# Buffer page output
+
+ob_start();
 
 ?>
-<style type="text/css" name="formstyle">
-td.pblock{ font-family: verdana,arial; font-size: 12}
 
-div.box { border: solid; border-width: thin; width: 100% }
-
-div.pcont{ margin-left: 3; }
-
-</style>
-
-</HEAD>
-
-<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> onLoad="if (window.focus) window.focus()" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
-
-
-<table width=100% border=0 cellpadding="0" cellspacing=0>
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp; <?php echo "$LDOR :: "; if($mode=='select') echo $LDUpdate; else echo $LDCreate; ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right>
-<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('or_create.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
-</tr>
-<tr valign=top >
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
- <ul>
+<ul>
  
-<FONT    SIZE=3 color=#800000 FACE="Arial"><p>
+<FONT class="prompt"><p>
  <?php
  if(isset($inputerror)&&$inputerror){
- 	echo "<font color=#ff0000 face='verdana,arial' size=3>$error_msg</font><p>";
+ 	echo "$error_msg<p>";
  }elseif(isset($save_ok)&&$save_ok){
  	 echo '<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'>'.$LDDataSaved.'<p>';
 }
@@ -226,7 +235,7 @@ echo $LDEnterInfo;
 </font>
 <p> 
  
-<font face="Verdana, Arial" size=-1><?php echo $LDEnterAllFields ?>
+<?php echo $LDEnterAllFields ?>
 
 <form action="or_new.php" method="post" name="newstat"  onSubmit="return chkForm(this)">
 
@@ -234,10 +243,10 @@ echo $LDEnterInfo;
 
 
   <tr>
-    <td class=pblock align=right bgColor="#eeeeee"><font color=#ff0000><b>*</b>
+    <td align=right bgColor="#eeeeee"><font color=#ff0000><b>*</b>
 	<?php echo $LDORNr ?></font>: 
 	</td>
-    <td class=pblock bgColor="#f9f9f9">
+    <td bgColor="#f9f9f9">
 	<?php
 		if($mode=='select'||$mode=='update') { echo '<input type="hidden" name="room_nr"  value="'.$room_nr.'">'.$room_nr; } else {
 	?>
@@ -249,8 +258,8 @@ echo $LDEnterInfo;
 </td>
   </tr> 
   <tr>
-    <td class=pblock align=right bgColor="#eeeeee"><font color=#ff0000><b>*</b><?php echo $LDOPTableNr ?></font>: </td>
-    <td class=pblock bgColor="#f9f9f9">
+    <td align=right bgColor="#eeeeee"><font color=#ff0000><b>*</b><?php echo $LDOPTableNr ?></font>: </td>
+    <td bgColor="#f9f9f9">
 	<select name="nr_of_beds">
  	<option value="1">1</option>
  	<option value="2">2</option>
@@ -264,8 +273,8 @@ echo $LDEnterInfo;
 </td>
   </tr> 
   <tr>
-    <td class=pblock align=right bgColor="#eeeeee"><font color=#ff0000><b>*</b><?php echo $LDDateCreation; ?>: </td>
-    <td class=pblock bgColor="#f9f9f9">
+    <td align=right bgColor="#eeeeee"><font color=#ff0000><b>*</b><?php echo $LDDateCreation; ?>: </td>
+    <td bgColor="#f9f9f9">
 	<?php
 		if($mode=='select'||$mode=='update'){
 			echo '<input type="hidden" name="date_create" value="'.$date_create.'">';
@@ -294,13 +303,13 @@ echo $LDEnterInfo;
 </td>
   </tr> 
   <tr>
-    <td class=pblock align=right bgColor="#eeeeee"><?php echo $LDORName ?>: </td>
-    <td class=pblock bgColor="#f9f9f9"><input type="text" name="info" size=50 maxlength=60 value="<?php echo $info ?>"><br>
+    <td align=right bgColor="#eeeeee"><?php echo $LDORName ?>: </td>
+    <td bgColor="#f9f9f9"><input type="text" name="info" size=50 maxlength=60 value="<?php echo $info ?>"><br>
 </td>
   </tr> 
 <tr>
-    <td class=pblock align=right bgColor="#eeeeee"></font><?php echo $LDOwnerWard; ?>: </td>
-    <td class=pblock bgColor="#f9f9f9">
+    <td align=right bgColor="#eeeeee"><?php echo $LDOwnerWard; ?>: </td>
+    <td bgColor="#f9f9f9">
 		<select name="ward_nr">
 		<option value=""> </option>';
 	<?php
@@ -324,8 +333,8 @@ echo $LDEnterInfo;
   </tr>
 
 <tr>
-    <td class=pblock align=right bgColor="#eeeeee"></font><?php echo $LDOwnerDept; ?>: </td>
-    <td class=pblock bgColor="#f9f9f9"><select name="dept_nr">
+    <td align=right bgColor="#eeeeee"><?php echo $LDOwnerDept; ?>: </td>
+    <td bgColor="#f9f9f9"><select name="dept_nr">
 	<option value=""> </option>';
 	<?php
 		while(list($x,$v)=each($deptarray)){
@@ -344,8 +353,8 @@ echo $LDEnterInfo;
 
   
   <tr>
-    <td class=pblock align=right bgColor="#eeeeee"><?php echo $LDTempClosed ?>: </td>
-    <td class=pblock bgColor="#f9f9f9"><input type="radio" name="is_temp_closed" value="0" <?php if(!$is_temp_closed) echo 'checked'; ?>> <?php echo $LDNo ?> <input type="radio" name="is_temp_closed" value="1" <?php if($is_temp_closed) echo 'checked'; ?>> <?php echo $LDYes ?> 
+    <td align=right bgColor="#eeeeee"><?php echo $LDTempClosed ?>: </td>
+    <td bgColor="#f9f9f9"><input type="radio" name="is_temp_closed" value="0" <?php if(!$is_temp_closed) echo 'checked'; ?>> <?php echo $LDNo ?> <input type="radio" name="is_temp_closed" value="1" <?php if($is_temp_closed) echo 'checked'; ?>> <?php echo $LDYes ?> 
 </td>
   </tr> 
  
@@ -371,19 +380,20 @@ echo $LDEnterInfo;
 <p>
 
 <a href="javascript:history.back()"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> border="0"></a>
-</FONT>
 
 </ul>
 
-<p>
-</td>
-</tr>
-</table>        
-<p>
-
 <?php
-require($root_path.'include/inc_load_copyrite.php');
-?>
 
-</BODY>
-</HTML>
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+# Assign page output to the mainframe template
+
+$smarty->assign('sMainFrameBlockData',$sTemp);
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
+?>

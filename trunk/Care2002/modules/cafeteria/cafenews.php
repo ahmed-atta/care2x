@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -14,7 +14,6 @@ define('LANG_FILE','editor.php');
 define('NO_2LEVEL_CHK',1);
 
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
 
 // reset all 2nd level lock cookies
 require($root_path.'include/inc_2level_reset.php');
@@ -37,6 +36,9 @@ require_once($root_path.'include/inc_cafe_get_menu.php');
 
 $readerpath='cafenews-read.php'.URL_APPEND;
 
+# Load the news display configs
+require_once($root_path.'include/inc_news_display_config.php');
+
 /* Get the maximum number of headlines to be displayed */
 $config_type='news_headline_max_display';
 require($root_path.'include/inc_get_global_config.php');
@@ -49,11 +51,33 @@ $news_num_stop=$news_headline_max_display;  // The maximum number of news articl
 require_once($root_path.'include/care_api_classes/class_news.php');
 $newsobj=new News;
 $news=&$newsobj->getHeadlinesPreview($dept_nr,$news_num_stop);
- 
-?><!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?><TITLE></TITLE>
+
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
+
+ # Hide the title bar
+ $smarty->assign('bHideTitleBar',TRUE);
+
+ # Window title
+ $smarty->assign('title',$title);
+
+ $smarty->assign('news_normal_display_width',$news_normal_display_width);
+
+ # Headline title
+ $smarty->assign('LDHeadline',$title);
+
+ # Collect javascript code
+
+ ob_start();
+
+?>
 
 <script language="javascript" >
 function editcafe()
@@ -67,83 +91,58 @@ function editcafe()
 }
 </script>
 
-<?php if($cfg['dhtml']) include("../include/inc_css_a_hilitebu.php"); ?>
-
 <style type="text/css" name="s2">
 .vn { font-family:verdana,arial; color:#000088; font-size:10}
 </style>
 
-</HEAD>
-<BODY bgcolor=#ffffff VLINK="#003366" link="#003366">
-
- <TABLE CELLSPACING=5 cellpadding=0 border="0" width="601">
-
-<tr>
-<td colspan=3>
-<FONT  SIZE=8 COLOR="#cc6600" FACE="verdana,Arial">
-<a href="javascript:editcafe()"><img <?php echo createComIcon($root_path,'basket.gif','0') ?>></a> <b><?php echo $title ?></b></FONT>
-<hr>
-</td>
-</tr>
- 
-  <tr>
-    <td WIDTH=480 VALIGN="top">
-	<FONT  SIZE=1 COLOR="<?php echo $cfg['body_txtcolor']; ?>" FACE="verdana,Arial">
-	
-	<table>
 <?php
+
+$sTemp = ob_get_contents();
+
+ob_end_clean();
+
+$smarty->append('JavaScript',$sTemp);
+
+$smarty->assign('sBasketImg','<img '.createComIcon($root_path,'basket.gif','0').'>');
+$smarty->assign('sTitle', $title);
+
  $editor_path='cafenews-edit-pass.php'.URL_APPEND.'&title='.$LDCafeNews;
- require($root_path.'include/inc_news_display.php');
-?>
-	</table>
-	
-	</td>
-<TD  VALIGN="top"   bgcolor="<?php echo $cfg['idx_txtcolor']; ?>" width=1>
-<img src=<?php echo $root_path; ?>"gui/img/common/default/pixel.gif" border=0 width=1 height=1>
-    </TD>
-<TD WIDTH=120 VALIGN="top" >
-	<FONT  SIZE=2  FACE="arial,verdana">
 
-<table cellspacing=0 cellpadding=1 border=0 align=right width=100%>
-<tr bgcolor="#999999" >
-<td>
-<table  cellspacing=0 cellpadding=2 align=right width=100%>
-<tr><td bgcolor=maroon align=center colspan=2>	<FONT  SIZE=2 FACE="verdana,Arial" color=white>
-<b><?php echo $LDMenuToday ?></b>
-</td>
-</tr>
-<tr>
-<td bgcolor="#ffffcc" class="vn"><nobr><?php echo nl2br($menu['menu']); ?></nobr>
-</td> 
-</tr>
+   /**
+ * Routine to display the news preview
+ */
+for($j=1;$j<=$news_num_stop;$j++){
 
-</table>
+	$picalign=($j==2)? 'right' : 'left';
 
-</td>
-</tr>
-<tr >
-<td><p><br>
-<img <?php echo createComIcon($root_path,'frage.gif','0') ?> border=0>
-<br>
-<FONT  SIZE=-1 FACE="Arial" >
-		&nbsp;<A HREF="cafenews-menu.php<?php echo URL_APPEND ?>"><?php echo $LDMenuAll ?></A><br>
-<img <?php echo createComIcon($root_path,'frage.gif','0') ?> border=0>
-<br>
-	&nbsp;<A HREF="cafenews-prices.php<?php echo URL_APPEND ?>"><?php echo $LDPrices ?></A>
-	<hr>
-	<a href="cafenews-edit-pass.php<?php echo URL_APPEND ?>"><?php echo $LDCafeEditorial ?></a>
+	 ob_start();
+		include($root_path.'include/inc_news_preview.php');
+		($j==2)? $smarty->display('news/headline_newslist_item2.tpl') : $smarty->display('news/headline_newslist_item.tpl');
+		$sTemp = ob_get_contents();
+	ob_end_clean();
 
-</td>
-</tr></table>
-    </TD>
-  </tr>
-  <tr>
-    <td colspan=3>
-<?php
-require($root_path.'include/inc_load_copyrite.php');
-?>
-    </td>
-  </tr>
-</table>
-</BODY>
-</HTML>
+	$smarty->assign('sNews_'.$j,$sTemp);
+}
+
+$smarty->assign('LDMenuToday',$LDMenuToday);
+$smarty->assign('sTodaysMenu', nl2br($menu['menu']));
+
+$smarty->assign('sAskIcon','<img '.createComIcon($root_path,'frage.gif','0').' border=0>');
+$smarty->assign('sMenuAllLink','<A HREF="cafenews-menu.php'.URL_APPEND.'">'.$LDMenuAll.'</A>');
+$smarty->assign('sPricesLink','<A HREF="cafenews-prices.php'.URL_APPEND.'">'.$LDPrices.'</A>');
+$smarty->assign('sCafeEditorialLink','<a href="cafenews-edit-pass.php'.URL_APPEND.'">'.$LDCafeEditorial.'</a>');
+
+# Assign the include file to the cafenews subframe
+$smarty->assign('sCafeNewsIncludeFile','cafeteria/cafenews_list.tpl');
+
+# Assign the subframe template file name to mainframe
+
+$smarty->assign('sMainBlockIncludeFile','cafeteria/cafenews.tpl');
+
+  /**
+ * show Template
+ */
+
+ $smarty->display('common/mainframe.tpl');
+
+ ?>

@@ -68,6 +68,41 @@ if(!is_object($TP_obj)){
 	$TP_obj=new Template($root_path);
 }
 
+# Assign the icons
+
+if($cfg['icons'] != 'no_icon'){
+	$TP_iconPost = '<img '.createComIcon($root_path,'post_discussion.gif','0').'>';
+	$TP_iconFolder = '<img '.createComIcon($root_path,'open.gif','0').'>';
+	$TP_iconBubble = '<img '.createComIcon($root_path,'bubble.gif','0').'>';
+	$TP_iconTalk = '<img '.createComIcon($root_path,'discussions.gif','0').'>';
+	$TP_iconEye = '<img '.createComIcon($root_path,'eye_s.gif','0').'>';
+	$TP_iconOGuy = '<img '.createComIcon($root_path,'prescription.gif','0').'>';
+	$TP_iconHeads = '<img '.createComIcon($root_path,'new_group.gif','').'>';
+	$TP_iconWGuy = '<img '.createComIcon($root_path,'people_search_online.gif','0').'>';
+	$TP_iconWTorso = '<img '.createComIcon($root_path,'man-whi.gif','0').'>';
+	$TP_iconIDCard = '<img '.createComIcon($root_path,'new_address.gif','0').'>';
+	$TP_iconGTeen = '<img '.createComIcon($root_path,'bn.gif','0').'>';
+	$TP_iconCrossTeen = '<img '.createComIcon($root_path,'bnplus.gif','0').'>';
+	$TP_iconPDF = '<img '.createComIcon($root_path,'icon_acro.gif','0').'>';
+	$TP_iconXPaper = '<img '.createComIcon($root_path,'nopmuser.gif','0').'>';
+}else{
+	$TP_iconPost = '';
+	$TP_iconFolder = '';
+	$TP_iconBubble = '';
+	$TP_iconTalk = '';
+	$TP_iconEye = '';
+	$TP_iconOGuy = '';
+	$TP_iconHeads = '';
+	$TP_iconWGuy ='';
+	$TP_iconWTorso = '';
+	$TP_iconIDCard = '';
+	$TP_iconGTeen = '';
+	$TP_iconCrossTeen = '';
+	$TP_iconPDF = '';
+	$TP_iconXPaper = '';
+}
+
+
 $TP_href_1="show_sick_confirm.php".URL_APPEND ."&pid=$pid&target=$target";
 if($data_entry){
 	$TP_SICKCONFIRM="<a href=\"show_sick_confirm.php".URL_APPEND ."&pid=$pid&target=$target\">$LDSickReport</a>";

@@ -32,10 +32,10 @@ function openDRGComposite(enr,edit,isd){
 			if($row['is_discharged']) $buf=0;
 ?>
   <tr bgcolor="#fefefe" valign="top">
-    <td><FONT SIZE=-1  FACE="Arial"><?php if($buf) echo '<img '.createComIcon($root_path,'check2.gif','0').'>'; else echo '&nbsp;'; ?></td>
+    <td><FONT SIZE=-1  FACE="Arial"><?php if($buf) echo '<img '.createComIcon($root_path,'check2.gif','0','',TRUE).'>'; else echo '&nbsp;'; ?></td>
     <td><FONT SIZE=-1  FACE="Arial"><?php echo @formatDate2Local($row['encounter_date'],$date_format); ?></td>
     <td><FONT SIZE=-1  FACE="Arial"><a href="javascript:openDRGComposite('<?php echo $row['encounter_nr'] ?>','<?php echo $buf; ?>','<?php echo $row['is_discharged'] ?>')"><?php echo $row['encounter_nr']; ?></a></td>
-    <td><a href="javascript:openDRGComposite('<?php echo $row['encounter_nr'] ?>','<?php echo $buf; ?>','<?php echo $row['is_discharged'] ?>')"><img <?php echo createComIcon($root_path,'info2.gif','0'); ?></td>
+    <td><a href="javascript:openDRGComposite('<?php echo $row['encounter_nr'] ?>','<?php echo $buf; ?>','<?php echo $row['is_discharged'] ?>')"><img <?php echo createComIcon($root_path,'info2.gif','0','',TRUE); ?></td>
   </tr>
 
 <?php

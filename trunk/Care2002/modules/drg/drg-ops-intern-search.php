@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -60,12 +60,12 @@ if($mode=='save')
 
 /* Preset the images */
 
-$img['delete']=createComIcon($root_path,'delete2.gif','0','right');
-$img['arrow']=createComIcon($root_path,'l_arrowgrnsm.gif','0','absmiddle');
-$img['info']=createComIcon($root_path,'button_info.gif','0','absmiddle');
-$img['bubble']=createComIcon($root_path,'bubble2.gif','0','absmiddle');
-$img['blue']=createComIcon($root_path,'l2-blue.gif','0');
-$img['t2']=createComIcon($root_path,'t2-blue.gif','0');
+$img['delete']=createComIcon($root_path,'delete2.gif','0','right',TRUE);
+$img['arrow']=createComIcon($root_path,'l_arrowgrnsm.gif','0','absmiddle',TRUE);
+$img['info']=createComIcon($root_path,'button_info.gif','0','absmiddle',TRUE);
+$img['bubble']=createComIcon($root_path,'bubble2.gif','0','absmiddle',TRUE);
+$img['blue']=createComIcon($root_path,'l2-blue.gif','0','',TRUE);
+$img['t2']=createComIcon($root_path,'t2-blue.gif','0','',TRUE);
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -194,8 +194,8 @@ function drawdata(&$data)
 
 	
 						echo "
-						<tr bgcolor=";
-						if($toggle) { echo "#efefef>"; $toggle=0;} else {echo "#ffffff>"; $toggle=1;};
+						<tr class=";
+						if($toggle) { echo "wardlistrow2>"; $toggle=0;} else {echo "wardlistrow1>"; $toggle=1;};
 						echo '
 						<td>';
 						if(!$showonly)
@@ -320,7 +320,7 @@ if ($drg){
 ?>
 <?php if(($linecount>15)&&!$showonly) { ?>
 
-						<p>
+<p>
 <FORM action="<?php echo $thisfile ?>" method="post" onSubmit="return pruf(this)" name="form2">
 <a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> align="right"></a>
 <font face="Arial,Verdana"  color="#000000" size=-1>

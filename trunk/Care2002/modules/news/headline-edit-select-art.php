@@ -3,8 +3,8 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /*
-CARE2X Integrated Information System beta 2.0.0 - 2004-05-16 for Hospitals and Health Care Organizations and Services
-Copyright (C) 2002  Elpidio Latorilla & Intellin.org	
+CARE2X Integrated Information System beta 2.0.1 - 2004-07-04 for Hospitals and Health Care Organizations and Services
+Copyright (C) 2002,2003,2004,2005  Elpidio Latorilla & Intellin.org	
 
 GNU GPL. For details read file "copy_notice.txt".
 */
@@ -39,21 +39,23 @@ function chkForm(d)
 }
 </script>
 
+<?php require($root_path.'include/inc_css_a_hilitebu.php'); ?>
+
 </head>
 <body>
 <form name="selectform" method="get" action="headline-edit.php" onSubmit="return chkForm(this)">
-<FONT  SIZE=6 COLOR="#cc6600" FACE="verdana,Arial">
+<FONT  SIZE=6 COLOR="#cc6600">
 <b><?php echo $title ?></b></FONT>
 <hr>
 <table border=0>
   <tr>
     <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0') ?>></td>
-    <td colspan=2><FONT FACE="verdana,Arial"><FONT  SIZE=5 COLOR="#000066" FACE="verdana,Arial"><?php echo $LDWhereTo ?></font><p>
-			<font size=2><?php echo $LDPlsSelect ?></td>
+    <td colspan=2><FONT  SIZE=5 COLOR="#000066"><?php echo $LDWhereTo ?></font><p>
+			<?php echo $LDPlsSelect ?></td>
   </tr>
   <tr>
     <td>&nbsp;</td>
-    <td bgcolor="ccffff"><FONT FACE="verdana,Arial"><p><br>
+    <td bgcolor="ccffff"><p><br>
 <!-- 		&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $LDArticle1 ?><br>
 		<input type="hidden" name="artopt" value="">
  -->    	

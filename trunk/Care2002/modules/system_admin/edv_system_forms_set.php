@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -43,42 +43,48 @@ if(isset($mode)&&($mode=='save')&&!empty($max_items)){
 	$gc->getConfig('patient_%_show');
 }
 
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('system_admin');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',$LDDataEntryForms);
+
+# href for return button
+ $smarty->assign('pbBack',$returnfile);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('system_forms_set.php')");
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',$LDDataEntryForms);
+
+ if($rows) {
+ 	$smarty->append('JavaScript','<script language="javascript" src="'.$root_path.'js/check_menu_item_same_item.js"></script>');
+}
+
+# Buffer page output
+
+ob_start();
+
 ?>
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
-<?php 
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-?>
-
- <?php if($rows) : ?>
-<script language="javascript" src="<?php echo $root_path; ?>js/check_menu_item_same_item.js">
-</script>
-<?php endif ?>
-</HEAD>
-
-<BODY topmargin=0 leftmargin=0 marginheight=0 marginwidth=0 bgcolor=<?php echo $cfg['body_bgcolor'];?>>
-
-
-<table width=100% border=0 cellspacing=0>
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG> <?php echo $LDDataEntryForms ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right>
-<?php if($cfg['dhtml'])echo'<a href="'.$returnfile.'"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('system_forms_set.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
-</tr>
-<tr>
-<td bgcolor=<?php echo $cfg['body_bgcolor'];?> colspan=2>
-<FONT  color="#000066" FACE="verdana,arial" size=4><?php echo $LDDataEntryForms; ?></font>
+<ul>
 <form method="post">
 <table border=0 cellspacing=1 cellpadding=2>  
-
-  <tr background="../../gui/img/common/default/tableHeaderbg3.gif">
-    <td><FONT  color="#000099" FACE="verdana,arial" size=2><b></b></td>
-    <td><FONT  color="#000099" FACE="verdana,arial" size=2><b><?php echo $LDItem; ?></b></td>
-   <td><FONT  color="#000099" FACE="verdana,arial" size=2><b><?php echo $LDStatus; ?></b></td>
+<tbody class="submenu">
+  <tr class="wardlisttitlerow">
+    <td><FONT  color="#000099"><b></b></td>
+    <td><FONT  color="#000099"><b><?php echo $LDItem; ?></b></td>
+   <td><FONT  color="#000099"><b><?php echo $LDStatus; ?></b></td>
   </tr>
 
 <?php 
@@ -86,9 +92,9 @@ $i=1;
 while(list($x,$v)=each($GCONFIG))
 {
   echo '<tr>
-	<td bgcolor="#e9e9e9"><img '.createComIcon($root_path,'post_discussion.gif','0').'></td>
-	<td bgcolor="#e9e9e9"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b>'.strtr($x,'_',' ').'</b> </FONT></td>
-	<td bgcolor="#e9e9e9" align="center"><FONT   FACE="verdana,arial" size=2>	<input type="checkbox" name="value'.$i.'" value="1" ';
+	<td><img '.createComIcon($root_path,'post_discussion.gif','0').'></td>
+	<td><FONT  color="#0000cc"><b>'.strtr($x,'_',' ').'</b> </FONT></td>
+	<td align="center"><input type="checkbox" name="value'.$i.'" value="1" ';
 	if($v) echo 'checked';
 	echo '><input type="hidden" name="index'.$i.'" value="'.$x.'">
        </td>  
@@ -97,6 +103,7 @@ while(list($x,$v)=each($GCONFIG))
 	$i++;
 }
 ?>
+</tbody>
 </table>
 <?php
 if($not_trans_id){
@@ -111,16 +118,18 @@ if($not_trans_id){
 <input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0'); ?> border=0>
 
 </form>
-
-</FONT>
-<p>
-</td>
-</tr>
-</table>        
-<p>
+</ul>
 <?php
-require($root_path.'include/inc_load_copyrite.php');
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+# Assign page output to the mainframe template
+
+$smarty->assign('sMainFrameBlockData',$sTemp);
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
 ?>
-</FONT>
-</BODY>
-</HTML>

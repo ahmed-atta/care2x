@@ -15,62 +15,48 @@ $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_date_format_functions.php');
 
+//$db->debug = 1;
 
-	/*include('includes/condb.php');
-	error_reporting(0);
-	connect_db();
-	*/
-	$patqry="SELECT e.*,p.* FROM care_encounter AS e, care_person AS p WHERE e.encounter_nr=$patientno AND e.pid=p.pid";
-	//$resultpatqry=mysql_query($patqry);
-	
-	if($resultpatqry=$db->Execute($patqry)){
-		if($resultpatqry->RecordCount()){
-			$patient=$resultpatqry->FetchRow();
-		}
+/*include('includes/condb.php');
+error_reporting(0);
+connect_db();
+*/
+$patqry="SELECT e.*,p.* FROM care_encounter AS e, care_person AS p WHERE e.encounter_nr=$patientno AND e.pid=p.pid";
+//$resultpatqry=mysql_query($patqry);
+
+if($resultpatqry=$db->Execute($patqry)){
+	if($resultpatqry->RecordCount()){
+		$patient=$resultpatqry->FetchRow();
 	}
+}
+
+$presdatetime=date("Y-m-d H:i:s");
+
+$actMil=2000;
+$ybr=date(Y)-$actMil;
+
+$sql="SELECT payment_receipt_no FROM care_billing_payment ORDER BY payment_receipt_no DESC";
+
+if($ergebnis=$db->SelectLimit($sql,1)){
+	$cntergebnis=$ergebnis->FetchRow();
 	
-	$presdatetime=date("Y-m-d H:i:s");
+	$receipt_no=$cntergebnis['payment_receipt_no'];
+	// add one to receipt number for new bill
+
+	$receipt_no++;
+
+	//check for empty set
+}else{
+	//generate new bill number
+	$ybr="6".$ybr."000000";
+	$receipt_no=(int)$ybr;
+}
+
+
+if($receipt_no==10000000000) $receipt_no="6".$ybr."000000";
+// limit to 10 digit, reset variables
 	
-	
-	
-	include($root_path.'include/inc_db_makelink.php');
-	if($dblink_ok)
-	{
-	
-		$sql="SELECT payment_receipt_no FROM care_billing_payment ORDER BY payment_receipt_no DESC LIMIT 1";
-		$ergebnis=mysql_query($sql,$link);
-		$cntergebnis=mysql_num_rows($ergebnis);
-	
-		$actMil=2000;
-		$ybr=date(Y)-$actMil;
-	
-	
-	
-		//check for empty set
-	
-		if($cntergebnis !=0)
-		{
-			$receipt_no=mysql_result($ergebnis,0,'payment_receipt_no');
-	
-			// add one to receipt number for new bill
-			$receipt_no+=1;
-		}
-	
-		else
-		{
-			//generate new bill number
-	
-			$ybr="6".$ybr."000000";
-	
-			$receipt_no=(int)$ybr;
-	
-		}
-	
-	
-		if($receipt_no==10000000000) $receipt_no="6".$ybr."000000";
-		// limit to 10 digit, reset variables
-	
-	}	
+
 $breakfile='patient_payment_links.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='.$full_en;
 
 # Extract the language variable

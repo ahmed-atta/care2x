@@ -5,7 +5,7 @@ require($root_path.'include/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.net, elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -34,6 +34,7 @@ $s_date=$pyear.'-'.$pmonth.'-'.$pday;
 if($s_date==date('Y-m-d')) $is_today=true;
 	else $is_today=false;
 
+//$db->debug=1;
 
 $tnow=date('H:i:s');
 	
@@ -78,13 +79,13 @@ if(($mode=='')||($mode=='fresh')){
 	# set to edit mode
 	$edit=true;
 	
-		# Create the waiting outpatients' list
+		# Create the waiting outpatients´ list
 		$dnr=(isset($w_waitlist)&&$w_waitlist) ? 0 : $dept_nr;
 		$waitlist=&$enc_obj->createWaitingOutpatientList($dnr);
 		$waitlist_count=$enc_obj->LastRecordCount();
 		//echo $waitlist_count.'<p>'.$enc_obj->getLastQuery();
 		
-		# Get the doctor's on duty information
+		# Get the doctor´s on duty information
 		#### Start of routine to fetch doctors on duty
 		$elem='duty_1_pnr';
 		if(SHOW_DOC_2) $elem.=',duty_2_pnr';
@@ -111,11 +112,37 @@ if(($mode=='')||($mode=='fresh')){
 		}
 		#### End of routine to fetch doctors on duty
 }
+
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('nursing');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle', $dept." :: $LDOutpatientClinic (".formatDate2Local($s_date,$date_format,'','',$null='').")");
+
+  # hide back button
+ $smarty->assign('pbBack',FALSE);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('ambulatory_clinic.php')");
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',$dept." :: $LDOutpatientClinic (".formatDate2Local($s_date,$date_format,'','',$null='').")");
+
+ # Collect extra javascript code
+
+ ob_start();
 ?>
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
 
 <script language="javascript">
 <!-- 
@@ -167,9 +194,11 @@ function Transfer(pn,pw)
 		transwin<?php echo $sid ?>=window.open(urlholder,"transwin<?php echo $sid ?>","width=550,height=620,menubar=no,resizable=yes,scrollbars=yes");
 	}
 }
+
 <?php 
 require($root_path.'include/inc_checkdate_lang.php'); 
 ?>
+
 // -->
 </script>
 
@@ -178,33 +207,205 @@ require($root_path.'include/inc_checkdate_lang.php');
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
 
 <?php
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-?>
+$sTemp = ob_get_contents();
 
-<style type="text/css" name="s2">
-td.vn { font-family:verdana,arial; color:#000088; font-size:10}
+ob_end_clean();
 
-</style>
-</HEAD>
+$smarty->append('JavaScript',$sTemp);
 
-<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+# If ward exists, show the occupancy list
+
+if($rows){
+
+	$smarty->assign('bShowPatientsList',TRUE);
+
+	if($s_date<date('Y-m-d')){
+	 	$smarty->assign('sWarningPrompt','<img '.createComIcon($root_path,'warn.gif','0','absmiddle',TRUE).'> <font color="#ff0000"><b>'.$LDAttention.'</font> '.$LDOldList.'</b>');
+
+		# Prevent adding new patients to the list  if list is old
+		$edit=FALSE;
+	}
+
+	# Start here, create the occupancy list
+	# Assign the column  names
+
+	$smarty->assign('LDTime',$LDTime);
+	$smarty->assign('LDRoom',$LDRoom);
+	$smarty->assign('LDBed',$LDPatListElements[1]);
+	$smarty->assign('LDFamilyName',$LDLastName);
+	$smarty->assign('LDName',$LDName);
+	$smarty->assign('LDBirthDate',$LDBirthDate);
+	$smarty->assign('LDPatNr',$LDPatListElements[4]);
+	$smarty->assign('LDInsuranceType',$LDPatListElements[5]);
+	$smarty->assign('LDOptions',$LDPatListElements[6]);
+
+	# Initialize help flags
+	$toggle=1;
+	$room_info=array();
+
+	$males=0;
+	$females=0;
+
+	# Initialize list rows container string
+	$sListRows='';
+
+	# Loop trough patients
+
+	while ($patient=$opat_obj->FetchRow()){
+
+			if($patient['encounter_nr']==$sEncNrBuffer) continue;
+				else $sEncNrBuffer=$patient['encounter_nr'];
+
+			# Reset elements
+
+			$smarty->assign('sMiniColorBars','');
+			$smarty->assign('sRoom','');
+			$smarty->assign('sBed','');
+			$smarty->assign('sBedIcon','');
+			$smarty->assign('cComma','');
+			$smarty->assign('sFamilyName','');
+			$smarty->assign('sName','');
+			$smarty->assign('sTitle','');
+			$smarty->assign('sBirthDate','');
+			$smarty->assign('sPatNr','');
+			$smarty->assign('sAdmitDataIcon','');
+			$smarty->assign('sChartFolderIcon','');
+			$smarty->assign('sNotesIcon','');
+			$smarty->assign('sTransferIcon','');
+			$smarty->assign('sDischargeIcon','');
+
+			$sAstart='';
+			$sAend='';
+			$sFamNameBuffer='';
+			$sNameBuffer='';
+
+			# set row color/class
+
+			if ($toggle){
+				$smarty->assign('bToggleRowClass',TRUE);
+			}else{
+				$smarty->assign('bToggleRowClass',FALSE);
+			}
+
+			$toggle=!$toggle;
 
 
-<table width=100% border=0 cellpadding="0" cellspacing=0>
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=3  FACE="Arial"><STRONG> &nbsp;&nbsp; <?php echo $dept." :: $LDOutpatientClinic (".formatDate2Local($s_date,$date_format,'','',$null='').")" ?> </STRONG></FONT>
-</td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr>
-<a href="javascript:gethelp('ambulatory_clinic.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
-</nobr>
-</td></tr>
-<tr valign=top >
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
-<?php
+			# If appt time is past the now time, color font with red
+			if($patient['time']<$tnow) $smarty->assign('sTimeFontClass'.'class="cave_data"');
+				elseif(($patient['time']>=$tnow)&&($patient['time']<=$tnow)) $smarty->assign('sTimeFontClass'.'class="go_data"');
 
+			if($patient['time']) $smarty->assign('sTime',convertTimeToLocal($patient['time'],$date_format));
+
+			# If patient and edit show small color bars
+			if($edit){
+			 	$smarty->assign('sMiniColorBars','<a href="javascript:getinfo(\''.$patient['encounter_nr'].'\')">
+			 		<img src="'.$root_path.'main/imgcreator/imgcreate_colorbar_small.php'.URL_APPEND.'&pn='.$patient['encounter_nr'].'" alt="'.$LDSetColorRider.'" align="absmiddle" border=0 width=80 height=18>
+			 		</a>');
+			}
+			
+
+			# Show images by sex
+
+			$sBuffer = '<a href="javascript:popPic(\''.$patient['pid'].'\')" title="'.$LDShowPhoto.'">';
+			switch(strtolower($patient['sex'])){
+				case 'f':
+						$smarty->assign('sBedIcon',$sBuffer.'<img '.createComIcon($root_path,'spf.gif','0','',TRUE).'></a>');
+						$females++;
+						break;
+				case 'm':
+						$smarty->assign('sBedIcon',$sBuffer.'<img '.createComIcon($root_path,'spm.gif','0','',TRUE).'></a>');
+						$males++;
+						break;
+				default:
+						$smarty->assign('sBedIcon',$sBuffer.'<img '.createComIcon($root_path,'bn.gif','0','',TRUE).'></a>');
+			}
+
+			# Show the patients name with link to open charts
+			if($edit){
+
+				$sAstart = '<a href="'.$root_path.'modules/registration_admission/aufnahme_pass.php'.URL_APPEND.'&target=search&fwd_nr='.$patient['encounter_nr'].'" title="'.$LDClk2Show.'">';
+
+			}
+
+			$smarty->assign('sTitle',ucfirst($patient['title']));
+
+			if(isset($sln)&&$sln) $sFamNameBuffer = eregi_replace($sln,'<span style="background:yellow">'.ucfirst($sln).'</span>',ucfirst($patient['name_last']));
+				else $sFamNameBuffer = ucfirst($patient['name_last']);
+
+			if($bed['name_last']) $smarty->assign('cComma',',');
+				else $smarty->assign('cComma','');
+
+			if(isset($sfn)&&$sfn) $sNameBuffer = eregi_replace($sfn,'<span style="background:yellow">'.ucfirst($sln).'</span>',ucfirst($patient['name_first']));
+				else $sNameBuffer = ucfirst($patient['name_first']);
+
+
+			if($edit) $sAend ='</a>';
+				else $sAend='';
+
+			# Assign the family and first names together with the <a href></a> tags
+
+			$smarty->assign('sFamilyName',$sAstart.$sFamNameBuffer.$sAend);
+			$smarty->assign('sName',$sAstart.$sNameBuffer.$sAend);
+
+
+			if($patient['date_birth']){
+
+				if(isset($sg)&&$sg) $smarty->assign('sBirthDate',eregi_replace($sg,"<font color=#ff0000><b>".ucfirst($sg)."</b></font>",formatDate2Local($patient['date_birth'],$date_format)));
+					else $smarty->assign('sBirthDate',formatDate2Local($patient['date_birth'],$date_format));
+			}
+
+			if ($patient['encounter_nr']) $smarty->assign('sPatNr',$patient['encounter_nr']);
+
+			$sBuffer = '';
+			if($patient['insurance_class_nr']!=2) $sBuffer = $sBuffer.'<font color="#ff0000">';
+
+			if(isset($$patient['LD_var'])&&!empty($$patient['LD_var']))  $sBuffer = $sBuffer.$$patient['LD_var'];
+				else  $sBuffer = $sBuffer.$patient['insurance_name'];
+
+			$smarty->assign('sInsuranceType',$sBuffer);
+
+			if($edit){
+
+				$smarty->assign('sAdmitDataIcon','<a href="'.$root_path.'modules/registration_admission/aufnahme_pass.php'.URL_APPEND.'&target=search&fwd_nr='.$patient['encounter_nr'].'" title="'.$LDAdmissionData.' : '.$LDClk2Show.'"><img '.createComIcon($root_path,'pdata.gif','0','',TRUE).' alt="'.$LDAdmissionData.' : '.$LDClk2Show.'"></a>');
+
+				$smarty->assign('sChartFolderIcon','<a href="javascript:getinfo(\''.$patient['encounter_nr'].'\')"><img '.createComIcon($root_path,'open.gif','0','',TRUE).' alt="'.$LDShowPatData.'"></a>');
+
+				$sBuffer = '<a href="javascript:getrem(\''.$patient['encounter_nr'].'\')"><img ';
+				if($patient['notes']) $sBuffer = $sBuffer.createComIcon($root_path,'bubble3.gif','0','',TRUE);
+					else $sBuffer = $sBuffer.createComIcon($root_path,'bubble2.gif','0','',TRUE);
+				$sBuffer = $sBuffer.' alt="'.$LDNoticeRW.'"></a>';
+
+				$smarty->assign('sNotesIcon',$sBuffer);
+
+				$smarty->assign('sTransferIcon','<a href="javascript:Transfer(\''.$patient['encounter_nr'].'\')"><img '.createComIcon($root_path,'xchange.gif','0','',TRUE).' alt="'.$LDTransferPatient.'"></a>');
+				$smarty->assign('sDischargeIcon','<a href="javascript:release(\''.$patient['encounter_nr'].'\')" title="'.$LDReleasePatient.'"><img '.createComIcon($root_path,'bestell.gif','0','',TRUE).' alt="'.$LDReleasePatient.'"></a>');
+			}
+
+			# Create the rows using ward_occupancy_list_row.tpl template
+			ob_start();
+				$smarty->display('ambulatory/outpatients_list_row.tpl');
+				$sListRows = $sListRows.ob_get_contents();
+			ob_end_clean();
+
+		# Append the new row to the previous row in string
+
+		$smarty->assign('sOccListRows',$sListRows);
+
+	} // end of patients loop
+}else{
+
+	# Prompt no outpatients available
+	$smarty->assign('sWarningPrompt','
+			<div class="warnprompt"><p><ul><img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'>
+			'.str_replace("~station~",strtoupper($station),$LDNoOutpatients).'</b></font><br><img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','',TRUE).'>
+			<a href="'.$root_path.'modules/appointment_scheduler/appt_main_pass.php'.URL_APPEND.'&dept_nr='.$dept_nr.'&dept_name='.$dept.'">'.$LDGoToAppointments.'</a><p>
+			</ul></div>');
+}
+
+# Assign href  for  bottom close button
+$smarty->assign('pbClose','<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'close2.gif','0','absmiddle').'></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp');
+
+/*
 if($rows){
 
 	if($s_date<date('Y-m-d')){
@@ -233,6 +434,8 @@ $occ_list.='
 	
 
 $occ_list.= '</tr>';
+
+$opat_obj->MoveFirst();
 
 $toggle=1;
 $room_info=array();
@@ -343,6 +546,9 @@ while ($patient=$opat_obj->FetchRow()){
 $occ_list.='</table>';
 }
 
+echo $occ_list;
+*/
+
 # Declare template items
 $TP_DOC1_BLOCK='';
 $TP_DOC2_BLOCK='';
@@ -355,8 +561,8 @@ $TP_Legend1_BLOCK='';
 if($waitlist_count){
 	while($waitpatient=$waitlist->FetchRow()){
 		$buf2='';
-		if($waitpatient['current_dept_nr']!=$dept_nr) $buf2=createComIcon($root_path,'red_dot.gif','0');
-			else  $buf2=createComIcon($root_path,'green_dot.gif','0');
+		if($waitpatient['current_dept_nr']!=$dept_nr) $buf2=createComIcon($root_path,'red_dot.gif','0','',TRUE);
+			else  $buf2=createComIcon($root_path,'green_dot.gif','0','',TRUE);
 		$TP_WLIST_BLOCK.='<nobr><img '.$buf2.'>&nbsp;<a href="javascript:assignWaiting(\''.$waitpatient['encounter_nr'].'\',\''.$waitpatient['dept_LDvar'].'\')">'.$waitpatient['name_last'].', '.$waitpatient['name_first'].' '.formatDate2Local($waitpatient['date_birth'],$date_format).'</nobr></a><br>';
 	}
 }
@@ -370,7 +576,7 @@ if($w_waitlist){
 # Create doctors-on-duty block
 if(isset($person1)){
 	$TP_DOC1_BLOCK='<a href="javascript:popinfo(\''.$pnr1.'\',\''.$dept_nr.'\')" title="'.$LDClk4Phone.'">'.$person1['name_last'].', '.$person1['name_first'].'</a>';
-	$TP_ICON1='<img '.createComIcon($root_path,'violet_phone.gif','0','absmiddle').'>';
+	$TP_ICON1='<img '.createComIcon($root_path,'violet_phone.gif','0','absmiddle',TRUE).'>';
 }
 if(isset($person2)){
 	$TP_DOC2_BLOCK='<a href="javascript:popinfo(\''.$pnr2.'\',\''.$dept_nr.'\')" title="'.$LDClk4Phone.'">'.$person2['name_last'].', '.$person2['name_first'].'</a>';
@@ -378,51 +584,39 @@ if(isset($person2)){
 }
 
 $TP_Legend1_BLOCK.='
-<nobr>&nbsp;<img '.createComIcon($root_path,'green_dot.gif','0','absmiddle').'>&nbsp;<b>'.$LDOwnPatient.'</b></nobr><br>
-<nobr>&nbsp;<img '.createComIcon($root_path,'red_dot.gif','0','absmiddle').'> <b>'.$LDNonOwnPatient.'</b></nobr><br>';
+<nobr>&nbsp;<img '.createComIcon($root_path,'green_dot.gif','0','absmiddle',TRUE).'>&nbsp;<b>'.$LDOwnPatient.'</b></nobr><br>
+<nobr>&nbsp;<img '.createComIcon($root_path,'red_dot.gif','0','absmiddle',TRUE).'> <b>'.$LDNonOwnPatient.'</b></nobr><br>';
 # Create the data block
 if($edit&&$rows){
-$TP_Legend1_BLOCK.='
-<nobr>&nbsp;<img '.createComIcon($root_path,'open.gif','0','absmiddle').'> <b>'.$LDOpenFile.'</b></nobr><br>
-<nobr>&nbsp;<img '.createComIcon($root_path,'bubble2.gif','0','absmiddle').'> <b>'.$LDNotesEmpty.'</b></nobr><br>
-<nobr>&nbsp;<img '.createComIcon($root_path,'bubble3.gif','0','absmiddle').'> <b>'.$LDNotes.'</b></nobr><br>
-<nobr>&nbsp;<nobr><img '.createComIcon($root_path,'xchange.gif','0','absmiddle').'> <b>'.$LDTransferPatient.'</b></nobr></nobr><br>
-<nobr>&nbsp;<img '.createComIcon($root_path,'bestell.gif','0','absmiddle').'> <b>'.$LDRelease.'</b></nobr><br>';
+$TP_Legend1_BLOCK.='<nobr>&nbsp;<img '.createComIcon($root_path,'pdata.gif','0','absmiddle',TRUE).'> <b>'.$LDAdmissionData.'</b></nobr><br>
+<nobr>&nbsp;<img '.createComIcon($root_path,'open.gif','0','absmiddle',TRUE).'> <b>'.$LDOpenFile.'</b></nobr><br>
+<nobr>&nbsp;<img '.createComIcon($root_path,'bubble2.gif','0','absmiddle',TRUE).'> <b>'.$LDNotesEmpty.'</b></nobr><br>
+<nobr>&nbsp;<img '.createComIcon($root_path,'bubble3.gif','0','absmiddle',TRUE).'> <b>'.$LDNotes.'</b></nobr><br>
+<nobr>&nbsp;<nobr><img '.createComIcon($root_path,'xchange.gif','0','absmiddle',TRUE).'> <b>'.$LDTransferPatient.'</b></nobr></nobr><br>
+<nobr>&nbsp;<img '.createComIcon($root_path,'bestell.gif','0','absmiddle',TRUE).'> <b>'.$LDRelease.'</b></nobr><br>';
 
 $TP_Legend2_BLOCK= '
-&nbsp;<img '.createComIcon($root_path,'spf.gif','0','absmiddle').'> <b>'.$LDFemale.'</b><br>
-&nbsp;<img '.createComIcon($root_path,'spm.gif','0','absmiddle').'> <b>'.$LDMale.'</b><br>';
+&nbsp;<img '.createComIcon($root_path,'spf.gif','0','absmiddle',TRUE).'> <b>'.$LDFemale.'</b><br>
+&nbsp;<img '.createComIcon($root_path,'spm.gif','0','absmiddle',TRUE).'> <b>'.$LDMale.'</b><br>';
 }
 # Load the quick info block template
 $tp=$TP_obj->load('ambulatory/tp_clinic_quickinfo.htm');
-eval("echo $tp;");
 
-if($rows){
-# Print both blocks of data
-echo $occ_list;
-}else{
-	# Prompt no outpatients available
-	echo '
-			<ul><img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'><font face="Verdana, Arial" size=3>
-			<font color="#880000"><b>'.str_replace("~station~",strtoupper($station),$LDNoOutpatients).'</b></font><br><img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0').'> 
-			<a href="'.$root_path.'modules/appointment_scheduler/appt_main_pass.php'.URL_APPEND.'&dept_nr='.$dept_nr.'&dept_name='.$dept.'">'.$LDGoToAppointments.'</a><p></font>
-			</ul>';
-}
-?>
-<p>
-<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>></a>
-</FONT>
+	# Buffer orig template output
+	ob_start();
+		eval("echo $tp;");
+		$sTemp = ob_get_contents();
+	ob_end_clean();
+	 # Assign to page template object
+	$smarty->assign('sSubMenuBlock',$sTemp);
 
+# Assign the submenu to the mainframe center block
 
-<p>
-</td>
-</tr>
-</table>        
-<p>
+ $smarty->assign('sMainBlockIncludeFile','ambulatory/outpatients.tpl');
 
-<?php
-require($root_path.'include/inc_load_copyrite.php');
-?>
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
 
-</BODY>
-</HTML>
+ ?>

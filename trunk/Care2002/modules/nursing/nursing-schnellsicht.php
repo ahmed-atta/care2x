@@ -3,9 +3,9 @@
  require('./roots.php');
  require($root_path.'include/inc_environment_global.php');
  /**
- * CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+ * CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
  * GNU General Public License
- * Copyright 2002,2003,2004 Elpidio Latorilla
+ * Copyright 2002,2003,2004,2005 Elpidio Latorilla
  * elpidio@care2x.org, elpidio@care2x.net
  *
  * See the file "copy_notice.txt" for the licence notice
@@ -18,17 +18,10 @@
  define('NO_2LEVEL_CHK',1);
  require_once($root_path.'include/inc_front_chain_lang.php');
 
- /**
- * LOAD Smarty
- */
-
- # Note: it is advisable to load this after the inc_front_chain_lang.php so 
- # that the smarty script can use the user configured template theme
- require_once($root_path.'gui/smarty_template/smarty_care.class.php');
- $smarty = new smarty_care('nursing');
-
  $breakfile='nursing.php'.URL_APPEND;
  $thisfile=basename(__FILE__);
+ 
+ $today = date('Y-m-d');
 
  // Let us make some interface for calendar class
  if($from=='arch'){
@@ -52,11 +45,10 @@
  if($s_date==date('Y-m-d')) $is_today=true;
 	else $is_today=false;
 	
+//$db->debug=1;
+
  $dbtable='care_ward';
 
- # Establish db connection
- if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
- if($dblink_ok) {
   /* Load date formatter */
   include_once($root_path.'include/inc_date_format_functions.php');
 	
@@ -93,7 +85,7 @@
   if($is_today)
    $sql.=" AND '$s_date'>=l.date_from AND l.date_to = '$dbf_nodate'";
   else
-   $sql.=" AND '$s_date'>= l.date_from AND '$s_date' <='$today' AND ('$s_date'<=l.date_to OR l.date_to = '$dbf_nodate')";
+   $sql.=" AND '$s_date'>= l.date_from AND '$s_date' <='".date('Y-m-d')."' AND ('$s_date'<=l.date_to OR l.date_to = '$dbf_nodate')";
 
   $sql.=" WHERE  w.is_temp_closed IN('',0) AND w.status NOT IN ('hide','delete','void','inactive')   AND w.date_create<='$s_date' ";
   $sql.="	GROUP BY w.nr ORDER BY w.nr";
@@ -102,60 +94,24 @@
 		$bedcount=$occbed->RecordCount();
 	}else{echo "$sql<br>$LDDbNoRead";}
 
-  }else{ echo "$LDDbNoLink<br>";}
-
-
-
- /**
- * HEAD META definition
- */
- $smarty->assign('setCharSet',setCharSet());
-
-
- /**
- * collect JavaScript for Smarty
+   /**
+ * LOAD Smarty
  */
 
- ob_start();
- require($root_path.'include/inc_js_gethelp.php');
- require($root_path.'include/inc_css_a_hilitebu.php');
- $sTemp = ob_get_contents();
- ob_end_clean();
- $smarty->assign('JavaScript',$sTemp);
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('nursing');
 
- $sTemp = $sid.'&lang='.$lang.'&pday='.$pday.'&pmonth='.$pmonth.'&pyear='.$pyear;
+  $sTemp = $sid.'&lang='.$lang.'&pday='.$pday.'&pmonth='.$pmonth.'&pyear='.$pyear;
  $smarty->assign('SID_Parameter',$sTemp);
  $smarty->assign('aufnahme_user',$aufnahme_user);
 
- /**
- * Toolbar (look at header_topblock.tbl)
- */
-
- $smarty->assign('HTMLtag',html_ret_rtl($lang)); 
- 
- $smarty->assign('LDNursing',$LDNursing );
+ $smarty->assign('sToolbarTitle',$LDNursing );
  $smarty->assign('Subtitle',$LDQuickView ); // Nursing-Subtitle (header_toblock.tpl)  
- $smarty->assign('top_txtcolor',$cfg['top_txtcolor']);
- $smarty->assign('top_bgcolor',$cfg['top_bgcolor']); 
 
  # Added for the common header top block
- $smarty->assign('pbBack','javascript:window.history.back()');
- $smarty->assign('gifBack2',createLDImgSrc($root_path,'back2.gif','0') );
  $smarty->assign('pbHelp','javascript:gethelp(\'nursing_how2search.php\',\'\','.$rows.',\'quick\',\'\')');
-
- # Added for the common header top block
- $smarty->assign('gifHilfeR',createLDImgSrc($root_path,'hilfe-r.gif','0') );
- 
- $smarty->assign('LDCloseAlt',$LDCloseAlt );
- $smarty->assign('gifClose2',createLDImgSrc($root_path,'close2.gif','0') );
- if($cfg['dhtml']) {
-  $smarty->assign('dhtml','style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"');
- } else {
-  $smarty->assign('dhtml','');
- }
-
-
- $smarty->assign('body_bgcolor',$cfg['body_bgcolor']);
 
  /*generate the calendar */
  include($root_path.'classes/calendar_jl/class.calendar.php'); 
@@ -214,9 +170,13 @@
 		$frei=0;
 	}
    if ($toggler==0) {
-    $bgc='ffffcc'; $toggler=1;
+    //$bgc='ffffcc';
+	$toggler=1;
+	$sStatListClass='wardlistrow1';
    } else {
-    $bgc='dfdfdf'; $toggler=0;
+    //$bgc='dfdfdf'; 
+	$toggler=0;
+	$sStatListClass='wardlistrow2';
    }
   
    /**
@@ -225,15 +185,15 @@
 
    ob_start();
    echo '
-     <tr bgcolor="#'.$bgc.'">';
+     <tr class="'.$sStatListClass.'">';
    echo '
-        <td align=center><font face="verdana,arial" size="2" ><a href="javascript:statbel(\'1\',\''.$result['nr'].'\',\''.$result['ward_id'].'\')"  title="'.$LDClk2Show.'">';
+        <td align=center><a href="javascript:statbel(\'1\',\''.$result['nr'].'\',\''.$result['ward_id'].'\')"  title="'.$LDClk2Show.'">';
    echo strtoupper($result['name']).'
         </a>';
    echo '</td>
-        <td align=center><font face="verdana,arial" size="2" >
+        <td align=center>
         '.$freebeds.'&nbsp;&nbsp;&nbsp;</td>
-        <td align=center><font face="verdana,arial" size="2" color="'.PIE_CHART_USED_COLOR.'">
+        <td align=center><font  color="'.PIE_CHART_USED_COLOR.'">
         ';
    if($bedrow['maxoccbed']) echo $bedrow['maxoccbed'];
    echo '&nbsp;&nbsp;&nbsp;</td>
@@ -253,8 +213,7 @@
 		echo '</a>';
 	}
 	echo '
-			</td><td align=center>
-			<font face="verdana,arial" size="2" >'.$roomrow['maxbed'].'
+			</td><td align=center>'.$roomrow['maxbed'].'
 			</td>';
 	echo "\r\n";
 	echo '
@@ -270,7 +229,7 @@
 	}
 	echo '
 			</td></tr>
-	 <tr><td bgcolor="#0000ee" colspan="7"><img src="../../gui/img/common/default/pixel.gif" border=0 width=1 height=1></td></tr>
+	 <tr><td class="thinrow_vspacer" colspan="7"><img src="../../gui/img/common/default/pixel.gif" border=0 width=1 height=1></td></tr>
 	 ';
 
 
@@ -309,7 +268,7 @@
  $smarty->assign('gifBul_arrowgrnlrg',createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle') );  
  $smarty->assign('gifMascot1_r',createMascot($root_path,'mascot1_r.gif','0','absmiddle') );
  $smarty->assign('LDNoOcc',$LDNoOcc); 
- $smarty->assign('LDClk2Archive',$LDClk2Archive);  
+ $smarty->assign('LDClk2Archive',$LDClk2Archive);
 
  /**
  * IF ($from == "arch")
@@ -320,25 +279,20 @@
  /* ELSE */
  $smarty->assign('pbClose2',createLDImgSrc($root_path,'close2.gif','0') );
  $smarty->assign('breakfile',$breakfile);
- 
- 
- $smarty->assign('bot_bgcolor',$cfg['bot_bgcolor']);
 
+ # Assign nr of wards available
 
- /**
- * show Copyright
- * managed in smarty_care.class.php
- */
- $smarty->assign('sCopyright',$smarty->Copyright());
- $smarty->assign('sPageTime',$smarty->Pagetime());
+ $smarty->assign('iWardCount',$rows);
+
+ # Assign quick view template to the mainframe block
+ 
+ $smarty->assign('sMainBlockIncludeFile','nursing/nursing-schnellansicht.tpl');
 
  /**
  * show Template
  */
 
- $smarty->display('file:nursing/nursing-schnellansicht.tpl');
-// $smarty->display('debug.tpl');
-
+ $smarty->display('common/mainframe.tpl');
 
 ?>
 

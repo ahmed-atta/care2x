@@ -5,7 +5,7 @@ require($root_path.'include/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.net, elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -62,7 +62,7 @@ if( $enc_obj->loadEncounterData($pn)) {
 				$person=new Person;
 				$death['death_date']=$date;
 				$death['death_encounter_nr']=$pn;
-				$death['history']="CONCAT(history,'Discharged ".date('Y-m-d H:i:s')." $encoder\n')";
+				$death['history']=$enc_obj->ConcatHistory("Discharged (cause: death) ".date('Y-m-d H:i:s')." $encoder\n");
 				$death['modify_id']=$encoder;
 				$death['modify_time']=date('YmdHis');
 				@$person->setDeathInfo($enc_obj->PID(),$death);
@@ -96,30 +96,43 @@ if( $enc_obj->loadEncounterData($pn)) {
 	$patient_ok=FALSE;
 }
 		
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
 
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
+
+# Toolbar title
+
+ $smarty->assign('sToolbarTitle',$LDReleasePatient);
+
+ # href for the return button
+ $smarty->assign('pbBack',FALSE);
+
+# href for the  button
+ $smarty->assign('pbHelp',"javascript:gethelp('inpatient_discharge.php','','','$station','$LDReleasePatient')");
+
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('title',$LDReleasePatient);
+
+ # Collect extra javascrit code if patient is not released yet
+ 
+ if(!$released){
+
+	ob_start();
 ?>
-
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
-
-<?php
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-
-?>
-<style type="text/css" name="s2">
-td.vn { font-family:verdana,arial; color:#000088; font-size:12}
-td.vl { font-family:verdana,arial; background-color:#ffffff;color:#0; font-size:12}
-
-</style>
 
 <script language="javascript">
 <!-- 
 
-function pruf(d)
-{ 
+function pruf(d){
 	if(!d.sure.checked){
 		return false;
 	}else{
@@ -142,6 +155,7 @@ function pruf(d)
 }
 
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
+
 //-->
 </script>
 
@@ -149,269 +163,124 @@ function pruf(d)
 <script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
 <script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
-</HEAD>
-
-<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> onLoad="if (window.focus) window.focus()" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
-
-<table width=100% border=0  cellspacing=0>
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2 FACE="Arial"><STRONG><?php echo $LDReleasePatient ?> </STRONG></FONT>
-</td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>"  align=right ><nobr>
-<!-- <a href="javascript:window.history.back()"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a> --><a href="javascript:gethelp('inpatient_discharge.php','','','<?php echo $station ?>','<?php echo $LDReleasePatient ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
-</tr>
-<tr>
-<td bgcolor="<?php echo $cfg['body_bgcolor']; ?>" colspan=2>
-<p></p>
- <ul>
 <?php
-if(0){
-echo '<table   cellpadding="2" cellspacing=0 border="0" >
-		<tr bgcolor="aqua" ><td><font face="verdana,arial" size="2" ><b>&nbsp;&nbsp;</b></td>
-		<td bgcolor="aqua"><font face="verdana,arial" size="2" ><b>'.$full_en.'</b></td>
-		<td bgcolor="aqua"><font face="verdana,arial" size="2" ><b>&nbsp;</b></td>
-		</tr>';
 
+	$sTemp = ob_get_contents();
+	ob_end_clean();
 
-echo '
-<tr bgcolor="#ffffcc"><td><font face="verdana,arial" size="2" ><b> &nbsp;&nbsp;</b></td>
-		<td valign="top" width="250"><font face="verdana,arial" size="2" >&nbsp;<br>
-		'.$result[title].'<br>
-		<b>'.$result['name_last'].', '.$result['name_first'].'</b> <br>
-		<font color=maroon>'.formatDate2Local($result['date_birth'],$date_format).'</font> <p>
-		'.nl2br($result[address]);
+	$smarty->append('JavaScript',$sTemp);
 
+} // End of if !$released
 
-
-echo '<p><font face="verdana,arial" size="1" >'.strtoupper($station).' &nbsp; &nbsp; '.$result['insurance_class_nr'].' '.$result['insurance_firm_id'].'<p>
-		'.formatDate2Local("$pyear-$pmonth-$pday",$date_format).'</font></td>';
-echo '<td bgcolor="#ffffcc" valign="top"><font face="verdana,arial" size="2" >';
-
-//******************* check cache if pix exists *************
-$fr=strtolower($full_en.'_'.$result['name_last'].'_'.$result['vorname'].'_'.(str_replace('.','-',$result['date_birth'])));
-
-$fname=strtolower($fr."_main.jpg");
-$frmain='/'.$fr.'/'.$fname;
-
-$cpix=$root_path."cache/$fname";
-
-if(file_exists($cpix))
-{
-	echo '<img src="'.$cpix.'" width="150">';
-}
-else
-{
-	// if fotos must be fetched directly from local dir
-	if($disc_pix_mode) 
-	{
-		$cpix=$fotoserver_localpath.$fname;
-		if(file_exists($cpix))
-		{
-			echo '<img src="'.$cpix.'" width="150">';
-		}
-		else echo '<img src="../'.$fotoserver_localpath.'foto-na.jpg">';
-	}
-	else
-	{
-		//**************** ftp check of main pix ************************
-		# Notes as of 2004-04-10: This will not be supported anymore and the priority will shift to using HXP protocol
-		// set up basic connection
-		//$ftp_server="192.168.0.2";   // configured in the file ..include/inc_remoteservers_conf.php
-		//$ftp_user="maryhospital_fotodepot";
-		//$ftp_pw="seeonly";
-		$conn_id = ftp_connect("$ftp_server"); 
-		if ($conn_id)
-		{
-			// login with username and password
-			$login_result = ftp_login($conn_id, "$ftp_user", "$ftp_pw"); 
-
-  	 		 // check connection
-  			if($login_result)
-		 	{ 
-  				$fn=ftp_pwd($conn_id);       
-				$f_e=ftp_size($conn_id,"$fn$frmain");
-  		  		//if(strpos(file("$frmain"),"warning")) echo '<img src="'.$frmain.'">';
-				if($f_e>0)
-				{
-			 		echo '<img src="'.$fotoserver_http.$frmain.'" width="150">';
-					// now save the pix in cache
-					ftp_get($conn_id,$cpix,"$fn$frmain",FTP_BINARY);	
-				}
-				else echo '<img src="'.$fotoserver_localpath.'foto-na.jpg">';
-  			}
-		 	else	echo "$LDFtpNoLink<p>";
-			// close the FTP stream 
-			ftp_quit($conn_id); 
-		}	
-		else 
-		{
-			echo '<img src="'.$fotoserver_localpath.'foto-na.jpg"><br>';
-			echo $LDFtpAttempted; 
-		}
-	}
- }
-
-echo '
-		</td>
-		</tr></table>';
+if(($mode=="release")&&($released)){
+	$smarty->assign('sPrompt',$LDJustReleased);
 }
 
-?>
-
-<?php if(($mode=="release")&&($released)) : ?>
-<font face="verdana,arial" size="3" ><b><?php echo $LDJustReleased ?></b></font>
-<?php endif ?>
-
-<?php
 if($patient_ok){
-?>
 
-<form action="<?php echo $thisfile ?>" name="discform" method="post" onSubmit="return pruf(this)">
-<table border=0 bgcolor="#efefef">
-  <tr>
-    <td colspan=2>
-	<?php
-		echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
-	?>
-	<img <?php echo $img_source; ?> align="top">
-	</td>
-  </tr>
-  <tr>
-  <tr>
-    <td class=vn><?php echo $LDPatListElements[0] ?>:</td>
-    <td class=vl>&nbsp;<?php echo $rm.strtoupper(chr($bd+96));//$rm.$bd ?></td>
-  </tr>
-    <td class=vn><?php echo $LDDate ?>:</td>
-    <td class=vl>&nbsp;
-	<?php 
+	$smarty->assign('thisfile',$thisfile);
+	$smarty->assign('sBarcodeLabel','<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>');
+	$smarty->assign('img_source','<img '.$img_source.' align="top">');
+	$smarty->assign('LDLocation',$LDPatListElements[0]);
+	$smarty->assign('sLocation',$rm.strtoupper(chr($bd+96)));
+	$smarty->assign('LDDate',$LDDate);
+
 	if($released){
-		 echo nl2br($x_date);
+		$smarty->assign('released',TRUE);
+		$smarty->assign('x_date',nl2br($x_date));
 	}else{
-		echo '<input type="text" name="x_date" size=12 maxlength=10 value="'.formatdate2Local(date('Y-m-d'),$date_format).'"  onBlur="IsValidDate(this,\''.$date_format.'\')"  onKeyUp="setDate(this,\''.$date_format.'\',\''. $lang.'\')">';
-	?>
-	<a href="javascript:show_calendar('discform.x_date','<?php echo $date_format ?>')">
- 	<img <?php echo createComIcon($root_path,'show-calendar.gif','0','top'); ?>></a>
-	<?php
+		$smarty->assign('sDateInput','<input type="text" name="x_date" size=12 maxlength=10 value="'.formatdate2Local(date('Y-m-d'),$date_format).'"  onBlur="IsValidDate(this,\''.$date_format.'\')"  onKeyUp="setDate(this,\''.$date_format.'\',\''. $lang.'\')">');
+		$smarty->assign('sDateMiniCalendar',"<a href=\"javascript:show_calendar('discform.x_date','$date_format')\"><img ".createComIcon($root_path,'show-calendar.gif','0','top')."></a>");
 	}
-	?>
-                 </td>
-  </tr>
-  <tr>
-    <td class=vn><?php echo $LDClockTime ?>:</td>
-    <td class=vl>&nbsp;
-	<?php if($released) echo nl2br($x_time); 
-			else echo '<input type="text" name="x_time" size=12 maxlength=12 value="'.convertTimeToLocal(date('H:i:s')).'" onKeyUp=setTime(this,\''.$lang.'\')>';
-	?>
-	</td>
-  </tr>
-  <tr>
-    <td class=vn><?php echo $LDReleaseType ?>:</td>
-    <td class=vl>
-	<?php if($released) 
-	{
+	$smarty->assign('LDClockTime',$LDClockTime);
+
+	if($released) $smarty->assign('x_time',nl2br($x_time));
+		else $smarty->assign('sTimeInput','<input type="text" name="x_time" size=12 maxlength=12 value="'.convertTimeToLocal(date('H:i:s')).'" onKeyUp=setTime(this,\''.$lang.'\')>');
+	$smarty->assign('LDReleaseType',$LDReleaseType);
+
+	$sTemp = '';
+	if($released){
+
 		while($dis_type=$discharge_types->FetchRow()){
 			if($dis_type['nr']==$relart){
-				echo '&nbsp;';
-				if(isset($$dis_type['LD_var'])&&!empty($$dis_type['LD_var'])) echo $$dis_type['LD_var'];
-					else echo $dis_type['name'];
+				$sTemp = $sTemp.'&nbsp;';
+				if(isset($$dis_type['LD_var'])&&!empty($$dis_type['LD_var'])) $sTemp = $sTemp.$$dis_type['LD_var'];
+					else $sTemp = $sTemp.$dis_type['name'];
 				break;
 			}
 		}
-	}else{ 
+	}else{
 		$init=1;
 		while($dis_type=$discharge_types->FetchRow()){
               # We will display only discharge types 1 to 7
               if($dis_type['nr']<8){
-			     echo '&nbsp;';
-			     echo '<input type="radio" name="relart" value="'.$dis_type['nr'].'"';
+			     $sTemp = $sTemp.'&nbsp;';
+			     $sTemp = $sTemp.'<input type="radio" name="relart" value="'.$dis_type['nr'].'"';
 			     if($init){
-				    echo ' checked';
+				    $sTemp = $sTemp.' checked';
 				    $init=0;
 		         }
-			     echo '>';
-			     if(isset($$dis_type['LD_var'])&&!empty($$dis_type['LD_var'])) echo $$dis_type['LD_var'];
-				    else echo $dis_type['name'];
-			     echo '<br>';
+			     $sTemp = $sTemp.'>';
+			     if(isset($$dis_type['LD_var'])&&!empty($$dis_type['LD_var'])) $sTemp = $sTemp.$$dis_type['LD_var'];
+				    else $sTemp = $sTemp.$dis_type['name'];
+			     $sTemp = $sTemp.'<br>';
               }
 		}
-			
-/*	echo '	
-					<input type="radio" name="relart" value="reg" checked> '.$LDRegularRelease.'<br>
-                 	<input type="radio" name="relart" value="self"> '.$LDSelfRelease.'<br>
-                 	<input type="radio" name="relart" value="emgcy"> '.$LDEmRelease.'<br>
-                 	<input type="radio" name="relart" value="chg_ward"> '.$LDChangeWard.'<br>
-                 	<input type="radio" name="relart" value="chg_bed"> '.$LDChangeBed.'<br>
-                 	<input type="radio" name="relart" value="pat_death"> '.$LDPatientDied.'<br>';
-*/	}
-	?>
-                 </td>
-  </tr>
-  <tr>
-    <td class=vn><?php echo $LDNotes ?>:</td>
-    <td class=vl>&nbsp;
-	<?php if($released) echo nl2br($info); else echo '<textarea name="info" cols=40 rows=3></textarea>';
-	?></td>
-  </tr>
-  <tr>
-    <td class=vn><?php echo $LDNurse ?>:</td>
-    <td class=vl>&nbsp;
-	<?php if($released) echo $encoder; else echo '<input type="text" name="encoder" size=25 maxlength=30 value="'.$encoder.'">';
-	?>
-                   </td>
-  </tr>
-<?php if(!(($mode=='release')&&($released))) { ?>
-  <tr>
-    <td class=vn><input type="submit" value="<?php echo $LDRelease ?>"></td>
-    <td class=vn>	<input type="checkbox" name="sure" value="1"> <?php echo $LDYesSure ?><br>
-                 </td>
-  </tr>
-<?php } ?>
-</table>
+	}
+	$smarty->assign('sDischargeTypes',$sTemp);
 
-<input type="hidden" name="mode" value="release">
-<?php if(($released)||($lock)) : ?>
-<input type="hidden" name="lock" value="1">
-<?php endif ?>
-<input type="hidden" name="sid" value="<?php echo $sid ?>">
-<input type="hidden" name="lang" value="<?php echo $lang ?>">
-<input type="hidden" name="station" value="<?php echo $station ?>">
-<input type="hidden" name="ward_nr" value="<?php echo $ward_nr ?>">
-<input type="hidden" name="dept" value="<?php echo $dept ?>">
-<input type="hidden" name="dept_nr" value="<?php echo $dept_nr ?>">
-<input type="hidden" name="pday" value="<?php echo $pday ?>">
-<input type="hidden" name="pmonth" value="<?php echo $pmonth ?>">
-<input type="hidden" name="pyear" value="<?php echo $pyear ?>">
-<input type="hidden" name="rm" value="<?php echo $rm ?>">
-<input type="hidden" name="bd" value="<?php echo $bd ?>">
-<input type="hidden" name="pn" value="<?php echo $pn ?>">
-<input type="hidden" name="s_date" value="<?php echo "$pyear-$pmonth-$pday" ?>">
-</form>
-<p>
+	$smarty->assign('LDNotes',$LDNotes);
 
-<?php
+	if($released) $smarty->assign('info',nl2br($info));
+
+	$smarty->assign('LDNurse',$LDNurse);
+
+	$smarty->assign('encoder',$encoder);
+
+	if(!(($mode=='release')&&($released))) {
+
+		$smarty->assign('bShowValidator',TRUE);
+		$smarty->assign('pbSubmit','<input type="submit" value="'.$LDRelease.'">');
+		$smarty->assign('sValidatorCheckBox','<input type="checkbox" name="sure" value="1">');
+		$smarty->assign('LDYesSure',$LDYesSure);
+	}
+
+	$sTemp = '<input type="hidden" name="mode" value="release">';
+
+	if(($released)||($lock)) $sTemp = $sTemp.'<input type="hidden" name="lock" value="1">';
+
+	$sTemp = $sTemp.'<input type="hidden" name="sid" value="'.$sid.'">
+		<input type="hidden" name="lang" value="'.$lang.'">
+		<input type="hidden" name="station" value="'.$station.'">
+		<input type="hidden" name="ward_nr" value="'.$ward_nr.'">
+		<input type="hidden" name="dept" value="'.$dept.'">
+		<input type="hidden" name="dept_nr" value="'.$dept_nr.'">
+		<input type="hidden" name="pday" value="'.$pday.'">
+		<input type="hidden" name="pmonth" value="'.$pmonth.'">
+		<input type="hidden" name="pyear" value="'.$pyear.'">
+		<input type="hidden" name="rm" value="'.$rm.'">
+		<input type="hidden" name="bd" value="'.$bd.'">
+		<input type="hidden" name="pn" value="'.$pn.'">
+		<input type="hidden" name="s_date" value="'."$pyear-$pmonth-$pday".'">';
+
+	$smarty->assign('sHiddenInputs',$sTemp);
+
+
 }else{
-	echo "<font face=\"verdana,arial\" size=3 color=maroon><b>$LDErrorOccured $LDTellEdpIfPersist</b></font><p>";
+	$smarty->assign('sPrompt',"$LDErrorOccured $LDTellEdpIfPersist");
 }
-?>
 
-<br><a href="<?php echo $breakfile; ?>">
-<?php if(($mode=='release')&&($released)) : ?>
-<img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>>
-<?php else : ?>
-<img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> border="0">
-<?php endif ?></a>
+if(($mode=='release')&&($released)) $sBreakButton= '<img '.createLDImgSrc($root_path,'close2.gif','0').'>';
+	else $sBreakButton= '<img '.createLDImgSrc($root_path,'cancel.gif','0').' border="0">';
 
-</FONT>
-</ul>
-<p>
-</td>
-</tr>
-</table>        
-<p>
-<?php
-require($root_path.'include/inc_load_copyrite.php');
-?>
-</BODY>
-</HTML>
+$smarty->assign('pbCancel','<a href="'.$breakfile.'">'.$sBreakButton.'</a>');
+
+$smarty->assign('sMainBlockIncludeFile','nursing/discharge_patient_form.tpl');
+
+ /**
+ * show Template
+ */
+
+ $smarty->display('common/mainframe.tpl');
+ // $smarty->display('debug.tpl');
+ ?>

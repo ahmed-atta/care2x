@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -13,7 +13,6 @@ require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','products.php');
 $local_user='ck_prod_arch_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
 
 /*if(!isset($dept)||!$dept)
 {
@@ -50,13 +49,41 @@ $count=0;
 /* Load the common icon images */
 $img_info=createComIcon($root_path,'info3.gif','0');
 
-?>
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
 
- <script language="javascript" >
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
+
+ # Title in the title bar
+ $smarty->assign('sToolbarTitle',$title);
+
+ # href for the back button
+// $smarty->assign('pbBack',$returnfile);
+
+ # href for the help button
+ $smarty->assign('pbHelp',"javascript:gethelp('products.php','archshow','','$cat')");
+
+ # href for the close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',$title);
+
+ # Assign Body Onload javascript code
+ $smarty->assign('sOnLoadJs','onLoad="document.suchform.keyword.focus()"');
+
+ # Collect javascript code
+ ob_start()
+
+?>
+
+<script language="javascript" >
 <!-- 
 function pruf(d)
 {
@@ -81,58 +108,42 @@ function popinfo(b)
 // -->
 </script> 
 
-<?php 
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-?></HEAD>
+<?php
 
-<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="document.suchform.keyword.focus()"
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
-<?php echo $test ?>
-<?php //foreach($argv as $v) echo "$v "; ?>
-<table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
-<tr valign=top>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="45">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG> &nbsp; <?php echo $title ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])echo'<a href="'.$returnfile.'"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('products.php','archshow','','<?php echo $cat ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
-</tr>
-<tr valign=top >
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+$smarty->append('JavaScript',$sTemp);
+
+# Buffer page output
+
+ob_start();
+
+?>
+
 <ul>
-<FONT face="Verdana,Helvetica,Arial" size=2>
 
 <p>
 <?php 
-require($root_path.'include/inc_products_archive_search_form.php'); 
+
+//$db->debug=1;
+
+require($root_path.'include/inc_products_archive_search_form.php');
 
 $rows=0;
 
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok)
+/* Load the date formatter */
+include_once($root_path.'include/inc_date_format_functions.php');
+
+$sql="SELECT * FROM $dbtable WHERE order_nr='$order_nr'";
+
+if($ergebnis=$db->Execute($sql))
 {
-     /* Load the date formatter */
-     include_once($root_path.'include/inc_date_format_functions.php');
-     
-
-				$sql='SELECT * FROM '.$dbtable.' 
-							 WHERE order_nr="'.$order_nr.'"';
-        		if($ergebnis=$db->Execute($sql))
-				{
-
-					$rows=$ergebnis->RecordCount();
-						
-				}else { echo "$LDDbNoRead<br>"; } 
-				
-			
-			//echo $sql;
+	$rows=$ergebnis->RecordCount();
+}else {
+	echo "$LDDbNoRead<br>";
 }
-else 
-{ echo "$LDDbNoLink<br>"; } 
-	
-	
+
 if($rows>0){
 
 	# Create the department object
@@ -144,65 +155,79 @@ if($rows>0){
 		}
 	}
 
-
 //++++++++++++++++++++++++ show general info about the list +++++++++++++++++++++++++++
-$tog=1;
-$content=$ergebnis->FetchRow();
-echo '</font>
-		<table cellpadding=0 cellspacing=0 border=0 bgcolor="#666666"><tr><td><table border=0 cellspacing=1 cellpadding=3>
-  		<tr bgcolor="#ffffff">';
+	$tog=1;
+	$content=$ergebnis->FetchRow();
+	echo '
+			<table cellpadding=0 cellspacing=0 border=0 class="frame">
+			<tr>
+			<td>
+			<table border=0 cellspacing=1 cellpadding=3>
+			<tr class="wardlisttitlerow">';
 	for ($i=0;$i<sizeof($LDArchValindex);$i++)
 	echo '
-		<td><font face=Verdana,Arial size=2 color="#0000ff">'.$LDArchValindex[$i].'</td>';
+		<td>'.$LDArchValindex[$i].'</td>';
+
 	echo '</tr>
-			<tr bgcolor=#f6f6f6>
-				<td><font face=Verdana,Arial size=2>';
-				
-				$buffer=$dept[$content['dept_nr']]['LD_var'];
-				if(isset($$buffer)&&!empty($$buffer)) 	echo $$buffer;
-					else echo $dept[$content['dept_nr']]['name_formal'];
-					
-			echo '</td>
-				 <td><font face=Verdana,Arial size=2>'.formatDate2Local($content['order_date'],$date_format).'</td>
-				<td ><font face=Verdana,Arial size=2>'.convertTimeToLocal($content['order_time']).'</td>
-				<td><font face=Verdana,Arial size=2>'.$content['modify_id'].'</td>
-				<td><font face=Verdana,Arial size=2>'.substr($content['validator'],0,strpos($content['validator'],'@')).'</td>
-				<td><font face=Verdana,Arial size=2>'.formatDate2Local($content['sent_datetime'],$date_format).'</td>
-				<td><font face=Verdana,Arial size=2>'.convertTimeToLocal(formatDate2Local($content['sent_datetime'],$date_format,0,1)).'</td>
-				<td><font face=Verdana,Arial size=2>'.$content['priority'].'</td>
-				</tr></table></td></tr></table>';
+			<tr class="wardlistrow1">
+			<td>';
 
-//++++++++++++++++++++++++ show the actual list +++++++++++++++++++++++++++
-$tog=1;
-$artikeln=explode(' ',$content['articles']);
-echo '<form name=actlist>
-		<font face="Verdana, Arial" size=2 color="#800000">';
-if (sizeof($artikeln)==1) echo $LDOrderedArticle; else echo  $LDOrderedArticleMany;
+	$buffer=$dept[$content['dept_nr']]['LD_var'];
 
-$LDFinindex[]='';
-echo '</font>
-		<table border=0 cellspacing=1 cellpadding=3>
-  		<tr bgcolor="#ffffee">';
-	for ($i=0;$i<sizeof($LDFinindex);$i++)
-	echo '
-		<td><font face=Verdana,Arial size=2 color="#000080">'.$LDFinindex[$i].'</td>';
-	echo '</tr>';	
+	if(isset($$buffer)&&!empty($$buffer)) 	echo $$buffer;
+		else echo $dept[$content['dept_nr']]['name_formal'];
 
-$i=1;
-for($n=0;$n<sizeof($artikeln);$n++)
- 	{
-	parse_str($artikeln[$n],$r);
-	if($tog)
-	{ echo '<tr bgcolor="#dddddd">'; $tog=0; }else{ echo '<tr bgcolor="#efefff">'; $tog=1; }
-	echo'
-				<td><font face=Arial size=2 color="#000080">'.$i.'</td>
-				<td><font face=Verdana,Arial size=2>'.$r['artikelname'].'</td>
-				 <td><font face=Verdana,Arial size=2>'.$r['pcs'].'</td>
-				<td ><font face=Verdana,Arial size=2><nobr>X '.$r['proorder'].'</nobr></td>
-				<td><font face=Verdana,Arial size=2>'.$r['bestellnum'].'</td>';
-				echo '<td><a href="javascript:popinfo(\''.$r['bestellnum'].'\')" ><img '.$img_info.' alt="'.$LDOpenInfo.$r['artikelname'].'"></a></td>
-			</tr>';
-	$i++;
+	echo '</td>
+		<td>'.formatDate2Local($content['order_date'],$date_format).'</td>
+		<td >'.convertTimeToLocal($content['order_time']).'</td>
+		<td>'.$content['modify_id'].'</td>
+		<td>'.substr($content['validator'],0,strpos($content['validator'],'@')).'</td>
+		<td>'.formatDate2Local($content['sent_datetime'],$date_format).'</td>
+		<td>'.convertTimeToLocal(formatDate2Local($content['sent_datetime'],$date_format,0,1)).'</td>
+		<td>'.$content['priority'].'</td>
+		</tr>
+		</table>
+		</td>
+		</tr>
+		</table>';
+
+	//++++++++++++++++++++++++ show the actual list +++++++++++++++++++++++++++
+	$tog=1;
+	$artikeln=explode(' ',$content['articles']);
+	echo '<form name=actlist>
+			<font size=2 color="#800000">';
+	if (sizeof($artikeln)==1) echo $LDOrderedArticle; else echo  $LDOrderedArticleMany;
+
+	$LDFinindex[]='';
+	echo '</font>
+			<table border=0 cellspacing=1 cellpadding=3>
+			<tr class="wardlisttitlerow">';
+	for ($i=0;$i<sizeof($LDFinindex);$i++){
+		echo '
+			<td>'.$LDFinindex[$i].'</td>';
+	}
+	echo '</tr>';
+
+	$i=1;
+	for($n=0;$n<sizeof($artikeln);$n++){
+
+		parse_str($artikeln[$n],$r);
+
+		if($tog){
+			echo '<tr class="wardlistrow2">'; $tog=0;
+		}else{
+			echo '<tr class="wardlistrow2">'; $tog=1;
+		}
+
+		echo '
+					<td><font color="#000080">'.$i.'</td>
+					<td>'.$r['artikelname'].'</td>
+					<td>'.$r['pcs'].'</td>
+					<td ><nobr>X '.$r['proorder'].'</nobr></td>
+					<td>'.$r['bestellnum'].'</td>';
+					echo '<td><a href="javascript:popinfo(\''.$r['bestellnum'].'\')" ><img '.$img_info.' alt="'.$LDOpenInfo.$r['artikelname'].'"></a></td>
+				</tr>';
+		$i++;
  	}
 	echo '</table>
 			</form>
@@ -212,26 +237,19 @@ for($n=0;$n<sizeof($artikeln);$n++)
 <a href="<?php echo $returnfile; ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>
 </table>
 	
-
 </ul>
 
-</FONT>
-<p>
-</td>
-</tr>
-
-<tr>
-<td bgcolor=<?php echo $cfg['bot_bgcolor']; ?> height=70 colspan=2>
 <?php
-require($root_path.'include/inc_load_copyrite.php');
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+# Assign the form template to mainframe
+
+ $smarty->assign('sMainFrameBlockData',$sTemp);
+
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
 ?>
-</td>
-</tr>
-</table>        
-&nbsp;
-
-</FONT>
-
-
-</BODY>
-</HTML>

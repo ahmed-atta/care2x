@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -212,15 +212,45 @@ if($srcword!=''||$mode=='paginate'){
 } # end of if (srcword!="")
 
 //echo $sql;
+
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('nursing');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',"$LDOrLogBook - $LDSearch");
+
+ # hide return button
+ $smarty->assign('pbBack',FALSE);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('oplog.php','search','$mode','$rows','$datafound')");
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',"$LDOrLogBook - $LDSearch");
+
+ # Body Onload js
+ $smarty->assign('sOnLoadJs','onLoad="if (window.focus) window.focus();document.suchform.srcword.select();"');
+
+ # Body OnUnload js
+ $smarty->assign('sOnUnloadJs','onUnload="if (wwin) wwin.close();"');
+
+# Collect js code
+
+ob_start();
 ?>
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
- <TITLE><?php echo "$LDSearch - $LDOrLogBook" ?></TITLE>
 
 <script  language="javascript">
-<!-- 
+<!--
 
 var wwin;
 var lock=true;
@@ -259,53 +289,32 @@ function getinfo(pid,dept,pdata){
 // -->
 </script>
 
-<?php 
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-?>
+<?php
 
+$sTemp = ob_get_contents();
+ob_end_clean();
+$smarty->append('JavaScript',$sTemp);
 
-</HEAD>
+# Buffer page output
 
-<BODY  topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="if (window.focus) window.focus();document.suchform.srcword.select();"
-<?php 
- echo  ' bgcolor='.$cfg['body_bgcolor']; 
- if (!$cfg['dhtml']){ echo ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } 
-  ?> onUnload="if (wwin) wwin.close();">
- 
-<table width=100% border=0 cellspacing="0">
-<tr>
-<td bgcolor=<?php echo $cfg['top_bgcolor']; ?>>
-<FONT  COLOR="<?php echo $cfg['top_txtcolor'];?>"  SIZE=+2  FACE="Arial">
-<STRONG> &nbsp;<?php echo "$LDOrLogBook - $LDSearch" ?></STRONG></FONT>
-</td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr>
-<!-- <a href="javascript:window.history.back()"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a> --><a href="javascript:gethelp('oplog.php','search','<?php echo $mode ?>','<?php echo $rows ?>','<?php echo $datafound ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
-</nobr>
-</td>
-</tr>
-<tr>
-<td colspan=3  bgcolor=<?php echo $cfg['body_bgcolor']; ?>>
+ob_start();
 
-
-<FONT    SIZE=-1  FACE="Arial">
-<?php 
 if((($mode=='get')||($datafound))&&$rows){
 
 	if($rows>1) echo $LDPatLogbookMany;
 		else echo $LDPatLogbook;
-		
+
 	echo '
 		<table cellpadding="0" cellspacing="0" border="0" bgcolor="#999999" width="100%">
 		<tr><td>
 		<table  cellpadding="3" cellspacing="1" border="0" width="100%">
 		';	
 	echo '
-		<tr bgcolor="#0000cc">';
+		<tr class="wardlisttitlerow">';
 	while(list($x,$v)=each($LDOpMainElements))
 	{
-		echo '		
-		<td background="'.$root_path.'gui/img/common/default/tableHeaderbg.gif"><font face="verdana,arial" size="1" color="#fefefe"><b>'.$v.'</b></td>';	
+		echo '
+		<td>'.$v.'</td>';
 	}
 	echo '
 		</tr>';
@@ -316,8 +325,8 @@ if((($mode=='get')||($datafound))&&$rows){
 		
 	while($pdata=$ergebnis->FetchRow()){
 		echo '
-				<tr>
-				<td colspan=9  background="'.$root_path.'gui/img/common/default/tableHeaderbg3.gif"><font size=2>&nbsp;
+				<tr class="submenu">
+				<td colspan=9>&nbsp;
 				<font color="#000033">';
 				$buffer=$pdata['LD_var'];
 				if(isset($$buffer)&&!empty($$buffer)) echo $$buffer;
@@ -334,14 +343,14 @@ if((($mode=='get')||($datafound))&&$rows){
 	list($iyear,$imonth,$iday)=explode('-',$pdata['op_date']);
 
 	echo '
-			<td valign=top><font face="verdana,arial" size="1" ><font size=2 color=red><b>'.$pdata['op_nr'].'</b></font><hr>'.formatDate2Local($pdata['op_date'],$date_format).'<br>
+			<td valign=top><font size="1" ><font size=2 color=red><b>'.$pdata['op_nr'].'</b></font><hr>'.formatDate2Local($pdata['op_date'],$date_format).'<br>
 			'.$tage[date("w",mktime(0,0,0,$imonth,$iday,$iyear))].'<br>
 			<a href="op-pflege-logbuch-start.php?sid='.$sid.'&lang='.$lang.'&mode=saveok&enc_nr='.$pdata['encounter_nr'].'&op_nr='.$pdata[op_nr].'&dept_nr='.$pdata[dept_nr].'&saal='.$pdata[op_room].'&thisday='.$pdata['op_date'].'">
 			<img '.$img_arrow.' alt="'.str_replace("~tagword~",$pdata['name_last'],$LDEditPatientData).'"></a>
 			</td>';
 	
 	echo '
-			<td valign=top><nobr><font face="verdana,arial" size="1" color=blue>
+			<td valign=top><nobr><font size="1" color=blue>
 			<a href="javascript:getinfo(\''.$pdata[encounter_nr].'\',\''.$pdata[dept_nr].'\')">
 			<img '.$img_info.' alt="'.str_replace("~tagword~",$pdata['name_last'],$LDOpenPatientFolder).'"></a>&nbsp; ';
 
@@ -352,12 +361,12 @@ if((($mode=='get')||($datafound))&&$rows){
 			<font color="#000000">'.$pdata['addr_str'].' '.$pdata['addr_str_nr'].'<br>'.$pdata['addr_zip'].' '.$pdata['citytown_name'].'</font><br></td>';
 			
 	echo '
-			<td valign=top><font face="verdana,arial" size="1" >';
+			<td valign=top><font size="1" >';
 	echo '
 	<font color="#cc0000">'.$LDOpMainElements[diagnosis].':</font><br>';
 	echo nl2br($pdata['diagnosis']);
 	echo '
-			</td><td valign=top><font face="verdana,arial" size="1" ><nobr>';
+			</td><td valign=top><font size="1" ><nobr>';
 			
 	$ebuf=array('operator','assistant','scrub_nurse','rotating_nurse');
 	//$tbuf=array("O","A","I","S");
@@ -376,7 +385,7 @@ if((($mode=='get')||($datafound))&&$rows){
 	}	
 	echo '
 	</td>
-	<td valign=top><font face="verdana,arial" size="1" >'.$LDAnaTypes[$pdata['anesthesia']].'<p>';
+	<td valign=top><font size="1" >'.$LDAnaTypes[$pdata['anesthesia']].'<p>';
 	if($pdata[an_doctor])
 		{ 
 			echo '<font color="#cc0000">'.$LDAnaDoc.'</font><br><font color="#000000">';
@@ -406,18 +415,18 @@ if((($mode=='get')||($datafound))&&$rows){
 			
 	echo '
 	</td>
-	<td valign=top><font face="verdana,arial" size="1" >';
-	echo '<font face="verdana,arial" size="1" color="#cc0000">'.$LDOpCut.':</font><br>'.convertTimeToLocal($ccbuf[s]).'<p>
-	<font face="verdana,arial" size="1" color="#cc0000">'.$LDOpClose.':</font><br>'.convertTimeToLocal($ccbuf[e]).'</td>';
+	<td valign=top><font size="1" >';
+	echo '<font size="1" color="#cc0000">'.$LDOpCut.':</font><br>'.convertTimeToLocal($ccbuf[s]).'<p>
+	<font size="1" color="#cc0000">'.$LDOpClose.':</font><br>'.convertTimeToLocal($ccbuf[e]).'</td>';
 	echo '
-	<td valign=top><font face="verdana,arial" size="1" color="#cc0000">'.$LDOpMainElements[therapy].':<font color=black><br>'.nl2br($pdata['op_therapy']).'</td>';
+	<td valign=top><font size="1" color="#cc0000">'.$LDOpMainElements[therapy].':<font color=black><br>'.nl2br($pdata['op_therapy']).'</td>';
 	echo '
-	<td valign=top><nobr><font face="verdana,arial" size="1" color="#cc0000">'.$LDOpMainElements[result].':<br>';
+	<td valign=top><nobr><font size="1" color="#cc0000">'.$LDOpMainElements[result].':<br>';
 	echo '<font color=black>'.nl2br($pdata['result_info']).'</td>';
 	echo '
-	<td valign=top><font face="verdana,arial" size="1" >';
-	echo '<font face="verdana,arial" size="1" color="#cc0000">'.$LDOpIn.':</font><br>'.convertTimeToLocal($eobuf[s]).'<p>
-	<font face="verdana,arial" size="1" color="#cc0000">'.$LDOpOut.':</font><br>'.convertTimeToLocal($eobuf[e]).'</td>';
+	<td valign=top><font size="1" >';
+	echo '<font size="1" color="#cc0000">'.$LDOpIn.':</font><br>'.convertTimeToLocal($eobuf[s]).'<p>
+	<font size="1" color="#cc0000">'.$LDOpOut.':</font><br>'.convertTimeToLocal($eobuf[e]).'</td>';
 	echo '
 	</tr>';
 
@@ -434,20 +443,23 @@ echo '
 	
 	echo '
 			<ul>
-				<table cellpadding=0 cellspacing=0 border=0>
+				<table cellpadding=0 cellspacing=0 border=0>';
+
+	if($rows) echo'
 				<tr>
-				<td valign="middle" align="center">
-				<font color="#800000" size=4>'.$LDPatientsFound.'</font>
+				<td valign="middle" class="prompt">
+				'.$LDPatientsFound.'
 				</td>
-				<td>	
+				<td>
 					<img '.createMascot($root_path,'mascot1_l.gif','0','middle').'>
 				</td>
-				</tr>
+				</tr>';
+	echo '
 				<tr>
 				<td valign=top colspan=2>';
 
 	if ($rows) echo str_replace("~nr~",$totalcount,$LDSearchFound).' '.$LDShowing.' '.$pagen->BlockStartNr().' '.$LDTo.' '.$pagen->BlockEndNr().'.';
-		else echo str_replace('~nr~','0',$LDSearchFound); 
+		else echo str_replace('~nr~','0',$LDSearchFound);
 				
 				
 	echo'
@@ -459,56 +471,47 @@ echo '
 				
 	if($rows){
 	
-		echo '<tr ><td colspan=8 bgcolor=#eeeee0><p><font size=2>';
+		echo '<tr ><td colspan=8 bgcolor=#eeeee0><p>';
 		if($rows==1) echo " $LDSimilar ";
 			else echo $LDPlsClk1;
 		echo '</td></tr>';
 		# Loads the arrow icon image
 		$img_src='<img '.createComIcon($root_path,'arrow.gif','0','middle').'>';
 		# Load the background image
-		$bgc='background="'.$root_path.'gui/img/skin/default/tableHeaderbg3.gif"';
+		//$bgc='background="'.$root_path.'gui/img/skin/default/tableHeaderbg3.gif"';
 		$img_male=createComIcon($root_path,'spm.gif','0');
 		$img_female=createComIcon($root_path,'spf.gif','0');
 		
 		$append="&srcword=$srcword";
 		
 ?>
-	<tr bgcolor=#eeeeee>
-     <td <?php echo $bgc; ?>><FONT  SIZE=-1  FACE="Arial"><b>
+	<tr class="wardlisttitlerow">
+     <td><b>
 	  <?php echo $pagen->makeSortLink($LDSex,'sex',$oitem,$odir,$append);  ?></b></td>
-     <td <?php echo $bgc; ?>><FONT  SIZE=-1  FACE="Arial"><b>
+     <td><b>
 	  <?php echo $pagen->makeSortLink($LDLastName,'name_last',$oitem,$odir,$append);  ?></b></td>
-     <td <?php echo $bgc; ?>><FONT  SIZE=-1  FACE="Arial"><b>
+     <td><b>
 	  <?php echo $pagen->makeSortLink($LDName,'name_first',$oitem,$odir,$append);  ?></b></td>
-     <td <?php echo $bgc; ?>><FONT  SIZE=-1  FACE="Arial"><b>
+     <td><b>
 	  <?php echo $pagen->makeSortLink($LDBday,'date_birth',$oitem,$odir,$append);  ?></b></td>
-     <td <?php echo $bgc; ?>><FONT  SIZE=-1  FACE="Arial"><b>
+     <td><b>
 	  <?php echo $pagen->makeSortLink($LDOpRoom,'op_room',$oitem,$odir,$append);  ?></b></td>
-     <td <?php echo $bgc; ?>><FONT  SIZE=-1  FACE="Arial"><b>
+     <td><b>
 	  <?php echo $pagen->makeSortLink($LDSrcListElements[5],'op_date',$oitem,$odir,$append);  ?></b></td>
-     <td <?php echo $bgc; ?>><FONT  SIZE=-1  FACE="Arial"><b>
+     <td><b>
 	  <?php echo $pagen->makeSortLink($LDOpNr,'op_nr',$oitem,$odir,$append);  ?></b></td>
-	<td <?php echo $bgc; ?>><FONT  SIZE=-1  FACE="Arial"><b>
+	<td><b>
 	  <?php echo $pagen->makeSortLink($LDPatientNr,'encounter_nr',$oitem,$odir,$append);  ?></b></td>
 </tr>
 
 
 <?php
-/*		echo '<tr bgcolor=#eeeeee>
-				<td>&nbsp;</td >
-				<td >&nbsp;</td >
-				<td >&nbsp;</td >
-				<td><font size=2>'.$LDOpRoom.':</td>
-				<td><font size=2> '.$LDSrcListElements[5].'</td>
-				<td><font size=2>'.$LDOpNr.'</td>
-				<td><font size=2>'.$LDPatientNr.'</td >
-				</tr>';*/
-				
+
 		while($pdata=$ergebnis->FetchRow()){
 				//echo "
 				//		<a href=\"op-pflege-logbuch-xtsuch-start.php?sid=$sid&lang=$lang&mode=get&dept_nr=$pdata[dept_nr]&op_nr=$pdata[op_nr]&srcword=".strtr($srcword," ","+")."\">";
-				echo "
-						<tr bgcolor=#eeeeee><td >";
+				echo '
+						<tr class="submenu"><td>';
 				
 				switch($pdata['sex']){
 					case 'f': echo '<img '.$img_female.'>'; break;
@@ -517,7 +520,7 @@ echo '
 				}				
 				
 				echo "</td>
-						<td><font size=2>
+						<td>
 						<a href=\"op-pflege-logbuch-xtsuch-start.php?sid=$sid&lang=$lang&mode=getbypid&nr=".$pdata['pid']."&dept_nr=$dept_nr&saal=$saal&srcword=".strtr($srcword," ","+")."\">&nbsp;";
 				
 				//echo $img_src;
@@ -526,30 +529,30 @@ echo '
  					else echo $pdata['name_last'];			
 						
  				echo '</a></td>
-				<td><font size=2>&nbsp;';
+				<td>&nbsp;';
 				
 				if($srcword&&stristr($pdata['name_first'],$srcword)) echo '<b><span style="background:yellow">'.$pdata['name_first'].'</span></b>';
  					else echo $pdata['name_first'];		
 							
  				echo '</td>
-				<td align="center" ><font size=2>';
+				<td align="center" >';
 				
 				if($srcword&&stristr($pdata['date_birth'],$srcword)) echo '<b><span style="background:yellow">'.formatDate2Local($pdata['date_birth'],$date_format).'</span></b>';
  					else echo formatDate2Local($pdata['date_birth'],$date_format);				
  				echo '
 				</td>
-				<td align="center"><font size=2>';
+				<td align="center">';
 						
 				echo "<a href=\"op-pflege-logbuch-xtsuch-start.php?sid=$sid&lang=$lang&mode=get&nr=".$pdata['nr']."&dept_nr=$dept_nr&saal=$saal&srcword=".strtr($srcword," ","+")."\">&nbsp;";
 				
 				echo '<b>'.$pdata[op_room].'</b></a></td>
-				<td align="center" ><font size=2><b>'.formatDate2Local($pdata['op_date'],$date_format).'</b> </td>
-				<td align="center" ><font size=2>';
+				<td align="center" ><b>'.formatDate2Local($pdata['op_date'],$date_format).'</b> </td>
+				<td align="center" >';
 				echo "<a href=\"op-pflege-logbuch-xtsuch-start.php?sid=$sid&lang=$lang&mode=get&nr=".$pdata['nr']."&dept_nr=$dept_nr&saal=$saal&srcword=".strtr($srcword," ","+")."\">&nbsp;";		
 				echo $pdata['op_nr'];
 				echo '</a>
 				</td>
-				<td align="center" ><font size=2>';
+				<td align="center" >';
 				echo "<a href=\"op-pflege-logbuch-xtsuch-start.php?sid=$sid&lang=$lang&mode=getbyenc&nr=".$pdata['encounter_nr']."&dept_nr=$dept_nr&saal=$saal&srcword=".strtr($srcword," ","+")."\">&nbsp;";		
 				echo $pdata['encounter_nr'];
 				echo '</a>
@@ -559,9 +562,9 @@ echo '
 		
 	}
 	if($totalcount>$pagen->MaxCount())	echo '
-			<tr bgcolor="#eeeeee"><td colspan=2><font face=arial size=2>'.$pagen->makePrevLink($LDPrevious,$append).'</td>
+			<tr bgcolor="#eeeeee"><td colspan=2>'.$pagen->makePrevLink($LDPrevious,$append).'</td>
 			<td colspan=4>&nbsp;</td>
-			<td align=right colspan=2><font face=arial size=2>'.$pagen->makeNextLink($LDNext,$append).'</td>
+			<td align=right colspan=2>'.$pagen->makeNextLink($LDNext,$append).'</td>
 			</tr>';
 	echo '	
 				</table>
@@ -585,7 +588,7 @@ echo '
     <td>
 		<table border=0 cellspacing=0 cellpadding=5 bgcolor=#eeeeee>
     <tr>
-      <td >	<font color=maroon size=2><b><?php echo $LDKeyword ?>:</b></font><br>
+      <td>	<font color=maroon size=2><b><?php echo $LDKeyword ?>:</b></font><br>
           		<input type="text" name="srcword" size=40 maxlength=100 value="<?php echo $srcword; ?>">
 				<input type="hidden" name="sid" value="<?php echo $sid; ?>"> 
 				<input type="hidden" name="lang" value="<?php echo $lang; ?>"> 
@@ -611,32 +614,26 @@ echo '
   	</form>
 
 
-</ul>
+<p>
 
-</FONT>
-<p>
-</td>
-</tr>
-</table>        
-<p>
-<ul>
-<FONT    SIZE=2  FACE="Arial">
 <b><?php echo $LDOtherFunctions ?>:</b><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-pflege-logbuch-arch-start.php?sid=<?php echo "$sid&lang=$lang&dept_nr=$dept_nr&saal=$saal&child=$child" ?>"><?php echo "$LDResearchArchive [$LDOrLogBook]" ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-pflege-logbuch-start.php?sid=<?php echo "$sid&lang=$lang&mode=fresh&dept_nr=$dept_nr&saal=$saal" ?>" <?php if ($child) echo "target=\"_parent\""; ?>><?php echo "$LDStartNewDocu [$LDOrLogBook]" ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="javascript:gethelp('oplog.php','search','<?php echo $mode ?>','<?php echo $rows ?>','<?php echo $datafound ?>')"><?php echo "$LDHelp" ?></a><br>
 
-<!-- <p>
-<a href="javascript:window.opener.focus();window.close();"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>  alt="<?php echo $LDCancel ?>"></a>
- -->
- </ul>
-<p>
+</ul>
 
 <?php
-require($root_path.'include/inc_load_copyrite.php');
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+# Assign page output to the mainframe template
+
+$smarty->assign('sMainFrameBlockData',$sTemp);
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
 ?>
-</FONT>
-
-
-</BODY>
-</HTML>

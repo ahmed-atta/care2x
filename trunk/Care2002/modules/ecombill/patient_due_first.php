@@ -17,6 +17,7 @@ $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_date_format_functions.php');
 
+//$db->debug=1;
 
 /*	include('includes/condb.php');
 	error_reporting(0);
@@ -24,8 +25,8 @@ require_once($root_path.'include/inc_date_format_functions.php');
 */
 $breakfile='patient_bill_links.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='.$full_en;
 
-		$sql="SELECT bill_bill_no FROM care_billing_bill ORDER BY bill_bill_no DESC LIMIT 1";
-		$ergebnis=$db->Execute($sql);
+		$sql="SELECT bill_bill_no FROM care_billing_bill ORDER BY bill_bill_no DESC";
+		$ergebnis=$db->SelectLimit($sql,1);
 		if(is_object($ergebnis)) $cntergebnis=$ergebnis->RecordCount();
 
 /*		$ergebnis=mysql_query($sql,$link);
@@ -70,7 +71,7 @@ $breakfile='patient_bill_links.php'.URL_APPEND.'&patientno='.$patientno.'&full_e
 		
 	$presdatetime=date("Y-m-d H:i:s");
 
-	$labquery="SELECT * FROM care_billing_bill_item WHERE bill_item_encounter_nr=$patientno AND bill_item_status='0'";
+	$labquery="SELECT * FROM care_billing_bill_item WHERE bill_item_encounter_nr=$patientno AND bill_item_status IN ('0','')";
 	//$resultlabquery=mysql_query($labquery);
 	//$itemcnt=mysql_num_rows($resultlabquery);
 	

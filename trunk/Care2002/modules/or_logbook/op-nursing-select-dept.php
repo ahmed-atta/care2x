@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -73,19 +73,33 @@ $ORNrs=&$dept_obj->getAllActiveORNrs();
 if(is_object($ORNrs)) $slen=$ORNrs->RecordCount();
 	else $slen=0;
 
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('nursing');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',$title);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('dept_op_select.php')");
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',$title);
+
+# Collect js code
+
+ob_start();
+
 ?>
-
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
-
-<style type="text/css">
-	A:link  {text-decoration: none; }
-	A:hover {text-decoration: none; }
-	A:active {text-decoration: none;}
-	A:visited {text-decoration: none;}
-</style>
 
 <script language="javascript">
 <!-- 
@@ -127,21 +141,17 @@ function check(d)
 -->
 </script>
 
-<?php 
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
+<?php
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+$smarty->append('JavaScript',$sTemp);
+
+# Buffer page output
+
+ob_start();
+
 ?>
-</HEAD>
-<BODY  bgcolor="silver" alink="navy" vlink="navy" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0>
-<table width=100% border=0 cellpadding="0" cellspacing=0>
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp; <?php echo $title ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('dept_op_select.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
-</tr>
-<tr>
-<td bgcolor="<?php echo $cfg['body_bgcolor']; ?>" colspan=2>
 
 <ul>
 <form action="<?php echo $targetfile ?>" method="post" name="dept_select" onSubmit="return check(this)">
@@ -151,8 +161,8 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 		<img <?php echo createComIcon($root_path,'angle_down_l.gif','0','bottom') ?> align="top">
 	</td>
 	<td valign="top">
-		
-		<font face=arial color="#990000" size=4>
+
+		<font class="prompt">
 		<?php echo $LDPlsSelectDept; ?>
 		
 	</td>
@@ -174,8 +184,8 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 				$bold='';
 				$boldx='';
 				if($dept_nr==$v['nr']) 	{ echo '<tr bgcolor="yellow">'; $bold="<font color=\"red\" size=2><b>";$boldx="</b></font>"; } 
-					elseif ($toggler==0){ echo '<tr bgcolor="#cfcfcf">'; } 
-						else { echo '<tr bgcolor="#f6f6f6">';}
+					elseif ($toggler==0){ echo '<tr class="wardlistrow1">'; }
+						else { echo '<tr class="wardlistrow2">';}
 				$toggler=!$toggler;
 				echo '<td >&nbsp;';
 
@@ -183,7 +193,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 
 				if($dept_nr==$v['nr']) echo ' checked';
 
-				echo '>&nbsp;<font face="verdana,arial" size="2" >&nbsp;'.$bold;
+				echo '>&nbsp;&nbsp;'.$bold;
 				if(isset($$v['LD_var'])&&!empty($$v['LD_var'])) echo $$v['LD_var'];
 					else echo $v['name_formal'];
 				echo $boldx.'&nbsp;</td>';
@@ -204,7 +214,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 	<!--  Start of the OR room numbers block -->
 		<table  cellpadding="2" cellspacing=0 border="0">
     		<tr>
-      			<td><font face=arial color="#990000" size=4><?php echo $LDSelectORoomNr; ?></td>
+      			<td><font class="prompt"><?php echo $LDSelectORoomNr; ?></td>
     		</tr>
 			<tr>
 			<td>
@@ -218,19 +228,19 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 				$bold='';
 				$boldx='';
 				if($saal==$room['room_nr']) 	{ echo '<tr bgcolor="yellow">'; $bold="<font color=\"red\" size=2><b>";$boldx="</b></font>"; } 
-					elseif ($toggler==0){ echo '<tr bgcolor="#cfcfcf">'; } 
-						else { echo '<tr bgcolor="#f6f6f6">';}
+					elseif ($toggler==0){ echo '<tr class="wardlistrow1">'; }
+						else { echo '<tr class="wardlistrow2">';}
 				$toggler=!$toggler;
 				echo '<td >&nbsp;';
 
 				echo '<input type="radio" name="saal" value="'.$room['room_nr'].'"';
 				if($saal==$room['room_nr']) echo ' checked';
-				echo '>&nbsp;<font face="verdana,arial" size="2" >&nbsp;'.$bold;
+				echo '>&nbsp;&nbsp;'.$bold;
 				echo $LDORoom.' '.$room['room_nr'];
 				
 				echo '&nbsp;</td>';
 				
-				echo '<td ><font face="verdana,arial" size="2" >&nbsp;';
+				echo '<td >&nbsp;';
 
 				echo $LDORoom.' '.$room['info'];
 				
@@ -262,15 +272,18 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <input type="hidden" name="target" value="<?php echo $target ?>">
 </form>
 
-</FONT>
-
-</td>
-</tr>
-</table>        
 </ul>
-<p>
 <?php
-require($root_path.'include/inc_load_copyrite.php');
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+# Assign page output to the mainframe template
+
+$smarty->assign('sMainFrameBlockData',$sTemp);
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
 ?>
-</BODY>
-</HTML>

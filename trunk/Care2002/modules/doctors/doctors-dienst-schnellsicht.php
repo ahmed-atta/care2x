@@ -3,16 +3,16 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
 
 # If cache must be deactivated, set $force_no_cache to true
-$force_no_cache=0;
+$force_no_cache=1;
 
 $lang_tables[]='departments.php';
 $lang_tables[]='prompt.php';
@@ -84,19 +84,38 @@ if($force_no_cache || (!$force_no_cache && !$is_cached)){
 	$pers_obj=new Personell;
 	$quicklist=&$pers_obj->getDOCQuicklist($dept_DOC,$pyear,$pmonth);
 }
+
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',$LDDocsOnDuty);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('docs_duty_quickview.php')");
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Body onLoad javascript
+ $smarty->assign('sOnLoadJs','onUnload="killchild()"');
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',$LDDocsOnDuty);
+
+ # Collect extra javascript
+
+ ob_start();
+
 ?>
-
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
-
-<style type="text/css">
-	A:link  {text-decoration: none; }
-	A:hover {text-decoration: none; }
-	A:active {text-decoration: none;}
-	A:visited {text-decoration: none;}
-</style>
 
 <script language="javascript">
 <!-- 
@@ -113,26 +132,23 @@ function popinfo(l,d)
 </script>
 
 <?php 
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
+
+ $sTemp=ob_get_contents();
+ ob_end_clean();
+ $smarty->append('JavaScript',$sTemp);
+
+ # Buffer page output
+
+ ob_start();
+
 ?>
-</HEAD>
-<BODY  bgcolor="silver" alink="navy" vlink="navy" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0>
-<table width=100% border=0 cellpadding="0" cellspacing=0>
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp; <?php echo $LDDocsOnDuty ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('docs_duty_quickview.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
-</tr>
-<tr>
-<td bgcolor="<?php echo $cfg['body_bgcolor']; ?>" colspan=2>
+
 	<table  cellpadding="2" cellspacing=0 border="0" >
-	<tr bgcolor="aqua" align=center>
+	<tr class="wardlisttitlerow" align=center>
 <?php
 
 for($j=0;$j<sizeof($LDTabElements);$j++)
-	echo '<td><font face="verdana,arial" size="2" ><b>&nbsp; '.$LDTabElements[$j].' &nbsp;&nbsp;</b></td>';
+	echo '<td>&nbsp; '.$LDTabElements[$j].' &nbsp;&nbsp;</td>';
 echo '
 	</tr>';
 
@@ -183,43 +199,46 @@ if(!$force_no_cache&&$is_cached){
 	$bold='';
 	$boldx='';
 	if($hilitedept==$v['nr']){ 
-		$temp_out.='<tr bgcolor="yellow">'; $bold="<font color=\"red\" size=2><b>";$boldx="</b></font>"; 
+		$temp_out.='<tr class="hilite">'; $bold="<font color=\"red\" size=2><b>";$boldx="</b></font>";
 	} 
-	elseif ($toggler==0) { 
-		$temp_out.='<tr bgcolor="#cfcfcf">'; $toggler=1;
+	elseif ($toggler==0) {
+		$temp_out.='<tr class="wardlistrow1">'; $toggler=1;
 	}else{
-		$temp_out.='<tr bgcolor="#f6f6f6">'; $toggler=0;
+		$temp_out.='<tr class="wardlistrow2">'; $toggler=0;
 	}
-	$temp_out.='<td ><font face="verdana,arial" size="1" >&nbsp;'.$bold;
+
+	$temp_out.='<td ><font size="1" >&nbsp;'.$bold;
 	$buff= $v['LD_var'];
 	if(isset($$buff)&&!empty($$buff)) $temp_out.=$$buff;
 	 	else $temp_out.=$v['name_formal'];
-	$temp_out.=$boldx.'&nbsp;</td><td >&nbsp;<font face="verdana,arial" size="2" >
-	<img '.createComIcon($root_path,'mans-gr.gif','0').'>&nbsp;';
+	$temp_out.=$boldx.'&nbsp;</td><td >&nbsp;
+	<img '.createComIcon($root_path,'mans-gr.gif','0','',TRUE).'>&nbsp;';
 	
 	//if ($aelems[l]!="") echo $aelems[l].', ';
 	//echo $aelems[f].'</b></a></td>';
 	if(in_array($v['nr'],$quicklist)&&$DOC_1['name_last']){$temp_out.='<a href="javascript:popinfo(\''.$ha['ha'.(date('d')-1)].'\',\''.$v['nr'].'\')" title="Click für mehr Info."><b>'.$DOC_1['name_last'].', '.$DOC_1['name_first'].'</b></a>'; }
 	$temp_out.='</td>
-	<td><font face="verdana,arial" size="2" >';
+	<td>';
 	if ($a['a'.(date('d')-1)]!='') 
 	{
-		$temp_out.=' <font color=red> '.$DOC_1['funk1'].'</font> / '.$DOC_1['inphone1'];
+		$temp_out.=' <font color=red> '.$DOC_1['funk1'].'</font>';
+		if($DOC_1['inphone1']) $temp_out.=' / '.$DOC_1['inphone1'];
 	}
-	$temp_out.='&nbsp;</td><td ><font face="verdana,arial" size="2" >
-	<img '.createComIcon($root_path,'mans-red.gif','0').'>&nbsp;';
+	$temp_out.='&nbsp;</td><td >
+	<img '.createComIcon($root_path,'mans-red.gif','0','',TRUE).'>&nbsp;';
 
 	if(in_array($v['nr'],$quicklist)&&$DOC_2['name_last']){$temp_out.='<a href="javascript:popinfo(\''.$hr['hr'.(date('d')-1)].'\',\''.$v['nr'].'\')" title="Click für mehr Info."><b>'.$DOC_2['name_last'].', '.$DOC_2['name_first'].'</b></a>';}
 	$temp_out.='</td>
-	<td><font face="verdana,arial" size="2" >';
+	<td>';
 	if ($r['r'.(date('d')-1)]!='') 
 	{
-		$temp_out.=' <font color=red> '.$DOC_2['funk1'].'</font> / '.$DOC_2['inphone1'];
+		$temp_out.=' <font color=red> '.$DOC_2['funk1'].'</font>';
+		if($DOC_2['inphone1']) $temp_out.=' / '.$DOC_2['inphone1'];
 	}
 	
 	$temp_out.='&nbsp;
 	</td><td >&nbsp; <a href="doctors-dienstplan.phpURLAPPEND&dept_nr='.$v['nr'].'&retpath=qview">
-	<button onClick="javascript:window.location.href=\'doctors-dienstplan.phpURLREDIRECTAPPEND&dept_nr='.$v['nr'].'&retpath=qview\'"><img '.createComIcon($root_path,'new_address.gif','0','absmiddle').' alt="IMGALT" ><font size=1> SHOWBUTTON </font></button></a> </td></tr>';
+	<button onClick="javascript:window.location.href=\'doctors-dienstplan.phpURLREDIRECTAPPEND&dept_nr='.$v['nr'].'&retpath=qview\'"><img '.createComIcon($root_path,'new_address.gif','0','absmiddle',FALSE).' alt="IMGALT" ><font size=1> SHOWBUTTON </font></button></a> </td></tr>';
 	
 }
 # Save in cache 
@@ -234,14 +253,20 @@ echo str_replace('URLREDIRECTAPPEND',URL_REDIRECT_APPEND,$temp_out);
 </table>
 <p>
 <a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>">
-</a></FONT>
-<p>
-</td>
-</tr>
-</table>        
-<p>
+</a>
+
 <?php
-require($root_path.'include/inc_load_copyrite.php');
+
+$sTemp = ob_get_contents();
+ ob_end_clean();
+
+# Assign the buffer output  to main frame template
+
+$smarty->assign('sMainFrameBlockData',$sTemp);
+
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
 ?>
-</BODY>
-</HTML>

@@ -14,7 +14,7 @@ require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require($root_path.'include/care_api_classes/class_core.php');
+require_once($root_path.'include/care_api_classes/class_core.php');
 $core=new Core;
 
 

@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -82,7 +82,7 @@ if(!empty($ipath)){
 
 $append='&retpath='.$retpath.'&ipath='.$ipath;
 
-# Initialize page's control variables
+# Initialize page´s control variables
 if($mode=='paginate'){
 	$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
 	//$searchkey='USE_SESSION_SEARCHKEY';
@@ -135,32 +135,48 @@ if($mode=='search'||$mode=='paginate'){
 # Load the common icons
 $img_options_contact=createComIcon($root_path,'violet_phone.gif','0');
 $img_options_delete=createComIcon($root_path,'delete2.gif','0');
+
+# Prepare page title
+ $sTitle = "$LDDocsList :: ";
+ $LDvar=$dept_obj->LDvar();
+ if(isset($$LDvar)&&$$LDvar) $sTitle = $sTitle.$$LDvar;
+   else $sTitle = $sTitle.$dept_obj->FormalName();
+
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',$sTitle);
+
+ # href for return button
+ $smarty->assign('pbBack',$breakfile);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('docs_personallist_edit.php')");
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',$sTitle);
+
+  # Body onLoad javascript
+ $smarty->assign('sOnLoadJs','onLoad="document.searchform.searchkey.focus()"');
+
+ # Collect extra javascript
+
+ ob_start();
+
 ?>
 
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
-
-<style type="text/css">
-	A:link  {text-decoration: none; }
-	A:hover {text-decoration: underline; color: red; }
-
-	A:visited {text-decoration: none;}
-
-div.a3 {font-family: arial; font-size: 14; margin-left: 3; margin-right:3; }
-.v12 {font-family: verdana; font-size: 12; }
-.v12_n {font-family: verdana; font-size: 12; color:#0000cc }
-
-.infolayer {
-	position:absolute;
-	visibility: hide;
-	left: 100;
-	top: 10;
-
-}
-
-</style>
 <script language="javascript">
 <!-- 
   var urlholder;
@@ -175,6 +191,7 @@ function deleteItem(nr){
 }
 -->
 </script>
+
 <script language="javascript">
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
 </script>
@@ -183,30 +200,18 @@ function deleteItem(nr){
 
 <script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
 
-<?php require($root_path.'include/inc_js_gethelp.php'); ?>
+<?php
+ 
+ $sTemp=ob_get_contents();
+ ob_end_clean();
+ $smarty->append('JavaScript',$sTemp);
 
-</HEAD>
+ # Buffer form
 
-<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 bgcolor="silver" alink="navy" vlink="navy"  >
+ ob_start();
 
-<table width=100% border=0 height=100% cellpadding="0" cellspacing="0" >
-	<tr valign=top height=20>
-	<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" ><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-		<STRONG><?php echo $LDDocsList ?> <font color="<?php echo $cfg['top_txtcolor']; ?>">::
-		<?php
-			$buf=$dept_obj->LDvar();
-			if(isset($$buf)&&!empty($$buf)) echo $$buf;
-				else echo $dept_obj->FormalName();
-		?></font>
-		</STRONG></FONT></td>
-	<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right><a href="<?php echo $breakfile ?>"><img
-		<?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a><a href="javascript:gethelp('docs_personallist_edit.php')"><img
-		<?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>></a><a href="<?php echo $breakfile ?>"><img
-		<?php echo createLDImgSrc($root_path,'close2.gif','0') ?>></a>
-	</td>
-	</tr>
-<tr>
-<td bgcolor=#cde1ec valign=top colspan=2><p>
+?>
+
 <ul>
 <p><br>
 <font face="arial,verdana,helvetica" size=2>
@@ -235,7 +240,7 @@ if(is_object($doctors)&&$doctors->RecordCount()){
 		while($row=$doctors->FetchRow()){
 	?>
   	<tr bgcolor="#ffffff">
-    <td  class="v13" colspan=3><nobr><font face=arial size=2>&nbsp;
+    <td  class="v13" colspan=3><nobr>&nbsp;
 	<?php  
 		switch($row['sex']){
 			case 'f': echo '<img '.$img_female.'>'; break;
@@ -248,7 +253,7 @@ if(is_object($doctors)&&$doctors->RecordCount()){
 <!--     <td  class="v13" colspan=2><font>&nbsp;<?php echo formatDate2Local($row['date_birth'],$date_format); ?></td>
  -->    <td  class="v13" colspan=2><nobr>&nbsp;<?php echo $row['job_function_title']; ?></nobr></td>
     <td  class="v13" colspan=2>&nbsp;<?php echo '
-						<font face=arial size=2>&nbsp;
+						&nbsp;
 							<a href="javascript:popinfo(\''.$row['personell_nr'].'\',\''.$dept_nr.'\')" title="'.$LDContactInfo.'">
 							<img '.$img_options_contact.' alt="'.$LDShowData.'"></a>&nbsp;';	 ?></td>
 	<td><a href="javascript:deleteItem('<?php echo $row['nr']; ?>')" title="<?php echo $LDDelete; ?>">
@@ -309,27 +314,26 @@ if($mode=='search'||$mode=='paginate'){
 		# Load the common icons
 		//$img_options_add=createComIcon($root_path,'add.gif','0');
 		$img_options_add=createLDImgSrc($root_path,'add2list_sm.gif','0');
-		$img_male=createComIcon($root_path,'spm.gif','0');
-		$img_female=createComIcon($root_path,'spf.gif','0');
-		$bgimg='tableHeaderbg3.gif';
-		$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
+		$img_male=createComIcon($root_path,'spm.gif','0','',TRUE);
+		$img_female=createComIcon($root_path,'spf.gif','0','',TRUE);
 
 	echo '<p>
-			<table border=0 cellpadding=2 cellspacing=1> <tr bgcolor="#0000aa" background="'.createBgSkin($root_path,'tableHeaderbg.gif').'">';
+			<table border=0 cellpadding=2 cellspacing=1>
+			<tr class="wardlisttitlerow">';
 			
 ?>
-     <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial"><b>
-	  <?php echo $pagen->makeSortLink($LDPersonellNr,'nr',$oitem,$odir,$append);  ?></b></td>
-     <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" ><b>
-	  <?php echo $pagen->makeSortLink($LDSex,'sex',$oitem,$odir,$append);  ?></b></td>
-      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" ><b>
-	  <?php echo $pagen->makeSortLink($LDFamilyName,'name_last',$oitem,$odir,$append);  ?></b></td>
-      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial"><b>
-	  <?php echo $pagen->makeSortLink($LDGivenName,'name_first',$oitem,$odir,$append);  ?></b></td>
-      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial"><b>
-	  <?php echo $pagen->makeSortLink($LDDateOfBirth,'date_birth',$oitem,$odir,$append);  ?></b></td>
-      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial"><b>
-	  <?php echo $pagen->makeSortLink($LDFunction,'job_function_title',$oitem,$odir,$append);  ?></b></td>
+     <td>
+	  <?php echo $pagen->makeSortLink($LDPersonellNr,'nr',$oitem,$odir,$append);  ?></td>
+     <td>
+	  <?php echo $pagen->makeSortLink($LDSex,'sex',$oitem,$odir,$append);  ?></td>
+      <td>
+	  <?php echo $pagen->makeSortLink($LDFamilyName,'name_last',$oitem,$odir,$append);  ?></td>
+      <td>
+	  <?php echo $pagen->makeSortLink($LDGivenName,'name_first',$oitem,$odir,$append);  ?></td>
+      <td>
+	  <?php echo $pagen->makeSortLink($LDDateOfBirth,'date_birth',$oitem,$odir,$append);  ?></td>
+      <td>
+	  <?php echo $pagen->makeSortLink($LDFunction,'job_function_title',$oitem,$odir,$append);  ?></td>
 
     <td  background="<?php echo createBgSkin($root_path,'tableHeaderbg.gif'); ?>"  align=center><font face=arial size=2 color="#ffffff"><b><?php echo $LDAdd; ?></td>
     <td background="<?php echo createBgSkin($root_path,'tableHeaderbg.gif'); ?>" ><font face=arial size=2 color="#ffffff"><b><?php echo $LDMoreInfo; ?></td>
@@ -340,9 +344,9 @@ if($mode=='search'||$mode=='paginate'){
 					while($row=$search_result->FetchRow())
 					{
 						echo "
-							<tr bgcolor=";
-						if($toggle) { echo "#efefef>"; $toggle=0;} else {echo "#ffffff>"; $toggle=1;};
-						echo"<td><font face=arial size=2>";
+							<tr class=";
+						if($toggle) { echo "wardlistrow2>"; $toggle=0;} else {echo "wardlistrow1>"; $toggle=1;};
+						echo"<td>";
                         echo '&nbsp;'.($row['nr']+$GLOBAL_CONFIG['personell_nr_adder']);
                         echo "</td><td>";	
 
@@ -352,21 +356,21 @@ if($mode=='search'||$mode=='paginate'){
 							default: echo '&nbsp;'; break;
 						}	
 						
-						echo"</td><td><font face=arial size=2>";
+						echo"</td><td>";
 						echo "&nbsp;".ucfirst($row['name_last']);
                         echo "</td>";	
-						echo"<td><font face=arial size=2>";
+						echo"<td>";
 						echo "&nbsp;".ucfirst($row['name_first']);
                         echo "</td>";	
-						echo"<td><font face=arial size=2>";
+						echo"<td>";
 						echo "&nbsp;".formatDate2Local($row['date_birth'],$date_format);
                         echo "</td>";	
-						echo"<td><font face=arial size=2>";
+						echo"<td>";
 						echo "&nbsp;".ucfirst($row['job_function_title']);
                         echo "</td>";	
 
 					    if($HTTP_COOKIE_VARS[$local_user.$sid]) echo '
-						<td><font face=arial size=2>&nbsp;
+						<td>&nbsp;
 							<a href="doctors-list-add.php'.URL_APPEND.'&nr='.$row['nr'].'&dept_nr='.$dept_nr.'&mode=save&retpath='.$retpath.'&ipath='.$ipath.'" title="'.$LDAddDoctorToList.'">
 							<img '.$img_options_add.' alt="'.$LDShowData.'"></a>&nbsp;';
 							
@@ -376,15 +380,15 @@ if($mode=='search'||$mode=='paginate'){
 		               }
 						echo '</td>';
 						echo '
-						<td align=center><font face=arial size=2>&nbsp;
+						<td align=center>&nbsp;
 							<a href="javascript:popinfo(\''.$row['nr'].'\',\''.$dept_nr.'\')" title="'.$LDContactInfo.'">
 							<img '.$img_options_contact.' alt="'.$LDShowData.'"></a>&nbsp;</td>';						
 						echo '</tr>';
 
 					}
 					echo '
-						<tr><td colspan=7><font face=arial size=2>'.$pagen->makePrevLink($LDPrevious,$append).'</td>
-						<td align=right><font face=arial size=2>'.$pagen->makeNextLink($LDNext,$append).'</td>
+						<tr><td colspan=7>'.$pagen->makePrevLink($LDPrevious,$append).'</td>
+						<td align=right>'.$pagen->makeNextLink($LDNext,$append).'</td>
 						</tr>
 						</table>';
 					if($linecount>$pagen->MaxCount())
@@ -438,25 +442,18 @@ while(list($x,$v)=each($dept_list))
 
 </ul>
 
-</FONT>
-<p>
-</td>
-</tr>
-
-<tr>
-<td bgcolor=silver height=70 colspan=2>
 <?php
-require($root_path.'include/inc_load_copyrite.php');
+
+$sTemp = ob_get_contents();
+ ob_end_clean();
+
+# Assign the submenu to the mainframe center block
+
+ $smarty->assign('sMainFrameBlockData',$sTemp);
+
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
 ?>
-</td>
-</tr>
-</table>        
-&nbsp;
-
-
-
-
-</FONT>
-
-</BODY>
-</HTML>

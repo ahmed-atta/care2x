@@ -1,7 +1,42 @@
 <?php
+
 $returnfile=$HTTP_SESSION_VARS['sess_file_return'];
 
-require('./gui_bridge/default/gui_std_tags.php');
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('nursing');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',$page_title);
+
+  # hide back button
+ $smarty->assign('pbBack',$returnfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=show&type_nr='.$type_nr);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('dicom_upload.php','$rows')");
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',$page_title);
+
+ # Create select viewer button
+
+ $smarty->assign('pbAux1',"javascript:popSelectDicomViewer('$sid','$lang')");
+ $smarty->assign('gifAux1',createLDImgSrc($root_path,'select_viewer.gif','0'));
+
+ # Collect extra javascript code
+
+ ob_start();
+
 
 //$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
 
@@ -18,13 +53,12 @@ function createTR($ld_text, $input_val, $colspan = 1)
 </tr>
 
 <?php
+
 $toggle=!$toggle;
+
 }
 
-echo StdHeader();
-echo setCharSet(); 
 ?>
- <TITLE><?php echo $title ?></TITLE>
 
 <script  language="javascript">
 <!-- 
@@ -90,38 +124,19 @@ dicomwin<?php echo $sid ?>=window.open("dicom_launch_single.php<?php echo URL_RE
 <script language="javascript" src="<?php echo $root_path; ?>js/dicom.js"></script>
 
 <?php 
-require($root_path.'include/inc_js_gethelp.php'); 
-require($root_path.'include/inc_css_a_hilitebu.php');
+$sTemp = ob_get_contents();
+
+ob_end_clean();
+
+$smarty->append('JavaScript',$sTemp);
+
+ob_start();
+
 ?>
-
-
-
-
-</HEAD>
-
-
-<BODY bgcolor="<?php echo $cfg['body_bgcolor'];?>" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
-
 
 <table width=100% border=0 cellspacing="0"  cellpadding=0 >
 
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php echo $page_title ?></STRONG> 
-</FONT>
-</td>
-
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right"><a href="javascript:popSelectDicomViewer('<?php echo $sid ?>','<?php echo $lang ?>')" ><img <?php echo createLDImgSrc($root_path,'select_viewer.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';?>></a>
-<a href="<?php echo $returnfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=show&type_nr='.$type_nr; ?>" ><img 
-<?php echo createLDImgSrc($root_path,'back2.gif','0'); ?> <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';?>><a 
-href="javascript:gethelp('dicom_upload.php','<?php echo $rows ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
- echo $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
-</td>
-</tr>
-
-<form method="post" name="entryform"  ENCTYPE="multipart/form-data"  action="<?php echo $thisfile; ?>" onSubmit="return chkform(this)">
-
+	<form method="post" name="entryform"  ENCTYPE="multipart/form-data"  action="<?php echo $thisfile; ?>" onSubmit="return chkform(this)">
 
 <?php
 /* Create the tabs */
@@ -129,98 +144,79 @@ href="javascript:gethelp('dicom_upload.php','<?php echo $rows ?>')"><img <?php e
 require('./gui_bridge/default/gui_tabs_upload.php');
 
 ?>
-<tr>
-<td colspan=3   bgcolor="<?php echo $cfg['body_bgcolor']; ?>">
+	<tr>
+		<td colspan=3   bgcolor="<?php echo $cfg['body_bgcolor']; ?>">
 
-<FONT    SIZE=-1  FACE="Arial">
-
-<table border=0 cellspacing=1 cellpadding=0 width=50%>
-<tr bgcolor="#ffffff">
-<td colspan=3 valign="top">
-
-<table border=0 width=100% cellspacing=1 cellpadding=3>
-
-<tr>
-<td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial">
-<?php 
-echo $LDPID;
-?>
-</td>
-<td width="30%"  bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial" color="#800000">
-<?php 
- echo $pid;
-?>
-</td>
-
-<td valign="top" rowspan=6 align="center" bgcolor="#ffffee" ><FONT SIZE=-1  FACE="Arial"><img <?php echo $img_source; ?>>
-</td>
-</tr>
-
-<tr>
-<td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php echo $LDTitle ?>:
-</td>
-<td  bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial">
-<?php echo $title ?>
-</td>
-
-</tr>
-<tr>
-<td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php  echo $LDLastName ?>:
-</td>
-<td  bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial" color="#990000"><b><?php echo $name_last; ?></b>
-</td>
-</tr>
-
-<tr>
-<td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php echo $LDFirstName ?>:
-</td>
-<td bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial" color="#990000"><b><?php echo $name_first; ?></b>
-</td>
-</tr>
-
-
+			<table border=0 cellspacing=1 cellpadding=0>
+				<tr bgcolor="#ffffff">
+				<td colspan=3 valign="top">
 <?php
-if (!$GLOBAL_CONFIG['person_name_2_hide']&&$name_2)
-{
-createTR($LDName2,$name_2);
+
+$smarty->assign('sClassItem','class="reg_item"');
+$smarty->assign('sClassInput','class="reg_input"');
+
+$smarty->assign('LDCaseNr',$LDPID);
+
+$smarty->assign('sEncNrPID',$pid);
+
+$smarty->assign('img_source',"<img $img_source>");
+
+$smarty->assign('LDTitle',$LDTitle);
+$smarty->assign('title',$title);
+$smarty->assign('LDLastName',$LDLastName);
+$smarty->assign('name_last',$name_last);
+$smarty->assign('LDFirstName',$LDFirstName);
+$smarty->assign('name_first',$name_first);
+
+# If person is dead show a black cross and assign death date
+
+if($death_date && $death_date != DBF_NODATE){
+	$smarty->assign('sCrossImg','<img '.createComIcon($root_path,'blackcross_sm.gif','0').'>');
+	$smarty->assign('sDeathDate',@formatDate2Local($death_date,$date_format));
 }
 
-if (!$GLOBAL_CONFIG['person_name_3_hide']&&$name_3)
-{
-createTR( $LDName3,$name_3);
+	# Set a row span counter, initialize with 7
+	$iRowSpan = 7;
+
+	if($GLOBAL_CONFIG['patient_name_2_show']&&$name_2){
+		$smarty->assign('LDName2',$LDName2);
+		$smarty->assign('name_2',$name_2);
+		$iRowSpan++;
+	}
+
+	if($GLOBAL_CONFIG['patient_name_3_show']&&$name_3){
+		$smarty->assign('LDName3',$LDName3);
+		$smarty->assign('name_3',$name_3);
+		$iRowSpan++;
+	}
+
+	if($GLOBAL_CONFIG['patient_name_middle_show']&&$name_middle){
+		$smarty->assign('LDNameMid',$LDNameMid);
+		$smarty->assign('name_middle',$name_middle);
+		$iRowSpan++;
+	}
+
+$smarty->assign('sRowSpan',"rowspan=\"$iRowSpan\"");
+
+$smarty->assign('LDBday',$LDBday);
+$smarty->assign('sBdayDate',@formatDate2Local($date_birth,$date_format));
+
+$smarty->assign('LDSex',$LDSex);
+if($sex=='m') $smarty->assign('sSexType',$LDMale);
+	elseif($sex=='f') $smarty->assign('sSexType',$LDFemale);
+
+$smarty->assign('LDBloodGroup',$LDBloodGroup);
+if($blood_group){
+	$buf='LD'.$blood_group;
+	$smarty->assign('blood_group',$$buf);
 }
 
-if (!$GLOBAL_CONFIG['person_name_middle_hide']&&$name_middle)
-{
-createTR($LDNameMid,$name_middle);
-}
-
-if (!$GLOBAL_CONFIG['person_name_maiden_hide']&&$name_maiden)
-{
-createTR($LDNameMaiden,$name_maiden);
-}
-
-if (!$GLOBAL_CONFIG['person_name_others_hide']&&$name_others)
-{
-createTR($LDNameOthers,$name_others);
-}
+$smarty->display('registration_admission/basic_data.tpl');
 ?>
 
-<tr>
-<td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php echo $LDBday ?>:
-</td>
-<td  bgcolor="#ffffee" ><FONT SIZE=-1  FACE="Arial"  color="#990000">
-<b><?php       echo @formatDate2Local($date_birth,$date_format);  ?></b>
-</td>
+					<table border=0 width=100% cellspacing=1 cellpadding=3>
 
-</tr>
 
-<tr>
-<td bgColor="#eeeeee" ><FONT SIZE=-1  FACE="Arial"><?php  echo $LDSex ?>: 
-</td>
-<td bgcolor="#ffffee" ><FONT SIZE=-1  FACE="Arial"><?php if($sex=="m") echo  $LDMale; elseif($sex=="f") echo $LDFemale ?>
-</td>
-</tr>
 
 <?php
 # Show input elements for additional info
@@ -259,7 +255,8 @@ if($mode=='new'){
 if($mode=='show'){
 	if($rows){
 		$bgimg='tableHeaderbg3.gif';
-		$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
+		//$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
+		$tbg='class="adm_list_titlebar"';
 		$img_arrow=createComIcon($root_path,'bul_arrowblusm.gif','0','absmiddle'); // Load the torse icon image
 		if(!$pop_only) $img_torso=createComIcon($root_path,'torso.gif','0'); // Load the torse icon image
 		$img_torsowin=createComIcon($root_path,'torso_win.gif','0'); // Load the torse icon image
@@ -268,7 +265,7 @@ if($mode=='show'){
 
 <table border=0 cellpadding=4 cellspacing=1 width=100%>
   <tr bgcolor="#f6f6f6">
-    <td  colspan=4><FONT SIZE=3  FACE="Arial" color="#000066"><nobr><?php echo $LDImageGroupNr; ?> <b><?php echo $nr ?></b>&nbsp;
+    <td  colspan=4><FONT class="prompt"><nobr><?php echo $LDImageGroupNr; ?><?php echo $nr ?>&nbsp;
 <?php 
 		if(!$pop_only){
 ?>
@@ -279,16 +276,16 @@ if($mode=='show'){
 	<a href="javascript:popDicom('<?php echo $nr ?>')" title="<?php echo "$LDViewInWindow ($LDFullScreen)" ?>"><img <?php echo $img_torsowin ?>></a></nobr></td>
   </tr>
   <tr bgcolor="#f6f6f6">
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><nobr><?php echo $LDImgNumber; ?></nobr></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><nobr><?php echo $LDNewFileName; ?></nobr></td>
+    <td <?php echo $tbg; ?>><nobr><?php echo $LDImgNumber; ?></nobr></td>
+    <td <?php echo $tbg; ?>><nobr><?php echo $LDNewFileName; ?></nobr></td>
 <?php 
 		if(!$pop_only){
 ?>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><nobr><?php echo "$LDViewImage ($LDSingleImage)" ?></nobr></td>
+    <td <?php echo $tbg; ?>><nobr><?php echo "$LDViewImage ($LDSingleImage)" ?></nobr></td>
 <?php 
 		}
 ?>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><nobr><?php echo "$LDViewInWindow ($LDSingleImage)" ?></nobr></td>
+    <td <?php echo $tbg; ?>><nobr><?php echo "$LDViewInWindow ($LDSingleImage)" ?></nobr></td>
   </tr>
 <?php
 
@@ -298,8 +295,8 @@ if($mode=='show'){
 
 			echo'
 		 		<tr>
-    			<td class="v12" align=center><FONT SIZE=-1  FACE="Arial">&nbsp;'.$i.'&nbsp;</td>
-    			<td class="v12"><FONT SIZE=-1  FACE="Arial">&nbsp;'.$v.'&nbsp;</td>';
+    			<td class="v12" align=center>&nbsp;'.$i.'&nbsp;</td>
+    			<td class="v12">&nbsp;'.$v.'&nbsp;</td>';
 			if(!$pop_only) echo '
     			<td class="v12" align=center><a href="dicom_launch_single.php'.URL_APPEND.'&pid='.$pid.'&img_nr='.$nr.'&fn='.$v.'" title="'.$LDViewInFrame.'"><img '.$img_torso.'></a></td>';
 			echo '
@@ -318,10 +315,10 @@ if($mode=='show'){
 <table border=0>
   <tr>
     <td><img <?php echo createMascot($root_path,'mascot2_r.gif','0','absmiddle') ?>></td>
-    <td><font color="#000099" SIZE=3  FACE="verdana,Arial"> <b>
+    <td><font class="warnprompt">
 	<?php 
 		echo $LDNoImageSaved;
-	?></b></font></td>
+	?></font></td>
   </tr>
 </table>
 <?php
@@ -337,7 +334,7 @@ if($mode=='show'){
 
 <table border=0>
   <tr>
-    <td><FONT SIZE=-1  FACE="Arial" color="#cc0000"><?php echo $LDImgNumber; ?></td>
+    <td><FONT class="vi_data"><?php echo $LDImgNumber; ?></td>
     <td></td>
     <td></td>
   </tr>
@@ -411,21 +408,26 @@ if($parent_admit) {
 
 </form>
 
-
-</FONT>
 <p>
 </td>
 </tr>
-</table>        
-<p>&nbsp;
-<!-- 
-<a href="<?php echo $breakfile?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
- -->
+</table>       
+
 <p>
+&nbsp;
+<p>
+
 <?php
-require($root_path.'include/inc_load_copyrite.php');
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+# Assign to page template object
+$smarty->assign('sMainFrameBlockData',$sTemp);
+
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
  ?>
-</FONT>
-<?php
-StdFooter();
-?>

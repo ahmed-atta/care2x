@@ -1,52 +1,57 @@
-<!-- Creates the tabs for the patient registration module  -->
 <?php
+#  Creates the tabs for the patient registration module
 if(!isset($notabs)||!$notabs){
-	
-?>
-<!-- 
-<tr>
-<td>
 
-<table border=0 cellpadding=5 cellspacing=0>
-  <tr>
-    <td bgcolor=<?php echo $tab_bot_line ?>><?php echo $LDRegisterNewPerson; ?></td>
-    <td>&nbsp;</td>
-    <td bgcolor=<?php echo $tab_bot_line ?>><?php echo $LDSearch; ?></td>
-    <td>&nbsp;</td>
-    <td bgcolor=<?php echo $tab_bot_line ?>><?php echo $LDAdvancedSearch; ?></td>
-    <td>&nbsp;&nbsp;&nbsp;</td>
-    <td bgcolor=<?php echo $tab_bot_line ?>><?php echo $LDAdmit; ?></td>
-  </tr>
-</table>
+	$smarty->assign('bShowTabs',TRUE);
 
+	#
+	# Starting at version 2.0.2, the button is named "new patient"
+	#
+	//if($target=="entry") $img='register_green.gif'; //echo '<img '.createLDImgSrc($root_path,'register_green.gif','0').' alt="'.$LDAdmit.'">';
+	//							else{ $img='register_gray.gif';}
 
-</td>
-</tr> -->
+	if($target=="entry") $img='new_patient_green.gif'; //echo '<img '.createLDImgSrc($root_path,'register_green.gif','0').' alt="'.$LDAdmit.'">';
+								else{ $img='admit-gray.gif';}
+	$pbBuffer='<a href="patient_register.php'.URL_APPEND.'&target=entry"><img '.createLDImgSrc($root_path,$img,'0').' alt="'.$LDRegisterNewPerson.'"  title="'.$LDRegisterNewPerson.'"';
+	if($cfg['dhtml']) $pbBuffer.='style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';
+	$pbBuffer.=' align=middle></a>';
+	$smarty->assign('pbNew',$pbBuffer);
 
-<!-- Tabs  -->
- <tr  bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
-<td colspan=3><?php if($target=="entry") $img='register_green.gif'; //echo '<img '.createLDImgSrc($root_path,'register_green.gif','0').' alt="'.$LDAdmit.'">';
-								else{ $img='register_gray.gif';}
-							echo'<a href="patient_register.php'.URL_APPEND.'&target=entry"><img '.createLDImgSrc($root_path,$img,'0').' alt="'.$LDRegisterNewPerson.'"  title="'.$LDRegisterNewPerson.'"'; if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';
-							if($target=="search") $img='search_green.gif'; //echo '<img '.createLDImgSrc($root_path,'search_green.gif','0').' alt="'.$LDSearch.'">';
+	if($target=="search") $img='search_green.gif'; //echo '<img '.createLDImgSrc($root_path,'search_green.gif','0').' alt="'.$LDSearch.'">';
 								else{ $img='such-gray.gif';}
-							echo '<a href="patient_register_search.php'.URL_APPEND.'&target=search"><img '.createLDImgSrc($root_path,$img,'0').' alt="'.$LDSearch.'" title="'.$LDSearch.'"';if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';						
-							if($target=="archiv") $img='advsearch_green.gif'; //echo '<img '.createLDImgSrc($root_path,'archive_green.gif','0').'  alt="'.$LDArchive.'">';
+	$pbBuffer='<a href="patient_register_search.php'.URL_APPEND.'&target=search"><img '.createLDImgSrc($root_path,$img,'0').' alt="'.$LDSearch.'" title="'.$LDSearch.'"';
+	if($cfg['dhtml']) $pbBuffer.='style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';
+	$pbBuffer.=' align=middle></a>';
+	$smarty->assign('pbSearch',$pbBuffer);
+
+	if($target=="archiv") $img='advsearch_green.gif'; //echo '<img '.createLDImgSrc($root_path,'archive_green.gif','0').'  alt="'.$LDArchive.'">';
 								else{$img='advsearch_gray.gif'; }
-							echo '<a href="patient_register_archive.php'.URL_APPEND.'&target=archiv"><img '.createLDImgSrc($root_path,$img,'0').' alt="'.$LDAdvancedSearch.'" title="'.$LDAdvancedSearch.'" ';if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';
+	$pbBuffer='<a href="patient_register_archive.php'.URL_APPEND.'&target=archiv"><img '.createLDImgSrc($root_path,$img,'0').' alt="'.$LDAdvancedSearch.'" title="'.$LDAdvancedSearch.'" ';
+	if($cfg['dhtml']) $pbBuffer.='style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; 
+	$pbBuffer.=' align=middle></a>';
+	$smarty->assign('pbAdvSearch',$pbBuffer);
 
-						?><img src="<?php echo $cfg['top_bgcolor']; ?>gui/img/common/default/pixel.gif" height=1 width=25><?php
-echo'<a href="aufnahme_start.php'.URL_APPEND.'&target=entry"><img '.createLDImgSrc($root_path,'admit-gray.gif','0').' alt="'.$LDAdmit.'"  title="'.$LDAdmit.'" '; if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';
-?></td>
-</tr>
-<?php
+	$smarty->assign('sHSpacer','<img src="'.$root_path.'gui/img/common/default/pixel.gif" height=1 width=25>');
 
+	#
+	# Starting at version 2.0.2, the button is named  "admission" and links to search admission page
+	#
+	//$pbBuffer='<a href="aufnahme_start.php'.URL_APPEND.'&target=entry"><img '.createLDImgSrc($root_path,'admit-gray.gif','0').' alt="'.$LDAdmit.'"  title="'.$LDAdmit.'" ';
+	$pbBuffer='<a href="aufnahme_daten_such.php'.URL_APPEND.'&target=search"><img '.createLDImgSrc($root_path,'ein-gray.gif','0').' alt="'.$LDAdmit.'"  title="'.$LDAdmit.'" ';
+	if($cfg['dhtml']) $pbBuffer.='style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';
+	$pbBuffer.=' align=middle></a>';
+	$smarty->assign('pbSwitchMode',$pbBuffer);
 }
+
+#  Horizontal  line below the tabs
+
+//if($tab_bot_line) $sDivClass = $tab_bot_line; else $sDivClass = '#333399';
+
+if($tab_bot_line) $sDivClass = 'class="reg_div"'; else $sDivClass =  'class="adm_div"';
+
+$smarty->assign('sRegDividerClass',$sDivClass);
+
+if(!empty($subtitle)) $smarty->assign('sSubTitle','<font color="#000099" SIZE=3  FACE="verdana,Arial"><b>:: '.$subtitle.'</b></font>');
+
+if(isset($current_encounter)&&$current_encounter) $smarty->assign('sWarnText','<font size=2 FACE="verdana,Arial"> <img '.createComIcon($root_path,'warn.gif','0','absmiddle').'> '.$LDPersonIsAdmitted.'</font>');
 ?>
-<!--  Horizontal  line below the tabs -->
-<tr>
-<td colspan=3  bgcolor="<?php if($tab_bot_line) echo $tab_bot_line; else echo '#333399'; ?>"><img src="p.gif" border=0 width=1 height=5><?php
-if(!empty($subtitle)) echo '<font color="#000099" SIZE=3  FACE="verdana,Arial"><b>:: '.$subtitle.'</b></font>';
-if(isset($current_encounter)&&$current_encounter) echo '<font size=2 FACE="verdana,Arial"> <img '.createComIcon($root_path,'warn.gif','0','absmiddle').'> '.$LDPersonIsAdmitted.'</font>';
-?></td>
-</tr>

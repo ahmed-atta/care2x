@@ -10,8 +10,8 @@ require_once($root_path.'include/care_api_classes/class_notes.php');
 *  Patient encounter.
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance.
 * @author Elpidio Latorilla
-* @version beta 2.0.0
-* @copyright 2002,2003,2004,2005 Elpidio Latorilla
+* @version beta 2.0.1
+* @copyright 2002,2003,2004,2005,2005 Elpidio Latorilla
 * @package care_api
 */
 class Encounter extends Notes {
@@ -345,7 +345,7 @@ class Encounter extends Notes {
 	* @param int Encounter number
 	* @return mixed adodb record object or boolean
 	*/			
-	function CareServiceClass($enc_nr) {
+	function CareServiceClass($enc_nr='') {
 	    return $this->getServiceClass('care',$enc_nr);
 	}
 	/**
@@ -363,7 +363,7 @@ class Encounter extends Notes {
 	* @param int Encounter number
 	* @return mixed adodb record object or boolean
 	*/			
-	function RoomServiceClass($enc_nr) {
+	function RoomServiceClass($enc_nr='') {
 	    return $this->getServiceClass('room',$enc_nr);
 	}
 	/**
@@ -381,7 +381,7 @@ class Encounter extends Notes {
 	* @param int Encounter number
 	* @return mixed adodb record object or boolean
 	*/			
-	function AttDrServiceClass($enc_nr) {
+	function AttDrServiceClass($enc_nr='') {
 	    return $this->getServiceClass('att_dr',$enc_nr);
 	}
 	/**
@@ -657,7 +657,7 @@ class Encounter extends Notes {
 	* @param int Encounter number
 	* @return boolean
 	*/
-	function loadEncounterData($enc_nr){
+	function loadEncounterData($enc_nr=''){
 	    global $db;
 		if(!$this->internResolveEncounterNr($enc_nr)) return FALSE;
 		$this->sql="SELECT e.*, p.pid, p.title,p.name_last, p.name_first, p.date_birth, p.sex,
@@ -2231,11 +2231,11 @@ class Encounter extends Notes {
 									LEFT JOIN $this->tb_ic AS i ON e.insurance_class_nr=i.class_nr
 									LEFT JOIN $this->tb_notes as n ON (e.encounter_nr=n.encounter_nr AND n.type_nr=6)
 							WHERE $cond e.encounter_class_nr=2 AND
-									(e.is_discharged='' OR e.is_discharged=0)  AND 
+									(e.is_discharged='' OR e.is_discharged=0)  AND
 									e.in_dept<>'' AND e.in_dept<>0 AND e.status NOT IN ($this->dead_stat)
 							ORDER BY e.encounter_nr";
-							/*GROUP BY e.encounter_nr,e.pid,e.insurance_class_nr,p.title,p.name_last,p.name_first,p.date_birth,p.sex,
-							p.photo_filename,a.time,a.urgency,i.LD_var,i.name, n.nr";*/
+							/*							GROUP BY e.encounter_nr,e.pid,e.insurance_class_nr,p.title,p.name_last,p.name_first,p.date_birth,p.sex,
+							p.photo_filename,a.date, a.time,a.urgency,i.LD_var,i.name, n.nr*/
 							
         if($this->res['opb']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['opb']->RecordCount()) {

@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -65,7 +65,7 @@ echo ucfirst($person['name_last']).', '.ucfirst($person['name_first']);
 
 <table border=0 >
 <tr>
-<td bgcolor=#ffffcc><img <?php echo createComIcon($root_path,'authors.gif') ?>>&nbsp;<font face=verdana,arial size=2 ><?php echo $LDContactInfo ?><br></font>
+<td bgcolor=#ffffcc><img <?php echo createComIcon($root_path,'authors.gif','0','',FALSE) ?>>&nbsp;<font face=verdana,arial size=2 ><?php echo $LDContactInfo ?><br></font>
 </td>
 </tr>
 <tr>
@@ -74,7 +74,7 @@ echo ucfirst($person['name_last']).', '.ucfirst($person['name_first']);
 </td>
 </tr>
 <tr>
-<td bgcolor=#ffffcc><img <?php echo createComIcon($root_path,'listen-sm-legend.gif') ?>>&nbsp;<font face=verdana,arial size=2 ><?php echo $LDOnCallContactInfo ?><br></font>
+<td bgcolor=#ffffcc><img <?php echo createComIcon($root_path,'listen-sm-legend.gif','0','',FALSE) ?>>&nbsp;<font face=verdana,arial size=2 ><?php echo $LDOnCallContactInfo ?><br></font>
 </td>
 </tr>
 <tr>

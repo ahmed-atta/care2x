@@ -17,6 +17,8 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_core.php');
 $core= new Core;
 
+//$db->debug=1;
+
 	/*include('includes/condb.php');
 	connect_db();*/
 

@@ -55,7 +55,7 @@ function chkform(d) {
    <tr bgcolor="#f6f6f6">
      <td><font color=red>*</font><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDate; ?></td>
      <td colspan=3><input type="text" name="msr_date" size=10 maxlength=10  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-	 <a href="javascript:show_calendar('wtht_form.msr_date','<?php echo $date_format; ?>')"><img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
+	 <a href="javascript:show_calendar('wtht_form.msr_date','<?php echo $date_format; ?>')"><img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle',TRUE); ?>></a>
 	 </td>
    </tr>
 <!--    <tr bgcolor="#f6f6f6">

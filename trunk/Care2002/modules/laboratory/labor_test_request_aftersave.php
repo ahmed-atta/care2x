@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -248,7 +248,7 @@ if($status=="draft") $smarty->assign('sAfterSavePrompt',$LDFormSaved[$saved]);
 
 $smarty->assign('LDWhatToDo',$LDWhatToDo);
 $smarty->assign('pbPrintOut','javascript:printOut()');
-$smarty->assign('gifGrnArrow','<img '.createComIcon($root_path,'bul_arrowgrnsm.gif','0','absmiddle').'>');
+$smarty->assign('gifGrnArrow','<img '.createComIcon($root_path,'bul_arrowgrnsm.gif','0','absmiddle',TRUE).'>');
 $smarty->assign('LDPrintForm',$LDPrintForm);
 $smarty->assign('pbEditForm',$root_path."modules/nursing/nursing-station-patientdaten-doconsil-".$target.".php".URL_APPEND."&pn=$pn&edit=$edit&station=$station&target=$target&dept_nr=$dept_nr&user_origin=$user_origin&noresize=$noresize&mode=edit&batch_nr=$batch_nr");
 $smarty->assign('LDEditForm',$LDEditForm);

@@ -4,17 +4,17 @@ function popNotes(d){
 }
 -->
 </script>
-<table border=0 cellpadding=4 cellspacing=1 width=100%>
+<table border=0 cellpadding=4 cellspacing=1 width=100% class="frame">
   <tr bgcolor="#f6f6f6">
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDate; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDTime; ?></td>
-     <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDWeight; ?></td>
+    <td <?php echo $tbg; ?>><FONT color="#000066"><?php echo $LDDate; ?></td>
+    <td <?php echo $tbg; ?>><FONT color="#000066"><?php echo $LDTime; ?></td>
+     <td <?php echo $tbg; ?>><FONT color="#000066"><?php echo $LDWeight; ?></td>
     <td <?php echo $tbg; ?>>&nbsp;</td>
-    <td  <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDHeight; ?></td>
+    <td  <?php echo $tbg; ?>><FONT color="#000066"><?php echo $LDHeight; ?></td>
     <td <?php echo $tbg; ?>>&nbsp;</td>
-     <td  <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LD['head_circumference']; ?></td>
+     <td  <?php echo $tbg; ?>><FONT color="#000066"><?php echo $LD['head_circumference']; ?></td>
     <td <?php echo $tbg; ?>>&nbsp;</td>
-   <td  <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDEncounterNr; ?></td>
+   <td  <?php echo $tbg; ?>><FONT color="#000066"><?php echo $LDEncounterNr; ?></td>
   </tr>
 
 <?php
@@ -25,27 +25,27 @@ while(list($x,$row)=each($msr_comp)){
 	$toggle=!$toggle;
 ?>
   <tr bgcolor="<?php echo $bgc; ?>">
-    <td><FONT SIZE=-1  FACE="Arial"><?php echo @formatDate2Local($row['msr_date'],$date_format); ?></td>
-    <td><FONT SIZE=-1  FACE="Arial"><?php echo strtr($row['msr_time'],'.',':'); ?></td>
-    <td><FONT SIZE=-1  FACE="Arial">
+    <td><?php echo @formatDate2Local($row['msr_date'],$date_format); ?></td>
+    <td><?php echo strtr($row['msr_time'],'.',':'); ?></td>
+    <td>
 	<?php 
 		if($row[6]['notes']) echo '<a href="javascript:popNotes(\''.$row[6]['notes'].'\')" title="'.$row[6]['notes'].'">'.$row[6]['value'].'</a>';
 			else echo $row[6]['value']; 
 	?></td>
-     <td><FONT SIZE=1  FACE="Arial"><?php echo $unit_ids[$row[6]['unit_nr']]; ?></td>
-    <td><FONT SIZE=-1  FACE="Arial">
+     <td><FONT SIZE=1 ><?php echo $unit_ids[$row[6]['unit_nr']]; ?></td>
+    <td>
 	<?php 
 		if($row[7]['notes']) echo '<a href="javascript:popNotes(\''.$row[7]['notes'].'\')" title="'.$row[7]['notes'].'">'.$row[7]['value'].'</a>';
 			else echo $row[7]['value']; 
 	?></td>
-     <td><FONT SIZE=1  FACE="Arial"><?php echo $unit_ids[$row[7]['unit_nr']]; ?></td>
-    <td><FONT SIZE=-1  FACE="Arial">
+     <td><FONT SIZE=1 ><?php echo $unit_ids[$row[7]['unit_nr']]; ?></td>
+    <td>
 	<?php 
 		if($row[9]['notes']) echo '<a href="javascript:popNotes(\''.$row[9]['notes'].'\')" title="'.$row[9]['notes'].'">'.$row[9]['value'].'</a>';
 			else echo $row[9]['value']; 
 	?></td>
-     <td><FONT SIZE=1  FACE="Arial"><?php echo $unit_ids[$row[9]['unit_nr']]; ?></td>
-   <td><FONT SIZE=-1  FACE="Arial"><?php echo $row['encounter_nr']; ?></td>
+     <td><FONT SIZE=1 ><?php echo $unit_ids[$row[9]['unit_nr']]; ?></td>
+   <td><?php echo $row['encounter_nr']; ?></td>
   </tr>
 
 <?php

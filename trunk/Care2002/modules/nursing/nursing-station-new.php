@@ -1,11 +1,11 @@
 <?php
-error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+//error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -55,16 +55,43 @@ if($mode){
 }else{
 	$depts=&$dept->getAllMedical();
 }
-$bgc=$root_path.'gui/img/skin/default/tableHeaderbg3.gif';
-$bgc2='#eeeeee';
+
+# Start the smarty templating
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('nursing');
+
+# Added for the common header top block
+
+ $smarty->assign('sToolbarTitle',"$LDCreate::$LDNewStation");
+
+ $smarty->assign('pbHelp',"javascript:gethelp('nursing_ward_mng.php','new')");
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',"$LDCreate::$LDNewStation");
+
+# Buffer page output
+
+ob_start();
 
 ?>
+<style type="text/css" name="formstyle">
 
+td.pblock{ font-family: verdana,arial; font-size: 12}
 
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
+div.box { border: solid; border-width: thin; width: 100% }
+
+div.pcont{ margin-left: 3; }
+
+</style>
 
 <script language="javascript">
 <!-- 
@@ -87,145 +114,72 @@ function check(d)
 </script>
 
 <?php
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
 
-?>
-<style type="text/css" name="formstyle">
-td.pblock{ font-family: verdana,arial; font-size: 12}
+$sTemp = ob_get_contents();
+ob_end_clean();
 
-div.box { border: solid; border-width: thin; width: 100% }
+$smarty->append('JavaScript',$sTemp);
 
-div.pcont{ margin-left: 3; }
+# Assign prompt elements
+if($rows){
+	$smarty->assign('sMascotImg','<img '.createMascot($root_path,'mascot1_r.gif','0','bottom').' align="absmiddle">');
+	$smarty->assign('sStationExists',str_replace("~station~",strtoupper($station),$LDStationExists));
+}
 
-</style>
+$smarty->assign('LDEnterAllFields',$LDEnterAllFields);
 
-</HEAD>
+# Assign form items
+$smarty->assign('LDStation',$LDStation);
+$smarty->assign('LDWard_ID',$LDWard_ID);
+$smarty->assign('LDDept',$LDDept);
+$smarty->assign('LDPlsSelect',$LDPlsSelect);
+$smarty->assign('LDNoSpecChars',$LDNoSpecChars);
+$smarty->assign('LDDescription',$LDDescription);
+$smarty->assign('LDRoom1Nr',$LDRoom1Nr);
+$smarty->assign('LDRoom2Nr',$LDRoom2Nr);
+$smarty->assign('LDRoomPrefix',$LDRoomPrefix);
+$smarty->assign('sSelectIcon','<img '.createComIcon($root_path,'l_arrowgrnsm.gif','0').'>');
 
-<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> onLoad="if (window.focus) window.focus()" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+# Assign input values
+$smarty->assign('name',$name);
+$smarty->assign('ward_id',$ward_id);
+$smarty->assign('description',$description);
+$smarty->assign('room_nr_start',$room_nr_start);
+$smarty->assign('room_nr_end',$room_nr_end);
+$smarty->assign('roomprefix',$roomprefix);
 
-
-<table width=100% border=0 cellpadding="0" cellspacing=0>
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp; <?php echo "$LDCreate::$LDNewStation" ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('nursing_ward_mng.php','new')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
-</tr>
-<tr valign=top >
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
- <ul>
-<?php if($rows) : ?>
-
-<img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"><font face="Verdana, Arial" size=3 color="#880000">
-<b><?php echo str_replace("~station~",strtoupper($station),$LDStationExists) ?></b></font><p>
-<?php endif ?>
-<font face="Verdana, Arial" size=-1><?php echo $LDEnterAllFields ?>
-<form action="nursing-station-new.php" method="post" name="newstat" onSubmit="return check(this)">
-<table border=0>
-  <tr>
-    <td class=pblock align=right background="<?php echo $bgc ?>"><font color=#ff0000><b>*</b></font><?php echo $LDStation ?>: </td>
-    <td class=pblock bgcolor="<?php echo $bgc2 ?>" ><input type="text" name="name" size=20 maxlength=40 value="<?php echo $name ?>"><br>
-</td>
-  </tr> 
-  <tr>
-    <td class=pblock align=right background="<?php echo $bgc ?>"><font color=#ff0000><b>*</b></font><?php echo $LDWard_ID ?>: </td>
-    <td class=pblock bgcolor="<?php echo $bgc2 ?>" ><input type="text" name="ward_id" size=20 maxlength=40 value="<?php echo $ward_id ?>"> [a-Z,1-0] <?php echo $LDNoSpecChars ?><br>
-</td>
-  </tr> 
-<tr>
-    <td class=pblock align=right background="<?php echo $bgc ?>"><font color=#ff0000><b>*</b></font><?php echo $LDDept ?>: </td>
-    <td class=pblock bgcolor="<?php echo $bgc2 ?>" >
-		<select name="dept_nr">
+# Create department select box
+$sTemp = '<select name="dept_nr">
 			<option value=""> </option>';
-	<?php
-		if($depts&&is_array($depts)){		
-			while(list($x,$v)=each($depts)){
-				echo '
-					<option value="'.$v['nr'].'"';
-				if($v['nr']==$dept_nr) echo ' selected';
-				echo '>';
-				if(isset($$v['LD_var'])&&$$v['LD_var']) echo $$v['LD_var'];
-					else echo $v['name_formal'];
-				echo '</option>';
-			}
-		}
-	?>
-		</select>
-	<img <?php echo createComIcon($root_path,'l_arrowgrnsm.gif','0') ?>> <?php echo $LDPlsSelect ?>
-</td>
-  </tr>
-  <tr>
-    <td class=pblock align=right background="<?php echo $bgc ?>"><font color=#ff0000><b>*</b></font><?php echo $LDDescription ?>: </td>
-    <td class=pblock bgcolor="<?php echo $bgc2 ?>" ><textarea name="description" cols=40 rows=8 wrap="physical"><?php echo $description ?></textarea>
-</td>
-  </tr>
-  <tr>
-    <td class=pblock align=right background="<?php echo $bgc ?>"><font color=#ff0000><b>*</b></font><?php echo $LDRoom1Nr ?>: </td>
-    <td class=pblock bgcolor="<?php echo $bgc2 ?>" ><input type="text" name="room_nr_start" size=4 maxlength=4 value="<?php echo $room_nr_start ?>"><br>
-</td>
-  </tr>
-  <tr>
-    <td class=pblock align=right background="<?php echo $bgc ?>"><font color=#ff0000><b>*</b></font><?php echo $LDRoom2Nr ?>: </td>
-    <td class=pblock bgcolor="<?php echo $bgc2 ?>" ><input type="text" name="room_nr_end" size=4 maxlength=4 value="<?php echo $room_nr_end ?>"><br>
-</td>
-  </tr>
-  <tr>
-    <td class=pblock align=right background="<?php echo $bgc ?>"><font color=#ff0000><b>*</b></font><?php echo $LDRoomPrefix ?>: </td>
-    <td class=pblock bgcolor="<?php echo $bgc2 ?>" ><input type="text" name="roomprefix" size=4 maxlength=4 value="<?php echo $roomprefix; ?>"><br>
-</td>
-  </tr>
-<!--   <tr>
-    <td class=pblock align=right><?php echo $LDNrBeds ?>:</td>
-    <td class=pblock><b>2</b><input type="hidden" name="bedtype" value=2 ><br></td>
-  </tr>
-  <tr>
-    <td class=pblock align=right><?php echo $LDBed1Prefix ?>:</td>
-    <td class=pblock><b>A</b><input type="hidden" name="bed_id1" value="a"><br>
-</td>
-  </tr>
-  <tr>
-    <td class=pblock align=right><?php echo $LDBed2Prefix ?>: </td>
-    <td class=pblock><b>B</b><input type="hidden" name="bed_id2" value="b"><br>
-</td>
-  </tr>
-  <tr>
-    <td class=pblock align=right><?php echo $LDHeadNurse ?>: </td>
-    <td class=pblock><input type="text" name="headnurse" size=40 maxlength=50 value="<?php echo $headnurse ?>"></td>
-  </tr>
-  <tr>
-    <td class=pblock align=right><?php echo $LDHeadNurse2 ?>:</td>
-    <td class=pblock><input type="text" name="asst" size=40 maxlength=50 value="<?php echo $asst ?>"></td>
-  </tr>
-  <tr>
-    <td class=pblock align=right><?php echo $LDNurses ?>:</td>
-    <td class=pblock><textarea name="nurses" cols=40 rows=8 wrap="physical"><?php echo $nurses ?></textarea>
-                     </td>
-  </tr>
- --></table>
-<input type="hidden" name="sid" value="<?php echo $sid ?>">
+
+if($depts&&is_array($depts)){
+	while(list($x,$v)=each($depts)){
+		$sTemp = $sTemp.'	
+		<option value="'.$v['nr'].'"';
+		if($v['nr']==$dept_nr) $sTemp = $sTemp.' selected';
+		$sTemp = $sTemp.'>';
+		if(isset($$v['LD_var'])&&$$v['LD_var']) $sTemp = $sTemp.$$v['LD_var'];
+			else $sTemp = $sTemp.$v['name_formal'];
+		$sTemp = $sTemp.'</option>';
+	}
+}
+$sTemp = $sTemp.'
+	</select>';
+
+$smarty->assign('sDeptSelectBox',$sTemp);
+
+$smarty->assign('sCancel','<a href="javascript:history.back()"><img '.createLDImgSrc($root_path,'cancel.gif','0').' border="0"></a>');
+$smarty->assign('sSaveButton','<input type="hidden" name="sid" value="'.$sid.'">
 <input type="hidden" name="mode" value="create">
-<input type="hidden" name="edit" value="<?php echo $edit ?>">
-<input type="hidden" name="lang" value="<?php echo $lang ?>">
-<input type="submit" value="<?php echo $LDCreateStation ?>">
-</form>
-<p>
+<input type="hidden" name="edit" value="'.$edit.'">
+<input type="hidden" name="lang" value="'.$lang.'">
+<input type="submit" value="'.$LDCreateStation.'">');
 
-<a href="javascript:history.back()"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> border="0"></a>
-</FONT>
+$smarty->assign('sMainBlockIncludeFile','nursing/ward_create_form.tpl');
 
-</ul>
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
 
-<p>
-</td>
-</tr>
-</table>        
-<p>
-
-<?php
-require($root_path.'include/inc_load_copyrite.php');
 ?>
-
-</BODY>
-</HTML>

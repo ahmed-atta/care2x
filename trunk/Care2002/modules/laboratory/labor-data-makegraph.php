@@ -6,9 +6,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -86,14 +86,40 @@ if($encounter=$enc_obj->getBasic4Data($encounter_nr)) {
 			//else echo("location:".$root_path."modules/nursing/nursing-station-patientdaten.php?sid=$sid&lang=$lang&edit=$edit&station=$station&pn=$pn&nodoc=labor");
 			exit;
 	}
-}else{echo "<p>".$lab_obj->getLastQuery()."sql$LDDbNoRead";exit;}
+}else{
+	echo "<p>".$lab_obj->getLastQuery()."sql$LDDbNoRead";
+	exit;
+}
 
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',"$LDLabReport - $LDGraph");
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('lab_list.php','graph','','','$LDGraph')");
+
+ # hide return  button
+ $smarty->assign('pbBack',FALSE);
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',"$LDLabReport - $LDGraph");
+
+ # collect extra javascript code
+ ob_start();
 ?>
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-      <title><?php echo "$LDLabReport - $LDGraph" ?></title>
-<?php echo setCharSet(); ?>
+
 <style type="text/css" name="1">
 .va12_n{font-family:verdana,arial; font-size:12; color:#000099}
 .a10_b{font-family:arial; font-size:10; color:#000000}
@@ -103,57 +129,31 @@ if($encounter=$enc_obj->getBasic4Data($encounter_nr)) {
 </style>
 
 <?php 
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-?>
 
-</HEAD>
+$sTemp = ob_get_contents();
+ob_end_clean();
 
-<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+$smarty->append('JavaScript',$sTemp);
 
-<table  border=0 cellspacing=0 cellpadding=0 width=100%>
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php echo "$LDLabReport - $LDGraph" ?></STRONG></FONT>
-</td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp('lab_list.php','graph','','','<?php echo $LDGraph ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
-</tr>
+# Assign patient basic elements
+$smarty->assign('LDCaseNr',$LDCaseNr);
+$smarty->assign('LDLastName',$LDLastName);
+$smarty->assign('LDName',$LDName);
+$smarty->assign('LDBday',LDBday);
 
-<tr>
-<td colspan=2  bgcolor=#dde1ec><p><br>
+# Assign patient basic data
+$smarty->assign('encounter_nr',$encounter_nr);
+$smarty->assign('sLastName',$patient['name_last']);
+$smarty->assign('sName',$patient['name_first']);
+$smarty->assign('sBday',formatDate2Local($patient['date_birth'],$date_format));
 
-<FONT    SIZE=-1  FACE="Arial">
+# Buffer page output
 
-<ul>
+ob_start();
 
-<table border=0>
-<tr>
-<td bgcolor=#ffffff><FONT SIZE=-1  FACE="Arial"><?php echo $LDCaseNr ?>:
-</td>
-<td bgcolor=#ffffee><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $encounter_nr; ?>&nbsp;
-</td>
-</tr>
-
-<tr>
-<td bgcolor=#ffffff><FONT SIZE=-1  FACE="Arial"><?php echo "$LDLastName, $LDName, $LDBday" ?>:
-</td>
-<td bgcolor=#ffffee><FONT SIZE=-1  FACE="Arial">&nbsp;<b><?php echo  $patient['name_last']; ?>, <?php echo  $patient['name_first']; ?>&nbsp;&nbsp;<?php echo  formatDate2Local($patient['date_birth'],$date_format); ?></b>
-</td>
-</tr>
-</table>
-
-</UL>
-<p>
-<table border=0 bgcolor=#9f9f9f cellspacing=0 cellpadding=0>
-<tr>
-<td>
-
-
+echo '
 <form action="labor-data-makegraph.php" method="post" name="labdata">
-<table border=0 cellpadding=0 cellspacing=1>
-<?php 
-
+<table border=0 cellpadding=0 cellspacing=1 class="frame">';
 
 # Get the number of colums
 $cols=sizeof($tdate);
@@ -235,9 +235,11 @@ while(list($group_id,$param_group)=each($paralistarray)){
 				while($tpbuf=&$tparams->FetchRow())	$tp[$tpbuf['id']]=&$tpbuf;
 			}
 			# Create the first colums boxes of a row
-			$txt='<tr bgcolor=';
-	 		if($toggle) { $txt.= '"#ffdddd"';}else { $txt.= '"#ffeeee"';}
-   			$txt.= '>
+			//$txt='<tr bgcolor=';
+	 		//if($toggle) { $txt.= '"#ffdddd"';}else { $txt.= '"#ffeeee"';}
+			$txt='<tr class=';
+	 		if($toggle) { $txt.= '"wardlistrow1"';}else { $txt.= '"wardlistrow2"';}
+			$txt.= '>
      		<td class="va12_n"> &nbsp;<nobr><a href="#">'.$pname.'</a></nobr> 
 			</td>
 			<td class="a10_b" >&nbsp;';
@@ -256,23 +258,25 @@ while(list($group_id,$param_group)=each($paralistarray)){
 		$tracker++;
 	}
 }
-	echo '
-</table>';     
 
-?>                                         
-</td></tr>
+echo '
 </table>
-</form>
-<ul>
-<p>
-<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDBack ?>"></a>
-</UL>
-</FONT>
-<?php
-require($root_path.'include/inc_load_copyrite.php');
+</form>';
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+$smarty->assign('sLabResultsGraphTable',$sTemp);
+
+$smarty->assign('sClose','<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'close2.gif','0','absmiddle').' alt="'.$LDClose.'"></a>');
+
+# Assign the include file to main frame template
+
+ $smarty->assign('sMainBlockIncludeFile','laboratory/chemlab_data_results_graph.tpl');
+
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
 ?>
-</td>
-</tr>
-</table>
-</BODY>
-</HTML>

@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -13,13 +13,12 @@ require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','nursing.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
 
 if(!$dept) 
 	if($HTTP_COOKIE_VARS[ck_thispc_dept]) $dept=$HTTP_COOKIE_VARS[ck_thispc_dept];
 		else $dept='plop'; // set to default plop = plastic surgery op
 
-$breakfile="nursing.php?sid=".$sid."&lang=".$lang;
+$breakfile="nursing.php".URL_APPEND;
 
 $datum=strftime("%d.%m.%Y");
 $zeit=strftime("%H.%M");
@@ -58,12 +57,34 @@ while ($n<35)
 	$daynumber[$n]="";
 	$n++;
 }
-?>
 
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
+# Start the smarty templating
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('nursing');
+
+# Added for the common header top block
+
+ $smarty->assign('sToolbarTitle',"$LDNursingStations - $LDArchive");
+
+ $smarty->assign('pbHelp',"javascript:gethelp('nursing_how2search.php','','','arch')");
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',"$LDNursingStations - $LDArchive");
+
+ /**
+ * collect JavaScript for Smarty
+ */
+ ob_start();
+?>
 
 <script language="javascript" >
 <!-- 
@@ -101,43 +122,34 @@ function cxjahr(offs)
 </script>
 
 <?php
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+$smarty->append('JavaScript',$sTemp);
+
+# Buffer page output
+
+ob_start();
+
 ?>
 
-
-
-</HEAD>
-
-<BODY  alink=navy vlink=navy topmargin=0 leftmargin=0  marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
-
-<table width=100% border=0 cellspacing=0 height=100%>
-
-<tr valign=top height=10>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp; <?php echo "$LDNursingStations - $LDArchive" ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('nursing_how2search.php','','','arch')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
-</tr>
-<tr valign=top >
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2><p><br>
 <ul>
-<FONT    SIZE=2  FACE="verdana,Arial" >
+<FONT  class="prompt">
 <?php echo $LDClkDate ?>
 </font><p>
 <?php 
 echo '<table cellspacing=0 cellpadding=0 border=0>
 		<tr><td align=left>';
 echo '<a href="nursing-station-archiv.php'.URL_APPEND.'&pmonth=';
-if($pmonth<2) echo '12&pyear='.($pyear-1).'" title="'.$LDLastMonth.'"><FONT  SIZE=1 FACE="Arial" color=silver>&lt;'.$monat[11];
-else echo ($pmonth-1).'&pyear='.$pyear.'" title="'.$LDLastMonth.'"><FONT  SIZE=1 FACE="Arial" color=silver>&lt;'.$monat[$pmonth-2];
+if($pmonth<2) echo '12&pyear='.($pyear-1).'" title="'.$LDLastMonth.'">&lt;'.$monat[11];
+else echo ($pmonth-1).'&pyear='.$pyear.'" title="'.$LDLastMonth.'">&lt;'.$monat[$pmonth-2];
 echo '</a></td><td  align=center>';
-echo '<FONT  SIZE=2 FACE="verdana,Arial" color=navy><b>'.$monat[$pmonth-1].' '.$pyear.'</b></font>';
+echo '<FONT color=navy><b>'.$monat[$pmonth-1].' '.$pyear.'</b></font>';
 echo '</td><td align=right>';
 echo '<a href="nursing-station-archiv.php'.URL_APPEND.'&pmonth=';
-if($pmonth>11) echo '1&pyear='.($pyear+1).'" title="'.$LDNextMonth.'"><FONT  SIZE=1 FACE="Arial" color=silver>'.$monat[0];
-else echo ($pmonth+1).'&pyear='.$pyear.'" title="'.$LDNextMonth.'"><FONT  SIZE=1 FACE="Arial" color=silver>'.$monat[$pmonth];
+if($pmonth>11) echo '1&pyear='.($pyear+1).'" title="'.$LDNextMonth.'">'.$monat[0];
+else echo ($pmonth+1).'&pyear='.$pyear.'" title="'.$LDNextMonth.'">'.$monat[$pmonth];
 echo '&gt;</a></td></tr><tr><td bgcolor=black colspan=3>';
 
 echo '<table border="0" cellspacing=1 cellpadding=5>';
@@ -145,9 +157,9 @@ echo '<table border="0" cellspacing=1 cellpadding=5>';
 echo '<tr>';
 for($n=0;$n<6;$n++)
 	{
-		echo '<td bgcolor=white><FONT    SIZE=4  FACE="Arial" ><b>'.$tage[$n].'</b></td>';
+		echo '<td bgcolor=white><FONT SIZE=4 ><b>'.$tage[$n].'</b></td>';
 	}
-echo '<td bgcolor="#ffffcc"><FONT    SIZE=4  FACE="Arial" color=red ><b>'.$tage[6].'</b></td>';
+echo '<td bgcolor="#ffffcc"><FONT SIZE=4 color=red ><b>'.$tage[6].'</b></td>';
 echo '</tr>';
 
 $j=0;
@@ -221,20 +233,18 @@ else echo'<input  type="button" value="+1" onClick=cxjahr(\'1\')> <input  type="
 
 </ul>
 
-</FONT>
-
-</td>
-</tr>
-
-<tr valign=top >
-<td bgcolor=<?php echo $cfg['bot_bgcolor']; ?> height=70 colspan=2>
 <?php
-require($root_path.'include/inc_load_copyrite.php');
-?>
-</td>
-</tr>
-</table>        
-&nbsp;
 
-</BODY>
-</HTML>
+$sTemp = ob_get_contents();
+ ob_end_clean();
+
+# Assign the page output to main frame template
+
+ $smarty->assign('sMainFrameBlockData',$sTemp);
+
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
+?>

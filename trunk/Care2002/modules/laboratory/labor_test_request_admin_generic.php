@@ -5,7 +5,7 @@ require($root_path.'include/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.net, elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -21,22 +21,16 @@ define('LANG_FILE','konsil.php');
 *  and set the user cookie name and break or return filename
 */
 
-switch($user_origin)
-{
+switch($user_origin){
   case 'lab':
-
                   $local_user='ck_lab_user';
-                  $breakfile="labor.php".URL_APPEND; 
+                  $breakfile="labor.php".URL_APPEND;
                   break;
-  
   case 'amb':
-  
                   $local_user='ck_amb_user';
-                  $breakfile=$root_path.'modules/ambulatory/ambulatory.php'.URL_APPEND; 
+                  $breakfile=$root_path.'modules/ambulatory/ambulatory.php'.URL_APPEND;
                   break;
-
   default:
-  
                   $local_user='ck_pflege_user';
                   $breakfile=$root_path."modules/nursing/nursing-station-patientdaten.php".URL_APPEND."&edit=$edit&station=$station&pn=$pn";
 }
@@ -160,7 +154,7 @@ if(!isset($mode))   $mode='';
 				case '2': $full_en = ($pn + $GLOBAL_CONFIG['patient_outpatient_nr_adder']);
 							break;
 				default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-			}						
+			}
 
 			if( $enc_obj->is_loaded) {
 				$result=&$enc_obj->encounter;
@@ -171,12 +165,10 @@ if(!isset($mode))   $mode='';
 						$stored_request=$ergebnis->FetchRow();
 					}
 				}else{
-					echo "<p>$sql<p>$LDDbNoRead"; 
-				}					
+					echo "<p>$sql<p>$LDDbNoRead";
+				}
 			}
-		}
-	   else 
-	   {
+		}else{
 		  $mode='';
 		  $pn='';
 	   }		
@@ -189,18 +181,41 @@ if($dept_obj->preloadDept($stored_request['testing_dept'])){
 	if(isset($$buffer)&&!empty($$buffer)) $formtitle=$$buffer;
 		else $formtitle=$dept_obj->FormalName();
 }
+
+# Prepare title
+$sTitle = $LDPendingTestRequest;
+if($stored_request['batch_nr']) $sTitle = $sTitle."  (".$stored_request['batch_nr']." ".$stored_request['room_nr']." ".$stored_request['dept'].")";
+
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',$sTitle);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('pending_generic.php')");
+
+ # hide return  button
+ $smarty->assign('pbBack',FALSE);
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',$sTitle);
+
+ # collect extra javascript code
+ ob_start();
 ?>
 
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
- <TITLE><?php echo "$LDDiagnosticTest $station" ?></TITLE>
-<?php
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-
-?>
 <style type="text/css">
 div.fva2_ml10 {font-family: verdana,arial; font-size: 12; margin-left: 10;}
 div.fa2_ml10 {font-family: arial; font-size: 12; margin-left: 10;}
@@ -252,41 +267,36 @@ function printOut()
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
 <script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
-</HEAD>
-
-<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> 
-onLoad="if (window.focus) window.focus(); " 
-topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
-
-<table width=100% border=0 cellpadding="5" cellspacing=0>
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php echo $LDPendingTestRequest." (#".$stored_request['batch_nr']." ".$stored_request['room_nr']." ".$stored_request['dept'].")"; ?></STRONG></FONT>
-</td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp('pending_generic.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
-</tr>
-<tr>
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> colspan=2>
-
 <?php
-if($batchrows)
-{
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+$smarty->append('JavaScript',$sTemp);
+
+# Buffer page output
+
+ob_start();
+
+# If pending request available, show list and actual form
+
+if($batchrows){
+
 ?>
 
 <table border=0>
-  <tr valign="top">
-<!-- left frame for the requests list -->
-    <td>
-	<FONT  SIZE=1  FACE="verdana">  
+	<tr valign="top">
+		<!-- left frame for the requests list -->
+		<td>
+
 <?php
 /* The following routine creates the list of pending requests */
 include_once($root_path.'include/inc_test_request_lister_fx.php');
 ?>
-</td>
+		</td>
 
-<!--  right frame for the request form -->
-    <td >
+		<!--  right frame for the request form -->
+		<td >
         <form name="form_test_request" method="post" action="<?php echo $thisfile ?>" onSubmit="return chkForm(this)">
 		<input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0','absmiddle') ?>  title="<?php echo $LDSaveEntry ?>"> 
         <a href="javascript:printOut()"><img <?php echo createLDImgSrc($root_path,'printout.gif','0','absmiddle') ?> alt="<?php echo $LDPrintOut ?>"></a>
@@ -326,7 +336,7 @@ if (($stored_request['result']!='') && $stored_request['status']!='done')
 		else $TP_report_date.=formatDate2Local(date('Y-m-d'),$date_format).'"'; 
 	$TP_report_date.=' size=10 maxlength=10 onFocus="this.select()" onBlur="IsValidDate(this,\''.$date_format.'\')" onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\')">';
 	
-	$TP_calendar_2='<a href="javascript:show_calendar(\'form_test_request.result_date\',\''.$date_format.'\')"><img '.createComIcon($root_path,'show-calendar.gif','0','absmiddle').'></a>';
+	$TP_calendar_2='<a href="javascript:show_calendar(\'form_test_request.result_date\',\''.$date_format.'\')"><img '.createComIcon($root_path,'show-calendar.gif','0','absmiddle',TRUE).'></a>';
   	
 	$TP_result_doctor_x='';
 	if($stored_request['result_doctor']) $TP_result_doctor=stripslashes($stored_request['result_doctor']);
@@ -351,9 +361,9 @@ if (($stored_request['result']!='') && $stored_request['status']!="done" )
          <a href="'. $thisfile.'?sid='.$sid.'&lang='.$lang.'&edit='.$edit.'&mode=done&target='.$target.'&subtarget='.$subtarget.'&batch_nr='.$batch_nr.'&pn='.$pn.'&user_origin='.$user_origin.'&entry_date='.$entry_date.'"><img '.createLDImgSrc($root_path,'done.gif','0','absmiddle').' alt="'.$LDDone.'"></a>';
 }
 ?>		
-     </form>
-</td>
-</tr>
+			</form>
+		</td>
+	</tr>
 </table>        	
 <?php
 }
@@ -365,12 +375,17 @@ else
 <a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0','absmiddle') ?>></a>
 <?php
 }
+
+$sTemp = ob_get_contents();
+ ob_end_clean();
+
+# Assign the page output to main frame template
+
+ $smarty->assign('sMainFrameBlockData',$sTemp);
+
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
 ?>
-	</td>
-  </tr>
-</table>
-<p>
-<?php
-require($root_path.'include/inc_load_copyrite.php');?>
-</BODY>
-</HTML>

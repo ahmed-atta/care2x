@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -28,12 +28,40 @@ if($n==$n2)
 else $n_error=1;
 
 if(!isset($userid)) $userid=$HTTP_SESSION_VARS['sess_user_name'];
+
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('system_admin');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',$LDPWChange);
+
+# href for return button
+ $smarty->assign('pbBack',$breakfile);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('pw_change.php')");
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',$LDPWChange);
+
+ # Body Onload js
+ if($mode!="pwchg") $smarty->assign('sOnLoadJs','onLoad="document.pwchanger.userid.focus()"');
+
+# Collect javascript code
+
+ob_start();
 ?>
 
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
- 
 <script language=javascript>
 function pruf(d)
 {
@@ -46,29 +74,21 @@ function pruf(d)
 </script>
  
 <?php
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+$smarty->append('JavaScript',$sTemp);
+
+# Buffer page output
+
+ob_start();
 
 ?>
-</HEAD>
-
-<BODY topmargin=0 leftmargin=0 marginheight=0 marginwidth=0 bgcolor=<?php echo $cfg['bot_bgcolor']; if($mode!="pwchg") echo ' onLoad="document.pwchanger.userid.focus()"'; ?>>
 
 <P>
 
-
-<table width=100% border=0 cellspacing=0>
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor'];?>">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor'];?>"  SIZE=+2  FACE="Arial"><STRONG>&nbsp;<?php echo $LDPWChange ?>
-</STRONG></FONT>
-</td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('pw_change.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
-</tr>
-<tr>
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2><p><br>
-<?php if($n_error) : ?><font face="verdana,arial" size=3 color="#990000">
+<?php if($n_error) : ?><font class="warnprompt">
 <img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"> <?php echo $LDNewPwDiffer ?>
 </font>
 <?php endif ?>
@@ -81,7 +101,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 
 <?php if (($pass=='check')&&$passtag) 
 {
-echo '<FONT  COLOR="red"  SIZE=+2  FACE="Arial"><STRONG>';
+echo '<FONT  class="warnprompt">';
 
 $errbuf=$title;
 
@@ -103,7 +123,7 @@ switch($passtag)
 
 logentry($userid,$keyword,$errbuf,$thisfile,$fileforward);
 
-echo '</STRONG></FONT><p>';
+echo '</FONT><p>';
 
 }
 ?>
@@ -116,14 +136,14 @@ echo '</STRONG></FONT><p>';
 
 <table border="0" cellpadding="20" cellspacing="0" bgcolor=#ffffdd>
 <tr>
-<td><font face=verdana,arial size=2 color=#800000>
+<td><font color=#800000>
 <p>
 <b><?php echo $LDUserIdPWPrompt ?></b><p></font>
-<font face=verdana,arial size=2 color=#000080><?php echo $LDUserId ?>:<br>
+<font color=#000080><?php echo $LDUserId ?>:<br>
 <input type="text" name="userid" size=25 maxlength=40 value="<?php echo $userid ?>"><br>
 <?php echo $LDPassword ?>:<br>
 <input type="password" name="keyword" size=25 maxlength=40><p>
-<font face=verdana,arial size=2 color=#800000>
+<font color=#800000>
 <b></b></font>
 <p><?php echo $LDNewPwPrompt ?><br>
 <input type="password" name="n" size=25 maxlength=40 value=""><br>
@@ -146,17 +166,24 @@ echo '</STRONG></FONT><p>';
 </table>
 </form>
 <?php endif ?>   
-</ul>
-<p><br>
 
-</td>
-</tr>
-</table>        
 <p>
+
 <a href="<?php echo $breakfile; ?>"><img <?php if($mode=='pwchg') echo createLDImgSrc($root_path,'close2.gif','0'); else echo createLDImgSrc($root_path,'cancel.gif','0'); ?>>
 </a>
-<p>
+
+</ul>
 <?php
-require($root_path.'include/inc_load_copyrite.php');
-?></BODY>
-</HTML>
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+# Assign page output to the mainframe template
+
+$smarty->assign('sMainFrameBlockData',$sTemp);
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
+?>

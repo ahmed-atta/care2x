@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -49,36 +49,29 @@ if(!$mday)
 	$year=$arraybuf[2];
 	$daytag=date("w",mktime(0,0,0,$month,$day,$year));
  }
- 
+
 
 $dbtable='care_cafe_menu';
 
-/* Establish db connection */
-if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
+include_once($root_path.'include/inc_date_format_functions.php');
 
-if($dblink_ok)
+
+$sql="SELECT menu FROM $dbtable WHERE cdate='".formatDate2STD($myear."-".$mmonth."-".$mday,"yyyy-mm-dd")."'";
+
+if(defined('LANG_DEPENDENT') && (LANG_DEPENDENT==1))
 {
-    include_once($root_path.'include/inc_date_format_functions.php');
-    
+	$sql.="' AND lang='".$lang."'";
+}
 
-	$sql="SELECT menu FROM $dbtable WHERE cdate='".formatDate2STD($myear."-".$mmonth."-".$mday,"yyyy-mm-dd")."'";
-    
-	if(defined('LANG_DEPENDENT') && (LANG_DEPENDENT==1))
-    {
-	    $sql.="' AND lang='".$lang."'";
-    }
+//echo $sql;
+if($ergebnis=$db->Execute($sql))
+{
+	$content=$ergebnis->FetchRow();
+}
+else echo '<p>'.$sql.'<p>$LDDbNoRead';
 
-	
-	//echo $sql;
-	if($ergebnis=$db->Execute($sql))
-    {
-		$content=$ergebnis->FetchRow();
-	}
-	else echo '<p>'.$sql.'<p>$LDDbNoRead'; 
-				
-	if(!$content['menu']) $content['menu']=$LDNoMenu;
+if(!$content['menu']) $content['menu']=$LDNoMenu;
 
-  } else { echo "$LDDbNoLink<br> $sql<br>"; }
 
 function aligndate(&$ad,&$am,&$ay)
 {
@@ -120,9 +113,12 @@ function editcafe()
 
 }
 </script>
+
+<?php require($root_path.'include/inc_css_a_hilitebu.php'); ?>
+
 </head>
 <body>
-<FONT  SIZE=8 COLOR="#cc6600" FACE="verdana,Arial">
+<FONT  SIZE=8 COLOR="#cc6600">
 <a href="javascript:editcafe()"><img <?php echo createComIcon($root_path,'basket.gif','0') ?>></a> <b><?php echo $LDCafeMenu ?></b></FONT>
 <form action="cafenews-menu.php" method="post">
 
@@ -133,15 +129,15 @@ function editcafe()
 <table border=0 cellspacing=1 cellpadding=3>
   <tr>
     <td colspan=7 bgcolor="#ccffff">
-	<FONT  SIZE=3 COLOR="#0000cc" FACE="verdana,Arial"><?php echo $LDThisWeek ?>
+	<FONT  SIZE=3 COLOR="#0000cc"><?php echo $LDThisWeek ?>
 </font>
 </td>
     <td colspan=7 bgcolor="#ccffff">
-	<FONT  SIZE=3 COLOR="#0000cc" FACE="verdana,Arial"><?php echo $LDNextWeek ?>
+	<FONT  SIZE=3 COLOR="#0000cc"><?php echo $LDNextWeek ?>
 </font>
 </td>  
      <td colspan=7 bgcolor="#ccffff">
-	<FONT  SIZE=3 COLOR="#0000cc" FACE="verdana,Arial"><?php echo $LD3rdWeek ?>
+	<FONT  SIZE=3 COLOR="#0000cc"><?php echo $LD3rdWeek ?>
 </font>
 </td> 
 </tr>
@@ -157,7 +153,7 @@ function editcafe()
 	if ($spot)  echo ' bgcolor="yellow">';
 		else echo ' bgcolor="#ccffff">';
 	echo '<a href="';
-	if($spot) echo "#\""; else echo 'cafenews-menu.php'.URL_APPEND.'&week='.$week.'&myear='.$year.'&mmonth='.$month.'&mday='.$acttag.'" ';
+	if($spot) echo '#"'; else echo 'cafenews-menu.php'.URL_APPEND.'&week='.$week.'&myear='.$year.'&mmonth='.$month.'&mday='.$acttag.'" ';
 	echo ' title="'.formatDate2Local($year.'-'.$month.'-'.$acttag,$date_format).'">';
 	if($spot) echo '<font color="#0000cc">';else echo '<font color="#d6d6d6">';
 	echo '<b>'.$dayname[$dyidx].'</b>';
@@ -178,13 +174,13 @@ function editcafe()
 <p>
 <table border=0 cellspacing=0 cellpadding=10>
   <tr bgcolor="#ccffff" >
-    <td colspan=3><FONT  SIZE=2  FACE="verdana,Arial"><b><?php echo $LDMenu ?></b><p>
+    <td colspan=3><b><?php echo $LDMenu ?></b><p>
 <?php echo nl2br($content[menu]) ?>	
  </td>
   </tr>
 
  <tr>    
- <td colspan=3><p><br><FONT  SIZE=2  FACE="verdana,Arial">
+ <td colspan=3><p><br>
 <a href="<?php echo $returnfile ?>"><img <?php echo createComIcon($root_path,'l-arrowgrnlrg.gif','0') ?>> <?php echo $LDBack2CafeNews ?></a></td>
   </tr>
  </table>

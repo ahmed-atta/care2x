@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'/include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -34,19 +34,19 @@ $dbtable='care_phone';
 $toggle=0;
 $linecount=0;
 
-
 $fielddata='name, vorname, inphone1, inphone2, inphone3, funk1, funk2, exphone1, exphone2';
 
 $keyword=trim($keyword);
 
 if(($keyword)&&($keyword!=' ')) {
 
-			$sql="SELECT $fielddata FROM $dbtable WHERE name $sql_LIKE '$keyword%' OR vorname $sql_LIKE '$keyword%' ORDER BY name";
+	$sql="SELECT $fielddata FROM $dbtable WHERE name $sql_LIKE '$keyword%' OR vorname $sql_LIKE '$keyword%' ORDER BY name";
 
-			if($ergebnis=$db->Execute($sql)) {
-				$linecount=$ergebnis->RecordCount();
-			}
-			 else {echo "<p>".$sql."<p>$LDDbNoRead";};
+	if($ergebnis=$db->Execute($sql)) {
+		$linecount=$ergebnis->RecordCount();
+	} else {
+		echo "<p>".$sql."<p>$LDDbNoRead";
+	}
 }
 
 ?>
@@ -56,7 +56,7 @@ if(($keyword)&&($keyword!=' ')) {
 <?php echo setCharSet(); ?>
  <TITLE></TITLE>
  
-  <script language="javascript">
+<script language="javascript">
 <!-- 
 function pruf(d)
 {
@@ -76,24 +76,26 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <?php if (!$cfg['dhtml']){ echo ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 
 <img <?php echo createComIcon($root_path,'phone.gif','0','absmiddle') ?>>
-<FONT  COLOR="<?php echo $cfg[top_txtcolor] ?>"  SIZE=6  FACE="verdana"> <b><?php echo "$LDPhoneDir $LDSearch" ?></b></font>
+<FONT  COLOR="<?php echo $cfg[top_txtcolor] ?>"  SIZE=6 > <b><?php echo "$LDPhoneDir $LDSearch" ?></b></font>
 <table width=100% border=0 cellpadding="0" cellspacing="0">
 <tr>
 <td colspan=3><img <?php echo createLDImgSrc($root_path,'such-b.gif','0') ?>><a href="phone_list.php<?php echo URL_APPEND; ?>"><img <?php echo createLDImgSrc($root_path,'phonedir-gray.gif','0') ?> <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="phone_edit_pass.php<?php echo URL_APPEND; ?>"><img <?php echo createLDImgSrc($root_path,'newdata-gray.gif','0') ?> <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
 <tr >
-<td bgcolor=#333399 colspan=3>
-<FONT  SIZE=1  FACE="Arial"><STRONG> &nbsp; </STRONG></FONT>
+<td class="passborder" colspan=3>
+&nbsp;
 </td>
 </tr>
-<tr bgcolor="#DDE1EC" >
-<td bgcolor=#333399>&nbsp;</td>
-<td ><p><br>
+<tr>
+<td   class="passborder">&nbsp;</td>
+<td>
+
+<p><br>
+
 <ul>
-<FONT    SIZE=-1  FACE="Arial">
 
 <FORM action="phone.php" method="post" name="searchdata" onSubmit="return pruf(this)">
-<font face="Arial,Verdana"  color="#000000" size=-1>
+
 <B><?php echo $LDKeywordPrompt ?></B></font><p>
 <font size=3><INPUT type="text" name="keyword" size="14" maxlength="40" onfocus=this.select() value="<?php echo $keyword ?>"></font> 
 <!-- <INPUT type="submit" name="versand" value="<?php echo $LDSEARCH ?>"> -->
@@ -111,21 +113,22 @@ if ($linecount>0) {
 
     echo "<hr width=80% align=left><p>".str_replace("~nr~",$linecount,$LDPhoneFound)."<p>";
     mysql_data_seek($ergebnis,0);
-    echo "<table border=0 cellpadding=3 cellspacing=1> <tr bgcolor=#0000aa>";
+    echo '<table border=0 cellpadding=3 cellspacing=1>
+	<tr class="wardlisttitlerow">';
 	
     for($i=0;$i<sizeof($fieldname);$i++) {
-	    echo"<td><font face=arial size=2 color=#ffffff><b>".$fieldname[$i]."</b></td>";
+	    echo"<td>".$fieldname[$i]."</td>";
 		
 	 }
 					echo "</tr>";
 					while($zeile=$ergebnis->FetchRow())
 					{
-						echo "<tr bgcolor=";
-						if($toggle) { echo "#efefef>"; $toggle=0;} else {echo "#ffffff>"; $toggle=1;};
+						echo "<tr class=";
+						if($toggle) { echo "wardlistrow2>"; $toggle=0;} else {echo "wardlistrow1>"; $toggle=1;};
 	
 						for($i=0;$i<$ergebnis->FieldCount();$i++) 
 						{
-							echo"<td><font face=arial size=2>";
+							echo"<td>";
 							if($zeile[$i]=="")echo "&nbsp;"; else echo $zeile[$i];
 							echo "</td>";
 						}
@@ -137,7 +140,7 @@ if ($linecount>0) {
 						echo '
 						<p><font color=red><B>New Search:</font>
 						<FORM action="phone.php" method="post" onSubmit="return pruf(this)" name="form2">
-						<font face="Arial,Verdana"  color="#000000" size=-1>
+
 						'.$LDKeywordPrompt.'</B><p>
 						<INPUT type="text" name="keyword" size="14" maxlength="25" value="'.$keyword.'"> 
 						<INPUT type="submit" name="versand" value="'.$LDSEARCH.'"></font>
@@ -165,13 +168,12 @@ if ($linecount>0) {
 <img <?php echo createComIcon($root_path,'frage.gif','0') ?>> <a href="javascript:gethelp('phone_how2start.php','search','newphone')"><?php echo $LDHowEnter ?></a><br>
 </ul>
 &nbsp;
-</FONT>
 <p>
 </td>
-<td bgcolor=#333399>&nbsp;</td>
+<td  class="passborder">&nbsp;</td>
 </tr>
 <tr >
-<td bgcolor="#333399" colspan=3><font size=1>
+<td  class="passborder" colspan=3>
 &nbsp; 
 </td>
 </tr>
@@ -181,9 +183,6 @@ if ($linecount>0) {
 <?php
 require($root_path.'include/inc_load_copyrite.php');
  ?>
-
-</FONT>
-
 
 </BODY>
 </HTML>

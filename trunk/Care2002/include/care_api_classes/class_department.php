@@ -11,7 +11,7 @@ require_once($root_path.'include/care_api_classes/class_core.php');
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance.
 * @author Elpidio Latorilla
 * @version beta 1.0.08
-* @copyright 2002,2003,2004,2005 Elpidio Latorilla
+* @copyright 2002,2003,2004,2005,2005 Elpidio Latorilla
 * @package care_api
 */
 class Department extends Core {

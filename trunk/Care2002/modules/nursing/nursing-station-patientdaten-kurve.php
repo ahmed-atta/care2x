@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -192,28 +192,54 @@ function aligndate(&$ad,&$am,&$ay)
 		}
 	}
 }
+
+# Prepare title
+$sTitle = "$LDFeverCurve $station ($jahr";
+if($kmonat==12) if($tag>25) $sTitle = $sTitle." - ".($jahr +1);
+$sTitle = $sTitle.")";
+
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('system_admin');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',$sTitle);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('nursing_feverchart.php','main','','$station','Fever chart')");
+
+ # hide return button
+ $smarty->assign('pbBack',FALSE);
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',$sTitle);
+
+ # Body Onload js
+ if(!$nofocus) $smarty->assign('sOnLoadJs','onLoad="if (window.focus) window.focus()"');
+
+ # Collect js code
+
+ ob_start();
+
 ?>
 
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
- <TITLE><?php echo $LDFeverCurve ?></TITLE>
-
 <style type="text/css" name="2">
-	A:link  {text-decoration: none; }
-	A:hover { color: red }
-	A:active {text-decoration: none;}
-	A:visited {text-decoration: none;}
 
 .pblock{ font-family: verdana,arial; }
-
 div.box { border: solid; border-width: thin; width: 100% }
-
 div.pcont{ margin-left: 3; }
-
 .a12{ font-family: verdana,arial; font-size:12;}
 .a10{ font-family: arial; font-size:10;}
+
 </style>
 
 <script language="javascript">
@@ -321,33 +347,24 @@ function returnifok(){
 	}
 //-->
 </script>
+
 <?php
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+$smarty->append('JavaScript',$sTemp);
+
+# Buffer page output
+
+ob_start();
 
 ?>
-
-
-
-<BODY bgcolor=#cde1ec <?php if(!$nofocus) echo 'onLoad="if (window.focus) window.focus()"'; ?> topmargin=0 leftmargin=0 marginwidth=0 marginheight=0>
 
 <script language="">
 <!-- Script Begin
 var dblclk=0;
 //  Script End -->
 </script>
-</HEAD>
-
-<table width=100% border=0 cellpadding="0" cellspacing=0>
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2 FACE="Arial"><STRONG> <?php echo "$LDFeverCurve $station ($jahr"; if($kmonat==12) if($tag>25) echo " - ".($jahr +1);?>)</STRONG></FONT>
-</td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><!-- <a href="javascript:window.history.back()"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a> --><a href="javascript:gethelp('nursing_feverchart.php','main','','<?php echo $station ?>','Fever chart')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
-</tr>
-<tr>
-<td colspan=2 bgcolor="#9f9f9f">
-
 
 <form name="berichtform">
 <?php
@@ -397,11 +414,11 @@ for ($i=$tag,$acttag=$tag,$d=0,$tgbuf=$tagname;$i<($tag+7);$i++,$d++,$tgbuf++,$a
 
 	if(!$d) echo' align=left width="98">';else if($d>5) echo' align=right width="98">';else echo' align=center width="98">';
 	if(!$d) echo '<a href="#">
-		<img '.createComIcon($root_path,'l_arrowgrnsm.gif','0').' alt="'.$LDBackDay.'" onMouseDown="setStartDate(\'dayback\',\''.$pn.'\',\''.$jahr.'\',\''.$kmonat.'\',\''.$tag.'\',\''.$station.'\',\''.$tagname.'\');return false;"></a>';
+		<img '.createComIcon($root_path,'l_arrowgrnsm.gif','0','',TRUE).' alt="'.$LDBackDay.'" onMouseDown="setStartDate(\'dayback\',\''.$pn.'\',\''.$jahr.'\',\''.$kmonat.'\',\''.$tag.'\',\''.$station.'\',\''.$tagname.'\');return false;"></a>';
 	echo '
 	<font face="verdana,arial" size="2" color="#000000" >'.formatShortDate2Local($actmonat,$acttag,$date_format).' . '.$tage[$tgbuf];
 	if ($d==6) echo ' <a href="#">
-		<img '.createComIcon($root_path,'r_arrowgrnsm.gif','0').' alt="'.$LDFwdDay.'" onMouseDown="setStartDate(\'dayfwd\',\''.$pn.'\',\''.$jahr.'\',\''.$kmonat.'\',\''.$tag.'\',\''.$station.'\',\''.$tagname.'\')"></a>';
+		<img '.createComIcon($root_path,'r_arrowgrnsm.gif','0','',TRUE).' alt="'.$LDFwdDay.'" onMouseDown="setStartDate(\'dayfwd\',\''.$pn.'\',\''.$jahr.'\',\''.$kmonat.'\',\''.$tag.'\',\''.$station.'\',\''.$tagname.'\')"></a>';
 	
 	echo '</td>';
 	//$tgbuf++;
@@ -775,12 +792,18 @@ echo
 <a href="<?php echo "$breakfile" ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>></a>
 </FONT>
 </ul>
-</td>
 
-</tr>
-</table>        
 <?php
-require($root_path.'include/inc_load_copyrite.php');
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+# Assign page output to the mainframe template
+
+$smarty->assign('sMainFrameBlockData',$sTemp);
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
 ?>
-</BODY>
-</HTML>

@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -54,40 +54,46 @@ if(($mode=='delete')&&($sure)&&($keyword!='')&&($keytype!='')) {
 //simulate update to search the keyword
 $update=true;
 
+# Load search routine
 require($root_path."include/inc_products_search_mod.php");
 
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
+
+ # Title in the title bar
+ $smarty->assign('sToolbarTitle',"$title $LDPharmaDb $LDManage");
+
+ # href for the back button
+// $smarty->assign('pbBack',$returnfile);
+
+ # href for the help button
+ $smarty->assign('pbHelp',"javascript:gethelp('products_db.php','delete','$from','$cat')");
+
+ # href for the close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',"$title $LDPharmaDb $LDManage");
+
+
+ # Buffer page output
+ ob_start()
+
 ?>
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
- <TITLE> <?php echo $title ?> - Verwalten </TITLE>
-
-<?php 
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-?></HEAD>
-
-<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
 
 <a name="pagetop"></a>
 
-<table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
-<tr valign=top>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="45">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG> &nbsp; <?php echo "$LDPharmacy $LDPharmaDb $LDManage" ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('products_db.php','delete','<?php echo $from ?>','<?php echo $cat ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
-</tr>
-<tr valign=top >
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
 <ul>
-<FONT face="Verdana,Helvetica,Arial" size=2>
-<p><br>
-
-
+<p>
+<br>
 
 <?php 
 if(!$sure)
@@ -109,20 +115,23 @@ else
 			<img '.createMascot($root_path,'mascot1_r.gif','0','middle').'><FONT face="Verdana,Helvetica,Arial" size=3  color="#800000">
 		'.$LDNoDelete.'</font><p>';
 }
-	//simulate saved condition to force the static display of data
-	$saveok=true;
 
+//simulate saved condition to force the static display of data
+$saveok=true;
+
+# Workaround to force display of form template
+$bShowThisForm = TRUE;
+
+# Load search results display routine
 require($root_path."include/inc_products_search_result_mod.php");
-
 
 ?>
 <p>
 <a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0','right') ?>></a>
 
+<?php 
 
-<?php if(!$sure)
-
-echo'
+if(!$sure) echo'
 	<form action="'.$thisfile.'" method="get" name=delform>
  <input type="hidden" name="sure" value="1">
  <input type="hidden" name="sid" value="'.$sid.'">
@@ -138,18 +147,17 @@ echo'
 ?>
 </ul>
 
-</FONT>
-<p>
-</td>
-</tr>
-<tr>
-<td bgcolor=<?php echo $cfg['bot_bgcolor']; ?> height=70 colspan=2>
 <?php
-require($root_path.'include/inc_load_copyrite.php');
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+# Assign the form template to mainframe
+
+ $smarty->assign('sMainFrameBlockData',$sTemp);
+
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
 ?>
-</td></tr>
-</table>        
-&nbsp;
-</FONT>
-</BODY>
-</HTML>

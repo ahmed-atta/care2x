@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -67,10 +67,42 @@ if(($mode=='delete')&&($keyword!=''))
 	//include($root_path.'include/inc_products_ordercatalog_delete.php');
 	$delete_ok=$product_obj->DeleteCatalogItem($keyword,$cat);
 }
+
+# Prepare title
+$sTitle="$title::$LDCatalog::";
+$buff=$dept_obj->LDvar($dept_nr);
+if(isset($$buff)&&!empty($$buff)) $sTitle=$sTitle.$$buff;
+	else $sTitle=$sTitle.$dept_obj->FormalName($dept_nr);
+
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',$sTitle);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('products.php','maincat','','$cat')");
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',$sTitle);
+
+ # Body OnLoad Javascript code
+ $smarty->assign('sOnLoadJs','onLoad="document.smed.keyword.focus()"');
+
+ # Buffer page output
+ ob_start();
 ?>
-<?php html_rtl($lang); ?>
-<head>
-<?php echo setCharSet(); ?>
+
 <script language=javascript>
 function popinfo(b)
 {
@@ -80,31 +112,18 @@ function popinfo(b)
 
 </script>
 <?php 
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+$smarty->append('JavaScript',$sTemp);
+
+# Buffer page output
+ob_start();
+
 ?>
-</head>
-<BODY  topmargin=0 leftmargin=0  marginwidth=0 marginheight=0 onLoad="document.smed.keyword.focus()"
-<?php echo "bgcolor=".$cfg['body_bgcolor']; if (!$cfg['dhtml']){ echo ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
 
-<table width=100% border=0 cellspacing=0 height=100%>
-
-<tr valign=top height=10>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" >
-<FONT  COLOR="<?php echo  $cfg['top_txtcolor']; ?>"  SIZE=+1  FACE="Arial"><STRONG>
-<?php 
-echo "$title::$LDCatalog::";
-$buff=$dept_obj->LDvar($dept_nr);
-if(isset($$buff)&&!empty($$buff)) echo $$buff;
-	else echo $dept_obj->FormalName($dept_nr);
-?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('products.php','maincat','','<?php echo $cat ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
-</tr>
-<tr valign=top >
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2><p><br>
 <ul>
-
 
 <form action="<?php echo $thisfile; ?>" method="get" name="smed">
 <font face="Verdana, Arial" size=1 color=#800000><?php echo $LDSearchWordPrompt ?>:
@@ -122,6 +141,10 @@ if(isset($$buff)&&!empty($$buff)) echo $$buff;
 <?php 
 if (($mode=='search')&&($keyword!='')) {
 	//set order catalog flag
+	
+	# Workaround to force the form template to be shown
+	$bShowThisForm = TRUE;
+
 	$bcat=true;
 	include($root_path.'include/inc_products_search_result_mod.php');
 }
@@ -157,23 +180,20 @@ require($root_path."include/inc_products_ordercatalog_show.php");
 
 <p>
 <a href="<?php echo "$breakfile" ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  alt="<?php echo $LDClose ?>"></a>
-
 <p>
 </ul>
 
-</FONT>
-
-</td>
-</tr>
-
-<tr valign=top  >
-<td bgcolor=<?php echo $cfg['bot_bgcolor']; ?> height=70 colspan=2>
 <?php
-require($root_path.'include/inc_load_copyrite.php');
-?>
-</td></tr>
-</table>        
-&nbsp;
+$sTemp = ob_get_contents();
+ ob_end_clean();
 
-</body>
-</html>
+# Assign the data  to the main frame template
+
+ $smarty->assign('sMainFrameBlockData',$sTemp);
+
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
+?>

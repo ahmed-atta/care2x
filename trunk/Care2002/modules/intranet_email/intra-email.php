@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -319,14 +319,57 @@ $content[body]";
   		else { echo "$LDDbNoLink<br>$sql"; } 
 } // end of if mode!=""
 
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
+ 
+ # Prepare title
+ $sTemp = "$LDIntraEmail - ";
+
+	if($mode=='compose'){
+		$sTemp.=$LDComposeMail;
+	}else{
+		switch($folder){
+			case 'inbox':  $sTemp.=$LDInbox; break;
+			case 'sent':   $sTemp.=$LDSent; break;
+			case 'drafts': $sTemp.=$LDDrafts; break;
+			case 'trash':  $sTemp.=$LDRecycle; break;
+			default:
+		}
+	}
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',$sTemp);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('intramail.php','mail','$mode','$folder','$sendok')");
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('title',$sTemp);
+ 
+ # Set body onLoad javascript
+ if($mode=='compose') $smarty->assign('sOnLoadJs','onLoad="document.mailform.recipient.focus()"');
+
+# Collect extra javascript code
+
+ob_start();
+
 ?>
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
- <script language="javascript" >
+
+<script language="javascript" >
 <!-- 
 var feld="recipient";
+
 <?php
 if($mode=='listmail')
 echo '
@@ -410,51 +453,21 @@ function chgQuickAddr()
 // -->
 </script> 
 
-<?php 
-require_once($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-?>
-
-</HEAD>
-
-<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
 <?php
-if($mode=='compose') echo ' onLoad="document.mailform.recipient.focus()"';
- if (!$cfg['dhtml']){ echo ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
-<?php echo $test ?>
-<?php //foreach($argv as $v) echo "$v "; ?>
-<table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
-<tr valign=top>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="30">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG> <?php echo $LDIntraEmail ?> - 
-<?php
-if($mode=='compose') echo $LDComposeMail;	
- else switch($folder)
-	{
-		case 'inbox': echo $LDInbox; break;
-		case 'sent': echo $LDSent; break;
-		case 'drafts': echo $LDDrafts; break;
-		case 'trash': echo $LDRecycle; break;
-		default: 
-	}				
-?>
-</STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();"><img 
-<?php echo createLDImgSrc($root_path,'back2.gif','0','absmiddle') ?> 
-style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a 
-href="javascript:gethelp('intramail.php','mail','<?php echo $mode ?>','<?php echo $folder ?>','<?php echo $sendok ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a></td>
-</tr>
-<tr valign=top >
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
 
-<FONT face="Verdana,Helvetica,Arial" size=2>
-<?php
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+$smarty->append('JavaScript',$sTemp);
+
+# Start buffering page output
+
+ob_start();
+
 /**
 * Top horizontal nav bar
 */
  echo '
-<FONT face="Verdana,Helvetica,Arial" size=2>
   &nbsp; <b>';
   if($mode!='listmail') echo '<a href="intra-email.php'.URL_APPEND.'&mode=listmail">'.$LDInbox.'</a> | ';
   	else echo $LDInbox.' | ';
@@ -464,7 +477,7 @@ href="javascript:gethelp('intramail.php','mail','<?php echo $mode ?>','<?php ech
 	<a href="javascript:gethelp(\'intramail.php\',\'mail\',\''.$mode.'\',\''.$folder.'\',\''.$sendok.'\')">'.$LDHelp.'</a>| 
 	<a href="intra-email-pass.php'.URL_APPEND.'">'.$LDLogout.'</a></b>
   <hr color=#000080>
-   &nbsp; <FONT  color="#800000">'.$HTTP_COOKIE_VARS[$local_user.$sid].'</font><br>
+   &nbsp; <FONT  color="#800000">'.$HTTP_COOKIE_VARS[$local_user.$sid].'<br>
 ';
 /*	echo '<a href="intra-email-addrbook.php'.URL_APPEND.'&mode='.$mode.'&folder='.$folder.'">'.$LDAddrBook.'</a> | 
 	<a href="intra-email-options.php'.URL_APPEND.'">'.$LDOptions.'</a> | 
@@ -482,14 +495,14 @@ echo '<ul><form name="mailform" action="'.$thisfile.'" method="post" onSubmit="r
 	if(($mode=='sendmail')&&($sendok)) 
 	{
 
-		echo '<img '.createMascot($root_path,'mascot1_r.gif','0','bottom').'><font color="#0000ff" size=3> <b>';
+		echo '<img '.createMascot($root_path,'mascot1_r.gif','0','bottom').'> <font class="prompt">';
 		if($folder=='drafts') echo $LDEmail2Drafts;
 		 else echo $LDEmailSent;
-		 echo '</b></font>';
+		 echo '</font>';
 	}
 echo '
   
-<table border=0 cellspacing=1 cellpadding=3>
+<table border=0 cellspacing=1 cellpadding=3 width="80%" height="80%">
     <tr>
       <td bgcolor="#f3f3f3" align=right><FONT face="Verdana,Helvetica,Arial" size=2 color="#000080">'.$LDRecipient.':</td>
       <td   bgcolor="#f3f3f3"><FONT face="Verdana,Helvetica,Arial" size=2 >';
@@ -580,11 +593,7 @@ echo '
 	echo '
 	    </td>
     </tr>
-    <tr>
-      <td bgcolor="#f3f3f3"></td>
-      <td bgcolor="#f3f3f3" colspan=2  align=right>
-                                    </td>
-    </tr>
+
   </table>
  	 <input type="hidden" name="sid" value="'.$sid.'">
  	 <input type="hidden" name="lang" value="'.$lang.'">
@@ -614,12 +623,12 @@ echo '
 	echo'
   <table border=0>
     <tr>
-      <td valign=top><FONT face="Verdana,Helvetica,Arial" size=2 color="#0000f0"><nobr>
+      <td valign=top><FONT color="#0000f0"><nobr>
 	  		';
 /**
 *  Left nav bar for mailboxes
 */
-	if($folder=='inbox') 
+	if($folder=='inbox')
 	echo '<img '.$img_openfolder.'> <b>'.$LDInbox.' </b>';
 		else echo '<a href="'.$thisfile.URL_APPEND.'&mode=listmail&l2h='.$l2h.'"><img '.$img_closefolder.'> '.$LDInbox.'</a>';
 	echo '<font size=1 face=verdana,arial color="#0"> (';
@@ -725,7 +734,7 @@ if($maxrow)
 else 
 {
 	echo '<img '.createMascot($root_path,'mascot1_r.gif','0','middle').'>
-			<FONT face="Verdana,Helvetica,Arial" size=3 color="#800000">';
+			<FONT class="prompt">';
 	switch($folder)
 	{
 		case 'inbox': $fbuf=$LDInbox; break;
@@ -740,9 +749,7 @@ else
   </table>
   
   ';
-}
-else if($mode=='')
-{
+}elseif($mode==''){
 	echo'<center>
 	<img '.createMascot($root_path,'mascot1_r.gif','0','middle').'> 
 	<FONT face="Verdana,Helvetica,Arial" size=3 color="#800000">
@@ -751,22 +758,17 @@ else if($mode=='')
 	<a href="'.$thisfile.URL_APPEND.'&mode=listmail">'.$LDNoteIntra.'</a>
 	</center>';
 }
-?>
-</FONT>
-<p>
-</td>
-</tr>
 
-<tr>
-<td bgcolor=<?php echo $cfg['bot_bgcolor']; ?> height=70 colspan=2>
-<?php
-require($root_path.'include/inc_load_copyrite.php');
-?>
-</td>
-</tr>
-</table>        
-&nbsp;
-</FONT>
 
-</BODY>
-</HTML>
+ $sTemp = ob_get_contents();
+ ob_end_clean();
+
+ # Assign to main template object
+	$smarty->assign('sMainFrameBlockData',$sTemp);
+
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
+?>

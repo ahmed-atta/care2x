@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -33,6 +33,10 @@ switch($target)
 	case 'currency_admin':	$title=$LDSystemLogin;
 								//$userck='ck_edv_admin_user';
 								$fileforward="edv_system_format_currency_add.php?sid=$sid&lang=$lang&from=$from";
+								break;
+	case 'modulgenerator':	$title=$LDSystemLogin;
+								//$userck='ck_edv_admin_user';
+								$fileforward=$root_path."modules/system_admin/sub_modul_neu.php?sid=$sid&lang=$lang&from=$from";
 								break;
 	default:{header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 
 }

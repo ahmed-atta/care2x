@@ -48,7 +48,7 @@ function submitform()
 	var tempstr;
 	var counter;
 	str = document.selectlab.hidden.value;
-	querystr = "confirmLabtests.php?";
+	querystr = "confirmlabtests.php?";
 
 	counter = 1;
 	for (i=0;i<document.selectlab.elements.length;i++)

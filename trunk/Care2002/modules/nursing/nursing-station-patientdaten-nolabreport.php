@@ -5,45 +5,34 @@ require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','nursing.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
-?>
 
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<META http-equiv='Cache-Control' content='no-cache, must-revalidate'>
-<META http-equiv='Pragma: no-cache'>
-<HEAD>
-<?php echo setCharSet(); ?>
- <TITLE><?php echo ucfirst($result[name_last]).",".ucfirst($result[name_first])." ".$result[date_birth]." ".$LDPatDataFolder ?></TITLE>
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
 
-<style type="text/css">
-	A:link  {text-decoration: none; }
-	A:hover { color: red }
-	A:active {text-decoration: none;}
-	A:visited {text-decoration: none;}
-</style>
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('nursing');
 
-<?php
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-?>
-</HEAD>
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',"$LDPatDataFolder $station");
 
-<BODY bgcolor=#cde1ec  topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 link="#800080" vlink="#800080" >
+ # hide return button
+ $smarty->assign('pbBack',FALSE);
 
-<table width=100% border=0 cellpadding="5" cellspacing=0>
-<tr>
-<td bgcolor="navy" >
-<FONT  COLOR="white"  SIZE=+2  FACE="Arial"><STRONG><?php echo "$LDPatDataFolder $station"; ?></STRONG></FONT>
-</td>
-<td bgcolor="navy" height="10" align=right></a><a href="javascript:gethelp('patient_folder.php','<?php echo $nodoc ?>','','<?php echo $station ?>','Main folder')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?> alt="<?php echo $LDHelp ?>"></a><a href="javascript:document.retform.submit()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"></a></td></tr>
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('patient_folder.php',' $nodoc','','$station','Main folder')");
 
-</tr>
-<tr>
-<td colspan=2>
- <ul><p><br>
- <?php
- echo '
-	<center><FONT  COLOR="maroon"  SIZE=4  FACE="Arial"><p><br>
+ # href for close button
+ $smarty->assign('breakfile','javascript:document.retform.submit()');
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',"$LDPatDataFolder $station");
+ 
+$sTemp= '<ul><p><br>
+	<center><FONT class="warnprompt"><p><br>
 	<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'> &nbsp;
 	<b>'.$LDNoLabReport.'</b><p>
 		<form method="post" action="'.$root_path.'modules/nursing/nursing-station-patientdaten.php" name="retform">
@@ -55,18 +44,16 @@ require($root_path.'include/inc_css_a_hilitebu.php');
  <input type="hidden" name="nodoc" value="">  
  <input type="submit" value=" OK ">
      </form>
-	</center>';
- ?>
-<p>
-</FONT>
-</ul>
-<p>
-</td>
-</tr>
-</table>        
-<p>
-<?php
-require($root_path.'include/inc_load_copyrite.php');
+	</center>
+	<p>
+</ul>';
+
+# Assign page output to the mainframe template
+
+$smarty->assign('sMainFrameBlockData',$sTemp);
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
 ?>
-</BODY>
-</HTML>

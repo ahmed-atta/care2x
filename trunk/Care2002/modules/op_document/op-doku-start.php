@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -142,9 +142,8 @@ if($mode=='save')
 			$mode='?';
 		} 	
 	}
-		
-	# Filter the search and paginate modes
-	if($mode=='search'||$mode=='paginate'){
+	
+	if($mode=='search'||$mode=='paginate'){	# Filter the search and paginate modes
 
 		# Initialize page´s control variables
 		if($mode=='paginate'){
@@ -202,7 +201,9 @@ if($mode=='save')
 		$pagen->setSortDirection($odir);
 	
 	}else{
+
 		# switch possible modes
+		
 		switch($mode){
 									
 			case 'update':
@@ -347,23 +348,54 @@ if($mode=='save')
 						}
 					}else echo "$sql<br>$LDDbNoRead"; 
 					break;
-					
+
+			case 'select': break;
+
 			default:
-			
+
 					if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) $mode="dummy";
 					
 		} // end of switch
 	}
 
+# Start the smarty templating
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('nursing');
+
+# Added for the common header top block
+
+ $smarty->assign('sToolbarTitle',"$LDOrDocument :: (".$HTTP_SESSION_VARS['sess_dept_name'].")");
+
+ # href for help button
+ if(!$mode) $sBuffer ='dummy';
+ 	else $sBuffer = $mode;
+
+ $smarty->assign('pbHelp',"javascript:gethelp('opdoc.php','create','$sBuffer')");
+
+ # hide return button
+ $smarty->assign('pbBack',FALSE);
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',"$LDOrDocument :: (".$HTTP_SESSION_VARS['sess_dept_name'].")");
+
+ # Prepare Body onLoad javascript code
+ if(!isset($mode) || empty($mode) || ($mode=='search'&&!$rows) || $mode=='dummy') {
+	$smarty->assign('sOnLoadJs','onLoad="document.searchform.searchkey.focus();"');
+ }
+ /**
+ * collect JavaScript for Smarty
+ */
+ ob_start();
 ?>
-
-
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
- <TITLE><?php echo $LDOrDocument ?></TITLE>
-
 
 <script  language="javascript">
 <!-- 
@@ -376,7 +408,7 @@ function hilite(idx,mode)
 	{
 	if(mode==1) idx.filters.alpha.opacity=100
 	else idx.filters.alpha.opacity=70;
-	}	
+	}
 function lookmatch(d)
 {
 	m=d.matchcode.value;
@@ -454,52 +486,33 @@ function chkForm(d){
 <script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
 <script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
-
-<style type="text/css" name=cat>
-
-div.cats{
-	position: relative;
-	right: 10;
-	top: 80;
-}
-</style>
-<?php 
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-?>
-</HEAD>
-
-<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 bgcolor=<?php echo $cfg['body_bgcolor']; ?>
 <?php
 
- if(!isset($mode) || empty($mode) || $mode=='dummy' || ($mode=='search'&&!$rows)) {
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+$smarty->append('JavaScript',$sTemp);
+
+# Buffer page output
+
+ob_start();
+
 ?>
- onLoad="document.searchform.searchkey.focus();"
-<?php
-}
-?>>
 
 <table width=100% border=0 cellspacing=0 cellpadding=0>
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php echo "$LDOrDocument :: (".$HTTP_SESSION_VARS['sess_dept_name'].")" ?></STRONG></FONT>
-</td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
-<a href="javascript:gethelp('opdoc.php','create','<?php if(!$mode) echo 'dummy'; else echo $mode ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  alt="<?php echo $LDClose ?>" style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a>
-</td>
-</tr>
+
 <?php require('./gui_tabs_op_doku.php'); ?>
 <tr>
-<td colspan=2  bgcolor=<?php echo $cfg['body_bgcolor']; ?>><p>
+<td colspan=2><p>
 
 <ul>
-<?php 
+<?php
 if(($mode=='search'||$mode=='paginate')&&$rows){
 
 	$append='&dept_nr='.$dept_nr.'&target='.$target;
 	# Preload  common icon images
-	$img_male=createComIcon($root_path,'spm.gif','0');
-	$img_female=createComIcon($root_path,'spf.gif','0');
+	$img_male=createComIcon($root_path,'spm.gif','0','',TRUE);
+	$img_female=createComIcon($root_path,'spf.gif','0','',TRUE);
 	$bgimg='tableHeaderbg3.gif';
 	$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
 ?>
@@ -507,7 +520,7 @@ if(($mode=='search'||$mode=='paginate')&&$rows){
 <table border=0>
   <tr>
     <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"></td>
-    <td><FONT  SIZE=3 FACE="verdana,Arial" color=#800000>
+    <td class="prompt">
 <b>
 <?php 
 
@@ -518,33 +531,29 @@ if(($mode=='search'||$mode=='paginate')&&$rows){
 </table>
 
 <table border=0 cellpadding=0 cellspacing=0>
-  <tr bgcolor=#0000aa>
-     <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+  <tr class="wardlisttitlerow">
+     <td> <b>
 	  <?php echo $pagen->makeSortLink($LDPatientNr,'encounter_nr',$oitem,$odir,$append);  ?></b></td>
-      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+      <td> <b>
 	  <?php echo $pagen->makeSortLink($LDSex,'sex',$oitem,$odir,$append);  ?></b></td>
-      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+      <td> <b>
 	  <?php echo $pagen->makeSortLink($LDLastName,'name_last',$oitem,$odir,$append);  ?></b></td>
-      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+      <td> <b>
 	  <?php echo $pagen->makeSortLink($LDName,'name_first',$oitem,$odir,$append);  ?></b></td>
-      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+      <td> <b>
 	  <?php echo $pagen->makeSortLink($LDBday,'date_birth',$oitem,$odir,$append);  ?></b></td>
     <td background="<?php echo createBgSkin($root_path,'tableHeaderbg.gif'); ?>" align=center><font face=arial size=2 color="#ffffff"><b><?php echo $LDSelect; ?></td>
 
-<!--     <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; &nbsp;<?php echo $LDPatientNr ?>&nbsp; &nbsp;</b></td>
-    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; <?php echo $LDLastName ?></b></td>
-    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; &nbsp;<?php echo $LDName ?></b></td>
-    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; &nbsp;<?php echo $LDBday ?></b></td>
-    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp;</b></td>
- -->  </tr>
+	</tr>
+
 <?php 
 $toggle=0;
 while($enc_row=$encounter->FetchRow()){
  	echo'
   <tr ';
-  if($toggle){ echo "bgcolor=#efefef"; $toggle=0;} else {echo "bgcolor=#ffffff"; $toggle=1;}
+  if($toggle){ echo 'class="wardlistrow2"'; $toggle=0;} else {echo 'class="wardlistrow1"'; $toggle=1;}
   echo '>
-    <td><FONT  SIZE=-1  FACE="Arial">&nbsp;';
+    <td>&nbsp;';
 	echo $enc_row['encounter_nr'];
    echo '&nbsp;</td><td>';
   
@@ -555,9 +564,9 @@ while($enc_row=$encounter->FetchRow()){
 	}	
    
    echo '
-    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; <a href="'.$thisfile.URL_APPEND.'&mode=select&pn='.$enc_row['encounter_nr'].'&dept_nr='.$dept_nr.'&target='.$target.'">'.$enc_row['name_last'].'</a></td>
-    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;'.$enc_row['name_first'].'</td>
-    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;'.formatDate2Local($enc_row['date_birth'],$date_format).'</td>';
+    <td>&nbsp; <a href="'.$thisfile.URL_APPEND.'&mode=select&pn='.$enc_row['encounter_nr'].'&dept_nr='.$dept_nr.'&target='.$target.'">'.$enc_row['name_last'].'</a></td>
+    <td>&nbsp; &nbsp;'.$enc_row['name_first'].'</td>
+    <td>&nbsp; &nbsp;'.formatDate2Local($enc_row['date_birth'],$date_format).'</td>';
 	echo '
 	<td><font face=arial size=2>&nbsp;';
 	echo '<a href="'.$thisfile.URL_APPEND.'&mode=select&pn='.$enc_row['encounter_nr'].'&dept_nr='.$dept_nr.'&target='.$target.'">';
@@ -569,7 +578,7 @@ while($enc_row=$encounter->FetchRow()){
 	}
 	echo '</td>';
 	echo '</tr>
-  <tr bgcolor=#0000ff>
+  <tr class="thinrow_vspacer">
   <td colspan=6 height=1><img src="'.$root_path.'gui/img/common/default/pixel.gif" border=0 width=1 height=1 align="absmiddle"></td>
   </tr>';
 }
@@ -588,12 +597,12 @@ echo '
 ?>
 	<table border="0">
           <tr>
-            <td><img <?php echo createComIcon($root_path,'angle_down_l.gif','0','absmiddle') ?>></td>
-            <td > <font color="#000099" SIZE=3  FACE="verdana,Arial"><b>
+            <td><img <?php echo createComIcon($root_path,'angle_down_l.gif','0','absmiddle',TRUE) ?>></td>
+            <td class="prompt">
 			<?php 
 				if($mode=='search') echo '<font color=maroon>'.$LDSorryNotFound.'</font>';
 					else echo $LDPlsSelectPatientFirst; 
-			?></b></font> 
+			?>
 			</td>
             <td valign="top"> 
 			<img <?php echo createMascot($root_path,'mascot1_l.gif','0','absmiddle') ?>>
@@ -626,7 +635,7 @@ $bg_img=$root_path.'gui/img/common/default/tableHeaderbg3.gif';
 	<table border="0">
           <tr>
             <td> <img <?php echo createMascot($root_path,'mascot2_r.gif','0','absmiddle') ?>></td>
-            <td><font color="#000099" SIZE=3  FACE="verdana,Arial"><b><?php echo $LDPlsFillInfo ?></b></font></td>
+            <td class="prompt"><?php echo $LDPlsFillInfo ?></td>
           </tr>
 	</table>
 <?php
@@ -636,9 +645,9 @@ $bg_img=$root_path.'gui/img/common/default/tableHeaderbg3.gif';
 
 <form method="post" action="op-doku-start.php" name="opdoc" <?php if($mode!='saveok') echo 'onSubmit="return chkForm(this)"'; ?>>
 <tr <?php if($mode=='saveok') echo "bgcolor=#ffffff"; ?>>
-<td background="<?php echo $bg_img; ?>"><FONT SIZE=-1  FACE="Arial" color=red><?php if($err_op_date) echo '*'; ?><?php echo $LDOpDate ?>:<br>
+<td background="<?php echo $bg_img; ?>"><FONT color=red><?php if($err_op_date) echo '*'; ?><?php echo $LDOpDate ?>:<br>
 </td>
-<td><FONT SIZE=-1  FACE="Arial">
+<td>
 
 <?php 
 
@@ -684,9 +693,9 @@ if($mode=='saveok'){
 <tr <?php if($mode=='saveok') echo "bgcolor=#ffffff"; ?>>
 <td background="<?php echo $bg_img; ?>">
 <p>
-<FONT SIZE=-1  FACE="Arial" <?php if($err_patnum) echo 'color=#cc0000'; ?>><?php echo $LDPatientNr ?>:
+<FONT <?php if($err_patnum) echo 'color=#cc0000'; ?>><?php echo $LDPatientNr ?>:
 </td>
-<td><FONT SIZE=-1  FACE="Arial" color="#000099">
+<td><FONT color="#000099">
 
 <?php 
 
@@ -696,9 +705,9 @@ if($mode=='saveok'){
 </td>
 </tr>
 <tr <?php if($mode=='saveok') echo "bgcolor=#ffffff"; ?>>
-<td background="<?php echo $bg_img; ?>"><FONT SIZE=-1  FACE="Arial" <?php if($err_name) echo 'color=#cc0000'; ?>><?php echo $LDLastName ?>:
+<td background="<?php echo $bg_img; ?>"><FONT <?php if($err_name) echo 'color=#cc0000'; ?>><?php echo $LDLastName ?>:
 </td>
-<td><FONT SIZE=-1  FACE="Arial" color="#000099">
+<td><FONT color="#000099">
 
 <?php 
 
@@ -708,9 +717,9 @@ if($mode=='saveok'){
 </td>
 </tr>
 <tr <?php if($mode=='saveok') echo "bgcolor=#ffffff"; ?>>
-<td background="<?php echo $bg_img; ?>"><FONT SIZE=-1  FACE="Arial" <?php if($err_vorname) echo 'color=#cc0000'; ?>><?php echo $LDName ?>:
+<td background="<?php echo $bg_img; ?>"><FONT <?php if($err_vorname) echo 'color=#cc0000'; ?>><?php echo $LDName ?>:
 </td>
-<td><FONT SIZE=-1  FACE="Arial" color="#000099">
+<td><FONT color="#000099">
 <?php 
 
    echo '<b>'.$result['name_first'].'</b>'; 
@@ -719,9 +728,9 @@ if($mode=='saveok'){
 </td>
 </tr>
 <tr <?php if($mode=='saveok') echo "bgcolor=#ffffff"; ?>>
-<td background="<?php echo $bg_img; ?>"><FONT SIZE=-1  FACE="Arial" <?php if($err_gebdatum) echo 'color=#cc0000'; ?>><?php echo $LDBday ?>:
+<td background="<?php echo $bg_img; ?>"><FONT <?php if($err_gebdatum) echo 'color=#cc0000'; ?>><?php echo $LDBday ?>:
 </td>
-<td><FONT SIZE=-1  FACE="Arial" color="#000099">
+<td><FONT color="#000099">
 <?php
 
       echo @formatDate2Local($result['date_birth'],$date_format);
@@ -732,7 +741,7 @@ if($mode=='saveok'){
 <tr <?php if($mode=='saveok') echo "bgcolor=#ffffff"; ?>>
 <td>
 </td>
-<td><FONT SIZE=-1  FACE="Arial"  color="#000099">
+<td><FONT  color="#000099">
 
 <font color="#000099">
 <?php 
@@ -747,7 +756,7 @@ switch($result['status'])
 
 </font>
 <br>
-<FONT SIZE=-1  FACE="Arial" color="#000099">
+<FONT color="#000099">
 <?php 
 
 if ($result['kasse']=="kasse")
@@ -769,9 +778,9 @@ if ($result['kasse']=="kasse")
 </tr>
 
 <tr <?php if($mode=='saveok') echo "bgcolor=#ffffff"; ?>>
-<td background="<?php echo $bg_img; ?>"><FONT SIZE=-1  FACE="Arial"  color=red><?php if($err_diagnosis) echo '*'; ?><?php echo $LDDiagnosis ?>:
+<td background="<?php echo $bg_img; ?>"><FONT  color=red><?php if($err_diagnosis) echo '*'; ?><?php echo $LDDiagnosis ?>:
 </td>
-<td><FONT SIZE=-1  FACE="Arial">
+<td>
 <?php
 
  echo createElement('diagnosis',$diagnosis,60,100); 
@@ -780,9 +789,9 @@ if ($result['kasse']=="kasse")
 </td>
 </tr>
 <tr <?php if($mode=='saveok') echo "bgcolor=#ffffff"; ?>>
-<td background="<?php echo $bg_img; ?>"><FONT SIZE=-1  FACE="Arial"  color=red> <?php if($err_localize) echo '*'; ?><?php echo $LDLocalization ?>:
+<td background="<?php echo $bg_img; ?>"><FONT  color=red> <?php if($err_localize) echo '*'; ?><?php echo $LDLocalization ?>:
 </td>
-<td><FONT SIZE=-1  FACE="Arial">
+<td>
 
 <?php
 
@@ -792,10 +801,10 @@ if ($result['kasse']=="kasse")
 </td>
 </tr>
 <tr <?php if($mode=='saveok') echo "bgcolor=#ffffff"; ?>>
-<td background="<?php echo $bg_img; ?>"><FONT SIZE=-1  FACE="Arial"  color=red><?php if($err_therapy) echo '*'; ?><?php echo $LDTherapy ?>:
+<td background="<?php echo $bg_img; ?>"><FONT  color=red><?php if($err_therapy) echo '*'; ?><?php echo $LDTherapy ?>:
 </td>
 <td>
-<FONT SIZE=-1  FACE="Arial">
+
 
 <?php
 
@@ -805,9 +814,9 @@ if ($result['kasse']=="kasse")
 </td>
 </tr >
 <tr <?php if($mode=='saveok') echo "bgcolor=#ffffff"; ?>>
-<td background="<?php echo $bg_img; ?>"><FONT SIZE=-1  FACE="Arial" color=red><?php if($err_special) echo '*'; ?><?php echo $LDSpecials ?>:
+<td background="<?php echo $bg_img; ?>"><FONT color=red><?php if($err_special) echo '*'; ?><?php echo $LDSpecials ?>:
 </td>
-<td><FONT SIZE=-1  FACE="Arial">
+<td>
 
 <?php
 
@@ -817,9 +826,9 @@ echo createElement('special',$special,60,100);
 </td>
 </tr>
 <tr <?php if($mode=='saveok') echo "bgcolor=#ffffff"; ?>>
-<td background="<?php echo $bg_img; ?>"><FONT SIZE=-1  FACE="Arial"  color=red><?php if($err_klas) echo '*'; ?><?php echo $LDClassification ?>:
+<td background="<?php echo $bg_img; ?>"><FONT  color=red><?php if($err_klas) echo '*'; ?><?php echo $LDClassification ?>:
 </td>
-<td><FONT SIZE=-1  FACE="Arial"><font color="#800000">
+<td><font color="#800000">
 <?php if($mode=='saveok')
 {
 
@@ -889,7 +898,7 @@ if($rows || $err_data)
 ?>
 
 <p>
- <FONT SIZE=-1  FACE="Arial" color=red><?php if($err_op_start) echo '*'; ?>
+ <FONT color=red><?php if($err_op_start) echo '*'; ?>
 <?php 
 
 /* Set the global $isTimeElement to 1 to cause the function to insert the setTime Code in the form input code */
@@ -949,32 +958,43 @@ echo createElement('op_room',$op_room);
 } 
 ?>
 
-
 <p>
 </ul>
 
-</FONT>
 <p>
+<?php
+if(($mode=='search'||$mode=='paginate')&&$rows){
+?>
 </td>
 </tr>
-</table>        
+</table>
+<?php
+}
+?>
 <hr>
 <ul>
-<FONT    SIZE=2  FACE="Arial">
+
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-doku-search.php<?php echo URL_APPEND."&target=search&dept_nr=$dept_nr"; ?>&mode=dummy"><?php echo $LDSearchDocu ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-doku-archiv.php<?php echo URL_APPEND."&target=archiv&dept_nr=$dept_nr"; ?>&mode=dummy"><?php echo $LDResearchArchive ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-doku-select-dept.php<?php echo URL_APPEND."&target=$target&dept_nr=$dept_nr"; ?>&mode=dummy"><?php echo $LDChangeOnlyDept ?></a><br>
-<!-- <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="javascript:showcat()"><?php echo $LDShowCat ?></a><br>
- -->
+
 <p>
 
 <a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  alt="<?php echo $LDClose ?>"></a>
 </ul><p>
 
 <?php
-require($root_path.'include/inc_load_copyrite.php');
-?>
-</FONT>
 
-</BODY>
-</HTML>
+$sTemp = ob_get_contents();
+ ob_end_clean();
+
+# Assign the page output to main frame template
+
+ $smarty->assign('sMainFrameBlockData',$sTemp);
+
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
+?>

@@ -1,4 +1,4 @@
-<table border=0 cellpadding=1 cellspacing=1 width=100%>
+<table border=0 cellpadding=1 cellspacing=1 width=100% class="frame">
 <?php
 if($rows){
 	# Get the field names
@@ -11,8 +11,8 @@ if($rows){
 
 
   <tr bgcolor="#fefefe">
-    <td><FONT SIZE=-1  FACE="Arial" color="#006600"><b><?php echo $LD[$x]; ?></b></td>
-    <td><FONT SIZE=-1  FACE="Arial">
+    <td><FONT color="#006600"><b><?php echo $LD[$x]; ?></b></td>
+    <td>
 	<?php 
 		switch($x){
 				    //  header('Location:aufnahme_daten_zeigen.php'.URL_REDIRECT_APPEND.'&encounter_nr='.$encounter_nr.'&origin=admit&sem=isadmitted&target=entry');

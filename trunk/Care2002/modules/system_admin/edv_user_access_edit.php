@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -147,47 +147,51 @@ if($mode!= ''){
 	    }
 }
 
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('system_admin');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',$LDManageAccess);
+
+ # href for return button
+ $smarty->assign('pbBack',$returnfile);
+
+# href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('edp.php','access','$mode')");
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',$LDManageAccess);
+ 
+ # Buffer page output
+ 
+ ob_start();
+
 ?>
 
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-
-<?php html_rtl($lang); ?>
-	<HEAD>
-<?php echo setCharSet(); ?>
-	
-<?php 
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-?>	
-	</HEAD>
-
-	<BODY bgcolor=<?php echo $cfg['bot_bgcolor']; ?> topmargin=0 leftmargin=0 marginwidth=0 marginheight=0
-	<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
-
-
-	<table width=100% border=0 cellspacing=0>
-	<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG> &nbsp; <?php echo "$LDManageAccess" ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])echo'<a href="'.$returnfile.'"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('edp.php','access','<?php echo $mode ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
-</tr>
-	<tr bgcolor=<?php echo $cfg['body_bgcolor']; ?> >
-	<td colspan=2><p><br>
-	<ul>
+<ul>
 
 <?php
  //if ($mode=='data_saved' || $error ||  $mode=='error_noareas' || $mode=='data_nosave' )
 
- if (($mode!='' || $error ) && $mode!='edit' )
-{
+if (($mode!='' || $error ) && $mode!='edit' ){
+
 ?>
 <table border=0>
   <tr>
     <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"></td>
-    <td><FONT  COLOR=red  SIZE=+1  FACE=Arial>
+    <td class="warnprompt">
 	<?php
-	          if ($error) echo  $LDInputError; 
+	          if ($error) echo  $LDInputError;
 			     elseif ($mode=='data_saved') echo $LDUserInfoSaved;
 				   elseif($mode=='error_save') echo $LDUserInfoNoSave;
 				     elseif($mode=='error_noareas') echo $LDNoAreas;
@@ -199,11 +203,11 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 }
 ?>
 
-<FONT    SIZE=3  FACE="Arial" color="#990000">
+<FONT class="prompt">
 
-<?php// if ((($error==1)and($mode=='save'))or(($error==0)and($mode==''))) :; ?>
+<?php
 
-<?php if(($mode=="")and($remark!='fromlist')) 
+if(($mode=="")and($remark!='fromlist'))
 {
 $gtime=date('H.i');
 if ($gtime<'9.00') echo $LDGoodMorning;
@@ -221,7 +225,6 @@ echo ' '.$HTTP_COOKIE_VARS[$local_user.$sid];
 <INPUT type="submit" name=message value="<?php echo $LDListActual ?>"></font>
 
 </FORM>
-
 <p>
 </FONT>
 
@@ -244,7 +247,7 @@ if($mode=='data_saved' || $edit)
 	<table border="0" cellpadding="5" cellspacing="1">
 	
 <tr bgcolor="#dddddd">
-<td colspan="3"><FONT    SIZE=-1  FACE="Arial">
+<td colspan="3">
 <?php echo $LDNewAccess ?>:
 </td>
 </tr>
@@ -253,8 +256,8 @@ if($mode=='data_saved' || $edit)
 <td>
 <input type=hidden name=route value=validroute>
 
-<FONT    SIZE=-1  FACE="Arial">
-<?php if ($errorname) {echo "<font color=red > <b>$LDName</b>";} 
+
+<?php if ($errorname) {echo "<font color=red > <b>$LDName</b>";}
 else { echo $LDName;} ?>
 
 <?php
@@ -281,7 +284,7 @@ else { echo $LDName;} ?>
 
 <br>
 </td>
-<td><FONT    SIZE=-1  FACE="Arial">
+<td>
 <?php if ($erroruser) {echo "<font color=red > <b>$LDUserId</b>";} 
 else { echo $LDUserId;} ?>
 
@@ -299,7 +302,7 @@ else { echo $LDUserId;} ?>
 
 <br>
 </td>
-<td><FONT    SIZE=-1  FACE="Arial">
+<td>
 <?php if ($errorpass) {echo "<font color=red > <b>$LDPassword</b>";} 
 else { echo $LDPassword;} ?>
 
@@ -320,7 +323,7 @@ else { echo $LDPassword;} ?>
 </tr>
 
 <tr bgcolor="#dddddd">
-<td  colspan=3><FONT    SIZE=-1  FACE="Arial">
+<td  colspan=3>
 <?php if ($errorbereich) {echo "<font color=red > <b>$LDAllowedArea</b> </font>";} 
 else { echo $LDAllowedArea;} ?>
 </td>
@@ -331,8 +334,6 @@ else { echo $LDAllowedArea;} ?>
 <td  colspan=3>
 
 <table border=0 cellspacing=0 width=100%>
-
-
 
 <!--  The list of the permissible areas are displayed here  -->
 
@@ -364,31 +365,31 @@ while (list($x,$v)=each($area_opt))
 	      case 0: echo '
 		                      <td  valign=top colspan=5><img  '.createComIcon($root_path,'redpfeil.gif','0','absmiddle').'><input type="checkbox" name="'.$x.'" value="'.$x.'" ';
 							  if($edit && strstr($user['permission'],$x)) echo 'checked ><FONT    SIZE=2  FACE="Arial" color="#ff0000">	';
-							     else echo '><FONT    SIZE=2  FACE="Arial" >';
+							     else echo '>';
 							  echo $v.'</td>';
 			          break;
 	      case 1: echo '
 		                      <td><img src="p.gif" width=15></td><td  valign=top colspan=4><img src="tl2-blue.gif" border=0 width=20 height=21 align="absmiddle"><input type="checkbox" name="'.$x.'" value="'.$x.'" ';
 							  if($edit && strstr($user['permission'],$x)) echo 'checked ><FONT    SIZE=2  FACE="Arial" color="#ff0000">';
-							     else echo '><FONT    SIZE=2  FACE="Arial" >';
+							     else echo '>';
 							  echo $v.'</td>';
 			          break;
 	      case 2: echo '
 		                      <td><img src="p.gif" width=15><td><img src="p.gif" width=15><td  valign=top colspan=3><img src="tl2-blue.gif" border=0 width=20 height=21 align="absmiddle"><input type="checkbox" name="'.$x.'" value="'.$x.'" ';
 							  if($edit && strstr($user['permission'],$x)) echo 'checked ><FONT    SIZE=2  FACE="Arial" color="#ff0000">';
-							     else echo '><FONT    SIZE=2  FACE="Arial" >';
+							     else echo '>';
 							  echo $v.'</td>';
 			          break;
 	      case 3: echo '
 		                       <td><img src="p.gif" width=15><td><img src="p.gif" width=15><td><img src="p.gif" width=15><td  valign=top colspan=2><img src="tl2-blue.gif" border=0 width=20 height=21 align="absmiddle"><input type="checkbox" name="'.$x.'" value="'.$x.'" ';
 							  if($edit && strstr($user['permission'],$x)) echo 'checked ><FONT    SIZE=2  FACE="Arial" color="#ff0000">';
-							     else echo '><FONT    SIZE=2  FACE="Arial" >';
+							     else echo '>';
 							  echo $v.'</td>';
 			          break;
 	      case 4: echo '
 		                       <td><img src="p.gif" width=15><td><img src="p.gif" width=15><td><img src="p.gif" width=15><td><img src="p.gif" width=15><td  valign=top colspan=1><img src="tl2-blue.gif" border=0 width=20 height=21 align="absmiddle"><input type="checkbox" name="'.$x.'" value="'.$x.'" ';
 							  if($edit && strstr($user['permission'],$x)) echo 'checked ><FONT    SIZE=2  FACE="Arial" color="#ff0000">';
-							     else echo '><FONT    SIZE=2  FACE="Arial" >';
+							     else echo '>';
 							  echo $v.'</td>';
 			          break;
 	   }
@@ -397,23 +398,16 @@ while (list($x,$v)=each($area_opt))
   echo '
   </tr>';
 }	   
-	   
-	   
-
 
 ?>
 
 </table>
 
-
 </td>
 </tr>
 
-
-
-
 <tr bgcolor="#dddddd">
-<td colspan=3><FONT    SIZE=-1  FACE="Arial">
+<td colspan=3>
 <p>
 <input type="hidden" name="personell_nr" value="<?php echo $personell_nr; ?>">
 <input type="hidden" name="itemname" value="<?php echo $itemname ?>">
@@ -430,28 +424,24 @@ while (list($x,$v)=each($area_opt))
   </tr>
 </table>
 
-
-
 </form>
 
 <p>
 <a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancel ?>" align="middle"></a>
-</FONT>
-
-<?php //endif; ?>
 
 </ul>
-<p>
-</td>
-</tr>
-</table>        
-<p>
 
 <?php
-require($root_path.'include/inc_load_copyrite.php');
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+# Assign page output to the mainframe template
+
+$smarty->assign('sMainFrameBlockData',$sTemp);
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
 ?>
-
-</FONT>
-
-</BODY>
-</HTML>

@@ -73,7 +73,7 @@ if($pregnancy['this_pregnancy_nr']) $TP_PNR=$pregnancy['this_pregnancy_nr'];
 
 # Delivery date
 if($pregnancy['delivery_date']) $TP_PREGDATE=formatDate2Local($pregnancy['delivery_date'],$date_format);
-$TP_IMG_PDATE=createComIcon($root_path,'show-calendar.gif','0');
+$TP_IMG_PDATE=createComIcon($root_path,'show-calendar.gif','0','',TRUE);
 # Delivery time
 if($pregnancy['delivery_time']) $TP_PTIME=$pregnancy['delivery_time'];
 # GRavida

@@ -22,8 +22,8 @@ $core= new Core;
 	$presdate=date("Y-m-d");
 	$presdatetime=date("Y-m-d H:i:s");
 	
-	$sql="SELECT payment_receipt_no FROM care_billing_payment ORDER BY payment_receipt_no DESC LIMIT 1";
-	$ergebnis=$db->Execute($sql);
+	$sql="SELECT payment_receipt_no FROM care_billing_payment ORDER BY payment_receipt_no DESC";
+	$ergebnis=$db->SelectLimit($sql,1);
 	if(is_object($ergebnis)) $cntergebnis=$ergebnis->RecordCount();
 /*	$ergebnis=mysql_query($sql);
 	$cntergebnis=mysql_num_rows($ergebnis);
@@ -59,8 +59,8 @@ $core= new Core;
 	
 
 	$chkfinalquery="SELECT * from care_billing_final WHERE final_encounter_nr='$patientno'";
-	$chkfinalresult=mysql_query($chkfinalquery);
-	$chkexists=mysql_num_rows($chkfinalresult);
+	$chkfinalresult=$db->Execute($chkfinalquery);
+	$chkexists=$chkfinalresult->RecordCount();
 	if($chkexists<1)
 	{
 		$insfinalbill="INSERT INTO care_billing_final (final_encounter_nr, final_bill_no, final_date, final_total_bill_amount, final_discount, final_total_receipt_amount, final_amount_due, final_amount_recieved) VALUES ($patientno, $final_bill_no, '$presdate', $totalbill,$discount, $paidamt,$amtdue,$currentamt)";

@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -57,7 +57,7 @@ echo " $ck_prod_db_user!";
             <TABLE cellSpacing=1 cellPadding=3 bgColor=#999999 
             border=0>
               <TBODY>
-              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'settings_tree.gif','0') ?>></td>
+              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'settings_tree.gif','0','',FALSE) ?>></td>
                 <TD vAlign=top width=150><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B><nobr>
 				 <a href="<?php echo $root_path ?>modules/products/products-datenbank-functions-eingabe.php<?php echo URL_APPEND."&userck=$userck"?>&cat=medlager"><?php echo $LDNewProduct ?></a>
@@ -68,7 +68,7 @@ echo " $ck_prod_db_user!";
                 <TD colSpan=3><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
                   width=5></TD></TR>
-              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'eyeglass.gif','0') ?>></td>
+              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'eyeglass.gif','0','',FALSE) ?>></td>
                 <TD vAlign=top width=150><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B> 
    				<a href="<?php echo $root_path ?>modules/products/products-datenbank-functions-such.php<?php echo URL_APPEND."&userck=$userck"?>&cat=medlager"><?php echo $LDSearch ?></a></B></FONT></TD>
@@ -79,7 +79,7 @@ echo " $ck_prod_db_user!";
                 <TD colSpan=3><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
                   width=5></TD></TR>
-              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'discussions.gif','0') ?>></td>
+              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'discussions.gif','0','',FALSE) ?>></td>
                 <TD vAlign=top width=150><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B>
 				<a href="<?php echo $root_path ?>modules/products/products-datenbank-functions-manage.php<?php echo URL_APPEND."&userck=$userck"?>&cat=medlager"><nobr><?php echo $LDManage ?></nobr></a>
@@ -91,7 +91,7 @@ echo " $ck_prod_db_user!";
                   src="../../gui/img/common/default/pixel.gif" 
                   width=5></TD></TR>
              
-              <TR bgColor=#eeeeee> <td align=center><img <?php echo createComIcon($root_path,'icn_rad.gif','0') ?>></td>
+              <TR bgColor=#eeeeee> <td align=center><img <?php echo createComIcon($root_path,'icn_rad.gif','0','',FALSE) ?>></td>
                 <TD vAlign=top width=150><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B><nobr>
 				<a href="medlager-report.php<?php echo URL_APPEND."&userck=$userck"?>"><?php echo $LDReports ?></a></nobr>
@@ -103,7 +103,7 @@ echo " $ck_prod_db_user!";
                 <TD colSpan=3><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
                   width=5></TD></TR>
-              <TR bgColor=#eeeeee>  <td align=center><img <?php echo createComIcon($root_path,'info2.gif','0') ?>></td>
+              <TR bgColor=#eeeeee>  <td align=center><img <?php echo createComIcon($root_path,'info2.gif','0','',FALSE) ?>></td>
                 <TD vAlign=top width=150><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B>
 			 <nobr><a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo $LDInfo ?></a></nobr>
@@ -116,7 +116,7 @@ echo " $ck_prod_db_user!";
 		</TBODY>
 		</TABLE>
 <p>
-<a href="<?php echo "$breakfile" ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  alt="<?php echo $LDClose ?>" align="middle"></a>
+<a href="<?php echo "$breakfile" ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0','',FALSE) ?>  alt="<?php echo $LDClose ?>" align="middle"></a>
 <p>
 </ul>
 

@@ -5,9 +5,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -25,6 +25,8 @@ if(!isset($user_origin)||empty($user_origin)) $user_origin='lab';
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 $encounter=new Encounter($encounter_nr);
 
+//$db->debug=1;
+
 $thisfile='labor_datainput.php';
 
 # Create lab object
@@ -35,10 +37,10 @@ require($root_path.'include/inc_labor_param_group.php');
 						
 if(!isset($parameterselect)||$parameterselect=='') $parameterselect='priority';
 
-$parameters=&$paralistarray[$parameterselect];					
+$parameters=&$paralistarray[$parameterselect];
 $paramname=&$parametergruppe[$parameterselect];
 
-# Load the date formatter */
+# Load the date formatter
 include_once($root_path.'include/inc_date_format_functions.php');
     
 if($mode=='save'){
@@ -55,11 +57,14 @@ if($mode=='save'){
 	$dbuf['serial_value']=serialize($nbuf);
 	$dbuf['job_id']=$job_id;
 	$dbuf['encounter_nr']=$encounter_nr;
-	$dbuf['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+	//$dbuf['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
 	if($allow_update){
+		
+		$dbuf['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		$dbuf['modify_time']=date('YmdHis');
 
-		# Recheck the date, ! bug patch 
-		if($HTTP_POST_VARS['std_date']=='0000-00-00') $dbuf['test_date']=date('Y-m-d');
+		# Recheck the date, ! bug pat	$dbuf['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];ch
+		if($HTTP_POST_VARS['std_date']==DBF_NODATE) $dbuf['test_date']=date('Y-m-d');
 	
 		$lab_obj->setDataArray($dbuf);
 		# set update pointer
@@ -74,7 +79,7 @@ if($mode=='save'){
 		$lab_obj->hideResultIfExists($encounter_nr,$job_id,$parameterselect);
 		# Convert date to standard format
 		if(isset($std_date)){
-			if($HTTP_POST_VARS['std_date']=='0000-00-00') $dbuf['test_date']=date('Y-m-d');
+			if($HTTP_POST_VARS['std_date']==DBF_NODATE) $dbuf['test_date']=date('Y-m-d');
 				else 	$dbuf['test_date']=$HTTP_POST_VARS['std_date'];
 		}else{
 			$dbuf['test_date']=formatDate2STD($HTTP_POST_VARS['test_date'],$date_format);
@@ -104,7 +109,12 @@ if($mode=='save'){
 	}
 # end of if(mode==save)
 } else { #If mode is not "save" then get the basic personal data 
- 
+
+	# If parameter group has changed do not allow update
+//	 if(isset($changegroup) && $changegroup){
+//	 	$allow_update=FALSE;
+//	}
+	
 	# Create encounter object
 	//include_once($root_path.'include/care_api_classes/class_encounter.php');
 	$enc_obj=new Encounter($encounter_nr);
@@ -149,12 +159,45 @@ if($mode=='save'){
 
 // echo "from table ".$linecount;
 if($saved || $row['test_date']) $std_date=$row['test_date'];
+
+# Prepare title
+ if($update) $sTitle="$LDLabReport - $LDEdit";
+ 	else $sTitle= "$LDNew $LDLabReport";
+
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
+
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
+
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',$sTitle);
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('lab.php','input','main','$job_id')");
+
+ # hide return  button
+ $smarty->assign('pbBack',FALSE);
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',$sTitle);
+
+ # collect extra javascript code
+ ob_start();
 ?>
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
- <TITLE>Laborwerte Eingabe</TITLE>
+
+<style type="text/css" name="1">
+.va12_n{font-family:verdana,arial; font-size:12; color:#000099}
+.a10_b{font-family:arial; font-size:10; color:#000000}
+.a10_n{font-family:arial; font-size:10; color:#000099}
+</style>
 
 <script language="javascript" name="j1">
 <!--        
@@ -189,105 +232,63 @@ function labReport(){
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
 // -->
 </script>
-
 <script language="javascript" src="<?php echo $root_path ?>js/checkdate.js" type="text/javascript"></script>
 <script language="javascript" src="<?php echo $root_path ?>js/setdatetime.js"></script>
 <script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
 <?php 
-require($root_path.'include/inc_js_gethelp.php'); 
-require($root_path.'include/inc_css_a_hilitebu.php');
-?>
-<style type="text/css" name="1">
-.va12_n{font-family:verdana,arial; font-size:12; color:#000099}
-.a10_b{font-family:arial; font-size:10; color:#000000}
-.a10_n{font-family:arial; font-size:10; color:#000099}
-</style>
-</HEAD>
 
-<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php
+$sTemp = ob_get_contents();
+ob_end_clean();
 
-/*if($newid) echo ' onLoad="document.datain.test_date.focus();" ';*/
- if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } 
- ?>>
+$smarty->append('JavaScript',$sTemp);
 
-<table width=100% border=0 cellspacing=0 cellpadding=0>
+# Assign patient basic elements
+$smarty->assign('LDCaseNr',$LDCaseNr);
+$smarty->assign('LDLastName',$LDLastName);
+$smarty->assign('LDName',$LDName);
+$smarty->assign('LDBday',LDBday);
+$smarty->assign('LDJobIdNr',$LDJobIdNr);
+$smarty->assign('LDExamDate',$LDExamDate);
 
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php if($update) echo "$LDLabReport - $LDEdit"; else echo "$LDNew $LDLabReport"; ?></STRONG></FONT>
-</td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp('lab.php','input','main','<?php echo $job_id ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
-</tr>
-<tr>
-<td  bgcolor=#dde1ec>
+# Assign patient basic data
+$smarty->assign('encounter_nr',$encounter_nr);
+$smarty->assign('sLastName',$patient['name_last']);
+$smarty->assign('sName',$patient['name_first']);
+$smarty->assign('sBday',formatDate2Local($patient['date_birth'],$date_format));
 
-<FONT    SIZE=-1  FACE="Arial">
+if($saved||$job_id) $smarty->assign('sJobIdNr',$job_id.'<input type=hidden name=job_id value="'.$job_id.'">');
+	else $smarty->assign('sJobIdNr','<input name="job_id" type="text" size="14">');
 
+$smarty->assign('sExamDate',$LDExamDate);
 
-<form method="post" action="<?php echo $thisfile; ?>" onSubmit="return pruf(this)" name="datain">
-
-<!--  Display of the patient's basic personal data -->
-<table border=0>
-<tr>
-<td bgcolor=#ffffff><FONT SIZE=-1  FACE="Arial"><?php echo $LDCaseNr ?>:
-</td>
-<td bgcolor=#ffffee><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $encounter_nr; ?>&nbsp;
-</td>
-</tr>
-
-<tr>
-<td bgcolor=#ffffff><FONT SIZE=-1  FACE="Arial"><?php echo "$LDLastName, $LDName, $LDBday" ?>:
-</td>
-<td bgcolor=#ffffee><FONT SIZE=-1  FACE="Arial">&nbsp;<b><?php echo  $patient['name_last']; ?>, <?php echo  $patient['name_first']; ?>&nbsp;&nbsp;<?php echo formatDate2Local($patient['date_birth'],$date_format); ?></b>
-</td>
-</tr>
-<tr>
-<td bgcolor=#ffffff><FONT SIZE=-1  FACE="Arial"><?php echo $LDJobIdNr ?>:
-</td>
-<td  bgcolor=#ffffee ><FONT SIZE=-1  FACE="Arial">&nbsp;
-<?php if($saved||$job_id)
-echo $job_id.'
-<input type=hidden name=job_id value="'.$job_id.'">';
-else echo ' 
-<input name="job_id" type="text" size="14" >';
-?>
-</td>
-</tr>
-<tr>
-<td bgcolor=#ffffff><FONT SIZE=-1  FACE="Arial"><?php echo $LDExamDate ?>
-</td>
-<td  bgcolor=#ffffee ><FONT SIZE=-1  FACE="Arial">&nbsp;
-<?php 
 if($saved||$row['test_date']||$std_date){
-   echo formatDate2Local($std_date,$date_format).'
-   	<input type=hidden name="std_date" value="'.$std_date.'">';
+   $smarty->assign('sExamDate',formatDate2Local($std_date,$date_format).'<input type=hidden name="std_date" value="'.$std_date.'">');
 }else{
-   echo '<input name="test_date" type="text" size="14" value="'.formatDate2Local(date('Y-m-d'),$date_format).'" onBlur="IsValidDate(this,\''.$date_format.'\')")  onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\')">';
-?>
-  	<a href="javascript:show_calendar('datain.test_date','<?php echo $date_format ?>')">
-	<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
-<?php
+   $smarty->assign('sExamDate','<input name="test_date" type="text" size="14" value="'.formatDate2Local(date('Y-m-d'),$date_format).'" onBlur="IsValidDate(this,\''.$date_format.'\')")  onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\')">');
+   $smarty->assign('sMiniCalendar',"<a href=\"javascript:show_calendar('datain.test_date','$date_format')\"><img ".createComIcon($root_path,'show-calendar.gif','0','absmiddle')."></a>");
 }
+
+# Assign parameter elements
+
+$smarty->assign('sParamGroup',strtr($parametergruppe[$parameterselect],"_","-"));
+
+$smarty->assign('pbSave','<input  type="image" '.createLDImgSrc($root_path,'savedisc.gif','0').'>');
+$smarty->assign('pbShowReport','<a href="labor_datalist_noedit.php'.URL_APPEND.'&encounter_nr='.$encounter_nr.'&noexpand=1&from=input&job_id='.$job_id.'&parameterselect='.$parameterselect.'&allow_update='.$allow_update.'&nostat=1&user_origin='.$user_origin.'"><img '.createLDImgSrc($root_path,'showreport.gif','0','absmiddle').' alt="'.$LDClk2See.'"></a>');
+
+if($saved) $sCancelBut='<img '.createLDImgSrc($root_path,'close2.gif','0','absmiddle').'>';
+	else $sCancelBut='<img  '.createLDImgSrc($root_path,'cancel.gif','0','absmiddle').'>';
+
+$smarty->assign('pbCancel',"<a href=\"$breakfile\">$sCancelBut</a>");
+
+$smarty->assign('sAskIcon',"<img ".createComIcon($root_path,'small_help.gif','0').">");
+
+$smarty->assign('sFormAction',$thisfile);
+
+# Buffer parameter items generation
+
+ob_start();
 ?>
-</td>
-</tr>
-</table>
-
-<table border=0 bgcolor=#ffdddd cellspacing=1 cellpadding=1 width="100%">
-<tr>
-<td  bgcolor=#ff0000 colspan=2><FONT SIZE=2  FACE="Verdana,Arial" color="#ffffff">
-<b><?php echo strtr($parametergruppe[$parameterselect],"_","-"); ?></b>
-</td>
-</tr>
-<tr>
-<td  colspan=2>
-
-
-<table border="0" cellpadding=0 cellspacing=1>
-
-
 
 <?php if($error) : ?>
 <tr bgcolor=#ffffee>
@@ -351,55 +352,19 @@ while($tp=$tparams->FetchRow()){
 		$rowlimit=0;
 	}
  }
-/*while(list($x,$v)=each($parameters)){
+ 
+ # Assign parameter output
+ 
+ $sTemp = ob_get_contents();
+ ob_end_clean();
+ 
+ $smarty->assign('sParameters',$sTemp);
 
-	echo '<td';
+# Collect hidden inputs for the parameters form
 
-	echo ' bgcolor="#ffffee" class="a10_b"><nobr>&nbsp;<b>'.$v.'</b>&nbsp;</nobr>';
+ob_start();
 
-	echo '</td>
-			<td>';
-
-	echo '<input name="'.$x.'" type="text" size="8" ';
-
-	echo 'value="';
-	if(isset($pdata[$x])&&!empty($pdata[$x])) echo trim($pdata[$x]);
-
-	echo '">';
-	echo'&nbsp;
-			</td>';
-
-	$rowlimit++;
-	if($rowlimit==$pcols){
-		echo '
-		</tr><tr>';
-		$rowlimit=0;
-	}
- }
-*/
 ?>
-</table>
-</td>
-</tr>
-<tr>
-<td>
-<input  type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?>> 
-</td>
-
-<td align="right"><font size=1><nobr>
-<?php
-echo '<a href="labor_datalist_noedit.php'.URL_APPEND.'&encounter_nr='.$encounter_nr.'&noexpand=1&from=input&job_id='.$job_id.'&parameterselect='.$parameterselect.'&allow_update='.$allow_update.'&nostat=1&user_origin='.$user_origin.'"><img '.createLDImgSrc($root_path,'showreport.gif','0','absmiddle').' alt="'.$LDClk2See.'"></a>';
-?>
-&nbsp;
-<a href="<?php echo $breakfile ?>"><?php
- if($saved) echo '<img '.createLDImgSrc($root_path,'close2.gif','0','absmiddle').'>';
-	else echo '<img  '.createLDImgSrc($root_path,'cancel.gif','0','absmiddle').'>'; 
-?></a>
-</nobr>
-</font>
-</td>
-</tr>
-</table>
 <input type=hidden name="parameterselect" value=<?php echo $parameterselect; ?>>
 <input type=hidden name="encounter_nr" value="<?php echo $encounter_nr; ?>">
 <input type=hidden name="sid" value="<?php echo $sid; ?>">
@@ -410,101 +375,69 @@ echo '<a href="labor_datalist_noedit.php'.URL_APPEND.'&encounter_nr='.$encounter
 <input type=hidden name="newid" value="<?php echo $newid; ?>">
 <input type=hidden name="user_origin" value="<?php echo $user_origin; ?>">
 <input type=hidden name="mode" value="save">
-</form>
+<?php
 
-<form action=<?php echo $thisfile; ?> method=post onSubmit="return chkselect(this)" name="paramselect">
-<table border=0>
-<tr>
-<td colspan=3><FONT SIZE=-1  FACE="Arial"><b><?php echo $LDSelectParamGroup ?></b>
-</td>
-</tr>
+$sTemp = ob_get_contents();
+ob_end_clean();
+$smarty->assign('sSaveParamHiddenInputs',$sTemp);
 
-<tr>
-<td><FONT SIZE=-1  FACE="Arial"><?php echo $LDParamGroup ?>:
-</td>
+# Assign parameter group selector box
+$sTemp = '<select name="parameterselect" size=1>';
 
-<td >
-<select name="parameterselect" size=1>
-<?php 
+while($tg=$tgroups->FetchRow()){
+		$sTemp = $sTemp.'<option value="'.$tg['group_id'].'"';
+		if($parameterselect==$tg['group_id']) $sTemp = $sTemp.' selected';
+		$sTemp = $sTemp.'>';
+		if(isset($parametergruppe[$tg['group_id']])&&!empty($parametergruppe[$tg['group_id']])) $sTemp = $sTemp.$parametergruppe[$tg['group_id']];
+			else $sTemp = $sTemp.$tg['name'];
+		$sTemp = $sTemp.'</option>';
+		$sTemp = $sTemp."\n";
+}
 
-	while($tg=$tgroups->FetchRow())
-      {
-		echo '<option value="'.$tg['group_id'].'"';
-		if($parameterselect==$tg['group_id']) echo ' selected';
-		echo '>';
-		if(isset($parametergruppe[$tg['group_id']])&&!empty($parametergruppe[$tg['group_id']])) echo $parametergruppe[$tg['group_id']];
-			else echo $tg['name'];
-		echo '</option>';
-		echo "\n";
-	  }	
+$smarty->assign('sParamGroupSelect',$sTemp.'</select>');
 
+$smarty->assign('LDSelectParamGroup',$LDSelectParamGroup);
+$smarty->assign('LDParamGroup',$LDParamGroup);
+
+# Collect hidden inputs for the parameter group selector
+ob_start();
 ?>
-</select>
-</td>
-
-<td>
 <input type=hidden name="encounter_nr" value="<?php echo $encounter_nr; ?>">
 <input type=hidden name="job_id" value="<?php echo $job_id; ?>">
 <input type=hidden name="sid" value="<?php echo $sid; ?>">
 <input type=hidden name="lang" value="<?php echo $lang; ?>">
 <input type=hidden name="update" value="<?php echo $update; ?>">
-<input type=hidden name="allow_update" value="<?php if(isset($allow_update)) echo $allow_update; ?>">
+<input type=hidden name="allow_update" value="<?php if( isset($allow_update)) echo $allow_update; ?>">
 <input type=hidden name="batch_nr" value="<?php if(isset($row['batch_nr'])) echo $row['batch_nr']; ?>">
 <input type=hidden name="newid" value="<?php echo $newid; ?>">
 <input type=hidden name="std_date" value="<?php echo $std_date; ?>">
 <input type=hidden name="user_origin" value="<?php echo $user_origin; ?>">
-
-<FONT SIZE=-1  FACE="Arial">&nbsp;<input  type="image" <?php echo createLDImgSrc($root_path,'auswahl2.gif','0') ?>>
-</td>
-</tr>
-</tr>
-
-</table>
-</form>
-
-
-</FONT>
-<p>
-</td>
-
-<td colspan=2 bgcolor=#ffffee width=20% valign=top>
-
-
-<table border=0 cellpadding=5 cellspacing=2>
-<tr>
-<td valign=top><a href="Javascript:gethelp('lab.php','input','param')"><img <?php echo createComIcon($root_path,'small_help.gif','0') ?>></a></td>
-<td><FONT SIZE=1  FACE="Arial"><?php echo $LDParamNoSee ?></td>
-</tr>
-<tr>
-<td valign=top><a href="Javascript:gethelp('lab.php','input','few')"><img <?php echo createComIcon($root_path,'small_help.gif','0') ?>></a></td>
-<td><FONT SIZE=1  FACE="Arial"><?php echo $LDOnlyPair ?></td>
-</tr>
-<tr>
-<td valign=top><a href="Javascript:gethelp('lab.php','input','save')"><img <?php echo createComIcon($root_path,'small_help.gif','0') ?>></a></td>
-<td><FONT SIZE=1  FACE="Arial"><?php echo $LDHow2Save ?></td>
-</tr>
-<tr>
-<td valign=top><a href="Javascript:gethelp('lab.php','input','correct')"><img <?php echo createComIcon($root_path,'small_help.gif','0') ?>></a></td>
-<td><FONT SIZE=1  FACE="Arial"><?php echo $LDWrongValueHow ?></td>
-</tr>
-<tr>
-<td valign=top><a href="Javascript:gethelp('lab.php','input','note')"><img <?php echo createComIcon($root_path,'small_help.gif','0') ?>></a></td>
-<td><FONT SIZE=1  FACE="Arial"><?php echo $LDVal2Note ?></td>
-</tr>
-<tr>
-<td valign=top><a href="Javascript:gethelp('lab.php','input','done')"><img <?php echo createComIcon($root_path,'small_help.gif','0') ?>></a></td>
-<td><FONT SIZE=1  FACE="Arial"><?php echo $LDImDone ?></td>
-</tr>
-</table>
-
-</td>
-</tr>
-</table>        
-<p>
-
+<input type=hidden name="changegroup" value="1">
+<input type=hidden name="saved" value="0">
 <?php
-require($root_path.'include/inc_load_copyrite.php');
-?>
 
-</BODY>
-</HTML>
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+$smarty->assign('sSelectGroupHiddenInputs',$sTemp);
+
+$smarty->assign('sSubmitSelect','<input  type="image" '.createLDImgSrc($root_path,'auswahl2.gif','0').'>');
+
+# Assign help items
+$smarty->assign('LDParamNoSee',"<a href=\"Javascript:gethelp('lab.php','input','param')\">$LDParamNoSee</a>");
+$smarty->assign('LDOnlyPair',"<a href=\"Javascript:gethelp('lab.php','input','few')\">$LDOnlyPair</a>");
+$smarty->assign('LDHow2Save',"<a href=\"Javascript:gethelp('lab.php','input','save')\">$LDHow2Save</a>");
+$smarty->assign('LDWrongValueHow',"<a href=\"Javascript:gethelp('lab.php','input','correct')\">$LDWrongValueHow</a>");
+$smarty->assign('LDVal2Note',"<a href=\"Javascript:gethelp('lab.php','input','note')\">$LDVal2Note</a>");
+$smarty->assign('LDImDone',"<a href=\"Javascript:gethelp('lab.php','input','done')\">$LDImDone</a>");
+
+# Assign the include file to mainframe
+
+ $smarty->assign('sMainBlockIncludeFile','laboratory/chemlab_data_results.tpl');
+
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
+?>

@@ -71,7 +71,7 @@ $TP_href_dcs='<a href="javascript:show_calendar(\'sickform.date_confirm\',\''.$d
 $TP_href_end='</a>';
 
 
-$TP_img_calendar='<img '.createComIcon($root_path,'show-calendar.gif','0','absmiddle').'>';
+$TP_img_calendar='<img '.createComIcon($root_path,'show-calendar.gif','0','absmiddle',TRUE).'>';
 
 $dfbuffer="LD_".strtr($date_format,".-/","phs");
 $TP_date_format=$$dfbuffer;

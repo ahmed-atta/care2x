@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -107,7 +107,7 @@ if($dblink_ok) {
     $config_type='news_dept_max_display';
     include($root_path.'include/inc_get_global_config.php');
 
-    if(!$news_dept_max_display) $news_num_stop=4; /* default is 3 */
+    if(!$news_dept_max_display) $news_num_stop=4; // default is 3
         else $news_num_stop=$news_dept_max_display;  // The maximum number of news article to be displayed
 	
 	//include($root_path.'include/inc_news_get.php'); // now get the current news	
@@ -130,42 +130,29 @@ $today=date('Y-m-d');
 //$HTTP_SESSION_VARS['sess_dept_nr']=$dept_nr;
 $HTTP_SESSION_VARS['sess_file_return']=$top_dir.basename(__FILE__);
 
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
 
-//echo $HTTP_SESSION_VARS['sess_file_editor'];
-/* Set this file as the referer */
-//$HTTP_SESSION_VARS['sess_path_referer']=$top_dir.basename(__FILE__);
-?>
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
- <TITLE><?php echo $title ?> Information</TITLE>
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
 
-<?php
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-?>
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
 
-</HEAD>
+ # Toolbar title
+ $smarty->assign('sToolbarTitle',$title);
 
-<BODY  topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } 
-?> >
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('dept_news.php')");
+ # href for close file
+ $smarty->assign('breakfile',$breakfile);
+ # href for return file
+ $smarty->assign('pbBack',$returnfile);
 
-<table width=100% border=0 cellspacing=0 cellpadding="0" height=100%>
-
-<tr valign=top height=45>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" >
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG>&nbsp;<?php echo $title ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])echo'<a href="'.$returnfile.'"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('dept_news.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td></tr>
-<tr valign=top >
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
-
-<table border=0 cellpadding=10>
-  <tr>
-<?php 
+ # Window title
+ $smarty->assign('title',$title);
 
  /* Get the news global configurations */
 $config_type='news_%';
@@ -178,74 +165,56 @@ require_once($root_path.'include/inc_editor_fx.php');
 
 $picalign='left';
 
-for($j=1;$j<=$news_num_stop;$j++)
-{
-	echo '
-    <td valign="top" width="50%">';
-	
-	include($root_path.'include/inc_news_preview.php');
-	
-	echo '
-	</td>';
-	if($j==2) echo '
-	</tr>
-	<tr>';
+for($j=1;$j<=$news_num_stop;$j++){
+
+	ob_start();
+		include($root_path.'include/inc_news_preview.php');
+		$smarty->display('news/headline_newslist_item.tpl');
+		$sTemp = ob_get_contents();
+	ob_end_clean();
+
+	# Assign to news item number
+	$smarty->assign('sNews_'.$j,$sTemp);
 }
 
-?>
-    
-  </tr>
-  <tr>
-    <td colspan=2 valign="top">
-	
+if($rows) {
 
-	
-<?php if($rows) { ?>
-	<?php echo $subtitle ?>
-	<table border=0 cellspacing=0 cellpadding=0>
-   <tr>
-     <td bgcolor=#0>
-	 <table border=0 cellspacing=1 cellpadding=5>
-    <tr bgcolor=#ffffff>
-      <td><font face="Verdana,arial" size=2 color="#0000cc"><b><?php echo $LDArticle ?></b></font></td>
-      <td>&nbsp;</td>
-	  <td><font face="Verdana,arial" size=2 color="#0000cc"><b><?php echo $LDWrittenBy ?>:</b></font></td>
-      <td><font face="Verdana,arial" size=2 color="#0000cc"><b><?php echo $LDWrittenOn ?>:</b></font></td>
-    </tr>
-<?php while($artikel=$news_archive->FetchRow())
-{
-echo '<tr bgcolor="#ffffff"><td><a href="#"><a href="'.$readerpath.'&nr='.$artikel['nr'].'&news_type=headline"><font face=verdana,arial size=2> '.$artikel['title'].'</a></td>
-		<td><font face=verdana,arial size=2><a href="'.$readerpath.'&nr='.$artikel['nr'].'&news_type=headline"><img '.createComIcon($root_path,'info.gif','0').' alt="'.$LDClk2Read.'"></a></td>		
-		<td><font face=verdana,arial size=2> '.$artikel['author'].'</td>
-		<td><font face=verdana,arial size=2><nobr> '.formatDate2Local($artikel['publish_date'],$date_format,1).' </td></tr>';
-echo "\r\n";
+	# If news category #5 exits, show the list
+	$smarty->assign('bShowArchiveList',TRUE);
+
+	$smarty->assign('subtitle',$subtitle);
+	$smarty->assign('LDArticle',$LDArticle);
+	$smarty->assign('LDWrittenBy',$LDWrittenBy);
+	$smarty->assign('LDWrittenOn',$LDWrittenOn);
+
+	#  Buffer news archive rows
+
+	ob_start();
+
+		while($artikel=$news_archive->FetchRow()){
+
+			echo '<tr bgcolor="#ffffff">
+				<td><a href="#"><a href="'.$readerpath.'&nr='.$artikel['nr'].'&news_type=headline"> '.$artikel['title'].'</a></td>
+				<td><a href="'.$readerpath.'&nr='.$artikel['nr'].'&news_type=headline"><img '.createComIcon($root_path,'info.gif','0','',TRUE).' alt="'.$LDClk2Read.'"></a></td>
+				<td> '.$artikel['author'].'</td>
+				<td><nobr> '.formatDate2Local($artikel['publish_date'],$date_format,1).'
+				</td>
+				</tr>';
+			echo "\r\n";
+		}
+
+		$sTemp = ob_get_contents();
+
+	ob_end_clean();
+
+	$smarty->assign('sNewsArchiveList',$sTemp);
+
 }
+
+$smarty->assign('sMainEditorLink','<a href="'.$editorpath.'">'.$LDClk2Compose.'</a>');
+
+$smarty->assign('sMainBlockIncludeFile','news/headline_dept_newslist.tpl');
+
+$smarty->display('common/mainframe.tpl');
+
 ?>
-  </table>
-  
-	 </td>
-   </tr>
- </table>
-	
-	</td>
-  </tr>
-</table>
-
-<?php } ?>
-<hr>
-	<FONT    SIZE=4  FACE="Arial">
-	<a href="<?php echo $editorpath ?>"> <?php echo $LDClk2Compose; ?> </a>
-<p>
-<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0','middle').' alt="'.$LDBackTxt.'"'; ?>></a>
-<p>
-</FONT>
-</td>
-</tr>
-
-</table>        
-
-<?php
-require($root_path.'include/inc_load_copyrite.php');
-?>
-</BODY>
-</HTML>

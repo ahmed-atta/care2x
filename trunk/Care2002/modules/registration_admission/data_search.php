@@ -11,9 +11,9 @@ require($root_path.'include/inc_environment_global.php');
 * zip_code addition to city town address 2004-05-13
 * revised by Elpidio for cross database compatibility 2004-05-13
 *
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -46,7 +46,7 @@ $limitselect=FALSE;
 
 # Set the default name of of the form
 # Note to Jean-Philippe LIOT
-# the form name was moved outside of the sql query because otherwise the element names because too long and get pruned by PosgreSQL
+# the form name was moved outside of the sql query because otherwise the element names become too long and get pruned by PostgreSQL
 
 $formname ='aufnahmeform';
 
@@ -80,7 +80,7 @@ if(isset($target)) {
 							        break;
 
 		case 'immunization' :
-									$sql="SELECT name AS \"type.value\", medicine AS \"medicine.value\", dosage AS \"dosage.value\", titer AS \"titer.value\", application AS \"application_type_nr.value\", period as \"refresh_date.value\", 0 AS use_frequency FROM care_type_immunization ";
+									$sql="SELECT name AS \"type.value\", medicine AS \"medicine.value\", dosage AS \"dosage.value\", titer AS \"titer.value\", application AS \"application_type_nr.selectedIndex\", period as \"refresh_date.value\", 0 AS use_frequency FROM care_type_immunization ";
 		                            if($mode=='search') {
 									    $sql.="WHERE  name $sql_LIKE '".$searchkey."%'";
 									} else {

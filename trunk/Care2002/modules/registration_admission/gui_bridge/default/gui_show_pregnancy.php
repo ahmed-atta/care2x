@@ -23,20 +23,20 @@ if($rows){
 		$show_details=true;
 		# Get the field names
 		$fields=&$obj->coreFieldNames();
-		# If not this encounter's pregnancy, show warn notice
+		# If not this encounter´s pregnancy, show warn notice
 		
 ?>
 
 	<tr>
 	<td colspan=6>
-	<table border=0 cellpadding=1 cellspacing=1 width=100%>
+	<table border=0 cellpadding=1 cellspacing=1 width=100% class="frame">
 <?php
 		if(!$parent_admit){
 ?>
 
-  	<tr>
-    <td <?php echo $tbg; ?>><b><?php echo $LDEncounterNr; ?></td>
-    <td <?php echo $tbg; ?>><?php echo $pregbuf[$show_preg_enc]['encounter_nr'] ?></td>
+  	<tr bgcolor="#fefefe">
+    <td <?php echo $tbg; ?>><FONT color="#ff0000"><b><?php echo $LDEncounterNr; ?></b></font></td>
+    <td <?php echo $tbg; ?>><FONT color="#ff0000"><?php echo $pregbuf[$show_preg_enc]['encounter_nr'] ?></font></td>
   	</tr>
 
 <?php
@@ -49,8 +49,8 @@ if($rows){
 
 
   <tr bgcolor="#fefefe">
-    <td><FONT SIZE=-1  FACE="Arial" color="#006600"><b><?php echo $LD[$x]; ?></b></td>
-    <td><FONT SIZE=-1  FACE="Arial">
+    <td><FONT color="#006600"><b><?php echo $LD[$x]; ?></b></font></td>
+    <td>
 	<?php 
 			switch($x){
 				case 'delivery_date': echo formatDate2Local($pregbuf[$show_preg_enc][$x],$date_format); break;
@@ -115,7 +115,7 @@ if($rows){
 	if($parent_admit&&$edit&&($show_preg_enc==$HTTP_SESSION_VARS['sess_en']||$no_enc_preg)){
 ?>
   <tr valign="top">
-    <td colspan=2>
+    <td colspan=2>&nbsp;<br>
 	<img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle'); ?>>
 	<a href="<?php 
 		echo$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='. strtr($target,' ','+').'&mode=new&allow_update='.$allow_update;
@@ -125,7 +125,7 @@ if($rows){
 		if($no_enc_preg) echo $LDEnterNewRecord;
 			else echo $LD['update_preg_details']; 
 ?>
-	</a>
+	</a>&nbsp;<p>
 	</td>
 	</tr>
 <?php
@@ -133,27 +133,27 @@ if($rows){
 	if($show_details&&$rows>1){
 ?>
   <tr bgcolor="#f6f6f6" valign="top">
-    <td colspan=6><img <?php echo createComIcon($root_path,'dwnarrowgrnlrg.gif','absmiddle') ?>> <font size=3 face="verdana,arial"><?php echo $LDOtherRecords; ?></font>
+    <td colspan=6><img <?php echo createComIcon($root_path,'dwnarrowgrnlrg.gif','absmiddle') ?>> <font size=3><?php echo $LDOtherRecords; ?></font>
 </td>
   </tr>
 
 <?php	
 	}
-	
+
 	if($rows>1||($no_enc_preg)){
 	
 ?>
   <tr bgcolor="#f6f6f6" valign="top">
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066">&nbsp;</td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDEncounterNr; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDelivery.' '.$LDDate; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDelivery.' '.$LDMode; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDOutcome; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDNrOfFetus; ?></td>
+    <td <?php echo $tbg; ?>><FONT color="#000066">&nbsp;</td>
+    <td <?php echo $tbg; ?>><FONT color="#000066"><?php echo $LDEncounterNr; ?></td>
+    <td <?php echo $tbg; ?>><FONT color="#000066"><?php echo $LDDelivery.' '.$LDDate; ?></td>
+    <td <?php echo $tbg; ?>><FONT color="#000066"><?php echo $LDDelivery.' '.$LDMode; ?></td>
+    <td <?php echo $tbg; ?>><FONT color="#000066"><?php echo $LDOutcome; ?></td>
+    <td <?php echo $tbg; ?>><FONT color="#000066"><?php echo $LDNrOfFetus; ?></td>
   </tr>
 <?php
 		while(list($x,$v)=each($pregbuf)){
-			# Do not list this encounter's pregnancy in the admission module
+			# Do not list this encounter´s pregnancy in the admission module
 			if($x==$show_preg_enc) continue;
 ?>
   <tr bgcolor="#fefefe" valign="top">
@@ -163,11 +163,11 @@ if($rows){
 			else echo '&nbsp;';
 ?>
 	</td>
-    <td><FONT SIZE=-1  FACE="Arial"><a href="<?php echo $thisfile.URL_APPEND.'&target='.$target.'&show_preg_enc='.$v['encounter_nr'] ?>"><?php echo $v['encounter_nr']; ?></a></td>
-    <td><FONT SIZE=-1  FACE="Arial"><?php echo @formatDate2Local($v['delivery_date'],$date_format); ?></td>
-    <td><FONT SIZE=-1  FACE="Arial"><?php echo $v['delivery_mode']; ?></td>
-    <td><FONT SIZE=-1  FACE="Arial"><?php echo $v['outcome']; ?></td>
-    <td><FONT SIZE=-1  FACE="Arial"><?php echo $v['nr_of_fetuses']; ?></td>
+    <td><a href="<?php echo $thisfile.URL_APPEND.'&target='.$target.'&show_preg_enc='.$v['encounter_nr'] ?>"><?php echo $v['encounter_nr']; ?></a></td>
+    <td><?php echo @formatDate2Local($v['delivery_date'],$date_format); ?></td>
+    <td><?php echo $v['delivery_mode']; ?></td>
+    <td><?php echo $v['outcome']; ?></td>
+    <td><?php echo $v['nr_of_fetuses']; ?></td>
   </tr>
 
 <?php

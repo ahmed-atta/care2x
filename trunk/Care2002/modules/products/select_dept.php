@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -47,56 +47,37 @@ switch($target){
 							break;
 	default : $fileforward=$root_path."modules/products/products-bestellung.php".URL_APPEND."&cat=$cat";
 }
-					  
-?>
 
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
 
-<style type="text/css">
-	A:link  {text-decoration: none; }
-	A:hover {text-decoration: none; }
-	A:active {text-decoration: none;}
-	A:visited {text-decoration: none;}
-</style>
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
 
-<?php 
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-?>
-</HEAD>
-<BODY  bgcolor="<?php echo $cfg['body_bgcolor']; ?>" alink="navy" vlink="navy" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0>
-<table width=100% border=0 cellpadding="0" cellspacing=0>
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp; <?php echo $title ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('docs_duty_quickview.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
-</tr>
-<tr>
-<td bgcolor="<?php echo $cfg['body_bgcolor']; ?>" colspan=2>
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
 
-<ul>
-<table border=0>
-  <tr>
-    <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"></td>
+# Title in toolbar
+ $smarty->assign('sToolbarTitle',$title);
 
-	<td colspan=4><center>
-	<font face=arial color="#990000" size=4>
-	<?php echo $LDPlsSelectDept; ?>
-	</center>
-</td>
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('dept_select.php')");
 
-  </tr>
-</table>
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
 
-	<table  cellpadding="2" cellspacing=0 border="0">
-<?php
+ # Window bar title
+ $smarty->assign('sWindowTitle',$title);
+
+$smarty->assign('sMascotImg','<img '.createMascot($root_path,'mascot1_r.gif','0','bottom').' align="absmiddle">');
+$smarty->assign('LDPlsSelectDept',$LDPlsSelectDept);
+
+ # Buffer department rows output
+ ob_start();
 
 $toggler=0;
-
 
 while(list($x,$v)=each($dept)){
 		
@@ -105,9 +86,9 @@ while(list($x,$v)=each($dept)){
 	if($hilitedept==$v['nr']) 	{ echo '<tr bgcolor="yellow">'; $bold="<font color=\"red\" size=2><b>";$boldx="</b></font>"; } 
 	else
 		if ($toggler==0) 
-			{ echo '<tr bgcolor="#cfcfcf">'; $toggler=1;} 
-				else { echo '<tr bgcolor="#f6f6f6">'; $toggler=0;}
-	echo '<td ><font face="verdana,arial" size="2" >&nbsp;'.$bold;
+			{ echo '<tr class="wardlistrow1">'; $toggler=1;}
+				else { echo '<tr class="wardlistrow2">'; $toggler=0;}
+	echo '<td>&nbsp;'.$bold;
 	if(isset($$v['LD_var'])&&!empty($$v['LD_var'])) echo $$v['LD_var'];
 		else echo $v['name_formal'];
 	echo $boldx.'&nbsp;</td>';
@@ -116,19 +97,21 @@ while(list($x,$v)=each($dept)){
 	echo "\n";
 
 	}
-echo '</table>';
+
+$sTemp = ob_get_contents();
+ ob_end_clean();
+
+# Assign the dept rows  to the frame template
+
+ $smarty->assign('sDeptRows',$sTemp);
+
+$smarty->assign('sBackLink','<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'close2.gif','0').' alt="'.$LDCloseAlt.'">');
+
+ $smarty->assign('sMainBlockIncludeFile','or/select_dept.tpl');
+
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
 ?>
-<p>
-<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>">
-</a></FONT>
-<p>
-</td>
-</tr>
-</table>        
-</ul>
-<p>
-<?php
-require($root_path.'include/inc_load_copyrite.php');
-?>
-</BODY>
-</HTML>
