@@ -9,7 +9,7 @@
 *  Note this class should be instantiated only after a "$db" adodb  connector object
 * has been established by an adodb instance
 * @author Elpidio Latorilla
-* @version beta 1.0.08
+* @version beta 1.0.09
 * @copyright 2002,2003 Elpidio Latorilla
 * @package care_api
 */

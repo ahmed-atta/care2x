@@ -9,7 +9,7 @@ require_once($root_path.'include/care_api_classes/class_notes.php');
 *  Medocs methods. Medocs = Textual documentation for diagnosis and therapy procedures as opposite of the DRG (code based documentation).
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
-* @version beta 1.0.08
+* @version beta 1.0.09
 * @copyright 2002,2003,2004 Elpidio Latorilla
 * @package care_api
 */
@@ -94,5 +94,42 @@ class Medocs extends Notes {
 		return $this->_getMedocsList($nr,'_REG');
 	}
 
+	/** 
+	* Gets medocs document based on a field "nr" key
+	*
+	* The returned  array has the following keys:
+	* diagnosis = Diagnosis text
+	* short_notes = Short diagnosis notes
+	* aux_notes = Auxilliary notes
+	* date = Date of creation
+	* time = Time of creation
+	* personell_nr = Personnel number who created the document
+	* personell_name = Personnel name
+	* therapy = Therapy text
+	* @access public
+	* @param int document number
+	* @return mixed array or boolean
+	*/
+	function getMedocsDocument($nr){
+		global $db;
+		if(empty($nr)) return FALSE;
+		$this->sql="SELECT nd.notes AS diagnosis,
+						nd.short_notes, 
+						nd.aux_notes, 
+						nd.date,
+						nd.time,
+						nd.personell_nr,
+						nd.personell_name,
+						nt.notes AS therapy
+		FROM $this->tb_notes AS nd LEFT JOIN $this->tb_notes AS nt ON nd.nr=nt.ref_notes_nr
+		WHERE   nd.nr=$nr";
+		
+        if($this->res['gmd']=$db->Execute($this->sql)) {
+            if($this->rec_count=$this->res['gmd']->RecordCount()) {
+				 return $this->res['gmd']->FetchRow();	 
+			} else { return false; }
+		} else { return false; }
+	}
+	
 }
 ?>

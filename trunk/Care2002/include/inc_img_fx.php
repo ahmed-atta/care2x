@@ -157,8 +157,11 @@ function createLogo($froot, $fn, $border='', $align=''){
 	# save the orig icon path
 	$icon_path=$img_path_com_icon;
 	# set the logo path
-	$img_path_com_icon='gui/img/logos/'.$theme_logo.'/'; # the path for non-language dependent logo
-	if(!file_exists($froot.$img_path_com_icon.$fn)) $img_path_com_icon='gui/img/logos/default/';
+	$img_path_com_icon='gui/img/logos/'.$theme_logo.'/'.$lang.'/'; # the path for  logo
+	if(!file_exists($froot.$img_path_com_icon.$fn)){
+		$img_path_com_icon='gui/img/logos/'.$theme_logo.'/default/'; # the path for  logo
+		if(!file_exists($froot.$img_path_com_icon.$fn)) 	$img_path_com_icon='gui/img/logos/default/';
+	}
 	# create the icon/logo
 	$img_src=createComIcon($froot,$fn,$border,$align);
 	# reset the orig icon path

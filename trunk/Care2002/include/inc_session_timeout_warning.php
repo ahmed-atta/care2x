@@ -1,4 +1,4 @@
-<html>
+<?php html_rtl($lang); ?>
 <head>
 <?php echo setCharSet($lang) ?>
 <title></title>

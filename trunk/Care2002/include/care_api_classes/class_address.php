@@ -11,7 +11,7 @@ require_once($root_path.'include/care_api_classes/class_core.php');
 *  Address methods.
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance.
 * @author Elpidio Latorilla
-* @version beta 1.0.08
+* @version beta 1.0.09
 * @copyright 2002,2003 Elpidio Latorilla
 * @package care_api
 */
@@ -160,6 +160,7 @@ class Address extends Core {
 		global $HTTP_SESSION_VARS;
 		$this->_useCityTown();
 		$this->data_array=$data;
+		$this->data_array['status']='normal';
 		$this->data_array['history']="Create: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
 		$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
 		$this->data_array['create_id']=$HTTP_SESSION_VARS['sess_user_name'];

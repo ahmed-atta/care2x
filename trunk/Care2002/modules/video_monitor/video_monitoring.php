@@ -11,7 +11,7 @@ $breakfile=$root_path.'main/spediens.php?sid='.$sid.'&lang='.$lang;
 require($root_path.'global_conf/inc_remoteservers_conf.php');
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<HTML>
+<?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
 

@@ -12,7 +12,7 @@ require_once($root_path.'include/care_api_classes/class_encounter.php');
 * Note this class should be instantiated only after a "$db" adodb  connector object
 * has been established by an adodb instance
 * @author Elpidio Latorilla
-* @version beta 1.0.08
+* @version beta 1.0.09
 * @copyright 2002,2003 Elpidio Latorilla
 * @package care_api
 */
@@ -218,7 +218,7 @@ class DRG extends Encounter{
 	* Language codes that have corresponding ICD tables
 	* @var string
 	*/
-	var $tb_lang_icd='en,de';
+	var $tb_lang_icd='en,de,pt-br';
 	/**
 	* Language codes that have corresponding OPS/ICPM tables
 	* @var string
@@ -236,14 +236,19 @@ class DRG extends Encounter{
 		$this->dept_nr=$dept_nr;
 		$this->coretable=$this->tb_diagnosis;
 		$this->ref_array=$this->fld_diagnosis;
+		
+		# convert the dashes to underscores in the language code
+		$intlang=strtr($lang,'-','_');
+		
 		# Check if language has a corresponding table. if not use default table
 		if(stristr($this->tb_lang_icd,$lang)){
-			$this->tb_diag_codes='care_icd'.$this->icd_version.'_'.$lang; # construct the code source table e.g. "care_icd10_en"
+			$this->tb_diag_codes='care_icd'.$this->icd_version.'_'.$intlang; # construct the code source table e.g. "care_icd10_en"
 		}else{
 			$this->tb_diag_codes=$this->tb_icd_default;
 		}
+
 		if(stristr($this->tb_lang_icpm,$lang)){
-			$this->tb_proc_codes='care_ops'.$this->ops_version.'_'.$lang; # construct the code source table e.g. "care_icd10_en"
+			$this->tb_proc_codes='care_ops'.$this->ops_version.'_'.$intlang; # construct the code source table e.g. "care_icd10_en"
 		}else{
 			$this->tb_proc_codes=$this->tb_icpm_default;
 		}

@@ -10,7 +10,7 @@ require_once($root_path.'include/care_api_classes/class_core.php');
 *  Notes methods.
 *  Note: this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance.
 * @author Elpidio Latorilla
-* @version beta 1.0.08
+* @version beta 1.0.09
 * @copyright 2002,2003,2004 Elpidio Latorilla
 * @package care_api
 */
@@ -151,9 +151,9 @@ class Notes extends Core {
 	function getType($nr=1){
 	    global $db;
 
-	    if ($this->result=$db->Execute("SELECT nr,type,name,LD_var FROM $this->tb_types WHERE nr=$nr")) {
-		    if ($this->result->RecordCount()) {
-		        return $this->result->FetchRow();
+	    if ($this->res['gt']=$db->Execute("SELECT nr,type,name,LD_var FROM $this->tb_types WHERE nr=$nr")) {
+		    if ($this->res['gt']->RecordCount()) {
+		        return $this->res['gt']->FetchRow();
 			} else {
 				return false;
 			}

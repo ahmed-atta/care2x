@@ -9,7 +9,7 @@ require_once($root_path.'include/care_api_classes/class_core.php');
 *  Insurance methods. 
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
-* @version beta 1.0.08
+* @version beta 1.0.09
 * @copyright 2002,2003,2004 Elpidio Latorilla
 * @package care_api
 */
@@ -481,7 +481,7 @@ class Insurance extends Core {
 *  Personinsurance methods. 
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
-* @version beta 1.0.08
+* @version beta 1.0.09
 * @copyright 2002,2003,2004 Elpidio Latorilla
 * @package care_api
 */
@@ -618,7 +618,7 @@ class PersonInsurance extends Insurance {
     function getInsuranceClassInfo($class_nr) {
         global $db;
 		
-        if($this->result=$db->Execute("SELECT class_id,name FROM $this->tb_class WHERE class_nr=$class_nr")) {
+        if($this->result=$db->Execute("SELECT class_nr,class_id,name,LD_var,description,status,history FROM $this->tb_class WHERE class_nr=$class_nr")) {
             if($this->result->RecordCount()) {
 				 $this->row= $this->result->FetchRow();
 				 return $this->row;	 

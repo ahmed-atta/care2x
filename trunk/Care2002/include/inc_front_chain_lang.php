@@ -128,11 +128,11 @@ if(!defined('NO_CHAIN')||NO_CHAIN!=1){
 
        if(getLang('invalid-access-warning.php')) {
 
-	       header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); 
+	       header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php?lang='.$lang); 
 	   }
 	     else {
 
-		     header('Location:'.$root_path.'language/'.LANG_DEFAULT.'/lang_'.LANG_DEFAULT.'_invalid-access-warning.php');
+		     header('Location:'.$root_path.'language/'.LANG_DEFAULT.'/lang_'.LANG_DEFAULT.'_invalid-access-warning.php?lang='.$lang);
 		 } 
        
 	   exit;

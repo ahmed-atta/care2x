@@ -4,7 +4,7 @@ if (eregi('inc_passcheck_head.php',$PHP_SELF))
 	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 ?>
-<HTML>
+<?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
  <TITLE></TITLE>

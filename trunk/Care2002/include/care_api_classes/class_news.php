@@ -9,7 +9,7 @@ require_once($root_path.'include/care_api_classes/class_core.php');
 *  News methods. 
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
-* @version beta 1.0.08
+* @version beta 1.0.09
 * @copyright 2002,2003,2004 Elpidio Latorilla
 * @package care_api
 */

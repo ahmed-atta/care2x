@@ -10,7 +10,7 @@ require_once($root_path.'include/care_api_classes/class_core.php');
 *
 * Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
-* @version beta 1.0.08
+* @version beta 1.0.09
 * @copyright 2002,2003 Elpidio Latorilla
 * @package care_api
 */
@@ -497,7 +497,7 @@ class Person extends Core {
 	* Returns the city or town code number. Reserved.
 	*/
 	function CityTownCode() {
-        return  $this->getValue('');
+        return  $this->getValue('addr_citytown_nr');
 	}
 	/**
 	* Returns citizenship.
@@ -654,7 +654,9 @@ class Person extends Core {
 	function CityTownName($code_nr=''){
 	    global $db;
 		if(!$this->is_preloaded) $this->sql="SELECT name FROM $this->tb_citytown WHERE nr=$code_nr";
-            else $this->sql="SELECT name FROM $this->tb_citytown WHERE nr=$this->CityTownCode()";
+            else $this->sql="SELECT name FROM $this->tb_citytown WHERE nr=".$this->CityTownCode();
+			
+		//echo $this->sql;exit;
         if($this->result=$db->Execute($this->sql)) {
             if($this->result->RecordCount()) {
 				 $this->row=$this->result->FetchRow();	 
