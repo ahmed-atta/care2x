@@ -24,14 +24,16 @@ switch($HTTP_SESSION_VARS['sess_user_origin'])
 }
 
 require_once($root_path.'include/inc_front_chain_lang.php');
+/* Load the date formatter */
+require_once($root_path.'include/inc_date_format_functions.php');
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
  <TITLE>
- <?php echo "$ln, $fn $bd - $pn";
+ <?php echo "$ln, $fn ".formatDate2Local($bd,$date_format)." - $pn";
 	if($opnr) echo" - OP# $opnr"; 
-	$targetbuf="$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=$newsave";
+	$targetbuf="$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&group_nr=$group_nr&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=$newsave";
 ?>	
 
 </TITLE>

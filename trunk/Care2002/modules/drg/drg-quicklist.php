@@ -10,9 +10,13 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+if (!$pn) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;}; 
+
+if(!isset($saveok)) $saveok=false;
+
 define('LANG_FILE','drg.php');
-switch($HTTP_SESSION_VARS['sess_user_origin'])
-{
+
+switch($HTTP_SESSION_VARS['sess_user_origin']){
 	case 'admission': 
 	{
 		$local_user='aufnahme_user';
@@ -23,56 +27,58 @@ switch($HTTP_SESSION_VARS['sess_user_origin'])
 		$local_user='ck_op_pflegelogbuch_user';
 	}
 }
+
 require_once($root_path.'include/inc_front_chain_lang.php');
-if (!$pn) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;}; 
-require_once($root_path.'include/inc_config_color.php');
-?>
-<?php if($saveok) { ?>
-<?php
-switch($target)
-{
-	case "ops-intern":
+require_once($root_path.'include/care_api_classes/class_drg.php');
+$DRG_obj= new DRG($pn,$dept_nr);
+
+if($saveok) { 
+	switch($target){
+		case "drg_intern":
 							$openerfile="drg-ops-intern.php";
 							break;
-	case "icd10":
+		case "diagnosis":
 							$openerfile="drg-icd10.php";
 							break;
-	case "ops301":
+		case "procedure":
 							$openerfile="drg-ops301.php";
 							break;
-	default:{header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;};
-}
+		default:{header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;};
+	}
 ?>
  <script language="javascript" >
- window.opener.location.href='<?php echo "$openerfile?sid=$sid&lang=$lang&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=composite&newsave=1" ?>';
+ window.opener.location.href='<?php echo "$openerfile?sid=$sid&lang=$lang&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&group_nr=$group_nr&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=composite&newsave=1" ?>';
  window.close();
 </script>
-	<?php exit; ?>
-<?php } ?>
-<?php
-switch($target)
-{
-	case "ops-intern":
-							$title=$LDOperation;
+<?php 
+
+	exit;
+} 
+
+switch($target){
+	case 'drg_intern':
+							$title=$LDCode;
 							$rowcolor="#990000";
 							$element="ops_intern_code";
 							$searchfile="drg-ops-intern-search.php";
 							break;
-	case "icd10":
+	case 'diagnosis':
 							$title=$LDIcd10;
 							$rowcolor="#0000aa";
 							$element="icd_code";
 							$searchfile="drg-icd10-search.php";
 							$save_related=1;
 							$element_related="related_icd";
+							$hidselector='icd_px';
 							break;
-	case "ops301":
+	case 'procedure':
 							$title=$LDOps301;
 							$rowcolor="#009900";
 							$element="ops_code";
 							$searchfile="drg-ops301-search.php";
 							$save_related=1;
 							$element_related="related_ops";
+							$hidselector='ops_px';
 							break;
 	default:{header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;};
 }
@@ -83,19 +89,12 @@ $thisfile="drg-quicklist.php";
 
 if($mode=='save')
 {
-	$itemselector="sel";
-	include($root_path."include/inc_drg_entry_save.php");
-}
-else
-{
-	$fielddata="item, code_description, rank";
-	$dbtable="care_drg_quicklist";
-	$sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE dept_nr="'.$dept_nr.'" AND type="'.$target.'" AND lang="'.$lang.'" ORDER BY rank DESC';
-		if($ergebnis=$db->Execute($sql))
-       	{
-			$linecount=$ergebnis->RecordCount();
-		}
-		else {echo "<p>".$sql."<p>$LDDbNoRead"; exit;};
+	$itemselector='sel';
+	include($root_path.'include/inc_drg_entry_save.php');
+}else{
+	if($qlist_obj=$DRG_obj->DeptQuicklist($target,$dept_nr)){
+		$linecount=$DRG_obj->LastRecordCount();
+	}
 }
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -156,7 +155,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 </td>
 <td><font face=arial size=2 color=#ffffff>&nbsp;<b><nobr><?php echo $title ?></nobr></b>&nbsp;</td>
 
-<td colspan=7><font face=arial size=2 color=#ffffff>&nbsp;&nbsp;&nbsp;<b><?php echo $LDDescription ?></b>
+<td><font face=arial size=2 color=#ffffff>&nbsp;&nbsp;&nbsp;<b><?php echo $LDDescription ?></b>
 </td>
 		
 </tr>
@@ -165,38 +164,38 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 function drawdata(&$data)
 {
 	global $toggle,$LDInclusive,$LDExclusive,$LDNotes,$LDRemarks,$LDExtraCodes,$LDAddCodes;
- 	global $idx,$keyword,$showonly;
-						parse_str($data,$parsed);
-						echo "
-						<tr bgcolor=";
-						if($toggle) { echo "#efefef>"; $toggle=0;} else {echo "#ffffff>"; $toggle=1;};
-						echo '
-						<td>';
-						 		echo '<input type="checkbox" name="sel'.$idx.'" value="'.htmlspecialchars($data).'">';
-								 $idx++;
-						echo '
-							</td>
-							<td><font face=arial size=2><nobr>';
-						//echo " *$parentcode +$grandcode";
-						 echo "$parsed[code]&nbsp;";		
-						echo "&nbsp;</nobr></td><td>&nbsp;";
-						//echo '<font face=arial size=2>'.trim($data[description]);
-						echo '<font face=arial size=2>';
-						echo "$parsed[des]&nbsp;";		
-						
-						echo '</td>';
-					echo "</tr>";
+ 	global $idx,$keyword,$showonly,$hidselector;
+
+	echo '
+	<tr bgcolor="';
+	if($toggle) { echo '#efefef">';} else {echo '#ffffff">'; };
+	$toggle=!$toggle;
+	echo '
+	<td>';
+	echo '<input type="checkbox" name="sel'.$idx.'" value="'.$data['nr'].'">
+			<input type="hidden" name="'.$hidselector.$idx.'" value="'.$data['code_parent'].'">';
+	$idx++;
+	
+	echo '
+	</td>
+	<td><font face=arial size=2><nobr>';
+	echo $data['code'].'&nbsp;';		
+	echo '&nbsp;</nobr></td><td>&nbsp;';
+	echo '<font face=arial size=2>';
+	echo $data['parent_desc'].':<b>'.$data['description'].'</b>&nbsp;';		
+				
+	echo '</td>';
+	echo '</tr>';
 }
 
-			if ($linecount>0) 
-				{ 
-					$idx=0;
-					while($zeile=$ergebnis->FetchRow())
-					{
-							drawdata($zeile['code_description']);
-							//$idx++;
-					}
-				}
+if ($linecount) { 
+	
+	$idx=0;
+	while($qlist=$qlist_obj->FetchRow()){
+		drawdata($qlist);
+		//$idx++;
+	}
+}
 ?>
 
 </table>
@@ -211,10 +210,12 @@ function drawdata(&$data)
 <input type="hidden" name="fn" value="<?php echo $fn; ?>">
 <input type="hidden" name="bd" value="<?php echo $bd; ?>">
 <input type="hidden" name="dept_nr" value="<?php echo $dept_nr; ?>">
+<input type="hidden" name="group_nr" value="<?php echo $group_nr; ?>">
 <input type="hidden" name="oprm" value="<?php echo $oprm; ?>">
 <input type="hidden" name="display" value="<?php echo $display; ?>">
 <input type="hidden" name="target" value="<?php echo $target; ?>">
 <input type="hidden" name="mode" value="save">
+<input type="hidden" name="quicklist" value="1">
 
 </form>
 <?php else : ?>

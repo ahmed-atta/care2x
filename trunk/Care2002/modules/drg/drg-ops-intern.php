@@ -24,53 +24,42 @@ switch($HTTP_SESSION_VARS['sess_user_origin'])
 	}
 }
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
-require_once($root_path.'include/care_api_classes/class_encounter.php');
-
-
-$toggle=0;
-
 /* Load the date formatter */
 require_once($root_path.'include/inc_date_format_functions.php');
-           
-	   
-$dbtable='care_nursing_op_logbook';
-				
-$sql="SELECT ops_intern_code  FROM $dbtable WHERE op_nr='$opnr' AND encounter_nr='$pn' AND dept_nr='$dept_nr' AND op_room='$oprm'";
+require_once($root_path.'include/care_api_classes/class_drg.php');
+$enc_obj = new DRG($pn);
 
-if($ergebnis=$db->Execute($sql)){
-	if($linecount=$ergebnis->RecordCount()){
-		switch($mode)
-		{
-			case 'delete':
-			{
-				$zeile=$ergebnis->FetchRow();
-				$linebuf=trim($zeile['ops_intern_code']);
-				if($linebuf=='') break;
-				$arrbuf=explode('~',$linebuf);
-				array_unique($arrbuf);
-				array_splice($arrbuf,$item,1);
-				$linebuf=addslashes(implode('~',$arrbuf));
-				$sql="UPDATE $dbtable SET ops_intern_code='$linebuf' WHERE patnum='$pn' AND op_nr='$opnr' AND dept_nr='$dept_nr' AND op_room='$oprm'";
-        		if($ergebnis=$db->Execute($sql)) {
-					header("location:drg-ops-intern.php?sid=$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=1");
-					exit;
-				}else{
-					echo "<p>".$sql."<p>$LDDbNoWrite";
-				}
-				break;
-			}
-					/* Reserved space for addtional cases */
-		}
-	}
-}else{
-	echo "<p>".$sql."<p>$LDDbNoRead";
-};
-		
+if(isset($mode)&&$mode=='save_group'&&isset($group_nr)&&$group_nr){
+	$enc_obj->groupNonGroupedItems($group_nr);
+	header("location:$thisfile?sid=$sid&lang=$lang&saveok=1&pn=$pn&opnr=$opnr&group_nr=$group_nr&ln=$ln&fn=$fn&dept_nr=$dept_nr&oprm=$oprm&display=$display");
+	exit;
+}
+
+$toggle=0;
+$thisfile=basename(__FILE__);
+          
+if(isset($mode)&&$mode=='delete'&&$item){
+	$buf=$enc_obj->ungroupDiagnoses($group_nr);
+	$buf2=$enc_obj->ungroupProcedures($group_nr);
+	$enc_obj->deleteEncounterDRGGroup($item);
+	header("location:$thisfile?sid=$sid&lang=$lang&pn=$pn&opnr=$opnr&group_nr=0&ln=$ln&fn=$fn&dept_nr=$dept_nr&oprm=$oprm&display=$display");
+	exit;
+}
+
+$non_grouped=false;
+if(!isset($group_nr)) $group_nr=0;
+
 /* Get the patient's basic data */
-$enc_obj = new Encounter($pn);
-if($enc=$enc_obj->getBasic4Data()){
+if($enc=&$enc_obj->getBasic4Data()){
 	$encounter=$enc->FetchRow();
+	// Get the internal drg groups for the encounter
+	$drg_rows=&$enc_obj->InternDRGGroups();
+	// Check for non grouped entries
+	if($enc_obj->nongroupedDiagnosisExists()){
+		$non_grouped=true; 
+	}elseif($enc_obj->nongroupedProcedureExists()){
+		$non_grouped=true; 
+	}
 }
 
 /* Load the icon images */
@@ -95,24 +84,25 @@ function gethelp(x,s,x1,x2,x3)
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
-function openOPSsearch()
+function openOPSsearch(c)
 {
-	urlholder="drg-ops-intern-search.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept_nr=$dept_nr&oprm=$oprm" ?>";
-	drgwin_<?php echo $uid ?>=window.open(urlholder,"drgwin_<?php echo $uid ?>","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
-	window.drgwin_<?php echo $uid ?>.moveTo(100,100);
+	g=document.ops_intern.group_nr.value;
+	urlholder="drg-ops-intern-search.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept_nr=$dept_nr&oprm=$oprm" ?>&group_nr="+g+"&current="+c;
+	drgwin_<?php echo $sid ?>=window.open(urlholder,"drgwin_<?php echo $sid ?>","width=600,height=450,menubar=no,resizable=yes,scrollbars=yes");
+	window.drgwin_<?php echo $sid ?>.moveTo(100,100);
 }
-function deleteItem(i)
+function deleteItem(i,g)
 {
-	if(confirm("<?php echo $LDAlertSureDelete ?>"))
+	if(confirm("<?php echo "$LDItemsDegrouped \\n $LDAlertSureDelete" ?>"))
 	{
-		window.location.href='drg-ops-intern.php?sid=<?php echo "$sid&lang=$lang&mode=delete&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept_nr=$dept_nr&oprm=$oprm&display=$display" ?>&item='+i;
+		window.location.href='drg-ops-intern.php?sid=<?php echo "$sid&lang=$lang&mode=delete&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept_nr=$dept_nr&oprm=$oprm&display=$display" ?>&item='+i+'&group_nr='+g;
 	}
 }
 function openQuicklist(t)
 {
 	urlholder="drg-quicklist.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept_nr=$dept_nr&oprm=$oprm" ?>&target="+t;
-	drgwin_<?php echo $uid ?>=window.open(urlholder,"drgwin_<?php echo $uid ?>","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
-	window.drgwin_<?php echo $uid ?>.moveTo(100,100);
+	drgwin_<?php echo $sid ?>=window.open(urlholder,"drgwin_<?php echo $sid ?>","width=600,height=450,menubar=no,resizable=yes,scrollbars=yes");
+	//window.drgwin_<?php echo $sid ?>.moveTo(100,100);
 }
 function openRelatedCodes()
 {
@@ -126,21 +116,51 @@ function openRelatedCodes()
 			h=650;';
 ?>
 
-	mc=document.ops_intern.maincode.value;
-	relcodewin_<?php echo $uid ?>=window.open("drg-related-codes.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept_nr=$dept_nr&oprm=$oprm" ?>&maincode="+mc,"relcodewin_<?php echo $uid ?>","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=" + (h-60));
-	window.relcodewin_<?php echo $uid ?>.moveTo(0,0);
+	gn=document.ops_intern.group_nr.value;
+	if(gn!=0){
+		relcodewin_<?php echo $sid ?>=window.open("drg-related-codes.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept_nr=$dept_nr&oprm=$oprm" ?>&group_nr="+gn,"relcodewin_<?php echo $sid ?>","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=" + (h-60));
+		window.relcodewin_<?php echo $sid ?>.moveTo(0,0);
+	}
 }
-
+function showItems(d,g){
+	if(d.checked){
+		updateDisplay(g);
+/*		document.ops_intern.group_nr.value=g;
+		window.parent.ICD.location.replace("drg-icd10.php<?php echo URL_REDIRECT_APPEND.'&display='.$display.'&pn='.$pn.'&group_nr='; ?>"+g);
+		window.parent.OPS.location.replace("drg-ops301.php<?php echo URL_REDIRECT_APPEND.'&display='.$display.'&pn='.$pn.'&group_nr='; ?>"+g);
+*/	}
+}
+function updateDisplay(g){
+	document.ops_intern.group_nr.value=g;
+	window.parent.ICD.location.replace("drg-icd10.php<?php echo URL_REDIRECT_APPEND.'&display='.$display.'&pn='.$pn.'&group_nr='; ?>"+g);
+	window.parent.OPS.location.replace("drg-ops301.php<?php echo URL_REDIRECT_APPEND.'&display='.$display.'&pn='.$pn.'&group_nr='; ?>"+g);
+}
+function useThisGroup(g){
+	document.ops_intern.mode.value="save_group";
+	document.ops_intern.group_nr.value=g;
+	document.ops_intern.submit();
+}
+function createNewGroupName()
+{
+	urlholder="drg-intern-create.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept_nr=$dept_nr&oprm=$oprm&non_grouped=$non_grouped" ?>";
+	newgrp_<?php echo $sid ?>=window.open(urlholder,"newgrp_<?php echo $sid ?>","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
+	window.newgrp_<?php echo $sid ?>.moveTo(100,100);
+}
+function checkCreateNew(){
+	if(confirm("Are you sure you want to create a new group code?")){
+		createNewGroupName();
+	}
+}
 // -->
 </script>
  
-  <?php 
+<?php 
 require($root_path.'include/inc_css_a_hilitebu.php');
 ?>
  <?php if($newsave) : ?>
  <script language="javascript" >
  //window.opener.location.href='drg-composite-start.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=composite&newsave=1" ?>';
-window.parent.opener.location.href='<?php echo "oploginput.php?sid=$sid&lang=$lang&mode=saveok&enc_nr=$pn&op_nr=$opnr&dept_nr=$dept_nr&saal=$oprm&pyear=$y&pmonth=$m&pday=$d" ?>';
+//window.parent.opener.location.href='<?php echo "oploginput.php?sid=$sid&lang=$lang&mode=saveok&enc_nr=$pn&op_nr=$opnr&dept_nr=$dept_nr&saal=$oprm&pyear=$y&pmonth=$m&pday=$d" ?>';
 </script>
 <?php endif ?>
 </HEAD>
@@ -149,7 +169,7 @@ window.parent.opener.location.href='<?php echo "oploginput.php?sid=$sid&lang=$la
 <?php if($display=="composite") echo 'topmargin=0 marginheight=0 leftmargin=0 marginwidth=0';
 else  echo 'topmargin=2 marginheight=2';
 ?> 
-onLoad="if(window.focus) window.focus();" bgcolor="<?php echo $cfg['body_bgcolor']; ?>" 
+onLoad="if(window.focus) window.focus();<?php if(isset($saveok)&&$saveok) echo 'updateDisplay(\''.$group_nr.'\');'; ?>" bgcolor="<?php echo $cfg['body_bgcolor']; ?>" 
 <?php if (!$cfg['dhtml']){ echo ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 <form name="ops_intern" action="drg-ops-intern.php" method="post">
 <FONT    SIZE=2  FACE="verdana,Arial" >
@@ -170,59 +190,79 @@ onLoad="if(window.focus) window.focus();" bgcolor="<?php echo $cfg['body_bgcolor
     <td width=100% valign="top">
 	<table border=0 cellpadding=1 cellspacing=1 width=100%> 
 		<tr bgcolor="#990000">
+ 		<td align="center"><font face=arial size=2 color=#ffffff><b><?php echo $LDSelect ?></b></td>
  		<td width="15%"><font face=arial size=2 color=#ffffff><b><?php echo $LDOpsIntern ?></b></td>
- 		<td colspan=2><font face=arial size=2 color=#ffffff><b><?php echo $LDOperation ?></b></td>
-    	</tr>
+ 		<td ><font face=arial size=2 color=#ffffff><b><?php echo $LDOperation ?></b></td>
+ 		<td><font face=arial size=2 color=#ffffff><b><?php echo $LDOptions ?></b></td>
+ 		<td>&nbsp;</td>
+   	</tr>
 
 <?php
-if($linecount>0){ 
-						
-	$zeile=$ergebnis->FetchRow();
-						
-	$linebuf=trim($zeile[ops_intern_code]);
-						
-	if($linebuf){
-		$arrbuf=explode('~',trim($linebuf));
-		array_unique($arrbuf);
-						
-		for($i=0;$i<sizeof($arrbuf); $i++){
-			parse_str(trim($arrbuf[$i]),$parsedline);
+if(is_object($drg_rows)){ 
+	$i=0;
+	while($drg=$drg_rows->FetchRow()){
 							
-			if(!$i) $main_code=$parsedline[code];
-							
+						
 			echo '<tr bgcolor=';
 								
 			if($toggle) { echo '#efefef>'; $toggle=0;} else {echo '#ffffff>'; $toggle=1;};
 								
 			echo '
-					<td><font face=arial size=2>'.stripslashes($parsedline[code]).'
+					<td align="center"><font face=arial size=2><input type="radio" name="grp_nr" onClick="javascript:showItems(this,\''.$drg['group_nr'].'\')" ';
+			if($group_nr==$drg['group_nr']) echo 'checked';
+			echo '>
 					</td>
-					<td><font face=arial size=2>'.stripslashes($parsedline[des]).'
+					<td><font face=arial size=2>'.$drg['code'].'
+					</td>
+					<td><font face=arial size=2>'.$drg['description'].'
+					</td>
+					<td><font face=arial size=2>';
+			if($non_grouped) echo '
+				<a href="javascript:useThisGroup(\''.$drg['group_nr'].'\')"><img '.createComIcon($root_path,'l_arrowgrnsm.gif','0').'> '.$LDUseToGroupItems.'</a>';
+			echo '
 					</td>
 					<td><a href="';
 							
-			echo 'javascript:deleteItem(\''.$i.'\')';
+			echo 'javascript:deleteItem(\''.$drg['nr'].'\',\''.$drg['group_nr'].'\')';
 								
 			echo '"><img '.$img_delete.' alt="'.$LDDeleteEntry.'"></a>
 					</td>
 					</tr>';
-		}
+		$i++;
 	}
 }
+if($non_grouped){
+		echo '<tr bgcolor="yellow">';
+								
+		//if($toggle) { echo '#efefef>'; $toggle=0;} else {echo '#ffffff>'; $toggle=1;};
+					echo '
+					<td align="center"><font face=arial size=2><input type="radio" name="grp_nr" onClick="javascript:showItems(this,\'0\')"';
+		if(!$group_nr) echo 'checked';
+		echo '>
+					</td>
+					<td><font face=arial size=2 color="#ee0000">'.$LDQMarks.'
+					</td>
+					<td ><font face=arial size=2 color="#ee0000">'.$LDNonSpecifiedGroup.'</td>
+					<td colspan=2><font face=arial size=2>
+					<a href="javascript:openOPSsearch(\'1\')"><img '.createComIcon($root_path,'l_arrowgrnsm.gif','0').'> '.$LDSpecifyGroup.'</a> <a href="javascript:createNewGroupName()"><img '.createComIcon($root_path,'l_arrowgrnsm.gif','0').'> '.$LDCreateGroupName.'</a>
+					</td>
+					';
+}
+
 
 ?>
 	</table>
-	
 	</td>
 	 <td valign="top" bgcolor="#990000"><font face=arial size=2 color=#ffffff>
-	<?php if($display!="composite") : ?>   
+	<?php if($display!='composite') { ?>   
 	<a href="javascript:window.history.back()" ><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?> width=110 height=24></a>
  	<p>
-	<?php else : ?>
-	<input type="button" value="<?php echo $LDSearch ?>" onClick="javascript:openOPSsearch()">&nbsp;
- 	<p><input type="button" value="<?php echo $LDQuickList ?>" onClick="javascript:openQuicklist('ops-intern')">
-	<?php endif ?>
+	<?php }else{ ?>
+	<input type="button" value="<?php echo $LDSearch ?>" onClick="javascript:openOPSsearch('0')">&nbsp;
+ 	<p><input type="button" value="<?php echo $LDQuickList ?>" onClick="javascript:openQuicklist('drg_intern')">
  	<p><input type="button" value="<?php echo $LDConvert2IcdOps ?>" onClick="javascript:openRelatedCodes()"><p>
+ 	<p><input type="button" value="Create new<?php echo $LDCreateNew ?>" onClick="javascript:checkCreateNew()"><p>
+	<?php } ?>
 	</td>
   </tr>
 </table>
@@ -234,7 +274,9 @@ if($linecount>0){
 <input type="hidden" name="fn" value="<?php echo $fn ?>">
 <input type="hidden" name="bd" value="<?php echo $bd ?>">
 <input type="hidden" name="display" value="<?php echo $display ?>">
-<input type="hidden" name="maincode" value="<?php echo $main_code ?>">
+<input type="hidden" name="group_nr" value="<?php echo $group_nr ?>">
+<input type="hidden" name="main_code" value="<?php echo $main_code ?>">
+<input type="hidden" name="mode" value="">
 
 </form>
 </FONT>

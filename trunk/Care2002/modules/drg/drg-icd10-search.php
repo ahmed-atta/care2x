@@ -11,8 +11,7 @@ require($root_path.'include/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 define('LANG_FILE','drg.php');
-switch($HTTP_SESSION_VARS['sess_user_origin'])
-{
+switch($HTTP_SESSION_VARS['sess_user_origin']){
 	case 'admission': 
 	{
 		$local_user='aufnahme_user';
@@ -30,9 +29,10 @@ require_once($root_path.'include/inc_config_color.php');
 if($saveok) 
 {
 ?>
- <script language="javascript" >
- window.opener.location.replace('drg-icd10.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=composite&newsave=1" ?>');
- window.close();
+<script language="javascript" >
+	window.opener.location.replace('drg-icd10.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&group_nr=$group_nr&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=composite&newsave=1"; ?>');
+    //window.opener.parent.ICD.location.reload();
+	window.close();
 </script>
 
 <?php
@@ -42,23 +42,19 @@ if($saveok)
 $toggle=0;
 $thisfile='drg-icd10-search.php';
 
-if($mode=='save')
-{
-	echo "saving";
+if($mode=='save'){
     /* Initialiase control elements */
 	$target='icd10';
 	$element='icd_code';
 	$save_related=1;
 	$element_related='related_icd';
 	$itemselector='sel';
+	$hidselector='icd_px';
 	include($root_path.'include/inc_drg_entry_save.php');
-}
-else
-{
-	$keyword=trim($keyword);
+}else{
 
-	if(($keyword) && ($keyword!=' '))
-	 {
+	$keyword=trim($keyword);
+	if(($keyword) && ($keyword!=' ')){
 	 
 		$fielddata='diagnosis_code,description,sub_level,inclusive,exclusive,notes,remarks,extra_subclass,extra_codes,std_code';
 		
@@ -112,7 +108,7 @@ $img['reset']=createComIcon($root_path,'button_reset.gif','0','absmiddle');
 <HEAD>
 <?php echo setCharSet(); ?>
  <TITLE><?php echo $LDIcd10Search ?></TITLE>
- <script language="javascript" src="../js/showhide-div.js">
+ <script language="javascript" src="<?php echo $root_path; ?>js/showhide-div.js">
 </script>
   <script language="javascript">
 <!-- 
@@ -148,15 +144,14 @@ function checkselect(d)
 // -->
 </script>
  
-  <?php 
+<?php 
 require($root_path.'include/inc_css_a_hilitebu.php');
 ?>
  
 </HEAD>
 
-<BODY  onLoad="if(window.focus) window.focus();
-<?php if(!$showonly) : ?>
-document.searchdata.keyword.select();document.searchdata.keyword.focus();
+<BODY  onLoad="if(window.focus) window.focus(); 
+<?php if(!$showonly) : ?> document.searchdata.keyword.select();document.searchdata.keyword.focus();
 <?php endif ?>
 " bgcolor=<?php echo $cfg['body_bgcolor']; ?>
 <?php if (!$cfg['dhtml']){ echo ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
@@ -168,7 +163,7 @@ document.searchdata.keyword.select();document.searchdata.keyword.focus();
 <?php if(!$showonly) : ?>
 <FONT    SIZE=3  FACE="verdana,Arial" color="#0000aa"><b><?php echo $LDIcd10 ?></b>&nbsp;
 </font>
-<font size=3><INPUT type="text" name="keyword" size="50" maxlength="60" onfocus=this.select() value="<?php echo $keyword ?>"></font> 
+<font size=3><INPUT type="text" name="keyword" size="50" maxlength="60" onfocus="this.select()" value="<?php echo $keyword ?>"></font> 
 <INPUT type="submit" name="versand" value="<?php echo $LDSearch ?>">
 <?php else : ?>
 <input type="hidden" name="keyword" value="">
@@ -181,6 +176,7 @@ document.searchdata.keyword.select();document.searchdata.keyword.focus();
 <input type="hidden" name="fn" value="<?php echo $fn; ?>">
 <input type="hidden" name="bd" value="<?php echo $bd; ?>">
 <input type="hidden" name="dept_nr" value="<?php echo $dept_nr; ?>">
+<input type="hidden" name="group_nr" value="<?php echo $group_nr; ?>">
 <input type="hidden" name="oprm" value="<?php echo $oprm; ?>">
 <input type="hidden" name="display" value="<?php echo $display; ?>">
 <input type="hidden" name="showonly" value="<?php echo $showonly; ?>">
@@ -213,18 +209,18 @@ function drawAdditional($tag,&$codebuf,&$databuf,$bkcolor,&$alttag)
 {
 	global $LDClose, $img;
 	
-							//echo '&nbsp;<a href="javascript:ssm(\''.$tag.'_'.cleandata($codebuf).'\'); clearTimeout(timer)"><img src="../img/l_arrowGrnSm.gif" border=0 width=12 height=12 alt="'.$alttag.'" align="absmiddle"></a>';
-							echo '<DIV id='.$tag.'_'.cleandata($codebuf).'
-									style=" VISIBILITY: hidden; POSITION: absolute;">
-									<TABLE cellSpacing=1 cellPadding=0 bgColor="#000000" border=0>
-  									<TR>
-   									 <TD>
-      									<TABLE cellSpacing=1 cellPadding=7 width="100%" bgColor="#'.$bkcolor.'" border=0><TBODY>
-        								<TR>
-										<TD bgColor="#'.$bkcolor.'">
-										<a href="javascript:hsm()"><img '.$img['delete'].' alt="'.$LDClose.'"></a>
-										<font face=arial size=2><b><font color="#003300">'.$alttag.':</font></b><br>'.$databuf.'
-										</TD></TR></TABLE></TD></TR></TBODY></TABLE></div>';
+	//echo '&nbsp;<a href="javascript:ssm(\''.$tag.'_'.cleandata($codebuf).'\'); clearTimeout(timer)"><img src="../img/l_arrowGrnSm.gif" border=0 width=12 height=12 alt="'.$alttag.'" align="absmiddle"></a>';
+	echo '<DIV id='.$tag.'_'.cleandata($codebuf).'
+				style=" VISIBILITY: hidden; POSITION: absolute;">
+				<TABLE cellSpacing=1 cellPadding=0 bgColor="#000000" border=0>
+  				<TR>
+   				<TD>
+      			<TABLE cellSpacing=1 cellPadding=7 width="100%" bgColor="#'.$bkcolor.'" border=0><TBODY>
+        		<TR>
+				<TD bgColor="#'.$bkcolor.'">
+				<a href="javascript:hsm()"><img '.$img['delete'].' alt="'.$LDClose.'"></a>
+				<font face=arial size=2><b><font color="#003300">'.$alttag.':</font></b><br>'.$databuf.'
+				</TD></TR></TABLE></TD></TR></TBODY></TABLE></div>';
 }
 
 function drawdata(&$data,&$advdata)
@@ -243,7 +239,7 @@ function drawdata(&$data,&$advdata)
 								else $valbuf.="&des*$parentdata[description]: <b>$data[description]</b>";
 */						
 						 echo '<input type="checkbox" name="sel'.$idx.'" value="'.$data['diagnosis_code'].'">
-						 		<input type="hidden" name="hid'.$idx.'" value="'.$parentdata['diagnosis_code'].'">';
+						 		<input type="hidden" name="icd_px'.$idx.'" value="'.$parentdata['diagnosis_code'].'">';
 						 $idx++;
 						}
 						echo '
@@ -376,11 +372,7 @@ function drawdata(&$data,&$advdata)
 								}	
 														
 							}
-							
-
 							//echo "#$zeile[diagnosis_code] *$parentcode +$grandcode";
-							
-
 						
 							if(!$grandpa[$grandcode])
 							{
@@ -399,7 +391,7 @@ function drawdata(&$data,&$advdata)
 										$priocolor=0;
 								}
 							}
-	
+
 							if(!$parent[$parentcode])
 							{
 								//echo "parent";
@@ -437,6 +429,7 @@ function drawdata(&$data,&$advdata)
 <input type="hidden" name="fn" value="<?php echo $fn; ?>">
 <input type="hidden" name="bd" value="<?php echo $bd; ?>">
 <input type="hidden" name="dept_nr" value="<?php echo $dept_nr; ?>">
+<input type="hidden" name="group_nr" value="<?php echo $group_nr; ?>">
 <input type="hidden" name="oprm" value="<?php echo $oprm; ?>">
 <input type="hidden" name="display" value="<?php echo $display; ?>">
 <input type="hidden" name="target" value="<?php echo $target; ?>">
@@ -451,13 +444,13 @@ function drawdata(&$data,&$advdata)
 
 <?php if(($linecount>15)&&!$showonly) : ?>
 
-						<p>
-						<FORM action="drg-icd10-search.php" method="post" onSubmit="return pruf(this)" name="form2">
-						<a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> align="right"></a>
-						<font face="Arial,Verdana"  color="#000000" size=-1>
-						<INPUT type="text" name="keyword" size="14" maxlength="25" value="<?php echo $keyword ?>"> 
-						<INPUT type="submit" name="versand" value="<?php echo $LDSearch ?>">
-						<input type="hidden" name="sid" value="<?php echo $sid; ?>">
+<p>
+<FORM action="drg-icd10-search.php" method="post" onSubmit="return pruf(this)" name="form2">
+<a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> align="right"></a>
+<font face="Arial,Verdana"  color="#000000" size=-1>
+<INPUT type="text" name="keyword" size="14" maxlength="25" value="<?php echo $keyword ?>"> 
+<INPUT type="submit" name="versand" value="<?php echo $LDSearch ?>">
+<input type="hidden" name="sid" value="<?php echo $sid; ?>">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
 <input type="hidden" name="pn" value="<?php echo $pn; ?>">
 <input type="hidden" name="opnr" value="<?php echo $opnr; ?>">
@@ -465,6 +458,7 @@ function drawdata(&$data,&$advdata)
 <input type="hidden" name="fn" value="<?php echo $fn; ?>">
 <input type="hidden" name="bd" value="<?php echo $bd; ?>">
 <input type="hidden" name="dept_nr" value="<?php echo $dept_nr; ?>">
+<input type="hidden" name="group_nr" value="<?php echo $group_nr; ?>">
 <input type="hidden" name="oprm" value="<?php echo $oprm; ?>">
 <input type="hidden" name="display" value="<?php echo $display; ?>">
 <input type="hidden" name="showonly" value="<?php echo $showonly; ?>">

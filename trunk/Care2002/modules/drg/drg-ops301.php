@@ -5,7 +5,6 @@ require($root_path.'include/inc_environment_global.php');
 /*
 CARE 2002 Integrated Information System beta 1.0.04 - 2003-03-31 for Hospitals and Health Care Organizations and Services
 Copyright (C) 2002  Elpidio Latorilla & Intellin.org	
-
 GNU GPL. For details read file "copy_notice.txt".
 */
 define('CATEGORY_NAME_FULL',1); // 1= the category names are to be displayed in full, 0 = only short codes are displayed 
@@ -31,11 +30,11 @@ $toggle=0;
 $thisfile=basename(__FILE__);
 
 if(isset($mode)&&!empty($mode)){
-	$saved_header="location:$thisfile?sid=$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=1";
+	$saved_header="location:$thisfile?sid=$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&group_nr=$group_nr&dept_nr=$dept_nr&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=1";
 }
 switch($mode)
 {
-	case "delete": 
+	case 'delete': 
 	{				
 		if($DRG_obj->deleteProcedure($itemx)){
 			header($saved_header);
@@ -43,7 +42,7 @@ switch($mode)
 		}
 		break;
 	}									
-	case "update_stat":
+	case 'update_stat':
 	{				
 		if($DRG_obj->setProcedureCategory($pn,$itemx,$val)){
 			header($saved_header);
@@ -51,7 +50,7 @@ switch($mode)
 		}
 		break;
 	}									
-	case "update_loc":
+	case 'update_loc':
 	{				
 		if($DRG_obj->setProcedureLocalization($itemx,$val)){
 			header($saved_header);
@@ -60,103 +59,14 @@ switch($mode)
 		break;
 	}									
 } // end of switch
+if(!isset($group_nr)) $group_nr=0;
+if(!isset($opnr)) $opnr=0;
 
-$drg=&$DRG_obj->ProcedureCodes();
-/*
-if($opnr)
-{
-	if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-	if($dblink_ok)
-	{	
-		$dbtable='care_nursing_op_logbook';
-				$sql="SELECT ops_code  FROM $dbtable WHERE op_nr='$opnr' AND encounter_nr='$pn' AND dept_nr='$dept_nr' AND op_room='$oprm'";
-        		$ergebnis=$db->Execute($sql);
-				$linecount=0;
-				if($ergebnis)
-       			{
-					if($linecount=$ergebnis->RecordCount())
-					{
-						switch($mode)
-						{
-							case "delete": 
-												$zeile=$ergebnis->FetchRow();
-												$linebuf=trim($zeile[ops_code]);
-												if($linebuf=="") break;
-												$linebuf=strtr($linebuf,'*','=');
-												$arrbuf=explode("~",$linebuf);
-												array_unique($arrbuf);
-												array_splice($arrbuf,$item,1);
-												$linebuf=addslashes(implode("~",$arrbuf));
-												$sql="UPDATE $dbtable SET ops_code='$linebuf' WHERE encounter_nr='$pn' AND op_nr='$opnr' AND dept_nr='$dept_nr' AND op_room='$oprm'";
-        										if($ergebnis=$db->Execute($sql)) 
-												{
-													header("location:drg-ops301.php?sid=$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=1");
-													exit;
-												}
-												else {echo "<p>".$sql."<p>$LDDbNoWrite";};
-											break;
-							case "update_stat":
-												$sql="SELECT ops_code FROM $dbtable WHERE encounter_nr='$pn' AND op_nr='$opnr' AND dept_nr='$dept_nr' AND op_room='$oprm'";
-        										if($ergebnis=$db->Execute($sql)) 
-												{
-													if($zeile=$ergebnis->FetchRow())
-													{
-														$linebuf=str_replace("&stat=1","&stat=2",$zeile[ops_code]);
-														$arrbuf=explode("~",$linebuf);
-														//$arrbuf[$itemx]=str_replace("&stat=2","&stat=1",$arrbuf[$itemx]);
-														parse_str($arrbuf[$itemx],$parsed);
-														$arrbuf[$itemx]="code=$parsed[code]&des=$parsed[des]&stat=1&loc=$parsed[loc]&byna=$parsed[byna]&bynr=$parsed[bynr]";
-														if($itemx!=0)
-														{
-															$helpbuf=$arrbuf[$itemx];
-															$arrbuf[$itemx]=$arrbuf[0];													
-															$arrbuf[0]=$helpbuf;
-														}
-														$linebuf=implode("~",$arrbuf);
-														
-														$sql="UPDATE $dbtable SET ops_code='$linebuf' WHERE encounter_nr='$pn' AND op_nr='$opnr' AND dept_nr='$dept_nr' AND op_room='$oprm'";
-        												if($ergebnis=$db->Execute($sql)) 
-														{
-															header("location:$thisfile?sid=$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=1");
-															exit;
-														}
-														else {echo "<p>".$sql."<p>$LDDbNoWrite";};
-													
-													}
-												}
-												else {echo "<p>".$sql."<p>$LDDbNoWrite";};
-											break;
-							case "update_loc":
-												$sql="SELECT ops_code FROM $dbtable WHERE encounter_nr='$pn' AND op_nr='$opnr' AND dept_nr='$dept_nr' AND op_room='$oprm'";
-        										if($ergebnis=$db->Execute($sql)) 
-												{
-													if($zeile=$ergebnis->FetchRow())
-													{
-														$arrbuf=explode("~",$zeile[ops_code]);
-														parse_str($arrbuf[$itemx],$parsed);
-														$arrbuf[$itemx]="code=$parsed[code]&des=$parsed[des]&stat=$parsed[stat]&loc=$val&byna=$parsed[byna]&bynr=$parsed[bynr]";
-														$linebuf=implode("~",$arrbuf);
-														
-														$sql="UPDATE $dbtable SET ops_code='$linebuf' WHERE encounter_nr='$pn' AND op_nr='$opnr' AND dept_nr='$dept_nr' AND op_room='$oprm'";
-        												if($ergebnis=$db->Execute($sql)) 
-														{
-															header("location:$thisfile?sid=$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=1");
-															exit;
-														}
-														else {echo "<p>".$sql."<p>$LDDbNoWrite";};
-													
-													}
-												}
-												else {echo "<p>".$sql."<p>$LDDbNoWrite";};
-											break;
-						}
-					}
-				}
-				 else {echo "<p>".$sql."<p>$LDDbNoRead";};
-		}
+if($display=='composite'){
+	$drg=&$DRG_obj->ProcedureCodes($group_nr);
+}else{
+	$drg=&$DRG_obj->OPProcedureCodes($opnr);
 }
-$uid="$dept_nr_$oprm_$pn_$opnr"; 
-*/
 /* Load the icon images */
 $img_delete=createComIcon($root_path,'delete2.gif','0','right');
 
@@ -173,30 +83,23 @@ function pruf(d)
 {
 	if((d.keyword.value=="")||(d.keyword.value==" ")) return false;
 }
-function gethelp(x,s,x1,x2,x3)
-{
-	if (!x) x="";
-	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
-	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
-	window.helpwin.moveTo(0,0);
-}
 function openOPSsearch(k,x)
 {
-	urlholder="drg-ops301-search.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept_nr=$dept_nr&oprm=$oprm" ?>&keyword="+k+"&showonly="+x;
-	drgwin_<?php echo $uid ?>=window.open(urlholder,"drgwin_<?php echo $uid ?>","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
+	urlholder="drg-ops301-search.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&group_nr=$group_nr&dept_nr=$dept_nr&oprm=$oprm" ?>&keyword="+k+"&showonly="+x;
+	drgwin_<?php echo $uid ?>=window.open(urlholder,"drgwin_<?php echo $uid ?>","width=600,height=450,menubar=no,resizable=yes,scrollbars=yes");
 	window.drgwin_<?php echo $uid ?>.moveTo(100,100);
 }
 function openQuicklist(t)
 {
-	urlholder="drg-quicklist.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept_nr=$dept_nr&oprm=$oprm" ?>&target="+t;
-	drgwin_<?php echo $uid ?>=window.open(urlholder,"drgwin_<?php echo $uid ?>","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
-	window.drgwin_<?php echo $uid ?>.moveTo(100,100);
+	urlholder="drg-quicklist.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&group_nr=$group_nr&dept_nr=$dept_nr&oprm=$oprm" ?>&target="+t;
+	drgwin_<?php echo $uid ?>=window.open(urlholder,"drgwin_<?php echo $uid ?>","width=600,height=450,menubar=no,resizable=yes,scrollbars=yes");
+	//window.drgwin_<?php echo $uid ?>.moveTo(100,100);
 }
 function deleteItem(i)
 {
 	if(confirm("<?php echo $LDAlertSureDelete ?>"))
 	{
-		//window.location.href='drg-ops301.php?sid=<?php echo "$sid&lang=$lang&mode=delete&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept_nr=$dept_nr&oprm=$oprm&display=$display" ?>&item='+i;
+		//window.location.href='drg-ops301.php?sid=<?php echo "$sid&lang=$lang&mode=delete&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&group_nr=$group_nr&dept_nr=$dept_nr&oprm=$oprm&display=$display" ?>&item='+i;
 		document.submitter.itemx.value=i;
 		document.submitter.mode.value="delete";
 		document.submitter.submit();
@@ -204,7 +107,7 @@ function deleteItem(i)
 }
 function makeChange(v,i,m)
 {
-	//window.location.replace('<?php echo "$thisfile?sid=$sid&lang=$lang&mode=updatestat&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept_nr=$dept_nr&oprm=$oprm&display=$display" ?>&item='+i+'&val='+v);
+	//window.location.replace('<?php echo "$thisfile?sid=$sid&lang=$lang&mode=updatestat&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&group_nr=$group_nr&dept_nr=$dept_nr&oprm=$oprm&display=$display" ?>&item='+i+'&val='+v);
 	document.submitter.val.value=v;
 	document.submitter.itemx.value=i;
 	document.submitter.mode.value=m;
@@ -214,12 +117,13 @@ function makeChange(v,i,m)
 // -->
 </script>
  
-  <?php 
+<?php 
+require($root_path.'include/inc_js_gethelp.php');
 require($root_path.'include/inc_css_a_hilitebu.php');
 ?>
  <?php if($newsave) : ?>
  <script language="javascript" >
-window.parent.opener.location.href='<?php echo "oploginput.php?sid=$sid&lang=$lang&mode=saveok&enc_nr=$pn&op_nr=$opnr&dept_nr=$dept_nr&saal=$oprm&pyear=$y&pmonth=$m&pday=$d" ?>';
+//window.parent.opener.location.href='<?php echo "oploginput.php?sid=$sid&lang=$lang&mode=saveok&enc_nr=$pn&op_nr=$opnr&group_nr=$group_nr&dept_nr=$dept_nr&saal=$oprm&pyear=$y&pmonth=$m&pday=$d" ?>';
 </script>
 <?php endif ?>
 </HEAD>
@@ -257,6 +161,12 @@ else  echo 'topmargin=2 marginheight=2';
 
 <?php
 if (is_object($drg)) { 
+	# Load the diagnosis categories
+	if($cat_obj=&$DRG_obj->DiagnosisCategories()) $cat_ok=true;
+		else $cat_ok=false;
+	# Load the localization types
+	if($loc_obj=&$DRG_obj->LocalizationTypes()) $loc_ok=true;
+		else $loc_ok=false;
 	
 	while($procedure=$drg->FetchRow()){
 		if($procedure['category_nr']=="1") $fcolor="#006600"; else $fcolor="#000000";
@@ -279,7 +189,7 @@ if (is_object($drg)) {
 			<select name="cat_<?php echo $procedure['procedure_nr'] ?>"  onChange="makeChange(this.value,'<?php echo $procedure['procedure_nr'] ?>','update_stat')">
 <?php
 	/* Create the option items */
-	if($cat_obj=&$DRG_obj->DiagnosisCategories()){
+	if($cat_ok){
 		echo '<option value="">  </option>
 		';
 		while($cat=$cat_obj->FetchRow()){
@@ -296,29 +206,38 @@ if (is_object($drg)) {
 			}
 			echo '</option>';
 		}
+		# Reset the $cat_obj
+		$cat_obj->MoveFirst();
 	}
 ?>		
         	</select>
 <?php
 		}else{
-			echo $LDAux;
+		
+			if(defined('CATEGORY_NAME_FULL')&&CATEGORY_NAME_FULL){
+				if(isset($$procedure['cat_LD_var'])&&!empty($$procedure['cat_LD_var']))  echo $$procedure['cat_LD_var'];
+					else echo $procedure['cat_name'];
+			}else{
+				if(isset($$procedure['cat_LD_var_short_code'])&&!empty($$procedure['cat_LD_var_short_code'])) echo $$procedure['cat_LD_var_short_code'];
+					else echo $procedure['cat_short_code'];
+			}
 		}
 		echo '</td>
-				<td>';
-		if($display!="composite"){
-			echo '<font face=arial size=2  color="'.$fcolor.'">';
-			switch($parsedline[loc])
-			{
-				case "r": echo $LDRight; break;
-				case "l": echo $LDLeft; break;
-				case "b": echo $LDBoth; break;
+				<td><font face=arial size=2  color="'.$fcolor.'">';
+		if($display!='composite'){
+			if(defined('LOCALIZATION_NAME_FULL')&&LOCALIZATION_NAME_FULL){
+				if(isset($$procedure['loc_LD_var'])&&!empty($$procedure['loc_LD_var']))  echo $$procedure['loc_LD_var'];
+					else echo $icd['loc_name'];
+			}else{
+				if(isset($$procedure['loc_LD_var_short_code'])&&!empty($$procedure['loc_LD_var_short_code'])) echo $$procedure['loc_LD_var_short_code'];
+					else echo $procedure['loc_short_code'];
 			}
 		}else{
 ?>
 			<select name="loc_<?php echo $procedure['procedure_nr'] ?>"  onChange="makeChange(this.value,'<?php echo $procedure['procedure_nr'] ?>','update_loc')">
 <?php
 	/* Create the option items */
-	if($loc_obj=&$DRG_obj->LocalizationTypes()){
+	if($loc_ok){
 		echo '<option value="">  </option>
 		';
 		while($loc=$loc_obj->FetchRow()){
@@ -335,6 +254,10 @@ if (is_object($drg)) {
 			}
 			echo '</option>';
 		}
+			
+		# Reset the loc_obj object
+		$loc_obj->MoveFirst();
+
 	}
 ?>		
         	</select>
@@ -363,7 +286,7 @@ if (is_object($drg)) {
 	<td valign="top" bgcolor="#009900"><font face=arial size=2 color=#ffffff>
   
 	<input type="button" value="<?php echo $LDSearch ?>" onClick="javascript:openOPSsearch('','0')">&nbsp;
- 	<p><input type="button" value="<?php echo $LDQuickList ?>" onClick="javascript:openQuicklist('ops301')"><p><br><p>
+ 	<p><input type="button" value="<?php echo $LDQuickList ?>" onClick="javascript:openQuicklist('procedure')"><p><br><p>
 	<a href="javascript:window.parent.close()" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>></a><p>
 
 	</td>
@@ -385,6 +308,7 @@ if (is_object($drg)) {
 <input type="hidden" name="fn" value="<?php echo $fn; ?>">
 <input type="hidden" name="bd" value="<?php echo $bd; ?>">
 <input type="hidden" name="dept_nr" value="<?php echo $dept_nr; ?>">
+<input type="hidden" name="group_nr" value="<?php echo $group_nr; ?>">
 <input type="hidden" name="oprm" value="<?php echo $oprm; ?>">
 <input type="hidden" name="display" value="<?php echo $display; ?>">
 <input type="hidden" name="y" value="<?php echo $y; ?>">

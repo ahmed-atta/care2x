@@ -31,7 +31,8 @@ if($saveok)
 ?>
 
  <script language="javascript" >
- window.opener.location.replace('drg-ops301.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=composite&newsave=1" ?>');
+	window.opener.location.replace('drg-ops301.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&group_nr=$group_nr&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=composite&newsave=1" ?>');
+    //window.opener.parent.OPS.location.reload();
  window.close();
 </script>
 
@@ -52,6 +53,7 @@ if($mode=='save')
 	$save_related=1;
 	$element_related='related_ops';
 	$itemselector='sel';
+	$hidselector='ops_px';
 	include($root_path.'include/inc_drg_entry_save.php');
 }
 else
@@ -94,15 +96,7 @@ else
   }
 }
 
-/* Load the icon images */
-/*$img_delete=createComIcon($root_path,'delete2.gif','0','right');
-$img_arrow=createComIcon($root_path,'l_arrowgrnsm.gif','0','absmiddle');
-$img_warn=createComIcon($root_path,'warn.gif','0','absmiddle');
-$img_info=createComIcon($root_path,'button_info.gif','0','absmiddle');
-$img_bubble=createComIcon($root_path,'bubble2.gif','0','absmiddle');
-$img_blue=createComIcon($root_path,'l2-blue.gif','0');
-$img_t2=createComIcon($root_path,'t2-blue.gif','0');
-*/
+
 $img['delete']=createComIcon($root_path,'delete2.gif','0','right');
 $img['arrow']=createComIcon($root_path,'l_arrowgrnsm.gif','0','absmiddle');
 $img['warn']=createComIcon($root_path,'warn.gif','0','absmiddle');
@@ -189,6 +183,7 @@ document.searchdata.keyword.select();document.searchdata.keyword.focus();
 <input type="hidden" name="fn" value="<?php echo $fn; ?>">
 <input type="hidden" name="bd" value="<?php echo $bd; ?>">
 <input type="hidden" name="dept_nr" value="<?php echo $dept_nr; ?>">
+<input type="hidden" name="group_nr" value="<?php echo $group_nr; ?>">
 <input type="hidden" name="oprm" value="<?php echo $oprm; ?>">
 <input type="hidden" name="display" value="<?php echo $display; ?>">
 <input type="hidden" name="showonly" value="<?php echo $showonly; ?>">
@@ -240,8 +235,7 @@ function drawdata(&$data,&$advdata)
 {
 	global $toggle,$parentcode,$grandcode,$priocolor,$LDInclusive,$LDExclusive,$LDNotes,$LDRemarks,$LDExtraCodes,$LDAddCodes;
  	global $idx,$iscolor,$keyword,$showonly,$parentdata, $img;
-/*	$img_arrow, $img_warn, $img_info, $img_bubble, $img_blue, $img_t2;
-*/	
+	
 						echo "
 						<tr bgcolor=";
 						if($priocolor||$iscolor) echo "#99ffee>";
@@ -254,7 +248,7 @@ function drawdata(&$data,&$advdata)
 								if(!stristr($data['code'],".")) $valbuf.='&des*'.$data['description'];
 									else $valbuf.='&des*'.$parentdata['description'].' <b>'.$data['description'].'</b>';
 */						 		echo '<input type="checkbox" name="sel'.$idx.'" value="'.$data['code'].'">
-										<input type="hidden" name="hid'.$idx.'" value="'.$parentdata['code'].'">';
+										<input type="hidden" name="ops_px'.$idx.'" value="'.$parentdata['code'].'">';
 								 $idx++;
 							}
 						echo '
@@ -421,6 +415,7 @@ function drawdata(&$data,&$advdata)
 <input type="hidden" name="fn" value="<?php echo $fn; ?>">
 <input type="hidden" name="bd" value="<?php echo $bd; ?>">
 <input type="hidden" name="dept_nr" value="<?php echo $dept_nr; ?>">
+<input type="hidden" name="group_nr" value="<?php echo $group_nr; ?>">
 <input type="hidden" name="oprm" value="<?php echo $oprm; ?>">
 <input type="hidden" name="display" value="<?php echo $display; ?>">
 <input type="hidden" name="target" value="<?php echo $target; ?>">
@@ -433,13 +428,13 @@ function drawdata(&$data,&$advdata)
 <?php endif ?>
 <?php if(($linecount>15)&&!$showonly) : ?>
 
-						<p>
-						<FORM action="drg-ops301-search.php" method="post" onSubmit="return pruf(this)" name="form2">
-						<a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> align="right"></a>
-						<font face="Arial,Verdana"  color="#000000" size=-1>
-						<INPUT type="text" name="keyword" size="14" maxlength="25" value="<?php echo $keyword ?>"> 
-						<INPUT type="submit" name="versand" value="<?php echo $LDSearch ?>">
-						<input type="hidden" name="sid" value="<?php echo $sid; ?>">
+<p>
+<FORM action="drg-ops301-search.php" method="post" onSubmit="return pruf(this)" name="form2">
+<a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> align="right"></a>
+<font face="Arial,Verdana"  color="#000000" size=-1>
+<INPUT type="text" name="keyword" size="14" maxlength="25" value="<?php echo $keyword ?>"> 
+<INPUT type="submit" name="versand" value="<?php echo $LDSearch ?>">
+<input type="hidden" name="sid" value="<?php echo $sid; ?>">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
 <input type="hidden" name="pn" value="<?php echo $pn; ?>">
 <input type="hidden" name="opnr" value="<?php echo $opnr; ?>">
@@ -447,12 +442,14 @@ function drawdata(&$data,&$advdata)
 <input type="hidden" name="fn" value="<?php echo $fn; ?>">
 <input type="hidden" name="bd" value="<?php echo $bd; ?>">
 <input type="hidden" name="dept_nr" value="<?php echo $dept_nr; ?>">
+<input type="hidden" name="group_nr" value="<?php echo $group_nr; ?>">
 <input type="hidden" name="oprm" value="<?php echo $oprm; ?>">
 <input type="hidden" name="display" value="<?php echo $display; ?>">
 <input type="hidden" name="showonly" value="<?php echo $showonly; ?>">
 <input type="hidden" name="target" value="<?php echo $target; ?>">
-</font></FORM>			
-						<p>
+</font>
+</FORM>			
+<p>
 <?php endif ?>
 </ul>
 &nbsp;

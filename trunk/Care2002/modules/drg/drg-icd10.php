@@ -33,11 +33,11 @@ $toggle=0;
 $thisfile=basename(__FILE__);
 
 if(isset($mode)&&!empty($mode)){
-	$saved_header="location:$thisfile?sid=$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=1";
+	$saved_header="location:$thisfile?sid=$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&group_nr=$group_nr&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=1";
 }
 switch($mode)
 {
-	case "delete": 
+	case 'delete': 
 	{				
 		if($DRG_obj->deleteDiagnosis($itemx)){
 			header($saved_header);
@@ -45,7 +45,7 @@ switch($mode)
 		}
 		break;
 	}									
-	case "update_stat":
+	case 'update_stat':
 	{				
 		if($DRG_obj->setDiagnosisCategory($pn,$itemx,$val)){
 			header($saved_header);
@@ -53,7 +53,7 @@ switch($mode)
 		}
 		break;
 	}									
-	case "update_loc":
+	case 'update_loc':
 	{				
 		if($DRG_obj->setDiagnosisLocalization($itemx,$val)){
 			header($saved_header);
@@ -62,8 +62,14 @@ switch($mode)
 		break;
 	}									
 } // end of switch
+if(!isset($group_nr)) $group_nr=0;
+if(!isset($opnr)) $opnr=0;
 
-$drg=&$DRG_obj->DiagnosisCodes();
+if($display=='composite'){
+	$drg=&$DRG_obj->DiagnosisCodes($group_nr);
+}else{
+	$drg=&$DRG_obj->OPDiagnosisCodes($opnr);
+}
 
 $uid="$dept_$oprm_$pn_$opnr"; 
 /* Load the icon images */
@@ -82,24 +88,17 @@ function pruf(d)
 {
 	if((d.keyword.value=="")||(d.keyword.value==" ")) return false;
 }
-function gethelp(x,s,x1,x2,x3)
-{
-	if (!x) x="";
-	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
-	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
-	window.helpwin.moveTo(0,0);
-}
 function openICDsearch(k,x)
 {
-	urlholder="drg-icd10-search.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept_nr=$dept_nr&oprm=$oprm&display=$display" ?>&keyword="+k+"&showonly="+x;
-	drgwin_<?php echo $uid ?>=window.open(urlholder,"drgwin_<?php echo $uid ?>","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
+	urlholder="drg-icd10-search.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&group_nr=$group_nr&dept_nr=$dept_nr&oprm=$oprm&display=$display" ?>&keyword="+k+"&showonly="+x;
+	drgwin_<?php echo $uid ?>=window.open(urlholder,"drgwin_<?php echo $uid ?>","width=600,height=450,menubar=no,resizable=yes,scrollbars=yes");
 	window.drgwin_<?php echo $uid ?>.moveTo(100,100);
 }
 function deleteItem(i)
 {
 	if(confirm("<?php echo $LDAlertSureDelete ?>"))
 	{
-		//window.location.href='drg-icd10.php?sid=<?php echo "$sid&lang=$lang&mode=delete&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept_nr=$dept_nr&oprm=$oprm&display=$display" ?>&item='+i;
+		//window.location.href='drg-icd10.php?sid=<?php echo "$sid&lang=$lang&mode=delete&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&group_nr=$group_nr&dept_nr=$dept_nr&oprm=$oprm&display=$display" ?>&item='+i;
 		document.submitter.itemx.value=i;
 		document.submitter.mode.value="delete";
 		document.submitter.submit();
@@ -107,7 +106,7 @@ function deleteItem(i)
 }
 function makeChange(v,i,m)
 {
-	//window.location.replace('<?php echo "$thisfile?sid=$sid&lang=$lang&mode=update_stat&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept_nr=$dept_nr&oprm=$oprm&display=$display" ?>&item='+i+'&val='+v);
+	//window.location.replace('<?php echo "$thisfile?sid=$sid&lang=$lang&mode=update_stat&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&group_nr=$group_nr&dept_nr=$dept_nr&oprm=$oprm&display=$display" ?>&item='+i+'&val='+v);
 	document.submitter.val.value=v;
 	document.submitter.itemx.value=i;
 	document.submitter.mode.value=m;
@@ -115,19 +114,20 @@ function makeChange(v,i,m)
 }
 function openQuicklist(t)
 {
-	urlholder="drg-quicklist.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept_nr=$dept_nr&oprm=$oprm" ?>&target="+t;
-	drgwin_<?php echo $uid ?>=window.open(urlholder,"drgwin_<?php echo $uid ?>","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
-	window.drgwin_<?php echo $uid ?>.moveTo(100,100);
+	urlholder="drg-quicklist.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&group_nr=$group_nr&dept_nr=$dept_nr&oprm=$oprm" ?>&target="+t;
+	drgwin_<?php echo $uid ?>=window.open(urlholder,"drgwin_<?php echo $uid ?>","width=600,height=450,menubar=no,resizable=yes,scrollbars=yes");
+	//window.drgwin_<?php echo $uid ?>.moveTo(100,100);
 }
 // -->
 </script>
  
 <?php 
+require($root_path.'include/inc_js_gethelp.php');
 require($root_path.'include/inc_css_a_hilitebu.php');
 ?>
 <?php if($newsave) : ?>
  <script language="javascript" >
-window.parent.opener.location.href='<?php echo "oploginput.php?sid=$sid&lang=$lang&mode=saveok&enc_nr=$pn&op_nr=$opnr&dept_nr=$dept_nr&saal=$oprm&pyear=$y&pmonth=$m&pday=$d" ?>';
+//window.parent.opener.location.href='<?php echo "oploginput.php?sid=$sid&lang=$lang&mode=saveok&enc_nr=$pn&op_nr=$opnr&dept_nr=$dept_nr&saal=$oprm&pyear=$y&pmonth=$m&pday=$d" ?>';
 </script>
 <?php endif ?>
 </HEAD>
@@ -154,8 +154,8 @@ else  echo 'topmargin=2 marginheight=2';
 	<table border=0 cellpadding=1 cellspacing=1 width=100%> 
 		<tr bgcolor="#0000aa">
  		<td><font face=arial size=2 color=#ffffff><b><?php echo $LDIcd10 ?></b></td>
- 		<td><font face=arial size=2 color=#ffffff><b><?php echo $LDSGBV ?></b></td>
- 		<td><font face=arial size=2 color=#ffffff><b><?php echo $LDDescription ?></b></td>
+<!--  		<td><font face=arial size=2 color=#ffffff><b><?php echo $LDSGBV ?></b></td>
+ --> 		<td><font face=arial size=2 color=#ffffff><b><?php echo $LDDescription ?></b></td>
  		<td><font face=arial size=2 color=#ffffff><nobr><b><?php echo $LDCategory ?></b> <a href="javascript:gethelp()" ><img <?php echo createComIcon($root_path,'frage.gif','0','absmiddle') ?>></a></nobr></td>
  		<td><font face=arial size=2 color=#ffffff><nobr><b><?php echo $LDLocalization ?></b> <a href="javascript:gethelp()" ><img <?php echo createComIcon($root_path,'frage.gif','0','absmiddle') ?>></a></nobr></td>
  		<td><font face=arial size=2 color=#ffffff><b><?php echo $LDBy ?></b></td>
@@ -167,69 +167,93 @@ else  echo 'topmargin=2 marginheight=2';
 <?php
 if (is_object($drg)) { 
 	
+	# Load the diagnosis categories
+	if($cat_obj=&$DRG_obj->DiagnosisCategories()) $cat_ok=true;
+		else $cat_ok=false;
+	# Load the localization types
+	if($loc_obj=&$DRG_obj->LocalizationTypes()) $loc_ok=true;
+		else $loc_ok=false;
+	
 	while($icd=$drg->FetchRow()){
+
+		# Start creating the display
 		if($icd['category_nr']=="1") $fcolor="#0000ff"; else $fcolor="#000000";
 		echo "<tr bgcolor=";
 		if($toggle) { echo "#efefef>"; $toggle=0;} else {echo "#ffffff>"; $toggle=1;};
 		echo '
 		<td><font face=arial size=2><a href="javascript:openICDsearch(\''.$icd['code'].'\',\'1\')">'.$icd['code'].'</a>
+		</td>';
+/*		<td><font face=arial size=2 color="'.$fcolor.'">
 		</td>
-		<td><font face=arial size=2 color="'.$fcolor.'">
-		</td>
-		<td><font face=arial size=2 color="'.$fcolor.'">'.$icd['parent_desc'].' <b>'.$icd['description'].'</b>
+*/		echo '
+		<td><font face=arial size=2 color="'.$fcolor.'">'.$icd['parent_desc'].': <b>'.$icd['description'].'</b>
 		</td>
 		<td><font face=arial size=2  color="'.$fcolor.'">';
-		if($icd['category_nr']=="1"){
+		if($icd['category_nr']=='1'){
 			if(defined('CATEGORY_NAME_FULL')&&CATEGORY_NAME_FULL){
 			 echo "<b>$LDMostResponsible</b>";
 			}else{
 				echo  "<b>$LDMostResp_s</b>";
 			}
-		}elseif($display=="composite"){
+		}elseif($display=='composite'){
 ?>
 			<select name="cat_<?php echo $icd['diagnosis_nr'] ?>"  onChange="makeChange(this.value,'<?php echo $icd['diagnosis_nr'] ?>','update_stat')">
 <?php
-	/* Create the option items */
-	if($cat_obj=&$DRG_obj->DiagnosisCategories()){
-		echo '<option value="">  </option>
-		';
-		while($cat=$cat_obj->FetchRow()){
-			echo '
-			<option value="'.$cat['nr'].'"';
-			if($icd['category_nr']==$cat['nr']) echo ' selected';
-			echo '>';
-			if(defined('CATEGORY_NAME_FULL')&&CATEGORY_NAME_FULL){
-				if(isset($$cat['LD_var'])&&!empty($$cat['LD_var'])) echo $$cat['LD_var'];
-					else echo $cat['name'];
-			}else{
-				if(isset($$cat['LD_var_short_code'])&&!empty($$cat['LD_var_short_code'])) echo $$cat['LD_var_short_code'];
-					else echo $cat['short_code'];
+			echo '<option value="">  </option>
+			';
+		
+			# Extract the category
+			# Create the option items 
+			if($cat_ok){
+				while($cat=$cat_obj->FetchRow()){
+					echo '
+					<option value="'.$cat['nr'].'"';
+					if($icd['category_nr']==$cat['nr']) echo ' selected';
+					echo '>';
+					
+					if(defined('CATEGORY_NAME_FULL')&&CATEGORY_NAME_FULL){
+						if(isset($$cat['LD_var'])&&!empty($$cat['LD_var']))  echo $$cat['LD_var'];
+							else echo $cat['name'];
+					}else{
+						if(isset($$cat['LD_var_short_code'])&&!empty($$cat['LD_var_short_code'])) echo $$cat['LD_var_short_code'];
+							else echo $cat['short_code'];
+					}
+					echo '</option>';
+				}
+				# Reset the $cat_obj
+				$cat_obj->MoveFirst();
 			}
-			echo '</option>';
-		}
-	}
+
 ?>		
         	</select>
 <?php
 		}else{
-			echo $LDAux;
+	
+			if(defined('CATEGORY_NAME_FULL')&&CATEGORY_NAME_FULL){
+				if(isset($$icd['cat_LD_var'])&&!empty($$icd['cat_LD_var']))  echo $$icd['cat_LD_var'];
+					else echo $icd['cat_name'];
+			}else{
+				if(isset($$icd['cat_LD_var_short_code'])&&!empty($$icd['cat_LD_var_short_code'])) echo $$icd['cat_LD_var_short_code'];
+					else echo $icd['cat_short_code'];
+			}
 		}
 		echo '</td>
-				<td>';
-		if($display!="composite"){
-			echo '<font face=arial size=2  color="'.$fcolor.'">';
-			switch($parsedline[loc])
-			{
-				case "r": echo $LDRight; break;
-				case "l": echo $LDLeft; break;
-				case "b": echo $LDBoth; break;
+				<td><font face=arial size=2  color="'.$fcolor.'">';
+		#Start creating the localization column
+		if($display!='composite'){
+			if(defined('LOCALIZATION_NAME_FULL')&&LOCALIZATION_NAME_FULL){
+				if(isset($$icd['loc_LD_var'])&&!empty($$icd['loc_LD_var']))  echo $$icd['loc_LD_var'];
+					else echo $icd['loc_name'];
+			}else{
+				if(isset($$icd['loc_LD_var_short_code'])&&!empty($$icd['loc_LD_var_short_code'])) echo $$icd['loc_LD_var_short_code'];
+					else echo $icd['loc_short_code'];
 			}
 		}else{
 ?>
 			<select name="loc_<?php echo $icd['diagnosis_nr'] ?>"  onChange="makeChange(this.value,'<?php echo $icd['diagnosis_nr'] ?>','update_loc')">
 <?php
 	/* Create the option items */
-	if($loc_obj=&$DRG_obj->LocalizationTypes()){
+	if($loc_ok){
 		echo '<option value="">  </option>
 		';
 		while($loc=$loc_obj->FetchRow()){
@@ -238,7 +262,7 @@ if (is_object($drg)) {
 			if($icd['localization']==$loc['nr']) echo ' selected';
 			echo '>';
 			if(defined('LOCALIZATION_NAME_FULL')&&LOCALIZATION_NAME_FULL){
-				if(isset($$loc['LD_var'])&&!empty($$loc['LD_var'])) echo $$loc['LD_var'];
+				if(isset($$loc['LD_var'])&&!empty($$loc['LD_var']))  echo $$loc['LD_var'];
 					else echo $loc['name'];
 			}else{
 				if(isset($$loc['LD_var_short_code'])&&!empty($$loc['LD_var_short_code'])) echo $$loc['LD_var_short_code'];
@@ -246,11 +270,16 @@ if (is_object($drg)) {
 			}
 			echo '</option>';
 		}
+		
+		# Reset the loc_obj object
+		$loc_obj->MoveFirst();
+		
 	}
 ?>		
         	</select>
 								
-<?php       
+<?php 
+
 		}
 		echo '</td>
 				<td><font face=arial size=2>'.stripslashes($icd['diagnosing_clinician']).' - '.$icd['diagnosing_dept_nr'].'
@@ -273,7 +302,7 @@ if (is_object($drg)) {
 	<?php if($display=="composite") : ?>   
 	 <td valign="top" bgcolor="#0000aa"><font face=arial size=2 color=#ffffff>
 	<input type="button" value="<?php echo $LDSearch ?>" onClick="javascript:openICDsearch('','0')">&nbsp;
- 	<p><input type="button" value="<?php echo $LDQuickList ?>" onClick="javascript:openQuicklist('icd10')"><p>
+ 	<p><input type="button" value="<?php echo $LDQuickList ?>" onClick="javascript:openQuicklist('diagnosis')"><p>
 	</td>
 	<?php endif ?>
   </tr>
@@ -295,6 +324,7 @@ if (is_object($drg)) {
 <input type="hidden" name="dept_nr" value="<?php echo $dept_nr; ?>">
 <input type="hidden" name="oprm" value="<?php echo $oprm; ?>">
 <input type="hidden" name="display" value="<?php echo $display; ?>">
+<input type="hidden" name="group_nr" value="<?php echo $group_nr; ?>">
 <input type="hidden" name="y" value="<?php echo $y; ?>">
 <input type="hidden" name="m" value="<?php echo $m; ?>">
 <input type="hidden" name="d" value="<?php echo $d; ?>">

@@ -11,19 +11,35 @@ require($root_path.'include/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 define('LANG_FILE','drg.php');
-$local_user='ck_op_pflegelogbuch_user';
+switch($HTTP_SESSION_VARS['sess_user_origin'])
+{
+	case 'admission': 
+	{
+		$local_user='aufnahme_user';
+		break;
+	}
+	default: 
+	{
+		$local_user='ck_op_pflegelogbuch_user';
+	}
+}
 require_once($root_path.'include/inc_front_chain_lang.php');
-if (!$opnr||!$pn) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;}; 
-?>
-<?php if($saveok) : ?>
+if (!isset($pn)||!$pn) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;}; 
+
+if($saveok) { ?>
+
  <script language="javascript" >
- window.opener.parent.location.href='<?php echo "drg-composite-start.php?sid=$sid&lang=$lang&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=composite&newsave=1" ?>';
+ window.opener.parent.location.href='<?php echo "drg-composite-start.php?sid=$sid&lang=$lang&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&group_nr=$group_nr&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=composite&newsave=1" ?>';
  window.close();
 </script>
-	<?php exit; ?>
-<?php endif ?>
+
 <?php
-require_once($root_path.'include/inc_config_color.php');
+	
+	exit;
+}
+
+require_once($root_path.'include/care_api_classes/class_drg.php');
+$DRG_obj=new DRG($pn); // Create a drg object
 
 $toggle=0;
 
@@ -32,71 +48,41 @@ $thisfile='drg-related-codes.php';
 if($mode=='save')
 {
 	$save_related=1;
-	
+	# Save first the related diagnosis codes
 	$target='icd10';
 	$element='icd_code';
 	$element_related='related_icd';
 	$itemselector='icd';
+	$hidselector='icd_px';
 	$lastindex=$last_icd_index;
-	$noheader=1;
-	include($root_path.'include/inc_drg_entry_save.php');
 	
+	$noheader=1; # Disable the redirect 
+	include($root_path.'include/inc_drg_entry_save.php');
+	# Save the related procedure codes
 	unset($qlist);
 	$linebuf='';
-	$noheader=0;
+	
+	$noheader=0; # Enable the redirect
 	$target='ops301';
 	$element='ops_code';
 	$element_related='related_ops';
 	$itemselector='ops';
+	$hidselector='ops_px';
 	$lastindex=$last_ops_index;
 	include($root_path.'include/inc_drg_entry_save.php');
 	if($linebuf=='')
 	{
-		header("location:$thisfile?sid=$sid&lang=$lang&saveok=1&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&target=$target");
+		header("location:$thisfile?sid=$sid&lang=$lang&saveok=1&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&group_nr=$group_nr&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&target=$target");
 		exit;
 	}
-}
-else
-{
-	if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-	if($dblink_ok)
-	{	
-		 
-            /* Load the date formatter */
-            include_once($root_path.'include/inc_date_format_functions.php');
-            
-
-			$dbtable='care_nursing_op_logbook';
-			
-			$sql="SELECT ops_intern_code  FROM $dbtable WHERE op_nr='$opnr' AND encounter_nr='$pn' AND dept_nr='$dept_nr' AND op_room='$oprm'";
-			if($op_result=$db->Execute($sql))
-       		{
-				//$icdcount=0;
-				//if ($zeile=mysql_fetch_array($op_result)) $opcount++;
-				$opcount=$op_result->RecordCount();
-			}
-			 else {echo "<p>".$sql."<p>$LDDbNoRead"; };
-			 
-			$dbtable="care_drg_related_codes";
-
-			$sql='SELECT related_icd,rank FROM '.$dbtable.' WHERE code="'.$maincode.'" AND related_icd<>"" AND lang="'.$lang.'" ORDER BY rank DESC';
-			if($icd_result=$db->Execute($sql))
-       		{
-				//$icdcount=0;
-				//if ($zeile=mysql_fetch_array($icd_result)) $icdcount++;
-				$icdcount=$icd_result->RecordCount();
-			}
-			 else {echo "<p>".$sql."<p>$LDDbNoRead"; };
-			 
-			$sql='SELECT related_ops,rank FROM '.$dbtable.' WHERE code="'.$maincode.'" AND related_ops<>"" AND lang="'.$lang.'" ORDER BY rank DESC';
-			if($ops_result=$db->Execute($sql))
-       		{
-				//$opscount=0;
-				//if ($zeile=mysql_fetch_array($ops_result)) $opscount++;
-				$opscount=$ops_result->RecordCount();
-			}
-			 else {echo "<p>".$sql."<p>$LDDbNoRead"; };
-		}
+}elseif(isset($group_nr)&&$group_nr){
+	 
+	/* Load the date formatter */
+	include_once($root_path.'include/inc_date_format_functions.php');
+	/* Load related codes */
+	$diag_obj=&$DRG_obj->RelatedDiagnoses($group_nr);
+ 	$proc_obj=&$DRG_obj->RelatedProcedures($group_nr);
+           
 }
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -104,9 +90,8 @@ else
 <HEAD>
 <?php echo setCharSet(); ?>
  <TITLE><?php echo "$LDQuickList $title" ?></TITLE>
-  <script language="javascript" src="../js/showhide-div.js">
-</script>
-  <script language="javascript">
+<script language="javascript" src="../js/showhide-div.js"></script>
+<script language="javascript">
 <!-- 
 function gethelp(x,s,x1,x2,x3)
 {
@@ -171,78 +156,44 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <form name="quicklist" onSubmit="return checkselect(this)" method="post">
 
 <table border=0 cellpadding=0 cellspacing=0 width='100%'> 
-<?php if($opcount)
-{
-?>
-<tr bgcolor="#990000">
-<td width="20">
-&nbsp;
-</td>
-<td><font face=arial size=2 color=#ffffff>&nbsp;<b><nobr><?php echo $LDOperation ?></nobr></b>&nbsp;</td>
-
-<td colspan=7><font face=arial size=2 color=#ffffff>&nbsp;&nbsp;&nbsp;<b><?php echo $LDDescription ?></b>
-</td>
-		
-</tr>
-
-<?php
-}
+<?php 
 
 function drawdata(&$data)
 {
 	global $toggle,$root_path;
- 	global $idx,$keyword,$showonly,$deleter,$selector,$maincode;
-						parse_str($data,$parsed);
-						echo "
-						<tr bgcolor=";
-						if($toggle) { echo "#efefef>"; $toggle=0;} else {echo "#ffffff>"; $toggle=1;};
-						echo '
-						<td>';
-						if($deleter)
-						{
-						 		echo '<input type="checkbox" name="'.$selector.$idx.'" value="'.htmlspecialchars($data).'">';
-								 $idx++;
-						}
-						else
-						{
-							if($maincode==$parsed[code]) echo'
-							<img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle').'>';
-						}
-						echo '
-							</td>
-							<td><font face=arial size=2><nobr>';
-						//echo " *$parentcode +$grandcode";
-						if(!$deleter&&($maincode!=$parsed[code])) echo '
-						<a href="javascript:getRelatedCodes(\''.$parsed[code].'\')"><u>'.$parsed[code].'</u></a>&nbsp;';
-						else
-							 echo "$parsed[code]&nbsp;";		
-						echo "&nbsp;</nobr></td><td>&nbsp;";
-						//echo '<font face=arial size=2>'.trim($data[description]);
-						echo '<font face=arial size=2>';
-						if(!$deleter&&($maincode!=$parsed[code])) echo '
-						 <a href="javascript:getRelatedCodes(\''.$parsed[code].'\')"><u>'.$parsed[des].'</u></a>&nbsp;';
-						else
-							echo "$parsed[des]&nbsp;";		
+ 	global $idx,$keyword,$showonly,$deleter,$selector,$maincode,$hidselector;
+
+	echo '
+	<tr bgcolor=';
 						
-						echo '</td>';
-					echo "</tr>";
+	if($toggle) { echo '#efefef>';} else {echo '#ffffff>'; };
+	$toggle=!$toggle;
+	echo '
+	<td>';
+	
+	echo '<input type="checkbox" name="'.$selector.$idx.'" value="'.$data['code'].'">
+	<input type="hidden" name="'.$hidselector.$idx.'" value="'.$data['code_parent'].'">
+	';
+	
+	$idx++;
+						
+	echo '
+	</td>
+	<td><font face=arial size=2><nobr>';
+	echo $data['code'].'&nbsp;';
+			
+	echo '&nbsp;</nobr></td><td>&nbsp;';
+	echo '<font face=arial size=2>';
+	echo $data['parent_desc'].':<b> '.$data['description'].'</b>&nbsp;';		
+						
+	echo '</td>';
+	echo '
+	</tr>';
 }
-			if ($opcount>0) 
-				{ 
-					//mysql_data_seek($op_result,0);
-					$zeile=$op_result->FetchRow();
-					if($zeile[ops_intern_code]!="") 
-					{
-						$linebuf=explode("~",$zeile[ops_intern_code]);
-						//foreach($linebuf as $v)	drawdata($v);
-						while(list($x,$v)=each($linebuf)) drawdata($v);
-					}
-				}
-				
-$deleter=1;
+
 $idx=0;
-if($icdcount)
-{
+
+if(is_object($diag_obj)){
 ?>
 <tr >
 <td colspan=8>&nbsp;
@@ -259,22 +210,23 @@ if($icdcount)
 		
 </tr>
 <?php
+$selector='icd';
+$hidselector='icd_px';
+$diag_exists=true;
+		
+	while($diagnosis=$diag_obj->FetchRow()){
+		drawdata($diagnosis);
+	}
+}else{
+	$diag_exist=false;
 }
-	$idx=0;
-			if ($icdcount>0) 
-				{ 
-					$selector="icd";
-					//mysql_data_seek($icd_result,0);
-					while($zeile=$icd_result->FetchRow())
-					{
-							drawdata($zeile[related_icd]);
-							//$idx++;
-					}
-				}
 ?>
 <input type="hidden" name="last_icd_index" value="<?php echo $idx ?>">
-<?php if($opscount)
-{
+<?php 
+
+$idx=0;
+
+if(is_object($proc_obj)){
 ?>
 <tr >
 <td colspan=8>&nbsp;
@@ -291,28 +243,26 @@ if($icdcount)
 		
 </tr>
 <?php
-}
-			if ($opscount>0) 
-				{ 
-					$selector="ops";
-					$idx=0;
-					//mysql_data_seek($ops_result,0);
-					while($zeile=$ops_result->FetchRow())
-					{
-							drawdata($zeile[related_ops]);
-							//$idx++;
-					}
-				}
-				else
-				{
+
+$selector='ops';
+$hidselector='ops_px';
+
+/* Draw the procedure codes */
+	
+	while($procedure=$proc_obj->FetchRow()){
+		drawdata($procedure);
+	}
+	$proc_exists=true;
+}else{
 ?>
 <input type="hidden" name="ops0" value="">
 <?php
-			}
+	$proc_exists=false;
+}
 ?>
 </table>
 <input type="hidden" name="last_ops_index" value="<?php echo $idx ?>">
-<?php if($icdcount||$opscount) : ?>
+<?php if($diag_exists||$proc_exists) : ?>
 <p>
 <input type="submit" value="<?php echo $LDApplySelection ?>">
 <input type="hidden" name="sid" value="<?php echo $sid; ?>">
@@ -323,10 +273,10 @@ if($icdcount)
 <input type="hidden" name="fn" value="<?php echo $fn; ?>">
 <input type="hidden" name="bd" value="<?php echo $bd; ?>">
 <input type="hidden" name="dept_nr" value="<?php echo $dept_nr; ?>">
+<input type="hidden" name="group_nr" value="<?php echo $group_nr; ?>">
 <input type="hidden" name="oprm" value="<?php echo $oprm; ?>">
 <input type="hidden" name="display" value="<?php echo $display; ?>">
 <input type="hidden" name="target" value="<?php echo $target; ?>">
-<input type="hidden" name="maincode" value="<?php echo $maincode; ?>">
 <input type="hidden" name="mode" value="save">
 
 </form>
