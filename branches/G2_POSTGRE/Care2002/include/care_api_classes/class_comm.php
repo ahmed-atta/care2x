@@ -8,7 +8,7 @@
 require_once($root_path.'include/care_api_classes/class_core.php');
 
 /**
-*  Communication information methods.
+*  Communication, Phone, beeper information methods.
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance.
 * @author Elpidio Latorilla
 * @version beta 1.0.09
@@ -42,7 +42,7 @@ class Comm extends Core {
 									'exphone2',
 									'funk1',
 									'funk2',
-									'room_nr',
+									'roomnr',
 									'date',
 									'time',
 									'status',
@@ -90,6 +90,39 @@ class Comm extends Core {
 		if($info=$this->DeptInfoExists($dept_nr,TRUE))	return $info->FetchRow();
 			else return FALSE;
 	}
-	
+    /**
+    * Gets the phone, etc. data of the person based on the record's primary key.
+    *
+    * The returned array contains the indexes as defined for the array $fld_phone
+    * @access public
+    * @param int Primary key number
+    * @param string Field names separated by comma. Default is '*''
+    * @return array
+    */
+    function getData($nr=0,$fields='*'){
+        global $db;
+        if(empty($nr)) return FALSE;
+        if(empty($fields)) $fields='*';
+        $this->sql="SELECT $fields FROM $this->tb_phone WHERE item_nr=$nr";
+        if($this->res['gdta']=$db->Execute($this->sql)) {
+            if($this->rec_count=$this->res['gdta']->RecordCount()) {
+                 return $this->res['gdta']->FetchRow();
+            } else { return FALSE; }
+        } else { return FALSE; }
+    }
+    /**
+    * Deletes the phone, etc. data of the person based on the record's primary key.
+    * @access public
+    * @param int Primary key number
+    * @return boolean
+    */
+    function deleteData($nr=0){
+        //global $db;
+        if(empty($nr)) return FALSE;
+        $this->sql="DELETE FROM $this->tb_phone WHERE item_nr=$nr";
+        if($this->Transact($this->sql)) {
+            return TRUE;
+        } else { return FALSE; }
+    }
 }
 ?>
