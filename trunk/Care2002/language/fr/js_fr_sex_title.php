@@ -13,7 +13,7 @@ $LDTitles=array(_=>"-",
 						Prof__Dr__Dr_=>"Prof. Dr. Dr.",
 						Sr_f=>"Sr.",
 						Madam_f=>"Madame",
-						Sir=>"Sir",
-						Lord=>"Lord");
+						Sir=>"Mr.",
+						Lord=>"Maitre");
 						
 ?>

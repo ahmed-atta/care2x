@@ -9,16 +9,16 @@ $LDEmergency='Urgence ambulatoire';
 $LDSonography='Sonographie';
 $LDNuclearMed='Diagnostiques Nucléaires';
 $LDAdmission='Admission';
-$LDAdmissionTxt='Admission/renvoi de l\'ambulatoire, recherche, archive';
+$LDAdmissionTxt='Admission/Renvoi de l\'ambulatoire, recherche, archive';
 $LDNews='Nouvelles';
-$LDNewsTxt='Nouvelles spécifiques pour la clinique, mémo, info, etc.';
+$LDNewsTxt='Nouvelles spécifiques de la clinique, mémo, info, etc.';
 # 2003-08-01 EL
-$LDAppointments='Appointments';
-$LDAppointmentsTxt='Patient appointments with this department';
-$LDPatientWaitingList='Patient waiting list';
-$LDPWListTxt='Today\'s admitted patients in the clinic';
-$LDOutpatientClinic='Outpatient clinic';
-$LDGeneralAmbulatory='General Ambulatory';
-$LDAmbulatory='Ambulatory';
+$LDAppointments='Rendez-vous';
+$LDAppointmentsTxt='Rendez-vous patient pour ce département';
+$LDPatientWaitingList='Liste des patiens en attente';
+$LDPWListTxt='Patient admis à la clinique aujourd'hui';
+$LDOutpatientClinic='Externat';
+$LDGeneralAmbulatory='Ambulatoire Générale';
+$LDAmbulatory='Ambulatoire';
 
 ?>

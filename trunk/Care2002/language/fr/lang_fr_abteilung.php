@@ -12,7 +12,7 @@ $LDDayTxt='Jour';
 * OB-Gyne = Obstetrics-Gynecology
 */
 $dept=array('Chirurgie g&eacute;n&eacute;rale',
-					'Urgence chirurgique',
+					'Urgence chirurgicale',
 					'Chirurgie plastique',
 					'ENT',
 					'Opthalmologie',
