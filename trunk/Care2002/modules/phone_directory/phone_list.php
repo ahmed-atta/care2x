@@ -11,7 +11,6 @@ GNU GPL. For details read file "copy_notice.txt".
 define('LANG_FILE','phone.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
 
 $dbtable='care_phone';
 
@@ -169,13 +168,13 @@ echo '></a>'; } ?><img <?php echo createLDImgSrc($root_path,'phonedir-b.gif','0'
 			if ($batchnum=="") $batchnum=1;
 			echo "<FONT SIZE=-1  FACE=Arial> $LDMoreInfo: &nbsp;&nbsp;\n"; 
 			if ($batchnum>1)
-			echo '<a href=phone_list.php'.URL_APPEND.'&pagecount='.$pagecount.'&linecount='.$linecount.'&batchnum='.($batchnum-1).'&displaysize='.$displaysize.'&edit='.$edit.'><font color=red ><< </font></a> - ';
+			echo '<a href=phone_list.php'.URL_APPEND.'&pagecount='.$pagecount.'&linecount='.$linecount.'&batchnum='.($batchnum-1).'&displaysize='.$displaysize.'&edit='.$edit.'><font color=red ><img src="../../gui/img/common/default/l-arrowgrnlrg.gif" border=0></font></a> - ';
 			for($i=1;$i<=$pagecount;$i++)
 			{ 	
-				if ($i==$batchnum) echo "<b>".$i." - </b>"; else echo ' <a href=phone_list.php'.URL_APPEND.'&pagecount='.$pagecount.'&linecount='.$linecount.'&batchnum='.$i.'&displaysize='.$displaysize.'&edit='.$edit.'>'.$i.'</a> - ';
+				if ($i==$batchnum) echo "<b><font color=red >".$i."</font> - </b>"; else echo ' <a href=phone_list.php'.URL_APPEND.'&pagecount='.$pagecount.'&linecount='.$linecount.'&batchnum='.$i.'&displaysize='.$displaysize.'&edit='.$edit.'>'.$i.'</a> - ';
 			}
 	
-			if ($batchnum<$pagecount)	echo '<a href=phone_list.php'.URL_APPEND.'&pagecount='.$pagecount.'&linecount='.$linecount.'&batchnum='.($batchnum+1).'&displaysize='.$displaysize.'&edit='.$edit.'><font color=red >>></font></a>';
+			if ($batchnum<$pagecount)	echo '<a href=phone_list.php'.URL_APPEND.'&pagecount='.$pagecount.'&linecount='.$linecount.'&batchnum='.($batchnum+1).'&displaysize='.$displaysize.'&edit='.$edit.'><font color=red ><img src="../../gui/img/common/default/bul_arrowgrnlrg.gif" border=0></font></a>';
 			echo "</FONT>\n";
 		
 		 }
@@ -188,10 +187,10 @@ echo '></a>'; } ?><img <?php echo createLDImgSrc($root_path,'phonedir-b.gif','0'
 				<input type=hidden name=sid value=\"$sid\">
 				<input type=hidden name=lang value=\"$lang\">
 				<input type=hidden name=edit value=\"$edit\">
-    				<input type=text name=displaysize value=".$displaysize." size=2> $LDRows<br>";
+    				<input type=text name=displaysize value=".$displaysize." size=2> $LDRows ";
 					
-		echo '<INPUT type="image" '.createLDImgSrc($root_path,'show.gif','0').'></font></FORM>';		
-					
+		echo '<INPUT type="image" src="../../gui/img/common/default/bul_arrowgrnlrg.gif"></font></FORM>';		
+     
 		//echo "<INPUT type=submit  value=\"$LDShow\".></font></FORM>";		
 }// end of if(rows)
 ?>
