@@ -6,19 +6,28 @@
 # ttf font rendering. By default, ttf rendering is disabled due to inconsequent results from different php versions.
 
 $ttf_render=FALSE;	
+$ttf_render=TRUE;
+
+# If the language is arabic or farsi, force TTF font to true 
+if($lang=='ar'||$lang=='fa') $ttf_render=TRUE;
+
+# Set the font type here
+
+$ttf_fonttype='arial.ttf';
 
 if($ttf_render){
+
 	$font_path=$root_path.'main/imgcreator/';
 	$ttf_ok=FALSE;
 	# Check if TTF text possible
 	if(function_exists(ImageTTFText)){
 		# Workaround to avoid upper/lower case error
-		if(file_exists($font_path.'arial.ttf')){
+		if(file_exists($font_path.$ttf_fonttype)){
 			$ttf_ok=TRUE;
-			$arial=$font_path.'arial.ttf';
-		}elseif(file_exists($font_path.'ARIAL.TTF')){
+			$arial=$font_path.$ttf_fonttype;
+		}elseif(file_exists($font_path.strtoupper($ttf_fonttype))){
 			$ttf_ok=TRUE;
-			$arial=$font_path.'ARIAL.TTF';
+			$arial=$font_path.strtoupper($ttf_fonttype);
 		}
 	}
 }else{
