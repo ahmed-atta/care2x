@@ -26,11 +26,11 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 * Set default values if not available from url
 */
 if (!isset($dept_nr)||empty($dept_nr)) { $dept_nr=$HTTP_SESSION_VARS['sess_dept_nr'];} # Default station must be set here !!
-/*if(!isset($pday)||empty($pday)) $pday=date('d');
+if(!isset($pday)||empty($pday)) $pday=date('d');
 if(!isset($pmonth)||empty($pmonth)) $pmonth=date('m');
 if(!isset($pyear)||empty($pyear)) $pyear=date('Y');
 $s_date=$pyear.'-'.$pmonth.'-'.$pday;
-*/
+
 if(isset($s_date)){
 	if($s_date==date('Y-m-d')) $is_today=true;
 		else $is_today=false;
@@ -101,7 +101,7 @@ if(($mode=='')||($mode=='fresh')){
 			if(SHOW_DOC_2) $duty2=&unserialize($result['duty_2_pnr']);
 					//echo $sql."<br>";
 		}
-
+		echo $pers_obj->getLastQuery();
 		# Adjust the day index. This is necessary since change of duty usually happens early morning  not midnight
 		$offset_day=$pday-1;
 		# Consider the early morning hours to belong to the past day
