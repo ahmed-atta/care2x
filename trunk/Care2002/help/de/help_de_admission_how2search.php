@@ -8,20 +8,19 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 <form action="#" >
 <b>Schritt 1</b>
 
-<ul>Geben Sie entweder eine vollständige Information oder die erste Zeichen von der Fallnummer, oder dem Namen, oder Vornamen, oder Geburtsdatum vom Patienten 
+<ul>Geben Sie entweder eine vollständige Information oder die erste Zeichen von der Fallnummer, oder dem Namen, oder Vornamen  vom Patienten 
  ein.
 		<p>Beispiel 1: "21000012" oder "12".
 		<br>Beispiel 2: "Guerero" oder "gue".
 		<br>Beispiel 3: "Alfredo" oder "Alf".
-		<br>Beispiel 4: "10.1" oder "10.12.1956".
 		
 </ul>
 <b>Schritt 2</b>
-<ul> Den <input type="button" value="SUCHEN" > anklicken.<p>
+<ul> Den <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> anklicken.<p>
 </ul>
 <b>Schritt 3</b>
 <ul>Wenn die Suche ein Ergebnis bzw. Ergebnisse liefert wird eine Liste gezeigt.<br>
-		Um das Dokument eines Patienten zu sehen, den nebenstehenden <img src="../img/statbel2.gif" border=0> anklicken.
+		Um das Dokument eines Patienten zu sehen, den nebenstehenden <img <?php echo createComIcon('../','pdata.gif','0') ?>>  Knopf anklicken.
 </ul>
 
 <b>Achtung!</b>

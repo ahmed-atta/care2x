@@ -1,19 +1,54 @@
 <?php
 /**
-* class Image
-*  extends Core
+* @package care_api
+*/
+
+/**
 */
 require_once($root_path.'include/care_api_classes/class_core.php');
-
+/**
+*  Image methods. 
+*  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
+* @author Elpidio Latorilla
+* @version beta 1.0.08
+* @copyright 2002,2003,2004 Elpidio Latorilla
+* @package care_api
+*/
 class Image extends Core{
-
-	var $tb_image='care_encounter_image'; # table for encounter's images
-	var $tb_img_diag='care_img_diagnostic'; # table for diagnostic images 
-	var $mimefilter='jpg,gif,png,bmp'; # allowed mime types
-	var $ul_img_ext=''; # uploaded img file's extension/mime type
-	var $def_root_path='fotos/encounter/'; # default root path for images
+	/**
+	* Table name for encounter's image data
+	* @var string
+	*/
+	var $tb_image='care_encounter_image';
+	/**
+	* Table name for diagnostics images data
+	* @var string
+	*/
+	var $tb_img_diag='care_img_diagnostic'; 
+	/**
+	* Default filter string for allowed file extensions
+	* @var string
+	*/
+	var $mimefilter='jpg,gif,png,bmp';
+	/**
+	* Holder for the uploaded file' extension/mime type
+	* @var string
+	*/
+	var $ul_img_ext='';
+	/**
+	* Default root path for stored images
+	* @var string
+	*/
+	var $def_root_path='fotos/encounter/';
+	/**
+	* Table name for person's registration data
+	* @var string
+	*/
 	var $tb_person='care_person';
-	
+	/**
+	* Field names of care_encounter_image table
+	* @var array
+	*/
 	var $fld_image=array('nr',
 									'encounter_nr',
 									'shot_date',
@@ -27,6 +62,10 @@ class Image extends Core{
 									'modify_time',
 									'create_id',
 									'create_time');
+	/**
+	* Field names of care_img_diagnostic table
+	* @var array
+	*/
 	var $fld_img_diag=array('nr',
 									'pid',
 									'encounter_nr',
@@ -52,8 +91,16 @@ class Image extends Core{
 		$this->ref_array=$this->fld_image;
 	}
 	/**
-	*  Checks if the image notes record exists in the table
-	*  return true if  record is availabe (note it returns true even if the notes fields is empty)
+	*  Checks if the image notes record exists in the table.
+	*
+	* The data is passed via an associative array containing the following index keys:
+	* - encounter_nr = encounter number
+	* - shot_date = date when image was taken
+	* - shot_nr = number of the image
+	*
+	*  Returns true if  record is availabe (note it returns true even if the notes fields is empty)
+	* @param array Data
+	* @return mixed integer or boolean
 	*/
 	function ImageNotesExists(&$data){
 		global $db;
@@ -66,6 +113,12 @@ class Image extends Core{
 		    } else { return false;}
 		} else { return false;}
 	}
+	/**
+	*  Checks if the image notes record exists in the table.
+	*
+	* @param array Data for updating
+	* @return boolean
+	*/
 	function updateImageNotes(&$data){
 	    global $db;
 		if(empty($data['notes'])){
@@ -79,9 +132,17 @@ class Image extends Core{
 		}
 	}
 	/**
-	* Gets the image' s data from the table
-	* param mixed $nr = int or array
-	* return adodb record object
+	* Gets the image' s data from the database table.
+	*
+	* The query data is passed via an associative array containing the following index keys:
+	* - encounter_nr = encounter number
+	* - shot_date = date when image was taken
+	* - shot_nr = number of the image
+	*
+	* The returned adodb record object contains a row of array.
+	* The array contains the data with the index keys as set in the <var>$fld_image</var> array.
+	* @param array Data used for query constraint. By reference.
+	* @return mixed adodb record object or boolean
 	*/
 	function getImageData(&$data){
 		global $db;
@@ -97,10 +158,15 @@ class Image extends Core{
 		} else { return false;}
 	}
 	/**
-	* Gets the last shot nr of an image data by encounter nr and shot date
-	* param array $data = passed by reference
-	* $data = array, contains at least the ff: indexes: 'enc_nr' => encounter number, 'shot_date' => shot date
-	* return adodb record object
+	* Gets the last shot number of an image data by encounter number and shot date.
+	*
+	* The query data is passed via an associative array containing the following index keys:
+	* - encounter_nr = encounter number
+	* - shot_date = date when image was taken
+	* - shot_nr = number of the image
+	*
+	* @param array Data used for query constraint. By reference.
+	* @return mixed adodb record object or boolean
 	*/
 	function getLastShotNr(&$data){
 		global $db;
@@ -113,10 +179,12 @@ class Image extends Core{
 		} else { return false;}
 	}
 	/**
-	* saveImageData() saves all data pertinent to the image
-	* public
-	* @param $data (array) = the data in array
-	* return last insert ID / false
+	* Saves all data pertinent to the image.
+	* 
+	* If successful, the last insert ID will be returned.
+	* @access public
+	* @param array Data to be saved.
+	* @return mixed integer or boolean
 	*/
 	function saveImageData(&$data){
 	    global $db;
@@ -134,11 +202,11 @@ class Image extends Core{
 		}
 	}
 	/**
-	* getAllImageData() gets all data from the care_encounter_image table which are pertinent to the encounter
-	* public
-	* @param $enc_nr (int) = encounter number
-	* @param $shot_date = the shot date of the image
-	* return ADODB record object
+	* Gets all data from the care_encounter_image table which are pertinent to the encounter.
+	* @access public
+	* @param int Encounter number
+	* @param string Shot date of the image
+	* @return mixed ADODB record object or boolean
 	*/
 	function getAllImageData($enc_nr,$shot_date=0){
 		global $db;
@@ -154,12 +222,13 @@ class Image extends Core{
 		}else{ return false;}
 	}
 	/**
-	* isValidUploadedImage() checks whether the uploaded image file is valid or not
-	* public
-	* the file's extension/mime type will be extracted and saved in the objects ul_img_ext variable
-	* @param $img (array) (pass by reference) the image pointer, usually $HTTP_POST_FILES
-	* @param $mfilter (str)  optional filter mime types, if empty, default will be used
-	* return true/false
+	* Checks whether the uploaded image file is valid or not.
+	*
+	* File's extension/mime type will be extracted and saved in the internal <var>$ul_img_ext</var> buffer.
+	* @access public
+	* @param array  Image pointer, (pass by reference) usually $HTTP_POST_FILES
+	* @param string  Optional filter string for mime types. If empty, default filter string <var>$mimefilter</var> will be used
+	* @return boolean
 	*/
 	function isValidUploadedImage(&$img,$mfilter=''){
 		if(empty($mfilter)) $mfilter=$this->mimefilter;
@@ -171,20 +240,21 @@ class Image extends Core{
 		}else{ return false;}
 	}
 	/**
-	* UploadedImageMimeType() returns the mime type of the uploaded image file
-	* that was checked by the isValidUploadedImage() method
-	* public
-	* return the mime type/file extension
+	* Returns the extension/mime type of the uploaded image file that was checked by the isValidUploadedImage() method.
+	*
+	* @access public
+	* @return string
 	*/
 	function UploadedImageMimeType(){
 		return $this->ul_img_ext;
 	}
 	/**
-	* saveUploadedImage() saves the uploaded image with the given filename into a given path
-	* public
-	* @param $img (array) (pass by reference) the image file in array (usually $HTTP_POST_FILES)
-	* @param $fpath (string) the complete path for the stored image. If empty, the default will be used
-	* @param $fname (string) thefilename of the stored image. If empty, the original file name will be used
+	* Saves the uploaded image with the given filename into a given path.
+	*
+	* @access public
+	* @param array  Image file in array (pass by reference) (usually $HTTP_POST_FILES)
+	* @param string Complete path for the stored image. If empty, the default <var>$def_root_path</var> will be used.
+	* @param string Filename of the stored image. If empty, the original file name will be used.
 	*/
 	function saveUploadedImage(&$img,$fpath='',$fname=''){
 		if(empty($fpath)) $fpath=$this->def_root_path;
@@ -192,10 +262,23 @@ class Image extends Core{
 	 		else return copy($img['tmp_name'],$fpath.$fname);
 	}
 	/**
-	* DicomImages() gets a list of dicom images
-	* @param $key (mixed)  the search keyword, if empty all dicom images will be returned as list
-	* public
-	* return adodb record object, else false
+	* Gets a list of dicom images.
+	*
+	* The returned adodb record object contains rows of arrays.
+	* Each array contains the data with the following index keys:
+	* - nr = primary key number of the image record entry
+	* - encounter_nr = encounter number of the dicom image (if available)
+	* - upload_date = date of image upload
+	* - max_nr = number of images within the image group
+	* - note_len = the length of notes (if available)
+	* - pid = the patient's PID number
+	* - name_last = patient's last or family name
+	* - name_first = patient's first or given name
+	* - date_birth = date of birth
+	*
+	* @param string  Search keyword. If empty all dicom images will be returned as list.
+	* @access public
+	* @return mixed adodb record object or boolean
 	*/
 	function DicomImages($key=''){
 		global $db;
@@ -225,10 +308,12 @@ class Image extends Core{
 		}else{return false;}
 	}	
 	/**
-	* getDicomImage() gets a dicom image
-	* @param $nr (int)  = the record number
-	* public
-	* return row, else false
+	* Gets a dicom image based on its primary key number.
+	*
+	* The returned  array contains the data with the index keys as set in the <var>$fld_img_diag</var> array.
+	* @param int Record number.
+	* @access public
+	* @return mixed array or boolean
 	*/
 	function getDicomImage($nr=''){
 		global $db;
@@ -241,17 +326,19 @@ class Image extends Core{
 		}else{return false;}
 	}	
 	/**
-	* useImgDiagnostic() sets the core table and fields to care_img_diagnostic
+	* Sets the core table and fields to care_img_diagnostic table.
 	*/
 	function useImgDiagnostic(){
 		$this->coretable=$this->tb_img_diag;
 		$this->ref_array=$this->fld_img_diag;
 	}
 	/**
-	* saveImgDiagnosticData() saves all data to care_img_diagnostic table
-	* public
-	* @param $data (array) = the data in array
-	* return last insert ID / false
+	* Saves all data to care_img_diagnostic table.
+	*
+	* If successful, the last insert ID will be returned, else FALSE.
+	* @access public
+	* @param array Image data for saving.
+	* @return mixed string or boolean
 	*/
 	function saveImgDiagnosticData(&$data){
 	    global $db;
@@ -263,9 +350,10 @@ class Image extends Core{
 		}else{return false;}
 	}
 	/**
-	* __delete() deletes an img record based on its "nr" value
-	* private
-	* return true or false
+	* Deletes an image record based on its "nr" value.
+	* @access private
+	* @param int Primary key number of image record.
+	* @return boolean
 	*/
 	function __delete($nr){
 		if(!$nr) return false;
@@ -273,9 +361,11 @@ class Image extends Core{
 		return $this->Transact();
 	}
 	/**
-	* setImgMaxNr() sets the value of max_nr of care_img_diagnostic table
-	* public
-	* return true or false
+	* Sets the value of max_nr of care_img_diagnostic table.
+	* @access public
+	* @param int Primary key number of image record.
+	* @param int Maximum number
+	* @return boolean
 	*/
 	function setImgMaxNr($nr=0,$count){
 	    global $db;
@@ -284,10 +374,11 @@ class Image extends Core{
 		return $this->Transact();
 	}
 	/**
-	* ImgNotes() returns the notes of an image 
-	* public
-	* @param $nr (int) = the record number
-	* return string, else false
+	* Returns the notes of an image.
+	*
+	* @access public
+	* @param int Primary key number of image record.
+	* @return mixed string or boolean
 	*/
 	function ImgNotes($nr=0){
 	    global $db;

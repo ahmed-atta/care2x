@@ -1,21 +1,42 @@
 <?php
-/* API class for Charts and Documentation
-*  Core 
-*   |_ Notes
-*         |_ NursingNotes
-*              |_ Charts
-*  Note this class should be instantiated only after a "$db" adodb  connector object
-* has been established by an adodb instance
+/**
+* @package care_api
+*/
+
+/**
 */
 require_once($root_path.'include/care_api_classes/class_core.php');
 require_once($root_path.'include/care_api_classes/class_notes.php');
 require_once($root_path.'include/care_api_classes/class_notes_nursing.php');
 
+/**
+*  Charts methods.
+*  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance.
+* @author Elpidio Latorilla
+* @version beta 1.0.08
+* @copyright 2002,2003 Elpidio Latorilla
+* @package care_api
+*/
 class Charts extends NursingNotes {
-
+	/**
+	* Table name for encounter measurement data
+	* @var string
+	*/
 	var $tb_measure='care_encounter_measurement';
+	/**
+	* Table name for encounter prescription data
+	* @var string
+	*/
 	var $tb_prescription='care_encounter_prescription';
+	/**
+	* Table name for prescription notes data
+	* @var string
+	*/
 	var $tb_presc_notes='care_encounter_prescription_notes';
+	/**
+	* Field names of care_encounter_measurement table
+	* @var array
+	*/
 	var $fld_measure=array(
 								'nr',
 								'msr_date',
@@ -33,7 +54,10 @@ class Charts extends NursingNotes {
 								'modify_time',
 								'create_id',
 								'create_time');
-								
+	/**
+	* Field names of care_encounter_prescription table
+	* @var array
+	*/
 	var $fld_prescription=array(
 								'nr',
 								'encounter_nr',
@@ -54,7 +78,10 @@ class Charts extends NursingNotes {
 								'modify_time',
 								'create_id',
 								'create_time');
-								
+	/**
+	* Field names of care_encounter_prescription_notes table
+	* @var array
+	*/
 	var $fld_presc_notes=array(
 								'nr',
 								'date',
@@ -67,19 +94,39 @@ class Charts extends NursingNotes {
 								'modify_time',
 								'create_id',
 								'create_time');
-	
+	/**
+	* Constructor
+	*/			
 	function Charts(){
 		$this->NursingNotes();
 	}
+	/**
+	* Sets the core table to the prescription table
+	* @access private
+	*/			
 	function _usePrescriptionTable(){
 		$this->coretable=$this->tb_prescription;
 		$this->ref_array=$this->fld_prescription;
 	}
+	/**
+	* Gets the diagnosis text based on the encounter_nr key.
+	* The result is sorted ascending by date and time. 
+	* @access public
+	* @param int Encounter number
+	* @return mixed adodb record object or boolean
+	*/			
 	function getDiagnosis($enr){
 		if($this->_getNotes("encounter_nr=$enr AND type_nr=12","ORDER BY date,time")){
 			return $this->result;
 		}else{return false;}
 	}
+	/**
+	* Saves a diagnosis text data into the database.
+	* The data to be stored are contained in an associative array  and passed by reference.
+	* @access public
+	* @param int Encounter number
+	* @return boolean
+	*/			
 	function saveDiagnosisFromArray(&$data_array){
 		//$this->setTable($this->tb_notes);
 		$this->data_array=$data_array;
@@ -90,11 +137,27 @@ class Charts extends NursingNotes {
 			return false;
 		}
 	}
+	/**
+	* Gets chart notes data based on the type_nr key.
+	* The result is sorting ascending by data and time.
+	* @access public
+	* @param int Encounter number
+	* @param int Type number of notes
+	* @return mixed adodb record object or boolean
+	*/			
 	function getChartNotes($enr,$type_nr){
 		if($this->_getNotes("encounter_nr=$enr AND type_nr=$type_nr","ORDER BY date,time")){
 			return $this->result;
 		}else{return false;}
 	}
+	/**
+	* Saves chart notes data  of the type_nr type key into the database.
+	* The data to be stored are contained in an associative array  and passed by reference.
+	* @access public
+	* @param array Chart notes data in associative array
+	* @param int Notes type number
+	* @return boolean
+	*/			
 	function saveChartNotesFromArray(&$data_array,$type_nr){
 		//$this->setTable($this->tb_notes);
 		$this->data_array=$data_array;
@@ -105,11 +168,26 @@ class Charts extends NursingNotes {
 			return false;
 		}
 	}	
+	/**
+	* Gets chart notes data based on the type_nr key and date key.
+	* The result is sorting ascending by data and time.
+	* @access public
+	* @param int Encounter number
+	* @param int Type number of notes
+	* @param string Date in yyyy-mm-dd format
+	* @return mixed adodb record object or boolean
+	*/			
 	function getDayChartNotes($enr,$type_nr,$date){
 		if($this->_getNotes("encounter_nr=$enr AND type_nr=$type_nr AND date='$date'","ORDER BY modify_time DESC")){
 			return $this->result;
 		}else{return false;}
 	}
+	/**
+	* Prepares the  measurement data for storing into the database.
+	* The data are transferred to an associative array, the core table is set to measurement table 
+	* and the reference array is set to the measurementtable's field names.
+	* @access private
+	*/			
 	function _prepareSaveMeasurement(){
 		global $HTTP_SESSION_VARS;
 		$this->coretable=$this->tb_measure;
@@ -119,6 +197,13 @@ class Charts extends NursingNotes {
 		$this->data_array['create_time']='NULL';	
 		$this->data_array['history']="Create: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
 	}
+	/**
+	* Saves a blood pressure data. 
+	* Data must be contained in an associative array and passed by reference.
+	* @param array Data contained in an associative array. Reference pass.
+	* @access public
+	* @return boolean
+	*/			
 	function saveBPFromArray(&$data){
 		$this->data_array=$data;
 		$this->_prepareSaveMeasurement();
@@ -129,6 +214,13 @@ class Charts extends NursingNotes {
 			return true;
 		}else{return false;}
 	}
+	/**
+	* Saves a temperature data. 
+	* Data must be contained in an associative array and passed by reference.
+	* @param array Data contained in an associative array. Reference pass.
+	* @access public
+	* @return boolean
+	*/			
 	function saveTemperatureFromArray(&$data){
 		$this->data_array=$data;
 		$this->_prepareSaveMeasurement();
@@ -138,6 +230,13 @@ class Charts extends NursingNotes {
 			return true;
 		}else{return false;}
 	}
+	/**
+	* Gets a blood pressure data based on encounter_nr and date keys.
+	* @param int Encounter number
+	* @param string Date of measurement
+	* @access public
+	* @return boolean
+	*/			
 	function getDayBP($enr,$date){
 		global $db;
 		$this->sql="SELECT * FROM $this->tb_measure WHERE encounter_nr=$enr AND msr_type_nr=8 AND msr_date='$date' ORDER BY msr_time";
@@ -145,13 +244,26 @@ class Charts extends NursingNotes {
 			return $this->result;
 		}else{return false;}
 	}
+	/**
+	* Gets a temperature data based on encounter_nr and date keys.
+	* @param int Encounter number
+	* @param string Date of measurement
+	* @access public
+	* @return boolean
+	*/			
 	function getDayTemperature($enr,$date){
 		global $db;
 		$this->sql="SELECT * FROM $this->tb_measure WHERE encounter_nr=$enr AND msr_type_nr=3 AND msr_date='$date' ORDER BY msr_time";
 		if($this->result=$db->Execute($this->sql)){
 			return $this->result;
 		}else{return false;}
-	}/**/
+	}
+	/**
+	* Saves prescription data.
+	* Data must be contained in an associative array and passed by reference.
+	* @param array Data contained in an associative array. Reference pass.
+	* @return boolean
+	*/			
 	function savePrescriptionFromArray(&$data){
 		global $HTTP_SESSION_VARS;
 		$this->_usePrescriptionTable();
@@ -165,6 +277,13 @@ class Charts extends NursingNotes {
 			return true;
 		}else{return false;}
 	}
+	/**
+	* Updates prescription data based on the nr key.
+	* Data must be contained in an associative array and passed by reference.
+	* @param int Record number key
+	* @param array Data contained in an associative array. Reference pass.
+	* @return boolean
+	*/			
 	function updatePrescriptionFromArray($nr,&$data){
 		global $HTTP_SESSION_VARS;
 		$this->_usePrescriptionTable();
@@ -176,6 +295,11 @@ class Charts extends NursingNotes {
 			return true;
 		}else{return false;}
 	}
+	/**
+	* Stops or marks the end of prescription data based on the nr key.
+	* @param int Record number key
+	* @return boolean
+	*/			
 	function EndPrescription($nr){
 		global $HTTP_SESSION_VARS;
 		$this->data_array=NULL;
@@ -188,6 +312,11 @@ class Charts extends NursingNotes {
 			return true;
 		}else{return false;}
 	}
+	/**
+	* Gets all current prescription data based on the encounter_nr key.
+	* @param int Encounter number
+	* @return mixed adodb record object or boolean
+	*/			
 	function getAllCurrentPrescription($enr){
 		global $db;
 		$this->sql="SELECT * FROM $this->tb_prescription WHERE encounter_nr=$enr AND NOT is_stopped ORDER BY nr";
@@ -197,6 +326,12 @@ class Charts extends NursingNotes {
 			return false;
 		}
 	}
+	/**
+	* Gets prescription data of a day based on the encounter_nr and date keys.
+	* @param int Encounter number
+	* @param string Prescription date
+	* @return mixed adodb record object or boolean
+	*/			
 	function getDayPrescriptionNotes($enr,$date){
 		global $db;
 		$this->sql="SELECT m.*,n.nr AS notes_nr,n.short_notes AS day_notes 
@@ -209,6 +344,12 @@ class Charts extends NursingNotes {
 			return false;
 		}
 	}
+	/**
+	* Saves prescription notes.
+	* Data must be contained in an associative array and passed by reference.
+	* @param array Data contained in an associative array. Reference pass.
+	* @return boolean
+	*/			
 	function savePrescriptionNotesFromArray(&$data){
 		global $HTTP_SESSION_VARS;
 		$this->data_array=$data;
@@ -222,6 +363,13 @@ class Charts extends NursingNotes {
 			return true;
 		}else{return false;}
 	}
+	/**
+	* Saves prescription notes based on the primary record key "nr".
+	* Data must be contained in an associative array and passed by reference.
+	* @param int Record number
+	* @param array Data contained in an associative array. Reference pass.
+	* @return boolean
+	*/			
 	function updatePrescriptionNotesFromArray($nr,&$data){
 		global $HTTP_SESSION_VARS;
 		$this->data_array=$data;
@@ -233,9 +381,19 @@ class Charts extends NursingNotes {
 			return true;
 		}else{return false;}
 	}
+	/**
+	* Gets table field's data of a given date range.
+	* The resulting data is buffered in the $result variable.
+	* @param int Encounter number
+	* @param int Field name of the table to be fetched
+	* @param int Type number of the notes
+	* @param string Starting date in yyyy-mm-dd format
+	* @param string Ending date in yyyy-mm-dd format
+	* @return boolean
+	*/			
 	function _getChartDailyData($enr,$notes_id,$type_nr,$start,$end){
 		global $db;
-		$this->Notes(); // call constructor to set the table and field names
+		$this->Notes(); # call Notes constructor to set the table and field names
 		$this->sql="SELECT date,$notes_id FROM $this->tb_notes WHERE encounter_nr=$enr AND type_nr=$type_nr AND date BETWEEN '$start' AND '$end' ORDER BY modify_time DESC";
 		if($this->result=$db->Execute($this->sql)){
 			if($this->result->RecordCount()){
@@ -243,31 +401,73 @@ class Charts extends NursingNotes {
 			}else{return false;}
 		}else{return false;}
 	}
+	/**
+	* Gets diet plan of a given date range.
+	* @param int Encounter number
+	* @param string Starting date in yyyy-mm-dd format
+	* @param string Ending date in yyyy-mm-dd format
+	* @return mixed adodb record object or boolean
+	*/			
 	function getChartDailyDietPlans($enr,$start,$end){
 		if($this->_getChartDailyData($enr,'short_notes',23,$start,$end)){
 			return $this->result;
 		}else{return false;}
 	}
+	/**
+	* Gets main notes data of a given date range.
+	* @param int Encounter number
+	* @param string Starting date in yyyy-mm-dd format
+	* @param string Ending date in yyyy-mm-dd format
+	* @return mixed adodb record object or boolean
+	*/			
 	function getChartDailyMainNotes($enr,$start,$end){
 		if($this->_getChartDailyData($enr,'notes',7,$start,$end)){
 			return $this->result;
 		}else{return false;}
 	}
+	/**
+	* Gets supplementary notes data of a given date range.
+	* @param int Encounter number
+	* @param string Starting date in yyyy-mm-dd format
+	* @param string Ending date in yyyy-mm-dd format
+	* @return mixed adodb record object or boolean
+	*/			
 	function getChartDailyEtcNotes($enr,$start,$end){
 		if($this->_getChartDailyData($enr,'notes',8,$start,$end)){
 			return $this->result;
 		}else{return false;}
 	}
+	/**
+	* Gets anticoaguants  data of a given date range.
+	* @param int Encounter number
+	* @param string Starting date in yyyy-mm-dd format
+	* @param string Ending date in yyyy-mm-dd format
+	* @return mixed adodb record object or boolean
+	*/			
 	function getChartDailyAnticoagNotes($enr,$start,$end){
 		if($this->_getChartDailyData($enr,'short_notes',10,$start,$end)){
 			return $this->result;
 		}else{return false;}
 	}
+	/**
+	* Gets IV notes  data of a given date range.
+	* @param int Encounter number
+	* @param string Starting date in yyyy-mm-dd format
+	* @param string Ending date in yyyy-mm-dd format
+	* @return mixed adodb record object or boolean
+	*/			
 	function getChartDailyIVNotes($enr,$start,$end){
 		if($this->_getChartDailyData($enr,'short_notes',9,$start,$end)){
 			return $this->result;
 		}else{return false;}
 	}
+	/**
+	* Gets prescription notes  data of a given date range.
+	* @param int Encounter number
+	* @param string Starting date in yyyy-mm-dd format
+	* @param string Ending date in yyyy-mm-dd format
+	* @return mixed adodb record object or boolean
+	*/			
 	function getChartDailyPrescriptionNotes($enr,$start,$end){
 		global $db;
 		$this->sql="SELECT p.nr,n.date,n.short_notes,p.color_marker
@@ -276,7 +476,7 @@ class Charts extends NursingNotes {
 						 WHERE p.encounter_nr=$enr AND NOT p.is_stopped ORDER BY p.nr";
 		if($this->result=$db->Execute($this->sql)){
 			return $this->result;
-		}else{ echo $this->sql;
+		}else{ //echo $this->sql;
 			return false;
 		}
 	}

@@ -71,7 +71,7 @@ if($dblink_ok)
 			$checkintern=false;
 		}
 		
-		if (($zeile['password']==$keyword)&&($zeile['login_id']==$userid)) 
+		if (($zeile['password']==md5($keyword))&&($zeile['login_id']==$userid)) 
 		{	
 			if (!($zeile['lockflag']))
 			{

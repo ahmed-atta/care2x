@@ -1,20 +1,67 @@
 <?php
-/* API class for user configuration data 
-*  Note this class should be instantiated only after a "$db" adodb  connector object
-* has been established by an adodb instance
+/**
+* @package care_api
 */
-
+/**
+*  User configuration methods. 
+*  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
+* @author Elpidio Latorilla
+* @version beta 1.0.08
+* @copyright 2002,2003 Elpidio Latorilla
+* @package care_api
+*/
 class UserConfig {
-
+	/**#@+
+	* @access private
+	*/
+	/**
+	* Table name for user configurations
+	* @var string
+	*/
 	var $tb='care_config_user'; // table name
+	/**
+	* SQL query result buffer
+	* @var adodb record object
+	*/
 	var $result;
+	/**
+	* Resulting row buffer
+	* @var array
+	*/
 	var $row;
+	/**
+	* Universal buffer
+	* @var mixed
+	*/
 	var $buffer;
+	/**
+	* Universal flag
+	* @var boolean
+	*/
 	var $bool=false;
+	/**
+	* Preloaded data flag
+	* @var boolean
+	*/
 	var $is_preloaded=false;
+	/**
+	* SQL query
+	* @var string
+	*/
 	var $sql;
+	/**
+	* Event flag
+	* @var boolean
+	*/
 	var $ok;
+	/**#@-*/
 	
+	/**
+	* Does SQL transaction. Uses the adodb transaction routine.
+	* @access private
+	* @param string 
+	* @return boolean
+	*/
 	function Transact($sql=''){
 	    global $db;
 		if(!empty($sql)) $this->sql=$sql;
@@ -28,22 +75,35 @@ class UserConfig {
 			return false;
 	    }
     }	
+	/**
+	* Loads the default configuration data.
+	*
+	* The loaded data is stored in the internal <var>$buffer</var> buffer array and the <var>$is_preloaded</var> flag is set.
+	* @deprec Use the public<var> getDefault()</var> method instead.
+	* @access private
+	* @return boolean
+	*/
 	function _getDefault(){
-	    global $db;
-		
-	    if ($this->result=$db->Execute("SELECT serial_config_data FROM $this->tb WHERE user_id='default'")) {
-		    if ($this->result->RecordCount()) {
-		        $this->row=$this->result->FetchRow();
-			    $this->buffer=unserialize($this->row['serial_config_data']);
-			   	$this->is_preloaded=true;
-			   	return true;
-			}else{
-				return false;
-			}
-		}else{
-		    return false;
-		}
+	    return $this->getConfig();
 	}
+	/**
+	* Loads the default configuration data.
+	*
+	* The loaded data is stored in the internal <var>$buffer</var> buffer array and the <var>$is_preloaded</var> flag is set.
+	* @access public
+	* @return boolean
+	*/
+	function getDefault(){
+	    return $this->getConfig();
+	}
+	/**
+	* Loads  the user's configuration data based on its user configuration id key.
+	*
+	* The loaded data is stored in the internal <var>$buffer</var> buffer array and the <var>$is_preloaded</var> flag is set.
+	* @access public
+	* @param string User configuration id
+	* @return boolean
+	*/
 	function getConfig($user_id='default'){
 	    global $db;
 	
@@ -53,18 +113,21 @@ class UserConfig {
 		    if ($this->result->RecordCount()) {
 		        $this->row=$this->result->FetchRow();
 			    $this->buffer=unserialize($this->row['serial_config_data']);
-				//echo $user_id.'<br>';
-				//while(list($x,$v)=each($this->buffer)) echo $x.'>'.$v.'<br>';
-			   	//return $this->buffer;
 			   	$this->is_preloaded=true;
 			   	return true;
 			}else{
-				return $this->_getDefault();
+				return $this->getConfig(); # Returns default config
 			}
 		}else{
 		    return false;
 		}
 	}
+	/**
+	* Checks if  the user's configuration data exists in the database based on its user configuration id key.
+	* @access public
+	* @param string User configuration id
+	* @return boolean
+	*/
 	function exists($user_id='') {
 	    global $db;
 	
@@ -80,7 +143,15 @@ class UserConfig {
 		    return false;
 		}
 	}
-	
+	/**
+	* Saves  the user's configuration data.
+	*
+	* The configuration data is serialized first before being passed to the method.
+	* @access public
+	* @param string User configuration id
+	* @param string Serialized data
+	* @return boolean
+	*/
 	function saveConfig($user_id='default',&$data) {
 	    global $db;
 	    
@@ -89,13 +160,16 @@ class UserConfig {
 	    $this->buffer=serialize($data);
 	    $this->sql="REPLACE INTO $this->tb (user_id,serial_config_data) VALUES ('$user_id','$this->buffer')";
 	    return $this->Transact();
-/*	    if($this->result=$db->Execute("REPLACE INTO $this->tb (user_id,serial_config_data) VALUES ('$user_id','$this->buffer')")) {
-		    return true;
-		}else{
-		    return false;
-		}
-*/
 	}
+	/**
+	* Replaces (updates)  a configuration item.
+	*
+	* @access public
+	* @param string User configuration id
+	* @param string Name of item to be replaced.
+	* @param string New value
+	* @return boolean
+	*/
 	function replaceItem($user_id='default',$type='',$value='') {
 	    global $db;
 	    
@@ -111,9 +185,19 @@ class UserConfig {
 		    return false;
 		}	         
 	}
+	/**
+	* Checks if the configuration data is successfully preloaded.
+	* @access public
+	* @return boolean
+	*/
 	function isPreLoaded(){
 		return $this->is_preloaded;
 	}
+	/**
+	* Returns the preloaded configuration data.
+	* @access public
+	* @return array
+	*/
 	function getConfigData(){
 		return $this->buffer;
 	}

@@ -8,6 +8,9 @@ if (eregi("inc_rightcolumn_menu.php",$PHP_SELF))
 $config_type='main_info_%';
 require($root_path.'include/inc_get_global_config.php');
 
+#Workaround
+$main_info_address=nl2br($main_info_address);
+
 /* Prepare the url links variables */
 $url_open="open-time.php".URL_APPEND;
 $url_mgmt="newscolumns.php".URL_APPEND."&dept_nr=28&user_origin=dept";

@@ -11,12 +11,12 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 <body alink="#0000ff" vlink="#0000ff" link="#0000ff">
 <font face="Arial" color="#cc0000" size=3><b>Hilfe</b></font><p>
 <font face="Verdana, Arial" size=2><b>
-<a href="../main/help-info.php" target="HELPINFOFRAME">Erste Schritte</a><br>
-<a href="#">Inhalt</a><br>
-<a href="#">Verzeichnis</a><br>
+<a href="../main/help-info.php<?php echo "?sid=$sid&lang=$lang" ?>" target="HELPINFOFRAME">Erste Schritte</a><br>
+<a href="../help/de/help_de_contents.php" target="HELPINFOFRAME">Inhalt</a><br>
+<!-- <a href="#">Verzeichnis</a><br>
 <a href="#">Suchen</a><br>
 <a href="#">Tipps & Tricks</a><br>
 <a href="#">Anleitungen</a></b></font>
-
+ -->
 </body>
 </html>

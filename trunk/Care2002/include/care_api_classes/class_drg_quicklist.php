@@ -1,21 +1,33 @@
 <?php
 /**
-* Quicklist Class
-* extends DRG class
+* @package care_api
+*/
+
+/**
 */
 require_once($root_path.'include/care_api_classes/class_drg.php');
-
+/**
+*  Quicklist for DRG codes.
+*  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance.
+* @author Elpidio Latorilla
+* @version beta 1.0.08
+* @copyright 2002,2003,2004 Elpidio Latorilla
+* @package care_api
+*/
 class Quicklist extends DRG{
-	
 	/**
-	* Table name
+	* Table name for drg quicklist data
+	* @var string
 	*/
 	var $tb_qlist='care_drg_quicklist';
-	
-	var $dept_nr;
-	
 	/**
-	* Tables fields
+	* Current department number
+	* @var int
+	*/
+	var $dept_nr;
+	/**
+	* Field names of care_drg_quicklist table
+	* @var array
 	*/
 	var $fld_qlist=array(
 				'nr',
@@ -29,19 +41,20 @@ class Quicklist extends DRG{
 				'modify_time',
 				'create_id',
 				'create_time');
-				
 	/**
 	* Constructor
-	*/
+	* @param int Encounter number
+	* @param int Department number
+	*/			
 	function Quicklist($enc_nr,$dept_nr){
 		$this->enc_nr=$enc_nr;
 		$this->dept_nr=$dept_nr;
 		$this->DRG($enc_nr);
 	}
 	/**
-	* internResolveDeptNr() tries to get the encounter number
-	* @param $enc_nr (int) = encounter number
-	* returns encouter number/true/false
+	* Resolves the encounter number.
+	* @param int Encounter number
+	* @return mixed integer or boolean
 	*/
 	function internResolveDeptNr($dept_nr='') {
 	    if (empty($dept_nr)) {
@@ -54,10 +67,10 @@ class Quicklist extends DRG{
 		}
 	}
 	/**
-	* DeptQuicklist() returns the quicklist code items of a department
-	* @param $dept_nr (int) = department number
-	* @param $type = quicklist items type (drg_intern, diagnosis, procedure)
-	* return ADODB record set
+	* Returns the quicklist code items of a department.
+	* @param string Quicklist items type (drg_intern, diagnosis, procedure)
+	* @param int Department number
+	* @return mixed adodb record object or boolean
 	*/
 	function DeptQuicklist($type='',$dept_nr=0){
 		global $db;
@@ -93,9 +106,11 @@ class Quicklist extends DRG{
 		}else{return false;}
 	}
 	/**
-	* QuickCodeExists() checks if the code exists in the quicklist
-	* @param $code (string) = code
-	* return record entry number if exist, else false
+	* Checks if the code exists in the quicklist.
+	*
+	* If the code exists, its primary record number will be returned, else FALSE will be returned.
+	* @param string Code to check
+	* @return mixed integer or boolean
 	*/
 	function QuickCodeExists($code=0){
 		if(!$code) return false;
@@ -108,10 +123,10 @@ class Quicklist extends DRG{
 		}else{return false;}
 	}
 	/**
-	* upRank($step=1) increases the ranking of the code in the quicklist by $step value
-	* @param $code (str) = the code
-	* @param $step (int) = increase step (default =1)
-	* return true/false
+	* Increases the ranking of the code in the quicklist by $step value.
+	* @param string Code
+	* @param int  Increase step (defaults to 1)
+	* @return boolean
 	*/
 	function upRank($code=0,$step=1){
 		if(!$code) return false;

@@ -526,14 +526,14 @@ How to select a particular document for display?</b>
 How to update or edit a displayed log document?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the <img src="../img/update3.gif" border=0> button situated below the operation's date on the leftmost column to switch to editing mode.<br>
+ 	<b>Step 1: </b>Click the <img <?php echo createComIcon('../','bul_arrowgrnlrg.gif','0') ?>> button situated below the operation's date on the leftmost column to switch to editing mode.<br>
  	<b>Step 2: </b>Once in the editing mode, click the "Help" button if you need further instructions in editing the document.<p> 
 	</ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to open the patient's data folder?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the <img src="../img/info2.gif" border=0> button on the left of the patient number.<br>
+ 	<b>Step 1: </b>Click the <img <?php echo createComIcon('../','info3.gif','0') ?>> button on the left of the patient number.<br>
  	<b>Step 2: </b>The patient's data folder will pop up. Click the "Help" button in the window if you need further instructions.<p> 
 	</ul>
 
@@ -595,14 +595,14 @@ Click the "Search" to switch over to search mode.</ul>
 How to update or edit a displayed log document?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the <img src="../img/update3.gif" border=0> button situated below the operation's date on the leftmost column to switch to editing mode.<br>
+ 	<b>Step 1: </b>Click the <img <?php echo createComIcon('../','bul_arrowgrnlrg.gif','0') ?>> button situated below the operation's date on the leftmost column to switch to editing mode.<br>
  	<b>Step 2: </b>Once in the editing mode, click the "Help" button if you need further instructions in editing the document.<p> 
 	</ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to open the patient's data folder?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the <img src="../img/info2.gif" border=0> button on the left of the patient number.<br>
+ 	<b>Step 1: </b>Click the <img <?php echo createComIcon('../','info3.gif','0') ?>> button on the left of the patient number.<br>
  	<b>Step 2: </b>The patient's data folder will pop up. Click the "Help" button in the window if you need further instructions.<p> 
 	</ul>
 	<?php endif ?>

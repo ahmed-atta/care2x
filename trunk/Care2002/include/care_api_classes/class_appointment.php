@@ -1,18 +1,50 @@
 <?php
-/* API class for appointment functions. Will be extended by other classes 
-*  Note this class should be instantiated only after a "$db" adodb  connector object
-* has been established by an adodb instance
+/**
+* @package care_api
 */
 
+/**
+*/
 require_once($root_path.'include/care_api_classes/class_core.php');
 
+/**
+*  Appointment methods.
+*  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance.
+* @author Elpidio Latorilla
+* @version beta 1.0.08
+* @copyright 2002,2003 Elpidio Latorilla
+* @package care_api
+*/
 class Appointment extends Core {
-
+	/**
+	* Database table for the appointment data.
+	* @var string
+	*/
     var $tb_appt='care_appointment';
+	/**
+	* Database table for the person data.
+	* @var string
+	*/
 	var $tb_person='care_person';
+	/**
+	* Person ID
+	* @var int
+	*/
 	var $pid;
+	/**
+	* SQL query result. Resulting ADODB record object.
+	* @var object
+	*/
 	var $result;
+	/**
+	* Resulting record count
+	* @var int
+	*/
 	var $count;
+	/**
+	* Fieldnames of the care_appointment table.
+	* @var array
+	*/
 	var $tabfields=array('nr',
 									'pid',
 									'date',
@@ -40,24 +72,30 @@ class Appointment extends Core {
 									'create_id',
 									'create_time');
 									
-	
+	/**
+	* Constructor
+	* @param int Person ID
+	*/
 	function Appointment($pid){
 		if(!empty($pid)) $this->pid=$pid;
 		$this->setTable($this->tb_appt);
 		$this->setRefArray($this->tabfields);
 	}
-	
-	function getAllObject($pid){
-		return $this->getPersonsAppointmentsObj($pid);
-	}
-	function getAppointment($nr){
-		global $db;
-		if(empty($nr)) return false;
-		if($this->result=$db->Execute("SELECT * FROM $this->tb_appt WHERE nr=$nr")){
-			if($this->result->RecordCount()) return $this->result->FetchRow();
-				else return false;
-		}
-	}
+	/**
+	* Gets  person's appointment data based on his pid key. 
+	* Returns an ADODB record object or boolean. The return adodb record contains rows of associative array
+	* with index keys corresponding to fieldnames in the $tabfields array.
+	*
+	* For example:
+	* <code>
+	* $obj->getPersonsAppointmentObj(100033344);
+	* $row=$obj->FetchRow();
+	* echo $row['purpose']; # Displays the appointment purpose
+	* </code>
+	*
+	* @param int Person ID
+	* @return mixed
+	*/
 	function getPersonsAppointmentsObj($pid=''){
 		global $db;
 		if(empty($pid)) return false;
@@ -67,16 +105,49 @@ class Appointment extends Core {
 		}
 	}
 	/**
-	* _getAll() is a private function that gets a list of appointments based on a condition
-	* private
-	* @param $y (int) the year
-	* @param $m (int) the month
-	* @param $d (int) the day
-	* @param $by (str) the condition 
-	* conditions '_DEPT' = by department nr, '_DOC' = by doctor, '_PRIO' = by priority
-	* return adodb record object
+	* Alias of getPersonsAppointmentObj()
+	* @param int Person ID
+	* @return mixed
 	*/
-	
+	function getAllObject($pid){
+		return $this->getPersonsAppointmentsObj($pid);
+	}
+	/**
+	* Gets  appointment data based on primary record key "nr". 
+	* Returns  array or boolean. The returned array has index keys corresponding to fieldnames in the $tabfields array.
+	*
+	* For example:
+	* <code>
+	* $row=$obj->getAppointment(155);
+	* echo $row['purpose']; # Displays the appointment purpose
+	* </code>
+	*
+	* @param int Record number
+	* @return mixed
+	*/
+	function getAppointment($nr){
+		global $db;
+		if(empty($nr)) return false;
+		if($this->result=$db->Execute("SELECT * FROM $this->tb_appt WHERE nr=$nr")){
+			if($this->result->RecordCount()) return $this->result->FetchRow();
+				else return false;
+		}
+	}
+	/**
+	* Gets a list of appointments based on a constraint type.
+	* Constraint types are: 
+	* -  '_DEPT' = by department nr
+	* -  '_DOC' = by doctor
+	* - '_PRIO' =  by priority
+	*
+	* @access private
+	* @param int Year of appointment
+	* @param int Month of appointment
+	* @param int Day of appointment
+	* @param string Condition
+	* @param string Value of constraint.
+	* @return mixed adodb record object or boolean
+	*/
 	function _getAll($y=0,$m=0,$d=0,$by='',$val=''){
 		global $db;
 		# Set to defaults if empty
@@ -98,40 +169,80 @@ class Appointment extends Core {
 		}else {echo $this->sql; return false;}
 	}
 	/**
-	* getAllByDateObj() gets all appointments by a given date
-	* public
-	* @param $y (int) the year
-	* @param $m (int) the month
-	* @param $d (int) the day
-	* return adodb record object
+	* Gets all appointments by a given date.
+	* Returns an adodb record object or boolean.
+	*
+	* For example:
+	* <code>
+	* $obj->getAllByDateObj(2003,12,1);
+	* while($row=$obj->FetchRow()){
+	* 	echo $row['purpose']; # Displays the appointment purpose
+	* }
+	* </code>
+	*
+	* @access public
+	* @param int Year of appointment
+	* @param int Month of appointment
+	* @param int Day of appointment
+	* @return mixed
 	*/
 	function getAllByDateObj($y=0,$m=0,$d=0){
 		return $this->_getAll($y,$m,$d);
 	}
 	/**
-	* getAllByDeptObj() gets all appointments by a given date and dept nr
-	* public
-	* @param $y (int) the year
-	* @param $m (int) the month
-	* @param $d (int) the day
-	* @param $nr (int) department nr
-	* return adodb record object
+	* Gets all appointments by a given date and department number.
+	* Returns an adodb record object or boolean.
+	*
+	* For example:
+	* <code>
+	* $dept_nr=13
+	* $obj->getAllByDeptObj(2003,12,1,$dept_nr);
+	* while($row=$obj->FetchRow()){
+	* 	echo $row['purpose']; # Displays the appointment purpose
+	* }
+	* </code>
+	*
+	* @access public
+	* @param int Year of appointment
+	* @param int Month of appointment
+	* @param int Day of appointment
+	* @param int Department number
+	* @return mixed
 	*/
 	function getAllByDeptObj($y=0,$m=0,$d=0,$nr){
 		return $this->_getAll($y,$m,$d,'_DEPT',$nr);
 	}
 	/**
-	* getAllByDocObj() gets all appointments by a given date and doctor's name
-	* public
-	* @param $y (int) the year
-	* @param $m (int) the month
-	* @param $d (int) the day
-	* @param $doc (str) the doctors name
-	* return adodb record object
+	* Gets all appointments by a given date and doctor's name.
+	* Returns an adodb record object or boolean.
+	*
+	* For example:
+	* <code>
+	* $doctor='Whitbey';
+	* $obj->getAllByDocObj(2003,12,1,$doctor);
+	* while($row=$obj->FetchRow()){
+	* 	echo $row['purpose']; # Displays the appointment purpose
+	* }
+	* </code>
+	*
+	* @access public
+	* @param int Year of appointment
+	* @param int Month of appointment
+	* @param int Day of appointment
+	* @param string Doctor's name
+	* @return mixed
 	*/
 	function getAllByDocObj($y=0,$m=0,$d=0,$doc){
 		return $this->_getAll($y,$m,$d,'_DOC',$doc);
 	}
+	/**
+	* Cancels an appointment based on the primary record key "nr".
+	* The cancel reason and name of person who made the cancellation can be passed.
+	* @param int Appointment record number
+	* @param string Reason of cancellation
+	* @param string Person who made the cancellation
+	* @return boolean
+	*/
 	function cancelAppointment($nr='',$reason='',$by=''){	
 		if(empty($nr)) return false;
 		$buffer['history']="CONCAT(history,'Cancel: ".date('Y-m-d H:i:s')." : ".$by."\n')";

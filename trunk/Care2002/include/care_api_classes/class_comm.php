@@ -1,13 +1,30 @@
 <?php
-/* API class for communication
-*  Note this class should be instantiated only after a "$db" adodb  connector object
-* has been established by an adodb instance
+/**
+* @package care_api
+*/
+
+/**
 */
 require_once($root_path.'include/care_api_classes/class_core.php');
 
+/**
+*  Communication information methods.
+*  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance.
+* @author Elpidio Latorilla
+* @version beta 1.0.08
+* @copyright 2002,2003,2004 Elpidio Latorilla
+* @package care_api
+*/
 class Comm extends Core {
-
-	var $tb_phone='care_phone'; // table name
+	/**
+	* Table name for telephone and other contact information data
+	* @var string
+	*/
+	var $tb_phone='care_phone';
+	/**
+	* Field names of care_phone table
+	* @var array
+	*/
 	var $fld_phone=array('item_nr',
 									'title',
 									'name',
@@ -42,14 +59,16 @@ class Comm extends Core {
 		$this->setRefArray($this->fld_phone);
 	}
 	/**
-	* DeptInfoExists() checks whether the department's phone info if exists
-	* public
-	* @param $dept_nr (int) department number
-	* @param $retinfo (bool) determines the return information
-	* return: if param $retinfo is true (return phone info if dept info exists, else false)
-	* return: if param $retinfo is false (return true if exists, else false)
+	* Checks whether the department's phone info if exists.
+	* The kind of returned inforamations is determined by the parameter $retinfo.
+	* - If param $retinfo is TRUE (return phone info if dept info exists, else FALSE)
+	* - If param $retinfo is FALSE (return TRUE if exists, else FALSE)
+	* @access public
+	* @param int Department number
+	* @param boolen Determines the kind of returned information
+	* @return mixed adodb record object or boolean
 	*/
-	function DeptInfoExists($dept_nr,$retinfo=false){
+	function DeptInfoExists($dept_nr,$retinfo=FALSE){
 		global $db;
 		if($retinfo) $elems='*';
 			else $elems='item_nr';
@@ -57,19 +76,19 @@ class Comm extends Core {
         if($this->res['diex']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['diex']->RecordCount()) {
 				 if($retinfo) return $this->res['diex'];
-					else return true;
-			} else { return false; }
-		} else { return false; }
+					else return TRUE;
+			} else { return FALSE; }
+		} else { return FALSE; }
 	}
 	/**
-	* DeptInfo() returns the department's phone info if exists
-	* public
-	* @param $dept_nr (int) department number
-	* return: return phone info in row if dept info exists, else false
+	* Returns the department's phone information if exists.
+	* @access public
+	* @param int Department number
+	* @return mixed adodb record object or boolean
 	*/
 	function DeptInfo($dept_nr){
-		if($arr=$this->DeptInfoExists($dept_nr,true))	return $arr->FetchRow();
-			else return false;
+		if($info=$this->DeptInfoExists($dept_nr,TRUE))	return $info->FetchRow();
+			else return FALSE;
 	}
 	
 }

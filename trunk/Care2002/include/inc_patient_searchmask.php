@@ -37,7 +37,14 @@ if(!$searchform_count)
 	         <FONT    SIZE=2  FACE="Arial"><?php echo $searchprompt ?>:<br>
 			 
 	         <input type="text" name="searchkey" size=40 maxlength=80><p>
-             <input type="image" <?php echo createLDImgSrc($root_path,'searchlamp.gif','0','absmiddle') ?>>
+			<?php
+			if(defined('SHOW_FIRSTNAME_CONTROLLER')&&SHOW_FIRSTNAME_CONTROLLER){
+			?>
+			 <input type="checkbox" name="firstname_too" <?php if(isset($firstname_too)&&$firstname_too) echo 'checked'; ?>> <?php echo $LDIncludeFirstName; ?><p>
+            <?php
+			}
+			?>
+			 <input type="image" <?php echo createLDImgSrc($root_path,'searchlamp.gif','0','absmiddle') ?>>
              <input type="hidden" name="sid" value="<?php echo $sid; ?>">
 	         <input type="hidden" name="lang" value="<?php echo $lang; ?>">
 	         <input type="hidden" name="noresize" value="<?php echo $noresize; ?>">

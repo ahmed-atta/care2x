@@ -1,27 +1,87 @@
 <?php
-/* API class for user configuration data 
-*  Note this class should be instantiated only after a "$db" adodb  connector object
-* has been established by an adodb instance
+/**
+* @package care_api
 */
+/** */
 require_once($root_path.'include/care_api_classes/class_core.php');
-
+/**
+*  Obstetrics methods. 
+*  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
+* @author Elpidio Latorilla
+* @version beta 1.0.08
+* @copyright 2002,2003 Elpidio Latorilla
+* @package care_api
+*/
 class Obstetrics extends Core {
-	# tables
+	/**
+	* Database table for the neonatal data.
+	* @var string
+	*/
 	var $tb_neonatal='care_neonatal'; 
+	/**
+	* Database table for the person registration data.
+	* @var string
+	*/
 	var $tb_person='care_person';
+	/**
+	* Database table for the encounter/admission data.
+	* @var string
+	*/
 	var $tb_enc='care_encounter';
+	/**
+	* Database table for the disease categories
+	* @var string
+	*/
 	var $tb_diseases='care_category_disease';
+	/**
+	* Database table for the outcome types
+	* @var string
+	*/
 	var $tb_outcomes='care_type_outcome';
+	/**
+	* Database table for the delivery modes
+	* @var string
+	*/
 	var $tb_dmodes='care_mode_delivery';
+	/**
+	* Database table for feeding types
+	* @var string
+	*/
 	var $tb_feeds='care_type_feeding';
+	/**
+	* Database table for the pregnancy data
+	* @var string
+	*/
 	var $tb_preg='care_pregnancy';
+	/**
+	* Database table for induction methods
+	* @var string
+	*/
 	var $tb_indmethod='care_method_induction';
+	/**
+	* Database table for perineum types
+	* @var string
+	*/
 	var $tb_perineum='care_type_perineum';
+	/**
+	* Database table for neonatal classifications
+	* @var string
+	*/
 	var $tb_classif='care_classif_neonatal';
+	/**
+	* Database table for anesthesia types
+	* @var string
+	*/
 	var $tb_anest='care_type_anaesthesia';
-
+	/**
+	* Birth details buffer
+	* @var adodb record object
+	*/
 	var $bd; # birth details holder
-		
+	/**
+	* Field names of care_neonatal table
+	* @var array
+	*/
 	var $fld_neonatal=array(
 									'nr',
 									'pid',
@@ -56,6 +116,10 @@ class Obstetrics extends Core {
 									'modify_time',
 									'create_id',
 									'create_time');
+	/**
+	* Field names of care_pregnancy table
+	* @var array
+	*/
 	var $fld_preg=array(
 									'nr',
 									'encounter_nr',
@@ -95,6 +159,7 @@ class Obstetrics extends Core {
 									'create_time');
 	/**
 	* Constructor
+	* @param int Encounter number
 	*/
 	function Obstetrics($nr=0){
 		if($nr) $this->enc_nr=$nr;
@@ -102,10 +167,12 @@ class Obstetrics extends Core {
 		$this->ref_array=$this->fld_neonatal;
 	}
 	/** 
-	* BirthDetails() gets all birth data
-	* public
-	* @param $pid (int) = pid number
-	* return adodb record object
+	* Gets all birth data based on the PID number.
+	*
+	* The data returned have index keys as outlined at the <var>$fld_neonatal</var> array.
+	* @access public
+	* @param int PID number
+	* @return mixed adodb record object or boolean
 	*/
 	function BirthDetails($pid){
 		global $db;
@@ -186,9 +253,9 @@ class Obstetrics extends Core {
 	}
 */
 	/**
-	* DiseaseCategories() gets all disease categories data stored in the care_category_disease table
-	* public
-	* returns adodb record object
+	* Gets all disease categories.
+	* @access public
+	* @return mixed adodb record object or boolean
 	*/ 
 	function DiseaseCategories(){
 		global $db;
@@ -200,9 +267,9 @@ class Obstetrics extends Core {
 		} else { return false; }
 	}
 	/**
-	* FeedingTypes() gets all feeding types data stored in the care_type_feeding table
-	* public
-	* returns adodb record object
+	* Gets all feeding types.
+	* @access public
+	* @return mixed adodb record object or boolean
 	*/ 
 	function FeedingTypes(){
 		global $db;
@@ -214,9 +281,9 @@ class Obstetrics extends Core {
 		} else { return false; }
 	}
 	/**
-	* Outcomes() gets all outcome types data stored in the care_type_outcome table
-	* public
-	* returns adodb record object
+	* Gets all outcome types.
+	* @access public
+	* @return mixed adodb record object or boolean
 	*/ 
 	function Outcomes(){
 		global $db;
@@ -228,9 +295,9 @@ class Obstetrics extends Core {
 		} else { return false; }
 	}
 	/**
-	* DeliveryModes() gets all delivery modes data stored in the care_mode_delivery table
-	* public
-	* returns adodb record object
+	* Gets all delivery modes.
+	* @access public
+	* @return mixed adodb record object or boolean
 	*/ 
 	function DeliveryModes(){
 		global $db;
@@ -242,10 +309,10 @@ class Obstetrics extends Core {
 		} else { return false; }
 	}
 	/**
-	* deactivateBirthDetails() sets the status of a neonatal birth details record to "inactive"
-	* public
-	* @param $pid (int) the pid nr of the person
-	* returns true/false
+	* Sets the status of a neonatal birth details record to "inactive".
+	* @access public
+	* @param int PID number
+	* @return mixed adodb record object or boolean
 	*/ 
 	function deactivateBirthDetails($pid){
 		global $HTTP_SESSION_VARS;
@@ -253,10 +320,10 @@ class Obstetrics extends Core {
 		return $this->Transact();
 	}
 	/**
-	* getDiseaseCategory() gets disease category data 
-	* public
-	* @param $nr (int) = category nr
-	* returns one row (associative array)
+	* Gets  complete disease category information.
+	* @access public
+	* @param int Primary record key number
+	* @return mixed array or boolean
 	*/ 
 	function getDiseaseCategory($nr){
 		global $db;
@@ -269,10 +336,10 @@ class Obstetrics extends Core {
 		} else { return false; }
 	}
 	/**
-	* getFeedingType() gets  feeding type data 
-	* public
-	* @param $nr (int) = type nr
-	* returns one row (associative array)
+	* Gets complete feeding type information. 
+	* @access public
+	* @param int Primary record key number
+	* @return mixed array or boolean
 	*/ 
 	function getFeedingType($nr){
 		global $db;
@@ -285,10 +352,10 @@ class Obstetrics extends Core {
 		} else { return false; }
 	}
 	/**
-	* getOutcome() gets outcome types data 
-	* public
-	* @param $nr (int) = type nr
-	* returns one row (associative array)
+	* Gets complete outcome type information. 
+	* @access public
+	* @param int Primary record key number
+	* @return mixed array or boolean
 	*/ 
 	function getOutcome($nr){
 		global $db;
@@ -301,10 +368,10 @@ class Obstetrics extends Core {
 		} else { return false; }
 	}
 	/**
-	* getDeliveryMode() gets a  delivery mode
-	* public
-	* @param $nr (int) = type nr
-	* returns one row (associative array)
+	* Gets complete delivery mode information. 
+	* @access public
+	* @param int Primary record key number
+	* @return mixed array or boolean
 	*/ 
 	function getDeliveryMode($nr){
 		global $db;
@@ -316,12 +383,15 @@ class Obstetrics extends Core {
 			} else { return false; }
 		} else { return false; }
 	}
-	/** 
-	* Pregnancies() gets all pregnancy data
-	* public
-	* @param $nr (int) = encounter number
-	* return adodb record object
-	*/
+	/**
+	* Gets  pregnancy information based on either the pid number or encounter number.
+	*
+	* The data returned have index keys as outlined at the <var>$fld_prenancy</var> array.
+	* @access public
+	* @param int Primary record key number
+	* @param string Flags the type of the first parameter. '_ENC' = encounter number, '_REG' = pid number.
+	* @return mixed adodb record object or boolean
+	*/ 
 	function Pregnancies($nr,$nr_type='_ENC'){
 		global $db;
 		if($nr_type=='_ENC'){
@@ -341,19 +411,18 @@ class Obstetrics extends Core {
 		} else { return false; }
 	}
 	/**
-	* usePregnancy() points the core table to care_pregnancy
-	* public
-	* return void
+	* Sets the core object to  point to care_pregnancy table
+	* @access public
 	*/
 	function usePregnancy(){
 		$this->coretable=$this->tb_preg;
 		$this->ref_array=$this->fld_preg;
 	}
 	/**
-	* deactivatePregnancy() sets the status of a pregnancy record to "inactive"
-	* public
-	* @param $nr (int) the record nr 
-	* returns true/false
+	* Sets the status of a pregnancy record to "inactive" based on the record's primary key number.
+	* @access public
+	* @param int Primary record key number
+	* @return mixed adodb record object or boolean
 	*/ 
 	function deactivatePregnancy($nr){
 		global $HTTP_SESSION_VARS;
@@ -362,10 +431,10 @@ class Obstetrics extends Core {
 		return $this->Transact();
 	}
 	/**
-	* InductionMethods() gets all induction methods data stored in the care_method_induction table
-	* public
-	* @param $grp (int) = the group number, default is 1 = pregnancy
-	* returns adodb record object
+	* Gets all induction methods.
+	* @access public
+	* @param int Group number
+	* @return mixed adodb record object or boolean
 	*/ 
 	function InductionMethods($grp=1){
 		global $db;
@@ -378,10 +447,10 @@ class Obstetrics extends Core {
 		} else { return false; }
 	}
 	/**
-	* getInductionMethod() gets the induction method
-	* public
-	* @param $nr (int) = the method number
-	* returns one row (associative array)
+	* Gets complete induction method information.
+	* @access public
+	* @param int Primary record key number
+	* @return mixed array or boolean
 	*/ 
 	function getInductionMethod($nr){
 		global $db;
@@ -396,9 +465,9 @@ class Obstetrics extends Core {
 		} else { return false; }
 	}
 	/**
-	* Perineums() gets all perineum types data stored in the care_type_perineum table
-	* public
-	* returns adodb record object
+	* Gets all perineum types.
+	* @access public
+	* @return mixed adodb record object or boolean
 	*/ 
 	function Perineums(){
 		global $db;
@@ -410,10 +479,10 @@ class Obstetrics extends Core {
 		} else { return false; }
 	}
 	/**
-	* getPerineum() gets a perineum data
-	* public
-	* @param $nr (int) = perineum number
-	* returns one row (associative array)
+	* Gets a complete perineum information.
+	* @access public
+	* @param int Primary record key number
+	* @return mixed array or boolean
 	*/ 
 	function getPerineum($nr=0){
 		global $db;
@@ -427,9 +496,9 @@ class Obstetrics extends Core {
 		} else { return false; }
 	}
 	/**
-	* Classifications() gets all classification  data stored in the care_classif_neonatal table
-	* public
-	* returns adodb record object
+	* Gets all classifications.
+	* @access public
+	* @return mixed adodb record object or boolean
 	*/ 
 	function Classifications(){
 		global $db;
@@ -441,10 +510,10 @@ class Obstetrics extends Core {
 		} else { return false; }
 	}
 	/**
-	* getClassification() gets a neonatal classification data
-	* public
-	* @param $nr (int) = classification number
-	* returns one row (associative array)
+	* Gets a complete neonatal classification information.
+	* @access public
+	* @param int Primary record key number
+	* @return mixed array or boolean
 	*/ 
 	function getClassification($nr=0){
 		global $db;
@@ -458,9 +527,9 @@ class Obstetrics extends Core {
 		} else { return false; }
 	}
 	/**
-	* AnaesthesiaTypes() gets all anaesthesia data stored in the care_type_anaesthesial table
-	* public
-	* returns adodb record object
+	* Gets all anaesthesia  types.
+	* @access public
+	* @return mixed array or boolean
 	*/ 
 	function AnaesthesiaTypes(){
 		global $db;
@@ -473,10 +542,10 @@ class Obstetrics extends Core {
 		} else { return false; }
 	}
 	/**
-	* getAnaesthesia() gets an anaesthesia data
-	* public
-	* @param $nr (int) = anaesthesia type number
-	* returns one row (associative array)
+	* Gets a complete anaesthesia information.
+	* @access public
+	* @param int Primary record key number
+	* @return mixed array or boolean
 	*/ 
 	function getAnaesthesia($nr=0){
 		global $db;
@@ -489,11 +558,11 @@ class Obstetrics extends Core {
 			} else { return false; }
 		} else { return false; }
 	}
-/**
-	* EncountersPregnancyExists() checks if the encounter has a pregnancy record. This is limited to the encounter only
-	* public
-	* @param $nr (int) = the encounter number
-	* return record number if exists, false if not exists
+	/**
+	* Checks if the encounter has a pregnancy record. This is limited to the encounter only.
+	* @access public
+	* @param int Encounter number
+	* @return mixed array or boolean
 	*/
 	function EncounterPregnancyExists($nr=0){
 		global $db;
@@ -508,13 +577,16 @@ class Obstetrics extends Core {
 		} else { return false; }
 	}
 	/**
-	* ChildNrAtParent() checks if the encounter nr of a child is recorded at the parents encounter record. 
-	* public
-	* @param $child_nr (int) = the encounter number of the child
-	* @param $parent_nr (int) = the encounter number of the parent
-	* return _CHILD_EXISTS = child encounter nr is recorded at parent
-	*			_NO_CHILD = child encounter nr is not recorded at parent
-	* 			_NO_EXISTS = parent pregnancy record not exists
+	* Checks if the encounter number of a child is recorded at the parent's encounter record. 
+	*
+	* return:
+	* - _CHILD_EXISTS = child encounter nr is recorded at parent
+	* - _NO_CHILD = child encounter nr is not recorded at parent
+	* - _NO_EXISTS = parent pregnancy record not exists
+	* @access public
+	* @param int = Encounter number of the child
+	* @param int = Encounter number of the parent
+	* @return string
 	*/
 	function ChildNrAtParent($child_nr=0,$parent_nr=0){
 		global $db;
@@ -532,11 +604,18 @@ class Obstetrics extends Core {
 		}
 	}
 	/**
-	* AddChildNrToParent() adds the encounter nr of a child to the parents encounter record. 
-	* public
-	* @param $child_nr (int) = the encounter number of the child
-	* @param $parent_nr (int) = the encounter number of the parent
-	* return true/false
+	* Adds the encounter number of a child to the parents encounter record. 
+	*
+	* The birth details are passed by reference with an associative array.
+	* The data must be prepared having the following index keys:
+	* - delivery_date = date of delivery (birth)
+	* - delivery_nr = the number or this birth e.g. 3rd, 4th, etc.
+	* - delivery_mode = the mode of delivery
+	* - outcome = the outcome of the delivery
+	* @access public
+	* @param int = Encounter number of the child
+	* @param int = Encounter number of the parent
+	* @return boolean
 	*/
 	function AddChildNrToParent($child_nr=0,$parent_nr=0,&$birth){
 		global $HTTP_SESSION_VARS;

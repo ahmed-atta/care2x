@@ -1,6 +1,5 @@
 <?php
- /* Get the news global configurations */
-
+# Load the news display configs
 require_once($root_path.'include/inc_news_display_config.php');
 
 $picpath=$root_path.$news_fotos_path.$news['nr'].'.'.$news['pic_mime'];
@@ -8,7 +7,6 @@ $picpath=$root_path.$news_fotos_path.$news['nr'].'.'.$news['pic_mime'];
 if(!isset($picalign) || empty($picalign)) {
     $picalign=(!($news['art_num']%2))? 'right' : 'left';
 }
-
 
 //if(!isset($picalign) || empty($picalign)) $picalign ='left';
 

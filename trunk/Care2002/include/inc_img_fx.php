@@ -165,4 +165,31 @@ function createLogo($froot, $fn, $border='', $align=''){
 	$img_path_com_icon=$icon_path; 
 	return $img_src;
 }
+/**
+* Checks if the given icon (or non-language dependent image) exists
+*/
+function image_exists($froot, $fn)
+{
+   global $lang,  $img_path_com_con;
+   
+	if(file_exists($froot.$img_path_com_icon.$fn)){
+		return TRUE;
+	}else{
+		return FALSE;
+	}
+}
+/**
+* Checks if the language dependent image exists
+*/
+function lang_image_exists($froot, $fn)
+{
+   global $lang, $img_path_control;
+   
+	if(file_exists($froot.$img_path_control.$lang.'/'.$lang.'_'.$fn)){
+		return TRUE;
+	}else{
+		return FALSE;
+	}
+}
+
 ?>

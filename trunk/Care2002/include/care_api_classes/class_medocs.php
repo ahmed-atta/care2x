@@ -1,28 +1,56 @@
 <?php
-/* API class for user configuration data 
-*  Note this class should be instantiated only after a "$db" adodb  connector object
-* has been established by an adodb instance
+/**
+* @package care_api
+*/
+/**
 */
 require_once($root_path.'include/care_api_classes/class_notes.php');
-
+/**
+*  Medocs methods. Medocs = Textual documentation for diagnosis and therapy procedures as opposite of the DRG (code based documentation).
+*  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
+* @author Elpidio Latorilla
+* @version beta 1.0.08
+* @copyright 2002,2003,2004 Elpidio Latorilla
+* @package care_api
+*/
 class Medocs extends Notes {
-	# tables
+	/**
+	* Table name for feeding types
+	* @var string
+	*/
 	var $tb_medocs='care_type_feeding';
+	/**
+	* Table name for person registration data
+	* @var string
+	*/
 	var $tb_person='care_person';
 	
 	/**
 	* Constructor
+	* @param int Encounter number
 	*/
 	function Medocs($nr=0){
 		if($nr) $this->enc_nr=$nr;
 		$this->coretable=$this->tb_medocs;
 	}
 	/** 
-	* _getMedocsList() gets all medocs list based on the given number
-	* private
-	* @param $nr (int) = select number
-	* @param $nr_type (str) = type of  $nr (_ENC = encounter nr, _REG = pid nr.)
-	* return adodb record object
+	* Gets all medocs documents based on the given key number.
+	*
+	* The type of key number is determined by the content of the $nr_type parameter.
+	*
+	* The returned adodb record object contains rows of arrays.
+	* Each array contains the encounter data with the following index keys:
+	* - nr = record's primary key number
+	* - encounter_nr = encounter number
+	* - date= date of documentation
+	* - time = time of documentation
+	* - notes = the document text
+	* - is_discharged = discharge status of encounter
+	*
+	* @access private
+	* @param int Key number
+	* @param string  Type of  key number. '_ENC' = encounter nr, '_REG' = pid nr.
+	* @return mixed adodb record object or boolean
 	*/
 	function _getMedocsList($nr,$nr_type='_ENC'){
 		global $db;
@@ -44,19 +72,23 @@ class Medocs extends Notes {
 		} else { return false; }
 	}
 	/** 
-	* encMedocsList() gets all medocs records of an encounter nr
-	* public
-	* @param $enc_nr (int) = encounter number
-	* return adodb record object
+	* Gets all medocs records of an encounter number.
+	*
+	* For detailed structure of returned data, see the <var> _getMedocsList()</var> method.
+	* @access public
+	* @param int Encounter number
+	* @return mixed adodb record object or boolean
 	*/
 	function encMedocsList($nr){
 		return $this->_getMedocsList($nr,'_ENC');
 	}
 	/** 
-	* pidMedocsList() gets all medocs records of a person's pid nr
-	* public
-	* @param $pid (int) = pid number
-	* return adodb record object
+	* Gets all medocs records of a pid number.
+	*
+	* For detailed structure of returned data, see the <var> _getMedocsList()</var> method.
+	* @access public
+	* @param int PID number
+	* @return mixed adodb record object or boolean
 	*/
 	function pidMedocsList($nr){
 		return $this->_getMedocsList($nr,'_REG');

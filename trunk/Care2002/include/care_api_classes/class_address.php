@@ -1,13 +1,30 @@
 <?php
-/* API class for user configuration data 
-*  Note this class should be instantiated only after a "$db" adodb  connector object
-* has been established by an adodb instance
+/**
+* @package care_api
+*/
+
+/**
 */
 require_once($root_path.'include/care_api_classes/class_core.php');
 
+/**
+*  Address methods.
+*  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance.
+* @author Elpidio Latorilla
+* @version beta 1.0.08
+* @copyright 2002,2003 Elpidio Latorilla
+* @package care_api
+*/
 class Address extends Core {
-
-	var $tb_citytown='care_address_citytown'; // table name
+	/**
+	* Database table for the citytown address data.
+	* @var string
+	*/
+	var $tb_citytown='care_address_citytown';
+	/**
+	* Fieldnames of care_address_citytown table. Primary key is "nr".
+	* @var array
+	*/
 	var $fld_citytown=array(
 									'nr',
 									'unece_modifier',
@@ -27,76 +44,117 @@ class Address extends Core {
 									
 	/**
 	* Constructor
+	* @param int Primary key of address record.
 	*/
 	function Address($nr){
 		$this->coretable=$this->tb_citytown;
 		$this->ref_array=$this->fld_citytown;
 	}
+	/**
+	* Sets the core table to the table name and field names of care_address_citytown 
+	* @access private
+	*/
 	function _useCityTown(){
 		$this->coretable=$this->tb_citytown;
 		$this->ref_array=$this->fld_citytown;
 	}
 	/**
-	* Gets all active city town addresses
+	* Gets all active city town addresses. Returns ADODB record object or boolean.
+	* The returned adodb object contains rows of array with index keys 
+	* corresponding to $fld_citytown.
+	* @access public
+	* @return mixed
 	*/
 	function getAllActiveCityTown(){
+		/**
+		* @global ADODB-db-link
+		*/
 	    global $db;
 		$this->sql="SELECT * FROM $this->tb_citytown WHERE status NOT IN ('inactive','hidden','deleted','void')";
 	    if ($this->res['gaact']=$db->Execute($this->sql)) {
 		    if ($this->rec_count=$this->res['gaact']->RecordCount()) {
 		        return $this->res['gaact'];
-			}else{return false;}
-		}else{return false;}
+			}else{return FALSE;}
+		}else{return FALSE;}
 	}
 	/**
-	* Same as getAllActiveCityTown but uses the limit feature of adodb 
-	* @param $len = length of data, or number of rows to be returned, default 30 rows
-	* @param $so = start index offset, default 0 = start index
-	* @param $oitem = order item, default = name
-	* @param $odir = order direction, default = ASC
+	* Same as getAllActiveCityTown but uses the limit feature of adodb to limit the number or rows actually returned.
+	* Returns ADODB record object or boolean.
+	* @param int  Length of data, or number of rows to be returned, default 30 rows
+	* @param int Start index offset, default 0 = start index
+	* @param string Sort item, default = 'name'
+	* @param string Sort direction, default = 'ASC'
+	* @return mixed
 	*/
 	function getLimitActiveCityTown($len=30,$so=0,$oitem='name',$odir='ASC'){
+		/**
+		* @global ADODB-db-link
+		*/
 	    global $db;
 		$this->sql="SELECT * FROM $this->tb_citytown WHERE status NOT IN ('inactive','hidden','deleted','void') ORDER BY $oitem $odir";
 	    if ($this->res['glact']=$db->SelectLimit($this->sql,$len,$so)) {
 		    if ($this->rec_count=$this->res['glact']->RecordCount()) {
 		        return $this->res['glact'];
-			}else{return false;}
-		}else{return false;}
+			}else{return FALSE;}
+		}else{return FALSE;}
 	}
 	/**
-	* Counts all active city town addresses
-	* returns the count, else return zero 
+	* Counts all active city town addresses. Rreturns the count, else return zero.
+	* @return int 
 	*/
 	function countAllActiveCityTown(){
+		/**
+		* @global ADODB-db-link
+		*/
 	    global $db;
 		$this->sql="SELECT nr FROM $this->tb_citytown WHERE status NOT IN ($this->dead_stat)";
 	    if ($this->res['caact']=$db->Execute($this->sql)) {
 		    return $this->res['caact']->RecordCount();
 		}else{return 0;}
 	}
+	/**
+	* Checks if city or town exists based on name and ISO country code keys.
+	* @param string Name of the city or town
+	* @param string Country ISO code
+	* @return boolean
+	*/
 	function CityTownExists($name='',$country='') {
+		/**
+		* @global ADODB-db-link
+		*/
 	    global $db;
-	    if(empty($name)) return false;
+	    if(empty($name)) return FALSE;
 		$this->sql="SELECT nr FROM $this->tb_citytown WHERE name LIKE '$name' AND iso_country_id LIKE '$country'";
 	    if($buf=$db->Execute($this->sql)) {
 	        if($buf->RecordCount()) {
-			    return true;
-		    } else { return false; }
-	   } else { return false; }
+			    return TRUE;
+		    } else { return FALSE; }
+	   } else { return FALSE; }
    }
+	/**
+	* Gets all record information of a city or town based on the record "nr" key. 
+	* Returns an ADODB record object or boolean.
+	* @param int Record nr (citytown nr) key
+	* @return object
+	*/
 	function getCityTownInfo($nr='') {
+		/**
+		* @global ADODB-db-link
+		*/
 	    global $db;
-	    if(empty($nr)) return false;
+	    if(empty($nr)) return FALSE;
 		$this->sql="SELECT * FROM $this->tb_citytown WHERE nr=$nr";
 	    if($this->res['gcti']=$db->Execute($this->sql)) {
 	        if($this->res['gcti']->RecordCount()) {
 			    return $this->res['gcti'];
-		    } else { return false; }
-	   } else { return false; }
+		    } else { return FALSE; }
+	   } else { return FALSE; }
    }
 	/**
-	* Insert new city/town info in the database
+	* Insert new city/town info in the database table. The data is contained in associative array and passed by reference.
+	* The array keys must correspond to the field names contained in $fld_citytown.
+	* @param array Data to save. By reference.
+	* @return boolean
 	*/
 	function saveCityTownInfoFromArray(&$data){
 		global $HTTP_SESSION_VARS;
@@ -109,11 +167,12 @@ class Address extends Core {
 		return $this->insertDataFromInternalArray();
 	}
 	/**
-	* updateCityTownInfoFromArray()
-	* updates the city/town's data
-	* param nr = the city/town's record nr.
-	* param data =  2 dimensional array of the data passed as reference
-	* return = true on success, else false on failure
+	* Updates the city/town's data. The data is contained in associative array and passed by reference.
+	* The array keys must correspond to the field names contained in $fld_citytown. 
+	* Only the keys of data to be updated must be present in the passed array.
+	* @param int City/town's record nr (primary key)
+	* @param array Data passed as reference
+	* @return boolean
 	*/
 	function updateCityTownInfoFromArray($nr,&$data){
 		global $HTTP_SESSION_VARS;
@@ -129,12 +188,14 @@ class Address extends Core {
 		return $this->updateDataFromInternalArray($nr);
 	}
 	/**
-	* Searches for the active city or town
-	* @param $key (char) the search keyword
+	* Searches for the active city or town based on a string keyword.
+	* Returns an ADODB record object of search results or boolean.
+	* @param string Search keyword
+	* @return mixed
 	*/
    	function searchActiveCityTown($key){
 		global $db;
-		if(empty($key)) return false;
+		if(empty($key)) return FALSE;
 		$select="SELECT *  FROM $this->tb_citytown ";
 		$append=" AND status NOT IN ('inactive','deleted','closed','hidden','void')";
 		$this->sql="$select WHERE ( name LIKE '$key%' OR unece_locode LIKE '$key%' ) $append";
@@ -151,24 +212,29 @@ class Address extends Core {
 						if($this->result=$db->Execute($this->sql)){
 							if($this->result->RecordCount()){
 								return $this->result;
-							}else{return false;}
-						}else{return false;}
+							}else{return FALSE;}
+						}else{return FALSE;}
 					}
-				}else{return false;}
+				}else{return FALSE;}
 			}
-	   } else { return false; }
+	   } else { return FALSE; }
    	}
 	/**
-	* Limited return search for the active city or town
-	* @param $key (char) the search keyword
-	* @param $len (int) the max nr of rows returned, default=30
-	* @param $so (int)  start index offset, defaut 0 = start
-	* @param $oitem (char)  the sort order item, default= name
-	* @param $odir (char)  sort direction, default = ASC
+	* Limited return search for the active city or town. 
+	* Returns an ADODB record object of search results or boolean.
+	* @param string Search keyword
+	* @param int Maximum number of rows returned, default=30
+	* @param int Start index offset, defaut = 0 (start)
+	* @param string  Sort order item, default= name
+	* @param string  Sort direction, default = ASC
+	* @return mixed
 	*/
    	function searchLimitActiveCityTown($key,$len=30,$so=0,$oitem='name',$odir='ASC'){
+		/**
+		* @global ADODB-db-link
+		*/
 		global $db;
-		if(empty($key)) return false;
+		if(empty($key)) return FALSE;
 		$select="SELECT *  FROM $this->tb_citytown ";
 		$append=" AND status NOT IN ('inactive','deleted','closed','hidden','void') ORDER BY $oitem $odir";
 		$this->sql="$select WHERE ( name LIKE '$key%' OR unece_locode LIKE '$key%' ) $append";
@@ -185,21 +251,25 @@ class Address extends Core {
 						if($this->res['slact']=$db->SelectLimit($this->sql,$len,$so)){
 							if($this->rec_count=$this->res['slact']->RecordCount()){
 								return $this->res['slact'];
-							}else{return false;}
-						}else{return false;}
+							}else{return FALSE;}
+						}else{return FALSE;}
 					}
-				}else{return false;}
+				}else{return FALSE;}
 			}
-	   } else { return false; }
+	   } else { return FALSE; }
    	}
 	/**
-	* Searches for the active city or town but returns only the total count
-	* @param $key (char) the search keyword
-	* Returns the count value, else returns zero
+	* Searches for the active city or town but returns only the total count of the resulting rows.
+	* Returns the count value, else returns zero.
+	* @param string Search keyword
+	* @return int
 	*/
    	function searchCountActiveCityTown($key){
+		/**
+		* @global ADODB-db-link
+		*/
 		global $db;
-		if(empty($key)) return false;
+		if(empty($key)) return FALSE;
 		$select="SELECT nr FROM $this->tb_citytown ";
 		$append=" AND status NOT IN ('inactive','deleted','closed','hidden','void')";
 		$this->sql="$select WHERE ( name LIKE '$key%' OR unece_locode LIKE '$key%' ) $append";

@@ -1,8 +1,7 @@
 <?php  
 $nofile=0;
 
-if($news[$j])
-	{
+if($news[$j]){
 
 		 $picpath=$root_path.$news_fotos_path.$news[$j]['nr'].'.'.$news[$j]['pic_mime'];
 

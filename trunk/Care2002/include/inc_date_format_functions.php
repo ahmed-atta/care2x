@@ -171,8 +171,16 @@ function formatDate2STD($localDate,$localFormat,&$sepChars)
 		 elseif($Format_array[$i]=='mm') { $vMonth = $loc_array[$i];}
 		   elseif($Format_array[$i]=='dd') { $vDay = $loc_array[$i];}
 	 }
- 	  
-	  $finalDate=$vYear.'-'.$vMonth.'-'.$vDay; /* DATE standard */
+	 
+	 # if invalid numeric return empty string
+	 if(!is_numeric($vYear)||!is_numeric($vMonth)||!is_numeric($vDay)){
+	 	$finalDate= '';
+ 	 }else{
+		  # DATE standard
+		  if(strlen($vMonth)==1) $vMonth='0'.$vMonth;
+		  if(strlen($vDay)==1) $vDay='0'.$vDay;
+		 $finalDate=$vYear.'-'.$vMonth.'-'.$vDay; 
+	}
      
    }
    return $finalDate;

@@ -1,24 +1,71 @@
 <?php
-/* API class for managing the display of large block of data
-*  Note this class should be instantiated only after a "$db" adodb  connector object
-* has been established by an adodb instance
+/**
+* @package care_api
 */
-//require_once($root_path.'include/care_api_classes/class_core.php');
-
+/**
+*  Pagination methods. 
+*
+* Handles the pagination of search results or lists with large number of returned rows.
+* Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
+* @author Elpidio Latorilla
+* @version beta 1.0.08
+* @copyright 2002,2003 Elpidio Latorilla
+* @package care_api
+*/
 class Paginator {
-
-	var $max_nr=20; # The maximum nr of items displayed. User configurable.
-	var $csx=0; # Current data block start index
-	var $tcount=0; # Total available data count
-	var $blkcount=0; # number of rows of resulting block
-	var $page=''; # This page name
-	var $skey=''; # Internal searchkey
-	var $sort_item=''; # db table field to be sorted
-	var $sort_dir; # sort direction, default is ascending
-	var $rootpath; # Root path of the module calling this object
-
+	/**
+	* Maximum number of rows displayed. User configurable.
+	* @var int
+	*/
+	var $max_nr=20;  
+	/**
+	* Current first row index
+	* @var string
+	*/
+	var $csx=0; 
+	/**
+	* Total available data count
+	* @var string
+	*/
+	var $tcount=0; 
+	/**
+	* Number of rows of resulting block
+	* @var string
+	*/
+	var $blkcount=0;
+	/**
+	* This page name
+	* @var string
+	*/
+	var $page='';
+	/**
+	* Internal searchkey
+	* @var string
+	*/
+	var $skey='';
+	/**
+	* Database table field to be sorted
+	* @var string
+	*/
+	var $sort_item='';
+	/**
+	* Sort direction, default is ascending
+	* @var string
+	*/
+	var $sort_dir;
+	/**
+	* Root path of the module calling this object
+	* @var string
+	*/
+	var $rootpath;
 	/**
 	* Constructor
+	* @param int Index of the first row
+	* @param string Forward filename or url
+	* @param string Search keyword (reference)
+	* @param string Root path
+	* @param string Field name to sort
+	* @param string Sort direction
 	*/
 	function Paginator($x=0,$fwdfile,&$sk,$rootpath,$oitem,$odir) {	
 		if(empty($x)) $this->csx=0;
@@ -30,22 +77,25 @@ class Paginator {
 		$this->sort_dir=$odir;
 	}	
 	/**
-	* Sets the total number of rows of resulting data block
+	* Sets the total number of rows of resulting data block.
+	* @param int Total rows in a block count
 	*/
 	function setTotalBlockCount($c=0){
 		$this->blkcount=$c;
 	}
 	/**
-	* Sets the total number  of available data
+	* Sets the total number  of available rows in the table.
+	* @param int Total available rows in the table
 	*/
 	function setTotalDataCount($c=0){
 		$this->tcount=$c;
 	}
-	
 	/**
-	* Creates the "previous" block link
-	* public
-	* @param $txt (str) the link text in local language
+	* Creates and returns the "previous" block link.
+	* @access public
+	* @param string URL link text in local language
+	* @param string Additional url GET variables and values
+	* @return string Complete URL link to "previous" block
 	*/
 	function makePrevLink($txt='',$append=''){
 		if (!$this->csx){
@@ -58,9 +108,11 @@ class Paginator {
 		}
 	}
 	/**
-	* Creates the "next" block link
-	* public
-	* @param $txt (str) the link text in local language
+	* Creates and returns the "Next" block link.
+	* @access public
+	* @param string URL link text in local language
+	* @param string Additional url GET variables and values
+	* @return string Complete URL link to "Next" block
 	*/
 	function makeNextLink($txt='',$append=''){
 		$x=$this->nextIndex();
@@ -73,8 +125,9 @@ class Paginator {
 		}
 	}
 	/**
-	* returns the start index of the  previous block
-	* private
+	* Returns the start index of the  previous block's row.
+	* @access private
+	* @return int
 	*/
 	function prevIndex(){
 		$b=$this->csx-$this->max_nr;
@@ -82,8 +135,9 @@ class Paginator {
 			else return 0;
 	}
 	/**
-	* returns the start index of the  next block
-	* private
+	* Returns the start index of the  next block's row.
+	* @access private
+	* @return int
 	*/
 	function nextIndex(){
 		$b=$this->csx+$this->max_nr;
@@ -92,12 +146,17 @@ class Paginator {
 	}
 	/**
 	* returns the maximal number of rows allowed for a block
+	* @access public
+	* @return int
 	*/
 	function MaxCount(){
 		return $this->max_nr;
 	}
 	/**
-	* sets the maximal number of rows allowed for a block
+	* Sets the maximal number of rows allowed for a block.
+	* @access public
+	* @param int Maximum number or returned rows
+	* @return int
 	*/
 	function setMaxCount($max){
 		if($max) {
@@ -108,19 +167,25 @@ class Paginator {
 		}
 	}
 	/**
-	* returns the start offset/index of the block
+	* Returns the index of the first row of the block.
+	* @access public
+	* @return int
 	*/
 	function BlockStartIndex(){
 		return $this->csx;
 	}
 	/**
-	* returns the real block start number
+	* Returns the real block start number. Returns start index + 1.
+	* @access public
+	* @return int
 	*/
 	function BlockStartNr(){
 		return $this->csx+1;
 	}
 	/**
-	* returns the real block end number
+	* Returns the real block end number.
+	* @access public
+	* @return int
 	*/
 	function BlockEndNr(){
 		if($this->nextIndex()){
@@ -131,9 +196,17 @@ class Paginator {
 		}
 	}
 	/**
-	* Creates a link for sorting
+	* Returns a link for sorting.
+	* @access public
+	* @deprec Prefer to use the <var>makeSortLink()</var> method
+	* @param string Text to display as link
+	* @param string Field name to sort
+	* @param string Sort direction. Defaults to 'ASC' = ascending.
+	* @param boolean Flags to show or hide the direction arrow icon.
+	* @param string Additional GET variables and values to be added to the URL link in this format: "&variable1=value1&variable2=value2"
+	* @return string Complete URL link for sorting the rows
 	*/
-	function SortLink($txt,$item,$dir,$flag=0,$append=''){
+	function SortLink($txt,$item,$dir,$flag=FALSE,$append=''){
 		if(empty($txt)) $txt='Sort';
 		
 		if(empty($dir)){
@@ -155,22 +228,30 @@ class Paginator {
 			return '<a href="'.$this->page.URL_APPEND.'&mode=paginate&pgx='.$this->csx.'&totalcount='.$this->tcount.'&oitem='.$item.'&odir='.$dir.$append.'">'.$img.$txt.'</a>';
 	}
 	/**
-	* Creates a link for sorting, improved version of SortLink
+	* Creates a link for sorting, improved version of SortLink().
+	* @access public
+	* @param string Text to display as link
+	* @param string Field name to sort
+	* @param string Previous field name used for sorting
+	* @param string Sort direction. Defaults to 'ASC' = ascending.
+	* @param string Additional GET variables and values to be added to the URL link in this format: "&variable1=value1&variable2=value2"
+	* @return string Complete URL link for sorting the rows
 	*/
 	function makeSortLink($txt,$item,$oitem,$odir,$append){
 		if($item==$oitem) $flag=TRUE;
 			else $flag=FALSE;
 		return $this->SortLink($txt,$item,$odir,$flag,$append);
 	}
-
 	/**
-	* sets the order item
+	* Sets the sort order field name.
+	* @param string Field name to sort
 	*/
 	function setSortItem($item){
 		$this->sort_item=$item;
 	}
 	/**
-	* sets the order direction
+	* Sets the order direction.
+	* @param string Sort direction. Defaults to 'ASC' = ascending.
 	*/
 	function setSortDirection($dir){
 		$this->sort_dir=$dir;

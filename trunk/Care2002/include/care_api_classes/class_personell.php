@@ -1,24 +1,87 @@
 <?php
-/* API class for personell
-*  Note this class should be instantiated only after a "$db" adodb  connector object
-* has been established by an adodb instance
+/**
+* @package care_api
+*/
+/**
 */
 require_once($root_path.'include/care_api_classes/class_core.php');
-
+/**
+*  Personnel methods. 
+*  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
+* @author Elpidio Latorilla
+* @version beta 1.0.08
+* @copyright 2002,2003,2004 Elpidio Latorilla
+* @package care_api
+*/
 class Personell extends Core {
-
-	var $tb='care_personell'; // table name
+	/**#@+
+	* @access private
+	*/
+	/**
+	* Table name for personnel data
+	* @var string
+	*/
+	var $tb='care_personell';
+	/**
+	* Table name for personnel assignments
+	* @var string
+	*/
 	var $tb_assign='care_personell_assignment';
+	/**
+	* Table name for person registration data.
+	* @var string
+	*/
 	var $tb_person='care_person';
+	/**
+	* Table name for on-call duty plans
+	* @var string
+	*/
 	var $tb_dpoc='care_dutyplan_oncall';
+	/**
+	* Table name for phone and contact information
+	* @var string
+	*/
 	var $tb_cphone='care_phone';
+	/**
+	* Table name for city-town names
+	* @var string
+	*/
 	var $tb_citytown='care_address_citytown';
+	/**#@-*/
+	/**
+	* SQL query result buffer
+	* @var adodb record object
+	*/
 	var $result;
-	var $is_loaded='false';
+	/**
+	* Loaded data flag
+	* @var boolean
+	*/
+	var $is_loaded='FALSE';
+	/**
+	* Resulting row buffer
+	* @var array
+	*/
 	var $row;
+	/**
+	* Depatments data buffer
+	* @var adodb record object
+	*/
 	var $depts;
+	/**
+	* Resulting rows count buffer
+	* @var int
+	*/
 	var $record_count;
+	/**
+	* Personnel data buffer
+	* @var adodb record object
+	*/
 	var $personell_data;
+	/**
+	* Field names of care_dutyplan_oncall
+	* @var array
+	*/
 	var $dpoc_fields=array('nr',
 									'dept_nr',
 									'role_nr',
@@ -34,7 +97,10 @@ class Personell extends Core {
 									'modify_time',
 									'create_id',
 									'create_time');
-									
+	/**
+	* Field names of care_personell_assignment
+	* @var array
+	*/
 	var $assign_fields=array('nr',
 									'personell_nr',
 									'role_nr',
@@ -50,6 +116,10 @@ class Personell extends Core {
 									'modify_time',
 									'create_id',
 									'create_time');
+	/**
+	* Field names of care_personell
+	* @var array
+	*/
 	var $personell_fields=array('nr',
 									'short_id',
 									'pid',
@@ -76,41 +146,93 @@ class Personell extends Core {
 									'modify_time',
 									'create_id',
 									'create_time');
-									
+	/**
+	* Constructor
+	*/
 	function Personell(){
 		$this->setTable($this->tb);
 		$this->setRefArray($this->personell_fields);
 	}
+	/**
+	* Sets the core object to point to the care_dutyplan_oncall table and field names.
+	* @access public
+	*/
 	function useDutyplanTable(){
 		$this->setTable($this->tb_dpoc);
 		$this->setRefArray($this->dpoc_fields);
 	}
+	/**
+	* Sets the core object to point to the care_personell_assignment table and field names.
+	* @access public
+	*/
 	function useAssignmentTable(){
 		$this->setTable($this->tb_assign);
 		$this->setRefArray($this->assign_fields);
 	}
+	/**
+	* Sets the core object to point to the care_personell table and field names.
+	* @access public
+	*/
 	function usePersonellTable(){
 		$this->setTable($this->tb);
 		$this->setRefArray($this->personell_fields);
 	}
+	/**
+	* Checks if the personnel (employee) number exists in the database.
+	* @access public
+	* @param int Personnel number
+	* @return boolean
+	*/
 	function InitPersonellNrExists($init_nr){
 		global $db;
 		$this->sql="SELECT nr FROM $this->tb WHERE nr=$init_nr";
 		if($this->result=$db->Execute($this->sql)){
 			if($this->result->RecordCount()){
-				return true;
-			} else { return false; }
-		} else { return false; }
+				return TRUE;
+			} else { return FALSE; }
+		} else { return FALSE; }
 	}	
+	/**#@+
+	*
+	* The returned adodb record object contains rows of arrays.
+	* Each array contains the personnel data with the following index keys:
+	* - nr = record's primary key number
+	* - personell_nr = personnel or employee number
+	* - job_function_title = job function title or name
+	* - name_last = employee's last or family name
+	* - name_first = employee's first or given name
+	* - date_birth = date of birth
+	* - sex = sex
+	* @return mixed adodb record object or boolean
+	*/
+	/**
+	* Returns information of all nurses of a department.
+	*
+	* @access public
+	* @param int Department number
+	*/
 	function getDoctorsOfDept($dept_nr=0){
-		if(!$dept_nr) return false;
+		if(!$dept_nr) return FALSE;
 			else return $this->_getAllPersonell(1,17,$dept_nr); // 1= dept (location), 17 = doctor (role)
 	}
+	/**
+	* Returns information of all nurses of a department.
+	*
+	* @access public
+	* @param int Department number
+	*/
 	function getNursesOfDept($dept_nr=0){
-		if(!$dept_nr) return false;
+		if(!$dept_nr) return FALSE;
 		else return $this->_getAllPersonell(1,16,$dept_nr); // 1= dept (location); 16 = nurse (role)
 	}
-	
+	/**
+	* Returns  information of all personnel (employee) based on location type, role number and department number keys
+	*
+	* @access private
+	* @param int Location type number
+	* @param int Role number
+	* @param int Department number
+	*/
 	function _getAllPersonell($loc_type_nr,$role_nr=0,$dept_nr){
 	    global $db;
 		$row=array();
@@ -133,18 +255,32 @@ class Personell extends Core {
 		    if ($this->record_count=$this->result->RecordCount()) {
 		    	return $this->result;
 			} else {
-				return false;
+				return FALSE;
 			}
 		}
 		else {
-		    return false;
+		    return FALSE;
 		}
 	}
+	/**#@-*/
 	
+	/**#@+
+	*
+	* If the on-call duty plan exists, its record primary key number will be returned, else FALSE
+	* @return mixed adodb record object or boolean
+	*/
+	/**
+	* Checks if the on-call duty plan of a given role number, department number, year and month exists in the databank.
+	* @access private
+	* @param int Role number
+	* @param int Department number
+	* @param int Year
+	* @param int Month
+	*/
 	function _OCDutyplanExists($role_nr,$dept_nr=0,$year=0,$month=0){
 		global $db;
 		if(!$role_nr||!$dept_nr||!$year||!$month){
-			return false;
+			return FALSE;
 		}else{
 			$this->sql="SELECT nr FROM $this->tb_dpoc WHERE role_nr=$role_nr AND dept_nr=$dept_nr AND year=$year AND month=$month";
 	    	if ($this->res['_ocdpe']=$db->Execute($this->sql)) {
@@ -153,41 +289,109 @@ class Personell extends Core {
 					//echo $this->sql;
 		    		return $this->row['nr'];
 				} else {
-					return false;
+					return FALSE;
 				}
 			}else {
-		   	 return false;
+		   	 return FALSE;
 			}
 		}
 	}
+	/**
+	* Checks if the  doctors' on-call duty plan of a given department number, year and month exists in the databank.
+	*
+	* If the on-call duty plan exists, its record primary key number will be returned, else FALSE
+	* @access public
+	* @param int Department number
+	* @param int Year
+	* @param int Month
+	*/
 	function DOCDutyplanExists($dept_nr,$year,$month){
 		return $this->_OCDutyplanExists(15,$dept_nr,$year,$month); // 15 = doctor_on_call (role)
 	}
+	/**
+	* Checks if the  nurses' on-call duty plan of a given department number, year and month exists in the databank.
+	*
+	* If the on-call duty plan exists, its record primary key number will be returned, else FALSE
+	* @access public
+	* @param int Department number
+	* @param int Year
+	* @param int Month
+	*/
 	function NOCDutyplanExists($dept_nr,$year,$month){
 		return $this->_OCDutyplanExists(14,$dept_nr,$year,$month); // 14 = nurse_on_call (role)
 	}
+	/**#@-*/
 	
+	/**#@+
+	*
+	* The returned items are based on the field names passed as string to the method.
+	* To see the allowed field names to be passed, see the <var>$fld_dpoc</var> array.
+	* @return mixed adodb record object or boolean
+	*/
+	/**
+	* Gets the on-call duty plan of a given role number, department number, year and month.
+	*
+	* @access private
+	* @param int Role number
+	* @param int Department number
+	* @param int Year
+	* @param int Month
+	* @param string Field names of items to be fetched
+	*/
 	function _getOCDutyplan($role_nr,$dept_nr=0,$year=0,$month=0,$elems='*'){
 		global $db;
 		
 		if(!$role_nr||!$dept_nr||!$year||!$month){
-			return false;
+			return FALSE;
 		}else{
 			$this->sql="SELECT $elems FROM $this->tb_dpoc WHERE role_nr=$role_nr AND dept_nr=$dept_nr AND year=$year AND month=$month";
 	    	if ($this->res['_godp']=$db->Execute($this->sql)) {
 		    	if ($this->rec_count=$this->res['_godp']->RecordCount()) {
 					return $this->res['_godp']->FetchRow();
-				}else{return false;}
-			}else{return false;}
+				}else{return FALSE;}
+			}else{return FALSE;}
 		}
 	}
+	/**
+	* Gets the  doctors' on-call duty plan of a  department number, year and month.
+	*
+	* @access public
+	* @param int Department number
+	* @param int Year
+	* @param int Month
+	* @param string Field names of items to be fetched
+	*/
 	function getDOCDutyplan($dept_nr,$year,$month,$elems='*'){
 		return $this->_getOCDutyplan(15,$dept_nr,$year,$month,$elems);
 	}
+	/**
+	* Gets the  Nurses' on-call duty plan of a  department number, year and month.
+	*
+	* @access public
+	* @param int Department number
+	* @param int Year
+	* @param int Month
+	* @param string Field names of items to be fetched
+	*/
 	function getNOCDutyplan($dept_nr,$year,$month,$elems='*'){
 		return $this->_getOCDutyplan(14,$dept_nr,$year,$month,$elems);
 	}
+	/**#@-*/
 	
+	/**
+	* Gets the personnel information based on its personnel number key.
+	*
+	* The returned  array contains the personnel data with the following index keys:
+	* - all index keys as outlined in the <var>$personell_fields</var> array
+	* - all index keys as outlined in the <var>Person::$elems_array</var> array
+	* - funk1 = first pager number
+	* - inphone1 = first internal phone number
+	* - inphone2 = second internal phone number
+	* - inphone3 = third internal phone number
+	* @access public
+	* @param int Personnel number
+	* @return mixed adodb record object or boolean
+	*/
 	function getPersonellInfo($nr){
 		global $db;
 		$sql="SELECT ps.*,p.*,
@@ -206,12 +410,22 @@ class Personell extends Core {
 		   	if ($this->record_count=$this->result->RecordCount()) {
 				return $this->result->FetchRow();
 			} else {
-				return false;
+				return FALSE;
 			}
 		}else {
-			return false;
+			return FALSE;
 		}
 	}
+	/**
+	* Gets a list of departments with on-call duty plan of a given role number, year and month.
+	*
+	* The returned array contains the department numbers with availabe on-call plan.
+	* @access private
+	* @param int Role number
+	* @param int Year
+	* @param int Month
+	* @return mixed array  or boolean
+	*/
 	function _getOCQuicklist($role_nr,$year=0,$month=0){
 		global $db;
 		$x='';
@@ -220,7 +434,7 @@ class Personell extends Core {
 		$row;
 		$buffer=array();
 		if(!$role_nr||!$year||!$month){
-			return false;
+			return FALSE;
 		}else{
 			list($x,$v)=each($d);
 			$dept_list='dept_nr='.$v['nr'];
@@ -237,33 +451,63 @@ class Personell extends Core {
 					}
 					return $buffer;
 				} else {
-					return false;
+					return FALSE;
 				}
 			}else {
-		   	 return false;
+		   	 return FALSE;
 			}
 		}
 	}
+	/**
+	* Gets a list of departments with doctors' on-call duty plan of a given  year and month.
+	*
+	* An array to hold the department numbers must be passed as reference.
+	* @access public
+	* @param array Department numbers. Associative, reference.
+	* @param int Year
+	* @param int Month
+	* @return mixed array  or boolean
+	*/
 	function getDOCQuicklist(&$depts,$year,$month){
 		$this->depts=$depts;
 		return $this->_getOCQuicklist(15,$year,$month);
 	}
+	/**
+	* Gets a list of departments with Nurses' on-call duty plan of a given  year and month.
+	*
+	* An array to hold the department numbers must be passed as reference.
+	* @access public
+	* @param array Department numbers. Associative, reference.
+	* @param int Year
+	* @param int Month
+	* @return mixed array  or boolean
+	*/
 	function getNOCQuicklist(&$depts,$year,$month){
 		$this->depts=$depts;
 		return $this->_getOCQuicklist(14,$year,$month);
 	}	
 	/**
-	* Search and returns basic info: last name, first name, DOB, personnel nr. sex, PID, Job function title
-	* @param $key (char) the search key words
-	* @param $oitem (char) the field to sort, default = 'name_last'
-	* @param $odir (char) the sorting direction, default = ASC
-	* @param $limit (bool) whether the return is limited or not, default FALSE
-	* @param $len (int) the maximum number of rows returned, default 30 rows
-	* @param $so (int) the start index offset, default 0 = start
+	* Searches and returns basic personnel information.
+	*
+	* The returned adodb record object contains rows of arrays.
+	* Each array contains the personnel data with the following index keys:
+	* - nr = record's primary key number
+	* - job_function_title = job function title or name
+	* - name_last = employee's last or family name
+	* - name_first = employee's first or given name
+	* - date_birth = date of birth
+	* - sex = sex
+	* @param string Search key words
+	* @param string Field name to sort, default = 'name_last'
+	* @param string Sort direction, default = ASC
+	* @param boolean Flags whether the return is limited or not, default FALSE
+	* @param int Maximum number of rows returned, default 30 rows
+	* @param int Index of the first returned row default 0 = start
+	* @return mixed adodb record object  or boolean
 	*/
 	function searchPersonellBasicInfo($key,$oitem='name_last',$odir='ASC',$limit=FALSE,$len=30,$so=0){
 		global $db;
-		if(empty($key)) return false;
+		if(empty($key)) return FALSE;
 		$this->sql="SELECT ps.nr, ps.job_function_title, p.pid, p.name_last, p.name_first, p.date_birth, p.sex
 				FROM $this->tb AS ps, $this->tb_person AS p";
 		if(is_numeric($key)){
@@ -291,24 +535,36 @@ class Personell extends Core {
 		   	if ($this->record_count=$this->res['spbi']->RecordCount()) {
 				$this->rec_count=$this->record_count; # Work around
 				return $this->res['spbi'];
-			}else{return false;}
-		}else{return false;}
+			}else{return FALSE;}
+		}else{return FALSE;}
 	}		
 	/**
-	* Search similar to searchPersonellBasicInfo but returns a limited nr of rows
-	* @param $key (char) the search key words
-	* @param $len (int) the maximum number of rows returned, default 30 rows
-	* @param $so (int) the start index offset, default 0 = start
-	* @param $oitem (char) the field to sort, default = 'name_last'
-	* @param $odir (char) the sorting direction, default = ASC
+	* Search similar to searchPersonellBasicInfo but returns a limited number of rows.
+	*
+	* For detailed structure of returned data, see <var>searchPersonellBasicInfo()</var> method.
+	* @access public
+	* @param string Search key word
+	* @param int Maximum number of rows returned, default 30 rows
+	* @param int Index of the first returned row, default 0 = start
+	* @param string Field name to sort, default = 'name_last'
+	* @param string Sort direction, default = ASC
+	* @return mixed adodb record object  or boolean
 	*/
 	function searchLimitPersonellBasicInfo($key,$len,$so,$oitem,$odir){
 		return $this->searchPersonellBasicInfo($key,$oitem,$odir,TRUE,$len,$so);
 	}
+	/**
+	* Checks if the PID number (the person) exists as employee in the database.
+	*
+	* If person exists as employee, its record primary number key will be returned, else FALSE.
+	* @access public
+	* @param int PID number
+	* @return mixed integer  or boolean
+	*/
 	function Exists($pid=0){
 		global $db;
 		if(!$pid){
-			return false;
+			return FALSE;
 		}else{
 			$sql="SELECT nr FROM $this->tb WHERE pid=$pid";
 	    	if ($this->result=$db->Execute($sql)) {
@@ -316,20 +572,28 @@ class Personell extends Core {
 					$this->row=$this->result->FetchRow();
 		    		return $this->row['nr'];
 				} else {
-					return false;
+					return FALSE;
 				}
 			}else {
-		   		return false;
+		   		return FALSE;
 			}
 		}
 	}
+	/**
+	* Loads the personnel data in the internal buffer <var>$personell_data</var>. based on its personnel number key.
+	*
+	* The data is stored in the internal buffer array <var> $personell_data</var> .
+	* This method returns only TRUE or FALSE. The load success status is also stored in the <var>$is_loaded</var> variable.
+	* @access public
+	* @param int Personnel number
+	* @return boolean
+	*/
 	function loadPersonellData($nr=0){
 	    global $db;
-		if(!$nr) return false;
-/*		$sql="SELECT ps.*
-				FROM $this->tb AS ps
-				WHERE ps.nr=$nr";
-*/		$this->sql="SELECT ps.*, p.title, p.name_last, p.name_first, p.date_birth, p.sex,
+		
+		if(!$nr) return FALSE;
+
+		$this->sql="SELECT ps.*, p.title, p.name_last, p.name_first, p.date_birth, p.sex,
 							p.addr_str,p.addr_str_nr,p.addr_zip, 
 							p.photo_filename,
 							c.funk1,
@@ -348,56 +612,103 @@ class Personell extends Core {
 		    if($this->record_count=$this->result->RecordCount()) {
 			    $this->personell_data=$this->result->FetchRow();
 				$this->result=NULL;
-			    $this->is_loaded=true;
-			    $this->is_preloaded=true;
+			    $this->is_loaded=TRUE;
+			    $this->is_preloaded=TRUE;
 				//echo $this->sql; 
-				return true;
-		    } else {echo $this->sql;  return false;}
-		} else {return false;}
+				return TRUE;
+		    } else {
+				//echo $this->sql;
+				return FALSE;
+			}
+		} else {return FALSE;}
 	}
+	/**#@+
+	*
+	* Use this methode only after the personnell data was successfully loaded with the <var>loadPersonellData()</var> method.
+	* @access public
+	* @return string
+	*/
+	/**
+	* Returns the title
+	*/
 	function Title(){
-	    //if(!$this->is_loaded) return false;
+	    //if(!$this->is_loaded) return FALSE;
 		return $this->personell_data['title'];
 	}
+	/**
+	* Returns the employee's last/family name
+	*/
 	function LastName(){
-	    //if(!$this->is_loaded) return false;
+	    //if(!$this->is_loaded) return FALSE;
 		return $this->personell_data['name_last'];
 	}
+	/**
+	* Returns the employee's first/given name
+	*/
 	function FirstName(){
-	    //if(!$this->is_loaded) return false;
+	    //if(!$this->is_loaded) return FALSE;
 		return $this->personell_data['name_first'];
 	}
+	/**
+	* Returns date of birth
+	*/
 	function BirthDate(){
-	    //if(!$this->is_loaded) return false;
+	    //if(!$this->is_loaded) return FALSE;
 		return $this->personell_data['date_birth'];
 	}
-	function PID(){
-	    //if(!$this->is_loaded) return false;
-		return $this->personell_data['pid'];
-	}	
+	/**
+	* Returns first internal phone number
+	*/
 	function InPhone1(){
-	    //if(!$this->is_loaded) return false;
+	    //if(!$this->is_loaded) return FALSE;
 		return $this->personell_data['inphone1'];
 	}	
+	/**
+	* Returns second internal phone number
+	*/
 	function InPhone2(){
-	    //if(!$this->is_loaded) return false;
+	    //if(!$this->is_loaded) return FALSE;
 		return $this->personell_data['inphone2'];
 	}	
+	/**
+	* Returns third internal phone number
+	*/
 	function InPhone3(){
-	    //if(!$this->is_loaded) return false;
+	    //if(!$this->is_loaded) return FALSE;
 		return $this->personell_data['inphone3'];
 	}	
+	/**
+	* Returns first pager number
+	*/
 	function Beeper1(){
-	    //if(!$this->is_loaded) return false;
+	    //if(!$this->is_loaded) return FALSE;
 		return $this->personell_data['funk1'];
 	}	
+	/**
+	* Returns second pager number
+	*/
 	function Beeper2(){
-	    //if(!$this->is_loaded) return false;
+	    //if(!$this->is_loaded) return FALSE;
 		return $this->personell_data['funk2'];
 	}	
+	/**
+	* Returns full address in german format
+	*/
 	function formattedAddress_DE(){
-	    //if(!$this->is_loaded) return false;
+	    //if(!$this->is_loaded) return FALSE;
 		return $this->personell_data['addr_str'].' '.$this->personell_data['addr_str_nr'].'<br>'.$this->personell_data['addr_str_zip'].' '.$this->personell_data['citytown_name'];
 	}
+	/**#@-*/
+	/**
+	* Returns person's PID number.
+	*
+	* Use this methode only after the personnell data was successfully loaded with the <var>loadPersonellData()</var> method.
+	* @access public
+	* @return string
+	*/
+	function PID(){
+	    //if(!$this->is_loaded) return FALSE;
+		return $this->personell_data['pid'];
+	}	
 }
 ?>

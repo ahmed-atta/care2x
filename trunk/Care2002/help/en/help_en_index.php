@@ -7,15 +7,21 @@
 </head>
 <body alink="#0000ff" vlink="#0000ff" link="#0000ff">
 <font face="Arial" color="#cc0000" size=3><b>Help</b></font><p>
-<font face="Verdana, Arial" size=2><b>
-<a href="../main/help-info.php" target="HELPINFOFRAME">Initial steps</a><br>
+<font face="Verdana, Arial" size=2>
+<a href="../main/help-info.php" target="HELPINFOFRAME">Initial steps</a><br></b>
 <!--<a href="../help/en/help_en_contents.php" target="HELPINFOFRAME">Contents</a><br>
  <a href="#" target="HELPINFOFRAME">Index</a><br>
 <a href="#" target="HELPINFOFRAME">Search</a><br>
 <a href="#" target="HELPINFOFRAME">Tips & Tricks</a><br>
 <a href="#" target="HELPINFOFRAME">Introductions</a></b>
  --><p>
-<a href="http://care2x.net/docswiki/index.php?UM - English" target="HELPINFOFRAME">Online Manual</a></b>
+ (<font size=1>needs Internet connection</font><font color=#ff0000><b>*</b></font>)
+ <p>
+ <b>
+<font color=#ff0000><b>*</b></font><a href="http://care2x.net/docswiki/index.php?UM - English" target="HELPINFOFRAME">Online Manual</a>
+<p>
+<font color=#ff0000><b>*</b></font><a href="http://care2x.net/docswiki/index.php?Workflow%20Charts" target="HELPINFOFRAME">Workflow charts</a>
+</b>
 
 </font>
 

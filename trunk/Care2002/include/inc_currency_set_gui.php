@@ -54,7 +54,11 @@ while($currency=$ergebnis->FetchRow())
 	<a href="'.$editfile.$currency['item_no'].'"><button onClick="javascript:window.location.href=\''.$editfile.$currency['item_no'].'\'">'.$LDEditInfo.'</button></a> </FONT>
 	</td>';
 	//echo '<td><a href="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&mode=delete&item_no='.$currency['item_no'].'"><img '.createComIcon($root_path,'delete2.gif','0').' alt="'.$LDDelete.'"></a></td>';
-	echo '<td bgcolor="#e9e9e9"><a href="javascript:deleteCurrency('.$currency['item_no'].',\''.$currency['status'].'\')"><img '.createComIcon($root_path,'delete2.gif','0').' alt="'.$LDDelete.'"></a></td>';
+	if($currency['status']!='main'){
+		echo '<td bgcolor="#e9e9e9"><a href="javascript:deleteCurrency('.$currency['item_no'].',\''.$currency['status'].'\')"><img '.createComIcon($root_path,'delete2.gif','0').' alt="'.$LDDelete.'"></a></td>';
+	}else{
+		echo '<td bgcolor="#e9e9e9">&nbsp;</td>';
+	}
 
 	echo '
 	</tr>';
