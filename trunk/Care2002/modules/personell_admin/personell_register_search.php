@@ -353,7 +353,7 @@ if ($linecount) {
 							
                        if(!file_exists($root_path."cache/barcodes/pn_".($zeile['pid']+$GLOBAL_CONFIG['person_id_nr_adder']).".png"))
 	      		       {
-			               echo "<img src='".$root_path."classes/barcode/image.php?code=".($zeile['pid']+$GLOBAL_CONFIG['person_id_nr_adder'])."&style=68&type=I25&width=145&height=50&xres=2&font=5&label=2' border=0 width=0 height=0>";
+			               echo "<img src='".$root_path."classes/barcode/image.php?code=".($zeile['pid']+$GLOBAL_CONFIG['person_id_nr_adder'])."&style=68&type=I25&width=180&height=50&xres=2&font=5&label=2' border=0 width=0 height=0>";
 		               }
 						echo '</td></tr>';
 

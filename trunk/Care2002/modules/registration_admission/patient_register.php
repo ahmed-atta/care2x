@@ -241,6 +241,8 @@ if($dblink_ok) {
 								$photo_filename=$pid.'.'.$picext;
 								# Save the file
 								$img_obj->saveUploadedImage($HTTP_POST_FILES['photo_filename'],$root_path.$photo_path.'/',$photo_filename);
+								# Update filename to databank
+								$person_obj->setPhotoFilename($pid,$photo_filename);
 					   		}
 							//echo $pid;
 				  			# Update the insurance data

@@ -131,7 +131,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php echo $LDPharmaDbTxt ?></FONT></TD></TR>
-				  
+<!-- 				  
 				<TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
@@ -143,7 +143,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" size=2>British National Formulary (needs internet line)</FONT></TD></TR> 
    
-<!--  			   <TR bgColor=#dddddd height=1>
+ 			   <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
                   width=5></TD></TR>

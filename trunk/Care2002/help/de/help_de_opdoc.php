@@ -9,13 +9,18 @@ if($src=="create")
 {
 	switch($x1)
 	{
-	case "": print "Ein neues Dokument erstellen";
+	case "": print "Ein neues Dokument anlegen";
 						break;
-	case "dummy": print "Ein neues Dokument erstellen";
+	case "dummy": print "Ein neues Dokument anlegen";
 						break;
 	case "saveok": print  "Das Dokument ist gespeichert";
 						break;
 	case "update": print "Dokument aktualisieren";
+						break;
+	case "search": print "Suchen nach einem Patient";
+						break;
+	default : print "Suchen nach einem Patient";
+					$x1='';
 	}
 }
 if($src=="search")
@@ -24,11 +29,12 @@ if($src=="search")
 	{
 	case "dummy": print "Suchen nach einem Dokument";
 						break;
-	case "": print "Suchen nach einem Dokument";
-						break;
+
 	case "match": print  "Suchergebnis";
 						break;
 	case "select": print "Dokument eines Patienten";
+						break;
+	default : print "Suchen nach einem Dokument";
 	}
 }
 if($src=="arch")
@@ -64,7 +70,7 @@ Wie bearbeite bzw. aktualisiere ich das Dokument?</b>
 Wie erstelle ich ein neues Dokument?</b>
 </font>
 <ul>       	
- 	<b>Schritt 1: </b>Klickt den <input type="button" value="Neues OP Dokument starten"> Knopf an um ein neues Eingabeformular zu erstellen.<br>
+ 	<b>Schritt 1: </b>Klickt den <input type="button" value="Neues OP Dokument starten"> Knopf an um ein neues Eingabeformular anzulegen.<br>
 	</ul>
 <b>Achtung!</b>
 <ul>  Wenn Sie abbrechen möchten klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.
@@ -86,7 +92,7 @@ Wie bearbeite bzw. aktualisiere ich das Dokument?</b>
  Wenn Sie abbrechen möchten klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.
 </ul>
 <?php endif ?>
-<?php if(($x1=="dummy")||($x1=="")) : ?>
+<?php if(($x1=="dummy")||($x1=="")|| ($x1=='search')) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie erstelle ich ein neues Dokument?</b>
 </font>
@@ -280,6 +286,7 @@ Wenn die Suche ein einziges Ergebnis findet werden die Daten sofort gezeigt.<br>
 </ul>
 	<?php endif ?>
 <?php if(($x1=="search")&&($x2>0)) : ?>
+
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie wähle ich ein bestimmtes Dokument zum lesen aus?</b>

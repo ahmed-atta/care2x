@@ -350,6 +350,9 @@ if($user_origin=='lab')
 
 <?php
 if($edit){
+?>
+	<form name="form_test_request" method="post" action="<?php echo $thisfile ?>" onSubmit="return chkForm(this)">
+<?php
 
 /* If in edit mode display the control buttons */
 
@@ -391,8 +394,6 @@ elseif(!$read_form && !$no_proc_assist)
         ?>
      </td> 
 		<td class=fva2_ml10><div class="fva2_ml10">
-
-		<form name="form_test_request" method="post" action="<?php echo $thisfile ?>" onSubmit="return chkForm(this)">
 
 		<table border=0  cellpadding=0 cellspacing=0 width=100%>
     <tr>

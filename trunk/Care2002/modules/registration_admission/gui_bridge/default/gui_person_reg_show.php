@@ -85,7 +85,17 @@ require('./gui_bridge/default/gui_tabs_patreg.php');
 <tr>
 <td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php echo $LDRegistryNr ?>:
 </td>
-<td width="30%"  bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo $pid; ?>
+<td width="30%"  bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo $pid; ?><br>
+<?php #
+if(file_exists($root_path.'cache/barcodes/pn_'.$pid.'.png')){
+	echo '<img src="'.$root_path.'cache/barcodes/pn_'.$pid.'.png" border=0 width=180 height=35>';
+}else{
+
+    echo "<img src='".$root_path."classes/barcode/image.php?code=".$pid."&style=68&type=I25&width=180&height=50&xres=2&font=5&label=2&form_file=pn' border=0 width=0 height=0>";
+
+    echo "<img src='".$root_path."classes/barcode/image.php?code=".$pid."&style=68&type=I25&width=180&height=50&xres=2&font=5' border=0 height=35>";
+}
+?>
 </td>
 
 <td valign="top" rowspan=6 align="center" bgcolor="#ffffee" ><FONT SIZE=-1  FACE="Arial"><img <?php echo $img_source; ?>>
@@ -318,7 +328,7 @@ createTR($LDReligion,$religion,2);
 
 if (!$GLOBAL_CONFIG['person_ethnic_orig_hide']&&$ethnic_orig)
 {
-createTR($LDEthnicOrigin,$ethnic_orig_txt,2);
+createTR($LDEthnicOrigin,$ethnic_orig,2);
 }
 
 ?>

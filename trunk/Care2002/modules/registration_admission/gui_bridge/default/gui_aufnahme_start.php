@@ -100,8 +100,8 @@ if (!$cfg['dhtml']){ echo ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_al
 
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
 <a href="javascript:gethelp('admission_how2new.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
-if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo 'startframe.php'.URL_APPEND; 
-	else echo "aufnahme_pass.php?sid=$sid&target=entry&lang=$lang"; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
+if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo $root_path.'main/startframe.php'.URL_APPEND; 
+	else echo "aufnahme_pass.php".URL_APPEND."&target=entry"; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </td>
 </tr>
 
@@ -187,7 +187,7 @@ if($error)
 <td  background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php echo $LDCaseNr ?>:
 </td>
 <td bgcolor="#eeeeee">
-<FONT SIZE=-1  FACE="Arial" ><?php if(isset($encounter_nr)&&$encounter_nr) echo $encounter_nr; else echo '<font color="red">'.$LDNotYetAdmitted.'</font>'; ?>
+<FONT SIZE=-1  FACE="Arial" ><?php if(isset($encounter_nr)&&$encounter_nr) echo $full_en; else echo '<font color="red">'.$LDNotYetAdmitted.'</font>'; ?>
 </td>
 <td rowspan=7 align="center"><img <?php echo $img_source ?>>
 </td>
@@ -587,7 +587,7 @@ while($buffer=$att_dr_service->FetchRow())
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial" color=red><?php echo $LDAdmitBy ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input  name="encoder" type="text" value=<?php if ($encoder!='') echo '"'.$encoder.'"' ; else echo '"'.$HTTP_COOKIE_VARS[$local_user.$sid].'"' ?> size="28" readonly>
+<td colspan=2 bgcolor="#eeeeee"><input  name="encoder" type="text" value=<?php if ($encoder!='') echo '"'.$encoder.'"' ; else echo '"'.$HTTP_COOKIE_VARS[$local_user.$sid].'"' ?> size="28">
 </nobr>
 </td>
 </tr>
@@ -664,12 +664,9 @@ if(defined('MASCOT_SHOW') && MASCOT_SHOW==1)
 ?>
 
 <p>
-<a href="
-<?php if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) echo 'patient.php';
-	else echo 'patient.php';
-	echo URL_APPEND;
-?>
-"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
+<a href="<?php 
+	echo 'patient.php'.URL_APPEND;
+?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
 </ul>
 <p>
 <hr>

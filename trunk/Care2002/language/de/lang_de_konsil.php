@@ -189,7 +189,7 @@ $LDRequestedTest='Gew. Untersuchung';
 $LDLabel='Etikett';					
 $LDCentralLab='Zentrallabor';
 
-$LDRequestOf='Anforderung von ';
+$LDRequestOf='Auftrag an ';
 $LDTelephone='Telefon';
 $LDToBloodBank='An die Blutzentrale';
 $LDWithMatchTest='mit Verträglichkeitsprobe(n)';
@@ -272,7 +272,7 @@ $LDPlsEnterDiagnosisQuiry='Bitte geben Sie die Diagnose bzw. Fragestellung ein.'
 $LDPlsSelectDept='Bitte wählen Sie die Abteilung aus.';
 $LDPlsSelectDeptShort='bitte Abteilung auswählen';
 /* 2002-12-09 EL */
-$LDPendingTestRequest='Anstehende Anforderung';
+$LDPendingTestRequest='Unbearbeitete Anforderung';
 /* 2002-09-13 EL */
 $LDPrevRequest='Vorherige Anforderung';
 $LDNextRequest='Nächste Anforderung';
@@ -280,7 +280,7 @@ $LDEnterResult='Diese Anforderung befunden';
 $LDPrintOut='Diese Anforderung ausdrucken';
 $LDSaveEntry='Eingabe Speichern';
 /* 2002-09-14 EL */
-$LDNoPendingRequest='Es gibt keine anstehende Anforderung.';
+$LDNoPendingRequest='Es gibt keine unbearbeitete Anforderung.';
 $LDTestFindings='Befund';
 $LDCaseNr='Fallnummer';
 $LDFamilyName='Name';

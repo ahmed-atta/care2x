@@ -388,7 +388,7 @@ href="javascript:gethelp('submenu1.php','<?php echo $LDSpexFunctions ?>')"><img 
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php if(($cfg['mask']==1)||($cfg['mask']=='')) echo $LDDisplay2Txt; else echo $LDDisplay1Txt; ?></FONT></TD></TR> -->
 				  
-              <TR bgColor=#dddddd height=1>
+       <!--        <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
                   width=5></TD></TR>
@@ -400,7 +400,7 @@ href="javascript:gethelp('submenu1.php','<?php echo $LDSpexFunctions ?>')"><img 
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php  echo $LDTicketedSupportTxt;  ?></FONT></TD></TR> 
-				  
+				   -->
               <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
@@ -408,7 +408,7 @@ href="javascript:gethelp('submenu1.php','<?php echo $LDSpexFunctions ?>')"><img 
               <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'discussions.gif','0') ?> align="absmiddle"></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B>
-				 <a href="http://www.arzt-seite.info/newsgroup/gotodoc.medizin.care2002.dev/thread_frameset.php3?name=gotodoc.medizin.care2002.dev">
+				 <a href="http://www.mail-archive.com/care2002-developers@lists.sourceforge.net">
 				<?php  echo $LDNewsgroup; ?></a> 
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 

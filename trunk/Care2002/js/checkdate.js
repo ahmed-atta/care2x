@@ -28,7 +28,7 @@ function IsValidDate(objDate,sFormat)
    var sDay = "", sMonth = "", sYear = "";
    var bIsLeapYear = false;
    var bOk = true;
-   var bDebug = false;
+   var bDebug = true;
    var sErrorMsg= errDate + ":\n";  /* EL140802 */
    var sLangTemp=""; /* indonesian time format dd/MM/yyyy. Added 2003-11-20.  */
 
@@ -60,27 +60,32 @@ function IsValidDate(objDate,sFormat)
    /* DE dmmyy, dmmyyyy, d.mm.yyyy       */
    /* DE8601 ymmdd, yyymmdd, yyy-mm-dd   */
    /* EN mddyy, mddyyyy, m/dd/yyyy       */
-   if ((nSize == 5) || (nSize == 7) || (nSize == 9))
+   if(nSize<5) 
    {
-     sDate = "0" + sDate;
-     nSize = sDate.length;
-   }
+   	bOk = false;
+   }else{
 
-   /* check DE ddmmyyyy or dd.mm.yy */
-   if ((nSize == 8) && ( sLang == "DE"))
-   {
-     if (sDate.substr(2,1) == ".")
-       { nSize = nSize +1; }
-   }
+	if ((nSize == 5) || (nSize == 7) || (nSize == 9))
+	{
+		sDate = "0" + sDate;
+		nSize = sDate.length;
+	}
+	 /* check DE ddmmyyyy or dd.mm.yy */
+     
+	if ((nSize == 8) && ( sLang == "DE"))
+	{
+		if (sDate.substr(2,1) == ".")
+		{ nSize = nSize +1; }
+	}
 
-   /* check DE8601 yyyymmdd or yy-mm-dd */
-   if ((nSize == 8) && ( sLang == "DE8601"))
-   {
-     if (sDate.substr(2,1) == "-")
-       { nSize = nSize +1; }
-   }
+	/* check DE8601 yyyymmdd or yy-mm-dd */
+	if ((nSize == 8) && ( sLang == "DE8601"))
+	{
+		if (sDate.substr(2,1) == "-")
+		{ nSize = nSize +1; }
+	}
 
-   /* check EN mmddyyyy or mm/dd/yy */ 
+   /* check EN mmddyyyy or mm/dd/yy */
    if ((nSize == 8) && (( sLang == "EN")||( sLang == "ID")))
    {
      if (sDate.substr(2,1) == "/")
@@ -103,6 +108,8 @@ function IsValidDate(objDate,sFormat)
    /* =============== */
    switch (nSize)
    {
+     case 0: break;
+
      case 6 : /* ddMMyy, yyMMdd, MMddyy */
      { if (isNaN(sDate) == true)
        { //alert("no numeric sDate");
@@ -398,9 +405,9 @@ function IsValidDate(objDate,sFormat)
      }
      bOk = false;
    }
-
+}
    /* -- Result of check */
-   if (bOk == true)
+   if (bOk)
    {
      /* formatting back to string to get some leading zero */
      sDay = "";
@@ -438,19 +445,18 @@ function IsValidDate(objDate,sFormat)
       } else {
          objDate.value = "";
       }
+      return true;
    } else {
      /* found some error */
-     
-     try {
-      objDate.select();  /* EL140802 */
-      objDate.focus();   /* EL140802 */
-     }
-     catch (e) {
-      ;
-     }
-     finally {
+
       alert(sErrorMsg);  /* EL140802 */
-     }
+      objDate.value = '';
+      
+      objDate.select();
+      objDate.Focus();
+
+      return false;
+
      /**
      * Die focus() & select() funktionen tun offensichtlich nicht richtig bei Mozilla.
      * Wir brauchen hier cross-programming.

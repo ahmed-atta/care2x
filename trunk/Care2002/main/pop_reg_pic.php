@@ -21,7 +21,13 @@ require_once($root_path.'global_conf/inc_remoteservers_conf.php');
 
 </head>
 <body onLoad="if (window.focus) window.focus()">
-<font size=2 face="verdana,arial"><?php echo $nm ?><br>
+<font size=2 face="verdana,arial"><?php echo $nm ?></font><br>
+<?php
+if(!empty($fn) && file_exists($root_path."fotos/registration/$fn")){
+?>
 <img src="<?php echo "$httprotocol://$main_domain" ?>/fotos/registration/<?php echo $fn ?>">
+<?php
+}
+?>
 </body>
 </html>

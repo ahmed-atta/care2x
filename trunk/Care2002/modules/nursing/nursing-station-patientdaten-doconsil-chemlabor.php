@@ -1,5 +1,6 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+//error_reporting(E_ALL);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
@@ -106,7 +107,6 @@ else
 }
 
 require_once($root_path.'include/inc_front_chain_lang.php'); ///* invoke the script lock*/
-require_once($root_path.'include/inc_config_color.php'); ///* load color preferences*/
 
 $thisfile='nursing-station-patientdaten-doconsil-chemlabor.php';
 
@@ -162,9 +162,7 @@ if(isset($pn)&&$pn) {
 	  	$pn='';
    }		
 }
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok){	
+
 	if(!isset($mode)) $mode='';
 	
 	switch($mode){
@@ -291,9 +289,9 @@ if($dblink_ok){
 			               else {echo "<p>$sql<p>$LDDbNoRead"; exit;}
 						 $mode="save";   
 		   }	    
-	}
-	else 
-		{ echo "$LDDbNoLink<br>$sql<br>"; }
+		
+if(!isset($edit)) $edit=FALSE;	
+		
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -771,7 +769,7 @@ elseif(!$read_form && !$no_proc_assist)
 
       if($edit)
         {
-		    echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
+		    echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid=$sid&lang=$lang&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
 		}
         elseif(empty($pn))
 		{
@@ -885,9 +883,10 @@ for($n=0;$n<8;$n++)
  <?php
  
     $tdcount=0; /* $tdcount limits the number of  columns (7) for test elements */
-	
+
     while(list($x,$v)=each($LD_Elements))
 	{
+
 	  if(!$tdcount) echo '
 	  <tr class="lab">';
 	  

@@ -30,7 +30,7 @@ switch($dept_nr)
 				break;
 	case 25: $target='baclabor';
 				break;
-	case 43: $target='blood';
+	case 41: $target='blood';
 				break;
 	default: $target='generic';
 }

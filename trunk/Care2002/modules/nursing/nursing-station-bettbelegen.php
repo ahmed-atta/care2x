@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
+* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@latorilla.com
+* elpidio@care2x.net, elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -262,7 +262,7 @@ if($mode=='search'){
 							
                        if(!file_exists($root_path.'cache/barcodes/en_'.$full_en.'.png'))
 	      		       {
-			               echo "<img src='".$root_path."classes/barcode/image.php?code=".$full_en."&style=68&type=I25&width=145&height=50&xres=2&font=5&label=2&form_file=en' border=0 width=0 height=0>";
+			               echo "<img src='".$root_path."classes/barcode/image.php?code=".$full_en."&style=68&type=I25&width=180&height=50&xres=2&font=5&label=2&form_file=en' border=0 width=0 height=0>";
 		               }
 						echo '</td></tr>';
 

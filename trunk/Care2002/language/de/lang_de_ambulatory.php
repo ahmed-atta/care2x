@@ -1,7 +1,7 @@
 <?php
 /* 2002-10-02 EL */
 $LDDepartments='Abteilungen';
-$LDPendingRequest='Anstehende Anforderung';
+$LDPendingRequest='Unbearbeitete Anforderung';
 $LDPendingRequestTxt='Empfangen, Auflisten, Ausdrucken, Befunden';
 $LDGeneralSurgery='Allgemeine Ambulanz';
 $LDInternalMed='Innere Medizin Ambulanz';

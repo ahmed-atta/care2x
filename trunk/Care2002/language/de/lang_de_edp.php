@@ -21,7 +21,7 @@ $LDAt='um';
 
 $LDNew='Neue';
 $LDEdit='Aktualisieren';
-$LDCreate='Erstellen';
+$LDCreate='Anlegen';
 $LDValue='Wert';
 
 $LDNews='Nachrichten';
@@ -52,7 +52,7 @@ $LDDataRemoved='Die Daten könnten aus der Datenbank gelöscht worden sein.';
 $LDPlsInformDept='Bitte verständigen Sie die ~tagword~ Abteilung und evtl. die EDV Abteilung. Vielen Dank.';
 
 $LDReports='Bericht';
-$LDReportsTxt='Berichte erstellen, ansehen, verwalten, u.s.w.';
+$LDReportsTxt='Berichte schreiben, lesen, verwalten, u.s.w.';
 $LDInfo='Information';
 $LDInfoTxt='Information suchen bzw. lesen';
 $LDManage='Verwaltung';
@@ -78,13 +78,13 @@ $LDNoBack='Nein, Zurück';
 
 $LDOK='OK';
 $LDManageAccess='Berechtigungen verwalten';
-$LDManageAccessTxt='Erstellen, sperren, ändern, löschen, u.s.w.';
+$LDManageAccessTxt='Anlegen, sperren, ändern, löschen, u.s.w.';
 $LDSqlDb='SQL Datenbank';
 $LDSqlDbTxt='Manuelle SQL verarbeitung <b>ACHTUNG</b> nur für Experten';
 $LDSysOpLogin='SysOp Login';
 $LDSysOpLoginTxt='Anmelden als System Operator bzw. Administrator';
 $LDEDP='EDV';
-$LDNewAccess='Neue Zugangsberechtigung erstellen';
+$LDNewAccess='Neue Zugangsberechtigung anlegen';
 $LDListActual='Aktuelle Zugangsberechtigungen auflisten';
 $LDName='Name';
 $LDPassword='Passwort';
@@ -189,7 +189,7 @@ $LDUserInfoSaved='Die Information wurde erfolgreich gespeichert';
 $LDUserInfoNoSave='Der Zugang konnte nicht erstellt werden. <br>Bitte prüfen Sie die eingegebenen Information.';
 $LDNoAreas='Sie haben keine Bereiche ausgewählt!';
 $LDUserDouble='Der Zugang konnte nicht erstellt werden. <br>Bitte geben Sie eine andere Benutzerkennung ein.';
-$LDEnterNewUser='Einen neuen Benutzer erstellen';
+$LDEnterNewUser='Einen neuen Benutzer anlegen';
 /* 2002-11-22 EL*/
 $LDDeleteCurrency='Wollen Sie diese Währungsinformation wirklich löschen?';
 $LDNoMainDelete='Die Hauptwährung darf nicht gelöscht werden!. \nBitte stellen Sie zuerst eine andere Hauptwährung ein.';
@@ -219,7 +219,7 @@ $LDTheme='Theme';
 $LDItem='Eintrag';
 /* 2003-02-26- EL*/
 $LDDeptAdmin='Verwaltung von Abteilungen';
-$LDNewDept='Abteilung erstellen bzw. Einstellungen vornehmen';
+$LDNewDept='Abteilung anlegen bzw. Einstellungen vornehmen';
 $LDShowDeptInfo ='Abteilungsinformation';
 $LDShowDeptInfoTxt='Anzeigen von aktiven Abteilungen';
 $LDConfigOptions='Einstellungsoptionen';
@@ -264,7 +264,7 @@ $LDHideShow='Zeigen/verstecken';
 $LDSortOrder='Reihenfolge';
 $LDAdminIndex='Admin index';
 $LDUsers='Benutzer';
-$LDCreateEditLock='Erstellen, Verarbeiten, Sperren';
+$LDCreateEditLock='Anlegen, Bearbeiten, Sperren';
 $LDDatabase='Datenbank';
 $LDPhpMyAdmin='PhpMyAdmin';
 $LDGeneral='Allgemein';

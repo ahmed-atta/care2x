@@ -562,8 +562,8 @@ echo '<ul>'.$result[title].'<br>
 echo '<p>'.strtoupper($station).' &nbsp; &nbsp; '.$result[kasse].' '.$result[kassename];
 //echo '<p><IMG SRC="http://www.barcodemill.com/cgi-bin/barcodemill/bcmill/barcode.gif?height=30&symbol=1&content='.$result[encounter_nr].'" align="left">';
 
-if(file_exists('../cache/barcodes/pn_'.$result['encounter_nr'].'.png')) echo '<br><img src="../cache/barcodes/pn_'.$result[encounter_nr].'.png" border=0>';
-else echo "<br><img src='../classes/barcode/image.php?code=$result[encounter_nr]&style=68&type=I25&width=145&height=50&xres=2&font=5' border=0>";
+if(file_exists('../cache/barcodes/en_'.$result['encounter_nr'].'.png')) echo '<br><img src="../cache/barcodes/en_'.$result[encounter_nr].'.png" border=0>';
+else echo "<br><img src='../classes/barcode/image.php?code=$result[encounter_nr]&style=68&type=I25&width=180&height=50&xres=2&font=5' border=0>";
 echo '</ul>';
 */
 // echo '<p>'.$pday.'.'.$pmonth.'.'.$pyear;
@@ -572,7 +572,7 @@ echo '</ul>';
 
 //..................... START...... PATIENT_INFO_IMAGE
 
-echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178 align="left" hspace=5 vspace=5>';
+echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid=$sid&lang=$lang&fen='.$full_en.'&en='.$pn.'" width=282 height=178 align="left" hspace=5 vspace=5>';
 
 //..................... END....... PATIENT_INFO_IMAGE
 

@@ -100,7 +100,7 @@ $LDTestType=array('chemlabor'=>'Laboruntersuchung',
 								      'blood'=>'Blutkonserven',
 									  'radio'=>'radiologische Untersuchung');
 /* 2002-09-10 EL */
-$LDTestReception='Anstehende Anforderung';
+$LDTestReception='Unbearbeitete Anforderung';
 $LDTestReceptionTxt='Anforderung verarbeiten, Befunde eingeben';
 /* 2002-09-15 EL */
 $LDPrintForm='Die Anforderung drucken';

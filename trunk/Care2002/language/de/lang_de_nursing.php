@@ -82,13 +82,13 @@ $LDNextMonth='Nächsten Monat';
 $LDNursingManage='Stationsverwaltung';
 $LDShowStationDataTxt='&nbsp;Beschreibung, Betten, <br>	&nbsp;usw. zeigen bzw. ändern';
 $LDLockBedTxt='&nbsp;bzw. freigeben';
-$LDAccessRightsTxt='&nbsp;Erstellen, sperren, <br>&nbsp;freigeben, löschen, usw.';
+$LDAccessRightsTxt='&nbsp;Anlegen, sperren, <br>&nbsp;freigeben, löschen, usw.';
 $LDShowStationData='Stationsprofil';
 $LDLockBed='Bett sperren';
 $LDAccessRights='Zugangsberechtigungen';
 $LDProfile='Profil';
-$LDCreate='Erstellen';
-$LDNewStation='Neue station erstellen';
+$LDCreate='Anlegen';
+$LDNewStation='Neue station anlegen';
 $LDDescription='Beschreibung';
 $LDDept='Abteilung';
 $LDRoom1Nr='Nummer des ersten Zimmers';
@@ -101,7 +101,7 @@ $LDBed2Prefix='Bettenmarkierung des zweiten Bettes';
 $LDHeadNurse='Stationsleiter(in)';
 $LDHeadNurse2='Stellvertreter(in)';
 $LDNurses='Krankenschwester/Pfleger';
-$LDCreateStation='Station erschaffen';
+$LDCreateStation='Station anlegen';
 $LDEnterAllFields ='Die mit <font color=#ff0000><b>*</b></font> markierten Felder müssen unbedingt ausgefüllt werden.';
 $LDPlsSelect='Bitte eine Abteilung auswählen';
 $LDStationExists='Die Station ~station~ ist bereits vorhanden! Bitte benutzen einen anderen Stationsnamen.';
@@ -110,8 +110,8 @@ $LDAlertRoomNr='Die nummer des letzten Zimmers muss unbedingt höher als die des 
 $LDExistStations='Vorhandene Stationen. Bitte die gewünschte Station anklicken.';
 $LDOtherStations='Andere Stationen';
 $LDEditProfile='Profil aktualisieren bzw. ändern';
-$LDCreatedOn='Erstellt bzw. aktualisiert am:';
-$LDCreatedBy='Erstellt von:';
+$LDCreatedOn='Angelegt bzw. aktualisiert am:';
+$LDCreatedBy='Angelegt von:';
 
 $LDTemplateMissing='Die Schablone für station ~station~ nicht vorhanden!';
 $LDNoOrigData='Die ursprüngliche Daten sind nicht !';
@@ -124,7 +124,7 @@ $LDFromYesterday='(Von Gestern!!)';
 $LDListFrom='Die Liste liegt allerdings ~nr~ Tage zurück.';
 $LDCopyAnyway='Trotzdem, Belegungsliste auf heute übernehmen.';
 $LDTakeoverList='Diese Belegungsliste auf heute übernehmen.';
-$LDDoNotCopy='Nicht übernehmen! Eine neue Belegungsliste erstellen.';
+$LDDoNotCopy='Nicht übernehmen! Eine neue Belegungsliste anlegen.';
 $LDOldList='Dies ist eine ALTE Belegungsliste!';
 $LDQuickInformer='Auf einen Blick';
 $LDAttention='Achtung!';
@@ -148,7 +148,7 @@ $LDNoInit='Die Station ~station~ ist noch nicht initialisiert!';
 $LDIfInit='Falls Sie die Station initialisieren möchten, klicken Sie hier an.';
 $LDShowPatData='Patientenmappe öffnen';
 $LDReleasePatient='Patient entlassen';
-$LDNoticeRW='Vermerk erstellen bzw. lesen';
+$LDNoticeRW='Vermerk eintragen bzw. lesen';
 $LDInfoUnlock='Click für Info bzw. zum Aufheben der Sperre.';
 
 $LDPatListElements=array(
@@ -312,10 +312,10 @@ $LDErrorDuplicateBed='Fehler: Bettbelegung 2x in der Tabelle vorhanden!';
 $LDNoFound='Die Suche hat leider keinen Patient gefunden.';
 
 $LDNoWardsYet='Noch keine Pflegestation vorhanden.';
-$LDClk2CreateWard='Bitte hier anklicken um eine Pflegestation zu erstellen.';
+$LDClk2CreateWard='Bitte hier anklicken um eine Pflegestation anzulegen.';
 
 /* 2002-10-12 EL */
-$LDToCreateNewList='Um eine Liste zu erstellen';
+$LDToCreateNewList='Um eine Liste anzulegen';
 $LD_ddpMMpyyyy='TT.MM.JJJJ';
 $LD_yyyyhMMhdd='JJJJ-MM-TT';
 $LD_MMsddsyyyy='MM/TT/JJJJ';

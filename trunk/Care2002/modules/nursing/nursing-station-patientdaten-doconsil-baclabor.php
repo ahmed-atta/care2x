@@ -621,7 +621,7 @@ elseif(!$read_form && !$no_proc_assist)
                  /* The patient label */
  if($edit)
         {
-		   echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
+		   echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid=$sid&lang=$lang&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
 		}
         elseif($pn=="")
 		{

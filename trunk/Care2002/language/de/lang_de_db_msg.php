@@ -9,6 +9,6 @@ $LDDbNoDelete='Löschen in DB ist gescheitert!';
 $LDSessionTimeout='Session verfallen';
 $LDSessionTimeoutTxt='Es gab eine lange Zeit der Inaktivität. Aus Sicherheitsgründen hat sich dieses Modul gesperrt.<p>
 Um es noch mal zu starten, tun Sie entweder:<p>
-- das Modul noch mal starten in dem Sie es an der linken Auswahlliste anclicken<br>
+- das Modul noch mal starten in dem Sie es auf der linken Auswahlliste anklicken<br>
 - oder den "Aktualisieren" Knopf des Browsers anklicken <p> Alle vorherige nicht gespeicherte Daten gehen leider verloren.'; 
 ?>

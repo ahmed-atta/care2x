@@ -239,9 +239,9 @@ if ($enc_obj->record_count) {
 						echo '	
 							<img '.createLDImgSrc($root_path,'ok_small.gif','0').' alt="'.$LDTestThisPatient.'"></a>&nbsp;';
 							
-                       if(!file_exists($root_path."cache/barcodes/pn_".$full_en.".png"))
+                       if(!file_exists($root_path."cache/barcodes/en_".$full_en.".png"))
 	      		       {
-			               echo "<img src='".$root_path."classes/barcode/image.php?code=".$full_en."&style=68&type=I25&width=180&height=50&xres=2&font=5&label=2' border=0 width=0 height=0>";
+			               echo "<img src='".$root_path."classes/barcode/image.php?code=".$full_en."&style=68&type=I25&width=180&height=50&xres=2&font=5&label=2&form_file=en' border=0 width=0 height=0>";
 		               }
 						echo '</td></tr>';
 

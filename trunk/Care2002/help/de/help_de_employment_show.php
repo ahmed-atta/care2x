@@ -15,14 +15,14 @@ Wie ändere ich die Daten eines Mitarbeiters?</b></font>
 Wie kann ich einen Mitarbeiter als Arzt eintragen?</b></font>
 <ul>
 	<b>Schritt :</b> Klicken Sie auf die Option "<font color=#000088>Als Arzt einer Abteilung anlegen</font>".<p>
-	<img src="../help/en/img/en_employ_doctor.png" border=0 width=206 height=147>
+	<img src="../help/de/img/de_employ_doctor.png" border=0>
 </ul>
 
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Wie geht das mit einer Pflegekraft?</b></font>
 <ul>
 	<b>Schritt :</b> Klicken Sie auf die Option  "<font color=#000088>Als Pflegekraft anlegen</font>".<p>
-	<img src="../help/en/img/en_employ_nurse.png" border=0 width=206 height=147>
+	<img src="../help/de/img/de_employ_nurse.png" border=0 >
 </ul>
 
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>

@@ -1,5 +1,8 @@
 <?php
 //error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR),
+
+### The following arrays are the "role" levels each containing an access point or groups of access points
+
 $all='_a_0_all';
 $sysadmin='System_Admin';
 

@@ -20,7 +20,7 @@ if(empty($displaysize)||!is_numeric($displaysize)) $displaysize=10;
     /* Load the date formatter */
     include_once($root_path.'include/inc_date_format_functions.php');
 
-   $fielddata='item_nr, title, name, vorname, beruf, bereich1, bereich2,  inphone1, inphone2, inphone3, funk1, funk2, exphone1, exphone2, roomnr';
+   $fielddata='item_nr, title, name, vorname, beruf, bereich1, bereich2,  inphone1, inphone2, inphone3, exphone1, exphone2, funk1, funk2, roomnr';
 
    if ($edit) $fielddata.=', date, time';
 

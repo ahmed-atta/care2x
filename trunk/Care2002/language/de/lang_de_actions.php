@@ -21,4 +21,13 @@ $LDListApptByDept='Alle Termine bei der Abteilung';
 $LDListApptByDoc='Alle Termine mit dem Arzt';
 $LDdone='Fertig';
 $LDOk='Ok';
+$LDSelect='Select';
+
+$LDHelp="Hilfe";
+$LDCloseHelpWin="Hilfefenster schliessen";
+
+$LDRefreshWindow = 'Erneut anzeigen';
+
+$LDNext = 'Nächste';
+$LDPrevious = 'Vorher';
 ?>

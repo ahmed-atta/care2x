@@ -437,7 +437,7 @@ if($edit){
 <?php
 
 if($edit){
-	echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
+	echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid=$sid&lang=$lang&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
 }elseif($pn==''){
 	$searchmask_bgcolor='#ffffff';
 	include($root_path.'include/inc_test_request_searchmask.php');

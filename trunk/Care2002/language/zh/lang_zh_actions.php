@@ -22,4 +22,12 @@ $LDListApptByDoc='按医生显示预诊清单';
 $LDdone='完成';
 $LDOk='确定';
 $LDSelect='选择';
+
+$LDHelp="Help";
+$LDCloseHelpWin="Close help window";
+
+$LDRefreshWindow = 'Refresh display';
+
+$LDNext = 'Next';
+$LDPrevious = 'Previous';
 ?>

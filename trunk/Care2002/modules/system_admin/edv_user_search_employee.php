@@ -29,25 +29,38 @@ if(!isset($searchkey)) $searchkey='';
 if(!isset($mode)) $mode='';
 
 
-if(($mode=='search')and($searchkey)){	
+if(($mode=='search')and($searchkey))
+{
+			
 	/* Load global config */
+	include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+	$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
+    $glob_obj->getConfig('personell_%');
 	$suchwort=trim($searchkey);
 	
 	if(is_numeric($suchwort)){
-		$suchbuffer=(int) $suchwort;
+		$suchwort=(int) $suchwort;
 		$numeric=1;
+		if($suchwort < $GLOBAL_CONFIG['personell_nr_adder']) $suchbuffer=$suchwort; 
+			else $suchbuffer=($suchwort-$GLOBAL_CONFIG['personell_nr_adder']); 
 	}else{
 		$suchbuffer=$suchwort;
 	}
 			
-	$sql="SELECT ps.nr, ps.is_discharged, p.name_last, p.name_first, p.date_birth,u.login_id
+	$sql='SELECT ps.nr, ps.is_discharged, p.name_last, p.name_first, p.date_birth,u.login_id
 		          FROM (care_personell as ps,care_person as p) 
-				  	LEFT JOIN care_users AS u ON u.personell_nr=ps.nr ";
-	if($numeric) $sql.="WHERE ps.nr LIKE '%".$suchbuffer."'";		
-		else $sql.= "WHERE (p.name_last LIKE '".addslashes($suchwort)."%' 
-		              OR p.name_first LIKE '".addslashes($suchwort)."%') ";
-	$sql.=" AND ps.is_discharged IN ('',0) AND ps.pid=p.pid ORDER BY p.name_last ";
-	echo $sql;
+				  	LEFT JOIN care_users AS u ON u.personell_nr=ps.nr
+		          WHERE
+				  (
+		               p.name_last LIKE "'.addslashes($suchwort).'%" 
+		              OR p.name_first LIKE "'.addslashes($suchwort).'%"
+		              OR p.date_birth LIKE "'.@formatDate2Std($suchwort,$date_format).'%"
+		              OR ps.nr LIKE "'.(int)$suchbuffer.'"
+				  )
+				  AND NOT ps.is_discharged
+				  AND ps.pid=p.pid  
+		          ORDER BY p.name_last ';
+				  
 	if($ergebnis=$db->Execute($sql)){
 			
 		if ($linecount=$ergebnis->RecordCount()){ 
@@ -189,7 +202,7 @@ if($mode=='search'){
 							
                        if(!file_exists($root_path.'cache/barcodes/en_'.$full_en.'.png'))
 	      		       {
-			               echo "<img src='".$root_path."classes/barcode/image.php?code=".($zeile['nr']+$GLOBAL_CONFIG['personell_nr_adder'])."&style=68&type=I25&width=145&height=50&xres=2&font=5&label=2&form_file=en' border=0 width=0 height=0>";
+			               echo "<img src='".$root_path."classes/barcode/image.php?code=".($zeile['nr']+$GLOBAL_CONFIG['personell_nr_adder'])."&style=68&type=I25&width=180&height=50&xres=2&font=5&label=2&form_file=en' border=0 width=0 height=0>";
 		               }
 						echo '</td></tr>';
 

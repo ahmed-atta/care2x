@@ -9,10 +9,10 @@ $report_authorsize=10;
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -47,7 +47,14 @@ $pdf=& new Cezpdf();
 $logo=$root_path.'gui/img/logos/lopo/care_logo.png';
 $pidbarcode=$root_path.'cache/barcodes/pn_'.$encounter['pid'].'.png';
 $encbarcode=$root_path.'cache/barcodes/en_'.$enc.'.png';
-$idpic=$root_path.'fotos/registration/'.$encounter['photo_filename'];
+
+# Patch for empty file names 2004-05-2 EL
+if(empty($encounter['photo_filename'])){
+	$idpic=$root_path.'fotos/registration/_nothing_';
+ }else{
+	$idpic=$root_path.'fotos/registration/'.$encounter['photo_filename'];
+}
+
 # Load the page header #1
 require('../std_plates/pageheader1.php');
 # Load the patient data plate #1
