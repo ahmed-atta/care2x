@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -30,65 +30,35 @@ $newdata=1;
 $dbtable='care_phone';
 $curdate=date('Y-m-d');
 $curtime=date('H:i:s');
-
+//$db->debug=true;
 if ($mode=='save'){
 	   // start checking input data
-	if (($name!='') || ($vorname!='')) {	
-	
-		$sql="INSERT INTO ".$dbtable." 
-						(	
-							title,
-							name,
-							vorname,
-							personell_nr,
-							beruf,
-							bereich1,
-							bereich2,
-							inphone1,
-							inphone2,
-							inphone3,
-							exphone1,
-							exphone2,
-							funk1,
-							funk2,
-							roomnr,
-							date,
-							time,
-							create_id,
-							create_time
-							 ) 
-						VALUES (
-							'$anrede',
-							'$name', 
-							'$vorname',
-							'$personell_nr', 
-							'$beruf', 
-							'$bereich1', 
-							'$bereich2', 
-							'$inphone1', 
-							'$inphone2', 
-							'$inphone3', 
-							'$exphone1', 
-							'$exphone2', 
-							'$funk1', 
-							'$funk2', 
-							'$zimmerno',
-							'$curdate', 
-							'$curtime',
-							'".$HTTP_COOKIE_VARS[$local_user.$sid]."',
-							NULL
-							)";
-				
- 						if($db->Execute($sql))
-						{ 
-							header('location:phone_list.php'.URL_REDIRECT_APPEND.'&user_origin='.$user_origin);
-							exit;
-						}
-			 			else {echo "<p>".$sql."<p>$LDDbNoSave.";};
-    }else{
-		$error=1;
-	}
+	if (!empty($name) && !empty($vorname)) {
 
+         # Create comm object
+         include_once($root_path.'include/care_api_classes/class_comm.php');
+         $phone = & new Comm;
+    
+        # Correctly map some indexes
+        $HTTP_POST_VARS['roomnr']=$HTTP_POST_VARS['zimmerno'];
+        $HTTP_POST_VARS['date'] = $curdate;
+        $HTTP_POST_VARS['time'] = $curtime;
+        $HTTP_POST_VARS['create_id'] = $HTTP_SESSION_VARS['sess_user_name'];
+        $HTTP_POST_VARS['create_time'] = date('YmdHis');
+        $HTTP_POST_VARS['history'] = "Add ".date('Y-m-d H:i:S')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
+        $HTTP_POST_VARS['title'] = $HTTP_POST_VARS['anrede'];
+
+        $phone->setDataArray($HTTP_POST_VARS);
+ 	    //))if($db->Execute($sql))
+        if($phone->insertDataFromInternalArray()){
+	       header('location:phone_list.php'.URL_REDIRECT_APPEND.'&user_origin='.$user_origin);
+		   exit;
+	    }else{
+           echo "<p>".$phone->getLastQuery()."<p>$LDDbNoSave.";
+        };
+    }else{
+        $error=1;
+    }
 }elseif($user_origin=='pers'&&$nr){
 	if(!$employee->loadPersonellData($nr)) $mode='';
 }

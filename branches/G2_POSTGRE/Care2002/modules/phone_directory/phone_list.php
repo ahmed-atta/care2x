@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /*
-CARE 2X Integrated Information System version deployment 1.1 (mysql) 2004-01-11 for Hospitals and Health Care Organizations and Services
+CARE 2X Integrated Information System beta 1.0.09 - 2003-11-25 for Hospitals and Health Care Organizations and Services
 Copyright (C) 2002  Elpidio Latorilla & Intellin.org	
 
 GNU GPL. For details read file "copy_notice.txt".
@@ -16,19 +16,20 @@ $dbtable='care_phone';
 # Filter invalid display size and set to default
 if(empty($displaysize)||!is_numeric($displaysize)) $displaysize=10;
 
+# Load the date formatter
+include_once($root_path.'include/inc_date_format_functions.php');
 
-    /* Load the date formatter */
-    include_once($root_path.'include/inc_date_format_functions.php');
+$fielddata='item_nr, title, name, vorname, beruf, bereich1, bereich2,  inphone1, inphone2, inphone3, exphone1, exphone2, funk1, funk2,  roomnr';
 
-   $fielddata='item_nr, title, name, vorname, beruf, bereich1, bereich2,  inphone1, inphone2, inphone3, funk1, funk2, exphone1, exphone2, roomnr';
+if ($edit){
+   $fielddata.=', date, time';
+}
 
-   if ($edit) $fielddata.=', date, time';
+$sql='SELECT '.$fielddata.' FROM '.$dbtable.' ORDER BY name';
 
-	$sql='SELECT '.$fielddata.' FROM '.$dbtable.' ORDER BY name';
-    if( $ergebnis=$db->Execute($sql))
-	{
-		$rows=$ergebnis->RecordCount();
-	}
+if( $ergebnis=$db->Execute($sql)){
+   $rows=$ergebnis->RecordCount();
+}
 ?>
 
 <?php html_rtl($lang); ?>
@@ -71,12 +72,9 @@ echo '></a>'; } ?><img <?php echo createLDImgSrc($root_path,'phonedir-b.gif','0'
 
 <FONT    SIZE=1  FACE="Arial">
 
-<?php if($rows)
-{
-		//$colnum=mysql_num_fields($ergebnis);
-		
-		//if(!$edit) $colstop=$colnum-3; else $colstop=$colnum;
-		
+<?php
+if($rows){
+
 		$colstop=$ergebnis->FieldCount();
 
 		if(!$batchnum)

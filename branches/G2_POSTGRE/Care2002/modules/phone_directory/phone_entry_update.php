@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -14,8 +14,11 @@ define('LANG_FILE','phone.php');
 $local_user='phonedir_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-require_once($root_path.'include/inc_config_color.php');
+# Load the Comm class and create comm (phone) object
+require_once($root_path.'include/care_api_classes/class_comm.php');
+$phone = & new Comm;
 
+//$db->debug=true;
 $error=1;
 //$newdata=0;
 $curdate=date('Y-m-d');
@@ -23,52 +26,37 @@ $curtime=date('H:i:s');
 
 $dbtable='care_phone';
 
-if($from=='list') include('../include/inc_db_makelink.php');
-
-if($link&&$DBLink_OK) 					
-{
-    if ($mode=='save')
-     {
+if ($mode=='save'){
 	    // start checking input data
-	    if (($name!="")or($vorname!=""))
-		{
-						$sql='UPDATE '.$dbtable.' SET
-							title="'.$anrede.'",
-							name="'.$name.'",
-							vorname="'.$vorname.'",
-							beruf="'.$beruf.'",
-							bereich1="'.$bereich1.'",
-							bereich2="'.$bereich2.'",
-							inphone1="'.$inphone1.'",
-							inphone2="'.$inphone2.'",
-							inphone3="'.$inphone3.'",
-							exphone1="'.$exphone1.'",
-							exphone2="'.$exphone2.'",
-							funk1="'.$funk1.'",
-							funk2="'.$funk2.'",
-							roomnr="'.$zimmerno.'",
-							date="'.$curdate.'",
-							time="'.$curtime.'",
-							modify_id="'.$HTTP_COOKIE_VARS[$local_user.$sid].'"  
-						WHERE item_nr="'.$itemname.'"';
-				
- 						if($db->Execute($sql))
-						{ 
-							header("Location: phone_list.php?sid=$sid&lang=$lang&batchnum=$batchnum&linecount=$linecount&pagecount=$pagecount&displaysize=$displaysize&update=1&itemname=$itemname&edit=$edit"); 
+    if (($name!="")or($vorname!="")){
+
+                # Correctly map some indexes
+                $HTTP_POST_VARS['roomnr']=$HTTP_POST_VARS['zimmerno'];
+                $HTTP_POST_VARS['date'] = $curdate;
+                $HTTP_POST_VARS['time'] = $curtime;
+                $HTTP_POST_VARS['modify_id'] = $HTTP_SESSION_VARS['sess_user_name'];
+                $HTTP_POST_VARS['modify_time'] = date('YmdHis');
+                $HTTP_POST_VARS['history'] = $phone->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
+                $HTTP_POST_VARS['title'] = $HTTP_POST_VARS['anrede'];
+
+                $phone->setWhereCondition("item_nr='$itemname'");
+                $phone->setDataArray($HTTP_POST_VARS);
+
+ 				if($phone->updateDataFromInternalArray($itemname))
+						{
+							header("Location: phone_list.php?sid=$sid&lang=$lang&batchnum=$batchnum&linecount=$linecount&pagecount=$pagecount&displaysize=$displaysize&update=1&itemname=$itemname&edit=$edit");
 							exit;
 						}
 			 			else {echo "<p>".$sql."<p>$LDDbNoSave";};
     	 }
- 	}
-	else
-	{
-						$sql='SELECT * FROM '.$dbtable.' WHERE item_nr="'.$itemname.'"';
-		
- 						if($ergebnis=$db->Execute($sql))	$zeile=$ergebnis->FetchRow();					
-			 			    else {echo "<p>".$sql."<p>$LDDbNoRead";};
-	}
+}else{
+
+    if(!$zeile=$phone->getData($itemname)){
+        $zeile=array();
+        echo $phone->getLastQuery()."<br>$LDDbNoRead<br>";
+    }
 }
- else echo "$LDDbNoLink<br>";  
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>

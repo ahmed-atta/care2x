@@ -29,7 +29,12 @@ function chkForm(d) {
    <tr bgcolor="#f6f6f6">
      <td><font color="red"><b>*</b><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDate; ?></td>
      <td><input type="text" name="date" size=10 maxlength=10  
-	 	 value="<?php if(($mode!='update')&&!empty($date)&&($date!='0000-00-00')) echo formatDate2Local($date,$date_format); ?>" 
+	 	 value="<?php
+         if(!empty($date)&&($date!=$dbf_nodate)){
+             if($error) echo $date;
+               elseif($mode!='update') echo formatDate2Local($date,$date_format);
+         }
+          ?>"
 	 	onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
 		<a href="javascript:show_calendar('appt_form.date','<?php echo $date_format ?>')">
  		<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a> 
@@ -118,21 +123,14 @@ if(is_object($encounter_classes)){
  </table>
 <input type="hidden" name="encounter_nr" value="<?php echo $HTTP_SESSION_VARS['sess_en']; ?>">
 <input type="hidden" name="pid" value="<?php echo $HTTP_SESSION_VARS['sess_pid']; ?>">
-<input type="hidden" name="modify_id" value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>">
-<?php 
+<?php
 if($mode=='select'){
 ?>
 <input type="hidden" name="nr" value="<?php echo $nr; ?>">
 <?php
-}else{
-?>
-<input type="hidden" name="create_id" value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>">
-<input type="hidden" name="create_time" value="null">
-<input type="hidden" name="history" value="Created: <?php echo date('Y-m-d H:i:s'); ?> : <?php echo $HTTP_SESSION_VARS['sess_user_name']."\n"; ?>">
-<?php
 }
-
 ?>
+
 <input type="hidden" name="mode" value="<?php if($mode=='select') echo 'update'; else echo 'create';?>">
 <input type="hidden" name="target" value="<?php echo $target; ?>">
 <input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0'); ?>>
