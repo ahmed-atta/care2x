@@ -1,5 +1,5 @@
 <?php
-$LDMainTitle="Care 2002 Système hospitalier intégré d`information";
+$LDMainTitle="Care 2002 Système hospitalier intégré d'information";
 
 /*$LDMainTitle="Marienhospital a virtual Integrated Hospital Information System in Internet";
 */
@@ -18,7 +18,7 @@ $LDFax="Fax";
 $LDAddress="Addresse";
 $LDEmail="Email";
 
-$LDOpenTimes ="Horaire d`Admission";
+$LDOpenTimes ="Horaire d'Admission";
 $LDManagement ="Management";
 $LDDept ="Départements";
 $LDCafenews ="Les nouvelles de Caféteria";
@@ -35,9 +35,9 @@ $LDMore="plus sur l`article";
 $LDEditTitle="Titre";
 $LDNewsDummy=array(1=>"premier",2=>"second",3=>"troisième",4=>"quatrième");
 
-$LDNoFrame='Ce site web utilise des cadres afin de fonctionner mieux. Veuillez installer un navigateur approprié. Nous conseillons
-						Microsoft Internet Explorer à partir de la version 5.0. Activez Javascript (JScript) s`il vous plaît et
-						activez la réception automatique des cookies';
+$LDNoFrame="Ce site web utilise des cadres afin de fonctionner mieux. Veuillez installer un navigateur approprié. Nous conseillons
+						Microsoft Internet Explorer à partir de la version 5.0. Activez Javascript (JScript) s'il vous plaît et
+						activez la réception automatique des cookies";
 
 $LDClk2Write="Cliquez-moi pour éditer";
 
@@ -54,7 +54,7 @@ $LDCookieRef="Si vous voulez en savoir plus sur les cookies, vous pouvez lire le
 $LDPrivPolicy="Si vous souhaitez lire notre politique de discrétion, veuillez <a href=\"language/fr/fr_privacy.htm\" target=\"pp\">cliquer ici:</a>";
 $LDOurPrivPolicy="Notre politique de discrétion";
 $LDSubmitNews="Poster des nouvelles";
-$LDEditNews="Éditer et poster les nouvelles via l`éditeur en-ligne";
+$LDEditNews="Éditer et poster les nouvelles via l'éditeur en-ligne";
 /* 2002-10-17 EL */
 $LDCredits='Crédits';
 
