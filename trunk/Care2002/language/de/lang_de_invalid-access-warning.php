@@ -49,7 +49,7 @@ die Cookies an.
 Ihr Browser nehme keine Cookies an. Stellen Sie bitte Ihren Browser zur automatischen Annahme von Cookies ein.
 <br>
 <img <?php echo createComIcon('../../','achtung.gif') ?>>
-Ihr Browser würde Javascript nicht unterstützen oder das Javascript könnte ausgeschaltet sein. Schalten Sie bitte das
+Ihr Browser kann Javascript nicht unterstützen oder das Javascript könnte ausgeschaltet sein. Schalten Sie bitte
 Javascript ein.<br>
 <img <?php echo createComIcon('../../','achtung.gif') ?>>
 In seltenen Fällen könnte die Datenübertragung gestört gewesen sein. Klicken Sie den "Aktualisieren" in Ihrem Browser an.
