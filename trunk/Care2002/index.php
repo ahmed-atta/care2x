@@ -1,9 +1,9 @@
 <?php
 /*
 CARE 2X Integrated Information System for Hospitals and Health Care Organizations and Services
-Care 2002, Care 2x, Copyright (C) 2002,2003,2004  Elpidio Latorilla
+Care 2002, Care2x, Copyright (C) 2002,2003,2004,2005  Elpidio Latorilla
 
-Beta version 1.0.05    2003-11-26
+Beta version 2.0.1   2004-07-04
 								
 This script(s) is(are) free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public
@@ -38,6 +38,8 @@ if(!isset($sid)) $sid='';
 
 require('./roots.php');
 require('./include/inc_environment_global.php');
+
+//$db->debug=1;
 
 # Register global session variables
 if(!session_is_registered('sess_user_name')) session_register('sess_user_name');
@@ -124,7 +126,6 @@ function configNew(&$bn,&$bv,&$f,$i,&$uid)
    error_reporting($old_err_rep);
 }
 
-
 /**
 * Create simple session id (sid), save a encrpyted  sid to a cookie with a dynamic name 
 * consisting of concatenating "ck_sid" and the sid itself.
@@ -155,15 +156,15 @@ if((isset($boot)&&$boot)||!isset($HTTP_COOKIE_VARS['ck_config'])||empty($HTTP_CO
 	
 # Load user config API. Get the user config data from db
 require_once('include/care_api_classes/class_userconfig.php');
-$cfg=new UserConfig;
+$cfg_obj=new UserConfig;
 
-if($cfg->exists($user_id)) {
-	$cfg->getConfig($user_id);
-	$USERCONFIG=&$cfg->buffer;
+if($cfg_obj->exists($user_id)) {
+	$cfg_obj->getConfig($user_id);
+	$USERCONFIG=$cfg_obj->buffer;
     $config_exists=true;  // Flag that user config is existing
 }else{
-	$cfg->_getDefault();
-	$USERCONFIG=&$cfg->buffer;
+	$cfg_obj->_getDefault();
+	$USERCONFIG=$cfg_obj->buffer;
 }
 
 # Load global configurations API
@@ -187,6 +188,7 @@ if(!$GLOBALCONFIG['language_single']) {
     if($_chg_lang_&&!empty($lang)) {
 		    $savelang=1;
 	}else{
+		//echo $lang=$USERCONFIG['lang'];
         if($USERCONFIG['lang']) $lang=$USERCONFIG['lang'];
 			    else  include('chklang.php');
 	 } 
@@ -209,7 +211,7 @@ if(!$GLOBALCONFIG['language_single']) {
 $createwarn=file_exists('create_admin.php');
 $initwarn=file_exists('./install/initialize.php');
 $md5warn=file_exists('./install/encode_pw_md5.php');
-$installwarn=file_exists('./install/encode_pw_md5.php');
+$installwarn=file_exists('./install/install.php');
 if($createwarn||$installwarn||$md5warn){
 	# Load necessary language tables
 	$lang_tables[]='create_admin.php';
@@ -250,12 +252,12 @@ setcookie($ck_lang_buffer,$lang);*/
 	 //echo $mask;
 if((isset($mask)&&$mask)||!$config_exists||$savelang) {
 		if(!$config_exists) {
-		
-			//$cfg->getConfig('default');
-			//$USERCONFIG=&$cfg->buffer;
-			
+
+			//$cfg_obj->getConfig('default');
+			//$USERCONFIG=&$cfg_obj->buffer;
+
 			configNew($bname,$bversion,$user_id,$ip,$cfgid);
-			
+
 			$USERCONFIG['bname']=$bname;
 			$USERCONFIG['bversion']=$bversion;
 			$USERCONFIG['cid']=$cfgid;
@@ -264,16 +266,16 @@ if((isset($mask)&&$mask)||!$config_exists||$savelang) {
 		//save browser info to user config array
 		// *****************************
 		if(empty($ip)) $USERCONFIG['ip']=$REMOTE_ADDR;
-		$USERCONFIG['mask']=$mask; 
-		$USERCONFIG['lang']=$lang;		
+		$USERCONFIG['mask']=$mask;
+		$USERCONFIG['lang']=$lang;
 		if(((($bname=='msie') ||($bname=='opera')) &&($bversion>4)) ||(($bname=='netscape')&&($bversion>3.5)) ||($bname=='mozilla')) {
 		    $USERCONFIG['dhtml']=1;
-		} 
+		}
 		// *****************************
 		// Save config to db
 		// *****************************
 		$mask=$USERCONFIG['mask']; # save mask before serializing
-        $cfg->saveConfig($user_id,$USERCONFIG);
+        $cfg_obj->saveConfig($user_id,$USERCONFIG);
 		setcookie('ck_config',$user_id,time()+(3600*24*365)); # expires after 1 year
 }	
 
@@ -283,12 +285,58 @@ if(empty($HTTP_SESSION_VARS['sess_user_name'])) $HTTP_SESSION_VARS['sess_user_na
 # set the initial session timeout start value
 $HTTP_SESSION_VARS['sess_tos']=date('His');
 
+# Load character set fx
 include_once('include/inc_charset_fx.php');
 
+# Load image fx
+require_once('include/inc_img_fx.php');
+
+# Start smarty templating
+
+# Wordaround for user config array to work inside the smarty class
+$cfg = $USERCONFIG;
+
+//while(list($x,$v)=each($cfg)) echo "$x => $v<br>";
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',$LDMainTitle);
+
+ #Assign the contents frame source
+$smarty->assign('sContentsFrameSource',"src = \"blank.php?lang=$lang&sid=$sid\"");
+
 # Load the gui template
-if($lang=='ar'||$lang=='fa') {
-	require('gui/html_template/righttoliftdefault/tp_index.php');
-} else{
-	require('gui/html_template/default/tp_index.php');
+//require('gui/html_template/default/tp_index.php');
+# If the floating menu window is selected
+
+if($mask == 2){
+
+	if($lang=='ar'||$lang=='fa') $smarty->assign('sBaseFramesetTemplate','common/frameset_floatingmenu_rtl.tpl');
+		else $smarty->assign('sBaseFramesetTemplate','common/frameset_floatingmenu_ltr.tpl');
+	
+	$smarty->assign('sMenuFrameSource','src="main/menubar2.php"');
+	$smarty->assign('sStartFrameSource',"src=\"main/indexframe.php?boot=1&lang=$lang&egal=$egal&cookie=$cookie&sid=$sid&mask=2\"");
+
+}else{
+	
+	$smarty->assign('sStartFrameSource',"src = \"main/indexframe.php?boot=1&mask=$mask&lang=$lang&cookie=$cookie&sid=$sid\"");
+	
+	# Assign frame dimensions
+	$smarty->assign('gui_frame_left_nav_width',$GLOBALCONFIG['gui_frame_left_nav_width']);
+	$smarty->assign('gui_frame_left_nav_border',$GLOBALCONFIG['gui_frame_left_nav_border']);
+
+	if($lang=='ar'||$lang=='fa') {
+		$smarty->assign('sBaseFramesetTemplate','common/frameset_rtl.tpl');
+		//require('gui/html_template/righttoliftdefault/tp_index.php');
+	} else{
+		# Else use normal frameset design
+		$smarty->assign('sBaseFramesetTemplate','common/frameset_ltr.tpl');
+	}
 }
+
+# Display the frame page
+
+$smarty->display('common/baseframe.tpl');
+
 ?>

@@ -10,9 +10,10 @@ require($root_path.'include/inc_css_a_sublinker_d.php');
 <script language="javascript">
 function changeLanguage(lang)
 {
-    <?php if(($cfg[mask]==1)||($cfg[mask]==""))  echo "window.top.location.replace(\"../index.php?lang=\"+lang+\"&mask=$cfg[mask]&sid=$sid&egal=1&_chg_lang_=1\");";
+    <?php if(($cfg['mask']==1)||($cfg['mask']=="")||$mask==1||$mask=='')  echo "window.top.location.replace(\"../index.php?lang=\"+lang+\"&mask=$cfg[mask]&sid=$sid&egal=1&_chg_lang_=1\");";
 	 else echo "window.opener.top.location.replace(\"../index.php?lang=\"+lang+\"&mask=$cfg[mask]&sid=$sid&egal=1\");";
 	 ?>
+
 	return false;
 }
 function checkIfChanged(lang)
@@ -25,7 +26,7 @@ function checkIfChanged(lang)
  
  <?php
  # Prepare values for body template
-if($boot){
+if($boot || $_chg_lang_){
 	 $TP_js_onload= 'onLoad="if (window.focus) window.focus();window.parent.CONTENTS.location.replace(\'startframe.php?sid='.$sid.'&lang='.$lang.'&egal='.$egal.'&cookie='.$cookie.'\');"';
 }else{
 	$TP_js_onload='onLoad="if (window.focus) window.focus();"';
@@ -50,7 +51,7 @@ $tp_body=&$TP_obj->load('tp_main_index_menu_body.htm');
 eval("echo $tp_body;");
 ?>
 
-<TABLE CELLPADDING=0 CELLSPACING=0 border=0 >
+<TABLE CELLPADDING=0 CELLSPACING=0 border=0>
 
 <?php
 //echo $HTTP_COOKIE_VARS['ck_config']; // used only in debugging related to user config data
@@ -81,7 +82,7 @@ if(!$GLOBALCONFIG['language_single']){
 ?>
 <tr>
 <td colspan=3>
-<FONT  FACE="Arial"  SIZE="-1">
+<FONT SIZE="1" face="arial,verdana">
 <form action="#" onSubmit="return checkIfChanged(this.lang.value)">
 <hr>
 <?php echo $LDLanguage ?><br>
@@ -99,8 +100,9 @@ echo $langselect;
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
 <input type="hidden" name="mask" value="<?php echo $mask ?>">
 <input type="hidden" name="egal" value="1">
-<input type="hidden" name="chg_lang" value="1">
+<input type="hidden" name="_chg_lang_" value="1">
 <hr>
+</FONT>
 </td>
 </tr>
 <?php
@@ -109,7 +111,7 @@ echo $langselect;
 
 <tr >
 <td colspan=3>
-<font FACE="Arial" SIZE=1 color="#6f6f6f">
+<font SIZE=1 color="#6f6f6f" face="arial,verdana">
 <?php echo $dbtype; ?>
 <br>
 <nobr><b><?php echo $LDUser ?>:</b></nobr><br>
@@ -120,7 +122,6 @@ echo $langselect;
 </td>
 </tr>
 </form>
-</FONT>
 </TABLE>
 <center>
 <a href="http://www.opensource.org/" target="_blank"><img src="<?php echo $root_path ?>gui/img/common/default/osilogo.gif" border=0></a>
