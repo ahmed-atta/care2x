@@ -268,7 +268,7 @@ if(!isset($name_last)) $name_last='';
 if(!isset($name_first)) $name_first='';
 createTR('name_last', $LDLastName,$name_last);
 createTR( 'name_first', $LDFirstName,$name_first);
-
+/*
 if ($GLOBAL_CONFIG['patient_name_2_show'])
 {
 if(!isset($name_2)) $name_2='';
@@ -286,7 +286,7 @@ if(!isset($name_3)) $name_3='';
 createTR('name_3', $LDName3,$name_3);
 }
 
-
+*/
 
 
 if(!isset($date_birth)) $date_birth='';
@@ -319,7 +319,7 @@ if(!isset($addr_city_town)) $addr_city_town='';
 <input name="sex" type="radio" value="f" <?php if ($sex=='f') echo 'checked' ?>><?php echo $LDFemale ?>
 </td>
 </tr>
-
+<!-- COMMENTATO DA NOI!!!!!!!!!
 <tr bgcolor="white">
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $LDAdmitClass ?>:
 </td>
@@ -358,15 +358,15 @@ if(!empty($ward_info)&&$ward_info->RecordCount()){
 
 </td>
 </tr>
-
-<?php
+-->
+<?php/*
 createTR( 'referrer_diagnosis', $LDDiagnosis,$referrer_diagnosis);
 createTR( 'referrer_dr', $LDRecBy,$referrer_dr);
 createTR( 'referrer_recom_therapy', $LDTherapy,$referrer_recom_therapy);
 createTR( 'referrer_notes', $LDSpecials,$referrer_notes);
-?>
+     */?>
 
-
+<!-- COMMENTATO DA NOI!!!!!
 <tr bgcolor="white">
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $LDBillType ?>:
 </td>
@@ -374,6 +374,7 @@ createTR( 'referrer_notes', $LDSpecials,$referrer_notes);
 <?php
 if($insurance_classes){
     while($result=$insurance_classes->FetchRow()) {
+     
 ?>
 <input name="insurance_class_nr" type="radio"  value="<?php echo $result['class_nr']; ?>" >
 <?php 
@@ -382,10 +383,11 @@ if($insurance_classes){
         echo '&nbsp;';
 	}
 } 
+      
 ?>
 </td>
 </tr>
-
+-->
 <?php
 createTR( 'insurance_nr', $LDInsuranceNr,$insurance_nr);
 createTR( 'insurance_firm_name', $LDInsuranceCo,$insurance_firm_name);
@@ -510,8 +512,8 @@ while($buffer=$att_dr_service->FetchRow())
 
  --><p>
 <a href="
-<?php if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) echo 'startframe.php';
-	else echo 'patient.php';
+<?php if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) echo 'aufnahme_start.php';
+	else echo 'aufnahme_start.php';
 	echo URL_APPEND;
 ?>
 "><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>

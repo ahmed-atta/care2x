@@ -1,7 +1,10 @@
 <?php
+
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
+require ('Mappa.php');
+
 /**
 * CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
@@ -10,6 +13,100 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+$num_referto=$HTTP_GET_VARS['referto'];
+
+if ($HTTP_GET_VARS['appt_nr'] && !$HTTP_GET_VARS['referto'])
+{
+$domanda="SELECT * from care_encounter WHERE pid=".$HTTP_GET_VARS['pid'];
+	$risposta=$db->Execute($domanda);
+	$risposta=$risposta->FetchRow();
+	$assicurazione=$risposta['insurance_firm_id'];
+	$encounter_nr=$risposta['encounter_nr'];
+	$appt_nr=$HTTP_GET_VARS['appt_nr'];
+	$richiesta="SELECT purpose FROM care_appointment WHERE nr=".$appt_nr;
+	$risposte=$db->Execute($richiesta);
+	$risposta=$risposte->FetchRow();
+	
+	$codice=split('#',$risposta['purpose']);
+	if ($codice[1]!='COXXX')
+	{
+	$query="UPDATE care_appointment  SET  appt_status='In attesa di referto',
+							history=CONCAT(history,'Done ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."'),
+							modify_id='".$HTTP_SESSION_VARS['sess_user_name']."',
+							encounter_nr=".$encounter_nr.",
+							modify_time='".date('YmdHis')."'
+							WHERE nr=".$HTTP_GET_VARS['appt_nr'];
+		
+							$result=$db->Execute($query);	
+	}
+	else
+	{
+	$query="UPDATE care_appointment  SET  appt_status='Richiesta inoltrata al Laboratorio',
+							history=CONCAT(history,'Done ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."'),
+							modify_id='".$HTTP_SESSION_VARS['sess_user_name']."',
+							encounter_nr=".$encounter_nr.",
+							modify_time='".date('YmdHis')."'
+							WHERE nr=".$HTTP_GET_VARS['appt_nr'];
+		
+							$result=$db->Execute($query);	
+	}
+//Header ("Location:../appointment_scheduler/appt_main_pass.php?lang=it");
+//echo "dpt vale". $_GET['dept_nr'];
+/*
+$ricdescrizione="SELECT * FROM care_appointment WHERE nr=".$appt_nr;
+$descrizione=$db->Execute($ricdescrizione);
+$descrizione=$descrizione->FetchRow();
+$codice=split("#",$descrizione['purpose']);
+*/
+if($codice[1]!='COXXX')
+{
+$ricprezzo="SELECT * FROM prezzi_".$assicurazione." WHERE item_code='".$codice[1]."'";
+$prezzo=$db->Execute($ricprezzo);
+$prezzo=$prezzo->FetchRow();
+$fatturazione="INSERT INTO care_billing_bill_item ( bill_item_encounter_nr, bill_item_code, bill_item_unit_cost, bill_item_units, bill_item_amount, bill_item_date, bill_item_status, bill_item_bill_no) VALUES (".$encounter_nr.",'".$prezzo['item_code']."',".$prezzo['item_unit_cost'].",1,".$prezzo['item_unit_cost'].",'".date('Y-m-d H:i:s')."','0',0)";
+//echo $fatturazione;
+//echo "   ".$prezzo['item_code'];
+
+$risposta=$db->Execute($fatturazione);
+//exit;
+}
+Header ("Location:../appointment_scheduler/appt_show.php?lang=it&dept_nr=".$_GET['dept_nr']);
+
+}	
+else if ($HTTP_GET_VARS['appt_nr'] && $HTTP_GET_VARS['referto'])
+{
+	$verifica="select * from care_encounter_notes where ref_notes_nr=".(2*$HTTP_GET_VARS['appt_nr']);
+
+	$ver_dati=$db->Execute($verifica);
+	$carica= $ver_dati->RecordCount();
+
+
+$domanda="SELECT * from care_encounter WHERE pid=".$HTTP_GET_VARS['pid'];
+
+	//debugger_on;
+	$risposta=$db->Execute($domanda);
+	$risposta=$risposta->FetchRow();
+#La commentiamo questa query poich? in realt? la svolgiamo su salva_su_db.php, quando cio? stampano il referto!!!
+/*
+$query="UPDATE care_appointment  SET  appt_status='Fatto',
+							history=CONCAT(history,'Fatto ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."'),
+							modify_id='".$HTTP_SESSION_VARS['sess_user_name']."',
+							modify_time='".date('YmdHis')."'
+							WHERE nr=".$HTTP_GET_VARS['appt_nr'];
+*/
+ //$result=$db->Execute($query);	
+ 
+
+ if($mappa[$referto][1]=='true')
+
+ Header ("Location:radiografico.php?lang=it&pid=".$HTTP_GET_VARS['pid']."&encounter_nr=".$risposta['encounter_nr']."&appt_nr=".$HTTP_GET_VARS['appt_nr']."&carica=".$carica."&codice=".$num_referto."&sess_user_name=".$HTTP_SESSION_VARS['sess_user_name']);
+else
+Header ("Location:".$mappa[$referto][2]."?lang=it&pid=".$HTTP_GET_VARS['pid']."&encounter_nr=".$risposta['encounter_nr']."&carica=".$carica."&appt_nr=".$HTTP_GET_VARS['appt_nr']."&carica=".$carica."&codice=".$num_referto."&sess_user_name=".$HTTP_SESSION_VARS['sess_user_name']);
+//Header ("Location:../medocs/show_medocs.php?lang=it&pid=".$HTTP_GET_VARS['pid']."&encounter_nr=".$risposta['encounter_nr']."&target=entry&mode=new&type_nr=1");
+
+}
+else
+{					
 $lang_tables[]='departments.php';
 $lang_tables[]='prompt.php';
 $lang_tables[]='person.php';
@@ -101,6 +198,7 @@ if($pid!='' || $encounter_nr!='')
 
         if ($pid)
         {	
+			
 		  /* Check whether the person is currently admitted. If yes jump to display admission data */
 		  if(!$update&&$encounter_nr=$encounter_obj->isPIDCurrentlyAdmitted($pid)){
 		      header('Location:aufnahme_daten_zeigen.php'.URL_REDIRECT_APPEND.'&encounter_nr='.$encounter_nr.'&origin=admit&sem=isadmitted&target=entry');
@@ -126,6 +224,56 @@ if($pid!='' || $encounter_nr!='')
 			
             if (($mode=='save') || ($forcesave!=''))
             {
+				// Questo controllo ? necessario per verificare che la persona non sia gi? stata registrata
+				if(!$update)
+				{
+					 $sql="select * from care_encounter where insurance_nr='".$insurance_nr."'";
+					 $esiste=$db->Execute($sql);
+					// echo $sql;
+					 if($esiste->RecordCount()) 
+					 {
+					 ?>
+				<html>
+
+				<head>
+				<title> Errore!!! </title>
+
+				</head>
+				<table border="0" width="101%" bgcolor=#99ccff>
+					<tr>
+						<td width="101%"><font color="#330066" size="+2" face="Arial"><strong>Il codice fiscale inserito esiste gi&agrave nel database!!!</strong></font></td>
+					</tr>
+					</table>
+					<?
+					$query_errore="SELECT * FROM care_person WHERE pid='".$_POST['pid']."'";
+					$esecuzione_query_errore=$db->Execute($query_errore);
+					$risposta_query_errore=$esecuzione_query_errore->FetchRow();
+					?>
+					<center>
+					<?
+					 echo "<b>Attenzione, la persona registrata esiste gia'!</b><br />";
+					 echo "<b>Verifica i dati per questa persona appena inserita</b><br />";
+					 echo "<b>PID :</b>".$_POST['pid']."<br />";
+					 echo "<b>Nome :</b>".$risposta_query_errore['name_first']."<br />";
+					 echo "<b>Cognome :</b>".$risposta_query_errore['name_last']."<br />";
+					 reset($esiste);
+					 $stesso_codice_fiscale=$esiste->FetchRow();
+					 $query_dati_stesso_codice_fiscale="SELECT * FROM care_person WHERE pid='".$stesso_codice_fiscale['pid']."'";
+					 $esecuzione_query_dati_stesso_codice_fiscale=$db->Execute($query_dati_stesso_codice_fiscale);
+					 $risposta_query_dati_stesso_codice_fiscale=$esecuzione_query_dati_stesso_codice_fiscale->FetchRow();
+					 echo "<br /><br /><i>Il suo codice fiscale coincide con quello del paziente</i><br />";
+					 echo "<b>PID :</b>".$risposta_query_dati_stesso_codice_fiscale['pid']."<br />";
+					 echo "<b>Nome :</b>".$risposta_query_dati_stesso_codice_fiscale['name_first']."<br />";
+					 echo "<b>Cognome :</b>".$risposta_query_dati_stesso_codice_fiscale['name_last']."<br />";
+					?>
+					</center>
+					<?
+					exit;
+					 }
+				}
+				
+			
+			
 	             if(!$forcesave)
 	             {
 	                  //clean and check input data variables
@@ -135,32 +283,45 @@ if($pid!='' || $encounter_nr!='')
 					  */
 	                  $encoder=trim($encoder); 
 					  if($encoder=='') $encoder=$HTTP_SESSION_VARS['sess_user_name'];
-					  
+		
+					  //Abbiamo modificato i $error settandoli a 0. In questo modo il programma forza l'immissione del paziente			  
 	                  $referrer_diagnosis=trim($referrer_diagnosis);
-					  if ($referrer_diagnosis=='') { $errordiagnose=1; $error=1; $errornum++;};
+					  if ($referrer_diagnosis=='') { $errordiagnose=1; $error=0; $errornum++;};
 					  
 	                  $referrer_dr=trim($referrer_dr);
-					  if ($referrer_dr=='') { $errorreferrer=1; $error=1; $errornum++;};
+					  if ($referrer_dr=='') { $errorreferrer=1; $error=0; $errornum++;};
 					  
 	                  $referrer_recom_therapy=trim($referrer_recom_therapy);
-					  if ($referrer_recom_therapy=='') { $errortherapie=1; $error=1; $errornum++;};
+					  if ($referrer_recom_therapy=='') { $errortherapie=1; $error=0; $errornum++;};
 					  
 	                  $referrer_notes=trim($referrer_notes);
-					  if ($referrer_notes=='') { $errorbesonder=1; $error=1; $errornum++;};
+					  if ($referrer_notes=='') { $errorbesonder=1; $error=0; $errornum++;};
 					  
 	                  $encounter_class_nr=trim($encounter_class_nr);
-					  if ($encounter_class_nr=='') { $errorstatus=1; $error=1; $errornum++;};
-	
-			          if($insurance_show) {
-                          if(trim($insurance_nr) && (trim($insurance_firm_name)=='')) { $errorinsnr=1; $error=1; $errornum++;}
-		              }
-	              }
- 				
-				
+		
+					  if ($encounter_class_nr=='') { $errorstatus=1; $error=0; $errornum++;};
+					  if(!trim($insurance_nr)|| !trim($insurance_firm_name)) { $errorinsnr=1; $error=2; $errornum=1;}
+					  //Modifiche fino a qui
+					  // ERA IL CONTROLLO SU POLIZZA E ASSICURAZIONE; MA PARE CHE IL NUMERO DI POLIZZA NON SIA COSI' IMPORTANTE.....
+					  /*  if($insurance_show) {
+                          if(trim($insurance_nr) && (trim($insurance_firm_name)=='') OR (!trim($insurance_nr) && (trim($insurance_firm_name)))) { $errorinsnr=1; $error=2; $errornum=1;}
+					  
+		              }*/
 
+	              }
+		
+ 		
+		     //  $_POST['insurance_nr']
+			if(!trim($_POST['insurance_nr'])|| !trim($insurance_firm_name)) 
+			  { 
+			    //	    echo "son qui";
+	    $errorinsnr=1; $error=2; $errornum=1;}	
+	    
+			//	echo "er vale".$error;
                  if(!$error) 
 	             {	
-					
+					$HTTP_POST_VARS['insurance_nr']=strtoupper($HTTP_POST_VARS['insurance_nr']);
+					//echo $HTTP_POST_VARS['insurance_nr'];
 						if(!$GLOBAL_CONFIG['patient_service_care_hide']){
 						    if(!empty($sc_care_start)) $sc_care_start=formatDate2Std($sc_care_start,$date_format);
 						    if(!empty($sc_care_end)) $sc_care_end=formatDate2Std($sc_care_end,$date_format);
@@ -176,7 +337,7 @@ if($pid!='' || $encounter_nr!='')
 						    if(!empty($sc_att_dr_end)) $sc_att_dr_end=formatDate2Std($sc_att_dr_end,$date_format);
 						    $att_dr_class=compact('sc_att_dr_nr','sc_att_dr_class_nr','sc_att_dr_start', 'sc_att_dr_end','encoder');
 						}
-
+								
 				      if($update || $encounter_nr)
 					  {
 							//echo formatDate2STD($geburtsdatum,$date_format);
@@ -210,7 +371,7 @@ if($pid!='' || $encounter_nr!='')
 							/* Determine the format of the encounter number */
 							if($GLOBAL_CONFIG['encounter_nr_fullyear_prepend']) $ref_nr=(int)date('Y').$GLOBAL_CONFIG['encounter_nr_init'];
 								else $ref_nr=$GLOBAL_CONFIG['encounter_nr_init'];
-							//echo $ref_nr;
+							$HTTP_POST_VARS['encounter_class_nr']=1;
 							switch($HTTP_POST_VARS['encounter_class_nr'])
 							{
 								case '1': $HTTP_POST_VARS['encounter_nr']=$encounter_obj->getNewEncounterNr($ref_nr+$GLOBAL_CONFIG['patient_inpatient_nr_adder'],1);
@@ -225,7 +386,7 @@ if($pid!='' || $encounter_nr!='')
 									$HTTP_POST_VARS['create_time']=date('Y-m-d H:i:s');
 									$HTTP_POST_VARS['history']='Create: '.date('Y-m-d H:i:s').' = '.$encoder;
 									//if(isset($HTTP_POST_VARS['encounter_nr'])) unset($HTTP_POST_VARS['encounter_nr']);					
-									
+									$HTTP_POST_VARS['in_ward']=1;
 									$encounter_obj->setDataArray($HTTP_POST_VARS);
 									
 									if($encounter_obj->insertDataFromInternalArray())
@@ -341,4 +502,5 @@ if($pid!='' || $encounter_nr!='')
 include_once($root_path.'include/inc_patient_encounter_type.php');		 
 
 require('./gui_bridge/default/gui_aufnahme_start.php');
+}
 ?>

@@ -248,7 +248,7 @@ $target='search';
 
 
 <p>
-<a href=<?php  	echo '"patient.php'.URL_APPEND.'&target=search">'; ?><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a>
+<a href=<?php  	echo '"aufnahme_start.php'.URL_APPEND.'&target=search">'; ?><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a>
 <p>
 
 <?php

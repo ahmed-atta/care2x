@@ -26,9 +26,9 @@ switch($target)
 	case 'search':$fileforward='aufnahme_daten_such.php'.$append; 
 						$lognote='Admision search ok';
 						break;
-	case 'archiv':$fileforward='aufnahme_list.php'.$append;
-						$lognote='Admission archive ok';
-						 break;
+						case 'archiv':$fileforward='aufnahme_list.php'.$append; 
+						$lognote='Admission archive ok'; 
+						 break; 
 	default: $target='entry';
 				$lognote='Admission ok';
 				$fileforward='aufnahme_start.php'.$append;
@@ -65,7 +65,7 @@ require($root_path.'include/inc_passcheck_head.php');
 switch($target){
 	case 'entry':$buf=$LDAdmission; break;
 	case 'search':$buf=$LDAdmTargetSearch; break;
-	case 'archiv':$buf=$LDAdmTargetArchive; break;
+	case 'archiv':$buf=$LDAdmTargetArchive; break; 
 	default: $target="entry";$buf=$LDAdmission;
 }
 
@@ -76,13 +76,16 @@ echo '
   
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
 <tr>
+
 <td colspan=3><?php if($target=="entry") echo '<img '.createLDImgSrc($root_path,'admit-blue.gif','0').' alt="'.$LDAdmit.'">';
 								else{ echo'<a href="aufnahme_pass.php?sid='.$sid.'&target=entry&lang='.$lang.'"><img '.createLDImgSrc($root_path,'admit-gray.gif','0').' alt="'.$LDAdmit.'"'; if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';}
 							if($target=="search") echo '<img '.createLDImgSrc($root_path,'such-b.gif','0').' alt="'.$LDSearch.'">';
 								else{ echo '<a href="aufnahme_pass.php?sid='.$sid.'&target=search&lang='.$lang.'"><img '.createLDImgSrc($root_path,'such-gray.gif','0').' alt="'.$LDSearch.'" ';if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';}
-							if($target=="archiv") echo '<img '.createLDImgSrc($root_path,'arch-blu.gif','0').'  alt="'.$LDArchive.'">';
-								else{ echo '<a href="aufnahme_pass.php?sid='.$sid.'&target=archiv&lang='.$lang.'"><img '.createLDImgSrc($root_path,'arch-gray.gif','0').' alt="'.$LDArchive.'" ';if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';}
-						?></td>
+
+ if($target=="archiv") echo '<img '.createLDImgSrc($root_path,'arch-blu.gif','0').'  alt="'.$LDArchive.'">';
+								else{ echo '<a href="aufnahme_pass.php?sid='.$sid.'&target=archiv&lang='.$lang.'"><img '.createLDImgSrc($root_path,'arch-gray.gif','0').' alt="'.$LDArchive.'" ';if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';} 
+
+				?></td>
 </tr>
 
 <?php require($root_path.'include/inc_passcheck_mask.php') ?>  
@@ -95,6 +98,7 @@ echo '
 <img <?php echo createComIcon($root_path,'update.gif','0','absmiddle') ?>> <a href="aufnahme_pass.php?sid=<?php echo "$sid&lang=$lang" ?>&target=search"><?php echo $LDAdmWantSearch ?></a><br>
 <?php endif ?>
 <?php if($target!="archiv") : ?>
+
 <img <?php echo createComIcon($root_path,'update.gif','0','absmiddle') ?>> <a href="aufnahme_pass.php?sid=<?php echo "$sid&lang=$lang" ?>&target=archiv"><?php echo $LDAdmWantArchive ?></a><br>
 <?php endif ?>
 <img <?php echo createComIcon($root_path,'frage.gif','0','absmiddle') ?>> <a href="javascript:gethelp('admission_how2start.php','<?php echo $target ?>','entry')"><?php echo $LDAdmHow2Enter ?></a><br>

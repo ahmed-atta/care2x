@@ -2,7 +2,7 @@
 if($parent_admit) $bgimg='tableHeaderbg3.gif';
 	else $bgimg='tableHeader_gr.gif';
 $tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
-
+//echo "gui_show_appointment.php";
 # Prepare the encounter classes into an array
 if(is_object($encounter_classes)){
 	while($ec_row=$encounter_classes->FetchRow()) $enc_class[$ec_row['class_nr']]=$ec_row;
@@ -60,7 +60,9 @@ while($row=$result->FetchRow()){
     <td><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>"><?php echo @formatDate2Local($row['date'],$date_format); ?></td>
     <td rowspan=4 valign="top"><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>">
 	<?php 
-		echo nl2br($row['purpose']);
+		//echo nl2br(str_replace("_"," ",trim($row['purpose'])));
+		$descriziones=split('#',$row['purpose']);
+		echo nl2br(str_replace("_"," ",$descriziones[0]));
 		if($row['appt_status']=='cancelled'){
 			echo '<br>______________________<br>'.$LDCancelReason.'<br>'.nl2br($row['cancel_reason']);
 		}
@@ -69,7 +71,7 @@ while($row=$result->FetchRow()){
     <td><FONT SIZE=1  FACE="Arial" color="<?php echo $tc; ?>">
 	<?php 
 	if($row['appt_status']!='cancelled'){
-		if($row['appt_status']=='done'){
+		if($row['appt_status']=='Fatto'){
 			$urg_img='check-r.gif';
 		}else{
 			$urg_img='level_'.$row['urgency'].'.gif';
@@ -77,7 +79,7 @@ while($row=$result->FetchRow()){
 		echo '<img '.createComIcon($root_path,$urg_img,'0','absmiddle').'>'; 
 	?>
 <?php 
-		if($row['appt_status']=='done' && $row['encounter_nr']){
+		if($row['appt_status']=='Fatto' && $row['encounter_nr']){
 			echo '<a href="'.$root_path.'modules/registration_admission/aufnahme_daten_zeigen.php'.URL_APPEND.'&encounter_nr='.$row['encounter_nr'].'&origin=appt&target='.$target.'">'.$row['encounter_nr'].'</a>';
 		}
 	}else{
@@ -90,12 +92,14 @@ while($row=$result->FetchRow()){
 		if($row['appt_status']=='pending'){
 			if(!$death_date||$death_date=='0000-00-00'){
 	?>
+	<!-- COMMENTO NOSTRO
 	<a href="<?php echo $thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=select&nr='.$row['nr']; ?>"><img <?php echo createLDImgSrc($root_path,'edit_sm.gif','0'); ?>></a> <br> 
 	<a href="javascript:checkApptDate('<?php echo $row['date'] ?>','<?php echo $row['encounter_class_nr'] ?>','<?php echo $row['nr'] ?>' )"><img <?php echo createLDImgSrc($root_path,'admit_sm.gif','0'); ?>></a> <br>
 	<?php
 			}
 	?>
 	<a href="javascript:cancelAppointment(<?php echo $row['nr']; ?>)"><img <?php echo createLDImgSrc($root_path,'cancel_sm.gif','0'); ?>></a>
+	-->
 	<?php
 		}else{
 			echo '&nbsp;';
@@ -151,7 +155,7 @@ if(!$death_date||$death_date=='0000-00-00'){
 ?>
 <img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle'); ?>>
 <a href="<?php echo $thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new'; ?>"> 
-<?php echo $LDScheduleNewAppointment; ?>
+<?php echo $LDScheduleNewAppointment;?>
 </a>
 <?php
 }

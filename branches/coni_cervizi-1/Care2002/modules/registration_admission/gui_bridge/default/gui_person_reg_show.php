@@ -61,10 +61,9 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
 <FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php echo $LDPatientRegister ?></STRONG> <font size=+2>(<?php echo ($pid) ?>)</font></FONT>
 </td>
-
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
 <a href="javascript:gethelp('person_admit.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
-if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo "startframe.php?sid=".$sid."&lang=".$lang; 
+if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo "../../main/startframe.php?sid=".$sid."&lang=".$lang; 
 	else echo $breakfile."?sid=$sid&target=entry&lang=$lang"; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </td>
 </tr>
@@ -93,7 +92,8 @@ require('./gui_bridge/default/gui_tabs_patreg.php');
 <!-- Load the options table  -->
 <td rowspan=30  valign="top">
 <?php
-require('./gui_bridge/default/gui_patient_reg_options.php');
+
+require('gui_patient_reg_options.php');
 ?>
 </td>
 
@@ -154,7 +154,7 @@ if (!$GLOBAL_CONFIG['person_name_2_hide']&&$name_2)
 {
 createTR($LDName2,$name_2);
 }
-
+/*
 if (!$GLOBAL_CONFIG['person_name_3_hide']&&$name_3)
 {
 createTR( $LDName3,$name_3);
@@ -174,6 +174,7 @@ if (!$GLOBAL_CONFIG['person_name_others_hide']&&$name_others)
 {
 createTR($LDNameOthers,$name_others);
 }
+*/
 ?>
 
 <tr>
@@ -194,7 +195,7 @@ if($death_date&&$death_date!='0000-00-00'){
 
 </tr>
 
-
+<!-- COMMENTATO DA NOI!!!!!!!!
 <tr>
 <td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php echo $LDBloodGroup ?>:
 </td>
@@ -202,6 +203,7 @@ if($death_date&&$death_date!='0000-00-00'){
 <?php 
 	$buf='LD'.$blood_group;
 	echo $$buf;
+      
 ?>
 </td>
 </tr>
@@ -218,7 +220,7 @@ if($civil_status=="single") echo $LDSingle;
     elseif($civil_status=="separated") echo  $LDSeparated ?>
 </td>
 </tr>
-
+-->
 
 <tr>
 <td colspan=3><FONT SIZE=-1  FACE="Arial"><?php echo $LDAddress ?>:
@@ -236,14 +238,24 @@ if($civil_status=="single") echo $LDSingle;
 
 
 
+
+<?php
+if (!$GLOBAL_CONFIG['person_sss_nr_hide']&&$sss_nr)
+{
+createTR($LDSSSNr,$sss_nr,2);
+}?>
+
+
 <tr>
-<td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial">&nbsp;&nbsp;&nbsp;<?php echo $LDTownCity ?>:
+<td bgColor="#eeeeee" ><FONT SIZE=-1  FACE="Arial,verdana,sans serif"><?php echo $LDZipCode ?>:
 </td>
-<td bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial"><?php echo $addr_citytown_name; ?>
-</td>
-<td bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial">&nbsp;&nbsp;&nbsp;<?php echo $LDZipCode ?>: <?php echo $addr_zip; ?>
+<td colspan=2 bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial,verdana,sans serif"><?php echo $addr_zip; ?>
 </td>
 </tr>
+
+
+
+
 
  <?php
 
@@ -253,13 +265,13 @@ createTR($LDInsuranceNr,$insurance_nr,2);
 $buffer=$insurance_class_info['LD_var'];
 if(isset($$buffer)&&!empty($$buffer)) createTR($LDInsuranceClass,$$buffer,2);
     else createTR($LDInsuranceClass,$insurance_class_info['name'],2);
-createTR($LDInsuranceCo.' 1',$insurance_firm_name,2);
+createTR($LDInsuranceCo,$insurance_firm_name,2);
 }
 
 
 if (!$GLOBAL_CONFIG['person_phone_1_nr_hide']&&$phone_1_nr)
 {
-createTR($LDPhone.' 1',$phone_1_nr,2);
+createTR($LDPhone,$phone_1_nr,2);
 }
 
 if (!$GLOBAL_CONFIG['person_phone_2_nr_hide']&&$phone_2_nr)
@@ -269,7 +281,7 @@ createTR($LDPhone.' 2',$phone_2_nr,2);
 
 if (!$GLOBAL_CONFIG['person_cellphone_1_nr_hide']&&$cellphone_1_nr)
 {
-createTR($LDCellPhone.' 1',$cellphone_1_nr,2);
+createTR($LDCellPhone,$cellphone_1_nr,2);
 }
 
 if (!$GLOBAL_CONFIG['person_cellphone_2_nr_hide']&&$cellphone_2_nr)
@@ -298,17 +310,14 @@ if (!$GLOBAL_CONFIG['person_email_hide']&&$email)
 
 if (!$GLOBAL_CONFIG['person_citizenship_hide']&&$citizenship)
 {
-createTR($LDCitizenship,$citizenship,2);
+createTR('Provincia'/*$LDCitizenship*/,$citizenship,2);//MOD. GIORGIO 26/10/04
 }
 
-if (!$GLOBAL_CONFIG['person_sss_nr_hide']&&$sss_nr)
-{
-createTR($LDSSSNr,$sss_nr,2);
-}
+
 
 if (!$GLOBAL_CONFIG['person_nat_id_nr_hide']&&$nat_id_nr)
 {
-createTR($LDNatIdNr,$nat_id_nr,2);
+createTR("Societa' Sportiva",$nat_id_nr,2);
 }
 
 if (!$GLOBAL_CONFIG['person_religion_hide']&&$religion)
@@ -354,8 +363,11 @@ if($current_encounter){
 # Else if person still living, show button links to admission
 }elseif(!$death_date||$death_date=='0000-00-00'){
 ?>
-<a href="<?php echo $admissionfile ?>&pid=<?php echo $pid ?>&origin=patreg_reg&encounter_class_nr=1"><img <?php echo createLDImgSrc($root_path,'admit_inpatient.gif','0','absmiddle') ?>></a>
+
+<a href="<?php echo $admissionfile ?>&pid=<?php echo $pid ?>&origin=patreg_reg&encounter_class_nr=1"><img <?php echo createLDImgSrc($root_path,'admit_inpatient.gif','0','absmiddle') ?>></a> 
+   <!-- Così eliminiamo la possibilità di scegliere tra paziente interno o esterno e lasciamo solo gli interno, ma questo lo sappiamo solo noi, la trasparenza per l'urtente non è necessaria, basta che esista una sola classe di pazienti
 <a href="<?php echo $admissionfile ?>&pid=<?php echo $pid ?>&origin=patreg_reg&encounter_class_nr=2"><img <?php echo createLDImgSrc($root_path,'admit_outpatient.gif','0','absmiddle') ?>></a>
+-->
 <?php
 }
 ?>
@@ -383,8 +395,8 @@ if($current_encounter){
 
 <p>
 <a href="
-<?php if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) echo $root_path.'main/startframe.php'.URL_APPEND;
-	else echo $breakfile.URL_APPEND;
+<?php if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) echo $root_path.'registration_admission/aufnahme_start.php'.URL_APPEND;
+	else echo "aufnahme_start.php".URL_APPEND;
 	echo ;
 ?>
 "><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>

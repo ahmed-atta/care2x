@@ -1,5 +1,11 @@
 <?php
 
+//debug
+/*while(list($a,$b)=each($HTTP_POST_VARS))
+{
+echo $a."##".$b."@@<br>";
+}*/
+
 require('./gui_bridge/default/gui_std_tags.php');
 
 $error_fontcolor='red';
@@ -28,6 +34,11 @@ echo setCharSet();
 
 <script  language="javascript">
 <!-- 
+function parti()
+{
+document.getElementById('livello').style.visibility='hidden';
+document.aufnahmeform.pri.checked=true;
+}
 function forceSave(){
    document.aufnahmeform.mode.value="forcesave";
    document.aufnahmeform.submit();
@@ -42,7 +53,18 @@ function popSearchWin(target,obj_val,obj_name){
 	DSWIN<?php echo $sid ?>=window.open(urlholder,"wblabel<?php echo $sid ?>","menubar=no,width=400,height=550,resizable=yes,scrollbars=yes");
 }
 
+function controllo_atl(){
+if(document.aufnahmeform.atl.checked)
+document.aufnahmeform.atl.checked=false;
+}
+
+function controllo_pri(){
+if(document.aufnahmeform.pri.checked)
+document.aufnahmeform.pri.checked=false;
+}
+
 function chkform(d) {
+
 	 if(d.name_last.value==""){
 		alert("<?php echo $LDPlsEnterLastName; ?>");
 		d.name_last.focus();
@@ -62,6 +84,10 @@ function chkform(d) {
 		alert("<?php echo $LDPlsEnterStreetName; ?>");
 		d.addr_str.focus();
 		return false;
+	}else if(d.cellphone_1_nr.value==""){
+		alert('Mobile necessario (se non disponibile mettere -)');
+		d.cellphone_1_nr.focus();
+		return false;
 	}else if(d.addr_str_nr.value==""){
 		alert("<?php echo $LDPlsEnterBldgNr; ?>");
 		d.addr_str_nr.focus();
@@ -73,6 +99,38 @@ function chkform(d) {
 	}else if(d.user_id.value==""){
 		alert("<?php echo $LDPlsEnterFullName; ?>");
 		d.user_id.focus();
+		return false;
+	}else if(d.citizenship.value==""){
+		alert("Indicare la provincia di residenza");
+		d.user_id.focus();
+		return false;
+	}else if(d.sss_nr.value==""){
+		alert("Indicare la localita' di residenza");
+		d.sss_nr.focus();
+		return false;
+	}
+	else{
+		return true;
+	}
+}
+
+function controlla_campi_atl(){
+//window.alert(document.aufnahmeform.name_maiden.value);
+if(document.aufnahmeform.atl.checked==true && document.aufnahmeform.name_maiden.value==''){
+		alert('Bisogna inserire uno Sport');
+		document.aufnahmeform.name_maiden.focus();
+		return false;
+	}/*else if(document.aufnahmeform.atl.checked==true && document.aufnahmeform.name_3.value==''){
+		alert('Specialit&agrave/Ruolo/Categoria');
+		document.aufnahmeform.name_3.focus();
+		return false;
+	}*/else if(document.aufnahmeform.atl.checked==true && document.aufnahmeform.nat_id_nr.value==''){
+		alert('Bisogna inserire una Societ&agrave Sportiva');
+		document.aufnahmeform.nat_id_nr.focus();
+		return false;
+	} else if(document.aufnahmeform.atl.checked==true && document.aufnahmeform.religion.value==''){
+		alert('Bisogna inserire la Federazione');
+		document.aufnahmeform.religion.focus();
 		return false;
 	}else{
 		return true;
@@ -95,7 +153,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 </HEAD>
 
 
-<BODY bgcolor="<?php echo $cfg['bot_bgcolor'];?>" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="if (window.focus) window.focus();" 
+<BODY onLoad="javascript:parti()" bgcolor="<?php echo $cfg['bot_bgcolor'];?>" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="if (window.focus) window.focus();" 
 <?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
 
 
@@ -125,7 +183,7 @@ require('./gui_bridge/default/gui_tabs_patreg.php');
 
 <FONT    SIZE=-1  FACE="Arial">
 
-<form method="post" action="<?php echo $thisfile; ?>" name="aufnahmeform" ENCTYPE="multipart/form-data" onSubmit="return chkform(this)">
+<form method="post" action="<?php echo $thisfile; ?>" name="aufnahmeform" ENCTYPE="multipart/form-data" onSubmit="return (chkform(this) && controlla_campi_atl())" >
 
 <table border=0 cellspacing=0 cellpadding=0>
 
@@ -246,7 +304,15 @@ require('./gui_bridge/default/gui_tabs_patreg.php');
 <td><FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo convertTimeToLocal(formatDate2Local($date_reg,$date_format,0,1)); ?>
 </td>
 </tr>
-
+<!-- AGGIUNTO DA NOI PER METTERE SE SIA UN ATLETA O UN PRIVATO, NEL PRIMO CASO COMPAIONO I CAMPI NECESSARI PER L'ATLETA -->
+<tr>
+<td><FONT SIZE=-1  FACE="Arial"><?php echo "<font size='3' color='red'><b>Atleta</b></font>"; ?>
+<input type="radio" name="atl" value="atleta" onclick="document.getElementById('livello').style.visibility='visible'; javascript:controllo_pri()"  ></td>
+<td><FONT SIZE=-1  FACE="Arial" ><?php echo "<font size='3' ><b>Privato</b></font>"; ?>
+<input type="radio" name="pri" value="privato" onclick="document.getElementById('livello').style.visibility='hidden'; javascript:controllo_atl()"  >
+</td>
+</tr>
+<!-- TERMINE AGGIUNTA -->
 <tr>
 <td><FONT SIZE=-1  FACE="Arial"><?php echo $LDTitle ?>:
 </td>
@@ -256,33 +322,14 @@ require('./gui_bridge/default/gui_tabs_patreg.php');
 </tr>
 
 <?php
-createTR($errornamelast, 'name_last', $LDLastName,$name_last,'','',TRUE);
-createTR($errornamefirst, 'name_first', $LDFirstName,$name_first,'','',TRUE);
+createTR($errornamelast, 'name_last', "* ".$LDLastName,$name_last,'','',TRUE);
+createTR($errornamefirst, 'name_first', "* ".$LDFirstName,$name_first,'','',TRUE);
 
 if (!$person_name_2_hide)
 {
 createTR($errorname2, 'name_2', $LDName2,$name_2);
 }
 
-if (!$person_name_3_hide)
-{
-createTR($errorname3, 'name_3', $LDName3,$name_3);
-}
-
-if (!$person_name_middle_hide)
-{
-createTR($errornamemid, 'name_middle', $LDNameMid,$name_middle);
-}
-
-if (!$person_name_maiden_hide)
-{
-createTR($errornamemaiden, 'name_maiden', $LDNameMaiden,$name_maiden);
-}
-
-if (!$person_name_others_hide)
-{
-createTR($errornameothers, 'name_others', $LDNameOthers,$name_others);
-}
 ?>
 
 <tr>
@@ -306,8 +353,10 @@ createTR($errornameothers, 'name_others', $LDNameOthers,$name_others);
        }*/
  ?>"
  onFocus="this.select();"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"> 
- <a href="javascript:show_calendar('aufnahmeform.date_birth','<?php echo $date_format ?>')">
+<!-- 
+<a href="javascript:show_calendar('aufnahmeform.date_birth','<?php echo $date_format ?>')">
  <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a> 
+-->
  <font size=1>[ <?php   
  $dfbuffer="LD_".strtr($date_format,".-/","phs");
   echo $$dfbuffer;
@@ -326,12 +375,12 @@ if ($errorsex) echo "</font>";
  ?>
  </td>
 </tr>
-
+ <!-- COMMENTATO DA NOI!!!!!!!!
 <tr>
 <td><FONT SIZE=-1  FACE="Arial"><?php echo $LDBloodGroup ?>:
 </td>
 <td colspan=2><FONT SIZE=-1  FACE="Arial">
-<input name="blood_group" type="radio" value="A"  <?php if($blood_group=='A') echo 'checked'; ?>><?php echo $LDA ?>&nbsp;&nbsp;
+ <input name="blood_group" type="radio" value="A"  <?php if($blood_group=='A') echo 'checked'; ?>><?php echo $LDA ?>&nbsp;&nbsp;
 <input name="blood_group" type="radio" value="B"  <?php if($blood_group=='B') echo 'checked'; ?>><?php echo $LDB ?>&nbsp;&nbsp;
 <input name="blood_group" type="radio" value="AB"  <?php if($blood_group=='AB') echo 'checked'; ?>><?php echo $LDAB ?>&nbsp;&nbsp;
 <input name="blood_group" type="radio" value="O"  <?php if($blood_group=='O') echo 'checked'; ?>><?php echo $LDO ?>
@@ -349,8 +398,19 @@ if ($errorsex) echo "</font>";
 <FONT SIZE=-1  FACE="Arial"> <input name="civil_status" type="radio" value="separated"  <?php if($civil_status=="separated") echo "checked"; ?>><?php echo $LDSeparated ?>&nbsp;&nbsp;
 </td>
 </tr>
-
- 
+-->
+ <?php
+ if (!$person_name_middle_hide)
+{
+?><tr>
+<td><FONT SIZE=-1  FACE="Arial,verdana,sans serif"><?php if ($errornameid||$red) echo '<font color="'.$error_fontcolor.'">'; ?><font color=#ff0000>* <?php echo "Localita' di Nascita" ?>:</font>
+</td>
+<td colspan=2><input name="<?php echo 'name_middle'; ?>" type="text" size="35" value="<?php echo $name_middle; ?>" >
+</td>
+</tr>
+<?php
+}
+?>
 <tr>
 <td colspan=2><FONT SIZE=-1  FACE="Arial"><?php if ($erroraddress) echo "<font color=red>"; ?><?php echo $LDAddress ?></font>:
 </td>
@@ -365,60 +425,116 @@ if ($errorsex) echo "</font>";
 </td>
 </tr>
 
+<?
+if (!$person_sss_nr_hide)
+{
+//createTR($errorsss, 'sss_nr', $LDSSSNr,$sss_nr,2);
+?>
 <tr>
-<td><FONT SIZE=-1  FACE="Arial"><?php if ($errortown) echo "<font color=red>"; ?><?php echo $LDTownCity ?>:
+<td><FONT SIZE=-1  FACE="Arial,verdana,sans serif"><?php if ($errorsss||$red) echo '<font color="red">'; ?><font color=#ff0000>* <?php echo $LDSSSNr ?>:</font>
 </td>
-<td><input name="addr_citytown_name" type="text" size="35" value="<?php echo $addr_citytown_name; ?>" ><a href="javascript:popSearchWin('citytown','aufnahmeform.addr_citytown_nr','aufnahmeform.addr_citytown_name')"><img <?php echo createComIcon($root_path,'b-write_addr.gif','0') ?>></a>
+<td colspan=1><input name="<?php echo "sss_nr" ?>" type="text" size="35" value="<?php echo $sss_nr ?>" >
 </td>
-<td>&nbsp;&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if ($errorzip) echo "<font color=red>"; ?><font color=#ff0000>* <?php echo $LDZipCode ?>:<input name="addr_zip" type="text" size="10" value="<?php echo $addr_zip; ?>" >
 
+<td>&nbsp;   <FONT SIZE=-1  FACE="Arial"><?php if ($errorzip) echo "<font color=red>"; ?><font color=#ff0000>* <?php echo $LDZipCode ?>:<input name="addr_zip" type="text" size="10" value="<?php echo $addr_zip; ?>" >
 </td>
 </tr>
+<?php
+}
+
+
+?>
+<!--<tr>
+
+<td><FONT SIZE=-1  FACE="Arial"><?php if ($errortown) echo "<font color=red>"; ?>
+<font color=#ff0000>* <?php echo "Localita' di Nascita" ?>:</font></td>
+<td><input name="localita_nascita" type="text" size="35" value="<?php echo $addr_citytown_name; ?>" ><!--<a href="javascript:popSearchWin('citytown','aufnahmeform.addr_citytown_nr','aufnahmeform.addr_citytown_name')"><img <?php echo createComIcon($root_path,'b-write_addr.gif','0') ?>></a>
+</td>-->
+
+<!--
+<?php
+//PROVA PROVA
+if (!$person_citizenship_hide)
+{
+createTR($errorcitizen, 'citizenship', $LDCitizenship,$citizenship,2);
+}
+?>
+-->
+
+<tr>
+	<td>
+	<FONT SIZE=-1  FACE="Arial,verdana,sans serif">	
+	<?php if ($errorcitizen||$red) echo '<font color="'.$error_fontcolor.'">'; ?>
+	<font color="red">* 
+	<?php echo "Prov." ?>:</font>
+	</td>
+	<td colspan=2><input name="citizenship" type="text" size="2" maxlength="2" value="<?php echo $citizenship ; ?>" ><?php echo "<font size='-1'>INSERIRE LA SIGLA AUTOMOBILISTICA</font>";	?>
+	</td>
+</tr>
+
+
 
 <?php
+
 if($insurance_show) {
     if (!$person_insurance_1_nr_hide) {
-        createTR($errorinsurancenr, 'insurance_nr', $LDInsuranceNr.' 1',$insurance_nr,2);
+      //  createTR($errorinsurancenr, 'insurance_nr', $LDInsuranceNr.' ',$insurance_nr,2);
+
 ?>
 <tr>
 <td>&nbsp;
 </td>
 <td colspan=2><FONT SIZE=-1  FACE="Arial"><?php if ($errorinsuranceclass) echo '<font color="'.$error_fontcolor.'">'; ?>
 <?php
-if($insurance_classes!=false){
+       
+	/* if($insurance_classes!=false){
     while($result=$insurance_classes->FetchRow()) {
+	*/	
 ?>
-<input name="insurance_class_nr" type="radio"  value="<?php echo $result['class_nr']; ?>"  <?php if($insurance_class_nr==$result['class_nr']) echo 'checked'; ?>>
-<?php 
-        $LD=$result['LD_var'];
+<!-- COMMENTATO DA NOI!!!!!!!
+ <input name="insurance_class_nr" type="radio"  value="<?php echo $result['class_nr']; ?>"  <?php/* if($insurance_class_nr==$result['class_nr']) echo 'checked'; */?>>
+-->
+   <?php /*
+          $LD=$result['LD_var'];
         if(isset($$LD)&&!empty($$LD)) echo $$LD; else echo $result['name'];
         echo '&nbsp;';
 	}
 } else echo "no insurance class";
+	 */
 ?>
+   
 </td>
+
 </tr>
+
 <tr>
+<!-- COMMENTATO DA NOI!!!!!!!!!!!!!!!!!!!
 <td><FONT SIZE=-1  FACE="Arial"><?php if ($errorinsurancecoid) echo '<font color="'.$error_fontcolor.'">'; ?><?php echo $LDInsuranceCo ?>:
 </td>
+
 <td colspan=2><input name="insurance_firm_name" type="text" size="35" value="<?php echo $insurance_firm_name; ?>" ><a href="javascript:popSearchWin('insurance','aufnahmeform.insurance_firm_id','aufnahmeform.insurance_firm_name')"><img <?php echo createComIcon($root_path,'b-write_addr.gif','0') ?>></a>
 </td>
+-->
 </tr>
 <?php
     }
 } else {
+
 ?>
 
   <tr>
-    <td colspan=2><a><?php echo $LDSeveralInsurances; ?><img <?php echo createComIcon($root_path,'frage.gif','0') ?>></a></td>
+     <td colspan=2><a><?php echo $LDSeveralInsurances; ?><img <?php echo createComIcon($root_path,'frage.gif','0') ?>></a></td>
   </tr>
-   
+
+  
 <?php
+    
 }
+
 
 if (!$person_phone_1_nr_hide)
 {
-createTR($errorphone1, 'phone_1_nr', $LDPhone.' 1',$phone_1_nr,2);
+createTR($errorphone1, 'phone_1_nr', $LDPhone.' ',$phone_1_nr,2);
 }
 
 if (!$person_phone_2_nr_hide)
@@ -428,7 +544,20 @@ createTR($errorphone2, 'phone_2_nr', $LDPhone.' 2',$phone_2_nr,2);
 
 if (!$person_cellphone_1_nr_hide)
 {
-createTR($errorcell1, 'cellphone_1_nr', $LDCellPhone.' 1',$cellphone_1_nr,2);
+#createTR($errorcell1, 'cellphone_1_nr', $LDCellPhone.' ',$cellphone_1_nr,2);
+?>
+
+
+
+
+
+<tr>
+<td><FONT SIZE=-1  FACE="Arial,verdana,sans serif"><?php if ($errorcell1||$red) echo '<font color="'.$error_fontcolor.'">'; ?><font color="red">* <?php echo "Mobile" ?>:</font>
+</td>
+<td colspan=2><input name="<?php echo 'cellphone_1_nr'; ?>" type="text" size="35" value="<?php echo $cellphone_1_nr; ?>" >
+</td>
+</tr>
+<?php
 }
 
 if (!$person_cellphone_2_nr_hide)
@@ -446,31 +575,12 @@ if (!$person_email_hide)
 createTR($erroremail, 'email', $LDEmail,$email,2);
 }
 
+/*
 if (!$person_citizenship_hide)
 {
 createTR($errorcitizen, 'citizenship', $LDCitizenship,$citizenship,2);
 }
-
-if (!$person_sss_nr_hide)
-{
-createTR($errorsss, 'sss_nr', $LDSSSNr,$sss_nr,2);
-}
-
-if (!$person_nat_id_nr_hide)
-{
-createTR($errornatid, 'nat_id_nr', $LDNatIdNr,$nat_id_nr,2);
-}
-
-if (!$person_religion_hide)
-{
-createTR($errorreligion, 'religion', $LDReligion,$religion,2);
-}
-
-if (!$person_ethnic_orig_hide)
-{
-createTR($errorethnicorig, 'ethnic_orig', $LDEthnicOrigin,$ethnic_orig,2);
-}
-
+*/
 
 ?>
 <tr>
@@ -483,6 +593,72 @@ createTR($errorethnicorig, 'ethnic_orig', $LDEthnicOrigin,$ethnic_orig,2);
 
 
 </table>
+<!-- COSA AGGIUNTA DA NOI PER RENDERE OBBLIGATORI I CAMPI PER L'ATLETA -->
+<div ID="livello">
+	<table>
+				<?php
+					if (!$person_name_maiden_hide)
+{?>   
+<tr>
+<td><FONT SIZE=-1  FACE="Arial,verdana,sans serif"><?php if ($errornamemaiden||$red) echo '<font color="'.$error_fontcolor.'">'; ?><font color="blue">* <?php echo "Sport" ?>:</font>
+</td>
+<td colspan=2><input name="<?php echo 'name_maiden'; ?>" type="text" size="35" value="<?php echo $name_maiden; ?>" readonly>
+<a href="javascript:popSearchWin('sport','aufnahmeform.name_maiden','aufnahmeform.name_maiden')"><img <?php echo createComIcon($root_path,'b-write_addr.gif','0') ?>></a>
+</td>
+</tr>
+<?php
+}
+
+if (!$person_name_3_hide)
+{?><tr>
+<td><FONT SIZE=-1  FACE="Arial,verdana,sans serif"><?php if ($errorname3||$red) echo '<font color="'.$error_fontcolor.'">'; ?><font color="blue">* <?php echo "Specialita'/Ruolo/Categoria" ?>:</font>
+</td>
+<td colspan=2><input name="<?php echo 'name_3'; ?>" type="text" size="35" value="<?php echo $name_3; ?>" readonly>
+<a href="javascript:popSearchWin('specialita','aufnahmeform.name_3','aufnahmeform.name_3')"><img <?php echo createComIcon($root_path,'b-write_addr.gif','0') ?>></a>
+</td>
+</tr>
+<?php
+}
+
+
+
+
+if (!$person_name_others_hide)
+{?><tr>
+<td><FONT SIZE=-1  FACE="Arial,verdana,sans serif"><?php if ($errornameothers||$red) echo '<font color="'.$error_fontcolor.'">'; ?><font color="blue">* <?php echo "Inizio attivita' ad anni" ?>:</font>
+</td>
+<td colspan=2><input name="<?php echo 'name_others'; ?>" type="text" size="35" value="<?php echo $name_others; ?>" >
+</td>
+</tr>
+<?php
+}
+
+if (!$person_nat_id_nr_hide)
+{?><tr>
+<td><FONT SIZE=-1  FACE="Arial,verdana,sans serif"><?php if ($errornatid||$red) echo '<font color="'.$error_fontcolor.'">'; ?><font color="blue">* <?php echo "Societa' sportiva" ?>:</font>
+</td>
+<td colspan=2><input name="<?php echo 'nat_id_nr'; ?>" type="text" size="35" value="<?php echo $nat_id_nr; ?>" >
+</td>
+</tr>
+<?php
+}
+
+if (!$person_religion_hide)
+{?><tr>
+<td><FONT SIZE=-1  FACE="Arial,verdana,sans serif"><?php if ($errorreligion||$red) echo '<font color="'.$error_fontcolor.'">'; ?><font color="blue">* <?php echo $LDReligion ?>:</font>
+</td>
+<td colspan=2><input name="<?php echo 'religion'; ?>" type="text" size="35" value="<?php echo $religion; ?>" readonly>
+<a href="javascript:popSearchWin('federazioni','aufnahmeform.religion','aufnahmeform.religion')"><img <?php echo createComIcon($root_path,'b-write_addr.gif','0') ?>></a>
+</td>
+</tr>
+
+   
+<?php
+}
+				?>		
+	</table>
+</div>
+<!-- COSA AGGIUNTA DA NOI PER RENDERE OBBLIGATORI I CAMPI PER L'ATLETA -->
 <p>
 <INPUT TYPE="hidden" name="MAX_FILE_SIZE" value="1000000">
 <input type="hidden" name="itemname" value="<?php echo $itemname; ?>">
@@ -502,7 +678,7 @@ createTR($errorethnicorig, 'ethnic_orig', $LDEthnicOrigin,$ethnic_orig,2);
 }
 ?>
 
-<input  type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?>  alt="<?php echo $LDSaveData ?>" align="absmiddle"> 
+<input  type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?>  alt="<?php echo $LDSaveData ?>" align="absmiddle" > 
 <a href="javascript:document.aufnahmeform.reset()"><img <?php echo createLDImgSrc($root_path,'reset.gif','0') ?> alt="<?php echo $LDResetData ?>"   align="absmiddle"></a>
 
 <?php if($error||$error_person_exists) echo '<input  type="button" value="'.$LDForceSave.'" onClick="forceSave()">'; ?>
@@ -536,7 +712,8 @@ createTR($errorethnicorig, 'ethnic_orig', $LDEthnicOrigin,$ethnic_orig,2);
 <p>
 </td>
 </tr>
-</table>        
+</table>     
+
 <p>
 <ul>
 <FONT    SIZE=2  FACE="Arial">
@@ -545,8 +722,8 @@ createTR($errorethnicorig, 'ethnic_orig', $LDEthnicOrigin,$ethnic_orig,2);
 
 <p>
 <a href="
-<?php if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) echo $breakfile;
-	else echo 'aufnahme_pass.php';
+<?php if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) echo 'aufnahme_start.php';
+	else echo 'aufnahme_start.php';
 	echo URL_APPEND;
 ?>
 "><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>

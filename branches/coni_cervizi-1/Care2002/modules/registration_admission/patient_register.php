@@ -84,13 +84,13 @@ if($dblink_ok) {
             if (trim($addr_str_nr)=='') { $errorstreetnr=1; $error++;}
             if ($addr_citytown_nr&&(trim($addr_citytown_name)=='')) { $errortown=1; $error++;}
             if ($sex=='') { $errorsex=1; $error++;}
-			
+	    /*COMMENTAIMO NOI SEMPRE PER LEVARE IL CONTROLLO INCROCIATO TRA POLIZZA E COMPAGNIA ASSICURATIVA			
 			if($insurance_show) {
                 if(trim($insurance_nr) && (trim($insurance_firm_name)=='')) { $errorinsurancecoid=1; $error++;}
 		    }
-			
+	    */	
         }
-	
+	    	
         /* If the validation produces no error, save the data */
         if(!$error) {	
             /* Save the old filename for testing */
@@ -139,7 +139,7 @@ if($dblink_ok) {
 						 religion='$religion',
 						 ethnic_orig='$ethnic_orig',
 						 date_update='".date('Y-m-d H:i:s')."',";
-
+//citizenship='$citizenship',
 			   //if ($old_fn!=$photo_filename){
 			   if ($valid_image){
 					# Compose the new filename
@@ -185,7 +185,8 @@ if($dblink_ok) {
 					  }
                  }				
 			      $newdata=1;
-				  //echo $sql;
+			      //DEBUG
+				 //echo $sql;
 			
 			      header("Location: patient_register_show.php".URL_REDIRECT_APPEND."&pid=$pid&from=$from&newdata=1&target=entry");
 			      exit;     
@@ -194,6 +195,7 @@ if($dblink_ok) {
 			      $db->RollbackTrans();
 			  }
             } else {
+            //INSERISCI UN NUOVO PAZIENTE
                  $from='entry';
 				 //echo $GLOBAL_CONFIG['person_id_nr_init']." goog";
 				 //echo $HTTP_POST_VARS['pid'];
@@ -204,6 +206,7 @@ if($dblink_ok) {
 				 //$HTTP_POST_VARS['modify_id']=$user_id;
 				 $HTTP_POST_VARS['create_id']=$user_id;
 				 $HTTP_POST_VARS['create_time']=date('YmdHis');
+				 
 				 				 # Prepare internal data to be stored together with the user input data
 				if(!$person_obj->InitPIDExists($GLOBAL_CONFIG['person_id_nr_init'])){
 					# If db is mysql, insert the initial pid value  from global config
@@ -268,7 +271,9 @@ if($dblink_ok) {
                  			}				
 			
 			        		$newdata=1;
-						
+							
+							//ESCO DA QUI !!! SALTO IL REINDIRIZZAMENTO
+							//exit;
 			          		header("Location: patient_register_show.php".URL_REDIRECT_APPEND."&pid=$pid&from=$from&newdata=1&target=entry");
 			          		exit;     
 		         		}else {echo "<p>$db->ErrorMsg()<p>$LDDbNoSave";}

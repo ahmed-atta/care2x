@@ -1,7 +1,7 @@
 <?php
 
 require('./gui_bridge/default/gui_std_tags.php');
-
+echo "gui_person_reg_showdetail.php";
 
 function createTR($ld_text, $input_val, $colspan = 1)
 {

@@ -44,6 +44,8 @@ function cancelEnc(){
 //-->
 </script>
 <?php
+
+
 # Let us detect if data entry is allowed
 	//echo $enc_status['is_disharged'].'<p>'. $enc_status['encounter_status'].'<p>d= '. $enc_status['in_dept'].'<p>w= '. $enc_status['in_ward'];
 /*	if($enc_status['is_disharged']){
@@ -54,6 +56,9 @@ function cancelEnc(){
 		if(!$enc_status['in_ward']&&!$enc_status['in_dept']) $data_entry=false;
 	}
 */
+
+
+
 if(!$is_discharged&&!$enc_status['in_ward']&&!$enc_status['in_dept']&&(!$enc_status['encounter_status']||stristr('cancelled',$enc_status['encounter_status']))){
 //if(!$enc_status['is_discharged']&&!$enc_status['in_ward']&&!$enc_status['in_dept']&&(!$enc_status['encounter_status']||stristr('cancelled',$enc_status['encounter_status']))){
 	$data_entry=false;
@@ -165,13 +170,31 @@ if($data_entry){
 
 # If encounter_status empty or 'allow_cancel', show the cancel option link
 //if(!$enc_status['is_discharged']&&!$enc_status['in_ward']&&!$enc_status['in_dept']&&(empty($enc_status['encounter_status'])||$enc_status['encounter_status']=='allow_cancel')){
+
 if(!$data_entry&&($enc_status['encounter_status']!='cancelled')&&!$enc_status['is_discharged']){
-	$TP_xenc_BLK="<a href=\"javascript:cancelEnc('".$HTTP_SESSION_VARS['sess_en']."')\">$LDCancelThisAdmission</a>";
+ 
+  //MARCO ha creato questa cosa fantastica dal nulla...in pratica ha commentato la linea 179 e ha fatto l'eco della 177 consentte di dimettere un paziente
+   //echo"  <a href=\"javascript:cancelEnc('".$HTTP_SESSION_VARS['sess_en']."')\">$LDCancelThisAdmission</a>";
+
+
+//$TP_xenc_BLK="<a href=\"javascript:cancelEnc('".$HTTP_SESSION_VARS['sess_en']."')\">$LDCancelThisAdmission</a>";
 }else{
+
 	$TP_xenc_BLK="<font color='#333333'>$LDCancelThisAdmission</font>";
 }
 
 # Load the template
-$TP_options=$TP_obj->load('registration_admission/tp_pat_admit_options.htm');
-eval("echo $TP_options;");
+//Per eliminare il menù di opzioni accanto alla form visualizzata dell'accettazione del paziente, così leviamo tutto 170304
+//$TP_options=$TP_obj->load('registration_admission/tp_pat_admit_options.htm');
+//eval("echo $TP_options;");
 ?>
+<table border=2 bgcolor="#eeeeee">
+<tr>
+<td>
+<img src="../../gui/img/common/default/timeplan.gif"
+</td>
+<td>
+<a href="show_appointment.php?lang=it&target=entry&pid=<?php echo $pid ;?>">Appuntamenti</a>
+</td>
+</tr>
+</table>

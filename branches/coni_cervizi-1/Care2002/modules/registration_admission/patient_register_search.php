@@ -310,9 +310,9 @@ echo '<a href="javascript:gethelp(\'person_search_tips.php\')">'.$LDTipsTricks.'
 </td>
      </tr>
    </table>
-
+<!-- Serve per creare il bottone di annulla-->
 <p>
-<a href="<?php	echo $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a>
+<a href="<?php	echo "aufnahme_start.php"; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a>
 <p>
 
 <?php

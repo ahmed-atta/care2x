@@ -2,6 +2,7 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
+require('Mappa.php');
 /**
 * CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
@@ -45,6 +46,7 @@ if(!isset($mode)){
 	
 }
 $lang_tables=array('prompt.php','departments.php');
+
 require('./include/init_show.php');
 
 if($result=&$obj->getPersonsAppointmentsObj($pid)){
@@ -66,9 +68,11 @@ require_once($root_path.'include/care_api_classes/class_department.php');
 $dept_obj=new Department;
 $deptarray=$dept_obj->getAllMedical('name_formal');
 
-$buffer=str_replace('~tag~',$title.' '.$name_last,$LDNoRecordYet);
+//$buffer=str_replace('~tag~',$title.' '.$name_last,$LDNoRecordYet);
+$buffer=('Il paziente non ha alcun appuntamento');
 $norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer); 
 
 /* Load GUI page */
 require('./gui_bridge/default/gui_show.php');
+
 ?>

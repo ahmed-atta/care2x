@@ -64,11 +64,12 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 				  </nobr></B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><nobr><?php echo $LDPatientRegisterTxt ?></nobr></FONT></TD></TR>
-              <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
+<!--              <TR bgColor=#dddddd height=1>
+                  <TD colSpan=3><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
                   width=5></TD></TR>
-				  
+-->
+	<!--			  
                <TR bgColor=#eeeeee> <td align=center><img <?php echo createComIcon($root_path,'bn.gif','0') ?>></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B><nobr>
@@ -208,8 +209,11 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 				<a href="patient_register_pass.php<?php echo URL_APPEND; ?>&target=search&retpath=docs"><?php echo $LDBirthDetails ?></a>
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><nobr><?php echo $LDBirthDetailsTxt ?></nobr></FONT></TD></TR>					</TBODY>
-		</TABLE>
+                  size=2><nobr><?php echo $LDBirthDetailsTxt ?></nobr></FONT></TD></TR>					
+-->
+</TBODY>
+
+                </TABLE>
 		</TD></TR>
 		</TBODY>
 		</TABLE>

@@ -1,5 +1,7 @@
 <?php
+
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
@@ -98,5 +100,6 @@ if(!isset($user_id) || !$user_id)
 require_once($root_path.'include/inc_photo_filename_resolve.php');
 
 /* Load GUI page */
+
 require('./gui_bridge/default/gui_person_reg_show.php');
 ?>

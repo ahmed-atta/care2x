@@ -171,22 +171,22 @@ createTR($LDName2,$name_2);
 
 if (!$GLOBAL_CONFIG['person_name_3_hide']&&$name_3)
 {
-createTR( $LDName3,$name_3);
+createTR( "Specialita'",$name_3);
 }
 
 if (!$GLOBAL_CONFIG['person_name_middle_hide']&&$name_middle)
 {
-createTR($LDNameMid,$name_middle);
+createTR("Localita' di Nascita'",$name_middle);
 }
 
 if (!$GLOBAL_CONFIG['person_name_maiden_hide']&&$name_maiden)
 {
-createTR($LDNameMaiden,$name_maiden);
+createTR("Sport",$name_maiden);
 }
 
 if (!$GLOBAL_CONFIG['person_name_others_hide']&&$name_others)
 {
-createTR($LDNameOthers,$name_others);
+createTR("Inizio attivita' ad anni",$name_others);
 }
 ?>
 
@@ -251,7 +251,7 @@ if($mode=='show'){
 	$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
 
 	if($rows){
-
+		
 	  @ include('./gui_bridge/default/gui_'.$thisfile);
 	
 	}else{
@@ -306,7 +306,7 @@ if($parent_admit) {
 	include('./include/bottom_controls_registration_options.inc.php');
 }
 ?>
-<a href="<?php  echo $breakfile.URL_APPEND; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
+<a href="<?php  echo "aufnahme_pass.php".URL_APPEND; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
 
 <p>
 </ul>

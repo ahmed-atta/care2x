@@ -252,7 +252,7 @@ if(!isset($name_last)) $name_last='';
 if(!isset($name_first)) $name_first='';
 createTR('name_last', $LDLastName,$name_last);
 createTR( 'name_first', $LDFirstName,$name_first);
-
+/*
 if (!$GLOBAL_CONFIG['person_name_2_hide'])
 {
 if(!isset($name_2)) $name_2='';
@@ -282,7 +282,7 @@ if (!$GLOBAL_CONFIG['person_name_others_hide'])
 if(!isset($name_others)) $name_others='';
 createTR('name_others', $LDNameOthers,$name_others);
 }
-
+*/
 if(!isset($date_birth)) $date_birth='';
 if(!isset($addr_str)) $addr_str='';
 if(!isset($addr_str_nr)) $addr_str_nr='';
@@ -333,23 +333,30 @@ if(!isset($addr_city_town)) $addr_city_town='';
 <td>&nbsp;&nbsp;&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if (isset($errorstreetnr)&&$errorstreetnr) echo "<font color=red>"; ?><?php echo $LDStreetNr ?>:<input name="addr_str_nr" type="text" size="10" value="<?php echo $addr_str_nr; ?>">
 </td>
 </tr>
+<?php
+if (!$GLOBAL_CONFIG['person_sss_nr_hide'])
+{
+if(!isset($sss_nr)) $sss_nr='';
+createTR('sss_nr', $LDSSSNr,$sss_nr,2);
+}
+?>
 
-<tr>
-<td><FONT SIZE=-1  FACE="Arial"><?php echo $LDTownCity ?>:
+<!--<td><FONT SIZE=-1  FACE="Arial"><?php echo $LDTownCity ?>:
 </td>
 <td><input name="addr_citytown_name" type="text" size="35" value="<?php if(isset($addr_citytown_name)) echo $addr_citytown_name; ?>">
 <a href="javascript:popSearchWin('citytown','aufnahmeform.addr_citytown_nr','aufnahmeform.addr_citytown_name')"><img <?php echo createComIcon($root_path,'l-arrowgrnlrg.gif','0') ?>></a>
 </td>
-<td>&nbsp;&nbsp;&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if (isset($errorzip)&&$errorzip) echo "<font color=red>"; ?><?php echo $LDZipCode ?>:<input name="addr_zip" type="text" size="10" value="<?php echo $addr_zip; ?>">
+-->
+<td colspan=2><FONT SIZE=-1  FACE="Arial"><?php if (isset($errorzip)&&$errorzip) echo "<font color=red>"; ?><?php echo $LDZipCode ?>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="addr_zip" type="text" size="10" value="<?php echo $addr_zip; ?>">
 </td>
-</tr>
+
 
 <?php
 
 if (!$GLOBAL_CONFIG['person_phone_1_nr_hide'])
 {
 if(!isset($phone_1_nr)) $phone_1_nr='';
-createTR('phone_1_nr', $LDPhone.' 1',$phone_1_nr,2);
+createTR('phone_1_nr', $LDPhone,$phone_1_nr,2);
 }
 
 if (!$GLOBAL_CONFIG['person_phone_2_nr_hide'])
@@ -361,7 +368,7 @@ createTR('phone_2_nr', $LDPhone.' 2',$phone_2_nr,2);
 if (!$GLOBAL_CONFIG['person_cellphone_1_nr_hide'])
 {
 if(!isset($cellphone_1_nr)) $cellphone_1_nr='';
-createTR('cellphone_1_nr', $LDCellPhone.' 1',$cellphone_1_nr,2);
+createTR('cellphone_1_nr', $LDCellPhone,$cellphone_1_nr,2);
 }
 
 if (!$GLOBAL_CONFIG['person_cellphone_2_nr_hide'])
@@ -388,16 +395,11 @@ if(!isset($citizenship)) $citizenship='';
 createTR('citizenship', $LDCitizenship,$citizenship,2);
 }
 
-if (!$GLOBAL_CONFIG['person_sss_nr_hide'])
-{
-if(!isset($sss_nr)) $sss_nr='';
-createTR('sss_nr', $LDSSSNr,$sss_nr,2);
-}
 
 if (!$GLOBAL_CONFIG['person_nat_id_nr_hide'])
 {
 if(!isset($nat_id_nr)) $nat_id_nr='';
-createTR('nat_id_nr', $LDNatIdNr,$nat_id_nr,2);
+createTR('nat_id_nr', "Societa' sportiva",$nat_id_nr,2);
 }
 
 if (!$GLOBAL_CONFIG['person_religion_hide'])
@@ -405,12 +407,13 @@ if (!$GLOBAL_CONFIG['person_religion_hide'])
 if(!isset($religion)) $religion='';
 createTR('religion', $LDReligion,$religion,2);
 }
-
+/*
 if (!$GLOBAL_CONFIG['person_ethnic_orig_hide'])
 {
 if(!isset($ethnic_orig)) $ethnic_orig='';
 createTR('ethnic_orig', $LDEthnicOrigin,$ethnic_orig,2);
 }
+*/
 ?>
 
 </table>
@@ -448,7 +451,7 @@ createTR('ethnic_orig', $LDEthnicOrigin,$ethnic_orig,2);
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="patient_register_search.php<?php echo URL_APPEND; ?>"><?php echo $LDPatientSearch ?></a><br>
 
  --><p>
-<a href="<?php	echo 'patient.php'.URL_APPEND; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
+<a href="<?php	echo 'aufnahme_start.php'.URL_APPEND; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
 </ul>
 <p>
 <?php

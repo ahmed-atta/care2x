@@ -43,13 +43,15 @@ function chkForm(d) {
      <td></font><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDTime; ?></td>
      <td><input type="text" name="time" size=10 maxlength=10 value="<?php if(!empty($time)) echo convertTimeToLocal($time); ?>"></td>
    </tr>
+   <!--
    <tr bgcolor="#f6f6f6">
      <td><font color="red"><b>*</b><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDepartment; ?></td>
      <td>
 	    <select name="to_dept_nr">
 		<option value=""></option>
 	<?php
-		
+	
+	
 		while(list($x,$v)=each($deptarray)){
 			echo '
 				<option value="'.$v['nr'].'" ';
@@ -63,16 +65,57 @@ function chkForm(d) {
         </select>
 	 </td>
    </tr>
-   
+  --> 
    <tr bgcolor="#f6f6f6">
-     <td><font color="red"><b>*</b><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo "$LDPhysician/$LDClinician"; ?></td>
+     <!--
+	 <td><font color="red"><b>*</b><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo "$LDPhysician/$LDClinician"; ?></td>
      <td><input type="text" name="to_personell_name" size=50 maxlength=60  value="<?php if(isset($to_personell_name)) echo $to_personell_name; ?>"></td>
+	 -->
+	 
    </tr>
-
+<!--
    <tr bgcolor="#f6f6f6">
      <td><font color="red"><b>*</b><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDPurpose; ?></td>
      <td><textarea name="purpose" cols=40 rows=6 wrap="physical"><?php if(isset($purpose)) echo $purpose; ?></textarea>
          </td>
+		 -->
+		 <?php
+	 	$sqlesami="select * from prezzi_1 where item_type='HS' ORDER BY item_description ASC";
+		$risultato=$db->Execute($sqlesami);
+	
+	//echo "sql $sqlesami";
+	 ?>
+	 <td><font color="red"><b>*</b><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo "Scegli esame"; ?></td>
+     <td >
+	 	<select name="purpose">
+		<?php
+		if($_GET['cod']=='COXXX') echo "<option SELECTED value='Analisi_di_Laboratorio#COXXX'>Analisi di Laboratorio </option>";
+		while($ris=$risultato->FetchRow())
+		{
+			$lung=strlen($ris['item_description']);
+			if($lung>100) $description=substr ($ris['item_description'],0,100);
+			else $description=trim($ris['item_description']);
+			$stringa=trim(rtrim($ris['item_description']));
+			$stringa.="#".trim(rtrim($ris['item_code']));
+			$stringa=str_replace(" ","_",$stringa);
+			$stringa=rtrim($stringa);
+			$stringa=trim($stringa);
+		
+			//echo "<option >".$stringa."</option>";
+			if($_GET['cod']==$ris['item_code']) echo "<option SELECTED value=".$stringa.">".$description." </option>";
+			
+			else echo "<option value=".$stringa.">".$description."</option>";
+		}
+		echo "<option value='Routine P.O.'> Routine P.O.</option>";
+		echo "<option value='Routine I.N.'> Routine I.N.</option>";
+		echo "<option value='Routine cardiologica P.O./I.N.'> Routine cardiologica P.O./I.N.</option>";
+		echo "<option value='Analisi di Laboratorio'>Analisi di Laboratorio</option>"
+		
+		?>
+		
+		</select> 
+		
+	 </td>
    </tr>
    <tr bgcolor="#f6f6f6">
      <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDUrgency; ?></td>
@@ -97,7 +140,7 @@ function chkForm(d) {
 	 	<input type="checkbox" name="remind_mail" value="1"  <?php if($remind_mail) echo 'checked'; ?>><?php echo $LDMail; ?>
 	 </td>
    </tr>
-   <tr bgcolor="#f6f6f6">
+   <!--<tr bgcolor="#f6f6f6">
      <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDPlannedEncType; ?></td>
      <td><FONT SIZE=-1  FACE="Arial" color="#000066">
 <?php
@@ -105,6 +148,7 @@ if(is_object($encounter_classes)){
     while($result=$encounter_classes->FetchRow()) {
 ?>
 		<input name="encounter_class_nr" type="radio"  value="<?php echo $result['class_nr']; ?>" <?php if($encounter_class_nr==$result['class_nr']) echo 'checked'; ?>>
+
 <?php 
         $LD=$result['LD_var'];
         if(isset($$LD)&&!empty($$LD)) echo $$LD; else echo $result['name'];
@@ -114,7 +158,7 @@ if(is_object($encounter_classes)){
 ?>
      </td>
    </tr>
-
+-->
  </table>
 <input type="hidden" name="encounter_nr" value="<?php echo $HTTP_SESSION_VARS['sess_en']; ?>">
 <input type="hidden" name="pid" value="<?php echo $HTTP_SESSION_VARS['sess_pid']; ?>">
@@ -135,6 +179,7 @@ if($mode=='select'){
 ?>
 <input type="hidden" name="mode" value="<?php if($mode=='select') echo 'update'; else echo 'create';?>">
 <input type="hidden" name="target" value="<?php echo $target; ?>">
+
 <input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0'); ?>>
 
 </form>
