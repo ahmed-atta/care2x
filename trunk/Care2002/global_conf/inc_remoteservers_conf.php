@@ -3,20 +3,18 @@
 # Main domain or ip address
 # for example, default is "localhost"
 #
-//$main_domain="192.168.0.5";
+$main_domain="192.168.0.10";
+
 # 
 # main ip addres of foto server 
 # for example , default is "localhost"
 #
-//$fotoserver_ip="192.168.0.5";
+$fotoserver_ip="192.168.0.10";
+
 #
 # Http protocol, either http or https for ssl layer. Default is http (normal).
 #
-//$httprotocol='http';
-
-# NOTE: the $main_domain,$fotoserver and $httprotocol variables were moved to the /include/inc_init_main.php script
-
-require_once($root_path.'include/inc_init_main.php');
+$httprotocol='http';
 
 # Source mode of photos and images
 # Set to 0 if fotos come via ftp server, set to 1 if fotos come from local  drive directory, default is 1
@@ -38,7 +36,7 @@ this is the server address of the http foto server for patients, required for th
 */
 //$fotoserver_http="http://".$fotoserver_ip."/fotos/";
 
-$fotoserver_http="$httprotocol://".$fotoserver_ip."/fotos/";
+$fotoserver_http="$httprotocol://$main_domain/fotos/";
 
 /*
 this is the server address of the ftp foto server for patients, required for probing the pics filenames, number, etc.

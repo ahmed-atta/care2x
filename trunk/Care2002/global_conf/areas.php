@@ -101,5 +101,9 @@ $area_opt=array(
 							/* Group start*/
 						   'title_dir' => $title_dir,
 						  '_a_1_teldirwrite' =>  $_a_1_teldirwrite,
+
+						  							/* Group start*/
+						   'title_hxpserver' => $title_hxpserver,
+						  '_a_1_hxpserver' =>  $_a_1_hxpserver
 						);
 ?>
