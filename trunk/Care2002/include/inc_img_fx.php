@@ -1,23 +1,40 @@
 <?php
 /* These are functions for image routines */
 
-# Get the control buttons theme 
-if(!isset($GLOBAL_CONFIG)||!is_array($GLOBAL_CONFIG)) $GLOBAL_CONFIG=array();
-if(!isset($GLOBAL_CONFIG['theme_control_buttons'])){	
-	include_once($root_path.'include/care_api_classes/class_globalconfig.php');
-	$gc=new GlobalConfig($GLOBAL_CONFIG);
-	$gc->getConfig('theme_control_buttons');
-}
-
 # Initialize themes and paths 
 //$theme_control='blue_aqua'; // Temporary initial theme
 //$theme_control='aqua'; // Temporary initial theme
-$theme_control=$GLOBAL_CONFIG['theme_control_buttons']; 
-$theme_com_icon='default'; // Temporary initial theme
-//$theme_logo='default'; 
+//$theme_control=$GLOBAL_CONFIG['theme_control_buttons'];
+//$theme_com_icon='default'; // Temporary initial theme
+//$theme_com_icon='winter_jelias'; // Temporary initial theme
+//$theme_logo='default';
+
 $theme_logo='lopo';  // The logo theme
 
-# Set the mascot theme 
+
+# Create global config object
+
+if(!isset($GLOBAL_CONFIG)||!is_array($GLOBAL_CONFIG)) $GLOBAL_CONFIG=array();
+require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+$gc=new GlobalConfig($GLOBAL_CONFIG);
+
+
+# Set the control buttons theme
+
+if(!isset($cfg['control_buttons'])||empty($cfg['control_buttons'])){
+	$gc->getConfig('theme_control_buttons');
+	if(!isset($GLOBAL_CONFIG['theme_control_buttons'])||empty($GLOBAL_CONFIG['theme_control_buttons'])){
+		$theme_control='default'; // this is the last default theme if the global item is not available, change this to the desired mascot theme
+	}else{
+		$theme_control=$GLOBAL_CONFIG['theme_control_buttons'];
+	}
+}else{
+	$theme_control=$cfg['control_buttons'];
+}
+
+
+# Set the mascot theme
+
 if(!isset($cfg['mascot'])||empty($cfg['mascot'])){
 	$gc->getConfig('theme_mascot');
 	if(!isset($GLOBAL_CONFIG['theme_mascot'])||empty($GLOBAL_CONFIG['theme_mascot'])){
@@ -28,6 +45,20 @@ if(!isset($cfg['mascot'])||empty($cfg['mascot'])){
 }else{
 	$theme_mascot=$cfg['mascot'];
 }
+
+# Set the common icons theme/style
+
+if(!isset($cfg['icons'])||empty($cfg['icons'])){
+	$gc->getConfig('theme_common_icons');
+	if(!isset($GLOBAL_CONFIG['theme_common_icons'])||empty($GLOBAL_CONFIG['theme_common_icons'])){
+		$theme_com_icon='default'; // this is the last default theme if the global item is not available, change this to the desired mascot theme
+	}else{
+		$theme_com_icon=$GLOBAL_CONFIG['theme_common_icons'];
+	}
+}else{
+	$theme_com_icon=$cfg['icons'];
+}
+
 //$theme_mascot='none';
 //$theme_mascot='default';
 $theme_skin='default';
@@ -75,12 +106,21 @@ function createLDImgSrc($froot, $fn, $border='', $align='')
 /**
 * createComIcom = create common icon
 * displays the common non-language dependent icon
+* param 1 = root path
+* param 2 = icon's file name
+* param 3 = border size
+* param 4 = alignment
+* param 5 = FALSE = the icon can be hidden based on the user config, TRUE = the icon will be shown always
 */
-function createComIcon($froot, $fn, $border='', $align='')
+function createComIcon($froot, $fn, $border='', $align='', $show_always=TRUE)
 {
    global $lang, $theme_com_icon, $img_path_com_icon;
-   
-   if(file_exists($froot.$img_path_com_icon.$fn))
+	
+   # if icon theme is  "no_icon", return a transparent pixel gif
+   if($theme_com_icon == 'no_icon' && !$show_always){
+	$picfile_path=$froot.'gui/img/common/default/pixel.gif';
+   }
+   elseif(file_exists($froot.$img_path_com_icon.$fn))
    {
       $picfile_path=$froot.$img_path_com_icon.$fn;
     }

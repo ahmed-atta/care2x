@@ -28,8 +28,8 @@ function printCheckBox($param,$printout=true)
 {
    	global $stored_request, $root_path;
 	
-    if($stored_request[$param]==1) $buffer= '<img '.createComIcon($root_path,'chkbox_chk.gif','0','absmiddle').'>'; 
-	  else $buffer= '<img '.createComIcon($root_path,'chkbox_blk.gif','0','absmiddle').'>';
+    if($stored_request[$param]==1) $buffer= '<img '.createComIcon($root_path,'chkbox_chk.gif','0','absmiddle',TRUE).'>';
+	  else $buffer= '<img '.createComIcon($root_path,'chkbox_blk.gif','0','absmiddle',TRUE).'>';
 	if($printout) echo $buffer;
 		else return $buffer;
 }
@@ -40,13 +40,13 @@ function printRadioButton($param,$value,$printout=true)
 	
     if($value ) 
 	{
-	   if($stored_request[$param]) $buffer= '<img '.createComIcon($root_path,'radio_chk.gif','0','absmiddle').'>'; 
+	   if($stored_request[$param]) $buffer= '<img '.createComIcon($root_path,'radio_chk.gif','0','absmiddle',TRUE).'>';
 	   else $buffer='';
 	}
-	  elseif(!$stored_request[$param]) $buffer= '<img '.createComIcon($root_path,'radio_chk.gif','0','absmiddle').'>'; 
+	  elseif(!$stored_request[$param]) $buffer= '<img '.createComIcon($root_path,'radio_chk.gif','0','absmiddle',TRUE).'>';
 	    else $buffer='';
 	 
-	if(empty($buffer)) $buffer= '<img '.createComIcon($root_path,'radio_blk.gif','0','absmiddle').'>';
+	if(empty($buffer)) $buffer= '<img '.createComIcon($root_path,'radio_blk.gif','0','absmiddle',TRUE).'>';
 	
 	if($printout) echo $buffer;
 		else return $buffer;
@@ -64,7 +64,7 @@ if($tracker>1)
    $requests->MoveFirst();
 
 ?>
-<a href="<?php echo $thisfile.URL_APPEND."&target=".$target."&subtarget=".$subtarget."&pn=".$test_request['encounter_nr']."&batch_nr=".$test_request['batch_nr']."&user_origin=".$user_origin."&tracker=".($tracker-1); ?>"><img <?php echo createComIcon($root_path,'uparrowgrnlrg.gif','0','left') ?> alt="<?php echo $LDPrevRequest ?>"></a>
+<a href="<?php echo $thisfile.URL_APPEND."&target=".$target."&subtarget=".$subtarget."&pn=".$test_request['encounter_nr']."&batch_nr=".$test_request['batch_nr']."&user_origin=".$user_origin."&tracker=".($tracker-1); ?>"><img <?php echo createComIcon($root_path,'uparrowgrnlrg.gif','0','left',TRUE) ?> alt="<?php echo $LDPrevRequest ?>"></a>
 <?php
 }
 if($tracker<$batchrows)
@@ -72,7 +72,7 @@ if($tracker<$batchrows)
    $requests->Move($tracker);
    $test_request=$requests->FetchRow();
 ?>
-<a href="<?php echo $thisfile.URL_APPEND."&target=".$target."&subtarget=".$subtarget."&pn=".$test_request['encounter_nr']."&batch_nr=".$test_request['batch_nr']."&user_origin=".$user_origin."&tracker=".($tracker+1); ?>"><img <?php echo createComIcon($root_path,'dwnarrowgrnlrg.gif','0','right') ?>  alt="<?php echo $LDNextRequest ?>"></a>
+<a href="<?php echo $thisfile.URL_APPEND."&target=".$target."&subtarget=".$subtarget."&pn=".$test_request['encounter_nr']."&batch_nr=".$test_request['batch_nr']."&user_origin=".$user_origin."&tracker=".($tracker+1); ?>"><img <?php echo createComIcon($root_path,'dwnarrowgrnlrg.gif','0','right',TRUE) ?>  alt="<?php echo $LDNextRequest ?>"></a>
 <?php
 }
 
@@ -98,7 +98,7 @@ while($test_request=$requests->FetchRow())
    }
    else
    {
-        echo "<img ".createComIcon($root_path,'redpfeil.gif','0')."> <FONT size=1 color=\"red\">".$test_request['batch_nr']." ".$test_request['room_nr']."</font><br>";
+        echo "<img ".createComIcon($root_path,'redpfeil.gif','0','',TRUE)."> <FONT size=1 color=\"red\">".$test_request['batch_nr']." ".$test_request['room_nr']."</font><br>";
         $track_item=$tracker;
    }
    

@@ -501,7 +501,7 @@ ob_start();
 		   if(strpos($x,"_telx_")!==FALSE)
 		   {
 		      echo '
-			          <td align="right" '.$tdbgcolor.'><img '.createComIcon($root_path,'violet_phone.gif').'></td>';
+			          <td align="right" '.$tdbgcolor.'><img '.createComIcon($root_path,'violet_phone.gif','0','',TRUE).'></td>';
 	        }
 			else
 			{ 
@@ -536,7 +536,7 @@ ob_end_flush();
     <td colspan=11&nbsp;><font size=2 face="verdana,arial" color="black"><?php if($stored_request['notes']) echo stripslashes($stored_request['notes']); ?></td>
   </tr>
   <tr>
-    <td colspan=20><font size=2 face="verdana,arial" color="purple">&nbsp;<?php echo $LDEmergencyProgram.' &nbsp;&nbsp;&nbsp;<img '.createComIcon($root_path,'violet_phone.gif','0','absmiddle').'> '.$LDPhoneOrder ?></td>
+    <td colspan=20><font size=2 face="verdana,arial" color="purple">&nbsp;<?php echo $LDEmergencyProgram.' &nbsp;&nbsp;&nbsp;<img '.createComIcon($root_path,'violet_phone.gif','0','absmiddle',TRUE).'> '.$LDPhoneOrder ?></td>
   </tr>
 
 </table><!-- End of the main table holding the form -->

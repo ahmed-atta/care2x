@@ -1,5 +1,19 @@
 <?php
+/**
+* this include file will only work properly if the calling script has created an smarty template object named $smarty
+*/
+
 $nofile=0;
+
+/**
+ Reset elements
+*/
+$sBuffer ='';
+$smarty->assign('sImgAlign',$picalign);
+$smarty->assign('sHeadlineItemTitle','');
+$smarty->assign('sNewsPreview','');
+$smarty->assign('sPreface','');
+$smarty->assign('sEditorLink','');
 
 if($news[$j]){
 	# First test for record nr. + mime combination of image filename
@@ -12,70 +26,84 @@ if($news[$j]){
 
 		if(!empty($news[$j]['body']))
 		{
-		    echo '<font size="'.$news_headline_title_font_size.'" face="'.$news_headline_title_font_face.'" color="'.$news_headline_title_font_color.'">';
+		    $sBuffer = '<font size="'.$news_headline_title_font_size.'" face="'.$news_headline_title_font_face.'" color="'.$news_headline_title_font_color.'">';
 			
-			if ($news_headline_title_font_bold) echo '<b>';
+			if ($news_headline_title_font_bold) $sBuffer = $sBuffer.'<b>';
+
+			$sBuffer = $sBuffer.ucfirst(deactivateHotHtml(nl2br($news[$j]['title'])));
 			
-			echo ucfirst(deactivateHotHtml(nl2br($news[$j]['title'])));
+			if ($news_headline_title_font_bold) $sBuffer = $sBuffer.'</b>';
 			
-			if ($news_headline_title_font_bold) echo '</b>';
+
 			
 			if(file_exists($picpath)&& !empty($news[$j]['body']))
 		   {
 			    $picsize=GetImageSize($picpath);
 		 	    
-				echo '
-				<img src="'.$picpath.'" border=0 align="'.$picalign.'" hspace=10 ';
-			    
-				if(!$picsize||($picsize[0]>150)) echo 'width="150" > ';
-				    else echo $picsize[3].'> ';
+				$smarty->assign('sHeadlineImg','src="'.$picpath.'"');
+
+				if(!$picsize||($picsize[0]>150)) $smarty->assign('sImgWidth','width="150"');
+				    else $smarty->assign('sImgWidth',$picsize[3]);
 		    }
 			
-			echo '</font><br>';
-			
-		    echo '<font size="'.$news_headline_preface_font_size.'" face="'.$news_headline_preface_font_face.'" color="'.$news_headline_preface_font_color.'">';
+			$sBuffer = $sBuffer.'</font>';
 
-			if ($news_headline_preface_font_bold) echo '<b>';
+			$smarty->assign('sHeadlineItemTitle',$sBuffer);
 			
-			echo ucfirst (deactivateHotHtml(nl2br($news[$j]['preface'])));
-			
-			if ($news_headline_preface_font_bold) echo '</b>';
+		    $sBuffer ='<font size="'.$news_headline_preface_font_size.'" face="'.$news_headline_preface_font_face.'" color="'.$news_headline_preface_font_color.'">';
 
-			echo '</font><p>';
+			if ($news_headline_preface_font_bold) $sBuffer = $sBuffer.'<b>';
 			
-		    echo '<font size="'.$news_headline_body_font_size.'" face="'.$news_headline_body_font_face.'" color="'.$news_headline_body_font_color.'">';
+			$sBuffer = $sBuffer.ucfirst (deactivateHotHtml(nl2br($news[$j]['preface'])));
 			
-			if ($news_headline_body_font_bold) echo '<b>';
+			if ($news_headline_preface_font_bold) $sBuffer = $sBuffer.'</b>';
+
+			$sBuffer = $sBuffer.'</font>';
 			
-			echo substr(deactivateHotHtml(nl2br($news[$j]['body'])), 0 ,$news_normal_preview_maxlen).'...';
+			$smarty->assign('sPreface',$sBuffer);
 			
-			if ($news_headline_body_font_bold) echo '</b>';
+		    $sBuffer = '<font size="'.$news_headline_body_font_size.'" face="'.$news_headline_body_font_face.'" color="'.$news_headline_body_font_color.'">';
 			
-			echo '</font><br>';
+			if ($news_headline_body_font_bold) $sBuffer = $sBuffer.'<b>';
 			
-		 	echo '
-		 	<a href="'.$readerpath.'&nr='.$news[$j]['nr'].'&news_type=headline"><font size=1 color="#ff0000" face="arial">'.$LDMore.'...</font></a>';
-			//print "</nobr>";
+			$sBuffer = $sBuffer.substr(deactivateHotHtml(nl2br($news[$j]['body'])), 0 ,$news_normal_preview_maxlen).'...';
+			
+			if ($news_headline_body_font_bold) $sBuffer = $sBuffer.'</b>';
+			
+			$sBuffer = $sBuffer.'</font>';
+			
+			$smarty->assign('sNewsPreview',$sBuffer);
+			
+		 	$smarty->assign('sEditorLink','<a href="'.$readerpath.'&nr='.$news[$j]['nr'].'&news_type=headline"><font size=1 color="#ff0000" face="arial">'.$LDMore.'...</a>');
+
 		}
 		else
 		{
 		 $nofile=1;
 		 }
 	} 
-	
+
 	if(!$news[$j]||$nofile)
 	{ 
 		$i=$j;
 		
-		print '
- 		<img '.createComIcon($root_path,'pplanu-s.jpg','0',$picalign).'>';
+		$smarty->assign('sHeadlineImg',createComIcon($root_path,'pplanu-s.jpg','0','',TRUE));
+		$smarty->assign('sImgAlign',$picalign);
 		
-		if(file_exists($root_path."language/".$lang."/lang_".$lang."_newsdummy.php")) include ($root_path."language/".$lang."/lang_".$lang."_newsdummy.php");
-		   else include($root_path."language/en/lang_en_newsdummy.php");
+		ob_start();
+
+
+			if(file_exists($root_path."language/".$lang."/lang_".$lang."_newsdummy.php")) include ($root_path."language/".$lang."/lang_".$lang."_newsdummy.php");
+		   	else include($root_path."language/en/lang_en_newsdummy.php");
+			
+			$sBuffer = ob_get_contents();
 		
+		ob_end_clean();
+		
+		$smarty->assign('sHeadlineItemTitle',$sBuffer);
+
 		if(!isset($editor_path)||empty($editor_path)) $editor_path='editor-pass.php?sid='.$sid.'&lang='.$lang.'&target=headline&title='.$LDEditTitle;
 		
-		print '
-		<font size=1 face="verdana,arial"><a href="'.$editor_path.'">'.$LDClk2Write.'</a>';
+		$smarty->assign('sEditorLink','<a href="'.$editor_path.'">'.$LDClk2Write.'</a>');
 	}
 ?>

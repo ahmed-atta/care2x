@@ -17,14 +17,16 @@ function deleteCurrency(n,s)
 
 
 <ul>
-<FONT    SIZE=2  FACE="verdana,Arial">
-<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<?php echo $LDSetCurrency ?> </FONT><FONT    SIZE=3 color=#800000 FACE="Arial"><p>
+
+<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2>
+<?php echo $LDSetCurrency ?> </FONT><FONT  class="prompt"><p>
 <?php
 if(($mode=='save')&&$new_main_currency) echo '<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'> '.$LDNewCurrencySet.'<p>';
 echo $LDPlsSelectCurrency;
-?></font><p>
-<FONT    SIZE=-1  FACE="Arial">
+?>
+</font>
+<p>
+
 <form action="<?php echo $thisfile ?>" name="c_form" method="post" onSubmit="return chkForm(this)">
 <table border=0 cellspacing=1 cellpadding=5>  
 <?php 
@@ -39,10 +41,10 @@ while($currency=$ergebnis->FetchRow())
 	$old_main_item=$currency['item_no'];
   }
   echo '></td>
-	<td bgcolor="#e9e9e9"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b>'.$currency['short_name'].'</b> </FONT></td>
-	<td bgcolor="#e9e9e9"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b>'.$currency['long_name'].'</b> </FONT></td>
-	<td bgcolor="#f9f9f9"><FONT   FACE="verdana,arial" size=2>'.$currency['info'].'<br></td>  
-	<td bgcolor="#e9e9e9"><FONT   FACE="verdana,arial" size=2';
+	<td bgcolor="#e9e9e9"><b>'.$currency['short_name'].'</b> </FONT></td>
+	<td bgcolor="#e9e9e9"><b>'.$currency['long_name'].'</b> </FONT></td>
+	<td bgcolor="#f9f9f9">'.$currency['info'].'<br></td>
+	<td bgcolor="#e9e9e9"><FONT ';
 	if($currency['status']=='main') {
 	    echo ' color="red"';
 	    $ld_buffer='LD'.$currency['status'];
@@ -50,8 +52,8 @@ while($currency=$ergebnis->FetchRow())
 	}
 	echo '
 	</td>';
-	if(defined('SET_EDIT') && SET_EDIT==1) echo '<td bgcolor="#e9e9e9"><FONT  color="#0000cc" FACE="verdana,arial" size=2>
-	<a href="'.$editfile.$currency['item_no'].'"><button onClick="javascript:window.location.href=\''.$editfile.$currency['item_no'].'\'">'.$LDEditInfo.'</button></a> </FONT>
+	if(defined('SET_EDIT') && SET_EDIT==1) echo '<td bgcolor="#e9e9e9">
+	<a href="'.$editfile.$currency['item_no'].'"><button onClick="javascript:window.location.href=\''.$editfile.$currency['item_no'].'\'">'.$LDEditInfo.'</button></a>
 	</td>';
 	//echo '<td><a href="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&mode=delete&item_no='.$currency['item_no'].'"><img '.createComIcon($root_path,'delete2.gif','0').' alt="'.$LDDelete.'"></a></td>';
 	if($currency['status']!='main'){

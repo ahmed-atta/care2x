@@ -22,7 +22,7 @@ if($edit || $read_form){
 }else{
 
 	if($stored_request['status']=='pending'){
-		$smarty->assign("miniCalendar","<a href=\"javascript:show_calendar('form_test_request.entry_date','$date_format')\"><img ".createComIcon($root_path,'show-calendar.gif','0','absmiddle')."></a>");
+		$smarty->assign("miniCalendar","<a href=\"javascript:show_calendar('form_test_request.entry_date','$date_format')\"><img ".createComIcon($root_path,'show-calendar.gif','0','absmiddle',TRUE)."></a>");
 		$tpbuffer='<input type="text" name="entry_date" size=10 maxlength=10  onBlur="IsValidDate(this,\''.$date_format.'\')" onKeyUp="setDate(this,\''.$date_format.'\',\''. $lang.'\')" value="';
 		if($stored_request['entry_date'] && $stored_request['entry_date']!=DBF_NODATE) $tpbuffer.= @formatDate2Local($stored_request['entry_date'],$date_format).'" onBlur="IsValidDate(this,\''.$date_format.'\')';
 			else $tpbuffer.= @formatDate2Local(date('Y-m-d'),$date_format);

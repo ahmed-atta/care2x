@@ -55,7 +55,19 @@ if(!defined('NOSTART_SESSION')||(defined('NOSTART_SESSION')&&!NOSTART_SESSION)){
 	# Set cache lifetime
 	//ini_set('session.cache_expire',1); # = 3 Hours
 	# Start adodb session handling
-	include_once($root_path.'classes/adodb/adodb-session.php');
+	
+	# New session handler starting adodb 4.05
+	
+	$ADODB_SESSION_DRIVER=$dbtype;
+	$ADODB_SESSION_CONNECT=$dbhost;
+	$ADODB_SESSION_USER =$dbusername;
+	$ADODB_SESSION_PWD =$dbpassword;
+	$ADODB_SESSION_DB =$dbname;
+	
+	include_once($root_path.'classes/adodb/session/adodb-session.php');
+
+	// Old adodb 250 session handler
+	//include_once($root_path.'classes/adodb/adodb-session.php');
 	session_start();
 }
 

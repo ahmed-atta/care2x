@@ -3,23 +3,17 @@
 if (eregi('inc_passcheck_mask.php',$PHP_SELF)) 
 	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
-
-if(empty($maskBorderColor)) $maskBorderColor='#333399';
 ?>
 <tr>
-<td bgcolor="<?php echo $maskBorderColor ?>" colspan=3><FONT    SIZE=3  FACE="Arial" color="#ffffff">
-&nbsp;<!-- &nbsp;&nbsp;<?php echo $LDPwNeeded ?> -->
-</td>
+<td class="passborder" colspan=3>&nbsp;</td>
 </tr>
 
-<tr bgcolor="#DDE1EC">
-<td bgcolor="<?php echo $maskBorderColor ?>" width=1%><font size=1>&nbsp;</td>
-
-<td>
+<tr>
+<td class="passborder" width=1%></td>
+<td class="passbody">
 
 <p><br>
 <center>
-
 
 <?php if (isset($pass)&&($pass=='check')&&($passtag)) 
 {
@@ -27,15 +21,15 @@ if(empty($maskBorderColor)) $maskBorderColor='#333399';
 switch($passtag)
 {
 	case 1:$errbuf="$errbuf $LDWrongEntry"; 
-				$err_msg="$LDWrongEntry<br><font size=2 color=\"#000000\">$LDPlsTryAgain</font>";
+				$err_msg="<div class=\"warnprompt\">$LDWrongEntry</div><br>$LDPlsTryAgain";
 				//echo '<img '.createLDImgSrc($root_path,'cat-fe.gif','0','left').'>';
 				break;
 	case 2:$errbuf="$errbuf $LDNoAuth"; 
-				$err_msg="$LDNoAuth<br><font size=2 color=\"#000000\">$LDPlsContactEDP</font>";
+				$err_msg="<div class=\"warnprompt\">$LDNoAuth</div><br>$LDPlsContactEDP";
 				//echo '<img '.createLDImgSrc($root_path,'cat-noacc.gif','0','left').'>';
 				break;
 	default:$errbuf="$errbuf $LDAuthLocked"; 
-				$err_msg="$LDAuthLocked<br><font size=2 color=\"#000000\">$LDPlsContactEDP</font>";
+				$err_msg="<div class=\"warnprompt\">$LDAuthLocked</div><br>$LDPlsContactEDP";
 				//echo '<img '.createLDImgSrc($root_path,'cat-sperr.gif','0','left').'>'; 
 }
 
@@ -46,7 +40,7 @@ logentry($userid,"PW ($keyword)","$REMOTE_ADDR $errbuf",$thisfile,$fileforward);
 <table border=0>
   <tr>
     <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0') ?>></td>
-    <td align="center"><FONT  COLOR="#cc0000"  SIZE=+2  FACE="Arial"><STRONG><?php echo $err_msg ?></STRONG></FONT></td>
+    <td align="center"><?php echo $err_msg ?></td>
   </tr>
 </table>
 
@@ -55,31 +49,29 @@ logentry($userid,"PW ($keyword)","$REMOTE_ADDR $errbuf",$thisfile,$fileforward);
 ?>
 
 
-<table  border=0 cellpadding=0 cellspacing=0>
+<table border=0 cellpadding=0  cellspacing=0>
 <tr>
 <?php if(!$passtag) echo '
-<td>
-
-<img '.createMascot($root_path,'mascot3_r.gif','0').'>
-</td>
+<td><img '.createMascot($root_path,'mascot3_r.gif','0').'></td>
 ';
 ?>
-<td bgcolor="#999999" valign=top>
-
-<table cellpadding=1 bgcolor=#999999 cellspacing=0>
+<td valign=top>
+<table cellspacing=0 class="passmaskframe">
 <tr>
 <td>
-<table cellpadding=20 bgcolor=#eeeeee >
+<table cellpadding=20 cellspacing=0 class="passmask">
 <tr>
 <td>
 <p>
 <FORM action="<?php echo $thisfile; ?>" method="post" name="passwindow" onSubmit="return pruf(this);">
-<font color=maroon size=3>
-<b><?php echo $LDPwNeeded ?>!</b></font><p>
-<font face="Arial,Verdana"  color="#000000" size=-1>
-<nobr><?php echo $LDUserPrompt ?>:</nobr><br></font>
+<div class="prompt">
+<b><?php echo $LDPwNeeded ?>!</b><p>
+</div>
+<nobr><?php echo $LDUserPrompt ?>:</nobr>
+<br>
 <INPUT type="text" name="userid" size="14" maxlength="25"> <p>
-<font face="Arial,Verdana"  color="#000000" size=-1><nobr><?php echo $LDPwPrompt ?>:</font><br>
+
+<nobr><?php echo $LDPwPrompt ?>:<br>
 <INPUT type="password" name="keyword" size="14" maxlength="25"> 
 <input type=hidden name=direction value="<?php print $direction; ?>">
 <input type=hidden name="pass" value="check">
@@ -112,7 +104,7 @@ if($not_trans_id) {
 <input type="hidden" name="cyear" value="<?php echo $cyear ?>">
 <input type="hidden" name="cday" value="<?php echo $cday; ?>">
 <?php } ?>
-</font></nobr><p>
+</nobr><p>
 <INPUT type="image"  <?php echo createLDImgSrc($root_path,'continue.gif','0') ?>>&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="<?php print $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>>
 </a>
@@ -133,16 +125,12 @@ if($not_trans_id) {
 </center>
 
 </td>
-<td bgcolor="<?php echo $maskBorderColor ?>"><font size=1>&nbsp;</td>
+<td class="passborder">&nbsp;</td>
 </tr>
 
 <tr >
-<td bgcolor="<?php echo $maskBorderColor ?>" colspan=3><font size=1>
-&nbsp; 
-</td>
+<td class="passborder" colspan=3>&nbsp;</td>
 </tr>
-
-
 </table>      
 
 
