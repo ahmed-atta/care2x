@@ -5,9 +5,9 @@ $LDAdmission='Admission';
 $LDAmbulatory='Ambulatoire';
 $LDMedocs='Medocs';
 $LDDoctors='Docteurs';
-$LDNursing='Nursing';
+$LDNursing='Maternité';
 $LDOR='OR';
-$LDLabs='Laboratoires';
+$LDLabs='Laboratoire';
 $LDRadiology='Radiologie';
 $LDPharmacy='Pharmacie';
 $LDMedDepot='Dépot médical';
@@ -23,13 +23,13 @@ $LDAppointments='Rendez-vous';
 
 $VersionChgTarget='_haut';
 $LDLanguage='Langage';
-$LDPlsWaitInit='Veuillez patienter. Le procès d\'initialisation est en route....';
+$LDPlsWaitInit='Veuillez patienter. Le procès d\'initialisation est en cours....';
 
 $LDChange='Modifier';
 /* 2003-04-27 EL */
 $LDBrazilian='Brésilien';
 $LDCzech='Tchèque';
-$LDEnglish='English';
+$LDEnglish='Anglais';
 $LDFrench='Français';
 $LDGerman='Allemand';
 $LDIndonesian='Indonésien';

@@ -150,7 +150,7 @@ $LD_MMsddsyyyy='mm/jj/aaaa';
 /* 2002-10-13 EL */
 $LDPlsSelectPatientFirst='Trouvez le patient en premier, s\'il vous plaît.';
 /* 2002-11-30 EL */
-$LDPatientRegister='Inscription du patient';
+$LDPatientRegister='Inscription d\'un patient';
 $LDRegDate='Date d\'inscription';
 $LDRegTime='Heure d\'inscription';
 $LDRegBy='Inscrit par';
@@ -178,7 +178,7 @@ $LDEmail='Email';
 $LDZipCode='Code postal';
 $LDPhoto='Photo';
 /* 2002-12-02 EL*/
-$LDPatientRegisterTxt='Inscrire patient, rechercher les inscriptions, rechercher dans l\'archive';
+$LDPatientRegisterTxt='Inscrire un patient, rechercher les inscriptions, rechercher dans l\'archive';
 $LDAdmitNr='No. d\'admission';
 $LDPatient='Patient';
 $LDVisit='Visite';
@@ -186,13 +186,13 @@ $LDVisitTxt='Admission ambulatoire ou consultation externe';
 $LDAdmissionTxt='Admission consultation interne, recherche';
 $LDImmunization='Vaccination';
 $LDESE='Entrer, chercher, éditer';
-$LDImmunizationTxt=$LDESE.' rapport immunisation';
+$LDImmunizationTxt=$LDESE.' rapport de vaccination';
 $LDDRG='GAD';
 $LDDRGTxt=$LDESE.' GAD (Groupes apparentés du diagnostic)';
 $LDProcedures='Procédures';
-$LDProceduresTxt=$LDESE.' procédures thérapiques';
+$LDProceduresTxt=$LDESE.' les procédures thérapeutiques';
 $LDPrescriptions='Ordonnances';
-$LDPrescriptionsTxt=$LDESE.' Ordonnances';
+$LDPrescriptionsTxt=$LDESE.' les ordonnances';
 /* 2002-12-03 EL*/
 $LDDiagXResults='Résultats du diagnostic';
 $LDDiagXResultsTxt='Chercher, afficher les résulats du diagnostic ou des rapports';
