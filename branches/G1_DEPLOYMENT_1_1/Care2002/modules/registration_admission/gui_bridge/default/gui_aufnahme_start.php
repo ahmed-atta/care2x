@@ -187,7 +187,7 @@ if($error)
 <td  background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php echo $LDCaseNr ?>:
 </td>
 <td bgcolor="#eeeeee">
-<FONT SIZE=-1  FACE="Arial" ><?php if(isset($encounter_nr)&&$encounter_nr) echo $full_en; else echo '<font color="red">'.$LDNotYetAdmitted.'</font>'; ?>
+<FONT SIZE=-1  FACE="Arial" ><?php if(isset($encounter_nr)&&$encounter_nr) echo $encounter_nr; else echo '<font color="red">'.$LDNotYetAdmitted.'</font>'; ?>
 </td>
 <td rowspan=7 align="center"><img <?php echo $img_source ?>>
 </td>
@@ -587,7 +587,7 @@ while($buffer=$att_dr_service->FetchRow())
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial" color=red><?php echo $LDAdmitBy ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input  name="encoder" type="text" value=<?php if ($encoder!='') echo '"'.$encoder.'"' ; else echo '"'.$HTTP_COOKIE_VARS[$local_user.$sid].'"' ?> size="28">
+<td colspan=2 bgcolor="#eeeeee"><input  name="encoder" type="text" value=<?php if ($encoder!='') echo '"'.$encoder.'"' ; else echo '"'.$HTTP_COOKIE_VARS[$local_user.$sid].'"' ?> size="28" readonly>
 </nobr>
 </td>
 </tr>
