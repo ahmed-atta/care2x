@@ -65,6 +65,8 @@ window.opener.location.reload();
 </table>
 <center>
  	<input type="hidden" name="mode" value="save">
+ 	<input type="hidden" name="lang" value="<?php echo $lang ?>">
+ 	<input type="hidden" name="sid" value="<?php echo $sid ?>">
  	<input type="submit" value=" <?php echo $LDOk ?> ">
   <input type="button" value="<?php echo $LDClose ?>" onClick="window.close()">
  </center>

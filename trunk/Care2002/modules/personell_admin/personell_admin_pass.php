@@ -55,13 +55,12 @@ if ($pass=='check')
 
 $errbuf=$LDAdmission;
 
-require($root_path.'include/inc_passcheck_head.php');
-
 /* erase the user_origin */
 if(isset($HTTP_SESSION_VARS['sess_user_origin'])) $HTTP_SESSION_VARS['sess_user_origin']='';
+
+require($root_path.'include/inc_passcheck_head.php');
 ?>
 
-<?php echo setCharSet(); ?>
 <BODY  onLoad="document.passwindow.userid.focus();" bgcolor=<?php echo $cfg['body_bgcolor']; ?>
 <?php if (!$cfg['dhtml']){ echo ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 

@@ -42,11 +42,8 @@ if ($pass=='check')
 
 $errbuf="Doctors $title";
 
-require_once($root_path.'include/inc_config_color.php');
-
 require($root_path.'include/inc_passcheck_head.php');
 ?>
-<?php echo setCharSet(); ?>
 <BODY  onLoad="document.passwindow.userid.focus();" bgcolor=<?php echo $cfg['body_bgcolor']; ?>
 <?php if (!$cfg['dhtml']){ echo ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 <FONT    SIZE=-1  FACE="Arial">

@@ -52,10 +52,8 @@ if ($pass=='check')
 $errbuf=$title;
 $minimal=1;
 require($root_path.'include/inc_passcheck_head.php');
-require_once($root_path.'include/inc_config_color.php');
 ?>
 
-<?php echo setCharSet(); ?>
 <BODY  <?php if (!$nofocus) echo 'onLoad="document.passwindow.userid.focus()"'; echo  ' bgcolor='.$cfg['body_bgcolor']; 
  if (!$cfg['dhtml']){ echo ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } 
 ?>>

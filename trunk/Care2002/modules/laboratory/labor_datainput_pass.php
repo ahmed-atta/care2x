@@ -43,7 +43,6 @@ $minimal=1;
 require($root_path.'include/inc_passcheck_head.php');
 ?>
 
-<?php echo setCharSet(); ?>
 <BODY onLoad="if (window.focus) window.focus(); document.passwindow.userid.focus();">
 
 

@@ -118,7 +118,6 @@ require_once($root_path.'include/inc_config_color.php');
 require($root_path.'include/inc_passcheck_head.php');
 ?>
 
-<?php echo setCharSet(); ?>
 <BODY onLoad="if (window.focus) window.focus(); document.passwindow.userid.focus();">
 
 

@@ -26,9 +26,6 @@ require($root_path.'include/inc_2level_reset.php'); setcookie(ck_2level_sid.$sid
 require($root_path.'include/inc_passcheck_internchk.php');
 if ($pass=='check') 	
 	include($root_path.'include/inc_passcheck.php');
-	
-require_once($root_path.'include/inc_config_color.php');
-
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">

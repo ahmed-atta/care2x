@@ -14,8 +14,6 @@ define('LANG_FILE','stdpass.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-/*if ($pdaten=="ja") setcookie(pdatencookie,"ja");*/
-
 require_once($root_path.'global_conf/areas_allow.php');
 
 $allowedarea=&$allow_area['lab_w'];
@@ -46,7 +44,6 @@ $minimal=1;
 require($root_path.'include/inc_passcheck_head.php');
 ?>
 
-<?php echo setCharSet(); ?>
 <BODY onLoad="if (window.focus) window.focus(); document.passwindow.userid.focus();">
 
 

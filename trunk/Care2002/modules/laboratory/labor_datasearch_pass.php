@@ -13,7 +13,6 @@ require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','stdpass.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
 require_once($root_path.'global_conf/areas_allow.php');
 
 /*if ($pdaten=="ja") setcookie(pdatencookie,"ja");*/
@@ -48,7 +47,6 @@ $minimal=1;
 require($root_path.'include/inc_passcheck_head.php');
 ?>
 
-<?php echo setCharSet(); ?>
 <BODY  onLoad="document.passwindow.userid.focus()">
 
 <FONT    SIZE=-1  FACE="Arial">

@@ -62,6 +62,9 @@ $available_languages = array(
   'zh'         => array('zh|chinese simplified', 'chinese_gb')
 );
 
+
+if (!defined('__PMA_LANG_DETECT__')) {
+    define('__PMA_LANG_DETECT__', 1);
     /**
      * Analyzes some PHP environment variables to find the most probable language
      * that should be used
@@ -91,8 +94,7 @@ $available_languages = array(
         }
     } // end of the 'pmcLangDetect()' function
 	
-if (!defined('__PMA_LANG_DETECT__')) {
-    define('__PMA_LANG_DETECT__', 1);
+
 } // end if
 
 

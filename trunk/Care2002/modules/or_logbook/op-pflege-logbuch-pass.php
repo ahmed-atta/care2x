@@ -5,7 +5,6 @@ require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','stdpass.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
 
 require_once($root_path.'global_conf/areas_allow.php');
 
@@ -54,7 +53,6 @@ $errbuf="OP Logs $title";
 require($root_path.'include/inc_passcheck_head.php');
 ?>
 
-<?php echo setCharSet(); ?>
 <BODY <?php if (!$nofocus)
 				{ echo 'onLoad="document.passwindow.userid.focus();';
 					if($retpath=="calendar_opt") echo "window.resizeTo(800,600);window.moveTo(20,20);";
