@@ -1,5 +1,5 @@
 <?
-/*chargement du driver ADODB*/
+/*chargement du driver ADODB (test)*/
 include('adodb/adodb.inc.php');
 
 /* déclaration de quelques variables */
