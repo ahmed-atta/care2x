@@ -133,6 +133,9 @@ echo '</TD></TR>';
 	<?php if($lang!='id') : ?>
 	<option value="id"> Indonesian</option>
     <?php endif ?>
+	<?php if($lang!='no') : ?>
+	<option value="no"> Norwegian</option>
+    <?php endif ?>	
 	<?php if($lang!='pl') : ?>
 	<option value="pl"> Polish</option>
     <?php endif ?>
