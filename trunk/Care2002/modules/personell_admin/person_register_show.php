@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
 * Copyright 2002,2003,2004,2005 Elpidio Latorilla
-* elpidio@care2x.org, elpidio@care2x.net
+* elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -100,7 +100,7 @@ if(isset($current_employ)&&$current_employ){
 ?>
 <a href="personell_register_show.php<?php echo URL_APPEND ?>&personell_nr=<?php echo $current_employ ?>&target=personell_reg"><img <?php echo createLDImgSrc($root_path,'employment_data.gif','0','absmiddle') ?>></a>
 <?php
-}else{
+}elseif($person->DeathDate() == DBF_NODATE){
 ?>
 <a href="personell_register.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&target=personell_reg"><img <?php echo createLDImgSrc($root_path,'add_employ.gif','0','absmiddle') ?>></a>
 
