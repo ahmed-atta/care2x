@@ -24,7 +24,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 
 <tr>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php echo $LDPatientData.' ('.$full_en.')'; ?></STRONG></FONT>
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php echo $LDPatientData.' ('.$encounter_nr.')'; ?></STRONG></FONT>
 </td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
 <a href="javascript:gethelp('admission_show.php','<?php echo $from ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
@@ -102,15 +102,15 @@ if($is_discharged){
 <td valign="top" background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $LDCaseNr ?>:
 </td>
 <td bgcolor="#eeeeee">
-<FONT SIZE=-1  FACE="Arial" ><FONT SIZE=-1  FACE="Arial" color="#800000">&nbsp;<b><?php echo $full_en; ?></b><br>
+<FONT SIZE=-1  FACE="Arial" ><FONT SIZE=-1  FACE="Arial" color="#800000">&nbsp;<b><?php echo $encounter_nr; ?></b><br>
 <?php #
-if(file_exists($root_path.'cache/barcodes/en_'.$full_en.'.png')) echo '<img src="'.$root_path.'cache/barcodes/en_'.$full_en.'.png" border=0 width=180 height=35>';
+if(file_exists($root_path.'cache/barcodes/en_'.$encounter_nr.'.png')) echo '<img src="'.$root_path.'cache/barcodes/en_'.$encounter_nr.'.png" border=0 width=180 height=35>';
   else 
   {
 
-    echo "<img src='".$root_path."classes/barcode/image.php?code=".$full_en."&style=68&type=I25&width=180&height=50&xres=2&font=5&label=2&form_file=en' border=0 width=0 height=0>";
+    echo "<img src='".$root_path."classes/barcode/image.php?code=".$encounter_nr."&style=68&type=I25&width=180&height=50&xres=2&font=5&label=2&form_file=en' border=0 width=0 height=0>";
 
-    echo "<img src='".$root_path."classes/barcode/image.php?code=".$full_en."&style=68&type=I25&width=180&height=40&xres=2&font=5' border=0>";
+    echo "<img src='".$root_path."classes/barcode/image.php?code=".$encounter_nr."&style=68&type=I25&width=180&height=40&xres=2&font=5' border=0>";
   }
 ?>
 </td>
@@ -156,7 +156,7 @@ if(file_exists($root_path.'cache/barcodes/en_'.$full_en.'.png')) echo '<img src=
 <td bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial" color="#800000">&nbsp;<b><?php echo $name_first; ?></b>
 <?php
 # If person is dead show a black cross
-if($death_date&&$death_date!='0000-00-00') echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0').'>';
+if($death_date&&$death_date!='0000-00-00'&&$death_date!='0001-01-01') echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0').'>';
 ?>
 </td>
 </tr>
@@ -167,7 +167,7 @@ if($death_date&&$death_date!='0000-00-00') echo '&nbsp;<img '.createComIcon($roo
 <td bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial" color="#800000"><FONT SIZE=-1  FACE="Arial">&nbsp;<b><?php echo formatDate2Local($date_birth,$date_format);?></b>
 <?php
 # If person is dead show a black cross
-if($death_date&&$death_date!='0000-00-00'){
+if($death_date&&$death_date!='0000-00-00'&&$death_date!='0001-01-01'){
 	echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0').'>&nbsp;<font color="#000000">'.formatDate2Local($death_date,$date_format).'</font>';
 }
 ?>
