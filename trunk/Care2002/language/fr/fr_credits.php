@@ -19,7 +19,7 @@ require_once('../../include/inc_vars_resolve.php');
 			<P><img src="../../gui/img/control/default/fr/fr_x-blank.gif" width=135 border=0  align=right vspace=10>
 			<b>La traduction française de Care 2002 était réalisée par Matej Hausenblas.</b>
 			
-			<P><a href="mailto:pgomariz@ono.com"><u>Matej Hausenblas  peut etre  contacté ici..</u></a>
+			<P><a href="mailto:pgomariz@ono.com"><u>Matej Hausenblas  peut être  contacté ici..</u></a>
 </TD></TR></TBODY></TABLE>
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
@@ -33,14 +33,14 @@ require_once('../../include/inc_vars_resolve.php');
 			<P><img src="../../gui/img/control/default/fr/fr_x-blank.gif"  border=0  width=135 align=right vspace=10>
 			<b>La traduction italienne de Care 2002 était réalisée par Giuseppe Scarpi:</b>
 			<p>
-			Giuseppe Scarpi was born in Rome, Italy, 35 years ago. 
+			Giuseppe Scarpi est né à Rome, Italie, il y a 35 ans.
 			<p>He has a degree in Electronic Engineering and has worked for several companies in the biomedical sector, 
 			where he developed an understanding about the relationships between medical and informatics worlds.<br>
 He uses and appreciates both Linux and Windows, "<i>as both are the result of a great human work that must be respected</i>".<p>
 He decided to actively join open source because: <br><i>"Such an ideal world can survive only if perfectly balanced. If you take something,
  you should also give back in proportion."</i>
 
-			<P><a href="mailto:kalbun@inwind.it"><u>Giuseppe Scarpi  peut etre  contacté ici..</u></a>
+			<P><a href="mailto:kalbun@inwind.it"><u>Giuseppe Scarpi  peut être  contacté ici..</u></a>
 </TD></TR></TBODY></TABLE>
 
 <hr>
@@ -55,7 +55,7 @@ He decided to actively join open source because: <br><i>"Such an ideal world can
             <P><img src="../../fotos/credits/gabriele_cicala.jpg"  border=0  align=right vspace=10>
 			<b>La traduction italienne de Care 2002 et www.care2x.cométait réalisée par Gabriele Cicala.</b>
 			
-			<P><a href="mailto:gabcicala@tiscali.it"><u>Gabriele Cicala   peut etre  contacté ici..</u></a>
+			<P><a href="mailto:gabcicala@tiscali.it"><u>Gabriele Cicala   peut être  contacté ici..</u></a>
 </TD></TR></TBODY></TABLE>
 
 <hr>
@@ -70,7 +70,7 @@ He decided to actively join open source because: <br><i>"Such an ideal world can
             <P><img src="../../fotos/credits/daniel_zilli.jpg"  border=0  align=right vspace=10>
 			<b>La traduction brésilien-portugaise de Care 2002 et www.care2x.com était réalisée par Daniel Zilli.</b>
 			
-			<P><a href="mailto:danielz@cco.matrix.com.br"><u>Daniel Zilli   peut etre  contacté ici..</u></a>
+			<P><a href="mailto:danielz@cco.matrix.com.br"><u>Daniel Zilli   peut être  contacté ici..</u></a>
 </TD></TR></TBODY></TABLE>
 
 <hr>
@@ -85,7 +85,7 @@ He decided to actively join open source because: <br><i>"Such an ideal world can
             <P><img src="../../fotos/credits/agus_mr.jpg"  border=0  align=right vspace=10>
 			<b>La traduction indonésienne de Care 2002 et www.care2x.com était réalisée par Agus Muhammad Ramdan.</b>
 			
-			<P><a href="mailto:agusmr@mweb.co.id"><u>Agus M. Ramdan  peut etre  contacté ici..</u></a>
+			<P><a href="mailto:agusmr@mweb.co.id"><u>Agus M. Ramdan  peut être  contacté ici..</u></a>
 </TD></TR></TBODY></TABLE>
 
 <hr>
