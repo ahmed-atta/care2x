@@ -1,4 +1,4 @@
-<?
+<?php
 $LDWhereTo="Wo soll die Nachricht erscheinen?";
 $LDPlsSelect="Bitte wählen Sie die Artikelnummer anhand des Bildes. Anschiessend klicken Sie \"Weiter...\" an.";
 $LDContinueBut="Weiter...";
@@ -20,9 +20,9 @@ $LDTitleMaxNote="Maximal 50 Zeichen";
 $LDHeader="Vorspann";
 $LDHeaderMaxNote="Maximal 50 Zeichen";
 $LDNews="Nachricht";
-$LDPicFile="Bild";
+$LDPicFile="Bild <font size=1>(maximale Dateigröße ist 1MB)</font>";
 $LDAuthor="Autor/Verfasser";
-$LDPublishDate="Datum, ab dem das Artikel erscheinen soll.";
+$LDPublishDate="Datum der ersten Erscheinung. <font size=1>(\"H\" für heute)</font>";
 
 $LDAlertTitle="Bitte geben Sie einen Titel ein";
 $LDAlertNews="Bitte tippen Sie die Nachricht ein";
@@ -32,15 +32,14 @@ $LDAlertDate="Bitte geben Sie ein Datum ein";
 $LDWrittenOn="Verfasst am:";
 $LDWrittenFrom="Von:";
 
-$LDDbNoSave="Speichern in die Datenbank gescheitert";
-$LDDbNoRead="Das Lesen aus der Datenbank gescheitert";
-$LDDbNoLink="Verbindung zur Datenbank konnte nicht hergestellt werden.";
-
 $LDArticleSaved="Das Artikel wurde gespeichert. Sie sehen jetzt eine Vorschau.";
 $LDBackTxt="Zurück";
 
 $LDQuickInfo="Auf einen Blick";
-$LDPhone="Telefon";
+$LDPhonePolice="Polizei";
+$LDPhoneFire="Feuerwehr";
+$LDAmbulance="Notarzt";
+$LDPhone="Telefon (KH)";
 $LDFax="Fax";
 $LDAddress="Anschift";
 $LDEmail="Email";
@@ -100,4 +99,8 @@ $LDMarkWeek="Bitte markieren Sie die Woche in der Liste.";
 $LDClkContinue="Anschliessend klicken Sie \"Weiter...\" an.";
 $LDPlsEnter="Bitte hier eintragen...";
 $LDClk2Edit="Klick hier zum schreiben";
+$LDPreviewPic="Bildvorschau";
+$LDCafeEditorial="Cafenews Redaktion";
+$LDHealthTips="Gesundheitstips";
+$LDClk2Write="Zum Schreiben, bitte hier anklicken";
 ?>

@@ -1,43 +1,42 @@
-<?
-$monat=array("",
-						"January",
-						"February",
-						"March",
-						"April",
-						"May",
-						"June",
-						"July",
-						"August",
-						"September",
-						"October",
-						"November",
-						"December"
-						);
+<?php
+$Jan="January";
+$Feb="February";
+$Mae="March";
+$Apr="April";
+$Mai="May";
+$Jun="June";
+$Jul="July";
+$Aug="August";
+$Sep="September";
+$Okt="October";
+$Nov="November";
+$Dez="December";
 
-$LDDoctors="Physicians/Surgeons";
-$LDQView="Quickview";
-$LDQViewTxt="Quickview of the physicians/surgeons' on-call duty plan";
+/**
+* Note: the first element of $monat is set to empty string
+*/
+$monat=array("",$Jan,$Feb,$Mae,$Apr,$Mai,$Jun,$Jul,$Aug,$Sep,$Okt,$Nov,$Dez);
+
+$LDDoctors="Doctors";
+$LDQView="DOC Quickview";  // DOC = doctor on call
+$LDQViewTxt="Quickview of today's DOC (doctor-on-call) schedule";
 $LDDutyPlan="Duty plan";
 $LDDutyPlanTxt="Duty plan, view, update, delete, manage, etc.";
-$LDDocsList="Physician/Surgeons' list";
-$LDDocsListTxt="Create or update physicians/surgeons' list, enter data, etc..";
+$LDDocsList="Doctors' list";
+$LDDocsListTxt="Create or update doctors' list, enter data, etc..";
 $LDDocsForum="Forum";
-$LDDocsForumTxt="Discussions forum for physicians/surgeons";
+$LDDocsForumTxt="Discussions forum for doctors";
 $LDNews="News";
 $LDNewsTxt="Compose, read, edit news";
 $LDMemo="Memo";
 $LDMemoTxt="Compose, read, edit memo";
 $LDCloseAlt="Close physicians/surgeons' window";
-$LDDbNoLink="Attempt to connect to DB failed!";
-$LDDbNoRead="Attempt to read from DB failed!";
-$LDDbNoSave="Attempt to save to DB failed!";
-
-$LDDocsOnDuty="Physicians/Surgeons on Duty";
+$LDDocsOnDuty="Doctors on Call";
 
 $LDTabElements=array("Department",
-								 "Physician/Surgeon 1",
+								 "DOC 1",
 								 "Beeper/Phone",
-								 "Physician/Surgeon 2",
+								 "DOC 2",
 								 "Beeper/Phone",
 								 "Duty plan"
 								 );
@@ -58,8 +57,8 @@ $LDFullDay=array("Sunday",
 								"Friday",
 								"Saturday"
 								);
-$LDDoc1="Physician/Surgeon 1";
-$LDDoc2="Physician/Surgeon 2";
+$LDDoc1="Doctor-On-Call 1";
+$LDDoc2="Doctor-On-Call 2";
 $LDClosePlan="Close this plan";
 $LDNewPlan="Create a new plan";
 $LDBack="Back";
@@ -89,4 +88,10 @@ $LDChange="Change";
 $LDCreatePersonList="Create a list for personell";
 $LDNoPersonList="The list of personell is not yet created. Please create the list first. Click on the following button.";
 $LDShow="Show";
+
+$LDDOCS="DOC Scheduler";
+$LDDOCSTxt="Doctor On Call Scheduler, plan, view, update, edit, etc.";
+$LDDOCSR="DOCSR";
+$LDDOCSRTxt="Doctor On Call Schedule Requester";
+
 ?>

@@ -1,4 +1,4 @@
-<?
+<?php
 $LDTitleTag=array
 					(headline=>"Schlagzeile",
 					cafenews=>"Cafeteria News",

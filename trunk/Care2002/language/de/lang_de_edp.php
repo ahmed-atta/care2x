@@ -1,11 +1,4 @@
-<?
-$LDDbNoLink="Verbindung zu DB gescheitert!";
-$LDDbNoRead="Lesen aus der DB is gescheitert!";
-$LDDbNoSave="Schreiben in die DB is gescheitert!";
-$LDDbNoUpdate="Update ist gescheitert!";
-$LDDbNoLastData="Letzte Daten nicht gefunden!";
-$LDDbNoDelete="Löschen in DB ist gescheitert!";
-
+<?php
 $LDClose="Schliessen";
 $LDCancel="Abbrechen";
 $LDResetEntry="Eingabe löschen";
@@ -42,24 +35,18 @@ $LDPast3Months="Letzte 3 Monate";
 $LDPastAll="Alle";
 $LDSelect="Auswählen";
 
-
-
 $LDClk2SeeEdit="Falls Sie sie sehen bzw. weiter bearbeiten möchten, klicken Sie den Pfeil an.";
-
 
 $LDNoDataFound="Die Suche hat <font color=red><b>keine</b></font> Daten gefunden, die dem Suchbegriff entsprechen.";
 $LDClk2SeeInfo="Bitte klicken Sie das richtige an, um die komplette Information zu zeigen.";
 /********************** Do not erase or replace the ~nr~ *****************************/
 $LDFoundNrData="Die Suche hat <font color=red><b>~nr~</b></font> Daten gefunden, die dem Suchbegriff entsprechen.";
 
-
 $LDBack2Edit="Zurück und noch mal bearbeiten.";
-
 
 $LDGoodMorning="Guten Morgen";
 $LDGoodDay="Guten Tag";
 $LDGoodEvening="Guten Abend";
-
 
 $LDDataRemoved="Die Daten könnten aus der Datenbank gelöscht worden sein.";
 $LDPlsInformDept="Bitte verständigen Sie die ~tagword~ Abteilung und evtl. die EDV Abteilung. Vielen Dank.";
@@ -103,7 +90,7 @@ $LDName="Name";
 $LDPassword="Passwort";
 $LDUserId="Benutzerkennung";
 $LDArea="Bereich";
-$LDAllowedArea="Zulläsige Bereiche sind:";+
+$LDAllowedArea="Zulässige Bereiche sind:";+
 $LDActualAccess="Aktuelle Zugangsberechtigungen";
 $LDAccessDeleted="Die Zugangsberechtigung wurde erfolgreich aus der Datenbank entfernt.";
 $LDFfActualAccess="Folgende sind die aktuelle Zugangsberechtigungen.";
@@ -123,9 +110,9 @@ $LDInitChange="Ä";
 $LDLock="Sperren";
 $LDInitLock="S";
 $LDUnlock="Freigeben";
-$LDInitUnlock="F";
+$LDInitUnlock="F";      // F = Freigeben bzw. Freigabe
 $LDDelete="Löschen";
-$LDInitDelete="L";
+$LDInitDelete="L";      // L = löschen
 $LDUpdateRight="Berechtigung ändern";
 $LDInputError="Ihre Eingabe ist entweder fehlerhaft oder Daten fehlen. Rote Eingabefelder müssen ausgefüllt oder die Eingabe korrigiert werden.";
 $LDAccessRight="Zugangsberechtigung";

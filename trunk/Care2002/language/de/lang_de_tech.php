@@ -1,11 +1,4 @@
-<?
-$LDDbNoLink="Verbindung zu DB gescheitert!";
-$LDDbNoRead="Lesen aus der DB is gescheitert!";
-$LDDbNoSave="Schreiben in die DB is gescheitert!";
-$LDDbNoUpdate="Update ist gescheitert!";
-$LDDbNoLastData="Letzte Daten nicht gefunden!";
-$LDDbNoDelete="Löschen in DB ist gescheitert!";
-
+<?php
 $LDClose="Close";
 $LDTech="Technik";
 $LDTechRepair="Technische Reparatur";
@@ -35,13 +28,13 @@ $LDRepairArea="Lokalisation der Schaden";
 $LDReporter="Angefordert von";
 $LDPersonnelNr="Personal Nr.";
 $LDPhoneNr="Telefon Nr.  <font size=1>(für eventuelle Rückfragen)</font>";
-$LDPlsDescribe="Beschreiben Sie hier bitte die Art und Umfang der Schaden.";
+$LDPlsDescribe="Bitte beschreiben Sie hier die Art und Umfang der Schaden.";
 
-$LDAlertName="Sie müssen Ihren Namen eingeben!";
-$LDAlertDept="Sie müssen eine Abteilung auswählen!";
+$LDAlertName="Bitte geben Sie Ihren Namen ein!";
+$LDAlertDept="Bitte geben Sie Ihre Abteilung ein!";
 $LDAlertDeptOnly="Bitte geben Sie Ihre Abteilung ein.";
-$LDAlertPNr="Sie müssen Ihre Personalnummber eingeben!";
-$LDAlertDescribe="Sie müssen die Schaden bzw. Reparaturarbeit beschreiben!";
+$LDAlertPNr="Bitte geben Sie Ihre Personalnummer ein!";
+$LDAlertDescribe="Bitte beschreiben Sie die Schaden bzw. Art der Reparaturarbeit!";
 $LDAck="Empfangsbestätigung";
 $LDYour="Ihre";
 $LDReceived="wurde am";
@@ -127,7 +120,6 @@ $LDInfoCat=array(
 						"Telefon",
 						"Wasser, Versorgung"
 						);
-$LDNoFound="Die Suche hat leider nichts gefunden, was dem Suchbegriff entspricht. <br>Bitte versuches Sie es 
-	noch mal und geben sie etwas ausführlicheres ein. Danke.";
+$LDNoFound="Die Suche hat leider nichts gefunden, was dem Suchbegriff entspricht. <br>Bitte versuches Sie es noch mal und geben sie etwas ausführlicheres ein. Danke.";
 $LDSendInquiry="Frage senden";
 ?>

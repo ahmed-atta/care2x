@@ -1,13 +1,7 @@
-<?
-$LDDbNoLink="Verbindung zu DB gescheitert!";
-$LDDbNoRead="Lesen aus der DB is gescheitert!";
-$LDDbNoSave="Schreiben in die DB is gescheitert!";
-$LDDbNoUpdate="Update ist gescheitert!";
-$LDDbNoLastData="Letzte Daten nicht gefunden!";
-$LDDbNoDelete="Löschen in DB ist gescheitert!";
+<?php
 $LDApplySelection="Auswahl übernehmen";
 
-$LDIcd10="ICD-10";
+$LDIcd10="ICD-10";      // ICD = International Codes of Diseases  !! Do not translate !!
 $LDOps301="OPS-301";
 $LDBack2Logbook="Zurück zum OP Logbuch";
 $LDIcd10Search="ICD-10 Suchen";
@@ -34,11 +28,11 @@ $LDSearch="Suchen";
 $LDOperation="Operativer Eingriff";
 $LDAlertSureDelete="Möchten Sie wirklich den Eintrag löschen?";
 
-$LDAux="N";
-$LDMain="H";
-$LDRight="R";
-$LDLeft="L";
-$LDBoth="B";
+$LDAux="N";  // N = Nebendiagnose
+$LDMain="H";  // H = Hauptdiagnose oder Haupttherapy
+$LDRight="R";  // R = rechts
+$LDLeft="L";    //  L = links
+$LDBoth="B";  // B = beide bzw. beide Seiten
 
 $LDDeleteEntry="Eintrag löschen";
 $LDNoQuickList="Die Schnellliste ist momentan leer.";

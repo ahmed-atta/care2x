@@ -1,4 +1,4 @@
-<?
+<?php
 $LDPageTitle="Departments";
 $LDDeptTxt="Department";
 $LDOpenHrsTxt="Working Hours";
@@ -6,6 +6,11 @@ $LDChkHrsTxt="Medical Checkup Hours";
 $LDClk4Info="Click for more Information about";
 $LDDayTxt="Day";
 
+/**
+* A small dictionary:
+* ENT = Eye, Nose, Throath
+* OB-Gyne = Obstetrics-Gynecology
+*/
 $dept=array("General Surgery",
 					"Emergency Surgery",
 					"Plastic Surgery",
@@ -20,6 +25,10 @@ $dept=array("General Surgery",
 					"Intermediate Care Unit",
 					"Intensive Care Unit",
 					"Medical Laboratory");
+					
+/**
+* Do not translate the $target variable
+*/
 $target=array("dept_generalsurgery",
 					"dept_emergency",
 					"dept_plasticsurgery",

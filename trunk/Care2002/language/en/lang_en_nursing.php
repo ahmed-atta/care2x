@@ -1,6 +1,6 @@
-<?
+<?php
 /*
-	IMPORTANT!	All words or characters inclosed with ~ ~ must not be changed.
+*	IMPORTANT!	All words or characters inclosed with ~ ~ must not be changed.
 */
 $LDNursing="Nursing";
 $LDStation="Ward";
@@ -22,13 +22,6 @@ $LDNewsTxt="Read, compose, or edit a news article.";
 $LDMemoTxt="Read, compose, or edit a memo.";
 $LDNursingForumTxt="Discussions forum about nursing.";
 $LDNursingStationsTxt="Occupancy, patient' charts, photos, etc.";
-
-$LDDbNoLink="Attempt to connect to DB failed!";
-$LDDbNoRead="Attempt to read from DB failed!";
-$LDDbNoSave="Attempt to save to DB failed!";
-$LDDbNoUpdate="Attempt to update to DB failed";
-$LDDbNoLastData="Last data not found!";
-$LDDbNoDelete="Delete failed!";
 
 $LDCloseBack2Main="Close and go back to start page";
 $LDOld="Old";
@@ -174,9 +167,9 @@ $LDPatListElements=array(
 										"Insurance",
 										"Options"
 										);
-/**********do not change the \"+b+\" and \"+r+\" **************************/
+/********** NOTE: !! do not change the \"+b+\" and \"+r+\"  !! **************************/
 $LDConfirmUnlock="Do you really want to unlock the \"+b+\" bed in room \"+r+\" ?";							
-/**********do not change the \"+t+\" \"+n+\" and \"+r+b+\" **************************/
+/********** NOTE: !! do not change the \"+t+\" \"+n+\" and \"+r+b+\"  **************************/
 $LDConfirmDelete="Do you really want to delete \"+t+\" \"+n+\" from room \"+r+b+\"?";
 $LDConfirmLock="Do you really want to lock this bed?";
 $LDClk2Occupy="Click to occupy this bed";
@@ -188,8 +181,7 @@ $LDInsurance=array(
 $LDSave="Save";
 $LDNurse="Nurse";
 $LDYesSure="Yes, I'm sure. Dismiss the patient.";
-$LDFtpAttempted="Attempted to connect to the FTP server.<br>The FTP server may be down or busy. 
-							If this problem persists for a long time, contact the EDP dept.";
+$LDFtpAttempted="Attempted to connect to the FTP server.<br>The FTP server may be down or busy. If this problem persists for a long time, contact the EDP dept.";
 $LDFtpNoLink="FTP login failed";
 $LDJustReleased="The patient was dismissed. Click \"Close\" to continue.";
 $LDReleaseType="Dismissal type";
@@ -326,4 +318,5 @@ $LDAvailable="";
 $LDQueries="Inquiries to the Physician";
 $LDChangeWard="Change of ward";
 $LDChangeBed="Change of bed";
+$LDPatientDied="Death of patient";
 ?>

@@ -1,11 +1,7 @@
-<?
-$LDDbNoLink="Attempt to connect to DB failed!";
-$LDDbNoRead="Attempt to read from DB failed!";
-$LDDbNoSave="Attempt to save to DB failed!";
-$LDDbNoUpdate="Attempt to update to DB failed";
-$LDDbNoLastData="Last data not found!";
-$LDDbNoDelete="Delete failed!";
-
+<?php
+/**
+* IMPORTANT NOTICE: Do not replace the words or characters enclosed in ~ ~ .
+*/
 $LDClose="Close";
 $LDTech="Technical";
 $LDTechRepair="Technical repair";

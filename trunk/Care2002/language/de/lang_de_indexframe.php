@@ -13,12 +13,14 @@ $indextag=array("Allgemeines&nbsp;",
 				"Apotheke&nbsp;",
 				"Medicallager&nbsp;",
 				"EDV &nbsp;",
-				"Intranet Email&nbsp;",
-				"Internet Email&nbsp;",
+				"Intranet E-mail&nbsp;",
+				"Internet E-mail&nbsp;",
 				"Spezielles &nbsp;",
 				"Login &nbsp;"
 				);
-
+/**
+* Die variabel $divtag is z.Z. experimentell
+*/
 $divtag=array("Home",
 				"Telefonbuch",
 				"Aufnahme",
@@ -36,9 +38,8 @@ $divtag=array("Home",
 				"",
 				""
 				);
-				
-$VersionChgLang="English version";
-$VersionChgHref="../index.php?lang=en&mask=$cfg[mask]&egal=1";
+$LDLanguage="Sprache";
 $VersionChgTarget="_top";
+$LDPlsWaitInit="Einen Moment bitte. Initialization läuft gerade....";
 
 ?>

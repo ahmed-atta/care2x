@@ -1,6 +1,6 @@
-<?
+<?php
 $LDWhereTo="Where do you want to post the article?";
-$LDPlsSelect='Please select the number based on the sample graphic, then press "Continue...".';
+$LDPlsSelect="Please select the number based on the sample graphic, then press \"Continue...\".";
 $LDContinueBut="Continue...";
 $LDCancelBut="Cancel";
 $LDBackBut="Back";
@@ -19,9 +19,15 @@ $LDTitleMaxNote="Maximum 50";
 $LDHeader="Header";
 $LDHeaderMaxNote="Maximum 50";
 $LDNews="News article";
-$LDPicFile="Picture";
+/**
+* Do not translate the "<font size=1>" and "</font>"
+*/
+$LDPicFile="Picture <font size=1>(maximum file size 1MB)</font>";
 $LDAuthor="Author";
-$LDPublishDate="Publish date";
+/**
+* Do not translate the "<font size=1>" and "</font>"
+*/
+$LDPublishDate="Publish date <font size=1>(\"T\" for today)</font>";
 
 $LDAlertTitle="Please supply a title";
 $LDAlertNews="Please type the news article";
@@ -31,15 +37,14 @@ $LDAlertDate="Please supply a publish date";
 $LDWrittenOn="Written on:";
 $LDWrittenFrom="By:";
 
-$LDDbNoSave="Save attempt to DB failed!";
-$LDDbNoRead="Write attempt to DB failed!";
-$LDDbNoLink="Attempt to connect to DB failed!";
-
 $LDArticleSaved="The article is saved. You are seeing a preview.";
 $LDBackTxt="Back";
 
 $LDQuickInfo="Quick Informer";
-$LDPhone="Phone";
+$LDPhonePolice="Police";
+$LDPhoneFire="Fire Dept.";
+$LDAmbulance="Emergency";
+$LDPhone="Phone (Hospital)";
 $LDFax="Fax";
 $LDAddress="Address";
 $LDEmail="Email";
@@ -87,6 +92,9 @@ $LDCafePrices="cafeteria price list";
 
 $LDCreateGroup="Create a new group of products";
 $LDCreateGroupPrompt="You must create a new group of products. Please click \"Continue...\".";
+/**
+* Do not translate the "<font color=\"#000000\">" and "</font>"
+*/
 $LDMarkGroup="You must select a product group to edit.<br> Then click  \"<font color=\"#000000\">Continue...</font>\"";
 $LDEnterGroup="Enter the name of the new group.<br>Then click \"<font color=\"#000000\">Continue...</font>\"";
 $LDProdGroup="Product group";
@@ -97,4 +105,8 @@ $LDMarkWeek="Please select the week.";
 $LDClkContinue="Then click \"Continue...\".";
 $LDPlsEnter="Type the menu here...";
 $LDClk2Edit="Click me to edit";
+$LDPreviewPic="Preview Picture";
+$LDCafeEditorial="Cafenews Editor";
+$LDHealthTips="Health Tips";
+$LDClk2Write="Click here to start the editor";
 ?>

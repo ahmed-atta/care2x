@@ -1,4 +1,4 @@
-<?
+<?php
 $LDNursing="Pflege";
 $LDStation="Station";
 $LDQuickView="Schnellsicht";
@@ -18,13 +18,6 @@ $LDNewsTxt="Nachrichten lesen bzw. versenden.";
 $LDMemoTxt="Lesen bzw. versenden.";
 $LDNursingForumTxt="Diskussionsforum über Pflege.";
 $LDNursingStationsTxt="Bettenbelegung, Patientenkurven, Konsilscheine, u.v.m.";
-
-$LDDbNoLink="Verbindung zu DB gescheitert!";
-$LDDbNoRead="Lesen aus der DB is gescheitert!";
-$LDDbNoSave="Schreiben in die DB is gescheitert!";
-$LDDbNoUpdate="Update ist gescheitert!";
-$LDDbNoLastData="Letzte Daten nicht gefunden!";
-$LDDbNoDelete="Löschen in DB ist gescheitert!";
 
 $LDCloseBack2Main="Schliessen und zurück zur Startseite";
 $LDOld="Alte";
@@ -316,4 +309,5 @@ $LDAvailable="vorhanden.";
 $LDQueries="Fragen an den Arzt";
 $LDChangeWard="Stationswechsel";
 $LDChangeBed="Bettwechsel";
+$LDPatientDied="Ableben des Patienten";
 ?>

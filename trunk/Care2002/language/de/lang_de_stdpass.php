@@ -1,17 +1,10 @@
-<?
+<?php
 $LDUserPrompt="Benutzername eingeben";
 $LDPwPrompt="Passwort eingeben";
 $LDSubmitBut="Weiter...";
 $LDPwNeeded="Passwort erforderlich";
 $LDIntroTo="Einführung in die";
 $LDWhatTo="Wie mache ich was mit";
-
-$LDDbNoLink="Verbindung zu DB gescheitert!";
-$LDDbNoRead="Lesen aus der DB is gescheitert!";
-$LDDbNoSave="Schreiben in die DB is gescheitert!";
-$LDDbNoUpdate="Update ist gescheitert!";
-$LDDbNoLastData="Letzte Daten nicht gefunden!";
-$LDDbNoDelete="Löschen in DB ist gescheitert!";
 
 $LDWrongEntry="Falsche Eingabe";
 $LDNoAuth="Keine Berechtigung";
@@ -98,5 +91,7 @@ $LDLogoutConfirm="Wollen Sie sich wirklich abmelden?";
 $LDOK="OK";
 $LDYes="Ja";
 $LDNotReally="Nein, nicht wirklich.";
-
+$LDDOCScheduler="Dienstplaner";
+$LDORNOCScheduler="Dienstplaner";
+$LDFotolab="Fotolabor";
 ?>

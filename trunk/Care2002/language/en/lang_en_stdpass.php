@@ -1,17 +1,10 @@
-<?
+<?php
 $LDUserPrompt="Username";
 $LDPwPrompt="Password";
 $LDSubmitBut="Continue...";
 $LDPwNeeded="Password needed";
 $LDIntroTo="Introduction to editing news articles in";
 $LDWhatTo="What and how can I edit news articles in";
-
-$LDDbNoLink="Attempt to connect to DB failed!";
-$LDDbNoRead="Attempt to read from DB failed!";
-$LDDbNoSave="Attempt to save to DB failed!";
-$LDDbNoUpdate="Attempt to update to DB failed";
-$LDDbNoLastData="Last data not found!";
-$LDDbNoDelete="Delete failed!";
 
 $LDWrongEntry="Wrong entries!";
 $LDNoAuth="No access right";
@@ -97,4 +90,7 @@ $LDLogoutConfirm="Do you really want to log out?";
 $LDOK="OK";
 $LDYes="Yes";
 $LDNotReally="No, not really.";
+$LDDOCScheduler="DOC Scheduler";
+$LDORNOCScheduler="ORNOC Scheduler";
+$LDFotolab="Photolab";
 ?>

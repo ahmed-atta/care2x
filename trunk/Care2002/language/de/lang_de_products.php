@@ -1,11 +1,4 @@
-<?
-$LDDbNoLink="Verbindung zu DB gescheitert!";
-$LDDbNoRead="Lesen aus der DB is gescheitert!";
-$LDDbNoSave="Schreiben in die DB is gescheitert!";
-$LDDbNoUpdate="Update ist gescheitert!";
-$LDDbNoLastData="Letzte Daten nicht gefunden!";
-$LDDbNoDelete="Löschen in DB ist gescheitert!";
-
+<?php
 $LDClose="Schliessen";
 $LDCancel="Abbrechen";
 $LDResetEntry="Eingabe löschen";
@@ -97,7 +90,7 @@ $LDNormal="Normal";
 $LDUrgent="Eilig";
 $LDPassword="Passwort";
 $LDValidatedBy="Bestätigt von";
-$LDSendOrder="Bestellliste an die Apotheke senden.";
+$LDSendOrder="Bestellliste senden.";
 $LDBack2Edit="Zurück und noch mal bearbeiten.";
 $LDEndOrder="Bestellung beenden und verlassen.";
 $LDCreateBasket="Eine neue Bestellliste erstellen bzw. einen leeren Bestellkorb erzeugen.";
@@ -190,7 +183,7 @@ $LDOrderListKey="Suchbegriff für die Bestellungsliste";
 
 $LDReport="Bericht";
 $LDWriteReport="Bericht verfassen";
-$LDReportSent="Der Bericht is gesendet";
+$LDReportSent="Der Bericht ist gesendet";
 $LDSend="Senden";
 $LDPersonellNr="Personalnummer";
 $LDResetAll="Alles verwerfen";

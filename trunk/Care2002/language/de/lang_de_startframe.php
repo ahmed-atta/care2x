@@ -1,6 +1,8 @@
-<?
-$LDMainTitle="Maryhospital.com das Virtuelles Krankenhaus im Internet";
+<?php
+$LDMainTitle="Care 2002 Integriertes Krankenhaus InformationSystem";
 
+/*$LDMainTitle="Maryhospital ein virtuelles Integriertes Krankenhaus InformationSystem im Internet";
+*/
 $LDInviteAskMe='Stellen Sie hier ihre Fragen. z.B. "Was ist die Telefonnummer von M9d?"';
 $LDTipsLink='Tips:';
 $LDTipsAskMe='Probieren Sie Synonyme z.B. statt "Schwester" schreiben Sie "Sr".';
@@ -8,9 +10,12 @@ $LDTipsImgAlt="Klick hier wie man die besten Ergebnisse findet.";
 $LDSubmitBut="Abschicken";
 
 $LDQuickInfo="Auf einen Blick";
-$LDPhone="Telefon";
+$LDPhonePolice="Polizei";
+$LDPhoneFire="Feuerwehr";
+$LDAmbulance="Notarzt";
+$LDPhone="Telefon (KH)";
 $LDFax="Fax";
-$LDAddress="Anschift";
+$LDAddress="Anschrift";
 $LDEmail="Email";
 
 $LDOpenTimes ="Öffnungszeiten";
@@ -36,14 +41,13 @@ $LDNoFrame='Diese Seite verwendet Frames für optimales funktionieren. Bitte inst
 						stellen Sie die Akzeptanz auf Cookies auf "automatisch" ein'; 
 $LDClk2Write="Klick hier zum schreiben";
 
-$LDAlertBrowser="Ihr Browser ist kein MSIE!<br> Wir empfehlen den MS Internet Explorer ab version 5.0 für optimales Funktionieren des Programs.";
 $LDAlertOldBrowser="Ihr Browser ist älter als version 5.0<br> Wir empfehlen die version ab 5.0. <br> Sie können zwar eine ältere version benutzen, aber das
 								Program würde nicht einwandfrei funktionieren.";
 $LDAlertNoCookie="Sie oder Ihr Browser hätte(n) möglicherweise die Cookies abgelehnt.<br>Dieses Program ist auf Cookies angewiesen
 								sonst würde es nicht einwandfrei laufen.<br>Bitte stellen Sie den Browser auf automatische Annahme von
 								Cookies ein.<br>";
 $LDClkAfter="Danach klicken Sie hier an.";
-$LDGoAheadEgal="Starte das Program trotzdem weiter.";
+$LDGoAheadEgal="Klick hier an um das Program zu starten.";
 $LDGoAheadEgalCookie="I will KEINE Cookies annehmen. Starte das Program trotzdem weiter.";
 $LDCookieRef="Wenn Sie mehr über Cookies wissen wollen lesen Sie dieses Dokument:<br>
 						<a href=\"http://iug.uni-paderborn.de/info/datenschutz.html\" target=\"pp\">Cookies und Datenschutz (Entgegen landläufiger Meinung)</a><br>";

@@ -1,36 +1,38 @@
-<?
-$LDDbNoLink="Attempt to connect to DB failed!";
-$LDDbNoRead="Attempt to read from DB failed!";
-$LDDbNoSave="Attempt to save to DB failed!";
-$LDDbNoUpdate="Attempt to update to DB failed";
-$LDDbNoLastData="Last data not found!";
-$LDDbNoDelete="Delete failed!";
-
+<?php
 $LDOr="OR";
 $LDLOGBOOK="LOGBOOK";
 $LDOrDocument="OR Documentation";
 $LDOrDocumentTxt="Documenting the operative services";
-$LDDutyPlan="Standby duty plan";
-$LDQuickView="Quick view";
-$LDQviewTxtDocs="Quick view of today's physician/surgeon on standby duty";
+
+/**
+*  A tiny dictionary:
+*  DOC = doctor on call duty
+*  ORNOC = Operating room nurse on call duty
+*  OR = operating room (surgery room)
+*/
+$LDDOC="DOC";
+$LDORNOC="ORNOC";
+$LDScheduler="Scheduler";
+$LDQuickView="Quickview";
+$LDQviewTxtDocs="Quick view of today's DOC (Doctor-On-Call)";
 $LDOrLogBook="OR nursing logbook";
 $LDOrLogBookTxt="Documenting the nursing services in OR, archive files";
 $LDOrProgram="OR program";
 $LDOrProgramTxt="Show, edit, create, etc. an OR program";
 $LDQviewTxtNurse="Quick view of today's nurses' on standby duty";
-$LDDutyPlanTxt="Show, edit, create a standby duty plan for nurses";
+$LDDutyPlanTxt="Show, edit, create ORNOC (OR Nurse-On-Call)";
 $LDOnCallDuty="Standby duty";
-$LDOnCallDutyTxt="Documenting the work during a standby duty";
+$LDOnCallDutyTxt="Documenting the work during an On-Call duty";
 $LDAnaLogBook="Anesthesia logbook";
 $LDAnaLogBookTxt="Documenting the anesthesia services, archive files";
-$LDQviewTxtAna="Quick view of today's nurses on stanby duty for anesthesia";
+$LDQviewTxtAna="Quick view of today's ORNOC for anesthesia";
 $LDNewDocu="New document";
 $LDSearch="Search";
 $LDArchive="Archive";
 $LDSee="See";
 $LDUpdate="Update";
 $LDCreate="Create";
-$LDCreatePersonList="Create a personnel list";
+$LDCreatePersonList="Create a OR Nurses list";
 $LDDoctor="Physician/Surgeon";
 $LDNursing="Nursing";
 $LDAna="Anaesthesia";
@@ -72,8 +74,16 @@ $LDTherapy="Therapy";
 $LDSpecials="Special notice";
 $LDClassification="Classification";
 
+/**
+*  A tiny dictionary:
+*  OP = operation (surgical operation)
+*/
 $LDOpStart="OP Start";
 $LDOpEnd="OP End";
+/**
+*  A tiny dictionary:
+*  Scrub nurse =  the nurse in sterile clothing assisting the surgeon, in charge of the sterile instruments and surgical materials
+*/
 $LDScrubNurse="Scrub nurse";
 $LDOpRoom="OP room";
 $LDResetAll="Erase all entries";
@@ -141,6 +151,10 @@ $LDOpenPatientFolder="Open the nursing folder of ~tagword~";
 $tbuf=array("O","A","S","R");
 $cbuf=array("Surgeon","Assistant","Scrub nurse","Rotating nurse");
 
+/**
+*  A tiny dictionary:
+*  rotating nurse =  the nurse in non-sterile clothing assisting the scrub nurse, in charge of the non-sterile instruments and surgical materials
+*/
 $LDOpPersonElements=array(
 											operator=>"Surgeon",
 											assist=>"Assistant",
@@ -162,6 +176,16 @@ $LDUsedMaterial="Used OP materials";
 $LDContainer="Used container/instruments";
 $LDDRG="DRG";
 $LDShowLogbook="Show logbook";
+
+/**
+*  A tiny dictionary:
+*  ITA = Intra Tracheal Anesthesia
+*  ITN = Intratrachele Narkose (german)
+*  LA =  Local anesthesia (locally injected or applied)
+*  DS = Daemmerschlaf (a local dialect meaning analgesic sedation )
+*  AS = Analgesic sedation (german = Analgosidierung)
+*  Plexus = Anesthesia on the Plexus nerve 
+*/
 
 $LDAnaTypes=array(
 					"ITN"=>"ITA",
@@ -196,12 +220,14 @@ $LDJobIdTag=array(
 $LDQuickSelectList="Quick select list";
 $LDTimes="Time";
 $LDPlasterCast="Plaster cast";
+/**
+*  Reposition = repositioning of bone dislocation or fracture
+*/
 $LDReposition="Reposition";
 $LDWaitTime="Idle time";
 $LDStart="Start";
 $LDEnd="End";
-$LDPatNoExist="The patient is not yet entered in the logbook. Please close this window and start the logbook from the very
-						beginning. If this problem persists, please notify the EDP department.";
+$LDPatNoExist="The patient is not yet entered in the logbook. Please close this window and start the logbook from the very	beginning. If this problem persists, please notify the EDP department.";
 $opts=array("-",
 					"Patient arrived late in OR",
        				"Anesthesiologists arrived late in OR",
@@ -210,7 +236,7 @@ $opts=array("-",
        				"Special reason");
 $LDReason="Reason";
 $LDMaterialElements=array(
-									"Art.nr.",
+									"Best.nr.",
     								"Art.name",
     								"&nbsp;",
     								"Generic",
@@ -246,9 +272,7 @@ $LDSelectArticle="Click to select this article";
 $LDDbInfo="Info from the databank";
 $LDRemoveArticle="Remove article from this list";
 $LDArticleNoList="Article not listed in the databank";
-$LDPromptSearch="Please enter a search keyword.<br>
-							Like for example a given name, family name, or a birthdate, etc.
-							(Read also the  <a href=\"ucons.php\">Tips</a>.)";
+$LDPromptSearch="Please enter a search keyword.<br>Like for example a given name, family name, or a birthdate, etc.	(Read also the  <a href=\"ucons.php\">Tips</a>.)";
 $LDKeyword="Keyword";
 $LDOtherFunctions="Other functions";
 $LDInfoNotFound="The needed information is not found!";

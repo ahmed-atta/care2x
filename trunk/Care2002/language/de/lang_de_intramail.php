@@ -1,11 +1,4 @@
-<?
-$LDDbNoLink="Verbindung zu DB gescheitert!";
-$LDDbNoRead="Lesen aus der DB is gescheitert!";
-$LDDbNoSave="Schreiben in die DB is gescheitert!";
-$LDDbNoUpdate="Update ist gescheitert!";
-$LDDbNoLastData="Letzte Daten nicht gefunden!";
-$LDDbNoDelete="Löschen in DB ist gescheitert!";
-
+<?php
 $LDClose="Schliessen";
 $LDCancel="Abbrechen";
 $LDResetEntry="Eingabe löschen";
@@ -14,7 +7,6 @@ $LDReset="Löschen";
 
 $LDNewSearch="Neue Suche";
 $LDSearch="Suchen";
-
 
 $LDContinue="Weiter";
 $LDBack="Zurück";
@@ -32,8 +24,6 @@ $LDSelect="Auswählen";
 $LDGoodMorning="Guten Morgen";
 $LDGoodDay="Guten Tag";
 $LDGoodEvening="Guten Abend";
-
-
 
 $LDPageTop="Zurück nach ganz oben.";
 $LDPreview="Vorschau";
@@ -54,16 +44,16 @@ $LDWelcome="Willkommen";
 
 $LDErrorLogin="Falsche Passwort oder Benutzername! Bitte korrigieren Sie die Eingaben.";
 $LDErrorForm="Das Formular ist nicht vollständig ausgefüllt!<br>Bitte füllen Sie es vollständig aus.";
-$LDErrorPassword="Die Passwortangaben sind nicht gleich! <br>Bitte korrigieren Sie die Angaben. Die Passwortangaben müssen unbedingt gleich sein.";
+$LDErrorPassword="Die Passwortangaben sind nicht unterschiedlich! <br>Bitte korrigieren Sie die Angaben. Die Passwortangaben müssen unbedingt gleich sein.";
 $LDErrorIncomplete="Eingabe ist inkomplett!  Bitte geben Sie die erforderliche Information ein.";
 
-$LDIntraEmail="Intranet Email";
+$LDIntraEmail="Intranet E-mail";
 $LDLogin="Login";
-$LDUrEmailAddr="Ihre Email Addresse";
+$LDUrEmailAddr="Ihre E-mail Addresse";
 
 $LDNotRegUser= "Sie sind noch nicht als Benutzer registriert.<br>Bitte füllen Sie das untere Formular aus um sich registrieren zu lassen.";
 $LDFirstName="Vorname";
-$LDChoiceAddr="Gewünschte Email Addresse";
+$LDChoiceAddr="Gewünschte E-mail Addresse";
 $LDAlias="Alias";
 $LDChoicePassword="Gewünschtes Passwort";
 $LDPassword2x="Passwort noch einmal eingeben";
@@ -71,14 +61,14 @@ $LDRegister="Registrieren";
 $LDNewReg="Neuer Benutzer kann sich hier registrieren lassen.";
 
 $LDInbox="Posteingang";
-$LDNewEmail="Neue Email";
+$LDNewEmail="Neue E-mail";
 $LDAddrBook="Addressenbuch";
 $LDOptions="Optionen";
 $LDHelp="Hilfe";
 $LDSent="Gesendete";
 $LDDrafts="Vorlagen";
 $LDRecycle="Recycle";
-$LDReadEmail="Email lesen";
+$LDReadEmail="E-mail lesen";
 $LDEmailCount="Sie haben <font size=2 color=#0><b>~nr~ ungelesene Nachrichten</b></font> in ihrem Posteingang.";
 $LDSortDate="Sortieren per Datum";
 $LDSubject="Betreff";
@@ -99,13 +89,12 @@ $LDRecipient="Empfänger";
 $LDQuickAddr="Schnelladdresse";
 $LDInsertAddr="Einfügen";
 $LDFolderEmpty="Der Ordner ~tagword~ is momentan leer.";
-$LDNoteIntra="Bitte beachten Sie das die Emails nur innerhalb des<br>
-	Intranets verschickt bzw. empfangen werden können. <p>Bitte klicken Sie hier um Ihren Posteingang zu öffnen.";
-$LDEmailSent="Der Email wurde erfolgreich gesendet!";
-$LDConfirmDelete="Die markierte Emails wirklich löschen?";
+$LDNoteIntra="Bitte beachten Sie das die E-mails nur innerhalb des<br>Intranets verschickt bzw. empfangen werden können. <p>Bitte klicken Sie hier um Ihren Posteingang zu öffnen.";
+$LDEmailSent="Der E-mail wurde erfolgreich gesendet!";
+$LDConfirmDelete="Die markierte E-mails wirklich löschen?";
 $LDAlertNoRecipient="Die Empfängeraddresse fehlt! Bitte geben Sie eine Empfängeraddresse in das Feld -Empfänger- ein.";
-$LDAlertNoSubject="Der Betreff fehlt! Klicken Sie -Abbrechen- an. Wenn Sie den Email ohne Betreff trotzdem versenden möchten, klicken Sie -OK- an.";
-$LDAlertNoText="Sie haben nichts geschrieben. Bitte schreiben Sie bevor Sie das Email senden.";
+$LDAlertNoSubject="Der Betreff fehlt! Klicken Sie -Abbrechen- an. Wenn Sie den E-mail ohne Betreff trotzdem versenden möchten, klicken Sie -OK- an.";
+$LDAlertNoText="Sie haben nichts geschrieben. Bitte schreiben Sie bevor Sie das E-mail senden.";
 $LDRead="Lesen";
 $LDBack2="Zurück zu";
 $LDReply2="Antwort an";
@@ -115,23 +104,23 @@ $LDReplyAgain="Erneut antworten";
 $LDForward="Weiterleiten";
 $LDClk4Printer="Klick hier um eine ausdruckfähige version zu öffnen";
 $LDPrinterVersion="Version zum ausdrucken";
-$LDAskDeleteMail="Diesen Email wirklich löschen?";
+$LDAskDeleteMail="Diesen E-mail wirklich löschen?";
 $LDPrint="Ausdrucken";
 $LDAttach="Anhang";
-$LDEmailAddr="Email Addresse";
+$LDEmailAddr="E-mail Addresse";
 $LDShortName="Kurzname";
 $LDSortName="Sortieren per Name";
 $LDMoreInfo="Mehr Info";
 $LDTakeOver="Übertragen";
 $LDJustReset="Zurücksetzen";
 $LDMaximum="Maximal";
-$LDSaveNewAddr="Neue Email Addresse ins Addressenbuch Speichern";
-$LDWriteEmail="Email schreiben";
-$LDAddNewAddr="Neue Email Addresse einfügen";
+$LDSaveNewAddr="Neue E-mail Addresse ins Addressenbuch Speichern";
+$LDWriteEmail="E-mail schreiben";
+$LDAddNewAddr="Neue E-mail Addresse einfügen";
 $LDConfirmDeleteAddr="Wollen Sie die markierte Addressen wirklich löschen?";
 
 $LDUrInfo="Ihre Information";
-$LDEmailProc="Email Behandlung";
+$LDEmailProc="E-mail Behandlung";
 $LDProfile="Profil";
 $LDProfileTxt="Name, Alias, ändern";
 $LDPasswordChange="Passwort ändern";
@@ -142,7 +131,38 @@ $LDMemberDirTxt="Sich ins Verzeichnis eintragen<br>	&nbsp;bzw. nicht eintragen l
 $LDReply2Txt="Antwort an: addresse ändern";
 $LDEmailAddrChange="Ihre Addresse ändern";
 $LDSignature="Unterschrift";
-$LDSignatureTxt="Unterschift erstellen zum<br>&nbsp;anhängen an jedem<br>&nbsp;ausgehenden Email";
+$LDSignatureTxt="Unterschift erstellen zum<br>&nbsp;anhängen an jedem<br>&nbsp;ausgehenden E-mail";
 
-$LDEmail2Drafts="Email wurde als Vorlage gespeichert.";
+$LDEmail2Drafts="E-mail wurde als Vorlage gespeichert.";
+$LDNoEmailAddress="Die Email Addresse fehlt! Bitte geben Sie mindestens die Email Addresse ein.";
+$LDLogout="Logout";
+$LDNameIsUsed="Die E-mail adresse wird schon von jemand benutzt. Bitte geben Sie eine andere Adresse ein.";
+/**
+* The indexes of the email domains sychronize with department tags that are used throughout the 
+* software. Please be aware of the dependecies.
+*/
+$LDEmailDomains=array(
+intranet=>"intranet",
+allg_chir=>"allgemeine.chirurgie",
+anaesth=>"anaesthesie",
+gyn=>"gynokologie",
+icu=>"intensiv",
+imc=>"intermediate",
+plast=>"plastische.chirurgie",
+unfall=>"unfall.chirurgie",
+hno=>"hno",
+pallia=>"palliativ",
+augen=>"augen",
+neuro=>"neurologie",
+radio=>"radiologie",
+inn1=>"innere.1",
+inn2=>"innere.2",
+plop=>"plastische.op",
+hnop=>"hno.op",
+allg_op=>"allgemeine.chirurgie.op",
+unfall_op=>"unfall.op",
+gyn_op=>"gyn.op",
+augen_op=>"augen.op"
+);
+
 ?>

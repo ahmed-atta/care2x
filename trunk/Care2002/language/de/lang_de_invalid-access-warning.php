@@ -1,13 +1,14 @@
-<? setcookie(currentuser,"");?>
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
- <TITLE>Invalid Access Warning</TITLE>
+ <TITLE>Unerlaubter Zugriff</TITLE>
 </HEAD>
 
-<BODY BACKGROUND="leinwand.gif">
-
+<BODY bgcolor="#ffffff">
 
 <table width=100% border=1>
 <tr>
@@ -23,7 +24,7 @@
 <FONT    SIZE=3 color=red  FACE="Arial">
 <b>Sie sind nicht berechtigt dieses Dokument zu öffnen!</b></font><p>
 <FORM >
-<INPUT type="button"  value=" OK "  onClick="<? if ($mode=="close") print 'window.close()'; else print 'history.back()'; ?>"></FORM>
+<INPUT type="button"  value=" OK "  onClick="<?php if ($mode=="close") print 'window.close()'; else print 'history.back()'; ?>"></FORM>
 <p>
 </font>
 </center>
@@ -56,11 +57,10 @@ In seltenen Fällen könnte die Datenübertragung gestört gewesen sein. Klicken Sie
 </tr>
 </table>        
 <p>
-
-<? require("de_copyrite.htm"); ?>
-
+<?php
+$path_root="../../";
+require("de_copyrite.php"); 
+?>
 </FONT>
-
-
 </BODY>
 </HTML>

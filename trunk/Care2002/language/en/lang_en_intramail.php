@@ -1,11 +1,4 @@
-<?
-$LDDbNoLink="Attempt to connect to DB failed!";
-$LDDbNoRead="Attempt to read from DB failed!";
-$LDDbNoSave="Attempt to save to DB failed!";
-$LDDbNoUpdate="Attempt to update to DB failed";
-$LDDbNoLastData="Last data not found!";
-$LDDbNoDelete="Delete failed!";
-
+<?php
 $LDClose="Close";
 $LDCancel="Cancel";
 $LDResetEntry="Erase entries";
@@ -105,8 +98,7 @@ $LDRecipient="Recipient";
 $LDQuickAddr="Quick address";
 $LDInsertAddr="Insert";
 $LDFolderEmpty="The ~tagword~ folder is empty at the moment.";
-$LDNoteIntra="Please take note that intranet emails can be sent and received WITHIN THE INTRANET SYSTEM ONLY.
-<p>Please click here to open your inbox.";
+$LDNoteIntra="Please take note that intranet emails can be sent and received WITHIN THE INTRANET SYSTEM ONLY. <p>Please click here to open your inbox.";
 $LDEmailSent="The email was sent successfully!";
 $LDConfirmDelete="Are you sure you want to delete the marked emails?";
 $LDAlertNoRecipient="Recipient missing! Please enter a recipient email address.";
@@ -151,4 +143,35 @@ $LDSignature="Signature";
 $LDSignatureTxt="Create signature<br>&nbsp;that automatically attaches<br>&nbsp;to every outgoing email.";
 
 $LDEmail2Drafts="Email was saved as draft.";
+$LDNoEmailAddress="Die Email Addresse fehlt! Geben Sie mindestens die Email Addresse ein.";
+$LDLogout="Logout";
+$LDNameIsUsed="The email address is already being used by somebody. Please choose another username.";
+/**
+* The indexes of the email domains sychronize with department tags that are used throughout the 
+* software. Please be aware of the dependencies.
+*/
+$LDEmailDomains=array(
+intranet=>"intranet",
+allg_chir=>"general.med",
+anaesth=>"anesthesia",
+gyn=>"ob.gyne",
+icu=>"icu",
+imc=>"intermediate",
+plast=>"plastic.surgery",
+unfall=>"emergency.med",
+hno=>"ent",
+pallia=>"palliative",
+augen=>"eye.med",
+neuro=>"neurology",
+radio=>"radiology",
+inn1=>"internal.med.1",
+inn2=>"internal.med.2",
+plop=>"plastic.surgery.op",
+hnop=>"ent.op",
+allg_op=>"general.surgery.op",
+unfall_op=>"emergency.op",
+gyn_op=>"ob.gyne.op",
+augen_op=>"eye.med.op"
+);
+
 ?>

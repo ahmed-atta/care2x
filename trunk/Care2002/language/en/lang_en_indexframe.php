@@ -1,4 +1,4 @@
-<?
+<?php
 $indextag=array("Home&nbsp;",
 				"Directory&nbsp;",
 				"Admission&nbsp;",
@@ -17,7 +17,9 @@ $indextag=array("Home&nbsp;",
 				"Specials &nbsp;",
 				"Login &nbsp;"
 				);
-
+/**
+* The divtag variable is experimental
+*/
 $divtag=array("Home",
 				"Phone Directory",
 				"Admission",
@@ -35,7 +37,7 @@ $divtag=array("Home",
 				"",
 				""
 				);
-$VersionChgLang="German version";
-$VersionChgHref="../index.php?lang=de&mask=$cfg[mask]&egal=1";
 $VersionChgTarget="_top";
+$LDLanguage="Language";
+$LDPlsWaitInit="Please hold on. Initialization process is going on....";
 ?>

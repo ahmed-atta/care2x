@@ -1,45 +1,40 @@
-<?
-$monat=array("",
-						"Januar",
-						"Februar",
-						"März",
-						"April",
-						"Mai",
-						"Juni",
-						"Juli",
-						"August",
-						"September",
-						"Oktober",
-						"November",
-						"Dezember"
-						);
+<?php
+$Jan="Januar";
+$Feb="Februar";
+$Mae="März";
+$Apr="April";
+$Mai="Mai";
+$Jun="Juni";
+$Jul="Juli";
+$Aug="August";
+$Sep="September";
+$Okt="Oktober";
+$Nov="November";
+$Dez="Dezember";
+
+$monat=array("",$Jan,$Feb,$Mae,$Apr,$Mai,$Jun,$Jul,$Aug,$Sep,$Okt,$Nov,$Dez);
 
 $LDDoctors="Ärzte";
 $LDQView="Schnellsicht";
 $LDQViewTxt="Schnellübersicht über die gegenwärtige diensthabende Ärzte";
-$LDDutyPlan="Dienstplan";
-$LDDutyPlanTxt="Dienstplan sehen, erstellen, verarbeiten, u.s.w.";
 $LDDocsList="Ärzteliste erstellen";
 $LDDocsListTxt="Eingabe von Personaldaten, Funk & Telefonnummer, usw.";
-$LDDocsForum="Ärzte forum";
+$LDDocsForum="Ärzte Forum";
 $LDDocsForumTxt="Diskussionsforum für Ärzte";
 $LDNews="Nachrichten";
-$LDNewsTxt="Nachrichten versenden bzw. lesen";
+$LDNewsTxt="Nachrichten lesen bzw. schreiben";
 $LDMemo="Rundbrief";
-$LDMemoTxt="Rundbrief(e) versenden bzw. lesen";
+$LDMemoTxt="Rundbrief(e) lesen bzw. versenden";
 $LDCloseAlt="Ärzte Fenster schliessen";
-$LDDbNoLink="Verbindung zu DB gescheitert!";
-$LDDbNoRead="Lesen aus der DB is gescheitert!";
-$LDDbNoSave="Schreiben in die DB is gescheitert!";
 
 $LDDocsOnDuty="Diensthabende Ärzte";
 
 $LDTabElements=array("Abteilung",
-								 "Arzt 1",
+								 "Bereitschaft",
 								 "Funk/Telefon",
-								 "Arzt 2",
+								 "Hintergrund",
 								 "Funk/Telefon",
-								 "Dienstplan"
+								 "Monatsdienstplan"
 								 );
 $LDShowActualPlan="Aktuellen Dienstplan zeigen";
 $LDShortDay=array("So",
@@ -58,8 +53,8 @@ $LDFullDay=array("Sonntag",
 								"Freitag",
 								"Samstag"
 								);
-$LDDoc1="Arzt 1";
-$LDDoc2="Arzt 2";
+$LDDoc1="Bereitschaft";
+$LDDoc2="Hintergrund";
 $LDClosePlan="Diesen Plan schliessen";
 $LDNewPlan="Einen neuen Plan erstellen";
 $LDBack="Zurück";
@@ -90,4 +85,11 @@ $LDChange="Wechseln";
 $LDCreatePersonList="Personalliste erstellen bzw. ändern";
 $LDNoPersonList="Die Personalliste ist noch nicht vorhanden. Bitte erstellen Sie zuerst die Liste. Klicken Sie den Knopf an.";
 $LDShow="Zeigen";
+
+$LDDOCS="Dienstplaner";
+$LDDOCSTxt="Dienstplan sehen, erstellen, verarbeiten, u.s.w.";
+$LDDOCSR="Dienstwünsche";
+$LDDOCSRTxt="Dientswünsche planen bzw. eintragen";
+
+
 ?>

@@ -1,4 +1,6 @@
-<? setcookie(currentuser,"");?>
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
@@ -6,8 +8,7 @@
  <TITLE>Invalid Access Warning</TITLE>
 </HEAD>
 
-<BODY BACKGROUND="leinwand.gif">
-
+<BODY bgcolor="#ffffff">
 
 <table width=100% border=1>
 <tr>
@@ -23,7 +24,7 @@
 <FONT    SIZE=3 color=red  FACE="Arial">
 <b>You have no access rights to open this document!</b></font><p>
 <FORM >
-<INPUT type="button"  value=" OK "  onClick="<? if ($mode=="close") print 'window.close()'; else print 'history.back()'; ?>"></FORM>
+<INPUT type="button"  value=" OK "  onClick="<?php if ($mode=="close") print 'window.close()'; else print 'history.back()'; ?>"></FORM>
 <p>
 </font>
 </center>
@@ -57,7 +58,10 @@ In rare cases there might have been an error in the data transfer. To correct th
 </table>        
 <p>
 
-<? require("en_copyrite.htm"); ?>
+<?php
+$path_root="../../";
+require("en_copyrite.php"); 
+?>
 </FONT>
 
 

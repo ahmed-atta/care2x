@@ -1,4 +1,4 @@
-<?
+<?php
 $fieldname=array(
 							"Name",
 							"Vorname",
@@ -11,12 +11,6 @@ $fieldname=array(
 							"Privat 2"
 							);
 							
-$LDDbNoLink="Verbindung zu DB gescheitert!";
-$LDDbNoRead="Lesen aus der DB is gescheitert!";
-$LDDbNoSave="Schreiben in die DB is gescheitert!";
-$LDDbNoDelete="Das Löschen ist gescheitert!";
-$LDDbNoUpdate="Das Vorbereiten in DB ist gescheitert!";
-
 $LDPhoneDir="Telefonbuch";
 
 $LDSearch="Suchen";

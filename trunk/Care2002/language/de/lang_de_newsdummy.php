@@ -1,4 +1,4 @@
-<?
+<?php
 print '
 		<FONT  SIZE=+1 COLOR="#cc0000" FACE="verdana,Arial">
 		<b>'.ucfirst($LDNewsDummy[$i]).' Beitrag</b>

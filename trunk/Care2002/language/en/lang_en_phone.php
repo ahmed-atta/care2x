@@ -1,4 +1,4 @@
-<?
+<?php
 $fieldname=array(
 							"Family name",
 							"Name",
@@ -11,12 +11,6 @@ $fieldname=array(
 							"Private 2"
 							);
 							
-$LDDbNoLink="Attempt to connect to DB failed!";
-$LDDbNoRead="Attempt to read from DB failed!";
-$LDDbNoSave="Attempt to save to DB failed!";
-$LDDbNoDelete="Attempt to delete in DB failed!";
-$LDDbNoUpdate="Attempt to prepare data failed!";
-
 $LDPhoneDir="Phone directory";
 $LDSearch="Search";
 $LDDir="Directory";

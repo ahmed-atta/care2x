@@ -1,4 +1,4 @@
-<?
+<?php
 $LDPageTitle="Abteilungen";
 $LDDeptTxt="Abteilung";
 $LDOpenHrsTxt="Öffnungszeiten";
@@ -20,6 +20,9 @@ $dept=array("Allgemeine Chirurgie",
 					"Intermediate Care Unit",
 					"Intensive Care Unit",
 					"Labor");
+/** 
+* Die variabel $target bitte NICHT übersetzen !!
+*/
 $target=array("dept_generalsurgery",
 					"dept_emergency",
 					"dept_plasticsurgery",

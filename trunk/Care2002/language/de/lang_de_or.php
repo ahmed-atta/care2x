@@ -1,15 +1,11 @@
-<?
-$LDDbNoLink="Verbindung zu DB gescheitert!";
-$LDDbNoRead="Lesen aus der DB is gescheitert!";
-$LDDbNoSave="Schreiben in die DB is gescheitert!";
-$LDDbNoUpdate="Update ist gescheitert!";
-$LDDbNoLastData="Letzte Daten nicht gefunden!";
-$LDDbNoDelete="Löschen in DB ist gescheitert!";
-
+<?php
 $LDOr="OP";
 $LDLOGBOOK="LOGBUCH";
 $LDOrDocument="OP Dokumentation";
 $LDOrDocumentTxt="Dokumentation der OP Leistung";
+$LDDOC="Dienst";
+$LDORNOC="Dienst";
+$LDScheduler="Planer";
 $LDDutyPlan="Dienstplan";
 $LDQuickView="Schnellsicht";
 $LDQviewTxtDocs="Übersicht über die gegenwärtige diensthabende Ärzte";
@@ -163,11 +159,16 @@ $LDUsedMaterial="Verbrauchte OP Material";
 $LDContainer="Benutzte Siebe/Container";
 $LDDRG="DRG";
 $LDShowLogbook="Logbuch einblenden";
-
+/**
+*  ITN = Intratrachele Narkose
+*  LA = Lokale anesthesie
+*  DS = Dämmerschlaf = Analgosedierung
+*  AS = Analgosidierung
+*/
 $LDAnaTypes=array(
 					"ITN"=>"ITN",
 					"ITN-Jet"=>"ITN-Jet",
-					"ITN-Mask"=>"ITN-Mask",
+					"ITN-Mask"=>"ITN-Maske",
 					"LA"=>"LA",
 					"DS"=>"DS",
 					"AS"=>"AS",
@@ -176,7 +177,7 @@ $LDAnaTypes=array(
 					);
 
 $LDAnaDoc="Narkosearzt";
-$LDAnaPrefix="N";
+$LDAnaPrefix="N";  // N = Narkose
 $LDEnterPerson="Einen neuen ~tagword~ eingeben";
 $LDExtraInfo="Weitere Angaben";
 $LDFrom="ab";
@@ -212,7 +213,7 @@ $opts=array("-",
        				"Besonderer Grund");
 $LDReason="Grund";
 $LDMaterialElements=array(
-									"Art.nr.",
+									"Order nr.",
     								"Art.name",
     								"&nbsp;",
     								"Generic",

@@ -1,11 +1,4 @@
-<?
-$LDDbNoLink="Verbindung zu DB gescheitert!";
-$LDDbNoRead="Lesen aus der DB is gescheitert!";
-$LDDbNoSave="Schreiben in die DB is gescheitert!";
-$LDDbNoUpdate="Update ist gescheitert!";
-$LDDbNoLastData="Letzte Daten nicht gefunden!";
-$LDDbNoDelete="Löschen in DB ist gescheitert!";
-
+<?php
 $LDLab="Labor";
 $LDMedLab="Medizinisches Labor";
 $LDPathLab="Pathologisches Labor";
@@ -72,7 +65,7 @@ $LDHow2Save="Wie soll ich die Werte speichern?";
 $LDWrongValueHow="Ich habe einen falschen Wert gespeichert. Wie korrigiere ich das?";
 $LDVal2Note="I muss einen Vermerk anstatt Wert eingeben. Wie geht das?";
 $LDImDone="Ich bin fertig. Was nun?";
-$LDAlertJobId="Geben Sie die Auftragsnummer ein!";
-$LDAlertTestDate="Geben Sie das Untersuchungsdatum ein!";
+$LDAlertJobId="Bitte geben Sie die Auftragsnummer ein!";
+$LDAlertTestDate="Bitte geben Sie das Untersuchungsdatum ein!";
 
 ?>

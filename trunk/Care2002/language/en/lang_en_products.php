@@ -1,11 +1,4 @@
-<?
-$LDDbNoLink="Attempt to connect to DB failed!";
-$LDDbNoRead="Attempt to read from DB failed!";
-$LDDbNoSave="Attempt to save to DB failed!";
-$LDDbNoUpdate="Attempt to update to DB failed";
-$LDDbNoLastData="Last data not found!";
-$LDDbNoDelete="Delete failed!";
-
+<?php
 $LDClose="Close";
 $LDCancel="Cancel";
 $LDResetEntry="Erase entries";
@@ -18,6 +11,8 @@ $LDMedDepot="Medical Depot";
 $LDSearchWordPrompt="Enter a search keyword, for example: an order number, a product number, or a product name, etc.";
 $LDEnterData="Click to enter data";
 $LDClk2See="Click to see data";
+
+/**************** note the " ~nr~ " must not be erased it will be replaced by the script with the number of search results ******/
 $LDFoundPatient="The search found <b>~nr~</b> patients";
 $LDWildCards="What are wildcards and how to use them";
 $LDNewSearch="New search";
@@ -98,7 +93,7 @@ $LDNormal="Normal";
 $LDUrgent="Urgent";
 $LDPassword="Password";
 $LDValidatedBy="Validated by";
-$LDSendOrder="Send this order list to the pharmacy.";
+$LDSendOrder="Send this order list.";
 $LDBack2Edit="Go back and edit list.";
 $LDEndOrder="End ordering.";
 $LDCreateBasket="Start a new order list.";

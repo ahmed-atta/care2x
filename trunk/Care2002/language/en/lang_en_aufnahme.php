@@ -1,4 +1,4 @@
-<?
+<?php
 $LDAdmission="Admission";
 $LDAdmitDate="Admission date";
 $LDAdmitTime="Admission time";
@@ -32,10 +32,6 @@ $LDGoodMorning="Good Morning!";
 $LDGoodDay="Hi! Nice to see you!";
 $LDGoodAfternoon="Good afternoon!";
 $LDGoodEvening="Good Evening";
-
-$LDDbNoLink="Attempt to connect to DB failed!";
-$LDDbNoRead="Attempt to read from DB failed!";
-$LDDbNoSave="Attempt to save to DB failed!";
 
 $LDNewForm="I need an empty form please.";
 
@@ -139,4 +135,5 @@ $LDEnterDiagnosisNote="Attach links to diagnosis related notes & publications:";
 $LDEnterTherapyNote="Attach links to therapy related notes & publications:";
 $LDSeeDiagnosisNote="Diagnosis related notes & publications:";
 $LDSeeTherapyNote="Therapy related notes & publications:";
+$LDMakeBarcodeLabels="Make barcode labels";
 ?>

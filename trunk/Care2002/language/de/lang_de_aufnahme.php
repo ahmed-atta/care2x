@@ -1,4 +1,4 @@
-<?
+<?php
 $LDAdmission="Aufnahme";
 $LDAdmitDate="Aufnahmedatum";
 $LDAdmitTime="Aufnahmezeit";
@@ -12,7 +12,7 @@ $LDAdmitBy="Aufgenommen von";
 $LDSex="Geschlecht";
 $LDMale="männlich";
 $LDFemale="weiblich";
-$LDAddress="Addresse";
+$LDAddress="Adresse";
 $LDAmbulant="Ambulant";
 $LDStationary="Stationär";
 $LDSelfPay="Selbstzahler";
@@ -134,10 +134,11 @@ $LDTherapyType="Behandlungsart";
 $LDTherapyOpt="Wahlarzt";
 $LDServiceType="Leistungsart";
 
-$LDClick2Print="Klicken Sie die Etiketten zum Ausdrucken";
+$LDClick2Print="Klicken Sie die Etiketten an zum Drucken";
 $LDEnterDiagnosisNote="Verknüpfungen mit Diagnose relevanten Publikationen anhängen:";
 $LDEnterTherapyNote="Verknüpfungen mit Therapie relevanten Publikationen anhängen:";
 $LDSeeDiagnosisNote="Verknüpfungen mit Diagnose relevanten Publikationen:";
 $LDSeeTherapyNote="Verknüpfungen mit Therapie relevanten Publikationen:";
+$LDMakeBarcodeLabels="Druck Barcode Etiketten";
 
 ?>
