@@ -1,11 +1,4 @@
-<?
-$LDDbNoLink="Mencoba koneksi ke DB gagal!";
-$LDDbNoRead="Mencoba membaca dari DB gagal!";
-$LDDbNoSave="Mencoba menyimpan ke DB gagal!";
-$LDDbNoUpdate="Mencoba untuk pemutakhiran ke DB failed";
-$LDDbNoLastData="Data terakhir tidak ditemukan!";
-$LDDbNoDelete="Penghapusan gagal!";
-
+<?php
 $LDClose="Tutup";
 $LDCancel="Batal";
 $LDResetEntry="Hapus Masukan";
@@ -151,4 +144,9 @@ $LDSignature="Tanda Tangan";
 $LDSignatureTxt="Buat tanda tangan<br>&nbsp;Yang secara otomatis dilampirkan<br>&nbsp;tiap-tiap email keluar  .";
 
 $LDEmail2Drafts="Email telah disimpan sebagai draft.";
+
+$LDNoEmailAddress="Email address mission! Please enter an email address";
+$LDLogout="Logout";
+$LDNameIsUsed="The email address is already being used by somebody. Please choose another username.";
+
 ?>

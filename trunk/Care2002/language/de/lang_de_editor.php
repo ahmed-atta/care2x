@@ -83,6 +83,7 @@ $LDBack2CafeNews="Zurück zu Cafeteria News";
 $LDProdName="Produktname";
 $LDPriceDM="Preis DM";
 $LDPriceEuro="Preis €";
+$LDPrice="Preis";
 $LDNoPrice="Die Preise sind momentan nicht vorhanden.";
 $LDSorry="Wir bitten um Entschuldigung. Versuchen Sie es im späteren Zeitpunkt.";
 $LDCafePrices="cafeteria preisliste";
@@ -103,4 +104,13 @@ $LDPreviewPic="Bildvorschau";
 $LDCafeEditorial="Cafenews Redaktion";
 $LDHealthTips="Gesundheitstips";
 $LDClk2Write="Zum Schreiben, bitte hier anklicken";
+
+$LDOr="Oder";
+$LDSetCurrency="Währung einstellen";
+$LDNewCurrencySet="Die Währung ist jetzt übernommen worden.";
+$LDPlsSelectCurrency="Bitte wählen Sie die gewünschte Währung aus. Danach klicken Sie \"Übernehmen\" an.";
+$LDmain="Hauptwährung";
+$LDClk2AddCurrency="Zur Eingabe neuer Währung, bitte hier anklicken. (Achtung: Sie würden Cafenews verlassen!)";
+$LDMenuSaved="Der menu is gespeichert.";
+
 ?>

@@ -47,4 +47,11 @@ $LDEditXrayDiag="Befund bearbeiten";
 $LDReadDiag="Befund lesen";
 $LDWriteDiag="Befund schreiben";
 $LDPreviewReport="Vorschau/Befund";
+/* 2002-09-08 EL*/
+$LDTestRequestRadio="Anforderung";
+$LDTestRequestRadioTxt="Anforderung von radiologischer Untersuchung";
+/* 2002-09-10 EL */
+$LDTestReception="Anstehende Anforderung";
+$LDTestReceptionTxt="Anforderung verarbeiten, Befunde eingeben";
+
 ?>

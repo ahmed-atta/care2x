@@ -1,11 +1,4 @@
- <?
-$LDDbNoLink="Mencoba koneksi ke DB gagal!";
-$LDDbNoRead="Mencoba membaca dari DB gagal!";
-$LDDbNoSave="Mencoba menyimpan ke DB gagal!";
-$LDDbNoUpdate="Mencoba untuk pemutakhiran ke DB failed";
-$LDDbNoLastData="Data terakhir tidak ditemukan!";
-$LDDbNoDelete="Penghapusan gagal!";
-
+<?php
 $LDClose="Tutup";
 $LDTech="Teknis";
 $LDTechRepair="Perbaikan teknis";
@@ -17,16 +10,16 @@ $LDReRepair="Permintaan dukungan perbaikan";
 $LDReRepairTxt="Laporan rusak, buat dan kirim permintaan untuk servis perbaikan.";
 $LDRepabotActivate="Mengaktifkan Repabot";
 $LDRepabotActivateTxt="sebuah robot untuk pelayanan otomatis dari pekerjaan permintaan perbaikan .";
-$LDRepairReport="melaporkan perbaikan";
+$LDRepairReport="<nobr>Melaporkan perbaikan</nobr>";
 $LDRepairReportTxt="Laporan pekerjaan perbaikan yang telah diselesaikan.";
 $LDReportsArchive="Arsip laporan";
 $LDReportsArchiveTxt="Pencarian di arsip laporan teknis";
 $LDQuestions="Penyelidikan, pertanyan";
 $LDQuestionsTxt="Buat, baca, dan kirim pertanyaan atau penyelidikan";
 $LDQBotActivate="Mengaktifkan Q-Bot";
-$LDQBotActivateTxt="sebuah robot untuk pelaynan otomatis dari pertanyaan atau penyelidikan.";
+$LDQBotActivateTxt="Sebuah robot untuk pelaynan otomatis dari pertanyaan atau penyelidikan.";
 $LDInfo="Informasi";
-$LDInfoTxt="lihat untuk informasi tentang sifat teknis.";
+$LDInfoTxt="Lihat untuk informasi tentang sifat teknis.";
 
 $LDSendRequest="Kirim permintaan";
 $LDSendReport="Kirim Laporan";
@@ -34,15 +27,15 @@ $LDSendInquiry="Kirim penyelidikan";
 $LDReset="Reset";
 $LDRepairArea="Lokalisasi kerusakan";
 $LDReporter="Permintaan oleh";
-$LDPersonnelNr="nr. personil";
-$LDPhoneNr="nr.  telepon<font size=1>(untuk penyelidikan akhir)</font>";
+$LDPersonnelNr="Nr. personil";
+$LDPhoneNr="Nr.  telepon<font size=1>(untuk penyelidikan akhir)</font>";
 $LDPlsDescribe="Silakan deskripsikan sifat kerusakan";
 
 $LDAlertName="silakan masukkan nama anda.";
 $LDAlertDept="Masukkan departemen anda atau lokaliasasi kerusakan.";
 $LDAlertDeptOnly="Silakan masukkan departemen anda.";
-$LDAlertPNr="silakan masukkan no. personil.";
-$LDAck="tanda terima";
+$LDAlertPNr="Silakan masukkan no. personil.";
+$LDAck="Tanda terima";
 $LDYour="milik anda";
 $LDReceived="telah diterima di";
 $LDAt="pada";
@@ -58,7 +51,7 @@ $LDName="Nama";
 $LDDept="Departemen";
 $LDEnterQuestion="Silakan masukkan pertanyaan";
 $LDLogIn="Log in";
-$LDPlsNoRequest="(jangan masukkan permintaan untuk perbaikan disini. Jika anda ingin melaporkan kerusakan dan perlu memperbaikinya Silakan klik disini.";
+$LDPlsNoRequest="(jangan masukkan permintaan untuk perbaikan disini.<br>Jika anda ingin melaporkan kerusakan dan perlu memperbaikinya Silakan klik disini.";
 $LDLastQuestions="~tagword~ pertanyan atau jawaban terakhir";
 $LDFrom="dari";
 $LDTo="untuk";
@@ -126,5 +119,5 @@ $LDInfoCat=array(
 						"Sistem telepon",
 						"air, suplai"
 						);
-$LDNoFound="saya tidak menemukan apapun yang cocok untuk menjadi Kata Kunci Pencarian. <br>Silakan coba lagi dan masukkan beberapa informasi.";
+$LDNoFound="Saya tidak menemukan apapun yang cocok untuk menjadi Kata Kunci Pencarian. <br>Silakan coba lagi dan masukkan beberapa informasi.";
 ?>

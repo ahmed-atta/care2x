@@ -133,5 +133,61 @@ $LDSystemAdmin="System Administrator";
 $LDMySQLManage="Manage SQL databank with PHP MySQLAdmin";
 $LDSpexFunctions="Other special functions";
 $LDWelcome="Welcome";
-$LDForeWord="You now have the highest access previleges.<br>The following functions are available without restrictions. <br><b>Please be very careful with what you do.</b>";
+$LDForeWord="You now have the highest access privileges.<br>The following functions are available without restrictions. <br><b>Please be very careful with what you do.</b>";
+
+$LDSetDateFormat="Set Date Format";
+$LDSelectDateFormat="Please select the needed date format:";
+/* Do not translate $LDDateFormats */
+$LDDateFormats=array("dd.MM.yyyy","yyyy-MM-dd","MM/dd/yyyy");
+
+$LDDateFormatsTxt= array("For example: 01.10.2002 (01 October 2002)",
+                                         "For example: 2002-10-01 (2002 October 01)",
+										 "For example: 10/01/2002 (October 01, 2002)");
+
+$LDNewDateFormatSaved="The new date format is now in effect.";
+									
+$LDSetCurrency="Set currency";
+$LDNewCurrencySet="The new currency is now active.";
+$LDPlsSelectCurrency="Please select currency.";
+$LDAddCurrency="Add new type of currency";
+$LDPlsAddCurrency="Please enter the information about the currency. Then click \"Save\".";
+$LDAddedNewCurrency="The information about the new currency is saved.";
+$LDmain="main";
+$LDClk2AddCurrency="To enter new currency type, please click here.";
+$LDCurrencyShortName="Currency's symbolic or short name:";
+$LDCurrencyLongName="Currency's descriptive name:";
+$LDCurrencyInfo="Additional information:";
+$LDClk2SetCurrency="To set the main currency, please click here.";
+$LDCurrencyUpdated="The currency information is updated.";
+$LDUpdateCurrencyInfo="Edit Currency Information";
+$LDPlsEnterUpdate="Please edit the currency information. Then press \"Update\".";
+
+$LDEditInfo="Edit";
+$LDCurrencyAdmin="Currency administration";
+
+/**
+* The following lines must be modified according to the examples:
+* english:
+* day = d , month = m, year = y
+* result => dd.mm.yyyy
+*
+* german:
+* day = t, month = m, year = j
+* result => tt.mm.jjjj
+*
+* indonesian:
+* day = h, month = b, year = t
+* result => hh.bb.tttt
+* 
+* BEGIN */
+$LD_ddpMMpyyyy="dd.mm.yyyy";
+$LD_yyyyhMMhdd="yyyy-mm-dd";
+$LD_MMsddsyyyy="mm/dd/yyyy";
+/* END */
+/* 2002-10-22 EL */
+$LDUserInfoSaved='The user access was successfully created';
+$LDUserInfoNoSave='The access creation failed. Please check the entered information';
+$LDNoAreas='You have not selected any area!';
+$LDUserDouble='The access creation failed. Please use a different user login name.';
+$LDEnterNewUser='Create a new user access';
 ?>

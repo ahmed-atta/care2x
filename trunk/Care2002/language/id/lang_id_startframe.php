@@ -1,52 +1,55 @@
-<?
-$LDMainTitle="Maryhospital.com a virtual Hospital Integrated Administration in Internet";
+<?php
+$LDMainTitle='Maryhospital.com sebuah administrasi rumah sakit virtual diintegrasikan  pada Internet';
 
-$LDInviteAskMe='Masukkan pertanyaan anda, Sebagai contoh: "Berapa no telponM9d?"';
+$LDInviteAskMe= 'Masukan query anda, sebagai contoh: \'what is the phone number of M9d?\'';
+
 $LDTipsLink='Tip:';
-$LDTipsAskMe='mencari sinonim, sebagai contoh ketikkan "station" ditempat "ward".';
-$LDTipsImgAlt="klik disini untuk mendapat tips bagaimana mendapat hasil terbaik.";
-$LDSubmitBut="Kirim pertanyaan";
+$LDTipsAskMe='Coba synonimnya, contoh ketik "station" pada tempat "ward".';
+$LDTipsImgAlt='Klik disini untuk tips bagaimana caranya mendapatkan hasil tebaik';
+$LDSubmitBut='Kirim query';
 
-$LDQuickInfo="Quick Informer";
-$LDPhone="Telepon";
-$LDFax="Fax";
-$LDAddress="Alamat";
-$LDEmail="Email";
+$LDQuickInfo= 'Pelapor cepat';
+$LDPhonePolice='Polisi';
+$LDPhoneFire='Pemadam Kebakaran';
+$LDAmbulance='Dokter Gawat Darurat';
+$LDPhone='Telepon';
+$LDFax='Fax';
+$LDAddress='Alamat';
+$LDEmail= 'Email';
 
-$LDOpenTimes ="Admission Hours";
-$LDManagement ="Manajemen";
-$LDDept ="Departemen";
-$LDCafenews ="Berita Kafetaria";
-$LDAdmission ="Admission";
-$LDExhibition ="Pameran";
-$LDEducation ="Pendidikan";
-$LDAdvStudies ="Studies";
-$LDPhyTherapy ="Terapi Fisik";
-$LDHealthTips ="Tip Kesehatan";
-$LDCalendar ="Kaleneder";
-$LDHelp="Bantuan";
-$LDMore="Artikel lanjutan";
+$LDOpenTimes ='Jam Penerimaan';
+$LDManagement ='Pengelolaan';
+$LDDept ='Departement';
+$LDCafenews ='Berita Kafetaria';
+$LDAdmission ='Penerimaan';
+$LDExhibition ='Exhibitions';
+$LDEducation ='Pendidikan';
+$LDAdvStudies ='Belajar';
+$LDPhyTherapy ='Terapi fisik';
+$LDHealthTips ='Tip Kesehatan';
+$LDCalendar ='Kalender';
+$LDHelp='Bantuan';
+$LDMore='Artikel yang lain';
 
-$LDEditTitle="Headline";
-$LDNewsDummy=array(1=>"Pertama",2=>"Kedua",3=>"Ketiga",4=>"Keempat");
+$LDEditTitle='Berita Utama';
+$LDNewsDummy= array(1=>'pertama',2=>'kedua',3=>'ketiga',4=>'keempat');
 
-$LDNoFrame='Situs ini menggunakan frame untuk pemfungsian optimal. Silakan Install Browser yang cocok. Kami merekomendasikan
-						Microsoft Internet Explorer Mulain versi 5.0.Silakan akftfkan JavaScript(JScript) dan
-						nyalakan penerima cookie otomatis';
+$LDNoFrame='Website ini mengunakan frames untuk fungsi yang optimal. Silahkan instal sebuah browser yang semestinya. Kami menyarankan Microsoft Internet Explorer dimulai dari versi 5.0. Silahkan aktifkan Javascript (JScript) dan hidupkan otomatis cookies reception';
 						
-$LDClk2Write="Klik saya untuk mengedit";
+$LDClk2Write='Klik saya untuk edit';
 
-$LDAlertBrowser="Browser anda bukan MSIE! <br>kami merekomendasikan MS Internet Explorer versi 5.0 atau sesudahnya untuk pemfungsian optimal program.";
-$LDAlertOldBrowser="Versi browser anda kurang dari 5.0!<br> Kami merekomendasikan anda menggunakan versi 5.0 atau sesudahnya. <br> menggunakan versi yang lebih tua bisa menyebabkan
-                          fungsi program tiudak dapat dipercaya.";
-$LDAlertNoCookie="anda atau browser anda boleh jadi menolak cookies).<br>program ini membutuhkan mereka. sebaliknya program tidak akan
-							berfungsi dengan baik.<br>silakan set browser anda secara otomatis untuk menerima cookies.<br>";
-$LDClkAfter="Setelah itu klik ini.";
-$LDGoAheadEgal="maju kedepan jalankan program bagaimanapun keadaanya.";
-$LDGoAheadEgalCookie="Saya tidak mau menerima Cookie. Maju kedepan dan mulai program bagaimanapun juga.";
-$LDCookieRef="Jika anda ingin mengetahui lebih lanjut tentang cookie, anda bisa membaca dokumen dibawah ini:<br>
-						<a href=\"http://www.dtp-aus.com/cookies.htm\" target=\"pp\">Sedikit tentang Cookie (Keamanan dan kebohongan)</a><br>
-						<a href=\"http://www.cookiecentral.com/content.phtml?area=4&id=10\" target=\"pp\">Cookie dan PrivasiFAQ</a><br>";
-$LDPrivPolicy="Jika anda ingin membaca kebijakan privasi kami silakan<a href=\"language/en/en_privacy.htm\" target=\"pp\">klik ini:</a>";
-$LDOurPrivPolicy="Kebijakan Privasi kami";
+$LDAlertOldBrowser= 'Versi browser anda lebih tua dari 5.0!<br> Kami merekomendasikan versi 5.0 atau lebih. <br> Mengunakan versi lebih tua mungkin menyebabakan tidak berfungsinya dengan baik program';
+$LDAlertNoCookie= 'Anda atau browser anda mungkin telah menolak cookie. <br> Program ini tergantung dengannya. Sebaliknya program akan tidak berfungsi semestinya. <br>Silahkan set browser anda untuk menerima cookie secara otomatis.<br>';
+$LDClkAfter='Setelah itu klik ini.';
+$LDGoAheadEgal='Bagamanapun juga silahkan dan memulai program.';
+$LDGoAheadEgalCookie= 'Saya tidak ingin menerima cookies. Bagamanapun juga silahkan dan memulai program. ';
+$LDCookieRef='Jika anda ingin mengetahui lebih tentang cookies anda dapat membaca beberapa dokumen dibawah ini:<br>
+<a href=\'http://www.dtp-aus.com/cookies.htm\' target=\'pp\'>Beberapa kata tentang Cookies(Security dan the lies)</a><br>
+<a href=\'http://www.cookiecentral.com/content.phtml?area=4&id=10\' target=\'pp\'>Cookies and Privacy FAQ</a><br>';
+$LDPrivPolicy='Jika anda ingin membaca our privacy policy silahkan <a href=\'language/id/id_privacy.htm\' target=\'pp\'> klik disini:</a>';
+$LDOurPrivPolicy='Kebijakan Kerahasiaan Kami';
+$LDSubmitNews='Submit Berita';
+$LDEditNews='Edit & submit berita melalui online editor';
+/* 2002-10-17 EL */
+$LDCredits='Credits';
 ?>

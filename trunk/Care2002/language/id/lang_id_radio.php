@@ -1,56 +1,56 @@
-<?
-$LDDbNoLink="Mencoba koneksi ke DB gagal!";
-$LDDbNoRead="Mencoba membaca dari DB gagal!";
-$LDDbNoSave="Mencoba menyimpan keDB gagal!";
-$LDDbNoUpdate="Mencoba Pemutakhiran ke DB gagal!;";
-$LDDbNoLastData="Data Terakhir tidka ditemukan!";
-$LDDbNoDelete="Penghapusan Gagal!";
+<?php
+$LDClose='Tutup';
+$LDCancel='Batal';
+$LDResetEntry='Hapus entry-entry';
+$LDSave='Simpan';
 
-$LDClose="Tutup";
-$LDCancel="Batal";
-$LDResetEntry="Hapus Masukan";
-$LDSave="Simpan";
+$LDSearchWordPrompt='Masukan sebuah pencarikan kata kunci, sebagai contoh: Nama keluarga, nama, atau tanggal lahir, dll.';
+$LDEnterData='Klik untuk memmasukan data';
+$LDClk2See='Klik untuk menlihat data';
+$LDFoundPatient='Pencarian ditemukan <b>~nr~</b> pasient';
+$LDWildCards='Apakah wildcards dan bagaimana mengunakannya';
+$LDNewSearch='Pencarian baru';
 
-$LDSearchWordPrompt="MAsukkan Kata Kunci pencarian, Contoh: Nama Keluarga,  nama, Atau tanggal lahir, dll.";
-$LDEnterData="Klik untuk memasukkan data";
-$LDClk2See="Klik untuk melihat data";
-$LDFoundPatient="Pendarian menemukan<b>~nr~</b> pasien";
-$LDWildCards="Apa itu wildcard dan bagaimana menggunakannya";
-$LDNewSearch="Pencarian baru";
+$LDCaseNr='No. Pasien';
+$LDLastName='Nama Keluarga';
+$LDName='Nama';
+$LDBday='Tanggal Lahir';
+$LDOClock='Tepat';
+$LDBack='Kembali';
 
-$LDCaseNr="No. Pasien";
-$LDLastName="Nama Keluarga";
-$LDName="Nama";
-$LDBday="Tanggal Lahir";
-$LDOClock="Tepat";
-$LDBack="Kembali";
+$LDOn='On';
+$LDAt='pada';
+$LDClk2Edit='klik untuk edit laporan ini';
 
-$LDOn="On";
-$LDAt="pada";
-$LDClk2Edit="Klik untuk mengedit laporan ini";
+$LDNew='Baru';
+$LDEdit='Edit';
+$LDCreate='Buat';
+$LDValue='Nilai';
 
-$LDNew="Baru";
-$LDEdit="Edit";
-$LDCreate="Buat";
-$LDValue="Nilai";
+$LDRadio='Radiologi - Sinar-X';
+$LDXrayFilms='Film Sinar-X';
+$LDXrayFilmsTxt='tampilkkan film Sinar-X, baca atau tulis laporan diagnosa, dll.';
+$LDNews='Berita';
+$LDNewsTxt='Baca atau tulis berita mengenai radiologi';
+$LDMemo='Memo';
+$LDMemoTxt='Baca atau tulis sebuah memo';
+$LDSearchPat='mencari pasien';
+$LDCategory='Kategori';
+$LDPast3Days='Tiga hari terakhir';
+$LDPast3Months='Tiga bulan terakhir';
+$LDPastAll='Seluruh';
+$LDSelect='Pilih';
+$LDShootDate='Tanggal foto';
+$LDFullScreen='Seluruh layar';
+$LDEditXrayDiag='Edit laporan diagnosa';
+$LDReadDiag='Baca diagnosa';
+$LDWriteDiag='Tulis diagnosa';
+$LDPreviewReport='tampilkann ulang/diagnosa';
+/* 2002-09-08 EL*/
+$LDTestRequestRadio='Test request';
+$LDTestRequestRadioTxt='Request for radiological tests';
+/* 2002-09-10 EL */
+$LDTestReception='Pending Request';
+$LDTestReceptionTxt='Receive & process test requests, write results/diagnoses';
 
-$LDRadio="Radiologi - Sinar-X";
-$LDXrayFilms="Film Sinar-X";
-$LDXrayFilmsTxt="tampilkkan film Sinar-X, baca atau tulis laporan diagnosa, dll.";
-$LDNews="Berita";
-$LDNewsTxt="baca atau tulis berita menyangkut radiologi";
-$LDMemo="Memo";
-$LDMemoTxt="Baca atau tulis memo";
-$LDSearchPat="mencari pasien";
-$LDCategory="kategori";
-$LDPast3Days="Tiga hari terakhir";
-$LDPast3Months="Tiga bulan terakhir";
-$LDPastAll="Seluruh";
-$LDSelect="Pilih";
-$LDShootDate="tanggal foto";
-$LDFullScreen="Seluruh layar";
-$LDEditXrayDiag="Edit laporan diagnosa";
-$LDReadDiag="Baca diagnosa";
-$LDWriteDiag="Tulis diagnosa";
-$LDPreviewReport="tampilkann ulang/diagnosa";
 ?>

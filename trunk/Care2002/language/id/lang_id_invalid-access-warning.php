@@ -1,3 +1,8 @@
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require_once('../../include/inc_vars_resolve.php'); // globalize POST, GET, & COOKIE  vars
+require_once('../../include/inc_img_fx.php');
+?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
@@ -22,7 +27,7 @@
         mengakses dokumen ini!</b></font> 
         <p>
 <FORM >
-<INPUT type="button"  value=" OK "  onClick="<? if ($mode=="close") print 'window.close()'; else print 'history.back()'; ?>"></FORM>
+<INPUT type="button"  value=" OK "  onClick="<?php if ($mode=="close") print 'window.close()'; else print 'history.back()'; ?>"></FORM>
 <p>
 </font>
 </center>
@@ -31,19 +36,19 @@
         <font size=3 face="verdana,arial"> Sebab yang memungkinkan terjadinya 
         masalah ini:</FONT> 
         <p> 
-        <font size=2 face="verdana,arial"> <img src="../../img/achtung.gif" width=18 height=23 border=0> 
+        <font size=2 face="verdana,arial"> <img <?php echo createComIcon('../../','achtung.gif') ?>> 
         Anda menggunakan fungsi standar "Back" atau"Forward" di Browser anda. 
         Hindari penggunaan Tombol ini.<br>
-        <img src="../../img/achtung.gif" width=18 height=23 border=0> Bisa jadi 
+        <img <?php echo createComIcon('../../','achtung.gif') ?>> Bisa jadi 
         anda menolak Cookie. Program ini bergantung pada Cookie agar dapat berfungsi 
         dengan baik. Jadi tolong terima Cookie. <br>
-        <img src="../../img/achtung.gif" width=18 height=23 border=0> Boleh jadi 
+        <img <?php echo createComIcon('../../','achtung.gif') ?>> Boleh jadi 
         Browser anda tidak menerima Cookie. Silakan Set Up Browser anda agar dapat 
         menerima Cookie Secara otomatis. <br>
-        <img src="../../img/achtung.gif" width=18 height=23 border=0> Browser 
+        <img <?php echo createComIcon('../../','achtung.gif') ?>> Browser 
         anda tidak mampu manjalankan JavaScript atau JavaScript-nya dimatikan. 
         Silakan nyalakan JavaScript di Browser anda. <br>
-        <img src="../../img/achtung.gif" width=18 height=23 border=0> Pada beberapa 
+        <img <?php echo createComIcon('../../','achtung.gif') ?>> Pada beberapa 
         Kasus yang jarang terjadi anda error pada bagian transfer data. Untuk 
         mengkoreksi situasi ini Klik sama tombol "reload" Browser anda. 
         <p> 
@@ -54,8 +59,10 @@
 </tr>
 </table>        
 <p>
-
-<? require("id_copyrite.htm"); ?>
+<?php
+$path_root='../../';
+require('id_copyrite.php'); 
+?>
 </FONT>
 
 

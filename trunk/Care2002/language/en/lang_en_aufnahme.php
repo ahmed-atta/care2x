@@ -131,6 +131,7 @@ $LDTherapyOpt="Therapy option";
 $LDServiceType="Service type";
 
 $LDClick2Print="Click the barcode labels to print";
+
 $LDEnterDiagnosisNote="Attach links to diagnosis related notes & publications:";
 $LDEnterTherapyNote="Attach links to therapy related notes & publications:";
 $LDSeeDiagnosisNote="Diagnosis related notes & publications:";
@@ -139,4 +140,10 @@ $LDMakeBarcodeLabels="Make barcode labels";
 
 $LDPlsEnterDept="<b>Please enter your department, clinic, or work area.</b><br>(e.g. PLOP, Internal Med2, or M4A, etc.)";
 $LDOkSaveNow="OK save now";
+
+$LD_ddpMMpyyyy="dd.mm.yyyy";
+$LD_yyyyhMMhdd="yyyy-mm-dd";
+$LD_MMsddsyyyy="mm/dd/yyyy";
+/* 2002-10-13 EL */
+$LDPlsSelectPatientFirst="Please find the patient first.";
 ?>

@@ -56,4 +56,7 @@ $LDPrivPolicy="Si usted desea leer nuestra política de privacidad por favor <a h
 $LDOurPrivPolicy="nuestra política de privacidad";
 $LDSubmitNews="Enviar Noticia";
 $LDEditNews="Editar y Enviar Noticia con el editor online";
+/* 2002-10-17 EL */
+$LDCredits='Créditos';
+
 ?>

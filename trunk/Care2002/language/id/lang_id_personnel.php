@@ -1,4 +1,4 @@
-<?
+<?php
 $LDDbNoLink="Mencoba koneksi ke DB gagal!";
 $LDDbNoRead="Mencoba membaca dari DB gagal!";
 $LDDbNoSave="Mencoba menyimpan ke DB gagal!";

@@ -68,4 +68,48 @@ $LDImDone="Ich bin fertig. Was nun?";
 $LDAlertJobId="Bitte geben Sie die Auftragsnummer ein!";
 $LDAlertTestDate="Bitte geben Sie das Untersuchungsdatum ein!";
 
+/* 2002-09-01 EL */
+$LDTestRequest="Anforderung";
+$LDFillUpSend="Anforderung von ";
+$LDTestRequestPathoTxt=$LDFillUpSend." pathologishen/histologischen Untersuchung";
+$LDTestRequestBacterioTxt=$LDFillUpSend."bakteriologischen Untersuchung";
+$LDTestRequestChemLabTxt=$LDFillUpSend."Blut bzw chemischen Untersuchung";
+$LDBloodBank="Blutzentrale";
+$LDBloodRequest="Blutkonserven";
+$LDBloodRequestTxt=$LDFillUpSend."Blutkonserven bzw -präparate";
+
+$LDRequestSent= array('insert'=>"Die Anforderung wurde gesendet.",
+                                    'update'=>"Die aktualisierte Anforderung wurde gesendet.");
+$LDFormSaved=array('insert'=>"Die Anforderung wurde gespeichert (nicht gesendet).",
+                                 'update'=>"Die aktualisierte Anforderung wurde gespeichert (nicht gesendet).");
+$LDWhatToDo=" Was möchten Sie jetzt tun?";
+
+$LDNewFormSamePatient="Eine neue Anforderung für <b>denselben</b> Patient erstellen";
+$LDEditForm="Dieselbe Anforderung nachbearbeiten";
+$LDEndTestRequest="Anforderung beenden";
+$LDNewFormOtherPatient="Ein neues Formular für einen anderen Patient bereitstellen";
+
+/* 2002-09-03 EL */							  
+$LDSearchPatient="Patient suchen";
+$LDSearchFound="Die Suche hat ~nr~ Patienten gefunden.";
+/* 2002-09-04 EL */		
+$LDTestRequestFor="Anforderung von ";
+$LDTestType=array('chemlabor'=>"Laboruntersuchung",
+                                     'patho'=>"Pathologie",
+								 'baclabor'=>"bakteriologische Untersuchung",
+								      'blood'=>"Blutkonserven");
+/* 2002-09-10 EL */
+$LDTestReception="Anstehende Anforderung";
+$LDTestReceptionTxt="Anforderung verarbeiten, Befunde eingeben";
+/* 2002-09-15 EL */
+$LDPrintForm="Die Anforderung drucken";
+
+/* 2002-09-21 EL */
+$LDInitFindings='Vorbefund';
+$LDCurrentFindings='Zwischenbefund';
+$LDFinalFindings='Endbefund';
+
+$LDFillLabOnly='Nur vom Labor auszufüllen!';
+$LDLEN='LDN';  /* Lab entry number */
+
 ?>

@@ -143,4 +143,8 @@ $LDMakeBarcodeLabels="Druck Barcode Etiketten";
 
 $LDPlsEnterDept="<b>Bitte geben sie Ihre Abteilung oder Arbeitsplatz ein. </b><br>(z.B. PLOP oder Innere2 oder M4A, usw.)";
 $LDOkSaveNow="OK jetzt abspeichern";
+
+$LD_ddpMMpyyyy="TT.MM.JJJJ";
+$LD_yyyyhMMhdd="JJJJ-MM-TT";
+$LD_MMsddsyyyy="MM/TT/JJJJ";
 ?>

@@ -1,45 +1,28 @@
 <?php
 		
-$indextag=array("Allgemeines&nbsp;",
-				"Telefonbuch&nbsp;",
-				"Aufnahme&nbsp;",
-				"Medocs&nbsp;",
-				"Ärzte&nbsp;",
-				"Pflege&nbsp;",
-				"OP&nbsp;",
-				"Technik&nbsp;",
-				"Labor&nbsp;",
-				"Radiologie&nbsp;",
-				"Apotheke&nbsp;",
-				"Medicallager&nbsp;",
-				"EDV &nbsp;",
-				"Intranet E-mail&nbsp;",
-				"Internet E-mail&nbsp;",
-				"Spezielles &nbsp;",
-				"Login &nbsp;"
+$indextag=array('Allgemeines',
+				'Aufnahme',
+				'Ambulanz',
+				'Medocs',
+				'Ärzte',
+				'Pflege',
+				'OP',
+				'Labor',
+				'Radiologie',
+				'Apotheke',
+				'Medicallager',
+				'Telefonbuch',
+				'Technik',
+				'EDV ',
+				'Intranet E-mail',
+				'Internet E-mail',
+				'Spezielles',
+				'Login '
 				);
-/**
-* Die variabel $divtag is z.Z. experimentell
-*/
-$divtag=array("Home",
-				"Telefonbuch",
-				"Aufnahme",
-				"Medocs",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				""
-				);
-$LDLanguage="Sprache";
-$VersionChgTarget="_top";
-$LDPlsWaitInit="Einen Moment bitte. Initialization läuft gerade....";
 
+$LDLanguage='Sprache';
+$VersionChgTarget='_top';
+$LDPlsWaitInit='Einen Moment bitte. Initialization läuft gerade....';
+
+$LDChange='Wechseln';
 ?>

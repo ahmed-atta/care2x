@@ -1,11 +1,4 @@
-<?
-$LDDbNoLink="Mencoba koneksi ke DB gagal!";
-$LDDbNoRead="Mencoba membaca dari DB gagal!";
-$LDDbNoSave="Mencoba menyimpan ke DB gagal!";
-$LDDbNoUpdate="Mencoba untuk pemutakhiran ke DB failed";
-$LDDbNoLastData="Data terakhir tidak ditemukan!";
-$LDDbNoDelete="Penghapusan gagal!";
-
+<?php
 $LDNews="Berita";
 $LDNewsTxt="Tulis Artikel berita Utama";
 $LDMemo="Memo";
@@ -94,7 +87,7 @@ $LDStandbyDuty="Standby duty";
 $LDStandbyDutyTxt="Mendokumentasikan performa kerja di standby duty";
 $LDHandStat="Statistik bedah tangan";
 $LDHandStatTxt="Mendokumentasikan Operasi bedah tangan";
-$LDCalendar="kalender";
+$LDCalendar="Kalender";
 $LDCalendarTxt="Kalender Multi Fungsi";
 $LDBlackBoard="Papan Tulis";
 $LDBlackBoardTxt="Pos-kan atau cari informasi";

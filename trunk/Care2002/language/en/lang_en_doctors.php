@@ -93,5 +93,7 @@ $LDDOCS="DOC Scheduler";
 $LDDOCSTxt="Doctor On Call Scheduler, plan, view, update, edit, etc.";
 $LDDOCSR="DOCSR";
 $LDDOCSRTxt="Doctor On Call Schedule Requester";
+/* 2002-09-15 EL */
+$LDTestRequest="Test request";
 
 ?>

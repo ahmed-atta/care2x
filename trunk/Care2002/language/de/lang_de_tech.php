@@ -1,5 +1,5 @@
 <?php
-$LDClose="Close";
+$LDClose="Schliessen";
 $LDTech="Technik";
 $LDTechRepair="Technische Reparatur";
 $LDTechMaint="Technische Wartung";
@@ -24,11 +24,11 @@ $LDInfoTxt="Technische Information suchen bzw. lesen";
 $LDSendRequest="Anforderung senden";
 $LDSendReport="Meldung senden";
 $LDReset="Eingabe löschen";
-$LDRepairArea="Lokalisation der Schaden";
+$LDRepairArea="Wo ist der Schaden aufgetreten?";
 $LDReporter="Angefordert von";
 $LDPersonnelNr="Personal Nr.";
 $LDPhoneNr="Telefon Nr.  <font size=1>(für eventuelle Rückfragen)</font>";
-$LDPlsDescribe="Bitte beschreiben Sie hier die Art und Umfang der Schaden.";
+$LDPlsDescribe="Bitte beschreiben Sie hier die Art und Umfang des Schadens.";
 
 $LDAlertName="Bitte geben Sie Ihren Namen ein!";
 $LDAlertDept="Bitte geben Sie Ihre Abteilung ein!";
@@ -39,7 +39,7 @@ $LDAck="Empfangsbestätigung";
 $LDYour="Ihre";
 $LDReceived="wurde am";
 $LDAt="um";
-$LDAtTech="an der technischen Abteilung empfangen.";
+$LDAtTech="von der technischen Abteilung empfangen.";
 $LDRequest="Anforderung";
 $LDReport="Meldung";
 $LDThanksSir="Vielen Dank Herr/Frau";

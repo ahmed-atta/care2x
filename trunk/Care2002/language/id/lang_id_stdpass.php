@@ -1,29 +1,22 @@
-<?
-$LDUserPrompt="Username";
-$LDPwPrompt="Password";
-$LDSubmitBut="Continue...";
-$LDPwNeeded="Password needed";
+<?php
+$LDUserPrompt="Nama User";
+$LDPwPrompt="Kata Kunci";
+$LDSubmitBut="Lanjutkan...";
+$LDPwNeeded="Memerlukan Kata Kunci";
 $LDIntroTo="Introduction to editing news articles in";
 $LDWhatTo="What and how can I edit news articles in";
-
-$LDDbNoLink="Mencoba koneksi ke DB gagal!";
-$LDDbNoRead="Mencoba membaca dari DB gagal!";
-$LDDbNoSave="Mencoba menyimpan ke DB gagal!";
-$LDDbNoUpdate="Mencoba untuk pemutakhiran ke DB failed";
-$LDDbNoLastData="Data terakhir tidak ditemukan!";
-$LDDbNoDelete="Penghapusan gagal!";
 
 $LDWrongEntry="Wrong entries!";
 $LDNoAuth="No access right";
 $LDAuthLocked="Access right frozen.";
 
-$LDNewData="New Data";
+$LDNewData="Data Baru";
 $LDEdit="Edit";
 $LDAdmit="Admit";
-$LDSearch="Search";
-$LDArchive="Archive";
-$LDAdmission="Patient Admission";
-$LDAdmTargetEntry="Admission";
+$LDSearch="Cari";
+$LDArchive="Arsip";
+$LDAdmission="Administrasi Pasien";
+$LDAdmTargetEntry="Penerimaan";
 $LDAdmTargetSearch="Search Admitted Patients";
 $LDAdmTargetArchive="Research in Archive";
 $LDAdmWantEntry="I need to admit a patient";
@@ -45,56 +38,77 @@ $LDWhat2Do="How to do what in";
 $LDHowManage="How to manage the directory";
 $LDHowEnter="How to enter new phone information";
 
-$LDPhoneDir="Phone directory";
+$LDPhoneDir="Petunjuk telepon";
 $LDMakeDutyPlan="Create dutyplan";
 $LDDocsList="Doctors' list";
-$LDNursingManage="Ward management";
+$LDNursingManage="Pengelolaan bangsal";
 
-$LDNursingStation="Nursing ward";
+$LDNursingStation="Perawat Ruangan";
 $LDOrDocu="OR Documentation";
 $LDOrLogBook="OR nursing logbook";
-$LDOrNursing="OR nursing";
-$LDCreate="Create";
+$LDOrNursing="Perawat RO";
+$LDCreate="Buat";
 $LDPersonList="Personnel list";
 $LDRepabotActivate="Activate Repabot";
 $LDQBotActivate="Activate Q-Bot";
 
-$LDMedLab="Medical laboratory";
-$LDCancel="Cancel";
+$LDMedLab="Laboratori Medis";
+$LDCancel="Batal";
 
-$LDPharmacy="Pharmacy";
-$LDOrderArchive="Archive";
-$LDPharmaOrder="Ordering";
-$LDOrderCat="My product catalog";
+$LDPharmacy="Farmasi";
+$LDOrderArchive="Arsip";
+$LDPharmaOrder="Memesan";
+$LDOrderCat="Katalog Produk ku";
 $LDPharmaDb="Databank";
 $LDPharmaOrderBot="Activate OrderBot";
 
-$LDMedDepot="Medical Depot";
+$LDMedDepot="Depot Medis";
 $LDMediBotActivate="Activate Medibot";
 $LDSqlDb="SQL Databank";
 $LDManageAccess="Manage Access Rights";
 $LDListAll="List all";
 $LDSystemLogin="System Administrator Login";
 $LDSeeData="Display data";
-$LDNewData="Enter new data";
+$LDNewData="Data Baru";
 
-$LDWelcome="Welcome";
+$LDWelcome="Selamat sedang";
 $LDLogin="Login";
 $LDChangeSaved="The changes were saved.";
-$LDPcID="Current identity of this computer";
-$LDDept="Department";
-$LDWard="Ward";
-$LDWardOR="Ward room or OR number";
-$LDPhoneNr="Nomor telepon ruangan";
+$LDPcID="Identitas dari computer saat ini";
+$LDDept="Departemen";
+$LDWard="Nama Ruangan";
+$LDWardOR="Nomor Perawat Ruangan - Nomor RO Ruangan";
+$LDPhoneNr="Nomor Telepon Ruangan";
 $LDIntercomNr="Nomor Interkom Ruangan";
 $LDPcIP="IP Adress Computer ini";
 $LDSave="Simpan perubahan";
 $LDNoChange="Jangan Rubah setting yang ada";
 $LDClose="Tutup";
 $LDLogout="Keluar";
-$LDNewLogin="login baru";
+$LDNewLogin="Login baru";
 $LDLogoutConfirm="Anda yakin mau keluar (Log Out)?";
 $LDOK="OK";
 $LDYes="Ya";
 $LDNotReally="Tidak, Tidak juga.";
+$LDDOCScheduler="DOC Scheduler";
+$LDORNOCScheduler="ORNOC Scheduler";
+$LDFotolab="Photolab";
+/* 2002-09-08 EL */
+$LDTestRequest='Diagnostic Test Request';
+$LDTestType=array('patho'=>'Pathology', 
+                             'chemlabor'=>'Medical Laboratory', 
+							 'baclabor'=>'Bacteriological Laboratory',
+							 'blood'=>'Blood Bank',
+							 'radio'=>'Radiology',
+							 'sono'=>'Sonography',
+							 'allamb'=>'General Ambulatory',
+							 'unfamb'=>'Emergency Ambulatory',
+							 'nuklear'=>'Nuclear Diagnostics',
+							 'inmed'=>'Internal Medicine');
+$LDBloodOrder='Request for blood conserve';
+/* 2002-09-22 EL */
+$LDPendingRequest='Pending request';
+/* 2002-10-06 EL*/
+$LDLoggedOut='Logged out';
+
 ?>

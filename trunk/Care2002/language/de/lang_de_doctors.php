@@ -91,5 +91,7 @@ $LDDOCSTxt="Dienstplan sehen, erstellen, verarbeiten, u.s.w.";
 $LDDOCSR="Dienstwünsche";
 $LDDOCSRTxt="Dientswünsche planen bzw. eintragen";
 
+/* 2002-09-15 EL */
+$LDTestRequest="Anforderung";
 
 ?>

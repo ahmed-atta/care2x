@@ -1,10 +1,16 @@
-<?
-require("../chklang.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+$lang='en';
+define('LANG_FILE','');
+define('NO_CHAIN',1);
+require_once('../include/inc_front_chain_lang.php');
+
+require('../chklang.php');
 $notable=1;
-require("../include/inc_db_makelink.php");
+require('../include/inc_db_makelink.php');
 if($link&&$DBLink_OK) 
 	{
-		$sql="select * from mahopass";
+		$sql='select * from care_users';
 		if( $ergebnis=mysql_query($sql,$link)) 
 		{
 			if(mysql_num_rows($ergebnis)) $notable=0;
@@ -12,13 +18,13 @@ if($link&&$DBLink_OK)
 	}
 if (!$notable)
 	{
-		 header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); 
+		 header('Location:../language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php?lang='.$lang); 
 		 exit;
 	}
 	else 
 	{
-		 $usid=uniqid("");
-		 include("../include/inc_init_crypt.php"); // initialize crypt
+		 $usid=uniqid('');
+		 include('../include/inc_init_crypt.php'); // initialize crypt
          $ciphersid=$enc_hcemd5->encodeMimeSelfRand($usid);
     }
 ?>
@@ -29,11 +35,7 @@ if (!$notable)
 </head>
 
 <body bgcolor=white>
-<script>
-var r= Math.random() *10;
-if(r>5) document.write('<img src="../img/nedr.gif" border=0 width=100 height=138 align="left">');
-else document.write('<img src="../img/catr.gif" border=0  align="left">');
-</script>
+
 <font size=3 color=maroon>Please click the "Start phpMyAdmin" button to start...</font>
 <p>
 

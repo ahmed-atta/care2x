@@ -1,41 +1,27 @@
-<?
-$indextag=array("Home&nbsp;",
-				"Direktori&nbsp;",
-				"izin&nbsp;",
-				"Medocs&nbsp;",
-				"Dokter&nbsp;",
-				"Perawat&nbsp;",
-				"atau&nbsp;",
-				"Dukungan Teknis&nbsp;",
-				"Laboratorium&nbsp;",
-				"Radiologi&nbsp;",
-				"Farmasi&nbsp;",
-				"Depot medis&nbsp;",
-				"EDP &nbsp;",
-				"Intranet Email&nbsp;",
-				"Internet Email&nbsp;",
-				"Spesial &nbsp;",
-				"Login &nbsp;"
+<?php
+$indextag=array('Home',
+				'Admin Pasien',
+				'Ambulatory',
+				'Medocs',
+				'Dokter',
+				'Perawat',
+				'RO Ruang Operasi',
+				'Laboratorium',
+				'Radiologi',
+				'Farmasi',
+				'Depot medis',
+				'Petunjuk',
+				'Dukungan Teknis',
+				'PDE ',
+				'Intranet Email',
+				'Internet Email',
+				'Fungsi Spesial ',
+				'Login '
 				);
 
-$divtag=array("Home",
-				"Direktori telepon",
-				"Hak",
-				"Medocs",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				""
-				);
-$VersionChgLang="versi Jerman";
-$VersionChgHref="../index.php?lang=de&mask=$cfg[mask]&egal=1";
-$VersionChgTarget="_top";
+
+$VersionChgTarget='_top';
+$LDLanguage='Bahasa';
+$LDPlsWaitInit='Silahkan tunggu sebentar. Inisialisasi sedang dilaksanakan....';
+$LDChange='Change';
 ?>

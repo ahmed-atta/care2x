@@ -1,48 +1,41 @@
-<?
-$LDDbNoLink="Mencoba koneksi ke DB gagal!";
-$LDDbNoRead="Mencoba membaca dari DB gagal!";
-$LDDbNoSave="Mencoba menyimpan keDB gagal!";
-$LDDbNoUpdate="Mencoba Pemutakhiran ke DB gagal!;";
-$LDDbNoLastData="Data Terakhir tidka ditemukan!";
-$LDDbNoDelete="Penghapusan Gagal!";
+<?php
+$LDIcd10='ICD-10';
+$LDOps301='OPS-301';
+$LDBack2Logbook='Kembali ke logbook';
+$LDIcd10Search='Cari ICD-10 ';
+$LDSearch4ICD10='Cari untuk Code-code ICD-10';
+$LDSearch4OPS301='Cari untuk Code-code OPS-301';
+$LDDescription='Deskripsi';
+$LDMainAuxDiag='Utama/Alat Bantu';
+$LDMainAuxOp='Utama/Alat Bantu Operasi';
+$LDDiagBy='Di Diagnosed oleh';
+$LDDoneBy='Dilakukan oleh';
+$LDInclusive='Pemasukan Barang';
+$LDExclusive='Pengeluaran Barang';
+$LDNotes='Catatan';
+$LDRemarks='Penandaan ulang';
+$LDExtraCodes='Tambahan code atau coding';
+$LDAddCodes='Tambahan catatan atau code-code';
+$LDApplySelection='Laksanakan pemilihan';
+$LDSGBV='SGB-V';
+$LDLocalization='Loc.';
+$LDOpsIntern='Kode';
+$LDSearchCodes='Cari kode-kode';
+$LDQuickList='Daftar singkat';
+$LDConvert2IcdOps='-> ICD/OPS';
 
-$LDIcd10="ICD-10";
-$LDOps301="OPS-301";
-$LDBack2Logbook="Kembali ke logbook";
-$LDIcd10Search="ICD-10 Search";
-$LDSearch4ICD10="Mencari kode ICD-10 ";
-$LDSearch4OPS301="Mencari kode OPS-301 ";
-$LDDescription="Deskripsi";
-$LDMainAuxDiag="Utama/bantuan";
-$LDMainAuxOp="Operasi utama/bantuan";
-$LDDiagBy="Didiagnosa oleh";
-$LDDoneBy="Diselesaikan oleh";
-$LDInclusive="inklusi";
-$LDExclusive="eksklusi";
-$LDNotes="catatan";
-$LDRemarks="Penandaan ulang";
-$LDExtraCodes="Kode atau pengkodean ekstra";
-$LDAddCodes="Catatan atau kode tambahan";
-$LDApplySelection="Terapkan seleksi";
-$LDSGBV="SGB-V";
-$LDLocalization="Loc.";
-$LDOpsIntern="Kode";
-$LDSearchCodes="Mencari kode";
-$LDQuickList="daftarcepat";
-$LDConvert2IcdOps="-> ICD/OPS";
+$LDSearch='Cari';
+$LDOperation='Operasi';
+$LDAlertSureDelete='Apakah anda yakin menginingkan menghapus entri ini?';
 
-$LDSearch="Mencari";
-$LDOperation="Operasi";
-$LDAlertSureDelete="Anda yakin akan menghapus masukan ini?";
+$LDAux='A';
+$LDMain='M';
+$LDRight='R';
+$LDLeft='L';
+$LDBoth='B';
 
-$LDAux="A";
-$LDMain="M";
-$LDRight="R";
-$LDLeft="L";
-$LDBoth="B";
-
-$LDDeleteEntry="hapus masukan";
-$LDNoQuickList="Daftarcepat kosong saat ini.";
-$LDClick2Search="Silakan klik disini untuk mencoba mencari.";
-$LDPossibleCodes="Kemungkinan kode ICD & OPS ";
+$LDDeleteEntry='Hapus entry';
+$LDNoQuickList='Daftar Singkat saat ini kosong.';
+$LDClick2Search='Silahkan clik disini untuk pergi pencarian.';
+$LDPossibleCodes='Kode ICD & OPS yang mungkin';
 ?>

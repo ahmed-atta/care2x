@@ -43,7 +43,7 @@ $LDReceived="fue recibido perfectamente";
 $LDAt="en";
 $LDAtTech=". Gracias. <i>Su servicio de mantenimiento.</i>";
 $LDRequest="petición";
-$LDReport="nforme";
+$LDReport="informe";
 $LDThanksSir="Muchas Gracias Sr/Sra";
 $LDPlsTypeReport="Por favor describa el trabajo de reparación realizado.";
 $LDJobIdNr="Nº de parte de reparación.";
@@ -109,7 +109,7 @@ $LDInquiryArrived="Una nueva duda a llegado!";
 $LDSearchWordPrompt="Introduca palabras clave";
 $LDInfoCat=array(
 						"Solicitar una reparación",
-						"Avisar de averia",
+						"Avisar de avería",
 						"Climatización",
 						"Informática",
 						"Dirección IP de un ordenador",
@@ -120,5 +120,5 @@ $LDInfoCat=array(
 						"Telefonía",
 						"Fontanería"
 						);
-$LDNoFound="No  seencontro nada que corresponda a la palabra clave de la búsqueda.  <br>Intentelo de la otra vez e incorporé más información.  ";
+$LDNoFound="No  seencontro nada que corresponda con la palabra clave de la búsqueda.  <br>Intentelo de la otra vez e incorporé más información.  ";
 ?>

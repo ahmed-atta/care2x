@@ -1,5 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require_once('../../include/inc_vars_resolve.php');
+require_once('../../include/inc_img_fx.php');
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
@@ -35,19 +37,19 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 Mögliche Ursachen des Problems:
 </FONT><p>
 <font size=2 face="verdana,arial">
-<img src="../../img/achtung.gif" width=18 height=23 border=0>
+<img <?php echo createComIcon('../../','achtung.gif') ?>>
 Sie hätten die "Zurück" oder "Vorwärts" Funktion des Browsers benutzt. Vermeiden Sie bitte diese Funktionen bzw. Knöpfe zu benutzen.<br>
-<img src="../../img/achtung.gif" width=18 height=23 border=0>
+<img <?php echo createComIcon('../../','achtung.gif') ?>>
 Sie hätten eine Cookie abgelehnt. Dieses Program ist von Cookies abhängig um einwandfrei zu laufen. Nehmen Sie bitte
 die Cookies an.
 <br>
-<img src="../../img/achtung.gif" width=18 height=23 border=0>
+<img <?php echo createComIcon('../../','achtung.gif') ?>>
 Ihr Browser nehme keine Cookies an. Stellen Sie bitte Ihren Browser zur automatischen Annahme von Cookies ein.
 <br>
-<img src="../../img/achtung.gif" width=18 height=23 border=0>
+<img <?php echo createComIcon('../../','achtung.gif') ?>>
 Ihr Browser würde Javascript nicht unterstützen oder das Javascript könnte ausgeschaltet sein. Schalten Sie bitte das
 Javascript ein.<br>
-<img src="../../img/achtung.gif" width=18 height=23 border=0>
+<img <?php echo createComIcon('../../','achtung.gif') ?>>
 In seltenen Fällen könnte die Datenübertragung gestört gewesen sein. Klicken Sie den "Aktualisieren" in Ihrem Browser an.
 <p>
 
@@ -58,8 +60,8 @@ In seltenen Fällen könnte die Datenübertragung gestört gewesen sein. Klicken Sie
 </table>        
 <p>
 <?php
-$path_root="../../";
-require("de_copyrite.php"); 
+$path_root='../../';
+require('de_copyrite.php'); 
 ?>
 </FONT>
 </BODY>

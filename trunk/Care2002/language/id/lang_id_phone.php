@@ -1,4 +1,4 @@
-<?
+<?php
 $fieldname=array(
 							"Nama Keluarga",
 							"Nama",
@@ -11,15 +11,9 @@ $fieldname=array(
 							"Private 2"
 							);
 							
-$LDDbNoLink="Mencoba koneksi ke DB gagal!";
-$LDDbNoRead="Mencoba membaca dari DB gagal!";
-$LDDbNoSave="Mencoba menyimpan ke DB gagal!";
-$LDDbNoDelete="Mencoba menghapus di DB gagal!";
-$LDDbNoUpdate="Mencoba mempersiapkan data gagal!";
-
-$LDPhoneDir="Direktori telepon";
+$LDPhoneDir="Petunjuk telepon";
 $LDSearch="Cari";
-$LDDir="Direktori";
+$LDDir="Petunjuk";
 $LDNewData="Data Baru";
 $LDSEARCH="CARI";
 
@@ -27,7 +21,7 @@ $LDSEARCH="CARI";
 $LDPhoneFound="Pencarian menemukan <font color=red><b> ~nr~ </b></font> data yang relevan.";
 
 $LDKeywordPrompt="Masukkan Kata Kunci Pencarian. Sebagai Contoh: nama,atau departemen, atau shortform, dll.";
-$LDShowDir="Tampilkan direktori lengkap";
+$LDShowDir="Tampilkan petunjuk lengkap";
 $LDNewEntry="Masukkan telepon baru atau data Beeper";
 
 $LDExtFields=array(
@@ -74,11 +68,11 @@ $LDSave="Simpan";
 $LDEdit="Edit";
 $LDDelete="Hapus";
 $LDReset="Reset";
-$LDNewPhoneEntry="Masukan Informasi teleponn baru";
+$LDNewPhoneEntry="Masukan Informasi telepon baru";
 $LDShow="Tampilkan";
-$LDActualDir="Isi Direktori Aktual";
-$LDMoreInfo="Info Direktori Selengkapnya";
-$LDMaxItem="Jumlah total masukan direktori";
+$LDActualDir="Isi Petunjuk Aktual";
+$LDMoreInfo="Info Petunjuk Selengkapnya";
+$LDMaxItem="Jumlah total masukan petunjuk";
 $LDUpdateOk="Informasi dimutakhirkan dengan sukses";
 $LDRows="Rows";
 
@@ -86,18 +80,18 @@ $LDGoodMorning="Selamat Pagi!";
 $LDGoodDay="Hi! Senang Bertemu dengan ands!";
 $LDGoodEvening="Selamat Sore";
 
-$LDShowActualDir="Tampilkan Masukan Direktori Terakhir";
+$LDShowActualDir="Tampilkan Masukan Petunjuk Terakhir";
 $LDYesDelete="Ya, hapus";
 $LDNoCancel="Tidak! Batal";
 $LDDeleteEntry="Hapus Masukan";
 $LDNoData="Anda Tidak memasukkan apapun. Tolong masukkan data sebelum menekan tombol \"Simpan\".";
 $LDReallyDelete="anda benar-benar ingin menghapus masukan dibawah?";
 
-$LDHowManage="Bagaimana cara mengatur direktori";
-$LDHow2OpenDir="Bagaimana cara membuka seluruh direktori";
+$LDHowManage="Bagaimana cara mengatur petunjuk";
+$LDHow2OpenDir="Bagaimana cara membuka seluruh petunjuk";
 $LDHowEnter="Bagaimaa cara memasukkan Informasi baru telepon ";
 $LDHow2SearchPhone="Bagaimana cara mencari no. telepon";
 $LDUpdate="Mutakhirkan data";
 
-$LDDirData="Edit no. direktori masukan <font color=\"red\">~nr~</font>";
+$LDDirData="Edit no. petunjuk masukan <font color=\"red\">~nr~</font>";
 ?>

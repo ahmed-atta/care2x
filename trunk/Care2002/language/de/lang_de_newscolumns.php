@@ -21,7 +21,13 @@ $LDTitleTag=array
 					dept_IMCU=>"Intermediate Care",
 					dept_ICU=>"Intensivstation",
 					dept_lab=>"Medizinisches Labor",
-					patient_admission=>"Aufnahme von Patienten");
+					patient_admission=>"Aufnahme von Patienten",
+					allamb=>'Allgemeine Ambulanz',
+					unfamb=>'Unfall Ambulanz',
+					sono=>'Sonographie',
+					nuklear=>'Nuklear Medizin Ambulanz',
+					inmed=>'Innere Medizin Ambulanz');
+
 $LDSubTitle=array
 					(headline=>"",
 					cafenews=>"",

@@ -46,4 +46,11 @@ $LDEditXrayDiag="Edit diagnostic report";
 $LDReadDiag="Read diagnosis";
 $LDWriteDiag="Write diagnosis";
 $LDPreviewReport="Preview/Diagnosis";
+/* 2002-09-08 EL*/
+$LDTestRequestRadio="Test request";
+$LDTestRequestRadioTxt="Request for radiological tests";
+/* 2002-09-10 EL */
+$LDTestReception="Pending Request";
+$LDTestReceptionTxt="Receive & process test requests, write results/diagnoses";
+
 ?>

@@ -105,8 +105,8 @@ $LDMyIntranet="myIntranet";
 $LDMyIntranetTxt="My personal planner, organizer, diary, memo, calendar, etc.";
 $LDAccessPw="Access password";
 $LDAccessPwTxt="Change or update access password";
-$LDWebCam="Webcam";
-$LDWebCamTxt="Intranet webcameras";
+$LDWebCam="Video Security";
+$LDWebCamTxt="Intranet webcamera security surveillance";
 $LDPhotoLab="Photolab";
 $LDPhotoLabTxt="Save, document, index photos of patients";
 

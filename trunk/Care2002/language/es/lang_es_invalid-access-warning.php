@@ -5,7 +5,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 <HTML>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
- <TITLE>Invalid Access Warning</TITLE>
+ <TITLE>Advertencia de acceso no autorizado</TITLE>
 </HEAD>
 
 <BODY bgcolor="#ffffff">
@@ -13,7 +13,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 <table width=100% border=1>
 <tr>
 <td bgcolor="navy">
-<FONT  COLOR="white"  SIZE=+3  FACE="Arial"><STRONG>&nbsp;Unauthorized Page Access</STRONG></FONT>
+<FONT  COLOR="white"  SIZE=+3  FACE="Arial"><STRONG>&nbsp;No está autorizado para acceder a esta página</STRONG></FONT>
 </td>
 </tr>
 <tr>
@@ -22,7 +22,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 
 <center>
 <FONT    SIZE=3 color=red  FACE="Arial">
-<b>You have no access rights to open this document!</b></font><p>
+<b>No tiene permisos de acceso a esta página!</b></font><p>
 <FORM >
 <INPUT type="button"  value=" OK "  onClick="<?php if ($mode=="close") print 'window.close()'; else print 'history.back()'; ?>"></FORM>
 <p>
@@ -31,24 +31,22 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 <p>
 <ul>
 <font size=3 face="verdana,arial">
-Probable causes of this problem:
+Probables causas del problema:
 </FONT><p>
 <font size=2 face="verdana,arial">
-<img src="../../img/achtung.gif" width=18 height=23 border=0>
-You might have used the standard "Back" or "Forward" function of your browser. Avoid using these buttons.<br>
-<img src="../../img/achtung.gif" width=18 height=23 border=0>
-You might have rejected a cookie. The program is dependent on cookies to operate properly. So please accept the
-cookies.
+<img <?php echo createComIcon('../../','achtung.gif') ?>>
+Puede ser que haya utilizado la función atras o adelante  de su browser.  Evite de usar estos botones.<br>
+<img <?php echo createComIcon('../../','achtung.gif') ?>>
+Puede que haya rechazado una cookie.  El programa depende de las cookie para funcionar correctamente.Acepte las cookies.
 <br>
-<img src="../../img/achtung.gif" width=18 height=23 border=0>
-Your browser might not be accepting cookies. Please set up your browser to accept cookies automatically.
+<img <?php echo createComIcon('../../','achtung.gif') ?>>
+Su Navegador no pudo aceptar las cookies.  Por favor configure su navegador para que acepte las cookies automáticamente.
 <br>
-<img src="../../img/achtung.gif" width=18 height=23 border=0>
-Your browser might not be able to run javascript or the javascript might be disabled. Please enable the javascript in your browser.
+<img <?php echo createComIcon('../../','achtung.gif') ?>>
+Su navegador no pudo hacer funcionar Javascript o el Javascript pudo ser no interpretado. Permita por favor el Javascript en su navegador.  
 <br>
-<img src="../../img/achtung.gif" width=18 height=23 border=0>
-In rare cases there might have been an error in the data transfer. To correct the situation just click the
-"reload" button of your browser.
+<img <?php echo createComIcon('../../','achtung.gif') ?>>
+En raras ocasiones puede haber un error en la transferencia de datos.  Para corregirlo pulse el botón de "recarga" de su navegador.
 <p>
 </FONT>
 <p>

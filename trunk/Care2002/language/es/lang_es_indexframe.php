@@ -1,43 +1,27 @@
 <?php
-$indextag=array("Home&nbsp;",
-				"Directorio&nbsp;",
-				"Admisión&nbsp;",
-				"Medocs&nbsp;",
-				"Médicos&nbsp;",
-				"Enfermería&nbsp;",
-				"Quirófano&nbsp;",
-				"Mantenimiento&nbsp;",
-				"Laboratorios&nbsp;",
-				"Radiología&nbsp;",
-				"Farmacia&nbsp;",
-				"Depósitos&nbsp;",
-				"EDP &nbsp;",
-				"Intranet Email&nbsp;",
-				"Internet Email&nbsp;",
-				"Otras Func. &nbsp;",
-				"Login &nbsp;"
+$indextag=array('Home',
+				'Admisión',
+				'Clínica de dia',
+				'Medocs',
+				'Médicos',
+				'Enfermería',
+				'Quirófano',
+				'Laboratorios',
+				'Radiología',
+				'Farmacia',
+				'Depósitos',
+				'Directorio',
+				'Ayuda técnica',
+				'EDP ',
+				'Intranet Email',
+				'Internet Email',
+				'Otras Func. ',
+				'Login '
 				);
-/**
-* The divtag variable is experimental
-*/
-$divtag=array("Home",
-				"Phone Directory",
-				"Admission",
-				"Medocs",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				""
-				);
-$VersionChgTarget="_top";
-$LDLanguage="Language";
-$LDPlsWaitInit="Please hold on. Initialization process is going on....";
+
+$VersionChgTarget='_top';
+$LDLanguage='Idioma';
+$LDPlsWaitInit='Espere por favor .Inicializando procesos...';
+
+$LDChange='Cambio';
 ?>

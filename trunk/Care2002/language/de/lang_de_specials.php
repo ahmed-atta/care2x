@@ -87,8 +87,8 @@ $LDMyIntranet="myIntranet";
 $LDMyIntranetTxt="Mein Terminkalender, Personalplaner, Tagebuch, Kalender, etc.";
 $LDAccessPw="Zugangspasswort";
 $LDAccessPwTxt="Passwort ändern bzw. aktualisieren";
-$LDWebCam="Webcam";
-$LDWebCamTxt="Intranet Webcameras";
+$LDWebCam="Video Überwachung";
+$LDWebCamTxt="Video Sicherheitsüberwachung über Intranet Webcameras";
 $LDPhotoLab="Fotolabor";
 $LDPhotoLabTxt="Fotos von Patienten speichern, verwalten, usw.";
 
