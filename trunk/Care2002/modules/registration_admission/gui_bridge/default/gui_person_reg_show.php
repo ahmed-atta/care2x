@@ -318,7 +318,7 @@ createTR($LDReligion,$religion,2);
 
 if (!$GLOBAL_CONFIG['person_ethnic_orig_hide']&&$ethnic_orig)
 {
-createTR($LDEthnicOrigin,$ethnic_orig,2);
+createTR($LDEthnicOrigin,$ethnic_orig_txt,2);
 }
 
 ?>

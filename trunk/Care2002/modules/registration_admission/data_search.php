@@ -45,13 +45,23 @@ if(isset($target)) {
 							        break;
 		case 'immunization' :    $sql='SELECT name AS `reportform.type.value`, medecin AS `reportform.medicine.value`, dosage AS `reportform.dosage.value`, titer AS `reportform.titer.value`, application AS `reportform.application_type_nr.selectedIndex`, DATE_FORMAT((CURDATE() + INTERVAL period DAY),\'%d/%m/%Y\') as `reportform.refresh_date.value`, 0 AS use_frequency FROM care_type_immunization WHERE ';
 		                            if($mode=='search') {
-									    $sql.='name LIKE "'.$searchkey.'%" OR unece_locode LIKE "'.$searchkey.'%"';
+									    $sql.='name LIKE "'.$searchkey.'%"';
 									} else {
 									    $sql.=' 1 ORDER BY name DESC LIMIT '.$quicklistmaxnr;
 									}
 									    
 		                            $title=$LDSearch.' :: '.$LDImmunization.' ('.$LDImmunization.')';
 									$itemname=$LDImmunization;
+							        break;
+		case 'ethnic_orig' :    $sql='SELECT name AS `aufnahmeform.ethnic_orig_txt.value` ,nr AS `aufnahmeform.ethnic_orig.value`, 0 AS use_frequency FROM care_type_ethnic_orig WHERE ';
+		                            if($mode=='search') {
+									    $sql.='name LIKE "'.$searchkey.'%"';
+									} else {
+									    $sql.=' 1 ORDER BY name DESC LIMIT '.$quicklistmaxnr;
+									}
+									    
+		                            $title=$LDSearch.' :: '.$LDEthnicOrigin.' ('.$LDEthnicOrigin.')';
+									$itemname=$LDEthnicOrigin;
 							        break;
 
 	}

@@ -468,7 +468,15 @@ createTR($errorreligion, 'religion', $LDReligion,$religion,2);
 
 if (!$person_ethnic_orig_hide)
 {
-createTR($errorethnicorig, 'ethnic_orig', $LDEthnicOrigin,$ethnic_orig,2);
+/** Add by Jean-Philippe LIOT 13/05/2004 **/
+?>
+<tr>
+<td><FONT SIZE=-1  FACE="Arial"><?php if ($errortown) echo "<font color=red>"; ?><?php echo $LDEthnicOrigin ?>:
+</td>
+<td><input name="ethnic_orig_txt" type="text" size="35" value="<?php echo $ethnic_orig_txt; ?>" ><a href="javascript:popSearchWin('ethnic_orig')"><img <?php echo createComIcon($root_path,'b-write_addr.gif','0') ?>></a>
+</td>
+</tr>
+<?php
 }
 
 
@@ -484,7 +492,7 @@ createTR($errorethnicorig, 'ethnic_orig', $LDEthnicOrigin,$ethnic_orig,2);
 
 </table>
 <p>
-<INPUT TYPE="hidden" name="MAX_FILE_SIZE" value="1000000">
+<input TYPE="hidden" name="MAX_FILE_SIZE" value="1000000">
 <input type="hidden" name="itemname" value="<?php echo $itemname; ?>">
 <input type="hidden" name="sid" value="<?php echo $sid; ?>">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
@@ -494,6 +502,7 @@ createTR($errorethnicorig, 'ethnic_orig', $LDEthnicOrigin,$ethnic_orig,2);
 <input type="hidden" name="insurance_item_nr" value="<?php echo $insurance_item_nr; ?>">
 <input type="hidden" name="insurance_firm_id" value="<?php echo $insurance_firm_id; ?>">
 <input type="hidden" name="insurance_show" value="<?php echo $insurance_show; ?>">
+<input type="hidden" name="ethnic_orig" value="<?php echo $ethnic_orig; ?>">
 
 <?php if($update)
 {

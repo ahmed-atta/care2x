@@ -22,12 +22,18 @@ class Person extends Core {
 	* Table name for person registration data.
 	* @var string
 	*/
-    var $tb_person='care_person';
+	var $tb_person='care_person';
 	/**
 	* Table name for city town name.
 	* @var string
 	*/
 	var $tb_citytown='care_address_citytown';
+	/**
+	* Table name for ethnic origin.
+	* Add by Jean-Philippe LIOT 13/05/2004
+	* @var string
+	*/
+	var $tb_ethnic_orig='care_type_ethnic_orig';
 	/**
 	* Table name for encounter data.
 	* @var string
@@ -301,9 +307,10 @@ class Person extends Core {
 		 
 		if(!$this->internResolvePID($pid)) return false;
 		
-	    $this->sql="SELECT p.*, addr.name AS addr_citytown_name 
+	    $this->sql="SELECT p.*, addr.name AS addr_citytown_name,ethnic.name AS ethnic_orig_txt
 					FROM $this->tb_person AS p 
 					LEFT JOIN  $this->tb_citytown AS addr ON p.addr_citytown_nr=addr.nr
+					LEFT JOIN  $this->tb_ethnic_orig AS ethnic ON p.ethnic_orig=ethnic.nr
 					WHERE p.pid='$this->pid' ";
         //echo $this->sql;
         if($this->result=$db->Execute($this->sql)) {
