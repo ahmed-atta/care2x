@@ -1,83 +1,83 @@
 <?php
-$LDNews="News";
-$LDNewsTxt="Write headline news articles";
+$LDNews="Nouvelles";
+$LDNewsTxt="Ecrire l\'enête d\'un nouvvel article";
 $LDMemo="Memo";
-$LDMemoTxt="Read or write a memo";
+$LDMemoTxt="Lire ou Ecrire un memo";
 
-$LDClose="Close";
-$LDCancel="Cancel";
-$LDResetEntry="Erase entries";
-$LDSave="Save";
-$LDReset="Reset";
+$LDClose="Fermer";
+$LDCancel="Annuler";
+$LDResetEntry="Effacer les entrèes";
+$LDSave="Sauver";
+$LDReset="Reinitialiser";
 
-$LDNewSearch="New search";
-$LDSearch="Search";
+$LDNewSearch="Nouvelle recherche";
+$LDSearch="Recherche";
 
-$LDContinue="Continue";
-$LDBack="Go back";
+$LDContinue="Continuer";
+$LDBack="Retour";
 
-$LDOn="On";
-$LDAt="At";
+$LDOn="Sur";
+$LDAt="A";
 
-$LDNew="New";
-$LDEdit="Edit";
-$LDCreate="Create";
+$LDNew="Nouveau";
+$LDEdit="Editer";
+$LDCreate="Crèer";
 
-$LDPastAll="All";
-$LDSelect="Select";
+$LDPastAll="Tous";
+$LDSelect="Selectionner";
 
-$LDOrderArchive="Archive";
+$LDOrderArchive="Archiver";
 
-$LDGoodMorning="Good morning";
-$LDGoodDay="Hello, nice to see you";
-$LDGoodEvening="Good evening";
+$LDGoodMorning="Bonjour";
+$LDGoodDay="Bonjour, ravi de vous voir";
+$LDGoodEvening="Bonsoir";
 
 $LDDate="Date";
-$LDDept="Department";
-$LDPrio="Priority";
+$LDDept="Départment";
+$LDPrio="Priorité";
 
 
-$LDPageTop="Back to top.";
-$LDPreview="Preview";
-$LDUpdateData="Update or edit";
+$LDPageTop="Haut de page.";
+$LDPreview="Previsualisation";
+$LDUpdateData="Mettre à jour ou Editer";
 
-$LDNoBack="No. Go back.";
+$LDNoBack="Non. Revenir en arrière.";
 $LDOK="OK";
-$LDName="Name";
-$LDPassword="Password";
-$LDUserId="User login name";
-$LDChange="Change";
-$LDLock="Lock";
-$LDUnlock="Unlock";
-$LDDelete="Delete";
-$LDYesSure="Yes, I'm sure.";
-$LDKeywordPrompt="Enter a search keyword";
-$LDWelcome="Welcome";
+$LDName="Nom";
+$LDPassword="Mot de passe";
+$LDUserId="Nom d\'utilisateur";
+$LDChange="Modifier";
+$LDLock="Verrouiller";
+$LDUnlock="Deverrouiller";
+$LDDelete="Effacer";
+$LDYesSure="Oui, je suis sur.";
+$LDKeywordPrompt="Entrer le mot clef recherché;
+$LDWelcome="Bonjour";
 
 
-$LDLogin="Login";
+$LDLogin="Identifiant";
 
-$LDFirstName="Given name";
+$LDFirstName="Nom propre";
 
 $LDOptions="Options";
-$LDHelp="Help";
-$LDSent="Sent";
-$LDDrafts="Drafts";
+$LDHelp="Aide";
+$LDSent="Envoyer";
+$LDDrafts="Corbeille";
 $LDDate="Date";
-$LDTime="Time";
-$LDSize="Size";
-$LDFrom="From";
-$LDTo="To";
-$LDSend="Send";
-$LDChange="Change";
-$LDInsertAddr="Insert";
-$LDRead="Read";
-$LDBack2="Back to";
-$LDReply2="Reply to";
-$LDPrint="Print";
-$LDMoreInfo="More info";
-$LDTakeOver="Take over";
-$LDJustReset="Reset";
+$LDTime="Heure";
+$LDSize="Taille";
+$LDFrom="De";
+$LDTo="A";
+$LDSend="Envoyer";
+$LDChange="Modifier";
+$LDInsertAddr="Inserer";
+$LDRead="Lire";
+$LDBack2="Retour à";
+$LDReply2="Repondre à";
+$LDPrint="Imprimer";
+$LDMoreInfo="Plus d\'info";
+$LDTakeOver="Succèder";
+$LDJustReset="Reinitialiser";
 $LDMaximum="Maximum";
 
 $LDSpexFunctions="Special Functions";
