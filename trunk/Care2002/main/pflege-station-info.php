@@ -68,7 +68,7 @@ if($link&&$DBLink_OK)
 									if($ergebnis=mysql_query($sql,$link)) 
 										{
 											mysql_close($link);
-											header("location:pflege-station-info.php?sid=$sid&lang=$lang&station=$station&edit=0&mode=show");
+											header("location:pflege-station-info.php?sid=$sid&lang=$lang&edit=0&mode=show&station=$station");
 											exit;
 										}
 										else echo "$sql<br>$LDDbNoSave";

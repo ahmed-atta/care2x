@@ -60,8 +60,8 @@ function belegen(anum)
 
              <?php
             echo '
-	          urlholder="pflege-station.php?mode=newdata&sid='.$sid.'&lang='.$lang.'&station='.$s.'&rm='.$rm.'&bd='.$bd.'&pyear='.$py.'&pmonth='.$pm.'&pday='.$pd.'&patnum="+anum;
-	               ';
+	          urlholder="pflege-station.php?mode=newdata&sid='.$sid.'&lang='.$lang.'&rm='.$rm.'&bd='.$bd.'&pyear='.$py.'&pmonth='.$pm.'&pday='.$pd.'&patnum="+anum+"&station='.$s.'";
+			  ';
              ?>
 	          window.opener.location.replace(urlholder);
 	          window.close();

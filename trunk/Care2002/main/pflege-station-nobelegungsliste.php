@@ -39,7 +39,7 @@ require_once('../include/inc_front_chain_lang.php');
  </table>
  
  <p>
-<a href="pflege-station.php?<?php echo "sid=$sid&lang=$lang&edit=$edit&list=1&station=$station&mode=fresh"; ?>">
+<a href="pflege-station.php?<?php echo "sid=$sid&lang=$lang&edit=$edit&list=1&mode=fresh&station=$station"; ?>">
 <?php echo $LDClkHere.' '.$LDToCreateNewList ?>...</a>
 </center>
 </body>

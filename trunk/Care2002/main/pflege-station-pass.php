@@ -17,7 +17,7 @@ require_once('../global_conf/areas_allow.php');
 
 $allowedarea=&$allow_area['wards'];
 
-$fileforward="pflege-station.php?sid=$sid&lang=$lang&edit=$edit&station=$station&retpath=$retpath";
+$fileforward="pflege-station.php?sid=$sid&lang=$lang&edit=$edit&retpath=$retpath&station=$station";
 $thisfile="pflege-station-pass.php";
 if($retpath=="quick") $breakfile="pflege-schnellsicht.php?sid=".$sid."&lang=".$lang;
  else $breakfile="pflege.php?sid=".$sid."&lang=".$lang;

@@ -14,7 +14,7 @@ require_once('../include/inc_front_chain_lang.php');
 
 require_once('../include/inc_config_color.php'); // load color preferences
 
-$breakfile="pflege.php?sid=".$sid."&lang=".$lang;
+$breakfile='pflege.php?sid='.$sid.'&lang='.$lang;
 
 if($pday=='') $pday=date('d');
 if($pmonth=='') $pmonth=date('m');
@@ -66,7 +66,7 @@ var urlholder;
 	winh=(winh / 2) - 300;
 	winspecs="width=800,height=600,screenX=" + winw + ",screenY=" + winh + ",menubar=no,resizable=yes,scrollbars=yes";
 
-	urlholder="pflege-station.php?route=validroute&station=" + station + "&user=<?php echo $aufnahme_user.'"' ?>;
+	urlholder="pflege-station.php?route=validroute&user=<?php echo $aufnahme_user ?>&station=" + station;
 	stationwin=window.open(urlholder,station,winspecs);
 	}
 
@@ -81,8 +81,8 @@ var urlholder;
 ?>
 	winspecs="menubar=no,resizable=yes,scrollbars=yes,width=" + (w-15) + ", height=" + (h-60);
 	
-	if (e==1) urlholder="pflege-station-pass.php?rt=pflege&station="+station+"&sid=<?php echo "$sid&lang=$lang&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>&edit=1&retpath=quick";
-		else urlholder="pflege-station.php?rt=pflege&station="+station+"&sid=<?php echo "$sid&lang=$lang&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>&edit=0&retpath=quick"
+	if (e==1) urlholder="pflege-station-pass.php?rt=pflege&sid=<?php echo "$sid&lang=$lang&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>&edit=1&retpath=quick&station="+station;
+		else urlholder="pflege-station.php?rt=pflege&sid=<?php echo "$sid&lang=$lang&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>&edit=0&retpath=quick&station="+station;
 	//stationwin=window.open(urlholder,station,winspecs);	
 	window.location.href=urlholder;
 <?php // if($cfg['dhtml']) echo 'window.stationwin.moveTo(0,0);'; ?>

@@ -169,7 +169,7 @@ if($link&&$DBLink_OK)
 							//echo "it is checked but no rows ".$sql;
 									mysql_close($link);
 									//echo "location:pflege-station-nobelegungsliste.php?sid=$sid&lang=$lang&station=$station&c=32&edit=$edit";
-									header ("location:pflege-station-nobelegungsliste.php?sid=$sid&lang=$lang&station=$station&c=32&edit=$edit"); 
+									header ("location:pflege-station-nobelegungsliste.php?sid=$sid&lang=$lang&c=32&edit=$edit&station=$station"); 
 									exit; 
 								}
 							}
@@ -213,7 +213,7 @@ if($link&&$DBLink_OK)
 											$pday=date('d');
 											$pmonth=date('m');
 											$pyear=date('Y');
-											header("location:pflege-station.php?sid=".$sid."&lang=".$lang."&station=".$station."&mode=&edit=1&pday=".$pday."&pmonth=".$pmonth."&pyear=".$pyear);
+											header("location:pflege-station.php?sid=".$sid."&lang=".$lang."&mode=&edit=1&pday=".$pday."&pmonth=".$pmonth."&pyear=".$pyear."&station=".$station);
 											exit;
 										}
 										else echo $LDDbNoSave."<br>".$sql;
@@ -260,7 +260,7 @@ if($link&&$DBLink_OK)
 																if($ergebnis=mysql_query($sql,$link)) 
 																		{
 																			mysql_close($link);
-																			header("location:pflege-station.php?sid=$sid&lang=$lang&station=$station&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear");
+																			header("location:pflege-station.php?sid=$sid&lang=$lang&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station");
 																			exit;
 																		}
 																		else echo "$LDDbNoUpdate $sql";
@@ -331,7 +331,7 @@ if($link&&$DBLink_OK)
 																		{
 																		
 																			mysql_close($link);
-																			header("location:pflege-station.php?sid=$sid&lang=$lang&station=$station&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear");
+																			header("location:pflege-station.php?sid=$sid&lang=$lang&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station");
 																			exit;
 																		}
 																		else echo "$LDDbNoSave<br>$sql";
@@ -399,7 +399,7 @@ if($link&&$DBLink_OK)
 */																			
                                                                             flagPatientAtStation($patnum,1,$station);
 																			
-																			header("location:pflege-station.php?sid=".$sid."&lang=".$lang."&station=".$station."&edit=1&mode=&pday=".$pday."&pmonth=".$pmonth."&pyear=".$pyear);
+																			header("location:pflege-station.php?sid=".$sid."&lang=".$lang."&edit=1&mode=&pday=".$pday."&pmonth=".$pmonth."&pyear=".$pyear."&station=".$station);
 																			//mysql_close($link);
 																			exit;
 																		}
@@ -474,7 +474,7 @@ if($link&&$DBLink_OK)
 																		    
 																			flagPatientAtStation($dbdata['patnum'],1,$station);
 																		    
-																			header("location:pflege-station.php?sid=$sid&lang=$lang&station=$station&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear");
+																			header("location:pflege-station.php?sid=$sid&lang=$lang&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station");
 																			mysql_close($link);
 																			exit;
 																		}
@@ -533,7 +533,7 @@ if($link&&$DBLink_OK)
 										if($ergebnis=mysql_query($sql,$link)) 
 											{
 												mysql_close($link);
-												header("location:pflege-station.php?sid=$sid&lang=$lang&station=$station&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear");
+												header("location:pflege-station.php?sid=$sid&lang=$lang&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station");
 												exit;
 											}
 											else echo "$LDDbNoDelete<br>$sql";
@@ -580,8 +580,8 @@ function getinfo(pid,pdata){
 	{ echo '
 	urlholder="pflege-station-patientdaten.php?sid=';
 	echo "$sid&lang=$lang";
-	echo '&pn="+pid+"&patient=" + pdata + "&station=';
-	echo "$station&pday=$pday&pmonth=$pmonth&pyear=$pyear&edit=$edit"; 
+	echo '&pn="+pid+"&patient=" + pdata + "';
+	echo "&pday=$pday&pmonth=$pmonth&pyear=$pyear&edit=$edit&station=$station"; 
 	echo '";';
 	echo '
 	patientwin=window.open(urlholder,pid,"width=700,height=600,menubar=no,resizable=yes,scrollbars=yes");
@@ -592,18 +592,18 @@ function getinfo(pid,pdata){
 ?>
 	}
 function getrem(pid,pdata){
-	urlholder="pflege-station-remarks.php?sid=<?php echo "$sid&lang=$lang"; ?>&pn="+pid+"&patient=" + pdata + "&station=<?php echo "$station&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>";
+	urlholder="pflege-station-remarks.php?sid=<?php echo "$sid&lang=$lang"; ?>&pn="+pid+"&patient=" + pdata + "<?php echo "&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station"; ?>";
 	patientwin=window.open(urlholder,pid,"width=700,height=500,menubar=no,resizable=yes,scrollbars=yes");
 	}
 	
 function indata(room,bed)
 {
-	urlholder="pflege-station-bettbelegen.php?sid=<?php echo "$sid&lang=$lang"; ?>&s=<?php echo $station; ?>&rm="+room+"&bd="+bed+"<?php echo "&py=".$pyear."&pm=".$pmonth."&pd=".$pday."&tb=".str_replace("#","",$cfg['top_bgcolor'])."&tt=".str_replace("#","",$cfg['top_txtcolor'])."&bb=".str_replace("#","",$cfg['body_bgcolor'])."&d=".$cfg['dhtml']; ?>";
+	urlholder="pflege-station-bettbelegen.php?sid=<?php echo "$sid&lang=$lang"; ?>&rm="+room+"&bd="+bed+"<?php echo "&py=".$pyear."&pm=".$pmonth."&pd=".$pday."&tb=".str_replace("#","",$cfg['top_bgcolor'])."&tt=".str_replace("#","",$cfg['top_txtcolor'])."&bb=".str_replace("#","",$cfg['body_bgcolor'])."&d=".$cfg['dhtml']; ?>&s=<?php echo $station; ?>";
 	indatawin=window.open(urlholder,"bedroom","width=700,height=450,menubar=no,resizable=yes,scrollbars=yes");
 }
 function release(room,bed,pid)
 {
-	urlholder="pflege-station-patient-release.php?sid=<?php echo "$sid&lang=$lang"; ?>&station=<?php echo $station; ?>&rm="+room+"&bd="+bed+"&pn="+pid+"<?php echo "&pyear=".$pyear."&pmonth=".$pmonth."&pday=".$pday."&tb=".str_replace("#","",$cfg['top_bgcolor'])."&tt=".str_replace("#","",$cfg['top_txtcolor'])."&bb=".str_replace("#","",$cfg['body_bgcolor'])."&d=".$cfg['dhtml']; ?>";
+	urlholder="pflege-station-patient-release.php?sid=<?php echo "$sid&lang=$lang"; ?>&rm="+room+"&bd="+bed+"&pn="+pid+"<?php echo "&pyear=".$pyear."&pmonth=".$pmonth."&pday=".$pday."&tb=".str_replace("#","",$cfg['top_bgcolor'])."&tt=".str_replace("#","",$cfg['top_txtcolor'])."&bb=".str_replace("#","",$cfg['body_bgcolor'])."&d=".$cfg['dhtml']; ?>&station=<?php echo $station; ?>";
 	//indatawin=window.open(urlholder,"bedroom","width=700,height=450,menubar=no,resizable=yes,scrollbars=yes"
 	window.location.href=urlholder;
 }
@@ -612,7 +612,7 @@ function unlock(b,r)
 {
 <?php
 	echo '
-	urlholder="pflege-station.php?mode=newdata&patnum=unlock&sid='.$sid.'&lang='.$lang.'&station='.$station.'&rm="+r+"&bd="+b+"&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday.'";
+	urlholder="pflege-station.php?mode=newdata&patnum=unlock&sid='.$sid.'&lang='.$lang.'&rm="+r+"&bd="+b+"&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday.'&station='.$station.'";
 	';
 ?>
 	if(confirm('<?php echo $LDConfirmUnlock ?>'))
@@ -624,7 +624,7 @@ function deletePatient(r,b,t,n)
 {
 	if(confirm("<?php echo $LDConfirmDelete ?>"))
 	{
-		url="pflege-station.php?sid=<?php echo "$sid&lang=$lang&station=$station&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>&mode=delete&rm="+r+"&bd="+b;
+		url="pflege-station.php?sid=<?php echo "$sid&lang=$lang&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>&mode=delete&rm="+r+"&bd="+b+"<?php echo "&station=$station"; ?>";
 		window.location.replace(url);
 	}
 }

@@ -17,8 +17,6 @@ require('../include/inc_2level_reset.php');
 
 require_once('../include/inc_config_color.php');
 
-$datum=strftime("%d.%m.%Y");
-$zeit=strftime("%H.%M");
 $toggler=0;
 $breakfile="startframe.php?sid=".$sid."&lang=".$lang;
 
@@ -29,7 +27,8 @@ require('../include/inc_db_makelink.php');
 if($link&&$DBLink_OK) 
     {
 /*        $sql="SELECT item, station, dept FROM $dbtable WHERE  lang='".$lang."' ORDER BY station";
-*/        $sql="SELECT item, station, dept FROM $dbtable ORDER BY station";
+*/       
+         $sql="SELECT item, station, dept FROM $dbtable ORDER BY station";
 		if($ergebnis=mysql_query($sql,$link))
         {
             $rows=mysql_num_rows($ergebnis);
@@ -46,28 +45,7 @@ if($link&&$DBLink_OK)
 
 <script language="javascript">
 <!-- 
-var urlholder;
 
-function statbel(station){
-<?php
-	if($cfg['dhtml'])
-	{
-	echo 'w=window.parent.screen.width;
-			h=window.parent.screen.height;';
-	}
-	else echo 'w=800;
-					h=600;';
-?>
-	winspecs="menubar=no,resizable=yes,scrollbars=yes,width=" + (w-15) + ", height=" + (h-60);
-	urlholder="pflege-station-pass.php?sid=<?php echo "$sid&lang=$lang" ?>&rt=pflege&edit=1&station="+station;
-	window.location.href=urlholder;
-	//stationwin=window.open(urlholder,station,winspecs);	
-}
-	
-function closewin()
-{
-	location.href='startframe.php?sid=<?php echo $$ck_sid_buffer.'&uid='.$r;?>';
-}
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
@@ -202,7 +180,8 @@ require('../include/inc_css_a_hilitebu.php');
 						$i=0;
 						while($stations=mysql_fetch_array($ergebnis))
 						{
-							echo '<a href="javascript:statbel(\''.$stations[station].'\')">'.$stations[station].'</a> &nbsp;';
+
+							echo '<a href="pflege-station-pass.php?sid='.$sid.'&lang='.$lang.'&rt=pflege&edit=1&station='.$stations['station'].'">'.$stations['station'].'</a> &nbsp;';
 							$i++;
 							if($i==4)
 							{

@@ -13,23 +13,23 @@ $local_user='ck_pflege_user';
 require_once('../include/inc_front_chain_lang.php');
 require_once('../include/inc_config_color.php'); // load color preferences
 
-$breakfile="pflege.php?sid=".$sid."&lang=".$lang;
+$breakfile='pflege.php?sid='.$sid.'&lang='.$lang;
 
-if($pday=="") $pday=date(d);
-if($pmonth=="") $pmonth=date(m);
-if($pyear=="") $pyear=date(Y);
-$t_date=$pday.".".$pmonth.".".$pyear;
+if($pday=='') $pday=date('d');
+if($pmonth=='') $pmonth=date('m');
+if($pyear=='') $pyear=date('Y');
+$t_date=$pday.'.'.$pmonth.'.'.$pyear;
 
 if($mode)
 {
-	$dbtable="care_nursing_station";
+	$dbtable='care_nursing_station';
 			
 	include('../include/inc_db_makelink.php');
 	if($link&&$DBLink_OK) 
 		{
 			switch($mode)
 			{	
-				case "create": 
+				case 'create': 
 					/* check if ward already exists */
 					$sql="SELECT info FROM $dbtable	WHERE station='$station' AND lang='".$lang."'";
 					if($ergebnis=mysql_query($sql,$link))
@@ -65,7 +65,7 @@ if($mode)
 													'$station',
 													'$dept',
 													'$description',
-													'".date("Y-m-d H:i:s")."',
+													'".date('Y-m-d H:i:s')."',
 													'template',
 													'$start_no',
 													'$end_no',
@@ -83,7 +83,7 @@ if($mode)
 									if($ergebnis=mysql_query($sql,$link)) 
 										{
 											mysql_close($link);
-											header("location:pflege-station.php?sid=$sid&lang=$lang&station=$station&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear");
+											header("location:pflege-station.php?sid=$sid&lang=$lang&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station");
 											exit;
 										}
 										else echo "$sql<br>$LDDbNoSave";
