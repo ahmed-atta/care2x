@@ -1,59 +1,71 @@
-<?php 
+<?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_date_format_functions.php');
+//require_once($root_path.'include/inc_date_format_functions.php');
 
 $thisfile=basename(__FILE__);
 $searchmask_bgcolor="#f3f3f3";
 $searchprompt=$LDEnterSearchKeyword;
 
-$quicklistmaxnr=10; // The maximum number of quicklist popular items
+# Initialize some values
 
+$quicklistmaxnr=10; // The maximum number of quicklist popular items
 $sql='';
+$limitselect=FALSE;
+$linecount=0;
 
 if(!isset($mode)) $mode='';
 
-if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
+//$db->debug=true;
+
 
 if(isset($target)) {
-   switch ($target)
-	{
-	    case 'insurance' :   
-		                            $sql='SELECT name,firm_id AS nr ,use_frequency FROM care_insurance_firm WHERE ';
-									if($mode=='search') {
-									    $sql.='name LIKE "'.$searchkey.'%" OR firm_id LIKE "'.$searchkey.'%"';
-									} else {
-									    $sql.=' 1 ORDER BY use_frequency DESC LIMIT '.$quicklistmaxnr;
-									}
-		                            $title=$LDSearch.' :: '.$LDInsuranceCo;
-									$itemname=$LDInsuranceCo;
-							        break;
-									
-		case 'citytown' :    $sql='SELECT name,nr,use_frequency FROM care_address_citytown WHERE ';
-		                            if($mode=='search') {
-									    $sql.='name LIKE "'.$searchkey.'%" OR unece_locode LIKE "'.$searchkey.'%"';
-									} else {
-									    $sql.=' 1 ORDER BY use_frequency DESC LIMIT '.$quicklistmaxnr;
-									}
-									    
-		                            $title=$LDSearch.' :: '.$LDAddress.' ('.$LDTownCity.')';
-									$itemname=$LDTownCity;
-							        break;
+   switch ($target){
+	    case 'insurance' :   $sql="SELECT name,firm_id AS nr ,use_frequency FROM care_insurance_firm";
+						if($mode=='search') {
+							$sql.=" WHERE name $sql_LIKE '$searchkey%' OR firm_id $sql_LIKE '$searchkey%'";
+						} else {
+							//$sql.=" ORDER BY use_frequency DESC LIMIT $quicklistmaxnr";
+							$sql.=" ORDER BY use_frequency DESC";
+							$limitselect=TRUE;
+						}
+						$title=$LDSearch.' :: '.$LDInsuranceCo;
+						$itemname=$LDInsuranceCo;
+						break;
+
+		case 'citytown' :    $sql="SELECT name,nr,use_frequency FROM care_address_citytown ";
+						if($mode=='search') {
+							$sql.=" WHERE name $sql_LIKE '$searchkey%' OR unece_locode $sql_LIKE '$searchkey%'";
+						} else {
+							//$sql.=" ORDER BY use_frequency DESC LIMIT $quicklistmaxnr";
+							$sql.=" ORDER BY use_frequency DESC";
+							$limitselect=TRUE;
+						}
+						$title=$LDSearch.' :: '.$LDAddress.' ('.$LDTownCity.')';
+						$itemname=$LDTownCity;
+						break;
 	}
-
-	if($result=$db->Execute($sql))	$linecount=$result->RecordCount();
-
+	if($limitselect){
+		if($result=$db->SelectLimit($sql,$quicklistmaxnr)){
+			$linecount=$result->RecordCount();
+		}
+	}else{
+		if($result=$db->Execute($sql)){
+			$linecount=$result->RecordCount();
+		}
+	}
 }
 
 /* Set color values for the search mask */
 $entry_block_bgcolor='#fff3f3';
 $entry_border_bgcolor='#66ee66';
 $entry_body_bgcolor='#ffffff';
-?><?php html_rtl($lang); ?>
+?>
+<?php html_rtl($lang); ?>
 <head>
 <?php echo setCharSet(); ?>
 <title><?php echo $title ?></title>
@@ -63,18 +75,25 @@ $entry_body_bgcolor='#ffffff';
 <!-- Script Begin
 function setValue(name,val) {
 
-    mywin=parent.window.opener;
+ mywin=parent.window.opener;
 	mywin.document.<?php echo $obj_name; ?>.value=name;
 	mywin.document.<?php echo $obj_val; ?>.value=val;
 	mywin.focus();
 	this.window.close();
 }
+
+// set focus on input "searchkey"
+function SetFocus () {
+ document.searchform.searchkey.focus();
+}
+
 //  Script End -->
 </script>
 </head>
-<body><font face=arial>
+<body onLoad="window.focus();SetFocus();">
 
-<font size=3><b><?php echo $title ?></b></font>
+
+<font face=arial size=3><b><?php echo $title ?></b></font>
 
 		 <table border=0 cellpadding=10 bgcolor="<?php echo $entry_border_bgcolor ?>">
      <tr>
@@ -85,13 +104,13 @@ include($root_path.'include/inc_patient_searchmask.php');
 </td>
      </tr>
    </table>
-   
+
 <?php
 if($mode=='search')  {    
     if(!$linecount) $linecount=0;
-    echo '<hr width=80% align=left>'.str_replace("~nr~",$linecount,$LDSearchFoundData).'<p>';
+    echo '<hr width="80%" align=left>'.str_replace("~nr~",$linecount,$LDSearchFoundData).'<p>';
 } else {
-    echo '<hr width=80% align=left><font size=4 color="#990000">'.$LDTop.' '.$quicklistmaxnr.' '.$LDQuickList.'</font>';
+    echo '<hr width="80%" align=left><font size=4 color="#990000">'.$LDTop.' '.$quicklistmaxnr.' '.$LDQuickList.'</font>';
 }
     
     //echo $mode;
