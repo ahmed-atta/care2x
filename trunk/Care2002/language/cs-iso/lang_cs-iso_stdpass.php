@@ -112,4 +112,5 @@ $LDPendingRequest='Nevyøízené objednávky';
 $LDLoggedOut='Odhlá¹en';
 /* 2003-03-18 EL */
 $LDNursesList='Nurses\' List';
+$LDAppointments='Appointments';
 ?>

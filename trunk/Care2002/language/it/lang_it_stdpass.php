@@ -114,5 +114,5 @@ $LDPendingRequest='Richiesta in coda';
 $LDLoggedOut='Logged out';
 /* 2003-03-18 EL */
 $LDNursesList='Nurses\' List';
-
+$LDAppointments='Appointments';
 ?>

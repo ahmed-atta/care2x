@@ -112,4 +112,5 @@ $LDPendingRequest='Requisições pendentes';
 $LDLoggedOut='Sessão Terminada';
 /* 2003-03-18 EL */
 $LDNursesList='Nurses\' List';
+$LDAppointments='Appointments';
 ?>
