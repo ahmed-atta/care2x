@@ -8,14 +8,14 @@ $LDWhatTo='Edition de nouveaux articles : Ce que c\'est et comment faire';
 
 $LDWrongEntry='Entrées incorrectes!';
 $LDNoAuth='Vous n\'avez pas les droits d\'accès!';
-$LDAuthLocked='Vos droits d\'accès sont bloqués!';
+$LDAuthLocked='Vos droits d\'accès sont verrouillés!';
 
 $LDNewData='Nouvelle donnée';
 $LDEdit='Editer';
 $LDAdmit='Admettre';
 $LDSearch='Rechercher';
 $LDArchive='Archiver';
-$LDAdmission='Patient Admission';
+$LDAdmission='Admission d\'un patient';
 $LDAdmTargetEntry='Admission';
 $LDAdmTargetSearch='Rechercher les patiens admis';
 $LDAdmTargetArchive='Rechercher dans l\'historique';
@@ -52,10 +52,10 @@ $LDPersonList='Liste du Personnel';
 $LDRepabotActivate='Activer Repabot';
 $LDQBotActivate='Activer Q-Bot';
 
-$LDMedLab='Laboratoire Medical';
+$LDMedLab='Laboratoire Médical';
 $LDCancel='Annuler';
 
-$LDPharmacy='Pharmacies';
+$LDPharmacy='Pharmacie';
 $LDOrderArchive='Historique';
 $LDPharmaOrder='Inscrire';
 $LDOrderCat='Mon catalogue de produit';
@@ -67,11 +67,11 @@ $LDMediBotActivate='Activer Medibot';
 $LDSqlDb='SQL Base de donnée';
 $LDManageAccess='Gèrer les droits d\'accès';
 $LDListAll='Lister tous';
-$LDSystemLogin='Connexion en tant qu\'adminiatrateur système';
-$LDSeeData='Aficher les données';
+$LDSystemLogin='Connexion en tant qu\'administrateur système';
+$LDSeeData='Afficher les données';
 $LDNewData='Entrer une nouvelle donnée';
 
-$LDWelcome='Bienvenu';
+$LDWelcome='Bienvenue';
 $LDLogin='Connexion';
 $LDChangeSaved='Les modifications ont été sauvegardées.';
 $LDPcID='L\'identité actuelle de la station est';
@@ -98,16 +98,17 @@ $LDTestRequest='Requâte pour un test Diagnostic';
 $LDTestType=array('patho'=>'Pathologie',
                              'chemlabor'=>'Laboratoire Medical',
 							'baclabor'=>'Laboratoire Bacteriologique',
-							 'blood'=>'Banque de sanguin',
+							 'blood'=>'Banque de sang',
 							'radio'=>'Radiologie',
 							'sono'=>'Sonographie',
-							 'allamb'=>'Ambulatoire Général',
+							 'allamb'=>'Ambulatoire
+Générale',
 							 'unfamb'=>'Urgence Ambulatoire',
 							'nuklear'=>'Diagnostic Nucléaire',
 							 'inmed'=>'Médicine Interne');
 $LDBloodOrder='Requâte pour un produit sanguin';
 /* 2002-09-22 EL */
-$LDPendingRequest='Requâte en attente';
+$LDPendingRequest='Requête en attente';
 /* 2002-10-06 EL*/
 $LDLoggedOut='Déconnecté';
 /* 2003-03-18 EL */
@@ -130,6 +131,6 @@ $LDViewDicom='Voir les images DICOM';
 $LDYellowList='Liste Jaune';
 $LDRedList='Liste Rouge';
 #2003-11-22 EL
-$LDAdvancedSearch='Advanced search';
-$LDNewPerson='Register new person';
+$LDAdvancedSearch='Recherche avancée';
+$LDNewPerson='Inscrire une nouvelle personne';
 ?>
