@@ -25,7 +25,7 @@ $url_jscredits="javascript:openCreditsWindow()";
 
 // Load the template
 require($root_path.'include/care_api_classes/class_template.php');
-$tp_obj=new Template;
+$tp_obj=new Template($root_path,$template_path,$template_theme);
 $tp=&$tp_obj->load('tp_rightcolumn_menu.htm');
 // Output display
 eval ("echo $tp;");
