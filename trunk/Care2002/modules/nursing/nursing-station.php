@@ -315,7 +315,6 @@ if(($occup=='template')&&(!$mode)&&(!isset($list)||!$list)){
 # If ward exists, show the occupancy list
 
 if($ward_ok){
-
 	if($pyear.$pmonth.$pday<date('Ymd')){
 	 	$smarty->assign('sWarningPrompt','
 		<img '.createComIcon($root_path,'warn.gif','0','absmiddle',TRUE).'> <font color="#ff0000"><b>'.$LDAttention.'</font> '.$LDOldList.'</b>');
@@ -352,7 +351,6 @@ if($ward_ok){
 	# Loop trough the ward rooms
 
 	for ($i=$ward_info['room_nr_start'];$i<=$ward_info['room_nr_end'];$i++){
-
 		if($room_ok){
 			$room_info=$room_obj->FetchRow();
 		}else{
@@ -363,8 +361,8 @@ if($ward_ok){
 		// Scan the patients object if the patient is assigned to the bed & room
 		# Loop through room beds
 
-		for($j=1;$j<=$room_info['nr_of_beds'];$j++){
-		
+		//for($j=1;$j<=$room_info['nr_of_beds'];$j++){
+		for($j=1;$j<=$nr_beds;$j++){
 			# Reset elements
 
 			$smarty->assign('sMiniColorBars','');
@@ -544,7 +542,7 @@ if($ward_ok){
 				}
 			}
 
-			# Create the rows using ward_occupancy_list_row.tpl template
+			# Create the rows using ward_occupancy_list_row.tpl template^
 			ob_start();
 				$smarty->display('nursing/ward_occupancy_list_row.tpl');
 				$sListRows = $sListRows.ob_get_contents();
