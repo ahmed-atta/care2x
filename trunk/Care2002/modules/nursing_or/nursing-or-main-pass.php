@@ -25,7 +25,7 @@ switch($target)
 							
 $thisfile=basename(__FILE__);
 
-$breakfile=$root_path.'main/op-doku.php'.URL_APPEND;
+$breakfile=$root_path.'modules/nursing/nursing.php'.URL_APPEND;
 
 $lognote="$title ok";
 
