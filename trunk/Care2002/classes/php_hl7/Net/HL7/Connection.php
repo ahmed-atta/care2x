@@ -152,7 +152,7 @@ class Net_HL7_Connection {
   function close() {
 
     socket_close($this->_HANDLE);
-    return True
+    return True;
   }
 }
 
