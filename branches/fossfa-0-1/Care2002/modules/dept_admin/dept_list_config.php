@@ -92,8 +92,12 @@ while(list($x,$v)=each($deptarray)){
 		if(isset($$v['LD_var'])&&$$v['LD_var']) echo $$v['LD_var'];
 			else echo $v['name_formal']; 
 	?></a> </td>
-    <td class=pblock  bgColor="#eeeeee"><?php if($v['is_inactive']) echo '<font color="red">'.$LDInactive.'</font>'; else echo $LDActive ?> </td>
-    <td class=pblock  bgColor="#eeeeee"><?php if($v['status']=='hidden') echo '<font color="red">'.$LDHidden.'</font>'; else echo $LDVisible ?> </td>
+    <td class=pblock  bgColor="#eeeeee"><?php if($v['is_inactive']) echo '<font color="red">'.$LDInactive.'</font>'; else echo $LDActive ?> 
+[<a href="dept_status.php?nr=<?PHP echo $v['nr']."&active=".$v['is_inactive']; ?>">x</a>]
+</td>
+    <td class=pblock  bgColor="#eeeeee"><?php if($v['status']=='hidden') echo '<font color="red">'.$LDHidden.'</font>'; else echo $LDVisible ?> 
+[<a href="dept_status.php?nr=<?PHP echo $v['nr']; ?>&status=<?PHP if($v['status']=='hidden') echo 'visible'; else echo "hidden"; ?>">x</a>]
+</td>
  	<td class=pblock  bgColor="#eeeeee"><a href="dept_status_config.php<?php echo URL_APPEND."&dept_nr=".$v['nr']; ?>"><?php echo $LDChange; ?></a> </td>
  </tr> 
 <?php

@@ -65,56 +65,56 @@ class Department extends Core {
 	* @var array
 	*/
 	var $tabfields=array('nr',
-									'id',
-									'type',
-									'name_formal',
-									'name_short',
-									'name_alternate',
-									'LD_var',
-									'description',
-									'admit_inpatient',
-									'admit_outpatient',
-									'has_oncall_doc',
-									'has_oncall_nurse',
-									'does_surgery',
-									'this_institution',
-									'is_sub_dept',
-									'parent_dept_nr',
-									'work_hours',
-									'consult_hours',
-									'is_inactive',
-									'sort_order',
-									'address',
-									'sig_line',
-									'sig_stamp',
-									'logo_mime_type',
-									'status',
-									'history',
-									'modify_id',
-									'modify_time',
-									'create_id',
-									'create_time');
+			     'id',
+			     'type',
+			     'name_formal',
+			     'name_short',
+			     'name_alternate',
+			     'LD_var',
+			     'description',
+			     'admit_inpatient',
+			     'admit_outpatient',
+			     'has_oncall_doc',
+			     'has_oncall_nurse',
+			     'does_surgery',
+			     'this_institution',
+			     'is_sub_dept',
+			     'parent_dept_nr',
+			     'work_hours',
+			     'consult_hours',
+			     'is_inactive',
+			     'sort_order',
+			     'address',
+			     'sig_line',
+			     'sig_stamp',
+			     'logo_mime_type',
+			     'status',
+			     'history',
+			     'modify_id',
+			     'modify_time',
+			     'create_id',
+			     'create_time');
 	/**
-	* Constructor
-	* @param int Department number
-	*/			
+	 * Constructor
+	 * @param int Department number
+	 */			
 	function Department($nr=0){
-		$this->setTable($this->tb);
-		$this->setRefArray($this->tabfields);
-		$this->dept_nr=$nr;
+	  $this->setTable($this->tb);
+	  $this->setRefArray($this->tabfields);
+	  $this->dept_nr=$nr;
 	}
 	/**
-	* Gets all data from the care_department table
-	* @access private
-	* @param string WHERE condition of the sql query
-	* @param string Sort item
-	* @param string  Determines the return type whether adodb object (_OBJECT) or assoc array (_ARRAY, '', empty) 
-	* @return mixed boolean or adodb record object or assoc array, determined by param $ret_type
-	*/
+	 * Gets all data from the care_department table
+	 * @access private
+	 * @param string WHERE condition of the sql query
+	 * @param string Sort item
+	 * @param string  Determines the return type whether adodb object (_OBJECT) or assoc array (_ARRAY, '', empty) 
+	 * @return mixed boolean or adodb record object or assoc array, determined by param $ret_type
+	 */
 	function _getalldata($cond='1',$sort='',$ret_type=''){
-	    global $db;
-		if(empty($sort)) $sort='name_formal';
-		$this->sql="SELECT * FROM $this->tb WHERE $cond AND status NOT IN ($this->dead_stat) ORDER BY $sort";
+	  global $db;
+	  if(empty($sort)) $sort='name_formal';
+	  $this->sql="SELECT * FROM $this->tb WHERE $cond AND status NOT IN ($this->dead_stat) ORDER BY $sort";
 	    if ($this->res['_gald']=$db->Execute($this->sql)) {
 		    if ($this->dept_count=$this->res['_gald']->RecordCount()){
 				$this->rec_count=$this->dept_count;

@@ -15,54 +15,60 @@ if(isset($pid) && $pid){
 <!-- 
 
 function chkform(d) {
-	encr=<?php if ($encounter_class_nr) {echo $encounter_class_nr; } else {echo '0';} ?>;
-	if(d.encounter_class_nr[0]&&d.encounter_class_nr[1]&&!d.encounter_class_nr[0].checked&&!d.encounter_class_nr[1].checked){
-		alert("<?php echo $LDPlsSelectAdmissionType; ?>");
-		return false;
-	}else if(d.encounter_class_nr[0]&&d.encounter_class_nr[0].checked&&!d.current_ward_nr.value){
-		alert("<?php echo $LDPlsSelectWard; ?>");
-		d.current_ward_nr.focus();
-		return false;
-	}else if(d.encounter_class_nr[1]&&d.encounter_class_nr[1].checked&&!d.current_dept_nr.value){
-		alert("<?php echo $LDPlsSelectDept; ?>");
-		d.current_dept_nr.focus();
-		return false;
-	}else if(!d.encounter_class_nr[0]&&encr==1&&!d.current_ward_nr.value){
-		alert("<?php echo $LDPlsSelectWard; ?>");
-		d.current_ward_nr.focus();
-		return false;
-	}else if(!d.encounter_class_nr[1]&&encr==2&&!d.current_dept_nr.value){
-		alert("<?php echo $LDPlsSelectDept; ?>");
-		d.current_dept_nr.focus();
-		return false;
-	}else if(d.referrer_diagnosis.value==""){
-		alert("<?php echo $LDPlsEnterRefererDiagnosis; ?>");
-		d.referrer_diagnosis.focus();
-		return false;
-	}else if(d.referrer_dr.value==""){
-		alert("<?php echo $LDPlsEnterReferer; ?>");
-		d.referrer_dr.focus();
-		return false;
-	}else if(d.referrer_recom_therapy.value==""){
-		alert("<?php echo $LDPlsEnterRefererTherapy; ?>");
-		d.referrer_recom_therapy.focus();
-		return false;
-	}else if(d.referrer_notes.value==""){
-		alert("<?php echo $LDPlsEnterRefererNotes; ?>");
-		d.referrer_notes.focus();
-		return false;
-	}else if(d.encoder.value==""){
-		alert("<?php echo $LDPlsEnterFullName; ?>");
-		d.encoder.focus();
-		return false;
-	}else{
-		return true;
-	}
+  global $GLOBAL_CONFIG;
+
+  encr=<?php if ($encounter_class_nr) {echo $encounter_class_nr; } else {echo '0';} ?>;
+  if(d.encounter_class_nr[0]&&d.encounter_class_nr[1]&&!d.encounter_class_nr[0].checked&&!d.encounter_class_nr[1].checked){
+    alert("<?php echo $LDPlsSelectAdmissionType; ?>");
+    return false;
+  }else if(d.encounter_class_nr[0]&&d.encounter_class_nr[0].checked&&!d.current_ward_nr.value){
+    alert("<?php echo $LDPlsSelectWard; ?>");
+    d.current_ward_nr.focus();
+    return false;
+  }else if(d.encounter_class_nr[1]&&d.encounter_class_nr[1].checked&&!d.current_dept_nr.value){
+    alert("<?php echo $LDPlsSelectDept; ?>");
+    d.current_dept_nr.focus();
+    return false;
+  }else if(!d.encounter_class_nr[0]&&encr==1&&!d.current_ward_nr.value){
+    alert("<?php echo $LDPlsSelectWard; ?>");
+    d.current_ward_nr.focus();
+    return false;
+  }else if(!d.encounter_class_nr[1]&&encr==2&&!d.current_dept_nr.value){
+    alert("<?php echo $LDPlsSelectDept; ?>");
+    d.current_dept_nr.focus();
+    return false;
+  }else if( (d.referrer_diagnosis.value=="") && 
+	    !$GLOBAL_CONFIG['admission_diagnosis_hide'] ){
+    alert("<?php echo $LDPlsEnterRefererDiagnosis; ?>");
+    d.referrer_diagnosis.focus();
+    return false;
+  }else if( (d.referrer_dr.value=="") && 
+	    !$GLOBAL_CONFIG['admission_referredby_hide'] ){
+    alert("<?php echo $LDPlsEnterReferer; ?>");
+    d.referrer_dr.focus();
+    return false;
+  }else if( (d.referrer_recom_therapy.value=="") && 
+	    !$GLOBAL_CONFIG['admission_referrer_therapy_hide'] ){
+    alert("<?php echo $LDPlsEnterRefererTherapy; ?>");
+    d.referrer_recom_therapy.focus();
+    return false;
+  }else if( (d.referrer_notes.value=="") && 
+	    !$GLOBAL_CONFIG['admission_referrer_notes_hide'] ){
+    alert("<?php echo $LDPlsEnterRefererNotes; ?>");
+    d.referrer_notes.focus();
+    return false;
+  }else if(d.encoder.value==""){
+    alert("<?php echo $LDPlsEnterFullName; ?>");
+    d.encoder.focus();
+    return false;
+  }else{
+    return true;
+  }
 }
 function resolveLoc(){
-	d=document.aufnahmeform;
-	if(d.encounter_class_nr[0].checked==true) d.current_dept_nr.selectedIndex=0;
-		else d.current_ward_nr.selectedIndex=0;
+  d=document.aufnahmeform;
+  if(d.encounter_class_nr[0].checked==true) d.current_dept_nr.selectedIndex=0;
+  else d.current_ward_nr.selectedIndex=0;
 }
 -->
 </script>

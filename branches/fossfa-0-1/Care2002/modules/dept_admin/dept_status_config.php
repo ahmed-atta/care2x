@@ -26,29 +26,29 @@ $dept_obj=new Department;
 
 if($mode)
 {
-	
-	if(!isset($db)||!$db) include_once($root_path.'include/inc_db_makelink.php');
-	if($dblink_ok)
-		{
-			switch($mode)
-			{	
-				case 'update': 
-									$HTTP_POST_VARS['history']=" CONCAT(history,'Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n"."')";
-									$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-									$dept_obj->setTable('care_department');
-									$dept_obj->setDataArray($HTTP_POST_VARS);
-									$dept_obj->where=' nr='.$dept_nr;
-									if($dept_obj->updateDataFromInternalArray($dept_nr)) 
-										{
-											header("location:dept_status_config.php".URL_REDIRECT_APPEND."&edit=1&updateok=1&dept_nr=$dept_nr");
-											exit;
-										}
-										else echo "$sql<br>$LDDbNoSave";
-									break;
-									
-			}// end of switch
-		}
-  		 else { echo "$LDDbNoLink<br>"; } 
+  
+  if(!isset($db)||!$db) include_once($root_path.'include/inc_db_makelink.php');
+  if($dblink_ok)
+    {
+      switch($mode)
+	{	
+	case 'update': 
+	  $HTTP_POST_VARS['history']=" CONCAT(history,'Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n"."')";
+	  $HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+	  $dept_obj->setTable('care_department');
+	  $dept_obj->setDataArray($HTTP_POST_VARS);
+	  $dept_obj->where=' nr='.$dept_nr;
+	  if($dept_obj->updateDataFromInternalArray($dept_nr)) 
+	    {
+	      header("location:dept_status_config.php".URL_REDIRECT_APPEND."&edit=1&updateok=1&dept_nr=$dept_nr");
+	      exit;
+	    }
+	  else echo "$sql<br>$LDDbNoSave";
+	  break;
+	  
+	}// end of switch
+    }
+  else { echo "$LDDbNoLink<br>"; } 
 }
 
 $depttypes=$dept_obj->getTypes();
