@@ -3,15 +3,17 @@
 if (eregi('inc_passcheck_mask.php',$PHP_SELF)) 
 	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
+
+if(empty($maskBorderColor)) $maskBorderColor='#333399';
 ?>
 <tr>
-<td bgcolor=#333399 colspan=3><FONT    SIZE=3  FACE="Arial" color="#ffffff">
+<td bgcolor="<?php echo $maskBorderColor ?>" colspan=3><FONT    SIZE=3  FACE="Arial" color="#ffffff">
 &nbsp;<!-- &nbsp;&nbsp;<?php echo $LDPwNeeded ?> -->
 </td>
 </tr>
 
 <tr bgcolor="#DDE1EC">
-<td bgcolor=#333399 width=1%><font size=1>&nbsp;</td>
+<td bgcolor="<?php echo $maskBorderColor ?>" width=1%><font size=1>&nbsp;</td>
 
 <td>
 
@@ -115,11 +117,11 @@ if($not_trans_id) {
 </center>
 
 </td>
-<td bgcolor=#333399><font size=1>&nbsp;</td>
+<td bgcolor="<?php echo $maskBorderColor ?>"><font size=1>&nbsp;</td>
 </tr>
 
 <tr >
-<td bgcolor="#333399" colspan=3><font size=1>
+<td bgcolor="<?php echo $maskBorderColor ?>" colspan=3><font size=1>
 &nbsp; 
 </td>
 </tr>
