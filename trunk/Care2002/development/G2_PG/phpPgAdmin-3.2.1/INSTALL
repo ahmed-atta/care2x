@@ -1,0 +1,33 @@
+phpPgAdmin Installation Guide
+-----------------------------
+
+1. Unpack your download
+
+   tar -xvzf phpPgAdmin-*.tar.gz
+
+2. Configure phpPgAdmin
+
+   edit phpPgAdmin/conf/config.inc.php
+
+   If you mess up the configuration file, you can recover it from the
+   config.inc.php-dist file.
+
+3. Set up the reports database.
+
+   If you want to enable reports (which are a useful feature) then go to
+   the 'sql' subdirectory and view the SQL script for your database.  It
+   will contain instructions on how to set up the reports database.
+
+4. Browse to the phpPgAdmin installation using a web browser.  You might
+   need cookies enabled for phpPgAdmin to work.
+
+5. IMPORTANT - SECURITY
+
+   PostgreSQL by default does not require you to use a password to log in.
+   This means that if you set up phpPgAdmin where the world can see it,
+   someone could just come along and type username 'postgres' or 'pgsql'
+   with no password and easily log in as a super user.
+
+   We STRONGLY recomment that you enable md5 passwords for local connections
+   in your pg_hba.conf, and set a password for the default superuser account.
+
