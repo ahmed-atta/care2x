@@ -35,6 +35,23 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 <head>
 <title></title>
 </head>
+<?php
+if($lang=='ar'||$lang=='fa'){
+?>
+<frameset rows="35,*" border=0>
+  <frame name="DIAGNOSTICS_REPORT_HEAD_<?php echo $sid.'_'.$pn ?>" src="diagnostics-report-head.php<?php echo $rel_url ?>" marginwidth=0 marginheight=0>
+  <frameset cols="*,16%" border=0>
+    <frame name="DIAGNOSTICS_REPORT_MAIN_<?php echo $sid.'_'.$pn ?>" src="blank.htm" >
+    <frame name="DIAGNOSTICS_REPORT_INDEX_<?php echo $sid.'_'.$pn ?>" src="diagnostics-report-index.php<?php echo $rel_url ?>" marginwidth=0 marginheight=0 border=0>
+  </frameset>
+<noframes>
+<body>
+</body>
+</noframes>
+</frameset>
+<?php
+}else{
+?>
 <frameset rows="35,*" border=0>
   <frame name="DIAGNOSTICS_REPORT_HEAD_<?php echo $sid.'_'.$pn ?>" src="diagnostics-report-head.php<?php echo $rel_url ?>" marginwidth=0 marginheight=0>
   <frameset cols="16%,*" border=0>
@@ -43,9 +60,12 @@ require_once($root_path.'include/inc_front_chain_lang.php');
   </frameset>
 <noframes>
 <body>
-
-
 </body>
 </noframes>
 </frameset>
+<?php
+}
+?>
+
+
 </html>
