@@ -117,15 +117,14 @@ require($root_path.'include/inc_css_a_hilitebu.php');
     <td><FONT  color="#000099" FACE="verdana,arial" size=2></td>
     <td background="../../gui/img/common/default/tableHeaderbg3.gif"><FONT  color="#000099" FACE="verdana,arial" size=2><b><?php echo $LDDefaultLang; ?></b></td>
     <td><select name="deflang">
-        	<option value="pt-br" <?php if($GLOBALCONFIG['language_default']=='pt-br') echo 'selected'; ?>> Brazilian</option>
-        	<option value="cs-iso" <?php if($GLOBALCONFIG['language_default']=='cs-iso') echo 'selected'; ?>>  Czech</option>
-        	<option value="en" <?php if($GLOBALCONFIG['language_default']=='en') echo 'selected'; ?>> English</option>
-        	<option value="fr" <?php if($GLOBALCONFIG['language_default']=='fr') echo 'selected'; ?>> French</option>
-        	<option value="de" <?php if($GLOBALCONFIG['language_default']=='de') echo 'selected'; ?>> German</option>
-        	<option value="it" <?php if($GLOBALCONFIG['language_default']=='it') echo 'selected'; ?>> Italian</option>
-        	<option value="id" <?php if($GLOBALCONFIG['language_default']=='id') echo 'selected'; ?>> Indonesian</option>
-        	<option value="pl" <?php if($GLOBALCONFIG['language_default']=='pl') echo 'selected'; ?>> Polish</option>
-        	<option value="es" <?php if($GLOBALCONFIG['language_default']=='es') echo 'selected'; ?>> Spanish</option>
+
+<?php
+require($root_path.'include/care_api_classes/class_language.php');
+$lang_obj=new Language;
+$langselect= &$lang_obj->createSelectForm($GLOBALCONFIG['language_default']);
+echo $langselect;
+?>
+			
         </select>
         </td>
   </tr>
