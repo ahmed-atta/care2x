@@ -23,8 +23,8 @@ function printCheckBox($param)
 {
    	global $stored_request;
 	
-    if($stored_request[$param]) echo '<img '.createComIcon('../','chkbox_chk.gif','0','absmiddle').'>'; 
-	  else echo '<img '.createComIcon('../','chkbox_chk.gif','0','absmiddle').'>';
+    if($stored_request[$param]==1) echo '<img '.createComIcon('../','chkbox_chk.gif','0','absmiddle').'>'; 
+	  else echo '<img '.createComIcon('../','chkbox_blk.gif','0','absmiddle').'>';
 }
 
 function printRadioButton($param,$value)
@@ -42,5 +42,13 @@ function printRadioButton($param,$value)
 	    else $noblank=0;
 	 
 	if(!$noblank) echo '<img '.createComIcon('../','radio_blk.gif','0','absmiddle').'>'; 
+	$noblank=1;
+
+/*    if($value ) 
+	{
+	   if($stored_request[$param]==1) echo '<img '.createComIcon('../','radio_chk.gif','0','absmiddle').'>'; 
+	   else echo '<img '.createComIcon('../','radio_blk.gif','0','absmiddle').'>'; 
+	}
+*/
 }
 ?>

@@ -392,7 +392,7 @@ if($stored_request['entry_date'] && $stored_request['entry_date']!="0000-00-00")
 			<?php
 	    if($stored_request['material_type']=="pe") echo '<img '.createComIcon('../','radio_chk.gif','0','absmiddle').'> '; 
 	      else echo '<img '.createComIcon('../','radio_blk.gif','0','absmiddle').'> ';  
-		echo 'align="absmiddle">&nbsp;'.$LDPE.'</b>'; 	  
+		echo '&nbsp;'.$LDPE.'</b>'; 	  
 	?><br>
   	<?php 
 	    if($stored_request['material_type']=="op_specimen") echo '<img '.createComIcon('../','radio_chk.gif','0','absmiddle').'> '; 
