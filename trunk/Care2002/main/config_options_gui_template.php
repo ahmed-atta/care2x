@@ -44,7 +44,7 @@ if(isset($mode)&&$mode=='save'){
 }
 
 require($root_path.'include/care_api_classes/class_template.php');
-$tp_obj= new Template;
+$tp_obj= new Template($root_path);
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>

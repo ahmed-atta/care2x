@@ -10,6 +10,56 @@ class Template{
 	var $default_path='gui/html_template/';
 	var $default_theme='default';
 	var $tp_dirs=array();
+	var $tp_root;
+	var $tp_path;
+	var $tp_main_path;
+	var $tp_theme;
+	
+	/**
+	* Constructor
+	* @param $root = the root path of the current script that instantiates this class
+	* @param $path = the path of template source file
+	* @param $theme = the template theme
+	*/
+	function Template($root='./',$path='',$theme='default'){
+		$this->tp_root=$root;
+		if(empty($path)) $this->tp_path=$root.$this->default_path;
+			else $this->tp_path=$path;
+		$this->tp_main_path=$this->tp_path;
+		$this->tp_theme=$theme;
+	}
+	/**
+	* setPath() sets the template path 
+	* @param $path = the path of template source file
+	* return true/false
+	*/
+	function setPath($path=''){
+		if(empty($path)) return false;
+		if(empty($this->tp_main_path)) $this->tp_main_path=$this->tp_path;
+		$this->tp_path=$path;
+		return true;
+	}
+	/**
+	* setTheme() sets the template theme 
+	* @param $them = the template theme
+	* return void
+	*/
+	function setTheme($theme=''){
+		if(empty($theme)) return false;
+		$this->tp_theme=$theme;
+	}
+	/** 
+	* useMainPath() sets the template path to the main path which was set at the construction time
+	* return true/false
+	*/
+	function useMainPath(){
+		if(empty($this->tp_main_path)){
+			return false;
+		}else{
+			$this->tp_path=$this->tp_main_path;
+			return true;
+		}
+	}
 	/**
 	* _getTemplates()
 	* private
@@ -17,13 +67,11 @@ class Template{
 	* returns the list in an array
 	*/
 	function _getTemplates(){
-		global $template_path, $root_path;
-		if(empty($template_path)) $template_path=$root_path.$this->default_path;
-		$handle=opendir($template_path.'.');  // Modify this path if you have placed the language tables somewhere else
+		$handle=opendir($this->tp_path.'.');  // Modify this path if you have placed the language tables somewhere else
 		$this->tp_dirs=array();
 		while (false!==($tp = readdir($handle))) { 
    			if ($tp != '.' && $tp != '..') {
-				if(is_dir($template_path.$tp)){
+				if(is_dir($this->tp_path.$tp)){
 					$this->tp_dirs[$tp]=$tp;
 				}
 			} 
@@ -36,16 +84,14 @@ class Template{
 	* returns the template in string form
 	*/
 	function load($tp_fn){
-		global $template_path, $root_path, $template_theme;
 		if(!empty($tp_fn)){
-			if(empty($template_path)) $template_path=$root_path.$this->default_path;
-			if(empty($template_theme)) $template_theme=$this->default_theme; // Last default alternative
-			$tpsrc=$template_path.$template_theme.'/';
-			if(!file_exists($tpsrc.$tp_fn)) $this->filename=$root_path.$this->default_path.$this->default_theme.'/'.$tp_fn;
-				else $this->filename=$tpsrc.$tp_fn;
+			$tpsrc=$this->tp_path.$this->tp_theme.'/';
+			if(file_exists($tpsrc.$tp_fn)) $this->filename=$tpsrc.$tp_fn;
+				else $this->filename=$this->tp_root.$this->default_path.$this->default_theme.'/'.$tp_fn;
 			$fn=fopen($this->filename,"r");
 			$this->template=fread($fn,filesize($this->filename));
 			fclose($fn);
+			$this->template=str_replace('\\','\\\\',$this->template);
 			$this->template=str_replace('"','\\"',$this->template);
 			return '"'.$this->template.'"';
 		}else{return false;}
@@ -59,7 +105,7 @@ class Template{
 	function createSelectForm($curr_theme){
 		$this->_getTemplates();
 		$str='';
-		while(list($x,$v)=each($tpdirs)){
+		while(list($x,$v)=each($this->tp_dirs)){
 			$str.= '<option value="'.$x.'"';
 			if($curr_theme==$x) $str.='selected';
 			$str.= '> '.$v.'</option>
@@ -68,7 +114,7 @@ class Template{
 		return $str;
 	}
 	/**
-	* createSelectForm() creates the available templates as radio buttons 
+	* createRadioSelect() creates the list of available templates as radio buttons 
 	* public
 	* @param $name = the name of the radio  input element
 	* @param $curr_theme = the current theme, if the current theme is equal to a theme, the theme will be marked "checked"
@@ -77,7 +123,7 @@ class Template{
 	function createRadioSelect($name,$curr_theme){
 		$this->_getTemplates();
 		$str='';
-		while(list($x,$v)=each($tpdirs)){
+		while(list($x,$v)=each($this->tp_dirs)){
 			$str.= '<input type="radio" name="'.$name.'" value="'.$x.'"';
 			if($curr_theme==$x) $str.='checked';
 			$str.= '> '.$v;
