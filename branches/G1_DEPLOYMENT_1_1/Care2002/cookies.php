@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once('include/inc_environment_global.php');
 require("language/$lang/lang_".$lang."_startframe.php"); ?>
-<html>
+<html dir=<?php echo $TP_DIR ?>>
 <head>
 <?php 
 
