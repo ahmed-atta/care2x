@@ -19,7 +19,7 @@
 
 </description>
 
-<license>PHP License</license> 
+<license>PHP License, see http://www.php.net/license/3_0.txt</license> 
 
 <maintainers> 
   <maintainer>
@@ -31,9 +31,9 @@
 </maintainers>
 
  <release>
-  <version>0.10</version>
+  <version>0.1.0</version>
   <date>2004-06-01</date>
-  <state>beta</state>
+  <state>alpha</state>
   <notes>
    This is the first release.
   </notes>
