@@ -117,9 +117,9 @@ $LDMsrUnit='Msr. Unit';
 $LDMedian='Median';
 $LDUpperBound='Upper boundary';
 $LDLowerBound='Lower boundary';
-$LDUpperCritical='Upper critical';
-$LDLowerCritical='Lower critical';
-$LDUpperToxic='Upper toxic';
-$LDLowerToxic='Lower toxic';
+$LDUpperCritical='Plus critique';
+$LDLowerCritical='Moins critique';
+$LDUpperToxic='Plus toxique';
+$LDLowerToxic='Moins toxique';
 
 ?>
