@@ -17,7 +17,7 @@ require_once($root_path.'include/inc_environment_global.php');
 			<P><img src="../../fotos/credits/elpidio_latorilla_3.jpg" border=0  align=right vspace=10>
 			<b>La première version bêta de CARE 2002 a été créée par Elpidio Latorilla:</b>
 			<p>
-			Professions: <br>Programmeur, Infirmière chirurgique, technicien en électronique et télécommunications
+			Professions: <br>Programmeur, infirmier chirurgique, technicien en électronique et télécommunications
 			<p>
 			Secteurs d'intérêt: <br>C, C++, PHP, Javascript, SQL, TCL/TK, HTML, Perl, ASP, Java
 			<P><a href="mailto:elpidio@latorilla.com"><u>Elpidio Latorilla peut-être contacté ici.</u></a>
@@ -45,7 +45,7 @@ require_once($root_path.'include/inc_environment_global.php');
 			Idées, discussions, conseils, tips, etc.
 			</font><p>
 			Lopo L. de Almeida est né en Angola en 1966. Il travaille dans le secteur d'informatique - allant de l'automatisation commerciale à l'automatisation industrielle - en tant que développeur de logiciels et dessinateur d'interface pour plus de 16 ans maintenant. Pendant les dernières 5 années il a travaillé dans le développement web et gestion d'entreprise. Il est le CEO/CTO de HumanEasy - un partenaire du projet Care2002 qui est en charge de ses <b>relations publiques et de gestion du marketing</b>.<br>
-			He is also involved in many other GNU/GPL projects; some of them are in use at Care2x's site.<br>
+			Il est également actif dans de nombreux projets GNU/GPL; certains parmi eux sont en utilisation sur le site de Care2x.<br>
 			<p><a href="http://www.humaneasy.com" target="_blank"><u>Lopo L. de Almeida peut-être contacté ici.</u></a>
 </td></tr></tbody></table>
 <hr>
@@ -54,14 +54,14 @@ require_once($root_path.'include/inc_environment_global.php');
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/giuseppe_scarpi.jpg"  border=0  width=135 height=170 align=right vspace=10>
-			<b>Giuseppe Scarpi (IT) translated Care 2002 to italian.</b>
+			<b>Giuseppe Scarpi (IT) a traduit Care 2002 en italien.</b>
 			<p>
-			Giuseppe Scarpi was born in Rome, Italy, 35 years ago. 
-			<p>He has a degree in Electronic Engineering and has worked for several companies in the biomedical sector, 
-			where he developed an understanding about the relationships between medical and informatics worlds.<br>
-He uses and appreciates both Linux and Windows, "<i>as both are the result of a great human work that must be respected</i>".<p>
-He decided to actively join open source because: <br><i>"Such an ideal world can survive only if perfectly balanced. If you take something,
- you should also give back in proportion."</i>
+			Giuseppe Scarpi est né à Rome, en Italie, il y a 35 ans.
+			<p>Il a un diplôme d'Ingénieur en Électronique et il a travaillé pour plusieures companies dans le secteur biomédical,
+			où il a développé une compréhension de la relation entre le monde de l'informatique et celui de la médecine.<br>
+Il utilise et apprécie les deux, Linux et Windows, "<i>en tant que résultat d'un grand travail humain qui doit être respecté</i>".<p>
+Il a décidé de joindre activement les logiciels libres car:<br><i>"Un tel monde idéal peut survivre uniquement s'il est parfaitement équilibré. Si vous prenez quelque chose,
+ vous devriez rendre quelque chose en proportion."</i>
 
 			<P><a href="mailto:kalbun@inwind.it"><u>Giuseppe Scarpi peut-être contacté ici.</u></a>
 </TD></TR></TBODY></TABLE>
@@ -72,18 +72,11 @@ He decided to actively join open source because: <br><i>"Such an ideal world can
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/gabriele_cicala.jpg"  border=0  align=right vspace=10>
-			<b>Gabriele Cicala (IT) translated most of the the www.care2x.com website to italian.</b>
+			<b>Gabriele Cicala (IT) a traduit la plus grande partie du site web de www.care2x.com en italien.</b>
 			<p>
-			Gabriele Cicala was born in Rossano, in Calabria southern Italy, in 1970.
-He has obtained a degree in Telecommunications Engineering from the Politecnico
-di Torino. Currently, he is working as a consultant for an informatics company. <p>Since
-he has known Linux and the
-open-source environment, he is very interested in every kind of project
-of this movement. Despite the
-fact that he is neither working in medical nor in health sector, he decided
-to join the Care project because
-he believes in the same things that the Care's creator and contributors
-believe.
+			Gabriele Cicala est né à Rossano, en Calabrie en Italie du sud, en 1970.
+Il a obtenu un diplôme en ingénierie de télecommunications à Politecnico di Torino.
+A présent il travaille en tant que consultant pour une entreprise d'informatique. <p>Depuis qu'il a connu Linux et l'environnement du logiciel libre, il est très intéressé en tout espèce de projet de ce mouvement. Malgré le fait qu'il ne travaille ni dans le domaine médical ni de santé, il a décidé de joindre le projet Care parce qu'il croît les mêmes choses que le créateur de Care et les contributeurs croient.
 			
 			<P><a href="mailto:gabcicala@tiscali.it"><u>Gabriele Cicala peut-être contacté ici.</u></a>
 </TD></TR></TBODY></TABLE>
@@ -94,12 +87,12 @@ believe.
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/daniel_zilli.jpg"  border=0  align=right vspace=10>
-			<b>Daniel Zilli (BR) translated Care 2002 and www.care2x.com website to  brazilian-portuguese.</b>
+			<b>Daniel Zilli (BR) a traduit Care 2002 et le site web www.care2x.com en portugais brésilien.</b>
 			<p>
-			Daniel is a nice guy who loves to live a happy life. He likes computers, football, and good music.
-He  loves computers and has 10 years of computer experience it.
-Daniel owns a company that produces computer
-science education products, open source software and local  linux distro.
+			Daniel est un type agréable qui adore vivre une vie heureuse. Il aime les ordinateurs, football, et bonne musique.
+Il adore les ordinateurs et il a 10 ans d'expérience en cette matière.
+Daniel est le propriétaire d'une entreprise qui produit des produits d'éducation d'informatique, les logiciels libres et une distribution de linux locale.
+
 			<P><a href="mailto:danielz@cco.matrix.com.br"><u>Daniel Zilli peut-être contacté ici.</u></a>
 </TD></TR></TBODY></TABLE>
 <hr>
@@ -108,7 +101,7 @@ science education products, open source software and local  linux distro.
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/muhammad_panji.png"  border=0  align=right vspace=10>
-			<b>Muhammad Panji (ID) cotranslated Care 2002 and www.care2x.com website to indonesian.</b>
+			<b>Muhammad Panji (ID) a participé à la traduction de Care 2002 et du site web de www.care2x.com en indonésien.</b>
 			
 			<P><a href="mailto:sumodirjo@users.sourceforge.net"><u>Muhammad Panji peut-être contacté ici.</u></a>
 </TD></TR></TBODY></TABLE>
@@ -119,7 +112,7 @@ science education products, open source software and local  linux distro.
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/agus_mr.jpg"  border=0  align=right vspace=10>
-			<b>Agus Muhammad Ramdan (ID) translated Care 2002 and www.care2x.com website to indonesian.</b>
+			<b>Agus Muhammad Ramdan (ID) a traduit Care 2002 et le site web de www.care2x.com en indonésien.</b>
 			
 			<P><a href="mailto:agusmr@mweb.co.id"><u>Agus M. Ramdan peut-être contacté ici.</u></a>
 </TD></TR></TBODY></TABLE>
@@ -129,20 +122,18 @@ science education products, open source software and local  linux distro.
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/thomas_wiedmann.jpg"  border=0  align=right vspace=10>
-			<b>Thomas Wiedmann (DE) is the most active debugger</b>
+			<b>Thomas Wiedmann (DE) est le déboggueur le plus actif</b>
 			<p><font size=1>
-			Complete testing <br>
-			Debugging<br>
-			DB 'optimistic locking' concept<br>
-			DB optimizations<br>
-			Validation scripts for date and numbers<p>
+			Tests complets<br>
+			Débuggage<br>
+			Le concept de DB 'optimistic locking' (verouillage optimistique)<br>
+			Optimisations de la DB<br>
+			Validation des scripts pour la date et les numéros<p>
 			</font>
-			Thomas Wiedmann is a long time software developer and works in Stuttgart, Germany. He has
-			been working with Gupta Team Developer and IBM DB2 since 7 years and is an
-			IBM Certified UDB DB2 Administrator, too. Read more about DB2 in his book
-			"DB2" ISBN 3-932311-80-9. He is an author for TOOLBOX (www.toolbox-mag.de),
-			a German developer magazine.
-		
+			Thomas Wiedmann est un développeur avec longue expérience et travaille à Stuttgart, en Allemagne. Il a
+			travaillé avec Gupta Team Developer et IBM DB2 depuis 7 ans et est également un administrateur certifié
+			IBM en UDB DB2. A lire plus sur DB2 dans son livre "DB2" ISBN 3-932311-80-9. Il est un auteur pour
+			TOOLBOX (www.toolbox-mag.de), un magazine allemand.
 
 			<P><a href="mailto:tho123@users.sourceforge.net"><u>Thomas Wiedmann peut-être contacté ici.</u></a>
 </TD></TR></TBODY></TABLE>
@@ -153,7 +144,7 @@ science education products, open source software and local  linux distro.
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/hinostroza.jpg"  border=0  width=135 align=right vspace=10>
 			<b>Dr. med Daniel Hinostroza C. (EC)</b><br>
-			Spanish translations
+			Traductions espagnoles
 			<p><font size=1>
 			Author and coauthor of numerous medical textbooks<br>
 5 years as Director of the Grünenthal Medical Informatics Center, Quito
@@ -205,15 +196,15 @@ Website: www.cerebroperiferico.com
         <TBODY>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-			<b>Matej Hausenblas (FR) did the french translations of Care 2002</b>
+			<b>Mat&#283;j Hausenblas (FR) did the french translations of Care 2002</b>
 			<p>
-Matej Hausenblas was born in Prague, Czech Republic, in 1981.
+Mat&#283;j Hausenblas was born in Prague, Czech Republic, in 1981.
 He is a student on a math-informatics-physics university. After several years 
 of using Windows he decided to have a look at Linux, as a worthy challenge 
 and after some time, he decided to participate on the Open Source projects to 
 improve some skills and also to return something back and to see how things 
 work in this kind of community.
-			<P><a href="mailto:matejh@users.sourceforge.net"><u>Matej Hausenblas peut-être contacté ici.</u></a>
+			<P><a href="mailto:matejh@users.sourceforge.net"><u>Mat&#283;j Hausenblas peut-être contacté ici.</u></a>
 </TD></TR></TBODY></TABLE>
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
@@ -323,7 +314,7 @@ work in this kind of community.
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Data structure design, Obstetrics, Bug reporting, GUI design</font></td>
   </tr>
   <tr>
-    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Matêj Hausenblas (FR)</font></nobr>&nbsp;</td>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Mat&#283;j Hausenblas (FR)</font></nobr>&nbsp;</td>
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;French translation</font></td>
   </tr>
   <tr>
