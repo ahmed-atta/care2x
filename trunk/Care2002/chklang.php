@@ -35,6 +35,7 @@ $lang_path = 'language/';
  * example.
  */
 $available_languages = array(
+  'ar'         => array('ar|Arabic', '28596'),
   'bg'         => array('bg|bulgarian', 'bulgarian-win1251'),
   'ca'         => array('ca|catalan', 'catala'),
   'cs-iso'     => array('cs|czech', 'czech-iso'),
@@ -149,7 +150,7 @@ if (empty($lang)) {
 }
 
 /**
-* The following lines are inserted by Elpidio latorilla for Care 2002 - 19.07.2002/08:55
+* The following lines are inserted by Elpidio latorilla for CARE 2X - 19.07.2002/08:55
 */
 $lang_file = $lang_path.$lang.'lang_'.$lang.'_nursing.php';
 if((!file_exists($lang_file))&&(!file_exists('../'.$lang_file))) 
