@@ -103,6 +103,7 @@ if($dblink_ok) {
                     $photo_filename=cleanString($name_last).'_'.cleanString($name_first).'_'.formatDate2STD($date_birth,$date_format).'.'.$picext;
 
                     @ copy($HTTP_POST_FILES['photo_filename']['tmp_name'],$root_path.$photo_path.'/'.$photo_filename);
+					$HTTP_POST_VARS['photo_filename']=$photo_filename;
                 }
             }
   
@@ -161,13 +162,12 @@ if($dblink_ok) {
 						  }
 				      } elseif ($insurance_nr && $insurance_firm_name  && $insurance_class_nr) {
 	
-						      $insure_data=array('insurance_nr'=>$insurance_nr,
+						   $insure_data=array('insurance_nr'=>$insurance_nr,
 						                                'firm_id'=>$insurance_firm_id,
 														'pid'=>$pid,
 														'class_nr'=>$insurance_class_nr);
 														
-						      $pinsure_obj->insertDataFromArray($insure_data);
-							  
+							$pinsure_obj->insertDataFromArray($insure_data);
 					  }
                  }				
 			      $newdata=1;
@@ -181,12 +181,12 @@ if($dblink_ok) {
 			  }
             } else {
                  $from='entry';
-				 
 				 /* Prepare internal data to be stored together with the user input data */
+				 if(!$person_obj->InitPIDExists($GLOBAL_CONFIG['person_id_nr_init'])) $HTTP_POST_VARS['pid']=$GLOBAL_CONFIG['person_id_nr_init'];
 				 $HTTP_POST_VARS['date_birth']=@formatDate2Std($date_birth,$date_format);
 				 $HTTP_POST_VARS['date_reg']=date('Y-m-d H:i:s');
 				 $HTTP_POST_VARS['status']='normal';
-				 $HTTP_POST_VARS['history']="Init.reg. ".date('Y-m-d H:i:s')." =".$user_id."\n";
+				 $HTTP_POST_VARS['history']="Init.reg. ".date('Y-m-d H:i:s')." ".$user_id."\n";
 				 $HTTP_POST_VARS['modify_id']=$user_id;
 				 $HTTP_POST_VARS['create_id']=$user_id;
 				 $HTTP_POST_VARS['create_time']='NULL';
@@ -197,6 +197,30 @@ if($dblink_ok) {
 	             { 
 		              //* If data was newly inserted, get the insert id = patient number */
 		               if(!$update) $pid=$db->Insert_ID();
+					   
+				  /* Update the insurance data */
+				  /* Lets detect if the data is already existing */
+				  if($insurance_show) {
+				      if($insurance_item_nr) {
+				          if(!empty($insurance_nr) && !empty($insurance_firm_name) && $insurance_firm_id) {  
+						  
+						      $insure_data=array('insurance_nr'=>$insurance_nr,
+						                                'firm_id'=>$insurance_firm_id,
+														'class_nr'=>$insurance_class_nr);
+														
+						      $pinsure_obj->updateDataFromArray($insure_data,$insurance_item_nr);
+						  
+						  }
+				      } elseif ($insurance_nr && $insurance_firm_name  && $insurance_class_nr) {
+	
+						      $insure_data=array('insurance_nr'=>$insurance_nr,
+						                                'firm_id'=>$insurance_firm_id,
+														'pid'=>$pid,
+														'class_nr'=>$insurance_class_nr);
+														
+						      $pinsure_obj->insertDataFromArray($insure_data);
+					  }
+                 }				
 			
 			          $newdata=1;
 						
@@ -207,16 +231,15 @@ if($dblink_ok) {
              }
         } // end of if(!$error)
 
-     }
-     elseif(isset($pid) && ($pid!=''))
-     {
+     }elseif(isset($pid) && ($pid!='')){
 		 /* Get the person's data */
          if($data_obj=&$person_obj->getAllInfoObject())
          {
 	         $zeile=$data_obj->FetchRow();
 	 
-             while(list($x,$v)=each($zeile))	$$x=$v;            
-			       
+             //while(list($x,$v)=each($zeile))	$$x=$v;            
+			  extract($zeile);
+			      
 			 /* Get the related insurance data */
 			 $p_insurance=&$pinsure_obj->getPersonInsuranceObject($pid);
 			 if($p_insurance==false) {
@@ -226,7 +249,8 @@ if($dblink_ok) {
 				    $insurance_show=true;
 				} elseif ($p_insurance->RecordCount()==1){
 				    $buffer= $p_insurance->FetchRow();
-					while(list($x,$v)=each($buffer)) {$$x=$v; }
+					//while(list($x,$v)=each($buffer)) {$$x=$v; }
+					extract($buffer);
 				    $insurance_show=true;
 				    $insurance_firm_name=$pinsure_obj->getFirmName($insurance_firm_id); 
 				} else { $insurance_show=false;}
@@ -235,7 +259,6 @@ if($dblink_ok) {
     } else {
 	     $date_reg=date('Y-m-d H:i:s');
      }			
-	 
 	 /* Get the insurance classes */
 	 $insurance_classes=&$pinsure_obj->getInsuranceClassInfoObject('class_nr,name,LD_var');
 } else { 
