@@ -189,17 +189,21 @@ class Image extends Core{
 	*/
 	function saveImageData(&$data){
 	    global $db;
-		$nr;
-		if($nr=$this->getLastShotNr($data)){
-			$data['shot_nr']=$nr+1;
+		$nr=0;
+		if(empty($data['encounter_nr'])){
+			return FALSE;
 		}else{
-			$data['shot_nr']=1;
-		}
-		$this->data_array=$data;
-		if($this->insertDataFromInternalArray()){
-			return $db->Insert_ID();
-		}else{
-			return false;
+			if($nr=$this->getLastShotNr($data)){
+				$data['shot_nr']=$nr+1;
+			}else{
+				$data['shot_nr']=1;
+			}
+			$this->data_array=$data;
+			if($this->insertDataFromInternalArray()){
+				return $db->Insert_ID();
+			}else{
+				return FALSE;
+			}
 		}
 	}
 	/**
