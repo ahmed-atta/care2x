@@ -57,13 +57,13 @@ $LDSubTitle=array
 
 $LDMore='mehr dazu';
 $LDBackTxt='Zurück';
-$LDClk2Read='Click zum Lesen';
+$LDClk2Read='Klicke zum Lesen';
 
 $LDArticle='Artikel';
 $LDWrittenOn='am';
 $LDWrittenBy='Verfasst von';
 
 $LDNewsDummy=array(1=>'erster',2=>'zweiter',3=>'dritter',4=>'vierter');
-$LDClk2Compose='Click hier zum schreiben...';
-$LDClk2Write='Click here to start the editor';
+$LDClk2Compose='Klicke hier zum schreiben...';
+$LDClk2Write='Klicke hier um den (internen) Texteditor zu starten';
 ?>
