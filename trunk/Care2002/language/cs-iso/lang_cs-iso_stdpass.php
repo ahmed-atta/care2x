@@ -34,16 +34,16 @@ $LDMedocsHow2Search='Jak najít  po¾adovaný dokument v systému Medoc';
 $LDMedocsHow2Archive='Jak prohledávat archív systému Medoc';
 
 $LDIntro2='Úvod do';
-$LDWhat2Do='How to do what in';
-$LDHowManage='How to manage the directory';
-$LDHowEnter='How to enter new phone information';
+$LDWhat2Do='Jak pracovat v sekci';
+$LDHowManage='Jak spravovat adresáø';
+$LDHowEnter='Jak mohu zadát nové informace do telefonního seznamu';
 
 $LDPhoneDir='Telefonní seznam';
-$LDMakeDutyPlan='Create dutyplan';
+$LDMakeDutyPlan='Vytvoøit plán práce';
 $LDDocsList='Seznam lékaøù';
-$LDNursingManage='Ward management';
+$LDNursingManage='Navení èísel pokojù a oddìlení';
 
-$LDNursingStation='Nursing ward';
+$LDNursingStation='Pøehled obsazení pokojù';
 $LDOrDocu='Dokumentace operaèního sálu';
 $LDOrLogBook='Kniha sestry na operaèním sále';
 $LDOrNursing='Sestra na operaèním sále';

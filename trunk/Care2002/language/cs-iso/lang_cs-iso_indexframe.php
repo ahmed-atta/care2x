@@ -3,7 +3,7 @@ $indextag=array('Domovská stránka',
 
 				'Pøíjem',
 				'Ambulatory',
-				'Lékaøská dokumentace',
+				'Karta pacienta',
 				'Lékaøi',
 				'Sestry',
 				'Operaèní sál',
@@ -20,7 +20,7 @@ $indextag=array('Domovská stránka',
 				'Pøihlá¹ení',
 				);
 
-$VersionChgTarget='_top';
+$VersionChgTarget='_na_vrchol';
 $LDLanguage='Jazyk';
 $LDPlsWaitInit='Prosím o chvíli strpení. Probíhá incializace programu ....';
 
