@@ -13,16 +13,16 @@ function signalNewDiagnosticsReportEvent($report_date='', $script_name='labor_te
    global $db, $local_user, $sid, $batch_nr, $pn, $HTTP_SESSION_VARS, $target,$dept_nr,$formtitle,
    				$subtarget, $LDDbNoRead, $LDDbNoSave, $date_format, $entry_date,$root_path;
    
-	/* Check if the formatDate2Local function is loaded */
+	# Check if the formatDate2Local function is loaded 
 	if(!function_exists('formatDate2Local'))   include_once($root_path.'include/inc_date_format_functions.php');
 
-	/* Load the visual signalling defined constants */
+	# Load the visual signalling defined constants 
 	if(!function_exists('setEventSignalColor')) include_once($root_path.'include/inc_visual_signalling_fx.php');
    
 									
     $entry_table='care_encounter_diagnostics_report';
 									
-    $report_exits=0; // assume that report does not exist yet
+    $report_exits=0; # assume that report does not exist yet
 	
 	if(empty($report_date)){
 		$report_date=date('Y-m-d');
@@ -30,7 +30,7 @@ function signalNewDiagnosticsReportEvent($report_date='', $script_name='labor_te
 		$report_date=formatDate2Std($report_date,$date_format);
 	}
 									
-    /* Check first if a copy is already existing. If yes = update entry, no = insert new entry*/
+    # Check first if a copy is already existing. If yes = update entry, no = insert new entry
 									
     $sql="SELECT item_nr FROM $entry_table WHERE report_nr=$batch_nr";
 									

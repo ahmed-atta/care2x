@@ -3,32 +3,29 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'/include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+$lang_tables[]='departments.php';
 define('LANG_FILE','tech.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
 
 $thisfile=basename(__FILE__);
 $breakfile='technik.php'.URL_APPEND;
 $returnfile=$HTTP_SESSION_VARS['sess_file_return'].URL_APPEND;
 $HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
 
-$deptnames=@get_meta_tags($root_path."global_conf/$lang/doctors_abt_list.pid");
-
 if(!isset($mode)) $mode='';
 
-/**
-* Resolve the department's acronym to it proper name
-*/
-$checkdept=1;
-require($root_path.'include/inc_resolve_dept_dept.php');
+# Resolve department
+require_once($root_path.'include/inc_resolve_dept.php');
+# Resolve ward
+require_once($root_path.'include/inc_resolve_ward.php');
 
 if(!isset($inquirer)||empty($inquirer))
 {
@@ -40,11 +37,11 @@ if(!isset($inquirer)||empty($inquirer))
 	{
 	    $inquirer=$HTTP_POST_VARS['inquirer'];
     }
-	else
+/*	else
 	{
-	     $inquirer=$HTTP_COOKIE_VARS['ck_login_username'.$sid];
+	     $inquirer=$HTTP_SESSION_VARS['sess_user_name'];
 	}
-}
+*/}
 
 $dbtable='care_tech_questions';
 
@@ -82,19 +79,22 @@ if($dblink_ok) {
     }
 						
     if($mode=='read') {
-        $sql="SELECT tdate,ttime,inquirer,query,answered,reply,ansby,astamp FROM $dbtable
+/*        $sql="SELECT tdate,ttime,inquirer,query,answered,reply,ansby,astamp FROM $dbtable
 							 WHERE inquirer='$inquirer'
 							 		AND dept='".$HTTP_GET_VARS['dept']."'
 									AND tdate='".$HTTP_GET_VARS['tdate']."'
 									AND ttime='".$HTTP_GET_VARS['ttime']."'
 									AND tid='".$HTTP_GET_VARS['tid']."'
 									LIMIT 0,10"; 
+*/        $sql="SELECT tdate,ttime,inquirer,query,answered,reply,ansby,astamp FROM $dbtable
+							 WHERE batch_nr='".$HTTP_GET_VARS['batch_nr']."'
+									LIMIT 0,10"; 
         if($result=$db->Execute($sql)) {
             $inhalt=$result->FetchRow();		
         } else {echo "<p>$sql $LDDbNoSave<br>"; };
     }
 			
-    $sql="SELECT dept,tdate,ttime,inquirer,tid,query,answered FROM $dbtable WHERE inquirer='$inquirer'  ORDER BY tid DESC LIMIT 0,10 "; 
+    $sql="SELECT batch_nr,dept,tdate,ttime,inquirer,tid,query,answered FROM $dbtable WHERE inquirer='$inquirer'  ORDER BY tid DESC LIMIT 0,6 "; 
     if($ergebnis=$db->Execute($sql)) {
         $rows = $ergebnis->RecordCount();
     } else {echo '<p>'.$sql.$LDDbNoRead.'<br>'; };
@@ -113,14 +113,17 @@ function checkform(d)
 {
 	if(d.query.value=="") 
 		{	alert("<?php echo $LDAlertQuestion ?>");
+			d.query.focus();
 			return false;
 		}
 	if(d.inquirer.value=="") 
 		{	alert("<?php echo $LDAlertName ?>");
+			d.inquirer.focus();
 			return false;
 		}
 	if(d.dept.value=="") 
 		{	alert("<?php echo $LDAlertDeptOnly ?>");
+			d.dept.focus();
 			return false;
 		}
 	return true;
@@ -173,7 +176,7 @@ td.vn { font-family:verdana,arial; color:#000088; font-size:10;background-color:
 		{
 			echo '	<tr><td bgcolor="#999999" >	<FONT  SIZE=2 FACE="verdana,Arial" color=white>';
 
-			echo "	<b>$LDReply $LDFrom ".$inhalt['ansby']." $LDAt ".$inhalt['astamp']." :</b>";
+			echo "	<b>$LDReply $LDFrom ".$inhalt['ansby']." $LDOn ".formatDate2Local($inhalt['astamp'],$date_format,1)." $LDOClock:</b>";
 			echo '	</td>
 					</tr>
 					<tr><td  bgcolor="#ffffcc" ><FONT  SIZE=1 FACE="verdana,Arial" >';
@@ -203,7 +206,8 @@ td.vn { font-family:verdana,arial; color:#000088; font-size:10;background-color:
 <?php if($rows)
 while ($content=$ergebnis->FetchRow()) 
 {
-	echo "&nbsp;<b>".formatDate2Local($content['tdate'],$date_format).":</b> <a href=\"$thisfile?sid=$sid&lang=$lang&mode=read&dept=$content[dept]&tdate=$content[tdate]&ttime=$content[ttime]&inquirer=$content[inquirer]&tid=$content[tid]\">".substr($content[query],0,40)."...";
+	//echo "&nbsp;<b>".formatDate2Local($content['tdate'],$date_format).":</b> <a href=\"$thisfile".URL_APPEND."&mode=read&dept=".$content['dept']."&tdate=".$content['tdate']."&ttime=".$content['ttime']."&inquirer=".$content['inquirer']."&tid=".$content['tid']."\">".substr($content[query],0,40)."...";
+	echo "&nbsp;<b>".formatDate2Local($content['tdate'],$date_format).":</b> <a href=\"$thisfile".URL_APPEND."&mode=read&batch_nr=".$content['batch_nr']."&dept_nr=".$dept_nr."&inquirer=".strtr($inquirer,' ','+')."\">".substr($content[query],0,40)."...";
 	if(isset($content['answered'])&&!empty($content['answered'])) echo '<img '.createComIcon($root_path,'warn.gif','0').'>';
 	echo '</a><p>';
 }
@@ -250,30 +254,29 @@ while ($content=$ergebnis->FetchRow())
 <input type="hidden" name="sid" value= "<?php echo $sid ?>">
 <input type="hidden" name="lang" value= "<?php echo $lang ?>">
 <input type="hidden" name="mode" value="save">
-<?php echo $LDName ?>:<br><input type="text" name="inquirer" size="30"  value="<?php echo $inquirer ?>"> <br>
-<?php echo $LDDept ?>:<br><input type="text" name="dept" size="30" value="<?php echo $deptnames[$dept] ?>">
+<?php echo $LDName ?>:<br><input type="text" name="inquirer" size="30"  value="<?php if($inquirer) echo $inquirer; elseif(isset($HTTP_SESSION_VARS['sess_user_name'])) echo $HTTP_SESSION_VARS['sess_user_name'] ?>"> <br>
+<?php echo $LDDept ?>:<br><input type="text" name="dept" size="30" value="<?php echo $dept_name ?>">
 </td>
 </tr>
 
 </table>
 <p>
 
-<input type="image"  <?php echo createLDImgSrc($root_path,'send.gif','0') ?> >  
+<input type="image"  <?php echo createLDImgSrc($root_path,'abschic.gif','0','middle') ?> >&nbsp;&nbsp;&nbsp;<a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc($root_path,'cancel.gif','0','middle') ?> alt="<?php echo $LDCancel ?>" align="middle"></a>
+
 </form>
 
 </FONT>
 <p>
 
-<a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancel ?>" align="middle"></a>
-<p>
 <FONT    SIZE=-1  FACE="Arial">
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>>
 <a href="technik-reparatur-anfordern.php<?php echo URL_APPEND ?>"><?php echo $LDReRepairTxt ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>>
 <a href="technik-reparatur-melden.php<?php echo URL_APPEND ?>"><?php echo $LDRepairReportTxt ?></a><br>
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>>
+<!-- <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>>
 <a href="technik-info.php<?php echo URL_APPEND ?>"><?php echo $LDInfoTxt ?></a><br>
-</FONT>
+ --></FONT>
 </ul>
 </FONT>
 <p>
@@ -287,7 +290,7 @@ require($root_path.'include/inc_load_copyrite.php');
 </td>
 </tr>
 </table>        
-&nbsp;
+
 </FONT>
 </BODY>
 </HTML>

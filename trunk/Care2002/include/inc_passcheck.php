@@ -33,10 +33,10 @@ function validarea(&$zeile2, $permit_type_all = 1){
 
 function logentry(&$userid,$key,$report,&$remark1,&$remark2)
 {
-   global $passtag;
+   global $passtag, $root_path;
 
-	if($passtag) $logpath='../logs/access_fail/'.date('Y').'/';
-	   else $logpath='../logs/access/'.date('Y').'/';
+	if($passtag) $logpath=$root_path.'logs/access_fail/'.date('Y').'/';
+	   else $logpath=$root_path.'logs/access/'.date('Y').'/';
 	   
 	if (file_exists($logpath))
 	{
@@ -98,9 +98,9 @@ if($dblink_ok)
 					//setcookie($userck.$sid,$zeile['name']);	
 					//echo $fileforward;
 					$HTTP_SESSION_VARS['sess_user_name']=$zeile['name'];
+										
 					header('Location:'.strtr($fileforward,' ','+').'&checkintern='.$checkintern);
-					exit;
-					
+					exit;					
 				}else {$passtag=2;};
 			}else $passtag=3;
 		}else {$passtag=1;};

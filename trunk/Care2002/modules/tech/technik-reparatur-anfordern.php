@@ -1,32 +1,29 @@
 <?php
-//error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'/include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+$lang_tables[]='departments.php';
 define('LANG_FILE','tech.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
 
-$deptnames=get_meta_tags($root_path."global_conf/$lang/doctors_abt_list.pid");
-
-include($root_path.'include/inc_resolve_dept_dept.php');
-
+# Resolve department
+require_once($root_path.'include/inc_resolve_dept.php');
+# Resolve ward
+require_once($root_path.'include/inc_resolve_ward.php');
+	
 $breakfile='technik.php'.URL_APPEND;
 $returnfile=$HTTP_SESSION_VARS['sess_file_return'].URL_APPEND;
 $HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
 
-if(!isset($HTTP_COOKIE_VARS['ck_thispc_station'])) $HTTP_COOKIE_VARS['ck_thispc_station']='';
-if(!isset($HTTP_COOKIE_VARS['ck_thispc_room'])) $HTTP_COOKIE_VARS['ck_thispc_room']='';
-if(!isset($HTTP_COOKIE_VARS['ck_thispc_dept'])) $HTTP_COOKIE_VARS['ck_thispc_dept']='';
-if(!isset($HTTP_COOKIE_VARS['ck_thispc_phone'])) $HTTP_COOKIE_VARS['ck_thispc_phone']='';
 if(!isset($HTTP_COOKIE_VARS['ck_login_username'.$sid])) $HTTP_COOKIE_VARS['ck_login_username'.$sid]='';
 
 if(!isset($dept)) $dept='';
@@ -145,14 +142,14 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <td bgcolor=#ffffcc valign="top">
 <FONT    SIZE=-1  FACE="Arial">
 <?php echo $LDRepairArea ?>:<br>
-<input name="dept" type="text" value="<?php echo strtoupper($HTTP_COOKIE_VARS['ck_thispc_station'])." - ".$HTTP_COOKIE_VARS['ck_thispc_room']." - ".$deptnames[$dept] ?>" size="30" maxlength="25">
+<input name="dept" type="text" value="<?php echo strtoupper($ward_id)." - ".$cfg['thispc_room_nr']." - ".$dept_name ?>" size="30" maxlength="25">
 
 </td>
 
 <td bgcolor=#ffffcc ><FONT    SIZE=-1  FACE="Arial">
-<?php echo $LDReporter ?>:<br><input type="text" name="reporter" size="30" value="<?php echo $HTTP_COOKIE_VARS['ck_login_username'.$sid] ?>"> <br>
+<?php echo $LDReporter ?>:<br><input type="text" name="reporter" size="30" value="<?php echo $HTTP_SESSION_VARS['sess_user_name'] ?>"> <br>
 <?php echo $LDPersonnelNr ?>:<br><input type="text" name="id" size="30" value=""><br>
-<?php echo $LDPhoneNr ?>:<br><input type="text" name="tphone" size="30" value="<?php echo $HTTP_COOKIE_VARS['ck_thispc_phone'] ?>">
+<?php echo $LDPhoneNr ?>:<br><input type="text" name="tphone" size="30" value="<?php echo $cfg['thispc_phone'] ?>">
 </td>
 </tr>
 <tr>
@@ -171,21 +168,18 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <input type="hidden" name="ttime" value= "<?php echo date('H:i:s') ?>">
 <input type="hidden" name="sid" value= "<?php echo $sid ?>">
 <input type="hidden" name="lang" value= "<?php echo $lang ?>">
-<input type="image"  <?php echo createLDImgSrc($root_path,'send.gif','0') ?>  >  
+<input type="image"  <?php echo createLDImgSrc($root_path,'abschic.gif','0','middle') ?>  >&nbsp;&nbsp;&nbsp;<a href="<?php echo $breakfile; ?>" ><img <?php echo createLDImgSrc($root_path,'cancel.gif','0','middle') ?> alt="<?php echo $LDClose ?>" align="middle"></a>
 </form>
-
-
 <p>
-<a href="<?php echo $breakfile; ?>" ><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDClose ?>" align="middle"></a>
-<p>
+
 <FONT    SIZE=-1  FACE="Arial">
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>>
-<a href="technik-reparatur-melden.php?sid=<?php echo "$sid&lang=$lang" ?>"><?php echo $LDRepairReportTxt ?></a><br>
+<a href="technik-reparatur-melden.php<?php echo URL_APPEND ?>"><?php echo $LDRepairReportTxt ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>>
-<a href="technik-questions.php?sid=<?php echo "$sid&lang=$lang" ?>"><?php echo $LDQuestionsTxt ?></a><br>
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>>
-<a href="technik-info.php?sid=<?php echo "$sid&lang=$lang" ?>"><?php echo $LDInfoTxt ?></a><br>
-</FONT>
+<a href="technik-questions.php<?php echo URL_APPEND ?>"><?php echo $LDQuestionsTxt ?></a><br>
+<!-- <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>>
+<a href="technik-info.php<?php echo URL_APPEND ?>"><?php echo $LDInfoTxt ?></a><br>
+ --></FONT>
 
 </ul>
 

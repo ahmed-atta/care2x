@@ -1,13 +1,16 @@
 <?php
-/* API class for person's basic personal data.
+/* API class for person's basic personal data extends core class
 *  Note this class should be instantiated only after a "$db" adodb  connector object
 * has been established by an adodb instance
 */
+require_once($root_path.'include/care_api_classes/class_core.php');
 
-class Person {
+class Person extends Core {
 
     var $tb_person='care_person';
 	var $tb_citytown='care_address_citytown';
+	var $tb_enc='care_encounter';
+	var $tb_employ='care_personell';
 	var $pid;
 	var $result;
 	var $ok;
@@ -17,6 +20,8 @@ class Person {
 	var $row;
 	var $person=array();
 	var $is_preloaded=false;
+	var $is_nr=false;
+	
 	var $basic_list='pid,title,name_first,name_last,name_2,name_3,name_middle,name_maiden,name_others,date_birth,
 				           sex,addr_str,addr_str_nr,addr_zip,addr_citytown_nr,photo_filename';
 						   
@@ -34,6 +39,7 @@ class Person {
 				 'name_maiden',
 				 'name_others',
 				 'date_birth',
+				 'blood_group',
 				 'addr_str',
 				 'addr_str_nr',
 				 'addr_zip',
@@ -71,6 +77,8 @@ class Person {
 	
 	function Person ($pid='') {
 	    $this->pid=$pid;
+		$this->ref_array=$this->elems_array;
+		$this->coretable=$this->tb_person;
 	}
 	
 	function setPID($pid) {
@@ -96,7 +104,7 @@ class Person {
 			} else { return false; }
 		} else { return false; }
 	}
-	   function prepInsertArray(){
+	function prepInsertArray(){
         global $HTTP_POST_VARS;
 		$x='';
 		$v='';
@@ -146,7 +154,7 @@ class Person {
 		return $this->insertDataFromArray($this->data_array);
 	}
 
-    function updateDataFromArray(&$array,$item_nr='') {
+/*    function updateDataFromArray(&$array,$item_nr='') {
 	    
 		$x='';
 		$v='';
@@ -155,22 +163,24 @@ class Person {
 		if(!is_array($array)) return false;
 		if(empty($item_nr)||!is_numeric($item_nr)) return false;
 		while(list($x,$v)=each($array)) {
-		    $sql.="$x='$v',";
+			if(stristr($v,'concat')||stristr($v,'null')) $sql.="$x= $v,";
+		    	else $sql.="$x='$v',";
 		}
 		$sql=substr_replace($sql,'',(strlen($sql))-1);
 		
-        $this->sql="UPDATE $this->tb_person SET $sql WHERE item_nr=$item_nr";
+        $this->sql="UPDATE $this->tb_person SET $sql WHERE pid=$item_nr";
 		
 		return $this->Transact();
 	}
-
+*/
 	function getAllInfoObject($pid='') {
 	    global $db;
 		 
 		if(!$this->internResolvePID($pid)) return false;
 		
-	    $this->sql="SELECT p.* , addr.name AS addr_citytown_name 
-					FROM $this->tb_person AS p LEFT JOIN  $this->tb_citytown AS addr ON p.addr_citytown_nr=addr.nr
+	    $this->sql="SELECT p.*, addr.name AS addr_citytown_name 
+					FROM $this->tb_person AS p 
+					LEFT JOIN  $this->tb_citytown AS addr ON p.addr_citytown_nr=addr.nr
 					WHERE p.pid='$this->pid' ";
         //echo $this->sql;
         if($this->result=$db->Execute($this->sql)) {
@@ -383,5 +393,108 @@ class Person {
 		if($db->Execute($this->sql)) {return true;}
 		   else  {echo $this->sql;return false;}
 	}		
+	/**
+	* CurrentEncounter() checks if a person is currently admitted (both inpatient & outpatient)
+	* public
+	* @param $pid (int) =  pid number
+	* returns encounter nr. if true, else false
+	*/
+	function CurrentEncounter($pid){
+	    global $db;
+		if(!$pid) return false;
+		$this->sql="SELECT encounter_nr FROM $this->tb_enc 
+							WHERE pid='$pid' AND NOT is_discharged AND NOT (encounter_status LIKE 'cancelled') AND status NOT IN ($this->dead_stat)";
+		if($buf=$db->Execute($this->sql)){
+		    if($buf->RecordCount()) {
+				$buf2=$buf->FetchRow();
+				//echo $this->sql;
+				return $buf2['encounter_nr'];
+			}else{return false;}
+		}else{return false;}
+	}
+	/**
+	* EncounterList() gets all encounters of a person
+	* public
+	* @param $pid (int) =  pid number
+	* returns adodb record object, else false
+	*/
+	function EncounterList($pid){
+	    global $db;
+		if(!$pid) return false;
+		$this->sql="SELECT encounter_nr,encounter_date,encounter_class_nr,is_discharged,discharge_date FROM $this->tb_enc WHERE pid='$pid' AND status NOT IN ($this->dead_stat)";
+		if($this->res['_enl']=$db->Execute($this->sql)){
+		    if($this->rec_count=$this->res['_enl']->RecordCount()) {
+				return $this->res['_enl'];
+			}else{return false;}
+		}else{return false;}
+	}
+	/**
+	* Persons() gets a list of persons based on search key
+	* public
+	* @param $pid (int) =  pid number
+	* returns adodb record object, else false
+	*/
+	function Persons($searchkey=''){
+	    global $db;
+		$searchkey=trim($searchkey);
+		if(is_numeric($searchkey)) {
+            $searchkey=(int) $searchkey;
+			$this->is_nr=true;
+			$order_item='pid';			
+	    } else {
+            $order_item='name_last';
+			$this->is_nr=false;
+		}
+			 
+		$this->sql="SELECT pid, name_last, name_first, date_birth, sex FROM $this->tb_person";
+		if(empty($searchkey)){
+			$this->sql.=' WHERE';
+		}else{
+			$this->sql.=" WHERE ( pid='$suchwort'
+									OR  name_last LIKE '$searchkey%' 
+			                		OR name_first LIKE '$searchkey%'
+			                		OR pid LIKE '$searchkey' 
+									)
+									AND";
+		}
+		$this->sql.=" status NOT IN ($this->dead_stat) ORDER BY $order_item";
+		if($this->res['pers']=$db->Execute($this->sql)){
+		    if($this->rec_count=$this->res['pers']->RecordCount()) {			
+				return $this->res['pers'];
+			}else{return false;}
+		}else{return false;}
+	}
+	/**
+	* CurrentEmployment() checks if the person is currently employed in the hospital and returns its employee nr.
+	* public
+	* @param $pid (int) = person id nr.
+	* return employee nr, else false
+	*/
+	function CurrentEmployment($pid){
+	    global $db;
+		if(!$pid) return false;
+		$this->sql="SELECT nr FROM $this->tb_employ 
+							WHERE pid='$pid' AND NOT is_discharged AND status NOT IN ($this->dead_stat)";
+		if($buf=$db->Execute($this->sql)){
+		    if($buf->RecordCount()) {
+				$buf2=$buf->FetchRow();
+				//echo $this->sql;
+				return $buf2['nr'];
+			}else{return false;}
+		}else{return false;}
+	}
+	/**
+	* setDeathInfo() sets death information
+	* @public
+	* @param $pid (int) the pid number of the person
+	* @data (array) the data in associative array
+	* return true/false
+	*/
+	function setDeathInfo($pid,&$data){
+		$this->setDataArray($data);
+		$this->setWhereCondition("pid=$pid");
+		return $this->updateDataFromInternalArray($pid);
+	}
+	
 }
 ?>

@@ -26,7 +26,7 @@ if((($mode=='search')||$update)&&($keyword!=''))
 			{
 			if($update)
 			{
-				$sql='SELECT SQL_SMALL_RESULT * FROM '.$dbtable.' WHERE  bestellnum="'.$keyword.'"';
+				$sql='SELECT  * FROM '.$dbtable.' WHERE  bestellnum="'.$keyword.'"';
         		$ergebnis=$db->Execute($sql);
 				$linecount=$ergebnis->RecordCount();
 			}
@@ -54,7 +54,7 @@ if((($mode=='search')||$update)&&($keyword!=''))
 				}
 			} //end of if $update else				
 	//if parent is order catalog
-		if(($linecount==1)&&($bcat))
+		if(($linecount==1)&&$bcat)
 		{
 			$ttl=$ergebnis->FetchRow();
 			$ergebnis->MoveFirst();

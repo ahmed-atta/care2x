@@ -3,7 +3,6 @@
 *  Note this class should be instantiated only after a "$db" adodb  connector object
 * has been established by an adodb instance
 */
-require_once($root_path.'include/care_api_classes/class_core.php');
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 
 class Ward extends Encounter {
@@ -14,6 +13,7 @@ class Ward extends Encounter {
 	var $tb_notes='care_encounter_notes';
 	var $ward_nr;
 	var $dept_nr;
+	var $techinfo;
 	//var $ok; // is within core
 	//var $sql;  // is within core
 	//var $result; // is within core
@@ -70,11 +70,11 @@ class Ward extends Encounter {
 	}
 	function getAllWardsItemsObject(&$items) {
 	    global $db;
-	    $this->sql="SELECT $items  FROM $this->tb_ward WHERE status NOT IN ('hidden','deleted','closed','inactive')";
+	    $this->sql="SELECT $items  FROM $this->tb_ward WHERE status NOT IN ($this->dead_stat)";
         //echo $this->sql;
-        if($this->result=$db->Execute($this->sql)) {
-            if($this->result->RecordCount()) {
-				 return $this->result;	 
+        if($this->res['gawio']=$db->Execute($this->sql)) {
+            if($this->rec_count=$this->res['gawio']->RecordCount()) {
+				 return $this->res['gawio'];	 
 			} else { return false; }
 		} else { return false; }
 	}
@@ -125,10 +125,10 @@ class Ward extends Encounter {
 	function getWardInfo($ward_nr){
 		global $db;
 		$this->sql="SELECT w.*,d.name_formal AS dept_name FROM $this->tb_ward AS w LEFT JOIN $this->tb_dept AS d ON w.dept_nr=d.nr
-					WHERE w.nr=$ward_nr AND w.status NOT IN ('closed','deleted','hidden','inactive','void')";
-        if($this->result=$db->Execute($this->sql)) {
-            if($this->result->RecordCount()) {
-				 return $this->result->FetchRow();	 
+					WHERE w.nr=$ward_nr AND w.status NOT IN ('closed',$this->dead_stat)";
+        if($this->res['gwi']=$db->Execute($this->sql)) {
+            if($this->rec_count=$this->res['gwi']->RecordCount()) {
+				 return $this->res['gwi']->FetchRow();	 
 			} else { return false; }
 		} else { return false; }
 	}	
@@ -136,13 +136,17 @@ class Ward extends Encounter {
 		global $db;
 		$this->sql="SELECT * FROM $this->tb_room WHERE type_nr=1 AND ward_nr=$ward_nr AND room_nr  BETWEEN '$s_nr' AND '$e_nr' AND  status NOT IN ('closed','deleted','hidden','inactive','void') ORDER BY room_nr";
 		if($this->result=$db->Execute($this->sql)) {
-            if($this->result->RecordCount()) {
+            if($this->rec_count=$this->result->RecordCount()) {
 				 return $this->result;	 
 			} else {return false; }
 		} else {return false; }
 	}	
 	function _getWardOccupants($ward_nr,$date){
 		global $db;
+		
+		if($date==date('Y-m-d')) $pstat='discharged';
+			else $pstat='dummy';
+			
 		$this->sql="SELECT r.location_nr AS room_nr,
 									r.nr AS room_loc_nr,
 									b.location_nr AS bed_nr, 
@@ -153,6 +157,7 @@ class Ward extends Encounter {
 									p.date_birth,
 									p.title,
 									p.sex,
+									p.photo_filename,
 									e.insurance_class_nr,
 									i.name AS insurance_name,
 									i.LD_var AS insurance_LDvar,
@@ -161,9 +166,9 @@ class Ward extends Encounter {
 									LEFT JOIN $this->tb_location AS b  ON 	(r.encounter_nr=b.encounter_nr
 																								AND r.group_nr=b.group_nr 
 																								AND	b.type_nr=5 
-																								AND b.status NOT IN ('inactive','closed','hidden','deleted','void')
+																								AND b.status NOT IN ('$pstat','closed',$this->dead_stat)
 																								AND b.date_from<='$date'
-										 														AND (b.date_to IN ('0000-00-00','') OR b.date_to>='$date')
+										 														AND ('$date'<=b.date_to OR b.date_to IN ('0000-00-00',''))
 																								)	
 									LEFT JOIN $this->tb_enc AS e ON b.encounter_nr=e.encounter_nr
 									LEFT JOIN $this->tb_person AS p ON e.pid=p.pid
@@ -171,12 +176,12 @@ class Ward extends Encounter {
 									LEFT JOIN $this->tb_notes AS n ON b.encounter_nr=n.encounter_nr AND n.type_nr=6
 							WHERE  r.group_nr=$ward_nr 
 											AND	r.type_nr=4 
-											AND r.status NOT IN ('closed','inactive','hidden','deleted','void')
-										 	AND r.date_to IN ('0000-00-00','')
+											AND r.status NOT IN ('$pstat','closed',$this->dead_stat)
+										 	AND ('$date'<=r.date_to OR r.date_to IN ('0000-00-00',''))
 							/*GROUP BY r.location_nr*/
 							ORDER BY r.location_nr,b.location_nr";
 		if($this->result=$db->Execute($this->sql)){
-			if($this->result->RecordCount()){
+			if($this->rec_count=$this->result->RecordCount()){
 				//echo $this->result->RecordCount();
 				//echo $this->sql.'  count';
 				return true;
@@ -425,5 +430,70 @@ class Ward extends Encounter {
         if($this->_getActiveRoomInfo($room_nr,$ward_nr)) {
 			return $this->result;
 		} else { return false; }
+	}
+	/**
+	* countBeds() counts all beds available to the ward
+	* public
+	* @param $ward_nr (int ) = the ward nr of the ward
+	* return number of bed (int)
+	*/
+	function countBeds($ward_nr){
+	    global $db;
+		$this->sql="SELECT SUM(nr_of_beds) AS nr FROM $this->tb_room WHERE ward_nr=$ward_nr AND NOT is_temp_closed AND status NOT IN ($this->dead_stat)";
+        if($buf=$db->Execute($this->sql)) {
+            if($buf->RecordCount()) {
+				$row=$buf->FetchRow();
+				 return $row['nr'];
+			} else { return false; }
+		} else { return false; }
+	}
+	/**
+	* createWaitingList() creates a list of patients waiting to be assigned a room or bed 
+	* public
+	* @param $ward_nr (int) = the nr of the ward. If zero, all waiting patients regardless of ward preassignment will be returned
+	* return adodb record set
+	*/
+	function createWaitingInpatientList($ward_nr=0){
+		global $db;
+		if($ward_nr) $cond="AND current_ward_nr='$ward_nr'";
+			else $cond='';
+		//if(empty($key)) return false;
+		$this->sql="SELECT e.encounter_nr, e.encounter_class_nr, e.current_ward_nr, p.pid, p.name_last, p.name_first, p.date_birth, p.sex,w.ward_id
+				FROM $this->tb_enc AS e 
+					LEFT JOIN $this->tb_person AS p ON e.pid=p.pid
+					LEFT JOIN $this->tb_ward AS w ON e.current_ward_nr=w.nr
+				WHERE e.encounter_class_nr='1' AND NOT e.is_discharged $cond AND NOT in_ward";
+		//echo $sql;
+	    if ($this->res['_cwil']=$db->Execute($this->sql)){
+		   	if ($this->rec_count=$this->res['_cwil']->RecordCount()){
+				return $this->res['_cwil'];
+			}else{return false;}
+		}else{return false;}
+	}
+	/**
+	* EncounterLocationsInfo() returns the current dept id, dept name, ward id, ward name, room and bed number of an encounter
+	* @public
+	* @param $enc_nr (int) encounter number
+	* return row in assoc array
+	*/
+	function EncounterLocationsInfo($enc_nr){
+		global $db;
+
+		$this->sql="SELECT w.ward_id,w.name AS ward_name, w.roomprefix,
+							d.id AS dept_id,d.name_formal AS dept_name,
+							r.location_nr AS room_nr, b.location_nr AS bed_nr
+				FROM $this->tb_enc AS e 
+					LEFT JOIN $this->tb_ward AS w ON e.encounter_class_nr=1 AND e.current_ward_nr=w.nr
+					LEFT JOIN $this->tb_dept AS d ON (e.encounter_class_nr=1 AND e.current_ward_nr=d.nr) 
+																	OR	(e.encounter_class_nr=2 AND e.current_dept_nr=d.nr)
+					LEFT JOIN $this->tb_location AS r ON r.encounter_nr=$enc_nr AND r.group_nr=w.nr AND r.type_nr=4 AND r.status<>'discharged'
+					LEFT JOIN $this->tb_location AS b ON b.encounter_nr=$enc_nr AND  b.group_nr=w.nr AND b.type_nr=5 AND b.status<>'discharged'
+					WHERE e.encounter_nr=$enc_nr AND e.status NOT IN ($this->dead_stat)";
+		//echo $sql;
+	    if ($this->res['eli']=$db->Execute($this->sql)){
+		   	if ($this->rec_count=$this->res['eli']->RecordCount()){
+				return $this->res['eli']->FetchRow();
+			}else{return false;}
+		}else{return false;}
 	}
 }

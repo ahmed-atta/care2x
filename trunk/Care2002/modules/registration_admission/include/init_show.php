@@ -1,9 +1,9 @@
 <?php
+$lang_tables[]='person.php';
 $lang_tables[]='prompt.php';
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-//require_once($root_path.'include/inc_config_color.php');
 require_once($root_path.'include/inc_date_format_functions.php');
 require_once($root_path.'include/inc_editor_fx.php');
 require_once($root_path.'include/care_api_classes/class_person.php');
@@ -18,7 +18,6 @@ $admissionfile='aufnahme_start.php'.URL_APPEND;
 if((!isset($pid)||!$pid)&&$HTTP_SESSION_VARS['sess_pid']) $pid=$HTTP_SESSION_VARS['sess_pid'];
 	elseif((isset($pid)&&$pid)&&!$HTTP_SESSION_VARS['sess_pid']) $HTTP_SESSION_VARS['sess_pid']=$pid;
 
-//echo getcwd();
 $HTTP_SESSION_VARS['sess_path_referer']=$top_dir.$thisfile;
 //$HTPP_SESSION_VARS['sess_pid']=$pid;
 
@@ -62,27 +61,28 @@ if(!isset($edit)) $edit=false;
 $current_encounter=$person_obj->CurrentEncounter($pid);
 
 if($HTTP_SESSION_VARS['sess_parent_mod']=='admission') {
+	
+	# Resolve the encounter number
+	if((!isset($encounter_nr)||!$encounter_nr)&&$HTTP_SESSION_VARS['sess_en']) $encounter_nr=$HTTP_SESSION_VARS['sess_en'];
+		elseif((isset($encounter_nr)&&$encounter_nr)&&!$HTTP_SESSION_VARS['sess_en']) $HTTP_SESSION_VARS['sess_en']=$encounter_nr;
+
 	$parent_admit=true;
 	$page_title=$LDAdmission;
+	
+	# Get the overall status
+	include_once($root_path.'include/care_api_classes/class_encounter.php');
+	$enc_obj=new Encounter;
+	if($stat=&$enc_obj->AllStatus($HTTP_SESSION_VARS['sess_en'])){
+		$enc_status=$stat->FetchRow();
+	}
 	# If current_encounter is this encounter nr
 	if($current_encounter==$HTTP_SESSION_VARS['sess_en']){
 		$is_discharged=false;
 		$edit=true;
 
-		include_once($root_path.'include/care_api_classes/class_encounter.php');
-		$enc_obj=new Encounter;
-		if($stat=&$enc_obj->AllStatus($HTTP_SESSION_VARS['sess_en'])){
-			$enc_status=$stat->FetchRow();
-		}
 	}
 	//echo " curr $current_encounter this ".$HTTP_SESSION_VARS['sess_en'];
-/*	include_once($root_path.'include/care_api_classes/class_encounter.php');
-	$enc_obj=new Encounter;
-	if($enc_obj->isCurrentlyAdmitted($HTTP_SESSION_VARS['sess_en'])){
-		$is_discharged=false;
-		$edit=true;
-	}
-*/}else{
+}else{
 	$parent_admit=false;
 	$page_title=$LDPatientRegister;
 }

@@ -3,13 +3,15 @@
 *  Note this class should be instantiated only after a "$db" adodb  connector object
 * has been established by an adodb instance
 */
+require_once($root_path.'include/care_api_classes/class_core.php');
 
-class News {
+class News extends Core {
 
 	var $tb='care_news_article'; // table name
 	var $result;
 	var $row;
 	var $buffer;
+	var $headnrs=array();
 	
 	function getItem($nr=0,$item='')  {
 	    global $db;
@@ -111,6 +113,7 @@ class News {
 			if($this->result=$db->Execute($sql)) {
 			    if($this->result->RecordCount()) {
 				    $this->buffer[$i]=$this->result->FetchRow();
+					$this->headnrs[$i]=$this->buffer[$i]['nr'];
 				} else {
 				 
 				    // if no file found get the last entry
@@ -128,6 +131,7 @@ class News {
 				    if($this->result=$db->Execute($sql)) {
 					    if($this->result->RecordCount()) {
 						    $this->buffer[$i]=$this->result->FetchRow();
+							$this->headnrs[$i]=$this->buffer[$i]['nr'];
 					    }
 				   }
 			    }
@@ -143,26 +147,24 @@ class News {
 	    
 		if(!$dept_nr) return false;
 		
-		if (!is_array($heads)) {
-		    if ($this->buffer=$this->getList($dept_nr)) return $this->buffer;
-			    else return false;
-		}	
-		
 		/* Now set the sql query for article # 5 or the achived news */
-        $sql_archive="SELECT nr,title,preface,author,publish_date,submit_date FROM $this->tb WHERE dept_nr=".$dept_nr;
-					
-        for($i=1;$i<=sizeof($heads);$i++) {
-            $sql_archive.='	AND nr<>'.$heads[$i]['nr'];
+        $this->sql="SELECT nr,title,preface,author,publish_date,submit_date FROM $this->tb WHERE dept_nr=".$dept_nr;
+       
+	   while(list($x,$v)=each($this->headnrs)) {
+            $this->sql.=' AND nr<>'.$v;
         }
+		
+		$this->sql.=" OR (dept_nr=$dept_nr AND art_num=5)";
 
         if(defined('MODERATE_NEWS') && (MODERATE_NEWS==1)) {
-           $sql_archive.=" AND status<>'pending'";
+           $this->sql.=" AND status<>'pending'";
         }
 		 
-        $sql_archive.=" ORDER BY create_time DESC";
-		  							
-	    if($this->result=$db->Execute($sql_archive)) {
-            if($this->result->RecordCount())  return $this->result;
+        $this->sql.=" ORDER BY create_time DESC";
+		 
+		//echo $sql_archive;
+	    if($this->res['gal']=$db->Execute($this->sql)) {
+            if($this->rec_count=$this->res['gal']->RecordCount())  return $this->res['gal'];
 			    else return false;
 	    }
 	}

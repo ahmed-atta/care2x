@@ -1,9 +1,8 @@
 <?php
-/* API class for encounter. Extends class Person (class_person.php) 
+/* API class for encounter. Extends class Notes (class_notes.php) 
 *  Note this class should be instantiated only after a "$db" adodb  connector object
 * has been established by an adodb instance
 */
-require_once($root_path.'include/care_api_classes/class_core.php');
 require_once($root_path.'include/care_api_classes/class_notes.php');
 
 class Encounter extends Notes {
@@ -20,6 +19,7 @@ class Encounter extends Notes {
 	var $tb_sickconfirm='care_encounter_sickconfirm';
 	var $tb_dept='care_department';
 	var $tb_insco='care_insurance_firm';
+	var $tb_appt='care_appointment';
 	/* Aux vars */
 	var $enc_nr;
 	var $encoder;
@@ -116,9 +116,10 @@ class Encounter extends Notes {
 		global $db;
 		$row=array();
 		$this->sql="SELECT encounter_nr FROM $this->tb_enc WHERE encounter_nr>=$ref_nr AND encounter_class_nr=$enc_class_nr ORDER BY encounter_nr DESC";
-		if($this->result=$db->SelectLimit($this->sql,1)){
-			if($this->result->RecordCount()){
-				$row=$this->result->FetchRow();
+		//$this->sql="SELECT encounter_nr FROM $this->tb_enc WHERE encounter_nr>=$ref_nr ORDER BY encounter_nr DESC";
+		if($this->res['gnen']=$db->SelectLimit($this->sql,1)){
+			if($this->res['gnen']->RecordCount()){
+				$row=$this->res['gnen']->FetchRow();
 				return $row['encounter_nr']+1;
 			}else{/*echo $this->sql.'no xount';*/return $ref_nr;}
 		}else{/*echo $this->sql.'no sql';*/return $ref_nr;}
@@ -268,9 +269,9 @@ class Encounter extends Notes {
 	function AllEncounterClassesObject(){
 	    global $db;
 		$this->sql="SELECT class_nr,class_id,name,LD_var FROM $this->tb_ec WHERE 1";
-		if($this->result=$db->Execute($this->sql)) {
-		    if($this->result->RecordCount()) {
-			    return $this->result;
+		if($this->res['aec']=$db->Execute($this->sql)) {
+		    if($this->res['aec']->RecordCount()) {
+			    return $this->res['aec'];
 		    } else { return false;}
 		} else { return false;}
 	}
@@ -278,19 +279,20 @@ class Encounter extends Notes {
 	function loadEncounterData($enc_nr){
 	    global $db;
 		if(!$this->internResolveEncounterNr($enc_nr)) return false;
-		$this->sql="SELECT e.*, p.title,p.name_last, p.name_first, p.date_birth, p.sex,
-									p.addr_str,p.addr_str_nr,p.addr_zip, 
-									p.photo_filename, t.name AS citytown_name
+		$this->sql="SELECT e.*, p.pid, p.title,p.name_last, p.name_first, p.date_birth, p.sex,
+									p.addr_str,p.addr_str_nr,p.addr_zip, p.blood_group,
+									p.photo_filename, t.name AS citytown_name,p.death_date
 							FROM $this->tb_enc AS e, 
 									 $this->tb_person AS p 
 									 LEFT JOIN $this->tb_citytown AS t ON p.addr_citytown_nr=t.nr
 							WHERE e.encounter_nr=$this->enc_nr
 								AND e.pid=p.pid";
 		//echo $sql;
-		if($this->result=$db->Execute($this->sql)) {
-		    if($this->record_count=$this->result->RecordCount()) {
-			    $this->encounter=$this->result->FetchRow();
-				$this->result=NULL;
+		if($this->res['lend']=$db->Execute($this->sql)) {
+		    if($this->record_count=$this->res['lend']->RecordCount()) {
+				$this->rec_count=$this->record_count;
+			    $this->encounter=$this->res['lend']->FetchRow();
+				//$this->result=NULL;
 			    $this->is_loaded=true;
 				return true;
 		    } else { return false;}
@@ -384,6 +386,14 @@ class Encounter extends Notes {
 	    if(!$this->is_loaded) return false;
 		return $this->encounter['in_ward'];
 	}
+	function In_Dept(){
+	    if(!$this->is_loaded) return false;
+		return $this->encounter['in_dept'];
+	}
+	function Is_Discharged(){
+	    if(!$this->is_loaded) return false;
+		return $this->encounter['is_discharged'];
+	}
 	function EncounterStatus(){
 	    if(!$this->is_loaded) return false;
 		return $this->encounter['encounter_status'];
@@ -430,25 +440,52 @@ class Encounter extends Notes {
 		$this->where=" encounter_nr=$item_nr";
 		return $this->updateDataFromInternalArray($item_nr);
 	}
-	
-	function isCurrentlyAdmitted($pid){
+	/**
+	* isCurrentlyAdmitted() checks if a nr is currently admitted (both inpatient & outpatient)
+	* public
+	* @param $nr (int) =  number
+	* @param $type (str) = type of param $nr (_ENC = encounter nr, _PID = pid nr) , defaults to _ENC = encounter nr.
+	* returns encounter nr. if true, else false
+	*/
+	function isCurrentlyAdmitted($nr,$type='_ENC'){
 	    global $db;
-		$this->sql="SELECT encounter_nr FROM $this->tb_enc WHERE pid='$pid' AND NOT is_discharged";
-		if($this->result=$db->Execute($this->sql)){
-		    if($this->result->RecordCount()) {
-			    $this->row=$this->result->FetchRow();
-				return $this->row['encounter_nr'];
-			} else return false;
-		}else {
-		    return false;
-		}
+		if(!$nr) return false;
+		if($type=='_ENC') $cond='encounter_nr';
+			elseif($type=='_PID') $cond='pid';
+			 	else return false;
+		$this->sql="SELECT encounter_nr FROM $this->tb_enc 
+						WHERE $cond='$nr' AND NOT (encounter_status LIKE 'cancelled') AND NOT is_discharged AND status NOT IN ($this->dead_stat)";
+		if($buf=$db->Execute($this->sql)){
+		    if($buf->RecordCount()) {
+				$buf2=$buf->FetchRow();
+				return $buf2['encounter_nr'];
+			}else{return false;}
+		}else{return false;}
+	}
+	/**
+	* isPIDCurrentlyAdmitted() checks if the person is currently admitted as encounter
+	* public
+	* @param $nr (int) = pid number
+	* returns encounter nr. if true, else false
+	*/
+	function isPIDCurrentlyAdmitted($nr){
+	    return $this->isCurrentlyAdmitted($nr,'_PID');
+	}
+	/**
+	* isENCCurrentlyAdmitted() checks if a given encounter nr is currently admitted
+	* public
+	* @param $nr (int) = encounter number
+	* returns encounter nr. if true, else false
+	*/
+	function isENCCurrentlyAdmitted($nr){
+	    return $this->isCurrentlyAdmitted($nr,'_ENC');
 	}
 	
 	function setHistorySeen($encoder='',$enc_nr=''){
 	    global $db;
 		if(empty($encoder)) return false;
 		if(!$this->internResolveEncounterNr($enc_nr)) return false;
-		$this->sql="UPDATE $this->tb_enc SET history= CONCAT(history,\"\nView ".date('Y-m-d H:i:s')." = $encoder\") WHERE encounter_nr=$this->enc_nr";
+		$this->sql="UPDATE $this->tb_enc SET history= CONCAT(history,'\nView ".date('Y-m-d H:i:s')." = $encoder') WHERE encounter_nr=$this->enc_nr";
 		
 		if($db->Execute($this->sql)) {return true;}
 		   else  {echo $this->sql;return false;}
@@ -482,7 +519,7 @@ class Encounter extends Notes {
 	function _searchAdmissionBasicInfo($key,$enc_class=0,$add_opt=''){
 		global $db;
 		//if(empty($key)) return false;
-		$sql="SELECT e.encounter_nr, e.encounter_class_nr, p.pid, p.name_last, p.name_first, p.date_birth 
+		$sql="SELECT e.encounter_nr, e.encounter_class_nr, p.pid, p.name_last, p.name_first, p.date_birth,p.sex,p.blood_group
 				FROM $this->tb_enc AS e LEFT JOIN $this->tb_person AS p ON e.pid=p.pid";
 		if(is_numeric($key)){
 			$key=(int)$key;
@@ -494,12 +531,13 @@ class Encounter extends Notes {
 						OR p.name_first LIKE '$key%'
 						OR p.date_birth LIKE '$key%')";
 			if($enc_class) $sql.="	AND e.encounter_class_nr=$enc_class";
-			$sql.="  AND NOT e.is_discharged ".$add_opt;
+			$sql.="  AND NOT e.is_discharged AND e.status NOT IN ($this->dead_stat) ".$add_opt;
 		}
 		//echo $sql;
-	    if ($this->result=$db->Execute($sql)) {
-		   	if ($this->record_count=$this->result->RecordCount()) {
-				return $this->result;
+	    if ($this->res['sabi']=$db->Execute($sql)) {
+		   	if ($this->record_count=$this->res['sabi']->RecordCount()) {
+				$this->rec_count=$this->record_count;
+				return $this->res['sabi'];
 			} else {
 				return false;
 			}
@@ -513,11 +551,23 @@ class Encounter extends Notes {
 	function searchOutpatientBasicInfo($key){
 		return $this->_searchAdmissionBasicInfo($key,2); // 2 = outpatient (encounter class)
 	}
-	function searchEncounterBasicInfo($key){
-		return $this->_searchAdmissionBasicInfo($key,0); // 0 = all kinds of admission
+	function searchEncounterBasicInfo($key,$sortitem='',$order=''){
+		if(!empty($sortitem)){
+			$option=' ORDER BY ';
+			switch($sortitem){
+				case 'LASTNAME': $option.=' p.name_last '; break;
+				case 'FIRSTNAME': $option.=' p.name_first '; break;
+				case 'ENCNR': $option.=' e.encounter_nr '; break;
+				case 'BDAY': $option.=' p.date_birth '; break;
+				default: $option.='';
+			}
+			$option.=$order;
+		}
+		
+		return $this->_searchAdmissionBasicInfo($key,0,$option); // 0 = all kinds of admission
 	}
 	function searchInpatientNotInWardBasicInfo($key){
-		return $this->_searchAdmissionBasicInfo($key,1,'AND NOT in_ward'); // 2 = outpatient (encounter class)
+		return $this->_searchAdmissionBasicInfo($key,1,'AND NOT in_ward'); // 1 = outpatient (encounter class)
 	}
 	function EncounterExists($enc_nr){
 	    global $db;
@@ -554,6 +604,11 @@ class Encounter extends Notes {
 		$this->loc_nr=$loc_nr;
 		return $this->_InLocation(5);
 	}
+	function InDept($enr,$loc_nr){
+		$this->enc_nr=$enr;
+		$this->loc_nr=$loc_nr;
+		return $this->_InLocation(1);
+	}
 	function _setLocation($enr=0,$type_nr=0,$loc_nr=0,$group_nr,$date='',$time=''){
 		global $HTTP_SESSION_VARS;
 		//if(!($enr&&$type_nr&&$loc_nr)) return false;
@@ -563,19 +618,26 @@ class Encounter extends Notes {
 		$history="Create: ".date('Y-m-d H:i:s')." ".$user."\n";
 		$this->sql="INSERT INTO $this->tb_location (encounter_nr,type_nr,location_nr,group_nr,date_from,time_from,history,modify_id,create_id,create_time) 
 						VALUES 
-						('$enr','$type_nr','$loc_nr','$group_nr','$date','$time','$history','$user','$user',NULL)";
+						('$enr','$type_nr','$loc_nr','$group_nr','$date','$time','$history','$user','$user','".date('YmdHis')."')";
 		//echo $this->sql;
 		if($this->Transact($this->sql)) return true; else	echo $this->sql;
 		//return $this->Transact($this->sql);
 	}
 	function assignInWard($enr,$loc_nr,$group_nr,$date,$time){
-		return $this->_setLocation($enr,2,$loc_nr,$group_nr,$date,$time);
+		if($this->_setLocation($enr,2,$loc_nr,$group_nr,$date,$time)){ # loc. type 2 = ward
+			return $this->setCurrentWardInWard($enr,$loc_nr);
+		}
 	}
 	function assignInRoom($enr,$loc_nr,$group_nr,$date,$time){
-		return $this->_setLocation($enr,4,$loc_nr,$group_nr,$date,$time);
+		return $this->_setLocation($enr,4,$loc_nr,$group_nr,$date,$time); # loc. type 4 = room
 	}
 	function assignInBed($enr,$loc_nr,$group_nr,$date,$time){
-		return $this->_setLocation($enr,5,$loc_nr,$group_nr,$date,$time);
+		return $this->_setLocation($enr,5,$loc_nr,$group_nr,$date,$time); # loc. type 5 = bed
+	}
+	function assignInDept($enr,$loc_nr,$group_nr,$date,$time){
+		if($this->_setLocation($enr,1,$loc_nr,$group_nr,$date,$time)){ # loc. type 1 = department
+			return $this->setCurrentDeptInDept($enr,$loc_nr);
+		}
 	}
 	function AdmitInWard($enr,$ward_nr,$room_nr,$bed_nr){
 		global $db;
@@ -604,40 +666,102 @@ class Encounter extends Notes {
 			return false;
 		}
 	}
-	function _setCurrentAssignment($enr,$data){
+	/**
+	* _setCurrentAssignment()
+	* private generic method that updates items and adds modifier's info
+	* private
+	* @param $enr (int) = encounter nr
+	* @param $data (str) = the data for updating formatted in sql syntax
+	* @param $act (str) = modification action, defaults to "modified"
+	* return true/false
+	*/
+	function _setCurrentAssignment($enr,$data='',$act='Modified'){
+		global $HTTP_SESSION_VARS;
+		if(!$enr||empty($data)) return false;
+		$data.=",history=CONCAT(history,'\n$act ".date('Y-m- H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."'), 
+						modify_id='".$HTTP_SESSION_VARS['sess_user_name']."',
+						modify_time='".date('YmdHis')."'";
 		$this->sql="UPDATE $this->tb_enc SET $data WHERE encounter_nr=$enr";
 		return $this->Transact($this->sql);
 	}
 	function setCurrentWard($enr,$assign_nr){
-		return $this->_setCurrentAssignment($enr,"current_ward_nr=$assign_nr");
+		return $this->_setCurrentAssignment($enr,"current_ward_nr=$assign_nr",'Set ward');
+	}
+	function setCurrentWardInWard($enr,$assign_nr){
+		return $this->_setCurrentAssignment($enr,"encounter_status='disallow_cancel',current_ward_nr=$assign_nr,in_ward",'Set ward + in ward');
 	}
 	function setCurrentRoom($enr,$assign_nr){
-		return $this->_setCurrentAssignment($enr,"current_room_nr=$assign_nr");
+		return $this->_setCurrentAssignment($enr,"current_room_nr=$assign_nr",'Set room');
 	}
 	function setCurrentDept($enr,$assign_nr){
-		return $this->_setCurrentAssignment($enr,"current_dept_nr=$assign_nr");
+		return $this->_setCurrentAssignment($enr,"current_dept_nr=$assign_nr",'Set dept');
+	}
+	function setCurrentDeptInDept($enr,$assign_nr){
+		return $this->_setCurrentAssignment($enr,"encounter_status='disallow_cancel',current_dept_nr=$assign_nr,in_dept=1",'Set dept + in dept');
 	}
 	function setCurrentFirm($enr,$assign_nr){
-		return $this->_setCurrentAssignment($enr,"current_firm_nr=$assign_nr");
+		return $this->_setCurrentAssignment($enr,"current_firm_nr=$assign_nr",'Set firm');
 	}
 	function setCurrentAttdDr($enr,$assign_nr){
-		return $this->_setCurrentAssignment($enr,"current_att_dr_nr=$assign_nr");
+		return $this->_setCurrentAssignment($enr,"current_att_dr_nr=$assign_nr",'Set attd dr.');
+	}
+	function resetCurrentWard($enr){
+		return $this->_setCurrentAssignment($enr,"current_ward_nr=0,in_ward=0",'Reset current ward');
+	}
+	function resetCurrentDept($enr){
+		return $this->_setCurrentAssignment($enr,"current_dept_nr=0,in_dept=0",'Reset current dept');
 	}
 	function setInWard($enr){
-		return $this->_setCurrentAssignment($enr,'in_ward=1');
+		return $this->_setCurrentAssignment($enr,"current_status='disallow_cancel',in_ward=1",'Set in ward');
 	}
 	function setNotInWard($enr){
-		return $this->_setCurrentAssignment($enr,'in_ward=0');
+		return $this->_setCurrentAssignment($enr,'in_ward=0','Set not in ward');
+	}
+	function setInDept($enr){
+		return $this->_setCurrentAssignment($enr,"current_status='disallow_cancel',in_dept=1",'Set in dept');
+	}
+	function setNotInDept($enr){
+		return $this->_setCurrentAssignment($enr,'in_dept=0','Set not in dept');
 	}
 	function setAdmittedInWard($enr,$ward_nr,$room_nr,$bed_nr){
-		return $this->_setCurrentAssignment($enr,"current_ward_nr=$ward_nr,current_room_nr=$room_nr,in_ward=1");
+		return $this->_setCurrentAssignment($enr,"encounter_status='disallow_cancel',current_ward_nr=$ward_nr,current_room_nr=$room_nr,in_ward=1",'Admitted in ward');
+	}
+	function ResetAllCurrentPlaces($enr){
+		return $this->_setCurrentAssignment($enr,'current_ward_nr=0,current_room_nr=0,current_dept_nr=0,current_firm_nr=0,in_ward=0','Reset all locations');
+	}
+	
+	/**
+	* Cancel() cancels an encounter only when its encounter_status is set to '' (emtpy) or 'allow_cancel'
+	* it sets the encounter_status= 'cancelled', status='void', is_discharged=1 and stores history and modify infos
+	* public
+	* @param enc_nr (int) = encounter nr
+	* @param by (str) = extra name of person responsible for cancellation
+	* return true/false
+	*/
+	function Cancel($enc_nr=0,$by){
+		global $HTTP_SESSION_VARS;
+		if(!$this->internResolveEncounterNr($enc_nr)) return false;
+		if(empty($by)) $by=$HTTP_SESSION_VARS['sess_user_name'];
+		$this->sql="UPDATE $this->tb_enc SET encounter_status='cancelled',status='void',is_discharged=1,
+						history=CONCAT(history,'\nCancelled ".date('Y-m- H:i:s')." by $by, logged-user ".$HTTP_SESSION_VARS['sess_user_name']."'), 
+						modify_id='".$HTTP_SESSION_VARS['sess_user_name']."',
+						modify_time='".date('YmdHis')."' 
+						WHERE encounter_nr=$this->enc_nr AND encounter_status IN ('','0','allow_cancel')";
+		return $this->Transact($this->sql);
+	}
+	/**
+	* Replaces the current ward and resets the in_ward flag to 0
+	*/
+	function ReplaceWard($enr,$ward_nr){
+		return $this->_setCurrentAssignment($enr,"current_ward_nr=$ward_nr,in_ward=0",'Replaced ward');
 	}
 	/**
 	* Flags that the encounter is fully discharged
 	* Sets the is_discharged field of care_encounter table and clears the current department,ward,room fields
 	*/
-	function setIsDischarged($enr){
-		$this->sql="UPDATE $this->tb_enc SET is_discharged=1,current_ward_nr=0,current_room_nr=0,current_dept_nr=0,current_firm_nr=0,in_ward=0 WHERE encounter_nr=$enr AND NOT is_discharged";
+	function setIsDischarged($enr,$date,$time){
+		//$this->sql="UPDATE $this->tb_enc SET is_discharged=1, discharge_date='$date',discharge_time='$time', current_ward_nr=0,current_room_nr=0,current_dept_nr=0,current_firm_nr=0,in_ward=0 WHERE encounter_nr=$enr AND NOT is_discharged";
+		$this->sql="UPDATE $this->tb_enc SET is_discharged=1, discharge_date='$date',discharge_time='$time', in_ward=0,in_dept=0 WHERE encounter_nr=$enr AND NOT is_discharged";
 		//if($this->Transact($this->sql)) return true; else echo $this->sql;
 		return $this->Transact($this->sql);
 	}
@@ -668,10 +792,12 @@ class Encounter extends Notes {
 							SET	discharge_type_nr=$d_type_nr,
 									date_to='$date',
 									time_to='$time',
-									history=CONCAT(history,'Update (discharged): ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n'),
+									status='discharged',
+									history=CONCAT(history,'\nUpdate (discharged): ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."'),
 									modify_id='".$HTTP_SESSION_VARS['sess_user_name']."'
 							WHERE encounter_nr=$enr AND type_nr IN ($loc_types) AND date_to IN ('','0000-00-00')";
-		if($this->Transact($this->sql)) return true; else echo $this->sql;
+		if($this->Transact($this->sql)){ return true;}
+		 else{echo $this->sql; return false;}
 		//return $this->Transact($this->sql);
 	}
 	/**
@@ -679,21 +805,21 @@ class Encounter extends Notes {
 	*/
 	function Discharge($enr,$d_type_nr,$date='',$time=''){
 		if($this->_discharge($enr,"'1','2','3','4','5','6'",$d_type_nr,$date,$time)){
-			if($this->setIsDischarged($enr)){
+			if($this->setIsDischarged($enr,$date,$time)){
 				return true;
 			}else{return false;}
 		}else{return false;}
 	}
 	/**
-	* Complete discharge of patient from the department, but patient remains current
+	* Complete discharge of patient from the department, but patient remains admitted
 	*/
-	function DischargeFromDept($enr,$d_type_nr,$date='',$time=''){
+	function DischargeFromDept($enr,$d_type_nr,$date='',$time='',$rst_enc=1){
 		if($this->_discharge($enr,"'1','2','3','4','5','6'",$d_type_nr,$date,$time)){
-			return true;
-		}else{return false;}
+			return $this->resetCurrentDept($enr);
+		}
 	}
 	/**
-	* Complete discharge of patient from the ward but patient remains current
+	* Complete discharge of patient from the ward but patient remains admitted
 	*/
 	function DischargeFromWard($enr,$d_type_nr,$date='',$time=''){
 		if($this->_discharge($enr,"'2','4','5','6'",$d_type_nr,$date,$time)){
@@ -710,7 +836,6 @@ class Encounter extends Notes {
 	}
 	/**
 	* Complete discharge of patient from the bed but patient remains in room
-	* Alias of DischargeFromBed()
 	*/
 	function DischargeFromBed($enr,$d_type_nr,$date='',$time=''){
 		if($this->_discharge($enr,"'5'",$d_type_nr,$date,$time)){
@@ -842,6 +967,99 @@ class Encounter extends Notes {
 		    } else { return false;}
 		} else { return false;}
 	}
-	 
+	 /**
+	 * markAppointmentDone() marks an appointment's status as done and links the encounter number
+	 * public
+	 * @param $appt_nr (int) = the appointment record number
+	 * @parm $class_nr (int) = the final type of encounter (1= inpatient, 2= outpatient)
+	 * @param $enc_nr (int) = the encounter number that resulted from the appointment
+	 * return true/false
+	 */
+	function markAppointmentDone($appt_nr=0,$class_nr=0,$enc_nr=0){
+	    global $HTTP_SESSION_VARS;
+		if(!$appt_nr||!$this->internResolveEncounterNr($enc_nr)) return false;
+		$this->sql="UPDATE $this->tb_appt SET  appt_status='done',encounter_nr=$this->enc_nr,encounter_class_nr=$class_nr,
+							history=CONCAT(history,'\nDone ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."'),
+							modify_id='".$HTTP_SESSION_VARS['sess_user_name']."',
+							modify_time='".date('YmdHis')."'
+							WHERE nr=$appt_nr";	
+		return $this->Transact();
+	}
+	/**
+	* OutPatientsBasic() gets  basic info of all outpatients = encounter_class_nr=2; 
+	* public
+	* @param $dept_nr (int) = the department nr, if empty all departments will be searched
+	* return adodb record object, else false
+	*/
+	function OutPatientsBasic($dept_nr=0){
+		global $db;
+		if($dept_nr) $cond="e.current_dept_nr=$dept_nr AND";
+			else $cond='';
+			//$cond='';
+		$this->sql="SELECT e.encounter_nr,e.pid,e.insurance_class_nr,
+									p.title,p.name_last,p.name_first,p.date_birth,p.sex, p.photo_filename,
+									a.time,a.urgency,
+									i.LD_var,i.name AS insurance_name,
+									n.nr AS notes
+							FROM ($this->tb_enc AS e, $this->tb_person AS p) 
+									LEFT JOIN $this->tb_appt AS a ON e.encounter_nr=a.encounter_nr
+									LEFT JOIN $this->tb_ic AS i ON e.insurance_class_nr=i.class_nr
+									LEFT JOIN $this->tb_notes as n ON e.encounter_nr=n.encounter_nr AND n.type_nr=6
+							WHERE $cond e.encounter_class_nr=2 AND e.pid=p.pid AND NOT e.is_discharged  AND e.in_dept AND e.status NOT IN ($this->dead_stat)
+							GROUP BY e.encounter_nr";
+							
+        if($this->res['opb']=$db->Execute($this->sql)) {
+            if($this->rec_count=$this->res['opb']->RecordCount()) {
+				 return $this->res['opb'];	 
+			} else { return false; }
+		} else { return false; }	
+	}
+	/**
+	* createWaitingOutpatientList() creates a list of outpatients waiting to be admitted in the clinic
+	* public
+	* @param $dept_nr (int) = the nr of the department. If zero, all waiting outpatients regardless of department preassignment will be returned
+	* return adodb record set
+	*/
+	function createWaitingOutpatientList($dept_nr=0){
+		global $db;
+		if($dept_nr) $cond="AND current_dept_nr='$dept_nr'";
+			else $cond='';
+			//$cond='';
+		//if(empty($key)) return false;
+		$this->sql="SELECT e.encounter_nr, e.encounter_class_nr, e.current_dept_nr,
+									p.pid, p.name_last, p.name_first, p.date_birth, p.sex, 
+									d.nr AS dept_nr, d.name_short, d.LD_var AS dept_LDvar
+				FROM $this->tb_enc AS e 
+					LEFT JOIN $this->tb_person AS p ON e.pid=p.pid
+					LEFT JOIN $this->tb_dept AS d ON e.current_dept_nr=d.nr
+				WHERE e.encounter_class_nr='2' AND NOT e.is_discharged $cond 
+							AND NOT e.in_dept AND NOT (e.encounter_status LIKE 'cancelled')
+							AND e.status NOT IN ($this->dead_stat)
+				ORDER BY p.name_last";
+		//echo $sql;
+	    if ($this->res['cwol']=$db->Execute($this->sql)){
+		   	if ($this->rec_count=$this->res['cwol']->RecordCount()){
+				return $this->res['cwol'];
+			}else{return false;}
+		}else{return false;}
+	}
+	/**
+	* AllStatus() returns the status info and current locations of an encounter
+	* public
+	* @param $enc_nr (int) = encounter number
+	* return adodb record set
+	*/
+	function AllStatus($enc_nr=0){
+	    global $db;
+		if(!$this->internResolveEncounterNr($enc_nr)) return false;
+		$this->sql="SELECT encounter_status,current_ward_nr,current_room_nr,in_ward,current_dept_nr,in_dept,is_discharged,status
+						FROM $this->tb_enc	WHERE encounter_nr=$this->enc_nr AND status NOT IN ($this->dead_stat)";	
+		//echo $sql;
+		if($this->res['ast']=$db->Execute($this->sql)) {
+		    if($this->rec_count=$this->res['ast']->RecordCount()) {
+				return $this->res['ast'];
+		    } else { return false;}
+		} else { return false;}
+	}
 }
 ?>

@@ -3,7 +3,7 @@
 require('./roots.php');
 require($root_path.'/include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -13,7 +13,6 @@ require($root_path.'/include/inc_environment_global.php');
 define('LANG_FILE','tech.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
 
 $thisfile=basename(__FILE__);
 $breakfile='technik.php'.URL_APPEND;
@@ -25,10 +24,8 @@ if(!isset($tech)) $tech='';
 if(!isset($mode)) $mode='';
 if(!isset($ofset)) $ofset='';
 
-/* Load the date formatter */
+# Load the date formatter
 require_once($root_path.'include/inc_date_format_functions.php');
-
-
 
 if(isset($mode)&&($mode=='search'))
 {
@@ -36,12 +33,12 @@ if(isset($mode)&&($mode=='search'))
 	
 	if(isset($edate)&&$edate)
 	{
-  	    $edate=formatDate2STD($edate,$date_format);
+  	    $edate=@formatDate2STD($edate,$date_format);
 	}
 	
 	if(isset($sdate)&&$sdate)
 	{
-	     $sdate=formatDate2STD($sdate,$date_format);
+	     $sdate=@formatDate2STD($sdate,$date_format);
 	}
 		
 		
@@ -49,19 +46,19 @@ if(isset($mode)&&($mode=='search'))
 	if(!isset($nrows)||!$nrows) $nrows=20;
 }
 
-//init db parameters
+# init db parameters
 $linecount=0;
 $dbtable='care_tech_repair_done';
 
-//this is the search module
+# this is the search module
 if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
 if($dblink_ok) {
 	if($mode=='search') {
 				$sql='SELECT * FROM '.$dbtable.' WHERE ';
-				if($tech) $sql.=" reporter LIKE '$tech' ";
+				if($tech) $sql.=" reporter LIKE '$tech%' ";
 				if($dept)
 				{
-					if($tech) $sql.=" AND dept LIKE '$dept' "; else $sql.=" dept LIKE '$dept' ";
+					if($tech) $sql.=" AND dept LIKE '$dept%' "; else $sql.=" dept LIKE '$dept%' ";
 				}
 				$buf='';
 				
@@ -89,8 +86,6 @@ if($dblink_ok) {
 				} else {echo "<p>".$sql."$LDDbNoRead<br>"; };
 } else { echo "$LDDbNoLink<br>"; } 
 
-
-$abt=array("PLOP","GYN","Anästhesie","Unfall");
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
@@ -104,13 +99,6 @@ function show_order(d,D,t,r,i)
 	urlholder="technik-report-showcontent.php<?php echo URL_REDIRECT_APPEND; ?>&dept="+d+"&tdate="+D+"&ttime="+t+"&reporter="+r+"&tid="+i;
 	//orderlistwin=window.open(urlholder,"orderlistwin","width=700,height=550,menubar=no,resizable=yes,scrollbars=yes");
 	window.location.href=urlholder;
-	}
-function gethelp(x,s,x1,x2,x3)
-{
-	if (!x) x="";
-	urlholder="<?php echo $root_path; ?>main/help-router.php<?php echo URL_REDIRECT_APPEND ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
-helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
-	window.helpwin.moveTo(0,0);
 }
 
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
@@ -120,6 +108,7 @@ helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizab
 
 <script language="javascript" src="/js/setdatetime.js"></script>
 <script language="javascript" src="/js/checkdate.js" type="text/javascript"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
 <?php 
 require($root_path.'include/inc_js_gethelp.php');
@@ -144,8 +133,8 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <p>
   <form action="<?php echo $thisfile?>" method="get" name="suchform">
   <table border=0 cellspacing=2 cellpadding=3>
-    <tr bgcolor=#ffffdd background="<?php echo $root_path; ?>gui/img/common/default/tableHeaderbg3.gif">
-      <td  colspan=2><FONT face="Verdana,Helvetica,Arial" size=2 color="#800000"><?php echo $LDSearchReport ?>:</td>
+    <tr bgcolor=#ffffdd>
+      <td  colspan=2 background="<?php echo $root_path; ?>gui/img/common/default/tableHeaderbg3.gif"><FONT face="Verdana,Helvetica,Arial" size=2 color="#000080"><?php echo $LDSearchReport ?>:</td>
     </tr>
     <tr bgcolor=#ffffdd>
       <td align=right><FONT face="Verdana,Helvetica,Arial" size=2><?php echo $LDTechnician ?>:</td>
@@ -159,8 +148,14 @@ require($root_path.'include/inc_css_a_hilitebu.php');
     </tr>
     <tr bgcolor=#ffffdd>
       <td align=right><FONT face="Verdana,Helvetica,Arial" size=2 ><?php echo "$LDDate $LDFrom" ?>:</td>
-      <td><FONT face="Verdana,Helvetica,Arial" size=2><input type="text" name="sdate" size=10 maxlength=10   onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"><?php echo $LDTo ?><input type="text" name="edate" size=10 maxlength=10   onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-          </td>
+      <td><FONT face="Verdana,Helvetica,Arial" size=2><input type="text" name="sdate" size=10 maxlength=10   onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+	  		<a href="javascript:show_calendar('suchform.sdate','<?php echo $date_format ?>')">
+			<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
+  
+	  <?php echo $LDTo ?>&nbsp;<input type="text" name="edate" size=10 maxlength=10   onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+   			<a href="javascript:show_calendar('suchform.edate','<?php echo $date_format ?>')">
+			<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
+         </td>
     </tr>
 
     <tr >
@@ -198,7 +193,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
   				<tr bgcolor="#ffffff"  background="'.$root_path.'gui/img/common/default/tableHeaderbg3.gif">';
 		for ($i=0;$i<sizeof($bcatindex);$i++)
 		echo '
-				<td><font face=Verdana,Arial size=2 color="#000080">'.$bcatindex[$i].'</td>';
+				<td  background="'.$root_path.'gui/img/common/default/tableHeaderbg3.gif"><font face=Verdana,Arial size=2 color="#000080">'.$bcatindex[$i].'</td>';
 		echo '
 				</tr>';	
 

@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -242,7 +242,7 @@ if($mode=='data_saved' || $edit)
  echo '<input type="button" value="'.$LDEnterNewUser.'" onClick="javascript:window.location.href=\'edv_user_access_edit.php'.URL_REDIRECT_APPEND.'&remark=fromlist\'">';
 }
 ?>
-<input type="button" value="Find an employee<?php echo $LDFindEmployee; ?>" onClick="javascript:window.location.href='edv_user_search_employee.php<?php echo URL_REDIRECT_APPEND; ?>&remark=fromlist'">
+<input type="button" value="<?php echo $LDFindEmployee; ?>" onClick="javascript:window.location.href='edv_user_search_employee.php<?php echo URL_REDIRECT_APPEND; ?>&remark=fromlist'">
 
 <table border=0 bgcolor="#000000" cellpadding=0 cellspacing=0>
   <tr>

@@ -13,7 +13,7 @@ if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
 		{
 				$sql="INSERT INTO ".$dbtable." 
 						(	
-							dept,
+							dept_nr,
 							hit,
 							artikelname,
 							minorder,
@@ -21,7 +21,7 @@ if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
 							proorder,
 							bestellnum ) 
 						VALUES (
-							'$dept',
+							'$dept_nr',
 							'$hit',
 							'$artname',
 							'$minorder',

@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'/include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -15,8 +15,6 @@ define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 // reset all 2nd level lock cookies
 require($root_path.'include/inc_2level_reset.php');
-
-require_once($root_path.'include/inc_config_color.php');
 
 if(!session_is_registered('sess_path_referer')) session_register('sess_path_referer');
 if(!session_is_registered('sess_file_return')) session_register('sess_file_return');
@@ -110,7 +108,7 @@ if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_ali
               <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'icn_rad.gif','0') ?>></td>
                 <TD vAlign=top width=150><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B> 
-   				<a href="technik-reparatur-melden.php<?php echo URL_APPEND ?>"><?php echo $LDRepairReport ?></a></B></FONT></TD>
+   				<a href="technik-reparatur-melden.php<?php echo URL_APPEND ?>"><?php echo $LDRepairReport ?></B></a></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><nobr><?php echo $LDRepairReportTxt ?></nobr></FONT></TD></TR>
               
@@ -149,7 +147,7 @@ if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_ali
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><nobr><?php echo $LDQBotActivateTxt ?></nobr></FONT></TD></TR>
-              <TR bgColor=#dddddd height=1>
+<!--               <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
                   <?php echo createComIcon($root_path,'pixel.gif','0'); ?>
                   width=5></TD></TR>
@@ -160,7 +158,7 @@ if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_ali
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php echo $LDInfoTxt ?></FONT></TD></TR>
-                         
+ -->                         
 		</TBODY>
 		</TABLE>
 		</TD></TR>
@@ -183,7 +181,6 @@ require($root_path.'include/inc_load_copyrite.php');
 </td>
 </tr>
 </table>        
-&nbsp;
 </FONT>
 </BODY>
 </HTML>

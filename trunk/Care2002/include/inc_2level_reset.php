@@ -22,8 +22,10 @@ $cookie_2level=array('ck_cafenews_user',
 								 'ck_edv_user',
 								 'ck_intra_email_user',
 								 'ck_fotolab_user',
+								 'ck_pflege_user',
 								 'currentuser',
-								 'ck_op_dienstplan_user'
+								 'ck_op_dienstplan_user',
+								 'ck_radio_user'
 								 );
 								 
 for($i=0;$i<sizeof($cookie_2level); $i++)

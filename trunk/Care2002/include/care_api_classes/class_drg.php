@@ -861,5 +861,65 @@ class DRG extends Encounter{
 		    } else { return false;}
 		} else { return false;}
 	}
-
+	/** 
+	* _getDRGList() gets all DRG entries based on the given number
+	* private
+	* @param $nr (int) = select number
+	* @param $nr_type (str) = type of  $nr (_ENC = encounter nr, _REG = pid nr.)
+	* return adodb record object
+	*/
+	function _getDRGList($nr,$nr_type='_ENC'){
+		global $db;
+		# Set field name for main selection
+		if($nr_type=='_ENC'){
+			$disc='encounter_nr';
+		}elseif($nr_type='_REG'){
+			$disc='pid';
+		}else{
+			$this->error_msg='Type of nr. invalid or empty';
+			return false;
+		}
+		
+		$this->sql="SELECT e.encounter_nr,e.encounter_date,e.is_discharged  
+						FROM   $this->tb_enc AS e,
+									$this->tb_enc_drg AS i,
+									$this->tb_diagnosis AS d,
+									$this->tb_procedure AS p
+						WHERE e.$disc=$nr
+							AND e.status NOT IN ($this->dead_stat) 
+							AND (
+									(i.encounter_nr=e.encounter_nr AND i.status NOT IN ($this->dead_stat))
+									OR 
+									(d.encounter_nr=e.encounter_nr AND d.status NOT IN ($this->dead_stat))
+									OR 
+									(p.encounter_nr=e.encounter_nr AND p.status NOT IN ($this->dead_stat))
+								)
+						GROUP BY e.encounter_nr
+						ORDER BY e.encounter_date DESC";
+		//echo $this->sql;
+        if($this->res['_gmed']=$db->Execute($this->sql)) {
+            if($this->rec_count=$this->res['_gmed']->RecordCount()) {
+				 return $this->res['_gmed'];	 
+			} else { return false; }
+		} else { return false; }
+	}
+	/** 
+	* encDRGList() gets all DRG records of an encounter nr
+	* public
+	* @param $enc_nr (int) = encounter number
+	* return adodb record object
+	*/
+	function encDRGList($nr){
+		return $this->_getDRGList($nr,'_ENC');
+	}
+	/** 
+	* pidDRGList() gets all DRG records of a person's pid nr
+	* public
+	* @param $pid (int) = pid number
+	* return adodb record object
+	*/
+	function pidDRGList($nr){
+		return $this->_getDRGList($nr,'_REG');
+	}
+	
 }

@@ -1,4 +1,6 @@
 <?php
+# define to 1 to measure page generation time
+define('USE_PAGE_GEN_TIME',1);
 # globalize the POST, GET, & COOKIE variables
 require_once($root_path.'include/inc_vars_resolve.php'); 
 
@@ -27,13 +29,10 @@ if(!defined('NOSTART_SESSION')||(defined('NOSTART_SESSION')&&!NOSTART_SESSION)){
 
 # Set the url append data
 if (ini_get('session.use_trans_sid')!=1) {
-    //define('URL_APPEND','?'.SID.'&lang='.$lang);
     define('URL_APPEND','?sid='.$sid.'&lang='.$lang);
-	//define('URL_REDIRECT_APPEND',URL_APPEND);
 	$not_trans_id=true;
 } else {
     define('URL_APPEND','?lang='.$lang);
-    //define('URL_REDIRECT_APPEND','?'.SID.'&lang='.$lang);
 	$not_trans_id=false;
 }
 //define('URL_REDIRECT_APPEND','?'.SID.'&lang='.$lang);
@@ -45,4 +44,14 @@ define('URL_REDIRECT_APPEND','?sid='.$sid.'&lang='.$lang);
 $template_theme='human_aqua_2';
 # Set the template path
 $template_path=$root_path.'gui/html_template/';
+# Page generation time start
+if(defined('USE_PAGE_GEN_TIME')&&USE_PAGE_GEN_TIME){
+	include($root_path.'classes/ladezeit/ladezeitclass.php');
+	$pgt=new ladezeit();
+	$pgt->start();
+}
+# Define the time when the doc-on-duty will change in 24 hours H.M format (eg. 3 PM = 15.00, 12 PM = 0.00)
+define('DOC_CHANGE_TIME','7.30'); 
+# Define the time when the nurse-on-duty will change in 24 hours H.M format (eg. 3 PM = 15.00, 12 PM = 0.00)
+define('NOC_CHANGE_TIME','7.30'); 
 ?>

@@ -54,10 +54,13 @@ class Calendar {
 		
 
 	/** MAIN FUNCTION **/
-	function mkCalendar ($intYear = "", $intMonth = "", $intDay = "") {
-	
-		global $LDMonthFullName, $LDDayShortName; // added by Elpidio Latorilla 2003-04-05
-		
+	function mkCalendar ($intYear = "", $intMonth = "", $intDay = "", $dept_nr=0, $aux='') {
+		## added by Elpidio Latorilla 2003-04-05
+		global $LDMonthFullName, $LDDayShortName; 
+		## Added by Elpidio Latorilla 2003-08-28
+		global $thisfile;
+		if(empty($PHP_SELF)) $PHP_SELF=$thisfile;
+		##############################
 		$intYear = $intYear ? $intYear : date("Y");
 		$intMonth = $intMonth ? $intMonth : date("m");
 		$intMonthTS = mktime (0, 0, 0, $intMonth, 1, $intYear);
@@ -188,7 +191,7 @@ class Calendar {
 				";
 			}else{ 
 				echo "
-								<TD align=\"center\" bgcolor=\"$currBGColor\"><font size=1 face=\"verdana,arial\"><A href=\"$PHP_SELF".URL_APPEND."&currYear=$intYear&currMonth=$intMonth&currDay=$i\">$DayPrepend$i$DayAppend</A></font></TD>
+								<TD align=\"center\" bgcolor=\"$currBGColor\"><font size=1 face=\"verdana,arial\"><A href=\"$PHP_SELF".URL_APPEND."&currYear=$intYear&currMonth=$intMonth&currDay=$i&dept_nr=$dept_nr&aux=$aux\">$DayPrepend$i$DayAppend</A></font></TD>
 				";
 			}
 			

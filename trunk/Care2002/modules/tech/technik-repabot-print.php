@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'/include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -137,9 +137,9 @@ if($rows>0)
     $content=$ergebnis->FetchRow();
 
     echo '</font>
-		<table cellpadding=0 cellspacing=0 border=0 bgcolor="#666666">
+		<table cellpadding=0 cellspacing=0 border=0 bgcolor="#666666" width="100%">
 		<tr><td>
-		<table border=0 cellspacing=1 cellpadding=3>
+		<table border=0 cellspacing=1 cellpadding=3 width="100%">
   		<tr bgcolor="#ffffff" background="../../gui/img/common/default/tableHeaderbg3.gif">';
 		
 	for ($i=0;$i<sizeof($requestindex);$i++)

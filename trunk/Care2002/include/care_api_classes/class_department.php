@@ -53,12 +53,15 @@ class Department extends Core {
 		$this->dept_nr=$nr;
 	}
 	
-	function _getalldata($cond='1',$sort='name_formal'){
+	function _getalldata($cond='1',$sort='',$ret_type=''){
 	    global $db;
-		
-	    if ($this->result=$db->Execute("SELECT * FROM $this->tb WHERE $cond AND status NOT IN ('deleted','hidden','closed','inactive') ORDER BY $sort")) {
-		    if ($this->dept_count=$this->result->RecordCount()) {
-		        return $this->result->GetArray();
+		if(empty($sort)) $sort='name_formal';
+		$this->sql="SELECT * FROM $this->tb WHERE $cond AND status NOT IN ($this->dead_stat) ORDER BY $sort";
+	    if ($this->res['_gald']=$db->Execute($this->sql)) {
+		    if ($this->dept_count=$this->res['_gald']->RecordCount()){
+				$this->rec_count=$this->dept_count;
+		        if($ret_type=='_OBJECT') return $this->res['_gald'];
+					else return $this->res['_gald']->GetArray();
 			}else{
 				return false;
 			}
@@ -86,7 +89,10 @@ class Department extends Core {
 		return $this->_getalldata('1');
 	}
 	function getAllActive() {
-		return $this->_getalldata('1');
+		return $this->_getalldata('(is_inactive="" OR is_inactive="0")');
+	}
+	function getAllActiveObject() {
+		return $this->_getalldata('(is_inactive="" OR is_inactive="0")','','_OBJECT');
 	}
 	
 	function getAllSort($sort='') {
@@ -94,11 +100,14 @@ class Department extends Core {
 	}
 	
 	function getAllActiveSort($sort='') {
-		return $this->_getalldata('is_inactive="" OR is_inactive="0"',$sort);
+		return $this->_getalldata('(is_inactive="" OR is_inactive="0")',$sort);
 	}
 	
 	function getAllMedical() {
 		return $this->_getalldata('type=1 AND (is_inactive="" OR is_inactive="0")');
+	}
+	function getAllMedicalObject() {
+		return $this->_getalldata('type=1 AND (is_inactive="" OR is_inactive="0")','','_OBJECT');
 	}
 	function getAllMedicalWithOnCall() {
 		return $this->_getalldata('type=1 AND (is_inactive="" OR is_inactive="0") AND (has_oncall_doc=1 OR has_oncall_nurse=1)');

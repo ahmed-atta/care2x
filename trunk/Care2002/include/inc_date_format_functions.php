@@ -96,7 +96,7 @@ function formatDate2Local($stdDate,$localFormat,$retTime,$timeOnly,&$sepChars)
 	    elseif($localArray[$i]=='dd') $localArray[$i]=$stdArray[2];
    }
    
-   if ($lang=='de') $stdTime=strtr($stdTime,':','.'); // This is a hard coded time  format translator for german "de" language
+   //if ($lang=='de') $stdTime=strtr($stdTime,':','.'); // This is a hard coded time  format translator for german "de" language
    
    if($retTime) return implode($localSeparator,$localArray).' '.$stdTime;
     else return implode($localSeparator,$localArray);
@@ -210,14 +210,15 @@ function convertTimeToLocal($time_val)
    
    switch($lang)
    {
-     case 'de': $time_val=strtr($time_val,':,/-','....'); break; // convert the separators to '.' 
-     default : $time_val=strtr($time_val,'.,/-','::::'); // convert the separators to ':'
+     //case 'de': $time_val=strtr($time_val,':,/-','....'); break; # convert the separators to '.' 
+     default : $time_val=strtr($time_val,'.,/-','::::'); # convert the separators to ':'
    }
    
-   return $time_val;
+   //return $time_val;
+   return substr($time_val,0,strrpos($time_val,':'));
 }
 
-/* Now load the date format*/
+# Now load the date format
 $date_format=getDateFormat();
 
 ?>

@@ -8,16 +8,21 @@ $obj->setDataArray($HTTP_POST_VARS);
 switch($mode){	
 		case 'create': 
 								if($obj->insertDataFromInternalArray()) {
+									if(!$no_redirect){
 										header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&pid=".$HTTP_SESSION_VARS['sess_pid']);
-										echo "$obj->getLastQuery<br>$LDDbNoSave";//exit;
+										//echo "$obj->getLastQuery<br>$LDDbNoSave";
+										exit;
+									}
 								} else echo "$obj->getLastQuery<br>$LDDbNoSave";
 								break;
 		case 'update': 
 								$obj->where=' nr='.$nr;
 								if($obj->updateDataFromInternalArray($nr)) {
+									if(!$no_redirect){
 										header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&pid=".$HTTP_SESSION_VARS['sess_pid']);
 										//echo "$obj->sql<br>$LDDbNoUpdate";
-										//exit;
+										exit;
+									}
 								} else echo "$obj->getLastQuery<br>$LDDbNoUpdate";
 								break;
 }// end of switch

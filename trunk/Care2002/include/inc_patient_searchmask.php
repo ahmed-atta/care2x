@@ -44,6 +44,7 @@ if(!$searchform_count)
 	         <input type="hidden" name="target" value="<?php echo $target; ?>">
 	         <input type="hidden" name="user_origin" value="<?php echo $user_origin; ?>">
 	         <input type="hidden" name="retpath" value="<?php echo $retpath; ?>">
+	         <input type="hidden" name="aux1" value="<?php echo $aux1; ?>">
 	         <input type="hidden" name="mode" value="search">
 	         </form>
 			</td>

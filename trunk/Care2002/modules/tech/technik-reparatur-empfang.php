@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'/include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -13,25 +13,20 @@ require($root_path.'/include/inc_environment_global.php');
 define('LANG_FILE','tech.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
 $breakfile='technik.php'.URL_APPEND;
 $returnfile=$HTTP_SESSION_VARS['sess_file_return'].URL_APPEND;
 $HTTP_SESSION_VARS['sess_file_return']='technik.php';
 
- if($repair=='ask') 
- {
+if($repair=='ask'){
  	$target=$LDRequest;
 	$returnfile='technik-reparatur-anfordern.php?sid='.$sid.'&lang='.$lang;
- }
- else
- {
+}else{
   $target=$LDReport;
   $returnfile='technik-reparatur-melden.php?sid='.$sid.'&lang='.$lang;
- }
+}
 
-/* Load date formatter */
-include_once($root_path.'include/inc_date_format_functions.php');
-
+# Load date formatter
+require_once($root_path.'include/inc_date_format_functions.php');
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -39,19 +34,8 @@ include_once($root_path.'include/inc_date_format_functions.php');
 <HEAD>
 <?php echo setCharSet(); ?>
 
-<script language="javascript" >
-<!-- 
-
-function gethelp(x,s,x1,x2,x3)
-{
-	if (!x) x="";
-	urlholder="<?php echo $root_path; ?>main/help-router.php<?php echo URL_APPEND ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
-helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
-	window.helpwin.moveTo(0,0);
-}
-// -->
-</script>
 <?php 
+require($root_path.'include/inc_js_gethelp.php');
 require($root_path.'include/inc_css_a_hilitebu.php');
 ?>
 </HEAD>
@@ -85,6 +69,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <FONT    SIZE=2  FACE="Verdana,Arial" color="#990000">
 <?php echo $LDThanksSir ?> <b><?php echo("$reporter") ?></b>. <p>
 <?php echo $LDYour ?> <?php echo $target ?> <?php echo $LDReceived ?> <b><?php echo formatDate2Local($tdate,$date_format); ?></b> <?php echo $LDAt ?>   <b><?php echo convertTimeToLocal($ttime); ?></b> 
+<p>
 <?php echo $LDAtTech ?>
 </td>
 
@@ -98,9 +83,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
 <input type="hidden" name="lang" value="<?php echo $lang ?>">
 <INPUT type="submit"  value="  OK  "></font></FORM>
-
 </center>
-
 
 </FONT>
 <ul>
@@ -112,12 +95,12 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <a href="technik-reparatur-melden.php<?php echo URL_APPEND ?>"><?php echo $LDRepairReportTxt ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>>
 <a href="technik-questions.php<?php echo URL_APPEND ?>"><?php echo $LDQuestionsTxt ?></a><br>
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>>
+<!-- <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>>
 <a href="technik-info.php<?php echo URL_APPEND ?>"> <?php echo $LDInfoTxt ?></a><br>
-</FONT>
+ --></FONT>
 </ul>
 <p>
-<HR>
+
 
 <?php
 require($root_path.'include/inc_load_copyrite.php');

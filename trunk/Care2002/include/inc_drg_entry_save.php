@@ -87,7 +87,7 @@ if($multiple_save){
 		$DRG_obj->setDataArray($data);
 		# Now insert the data
 		$DRG_obj->insertDataFromInternalArray();
-		echo $DRG_obj->getLastQuery()."<p>";
+		//echo $DRG_obj->getLastQuery()."<p>";
 
 		$data['qlist_type']=$qlist_type;
 		$data['code_type']=$qlist_type;
@@ -98,13 +98,12 @@ if($multiple_save){
 		//echo $DRG_obj->getLastQuery()."<br>";
 		# Update related code table
 		$DRG_obj->addDRGRelatedCode($data);
-		//echo $DRG_obj->getLastQuery();
-		echo $DRG_obj->getLastQuery()."<br>";
+		//echo $DRG_obj->getLastQuery()."<br>";
 	}
 	$saveok=1;
 }
 // Redirect and exit 
-$buf="location:$thisfile?sid=$sid&lang=$lang&saveok=$saveok&pn=$pn&opnr=$opnr&group_nr=$group_nr&ln=$ln&fn=$fn&bd=$bd&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&target=$target";
+$buf="location:$thisfile?sid=$sid&lang=$lang&saveok=$saveok&pn=$pn&opnr=$opnr&group_nr=$group_nr&edit=$edit&ln=$ln&fn=$fn&bd=$bd&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&target=$target";
 //echo $buf;
 if(!$noheader){
 	header($buf);

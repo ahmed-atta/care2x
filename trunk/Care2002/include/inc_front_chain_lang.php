@@ -6,11 +6,6 @@ if (eregi('inc_front_chain_lang.php',$PHP_SELF))
 	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 
-/**
-* The following constant LANG_DEFAULT is the default language code. Set this to the language code of your choice.
-* NOTE: set this to a code of a language with an existing language table.
-*/
-
 /* Establish db connection */
 require_once($root_path.'include/inc_db_makelink.php');
 

@@ -8,15 +8,15 @@ require_once($root_path.'include/care_api_classes/class_core.php');
 
 class Insurance extends Core {
 
-	var $tb_class='care_class_insurance'; // table name
-	var $tb_insurance='care_insurance_firm';
+	var $tb_class='care_class_insurance'; # insurance classes table name
+	var $tb_insurance='care_insurance_firm'; # insurance companies
 	var $result;
 	var $row;
 	var $firm_id;
 	var $buffer;
 	var $sql;
 	var $ok;
-	/* Field names of the care_insurance_firm table */
+	# Field names of the care_insurance_firm table 
 	var $fld_insurance=array(
 			'firm_id',
 			'name',
@@ -84,18 +84,18 @@ class Insurance extends Core {
 	    }
     }
 		
-    function getInsuranceClassInfoObject($items='class_nr,class,name,LD_var,description,status,history') {
+    function getInsuranceClassInfoObject($items='class_nr,class_id,name,LD_var,description,status,history') {
     
 	    global $db;
 	
-        if ($this->result=$db->Execute("SELECT $items  FROM $this->tb_class")) {
-            if ($this->result->RecordCount()) {
-                return $this->result;
+        if ($this->res['gicio']=$db->Execute("SELECT $items  FROM $this->tb_class")) {
+            if ($this->res['gicio']->RecordCount()) {
+                return $this->res['gicio'];
             } else {return false;}
 		} else {return false; }
     }
 	
-    function getInsuranceClassInfoArray($items='class_nr,class,name,LD_var,description,status,history') {
+    function getInsuranceClassInfoArray($items='class_nr,class_id,name,LD_var,description,status,history') {
     
 	    global $db;
 	
@@ -337,7 +337,7 @@ class PersonInsurance extends Insurance {
     function getInsuranceClassInfo($class_nr) {
         global $db;
 		
-        if($this->result=$db->Execute("SELECT name FROM $this->tb_class WHERE class_nr=$class_nr")) {
+        if($this->result=$db->Execute("SELECT class_id,name FROM $this->tb_class WHERE class_nr=$class_nr")) {
             if($this->result->RecordCount()) {
 				 $this->row= $this->result->FetchRow();
 				 return $this->row;	 

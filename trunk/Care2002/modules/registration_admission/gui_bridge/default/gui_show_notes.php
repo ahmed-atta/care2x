@@ -440,14 +440,14 @@ while(list($x,$v)=each($types)){
 			   					else  echo createComIcon($root_path,'docu_unrd.gif','0');
 						?>>
 			   </td>
-                <TD vAlign=top ><nobr><FONT 
+                <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2>
 				 <a href="show_notes.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&target=<?php echo $target ?>&type_nr=<?php echo $v['nr'] ?>">
 				 <?php 
 				 	if(isset($$v['LD_var'])&&!empty($$v['LD_var'])) echo $$v['LD_var']; else echo $v['name'] 
 				 ?>
 				 </a>
-				   </FONT></nobr></TD>
+				   </FONT></TD>
                 </TR>
 			   
            <?php Spacer(); ?>

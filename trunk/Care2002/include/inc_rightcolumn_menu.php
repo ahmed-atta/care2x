@@ -10,15 +10,15 @@ require($root_path.'include/inc_get_global_config.php');
 
 /* Prepare the url links variables */
 $url_open="open-time.php".URL_APPEND;
-$url_mgmt="newscolumns.php".URL_APPEND."&dept_nr=28";
+$url_mgmt="newscolumns.php".URL_APPEND."&dept_nr=28&user_origin=dept";
 $url_dept="".$root_path.'modules/news/'."departments.php".URL_APPEND;
 $url_cafe="".$root_path.'modules/cafeteria/'."cafenews.php".URL_APPEND;
-$url_adm="newscolumns.php".URL_APPEND."&dept_nr=33";
-$url_exh="newscolumns.php".URL_APPEND."&dept_nr=29";
-$url_edu="newscolumns.php".URL_APPEND."&dept_nr=30";
-$url_stud="newscolumns.php".URL_APPEND."&dept_nr=31";
-$url_phys="newscolumns.php".URL_APPEND."&dept_nr=10";
-$url_tips="newscolumns.php".URL_APPEND."&dept_nr=32";
+$url_adm="newscolumns.php".URL_APPEND."&dept_nr=33&user_origin=dept";
+$url_exh="newscolumns.php".URL_APPEND."&dept_nr=29&user_origin=dept";
+$url_edu="newscolumns.php".URL_APPEND."&dept_nr=30&user_origin=dept";
+$url_stud="newscolumns.php".URL_APPEND."&dept_nr=31&user_origin=dept";
+$url_phys="newscolumns.php".URL_APPEND."&dept_nr=10&user_origin=dept";
+$url_tips="newscolumns.php".URL_APPEND."&dept_nr=32&user_origin=dept";
 $url_calendar=$root_path."modules/calendar/calendar.php".URL_APPEND."&retpath=home";
 $url_jshelp="javascript:gethelp()";
 $url_news="editor-pass.php".URL_APPEND;

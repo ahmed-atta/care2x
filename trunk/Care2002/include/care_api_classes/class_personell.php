@@ -115,7 +115,7 @@ class Personell extends Core {
 	    global $db;
 		$row=array();
 		
-		$sql="SELECT a.nr, a.personell_nr, ps.job_function_title, p.name_last, p.name_first, p.date_birth
+		$sql="SELECT a.nr, a.personell_nr, ps.job_function_title, p.name_last, p.name_first, p.date_birth, p.sex
 				FROM 	$this->tb_assign AS a,
 							$this->tb AS ps,
 							$this->tb_person AS p			
@@ -143,14 +143,14 @@ class Personell extends Core {
 	
 	function _OCDutyplanExists($role_nr,$dept_nr=0,$year=0,$month=0){
 		global $db;
-		
 		if(!$role_nr||!$dept_nr||!$year||!$month){
 			return false;
 		}else{
-			$sql="SELECT nr FROM $this->tb_dpoc WHERE role_nr=$role_nr AND dept_nr=$dept_nr AND year=$year AND month=$month";
-	    	if ($this->result=$db->Execute($sql)) {
-		    	if ($this->result->RecordCount()) {
-					$this->row=$this->result->FetchRow();
+			$this->sql="SELECT nr FROM $this->tb_dpoc WHERE role_nr=$role_nr AND dept_nr=$dept_nr AND year=$year AND month=$month";
+	    	if ($this->res['_ocdpe']=$db->Execute($this->sql)) {
+		    	if ($this->res['_ocdpe']->RecordCount()) {
+					$this->row=$this->res['_ocdpe']->FetchRow();
+					//echo $this->sql;
 		    		return $this->row['nr'];
 				} else {
 					return false;
@@ -167,29 +167,25 @@ class Personell extends Core {
 		return $this->_OCDutyplanExists(14,$dept_nr,$year,$month); // 14 = nurse_on_call (role)
 	}
 	
-	function _getOCDutyplan($role_nr,$dept_nr=0,$year=0,$month=0){
+	function _getOCDutyplan($role_nr,$dept_nr=0,$year=0,$month=0,$elems='*'){
 		global $db;
 		
 		if(!$role_nr||!$dept_nr||!$year||!$month){
 			return false;
 		}else{
-			$sql="SELECT * FROM $this->tb_dpoc WHERE role_nr=$role_nr AND dept_nr=$dept_nr AND year=$year AND month=$month";
-	    	if ($this->result=$db->Execute($sql)) {
-		    	if ($this->record_count=$this->result->RecordCount()) {
-					return $this->result->FetchRow();
-				} else {
-					return false;
-				}
-			}else {
-		   	 return false;
-			}
+			$this->sql="SELECT $elems FROM $this->tb_dpoc WHERE role_nr=$role_nr AND dept_nr=$dept_nr AND year=$year AND month=$month";
+	    	if ($this->res['_godp']=$db->Execute($this->sql)) {
+		    	if ($this->rec_count=$this->res['_godp']->RecordCount()) {
+					return $this->res['_godp']->FetchRow();
+				}else{return false;}
+			}else{return false;}
 		}
 	}
-	function getDOCDutyplan($dept_nr,$year,$month){
-		return $this->_getOCDutyplan(15,$dept_nr,$year,$month);
+	function getDOCDutyplan($dept_nr,$year,$month,$elems='*'){
+		return $this->_getOCDutyplan(15,$dept_nr,$year,$month,$elems);
 	}
-	function getNOCDutyplan($dept_nr,$year,$month){
-		return $this->_getOCDutyplan(14,$dept_nr,$year,$month);
+	function getNOCDutyplan($dept_nr,$year,$month,$elems='*'){
+		return $this->_getOCDutyplan(14,$dept_nr,$year,$month,$elems);
 	}
 	
 	function getPersonellInfo($nr){
@@ -260,7 +256,7 @@ class Personell extends Core {
 	function searchPersonellBasicInfo($key){
 		global $db;
 		if(empty($key)) return false;
-		$sql="SELECT ps.nr, ps.job_function_title, p.pid, p.name_last, p.name_first, p.date_birth 
+		$sql="SELECT ps.nr, ps.job_function_title, p.pid, p.name_last, p.name_first, p.date_birth, p.sex
 				FROM $this->tb AS ps, $this->tb_person AS p";
 		if(is_numeric($key)){
 			$key=(int)$key;

@@ -51,21 +51,26 @@ class Measurement extends Core {
 		    return false;
 		}
 	}
-	
+	/**
+	* _getUnits() get measurement units
+	* private
+	* @param $cond (str) the select condition
+	* return array
+	*/
 	function _getUnits($cond='1'){
 	    global $db;
-	
-	    if ($this->result=$db->Execute("SELECT nr,unit_type_nr,id,name,LD_var  FROM $this->tb_units WHERE $cond")) {
-		    if ($this->result->RecordCount()) {
-		        return $this->result->GetArray();
-			} else {
-				return false;
-			}
-		}
-		else {
-		    return false;
-		}
+		$this->sql="SELECT nr,unit_type_nr,id,name,LD_var  FROM $this->tb_units WHERE $cond";
+	    if ($this->res['_gunits']=$db->Execute($this->sql)) {
+		    if ($this->rec_count=$this->res['_gunits']->RecordCount()) {
+		        return $this->res['_gunits']->GetArray();
+			}else{return false;}
+		}else{return false;}
 	}	
+	/**
+	* getUnits() gets all measurement units
+	* public 
+	* return array
+	*/
 	
 	function getUnits(){
 	    return $this->_getUnits();
@@ -92,5 +97,29 @@ function increaseUnitHit($nr,$count='1'){
 		}
 	}	
 	*/
+	/**
+	* VolumeUnits() returns all volume units in metric system
+	* public
+	* return resulting rows in array
+	*/
+	function VolumeUnits(){
+		return $this->_getUnits('unit_type_nr=1'); # Unit type nr 1 = volume unit
+	}
+	/**
+	* VolumeUnits() returns all weight units in metric system
+	* public
+	* return resulting rows in array
+	*/
+	function WeightUnits(){
+		return $this->_getUnits('unit_type_nr=2'); # Unit type nr 2 = weight unit
+	}
+	/**
+	* VolumeUnits() returns all length/height units in metric system
+	* public
+	* return resulting rows in array
+	*/
+	function LengthUnits(){
+		return $this->_getUnits('unit_type_nr=3'); # Unit type nr 2 = length/height unit 
+	}
 }
 ?>

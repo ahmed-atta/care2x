@@ -27,11 +27,16 @@ class Notes extends Core {
 									'date',
 									'time',
 									'location_type',
+									'location_type_nr',
+									'location_nr',
 									'location_id',
 									'ack_short_id',
 									'date_ack',
 									'date_checked',
 									'date_printed',
+									'send_by_mail',
+									'send_by_email',
+									'send_by_fax',
 									'status',
 									'history',
 									'modify_id',
@@ -87,16 +92,13 @@ class Notes extends Core {
 	function _getNotes($cond,$order='ORDER BY date,time DESC'){
 	    global $db;
 		$this->sql="SELECT * FROM $this->tb_notes WHERE $cond $order";
+		//echo $this->sql;
 	    if ($this->result=$db->Execute($this->sql)) {
 		    if ($this->result->RecordCount()) {
-		        return true;
-			} else {
-				return false;
-			}
-		}
-		else {
-		    return false;
-		}
+		        //return true;
+		        return $this->result;
+			}else{return false;}
+		}else{return false;}
 	}
 	function _insertNotesFromInternalArray($type_nr=''){
 		global $HTTP_SESSION_VARS;
@@ -135,6 +137,14 @@ class Notes extends Core {
 				}else{return false;}
 			}else{return false;}
 		}
+	}
+	/**
+	* getEncounterNotesByType() gets the notes by record's number
+	* public
+	* @param $nr (int) = record nr.
+	*/
+	function getEncounterNotes($nr){
+		return $this->_getNotes("nr=$nr AND status NOT IN ($this->dead_stat)",'');
 	}
 }
 ?>

@@ -5,6 +5,8 @@ if($cfg['dhtml'])
 	<script language="javascript" src="'.$root_path.'js/hilitebu.js">
 	</script>
 
+
+
 	<STYLE TYPE="text/css">
 
 	A:link  {text-decoration: none; color: '.$cfg['body_txtcolor'].';}
@@ -15,4 +17,14 @@ if($cfg['dhtml'])
 	A:visited:hover {text-decoration: underline; color: '.$cfg['body_hover'].';}
 	</style>';
 }
+
 ?>
+<script language="JavaScript">
+<!--
+function popPic(nd,fn){
+
+	regpicwindow = window.open("<?php echo $root_path ?>main/pop_reg_pic.php<?php echo URL_REDIRECT_APPEND ?>&nm="+nd+"&fn="+fn,"regpicwin","toolbar=no,scrollbars,width=180,height=250");
+
+}
+// -->
+</script>
