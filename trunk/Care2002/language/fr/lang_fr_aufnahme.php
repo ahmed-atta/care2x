@@ -88,7 +88,7 @@ $LDMEDOCS='Système de documentation médicale (Medocs)';
 $LDMedocsSearchTitle='Medocs - Recherche de documents';
 $LDHideCat='Cliquez pour cacher le CAT';
 $LDNewDocu='Renseigner le patient suivant';
-$LDExtraInfo='Extra informations';
+$LDExtraInfo='Extra information';
 $LDMedAdvice='Avis médical';
 $LDMedocs='Medocs';
 
