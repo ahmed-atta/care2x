@@ -29,7 +29,7 @@ switch($target)
 						$title="$LDManageAccess - $LDNewData";
 						break;
 
-	case 'search':$fileforward='edv-accessplan-such.php'.$append; 
+	case 'search':$fileforward='edv_user_access_search.php'.$append; 
 						$title="$LDManageAccess - $LDSearch";
 						break;
 	case 'archiv':$fileforward='edv_user_access_list.php'.$append; 

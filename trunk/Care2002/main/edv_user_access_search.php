@@ -3,25 +3,31 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 define('LANG_FILE','edp.php');
 $local_user='ck_edv_user';
 require_once('../include/inc_front_chain_lang.php');
+/**
+* The following require loads the access areas that can be assigned for
+* user permissions.
+*/
+require('../include/inc_accessplan_areas_functions.php');
 
 require_once('../include/inc_config_color.php');
 $breakfile="edv.php?sid=".$sid."&lang=".$lang;
 
-$thisfile="edv-accessplan-such.php";
+$thisfile="edv_user_access_search.php";
 
-if($mode)
+if(isset($mode) && ($mode=='search'))
 {
 	include('../include/inc_db_makelink.php');
 	if($link&&$DBLink_OK) 
-					{	$sql='SELECT * FROM mahopass WHERE mahopass_id LIKE "'.addslashes($name).'%" OR mahopass_name LIKE "'.addslashes($name).'%"';
-						$ergebnis=mysql_query($sql,$link);
-						if($ergebnis)
+	{	
+	/* Load the date formatter */
+    include_once('../include/inc_date_format_functions.php');
+
+	
+	$sql='SELECT * FROM care_users WHERE exc <> 1 AND (login_id LIKE "'.addslashes($name).'%" OR name LIKE "'.addslashes($name).'%")';
+						if($ergebnis=mysql_query($sql,$link))
 							{
-											$rows=0;
-											while($zeile=mysql_fetch_array($ergebnis)) $rows++;
-											if($rows)
-											{ mysql_data_seek($ergebnis,0);
-											}
+											$rows=mysql_num_rows($ergebnis);
+
 							}
 	}
   	else { echo "$LDDbNoLink<br>$sql"; }
@@ -91,40 +97,37 @@ function gethelp(x,s,x1,x2,x3)
 
 		while ($zeile=mysql_fetch_array($ergebnis))
 		{  
-			if($zeile[exc]) continue;
+			if($zeile['exc']) continue;
 			 echo "
 						<tr  bgcolor=#efefef>\n";
 			echo "
-						<td><FONT    SIZE=1  FACE=Arial>".$zeile[mahopass_name]."</td>\n
-						<td><FONT    SIZE=1  FACE=Arial>".$zeile[mahopass_id]."</td>\n
-						<td><FONT    SIZE=1  FACE=Arial>".$zeile[mahopass_password]."</td><td>\n";
-			if ($zeile[mahopass_lockflag])
+						<td><FONT    SIZE=1  FACE=Arial>".$zeile['name']."</td>\n
+						<td><FONT    SIZE=1  FACE=Arial>".$zeile['login_id']."</td>\n
+						<td><FONT    SIZE=1  FACE=Arial>****</td><td>\n";
+			if ($zeile['lockflag'])
 				   echo '
-				   		<img src="../img/padlock.gif" border=0 width=12 height=15>'; else echo '<img src=../img/arrow-gr.gif width=12 height=12>';
+				   		<img '.createComIcon('../','padlock.gif','0').'>'; else echo '<img '.createComIcon('../','arrow-gr.gif','0').'>';
+
+
 			echo "
-						</td>\n <td><FONT    SIZE=1  FACE=Arial>".
-														$zeile[mahopass_area1]." ".
-														$zeile[mahopass_area2]." ".
-														$zeile[mahopass_area3]." ".
-														$zeile[mahopass_area4]." ".
-														$zeile[mahopass_area5]." ".
-														$zeile[mahopass_area6]." ".
-														$zeile[mahopass_area7]." ".
-														$zeile[mahopass_area8]." ".
-														$zeile[mahopass_area9]." ".
-														$zeile[mahopass_area10].
-														"</td>\n";
+						</td>\n <td><FONT    SIZE=1  FACE=Arial>";
+			/* Display the permitted areas */
+			
+			$area=explode(' ',$zeile['permission']);
+			
+			for($j=0;$j<sizeof($area);$j++) echo $area_opt[$area[$j]].'<br>';
+
+			echo '</td>
+					<td><FONT    SIZE=1  FACE=Arial> '.formatDate2Local($zeile['s_date'],$date_format).' / '.convertTimeToLocal($zeile['s_time']).' </td>';
 			echo "
-					<td><FONT    SIZE=1  FACE=Arial> $zeile[mahopass_date] / $zeile[mahopass_time] </td>";
-			echo "
-					<td><FONT    SIZE=1  FACE=Arial>".$zeile[mahopass_encoder]."</td>";
+					<td><FONT    SIZE=1  FACE=Arial>".$zeile['create_id']."</td>";
             echo "
 					<td><FONT    SIZE=1  FACE=verdana,Arial>
-					<a href=edv_user_access_update.php?sid=$sid&lang=$lang&itemname=".str_replace(' ','+',$zeile[mahopass_id])." title=\"$LDChange\"> $LDInitChange</a> \n
-			<a href=edv_user_access_lock.php?sid=$sid&lang=$lang&itemname=".str_replace(' ','+',$zeile[mahopass_id])." ";
-			if ($zeile[mahopass_lockflag]) echo "title=\"$LDUnlock\" > $LDInitUnlock"; else echo "title=\"$LDLock\"> $LDInitLock";
+					<a href=edv_user_access_edit.php?sid=$sid&lang=$lang&mode=edit&userid=".str_replace(' ','+',$zeile['login_id'])." title=\"$LDChange\"> $LDInitChange</a> \n
+			<a href=edv_user_access_lock.php?sid=$sid&lang=$lang&itemname=".str_replace(' ','+',$zeile['login_id'])." ";
+			if ($zeile['lockflag']) echo "title=\"$LDUnlock\" > $LDInitUnlock"; else echo "title=\"$LDLock\"> $LDInitLock";
 			echo "</a> \n
-			<a href=edv_user_access_delete.php?sid=$sid&lang=$lang&itemname=".str_replace(' ','+',$zeile[mahopass_id])." title=\"$LDDelete\">	$LDInitDelete</a> </td>";
+			<a href=edv_user_access_delete.php?sid=$sid&lang=$lang&itemname=".str_replace(' ','+',$zeile['login_id'])." title=\"$LDDelete\">	$LDInitDelete</a> </td>";
 			echo "</tr>";
         };
         echo "
@@ -169,7 +172,7 @@ function gethelp(x,s,x1,x2,x3)
 </table>        
 <br>
 
-<FORM  method=get action="edv-accessplan-such-pass.php" >
+<FORM  method=get action="<?php echo $breakfile;?>" >
 <input type="hidden" name="sid" value="<?php echo $sid;?>">
 <input type="hidden" name="lang" value="<?php echo $lang;?>">
 <INPUT type="submit"  value="<?php echo $LDCancel ?>"></FORM>
