@@ -4,8 +4,9 @@
 * has been established by an adodb instance
 */
 require_once($root_path.'include/care_api_classes/class_core.php');
+require_once($root_path.'include/care_api_classes/class_notes.php');
 
-class Encounter extends Core {
+class Encounter extends Notes {
     /* Table names related to encounter */
     var $tb_enc='care_encounter';
 	var $tb_fc='care_class_financial';
@@ -14,6 +15,8 @@ class Encounter extends Core {
 	var $tb_ic='care_class_insurance';
 	var $tb_person='care_person';
 	var $tb_citytown='care_address_citytown';
+	var $tb_location='care_encounter_location';
+	var $tb_dis_type='care_type_discharge';
 	/* Aux vars */
 	var $enc_nr;
 	var $encoder;
@@ -23,6 +26,11 @@ class Encounter extends Core {
 	var $is_loaded=false;
 	var $single_result=false;
 	var $record_count;
+	var $type_nr;
+	var $loc_nr;
+	var $group_nr;
+	var $date;
+	var $time;
 	
 	var $tabfields=array('encounter_nr',
 	                           'pid',
@@ -83,7 +91,6 @@ class Encounter extends Core {
 	function setSingleResult($bool=false){
 	    $this->single_result=$bool;
 	}
-
 	function internResolveEncounterNr($enc_nr='') {
 	    if (empty($enc_nr)) {
 		    if(empty($this->enc_nr)) {
@@ -94,7 +101,6 @@ class Encounter extends Core {
 			return true;
 		}
 	}
-		
     function getServiceClass($type,$enc_nr) {
         global $db;
 	    
@@ -124,7 +130,6 @@ class Encounter extends Core {
 		     } else { return false;}
 		} else { return false;}
     }
-	
 	function CareServiceClass($enc_nr) {
 	    return $this->getServiceClass('care',$enc_nr);
 	}
@@ -134,7 +139,6 @@ class Encounter extends Core {
 	function AttDrServiceClass($enc_nr) {
 	    return $this->getServiceClass('att_dr',$enc_nr);
 	}
-
     function saveServiceClass($type, &$val_array,$enc_nr='')
     {
 	    global $db;
@@ -168,7 +172,6 @@ class Encounter extends Core {
 				'".$val_array['encoder']."',
 				NULL
 			)";
-			
         return $this->Transact();
     }	
 
@@ -181,7 +184,6 @@ class Encounter extends Core {
 	function saveAttDrServiceClass(&$val_array,$enc_nr) {
 	    return $this->saveServiceClass('att_dr',$val_array,$enc_nr);
 	}
-	
     function updateServiceClass($type, &$val_array)
     {
 	    global $db;
@@ -194,7 +196,6 @@ class Encounter extends Core {
 				   history =(CONCAT(history,'\n Update ".date('Y-m-d H:i:s')." = ".$val_array['encoder']."')),
 				   modify_id = '".$val_array['encoder']."'
 			WHERE nr = '".$val_array['sc_'.$type.'_nr']."'";
-			
 		return $this->Transact();
     }	
 	
@@ -329,23 +330,23 @@ class Encounter extends Core {
 	}
 	function CurrentWardNr(){
 	    if(!$this->is_loaded) return false;
-		return $this->encounter['current_ward'];
+		return $this->encounter['current_ward_nr'];
 	}
 	function CurrentRoomNr(){
 	    if(!$this->is_loaded) return false;
-		return $this->encounter['current_room'];
+		return $this->encounter['current_room_nr'];
 	}
 	function CurrentDeptNr(){
 	    if(!$this->is_loaded) return false;
-		return $this->encounter['current_dept'];
+		return $this->encounter['current_dept_nr'];
 	}
 	function CurrentFirmNr(){
 	    if(!$this->is_loaded) return false;
-		return $this->encounter['current_firm'];
+		return $this->encounter['current_firm_nr'];
 	}
-	function CurrentAttDr(){
+	function CurrentAttDrNr(){
 	    if(!$this->is_loaded) return false;
-		return $this->encounter['current_att_dr'];
+		return $this->encounter['current_att_dr_nr'];
 	}
 	function inWard(){
 	    if(!$this->is_loaded) return false;
@@ -453,7 +454,7 @@ class Encounter extends Core {
 				FROM $this->tb_enc AS e LEFT JOIN $this->tb_person AS p ON e.pid=p.pid";
 		if(is_numeric($key)){
 			$key=(int)$key;
-			$sql.=" WHERE e.encounter_nr = $key AND NOT e.is_discharged";
+			$sql.=" WHERE e.encounter_nr = $key AND NOT e.is_discharged ".$add_opt;
 		}else{
 			$sql.=" WHERE (e.encounter_nr LIKE '$key%' 
 						OR p.pid LIKE '$key%'
@@ -496,6 +497,202 @@ class Encounter extends Core {
 			} else return false;
 		}else {
 		    return false;
+		}
+	}
+	function _InLocation($type_nr){
+		global $db;
+		if($this->result=$db->Execute("SELECT nr FROM $this->tb_location WHERE encounter_nr=$this->enc_nr AND type_nr=$type_nr AND location_nr=$this->loc_nr AND (date_to='' OR date_to='0000-00-00')")){
+			if($this->result->RecordCount()){
+				return $this->result['nr'];
+			}else{return false;}
+		}else{return false;}
+	}
+	function InWard($enr,$loc_nr){
+		$this->enc_nr=$enr;
+		$this->loc_nr=$loc_nr;
+		return $this->_InLocation(2);
+	}
+	function InRoom($enr,$loc_nr){
+		$this->enc_nr=$enr;
+		$this->loc_nr=$loc_nr;
+		return $this->_InLocation(4);
+	}
+	function InBed($enr,$loc_nr){
+		$this->enc_nr=$enr;
+		$this->loc_nr=$loc_nr;
+		return $this->_InLocation(5);
+	}
+	function _setLocation($enr=0,$type_nr=0,$loc_nr=0,$group_nr,$date='',$time=''){
+		global $HTTP_SESSION_VARS;
+		//if(!($enr&&$type_nr&&$loc_nr)) return false;
+		if(empty($date)) $date=date('Y-m-d');
+		if(empty($time)) $time=date('H:i:s');
+		$user=$HTTP_SESSION_VARS['sess_user_name'];
+		$history="Create: ".date('Y-m-d H:i:s')." ".$user."\n";
+		$this->sql="INSERT INTO $this->tb_location (encounter_nr,type_nr,location_nr,group_nr,date_from,time_from,history,modify_id,create_id,create_time) 
+						VALUES 
+						('$enr','$type_nr','$loc_nr','$group_nr','$date','$time','$history','$user','$user',NULL)";
+		//echo $this->sql;
+		if($this->Transact($this->sql)) return true; else	echo $this->sql;
+		//return $this->Transact($this->sql);
+	}
+	function assignInWard($enr,$loc_nr,$group_nr,$date,$time){
+		return $this->_setLocation($enr,2,$loc_nr,$group_nr,$date,$time);
+	}
+	function assignInRoom($enr,$loc_nr,$group_nr,$date,$time){
+		return $this->_setLocation($enr,4,$loc_nr,$group_nr,$date,$time);
+	}
+	function assignInBed($enr,$loc_nr,$group_nr,$date,$time){
+		return $this->_setLocation($enr,5,$loc_nr,$group_nr,$date,$time);
+	}
+	function AdmitInWard($enr,$ward_nr,$room_nr,$bed_nr){
+		global $db;
+		
+		$date=date('Y-m-d');
+		$time=date('H:i:s');
+		if($this->InWard($enr,$ward_nr)){
+			$ok=true;
+		}else{
+			if($this->assignInWard($enr,$ward_nr,$ward_nr,$date,$time)){
+				$ok=true;
+			}else{$ok=false;}
+		}
+		if($this->InRoom($enr,$room_nr)){
+			$ok=true;
+		}else{
+			if($this->assignInRoom($enr,$room_nr,$ward_nr,$date,$time)){
+				$ok=true;
+			}else{$ok=false;}
+		}
+		if($ok&&!$this->InBed($enr,$bed_nr)){
+			if($this->assignInBed($enr,$bed_nr,$ward_nr,$date,$time)){
+				return true;
+			}else{return false;}
+		}else{
+			return false;
+		}
+	}
+	function _setCurrentAssignment($enr,$data){
+		$this->sql="UPDATE $this->tb_enc SET $data WHERE encounter_nr=$enr";
+		return $this->Transact($this->sql);
+	}
+	function setCurrentWard($enr,$assign_nr){
+		return $this->_setCurrentAssignment($enr,"current_ward_nr=$assign_nr");
+	}
+	function setCurrentRoom($enr,$assign_nr){
+		return $this->_setCurrentAssignment($enr,"current_room_nr=$assign_nr");
+	}
+	function setCurrentDept($enr,$assign_nr){
+		return $this->_setCurrentAssignment($enr,"current_dept_nr=$assign_nr");
+	}
+	function setCurrentFirm($enr,$assign_nr){
+		return $this->_setCurrentAssignment($enr,"current_firm_nr=$assign_nr");
+	}
+	function setCurrentAttdDr($enr,$assign_nr){
+		return $this->_setCurrentAssignment($enr,"current_att_dr_nr=$assign_nr");
+	}
+	function setInWard($enr){
+		return $this->_setCurrentAssignment($enr,'in_ward=1');
+	}
+	function setNotInWard($enr){
+		return $this->_setCurrentAssignment($enr,'in_ward=0');
+	}
+	function setAdmittedInWard($enr,$ward_nr,$room_nr,$bed_nr){
+		return $this->_setCurrentAssignment($enr,"current_ward_nr=$ward_nr,current_room_nr=$room_nr,in_ward=1");
+	}
+	/**
+	* Flags that the encounter is fully discharged
+	* Sets the is_discharged field of care_encounter table and clears the current department,ward,room fields
+	*/
+	function setIsDischarged($enr){
+		$this->sql="UPDATE $this->tb_enc SET is_discharged=1,current_ward_nr=0,current_room_nr=0,current_dept_nr=0,current_firm_nr=0,in_ward=0 WHERE encounter_nr=$enr AND NOT is_discharged";
+		//if($this->Transact($this->sql)) return true; else echo $this->sql;
+		return $this->Transact($this->sql);
+	}
+	/**
+	* Get the discharge types data
+	* return = ADODB dataset object if ok
+	* return = false if not ok
+	*/
+	function getDischargeTypesData(){
+		global $db;
+		$this->sql="SELECT nr,name,LD_var FROM $this->tb_dis_type WHERE 1 ORDER BY nr";
+		if($this->result=$db->Execute($this->sql)){
+			if($this->result->RecordCount()){
+				return $this->result;
+			}else{return false;}
+		}else{return false;}
+	}		
+	/**
+	* Complete discharge
+	* - private function
+	* Avoid using this function directly. Use the approprite API functions
+	*/
+	function _discharge($enr,$loc_types,$d_type_nr,$date='',$time=''){
+		global $HTTP_SESSION_VARS;
+		if(empty($date)) $date=date('Y-m-d');
+		if(empty($time)) $time=date('H:i:s');
+		$this->sql="UPDATE $this->tb_location
+							SET	discharge_type_nr=$d_type_nr,
+									date_to='$date',
+									time_to='$time',
+									history=CONCAT(history,'Update (discharged): ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n'),
+									modify_id='".$HTTP_SESSION_VARS['sess_user_name']."'
+							WHERE encounter_nr=$enr AND type_nr IN ($loc_types) AND date_to IN ('','0000-00-00')";
+		if($this->Transact($this->sql)) return true; else echo $this->sql;
+		//return $this->Transact($this->sql);
+	}
+	/**
+	* Complete discharge of patient from the hospital or clinic
+	*/
+	function Discharge($enr,$d_type_nr,$date='',$time=''){
+		if($this->_discharge($enr,"'1','2','3','4','5','6'",$d_type_nr,$date,$time)){
+			if($this->setIsDischarged($enr)){
+				return true;
+			}else{return false;}
+		}else{return false;}
+	}
+	/**
+	* Complete discharge of patient from the department, but patient remains current
+	*/
+	function DischargeFromDept($enr,$d_type_nr,$date='',$time=''){
+		if($this->_discharge($enr,"'1','2','3','4','5','6'",$d_type_nr,$date,$time)){
+			return true;
+		}else{return false;}
+	}
+	/**
+	* Complete discharge of patient from the ward but patient remains current
+	*/
+	function DischargeFromWard($enr,$d_type_nr,$date='',$time=''){
+		if($this->_discharge($enr,"'2','4','5','6'",$d_type_nr,$date,$time)){
+			return true;
+		}else{return false;}
+	}
+	/**
+	* Complete discharge of patient from the room but patient remains in ward
+	*/
+	function DischargeFromRoom($enr,$d_type_nr,$date='',$time=''){
+		if($this->_discharge($enr,"'4','5','6'",$d_type_nr,$date,$time)){
+			return true;
+		}else{return false;}
+	}
+	/**
+	* Complete discharge of patient from the bed but patient remains in room
+	* Alias of DischargeFromBed()
+	*/
+	function DischargeFromBed($enr,$d_type_nr,$date='',$time=''){
+		if($this->_discharge($enr,"'5'",$d_type_nr,$date,$time)){
+			return true;
+		}else{return false;}
+	}
+	function saveDischargeNotesFromArray(&$data_array){
+		$this->setTable($this->tb_notes);
+		$this->data_array=$data_array;
+		$this->setRefArray($this->fld_notes);
+		if($this->_insertNotesFromInternalArray(3)){ // 3 = discharge summary note type
+			return true;
+		}else{
+			return false;
 		}
 	}
 }

@@ -156,8 +156,9 @@ class Department extends Core {
 		}
 	}
 	
-	function preloadDept($nr){
+	function preloadDept($nr=0){
 	    global $db;
+		if(!$nr) return false;
 	    if ($this->result=$db->Execute("SELECT * FROM $this->tb WHERE nr=$nr")) {
 		    if ($this->dept_count=$this->result->RecordCount()) {
 		        $this->preload_dept=$this->result->FetchRow();

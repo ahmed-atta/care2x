@@ -33,7 +33,7 @@ class UserConfig {
 	function getConfig($user_id='default') {
 	    global $db;
 	
-		if(empty($user_id)) return _getDefault();
+		if(empty($user_id)) return $this->_getDefault();
 		
 	    if ($this->result=$db->Execute("SELECT serial_config_data FROM $this->tb WHERE user_id='$user_id'")) {
 		    if ($this->result->RecordCount()) {
@@ -43,7 +43,7 @@ class UserConfig {
 				//while(list($x,$v)=each($this->buffer)) echo $x.'>'.$v.'<br>';
 			   // return $this->buffer;
 			} else {
-				return _getDefault();
+				return $this->_getDefault();
 			}
 		}
 		else {

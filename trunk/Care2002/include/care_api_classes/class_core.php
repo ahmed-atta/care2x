@@ -14,6 +14,7 @@ class Core {
 	var $buffer_array=array();
 	var $result;
 	var $where;
+	var $do_intern;
 	
 	function setTable($table) {
 	    $this->coretable=$table;
@@ -26,6 +27,17 @@ class Core {
 	function setDataArray(&$array){
 	    $this->data_array=$array;
 	}
+	
+	function _RecordExists($cond=''){
+		global $db;
+		if(empty($cond)) return false;
+		if($this->result=$db->Execute("SELECT * FROM $this->coretable WHERE $cond")){
+			if($this->result->RecordCount()){
+				return true;
+			}else{return false;}
+		}else{return false;}
+	}
+			
 	
 	function Transact() {
 	
@@ -48,7 +60,9 @@ class Core {
 		//$this->buffer_array=NULL;
 		while(list($x,$v)=each($this->ref_array)) {
 	       // if(isset($this->data_array[$v])&&!empty($this->data_array[$v])) $this->buffer_array[$v]=$this->data_array[$v];
-	        if(isset($this->data_array[$v])) { $this->buffer_array[$v]=$this->data_array[$v]; }
+	        if(isset($this->data_array[$v])) { 
+				$this->buffer_array[$v]=$this->data_array[$v]; //echo  $this->buffer_array[$v].'<br>';
+			}
 	    }
 		reset($this->ref_array);
 		return 1;
@@ -117,14 +131,14 @@ class Core {
 			if(stristr($v,'null')) $values.='NULL,';
 				else $values.="'$v',";
 		}
+		reset($array);
 		$index=substr_replace($index,'',(strlen($index))-1);
 		$values=substr_replace($values,'',(strlen($values))-1);
         $this->sql="INSERT INTO $this->coretable ($index) VALUES ($values)";		
-		//echo $this->sql;exit;
+		//echo $this->sql;//exit;
 		reset($array);
 		return $this->Transact();
 	}
-
     function updateDataFromArray(&$array,$item_nr='') {
 		$x='';
 		$v='';
@@ -135,19 +149,24 @@ class Core {
 		if(stristr($v,'concat')||stristr($v,'null')) $elems.="$x= $v,";
 		    else $elems.="$x='$v',";
 		}
+		reset($array);
+		//echo strlen($elems)." leng<br>";
 		$elems=substr_replace($elems,'',(strlen($elems))-1);
 		if(empty($this->where)) $this->where="nr=$item_nr";
         $this->sql="UPDATE $this->coretable SET $elems WHERE $this->where";
-		//echo $this->sql;
+		$this->where=''; // reset the condition variable
+		//echo $this->sql.'<br>';
 		return $this->Transact();
 	}
-
     function updateDataFromInternalArray($item_nr='') {
-	    //$this->data_array=NULL;
-		//echo $item_nr;
 		if(empty($item_nr)||!is_numeric($item_nr)) return false;
 	    $this->_prepSaveArray();
 		return $this->updateDataFromArray($this->buffer_array,$item_nr);
 	}
-	
+	function getLastQuery(){
+		return $this->sql;
+	}
+	function setWhereCondition($cond){
+		$this->where=$cond;
+	}
 }

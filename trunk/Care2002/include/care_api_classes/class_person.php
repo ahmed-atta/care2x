@@ -374,7 +374,5 @@ class Person {
 		if($db->Execute($this->sql)) {return true;}
 		   else  {echo $this->sql;return false;}
 	}		
-
-	
 }
 ?>
