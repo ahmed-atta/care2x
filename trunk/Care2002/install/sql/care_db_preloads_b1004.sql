@@ -1,3 +1,12 @@
+# phpMyAdmin MySQL-Dump
+# version 2.3.2
+# http://www.phpmyadmin.net/ (download page)
+#
+# Host: localhost
+# Generation Time: Apr 21, 2003 at 12:17 AM
+# Server version: 3.22.34
+# PHP Version: 4.0.4pl1/**/
+# Database : xxxxx
 
 #
 # Dumping data for table care_category_diagnosis
@@ -71,6 +80,27 @@ INSERT INTO care_class_therapy VALUES (7, '2', 'tpn', 'TPN', 'LDTPN', '', '', ''
 INSERT INTO care_class_therapy VALUES (8, '2', 'hie', 'HIE', 'LDHIE', '', '', '', 00000000000000, '', 00000000000000);
 
 #
+# Dumping data for table care_complication
+#
+
+INSERT INTO care_complication VALUES (1, 1, 'Previous C/S', 'LDPreviousCS', '', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_complication VALUES (2, 1, 'Pre-eclampsia', 'LDPreEclampsia', '', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_complication VALUES (3, 1, 'Eclampsia', 'LDEclampsia', '', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_complication VALUES (4, 1, 'Other hypertension', 'LDOtherHypertension', '', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_complication VALUES (5, 1, 'Other proteinuria', 'LDProteinuria', '', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_complication VALUES (6, 1, 'Cardiac', 'LDCardiac', '', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_complication VALUES (7, 1, 'Anaemia < 8.5g', 'LDAnaemia', '', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_complication VALUES (8, 1, 'Asthma', 'LDAsthma', '', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_complication VALUES (9, 1, 'Epilepsy', 'LDEpilepsy', '', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_complication VALUES (10, 1, 'Placenta praevia', 'LDPlacentaPraevia', '', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_complication VALUES (11, 1, 'Abruptio placentae', 'LDAbruptioPlacentae', '', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_complication VALUES (12, 1, 'Other APH', 'LDOtherAPH', '', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_complication VALUES (13, 1, 'Diabetes', 'LDDiabetes', '', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_complication VALUES (14, 1, 'Cord prolapse', 'LDCordProlapse', '', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_complication VALUES (15, 1, 'Ruptured uterus', 'LDRupturedUterus', '', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_complication VALUES (16, 1, 'Extrauterine pregnancy', 'LDExtraUterinePregnancy', '', '', '', '', 00000000000000, '', 00000000000000);
+
+#
 # Dumping data for table care_config_global
 #
 
@@ -87,24 +117,24 @@ INSERT INTO care_config_global VALUES ('main_info_email', 'contact@care2x.com', 
 INSERT INTO care_config_global VALUES ('person_id_nr_adder', '10000000', '', '', '', '', 20030105033839, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('patient_outpatient_nr_adder', '20800000', '', '', '', '', 20030105033839, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('patient_inpatient_nr_adder', '22000000', '', '', '', '', 20030105033839, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_name_2_hide', '1',  NULL,  NULL, '', '', 20030322190927, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_name_3_hide', '1',  NULL,  NULL, '', '', 20030322190927, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_name_middle_hide', '0',  NULL,  NULL, '', '', 20030322190927, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_name_maiden_hide', '1',  NULL,  NULL, '', '', 20030322190927, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_ethnic_orig_hide', '1',  NULL,  NULL, '', '', 20030322190927, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_name_others_hide', '1',  NULL,  NULL, '', '', 20030322190927, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_nat_id_nr_hide', '1',  NULL,  NULL, '', '', 20030322190927, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_religion_hide', '0',  NULL,  NULL, '', '', 20030322190927, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_cellphone_2_nr_hide', '1',  NULL,  NULL, '', '', 20030322190927, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_phone_2_nr_hide', '1',  NULL,  NULL, '', '', 20030322190927, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_citizenship_hide', '1',  NULL,  NULL, '', '', 20030322190927, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_sss_nr_hide', '1',  NULL,  NULL, '', '', 20030322190927, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('language_default', 'id',  NULL,  NULL, '', '', 20030223163019, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('language_single', '0',  NULL,  NULL, '', '', 20030223163019, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_name_2_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_name_3_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_name_middle_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_name_maiden_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_ethnic_orig_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_name_others_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_nat_id_nr_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_religion_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_cellphone_2_nr_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_phone_2_nr_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_citizenship_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_sss_nr_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('language_default', 'id',  NULL,  NULL, '', '', 20030329212253, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('language_single', '0',  NULL,  NULL, '', '', 20030329212253, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('mascot_hide', '', '', '', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('mascot_style', 'default', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('gui_frame_left_nav_width', '150',  NULL,  NULL, '', '', 20030223163019, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('gui_frame_left_nav_border', '1',  NULL,  NULL, '', '', 20030223163019, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('gui_frame_left_nav_width', '150',  NULL,  NULL, '', '', 20030329212253, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('gui_frame_left_nav_border', '1',  NULL,  NULL, '', '', 20030329212253, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('news_fotos_path', 'fotos/news/', '', '', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('news_headline_title_font_size', '5', '', '', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('news_headline_title_font_face', 'arial,verdana,helvetica,sans serif', '', '', '', '', 00000000000000, '', 00000000000000);
@@ -119,23 +149,24 @@ INSERT INTO care_config_global VALUES ('news_normal_preview_maxlen', '600', '', 
 INSERT INTO care_config_global VALUES ('news_headline_title_font_bold', '1', '', '', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('news_headline_preface_font_bold', '1', '', '', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('news_normal_display_width', '500', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_fax_hide', '0',  NULL,  NULL, '', '', 20030322190927, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_email_hide', '0',  NULL,  NULL, '', '', 20030322190927, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_phone_1_nr_hide', '0',  NULL,  NULL, '', '', 20030322190927, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_cellphone_1_nr_hide', '0',  NULL,  NULL, '', '', 20030322190927, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_fax_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_email_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_phone_1_nr_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_cellphone_1_nr_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('person_foto_path', 'fotos/registration/', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_service_care_hide', '1',  NULL,  NULL, '', '', 20030322190927, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_service_room_hide', '1',  NULL,  NULL, '', '', 20030322190927, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_service_att_dr_hide', '1',  NULL,  NULL, '', '', 20030322190927, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('patient_service_care_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('patient_service_room_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('patient_service_att_dr_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('patient_financial_class_single_result', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_name_2_show', '1',  NULL,  NULL, '', '', 20030322190927, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_name_3_show', '1',  NULL,  NULL, '', '', 20030322190927, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_name_middle_show', '1',  NULL,  NULL, '', '', 20030322190927, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('theme_control_buttons', 'blue_aqua',  NULL,  NULL, '', '', 20030301185336, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('gui_frame_left_nav_bdcolor', '#990000',  NULL,  NULL, '', '', 20030223163019, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('patient_name_2_show', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('patient_name_3_show', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('patient_name_middle_show', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('theme_control_buttons', 'blue_aqua',  NULL,  NULL, '', '', 20030329210153, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('gui_frame_left_nav_bdcolor', '#990000',  NULL,  NULL, '', '', 20030329212253, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('theme_control_theme_list', 'default,blue_aqua', '', '', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('medocs_text_preview_maxlen', '100', '', '', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('personell_nr_adder', '100000', '', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('notes_preview_maxlen', '120',  NULL,  NULL, '', '', 20030413100412, '', 20030412201004);
 
 #
 # Dumping data for table care_config_user
@@ -207,25 +238,26 @@ INSERT INTO care_department VALUES (43, 'blood_bank', '1', 'Blood Bank', 'Blood 
 # Dumping data for table care_menu_main
 #
 
-INSERT INTO care_menu_main VALUES ('1', '1', 'LDHome', 'main/startframe.php', '1', '', '', 20030223021512, 00000000000000);
-INSERT INTO care_menu_main VALUES ('2', '5', 'LDPatient', 'modules/registration_admission/patient.php', '1', '', '', 20030223021747, 00000000000000);
-INSERT INTO care_menu_main VALUES ('3', '10', 'LDAdmission', 'modules/registration_admission/aufnahme_pass.php', '1', '', '', 20030223021826, 00000000000000);
-INSERT INTO care_menu_main VALUES ('4', '15', 'LDAmbulatory', 'modules/ambulatory/ambulatory.php', '1', '', '', 20030223021826, 00000000000000);
-INSERT INTO care_menu_main VALUES ('5', '20', 'LDMedocs', 'modules/medocs/medocs_pass.php', '1', '', '', 20030223021826, 00000000000000);
-INSERT INTO care_menu_main VALUES ('6', '25', 'LDDoctors', 'modules/doctors/doctors.php', '1', '', '', 20030223021747, 00000000000000);
-INSERT INTO care_menu_main VALUES ('7', '35', 'LDNursing', 'modules/nursing/nursing.php', '1', '', '', 20030223021747, 00000000000000);
-INSERT INTO care_menu_main VALUES ('8', '40', 'LDOR', 'main/op-doku.php', '1', '', '', 20030223021747, 00000000000000);
-INSERT INTO care_menu_main VALUES ('9', '45', 'LDLabs', 'modules/laboratory/labor.php', '1', '', '', 20030223021747, 00000000000000);
-INSERT INTO care_menu_main VALUES ('10', '50', 'LDRadiology', 'modules/radiology/radiolog.php', '1', '', '', 20030223021747, 00000000000000);
-INSERT INTO care_menu_main VALUES ('11', '55', 'LDPharmacy', 'modules/pharmacy/apotheke.php', '1', '', '', 20030223021747, 00000000000000);
-INSERT INTO care_menu_main VALUES ('12', '60', 'LDMedDepot', 'modules/med_depot/medlager.php', '1', '', '', 20030223021747, 00000000000000);
-INSERT INTO care_menu_main VALUES ('13', '65', 'LDDirectory', 'modules/phone_directory/phone.php', '1', '', '', 20030223021747, 00000000000000);
-INSERT INTO care_menu_main VALUES ('14', '70', 'LDTechSupport', 'modules/tech/technik.php', '1', '', '', 20030223021747, 00000000000000);
-INSERT INTO care_menu_main VALUES ('15', '72', 'LDEDP', 'modules/system_admin/edv.php', '1', '', '', 20030223144145, 00000000000000);
-INSERT INTO care_menu_main VALUES ('16', '75', 'LDIntraEmail', 'modules/intranet_email/intra-email-pass.php', '1', '', '', 20030223021826, 00000000000000);
-INSERT INTO care_menu_main VALUES ('17', '80', 'LDInterEmail', 'modules/nocc/index.php', '1', '', '', 20030223021826, 00000000000000);
-INSERT INTO care_menu_main VALUES ('18', '85', 'LDSpecials', 'main/spediens.php', '1', '', '', 20030223021747, 00000000000000);
-INSERT INTO care_menu_main VALUES ('19', '90', 'LDLogin', 'main/login.php', '1', '', '', 20030223021747, 00000000000000);
+INSERT INTO care_menu_main VALUES ('1', '1', 'Home', 'LDHome', 'main/startframe.php', '1', '', '', 20030405003640, 00000000000000);
+INSERT INTO care_menu_main VALUES ('2', '5', 'Patient', 'LDPatient', 'modules/registration_admission/patient.php', '1', '', '', 20030405003710, 00000000000000);
+INSERT INTO care_menu_main VALUES ('3', '10', 'Admission', 'LDAdmission', 'modules/registration_admission/aufnahme_pass.php', '1', '', '', 20030405003723, 00000000000000);
+INSERT INTO care_menu_main VALUES ('4', '15', 'Ambulatory', 'LDAmbulatory', 'modules/ambulatory/ambulatory.php', '1', '', '', 20030405003740, 00000000000000);
+INSERT INTO care_menu_main VALUES ('5', '20', 'Medocs', 'LDMedocs', 'modules/medocs/medocs_pass.php', '1', '', '', 20030405003755, 00000000000000);
+INSERT INTO care_menu_main VALUES ('6', '25', 'Doctors', 'LDDoctors', 'modules/doctors/doctors.php', '1', '', '', 20030405003814, 00000000000000);
+INSERT INTO care_menu_main VALUES ('7', '35', 'Nursing', 'LDNursing', 'modules/nursing/nursing.php', '1', '', '', 20030405003828, 00000000000000);
+INSERT INTO care_menu_main VALUES ('8', '40', 'OR', 'LDOR', 'main/op-doku.php', '1', '', '', 20030405003839, 00000000000000);
+INSERT INTO care_menu_main VALUES ('9', '45', 'Laboratories', 'LDLabs', 'modules/laboratory/labor.php', '1', '', '', 20030405003853, 00000000000000);
+INSERT INTO care_menu_main VALUES ('10', '50', 'Radiology', 'LDRadiology', 'modules/radiology/radiolog.php', '1', '', '', 20030405003906, 00000000000000);
+INSERT INTO care_menu_main VALUES ('11', '55', 'Pharmacy', 'LDPharmacy', 'modules/pharmacy/apotheke.php', '1', '', '', 20030405003922, 00000000000000);
+INSERT INTO care_menu_main VALUES ('12', '60', 'Medical Depot', 'LDMedDepot', 'modules/med_depot/medlager.php', '1', '', '', 20030405003937, 00000000000000);
+INSERT INTO care_menu_main VALUES ('13', '65', 'Directory', 'LDDirectory', 'modules/phone_directory/phone.php', '1', '', '', 20030405003952, 00000000000000);
+INSERT INTO care_menu_main VALUES ('14', '70', 'Tech Support', 'LDTechSupport', 'modules/tech/technik.php', '1', '', '', 20030405004050, 00000000000000);
+INSERT INTO care_menu_main VALUES ('15', '72', 'EDP', 'LDEDP', 'modules/system_admin/edv.php', '1', '', '', 20030405004102, 00000000000000);
+INSERT INTO care_menu_main VALUES ('16', '75', 'Intranet Email', 'LDIntraEmail', 'modules/intranet_email/intra-email-pass.php', '1', '', '', 20030405004116, 00000000000000);
+INSERT INTO care_menu_main VALUES ('17', '80', 'Internet Email', 'LDInterEmail', 'modules/nocc/index.php', '1', '', '', 20030405004128, 00000000000000);
+INSERT INTO care_menu_main VALUES ('18', '85', 'Special Tools', 'LDSpecials', 'main/spediens.php', '1', '', '', 20030405004142, 00000000000000);
+INSERT INTO care_menu_main VALUES ('19', '90', 'Login', 'LDLogin', 'main/login.php', '1', '', '', 20030405004151, 00000000000000);
+INSERT INTO care_menu_main VALUES ('20', '7', 'Appointments', 'LDAppointments', 'modules/appointment_scheduler/appt_main_pass.php', '1', '',  NULL, 20030407233801, 20030405000145);
 
 #
 # Dumping data for table care_method_induction
@@ -285,16 +317,6 @@ INSERT INTO care_role_person VALUES (16, '0', 'nurse', 'Nurse', 'LDNurse', '', '
 INSERT INTO care_role_person VALUES (17, '0', 'doctor', 'Doctor', 'LDDoctor', '', '', 00000000000000, '', 00000000000000);
 
 #
-# Dumping data for table care_station2dept
-#
-
-INSERT INTO care_station2dept VALUES ('augen', 'p2a p2b', '0');
-INSERT INTO care_station2dept VALUES ('hno', 'm4a m4b m4c m4d', '0');
-INSERT INTO care_station2dept VALUES ('hnop', 'm4a m4b m4c m4d', '1');
-INSERT INTO care_station2dept VALUES ('plast', 'p3a p3b p4a p4b', '0');
-INSERT INTO care_station2dept VALUES ('plop', 'p3a p3b p4a p4b', '1');
-
-#
 # Dumping data for table care_type_application
 #
 
@@ -328,7 +350,7 @@ INSERT INTO care_type_cause_opdelay VALUES (2, 'nurse', 'Nurses were delayed', '
 INSERT INTO care_type_cause_opdelay VALUES (3, 'surgeon', 'Surgeons were delayed', 'LDSurgeonsDelayed', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_type_cause_opdelay VALUES (4, 'cleaning', 'Cleaning delayed', 'LDCleaningDelayed', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_type_cause_opdelay VALUES (5, 'anesthesia', 'Anesthesiologist was delayed', 'LDAnesthesiologistDelayed', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_cause_opdelay VALUES (0, 'other', 'Other causes', 'LDOtherCauses', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_type_cause_opdelay VALUES (99, 'other', 'Other causes', 'LDOtherCauses', '', '', 00000000000000, '', 00000000000000);
 
 #
 # Dumping data for table care_type_color
@@ -356,6 +378,18 @@ INSERT INTO care_type_color VALUES ('rose', 'rose', 'LDrose', '', '', 0000000000
 INSERT INTO care_type_department VALUES (1, 'medical', 'Medical', 'LDMedical', 'Medical, Nursing, Diagnostics, Labs, OR', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_type_department VALUES (2, 'support', 'Support (non-medical)', 'LDSupport', 'non-medical departments', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_type_department VALUES (3, 'news', 'News', 'LDNews', 'News group or category', '', '', 00000000000000, '', 00000000000000);
+
+#
+# Dumping data for table care_type_discharge
+#
+
+INSERT INTO care_type_discharge VALUES (1, 'regular', 'Regular discharge', 'LDRegularRelease',  NULL, '', 20030415010555, '', 20030413121226);
+INSERT INTO care_type_discharge VALUES (2, 'own', 'Patient left hospital on his own will', 'LDSelfRelease',  NULL, '', 20030415010606, '', 20030413121317);
+INSERT INTO care_type_discharge VALUES (3, 'emergency', 'Emergency discharge', 'LDEmRelease',  NULL, '', 20030415010617, '', 20030413121452);
+INSERT INTO care_type_discharge VALUES (4, 'change_ward', 'Change of ward', 'LDChangeWard',  NULL, '', 00000000000000, '', 20030413121526);
+INSERT INTO care_type_discharge VALUES (6, 'change_bed', 'Change of bed', 'LDChangeBed',  NULL, '', 20030415000942, '', 20030413121619);
+INSERT INTO care_type_discharge VALUES (7, 'death', 'Death of patient', 'LDPatientDied',  NULL, '', 20030415010642, '', 00000000000000);
+INSERT INTO care_type_discharge VALUES (5, 'change_room', 'Change of room', 'LDChangeRoom',  NULL, '', 20030415010659, '', 00000000000000);
 
 #
 # Dumping data for table care_type_duty
@@ -473,6 +507,7 @@ INSERT INTO care_type_measurement VALUES (4, 'fluid_intake', 'Fluid intake', 'LD
 INSERT INTO care_type_measurement VALUES (5, 'fluid_output', 'Fluid output', 'LDFluidOutput', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_type_measurement VALUES (6, 'weight', 'Weight', 'LDWeight', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_type_measurement VALUES (7, 'height', 'Height', 'LDHeight', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_type_measurement VALUES (8, 'bp_composite', 'Sys/Dias', 'LDSysDias',  NULL, '', 20030419143920, '', 20030419143920);
 
 #
 # Dumping data for table care_type_notes
@@ -484,11 +519,10 @@ INSERT INTO care_type_notes VALUES (3, 'discharge', 'Discharge summary', 'LDDisc
 INSERT INTO care_type_notes VALUES (4, 'consult', 'Consultation notes', 'LDConsultNotes', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_type_notes VALUES (5, 'op', 'Operation notes', 'LDOpNotes', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_type_notes VALUES (6, 'daily_ward', 'Daily ward\'s notes', 'LDDailyNurseNotes', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_notes VALUES (22, 'other', 'Other', 'LDOther', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_notes VALUES (7, 'chart_notes', 'Chart notes', 'LDChartNotes', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_notes VALUES (8, 'chart_notes_etc', 'PT,ATG,etc.', 'LDPTATGetc', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_notes VALUES (9, 'iv', 'IV daily notes', 'LDIVDailyNotes', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_notes VALUES (10, 'anticoag', 'Anticoagulant daily notes', 'LDAnticoagDailyNotes', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_type_notes VALUES (7, 'daily_chart_notes', 'Chart notes', 'LDChartNotes', '', '', 20030419114423, '', 00000000000000);
+INSERT INTO care_type_notes VALUES (8, 'chart_notes_etc', 'PT,ATG,etc. daily notes', 'LDPTATGetc', '', '', 20030419114204, '', 00000000000000);
+INSERT INTO care_type_notes VALUES (9, 'daily_iv_notes', 'IV daily notes', 'LDIVDailyNotes', '', '', 20030419114619, '', 00000000000000);
+INSERT INTO care_type_notes VALUES (10, 'daily_anticoag', 'Anticoagulant daily notes', 'LDAnticoagDailyNotes', '', '', 20030419111909, '', 00000000000000);
 INSERT INTO care_type_notes VALUES (11, 'lot_charge_nr', 'Material LOT, Charge Nr.', 'LDMaterialLOTChargeNr', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_type_notes VALUES (12, 'text_diagnosis', 'Diagnosis text', 'LDDiagnosis', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_type_notes VALUES (13, 'text_therapy', 'Therapy text', 'LDTherapy', '', '', 00000000000000, '', 00000000000000);
@@ -500,6 +534,9 @@ INSERT INTO care_type_notes VALUES (18, 'nursing_inquiry', 'Inquiry to doctor', 
 INSERT INTO care_type_notes VALUES (19, 'doctor_directive', 'Doctor\'s directive', 'LDDoctorDirective', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_type_notes VALUES (20, 'problem', 'Problem', 'LDProblem', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_type_notes VALUES (21, 'development', 'Development', 'LDDevelopment', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_type_notes VALUES (22, 'allergy', 'Allergy', 'LDAllergy',  NULL, '', 00000000000000, '', 00000000000000);
+INSERT INTO care_type_notes VALUES (23, 'daily_diet', 'Diet plan', 'LDDietPlan', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_type_notes VALUES (99, 'other', 'Other', 'LDOther', '', '', 20030420000747, '', 00000000000000);
 
 #
 # Dumping data for table care_type_outcome
@@ -566,6 +603,8 @@ INSERT INTO care_type_time VALUES (7, 'bandage', 'Bandage', 'LDBandage', 'Times 
 INSERT INTO care_type_unit_measurement VALUES (1, 'volume', 'Volume', 'LDVolume', '', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_type_unit_measurement VALUES (2, 'weight', 'Weight', 'LDWeight', '', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_type_unit_measurement VALUES (3, 'length', 'Length', 'LDLength', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_type_unit_measurement VALUES (4, 'pressure', 'Pressure', 'LDPressure', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_type_unit_measurement VALUES (5, 'temperature', 'Temperature', 'LDTemperature', '', '', '', 20030419144724, '', 20030419144724);
 
 #
 # Dumping data for table care_unit_measurement
@@ -583,6 +622,14 @@ INSERT INTO care_unit_measurement VALUES (9, 3, 'km', 'kilometer', 'LDKilometer'
 INSERT INTO care_unit_measurement VALUES (10, 3, 'in', 'inch', 'LDInch', 'english',  NULL, '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_unit_measurement VALUES (11, 3, 'ft', 'foot', 'LDFoot', 'english',  NULL, '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_unit_measurement VALUES (12, 3, 'yd', 'yard', 'LDYard', 'english',  NULL, '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_unit_measurement VALUES (14, 4, 'mmHg', 'mmHg', 'LDmmHg', 'metric',  NULL, '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_unit_measurement VALUES (15, 5, 'celsius', 'Celsius', 'LDCelsius', 'metric',  NULL, '', '', 00000000000000, '', 00000000000000);
+
+#
+# Dumping data for table care_users
+#
+
+INSERT INTO care_users VALUES ('admin','admin', 'admin', '0', 'System_Admin', '1', '0000-00-00', '00:00:00', '0000-00-00', '00:00:00', '', '', '', 20021016154505, '', 00000000000000);
 
 #
 # Dumping data for table care_version
