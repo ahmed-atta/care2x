@@ -191,6 +191,7 @@ $LDReset='Eingabe verwerfen';
 
 $LDNoLabReport='Kein Laborbefund vorhanden!';
 $LDFeverCurve='Patientenkurve';
+$LDICDneu='neues ICD-Modul';
 $LDNursingReport='Pflegebericht';
 $LDDocsPrescription='Arztanordnung';
 $LDNursingPlan='Pflegeplanung';

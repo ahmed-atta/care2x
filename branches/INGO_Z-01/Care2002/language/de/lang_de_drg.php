@@ -23,6 +23,7 @@ $LDLocalization='Lok.';
 $LDOpsIntern='Schlüssel';
 $LDSearchCodes='Suchen nach Schlüsseln';
 $LDQuickList='Schnellliste';
+$LDPatientList='Patientenliste';
 $LDConvert2IcdOps='-> ICD/OPS';
 $LDSearch='Suchen';
 $LDOperation='Beschreibung';
@@ -36,6 +37,7 @@ $LDBoth='Beide';  // B = beide bzw. beide Seiten
 
 $LDDeleteEntry='Eintrag löschen';
 $LDNoQuickList='Die Schnellliste ist momentan leer.';
+$LDNoPatientList='Dieser Patient hatte noch keine Diagnosen.';
 $LDClick2Search='Bitte clicken Sie hier an zum Suchen.';
 
 $LDPossibleCodes='Mögliche ICD & OPS Schlüsselnummer';
@@ -47,12 +49,16 @@ $LDMostResponsible='Hauptdiagnose';
 $LDAssociated='Nebendiagnose';
 $LDNosocomial='Nosokomial';
 $LDIatrogenic='Iatrogen';
+$LDUeberweisung='Überweisung';
+$LDAU_Bescheinigung='AU-Bescheinigung';
 $LDOther='Andere';
 $LDMostResp_s='H';
 $LDAssociated_s='N';
 $LDNosocomial_s='Ns';
 $LDIatrogenic_s='I';
 $LDOther_s='A';
+$LDUeberweisung_s='Ü';
+$LDAU_Bescheinigung_s='AU';
 
 $LDBothSides='Beide Seiten';
 $LDLeft_s='L';
