@@ -1,43 +1,42 @@
 <?php
-$LDClose="Close";
-$LDCancel="Cancel";
-$LDResetEntry="Erase entries";
-$LDSave="Save";
-$LDReset="Reset";
+$LDClose='Fermer';
+$LDCancel='Annuler';
+$LDResetEntry='Effacer les entrées';
+$LDSave='Sauver';
+$LDReset='Reinitialiser';
 
+$LDEnterData='Cliquez pour entrer les données';
+$LDClk2See='Cliquer pour voir les données';
+$LDFoundPatient='La recherche a trouvé <b>~nr~</b> patient(s)';
+$LDWildCards='Ce que sont les wildcards et comment les utiliser';
+$LDNewSearch='Nouvelle recherche';
+$LDSearch='Recherche';
 
-$LDEnterData="Click to enter data";
-$LDClk2See="Click to see data";
-$LDFoundPatient="The search found <b>~nr~</b> patients";
-$LDWildCards="What are wildcards and how to use them";
-$LDNewSearch="New search";
-$LDSearch="Search";
+$LDOClock=' ';
+$LDContinue='Continuer';
+$LDBack='Précédent';
 
-$LDOClock="o'clock";
-$LDContinue="Continue";
-$LDBack="Go back";
+$LDOn='Sur';
+$LDAt='at';
+$LDClk2Edit='Cliquer pour éditer ce rapport';
 
-$LDOn="On";
-$LDAt="At";
-$LDClk2Edit="Click to edit this report";
+$LDNew='Nouveau';
+$LDEdit='Editer';
+$LDCreate='Crèer';
+$LDValue='Valeur';
 
-$LDNew="New";
-$LDEdit="Edit";
-$LDCreate="Create";
-$LDValue="Value";
+$LDNews='Nouvelles';
+$LDNewsTxt='Lire ou Ecrire de nouveaux articles concernanrt le department EDP';
+$LDMemo='Memo';
+$LDMemoTxt='Lire ou Ecrire un memo';
+$LDSearchPat='Rechercher un  patient';
+$LDCategory='Categories';
+$LDPast3Days='Les trois derniers jours';
+$LDPast3Months='Les trois derniers mois';
+$LDPastAll='Tous';
+$LDSelect='Selectionner';
 
-$LDNews="News";
-$LDNewsTxt="Read or write news articles pertaining to edp department";
-$LDMemo="Memo";
-$LDMemoTxt="Read or write a memo";
-$LDSearchPat="Search patient";
-$LDCategory="Category";
-$LDPast3Days="Past 3 days";
-$LDPast3Months="Past 3 months";
-$LDPastAll="All";
-$LDSelect="Select";
-
-$LDOrderArchive="Archive";
+$LDOrderArchive='Archive';
 
 
 
@@ -47,7 +46,7 @@ $LDClk2SeeInfo="Please click the right one to see the complete information";
 $LDFoundNrData="The search found <font color=red><b>~nr~</b></font> data that corresponded to the search keyword.";
 $LDOpenInfo="Show complete information about ";
 
-$LDGoodMorning="Good morning";
+$LDGoodMorning="Bonjour";
 $LDGoodDay="Hello, nice to see you";
 $LDGoodEvening="Good evening";
 
@@ -190,4 +189,145 @@ $LDUserInfoNoSave='The access creation failed. Please check the entered informat
 $LDNoAreas='You have not selected any area!';
 $LDUserDouble='The access creation failed. Please use a different user login name.';
 $LDEnterNewUser='Create a new user access';
+/* 2003-02-21 EL*/
+$LDMenuItem='Menu item';
+$LDOrderNr='Sort nr.';
+$LDStatus='Status';
+$LDHideBy='Hide by:';
+$LDPath='Path';
+$LDVisible='Visible';
+$LDFrameResizable='Frame is resizable';
+$LDBorderColor='Border color';
+$LDBorderWidth='Border width';
+$LDFrameWidth='Frame width';
+$LDNo='No';
+$LDYes='Yes';
+$LDAllowMultiLang='Allow multiple language choice';
+$LDDefaultLang='Default language (if multi-language is not allowed)';
+/* 2003-02-22 EL*/
+$LDMainMenuItems='Main menu items';
+$LDMainMenuDisplay='Main menu display';
+$LDDataEntryForms='Data entry forms';
+$LDControlButImg='Control buttons & images';
+$LDSampleButtons='Sample buttons';
+$LDTheme='Theme';
+$LDItem='Item';
+/* 2003-02-26- EL*/
+$LDDeptAdmin='Department Administration';
+$LDNewDept='Create and configure new departments';
+$LDShowDeptInfo ='Department Profiles';
+$LDShowDeptInfoTxt='Display profile information of existing active departments';
+$LDConfigOptions='Configuration options';
+$LDDeptConfigOptions='Configuration, update info, deactivate, activate, hide and unhide departments';
+$LDDescription='Description';
+/* 2003-023-01 EL*/
+$LDFormalName='Formal Name';
+$LDInternalID='Internal ID Code';
+$LDPlsSelect='Please select one';
+$LDTypeDept='Type of Department';
+$LDIsSubDept='Is this a sub-department ?';
+$LDParentDept='Parent Department';
+$LDLangVariable='Language variable';
+$LDShortName='Short Name';
+$LDAlternateName='Alternate Name';
+$LDAdmitsOutpatients='Admits outpatients ?';
+$LDAdmitsInpatients='Admits inpatients ?';
+$LDBelongsToInst='Belongs to this institution ?';
+$LDWorkHrs='Working hours';
+$LDConsultationHrs='Consultation Hours';
+$LDSigLine='Signature Line';
+$LDSigStampTxt='Signature Stamp Text';
+$LDDeptLogo='Department\'s Logo';
+$LDHidden='Hidden';
+$LDNormal='Normal';
+$LDInactive='Inactive';
+$LDActive='Active';
+$LDDeptStatus='Department\'s status';
+$LDRecordStatus='Record\'s status';
+/* 2003-03-30 EL*/
+$LDConfigOptions='Configuration Options';
+$LDDoesSurgeryOp='Does operative surgery?';
+$LDList='List';
+$LDUpdate='Update';
+# 2003-08-03 EL
+$LDFindEmployee='Find an employee';
+#2003-10-27 EL
+$LDMainMenu='Main menu';
+$LDHideShow='Hide/show';
+$LDSortOrder='sort order';
+$LDAdminIndex='Admin index';
+$LDUsers='Users';
+$LDCreateEditLock='Create, edit, lock';
+$LDDatabase='Database';
+$LDPhpMyAdmin='PhpMyAdmin';
+$LDGeneral='General';
+$LDQuickInformer='Quick informer';
+$LDEnterInfo='Please edit or enter the information. Then click "Save".';
+$LDPaginatorMaxRows='Paginator max rows';
+
+#2003-10-28 EL
+$LDAddressList='Address list';
+$LDAddressListTxt='When the address list is displayed in the  address manager module.';
+$LDAddressSearch='Address search';
+$LDAddressSearchTxt='When the search for addresses returns a list';
+$LDInsuranceList='Insurance companies list';
+$LDInsuranceListTxt='When the insurance companies list is displayed in the insurance company module.';
+$LDInsuranceSearch='Insurance search';
+$LDInsuranceSearchTxt='When the search for insurance company returns a list.';
+$LDPersonnelSearch='Employee search';
+$LDPersonnelSearchTxt='When the search for an employee returns a list.';
+$LDPersonnelList='Employee list';
+$LDPersonnelListTxt='When the employees list is displayed in the personnel manager module.';
+$LDPersonSearch='Person search';
+$LDPersonSearchTxt='When the search for a person returns a list.';
+$LDPatientSearch='Patient search';
+$LDPatientSearchTxt='When the search for a patient returns a list.';
+$LDORPatientSearch='Patient for operation search';
+$LDORPatientSearchTxt='When the search for patient for operation returns a list. 
+This value is usually less than 10 due to a narrow display space in the OR logbook module';
+$LDEnterMaxRows='Please enter the maximum number rows displayed  per page after a successful search.';
+#2003-11-01 EL
+$LDTimeOut='Time out';
+$LDTimeOutActive='Time out active';
+$LDTimeOutTxt='Should the password protected modules time out (lock itselt) after a set time of inactivity?';
+$LDTimeOutTime='Elapsed time';
+$LDTimeOutTimeTxt='Elapsed idle time (inactivity) that triggers the time out and locks the module. Note: 
+If your entry is invalid, the system will use the default maximum values.';
+#2003-11-09 EL
+$LDGUI='GUI';
+$LDNewsDisplay='News display';
+$LDTitleFontSize='Title font size';
+$LDTitleFontColor='Title font color';
+$LDTitleFont='Title font';
+$LDPrefaceFontSize='Lead summary font size';
+$LDPrefaceFontColor='Lead summary font color';
+$LDPrefaceFont='Lead summary font';
+$LDBodyFontSize='News body font size';
+$LDBodyFontColor='News body font color';
+$LDBodyFont='News body font';
+$LDPreviewMaxlen='News preview maximum characters';
+$LDTitleFontBold='Title font weight';
+$LDPrefaceFontBold='Lead summary font weight';
+$LDDisplayWidth='News display width (in pixel or %)';
+$LDBold='Bold';
+$LDNoteDefault='Note: If you enter an invalid value, the system will just replace it with the default value.';
+$LDUseDefault='Use default values';
+$LDClkPickColor='Click here to pick up the color';
+#2003-11-11 EL
+$LDORAdmin='OR administration';
+$LDListConfig='List & configure';
+$LDOR='OR';
+$LDORNr='OR number';
+$LDTempClosed='Is temporary closed?';
+$LDOwnerWard='Owner ward';
+$LDOwnerDept='Owner department';
+$LDDateCreation='Date of creation';
+$LDDateClose='Date of closure';
+$LDOPTableNr='Number of OP table';
+$LDORName='OR room name';
+$LDORNrExists='OR room number already exists!';
+$LDToggle='Toggle';
+$LDChange='Change';
+$LDClkNextNr='Click to use next available number';
+$LDOPTable='OP table';
 ?>
