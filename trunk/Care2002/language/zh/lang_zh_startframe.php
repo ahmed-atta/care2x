@@ -1,5 +1,5 @@
 <?php
-$LDMainTitle='Care 2002 综合医院信息系统';
+$LDMainTitle='CARE 2X 综合医院信息系统';
 
 /*$LDMainTitle='Marienhospital a virtual Integrated Hospital Information System in Internet';
 */

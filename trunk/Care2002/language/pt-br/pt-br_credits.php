@@ -4,7 +4,7 @@ require('./roots.php');
 require($root_path.'/include/inc_environment_global.php');
 require_once($root_path.'include/inc_vars_resolve.php');
 ?>
-<html>
+<?php html_rtl($lang); ?>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <title>Créditos</title>
@@ -19,7 +19,7 @@ require_once($root_path.'include/inc_vars_resolve.php');
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/daniel_zilli.jpg"  border=0  align=right vspace=10>
 			<b>
-			O tradução brasileira do CARE 2002 e www.care2x.com foi feito por Daniel Zilli.
+			O tradução brasileira do CARE 2X e www.care2x.com foi feito por Daniel Zilli.
 			</b><p>
 			 Daniel Zilli é natural de Passo Fundo estado do Rio Grande do Sul - Brasil. Possui formação técnica em Engenharia de Software e está concluindo sua graduação em Sistemas de Informação. Com experiência há mais de 10 anos em informática, desenvolveu uma metodologia para trabalhar não só o lado tecnológico, mas também o lado humano das organizações.
 <p>
@@ -29,14 +29,71 @@ Daniel é sócio-diretor da Lec Tecnologia, empresa especializada em consultoria d
 </TD></TR></TBODY></TABLE>
 
 <hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+			<b>Daniel Fink (BR)</b><p>
+			Brazilian help files
+</TD></TR></TBODY></TABLE>
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+			<b>Juarez Sagebin Correa (BR)</b><p>
+			Brazilian help files
+</TD></TR></TBODY></TABLE>
+
+<hr>
 
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
+			<b>Leocyr Ramos (Cortez) (BR)</b><p>
+			ICD10 codes in brazilian language<p>
+			Leocyr has a bachelor degree in computer science and is about to finish a second degree in hospital administration. He has
+			been working with health care systems for four years.
+			<P><a href="mailto:leocyr@hotmail.com"><u>Leocyr Cortez pode ser contatado aqui.</u></a>
+</TD></TR></TBODY></TABLE>
+
+<hr>
+
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+            <P><img src="../../fotos/credits/luca_romoli.jpg"  border=0  align=right vspace=10>
+			<b>Luca Romoli (BR/IT)</b><p>
+			PPT Presentations and templates<br>
+			Project management tools<br>
+			Financial management and marketing tools<br>
+			Marketing campaigns in Brazil<p>
+			Luca is an experienced business consultant specializing in web applications. His target is to make the first productive installation of Care2x
+			in Brazilian hospitals.
+			<P><a href="mailto:luca@camocim.com"><u>Luca Romoli pode ser contatado aqui.</u></a>
+</TD></TR></TBODY></TABLE>
+
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
 			<b>Rodrigo F. Ferreira (BR)</b><p>
-			A tradução brasileira do CARE 2002
+			A tradução brasileira do CARE 2X
 			<P><a href="mailto:rodrigo@otorrinosclinica.com.br"><u>Rodrigo F. Ferreira pode ser contatado aqui.</u></a>
+</TD></TR></TBODY></TABLE>
+
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+			<b>Thomas Tschopke Soares (BR)</b><p>
+			Online demo installation<br>
+			Brazilian help files
+			<P><a href="mailto:ttsoares@orion.ufrgs.br"><u>Thomas T. Soares pode ser contatado aqui.</u></a>
 </TD></TR></TBODY></TABLE>
 
 <hr>
@@ -49,7 +106,7 @@ Daniel é sócio-diretor da Lec Tecnologia, empresa especializada em consultoria d
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/giuseppe_scarpi.jpg"  width=135 height=170 border=0  align=right vspace=10>
-			<b>A tradução italiana do CARE 2002 foi feito por Giuseppe Scarpi:</b>
+			<b>A tradução italiana do CARE 2X foi feito por Giuseppe Scarpi:</b>
 			<p>
 			Giuseppe Scarpi nasceu em Roma, Itália e tem 35 anos. 
 <p>
@@ -90,7 +147,7 @@ Ele decidiu unir-se ativamente ao código aberto porque:
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/agus_mr.jpg"  border=0  align=right vspace=10>
-			<b>A tradução indonesia do CARE 2002 e www.care2x.com foi feito por Agus Muhammad Ramdan.</b>
+			<b>A tradução indonesia do CARE 2X e www.care2x.com foi feito por Agus Muhammad Ramdan.</b>
 			
 			<P><a href="mailto:agusmr@mweb.co.id"><u>Agus M. Ramdan pode ser contatado aqui.</u></a>
 </TD></TR></TBODY></TABLE>
@@ -115,7 +172,7 @@ Alguns conhecimentos científicos e médicos (desta forma juntou-se ao projeto car
         <TBODY>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-<b>Patxi Gomaríz (ES) fez a tradução para o espanhol do Care 2002.</b>
+<b>Patxi Gomaríz (ES) fez a tradução para o espanhol do CARE 2X.</b>
 <p>
 Patxi Gomaríz nasceu na primavera de 1966 em Murcia, Espanha.
 Sua vida e trabalho gira em torno principalmente da fotografia, sendo um especialista em fotografia para 

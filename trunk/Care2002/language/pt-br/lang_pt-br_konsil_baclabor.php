@@ -298,4 +298,4 @@ $lab_TestResultId_2 = array('No growth after 48 hours', 'Aerobe like growth', 'A
 										   'Cocci.Cylinder.Mixflora','', '',
 										   'Bacteria microscop.NonEvid', '', '',
 										   'NoG.oxacil.resist.Staphyloc.', '', '');
-										   				  
+?>

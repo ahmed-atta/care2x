@@ -23,4 +23,5 @@ $LDProblem='问题';
 $LDDevelopment='Development';
 $LDAllergy='过敏症';
 $LDDietPlan='饮食计划';
+$LDPrintPDFDocAllReport='PDF document of all reports';
 ?>

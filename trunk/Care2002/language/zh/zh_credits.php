@@ -4,7 +4,7 @@ require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 
 ?>
-<html>
+<?php html_rtl($lang); ?>
 <head>
 <title>鸣谢</title>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
@@ -25,7 +25,7 @@ require_once($root_path.'include/inc_environment_global.php');
 			<p>
 			在一九九二年毕业于华东工学院并获得工程学学位后，陈伟宁先生一直在努力学习程序开发。出于对开发源代码项目的支持和多年程序开发的兴趣发展，陈伟宁先生决定参与开发源代码项目以促进技术并可从中学习到许多新东西。同时，也可以加深对开发源代码社区日常运作的了解。
 			<p>
-			尽管对医疗或健康保健部门不太熟悉，陈伟宁先生仍然决定加入Care 2002项目。因为他希望通过自身的努力，Care项目可以成功地应用于中国的医疗系统中。
+			尽管对医疗或健康保健部门不太熟悉，陈伟宁先生仍然决定加入CARE 2X项目。因为他希望通过自身的努力，Care项目可以成功地应用于中国的医疗系统中。
 
 <P><a href="mailto:weining.chen@army.com"><u>与陈伟宁先生联系</u></a>
 </TD></TR></TBODY></TABLE>
@@ -35,7 +35,7 @@ require_once($root_path.'include/inc_environment_global.php');
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/elpidio_latorilla_3.jpg" border=0  align=right vspace=10>
-			<b>CARE 2002的第一测试版由Elpidio Latorilla创建：</b>
+			<b>CARE 2X的第一测试版由Elpidio Latorilla创建：</b>
 			<p>职员：<br>程序员，外科护士，电子与通讯技师
 			<p>个人爱好：<br>C, C++, PHP, Javascript, SQL, TCL/TK, HTML, Perl, ASP, Java
 			<P><a href="mailto:elpidio@latorilla.com"><u>与Elpidio Latorilla先生联系</u></a>
@@ -69,7 +69,7 @@ require_once($root_path.'include/inc_environment_global.php');
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/giuseppe_scarpi.jpg"  border=0  width=135 height=170 align=right vspace=10>
-			<b>Giuseppe Scarpi (IT) 翻译Care 2002至意大利语版本。</b>
+			<b>Giuseppe Scarpi (IT) 翻译CARE 2X至意大利语版本。</b>
 			<p>Giuseppe Scarpi先生35年前出生于意大利罗马。 
 			<p>在获得了电子工程学学位后，Giuseppe Scarpi先生曾服务于多家公司的生物医学部门，此间的经历使他融会贯通了医学和信息技术之间的关系。<br>Giuseppe Scarpi先生目前使用并赞赏Linux和Windows系统，他认为："<i>as both are the result of a great human work that must be respected</i>"。
 			<p>Giuseppe Scarpi先生积极地投身开发源代码组织是因为：<br><i>“理想世界的存在取决于完美的平衡。如果你想索取，那你也应该付出。”</i>
@@ -84,7 +84,7 @@ require_once($root_path.'include/inc_environment_global.php');
             <P><img src="../../fotos/credits/gabriele_cicala.jpg"  border=0  align=right vspace=10>
 			<b>Gabriele Cicala (IT) 将www.care2x.com网站的大部分内容翻译成意大利语。</b>
 			<p>Gabriele Cicala先生1970年出生于Rossano，位于意大利南部的Calabria。他毕业于Politecnico di Torino并获得通讯工程学学位。目前，Gabriele Cicala先生任职于一家信息公司任顾问。
-			<p>出于对Linux和开发源代码环境的了解，Gabriele Cicala先生对各开放源码的项目很有兴趣。尽管对医疗或健康保健部门不太熟悉，Gabriele Cicala先生仍然决定加入Care 2002项目。因为他相信，Care项目的创始人和志愿者都有着和他一样的信念。
+			<p>出于对Linux和开发源代码环境的了解，Gabriele Cicala先生对各开放源码的项目很有兴趣。尽管对医疗或健康保健部门不太熟悉，Gabriele Cicala先生仍然决定加入CARE 2X项目。因为他相信，Care项目的创始人和志愿者都有着和他一样的信念。
 			<P><a href="mailto:gabcicala@tiscali.it"><u>与Gabriele Cicala先生联系</u></a>
 </TD></TR></TBODY></TABLE>
 
@@ -94,7 +94,7 @@ require_once($root_path.'include/inc_environment_global.php');
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/daniel_zilli.jpg"  border=0  align=right vspace=10>
-			<b>Daniel Zilli (BR) 将Care 2002和www.care2x.com网站翻译成巴西－葡萄牙语。</b>
+			<b>Daniel Zilli (BR) 将CARE 2X和www.care2x.com网站翻译成巴西－葡萄牙语。</b>
 			<p>Daniel是一个不错的小伙，他热爱生活，喜欢计算机，足球和音乐。他非常喜欢计算机并已有了大约10年的经验。Daniel先生开办了一家电脑公司，主要从事计算机科学教育产品的生产，开发源代码软件和当地的Linux分发。
 			<P><a href="mailto:danielz@cco.matrix.com.br"><u>与Daniel Zilli先生联系</u></a>
 </TD></TR></TBODY></TABLE>
@@ -104,7 +104,7 @@ require_once($root_path.'include/inc_environment_global.php');
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/muhammad_panji.png"  border=0  align=right vspace=10>
-			<b>Muhammad Panji (ID) 与他人合作翻译Care 2002和www.care2x.com网站为印度尼西亚语。</b>
+			<b>Muhammad Panji (ID) 与他人合作翻译CARE 2X和www.care2x.com网站为印度尼西亚语。</b>
 			<P><a href="mailto:sumodirjo@users.sourceforge.net"><u>与Muhammad Panji先生联系</u></a>
 </TD></TR></TBODY></TABLE>
 
@@ -114,7 +114,7 @@ require_once($root_path.'include/inc_environment_global.php');
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/agus_mr.jpg"  border=0  align=right vspace=10>
-			<b>Agus Muhammad Ramdan (ID) 将Care 2002和www.care2x.com网站翻译为印度尼西亚语。</b>
+			<b>Agus Muhammad Ramdan (ID) 将CARE 2X和www.care2x.com网站翻译为印度尼西亚语。</b>
 			
 			<P><a href="mailto:agusmr@mweb.co.id"><u>与Agus M. Ramdan先生联系</u></a>
 </TD></TR></TBODY></TABLE>
@@ -192,7 +192,7 @@ phpMyAdmin官方西班牙语翻译<br>
         <TBODY>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-			<b>Matej Hausenblas (FR) 将Care 2002翻译为法语</b>
+			<b>Matej Hausenblas (FR) 将CARE 2X翻译为法语</b>
 			<p>Matej Hausenblas先生1981年出生于捷克共和国的Prague市。
 他是一所数学－信息－物理学大学的学生。在使用了Windows几年后，Matej Hausenblas先生作出了一个富有挑战性的决定：尝试使用Linux。
 在一段时间后，他决定参与开发源代码项目以促进技术并可从中学习到许多新东西，同时可以加深对开发源代码社区日常运作的了解。<P>
@@ -226,7 +226,7 @@ phpMyAdmin官方西班牙语翻译<br>
         <TBODY>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-			<b>Daniele Frijia (DE) 检查Care 2002安全方面的问题</b>
+			<b>Daniele Frijia (DE) 检查CARE 2X安全方面的问题</b>
 			<br>
 			主要贡献：<p>
 			<font size=1>

@@ -1,6 +1,6 @@
 <?php
 $LDDiagnosticTest='Requisição para exame de diagnósticos';
-$LDHospitalName='CARE 2002';
+$LDHospitalName='CARE 2X';
 $LDCentralLab='Laboratória Central';
 $LDLabel='Etiqueta';
 $LDRoomNr='Nr do quarto.';

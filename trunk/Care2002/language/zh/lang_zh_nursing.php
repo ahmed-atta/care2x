@@ -403,4 +403,5 @@ $LDShowClinicOnly='本门诊专用';
 # 2003-09-16 EL
 $LDAdmissionData='接待数据';
 $LDShowPhoto='显示照片';
+$LDOpenWardManagement='Open ward for administration';
 ?>

@@ -1,5 +1,5 @@
 <?php
-$LDMainTitle='Care 2002 Sistema de Informação Integrado para Hospitais';
+$LDMainTitle='CARE 2X Sistema de Informação Integrado para Hospitais';
 
 $LDInviteAskMe='Introduza a sua questão, por exemplo: "Qual é o número de telefone de M9d?"';
 $LDTipsLink='Dicas:';

@@ -401,5 +401,5 @@ $LDShowClinicOnly='Somente está clínica';
 # 2003-09-16 EL
 $LDAdmissionData='Admission data';
 $LDShowPhoto='Exibir foto';
+$LDOpenWardManagement='Open ward for administration';
 ?>
-

@@ -2,7 +2,7 @@
 require($root_path.'include/inc_credits_openwin.php');
 ?>
 <FONT    SIZE=1  FACE="Arial" color=gray>
- <a href="http://www.care2x.com" target=_new>CARE 2x versão beta 1.0.08</a> 
+ <a href="http://www.care2x.com" target=_new>CARE 2x versão beta 1.0.09</a> 
 :: <a href="<?php echo $root_path ?>legal_gnu_gpl.htm" target=_new> Licença</a> 
 ::  <a href=mailto:info@care2x.com>Contato</a> <font size=1 face="arial"> :: <a 
 href="<?php echo $root_path ?>language/pt-br/pt-br_privacy.htm" 

@@ -138,11 +138,13 @@ $LDForeWord="Você agora tem os mais altas permissões de acesso.<br>As funções a 
 $LDSetDateFormat="Configure o formato da data";
 $LDSelectDateFormat="Favor selecionar o formado de data necessário:";
 /* Do not translate $LDDateFormats */
-$LDDateFormats=array("dd.MM.yyyy","yyyy-MM-dd","MM/dd/yyyy");
+$LDDateFormats=array('dd.MM.yyyy','yyyy-MM-dd','MM/dd/yyyy','dd/MM/yyyy');
 
 $LDDateFormatsTxt= array("Por exemplo: 01.10.2002 (01 Outubro 2002)",
                                          "Por exemplo: 2002-10-01 (2002 Outubro 01)",
-										 "Por exemplo: 10/01/2002 (Outubro 01, 2002)");
+										 "Por exemplo: 10/01/2002 (Outubro 01, 2002)",
+										 "Por exemplo: 01/10/2002 ( 01 Outubro 2002)"
+										 );
 
 $LDNewDateFormatSaved="O novo formato de data agora está ativo.";
 
@@ -183,6 +185,7 @@ $LDCurrencyAdmin="Configuração monetária";
 $LD_ddpMMpyyyy="dd.mm.aaaa";
 $LD_yyyyhMMhdd="yyyy-mm-dd";
 $LD_MMsddsyyyy="mm/dd/yyyy";
+$LD_ddsMMsyyyy='dd/mm/yyyy';
 /* END */
 /* 2002-10-22 EL */
 $LDUserInfoSaved='A permissão de acesso foi criada com sucesso!';
