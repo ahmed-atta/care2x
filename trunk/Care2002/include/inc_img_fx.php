@@ -37,6 +37,7 @@ $img_path_com_icon='gui/img/common/'.$theme_com_icon.'/'; # the path for non-lan
 $img_path_mascot='gui/img/mascot/'.$theme_mascot.'/'; # the path for non-language dependent mascot
 $img_path_skin='gui/img/skin/'.$theme_skin.'/'; # the path for non-language dependent mascot
 
+
 /**
 * createLDImgSrc will display a language dependent image
 * if the filename does not exists, the default version will be displayed

@@ -7,8 +7,8 @@ if (eregi('inc_test_request_gd_chemlabor.php',$PHP_SELF))
 /**
 * CARE 2X Integrated Hospital Information System
 * GNU General Public License
-* Copyright 2002 Elpidio Latorilla
-* elpidio@latorilla.com
+* copyright 2002,2003,2004 Elpidio Latorilla
+* elpidio@care2x.net, elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
 */

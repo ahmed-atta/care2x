@@ -15,8 +15,9 @@
 	<a href="#transfer">transfer a patient?</a><br>
 	<a href="#discharge">discharge a patient?</a><br>
 	<a href="#notes">read or write notes on the patient?</a><br>
-	<a href="#sall">show all waiting outpatients?</a>
-</ul>
+	<a href="#sall">show all waiting outpatients?</a><br>
+	<a href="#pic">show the patient's id photo?</a>
+	</ul>
 <hr>
 <b>
 <p><font color="#990000">What do these colored bars <img src="../help/en/img/en_sbars.png" border=0 width=98 height=23> mean?</font></b><p>
@@ -97,6 +98,15 @@ They signal an event/events associated with the color. For example, brown bar si
 <img src="../help/en/img/en_ambulatory_showall.png" border=0 width=301 height=156>
 </ul>
 
+<a name="pic"></a>
+<font face="Verdana, Arial" size=2>
+<b>
+<p><font color="#990000">How to show the patient's id photo?</font></b><p>
+<font face="Verdana, Arial" size=2>
+<ul>
+<b>Step:</b> Click the <img <?php echo createComIcon($root_path,'spf.gif','0'); ?>> or  <img <?php echo createComIcon($root_path,'spm.gif','0'); ?>> icon.<p>
+<img src="../help/en/img/en_ambulatory_sex.png" border=0 width=434 height=84>
+</ul>
 </font>
 
 </body>

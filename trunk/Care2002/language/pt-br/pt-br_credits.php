@@ -35,7 +35,8 @@ Daniel é sócio-diretor da Lec Tecnologia, empresa especializada em consultoria d
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<b>Daniel Fink (BR)</b><p>
-			Brazilian help files
+			Brazilian help files<br>
+			Continuing work on Ataraxia WAP module
 </TD></TR></TBODY></TABLE>
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>

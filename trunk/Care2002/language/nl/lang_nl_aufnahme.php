@@ -398,4 +398,11 @@ $LDMask='Mask';
 $LDIntravenous='Intravenous';
 $LDSubcutaneous='Subcutaneous';
 $LDPreAdmission='Pre-admission';
+#2004-01-01 EL
+$LDPersonDuplicate='This person seems to be registered already.';
+$LDSimilarData='The following listed person has similar personal data.';
+$LDSimilarData2='The following listed persons have similar personal data.';
+$LDPlsCheckFirst='Please check it out first before you decide the next step.';
+$LDPlsCheckFirst2='Please check them out first before you decide the next step.';
+$LDShowDetails='Show details';
 ?>

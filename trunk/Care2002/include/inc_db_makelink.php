@@ -1,6 +1,7 @@
 <?php
 # Set this to your database type. For details refer to ADODB manual or goto http://php.weblogs.com/ADODB/
-$dbtype='mysql';
+#$dbtype='mysql';
+#$dbtype='postgres7';
 
 /*------begin------ 
 * This protection code was suggested by Luki R. luki@karet.org 
@@ -10,7 +11,7 @@ if (eregi('inc_db_makelink.php',$PHP_SELF)) die('<meta http-equiv="refresh" cont
 
 if(!isset($root_path)) $root_path='../'; // default language table root path is "../"
 if(!isset($lang)) include($root_path.'chklang.php');
-//if(!isset($dbtype) || empty($dbtype)) $dbtype='mysql';
+
 
 /*********************************************************
 *   the following lines establish connection to the database 
@@ -27,6 +28,26 @@ if(!isset($lang)) include($root_path.'chklang.php');
 
 # This line loads those variables
 require($root_path.'include/inc_init_main.php');
+
+# Default to msql if dbtype is missing
+if(!isset($dbtype) || empty($dbtype)) $dbtype='mysql';
+
+# Adjust some  db dependent sql peculiarities
+# Set the "LIKE" comparison operator, postgre needs "ILIKE" for case-insensitive comparison
+# Set the "no-date" value based on the dbtype
+switch($dbtype){
+	case 'mysql': $dbf_nodate=NODATE_MYSQL; 
+				$sql_LIKE='LIKE';
+				break;
+	case 'postgres7': $dbf_nodate=NODATE_POSTGRE; 
+				$sql_LIKE = 'ILIKE';
+				break;
+	case 'postgres': $dbf_nodate=NODATE_POSTGRE; 
+				$sql_LIKE='ILIKE';
+				break;
+	default: $dbf_nodate=NODATE_DEFAULT;
+				$sql_LIKE='LIKE';
+}
 
 # Load the db error messages lang table
 if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_db_msg.php')){
@@ -57,26 +78,25 @@ else $dblink_ok=1;
 $db->SetDatabase($dbname);
 */
 
-# Set dbtype to mysql if not set or empty
-if(!isset($dbtype)||empty($dbtype)) $dbtype='mysql';
-
 # ADODB connection
 require_once($root_path.'classes/adodb/adodb.inc.php');
 $db = &ADONewConnection($dbtype);
+
 $dblink_ok = $db -> Connect($dbhost,$dbusername,$dbpassword,$dbname);
 
-# Establish a link 
+# Establish a link
 # Native mySQL connection
 # Temporary active for the transition phase from 1.0.03 to 1.0.04
 # this will be deactivated or totally removed in later versions
+/*
 if ($link=mysql_connect($dbhost,$dbusername,$dbpassword)){
-	if(mysql_select_db($dbname,$link)){	
+	if(mysql_select_db($dbname,$link)){
 		$DBLink_OK=1;
 	}else{
 		$DBLink_OK=0;
-	} 
+	}
 }
-
+*/
 # Load the database functions
 require_once($root_path.'include/inc_db_fx.php');
 ?>

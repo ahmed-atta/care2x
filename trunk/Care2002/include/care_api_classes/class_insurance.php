@@ -9,8 +9,8 @@ require_once($root_path.'include/care_api_classes/class_core.php');
 *  Insurance methods. 
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
-* @version beta 1.0.09
-* @copyright 2002,2003,2004 Elpidio Latorilla
+* @version deployment 1.1 (mysql) 2004-01-11
+* @copyright 2002,2003,2004,2004 Elpidio Latorilla
 * @package care_api
 */
 class Insurance extends Core {
@@ -481,8 +481,8 @@ class Insurance extends Core {
 *  Personinsurance methods. 
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
-* @version beta 1.0.09
-* @copyright 2002,2003,2004 Elpidio Latorilla
+* @version deployment 1.1 (mysql) 2004-01-11
+* @copyright 2002,2003,2004,2004 Elpidio Latorilla
 * @package care_api
 */
 class PersonInsurance extends Insurance {
@@ -558,7 +558,7 @@ class PersonInsurance extends Insurance {
 		if(!is_array($array)) return FALSE;
 		while(list($x,$v)=each($array)) {
 		    $index.="$x,";
-		    $values.="$v,";
+		    $values.="'$v',";
 		}
 		    $index=substr_replace($index,'',(strlen($index))-1);
 		    $values=substr_replace($values,'',(strlen($values))-1);

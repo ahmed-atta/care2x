@@ -2,15 +2,15 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
-require('./roots.php');
-require($root_path.'/include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.07 - 2003-08-29
+* CARE 2002 Integrated Hospital Information System beta 1.0.09 - 30.11.2003
 * GNU General Public License
-* Copyright 2002 Elpidio Latorilla
-* elpidio@latorilla.com
+* copyright 2002,2003,2004 Elpidio Latorilla
+* elpidio@care2x.net, elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
+*
+* 19.oct.2003 Daniel Hinostroza: Spanish switch lang added
 */
 if(!isset($lang))
   if(isset($HTTP_GET_VARS['lang'])) $lang=$HTTP_GET_VARS['lang'];
@@ -22,7 +22,7 @@ require_once($root_path.'include/inc_charset_fx.php');
 require_once($root_path.'include/inc_img_fx.php');	
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<HTML>
+<?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
 </HEAD>
@@ -36,6 +36,7 @@ switch($lang)
 	case "de": echo '... wird noch weiter ausgebaut.'; break;
 	case "it": echo 'Ancora un po\' di pazienza, ci siamo lavorando.'; break;
 	case "id": echo 'Kami sedan mengerjakan bagian ini. Harap bersabar'; break;
+	case "es": echo 'Estamos trabajando en este módulo.  Por favor, sea paciente'; break;
 	default: echo 'We are working on it. Please be patient.';
 }
 ?>

@@ -10,8 +10,8 @@ require_once($root_path.'include/care_api_classes/class_core.php');
 *
 * Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
-* @version beta 1.0.09
-* @copyright 2002,2003 Elpidio Latorilla
+* @version deployment 1.1 (mysql) 2004-01-11
+* @copyright 2002,2003,2004 Elpidio Latorilla
 * @package care_api
 */
 class Person extends Core {
@@ -204,7 +204,7 @@ class Person extends Core {
 		$x='';
 		$v='';
 		$this->data_array=NULL;
-		
+		if(!isset($HTTP_POST_VARS['create_time'])||empty($HTTP_POST_VARS['create_time'])) $HTTP_POST_VARS['create_time']=date('YmdHis');
 		while(list($x,$v)=each($this->elems_array)) {
 	    	if(isset($HTTP_POST_VARS[$v])&&!empty($HTTP_POST_VARS[$v])) $this->data_array[$v]=$HTTP_POST_VARS[$v];
 	    }
@@ -216,6 +216,7 @@ class Person extends Core {
 	function Transact() {
 	
 	    global $db;
+	    //$db->debug=true;
 		
         $db->BeginTrans();
         $this->ok=$db->Execute($this->sql);
@@ -243,11 +244,10 @@ class Person extends Core {
 		    $index.="$x,";
 		    $values.="'$v',";
 		}
-		    $index=substr_replace($index,'',(strlen($index))-1);
-		    $values=substr_replace($values,'',(strlen($values))-1);
+		$index=substr_replace($index,'',(strlen($index))-1);
+		$values=substr_replace($values,'',(strlen($values))-1);
 
-        $this->sql="INSERT INTO $this->tb_person ($index) VALUES ($values)";		
-		//echo $this->sql;
+		$this->sql="INSERT INTO $this->tb_person ($index) VALUES ($values)";
 		return $this->Transact();
 	}
 	/**
@@ -257,9 +257,10 @@ class Person extends Core {
 	* @access public
 	* @return boolean
 	*/
-    function insertDataFromInternalArray() {
+	function insertDataFromInternalArray() {
 	    //$this->data_array=NULL;
-	    $this->prepInsertArray();
+		# Check if  "create_time" key has a value, if no, create a new value
+		$this->prepInsertArray();		
 		return $this->insertDataFromArray($this->data_array);
 	}
 
@@ -685,10 +686,14 @@ class Person extends Core {
 	* @return mixed string or boolean
 	*/
 	function setHistorySeen($encoder='',$pid=''){
-	    global $db;
+	    global $db, $dbtype;
+	    //$db->debug=true;
 		if(empty($encoder)) return false;
 		if(!$this->internResolvePID($pid)) return false;
-		$this->sql="UPDATE $this->tb_person SET history= CONCAT(history,\"\nView ".date('Y-m-d H:i:s')." = $encoder\") WHERE pid=$this->pid";
+		if($dbtype=='mysql')
+			$this->sql="UPDATE $this->tb_person SET history= CONCAT(history,'\nView ".date('Y-m-d H:i:s')." = $encoder') WHERE pid=$this->pid";
+		else
+			$this->sql="UPDATE $this->tb_person SET history= history || '\nView ".date('Y-m-d H:i:s')." = $encoder' WHERE pid=$this->pid";
 		
 		if($db->Execute($this->sql)) {return true;}
 		   else  {echo $this->sql;return false;}
@@ -704,8 +709,7 @@ class Person extends Core {
 	function CurrentEncounter($pid){
 	    global $db;
 		if(!$pid) return false;
-		$this->sql="SELECT encounter_nr FROM $this->tb_enc 
-							WHERE pid='$pid' AND NOT is_discharged AND NOT (encounter_status LIKE 'cancelled') AND status NOT IN ($this->dead_stat)";
+		$this->sql="SELECT encounter_nr FROM $this->tb_enc WHERE pid='$pid' AND (is_discharged='' OR is_discharged=0) AND encounter_status <> 'cancelled' AND status NOT IN ($this->dead_stat)";
 		if($buf=$db->Execute($this->sql)){
 		    if($buf->RecordCount()) {
 				$buf2=$buf->FetchRow();
@@ -827,6 +831,40 @@ class Person extends Core {
 		$this->setWhereCondition("pid=$pid");
 		return $this->updateDataFromInternalArray($pid);
 	}
+	/**
+	* Returns the PID ('nr' of a column) based on OID key
+	*
+	* Special for postgresql or dbms that returns an OID key after an insert
+	*
+	* @access public
+	* @param int OID return insert key of a column
+	* @return mixed integer or boolean
+	*/
+	function postgre_PIDbyOID($oid=0){
+		if(!$oid) return false;
+		else return $this->postgre_Insert_ID($this->tb_person,'pid',$oid);
+	}
 	
+	/**
+	* returns basic data of living person(s) based on family name, first name & b-day
+	*
+	* @access public
+	* @param array The data keys
+	* @param boolean Flags if non-living persons are also returned. Default = FALSE
+	* @return mixed array or boolean
+	*/
+	function PIDbyData(&$data,$deadtoo=FALSE){
+		global $db, $sql_LIKE, $dbf_nodate;
+		$this->sql="SELECT pid,name_last,name_first,date_birth,sex FROM $this->tb_person WHERE name_last $sql_LIKE '".$data['name_last']."' 
+					AND name_first $sql_LIKE '".$data['name_first']."'
+					AND date_birth='".$data['date_birth']."'
+					AND sex $sql_LIKE '".$data['sex']."'";
+		if(!$deadtoo) $this->sql.=" AND death_date='$dbf_nodate'";
+		if($res['pbd']=$db->Execute($this->sql)){
+		    if($res['pbd']->RecordCount()) {
+				return $res['pbd'];//
+			}else{return false;}
+		}else{return false;}
+	}
 }
 ?>

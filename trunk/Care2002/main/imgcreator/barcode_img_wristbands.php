@@ -24,6 +24,7 @@ GNU GPL. For details read file "copy_notice.txt".
 
 
 if(!extension_loaded('gd')) dl('php_gd.dll');
+
 define('LANG_FILE','aufnahme.php');
 define('NO_CHAIN',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
@@ -113,7 +114,7 @@ header ('Content-type: image/png');
 	$tmargin=2;  # Top margin
 	
 	if($ttf_ok){
-    	ImageTTFText($im,12,0,$lmargin,$tmargin+10,$black,$arial,$LDPrintPortraitFormat);
+    	ImageTTFText($im,12,0,$lmargin,$tmargin+10,$black,$arial,$LDPrintPortraitFormat.$arial);
     	ImageTTFText($im,12,0,$lmargin,$tmargin+25,$black,$arial,$LDClickImgToPrint);
 	}else{
 		ImageString($im,2,10,2,$LDPrintPortraitFormat,$black);
@@ -131,10 +132,12 @@ header ('Content-type: image/png');
 	$lmargin=1; # Left margin
 	$tmargin=11;  # Top margin
 	
-	$dataline1=$result['name_last'].', '.$result['name_first'];
+	$dataline1=$result['name_last'].', '.utf8_encode($result['name_first']);
 	$dataline2=$result['date_birth'];
 	$dataline3='1234567890'.$result['current_ward'].' '.$result['current_dept'].' '.$result['insurance_co_id'].' '.$result['insurance_2_co_id'];
 	//$ttf_ok=0;
+	
+	
 	if($ttf_ok){
     	ImageTTFText($namelabel,11,0,$lmargin,$tmargin,$nm_black,$arial,$dataline1);
     	ImageTTFText($namelabel,10,0,$lmargin,$tmargin+13,$nm_black,$arial,$dataline2);

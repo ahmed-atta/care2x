@@ -3,8 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 ?>
-<html>
+<?php html_rtl($lang); ?>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <title>Credits</title>
 </head>
 <body onLoad="if(window.focus) window.focus()">
@@ -15,7 +16,7 @@ require_once($root_path.'include/inc_environment_global.php');
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/elpidio_latorilla_3.jpg" border=0  align=right vspace=10>
-			<b>The first beta version of CARE 2002 was created by Elpidio Latorilla:</b>
+			<b>The first beta version of CARE 2X was created by Elpidio Latorilla:</b>
 			<p>
 			Professions: <br>Programmer, Surgery Nurse, Electronics & telecommunications technician
 			<p>
@@ -57,7 +58,7 @@ require_once($root_path.'include/inc_environment_global.php');
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/giuseppe_scarpi.jpg"  border=0  width=135 height=170 align=right vspace=10>
-			<b>Giuseppe Scarpi (IT) translated Care 2002 to italian.</b>
+			<b>Giuseppe Scarpi (IT) translated CARE 2X to italian.</b>
 			<p>
 			Giuseppe Scarpi was born in Rome, Italy, 35 years ago. 
 			<p>He has a degree in Electronic Engineering and has worked for several companies in the biomedical sector, 
@@ -97,7 +98,7 @@ believe.
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/daniel_zilli.jpg"  border=0  align=right vspace=10>
-			<b>Daniel Zilli (BR) translated Care 2002 and www.care2x.com website to  brazilian-portuguese.</b>
+			<b>Daniel Zilli (BR) translated CARE 2X and www.care2x.com website to  brazilian-portuguese.</b>
 			<p>
 			Daniel is a nice guy who loves to live a happy life. He likes computers, football, and good music.
 He  loves computers and has 10 years of computer experience it.
@@ -111,7 +112,7 @@ science education products, open source software and local  linux distro.
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/muhammad_panji.png"  border=0  align=right vspace=10>
-			<b>Muhammad Panji (ID) cotranslated Care 2002 and www.care2x.com website to indonesian.</b>
+			<b>Muhammad Panji (ID) cotranslated CARE 2X and www.care2x.com website to indonesian.</b>
 			
 			<P><a href="mailto:sumodirjo@users.sourceforge.net"><u>Muhammad Panji can be contacted here.</u></a>
 </TD></TR></TBODY></TABLE>
@@ -122,7 +123,7 @@ science education products, open source software and local  linux distro.
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/agus_mr.jpg"  border=0  align=right vspace=10>
-			<b>Agus Muhammad Ramdan (ID) translated Care 2002 and www.care2x.com website to indonesian.</b>
+			<b>Agus Muhammad Ramdan (ID) translated CARE 2X and www.care2x.com website to indonesian.</b>
 			
 			<P><a href="mailto:agusmr@mweb.co.id"><u>Agus M. Ramdan can be contacted here.</u></a>
 </TD></TR></TBODY></TABLE>
@@ -208,7 +209,7 @@ Website: www.cerebroperiferico.com
         <TBODY>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-			<b>Matej Hausenblas (FR) did the french translations of Care 2002</b>
+			<b>Matej Hausenblas (FR) did the french translations of CARE 2X</b>
 			<p>
 Matej Hausenblas was born in Prague, Czech Republic, in 1981.
 He is a student on a math-informatics-physics university. After several years 
@@ -252,7 +253,7 @@ work in this kind of community.
         <TBODY>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-			<b>Daniele Frijia (DE) checked the security aspects of Care 2002.</b>
+			<b>Daniele Frijia (DE) checked the security aspects of CARE 2X.</b>
 			<br>
 			A few of his many contributions:<p>
 			<font size=1>

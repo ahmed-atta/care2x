@@ -45,18 +45,19 @@ if(!$cfg['dhtml']){
 
 
 $TP_logo=createLogo($root_path,'care_logo.gif','0');
-
+# Load the template
 $tp_body=&$TP_obj->load('tp_main_index_menu_body.htm');
 eval("echo $tp_body;");
 ?>
 
-<TABLE CELLPADDING=0 CELLSPACING=0 border=0 >
+<TABLE CELLPADDING=0 CELLSPACING=0 border=0  dir=ltr>
 
 <?php
 //echo $HTTP_COOKIE_VARS['ck_config']; // used only in debugging related to user config data
 if($result){
 	$gui='';
 	$TP_img1= '<img '.createComIcon($root_path,'blue_bullet.gif','0','middle').'>';
+	
 	$TP_com_img_path=$root_path.'gui/img/common';
 	$buf='';
 	# Load the menu item template

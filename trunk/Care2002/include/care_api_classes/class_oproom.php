@@ -19,8 +19,8 @@ require_once($root_path.'include/care_api_classes/class_core.php');
 *
 *  Note: this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance.
 * @author Elpidio Latorilla
-* @version beta 1.0.09
-* @copyright 2002,2003,2004 Elpidio Latorilla
+* @version deployment 1.1 (mysql) 2004-01-11
+* @copyright 2002,2003,2004,2004 Elpidio Latorilla
 * @package care_api
 */
 class OPRoom extends Core {
@@ -103,7 +103,7 @@ class OPRoom extends Core {
 	* @return boolean
 	*/
 	function ORNrExists($rm_nr){
-		if($this->_RecordExists("type_nr=2 AND room_nr='$rm_nr'")){
+		if($this->_RecordExists("type_nr=2 AND room_nr=$rm_nr")){
 			return true;
 		}else{return false;}
 	}
@@ -133,7 +133,7 @@ class OPRoom extends Core {
 		}
 		
 		//$this->sql="SELECT * FROM $this->tb_room WHERE room_nr='$rm_nr'";
-		$this->sql="SELECT o.*, w.ward_id, w.name AS wardname, d.name_formal AS deptname, d.name_short AS deptshort, d.LD_var
+		$this->sql="SELECT o.*, w.ward_id, w.name AS wardname, d.name_formal AS deptname, d.name_short AS deptshort, d.LD_var AS \"LD_var\"
 						 FROM $this->tb_room AS o
 						 			LEFT JOIN $this->tb_ward AS w ON o.ward_nr=w.nr
 									LEFT JOIN $this->tb_dept AS d ON o.dept_nr=d.nr";
@@ -178,7 +178,7 @@ class OPRoom extends Core {
 		
 		if(empty($cond)) $cond='1';
 		
-		$this->sql="SELECT o.*, w.ward_id, w.name AS wardname, d.name_formal AS deptname, d.name_short AS deptshort, d.LD_var
+		$this->sql="SELECT o.*, w.ward_id, w.name AS wardname, d.name_formal AS deptname, d.name_short AS deptshort, d.LD_var AS \"LD_var\"
 						 FROM $this->tb_room AS o
 						 			LEFT JOIN $this->tb_ward AS w ON o.ward_nr=w.nr
 									LEFT JOIN $this->tb_dept AS d ON o.dept_nr=d.nr
@@ -255,18 +255,23 @@ class OPRoom extends Core {
 	* Returns a line of text of all room numbers separated by comma.
 	*
 	* Used for validation purposes by searching a users input against this text.
+	* Returns an empty string if no room available.
 	* @access public
 	* @return string
 	*/
 	function CombinedORNrs(){
 		if(!$this->is_allpreloaded) $this->preloadAllORInfo();
 		$buffer=array();
-		while($row=$this->allpreloaded_OR->FetchRow()){
-			$buffer[]=$row['room_nr'];
+		if($this->is_allpreloaded){
+			while($row=$this->allpreloaded_OR->FetchRow()){
+				$buffer[]=$row['room_nr'];
+			}
+			# Reset the pointer
+			$this->allpreloaded_OR->MoveFirst();
+			return implode(',',$buffer);
+		}else{
+			return '';
 		}
-		# Reset the pointer
-		$this->allpreloaded_OR->MoveFirst();
-		return implode(',',$buffer);
 	}
 }
 ?>

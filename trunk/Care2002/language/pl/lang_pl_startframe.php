@@ -1,5 +1,5 @@
 <?php
-$LDMainTitle="Care 2002 Zintegrowany System Obs³ugi Placówek Zdrowia";
+$LDMainTitle="CARE 2X Zintegrowany System Obs³ugi Placówek Zdrowia";
 
 /*$LDMainTitle="Marienhospital a virtual Integrated Hospital Information System in Internet";
 */

@@ -11,6 +11,11 @@ define('NOC_CHANGE_TIME','7.30');
 # Define to TRUE if you want to send the html output in base64 encrypted form
 define('ENCRYPT_PAGE_BASE64',FALSE);
 
+#Define the "no-date" values for the db date field
+define('NODATE_MYSQL','0000-00-00');
+define('NODATE_POSTGRE','0001-01-01');
+define('NODATE_DEFAULT','0000-00-00');
+
 # Set the default template theme
 $template_theme='biju';
 //$template_theme='default';
@@ -68,12 +73,17 @@ if(defined('USE_PAGE_GEN_TIME')&&USE_PAGE_GEN_TIME){
 }
 
 $TP_ALIGN='left'; # template variable for document direction
-# Function to generate the html or html dir-rtl tag
+$TP_ANTIALIGN='right';
+$TP_DIR='ltr';
+
+# Function to generate the <html> or <html dir-rtl> tag
 function html_ret_rtl($lang){
-	global $TP_ALIGN;
+	global $TP_ALIGN,$TP_ANTIALIGN, $TP_DIR;
 	if(($lang=='ar')||($lang=='fa')){
-		return '<HTML dir=rtl>';
+		$TP_ANTIALIGN=$TP_ALIGN;
 		$TP_ALIGN='right';
+		$TP_DIR='rtl';
+		return '<HTML dir=rtl>';
 		}else{
 			return '<HTML>';
 		}

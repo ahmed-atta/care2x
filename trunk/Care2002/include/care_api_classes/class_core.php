@@ -9,8 +9,8 @@
 *  Note this class should be instantiated only after a "$db" adodb  connector object
 * has been established by an adodb instance
 * @author Elpidio Latorilla
-* @version beta 1.0.09
-* @copyright 2002,2003 Elpidio Latorilla
+* @version deployment 1.1 (mysql) 2004-01-11
+* @copyright 2002,2003,2004 Elpidio Latorilla
 * @package care_api
 */
 class Core {
@@ -185,7 +185,9 @@ class Core {
     function _prepSaveArray(){
 		$x='';
 		$v='';
-		//$this->buffer_array=NULL;
+		//$this->buffer_array=NULL;	
+		# Check if  "create_time" key has a value, if no, create a new value
+		if(!isset($this->data_array['create_time'])||empty($this->data_array['create_time'])) $this->data_array['create_time']=date('YmdHis');
 		while(list($x,$v)=each($this->ref_array)) {
 	       // if(isset($this->data_array[$v])&&!empty($this->data_array[$v])) $this->buffer_array[$v]=$this->data_array[$v];
 	        if(isset($this->data_array[$v])) { 
@@ -317,7 +319,7 @@ class Core {
         if($this->result=$db->Execute($this->sql)) {
             if($this->result->RecordCount()) {
 				 while($this->ref_array=$this->result->FetchRow());
-				 return $this->ref_array; 
+				 return $this->ref_array;
 			} else { return FALSE; }
 		} else { return FALSE; }
 	}
@@ -361,13 +363,17 @@ class Core {
 	* @return boolean
 	*/
     function updateDataFromArray(&$array,$item_nr='',$isnum=TRUE) {
+    	global $dbtype;
 		$x='';
 		$v='';
 		$elems='';
+		if($dbtype=='postgres7'||$dbtype=='postgres') $concatfx='||';
+			else $concatfx='concat';
 		if(empty($array)) return FALSE;
 		if(empty($item_nr)||($isnum&&!is_numeric($item_nr))) return FALSE;
 		while(list($x,$v)=each($array)) {
-		if(stristr($v,'concat')||stristr($v,'null')) $elems.="$x= $v,";
+
+		if(stristr($v,$concatfx)||stristr($v,'null')) $elems.="$x= $v,";
 		    else $elems.="$x='$v',";
 		}
 		# Bug fix. Reset array.
@@ -541,4 +547,22 @@ class Core {
 			return FALSE;
 		}
 	}
+	/**
+	* Returns the  value of the primary key of a row based on the column OID key
+	*
+	* Special for postgre and other dbms that returns OID after an insert query
+	* @param str Table name
+	* @param str Field name of the primary key
+	* @param int OID value
+	* @return int Non-zero if value ok, else zero if not found
+	*/
+	function postgre_Insert_ID($table,$pk,$oid){
+		global $db;
+		$this->sql="SELECT $pk FROM $table WHERE oid=$oid";
+		if($result=$db->Execute($this->sql)) {
+			if($result->RecordCount()) {
+				$buf=$result->FetchRow();
+				 return $buf[$pk];
+			} else { return 0; }
+		} else { return 0; }	}
 }

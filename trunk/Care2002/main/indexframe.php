@@ -2,12 +2,11 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
-
 /**
-* CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
+* CARE 2X Integrated Hospital Information System deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@latorilla.com
+* elpidio@care2x.net, elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -19,10 +18,7 @@ $wintitle='Menu - Care2x';
 
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-/**
-* We check again the language variable lang. If table file not available use default (lang = "en")
-*/
-
+# We check again the language variable lang. If table file not available use default (lang = "en")
 if(!isset($lang)||empty($lang))  include($root_path.'chklang.php');
 
 /* Load the language table */
@@ -30,10 +26,10 @@ if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_indexframe.php')){
 	include($root_path.'language/'.$lang.'/lang_'.$lang.'_indexframe.php');
 }else{
 	include($root_path.'language/en/lang_en_indexframe.php');
-	$lang='en'; // last desperate effort to settle the language 
+	$lang='en'; # last desperate effort to settle the language 
 }
 
-// echo $HTTP_COOKIE_VARS['ck_config']; // for debugging only
+// echo $HTTP_COOKIE_VARS['ck_config']; # for debugging only
 
 if(($mask==2)&&!$nonewmask)
 {
@@ -42,7 +38,8 @@ if(($mask==2)&&!$nonewmask)
 }
 
 # Get the menu items
-$sql='SELECT nr,sort_nr,name,LD_var,url,is_visible FROM care_menu_main WHERE is_visible=1 OR LD_var="LDEDP" OR LD_var="LDLogin" ORDER by sort_nr ';
+//$sql="SELECT nr,sort_nr,name,LD_var AS \"LD_var\",url,is_visible FROM care_menu_main WHERE is_visible=1 OR LD_var='LDEDP' OR LD_var='LDLogin' ORDER by sort_nr";
+$sql="SELECT * FROM care_menu_main WHERE is_visible=1 OR LD_var='LDEDP' OR LD_var='LDLogin' ORDER by sort_nr";
 
 $result=$db->Execute($sql);
 
@@ -60,6 +57,9 @@ require_once($root_path.'include/care_api_classes/class_department.php');
 require_once($root_path.'include/care_api_classes/class_ward.php');
 $dept=new Department();
 $ward=new Ward();
+
+# Display of database type
+//echo $dbtype;
 
 require('./gui_bridge/gui_indexframe.php');
 ?>
