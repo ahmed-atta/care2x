@@ -47,7 +47,7 @@ $LDAlertNoCookie='Sie oder Ihr Browser hätte(n) möglicherweise die Cookies abgel
 								Cookies ein.<br>';
 $LDClkAfter='Danach klicken Sie hier an.';
 $LDGoAheadEgal='Klick hier an um das Program zu starten.';
-$LDGoAheadEgalCookie='I will KEINE Cookies annehmen. Starte das Program trotzdem weiter.';
+$LDGoAheadEgalCookie='Ich will KEINE Cookies annehmen. Starte das Program trotzdem weiter.';
 $LDCookieRef='Wenn Sie mehr über Cookies wissen wollen lesen Sie dieses Dokument:<br>
 						<a href=\'http://iug.uni-paderborn.de/info/datenschutz.html\' target=\'pp\'>Cookies und Datenschutz (Entgegen landläufiger Meinung)</a><br>';
 $LDPrivPolicy='Unsere Datenschutzbestimmungen können Sie  <a href=\'language/de/de_privacy.htm\' target=\'pp\'>hier lesen:</a>';
@@ -56,4 +56,6 @@ $LDSubmitNews='Online Redaktion';
 $LDEditNews='Nachrichten mit Online Redaktion schreiben';
 /* 2002-10-17 EL */
 $LDCredits='Credits';
+/* 2003-05-24 EL */
+$LDPublicItems='Allgemein zugänglich';
 ?>

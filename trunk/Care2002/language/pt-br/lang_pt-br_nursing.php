@@ -360,4 +360,27 @@ $LDRoom='Room';
 $LDAdm_Nr='Adm.Nr.';
 $LDStatus='Status';
 $LDInWard='In Ward';
+/* 2003-04-23 EL */
+$LDWard_ID='Ward ID';
+$LDNoSpecChars='No special characters allowed';
+/* 2003-04-24 EL*/
+$LDTemporaryCloseWard='Temporarily close this ward';
+$LDIrreversiblyCloseWard='Irreversibly close this ward';
+$LDSureTemporaryClose='Are you sure you want to close this ward temporarily?';
+$LDSureIrreversibleClose='Are you sure you want to close this ward IRREVERSIBLY ?';
+/* Do not translate the ~str~ , it will be replaced with the ward's name by the program */
+$LDWardNoClose='The ~str~ ward  cannot be closed because patients are still admitted.<br>You need to discharge all patients from the ward before closing it.';
+$LDBackToWardProfile='To go back to ward\'s profile';
+$LDShowWardOccupancy='To display the ward\'s occupancy list';
+$LDTemporaryClosed='Temporary closed';
+$LDReopenWard='Reopen this ward';
+$LDSureReopenWard='Are you sure you want to reopen this ward?';
+$LDShortDescription='Short description';
+$LDRoomShortDescription='Room\'s short description';
+$LDRoomNotCreated='Rooms not yet created';
+/* 2003-05-10 EL */
+$LDChangeRoom='Change of room';
+/*2003-06-14 EL*/
+$LDNrOfBedsRoom='The nr. of beds of room';
+$LDIsNotANumber='is not a valid number';
 ?>

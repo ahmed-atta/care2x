@@ -38,4 +38,29 @@ $LDDeleteEntry="Effacer l'entrée";
 $LDNoQuickList="La liste rapide est vide pour le moment.";
 $LDClick2Search="Veuillez cliquer ici afin d'aller à la recherche.";
 $LDPossibleCodes="Codes ICD & OPS possibles";
+/*2003-05-25 EL */
+$LDCategory='Category';
+$LDLoc='Loc.';
+$LDBy='By';
+$LDMostResponsible='Most responsible';
+$LDAssociated='Associated';
+$LDNosocomial='Nosocomial';
+$LDIatrogenic='Iatrogenic';
+$LDOther='Other';
+$LDMostResp_s='M';
+$LDAssociated_s='A';
+$LDNosocomial_s='N';
+$LDIatrogenic_s='I';
+$LDOther_s='O';
+
+$LDBothSides='Both sides';
+$LDLeft_s='S';
+$LDRight_s='R';
+$LDBothSides_s='B';
+/* 2003-05-29 EL*/
+$LDQMarks='??????';
+$LDNonSpecifiedGroup='Non-specified group';
+$LDSpecifyGroup='Specify group';
+$LDCreateGroupName='Create new group name';
+$LDSelect='Select';
 ?>

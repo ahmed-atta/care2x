@@ -25,7 +25,7 @@ $LDSearchCodes="Suchen nach Schlüsseln";
 $LDQuickList="Schnellliste";
 $LDConvert2IcdOps="-> ICD/OPS";
 $LDSearch="Suchen";
-$LDOperation="Operativer Eingriff";
+$LDOperation="Beschreibung";
 $LDAlertSureDelete="Möchten Sie wirklich den Eintrag löschen?";
 
 $LDAux="N";  // N = Nebendiagnose
@@ -39,4 +39,29 @@ $LDNoQuickList="Die Schnellliste ist momentan leer.";
 $LDClick2Search="Bitte clicken Sie hier an zum Suchen.";
 
 $LDPossibleCodes="Mögliche ICD & OPS Schlüsselnummer";
+/*2003-05-25 EL */
+$LDCategory='Kategorie';
+$LDLoc='Lok.';
+$LDBy='Von';
+$LDMostResponsible='Hauptdiagnose';
+$LDAssociated='Nebendiagnose';
+$LDNosocomial='Nosokomial';
+$LDIatrogenic='Iatrogen';
+$LDOther='Andere';
+$LDMostResp_s='H';
+$LDAssociated_s='N';
+$LDNosocomial_s='Ns';
+$LDIatrogenic_s='I';
+$LDOther_s='A';
+
+$LDBothSides='Beide Seiten';
+$LDLeft_s='L';
+$LDRight_s='R';
+$LDBothSides_s='B';
+/* 2003-05-29 EL*/
+$LDQMarks='??????';
+$LDNonSpecifiedGroup='Noch nicht benannte Gruppe';
+$LDSpecifyGroup='Gruppe benennen';
+$LDCreateGroupName='Neue Gruppenname anlegen';
+$LDSelect='Auswahl';
 ?>

@@ -359,4 +359,7 @@ $LDRoomShortDescription='Deskripsi singkat ruang ';
 $LDRoomNotCreated='Ruangan belum dibuat';
 /* 2003-05-10 EL */
 $LDChangeRoom='Change of room';
+/*2003-06-14 EL*/
+$LDNrOfBedsRoom='The nr. of beds of room';
+$LDIsNotANumber='is not a valid number';
 ?>

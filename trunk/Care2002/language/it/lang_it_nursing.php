@@ -388,4 +388,7 @@ $LDRoomShortDescription='Descrizione breve della sala';
 $LDRoomNotCreated='Non ci sono ancora sale';
 /* 2003-05-10 EL */
 $LDChangeRoom='Cambio sala';
+/*2003-06-14 EL*/
+$LDNrOfBedsRoom='The nr. of beds of room';
+$LDIsNotANumber='is not a valid number';
 ?>

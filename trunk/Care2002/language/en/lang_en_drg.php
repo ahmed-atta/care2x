@@ -29,7 +29,7 @@ $LDOperation='Operation';
 $LDAlertSureDelete='Are you sure you want to delete this entry?';
 
 $LDAux='A';   // A = Auxiliary
-$LDMain='M'; // M = Main
+$LDMain='Main'; // M = Main
 $LDRight='Right'; // R = Right
 $LDLeft='Left';   // L = Left
 $LDBoth='Both';  // B = Both or (both sides)
@@ -87,4 +87,7 @@ $LDAlertNoDescription='Please enter the code\'s description.';
 $LDCode='Code';
 /*2003-06-13 EL*/
 $LDAddGroupEncounter='Add group to encounter';
+$LDMain_s='M';
+$LDSupplemental='Supplemental';
+$LDSupp_s='S';
 ?>

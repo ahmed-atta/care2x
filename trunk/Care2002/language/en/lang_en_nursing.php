@@ -380,4 +380,7 @@ $LDRoomShortDescription='Room\'s short description';
 $LDRoomNotCreated='Rooms not yet created';
 /* 2003-05-10 EL */
 $LDChangeRoom='Change of room';
+/*2003-06-14 EL*/
+$LDNrOfBedsRoom='The nr. of beds of room';
+$LDIsNotANumber='is not a valid number';
 ?>

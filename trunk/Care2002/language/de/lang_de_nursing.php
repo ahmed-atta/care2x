@@ -370,4 +370,7 @@ $LDRoomShortDescription='Kurzbeschreibung von der Station';
 $LDRoomNotCreated='Zimmer noch nicht vorhanden';
 /* 2003-05-10 EL */
 $LDChangeRoom='Zimmerwechsel';
+/*2003-06-14 EL*/
+$LDNrOfBedsRoom='Die Bettenanzahl im Zimmer';
+$LDIsNotANumber='ist keine gültige Zahl';
 ?>

@@ -68,11 +68,11 @@ $LDBack2Archive='Zurück zum Archiv';
 $LDFrom='ab';
 $LDTo='bis';
 $LDUpdateData='Daten aktualisieren';
-$LDNewArchive='Neue suche im Archiv';
+$LDNewArchive='Noch mal im Archiv suchen';
 $LDAdmArchive='Patientenaufnahme Archiv';
 
 /************** note: do not erase the ' ~nr~ ' it will be replaced by the script with a number **************/
-$LDFoundData='Es wurde(n) ~nr~ relevante Daten gefunden!<br>Bitte klicken Sie den richtigen an.';
+$LDFoundData='Es gab ~nr~ Treffer!<br>Bitte klicken Sie den gewünschten Datensatz an.';
 
 $LDClk2Show='Klick zum zeigen';
 
@@ -183,7 +183,7 @@ $LDAdmissionTxt='Stationäre Aufnahme, Suchen, & Archiv';
 $LDImmunization='Impfungen';
 $LDESE='Eingabe, Suche, Bearbeitung';
 $LDImmunizationTxt=$LDESE.' von Impfdaten';
-$LDDRG='Diagnoses (DRG)';
+$LDDRG='DRG';
 $LDDRGTxt=$LDESE.' DRG (Diagnosis related groups)';
 $LDProcedures='Prozeduren';
 $LDProceduresTxt=$LDESE.' von Therapien';
@@ -246,7 +246,7 @@ $LDNotYetAdmitted='Noch nicht aufgenommen';
 $LDPatientCurrentlyAdmitted='Patient ist bereits aufgenommen!';
 $LDOptions='Optionen';
 /** note the ' ~nr~ ' must not be erased it will be replaced by the script with the number of search results ******/
-$LDSearchFoundAdmit='Ich habe <font color=red><b>~nr~</b></font> relevante Aufnahmedaten gefunden.';
+$LDSearchFoundAdmit='Ich habe <font color=red><b>~nr~</b></font> relevante Daten gefunden.';
 $LDPatientNr='PatientenNr.';
 $LDNoRecordYet='~tag~ hat noch kein ~obj~ .';
 $LDNoRecordFor='Noch keine Daten vorhanden.';
@@ -320,7 +320,7 @@ $LDcancelled='storniert';
 /* 2003-03-10 EL */
 $LDGotMedAdvice='Aufklärung';
 /* 2003-03-15 EL */
-$LDShowDocList='Die Dokumentenliste auflisten';
+$LDShowDocList='Die Dokumente auflisten';
 $LDScheduleNewAppointment='Neues Termin';
 /* 2003-04-04 EL */
 $LDNoPendingApptThisDay='Keine Termine an diesem Tag vorhanden.';
@@ -332,4 +332,13 @@ $LDRegisterNewPerson='Eine neue Person aufnehmen';
 /* 2003-05-17 EL */
 $LDEnterPersonSearchKey='Stichwort eingeben: z.B. Personen-Nr. (PID), Name, oder Vorname';
 $LDPersonData='Personendaten';
+/* 2003-05-26 EL*/
+$LDDiagnoses='Diagnosen';
+$LDCreateNewForm='Create a form for';
+$LDOtherRecords='Andere Einträge';
+/*2003-06-17 El*/
+$LDFullForm='Komplettes Formular';
+$LDAllContents='Alle Inhalte';
+$LDAllText='Nur dynamische Inhalte';
+$LDDataOnly='Nur fallrelevante Daten';
 ?>

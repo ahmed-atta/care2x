@@ -44,4 +44,6 @@ $LDDepartment='Department';
 $LDPressRelations='Press Relations';
 /* 2003-05-19 EL */
 $LDSelectDept='Select department';
+/*2003-06-15 EL*/
+$LDPlsSelectDept='Please select a department';
 ?>

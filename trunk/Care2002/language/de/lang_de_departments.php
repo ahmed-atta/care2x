@@ -35,4 +35,15 @@ $LDTechnicalMaintenance='Technik';
 $LDITDepartment='EDV';	
 $LDGeneralAmbulatory='Allgemeine Ambulanz';
 $LDBloodBank='Blutzentrale';
+$LDNursing='Pflege';
+/* 2003-04-27 EL */
+$LDMedical='Medizinisch';
+$LDSupport='Nicht-medizinisch';
+$LDNews='Nachrichten (Presse)';
+$LDDepartment='Abteilung';
+$LDPressRelations='Presse';
+/* 2003-05-19 EL */
+$LDSelectDept='Abteilung auswählen';
+/*2003-06-15 EL*/
+$LDPlsSelectDept='Bitte wählen Sie eine Abteilung aus';
 ?>

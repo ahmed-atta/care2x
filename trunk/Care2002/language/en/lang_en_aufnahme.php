@@ -184,7 +184,7 @@ $LDAdmissionTxt='Inpatient admission, search, research';
 $LDImmunization='Immunization';
 $LDESE='Enter, search, edit';
 $LDImmunizationTxt=$LDESE.' immunization report';
-$LDDRG='DRG\'s';
+$LDDRG='DRG (composite)';
 $LDDRGTxt=$LDESE.' DRG (Diagnosis related groups)';
 $LDProcedures='Procedures';
 $LDProceduresTxt=$LDESE.' therapy procedures';
@@ -335,4 +335,11 @@ $LDEnterPersonSearchKey='Enter search keyword: e.g. PID, first name, or family n
 $LDPersonData='Personal data';
 /* 2003-05-26 EL*/
 $LDDiagnoses='Diagnoses';
+$LDCreateNewForm='Create a form for';
+$LDOtherRecords='Other records';
+/*2003-06-17 El*/
+$LDFullForm='Full form';
+$LDAllContents='All contents';
+$LDAllText='Dynamic contents only';
+$LDDataOnly='Encounter relevant data only';
 ?>
