@@ -34,11 +34,11 @@ require_once('../../include/inc_vars_resolve.php');
 			<b>La traduction italienne de Care 2002 était réalisée par Giuseppe Scarpi:</b>
 			<p>
 			Giuseppe Scarpi est né à Rome, Italie, il y a 35 ans.
-			<p>He has a degree in Electronic Engineering and has worked for several companies in the biomedical sector, 
-			where he developed an understanding about the relationships between medical and informatics worlds.<br>
-He uses and appreciates both Linux and Windows, "<i>as both are the result of a great human work that must be respected</i>".<p>
-He decided to actively join open source because: <br><i>"Such an ideal world can survive only if perfectly balanced. If you take something,
- you should also give back in proportion."</i>
+			<p>Il a un diplôme d'Ingénieur en Électronique et il a travaillé pour plusieures companies dans le secteur biomédical,
+			où il a développé une compréhension de la relation entre le monde de l'informatique et médecine.<br>
+Il utilise et apprécie les deux, Linux et Windows, "<i>en tant que résultat d'un grand travail humain qui doit être respecté</i>".<p>
+Il a décidé de joindre activement la source libre car:<br><i>"Un tel monde idéal peut survivre uniquement s'il est parfaitement équilibré. Si vous prenez quelque chose,
+ vous devriez rendre quelque chose en proportion."</i>
 
 			<P><a href="mailto:kalbun@inwind.it"><u>Giuseppe Scarpi  peut être  contacté ici..</u></a>
 </TD></TR></TBODY></TABLE>
@@ -106,7 +106,7 @@ He decided to actively join open source because: <br><i>"Such an ideal world can
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Extensions de sécurité</font></td>
   </tr>
   <tr>
-    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Matêj Hausenblas (FR)</font></nobr>&nbsp;</td>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Matej Hausenblas (FR)</font></nobr>&nbsp;</td>
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;La traduction fran&ccedil;aise</font></td>
   </tr>
   <tr>
