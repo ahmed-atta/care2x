@@ -23,6 +23,7 @@ if(!isset($mode)){
 	//include('./include/save_prescription.inc.php');
 	include('./include/save_admission_data.inc.php');
 }
+$lang_tables=array('legal.php');
 require('./include/init_show.php');
 
 $sql="SELECT e.insurance_nr,e.current_dept_nr,f.name AS insurers_name 
