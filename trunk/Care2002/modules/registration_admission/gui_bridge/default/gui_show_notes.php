@@ -1,7 +1,7 @@
 <?php
 if(isset($HTTP_SESSION_VARS['sess_file_return'])&&!empty($HTTP_SESSION_VARS['sess_file_return']))
 	$returnfile=$HTTP_SESSION_VARS['sess_file_return'];
-	else $returnfile='show_appointment.php';
+	else $returnfile=$top_dir.'show_appointment.php';
 
 require('./gui_bridge/default/gui_std_tags.php');
 
@@ -215,14 +215,26 @@ while($row=$result->FetchRow()){
 
   <tr  bgcolor="<?php echo $bgc; ?>"  valign="top">
     <td><FONT SIZE=-1  FACE="Arial"><?php if(!empty($row['date'])) echo @formatDate2Local($row['date'],$date_format); ?></td>
-    <td><FONT SIZE=-1  FACE="Arial" color="#000033"><?php if(!empty($row['notes'])) echo $row['notes'].'<br>'; ?>
-	<?php
-		if(!empty($row['short_notes'])) echo '[ '.$row['short_notes'].' ]';
+    <td><FONT SIZE=-1  FACE="Arial" color="#000033">
+	<?php 
+		if(!empty($row['notes'])) echo hilite(substr($row['notes'],0,$GLOBAL_CONFIG['notes_preview_maxlen']));
+		if (strlen($row['notes']) > $GLOBAL_CONFIG['notes_preview_maxlen']) echo ' [...]';
+		echo '<br>'; 
+		if(!empty($row['short_notes'])) echo '[ '.hilite($row['short_notes']).' ]';
 	?>
 	</td>
-    <td align="center"><a href="#"><img <?php echo createComIcon($root_path,'info3.gif','0'); ?>></a></td>
-    <td><FONT SIZE=-1  FACE="Arial"><?php if($row['personell_nr']) echo $row['personell_nr']; ?></td>
-    <td><FONT SIZE=-1  FACE="Arial"><?php echo $HTTP_SESSION_VARS['sess_full_en']; ?></td>
+    <td align="center"><?php if (strlen($row['notes']) > $GLOBAL_CONFIG['notes_preview_maxlen']) echo '<a href="#"><img '.createComIcon($root_path,'info3.gif','0').'></a>'; ?></td>
+    <td><FONT SIZE=-1  FACE="Arial"><?php if($row['personell_name']) echo $row['personell_name']; ?></td>
+    <td><FONT SIZE=-1  FACE="Arial">
+	<?php 
+		switch($row['encounter_class_nr'])
+		{
+			case 1:  echo ($row['encounter_nr']+$GLOBAL_CONFIG['patient_inpatient_nr_adder']);
+						break;
+			case 2:  echo ($row['encounter_nr']+$GLOBAL_CONFIG['patient_outpatient_nr_adder']);
+						break;
+		}
+	?></td>
   </tr>
 
 <?php
@@ -300,7 +312,7 @@ if($parent_admit) {
 ?>
 <img <?php echo createComIcon($root_path,'l-arrowgrnlrg.gif','0','absmiddle'); ?>>
 <a href="<?php echo $returnfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=show&type_nr='.$type_nr; ?>"> 
-<?php echo $LDBackToOptions; ?>
+<?php echo $LDBackToOptions;  ?>
 </a>
 
 </td>

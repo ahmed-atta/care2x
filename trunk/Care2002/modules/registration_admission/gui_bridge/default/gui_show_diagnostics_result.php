@@ -19,7 +19,24 @@ while($row=$result->FetchRow()){
   <tr bgcolor="#fefefe">
     <td><a href="<?php echo $buf; ?>&user_origin=patreg" target="_new"><img <?php echo createComIcon($root_path,'info3.gif','0'); ?>></a></td>
     <td><FONT SIZE=-1  FACE="Arial"><?php echo $row['report_nr']; ?></td>
-    <td><FONT SIZE=-1  FACE="Arial" color="#006600"><b><?php echo $row['reporting_dept']; ?></b></td>
+    <td><FONT SIZE=-1  FACE="Arial" color="#006600"><b>
+	<?php 
+		$deptnr_ok=false;
+		while(list($x,$v)=each($depts_array)){
+			if($v['nr']==$row['reporting_dept_nr']){
+				$deptnr_ok=true;
+				break;
+			}
+		}
+		reset($depts_array);
+		if($deptnr_ok){
+			if(isset($$v['LD_var'])&&!empty($$v['LD_var'])) echo $$v['LD_var'];
+				else echo $v['name_formal'];
+		}else{
+			echo $row['reporting_dept'].$row['reporting_dept_nr'];
+		}
+	 ?></b>
+	</td>
     <td><FONT SIZE=-1  FACE="Arial"><?php echo $full_en; ?></td>
     <td><FONT SIZE=-1  FACE="Arial"><?php echo @formatDate2Local($row['report_date'],$date_format); ?></td>
     <td><FONT SIZE=-1  FACE="Arial"><?php echo $row['report_time']; ?></td>

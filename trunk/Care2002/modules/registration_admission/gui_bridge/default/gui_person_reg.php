@@ -125,7 +125,7 @@ require('./gui_bridge/default/gui_tabs_patreg.php');
 
  <div class="cats">
 <a href="javascript:hidecat()"><img
-<?php if($from=="pass")
+<?php if($from=='pass')
 { 
     echo 'src="'.$root_path.'main/imgcreator/catcom.php?lang='.$lang.'&person='.strtr($HTTP_COOKIE_VARS[$local_user.$sid]," ","+").'" ';
  }
