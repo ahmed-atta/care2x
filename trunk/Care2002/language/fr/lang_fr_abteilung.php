@@ -2,8 +2,8 @@
 $LDPageTitle='Départements';
 $LDDeptTxt='Département';
 $LDOpenHrsTxt='Horaires de travail';
-$LDChkHrsTxt="Les horaires d'examens médicaux";
-$LDClk4Info="Cliquez pour plus d'informations";
+$LDChkHrsTxt='Les horaires d\'examens médicaux';
+$LDClk4Info='Cliquez pour plus d\'informations';
 $LDDayTxt='Jour';
 
 /**

@@ -9,7 +9,7 @@ $LDEmergency='Urgence ambulatoire';
 $LDSonography='Sonographie';
 $LDNuclearMed='Diagnostiques Nucléaires';
 $LDAdmission='Admission';
-$LDAdmissionTxt='Admission/renvoi de l`ambulatoire, recherche, archive';
+$LDAdmissionTxt='Admission/renvoi de l\'ambulatoire, recherche, archive';
 $LDNews='Nouvelles';
 $LDNewsTxt='Nouvelles spécifiques pour la clinique, mémo, info, etc.';
 
