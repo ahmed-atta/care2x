@@ -26,7 +26,12 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 		<form action="<?php echo $root_path; ?>modules/phpmyadmin/index.php" method="post">
 			<input type="hidden" name="lang" value="<?php echo $lang ?>">
 			<input type="hidden" name="sid" value="<?php echo $sid; ?>">
-			<input type="submit" value="<?php echo $LDContinue ?>">
+			<input type="submit" value="<?php echo 'phpMyAdmin' ?>">
+		</form><p> 
+		<form action="<?php echo $root_path; ?>development/G2_PG/phpPgAdmin-3.2.1/index.php" method="post">
+			<input type="hidden" name="lang" value="<?php echo $lang ?>">
+			<input type="hidden" name="sid" value="<?php echo $sid; ?>">
+			<input type="submit" value="<?php echo 'phpPgAdmin' ?>">
 		</form><p> 
 		<form action="edv.php" method="post">
 			<input type="hidden" name="lang" value="<?php echo $lang ?>">
