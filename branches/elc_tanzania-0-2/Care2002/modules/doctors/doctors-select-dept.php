@@ -91,6 +91,13 @@ $smarty->assign('LDPlsSelectDept',$LDPlsSelectDept);
 
 $toggler=0;
 
+if(!$nr)
+{
+	echo '<tr class="wardlistrow1">'; $toggler=1;
+	echo '<td ><font face="verdana,arial" size="2" >&nbsp;'.$bold.$LDAllDoctors.$boldx.'&nbsp;</td>';
+	echo '<td >&nbsp; <a href="doctors-dienst-personalliste-all.php">
+	<img '.createLDImgSrc($root_path,'ok_small.gif','0','absmiddle').' alt="'.$LDShowActualPlan.'" ></a> </td></tr>';
+}
 while(list($x,$v)=each($dept_DOC)){
 		
 	$bold='';

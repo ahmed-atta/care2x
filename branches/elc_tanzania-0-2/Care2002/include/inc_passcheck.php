@@ -98,7 +98,7 @@ if($dblink_ok)
 					//setcookie($userck.$sid,$zeile['name']);	
 					//echo $fileforward;
 					$HTTP_SESSION_VARS['sess_user_name']=$zeile['name'];
-										
+					
 					header('Location:'.strtr($fileforward,' ','+').'&checkintern='.$checkintern);
 					exit;					
 				}else {$passtag=2;};

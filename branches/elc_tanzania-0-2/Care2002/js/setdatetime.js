@@ -16,7 +16,6 @@
 *  return true if date is created, other wise false and the input entry will be erased
 */
 function setDate(elindex, date_format, lang){
-
    var make_time = 0;
 	var actual = '';
 	
@@ -117,6 +116,50 @@ function setDate(elindex, date_format, lang){
 	   return false;
 	}
 }
+
+/**
+*  setDatebyAge will set the date by a given age
+*  param elindex = a form object of the type input text
+*  param date = the date format any one of ff:  yyyy-mm-dd, dd.mm.yyyy, mm/dd/yyyy
+*  param lang = the ISO code of the language
+*  return true if date is created, other wise false and the input entry will be erased
+*/
+function setDatebyAge(elindex, birth, date_format, lang){
+
+   var make_time = 0;
+	var actual = '';
+	
+    /* Prepare the language dependent shortcuts */
+	switch(lang.toLowerCase())
+	{
+	   case 'de': today = 'h';  // h = heute
+	              yesterday = 'g';  // g = gestern
+				  break;
+	   case 'it': today = 'o';       // o = oggi
+	              yesterday = 'i';   // i = ieri
+				  break;
+	   case 'es':  today = 'h';       // h = hoy
+	              yesterday = 'a';   // a = ayer
+				  break; 
+	   case 'fr':  today = 'a';       // h = aujourd'hui
+	              yesterday = 'h';   // a = hier
+				  break; 
+	  
+	   default: today = 't';         // t = today
+	            yesterday = 'y';     // y = yesterday
+	}
+	/* Extract the value of the input element an convert to lower case to be sure */
+	var jetzt = new Date();
+	var Jahr = jetzt.getFullYear();
+	buf = Jahr-(elindex.value);
+	if(elindex.value>0)
+	{
+	    birth.value=buf; //* Now set the value of the element
+	    IsValidDate(birth,date_format);
+	}
+	    return true;
+}
+
 
 /**
 *  setTime will set the time according to the trigger input

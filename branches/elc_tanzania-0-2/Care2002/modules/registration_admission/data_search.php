@@ -54,7 +54,7 @@ if(isset($target)) {
    switch ($target)
 	{
 	    case 'insurance' :   
-		                            $sql="SELECT name AS \"insurance_firm_name.value\", firm_id AS \"insurance_firm_id.value\", use_frequency FROM care_insurance_firm";
+		              $sql="SELECT name AS \"insurance_firm_name.value\", firm_id AS \"insurance_firm_id.value\", use_frequency FROM care_insurance_firm";
 									if($mode=='search') {
 									$sql.=" WHERE name $sql_LIKE '$searchkey%' OR firm_id $sql_LIKE '$searchkey%'";
 									} else {

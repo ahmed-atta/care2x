@@ -7,6 +7,7 @@ $LDTitle='Occupation';
 $LDLastName='Surname/Ukoo';
 $LDFirstName='First name';
 $LDBday='Date of birth';
+$LDAge='OR: [ age in years ]';
 $LDPhone='Phone';
 $LDAdmitBy='Admitted by';
 $LDSex='Sex';
@@ -409,4 +410,7 @@ $LDNr='Nr.';
 $LDOtherHospitalNr='Other Hospital Nr.';
 $LDSelectOtherHospital = 'Select other hospital to change the number';
 $LDNoNrNoDelete = 'no number = delete';
+# 2005-02-02 RM
+$LDTribeNew = 'New Tribe';
+$LDTribeSelectComment = 'No hit -> Enter new tribe';
 ?>

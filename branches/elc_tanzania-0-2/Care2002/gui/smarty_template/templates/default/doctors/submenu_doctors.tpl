@@ -6,11 +6,11 @@
 					<TABLE cellSpacing=1 cellPadding=3 width=600>
 					<TBODY class="submenu">
 
-					{{$LDQViewTxt}}
+					{{*$LDQViewTxt*}}
 
 					{{include file="common/submenu_row_spacer.tpl"}}
 
-					{{$LDDutyPlanTxt}}
+					{{*$LDDutyPlanTxt*}}
 
 					{{include file="common/submenu_row_spacer.tpl"}}
 
@@ -18,7 +18,7 @@
 
 					{{include file="common/submenu_row_spacer.tpl"}}
 
-					{{$LDNewsTxt}}
+					{{*$LDNewsTxt*}}
 
 					</TBODY>
 					</TABLE>

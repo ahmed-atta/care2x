@@ -51,6 +51,9 @@ if(!$passtag) $smarty->assign('sMascotColumn','<td><img '.createMascot($root_pat
 #
 $smarty->assign('sPassFormParams','action="'.$thisfile.'" method="post" name="passwindow" onSubmit="return pruf(this);"');
 $smarty->assign('LDPwNeeded',$LDPwNeeded);
+// For demo-Page health.elct.org:
+  $smarty->assign('sDemoLoginInfo',"use: demo");
+  $smarty->assign('sDemoPasswordInfo',"use: demo");
 $smarty->assign('LDUserPrompt',$LDUserPrompt);
 $smarty->assign('LDPwPrompt',$LDPwPrompt);
 

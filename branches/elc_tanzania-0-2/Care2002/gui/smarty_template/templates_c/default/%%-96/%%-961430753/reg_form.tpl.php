@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.0, created on 2004-11-23 17:03:39
+<?php /* Smarty version 2.6.0, created on 2005-02-18 15:16:01
          compiled from registration_admission/reg_form.tpl */ ?>
 				<?php echo $this->_tpl_vars['sRegFormJavaScript']; ?>
 
@@ -83,8 +83,34 @@ unset($_smarty_tpl_vars);
 
 				<?php echo $this->_tpl_vars['sNameMiddle']; ?>
 
-				<?php echo $this->_tpl_vars['sNameMaiden']; ?>
+    			<?php if ($this->_tpl_vars['bShowTribeSelection']): ?>
+    					    					<tr>
+    					  <td class="reg_item">
+    					    <?php echo $this->_tpl_vars['sNameTribe']; ?>
 
+   					    </td>
+        					  <td class="reg_input">
+        					    <?php echo $this->_tpl_vars['sTribeSelect']; ?>
+
+        				</td>
+        			  </td>        					  
+    					</tr>
+    					
+    				<?php else: ?>
+    				  <?php echo $this->_tpl_vars['sNameTribe']; ?>
+
+    				<?php endif; ?>				
+    		
+    					<tr>
+    					  <td class="reg_item" valign=top class="reg_input">
+            		<?php echo $this->_tpl_vars['sTownCity']; ?>
+
+            		<td colspan=2 class="reg_input">
+        		    <?php echo $this->_tpl_vars['sTownCitySelect']; ?>
+
+        		    </td>
+            		</td>
+            	</tr>
 				<?php echo $this->_tpl_vars['sNameOthers']; ?>
 
 
@@ -121,10 +147,15 @@ unset($_smarty_tpl_vars);
  &nbsp;&nbsp; <?php echo $this->_tpl_vars['sBGABInput'];  echo $this->_tpl_vars['LDAB']; ?>
   &nbsp;&nbsp; <?php echo $this->_tpl_vars['sBGOInput'];  echo $this->_tpl_vars['LDO']; ?>
 
+          &nbsp;&nbsp;
+					| <?php echo $this->_tpl_vars['RHfactor']; ?>
+ <?php echo $this->_tpl_vars['sBRHposInput'];  echo $this->_tpl_vars['RHpos']; ?>
+  &nbsp;&nbsp; <?php echo $this->_tpl_vars['sBRHnegInput'];  echo $this->_tpl_vars['RHneg']; ?>
+
+					<br>
 				</td>
 				</tr>
 			<?php endif; ?>
-
 			<?php if ($this->_tpl_vars['LDCivilStatus']): ?>
 				<tr>
 				<td class="reg_item">
@@ -164,10 +195,7 @@ unset($_smarty_tpl_vars);
 
 					</td>
 					<td class="reg_input">
-						<?php echo $this->_tpl_vars['LDStreetNr']; ?>
- &nbsp;&nbsp; <?php echo $this->_tpl_vars['sStreetNrInput']; ?>
-
-					</td>
+						 &nbsp;&nbsp; 					</td>
 				</tr>
 
 				<tr>
@@ -308,3 +336,4 @@ unset($_smarty_tpl_vars);
 		<?php endif; ?>
 
 		<?php echo $this->_tpl_vars['sNewDataForm']; ?>
+

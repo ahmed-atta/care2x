@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.0, created on 2004-07-05 00:41:47
+<?php /* Smarty version 2.6.0, created on 2005-02-02 11:19:14
          compiled from nursing/nursing.tpl */ ?>
 		 <blockquote>
 			<TABLE cellSpacing=0  width=600 class="submenu_frame" cellpadding="0">
@@ -44,9 +44,7 @@ $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>
 
-					<?php echo $this->_tpl_vars['LDArchive']; ?>
-
-
+					
 					<?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "common/submenu_row_spacer.tpl", 'smarty_include_vars' => array()));
 $this->_tpl_vars = $_smarty_tpl_vars;
@@ -71,9 +69,7 @@ $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>
 
-					<?php echo $this->_tpl_vars['LDNews']; ?>
-
-
+					
 					</TBODY>
 					</TABLE>
 				</TD>

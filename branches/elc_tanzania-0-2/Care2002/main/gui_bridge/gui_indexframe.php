@@ -90,8 +90,8 @@ require("menu/$LocMenuTreeDir/mainmenu.inc.php");
 
 <?php
 //echo $HTTP_COOKIE_VARS['ck_config']; // used only in debugging related to user config data
-
-if(!$GLOBALCONFIG['language_single']){
+//echo $GLOBALCONFIG['language_single']."<br>";
+if($GLOBALCONFIG['language_single']<>1){
 ?>
 <tr>
 <td colspan=3>
@@ -125,9 +125,11 @@ echo $langselect;
 <tr >
 <td colspan=3>
 <font SIZE=1 color="#6f6f6f" face="arial,verdana">
-<?php echo $dbtype; ?>
+Demo-loginname: demo<br>
+Demo-password: demo<br>
+<?php echo "We use a ".$dbtype." database"; ?>
 <br>
-<nobr><b><?php echo $LDUser ?>:</b></nobr><br>
+<nobr><b><?php echo $LDUser ?>:</b></nobr>
 <?php echo  $HTTP_SESSION_VARS['sess_login_username']; ?><br>
 <?php echo $dept->FormalName($cfg['thispc_dept_nr']); ?><br>
 <?php echo $ward->WardName($cfg['thispc_ward_nr']); ?><br>

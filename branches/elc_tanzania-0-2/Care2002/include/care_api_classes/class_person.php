@@ -119,10 +119,12 @@ class Person extends Core {
 				 'name_others',
 				 'date_birth',
 				 'blood_group',
+				 'rh',
 				 'addr_str',
 				 'addr_str_nr',
 				 'addr_zip',
 				 'addr_citytown_nr',
+				 'addr_citytown_name',
 				 'phone_1_code',
 				 'phone_1_nr',
 				 'phone_2_code',
@@ -211,10 +213,12 @@ class Person extends Core {
         global $HTTP_POST_VARS;
 		$x='';
 		$v='';
+				
 		$this->data_array=NULL;
 		if(!isset($HTTP_POST_VARS['create_time'])||empty($HTTP_POST_VARS['create_time'])) $HTTP_POST_VARS['create_time']=date('YmdHis');
 		while(list($x,$v)=each($this->elems_array)) {
 	    	if(isset($HTTP_POST_VARS[$v])&&!empty($HTTP_POST_VARS[$v])) $this->data_array[$v]=$HTTP_POST_VARS[$v];
+	    	
 	    }
     }	
 	/**
@@ -310,12 +314,13 @@ class Person extends Core {
 	    global $db;
 		 
 		if(!$this->internResolvePID($pid)) return false;
-	    $this->sql="SELECT p.*, addr.name AS addr_citytown_name,ethnic.name AS ethnic_orig_txt
+	    $this->sql="SELECT p.*, addr_citytown_name,ethnic.name AS ethnic_orig_txt
 					FROM $this->tb_person AS p
 					LEFT JOIN  $this->tb_citytown AS addr ON p.addr_citytown_nr=addr.nr
 					LEFT JOIN  $this->tb_ethnic_orig AS ethnic ON p.ethnic_orig=ethnic.nr
 					WHERE p.pid='$this->pid' ";
         //echo $this->sql;
+        
         if($this->result=$db->Execute($this->sql)) {
             if($this->result->RecordCount()) {
 				 return $this->result;	 

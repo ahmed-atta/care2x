@@ -131,31 +131,24 @@ if($pid!='' || $encounter_nr!=''){
 					  *  $error = 1 will cause to show the "save anyway" override button to save the incomplete data
 					  *  $error = 2 will cause to force the user to enter a data in an input element (no override allowed)
 					  */
+					  
 	                  $encoder=trim($encoder); 
 					  if($encoder=='') $encoder=$HTTP_SESSION_VARS['sess_user_name'];
 					  
-	                  $referrer_diagnosis=trim($referrer_diagnosis);
-					  if ($referrer_diagnosis=='') { $errordiagnose=1; $error=1; $errornum++; };
-					  
-	                  $referrer_dr=trim($referrer_dr);
-					  if ($referrer_dr=='') { $errorreferrer=1; $error=1; $errornum++;};
-					  
-	                  $referrer_recom_therapy=trim($referrer_recom_therapy);
-					  if ($referrer_recom_therapy=='') { $errortherapie=1; $error=1; $errornum++;};
-					  
-	                  $referrer_notes=trim($referrer_notes);
-					  if ($referrer_notes=='') { $errorbesonder=1; $error=1; $errornum++;};
+					  /*if ($referrer_notes=='') { $errorbesonder=1; $error=1; $errornum++;};
 					  
 	                  $encounter_class_nr=trim($encounter_class_nr);
+	          
 					  if ($encounter_class_nr=='') { $errorstatus=1; $error=1; $errornum++;};
 	
 			          if($insurance_show) {
                           if(trim($insurance_nr) &&  trim($insurance_firm_name)=='') { $error_ins_co=1; $error=1; $errornum++;}
 		              }
-	              }
- 				
+	           */   }
+ 						
 
 
+						
                  if(!$error) 
 	             {	
 					
@@ -405,22 +398,6 @@ function chkform(d) {
 		alert("<?php echo $LDPlsSelectDept; ?>");
 		d.current_dept_nr.focus();
 		return false;
-	}else if(d.referrer_diagnosis.value==""){
-		alert("<?php echo $LDPlsEnterRefererDiagnosis; ?>");
-		d.referrer_diagnosis.focus();
-		return false;
-	}else if(d.referrer_dr.value==""){
-		alert("<?php echo $LDPlsEnterReferer; ?>");
-		d.referrer_dr.focus();
-		return false;
-	}else if(d.referrer_recom_therapy.value==""){
-		alert("<?php echo $LDPlsEnterRefererTherapy; ?>");
-		d.referrer_recom_therapy.focus();
-		return false;
-	}else if(d.referrer_notes.value==""){
-		alert("<?php echo $LDPlsEnterRefererNotes; ?>");
-		d.referrer_notes.focus();
-		return false;
 	}else if(d.encoder.value==""){
 		alert("<?php echo $LDPlsEnterFullName; ?>");
 		d.encoder.focus();
@@ -596,7 +573,6 @@ if(!isset($pid) || !$pid){
 
 			# If no encounter nr or inpatient, show ward/station info, 1 = inpatient
 			if(!$encounter_nr||$encounter_class_nr==1){
-
 				if ($errorward||$encounter_class_nr==1) $smarty->assign('LDWard',"<font color=red>$LDWard</font>");
 					$smarty->assign('LDWard',$LDWard);
 				$sTemp = '';

@@ -2,7 +2,8 @@
 $LDHome='Home';
 $LDPatient='Patient';
 $LDAdmission='Admission';
-$LDAmbulatory='Ambulatory';
+$LDAmbulatory='Outpatient';
+$LDInpatient='Inpatient';
 $LDMedocs='Medocs';
 $LDDoctors='Doctors';
 $LDNursing='Nursing';

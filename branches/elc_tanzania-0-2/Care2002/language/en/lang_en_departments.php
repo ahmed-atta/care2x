@@ -9,6 +9,7 @@ $LDExhibitions='Exhibitions';
 $LDHeadline='Headline';
 $LDAdmission='Admission';
 /* 2003-08-20 DH */
+$LDAllDoctors='List of all doctors';
 $LDAnesthesiology='Anesthesiology';
 $LDCafeteria='Cafeteria News';
 $LDGeneralSurgery='General Surgery';

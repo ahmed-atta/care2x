@@ -26,7 +26,7 @@
 
 					{{include file="common/submenu_row_spacer.tpl"}}
 
-					{{$LDArchive}}
+					{{*$LDArchive*}}
 
 					{{include file="common/submenu_row_spacer.tpl"}}
 
@@ -38,7 +38,7 @@
 
 					{{include file="common/submenu_row_spacer.tpl"}}
 
-					{{$LDNews}}
+					{{*$LDNews*}}
 
 					</TBODY>
 					</TABLE>

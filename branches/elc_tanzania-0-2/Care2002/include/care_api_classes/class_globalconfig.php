@@ -65,7 +65,6 @@ class GlobalConfig  extends Core{
 	*/
 	function getConfig($type='') {
 	    global $db, $sql_LIKE;
-		
 	    if(empty($type)||!$type) {
 		    $this->condition='1';
 		} else {

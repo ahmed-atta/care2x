@@ -60,7 +60,30 @@
 				{{$sName2}}
 				{{$sName3}}
 				{{$sNameMiddle}}
-				{{$sNameMaiden}}
+    			{{if $bShowTribeSelection}}
+    					{{*$sOtherNrSelect*}}
+    					<tr>
+    					  <td class="reg_item">
+    					    {{ $sNameTribe }}
+   					    </td>
+        					  <td class="reg_input">
+        					    {{ $sTribeSelect }}
+        				</td>
+        			  </td>        					  
+    					</tr>
+    					
+    				{{else}}
+    				  {{ $sNameTribe }}
+    				{{/if}}				
+    		
+    					<tr>
+    					  <td class="reg_item" valign=top class="reg_input">
+            		{{$sTownCity}}
+            		<td colspan=2 class="reg_input">
+        		    {{ $sTownCitySelect }}
+        		    </td>
+            		</td>
+            	</tr>
 				{{$sNameOthers}}
 
 				<tr>

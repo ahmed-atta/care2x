@@ -77,7 +77,6 @@ if(!isset($mode)){
 			$mode='update';
 		include('./include/save_admission_data.inc.php');
 	}
-	
 }
 $lang_tables=array('prompt.php','departments.php');
 require('./include/init_show.php');

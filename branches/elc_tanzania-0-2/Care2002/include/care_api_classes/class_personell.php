@@ -262,6 +262,34 @@ class Personell extends Core {
 		    return FALSE;
 		}
 	}
+	function _getAllPersonellAllDepts($loc_type_nr,$role_nr=0){
+	    global $db, $dbf_nodate;
+		$row=array();
+		
+		$sql="SELECT a.nr, a.personell_nr, ps.job_function_title, p.name_last, p.name_first, p.date_birth, p.sex
+				FROM 	$this->tb_assign AS a,
+							$this->tb AS ps,
+							$this->tb_person AS p			
+				WHERE a.role_nr=$role_nr 
+					AND a.location_type_nr=$loc_type_nr 
+					AND (a.date_end='$dbf_nodate' OR a.date_end>='".date('Y-m-d')."')
+					AND a.status NOT IN ($this->dead_stat)
+					AND a.personell_nr=ps.nr
+					AND ps.pid=p.pid 
+				ORDER BY p.name_last, p.name_first";
+				
+		
+	    if ($this->result=$db->Execute($sql)) {
+		    if ($this->record_count=$this->result->RecordCount()) {
+		    	return $this->result;
+			} else {
+				return FALSE;
+			}
+		}
+		else {
+		    return FALSE;
+		}
+	}
 	/**#@-*/
 	
 	/**#@+

@@ -327,7 +327,8 @@ if($ward_ok){
 		// Scan the patients object if the patient is assigned to the bed & room
 		# Loop through room beds
 
-		for($j=1;$j<=$room_info['nr_of_beds'];$j++){
+		//for($j=1;$j<=$room_info['nr_of_beds'];$j++){
+		for($j=1;$j<=$nr_beds;$j++){
 
 			# Reset elements
 

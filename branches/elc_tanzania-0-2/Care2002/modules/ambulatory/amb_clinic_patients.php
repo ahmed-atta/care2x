@@ -1,4 +1,5 @@
 <?php
+
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
@@ -65,8 +66,10 @@ if(($mode=='')||($mode=='fresh')){
 	
 	# Get all outpatients for this dept
 	$opat_obj=&$enc_obj->OutPatientsBasic($dept_nr);
+	
 	//echo $enc_obj->getLastQuery();
 	$rows=$enc_obj->LastRecordCount();
+	
 	# If dept name is empty, fetch by location nr
 	if(!isset($dept)||empty($dept)){
 		# Create department object 
@@ -76,6 +79,7 @@ if(($mode=='')||($mode=='fresh')){
 		if(isset($$deptLDvar)&&!empty($$deptLDvar)) $dept=$$deptLDvar;
 			else $dept=$dept_obj->FormalName($dept_nr);
 	}
+	
 	# set to edit mode
 	$edit=true;
 	
@@ -91,7 +95,9 @@ if(($mode=='')||($mode=='fresh')){
 		if(SHOW_DOC_2) $elem.=',duty_2_pnr';
 		
 		# Create personnel object
+		
 		include_once($root_path.'include/care_api_classes/class_personell.php');
+		
 		$pers_obj=new Personell;
 			
 		if($result=$pers_obj->getDOCDutyplan($dept_nr,$pyear,$pmonth,$elem)){

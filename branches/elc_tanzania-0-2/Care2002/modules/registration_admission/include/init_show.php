@@ -30,15 +30,18 @@ if(!isset($user_id) || !$user_id)
     $user_id=$local_user.$sid;
     $user_id=$$user_id;
 }
- 
+
 if(isset($pid) && ($pid!='')) {
 	$person_obj=new Person($pid);
 	if($data_obj=&$person_obj->getAllInfoObject()){
 		$zeile=$data_obj->FetchRow();
 		//while(list($x,$v)=each($zeile))	$$x=$v;
 		extract($zeile);       
-	}
+	} else {
+	  //
+  }
 }
+
 
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);

@@ -83,7 +83,8 @@ Contact author at: barcode@mribti.com
   if (!isset($xres))   $xres    = BCD_DEFAULT_XRES;
   if (!isset($font))   $font    = BCD_DEFAULT_FONT;
 
-
+$width=1;
+$height=1;
   switch ($type)
   {
     case "I25":
