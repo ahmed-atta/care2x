@@ -1,5 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require_once('../../include/inc_vars_resolve.php');
+require_once('../../include/inc_img_fx.php');
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
@@ -57,8 +59,8 @@ En raras ocasiones puede haber un error en la transferencia de datos.  Para corr
 <p>
 
 <?php
-$path_root="../../";
-require("../Copy%20of%20en/en_copyrite.php"); 
+$path_root='../../';
+require('../es_copyrite.php'); 
 ?>
 </FONT>
 
