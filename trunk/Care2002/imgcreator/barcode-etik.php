@@ -1,49 +1,21 @@
-<? 
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /*
-CARE 2002 Integrated Information System for Hospitals and Health Care Organizations and Services
-Copyright (C) 2002  Elpidio Latorilla
-								
-Beta version 1.0    2002-05-10
-								
-This script(s) is(are) free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public
-License as published by the Free Software Foundation; either
-version 2 of the License, or (at your option) any later version.
-																  
-This software is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-General Public License for more details.
-											   
-You should have received a copy of the GNU General Public
-License along with this script; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-																		 
-Copy of GNU General Public License at: http://www.gnu.org/
-													 
-Source code home page: http://www.care2x.com
-Contact author at: elpidio@latorilla.com
+CARE 2002 Integrated Information System beta 1.0.02 - 30.07.2002 for Hospitals and Health Care Organizations and Services
+Copyright (C) 2002  Elpidio Latorilla & Intellin.org	
 
-This notice also applies to other scripts which are integral to the functioning of CARE 2002 within this directory and its top level directory
-A copy of this notice is also available as file named copy_notice.txt under the top level directory.
+GNU GPL. For details read file "copy_notice.txt".
 */
 
-// *****************************************************************************
-// * Note: for higher efficiency, barcode labels created with this script are cached
-// * in the cache/barcodes/ directory. If you make changes here, be sure that
-// * you delete the cached barcode image first before running this script to see the changes
-// * otherwise the cached old barcode image will be displayed
-// *****************************************************************************
-
-//dl("php_gd.dll");
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-require("../language/".$lang."/lang_".$lang."_aufnahme.php");
+if(!extension_loaded("gd")) dl("php_gd.dll");
+define("LANG_FILE","aufnahme.php");
+define("NO_CHAIN",1);
+require("../include/inc_front_chain_lang.php");
 header ("Content-type: image/png");
 
 if(!$pn) $pn="22000029";
 
+/*
 if(file_exists("../cache/barcodes/pn_".$pn."_bclabel_".$lang.".png"))
 {
     $im = ImageCreateFrompng("../cache/barcodes/pn_".$pn."_bclabel_".$lang.".png");
@@ -51,7 +23,8 @@ if(file_exists("../cache/barcodes/pn_".$pn."_bclabel_".$lang.".png"))
 }
 else
 {
-    include("../req/db-makelink.php");
+*/
+    include("../include/inc_db_makelink.php");
     if($link&&$DBLink_OK)
 	{	
 	    // get orig data
@@ -151,7 +124,7 @@ else
     ImageString($im,1,466,336,"$LDServiceType:",$black);
     ImageString($im,4,466,343,$result[service_type],$black);
 
-    // ---------------------------------------- create label 
+    // -- create label 
     $label=ImageCreate(282,178);
     $ewhite = ImageColorAllocate ($label, 255,255,255); //white bkgrnd
     $elightgreen= ImageColorAllocate ($im, 205, 225, 236);
@@ -170,7 +143,7 @@ else
     //ImageString($label,4,5,150,"$result[dept]   $result[ward]   $result[doc_art]   $result[s_code]",$black);
     ImageString($label,3,10,160,"PLA      P3B      WA      65p",$black);
 
-    // ---------------------------------------- create smaller label
+    // -- create smaller label
     $label2=ImageCreate(173,133);
     $e2white = ImageColorAllocate ($label2, 255,255,255); //white bkgrnd
     ImageCopy($label2,$bc,35,0,9,7,134,37);
@@ -206,7 +179,7 @@ else
         //ImageLine($im,0,$wi,569,$wi,$blue);
     }
 
-    // ----------------- place the smaller labels
+    // ---  place the smaller labels
     for($i=0,$j=1;$i<1080;$i+=135,$j++)
     {
         if($j>4) ImageCopy($im,$label2,570,$i+1,0,0,173,133);
@@ -220,12 +193,14 @@ else
 	// *******************************************************************
 	
    /*
+   // START 
     ImageLine($im,0,0,$w-1,0,$blue);
     ImageLine($im,0,0,0,$h-1,$blue);
     ImageLine($im,0,$h-1,$w-1,$h-1,$blue);
     ImageLine($im,$w-1,0,$w-1,$h-1,$blue);
     ImageLine($im,569,0,569,$h-1,$blue);
     ImageLine($im,284,359,284,$h-1,$blue);
+	// END
    */
 	
     Imagepng ($im);
@@ -234,13 +209,18 @@ else
     // * comment the following one line if you want to deactivate caching of 
 	// * the barcode label image
 	// *******************************************************************
+/*    
+	// START
     Imagepng ($im,"../cache/barcodes/pn_".$pn."_bclabel_".$lang.".png");
-	
+	// END
+*/	
+	// Do not edit the following lines
     ImageDestroy ($label);
     ImageDestroy ($label2);
     ImageDestroy ($label3);
+/*
 }
-
+*/
 ImageDestroy ($im);
  ?>
 

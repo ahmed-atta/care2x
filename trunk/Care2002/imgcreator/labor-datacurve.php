@@ -1,22 +1,18 @@
-<?
-// <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-require("../req/db_dbp.php");
-$dbtable="nursing_station_patients_curve";
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/*
+CARE 2002 Integrated Information System beta 1.0.02 - 30.07.2002 for Hospitals and Health Care Organizations and Services
+Copyright (C) 2002  Elpidio Latorilla & Intellin.org	
 
-$yr=2001;
-$mo=10;
-//$dy=11;
+GNU GPL. For details read file "copy_notice.txt".
+*/
+require("../include/inc_labor_param_group.php");
 
-$xoffs=100;
-$xunit=$xoffs/24;
-$yunit_temp=135/5;
-$yunit_bp=135/200;
+if(!extension_loaded("gd")) dl("php_gd.dll");
 
-$fielddata="patnum,name,vorname,gebdatum";
-
-require("../req/labor-param-group.php");
-
-//search the paramgroup of the parameter
+/**
+* search the paramgroup of the parameter
+*/
 for($i=0;$i<sizeof($parametergruppe);$i++)
 {
 	if(in_array($parameter,$paralistarray[$i])) 
@@ -26,51 +22,35 @@ for($i=0;$i<sizeof($parametergruppe);$i++)
 	}
 }
 
-//print "param ".$parameter." group ".$groupname."<p>";
 $dbuf=explode("~",$tid);
 $cols=sizeof($dbuf);
 $srctid=" tid='$dbuf[0]'";
 
-for($i=1;$i<$cols;$i++)
-{
-	$srctid.=" OR tid='$dbuf[$i]'";
-}
-
-						
+for($i=1;$i<$cols;$i++)	$srctid.=" OR tid='$dbuf[$i]'";
+				
 if($parameterselect=="") $parameterselect=0;
 
 $parameters=$paralistarray[$parameterselect];					
-//$paramname=$parametergruppe[$parameterselect];
 
-require("../req/db_dbp.php");
+require("../include/inc_db_makelink.php");
+if($link&&$DBLink_OK) 
+{ 			
+      $dbtable="lab_test_data";
+      $sql="SELECT $groupname,tid FROM $dbtable WHERE patnum='$patnum' AND ($srctid) ORDER BY tid";
+      if($ergebnis=mysql_query($sql,$link))
+      {
+           $rows=0;$zeile=array();
+           while ($zeile=mysql_fetch_array($ergebnis)) $rows++;
+           if ($rows) mysql_data_seek($ergebnis,0);
+               else
+               {
+                   exit;
+               }
+      }	
+}
+else 
+    { exit; }
 
-$link=mysql_connect($dbhost,$dbusername,$dbpassword);
-if ($link)
- { 
-
-   if(mysql_select_db($dbname,$link)) 
-	{
-				
-				$dbtable="lab_test_data";
-				$sql="SELECT $groupname,tid FROM $dbtable WHERE patnum='$patnum' AND ($srctid) ORDER BY tid";
-				//print $sql."<p>";
-        		if($ergebnis=mysql_query($sql,$link))
-				{
-					$rows=0;$zeile=array();
-					while ($zeile=mysql_fetch_array($ergebnis)) $rows++;
-					if ($rows) mysql_data_seek($ergebnis,0);
-					else
-					 {
-					 	exit;
-					 }
-				}	
-	} else exit;
-	 mysql_close($link);
-  }
-  	 else 
-		{ exit; }
-
-   
 $tabhi=100;
 $tabcols=100;
 $tablen=$tabcols*$cols;
@@ -78,14 +58,8 @@ $ox=$tabcols/2;
 $tabrows=$tabhi/10;
 
 header ("Content-type: image/PNG");
-//dl("php_gd.dll");
-/*
-$im=@ImageCreateFromPNG("datacurve.png");
 
-if(!$im)
-{
-*/
- $im = @ImageCreate ($tablen, $tabhi)
+$im = @ImageCreate ($tablen, $tabhi)
      or die ("Cannot Initialize new GD image stream");
 // $background_color = ImageColorAllocate ($im, 205,225,236);
 $background_color = ImageColorAllocate ($im, 255,255,255);
@@ -94,16 +68,9 @@ ImageFilledRectangle($im,0,20,$tablen,80,$text_color);
 
 $text_color = ImageColorAllocate ($im, 175, 204, 255);
 
-for($i=$tabcols;$i<$tablen;$i+=$tabcols)
- ImageLine($im,$i,0,$i,$tabhi-1,$text_color);
-for($i=$tabrows;$i<$tabhi;$i+=$tabrows)
- ImageLine($im,0,$i,$tablen-1,$i,$text_color);
-
+for($i=$tabcols;$i<$tablen;$i+=$tabcols) ImageLine($im,$i,0,$i,$tabhi-1,$text_color);
+for($i=$tabrows;$i<$tabhi;$i+=$tabrows) ImageLine($im,0,$i,$tablen-1,$i,$text_color);
 ImageLine($im,0,$tabhi-1,$tablen-1,$tabhi-1,$text_color);
-
-/*
-}
-*/
 
 //**************** start tracing ***********************
 $vbuf=array();
@@ -111,9 +78,7 @@ if($rows)
 {
  while($zeile=mysql_fetch_array($ergebnis)) 
 	{
-
 //**************** begin of curve tracing  data ***************
-//print $zeile[$groupname]."<p>";
 				parse_str($zeile[$groupname],$vbuf);
 				array_unique($vbuf);
 				//$text_color = ImageColorAllocate ($im, 255, 0, 255);
@@ -143,13 +108,10 @@ if($rows)
 				$dybuf=$tabhi-$dybuf; // invert the values
 				$text_color = ImageColorAllocate ($im, 0, 0, 255);
 				 ImageArc($im,$ox,$dybuf,4,4,0,360,$text_color);
-				if($ox1 || $oy1) 
-				ImageLine($im,$ox1,$oy1,$ox,$dybuf,$text_color);
+				if($ox1 || $oy1) ImageLine($im,$ox1,$oy1,$ox,$dybuf,$text_color);
 				 $ox1=$ox;$oy1=$dybuf;
 				 //$xlb=$ox2;$ylb=$oy2;
 				$ox+=$tabcols; 
-
-			
 	}
 }
 

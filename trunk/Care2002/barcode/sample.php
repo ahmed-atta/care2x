@@ -11,7 +11,7 @@
  </tr>
 </table>
 <br><br>
-<? 
+<?php 
  define (__TRACE_ENABLED__, false);
  define (__DEBUG_ENABLED__, false);
 								   
@@ -101,10 +101,10 @@ if (isset($barcode) && strlen($barcode)>0) {
  </tr>
  <tr>
   <td rowspan="2" bgcolor="#EFEFEF"><b>Size</b></td>
-  <td rowspan="1">Width: <input type="text" size="6" maxlength="3" name="width" value="<?=$width?>"></td>
+  <td rowspan="1">Width: <input type="text" size="6" maxlength="3" name="width" value="<?php echo $width?>"></td>
  </tr>
  <tr>
-  <td>Height: <input type="text" size="6" maxlength="3" name="height" value="<?=$height?>"></td>
+  <td>Height: <input type="text" size="6" maxlength="3" name="height" value="<?php echo $height?>"></td>
  </tr>
  <tr>
   <td bgcolor="#EFEFEF"><b>Xres</b></td>
@@ -126,7 +126,7 @@ if (isset($barcode) && strlen($barcode)>0) {
  </tr>
  <tr>
   <td bgcolor="#EFEFEF"><b>Value</b></td>
-  <td><input type="Text" size="24" name="barcode" style="WIDTH: 260px" value="<?=$barcode?>"></td>
+  <td><input type="Text" size="24" name="barcode" style="WIDTH: 260px" value="<?php echo $barcode?>"></td>
  </tr>
  <tr>
  </tr>

@@ -1,39 +1,21 @@
-<? 
+<?php 
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /*
-CARE 2002 Integrated Information System for Hospitals and Health Care Organizations and Services
-Copyright (C) 2002  Elpidio Latorilla
-								
-Beta version 1.0    2002-05-10
-								
-This script(s) is(are) free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public
-License as published by the Free Software Foundation; either
-version 2 of the License, or (at your option) any later version.
-																  
-This software is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-General Public License for more details.
-											   
-You should have received a copy of the GNU General Public
-License along with this script; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-																		 
-Copy of GNU General Public License at: http://www.gnu.org/
-													 
-Source code home page: http://www.care2x.com
-Contact author at: elpidio@latorilla.com
+CARE 2002 Integrated Information System beta 1.0.02 - 30.07.2002 for Hospitals and Health Care Organizations and Services
+Copyright (C) 2002  Elpidio Latorilla & Intellin.org	
 
-This notice also applies to other scripts which are integral to the functioning of CARE 2002 within this directory and its top level directory
-A copy of this notice is also available as file named copy_notice.txt under the top level directory.
+GNU GPL. For details read file "copy_notice.txt".
 */
+define("LANG_FILE","aufnahme.php");
+define("NO_CHAIN",1);
+require("../include/inc_front_chain_lang.php");
 
-//dl("php_gd.dll");
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-require("../language/".$lang."/lang_".$lang."_aufnahme.php");
-
+if(!extension_loaded("gd")) dl("php_gd.dll");
+/**
+* We will check again if gd is loaded, if yes create the image
+*/
+if(extension_loaded("gd")) 
+{
 header ("Content-type: image/png");
 //header ("Content-type: image/jpeg");
 //header ("Content-type: image/gif");
@@ -59,25 +41,27 @@ if(($time>=0)&&($time<10)) $greet=$LDGoodMorning;
 // * uncomment the following lines to use ttf font and comment the default line
 // *******************************************************************
 
-/*
-ImageTTFText($im,14,0,9,25,$black,"verdanab.ttf","hello");
+/* ------------- Start ----------------------------------------------------*/
+/*ImageTTFText($im,14,0,9,25,$black,"verdanab.ttf","hello");
 ImageTTFText ($im, 14, 0, 15, 76, $black, "verdana.ttf",$person);
 imagecolortransparent($im,$blue);
 */
+/* ------------- End ------------------------------------------------------*/
 
 // ******************************************************************
 // * the following code is the default - uses system fonts
 // * comment the following lines if you use the ttf font line above
 // ******************************************************************
-
+/* --------------- Start -----------------------------*/
 ImageString($im,5,9,20,$greet,$black);
 if(strlen($person)>18) $fs=3; else $fs=5;
 ImageString($im,$fs,12,63,$person,$black);
-
+/* ---------------- End ------------------------------*/
 Imagepng ($im);
 //Imagegif ($im);
 //Imagejpeg ($im);
 ImageDestroy ($im);
+}
 ?>
 
 

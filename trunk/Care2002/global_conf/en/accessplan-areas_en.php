@@ -1,5 +1,4 @@
-<?
-
+<?php
 $areaopt=array();
 
 $areaopt['']="";
@@ -39,18 +38,6 @@ $areaopt['pharma']="Pharmacy";
 $areaopt['meddepot']="Medical Depot";
 $areaopt['radio']="Radiology";
 $areaopt['news']="News editor";
+$areaopt['fotolab']="Photolab";
 
-
-function createselecttable($itemselect)
-{
-	global $areaopt;
-
-	while(list($k,$v)=each($areaopt))
-	{
-		print '<option value="'.$k.'" ';
-		if ($itemselect==$k) print "selected";
-		print '>'.$v.'</option>';
-	}
-	reset($areaopt);
-}
 ?>

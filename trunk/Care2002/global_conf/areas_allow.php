@@ -1,4 +1,4 @@
-<?
+<?php
 $allow_area['admit']=array("admit","all","System_Admin");
 $allow_area['cafe']=array("cafe","all","System_Admin");
 $allow_area['medocs']=array("medocs","all","System_Admin");
@@ -17,4 +17,5 @@ $allow_area['news']=array("news","all","System_Admin");
 $allow_area['op_docs']=array("doc_op","all","System_Admin");
 $allow_area['duty_op']=array("duty_op","all","System_Admin");
 $allow_area['cafenews']=array("cafenews","news","all","System_Admin");
+$allow_area['fotolab']=array("fotolab,all,System_Admin");
 ?>

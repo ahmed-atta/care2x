@@ -1,15 +1,22 @@
-<?
-// <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-require("../req/db_dbp.php");
-$dbtable="nursing_station_patients_curve";
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/*
+CARE 2002 Integrated Information System for Hospitals and Health Care Organizations and Services
+Copyright (C) 2002  Elpidio Latorilla & Intellin.org	
 
-//$yr=2001;
-//$mo=10;
-//$dy=11;
+GNU GPL. For details read file "copy_notice.txt".
+*/
 
+/**
+* This routine creates graphical chart for blood pressure and temperature
+*/
+
+/**
+* This function aligns the date to the start of the grahical chart
+*/
 function aligndate(&$ad,&$am,&$ay)
 {
-	if(!checkdate($am,$ad,$ay))
+	if(!checkdate($am,$ad,$ay)) // checks if the day is valid for example Feb.29 or Sept. 31, last day of month, or last day of year, etc.
 	{
 		if($am==12)
 		{
@@ -24,17 +31,20 @@ function aligndate(&$ad,&$am,&$ay)
 		}
 	}
 }
+/**
+* Initialize some values
+*/
+$xoffs=100; // The width of a day's column in pixels
+$xunit=$xoffs/24; // Unit of 1 hour in pixels = Width of day's column divided by 24 hours
+$yunit_temp=135/5; // Unit of y coord per temperature value in pixels
+$yunit_bp=135/200; // Unit of y coord per blood pressure value in pixels
 
-$xoffs=100;
-$xunit=$xoffs/24;
-$yunit_temp=135/5;
-$yunit_bp=135/200;
+if(!extension_loaded("gd")) dl("php_gd.dll");
 
-$link=mysql_connect($dbhost,$dbusername,$dbpassword);
- if ($link)
- {
-	if(mysql_select_db($dbname,$link)) 
-	{	
+include("../include/inc_db_makelink.php");
+if($link&&$DBLink_OK) 
+{	
+    $dbtable="nursing_station_patients_curve";
 		 	$sql="SELECT bp_temp FROM $dbtable WHERE patnum='$pn'";
 
 			if($ergebnis=mysql_query($sql,$link))
@@ -53,7 +63,6 @@ $link=mysql_connect($dbhost,$dbusername,$dbpassword);
 					for($i=$dy,$acttag=$dy,$d=0;$i<($dy+7);$i++,$d++,$acttag++)
 		 			{
 						aligndate(&$acttag,&$actmonat,&$actjahr); // function to align the date
-
 						$cbuf="sd=$actjahr$actmonat$acttag&rd=$acttag.$actmonat.$actjahr";
 		 				$loaded[$i]=0;
 						while(list($x,$v)=each($arr))
@@ -69,24 +78,23 @@ $link=mysql_connect($dbhost,$dbusername,$dbpassword);
 	 				}// end of for $i=0
 				}// end of if rows
 			}// end of if ergebnis
-	}//else print "$sql<br>";
-	mysql_close($link);
+
   } //else { print " $sql<br>"; }
-
- 
-
   
-  
-$tabhi=135;
-$tablen=700;
-$tabcols=$tablen/28;
-$tabrows=$tabhi/20;
+$tabhi=135; // Height of graph chart in pixels
+$tablen=700; // Total width of graph chart in pixels
+$tabcols=$tablen/28; // Total number of vertical lines
+$tabrows=$tabhi/20; // Total number of horizontal lines
 
- header ("Content-type: image/PNG");
-//dl("php_gd.dll");
+header ("Content-type: image/PNG");
 
-$im=@ImageCreateFromPNG("datacurve.png");
 
+$im=@ImageCreateFromPNG("datacurve.png"); // Loads the ready made image (makes this routine faster)
+
+/**
+* The next set of codes create the graph chart on-the-fly 
+* if the ready made image is not loaded successfully
+*/
 if(!$im)
 {
  $im = @ImageCreate ($tablen, $tabhi)
@@ -94,20 +102,36 @@ if(!$im)
 // $background_color = ImageColorAllocate ($im, 205,225,236);
 $background_color = ImageColorAllocate ($im, 255,255,255);
 $text_color = ImageColorAllocate ($im, 0, 170, 255);
-
-for($i=$tabcols;$i<$tablen;$i+=$tabcols)
- ImageLine($im,$i,0,$i,$tabhi-1,$text_color);
-for($i=$tabrows;$i<$tabhi;$i+=$tabrows)
- ImageLine($im,0,$i,$tablen-1,$i,$text_color);
-
+/**
+* The vertical and horizontal lines are drawn
+*/
+for($i=$tabcols;$i<$tablen;$i+=$tabcols) ImageLine($im,$i,0,$i,$tabhi-1,$text_color);
+for($i=$tabrows;$i<$tabhi;$i+=$tabrows) ImageLine($im,0,$i,$tablen-1,$i,$text_color);
 ImageLine($im,0,$tabhi-1,$tablen-1,$tabhi-1,$text_color);
 }
 
-//**************** start tracing ***********************
-//$ox1=0;$oy1=135-(80*$yunit_bp);
-//$tx1=0; $ty1=$oy1;
+$text_red = ImageColorAllocate ($im, 255, 0, 0);
+$text_blue = ImageColorAllocate ($im, 0, 0, 255);
+
+//**************** start drawing the graph values ***********************
+/**
+* These variables are used in the following lines of code
+*
+* $ox1 = a line's start x coord for blood pressure
+* $oy1= a line's start y coord for blood pressure
+* $tx1 = a line's start x coord for temperature
+* $ty1 = a line's start y coord for temperature
+* $ox2 = a line's end x coord for blood pressure
+* $oy2= a line's end y coord for blood pressure
+* $tx2 = a line's end x coord for temperature
+* $ty2 = a line's end y coord for temperature
+*
+* $n = Column number of the chart = corresponding to a day
+* $xof= The current start x coord
+*/
 $ox1=0;$oy1=0;
 $tx1=0; $ty1=0;
+
 for($n=0,$xof=0;$n<7;$n++,$xof+=$xoffs)
 {
 	if(!$loaded[$n]) continue;
@@ -115,67 +139,43 @@ for($n=0,$xof=0;$n<7;$n++,$xof+=$xoffs)
 	if ($sbuf[$n]) 	parse_str($sbuf[$n],$abuf);
 	$b_t=explode("~",trim($abuf[e])); 
 	
-					//print $b_t[0]." ".$b_t[1]."<br>";
-					//print "here we gow";
-
-
 //**************** begin of curve tracing  Blood Pressure***************
-$b=explode("B",trim($b_t[0]));
-if(!$b[0]) array_splice($b,0,1);
-$b=array_unique($b);
-sort($b,SORT_NUMERIC);
+    $b=explode("B",trim($b_t[0]));
+    if(!$b[0]) array_splice($b,0,1);
+    $b=array_unique($b);
+    sort($b,SORT_NUMERIC);
 
-$text_color = ImageColorAllocate ($im, 255, 0, 0);
-
-//$bb=explode("b",$b[0]);
-//if(($bc[0])&&($bc[1])) 
-//$ox1=$xlb ;$oy1=$ylb;
-
-// ImageArc($im,$ox1,$oy1,4,4,0,360,$text_color);
-
-//print $ox1." ".$oy1."<br>";
-			for($i=0;$i<(sizeof($b));$i++)
-			{
-				if(!$b[$i]) continue;
-				$bc=explode("b",$b[$i]);
-				if(($bc[0]==0)||($bc[1]==0)) continue;
-				//{$bc[0]=12; $bc[1]=100;}
-				$ox2=(($bc[0])*$xunit)+$xof; $oy2=(($bc[1])-70)*$yunit_bp;$oy2=134-$oy2;
-				 ImageArc($im,$ox2,$oy2,4,4,0,360,$text_color);
-				if($ox1 || $oy1) 
-				ImageLine($im,$ox1,$oy1,$ox2,$oy2,$text_color);
-				 $ox1=$ox2;$oy1=$oy2;
-				 //$xlb=$ox2;$ylb=$oy2;
-			}
+    for($i=0;$i<(sizeof($b));$i++)
+    {
+        if(!$b[$i]) continue;
+        $bc=explode("b",$b[$i]);
+        if(($bc[0]==0)||($bc[1]==0)) continue;
+        $ox2=(($bc[0])*$xunit)+$xof; 
+	    $oy2=(($bc[1])-70)*$yunit_bp;$oy2=134-$oy2;
+        ImageArc($im,$ox2,$oy2,4,4,0,360,$text_red);
+        if($ox1 || $oy1) ImageLine($im,$ox1,$oy1,$ox2,$oy2,$text_red);
+        $ox1=$ox2;
+	    $oy1=$oy2;
+    }
 			
 //**************** begin of curve tracing  Temperature***************
+    $b=explode("T",trim($b_t[1]));
+    if(!$b[1]) array_splice($b,0,1);
+    $b=array_unique($b);
+    sort($b,SORT_NUMERIC);
 
-$b=explode("T",trim($b_t[1]));
-if(!$b[1]) array_splice($b,0,1);
-$b=array_unique($b);
-sort($b,SORT_NUMERIC);
-
-$text_color = ImageColorAllocate ($im, 0, 0, 255);
-
-//$tx1=$xlt; $ty1=$ylt;
-
-//print $ox1." ".$oy1."<br>";
-			for($i=0;$i<(sizeof($b));$i++)
-			{
-				if(!$b[$i]) continue;
-				$bc=explode("t",$b[$i]);
-				if(($bc[0]==0)||($bc[1]==0)) continue;
-				$tx2=(($bc[0])*$xunit)+$xof; $ty2=(($bc[1])-35)*$yunit_temp;$ty2=134-$ty2;
-//print $ox2." ".$oy2."<br>";
-				 ImageFilledRectangle($im,$tx2-2,$ty2-2,$tx2+1,$ty2+1,$text_color);
-				if($tx1 || $ty1) ImageLine($im,$tx1,$ty1,$tx2,$ty2,$text_color);
-				 $tx1=$tx2;$ty1=$ty2;
-				// $xlt=$ox2;$ylt=$oy2;
-
-			}
+    for($i=0;$i<(sizeof($b));$i++)
+    {
+        if(!$b[$i]) continue;
+        $bc=explode("t",$b[$i]);
+        if(($bc[0]==0)||($bc[1]==0)) continue;
+        $tx2=(($bc[0])*$xunit)+$xof; 
+	    $ty2=(($bc[1])-35)*$yunit_temp;$ty2=134-$ty2;
+        ImageFilledRectangle($im,$tx2-2,$ty2-2,$tx2+1,$ty2+1,$text_blue);
+        if($tx1 || $ty1) ImageLine($im,$tx1,$ty1,$tx2,$ty2,$text_blue);
+        $tx1=$tx2;$ty1=$ty2;
+    }
 } // end of for $n
-
- 				// ImageLine($im,0,0,350,98,$text_color);
 
 ImagePNG($im);
 ImageDestroy ($im);

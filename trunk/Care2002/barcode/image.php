@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /*
 Barcode Render Class for PHP using the GD graphics library 
 Copyright (C) 2001  Karim Mribti

@@ -1,11 +1,20 @@
-<?
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/*
+CARE 2002 Integrated Information System for Hospitals and Health Care Organizations and Services
+Copyright (C) 2002  Elpidio Latorilla & Intellin.org	
+
+GNU GPL. For details read file "copy_notice.txt".
+*/
+if(!extension_loaded("gd")) dl("php_gd.dll");
+
 $tabhi=90;
 $tablen=3000; //original length
 $tabcols=$tablen/24;
 $tabrows=$tabhi/6;
 
  header ("Content-type: image/PNG");
-//dl("php_gd.dll");
+
 $im = @ImageCreate ($tablen, $tabhi)
      or die ("Cannot Initialize new GD image stream");
 $background_color = ImageColorAllocate ($im, 255,255,255);
@@ -13,8 +22,7 @@ $text_color = ImageColorAllocate ($im, 0, 170, 255);
 $black = ImageColorAllocate ($im, 0, 0, 0);
 $red =ImageColorAllocate ($im, 255, 0, 0);
 
-require("../req/db_dbp.php");
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 
 if($link&&$DBLink_OK) 
 	{	
