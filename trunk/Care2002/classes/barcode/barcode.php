@@ -142,7 +142,18 @@ define("BCD_C128_BAR_4"              ,   4);
 	   		} else __DEBUG__("FlushObject: No output type");
 	 }											
 	  											
-	function FlushObject2File () {
+	function FlushObject2File ($prepend = 'pn_' ) {
+	 if (($this->mStyle & BCS_BORDER)) {
+	       $this->DrawBorder();
+	    }				       
+	   if ($this->mStyle & BCS_IMAGE_PNG) {
+			   	ImagePng($this->mImg,'../../cache/barcodes/'.$prepend.'temp.png');
+	   } else if ($this->mStyle & BCS_IMAGE_JPEG) {
+			   	ImagePng($this->mImg,'../../cache/barcodes/'.$prepend.'temp.jpg');
+	   		} else __DEBUG__("FlushObject: No output type");
+	 }		
+	 
+	function FlushObject2PnFile () {
 	 if (($this->mStyle & BCS_BORDER)) {
 	       $this->DrawBorder();
 	    }				       
@@ -151,8 +162,8 @@ define("BCD_C128_BAR_4"              ,   4);
 	   } else if ($this->mStyle & BCS_IMAGE_JPEG) {
 			   	ImagePng($this->mImg,'../../cache/barcodes/pn_temp.jpg');
 	   		} else __DEBUG__("FlushObject: No output type");
-	 }		
-	 									
+	 }		 	
+	 								
 	function FlushObject2FormFile () {
 	 if (($this->mStyle & BCS_BORDER)) {
 	       $this->DrawBorder();
@@ -173,8 +184,18 @@ define("BCD_C128_BAR_4"              ,   4);
 	   } else if ($this->mStyle & BCS_IMAGE_JPEG) {
 			   	ImagePng($this->mImg,'../../cache/barcodes/lab_temp.jpg');
 	   		} else __DEBUG__("FlushObject: No output type");
-	 }											
-
+	 }			
+	 								
+	function FlushObject2EnFile () {
+	 if (($this->mStyle & BCS_BORDER)) {
+	       $this->DrawBorder();
+	    }				       
+	   if ($this->mStyle & BCS_IMAGE_PNG) {
+			   	ImagePng($this->mImg,'../../cache/barcodes/en_temp.png');
+	   } else if ($this->mStyle & BCS_IMAGE_JPEG) {
+			   	ImagePng($this->mImg,'../../cache/barcodes/en_temp.jpg');
+	   		} else __DEBUG__("FlushObject: No output type");
+	 }		
      function DestroyObject () {
 	   ImageDestroy($obj->mImg);
 	 }

@@ -3,6 +3,7 @@
 * Inserted code for Care 2002
 */
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+
 require_once("../../include/inc_vars_resolve.php"); // globalize POST, GET, & COOKIE  vars
 /* END */
 
@@ -79,7 +80,7 @@ Contact author at: barcode@mribti.com
 	  
         if(!$pn&&$code) $pn=$code;
 
-	    switch($form_file)
+/*	    switch($form_file)
 	    {
 	        case "1":  $obj->FlushObject2FormFile();
 		                   $prepend='form_';
@@ -87,9 +88,30 @@ Contact author at: barcode@mribti.com
 		    case "lab":$obj->FlushObject2LabFile();
 		                   $prepend='lab_';
 						   break;
-		    default:    $obj->FlushObject2File();
+		    case "en":$obj->FlushObject2EnFile();
+		                   $prepend='en_';
+						   break;
+		    default:    $obj->FlushObject2PnFile();
+		                   $prepend='pn_';
+		  }*/
+		  
+	    switch($form_file)
+	    {
+	        case "1": 
+		                   $prepend='form_';
+						   break;
+		    case "lab":
+		                   $prepend='lab_';
+						   break;
+		    case "en":
+		                   $prepend='en_';
+						   break;
+		    default:    
 		                   $prepend='pn_';
 		  }
+		  
+		  	$obj->FlushObject2File($prepend);	
+			   
            /* Copy the temporary file to the correct patient number */
           copy('../../cache/barcodes/'.$prepend.'temp.png','../../cache/barcodes/'.$prepend.$pn.'.png');
 
@@ -108,6 +130,6 @@ Contact author at: barcode@mribti.com
 
 if($label==1)
 {
-	 header("location: ../../imgcreator/barcode-etik.php?sid=$sid&lang=$lang&pn=$pn");
+	 header("location: ../../main/imgcreator/barcode-etik.php?sid=$sid&lang=$lang&pn=$pn");
 }
 ?>
