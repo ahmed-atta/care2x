@@ -15,8 +15,8 @@
  /**
  * LOAD Smarty
  */
- require_once('smarty.php');
- $smarty = new smarty_nursing;
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('nursing');
  
  define('LANG_FILE','nursing.php');
  define('NO_2LEVEL_CHK',1);
@@ -24,7 +24,6 @@
  
  // reset all 2nd level lock cookies
  require($root_path.'include/inc_2level_reset.php');
- require_once($root_path.'include/inc_config_color.php');
  
  $toggler=0;
  $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
@@ -65,6 +64,7 @@
  {
   while($stations=$ward_info->FetchRow()) {
    $sWardInfo = $sWardInfo.'<tr><td><FONT face="Verdana,Helvetica,Arial" size=2><li> <a href="'.strtr('nursing-station-pass.php'.URL_APPEND.'&rt=pflege&edit=1&station='.$stations['ward_id'].'&location_id='.$stations['ward_id'].'&ward_nr='.$stations['nr'],' ',' ').'"><font color="green"><b>'.strtoupper($stations['ward_id']).'</b></font></a> &nbsp;';
+   $sWardInfo = $sWardInfo."\n";
    $sWardInfo = $sWardInfo.'</td><td><FONT face="Verdana,Helvetica,Arial" size=2>'.$stations['name'].'</td></tr>';
   }
   $sWardInfo = $sWardInfo. '</table>';
@@ -81,13 +81,21 @@
  /**
  * Toolbar
  */
-# Added for the html direction 
+# Added for the html tag direction 
  $smarty->assign('HTMLtag',html_ret_rtl($lang));
+ 
  $smarty->assign('top_txtcolor',$cfg['top_txtcolor']);
  $smarty->assign('top_bgcolor',$cfg['top_bgcolor']);
  $smarty->assign('gifBack2',createLDImgSrc($root_path,'back2.gif','0') );
 
+ # Added for the common header top block
+ $smarty->assign('pb_href_back','javascript:window.history.back()');
+ 
  $smarty->assign('LDNursing',$LDNursing );
+ 
+ # Added for the common header top block
+ $smarty->assign('pb_href_help','javascript:gethelp(\'nursing.php\',\''.$LDNursing.'\')');
+ 
  $smarty->assign('gifHilfeR',createLDImgSrc($root_path,'hilfe-r.gif','0') );
  
  $smarty->assign('LDCloseAlt',$LDCloseAlt );
@@ -166,7 +174,7 @@
  /**
  * show Template
  */
- $smarty->display('nursing.tpl');
+ $smarty->display('nursing/nursing.tpl');
  // $smarty->display('debug.tpl');
 ?>
 
