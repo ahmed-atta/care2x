@@ -5,7 +5,7 @@ require($root_path.'include/inc_environment_global.php');
 require_once($root_path.'include/inc_img_fx.php');
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<HTML>
+<?php html_rtl($lang); ?>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
  <TITLE>Accès non authorisé de la page</TITLE>
@@ -38,7 +38,7 @@ Les causes possibles de ce problème:
 </FONT><p>
 <font size=2 face="verdana,arial">
 <img <?php echo createComIcon('../../','achtung.gif') ?>>
-Vous avez peut-être utilisé les touches standard "Retour" ou "Suivant" de votre navigateur. Veuillez évitez de les utiliser.<br>
+Vous avez peut-être utilisé les touches standard "Rétour" ou "Avancer" de votre navigateur. Veuillez évitez de les utiliser.<br>
 <img <?php echo createComIcon('../../','achtung.gif') ?>>
 Vous avez peut-être rejeté une cookie. Le programme dépend des cookies pour fonctionner correctement. Veuillez accepter les cookies.
 <br>

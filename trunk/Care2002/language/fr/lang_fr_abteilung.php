@@ -1,6 +1,6 @@
 <?php
-$LDPageTitle='Départements';
-$LDDeptTxt='Département';
+$LDPageTitle='D&eacute;partements';
+$LDDeptTxt='D&eacute;partement';
 $LDOpenHrsTxt='Horaires de travail';
 $LDChkHrsTxt='Les horaires d\'examens m&eacute;dicaux';
 $LDClk4Info='Cliquez pour plus d\'informations';
@@ -12,7 +12,7 @@ $LDDayTxt='Jour';
 * OB-Gyne = Obstetrics-Gynecology
 */
 $dept=array('Chirurgie g&eacute;n&eacute;rale',
-					'Urgence chirurgicale',
+					'Urgence chirurgique',
 					'Chirurgie plastique',
 					'ENT',
 					'Opthalmologie',
