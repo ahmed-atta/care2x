@@ -1,14 +1,14 @@
 <?php
 $LDHeadlines='Titres principaux';
-$LDCafeNews='Nouvelles de Cafet&eacute;ria';
-$LDManagement='Management';
-$LDHealthTips='Tips de sant&eacute;';
+$LDCafeNews='Nouvelles de la Cafetéria';
+$LDManagement='Gestion';
+$LDHealthTips='Trucs de santé;';
 $LDEducation='Education';
-$LDStudies='&Eacute;tudes';
-$LDExhibitions='Exhibitions';
+$LDStudies='Etudes';
+$LDExhibitions='Demonstrations';
 $LDHeadline='Titre';
 $LDAdmission='Admission';
-$LDCafeteria='Nouvelles de Cafet&eacute;ria';
+$LDCafeteria='Nouvelles de la Cafetéria';
 $LDGeneralSurgery='Chirurgie g&eacute;n&eacute;rale';
 $LDEmergencySurgery='Urgence chirurgique';
 $LDPlasticSurgery='Chirurgie plastique';

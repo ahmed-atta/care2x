@@ -1,14 +1,17 @@
 <?php
-$LDDbNoSave="L'essai d'enregistrement dans DB a failli!";
-$LDDbNoRead="L'essai de lecture dans DS a failli!";
-$LDDbNoLink="L'essai de lien dans DB a failli!";
-$LDDbNoUpdate="L'essai de mise à jour de DB a failli";
+$LDDbNoSave="L'enregistrement dans la DB a échoué!";
+$LDDbNoRead="L'essai de lecture dans DS a échoué!";
+$LDDbNoLink="L'essai de lien dans DB a échoué!";
+$LDDbNoUpdate="L'essai de mise à jour de DB a échoué";
 $LDDbNoLastData="Dernieres données non trouvées!";
-$LDDbNoDelete="L'effacement a failli!";
+$LDDbNoDelete="L'effacement a échoué!";
 #2003-11-01 EL
-$LDSessionTimeout='Session time out';
-$LDSessionTimeoutTxt='There has been a long time of inactivity. The module has timed out and locked itself for security reasons. 
-To activate this module again, you can try doing one of the following:<p>
-- Start the module again by selecting it on the main menu<br>
-- Refresh your browser by clicking the refresh button<p> Any unsaved previous data will be  lost unfortunately.'; 
+$LDSessionTimeout='Session expirée';
+$LDSessionTimeoutTxt='Une longue période d\'incativité est apparue. Le module a
+expiré et s'est verrouillé lui-même pour des raisons de sécurité. 
+Pour activer de nouveau ce module, vous pouvez utilisez l\'une des méthodes
+suivantes :<p>
+- Démarrez le module de nouveau en le selectionnant dans le menu principal<br>
+- Actualisez votre navigateur en cliquant sur le bouton Actualiser<p> Tous
+les données non sauvegardées seront malheureusement perdues.'; 
 ?>
