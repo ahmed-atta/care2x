@@ -1,49 +1,58 @@
 <?php
-$LDHeadlines='Notícias';			
-$LDCafeNews='Novedades en Cafeteria';		
-$LDManagement='Management';
-$LDHealthTips='Health Tips';
-$LDEducation='Educacíon';
+
+/**
+* Correcciones: Dr. med. Daniel Hinostroza C.
+*/
+
+$LDHeadlines='Noticias';
+$LDCafeNews='Novedades en la cafetería';
+$LDManagement='Administración';
+$LDHealthTips='Consejos saludables';
+$LDEducation='Educación';
 $LDStudies='Estudios';
-$LDExhibitions='Exhibitions';
-$LDHeadline='Titulo';
-$LDAdmission='Admisíon';
-$LDCafeteria='Novedades en Cafeteria';
-$LDGeneralSurgery='Cirugía General';
-$LDEmergencySurgery='Cirugía Urgencias';
-$LDPlasticSurgery='Cirugía Plastica';
-$LDEarNoseThroath='Ottorino';
+$LDExhibitions='Exhibiciones';
+$LDHeadline='Título';
+$LDAdmission='Admisión';
+/* 2003-08-20 DH */
+$LDAnesthesiology='Anestesiología';
+$LDCafeteria='Novedades en la cafetería';
+$LDGeneralSurgery='Cirugía general';
+$LDEmergencySurgery='Cirugía de urgencias';
+$LDPlasticSurgery='Cirugía plástica';
+$LDEarNoseThroath='Otorrinolaringología';
 $LDOpthalmology='Oftalmología';
-$LDPathology='Anatomía Patológica';
-$LDObGynecology='Ob-Gine';
-$LDPhysicalTherapy='Rehabilitacíon';
-$LDInternalMedicine='Medicina Interna';
-$LDIntermediateCareUnit='U.V.I';
-$LDIntensiveCareUnit='U.C.I';
-$LDEmergencyAmbulatory='Ambulatorio de Urgencias';
-$LDInternalMedicineAmbulatory='Ambulatorio de Medicina Interna';
+$LDPathology='Anatomía patológica';
+$LDObGynecology='Ginecología y Obstetricia';
+$LDPhysicalTherapy='Rehabilitación';
+$LDInternalMedicine='Medicina interna';
+$LDIntermediateCareUnit='U.C.Intermedios';
+$LDIntensiveCareUnit='U.C.Intensivos';
+$LDEmergencyAmbulatory='Ambulatorio de urgencias';
+$LDInternalMedicineAmbulatory='Ambulatorio de Medicina interna';
 $LDSonography='Ecografía';
-$LDNuclearDiagnostics='Nuclear Diagnostics';
+$LDNuclearDiagnostics='Diagnóstico nuclear';
 $LDRadiology='Radiología';
-$LDOncology='Oncology';
-$LDNeonatal='Neonatal';
-$LDCentralLaboratory='Central Laboratory';
-$LDSerologicalLaboratory='Serological Laboratory';
-$LDChemicalLaboratory='Laboratório Médico';
-$LDBacteriologicalLaboratory='Laboratorio Bacteriológico';
-$LDTechnicalMaintenance='Technical Maintenance';
-$LDITDepartment='IT Department';
-$LDGeneralAmbulatory='Ambulatorio Geral';
-$LDBloodBank='Banco de Sangre';
-$LDNursing='Enfermeria';
+$LDOncology='Oncología';
+$LDNeonatal='Neonatología';
+$LDCentralLaboratory='Laboratorio central';
+$LDSerologicalLaboratory='Laboratorio serológico';
+$LDChemicalLaboratory='Laboratorio médico';
+$LDBacteriologicalLaboratory='Laboratorio bacteriológico';
+$LDTechnicalMaintenance='Mantenimiento técnico';
+$LDITDepartment='Departamento de IT';
+$LDGeneralAmbulatory='Ambulatorio general';
+$LDBloodBank='Banco de sangre';
+$LDNursing='Enfermería';
 /* 2003-04-27 EL */
-$LDMedical='Medical';
-$LDSupport='Non-medical';
-$LDNews='News';
-$LDDepartment='Department';
-$LDPressRelations='Presse';
+$LDMedical='Medico';
+$LDSupport='No-médico';
+$LDNews='Noticias';
+$LDDepartment='Departamento';
+$LDPressRelations='Prensa';
 /* 2003-05-19 EL */
-$LDSelectDept='Select department';
+$LDSelectDept='Elija un departamento';
 /*2003-06-15 EL*/
-$LDPlsSelectDept='Please select a department';
+$LDPlsSelectDept='Por favor elija un departamento';
+$LD_AllMedicalDept='Todos los departamentos médicos';
+$LDClinic='Clínica';
 ?>

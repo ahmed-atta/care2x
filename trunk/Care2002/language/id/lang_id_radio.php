@@ -52,5 +52,31 @@ $LDTestRequestRadioTxt='Request for radiological tests';
 /* 2002-09-10 EL */
 $LDTestReception='Pending Request';
 $LDTestReceptionTxt='Receive & process test requests, write results/diagnoses';
+# 2003-08-08 EL
+$LDDicomImages='DICOM images';
+$LDDicomImagesTxt='View diagnostic images in DICOM format';
+$LDUploadDate='Upload date';
+$LDViewImage='View here';
+$LDViewInWindow='View in window';
+$LDNrImages='Nr.of slices';
+$LDDicomViewer='Dicom viewer';
+$LDViewInFrame='View in this frame';
+$LDUploadDicom='Upload DICOM';
+$LDUploadDicomTxt='Upload diagnostic images in DICOM format';
+$LDPID='PID';
+$LDImgNumber='Image number';
+$LDSingleImage='single image';
+$LDImageGroupNr='Image group number';
+$LDNewFileName='New filename';
+$LDUploadNew='I need to upload';
+$LDNewImageFiles='new image files';
+# 2003-08-09 EL
+$LDSelectViewer='Select viewer';
+$LDSelectViewerTxt='Select DICOM viewer program';
+$LDCurrentViewer='Current viewer';
+$LDNagoyaTechInst='Nagoya Tech. Institute';
+$LDRAIMJAVA='RAIMJAVA©';
+$LDNoImageSaved='No image was saved!';
+$LDImageNotes='Image notes';
 
 ?>

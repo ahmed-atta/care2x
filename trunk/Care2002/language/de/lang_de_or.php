@@ -74,7 +74,7 @@ $LDScrubNurse='OP Schwester/Pfleger';
 $LDOpRoom='OP Saal';
 $LDResetAll='Alle Eingaben verwerfen/löschen.';
 $LDUpdateData='Aktualisieren bzw. ändern';
-$LDStartNewDocu='Neues OP Dokument starten';
+$LDStartNewDocu='Neues OP Dokument anlegen';
 $LDSearchKeyword='Suchbegriff: z.B. Name oder Vorname';
 
 $LDSrcListElements=array(

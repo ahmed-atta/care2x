@@ -58,4 +58,6 @@ $LDEditNews='Nachrichten mit Online Redaktion schreiben';
 $LDCredits='Credits';
 /* 2003-05-24 EL */
 $LDPublicItems='Allgemein zugänglich';
+# 2003-08-28 EL
+$LDHeadline='Nachrichten';
 ?>

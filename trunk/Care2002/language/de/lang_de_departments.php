@@ -8,6 +8,8 @@ $LDStudies='Ausbildung';
 $LDExhibitions='Veranstaltung';
 $LDHeadline='Nachricht';
 $LDAdmission='Aufnahme';
+/* 2003-08-20 DH */
+$LDAnesthesiology='Anestesiologie';
 $LDCafeteria='Cafeteria';
 $LDGeneralSurgery='Allgemeine Chirurgie';
 $LDEmergencySurgery='Unfall Chirurgie';
@@ -46,4 +48,6 @@ $LDPressRelations='Presse';
 $LDSelectDept='Abteilung auswählen';
 /*2003-06-15 EL*/
 $LDPlsSelectDept='Bitte wählen Sie eine Abteilung aus';
+$LD_AllMedicalDept='__Alle medizinische Abteilungen__';
+$LDClinic='Ambulanz';
 ?>

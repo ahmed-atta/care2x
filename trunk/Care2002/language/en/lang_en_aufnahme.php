@@ -198,7 +198,7 @@ $LDAppointmentsTxt=$LDESE.', research appointments or schedules';
 $LDPatientDev='Development';
 $LDPatientDevTxt=$LDESE.', display reports on patient\'s development';
 $LDWtHt='Weights & Heights';
-$LDWtHtTxt=$LDESE.' weights & heights data';
+$LDWtHtTxt=$LDESE.' weight, height & head circumference';
 $LDPregnancies='Pregnancies';
 $LDPregnanciesTxt=$LDESE.' pregnancy information';
 $LDBirthDetails='Birth details';
@@ -208,7 +208,7 @@ $LDInsuranceCo='Insurance Company';
 $LDInsuranceNr_2='Extra Insurance Nr.';
 $LDInsuranceCo_2='Extra Insurance Co.';
 $LDBillType='Billing Type';
-$LDWard='Ward/Clinic';
+$LDWard='Ward/Station';
 $LDMakeWristBand='Make wristbands';
 $LDClickImgToPrint='Click the image to print out.';
 $LDPrintPortraitFormat='Set your printer to landscape format.';
@@ -344,4 +344,28 @@ $LDAllText='Dynamic contents only';
 $LDDataOnly='Encounter relevant data only';
 /*2003-06-21 EL*/
 $LDChartsRecords='Charts folder';
+# 2003-07-26 EL
+$LDMode='Mode';
+$LDPatientIsDischarged='This patient is already discharged';
+$LDShow='Show';
+$LDPlannedEncType='Planned admission type';
+# 2003-08-01 EL
+$LDListEncounters='Admissions\' list';
+$LDDischarged='Discharged';
+$LDDischargeDate='Discharge date';
+# 2003-08-04 EL
+$LDCancelThisAdmission='Cancel this admission';
+$LDInsShortID[1]='PRIV';  // privately paid insurance
+$LDInsShortID[2]='COM'; // Common state sponsored insurance
+$LDInsShortID[3]='SP';    // self pay, direct pay
+# 2003-08-26 EL
+$LDMeasurements='Measurements';
+#2003-08-28 eL
+$LDPlsEnterReferer='Please enter refering physician';
+$LDPlsEnterRefererDiagnosis='Please enter referal diagnosis';
+$LDPlsEnterRefererTherapy='Please enter referer\'s recommended therapy';
+$LDPlsEnterRefererNotes='Please enter referer\'s notes';
+$LDPlsSelectAdmissionType='Please select admission type';
+$LDForInpatient='For inpatient';
+$LDForOutpatient='For outpatient';
 ?>

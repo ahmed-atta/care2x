@@ -1,42 +1,50 @@
 <?php
-$LDHome='Home';
-$LDPatient='Patient';
+
+/**
+* Correcciones: Dr. med. Daniel Hinostroza C.
+*/
+
+$LDHome='Inicio';
+$LDPatient='Paciente';
 $LDAdmission='Admisión';
-$LDAmbulatory='Clínica de dia';
+$LDAmbulatory='Ambulatorio';
 $LDMedocs='Medocs';
 $LDDoctors='Médicos';
-$LDNursing='Enfermería';
-$LDOR='Quirófano';
+$LDNursing='Enfermeras';
+$LDOR='Quirófanos';
 $LDLabs='Laboratorios';
 $LDRadiology='Radiología';
 $LDPharmacy='Farmacia';
-$LDMedDepot='Depósitos';
+$LDMedDepot='Insumos médicos';
 $LDDirectory='Directorio';
-$LDTechSupport='Ayuda técnica';
-$LDEDP='EDP';
-$LDIntraEmail='Intranet Email';
-$LDInterEmail='Internet Email';
-$LDSpecials='Otras Func.';
+$LDTechSupport='Soporte técnico';
+$LDEDP='Admin. Sistemas';
+$LDIntraEmail='Email intranet';
+$LDInterEmail='Email internet';
+$LDSpecials='Herram. esp.';
 $LDLogin='Login';
-$LDLogout='Logout';				
-				
+$LDLogout='Logout';
+$LDAppointments='Citas';
+
 $VersionChgTarget='_top';
 $LDLanguage='Idioma';
-$LDPlsWaitInit='Espere por favor .Inicializando procesos...';
+$LDPlsWaitInit='Por favor espere. El sistema se está iniciando...';
 
 $LDChange='Cambio';
 /* 2003-04-27 EL */
-$LDBrazilian='Português Brasil';
-$LDCzech='Czech';
-$LDEnglish='Englis';
-$LDFrench='French';
-$LDGerman='German';
-$LDIndonesian='Indonesian';
+$LDBrazilian='Brasileño';
+$LDCzech='Checo';
+$LDEnglish='Inglés';
+$LDFrench='Francés';
+$LDGerman='Alemán';
+$LDIndonesian='Indonesio';
 $LDItalian='Italiano';
-$LDNorwegian='Norwegian';
-$LDPolish='Polish';
-$LDPortuguese='Português';
+$LDNorwegian='Noruego';
+$LDPolish='Polaco';
+$LDPortuguese='Portugués';
 $LDSpanish='Español';
 /* 2003-04-28 El */
-$LDDutch='Dutch';
+$LDDutch='Holandés';
+# 2003-08-04 EL
+$LDPerson='Persona';
 ?>

@@ -219,4 +219,12 @@ $LDGUITemplate='GUI Template option';
 $LDGUITemplateTxt='Select a GUI (graphic user interface) template';
 $LDGUITheme='GUI Theme';
 $LDTheme='Theme';
+# 2002-01-18 EL
+$LDTicketedSupport='Ticketed Support';
+$LDTicketedSupportTxt='Send a ticketed request to the project\'s online support';
+$LDNewsgroup='Newsgroup';
+$LDNewsgroupTxt='Newsgroup mirroring the developers\' mailing list.';
+# 2002-08-19 EL
+$LDPharmaIndex='Pharma Index';
+$LDPharmaIndexTxt='Pharmaceutical indexes like Redlist, Yellowlist, IFAP, NIMS, or PIMS';
 ?>

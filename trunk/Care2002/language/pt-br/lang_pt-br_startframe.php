@@ -69,5 +69,8 @@ $LDSubmitNews='Envie Notícias';
 $LDEditNews='Edite & envie notícias via editor online';
 /* 2002-10-17 EL */
 $LDCredits='Créditos';
-
+/* 2003-05-24 EL */
+$LDPublicItems='Public items';
+# 2003-08-28 EL
+$LDHeadline='Manchetes';
 ?>

@@ -203,4 +203,11 @@ $LDGUITemplate='GUI Themen';
 $LDGUITemplateTxt='Eine GUI (graphic user interface) Theme auswählen ';
 $LDGUITheme='GUI Theme';
 $LDTheme='Theme';
+$LDTicketedSupport='Ticketed Support';
+$LDTicketedSupportTxt='Den Online Support von CARE2X kontaktieren.';
+$LDNewsgroup='Newsgroup';
+$LDNewsgroupTxt='Spiegel der Mailingliste von den Projektentwicklern.';
+# 2002-08-19 EL
+$LDPharmaIndex='Rote Liste';
+$LDPharmaIndexTxt='Pharmaindizes wie z.B Rote Liste, Gelbe Liste, oder IFAP';
 ?>

@@ -10,7 +10,7 @@ require_once('../../include/inc_vars_resolve.php');
 
 <body onLoad="if(window.focus) window.focus()">
 
-<font face="verdana,arial" size=6 color="#0000ff">Credits</fonts>
+<font face="verdana,arial" size=6 color="#0000ff">Vi takker</fonts>
 
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
@@ -389,7 +389,7 @@ Grunnen til at han ble med på 'Åpen kildekode' er: <br><i>"En ideel verdan kan b
 
   <tr>
 
-    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Mat&#283;j Hausenblas (FR)</font></nobr>&nbsp;</td>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Matêj Hausenblas (FR)</font></nobr>&nbsp;</td>
 
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Fransk oversetting</font></td>
 

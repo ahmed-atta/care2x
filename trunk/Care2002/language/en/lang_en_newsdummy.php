@@ -5,7 +5,8 @@ print '
 			</FONT>
 		<BR>
 		<font size=-1 color="#000000" face="arial">
-		<b>The '.$LDNewsDummy[$i].' news article or information will be shown here.</b><p>
+		<b>
+		The '.$LDNewsDummy[$i].' news article or information will be shown here.</b><p>
 			You can publish your news, information, memoranda, etc. in this area.
 			With the user friendly editor you can compose and publish your article 
 			in a very short time and in a very easy way. The editor will show you

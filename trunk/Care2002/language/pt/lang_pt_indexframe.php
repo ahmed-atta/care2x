@@ -12,7 +12,7 @@ $LDLabs='Laboratórios';
 $LDRadiology='Radiologia';
 $LDPharmacy='Farmácia';
 $LDMedDepot='Medicamentos';
-$LDDirectory='Diretório';
+$LDDirectory='Directório';
 $LDTechSupport='Suporte Técnico';
 //$LDEDP='Admininistração do Sistema';
 $LDEDP='Admin. do Sistema';
@@ -21,7 +21,7 @@ $LDInterEmail='Internet Email';
 //$LDSpecials='Funcionalidades Especiais';
 $LDSpecials='Func. Especiais';
 $LDLogin='Iniciar Sessão';
-$LDLogout='Logout';							
+$LDLogout='Teminar Sessão';					
 
 $VersionChgTarget='_top';
 $LDLanguage='Língua';
@@ -42,4 +42,6 @@ $LDPortuguese='Portuguese';
 $LDSpanish='Spanish';
 /* 2003-04-28 El */
 $LDDutch='Dutch';
+# 2003-08-04 EL
+$LDPerson='Person';
 ?>

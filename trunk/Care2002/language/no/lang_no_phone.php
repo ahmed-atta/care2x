@@ -190,4 +190,6 @@ $LDUpdate="Oppdater data";
 
 $LDDirData="Editer telefondata nr. <font color=\"red\">~nr~</font>";
 
+$LDTelephone='Telephone';
+$LDBeeper='Beeper';
 ?>

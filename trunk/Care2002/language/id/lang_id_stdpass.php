@@ -125,4 +125,9 @@ $LDPlsTryAgain='Silahkan coba lagi.';
 /* 2003-07-11 EL */
 $LDAdministration='Pengelolaan';
 $LDOutpatientClinic='Outpatient clinic';
+$LDUploadDicom='Upload DICOM images';
+$LDViewDicom='View DICOM images';
+# 2003-08-22 EL
+$LDYellowList='Yellow List';
+$LDRedList='Red List';
 ?>

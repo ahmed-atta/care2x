@@ -19,7 +19,6 @@ require_once($root_path.'include/inc_vars_resolve.php');
             width=5 border=0></TD></TR>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-            <P><img src="../../gui/img/common/default/pixel.gif"  width=135  border=0  align=right vspace=10>
 			<b>Erik de Wild (NL) is april 2003 begonnen met de Nederlandse vertaling van Care2002. </b>
   
     <p>
@@ -258,7 +257,7 @@ Daniele Frijia uit Duitsland heeft de veiligheidsaspecten van Care2002 gecontrol
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;verbeteringen in de beveiliging</font></td>
   </tr>
   <tr>
-    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Mat&#283;j Hausenblas (FR)</font></nobr>&nbsp;</td>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Matêj Hausenblas (FR)</font></nobr>&nbsp;</td>
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Franse vertaling</font></td>
   </tr>
   <tr>

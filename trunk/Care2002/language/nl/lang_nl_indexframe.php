@@ -1,24 +1,24 @@
 <?php
 
 $LDHome='Beginpagina';
-$LDPatient='Patient';
-$LDAdmission='Toelating';
-$LDAmbulatory='Ambulante hulp';
+$LDPatient='Bewoners';
+$LDAdmission='Opname';
+$LDAmbulatory='Poliklinisch';
 $LDMedocs='Medische documenten';
-$LDDoctors='Docters';
+$LDDoctors='Dokters';
 $LDNursing='Verpleging';
 $LDOR='Operatie Kamers';
-$LDLabs='Labs';
+$LDLabs='Labaratorium';
 $LDRadiology='Radiologie';
-$LDPharmacy='Pharmacie';
-$LDMedDepot='Medisch Depot';
-$LDDirectory='Directory';
-$LDTechSupport='Technische Ondersteuning';
+$LDPharmacy='Apotheek';
+$LDMedDepot='Magazijn';
+$LDDirectory='Telefoonboek';
+$LDTechSupport='Technische Dienst';
 $LDEDP='EDP';
 $LDIntraEmail='Intranet E-mail';
 $LDInterEmail='Internet E-mail';
 $LDSpecials='Speciale functies';
-$LDLogin='Login';
+$LDLogin='Inloggen';
 $LDLogout='Logout';
 $LDAppointments='Afspraken';
 
@@ -40,5 +40,6 @@ $LDPolish='Polish';
 $LDPortuguese='Portugese';
 $LDSpanish='Spaanse';
 /* 2003-04-28 El */
-$LDDutch='Nederlandse';
+$LDDutch='Nederlands';
+$LDPerson='Persoon';
 ?>

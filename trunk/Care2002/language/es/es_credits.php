@@ -11,23 +11,63 @@ require_once('../../include/inc_vars_resolve.php');
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
         <TR>
-          <TD><IMG height=15 
-            src="../../gui/img/common/default/pixel.gif" 
-            width=5 border=0></TD></TR>
-        <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-			<P><img src="../../gui/img/control/default/es/es_x-blank.gif" width=135 border=0  align=right vspace=10> 
-          <b>La traducción Espa&ntilde;ola de Care 2002 fue hecha por Patxi Gomaríz</b> 
+          <b>Patxi Gomaríz (ES)<br> La traducción Española de Care 2002.</b> 
         <p>
 			Patxi Gomaríz nació en la primavera del año 1966 en Murcia (España).
         <p> Su vida laboral gira entorno a la fotografía, es especialista en fotografía 
           de Oftalmología (fundus camera). Apasionado por Internet, también construye 
           sitios web. 
         <p> "<i>Pienso que el código abierto es una manera eficaz de luchar contra 
-          la localizaci&oacute;n económica, especialmente en asuntos tan fundamentales 
+          la localización económica, especialmente en asuntos tan fundamentales 
           como la salud, por eso me siento orgulloso de mi pequeña aportación 
           a este gran proyecto</i>". 
-        <P><a href="mailto:pgomariz@ono.com"><u>Puede Ponerse en contacto con Patxi Gomar&iacute;z aqu&iacute;</u></a>
+        <P><a href="mailto:pgomariz@ono.com"><u>Puede Ponerse en contacto con Patxi Gomaríz aquí</u></a>
+</TD></TR></TBODY></TABLE>
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+			<P><img src="../../fotos/credits/hinostroza.jpg"  border=0  width=135 align=right vspace=10> 
+          <b>Dr. med Daniel Hinostroza C. (EC)<br> La traducción Española de Care 2002.</b> 
+        <p>
+<li>Autor y coautor de numerosos textos médicos.<br>
+<li>5 años como Director del Centro de Informática Médica Grünenthal, Quito
+- Ecuador.<br>
+<li>Estudios preliminares en Informática Médica en la Universidad de
+Stanford.<br>
+<li>2 años como Líder de Proyectos Multimedia en Grünenthal GmbH, Aquisgrán,
+Alemania.<br>
+<li>Traductor oficial para phpMyAdmin (Español)<p>
+Webmaster de la iniciativa de sitio web médico más grande del Ecuador
+(www.cmpichincha.med.ec) y la Sociedad Ecuatoriana de Dermatología
+(www.sociedadecuatorianadedermatologia.org.ec).<br>
+Website: www.cerebroperiferico.com
+
+        <P><a href="mailto:postmaster@cerebroperiferico.com"><u>Puede Ponerse en contacto con Dr. Daniel Hinostroza aquí</u></a>
+</TD></TR></TBODY></TABLE>
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+			<P><img src="../../fotos/credits/javier.jpg"  border=0  width=135 align=right vspace=10> 
+          <b>Javier Alberto Arias (AR)<br> La traducción Española de Care 2002.</b> 
+        <p>
+
+        <P><a href="mailto:javisxx@hotmail.com"><u>Puede Ponerse en contacto con Javier Alberto Arias</u></a>
+</TD></TR></TBODY></TABLE>
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+			<P><img src="../../fotos/credits/gonzalo.jpg"  border=0  width=135 align=right vspace=10> 
+          <b>Gonzalo Gomez Sotelo (AR)<br> La traducción Española de Care 2002.</b> 
+        <p>
+
+        <P><a href="mailto:gonzalo@smandes.com.ar"><u>Puede Ponerse en contacto con Gonzalo Gomez Sotelo</u></a>
 </TD></TR></TBODY></TABLE>
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
@@ -40,19 +80,19 @@ require_once('../../include/inc_vars_resolve.php');
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/giuseppe_scarpi.jpg"  border=0  width=135 height=170 align=right vspace=10> 
           <b>La traducción Italiana de Care 2002 fue hecha por Giuseppe Scarpi:</b> 
-        <p> Giuseppe Scarpi naci&oacute; en Roma, Italia, hace 35 a&ntilde;os. 
-        <p>Graduado en ingenier&iacute;a electr&oacute;nica ha trabajado para 
-          varias compa&ntilde;&iacute;as en el sector biom&eacute;dico, donde 
-          &eacute;l desarroll&oacute; un trabajo sobre las relaciones entre el 
-          mundo de la medicina y la inform&aacute;tica. <br>
-          &Eacute;l utiliza y aprecia Linux y Windows, <em>&quot;pues ambos son 
+        <p> Giuseppe Scarpi nació en Roma, Italia, hace 35 años. 
+        <p>Graduado en ingeniería electrónica ha trabajado para 
+          varias compañías en el sector biomédico, donde 
+          él desarrolló un trabajo sobre las relaciones entre el 
+          mundo de la medicina y la informática. <br>
+          Él utiliza y aprecia Linux y Windows, <em>&quot;pues ambos son 
           el resultado de un gran trabajo humano que se debe respetar&quot;. </em> 
-        <p> &Eacute;l decidi&oacute; ensamblar activamente c&oacute;digo abierto 
+        <p> Él decidió ensamblar activamente código abierto 
           porque:<br>
-          <em>&quot;un mundo tan ideal puede sobrevivir solamente si est&aacute; 
-          equilibrado perfectamente. Si usted toma algo, usted debe tambi&eacute;n 
-          dar algo en proporci&oacute;n.&quot; </em>
-        <P><a href="mailto:kalbun@inwind.it"><u>Puede Ponerse en contacto con Giuseppe Scarpi aqu&iacute;</u></a>
+          <em>&quot;un mundo tan ideal puede sobrevivir solamente si está 
+          equilibrado perfectamente. Si usted toma algo, usted debe también 
+          dar algo en proporción.&quot; </em>
+        <P><a href="mailto:kalbun@inwind.it"><u>Puede Ponerse en contacto con Giuseppe Scarpi aquí</u></a>
 </TD></TR></TBODY></TABLE>
 
 <hr>
@@ -66,7 +106,7 @@ require_once('../../include/inc_vars_resolve.php');
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/gabriele_cicala.jpg"  border=0  align=right vspace=10> 
           <b>La traducción Italiana de www.care2x.com fue hecha por Gabriele Cicala.</b> 
-        <P><a href="mailto:gabcicala@tiscali.it"><u>Puede Ponerse en contacto con Gabriele Cicala aqu&iacute;</u></a>
+        <P><a href="mailto:gabcicala@tiscali.it"><u>Puede Ponerse en contacto con Gabriele Cicala aquí</u></a>
 </TD></TR></TBODY></TABLE>
 
 <hr>
@@ -79,24 +119,9 @@ require_once('../../include/inc_vars_resolve.php');
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/daniel_zilli.jpg"  border=0  align=right vspace=10> 
-          <b>La traducción brasile&ntilde;a-Portuguesa de Care 2002 y www.care2x.com 
+          <b>La traducción brasileña-Portuguesa de Care 2002 y www.care2x.com 
           fue hecha por Daniel Zilli.</b> 
-        <P><a href="mailto:danielz@cco.matrix.com.br"><u>Puede Ponerse en contacto con Daniel Zilli aqu&iacute;.</u></a>
-</TD></TR></TBODY></TABLE>
-
-<hr>
-<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
-        <TBODY>
-        <TR>
-          <TD><IMG height=15 
-            src="../../gui/img/common/default/pixel.gif" 
-            width=5 border=0></TD></TR>
-        <TR>
-          <TD vAlign=top><font face="verdana,arial" size=2>
-            <P><img src="../../fotos/credits/agus_mr.jpg"  border=0  align=right vspace=10> 
-          <b>La traducción Indonesia de Care 2002 y www.care2x.com fue hecha por 
-          Agus Muhammad Ramdan.</b> 
-        <P><a href="mailto:agusmr@mweb.co.id"><u>Puede Ponerse en contacto con Agus M. Ramdan aqu&iacute;</u></a>
+        <P><a href="mailto:danielz@cco.matrix.com.br"><u>Puede Ponerse en contacto con Daniel Zilli aquí.</u></a>
 </TD></TR></TBODY></TABLE>
 
 <hr>
@@ -117,7 +142,7 @@ require_once('../../include/inc_vars_resolve.php');
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Realces de seguridad</font></td>
   </tr>
   <tr>
-    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Mat&#283;j Hausenblas (FR)</font></nobr>&nbsp;</td>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Matêj Hausenblas (FR)</font></nobr>&nbsp;</td>
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Traducción 
       Francesa</font></td>
   </tr>
@@ -133,7 +158,7 @@ require_once('../../include/inc_vars_resolve.php');
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Patxi Gomaríz (ES)</font></nobr>&nbsp;</td>
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Traducción 
-      Espa&ntilde;ola</font></td>
+      Española</font></td>
   </tr>
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Pawel Cyrta (PL)</font></nobr>&nbsp;</td>

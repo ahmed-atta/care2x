@@ -94,4 +94,7 @@ $LDHow2SearchPhone="Bagaimana cara mencari no. telepon";
 $LDUpdate="Mutakhirkan data";
 
 $LDDirData="Edit no. petunjuk masukan <font color=\"red\">~nr~</font>";
+
+$LDTelephone='Telephone';
+$LDBeeper='Beeper';
 ?>

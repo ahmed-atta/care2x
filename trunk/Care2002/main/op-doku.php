@@ -13,7 +13,6 @@ require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','or.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
 
 $thisfile=basename(__FILE__);
 
@@ -85,13 +84,15 @@ require($root_path.'include/inc_css_a_hilitebu.php');
               <TBODY>
               <TR bgColor=#eeeeee>
                 <TD vAlign=top width=180><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B><nobr>
+                  face="Verdana,Helvetica,Arial" size=2><B>
 				 <img <?php echo createComIcon($root_path,'blaupfeil.gif','0','middle') ?>> 
 				 <a href="<?php echo $root_path; ?>modules/op_document/op-doku-pass.php?sid=<?php echo "$sid&lang=$lang" ?>" onmouseover="ssm('ALog'); clearTimeout(timer) " 
       onmouseout="timer=setTimeout('hsm()',1000)" ><?php echo $LDOrDocument ?></a>
-				  </nobr></B></FONT></TD>
+				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php echo $LDOrDocumentTxt ?></FONT></TD>
+				  </tr>
+				  
               <TR bgColor=#dddddd height=1>
                 <TD colSpan=2><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
@@ -134,13 +135,15 @@ require($root_path.'include/inc_css_a_hilitebu.php');
               <TBODY>
               <TR bgColor=#eeeeee>
                 <TD vAlign=top width=180><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B><nobr>
+                  face="Verdana,Helvetica,Arial" size=2><B>
 				 <img <?php echo createComIcon($root_path,'blaupfeil.gif','0','middle') ?>>  
 				 <a href="<?php echo $root_path ?>modules/or_logbook/op-pflege-logbuch-pass.php?sid=<?php echo "$sid&lang=$lang" ?>" onmouseover="ssm('PLog'); clearTimeout(timer) " 
       onmouseout="timer=setTimeout('hsm()',1000)" ><?php echo $LDOrLogBook ?></a><br>
-				  </nobr></B></FONT></TD>
+				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php echo $LDOrLogBookTxt ?></FONT></TD>
+				 </tr>
+<!-- 				 
               <TR bgColor=#dddddd height=1>
                 <TD colSpan=2><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
@@ -153,7 +156,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
       onmouseout="timer=setTimeout('hsm()',1000)"><?php echo $LDOrProgram ?></a></B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><nobr><?php echo $LDOrProgramTxt ?></nobr></FONT></TD></TR>
-              
+ -->              
               <TR bgColor=#dddddd height=1>
                 <TD colSpan=2><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
@@ -165,11 +168,13 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 				 <a href="<?php echo $root_path ?>modules/nursing_or/nursing-or-dienst-schnellsicht.php<?php echo URL_APPEND ?>"><?php echo "$LDORNOC $LDQuickView" ?></a>
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><nobr><?php echo $LDQviewTxtNurse ?></nobr></FONT></TD></TR>
+                  size=2><?php echo $LDQviewTxtNurse ?></FONT></TD></TR>
+				  
               <TR bgColor=#dddddd height=1>
                 <TD colSpan=2><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
                   width=5></TD></TR>
+				  
               <TR bgColor=#eeeeee>
                 <TD vAlign=top width=180><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B>
@@ -179,6 +184,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php echo $LDDutyPlanTxt ?></FONT></TD></TR>
+				  
 				  <TR bgColor=#dddddd height=1>
                 <TD colSpan=2><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
@@ -206,26 +212,29 @@ require($root_path.'include/inc_css_a_hilitebu.php');
             <TABLE cellSpacing=1 cellPadding=3 width=600 bgColor=#999999 
             border=0>
               <TBODY>
-              <TR bgColor=#eeeeee>
+<!--               <TR bgColor=#eeeeee>
                 <TD vAlign=top width=180><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B><nobr>
 				 <img <?php echo createComIcon($root_path,'blaupfeil.gif','0','middle') ?>>  <a href="ucons.php<?php echo URL_APPEND; ?>" ><?php echo "$LDOr $LDAnaLogBook" ?></a><br>
 				  </nobr></B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php echo $LDAnaLogBookTxt ?></FONT></TD>
+				</tr>
                            
               <TR bgColor=#dddddd height=1>
                 <TD colSpan=2><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
                   width=5></TD></TR>
+ -->				  
               <TR bgColor=#eeeeee>
                 <TD vAlign=top width=180><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B>
 				<img <?php echo createComIcon($root_path,'blaupfeil.gif','0','middle') ?>>  
-				<a href="<?php echo $root_path ?>modules/nursing_or/nursing-or-dienst-schnellsicht.php<?php echo URL_APPEND; ?>&retpath=menu&hilitedept=42"><?php echo $LDQuickView ?></a>
+				<a href="<?php echo $root_path ?>modules/nursing_or/nursing-or-dienst-schnellsicht.php<?php echo URL_APPEND; ?>&retpath=menu&hilitedept=39"><?php echo $LDQuickView ?></a>
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><nobr><?php echo $LDQviewTxtAna ?></nobr></FONT></TD></TR>
+                  size=2><?php echo $LDQviewTxtAna ?></FONT></TD></TR>
+				  
               <TR bgColor=#dddddd height=1>
                 <TD colSpan=2><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
@@ -234,7 +243,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
                 <TD vAlign=top width=180><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B>
 				<img <?php echo createComIcon($root_path,'blaupfeil.gif','0','middle') ?>>  
-				<a href="<?php echo $root_path ?>modules/nursing_or/nursing-or-dienstplan.php?sid=<?php echo "$sid&lang=$lang" ?>&dept_nr=42&retpath=menu" onmouseover="ssm('AnaDienstplan'); clearTimeout(timer) " 
+				<a href="<?php echo $root_path ?>modules/nursing_or/nursing-or-dienstplan.php?sid=<?php echo "$sid&lang=$lang" ?>&dept_nr=39&retpath=menu" onmouseover="ssm('AnaDienstplan'); clearTimeout(timer) " 
       onmouseout="timer=setTimeout('hsm()',1000)" ><?php echo "$LDORNOC $LDScheduler" ?></a>
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 

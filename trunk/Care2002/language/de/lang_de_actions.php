@@ -16,4 +16,9 @@ $LDAdmit='Aufnehmen';
 $LDArchive='Archiv';
 $LDStart='Start';
 $LDEnd='End';
+# 2003-07-29 EL
+$LDListApptByDept='Alle Termine bei der Abteilung';
+$LDListApptByDoc='Alle Termine mit dem Arzt';
+$LDdone='Fertig';
+$LDOk='Ok';
 ?>

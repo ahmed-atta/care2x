@@ -61,5 +61,7 @@ $LDEditNews="Edytuj i zatwierdz wiadomo¶æ online poprzez editor";
 $LDCredits='Kredyty';
 /* 2003-05-24 EL */
 $LDPublicItems='Public items';
+# 2003-08-28 EL
+$LDHeadline='Nag³ówek';
 
 ?>

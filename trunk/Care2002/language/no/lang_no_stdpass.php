@@ -127,4 +127,9 @@ $LDPlsTryAgain='Vennligst prøv igjen';
 /* 2003-07-11 EL */
 $LDAdministration='Administration';
 $LDOutpatientClinic='Outpatient clinic';
+$LDUploadDicom='Upload DICOM images';
+$LDViewDicom='View DICOM images';
+# 2003-08-22 EL
+$LDYellowList='Yellow List';
+$LDRedList='Red List';
 ?>

@@ -59,4 +59,6 @@ $LDEditNews='Editar e submeter notícias através do editor online';
 $LDCredits='Créditos';
 /* 2003-05-24 EL */
 $LDPublicItems='Public items';
+# 2003-08-28 EL
+$LDHeadline='Cabelçaho';
 ?>

@@ -43,9 +43,9 @@ Ha deciso di unirsi attivamente alla causa dell'Open Source in quanto
             <P><img src="../../fotos/credits/gabriele_cicala.jpg"  border=0  align=right vspace=10>
 			<b>La traduzione italiana di sito web (www.care2x.com) è sviluppata e gestita da Gabriele Cicala.</b>
 			<p>
-			Gabriele Cicala &egrave; nato a Rossano in provincia di Cosenza nel 1970.
+			Gabriele Cicala è nato a Rossano in provincia di Cosenza nel 1970.
   Ha conseguito la laurea in ingegneria delle telecomunicazioni al Politecnico di Torino.
-  Attualmente lavora in una societ&agrave; informatica in qualit&agrave; di consulente. <p>Fin dal primo momento in cui ha conosciuto l'ambiente Linux 
+  Attualmente lavora in una società informatica in qualità di consulente. <p>Fin dal primo momento in cui ha conosciuto l'ambiente Linux 
 e open-source ha sempre avuto interesse per ogni tipo di progetto. Nonostante non appartenga propriamente all'ambiente medico ha deciso di 
 unirsi al progetto in quanto crede nelle stesse cose in cui credono il 
 suo ideatore e tutti i suoi collaboratori.
@@ -53,6 +53,32 @@ suo ideatore e tutti i suoi collaboratori.
 </TD></TR></TBODY></TABLE>
 
 <hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+            <P>
+			<b>
+			Massimiliano Cuccia (IT)
+			</b><p>
+			Contributions to the development of DICOM viewer modules.
+			
+			<P><a href="mailto:mcuccia@users.sourceforge.net"><u>Si può contattare Massimiliano Cuccia qui.</u></a>
+</TD></TR></TBODY></TABLE>
+
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+            <P>
+			<b>
+			Daniele Ali (IT)
+			</b><p>
+			Contributions to the development of DICOM viewer modules.
+			
+			<P><a href="mailto:alidan@users.sourceforge.net"><u>Si può contattare Daniele Ali qui.</u></a>
+</TD></TR></TBODY></TABLE>
+
+<!-- <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
         <TR>
@@ -68,21 +94,7 @@ suo ideatore e tutti i suoi collaboratori.
 			
 			<P><a href="mailto:danielz@cco.matrix.com.br"><u>Si può contattare Daniel Zilli qui.</u></a>
 </TD></TR></TBODY></TABLE>
-
-<hr>
-<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
-        <TBODY>
-        <TR>
-          <TD><IMG height=15 
-            src="../../gui/img/common/default/pixel.gif" 
-            width=5 border=0></TD></TR>
-        <TR>
-          <TD vAlign=top><font face="verdana,arial" size=2>
-            <P><img src="../../fotos/credits/agus_mr.jpg"  border=0  align=right vspace=10>
-			<b>La traduzione indonesiana di Care 2002 e sito web (www.care2x.com) è stata fatta da Agus Muhammad Ramdan.</b>
-			
-			<P><a href="mailto:agusmr@mweb.co.id"><u>Si può contattare Agus M. Ramdan qui.</u></a>
-</TD></TR></TBODY></TABLE>
+ -->
 
 <hr>
 <font face="verdana,arial" size=3 color="#0000ff">Altri ringraziamenti</font>
@@ -102,7 +114,7 @@ suo ideatore e tutti i suoi collaboratori.
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Miglioramenti del livello di sicurezza</font></td>
   </tr>
   <tr>
-    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Mat&#283;j Hausenblas (FR)</font></nobr>&nbsp;</td>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Matêj Hausenblas (FR)</font></nobr>&nbsp;</td>
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Traduzione in  francese</font></td>
   </tr>
   <tr>

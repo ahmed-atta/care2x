@@ -57,7 +57,7 @@ $LDAdmWantSearch='Ich suche einen Patient';
 $LDAdmWantArchive='Ich möchte zum Archiv';
 
 /**************** note the ' ~nr~ ' must not be erased it will be replaced by the script with the number of search results ******/
-$LDSearchFound='Es wurde(n) <font color=red><b>~nr~</b></font> relevante daten gefunden.';
+$LDSearchFound='Insgesamt <font color=red><b>~nr~</b></font> Treffer gefunden.';
 
 $LDShowData='Zeige Daten';
 $LDPatientData='Aufnahmedaten';
@@ -343,4 +343,28 @@ $LDAllText='Nur dynamische Inhalte';
 $LDDataOnly='Nur fallrelevante Daten';
 /*2003-06-21 EL*/
 $LDChartsRecords='Patientenkurve';
+# 2003-07-26 EL
+$LDMode='Mode';
+$LDPatientIsDischarged='Dieser Patient wurde schon entlassen';
+$LDShow='Zeige';
+$LDPlannedEncType='Geplante Aufnahmeart';
+# 2003-08-01 EL
+$LDListEncounters='Aufnahmen auflisten';
+$LDDischarged='Abgeschlossen';
+$LDDischargeDate='Entlassungsdatum';
+# 2003-08-04 EL
+$LDCancelThisAdmission='Aufnahme stornieren';
+$LDInsShortID[1]='PRIV';
+$LDInsShortID[2]='ALG';
+$LDInsShortID[3]='SZ';
+# 2003-08-26 EL
+$LDMeasurements='Messwerte';
+#2003-08-28 eL
+$LDPlsEnterReferer='Bitte geben Sie den überweisenden Arzt ein.';
+$LDPlsEnterRefererDiagnosis='Bitte geben Sie die Überweisungsdiagnose ein.';
+$LDPlsEnterRefererTherapy='Bitte geben Sie die Überweisungstherapie ein.';
+$LDPlsEnterRefererNotes='Bitte geben Sie die Überweisungsangabe ein.';
+$LDPlsSelectAdmissionType='Bitte wählen Sie die Aufnahmeart aus.';
+$LDForInpatient='Für stationäre Aufnahme';
+$LDForOutpatient='Für ambulante Aufnahme';
 ?>

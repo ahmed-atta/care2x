@@ -233,4 +233,6 @@ $LDDoesSurgeryOp='Ist chirurgisch operativ tätig?';
 $LDList='Liste';
 $LDDept='Abteilung';
 $LDUpdate='Aktualisieren';
+# 2003-08-03 EL
+$LDFindEmployee='Mitarbeiter suchen';
 ?>

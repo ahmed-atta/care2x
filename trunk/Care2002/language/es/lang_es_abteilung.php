@@ -1,35 +1,41 @@
 <?php
-$LDPageTitle='Departmentos';
-$LDDeptTxt='Departmentos';
-$LDOpenHrsTxt='Horario de la Clínica';
+$LDPageTitle='Departamentos';
+$LDDeptTxt='Departamentos';
+$LDOpenHrsTxt='Horario de la clínica';
 $LDChkHrsTxt='Horario de consultas';
-$LDClk4Info='Click para mas información';
-$LDDayTxt='Dia';
+$LDClk4Info='Dé clic para más información';
+$LDDayTxt='Día';
+
+/**
+* Correcciones: Dr. med. Daniel Hinostroza C.
+*/
 
 /**
 * A small dictionary:
-* ENT = Eye, Nose, Throath
-* OB-Gyne = Obstetrics-Gynecology
+* ORL = Otorrinolaringología
+* Gineco-obst= Ginecología y Obstetricia
+* U.V.I= 
+* U.C.I= Unidad de Cuidados Intensivos
 */
-$dept=array('Cirugía General',
-					'Cirugía de Urgencias',
-					'Cirugía Plástica',
-					'Otorrino',
+$dept=array('Cirugía general',
+					'Cirugía de urgencias',
+					'Cirugía plástica',
+					'Otorrinolaringología',
 					'Oftalmología',
-					'Pathology',
-					'OB-Gine',
+					'Patología',
+					'Gineco-obst',
 					'Rehabilitación',
-					'Medicina Interna',
+					'Medicina interna',
 					'Oncología',
 					'Mantenimiento',
 					'U.V.I.',
 					'U.C.I.',
 					'Laboratorio',
-					'Ambulatorio de Urgencias',
-					'Ambulatorio General',
-					'Sonography',
-					'Nuclear Diagnostics',
-					'Ambulatorio de Medicina Interna');
+					'Ambulatorio de urgencias',
+					'Ambulatorio general',
+					'Sonografía',
+					'Diagnóstico nuclear',
+					'Ambulatorio - Med. interna');
 					
 					
 /**

@@ -92,10 +92,10 @@ $LDSearchFound='~nr~ patients were found.';
 /* 2002-09-04 EL */		
 $LDTestRequestFor='Request for ';
 $LDTestType=array('chemlabor'=>'chemical laboratory test',
-                                     'patho'=>'pathological test',
+                              'patho'=>'pathological test',
 								 'baclabor'=>'bacteriological test',
 								 'radio'=>'radiological test',
-								 'blood'     =>'blood product');
+								 'blood'=>'blood product');
 /* 2002-09-10 EL */
 $LDTestReception='Pending Request';
 $LDTestReceptionTxt='Receive & process requests, write results/findings/diagnoses';
@@ -108,4 +108,16 @@ $LDCurrentFindings='Current findings';
 $LDFinalFindings='Final findings';
 $LDFillLabOnly='For lab use only';
 $LDLEN='LEN';  /* Lab entry number */
+/*2003-07-11 EL*/
+$LDAdministration='Administration';
+$LDTestParameters='Test parameters';
+$LDTestParametersTxt='Enter or edit units or measure, values,  range, limits, etc.';
+$LDMsrUnit='Msr. Unit';
+$LDMedian='Median';
+$LDUpperBound='Upper boundary';
+$LDLowerBound='Lower boundary';
+$LDUpperCritical='Upper critical';
+$LDLowerCritical='Lower critical';
+$LDUpperToxic='Upper toxic';
+$LDLowerToxic='Lower toxic';
 ?>

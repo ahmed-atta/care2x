@@ -1,5 +1,13 @@
 <?php
+
+/**
+* Correcciones: Dr. med. Daniel Hinostroza C.
+*/
+
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
+require_once($root_path.'include/inc_img_fx.php');
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
@@ -35,15 +43,15 @@ Probables causas del problema:
 </FONT><p>
 <font size=2 face="verdana,arial">
 <img <?php echo createComIcon('../../','achtung.gif') ?>>
-Puede ser que haya utilizado la función atras o adelante  de su browser.  Evite de usar estos botones.<br>
+Puede ser que haya utilizado la función atrás o adelante  de su navegador.  Evite usar estos botones.<br>
 <img <?php echo createComIcon('../../','achtung.gif') ?>>
-Puede que haya rechazado una cookie.  El programa depende de las cookie para funcionar correctamente.Acepte las cookies.
+Puede que haya rechazado una cookie.  El programa depende de cookies para funcionar correctamente.  Acepte las cookies.
 <br>
 <img <?php echo createComIcon('../../','achtung.gif') ?>>
-Su Navegador no pudo aceptar las cookies.  Por favor configure su navegador para que acepte las cookies automáticamente.
+Su navegador no pudo aceptar las cookies.  Por favor configure su navegador para que acepte las cookies automáticamente.
 <br>
 <img <?php echo createComIcon('../../','achtung.gif') ?>>
-Su navegador no pudo hacer funcionar Javascript o el Javascript pudo ser no interpretado. Permita por favor el Javascript en su navegador.  
+Su navegador no pudo hacer funcionar Javascript o el Javascript no pudo ser interpretado. Habilite Javascript en las opciones de su navegador.  
 <br>
 <img <?php echo createComIcon('../../','achtung.gif') ?>>
 En raras ocasiones puede haber un error en la transferencia de datos.  Para corregirlo pulse el botón de "recarga" de su navegador.
@@ -57,8 +65,7 @@ En raras ocasiones puede haber un error en la transferencia de datos.  Para corr
 <p>
 
 <?php
-$root_path="../../";
-require("../Copy%20of%20en/en_copyrite.php"); 
+require($root_path.'include/inc_load_copyrite.php'); 
 ?>
 </FONT>
 

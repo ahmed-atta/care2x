@@ -184,7 +184,7 @@ $LDAdmissionTxt='Inpatient admission, search, research';
 $LDImmunization='Immunization';
 $LDESE='Enter, search, edit';
 $LDImmunizationTxt=$LDESE.' immunization report';
-$LDDRG='Diagnoses (DRG)';
+$LDDRG='DRG (composite)';
 $LDDRGTxt=$LDESE.' DRG (Diagnosis related groups)';
 $LDProcedures='Procedures';
 $LDProceduresTxt=$LDESE.' therapy procedures';
@@ -198,7 +198,7 @@ $LDAppointmentsTxt=$LDESE.', research appointments or schedules';
 $LDPatientDev='Development';
 $LDPatientDevTxt=$LDESE.', display reports on patient\'s development';
 $LDWtHt='Weights & Heights';
-$LDWtHtTxt=$LDESE.' weights & heights data';
+$LDWtHtTxt=$LDESE.' weight, height & head circumference';
 $LDPregnancies='Pregnancies';
 $LDPregnanciesTxt=$LDESE.' pregnancy information';
 $LDBirthDetails='Birth details';
@@ -355,4 +355,17 @@ $LDDischarged='Discharged';
 $LDDischargeDate='Discharge date';
 # 2003-08-04 EL
 $LDCancelThisAdmission='Cancel this admission';
+$LDInsShortID[1]='PRIV';  // privately paid insurance
+$LDInsShortID[2]='COM'; // Common state sponsored insurance
+$LDInsShortID[3]='SP';    // self pay, direct pay
+# 2003-08-26 EL
+$LDMeasurements='Measurements';
+#2003-08-28 eL
+$LDPlsEnterReferer='Please enter refering physician';
+$LDPlsEnterRefererDiagnosis='Please enter referal diagnosis';
+$LDPlsEnterRefererTherapy='Please enter referer\'s recommended therapy';
+$LDPlsEnterRefererNotes='Please enter referer\'s notes';
+$LDPlsSelectAdmissionType='Please select admission type';
+$LDForInpatient='For inpatient';
+$LDForOutpatient='For outpatient';
 ?>

@@ -373,4 +373,21 @@ $LDChangeRoom='Zimmerwechsel';
 /*2003-06-14 EL*/
 $LDNrOfBedsRoom='Die Bettenanzahl im Zimmer';
 $LDIsNotANumber='ist keine gültige Zahl';
+$LDWaitingList='Warteliste';
+$LDShowAll='Alle zeigen';
+$LDShowWardOnly='Nur diese Station';
+$LDTransferToBed='In anderes Bett dieser Station';
+$LDTransferToWard='Auf andere Station';
+$LDShowBeds='Betten zeigen';
+$LDTransferPatient='Patientenumzug';
+$LDDRG='DRG';
+$LDFinanceType='Abrechnungsart';
+#2003-08-02 EL
+$LDOutToInpatient='Aufnahmestatus wechseln.';
+$LDTransferClinic='Einer Ambulanz bzw. Abteilung überweisen.';
+$LDClinic='Ambulanz';
+$LDOwnPatient='Eigener Patient';
+$LDNonOwnPatient='Fremder Patient';
+# 2003-08-04 EL
+$LDShowClinicOnly='Nur diese Ambulanz';
 ?>

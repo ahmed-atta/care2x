@@ -16,10 +16,6 @@ require_once($root_path.'include/inc_vars_resolve.php');
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
         <TR>
-          <TD><IMG height=15 
-            src="../../gui/img/common/default/pixel.gif" 
-            width=5 border=0></TD></TR>
-        <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/daniel_zilli.jpg"  border=0  align=right vspace=10>
 			<b>
@@ -34,6 +30,16 @@ Daniel é sócio-diretor da Lec Tecnologia, empresa especializada em consultoria d
 
 <hr>
 
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+			<b>Rodrigo F. Ferreira (BR)</b><p>
+			A tradução brasileira do CARE 2002
+			<P><a href="mailto:rodrigo@otorrinosclinica.com.br"><u>Rodrigo F. Ferreira pode ser contatado aqui.</u></a>
+</TD></TR></TBODY></TABLE>
+
+<hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
         <TR>
@@ -93,12 +99,7 @@ Ele decidiu unir-se ativamente ao código aberto porque:
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
         <TR>
-          <TD><IMG height=15 
-            src="../../gui/img/common/default/pixel.gif" 
-            width=5 border=0></TD></TR>
-        <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-			<P><img src="../../gui/img/control/default/<?php echo $lang ?>/<?php echo $lang ?>_x-blank.gif"  border=0  width=135 align=right vspace=10>
 			<b>Nino Novak (DE) editou a versão germânica do www.care2x.com. </b>
 <p>
 Nino Novak é um pobre cowboy solitário. Ele atira mais rápido do que pensa. As vezes é um pouco inquieto. 
@@ -113,13 +114,8 @@ Alguns conhecimentos científicos e médicos (desta forma juntou-se ao projeto car
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
         <TR>
-          <TD><IMG height=15 
-            src="../../gui/img/common/default/pixel.gif" 
-            width=5 border=0></TD></TR>
-        <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-			<P><img src="../../gui/img/control/default/<?php echo $lang ?>/<?php echo $lang ?>_x-blank.gif"  border=0  width=135 align=right vspace=10>
-<b>Patxi Gomaríz fez a tradução para o espanhol do Care 2002.</b>
+<b>Patxi Gomaríz (ES) fez a tradução para o espanhol do Care 2002.</b>
 <p>
 Patxi Gomaríz nasceu na primavera de 1966 em Murcia, Espanha.
 Sua vida e trabalho gira em torno principalmente da fotografia, sendo um especialista em fotografia para 
@@ -151,7 +147,7 @@ Por essa razão, e sinto orgulho da minha pequena contribuição para este grande p
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Aprimoramento da segurança</font></td>
   </tr>
   <tr>
-    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Mat&#283;j Hausenblas (FR)</font></nobr>&nbsp;</td>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Matêj Hausenblas (FR)</font></nobr>&nbsp;</td>
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Tradução para o francês</font></td>
   </tr>
   <tr>

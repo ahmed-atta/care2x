@@ -118,14 +118,14 @@ $LDAt='à';
 $LDDept='dép.';
 $LDRoomNr='Chambre no.';
 $LDAdmitType='Type d\'admission';
-$LDCivilStat='Etat civile';
+$LDCivilStat='État civile';
 $LDInsuranceNr='No d\'assurance';
 $LDNameAddr='Nom & Adresse';
 $LDBillInfo='Info de factration';
 $LDAdmitDiagnosis='Diagnostique d\'admission';
 $LDInfo2='Info à';
 $LDPrintDate='Date d\'impression';
-$LDReligion='Religion';
+$LDReligion='Réligion';
 $LDTherapyType='Type de thérapie';
 $LDTherapyOpt='Options de thérapie';
 $LDServiceType='Type de service';
@@ -344,4 +344,28 @@ $LDAllText='Uniquement contenu dynamique';
 $LDDataOnly='Rencontrer les données pertinentes uniquement';
 /*2003-06-21 EL*/
 $LDChartsRecords='Répertoire des tableaux';
+# 2003-07-26 EL
+$LDMode='Mode';
+$LDPatientIsDischarged='This patient is already discharged';
+$LDShow='Show';
+$LDPlannedEncType='Planned admission type';
+# 2003-08-01 EL
+$LDListEncounters='Admissions\' list';
+$LDDischarged='Discharged';
+$LDDischargeDate='Discharge date';
+# 2003-08-04 EL
+$LDCancelThisAdmission='Cancel this admission';
+$LDInsShortID[1]='PRIV';  // privately paid insurance
+$LDInsShortID[2]='COM'; // Common state sponsored insurance
+$LDInsShortID[3]='SP';    // self pay, direct pay
+# 2003-08-26 EL
+$LDMeasurements='Measurements';
+#2003-08-28 eL
+$LDPlsEnterReferer='Please enter refering physician';
+$LDPlsEnterRefererDiagnosis='Please enter referal diagnosis';
+$LDPlsEnterRefererTherapy='Please enter referer\'s recommended therapy';
+$LDPlsEnterRefererNotes='Please enter referer\'s notes';
+$LDPlsSelectAdmissionType='Please select admission type';
+$LDForInpatient='For inpatient';
+$LDForOutpatient='For outpatient';
 ?>

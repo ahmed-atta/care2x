@@ -55,4 +55,6 @@ $LDEditNews='Wijzig en voeg nieuws toe via de online editor';
 $LDCredits='Credits';
 /* 2003-05-24 EL */
 $LDPublicItems='Public items';
+# 2003-08-28 EL
+$LDHeadline='In het nieuws';
 ?>

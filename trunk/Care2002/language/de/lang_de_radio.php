@@ -53,5 +53,31 @@ $LDTestRequestRadioTxt='Anforderung von radiologischer Untersuchung';
 /* 2002-09-10 EL */
 $LDTestReception='Anstehende Anforderung';
 $LDTestReceptionTxt='Anforderung verarbeiten, Befunde eingeben';
+# 2003-08-08 EL
+$LDDicomImages='DICOM Bilder';
+$LDDicomImagesTxt='Bilder in DICOM Format betrachten';
+$LDUploadDate='Übertrag.Datum';
+$LDViewImage='Betrachten';
+$LDViewInWindow='In anderes Fenster';
+$LDNrImages='Anzahl d.Bilder';
+$LDDicomViewer='Dicom Betrachter';
+$LDViewInFrame='In diesem Rahmen betrachten';
+$LDUploadDicom='Upload DICOM';
+$LDUploadDicomTxt='Bilder in DICOM Format hinaufladen';
+$LDPID='PID';
+$LDImgNumber='Bildnr.';
+$LDSingleImage='ein Bild';
+$LDImageGroupNr='Bildergruppe Nr.';
+$LDNewFileName='Neuer Dateiname';
+$LDUploadNew='Ich möchte';
+$LDNewImageFiles='neue Bilddateien hinaufladen';
+# 2003-08-09 EL
+$LDSelectViewer='Betrachter wählen';
+$LDSelectViewerTxt='DICOM Betrachter auswählen';
+$LDCurrentViewer='Betrachter heute';
+$LDNagoyaTechInst='Nagoya Tech. Institute';
+$LDRAIMJAVA='RAIMJAVA©';
+$LDNoImageSaved='Kein Bild is gespeichert!';
+$LDImageNotes='Information';
 
 ?>

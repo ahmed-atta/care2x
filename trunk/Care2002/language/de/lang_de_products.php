@@ -50,7 +50,7 @@ $LDOrderCatTxt='Erstellen, aktualisieren, ändern, löschen, etc.';
 $LDPharmaDb='Datenbank';
 $LDPharmaDbTxt='Produkt-info, Lagerverwaltung, u.s.w.';
 $LDRedList='Rote Liste';
-$LDRedListTxt='Information über Arzneimittel';
+$LDRedListTxt='Arzneimittel-Informationen';
 $LDOrderBotActivate='Bestellbot aktivieren';
 $LDOrderBotActivateTxt='Automatischer Empfang von Bestellungen aktivieren';
 
@@ -85,7 +85,7 @@ $LDSearchArticle='Artikel suchen';
 $LDSearchKey='Suchbegriff für den Artikel';
 $LDPut2Catalog='Dieses Artikel in Bestellkatalog stellen';
 $LDActualOrder='Aktuelle Bestellung';
-$LDOrderSent='Folgende Bestellliste wurde an die Apotheke erfolgreich gesendet. Vielen Dank!';
+$LDOrderSent='Folgende Bestellliste erfolgreich wurde an die Apotheke gesendet. Vielen Dank!';
 $LDNormal='Normal';
 $LDUrgent='Eilig';
 $LDPassword='Passwort';
@@ -144,7 +144,7 @@ $LDMinOrder='Minimum Bestellung';
 $LDMaxOrder='Maximum Bestellung';
 $LDPcsProOrder='Stück pro Bestellung';
 $LDIndustrialNr='Artikelnummer PZN';
-$LDLicenseNr='Zullasungsnummer';
+$LDLicenseNr='Zulassungsnummer';
 $LDPicFile='Bilddatei';
 $LDBack2Menu='Zurück zur Datenbank Menu';
 $LDPageTop='Zurück nach ganz oben.';
@@ -204,5 +204,15 @@ $LDTime='Zeit';
 /* 2002-11-5 EL */
 $LDInvalidPassword='Invalid password!';
 $LDUnknownValidator='Validator unknown!';
-$LDPlsEnterInfo='Please enter the correct info.';
+$LDPlsEnterInfo='Bitte geben Sie die richtinge Information ein.';
+# 2003-08-17 EL
+$LDAlertInvalidMinorder='Die minimum Bestellung hat falsche Eingabe';
+$LDAlertInvalidMaxorder='Die maximum Bestellung hat falsche Eingabe';
+$LDAlertInvalidProorder='Die Stück pro Bestellung hat falsche Eingabe';
+$LDAlertMinHigherMax='Die minimum höher als maximum ist nicht zulläßig.';
+$LDAlertNoNegativeOrder='Negativer Wert ist in dieser Version nicht erlaubt';
+# 2003-08-22 EL
+$LDYellowList='Gelbe Liste';
+$LDYellowListTxt='Arzneimittel-Informationen (Internet erforderlich)';
+$LDClickSelectDept='Please click this to select a department.';
 ?>

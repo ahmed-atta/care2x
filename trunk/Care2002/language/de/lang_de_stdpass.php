@@ -123,4 +123,12 @@ $LDBilling='eComBill';
 /* 2003-05-18 EL */
 $LDPlsContactEDP='Bitte melden Sie sich bei der EDV Abteilung.';
 $LDPlsTryAgain='Bitte versuchen Sie es noch mal.';
+/* 2003-07-11 EL */
+$LDAdministration='Verwaltung';
+$LDOutpatientClinic='Ambulanz';
+$LDUploadDicom='DICOM Bilder laden';
+$LDViewDicom='DICOM Bilder betrachten';
+# 2003-08-22 EL
+$LDYellowList='Gelbe Liste';
+$LDRedList='Rote Liste';
 ?>

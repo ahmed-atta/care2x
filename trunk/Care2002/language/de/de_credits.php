@@ -17,7 +17,8 @@ require_once('../../include/inc_vars_resolve.php');
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/thomas_wiedmann.jpg"  border=0   align=right vspace=10>
-			<b>Thomas Wiedmann (DE) hat u.a. folgendes zu dem Projekt beigetragen:</b>
+			<b>Thomas Wiedmann (DE) </b><br>
+			Aktivste Debugger und trägt u.a. noch folgendes dazu bei:
 			<p><font size=1>
 		     Javascripts zur Validierung von Datum & Zahlen<br>
 			Testing (ganz durch)<br>
@@ -35,6 +36,44 @@ require_once('../../include/inc_vars_resolve.php');
 			<P><a href="mailto:tho123@users.sourceforge.net"><u>Thomas Wiedmann kann hier kontaktiert werden.</u></a>
 			<br><a href="http://www.twiedmann.de" target="_new"><u>Mehr Info bei www.twiedmann.de</u></a>
 </TD></TR></TBODY></TABLE>
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+<TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+		  <P><img src="../../fotos/credits/wilfried_goedert.jpg" border=0  align=right vspace=10 >
+			<P><b>Dr. med Wilfried Gödert (DE)</b><br>
+			Trägt u.a. folgendes zu dem Projekt bei:
+			<p><font size=1>
+		     Verwaltung und Hosting von:<br>
+			 www.care2x.de<br>News Server, OTRS Support System<br>
+			 Promotion, Pressearbeit<br>
+			 Beratung
+			<p>
+			</font>
+			Beruf: Arzt, Zusatzausbildung Medizininformatik
+			<P>Dr. Wilfried Gödert kann hier kontaktiert werden
+			<br><a href="mailto:goedert@users.sourceforge.net"><u>goedert(at)users.sourceforge.net</u></a>
+</TD></TR>	
+</TBODY></TABLE>
+
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+<TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+		  <P><img src="../../fotos/credits/sven_koechel.jpg" border=0  align=right vspace=10 >
+			<P><b>Sven Köchel (AT)</b>
+			<p>
+			Erstellung und Verwaltung von <a href="http://www.care2x.at" target="_blank">"Team Austria"</a> Webseite für Care2x.<br>
+			Entwicklungsarbeit an CARE-CAM zur Beobachtung und Kamerasteuerung.
+			<p>
+			Sven Köchel kann hier kontaktiert werden
+			<br><a href="mailto:sid61@users.sourceforge.net"><u>sid61(at)users.sourceforge.net</u></a>
+			</font>
+</TD></TR>	
+</TBODY></TABLE>
+
 
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
@@ -45,15 +84,12 @@ require_once('../../include/inc_vars_resolve.php');
             width=5 border=0></TD></TR>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-			<P><img src="../../gui/img/common/default/pixel.gif"  border=0  width=135 align=right vspace=10>
 			<b>Nino Novak (DE) hat die deutsche Fassung von www.care2x.com komplett überarbeitet.</b>
 			<p>
 			Nino Novak ist ein einsamer alter Cowboy, der besser schießen kann als denken. Manchmal
 			etwas pingelig. Diskutiert gerne mit (echten) Gurus.
 			Möchte helfen, die Welt zu verbessern. Kam zu Care2x, weil sich seine medizinisch-wissenschaftliche Vergangenheit
 			mal wieder zu Wort gemeldet hat. Ist aber ansonsten harmlos :-)
-		
-
 			<P><a href="mailto:nino@kflog.org"><u>Nino Novak kann hier kontaktiert werden.</u></a>
 </TD></TR></TBODY></TABLE>
 <hr>
@@ -65,7 +101,6 @@ require_once('../../include/inc_vars_resolve.php');
             width=5 border=0></TD></TR>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-			<P><img src="../../gui/img/common/default/pixel.gif" border=0  width=135 align=right vspace=10>
 			<b>Daniele Frijia (DE) hat die Sicherheitsaspekten des Programms durchcheckt.</b>
 			<br>
 			Er hat u.a. folgendes beigetragen:<p>
@@ -166,7 +201,7 @@ etwas nimmt, sollte man etwas in gleicher Proportion zurückgeben."</i>
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Sicherheitsverbesserungen</font></td>
   </tr>
   <tr>
-    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Mat&#283;j Hausenblas (FR)</font></nobr>&nbsp;</td>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Matêj Hausenblas (FR)</font></nobr>&nbsp;</td>
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Übersetzung auf französisch</font></td>
   </tr>
   <tr>

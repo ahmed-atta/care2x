@@ -8,6 +8,8 @@ $LDStudies='Studies';
 $LDExhibitions='Exhibitions';
 $LDHeadline='Headline';
 $LDAdmission='Admission';
+/* 2003-08-20 DH */
+$LDAnesthesiology='Anesthesiology';
 $LDCafeteria='Cafeteria News';
 $LDGeneralSurgery='General Surgery';
 $LDEmergencySurgery='Emergency Surgery';
@@ -46,4 +48,6 @@ $LDPressRelations='Presse';
 $LDSelectDept='Select department';
 /*2003-06-15 EL*/
 $LDPlsSelectDept='Please select a department';
+$LD_AllMedicalDept='____All medical departments_____';
+$LDClinic='Clinic';
 ?>

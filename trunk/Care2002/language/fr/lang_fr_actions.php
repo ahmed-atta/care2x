@@ -16,4 +16,10 @@ $LDAdmit='Admettre';
 $LDArchive='Archive';
 $LDStart='Début';
 $LDEnd='Fin';
+# 2003-07-29 EL
+$LDListApptByDept='List appointments by department';
+$LDListApptByDoc='List appointments by clinician';
+$LDdone='Done';
+$LDOk='Ok';
+$LDSelect='Select';
 ?>

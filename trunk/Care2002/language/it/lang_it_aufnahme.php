@@ -356,4 +356,17 @@ $LDDischarged='Dimesso';
 $LDDischargeDate='Data di dimesso';
 # 2003-08-04 EL
 $LDCancelThisAdmission='Cancel this admission';
+$LDInsShortID[1]='PRIV';  // privately paid insurance
+$LDInsShortID[2]='COM'; // Common state sponsored insurance
+$LDInsShortID[3]='SP';    // self pay, direct pay
+# 2003-08-26 EL
+$LDMeasurements='Measurements';
+#2003-08-28 eL
+$LDPlsEnterReferer='Please enter refering physician';
+$LDPlsEnterRefererDiagnosis='Please enter referal diagnosis';
+$LDPlsEnterRefererTherapy='Please enter referer\'s recommended therapy';
+$LDPlsEnterRefererNotes='Please enter referer\'s notes';
+$LDPlsSelectAdmissionType='Please select admission type';
+$LDForInpatient='For inpatient';
+$LDForOutpatient='For outpatient';
 ?>

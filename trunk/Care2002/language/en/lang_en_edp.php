@@ -84,23 +84,23 @@ $LDYesDelete='Yes, I am dead sure. Delete access right.';
 $LDNoBack='No. Go back.';
 $LDClk2Ack='Click the arrow button to acknowledge and/or print the order list.';
 $LDOK='OK';
-$LDManageAccess='Access rights';
+$LDManageAccess='Access Permissions';
 $LDManageAccessTxt='Manage, create, lock, remove, update, or change, etc.';
 $LDSqlDb='SQL Databank';
 $LDSqlDbTxt='Direct SQL access. <b>ATTENTION</b> only for experts';
 $LDSysOpLogin='System Admin';
 $LDSysOpLoginTxt='Login as system administrator';
 $LDEDP='EDP';
-$LDNewAccess='Create new access right';
-$LDListActual='List actual access rights';
+$LDNewAccess='Create new access permission';
+$LDListActual='List actual access permission';
 $LDName='Name';
 $LDPassword='Password';
 $LDUserId='User login name';
 $LDArea='Area';
 $LDAllowedArea='Allowed areas are:';
-$LDActualAccess='Actual access rights';
-$LDAccessDeleted='The access right was deleted successfully.';
-$LDFfActualAccess='Following are the actual access rights.';
+$LDActualAccess='Actual access permissions';
+$LDAccessDeleted='The access permission was deleted successfully.';
+$LDFfActualAccess='Following are the actual access permissions.';
 
 $LDAccessIndex=array(
 				'Name',
@@ -253,4 +253,6 @@ $LDConfigOptions='Configuration Options';
 $LDDoesSurgeryOp='Does operative surgery?';
 $LDList='List';
 $LDUpdate='Update';
+# 2003-08-03 EL
+$LDFindEmployee='Find an employee';
 ?>

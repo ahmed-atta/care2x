@@ -111,5 +111,7 @@ $LDEditNews='Editer og legg til nyheter med editor';
 $LDCredits='Takk til...';
 /* 2003-05-24 EL */
 $LDPublicItems='Public items';
+# 2003-08-28 EL
+$LDHeadline='Overskrift';
 
 ?>

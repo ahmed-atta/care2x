@@ -126,4 +126,9 @@ $LDPlsTryAgain='Si prega di riprovare.';
 /* 2003-07-11 EL */
 $LDAdministration='Direzione';
 $LDOutpatientClinic='Day clinic';
+$LDUploadDicom='Upload DICOM images';
+$LDViewDicom='View DICOM images';
+# 2003-08-22 EL
+$LDYellowList='Yellow List';
+$LDRedList='Red List';
 ?>

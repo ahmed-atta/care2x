@@ -1,69 +1,74 @@
 <?php
+
+/**
+* Correcciones: Dr. med. Daniel Hinostroza C.
+*/
+
 $LDTitleTag=array
-					(headline=>'Headline',
+					(headline=>'',
 					cafenews=>'Cafetería',
 					management=>'Gerencia',
-					healthtips=>'Health Tips',
+					healthtips=>'Consejos de salud',
 					adv_studies=>'Avances en investigación',
 					prof_training=>'Educación',
-					physiotherapy=>'Fisioterapía',
+					physiotherapy=>'Fisioterapia',
 					events=>'Demostraciones',
 					dept_generalsurgery=>'Cirugía general',
 					dept_emergency=>'Urgencias',
 					dept_plasticsurgery=>'Cirugía plástica',
 					dept_ent=>'Otorrinolaringología',
 					dept_eyesurgery=>'Oftalmología',
-					dept_pathology=>'Anatomía Patológica',
+					dept_pathology=>'Anatomía patológica',
 					dept_gynecology=>'Ginecología',
-					dept_internalmed=>'Medicína Interna',
+					dept_internalmed=>'Medicína interna',
 					dept_oncology=>'Oncología',
 					dept_techservice=>'Mantenimiento',
 					dept_IMCU=>'U.V.I.',
 					dept_ICU=>'U.C.I.',
 					dept_lab=>'Laboratorio',
 					patient_admission=>'Admisión',
-					allamb=>'Ambulatorio General',
-					unfamb=>'Ambulatorio de Urgencias',
-					sono=>'Sonography',
-					nuklear=>'Nuclear Diagnostics',
-					inmed=>'Ambulatorio de Medicina Interna');
+					allamb=>'Ambulatorio general',
+					unfamb=>'Ambulatorio de urgencias',
+					sono=>'Sonografía',
+					nuklear=>'Diagnóstico nuclear',
+					inmed=>'Ambulatorio de Medicina interna');
 					
 					
 $LDSubTitle=array
 					(headline=>'',
-					cafenews=>'',
-					management=>'',
-					healthtips=>'Más Especialidadeds De la Salud',
+					cafenews=>'Noticias de la cafetería',
+					management=>'Gerencia',
+					healthtips=>'Más especialidades de la salud',
 					adv_studies=>'Información relevante sobre los estudios avanzados',
-					prof_training=>'Información relevante sobre Educación',
-					physiotherapy=>'',
-					events=>'',
-					dept_generalsurgery=>'',
-					dept_emergency=>'',
-					dept_plasticsurgery=>'',
-					dept_ent=>'',
-					dept_eyesurgery=>'',
-					dept_pathology=>'',
-					dept_gynecology=>'',
-					dept_internalmed=>'',
-					dept_oncology=>'',
-					dept_techservice=>'',
-					dept_IMCU=>'',
-					dept_ICU=>'',
-					dept_lab=>'',
-					patient_admission=>'Más información sobre Admisión',
+					prof_training=>'Información relevante sobre educación',
+					physiotherapy=>'Fisioterapia',
+					events=>'Eventos',
+					dept_generalsurgery=>'Cirugía general',
+					dept_emergency=>'Emergencias',
+					dept_plasticsurgery=>'Cirugía plástica',
+					dept_ent=>'Otorrinolaringología',
+					dept_eyesurgery=>'Cirugía oftálmica',
+					dept_pathology=>'Patología',
+					dept_gynecology=>'Ginecología',
+					dept_internalmed=>'Medicina interna',
+					dept_oncology=>'Oncología',
+					dept_techservice=>'Soporte técnico',
+					dept_IMCU=>'U.V.I',
+					dept_ICU=>'U.C.I',
+					dept_lab=>'Laboratorio',
+					patient_admission=>'Más información acerca de la admisión',
 					SBDefault=>'Más información');
 
 
-$LDMore='Más sobre el artículo';
+$LDMore='Más acerca del artículo';
 $LDBackTxt='Volver';
-$LDClk2Read='Click para leer';
+$LDClk2Read='Dé clic para leer';
 
-$LDArticle='Articulo';
-$LDWrittenOn='on';
+$LDArticle='Artículo';
+$LDWrittenOn='en';
 $LDWrittenBy='Escrito por';
 
-$LDNewsDummy=array(1=>'primero',2=>'segundo',3=>'tercero',4=>'cuarto');
-$LDClk2Compose='Click aquí para componer...'
-$LDClk2Write='Click here to start the editor';
+$LDNewsDummy=array(1=>'primer',2=>'segundo',3=>'tercer',4=>'cuarto');
+$LDClk2Compose='Dé clic aquí para componer...';
+$LDClk2Write='Dé clic aquí para componer';
 ?>

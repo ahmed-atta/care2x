@@ -334,11 +334,33 @@ href="javascript:gethelp('submenu1.php','<?php echo $LDSpexFunctions ?>')"><img 
                   face="Verdana,Helvetica,Arial" size=2><B>
 				 <a href="<?php echo $root_path; ?>modules/myintranet/my-passw-change.php<?php echo URL_APPEND; ?>"><?php echo $LDAccessPw ?></a> 
 				  </B></FONT></TD>
+                <TD><FONT face="Verdana,Helvetica,Arial" size=2><?php echo $LDAccessPwTxt ?></FONT></TD></TR>
+
+				<TR bgColor=#dddddd height=1>
+                <TD colSpan=3><IMG height=1 
+                  src="../../gui/img/common/default/pixel.gif" 
+                  width=5></TD></TR>
+<!--				  
+              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'templates.gif','0') ?> align="absmiddle"></td>
+                <TD vAlign=top ><FONT 
+                  face="Verdana,Helvetica,Arial" size=2><B>
+				 <a href="http://www.bnf.org/bnf/index.html">BNF 45</a> 
+				  </B></FONT></TD>
+                <TD><FONT face="Verdana,Helvetica,Arial" size=2>British National Formulary</FONT></TD></TR> 
+
+				<TR bgColor=#dddddd height=1>
+                <TD colSpan=3><IMG height=1 
+                  src="../../gui/img/common/default/pixel.gif" 
+                  width=5></TD></TR>
+              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'redlist.gif','0') ?> align="absmiddle"></td>
+                <TD vAlign=top ><FONT 
+                  face="Verdana,Helvetica,Arial" size=2><B>
+				 <a href="pharmaindex.php<?php  echo URL_APPEND;  ?>"><?php  echo $LDPharmaIndex;  ?></a> 
+				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDAccessPwTxt ?></FONT></TD></TR>
+                  size=2><?php  echo $LDPharmaIndexTxt;  ?></FONT></TD></TR> 
 
-
-<!--               <TR bgColor=#dddddd height=1>
+               <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
                   width=5></TD></TR>
@@ -351,6 +373,32 @@ href="javascript:gethelp('submenu1.php','<?php echo $LDSpexFunctions ?>')"><img 
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php if(($cfg['mask']==1)||($cfg['mask']=='')) echo $LDDisplay2Txt; else echo $LDDisplay1Txt; ?></FONT></TD></TR> -->
+				  
+              <TR bgColor=#dddddd height=1>
+                <TD colSpan=3><IMG height=1 
+                  src="../../gui/img/common/default/pixel.gif" 
+                  width=5></TD></TR>
+              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'top_help.gif','0') ?> align="absmiddle"></td>
+                <TD vAlign=top ><FONT 
+                  face="Verdana,Helvetica,Arial" size=2><B>
+				 <a href="http://care2x.de/otrs/customer.pl">
+				<?php  echo $LDTicketedSupport; ?></a> 
+				  </B></FONT></TD>
+                <TD><FONT face="Verdana,Helvetica,Arial" 
+                  size=2><?php  echo $LDTicketedSupportTxt;  ?></FONT></TD></TR> 
+				  
+              <TR bgColor=#dddddd height=1>
+                <TD colSpan=3><IMG height=1 
+                  src="../../gui/img/common/default/pixel.gif" 
+                  width=5></TD></TR>
+              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'discussions.gif','0') ?> align="absmiddle"></td>
+                <TD vAlign=top ><FONT 
+                  face="Verdana,Helvetica,Arial" size=2><B>
+				 <a href="http://www.arzt-seite.info/newsgroup/gotodoc.medizin.care2002.dev/thread_frameset.php3?name=gotodoc.medizin.care2002.dev">
+				<?php  echo $LDNewsgroup; ?></a> 
+				  </B></FONT></TD>
+                <TD><FONT face="Verdana,Helvetica,Arial" 
+                  size=2><?php  echo $LDNewsgroupTxt;  ?></FONT></TD></TR> 
 		</TBODY>
 		</TABLE>
 		</TD></TR>

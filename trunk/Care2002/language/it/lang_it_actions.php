@@ -20,4 +20,5 @@ $LDEnd='End';
 $LDListApptByDept='List appointments by department';
 $LDListApptByDoc='List appointments by clinician';
 $LDdone='Done';
+$LDOk='Ok';
 ?>

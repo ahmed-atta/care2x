@@ -121,4 +121,12 @@ $LDBilling='eComBill';
 /* 2003-05-18 EL */
 $LDPlsContactEDP='Please contact the EDP department.';
 $LDPlsTryAgain='Please try again';
+/* 2003-07-11 EL */
+$LDAdministration='Administration';
+$LDOutpatientClinic='Outpatient clinic';
+$LDUploadDicom='Upload DICOM images';
+$LDViewDicom='View DICOM images';
+# 2003-08-22 EL
+$LDYellowList='Yellow List';
+$LDRedList='Red List';
 ?>

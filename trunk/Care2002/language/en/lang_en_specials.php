@@ -166,16 +166,16 @@ $LDNewPw2='Repeat new password';
 $LDChangePw='Change password';
 $LDOops='Ooops! No, do not change.';
 
-$LDWrongEntry='Wrong entries!';
+/*$LDWrongEntry='Wrong entries!';
 $LDNoAuth='No access right';
-$LDAuthLocked='Access right frozen.';
+$LDAuthLocked='Access right frozen.';*/
 
 $LDAlertPwError='The new passwords are not the same. Please enter the new passwords again.';
 $LDPWChanged='The new password is saved.';
 
 $LDBday='Birthdate';
 $LDShotDate='Shotdate';
-$LDPatientNr='Patient number';
+$LDPatientNr='Encounter Nr';
 $LDSetShotDate='Set this date for all pictures.';
 $LDFotoLab='Photolab';
 $LDHowManyPics='How many pictures do you wish to save in the databank?';
@@ -184,12 +184,12 @@ $LDNewPics='pictures from a new patient';
 $LDMorePics='pictures from the same patient';
 $LDAdditional='Additional';
 $LDLinkBroken='Link to the photo server is broken.';
-$LDPicsSaved='The following photo files are renamed and saved in the databank:';
+$LDPicsSaved='The following photo files were renamed and saved in the databank:';
 $LDEditTitle='Headline';
 
-$LDAlertPhotoInfo='The information in the entry field number ';
+$LDAlertPhotoInfo='The information in the entry field';
 $LDAlertNoPhotoInfo=' is not complete. Please enter the complete information.';
-$LDAlertNoPatientData='The patient\'s data is not complete. Please enter the complete patient\'s data on the lower left frame.';
+$LDAlertNoPatientData='The patient\'s data is not complete.';
 $LDAlertNumberOnly='Please enter a number or the word "main".';
 
 $LDStatistics='Statistics';
@@ -221,4 +221,16 @@ $LDGUITemplate='GUI Template option';
 $LDGUITemplateTxt='Select a GUI (graphic user interface) template';
 $LDGUITheme='GUI Theme';
 $LDTheme='Theme';
+# 2002-08-10
+$LDLastName='Family name';
+$LDWantUpload='I want to upload';
+$LDImage='image(s)';
+# 2002-01-18 EL
+$LDTicketedSupport='Ticketed Support';
+$LDTicketedSupportTxt='Send a ticketed request to the project\'s online support';
+$LDNewsgroup='Newsgroup';
+$LDNewsgroupTxt='Newsgroup mirroring the developers\' mailing list.';
+# 2002-08-19 EL
+$LDPharmaIndex='Pharma Index';
+$LDPharmaIndexTxt='Pharmaceutical indexes like Redlist, IFAP, NIMS, or PIMS';
 ?>

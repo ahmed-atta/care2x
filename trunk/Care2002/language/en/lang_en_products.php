@@ -53,7 +53,7 @@ $LDOrderCatTxt='Create, edit, update, remove, etc.';
 $LDPharmaDb='Databank';
 $LDPharmaDbTxt='Managing product information';
 $LDRedList='Index of Medical Specialties';
-$LDRedListTxt='Detailed info about medical products';
+$LDRedListTxt='Pharmaceutical index (needs internet line)';
 $LDOrderBotActivate='OrderBot';
 $LDOrderBotActivateTxt='Activate automatic reception of order lists.';
 
@@ -208,4 +208,14 @@ $LDTime='Time';
 $LDInvalidPassword='Invalid password!';
 $LDUnknownValidator='Validator unknown!';
 $LDPlsEnterInfo='Please enter the correct info.';
+# 2003-08-17 EL
+$LDAlertInvalidMinorder='The minimum order has invalid character';
+$LDAlertInvalidMaxorder='The maximum order has invalid character';
+$LDAlertInvalidProorder='The nr.of pcs. per order has invalid character';
+$LDAlertMinHigherMax='Minimum greater than maximum is not allowed';
+$LDAlertNoNegativeOrder='Negative value is currently not allowed';
+# 2003-08-22 EL
+$LDYellowList='Yellow List';
+$LDYellowListTxt='German pharmaceutical index (needs internet line)';
+$LDClickSelectDept='Please click this to select a department.';
 ?>
