@@ -1,6 +1,7 @@
 <?php
 /* Translation to indonesian by Agus Muhammad Ramdan */
-/* Translation to indonesian by Muhammad Panji <sumodirjo@users.sourceforge.net> 2003-04-16 */
+/* Translation to indonesian by Muhammad Panji 
+<sumodirjo@users.sourceforge.net> 2003-04-16 */
 $LDClose='Tutup';
 $LDCancel='Batal';
 $LDResetEntry='Hapus masukan';
@@ -14,7 +15,7 @@ $LDWildCards='Apa itu wildcards dan bagaimana menggunakannya';
 $LDNewSearch='Pencarian baru';
 $LDSearch='Pencarian';
 
-$LDOClock='tepat';
+$LDOClock='Tepat';
 $LDContinue='Lanjut';
 $LDBack='Kembali';
 
@@ -25,10 +26,10 @@ $LDClk2Edit='Klik untuk mengedit laporan';
 $LDNew='Baru';
 $LDEdit='Edit';
 $LDCreate='Buat';
-$LDValue='nilai';
+$LDValue='Nilai';
 
-$LDNews='berita';
-$LDNewsTxt='baca atau tulis artikel berita menyinggung departemen EDP';
+$LDNews='Berita';
+$LDNewsTxt='Baca atau tulis artikel berita menyinggung departemen EDP';
 $LDMemo='Memo';
 $LDMemoTxt='Baca atau tulis memo';
 $LDSearchPat='Mencari Pasien';
@@ -36,13 +37,14 @@ $LDCategory='Kategori';
 $LDPast3Days='Tiga hari terakhir';
 $LDPast3Months='Tiga bulan terakhir';
 $LDPastAll='Semua';
-$LDSelect='pilih';
+$LDSelect='Pilih';
 
 $LDOrderArchive='Arsip';
 
 $LDNoDataFound='Pencarian menemukan<font color=red><b>Tidak ada</b></font> data.';
 $LDClk2SeeInfo='silakan klik bagian kanan untuk informasi selengkapnya';
-/********************** Do not erase or replace the ~nr~ *****************************/
+/********************** Do not erase or replace the ~nr~ 
+*****************************/
 $LDFoundNrData='Pencarian menemukan<font color=red><b>~nr~</b></font> data yang cocok dengan kata kunci pencarian.';
 $LDOpenInfo='Tampilkan Informasi lengkap tentang ';
 
@@ -101,7 +103,6 @@ $LDAllowedArea='Area yang diijinkan adalah:';
 $LDActualAccess='Hak akses sebenarnya';
 $LDAccessDeleted='Izin akses telah dihapus dengan sukses.';
 $LDFfActualAccess='Berikut ini Izin Akses Aktua;.';
-
 $LDAccessIndex=array(
 				'Nama',
 			 	'Nama Login',
@@ -215,7 +216,7 @@ $LDFrameWidth='Lebar bingkai';
 $LDNo='Tidak';
 $LDYes='Ya';
 $LDAllowMultiLang='Ijinkan pemilihan multibahasa';
-$LDDefaultLang='Bahasa Default(jika dukungan multi bahasa tidak diijinkan)';
+$LDDefaultLang='Bahasa Default (jika dukungan multi bahasa tidak diijinkan)';
 /* 2003-02-22 EL*/
 $LDMainMenuItems='Item menu utama';
 $LDMainMenuDisplay='Penampilan manu utama';
@@ -230,7 +231,7 @@ $LDNewDept='Buat dan konfigurasikan departemen baru';
 $LDShowDeptInfo ='Profil Departemen';
 $LDShowDeptInfoTxt='Tampilkan informasi profil departemen yang aktif saat ini';
 $LDConfigOptions='Opsi Konfigurasi';
-$LDDeptConfigOptions='konfigurasi, pemutakhiran info, pentidakaktifan, Pengaktifan, Sembunyi dam munculkan departemen';
+$LDDeptConfigOptions='konfigurasi, pemutakhiran info, penonaktifan, Pengaktifan, Sembunyi dam munculkan departemen';
 $LDDescription='Deskripsi';
 /* 2003-023-01 EL*/
 $LDFormalName='Nama Resmi';
@@ -255,91 +256,89 @@ $LDNormal='Normal';
 $LDInactive='tidak Aktif';
 $LDActive='Aktif';
 $LDDeptStatus='status Departemen';
-$LDRecordStatus='Record\'s status';
+$LDRecordStatus='Status Rekaman';
 /* 2003-03-30 EL*/
 $LDConfigOptions='Pilihan Konfigurasi';
-$LDDoesSurgeryOp='Does operative surgery?';
-$LDList='List';
-$LDUpdate='Update';
+$LDDoesSurgeryOp='Memberlakukan Pembedahan?'; //Does operative surgery?';
+$LDList='Daftar';
+$LDUpdate='Mutakhirkan';
 # 2003-08-03 EL
-$LDFindEmployee='Find an employee';
+$LDFindEmployee='Mencari Pekerja';
 #2003-10-27 EL
-$LDMainMenu='Main menu';
-$LDHideShow='Hide/show';
+$LDMainMenu='Menu Utama';
+$LDHideShow='Sembunyikan/Tampilkan';
 $LDSortOrder='sort order';
-$LDAdminIndex='Admin index';
-$LDUsers='Users';
-$LDCreateEditLock='Create, edit, lock';
+$LDAdminIndex='Indeks Admin';
+$LDUsers='Pengguna';
+$LDCreateEditLock='Buat, edit, kunci';
 $LDDatabase='Database';
 $LDPhpMyAdmin='PhpMyAdmin';
-$LDGeneral='General';
-$LDQuickInformer='Quick informer';
-$LDEnterInfo='Please edit or enter the information. Then click "Save".';
-$LDPaginatorMaxRows='Paginator max rows';
+$LDGeneral='Umum';
+$LDQuickInformer='Informan cepat'; //quick informer
+$LDEnterInfo='Silakan edit atau masukkan informasi. lalu klik "Simpan".';
+$LDPaginatorMaxRows='baris maks pembagi halaman'; //Paginator max rows
 
 #2003-10-28 EL
-$LDAddressList='Address list';
-$LDAddressListTxt='When the address list is displayed in the  address manager module.';
-$LDAddressSearch='Address search';
-$LDAddressSearchTxt='When the search for addresses returns a list';
-$LDInsuranceList='Insurance companies list';
-$LDInsuranceListTxt='When the insurance companies list is displayed in the insurance company module.';
-$LDInsuranceSearch='Insurance search';
-$LDInsuranceSearchTxt='When the search for insurance company returns a list.';
-$LDPersonnelSearch='Employee search';
-$LDPersonnelSearchTxt='When the search for an employee returns a list.';
-$LDPersonnelList='Employee list';
-$LDPersonnelListTxt='When the employees list is displayed in the personnel manager module.';
-$LDPersonSearch='Person search';
-$LDPersonSearchTxt='When the search for a person returns a list.';
-$LDPatientSearch='Patient search';
-$LDPatientSearchTxt='When the search for a patient returns a list.';
-$LDORPatientSearch='Patient for operation search';
-$LDORPatientSearchTxt='When the search for patient for operation returns a list. 
-This value is usually less than 10 due to a narrow display space in the OR logbook module';
-$LDEnterMaxRows='Please enter the maximum number rows displayed  per page after a successful search.';
+$LDAddressList='Daftar Alamat';
+$LDAddressListTxt='Ketika daftar alamat ditampilkan di modul manajer alamat.';
+$LDAddressSearch='Pencarian alamat';
+$LDAddressSearchTxt='Ketika pencarian alamat mengembalikan daftar';
+$LDInsuranceList='Daftar perusahaan asuransi';
+$LDInsuranceListTxt='Ketika daftar perusahaan asuransi ditampilkan di modul perusahaan asuransi.';
+$LDInsuranceSearch='Pencarian Asuransi';
+$LDInsuranceSearchTxt='Ketika pencarian perusahaan asuransi mengembalikan sebuah daftar.';
+$LDPersonnelSearch='Pencarian pekerja';
+$LDPersonnelSearchTxt='Ketika pencarian seorang pekerja mengembalikan sebuah daftar.';
+$LDPersonnelList='Daftar pekerja';
+$LDPersonnelListTxt='Ketika daftar pekerja ditampilkan di modul manajer personel.';
+$LDPersonSearch='Pencarian personel';
+$LDPersonSearchTxt='Ketika pencarian seseorang mengembalikan sebuah daftar.';
+$LDPatientSearch='Pencarian pasien';
+$LDPatientSearchTxt='Ketika pencarian seorang pasien mengembalikan sebuah daftar.';
+$LDORPatientSearch='Pencarian pasien untuk operasi';
+$LDORPatientSearchTxt='Ketika pencarian pasien untuk operasi mengembalikan sebuah daftar. Nilai ini biasanya kurang dari 10 berhubung pada keterbatasan tempat di modul buku log(logbook) OR ';
+$LDEnterMaxRows='Silakan masukkan jumlah maksimum baris yang ditampilkan per halaman setelah pencarian yang berhasil.';
 #2003-11-01 EL
 $LDTimeOut='Time out';
-$LDTimeOutActive='Time out active';
-$LDTimeOutTxt='Should the password protected modules time out (lock itselt) after a set time of inactivity?';
-$LDTimeOutTime='Elapsed time';
-$LDTimeOutTimeTxt='Elapsed idle time (inactivity) that triggers the time out and locks the module. Note: 
-If your entry is invalid, the system will use the default maximum values.';
+$LDTimeOutActive='Time out aktif';
+$LDTimeOutTxt='Haruskan modul yang diproteksi password time out (mengunci dirinya sendiri) setelah waktu ketidakaktifan tertentu?';
+$LDTimeOutTime='Waktu terlewati';
+$LDTimeOutTimeTxt='Waktu idle terlewati (ketidakaktifan) yang memicu time out dan mengunci modul. Catatan: Jika masukan anda invalid, sistem akan menggunakan nilai maksimum default.';
 #2003-11-09 EL
 $LDGUI='GUI';
-$LDNewsDisplay='News display';
-$LDTitleFontSize='Title font size';
-$LDTitleFontColor='Title font color';
-$LDTitleFont='Title font';
-$LDPrefaceFontSize='Lead summary font size';
-$LDPrefaceFontColor='Lead summary font color';
-$LDPrefaceFont='Lead summary font';
-$LDBodyFontSize='News body font size';
-$LDBodyFontColor='News body font color';
-$LDBodyFont='News body font';
-$LDPreviewMaxlen='News preview maximum characters';
-$LDTitleFontBold='Title font weight';
-$LDPrefaceFontBold='Lead summary font weight';
-$LDDisplayWidth='News display width (in pixel or %)';
-$LDBold='Bold';
-$LDNoteDefault='Note: If you enter an invalid value, the system will just replace it with the default value.';
-$LDUseDefault='Use default values';
-$LDClkPickColor='Click here to pick up the color';
+$LDNewsDisplay='Penampilan berita';
+$LDTitleFontSize='Ukuran huruf judul';
+$LDTitleFontColor='Warna huruf judul';
+$LDTitleFont='Jenis huruf judul';
+$LDPrefaceFontSize='ukuran huruf ringkasan depan';
+$LDPrefaceFontColor='warna huruf ringkasan depan';
+$LDPrefaceFont='jenis huruf ringkasan depan';
+$LDBodyFontSize='Ukuran huruf isi berita';
+$LDBodyFontColor='Warna huruf isi berita';
+$LDBodyFont='Jenis huruf isi berita';
+$LDPreviewMaxlen='karakter maksimum preview berita';
+$LDTitleFontBold='Berat(tebal) huruf judul'; //Title font weight';
+$LDPrefaceFontBold='Berat(tebal) huruf ringkasan depan';
+$LDDisplayWidth='Lebar penampilan berita(dalam piksel atau %)';
+$LDBold='Tebal';
+$LDNoteDefault='Catatan: Jika anda memasukkan sebuah nilai invalid, sistem hanya akan menggantikannya dengan nilai default.';
+$LDUseDefault='Gunakan nilai default';
+$LDClkPickColor='Klik disini untuk mengambil warna';
 #2003-11-11 EL
-$LDORAdmin='OR administration';
-$LDListConfig='List & configure';
+$LDORAdmin='Administrasi OR';
+$LDListConfig='Daftar & konfigurasikan';
 $LDOR='OR';
-$LDORNr='OR number';
-$LDTempClosed='Is temporary closed?';
-$LDOwnerWard='Owner ward';
-$LDOwnerDept='Owner department';
-$LDDateCreation='Date of creation';
+$LDORNr='Nomor OR';
+$LDTempClosed='Ditutup Sementara?';
+$LDOwnerWard='Bangsal Pemilik';
+$LDOwnerDept='departemen pemilik';
+$LDDateCreation='Tanggal pembuatan';
 $LDDateClose='Date of closure';
-$LDOPTableNr='Number of OP table';
-$LDORName='OR room name';
-$LDORNrExists='OR room number already exists!';
+$LDOPTableNr='Nomor tabel OP';
+$LDORName='nama ruang RO(OR)';
+$LDORNrExists='nomor ruang RO(OR) telah ada!';
 $LDToggle='Toggle';
-$LDChange='Change';
-$LDClkNextNr='Click to use next available number';
-$LDOPTable='OP table';
+$LDChange='Rubah';
+$LDClkNextNr='Klik untuk menggunakan nomor tersedia selanjutnya';
+$LDOPTable='Tabel OP';
 ?>

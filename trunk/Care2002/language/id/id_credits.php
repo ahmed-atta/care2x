@@ -16,6 +16,16 @@ require_once($root_path.'include/inc_environment_global.php');
         <TBODY>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
+            <P><img src="../../fotos/credits/muhammad_panji.png" width=135  border=0  align=right vspace=10>
+			<b>Versi Indonesia CARE 2X  telah dikembangkan oleh Muhammad Panji.</b>
+
+			<P><a href="mailto:sumodirjo@yahoo.co.uk"><u>Muhammad Panji dapat di hubungi disini.</u></a>
+</TD></TR></TBODY></TABLE>
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/agus_mr.jpg"  border=0  align=right vspace=10>
 			<b>Versi Indonesia CARE 2X  dan www.care2x.com telah dikembangkan oleh Agus Muhammad Ramdan.</b>
 			
@@ -33,16 +43,7 @@ require_once($root_path.'include/inc_environment_global.php');
 			
 			<P><a href="mailto:adjem@adams-media.com"><u>A. Djem dapat di hubungi disini.</u></a>
 </TD></TR></TBODY></TABLE>
-<hr>
-<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
-        <TBODY>
-        <TR>
-          <TD vAlign=top><font face="verdana,arial" size=2>
-            <P><img src="../../fotos/credits/muhammad_panji.png" width=135  border=0  align=right vspace=10>
-			<b>Versi Indonesia CARE 2X  telah dikembangkan oleh Muhammad Panji.</b>
-			
-			<P><a href="mailto:sumodirjo@yahoo.co.uk"><u>Muhammad Panji dapat di hubungi disini.</u></a>
-</TD></TR></TBODY></TABLE>
+
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>

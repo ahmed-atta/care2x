@@ -125,12 +125,12 @@ $LDPlsTryAgain='Silahkan coba lagi.';
 /* 2003-07-11 EL */
 $LDAdministration='Pengelolaan';
 $LDOutpatientClinic='Klinik pasien (yang) keluar';
-$LDUploadDicom='Upload DICOM images';
-$LDViewDicom='View DICOM images';
+$LDUploadDicom='Upload gambar DICOM';
+$LDViewDicom='Lihat gambar DICOM';
 # 2003-08-22 EL
-$LDYellowList='Yellow List';
-$LDRedList='Red List';
+$LDYellowList='Daftar Kuning';
+$LDRedList='Daftar Merah';
 #2003-11-22 EL
-$LDAdvancedSearch='Advanced search';
-$LDNewPerson='Register new person';
+$LDAdvancedSearch='Pencarian Lanjutan';
+$LDNewPerson='Daftar Personel baru';
 ?>

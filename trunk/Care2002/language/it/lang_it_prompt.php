@@ -47,41 +47,45 @@ $LDCachedInfo='Queste sono informazioni precedentemente in cache!';
 $LDClkNoCache='Clicchi >>questo<< per avere informazioni non in cache.';
 
 # 2003-08-25 EL
-$LDPlsEnterReport='Please enter your report or notes';
-$LDPlsEnterDosage='Please enter the dosage';
-$LDPlsEnterMedicine='Please enter the name of medicine';
-$LDPlsEnterMedType='Please enter the type of medicine';
-$LDPlsSelectAppType='Please select the type of application';
-$LDPlsSelectPrescType='Please select the type of prescription';
-$LDPlsEnterValue='Please enter a value';
-$LDPlsSelectUnitMsr='Please select unit of measure';
+$LDPlsEnterReport='Per favore inserisca le sue note o rapporti';
+$LDPlsEnterDosage='Per favore inserisca la posologia';
+$LDPlsEnterMedicine='Per favore inserisca il nome della medicina';
+$LDPlsEnterMedType='Per favore inserisca il tipo di medicina';
+$LDPlsSelectAppType='Per favore selezioni il tipo di applicazione';
+$LDPlsSelectPrescType='Per favore selezioni il tipo di prescrizione';
+$LDPlsEnterValue='Per favore inserisca un valore';
+$LDPlsSelectUnitMsr='Per favore selezioni l\'unità di misura';
 
 # 2003-08-26 EL
-$LDEntryInvalidChar='An entry has an invalid value!';
-$LDNotNegValue='Negative value in not allowed!';
-$LDOptional='Optional';
+$LDEntryInvalidChar='Un dato inserito ha un valore non valido!';
+$LDNotNegValue='Valore negativo non consentito!';
+$LDOptional='Opzionale';
 
-$LDSaveAnyway='Do you really want to save data anyway';
+$LDSaveAnyway='Vuole salvare i dati comunque?';
 #2003-08-27 EL
-$LDDeathDateIs='The entered date of death is';
-$LDIsCorrect='Is that correct?';
-$LDProceedSave='Do you want to proceed save?';
+$LDDeathDateIs='La data di morte inserita è';
+$LDIsCorrect='E\' corretta?';
+$LDProceedSave='Vuole salvare?';
 #2003-08-28 EL
-$LDPlsSelectWard='Please select a ward or station';
+$LDPlsSelectWard='Pre favore selezioni una corsia o un posto';
 # 2003-09-20 EL
-$LDPlsEnterTherapy='Please enter the therapy.';
-$LDPlsMedicalAdvice='Please specify whether the patient got medical advice or not.';
+$LDPlsEnterTherapy='Per favore inserisca la terapia.';
+$LDPlsMedicalAdvice='Per favore specifichi quando il paziente ha avuto un consulto medico o no.';
 # 2003-09-23 EL
-$LDPlsEnterJobFunction='Please enter the job function.';
+$LDPlsEnterJobFunction='Per favore inserisca il tipo di lavoro.';
 #2003-04-10 EL
-$LDPlsFillInfo='Please fill in the fields marked red';
-$LDPlsEnterLocalization='Please enter the localization';
-$LDPlsEnterNotes='Please enter notes';
-$LDPlsEnterClassification='Please enter the classifications';
-$LDPlsEnterStartTime='Please enter start time';
-$LDPlsEnterEndTime='Please enter end time';
-$LDPlsEnterScrubNurse='Please enter scrub nurse info';
-$LDPlsEnterORNr='Please enter the OR ID or number';
-$LDWrongLoginPW='Your login or password is wrong';
-$LDPlsORNr='Please enter the OR number';
+$LDPlsFillInfo='Per favore compili i campi marcati in rosso';
+$LDPlsEnterLocalization='Per favore inserisca la localizzazione';
+$LDPlsEnterNotes='Per favore inserisca le note';
+$LDPlsEnterClassification='Per favore inserisca le classificazioni';
+$LDPlsEnterStartTime='Per favore indichi da che ora';
+$LDPlsEnterEndTime='Per favore indichi fino a che ora';
+$LDPlsEnterScrubNurse='Per favore inserisca il nome dell\'infermiere/a specializzato/a';
+$LDPlsEnterORNr='Per favore inserisca il numero o il suo identificativo';
+$LDWrongLoginPW='La sua login o password è errata';
+$LDPlsORNr='Per favore inserisca il suo numero identificativo';
+
+#2004-08-06 EL
+$LDInvalidDate ='The entered date was invalid.';
+$LDNoPastDate = 'Dates in the past are not accepted.';
 ?>

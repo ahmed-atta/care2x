@@ -355,52 +355,59 @@ $LDListEncounters='Admissions\' list';
 $LDDischarged='Dimesso';
 $LDDischargeDate='Data di dimesso';
 # 2003-08-04 EL
-$LDCancelThisAdmission='Cancel this admission';
+$LDCancelThisAdmission='Cancella questa accettazione';
 $LDInsShortID[1]='PRIV';  // privately paid insurance
 $LDInsShortID[2]='COM'; // Common state sponsored insurance
 $LDInsShortID[3]='SP';    // self pay, direct pay
 # 2003-08-26 EL
-$LDMeasurements='Measurements';
+$LDMeasurements='Misurazioni';
 #2003-08-28 eL
-$LDPlsEnterReferer='Please enter refering physician';
-$LDPlsEnterRefererDiagnosis='Please enter referal diagnosis';
-$LDPlsEnterRefererTherapy='Please enter referer\'s recommended therapy';
-$LDPlsEnterRefererNotes='Please enter referer\'s notes';
-$LDPlsSelectAdmissionType='Please select admission type';
-$LDForInpatient='For inpatient';
-$LDForOutpatient='For outpatient';
+$LDPlsEnterReferer='Per favore inserisci medico referente';
+$LDPlsEnterRefererDiagnosis='Per favore inserisci diagnosi';
+$LDPlsEnterRefererTherapy='Per favore inserisci terapia raccomandata';
+$LDPlsEnterRefererNotes='Per favore inserisci note di riferimento';
+$LDPlsSelectAdmissionType='Per favore seleziona tipo di accettazione.';
+$LDForInpatient='Per ricoverati';
+$LDForOutpatient='Per pazienti esterni';
 #2003-09-18 EL
-$LDPersonSearch='Search a person';
+$LDPersonSearch='Ricerca di una persona';
 #2003-09-24 EL
-$LDShowing='Showing';
-$LDPrevious='Previous';
-$LDNext='Next';
-$LDAdvancedSearch='Advanced search';
+$LDShowing='Mostrare';
+$LDPrevious='Precedente';
+$LDNext='Successivo';
+$LDAdvancedSearch='Ricerca avanzata';
+
 #2003-10-28 EL
-$LDIncludeFirstName='Search for first names too.';
+$LDIncludeFirstName='Ricerca anche per nome.';
 $LDTipsTricks='Tips & tricks';
 #2003-12-06 EL
-$LDPrintPDFDoc='Make PDF document';
-$LDDeathDate='Death date';
+$LDPrintPDFDoc='Genera documento in formato PDF';
+$LDDeathDate='Data del Decesso';
 
 # 2003-10-14 NDHC
-$LDITA='Intratracheal anesthesia';
-$LDLA='Local anesthesia';
-$LDAS='Analgesic sedation';
-$LDOral='Oral';
-$LDAnticoagulant='Anticoagulant';
-$LDHemolytic='Hemolytic';
-$LDDiuretic='Diuretic';
-$LDAntibiotic='Antibiotic';
-$LDMask='Mask';
-$LDIntravenous='Intravenous';
-$LDSubcutaneous='Subcutaneous';
-$LDPreAdmission='Pre-admission';
+$LDITA='Anestesia Endotracheale';
+$LDLA='Anestesia locale';
+$LDAS='Sedazione Analgesica';
+$LDOral='Orale';
+$LDAnticoagulant='Anticoagulante';
+$LDHemolytic='Emolitico';
+$LDDiuretic='Diuretico';
+$LDAntibiotic='Antibiotico';
+$LDMask='Maschera';
+$LDIntravenous='Endovenosa';
+$LDSubcutaneous='Sottocutaneo';
+$LDPreAdmission='Pre-ammissione';
 #2004-01-01 EL
-$LDPersonDuplicate='This person seems to be registered already.';
-$LDSimilarData='The following listed person has similar personal data.';
-$LDSimilarData2='The following listed persons have similar personal data.';
-$LDPlsCheckFirst='Please check it out first before you decide the next step.';
-$LDPlsCheckFirst2='Please check them out first before you decide the next step.';
-$LDShowDetails='Show details';
+$LDPersonDuplicate='Questa persona sembra essere già registrata.';
+$LDSimilarData='La seguente persona in elenco ha gli stessi dati personali.';
+$LDSimilarData2='Le seguenti persone in elenco hanno gli stessi dati personali.';
+$LDPlsCheckFirst='Per favore controlla i dati prima di decidere il prossimo passo.';
+$LDPlsCheckFirst2='Per favore controlla i dati prima di decidere il prossimo passo.';
+$LDShowDetails='Mostra dettagli';
+
+# 2004-05-22 KB
+$LDNr='Nr.';
+$LDOtherHospitalNr='Other Hospital Nr.';
+$LDSelectOtherHospital = 'Select other hospital to change the number';
+$LDNoNrNoDelete = 'no number = delete';
 ?>

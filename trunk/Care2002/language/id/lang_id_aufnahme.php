@@ -250,16 +250,16 @@ $LDOptions='Opsi';
 /** note the ' ~nr~ ' must not be erased it will be replaced by the script with the number of search results ******/
 $LDSearchFoundAdmit='Saya menemukan <font color=red><b>~nr~</b></font> data izin berkait.';
 $LDPatientNr='No. Pasien';
-$LDNoRecordYet='~tag~ has no ~obj~ yet.';
-$LDNoRecordFor='No ~obj~ record for ~tag~ yet.';
+$LDNoRecordYet='~tag~ belum memiliki ~obj~ .';
+$LDNoRecordFor='belum ada rekaman ~obj~ untuk  ~tag~ .';
 $LDRegistrationNr='No. Pendaftaran';
 $LDDate='Tanggal';
 $LDType='Tipe';
 $LDMedicine='Obat';
 $LDTiter='Titer';
-$LDRefreshDate='Refresh date';
-$LDReportingDept='Reporting Dept';
-$LDReportNr='Report Nr.';
+$LDRefreshDate='tanggal Refresh';
+$LDReportingDept='Dept. Pelapor';
+$LDReportNr='No. Laporan';
 $LDDelivery='Pengiriman';
 $LDTime='Waktu';
 $LDClass='Kelas';
@@ -360,47 +360,53 @@ $LDInsShortID[1]='PRIV';  // privately paid insurance
 $LDInsShortID[2]='COM'; // Common state sponsored insurance
 $LDInsShortID[3]='SP';    // self pay, direct pay
 # 2003-08-26 EL
-$LDMeasurements='Measurements';
+$LDMeasurements='Pengukuran';
 #2003-08-28 eL
-$LDPlsEnterReferer='Please enter refering physician';
-$LDPlsEnterRefererDiagnosis='Please enter referal diagnosis';
-$LDPlsEnterRefererTherapy='Please enter referer\'s recommended therapy';
-$LDPlsEnterRefererNotes='Please enter referer\'s notes';
-$LDPlsSelectAdmissionType='Please select admission type';
-$LDForInpatient='For inpatient';
-$LDForOutpatient='For outpatient';
+$LDPlsEnterReferer='Silakan masukkan dokter yang dihubungi';
+$LDPlsEnterRefererDiagnosis='Silakan masukkan diagnosis yang diserahkan';
+$LDPlsEnterRefererTherapy='Silakan masukkan terapi yang direkomendasikan penghubung';
+$LDPlsEnterRefererNotes='Silakan masukkan catatan dari penghubung';
+$LDPlsSelectAdmissionType='Silakan masukan tipe admisi';
+$LDForInpatient='Untuk pasien masuk';
+$LDForOutpatient='Untuk pasien keluar';
 #2003-09-18 EL
-$LDPersonSearch='Search a person';
+$LDPersonSearch='Mencari Seseorang';
 #2003-09-24 EL
-$LDShowing='Showing';
-$LDPrevious='Previous';
-$LDNext='Next';
-$LDAdvancedSearch='Advanced search';
+$LDShowing='Tampilkan';
+$LDPrevious='Sebelum';
+$LDNext='Sesudah';
+$LDAdvancedSearch='Pencarian Lanjutan';
 #2003-10-28 EL
-$LDIncludeFirstName='Search for first names too.';
-$LDTipsTricks='Tips & tricks';
+$LDIncludeFirstName='Cari untuk nama depan juga.';
+$LDTipsTricks='Tip & trik';
 #2003-12-06 EL
-$LDPrintPDFDoc='Make PDF document';
-$LDDeathDate='Death date';
+$LDPrintPDFDoc='Buat Dokumen PDF';
+$LDDeathDate='Tanggal meninggal';
 
 # 2003-10-14 NDHC
-$LDITA='Intratracheal anesthesia';
-$LDLA='Local anesthesia';
-$LDAS='Analgesic sedation';
-$LDOral='Oral';
-$LDAnticoagulant='Anticoagulant';
-$LDHemolytic='Hemolytic';
-$LDDiuretic='Diuretic';
-$LDAntibiotic='Antibiotic';
-$LDMask='Mask';
-$LDIntravenous='Intravenous';
-$LDSubcutaneous='Subcutaneous';
-$LDPreAdmission='Pre-admission';
+$LDITA='Pembiusan didalam batang tenggorok';
+$LDLA='Pembiusan Lokal';
+$LDAS='Sedasi analgesik'; //Pemberian obat penenang penahan rasa sakit'; //'Analgesic sedation'; or change it as Sedasi analgesik
+$LDOral='Mulut';
+$LDAnticoagulant='Antikoagulan';
+$LDHemolytic='Hemolitik';
+$LDDiuretic='Diuretik';
+$LDAntibiotic='Antibiotik';
+$LDMask='Topeng';
+$LDIntravenous='Kedalam pembuluh darah';
+$LDSubcutaneous='Sub kulit'; //Subcutaneous
+$LDPreAdmission='Pre-admisi';
 #2004-01-01 EL
-$LDPersonDuplicate='This person seems to be registered already.';
-$LDSimilarData='The following listed person has similar personal data.';
-$LDSimilarData2='The following listed persons have similar personal data.';
-$LDPlsCheckFirst='Please check it out first before you decide the next step.';
-$LDPlsCheckFirst2='Please check them out first before you decide the next step.';
-$LDShowDetails='Show details';
+$LDPersonDuplicate='Kelihatannya orang ini sudah terdaftar.';
+$LDSimilarData='Orang dalam daftar berikut memiliki data pribadi yang mirip.';
+$LDSimilarData2='Orang-orang dalam daftar berikut memiliki data pribadi yang mirip.';
+$LDPlsCheckFirst='Silakan cek dahulu sebelum anda memutuskan langkah selanjutnya.';
+$LDPlsCheckFirst2='Silakan Cek dahulu sebelum anda memutuskan langkah selanjutnya.';
+$LDShowDetails='Tampilkan Selengkapnya';
+
+# 2004-05-22 KB
+$LDNr='No.';
+$LDOtherHospitalNr='No. Rumah Sakit lain';
+$LDSelectOtherHospital = 'Pilih Rumah Sakit lain untuk mengubah nomor';
+$LDNoNrNoDelete = 'tidak ada nomor = hapus';
 ?>

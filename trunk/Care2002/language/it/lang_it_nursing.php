@@ -388,27 +388,27 @@ $LDRoomNotCreated='Non ci sono ancora sale';
 /* 2003-05-10 EL */
 $LDChangeRoom='Cambio sala';
 /*2003-06-14 EL*/
-$LDNrOfBedsRoom='The nr. of beds of room';
-$LDIsNotANumber='is not a valid number';
-$LDWaitingList='Waiting list';
-$LDShowAll='Show all'; # <= Pls. keep translation very short
-$LDShowWardOnly='Show ward only'; # <= Pls. keep translation very short
-$LDTransferToBed='Transfer to another bed in this ward';
-$LDTransferToWard='Transfer to another ward';
-$LDShowBeds='Show beds';
-$LDTransferPatient='Transfer patient';
+$LDNrOfBedsRoom='Il num. di letti della stanza';
+$LDIsNotANumber='non è un numero valido';
+$LDWaitingList='Lista d\'attesa';
+$LDShowAll='Mostra tutto'; # <= Pls. keep translation very short
+$LDShowWardOnly='Mostra corsia soltanto'; # <= Pls. keep translation very short
+$LDTransferToBed='Trasferisci in un altro letto in questa corsia';
+$LDTransferToWard='Trasferisci in un altro reparto';
+$LDShowBeds='Mostra letti';
+$LDTransferPatient='Trasferimento paziente';
 $LDDRG='DRG';
-$LDFinanceType='Payment type';
+$LDFinanceType='Tipo di pagamento';
 #2003-08-02 EL
-$LDOutToInpatient='Change admission status to inpatient';
-$LDTransferClinic='Transfer to clinic or department';
-$LDClinic='Clinic';
-$LDOwnPatient='Own\'s patient';
-$LDNonOwnPatient='Non-own\'s patient';
+$LDOutToInpatient='Cambia stato d\'accettazione al paziente ricoverato';
+$LDTransferClinic='Trasferimento alla clinica o dipartimento';
+$LDClinic='Clinica';
+$LDOwnPatient='Appartenenti al paziente';
+$LDNonOwnPatient='Non appartenente al paziente';
 # 2003-08-04 EL
-$LDShowClinicOnly='This clinic only';
+$LDShowClinicOnly='Questa clinica soltanto';
 # 2003-09-16 EL
-$LDAdmissionData='Admission data';
-$LDShowPhoto='Show photo';
-$LDOpenWardManagement='Open ward for administration';
+$LDAdmissionData='Dati per l\'accettazione';
+$LDShowPhoto='Mostra foto';
+$LDOpenWardManagement='Corsia/reparto aperti per l\'amministrazione';
 ?>

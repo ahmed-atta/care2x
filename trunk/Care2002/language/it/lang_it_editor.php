@@ -105,7 +105,7 @@ $LDSetCurrency='Scegliere la valuta';
 $LDNewCurrencySet='La nuova valut è or attiva';
 $LDPlsSelectCurrency='Scegliere la valuta';
 $LDmain='principale';
-$LDClk2AddCurrency='Selezinare qui per scegliere la valuta (nota: si uscirà dalle news della mensa!)';
+$LDClk2AddCurrency='Selezionare qui per scegliere la valuta (nota: si uscirà dalle news della mensa!)';
 
 $LDMenuSaved='Il menu è stato salvato.';
 /* 2002-10-13 EL */
@@ -113,9 +113,9 @@ $LD_ddpMMpyyyy='gg.mm.aaaa';
 $LD_yyyyhMMhdd='aaaa-mm-gg';
 $LD_MMsddsyyyy='mm/gg/aaaa';
 /* 2003-02-11*/
-$LDSubmitNews='Submit News';
-$LDDelete='Delete';
-$LDDeleteCurrency='Are you sure, you really want to delete this currency?';
-$LDNoMainDelete='You cannot delete a main currency. \nPlease set a different main currency first.';
-$LDCurrencyExisting='This currency exists already!';
+$LDSubmitNews='Inoltra news';
+$LDDelete='Cancella';
+$LDDeleteCurrency='Sei sicuro? Vuoi realmente cancellare questa valuta? ';
+$LDNoMainDelete='Non è possibile cancellare la valuta principale. \nPer favore imposta inizialmente una valuta principale.';
+$LDCurrencyExisting='Questa valuta esiste già!';
 ?>

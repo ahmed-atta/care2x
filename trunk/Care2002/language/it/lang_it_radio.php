@@ -54,30 +54,32 @@ $LDTestRequestRadioTxt='Richiesta test radiologico';
 $LDTestReception='Richiesta in coda';
 $LDTestReceptionTxt='Ricevi ed elabora le richieste di test, scrivi risultati/diagnosi';
 # 2003-08-08 EL
-$LDDicomImages='DICOM images';
-$LDDicomImagesTxt='View diagnostic images in DICOM format';
-$LDUploadDate='Upload date';
-$LDViewImage='View here';
-$LDViewInWindow='View in window';
-$LDNrImages='Nr.of slices';
-$LDDicomViewer='Dicom viewer';
-$LDViewInFrame='View in this frame';
-$LDUploadDicom='Upload DICOM';
-$LDUploadDicomTxt='Upload diagnostic images in DICOM format';
+$LDDicomImages='Immagini DICOM';
+$LDDicomImagesTxt='Guarda le immagini diagnostiche in formato DICOM';
+$LDUploadDate='Carica la data';
+$LDViewImage='Guarda qui';
+$LDViewInWindow='Guarda nella finestra';
+$LDNrImages='Num. di visioni';
+$LDDicomViewer='Visualizzatore DICOM';
+$LDViewInFrame='Guarda in questo frame';
+$LDUploadDicom='Carica DICOM';
+$LDUploadDicomTxt='Carica immagini diagnostiche in formato DICOM';
 $LDPID='PID';
-$LDImgNumber='Image number';
-$LDSingleImage='single image';
-$LDImageGroupNr='Image group number';
-$LDNewFileName='New filename';
-$LDUploadNew='I need to upload';
-$LDNewImageFiles='new image files';
+$LDImgNumber='Numero immagine';
+$LDSingleImage='singola immagine';
+$LDImageGroupNr='Numero gruppo immagine';
+$LDNewFileName='Nuovo filename';
+$LDUploadNew='Bisogna caricare';
+$LDNewImageFiles='Nuovo file immagini';
 # 2003-08-09 EL
-$LDSelectViewer='Select viewer';
-$LDSelectViewerTxt='Select DICOM viewer program';
-$LDCurrentViewer='Current viewer';
+$LDSelectViewer='Seleziona visualizzatore';
+$LDSelectViewerTxt='Seleziona programma visualizzatore DICOM';
+$LDCurrentViewer='Attuale visualizzatore';
 $LDNagoyaTechInst='Nagoya Tech. Institute';
 $LDRAIMJAVA='RAIMJAVA©';
-$LDNoImageSaved='No image was saved!';
-$LDImageNotes='Image notes';
+$LDNoImageSaved='Nessuna immagine è stata salvata';
+$LDImageNotes='Note alla immagine';
 
+#2004-08-05 EL
+$LDMissingImageFile = 'Missing image file(s)!';
 ?>

@@ -15,6 +15,26 @@ require_once($root_path.'include/inc_environment_global.php');
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
         <TR>
+          <TD><IMG height=15
+            src="../../gui/img/common/default/pixel.gif"
+            width=5 border=0></TD></TR>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+            <P><img src="../../fotos/credits/gabriele_cicala.jpg"  border=0  align=right vspace=10>
+			<b>La traduzione italiana di sito web (www.care2x.com) è sviluppata e gestita da Gabriele Cicala.</b>
+			<p>
+			Gabriele Cicala è nato a Rossano in provincia di Cosenza nel 1970.
+  Ha conseguito la laurea in ingegneria delle telecomunicazioni al Politecnico di Torino.
+  Attualmente lavora in una società informatica in qualità di consulente. <p>Fin dal primo momento in cui ha conosciuto l'ambiente Linux 
+e open-source ha sempre avuto interesse per ogni tipo di progetto. Nonostante non appartenga propriamente all'ambiente medico ha deciso di
+unirsi al progetto in quanto crede nelle stesse cose in cui credono il
+suo ideatore e tutti i suoi collaboratori.
+			<P><a href="mailto:gabcicala@tiscali.it"><u>Si può contattare Gabriele Cicala qui.</u></a>
+</TD></TR></TBODY></TABLE>
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
           <TD><IMG height=15 
             src="../../gui/img/common/default/pixel.gif" 
             width=5 border=0></TD></TR>
@@ -32,27 +52,6 @@ Ha deciso di unirsi attivamente alla causa dell'Open Source in quanto
 "<i>...questo è un mondo ideale che sopravviverà fintanto che sarà perfettamente in equilibrio: se si prende, bisogna anche dare in proporzione</i>".
 
 			<P><a href="mailto:kalbun@inwind.it"><u>Si può contattare Giuseppe Scarpi qui.</u></a>
-</TD></TR></TBODY></TABLE>
-
-<hr>
-<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
-        <TBODY>
-        <TR>
-          <TD><IMG height=15 
-            src="../../gui/img/common/default/pixel.gif" 
-            width=5 border=0></TD></TR>
-        <TR>
-          <TD vAlign=top><font face="verdana,arial" size=2>
-            <P><img src="../../fotos/credits/gabriele_cicala.jpg"  border=0  align=right vspace=10>
-			<b>La traduzione italiana di sito web (www.care2x.com) è sviluppata e gestita da Gabriele Cicala.</b>
-			<p>
-			Gabriele Cicala è nato a Rossano in provincia di Cosenza nel 1970.
-  Ha conseguito la laurea in ingegneria delle telecomunicazioni al Politecnico di Torino.
-  Attualmente lavora in una società informatica in qualità di consulente. <p>Fin dal primo momento in cui ha conosciuto l'ambiente Linux 
-e open-source ha sempre avuto interesse per ogni tipo di progetto. Nonostante non appartenga propriamente all'ambiente medico ha deciso di 
-unirsi al progetto in quanto crede nelle stesse cose in cui credono il 
-suo ideatore e tutti i suoi collaboratori.
-			<P><a href="mailto:gabcicala@tiscali.it"><u>Si può contattare Gabriele Cicala qui.</u></a>
 </TD></TR></TBODY></TABLE>
 
 <hr>

@@ -107,7 +107,7 @@ $LDTestType=array('patho'=>'Anatomia Patologica',
 			 'nuklear'=>'Radiodiagnostica',
 			 'inmed'=>'Day Hospital di Medicina Interna');
 							 
-$LDBloodOrder='Richiesta scorte di sangue';
+$LDBloodOrder='Richiesta scorta di sangue';
 /* 2002-09-22 EL */
 $LDPendingRequest='Richiesta in coda';
 /* 2002-10-06 EL*/
@@ -117,7 +117,7 @@ $LDNursesList='Elenco Personale Infermieristico';
 $LDAppointments='Appuntamenti';
 /* 2003-04-27 */
 $LDInsuranceCoManager='Gestione Compagnie Assicurative';
-$LDAddressMngr='Gestioni Indirizzi';
+$LDAddressMngr='Gestione Indirizzi';
 /* 2003-04-30 EL*/
 $LDBilling='eComBill';
 /* 2003-05-18 EL */
@@ -126,12 +126,12 @@ $LDPlsTryAgain='Si prega di riprovare.';
 /* 2003-07-11 EL */
 $LDAdministration='Direzione';
 $LDOutpatientClinic='Day clinic';
-$LDUploadDicom='Upload DICOM images';
-$LDViewDicom='View DICOM images';
+$LDUploadDicom='Carica immagini DICOM';
+$LDViewDicom='Vedi immagini DICOM';
 # 2003-08-22 EL
-$LDYellowList='Yellow List';
-$LDRedList='Red List';
+$LDYellowList='Lista Gialla';
+$LDRedList='Lista Rossa';
 #2003-11-22 EL
-$LDAdvancedSearch='Advanced search';
-$LDNewPerson='Register new person';
+$LDAdvancedSearch='Ricerca avanzata';
+$LDNewPerson='Registra una nuova persona';
 ?>

@@ -200,7 +200,7 @@ $LDDisplay2Txt="Switch over to the display with the menu on a floating frame. ";
 
 $LDNewPwDiffer="Password yang baru bebeda satu sama lain.<br> Silakan masukkan password baru lagi.";
 /* 2003-03-22 EL*/
-$LDPersonellMngmnt='Manajemen Perosnalia';
+$LDPersonellMngmnt='Manajemen Personalia';
 $LDPersonellMngmntTxt='Perangkat dan fungsi untuk memenej peronel';
 /* 2003-04-25 EL */
 $LDBilling='eCombill';
@@ -210,23 +210,54 @@ $LDInsuranceCoMngrTxt='Masukan baru, edit data perusahaan asuransi';
 $LDAddressMngr='Manajer Alamat';
 $LDAddressMngrTxt='Masukkan, daftar, edit, & mutakhirkan data alamat';
 /* 2003-05-18 EL */
-$LDUserConfigOpt='Configuration options';
-$LDUserConfigOptTxt='User options for background & text colors, mascots, avatar, etc.';
-$LDMascotOpt='Mascot options';
-$LDMascotOptTxt='Hide, show, or select prompt mascots.';
-$LDMascot='Mascot';
-$LDSampleMascot='Sample mascots';
+$LDUserConfigOpt='Opsi Konfigurasi';
+$LDUserConfigOptTxt='Opsi pengguna untuk warna latar belakang dan teks, maskot, avatar, dll.';
+$LDMascotOpt='Pilihan Maskot';
+$LDMascotOptTxt='Sembunyikan, Tampilkan, atau pilih prompt maskot.';
+$LDMascot='Maskot';
+$LDSampleMascot='Contoh maskot';
 /* 2003-04-24 EL*/
-$LDGUITemplate='GUI Template option';
-$LDGUITemplateTxt='Select a GUI (graphic user interface) template';
-$LDGUITheme='GUI Theme';
-$LDTheme='Theme';
+$LDGUITemplate='Opsi template GUI';
+$LDGUITemplateTxt='Pilih template GUI (graphic user interface)';
+$LDGUITheme='Tema GUI';
+$LDTheme='Tema';
 # 2002-01-18 EL
-$LDTicketedSupport='Ticketed Support';
-$LDTicketedSupportTxt='Send a ticketed request to the project\'s online support';
+$LDTicketedSupport='Dukungan tiket'; //Ticketed Support';
+$LDTicketedSupportTxt='Kirim sebuah permintaan bertiket ke dukungan online proyek';
 $LDNewsgroup='Newsgroup';
-$LDNewsgroupTxt='Newsgroup mirroring the developers\' mailing list.';
+$LDNewsgroupTxt='Newsgroup me-mirror mailing list pengembang.';
 # 2002-08-19 EL
-$LDPharmaIndex='Pharma Index';
-$LDPharmaIndexTxt='Pharmaceutical indexes like Redlist, Yellowlist, IFAP, NIMS, or PIMS';
+$LDPharmaIndex='Indeks Pharma';
+$LDPharmaIndexTxt='Indeks Pharmaceutical seperti daftar merah, daftar kuning, IFAP, NIMS, or PIMS';
+
+#2004-05-23 EL
+$LDPlugins='Plugin';
+$LDNoPluginsPrompt='Belum ada plugin yang terinstall. Jika anda ingin mengambil modul plugin Care2x silakan berkunjung ke http://www.care2x-plugins.org.';
+$LDPluginsTxt='Koleksi perkakas dan modul plugin';
+
+#2004-06-13 EL
+$LDCssThemes = 'CSS Themes - Design';
+$LDCssThemesTxt= 'Design for border color, sizes, decoration, font types & sizes, backgrounds, etc.';
+$LDDescription = 'Description';
+$LDScreenshot = 'Screenshot';
+
+#2004-06-30
+$LDSmartyTemplate = 'Smarty Template - Design';
+$LDSmartyTemplateTxt = 'Select smarty based GUI template theme';
+
+
+#2004-07-08
+$LDControlButtons = 'Control Buttons Styles';
+$LDControlButtonsTxt = 'Select control buttons style';
+$LDComIcons = 'Common Icons Styles';
+$LDComIconsTxt = 'Select decorative icons style <br>(note: in combination with some CSS themes, the icons are overridden by the CSS design)';
+$LDDevDesigner = 'Developer/Designer';
+$LDNoIcon = 'No icons';
+$LDNoIconTxt = 'Shows no icons in submenus. Display of icons is suppressed';
+
+#2004-07-29
+$LDMainMenuTree = 'Main Menu Styles';
+$LDMainMenuTreeTxt = 'Select the main menu style';
+$LDStyle = 'Style';
+$LDRefreshBrowser = 'Refresh your browser to see the change(s)';
 ?>
