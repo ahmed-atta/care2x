@@ -63,7 +63,7 @@ if($news_nr = $newsobj->saveNews($dept_nr,$news)) {
 	    if($GLOBALCONFIG['news_fotos_path']=='') $news_fotos_path=$root_path.'fotos/news/'; /* default path */
 	        else $news_fotos_path = $root_path.$GLOBALCONFIG['news_fotos_path']; 
 				
-	    $picfilename=$news_nr.'.'.strtolower($picext);
+	    $picfilename="$news_nr.$picext";
 		//$movefile='rename("'.$HTTP_POST_FILES['pic']['tmp_name'].'","../news_service/'.$lang.'/fotos/'.$picfilename.'");';
         //eval($movefile);
         copy($HTTP_POST_FILES['pic']['tmp_name'],$news_fotos_path.$picfilename);
