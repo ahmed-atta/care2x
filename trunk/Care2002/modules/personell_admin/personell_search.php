@@ -189,7 +189,6 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 					$pagen->setSortItem($oitem);
 					$pagen->setSortDirection($odir);
 				}
-				else $mode="";
 			}
 			 else {echo "<p>".$sql."<p>$LDDbNoRead";};
 } else { 
