@@ -175,7 +175,8 @@
 */ 
 	
  $smarty->assign('sCopyright',$smarty->Copyright());
- 
+ $smarty->assign('sPageTime',$smarty->Pagetime());
+
  /**
  * show Template
  */
