@@ -76,8 +76,8 @@ $TP_img_calendar='<img '.createComIcon($root_path,'show-calendar.gif','0','absmi
 $dfbuffer="LD_".strtr($date_format,".-/","phs");
 $TP_date_format=$$dfbuffer;
 
-
-$TP_diagnosis='<textarea name="diagnosis" cols=40 rows=5 wrap="physical"></textarea>';
+#$TP_diagnosis='<textarea name="diagnosis" cols=40 rows=5 wrap="physical" readonly="readonly">'.$diag_field.'</textarea>';
+$TP_diagnosis="<br>".nl2br($diag_field); ### IRZ
 
 # Signature stamp of the department
 $TP_dept_sigstamp=nl2br($dept['sig_stamp']); 
@@ -103,6 +103,28 @@ $TP_main_address=nl2br($GLOBAL_CONFIG['main_info_address']);
 # Load the template
 $TP_sickform=&$TP_obj->load('registration_admission/tp_show_sick_confirm.htm');
 # Output template
+?>
+
+<script language="JavaScript" type="text/javascript">
+<!--
+function openICDComposite(){
+<?php if($cfg['dhtml'])
+	echo '
+			w=window.parent.screen.width;
+			h=window.parent.screen.height;';
+	else
+	echo '
+			w=800;
+			h=650;';
+?>
+	
+	drgcomp_<?php echo $HTTP_SESSION_VARS['sess_full_en']."_".$op_nr."_".$dept_nr."_".$saal ?>=window.open("<?php echo $root_path ?>modules/drg/drg-neu-start.php<?php echo URL_REDIRECT_APPEND."&display=composite&pn=".$encounter_nr."&edit=$edit&ln=$name_last&fn=$name_first&bd=$date_birth&dept_nr=$dept_nr&oprm=$saal"; ?>","drgcomp_<?php echo $encounter_nr."_".$op_nr."_".$dept_nr."_".$saal ?>","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=" + (h-60));
+	window.drgcomp_<?php echo $HTTP_SESSION_VARS['sess_full_en']."_".$op_nr."_".$dept_nr."_".$saal ?>.moveTo(0,0);
+}
+//-->
+</script>
+
+<?php
 eval("echo $TP_sickform;");
 ?>
 <input type="hidden" name="sid" value="<?php echo $sid; ?>">
@@ -136,9 +158,10 @@ eval("echo $TP_sickform;");
 <input type="hidden" name="pid" value="<?php echo $HTTP_SESSION_VARS['sess_pid']; ?>">
 <input type="hidden" name="mode" value="new">
 <input type="hidden" name="target" value="<?php echo $target; ?>">
+<input type="hidden" name="diag_field" value="<?php echo $diag_field ?>">
 <!-- <input type="submit" <?php echo createLDImgSrc($root_path,'ok.gif','0','absmiddle'); ?> >            
  -->
-<input type="submit"  value="go"> 
+<input type="submit"  value="go">
 </form>
 <?php
 }else{

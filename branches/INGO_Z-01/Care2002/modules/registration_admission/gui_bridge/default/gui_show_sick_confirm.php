@@ -18,8 +18,22 @@ if($insurance){
 # Extract the  confirmation record for display
 if($get_nr){
 	$sickconfirm=$single_obj->FetchRow();
-}elseif(is_object($sickconfirm_obj)){
+}elseif(is_object($sickconfirm_obj) && $first){
+  $first=0;
 	$sickconfirm=$sickconfirm_obj->FetchRow();
+	# standardmäßig: es wird die letzte Bescheinigung angezeigt (Zeile darüber)
+  $sick_nr=$sickconfirm['nr'];
+  $sql="SELECT d.code, c.description, m.description AS parent_desc
+				FROM care_encounter_sickconfirm AS s, care_diagnosis AS d, care_icd10_de AS c
+				LEFT OUTER JOIN care_icd10_de AS m ON d.code_parent=m.diagnosis_code AND d.code_parent NOT IN ('',' ')
+				WHERE s.nr=$sick_nr AND s.diagnosis=d.diagnosis_nr AND d.code=c.diagnosis_code";
+	$res=&$db->Execute($sql);	
+	if(!$res) $db->ErrorMsg(); else { 
+    $res->MoveFirst();
+  	if(!$res->EOF){
+	    $diag_field="<b>".$res->fields[0]."</b>: ".$res->fields[2].": ".$res->fields[1].chr(13);		  			
+		}	
+	}	
 } 
 
 # Take over the dept number
@@ -63,7 +77,8 @@ $TP_img_calendar='';
 $TP_date_format='';
 
 
-$TP_diagnosis=nl2br($sickconfirm['diagnosis']);
+# $TP_diagnosis=nl2br($sickconfirm['diagnosis']);
+$TP_diagnosis=nl2br($diag_field); ### IRZ
 
 # Get the address of the hospital from the global config table
 $glob_obj->getConfig('main_info_address');
@@ -74,6 +89,28 @@ $TP_sickform=&$TP_obj->load('registration_admission/tp_show_sick_confirm.htm');
 # Show the print button
 echo '<a href="javascript:printForm(\''.$sickconfirm['nr'].'\')"><img '.createLDImgSrc($root_path,'printout.gif','0').'></a>';
 # Output template
+?>
+
+<script language="JavaScript" type="text/javascript">
+<!--
+function openICDComposite(){
+<?php if($cfg['dhtml'])
+	echo '
+			w=window.parent.screen.width;
+			h=window.parent.screen.height;';
+	else
+	echo '
+			w=800;
+			h=650;';
+?>
+	
+	drgcomp_<?php echo $HTTP_SESSION_VARS['sess_full_en']."_".$op_nr."_".$dept_nr."_".$saal ?>=window.open("<?php echo $root_path ?>modules/drg/drg-neu-start.php<?php echo URL_REDIRECT_APPEND."&display=composite&pn=".$encounter_nr."&edit=$edit&ln=$name_last&fn=$name_first&bd=$date_birth&dept_nr=$dept_nr&oprm=$saal"; ?>","drgcomp_<?php echo $encounter_nr."_".$op_nr."_".$dept_nr."_".$saal ?>","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=" + (h-60));
+	window.drgcomp_<?php echo $HTTP_SESSION_VARS['sess_full_en']."_".$op_nr."_".$dept_nr."_".$saal ?>.moveTo(0,0);
+}
+//-->
+</script>
+
+<?php
 eval("echo $TP_sickform;");
 
 # If more than 1 record available, list the remaining
@@ -100,7 +137,20 @@ if($rows>1){
 		}
 		# Prepare the confim date & diagnosis and href url and dept name
 		$TP_date_confirm=formatDate2Local($other_row['date_confirm'],$date_format);
-		$TP_diagnosis=nl2br($other_row['diagnosis']);
+		
+    $diag_nr=$other_row['diagnosis'];
+  	$sql="SELECT d.code, c.description
+	  			FROM care_diagnosis_encounter AS e, care_diagnosis AS d, care_icd10_de AS c
+		  		WHERE e.nr=$diag_nr AND e.diagnosis_nr=d.diagnosis_nr AND d.code=c.diagnosis_code
+		  		ORDER BY e.date DESC";			
+  	$res=&$db->Execute($sql);	
+  	if(!$res) $db->ErrorMsg(); else { 
+      $res->MoveFirst();	
+    	if(!$res->EOF){
+	      $TP_diagnosis=$res->fields[0].": ".$res->fields[1];
+		  }	
+  	}	
+		#$TP_diagnosis=nl2br($other_row['diagnosis']);
 		$TP_href=$thisfile.URL_APPEND.'&get_nr='.$other_row['nr'].'&dept_nr='.$dept_nr;
 		if(isset($$other_row['LD_var'])&&!empty($$other_row['LD_var'])) $TP_dept_name=$$other_row['LD_var'];
 			else $TP_dept_name=$other_row['name_formal'];
@@ -140,9 +190,10 @@ if(!$is_discharged){
 	<input type="hidden" name="pid" value="<?php echo $HTTP_SESSION_VARS['sess_pid']; ?>">
 	<input type="hidden" name="mode" value="new">
 	<input type="hidden" name="target" value="<?php echo $target; ?>">
+	<input type="hidden" name="diag_field" value="<?php echo $diag_field; ?>"> 
 <!-- <input type="submit" <?php echo createLDImgSrc($root_path,'ok.gif','0','absmiddle'); ?> >            
  -->
-	<input type="submit"  value="go"> 
+	<input type="submit"  value="go">
 </form>
 <?php
 }
