@@ -209,8 +209,8 @@ if(!$GLOBALCONFIG['language_single']) {
 $createwarn=file_exists('create_admin.php');
 $initwarn=file_exists('./install/initialize.php');
 $md5warn=file_exists('./install/encode_pw_md5.php');
-$installwarn=file_exists('./install/encode_pw_md5.php');
-if($createwarn||$installwarn||$md5warn){
+$installwarn=file_exists('./install/install.php');
+if($createwarn||$installwarn||$md5warn||$initwarn){
 	# Load necessary language tables
 	$lang_tables[]='create_admin.php';
 	include_once('./include/inc_load_lang_tables.php');
