@@ -10,8 +10,9 @@ $breakfile='patient.php';
 $admissionfile='aufnahme_start.php'.URL_APPEND;
 
 if((!isset($pid)||!$pid)&&$HTTP_SESSION_VARS['sess_pid']) $pid=$HTTP_SESSION_VARS['sess_pid'];
+	elseif((isset($pid)&&$pid)&&!$HTTP_SESSION_VARS['sess_pid']) $HTTP_SESSION_VARS['sess_pid']=$pid;
 //echo getcwd();
-$HTTP_SESSION_VARS['sess_path_referer']=getcwd().'/'.$thisfile;
+$HTTP_SESSION_VARS['sess_path_referer']=$top_dir.$thisfile;
 //$HTPP_SESSION_VARS['sess_pid']=$pid;
 
 /* Default path for fotos. Make sure that this directory exists! */
@@ -26,19 +27,10 @@ if(!isset($user_id) || !$user_id)
  
 if(isset($pid) && ($pid!='')) {
 	$person_obj=new Person($pid);
-		
-
 	if($data_obj=&$person_obj->getAllInfoObject()){
 		$zeile=$data_obj->FetchRow();
-	 
 		while(list($x,$v)=each($zeile))	$$x=$v;       
 			
-	}
-		
-	$sql='SELECT * FROM care_appointment WHERE pid='.$pid;
-		
-	if($result=$db->Execute($sql)){
-		$row=$result->RecordCount();
 	}
 }
 
@@ -46,6 +38,8 @@ require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('person_%');
 $glob_obj->getConfig('patient_%');
+
+$HTTP_SESSION_VARS['sess_full_pid']=$pid+$GLOBAL_CONFIG['person_id_nr_adder'];
 		
 /* Check whether config foto path exists, else use default path */			
 $photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $default_photo_path;
@@ -58,5 +52,4 @@ if($HTTP_SESSION_VARS['sess_parent_mod']=='admission') {
 	$parent_admit=false;
 	$page_title=$LDPatientRegister;
 }
-
 ?>
