@@ -27,28 +27,30 @@ switch($target)
   case 'chemlabor': $entry_block_bgcolor="#fff3f3";
                           $entry_border_bgcolor="#ee6666";
 						  $entry_body_bgcolor="#ffffff";
-						  $breakfile="pflege-station-patientdaten-doconsil-chemlabor.php?sid=".$sid."&lang=".$lang."&target=".$target."&noresize=1&user_origin=".$user_origin;
+						  $breakfile="nursing-station-patientdaten-doconsil-chemlabor.php?sid=".$sid."&lang=".$lang."&target=".$target."&noresize=1&user_origin=".$user_origin;
 						  break;
   case 'baclabor': $entry_block_bgcolor="#fff3f3";
                           $entry_border_bgcolor="#ee6666";
 						  $entry_body_bgcolor="#ffffff";
-						  $breakfile="pflege-station-patientdaten-doconsil-baclabor.php?sid=".$sid."&lang=".$lang."&target=".$target."&noresize=1&user_origin=".$user_origin;
+						  $breakfile="nursing-station-patientdaten-doconsil-baclabor.php?sid=".$sid."&lang=".$lang."&target=".$target."&noresize=1&user_origin=".$user_origin;
 						  break;
   case 'patho': $entry_block_bgcolor="#cde1ec";
                           $entry_border_bgcolor="#cde1ec";
 						  $entry_body_bgcolor="#ffffff";
-						  $breakfile="pflege-station-patientdaten-doconsil-patho.php?sid=".$sid."&lang=".$lang."&target=".$target."&noresize=1&user_origin=".$user_origin;
+						  $breakfile="nursing-station-patientdaten-doconsil-patho.php?sid=".$sid."&lang=".$lang."&target=".$target."&noresize=1&user_origin=".$user_origin;
 						  break;
   case 'blood': $entry_block_bgcolor="#99ffcc";
                           $entry_border_bgcolor="#99ffcc";
 						  $entry_body_bgcolor="#ffffff";
-						  $breakfile="pflege-station-patientdaten-doconsil-blood.php?sid=".$sid."&lang=".$lang."&target=".$target."&noresize=1&user_origin=".$user_origin;
+						  $breakfile="nursing-station-patientdaten-doconsil-blood.php?sid=".$sid."&lang=".$lang."&target=".$target."&noresize=1&user_origin=".$user_origin;
 						  break;
   default            : $entry_block_bgcolor="#fff3f3";
                           $entry_border_bgcolor="#ee6666";
 						  $entry_body_bgcolor="#ffffff";
-						  $breakfile="pflege-station-patientdaten-doconsil-baclabor.php?sid=".$sid."&lang=".$lang."&target=".$target."&noresize=1&user_origin=".$user_origin;
+						  $breakfile="nursing-station-patientdaten-doconsil-baclabor.php?sid=".$sid."&lang=".$lang."&target=".$target."&noresize=1&user_origin=".$user_origin;
 }
+
+$breakfile=$root_path.'modules/nursing/'.$breakfile;
 
 if(($mode=='search')&&!empty($searchkey)){
 
@@ -56,8 +58,8 @@ if(($mode=='search')&&!empty($searchkey)){
 	include_once($root_path.'include/care_api_classes/class_encounter.php');
 	$enc_obj=new Encounter;
 	$encounter=&$enc_obj->searchEncounterBasicInfo($searchkey);
-			
-	if(($enc_obj->record_count==1)){
+	$linecount=$enc_obj->record_count;
+	if($linecount==1){
 		$row=$encounter->FetchRow();
 		header("location:".$root_path."modules/nursing/nursing-station-patientdaten-doconsil-".$target.".php".URL_REDIRECT_APPEND."&pn=".$row['encounter_nr']."&edit=1&status=".$status."&target=".$target."&user_origin=".$user_origin."&noresize=1&mode=");
 		exit;
@@ -140,7 +142,7 @@ if ($enc_obj->record_count)
 
 					while($row=$encounter->FetchRow())
 					{
-						switch ($row['encounter_class_nr'])
+/*						switch ($row['encounter_class_nr'])
 						{
 						    case '1': $full_en = ($row['encounter_nr'] + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
 							                   break;
@@ -148,6 +150,8 @@ if ($enc_obj->record_count)
 											break;
 						    default: $full_en = ($row['encounter_nr'] + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
 						}						
+*/
+						$full_en=$row['encounter_nr'];
 						echo "
 							<tr bgcolor=";
 						if($toggle) { echo "#efefef>"; $toggle=0;} else {echo "#ffffff>"; $toggle=1;};
@@ -173,7 +177,7 @@ if ($enc_obj->record_count)
 							
                        if(!file_exists($root_path."cache/barcodes/pn_".$full_en.".png"))
 	      		       {
-			               echo "<img src='".$root_path."classes/barcode/image.php?code=".$full_en."&style=68&type=I25&width=145&height=50&xres=2&font=5&label=2' border=0 width=0 height=0>";
+			               echo "<img src='".$root_path."classes/barcode/image.php?code=".$full_en."&style=68&type=I25&width=180&height=50&xres=2&font=5&label=2' border=0 width=0 height=0>";
 		               }
 						echo '</td></tr>';
 
