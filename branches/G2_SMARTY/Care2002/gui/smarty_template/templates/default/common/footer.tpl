@@ -1,7 +1,7 @@
  <tr valign=top >
  <td bgcolor={$bot_bgcolor} height=70 colspan=2>
 
- {$sCopyright} 
+ {include file="common/copyright.tpl"} 
  
  </td>
  </tr>

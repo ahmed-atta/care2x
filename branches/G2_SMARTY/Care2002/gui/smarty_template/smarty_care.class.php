@@ -121,7 +121,20 @@ class smarty_care extends Smarty {
  function Copyright(){
  	global $root_path, $lang, $pgt;
 	ob_start();
-	include($root_path.'include/inc_load_copyrite.php');
+	if(file_exists($root_path.'language/'.$lang.'/'.$lang.'_copyrite.php')) include($root_path.'language/'.$lang.'/'.$lang.'_copyrite.php');
+  		else include($root_path.'language/en/en_copyrite.php');
+	$sTemp = ob_get_contents();
+	ob_end_clean();
+ 	return $sTemp;
+ }
+ 
+ function PageTime(){
+ 	global $pgt;
+	ob_start();
+	if(defined('USE_PAGE_GEN_TIME')&&USE_PAGE_GEN_TIME){
+		$pgt->ende();
+		$pgt->ausgabe();
+	}	
 	$sTemp = ob_get_contents();
 	ob_end_clean();
  	return $sTemp;
