@@ -1,7 +1,7 @@
 <?php
 require_once('../../include/inc_vars_resolve.php');
 ?>
-<html>
+<?php html_rtl($lang); ?>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <title>Crédits</title>
@@ -13,7 +13,19 @@ require_once('../../include/inc_vars_resolve.php');
         <TBODY>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-			<b>La traduction française de Care 2002 était réalisée par Matej Hausenblas.</b>
+			<b>Jean-Philippe LIOT (FR)</b><br>La traduction française de CARE 2X était réalisée.
+			<p>
+			Jean-Philippe is a doctor of veterinary medicine. In addition to translating Care2x to french he is also working on its
+			development for veterinary practice management.
+			<P><a href="mailto:jp.liot@libertysurf.fr"><u>Jean-Philippe peut être contacté ici..</u></a>
+</TD></TR></TBODY></TABLE>
+
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+			<b>Matej Hausenblas (FR)</b><br>La traduction française de CARE 2X était réalisée.
 			<p>
 			Matej Hausenblas est né à Prague, République Tchéque, en 1981.<p>
 Il est étudiant à l'université de maths-informatique-physique. Après quelques 
@@ -35,7 +47,7 @@ marchent dans une telle société.
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/giuseppe_scarpi.jpg"  border=0  width=135 align=right vspace=10>
-			<b>La traduction italienne de Care 2002 était réalisée par Giuseppe Scarpi (IT):</b>
+			<b>La traduction italienne de CARE 2X était réalisée par Giuseppe Scarpi (IT):</b>
 			<p>
 			Giuseppe Scarpi est né à Rome, Italie, il y a 35 ans.
 			<p>Il a un diplôme d'Ingénieur en Électronique et il a travaillé pour plusieures companies dans le secteur biomédical,
@@ -57,7 +69,7 @@ Il a décidé de joindre activement la source libre car:<br><i>"Un tel monde idéal
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/gabriele_cicala.jpg"  border=0  align=right vspace=10>
-			<b>La traduction italienne de Care 2002 et www.care2x.com était réalisée par Gabriele Cicala (IT).</b>
+			<b>La traduction italienne de CARE 2X et www.care2x.com était réalisée par Gabriele Cicala (IT).</b>
 			
 			<P><a href="mailto:gabcicala@tiscali.it"><u>Gabriele Cicala peut être contacté ici..</u></a>
 </TD></TR></TBODY></TABLE>
@@ -72,7 +84,7 @@ Il a décidé de joindre activement la source libre car:<br><i>"Un tel monde idéal
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/daniel_zilli.jpg"  border=0  align=right vspace=10>
-			<b>La traduction brésilien-portugaise de Care 2002 et www.care2x.com était réalisée par Daniel Zilli (BR).</b>
+			<b>La traduction brésilien-portugaise de CARE 2X et www.care2x.com était réalisée par Daniel Zilli (BR).</b>
 			<p>
 			Daniel est un type agréable qui adore vivre une vie heureuse. Il aime les ordinateurs, football, et bonne musique.
 Il a 10 ans de l`expérience avec les ordinateurs et il adore ce qu`il fait.
@@ -116,7 +128,7 @@ pour l`éducation de la science d`ordinateurs, les logiciels libres et distributi
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/agus_mr.jpg"  border=0  align=right vspace=10>
-			<b>La traduction indonésienne de Care 2002 et www.care2x.com était réalisée par Agus Muhammad Ramdan (ID).</b>
+			<b>La traduction indonésienne de CARE 2X et www.care2x.com était réalisée par Agus Muhammad Ramdan (ID).</b>
 			
 			<P><a href="mailto:agusmr@mweb.co.id"><u>Agus M. Ramdan  peut être  contacté ici..</u></a>
 </TD></TR></TBODY></TABLE>
@@ -199,7 +211,7 @@ pour l`éducation de la science d`ordinateurs, les logiciels libres et distributi
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../gui/img/common/default/pixel.gif"  border=0  width=135 align=right vspace=10>
-			<b>Daniele Frijia (DE) a contrôlé les aspects de sécurité de Care 2002.</b>
+			<b>Daniele Frijia (DE) a contrôlé les aspects de sécurité de CARE 2X.</b>
 			<br>
 			Quelques de ses multiples contributions:<p>
 			<font size=1>
