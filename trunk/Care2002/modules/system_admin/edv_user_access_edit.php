@@ -10,11 +10,10 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+$lang_tables[] = 'access.php';
 define('LANG_FILE','edp.php');
 $local_user='ck_edv_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-
-require_once($root_path.'include/inc_config_color.php');
 
 /**
 * The following require loads the access areas that can be assigned for
@@ -30,7 +29,13 @@ $edit=0;
 $error=0;
 
 if(!isset($mode)) $mode='';
-
+if(!isset($errorname)) $errorname='';
+if(!isset($erroruser)) $erroruser='';
+if(!isset($username)) $username='';
+if(!isset($userid)) $userid='';
+if(!isset($errorpass)) $errorpass='';
+if(!isset($pass)) $pass='';
+if(!isset($errorbereich)) $errorbereich='';
 
 if($mode!= ''){
     if($mode!='edit' && $mode!='update' && $mode!='data_saved'){
@@ -44,11 +49,7 @@ if($mode!= ''){
          if($pass=='') { $errorpass=1; $error=1; }		   
     }
 
-	if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
 
-    if($dblink_ok)
-    {
-	
       if(($mode=='save' && !$error ) || ($mode=='update' && !$erroruser)) 
 	  {
  
@@ -97,7 +98,7 @@ if($mode!= ''){
 						   '".date('H:i:s')."',
 						   'normal',
 						   '',
-						   '".$HTTP_COOKIE_VARS[$local_user.$sid]."',
+						   '".$HTTP_SESSION_VARS['sess_user_name']."',
 						   '".date('YmdHis')."'
 						 )";
 
@@ -133,7 +134,7 @@ if($mode!= ''){
 	    if($mode=='edit' || $mode=='data_saved' || $edit) {
         
 		    $sql="SELECT name, login_id, permission FROM care_users WHERE login_id='$userid'";
-		    //$sql='SELECT * FROM care_users WHERE name="'.$username.'"';
+
 		    if($ergebnis=$db->Execute($sql)) {
             
 			    if($ergebnis->RecordCount()) {
@@ -144,10 +145,6 @@ if($mode!= ''){
 		   
             }
 	    }
-	}// end of if($link
-    else {
-	    echo "$LDDbNoLink";
-	}
 }
 
 ?>

@@ -10,6 +10,7 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+$lang_tables[] = 'access.php';
 define('LANG_FILE','edp.php');
 $local_user='ck_edv_user';
 
