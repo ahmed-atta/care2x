@@ -20,11 +20,13 @@ $fileforward='login-pc-config.php'.URL_REDIRECT_APPEND;
 $thisfile='login.php';
 $breakfile='startframe.php'.URL_APPEND;
 
-
-
 if(!isset($pass)) $pass='';
 if(!isset($keyword)) $keyword='';
 if(!isset($userid)) $userid='';
+
+if(!session_is_registered('sess_login_userid')) session_register('sess_login_userid');
+if(!session_is_registered('sess_login_username')) session_register('sess_login_username');
+if(!session_is_registered('sess_login_pw')) session_register('sess_login_pw');
 
 function logentry(&$userid,$key,$report)
 {
@@ -56,16 +58,18 @@ if ((($pass=='check')&&($keyword!=''))&&($userid!=''))
 			{	
 				if (!($zeile['lockflag']))
 				{								
-					setcookie('ck_login_userid'.$sid,$zeile['login_id'],0,'/');
-					setcookie('ck_login_username'.$sid,$zeile['name'],0,'/');
-										
+					//setcookie('ck_login_userid'.$sid,$zeile['login_id'],0,'/');
+					//setcookie('ck_login_username'.$sid,$zeile['name'],0,'/');
+					$HTTP_SESSION_VARS['sess_login_userid']=$zeile['login_id'];		
+					$HTTP_SESSION_VARS['sess_login_username']=$zeile['name'];		
 					/** Init the crypt object, encrypt the password, and store in cookie
 					*/
     				$enc_login = new Crypt_HCEMD5($key_login,makeRand());
 										
 					$cipherpw=$enc_login->encodeMimeSelfRand($zeile['password']);
 										
-                    setcookie('ck_login_pw'.$sid,$cipherpw,0,'/');
+                    //setcookie('ck_login_pw'.$sid,$cipherpw,0,'/');
+					$HTTP_SESSION_VARS['sess_login_pw']=$cipherpw;		
 										
 					/**
 					* Set the login flag

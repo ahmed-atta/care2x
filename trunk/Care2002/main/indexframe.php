@@ -16,33 +16,21 @@ define(NO_CHAIN,1);
 
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-
 /**
 * We check again the language variable lang. If table file not available use default (lang = "en")
 */
-$ck_lang_buffer="ck_lang$sid";
 
-if(isset($lang)&&$lang)
-{
-	if(!$HTTP_COOKIE_VARS[$ck_lang_buffer]||($lang!=$HTTP_COOKIE_VARS[$ck_lang_buffer])) 
-	{
-	    if(!file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_indexframe.php')) $lang='en';
-	    setcookie($ck_lang_buffer);
-	    setcookie($ck_lang_buffer,$lang);
-		$reload_page=1;
-    }
-}
-else
-{
-if(!$HTTP_COOKIE_VARS[$ck_lang_buffer]) include('/chklang.php');
-	else $lang=$HTTP_COOKIE_VARS[$ck_lang_buffer];
-}
+if(!isset($lang)||empty($lang))  include($root_path.'chklang.php');
 
 /* Load the language table */
-if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_indexframe.php')) include($root_path.'language/'.$lang.'/lang_'.$lang.'_indexframe.php');
-else include($root_path.'language/en/lang_en_indexframe.php');
+if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_indexframe.php')){
+	include($root_path.'language/'.$lang.'/lang_'.$lang.'_indexframe.php');
+}else{
+	include($root_path.'language/en/lang_en_indexframe.php');
+	$lang='en'; // last desperate effort to settle the language 
+}
 
-
+echo $HTTP_COOKIE_VARS['ck_config'];
 
 if(($mask==2)&&!$nonewmask)
 {
@@ -50,9 +38,6 @@ if(($mask==2)&&!$nonewmask)
 	exit;
 }
 
-
-/* Establish db connection */
-require_once($root_path.'include/inc_db_makelink.php');
  
 $sql='SELECT nr,sort_nr,name,LD_var,url,is_visible FROM care_menu_main WHERE is_visible=1 OR LD_var="LDEDP" OR LD_var="LDLogin" ORDER by sort_nr ';
 

@@ -2,8 +2,6 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
-require('./roots.php');
-require($root_path.'include/inc_environment_global.php');
 /**
 * CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
 * GNU General Public License
@@ -12,19 +10,44 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+$lang_tables=array('departments.php');
 define('LANG_FILE','stdpass.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-if(isset($mode)&&($mode=='save'))
-{
-	$OneYear=time()+(3600*24*365);
-	setcookie(ck_thispc_dept,$HTTP_POST_VARS['pcdept'],$OneYear); //expires in 1 year
-	setcookie(ck_thispc_station,$HTTP_POST_VARS['pcstation'],$OneYear);
-	setcookie(ck_thispc_room,$HTTP_POST_VARS['pcroom'],$OneYear);
-	setcookie(ck_thispc_phone,$HTTP_POST_VARS['pcphone'],$OneYear);
-	setcookie(ck_thispc_intercom,$HTTP_POST_VARS['pcintercom'],$OneYear);
+require_once($root_path.'include/care_api_classes/class_userconfig.php');
+$user=new UserConfig;
+
+if($user->getConfig($HTTP_COOKIE_VARS['ck_config'])){
+	$config=&$user->getConfigData();
+}else{
+	$config=array();
+}
+
+/* Load the dept object */
+require_once($root_path.'include/care_api_classes/class_department.php');
+$dept=new Department;
+$depts=&$dept->getAllActive();
+
+// Load the ward object and wards info 
+require_once($root_path.'include/care_api_classes/class_ward.php');
+$ward_obj=new Ward;
+$items='nr,ward_id,name'; // set the items to be fetched
+$ward_info=&$ward_obj->getAllWardsItemsArray($items);
+
+
+if(isset($mode)&&($mode=='save')){
+
+	$config['thispc_dept_nr']=$HTTP_POST_VARS['thispc_dept_nr'];
+	$config['thispc_ward_nr']=$HTTP_POST_VARS['thispc_ward_nr'];
+	$config['thispc_room_nr']=$HTTP_POST_VARS['thispc_room_nr'];
+	$config['thispc_phone']=$HTTP_POST_VARS['thispc_phone'];
+	$config['thispc_intercom']=$HTTP_POST_VARS['thispc_intercom'];
+	
+	$user->saveConfig($HTTP_COOKIE_VARS['ck_config'],$config);
+	
 	header("location: login-pc-config.php?sid=$sid&lang=$lang&saved=1");
+	exit;
 }
 
 require_once($root_path.'include/inc_config_color.php');
@@ -98,7 +121,24 @@ SIZE=+3  FACE="Arial">
               <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'home.gif') ?>></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B><nobr>
-				 <input type="text" name="pcdept" size=20 maxlength=25 value="<?php echo $HTTP_COOKIE_VARS['ck_thispc_dept'] ?>">
+
+				<select name="thispc_dept_nr">
+				<option value=""> </option>';
+	<?php
+		if($depts&&is_array($depts)){		
+			while(list($x,$v)=each($depts)){
+				echo '
+					<option value="'.$v['nr'].'"';
+				if($v['nr']==$config['thispc_dept_nr']) echo ' selected';
+				echo '>';
+				if(isset($$v['LD_var'])&&$$v['LD_var']) echo $$v['LD_var'];
+					else echo $v['name_formal'];
+				echo '</option>';
+			}
+		}
+	?>
+				</select>
+				  
 				  </nobr></B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><nobr><?php echo $LDDept ?></nobr></FONT></TD>
@@ -109,7 +149,21 @@ SIZE=+3  FACE="Arial">
               <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'statbel2.gif') ?>></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B><nobr>
-				 <input type="text" name="pcstation" size=20 maxlength=25 value="<?php echo $HTTP_COOKIE_VARS['ck_thispc_station'] ?>">
+
+				<select name="thispc_ward_nr">
+				<option value=""> </option>';
+	<?php
+		if($ward_info&&is_array($ward_info)){		
+			while(list($x,$v)=each($ward_info)){
+				echo '
+					<option value="'.$v['nr'].'"';
+				if($v['nr']==$config['thispc_ward_nr']) echo ' selected';
+				echo '>'.$v['name'].'</option>';
+			}
+		}
+	?>
+				</select>
+
      			  </nobr></B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><nobr><?php echo $LDWard ?></nobr></FONT></TD>
@@ -120,7 +174,7 @@ SIZE=+3  FACE="Arial">
                 <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'button_info.gif') ?>></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B>
-				 <input type="text" name="pcroom" size=20 maxlength=25 value="<?php echo $HTTP_COOKIE_VARS['ck_thispc_room'] ?>">
+				 <input type="text" name="thispc_room_nr" size=20 maxlength=25 value="<?php echo $config['thispc_room_nr'] ?>">
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php echo $LDWardOR ?></FONT></TD></TR>
@@ -131,7 +185,7 @@ SIZE=+3  FACE="Arial">
               <TR bgColor=#eeeeee>  <td align=center><img <?php echo createComIcon($root_path,'profile.gif') ?>></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B>
-				 <input type="text" name="pcphone" size=20 maxlength=25 value="<?php echo $HTTP_COOKIE_VARS['ck_thispc_phone'] ?>">
+				 <input type="text" name="thispc_phone" size=20 maxlength=25 value="<?php echo $config['thispc_phone'] ?>">
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php echo $LDPhoneNr ?></FONT></TD></TR>
@@ -142,7 +196,7 @@ SIZE=+3  FACE="Arial">
               <TR bgColor=#eeeeee>  <td align=center><img <?php echo createComIcon($root_path,'listen-sm-legend.gif') ?>></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B>
-				 <input type="text" name="pcintercom" size=20 maxlength=25 value="<?php echo $HTTP_COOKIE_VARS['ck_thispc_intercom'] ?>">
+				 <input type="text" name="thispc_intercom" size=20 maxlength=25 value="<?php echo $config['thispc_intercom'] ?>">
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php echo $LDIntercomNr ?></FONT></TD></TR>
