@@ -1,7 +1,6 @@
 <?php
-
 /**
-* SETUP Smarty for modul CARE2X - "NURSING"
+* SETUP Smarty for modul CARE2X 
 *
 * SMARTY.PHP 
 * 19.12.2003 Thomas Wiedmann
@@ -11,11 +10,13 @@
 
 #Set the default template, change this to the desired default template
 $default_template='default';
+# Path to the smarty care templates and classes
+ $sDocRoot = $root_path.'gui/smarty_template';
 
 # Set the template 
 # First check if the user config template is available
-if(isset($cfg['template'])||!empty($cfg['template'])){
-	$templatedir=$cfg['template'];
+if(isset($cfg['template_theme'])||!empty($cfg['template_theme'])){
+	$templatedir=$cfg['template_theme'];
 }else{
 	# Else get try to get the global config template
 	if(!isset($GLOBAL_CONFIG)||!is_array($GLOBAL_CONFIG)) $GLOBAL_CONFIG=array();
@@ -28,14 +29,16 @@ if(isset($cfg['template'])||!empty($cfg['template'])){
 		$gc->getConfig('template_smarty');
 	}
 	
-	# If the global config template is not available, use "default"
+	# If the global config template is not available, use hard coded template theme
 	if(!isset($GLOBAL_CONFIG['template_smarty'])||empty($GLOBAL_CONFIG['template_smarty'])){
-		$templatedir=$default_template; // this is the last default theme if the global item is not available
+		$templatedir=$template_theme; // use this theme if the global item is not available
 	}else{
 		$templatedir=$GLOBAL_CONFIG['template_smarty'];
 	}
 }
 
+# Last check if the template directory does not exist, use default template (last resort)
+if(!file_exists("$sDocRoot/$templatedir/.")) $templatedir=$default_template;
 
 /**
 * LOAD Smarty Library
@@ -52,11 +55,10 @@ class smarty_care extends Smarty {
  */
  function smarty_care ($dirname) {
  
- 	global $root_path, $templatedir;
+ 	global $root_path, $templatedir, $default_template, $sDocRoot;
 	
   //$sDocRoot = $_SERVER['DOCUMENT_ROOT'];
   //$sDocRoot = $sDocRoot."/modules/nursing";
-  $sDocRoot = $root_path.'gui/smarty_template';
  
   $this->smarty();
   
@@ -75,12 +77,23 @@ class smarty_care extends Smarty {
     $this->config_dir = $sDocRoot.'/configs';  
     $this->cache_dir = $sDocRoot.'/cache';    
   }*/
-    $this->template_dir = $sDocRoot."/templates/$templatedir";
-    $this->compile_dir = $sDocRoot."/templates_c/$templatedir/$dirname";  
-    $this->config_dir = $sDocRoot.'/configs';  
+  
+  # Another check if the working directory is really inside the template theme. 
+  # If not, use default template theme.
+  if(file_exists($sDocRoot."/templates/$templatedir/$dirname/.")){
+      $this->template_dir = $sDocRoot."/templates/$templatedir";
+      $this->compile_dir = $sDocRoot."/templates_c/$templatedir/$dirname";  
+  }else{
+      $this->template_dir = $sDocRoot."/templates/$default_template";
+      $this->compile_dir = $sDocRoot."/templates_c/$default_template/$dirname";  
+  }
+    
+	$this->config_dir = $sDocRoot.'/configs';  
     $this->cache_dir = $sDocRoot.'/cache';    
   
-/*  echo     $this->template_dir."<p>";
+/*
+	For temporary debugging
+  echo     $this->template_dir."<p>";
   echo  $this->compile_dir."<p>";  
   echo  $this->config_dir."<p>";  
   echo  $this->cache_dir."<p>";    
@@ -104,6 +117,16 @@ class smarty_care extends Smarty {
   // $this->caching = true;
 
  }
+ 
+ function Copyright(){
+ 	global $root_path, $lang, $pgt;
+	ob_start();
+	include($root_path.'include/inc_load_copyrite.php');
+	$sTemp = ob_get_contents();
+	ob_end_clean();
+ 	return $sTemp;
+ }
+ 
 }
 
 ?>
