@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System deployment 1.1 (mysql) 2004-01-11
+* CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -46,9 +46,10 @@ function logentry(&$userid,$key,$report)
 
 if ((($pass=='check')&&($keyword!=''))&&($userid!=''))
 {
+
     if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
     if($dblink_ok) {	
-	    $sql='SELECT * FROM care_users WHERE login_id="'.addslashes($userid).'"';
+	    $sql="SELECT * FROM care_users WHERE login_id='".addslashes($userid)."'";
 							
 		if($ergebnis=$db->Execute($sql))
 		{
