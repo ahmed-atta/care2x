@@ -11,7 +11,7 @@ require($root_path.'include/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 # Default value for the maximum nr of rows per block displayed, define this to the value you wish
-# In normal cases this value is derived from the db table "care_config_global" using the "insurance_list_max_block_rows" element.
+# In normal cases this value is derived from the db table "care_config_global" using the "pagin_insurance_list_max_block_rows" element.
 define('MAX_BLOCK_ROWS',30); 
 
 $lang_tables[]='actions.php';
@@ -57,9 +57,9 @@ require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 
 # Get the max nr of rows from global config
-$glob_obj->getConfig('patient_search_max_block_rows');
-if(empty($GLOBAL_CONFIG['patient_search_max_block_rows'])) $pagen->setMaxCount(MAX_BLOCK_ROWS); # Last resort, use the default defined at the start of this page
-	else $pagen->setMaxCount($GLOBAL_CONFIG['patient_search_max_block_rows']);
+$glob_obj->getConfig('pagin_patient_search_max_block_rows');
+if(empty($GLOBAL_CONFIG['pagin_patient_search_max_block_rows'])) $pagen->setMaxCount(MAX_BLOCK_ROWS); # Last resort, use the default defined at the start of this page
+	else $pagen->setMaxCount($GLOBAL_CONFIG['pagin_patient_search_max_block_rows']);
 	
 if(($mode=='search'||$mode=='paginate')&&!empty($searchkey)){
 	# Convert other wildcards

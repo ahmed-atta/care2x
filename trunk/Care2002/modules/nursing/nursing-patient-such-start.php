@@ -10,6 +10,8 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+
+$lang_tables[]='search.php';
 define('LANG_FILE','nursing.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
@@ -23,14 +25,44 @@ $GLOBAL_CONFIG;
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('patient_%');
 
-if($mode=='such')
+if($mode=='such'||$mode=='paginate')
 {
 	$tb_person='care_person';
 	$tb_encounter='care_encounter';
 	$tb_location='care_encounter_location';
 	$tb_ward='care_ward';
+
+	# Initialize page's control variables
+	if($mode=='paginate'){
+		$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
+	}else{
+		# Reset paginator variables
+		$pgx=0;
+		$totalcount=0;
+		$HTTP_SESSION_VARS['sess_searchkey']=$searchkey;
+		$oitem='';
+		$odir='';
+	}
 	
-	$srcword=trim($srcword);
+	# convert * and ? to % and &
+	$searchkey=strtr($searchkey,'*?','%_');
+
+	#Load and create paginator object
+	include_once($root_path.'include/care_api_classes/class_paginator.php');
+	$pagen=new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
+	
+	$GLOBAL_CONFIG=array();
+	include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+	$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
+
+	# Get the max nr of rows from global config
+	$glob_obj->getConfig('pagin_patient_search_max_block_rows');
+	if(empty($GLOBAL_CONFIG['pagin_patient_search_max_block_rows'])) $pagen->setMaxCount(MAX_BLOCK_ROWS); # Last resort, use the default defined at the start of this page
+		else $pagen->setMaxCount($GLOBAL_CONFIG['pagin_patient_search_max_block_rows']);
+	
+	# Work around
+	//$searchkey=$searchkey;
+	$srcword=trim($searchkey);
 	//prepare the seach word detect several types
 	if(is_numeric($srcword)){
 		$usenum=true;
@@ -54,38 +86,98 @@ if($mode=='such')
 		$cond="($cond)";
 		
 	}
+	
 	$cond.=" AND l.encounter_nr=e.encounter_nr";
+	
 	if(!$arch) $cond.=' AND NOT e.is_discharged';
 	
-	if($usenum) $cond.=' GROUP BY r.location_nr ORDER BY e.encounter_nr DESC';
-		else $cond.=' AND p.pid=e.pid GROUP BY r.location_nr ORDER BY p.name_last';
+	if($usenum) $cond.=' GROUP BY r.location_nr';
+		else $cond.=' AND p.pid=e.pid GROUP BY r.location_nr';
 	
 	if(!isset($db)||!$db)include($root_path.'include/inc_db_makelink.php');
 	if($dblink_ok){			
-		$sql="SELECT p.name_last, p.name_first,p.date_birth,
+		$sqlselect="SELECT p.name_last, p.name_first,p.date_birth,
 					e.encounter_nr, e.encounter_class_nr,e.in_ward,
 					w.name AS ward_name,w.roomprefix,
 					l.location_nr AS  ward_nr,l.date_from AS ward_date,
 					r.location_nr AS room_nr ";
 					
 		if($usenum){
-			$sql.=" FROM $tb_encounter as e LEFT JOIN $tb_person AS p ON p.pid=e.pid";
+			$sqlfrom=" FROM $tb_encounter as e LEFT JOIN $tb_person AS p ON p.pid=e.pid";
 		}else{
-			$sql.=" FROM $tb_person as p LEFT JOIN $tb_encounter AS e ON p.pid=e.pid";
+			$sqlfrom=" FROM $tb_person as p LEFT JOIN $tb_encounter AS e ON p.pid=e.pid";
 		}
-		$sql.=" LEFT JOIN $tb_location AS l ON l.encounter_nr=e.encounter_nr AND l.type_nr=2
+		$sqlfrom.=" LEFT JOIN $tb_location AS l ON l.encounter_nr=e.encounter_nr AND l.type_nr=2
 					LEFT JOIN $tb_location AS r ON r.encounter_nr=l.encounter_nr AND r.type_nr=4 AND r.group_nr=l.location_nr 
 					LEFT JOIN $tb_ward AS w ON w.nr=l.location_nr
 					WHERE $cond";
-					//echo $sql."<p>";
-		if($ergebnis=$db->Execute($sql)){
+		
+		if(!empty($oitem)){
+
+			#Filter the sort item
+			switch($oitem){
+				case 'ward_nr':
+				{
+					$itembuf='location_nr';
+					$prep='l';
+					break;
+				}
+				case 'ward_date':
+				{
+					$itembuf='date_from';
+					$prep='l';
+					break;
+				}
+				case 'room_nr':
+				{
+					$itembuf='location_nr';
+					$prep='r';
+					break;
+				}
+				case 'encounter_nr':
+				{
+					$itembuf='encounter_nr';
+					$prep='e';
+					break;
+				}
+				default:
+					$itembuf=$oitem;
+					$prep='p';
+			}
+			 $sql=$sqlselect.$sqlfrom." ORDER BY $prep.$itembuf $odir";
+		}else{
+			$sql=$sqlselect.$sqlfrom;
+		}
+		//echo $sql."<p>mode==such";
+
+		if($ergebnis=$db->SelectLimit($sql,$pagen->MaxCount(),$pagen->BlockStartIndex())){
 			$rows=$ergebnis->RecordCount();
 /*			if($rows==1){
 				$result=$ergebnis->FetchRow();
 				header("location:nursing-station.php?sid=$sid&lang=$lang&ward_nr=".$result['ward_nr']."&station=".$result['ward_name']);
 				exit;
 			}
-*/		}else{echo "$sql<br>$LDDbNoRead";} 
+*/
+					$pagen->setTotalBlockCount($rows);
+					
+					# If more than one count all available
+					if(isset($totalcount)&&$totalcount){
+						$pagen->setTotalDataCount($totalcount);
+					}else{
+						# Count total available data
+						$sql='SELECT e.encounter_nr '.$sqlfrom;
+						//echo  $sql;
+						$totalcount=0;
+						if($result=$db->Execute($sql)){
+							$totalcount=$result->RecordCount();
+						}
+						$pagen->setTotalDataCount($totalcount);
+					}
+					# Set the sort parameters
+					$pagen->setSortItem($oitem);
+					$pagen->setSortDirection($odir);
+
+		}else{echo "$sql<br>$LDDbNoRead";} 
 	}else { echo "$LDDbNoLink<br>"; } 
 }
 ?>
@@ -94,17 +186,36 @@ if($mode=='such')
 <HEAD>
 <?php echo setCharSet(); ?>
 
+<script language="javascript">
+<!-- 
+var urlholder;
+
+  function gotoWard(ward_nr,st,y,m,d){
+<?php
+	if($cfg['dhtml'])
+	{
+	echo 'w=window.parent.screen.width; h=window.parent.screen.height;';
+	}
+	else echo 'w=800;
+					h=600;';
+?>
+	winspecs="menubar=no,resizable=yes,scrollbars=yes,width=" + (w-15) + ", height=" + (h-60);
+	
+	urlholder="nursing-station-pass.php?rt=pflege&sid=<?php echo "$sid&lang=$lang"; ?>&pday="+d+"&pmonth="+m+"&pyear="+y+"&edit=1&retpath=search_patient&ward_nr="+ward_nr+"&station="+st;
+	window.location.href=urlholder;
+}
+
+// -->
+</script>
 
 <?php
 require($root_path.'include/inc_js_gethelp.php');
 require($root_path.'include/inc_css_a_hilitebu.php');
 ?>
 
-
-
 </HEAD>
 
-<BODY  topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="if (window.focus) window.focus();document.suchlogbuch.srcword.select();"
+<BODY  topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="if (window.focus) window.focus();document.suchlogbuch.searchkey.select();"
 <?php 
  echo  ' bgcolor='.$cfg['body_bgcolor']; 
  if (!$cfg['dhtml']){ echo ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } 
@@ -130,36 +241,71 @@ require($root_path.'include/inc_css_a_hilitebu.php');
   <tr>
     <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"></td>
     <td><FONT  SIZE=3 FACE="verdana,Arial" color=#800000>
-<b><?php echo "$LDSearchKeyword <font color=#0000ff>\"$srcword\"</font> ".str_replace("~rows~",$rows,$LDWasFound) ?> <br>
+<b><?php echo "$LDSearchKeyword <font color=#0000ff>\"$searchkey\"</font> ".str_replace("~rows~",$totalcount,$LDWasFound).' '.$LDShowing.' '.$pagen->BlockStartNr().' '.$LDTo.' '.$pagen->BlockEndNr().'.'; ?> <br>
 <?php echo $LDPlsClk ?></b></font></td>
   </tr>
 </table>
 
 <table border=0 cellpadding=0 cellspacing=0>
-  <tr bgcolor=#0000aa>
-    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp;</b></td>
+  <tr>
+
 <?php
+$bgimg='tableHeaderbg3.gif';
+//$bgimg='tableHeader_gr.gif';
+$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
+
+$append="&usenum=$usenum&arch=$arch";
+
 if($usenum){
+
+
+
 ?>
-    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; <?php echo $LDAdm_Nr; ?></b></td>
+     <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
+	  <?php 
+		echo $pagen->makeSortLink($LDAdm_Nr,'encounter_nr',$oitem,$odir,$append); 
+			 ?></b></td>
 <?php
 }
 ?>
-    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; <?php echo $LDLastName ?></b></td>
-    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; <?php echo $LDName ?></b></td>
-    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; <?php echo $LDBirthDate ?></b></td>
+			 <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
+	  <?php 
+		echo $pagen->makeSortLink($LDLastName,'name_last',$oitem,$odir,$append); 
+			 ?></b></td>
+			 <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
+	  <?php 
+		echo $pagen->makeSortLink($LDName,'name_first',$oitem,$odir,$append); 
+			 ?></b></td>
+			 <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
+	  <?php 
+		echo $pagen->makeSortLink($LDBirthDate,'date_birth',$oitem,$odir,$append); 
+			 ?></b></td>
+
 <?php
 if(!$usenum){
 ?>
-    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; <?php echo $LDAdm_Nr; ?></b></td>
+			 <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
+	  <?php 
+		echo $pagen->makeSortLink($LDAdm_Nr,'encounter_nr',$oitem,$odir,$append); 
+			 ?></b></td>
 <?php
 }
 ?>
-    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; &nbsp;<?php echo $LDStation ?>&nbsp;</b></td>
-    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; &nbsp;<?php echo $LDRoom ?>&nbsp;</b></td>
-    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; <?php echo $LDDate ?></b></td>
-    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; <?php echo $LDStatus ?></b></td>
-  </tr>
+			 <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
+	  <?php 
+		echo $pagen->makeSortLink($LDStation,'ward_nr',$oitem,$odir,$append); 
+			 ?></b></td>
+			 <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
+	  <?php 
+		echo $pagen->makeSortLink($LDRoom,'room_nr',$oitem,$odir,$append); 
+			 ?></b></td>
+			 <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
+	  <?php 
+		echo $pagen->makeSortLink($LDDate,'ward_date',$oitem,$odir,$append); 
+			 ?></b></td>
+
+     <td bgcolor=#000066><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; <?php echo $LDStatus ?></b></td>
+ </tr>
  <?php 
  $toggle=0;
  while($result=$ergebnis->FetchRow())
@@ -183,15 +329,17 @@ if(!$usenum){
 	list($pyear,$pmonth,$pday)=explode('-',$result['ward_date']);
   
 	//$buf="nursing-station.php".URL_APPEND."&station=".$result['ward_name']."&ward_nr=".$result['ward_nr'];
-	$buf="nursing-station.php".URL_APPEND."&ward_nr=".$result['ward_nr']."&pyear=$pyear&pmonth=$pmonth&pday=$pday";
+	//$buf="nursing-station.php".URL_APPEND."&ward_nr=".$result['ward_nr']."&pyear=$pyear&pmonth=$pmonth&pday=$pday";
+	$buf="javascript:gotoWard('".$result['ward_nr']."','".addslashes($result['ward_name'])."','$pyear','$pmonth','$pday')";
   
-  echo '>
+  echo '>';
+/*  echo '
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">';
 	if($result['s_date'] <> (date('Y-m-d'))) echo '<img '.createComIcon($root_path,'bul_arrowblusm.gif','0').'>';
 		else echo '<img '.createComIcon($root_path,'r_arrowgrnsm.gif','0').'>';
 	echo'
 	</a></td>';
-	if($usenum){
+*/	if($usenum){
 	echo '
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.$full_enr.'</a>&nbsp;</td>';
 	}
@@ -215,14 +363,23 @@ if(!$usenum){
 	echo '</td>
   </tr>
   <tr bgcolor=#0000ff>
-  <td colspan=9 height=1><img '.createComIcon($root_path,'pixel.gif','0','absmiddle').'></td>
+  <td colspan=8 height=1><img '.createComIcon($root_path,'pixel.gif','0','absmiddle').'></td>
   </tr>';
   }
+	
+	echo '
+		<tr><td colspan=7><font face=arial size=2>'.$pagen->makePrevLink($LDPrevious,$append).'</td>
+		<td align=right><font face=arial size=2>'.$pagen->makeNextLink($LDNext,$append).'</td>
+		</tr>';
  ?>
 </table>
 <p>
 <hr>
-<?php } ?>
+<?php 
+}else{
+	if($mode=='such') echo str_replace('~nr~','0',$LDSearchFound); 
+}
+?>
 
 	<?php echo $LDSearchPrompt ?>
 	
@@ -233,7 +390,7 @@ if(!$usenum){
 		<table border=0 cellspacing=0 cellpadding=5 bgcolor="#eeeeee">
     <tr>
       <td>	<font color=maroon size=2><b><?php echo $LDSrcKeyword ?>:</b></font><br>
-          		<input type="text" name="srcword" size=40 maxlength=100 value="<?php if ($srcword!=NULL) echo $srcword; ?>">
+          		<input type="text" name="searchkey" size=40 maxlength=100 value="<?php if ($srcword!='') echo $srcword; ?>">
 				<input type="hidden" name="sid" value="<?php echo $sid; ?>">
   				<input type="hidden" name="lang" value="<?php echo $lang; ?>">
   			<input type="hidden" name="mode" value="such"><br>

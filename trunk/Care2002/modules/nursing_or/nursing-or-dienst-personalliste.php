@@ -12,7 +12,7 @@ require($root_path.'include/inc_environment_global.php');
 */
 
 # Default value for the maximum nr of rows per block displayed, define this to the value you wish
-# In normal cases this value is derived from the db table "care_config_global" using the "insurance_list_max_block_rows" element.
+# In normal cases this value is derived from the db table "care_config_global" using the "pagin_insurance_list_max_block_rows" element.
 define('MAX_BLOCK_ROWS',30); 
 
 $lang_tables[]='search.php';
@@ -98,9 +98,9 @@ $pagen=new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_p
 
 
 # Get the max nr of rows from global config
-$glob_obj->getConfig('personell_search_max_block_rows');
-if(empty($GLOBAL_CONFIG['personell_search_max_block_rows'])) $pagen->setMaxCount(MAX_BLOCK_ROWS); # Last resort, use the default defined at the start of this page
-	else $pagen->setMaxCount($GLOBAL_CONFIG['personell_search_max_block_rows']);
+$glob_obj->getConfig('pagin_personell_search_max_block_rows');
+if(empty($GLOBAL_CONFIG['pagin_personell_search_max_block_rows'])) $pagen->setMaxCount(MAX_BLOCK_ROWS); # Last resort, use the default defined at the start of this page
+	else $pagen->setMaxCount($GLOBAL_CONFIG['pagin_personell_search_max_block_rows']);
 
 # Load date formatter
 include_once($root_path.'include/inc_date_format_functions.php');
@@ -274,7 +274,7 @@ if(is_object($nurses)&&$nurses->RecordCount()){
 }
 ?>
 <hr>
-<font face="arial,verdana,helvetica" size=3 color="#990000"><b><?php echo "$LDAddNurseToList. $LDPlsFindPersonFirst."; ?></b></font>
+<font face="arial,verdana,helvetica" size=3 color="#990000"><b><?php echo "$LDAddNurseToList. $LDPlsSearchNurse"; ?></b></font>
 	<table border=0 cellpadding=10 bgcolor="<?php echo $entry_border_bgcolor ?>">
      <tr>
        <td>

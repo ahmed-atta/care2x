@@ -13,7 +13,6 @@ require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','intramail.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
 require_once($root_path.'include/inc_intramail_domains.php');
 
 $thisfile=basename(__FILE__);
@@ -44,7 +43,7 @@ if($mode!='')
 					if($ergebnis->RecordCount())
 					{
 						$content=$ergebnis->FetchRow();
-						if(crypt($password,substr($content[pw],0,2))==$content['pw'])
+						if(md5($password)==$content['pw'])
 						{
 						    /**
 						    * Init crypt to use 2nd level key and encrypt the sid.
@@ -99,7 +98,19 @@ if($mode!='')
 				else{
 						if($pw1==$pw2)
 						{
-							$sql="INSERT INTO $dbtable 
+						$sql="INSERT INTO $dbtable 
+										( 	user_name,
+											email,
+											alias,
+											pw 
+										)
+										VALUES
+										(	'$name',
+											'$addr@$dept',
+											'$alias',
+											'".md5($pw1)."'
+										)";			
+/*								$sql="INSERT INTO $dbtable 
 										( 	user_name,
 											email,
 											alias,
@@ -111,7 +122,7 @@ if($mode!='')
 											'$alias',
 											'".crypt($pw1)."'
 										)";			
-							
+*/							
 							$db->BeginTrans();
 							$ok=$db->Execute($sql);
 							if($ok&&$db->CommitTrans())
@@ -157,14 +168,13 @@ function pruf(d)
 		usr.value="";
 		usr.focus();
 		return false;
-	}
-	if((p=="")||(p==" "))
-	{
+	}else	if((p=="")||(p==" ")){
 		pw.value="";
 		pw.focus();
 		return false;
-	}
+	}else {
 	return true;
+	}
 }
 // -->
 </script> 

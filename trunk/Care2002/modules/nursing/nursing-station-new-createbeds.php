@@ -31,7 +31,7 @@ if(isset($mode)&&$mode=='save_beds'){
 	$HTTP_POST_VARS['history']="Created: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
 	$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
 	$HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
-	$HTTP_POST_VARS['create_time']='NULL';
+	$HTTP_POST_VARS['create_time']=date('YmdHis');
 	
 	for($i=$room_nr_start;$i<=$room_nr_end;$i++){
 	
@@ -43,13 +43,16 @@ if(isset($mode)&&$mode=='save_beds'){
 			$HTTP_POST_VARS['nr_of_beds']=$$beds;
 			$HTTP_POST_VARS['info']=$$info;
 			if($ward_obj->saveWardRoomInfoFromArray($HTTP_POST_VARS)) $saved_ok=true;
+			//echo $ward_obj->getLastQuery().'<p>';
 		}
 	}
 	
 	if($saved_ok){
 		header("location:nursing-station.php".URL_REDIRECT_APPEND."&edit=1&ward_nr=$ward_nr&retpath=ward_mng");
 		exit;
-	}	
+	}else{
+		echo $ward_obj->getLastQuery();
+	}
 }else{
 	/* Get the ward's data */
 	$ward=&$ward_obj->getWardInfo($ward_nr);

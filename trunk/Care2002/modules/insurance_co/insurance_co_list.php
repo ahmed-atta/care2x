@@ -12,7 +12,7 @@ require($root_path.'include/inc_environment_global.php');
 */
 
 # Default value for the maximum nr of rows per block displayed, define this to the value you wish
-# In normal cases this value is derived from the db table "care_config_global" using the "insurance_list_max_block_rows" element.
+# In normal cases this value is derived from the db table "care_config_global" using the "pagin_insurance_list_max_block_rows" element.
 define('MAX_BLOCK_ROWS',30); 
 
 $lang_tables[]='search.php';
@@ -39,17 +39,17 @@ if($mode!='paginate'){
 $GLOBAL_CONFIG=array();
 include_once($root_path.'include/care_api_classes/class_globalconfig.php');
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
-$glob_obj->getConfig('insurance_list_max_block_rows');
-if(empty($GLOBAL_CONFIG['insurance_list_max_block_rows'])) $GLOBAL_CONFIG['insurance_list_max_block_rows']=MAX_BLOCK_ROWS; # Last resort, use the default defined at the start of this page
+$glob_obj->getConfig('pagin_insurance_list_max_block_rows');
+if(empty($GLOBAL_CONFIG['pagin_insurance_list_max_block_rows'])) $GLOBAL_CONFIG['pagin_insurance_list_max_block_rows']=MAX_BLOCK_ROWS; # Last resort, use the default defined at the start of this page
 
 #Load and create paginator object
 require_once($root_path.'include/care_api_classes/class_paginator.php');
 $pagen=new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
 # Adjust the max nr of rows in a block
-$pagen->setMaxCount($GLOBAL_CONFIG['insurance_list_max_block_rows']);
+$pagen->setMaxCount($GLOBAL_CONFIG['pagin_insurance_list_max_block_rows']);
 
 # Get all the active firms info
-$firms=$ins_obj->getLimitActiveFirmsInfo($GLOBAL_CONFIG['insurance_list_max_block_rows'],$pgx,$oitem,$odir);
+$firms=$ins_obj->getLimitActiveFirmsInfo($GLOBAL_CONFIG['pagin_insurance_list_max_block_rows'],$pgx,$oitem,$odir);
 
 $linecount=$ins_obj->LastRecordCount();
 $pagen->setTotalBlockCount($linecount);

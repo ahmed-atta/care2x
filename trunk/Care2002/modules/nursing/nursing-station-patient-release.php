@@ -90,6 +90,10 @@ if( $enc_obj->loadEncounterData($pn)) {
 		require_once($root_path.'include/inc_photo_filename_resolve.php');
 		/* Load the discharge types */
 		$discharge_types=&$enc_obj->getDischargeTypesData();
+		
+		$patient_ok=TRUE;
+}else{
+	$patient_ok=FALSE;
 }
 		
 
@@ -259,6 +263,9 @@ echo '
 <font face="verdana,arial" size="3" ><b><?php echo $LDJustReleased ?></b></font>
 <?php endif ?>
 
+<?php
+if($patient_ok){
+?>
 
 <form action="<?php echo $thisfile ?>" name="discform" method="post" onSubmit="return pruf(this)">
 <table border=0 bgcolor="#efefef">
@@ -379,6 +386,12 @@ echo '
 <input type="hidden" name="s_date" value="<?php echo "$pyear-$pmonth-$pday" ?>">
 </form>
 <p>
+
+<?php
+}else{
+	echo "<font face=\"verdana,arial\" size=3 color=maroon><b>$LDErrorOccured $LDTellEdpIfPersist</b></font><p>";
+}
+?>
 
 <br><a href="<?php echo $breakfile; ?>">
 <?php if(($mode=='release')&&($released)) : ?>

@@ -3,16 +3,14 @@
 if (eregi("headline-format.php",$PHP_SELF)) 
 	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
-
-require_once($root_path.'include/inc_news_display_config.php');
 ?>
 <tr>
 <td>
 
-<table border=0 bgcolor=#cfcfcf cellpadding=1 cellspacing=0 width=100%>
+<table border=0 bgcolor=#cfcfcf cellpadding=1 cellspacing=0 width="100%">
   <tr>
     <td>
-	<table border=0 bgcolor=#ffffff cellpadding=1 cellspacing=0 width=100%>
+	<table border=0 bgcolor=#ffffff cellpadding=1 cellspacing=0 width="100%">
    <tr>
      <td><font face="Verdana, Arial" size=6 color=#800000>
 	 <b><?php echo $LDHeadline ?></b>

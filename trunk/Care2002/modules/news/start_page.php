@@ -20,17 +20,17 @@ if(!$HTTP_COOKIE_VARS[$cksid] && !$cookie) { header("location:".$root_path."cook
 if(!session_is_registered('sess_news_nr')) session_register('sess_news_nr');
 
 $readerpath='headline-read.php?sid='.$sid.'&lang='.$lang;
-// reset all 2nd level lock cookies
+# reset all 2nd level lock cookies
 require($root_path.'include/inc_2level_reset.php');
 		
-$dept_nr=1;  /* 1 = press relations */
+$dept_nr=1; # 1 = press relations
 
-/* Get the maximum number of headlines to be displayed */
+# Get the maximum number of headlines to be displayed
 $config_type='news_headline_max_display';
 include($root_path.'include/inc_get_global_config.php');
 
-if(!isset($news_headline_max_display)||!$news_headline_max_display) $news_num_stop=3; /* default is 3 */
-    else $news_num_stop=$news_headline_max_display;  // The maximum number of news article to be displayed
+if(!isset($news_headline_max_display)||!$news_headline_max_display) $news_num_stop=3; # default is 3 
+    else $news_num_stop=$news_headline_max_display;  # The maximum number of news article to be displayed
 	
 //include($root_path.'include/inc_news_get.php'); // now get the current news
 $thisfile=basename(__FILE__);
@@ -38,7 +38,7 @@ require_once($root_path.'include/care_api_classes/class_news.php');
 $newsobj=new News;
 $news=&$newsobj->getHeadlinesPreview($dept_nr,$news_num_stop);
 
-/* Set initial session environment for this module */
+# Set initial session environment for this module
 
 if(!session_is_registered('sess_file_editor')) session_register('sess_file_editor');
 if(!session_is_registered('sess_file_reader')) session_register('sess_file_reader');
@@ -53,6 +53,8 @@ $HTTP_SESSION_VARS['sess_user_origin']='main_start';
 $HTTP_SESSION_VARS['sess_path_referer']=$top_dir.$thisfile;
 
 $readerpath='headline-read.php'.URL_APPEND;
+# Load the news display configs
+require_once($root_path.'include/inc_news_display_config.php');
 
 ?>
 
@@ -63,18 +65,6 @@ $readerpath='headline-read.php'.URL_APPEND;
 
 <?php if($cfg['dhtml']) include($root_path.'include/inc_css_a_hilitebu.php'); ?>
 
-<script language="javascript">
-<!-- Script Begin
-function gethelp(x,s,x1,x2,x3)
-{
-	if (!x) x="";
-	urlholder="<?php echo $root_path; ?>help-router.php<?php echo URL_REDIRECT_APPEND ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
-	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
-	window.helpwin.moveTo(0,0);
-}
-//  Script End -->
-
-</script>
 <?php
  include($root_path.'include/inc_js_gethelp.php'); 
  ?>
@@ -84,7 +74,7 @@ function gethelp(x,s,x1,x2,x3)
 ?>>
 
 <!-- <TABLE CELLSPACING=3 cellpadding=0 border="0" width="601"> -->
-<TABLE CELLSPACING=3 cellpadding=0 border="0" width="100%">
+<TABLE CELLSPACING=3 cellpadding=0 border="0" width="<?php echo $news_normal_display_width ?>">
 <!-- These are the header images. Comment it to hide -->
 <!--   
 	<tr>

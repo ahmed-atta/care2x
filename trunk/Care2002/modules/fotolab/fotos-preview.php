@@ -122,6 +122,7 @@ if($toggle_pic){
 <?php
 	if($toggle_pic) echo '</a>';
 ?>
+<br>
 <?php
 if(!empty($image['notes'])){
 	$notes=str_replace('[[','<font size=1 color="#abcdef">',htmlspecialchars($image['notes']));

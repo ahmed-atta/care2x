@@ -10,6 +10,8 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+
+$lang_tables[]='lab.php';
 define('LANG_FILE','konsil.php');
 
 /* Globalize the variables */
@@ -335,18 +337,18 @@ topmargin=0 leftmargin=0 marginwidth=0 marginheight=0
 <table width=100% border=0 cellpadding="5" cellspacing=0>
 <tr>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php echo $LDDiagnosticTest; //if($user_origin!='lab') echo " (".$station.")"; ?></STRONG></FONT>
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php echo $LDTestRequestFor.$LDTestType[$target]; //if($user_origin!='lab') echo " (".$station.")"; ?></STRONG></FONT>
 </td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr>
 <?php 
 if($user_origin=='lab')
 {
 ?>
-<a href="<?php echo $thisfile."?sid=".$sid."&lang=".$lang."&station=".$station."&user_origin=".$user_origin."&status=".$status."&target=".$target."&noresize=".$noresize; ?>"><img <?php echo createLDImgSrc($root_path,'newpat2.gif','0') ?>></a>
+<a href="<?php echo $thisfile."?sid=".$sid."&lang=".$lang."&station=".$station."&user_origin=".$user_origin."&status=".$status."&target=".$target."&noresize=".$noresize; ?>"><img <?php echo createLDImgSrc($root_path,'newpat2.gif','0') ?> <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';?>></a>
 &nbsp;
 <?php
 }
-?><a href="javascript:gethelp('request_blood.php','<?php echo $pn ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
+?><a href="javascript:gethelp('request_blood.php','<?php echo $pn ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';?>></a><a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';?>></a></nobr></td>
 </tr>
 <tr>
 <td bgcolor=<?php echo $cfg['body_bgcolor']; ?> colspan=2>
@@ -392,7 +394,7 @@ if($edit){
           echo "<img src='".$root_path."classes/barcode/image.php?code=$batch_nr&style=68&type=I25&width=145&height=40&xres=2&font=5' border=0>";
 ?>
       </td>
-		<td class=fva2_ml10><div   class=fva2_ml10><font size=3 color="#0000ff"><b><?php echo $LDRequestOf.$formtitle ?></b></font>
+		<td class=fva2_ml10><div   class=fva2_ml10><font size=3 color="#0000ff"><b><?php  echo $LDTestRequestFor.$LDTestType[$target];  ?></b></font>
 		<br>
 		<?php 
 		 

@@ -217,7 +217,7 @@ while ($result=$wards->FetchRow()){
 			<tr bgcolor="#'.$bgc.'">';
 	echo "\r\n";
 	echo '
-						<td align=center><font face="verdana,arial" size="2" ><a href="javascript:statbel(\'0\',\''.$result['nr'].'\')"  title="'.$LDClk2Show.'">';
+						<td align=center><font face="verdana,arial" size="2" ><a href="javascript:statbel(\'1\',\''.$result['nr'].'\',\''.$result['ward_id'].'\')"  title="'.$LDClk2Show.'">';
 	echo strtoupper($result['name']).'
 						</a>';
 	echo '</td>

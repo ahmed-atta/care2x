@@ -20,10 +20,15 @@ $breakfile=$root_path.$HTTP_SESSION_VARS['sess_file_break'].URL_APPEND;
 
 //$HTTP_SESSION_VARS['sess_file_return']='start_page.php';
 
-/* Get the news article */
+# Get the news article
 require_once($root_path.'include/care_api_classes/class_news.php');
 $newsobj=new News;
 $news=&$newsobj->getNews($nr);
+
+# Get the news global configurations
+
+require_once($root_path.'include/inc_news_display_config.php');
+
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -43,17 +48,7 @@ $news=&$newsobj->getNews($nr);
 	</style>';
 }
 ?>
-<script language="">
-<!-- Script Begin
-function gethelp(x,s,x1,x2,x3)
-{
-	if (!x) x="";
-	urlholder="<?php echo $root_path; ?>help-router.php<?php echo URL_REDIRECT_APPEND ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
-	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
-	window.helpwin.moveTo(0,0);
-}
-//  Script End -->
-</script>
+
 </HEAD>
 <BODY bgcolor=<?php if ($cfg) 
 {	echo $cfg['body_bgcolor']; 
@@ -75,11 +70,12 @@ function gethelp(x,s,x1,x2,x3)
 </table>
 <?php endif ?>
 
-<TABLE CELLSPACING=5 cellpadding=0 border="0" width="600">
+<TABLE CELLSPACING=5 cellpadding=0 border="0" width="<?php echo $news_normal_display_width ?>">
 
 <TR >
 <TD WIDTH=80% VALIGN="top" >
-<img <?php echo (isset($news_type)&&($news_type='headline')) ?  createComIcon($root_path,'headline4.png','0') :  createComIcon($root_path,'news.png','0')?>>
+<img <?php echo (isset($news_type)&&($news_type='headline')) ?  createLDImgSrc($root_path,'headline4.png','0') :  createComIcon($root_path,'news.png','0')?>>
+<br>
 <?php 
 
 require($root_path.'include/inc_news_display_one.php');
@@ -102,7 +98,6 @@ require($root_path.'include/inc_news_display_one.php');
 
 <tr>
 <td colspan=3>
-<hr>
 <?php
 require($root_path.'include/inc_load_copyrite.php');
 ?>

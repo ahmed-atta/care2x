@@ -16,7 +16,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_config_color.php'); // load color preferences
 /* Load the insurance object */
 require_once($root_path.'include/care_api_classes/class_insurance.php');
-$ins_obj=new Insurance;
+$ins_obj=& new Insurance;
 
 switch($retpath)
 {
@@ -169,19 +169,19 @@ if(!empty($mode)){
   </tr>
   <tr>
     <td class=pblock align=right background="<?php echo $bgc ?>"><?php echo $LDMainPhoneNr ?>: </td>
-    <td class=pblock bgcolor="<?php echo $bgc2 ?>" ><input type="text" name="phone_main" size=50 maxlength=60 value="<?php echo $phone_main ?>"><br></td>
+    <td class=pblock bgcolor="<?php echo $bgc2 ?>" ><input type="text" name="phone_main" size=50 maxlength=35 value="<?php echo $phone_main ?>"><br></td>
   </tr>
   <tr>
     <td class=pblock align=right background="<?php echo $bgc ?>"><?php echo $LDAuxPhoneNr ?>: </td>
-    <td class=pblock bgcolor="<?php echo $bgc2 ?>" ><input type="text" name="phone_aux" size=50 maxlength=60 value="<?php echo $phone_aux ?>"><br></td>
+    <td class=pblock bgcolor="<?php echo $bgc2 ?>" ><input type="text" name="phone_aux" size=50 maxlength=35 value="<?php echo $phone_aux ?>"><br></td>
   </tr>
   <tr>
     <td class=pblock align=right background="<?php echo $bgc ?>"><?php echo $LDMainFaxNr ?>: </td>
-    <td class=pblock bgcolor="<?php echo $bgc2 ?>" ><input type="text" name="fax_main" size=50 maxlength=60 value="<?php echo $fax_main ?>"><br></td>
+    <td class=pblock bgcolor="<?php echo $bgc2 ?>" ><input type="text" name="fax_main" size=50 maxlength=35 value="<?php echo $fax_main ?>"><br></td>
   </tr>
   <tr>
     <td class=pblock align=right background="<?php echo $bgc ?>"><?php echo $LDAuxFaxNr ?>: </td>
-    <td class=pblock bgcolor="<?php echo $bgc2 ?>" ><input type="text" name="fax_aux" size=50 maxlength=60 value="<?php echo $fax_aux ?>"><br></td>
+    <td class=pblock bgcolor="<?php echo $bgc2 ?>" ><input type="text" name="fax_aux" size=50 maxlength=35 value="<?php echo $fax_aux ?>"><br></td>
   </tr>
   <tr>
     <td class=pblock align=right background="<?php echo $bgc ?>"><?php echo $LDContactPerson ?>: </td>
@@ -193,11 +193,11 @@ if(!empty($mode)){
   </tr>
   <tr>
     <td class=pblock align=right background="<?php echo $bgc ?>"><?php echo $LDContactPersonPhoneNr ?>: </td>
-    <td class=pblock bgcolor="<?php echo $bgc2 ?>" ><input type="text" name="contact_phone" size=50 maxlength=60 value="<?php echo $contact_phone ?>"><br></td>
+    <td class=pblock bgcolor="<?php echo $bgc2 ?>" ><input type="text" name="contact_phone" size=50 maxlength=35 value="<?php echo $contact_phone ?>"><br></td>
   </tr>
   <tr>
     <td class=pblock align=right background="<?php echo $bgc ?>"><?php echo $LDContactPersonFaxNr ?>: </td>
-    <td class=pblock bgcolor="<?php echo $bgc2 ?>" ><input type="text" name="contact_fax" size=50 maxlength=60 value="<?php echo $contact_fax ?>"><br></td>
+    <td class=pblock bgcolor="<?php echo $bgc2 ?>" ><input type="text" name="contact_fax" size=50 maxlength=35 value="<?php echo $contact_fax ?>"><br></td>
   </tr>
   <tr>
     <td class=pblock><input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0'); ?>></td>

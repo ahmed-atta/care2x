@@ -16,9 +16,9 @@ define('DOC_CHANGE_TIME','7.30'); # Define the time when the doc-on-duty will ch
 
 $lang_tables[]='prompt.php';
 define('LANG_FILE','nursing.php');
-define('NO_2LEVEL_CHK',1);
+//define('NO_2LEVEL_CHK',1);
 $local_user='ck_pflege_user';
-require_once($root_path.'include/inc_front_chain_lang.php');
+require($root_path.'include/inc_front_chain_lang.php');
 
 if(empty($HTTP_COOKIE_VARS[$local_user.$sid])){
     $edit=0;
@@ -45,6 +45,8 @@ if(isset($retpath)){
 		case 'quick': $breakfile='nursing-schnellsicht.php'.URL_APPEND;
 							break;
 		case 'ward_mng': $breakfile='nursing-station-info.php'.URL_APPEND.'&ward_nr='.$ward_nr.'&mode=show';
+							break;
+		case 'search_patient': $breakfile='nursing-patient-such-start.php'.URL_APPEND;
 	}
 }
 

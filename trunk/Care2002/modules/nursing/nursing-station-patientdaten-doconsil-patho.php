@@ -331,9 +331,9 @@ topmargin=0 leftmargin=0 marginwidth=0 marginheight=0
 <table width=100% border=0 cellpadding="5" cellspacing=0>
 <tr>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php echo $LDDiagnosticTest; // if($user_origin!="lab") echo "(".$station.")"; ?></STRONG></FONT>
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php echo "$LDDiagnosticTest ::  $formtitle"; // if($user_origin!="lab") echo "(".$station.")"; ?></STRONG></FONT>
 </td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right ><nobr>
 <?php 
 if($user_origin=='lab')
 {

@@ -89,6 +89,15 @@ echo "<font face=arial font size=3 color=maroon><font size=5 >";
 echo $pn;
 
 if(is_object($encounter)){
+	$fn=$encounter->PhotoFilename();
+	if(file_exists($root_path.'fotos/registration/'.$fn)){
+		# If main photo ID exists, show it
+		echo '<br><a href="'.$root_path.'main/pop_reg_pic.php'.URL_APPEND.'&fn='.$fn.'" target="FOTOS_PREVIEW" title="'.$LDClk2Preview.'">
+	 		<img src="';
+		echo  $root_path.'main/imgcreator/thumbnail.php?mx=80&my=100&imgfile=fotos/registration/'.$fn;
+		echo '" border=0></a>';
+
+	}
 	echo "<br></font>".ucfirst($encounter->LastName()).", ".ucfirst($encounter->FirstName())." (";
 	echo formatDate2Local($encounter->BirthDate(),$date_format).')<br>';
 	echo "</font>";
