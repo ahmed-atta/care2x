@@ -1,5 +1,4 @@
 <?php
-
 $LDHome='Home';
 $LDPatient='Patient';
 $LDAdmission='Admission';
@@ -26,4 +25,16 @@ $LDLanguage='Langage';
 $LDPlsWaitInit='Veuillez patienter. Le procès d`initialisation est en route....';
 
 $LDChange='Modifier';
+/* 2003-04-27 EL */
+$LDBrazilian='Brazilian';
+$LDCzech='Czech';
+$LDEnglish='English';
+$LDFrench='Français';
+$LDGerman='Allemagne';
+$LDIndonesian='Indonesian';
+$LDItalian='Italian';
+$LDNorwegian='Norwegian';
+$LDPolish='Polish';
+$LDPortuguese='Portuguese';
+$LDSpanish='Spanish';
 ?>

@@ -1,5 +1,4 @@
 <?php
-				
 $LDHome='Domovská stránka';
 $LDPatient='Pacient';
 $LDAdmission='Pøíjem';
@@ -26,4 +25,16 @@ $LDLanguage='Jazyk';
 $LDPlsWaitInit='Prosím o chvíli strpení. Probíhá incializace programu ....';
 
 $LDChange='Zmìnit';
+/* 2003-04-27 EL */
+$LDBrazilian='Brazilian';
+$LDCzech='Cesky';
+$LDEnglish='English';
+$LDFrench='French';
+$LDGerman='German';
+$LDIndonesian='Indonesian';
+$LDItalian='Italian';
+$LDNorwegian='Norwegian';
+$LDPolish='Polish';
+$LDPortuguese='Portuguese';
+$LDSpanish='Spanish';
 ?>

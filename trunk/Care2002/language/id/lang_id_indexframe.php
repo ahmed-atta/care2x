@@ -1,5 +1,4 @@
 <?php
-
 $LDHome='Home';
 $LDPatient='Admin Pasien';
 $LDAdmission='Admission';
@@ -25,4 +24,16 @@ $VersionChgTarget='_top';
 $LDLanguage='Bahasa';
 $LDPlsWaitInit='Silahkan tunggu sebentar. Inisialisasi sedang dilaksanakan....';
 $LDChange='Change';
+/* 2003-04-27 EL */
+$LDBrazilian='Brazilian';
+$LDCzech='Czech';
+$LDEnglish='English';
+$LDFrench='French';
+$LDGerman='German';
+$LDIndonesian='B. Indonesia';
+$LDItalian='Italian';
+$LDNorwegian='Norwegian';
+$LDPolish='Polish';
+$LDPortuguese='Portuguese';
+$LDSpanish='Spanish';
 ?>

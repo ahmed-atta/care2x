@@ -1,24 +1,4 @@
 <?php
-$indextag=array('Home',
-				'Admissão',
-				'Ambulatório',
-				'SDM',
-				'Médicos',
-				'Enfermagem',
-				'Centro Cirurgico',
-				'Laboratórios',
-				'Radiologia',
-				'Farmácia',
-				'Depósito Médico',
-				'Diretório',
-				'Suporte Técnico',
-				'CPD ',
-				'Intranet E-mail',
-				'Internet E-mail',
-				'Especiais ',
-				'Login '
-				);
-
 $LDHome='Home';
 $LDPatient='Paciente';
 $LDAdmission='Admissão';
@@ -44,4 +24,16 @@ $VersionChgTarget='_top';
 $LDLanguage='Idioma';
 $LDPlsWaitInit='Por favor aguarde. Processo de inicialização em andamento....';
 $LDChange='Mudar';
+/* 2003-04-27 EL */
+$LDBrazilian='Brazilian';
+$LDCzech='Czech';
+$LDEnglish='English';
+$LDFrench='French';
+$LDGerman='German';
+$LDIndonesian='Indonesian';
+$LDItalian='Italian';
+$LDNorwegian='Norwegian';
+$LDPolish='Polish';
+$LDPortuguese='Portuguese';
+$LDSpanish='Spanish';
 ?>

@@ -25,4 +25,16 @@ $VersionChgTarget='_top';
 $LDLanguage='Jêzyk';
 $LDPlsWaitInit='Proszê o chwilê cierpliwo¶ci.  Proces inicjalizacji jest w trakcie dzia³ania ....';
 $LDChange='Change';
+/* 2003-04-27 EL */
+$LDBrazilian='Brazilian';
+$LDCzech='Czech';
+$LDEnglish='English';
+$LDFrench='French';
+$LDGerman='German';
+$LDIndonesian='Indonesian';
+$LDItalian='Italian';
+$LDNorwegian='Norwegian';
+$LDPolish='Polski';
+$LDPortuguese='Portuguese';
+$LDSpanish='Spanish';
 ?>

@@ -1,5 +1,4 @@
 <?php
-				
 $LDHome='Allgemeines';
 $LDPatient='Patient';
 $LDAdmission='Aufnahme';
@@ -27,5 +26,17 @@ $VersionChgTarget='_top';
 $LDPlsWaitInit='Einen Moment bitte. Initialization läuft gerade....';
 
 $LDChange='Wechseln';
+/* 2003-04-27 EL */
+$LDBrazilian='Brazilianisch';
+$LDCzech='Tchechisch';
+$LDEnglish='Englisch';
+$LDFrench='Französisch';
+$LDGerman='Deutsch';
+$LDIndonesian='Indonesisch';
+$LDItalian='Italianisch';
+$LDNorwegian='Norwegisch';
+$LDPolish='Polnisch';
+$LDPortuguese='Portugiesisch';
+$LDSpanish='Spanisch';
 
 ?>

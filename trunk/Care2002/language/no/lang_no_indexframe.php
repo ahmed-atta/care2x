@@ -23,4 +23,16 @@ $VersionChgTarget='_top';
 $LDLanguage='Språk';
 $LDPlsWaitInit='Vennligst vent... Initialasjon pågår....';
 $LDChange='Endre';
+/* 2003-04-27 EL */
+$LDBrazilian='Brazilian';
+$LDCzech='Czech';
+$LDEnglish='English';
+$LDFrench='French';
+$LDGerman='German';
+$LDIndonesian='Indonesian';
+$LDItalian='Italian';
+$LDNorwegian='Norwegian';
+$LDPolish='Polish';
+$LDPortuguese='Portuguese';
+$LDSpanish='Spanish';
 ?>
