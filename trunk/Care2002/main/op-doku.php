@@ -135,7 +135,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
                 <TD vAlign=top width=180><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B><nobr>
 				 <img <?php echo createComIcon($root_path,'blaupfeil.gif','0','middle') ?>>  
-				 <a href="op-pflege-logbuch-pass.php?sid=<?php echo "$sid&lang=$lang" ?>" onmouseover="ssm('PLog'); clearTimeout(timer) " 
+				 <a href="<?php echo $root_path ?>modules/or_logbook/op-pflege-logbuch-pass.php?sid=<?php echo "$sid&lang=$lang" ?>" onmouseover="ssm('PLog'); clearTimeout(timer) " 
       onmouseout="timer=setTimeout('hsm()',1000)" ><?php echo $LDOrLogBook ?></a><br>
 				  </nobr></B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
