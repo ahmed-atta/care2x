@@ -33,7 +33,7 @@ $LDGoodDay="Bonjour! Ravi de vous voir!";
 $LDGoodAfternoon="Bonjour!";
 $LDGoodEvening="Bonsoir";
 
-$LDNewForm="j'ai besoind d'un formulaire vide, s'il vous plaît.";
+$LDNewForm="j'ai besoin d'un formulaire vide, s'il vous plaît.";
 
 $LDForceSave="Enregistrer quand même";
 $LDSaveData="Enregistrer les données";

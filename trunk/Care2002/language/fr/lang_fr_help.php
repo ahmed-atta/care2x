@@ -1,5 +1,5 @@
 <?php
-$LDHelp="Help";
-$LDClose="Close";
-$LDCloseHelpWin="Close help window";
+$LDHelp="Aide";
+$LDClose="Fermer";
+$LDCloseHelpWin="Fermer la fenêtre d'aide";
 ?>

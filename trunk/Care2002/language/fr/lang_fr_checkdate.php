@@ -1,11 +1,11 @@
 <?php
 
-$LDErrorDate="The date is wrong. Please enter a correct date";
-$LDErrorDateLen="The date has a wrong length.";
-$LDErrorDateFormat="The date format is wrong.";
-$LDErrorNotNumeric="Non numerics are not allowed.";
-$LDErrorYear="The year is wrong";
-$LDErrorMonth="The month is wrong";
-$LDErrorDay="The day is wrong";
+$LDErrorDate="La date est fausse. Veuillez bien entrer une date correcte";
+$LDErrorDateLen="La date a une mauvaise longueur.";
+$LDErrorDateFormat="Le format de la date est faux.";
+$LDErrorNotNumeric="Les non numériques ne sont pas autorisés.";
+$LDErrorYear="L'année est fausse";
+$LDErrorMonth="Le mois est faux";
+$LDErrorDay="Le jour est faux";
 
 ?>
