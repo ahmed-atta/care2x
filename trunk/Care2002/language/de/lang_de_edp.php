@@ -125,7 +125,7 @@ $LDSystemAdmin='System Administrator';
 $LDMySQLManage='Datenbank verwalten mit PHP MySQLAdmin';
 $LDSpexFunctions='Andere spezielle Funktionen';
 $LDWelcome='Willkommen';
-$LDForeWord='Sie haben jetzt die oberste Zugangsberechtigung. <br>Folgende Funktionen stehen Ihnen ohne Zugangseinschränkung zur Verfügung. <br><b>Bitte seien Sie vorsichtig mit was Sie tun.</b>';
+$LDForeWord='Sie haben jetzt die oberste Zugangsberechtigung. <br>Folgende Funktionen stehen Ihnen ohne Zugangseinschränkung zur Verfügung. <br><b>Bitte seien Sie vorsichtig mit dem was Sie tun.</b>';
 
 $LDSetDateFormat='Datumsformat einstellen';
 $LDSelectDateFormat='Bitte wählen Sie das gewünschte Format aus:';
@@ -140,8 +140,8 @@ $LDDateFormatsTxt= array('Zum Beispiel: 01.10.2002 (01 Oktober 2002)',
 $LDNewDateFormatSaved='Das neue Datumsformat wurde übernommen.';
 
 $LDSetCurrency='Währung einstellen';
-$LDNewCurrencySet='Die Währung ist jetzt übernommen worden.';
-$LDPlsSelectCurrency='Bitte wählen Sie die gewünschte Währung aus. Danach klicken Sie \'Übernehmen\' an.';
+$LDNewCurrencySet='Die Währung ist jetzt gespeichert worden.';
+$LDPlsSelectCurrency='Bitte wählen Sie die gewünschte Währung aus. Danach klicken Sie \'Speichern\' an.';
 $LDAddCurrency='Eingabe von neuer Währung.';
 $LDPlsAddCurrency='Bitte geben Sie die Währungsinformation ein. Danach klicken Sie \'Speichern\' an.';
 $LDAddedNewCurrency='Die neue Währung ist gespeichert worden.';
@@ -165,6 +165,6 @@ $LD_MMsddsyyyy='MM/TT/JJJJ';
 $LDUserInfoSaved='Die Information wurde erfolgreich gespeichert';
 $LDUserInfoNoSave='Der Zugang konnte nicht erstellt werden. <br>Bitte prüfen Sie die eingegebenen Information.';
 $LDNoAreas='Sie haben keine Bereiche ausgewählt!';
-$LDUserDouble='Der Zugang konnte nicht erstellt werden. <br>Bitte geben Sie einen andere Benutzerkennung namen ein.';
+$LDUserDouble='Der Zugang konnte nicht erstellt werden. <br>Bitte geben Sie eine andere Benutzerkennung ein.';
 $LDEnterNewUser='Einen neuen Benutzer erstellen';
 ?>

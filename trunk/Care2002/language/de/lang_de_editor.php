@@ -112,5 +112,8 @@ $LDPlsSelectCurrency="Bitte wählen Sie die gewünschte Währung aus. Danach klicke
 $LDmain="Hauptwährung";
 $LDClk2AddCurrency="Zur Eingabe neuer Währung, bitte hier anklicken. (Achtung: Sie würden Cafenews verlassen!)";
 $LDMenuSaved="Der menu is gespeichert.";
-
+/* 2002-10-13 EL */
+$LD_ddpMMpyyyy='TT.MM.JJJJ';
+$LD_yyyyhMMhdd='JJJJ-MM-TT';
+$LD_MMsddsyyyy='MM/TT/JJJJ';
 ?>

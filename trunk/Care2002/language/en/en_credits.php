@@ -73,7 +73,11 @@ He decided to actively join open source because: <br><i>"Such an ideal world can
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/daniel_zilli.jpg"  border=0  align=right vspace=10>
 			<b>Daniel Zilli (BR) translated Care 2002 and www.care2x.com website to  brazilian-portuguese.</b>
-			
+			<p>
+			Daniel is a nice guy who loves to live a happy life. He likes computers, football, and good music.
+He  has 10 years of computer experience and loves what it does.
+Daniel owns a company that produces computer
+science education products, open source software and local  linux distro.
 			<P><a href="mailto:danielz@cco.matrix.com.br"><u>Daniel Zilli can be contacted here.</u></a>
 </TD></TR></TBODY></TABLE>
 
@@ -182,7 +186,7 @@ He decided to actively join open source because: <br><i>"Such an ideal world can
 			knowledge to improve the security of Care2x. The intention is to open a new "market" (medical)
 			for the open source community.
 
-			<P><a href="mailto:daniele@infra.de"><u>Daniele Frijia kann hier kontaktiert werden.</u></a>
+			<P><a href="mailto:daniele@infra.de"><u>Daniele Frijia can be contacted here.</u></a>
 </TD></TR></TBODY></TABLE>
 <hr>
 <font face="verdana,arial" size=3 color="#0000ff">More credits</font>

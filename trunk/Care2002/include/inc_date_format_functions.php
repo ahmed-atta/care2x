@@ -70,6 +70,8 @@ function getDateFormat($link,$DBLink_OK)
 */
 function formatDate2Local($stdDate,$localFormat,$retTime,$timeOnly,&$sepChars)
 {
+   global $lang;
+   
    if(!$sepChars) $sepChars=array('-','.','/',':',',');
    $localFormat=strtolower($localFormat); 
    
@@ -101,6 +103,8 @@ function formatDate2Local($stdDate,$localFormat,$retTime,$timeOnly,&$sepChars)
 	  elseif($localArray[$i]=='mm') $localArray[$i]=$stdArray[1];
 	    elseif($localArray[$i]=='dd') $localArray[$i]=$stdArray[2];
    }
+   
+   if ($lang=='de') $stdTime=strtr($stdTime,':','.'); // This is a hard coded time  format translator for german "de" language
    
    if($retTime) return implode($localSeparator,$localArray).' '.$stdTime;
     else return implode($localSeparator,$localArray);

@@ -56,5 +56,5 @@ $LDOurPrivPolicy='Unsere Datenschutzbestimmungen';
 $LDSubmitNews='Online Redaktion';
 $LDEditNews='Nachrichten mit Online Redaktion schreiben';
 /* 2002-10-17 EL */
-$LDCredits='Anerkennung';
+$LDCredits='Credits';
 ?>

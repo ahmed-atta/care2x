@@ -1,5 +1,5 @@
 <?php
-if($path_root=="") $path_root="../";
+if($path_root=='') $path_root='../';
 require($path_root.'include/inc_credits_openwin.php');
 ?>
 <head>
@@ -12,7 +12,7 @@ langsung pada mereka mengenai Versi Indonesia. Terimakasih.
 Beta version 1.0.03 
 CARE 2002 ditulis dan disebarkan dengan bebas dibawah GNU General Public License. Untuk lebih detailnya tentang licensi ini lihat
  <a href="<?php echo $path_root ?>legal_gnu_gpl.htm" target=_new>salinan license</a>. 
- Untuk keterangan selanjutnya silahkan menghubungi Elpidio Latorilla di <a href=mailto:elpidio@latorilla.com>elpidio@latorilla.com</a>.
+ Untuk keterangan selanjutnya silahkan menghubungi <a href=mailto:info@care2x.com>info@care2x.com</a>.
 <p>
 <font size=1 face="arial">
 [ <a href="<?php echo $path_root ?>language/id/id_privacy.htm" target="pp">Kebijakan Kerahasiaan (Privacy Policy)</a> ]

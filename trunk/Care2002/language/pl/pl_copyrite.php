@@ -10,8 +10,7 @@ wersji jêzykowej.
  Aplikacja CARE 2002 jest napisana i rozpowszechniana bez korzysci finsowych (nieodp³atnie) na podstawie : 
  the GNU General Public License. <br>Szczegó³owy tekst licencji do wgl¹du :
  <a href="<?php echo $path_root ?>legal_gnu_gpl.htm" target=_new>Tre¶æ Licencji</a>. 
-Dalszych wyczerpuj¹cych informacji udziela  Elpidio Latorilla email'ujac pod 
-<a href=mailto:elpidio@latorilla.com>elpidio@latorilla.com</a>.
+Dalszych wyczerpuj¹cych informacji udziela <a href=mailto:info@care2x.com>info@care2x.com</a> email'ujac.
  <p>
 <font size=1 face="arial">
 [ <a href="<?php echo $path_root ?>language/pl/pl_privacy.htm" target="pp">Statut naszej dzia³alnosci (our privacy policy)</a> ]
