@@ -32,6 +32,7 @@ class Encounter extends Notes {
 	var $date;
 	var $time;
 	
+	/* Field names */
 	var $tabfields=array('encounter_nr',
 	                           'pid',
 							   'encounter_date',

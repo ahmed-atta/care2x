@@ -44,9 +44,10 @@ class Department extends Core {
 									'create_id',
 									'create_time');
 									
-	function Department(){
+	function Department($nr){
 		$this->setTable($this->tb);
 		$this->setRefArray($this->tabfields);
+		$this->dept_nr=$nr;
 	}
 	
 	function _getalldata($cond='1',$sort='name_formal'){
@@ -193,9 +194,15 @@ class Department extends Core {
 		if(!$this->is_preloaded) return false;
 		return $this->preload_dept['type'];
 	}
-	function FormalName(){
-		if(!$this->is_preloaded) return false;
-		return $this->preload_dept['name_formal'];
+	function FormalName($nr=0){
+		if($this->is_preloaded){
+			return $this->preload_dept['name_formal'];
+		}elseif($nr){
+			$this->dept_nr=$nr;
+			return $this->_getItem('name_formal');
+		}else{
+			return false;
+		}
 	}
 	function ShortName(){
 		if(!$this->is_preloaded) return false;
@@ -254,6 +261,8 @@ class Department extends Core {
 			return false;
 		}
 	}
-	
+	function setDeptNr($nr){
+		$this->dept_nr=$nr;
+	}
 }
 ?>

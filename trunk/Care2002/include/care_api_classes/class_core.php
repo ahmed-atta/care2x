@@ -53,7 +53,6 @@ class Core {
 			return false;
 	    }
     }	
-	
     function _prepSaveArray(){
 		$x='';
 		$v='';
