@@ -35,4 +35,11 @@ $LDTechnicalMaintenance='Perawatan Teknis';
 $LDITDepartment='Departemen TI';
 $LDGeneralAmbulatory='Rawat Jalan Umum';
 $LDBloodBank='Bank Darah';
+$LDNursing='Perawat';
+/* 2003-04-27 EL */
+$LDMedical='Medical';
+$LDSupport='Non-medical';
+$LDNews='News';
+$LDDepartment='Department';
+$LDPressRelations='Presse';
 ?>

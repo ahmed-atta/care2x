@@ -274,6 +274,11 @@ $LDShowNextLog='Tampilkan masukan log selanjutnya';
 $LDShowGuideCal='Tampilkan kalender pemandu';
 
 $LDPerformance='Performa';
+/* 2002-10-13 EL */
+$LDPlsSelectPatientFirst='Silakan cari pasien dahulu.';
+$LD_ddpMMpyyyy='dd.bb.tttt';
+$LD_yyyyhMMhdd='tttt-bb-dd';
+$LD_MMsddsyyyy='mm/dd/tttt';
 /* 2002-10-15 EL */
 $LDStandbyInit='S'; /* S = Standby */
 $LDOncallInit='O'; /* O = Oncall */
@@ -284,4 +289,7 @@ $LDAddNurseToList='Masukkan seorang perawat ke daftar';
 $LDNursesList='Daftar perawat';
 /* 2003-03-19 EL */
 $LDPlsSelectDept='Silakan pilih sebuah departemen.';
+$LDSelectORoomNr='...and an OR.';
+$LDAlertNoDeptSelected=$LDPlsSelectDept;
+$LDAlertNoORSelected='Please select an operating room!';
 ?>

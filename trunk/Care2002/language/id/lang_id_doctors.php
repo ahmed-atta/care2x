@@ -88,33 +88,33 @@ $LDCreatePersonList='Buat daftar personil';
 $LDNoPersonList='Daftar personil belum dibuat. Silakan buat daftarnya dulu. klik di tombol yang ada.';
 $LDShow='Tampilkan';
 
-$LDDOCS='DOC Scheduler';
-$LDDOCSTxt='Doctor On Call Scheduler, plan, view, update, edit, etc.';
+$LDDOCS='Penjadwal DOC';
+$LDDOCSTxt='Penjadwal Doctor On Call, rencana, lihat, mutakhirkan, edit, dll.';
 $LDDOCSR='DOCSR';
 $LDDOCSRTxt='Doctor On Call Schedule Requester';
 /* 2002-09-15 EL */
-$LDTestRequest='Test request';
+$LDTestRequest='Permintan tes';
 /* 2003-03-16 EL */
-$LDContactInfo='Contact Info';
-$LDPersonalContactInfo='Personal Contact Info';
-$LDOnCallContactInfo='On-Call Contact Info';
-$LDPlsSelectDept='Please select a department';
-$LDCreateDoctorsList='Create doctors\' list';
-$LDPlsCreateList='Please create the list first.';
-$LDPlsClickButton='Click on the following button.';
-$LDFamilyName='Family name';
-$LDGivenName='Given name';
-$LDDateOfBirth='Date of birth';
-$LDEntryPrompt='Please enter a search keyword:<br>(e.g. family name, given name, personell number, etc.)<br>';
-$LDPersonellNr='Personell Nr.';
-$LDFunction='Function';
-$LDOptions='Options';
-$LDSearchFound='Search found ~nr~ relevant data.';
-$LDAddDoctorToList='Add a doctor to list';
-$LDAdd='Add';
-$LDDelete='Delete';
-$LDSureToDeleteEntry='Are you sure you want to delete this entry?';
+$LDContactInfo='Informasi kontak';
+$LDPersonalContactInfo='Informasi kontak personal';
+$LDOnCallContactInfo='Info kontak On-Call ';
+$LDPlsSelectDept='Silakan pilih sebuah departemen';
+$LDCreateDoctorsList='Buat daftar dokter';
+$LDPlsCreateList='Silakan buat daftar dahulu.';
+$LDPlsClickButton='Klik tombol berikut.';
+$LDFamilyName='Nama keluarga';
+$LDGivenName='Nama depan';
+$LDDateOfBirth='Tanggal lahir';
+$LDEntryPrompt='Silakan masukkan kata kunci pencarian:<br>(e.g. Nama keluarga, Nama depan, Nomor Personel, dll.)<br>';
+$LDPersonellNr='No. Personel';
+$LDFunction='Fungsi';
+$LDOptions='Opsi';
+$LDSearchFound='Pencarian menemukan ~nr~ data relevan.';
+$LDAddDoctorToList='Tambahkan ke daftar dokter';
+$LDAdd='Tambahkan';
+$LDDelete='Hapus';
+$LDSureToDeleteEntry='Apakah anda yakin akan menghapus masukan ini?';
 /* 2003-03-18 EL */
-$LDChangeOnlyDept='Change the department';
-$LDCreateNursesList='Create Nurses\' List';
+$LDChangeOnlyDept='Rubah departemen';
+$LDCreateNursesList='Buat daftar perawat';
 ?>

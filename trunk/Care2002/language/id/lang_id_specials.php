@@ -202,4 +202,11 @@ $LDNewPwDiffer="The new passwords differ from each other.<br> Please enter the n
 /* 2003-03-22 EL*/
 $LDPersonellMngmnt='Personell Management';
 $LDPersonellMngmntTxt='Tools and functions for managing personell';
+/* 2003-04-25 EL */
+$LDBilling='eCombill';
+$LDBillingTxt='Bill patient, create billable items, generate bill reports, etc.';
+$LDInsuranceCoMngr='Insurance Co. Manager';
+$LDInsuranceCoMngrTxt='Enter new, edit insurance company data';
+$LDAddressMngr='Address Manager';
+$LDAddressMngrTxt='Enter, list, edit, & update address data';
 ?>

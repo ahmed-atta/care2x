@@ -237,4 +237,7 @@ $LDDeptStatus='status Departemen';
 $LDRecordStatus='Record\'s status';
 /* 2003-03-30 EL*/
 $LDConfigOptions='Pilihan Konfigurasi';
+$LDDoesSurgeryOp='Does operative surgery?';
+$LDList='List';
+$LDUpdate='Update';
 ?>

@@ -34,7 +34,12 @@ $LDMore='Artikel yang lain';
 $LDEditTitle='Berita Utama';
 $LDNewsDummy= array(1=>'pertama',2=>'kedua',3=>'ketiga',4=>'keempat');
 
-$LDNoFrame='Website ini mengunakan frames untuk fungsi yang optimal. Silahkan instal sebuah browser yang semestinya. Kami menyarankan Microsoft Internet Explorer dimulai dari versi 5.0. Silahkan aktifkan Javascript (JScript) dan hidupkan otomatis cookies reception';
+/*$LDNoFrame='Website ini mengunakan frames untuk fungsi yang optimal. Silahkan instal sebuah browser yang semestinya. 
+Kami menyarankan Microsoft Internet Explorer dimulai dari versi 5.0. 
+Silahkan aktifkan Javascript (JScript) dan hidupkan otomatis cookies reception';
+*/
+$LDNoFrame='Website ini mengunakan frames untuk fungsi yang optimal. Silahkan instal sebuah browser yang semestinya. 
+Silahkan aktifkan Javascript (JScript) dan hidupkan otomatis cookies reception'; // Removed the MSIE ref. 2003-04-25 Elpidio
 						
 $LDClk2Write='Klik saya untuk edit';
 
