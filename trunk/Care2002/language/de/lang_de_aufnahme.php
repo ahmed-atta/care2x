@@ -141,4 +141,6 @@ $LDSeeDiagnosisNote="Verknüpfungen mit Diagnose relevanten Publikationen:";
 $LDSeeTherapyNote="Verknüpfungen mit Therapie relevanten Publikationen:";
 $LDMakeBarcodeLabels="Druck Barcode Etiketten";
 
+$LDPlsEnterDept="<b>Bitte geben sie Ihre Abteilung oder Arbeitsplatz ein. </b><br>(z.B. PLOP oder Innere2 oder M4A, usw.)";
+$LDOkSaveNow="OK jetzt abspeichern";
 ?>

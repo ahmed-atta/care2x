@@ -66,7 +66,7 @@ $LDMenuAll="Speiseplan für <br> &nbsp;andere Tagen";
 $LDPrices="Preise";
 $LDNoMenu="Speiseplan <br> nicht vorhanden.";
 
-$LDWhatToDo="Was möchten Sie Tun?";
+$LDWhatToDo="Was möchten Sie tun?";
 $LDPlsMarkSelection="Bitte markieren Sie eine Option in der Auswahlliste. Anschliessend klicken Sie \"Weiter...\" an";
 $LDMenuEdit="Speiseplan bearbeiten";
 $LDPriceEdit="Preise der Produkte bearbeiten";
@@ -98,7 +98,7 @@ $LDPriceSaved="Folgende Produkte bzw. Preise wurden gespeichert.";
 $LDMarkWeek="Bitte markieren Sie die Woche in der Liste.";
 $LDClkContinue="Anschliessend klicken Sie \"Weiter...\" an.";
 $LDPlsEnter="Bitte hier eintragen...";
-$LDClk2Edit="Klick hier zum schreiben";
+$LDClk2Edit="Zum Schreiben, bitte hier anklicken";
 $LDPreviewPic="Bildvorschau";
 $LDCafeEditorial="Cafenews Redaktion";
 $LDHealthTips="Gesundheitstips";

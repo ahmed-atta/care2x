@@ -319,4 +319,8 @@ $LDQueries="Inquiries to the Physician";
 $LDChangeWard="Change of ward";
 $LDChangeBed="Change of bed";
 $LDPatientDied="Death of patient";
+
+$LDFollowing="following";
+$LDErrorDuplicateBed="Error: Duplicate bed occupancy record in table nursing_station_patients";
+$LDNoFound="Search found no patient.";
 ?>

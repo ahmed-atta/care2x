@@ -136,4 +136,7 @@ $LDEnterTherapyNote="Attach links to therapy related notes & publications:";
 $LDSeeDiagnosisNote="Diagnosis related notes & publications:";
 $LDSeeTherapyNote="Therapy related notes & publications:";
 $LDMakeBarcodeLabels="Make barcode labels";
+
+$LDPlsEnterDept="<b>Please enter your department, clinic, or work area.</b><br>(e.g. PLOP, Internal Med2, or M4A, etc.)";
+$LDOkSaveNow="OK save now";
 ?>

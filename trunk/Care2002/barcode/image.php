@@ -1,5 +1,11 @@
 <?php
+/**
+* Inserted code for Care 2002
+*/
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require_once("../include/inc_vars_resolve.php"); // globalize POST, GET, & COOKIE  vars
+/* END */
+
 /*
 Barcode Render Class for PHP using the GD graphics library 
 Copyright (C) 2001  Karim Mribti
@@ -76,9 +82,11 @@ Contact author at: barcode@mribti.com
   	  unset($obj);  /* clean */
   }
 
+if(!$pn&&$code) $pn=$code;
+copy("../cache/barcodes/pn_temp.png","../cache/barcodes/pn_".$pn.".png");
+
 if($label)
  {
- 	 copy("../cache/barcodes/pn_temp.png","../cache/barcodes/pn_".$pn.".png");
-	 header("location: ../imgcreator/barcode-etik.php?sid=$ck_sid&lang=$lang&pn=$pn");
+	 header("location: ../imgcreator/barcode-etik.php?sid=$sid&lang=$lang&pn=$pn");
 }
 ?>

@@ -310,4 +310,8 @@ $LDQueries="Fragen an den Arzt";
 $LDChangeWard="Stationswechsel";
 $LDChangeBed="Bettwechsel";
 $LDPatientDied="Ableben des Patienten";
+
+$LDFollowing="folgende";
+$LDErrorDuplicateBed="Fehler: Bettbelegung 2x in der Tabelle vorhanden!"; 
+$LDNoFound="Die Suche hat leider keinen Patient gefunden.";
 ?>
