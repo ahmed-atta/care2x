@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
+* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -15,7 +15,7 @@ define('LANG_FILE','specials.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_config_color.php');
-$breakfile='spediens.php'.URL_APPEND;
+$breakfile='config_options.php'.URL_APPEND;
 
 $config_new=array();
 
@@ -138,7 +138,7 @@ if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_ali
 <table border=1>
   <tr >
     <td rowspan=3 bgcolor="<?php echo $config_new['idx_bgcolor']; ?>" width=100 align=left>
-	<center><img <?php echo createComIcon($root_path,'care_logo.gif','0') ?>></center>
+	<center><img <?php echo createLogo($root_path,'care_logo.gif','0') ?>></center>
 
 <a href="#" title="<?php echo $LDClk4TxtColor ?>" onClick="chgcolor('idx_txtcolor')">
 <FONT    SIZE=1  FACE="Arial" color="<?php echo $config_new['idx_txtcolor']; ?>">
@@ -185,7 +185,7 @@ require($root_path.'include/inc_load_copyrite.php');
 <FONT    SIZE=-1  FACE="Arial">
 <FORM >
 <input type="button" value="<?php echo $LDOK ?>" onClick="ok()">
-<INPUT type="button"  value="<?php echo $LDCancel ?>" onClick="location.replace('spediens.php<?php echo URL_REDIRECT_APPEND; ?>')">
+<INPUT type="button"  value="<?php echo $LDCancel ?>" onClick="location.replace('config_options.php<?php echo URL_REDIRECT_APPEND; ?>')">
 <input type="button" value="<?php echo $LDApply ?>" onClick="location.replace('colorchg.php<?php echo URL_REDIRECT_APPEND; ?>&mode=remain')">
 <?php if ($cfg['dhtml'])
 echo '&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="'.$LDColorOptExt.'" onClick="location.replace(\'excolorchg.php'.URL_REDIRECT_APPEND.'\')">';

@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
+* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -34,7 +34,6 @@ else
 }
 
 require_once($root_path.'include/inc_front_chain_lang.php'); ///* invoke the script lock*/
-require_once($root_path.'include/inc_config_color.php'); ///* load color preferences*/
 
 $thisfile=basename(__FILE__);
 
@@ -192,15 +191,12 @@ function printOut()
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
 //-->
 </script>
-<script language="javascript" src="<?php echo $root_path ?>js/setdatetime.js">
-</script>
-
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js">
-</script>
+<script language="javascript" src="<?php echo $root_path ?>js/setdatetime.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 <?php
 require($root_path.'include/inc_js_gethelp.php');
 require($root_path.'include/inc_css_a_hilitebu.php');
-
 ?>
 </HEAD>
 
@@ -269,20 +265,32 @@ if($stored_request['entry_date'] && $stored_request['entry_date']!="0000-00-00")
       <td rowspan=8 align="left" valign="top"><font size=4 color="#0000ff"><b><?php echo $formtitle ?></b></font><br>
 	  <font size=1 color="#000099"><?php echo $LDTel ?>
 	  </td>
-      <td class="fvag_ml10" align="right"><?php echo $LDEntryDate ?> &nbsp;</td>
+      <td class="fvag_ml10" align="right"><?php echo $LDEntryDate ?> 
+	  <?php
+	  if($stored_request['status']=='pending')
+		   {
+		?>
+			   	<a href="javascript:show_calendar('form_test_request.entry_date','<?php echo $date_format ?>')">
+				<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
+
+		<?php	           
+		}
+		?>
+	  </td>
       <td>
 	  <?php 
 	    
 
 		   if($stored_request['status']=='pending')
 		   {
-	           echo '
+				echo '
 	                   <input type="text" name="entry_date" size=10 maxlength=10 value="';
 					   
 			   if($stored_request['entry_date'] && $stored_request['entry_date']!="0000-00-00") echo formatDate2Local($stored_request['entry_date'],$date_format);
 			    else echo formatDate2Local(date('Y-m-d'),$date_format);
 			   
 			   echo '" onBlur="IsValidDate(this,\''.$date_format.'\')" onKeyUp="setDate(this,\''.$date_format.'\',\''. $lang.'\')">&nbsp;';
+	
 		    }
 			else 
 			{

@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
+* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -14,7 +14,6 @@ define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 if($edit&&!$HTTP_COOKIE_VARS[$local_user.$sid]) {header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
 $thisfile='nursing-station-patientdaten-todo.php';
 $breakfile="nursing-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$pn&edit=$edit";
@@ -179,8 +178,8 @@ require($root_path.'include/inc_checkdate_lang.php');
 </script>
 
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-
 <script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
 </HEAD>
 
@@ -312,12 +311,18 @@ if($cnt){
 		</td>
  -->		
         <td valign="top"><font face="verdana,arial" size="2" ><?php echo $LDDate ?>:<br>
-		<input type=text size=10 maxlength=10  name="dateput" onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')" onFocus=this.select() value="<?php if(!$saved) echo $dateput; ?>"><br>
+		<input type=text size=10 maxlength=10  name="dateput" value="<?php echo formatDate2Local(date('Y-m-d'),$date_format); ?>" onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')" onFocus=this.select() value="<?php if(!$saved) echo $dateput; ?>"><br>
+<a href="javascript:show_calendar('berichtform.dateput','<?php echo $date_format ?>')">
+ <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a><font size=1 face="arial">[<?php   
+ $dfbuffer="LD_".strtr($date_format,".-/","phs");
+  echo $$dfbuffer;
+ ?>]</font>
+
 <!-- 		<a href="javascript:document.berichtform.dateput.value='h';setDate(document.berichtform.dateput);"><img <?php echo createComIcon($root_path,'arrow-t.gif','0') ?> alt="<?php echo $LDInsertDate ?>"></a>
  -->		
          </td>
 		<td valign="top"><font face="verdana,arial" size="2" ><?php echo $LDClockTime ?>:<br>
-		<input type=text size="4" name="timeput" value="<?php if(!$saved) echo $timeput; ?>" onKeyUp=setTime(this,'<?php echo $lang ?>') onFocus=this.select()><br>
+		<input type=text size="4" name="timeput"  value="<?php echo date('H:i'); ?>"  onKeyUp=setTime(this,'<?php echo $lang ?>') onFocus=this.select()><br>
 <!-- 		<a href="javascript:document.berichtform.timeput.value='j';setTime(document.berichtform.timeput);"><img <?php echo createComIcon($root_path,'arrow-t.gif','0') ?> alt="<?php echo $LDInsertTimeNow ?>"></a>
  -->		</td>
 		<td><font face="verdana,arial" size="2" ><?php echo $LDDocsPrescription ?>:<br>&nbsp;<textarea rows="4" cols="25" name="berichtput"><?php if(!$saved) echo $berichtput; ?></textarea><br>
@@ -332,7 +337,14 @@ if($cnt){
 		<a href="javascript:document.berichtform.dateput2.value='h';setDate(document.berichtform.dateput2);"><img <?php echo createComIcon($root_path,'arrow-t.gif','0') ?> alt="<?php echo $LDInsertDate ?>"></a>
 		</td>
  -->		
-		<td valign="top"><font face="verdana,arial" size="2" ><?php echo $LDDate ?>:<br><input type=text size=10 maxlength=10  name="dateput2" value="<?php if(!$saved) echo $dateput2; ?>" onBlur="IsValidDate(this,'<?php echo $date_format ?>')"  onFocus="this.select()" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"><br>
+		<td valign="top"><font face="verdana,arial" size="2" ><?php echo $LDDate ?>:<br>
+		<input type=text size=10 maxlength=10  name="dateput2" value="<?php echo formatDate2Local(date('Y-m-d'),$date_format); ?>" onBlur="IsValidDate(this,'<?php echo $date_format ?>')"  onFocus="this.select()" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"><br>
+		<a href="javascript:show_calendar('berichtform.dateput2','<?php echo $date_format ?>')">
+ 		<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a><font size=1 face="arial">[<?php   
+		$dfbuffer="LD_".strtr($date_format,".-/","phs");
+		echo $$dfbuffer;
+		?>]</font>
+
 <!-- 		<a href="javascript:document.berichtform.dateput2.value='h';setDate(document.berichtform.dateput2);"><img <?php echo createComIcon($root_path,'arrow-t.gif','0') ?> alt="<?php echo $LDInsertDate ?>"></a>
  -->		
         </td>

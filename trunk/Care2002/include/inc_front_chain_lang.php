@@ -102,18 +102,22 @@ if(defined('LANG_FILE')&&LANG_FILE!='') {
 /* Load additional language tables */
 if(isset($lang_tables)&&is_array($lang_tables)&&sizeof($lang_tables)) include_once($root_path.'include/inc_load_lang_tables.php');
 
-/**
-*  Load additional environment files 
-*/
+#  Load additional environment files 
 require_once($root_path.'include/inc_config_color.php'); // load user configurations
 require_once($root_path.'include/inc_img_fx.php'); // image functions
 require_once($root_path.'include/inc_charset_fx.php'); // charset functions
 
-// Resolve the template theme
+# Resolve the template theme
 if(isset($cfg['template_theme'])&&!empty($cfg['template_theme'])) $template_theme=$cfg['template_theme'];
-/**
-* define environment constants
-*/
+
+# Load template class by default
+if(!defined('NO_TEMPLATE')||!NO_TEMPLATE){
+	require_once($root_path.'include/care_api_classes/class_template.php'); // template class
+	# Template object
+	$TP_obj=new Template($root_path,$template_path,$template_theme);
+}
+
+# define environment constants
 //define('MODERATE_NEWS',0);  // define to 1 if news is moderated
 //define('LANG_DEPENDENT',0); // define to 1 if the news contents are language dependent
 ?>

@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
+* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -32,7 +32,6 @@ else
   $breakfile=$root_path."modules/nursing/nursing-station-patientdaten.php".URL_APPEND."&edit=$edit&station=$station&pn=$pn";
 }
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
 $thisfile='nursing-station-patientdaten-doconsil-blood.php';
 
@@ -312,8 +311,8 @@ function printOut()
 //-->
 </script>
 <script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 </HEAD>
 
 <BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> 
@@ -359,10 +358,6 @@ if($user_origin=='lab')
 
 if($edit)
 {
-
-?>
-<form name="form_test_request" method="post" action="<?php echo $thisfile ?>" onSubmit="return chkForm(this)">
-<?php
 
 /* If in edit mode display the control buttons */
 
@@ -454,6 +449,8 @@ if($edit){
 	<!-- Second row -->
 		<tr  valign="top" bgcolor="<?php echo $bgc1 ?>" >
         <td>
+
+		<form name="form_test_request" method="post" action="<?php echo $thisfile ?>" onSubmit="return chkForm(this)">
 		
 		<!-- Block Specimen  -->
 		<table border=0 cellspacing=0 cellpadding=1 bgcolor="#000000" width=100% height=100%>
@@ -514,7 +511,10 @@ if($edit){
      </tr>
      <tr>
        <td><div class=fva2b_ml10><font size=1><?php echo $LDTransfusionDate ?></font></div></td>
-       <td><input type="text" name="transfusion_date" size=20 maxlength=10  value="<?php  if($mode=='edit') echo formatDate2Local($stored_request['transfusion_date'],$date_format); ?>"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"></td>
+       <td><input type="text" name="transfusion_date" size=20 maxlength=10  value="<?php  if($mode=='edit') echo formatDate2Local($stored_request['transfusion_date'],$date_format); ?>"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+	   <a href="javascript:show_calendar('form_test_request.transfusion_date','<?php echo $date_format ?>')">
+ 		<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a><font size=1 face="arial">
+	   </td>
      </tr>
      <tr>
        <td colspan=2><div class=fva2b_ml10><b><?php echo $LDDiagnosis ?></b><br>
@@ -527,7 +527,10 @@ if($edit){
      </tr>
      <tr>
        <td align="right"><div class=fva2b_ml10><font size=1><?php echo $LDDate ?>:&nbsp;</font></div></td>
-       <td><input type="text" name="send_date" size=20 maxlength=10  value="<?php  if($mode=="edit") echo formatDate2Local($stored_request['send_date'],$date_format); else echo formatDate2Local(date("Y-m-d"),$date_format) ?>" onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"></td>
+       <td><input type="text" name="send_date" size=20 maxlength=10  value="<?php  if($mode=="edit") echo formatDate2Local($stored_request['send_date'],$date_format); else echo formatDate2Local(date("Y-m-d"),$date_format) ?>" onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+	   	   <a href="javascript:show_calendar('form_test_request.send_date','<?php echo $date_format ?>')">
+ 		<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a><font size=1 face="arial">
+		</td>
      </tr>
      <tr>
        <td align="right"><div class=fva2b_ml10><font size=1><?php echo $LDDoctor ?>:&nbsp;</font></div></td>

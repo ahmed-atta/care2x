@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
+* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -12,9 +12,6 @@ require($root_path.'include/inc_environment_global.php');
 */
 /* Start initializations */
 define('LANG_FILE','konsil.php');
-
-/* Globalize the variables */
-
 
 /* We need to differentiate from where the user is coming: 
 *  $user_origin != lab ;  from patient charts folder
@@ -44,7 +41,6 @@ switch($user_origin)
 }
 
 require_once($root_path.'include/inc_front_chain_lang.php'); ///* invoke the script lock*/
-require_once($root_path.'include/inc_config_color.php'); ///* load color preferences*/
 require_once($root_path.'include/inc_diagnostics_report_fx.php');
 
 $thisfile='labor_test_request_admin_generic.php';
@@ -253,8 +249,8 @@ function printOut()
 </script>
 
 <script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
 </HEAD>
 
@@ -300,81 +296,48 @@ if (($stored_request['result']!='') && $stored_request['status']!='done')
   echo'
          <a href="'. $thisfile.'?sid='.$sid.'&lang='.$lang.'&edit='.$edit.'&mode=done&target='.$target.'&subtarget='.$subtarget.'&batch_nr='.$batch_nr.'&pn='.$pn.'&user_origin='.$user_origin.'&entry_date='.$entry_date.'"><img '.createLDImgSrc($root_path,'done.gif','0','absmiddle').' alt="'.$LDDone.'"></a>';
 }
-?>		
-	<!-- Start of the form  -->	
-		<table   cellpadding=0 cellspacing=0 border="0" width=700>
-		<tr  valign="top">
-		<td bgcolor="<?php echo $bgc1 ?>"  class=fva2_ml10><div   class=fva2_ml10>
-       <?php echo $LDRequestTo ?><br>
-       <font size=3>
-<?php echo $formtitle.'&nbsp;'.$LDDepartment ?>
-       </font>
-   <p>
-	<?php printCheckBox('visit'); echo '&nbsp;'.$LDVisitRequested; ?><p>
-<?php printCheckBox('order_patient'); echo '&nbsp;'.$LDPatCanBeOrdered; ?><p>
-<?php
-	  echo '<font size=1 color="#000099" face="verdana,arial">'.$batch_nr.'</font>&nbsp;<br>';
-          echo "<img src='".$root_path."classes/barcode/image.php?code=$batch_nr&style=68&type=I25&width=145&height=40&xres=2&font=5' border=0>";
-?>		
-
-</td>
-         <td  bgcolor="<?php echo $bgc1 ?>"  align="right"><div class=fva2b_ml10>
-<?php
-
-  echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
-
-?>
-		</div></td>
-	</tr>
 	
-	<tr bgcolor="<?php echo $bgc1 ?>">
-		<td colspan=2><div class=fva2_ml10><?php echo $LDDiagnosesInquiries ?><br>
-		  <font face="courier" size=2 color="#000000">
-		  <blockquote><?php if($stored_request['diagnosis_quiry']) echo nl2br(stripslashes($stored_request['diagnosis_quiry'])) ?></blockquote><p>
-		  </font>
-		</td>
-	</tr>	
+	#  Start of the form  	
+	# Prepare the values
+	$TP_checkbox_1=printCheckBox('visit',false);
+	$TP_checkbox_2=printCheckBox('order_patient',false); 
+	$TP_img_barcode= "<img src='".$root_path."classes/barcode/image.php?code=$batch_nr&style=68&type=I25&width=145&height=40&xres=2&font=5' border=0>";
+	$TP_img_patient_label='<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
 
-	<tr bgcolor="<?php echo $bgc1 ?>" valign="top">
-		<td ><div class=fva2_ml10><font color="#000099">
-		 <?php echo $LDDate ?>:
-		 <font face="courier" size=2 color="#000000">
-		<?php if($edit_form || $read_form) echo formatDate2Local($stored_request['send_date'],$date_format); ?>
-		</font>
-  </div></td>
-		<td align="right"><div class=fva2_ml10><font color="#000099">
-		<?php echo $LDDoctor ?>
-		<font face="courier" size=2 color="#000000">
-		<?php if($edit_form || $read_form) echo stripslashes($stored_request['send_doctor']) ?>&nbsp;&nbsp;&nbsp;&nbsp;
-		</font>
-  </div></td>
-</tr>
-
-	<tr bgcolor="<?php echo $bgc1 ?>">
-		<td colspan=2><div class=fva2_ml10>&nbsp;<br><font color="#000099"><?php echo $LDDeptReport ?><br>
-		<textarea name="result" cols=80 rows=10 wrap="physical"><?php if($stored_request['result']) echo stripslashes($stored_request['result']) ?></textarea>
-		</div><br>
-				</td>
-		</tr>	
-
-	<tr bgcolor="<?php echo $bgc1 ?>">
-		<td ><div class=fva2_ml10><font color="#000099">
-		 <?php echo $LDDate ?>:
-		<input type="text" name="result_date" 
-		  value="<?php if($stored_request['result_date'] != '0000-00-00') echo formatDate2Local($stored_request['result_date'],$date_format); 
-		                         else echo formatDate2Local(date('Y-m-d'),$date_format); 
-					?>"   size=10 maxlength=10 onFocus="this.select()" onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-  </div></td>
-			<td align="right"><div class=fva2_ml10><font color="#000099">
-		<?php echo $LDDoctor ?>
-		<input type="text" name="result_doctor" size=40 maxlength=40 value="<?php if($stored_request['result_doctor']) echo stripslashes($stored_request['result_doctor']) ?>">&nbsp;&nbsp;&nbsp;&nbsp;
-  </div></td>
-</tr>
-		
-
-		</table>
-	<!-- End of form  -->
-<?php
+	if($stored_request['diagnosis_quiry']) $TP_diagnosis_quiry=nl2br(stripslashes($stored_request['diagnosis_quiry']));
+		else $TP_diagnosis_quiry='';
+	
+	if($edit_form || $read_form) $TP_send_date=formatDate2Local($stored_request['send_date'],$date_format);
+		else $TP_send_date='';
+	$TP_calendar_1='';
+	$TP_input_1='/'; # Disables the input
+	$TP_block_1='blockquote';
+	$TP_send_doctor='';
+	if($edit_form || $read_form) $TP_send_doctor_x=stripslashes($stored_request['send_doctor']);
+		else $TP_send_doctor_x='';
+	
+	$TP_vspacer_2='';
+	$TP_block_2='textarea';
+	
+	if($stored_request['result']) $TP_result=stripslashes($stored_request['result']);
+		else $TP_result='';
+	$TP_report_date='<input type="text" name="result_date" value="';
+	if($stored_request['result_date'] != '0000-00-00') $TP_report_date.=formatDate2Local($stored_request['result_date'],$date_format).'"';
+		else $TP_report_date.=formatDate2Local(date('Y-m-d'),$date_format).'"'; 
+	$TP_report_date.=' size=10 maxlength=10 onFocus="this.select()" onBlur="IsValidDate(this,\''.$date_format.'\')" onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\')">';
+	
+	$TP_calendar_2='<a href="javascript:show_calendar(\'form_test_request.result_date\',\''.$date_format.'\')"><img '.createComIcon($root_path,'show-calendar.gif','0','absmiddle').'></a>';
+  	
+	$TP_result_doctor_x='';
+	if($stored_request['result_doctor']) $TP_result_doctor=stripslashes($stored_request['result_doctor']);
+		else $TP_result_doctor='';
+	
+	$TP_input_2='input';
+	
+	# Load template
+	$TP_generic=$TP_obj->load('laboratory/tp_form_generic.htm');
+	eval("echo $TP_generic;");
+	#  End of form 
 
 require($root_path.'include/inc_test_request_hiddenvars.php');
 

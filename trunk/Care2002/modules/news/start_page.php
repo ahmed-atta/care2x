@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
+* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -73,22 +73,24 @@ function gethelp(x,s,x1,x2,x3)
 	window.helpwin.moveTo(0,0);
 }
 //  Script End -->
+
 </script>
-</HEAD>
+<?php
+ include($root_path.'include/inc_js_gethelp.php'); 
+ ?>
+ </HEAD>
  <BODY topmargin=4 marginheight=4  bgcolor=<?php echo $cfg['body_bgcolor']; 
  if (!$cfg['dhtml']){ echo ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } 
 ?>>
 
-
-
-
 <TABLE CELLSPACING=3 cellpadding=0 border="0" width="601">
-  <tr>
-  
+<!-- This are the header images. Comment it to hide -->
+<!--   
+	<tr>
     <td colspan=3><nobr>  <img <?php echo createComIcon($root_path,'banner_middle3.gif','0') ?>><img <?php echo createComIcon($root_path,'mo_dau.gif','0') ?>>
-</nobr></td>
+	</nobr></td>
   </tr>
-
+ -->
 
   <tr>
     <td WIDTH=450 VALIGN="top">
@@ -98,7 +100,9 @@ function gethelp(x,s,x1,x2,x3)
  //require($root_path.'include/inc_news_display.php');
  require('./headline-format.php');
 ?>
-  <tr>
+<!-- The current news and news archive block -->
+<!--   
+	<tr>
     <td>
 	 <img <?php echo createComIcon($root_path,'news.png','0') ?>><p>
 	 <img <?php echo createComIcon($root_path,'news_archive2.png','0') ?>><br>
@@ -107,13 +111,15 @@ function gethelp(x,s,x1,x2,x3)
   <tr>
     <td>
 	<FONT  SIZE=1 FACE="verdana,Arial">.::<a href="editor-pass.php?sid=<?php echo "$sid&lang=$lang" ?>&target=headline&title=<?php echo $LDEditTitle ?>"><?php echo $LDClk2Write ?></a>::.</td>
-  </tr>
+  </tr> 
+-->
 
 	</table>
 	
 	</td>
-<TD  VALIGN="top"   bgcolor="<?php echo $cfg['body_txtcolor']; ?>" width=1>
-<img src="../../gui/img/common/default/pixel.gif" border=0 width=1 height=1>
+<!-- <TD  VALIGN="top"   bgcolor="<?php echo $cfg['body_txtcolor']; ?>" width=1>
+ --><TD   width=1  background="<?php echo $root_path ?>gui/img/common/biju/vert_reuna_20b.gif">
+ 	&nbsp;
     </TD>
 <TD WIDTH=150 VALIGN="top" >
 	<FONT  SIZE=2  FACE="arial,verdana">

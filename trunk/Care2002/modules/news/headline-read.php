@@ -3,21 +3,21 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
+* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-
+$lang_tables=array('startframe.php');
 define('LANG_FILE','editor.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_config_color.php');
 
 $returnfile='headline-edit-select-art.php'.URL_APPEND;
-$breakfile=$HTTP_SESSION_VARS['sess_file_break'].URL_APPEND;
+$breakfile=$root_path.$HTTP_SESSION_VARS['sess_file_break'].URL_APPEND;
 
 //$HTTP_SESSION_VARS['sess_file_return']='start_page.php';
 

@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
+* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -57,29 +57,13 @@ require_once($root_path.'include/inc_config_color.php');
 <HTML>
 <HEAD>
 <?php echo setCharSet(); ?>
- 
-<script language="javascript" >
-<!-- 
-function closewin()
-{
-	location.href='startframe.php?sid=<?php echo $$ck_sid_buffer.'&uid='.$r;?>';
-}
 
-function gethelp(x,s,x1,x2,x3)
-{
-	if (!x) x="";
-	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
-	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
-	window.helpwin.moveTo(0,0);
-}
-// -->
-</script> 
 <?php 
 require($root_path.'include/inc_js_gethelp.php');
 require($root_path.'include/inc_css_a_hilitebu.php');
 ?></HEAD>
 
-<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0  onLoad="window.parent.STARTPAGE.location.href='indexframe.php?sid=<?php echo "$sid&lang=$lang" ?>'" 
+<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0  onLoad="window.parent.STARTPAGE.location.href='indexframe.php<?php echo URL_REDIRECT_APPEND ?>'" 
 <?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
@@ -102,7 +86,7 @@ SIZE=+3  FACE="Arial">
 <FONT  face="Verdana,Helvetica,Arial" size=3 color="#990000"><?php echo $LDChangeSaved ?><br>
 <?php else : ?>
 <FONT  face="Verdana,Helvetica,Arial" size=5><font color="#cc0000" ><?php echo $LDWelcome ?>!</font><br>
-<?php echo $HTTP_COOKIE_VARS['ck_login_username'.$sid] ?>
+<?php echo $HTTP_SESSION_VARS['sess_login_username'] ?>
 <?php endif ?>
 </td></tr>
 </table>

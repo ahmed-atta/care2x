@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
+* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -209,11 +209,9 @@ require($root_path.'include/inc_checkdate_lang.php');
 ?>
 //-->
 </script>
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js">
-</script>
-
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js">
-</script>
+<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 <?php
 require($root_path.'include/inc_js_gethelp.php');
 require($root_path.'include/inc_css_a_hilitebu.php');
@@ -366,8 +364,10 @@ require($root_path.'include/inc_test_request_lister_fx.php');
 		</td>
     </tr>
 	<tr bgcolor="<?php echo $bgc1 ?>">
-		<td  colspan=2 bgcolor="#cccccc"><div class=fva2_ml10><font color="#000099">
-		 <?php echo $LDXrayNumber ?>
+		<td  colspan=2 bgcolor="#cccccc"><div class=fva2_ml10>
+        <nobr>
+		<font color="#000099">
+		<?php echo $LDXrayNumber ?>
         <input type="text" name="xray_nr" value="<?php if($read_form && $stored_request['xray_nr']) echo $stored_request['xray_nr']; ?>" size=9 maxlength=9> 
 		<?php echo $LD_r_cm2 ?>
         <input type="text" name="r_cm_2" value="<?php if($read_form && $stored_request['r_cm_2']) echo $stored_request['r_cm_2']; ?>" size=7 maxlength=15> 
@@ -375,7 +375,8 @@ require($root_path.'include/inc_test_request_lister_fx.php');
 		 <?php echo $LDXrayTechnician ?>&nbsp;
         <input type="text" name="mtr" value="<?php if($read_form && $stored_request['mtr']) echo $stored_request['mtr']; ?>" size=25 maxlength=35> 
 		<?php echo $LDDate ?>&nbsp;
-        <input type="text" name="xray_date" 
+
+		<input type="text" name="xray_date" 
 		value="<?php 
 		
 		            if($read_form && $stored_request['xray_date']!='0000-00-00')
@@ -387,7 +388,9 @@ require($root_path.'include/inc_test_request_lister_fx.php');
 					  echo formatDate2Local(date('Y-m-d'),$date_format);
 					}
 				  ?>" size=10 maxlength=10 onBlur="IsValidDate(this,'<?php echo $date_format ?>')"  onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"> 
-     
+		  	<a href="javascript:show_calendar('form_test_request.xray_date','<?php echo $date_format ?>')">
+			<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
+		</nobr>
 	  </div>
     </tr>	
 	<tr bgcolor="<?php echo $bgc1 ?>">
@@ -411,7 +414,12 @@ require($root_path.'include/inc_test_request_lister_fx.php');
 					{
 					  echo formatDate2Local(date('Y-m-d'),$date_format);
 					}
-				  ?>" size=10 maxlength=10 onBlur="IsValidDate(this,'<?php echo $date_format ?>')"  onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"> &nbsp;&nbsp;
+				  ?>" size=10 maxlength=10 onBlur="IsValidDate(this,'<?php echo $date_format ?>')"  onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+
+		  	<a href="javascript:show_calendar('form_test_request.results_date','<?php echo $date_format ?>')">
+			<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a><font size=1 face="arial">
+
+				  
   <?php echo $LDReportingDoc ?>
         <input type="text" name="results_doctor" value="<?php if($read_form && $stored_request['results_doctor']) echo $stored_request['results_doctor']; ?>" size=35 maxlength=35> 
 		</td>

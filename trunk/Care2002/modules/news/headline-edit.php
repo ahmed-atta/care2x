@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
+* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -84,8 +84,8 @@ function showpic(d)
 </script>
 
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js" type="text/javascript"></script>
-
 <script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
 </head>
 <body onLoad="document.selectform.newstitle.focus()">
@@ -115,6 +115,9 @@ function showpic(d)
 	<input type="text" name="author" size=30 maxlength=40><br>
   	<FONT FACE="verdana,Arial" color="#0000cc" size=2><b><?php echo $LDPublishDate ?>:</b><br>
 	<input type="text" name="publishdate" size=10 maxlength=10 onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+  	<a href="javascript:show_calendar('selectform.publishdate','<?php echo $date_format ?>')">
+	<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
+
 <!-- 	<input type="text" name="publishdate" size=10 maxlength=10 onKeyUp="setDate(this)">
  --> 
   [ <?php   

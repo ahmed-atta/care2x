@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
+* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -23,7 +23,7 @@ if(!session_is_registered('sess_path_referer')) session_register('sess_path_refe
 
 $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 
-$HTTP_SESSION_VARS['sess_path_referer']=$top_dir.'/'.basename(__FILE__);
+$HTTP_SESSION_VARS['sess_path_referer']=$top_dir.basename(__FILE__);
 
 
 ?>

@@ -7,8 +7,6 @@ define('LANG_FILE','stdpass.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-require_once($root_path.'include/inc_config_color.php');
-
 require_once($root_path.'global_conf/areas_allow.php');
 
 $allowedarea=&$allow_area['news'];

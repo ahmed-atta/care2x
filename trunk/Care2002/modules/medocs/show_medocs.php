@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
+* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -46,8 +46,10 @@ require_once($root_path.'include/care_api_classes/class_encounter.php');
 $enc_obj=new Encounter($encounter_nr);
 $enc_obj->loadEncounterData();
 $enc_class=$enc_obj->EncounterClass();
-if($enc_class==2)  $HTTP_SESSION_VARS['sess_full_en']=$GLOBAL_CONFIG['patient_outpatient_nr_adder']+$encounter_nr;
+/*if($enc_class==2)  $HTTP_SESSION_VARS['sess_full_en']=$GLOBAL_CONFIG['patient_outpatient_nr_adder']+$encounter_nr;
 	else $HTTP_SESSION_VARS['sess_full_en']=$GLOBAL_CONFIG['patient_inpatient_nr_adder']+$encounter_nr;
+*/
+$HTTP_SESSION_VARS['sess_full_en']=$encounter_nr;
 	
 if(empty($encounter_nr)&&!empty($HTTP_SESSION_VARS['sess_en'])){
 	$encounter_nr=$HTTP_SESSION_VARS['sess_en'];
@@ -101,7 +103,7 @@ if($mode=='show')
 	}
 }
 
-$subtitle='';
+$subtitle=$LDMedocs;
 	
 $buffer=str_replace('~tag~',$title.' '.$name_last,$LDNoRecordFor);
 $norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer); 

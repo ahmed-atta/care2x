@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
+* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -261,7 +261,7 @@ if($non_grouped){
 	<input type="button" value="<?php echo $LDSearch ?>" onClick="javascript:openOPSsearch('0')">&nbsp;
  	<p><input type="button" value="<?php echo $LDQuickList ?>" onClick="javascript:openQuicklist('drg_intern')">
  	<p><input type="button" value="<?php echo $LDConvert2IcdOps ?>" onClick="javascript:openRelatedCodes()"><p>
- 	<p><input type="button" value="Create new<?php echo $LDCreateNew ?>" onClick="javascript:checkCreateNew()"><p>
+ 	<p><input type="button" value="<?php echo $LDCreateNew ?>" onClick="javascript:checkCreateNew()"><p>
 	<?php } ?>
 	</td>
   </tr>

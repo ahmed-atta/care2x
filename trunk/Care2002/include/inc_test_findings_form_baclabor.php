@@ -648,6 +648,10 @@ for($n=0;$n<8;$n++)
 	    if($stored_findings['rec_date'] && $stored_findings['rec_date']!='0000-00-00') echo formatDate2Local($stored_findings['rec_date'],$date_format);
 		  else echo formatDate2Local(date('Y-m-d'),$date_format);
 		echo '" onBlur="IsValidDate(this,\''.$date_format.'\')"  onKeyUp="setDate(this,\''.$date_format.'\',\''. $lang.'\')">';
+	?>
+		<a href="javascript:show_calendar('form_test_request.rec_date','<?php echo $date_format ?>')">
+		<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
+	<?php
 	 }
 	 else
 	 {

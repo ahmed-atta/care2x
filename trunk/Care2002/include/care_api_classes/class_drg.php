@@ -131,7 +131,18 @@ class DRG extends Encounter{
 	*/
 	var $tb_diag_codes;
 	var $tb_proc_codes;
-				
+	
+	/**
+	* Default tables. The default table must be existing in your database!
+	*/
+	var $tb_icd_default='care_icd10_en';
+	var $tb_icpm_default='care_ops301_de';
+	/**
+	* Language codes that have corresponding tables
+	*/
+	var $tb_lang_icd='en,de';
+	var $tb_lang_icpm='de';
+	
 	/**
 	* Constructor
 	*/
@@ -141,9 +152,19 @@ class DRG extends Encounter{
 		$this->dept_nr=$dept_nr;
 		$this->coretable=$this->tb_diagnosis;
 		$this->ref_array=$this->fld_diagnosis;
-		$this->tb_diag_codes='care_icd'.$this->icd_version.'_'.$lang; // construct the code source table e.g. "care_icd10_en"
+		# Check if language has a corresponding table. if not use default table
+		if(stristr($this->tb_lang_icd,$lang)){
+			$this->tb_diag_codes='care_icd'.$this->icd_version.'_'.$lang; # construct the code source table e.g. "care_icd10_en"
+		}else{
+			$this->tb_diag_codes=$this->tb_icd_default;
+		}
+		if(stristr($this->tb_lang_icpm,$lang)){
+			$this->tb_proc_codes='care_ops'.$this->ops_version.'_'.$lang; # construct the code source table e.g. "care_icd10_en"
+		}else{
+			$this->tb_proc_codes=$this->tb_icpm_default;
+		}
 		//$this->tb_proc_codes='care_ops'.$this->ops_version.'_'.$lang; // construct the procedure source table e.g. "care_ops302_en"
-		$this->tb_proc_codes='care_ops'.$this->ops_version.'_de'; // construct the procedure source table "care_ops302_de" because it is the only available
+		$this->tb_proc_codes='care_ops'.$this->ops_version.'_de'; # construct the procedure source table "care_ops302_de" because it is the only available
 	}
 	/**
 	* Sets the core object to point to the encounter's diagnosis (care_encounter_diagnosis) table and fields

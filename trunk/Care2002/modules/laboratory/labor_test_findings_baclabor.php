@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
+* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -15,7 +15,6 @@ define('LANG_FILE','konsil.php');
 $local_user='ck_lab_user';
 
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
 require_once($root_path.'global_conf/inc_global_address.php'); 
 require_once($root_path.'include/inc_test_findings_fx_baclabor.php');
 require_once($root_path.'include/inc_test_request_vars_baclabor.php');
@@ -43,9 +42,7 @@ $db_request_table=$subtarget;
 						
 /* Here begins the real work */
 /* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok){	
-	require_once($root_path.'include/inc_date_format_functions.php');
+require_once($root_path.'include/inc_date_format_functions.php');
     /* Check for the patient number = $pn. If available get the patients data, otherwise set edit to 0 */
     if(isset($pn)&&$pn){		
 		include_once($root_path.'include/care_api_classes/class_encounter.php');
@@ -275,10 +272,7 @@ if($dblink_ok){
 						 {
 						    $mode='save'; echo $sql;
 						  }
-  
-}
-else 
- { echo "$LDDbNoLink<br>$sql<br>"; }
+
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -379,8 +373,8 @@ function gethelp(x,s,x1,x2,x3)
 //-->
 </script>
 <script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
 </HEAD>
 

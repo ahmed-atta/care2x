@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
+* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -12,17 +12,27 @@ require($root_path.'include/inc_environment_global.php');
 */
 $lang_tables=array('departments.php');
 define('LANG_FILE','doctors.php');
-if($HTTP_SESSION_VARS['sess_user_origin']=='personell_admin'){
-	$local_user='aufnahme_user';
-	$breakfile=$root_path.'modules/personell_admin/personell_register_show.php'.URL_APPEND.'&target=personell_reg&personell_nr='.$nr;
-}else{
-	$local_user='ck_op_dienstplan_user';
-	if (!empty($HTTP_SESSION_VARS['sess_path_referer'])){
-		$breakfile=$root_path.$HTTP_SESSION_VARS['sess_path_referer'];
-	} else {
-		/* default startpage */
-		$breakfile = $root_path.'op-doku.php'.URL_APPEND;
-	}
+
+switch($HTTP_SESSION_VARS['sess_user_origin'])
+{
+	case 'personell_admin':
+		$local_user='aufnahme_user';
+		$breakfile=$root_path.'modules/personell_admin/personell_register_show.php'.URL_APPEND.'&target=personell_reg&personell_nr='.$nr;
+		break;
+		
+	case 'calendar_opt':
+		define('NO_2LEVEL_CHK',1);
+		$breakfile = $root_path."modules/calendar/calendar-options.php".URL_APPEND."&year=$year&month=$month&day=$day&forceback=1";
+		break;
+		
+	default:
+		$local_user='ck_op_dienstplan_user';
+		if (!empty($HTTP_SESSION_VARS['sess_path_referer'])){
+			$breakfile=$root_path.$HTTP_SESSION_VARS['sess_path_referer'];
+		} else {
+			/* default startpage */
+			$breakfile = $root_path.'op-doku.php'.URL_APPEND;
+		}
 }
 
 require_once($root_path.'include/inc_front_chain_lang.php');
@@ -36,14 +46,14 @@ switch($retpath)
 }
 */
 
-$pday=date(j);
-$pmonth=date(n);
-$pyear=date(Y);
+if(empty($pday)) $pday=date('j');
+if(empty($pmonth)) $pmonth=date('n');
+if(empty($pyear)) $pyear=date('Y');
 $abtarr=array();
 $abtname=array();
-$datum=date("d.m.Y");
+$datum=date('d.m.Y');
 
-if(!$hilitedept)
+/*if(!$hilitedept)
 {
 	if($dept_nr) $hilitedept=$dept_nr;
 	else
@@ -51,7 +61,7 @@ if(!$hilitedept)
 		include($root_path.'include/inc_resolve_dept_dept.php');
 		if($deptOK) $hilitedept=$dept_nr;
 	}
-}
+}*/
 /* Load the department list with oncall doctors */
 require_once($root_path.'include/care_api_classes/class_department.php');
 $dept_obj=new Department;
@@ -61,6 +71,9 @@ switch($target){
 	case 'plist': $title=$LDCreateNursesList;
 					  $fileforward='nursing-or-dienst-personalliste.php'.URL_APPEND.'&retpath='.$retpath;
 					  break;
+	case 'calendar_opt': $title=$LDSelectDept;
+					  $fileforward=$root_path."modules/calendar/calendar-options.php".URL_APPEND."&year=$year&month=$month&day=$day";
+					  break;	
 	default: $title=$LDMakeDutyPlan;
 					  $fileforward='nursing-or-dienstplan-planen.php'.URL_APPEND.'&retpath='.$retpath;
 					  break;

@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
+* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -21,38 +21,39 @@ $keyword=trim($keyword);
 $dbtable='care_admission_patient';
 
 $toggle=0;
+$append=URL_APPEND."&target=$target&noresize=1&user_origin=$user_origin";
 
 switch($target)
 {
   case 'chemlabor': $entry_block_bgcolor="#fff3f3";
                           $entry_border_bgcolor="#ee6666";
 						  $entry_body_bgcolor="#ffffff";
-						  $breakfile="nursing-station-patientdaten-doconsil-chemlabor.php?sid=".$sid."&lang=".$lang."&target=".$target."&noresize=1&user_origin=".$user_origin;
+						  $breakfile="nursing-station-patientdaten-doconsil-chemlabor.php$append";
 						  break;
   case 'baclabor': $entry_block_bgcolor="#fff3f3";
                           $entry_border_bgcolor="#ee6666";
 						  $entry_body_bgcolor="#ffffff";
-						  $breakfile="nursing-station-patientdaten-doconsil-baclabor.php?sid=".$sid."&lang=".$lang."&target=".$target."&noresize=1&user_origin=".$user_origin;
+						  $breakfile="nursing-station-patientdaten-doconsil-baclabor.php$append";
 						  break;
   case 'patho': $entry_block_bgcolor="#cde1ec";
                           $entry_border_bgcolor="#cde1ec";
 						  $entry_body_bgcolor="#ffffff";
-						  $breakfile="nursing-station-patientdaten-doconsil-patho.php?sid=".$sid."&lang=".$lang."&target=".$target."&noresize=1&user_origin=".$user_origin;
+						  $breakfile="nursing-station-patientdaten-doconsil-patho.php$append";
 						  break;
   case 'blood': $entry_block_bgcolor="#99ffcc";
                           $entry_border_bgcolor="#99ffcc";
 						  $entry_body_bgcolor="#ffffff";
-						  $breakfile="nursing-station-patientdaten-doconsil-blood.php?sid=".$sid."&lang=".$lang."&target=".$target."&noresize=1&user_origin=".$user_origin;
+						  $breakfile="nursing-station-patientdaten-doconsil-blood.php$append";
 						  break;
   case 'radio': $entry_block_bgcolor="#efefef";
                           $entry_border_bgcolor="#fcfcfc";
 						  $entry_body_bgcolor="#ffffff";
-						  $breakfile="nursing-station-patientdaten-doconsil-radio.php?sid=".$sid."&lang=".$lang."&target=".$target."&noresize=1&user_origin=".$user_origin;
+						  $breakfile="nursing-station-patientdaten-doconsil-radio.php$append";
 						  break;
   default            : $entry_block_bgcolor="#fff3f3";
                           $entry_border_bgcolor="#ee6666";
 						  $entry_body_bgcolor="#ffffff";
-						  $breakfile="nursing-station-patientdaten-doconsil-baclabor.php?sid=".$sid."&lang=".$lang."&target=".$target."&noresize=1&user_origin=".$user_origin;
+						  $breakfile="nursing-station-patientdaten-doconsil-baclabor.php$append";
 }
 
 $breakfile=$root_path.'modules/nursing/'.$breakfile;
@@ -69,12 +70,12 @@ if(($mode=='search')&&!empty($searchkey)){
 		header("location:".$root_path."modules/nursing/nursing-station-patientdaten-doconsil-".$target.".php".URL_REDIRECT_APPEND."&pn=".$row['encounter_nr']."&edit=1&status=".$status."&target=".$target."&user_origin=".$user_origin."&noresize=1&mode=");
 		exit;
 	}
-
+/*
 	include_once($root_path.'include/care_api_classes/class_globalconfig.php');
 	$GLOBAL_CONFIG=array();
 	$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 	$glob_obj->getConfig('patient_%');	
-	
+*/	
 }else{ 
   $mode='';
 }

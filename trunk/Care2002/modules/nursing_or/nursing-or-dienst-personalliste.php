@@ -3,14 +3,14 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
+* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-$lang_tables=array('or.php');
+$lang_tables=array('or.php','departments.php');
 define('LANG_FILE','doctors.php');
 if($HTTP_SESSION_VARS['sess_user_origin']=='personell_admin'){
 	$local_user='aufnahme_user';
@@ -156,7 +156,7 @@ function deleteItem(nr){
 <STRONG><?php echo $LDNursesList ?> <font color="<?php echo $cfg['top_txtcolor']; ?>">::
 <?php 
 $buf=$dept_obj->LDvar();
-if(isset($$buf)&&!empty($$buf)) echo strtoupper($buf);
+if(isset($$buf)&&!empty($$buf)) echo strtoupper($$buf);
 	else echo strtoupper($dept_obj->FormalName()); 
 ?></font>
 </STRONG></FONT></td>

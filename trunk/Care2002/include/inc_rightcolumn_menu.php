@@ -25,10 +25,9 @@ $url_news="editor-pass.php".URL_APPEND;
 $url_jscredits="javascript:openCreditsWindow()";
 
 $TP_com_img_path=$root_path.'gui/img/common';
-// Load the template
-require($root_path.'include/care_api_classes/class_template.php');
-$tp_obj=new Template($root_path,$template_path,$template_theme);
-$tp=&$tp_obj->load('tp_rightcolumn_menu.htm');
-// Output display
+
+# Load the template
+$tp=&$TP_obj->load('tp_rightcolumn_menu.htm');
+# Output display
 eval ("echo $tp;");
 ?>

@@ -24,25 +24,40 @@ if(empty($maskBorderColor)) $maskBorderColor='#333399';
 <?php if (isset($pass)&&($pass=='check')&&($passtag)) 
 {
 
-print '<FONT  COLOR="red"  SIZE=+2  FACE="Arial"><STRONG>';
-
 switch($passtag)
 {
-case 1:$errbuf="$errbuf $LDWrongEntry"; print '<img '.createLDImgSrc($root_path,'cat-fe.gif','0','left').'>';break;
-case 2:$errbuf="$errbuf $LDNoAuth"; print '<img '.createLDImgSrc($root_path,'cat-noacc.gif','0','left').'>';break;
-default:$errbuf="$errbuf $LDAuthLocked"; print '<img '.createLDImgSrc($root_path,'cat-sperr.gif','0','left').'>'; 
+	case 1:$errbuf="$errbuf $LDWrongEntry"; 
+				$err_msg="$LDWrongEntry<br><font size=2 color=\"#000000\">$LDPlsTryAgain</font>";
+				//echo '<img '.createLDImgSrc($root_path,'cat-fe.gif','0','left').'>';
+				break;
+	case 2:$errbuf="$errbuf $LDNoAuth"; 
+				$err_msg="$LDNoAuth<br><font size=2 color=\"#000000\">$LDPlsContactEDP</font>";
+				//echo '<img '.createLDImgSrc($root_path,'cat-noacc.gif','0','left').'>';
+				break;
+	default:$errbuf="$errbuf $LDAuthLocked"; 
+				$err_msg="$LDAuthLocked<br><font size=2 color=\"#000000\">$LDPlsContactEDP</font>";
+				//echo '<img '.createLDImgSrc($root_path,'cat-sperr.gif','0','left').'>'; 
 }
-
-print '</STRONG></FONT><P>';
 
 logentry($userid,"PW ($keyword)","$REMOTE_ADDR $errbuf",$thisfile,$fileforward);
 
+?>
+
+<table border=0>
+  <tr>
+    <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0') ?>></td>
+    <td align="center"><FONT  COLOR="#cc0000"  SIZE=+2  FACE="Arial"><STRONG><?php echo $err_msg ?></STRONG></FONT></td>
+  </tr>
+</table>
+
+<?php
 }
 ?>
 
+
 <table  border=0 cellpadding=0 cellspacing=0>
 <tr>
-<?php if(!$passtag) print'
+<?php if(!$passtag) echo '
 <td>
 
 <img '.createMascot($root_path,'mascot3_r.gif','0').'>
@@ -58,7 +73,7 @@ logentry($userid,"PW ($keyword)","$REMOTE_ADDR $errbuf",$thisfile,$fileforward);
 <tr>
 <td>
 <p>
-<FORM action="<?php print $thisfile; ?>" method="post" name="passwindow" onSubmit="return pruf(this);">
+<FORM action="<?php echo $thisfile; ?>" method="post" name="passwindow" onSubmit="return pruf(this);">
 <font color=maroon size=3>
 <b><?php echo $LDPwNeeded ?>!</b></font><p>
 <font face="Arial,Verdana"  color="#000000" size=-1>
@@ -74,11 +89,11 @@ if($not_trans_id) {
 	echo '<input type="hidden" name="sid" value="'.$sid.'">';
 } ?>
 <input type="hidden" name="lang" value="<?php echo $lang ?>">
-<input type="hidden" name="mode" value="<?php print $mode; ?>">
+<input type="hidden" name="mode" value="<?php echo $mode; ?>">
 <input type="hidden" name="target" value="<?php echo $target ?>">
 <input type="hidden" name="subtarget" value="<?php echo $subtarget ?>">
 <input type="hidden" name="user_origin" value="<?php echo $user_origin ?>">
-<input type="hidden" name="title" value="<?php print $title; ?>">
+<input type="hidden" name="title" value="<?php echo $title; ?>">
 <?php if(!isset($minimal) || !$minimal) { ?>
 <input type="hidden" name="dept" value="<?php echo $dept ?>">
 <input type="hidden" name="dept_nr" value="<?php echo $dept_nr ?>">
@@ -94,7 +109,7 @@ if($not_trans_id) {
 <?php if(isset($c_flag)&&$c_flag) { ?>
 <input type="hidden" name="cmonth" value="<?php echo $cmonth ?>">
 <input type="hidden" name="cyear" value="<?php echo $cyear ?>">
-<input type="hidden" name="cday" value="<?php print $cday; ?>">
+<input type="hidden" name="cday" value="<?php echo $cday; ?>">
 <?php } ?>
 </font></nobr><p>
 <INPUT type="image"  <?php echo createLDImgSrc($root_path,'continue.gif','0') ?>>&nbsp;&nbsp;&nbsp;&nbsp;

@@ -3,15 +3,15 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
+* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","help.php");
-define("NO_CHAIN",1);
+define('LANG_FILE','help.php');
+define('NO_CHAIN',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 ?>
 <html>
@@ -24,18 +24,18 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 <body onLoad="if (window.focus) window.focus()">
 
 <?php 
-   if($helpidx=="") 
+   if($helpidx=='') 
      {
-	   if(file_exists("../help/".$lang."/help_".$lang."_main.php")) include("../help/".$lang."/help_".$lang."_main.php");
-	     else include("../help/en/help_en_main.php");  
+	   if(file_exists('../help/'.$lang.'/help_'.$lang.'_main.php')) include('../help/'.$lang.'/help_'.$lang.'_main.php');
+	     else include('../help/en/help_en_main.php');  
      }
      else
 	 {
-		if(file_exists("../help/".$lang."/help_".$lang."_".$helpidx)) include("../help/".$lang."/help_".$lang."_".$helpidx);
+		if(file_exists('../help/'.$lang.'/help_'.$lang.'_'.$helpidx)) include('../help/'.$lang.'/help_'.$lang.'_'.$helpidx);
 		  else 
 		   {
-	           if(file_exists("../help/".$lang."/help_".$lang."_main.php")) include("../help/".$lang."/help_".$lang."_main.php");
-	             else include("../help/en/help_en_main.php");  
+	           if(file_exists('../help/'.$lang.'/help_'.$lang.'_main.php')) include('../help/'.$lang.'/help_'.$lang.'_main.php');
+	             else include('../help/en/help_en_main.php');  
 		   }
       }
 ?>

@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
+* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -42,9 +42,6 @@ if(isset($mode)&&$mode=='save'){
 	}
 
 }
-
-require($root_path.'include/care_api_classes/class_template.php');
-$tp_obj= new Template($root_path);
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
@@ -60,9 +57,18 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <script language="javascript" src="<?php echo $root_path; ?>js/check_menu_item_same_item.js">
 </script>
 <?php endif ?>
+<script language="javascript">
+<!-- Script Begin
+function reloadParent() {
+	if(confirm("The browser needs to be refreshed to see the changes.\n Do you like to refresh it now?")) window.parent.location.reload();
+
+}
+//  Script End -->
+</script>
 </HEAD>
 
-<BODY topmargin=0 leftmargin=0 marginheight=0 marginwidth=0 bgcolor=<?php echo $cfg['bot_bgcolor'];?>>
+<BODY topmargin=0 leftmargin=0 marginheight=0 marginwidth=0 bgcolor=<?php echo $cfg['bot_bgcolor']; ?> 
+<?php if(isset($saved)&&$saved) echo 'onLoad="reloadParent();"'; ?>>
 
 
 <table width=100% border=0 cellspacing=0>
@@ -97,7 +103,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
   
 <?php
 
-$dirs=&$tp_obj->getTemplateList();
+$dirs=&$TP_obj->getTemplateList();
 
 while(list($x,$v)=each($dirs)){
 ?>

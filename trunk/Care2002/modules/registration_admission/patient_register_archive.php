@@ -3,7 +3,7 @@
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
+* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -114,7 +114,7 @@ if (isset($mode) && ($mode=='search'))
 
 							if(isset($date_birth)&&$date_birth)
 							  {
-							    $date_birth=formatDate2STD($date_birth,$date_format);
+							    $date_birth=@formatDate2STD($date_birth,$date_format);
 								
 								if($s2) $s2.=" AND date_birth=\"$date_birth\""; else $s2.=" date_birth=\"$date_birth\"";
 							  }

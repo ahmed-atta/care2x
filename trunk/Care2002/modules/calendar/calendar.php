@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
+* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -19,16 +19,15 @@ require($root_path.'include/inc_2level_reset.php');
 
 require_once($root_path.'include/inc_config_color.php');
 
-if($retpath=="home") $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
-	else $breakfile=$root_path."main/spediens.php".URL_APPEND;
-	
+if($retpath=='home') $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
+	else $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
+	 
 $datum=strftime("%d.%m.%Y");
 $zeit=strftime("%H.%M");
 $toggler=0;
-//$tage=array("Mon","Die","Mit","Don","Fre","Sam","Son");
 
-if($pmonth=="") $pmonth=date("n");
-if($pyear=="") $pyear=date("Y");
+if($pmonth=='') $pmonth=date('n');
+if($pyear=='') $pyear=date('Y');
 
 function getmaxdays($mon,$yr)
 {
@@ -113,7 +112,7 @@ function optionwin(d,m,y)
 {
 	if (!d) d="";
 	urlholder="calendar-options.php?sid=<?php echo "$sid&lang=$lang" ?>&day="+d+"&month="+m+"&year="+y;
-	optwin=window.open(urlholder,"optwin","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
+	optwin=window.open(urlholder,"optwin","width=800,height=700,menubar=no,resizable=yes,scrollbars=yes");
 }
 
 // -->

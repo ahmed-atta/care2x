@@ -24,29 +24,32 @@ function printLabInterns($param)
 
 }
 
-function printCheckBox($param)
+function printCheckBox($param,$printout=true)
 {
    	global $stored_request, $root_path;
 	
-    if($stored_request[$param]==1) echo '<img '.createComIcon($root_path,'chkbox_chk.gif','0','absmiddle').'>'; 
-	  else echo '<img '.createComIcon($root_path,'chkbox_blk.gif','0','absmiddle').'>';
+    if($stored_request[$param]==1) $buffer= '<img '.createComIcon($root_path,'chkbox_chk.gif','0','absmiddle').'>'; 
+	  else $buffer= '<img '.createComIcon($root_path,'chkbox_blk.gif','0','absmiddle').'>';
+	if($printout) echo $buffer;
+		else return $buffer;
 }
 
-function printRadioButton($param,$value)
+function printRadioButton($param,$value,$printout=true)
 {
    	global $stored_request, $root_path;
-	
-	$noblank=1;
 	
     if($value ) 
 	{
-	   if($stored_request[$param]) echo '<img '.createComIcon($root_path,'radio_chk.gif','0','absmiddle').'>'; 
-	   else $noblank=0;
+	   if($stored_request[$param]) $buffer= '<img '.createComIcon($root_path,'radio_chk.gif','0','absmiddle').'>'; 
+	   else $buffer='';
 	}
-	  elseif(!$stored_request[$param]) echo '<img '.createComIcon($root_path,'radio_chk.gif','0','absmiddle').'>'; 
-	    else $noblank=0;
+	  elseif(!$stored_request[$param]) $buffer= '<img '.createComIcon($root_path,'radio_chk.gif','0','absmiddle').'>'; 
+	    else $buffer='';
 	 
-	if(!$noblank) echo '<img '.createComIcon($root_path,'radio_blk.gif','0','absmiddle').'>'; 
+	if(empty($buffer)) $buffer= '<img '.createComIcon($root_path,'radio_blk.gif','0','absmiddle').'>';
+	
+	if($printout) echo $buffer;
+		else return $buffer;
 
 }
 

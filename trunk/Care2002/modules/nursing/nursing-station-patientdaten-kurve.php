@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
+* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -11,7 +11,9 @@ require($root_path.'include/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 define('LANG_FILE','nursing.php');
-$local_user='ck_pflege_user';
+
+require('./include/inc_admit_station_bridge.php');
+
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 if($edit&&!$HTTP_COOKIE_VARS[$local_user.$sid]) {header("Location:../language/$lang/lang_".$lang."_invalid-access-warning.php"); exit;}; 

@@ -10,10 +10,6 @@ if(file_exists($root_path.'language/'.$lang.'/'.$lang.'_copyrite.php')) include(
 ?>
 
        </span>
-     </td><td width="77">
-       <a href="http://www.opensource.org"><img 
-       <?php echo createComIcon($root_path,'osilogo.gif','0'); ?> alt="Open Source 
-       Initiative Homepage"></a>   
      </td>
    <tr>
   </table>

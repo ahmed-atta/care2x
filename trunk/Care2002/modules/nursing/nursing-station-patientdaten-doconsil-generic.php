@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
+* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -32,7 +32,6 @@ else
 }
 
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
 $thisfile=basename(__FILE__);
 
@@ -269,8 +268,8 @@ function printOut()
 //-->
 </script>
 <script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 </HEAD>
 
 <BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> 
@@ -419,6 +418,9 @@ elseif(!$read_form && !$no_proc_assist)
 		                         else echo formatDate2Local(date('Y-m-d'),$date_format); 
 					?>"
 		   size=10 maxlength=10 onBlur="IsValidDate(this,'<?php echo $date_format ?>')"  onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+		<a href="javascript:show_calendar('form_test_request.send_date','<?php echo $date_format ?>')">
+ 		<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
+
   </div></td>
 			<td align="right"><div class=fva2_ml10><font color="#000099">
 		<?php echo $LDDoctor ?>

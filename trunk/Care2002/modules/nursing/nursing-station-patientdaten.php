@@ -4,6 +4,7 @@ require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','nursing.php');
 define('NO_2LEVEL_CHK',1);
+
 require_once($root_path.'include/inc_front_chain_lang.php');
 /**
 * If the script call comes from the op module replace the user cookie with the user info from op module
@@ -12,15 +13,17 @@ if(isset($op_shortcut)&&$op_shortcut){
 	$HTTP_COOKIE_VARS['ck_pflege_user'.$sid]=$op_shortcut;
 	setcookie('ck_pflege_user'.$sid,$op_shortcut,0,'/');
 	$edit=1;
-}elseif(!$HTTP_COOKIE_VARS['ck_pflege_user'.$sid]){
-	if($edit) {header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 
 }elseif($HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]){
 	setcookie('ck_pflege_user'.$sid,$HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid],0,'/');
 	$edit=1;
+}elseif($HTTP_COOKIE_VARS['aufnahme_user'.$sid]){
+	setcookie('ck_pflege_user'.$sid,$HTTP_COOKIE_VARS['aufnahme_user'.$sid],0,'/');
+	$edit=1;
+}elseif(!$HTTP_COOKIE_VARS['ck_pflege_user'.$sid]){
+	if($edit) {header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 
 }
 /* Load the visual signalling defined constants */
 require_once($root_path.'include/inc_visual_signalling_fx.php');
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
 require_once($root_path.'global_conf/inc_remoteservers_conf.php');
 
 /* Retrieve the SIGNAL_COLOR_LEVEL_ZERO = for convenience purposes */
@@ -65,7 +68,7 @@ if($dblink_ok)
 				$result=&$enc_obj->encounter;		
 				$rows=$enc_obj->record_count;	
 
-					if($edit&&$result['is_discharged']) $edit=0;
+					if($result['is_discharged']) $edit=0;
 					
 					$event_table= 'care_encounter_event_signaller';
 					

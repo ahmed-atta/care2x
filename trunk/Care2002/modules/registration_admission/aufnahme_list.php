@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
+* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -52,6 +52,10 @@ if (isset($mode) && ($mode=='search'))
 
 	 $where='';
 	 $orwhere='';
+	 
+	 if(isset($HTTP_POST_VARS['date_start'])&&!empty($HTTP_POST_VARS['date_start'])) $HTTP_POST_VARS['date_start']=@formatDate2STD($HTTP_POST_VARS['date_start'],$date_format);
+	 if(isset($HTTP_POST_VARS['date_end'])&&!empty($HTTP_POST_VARS['date_end'])) $HTTP_POST_VARS['date_end']=@formatDate2STD($HTTP_POST_VARS['date_end'],$date_format);
+	 if(isset($HTTP_POST_VARS['date_birth'])&&!empty($HTTP_POST_VARS['date_birth'])) $HTTP_POST_VARS['date_birth']=@formatDate2STD($HTTP_POST_VARS['date_birth'],$date_format);
 
 	$parray=array('name_last','name_first','date_birth','sex');
 	$tab='p';
@@ -108,10 +112,10 @@ if (isset($mode) && ($mode=='search'))
 			
 			if(AUTOSHOW_ONERESULT){					
 	        	if($rows==1){
-		      	 //// If result is single item, display the data immediately 
-			   	$result=$ergebnis->FetchRow();
-			   	header("Location:aufnahme_daten_zeigen.php".URL_REDIRECT_APPEND."&target=archiv&origin=archiv&encounter_nr=".$result['encounter_nr']);
-			   	exit;
+		      		# If result is single item, display the data immediately 
+				   	$result=$ergebnis->FetchRow();
+				   	header("Location:aufnahme_daten_zeigen.php".URL_REDIRECT_APPEND."&target=archiv&origin=archiv&encounter_nr=".$result['encounter_nr']);
+				   	exit;
 	        	}
 			}
 		}else { echo $sql; $rows=0;}

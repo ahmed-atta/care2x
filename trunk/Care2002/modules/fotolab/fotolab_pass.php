@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
+* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -25,7 +25,7 @@ $title=$LDFotolab;
 							
 $thisfile="fotolab_pass.php";
 
-$breakfile="spediens.php?sid=".$sid."&lang=".$lang;
+$breakfile=$root_path."main/spediens.php".URL_APPEND;
 
 $lognote="$LDFotolab $title ok";
 

@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
+* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -32,7 +32,6 @@ else
 }
 
 require_once($root_path.'include/inc_front_chain_lang.php'); ///* invoke the script lock*/
-require_once($root_path.'include/inc_config_color.php'); ///* load color preferences*/
 require_once($root_path.'include/inc_diagnostics_report_fx.php');
 
 $thisfile='labor_test_request_admin_blood.php';
@@ -221,8 +220,8 @@ function printOut()
 //-->
 </script>
 <script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 </HEAD>
 
 <BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> 
@@ -562,9 +561,15 @@ if($edit  || $read_form)
            <td><input type="text" name="x_test_2_count" size=5 maxlength=5 <?php  if($stored_request['x_test_2_count']) echo 'value="'.$stored_request['x_test_2_count'].'"'; ?>></td>
            <td><input type="text" name="x_test_2_price" size=7 maxlength=7 <?php  echo 'value="'.$stored_request['x_test_2_price'].'"'; ?>></td>
            <td>&nbsp;<font size=1 face="arial"><?php echo $LDBookedOn ?></td>
-           <td><input type="text" name="mainlog_date" size=8 maxlength=10  value="<?php  if($stored_request['mainlog_date']!="0000-00-00") echo formatDate2Local($stored_request['mainlog_date'],$date_format); ?>"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')"  onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"></td>
+           <td><input type="text" name="mainlog_date" size=8 maxlength=10  value="<?php  if($stored_request['mainlog_date']!="0000-00-00") echo formatDate2Local($stored_request['mainlog_date'],$date_format); ?>"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')"  onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+		   <a href="javascript:show_calendar('form_test_request.mainlog_date','<?php echo $date_format ?>')">
+			<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a><font size=1 face="arial">
+		   </td>
            <td>&nbsp;<font size=1 face="arial"><?php echo $LDDate ?></td>
-           <td><input type="text" name="lab_date" size=8 maxlength=10  value="<?php  if($stored_request['lab_date']!="0000-00-00") echo formatDate2Local($stored_request['lab_date'],$date_format); ?>"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')"   onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"></td>
+           <td><input type="text" name="lab_date" size=8 maxlength=10  value="<?php  if($stored_request['lab_date']!="0000-00-00") echo formatDate2Local($stored_request['lab_date'],$date_format); ?>"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')"   onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+		   <a href="javascript:show_calendar('form_test_request.lab_date','<?php echo $date_format ?>')">
+			<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
+		   </td>
          </tr>
          <tr bgcolor="<?php echo $bgc1 ?>">
            <td><input type="text" name="x_test_3_code" size=4 maxlength=4 <?php  if($stored_request['x_test_3_code']) echo 'value="'.$stored_request['x_test_3_code'].'"'; ?>></td>

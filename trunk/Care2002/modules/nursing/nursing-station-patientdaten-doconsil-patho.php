@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
+* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -11,9 +11,6 @@ require($root_path.'include/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 define('LANG_FILE','konsil.php');
-
-/* Globalize the variables */
-
 
 /* We need to differentiate from where the user is coming: 
 *  $user_origin != lab ;  from patient charts folder
@@ -32,7 +29,6 @@ else
 }
 
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
 $thisfile='nursing-station-patientdaten-doconsil-patho.php';
 
@@ -304,8 +300,8 @@ function printOut()
 //-->
 </script>
 <script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 <?php
 require($root_path.'include/inc_js_gethelp.php');
 require($root_path.'include/inc_css_a_hilitebu.php');
@@ -353,11 +349,7 @@ if($user_origin=='lab')
  <ul>
 
 <?php
-if($edit)
-{
-?>
-<form name="form_test_request" method="post" action="<?php echo $thisfile ?>" onSubmit="return chkForm(this)">
-<?php
+if($edit){
 
 /* If in edit mode display the control buttons */
 
@@ -399,7 +391,9 @@ elseif(!$read_form && !$no_proc_assist)
         ?>
      </td> 
 		<td class=fva2_ml10><div class="fva2_ml10">
-		
+
+		<form name="form_test_request" method="post" action="<?php echo $thisfile ?>" onSubmit="return chkForm(this)">
+
 		<table border=0  cellpadding=0 cellspacing=0 width=100%>
     <tr>
       <td rowspan=8 align="left" valign="top"><font size=5 color="#0000ff"><b><?php echo $formtitle ?></b></font><br>
@@ -547,6 +541,9 @@ elseif(!$read_form && !$no_proc_assist)
 		<td ><div class=fva2_ml10><font color="#000099">
 		 <?php echo $LDOpDate ?>:
 		<input type="text" name="op_date"  value="<?php  if($mode=="edit") echo formatDate2Local($stored_request['op_date'],$date_format); else echo formatDate2Local(date('Y-m-d'),$date_format) ?>" size=10 maxlength=10 onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+	  	<a href="javascript:show_calendar('form_test_request.op_date','<?php echo $date_format ?>')">
+ 		<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
+
   </div></td>
 			<td align="right"><div class=fva2_ml10><font color="#000099">
 		<?php echo "$LDDoctor/$LDDept" ?>:
@@ -568,9 +565,7 @@ require($root_path.'include/inc_test_request_controls.php');
 require($root_path.'include/inc_test_request_hiddenvars.php');
 
 ?>
-
 </form>
-
 <?php
 }
 ?>

@@ -87,7 +87,7 @@ if($multiple_save){
 		$DRG_obj->setDataArray($data);
 		# Now insert the data
 		$DRG_obj->insertDataFromInternalArray();
-		//echo $DRG_obj->getLastQuery()."<p>";
+		echo $DRG_obj->getLastQuery()."<p>";
 
 		$data['qlist_type']=$qlist_type;
 		$data['code_type']=$qlist_type;
@@ -99,7 +99,7 @@ if($multiple_save){
 		# Update related code table
 		$DRG_obj->addDRGRelatedCode($data);
 		//echo $DRG_obj->getLastQuery();
-		//echo $DRG_obj->getLastQuery()."<br>";
+		echo $DRG_obj->getLastQuery()."<br>";
 	}
 	$saveok=1;
 }

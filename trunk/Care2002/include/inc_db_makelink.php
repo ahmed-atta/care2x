@@ -10,7 +10,7 @@ if (eregi('inc_db_makelink.php',$PHP_SELF)) die('<meta http-equiv="refresh" cont
 /*------end------*/
 
 if(!isset($root_path)) $root_path='../'; // default language table root path is "../"
-if(!isset($lang)) include('chklang.php');
+if(!isset($lang)) include($root_path.'chklang.php');
 //if(!isset($dbtype) || empty($dbtype)) $dbtype='mysql';
 
 /*********************************************************
@@ -18,8 +18,6 @@ if(!isset($lang)) include('chklang.php');
 *    
 *	 DO NOT EDIT 
 *  	
-*   the variable $DBLink_OK will be tested in the scripts to determine
-*	whether the database is available or not
 ***********************************************************/
 /**
 *   :::::NOTE:::::
@@ -68,7 +66,7 @@ $dblink_ok = $db -> Connect($dbhost,$dbusername,$dbpassword,$dbname);
 
 /* Establish a link */
 // Native mySQL connection
-// Temporary active for the transition phase from 1.0.04 to 1.0.04
+// Temporary active for the transition phase from 1.0.03 to 1.0.04
 // this will be deactivated or totally removed in later versions
 if ($link=mysql_connect($dbhost,$dbusername,$dbpassword)){
 	if(mysql_select_db($dbname,$link)){	

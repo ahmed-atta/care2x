@@ -10,6 +10,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 //define('NO_CHAIN',1);
+define('LANG_FILE','billing.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
@@ -25,7 +26,9 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 	}
 
 $breakfile='billingmenu.php'.URL_APPEND;
-	
+# Extract the language variable
+extract($TXT);
+
 ?>
 
 <html>
@@ -57,43 +60,31 @@ function submitform()
       <center>
       <table cellSpacing="1" cellPadding="3" width="450" bgColor="#999999" border="0" height="138">
 <?php
-	echo "<tr bgColor=\"#eeeeee\">";
-	echo "<td align=\"left\" height=\"73\" width=\"7666\" colspan=\"6\"><font size=\"5\" color=\"#FF0000\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-	if($service=='LT')echo "Laboratory Test Items";?><?php if($service=='HS')echo "Hospital Service Items";
-	echo "<p><font color=\"#800000\" size=\"4\">";
+
+	if($service=='LT') $TP_title= $LabTestItems;
+		elseif($service=='HS') $TP_title=$HospitalServiceItems;
 	
-	echo "</font></td>";
-	echo "<tr bgColor=\"#eeeeee\">";
-	
-	echo "<th height=\"7\" width=\"826\" align=\"center\" bgcolor=\"#CCCCCC\">Test code</th>";
-	echo "<th align=\"center\" height=\"7\" width=\"1014\" bgcolor=\"#CCCCCC\">Test Name&nbsp;</th>";
-	echo "<th height=\"7\" width=\"643\" align=\"center\" bgcolor=\"#CCCCCC\">Cost per unit</th>";
-	echo "<th height=\"7\" width=\"484\" align=\"center\" valign=\"middle\" bgcolor=\"#CCCCCC\">Discount</th>";
-	//echo "<th height=\"7\" align=\"center\" valign=\"middle\" bgcolor=\"#CCCCCC\"></th>";
+	$TP_head=&$TP_obj->load('ecombill/tp_edit_head.htm');
+	eval("echo $TP_head;");
+	# Load the template for items
+	$TP_item=&$TP_obj->load('ecombill/tp_edit_item.htm');
+	# Load the template for spacer
+	$TP_spacer=&$TP_obj->load('ecombill/tp_edit_spacer.htm');
+
 	for($cnt=0;$cnt<$cntLT;$cnt++)
 	{
 		$itemdetails="";
 		$result=$resultqryLT->FetchRow();
-		echo "</tr>";
-		echo "<tr bgColor=\"#eeeeee\">";
-		echo "<td height=\"7\" width=\"846\" align=\"center\">".$result['item_code'];
-		echo "</td>";
-		echo "<td align=\"center\" height=\"7\" width=\"1014\">";
-		echo "<input tupe=\"text\" name=\"itemnm.$cnt\" size=\"15\" value=\"".$result['item_description']."\">";
-		echo "</td>";		
-		echo "<td height=\"7\" width=\"623\" align=\"center\">";
-		echo "<input tupe=\"text\" name=\"itemcs.$cnt\" size=\"7\" value=\"".$result['item_unit_cost']."\">";
-		echo "</td>";
-		echo "<td height=\"7\" width=\"484\" align=\"center\" valign=\"middle\">";
-		echo "<input tupe=\"text\" name=\"itemdc.$cnt\" size=\"3\" value=\"".$result['item_discount_max_allowed']."\">";
-		//echo "</td>";
-		//echo "<td align=\"center\" height=\"7\" width=\"133\"><input type=\"button\" name=\"selectitem.$cnt\" value=\"EDIT\"></td>";
-		//echo "</tr>";		
+		$TP_code=$result['item_code'];
+		$TP_description=$result['item_description'];
+		$TP_unit_cost=$result['item_unit_cost'];
+		$TP_discount_max=$result['item_discount_max_allowed'];
+		
+		eval("echo $TP_item;");
+		
 		if($cnt != ($cntLT-1))
 		{
-			echo "<tr bgColor=\"#dddddd\" height=\"1\">";
-			echo "<td height=\"5\" width=\"7666\" colspan=\"6\"><img height=\"1\" src=\"pics/hor_bar.bmp\" width=\"5\"></td>";
-			echo "</tr>";
+			eval("echo $TP_spacer;");
 		}
 		$itemcd=$result['item_code'];
 		$itemcd1=$itemcd1.$itemcd;

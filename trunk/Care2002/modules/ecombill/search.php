@@ -138,15 +138,9 @@ if($mode=='search'){
     <td><font face=arial size=2 color="#ffffff"><b><?php echo $LDOptions; ?></td>
 	</tr>
 <?php
-/*				for($i=0;$i<sizeof($fieldname);$i++) {
-						echo'
-						<td><font face=arial size=2 color="#ffffff"><b>'.$fieldname[$i].'</b></td>';
-		
-					}*/					
-
 					while($zeile=$ergebnis->FetchRow())
 					{
-						switch ($zeile['encounter_class_nr'])
+/*						switch ($zeile['encounter_class_nr'])
 						{
 						    case '1': $full_en = ($zeile['encounter_nr'] + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
 							            break;
@@ -154,7 +148,8 @@ if($mode=='search'){
 										break;
 						    default: $full_en = ($zeile['encounter_nr'] + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
 						}						
-						
+*/						
+						$full_en=$zeile['encounter_nr'];
 						echo "
 							<tr bgcolor=";
 						if($toggle) { echo "#efefef>"; $toggle=0;} else {echo "#ffffff>"; $toggle=1;};
@@ -181,7 +176,7 @@ if($mode=='search'){
 							
                        if(!file_exists($root_path.'cache/barcodes/en_'.$full_en.'.png'))
 	      		       {
-			               echo "<img src='".$root_path."classes/barcode/image.php?code=".$full_en."&style=68&type=I25&width=145&height=50&xres=2&font=5&label=2&form_file=en' border=0 width=0 height=0>";
+			               echo "<img src='".$root_path."classes/barcode/image.php?code=".$full_en."&style=68&type=I25&width=180&height=50&xres=2&font=5&label=2&form_file=en' border=0 width=0 height=0>";
 		               }
 						
 						echo '</td></tr>';

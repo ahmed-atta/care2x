@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
+* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -20,7 +20,7 @@ $allowedarea=&$allow_area['cafenews'];
 
 $fileforward=$HTTP_SESSION_VARS['sess_file_editor'].URL_REDIRECT_APPEND;
 
-$breakfile=$HTTP_SESSION_VARS['sess_file_break'].URL_APPEND;
+$breakfile='cafenews.php'.URL_APPEND;
 
 $title= $HTTP_SESSION_VARS['sess_title']; 
 

@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
+* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -67,10 +67,10 @@ if($cfg['dhtml'])
  {
  switch($target)
 {
-	case 'entry':$buf=$LDPatient.' :: '.$LDRegistration; break;
-	case 'search':$buf=$LDPatient.' :: '.$LDSearch; break;
-	case 'archiv':$buf=$LDPatient.' :: '.$LDArchive; break;
-	default: $target="entry";$buf=$LDPatient.' :: '.$LDRegistration;
+	case 'entry':$buf=$LDPerson.' :: '.$LDRegistration; break;
+	case 'search':$buf=$LDPerson.' :: '.$LDSearch; break;
+	case 'archiv':$buf=$LDPerson.' :: '.$LDArchive; break;
+	default: $target='entry';$buf=$LDPerson.' :: '.$LDRegistration;
 }
 
 echo '
@@ -87,7 +87,7 @@ echo '
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
 <tr>
 <td colspan=3><?php if($target=="entry") echo '<img '.createLDImgSrc($root_path,'register_green.gif','0').' alt="'.$LDAdmit.'">';
-								else{ echo'<a href="patient_register_pass.php?sid='.$sid.'&target=entry&lang='.$lang.'"><img '.createLDImgSrc($root_path,'ein-gray.gif','0').' alt="'.$LDAdmit.'"'; if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';}
+								else{ echo'<a href="patient_register_pass.php?sid='.$sid.'&target=entry&lang='.$lang.'"><img '.createLDImgSrc($root_path,'register_gray.gif','0').' alt="'.$LDAdmit.'"'; if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';}
 							if($target=="search") echo '<img '.createLDImgSrc($root_path,'search_green.gif','0').' alt="'.$LDSearch.'">';
 								else{ echo '<a href="patient_register_pass.php?sid='.$sid.'&target=search&lang='.$lang.'"><img '.createLDImgSrc($root_path,'such-gray.gif','0').' alt="'.$LDSearch.'" ';if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';}
 							if($target=="archiv") echo '<img '.createLDImgSrc($root_path,'archive_green.gif','0').'  alt="'.$LDArchive.'">';

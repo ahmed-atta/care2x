@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
+* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -19,32 +19,47 @@ if(!isset($mode)){
 
 if($lang=='de') $icdlang=$lang;
 	else $icdlang='en';
-
+	
+$lang_tables=array('drg.php');
 require('./include/init_show.php');
 
+$m_sql="SELECT d.*, c.description, pr.description AS parent_desc,
+			cat.LD_var AS cat_LD_var, 
+			cat.LD_var_short_code AS cat_LD_var_short_code, 
+			cat.short_code AS cat_short_code, 
+			cat.name AS cat_name,
+			loc.LD_var AS loc_LD_var, 
+			loc.LD_var_short_code AS loc_LD_var_short_code, 
+			loc.short_code AS loc_short_code,
+			loc.name AS loc_name
+		FROM   ( care_person AS p , care_encounter AS e, care_encounter_diagnosis AS d, care_icd10_$icdlang AS c )
+			LEFT JOIN care_icd10_$icdlang AS pr ON d.code_parent=pr.diagnosis_code
+			LEFT JOIN care_category_diagnosis AS cat ON d.category_nr=cat.nr
+			LEFT JOIN care_type_localization AS loc ON d.localization=loc.nr";
+
 if($parent_admit){
-$sql="SELECT d.*, c.description FROM   care_person AS p , care_encounter AS e, care_encounter_diagnosis AS d, care_icd10_$icdlang AS c
-         WHERE p.pid='".$HTTP_SESSION_VARS['sess_pid']."' 
+
+	$sql=$m_sql." WHERE p.pid='".$HTTP_SESSION_VARS['sess_pid']."' 
 		 	AND p.pid=e.pid 
 		 	AND e.encounter_nr='".$HTTP_SESSION_VARS['sess_en']."'
 			AND e.encounter_nr=d.encounter_nr
 		 	AND d.code=c.diagnosis_code
 		 ORDER BY d.modify_time DESC";
-/*$sql="SELECT d.*, c.description FROM care_person AS p ,care_encounter AS e, care_encounter_diagnosis AS d, care_icd10_$icdlang AS c 
-         WHERE  p.pid='".$HTTP_SESSION_VARS['sess_pid']."' AND p.pid=e.pid AND e.encounter_nr=d.encounter_nr AND d.code=c.diagnosis_code";
-*/
 }else{
-$sql="SELECT d.*, c.description FROM care_person AS p ,care_encounter AS e, care_encounter_diagnosis AS d, care_icd10_$icdlang AS c 
-         WHERE  p.pid='".$HTTP_SESSION_VARS['sess_pid']."' AND p.pid=e.pid AND e.encounter_nr=d.encounter_nr AND d.code=c.diagnosis_code";
+	$sql=$m_sql." WHERE  p.pid='".$HTTP_SESSION_VARS['sess_pid']."' 
+		 	AND p.pid=e.pid 
+			AND e.encounter_nr=d.encounter_nr 
+			AND d.code=c.diagnosis_code
+		 ORDER BY d.modify_time DESC";
 }
 
 if($result=$db->Execute($sql)){
 	$rows=$result->RecordCount();
 }else{
-echo $sql;
+	echo $sql;
 }
 
-$subtitle=$LDDRG;
+$subtitle=$LDDiagnoses;
 $HTTP_SESSION_VARS['sess_file_return']=$thisfile;
 
 $buffer=str_replace('~tag~',$title.' '.$name_last,$LDNoRecordFor);

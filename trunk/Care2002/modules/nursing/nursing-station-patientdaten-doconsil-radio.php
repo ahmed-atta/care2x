@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
+* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -284,8 +284,8 @@ function printOut()
 </script>
 
 <script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
 </HEAD>
 
@@ -329,13 +329,8 @@ if($user_origin=='lab')
  <ul>
 
 <?php
-if($edit)
-{
-?>
+if($edit){
 
-<form name="form_test_request" method="post" action="<?php echo $thisfile ?>" onSubmit="return chkForm(this)">
-
-<?php
 
 /* If in edit mode display the control buttons */
 
@@ -408,6 +403,8 @@ echo '
 		<tr bgcolor="<?php echo $bgc1 ?>">
 		<td  valign="top" colspan=2 >
 		
+		<form name="form_test_request" method="post" action="<?php echo $thisfile ?>" onSubmit="return chkForm(this)">
+
 		<table border=0 cellpadding=1 cellspacing=1 width=100%>
     <tr>
       <td align="right"><div class=fva2_ml10><?php echo $LDXrayTest ?></td><br>
@@ -486,6 +483,9 @@ echo '
 					  echo formatDate2Local(date("Y-m-d"),$date_format);
 					}
 				  ?>" size=10 maxlength=10 onBlur="IsValidDate(this,'<?php echo $date_format ?>')"  onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+	  	<a href="javascript:show_calendar('form_test_request.send_date','<?php echo $date_format ?>')">
+		<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a><font size=1 face="arial">
+				  
   <?php echo $LDRequestingDoc ?>:
 		<input type="text" name="send_doctor" size=40 maxlength=40 value="<?php if($edit_form || $read_form) echo $stored_request['send_doctor'] ?>"></div><br>
 		</td>

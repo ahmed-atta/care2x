@@ -1,6 +1,6 @@
 <?php 
 
-$dbname='maho'; 
+$dbname='care2002'; 
 
 $dbusername='httpd'; 
 

@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
+* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -70,11 +70,9 @@ if($display=='composite'){
 }else{
 	$drg=&$DRG_obj->OPDiagnosisCodes($opnr);
 }
-
 $uid="$dept_$oprm_$pn_$opnr"; 
 /* Load the icon images */
 $img_delete=createComIcon($root_path,'delete2.gif','0','right');
-
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
