@@ -1,0 +1,34 @@
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define('LANG_FILE','nursing.php');
+$local_user='ck_pflege_user';
+require_once('../include/inc_front_chain_lang.php');
+require_once('../include/inc_config_color.php'); // load color preferences
+
+$breakfile="pflege-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$pn&edit=$edit";
+?>
+<html>
+<head>
+<title></title>
+</head>
+<body>
+
+<table border=0>
+  <tr>
+    <td><img <?php  echo createMascot('../','mascot1_r.gif','0') ?></td>
+    <td><b><font face="Verdana, Arial" color=#800000><?php echo $LDNoDiagReport ?></font></b></td>
+  </tr>
+</table>
+<p><br>
+<a href="<?php echo $breakfile ?>" target="_top"><img <?php echo createLDImgSrc('../','back2.gif','0') ?>>
+</a>
+</body>
+</html>
