@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -254,8 +254,7 @@ function chkForm(d){
 		d.blood_group.focus();
 		return false;
 	}
-	
-   if((d.rh_factor.value=='')||(d.rh_factor.value==' '))
+	else  if((d.rh_factor.value=='')||(d.rh_factor.value==' '))
 	{
 		alert("<?php echo $LDPlsEnterRhFactor ?>");
 		d.rh_factor.focus();
@@ -290,7 +289,6 @@ function chkForm(d){
 		d.doctor.focus();
 		return false;
 	}
-
 	else return true;
 }
 
@@ -354,23 +352,23 @@ if($user_origin=='lab')
 <td bgcolor=<?php echo $cfg['body_bgcolor']; ?> colspan=2>
  <ul>
 
+
+ 
 <?php
 
-if($edit)
-{
+if($edit){
+?>
+<form name="form_test_request" method="post" action="<?php echo $thisfile ?>" onSubmit="return chkForm(this)"> 
+<?php
 
-/* If in edit mode display the control buttons */
+	# If in edit mode display the control buttons 
+	$controls_table_width=700;
 
-$controls_table_width=700;
+	include($root_path.'include/inc_test_request_controls.php');
 
-require($root_path.'include/inc_test_request_controls.php');
+}elseif(!$read_form && !$no_proc_assist){
 
-}
-elseif(!$read_form && !$no_proc_assist)
-{
-
-/* Else if not in edit mode and no patient nr. available, show the search prompt */
-
+	# Else if not in edit mode and no patient nr. available, show the search prompt 
 ?>
 <table border=0>
   <tr>
@@ -449,8 +447,6 @@ if($edit){
 	<!-- Second row -->
 		<tr  valign="top" bgcolor="<?php echo $bgc1 ?>" >
         <td>
-
-		<form name="form_test_request" method="post" action="<?php echo $thisfile ?>" onSubmit="return chkForm(this)">
 		
 		<!-- Block Specimen  -->
 		<table border=0 cellspacing=0 cellpadding=1 bgcolor="#000000" width=100% height=100%>

@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /*
-CARE 2002 Integrated Information System beta 1.0.05 - 2003-06-22 for Hospitals and Health Care Organizations and Services
+CARE 2002 Integrated Information System beta 1.0.06 - 2003-08-06 for Hospitals and Health Care Organizations and Services
 Copyright (C) 2002  Elpidio Latorilla & Intellin.org	
 
 GNU GPL. For details read file "copy_notice.txt".
@@ -13,16 +13,12 @@ define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 $dbtable='care_phone';
+# Filter invalid display size and set to default
+if(empty($displaysize)||!is_numeric($displaysize)) $displaysize=10;
 
-if($displaysize=='') $displaysize=10;
-
-if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
-if($dblink_ok) {
 
     /* Load the date formatter */
     include_once($root_path.'include/inc_date_format_functions.php');
-    
-
 
    $fielddata='item_nr, title, name, vorname, beruf, bereich1, bereich2,  inphone1, inphone2, inphone3, funk1, funk2, exphone1, exphone2, roomnr';
 
@@ -33,7 +29,6 @@ if($dblink_ok) {
 	{
 		$rows=$ergebnis->RecordCount();
 	}
-} else { echo "$LDDbNoLink<br>"; } 
 ?>
 
 <HTML>
@@ -100,7 +95,7 @@ echo '></a>'; } ?><img <?php echo createLDImgSrc($root_path,'phonedir-b.gif','0'
 
 		if($update) echo "<font color=maroon size=3>$LDUpdateOk</font>";
 		
-        echo '<table  border="1" cellpadding="1" cellspacing="0">';
+        echo '<table  border=0 cellpadding=1 cellspacing=1>';
         echo "<tr nowrap >";
 		echo "<td colspan=";
 		if($currentuser=="") echo $colstop; else echo $colstop+1;
@@ -138,11 +133,11 @@ echo '></a>'; } ?><img <?php echo createLDImgSrc($root_path,'phonedir-b.gif','0'
 					{
 					   if($i == ($colstop-2)) echo formatDate2Local($zeile[$i],$date_format);
 					     elseif($i==($colstop-1)) echo  convertTimeToLocal($zeile[$i]);
-						   else echo $zeile[$i];
+						   else echo htmlspecialchars($zeile[$i]);
 					}
 					else 
 					{
-					     echo $zeile[$i];
+					     echo htmlspecialchars($zeile[$i]);
 					}
 					
 					echo "</td>\n";

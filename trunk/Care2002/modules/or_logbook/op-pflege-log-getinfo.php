@@ -49,8 +49,6 @@ switch($winid)
 
 if($pers_obj->record_count) $quickexist=true;
 
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
-
 $thisfile=basename(__FILE__);
 
 /* Establish db connection */
@@ -75,27 +73,6 @@ if($dblink_ok){
 		echo "$LDDbNoRead<br>";
 	} 
 				
-/*		$dbtable="care_personell_data_quicklist";
-
-		
-		$sql="SELECT lastname,firstname,profession FROM $dbtable
-					 WHERE dept='$dept'
-					 AND profession LIKE '$quickid'  ORDER BY frequency DESC";
-
-			if($quickresult=$db->Execute($sql))
-       		{
-				$rows=0;
-				if( $quicklist=mysql_fetch_array($quickresult)) $rows++;
-				if($rows)
-				{
-					mysql_data_seek($quickresult,0);
-					//$quicklist=$ergebnis->FetchRow();
-					$quickexist=1;
-					//echo $sql."<br>";
-				}
-			}
-				else { echo "$LDDbNoRead<br>$sql"; } */
-
 		if($mode=='save')
 		{
 					$dbtable='care_nursing_op_logbook';
@@ -192,36 +169,7 @@ if($dblink_ok){
 						}//end of else
 					if($saveok)
 						{
-/*							if(!$delitem)
-							{
-								$dbtable="personell_data_quicklist";
-								$sql="SELECT frequency FROM $dbtable
-					 						WHERE lastname='$ln'
-					 								AND firstname='$fn'
-													AND dept='$dept'";
-
-								if($ergebnis=$db->Execute($sql))
-       							{
-									$rows=0;
-									if( $result=$ergebnis->FetchRow()) $rows++;
-									if($rows)
-									{
-										$sql="UPDATE $dbtable SET frequency='".($result[frequency]+1)."' 
-					 							WHERE lastname='$ln'
-					 								AND firstname='$fn'
-													AND dept='$dept'
-													AND profession='$pr'";
-										$db->Execute($sql);
-									}
-									else
-									{
-										$sql="INSERT INTO $dbtable (dept_nr,lastname,firstname,profession,frequency) VALUES ('$dept_nr','$ln','$fn','$pr','1')";
-										$db->Execute($sql);
-									}
-								}
-								else { echo "$LDDbNoRead<br>"; } 
-							}*/
-							
+						
 							header("location:$thisfile?sid=$sid&lang=$lang&mode=saveok&winid=$winid&enc_nr=$enc_nr&dept_nr=$dept_nr&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday&op_nr=$op_nr");
 						}
 				}// end of if(mode==save)
@@ -250,7 +198,7 @@ if($dblink_ok){
 
 function refreshparent()
 {
-	<?php $comdat='&dept_nr='.$dept_nr.'&saal='.$saal.'&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday.'&op_nr='.$op_nr; ?>
+	<?php $comdat="&dept_nr=$dept_nr&saal=$saal&thisday=$pyear-$pmonth-$pday&op_nr=$op_nr"; ?>
 	//resetlogdisplays();resettimebars();resettimeframe();
 	window.opener.parent.LOGINPUT.location.replace('<?php echo "oploginput.php?sid=$sid&lang=$lang&enc_nr=$enc_nr&mode=notimereset$comdat"; ?>');
 	window.opener.parent.OPLOGMAIN.location.replace('<?php echo "oplogmain.php?sid=$sid&lang=$lang&gotoid=$enc_nr$comdat"; ?>');
@@ -277,15 +225,12 @@ function savedata(iln,ifn,inx,ipr)
 	//d.inputdata.value="?";
 	d.submit();
 }
-function gethelp(x,s,x1,x2,x3)
-{
-	if (!x) x="";
-	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
-	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
-	window.helpwin.moveTo(0,0);
-}
 -->
 </script>
+<?php
+require($root_path.'include/inc_js_gethelp.php');
+require($root_path.'include/inc_css_a_hilitebu.php');
+?>
 
 <STYLE type=text/css>
 div.box { border: double; border-width: thin; width: 100%; border-color: black; }
@@ -306,7 +251,6 @@ onLoad="<?php if($mode=="saveok") echo "refreshparent();window.focus();"; ?>if (
 <b>
 <?php 
 	echo $title.'<br><font size=4>';	
-	//echo $tage[$dyidx]." ($dy".".".$mo.".".$yr.")</font>";
 ?>
 </b>
 </font>
@@ -517,11 +461,11 @@ echo'
 <div align=right>
 &nbsp;&nbsp;
 <a href="javascript:window.close()">
-<?php if($mode=="saveok")  : ?>
+<?php if($mode=='saveok')  { ?>
 <img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>">
-<?php else : ?>
-<img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>" border="0" alt="<?php echo $LDClose ?>">
-<?php endif ?>
+<?php }else{ ?>
+<img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> border="0" alt="<?php echo $LDClose ?>">
+<?php } ?>
 </a></div>
 </BODY>
 

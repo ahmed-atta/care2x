@@ -1,198 +1,153 @@
 <?php
+
+define('ROW_MAX',15); # define here the maximum number of rows for displaying the parameters
+
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+$lang_tables=array('chemlab_groups.php','chemlab_params.php');
 define('LANG_FILE','lab.php');
 $local_user='ck_lab_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-if(!$patnum) {header('Location:../language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 
-require_once($root_path.'include/inc_config_color.php');
+if(!$encounter_nr) {header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 
+
+if(!isset($user_origin)||empty($user_origin)) $user_origin='lab';
+
+# Create encounter object
+require_once($root_path.'include/care_api_classes/class_encounter.php');
+$encounter=new Encounter($encounter_nr);
 
 $thisfile='labor_datainput.php';
-$breakfile="labor_data_patient_such.php?sid=$sid&lang=$lang&mode=edit&versand=1&keyword=$patnum";
 
-$fielddata='patnum,name,vorname,gebdatum';
+# Create lab object
+require_once($root_path.'include/care_api_classes/class_lab.php');
+$lab_obj=new Lab($encounter_nr);
 
 require($root_path.'include/inc_labor_param_group.php');
-
 						
-if($parameterselect=="") $parameterselect=0;
+if(!isset($parameterselect)||$parameterselect=='') $parameterselect='priority';
 
-$parameters=$paralistarray[$parameterselect];					
-$paramname=$parametergruppe[$parameterselect];
+$parameters=&$paralistarray[$parameterselect];					
+$paramname=&$parametergruppe[$parameterselect];
 
-$dbsourcetable='care_admission_patient';
-$dbtargettable='care_lab_test_data';
-
-$curdate=date('Y-m-d');
-$curtime=date('H:i:s');
-
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok)
-{
-    /* Load the date formatter */
-    include_once($root_path.'include/inc_date_format_functions.php');
+# Load the date formatter */
+include_once($root_path.'include/inc_date_format_functions.php');
     
-
-		if($mode=='save')
-		{
-		
-				// check if entry is already existing
-				$sql="SELECT encoding,tid FROM $dbtargettable WHERE patnum='$patnum' AND job_id='$job_id'";
-				if($ergebnis=$db->Execute($sql))
-       			{
-					//echo $sql." checked <br>";
-					$nbuf=$parameters[0];
-					//echo $nbuf."=".$$nbuf." | ";
-					if($$nbuf) $dbuf="$nbuf=".$$nbuf." ";
-					for($i=1;$i<sizeof($parameters);$i++)
-					{
-						$nbuf=$parameters[$i];
-						if(!$$nbuf) continue;
-						//echo $nbuf."=".$$nbuf." | ";
-						$dbuf.="&$nbuf=".$$nbuf." ";
-					}
-					
-					if(!$test_date) 
-					{
-						$test_date=date('Y-m-d');
-					}
-/*					else
-					{
-						$td=explode('.',$test_date);
-						$td=array_reverse($td);
-						$test_sortdate=implode("",$td);
-					}					
-*/					
-					
-					$rows=0;
-					
-					/* get the user data */
-					$current_user=$HTTP_COOKIE_VARS[$local_user.$sid];
-					
-					if($rows=$ergebnis->RecordCount())
-						{
-
-							$content=$ergebnis->FetchRow();
-							
-							$content[encoding].=' ~e='.$encoder.'&d='.date('Y-m-d').'&t='.date('H:i:s').'&a='.$paramname;
-							
-							// $dbuf=htmlspecialchars($dbuf);
-							$sql="UPDATE $dbtargettable SET $paramname='$dbuf', encoding='".$content['encoding']."', modify_id='$current_user', tid='".$content['tid']."'
-									WHERE patnum='$patnum'
-									AND job_id='$job_id'";
-								
-							if($ergebnis=$db->Execute($sql))
-       							{
-									//echo $sql." new update <br>";
-								
-								header("location:$thisfile?sid=$sid&lang=$lang&saved=1&patnum=$patnum&job_id=$job_id&parameterselect=$parameterselect");
-								}
-								else {echo "<p>$sql$LDDbNoUpdate";}
-						} // else create new entry
-						else
-						{
-							//$dbuf=strtr("sd=$yr$mo$dy&rd=$dy.$mo.$yr&e=$newdata"," <>","+()")."\r\n";
-							$sql="INSERT INTO $dbtargettable 
-										(
-										patnum,
-										lastname,
-										firstname,
-										bday,
-										$paramname,
-										job_id,
-										test_date,
-										test_time,
-										test_sortdate,
-										encoding,
-										modify_id,
-										create_id,
-										create_time
-										)
-									 	VALUES
-										(
-										'$patnum',
-										'$lastname',
-										'$firstname',
-										'$bday',
-										'$dbuf',
-										'$job_id',
-										'".formatDate2STD($test_date,$date_format)."',
-										'".date('H:i:s')."',
-										'".date('Ymd')."',
-										'e=$encoder&d=".date('Y-m-d')."&t=".date('H:i:s')."&a=".$paramname."',
-										'$current_user',
-										'$current_user',
-										NULL
-										)";
-
-							if($ergebnis=$db->Execute($sql))
-       							{
-									//echo $sql." new insert <br>";
-									
-									header("location:$thisfile?sid=$sid&lang=$lang&saved=1&patnum=$patnum&job_id=$job_id&parameterselect=$parameterselect");
-								}
-								else {echo "<p>$sql$LDDbNoSave";}
-						}//end of else
-					} // end of if ergebnis
-		 }// end of if(mode==save)
-		 
-		 /*  If mode is not "save" then get the basic personal data */
-		 else 
-		 {
-			if($saved||$job_id&&!$newid)
-			{
-				$sql="SELECT patnum,lastname,firstname,bday,$paramname,test_date FROM $dbtargettable WHERE patnum='$patnum' AND job_id='$job_id'";
-			}
-			 else
-			 {
-			    $sql="SELECT $fielddata FROM $dbsourcetable WHERE patnum='$patnum'";
-			 }
-				//echo $sql;
-        		if($ergebnis=$db->Execute($sql))
-				{
-					$zeile=$ergebnis->FetchRow();
-					if($saved||$job_id&&!$newid)
-					{
-						$lname=$zeile['lastname'];
-						$fname=$zeile['firstname'];
-						$bday=$zeile['bday'];
-   					}
-					else
-					{
-						$lname=$zeile['name'];
-						$fname=$zeile['vorname'];
-						$bday=$zeile['gebdatum'];
-					}
-					$patnum=$zeile['patnum'];
-				}
-			$aufdatum=$curdate;
-			$aufzeit=$curtime;	
-			$encoder=$aufnahme_user;			
-		//	while(list($x,$v)=each($zeile)) echo $v." ";
-		 }
+if($mode=='save'){
+	
+	$nbuf=array();
+	# Prepare parameter values and serialize
+	while(list($x,$v)=each($parameters))
+	{
+		if(isset($HTTP_POST_VARS[$x])&&!empty($HTTP_POST_VARS[$x])){
+		 $nbuf[$x]=$HTTP_POST_VARS[$x];
+		}
 	}
-	else 
-		{ echo "$LDDbNoLink<br>$sql<br>"; }
+	$dbuf['group_id']=$parameterselect;
+	$dbuf['serial_value']=serialize($nbuf);
+	$dbuf['job_id']=$job_id;
+	$dbuf['encounter_nr']=$encounter_nr;
+	$dbuf['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+	if($allow_update){
 
+		# Recheck the date, ! bug patch 
+		if($HTTP_POST_VARS['std_date']=='0000-00-00') $dbuf['test_date']=date('Y-m-d');
+	
+		$lab_obj->setDataArray($dbuf);
+		# set update pointer
+		$lab_obj->setWhereCondition("batch_nr='$batch_nr'");
+		if($lab_obj->updateDataFromInternalArray($batch_nr)){
+			$saved=true;
+		}else{echo "<p>".$lab_obj->getLastQuery()."$LDDbNoSave";}
+	
+	}else{
+		
+		# Hide old job record if it exists
+		$lab_obj->hideResultIfExists($encounter_nr,$job_id,$parameterselect);
+		# Convert date to standard format
+		if(isset($std_date)){
+			if($HTTP_POST_VARS['std_date']=='0000-00-00') $dbuf['test_date']=date('Y-m-d');
+				else 	$dbuf['test_date']=$HTTP_POST_VARS['std_date'];
+		}else{
+			$dbuf['test_date']=formatDate2STD($HTTP_POST_VARS['test_date'],$date_format);
+		}
+		$dbuf['test_time']=date('H:i:s');
+		
+		$dbuf['history']="Create ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
+		$dbuf['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		$dbuf['create_time']='NULL';
+		# Insert new job record
+		$lab_obj->setDataArray($dbuf);
+		if($lab_obj->insertDataFromInternalArray()){
+			//echo $sql." new insert <br>";				
+			$batch_nr=$db->Insert_ID();
+			$saved=true;
+		}else{echo "<p>".$lab_obj->getLastQuery()."$LDDbNoSave";}
+		
+	}
+	# If save successful, jump to display values
+	if($saved){
+		include_once($root_path.'include/inc_visual_signalling_fx.php');
+		# Set the visual signal 
+		setEventSignalColor($encounter_nr,SIGNAL_COLOR_DIAGNOSTICS_REPORT);							
+		header("location:$thisfile?sid=$sid&lang=$lang&saved=1&batch_nr=$batch_nr&encounter_nr=$encounter_nr&job_id=$job_id&parameterselect=$parameterselect&allow_update=1&user_origin=$user_origin");
+	}
+# end of if(mode==save)
+} else { #If mode is not "save" then get the basic personal data 
+ 
+	# Create encounter object
+	//include_once($root_path.'include/care_api_classes/class_encounter.php');
+	$enc_obj=new Encounter($encounter_nr);
+	if($encounter=&$enc_obj->getBasic4Data($encounter_nr)){
+		$patient=$encounter->FetchRow();
+	}
+	# If previously saved, get the values
+	$pdata=array();
+	if($saved){
+		if($result=&$lab_obj->getBatchResult($batch_nr)){
+			$row=$result->FetchRow();
+			$pdata=unserialize($row['serial_value']);
+		}
+	}else{
+		if($result=&$lab_obj->getResult($job_id,$parameterselect)){
+			$row=$result->FetchRow();
+			$pdata=unserialize($row['serial_value']);
+		}else{
+			# disallow update if group does not exist yet
+			$allow_update=false;
+		}
+	}
+	
+	//echo $lab_obj->getLastQuery();
+			
+	# Get the test test groups
+	$tgroups=&$lab_obj->TestGroups();
+	# Get the test parameter values
+	$tparams=&$lab_obj->TestParams($parameterselect);
+
+	# Set the return file
+	if(isset($job_id)&&$job_id){
+		switch($user_origin){
+			case 'lab_mgmt':  $breakfile="labor_test_request_admin_chemlabor.php".URL_APPEND."&pn=$encounter_nr&batch_nr=$job_id&user_origin=lab"; 
+					break;
+			default: $breakfile="labor_data_check_arch.php".URL_APPEND."&versand=1&encounter_nr=$encounter_nr";
+		}
+	}else{
+		$breakfile="labor_data_patient_such.php".URL_APPEND."&mode=edit";
+	}
+}
 
 // echo "from table ".$linecount;
-
-
-
-
-
- 
+if($saved || $row['test_date']) $std_date=$row['test_date'];
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
@@ -201,59 +156,45 @@ if($dblink_ok)
  <TITLE>Laborwerte Eingabe</TITLE>
 
 <script language="javascript" name="j1">
-<!--
-        
-
-        function wopenTEST() 
-        {       window.open("ucons.php","Realtime4free","width=400,height=590,locationbar=no,menubar=no,status=no,scrollbars=yes,resizable=no,copyhistory=yes,screenX=400,screenY=20,left=400,top=20" );
-        }
-        function wopen()
-        {       window.open("ucons.php", "RealtimeQuoteCenter", "resizable=no,width=780,height=470,locationbar=no,menubar=no,status=no" );
-        }
-        function openMarktradar()
-        {
-                winNeu('ucons.php','http://diraba.teledata.de/dab/marketview.html?nick=&sessionid=lurker&nh=0&checksum=',625,480);
-        }
-        function openPRWin(address, width, height)
-        {
-                window.open("ucons.php", "Preisrechner", "width=" + width + ",height=" + height);
-        }
-        
+<!--        
 function pruf(d)
 {
 	if(!d.job_id.value)
-		{ alert("<?php echo $LDAlertJobId ?>"); return false;}
+		{ alert("<?php echo $LDAlertJobId ?>");
+			d.job_id.focus();
+			 return false;
+		}
 		else
 		{
-			if(!d.test_date.value)
-			{ alert("<?php echo $LDAlertTestDate ?>"); return false;}
+			if(d.test_date){
+				if(!d.test_date.value)
+				{ alert("<?php echo $LDAlertTestDate ?>");
+					d.test_date.focus();
+					return false;
+				}
 				else return true;
+			}
 		} 
 }
 function chkselect(d)
 {
- 	if(d.parameterselect.selectedIndex==<?php echo $parameterselect ?>) return false;
+ 	if(d.parameterselect.value=="<?php echo $parameterselect ?>"){
+		return false;
+	}
 }
-function gethelp(x,s,x1,x2,x3)
-{
-	if (!x) x="";
-	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
-	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
-	window.helpwin.moveTo(0,0);
+function labReport(){
+	window.location.replace("<?php echo 'labor_datalist_noedit.php'.URL_REDIRECT_APPEND.'&encounter_nr='.$encounter_nr.'&noexpand=1&from=input&job_id='.$job_id.'&parameterselect='.$parameterselect.'&allow_update='.$allow_update.'&nostat=1&user_origin=lab'; ?>");
 }
-
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
-
 // -->
 </script>
 
-<script language="javascript" src="../js/checkdate.js" type="text/javascript">
-</script>
-
-<script language="javascript" src="../js/setdatetime.js">
-</script>
+<script language="javascript" src="<?php echo $root_path ?>js/checkdate.js" type="text/javascript"></script>
+<script language="javascript" src="<?php echo $root_path ?>js/setdatetime.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
 <?php 
+require($root_path.'include/inc_js_gethelp.php'); 
 require($root_path.'include/inc_css_a_hilitebu.php');
 ?>
 <style type="text/css" name="1">
@@ -279,8 +220,8 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp('lab.php','input','main','<?php echo $job_id ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
 </tr>
 <tr>
-<td  bgcolor=#dde1ec><p><br>
-<ul>
+<td  bgcolor=#dde1ec>
+
 <FONT    SIZE=-1  FACE="Arial">
 
 
@@ -291,14 +232,14 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <tr>
 <td bgcolor=#ffffff><FONT SIZE=-1  FACE="Arial"><?php echo $LDCaseNr ?>:
 </td>
-<td bgcolor=#ffffee><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $patnum; ?>&nbsp;
+<td bgcolor=#ffffee><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $encounter_nr; ?>&nbsp;
 </td>
 </tr>
 
 <tr>
 <td bgcolor=#ffffff><FONT SIZE=-1  FACE="Arial"><?php echo "$LDLastName, $LDName, $LDBday" ?>:
 </td>
-<td bgcolor=#ffffee><FONT SIZE=-1  FACE="Arial">&nbsp;<b><?php echo  $lname; ?>, <?php echo  $fname; ?>&nbsp;&nbsp;<?php echo formatDate2Local($bday,$date_format); ?></b>
+<td bgcolor=#ffffee><FONT SIZE=-1  FACE="Arial">&nbsp;<b><?php echo  $patient['name_last']; ?>, <?php echo  $patient['name_first']; ?>&nbsp;&nbsp;<?php echo formatDate2Local($patient['date_birth'],$date_format); ?></b>
 </td>
 </tr>
 <tr>
@@ -318,29 +259,22 @@ else echo '
 </td>
 <td  bgcolor=#ffffee ><FONT SIZE=-1  FACE="Arial">&nbsp;
 <?php 
-if($saved || $zeile['test_date'])
-{
-   echo formatDate2Local($zeile['test_date'],$date_format).' <input type=hidden name=test_date value="'.$zeile['test_date'].'">';
-} 
-else 
-{
-   echo '<input name="test_date" type="text" size="14" value="'.formatDate2Local(date('Y-m-d'),$date_format).'" onBlur="IsValidDate(this,\''.$date_format.'\')")>';
+if($saved||$row['test_date']||$std_date){
+   echo formatDate2Local($std_date,$date_format).'
+   	<input type=hidden name="std_date" value="'.$std_date.'">';
+}else{
+   echo '<input name="test_date" type="text" size="14" value="'.formatDate2Local(date('Y-m-d'),$date_format).'" onBlur="IsValidDate(this,\''.$date_format.'\')")  onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\')">';
+?>
+  	<a href="javascript:show_calendar('datain.test_date','<?php echo $date_format ?>')">
+	<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
+<?php
 }
 ?>
 </td>
-</tr><?php if($newid) 
-/*
-echo '
-<tr>
-<td  bgcolor="#ffffff" ><FONT SIZE=-1  FACE="Arial">&nbsp;Untersuchungsdatum
-</td>
-<td bgcolor="#ffffee" >
-<input name="test_date" type="text" size="14" >
-</td>
-</tr>';*/
-?>
+</tr>
 </table>
-<table border=0 bgcolor=#ffdddd cellspacing=1 cellpadding=1>
+
+<table border=0 bgcolor=#ffdddd cellspacing=1 cellpadding=1 width="100%">
 <tr>
 <td  bgcolor=#ff0000 colspan=2><FONT SIZE=2  FACE="Verdana,Arial" color="#ffffff">
 <b><?php echo strtr($parametergruppe[$parameterselect],"_","-"); ?></b>
@@ -371,60 +305,77 @@ Information<?php if ($errornum>1) echo "en"; ?>!
 <?php 
 $paramnum=sizeof($parameters);
 
-$pcols=ceil($paramnum/15);
-//echo $pcols;
-//if($paramnum<=10) $count=$paramnum; else $count=10;
-if($pcols>1)
-{
-	$pbuf=$parameters;
-	while(sizeof($pbuf))
-	{
-		$param[]=array_splice($pbuf,0,15);
-	}
-	$paramnum=15;
-}
-else $param[]=$parameters;
+$pcols=ceil($paramnum/ROW_MAX);
 
 echo '<tr>';
 
-if($zeile[$paramname])  parse_str($zeile[$paramname],$pdata);
-
-
-for($j=0;$j<$pcols;$j++)
+for($j=0;$j<$pcols;$j++){
 echo '
 <td class="a10_n">&nbsp;'.$LDParameter.'</td>
 <td  class="a10_n">&nbsp;'.$LDValue.'</td>';
+}
+
 echo '
 	</tr>';
-
-//$count=$paramnum;
-for ($n=0;$n<$paramnum;$n++)
- {
-	echo '
-	<tr>';
-	for($j=0;$j<$pcols;$j++)
-	{
-			echo '<td';
-
-			 echo ' bgcolor="#ffffee" class="a10_b"><nobr>&nbsp;<b>'.strtr($param[$j][$n],"_~",". ").'</b>&nbsp;</nobr>';
-
-			echo '</td>
-			<td>';
-			if ($param[$j][$n]){
-				 echo '<input name="'.$param[$j][$n].'" type="text" size="8" ';
-
-	 			echo 'value="'.trim($pdata[($param[$j][$n])]).'"';
-
-				echo '>';
-			}
-			echo'&nbsp;
-			</td>';
-	}
 	
-	echo '
-	</tr>';
- }
+echo '
+<tr>';
+$rowlimit=0;
+//$count=$paramnum;
+while($tp=$tparams->FetchRow()){
 
+	echo '<td';
+
+	echo ' bgcolor="#ffffee" class="a10_b"><nobr>&nbsp;<b>';
+	if(isset($parameters[$tp['id']])&&!empty($parameters[$tp['id']])) echo $parameters[$tp['id']];
+		else echo $tp['name'];
+	
+	echo '</b>&nbsp;</nobr>';
+
+	echo '</td>
+			<td class="a10_b">';
+
+	echo '<input name="'.$tp['id'].'" type="text" size="8" ';
+
+	echo 'value="';
+	if(isset($pdata[$tp['id']])&&!empty($pdata[$tp['id']])) echo trim($pdata[$tp['id']]);
+
+	echo '">'.$tp['msr_unit'].'&nbsp;
+			</td>';
+
+	$rowlimit++;
+	if($rowlimit==$pcols){
+		echo '
+		</tr><tr>';
+		$rowlimit=0;
+	}
+ }
+/*while(list($x,$v)=each($parameters)){
+
+	echo '<td';
+
+	echo ' bgcolor="#ffffee" class="a10_b"><nobr>&nbsp;<b>'.$v.'</b>&nbsp;</nobr>';
+
+	echo '</td>
+			<td>';
+
+	echo '<input name="'.$x.'" type="text" size="8" ';
+
+	echo 'value="';
+	if(isset($pdata[$x])&&!empty($pdata[$x])) echo trim($pdata[$x]);
+
+	echo '">';
+	echo'&nbsp;
+			</td>';
+
+	$rowlimit++;
+	if($rowlimit==$pcols){
+		echo '
+		</tr><tr>';
+		$rowlimit=0;
+	}
+ }
+*/
 ?>
 </table>
 </td>
@@ -434,22 +385,29 @@ for ($n=0;$n<$paramnum;$n++)
 <input  type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?>> 
 </td>
 
-<td align=right><a href="<?php echo $breakfile ?>">
-<?php if($saved) echo '<img '.createLDImgSrc($root_path,'close2.gif','0').'>';
-else echo '<img  '.createLDImgSrc($root_path,'cancel.gif','0').'>'; ?>
-</a>
+<td align="right"><font size=1><nobr>
+<?php
+echo '<a href="labor_datalist_noedit.php'.URL_APPEND.'&encounter_nr='.$encounter_nr.'&noexpand=1&from=input&job_id='.$job_id.'&parameterselect='.$parameterselect.'&allow_update='.$allow_update.'&nostat=1&user_origin='.$user_origin.'"><img '.createLDImgSrc($root_path,'showreport.gif','0','absmiddle').' alt="'.$LDClk2See.'"></a>';
+?>
+&nbsp;
+<a href="<?php echo $breakfile ?>"><?php
+ if($saved) echo '<img '.createLDImgSrc($root_path,'close2.gif','0','absmiddle').'>';
+	else echo '<img  '.createLDImgSrc($root_path,'cancel.gif','0','absmiddle').'>'; 
+?></a>
+</nobr>
+</font>
 </td>
 </tr>
 </table>
 <input type=hidden name="parameterselect" value=<?php echo $parameterselect; ?>>
-<input type=hidden name="patnum" value="<?php echo $zeile['patnum']; ?>">
-<input type=hidden name="lastname" value="<?php echo $zeile['name']; ?>">
-<input type=hidden name="firstname" value="<?php echo $zeile['vorname']; ?>">
-<input type=hidden name="bday" value="<?php echo $zeile['gebdatum']; ?>">
+<input type=hidden name="encounter_nr" value="<?php echo $encounter_nr; ?>">
 <input type=hidden name="sid" value="<?php echo $sid; ?>">
 <input type=hidden name="lang" value="<?php echo $lang; ?>">
 <input type=hidden name="update" value="<?php echo $update; ?>">
+<input type=hidden name="allow_update" value="<?php if(isset($allow_update)) echo $allow_update; ?>">
+<input type=hidden name="batch_nr" value="<?php if(isset($row['batch_nr'])) echo $row['batch_nr']; ?>">
 <input type=hidden name="newid" value="<?php echo $newid; ?>">
+<input type=hidden name="user_origin" value="<?php echo $user_origin; ?>">
 <input type=hidden name="mode" value="save">
 </form>
 
@@ -465,25 +423,35 @@ else echo '<img  '.createLDImgSrc($root_path,'cancel.gif','0').'>'; ?>
 </td>
 
 <td >
-<select name=parameterselect size=1>
-<?php for ($i=0;$i<sizeof($parametergruppe);$i++)
+<select name="parameterselect" size=1>
+<?php 
+
+	while($tg=$tgroups->FetchRow())
       {
-		echo '<option value="'.$i.'"';
-		if($parameterselect==$i) echo ' selected';
-		echo '>'.$parametergruppe[$i].'</option>';
+		echo '<option value="'.$tg['group_id'].'"';
+		if($parameterselect==$tg['group_id']) echo ' selected';
+		echo '>';
+		if(isset($parametergruppe[$tg['group_id']])&&!empty($parametergruppe[$tg['group_id']])) echo $parametergruppe[$tg['group_id']];
+			else echo $tg['name'];
+		echo '</option>';
 		echo "\n";
 	  }	
+
 ?>
 </select>
 </td>
 
 <td>
-<input type=hidden name="patnum" value="<?php echo $zeile[patnum]; ?>">
+<input type=hidden name="encounter_nr" value="<?php echo $encounter_nr; ?>">
 <input type=hidden name="job_id" value="<?php echo $job_id; ?>">
 <input type=hidden name="sid" value="<?php echo $sid; ?>">
 <input type=hidden name="lang" value="<?php echo $lang; ?>">
 <input type=hidden name="update" value="<?php echo $update; ?>">
+<input type=hidden name="allow_update" value="<?php if(isset($allow_update)) echo $allow_update; ?>">
+<input type=hidden name="batch_nr" value="<?php if(isset($row['batch_nr'])) echo $row['batch_nr']; ?>">
 <input type=hidden name="newid" value="<?php echo $newid; ?>">
+<input type=hidden name="std_date" value="<?php echo $std_date; ?>">
+<input type=hidden name="user_origin" value="<?php echo $user_origin; ?>">
 
 <FONT SIZE=-1  FACE="Arial">&nbsp;<input  type="image" <?php echo createLDImgSrc($root_path,'auswahl2.gif','0') ?>>
 </td>
@@ -493,7 +461,7 @@ else echo '<img  '.createLDImgSrc($root_path,'cancel.gif','0').'>'; ?>
 </table>
 </form>
 
-</ul>
+
 </FONT>
 <p>
 </td>
@@ -533,11 +501,8 @@ else echo '<img  '.createLDImgSrc($root_path,'cancel.gif','0').'>'; ?>
 </table>        
 <p>
 
-<hr>
 <?php
-if(file_exists($root_path.'language/'.$lang.'/'.$lang.'_copyrite.php'))
-include('../language/'.$lang.'/'.$lang.'_copyrite.php');
-  else include('../language/en/en_copyrite.php');
+require($root_path.'include/inc_load_copyrite.php');
 ?>
 
 </BODY>

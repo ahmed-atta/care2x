@@ -3,74 +3,40 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+$lang_tables=array('chemlab_groups.php');
 define('LANG_FILE','lab.php');
 $local_user='ck_lab_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
+require_once($root_path.'include/care_api_classes/class_lab.php');
 
 $thisfile='labor_data_check_arch.php';
-$breakfile="labor_data_patient_such.php?sid=$sid&lang=$lang&mode=edit";
+$breakfile='labor_data_patient_such.php'.URL_APPEND.'&mode=edit';
 
 $toggle=0;
 
-$fielddata='patnum, name, vorname, gebdatum, item';
+$lab_obj=new Lab();
 
-$keyword=trim($keyword);
-
-$dbtable='care_lab_test_data';
-
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok)
-{
-    /* Load the date formatter */
-    require_once($root_path.'include/inc_date_format_functions.php');
+# Load the date formatter 
+require_once($root_path.'include/inc_date_format_functions.php');
     
-	
-    /* Load editor functions for time format converter */
-    //include_once('../include/inc_editor_fx.php');
-
-			$sql="SELECT job_id,test_date,test_time,encoding FROM $dbtable WHERE patnum='$patnum' ORDER BY tid DESC";
-
-        	$ergebnis=$db->Execute($sql);
-			$linecount=0;
-			if($ergebnis)
-       		{
-				while ($zeile=$ergebnis->FetchRow()) $linecount++;
-				if ($linecount>0) 
-				{ 		  
+$lab_results=&$lab_obj->createResultsList($encounter_nr);
+$linecount=$lab_obj->LastRecordCount();
+if (!$linecount) { 		  
 					
-					mysql_data_seek($ergebnis,0);
-				  	
-				}
-				else
-				{
-					
-					switch($mode)
-					{
-						case 'list': header("location:pflege-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$patnum&nodoc=labor");break;
-						default: header("location:labor_datainput.php?sid=$sid&lang=$lang&patnum=$patnum&newid=1&mode=$mode");
-					}
-				}
-			}
-			 else {echo "<p>$sql$LDDbNoRead";}
+	switch($mode)
+	{
+		case 'list': header("location:pflege-station-patientdaten.php".URL_REDIRECT_APPEND."&station=$station&pn=$encounter_nr&nodoc=labor");break;
+		default: header("location:labor_datainput.php".URL_REDIRECT_APPEND."&encounter_nr=$encounter_nr&newid=1&mode=$mode");
 	}
-	else 
-		{ echo "$LDDbNoLink<br>$sql<br>"; }
-
+} 
 ?>
-
-
-
-
-
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
@@ -105,25 +71,26 @@ if($dblink_ok)
 <?php 
 if($linecount>1) echo "<p>$LDReportFoundMany";
 	else echo "<p>$LDReportFound";
-echo " <font color=red><b>$patnum</b></font>.";
+echo " <font color=red><b>$encounter_nr</b></font>.";
 if($linecount>1) echo "<br> $LDIfWantEditMany<p>";
 	else echo "<br> $LDIfWantEdit<p>";
 					//	$abuf=array(); $last=array();
 				
-					echo "<table border=0 cellpadding=3 cellspacing=1> <tr bgcolor=#9f9f9f>";
+					echo '<table border=0 cellpadding=3 cellspacing=1> <tr bgcolor="#ff0000">';
 					
 					/* Print the column descriptors */
 						echo'
 						<td class="va12_w"><b>'.$LDJobIdNr.'</b></td>
+						<td class="va12_w"><b>'.$LDParamGroup.'</b></td>
 						<td class="va12_w"><b>'.$LDExamDate.'</b></td>
-					 <td class="va12_w">&nbsp;'.$LDAt.'</td>
+					 <td class="va12_w">&nbsp;<b>'.$LDAt.'</b></td>
 					 <td class="va12_w">&nbsp;</td>
 					 </tr>';
 					 
                     /* Print the list of the stored test results */
-					while($zeile=$ergebnis->FetchRow())
+					while($zeile=$lab_results->FetchRow())
 					{
-						$abuf=explode('~',$zeile['encoding']);	
+						$abuf=explode('~',$zeile['encoder']);	
 						$abuf=array_pop($abuf);
 						parse_str(trim($abuf),$last);
 						
@@ -131,12 +98,15 @@ if($linecount>1) echo "<br> $LDIfWantEditMany<p>";
 						
 						if($toggle) { echo "#dfdfdf>"; $toggle=0;} else {echo "#ffffff>"; $toggle=1;};
 	
-	                    $fwd_url = 'labor_datainput.php?sid='.$sid.'&lang='.$lang.'&patnum='.$patnum.'&job_id='.$zeile['job_id'].'&mode='.$mode.'&update=1';
+	                    $fwd_url = 'labor_datainput.php'.URL_APPEND.'&encounter_nr='.$encounter_nr.'&job_id='.$zeile['job_id'].'&parameterselect='.$zeile['group_id'].'&mode='.$mode.'&update=1';
 	                     
 						     /* Print the job id or batch nr., test date and time */
 							echo'
 							<td><font face=arial size=2>
 							&nbsp;<a href='.$fwd_url.'>'.$zeile['job_id'].'</a>
+							</td>
+							<td><font face=arial size=2>
+							&nbsp;<a href='.$fwd_url.'>'.$parametergruppe[$zeile['group_id']].'</a>
 							</td>
 							<td><font face=arial size=2>&nbsp;'.formatDate2Local($zeile['test_date'],$date_format).'
 							</td>
@@ -156,7 +126,7 @@ if($linecount>1) echo "<br> $LDIfWantEditMany<p>";
 <b><?php echo $LDNewJob ?></b></font><br>
 <?php echo "$LDNew $LDJobIdNr" ?>:<br>
 <input type="text" name="job_id" size=15 maxlength=15>
-<input type="hidden" name="patnum" value="<?php echo $patnum ?>">
+<input type="hidden" name="encounter_nr" value="<?php echo $encounter_nr ?>">
 <input type="hidden" name="newid" value="1">
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
 <input type="hidden" name="lang" value="<?php echo $lang ?>">

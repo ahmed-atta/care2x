@@ -3,7 +3,7 @@
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -14,7 +14,6 @@ require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
 require_once($root_path.'include/inc_date_format_functions.php');
 
 /*if(empty($date_format))
@@ -81,19 +80,28 @@ if (isset($mode) && ($mode=='search'))
 								{
 								    $date_end=@formatDate2STD($date_end,$date_format);
 							   }
+							   
+							$buffer='';
 							if(($date_start)&&($date_end))
 								{
-									if($s2) $s2.=" AND ((date_reg > \"$date_start\" OR date_reg LIKE \"$date_start %\") AND (date_reg <  \"$date_end\" OR date_reg LIKE \"$date_end %\"))"; else $s2.=" ((date_reg > \"$date_start\" OR date_reg LIKE \"$date_start %\") AND (date_reg <  \"$date_end\" OR date_reg LIKE \"$date_end %\"))";
+									$buffer=" ((date_reg > \"$date_start\" OR date_reg LIKE \"$date_start %\") AND (date_reg <  \"$date_end\" OR date_reg LIKE \"$date_end %\"))";
+									//if($s2) $s2.=" AND ((date_reg > \"$date_start\" OR date_reg LIKE \"$date_start %\") AND (date_reg <  \"$date_end\" OR date_reg LIKE \"$date_end %\"))"; else $s2.=" ((date_reg > \"$date_start\" OR date_reg LIKE \"$date_start %\") AND (date_reg <  \"$date_end\" OR date_reg LIKE \"$date_end %\"))";
 								}
 								elseif($date_start)
 								{
-									if($s2) $s2.=" AND date_reg LIKE \"$date_start %\""; else $s2.=" date_reg LIKE \"$date_start %\"";
+									$buffer=" date_reg LIKE \"$date_start %\"";
+									//if($s2) $s2.=" AND date_reg LIKE \"$date_start %\""; else $s2.=" date_reg LIKE \"$date_start %\"";
 								}
 								elseif($date_end)
 								{
-									if($s2) $s2.=" AND date_reg LIKE \"$date_end %\""; else $s2.=" date_reg LIKE \"$date_end %\"";
+									$buffer=" (date_reg < \"$date_end\" OR date_reg LIKE \"$date_end %\")";
+									//if($s2) $s2.=" AND (date_reg LIKE \"$date_end %\" OR date_reg LIKE \"$date_end %\")"; else $s2.=" date_reg LIKE \"$date_end %\"";
 								}
-								
+								if($buffer){
+									if($s2) $s2.=" AND $buffer";
+										else $s2=$buffer;
+								}
+									
 							if(isset($user_id)&&$user_id)
 								if($s2) $s2.=" AND modify_id LIKE \"$user_id%\""; else $s2.=" modify_id LIKE \"$user_id%\"";
 								
@@ -125,7 +133,7 @@ if (isset($mode) && ($mode=='search'))
 							if(isset($addr_str_nr)&&$addr_str_nr)
 								if($s2) $s2.=" AND addr_str_nr LIKE \"%$addr_str_nr%\""; else $s2.=" addr_str_nr LIKE \"%$addr_str_nr%\"";
 							if(isset($addr_citytown_nr)&&$addr_citytown_nr)
-								if($s2) $s2.=" AND addr_citytown_nr LIKE \"%$addr_citytown_nr%\""; else $s2.=" addr_citytown_nr LIKE \"%$addr_citytown_nr%\"";
+								if($s2) $s2.=" AND addr_citytown_nr LIKE \"$addr_citytown_nr\""; else $s2.=" addr_citytown_nr LIKE \"$addr_citytown_nr\"";
 							if(isset($addr_zip)&&$addr_zip)
 								if($s2) $s2.=" AND addr_zip LIKE \"%$addr_zip%\""; else $s2.=" addr_zip LIKE \"%$addr_zip%\"";
 								

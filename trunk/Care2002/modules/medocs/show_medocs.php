@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -59,25 +59,29 @@ if(empty($encounter_nr)&&!empty($HTTP_SESSION_VARS['sess_en'])){
 	
 if($mode=='show') 
 {
-	$sql="SELECT e.encounter_nr,nd.nr, nd.notes AS diagnosis,nd.short_notes, nd.date,nd.personell_nr, nt.notes AS therapy
-		FROM 	care_encounter AS e, 
-					care_encounter_notes AS nd,
-					care_encounter_notes AS nt
+	$sql="SELECT e.encounter_nr,e.is_discharged,nd.nr, nd.notes AS diagnosis,nd.short_notes, nd.date,nd.personell_nr,nd.personell_name, nt.notes AS therapy
+		FROM 	(care_encounter AS e, 
+					care_encounter_notes AS nd)
+					LEFT JOIN care_encounter_notes AS nt ON nt.ref_notes_nr=nd.nr
 		WHERE  e.encounter_nr=".$encounter_nr."
 			AND e.encounter_nr=nd.encounter_nr 
 			AND nd.type_nr=12
-			AND nd.nr=nt.ref_notes_nr
 			ORDER BY nd.create_time DESC";
 
 		/* 12 = text_diagnosis type of notes 
 		*  13 = text_therapy type of notes
 		*/
 	if($result=$db->Execute($sql)){
-		$rows=$result->RecordCount();
-		if($rows==1){
-			$row=$result->FetchRow();
-			header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&mode=details&nolist=1&pid=".$pid."&encounter_nr=".$encounter_nr."&nr=".$row['nr']);
-			exit;
+		if($rows=$result->RecordCount()){
+			# Resync the encounter_nr
+			if($HTTP_SESSION_VARS['sess_en']!=$encounter_nr) $HTTP_SESSION_VARS['sess_en']=$encounter_nr;
+			if($rows==1){
+				$row=$result->FetchRow();
+				if($row['is_discharged']) $edit=0;
+
+				header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&mode=details&nolist=1&pid=$pid&encounter_nr=&encounter_nr&nr=".$row['nr']."&edit=$edit&is_discharged=".$row['is_discharged']);
+				exit;
+			}
 		}
 	}else{
 		echo $sql;
@@ -90,10 +94,8 @@ if($mode=='show')
 						nd.personell_nr,
 						nd.personell_name,
 						nt.notes AS therapy
-		FROM 	care_encounter_notes AS nd,
-					care_encounter_notes AS nt
+		FROM 	care_encounter_notes AS nd LEFT JOIN care_encounter_notes AS nt ON nd.nr=nt.ref_notes_nr
 		WHERE   nd.nr=$nr
-			AND nd.nr=nt.ref_notes_nr
 		ORDER BY nd.create_time DESC";
 
 	if($result=$db->Execute($sql)){
@@ -109,7 +111,8 @@ $buffer=str_replace('~tag~',$title.' '.$name_last,$LDNoRecordFor);
 $norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer); 
 $HTTP_SESSION_VARS['sess_file_return']=$thisfile;
 
-$breakfile='medocs_pass.php';
+# Set break file
+require('include/inc_breakfile.php');
 
 if($mode=='show') $glob_obj->getConfig('medocs_%');
 /* Load GUI page */

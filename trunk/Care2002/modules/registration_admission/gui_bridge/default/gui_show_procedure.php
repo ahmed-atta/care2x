@@ -1,4 +1,4 @@
-<table border=0 cellpadding=4 cellspacing=1>
+<table border=0 cellpadding=4 cellspacing=1 width=100%>
 <?php
 while($row=$result->FetchRow()){
 

@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -13,18 +13,9 @@ require($root_path.'include/inc_environment_global.php');
 define('CATEGORY_NAME_FULL',1); // 1= the category names are to be displayed in full, 0 = only short codes are displayed 
 define('LOCALIZATION_NAME_FULL',1);// 1= the localization names are to be displayed in full, 0 = only short codes are displayed 
 define('LANG_FILE','drg.php');
-switch($HTTP_SESSION_VARS['sess_user_origin'])
-{
-	case 'admission': 
-	{
-		$local_user='aufnahme_user';
-		break;
-	}
-	default: 
-	{
-		$local_user='ck_op_pflegelogbuch_user';
-	}
-}
+
+require_once('drg_inc_local_user.php');
+
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_drg.php');
 $DRG_obj=new DRG($pn); // Create a drg object
@@ -33,7 +24,7 @@ $toggle=0;
 $thisfile=basename(__FILE__);
 
 if(isset($mode)&&!empty($mode)){
-	$saved_header="location:$thisfile?sid=$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&group_nr=$group_nr&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=1";
+	$saved_header="location:$thisfile?sid=$sid&lang=$lang&pn=$pn&edit=$edit&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&group_nr=$group_nr&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=1";
 }
 switch($mode)
 {
@@ -88,7 +79,7 @@ function pruf(d)
 }
 function openICDsearch(k,x)
 {
-	urlholder="drg-icd10-search.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&group_nr=$group_nr&dept_nr=$dept_nr&oprm=$oprm&display=$display" ?>&keyword="+k+"&showonly="+x;
+	urlholder="drg-icd10-search.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&edit=$edit&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&group_nr=$group_nr&dept_nr=$dept_nr&oprm=$oprm&display=$display" ?>&keyword="+k+"&showonly="+x;
 	drgwin_<?php echo $uid ?>=window.open(urlholder,"drgwin_<?php echo $uid ?>","width=600,height=450,menubar=no,resizable=yes,scrollbars=yes");
 	window.drgwin_<?php echo $uid ?>.moveTo(100,100);
 }
@@ -96,7 +87,7 @@ function deleteItem(i)
 {
 	if(confirm("<?php echo $LDAlertSureDelete ?>"))
 	{
-		//window.location.href='drg-icd10.php?sid=<?php echo "$sid&lang=$lang&mode=delete&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&group_nr=$group_nr&dept_nr=$dept_nr&oprm=$oprm&display=$display" ?>&item='+i;
+		//window.location.href='drg-icd10.php?sid=<?php echo "$sid&lang=$lang&mode=delete&pn=$pn&edit=$edit&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&group_nr=$group_nr&dept_nr=$dept_nr&oprm=$oprm&display=$display" ?>&item='+i;
 		document.submitter.itemx.value=i;
 		document.submitter.mode.value="delete";
 		document.submitter.submit();
@@ -104,7 +95,7 @@ function deleteItem(i)
 }
 function makeChange(v,i,m)
 {
-	//window.location.replace('<?php echo "$thisfile?sid=$sid&lang=$lang&mode=update_stat&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&group_nr=$group_nr&dept_nr=$dept_nr&oprm=$oprm&display=$display" ?>&item='+i+'&val='+v);
+	//window.location.replace('<?php echo "$thisfile?sid=$sid&lang=$lang&mode=update_stat&pn=$pn&edit=$edit&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&group_nr=$group_nr&dept_nr=$dept_nr&oprm=$oprm&display=$display" ?>&item='+i+'&val='+v);
 	document.submitter.val.value=v;
 	document.submitter.itemx.value=i;
 	document.submitter.mode.value=m;
@@ -112,7 +103,7 @@ function makeChange(v,i,m)
 }
 function openQuicklist(t)
 {
-	urlholder="drg-quicklist.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&group_nr=$group_nr&dept_nr=$dept_nr&oprm=$oprm" ?>&target="+t;
+	urlholder="drg-quicklist.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&edit=$edit&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&group_nr=$group_nr&dept_nr=$dept_nr&oprm=$oprm" ?>&target="+t;
 	drgwin_<?php echo $uid ?>=window.open(urlholder,"drgwin_<?php echo $uid ?>","width=600,height=450,menubar=no,resizable=yes,scrollbars=yes");
 	//window.drgwin_<?php echo $uid ?>.moveTo(100,100);
 }
@@ -125,7 +116,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 ?>
 <?php if($newsave) : ?>
  <script language="javascript" >
-//window.parent.opener.location.href='<?php echo "oploginput.php?sid=$sid&lang=$lang&mode=saveok&enc_nr=$pn&op_nr=$opnr&dept_nr=$dept_nr&saal=$oprm&pyear=$y&pmonth=$m&pday=$d" ?>';
+//window.parent.opener.location.href='<?php echo "oploginput.php?sid=$sid&lang=$lang&mode=saveok&enc_nr=$pn&edit=$edit&op_nr=$opnr&dept_nr=$dept_nr&saal=$oprm&pyear=$y&pmonth=$m&pday=$d" ?>';
 </script>
 <?php endif ?>
 </HEAD>
@@ -193,6 +184,25 @@ if (is_object($drg)) {
 			}else{
 				echo  "<b>$LDMostResp_s</b>";
 			}
+		}elseif(!$edit){
+			if($icd['category_nr']){
+				if($cat_ok){
+					while($cat=$cat_obj->FetchRow()){
+						if($icd['category_nr']==$cat['nr']) break;
+					}
+					if(defined('CATEGORY_NAME_FULL')&&CATEGORY_NAME_FULL){
+						if(isset($$cat['LD_var'])&&!empty($$cat['LD_var']))  echo $$cat['LD_var'];
+							else echo $cat['name'];
+					}else{
+						if(isset($$cat['LD_var_short_code'])&&!empty($$cat['LD_var_short_code'])) echo $$cat['LD_var_short_code'];
+							else echo $cat['short_code'];
+					}
+					# Reset the $cat_obj
+					$cat_obj->MoveFirst();
+				}
+			}else{
+				echo '&nbsp;';
+			}
 		}elseif($display=='composite'){
 ?>
 			<select name="cat_<?php echo $icd['diagnosis_nr'] ?>"  onChange="makeChange(this.value,'<?php echo $icd['diagnosis_nr'] ?>','update_stat')">
@@ -246,6 +256,25 @@ if (is_object($drg)) {
 				if(isset($$icd['loc_LD_var_short_code'])&&!empty($$icd['loc_LD_var_short_code'])) echo $$icd['loc_LD_var_short_code'];
 					else echo $icd['loc_short_code'];
 			}
+		}elseif(!$edit){
+			if($icd['localization']){
+				if($loc_ok){
+					while($loc=$loc_obj->FetchRow()){
+						if($icd['localization']==$loc['nr']) break;
+					}
+					if(defined('LOCALIZATION_NAME_FULL')&&LOCALIZATION_NAME_FULL){
+						if(isset($$loc['LD_var'])&&!empty($$loc['LD_var'])) echo $$loc['LD_var'];
+							else echo $loc['name'];
+					}else{
+						if(isset($$loc['LD_var_short_code'])&&!empty($$loc['LD_var_short_code'])) echo $$loc['LD_var_short_code'];
+							else echo $loc['short_code'];
+					}
+					# Reset the loc_obj object
+					$loc_obj->MoveFirst();
+				}
+			}else{
+				echo '&nbsp;';
+			}
 		}else{
 ?>
 			<select name="loc_<?php echo $icd['diagnosis_nr'] ?>"  onChange="makeChange(this.value,'<?php echo $icd['diagnosis_nr'] ?>','update_loc')">
@@ -284,12 +313,14 @@ if (is_object($drg)) {
 				</td>';
 		if($display=="composite"){
 			echo '
-					<td><a href="';
-			echo "javascript:deleteItem('".$icd['diagnosis_nr']."')";
-			echo '"><img '.$img_delete.' alt="'.$LDDeleteEntry.'"></a>
+					<td>';
+			if($edit){
+				echo '<a href="javascript:deleteItem(\''.$icd['diagnosis_nr'].'\')"><img '.$img_delete.' alt="'.$LDDeleteEntry.'"></a>';
+			}
+			echo '
 					</td>';
 		}
-		echo "</tr>";
+		echo '</tr>';
 	}
 }
 
@@ -297,12 +328,12 @@ if (is_object($drg)) {
 	</table>
 	
 	</td>
-	<?php if($display=="composite") : ?>   
+	<?php if($display=='composite'&&$edit) { ?>   
 	 <td valign="top" bgcolor="#0000aa"><font face=arial size=2 color=#ffffff>
 	<input type="button" value="<?php echo $LDSearch ?>" onClick="javascript:openICDsearch('','0')">&nbsp;
  	<p><input type="button" value="<?php echo $LDQuickList ?>" onClick="javascript:openQuicklist('diagnosis')"><p>
 	</td>
-	<?php endif ?>
+	<?php } ?>
   </tr>
 </table>
 
@@ -323,6 +354,7 @@ if (is_object($drg)) {
 <input type="hidden" name="oprm" value="<?php echo $oprm; ?>">
 <input type="hidden" name="display" value="<?php echo $display; ?>">
 <input type="hidden" name="group_nr" value="<?php echo $group_nr; ?>">
+<input type="hidden" name="edit" value="<?php echo $edit; ?>">
 <input type="hidden" name="y" value="<?php echo $y; ?>">
 <input type="hidden" name="m" value="<?php echo $m; ?>">
 <input type="hidden" name="d" value="<?php echo $d; ?>">

@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -14,77 +14,54 @@ define('LANG_FILE','lab.php');
 $local_user='ck_lab_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-require_once($root_path.'include/inc_config_color.php');
+$thisfile=basename(__FILE__);
+$breakfile='labor.php'.URL_APPEND;
 
-$dbtable='care_admission_patient';
-$thisfile='labor_data_patient_such.php';
-$breakfile='labor.php?sid='.$sid.'&lang='.$lang;
-
+if(!isset($mode)) $mode='';
+$keyword=trim($keyword);
 $toggle=0;
 
-$fielddata='patnum, name, vorname, gebdatum, item';
+if(($search)&&!empty($keyword)){
 
-$keyword=trim($keyword);
-
-if(($search)and($keyword)and($keyword!=" "))
-  {
-		include('../include/inc_db_makelink.php');
-		if($link&&$DBLink_OK) 
-		{
-		
-             /* Load the date formatter */
-            include_once($root_path.'include/inc_date_format_functions.php');
-            
+	# Load the date formatter 
+	include_once($root_path.'include/inc_date_format_functions.php');
+    
+	include_once($root_path.'include/care_api_classes/class_lab.php');
 	
-            /* Load editor functions for time format converter */
-            //include_once('../include/inc_editor_fx.php');
-		
-			if($keyword<20000000) $suchbuffer=$keyword+20000000; else $suchbuffer=$keyword;
-			if(is_numeric($keyword))
-			{
-			    $sql='SELECT '.$fielddata.' FROM '.$dbtable.' 
-			            WHERE patnum="'.((int)$keyword).'"';
-			}
-			else
-			{
-			    $sql='SELECT '.$fielddata.' FROM '.$dbtable.' 
-			             WHERE name LIKE "'.$keyword.'%" 
-			               OR vorname LIKE "'.$keyword.'%"
-			               OR gebdatum LIKE "'.$keyword.'%"
-			               OR patnum LIKE "'.$suchbuffer.'" 
-			               ORDER BY patnum';
-			}
-			
-        	$ergebnis=$db->Execute($sql);
-			$linecount=0;
-			
-			if($ergebnis)
-       		{
-				while ($zeile=$ergebnis->FetchRow()) $linecount++;
-				if ($linecount>0) 
-				{ 
-					mysql_data_seek($ergebnis,0);
-				}
-			}
-			 else { echo "$LDDbNoRead<br>"; } 
-		}
-  		 else { echo "$LDDbNoLink<br>"; } 
+	$lab_obj=new Lab();
+	# Get the existing lab reports
+	if($mode=='edit'){
+		$encounter=&$lab_obj->searchEncounterBasicInfo($keyword);  
+	}else{
+		$encounter=&$lab_obj->searchEncounterLabResults($keyword);
+	}  
+	# Get the number of results found
+	$linecount=$lab_obj->LastRecordCount();      
 }
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
 <?php echo setCharSet(); ?>
-	<script language="javascript" >
-function gethelp(x,s,x1,x2,x3)
-{
-	if (!x) x="";
-	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
-	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
-	window.helpwin.moveTo(0,0);
-}
-	</script>
 
+<?php 
+require($root_path.'include/inc_js_gethelp.php'); 
+require($root_path.'include/inc_css_a_hilitebu.php');
+?>
+
+<script language="JavaScript">
+<!-- Script Begin
+function checkForm(v) {
+	if((v.value=="")||(v.value==" ")){
+		v.value="";
+		v.focus();
+		return false;
+	}else{
+		return true;
+	}
+}
+//  Script End -->
+</script>
 </HEAD>
 
 <BODY onLoad="document.sform.keyword.select()">
@@ -107,7 +84,7 @@ function gethelp(x,s,x1,x2,x3)
 
 <!-- This is the search entry mask -->
 
-<FORM action="<?php echo $thisfile; ?>" method="post" name="sform">
+<FORM action="<?php echo $thisfile; ?>" method="post" name="sform" onSubmit="return checkForm(sform.keyword)">
 <font face="Arial,Verdana"  color="#000000" size=-1>
 <B><?php echo $LDSearchWordPrompt ?></B></font><p>
 <font size=3><INPUT type="text" name="keyword" size="20" maxlength="40" value="<?php echo $keyword ?>"></font> 
@@ -116,103 +93,101 @@ function gethelp(x,s,x1,x2,x3)
 <input type=hidden name="lang" value=<?php echo $lang ?>>
 <input type=hidden name="mode" value=<?php echo $mode ?>>
 <INPUT type="image" <?php echo createLDImgSrc($root_path,'searchlamp.gif','0','absmiddle') ?>>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="javascript:gethelp('lab.php','search','<?php echo $mode ?>','<?php echo $linecount ?>','<?php echo $datafound ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>></a>
+<a href="javascript:gethelp('lab.php','search','<?php echo $mode ?>','<?php echo $linecount ?>','<?php echo $datafound ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?>></a>
 </FORM>
 <p>
 <?php 
 
-if($linecount)
-{
-            /* Print the search result message */
-			echo str_replace('~nr~',$linecount,$LDFoundPatient).'<p>';
-			
-			 /* Create the column descriptors */
-			echo "<table border=0 cellpadding=3 cellspacing=1> <tr bgcolor=#9f9f9f>";
-					for($i=0;$i<sizeof($LDfieldname);$i++) 
-					{
-						echo"<td><font face=arial size=2 color=#ffffff><b>".$LDfieldname[$i]."</b></td>";
-		
-					}
-					 echo"<td>&nbsp;</td></tr>";
-                    
-					/* List all the stored lab result documents of the patient */
-					while($zeile=$ergebnis->FetchRow())
-					{
-						echo '<tr bgcolor=';
-						if($toggle) { echo "#dfdfdf>"; $toggle=0;} else {echo "#ffffff>"; $toggle=1;};
-	                    
-						/* Create the pat. nr., name, firstname columns */
-						for($i=0;$i<mysql_num_fields($ergebnis)-2;$i++) 
-						{
-							echo"
-							<td><font face=arial size=2>";
-							if($zeile[$i]=='')echo '&nbsp;'; else echo $zeile[$i];
-							echo '</td>';
-						}
-						
-						/* Create the date column extra */
-							echo'
-							<td><font face=arial size=2>';
-							if($zeile[$i]=='')echo '&nbsp;'; else echo formatDate2Local($zeile[$i],$date_format);
-							echo '</td>';
-						
-						/**
-						*  if mode is edit, create the button linked to labor_data_check_arch.php 
-						*  if mode is not edit, create button linked to labor_datalist_noedit.php (read only list)
-						*/
-						echo'
-						<td><font face=arial size=2>&nbsp';
-						
-					    if($mode=='edit')
-						{ 
-						echo'<a href="labor_data_check_arch.php?sid='.$sid.'&lang='.$lang.'&mode='.$mode.'&patnum='.$zeile[patnum].'&update=1"  title="'.$LDEnterData.'">
-						<button onClick="javascript:window.location.href=\'labor_data_check_arch.php?sid='.$sid.'&lang='.$lang.'&mode='.$mode.'&patnum='.$zeile[patnum].'&update=1\'">
-						<img 	'.createComIcon($root_path,'update2.gif','0','absmiddle').' alt="'.$LDEnterData.'">';
-						}
-						else
-						{
-						   echo'
-							<a href="labor_datalist_noedit.php?sid='.$sid.'&lang='.$lang.'&patnum='.$zeile[patnum].'&noexpand=1&nostat=1"  title="'.$LDClk2See.'">
-							<button onClick="javascript:window.location.href=\'labor_datalist_noedit.php?sid='.$sid.'&lang='.$lang.'&patnum='.$zeile[patnum].'&noexpand=1&nostat=1\'">
-							<img '.createComIcon($root_path,'update2.gif','0','absmiddle').' alt="'.$LDClk2See.'">';
-						}
-						
-						echo ' 
-						<font size=1>'.$LDLabReport.'</font></button></a>&nbsp;
-						</td></tr>';
+$prev_nr=0;
 
-					}
-					echo '</table>';
+if($linecount){
+	$dcount=0;
+	# Print the search result message 
+	if($mode=='edit')	echo str_replace('~nr~',$linecount,$LDFoundPatient).'<p>';
+			
+	# Create the column descriptors 
+	echo "<table border=0 cellpadding=3 cellspacing=1> <tr bgcolor=#9f9f9f>";
+
+	for($i=0;$i<sizeof($LDfieldname);$i++) {
+		echo"<td><font face=arial size=2 color=#ffffff><b>".$LDfieldname[$i]."</b></td>";
+	}
+	
+	echo"<td>&nbsp;</td></tr>";
+           
+	# List all the stored lab result documents of the patient 
+	while($zeile=$encounter->FetchRow()){
+
+		if($zeile['encounter_nr']!=$prev_nr){
+
+			$prev_nr=$zeile['encounter_nr'];
+			$dcount++;
+
+			echo '
+			<tr bgcolor=';
+			if($toggle) { echo '#efefef>';} else {echo '#ffffff>';}
+			$toggle=!$toggle;
+			echo '<td><font face=arial size=2>';
+			echo '&nbsp;'.$zeile['encounter_nr'];
+			if($zeile['encounter_class_nr']==2) echo ' <img '.createComIcon($root_path,'redflag.gif').'> <font size=1 color="red">'.$LDAmbulant.'</font>';
+        	echo '</td>
+					<td><font face=arial size=2>';
+			echo '&nbsp;'.ucfirst($zeile['name_last']);
+			echo '</td>
+					<td><font face=arial size=2>';
+			echo '&nbsp;'.ucfirst($zeile['name_first']);
+			echo '</td>
+					<td><font face=arial size=2>';
+			echo '&nbsp;'.formatDate2Local($zeile['date_birth'],$date_format);
+			echo '</td>';	
+						
+						
+			#  if mode is edit, create the button linked to labor_data_check_arch.php 
+			#  if mode is not edit, create button linked to labor_datalist_noedit.php (read only list)
+
+			echo'
+				<td><font face=arial size=2>&nbsp';
+						
+			if($mode=='edit'){ 
+				echo'<a href="labor_data_check_arch.php'.URL_APPEND.'&mode='.$mode.'&encounter_nr='.$zeile['encounter_nr'].'&update=1"  title="'.$LDEnterData.'">
+					<button onClick="javascript:window.location.href=\'labor_data_check_arch.php'.URL_REDIRECT_APPEND.'&mode='.$mode.'&encounter_nr='.$zeile['encounter_nr'].'&update=1\'"><img '.createComIcon($root_path,'update2.gif','0','absmiddle').' alt="'.$LDEnterData.'"><font size=1> '.$LDNewData;
+			}else{
+				echo'
+					<a href="labor_datalist_noedit.php'.URL_APPEND.'&encounter_nr='.$zeile['encounter_nr'].'&noexpand=1&nostat=1&user_origin=lab"  title="'.$LDClk2See.'">
+					<button onClick="javascript:window.location.href=\'labor_datalist_noedit.php'.URL_REDIRECT_APPEND.'&encounter_nr='.$zeile['encounter_nr'].'&noexpand=1&nostat=1&user_origin=lab\'"><img '.createComIcon($root_path,'update2.gif','0','absmiddle').' alt="'.$LDClk2See.'"><font size=1> '.$LDLabReport;
+			}
+						
+			echo '</font></button></a>&nbsp;
+				</td></tr>';
+
+		}
+	}
+	
+	echo '</table>';
 					
-					/* If result is more than 15 items, create an additional search entry mask below the list*/
-					if($linecount>15)
-					{
-						echo '
-						<p><font color=red><B>'.$LDNewSearch.':</font>
-						<FORM action="'.$thisfile.'" method="post">
-						<font face="Arial,Verdana"  color="#000000" size=-1>
-						'.$LDSearchWordPrompt.'</B><p>
-						<INPUT type="text" name="keyword" size="20" maxlength="40" value="'.$keyword.'"> 
-						<input type=hidden name="search" value=1>
-						<input type=hidden name="sid" value="'.$sid.'">
-						<input type=hidden name="lang" value="'.$lang.'">
-						<input type=hidden name="mode" value="'.$mode.'">
-						<INPUT type="image"  '.createLDImgSrc($root_path,'searchlamp.gif','0','absmiddle').'></font></FORM>
-						<p>';
-					}
+	# If result is more than 15 items, create an additional search entry mask below the list
+	if($dcount>15){
+		echo '
+				<p><font color=red><B>'.$LDNewSearch.':</font>
+				<FORM action="'.$thisfile.'" method="post" name="form2" onSubmit="return checkForm(form2.keyword)">
+				<font face="Arial,Verdana"  color="#000000" size=-1>
+				'.$LDSearchWordPrompt.'</B><p>
+				<INPUT type="text" name="keyword" size="20" maxlength="40" value="'.$keyword.'"> 
+				<input type=hidden name="search" value=1>
+				<input type=hidden name="sid" value="'.$sid.'">
+				<input type=hidden name="lang" value="'.$lang.'">
+				<input type=hidden name="mode" value="'.$mode.'">
+				<INPUT type="image"  '.createLDImgSrc($root_path,'searchlamp.gif','0','absmiddle').'></font></FORM>
+				<p>';
+	}
 }
 
 ?>
 <p>
 <br>&nbsp;
 <p>
-<a href="<?php echo "$breakfile" ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a>
+<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a>
 
 <p>
-<!--<hr width=80% align=left>
-<p>
- <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><img src="../img/small_help.gif" border=0> <?php echo $LDWildCards ?></a>
- -->
 
 </ul>
 &nbsp;

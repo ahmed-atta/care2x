@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -16,10 +16,8 @@ require('./include/inc_admit_station_bridge.php');
 
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-if($edit&&!$HTTP_COOKIE_VARS[$local_user.$sid]) {header("Location:../language/$lang/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
+//if($edit&&!$HTTP_COOKIE_VARS[$local_user.$sid]) {header("Location:../language/$lang/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 require_once($root_path.'include/inc_editor_fx.php'); 
-
 /* Load the data time shifter and create object */
 require_once($root_path.'classes/datetimemanager/class.dateTimeManager.php');
 $dateshifter=new dateTimeManager();
@@ -82,9 +80,7 @@ $tagnamebuf=$tagname;
 $date_start=date('Y-m-d',mktime(0,0,0,$kmonat,$tag,$jahr));
 $date_end=$dateshifter->shift_dates($date_start,-6,'d');
 
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok){	
+
 	/* Create encounter object */
 	include_once($root_path.'include/care_api_classes/class_encounter.php');
 	$enc_obj= new Encounter;
@@ -138,11 +134,9 @@ if($dblink_ok){
 			// get daily prescription notes
 			$daily_medis=$charts_obj->getChartDailyPrescriptionNotes($pn,$date_start,$date_end);
 		}
-	}else {echo "<p>$sql$LDDbNoRead"; exit;}
+	}else {echo $enc_obj->getLastQuery()."<p>$LDDbNoRead"; exit;}
 	include_once($root_path.'include/inc_date_format_functions.php');
-}else{
-	echo "$LDDbNoLink<br>$sql<br>";
-}
+
 
 function getlatestdata($info,$d,$m,$y)
 {
@@ -596,7 +590,7 @@ for ($i=$tag,$acttag=$tag,$d=0;$i<($tag+7);$i++,$d++,$acttag++)
 	if($r) 
 	 echo $r;
 	else 
-	  if($edit) echo '<img src="../../gui/img/common/default/pixel.gif" width="95" height="12"  align="absmiddle"  border=0 alt="'.str_replace("~tagword~",$LDAntiCoag,$LDClk2EnterDaily).'" >';
+	  if($edit) echo '<img src="p.gif" width="95" height="12"  align="absmiddle"  border=0 alt="'.str_replace("~tagword~",$LDAntiCoag,$LDClk2EnterDaily).'" >';
 	if($edit) echo '</a>';
 	echo '
 	</td>';
@@ -632,11 +626,11 @@ if(is_object($medis)){
 if(!$maxmedx||$maxmedx<10) $maxmedx=10;
 
 echo '
-		<td bgcolor="#ffffff" ><font size=1 face="verdana,arial" ><nobr>';
+		<td bgcolor="#ffffff" ><nobr><font size=1 face="verdana,arial" >';
 	if($edit) echo '<a href="javascript:popgetmedx(\'medication\',\''.$pn.'\',\''.$tag.'\')" title="'.str_replace("~tagword~",$LDMedication,$LDClk2Enter).'">';
 echo $LDMedication;
 	if($edit) echo '</a>';
-echo '&nbsp;<font color="#ff3366">'.$LDIvPort.'>';
+echo ' <font color="#ff3366">'.$LDIvPort.'></font></font></nobr><br>';
 echo '
 <table border=0 border="0" cellpadding="0"  cellspacing="0" width="100%">
   <tr>
@@ -686,12 +680,13 @@ for ($i=$tag,$acttag=$tag,$d=0;$i<($tag+7);$i++,$d++,$acttag++)
 	echo '><font face="verdana,arial" size="1" color="#000000">';
 	
 
-	if($edit) echo '
-	<a href="javascript:popgetdailyinfo(\'iv_needle\',\''.$pn.'\',\''.$actjahr.'\',\''.$actmonat.'\',\''.$acttag.'\',\''.($d+$tagnamebuf).'\',\''.$jahr.'\',\''.$kmonat.'\',\''.$tag.'\',\''.$tagname.'\')" title="'.str_replace("~tagword~",$LDIvPort,$LDClk2EnterDaily).'">';
+	if($edit) echo '<a href="javascript:popgetdailyinfo(\'iv_needle\',\''.$pn.'\',\''.$actjahr.'\',\''.$actmonat.'\',\''.$acttag.'\',\''.($d+$tagnamebuf).'\',\''.$jahr.'\',\''.$kmonat.'\',\''.$tag.'\',\''.$tagname.'\')" title="'.str_replace("~tagword~",$LDIvPort,$LDClk2EnterDaily).'">';
 
-	if($r)  echo $r;
-		else
-		 if($edit) echo '<img src="../../gui/img/common/default/pixel.gif" width="95" height="9"  align="absmiddle"  border=0 alt="'.str_replace("~tagword~",$LDIvPort,$LDClk2EnterDaily).'">';
+	if($r){
+		echo substr($r,0,13);
+	}elseif($edit){
+		echo '<img src="p.gif" width="95" height="9"  align="absmiddle"  border=0 alt="'.str_replace("~tagword~",$LDIvPort,$LDClk2EnterDaily).'">';
+	}
 	if($edit) echo '</a>';
 	
 // ************** medication dailydose ************************
@@ -735,7 +730,7 @@ for ($i=$tag,$acttag=$tag,$d=0;$i<($tag+7);$i++,$d++,$acttag++)
 		if($edit) echo '<a href="javascript:popgetdailymedx(\'medication\',\''.$pn.'\',\''.$actjahr.'\',\''.$actmonat.'\',\''.$acttag.'\',\''.($d+$tagnamebuf).'\',\''.$jahr.'\',\''.$kmonat.'\',\''.$tag.'\',\''.$tagname.'\')" title="'.str_replace("~tagword~",$LDMedication,$LDClk2PlanDaily).'">';
 	
 	
-		if($ok) echo $dosis['short_notes']; else echo'<img src="../../gui/img/common/default/pixel.gif" width="90" height="9"  align="absmiddle"  border=0>';
+		if($ok) echo $dosis['short_notes']; else echo'<img src="p.gif" width="90" height="9"  align="absmiddle"  border=0>';
 		if($edit) echo '</a>';
 		echo '</td></tr>';
 		$toggle=!$toggle;	

@@ -19,7 +19,7 @@ if (!$internok&&!$HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]) {header("Lo
   <frameset rows="53%,*">
 <?php if(($mode!="")) : ?>
     <frame name= "OPLOGMAIN"  src="<?php //echo 'oplogmain.php?gotoid='.$patnum.'&op_nr='.$op_nr.'&dept='.$dept.'&saal='.$saal.'&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday; ?>" >
-    <frame name="LOGINPUT"  src="<?php echo "oploginput.php?sid=$sid&lang=$lang&internok=$internok&mode=$mode&enc_nr=$enc_nr&op_nr=$op_nr&dept_nr=$dept_nr&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday";?>">
+    <frame name="LOGINPUT"  src="<?php echo "oploginput.php?sid=$sid&lang=$lang&internok=$internok&mode=$mode&enc_nr=$enc_nr&op_nr=$op_nr&dept_nr=$dept_nr&saal=$saal&thisday=$thisday";?>">
   </frameset>
   <frameset cols="15%,*">
     <frame name= "OPLOGINPUT"  SRC = "">

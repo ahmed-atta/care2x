@@ -3,21 +3,20 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-
+$lang_tables[]='prompt.php';
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
 require_once($root_path.'include/inc_date_format_functions.php');
-require($root_path.'include/care_api_classes/class_person.php');
-require($root_path.'include/care_api_classes/class_insurance.php');
+require_once($root_path.'include/care_api_classes/class_person.php');
+require_once($root_path.'include/care_api_classes/class_insurance.php');
 
 //* Get the global config for person's registration form*/
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
@@ -34,8 +33,11 @@ if((!isset($pid)||!$pid)&&$HTPP_SESSION_VARS['sess_pid']) $pid=$HTPP_SESSION_VAR
 $HTTP_SESSION_VARS['sess_path_referer']=$top_dir.$thisfile;
 $HTTP_SESSION_VARS['sess_file_return']=$thisfile;
 $HTTP_SESSION_VARS['sess_pid']=$pid;
-$HTTP_SESSION_VARS['sess_full_pid']=$pid+$GLOBAL_CONFIG['person_id_nr_adder'];
+//$HTTP_SESSION_VARS['sess_full_pid']=$pid+$GLOBAL_CONFIG['person_id_nr_adder'];
 $HTTP_SESSION_VARS['sess_parent_mod']='registration';
+$HTTP_SESSION_VARS['sess_user_origin']='registration';
+# Reset the encounter number
+$HTTP_SESSION_VARS['sess_en']=0;
 
 $dbtable='care_person';
 
@@ -50,9 +52,6 @@ if(!isset($user_id) || !$user_id)
     $user_id=$$user_id;
 }
 
-if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
-if($dblink_ok) {
- 
     if(isset($pid) && ($pid!='')) {
 
 
@@ -63,8 +62,8 @@ if($dblink_ok) {
          if($data_obj=&$person_obj->getAllInfoObject())
          {
 	        $zeile=$data_obj->FetchRow();
-	 
-            while(list($x,$v)=each($zeile))	$$x=$v;       
+	 		extract($zeile);
+            //while(list($x,$v)=each($zeile))	$$x=$v;       
 			/* Get related insurance data*/
 			$p_insurance=&$pinsure_obj->getPersonInsuranceObject($pid);
 			if($p_insurance==false) {
@@ -74,7 +73,8 @@ if($dblink_ok) {
 					$insurance_show=true;
 				} elseif ($p_insurance->RecordCount()==1){
 					$buffer= $p_insurance->FetchRow();
-					while(list($x,$v)=each($buffer)) {$$x=$v; }
+					extract($buffer);
+					//while(list($x,$v)=each($buffer)) {$$x=$v; }
 					$insurance_show=true;
 			        /*Get insurace firm name */
 					$insurance_firm_name=$pinsure_obj->getFirmName($insurance_firm_id); 
@@ -82,17 +82,15 @@ if($dblink_ok) {
 			} 
 			
 			$insurance_class_info=$pinsure_obj->getInsuranceClassInfo($insurance_class_nr);
-			
-			/* update the record's history */
+			# Check if person is currently admitted
+			$current_encounter=$person_obj->CurrentEncounter($pid);
+			# update the record's history 
 			if(empty($newdata)) @$person_obj->setHistorySeen($HTTP_SESSION_VARS['sess_user_name']);
         }
 
         /* Check whether config foto path exists, else use default path */			
         $photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $default_photo_path;
      }
-}
-else 
-{ echo "$LDDbNoLink<br>"; }
 
 require_once($root_path.'include/inc_photo_filename_resolve.php');
 

@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -54,7 +54,7 @@ if($dblink_ok){/* Load date formatter */
 	
 	
 	// Get the wards' info
-	$sql="SELECT nr,name,room_nr_start,room_nr_end	FROM $dbtable 
+	$sql="SELECT nr,ward_id,name,room_nr_start,room_nr_end	FROM $dbtable 
 				WHERE NOT is_temp_closed AND status NOT IN ('hide','delete','void','inactive') AND date_create<='$s_date' ORDER BY nr";
 		//echo $sql.'<p>';
 	if($wards=$db->Execute($sql))
@@ -109,7 +109,7 @@ var urlholder;
 	stationwin=window.open(urlholder,station,winspecs);
 	}
 
-  function statbel(e,ward_nr){
+  function statbel(e,ward_nr,st){
 <?php
 	if($cfg['dhtml'])
 	{
@@ -120,8 +120,8 @@ var urlholder;
 ?>
 	winspecs="menubar=no,resizable=yes,scrollbars=yes,width=" + (w-15) + ", height=" + (h-60);
 	
-	if (e==1) urlholder="nursing-station-pass.php?rt=pflege&sid=<?php echo "$sid&lang=$lang&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>&edit=1&retpath=quick&ward_nr="+ward_nr;
-		else urlholder="nursing-station.php?rt=pflege&sid=<?php echo "$sid&lang=$lang&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>&edit=0&retpath=quick&ward_nr="+ward_nr;
+	if (e==1) urlholder="nursing-station-pass.php?rt=pflege&sid=<?php echo "$sid&lang=$lang&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>&edit=1&retpath=quick&ward_nr="+ward_nr+"&station="+st;
+		else urlholder="nursing-station.php?rt=pflege&sid=<?php echo "$sid&lang=$lang&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>&edit=0&retpath=quick&ward_nr="+ward_nr+"&station="+st;
 	//stationwin=window.open(urlholder,station,winspecs);	
 	window.location.href=urlholder;
 <?php // if($cfg['dhtml']) echo 'window.stationwin.moveTo(0,0);'; ?>
@@ -244,7 +244,7 @@ while ($result=$wards->FetchRow()){
 			</td>';
 	echo "\r\n";
 	echo '
-			</td><td align=center> <a href="javascript:statbel(\'1\',\''.$result['nr'].'\')">';
+			</td><td align=center> <a href="javascript:statbel(\'1\',\''.$result['nr'].'\',\''.$result['ward_id'].'\')">';
 	if($is_today){
 		echo '
 			<img '.$img_statbel.' alt="'.str_replace("~station~",$result['name'],$LDEditStation).'" border="0"></a>';

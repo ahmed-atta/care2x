@@ -5,11 +5,13 @@ $app_types=$pres_obj->getAppTypes();
 $pres_types=$pres_obj->getPrescriptionTypes();
 ?>
 
-<form method="post" >
+<form method="post" name="reportform">
  <table border=0 cellpadding=2 width=100%>
    <tr bgcolor="#f6f6f6">
      <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDate; ?></td>
-     <td><input type="text" name="prescribe_date" size=10 maxlength=10  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"></td>
+     <td><input type="text" name="prescribe_date" size=10 maxlength=10  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+	 	 <a href="javascript:show_calendar('reportform.prescribe_date','<?php echo $date_format; ?>')"><img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
+	</td>
    </tr>
    
    <tr bgcolor="#f6f6f6">

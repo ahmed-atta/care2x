@@ -5,7 +5,6 @@ require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
 require_once($root_path.'include/inc_date_format_functions.php');
 
 //$thisfile=basename(__FILE__);

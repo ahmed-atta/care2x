@@ -11,7 +11,7 @@ require_once($root_path.'global_conf/areas_allow.php');
 
 $allowedarea=&$allow_area['op_room'];
 
-if($retpath=="calendar_opt"){
+if($retpath=='calendar_opt'){
 	$append=URL_APPEND."&dept_nr=$dept_nr&retpath=$retpath&pday=$pday&pmonth=$pmonth&pyear=$pyear"; 
 	$breakfile=$root_path."modules/calendar/calendar-options.php".URL_APPEND."&dept_nr=$dept_nr&retpath=$retpath&day=$pday&month=$pmonth&year=$pyear";
 }else{
@@ -38,12 +38,12 @@ $thisfile=basename(__FILE__);
 
 $lognote="OP Logs $title ok";
 
-$userck="ck_op_pflegelogbuch_user";
+$userck='ck_op_pflegelogbuch_user';
 //reset cookie;
 // reset all 2nd level lock cookies
 setcookie($userck.$sid,'');
 require($root_path.'include/inc_2level_reset.php'); 
-setcookie(ck_2level_sid.$sid,"");
+setcookie(ck_2level_sid.$sid,'');
 
 require($root_path.'include/inc_passcheck_internchk.php');
 if ($pass=='check') 	

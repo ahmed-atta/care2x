@@ -4,7 +4,7 @@ require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 //error_reporting(E_WARNING);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -32,8 +32,11 @@ if($retpath=="quick") $breakfile="nursing-schnellsicht.php".URL_APPEND;
  else $breakfile="nursing.php".URL_APPEND;
 
 $lognote="$LDNursingStation $station ok";
- 
-$userck="ck_pflege_user";
+
+$HTTP_SESSION_VARS['sess_parent_mod']='';
+
+$userck='ck_pflege_user';
+
 //echo $fileforward;
 //reset cookie;
 // reset all 2nd level lock cookies

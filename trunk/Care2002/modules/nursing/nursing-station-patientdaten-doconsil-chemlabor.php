@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -416,7 +416,7 @@ topmargin=0 leftmargin=0 marginwidth=0 marginheight=0
 if($user_origin=='lab' && $pn)
 {
 ?>
-<a href="<?php echo $thisfile."?sid=$sid&lang=$lang&station=$station&user_origin=$user_origin&status=$status&target=$target&noresize=$noresize"; ?>"><img <?php echo createLDImgSrc($root_path,'newpat2.gif','0') ?>></a>
+<a href="<?php echo $thisfile."?sid=$sid&lang=$lang&station=$station&user_origin=$user_origin&status=$status&target=$target&noresize=$noresize"; ?>"><img <?php echo createLDImgSrc($root_path,'newpat2.gif','0') ?> <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';?>></a>
 &nbsp;
 <?php
 }

@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -11,18 +11,8 @@ require($root_path.'include/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 define('LANG_FILE','drg.php');
-switch($HTTP_SESSION_VARS['sess_user_origin'])
-{
-	case 'admission': 
-	{
-		$local_user='aufnahme_user';
-		break;
-	}
-	default: 
-	{
-		$local_user='ck_op_pflegelogbuch_user';
-	}
-}
+
+require_once('drg_inc_local_user.php');
 
 if (!$pn) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;}; 
 
@@ -87,7 +77,7 @@ if($saveok&&$mode=='linkgroup'){
 ?>
 
     <script language="javascript" >
-    window.opener.parent.location.replace('drg-composite-start.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&opnr=$opnr&group_nr=$group_nr&ln=$ln&fn=$fn&bd=$bd&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=composite&newsave=1"; ?>');
+    window.opener.parent.location.replace('drg-composite-start.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&opnr=$opnr&group_nr=$group_nr&edit=$edit&ln=$ln&fn=$fn&bd=$bd&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=composite&newsave=1"; ?>');
     //window.opener.parent.INTERN.location.reload();
     window.close();
    </script>
@@ -180,6 +170,7 @@ eval("echo $tp;");
 <input type="hidden" name="bd" value="<?php echo $bd; ?>">
 <input type="hidden" name="dept_nr" value="<?php echo $dept_nr; ?>">
 <input type="hidden" name="group_nr" value="<?php echo $group_nr; ?>">
+<input type="hidden" name="edit" value="<?php echo $edit; ?>">
 <input type="hidden" name="oprm" value="<?php echo $oprm; ?>">
 <input type="hidden" name="display" value="<?php echo $display; ?>">
 <input type="hidden" name="target" value="<?php echo $target; ?>">

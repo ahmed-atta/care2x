@@ -109,8 +109,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
 <a href="javascript:gethelp('admission_how2new.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
-if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo "startframe.php?sid=".$sid."&lang=".$lang; 
-	else echo $breakfile."?sid=$sid&target=entry&lang=$lang"; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
+echo $breakfile;  ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </td>
 </tr>
 
@@ -162,7 +161,7 @@ align=right id=catcom border=0></a>
 <td ><FONT SIZE=-1  FACE="Arial" color="#800000"><?php if($pid) echo $pid+$person_id_nr_adder ?>&nbsp;
 </td>
 <td  rowspan=6 ><FONT SIZE=-1  FACE="Arial">
-<a href="#"  onClick="showpic(document.aufnahmeform.photo_filename)"><img <?php echo $img_source; ?> width=137  id="headpic" name="headpic"></a>
+<a href="#"  onClick="showpic(document.aufnahmeform.photo_filename)"><img <?php echo $img_source; ?> id="headpic" name="headpic"></a>
 <br>
 <?php echo $LDPhoto ?><br><input name="photo_filename" type="file" size="15"   onChange="showpic(this)" value="<?php if(isset($photo_filename)) echo $photo_filename ?>">
 
@@ -439,8 +438,8 @@ createTR($errorethnicorig, 'ethnic_orig', $LDEthnicOrigin,$ethnic_orig,2);
 <?php if($update) 
 	{ 
 		echo '<input type="button" value="'.$LDCancel.'" onClick="location.replace(\'';
-		if($from=="such") echo 'aufnahme_daten_such.php'.URL_APPEND.'&lang='.$lang;
-			else echo 'aufnahme_list.php'.URL_APPEND.'&newdata=1&lang='.$lang;
+		if($target=='search') echo 'patient_register_show.php'.URL_REDIRECT_APPEND.'&lang='.$lang;
+			else echo 'patient_register_archive.php'.URL_REDIRECT_APPEND.'&newdata=1&lang='.$lang;
 		echo '\')"> '; 
 	}
 ?>
@@ -473,7 +472,7 @@ createTR($errorethnicorig, 'ethnic_orig', $LDEthnicOrigin,$ethnic_orig,2);
 
 <p>
 <a href="
-<?php if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) echo 'startframe.php';
+<?php if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) echo $breakfile;
 	else echo 'aufnahme_pass.php';
 	echo URL_APPEND;
 ?>

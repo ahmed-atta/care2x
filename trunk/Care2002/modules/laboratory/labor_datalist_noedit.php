@@ -1,107 +1,97 @@
 <?php
+
+define('LAB_MAX_DAY_DISPLAY',7); # define the max number or days displayed at one time
+
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+$lang_tables=array('chemlab_groups.php','chemlab_params.php','prompt.php');
 define('LANG_FILE','lab.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
+if(!isset($user_origin)) $user_origin='';
 
-	if($user_origin=='lab')
-	{
-  		$local_user='ck_lab_user';
-  		$breakfile=$root_path.'modules/laboratory/labor.php'.URL_APPEND;
-	}
-	else
-	{
-  		$local_user='ck_pflege_user';
-  		$breakfile=$root_path.'modules/nursing/nursing-station-patientdaten.php'.URL_APPEND;
-	}
-	if(!$HTTP_COOKIE_VARS[$local_user.$sid]) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-//echo $HTTP_COOKIE_VARS[$local_user.$sid];
+if($user_origin=='lab'||$user_origin=='lab_mgmt'){
+  	$local_user='ck_lab_user';
+  	if(isset($from)&&$from=='input') $breakfile=$root_path.'modules/laboratory/labor_datainput.php'.URL_APPEND.'&encounter_nr='.$encounter_nr.'&job_id='.$job_id.'&parameterselect='.$parameterselect.'&allow_update='.$allow_update.'&user_origin='.$user_origin;
+		else $breakfile=$root_path.'modules/laboratory/labor_data_patient_such.php'.URL_APPEND;
+}else{
+  	$local_user='ck_pflege_user';
+  	$breakfile=$root_path.'modules/nursing/nursing-station-patientdaten.php'.URL_APPEND.'&pn='.$pn.'&edit='.$edit;
+	$encounter_nr=$pn;
+}
+if(!$HTTP_COOKIE_VARS[$local_user.$sid]) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 
-
-if(!$pn) header("location:".$root_path."modules/laboratory/labor_data_patient_such.php?sid=$sid&lang=$lang");
-require_once($root_path.'include/inc_config_color.php');
+if(!$encounter_nr) header("location:".$root_path."modules/laboratory/labor_data_patient_such.php?sid=$sid&lang=$lang");
 
 $thisfile=basename(__FILE__);
 
 /* Create encounter object */
-require_once($root_path.'include/care_api_classes/class_encounter.php');
-$enc_obj= new Encounter;
-/* Load global configs */
-include_once($root_path.'include/care_api_classes/class_globalconfig.php');
-$GLOBAL_CONFIG=array();
-$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
-$glob_obj->getConfig('patient_%');	
+require_once($root_path.'include/care_api_classes/class_lab.php');
+$enc_obj= new Encounter($encounter_nr);
+$lab_obj=new Lab($encounter_nr);
 
-/*if($from=='station') $breakfile="pflege-station-patientdaten.php?sid=$sid&lang=$lang&edit=$edit&station=$station&pn=$patnum";
-	else $breakfile='labor_data_patient_such.php'.URL_APPEND;
-*/
-$fielddata='patnum,name,vorname,gebdatum';
+$cache='';
 
-require($root_path.'include/inc_labor_param_group.php');
-
-						
-if($parameterselect=='') $parameterselect=0;
-
-$parameters=$paralistarray[$parameterselect];					
-//$paramname=$parametergruppe[$parameterselect];
-
-
-if($nostat) $ret=$root_path."modules/laboratory/labor_data_patient_such.php?sid=$sid&lang=$lang&versand=1&keyword=$pn";
-	else $ret=$root_path."modules/nursing/nursing-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$pn";
+if($nostat) $ret=$root_path."modules/laboratory/labor_data_patient_such.php?sid=$sid&lang=$lang&versand=1&keyword=$encounter_nr";
+	else $ret=$root_path."modules/nursing/nursing-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$encounter_nr";
 	
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok)
-{
-    /* Load the date formatter */
-    include_once($root_path.'include/inc_date_format_functions.php');
+# Load the date formatter */
+require_once($root_path.'include/inc_date_format_functions.php');
 
-		$enc_obj->where=" encounter_nr=$pn";
-	    if( $enc_obj->loadEncounterData($pn)) {
-			switch ($enc_obj->EncounterClass())
-			{
-		    	case '1': $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-		                   break;
-				case '2': $full_en = ($pn + $GLOBAL_CONFIG['patient_outpatient_nr_adder']);
-							break;
-				default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-			}						
+$enc_obj->setWhereCondition("encounter_nr='$encounter_nr'");
 
-			if( $enc_obj->is_loaded){
-				$result=&$enc_obj->encounter;		
-				$rows=$enc_obj->record_count;	
+if($encounter=&$enc_obj->getBasic4Data($encounter_nr)) {
+
+	$patient=$encounter->FetchRow();
+
+	$recs=&$lab_obj->getAllResults($encounter_nr);
+	
+	if ($rows=$lab_obj->LastRecordCount()){
+	
+		# Check if the lab result was recently modified
+		$modtime=$lab_obj->getLastModifyTime();
+
+		$lab_obj->getDBCache('chemlabs_result_'.$encounter_nr.'_'.$modtime,$cache);
+		# If cache not available, get the lab results and param items
+		//$cache=''; # empty to force redraw
+		if(empty($cache)){
+
+			include($root_path.'include/inc_labor_param_group.php');
 						
-				$dbtable='care_lab_test_data';
-				
-				$sql="SELECT * FROM $dbtable WHERE patnum='$pn' ORDER BY tid DESC";
-				
-        		if($ergebnis=$db->Execute($sql))
-				{
-					if (!$rows=$ergebnis->RecordCount())
-					 {
-					 	if($nostat)header("location:".$root_path."modules/laboratory/labor-nodatafound.php?sid=$sid&lang=$lang&patnum=$pn&ln=$result[name]&fn=$result[vorname]&nodoc=labor");
-					 	else header("location:".$root_path."modules/nursing/nursing-station-patientdaten-nolabreport.php?sid=$sid&lang=$lang&edit=$edit&station=$station&pn=$pn&nodoc=labor&user_origin=$user_origin");
-					 	//else echo("location:".$root_path."modules/nursing/nursing-station-patientdaten.php?sid=$sid&lang=$lang&edit=$edit&station=$station&pn=$pn&nodoc=labor");
-					 	exit;
-					 }
-				}	
+			if(!isset($parameterselect)||empty($parameterselect)) $parameterselect='priority';
+
+			$parameters=$paralistarray[$parameterselect];					
+			//$paramname=$parametergruppe[$parameterselect];
+			# Merge the records to common date key
+			$records=array();
+			$dt=array();
+			while($buffer=&$recs->FetchRow()){
+				//$records[$buffer['job_id']]=&$buffer;
+				# Prepare the values
+				$records[$buffer['job_id']][$buffer['group_id']]=&unserialize($buffer['serial_value']);
+				$tdate[$buffer['job_id']]=&$buffer['test_date'];
+				$ttime[$buffer['job_id']]=&$buffer['test_time'];
 			}
 		}
-			else{echo "<p>$sql$LDDbNoRead";exit;}
+		
+	}else{
+		if($nostat) header("location:".$root_path."modules/laboratory/labor-nodatafound.php".URL_REDIRECT_APPEND."&user_origin=$user_origin&ln=".strtr($patient['name_last'],' ','+')."&fn=".strtr($patient['name_first'],' ','+')."&bd=".formatDate2Local($patient['date_birth'],$date_format)."&encounter_nr=$encounter_nr&nodoc=labor&job_id=$job_id&parameterselect=$parameterselect&allow_update=$allow_update&from=$from");
+		 	else header("location:".$root_path."modules/nursing/nursing-station-patientdaten-nolabreport.php?sid=$sid&lang=$lang&edit=$edit&station=$station&pn=$encounter_nr&nodoc=labor&user_origin=$user_origin");
+			exit;
 	}
-	else 
-		{ echo "$LDDbNoLink<br>$sql<br>"; }
 
+}else{
+	echo "<p>".$lab_obj->getLastQuery()."sql$LDDbNoRead";exit;
+}
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
@@ -117,69 +107,79 @@ if($dblink_ok)
 .j{font-family:verdana; font-size:12; color:#000000}
 </style>
 
-<?php 
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-?><script language="javascript">
+<script language="javascript">
 <!-- Script Begin
 var toggle=true;
-function selectall()
-{
-	for(i=0;i<document.labdata.pname.length;i++)
-	{
-	if(toggle==true)
-	{document.labdata.pname[i].checked=true; }
-		else
-		{ document.labdata.reset();}
-	}	
+function selectall(){
+
+	d=document.labdata;
+	var t=d.ptk.value;
+	
+	if(t==1){
+		if(toggle==true){ d.tk.checked=true;}
+	}else{
+		for(i=0;i<t;i++){
+			if(toggle==true){d.tk[i].checked=true; }
+		}
+	}
+	if(toggle==false){ 
+		d.reset();
+	}
 	toggle=(!toggle);
 
 }
-function prep2submit()
-{
 
-	var j=0;
+function prep2submit(){
 	d=document.labdata;
-	for(i=0;i<d.pname.length;i++)
+	var j=false;
+	var t=d.ptk.value;
+	var n=false;
+	for(i=0;i<t;i++)
 	{
-		if(d.pname[i].checked==true) 
-		{
-			if(j)
-			{d.params.value=d.params.value +"~"+d.pname[i].value;}
-			else
-			{ d.params.value=d.pname[i].value;	j=1;}
+		if(t==1) {
+			n=d.tk;
+			v=d.tk.value;
+		}else{
+			n=d.tk[i];
+			v=d.tk[i].value;
 		}
+		if(n.checked==true){
+			if(j){
+				d.params.value=d.params.value +"~"+v;
+			}else{ 
+				d.params.value=v;	
+				j=1;
+			}
+		 }
 	}
-	if(d.params.value!=''){d.submit(); }
-}
-function gethelp(x,s,x1,x2,x3)
-{
-	if (!x) x="";
-	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
-	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
-	window.helpwin.moveTo(0,0);
+	if(d.params.value!=''){
+		d.submit();
+	}else{
+		alert("<?php echo $LDCheckParamFirst ?>");
+	}
 }
 //  Script End -->
 </script>
+
+<?php 
+require($root_path.'include/inc_js_gethelp.php');
+require($root_path.'include/inc_css_a_hilitebu.php');
+?>
+
 </HEAD>
 
 <BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
 <?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
-<?php if(!$noexpand) : ?>
-<script language="javascript">
-<!-- Script Begin
-	window.moveTo(0,0);
-	 window.resizeTo(1000,740);
-//  Script End -->
-</script>
-<?php endif ?>
 
 <table  border=0 cellspacing=0 cellpadding=0 width=100%>
 <tr>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
 <FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php echo "$LDLabReport $station"; ?></STRONG></FONT>
 </td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp('lab_list.php','','','','<?php echo $LDLabReport ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a 
+href="javascript:gethelp('lab_list.php','','','','<?php echo $LDLabReport ?>')"><img 
+<?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
+</nobr></td>
 </tr>
 
 <tr>
@@ -193,14 +193,14 @@ function gethelp(x,s,x1,x2,x3)
 <tr>
 <td bgcolor=#ffffff><FONT SIZE=-1  FACE="Arial"><?php echo $LDCaseNr ?>:
 </td>
-<td bgcolor=#ffffee><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $result['patnum']; ?>&nbsp;
+<td bgcolor=#ffffee><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $encounter_nr; ?>&nbsp;
 </td>
 </tr>
 
 <tr>
 <td bgcolor=#ffffff><FONT SIZE=-1  FACE="Arial"><?php echo "$LDLastName, $LDName, $LDBday" ?>:
 </td>
-<td bgcolor=#ffffee><FONT SIZE=-1  FACE="Arial">&nbsp;<b><?php echo  $result['name']; ?>, <?php echo  $result['vorname']; ?>&nbsp;&nbsp;<?php echo  formatDate2Local($result['gebdatum'],$date_format); ?></b>
+<td bgcolor=#ffffee><FONT SIZE=-1  FACE="Arial">&nbsp;<b><?php echo  $patient['name_last']; ?>, <?php echo  $patient['name_first']; ?>&nbsp;&nbsp;<?php echo  formatDate2Local($patient['date_birth'],$date_format); ?></b>
 </td>
 </tr>
 </table>
@@ -213,114 +213,153 @@ echo '
 <table border=0 bgcolor=#9f9f9f cellspacing=0 cellpadding=0>
 <tr>
 <td>
+
 <form action="labor-data-makegraph.php" method="post" name="labdata">
+
 <table border=0 cellpadding=0 cellspacing=1>
 <?php 
+if(empty($cache)){
 
-while($zeile=$ergebnis->FetchRow()) $data[]=$zeile;
+	# Get the number of colums
+	$cols=sizeof($records);
 
-if(sizeof($data)>5) $data=array_slice($data,0,5);
-$data=array_reverse($data);
-$pname=array();
-for($a=0;$a<sizeof($data);$a++)
-{
-	$da=$data[$a];
-	for($b=0;$b<sizeof($parametergruppe);$b++)
-	{
-		$buf=$da[($parametergruppe[$b])];
-		//echo $parametergruppe[$b]."<br>";
-		parse_str($buf,$elems);
-		//echo $buf."<br>";
-		$parameters=$paralistarray[$b];
-		for($c=0;$c<sizeof($parameters);$c++)
-		{
-		//echo $parameters[$c]." param <br>";
-			
-			//list($key[($a.$b.$c)],$val[($a.$b.$c)])=$elems[$c];
-			if($elems[($parameters[$c])]!='')
-			{
-				$val[($a.($parameters[$c]))]=$elems[($parameters[$c])];
-				if(!in_array($parameters[$c],$pname)) $pname[]=$parameters[$c];
-			}
-		}
-	}
-}	
-
-array_unique($pname);
-$cols=sizeof($data);
-if($cols>5) if($cfg[mask]!=2) $cols=5;  // set colunm number
-if(($rows=sizeof($pname))<10) $rows=10; // set rows number
-//echo sizeof($pname);
-echo'
+$cache= '
    <tr bgcolor="#dd0000" >
      <td class="va12_n"><font color="#ffffff"> &nbsp;<b>'.$LDParameter.'</b>
 	</td>
-	<td  class="j"><font color="#ffffff">&nbsp;<b>'.$LDNormalValue.'</b>&nbsp;</td>';
-	for($i=0;$i<$cols;$i++)
-	echo '
-	<td class="a12_b"><font color="#ffffff">&nbsp;<b>'.formatDate2Local($data[$i]['test_date'],$date_format).'</b>&nbsp;</td>';
-	echo '
-   <td>&nbsp;<a href="javascript:prep2submit()"><img '.createComIcon($root_path,'chart.gif','0','absmiddle').' alt="'.$LDClk2Graph.'"></td></a></td></tr>';
-echo'
+	<td  class="j"><font color="#ffffff">&nbsp;<b>'.$LDNormalValue.'</b>&nbsp;</td>
+	<td  class="j"><font color="#ffffff">&nbsp;<b>'.$LDMsrUnit.'</b>&nbsp;</td>
+	';
+	while(list($x,$v)=each($tdate))
+	$cache.= '
+	<td class="a12_b"><font color="#ffffff">&nbsp;<b>'.formatDate2Local($v,$date_format).'<br>'.$x.'</b>&nbsp;</td>';
+	
+	$cache.= '
+   <td>&nbsp;<a href="javascript:prep2submit()"><img '.createComIcon($root_path,'chart.gif','0','absmiddle').' alt="'.$LDClk2Graph.'"></td></a></td></tr>
    <tr bgcolor="#ffddee" >
      <td class="va12_n"><font color="#ffffff"> &nbsp;
 	</td>
+     <td class="va12_n"><font color="#ffffff"> &nbsp;
+	</td>
 	<td  class="j"><font color="#ffffff">&nbsp;</td>';
-	for($i=0;$i<$cols;$i++)
-	echo '
-	<td class="a12_b"><font color="#0000cc">&nbsp;<b>'.convertTimeToLocal($data[$i]['test_time']).'</b> '.$LDOClock.'&nbsp;</td>';
-	echo '
+
+
+	while(list($x,$v)=each($ttime))
+	$cache.= '
+	<td class="a12_b"><font color="#0000cc">&nbsp;<b>'.convertTimeToLocal($v).'</b> '.$LDOClock.'&nbsp;</td>';
+
+	# Reset array
+	reset($ttime);
+	
+	$cache.= '
    <td>&nbsp;<a href="javascript:selectall()"><img '.createComIcon($root_path,'dwnarrowgrnlrg.gif','0','absmiddle').' alt="'.$LDClk2SelectAll.'"></a>
        </tr>';
 
+# Display the values
+$tracker=0;
+$ptrack=0;
 
-for($l=0;$l<$rows;$l++)
-{
-	echo'
-   <tr bgcolor=';
-	 if($toggle) {echo '"#ffdddd"'; $toggle=(!$toggle); }else { echo '"#ffeeee"';$toggle=(!$toggle);}
-   echo '>
-     <td class="va12_n"> &nbsp;<nobr><a href="#">'.strtr($pname[$l],"_-",". ").'</a></nobr> 
-	</td>
-	<td class="j" >&nbsp;&nbsp;</td>';
-	for($i=0;$i<$cols;$i++)
-	echo '
-	<td class="j" >&nbsp;'.$val[$i.$pname[$l]].'&nbsp;</td>';
-	echo '
-	<td>
-	<input type="checkbox" name="pname" value="'.$pname[$l].'">
-</td></tr>';
+while(list($group_id,$param_group)=each($paralistarray)){
+	
+	$grpflag=true;
+	
+	while(list($param,$pname)=each($param_group)){
+		
+		$flag=false;
+		
+		$txt='';
+		
+		# Reset the array
+		reset($tdate);
+		while(list($jid,$xval)=each($tdate)){ 
+	
+			$txt.= '
+			<td class="j">&nbsp;';
+			if(!empty($records[$jid][$group_id][$param])) {
+				if($tp[$param]['hi_bound']&&$records[$jid][$group_id][$param]>$tp[$param]['hi_bound']){
+					$txt.='<img '.createComIcon($root_path,'arrow_red_up_sm.gif','0').'> <font color="red">'.$records[$jid][$group_id][$param].'</font>';
+				}elseif($records[$jid][$group_id][$param]<$tp[$param]['lo_bound']){
+					$txt.='<img '.createComIcon($root_path,'arrow_red_dwn_sm.gif','0').'> <font color="red">'.$records[$jid][$group_id][$param].'</font>';
+				}else{
+					$txt.=$records[$jid][$group_id][$param];
+				}
+				$flag=true;
+			}
+			$txt.='&nbsp;</td>';
+		}
+		# If a value exist, display the row
+		if($flag){
+		
+			# If parameters info not yet loaded, load now
+			if($grpflag){
+				$tparams=&$lab_obj->TestParams($group_id);
+				$grpflag=false;
+				while($tpbuf=&$tparams->FetchRow())	$tp[$tpbuf['id']]=&$tpbuf;
+			}
+			
+			# Create the front colum boxes
+			$txx='<tr bgcolor=';
+	 		if($toggle) { $txx.= '"#ffdddd"';}else { $txx.= '"#ffeeee"';}
+   			$txx.= '>
+     		<td class="va12_n"> &nbsp;<nobr><a href="#">'.$pname.'</a></nobr> 
+			</td>
+			<td class="a10_b" >&nbsp;';
+			if($tp[$param]['lo_bound']&&$tp[$param]['hi_bound']) $txx.=$tp[$param]['lo_bound'].' - '.$tp[$param]['hi_bound'];
+			$txx.='</td>
+			<td class="a10_b" >&nbsp;'.$tp[$param]['msr_unit'].'</td>';
+			# Print the final row
+			 
+			 $cache.=$txx.$txt.'<td>
+			<input type="checkbox" name="tk" value="'.$tracker.'">
+			</td></tr>';
+			
+	
+			$ptrack++;
+			$toggle=!$toggle;
+		}
+		$tracker++;
+	}
 }
-	echo '
-</table>';     
-
-// set the row/date variables for form
-for($i=0;$i<$cols;$i++)
-echo '
-<input type="hidden" name="date'.$i.'" value="'.$data[$i]['test_date'].'">
-<input type="hidden" name="time'.$i.'" value="'.$data[$i]['test_time'].'">';
-for($i=0;$i<$cols;$i++)
-echo '
-<input type="hidden" name="tid'.$i.'" value="'.$data[$i]['tid'].'">';
-
-echo '
+$cache.='
 <input type="hidden" name="colsize" value="'.$cols.'">
-<input type="hidden" name="sid" value="'.$sid.'">
-<input type="hidden" name="lang" value="'.$lang.'">
-<input type="hidden" name="from" value="'.$from.'">
-<input type="hidden" name="edit" value="'.$edit.'">
 <input type="hidden" name="params" value="">
-<input type="hidden" name="patnum" value="'.$result['patnum'].'">
-<input type="hidden" name="name" value="'.$result['name'].'">
-<input type="hidden" name="vorname" value="'.$result['vorname'].'">
-<input type="hidden" name="gebdatum" value="'.$result['gebdatum'].'">';
+<input type="hidden" name="ptk" value="'.$ptrack.'">
+';
+# Delete old cache data first
+$lab_obj->deleteDBCache('chemlabs_result_'.$encounter_nr.'_%');
+# Save new cache data
+$lab_obj->saveDBCache('chemlabs_result_'.$encounter_nr.'_'.$modtime,$cache);
+}
+
+echo $cache;
+?>
+</table>     
+<?php
+echo '
+<input type="hidden" name="sid" value="'.$sid.'">
+<input type="hidden" name="from" value="'.$from.'">
+<input type="hidden" name="encounter_nr" value="'.$encounter_nr.'">
+<input type="hidden" name="edit" value="'.$edit.'">
+<input type="hidden" name="lang" value="'.$lang.'">';
+
+if($from=='input'){
+	echo '
+<input type="hidden" name="parameterselect" value="'.$parameterselect.'">
+<input type="hidden" name="job_id" value="'.$job_id.'">
+<input type="hidden" name="allow_update" value="'.$allow_update.'">';
+}
 ?>                                         
+<input type="hidden" name="user_origin" value="<?php echo $user_origin ?>">
 </td></tr>
 </table>
 </form>
 
 <p>
-<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"></a>
+<?php
+echo '
+<button onClick="javascript:prep2submit()"><img '.createComIcon($root_path,'chart.gif','0','absmiddle').'> '.$LDClk2Graph.'</button>';
+?>&nbsp;&nbsp;&nbsp;
+<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?> alt="<?php echo $LDClose ?>"></a>
 </UL>
 
 </FONT>
@@ -333,7 +372,6 @@ require($root_path.'include/inc_load_copyrite.php');
 </td>
 </tr>
 </table>        
-
 
 </BODY>
 </HTML>

@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -149,8 +149,8 @@ if($count){
 ?>
  <table border=0 cellpadding=4 cellspacing=1 width=100%>
   <tr bgcolor="#f6f6f6">
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDCurrentEntry; ?></td>
     <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDTime; ?></td>
+    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDCurrentEntry; ?></td>
     <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDCreatedBy; ?></td>
   </tr>
 <?php
@@ -165,13 +165,13 @@ if($count){
 
 
   <tr  bgcolor="<?php echo $bgc; ?>"  valign="top">
+    <td><FONT SIZE=1  FACE="Arial"><?php if($row['time']) echo $row['time']; ?></td>
     <td><FONT SIZE=-1  FACE="Arial" color="#000033">
 	<?php 
 		if(!$sformat&&!empty($row['notes'])) echo deactivateHotHtml(nl2br($row['notes'])); 
 		 elseif($sformat&&!empty($row['short_notes'])) echo '[ '.deactivateHotHtml($row['short_notes']).' ]';
 	?>
 	</td>
-    <td><FONT SIZE=1  FACE="Arial"><?php if($row['time']) echo $row['time']; ?></td>
     <td><FONT SIZE=1  FACE="Arial"><?php if($row['personell_name']) echo $row['personell_name']; ?></td>
   </tr>
 

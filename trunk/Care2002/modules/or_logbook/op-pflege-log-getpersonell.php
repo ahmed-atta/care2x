@@ -5,63 +5,34 @@ require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','or.php');
 $local_user='ck_op_pflegelogbuch_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-/* Create the personell object */
+# Create the personell object 
 require_once($root_path.'include/care_api_classes/class_personell.php');
 $pers_obj=new Personell;
 
 $title=$LDOpPersonElements[$winid];
 switch($winid)
 {
-	case "operator": 
-							$stitle="O";
+	case 'operator': 
+							$stitle='O';
 							break;
-	case "assist": 
-							$stitle="A";
+	case 'assist': 
+							$stitle='A';
 							break;
-	case "scrub": 
-							$stitle="I";
+	case 'scrub': 
+							$stitle='I';
 							break;
-	case "rotating": 
-							$stitle="O";
+	case 'rotating': 
+							$stitle='O';
 							break;
-	case "ana": 
-							$element="an_doctor";
+	case 'ana': 
+							$element='an_doctor';
 							//$maxelement=10;
 							break;
-	default:{header("Location:".$root_path."/language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+	default:{header('Location:'.$root_path.'/language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 
 }
 
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
-
-$dbtable='care_personell_data';
-$thisfile="op-pflege-log-getpersonell.php";
+$thisfile=basename(__FILE__);
 $forwardfile="op-pflege-log-getinfo.php?sid=$sid&lang=$lang&winid=$winid&mode=save&enc_nr=$enc_nr&dept_nr=$dept_nr&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday&op_nr=$op_nr";
-
-/* Establish db connection */
-/*if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok)
-	{	
-	// get data if exists
-			$sql="SELECT * FROM $dbtable
-					 WHERE lastname LIKE '$inputdata%'
-					 OR firstname LIKE '$inputdata%'
-					 OR bday LIKE '$inputdata%'
-					 OR personell_nr LIKE '$inputdata%'";
-
-			if($ergebnis=$db->Execute($sql))
-       		{
-				$rows=0;
-				if( $result=$ergebnis->FetchRow()) $rows++;
-				if($rows)
-				{
-					mysql_data_seek($ergebnis,0);
-					$datafound=1;
-					//echo $sql."<br>";
-				}
-			}
-				else { echo "$LDDbNoRead<br>"; } 
-}
-  else { echo "$LDDbNoLink<br>"; } */
 
 $search=$pers_obj->searchPersonellBasicInfo($inputdata);
 
@@ -96,17 +67,12 @@ function savedata(iln,ifn,inx,ipr)
 	d.inputdata.value="?";
 	d.submit();
 }
-function gethelp(x,s,x1,x2,x3)
-{
-	if (!x) x="";
-	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
-	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
-	window.helpwin.moveTo(0,0);
-}
-
-	
 -->
 </script>
+<?php
+require($root_path.'include/inc_js_gethelp.php');
+require($root_path.'include/inc_css_a_hilitebu.php');
+?>
 
 <STYLE type=text/css>
 div.box { border: double; border-width: thin; width: 100%; border-color: black; }
@@ -259,7 +225,7 @@ onLoad="<?php if($saved) echo "parentrefresh();"; ?>if (window.focus) window.foc
 <p>
 <a href="<?php echo "op-pflege-log-getinfo.php?sid=$sid&lang=$lang&dept_nr=$dept_nr&saal=$saal&op_nr=$op_nr&enc_nr=$enc_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear&winid=$winid";?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0','left'); ?>>
 </a><a href="javascript:window.close()">
-<img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>" border="0" alt="<?php echo $LDClose ?>" align="right">
+<img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> border="0" alt="<?php echo $LDClose ?>" align="right">
 </a>
 
 </BODY>

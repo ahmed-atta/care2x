@@ -14,7 +14,7 @@ if(!isset($notabs)||!$notabs){
 								else{$img='arch-gray.gif'; }
 							echo '<a href="aufnahme_list.php'.URL_APPEND.'&target=archiv"><img '.createLDImgSrc($root_path,$img,'0').' alt="'.$LDArchive.'" ';if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';
 						?><img src="<?php echo $cfg['top_bgcolor']; ?>gui/img/common/default/pixel.gif" height=1 width=25><?php 
-						echo '<a href="patient_register.php'.URL_APPEND.'&target=entry"><img '.createLDImgSrc($root_path,'register_gray.gif','0').' alt="'.$LDAdmit.'"></a>'; ?></td>
+						echo '<a href="patient_register.php'.URL_APPEND.'&target=entry"><img '.createLDImgSrc($root_path,'register_gray.gif','0').' alt="'.$LDAdmit.'" '; if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>'; ?></td>
 </tr>
 <?php
 }

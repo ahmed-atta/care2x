@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -13,7 +13,6 @@ require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
 require_once($root_path.'global_conf/inc_remoteservers_conf.php');
 
 if(!$encoder) $encoder=$HTTP_COOKIE_VARS[$local_user.$sid];
@@ -21,11 +20,7 @@ if(!$encoder) $encoder=$HTTP_COOKIE_VARS[$local_user.$sid];
 $breakfile="nursing-station.php".URL_APPEND."&edit=1&station=$station&ward_nr=$ward_nr";
 $thisfile=basename(__FILE__);
 
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok){	
-	
-	  /* Load date formatter */
+	  # Load date formatter 
 	include_once($root_path.'include/inc_date_format_functions.php');
 	include_once($root_path.'include/care_api_classes/class_encounter.php');
 	$enc_obj=new Encounter;
@@ -105,10 +100,6 @@ if($dblink_ok){
 	
 			
 */
-}else{
-	echo "$LDDbNoLink<br>";
-}
-
 
 ?>
 
@@ -279,7 +270,7 @@ echo '
 	<?php
 		echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid=$sid&lang=$lang&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
 	?>
-	<img <?php echo $img_source; ?> width=137 align="top">
+	<img <?php echo $img_source; ?> align="top">
 	</td>
   </tr>
   <tr>
@@ -304,11 +295,12 @@ echo '
   </tr>
   <tr>
     <td class=vn><?php echo $LDReleaseType ?>:</td>
-    <td class=vl>&nbsp;
+    <td class=vl>
 	<?php if($released) 
 	{
 		while($dis_type=$discharge_types->FetchRow()){
 			if($dis_type['nr']==$relart){
+				echo '&nbsp;';
 				if(isset($$dis_type['LD_var'])&&!empty($$dis_type['LD_var'])) echo $$dis_type['LD_var'];
 					else echo $dis_type['name'];
 				break;
@@ -317,6 +309,7 @@ echo '
 	}else{ 
 		$init=1;
 		while($dis_type=$discharge_types->FetchRow()){
+			echo '&nbsp;';
 			echo '<input type="radio" name="relart" value="'.$dis_type['nr'].'"';
 			if($init){
 				echo ' checked';

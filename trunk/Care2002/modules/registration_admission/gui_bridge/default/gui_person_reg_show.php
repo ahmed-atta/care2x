@@ -80,7 +80,7 @@ require('./gui_bridge/default/gui_tabs_patreg.php');
 
 <FONT    SIZE=-1  FACE="Arial">
 
-<table border=0 cellspacing=1 cellpadding=0>
+<table border=0 cellspacing=1 cellpadding=3>
 
 <tr>
 <td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php echo $LDRegistryNr ?>:
@@ -88,7 +88,7 @@ require('./gui_bridge/default/gui_tabs_patreg.php');
 <td width="30%"  bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo $pid; ?>
 </td>
 
-<td valign="top" rowspan=7 align="center" bgcolor="#ffffee" ><FONT SIZE=-1  FACE="Arial"><img <?php echo $img_source; ?> width=137>
+<td valign="top" rowspan=6 align="center" bgcolor="#ffffee" ><FONT SIZE=-1  FACE="Arial"><img <?php echo $img_source; ?>>
 </td>
 <!-- Load the options table  -->
 <td rowspan=30  valign="top">
@@ -146,27 +146,27 @@ require('./gui_bridge/default/gui_patient_reg_options.php');
 
 <?php
 
-if (!$GLOBAL_CONFIG['person_name_2_hide'])
+if (!$GLOBAL_CONFIG['person_name_2_hide']&&$name_2)
 {
 createTR($LDName2,$name_2);
 }
 
-if (!$GLOBAL_CONFIG['person_name_3_hide'])
+if (!$GLOBAL_CONFIG['person_name_3_hide']&&$name_3)
 {
 createTR( $LDName3,$name_3);
 }
 
-if (!$GLOBAL_CONFIG['person_name_middle_hide'])
+if (!$GLOBAL_CONFIG['person_name_middle_hide']&&$name_middle)
 {
 createTR($LDNameMid,$name_middle);
 }
 
-if (!$GLOBAL_CONFIG['person_name_maiden_hide'])
+if (!$GLOBAL_CONFIG['person_name_maiden_hide']&&$name_maiden)
 {
 createTR($LDNameMaiden,$name_maiden);
 }
 
-if (!$GLOBAL_CONFIG['person_name_others_hide'])
+if (!$GLOBAL_CONFIG['person_name_others_hide']&&$name_others)
 {
 createTR($LDNameOthers,$name_others);
 }
@@ -226,7 +226,7 @@ if($civil_status=="single") echo $LDSingle;
 
  <?php
 
-if (!$GLOBAL_CONFIG['person_insurance_1_nr_hide']&&$insurance_show)
+if (!$GLOBAL_CONFIG['person_insurance_1_nr_hide']&&$insurance_show&&$insurance_nr)
 {
 createTR($LDInsuranceNr,$insurance_nr,2);
 $buffer=$insurance_class_info['LD_var'];
@@ -236,32 +236,32 @@ createTR($LDInsuranceCo.' 1',$insurance_firm_name,2);
 }
 
 
-if (!$GLOBAL_CONFIG['person_phone_1_nr_hide'])
+if (!$GLOBAL_CONFIG['person_phone_1_nr_hide']&&$phone_1_nr)
 {
 createTR($LDPhone.' 1',$phone_1_nr,2);
 }
 
-if (!$GLOBAL_CONFIG['person_phone_2_nr_hide'])
+if (!$GLOBAL_CONFIG['person_phone_2_nr_hide']&&$phone_2_nr)
 {
 createTR($LDPhone.' 2',$phone_2_nr,2);
 }
 
-if (!$GLOBAL_CONFIG['person_cellphone_1_nr_hide'])
+if (!$GLOBAL_CONFIG['person_cellphone_1_nr_hide']&&$cellphone_1_nr)
 {
 createTR($LDCellPhone.' 1',$cellphone_1_nr,2);
 }
 
-if (!$GLOBAL_CONFIG['person_cellphone_2_nr_hide'])
+if (!$GLOBAL_CONFIG['person_cellphone_2_nr_hide']&&$cellphone_2_nr)
 {
 createTR($LDCellPhone.' 2',$cellphone_2_nr,2);
 }
 
-if (!$GLOBAL_CONFIG['person_fax_hide'])
+if (!$GLOBAL_CONFIG['person_fax_hide']&&$fax)
 {
 createTR($LDFax,$fax,2);
 }
 
-if (!$GLOBAL_CONFIG['person_email_hide'])
+if (!$GLOBAL_CONFIG['person_email_hide']&&$email)
 {
 ?>
 
@@ -275,27 +275,27 @@ if (!$GLOBAL_CONFIG['person_email_hide'])
 <?php
 }
 
-if (!$GLOBAL_CONFIG['person_citizenship_hide'])
+if (!$GLOBAL_CONFIG['person_citizenship_hide']&&$citizenship)
 {
 createTR($LDCitizenship,$citizenship,2);
 }
 
-if (!$GLOBAL_CONFIG['person_sss_nr_hide'])
+if (!$GLOBAL_CONFIG['person_sss_nr_hide']&&$sss_nr)
 {
 createTR($LDSSSNr,$sss_nr,2);
 }
 
-if (!$GLOBAL_CONFIG['person_nat_id_nr_hide'])
+if (!$GLOBAL_CONFIG['person_nat_id_nr_hide']&&$nat_id_nr)
 {
 createTR($LDNatIdNr,$nat_id_nr,2);
 }
 
-if (!$GLOBAL_CONFIG['person_religion_hide'])
+if (!$GLOBAL_CONFIG['person_religion_hide']&&$religion)
 {
 createTR($LDReligion,$religion,2);
 }
 
-if (!$GLOBAL_CONFIG['person_ethnic_orig_hide'])
+if (!$GLOBAL_CONFIG['person_ethnic_orig_hide']&&$ethnic_orig)
 {
 createTR($LDEthnicOrigin,$ethnic_orig,2);
 }
@@ -314,19 +314,28 @@ createTR($LDEthnicOrigin,$ethnic_orig,2);
 <p>
 
 
-<?php if (!$newdata) : ?>
+<?php if (!$newdata) { ?>
 
 <?php if($target=="search") $newsearchfile='patient_register_search.php'.URL_APPEND;
     else $newsearchfile='patient_register_archive.php'.URL_APPEND;
 ?>
 <a href="<?php echo $newsearchfile ?>"><img 
 <?php echo createLDImgSrc($root_path,'new_search.gif','0','absmiddle') ?>></a>
-<?php endif; ?>
+<?php } ?>
 <a href="patient_register.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&update=1"><img 
 <?php echo createLDImgSrc($root_path,'update_data.gif','0','absmiddle') ?>></a>
+<?php
+if($current_encounter){
+?>
+<a href="aufnahme_daten_zeigen.php<?php echo URL_APPEND ?>&encounter_nr=<?php echo $current_encounter ?>&origin=patreg_reg"><img <?php echo createLDImgSrc($root_path,'admission_data.gif','0','absmiddle') ?>></a>
+<?php
+}else{
+?>
 <a href="<?php echo $admissionfile ?>&pid=<?php echo $pid ?>&origin=patreg_reg&encounter_class_nr=1"><img <?php echo createLDImgSrc($root_path,'admit_inpatient.gif','0','absmiddle') ?>></a>
 <a href="<?php echo $admissionfile ?>&pid=<?php echo $pid ?>&origin=patreg_reg&encounter_class_nr=2"><img <?php echo createLDImgSrc($root_path,'admit_outpatient.gif','0','absmiddle') ?>></a>
-
+<?php
+}
+?>
 
 <form action="patient_register.php" method=post>
 <input type=submit value="<?php echo $LDRegisterNewPerson ?>" >

@@ -51,7 +51,7 @@ $minute="05";
 <script language="javascript">
 function refreshparent()
 {
-	<?php $comdat='&dept_nr='.$dept_nr.'&saal='.$saal.'&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday.'&op_nr='.$op_nr; ?>
+	<?php $comdat="&dept_nr=$dept_nr&saal=$saal&thisday=$pyear-$pmonth-$pday&op_nr=$op_nr"; ?>
 	window.top.LOGINPUT.location.replace("<?php echo "oploginput.php?sid=$sid&lang=$lang&enc_nr=$enc_nr&mode=notimereset$comdat"; ?>");
 	window.top.OPLOGMAIN.location.replace("<?php echo "oplogmain.php?sid=$sid&lang=$lang&gotoid=$enc_nr$comdat"; ?>");
 }

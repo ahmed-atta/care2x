@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -11,11 +11,14 @@ require($root_path.'include/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 define('LANG_FILE','aufnahme.php');
-$local_user='medocs_user';
+# Resolve the local user based on the origin of the script
+require_once('include/inc_local_user.php');
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_date_format_functions.php');
 
-require_once($root_path.'include/inc_config_color.php');
+# Set break file
+require('include/inc_breakfile.php');
+
 $keyword=strtr($keyword,'%',' ');
 $keyword=trim($keyword);
 
@@ -30,8 +33,6 @@ $entry_body_bgcolor='#ffffff';
 
 if(!isset($searchkey)) $searchkey='';
 if(!isset($mode)) $mode='';
-
-$breakfile='medocs_pass.php';
 
 if(($mode=='search')and($searchkey))
 {
@@ -73,6 +74,8 @@ if(($mode=='search')and($searchkey))
 			              OR enc.encounter_nr LIKE "'.addslashes($suchbuffer).'"
 					  )
 					  AND enc.pid=reg.pid  
+					  AND enc.encounter_status<>"cancelled"
+					  AND enc.status NOT IN ("void","hidden","deleted","inactive")
 			          ORDER BY enc.encounter_nr ';
 					  
 			if($ergebnis=$db->Execute($sql))
@@ -129,8 +132,7 @@ function gethelp(x,s,x1,x2,x3)
 </td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
 <a href="javascript:gethelp('admission_how2search.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
-if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo "startframe.php?sid=".$sid."&lang=".$lang; 
-	else echo "aufnahme_pass.php?sid=$sid&target=entry&lang=$lang"; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
+echo $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </td>
 </tr>
 
@@ -162,7 +164,7 @@ $target='search';
 
 
 <p>
-<a href=<?php  	echo $breakfile.URL_APPEND.'&target=search">'; ?><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a>
+<a href="<?php echo $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a>
 <p>
 
 <?php

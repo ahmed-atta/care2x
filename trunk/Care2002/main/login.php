@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -104,7 +104,7 @@ require($root_path.'include/inc_passcheck_head.php');
 <p>
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
 <tr>
-<td colspan=3><img <?php echo createComIcon($root_path,'login-b.gif') ?>></td>
+<td colspan=3><img <?php echo createLDImgSrc($root_path,'login-b.gif') ?>></td>
 </tr>
 
 <?php require($root_path.'include/inc_passcheck_mask.php') ?>  
@@ -114,7 +114,6 @@ require($root_path.'include/inc_passcheck_head.php');
 <img src="../img/small_help.gif" > <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>">Wieso soll ich mich einloggen?</a><br>
 <img src="../img/small_help.gif" > <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>">Was bewirkt das einloggen?</a><br>
  -->
-<HR>
 <p>
 <?php
 require($root_path.'include/inc_load_copyrite.php');

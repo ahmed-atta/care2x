@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -11,7 +11,7 @@ require($root_path.'include/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 
-define('AUTOSHOW_ONERESULT',0);
+define('AUTOSHOW_ONERESULT',0); # Defining to 1 will automatically show the admission data if the search result is one, otherwise the result will be listed
 
 function Cond($item,$k){
 	global $where,$tab,$HTTP_POST_VARS;
@@ -50,13 +50,11 @@ if (isset($mode) && ($mode=='search'))
 	
 	$select="SELECT p.name_last,p.name_first,p.date_birth,e.encounter_nr,e.encounter_class_nr,e.is_discharged,e.encounter_date FROM ";
 
-	 $where='';
-	 $orwhere='';
+	$where=''; 		# ANDed where condition
+	$orwhere='';	# ORed where condition
+	$datecond='';	# date condition
 	 
-	 if(isset($HTTP_POST_VARS['date_start'])&&!empty($HTTP_POST_VARS['date_start'])) $HTTP_POST_VARS['date_start']=@formatDate2STD($HTTP_POST_VARS['date_start'],$date_format);
-	 if(isset($HTTP_POST_VARS['date_end'])&&!empty($HTTP_POST_VARS['date_end'])) $HTTP_POST_VARS['date_end']=@formatDate2STD($HTTP_POST_VARS['date_end'],$date_format);
-	 if(isset($HTTP_POST_VARS['date_birth'])&&!empty($HTTP_POST_VARS['date_birth'])) $HTTP_POST_VARS['date_birth']=@formatDate2STD($HTTP_POST_VARS['date_birth'],$date_format);
-
+	# Walk the arrays in the function to preprocess the search condition data
 	$parray=array('name_last','name_first','date_birth','sex');
 	$tab='p';
 	array_walk($parray,'Cond');
@@ -66,12 +64,30 @@ if (isset($mode) && ($mode=='search'))
 	$farray=array('sc_care_class_nr','sc_room_class_nr','sc_att_dr_class_nr');
 	array_walk($farray,'fCond');
 	
+	# Process the dates
+	 if(isset($date_start)&&!empty($date_start)) $date_start=@formatDate2STD($date_start,$date_format);
+	 if(isset($date_end)&&!empty($date_end)) $date_end=@formatDate2STD($date_end,$date_format);
+	 if(isset($date_birth)&&!empty($date_birth)) $date_birth=@formatDate2STD($date_birth,$date_format);
+	
+	if($date_start){
+		if($date_end){
+			$datecond="(e.encounter_date LIKE '$date_start%' OR e.encounter_date>'$date_start') AND (e.encounter_date<'$date_end' OR e.encounter_date LIKE '$date_end%')";
+		}else{
+			$datecond="e.encounter_date LIKE '$date_start%'";
+		}
+	}elseif($date_end){
+			$datecond="(e.encounter_date< '$date_end' OR e.encounter_date LIKE '$date_end%')";
+	}
+	
+	if(!empty($datecond)){
+		if(empty($where)) $where=$datecond;
+		    else $where.=' AND '.$datecond;
+	}
+			
 	if(!empty($orwhere)) {
 		if(empty($where)) $where='('.$orwhere.')';
 		    else $where.=' AND ('.$orwhere.') ';
 	}
-	
-	
 	
 	if($name_last||$name_first||$date_birth||$sex){
 		if($encounter_nr||$encounter_class_nr||$current_ward_nr||$referrer_diagnosis||$referrer_dr||$referrer_recom_therapy||$referrer_notes||$insurance_class_nr){
@@ -88,7 +104,7 @@ if (isset($mode) && ($mode=='search'))
 		}
 				
 	}else{
-		if($encounter_nr||$encounter_class_nr||$current_ward_nr||$referrer_diagnosis||$referrer_dr||$referrer_recom_therapy||$referrer_notes||$insurance_class_nr){
+		if($date_start||$date_end||$encounter_nr||$encounter_class_nr||$current_ward_nr||$referrer_diagnosis||$referrer_dr||$referrer_recom_therapy||$referrer_notes||$insurance_class_nr){
 			if($sc_care_class_nr||$sc_room_class_nr||$sc_att_dr_class_nr){
 				$from=" care_person AS p, care_encounter AS e, care_encounter_financial_class AS f";
 				$where.=" AND p.pid=e.pid AND e.encounter_nr=f.encounter_nr";
@@ -106,7 +122,7 @@ if (isset($mode) && ($mode=='search'))
 	
 	if(!empty($where)) {
 
-		$sql=$select.$from.' WHERE '.$where.' ORDER by e.create_time DESC';
+		$sql="$select$from WHERE $where AND NOT (e.encounter_status LIKE 'cancelled') AND e.status NOT IN ('void','inactive','hidden','deleted') ORDER by e.create_time DESC";
 		if($ergebnis=$db->Execute($sql)) {			
   			$rows=$ergebnis->RecordCount();			
 			
@@ -118,7 +134,7 @@ if (isset($mode) && ($mode=='search'))
 				   	exit;
 	        	}
 			}
-		}else { echo $sql; $rows=0;}
+		}else { echo "$LDDbNoRead<p>$sql"; $rows=0;}
 	}
 					
   }

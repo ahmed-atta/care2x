@@ -19,7 +19,7 @@ function cancelAppointment(nr) {
     <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo "$LDDate/$LDTime/$LDDetails"; ?></td>
     <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDPatient; ?></td>
     <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDAppointments; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDStatus; ?></td>
+    <td <?php echo $tbg; ?> colspan=2><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDStatus; ?></td>
   </tr>
 <?php
 $toggle=0;
@@ -42,7 +42,7 @@ while($row=$result->FetchRow()){
     <td rowspan=4 valign="top"><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>"><font color="<?php if(empty($tc)) echo '#0000cc'; else echo $tc; ?>"><b>
 	<a href="<?php echo $root_path.'modules/registration_admission/patient_register_show.php'.URL_APPEND.'&pid='.$row['pid']; ?>">
 	<?php 
-		echo ucfirst($row['name_last']).'</b></font>, '.ucfirst($row['name_first']).' ';
+		echo ucfirst($row['name_last']).'</b></font>, '.ucfirst($row['name_first']).'<br>';
 		echo @formatDate2Local($row['date_birth'],$date_format).'</font>';
 	?>
 	</a>
@@ -55,7 +55,39 @@ while($row=$result->FetchRow()){
 		}
 	?>
 	</td>
-    <td><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>"><img <?php echo createComIcon($root_path,'level_'.$row['urgency'].'.gif','0'); ?>></td>
+    <td><FONT SIZE=1  FACE="Arial" color="<?php echo $tc; ?>">
+	 <?php 
+	if($row['appt_status']!='cancelled'){
+		if($row['appt_status']=='done'){
+			$urg_img='check-r.gif';
+		}else{
+			$urg_img='level_'.$row['urgency'].'.gif';
+		}
+		echo '<img '.createComIcon($root_path,$urg_img,'0','absmiddle').'>'; 
+	?>
+<?php 
+		if($row['appt_status']=='done' && $row['encounter_nr']){
+			echo '<a href="'.$root_path.'modules/registration_admission/aufnahme_daten_zeigen.php'.URL_APPEND.'&encounter_nr='.$row['encounter_nr'].'&origin=appt&target='.$target.'">'.$row['encounter_nr'].'</a>';
+		}
+	}else{
+		echo '&nbsp;';
+	}
+	?>	
+	
+	</td>
+    <td rowspan=4 valign="top"> 
+	<?php
+		if($row['appt_status']=='pending'){
+	?>
+	<a href="<?php echo $editorfile.URL_APPEND.'&pid='.$row['pid'].'&target=&mode=select&nr='.$row['nr']; ?>"><img <?php echo createLDImgSrc($root_path,'edit_sm.gif','0'); ?>></a> <br>
+	<a href="<?php echo $root_path.'modules/registration_admission/aufnahme_start.php'.URL_APPEND; ?>&pid=<?php echo $row['pid'] ?>&origin=patreg_reg&encounter_class_nr=<?php echo $row['encounter_class_nr']; ?>&appt_nr=<?php echo $row['nr']; ?>"><img <?php echo createLDImgSrc($root_path,'admit_sm.gif','0'); ?>></a> <br>
+	<a href="javascript:cancelAppointment(<?php echo $row['nr']; ?>)"><img <?php echo createLDImgSrc($root_path,'cancel_sm.gif','0'); ?>></a>
+	<?php
+		}else{
+			echo '&nbsp;';
+		}
+	?>
+	</td>  
   </tr>
   <tr   bgcolor="<?php echo $bgc; ?>" >
     <td><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>"><?php echo $row['time']; ?></td>
@@ -65,7 +97,7 @@ while($row=$result->FetchRow()){
 			if(isset($$buffer)&&!empty($$buffer)) echo $$buffer; else echo $row['appt_status']; 
 		?>
 	</td>
-  </tr>
+	</tr>
   <tr  bgcolor="<?php echo $bgc; ?>" >
     <td><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>">
 	<?php 
@@ -85,17 +117,11 @@ while($row=$result->FetchRow()){
     <td><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>"><?php echo $row['to_personell_name']; ?></td>
     <td><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>">
 	<?php
-		if($row['appt_status']!='cancelled'){
+		$buf=$enc_class[$row['encounter_class_nr']]['LD_var'];
+		 if (isset($$buf)&&!empty($$buf)) echo $$buf; 
+    		else echo  $enc_class[$row['encounter_class_nr']]['name']; 
 	?>
-	<a href="<?php echo $editorfile.URL_APPEND.'&pid='.$row['pid'].'&target=&mode=select&nr='.$row['nr']; ?>"><img <?php echo createLDImgSrc($root_path,'edit_sm.gif','0'); ?>></a> 
-	<?php
-		}
-		if($row['appt_status']=='pending'){
-	?>
-	<a href="javascript:cancelAppointment(<?php echo $row['nr']; ?>)"><img <?php echo createLDImgSrc($root_path,'cancel_sm.gif','0'); ?>></a><br></td>
-	<?php
-		}
-	?>  
+	</td>
   </tr>
 
 <?php

@@ -10,7 +10,7 @@ function Spacer()
 <?php
 */}
 ?>
-<img <?php echo createComIcon($root_path,'angle_left.gif',0); ?>>
+<img <?php echo createComIcon($root_path,'angle_left_s.gif',0); ?>>
 <br>
 <FONT face="Verdana,Helvetica,Arial" size=2 color="#cc0000">
 <?php echo $LDOptsForPerson ?>
@@ -23,7 +23,19 @@ function Spacer()
             <TABLE cellSpacing=1 cellPadding=2 bgColor=#999999 
             border=0>
               <TBODY>
-				  
+			<?php
+			if($current_encounter){
+			?>
+               <TR bgColor=#eeeeee> <td align=center><img <?php echo createComIcon($root_path,'pdata.gif','0') ?>></td>
+                <TD vAlign=top ><FONT 
+                  face="Verdana,Helvetica,Arial" size=2> <nobr>
+				 <a href="aufnahme_daten_zeigen.php<?php echo URL_APPEND ?>&encounter_nr=<?php echo $current_encounter ?>&origin=patreg_reg"><?php echo $LDPatientData; ?></a>
+				  </nobr> </FONT></TD>
+                </TR>
+			   
+			<?php
+			}else{
+			?>
                <TR bgColor=#eeeeee> <td align=center><img <?php echo createComIcon($root_path,'post_discussion.gif','0') ?>></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2> <nobr>
@@ -39,7 +51,11 @@ function Spacer()
 				<a href="aufnahme_start.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&origin=patreg_reg&encounter_class_nr=2"><?php echo $LDVisit.' - '.$LDAmbulant; ?></a>
 				   </FONT></TD>
                 </TR>
-			   
+		
+			<?php
+			}
+			?>
+			
            <?php Spacer(); ?>
 
 				  
@@ -49,7 +65,34 @@ function Spacer()
 			 <a href="show_appointment.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&target=<?php echo $target ?>"><?php echo $LDAppointments ?></a>
 				   </FONT></TD>
                 </TR>				 
+
+           <?php Spacer(); ?>
+				  
+              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'qkvw.gif','0') ?>></td>
+                <TD vAlign=top ><FONT 
+                  face="Verdana,Helvetica,Arial" size=2> <nobr>
+				 <a href="show_encounter_list.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&target=<?php echo $target ?>"><?php echo $LDListEncounters ?></a>
+				  </nobr> </FONT></TD>
+                </TR>
 			   
+           <?php Spacer(); ?>
+				  
+               <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'discussions.gif','0') ?>></td>
+                <TD vAlign=top ><FONT 
+                  face="Verdana,Helvetica,Arial" size=2> 
+				  <a href="show_medocs.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&target=<?php echo $target ?>"><?php echo $LDMedocs ?></a>
+				   </FONT></TD>
+                </TR>
+			   
+           <?php Spacer(); ?>
+				  
+               <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'eye_s.gif','0') ?>></td>
+                <TD vAlign=top ><FONT 
+                  face="Verdana,Helvetica,Arial" size=2> 
+				  <a href="show_drg.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&target=<?php echo $target ?>"><?php echo $LDDRG ?></a>
+				   </FONT></TD>
+                </TR>
+				
            <?php Spacer(); ?>
 				  
                <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'bubble.gif','0') ?>></td>
@@ -59,9 +102,10 @@ function Spacer()
 				   </FONT></TD>
                 </TR>
 			   
+<!-- 				   
            <?php Spacer(); ?>
 				  
-				  <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'eye_s.gif','0') ?>></td>
+			  <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'eye_s.gif','0') ?>></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2> <nobr>
 				 <a href="show_diagnosis.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&target=<?php echo $target ?>"><?php echo $LDDiagnoses ?></a>
@@ -77,7 +121,7 @@ function Spacer()
 				  </nobr> </FONT></TD>
                 </TR>
 			   
-           <?php Spacer(); ?>
+ -->           <?php Spacer(); ?>
 				  
               <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'prescription.gif','0') ?>></td>
                 <TD vAlign=top ><FONT 
@@ -85,7 +129,7 @@ function Spacer()
 				 <a href="show_prescription.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&target=<?php echo $target ?>"><?php echo $LDPrescriptions ?></a>
 				  </nobr> </FONT></TD>
                </TR>
-			   
+<!-- 			   
            <?php Spacer(); ?>
 				  
               <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'new_group.gif','0') ?>></td>
@@ -94,7 +138,7 @@ function Spacer()
 				 <a href="show_notes.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&target=<?php echo $target ?>&type_nr=21"><?php echo "$LDNotes - $LDPatientDev" ?></a>
 				  </nobr> </FONT></TD>
                 </TR>
-				
+ -->				
       	<?php Spacer(); ?>
 				  
               <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'new_group.gif','0') ?>></td>

@@ -3,13 +3,14 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+$lang_tables[]='departments.php';
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
 require($root_path.'include/inc_front_chain_lang.php');
@@ -99,7 +100,7 @@ if($pid!='' || $encounter_nr!='')
         if ($pid)
         {	
 		  /* Check whether the person is currently admitted. If yes jump to display admission data */
-		  if(!$update&&$encounter_nr=$encounter_obj->isCurrentlyAdmitted($pid)){
+		  if(!$update&&$encounter_nr=$encounter_obj->isPIDCurrentlyAdmitted($pid)){
 		      header('Location:aufnahme_daten_zeigen.php'.URL_REDIRECT_APPEND.'&encounter_nr='.$encounter_nr.'&origin=admit&sem=isadmitted&target=entry');
 			  exit;
 		  }
@@ -152,10 +153,12 @@ if($pid!='' || $encounter_nr!='')
                           if(trim($insurance_nr) && (trim($insurance_firm_name)=='')) { $errorinsnr=1; $error=1; $errornum++;}
 		              }
 	              }
- 
+ 				
+				
 
                  if(!$error) 
 	             {	
+					
 						if(!$GLOBAL_CONFIG['patient_service_care_hide']){
 						    if(!empty($sc_care_start)) $sc_care_start=formatDate2Std($sc_care_start,$date_format);
 						    if(!empty($sc_care_end)) $sc_care_end=formatDate2Std($sc_care_end,$date_format);
@@ -199,14 +202,13 @@ if($pid!='' || $encounter_nr!='')
 								        exit;
 								    }
 
-					  }	
-					  else
-					  {
+					  }else{
+					  
 					  	    $newdata=1;
 							/* Determine the format of the encounter number */
 							if($GLOBAL_CONFIG['encounter_nr_fullyear_prepend']) $ref_nr=(int)date('Y').$GLOBAL_CONFIG['encounter_nr_init'];
 								else $ref_nr=$GLOBAL_CONFIG['encounter_nr_init'];
-								
+							//echo $ref_nr;
 							switch($HTTP_POST_VARS['encounter_class_nr'])
 							{
 								case '1': $HTTP_POST_VARS['encounter_nr']=$encounter_obj->getNewEncounterNr($ref_nr+$GLOBAL_CONFIG['patient_inpatient_nr_adder'],1);
@@ -238,16 +240,23 @@ if($pid!='' || $encounter_nr!='')
 									    if(!$GLOBAL_CONFIG['patient_service_att_dr_hide']){
 										    $encounter_obj->saveAttDrServiceClass($att_dr_class);
 										}*/
+										
+										//echo $encounter_obj->getLastQuery();
+										
+										# If appointment number available, mark appointment as "done"
+										if(isset($appt_nr)&&$appt_nr) $encounter_obj->markAppointmentDone($appt_nr,$HTTP_POST_VARS['encounter_class_nr'],$encounter_nr);
 										//echo $encounter_obj->getLastQuery();
 							            header("Location: aufnahme_daten_zeigen.php".URL_REDIRECT_APPEND."&encounter_nr=$encounter_nr&origin=admit&target=entry&newdata=$newdata"); 
 								        exit;
-								    }
+								    }else{
+										echo $LDDbNoSave.'<p>'.$encounter_obj->getLastQuery();
+									}
 									
 					 }// end of if(update) else()                 
                   }	// end of if($error)
              } // end of if($mode)
 
-        } elseif($encounter_nr!='') {
+        }elseif($encounter_nr!='') {
 			  /* Load encounter data */
 			  $encounter_obj->loadEncounterData();
 			  if($encounter_obj->is_loaded) {
@@ -259,7 +268,6 @@ if($pid!='' || $encounter_nr!='')
                   /* Get insurance firm name*/
 			      $insurance_firm_name=$pinsure_obj->getFirmName($insurance_firm_id);
 				  
-			  }
 			  
 			  /* GEt the patient's services classes */
 			  
@@ -292,33 +300,43 @@ if($pid!='' || $encounter_nr!='')
 						reset($att_dr_class);
 					}    			  
 				}
-        } 	
+        	} 	
+
+		}
+
 	}
     else 
     { 
          echo "$LDDbNoLink<br>"; 
     }
-              
+    if(!$encounter_nr||$encounter_class_nr==1){
+		# Load all  wards info 
+		$ward_obj=new Ward;
+		$items='nr,name';
+		$ward_info=&$ward_obj->getAllWardsItemsObject($items);
+	}
+	if(!$encounter_nr||$encounter_class_nr==2){
+		# Load all medical departments
+		include_once($root_path.'include/care_api_classes/class_department.php');
+		$dept_obj=new Department;
+		$all_meds=&$dept_obj->getAllMedicalObject();
+	}
+       
 	$person_obj->setPID($pid);
 	if($data=&$person_obj->BasicDataArray($pid)){
 		//while(list($x,$v)=each($data))	$$x=$v;    
 		extract($data);  
 	}     
+	
+	# Prepare the photo filename
+	include_once($root_path.'include/inc_photo_filename_resolve.php');
 	/* Get the citytown name */
 	$addr_citytown_name=$person_obj->CityTownName($addr_citytown_nr);
+
 	 
 }
-    
-/* Load the wards info */
-$ward_obj=new Ward;
-$items='nr,name';
-$ward_info=&$ward_obj->getAllWardsItemsObject($items);
-
-/* Prepare text and resolve the numbers */
-require_once($root_path.'include/inc_patient_encounter_type.php');		 
-
-/* Prepare the photo filename */
-require_once($root_path.'include/inc_photo_filename_resolve.php');
+# Prepare text and resolve the numbers
+include_once($root_path.'include/inc_patient_encounter_type.php');		 
 
 require('./gui_bridge/default/gui_aufnahme_start.php');
 ?>

@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -18,7 +18,6 @@ if(isset($user_origin)&&$user_origin=='pers'){
 }
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_personell.php');
-require_once($root_path.'include/inc_config_color.php');
 
 /* Create employee object */
 $employee=new Personell();
@@ -137,19 +136,17 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 	
 	<td bgcolor=#333399>&nbsp;</td>
 
-	<td ><p><br>
+	<td><br>
 	<ul>
-
-
-<FONT    SIZE=-1  FACE="Arial"><p>
+	
+<FONT    SIZE=-1  FACE="Arial">
 <FORM action="phone_list.php" method="post" name="newentry">
 <input type="hidden" name="sid" value="<?php echo $sid; ?>">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
 <input type="hidden" name="newdata" value="<?php echo $newdata ?>">
 <input type="hidden" name="edit" value="<?php echo $edit ?>">
 <input type="hidden" name="user_origin" value="<?php echo $user_origin ?>">
-<INPUT type="submit"  value="<?php echo $LDShowActualDir ?>"></font></FORM>
-<p>
+<INPUT type="submit"  value="<?php echo $LDShowActualDir ?>"></FORM>
 </FONT>
 <?php if (($error)&&($mode=='save'))
 {
@@ -157,18 +154,16 @@ echo "<img ".createMascot($root_path,'mascot1_r.gif','0','absmiddle')."><FONT  C
 }
 ?>
 <form method="post" action="phone_edit.php" enctype="" name="entryform">
-<table bgcolor="#cceeff" border="1" cellpadding="5" cellspacing="1">
-<tr>
-<td colspan="3"><FONT    SIZE=-1  FACE="Arial">
+<table border="0" cellpadding="5" cellspacing="1">
+<tr bgcolor="#cceeff">
+<td colspan="4"><FONT    SIZE=-1  FACE="Arial">
 <?php echo $LDNewPhoneEntry ?>:
 </td>
-<td >
-&nbsp;
-</td>
 </tr>
-<tr>
-<td>
-<FONT    SIZE=-1  FACE="Arial"><b>
+
+<tr bgcolor="#cceeff">
+<td colspan=2>
+<FONT    SIZE=-1  FACE="Arial">
 <?php echo $LDEditFields[1] ?>&nbsp;
 <?php 
 if($user_origin=='pers'&&$employee->isPreLoaded()){
@@ -178,13 +173,21 @@ if($user_origin=='pers'&&$employee->isPreLoaded()){
 <?php
 }else{
 ?>
-<input name=anrede type=text size="5" value=""><br>
+<input name=anrede type=text size="20" value="" maxlength=25><br>
 <?php
 }
 ?>
-</b>
+
 </td>
-<td>
+<td colspan=2>
+<FONT    SIZE=-1  FACE="Arial">
+<?php echo $LDEditFields[4] ?>&nbsp;
+<input type=text name=beruf size="20" value="" maxlength=25><br>
+</td>
+</tr>
+
+<tr bgcolor="#cceeff">
+<td colspan=2>
 <FONT    SIZE=-1  FACE="Arial"><b>
 <?php echo $LDEditFields[2] ?>&nbsp;
 <?php 
@@ -194,14 +197,14 @@ if($user_origin=='pers'&&$employee->isPreLoaded()){
 <input type="hidden" name="name" value="<?php echo $employee->LastName(); ?>">
 <?php
 }else{
-?>
-<input name="name" type=text size="5" value=""><br>
+?><br>
+<input name="name" type=text size="40" value="" maxlength=45><br>
 <?php
 }
 ?>
 </b>
 </td>
-<td><FONT    SIZE=-1  FACE="Arial"><b>
+<td colspan=2><FONT    SIZE=-1  FACE="Arial"><b>
 <?php echo $LDEditFields[3] ?>&nbsp;
 <?php 
 if($user_origin=='pers'&&$employee->isPreLoaded()){
@@ -210,82 +213,78 @@ if($user_origin=='pers'&&$employee->isPreLoaded()){
 <input type="hidden" name="vorname" value="<?php echo $employee->FirstName(); ?>">
 <?php
 }else{
-?>
-<input name="vorname" type=text size="5" value=""><br>
+?><br>
+<input name="vorname" type=text size="40" value="" maxlength=45><br>
 <?php
 }
 ?>
 </b>
 </td>
-<td><FONT    SIZE=-1  FACE="Arial">
-<?php echo $LDEditFields[4] ?>&nbsp;
-<input type=text name=beruf size="10" value=""><br>
-</td>
 </tr>
-<tr>
+<tr bgcolor="#cceeff">
 <td colspan=2><FONT    SIZE=-1  FACE="Arial">
 <?php echo $LDEditFields[5] ?>
 <br>
 
-<input type=text name=bereich1 size="10" value=""><br>
+<input type=text name=bereich1 size="20" value="" maxlength=25><br>
 </td>
 <td><FONT    SIZE=-1  FACE="Arial">
 <?php echo $LDEditFields[6] ?>
 <br>
-<input type=text name=bereich2 size="10" value=""><br>
+<input type=text name=bereich2 size="20" value="" maxlength=25><br>
 </td>
 <td >
-&nbsp;
+<FONT    SIZE=-1  FACE="Arial">
+<?php echo $LDEditFields[14] ?><br>
+<input type=text name=zimmerno size="20" value="" maxlength=10><br>
 </td>
 </tr>
 
-<tr>
+<tr bgcolor="#cceeff">
 <td colspan=2><FONT    SIZE=-1  FACE="Arial">
 <?php echo $LDEditFields[7] ?>
 <br>
 
-<input type=text name=inphone1 size="20" value=""><br>
+<input type=text name=inphone1 size="20" value="" maxlength=15><br>
 </td>
 <td><FONT    SIZE=-1  FACE="Arial">
-<?php echo $LDEditFields[8] ?>
-<br>
-<input type=text name=inphone2 size="20" value=""><br>
+<?php echo $LDEditFields[10] ?><br>
+<input type=text name=exphone1 size="20" value="" maxlength=25><br>
 </td>
 <td><FONT    SIZE=-1  FACE="Arial">
-<?php echo $LDEditFields[9] ?>
-<br>
-<input type=text name=inphone3 size="20" value=""><br>
+<?php echo $LDEditFields[12] ?><br>
+<input type=text name=funk1 size="20" value="" maxlength=15><br>
 </td>
 </tr>
 
-<tr>
-<td colspan=2><FONT    SIZE=-1  FACE="Arial">
-<?php echo $LDEditFields[10] ?><br>
-
-<input type=text name=exphone1 size="20" value=""><br>
+<tr bgcolor="#cceeff">
+<td colspan=2>
+<FONT    SIZE=-1  FACE="Arial">
+<?php echo $LDEditFields[8] ?>
+<br>
+<input type=text name=inphone2 size="20" value="" maxlength=15><br>
 </td>
 <td><FONT    SIZE=-1  FACE="Arial">
 <?php echo $LDEditFields[11] ?><br>
-<input type=text name=exphone2 size="20" value=""><br>
+<input type=text name=exphone2 size="20" value="" maxlength=25><br>
 </td>
 <td >
-&nbsp;
+<FONT    SIZE=-1  FACE="Arial">
+<?php echo $LDEditFields[13] ?><br>
+<input type=text name=funk2 size="20" value="" maxlength=15><br>
 </td>
 </tr>
 
-<tr>
-<td colspan=2><FONT    SIZE=-1  FACE="Arial">
-<?php echo $LDEditFields[12] ?><br>
-
-<input type=text name=funk1 size="20" value=""><br>
+<tr bgcolor="#cceeff">
+<td colspan=2>
+<FONT    SIZE=-1  FACE="Arial">
+<?php echo $LDEditFields[9] ?>
+<br>
+<input type=text name=inphone3 size="20" value="" maxlength=15><br>
 </td>
-<td><FONT    SIZE=-1  FACE="Arial">
-<?php echo $LDEditFields[13] ?><br>
-<input type=text name=funk2 size="20" value=""><br>
+<td>&nbsp;
 </td>
-<td><FONT    SIZE=-1  FACE="Arial">
-<?php echo $LDEditFields[14] ?><br>
-<input type=text name=zimmerno size="20" value=""><br>
+<td>&nbsp;
 </td>
 </tr>
 

@@ -1,7 +1,33 @@
-<form method="post" name="appt_form">
+<script language="javascript">
+<!-- Script Begin
+function chkForm(d) {
+	if(d.date.value==''){
+		alert("<?php echo $LDPlsEnterDate; ?>");
+		d.date.focus();
+		return false;
+	}else if(d.to_dept_nr.value==''){
+		alert("<?php echo $LDPlsSelectDept; ?>");
+		d.to_dept_nr.focus();
+		return false;
+	}else if(d.to_personell_name.value==''){
+		alert("<?php echo $LDPlsEnterDoctor; ?>");
+		d.to_personell_name.focus();
+		return false;
+	}else if(d.purpose.value==''){
+		alert("<?php echo $LDPlsEnterPurpose; ?>");
+		d.purpose.focus();
+		return false;
+	}else{
+		return true;
+	}
+}
+//  Script End -->
+</script>
+
+<form method="post" name="appt_form" onSubmit="return chkForm(this)">
  <table border=0 cellpadding=2 width=100%>
    <tr bgcolor="#f6f6f6">
-     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDate; ?></td>
+     <td><font color="red"><b>*</b><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDate; ?></td>
      <td><input type="text" name="date" size=10 maxlength=10  
 	 	 value="<?php if(($mode!='update')&&!empty($date)&&($date!='0000-00-00')) echo formatDate2Local($date,$date_format); ?>" 
 	 	onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
@@ -14,13 +40,14 @@
 		</td>
    </tr>
    <tr bgcolor="#f6f6f6">
-     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDTime; ?></td>
+     <td></font><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDTime; ?></td>
      <td><input type="text" name="time" size=10 maxlength=10 value="<?php if(!empty($time)) echo convertTimeToLocal($time); ?>"></td>
    </tr>
    <tr bgcolor="#f6f6f6">
-     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDepartment; ?></td>
+     <td><font color="red"><b>*</b><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDepartment; ?></td>
      <td>
 	    <select name="to_dept_nr">
+		<option value=""></option>
 	<?php
 		
 		while(list($x,$v)=each($deptarray)){
@@ -38,12 +65,12 @@
    </tr>
    
    <tr bgcolor="#f6f6f6">
-     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo "$LDPhysician/$LDClinician"; ?></td>
+     <td><font color="red"><b>*</b><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo "$LDPhysician/$LDClinician"; ?></td>
      <td><input type="text" name="to_personell_name" size=50 maxlength=60  value="<?php if(isset($to_personell_name)) echo $to_personell_name; ?>"></td>
    </tr>
 
    <tr bgcolor="#f6f6f6">
-     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDPurpose; ?></td>
+     <td><font color="red"><b>*</b><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDPurpose; ?></td>
      <td><textarea name="purpose" cols=40 rows=6 wrap="physical"><?php if(isset($purpose)) echo $purpose; ?></textarea>
          </td>
    </tr>
@@ -69,6 +96,23 @@
 	 	<input type="checkbox" name="remind_phone" value="1"  <?php if($remind_phone) echo 'checked'; ?>><?php echo $LDPhone; ?>
 	 	<input type="checkbox" name="remind_mail" value="1"  <?php if($remind_mail) echo 'checked'; ?>><?php echo $LDMail; ?>
 	 </td>
+   </tr>
+   <tr bgcolor="#f6f6f6">
+     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDPlannedEncType; ?></td>
+     <td><FONT SIZE=-1  FACE="Arial" color="#000066">
+<?php
+if(is_object($encounter_classes)){
+    while($result=$encounter_classes->FetchRow()) {
+?>
+		<input name="encounter_class_nr" type="radio"  value="<?php echo $result['class_nr']; ?>" <?php if($encounter_class_nr==$result['class_nr']) echo 'checked'; ?>>
+<?php 
+        $LD=$result['LD_var'];
+        if(isset($$LD)&&!empty($$LD)) echo $$LD; else echo $result['name'];
+        echo '&nbsp;';
+	}
+} 
+?>
+     </td>
    </tr>
 
  </table>

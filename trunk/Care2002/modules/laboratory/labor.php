@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -74,6 +74,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 				  </nobr></B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php echo $LDTestRequestChemLabTxt ?></FONT></TD>
+			</TR> 
                            
               <TR bgColor=#dddddd height=1>
                 <TD colSpan=2><IMG height=1 
@@ -88,6 +89,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 				  </nobr></B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php echo $LDTestReceptionTxt ?></FONT></TD>
+			</TR> 
                            
               <TR bgColor=#dddddd height=1>
                 <TD colSpan=2><IMG height=1 
@@ -103,6 +105,8 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 				  </nobr></B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php echo $LDSeeLabData  ?></FONT></TD>
+			</TR> 
+				  
               <TR bgColor=#dddddd height=1>
                 <TD colSpan=2><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
@@ -189,6 +193,8 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 				  </nobr></B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php echo $LDTestRequestPathoTxt ?></FONT></TD>
+			</TR> 
+				  
               <TR bgColor=#dddddd height=1>
                 <TD colSpan=2><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
@@ -203,7 +209,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 				  </nobr></B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php echo $LDTestReceptionTxt ?></FONT></TD>
-                           
+			</TR> 
 		</TBODY>
 		</TABLE>
 		</TD></TR>
@@ -228,7 +234,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 				  </nobr></B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php echo $LDTestRequestBacterioTxt ?></FONT></TD>
-                           
+			</TR> 
               <TR bgColor=#dddddd height=1>
                 <TD colSpan=2><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
@@ -243,7 +249,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 				  </nobr></B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php echo $LDTestReceptionTxt ?></FONT></TD>
-                           
+			</TR> 
 		</TBODY>
 		</TABLE>
 		</TD></TR>
@@ -267,7 +273,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 				  </nobr></B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php echo $LDBloodRequestTxt ?></FONT></TD>
-                           
+			</TR> 
               <TR bgColor=#dddddd height=1>
                 <TD colSpan=2><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
@@ -282,13 +288,39 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 				  </nobr></B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php echo $LDTestReceptionTxt ?></FONT></TD>
-                           
+			</TR> 
 		</TBODY>
 		</TABLE>
 		</TD></TR>
 		</TBODY>
 		</TABLE>
 		<p>
+		
+<FONT face="Verdana,Helvetica,Arial" size=3 color="#990000"><b><?php echo $LDAdministration ?></b></FONT>
+
+ <TABLE cellSpacing=0 cellPadding=0 width=600 bgColor=#999999 border=0>
+        <TBODY>
+        <TR>
+          <TD>
+            <TABLE cellSpacing=1 cellPadding=3 width=600 bgColor=#999999 
+            border=0>
+              <TBODY>
+              <TR bgColor=#eeeeee>
+                <TD vAlign=top width=180><FONT 
+                  face="Verdana,Helvetica,Arial" size=2><B><nobr>
+				 <img <?php echo createComIcon($root_path,'blaupfeil.gif','0','middle') ?>>  
+				 <a href="labor_test_param_edit_pass.php?sid=<?php echo "$sid&lang=$lang" ?>&user_origin=lab" ><?php echo $LDTestParameters ?></a><br>
+				  </nobr></B></FONT></TD>
+                <TD><FONT face="Verdana,Helvetica,Arial" 
+                  size=2><?php echo $LDTestParametersTxt ?></FONT></TD>
+			</TR> 
+                           				                             
+		</TBODY>
+		</TABLE>
+		</TD></TR>
+		</TBODY>
+		</TABLE>
+<p>
 
 <a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  alt="<?php echo $LDCloseAlt ?>" align="middle"></a>
 

@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -120,8 +120,13 @@ if(is_object($all_image)){
      		echo '</td>
 	 		<td class="a12_gry"><a href="javascript:preview(\''.$image['nr'].'\')" title="'.$LDClk2Preview.'">
 	 		<img src="';
-			echo $final_path.$image['nr'].'.'.$image['mime_type'].'" border=0  width=60></a> </td>
-   			</tr>';
+			if(stristr($image['mime_type'],'gif')){
+				echo $final_path.$image['nr'].'.'.$image['mime_type'].'" border=0  width=80></a> </td>
+   				</tr>';
+			}else{
+				echo  $root_path.'main/imgcreator/thumbnail.php?mx=80&my=100&imgfile=/'.$fotoserver_localpath.$pn.'/'.$image['nr'].'.'.$image['mime_type'].'" border=0></a> </td>
+   				</tr>';
+			}
    		}
 	}
 }

@@ -3,11 +3,13 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /*
-CARE 2002 Integrated Information System beta 1.0.05 - 2003-06-22 for Hospitals and Health Care Organizations and Services
+CARE 2002 Integrated Information System beta 1.0.06 - 2003-08-06 for Hospitals and Health Care Organizations and Services
 Copyright (C) 2002  Elpidio Latorilla & Intellin.org	
 GNU GPL. 
 For details read file "copy_notice.txt".
 */
+$lang_tables[]='prompt.php';
+$lang_tables[]='departments.php';
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
@@ -22,7 +24,6 @@ if(!session_is_registered('sess_parent_mod')) session_register('sess_parent_mod'
 $encounter_obj=new Encounter($encounter_nr);
 $person_obj=new Person();
 $insurance_obj=new Insurance;
-$ward_obj=new Ward;
 
 $thisfile=basename(__FILE__);
 $breakfile='aufnahme_pass.php'.URL_APPEND;
@@ -97,13 +98,17 @@ if($dblink_ok) {
 		//load data
 		//while(list($x,$v)=each($row)) $$x=$v;
 		extract($row);
+		# Set edit mode
+		if(!$is_discharged) $edit=true;
+			else $edit=false;
+		# Fetch insurance and encounter classes
 		$insurance_class=&$encounter_obj->getInsuranceClassInfo($insurance_class_nr);
 		$encounter_class=&$encounter_obj->getEncounterClassInfo($encounter_class_nr);
 
 		//if($data_obj=&$person_obj->getAllInfoObject($pid))
 		$list='title,name_first,name_last,name_2,name_3,name_middle,name_maiden,name_others,date_birth,
 		         sex,addr_str,addr_str_nr,addr_zip,addr_citytown_nr,photo_filename';
-
+			
 		$person_obj->setPID($pid);
 		if($row=&$person_obj->getValueByList($list))
 		{
@@ -113,6 +118,27 @@ if($dblink_ok) {
 
 		$addr_citytown_name=$person_obj->CityTownName($addr_citytown_nr);
 		$encoder=$encounter_obj->RecordModifierID();
+		# Get current encounter to check if current encounter is this encounter nr
+		$current_encounter=$person_obj->CurrentEncounter($pid);
+		
+		if($stat=&$encounter_obj->AllStatus($encounter_nr)){
+			$enc_status=$stat->FetchRow();
+		}
+
+		# Get ward or department infos
+		if($encounter_class_nr==1){
+			# Get ward name
+			include_once($root_path.'include/care_api_classes/class_ward.php');
+			$ward_obj=new Ward;
+			$current_ward_name=$ward_obj->WardName($current_ward_nr);
+		}elseif($encounter_class_nr==2){
+			# Get ward name
+			include_once($root_path.'include/care_api_classes/class_department.php');
+			$dept_obj=new Department;
+			//$current_dept_name=$dept_obj->FormalName($current_dept_nr);
+			$current_dept_LDvar=$dept_obj->LDvar($current_dept_nr);
+		}
+
 	}
 
 	include_once($root_path.'include/inc_date_format_functions.php');
@@ -121,8 +147,6 @@ if($dblink_ok) {
 	if(!$newdata) $encounter_obj->setHistorySeen($HTTP_SESSION_VARS['sess_user_name'],$encounter_nr);
 	/* Get insurance firm name*/
 	$insurance_firm_name=$insurance_obj->getFirmName($insurance_firm_id);
-	/* Get ward name */
-	$current_ward_name=$ward_obj->WardName($current_ward_nr);
 	/* Check whether config path exists, else use default path */			
 	$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $default_photo_path;
 } else { 

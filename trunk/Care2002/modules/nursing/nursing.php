@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -32,6 +32,7 @@ $HTTP_SESSION_VARS['sess_file_return']=$top_dir.basename(__FILE__);
 /* Set this file as the referer */
 $HTTP_SESSION_VARS['sess_path_referer']=$top_dir.basename(__FILE__);
 $HTTP_SESSION_VARS['sess_user_origin']='dept';
+$HTTP_SESSION_VARS['sess_parent_mod']='';
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
@@ -77,50 +78,31 @@ require($root_path.'include/inc_css_a_hilitebu.php');
                   size=2><?php echo $LDNursingStationsTxt ?></FONT></TD></TR>
               <TR bgColor="#dddddd" >
                 <TD colSpan=3>
-				  <FONT face="Verdana,Helvetica,Arial" 
-                  size=2>
 				  <ul>
 				  <?php
 				  	 if(is_object($ward_info))
 					 {
-						$i=0;
+				  		echo '<table border=0 cellpadding=1 cellspacing=1>';
 						while($stations=$ward_info->FetchRow())
 						{
 
-							echo '<a href="'.strtr('nursing-station-pass.php'.URL_APPEND.'&rt=pflege&edit=1&station='.$stations['ward_id'].'&location_id='.$stations['ward_id'].'&ward_nr='.$stations['nr'],' ',' ').'"><font color="green"><b>'.strtoupper($stations['ward_id']).'</b></font></a> &nbsp;';
-							$i++;
-							if($i==4)
-							{
-								echo "<br>\r\n";
-								$i=0;
-							}
+							echo '<tr>
+							<td><FONT face="Verdana,Helvetica,Arial" size=2><li> <a href="'.strtr('nursing-station-pass.php'.URL_APPEND.'&rt=pflege&edit=1&station='.$stations['ward_id'].'&location_id='.$stations['ward_id'].'&ward_nr='.$stations['nr'],' ',' ').'"><font color="green"><b>'.strtoupper($stations['ward_id']).'</b></font></a> &nbsp;';
+							echo '</td>
+         				 	<td><FONT face="Verdana,Helvetica,Arial" size=2>'.$stations['name'].'
+							</td>
+							</tr>';
+							
 						}
+      					echo '</table>';
 					 }
 					 else
 					 {
 					     echo $LDNoWardsYet.'<br><img '.createComIcon($root_path,'redpfeil.gif','0','absmiddle').'> <a href="nursing-station-manage-pass.php'.URL_APPEND.'">'.$LDClk2CreateWard.'</a>';
 					  }
-	/*			  	 if(!empty($rows))
-					 {
-						$i=0;
-						while($stations=$ergebnis->FetchRow())
-						{
 
-							echo '<a href="'.strtr('nursing-station-pass.php'.URL_APPEND.'&rt=pflege&edit=1&station='.$stations['station'],' ',' ').'">'.$stations['station'].'</a> &nbsp;';
-							$i++;
-							if($i==4)
-							{
-								echo "<br>\r\n";
-								$i=0;
-							}
-						}
-					 }
-					 else
-					 {
-					     echo $LDNoWardsYet.'<br><img '.createComIcon($root_path,'redpfeil.gif','0','absmiddle').'> <a href="nursing-station-manage-pass.php'.URL_APPEND.'">'.$LDClk2CreateWard.'</a>';
-					  }*/
 				?>
-			</UL>  
+ 			</UL>  
 				  </TD></TR>
               <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'eye_s.gif','0') ?> border=0 width=16 height=16></td>
                 <TD vAlign=top width=150><FONT 
@@ -133,7 +115,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
                 <TD colSpan=3><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
                   width=5></TD></TR>
-              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'eyeglass.gif','0') ?>></td>
+              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'findnew.gif','0') ?>></td>
                 <TD vAlign=top width=150><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B><nobr>
 				 <a href="nursing-patient-such-start.php<?php echo URL_APPEND; ?>"><?php echo $LDSearchPatient ?></a>
@@ -166,7 +148,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
                 <TD colSpan=3><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
                   width=5></TD></TR>
-              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'bubble.gif','0') ?> border=0 width=15 height=14></td>
+              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'forums.gif','0') ?> border=0 width=15 height=14></td>
                 <TD vAlign=top width=150><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B>
 				  <a href="<?php echo $root_path; ?>modules/nursing_or/nursing-or-main-pass.php<?php echo URL_APPEND."&target=setpersonal&retpath=menu" ?>"><?php echo $LDNursesList ?></a>
@@ -184,7 +166,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php echo $LDNewsTxt ?></FONT></TD></TR>
-              <TR bgColor=#dddddd height=1>
+<!--               <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
                   width=5></TD></TR>
@@ -207,7 +189,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><nobr><?php echo $LDNursingForumTxt ?></nobr></FONT></TD></TR>
-<!--               <TR bgColor=#dddddd height=1>
+              <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
                   width=5></TD></TR>

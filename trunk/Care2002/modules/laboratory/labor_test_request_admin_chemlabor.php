@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -12,7 +12,7 @@ require($root_path.'include/inc_environment_global.php');
 */
 
 /* Start initializations */
-$lang_tables=array('departments.php');
+$lang_tables=array('departments.php','konsil.php');
 define('LANG_FILE','konsil_chemlabor.php');
 
 /* Globalize the variables */
@@ -44,6 +44,7 @@ $edit=0; /* Set script mode to no edit*/
 $formtitle=$LDChemicalLaboratory;
 $dept_nr=24; // 24 = department Nr. chemical lab
 
+$subtarget='chemlabor';
 						
 /* Here begins the real work */
 /* Establish db connection */
@@ -251,6 +252,11 @@ topmargin=0 leftmargin=0 marginwidth=0 marginheight=0
 <tr>
 <td bgcolor=<?php echo $cfg['body_bgcolor']; ?> colspan=2>
 
+<?php
+if($batchrows)
+{
+?>
+
 <table border=0>
   <tr valign="top">
   <!-- Left block for the request list  -->
@@ -267,6 +273,7 @@ require($root_path.'include/inc_test_request_lister_fx.php');
 <!-- Here begins the form  -->	
         
      <a href="javascript:printOut()"><img <?php echo createLDImgSrc($root_path,'printout.gif','0','absmiddle') ?> alt="<?php echo $LDPrintOut ?>"></a>
+     <a href="<?php echo 'labor_datainput.php'.URL_APPEND.'&encounter_nr='.$pn.'&job_id='.$batch_nr.'&mode='.$mode.'&update=1&user_origin=lab_mgmt'; ?>"><img <?php echo createLDImgSrc($root_path,'enterresults.gif','0','absmiddle') ?> alt="<?php echo $LDDone ?>"></a>
      <a href="<?php echo $thisfile.URL_APPEND."&edit=".$edit."&mode=done&target=".$target."&subtarget=".$subtarget."&batch_nr=".$batch_nr."&pn=".$pn."&formtitle=".$formtitle."&user_origin=".$user_origin."&noresize=".$noresize; ?>"><img <?php echo createLDImgSrc($root_path,'done.gif','0','absmiddle') ?> alt="<?php echo $LDDone ?>"></a>
 
 <?php
@@ -274,12 +281,25 @@ require_once($root_path.'include/inc_test_request_printout_chemlabor.php');
 ?>
 
      <a href="javascript:printOut()"><img <?php echo createLDImgSrc($root_path,'printout.gif','0','absmiddle') ?> alt="<?php echo $LDPrintOut ?>"></a>
+     <a href="<?php echo 'labor_datainput.php'.URL_APPEND.'&encounter_nr='.$pn.'&job_id='.$batch_nr.'&mode='.$mode.'&update=1&user_origin=lab_mgmt'; ?>"><img <?php echo createLDImgSrc($root_path,'enterresults.gif','0','absmiddle') ?> alt="<?php echo $LDDone ?>"></a>
      <a href="<?php echo $thisfile.URL_APPEND."&edit=".$edit."&mode=done&target=".$target."&subtarget=".$subtarget."&batch_nr=".$batch_nr."&pn=".$pn."&formtitle=".$formtitle."&user_origin=".$user_origin."&noresize=".$noresize; ?>"><img <?php echo createLDImgSrc($root_path,'done.gif','0','absmiddle') ?> alt="<?php echo $LDDone ?>"></a>
 
 </td>
 
 </tr>
-</table>        	
+</table>     
+
+<?php
+}
+else
+{
+?>
+<img <?php echo createMascot($root_path,'mascot1_r.gif','0','absmiddle') ?> ><font size=3 face="verdana,arial" color="#990000"><b><?php echo $LDNoPendingRequest ?></b></font>
+<p>
+<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>
+<?php
+}
+?>   	
 	
 	</td>
   </tr>

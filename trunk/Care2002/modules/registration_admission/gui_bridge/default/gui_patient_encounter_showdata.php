@@ -16,7 +16,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 ?> 
 </HEAD>
 
-<BODY bgcolor="<?php echo $cfg['bot_bgcolor'];?>" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
+<BODY bgcolor="<?php echo $cfg['body_bgcolor'];?>" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
 <?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
 
 
@@ -42,18 +42,18 @@ include('./gui_bridge/default/gui_tabs_patadmit.php')
 ?>
 
 <tr>
-<td colspan=3  bgcolor=<?php echo $cfg['body_bgcolor']; ?>><p><br>
+<td colspan=3  bgcolor=<?php echo $cfg['body_bgcolor']; ?>>
 
 <?php
-if(empty($is_discharged)){
+if(!$is_discharged){
 	if(!empty($sem)){
 ?>
 <table border=0>
   <tr>
     <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','absmiddle') ?>></td>
     <td><font color="#000099" SIZE=3  FACE="verdana,Arial"> <b><?php echo $LDPatientCurrentlyAdmitted; ?></b></font></td>
-    <td valign="bottom"><img <?php echo createComIcon($root_path,'angle_down_r.gif','0') ?>></td>
-  </tr>
+<!--     <td valign="bottom"><img <?php echo createComIcon($root_path,'angle_down_r.gif','0') ?>></td>
+ -->  </tr>
 </table>
 <?php
 	}
@@ -65,18 +65,35 @@ if(empty($is_discharged)){
 }
 ?>
 
-<FONT    SIZE=-1  FACE="Arial">
-
 <table border=0>
+<?php
+if($is_discharged){
+?>
+  <tr>
+    <td>&nbsp;</td>
+    <td bgcolor="red">&nbsp;<FONT    SIZE=2  FACE="verdana,Arial" color="#ffffff"><img <?php echo createComIcon($root_path,'warn.gif','0','absmiddle'); ?>> 
+	<b>
+		<?php 
+		if($current_encounter) echo $LDEncounterClosed;
+			else echo $LDPatientIsDischarged; 
+	?>
+	</b></font></td>
+    <td>&nbsp;</td>
+  </tr>
+
+<?php
+}
+?>
+
   <tr>
     <td>&nbsp;
   </td>
 
-  <td>
-	
+  <td valign="top">
+
 	<table border=0 cellpadding=0 cellspacing=0 bgcolor="#999999">
    <tr>
-     <td>
+	 <td>
 
 <table border="0" cellspacing=1 cellpadding=0>
 <tr bgcolor="white" >
@@ -95,7 +112,7 @@ if(file_exists($root_path.'cache/barcodes/en_'.$full_en.'.png')) echo '<img src=
   }
 ?>
 </td>
-<td rowspan=7 align="center"><img <?php echo $img_source; ?> hspace=5 width=137>
+<td rowspan=7 align="center"><img <?php echo $img_source; ?> hspace=5>
 </td>
 </tr>
 
@@ -177,12 +194,39 @@ if ($addr_country) echo $addr_country.'<br>';
 </td>
 </tr>
 
+<?php
+if($encounter_class_nr==1){
+?>
 <tr bgcolor="white">
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $LDWard ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php	echo $current_ward_name; ?>
+<td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">&nbsp;
+<?php	
+	if($in_ward){
+		echo '<a href="'.$root_path.'modules/nursing/'.strtr('nursing-station-pass.php'.URL_APPEND.'&rt=pflege&edit=1&station='.$current_ward_name.'&location_id='.$current_ward_name.'&ward_nr='.$current_ward_nr,' ',' ').'">'.$current_ward_name.'</a>';
+	}else{
+		echo $current_ward_name;
+	} ?>
 </td>
 </tr>
+<?php
+}elseif($encounter_class_nr==2){
+?>
+<tr bgcolor="white">
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo "$LDClinic/$LDDepartment" ?>:
+</td>
+<td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">&nbsp;
+<?php	
+	if($in_dept){
+		echo '<a href="'.$root_path.'modules/ambulatory/'.strtr('amb_clinic_patients_pass.php'.URL_APPEND.'&rt=pflege&edit=1&dept='.$$current_dept_LDvar.'&location_id='.$$current_dept_LDvar.'&dept_nr='.$current_dept_nr,' ',' ').'">'.$$current_dept_LDvar.'</a>';
+	}else{
+		echo $$current_dept_LDvar;
+	} ?>
+</td>
+</tr>
+<?php
+}
+?>
 
 <tr bgcolor="white">
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $LDDiagnosis ?>:
@@ -357,10 +401,12 @@ if($sc_att_dr_start&&$sc_att_dr_start!='0000-00-00') echo ' [ '.formatDate2Local
 
 
 <p>
-
-<a href="<?php echo $updatefile.URL_APPEND.'&encounter_nr='.$encounter_nr.'&update=1'; ?>"><img <?php echo createLDImgSrc($root_path,'update_data.gif','0','top') ?>></a>
+<?php 	if(!$is_discharged) include('./include/bottom_controls_admission.inc.php'); ?>
+<!-- <a href="<?php echo $updatefile.URL_APPEND.'&encounter_nr='.$encounter_nr.'&update=1'; ?>"><img <?php echo createLDImgSrc($root_path,'update_data.gif','0','top') ?>></a>
 <a href="javascript:makeBarcodeLabel('<?php echo $encounter_nr  ?>')"><img <?php echo createLDImgSrc($root_path,'barcode_label.gif','0','top') ?>></a>
 <a href="javascript:makeWristBands('<?php echo $encounter_nr ?>')"><img <?php echo createLDImgSrc($root_path,'barcode_wristband.gif','0','top') ?>></a>
+ -->
+ <a href="<?php echo $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>></a>
 
 <p>
 
@@ -374,18 +420,10 @@ if($sc_att_dr_start&&$sc_att_dr_start!='0000-00-00') echo ' [ '.formatDate2Local
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="aufnahme_start.php<?php echo URL_APPEND; ?>&mode=?"><?php echo $LDAdmWantEntry ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="aufnahme_daten_such.php<?php echo URL_APPEND; ?>"><?php echo $LDAdmWantSearch ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="aufnahme_list.php<?php echo URL_APPEND; ?>&newdata=1"><?php echo $LDAdmWantArchive ?></a><br>
+
 <p>
-&nbsp;
-<?php if ($from=='such') echo '
-		<a href="aufnahme_daten_such.php?sid='.$sid.'">';
-	if($from=='entry') echo '
-		<a href="aufnahme_start.php?sid='.$sid.'">';
-?>
-<img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a>
-<p>
-<hr>
 <?php
-StdCopyright();
+require($root_path.'include/inc_load_copyrite.php');
 ?>
 </FONT>
 <?php

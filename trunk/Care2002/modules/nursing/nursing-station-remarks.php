@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -13,13 +13,13 @@ require($root_path.'include/inc_environment_global.php');
 $lang_tables=array('date_time.php');
 define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
+//define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
 /* Create nursing notes object */
 require_once($root_path.'include/care_api_classes/class_notes_nursing.php');
 $report_obj= new NursingNotes;
-
-if ($station=='') { $station='p3a';  }
+ 
+//if ($station=='') { $station='Non-department specific';  }
 if($pday=='') $pday=date('d');
 if($pmonth=='') $pmonth=date('m');
 if($pyear=='') $pyear=date('Y');
@@ -27,28 +27,45 @@ $s_date=$pyear.'-'.$pmonth.'-'.$pday;
 
 $thisfile=basename(__FILE__);
 			
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok){
-    include_once($root_path.'include/inc_date_format_functions.php');
-	if($mode=='save'){
-		if($report_obj->saveDailyWardNotes($HTTP_POST_VARS)){
-			header("Location:$thisfile".URL_REDIRECT_APPEND."&pn=$pn&station=$station&location_nr=$location_nr");
-			exit;
-		}else{echo "$sql<p>$LDDbNoUpdate";}
-	}else{
-		if($d_notes=&$report_obj->getDailyWardNotes($pn)){
-    		include_once($root_path.'include/inc_editor_fx.php');
-			$occup=true;
-		}
-		/* Create nursing notes object */
-		include_once($root_path.'include/care_api_classes/class_ward.php');
-		$ward_obj= new Ward;
-	}
-}else{
-	echo "$LDDbNoLink<br>";
-} 
+require_once($root_path.'include/inc_date_format_functions.php');
 
+
+if($mode=='save'){
+	# Know where we are
+	switch($HTTP_SESSION_VARS['sess_user_origin']){
+		case 'lab': $HTTP_POST_VARS['location_type_nr']=1; # 1 =department
+						break;
+		default: 	$HTTP_POST_VARS['location_type_nr']=2; # 2 = ward 
+						break;
+	}
+	$HTTP_POST_VARS['location_id']=$station; 
+	if($report_obj->saveDailyWardNotes($HTTP_POST_VARS)){
+		//echo $report_obj->getLastQuery();
+		header("Location:$thisfile".URL_REDIRECT_APPEND."&pn=$pn&station=$station&dept_nr=$dept_nr&location_nr=$location_nr&saved=1");
+		exit;
+	}else{echo $report_obj->getLastQuery()."<p>$LDDbNoUpdate";}
+}else{
+	if($d_notes=&$report_obj->getDailyWardNotes($pn)){
+   		include_once($root_path.'include/inc_editor_fx.php');
+		$occup=true;
+	}
+	# If location name is empty, fetch by location nr
+	if(!isset($station)||empty($station)){
+		# Know where we are
+		switch($HTTP_SESSION_VARS['sess_user_origin']){
+			case 'amb': # Create nursing notes object 
+						include_once($root_path.'include/care_api_classes/class_department.php');
+						$obj= new Department;
+						$station=$obj->FormalName($dept_nr);
+						break;
+			default: # Create nursing notes object 
+						include_once($root_path.'include/care_api_classes/class_ward.php');
+						$obj= new Ward;
+						$station=$obj->WardName($location_nr);
+		}
+		echo $obj->getLastQuery();
+	}
+}
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -91,14 +108,13 @@ td.vn { font-family:verdana,arial; color:#000088; font-size:10}
 </style>
 </HEAD>
 
-<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> onLoad="if (window.focus) window.focus();<?php if(($mode=='save')&&($occup)) echo "window.opener.location.reload();window.focus();"; ?>" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
+<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?>  onLoad="if (window.focus) window.focus();<?php if(($mode=='save')&&($occup)||$saved) echo "window.opener.location.reload();window.focus();"; ?>" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
 <?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
-
 
 <table width=100% border=0 cellpadding="0" cellspacing=0>
 <tr>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=4  FACE="Arial"><STRONG> &nbsp;&nbsp; <?php echo $LDNotes.' '.strtoupper($station).' ('.formatDate2Local($s_date,$date_format).')'; ?> </STRONG></FONT>
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=4  FACE="Arial"><STRONG> &nbsp;&nbsp; <?php echo $LDNotes.' :: '.$station.' ('.formatDate2Local($s_date,$date_format).')'; ?> </STRONG></FONT>
 </td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr>
 <a href="javascript:gethelp('nursing_station.php','remarks','','<?php echo $station ?>','<?php echo $LDNotes ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  
@@ -165,12 +181,10 @@ if($occup){
 <input type="hidden" name="lang" value="<?php echo $lang ?>">
 <input type="hidden" name="station" value="<?php echo $station ?>">
 <input type="hidden" name="location_nr" value="<?php echo $location_nr; ?>">
-<input type="hidden" name="location_id" value="<?php echo $ward_obj->WardName($location_nr); ?>">
-<input type="hidden" name="location_type" value="2"> <!--  location type 2 = ward -->
 <input type="hidden" name="mode" value="save">
 <input type="hidden" name="pn" value="<?php echo $pn ?>">
-<!-- <input type="submit" value="<?php echo $LDSave ?>">
- --><p>
+<input type="hidden" name="dept_nr" value="<?php echo $dept_nr ?>">
+<p>
  <input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif') ?>>
  
 </form>

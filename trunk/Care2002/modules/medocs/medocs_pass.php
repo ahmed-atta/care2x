@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -18,6 +18,9 @@ require_once($root_path.'global_conf/areas_allow.php');
 
 $allowedarea=&$allow_area['admit'];
 $append=URL_REDIRECT_APPEND.'&from=pass'; 
+
+if(!session_is_registered('sess_user_origin')) session_register('sess_user_origin');
+
 switch($target)
 {
 	case 'entry':$fileforward='medocs_start.php'.$append; 
@@ -44,6 +47,9 @@ $userck='medocs_user';
 setcookie($userck.$sid,'');
 require($root_path.'include/inc_2level_reset.php'); 
 setcookie(ck_2level_sid.$sid,'');
+
+# reset the user origin
+$HTTP_SESSION_VARS['sess_user_origin']='';
 
 require($root_path.'include/inc_passcheck_internchk.php');
 if ($pass=='check') 	
@@ -86,8 +92,8 @@ echo '
   
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
 <tr>
-<td colspan=3><?php if($target=="entry") echo '<img '.createLDImgSrc($root_path,'einga-b.gif','0').' alt="'.$LDAdmit.'">';
-								else{ echo'<a href="medocs_pass.php?sid='.$sid.'&target=entry&lang='.$lang.'"><img '.createLDImgSrc($root_path,'ein-gray.gif','0').' alt="'.$LDAdmit.'"'; if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';}
+<td colspan=3><?php if($target=="entry") echo '<img '.createLDImgSrc($root_path,'newdata-b.gif','0').' alt="'.$LDAdmit.'">';
+								else{ echo'<a href="medocs_pass.php?sid='.$sid.'&target=entry&lang='.$lang.'"><img '.createLDImgSrc($root_path,'newdata-gray.gif','0').' alt="'.$LDAdmit.'"'; if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';}
 							if($target=="search") echo '<img '.createLDImgSrc($root_path,'such-b.gif','0').' alt="'.$LDSearch.'">';
 								else{ echo '<a href="medocs_pass.php?sid='.$sid.'&target=search&lang='.$lang.'"><img '.createLDImgSrc($root_path,'such-gray.gif','0').' alt="'.$LDSearch.'" ';if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';}
 /*							if($target=="archiv") echo '<img '.createLDImgSrc($root_path,'arch-blu.gif','0').'  alt="'.$LDArchive.'">';

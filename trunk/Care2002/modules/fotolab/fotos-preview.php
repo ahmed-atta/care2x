@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -94,9 +94,24 @@ if(PREVIEW_SIZE<$w){
 
 	
 if($toggle_pic) echo '<a href="'.basename(__FILE__).URL_APPEND.'&pn='.$pn.'&nr='.$nr.'&preview_size='.$preview_size.'">';
+
+if($t==1){
+
 ?>
+
 <img src="<?php	echo $picsource; ?>" <?php if($preview_size) echo 'width="'.$preview_size.'"'; else echo $wh; ?> border=0  name="preview"
 <?php 
+
+}elseif(($toggle_pic&&!$preview_size)||(!$toggle_pic&&$preview_size)){
+?>
+<img src="<?php	echo $picsource; ?>" <?php if($preview_size) echo 'width="'.$preview_size.'"'; else echo $wh; ?> border=0  name="preview"
+<?php
+}else{
+?>
+<img src="<?php	echo $root_path.'main/imgcreator/thumbnail.php?mx='.$preview_size.'&my='.$preview_size.'&imgfile=/'.$fotoserver_localpath.$pn.'/'.$image['nr'].'.'.$image['mime_type'] ?>" border=0  name="preview"
+<?php
+}
+
 if($toggle_pic){
 ?>
  alt="<?php if($preview_size) echo $LDTogglePreviewOrig; else echo $LDToggleOrigPreview; ?>" 

@@ -2,14 +2,33 @@
 if($parent_admit) $bgimg='tableHeaderbg3.gif';
 	else $bgimg='tableHeader_gr.gif';
 $tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
+
+# Prepare the encounter classes into an array
+if(is_object($encounter_classes)){
+	while($ec_row=$encounter_classes->FetchRow()) $enc_class[$ec_row['class_nr']]=$ec_row;
+}
+
 ?>
-<script language="">
+<script language="javascript">
 <!-- Script Begin
 function cancelAppointment(nr) {
 	if(confirm('<?php echo $LDSureCancelAppt; ?>')){
 		if(reason=prompt('<?php echo $LDEnterCancelReason; ?>','')){
 			window.location.href="<?php echo $thisfile.URL_REDIRECT_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=appt_cancel&nr='; ?>"+nr+"&reason="+reason;
 		}
+	}
+}
+function checkApptDate(d,e,n){
+	fg=false;
+	if(d=="<?php echo date('Y-m-d'); ?>"){
+		fg=true;
+	}else{
+		if (confirm("<?php echo $LDAppointNotToday.'\n'.$LDSureAdmitAppoint; ?>")){
+			fg=true;
+		}
+	}
+	if(fg){
+		window.location.href="<?php echo $root_path.'modules/registration_admission/aufnahme_start.php'.URL_REDIRECT_APPEND; ?>&pid=<?php echo $HTTP_SESSION_VARS['sess_pid'] ?>&origin=patreg_reg&encounter_class_nr="+e+"&appt_nr="+n;
 	}
 }
 //  Script End -->
@@ -19,7 +38,7 @@ function cancelAppointment(nr) {
   <tr bgcolor="#f6f6f6">
     <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo "$LDDate/$LDTime/$LDDetails"; ?></td>
     <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDAppointments; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDStatus; ?></td>
+    <td <?php echo $tbg; ?> colspan=2><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDStatus; ?></td>
   </tr>
 <?php
 $toggle=0;
@@ -47,8 +66,40 @@ while($row=$result->FetchRow()){
 		}
 	?>
 	</td>
-    <td><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>"><img <?php echo createComIcon($root_path,'level_'.$row['urgency'].'.gif','0'); ?>></td>
+    <td><FONT SIZE=1  FACE="Arial" color="<?php echo $tc; ?>">
+	<?php 
+	if($row['appt_status']!='cancelled'){
+		if($row['appt_status']=='done'){
+			$urg_img='check-r.gif';
+		}else{
+			$urg_img='level_'.$row['urgency'].'.gif';
+		}
+		echo '<img '.createComIcon($root_path,$urg_img,'0','absmiddle').'>'; 
+	?>
+<?php 
+		if($row['appt_status']=='done' && $row['encounter_nr']){
+			echo '<a href="'.$root_path.'modules/registration_admission/aufnahme_daten_zeigen.php'.URL_APPEND.'&encounter_nr='.$row['encounter_nr'].'&origin=appt&target='.$target.'">'.$row['encounter_nr'].'</a>';
+		}
+	}else{
+		echo '&nbsp;';
+	}
+	?>	
+	</td>
+    <td rowspan=4>
+		<?php
+		if($row['appt_status']=='pending'){
+	?>
+	<a href="<?php echo $thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=select&nr='.$row['nr']; ?>"><img <?php echo createLDImgSrc($root_path,'edit_sm.gif','0'); ?>></a> <br> 
+	<a href="javascript:checkApptDate('<?php echo $row['date'] ?>','<?php echo $row['encounter_class_nr'] ?>','<?php echo $row['nr'] ?>' )"><img <?php echo createLDImgSrc($root_path,'admit_sm.gif','0'); ?>></a> <br>
+	<a href="javascript:cancelAppointment(<?php echo $row['nr']; ?>)"><img <?php echo createLDImgSrc($root_path,'cancel_sm.gif','0'); ?>></a>
+	<?php
+		}else{
+			echo '&nbsp;';
+		}
+	?>
+	</td>
   </tr>
+
   <tr   bgcolor="<?php echo $bgc; ?>" >
     <td><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>"><?php echo $row['time']; ?></td>
     <td><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>">
@@ -77,17 +128,13 @@ while($row=$result->FetchRow()){
     <td><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>"><?php echo $row['to_personell_name']; ?></td>
     <td><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>">
 	<?php
-		if($row['appt_status']!='cancelled'){
+		$buf=$enc_class[$row['encounter_class_nr']]['LD_var'];
+		 if (isset($$buf)&&!empty($$buf)) echo $$buf; 
+    		else echo  $enc_class[$row['encounter_class_nr']]['name']; 
 	?>
-	<a href="<?php echo $thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=select&nr='.$row['nr']; ?>"><img <?php echo createLDImgSrc($root_path,'edit_sm.gif','0'); ?>></a> 
-	<?php
-		}
-		if($row['appt_status']=='pending'){
-	?>
-	<a href="javascript:cancelAppointment(<?php echo $row['nr']; ?>)"><img <?php echo createLDImgSrc($root_path,'cancel_sm.gif','0'); ?>></a><br></td>
-	<?php
-		}
-	?>  
+
+	&nbsp;
+	</td>  
   </tr>
 
 <?php

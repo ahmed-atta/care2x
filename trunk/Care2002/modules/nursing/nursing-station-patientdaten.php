@@ -31,6 +31,8 @@ $z = SIGNAL_COLOR_LEVEL_ZERO;
 /* Retrieve the SIGNAL_COLOR_LEVEL_FULL = for convenience purposes */
 $f = SIGNAL_COLOR_LEVEL_FULL;
 
+$HTTP_SESSION_VARS['sess_user_origin']='nursing';
+
 /* Create department object and load all medical depts */
 require_once($root_path.'include/care_api_classes/class_department.php');
 $dept_obj= new Department;
@@ -349,6 +351,25 @@ function isColorBarUpdated()
    if (changed_flag==1) return true;
      else return false;
 }
+function winClose(){
+	window.opener.location.reload();
+	window.close();
+}
+function openDRGComposite(){
+<?php if($cfg['dhtml'])
+	echo '
+			w=window.parent.screen.width;
+			h=window.parent.screen.height;';
+	else
+	echo '
+			w=800;
+			h=650;';
+?>
+	
+	drgcomp_<?php echo $HTTP_SESSION_VARS['sess_full_en']."_".$op_nr."_".$dept_nr."_".$saal ?>=window.open("<?php echo $root_path ?>modules/drg/drg-composite-start.php<?php echo URL_REDIRECT_APPEND."&display=composite&pn=".$pn."&edit=$edit&ln=$name_last&fn=$name_first&bd=$date_birth&dept_nr=$dept_nr&oprm=$saal"; ?>","drgcomp_<?php echo $encounter_nr."_".$op_nr."_".$dept_nr."_".$saal ?>","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=" + (h-60));
+	window.drgcomp_<?php echo $HTTP_SESSION_VARS['sess_full_en']."_".$op_nr."_".$dept_nr."_".$saal ?>.moveTo(0,0);
+} 
+
 //-->
 </script>
 <?php
@@ -357,7 +378,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 ?>
 </HEAD>
 
-<BODY bgcolor=#cde1ec onLoad="initwindow(); <?php if($mode=='changes_saved') echo 'window.opener.location.reload();' ?>" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 link="#800080" vlink="#800080" >
+<BODY bgcolor=#cde1ec onLoad="initwindow(); <?php if($mode=='changes_saved') echo 'window.opener.location.reload();' ?>" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 link="#800080" vlink="#800080">
 
 <table width=100% border=0 cellpadding="5" cellspacing=0>
 <tr>
@@ -377,22 +398,48 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 
 <?php
 
-         /* Now create the first group of color event signaller */
+# internal function for the following lines of code only
+function ha(){
+	global $edit;
+	if ($edit) return '<a href="#">';
+}
+function he(){
+	global $edit;
+	if ($edit) return 'onClick="javascript:pullbar(this)"></a><a href="#">';
+		else return  '>';
+}
+function hx(){
+	global $edit;
+	if ($edit) return 'onClick="javascript:pullbar(this)"></a>';
+		else return '>';
+}
+function gx(){
+	global $edit;
+	if ($edit) return 'onClick="javascript:pullGreenbar(this)"></a>';
+		else return '>';
+}
+function rx(){
+	global $edit;
+	if ($edit) return 'onClick="javascript:pullRosebar(this)"></a>';
+		else return '>';
+}
+
+       /* Now create the first group of color event signaller */
         echo '<table   cellpadding="0" cellspacing=0 border="0" >
-		<tr bgcolor="#696969" ><td colspan="3" ><nobr><a href="#"><img 
-		'.createComIcon($root_path,'qbar_'.$event['yellow'].'_yellow.gif','0').' name="yellow" onClick="javascript:pullbar(this)"></a><a href="#"><img 
-		'.createComIcon($root_path,'qbar_'.$event['black'].'_black.gif','0').' name="black" onClick="javascript:pullbar(this)"></a><a href="#"><img 
-		'.createComIcon($root_path,'qbar_'.$event['blue_pale'].'_blue_pale.gif','0').' name="blue_pale" onClick="javascript:pullbar(this)"></a><a href="#"><img 
-		'.createComIcon($root_path,'qbar_'.$event['brown'].'_brown.gif','0').' name="brown" onClick="javascript:pullbar(this)"></a><a href="#"><img 
-		'.createComIcon($root_path,'qbar_'.$event['pink'].'_pink.gif','0').' name="pink" onClick="javascript:pullbar(this)"></a><a href="#"><img 
-		'.createComIcon($root_path,'qbar_'.$event['yellow_pale'].'_yellow_pale.gif','0').' name="yellow_pale" onClick="javascript:pullbar(this)"></a><a href="#"><img 
-		'.createComIcon($root_path,'qbar_'.$event['red'].'_red.gif','0').' name="red" onClick="javascript:pullbar(this)"></a><a href="#"><img
-		'.createComIcon($root_path,'qbar_'.$event['green_pale'].'_green_pale.gif','0').' name="green_pale" onClick="javascript:pullbar(this)"></a><a href="#"><img
-		'.createComIcon($root_path,'qbar_'.$event['violet'].'_violet.gif','0').' name="violet" onClick="javascript:pullbar(this)"></a><a href="#"><img
-		'.createComIcon($root_path,'qbar_'.$event['blue'].'_blue.gif','0').' name="blue" onClick="javascript:pullbar(this)"></a><a href="#"><img
-		'.createComIcon($root_path,'qbar_'.$event['biege'].'_biege.gif','0').' name="biege" onClick="javascript:pullbar(this)"></a><img
-		'.createComIcon($root_path,'qbar_trans.gif','0').'><a href="#"><img
-		'.createComIcon($root_path,'qbar_'.$event['orange'].'_orange.gif','0').' name="orange" onClick="javascript:pullbar(this)"></a><img
+		<tr bgcolor="#696969" ><td colspan="3" ><nobr>'.ha().'<img 
+		'.createComIcon($root_path,'qbar_'.$event['yellow'].'_yellow.gif','0').' name="yellow" '.he().'<img 
+		'.createComIcon($root_path,'qbar_'.$event['black'].'_black.gif','0').' name="black" '.he().'<img 
+		'.createComIcon($root_path,'qbar_'.$event['blue_pale'].'_blue_pale.gif','0').' name="blue_pale" '.he().'<img 
+		'.createComIcon($root_path,'qbar_'.$event['brown'].'_brown.gif','0').' name="brown" '.he().'<img 
+		'.createComIcon($root_path,'qbar_'.$event['pink'].'_pink.gif','0').' name="pink" '.he().'<img 
+		'.createComIcon($root_path,'qbar_'.$event['yellow_pale'].'_yellow_pale.gif','0').' name="yellow_pale" '.he().'<img 
+		'.createComIcon($root_path,'qbar_'.$event['red'].'_red.gif','0').' name="red" '.he().'<img
+		'.createComIcon($root_path,'qbar_'.$event['green_pale'].'_green_pale.gif','0').' name="green_pale" '.he().'<img
+		'.createComIcon($root_path,'qbar_'.$event['violet'].'_violet.gif','0').' name="violet" '.he().'<img
+		'.createComIcon($root_path,'qbar_'.$event['blue'].'_blue.gif','0').' name="blue" '.he().'<img
+		'.createComIcon($root_path,'qbar_'.$event['biege'].'_biege.gif','0').' name="biege" '.hx().'<img
+		'.createComIcon($root_path,'qbar_trans.gif','0').'>'.ha().'<img
+		'.createComIcon($root_path,'qbar_'.$event['orange'].'_orange.gif','0').' name="orange" '.hx().'<img
 		'.createComIcon($root_path,'qbar_trans.gif','0').'><img
 		'.createComIcon($root_path,'qbar_trans.gif','0').'><img
 		'.createComIcon($root_path,'qbar_trans.gif','0').'>';
@@ -401,10 +448,9 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 		/* Note $h is used here as counter  */
 		for($h=1;$h<8;$h++)
 		{ 
-		  echo '<a href="#"><img
-		 '.createComIcon($root_path,'qbar_'.$event['green_'.$h].'_green.gif','0').' alt="'.$LDFullDayName[$h].'"  name="green_'.$h.'" onClick="javascript:pullGreenbar(this)"></a>';
+		  echo ha().'<img
+		 '.createComIcon($root_path,'qbar_'.$event['green_'.$h].'_green.gif','0').' alt="'.$LDFullDayName[$h].'"  name="green_'.$h.'" '.gx();
 		  }
-		 
 		 echo '<img
 		'.createComIcon($root_path,'qbar_trans.gif','0').'>';
 		
@@ -413,8 +459,8 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 		for($h=1;$h<25;$h++)
 		{ 
 
-		  echo '<a href="#"><img 
-			 '.createComIcon($root_path,'qbar_'.$event['rose_'.$h].'_rose.gif','0').' alt="'.$h.' '.$LDHour.'"  name="rose_'.$h.'" onClick="javascript:pullRosebar(this)"></a>';
+		  echo ha().'<img 
+			 '.createComIcon($root_path,'qbar_'.$event['rose_'.$h].'_rose.gif','0').' alt="'.$h.' '.$LDHour.'"  name="rose_'.$h.'" '.rx();
 			if(($h==6)||($h==12)||($h==18))
 		 	echo'<img
 			  '.createComIcon($root_path,'qbar_trans.gif','0').'>';
@@ -428,9 +474,14 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 		type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-pbericht.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDNursingReport.'"><input 
 		type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-todo.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDDocsPrescription.'"><input 
 		type="button" onClick="javascript:enlargewin();window.location.href=\''.$root_path.'main/diagnostics-report-start.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'&header='.$result['name_last'].',+'.$result['name_first'].'+'.formatDate2Local($result['date_birth'],$date_format).'\'" value="'.$LDReports.'"><br>
-		<input type="button" value="'.$LDRootData.'"><input 
-		type="button" value="'.$LDNursingPlan.'"><input 
-		type="button" onClick="javascript:window.location.href=\''.$root_path.'modules/laboratory/labor_datalist_noedit.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&user_origin=$user_origin&edit='.$edit.'\'" value="'.$LDLabReports.'"><input 
+		';
+		//<input type="button" value="'.$LDRootData.'"><input 
+		//type="button" value="'.$LDNursingPlan.'">
+		echo '<input 
+		type="button" onClick="javascript:openDRGComposite()" value="'.$LDDRG.'">';
+		
+		echo '<input 
+		type="button" onClick="javascript:window.location.href=\''.$root_path.'modules/laboratory/labor_datalist_noedit.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&user_origin='.$user_origin.'&edit='.$edit.'\'" value="'.$LDLabReports.'"><input 
 		type="button" onClick="javascript:enlargewin();window.location.href=\''.$root_path.'modules/fotolab/fotos-start.php'.URL_REDIRECT_APPEND.'&pn='.$pn.'&station='.$station.'&fileroot='.$fr.'&edit='.$edit.'\'" value="'.$LDPhotos.'">';
 		
 		
@@ -483,7 +534,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 */		
 /*	
 
-//..................... START...... PATIENT_INFO_HTML
+#..................... START...... PATIENT_INFO_HTML
 
 	echo'
 		<tr  bgcolor="#696969"><td   background="'.createBgSkin('../','folderskin2.jpg').'"><font face="verdana,arial" size="2" ><b>&nbsp;&nbsp;</b></td>
@@ -491,12 +542,13 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 		<td   background="'.createBgSkin('../','folderskin2.jpg').'"><font face="verdana,arial" size="2" ><b>&nbsp;</b></td>
 		</tr>';
 
-//..................... END....... PATIENT_INFO_HTML
+#..................... END....... PATIENT_INFO_HTML
 		
 */
 echo '
-<tr  bgcolor="#696969" ><td  background="'.createBgSkin($root_path,'folderskin2.jpg').'"><font face="verdana,arial" size="2" ><b> &nbsp;&nbsp;</b></td>
-		<td valign="top" bgcolor="#ffffff"><font face="verdana,arial" size="2" >';
+<tr  bgcolor="#696969" >
+	<td  background="'.createBgSkin($root_path,'folderskin2.jpg').'" width="10%">&nbsp;</td>
+		<td valign="top" bgcolor="#ffffff"><font face="verdana,arial" size="2">';
 
 //..................... START...... PATIENT_INFO_HTML
 
@@ -529,22 +581,22 @@ echo '
 <table border=0 cellspacing=1 cellpadding=0>
   <tr>
     <td bgcolor="#ffff00"><font size=1>&nbsp;&nbsp;&nbsp;</font></td>
-    <td><font size=1>&nbsp;'.$LDQueryDoctor.'</font></td>
+    <td><font size=1><nobr>&nbsp;'.$LDQueryDoctor.'</nobr></font></td>
   </tr>
   <tr>
   <tr>
     <td bgcolor="#000000"><font size=1>&nbsp;</td>
-    <td><font size=1>&nbsp;'.$LDDoctorInfo.'</font></td>
+    <td><font size=1><nobr>&nbsp;'.$LDDoctorInfo.'</nobr></font></td>
   </tr>
   <tr>
   <tr>
     <td bgcolor="#81eff5"><font size=1>&nbsp;</td>
-    <td><font size=1>&nbsp;'.$LDTestConsultRequested.'</td>
+    <td><font size=1><nobr>&nbsp;'.$LDTestConsultRequested.'</nobr></td>
   </tr>
   <tr>
   <tr>
     <td bgcolor="#804408"><font size=1>&nbsp;</td>
-    <td><font size=1>&nbsp;'.$LDDiagnosticsReport.'</td>
+    <td><font size=1><nobr>&nbsp;'.$LDDiagnosticsReport.'</nobr></td>
   </tr>
   <tr>
   <tr>
@@ -564,7 +616,7 @@ echo '
   <tr>
   <tr>
     <td bgcolor="#00ff00"><font size=1>&nbsp;</td>
-    <td><font size=1>&nbsp;'.$LDAntibioticsProgram.'</td>
+    <td><font size=1><nobr>&nbsp;'.$LDAntibioticsProgram.'</nobr></td>
   </tr>
   <tr>
   <tr>
@@ -579,7 +631,7 @@ echo '
   <tr>
   <tr>
     <td bgcolor="#f5ddc6"><font size=1>&nbsp;</td>
-    <td><font size=1>&nbsp;'.$LDSpecialCare.'</td>
+    <td><font size=1><nobr>&nbsp;'.$LDSpecialCare.'</nobr></td>
   </tr>
   <tr>
   <tr>
@@ -594,77 +646,7 @@ echo '
 
 echo '
 		</td>
-		<td   background="'.createBgSkin($root_path,'folderskin2.jpg').'" valign="top" align="center">
-		';
-//$frmain=$fotoserver_http.'/fotos/'.$fr.'/'.$fr.'_main.jpg';
-
-$fname=strtolower($fr."_main.jpg");
-$frmain='/'.$fr.'/'.$fname;
-
-//******************* check cache if pix exists *************
-$cpix='../cache/'.$fname;
-
-if(file_exists($cpix))
-{
-	echo '<img src="'.$cpix.'" width="150">';
-}
-else
-{
-	// if fotos must be fetched directly from local dir
-	if($disc_pix_mode) 
-	{
-		$cpix=$fotoserver_localpath.$fr.'/'.$fname;
-		if(file_exists($cpix))
-		{
-			echo '<img src="'.$cpix.'" width="150">';
-		}
-		else echo '<img  '.createLDImgSrc($root_path,'foto_na.gif').'>';
-	}
-	else
-	{
-		//**************** ftp check of main pix ************************
-
-		// set up basic connection
-		//$ftp_server="192.168.0.2";   // configured in the file ..include/inc_remoteservers_conf.php
-		//$ftp_user="maryhospital_fotodepot";
-		//$ftp_pw="seeonly";
-		$conn_id = ftp_connect("$ftp_server"); 
-		if ($conn_id)
-		{
-			// login with username and password
-			$login_result = ftp_login($conn_id, "$ftp_user", "$ftp_pw"); 
-
-  	 		 // check connection
-  			if($login_result)
-		 	{ 
-  				$fn=ftp_pwd($conn_id);       
-				$f_e=ftp_size($conn_id,"$fn$frmain");
-  		  		//if(strpos(file("$frmain"),"warning")) echo '<img src="'.$frmain.'">';
-				if($f_e>0)
-				{
-			 		echo '<img src="'.$fotoserver_http.$frmain.'" width="150">';
-					// now save the pix in cache
-					ftp_get($conn_id,$cpix,"$fn$frmain",FTP_BINARY);	
-				}
-				else echo '<img '.createLDImgSrc($root_path,'foto_na.gif').'>';
-  			}
-		 	else	echo "$LDFtpNoLink<p>";
-			// close the FTP stream 
-			ftp_quit($conn_id); 
-		}	
-		else 
-		{
-			echo '<img '.createLDImgSrc($root_path,'foto_na.gif').'><br>';
-			echo $LDFtpAttempted; 
-		}
-	}
- }
- 
-echo '
-		</td>
-		<td bgcolor="#cde1ec"><font face="verdana,arial" size="2" >
-		
-
+		<td   background="'.createBgSkin($root_path,'folderskin2.jpg').'" >&nbsp;
 		</td>
 		</tr>
 		<tr bgcolor="#696969" >
@@ -673,6 +655,16 @@ echo '
 		</table>
 		';
 ?>
+<input type="hidden" name="sid" value="<?php echo $sid ?>">
+<input type="hidden" name="lang" value="<?php echo $lang ?>">
+<input type="hidden" name="dept_nr" value="<?php echo $dept_nr ?>">
+<input type="hidden" name="pn" value="<?php echo $pn ?>">
+
+<?php
+# If in edit mode create the hidden items
+if($edit){
+?>
+
 <input type="hidden" name="yellow" value="<?php echo $event['yellow'] ?>">
 <input type="hidden" name="black" value="<?php echo $event['black'] ?>">
 <input type="hidden" name="blue_pale" value="<?php echo $event['blue_pale'] ?>">
@@ -716,15 +708,12 @@ echo '
 <input type="hidden" name="rose_22" value="<?php echo $event['rose_22'] ?>">
 <input type="hidden" name="rose_23" value="<?php echo $event['rose_23'] ?>">
 <input type="hidden" name="rose_24" value="<?php echo $event['rose_24'] ?>">
-<input type="hidden" name="sid" value="<?php echo $sid ?>">
-<input type="hidden" name="lang" value="<?php echo $lang ?>">
-<input type="hidden" name="dept_nr" value="<?php echo $dept_nr ?>">
-<input type="hidden" name="pn" value="<?php echo $pn ?>">
 <input type="hidden" name="mode" value="save_event_changes">
 <input type="submit" value="<?php echo $LDSaveChanges ?>">
-
 <?php
-  echo '<a href="javascript:window.close()"><img '.createLDImgSrc($root_path,'close2.gif','0','absmiddle').'></a>';
+}
+
+  echo '<a href="javascript:winClose()"><img '.createLDImgSrc($root_path,'close2.gif','0','absmiddle').'></a>';
 ?>
 
 

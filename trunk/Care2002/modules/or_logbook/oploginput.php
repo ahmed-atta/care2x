@@ -5,52 +5,43 @@ require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','or.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
-
+# Added intrusion trap
 if (!$internok&&!$HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
-// initializations
+# initializations
 $thisfile='oploginput.php';
 $pdata=array();
 
-if($pyear=='') $pyear=date('Y');
-if($pmonth=='') $pmonth=date('m');
-if($pday=='') $pday=date('d');
+if(!isset($thisday)||empty($thisday)) $thisday=date('Y-m-d');
+list($pyear,$pmonth,$pday)=explode('-',$thisday);
 
-/********************************* Resolve the department and op room ***********************/
-//require($root_path.'include/inc_resolve_opr_dept.php');
+# Set to edit mode
+$edit=true;
+
+# Resolve the department and op room 
 
 $datafound=0;
 
 $md=$pday;
 if(strlen($md)==1) $md='0'.$md;
-/* Create the encounter object */
+# Create the encounter object 
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 $enc_obj=new Encounter;
-/* Create the global object, load the patient configs*/
-require_once($root_path.'include/care_api_classes/class_globalconfig.php');
-$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
-$glob_obj->getConfig('patient_%');
 
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok)
-{	
-    /* Load the date formatter */
-    include_once($root_path.'include/inc_date_format_functions.php');
-    
-	
-    /* Load editor functions for time format converter */
+    # Load the date formatter 
+    require_once($root_path.'include/inc_date_format_functions.php');
+
+    # Load editor functions for time format converter 
     //include_once('../include/inc_editor_fx.php');
 
-	/* get orig data */
+	# get orig data 
 	switch($mode)
 	{
 		case 'save':	
 		
 				$dbtable='care_nursing_op_logbook';
 				
-				// check if entry is already existing
+				# check if entry is already existing
 				$sql="SELECT nr,entry_out,cut_close,encoding FROM $dbtable 
 						WHERE encounter_nr='$enc_nr' 
 							AND op_nr='$op_nr'
@@ -111,8 +102,7 @@ if($dblink_ok)
 							if($ergebnis=$db->Execute($sql))
        							{
 									//echo $sql." new update <br>";
-									
-									header("location:$thisfile?sid=$sid&lang=$lang&mode=saveok&enc_nr=$enc_nr&dept_nr=$dept_nr&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday&op_nr=$op_nr");
+									header("location:$thisfile?sid=$sid&lang=$lang&mode=saveok&enc_nr=$enc_nr&dept_nr=$dept_nr&saal=$saal&thisday=$thisday&op_nr=$op_nr");
 								}
 								else { echo "$sql<br>$LDDbNoSave<br>"; }
 						} // else create new entry
@@ -187,7 +177,7 @@ if($dblink_ok)
        							{
 									//echo $sql." new insert <br>";
 									
-									header("location:$thisfile?sid=$sid&lang=$lang&mode=saveok&enc_nr=$enc_nr&dept_nr=$dept_nr&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday&op_nr=$op_nr");
+									header("location:$thisfile?sid=$sid&lang=$lang&mode=saveok&enc_nr=$enc_nr&dept_nr=$dept_nr&saal=$saal&thisday=$thisday&op_nr=$op_nr");
 								}
 								else { echo "$sql<br>$LDDbNoSave<br>"; } 
 						}//end of else
@@ -251,10 +241,9 @@ if($dblink_ok)
 		}
 	 		break;
 	  } // end of switch mode
-}
-  else { echo "$LDDbNoLink<br>"; } 
 
-
+# Set the user origin
+$HTTP_SESSION_VARS['sess_user_origin']='op_room';
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -279,7 +268,7 @@ function resettimeframe()
 
 function resetlogdisplays()
 {
-	window.parent.OPLOGMAIN.location.replace('<?php echo "oplogmain.php?sid=$sid&lang=$lang&internok=$internok&gotoid=".$pdata['op_nr']."&dept_nr=$dept_nr&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday"; ?>');
+	window.parent.OPLOGMAIN.location.replace('<?php echo "oplogmain.php?sid=$sid&lang=$lang&internok=$internok&gotoid=".$pdata['op_nr']."&dept_nr=$dept_nr&saal=$saal&thisday=$thisday"; ?>');
 }
 
 function cleartimeframes()
@@ -489,7 +478,7 @@ function openDRGComposite()
 			h=650;';
 ?>
 	
-	drgcomp_<?php echo $pdata[encounter_nr]."_".$op_nr."_".$dept_nr."_".$saal ?>=window.open("<?php echo $root_path ?>modules/drg/drg-composite-start.php?sid=<?php echo "$sid&lang=$lang&display=composite&pn=$pdata[encounter_nr]&ln=$lname&fn=$fname&bd=$bdate&opnr=$op_nr&dept_nr=$dept_nr&oprm=$saal"; ?>","drgcomp_<?php echo $pdata[encounter_nr]."_".$op_nr."_".$dept_nr."_".$saal ?>","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=" + (h-60));
+	drgcomp_<?php echo $pdata[encounter_nr]."_".$op_nr."_".$dept_nr."_".$saal ?>=window.open("<?php echo $root_path ?>modules/drg/drg-composite-start.php?sid=<?php echo "$sid&lang=$lang&display=composite&pn=".$pdata['encounter_nr']."&edit=$edit&ln=$lname&fn=$fname&bd=$bdate&opnr=$op_nr&dept_nr=$dept_nr&oprm=$saal"; ?>","drgcomp_<?php echo $pdata['encounter_nr']."_".$op_nr."_".$dept_nr."_".$saal ?>","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=" + (h-60));
 	window.drgcomp_<?php echo $pdata[encounter_nr]."_".$op_nr."_".$dept_nr."_".$saal ?>.moveTo(0,0);
 }
 //-->
@@ -541,7 +530,7 @@ if(!$datafound) echo 'document.oppflegepatinfo.enc_nr.focus();';
 
 <?php
 	echo '
-			<font size="2" face="arial">'.formatDate2Local("$pyear-$pmonth-$pday",$date_format).'</font>'; 
+			<font size="2" face="arial">'.formatDate2Local($thisday,$date_format).'</font>'; 
 ?>
 
 &nbsp;
@@ -552,11 +541,11 @@ if(!$datafound) echo 'document.oppflegepatinfo.enc_nr.focus();';
 </TD>
 
 <td align=right bgcolor="navy" >
-<?php if($datafound) : ?>
+<?php if($datafound) { ?>
 <a href="oploginput.php?sid=<?php echo "$sid&lang=$lang&dept_nr=$dept_nr&saal=$saal" ?>&mode=fresh">
 <img <?php echo createLDImgSrc($root_path,'newpat2.gif','0','absmiddle') ?> alt="<?php echo $LDStartNewDocu ?>"></a>
-<?php endif ?>
-<?php if($op_nr) : ?>
+<?php } ?>
+<?php if($op_nr) { ?>
 <DIV id=dFunctions 
 style=" VISIBILITY: hidden; POSITION: absolute; top:20px">
 <TABLE cellSpacing=1 cellPadding=0 bgColor=#000000 border=0>
@@ -573,24 +562,24 @@ style=" VISIBILITY: hidden; POSITION: absolute; top:20px">
             </A><BR>
 			<A onmouseover=clearTimeout(timer) 
             onmouseout="timer=setTimeout('hsm()',500)"  onClick="document.oppflegepatinfo.xx2.value='material'"
-            href="op-logbuch-material-parentframe.php?sid=<?php echo "$sid&lang=$lang&op_nr=$op_nr&enc_nr=$pdata[encounter_nr]&dept_nr=$dept_nr&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>" target="OPLOGMAIN">
+            href="op-logbuch-material-parentframe.php?sid=<?php echo "$sid&lang=$lang&op_nr=$op_nr&enc_nr=".$pdata['encounter_nr']."&dept_nr=$dept_nr&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>" target="OPLOGMAIN">
 			<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>> <?php echo $LDUsedMaterial ?>
             </A><BR>
 		  <A onmouseover=clearTimeout(timer) 
             onmouseout="timer=setTimeout('hsm()',500)"    onClick="document.oppflegepatinfo.xx2.value='container'"
-            href="op-logbuch-material-parentframe.php?sid=<?php echo "$sid&lang=$lang&mode=cont&op_nr=$op_nr&enc_nr=$pdata[encounter_nr]&dept_nr=$dept_nr&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>" target="OPLOGMAIN">
+            href="op-logbuch-material-parentframe.php?sid=<?php echo "$sid&lang=$lang&mode=cont&op_nr=$op_nr&enc_nr=".$pdata['encounter_nr']."&dept_nr=$dept_nr&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>" target="OPLOGMAIN">
 			<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>> <?php echo $LDContainer ?>
             </A><BR>
 			<A onmouseover=clearTimeout(timer) 
             onmouseout="timer=setTimeout('hsm()',500)" 
-            href="oplogmain.php?sid=<?php echo "$sid&lang=$lang&op_nr=$op_nr&enc_nr=$pdata[encounter_nr]&dept_nr=$dept_nr&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>" target="OPLOGMAIN">
+            href="oplogmain.php?sid=<?php echo "$sid&lang=$lang&op_nr=$op_nr&enc_nr=".$pdata['encounter_nr']."&dept_nr=$dept_nr&saal=$saal&thisday=$thisday"; ?>" target="OPLOGMAIN">
 			<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>> <?php echo $LDShowLogbook ?>
             </A><BR></nobr></TD></TR></TABLE></TD></TR></TBODY></TABLE></DIV>
 <a href="javascript:ssm('dFunctions'); clearTimeout(timer)" 
       onmouseout="timer=setTimeout('hsm()',1000)" ><FONT  COLOR="white"  SIZE=3 face=verdana,arial >
 	  <img <?php echo createLDImgSrc($root_path,'funktion.gif','0','absmiddle') ?> alt="<?php echo $LDClk2DropMenu ?>"></a>
 
-<?php endif ?>
+<?php } ?>
 
 <DIV id=dLogoTable 
 style=" VISIBILITY: hidden; POSITION: absolute; top:20px">
@@ -696,10 +685,8 @@ style=" VISIBILITY: hidden; POSITION: absolute; top:20px">
 <input type="hidden" name="internok" value="<?php echo $internok; ?>">
 <input type="hidden" name="encoder" value="<?php echo $HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]; ?>">
 <input type="hidden" name="op_nr" value="<?php echo $op_nr; ?>">
-<input type="hidden" name="pmonth" value="<?php echo $pmonth; ?>">
-<input type="hidden" name="pyear"  value="<?php echo $pyear; ?>">
-<input type="hidden" name="op_date"  value="<?php echo $pyear.'-'.$pmonth.'-'.$pday; ?>">
-<input type="hidden" name="pday" value="<?php echo $pday; ?>">
+<input type="hidden" name="thisday"  value="<?php echo $thisday; ?>">
+<input type="hidden" name="op_date"  value="<?php echo $thisday; ?>">
 <input type="hidden" name="dept_nr" value="<?php echo $dept_nr; ?>">
 <input type="hidden" name="saal" value="<?php echo $saal; ?>">
 <input type="hidden" name="xx2" value="">
@@ -747,7 +734,7 @@ if($pdata['encounter_nr']=='')
 <?php if($datafound)
 	{
 	 echo '<a href="'.$root_path.'modules/drg/drg-icd10.php?sid='.$sid.'&lang='.$lang;
-	 echo "&pn=$pdata[encounter_nr]&ln=$lname&fn=$fname&bd=$bdate&opnr=$op_nr&dept_nr=$dept_nr&oprm=$saal";
+	 echo "&pn=".$pdata['encounter_nr']."&ln=$lname&fn=$fname&bd=$bdate&opnr=$op_nr&dept_nr=$dept_nr&oprm=$saal";
 	 echo '" target="OPLOGMAIN">'.$LDDiagnosis.':</a><br>
 <textarea name="diagnosis" cols=16 rows=8 wrap="physical" ></textarea>';
 	}
@@ -892,7 +879,7 @@ color="<?php if($datafound) echo "#0000cc"; else echo "#3f3f3f"; ?>">
 <?php if($datafound) 
 	{
 	 echo '<a href="'.$root_path.'modules/drg/drg-ops301.php?sid='.$sid.'&lang='.$lang;
-	 echo "&pn=$pdata[encounter_nr]&ln=$lname&fn=$fname&bd=$bdate&opnr=$op_nr&dept_nr=$dept_nr&oprm=$saal";
+	 echo "&pn=".$pdata['encounter_nr']."&ln=$lname&fn=$fname&bd=$bdate&opnr=$op_nr&dept_nr=$dept_nr&oprm=$saal";
 	echo '" target="OPLOGMAIN">'.$LDTherapy.'/'.$LDOperation.'</a><br>
 	<TEXTAREA NAME="op_therapy" COLS="18" ROWS="8"></TEXTAREA>';
 	}

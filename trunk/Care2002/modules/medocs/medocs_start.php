@@ -3,15 +3,18 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+
+
 define('LANG_FILE','aufnahme.php');
-$local_user='medocs_user';
+# Resolve the local user based on the origin of the script
+require_once('include/inc_local_user.php');
 require($root_path.'include/inc_front_chain_lang.php');
 
 /* If patient nr is invallid jump to registration search module*/
@@ -25,8 +28,9 @@ require_once($root_path.'include/inc_date_format_functions.php');
 
 $thisfile=basename(__FILE__);
 if($origin=='patreg_reg') $returnfile='patient_register_show.php'.URL_APPEND.'&pid='.$pid;
-   
-$breakfile='medocs_pass.php';
+
+# Set break file
+require('include/inc_breakfile.php');
 
 if(!session_is_registered('sess_pid')) session_register('sess_pid');
 if(!session_is_registered('sess_full_pid')) session_register('sess_full_pid');

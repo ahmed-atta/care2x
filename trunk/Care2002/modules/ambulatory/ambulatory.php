@@ -4,7 +4,7 @@ require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -21,6 +21,8 @@ require($root_path.'include/inc_2level_reset.php');
 if(!session_is_registered('sess_path_referer')) session_register('sess_path_referer');
 $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 $HTTP_SESSION_VARS['sess_path_referer']=$top_dir.basename(__FILE__);
+$HTTP_SESSION_VARS['sess_user_origin']='amb';
+$HTTP_SESSION_VARS['sess_parent_mod']='';
 /* Create department object and load all medical depts */
 require_once($root_path.'include/care_api_classes/class_department.php');
 $dept_obj= new Department;
@@ -44,6 +46,7 @@ function goDept(t) {
 	if(d.dept_nr.value!=""){
 		d.subtarget.value=d.dept_nr.value;
 		d.action=t;
+		eval("d.dept.value=d.dname"+d.dept_nr.value+".value;");
 		d.submit();
 	}
 }
@@ -57,284 +60,89 @@ function goDept(t) {
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
 <tr valign=top>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php echo $LDDepartments ?></STRONG></FONT></td>
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php echo $LDAmbulatory ?></STRONG></FONT></td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
 <?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('submenu1.php','<?php echo $LDDoctors ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2><p><br>
+<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
 <ul>
 
-<TABLE cellSpacing=0 cellPadding=0 width=700  bgColor=#999999 border=0>
-        <TBODY>
-        <TR>
-          <TD>
-            <TABLE cellSpacing=1 cellPadding=3 width=700  bgColor=#999999 
-            border=0>
-              <TBODY>
-              <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><FONT face="Verdana,Helvetica,Arial"  color="#990000"
-                  size=2><b><?php echo $LDEmergency ?></b></TD></TR>
-				  
-              <TR bgColor=#eeeeee>  <td align=center><img <?php echo createComIcon($root_path,'waiting.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B>
-			 <a href="<?php echo $root_path ?>modules/laboratory/labor_test_request_pass.php<?php echo URL_APPEND ?>&target=generic&subtarget=14&user_origin=amb"><?php echo $LDPendingRequest ?></a>
-				  </B></FONT></TD><!-- // 14= emergency ambulator department  -->
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDPendingRequestTxt ?></FONT></TD></TR>
+<?php
+# Prepare select options
+$TP_SELECT_BLOCK='<select name="dept_nr" size="1"><option value=""></option>';
+while(list($x,$v)=each($medical_depts)){
+	$TP_SELECT_BLOCK.='
+	<option value="'.$v['nr'].'">';
+	$buffer=$v['LD_var'];
+	if(isset($$buffer)&&!empty($$buffer)) $TP_SELECT_BLOCK.=$$buffer;
+		else $TP_SELECT_BLOCK.=$v['name_formal'];
+	$TP_SELECT_BLOCK.='</option>';
+}
+$TP_SELECT_BLOCK.='</select>';
+#Prepare hidden inputs
+$TP_HIDDENS='';
+reset($medical_depts);
+while(list($x,$v)=each($medical_depts)){
+	$buffer=$v['LD_var'];
+	if(isset($$buffer)&&!empty($$buffer)) $dname=$$buffer;
+		else $dname= $v['name_formal'];
+	$TP_HIDDENS.='
+	<input type="hidden" name="dname'.$v['nr'].'" value="'.$dname.'">';
+}
 
-			<TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>
-				  
-              <TR bgColor=#eeeeee>  <td align=center><img <?php echo createComIcon($root_path,'bubble2.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B>
-			 <a href="<?php echo $root_path ?>modules/news/newscolumns.php<?php echo URL_APPEND ?>&dept_nr=14&user_origin=amb"><?php echo $LDNews ?></a>
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDNewsTxt ?></FONT></TD></TR>
-				  
-				  
-		</TBODY>
-		</TABLE>
-		</TD></TR>
-		</TBODY>
-		</TABLE>				
-		<p>
-
-<TABLE cellSpacing=0 cellPadding=0 width=700 bgColor=#999999 border=0>
-        <TBODY>
-        <TR>
-          <TD>
-            <TABLE cellSpacing=1 cellPadding=3 width=700 bgColor=#999999 
-            border=0>
-              <TBODY>
-              <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><FONT face="Verdana,Helvetica,Arial"  color="#990000"
-                  size=2><b><?php echo $LDGeneralSurgery ?></b></FONT></TD></TR>
-
-              <TR bgColor=#eeeeee>  <td align=center><img <?php echo createComIcon($root_path,'waiting.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B>
-			 <a href="<?php echo $root_path ?>modules/laboratory/labor_test_request_pass.php<?php echo URL_APPEND.'&target=generic&subtarget=15&user_origin=amb'; // 15 = general ambulatory department ?>"><?php echo $LDPendingRequest ?></a>
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDPendingRequestTxt ?></FONT></TD></TR>	
-				  
-			<TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>
-				  
-              <TR bgColor=#eeeeee>  <td align=center><img <?php echo createComIcon($root_path,'bubble2.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B>
-			 <a href="<?php echo $root_path ?>modules/news/newscolumns.php<?php echo URL_APPEND; ?>&dept_nr=15&user_origin=amb"><?php echo $LDNews ?></a>
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDNewsTxt ?></FONT></TD></TR>
-
-				  	  
-		</TBODY>
-		</TABLE>
-		</TD></TR>
-		</TBODY>
-		</TABLE>
-		<p>
-
-<TABLE cellSpacing=0 cellPadding=0 width=700 bgColor=#999999 border=0>
-        <TBODY>
-        <TR>
-          <TD>
-            <TABLE cellSpacing=1 cellPadding=3 width=700 bgColor=#999999 
-            border=0>
-              <TBODY>
-              <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><FONT face="Verdana,Helvetica,Arial"  color="#990000"
-                  size=2><b><?php echo $LDSonography ?></b></TD></TR>
-				  
-              <TR bgColor=#eeeeee>  <td align=center><img <?php echo createComIcon($root_path,'waiting.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B>
-			 <a href="<?php echo $root_path ?>modules/laboratory/labor_test_request_pass.php<?php echo URL_APPEND.'&target=generic&subtarget=17&user_origin=amb'; // 17 = Sonography department ?>"><?php echo $LDPendingRequest ?></a>
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDPendingRequestTxt ?></FONT></TD></TR>
-
-				  			<TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>
-				  
-              <TR bgColor=#eeeeee>  <td align=center><img <?php echo createComIcon($root_path,'bubble2.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B>
-			 <a href="<?php echo $root_path ?>modules/news/newscolumns.php<?php echo URL_APPEND; ?>&dept_nr=17&user_origin=amb"><?php echo $LDNews ?></a>
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDNewsTxt ?></FONT></TD></TR>
-
-				  
-		</TBODY>
-		</TABLE>
-		</TD></TR>
-		</TBODY>
-		</TABLE>				
-		<p>
-		
-<TABLE cellSpacing=0 cellPadding=0 width=700 bgColor=#999999 border=0>
-        <TBODY>
-        <TR>
-          <TD>
-            <TABLE cellSpacing=1 cellPadding=3 width=700 bgColor=#999999 
-            border=0>
-              <TBODY>
-  				  
-              <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><FONT face="Verdana,Helvetica,Arial"  color="#990000"
-                  size=2><b><?php echo $LDInternalMed ?></b></TD></TR>
-				  
-              <TR bgColor=#eeeeee>  <td align=center><img <?php echo createComIcon($root_path,'waiting.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B>
-			 <a href="<?php echo $root_path ?>modules/laboratory/labor_test_request_pass.php<?php echo URL_APPEND.'&target=generic&subtarget=16&user_origin=amb'; // 16 = internal med ambulatory dept ?>"><?php echo $LDPendingRequest ?></a>
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDPendingRequestTxt ?></FONT></TD></TR>
-
-			<TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>
-				  
-              <TR bgColor=#eeeeee>  <td align=center><img <?php echo createComIcon($root_path,'bubble2.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B>
-			 <a href="<?php echo $root_path ?>modules/news/newscolumns.php<?php echo URL_APPEND; ?>&dept_nr=16&user_origin=amb"><?php echo $LDNews ?></a>
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDNewsTxt ?></FONT></TD></TR>
-				  
-
-		</TBODY>
-		</TABLE>
-		</TD></TR>
-		</TBODY>
-		</TABLE>
-		<p>
-
-<TABLE cellSpacing=0 cellPadding=0 width=700 bgColor=#999999 border=0>
-        <TBODY>
-        <TR>
-          <TD>
-            <TABLE cellSpacing=1 cellPadding=3 width=700 bgColor=#999999 
-            border=0>
-              <TBODY>
-  				  
-              <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><FONT face="Verdana,Helvetica,Arial"  color="#990000"
-                  size=2><b><?php echo $LDNuclearMed ?></b></TD></TR>
-				  
-              <TR bgColor=#eeeeee>  <td align=center><img <?php echo createComIcon($root_path,'waiting.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B>
-			 <a href="<?php echo $root_path ?>modules/laboratory/labor_test_request_pass.php<?php echo URL_APPEND.'&target=generic&subtarget=18&user_origin=amb'; // 18 = nuclear diagnostics dept  ?>"><?php echo $LDPendingRequest ?></a>
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDPendingRequestTxt ?></FONT></TD></TR>
-
-			<TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>
-				  
-              <TR bgColor=#eeeeee>  <td align=center><img <?php echo createComIcon($root_path,'bubble2.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B>
-			 <a href="<?php echo $root_path ?>modules/news/newscolumns.php<?php echo URL_APPEND; ?>&dept_nr=18&user_origin=amb"><?php echo $LDNews ?></a>
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDNewsTxt ?></FONT></TD></TR>
-				  
-
-		</TBODY>
-		</TABLE>
-		</TD></TR>
-		</TBODY>
-		</TABLE>
-		<p>
-		
-<TABLE cellSpacing=0 cellPadding=0 width=700 bgColor=#999999 border=0>
-        <TBODY>
-        <TR>
-          <TD>
-            <TABLE cellSpacing=1 cellPadding=3 width=700 bgColor=#999999 
-            border=0>
-              <TBODY>
-			  
-  			<form name="dept_select" method="post" action=""> 
-			
-              <TR bgColor=#dddddd>
-                <TD colSpan=3 bgColor=#dddddd >
-				<select name="dept_nr" size="1">  
-				<option value=""></option>
-				<?php
-				while(list($x,$v)=each($medical_depts)){
-				echo'
-				<option value="'.$v['nr'].'">';
-				$buffer=$v['LD_var'];
-				if(isset($$buffer)&&!empty($$buffer)) echo $$buffer;
-					else echo $v['name_formal'];
-				echo '</option>';
-			}
-				  ?>
-				</select>  
-				<img src="<?php echo $root_path ?>gui/img/common/default/l-arrowgrnlrg.gif" border=0 width=16 height=16>
-				<FONT face="Verdana,Helvetica,Arial" size=2><b><?php echo $LDSelectDept ?></b></TD></TR>
-				  
-              <TR bgColor=#eeeeee>  <td align=center><img <?php echo createComIcon($root_path,'waiting.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B>
-			 <a href="javascript:goDept('<?php echo $root_path ?>modules/laboratory/labor_test_request_pass.php')"><?php echo $LDPendingRequest ?></a>
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDPendingRequestTxt ?></FONT></TD></TR>
-
-			<TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>
-				  
-              <TR bgColor=#eeeeee>  <td align=center><img <?php echo createComIcon($root_path,'bubble2.gif','0') ?>></td>
-                <TD vAlign=top ><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B>
-			 <a href="javascript:goDept('<?php echo $root_path ?>modules/news/newscolumns.php')"><?php echo $LDNews ?></a>
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDNewsTxt ?></FONT></TD></TR>
-			<input type="hidden" name="sid" value="<?php echo $sid ?>">
-   			<input type="hidden" name="lang" value="<?php echo $lang ?>">
+# hidden
+$TP_HINPUTS='<input type="hidden" name="sid" value="'.$sid.'">
+   			<input type="hidden" name="lang" value="'.$lang.'">
    			<input type="hidden" name="target" value="generic">
    			<input type="hidden" name="user_origin" value="amb">
    			<input type="hidden" name="subtarget" value="">
-			</form>
+   			<input type="hidden" name="dept" value="">';
 
-		</TBODY>
-		</TABLE>
-		</TD></TR>
-		</TBODY>
-		</TABLE>
-		
-		<p>
-		
-<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  alt="<?php echo $LDCloseAlt ?>" align="middle"></a>
-<p>
+
+$TP_HREF_APPT1='<a href="javascript:goDept(\''.$root_path.'modules/appointment_scheduler/appt_main_pass.php\')">'.$LDAppointments.'</a>';
+$TP_HREF_PWL1='<a href="javascript:goDept(\'amb_clinic_patients_pass.php\')">'.$LDOutpatientClinic.'</a>';
+$TP_HREF_PREQ1='<a href="javascript:goDept(\''.$root_path.'modules/laboratory/labor_test_request_pass.php\')">'.$LDPendingRequest.'</a>';
+$TP_HREF_NEWS1='<a href="javascript:goDept(\''.$root_path.'modules/news/newscolumns.php\')">'.$LDNews.'</a>';
+
+$TP_HREF_APPT2="<a href=\"".$root_path."modules/appointment_scheduler/appt_main_pass.php".URL_APPEND."&target=14&dept_nr=14&user_origin=amb&dept=".strtr($LDEmergency,' ','+')."\">$LDAppointments</a>";
+$TP_HREF_PWL2="<a href=\"amb_clinic_patients_pass.php".URL_APPEND."&dept_nr=14&dept=".strtr($LDEmergency,' ','+')."\">$LDOutpatientClinic</a>";
+$TP_HREF_PREQ2="<a href=\"".$root_path."modules/laboratory/labor_test_request_pass.php".URL_APPEND."&target=generic&subtarget=14&user_origin=amb\">$LDPendingRequest</a>";
+$TP_HREF_NEWS2="<a href=\"".$root_path."modules/news/newscolumns.php".URL_APPEND."&dept_nr=14&user_origin=amb\">$LDNews</a>";
+
+$TP_HREF_APPT3="<a href=\"".$root_path."modules/appointment_scheduler/appt_main_pass.php".URL_APPEND."&target=15&dept_nr=15&user_origin=amb&dept=".strtr($LDGeneralAmbulatory,' ','+')."\">$LDAppointments</a>";
+$TP_HREF_PWL3="<a href=\"amb_clinic_patients_pass.php".URL_APPEND."&dept_nr=15&dept=".strtr($LDGeneralAmbulatory,' ','+')."\">$LDOutpatientClinic</a>";
+$TP_HREF_PREQ3="<a href=\"".$root_path."modules/laboratory/labor_test_request_pass.php".URL_APPEND."&target=generic&subtarget=15&user_origin=amb\">$LDPendingRequest</a>";
+$TP_HREF_NEWS3="<a href=\"".$root_path."modules/news/newscolumns.php".URL_APPEND."&dept_nr=15&user_origin=amb\">$LDNews</a>";
+
+$TP_HREF_APPT4="<a href=\"".$root_path."modules/appointment_scheduler/appt_main_pass.php".URL_APPEND."&target=17&dept_nr=17&user_origin=amb&dept=".strtr($LDSonography,' ','+')."\">$LDAppointments</a>";
+$TP_HREF_PWL4="<a href=\"amb_clinic_patients_pass.php".URL_APPEND."&dept_nr=17&dept=".strtr($LDSonography,' ','+')."\">$LDOutpatientClinic</a>";
+$TP_HREF_PREQ4="<a href=\"".$root_path."modules/laboratory/labor_test_request_pass.php".URL_APPEND."&target=generic&subtarget=17&user_origin=amb\">$LDPendingRequest</a>";
+$TP_HREF_NEWS4="<a href=\"".$root_path."modules/news/newscolumns.php".URL_APPEND."&dept_nr=17&user_origin=amb\">$LDNews</a>";
+
+$TP_HREF_APPT5="<a href=\"".$root_path."modules/appointment_scheduler/appt_main_pass.php".URL_APPEND."&target=16&dept_nr=16&user_origin=amb&dept=".strtr($LDInternalMed,' ','+')."\">$LDAppointments</a>";
+$TP_HREF_PWL5="<a href=\"amb_clinic_patients_pass.php".URL_APPEND."&dept_nr=16&dept=".strtr($LDInternalMed,' ','+')."\">$LDOutpatientClinic</a>";
+$TP_HREF_PREQ5="<a href=\"".$root_path."modules/laboratory/labor_test_request_pass.php".URL_APPEND."&target=generic&subtarget=16&user_origin=amb\">$LDPendingRequest</a>";
+$TP_HREF_NEWS5="<a href=\"".$root_path."modules/news/newscolumns.php".URL_APPEND."&dept_nr=16&user_origin=amb\">$LDNews</a>";
+
+$TP_HREF_APPT6="<a href=\"".$root_path."modules/appointment_scheduler/appt_main_pass.php".URL_APPEND."&target=18&dept_nr=18&user_origin=amb&dept=".strtr($LDNuclearMed,' ','+')."\">$LDAppointments</a>";
+$TP_HREF_PWL6="<a href=\"amb_clinic_patients_pass.php".URL_APPEND."&dept_nr=18&dept=".strtr($LDNuclearMed,' ','+')."\">$LDOutpatientClinic</a>";
+$TP_HREF_PREQ6="<a href=\"".$root_path."modules/laboratory/labor_test_request_pass.php".URL_APPEND."&target=generic&subtarget=18&user_origin=amb\">$LDPendingRequest</a>";
+$TP_HREF_NEWS6="<a href=\"".$root_path."modules/news/newscolumns.php".URL_APPEND."&dept_nr=18&user_origin=amb\">$LDNews</a>";
+
+$TP_HREF_APPT7="<a href=\"".$root_path."modules/appointment_scheduler/appt_main_pass.php".URL_APPEND."&target=6&dept_nr=6&user_origin=amb&dept=".strtr($LDEarNoseThroath,' ','+')."\">$LDAppointments</a>";
+$TP_HREF_PWL7="<a href=\"amb_clinic_patients_pass.php".URL_APPEND."&dept_nr=6&dept=".strtr($LDEarNoseThroath,' ','+')."\">$LDOutpatientClinic</a>";
+$TP_HREF_PREQ7="<a href=\"".$root_path."modules/laboratory/labor_test_request_pass.php".URL_APPEND."&target=generic&subtarget=6&user_origin=amb\">$LDPendingRequest</a>";
+$TP_HREF_NEWS7="<a href=\"".$root_path."modules/news/newscolumns.php".URL_APPEND."&dept_nr=6&user_origin=amb\">$LDNews</a>";
+
+$TP_CANCEL_BUT='<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'close2.gif','0').'  alt="'.$LDCloseAlt.'" align="middle"></a>';
+
+# Load the template
+$tp_amb=&$TP_obj->load('ambulatory/tp_menus.htm');
+eval("echo $tp_amb;");
+?>
+
 </ul>
-
 </FONT>
-<p>
 </td>
 </tr>
 

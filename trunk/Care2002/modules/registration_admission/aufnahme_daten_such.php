@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -14,8 +14,6 @@ define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_date_format_functions.php');
-
-require_once($root_path.'include/inc_config_color.php');
 
 $toggle=0;
 
@@ -32,13 +30,12 @@ if(!isset($mode)) $mode='';
 
 if(($mode=='search')and($searchkey))
 {
-    if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
-    if($dblink_ok) {
-				
-		/* Load global config */
-		include_once($root_path.'include/care_api_classes/class_globalconfig.php');
-        $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
-        $glob_obj->getConfig('patient_%');
+	# Convert *,? wildcards to &,_
+	$searchkey=strtr($searchkey,'*?','%_');
+	# Load global config 
+	include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+	$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
+	$glob_obj->getConfig('patient_%');
 
 			$suchwort=trim($searchkey);
 			if(is_numeric($suchwort))
@@ -61,7 +58,9 @@ if(($mode=='search')and($searchkey))
 			              OR enc.encounter_nr LIKE "'.(int)$suchbuffer.'"
 					  )
 					  AND enc.pid=reg.pid  
+					  AND NOT (enc.encounter_status LIKE "cancelled")
 					  AND NOT enc.is_discharged
+					  AND enc.status NOT IN ("void","hidden","inactive","deleted")
 			          ORDER BY enc.encounter_nr ';
 					  
 			if($ergebnis=$db->Execute($sql))
@@ -77,7 +76,7 @@ if(($mode=='search')and($searchkey))
 					}
 				}
 			}else{echo "<p>".$sql."<p>$LDDbNoRead";};
-	}else{ echo "$LDDbNoLink<br>"; }
+
 }else{
 	$mode='';
 }
@@ -157,11 +156,11 @@ if($mode=='search'){
 			
 ?>
 
-    <td><font face=arial size=2 color="#ffffff"><b><?php echo $LDCaseNr; ?></b></td>
-    <td><font face=arial size=2 color="#ffffff"><b><?php echo $LDLastName; ?></td>
-    <td><font face=arial size=2 color="#ffffff"><b><?php echo $LDFirstName; ?></td>
-    <td><font face=arial size=2 color="#ffffff"><b><?php echo $LDBday; ?></td>
-    <td><font face=arial size=2 color="#ffffff"><b><?php echo $LDOptions; ?></td>
+    <td background="<?php echo createBgSkin($root_path,'tableHeaderbg.gif'); ?>"><font face=arial size=2 color="#ffffff"><b><?php echo $LDCaseNr; ?></b></td>
+    <td background="<?php echo createBgSkin($root_path,'tableHeaderbg.gif'); ?>"><font face=arial size=2 color="#ffffff"><b><?php echo $LDLastName; ?></td>
+    <td background="<?php echo createBgSkin($root_path,'tableHeaderbg.gif'); ?>"><font face=arial size=2 color="#ffffff"><b><?php echo $LDFirstName; ?></td>
+    <td background="<?php echo createBgSkin($root_path,'tableHeaderbg.gif'); ?>"><font face=arial size=2 color="#ffffff"><b><?php echo $LDBday; ?></td>
+    <td background="<?php echo createBgSkin($root_path,'tableHeaderbg.gif'); ?>"><font face=arial size=2 color="#ffffff"><b><?php echo $LDOptions; ?></td>
 
 <?php
 /*				for($i=0;$i<sizeof($fieldname);$i++) {

@@ -8,13 +8,16 @@ if(!isset($imm_obj)) $imm_obj=new Immunization;
 
 require_once($root_path.'include/inc_date_format_functions.php');
 
-if(!isset($db)||!$db) include_once($root_path.'include/inc_db_makelink.php');
-if($dblink_ok){
-	switch($mode)
-	{	
+if($HTTP_POST_VARS['date']) $HTTP_POST_VARS['date']=@formatDate2STD($HTTP_POST_VARS['date'],$date_format);
+if($HTTP_POST_VARS['refresh_date']) $HTTP_POST_VARS['refresh_date']=@formatDate2STD($HTTP_POST_VARS['refresh_date'],$date_format);
+
+$imm_obj->setDataArray($HTTP_POST_VARS);
+
+switch($mode){	
 		case 'create': 
-								$HTTP_POST_VARS['date']=@formatDate2STD($HTTP_POST_VARS['date'],$date_format);
-								$imm_obj->setDataArray($HTTP_POST_VARS);
+								//if($HTTP_POST_VARS['date') $HTTP_POST_VARS['date']=@formatDate2STD($HTTP_POST_VARS['date'],$date_format);
+								//if($HTTP_POST_VARS['refresh_date') $HTTP_POST_VARS['date']=@formatDate2STD($HTTP_POST_VARS['refresh_date'],$date_format);
+								
 								if($imm_obj->insertDataFromInternalArray()) 
 									{
 										header("location:".$thisfile.URL_REDIRECT_APPEND."&mode=show&target=$target&pid=".$HTTP_SESSION_VARS['sess_pid']);
@@ -23,9 +26,9 @@ if($dblink_ok){
 									else echo "<br>$LDDbNoSave";
 								break;
 		case 'update': 
-								$HTTP_POST_VARS['date']=@formatDate2STD($HTTP_POST_VARS['date'],$date_format);
-								$imm_obj->setDataArray($HTTP_POST_VARS);
-								$imm_obj->where=' nr='.$imm_nr;
+								//$HTTP_POST_VARS['date']=@formatDate2STD($HTTP_POST_VARS['date'],$date_format);
+								//$imm_obj->setDataArray($HTTP_POST_VARS);
+								$imm_obj->setWhereCond("nr=$imm_nr");
 								if($imm_obj->updateDataFromInternalArray($dept_nr)) 
 									{
 										header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&pid=".$HTTP_SESSION_VARS['sess_pid']);
@@ -34,7 +37,7 @@ if($dblink_ok){
 									else echo "$sql<br>$LDDbNoUpdate";
 								break;
 					
-	}// end of switch
-} else { echo "$LDDbNoLink<br>"; } 
+}// end of switch
+
 
 ?>

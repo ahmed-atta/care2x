@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /*
-CARE 2002 Integrated Information System beta 1.0.05 - 2003-06-22 for Hospitals and Health Care Organizations and Services
+CARE 2002 Integrated Information System beta 1.0.06 - 2003-08-06 for Hospitals and Health Care Organizations and Services
 Copyright (C) 2002  Elpidio Latorilla & Intellin.org	
 
 GNU GPL. For details read file "copy_notice.txt".
@@ -11,7 +11,6 @@ GNU GPL. For details read file "copy_notice.txt".
 define('LANG_FILE','aufnahme.php');
 $local_user='medocs_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 require_once($root_path.'include/care_api_classes/class_person.php');
 require_once($root_path.'include/care_api_classes/class_insurance.php');

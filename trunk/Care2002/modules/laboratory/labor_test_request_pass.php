@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -24,6 +24,8 @@ if($target=='admin') $allowedarea=&$allow_area['test_receive'];
  else $allowedarea=&$allow_area['test_order'];
 
 if(!isset($target)||!$target) $target='chemlabor';
+# Set the origin
+$user_origin='lab';
 
 /* Set the default file forward */
 $fileforward=$root_path."modules/nursing/nursing-station-patientdaten-doconsil-".$target.".php".URL_REDIRECT_APPEND."&noresize=1&user_origin=".$user_origin."&target=".$target;
@@ -34,6 +36,21 @@ $test_pass_logo='micros.gif';
 
 $userck='ck_lab_user';
 
+
+# If target is generic, Filter the cheblab, patho, bactlab,bloodbank and radiology tests
+if($target=='generic'){
+	switch($subtarget){
+		case 8 : $target='admin'; $subtarget='patho'; break; # 8 = pathology
+		case 19: $target='radio'; break; # 19 = radiology
+		case 22: $target='admin'; $subtarget='chemlabor'; break; # 22 = central lab
+		case 23: $target='admin'; $subtarget='chemlabor'; break; # 23 = serological lab
+		case 24: $target='admin'; $subtarget='chemlabor'; break; # 24 = chemical lab
+		case 25: $target='admin'; $subtarget='baclabor'; break; # 25 = bacteriological lab
+		case 41: $target='blood'; break; # 41 = blood bank
+	}
+}
+
+# Refilter
 switch($target)
 {
 

@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -11,23 +11,71 @@ require($root_path.'include/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 $thisfile=basename(__FILE__);
+require_once($root_path.'include/care_api_classes/class_obstetrics.php');
+$obj=new Obstetrics;
+
+
+if(!isset($allow_update)) $allow_update=false;
+
 if(!isset($mode)){
 	$mode='show';
-} elseif($mode=='create'||$mode=='update') {
+}elseif($mode=='newdata') {
+	
+	include_once($root_path.'include/inc_date_format_functions.php');
+	$saved=false;
 
+	# Prepare additional info for saving
+	$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+	$HTTP_POST_VARS['modify_time']=date('YmdHis'); # Create own timestamp for cross db compatibility
+	if(empty($HTTP_POST_VARS['delivery_date'])) $HTTP_POST_VARS['delivery_date']=date('Y-m-d');
+		//else $HTTP_POST_VARS['delivery_date']=@formatDate2STD($HTTP_POST_VARS['delivery_date'],$date_format);
+
+	# Update child encounter to parent encounter
+	if(!empty($HTTP_POST_VARS['parent_encounter_nr'])) $obj->AddChildNrToParent($HTTP_SESSION_VARS['sess_en'],$HTTP_POST_VARS['parent_encounter_nr'],$HTTP_POST_VARS);
+	//echo $obj->getLastQuery();
+	
+	if($allow_update){
+		$obj->setWhereCondition('pid='.$HTTP_POST_VARS['pid']);
+		$obj->setDataArray($HTTP_POST_VARS);
+
+		if($obj->updateDataFromInternalArray($HTTP_POST_VARS['pid'])) {
+			$saved=true;
+		}else{
+			echo $obj->getLastQuery."<br>$LDDbNoUpdate";
+		}
+	}else{
+		# Deactivate the old record first if exists
+		$obj->deactivateBirthDetails($HTTP_SESSION_VARS['sess_pid']);
+		
+		$HTTP_POST_VARS['history']="Create ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
+		$HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		$HTTP_POST_VARS['create_time']=date('YmdHis'); # Create own timestamp for cross db compatibility
+		$obj->setDataArray($HTTP_POST_VARS);
+
+		if($obj->insertDataFromInternalArray()) {
+			$saved=true;
+		}else{
+			echo $obj->getLastQuery."<br>$LDDbNoSave";
+		}		
+	}
+	if($saved){
+		header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&allow_update=1&pid=".$HTTP_SESSION_VARS['sess_pid']);
+		exit;
+	}
 }
+
+# Add extra language table
+$lang_tables=array('obstetrics.php');
 require('./include/init_show.php');
 
-$sql="SELECT n.* FROM   care_neonatal AS n, care_person AS p
-		WHERE p.pid=".$HTTP_SESSION_VARS['sess_pid']." AND p.pid=n.pid 
-		ORDER BY n.modify_time DESC";
-		
-if($result=$db->Execute($sql)){
-	$rows=$result->RecordCount();
-}else{
-	echo "$sql<p>$LDDbNoRead";
+# Get all birth details data of the person
+$result=&$obj->BirthDetails($HTTP_SESSION_VARS['sess_pid']);
+if($rows=$obj->LastRecordCount()){
+	$birth=$result->FetchRow();
 }
+
 $subtitle=$LDBirthDetails;
+
 $HTTP_SESSION_VARS['sess_file_return']=$thisfile;
 
 $buffer=str_replace('~tag~',$title.' '.$name_last,$LDNoRecordFor);

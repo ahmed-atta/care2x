@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -34,7 +34,7 @@ require('./include/init_show.php');
 $page_title.=" :: $LDNotes $LDAndSym $LDReports";
 
 if($parent_admit){
-	$sql="SELECT n.notes,n.short_notes, n.encounter_nr,n.date,n.personell_nr,n.personell_name,e.encounter_class_nr
+	$sql="SELECT n.nr,n.notes,n.short_notes, n.encounter_nr,n.date,n.personell_nr,n.personell_name,e.encounter_class_nr
 		FROM care_encounter AS e, 
 					care_person AS p, 
 					care_encounter_notes AS n 
@@ -45,7 +45,7 @@ if($parent_admit){
 			AND n.type_nr=".$type_nr."
 		ORDER BY n.date DESC";
 }else{
-	$sql="SELECT n.notes,n.short_notes, n.encounter_nr,n.date,n.personell_nr,n.personell_name,e.encounter_class_nr
+	$sql="SELECT n.nr,n.notes,n.short_notes, n.encounter_nr,n.date,n.personell_nr,n.personell_name,e.encounter_class_nr
 		FROM 	care_encounter AS e, 
 					care_person AS p, 
 					care_encounter_notes AS n

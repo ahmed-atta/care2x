@@ -1,4 +1,5 @@
 <?php
+$lang_tables[]='prompt.php';
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
@@ -54,10 +55,34 @@ $HTTP_SESSION_VARS['sess_full_pid']=$pid;
 $photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $default_photo_path;
 require_once($root_path.'include/inc_photo_filename_resolve.php');
 
+# set to safe defaults
+if(!isset($is_discharged)) $is_discharged=true;
+if(!isset($edit)) $edit=false;
+# Check if person is currently admitted
+$current_encounter=$person_obj->CurrentEncounter($pid);
+
 if($HTTP_SESSION_VARS['sess_parent_mod']=='admission') {
 	$parent_admit=true;
 	$page_title=$LDAdmission;
-}else{
+	# If current_encounter is this encounter nr
+	if($current_encounter==$HTTP_SESSION_VARS['sess_en']){
+		$is_discharged=false;
+		$edit=true;
+
+		include_once($root_path.'include/care_api_classes/class_encounter.php');
+		$enc_obj=new Encounter;
+		if($stat=&$enc_obj->AllStatus($HTTP_SESSION_VARS['sess_en'])){
+			$enc_status=$stat->FetchRow();
+		}
+	}
+	//echo " curr $current_encounter this ".$HTTP_SESSION_VARS['sess_en'];
+/*	include_once($root_path.'include/care_api_classes/class_encounter.php');
+	$enc_obj=new Encounter;
+	if($enc_obj->isCurrentlyAdmitted($HTTP_SESSION_VARS['sess_en'])){
+		$is_discharged=false;
+		$edit=true;
+	}
+*/}else{
 	$parent_admit=false;
 	$page_title=$LDPatientRegister;
 }

@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -14,10 +14,9 @@ define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-require_once($root_path.'include/inc_config_color.php');
-$keyword=strtr($keyword,"%"," ");
-$keyword=trim($keyword);
-
+//$keyword=strtr($keyword,"%"," ");
+/*$keyword=trim($keyword);
+*/
 $dbtable='care_person';
 $toggle=0;
 $searchmask_bgcolor="#f3f3f3";
@@ -42,12 +41,12 @@ switch($origin)
 $breakfile.=URL_APPEND;
 $GLOBAL_CONFIG=array();
 
-if(isset($mode)&&($mode=='search')&&isset($searchkey)&&($searchkey))
-{
-    if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
-    if($dblink_ok) {
+if(isset($mode)&&($mode=='search')&&isset($searchkey)&&($searchkey)){
 	
-        include_once($root_path.'include/inc_date_format_functions.php');
+	# convert * and ? to % and &
+	$searchkey=strtr($searchkey,'*?','%_');
+    
+	    include_once($root_path.'include/inc_date_format_functions.php');
             
         //* Get the patient registration global config */
 /*        $config_type='person_id_%';
@@ -71,13 +70,16 @@ if(isset($mode)&&($mode=='search')&&isset($searchkey)&&($searchkey))
 			$suchbuffer=$suchwort;
 		}
 			 
-			$sql='SELECT pid, name_last, name_first, date_birth FROM '.$dbtable.' WHERE pid="'.$suchwort.'"
-						                          OR  name_last LIKE "'.$suchwort.'%" 
-			                                      OR name_first LIKE "'.$suchwort.'%"
-			                                      OR date_birth LIKE "'.formatDate2STD($suchwort,$date_format).'"
-			                                      OR date_birth LIKE "%'.$suchwort.'%"
-			                                      OR pid LIKE "'.$suchbuffer.'" 
-			                                    ORDER BY '.$order_item;
+			$sql='SELECT pid, name_last, name_first, date_birth FROM '.$dbtable.' 
+						WHERE ( pid="'.$suchwort.'"
+									OR  name_last LIKE "'.$suchwort.'%" 
+			                		OR name_first LIKE "'.$suchwort.'%"
+			                		OR date_birth LIKE "'.formatDate2STD($suchwort,$date_format).'"
+			                		OR date_birth LIKE "%'.$suchwort.'%"
+			                		OR pid LIKE "'.$suchbuffer.'" 
+									)
+									AND status NOT IN ("void","hidden","deleted","inactive")
+			            ORDER BY '.$order_item;
 
 			if($ergebnis=$db->Execute($sql))
        		{
@@ -93,8 +95,7 @@ if(isset($mode)&&($mode=='search')&&isset($searchkey)&&($searchkey))
 				else $mode="";
 			}
 			 else {echo "<p>".$sql."<p>$LDDbNoRead";};
-	}
-  	 else { echo "$LDDbNoLink<br>"; }
+
 } else { 
     $mode='';
 }
@@ -126,8 +127,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 </td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
 <a href="javascript:gethelp('admission_how2search.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
-if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo "startframe.php?sid=".$sid."&lang=".$lang; 
-	else echo$breakfile."?sid=$sid&target=entry&lang=$lang"; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
+echo $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </td>
 </tr>
 
@@ -231,7 +231,7 @@ if ($linecount)
 						echo '	
 							<img '.createLDImgSrc($root_path,'ok_small.gif','0').' alt="'.$LDTestThisPatient.'"></a>&nbsp;';
 							
-                       if(!file_exists("../cache/barcodes/pn_".$zeile['pid'].".png"))
+                       if(!file_exists($root_path.'cache/barcodes/pn_'.$zeile['pid'].'.png'))
 	      		       {
 			               echo "<img src='".$root_path."classes/barcode/image.php?code=".$zeile['pid']."&style=68&type=I25&width=145&height=50&xres=2&font=5&label=2' border=0 width=0 height=0>";
 		               }

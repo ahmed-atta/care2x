@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -22,22 +22,16 @@ require_once($root_path.'include/inc_config_color.php');
 $thisfile='op-pflege-logbuch-xtsuch-start.php';
 $breakfile='javascript:window.close()';
 
-
-/* Create the global object, load the patient configs*/
-require_once($root_path.'include/care_api_classes/class_globalconfig.php');
-$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
-$glob_obj->getConfig('patient_%');
-
-
 if($srcword!='')
 {
-	if(is_numeric($srcword)) $srcword=(int) $srcword;
+	if(is_numeric($srcword)){
+		$srcword=(int) $srcword;
+	}else{
+		# Convert other wildcards
+		$srcword=strtr($srcword,'*&','%_');
+	}
 
 	$dbtable='care_nursing_op_logbook';
-
-	if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-	if($dblink_ok)
-	{
 
        /* Load the date formatter */
        include_once($root_path.'include/inc_date_format_functions.php');
@@ -45,10 +39,7 @@ if($srcword!='')
 	
        /* Load editor functions for time format converter */
        //include_once('../include/inc_editor_fx.php');
-		
-	  if($mode=='get')
-	   {
-			$sql="SELECT o.*, e.encounter_nr,
+	   $selectfrom="SELECT o.*,
 								e.encounter_class_nr,
 								 p.name_last, 
 								 p.name_first, 
@@ -59,19 +50,31 @@ if($srcword!='')
 								 t.name AS citytown_name,
 								 d.name_formal,
 								 d.LD_var
-					FROM care_nursing_op_logbook AS o,
+					FROM  (care_nursing_op_logbook AS o,
 								care_encounter AS e,
-								care_person AS p,
-								care_address_citytown AS t,
-								care_department AS d
-					WHERE o.op_nr='$op_nr'
-								AND o.dept_nr='$dept_nr'
-								AND o.dept_nr=d.nr
+								care_person AS p)
+								LEFT JOIN care_address_citytown AS t ON t.nr=p.addr_citytown_nr
+								LEFT JOIN care_department AS d ON d.nr=o.dept_nr";
+		
+	  if($mode=='get'||$mode=='getbypid'||$mode=='getbyenc')
+	   {
+			if($mode=='get'){
+				$sql=$selectfrom."	WHERE o.nr='$nr'
 								AND o.encounter_nr=e.encounter_nr
 								AND e.pid=p.pid
-								AND p.addr_citytown_nr=t.nr
 					ORDER BY o.create_time DESC";
-
+			}elseif($mode=='getbypid'){
+				$sql=$selectfrom."	WHERE p.pid='$nr'
+								AND o.encounter_nr=e.encounter_nr
+								AND e.pid=p.pid
+					ORDER BY o.create_time DESC";
+			}else{
+				$sql=$selectfrom."	WHERE o.encounter_nr='$nr'
+								AND o.encounter_nr=e.encounter_nr
+								AND e.pid=p.pid
+					ORDER BY o.create_time DESC";
+			}
+			
 			if($ergebnis=$db->Execute($sql))
        		{
 				if($rows=$ergebnis->RecordCount())
@@ -82,41 +85,25 @@ if($srcword!='')
 				}
 			}
        	}
-	   	elseif(!$rows||($mode!="get"))
+	   	else
 	   	{
 			//********************************** start searching ***************************************
-			$sql="SELECT o.*, e.encounter_nr,
-								e.encounter_class_nr,
-								 p.name_last, 
-								 p.name_first, 
-								 p.date_birth, 
-								 p.addr_str,
-								 p.addr_str_nr,
-								 p.addr_zip,
-								 t.name AS citytown_name,
-								 d.name_formal,
-								 d.LD_var
-					FROM care_nursing_op_logbook AS o,
-								care_encounter AS e,
-								care_person AS p,
-								care_address_citytown AS t,
-								care_department AS d
-					WHERE (o.op_nr = '$srcword'
+			$sql=$selectfrom."	WHERE (o.op_nr = '$srcword'
 								OR e.encounter_nr = '$srcword'
 								OR p.name_last = '$srcword'
 								OR p.name_first = '$srcword'
 								OR p.date_birth = '$srcword')
 								AND o.encounter_nr=e.encounter_nr
 								AND e.pid=p.pid
-								AND o.dept_nr=d.nr
-								AND p.addr_citytown_nr=t.nr";
+					ORDER BY o.op_date DESC";
+					
 				if($ergebnis=$db->Execute($sql))
        			{
 					if($rows=$ergebnis->RecordCount())
 					{
-						$datafound=1;
+						if($rows==1) $datafound=1;
 					}else{
-						$sql="SELECT o.op_nr,o.dept_nr,o.op_room,o.op_date, e.encounter_nr, p.name_last, p.name_first, p.date_birth
+						$sql="SELECT o.nr,o.op_nr,o.dept_nr,o.op_room,o.op_date, e.encounter_nr, p.pid, p.name_last, p.name_first, p.date_birth
 						FROM care_nursing_op_logbook AS o,
 								care_encounter AS e,
 								care_person AS p
@@ -126,21 +113,17 @@ if($srcword!='')
 								OR p.name_first LIKE '$srcword%'
 								OR p.date_birth LIKE '$srcword%')
 								AND o.encounter_nr=e.encounter_nr
-								AND e.pid=p.pid";
+								AND e.pid=p.pid
+						ORDER BY p.name_last";
 						if($ergebnis=$db->Execute($sql))
        					{
-							if($rows=$ergebnis->RecordCount())
-							{
-								if($rows==1) $datafound=1;
-							}
+							$rows=$ergebnis->RecordCount();
 	           			}else { echo "$LDDbNoRead<br>$sql"; }
 	           		}
 			   }else { echo "$LDDbNoRead<br>$sql"; }
 			
 		} // end of else if mode== get
 
-	}
-  	else { echo "$LDDbNoLink<br>"; } 
 } //end of if (srcword!="")
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -215,11 +198,11 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 </td>
 </tr>
 <tr>
-<td colspan=3  bgcolor=<?php echo $cfg['body_bgcolor']; ?>><p><br>
+<td colspan=3  bgcolor=<?php echo $cfg['body_bgcolor']; ?>>
 
 
 <FONT    SIZE=-1  FACE="Arial">
-<?php if((($mode=="get")||($datafound))&&$rows)
+<?php if((($mode=='get')||($datafound))&&$rows)
 {
 	if($rows>1) echo $LDPatLogbookMany;
 		else echo $LDPatLogbook;
@@ -259,11 +242,13 @@ while($pdata=$ergebnis->FetchRow())
 		else { echo '<tr bgcolor="#eeeeee">'; $toggler=0;}
 	echo '
 			<a name="'.$pdata['encounter_nr'].'"></a>';
+			
 	list($iyear,$imonth,$iday)=explode('-',$pdata['op_date']);
+
 	echo '
 			<td valign=top><font face="verdana,arial" size="1" ><font size=2 color=red><b>'.$pdata['op_nr'].'</b></font><hr>'.formatDate2Local($pdata['op_date'],$date_format).'<br>
 			'.$tage[date("w",mktime(0,0,0,$imonth,$iday,$iyear))].'<br>
-			<a href="op-pflege-logbuch-start.php?sid='.$sid.'&lang='.$lang.'&mode=saveok&enc_nr='.$pdata['encounter_nr'].'&op_nr='.$pdata[op_nr].'&dept_nr='.$pdata[dept_nr].'&saal='.$pdata[op_room].'&pyear='.$iyear.'&pmonth='.$imonth.'&pday='.$iday.'">
+			<a href="op-pflege-logbuch-start.php?sid='.$sid.'&lang='.$lang.'&mode=saveok&enc_nr='.$pdata['encounter_nr'].'&op_nr='.$pdata[op_nr].'&dept_nr='.$pdata[dept_nr].'&saal='.$pdata[op_room].'&thisday='.$pdata['op_date'].'">
 			<img '.$img_arrow.' alt="'.str_replace("~tagword~",$pdata['name_last'],$LDEditPatientData).'"></a>
 			</td>';
 	
@@ -362,67 +347,98 @@ if($mode=='search')
 {
 	
 	echo '
-			<center>
-			
+			<ul>
+				<table cellpadding=0 cellspacing=0 border=0>
+				<tr>
+				<td valign="middle" align="center">
+				<font color="#800000" size=4>'.$LDPatientsFound.'</font>
+				</td>
+				<td>	
+					<img '.createMascot($root_path,'mascot1_l.gif','0','middle').'>
+				</td>
+				</tr>
+				<tr>
+				<td valign=top colspan=2>
+
 				<table cellpadding=0 cellspacing=0 border=0 >
 				<tr>
-				<td valign=top>
-				<table cellpadding=1 cellspacing=0 border=0 >
-				<tr>
 				<td bgcolor=#999999>
-				<table cellpadding=10 cellspacing=0 border=0 bgcolor=#eeeeee>
-				<tr ><td >';
-	echo '
-			<font color="#800000" size=4>'.$LDInfoNotFound.'</font>';
+				<table cellpadding=2 cellspacing=1 border=0 >
+				';
 				
 	if($rows)
 	{
-		echo '<p><font size=2>'.$LDButFf;
+		echo '<tr ><td colspan=7 bgcolor=#eeeee0><p><font size=2>'.$LDButFf;
 		if($rows==1) echo " $LDSimilar ";
 		else echo " $LDSimilarMany ";
-		echo $LDNeededInfo.'<p>';
+		echo $LDNeededInfo.'</td></tr>';
 		
 		$img_src='<img '.createComIcon($root_path,'arrow.gif','0','middle').'>'; // Loads the arrow icon image
 		
+		echo '<tr bgcolor=#eeeeee>
+				<td>&nbsp;</td >
+				<td >&nbsp;</td >
+				<td >&nbsp;</td >
+				<td><font size=2>'.$LDOpRoom.':</td>
+				<td><font size=2> '.$LDSrcListElements[5].'</td>
+				<td><font size=2>'.$LDOpNr.'</td>
+				<td><font size=2>'.$LDPatientNr.'</td >
+				</tr>';
 		while($pdata=$ergebnis->FetchRow())
 		{
-				echo "
+/*				echo "
 						<a href=\"op-pflege-logbuch-xtsuch-start.php?sid=$sid&lang=$lang&mode=get&dept_nr=$pdata[dept_nr]&op_nr=$pdata[op_nr]&srcword=".strtr($srcword," ","+")."\">";
+*/				echo "
+						<tr bgcolor=#eeeeee><td ><font size=2>
+						<a href=\"op-pflege-logbuch-xtsuch-start.php?sid=$sid&lang=$lang&mode=getbypid&nr=".$pdata['pid']."&dept_nr=$dept_nr&saal=$saal&srcword=".strtr($srcword," ","+")."\">&nbsp;";
 				
-				echo $img_src;
+				//echo $img_src;
 				
-				if($srcword&&stristr($pdata['name_last'],$srcword)) echo '<u><b><span style="background:yellow"> '.$pdata['name_last'].'</span></b></u>';
+				if($srcword&&stristr($pdata['name_last'],$srcword)) echo '<b><span style="background:yellow">'.$pdata['name_last'].'</span></b>';
  					else echo $pdata['name_last'];			
 						
- 				echo ', ';
+ 				echo '</a></td>
+				<td><font size=2>&nbsp;';
 				
-				if($srcword&&stristr($pdata['name_first'],$srcword)) echo '<u><b><span style="background:yellow"> '.$pdata['name_first'].'</span></b></u>';
+				if($srcword&&stristr($pdata['name_first'],$srcword)) echo '<b><span style="background:yellow">'.$pdata['name_first'].'</span></b>';
  					else echo $pdata['name_first'];		
 							
- 				echo ' (';
+ 				echo '</td>
+				<td align="center" ><font size=2>';
 				
-				if($srcword&&stristr($pdata['date_birth'],$srcword)) echo '<u><b><span style="background:yellow"> '.formatDate2Local($pdata['date_birth'],$date_format).'</span></b></u>';
+				if($srcword&&stristr($pdata['date_birth'],$srcword)) echo '<b><span style="background:yellow">'.formatDate2Local($pdata['date_birth'],$date_format).'</span></b>';
  					else echo formatDate2Local($pdata['date_birth'],$date_format);				
- 				echo ') ';
+ 				echo '
+				</td>
+				<td align="center"><font size=2>';
+						
+				echo "<a href=\"op-pflege-logbuch-xtsuch-start.php?sid=$sid&lang=$lang&mode=get&nr=".$pdata['nr']."&dept_nr=$dept_nr&saal=$saal&srcword=".strtr($srcword," ","+")."\">&nbsp;";
 				
-				echo strtoupper($altdept[$i]).'  '.$LDOpRoom.': <b>'.$pdata[op_room].'</b>, '.$LDSrcListElements[5].': <b>'.formatDate2Local($pdata['op_date'],$date_format).'</b> '.$LDOpNr.': <b>'.$pdata['op_nr'].'</b><br>';
-		}	
+				echo '<b>'.$pdata[op_room].'</b></a></td>
+				<td align="center" ><font size=2><b>'.formatDate2Local($pdata['op_date'],$date_format).'</b> </td>
+				<td align="center" ><font size=2>';
+				echo "<a href=\"op-pflege-logbuch-xtsuch-start.php?sid=$sid&lang=$lang&mode=get&nr=".$pdata['nr']."&dept_nr=$dept_nr&saal=$saal&srcword=".strtr($srcword," ","+")."\">&nbsp;";		
+				echo $pdata['op_nr'];
+				echo '</a>
+				</td>
+				<td align="center" ><font size=2>';
+				echo "<a href=\"op-pflege-logbuch-xtsuch-start.php?sid=$sid&lang=$lang&mode=getbyenc&nr=".$pdata['encounter_nr']."&dept_nr=$dept_nr&saal=$saal&srcword=".strtr($srcword," ","+")."\">&nbsp;";		
+				echo $pdata['encounter_nr'];
+				echo '</a>
+				</td>
+				</tr>';	
+			}	
 		
 	}
-	echo '		</td>
-				</tr>
+	echo '	
 				</table>
 				</td>
 				</tr>
 				</table>
 			</td>
-			<td>	
-			<img '.createMascot($root_path,'mascot1_l.gif','0','middle').'>
-				
-			</td>
 			</tr>
 			</table>
-			</center>
+			</ul>
 			';
 }
 ?>
@@ -477,9 +493,10 @@ if($mode=='search')
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-pflege-logbuch-start.php?sid=<?php echo "$sid&lang=$lang&mode=fresh&dept_nr=$dept_nr&saal=$saal" ?>" <?php if ($child) echo "target=\"_parent\""; ?>><?php echo "$LDStartNewDocu [$LDOrLogBook]" ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="javascript:gethelp('oplog.php','search','<?php echo $mode ?>','<?php echo $rows ?>','<?php echo $datafound ?>')"><?php echo "$LDHelp" ?></a><br>
 
-<p>
+<!-- <p>
 <a href="javascript:window.opener.focus();window.close();"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>  alt="<?php echo $LDCancel ?>"></a>
-</ul>
+ -->
+ </ul>
 <p>
 
 <?php

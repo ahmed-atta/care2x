@@ -80,13 +80,13 @@ if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo "startframe.php?sid=".$sid."&
 <?php
 /* Create the tabs */
 if($parent_admit) {
-$tab_bot_line='#66ee66';
-require('./gui_bridge/default/gui_tabs_patadmit.php');
-
+	$tab_bot_line='#66ee66';
+	require('./gui_bridge/default/gui_tabs_patadmit.php');
 }else{
 	$tab_bot_line='#66ee66';
 	require('./gui_bridge/default/gui_tabs_patreg.php');
 }
+
 ?>
 
 <tr>
@@ -95,9 +95,27 @@ require('./gui_bridge/default/gui_tabs_patadmit.php');
 <FONT    SIZE=-1  FACE="Arial">
 
 <table border=0 cellspacing=1 cellpadding=0 width=100%>
+<?php
+# If encounter is already discharged, show warning
+if($parent_admit&&$is_discharged){
+?>
 
+  <tr>
+    <td bgcolor="red">&nbsp;<FONT    SIZE=2  FACE="verdana,Arial" color="#ffffff"><img <?php echo createComIcon($root_path,'warn.gif','0','absmiddle'); ?>> 
+	<b>
+	<?php 
+		if($current_encounter) echo $LDEncounterClosed;
+			else echo $LDPatientIsDischarged; 
+	?>
+	</b></font></td>
+    <td>&nbsp;</td>
+  </tr>
+
+<?php
+}
+?>
 <tr bgcolor="#ffffff">
-<td colspan=3 valign="top">
+<td   valign="top">
 
 <table border=0 width=100% cellspacing=1>
 <tr>
@@ -114,7 +132,7 @@ if($parent_admit) echo ($HTTP_SESSION_VARS['sess_full_en']) ;
 ?>
 </td>
 
-<td valign="top" rowspan=8 align="center" bgcolor="#ffffee" ><FONT SIZE=-1  FACE="Arial"><img <?php echo $img_source; ?> width=137>
+<td valign="top" rowspan=8 align="center" bgcolor="#ffffee" ><FONT SIZE=-1  FACE="Arial"><img <?php echo $img_source; ?>>
 </td>
 </tr>
 
@@ -142,27 +160,27 @@ if($parent_admit) echo ($HTTP_SESSION_VARS['sess_full_en']) ;
 
 <?php
 
-if (!$GLOBAL_CONFIG['person_name_2_hide'])
+if (!$GLOBAL_CONFIG['person_name_2_hide']&&$name_2)
 {
 createTR($LDName2,$name_2);
 }
 
-if (!$GLOBAL_CONFIG['person_name_3_hide'])
+if (!$GLOBAL_CONFIG['person_name_3_hide']&&$name_3)
 {
 createTR( $LDName3,$name_3);
 }
 
-if (!$GLOBAL_CONFIG['person_name_middle_hide'])
+if (!$GLOBAL_CONFIG['person_name_middle_hide']&&$name_middle)
 {
 createTR($LDNameMid,$name_middle);
 }
 
-if (!$GLOBAL_CONFIG['person_name_maiden_hide'])
+if (!$GLOBAL_CONFIG['person_name_maiden_hide']&&$name_maiden)
 {
 createTR($LDNameMaiden,$name_maiden);
 }
 
-if (!$GLOBAL_CONFIG['person_name_others_hide'])
+if (!$GLOBAL_CONFIG['person_name_others_hide']&&$name_others)
 {
 createTR($LDNameOthers,$name_others);
 }
@@ -197,10 +215,10 @@ if($parent_admit) include('./gui_bridge/default/gui_patient_encounter_showdata_o
 </tr>
 
 <tr>
-<td bgColor="#eeeeee" colspan=3 valign="top">
+<td bgColor="#eeeeee" valign="top">
 
 <?php
-# If mode = show then display the data
+# If mode = show then display data
 if($mode=='show'){
 
 	if($parent_admit) $bgimg='tableHeaderbg3.gif';
@@ -227,7 +245,7 @@ if($mode=='show'){
     <td>&nbsp;</td>
     <td>  
   <?php
-	if($parent_admit){
+	if($parent_admit&&!$is_discharged){
   ?>
   <img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle'); ?>>
 <a href="<?php echo $thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new'; ?>"> 
@@ -260,6 +278,7 @@ if($parent_admit) {
 	include('./include/bottom_controls_registration_options.inc.php');
 }
 ?>
+<a href="<?php  echo $breakfile.URL_APPEND; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
 
 <p>
 </ul>
@@ -270,16 +289,15 @@ if($parent_admit) {
 </tr>
 </table>        
 <p>
-<ul>
+<!-- <ul> -->
 <FONT    SIZE=2  FACE="Arial">
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="patient_register_search.php<?php echo URL_APPEND; ?>"><?php echo $LDPatientSearch ?></a><br>
+<!-- <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="patient_register_search.php<?php echo URL_APPEND; ?>"><?php echo $LDPatientSearch ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="patient_register_archive.php<?php echo URL_APPEND; ?>&newdata=1&from=entry"><?php echo $LDArchive ?></a><br>
+ -->
+<p>
 
 <p>
-<a href="<?php  echo $breakfile.URL_APPEND; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
-
-<p>
-</ul>
+<!-- </ul> -->
 <?php
 require($root_path.'include/inc_load_copyrite.php');
 ?>

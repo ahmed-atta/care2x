@@ -216,7 +216,7 @@ if($error)
 <td bgcolor="#eeeeee">
 <FONT SIZE=-1  FACE="Arial" ><?php if(isset($encounter_nr)&&$encounter_nr) echo $full_en; else echo '<font color="red">'.$LDNotYetAdmitted.'</font>'; ?>
 </td>
-<td rowspan=7 align="right"><img <?php echo $img_source ?> width=137>
+<td rowspan=7 align="center"><img <?php echo $img_source ?>>
 </td>
 </tr>
 
@@ -262,7 +262,7 @@ if($error)
 </td>
 </tr>
 
-<?php if($GLOBAL_CONFIG['patient_name_2_show'])
+<?php if($GLOBAL_CONFIG['patient_name_2_show']&&$name_2)
 {
 ?>
 <tr>
@@ -274,7 +274,7 @@ if($error)
 <?php
 }
 
-if($GLOBAL_CONFIG['patient_name_3_show'])
+if($GLOBAL_CONFIG['patient_name_3_show']&&$name_3)
 {
 ?>
 <tr>
@@ -286,7 +286,7 @@ if($GLOBAL_CONFIG['patient_name_3_show'])
 <?php
 }
 
-if($GLOBAL_CONFIG['patient_name_middle_show'])
+if($GLOBAL_CONFIG['patient_name_middle_show']&&$name_middle)
 {
 ?>
 <tr>
@@ -333,25 +333,50 @@ echo $addr_zip.' '.$addr_citytown_name.'<br>';
 <td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">
 <?php
 if(is_object($encounter_classes)){
-    while($result=$encounter_classes->FetchRow()) {
+	while($result=$encounter_classes->FetchRow()) {
+       	$LD=$result['LD_var'];
+		//if($in_ward && ($encounter_class_nr==$result['class_nr'])){ # If in ward, freeze encounter class
+		if($encounter_nr ){ # If admitted, freeze encounter class
+           if ($encounter_class_nr==$result['class_nr']){
+		   		if(isset($$LD)&&!empty($$LD)) echo $$LD; else echo $result['name'];
+				echo '<input name="encounter_class_nr" type="hidden"  value="'.$encounter_class_nr.'">';
+				break;
+			}
+		}else{
 ?>
-<input name="encounter_class_nr" type="radio"  value="<?php echo $result['class_nr']; ?>" <?php if($encounter_class_nr==$result['class_nr']) echo 'checked'; ?>>
+	<input name="encounter_class_nr" type="radio"  value="<?php echo $result['class_nr']; ?>" <?php if($encounter_class_nr==$result['class_nr']) echo 'checked'; ?>>
 <?php 
-        $LD=$result['LD_var'];
-        if(isset($$LD)&&!empty($$LD)) echo $$LD; else echo $result['name'];
-        echo '&nbsp;';
-	}
-} 
+            if(isset($$LD)&&!empty($$LD)) echo $$LD; else echo $result['name'];
+        	echo '&nbsp;';
+		}
+	} 
+}
 ?>
 </td>
 </tr>
 
+<?php
+# If no encounter nr or inpatient, show ward/station info
+if(!$encounter_nr||$encounter_class_nr==1){
+?>
+
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php if ($errorward) echo "<font color=red>"; ?><?php echo $LDWard ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee">
+<td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">
+<?php
+if($in_ward){
+    while($station=$ward_info->FetchRow()){
+	    if(isset($current_ward_nr)&&($current_ward_nr==$station['nr'])){
+			echo $station['name'];
+			echo '<input name="current_ward_nr" type="hidden"  value="'.$current_ward_nr.'">';
+			break;
+		}
+    }
+}else{
+?>
 <select name="current_ward_nr">
-	<option value="">___________________________________________________</option>
+	<option value=""></option>
 <?php 
 if(!empty($ward_info)&&$ward_info->RecordCount()){
     while($station=$ward_info->FetchRow()){
@@ -363,9 +388,57 @@ if(!empty($ward_info)&&$ward_info->RecordCount()){
 }
 ?>
 </select>
-
+<?php
+}
+?>
 </td>
 </tr>
+<?php
+# End of if no encounter nr
+}
+
+# If no encounter nr or outpatient, show clinic/department info
+if(!$encounter_nr||$encounter_class_nr==2){
+?>
+
+<tr>
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php if ($errorward) echo "<font color=red>"; ?><?php echo "$LDClinic/$LDDepartment"; ?>:
+</td>
+<td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">
+<?php
+if($in_ward){
+    while($deptrow=$all_meds->FetchRow()){
+	    if(isset($current_dept_nr)&&($current_dept_nr==$deptrow['nr'])){
+			echo $deptrow['name_formal'];
+			echo '<input name="current_dept_nr" type="hidden"  value="'.$current_dept_nr.'">';
+			break;
+		}
+    }
+}else{
+?>
+<select name="current_dept_nr">
+	<option value=""></option>
+<?php 
+if(is_object($all_meds)){
+    while($deptrow=$all_meds->FetchRow()){
+	    echo '
+	    <option value="'.$deptrow['nr'].'" ';
+	    if(isset($current_dept_nr)&&($current_dept_nr==$deptrow['nr'])) echo 'selected';
+		echo '>'.$deptrow['name_formal'].'</option>';
+    }
+}
+?>
+</select>
+<?php
+}
+?>
+</td>
+</tr>
+<?php
+# End of if no encounter nr
+}
+?>
+
 
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php if ($errordiagnose) echo "<font color=red>"; ?><?php echo $LDDiagnosis ?>:
@@ -532,6 +605,7 @@ while($buffer=$att_dr_service->FetchRow())
 <p>
 <input type="hidden" name="pid" value="<?php echo $pid; ?>">
 <input type="hidden" name="encounter_nr" value="<?php echo $encounter_nr; ?>">
+<input type="hidden" name="appt_nr" value="<?php echo $appt_nr; ?>">
 <input type="hidden" name="sid" value="<?php echo $sid; ?>">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
 <input type="hidden" name="mode" value="save">

@@ -103,12 +103,13 @@ require('./gui_bridge/default/gui_tabs_patreg.php');
  ?>
 
 <table border=0 cellpadding=0 cellspacing=0>
-  <tr bgcolor=#0000aa background="<?php echo $root_path; ?>gui/img/common/default/tableHeaderbg.gif">
-  <?php
-for($j=0;$j<sizeof($LDElements);$j++)
-		echo '
-			<td><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>&nbsp;&nbsp;'.$LDElements[$j].'</b></td>';
-	?>
+  <tr bgcolor="#00cc00">
+      <td background="<?php echo $root_path; ?>gui/img/common/default/tableheader_gr.gif">&nbsp;</td>
+      <td background="<?php echo $root_path; ?>gui/img/common/default/tableheader_gr.gif"><FONT  SIZE=-1  FACE="Arial" color="#006600"><b>&nbsp;&nbsp;<?php echo $LDLastName; ?></b></td>
+      <td background="<?php echo $root_path; ?>gui/img/common/default/tableheader_gr.gif"><FONT  SIZE=-1  FACE="Arial" color="#006600"><b>&nbsp;&nbsp;<?php echo $LDFirstName; ?></b></td>
+      <td background="<?php echo $root_path; ?>gui/img/common/default/tableheader_gr.gif"><FONT  SIZE=-1  FACE="Arial" color="#006600"><b>&nbsp;&nbsp;<?php echo $LDBday; ?></b></td>
+      <td background="<?php echo $root_path; ?>gui/img/common/default/tableheader_gr.gif"><FONT  SIZE=-1  FACE="Arial" color="#006600"><b>&nbsp;&nbsp;<?php echo $LDRegistrationNr; ?></b></td>
+      <td background="<?php echo $root_path; ?>gui/img/common/default/tableheader_gr.gif"><FONT  SIZE=-1  FACE="Arial" color="#006600"><b>&nbsp;&nbsp;<?php echo $LDRegDate; ?></b></td>
   </tr>
  <?php 
  /* Load common icons*/
@@ -130,7 +131,7 @@ for($j=0;$j<sizeof($LDElements);$j++)
     <td align=right><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.@formatDate2Local($result['date_reg'],$date_format).'</a></td>
   </tr>
   <tr bgcolor=#0000ff>
-  <td colspan=8 height=1><img src="../../gui/img/common/default/pixel.gif" border=0 width=1 height=1 align="absmiddle"></td>
+  <td colspan=8 height=1><img src="../../gui/img/common/default/pixel.gif" border=0 width=1 height=1></td>
   </tr>';
   }
  ?>

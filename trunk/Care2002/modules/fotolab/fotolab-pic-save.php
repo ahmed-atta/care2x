@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -14,13 +14,14 @@ define('LANG_FILE','specials.php');
 $local_user='ck_fotolab_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-/* Load date formatter */
+# Load date formatter
 include_once($root_path.'include/inc_date_format_functions.php');
 				
-
-if(!$patnum||!$firstname||!$lastname||!$bday||!$maxpic)
-	{header("Location:fotolab-dir-select.php?sid=$sid&lang=$lang&maxpic=$maxpic&nopatdata=1"); exit;}; 
-require_once($root_path.'include/inc_config_color.php');
+# If data incomplete go back to select page
+if(!$patnum||!$firstname||!$lastname||!$bday||!$maxpic)	{
+	header("Location:fotolab-dir-select.php?sid=$sid&lang=$lang&maxpic=$maxpic&nopatdata=1"); 
+	exit;
+}; 
 require($root_path.'global_conf/inc_remoteservers_conf.php');
 
 require_once($root_path.'include/care_api_classes/class_image.php');
@@ -107,12 +108,9 @@ if($maxpic)
 		   $shotdate='sdate'.$i;
 		   $shotnr='nr'.$i;//echo $shotnr."<br>";
 		   echo $picfile.' '.$shotdate.' '.$shotnr;
-		   
-		   //if(!$HTTP_POST_FILES[$picfile]['size'] || !is_uploaded_file($HTTP_POST_FILES[$picfile]['tmp_name'])) continue;
+		   # Check the image
 		   if(!$img->isValidUploadedImage($HTTP_POST_FILES[$picfile])) continue;
-		   
-	      //$picext=substr($HTTP_POST_FILES[$picfile]['name'],strrpos($HTTP_POST_FILES[$picfile]['name'],".")+1);
-		  
+		   # Get the file extension
 		  $picext=$img->UploadedImageMimeType();
 
 		   $picext=strtolower($picext);
@@ -123,24 +121,26 @@ if($maxpic)
 				$data['mime_type']=$picext;
 									
 				if($picnr=$img->saveImageData($data)){
-			   		//$picfilename[$i]=$picdir.'_'.formatDate2Std($$shotdate,$date_format).'_'.$$shotnr.'.'.$picext;
 			   		$picfilename[$i]=$picnr.'.'.$picext;
 		
 		      		echo $HTTP_POST_FILES[$picfile]['name'].' <img '.createComIcon($root_path,'fwd.gif','0','absmiddle').'> ';
 		       		if($disc_pix_mode)
 		       		{
-			      		if(!is_dir($d))	mkdir($d,0777); // if $d directory not exist create it with CHMOD 777
-			      		//$makenewname='copy("'.$HTTP_POST_FILES[$picfile]['tmp_name'].'","'.$d.'/'.$picfilename[$i].'");';
+			      		if(!is_dir($d)){
+							# if $d directory not exist create it with CHMOD 777
+							mkdir($d,0777); 
+							# Copy the trap files to this new directory
+							copy($root_path.'fotos/encounter/donotremove/index.htm',$d.'/index.htm');
+							copy($root_path.'fotos/encounter/donotremove/index.php',$d.'/index.php');
+						}
 						# Store to the newly created directory
 						$dir_path=$d.'/';
 		       		}
 		       		else
 		       		{
-			      		//$makenewname='copy("'.$HTTP_POST_FILES[$picfile]['tmp_name'].'","../cache/'.$picfilename[$i].'");';
 						# Store to cache directory
 						$dir_path=$root_path.'cache/';
 			   		}
-		       		//eval($makenewname);
 					# Save the uploaded image
 					$img->saveUploadedImage($HTTP_POST_FILES[$picfile],$dir_path,$picfilename[$i]);
 					
@@ -185,7 +185,6 @@ if(!$disc_pix_mode)
 				//while(list($x,$v)=each($filelist)) echo $v."<br>";
 				if(in_array(strtolower($picdir),$filelist))
 			 	{
-					//echo "dir found!<br>";
 					if(ftp_chdir($conn_id,"$picdir/"))	$cdok=1;
 					else
 					{

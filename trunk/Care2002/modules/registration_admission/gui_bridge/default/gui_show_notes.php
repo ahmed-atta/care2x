@@ -37,10 +37,14 @@ function popRecordHistory(table,pid) {
 	urlholder="./record_history.php<?php echo URL_REDIRECT_APPEND; ?>&table="+table+"&pid="+pid;
 	HISTWIN<?php echo $sid ?>=window.open(urlholder,"histwin<?php echo $sid ?>","menubar=no,width=400,height=550,resizable=yes,scrollbars=yes");
 }
+function popNotesDetails(n,t) {
+	urlholder="./show_notes_details.php<?php echo URL_REDIRECT_APPEND; ?>&nr="+n+"&title="+t+"&ln=<?php echo $name_last ?>&fn=<?php echo $name_first ?>&bd=<?php echo $date_birth ?>";
+	HISTWIN<?php echo $sid ?>=window.open(urlholder,"histwin<?php echo $sid ?>","menubar=no,width=400,height=550,resizable=yes,scrollbars=yes");
+}
 
+<?php require($root_path.'include/inc_checkdate_lang.php'); ?>
 -->
 </script>
-
 <script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
 <script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
@@ -64,12 +68,11 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 
 <tr>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php echo $page_title ?></STRONG> 
-<font size=+2>(
-<?php 
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+1  FACE="Arial"><STRONG> &nbsp;<?php echo $page_title ?></STRONG> 
+(<?php 
 if($parent_admit) echo ($HTTP_SESSION_VARS['sess_full_en']);
 	else echo ($HTTP_SESSION_VARS['sess_full_pid']);
-?>)</font></FONT>
+?>)</font>
 </td>
 
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
@@ -99,9 +102,28 @@ require('./gui_bridge/default/gui_tabs_patadmit.php');
 <FONT    SIZE=-1  FACE="Arial">
 
 <table border=0 cellspacing=1 cellpadding=0 width=100%>
+<?php
+# If encounter is already discharged, show warning
+if($parent_admit&&$is_discharged){
+?>
+
+  <tr>
+    <td bgcolor="red">&nbsp;<FONT    SIZE=2  FACE="verdana,Arial" color="#ffffff"><img <?php echo createComIcon($root_path,'warn.gif','0','absmiddle'); ?>> 
+	<b>
+		<?php 
+		if($current_encounter) echo $LDEncounterClosed;
+			else echo $LDPatientIsDischarged; 
+	?>
+	</b></font></td>
+    <td>&nbsp;</td>
+  </tr>
+
+<?php
+}
+?>
 
 <tr bgcolor="#ffffff">
-<td colspan=3 valign="top">
+<td  valign="top">
 
 <table border=0 width=100% cellspacing=1>
 <tr>
@@ -118,7 +140,7 @@ if($parent_admit) echo ($HTTP_SESSION_VARS['sess_full_en']) ;
 ?>
 </td>
 
-<td valign="top" rowspan=8 align="center" bgcolor="#ffffee" ><FONT SIZE=-1  FACE="Arial"><img <?php echo $img_source; ?> width=137>
+<td valign="top" rowspan=8 align="center" bgcolor="#ffffee" ><FONT SIZE=-1  FACE="Arial"><img <?php echo $img_source; ?>>
 </td>
 </tr>
 
@@ -145,28 +167,27 @@ if($parent_admit) echo ($HTTP_SESSION_VARS['sess_full_en']) ;
 </tr>
 
 <?php
-
-if (!$GLOBAL_CONFIG['person_name_2_hide'])
+if (!$GLOBAL_CONFIG['person_name_2_hide']&&$name_2)
 {
 createTR($LDName2,$name_2);
 }
 
-if (!$GLOBAL_CONFIG['person_name_3_hide'])
+if (!$GLOBAL_CONFIG['person_name_3_hide']&&$name_3)
 {
 createTR( $LDName3,$name_3);
 }
 
-if (!$GLOBAL_CONFIG['person_name_middle_hide'])
+if (!$GLOBAL_CONFIG['person_name_middle_hide']&&$name_middle)
 {
 createTR($LDNameMid,$name_middle);
 }
 
-if (!$GLOBAL_CONFIG['person_name_maiden_hide'])
+if (!$GLOBAL_CONFIG['person_name_maiden_hide']&&$name_maiden)
 {
 createTR($LDNameMaiden,$name_maiden);
 }
 
-if (!$GLOBAL_CONFIG['person_name_others_hide'])
+if (!$GLOBAL_CONFIG['person_name_others_hide']&&$name_others)
 {
 createTR($LDNameOthers,$name_others);
 }
@@ -202,7 +223,13 @@ if($mode=='show'){
     <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $subtitle; ?></td>
     <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDetails; ?></td>
     <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDBy; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDEncounterNr; ?></td>
+    <?php 
+	if(!$parent_admit){
+	?>
+	<td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDEncounterNr; ?></td>
+  <?php
+  }
+  ?>
   </tr>
 <?php
 $toggle=0;
@@ -223,18 +250,17 @@ while($row=$result->FetchRow()){
 		if(!empty($row['short_notes'])) echo '[ '.hilite($row['short_notes']).' ]';
 	?>
 	</td>
-    <td align="center"><?php if (strlen($row['notes']) > $GLOBAL_CONFIG['notes_preview_maxlen']) echo '<a href="#"><img '.createComIcon($root_path,'info3.gif','0').'></a>'; ?></td>
+    <td align="center"><?php if (strlen($row['notes']) > $GLOBAL_CONFIG['notes_preview_maxlen']) echo '<a href="javascript:popNotesDetails(\''.$row['nr'].'\',\''.strtr($subtitle,"' ","´+").'\')"><img '.createComIcon($root_path,'info3.gif','0').'></a>'; ?></td>
     <td><FONT SIZE=-1  FACE="Arial"><?php if($row['personell_name']) echo $row['personell_name']; ?></td>
-    <td><FONT SIZE=-1  FACE="Arial">
-	<?php 
-		switch($row['encounter_class_nr'])
-		{
-			case 1:  echo ($row['encounter_nr']+$GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-						break;
-			case 2:  echo ($row['encounter_nr']+$GLOBAL_CONFIG['patient_outpatient_nr_adder']);
-						break;
-		}
-	?></td>
+    <?php 
+	if(!$parent_admit){
+	?>
+	<td><FONT SIZE=-1  FACE="Arial">
+	<a href="aufnahme_daten_zeigen.php<?php echo URL_APPEND ?>&encounter_nr=<?php echo $row['encounter_nr']; ?>&origin=patreg_reg"><?php echo $row['encounter_nr'];	?></a>
+	</td>
+  <?php
+  }
+  ?>
   </tr>
 
 <?php
@@ -307,7 +333,9 @@ while($row=$result->FetchRow()){
 } 
 ?>
 <?php
-if($parent_admit) {
+# Type nr 3 = discharge summary/notes
+# Type nr 99 = auxilliary notes
+if($parent_admit&&(!$is_discharged||$type_nr==3||$type_nr==99)) {
 ?>
 <p>
 <img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle'); ?>>
@@ -318,7 +346,11 @@ if($parent_admit) {
 }
 ?>
 <img <?php echo createComIcon($root_path,'l-arrowgrnlrg.gif','0','absmiddle'); ?>>
-<a href="<?php echo $returnfile.URL_APPEND.'&encounter_nr='.$HTTP_SESSION_VARS['sess_full_en'].'&target='.$target.'&mode=show&type_nr='.$type_nr; ?>"> 
+<a href="<?php 
+if($parent_admit) $buf='&encounter_nr='.$HTTP_SESSION_VARS['sess_full_en'];
+	else $buf='&pid='.$HTTP_SESSION_VARS['sess_full_pid'];
+echo $returnfile.URL_APPEND.$buf.'&target='.$target.'&mode=show&type_nr='.$type_nr; 
+?>"> 
 <?php echo $LDBackToOptions;  ?>
 </a>
 
@@ -339,7 +371,7 @@ function Spacer()
 <?php
 */}
 ?>
-<img <?php echo createComIcon($root_path,'angle_left.gif',0); ?>>
+<img <?php echo createComIcon($root_path,'angle_left_s.gif',0); ?>>
 <br>
 <FONT face="Verdana,Helvetica,Arial" size=2 color="#cc0000">
 <?php echo "$LDNotes $LDAndSym $LDReports $LDTypes" ?>
@@ -356,7 +388,14 @@ function Spacer()
 while(list($x,$v)=each($types)){
 ?>				  
 				  
-               <TR bgColor=#eeeeee> <td align=center><img <?php echo createComIcon($root_path,'post_discussion.gif','0') ?>></td>
+               <TR bgColor=#eeeeee> <td align=center>
+			   <img <?php 
+						   	# Type nr 3 = discharge summary/notes
+							# Type nr 99 = auxilliary notes
+			   				if($parent_admit&&(!$is_discharged||$v['nr']==3||$v['nr']==99)) echo createComIcon($root_path,'comments.gif','0');
+			   					else  echo createComIcon($root_path,'docu_unrd.gif','0');
+						?>>
+			   </td>
                 <TD vAlign=top ><nobr><FONT 
                   face="Verdana,Helvetica,Arial" size=2>
 				 <a href="show_notes.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&target=<?php echo $target ?>&type_nr=<?php echo $v['nr'] ?>">
@@ -391,7 +430,9 @@ if($parent_admit) {
 	include('./include/bottom_controls_registration_options.inc.php');
 }
 ?>
-
+<a href="
+<?php echo $returnfile.URL_APPEND.$buf.'&target='.$target.'&mode=show&type_nr='.$type_nr; ?>
+"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
 <p>
 </ul>
 
@@ -400,20 +441,6 @@ if($parent_admit) {
 </td>
 </tr>
 </table>        
-<p>
-<ul>
-<FONT    SIZE=2  FACE="Arial">
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="patient_register_search.php<?php echo URL_APPEND; ?>"><?php echo $LDPatientSearch ?></a><br>
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="patient_register_archive.php<?php echo URL_APPEND; ?>&newdata=1&from=entry"><?php echo $LDArchive ?></a><br>
-
-<p>
-<a href="
-<?php if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) echo 'startframe.php'.URL_APPEND;
-	else echo $breakfile.URL_APPEND;
-	echo ;
-?>
-"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
-</ul>
 <p>
 
 <?php
