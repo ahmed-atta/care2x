@@ -7,8 +7,8 @@ class Template{
 
 	var $filename;
 	var $template;
-	var $default_path='gui/html_template/';
-	var $default_theme='default';
+	var $default_path='gui/html_template/'; // Default template path, modify if you placed the template somewhere else
+	var $default_theme='default'; // Default template theme
 	var $tp_dirs=array();
 	var $tp_root;
 	var $tp_path;
@@ -88,7 +88,7 @@ class Template{
 			$tpsrc=$this->tp_path.$this->tp_theme.'/';
 			if(file_exists($tpsrc.$tp_fn)) $this->filename=$tpsrc.$tp_fn;
 				else $this->filename=$this->tp_root.$this->default_path.$this->default_theme.'/'.$tp_fn;
-			$fn=fopen($this->filename,"r");
+			$fn=fopen($this->filename,'r');
 			$this->template=fread($fn,filesize($this->filename));
 			fclose($fn);
 			$this->template=str_replace('\\','\\\\',$this->template);
