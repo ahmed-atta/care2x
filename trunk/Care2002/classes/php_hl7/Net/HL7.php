@@ -36,8 +36,8 @@
  * @example    observer_upload.php          An example of Net_FTP_Observer implementation.
  */
 
-class Net_HL7
-{
+//class Net_HL7
+//{
   /**
    * Separator for segments within a message. Usually this is \015.
    *
@@ -45,51 +45,51 @@ class Net_HL7
    * @since  0.10
    * @access public
    */
-  static var $_Net_HL7_SEGMENT_SEPARATOR = "\015";
+  $GLOBALS["_Net_HL7_SEGMENT_SEPARATOR"] = "\015";
 
 
   /**
    * Field separator for this message. In general '|' is used.
    *
    */
-  static var $_Net_HL7_FIELD_SEPARATOR = "|";
+  $_Net_HL7_FIELD_SEPARATOR = "|";
 
   /** 
    * HL7 NULL field, defaults to "". This is therefore different from
    * not setting the fields at all.
    */
-  static var $_Net_HL7_NULL = "\"\"";
+  $_Net_HL7_NULL = "\"\"";
 
 
   /**
    * Separator used in fields supporting components. Usually this is
    * the '^' character.
    */
-  static var $_Net_HL7_COMPONENT_SEPARATOR    = "^";
+  $_Net_HL7_COMPONENT_SEPARATOR    = "^";
 
 
   /**
    * Separator for fields that may be repeated. Defaults to '~'.
    */
-  static var $_Net_HL7_REPETITION_SEPARATOR   = "~";
+  $_Net_HL7_REPETITION_SEPARATOR   = "~";
 
 
   /**
    * Escape character for escaping special characters. Defaults to '\'.
    */
-  static var $_Net_HL7_ESCAPE_CHARACTER       = "\\";
+  $_Net_HL7_ESCAPE_CHARACTER       = "\\";
 
 
   /**
    * Separator used in fields supporting subcomponents. Usually this
    * is the '&' character.
    */
-  static var $_Net_HL7_SUBCOMPONENT_SEPARATOR = "&";
+  $_Net_HL7_SUBCOMPONENT_SEPARATOR = "&";
 
 
   /**
    * This is the version used in the MSH(12) field. Defaults to 2.2.
    */
-  static var $_Net_HL7_HL7_VERSION            = "2.2";
-}
+  $_Net_HL7_HL7_VERSION            = "2.2";
+//}
 ?>
