@@ -1,6 +1,7 @@
 <?php
 /* These are functions for image routines */
 
+/* Get the control buttons theme */
 if(!isset($GLOBAL_CONFIG)||!is_array($GLOBAL_CONFIG)) $GLOBAL_CONFIG=array();
 if(!isset($GLOBAL_CONFIG['theme_control_buttons'])){	
 	include_once($root_path.'include/care_api_classes/class_globalconfig.php');
@@ -8,14 +9,27 @@ if(!isset($GLOBAL_CONFIG['theme_control_buttons'])){
 	$gc->getConfig('theme_control_buttons');
 }
 
-
 /* Initialize themes and paths */
 //$theme_control='blue_aqua'; // Temporary initial theme
 //$theme_control='aqua'; // Temporary initial theme
 $theme_control=$GLOBAL_CONFIG['theme_control_buttons']; 
 $theme_com_icon='default'; // Temporary initial theme
+//$theme_logo='default'; 
+$theme_logo='lopo';  // The logo theme
+
+/* Set the mascot theme */
+if(!isset($cfg['mascot'])||empty($cfg['mascot'])){
+	$gc->getConfig('theme_mascot');
+	if(!isset($GLOBAL_CONFIG['theme_mascot'])||empty($GLOBAL_CONFIG['theme_mascot'])){
+		$theme_mascot='default'; // this is the last default theme if the global item is not available, change this to the desired mascot theme
+	}else{
+		$theme_mascot=$GLOBAL_CONFIG['theme_mascot'];
+	}
+}else{
+		$theme_mascot=$cfg['mascot'];
+}
 //$theme_mascot='none';
-$theme_mascot='default';
+//$theme_mascot='default';
 $theme_skin='default';
 
 $img_path_control='gui/img/control/'.$theme_control.'/';  // the path for language dependent control buttons
@@ -140,6 +154,20 @@ function createBgSkin($froot,$fn)
 	return $picfile_path;
 }
    
-   
-   
+/**
+*  createLogo creates a logo image 
+*/ 
+function createLogo($froot, $fn, $border='', $align=''){
+   global $lang, $theme_logo, $img_path_com_icon;
+	# save the orig icon path
+	$icon_path=$img_path_com_icon;
+	# set the logo path
+	$img_path_com_icon='gui/img/logos/'.$theme_logo.'/'; # the path for non-language dependent logo
+	if(!file_exists($froot.$img_path_com_icon.$fn)) $img_path_com_icon='gui/img/logos/default/';
+	# create the icon/logo
+	$img_src=createComIcon($froot,$fn,$border,$align);
+	# reset the orig icon path
+	$img_path_com_icon=$icon_path; 
+	return $img_src;
+}
 ?>
