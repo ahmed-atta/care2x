@@ -15,4 +15,4 @@ anglais).   Pour plus d'investigation, veuillez-vous contacter
 [ <a href="<?php echo $root_path ?>language/fr/fr_privacy.htm" target="pp">Notre politique de discr&eacute;tion</a> ]
 [ <a href="javascript:openCreditsWindow()"> Cr&eacute;dits </a> ]<br></font>
 <br>
- </font> </font> 
+ </font> </font>
