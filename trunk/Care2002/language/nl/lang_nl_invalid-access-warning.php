@@ -8,7 +8,7 @@ require_once($root_path.'include/inc_img_fx.php');
 <HTML>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
- <TITLE>Waarschuwing voor ongeldige toegangspoging</TITLE>
+ <TITLE>ONGELDIGE TOEGANG</TITLE>
 </HEAD>
 
 <BODY bgcolor="#ffffff">
@@ -16,7 +16,7 @@ require_once($root_path.'include/inc_img_fx.php');
 <table width=100% border=1>
 <tr>
 <td bgcolor="navy">
-<FONT  COLOR="white"  SIZE=+3  FACE="Arial"><STRONG>&nbsp;Onbevoegde toegangspoging tot pagina</STRONG></FONT>
+<FONT  COLOR="white"  SIZE=+3  FACE="Arial"><STRONG>&nbsp;Geen toegang tot pagina</STRONG></FONT>
 </td>
 </tr>
 <tr>
@@ -25,7 +25,7 @@ require_once($root_path.'include/inc_img_fx.php');
 
 <center>
 <FONT    SIZE=3 color=red  FACE="Arial">
-<b>U heeft geen toegansrechten tot dit document!</b></font><p>
+<b>U heeft geen toegangsrechten om deze pagina te openen!</b></font><p>
 <FORM >
 <INPUT type="button"  value=" OK "  onClick="<?php if ($mode=="close") print 'window.close()'; else print 'history.back()'; ?>"></FORM>
 <p>
@@ -34,22 +34,22 @@ require_once($root_path.'include/inc_img_fx.php');
 <p>
 <ul>
 <font size=3 face="verdana,arial">
-Mogelijke oorzaken van dit probleem:
+Mogelijke oorzaak van dit probleem:
 </FONT><p>
 <font size=2 face="verdana,arial">
 <img <?php echo createComIcon('../../','achtung.gif') ?>>
-U heeft mogelijk de "Vorige pagina" en "Volgende pagine" functie van uw browser gebruikt. Vermijdt het gebruik van deze buttons.<br>
+U heeft de standaard "Vorige" of "Volgende" knoppen gebruikt van uw browser. Probeer deze knoppen niet te gebruiken.<br>
 <img <?php echo createComIcon('../../','achtung.gif') ?>>
-U heeft mogelijk een cookie geweigerd. Het goed functioneren van het programma  is afhankelijk van cookies . Accepteer daarom a.u.b. de cookies.
+U browser ONDERSTEUND geen cookies. Het programma gebruik cookies. Controleer de versie van uw browser.
 <br>
 <img <?php echo createComIcon('../../','achtung.gif') ?>>
-U browser accepteert mogelijk geen cookies. Configureer uw browser zo dat cookies van deze website automatisch geaccepteerd worden.
+U browser ACCEPTEERD geen cookies. Het programma gebruik cookies. Controleer de instellingen van uw browser.
 <br>
 <img <?php echo createComIcon('../../','achtung.gif') ?>>
-Uw browser kan mogelijk geen javascript uitvoeren of javascript is uitgeschakeld. Sta a.u.b. het uitvoeren van javascript  door uw browser toe.
+Uw browser accepteerd geen javascript. Controleer de instellingen.
 <br>
 <img <?php echo createComIcon('../../','achtung.gif') ?>>
-Soms is er sprake van een fout in het datatransport. U kunt dit,  door te klikken op de "Opnieuw laden" button van uw browser, corrigeren.
+Er is een probleem met de datatransfer. Klik op vernieuwen om dit op te lossen
 <p>
 </FONT>
 <p>

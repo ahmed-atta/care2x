@@ -1,45 +1,46 @@
 <?php
-
-$LDHome='Beginpagina';
-$LDPatient='Bewoners';
-$LDAdmission='Opname';
-$LDAmbulatory='Poliklinisch';
-$LDMedocs='Medische documenten';
-$LDDoctors='Dokters';
+$LDHome='Home';
+$LDPatient='Patiënt';
+$LDAdmission='Aanmelding';
+$LDAmbulatory='Ambulante zorg';
+$LDMedocs='Medocs';
+$LDDoctors='Specialisten';
 $LDNursing='Verpleging';
-$LDOR='Operatie Kamers';
-$LDLabs='Labaratorium';
+$LDOR='OR';
+$LDLabs='Laboratoria';
 $LDRadiology='Radiologie';
 $LDPharmacy='Apotheek';
-$LDMedDepot='Magazijn';
-$LDDirectory='Telefoonboek';
-$LDTechSupport='Technische Dienst';
+$LDMedDepot='Medisch depot';
+$LDDirectory='Gegevensbank';
+$LDTechSupport='Tech Support';
 $LDEDP='EDP';
-$LDIntraEmail='Intranet E-mail';
-$LDInterEmail='Internet E-mail';
-$LDSpecials='Speciale functies';
-$LDLogin='Inloggen';
+$LDIntraEmail='Intranet Email';
+$LDInterEmail='Internet Email';
+$LDSpecials='Speciale Tools';
+$LDLogin='Login';
 $LDLogout='Logout';
-$LDAppointments='Afspraken';
+$LDAppointments='Afpspraken';
 
 $VersionChgTarget='_top';
 $LDLanguage='Taal';
-$LDPlsWaitInit='Wacht a.u.b. een moment. Het initialisatie proces wordt uitgevoerd....';
+$LDPlsWaitInit='Een moment aub. Initialisatie is bezig met opstarten....';
 
-$LDChange='Wijzig';
+$LDChange='Update';
 /* 2003-04-27 EL */
-$LDBrazilian='Braziliaans-Pt.';
+$LDBrazilian='Brazilian';
 $LDCzech='Czech';
 $LDEnglish='English';
-$LDFrench='Franse';
-$LDGerman='Duitse';
-$LDIndonesian='Indonesische';
-$LDItalian='Italiaanse';
-$LDNorwegian='Noors';
+$LDFrench='French';
+$LDGerman='German';
+$LDIndonesian='Indonesian';
+$LDItalian='Italian';
+$LDNorwegian='Norwegian';
 $LDPolish='Polish';
-$LDPortuguese='Portugese';
-$LDSpanish='Spaanse';
+$LDPortuguese='Portuguese';
+$LDSpanish='Spanish';
 /* 2003-04-28 El */
-$LDDutch='Nederlands';
+$LDDutch='Dutch';
+# 2003-08-04 EL
 $LDPerson='Persoon';
+
 ?>

@@ -2,7 +2,6 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
-require_once($root_path.'include/inc_vars_resolve.php');
 ?>
 <html>
 <head>
@@ -14,271 +13,301 @@ require_once($root_path.'include/inc_vars_resolve.php');
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
         <TR>
-          <TD><IMG height=15 
-            src="../../gui/img/common/default/pixel.gif" 
-            width=5 border=0></TD></TR>
-        <TR>
-          <TD vAlign=top><font face="verdana,arial" size=2>
-			<b>Erik de Wild (NL) is april 2003 begonnen met de Nederlandse vertaling van Care2002. </b>
-  
-    <p>
-Hij werkt als ICT-adviseur bij een middelgrote gemeente en is daarnaast zelfstandig opensource consultant.</b>
-	
-			<P><a href="mailto:erik.dewild@home.nl"><u>Contact leggen met Erik de Wild kan hier.</u></a>
-</TD></TR></TBODY></TABLE>
-
-<hr>
-<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
-        <TBODY>
-        <TR>
-
-          <TD vAlign=top><font face="verdana,arial" size=2>
-
-			<P><img src="../../fotos/credits/are_kristensen.jpg"  border=0  width=135 align=right vspace=10>
-
-			<b>Are Kristensen (NO) verzorgde de Noors vertaling van  Care 2002.</b>
-
-			<p>
-
-			<P><a href="mailto:arek@mail.amenta.no"><u>Contact leggen met Are Kristensen kan hier.</u></a>
-
-</TD></TR></TBODY></TABLE>
-
-<hr>
-<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
-        <TBODY>
-        <TR>
-          <TD><IMG height=15 
-            src="../../gui/img/common/default/pixel.gif" 
-            width=5 border=0></TD></TR>
-        <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/elpidio_latorilla_3.jpg" border=0  align=right vspace=10>
-			<b>De eerste beta versie van CARE 2002 is gemaakt door Elpidio Latorilla:</b>
+			<b>De eerste beta versie van Care2x is ontwikkeld door Elpidio Latorilla:</b>
 			<p>
-			Beroepen: <br>Programmeur, OK assistent, electronica en telecommunicatie deskundige
+			Kennisgebied: <br>Programeur, verpleger bij chirurgie, Electronica & telecommunicatie techneut
 			<p>
-			Aandachtsgebieden:<br>C, C++, PHP, Javascript, SQL, TCL/TK, HTML, Perl, ASP, Java
-			<P><a 
-href="mailto:elpidio@latorilla.com"><u>Contact leggen met Elpidio Latorilla kan hier.</u></a>
+			Intressante gebieden: <br>C, C++, PHP, Javascript, SQL, TCL/TK, HTML, Perl, ASP, Java
+			<P><a href="mailto:elpidio@latorilla.com"><u>Contact opnemen met Elpidio Latorilla.</u></a>
 </TD></TR></TBODY></TABLE>
+<hr>
+<table cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <tbody>
+        <tr>
+          <td vAlign=top><font face="verdana,arial" size=2>
+			<p><img src="../../fotos/credits/lopo_l_almeida.jpg"  
+                                width=135 height=170 border=0  align=right vspace=10>
+			<b>Lopo Lencastre de Almeida (PT)</b> is one of the most productive developers. 
+			Some of his contributions to the project are:
+                        <p><font size=1>
+			Marketing, Promotion and Public Relations<br>
+			Web and Logo design<br>
+			Implementation &amp; maintenance of several web tools (Bugtracker, Forum, FAQ, etc.)<br>
+			Implementation &amp; maintenance of the new web site (almost done)<br>
+			Forum moderation and administration<br>
+			Code finder/digger<br>
+			Consultations on PHP<br>
+			Advises on security<br>
+			Abstraction Layers Advisor (DB, Template, etc.)<br>
+			Debugging<br>
+			Ideas, discussions, hints, tips, etc.
+			</font><p>
+			Lopo L. de Almeida was born in Angola in 1966. He is working in the computer sector - ranging from commercial automation 
+			to industrial automation - as a software developer and interface designer for more than 16 years now . During the last 5 years he 
+			worked mostly  in web development and company management. He is the CEO/CTO of HumanEasy - a 
+			partner of Care2002 project in charge of its <b>Public Relations and Marketing Management</b>.<br>
+			He is also involved in many other GNU/GPL projects; some of them are in use at Care2x's site.<br>
+			<p><a href="http://www.humaneasy.com" target="_blank"><u>Lopo L. de Almeida can be contacted here.</u></a>
+</td></tr></tbody></table>
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
-        <TR>
-          <TD><IMG height=15 
-            src="../../gui/img/common/default/pixel.gif" 
-            width=5 border=0></TD></TR>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/giuseppe_scarpi.jpg"  border=0  width=135 height=170 align=right vspace=10>
-			<b>Giuseppe Scarpi (IT) verzorgde de Italiaanse vertaling van  Care 2002.</b>
+			<b>Giuseppe Scarpi (IT) translated Care 2002 to italian.</b>
 			<p>
-Giuseppe Scarpi is 35 jaar geleden in Rome geboren. 
- 
-			<p>Hij heeft een graad in de electrotechniek en heeft bij verschillende bedrijven in de bio-medische sector gewerkt, waar hij  de relatie tussen de medische en informatica werelden heeft leren kennen .<br>
-<p>
-Hij gebruikt en waardeerd zowel Linux als Windows, "<i>omdat ze  het resultaat zijn van grote menselijke inspanningen en daarom gerespecteerd moeten worden"</i>.<p>
-</i>
-Hij besloot actief te worden in de opensource gemeenschap omdat: <br><i>"Deze ideale constellatie alleen kan voortbestaan als zij perfect in balans is. Het geven en nemen dient met elkaar in verhouding te staan"</i>
-<P><a href="mailto:kalbun@inwind.it"><u>Contact leggen met Giuseppe Scarpi kan hier.</u></a>			
+			Giuseppe Scarpi was born in Rome, Italy, 35 years ago. 
+			<p>He has a degree in Electronic Engineering and has worked for several companies in the biomedical sector, 
+			where he developed an understanding about the relationships between medical and informatics worlds.<br>
+He uses and appreciates both Linux and Windows, "<i>as both are the result of a great human work that must be respected</i>".<p>
+He decided to actively join open source because: <br><i>"Such an ideal world can survive only if perfectly balanced. If you take something,
+ you should also give back in proportion."</i>
 
+			<P><a href="mailto:kalbun@inwind.it"><u>Giuseppe Scarpi can be contacted here.</u></a>
 </TD></TR></TBODY></TABLE>
 
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
-        <TR>
-          <TD><IMG height=15 
-            src="../../gui/img/common/default/pixel.gif" 
-            width=5 border=0></TD></TR>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/gabriele_cicala.jpg"  border=0  align=right vspace=10>
-			<b> Gabriele Cicala (IT) verzorgde het grootste deel van de Italiaanse vertaling van de www.care2x.com website.</b>
+			<b>Gabriele Cicala (IT) translated most of the the www.care2x.com website to italian.</b>
 			<p>
-			Gabriela Cicala is in 1970 in het zuiden van Italia, Calabria, in de stad Rossanno geboren. Hij heeft een graad gehaald in telecommunicatie van het Politechnico di Torrino. Hij werkt op dit moment als consultant voor een ICT bedrijf. <p>
-Sinds hij kennis heeft gemaakt met Linux en de open source omgeving, is hij erg geinteresseerd in elk soort project van deze beweging. Ondanks het feit dat hij niet in de medische sector werkt besloot hij om zich aan te sluiten bij het Care2002 project omdat hij in dezelfde dingen gelooft als de starter en ondersteuners van het project.
-	
-			<P><a href=="mailto:gabcicala@tiscali.it"><u>Contact leggen met Gabriele Cicala kan hier.</u></a>
+			Gabriele Cicala was born in Rossano, in Calabria southern Italy, in 1970.
+He has obtained a degree in Telecommunications Engineering from the Politecnico
+di Torino. Currently, he is working as a consultant for an informatics company. <p>Since
+he has known Linux and the
+open-source environment, he is very interested in every kind of project
+of this movement. Despite the
+fact that he is neither working in medical nor in health sector, he decided
+to join the Care project because
+he believes in the same things that the Care's creator and contributors
+believe.
+			
+			<P><a href="mailto:gabcicala@tiscali.it"><u>Gabriele Cicala can be contacted here.</u></a>
 </TD></TR></TBODY></TABLE>
 
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
-        <TR>
-          <TD><IMG height=15 
-            src="../../gui/img/common/default/pixel.gif" 
-            width=5 border=0></TD></TR>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/daniel_zilli.jpg"  border=0  align=right vspace=10>
-			<b> Daniel Zilli (BR) verzorgde de Braziliaans-Portugese vertaling van Care 2002 en de  www.care2x.com website.</b>
+			<b>Daniel Zilli (BR) translated Care 2002 and www.care2x.com website to  brazilian-portuguese.</b>
 			<p>
-			Daniel is een aardige jongen die er van houdt een gelukkig leven te hebben. Hij heeft veel plezier met computers, voetbal en goede muziek.
-Hij  houdt van computers en heeft er 10 jaar ervaring mee. Daniel is eigenaar van een bedrijf dat producten maakt voor het wetenschappelijk onderwijs, open source software en een lokale Linux distributie.
-			<P><a href="mailto:danielz@cco.matrix.com.br"><u>Contact leggen met Daniel Zilli kan hier.</u></a>
+			Daniel is a nice guy who loves to live a happy life. He likes computers, football, and good music.
+He  loves computers and has 10 years of computer experience it.
+Daniel owns a company that produces computer
+science education products, open source software and local  linux distro.
+			<P><a href="mailto:danielz@cco.matrix.com.br"><u>Daniel Zilli can be contacted here.</u></a>
+</TD></TR></TBODY></TABLE>
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+            <P><img src="../../fotos/credits/muhammad_panji.png"  border=0  align=right vspace=10>
+			<b>Muhammad Panji (ID) cotranslated Care 2002 and www.care2x.com website to indonesian.</b>
+			
+			<P><a href="mailto:sumodirjo@users.sourceforge.net"><u>Muhammad Panji can be contacted here.</u></a>
 </TD></TR></TBODY></TABLE>
 
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
-        <TR>
-          <TD><IMG height=15 
-            src="../../gui/img/common/default/pixel.gif" 
-            width=5 border=0></TD></TR>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/agus_mr.jpg"  border=0  align=right vspace=10>
-			<b> Agus Muhammad Ramdan (ID) verzorgde de Indonesische vertaling van Care 2002 en de www.care2x.com website..</b>
+			<b>Agus Muhammad Ramdan (ID) translated Care 2002 and www.care2x.com website to indonesian.</b>
 			
-			<P><a href="mailto:agusmr@mweb.co.id"><u> Contact leggen met Agus M. Ramdan kan hier.</u></a>
+			<P><a href="mailto:agusmr@mweb.co.id"><u>Agus M. Ramdan can be contacted here.</u></a>
 </TD></TR></TBODY></TABLE>
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
         <TR>
-          <TD><IMG height=15 
-            src="../../gui/img/common/default/pixel.gif" 
-            width=5 border=0></TD></TR>
-        <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-			<P><img src="../../fotos/credits/thomas_wiedmann.jpg"   border=0  align=right vspace=10>
-			<b> Thomas Wiedmann (Duitsland) heeft bijgedragen aan:</b>
+			<P><img src="../../fotos/credits/thomas_wiedmann.jpg"  border=0  align=right vspace=10>
+			<b>Thomas Wiedmann (DE) is the most active debugger</b>
 			<p><font size=1>
-			Volledig testen <br>
-			Oplossen van fouten<br>
-			Implementatie van het 'optimistic locking' concept<br>
-			Database optimalisatie<br>
-			Het vaststellen van de correcte werking van de data en nummer scripts<p>
+			Complete testing <br>
+			Debugging<br>
+			DB 'optimistic locking' concept<br>
+			DB optimizations<br>
+			Validation scripts for date and numbers<p>
 			</font>
-		Thomas Wiedmann is sinds lange tijd sofware ontwikkelaar en werkt in de Duitse stad Stuttgard. Sinds 7 jaar werkt hij met Gupta Team Developer en IBM DB2  en is daarnaast ook  IBM Certified UDB DB2 Administrator. Lees meer over DB2 in zijn boek book "DB2" ISBN 3-932311-80-9. Hij schrijft voor TOOLBOX (www.toolbox-mag.de),
-			een Duits blad voor ontwikkelaars.
-
-			<P><a href="mailto:tho123@users.sourceforge.net"><u>Contact leggen met Thomas Wiedmann kan hier.</u></a>
-</TD></TR></TBODY></TABLE>
-<hr>
-<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
-        <TBODY>
-        <TR>
-          <TD><IMG height=15 
-            src="../../gui/img/common/default/pixel.gif" 
-            width=5 border=0></TD></TR>
-        <TR>
-          <TD vAlign=top><font face="verdana,arial" size=2>
-			<P><img src="../../gui/img/common/default/pixel.gif"   border=0  width=135 align=right vspace=10>
-			<b>Matej Hausenblas (FR) verzorgde de Franse vertaling van Care20002</b>
-			<p>
-Matej Hausenblas is in 1981 geboren in de Tsjechische stad Praag Praag.
-Hij is student wiskunde/informatica en heeft na een aantal jaren gebruik van Windows beslist om zich, als waardige uitdaging, te verdiepen in Linux. Na enige tijd besloot hij om in open source projecten deel te gaan nemen om zijn vaardigheden te verbeteren, iets terug te geven en om er achter te komen hoe het werkt in dit soort gemeenschappen.
-
-			<P><a href="mailto:matejh@users.sourceforge.net"><u>Contact leggen met Matej Hausenblas kan hier.</u></a>
-<hr>
-<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
-        <TBODY>
-        <TR>
-          <TD><IMG height=15 
-            src="../../gui/img/common/default/pixel.gif" 
-            width=5 border=0></TD></TR>
-        <TR>
-          <TD vAlign=top><font face="verdana,arial" size=2>
-			<P><img src="../../gui/img/common/default/pixel.gif"   border=0  width=135 align=right vspace=10>
-			<b> Nino Novak uit Duisland heeft de Duitse versie www.care2x.com aangepast.</b>
-			<p>
-	Nino Novak is een arme eenzame cowby. Hij schiet sneller dan hij zelf denkt maar soms wat duister.  Hij houdt van de echte goeroes en  het voeren van diepgaande discussies met hen. Wil bouwen aan een betere wereld. Enige wetenschappelijke en medische achtergrond (dus is hij mee gaan werken aan het care2x project).
+			Thomas Wiedmann is a long time software developer and works in Stuttgart, Germany. He has
+			been working with Gupta Team Developer and IBM DB2 since 7 years and is an
+			IBM Certified UDB DB2 Administrator, too. Read more about DB2 in his book
+			"DB2" ISBN 3-932311-80-9. He is an author for TOOLBOX (www.toolbox-mag.de),
+			a German developer magazine.
 		
 
-			<P><a href="mailto:nino@kflog.org"><u>Contact leggen met Nino Novak kan hier.</u></a>
+			<P><a href="mailto:tho123@users.sourceforge.net"><u>Thomas Wiedmann can be contacted here.</u></a>
 </TD></TR></TBODY></TABLE>
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
         <TR>
-          <TD><IMG height=15 
-            src="../../gui/img/common/default/pixel.gif" 
-            width=5 border=0></TD></TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+			<P><img src="../../fotos/credits/hinostroza.jpg"  border=0  width=135 align=right vspace=10>
+			<b>Dr. med Daniel Hinostroza C. (EC)</b><br>
+			Spanish translations
+			<p><font size=1>
+			Author and coauthor of numerous medical textbooks<br>
+5 years as Director of the Grünenthal Medical Informatics Center, Quito
+- Ecuador <br>
+Initial studies in Medical Informatics at Stanford University<br>
+2 years as Multimedia Project Leader of Grünenthal GmbH, Aachen, Germany</font><p>
+Official translator for phpMyAdmin (Spanish)<br>
+Webmaster of the largest Ecuadorian medical website initiative
+(www.cmpichincha.med.ec) and the Ecuadorian Society of Dermatology
+(www.sociedadecuatorianadedermatologia.org.ec).<br>
+Website: www.cerebroperiferico.com
+			<P><a href="mailto:postmaster@cerebroperiferico.com"><u>Dr. Daniel Hinostroza can be contacted here.</u></a>
+</TD></TR></TBODY></TABLE>
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-			<P><img src="../../gui/img/common/default/pixel.gif"  border=0  width=135 align=right vspace=10>
-			<b>
-Patxi Gomaríz (ES) verzorgde de spaanse vertaling.</b>
+			<P><img src="../../fotos/credits/noel_villamor.jpg"  border=0  align=right vspace=10>
+			<b>Noel R. Villamor (PH)</b><br>
+			Module programming
+			<p>Finished the laboratory test plotting module tackling some tough mathematical problems.
+			<P><a href="mailto:noelrv@nipahut.org"><u>Noel Villamor can be contacted here.</u></a>
+</TD></TR></TBODY></TABLE>
+<hr><TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+			<b>Matej Hausenblas (FR) did the french translations of Care 2002</b>
 			<p>
-			Patxi Gomaríz is in het voorjaar van 1966 in de Spaanse stad Murcia geboren. Zijn leven en werk draait, als gespecialiseerd Phaltomology fotograaf (fundus camera)  vooral  rond fotografie. Hij is een internet enthousiasteling en ontwerpt ook websites.<p>
-			"<i>Ik denk dat open source code een effectief wapen is tegen de negatieve effecten van de economische globalisering, speciaal op die fundementele terreinen die belangrijk zijn voor de mensheid, zoals gezondheid. Daarom ben ik trots op mijn kleine bijdrage aan dit grote project.</i>"
+Matej Hausenblas was born in Prague, Czech Republic, in 1981.
+He is a student on a math-informatics-physics university. After several years 
+of using Windows he decided to have a look at Linux, as a worthy challenge 
+and after some time, he decided to participate on the Open Source projects to 
+improve some skills and also to return something back and to see how things 
+work in this kind of community.
+			<P><a href="mailto:matejh@users.sourceforge.net"><u>Matej Hausenblas can be contacted here.</u></a>
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+			<b>Nino Novak (DE) edited the german edition of www.care2x.com.</b>
+			<p>
+			Nino Novak is a poor lonesome cowboy. He shoots faster than he thinks. Sometimes a bit fussy.
+			Loves "real gurus" and sophisticated discussions with them. Wants to help in creating a better
+			world. Some scientific and medical background (thus joined the care2x project).
+		
 
-			<P><a href="mailto:pgomariz@ono.com"><u>Contact leggen met Patxi Gomaríz kan hier.</u></a>
+			<P><a href="mailto:nino@kflog.org"><u>Nino Novak can be contacted here.</u></a>
 </TD></TR></TBODY></TABLE>
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
         <TR>
-          <TD><IMG height=15 
-            src="../../gui/img/common/default/pixel.gif" 
-            width=5 border=0></TD></TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+			<b>Patxi Gomaríz (ES) did the spanish translations.</b>
+			<p>
+			Patxi Gomaríz was born in the spring of 1966 in Murcia, Spain. His life and work revolve mostly around photography
+			being a specialist in photography for Ophtalmology (fundus camera). He is an internet enthusiast and also designs 
+			websites.<p>
+			"<i>I think the open source code is an effective weapon against the negative effects of economic globalization specially in 
+			fundamental areas which are important to humanity like health. For that reason, I feel proud of my small
+			contribution to this great project.</i>"
+
+			<P><a href="mailto:pgomariz@ono.com"><u>Patxi Gomaríz can be contacted here.</u></a>
+</TD></TR></TBODY></TABLE>
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-			<P><img src="../../gui/img/common/default/pixel.gif"  border=0  width=135 align=right vspace=10>
-			<b>
-Daniele Frijia uit Duitsland heeft de veiligheidsaspecten van Care2002 gecontroleerd.</b>
+			<b>Daniele Frijia (DE) checked the security aspects of Care 2002.</b>
 			<br>
-			Een paar van zijn vele bijdragen:<p>
+			A few of his many contributions:<p>
 			<font size=1>
-			Advisering over beveilingingsvraagstukken<br>
-			Overleggen over php-kwesties<br>
-			Hij is de bewaker van het project
+			Advice on security<br>
+			Consultations on php matters<br>
+			He is the "sentinel" of the project
 		</font>
 		    <p>
-			Daniele Frijia (geboren in '81), op dit moment aan het werk bij een ISP in de Duitse stad Nurumbergcurrently , heeft zijn php kennis aangewend voor het verbeteren van de veiligheid van Care2xdedicates his php. De intentie is om een "nieuwe markt" (de medische) te openen voor de open source gemeenschap.
+			Daniele Frijia (born 81), currently working for an ISP in Nuremberg, Germany, dedicates his php
+			knowledge to improve the security of Care2x. The intention is to open a new "market" (medical)
+			for the open source community.
 
-			<P><a href="mailto:daniele@infra.de"><u>Contact leggen met Daniele Frijia kan hier.</u></a>
+			<P><a href="mailto:daniele@infra.de"><u>Daniele Frijia can be contacted here.</u></a>
 </TD></TR></TBODY></TABLE>
 <hr>
-
-
-
-<font face="verdana,arial" size=3 color="#0000ff">Meer credits</font>
-<font face="verdana,arial" size=1 > (in alfabetische volgorde)</font>
+<font face="verdana,arial" size=3 color="#0000ff">More credits</font>
+<font face="verdana,arial" size=1 > (in alphabetical order)</font>
 
 <table border=0 cellspacing=1 cellpadding=1>
   <tr>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Abrar H. Hazarika (ID)</font></nobr>&nbsp;</td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;eComBill billing module</font></td>
+  </tr>
+  <tr>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Are Kristensen (NO)</font></nobr>&nbsp;</td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Norwegian translations & online demo</font></td>
+  </tr>
+  <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Agus M. Ramdan (ID)</font></nobr>&nbsp;</td>
-    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;code herziening, care2x.com CMS</font></td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Code revisions, care2x.com CMS</font></td>
+  </tr>
+  <tr>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Biju Gopinath (IN)</font></nobr>&nbsp;</td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Alternate GUI design</font></td>
   </tr>
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Daniele Frijia (DE)</font></nobr>&nbsp;</td>
-    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;controle van de beveiliging, php consultant</font></td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Security checks, php consultant</font></td>
   </tr>
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Dilip Bharatee (IN)</font></nobr>&nbsp;</td>
-    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;ecomscience.com, full time programmeur</font></td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;ecomscience.com, full time programmers</font></td>
+  </tr>
+  <tr>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Erik de Wild (NL)</font></nobr>&nbsp;</td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Dutch translation, server package</font></td>
   </tr>
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Luki Rustianto (ID)</font></nobr>&nbsp;</td>
-    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;verbeteringen in de beveiliging</font></td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Security enhancements</font></td>
   </tr>
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Matêj Hausenblas (FR)</font></nobr>&nbsp;</td>
-    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Franse vertaling</font></td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;French translation</font></td>
   </tr>
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Muhammad Panji (ID)</font></nobr>&nbsp;</td>
-    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;aanvullingen  Indonesische vertaling</font></td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Additional indonesian translations</font></td>
   </tr>
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Nino Novak (DE)</font></nobr>&nbsp;</td>
-    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Duitse versie van www.care2x.com</font></td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;German edition of www.care2x.com</font></td>
   </tr>
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Patxi Gomaríz (ES)</font></nobr>&nbsp;</td>
-    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Spaanse vertaling</font></td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Spanish translation</font></td>
   </tr>
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Pawel Cyrta (PL)</font></nobr>&nbsp;</td>
-    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Poolse vertaling</font></td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Polish translation</font></td>
+  </tr>
+  <tr>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Petr Roupec(CZ)</font></nobr>&nbsp;</td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Czech translation</font></td>
   </tr>
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Prantar Deka (IN)</font></nobr>&nbsp;</td>
-    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;algemene rekening module</font></td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Generic billing module</font></td>
   </tr>
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Roberto Nanucci (IT)</font></nobr>&nbsp;</td>
@@ -286,16 +315,15 @@ Daniele Frijia uit Duitsland heeft de veiligheidsaspecten van Care2002 gecontrol
   </tr>
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Simone Aveotti (IT)</font></nobr>&nbsp;</td>
-    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;aanvulling Italiaanse vertaling</font></td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Additional italian translations</font></td>
   </tr>
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Thomas Wiedmann (DE)</font></nobr>&nbsp;</td>
-    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;testen, opsporen bugs, valideren van de scripts</font></td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Testing, debugging, validation scripts</font></td>
   </tr>
 </table>
 
-<font face="verdana,arial" size=1>Noot: Dit is een deel van de hele lijst. Aanvullende credits zijn op komst.</font>
+<font face="verdana,arial" size=1>Note: This is a partial list. Additional credits are coming.</font>
 
 </body>
 </html>
-

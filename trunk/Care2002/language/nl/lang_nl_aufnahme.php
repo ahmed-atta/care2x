@@ -1,363 +1,358 @@
 <?php
-$LDAdmission='Opname';
-$LDAdmitDate='Datum van opname';
-$LDAdmitTime='Tijdstip van opname';
-$LDCaseNr='Opname nummer';
+$LDAdmission='Aanmelding';
+$LDAdmitDate='Aanmeldingsdatum';
+$LDAdmitTime='Aanmeldingstijd';
+$LDCaseNr='Aanmeldingsnummer';
 $LDTitle='Titel';
 $LDLastName='Achternaam';
 $LDFirstName='Voornaam';
-$LDBday='Geboorte Datum';
-$LDPhone='Phone';
-$LDAdmitBy='Opgenomen door';
+$LDBday='Geboortedatum';
+$LDPhone='Telefoon';
+$LDAdmitBy='Aangemeld door:';
 $LDSex='Geslacht';
-$LDMale='Man';
-$LDFemale='Vrouw';
+$LDMale='man';
+$LDFemale='vrouw';
 $LDAddress='Adres';
-$LDAmbulant='Dagbehandeling';
-$LDStationary='Inpatient';
-$LDSelfPay='Eigen Bijdrage';
-$LDPrivate='Particuliere verzekering';
-$LDInsurance='Ziekenfonds';
-$LDDiagnosis='Diagnose';
-$LDRecBy='Diagnose gesteld door';
+$LDAmbulant='Dagbegehandeling';
+$LDStationary='Overige behandeling';
+$LDSelfPay='Betaald zelf';
+$LDPrivate='Prive verzekerd';
+$LDInsurance='Zorgverzekeraar';
+$LDDiagnosis='Diagnosis';
+$LDRecBy='Referentie door:';
 $LDTherapy='Therapie';
-$LDSpecials='Notities voor diagnose';
+$LDSpecials='Referentie aantekeningen';
 
-$LDPatientSearch='Search patient\'s data';
-$LDAdmit='Opname';
-$LDSearch='Zoek';
+$LDPatientSearch='Zoeken naar patiëntgegevens';
+$LDAdmit='Aanmelding';
+$LDSearch='Zoeken';
 $LDArchive='Archief';
-$LDCatPls='I like to see the cat please!';
-$LDGoodMorning='Good Morning!';
-$LDGoodDay='Hi! Nice to see you!';
-$LDGoodAfternoon='Good afternoon!';
-$LDGoodEvening='Good Evening';
+$LDCatPls='Ik wil de hulpkat zien!';
+$LDGoodMorning='Goede morgen!';
+$LDGoodDay='Hoi! Leuk je te zien!';
+$LDGoodAfternoon='Goede morgen / middag!';
+$LDGoodEvening='Goede avond!';
 
-$LDNewForm='Kunt u mij alstublieft een leeg formulier geven.';
+$LDNewForm='Ik heb een leeg formulier nodig.';
 
-$LDForceSave='Save anyway';
-$LDSaveData='Save data';
-$LDResetData='Reset data';
-$LDReset='Reset';
-$LDSave='Save';
-$LDCancel='Cancel';
+$LDForceSave='Toch opslaan';
+$LDSaveData='Gegevens opslaan';
+$LDResetData='Opnieuw Gegevens';
+$LDReset='Opnieuw';
+$LDSave='Opslaan';
+$LDCancel='Annuleren';
 
-$LDCancelClose='Cancel and back to start page';
-$LDCloseWin='Close admission window';
-$LDError='Information is missing in the input field marked <font color=red>red</font>!';
-$LDErrorS='Some information are missing in the input fields marked with <font color=red>red</font>!';
+$LDCancelClose='Annuleren en terug naar start pagina';
+$LDCloseWin='Sluit aanmeldingspagina';
+$LDError='Informatie is niet ingevuld bij de <font color=red>rode items</font>!';
+$LDErrorS='Sommige informatie is niet ingevuld bij de <font color=red>rode markeringen</font>!';
 
-$fieldname=array('Patient nr.','Lastname','Firstname','Date of birth','Options');
-$LDEntryPrompt='Geef een zoekterm op. Bijvoorbeeld: achternaam, voornaam, geboortedatum, enz.';
-$LDSEARCH='ZOEK';
-$LDAdmWantEntry='Ik moet een patient toevoegen';
-$LDAdmWantSearch='I am looking for a patient';
-$LDAdmWantArchive='Ik moet het archief onderzoeken';
+$fieldname=array('Patiënt nr.','Achternaam','Voornaam','Geboortedatum','Opties');
+$LDEntryPrompt='Voer het zoekwoord in (of een gedeelte). Bv.: achternaam, voornaam, geboortedatum, enz.';
+$LDSEARCH='ZOEKEN';
+$LDAdmWantEntry='Ik wil een patiënt aanmelden';
+$LDAdmWantSearch='Ik zoek een patiënt';
+$LDAdmWantArchive='Ik wil het archief doorbladeren';
 
 /**************** note the ' ~nr~ ' must not be erased it will be replaced by the script with the number of search results ******/
-$LDSearchFound='Er zijn <font color=red><b>~nr~</b></font> relevante gegevens gevonden.';
+$LDSearchFound='Zoekopdracht heeft <font color=red><b>~nr~</b></font> items gevonden.';
 
-$LDShowData='Show data';
-$LDPatientData='Onpname gegevens';
-$LDBack2Admit='Back to admission';
-$LDBack2Search='Back to search';
-$LDBack2Archive='Back to archive';
+$LDShowData='Data weergeven';
+$LDPatientData='Aanmeldingsgegevens';
+$LDBack2Admit='Terug naar aanmelding';
+$LDBack2Search='Terug naar zoeken';
+$LDBack2Archive='Terug naar archief';
 
-$LDFrom='from';
+$LDFrom='van';
 $LDTo='naar';
-$LDUpdateData='Update data';
-$LDNewArchive='Nieuwe zoekopdracht in het archief';
-$LDAdmArchive='Admission - Archive';
+$LDUpdateData='Update gegevens';
+$LDNewArchive='Nieuw onderzoek in archief';
+$LDAdmArchive='Aanmelding - Archief';
 
 /************** note: do not erase the ' ~nr~ ' it will be replaced by the script with a number **************/
-$LDFoundData='Er zijn ~nr~ met relevante gegevens gevonden!<br>Klik op juiste die u zocht.';
+$LDFoundData='Er zijn ~nr~ items gevonden!<br>Maak uw keuze.';
 
-$LDClk2Show='Click to show the data';
+$LDClk2Show='Klik om de gegevens weer te geven';
 
 $LDElements=array(
 								'',
-								'Lastname',
-								'Firstname',
-								'Date of birth',
-								'Patient nr.',
-								'Admission date'
+								'Achternaam',
+								'Voornaam',
+								'Geboortedatum',
+								'Patiënt nr.',
+								'Aanmeldingsdatum'
 								);
-$LDSearchKeyword='Search keyword or condition';
-$LDMEDOCS='Medical Documentation System (Medocs)';
-$LDMedocsSearchTitle='Medocs - Document search';
-$LDHideCat='Click to hide the cat';
-$LDNewDocu='Document the following patient';
-$LDExtraInfo='Extra information';
-$LDMedAdvice='Medical Advice';
+$LDSearchKeyword='Zoek kernwoord of gegeven';
+$LDMEDOCS='Medisch documentatie systeem (Medocs)';
+$LDMedocsSearchTitle='Medocs - Document zoeken';
+$LDHideCat='Klik om de hulpkat te verbergen';
+$LDNewDocu='Documenteer de volgende patiënt';
+$LDExtraInfo='Extra informatie';
+$LDMedAdvice='Medisch archief';
 $LDMedocs='Medocs';
 
-$LDYes='Yes';
-$LDNo='No';
+$LDYes='Ja';
+$LDNo='Nee';
 
-$LDEditOn='Documented on';
-$LDEditBy='Documented by';
-$LDKeyNr='Key number';
-$LDDocSearch='Search a medocs document';
+$LDEditOn='Gedocumenteerd op';
+$LDEditBy='Gedocumenteerd door';
+$LDKeyNr='Sleutel nr.';
+$LDDocSearch='Zoeken naar een medocs bestand';
 
-$LDMedDocOf='Medocs document of';
+$LDMedDocOf='Medocs document van';
 $LDMedocsElements=array(
 								'',
-								'Lastname',
-								'Firstname',
-								'Date of birth',
-								'Patient Nr.',
+								'Achternaam',
+								'Voornaam',
+								'Geboortedatum',
+								'Patiënt Nr.',
 								'Document Nr.',
-								'Department',
-								'Date',
-								'Time'
+								'Afdeling',
+								'Datum',
+								'Tijd'
 								);
-$LDStartNewDoc='Start a new medocs document';
-$LDNoMedocsFound='No medocs document of the patient found!';
+$LDStartNewDoc='Maak een nieuw medocs document';
+$LDNoMedocsFound='Geen medocs documenten van patiënt gevonden!';
 $LDAt='at';		
 		
-$LDDept='Dept';
-$LDRoomNr='Room nr';
-$LDAdmitType='Admission type';		
-$LDCivilStat='Civil status';
+$LDDept='Afd';
+$LDRoomNr='Kamer nr.';
+$LDAdmitType='Aanmeldingstype';		
+$LDCivilStat='Burgelijke staat';
 $LDInsuranceNr='Verzekeringsnummer';
-$LDNameAddr='Name & Address';
-$LDBillInfo='Billing info';
-$LDAdmitDiagnosis='Admission diagnosis';
-$LDInfo2='Info to';
-$LDPrintDate='Print date';
-$LDReligion='Religion';
-$LDTherapyType='Therapy type';
-$LDTherapyOpt='Therapy option';
+$LDNameAddr='Naam en adres';
+$LDBillInfo='Informatie betaalwijze';
+$LDAdmitDiagnosis='Aanmeldings diagnoses';
+$LDInfo2='Info naar';
+$LDPrintDate='Print datum';
+$LDReligion='Religie';
+$LDTherapyType='Therapie type';
+$LDTherapyOpt='Therapie optie';
 $LDServiceType='Service type';
 
-$LDClick2Print='Click the barcode labels to print';
+$LDClick2Print='Klik op de barcode labels om uit te printen';
 
-$LDEnterDiagnosisNote='Attach links to diagnosis related notes & publications:';
-$LDEnterTherapyNote='Attach links to therapy related notes & publications:';
-$LDSeeDiagnosisNote='Diagnosis related notes & publications:';
-$LDSeeTherapyNote='Therapy related notes & publications:';
-$LDMakeBarcodeLabels='Make barcode labels';
+$LDEnterDiagnosisNote='Make koppelingen naar diagnoses gerelateerde opmerkingen & publicaties:';
+$LDEnterTherapyNote='Make koppelingen naar therapie gerelateerde opmerkingen & publicaties:';
+$LDSeeDiagnosisNote='Diagnoses gerelateerde opmerkingen & publicaties:';
+$LDSeeTherapyNote='Therapie gerelateerde opmerkingen & publicaties:';
+$LDMakeBarcodeLabels='Maak barcode labels';
 
-$LDPlsEnterDept='<b>Please enter your department, clinic, or work area.</b><br>(e.g. PLOP, Internal Med2, or M4A, etc.)';
-$LDOkSaveNow='OK save now';
+$LDPlsEnterDept='<b>Vul aub uw afdeling, kliniek, of werkgebied in.</b><br>(bv. PLOP, Internal Med2, or M4A, enz.)';
+$LDOkSaveNow='OK nu opslaan';
 
-$LD_ddpMMpyyyy='dd.mm.yyyy';
-$LD_yyyyhMMhdd='yyyy-mm-dd';
-$LD_MMsddsyyyy='mm/dd/yyyy';
+$LD_ddpMMpyyyy='dd.mm.jjjj';
+$LD_yyyyhMMhdd='jjjj-mm-dd';
+$LD_MMsddsyyyy='mm/dd/jjjj';
 /* 2002-10-13 EL */
-$LDPlsSelectPatientFirst='Please find the person first.';
+$LDPlsSelectPatientFirst='Aub eerst patiënt selecteren.';
 /* 2002-11-30 EL */
-$LDPatientRegister='Persoons registratie';
-$LDRegDate='Datum registratie';
-$LDRegTime='Registration time';
-$LDRegBy='Gerigistreerd door';
-$LDName2='Tweede naam';
-$LDName3='Derde naam';
-$LDNameMid='Tussenvoegsel';
+$LDPatientRegister='Persoonsregistratie';
+$LDRegDate='Registratie datum';
+$LDRegTime='Registratie tijd';
+$LDRegBy='Geregistreerd door';
+$LDName2='2e naam';
+$LDName3='3e naam';
+$LDNameMid='Tussennaam';
 $LDNameMaiden='Meisjesnaam';
-$LDNameOthers='Overige namen';
+$LDNameOthers='Andere namen';
 $LDStreet='Straat';
 $LDStreetNr='Nr.';
-$LDTownCity='Plaats/Provincie';
-$LDProvState='Province/State';
-$LDRegion='Region';
-$LDCountry='Country';
-$LDCitizenship='Nationaliteit';
-$LDCivilStatus='Burgelijke staat'; /* Civil status = married, single, divorced, widow */
-$LDSingle='Vrijgezel';
+$LDTownCity='Stad';
+$LDProvState='Provicie';
+$LDRegion='Regio';
+$LDCountry='Land';
+$LDCitizenship='Staatsburgerschap';
+$LDCivilStatus='Burgerlijke staat'; /* Civil status = married, single, divorced, widow */
+$LDSingle='Alleenstaand';
 $LDMarried='Getrouwd';
 $LDDivorced='Gescheiden';
 $LDWidowed='Weduwe';
-$LDSeparated='Samenwonend';
-$LDCellPhone='Mobiel nummer.';
+$LDSeparated='Overig';
+$LDCellPhone='Mobiel.';
 $LDFax='Fax';
 $LDEmail='Email';
 $LDZipCode='Postcode';
 $LDPhoto='Foto';
 /* 2002-12-02 EL*/
-$LDPatientRegisterTxt='Register patient, search registrations, archive research';
-$LDAdmitNr='Opname Nr.';
-$LDPatient='Patient';
-$LDVisit='Visit';
-$LDVisitTxt='Ambulatory or outpatient admission';
+$LDPatientRegisterTxt='Registreer patiënt, zoek registraties, zoek archief';
+$LDAdmitNr='Aanmeldings Nr.';
+$LDPatient='Patiënt';
+$LDVisit='Bezoek';
+$LDVisitTxt='Aanmdelding dagbehandeling';
 $LDAdmissionTxt='Inpatient admission, search, research';
-$LDImmunization='Immunization';
-$LDESE='Enter, search, edit';
-$LDImmunizationTxt=$LDESE.' immunization report';
+$LDImmunization='Immunisatie';
+$LDESE='Invoer en zoeken';
+$LDImmunizationTxt=$LDESE.' immunisatie raport';
 $LDDRG='DRG (composite)';
 $LDDRGTxt=$LDESE.' DRG (Diagnosis related groups)';
 $LDProcedures='Procedures';
-$LDProceduresTxt=$LDESE.' therapy procedures';
-$LDPrescriptions='Prescriptions';
-$LDPrescriptionsTxt=$LDESE.' Prescriptions';
+$LDProceduresTxt=$LDESE.' therapie procedures';
+$LDPrescriptions='Voorschriften';
+$LDPrescriptionsTxt=$LDESE.' Voorschriften';
 /* 2002-12-03 EL*/
-$LDDiagXResults='Diagnostic Results';
-$LDDiagXResultsTxt='Search, research, display diagnostic results or reports';
-$LDAppointments='Appointments';
-$LDAppointmentsTxt=$LDESE.', research appointments or schedules';
-$LDPatientDev='Development';
-$LDPatientDevTxt=$LDESE.', display reports on patient\'s development';
-$LDWtHt='Weights & Heights';
-$LDWtHtTxt=$LDESE.' weights & heights data';
-$LDPregnancies='Pregnancies';
-$LDPregnanciesTxt=$LDESE.' pregnancy information';
-$LDBirthDetails='Birth details';
-$LDBirthDetailsTxt=$LDESE.' birth details';
+$LDDiagXResults='Diagnostisch resultaat';
+$LDDiagXResultsTxt='Zoeken, onderzoeken, weergeven diagnostische resultaten of rapporten';
+$LDAppointments='Afdelingen';
+$LDAppointmentsTxt=$LDESE.', bekijk afspraken of planningen';
+$LDPatientDev='Ontwikkeling';
+$LDPatientDevTxt=$LDESE.', bekijk rapporten van patiënt ontwikkelingen';
+$LDWtHt='Lengte en gewicht';
+$LDWtHtTxt=$LDESE.' lengte en gewicht gegevens';
+$LDPregnancies='Zwangerschap';
+$LDPregnanciesTxt=$LDESE.' zwangerschap informatie';
+$LDBirthDetails='Geboortes';
+$LDBirthDetailsTxt=$LDESE.' geboortegegevens';
 /* 2002-12-07 EL*/
-$LDInsuranceCo='Insurance Company';
-$LDInsuranceNr_2='Extra Insurance Nr.';
-$LDInsuranceCo_2='Extra Insurance Co.';
-$LDBillType='Billing Type';
-$LDWard='Ward/Station';
-$LDMakeWristBand='Make wristbands';
-$LDClickImgToPrint='Click the image to print out.';
-$LDPrintPortraitFormat='Set your printer to landscape format.';
+$LDInsuranceCo='Verzekeringsmaatschappij';
+$LDInsuranceNr_2='Extra Verzekerings Nr.';
+$LDInsuranceCo_2='Extra Verzekeringsmaatschappij.';
+$LDBillType='Betalingswijze';
+$LDWard='Verpleegafdeling';
+$LDMakeWristBand='Maak armbanden';
+$LDClickImgToPrint='Klik op figuur om uit te printen.';
+$LDPrintPortraitFormat='Installeer printopdracht als liggend formaat (landscape, landschap).';
 /* 2002-12-14 EL */
 $LDRegistryNr='PID Nr.';
-$LDRedirectToRegistry='Note: Your search will be redirected to the registration module!';
+$LDRedirectToRegistry='Opmerking: Uw zoekopdracht wordt doorgeschakeld naar de registratie!';
 /* 2002-12-24 EL */
 $LDSSSNr='SSS Nr.';
-$LDNatIdNr='National ID Nr.';
-$LDEthnicOrigin='Ethnic origin';
-$LDOtherNr='Other number(s)';
+$LDNatIdNr='Nationaal ID Nr.';
+$LDEthnicOrigin='Cultuur';
+$LDOtherNr='Andere nummers';
 /* 2002-12-25 EL */
-$LDSendBill='Send bill to';
-$LDContactPerson='Contact person';
-$LDOptsForPerson='Options for this person';
-$LDSickReport='Confirmation of inability to work';
-$LDAnamnesisForm='Anamnesis form';
-$LDConsentDec='Consent declaration';
+$LDSendBill='Stuur rekening naar';
+$LDContactPerson='Contact persoon';
+$LDOptsForPerson='Opties voor dit persoon';
+$LDSickReport='Bevestiging van arbeidsongeschikt';
+$LDAnamnesisForm='Anamnese formulier';
+$LDConsentDec='Declaratie toestemming';
 $LDUpdate='Update';
 /* 2002-12-29 EL */
-$LDGuarantor='Guarantor';
-$LDCareServiceClass='Care service class';
-$LDRoomServiceClass='Room service class';
-$LDAttDrServiceClass='Medical service class';
-$LDAdmitClass='Admission class';
+$LDGuarantor='Borgsteller';
+$LDCareServiceClass='Zorg service class';
+$LDRoomServiceClass='Kamer service class';
+$LDAttDrServiceClass='Medisch service class';
+$LDAdmitClass='Aanmeldings class';
 /* 2003-02-15 EL*/
-$LDEnterSearchKeyword='Please enter search keyword';
-$LDSearchFoundData='The search found <font color=red><b>~nr~</b></font> relevant data.';
+$LDEnterSearchKeyword='Vul aub een zoekword in';
+$LDSearchFoundData='De zoekopdracht heeft <font color=red><b>~nr~</b></font> items gevonden.';
 $LDQuickList='Quicklist';
-$LDSeveralInsurances='Patient has several insurances. Click here to edit.';
-$LDTop='Top';
-$LDInsuranceClass='Insurance class';
+$LDSeveralInsurances='Patiënt heeft meerdere verzekeringen. Klik hier om te bewerken.';
+$LDTop='Boven';
+$LDInsuranceClass='Verzekerings Class';
 $LDRecordsHistory='DB Record\'s History';
 /* 2003-02-16 EL*/
-$LDNotYetAdmitted='Not yet admitted';
-$LDPatientCurrentlyAdmitted='Patient is currently admitted!';
-$LDOptions='Options';
+$LDNotYetAdmitted='Nog niet aangemeld';
+$LDPatientCurrentlyAdmitted='Patiënt is momenteel aangemeld!';
+$LDOptions='Opties';
 /** note the ' ~nr~ ' must not be erased it will be replaced by the script with the number of search results ******/
-$LDSearchFoundAdmit='I found <font color=red><b>~nr~</b></font> relevant admission data.';
-$LDPatientNr='Patient Nr.';
-$LDNoRecordYet='~tag~ has no ~obj~ yet.';
-$LDNoRecordFor='No ~obj~ record for ~tag~ yet.';
-$LDRegistrationNr='Registration Nr.';
-$LDDate='Date';
+$LDSearchFoundAdmit='Er zijn <font color=red><b>~nr~</b></font> items gevonden.';
+$LDPatientNr='Patiënt Nr.';
+$LDNoRecordYet='~tag~ heeft nog geen ~obj~.';
+$LDNoRecordFor='Geen ~obj~ record voor ~tag~.';
+$LDRegistrationNr='Registratie Nr.';
+$LDDate='Datum';
 $LDType='Type';
-$LDMedicine='Medicine';
+$LDMedicine='Medicijn';
 $LDTiter='Titer';
-$LDRefreshDate='Refresh date';
-$LDReportingDept='Reporting Dept';
-$LDReportNr='Report Nr.';
-$LDDelivery='Delivery';
-$LDTime='Time';
+$LDRefreshDate='Vernieuwing datum';
+$LDReportingDept='Raporterende afdeling';
+$LDReportNr='Raport Nr.';
+$LDDelivery='Levering';
+$LDTime='Tijd';
 $LDClass='Class';
-$LDOutcome='Outcome';
-$LDNrOfFetus='Nr. of Fetuses';
+$LDOutcome='Resultaat';
+$LDNrOfFetus='Nr. van resultaat';
 $LDDetails='Details';
 /* 2003-03-02 */
-$LDDosage='Dosage';
-$LDAppType='Application type';
-$LDAppBy='Application by';
-$LDNotes='Notes';
-$LDEnterNewRecord='Enter new record';
-$LDPrescription='Prescription';
+$LDDosage='Dosis';
+$LDAppType='Applicatie type';
+$LDAppBy='Applicatie door';
+$LDNotes='Opmerkingen';
+$LDEnterNewRecord='Voer nieuw gegeven in';
+$LDPrescription='Voorschrift';
 $LDDrugClass='Drug Class';
-$LDPrescribedBy='Prescribed by';
-$LDPharmOrderNr='Pharmacy Order Number';
-$LDEncounterNr='Encounter Nr.';
-$LDValue='Value';
+$LDPrescribedBy='Voorgeschreven door';
+$LDPharmOrderNr='Apotheek bestellingsnummer';
+$LDEncounterNr='Ontmoetings Nr.';
+$LDValue='Waarde';
 $LDUnit='Unit';
-$LDWeight='Weight';
-$LDHeight='Height';
-$LDMeasuredBy='Measured by';
-$LDSickUntil='Unable to work until (inclusive)';
-$LDStartingFrom='Starting from';
-$LDConfirmedOn='Confirmed on';
-$LDInsurersCopy='Insurer\'s copy';
-$LDDiagnosis2='Diagnosis';
+$LDWeight='Gewicht';
+$LDHeight='Hoogte';
+$LDMeasuredBy='Gemeten door';
+$LDSickUntil='Arbeidongeschikt tot (inclusief)';
+$LDStartingFrom='Start op';
+$LDConfirmedOn='Bevestigd door';
+$LDInsurersCopy='Copie verzerkering';
+$LDDiagnosis2='Diagnose';
 /* 2003-03-03*/
 $LDBy='By';
-$LDSendCopyTo='Send copy to';
+$LDSendCopyTo='Stuur copie naar';
 /* 2003-03-05 EL*/
 $LDAndSym='&';
-$LDReports='Reports';
-$LDRefererDiagnosis='Referer Diagnosis';
-$LDRefererRecomTherapy='Referer recommended therapy';
-$LDShortNotes='Short Notes';
+$LDReports='Rapporten';
+$LDRefererDiagnosis='Andere diagnoses';
+$LDRefererRecomTherapy='Aanbevolen therapie andere diagnoses';
+$LDShortNotes='Opmerkingen';
 /* 2003-03-08 EL */
-$LDCreateNewAppointment='Create new appointment';
-$LDDepartment='Department';
-$LDRemindPatient='Remind patient';
-$LDRemindBy='Remind by';
+$LDCreateNewAppointment='Maak nieuwe afpsraak';
+$LDDepartment='Afdeling';
+$LDRemindPatient='Herinner patiënt';
+$LDRemindBy='Herrinerd door';
 $LDMail='Mail';
-$LDPurpose='Purpose';
-$LDClinician='Clinician';
-$LDPhysician='Physician';
-$LDBackToOptions='Back to options';
+$LDPurpose='Reden';
+$LDClinician='Specialist';
+$LDPhysician='Geneeskundige';
+$LDBackToOptions='Terug naar opties';
 $LDStatus='Status';
 /* 2003-03-08 EL*/
-$LDUrgency='Urgency';
-$LDNormal='Normal';
-$LDPriority='Priority';
+$LDUrgency='Urgentie';
+$LDNormal='Normaal';
+$LDPriority='Prioriteit';
 $LDUrgent='Urgent';
-$LDEmergency='Emergency';
+$LDEmergency='Spoedeisend';
 /* 2003-03-09 EL*/
-$LDCancelReason='Reason for cancellation';
-$LDSureCancelAppt='Are you sure you want to cancel this appointment?';
-$LDEnterCancelReason='Enter the reason for cancellation';
-$LDpending='pending';
-$LDcancelled='cancelled';
+$LDCancelReason='Reden voor afmelding';
+$LDSureCancelAppt='Weet u zeker dat u deze afspraak wilt annuleren?';
+$LDEnterCancelReason='Voer reden in van afmelding';
+$LDpending='openstaand';
+$LDcancelled='geannuleerd';
 /* 2003-03-10 EL */
-$LDGotMedAdvice='Did patient receive medical advice?';
+$LDGotMedAdvice='Heeft patiënt medisch advies gekregen?';
 /* 2003-03-15 EL */
-$LDShowDocList='Show document list';
-$LDScheduleNewAppointment='Schedule New Appointment';
+$LDShowDocList='Geef documenten weer';
+$LDScheduleNewAppointment='Plan nieuwe afspraak';
 /* 2003-04-04 EL */
-$LDNoPendingApptThisDay='There is no pending appointment for this day.';
-$LDNoPendingApptToday='There is no pending appointment today.';
+$LDNoPendingApptThisDay='Er zijn geen openstaande afspraken voor deze dag.';
+$LDNoPendingApptToday='Er is geen openstaande afspraak voor vandaag.';
 /* 2003-04-27 EL */
-$LDOptsForPatient='Options for this patient';
+$LDOptsForPatient='Opties voor de patiënt';
 /* 2003-05-06 EL */
-$LDRegisterNewPerson='Register a new person';
+$LDRegisterNewPerson='Meldt nieuw persoon aan';
 /* 2003-05-17 EL */
-$LDEnterPersonSearchKey='Enter search keyword: e.g. PID, first name, or family name';
-$LDPersonData='Personal data';
+$LDEnterPersonSearchKey='Vul zoekwoord in: bv. PID, voornaam, achternaam';
+$LDPersonData='Persoonlijke gegevens';
 /* 2003-05-26 EL*/
 $LDDiagnoses='Diagnoses';
-$LDCreateNewForm='Create a form for';
-$LDOtherRecords='Other records';
+$LDCreateNewForm='Maak formulier voor';
+$LDOtherRecords='Andere records';
 /*2003-06-17 El*/
-$LDFullForm='Full form';
-$LDAllContents='All contents';
-$LDAllText='Dynamic contents only';
-$LDDataOnly='Encounter relevant data only';
+$LDFullForm='Volledig formulier';
+$LDAllContents='Alle gegevens';
+$LDAllText='Alleen dynamische gegevens';
+$LDDataOnly='Geeft alleen belangrijke data weer';
 /*2003-06-21 EL*/
-$LDChartsRecords='Charts folder';
+$LDChartsRecords='Statistieken folder';
 # 2003-07-26 EL
 $LDMode='Mode';
-$LDPatientIsDischarged='This patient is already discharged';
-$LDShow='Show';
-$LDPlannedEncType='Planned admission type';
+$LDPatientIsDischarged='Deze patiënt is reeds al afgemeld';
+$LDShow='Weergeven';
+$LDPlannedEncType='Gepland aanmeldingstype';
 # 2003-08-01 EL
-$LDListEncounters='Admissions\' list';
-$LDDischarged='Discharged';
-$LDDischargeDate='Discharge date';
+$LDListEncounters='Lijst aanmeldingen';
+$LDDischarged='Afgemeld';
+$LDDischargeDate='Afmeldingsdatum';
 # 2003-08-04 EL
-$LDCancelThisAdmission='Cancel this admission';
-$LDInsShortID[1]='PRIV';  // privately paid insurance
-$LDInsShortID[2]='COM'; // Common state sponsored insurance
-$LDInsShortID[3]='SP';    // self pay, direct pay
-# 2003-08-26 EL
-$LDMeasurements='Measurements';
+$LDCancelThisAdmission='Aanmelding annuleren';
 ?>
