@@ -109,5 +109,17 @@ $LDFinalFindings='Final findings';
 
 $LDFillLabOnly='For lab use only';
 $LDLEN='LEN';  /* Lab entry number */
+/*2003-07-11 EL*/
+$LDAdministration='Administration';
+$LDTestParameters='Test parameters';
+$LDTestParametersTxt='Enter or edit units or measure, values,  range, limits, etc.';
+$LDMsrUnit='Msr. Unit';
+$LDMedian='Median';
+$LDUpperBound='Upper boundary';
+$LDLowerBound='Lower boundary';
+$LDUpperCritical='Upper critical';
+$LDLowerCritical='Lower critical';
+$LDUpperToxic='Upper toxic';
+$LDLowerToxic='Lower toxic';
 
 ?>
