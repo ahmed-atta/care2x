@@ -27,8 +27,8 @@ $append=URL_APPEND."&target=$target&noresize=1&user_origin=$user_origin";
 
 switch($target)
 {
-  case 'chemlabor': $entry_block_bgcolor="#fff3f3";
-                          $entry_border_bgcolor="#ee6666";
+  case 'chemlabor': $entry_block_bgcolor="#A0C6E5";
+                          $entry_border_bgcolor="#0000EE";
 						  $entry_body_bgcolor="#ffffff";
 						  $breakfile="nursing-station-patientdaten-doconsil-chemlabor.php$append";
 						  break;
@@ -235,7 +235,9 @@ if ($enc_obj->record_count) {
 					    if($HTTP_COOKIE_VARS[$local_user.$sid]) echo '
 						<td><font face=arial size=2>&nbsp;';
 						echo "
-							<a href=\"".$root_path."modules/nursing/nursing-station-patientdaten-doconsil-".$target.".php".URL_APPEND."&pn=".$row['encounter_nr']."&edit=1&status=".$status."&target=".$target."&user_origin=".$user_origin."&noresize=1&mode=\">";
+	      	
+
+<a href=\"".$root_path."modules/nursing/nursing-station-patientdaten-doconsil-".$target.".php".URL_APPEND."&pn=".$row['encounter_nr']."&edit=1&status=".$status."&target=".$target."&user_origin=".$user_origin."&noresize=1&mode=\">";
 						echo '	
 							<img '.createLDImgSrc($root_path,'ok_small.gif','0').' alt="'.$LDTestThisPatient.'"></a>&nbsp;';
 							

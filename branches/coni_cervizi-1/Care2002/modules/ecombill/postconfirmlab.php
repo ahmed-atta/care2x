@@ -35,7 +35,7 @@ $core= new Core;
 	}
 	$cnt=1;
 	
-	$chkpatqry="SELECT bill_item_code,bill_item_units FROM care_billing_bill_item WHERE bill_item_encounter_nr=$patientno";
+	$chkpatqry="SELECT bill_item_code,bill_item_units FROM prezzi_".$_SESSION['assicurazione']. " WHERE bill_item_encounter_nr=$patientno";
 	$resultchkpatqry=$db->Execute($chkpatqry);
 	if(is_object($resultchkpatqry)) $chkcnt=$resultchkpatqry->RecordCount();	
 /*	$resultchkpatqry=mysql_query($chkpatqry);
@@ -48,7 +48,7 @@ $core= new Core;
 		$labcod=substr($labcod,1);
 		$labcod1 = substr($labcod,0,strpos($labcod,"#"));
 		
-		$labitemqry="SELECT * FROM care_billing_item WHERE item_code='$labcod1'";
+		$labitemqry="SELECT * FROM prezzi_".$_SESSION['assicurazione']. " WHERE item_code='$labcod1'";
 		//$resultlabitemqry=mysql_query($labitemqry);
 		$resultlabitemqry=$db->Execute($labitemqry);
 		if(is_object($resultlabitemqry)){

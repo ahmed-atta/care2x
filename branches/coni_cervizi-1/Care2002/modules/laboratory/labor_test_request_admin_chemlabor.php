@@ -9,6 +9,7 @@ require($root_path.'include/inc_environment_global.php');
 * elpidio@care2x.net, elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
+* Questo file consente di visualizzare i test ancora in coda.
 */
 
 /* Start initializations */
@@ -270,19 +271,113 @@ require($root_path.'include/inc_test_request_lister_fx.php');
     <td>
 	
 <!-- Here begins the form  -->	
-        
-     <a href="javascript:printOut()"><img <?php echo createLDImgSrc($root_path,'printout.gif','0','absmiddle') ?> alt="<?php echo $LDPrintOut ?>"></a>
-     <a href="<?php echo 'labor_datainput.php'.URL_APPEND.'&encounter_nr='.$pn.'&job_id='.$batch_nr.'&mode='.$mode.'&update=1&user_origin=lab_mgmt'; ?>"><img <?php echo createLDImgSrc($root_path,'enterresults.gif','0','absmiddle') ?> alt="<?php echo $LDDone ?>"></a>
-     <a href="<?php echo $thisfile.URL_APPEND."&edit=".$edit."&mode=done&target=".$target."&subtarget=".$subtarget."&batch_nr=".$batch_nr."&pn=".$pn."&formtitle=".$formtitle."&user_origin=".$user_origin."&noresize=".$noresize; ?>"><img <?php echo createLDImgSrc($root_path,'done.gif','0','absmiddle') ?> alt="<?php echo $LDDone ?>"></a>
-
+<!--COMMENTATO DA NOI!!!!!!!!-->        
+<!--     <a href="javascript:printOut()"><img <?php /*echo createLDImgSrc($root_path,'printout.gif','0','absmiddle')*/ ?> alt="<?php /*echo $LDPrintOut*/ ?>"></a>
+<a href="<?php echo 'labor_datainput.php'.URL_APPEND.'&encounter_nr='.$pn.'&job_id='.$batch_nr.'&mode='.$mode.'&update=1&user_origin=lab_mgmt'; ?>"><img <?php /*echo createLDImgSrc($root_path,'enterresults.gif','0','absmiddle')*/ ?> alt="<?php/* echo $LDDone*/ ?>"></a>
+<a href="<?php/* echo $thisfile.URL_APPEND."&edit=".$edit."&mode=done&target=".$target."&subtarget=".$subtarget."&batch_nr=".$batch_nr."&pn=".$pn."&formtitle=".$formtitle."&user_origin=".$user_origin."&noresize=".$noresize; ?>"><img <?php echo createLDImgSrc($root_path,'done.gif','0','absmiddle')*/ ?> alt="<?php/* echo $LDDone*/ ?>"></a>
+-->
+<br />
 <?php
-require_once($root_path.'include/inc_test_request_printout_chemlabor.php');
+/*Questa riga visualizza la tabella rossa con gli esami da fare, deve quindi essere sostituita.*/
+//require_once($root_path.'include/inc_test_request_printout_chemlabor.php'); commentato da marco
+
+//inizio nuovo codice
+
+?>
+<br />
+<table border=0 cellpadding=1 cellspacing=0 bgcolor="#606060">
+  <tr>
+    <td>	
+	<!-- table for the form simulating the border -->
+	
+        <table border=0 cellspacing=0 cellpadding=0 bgcolor="#A0C6E5">
+   
+   
+   <tr>
+     <td>
+	 
+	 <!-- Here begins the table for the form  -->
+	 
+		<table   cellpadding=0 cellspacing=0 border=0 width=745>
+	
+	
+	<tr  valign="top">
+
+      <td bgcolor="#A0C6E5" width=215>
+	  <div class="lmargin">
+	  <font size=4 color="black" face="arial">
+    <br />
+	<br />
+       <?php echo "G. ONESTI" ?><br>
+       <?php echo "LABORATORIO" ?><p><font size=2>
+
+	
+	   <p>
+	
+<td>
+<?
+echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid=$sid&lang=$lang&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
 ?>
 
-     <a href="javascript:printOut()"><img <?php echo createLDImgSrc($root_path,'printout.gif','0','absmiddle') ?> alt="<?php echo $LDPrintOut ?>"></a>
-     <a href="<?php echo 'labor_datainput.php'.URL_APPEND.'&encounter_nr='.$pn.'&job_id='.$batch_nr.'&mode='.$mode.'&update=1&user_origin=lab_mgmt'; ?>"><img <?php echo createLDImgSrc($root_path,'enterresults.gif','0','absmiddle') ?> alt="<?php echo $LDDone ?>"></a>
-     <a href="<?php echo $thisfile.URL_APPEND."&edit=".$edit."&mode=done&target=".$target."&subtarget=".$subtarget."&batch_nr=".$batch_nr."&pn=".$pn."&formtitle=".$formtitle."&user_origin=".$user_origin."&noresize=".$noresize; ?>"><img <?php echo createLDImgSrc($root_path,'done.gif','0','absmiddle') ?> alt="<?php echo $LDDone ?>"></a>
 
+</tr>
+
+</td>
+
+</tr>
+
+
+
+</table>
+
+</table>
+
+</table>
+<br />
+<?
+//echo $stored_param[0];
+//echo $stored_request['parameters'];
+$query_esame="SELECT item_description FROM prezzi_1 where item_code=";
+//Le analisi selezionate sono presenti nella variabile stored_request
+$array=split("#",$stored_request['parameters']);
+$i=0;
+//inserisco i codici in un array
+while($array[$i])
+{
+  $array2= split("=",$array[$i]);  
+  $array3= split(",",$array2[0]);
+  $codici[$i]=trim($array3[0]);  
+  $i++;
+}
+
+for($j=0;$j<$i-1;$j++)
+{	
+
+$query_esame.="'".$codici[$j]."' "."or item_code=";
+}
+$query_esame.="'".$codici[$i-1]."';";
+//echo " 123 $query_esame";
+$risquery=$db->Execute($query_esame);
+echo "IL PAZIENTE DEVE EFFETTUARE LE SEGUENTI ANALISI DI LABORATORIO <br />";
+while($desc=$risquery->FetchRow())
+{
+	echo $desc['item_description'];
+	echo "<br />";
+}
+
+
+?>
+<br />
+<?
+//fine nuovo codice
+?>
+<!--
+<a href="javascript:printOut()"><img <?php /*echo createLDImgSrc($root_path,'printout.gif','0','absmiddle')*/ ?> alt="<?php/* echo $LDPrintOut*/ ?>"></a>
+    <a href="<?php echo 'labor_datainput.php'.URL_APPEND.'&encounter_nr='.$pn.'&job_id='.$batch_nr.'&mode='.$mode.'&update=1&user_origin=lab_mgmt'; ?>"><img <?php /*echo createLDImgSrc($root_path,'enterresults.gif','0','absmiddle') */?> alt="<?php/* echo $LDDone*/ ?>"></a>
+-->
+<a href="<?php echo 'labor_datainput.php'.URL_APPEND.'&encounter_nr='.$pn.'&job_id='.$batch_nr.'&mode='.$mode.'&update=1&user_origin=lab_mgmt'; ?>"><img <?php echo createLDImgSrc($root_path,'enterresults.gif','0','absmiddle') ?> alt="<?php echo $LDDone ?>"></a>
+<a href="../laboratory/labor.php?lang=it"><img src="../../gui/img/control/default/it/it_close2.gif" border=0 width="103" height="24"  alt="" align="middle"></a>
+<a href="<?php echo $thisfile.URL_APPEND."&edit=".$edit."&mode=done&target=".$target."&subtarget=".$subtarget."&batch_nr=".$batch_nr."&pn=".$pn."&formtitle=".$formtitle."&user_origin=".$user_origin."&noresize=".$noresize; ?>"><img <?php echo createLDImgSrc($root_path,'done.gif','0','absmiddle') ?> alt="<?php echo $LDDone ?>"></a>
 </td>
 
 </tr>

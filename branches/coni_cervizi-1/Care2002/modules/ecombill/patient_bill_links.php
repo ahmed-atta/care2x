@@ -35,8 +35,15 @@ extract($TXT);
 <?php echo setCharSet(); ?>
 <Script language=Javascript>
 function showbill(billid)
-{	
-	document.billlinks.action="patient_due_first.php?billid="+billid;
+{
+  //document.billlinks.action="../../invoice/fattura.php?billid="+billid;
+  document.billlinks.action="patient_due_first.php?billid="+billid;
+	document.billlinks.submit();
+}
+function show_storno(storno_id)
+{
+ 
+  document.billlinks.action="patient_due_first.php?storno_id="+storno_id;
 	document.billlinks.submit();
 }
 function showfinalbill()
@@ -59,12 +66,13 @@ function showfinalbill()
     <table border="0" width="585" height="11" bordercolor="#000000">
 
 <!-- 19.oct.2003 Daniel Hinostroza: Split the following line into two echoes to allow translation  -->
-    	<tr><td colspan=2><b><?php echo $PatientNumber ?>: </b> <?php echo "<b>".$full_en."</b>"; ?></td></tr>
+    	<!--<tr><td colspan=2><b><?php echo $PatientNumber ?>: </b> <?php echo "<b>".$full_en."</b>"; ?></td></tr>-->
+    	<!--Commentata la linea sopra perchè il numero di paziente tanto nn compare-->
     	<tr><td colspan=2><hr></td></tr>
     	<tr><td width=60%><b><?php echo $BillNo ?></b></td><td><b><?php echo $BillDate ?></b></td></tr>
     	<tr><td colspan=2><hr></td></tr>
     
-    	
+
     	
     	<?php
     	$billsquery="SELECT bill_bill_no,bill_date_time FROM care_billing_bill WHERE bill_encounter_nr='$patientno'";
@@ -76,6 +84,7 @@ function showfinalbill()
     		echo "<td>".formatDate2Local($result['bill_date_time'],$date_format)."</td>";
     		echo "</tr>";
     	}
+    	
 /*    	$billqueryresult=mysql_query($billsquery);
     	$count=mysql_num_rows($billqueryresult);
     	for ($i=0;$i<=$count;$i++)
@@ -94,7 +103,7 @@ function showfinalbill()
     	$chkfinalquery="SELECT * from care_billing_final WHERE final_encounter_nr='$patientno'";
     	$chkfinalresult=$db->Execute($chkfinalquery);
     	$chkexists=$chkfinalresult->RecordCount();    	
-    	if($chkexists>0)
+    	if($chkexists>0)##QUESTO if in realtà nn serve poichè la tavola su cui si fa una query nn la usiamo proprio
     	{
 			$result=$chkfinalresult->FetchRow();
     		$finaldate=$result['final_date'];
@@ -102,7 +111,7 @@ function showfinalbill()
     		echo "<td><b><a href=javascript:showfinalbill()>$FinalBill</a></b></td>";  
     		echo "<td>".formatDate2Local($finaldate,$date_format)."</td>";    		
     	}
-    	else
+    	else###questo else crea il link alla fattura attuale
     	{
 	    	echo "<td><a href=javascript:showbill('currentbill')>$CurrentBill</a></td>";    
 	    	echo "<td>".formatDate2Local($presdate,$date_format)."</td>";
@@ -125,8 +134,19 @@ function showfinalbill()
 */	 ?>   	
 	    	
     	</tr>
-    	
+    	    	<tr><td colspan=2><hr></td></tr>
+    	<tr><td width=60%><b><?php echo "Storni" ?></b></td><td><b><?php echo "Data Storni" ?></b></td></tr>
+    	<tr><td colspan=2><hr></td></tr>
     	<?php
+    	$query_storno="SELECT * FROM care_storno WHERE storno_encounter_nr='$patientno'";
+    	$result_query_storno=$db->Execute($query_storno);
+    	while ($result=$result_query_storno->FetchRow())
+    	{
+    		echo "<tr>";
+    		echo "<td><a href=javascript:show_storno('".$result['storno_id']."')>".$result['storno_id']."</a></td>";    
+    		echo "<td>".formatDate2Local($result['storno_date'],$date_format)."</td>";
+    		echo "</tr>";
+    	}
     	/*
     	$billsquery="SELECT bill_item_bill_no,bill_item_date from care_billing_bill_item WHERE bill_item_encounter_nr=$patientno and bill_item_status='1'";
     	$billqueryresult=mysql_query($billsquery);

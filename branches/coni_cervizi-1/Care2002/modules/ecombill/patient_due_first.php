@@ -16,12 +16,26 @@ define('LANG_FILE','billing.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_date_format_functions.php');
-
+//require_once("../../invoice/fattura.php");
 
 /*	include('includes/condb.php');
 	error_reporting(0);
 	connect_db();
 */
+if($storno_id!='')
+{
+header("Location: ../../storni/".$storno_id.".pdf");
+  exit;
+}
+
+if($billid!="currentbill") 
+{
+  header("Location: ../../fatture/".$billid.".pdf");
+  exit;
+}
+else
+{
+
 $breakfile='patient_bill_links.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='.$full_en;
 
 		$sql="SELECT bill_bill_no FROM care_billing_bill ORDER BY bill_bill_no DESC LIMIT 1";
@@ -31,16 +45,17 @@ $breakfile='patient_bill_links.php'.URL_APPEND.'&patientno='.$patientno.'&full_e
 /*		$ergebnis=mysql_query($sql,$link);
 		$cntergebnis=mysql_num_rows($ergebnis);
 */
+
 		$actMil=2000;
-		$ybb=date(Y)-$actMil;
+	      	$ybb=date(Y)-$actMil;
 
 		//check for empty set
-
+		//echo ($cntergebnis);
 		if($cntergebnis)
 		{
 			$result=$ergebnis->FetchRow();
 			$bill_no=$result['bill_bill_no'];
-
+			
 			// add one to bill number for new bill
 			$bill_no+=1;
 		}
@@ -48,14 +63,17 @@ $breakfile='patient_bill_links.php'.URL_APPEND.'&patientno='.$patientno.'&full_e
 		{
 			//generate new bill number
 
-			$ybb="5".$ybb."000000";
-
-			$bill_no=(int)$ybb;
+			//$ybb="5".$ybb."000000";
+		  //il numero di inizio delle fatture lo andiamo a prendere nel file inziofatture.txt
+		  $file=file("../../fatture/iniziofattura.txt");
+		  $dati=$file;
+		  $bill_no=(int)$dati[0];
+			//$bill_no=(int)268;
 
 		}
 
 
-		if($bill_no==10000000000) $bill_no="5".$ybb."000000";
+		if($bill_no==10000000000) $bill_no=0;
 		// limit to 10 digit, reset variables
 
 	$billno=$bill_no;
@@ -65,17 +83,30 @@ $breakfile='patient_bill_links.php'.URL_APPEND.'&patientno='.$patientno.'&full_e
 	//$resultpatqry=mysql_query($patqry);
 	$resultpatqry=$db->Execute($patqry);
 	
+	
 	if(is_object($resultpatqry)) $patient=$resultpatqry->FetchRow();
 		else $patient=array();
-		
+	
+	$ins=$patient['insurance_firm_id'];	
+	
 	$presdatetime=date("Y-m-d H:i:s");
 
+	// Consente di cancellare un item dalla fattura
+	if($_POST['cancello'])
+	  {
+	    $querycanc=" Delete FROM care_billing_bill_item WHERE bill_item_encounter_nr=$patientno AND bill_item_status='0' AND bill_item_code='".trim($_POST['cancello'])."'";
+	   
+	    $db->Execute($querycanc);
+	  }
+
+
 	$labquery="SELECT * FROM care_billing_bill_item WHERE bill_item_encounter_nr=$patientno AND bill_item_status='0'";
+
 	//$resultlabquery=mysql_query($labquery);
 	//$itemcnt=mysql_num_rows($resultlabquery);
 	
 	$resultlabquery=$db->Execute($labquery);
-
+      
 	$cntLT=0;$cntHS=0;
 	
 	if(is_object($resultlabquery)){
@@ -83,13 +114,15 @@ $breakfile='patient_bill_links.php'.URL_APPEND.'&patientno='.$patientno.'&full_e
 		$itemcnt=$resultlabquery->RecordCount();
 		while($labresult=$resultlabquery->FetchRow()){
 		
-			$lbqry="SELECT item_type FROM care_billing_item WHERE item_code='".$labresult['bill_item_code']."'";
-			$resultlbqry=$db->Execute($lbqry);
+			$lbqry="SELECT item_type FROM prezzi_".$_SESSION['assicurazione']. " WHERE item_code='".$labresult['bill_item_code']."'";
 			
+$resultlbqry=$db->Execute($lbqry);
+		
 			if(is_object($resultlbqry)){
-			
+			  
 				$buffer=$resultlbqry->FetchRow();
-				if($buffer['item_type']=="LT")
+							
+if($buffer['item_type']=="LT")
 				{
     		   		$cntLT=$cntLT+1;
 				}
@@ -140,13 +173,22 @@ extract($TXT);
 	}
 	function savebill()
 	{
-		document.patientbill.action="patientbill_printsave.php";
-		document.patientbill.submit();
+	 <? $prod=salkdjf;?>
+	  document.patientbill.target="_blank";
+	  document.patientbill.action="patientbill_printsave.php";
+	  //        document.patientbill.action="../../invoice/fattura.php";
+	  document.patientbill.submit();
+	  document.location="search.php?lang=it";
 	}
 	function cancelbill()
 	{
 		history.back(1);
 	}
+	/*	function cancelitem()
+	  {
+	    document.patientbill.action="patient_due_first.php?billno=currentbill";
+	    document.patientbill.submit();
+	  }*/
 
 //-->
 
@@ -159,9 +201,8 @@ extract($TXT);
       </tr>
     </table>
 
-<form name="patientbill" method="POST" action="">
-  <div align="center">
-    <center>
+<!--Qui c'era l'inizio del form	--> 
+
 <table border="0" width="95%" bordercolor="#000000" cellpadding=5 style="border-style:solid">
 <tr>
 <td>
@@ -177,12 +218,12 @@ extract($TXT);
               <td valign=top width="20%"><?php echo $PatientName ?>:</td>
 			  <td valign=top width="20%"><?php echo $patient['title'].' '.$patient['name_first'].' '.$patient['name_last'];?></td>
               <td valign=top width="20%">&nbsp;</td>
-              <td valign=top width="10%"><?php echo $BillNo ?>:</td>
+						   <td valign=top width="10%"><?php/* echo $BillNo*/ ?> </td>
               <td valign=top width="30%">
               <?php
-              if($billid=="currentbill")
+	      if($billid=="currentbill")
               {
-              	echo $billno;
+		//	echo $billno;
               }
               else
               {
@@ -194,7 +235,7 @@ extract($TXT);
 
          <tr>
               <td valign=top width="20%"><?php echo $PatientAddress ?>:</td>
-				<td valign=top width="20%"><?php echo $patient['addr_str'].$patient['addr_str_nr'].'<br>'.$patient['addr_zip'].$patient['addr_citytown_nr'];?></td>
+				<td valign=top width="20%"><?php echo $patient['addr_str'].', '.$patient['addr_str_nr'].'<br>'.$patient['addr_zip'];?></td>
               <td valign=top width="20%">&nbsp;</td>
               <td valign=top width="10%"><?php echo $BillDate ?>:</td>
               <td valign=top width="30%">
@@ -266,15 +307,19 @@ extract($TXT);
          <tr>
              <td colspan="5" height="30" width="641" bordercolor="#FFFFFF"><p><b><?php echo $BillingInformation ?>:</b></p></td>
          </tr>
+ <!-- /*FRANCESCO:SERVE PER VISUALIZZARE, NEL RESOCONTO GENERALE, QUANTI ITEM IN UN CONTO SONO STATI SELEZIONATI*/ -->      
+	 <tr>
+             <td colspan="5" height="30" width="641" bordercolor="#FFFFFF"><p><b><?php echo "TOTALE DELLE SELEZIONI: ".($cntHS+$cntLT) ?></b></p></td>
+         </tr>
 
           </table>
           <table border="0" width="100%" bordercolor="#000000" bgcolor=#999999 height="139" cellspacing="1" cellpadding="3">
 	              <tr>
-	                <th width="30%" valign="middle" align="left" height="38" bgcolor="#CCCCCC"><?php echo $Description ?></th>
-	                <th width="15%" valign="middle" align="center" height="38" bgcolor="#CCCCCC"><?php echo $CostperUnit ?></th>
-	                <th width="3%" valign="middle" align="center" height="38" bgcolor="#CCCCCC"><?php echo $Units ?></th>
-	                <th width="20%" valign="middle" align="center" height="38" bgcolor="#CCCCCC"><?php echo $TotalCost ?></th>
-	                <th width="25%" valign="middle" align="center" height="38" bgcolor="#CCCCCC"><?php echo $ItemType ?></th>
+	                <th width="70%" valign="middle" align="left" height="38" bgcolor="#CCCCCC"><?php echo $Description ?></th>
+	                <th width="5%" valign="middle" align="center" height="38" bgcolor="#CCCCCC"><?php echo $CostperUnit ?></th>
+	                <th width="2%" valign="middle" align="center" height="38" bgcolor="#CCCCCC"><?php echo $Units ?></th>
+	                <th width="13%" valign="middle" align="center" height="38" bgcolor="#CCCCCC"><?php echo $TotalCost ?></th>
+	                <th width="5%" valign="middle" align="center" height="38" bgcolor="#CCCCCC"><?php echo $ItemType ?></th>
 
 	              </tr>
 
@@ -287,7 +332,7 @@ extract($TXT);
 	  	      for($i=0;$i<$itemcnt1;$i++)
 	          {
 			  	$labres=$resultlabquery->FetchRow();
-	  		   $lbqry1="SELECT item_type,item_description FROM care_billing_item WHERE item_code='".$labres['bill_item_code']."'";
+	  		   $lbqry1="SELECT item_type,item_description FROM prezzi_".$_SESSION['assicurazione']." WHERE item_code='".$labres['bill_item_code']."'";
 	  	   	   //$resultlbqry1=mysql_query($lbqry1);
 	  	   	   $resultlbqry1=$db->Execute($lbqry1);
 			   if(is_object($resultlbqry1)) $lb1=$resultlbqry1->FetchRow();
@@ -323,7 +368,31 @@ extract($TXT);
 	  				echo $LaboratoryTests;
 	  			}
 	  		      echo "</td>";
-	  		   echo "</tr>";
+
+			      echo "<td width=\"11%\" valign=\"middle\" align=\"right\" height=\"17\" bgcolor=\"#EEEEEE\">&nbsp;";
+	  		      ?>
+				<!-- Questo codice consente di visualizzare un pulsante per eliminare gli item della fattura -->
+			 
+				  
+				   <form name="canc"  method="POST" action="patient_due_first.php?billid=currentbill">
+				   <input type="submit"  value="Cancella" >
+				   <input type="hidden" name="cancello" value="<?php echo  $labres['bill_item_code']; ?>">
+				   <input type="hidden" name="patientno" value="<?php echo $patientno; ?>">
+				   <input type="hidden" name="finalbilldate" value="<?php echo $finaldate; ?>">
+				   <input type="hidden" name="finalbillno" value="<?php echo $finalno; ?>">
+				   <input type="hidden" name="full_en" value="<?php echo $full_en ?>">
+				   <input type="hidden" name="lang" value="<?php echo $lang ?>">
+				   <input type="hidden" name="billno" value="<?php echo $billno; ?>">
+				   <input type="hidden" name="total" value="<?php echo $total; ?>">
+				   <input type="hidden" name="sid" value="<?php echo $sid ?>">	
+				   <input type="hidden" name="insurance" value="<?php echo $ins; ?>">			   
+				   </form>
+			          
+	  		      <?
+			       echo "</td>";
+
+
+			      echo "</tr>";
 
 	  		    if($lb1['item_type']=="HS")
 	  		    {
@@ -337,34 +406,39 @@ extract($TXT);
 	              }
 
 	              $total=$HStotal+$LTtotal;
+				
+
 	        }
 	        else
 	        {
 	        	//echo "OLDBILL";
 	        	//echo "<BR>";
-
+		 
 	        	$oldbilltotal=0;
 	        	$oldbdquery="SELECT bill_item_code,bill_item_unit_cost,bill_item_units,bill_item_amount from care_billing_bill_item WHERE bill_item_bill_no='$billid' and bill_item_status='1'";
 	        	
 				$oldbdqueryresult=$db->Execute($oldbdquery);
 	        	if(is_object($oldbdqueryresult)) $billitemcount=$oldbdqueryresult->RecordCount();
-/*				$oldbdqueryresult=mysql_query($oldbdquery);
+		  
+/*		esistente		$oldbdqueryresult=mysql_query($oldbdquery);
 	        	$billitemcount=mysql_num_rows($oldbdqueryresult);
 */
-	        	for ($obc=0;$obc<$billitemcount;$obc++)
+		  for ($obc=0;$obc<$billitemcount;$obc++)
 	        	{
 					$oldbd=$oldbdqueryresult->FetchRow();
 	        		$bitcode=$oldbd['bill_item_code'];
 
-	        		$itemdescquery="SELECT item_description,item_type from care_billing_item where item_code='$bitcode'";
+	        		$itemdescquery="SELECT item_description,item_type from prezzi_".$_SESSION['assicurazione']."  where item_code='$bitcode'";
 	        		$itemdescresult=$db->Execute($itemdescquery);
 	        		if(is_object($itemdescresult)) $it=$itemdescresult->FetchRow();
 					//$itdesc=mysql_result($itemdescresult,0,'item_description');
 					$itdesc=$it['item_description'];
-/*	        		$itemdescresult=mysql_query($itemdescquery);
+		 
+
+/*esistente	        		$itemdescresult=mysql_query($itemdescquery);
 	        		$itdesc=mysql_result($itemdescresult,0,'item_description');
 */
-	        		$itemtyp=$it['item_type'];
+		 	$itemtyp=$it['item_type'];
 	        		if($itemtyp=="HS")
 	        		{
 	        			$itemtyp=$MedicalServices;
@@ -397,10 +471,12 @@ extract($TXT);
 	  		      	echo "</td>";
 
 	        		echo "</tr>";
-
+				
 	        		$oldbilltotal=$oldbilltotal+$oldbd['bill_item_amount'];
 	        	}
-	       }
+	       
+			
+		}
 
 
 	      ?>
@@ -424,7 +500,7 @@ extract($TXT);
               		}
 	                ?>
 	                </th>
-	                <th width="11%" valign="middle" align="left" height="19" bgcolor="#EEEEEE">&nbsp;</th>
+	                <th width="11%" valign="middle" align="right" height="19" bgcolor="#EEEEEE">&nbsp;</th>
 
 	              </tr>
 	      </table>
@@ -495,10 +571,13 @@ extract($TXT);
 
 
 
-          <table border="0" width="100%" height="127">
+          <table border="0" width="641" height="127">
+  <?php if (($cntHS+$cntLT)!=0)
+		    {
+          ?>
             <tr>
-              <td width="56%" valign="middle" align="left" height="18"><?php echo $TotalBillAmount ?></td>
-              <td width="44" valign="middle" align="left" height="18"> <b>
+              <td width="2400" valign="middle" align="left" height="18"><?php echo $TotalBillAmount ?></td>
+              <td width="80" valign="middle" align="left" height="18"> <b>
               <?php
               if($billid=="currentbill")
               {
@@ -511,15 +590,18 @@ extract($TXT);
               ?>
               </b></td>
             </tr>
-
+	
             <tr>
-              <td width="56%" valign="middle" align="left" height="18"><?php echo $OutstandingAmount ?>:&nbsp;</td>
-              <td width="44%" valign="middle" align="left" height="18"><?php if($billid=="currentbill") $outstanding; else $outstanding=$oldbilloutstanding; if($outstanding<0) echo "0"; else echo $outstanding;?>&nbsp;</td>
+              <td width="2400" valign="middle" align="left" height="18"><?php echo $OutstandingAmount ?>:&nbsp;</td>
+              <td width="80" valign="middle" align="left" height="18"><?php if($billid=="currentbill") $outstanding; else $outstanding=$oldbilloutstanding; if($outstanding<0) echo "0"; else echo $outstanding;?>&nbsp;</td>
             </tr>
             <tr>
-              <td width="56%" valign="middle" align="left" height="19"><b><?php echo $AmountDue ?></b></td>
-              <td width="44%" valign="middle" align="left" height="19"><b><?php if($billid=="currentbill") echo $totaldue; else echo $oldbilltotal+$oldbilloutstanding; ?></b>&nbsp;</td>
+              <td width="2400" valign="middle" align="left" height="19"><b><?php echo $AmountDue ?></b></td>
+              <td width="80" valign="middle" align="left" height="19"><b><?php if($billid=="currentbill") echo $totaldue; else echo $oldbilltotal+$oldbilloutstanding; ?></b>&nbsp;</td>
             </tr>
+																						    <?php 
+		      }
+		?>
           </table>
 
         </td></tr>
@@ -537,7 +619,7 @@ extract($TXT);
   if($billid=="currentbill")
   {
   ?>
-	<a href="javascript:savebill();"><img <?php echo createLDImgSrc($root_path,'savedisc.gif','0'); ?>></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	<a href="javascript:savebill();" ><img <?php echo createLDImgSrc($root_path,'savedisc.gif','0'); ?>></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
   <?php
 /*  	echo "<input type=button value=Print name=print onclick=javascript:printsavebill();>&nbsp;&nbsp;&nbsp;&nbsp; ";
   	echo "<input type=button value=Save name=save onclick=javascript:savebill();>&nbsp;&nbsp;&nbsp;&nbsp;";
@@ -555,6 +637,14 @@ extract($TXT);
   ?>
 	<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0'); ?>></a>      
 
+
+
+<!--provo a mettere l\'inizio del form qui, era 191? -->
+
+<form name="patientbill" method="POST" action="">
+  <div align="center">
+    <center>
+       
     </center>
   </div>
 
@@ -571,6 +661,7 @@ extract($TXT);
 	<input type="hidden" name="lang" value="<?php echo $lang ?>">
 	<input type="hidden" name="sid" value="<?php echo $sid ?>">
 	<input type="hidden" name="full_en" value="<?php echo $full_en ?>">
+<input type="hidden" name="insurance" value="<?php echo $ins; ?>">
 
 </form>
 
@@ -584,3 +675,4 @@ require($root_path.'include/inc_load_copyrite.php');
  </body>
 </html>
 
+     <? } ?>

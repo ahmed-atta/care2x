@@ -92,11 +92,11 @@ if(($mode=='search'||$mode=='paginate')&&($searchkey))
 			if($numeric) $sql2.=' enc.encounter_nr LIKE "'.addslashes($suchbuffer).'"';
 				else $sql2.= '( reg.name_last LIKE "'.addslashes($suchwort).'%" 
 			              OR reg.name_first LIKE "'.addslashes($suchwort).'%")';
-			
+			###AND (enc.in_ward OR enc.in_dept) sarebbe dove c'è il buco qua sotto!!lo abbiamo tolto perchè non faceva trovare tutti sotto cartelle cliniche!!!il perchè??mah....
 			$sql2.='  AND enc.pid=reg.pid  
 					  AND enc.encounter_status<>"cancelled"
 					  AND NOT enc.is_discharged
-					  AND (enc.in_ward OR enc.in_dept)
+					  
 					  AND enc.status NOT IN ("void","hidden","deleted","inactive")
 			          ORDER BY ';
 /*			$sql2= '
@@ -117,7 +117,7 @@ if(($mode=='search'||$mode=='paginate')&&($searchkey))
 		if($oitem=='encounter_nr') $sql2.="enc.$oitem $odir";	
 			else $sql2.="reg.$oitem $odir";	
 				
-		//echo $sql.$dbtable.$sql2;
+		//echo "noi".$sql."  ".$dbtable.$sql2;
 			  
 		if($ergebnis=$db->SelectLimit($sql.$dbtable.$sql2,$pagen->MaxCount(),$pagen->BlockStartIndex())){			
 				
@@ -294,7 +294,7 @@ if($mode=='search'||$mode=='paginate'){
 
 					    if($HTTP_COOKIE_VARS[$local_user.$sid]) echo '
 						<td><font face=arial size=2>&nbsp;
-							<a href=show_medocs.php'.URL_APPEND.'&from=such&pid='.$zeile['pid'].'&encounter_nr='.$zeile['encounter_nr'].'&target=entry>
+							<a href=show_medocs.php'.URL_APPEND.'&from=such&pid='.$zeile['pid'].'&encounter_nr='.$zeile['encounter_nr'].'&target=show&mode=show>
 							<img '.$img_options.' alt="'.$LDShowData.'"></a>&nbsp;';
 							
                        if(!file_exists($root_path.'cache/barcodes/en_'.$full_en.'.png'))

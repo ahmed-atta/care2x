@@ -28,28 +28,92 @@ $encounter=new Encounter($encounter_nr);
 
 $thisfile='labor_datainput.php';
 
+#Risaliamo alle analisi che il paziente ha effettuato
+$domanda="SELECT * FROM care_test_request_chemlabor WHERE encounter_nr=".$encounter_nr." AND batch_nr=".$job_id;
+$risposta=$db->Execute($domanda);
+$risposta=$risposta->FetchRow();
+$risposta3=split("#",$risposta['parameters']);
+
+$i=0;
+while ($risposta3[$i]!='')
+{
+$risposta2[$i]=split("=",$risposta3[$i]);
+$i++;
+}
+
+#Richiediamo il file che mappa bene le analisi con i parametri da riempire
+include('Mappa_lab.php');
+
 # Create lab object
 require_once($root_path.'include/care_api_classes/class_lab.php');
 $lab_obj=new Lab($encounter_nr);
 
 require($root_path.'include/inc_labor_param_group.php');
 						
-if(!isset($parameterselect)||$parameterselect=='') $parameterselect='priority';
+if(!isset($parameterselect)||$parameterselect=='') $parameterselect='Nostro';
 
 $parameters=&$paralistarray[$parameterselect];					
 $paramname=&$parametergruppe[$parameterselect];
 
+/*
+while(list($c,$v)=each($HTTP_POST_VARS))
+{
+	echo "c $c <br />";
+	echo "v $v <br />";
+}
+echo "parselect ". $parameterselect;
+echo "valori 1".$HTTP_POST_VARS[trim($risposta2[0][0])];
+echo "valori 2".$HTTP_POST_VARS[trim($risposta2[1][0])];
+echo " altro ".$risposta2[0][0];
+echo " altro ".$risposta2[1][0];
+echo " i ".$HTTP_POST_VARS['contatore'];
+
+
+*/
+
+
 # Load the date formatter */
 include_once($root_path.'include/inc_date_format_functions.php');
-    
+  $verifica="SELECT * from care_test_findings_chemlab WHERE job_id='".$job_id."' AND encounter_nr=".$encounter_nr;
+$controllo=$db->Execute($verifica);
+$num_record=$controllo->RecordCount();
+//@$controllo=$controllo->FetchRow();
+//echo " davvero ".$controllo['batch_nr'];
+//exit;
+
 if($mode=='save'){
-	
+  
+	for ($i=0;$i<$HTTP_POST_VARS['contatore'];$i++)
+{
+ $valori[trim($risposta2[$i][0])]=$HTTP_POST_VARS[trim($risposta2[$i][0])];
+}
+$datiser=serialize($valori);
+if ($num_record==0)
+  {
+$query="INSERT INTO care_test_findings_chemlab (encounter_nr,job_id,group_id,test_date,test_time,history,modify_id,modify_time,create_id,create_time,serial_value) VALUES ($encounter_nr,'".$job_id."','Nostro','".date('Y-m-d')."','".date('H:i:s')."','Create ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."','".$HTTP_SESSION_VARS['sess_user_name']."','".date('YmdHis')."','".$HTTP_SESSION_VARS['sess_user_name']."','".date('YmdHis')."','".$datiser."')";
+$db->Execute($query);
+$saved=true;
+ }
+ else
+ {
+ $storia=$controllo->FetchRow();
+ $storia=$storia['history'];
+  $query="UPDATE care_test_findings_chemlab SET history='".$storia." Modified ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."' ,modify_id='".$HTTP_SESSION_VARS['sess_user_name']."',modify_time='".date('YmdHis')."',serial_value='".$datiser."'WHERE job_id='".$job_id."'" ;
+$db->Execute($query);
+$saved=true;
+//echo " query ".$query;
+//exit;
+
+ }
+#Codice originale che si interessava della registrazione nel db dei dati delle analisi
+/*
 	$nbuf=array();
 	# Prepare parameter values and serialize
 	while(list($x,$v)=each($parameters))
 	{
 		if(isset($HTTP_POST_VARS[$x])&&!empty($HTTP_POST_VARS[$x])){
 		 $nbuf[$x]=$HTTP_POST_VARS[$x];
+	
 		}
 	}
 	$dbuf['group_id']=$parameterselect;
@@ -57,6 +121,7 @@ if($mode=='save'){
 	$dbuf['job_id']=$job_id;
 	$dbuf['encounter_nr']=$encounter_nr;
 	$dbuf['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+
 	if($allow_update){
 
 		# Recheck the date, ! bug patch 
@@ -94,6 +159,7 @@ if($mode=='save'){
 		}else{echo "<p>".$lab_obj->getLastQuery()."$LDDbNoSave";}
 		
 	}
+	*/
 	# If save successful, jump to display values
 	if($saved){
 		include_once($root_path.'include/inc_visual_signalling_fx.php');
@@ -101,8 +167,11 @@ if($mode=='save'){
 		setEventSignalColor($encounter_nr,SIGNAL_COLOR_DIAGNOSTICS_REPORT);							
 		header("location:$thisfile?sid=$sid&lang=$lang&saved=1&batch_nr=$batch_nr&encounter_nr=$encounter_nr&job_id=$job_id&parameterselect=$parameterselect&allow_update=1&user_origin=$user_origin");
 	}
+	
 # end of if(mode==save)
-} else { #If mode is not "save" then get the basic personal data 
+} 
+#Questa sezione ? la nuova sezione update
+else { #If mode is not "save" then get the basic personal data 
  
 	# Create encounter object
 	//include_once($root_path.'include/care_api_classes/class_encounter.php');
@@ -131,8 +200,10 @@ if($mode=='save'){
 			
 	# Get the test test groups
 	$tgroups=&$lab_obj->TestGroups();
+	
 	# Get the test parameter values
 	$tparams=&$lab_obj->TestParams($parameterselect);
+	
 
 	# Set the return file
 	if(isset($job_id)&&$job_id){
@@ -261,7 +332,7 @@ else echo '
 <?php 
 if($saved||$row['test_date']||$std_date){
    echo formatDate2Local($std_date,$date_format).'
-   	<input type=hidden name="std_date" value="'.$std_date.'">';
+   	<input type=hidden name="std_date" value="'.$controllo['test_date'].'">';
 }else{
    echo '<input name="test_date" type="text" size="14" value="'.formatDate2Local(date('Y-m-d'),$date_format).'" onBlur="IsValidDate(this,\''.$date_format.'\')")  onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\')">';
 ?>
@@ -274,10 +345,11 @@ if($saved||$row['test_date']||$std_date){
 </tr>
 </table>
 
-<table border=0 bgcolor=#ffdddd cellspacing=1 cellpadding=1 width="100%">
+<table border=0 bgcolor=#99ccff cellspacing=1 cellpadding=1 width="100%">
 <tr>
-<td  bgcolor=#ff0000 colspan=2><FONT SIZE=2  FACE="Verdana,Arial" color="#ffffff">
-<b><?php echo strtr($parametergruppe[$parameterselect],"_","-"); ?></b>
+<td  bgcolor=#0D5BA7 colspan=2><FONT SIZE=2  FACE="Verdana,Arial" color="#ffffff">
+<b><?php echo "Test ".$job_id." per il paziente ".$encounter_nr; ?></b>
+<!--<b><?php /*echo strtr($parametergruppe[$parameterselect],"_","-"); */?></b>-->
 </td>
 </tr>
 <tr>
@@ -309,10 +381,15 @@ $pcols=ceil($paramnum/ROW_MAX);
 
 echo '<tr>';
 
-for($j=0;$j<$pcols;$j++){
+for($j=0;$j<1;$j++){
 echo '
+<td class="a10_n">&nbsp;Parametri d\' esame</td>
+<td  class="a10_n">&nbsp; Valore</td>';
+
+/*echo '
 <td class="a10_n">&nbsp;'.$LDParameter.'</td>
 <td  class="a10_n">&nbsp;'.$LDValue.'</td>';
+*/
 }
 
 echo '
@@ -322,33 +399,59 @@ echo '
 <tr>';
 $rowlimit=0;
 //$count=$paramnum;
-while($tp=$tparams->FetchRow()){
+$i=0;
 
-	echo '<td';
+while($risposta2[$i][0]!='')
+{
+//while($tp=$tparams->FetchRow()){
+$aiuto=trim($risposta2[$i][0]);
+	if (!$mappa_lab[$aiuto]['descrizione'])
+	echo "Questa analisi viene effettuata in outsourcing da un Ente di servizi.<br />";
+	else
+    {	
+	 echo '<td';
 
-	echo ' bgcolor="#ffffee" class="a10_b"><nobr>&nbsp;<b>';
-	if(isset($parameters[$tp['id']])&&!empty($parameters[$tp['id']])) echo $parameters[$tp['id']];
+	 echo ' bgcolor="#ffffee" class="a10_b"><nobr>&nbsp;<b>';
+     echo $mappa_lab[$aiuto]['parametro'];
+	 //echo $mappa_lab[$risposta2[$i]]['parametro'];
+	 /*
+	 if(isset($parameters[$tp['id']])&&!empty($parameters[$tp['id']])) echo $parameters[$tp['id']];
 		else echo $tp['name'];
-	
-	echo '</b>&nbsp;</nobr>';
+	 */
+	 
+	 echo '</b>&nbsp;</nobr>';
 
-	echo '</td>
+	 echo '</td>
 			<td class="a10_b">';
 
-	echo '<input name="'.$tp['id'].'" type="text" size="8" ';
-
-	echo 'value="';
-	if(isset($pdata[$tp['id']])&&!empty($pdata[$tp['id']])) echo trim($pdata[$tp['id']]);
-
-	echo '">'.$tp['msr_unit'].'&nbsp;
+	 //echo '<input name="'.$tp['id'].'" type="text" size="8" ';
+	echo '<input name="'.$aiuto.'" type="text" size="8" ';
+	
+	 echo 'value="';
+	 if ($num_record)
+	 {
+ 	 	$query="SELECT * FROM care_test_findings_chemlab WHERE job_id='".$job_id."' AND encounter_nr=".$encounter_nr;
+		$answer=$db->Execute($query);
+		$answer=$answer->FetchRow();
+		$prova=unserialize($answer['serial_value']);
+		echo 	$prova[$aiuto]; 
+	 }
+	 //if(isset($pdata[$tp['id']])&&!empty($pdata[$tp['id']])) echo trim($pdata[$tp['id']]);
+//if(isset($pdata[$tp['id']])&&!empty($pdata[$tp['id']])) echo trim($pdata[$tp['id']]);
+	 echo '">'.$mappa_lab[$aiuto]['unita_di_misura'].'&nbsp;
 			</td>';
-
-	$rowlimit++;
-	if($rowlimit==$pcols){
+	/*echo '">'.$tp['msr_unit'].'&nbsp;
+			</td>';
+*/
+	 //$rowlimit++;
+	 //if($rowlimit==$pcols)
+	  //{
 		echo '
 		</tr><tr>';
-		$rowlimit=0;
-	}
+		//$rowlimit=0;
+	  //}
+    }
+	$i++;
  }
 /*while(list($x,$v)=each($parameters)){
 
@@ -382,12 +485,12 @@ while($tp=$tparams->FetchRow()){
 </tr>
 <tr>
 <td>
-<input  type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?>> 
+<input  type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0');?>> 
 </td>
 
 <td align="right"><font size=1><nobr>
 <?php
-echo '<a href="labor_datalist_noedit.php'.URL_APPEND.'&encounter_nr='.$encounter_nr.'&noexpand=1&from=input&job_id='.$job_id.'&parameterselect='.$parameterselect.'&allow_update='.$allow_update.'&nostat=1&user_origin='.$user_origin.'"><img '.createLDImgSrc($root_path,'showreport.gif','0','absmiddle').' alt="'.$LDClk2See.'"></a>';
+//echo '<a href="labor_datalist_noedit.php'.URL_APPEND.'&encounter_nr='.$encounter_nr.'&noexpand=1&from=input&job_id='.$job_id.'&parameterselect='.$parameterselect.'&allow_update='.$allow_update.'&nostat=1&user_origin='.$user_origin.'"><img '.createLDImgSrc($root_path,'showreport.gif','0','absmiddle').' alt="'.$LDClk2See.'"></a>';
 ?>
 &nbsp;
 <a href="<?php echo $breakfile ?>"><?php
@@ -408,24 +511,28 @@ echo '<a href="labor_datalist_noedit.php'.URL_APPEND.'&encounter_nr='.$encounter
 <input type=hidden name="batch_nr" value="<?php if(isset($row['batch_nr'])) echo $row['batch_nr']; ?>">
 <input type=hidden name="newid" value="<?php echo $newid; ?>">
 <input type=hidden name="user_origin" value="<?php echo $user_origin; ?>">
+<input type=hidden name="contatore" value="<?php echo $i?>">
 <input type=hidden name="mode" value="save">
 </form>
+
 
 <form action=<?php echo $thisfile; ?> method=post onSubmit="return chkselect(this)" name="paramselect">
 <table border=0>
 <tr>
-<td colspan=3><FONT SIZE=-1  FACE="Arial"><b><?php echo $LDSelectParamGroup ?></b>
+<!--<td colspan=3><FONT SIZE=-1  FACE="Arial"><b><?php echo $LDSelectParamGroup ?></b>
 </td>
+-->
 </tr>
-
+<!--
 <tr>
 <td><FONT SIZE=-1  FACE="Arial"><?php echo $LDParamGroup ?>:
 </td>
 
 <td >
 <select name="parameterselect" size=1>
+-->
 <?php 
-
+/*
 	while($tg=$tgroups->FetchRow())
       {
 		echo '<option value="'.$tg['group_id'].'"';
@@ -436,11 +543,12 @@ echo '<a href="labor_datalist_noedit.php'.URL_APPEND.'&encounter_nr='.$encounter
 		echo '</option>';
 		echo "\n";
 	  }	
-
+*/
 ?>
+<!--
 </select>
 </td>
-
+-->
 <td>
 <input type=hidden name="encounter_nr" value="<?php echo $encounter_nr; ?>">
 <input type=hidden name="job_id" value="<?php echo $job_id; ?>">
@@ -453,7 +561,8 @@ echo '<a href="labor_datalist_noedit.php'.URL_APPEND.'&encounter_nr='.$encounter
 <input type=hidden name="std_date" value="<?php echo $std_date; ?>">
 <input type=hidden name="user_origin" value="<?php echo $user_origin; ?>">
 
-<FONT SIZE=-1  FACE="Arial">&nbsp;<input  type="image" <?php echo createLDImgSrc($root_path,'auswahl2.gif','0') ?>>
+<!--<FONT SIZE=-1  FACE="Arial">&nbsp;<input  type="image" <?php echo createLDImgSrc($root_path,'auswahl2.gif','0') ?>>
+-->
 </td>
 </tr>
 </tr>
@@ -465,19 +574,22 @@ echo '<a href="labor_datalist_noedit.php'.URL_APPEND.'&encounter_nr='.$encounter
 </FONT>
 <p>
 </td>
-
+<!--
 <td colspan=2 bgcolor=#ffffee width=20% valign=top>
 
 
 <table border=0 cellpadding=5 cellspacing=2>
 <tr>
+
 <td valign=top><a href="Javascript:gethelp('lab.php','input','param')"><img <?php echo createComIcon($root_path,'small_help.gif','0') ?>></a></td>
 <td><FONT SIZE=1  FACE="Arial"><?php echo $LDParamNoSee ?></td>
 </tr>
+
 <tr>
 <td valign=top><a href="Javascript:gethelp('lab.php','input','few')"><img <?php echo createComIcon($root_path,'small_help.gif','0') ?>></a></td>
 <td><FONT SIZE=1  FACE="Arial"><?php echo $LDOnlyPair ?></td>
 </tr>
+
 <tr>
 <td valign=top><a href="Javascript:gethelp('lab.php','input','save')"><img <?php echo createComIcon($root_path,'small_help.gif','0') ?>></a></td>
 <td><FONT SIZE=1  FACE="Arial"><?php echo $LDHow2Save ?></td>
@@ -495,12 +607,13 @@ echo '<a href="labor_datalist_noedit.php'.URL_APPEND.'&encounter_nr='.$encounter
 <td><FONT SIZE=1  FACE="Arial"><?php echo $LDImDone ?></td>
 </tr>
 </table>
-
 </td>
+
+
 </tr>
 </table>        
 <p>
-
+-->
 <?php
 require($root_path.'include/inc_load_copyrite.php');
 ?>

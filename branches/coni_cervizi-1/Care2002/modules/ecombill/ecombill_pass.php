@@ -9,9 +9,9 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 require_once($root_path.'global_conf/areas_allow.php');
 
-$allowedarea=&$allow_area['admit'];
-
-$fileforward='billingmenu.php'.URL_REDIRECT_APPEND;
+$allowedarea=&$allow_area['ecombill'];
+if($_GET['aggiungi']=="ok") $fileforward='nuove_prestazioni.php'.URL_REDIRECT_APPEND;
+else $fileforward='billingmenu.php'.URL_REDIRECT_APPEND;
 $thisfile=basename(__FILE__);
 $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
 
@@ -39,13 +39,14 @@ require($root_path.'include/inc_passcheck_head.php');
 <P>
 
 <img <?php echo createComIcon($root_path,'billing.jpg','0','absmiddle') ?>>
-<FONT  COLOR=<?php echo $cfg[top_txtcolor] ?>  SIZE=6  FACE="verdana"> <b><?php echo $LDBilling ?></b></font>
+<FONT  COLOR=<?php echo $cfg[top_txtcolor] ?>  SIZE=6  FACE="verdana"> <b><?php echo "Fatturazione" ?></b></font>
 
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
 
 <?php require($root_path.'include/inc_passcheck_mask.php') ?>  
 
-<p><!-- 
+<p>
+<!-- NON L?ABBIAMO COMMENTATO NOI 
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo "$LDIntro2 $LDNursingManage" ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo "$LDWhat2Do $LDNursingManage" ?></a><br>
  -->

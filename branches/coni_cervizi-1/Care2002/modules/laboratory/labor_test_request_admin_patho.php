@@ -13,7 +13,7 @@ require($root_path.'include/inc_environment_global.php');
 
 /* Start initializations */
 define('LANG_FILE','konsil.php');
-
+echo "prova";
 /* We need to differentiate from where the user is coming: 
 *  $user_origin != lab ;  from patient charts folder
 *  $user_origin == lab ;  from the laboratory

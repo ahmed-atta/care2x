@@ -185,7 +185,7 @@ if($dept_obj->preloadDept($stored_request['testing_dept'])){
 <?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
- <TITLE><?php echo "$LDDiagnosticTest $station" ?></TITLE>
+ <TITLE><?php echo "CICCIO $station" ?></TITLE>
 <?php
 require($root_path.'include/inc_js_gethelp.php');
 require($root_path.'include/inc_css_a_hilitebu.php');

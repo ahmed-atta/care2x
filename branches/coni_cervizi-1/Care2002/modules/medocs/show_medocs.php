@@ -1,7 +1,12 @@
 <?php
+
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+
+
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
+require('../registration_admission/Mappa.php');
+
 /**
 * CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
@@ -15,16 +20,20 @@ $thisfile=basename(__FILE__);
 if(!isset($type_nr)||!$type_nr) $type_nr=1; //* 1 = history physical notes
 
 require_once($root_path.'include/care_api_classes/class_notes.php');
+
+
 $obj=new Notes;
 $types=$obj->getAllTypesSort('name');
 $this_type=$obj->getType($type_nr);
 
+
 if(!isset($mode)){
-	$mode='show';
+	$mode='';
 } elseif(($mode=='create'||$mode=='update')
 				&&!empty($HTTP_POST_VARS['text_diagnosis'])
 				&&!empty($HTTP_POST_VARS['text_therapy'])) {
 	# Prepare the posted data for saving in databank
+		
 	include_once($root_path.'include/inc_date_format_functions.php');
 	# If date is empty,default to today
 	if(empty($HTTP_POST_VARS['date'])){
@@ -49,12 +58,15 @@ if(!isset($mode)){
 	include('./include/save_admission_data.inc.php');
 }
 
+//echo "vaccaccia $encounter_nr";
+
 require('./include/init_show.php');
 
 $page_title=$LDMedocs;
 
 # Load the entire encounter data
 require_once($root_path.'include/care_api_classes/class_encounter.php');
+
 $enc_obj=new Encounter($encounter_nr);
 $enc_obj->loadEncounterData();
 # Get encounter class
@@ -63,13 +75,12 @@ $enc_class=$enc_obj->EncounterClass();
 	else $HTTP_SESSION_VARS['sess_full_en']=$GLOBAL_CONFIG['patient_inpatient_nr_adder']+$encounter_nr;
 */
 $HTTP_SESSION_VARS['sess_full_en']=$encounter_nr;
-	
 if(empty($encounter_nr)&&!empty($HTTP_SESSION_VARS['sess_en'])){
 	$encounter_nr=$HTTP_SESSION_VARS['sess_en'];
 }elseif($encounter_nr) {
 	$HTTP_SESSION_VARS['sess_en']=$encounter_nr;
 }
-	
+
 if($mode=='show') 
 {
 	$sql="SELECT e.encounter_nr,e.is_discharged,nd.nr, nd.notes AS diagnosis,nd.short_notes, nd.date,nd.personell_nr,nd.personell_name, nt.notes AS therapy
@@ -78,9 +89,11 @@ if($mode=='show')
 					LEFT JOIN care_encounter_notes AS nt ON nt.ref_notes_nr=nd.nr
 		WHERE  e.encounter_nr=".$encounter_nr."
 			AND e.encounter_nr=nd.encounter_nr 
-			AND nd.type_nr=12
+			AND nd.type_nr=13
 			ORDER BY nd.create_time DESC";
-
+		/*echo "show_medocs.php $sql";
+		exit;
+			*/
 		/* 12 = text_diagnosis type of notes 
 		*  13 = text_therapy type of notes
 		*/
@@ -88,13 +101,13 @@ if($mode=='show')
 		if($rows=$result->RecordCount()){
 			# Resync the encounter_nr
 			if($HTTP_SESSION_VARS['sess_en']!=$encounter_nr) $HTTP_SESSION_VARS['sess_en']=$encounter_nr;
-			if($rows==1){
+			/*if($rows==1){
 				$row=$result->FetchRow();
 				if($row['is_discharged']) $edit=0;
 
-				header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&mode=details&nolist=1&pid=$pid&encounter_nr=&encounter_nr&nr=".$row['nr']."&edit=$edit&is_discharged=".$row['is_discharged']);
+				header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&mode=details&nolist=1&pid=$pid&encounter_nr=$encounter_nr&nr=".$row['nr']."&edit=$edit&is_discharged=".$row['is_discharged']);
 				exit;
-			}
+			}*/
 		}
 	}else{
 		echo $sql;
@@ -110,6 +123,8 @@ if($mode=='show')
 		FROM 	care_encounter_notes AS nd LEFT JOIN care_encounter_notes AS nt ON nd.nr=nt.ref_notes_nr
 		WHERE   nd.nr=$nr";
 
+		
+		
 	if($result=$db->Execute($sql)){
 		if($rows=$result->RecordCount()) $row=$result->FetchRow();
 	}else{
@@ -128,5 +143,7 @@ require('include/inc_breakfile.php');
 
 if($mode=='show') $glob_obj->getConfig('medocs_%');
 /* Load GUI page */
+
 require('./gui_bridge/default/gui_show_medocs.php');
+
 ?>

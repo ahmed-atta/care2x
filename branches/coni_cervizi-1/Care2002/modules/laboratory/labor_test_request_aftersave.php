@@ -185,6 +185,8 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 	?><p>
 <FONT    SIZE=2  FACE="verdana,Arial" color="#990000">
            <a href="javascript:printOut()"><img <?php echo createComIcon($root_path,'bul_arrowgrnsm.gif','0','absmiddle') ?>> <?php echo $LDPrintForm ?></a><br>
+<!-- COMMENTATO DA NOI PERCHE CREA I DUE LINK CHE NN SERVONO-->
+<!--
            <a href="<?php echo $root_path ?>modules/nursing/nursing-station-patientdaten-doconsil-<?php echo $target ?>.php<?php echo URL_APPEND ?>&pn=<?php echo $pn ?>&edit=<?php echo $edit ?>&station=<?php echo $station ?>&target=<?php echo $target ?>&dept_nr=<?php echo $dept_nr ?>&user_origin=<?php echo $user_origin ?>&noresize=<?php echo $noresize ?>&mode=edit&batch_nr=<?php echo $batch_nr ?>"><img <?php echo createComIcon($root_path,'bul_arrowgrnsm.gif','0','absmiddle') ?>> <?php echo $LDEditForm ?></a><br>
 	       <a href="<?php echo $root_path ?>modules/nursing/nursing-station-patientdaten-doconsil-<?php echo $target ?>.php<?php echo URL_APPEND ?>&pn=<?php echo $pn ?>&edit=<?php echo $edit ?>&station=<?php echo $station ?>&target=<?php echo $target ?>&dept_nr=<?php echo $dept_nr ?>&user_origin=<?php echo $user_origin ?>&noresize=<?php echo $noresize ?>&mode="><img <?php echo createComIcon($root_path,'bul_arrowgrnsm.gif','0','absmiddle') ?>> <?php echo $LDNewFormSamePatient ?></a><br>
            <?php
@@ -192,7 +194,8 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 		   {
 		   ?>
 		   <a href="<?php echo $root_path ?>modules/nursing/nursing-station-patientdaten-doconsil-<?php echo $target ?>.php<?php echo URL_APPEND ?>&edit=0&station=<?php echo $station ?>&target=<?php echo $target ?>&dept_nr=<?php echo $dept_nr ?>&user_origin=<?php echo $user_origin ?>&noresize=<?php echo $noresize ?>"><img <?php echo createComIcon($root_path,'bul_arrowgrnsm.gif','0','absmiddle') ?>> <?php echo $LDNewFormOtherPatient ?></a><br>
-           <?php
+-->    
+       <?php
 		   }
 		   ?>
            <a href="<?php echo $breakfile ?>"><img <?php echo createComIcon($root_path,'bul_arrowgrnsm.gif','0','absmiddle') ?>> <?php echo $LDEndTestRequest ?></a><p>

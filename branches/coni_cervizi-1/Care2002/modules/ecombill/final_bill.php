@@ -31,7 +31,7 @@ $breakfile='patientbill.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='.$fu
     	html_rtl($lang); 
     	echo "<table border=0 width=101% bgcolor=#99ccff>";
 	echo "<tr>";
-	echo "<td width=101%><font color=#330066 size=+3 face=Arial><strong>eComBill</strong></font></td>";
+	echo "<td width=101%><font color=#330066 size=+3 face=Arial><strong>Fatturazione</strong></font></td>";
 	echo "</tr>";
     	echo "</table>";
     	echo "<center><h4>You have Bills Pending.</center></h4>";

@@ -61,8 +61,9 @@ if(($mode=='search'||$mode=='paginate')&&!empty($searchkey)){
 	$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 
 	# Get the max nr of rows from global config
-	$glob_obj->getConfig('pagin_patient_search_max_block_rows');
-	if(empty($GLOBAL_CONFIG['pagin_patient_search_max_block_rows'])) $pagen->setMaxCount(MAX_BLOCK_ROWS); # Last resort, use the default defined at the start of this page
+	#####QUESTA SOTTO L'HO COMMENTATA IO - FRANCESCO - PER BYPASSARE IL PROBLEMA DELLA FATTURAZIONE
+	#$glob_obj->getConfig('pagin_patient_search_max_block_rows');
+	if(empty($GLOBAL_CONFIG['pagin_patient_search_max_block_rows'])) $pagen->setMaxCount(100); # Last resort, use the default defined at the start of this page######HO MESSO IO IL VALORE MAX A 100, PRIMA ERA MAX_BLOCK_ROWS.
 		else $pagen->setMaxCount($GLOBAL_CONFIG['pagin_patient_search_max_block_rows']);
 	
 	

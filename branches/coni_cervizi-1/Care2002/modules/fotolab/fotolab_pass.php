@@ -49,12 +49,10 @@ require($root_path.'include/inc_passcheck_head.php');
 <FONT    SIZE=-1  FACE="Arial">
 
 <P>
-
 <img <?php echo createComIcon($root_path,'smiley.gif','0','top') ?>>
 <FONT  COLOR="<?php echo$cfg['top_txtcolor'] ?>"  SIZE=6  FACE="verdana"> <b><?php echo $title ?></b></font>
 
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
-
 <?php require($root_path.'include/inc_passcheck_mask.php') ?>  
 
 <p>

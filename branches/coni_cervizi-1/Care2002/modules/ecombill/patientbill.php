@@ -73,6 +73,16 @@ function finalbill()
 </head>
 
 <body bgcolor="#FFFFFF" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0>
+<?php
+	$qassicurazione="SELECT insurance_firm_id from care_encounter WHERE encounter_nr=".$patient_no;
+	$qassicurazione2=$db->Execute($qassicurazione);
+	$qassicurazione2=$qassicurazione2->FetchRow();
+	$_SESSION['assicurazione']=$qassicurazione2['insurance_firm_id'];
+	$domanda="SELECT name FROM care_insurance_firm WHERE firm_id=".$qassicurazione2['insurance_firm_id'];
+	$risposta=$db->Execute($domanda);
+	$risposta=$risposta->FetchRow();
+	
+?>
 <table border="0" width="101%" bgcolor=#99ccff>
       <tr>
         <td width="101%"><font color="#330066" size="+2" face="Arial"><strong><?php echo $eComBill; ?></strong></font></td>
@@ -86,7 +96,7 @@ function finalbill()
 
 <!-- 19.oct.2003 Daniel Hinostroza: Split the following line into two echoes to allow translation  -->
   <p><blockquote><b><?php echo $PatientNumber; ?>: </b>  <?php echo "<b>".$full_en."</b></blockquote>"; ?>
-
+<p><blockquote><b><?php echo "Tipologia di Assicurazione"; ?>: </b>  <?php echo "<b>".$risposta['name']."</b></blockquote>"; ?>
   <div align="center">
     <center>
     <table border="1" width="585" height="11" bordercolor="#000000" style="border-style: solid">
@@ -99,9 +109,12 @@ function finalbill()
 
 
 <p><a href=javascript:subbill()><?php echo $ViewBill; ?></a>
-<p><a href=javascript:subpayment()><?php echo $ViewPayment; ?></a>
-<p><a href=javascript:show()><?php echo $MakeNewPayment; ?></a>
 
+<p><a href="storno.php?encounter_nr=<?php echo $patient_no?>"><?php echo "Effettuare uno storno" ; ?></a>
+<!-- COMMENTATO DA NOI!!!!
+<p><a href=javascript:subpayment()><?php echo $ViewPayment; ?></a>
+<p><a href=javascript:show()><?php echo "Effettuare uno storno"; ?></a>
+-->
 <?php
 
 $chkfinalquery="SELECT * from care_billing_final WHERE final_encounter_nr='$patient_no'";
@@ -113,7 +126,7 @@ if(is_object($chkfinalresult)) $chkexists=$chkfinalresult->RecordCount();
 //if($chkexists<1)
 if(!$chkexists)
 {
-	echo "<p><a href=javascript:finalbill()>$GenerateFinalBill</a></p>";
+  //	echo "<!--<p><a href=javascript:finalbill()>$GenerateFinalBill</a></p>-->"; COMMENTATO DA NOI!!!!!!!!!
 }
 
 ?>
@@ -150,7 +163,7 @@ if(!$chkexists)
 
 <input type="hidden" name="lang" value="<?php echo $lang ?>">
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
-<input type="hidden" name="full_en" value="<?php echo $full_en ?>">
+<input type="hidden" name="encounter_nr" value="<?php echo $full_en ?>">
 
 </form>
 

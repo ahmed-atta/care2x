@@ -1,4 +1,5 @@
 <?php
+
 $returnfile=$HTTP_SESSION_VARS['sess_file_return'];
 
 require('./gui_bridge/default/gui_std_tags.php');
@@ -29,23 +30,24 @@ echo setCharSet();
 <script  language="javascript">
 <!-- 
 
-<?php require($root_path.'include/inc_checkdate_lang.php'); ?>
+<?php// require($root_path.'include/inc_checkdate_lang.php'); ?>
 
 function popRecordHistory(table,pid) {
 	urlholder="./record_history.php<?php echo URL_REDIRECT_APPEND; ?>&table="+table+"&pid="+pid;
 	HISTWIN<?php echo $sid ?>=window.open(urlholder,"histwin<?php echo $sid ?>","menubar=no,width=400,height=550,resizable=yes,scrollbars=yes");
 }
-
--->
+//-->
 </script>
 
 <script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
 <script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
-<?php 
+<?php
+ 
 require($root_path.'include/inc_js_gethelp.php'); 
 require($root_path.'include/inc_css_a_hilitebu.php');
+
 ?>
 </HEAD>
 
@@ -145,22 +147,22 @@ createTR($LDName2,$name_2);
 
 if (!$GLOBAL_CONFIG['person_name_3_hide']&&$name_3)
 {
-createTR( $LDName3,$name_3);
+createTR( "Specialita'",$name_3);
 }
 
 if (!$GLOBAL_CONFIG['person_name_middle_hide']&&$name_middle)
 {
-createTR($LDNameMid,$name_middle);
+createTR("Localita' di Nascita",$name_middle);
 }
 
 if (!$GLOBAL_CONFIG['person_name_maiden_hide']&&$name_maiden)
 {
-createTR($LDNameMaiden,$name_maiden);
+createTR("Sport",$name_maiden);
 }
 
 if (!$GLOBAL_CONFIG['person_name_others_hide']&&$name_others)
 {
-createTR($LDNameOthers,$name_others);
+createTR("Inizio attivita' ad anni",$name_others);
 }
 ?>
 
@@ -188,6 +190,8 @@ if($death_date&&$death_date!='0000-00-00'){
 
 
 <?php
+//echo "gui_show_medocs.php";
+
 if($mode=='show'){
 	if($rows){
 		$bgimg='tableHeaderbg3.gif';
@@ -197,15 +201,46 @@ if($mode=='show'){
 <table border=0 cellpadding=4 cellspacing=1 width=100%>
   <tr bgcolor="#f6f6f6">
     <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDate; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDiagnosis; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDTherapy; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDetails; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066">&nbsp;</td>
+    <!--<td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDiagnosis; ?></td>-->
+	<td align="center" <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo "Tipologia di esame"; ?></td>
+    <!--<td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDTherapy; ?></td>
+    -->
+	<td align ="center" <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDetails; ?></td>
+    <!--
+	<td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066">&nbsp;</td>
+	
    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDBy; ?></td>
+   -->
   </tr>
 <?php
 $toggle=0;
-while($row=$result->FetchRow()){
+  
+	$contatore=0;  
+$contatore_short=0; 
+$contatore_cardio=0;
+
+while($row=$result->FetchRow())
+{
+$rispo2=0; 
+$rispo_short=0;
+$rispo_cardio=0;
+####TUTTO QUESTO PER GESTIRE LA PRESENZA DI REL_CONC_SHORT
+$controllo=split("#",$row[3]);
+$contatore2=0;
+while($controllo[$contatore2])
+{
+//echo $controllo[$contatore2];
+$controllo2=split("=",$controllo[$contatore2]);
+
+	if($controllo2[0]=='item_code')
+	break;
+	$contatore2++;
+}
+
+	//if ($controllo2[1]=='rel_conc_short')
+
+//	continue;
+######	
 	if($toggle) $bgc='#efefef';
 		else $bgc='#f0f0f0';
 	$toggle=!$toggle;
@@ -214,21 +249,129 @@ while($row=$result->FetchRow()){
 
   <tr  bgcolor="<?php echo $bgc; ?>"  valign="top">
     <td><FONT SIZE=-1  FACE="Arial"><?php if(!empty($row['date'])) echo @formatDate2Local($row['date'],$date_format); else echo '?'; ?></td>
-    <td><FONT SIZE=-1  FACE="Arial" color="#000033"><?php if(!empty($row['diagnosis'])) echo substr($row['diagnosis'],0,$GLOBAL_CONFIG['medocs_text_preview_maxlen']).'<br>'; ?>
+	  
+	  <?php
+	
+	  
+	//Recuperiamo il nome della prestazione
+
+	$codice=split("#item_code=",$row['diagnosis']);
+	$codice=str_replace("#","",$codice[1]);
+
+	$appt_num=split("appt_nr=",$row['diagnosis']);
+	$appt_num2=split("#",$appt_num[1]);
+if($codice[1])
+{
+
+	if($codice!='rel_conc_short' && $codice!='rel_conc_cardio' ) 
+	{
+	
+	$sql="SELECT * from prezzi_1 WHERE item_code='".$codice."'";
+	$ris=$db->Execute($sql);
+	$ris2=$ris->FetchRow();
+	$ris2=$ris2['item_description'];
+	}
+	else if ($codice=='rel_conc_short')
+	{
+	
+	$ris2='Relazione Conclusiva Breve';
+	$contatore_short++;
+	}
+	else if($codice=='rel_conc_cardio')
+	{
+	$ris2="Relazione conclusiva cardiologica";
+    $contatore_cardio++;
+	}
+}	
+else
+{
+$ris2='Relazione Conclusiva';
+$contatore++;
+}	
+	?>
+	  <td><FONT SIZE=-1  FACE="Arial" color="#000033"><?php  echo substr($ris2,0,$GLOBAL_CONFIG['medocs_text_preview_maxlen']).'<br>'; ?>
+   <!-- <td><FONT SIZE=-1  FACE="Arial" color="#000033"><?php if(!empty($row['diagnosis'])) echo substr($row['diagnosis'],0,$GLOBAL_CONFIG['medocs_text_preview_maxlen']).'<br>'; ?>-->
 	<?php
 		if(!empty($row['short_notes'])) echo '[ '.$row['short_notes'].' ]';
 	?>
 	</td>
-    <td><FONT SIZE=-1  FACE="Arial" color="#000033"><?php if(!empty($row['therapy'])) echo substr($row['therapy'],0,$GLOBAL_CONFIG['medocs_text_preview_maxlen']).'<br>'; ?>
+	
+	
+	
+     <!--   <td><FONT SIZE=-1  FACE="Arial" color="#000033"><?php if(!empty($row['notes'])) echo substr($codice[1],0,$GLOBAL_CONFIG['medocs_text_preview_maxlen']).'<br>'; ?>-->
+	<!--<td><FONT SIZE=-1  FACE="Arial" color="#000033"><?php if(!empty($row['therapy'])) echo substr($row['therapy'],0,$GLOBAL_CONFIG['medocs_text_preview_maxlen']).'<br>'; ?>
 
 	</td>    
 	<td align="center"><a href="<?php echo $thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&encounter_nr='.$HTTP_SESSION_VARS['sess_en'].'&target='.$target.'&mode=details&type_nr='.$type_nr.'&nr='.$row['nr']; ?>"><img <?php echo createComIcon($root_path,'info3.gif','0'); ?>></a></td>
-	<td align="center"><a href="<?php echo $root_path."modules/pdfmaker/medocs/report.php".URL_APPEND."&enc=".$HTTP_SESSION_VARS['sess_en']."&mnr=".$row['nr'].'&target='.$target; ?>" target=_blank><img <?php echo createComIcon($root_path,'pdf_icon.gif','0'); ?>></a></td>
-    <td><FONT SIZE=-1  FACE="Arial"><?php if($row['personell_name']) echo $row['personell_name']; ?></td>
+	-->
+	<!--link alla pagina pdf -->
+	<?php
+	if($appt_num2[0])
+	{
+	//echo $appt_num2[0];
+	$query="SELECT * FROM care_appointment WHERE nr=".$appt_num2[0];
+
+	$answer=$db->Execute($query);
+	$rispo=$answer->FetchRow();
+	}
+	else if ($ris2=='Relazione Conclusiva Breve')
+	{
+	
+	$query_short="SELECT * FROM care_encounter_notes WHERE aux_notes='rel_conc_short'  AND status='Fatto' AND encounter_nr=".$encounter_nr." ORDER BY ref_notes_nr DESC";
+	$answer_short=$db->Execute($query_short);
+	
+	for($kontatore_short=0;$kontatore_short<$contatore_short;$kontatore_short++)
+	{
+	$rispo_short=$answer_short->FetchRow();
+	}
+$file_short=substr($rispo_short['ref_notes_nr'],0,10)."_".substr($rispo_short['ref_notes_nr'],10,16).substr($rispo_short['time'],0,2).substr($rispo_short['time'],3,2).".pdf";
+	}
+	
+	else if ($ris2=='Relazione Conclusiva')
+	{
+	$query="SELECT * FROM care_encounter_notes WHERE aux_notes='rel_conc' AND status='Fatto' AND encounter_nr=".$encounter_nr." ORDER BY ref_notes_nr DESC";
+
+
+	$answer=$db->Execute($query);
+	for($kontatore=0;$kontatore<$contatore;$kontatore++)
+	{
+	$rispo2=$answer->FetchRow();
+	}
+	$file=substr($rispo2['ref_notes_nr'],0,10)."_".substr($rispo2['ref_notes_nr'],10,16).".pdf";
+	}
+
+
+	 else  {
+	$query="SELECT * FROM care_encounter_notes WHERE aux_notes='rel_conc_cardio' AND status='Fatto' AND encounter_nr=".$encounter_nr." ORDER BY ref_notes_nr DESC";
+
+
+	$answer=$db->Execute($query);
+	//$quanti=$answer->RecordCount();
+	for($kontatore2=0;$kontatore2<$contatore_cardio;$kontatore2++)
+	{
+	$rispo_cardio=$answer->FetchRow();
+	}
+	$file_cardio=substr($rispo_cardio['ref_notes_nr'],0,10)."_".substr($rispo_cardio['ref_notes_nr'],10,16).".pdf";
+	
+	}                                                                                                                                                   
+	/*echo substr($rispo2['ref_notes_nr'],0,10)."_".substr($rispo2['ref_notes_nr'],10,16)".pdf";
+	exit;
+	*/
+	?>
+	<td align="center"><?php if($rispo['appt_status']=="Fatto") {?><a href="<?php echo "../../referti/".$HTTP_SESSION_VARS['sess_en']."_".$appt_num2[0].".pdf"; ?>" target="_blank"><img <?php echo createComIcon($root_path,'pdf_icon.gif','0'); } 
+	else if($rispo2) {?><a href="<?php echo "../../rel_conc/".$file; ?>" target="_blank"><img <?php echo createComIcon($root_path,'pdf_icon.gif','0'); }
+	else if($rispo_cardio) {?><a href="<?php echo "../../rel_conc/".$file_cardio; ?>" target="_blank"><img <?php echo createComIcon($root_path,'pdf_icon.gif','0'); }
+	else if($rispo_short) {?><a href="<?php echo "../../rel_conc/".$file_short; ?>" target="_blank"><img <?php echo createComIcon($root_path,'pdf_icon.gif','0'); }
+	else echo "Referto da completare"?></a></td>
+	<!--<td align="center"><a href="<?php echo $root_path."modules/pdfmaker/medocs/report.php".URL_APPEND."&enc=".$HTTP_SESSION_VARS['sess_en']."&mnr=".$row['nr'].'&target='.$target; ?>" target=_blank><img <?php echo createComIcon($root_path,'pdf_icon.gif','0'); ?>></a></td>-->
+    <!--<td><FONT SIZE=-1  FACE="Arial"><?php if($row['personell_name']) echo $row['personell_name']; ?></td>
+	-->
   </tr>
 
 <?php
+		
 }
+
 ?>
 </table>
 
@@ -292,6 +435,7 @@ function chkForm(d) {
 		d.personell_name.focus();
 		return false;
 	}else{
+		
 		return true;
 	}
 
@@ -334,14 +478,38 @@ if(($mode=='show'||$mode=='details')&&!$enc_obj->Is_Discharged()){
 
 <p>
 <img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle'); ?>>
-<a href="<?php echo $thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&encounter_nr='.$HTTP_SESSION_VARS['sess_en'].'&target='.$target.'&mode=new&type_nr='.$type_nr; ?>"> 
-<?php echo $LDEnterNewRecord; ?>
+<a target='_blank' href="<?php echo "../../modules/laboratory/labor_datalist_noedit.php?lang=it&encounter_nr=".$encounter_nr."&noexpand=1&nostat=1&user_origin=lab";?>">
+Vedi i risultati delle analisi di laboratorio del paziente
+</a></p><br>
+<?php
+if ($HTTP_SESSION_VARS['sess_login_username']=="Francesco" ||$HTTP_SESSION_VARS['sess_login_username']=="Marco Bernardi" ||$HTTP_SESSION_VARS['sess_login_username']=="Berlutti Giovanna")
+{
+?>
+<img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle'); ?>>
+<a target='_blank' href="<?php echo "../../modules/medocs/conc_brevi.php?lang=it&encounter_nr=".$encounter_nr;?>">
+Conclusioni in breve
 </a><br>
+<?php
+}
+?>
+<!-- COMMENTATO DA NOI
+<img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle'); ?>>
+<a target='_blank' href="<?php echo "./rad_data.php?lang=it&encounter_nr=2004000000&noexpand=1&nostat=1&user_origin=lab";?>">
+Vedi i risultati di radiologia del paziente
+</a><br>
+
+<img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle'); ?>>
+<a href="<?php echo $thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&encounter_nr='.$HTTP_SESSION_VARS['sess_en'].'&target='.$target.'&mode=new&type_nr='.$type_nr; ?>"> 
+-->
+<?php //echo $LDEnterNewRecord; ?>
+</a><br>
+
 <?php
 	if($mode=='details'){
 ?>
-<img <?php echo createComIcon($root_path,'icon_acro.gif','0','absmiddle'); ?>>
+<!--<img <?php echo createComIcon($root_path,'icon_acro.gif','0','absmiddle'); ?>>
 <a href="<?php echo $root_path."modules/pdfmaker/medocs/report.php".URL_APPEND."&enc=".$HTTP_SESSION_VARS['sess_en']."&mnr=".$nr.'&target='.$target; ?>" target=_blank>
+-->
 <?php echo $LDPrintPDFDoc; ?>
 </a><br>
 <?php
@@ -384,7 +552,7 @@ if($parent_admit) {
 </table>        
 <ul>
 <p>
-<a href="<?php echo $breakfile?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
+<a href="<?php echo $breakfile."?lang=it"?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
 
 <p>
 </ul>

@@ -58,7 +58,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2><p><br>
 
 <ul>
-<FONT face="Verdana,Helvetica,Arial" size=3 color="#990000"><b><?php echo $LDMedLab ?></b></FONT>
+<FONT face="Verdana,Helvetica,Arial" size=3 color="#990000"><b><?php echo$LDMedLab ?></b></FONT>
  <TABLE cellSpacing=0 cellPadding=0 width=600 bgColor=#999999 border=0>
         <TBODY>
         <TR>
@@ -70,11 +70,13 @@ require($root_path.'include/inc_css_a_hilitebu.php');
                 <TD vAlign=top width=180><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B><nobr>
 				 <img <?php echo createComIcon($root_path,'blaupfeil.gif','0','middle') ?>>  
-				 <a href="labor_test_request_pass.php?sid=<?php echo "$sid&lang=$lang" ?>&target=chemlabor&user_origin=lab" ><?php echo $LDTestRequest ?></a><br>
+ <a href="labor_test_request_pass.php?sid=<?php echo "$sid&lang=$lang" ?>&target=chemlabor&user_origin=lab" ><?php echo $LDTestRequest ?></a><br>
 				  </nobr></B></FONT></TD>
+
                 <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDTestRequestChemLabTxt ?></FONT></TD>
+size=2><?php echo $LDTestRequestChemLabTxt ?></FONT></TD>
 			</TR> 
+
                            
               <TR bgColor=#dddddd height=1>
                 <TD colSpan=2><IMG height=1 
@@ -90,7 +92,8 @@ require($root_path.'include/inc_css_a_hilitebu.php');
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php echo $LDTestReceptionTxt ?></FONT></TD>
 			</TR> 
-                           
+
+                          
               <TR bgColor=#dddddd height=1>
                 <TD colSpan=2><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
@@ -100,6 +103,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
                 <TD vAlign=top width=180><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B><nobr>
 				 <img <?php echo createComIcon($root_path,'blaupfeil.gif','0','middle') ?>>  
+				 <!--<a href="../../Excel/test.php?<?php echo "sid=$sid&lang=$lang" ?>&route=validroute">-->
 				 <a href="labor_datasearch_pass.php?<?php echo "sid=$sid&lang=$lang" ?>&route=validroute">
 				 <?php echo $LDSeeData  ?></a><br>
 				  </nobr></B></FONT></TD>
@@ -112,7 +116,6 @@ require($root_path.'include/inc_css_a_hilitebu.php');
                   src="../../gui/img/common/default/pixel.gif" 
                   width=5></TD></TR>
 				  
-
               <TR bgColor=#eeeeee>
                 <TD vAlign=top width=180><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B> 
@@ -120,6 +123,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 				<a href="labor_datainput_pass.php?<?php echo "sid=$sid&lang=$lang" ?>"><?php echo $LDNewData ?></a></B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><nobr><?php echo $LDEnterLabData ?></nobr></FONT></TD></TR>
+
 <!--               
               <TR bgColor=#dddddd height=1>
                 <TD colSpan=2><IMG height=1 
@@ -176,7 +180,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 		</TABLE>
 
 <p>
-
+<!--
 <FONT face="Verdana,Helvetica,Arial" size=3 color="#990000"><b><?php echo $LDPathLab ?></b></FONT>
   <TABLE cellSpacing=0 cellPadding=0 width=600 bgColor=#999999 border=0>
         <TBODY>
@@ -217,7 +221,8 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 		</TABLE>
 
 <p>
-
+-->
+<!--
 <FONT face="Verdana,Helvetica,Arial" size=3 color="#990000"><b><?php echo $LDBacLab ?></b></FONT>
  <TABLE cellSpacing=0 cellPadding=0 width=600 bgColor=#999999 border=0>
         <TBODY>
@@ -256,6 +261,8 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 		</TBODY>
 		</TABLE>
 		<p>
+-->
+<!--
 <FONT face="Verdana,Helvetica,Arial" size=3 color="#990000"><b><?php echo $LDBloodBank ?></b></FONT>
 
  <TABLE cellSpacing=0 cellPadding=0 width=600 bgColor=#999999 border=0>
@@ -295,7 +302,8 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 		</TBODY>
 		</TABLE>
 		<p>
-		
+-->		
+
 <FONT face="Verdana,Helvetica,Arial" size=3 color="#990000"><b><?php echo $LDAdministration ?></b></FONT>
 
  <TABLE cellSpacing=0 cellPadding=0 width=600 bgColor=#999999 border=0>

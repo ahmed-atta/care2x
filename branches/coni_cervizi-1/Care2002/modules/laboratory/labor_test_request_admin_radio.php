@@ -19,6 +19,7 @@ define('LANG_FILE','konsil.php');
 *  $user_origin == lab ;  from the laboratory
 *  and set the user cookie name and break or return filename
 */
+echo "prova";
 if($user_origin=='lab'){
 	$local_user='ck_lab_user';
 	$breakfile=$root_path.'modules/radiology/radiolog.php'.URL_APPEND;

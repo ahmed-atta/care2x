@@ -16,7 +16,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 require_once($root_path.'global_conf/areas_allow.php');
 
-$allowedarea=&$allow_area['admit'];
+$allowedarea=&$allow_area['medocs'];
 $append=URL_REDIRECT_APPEND.'&from=pass'; 
 
 if(!session_is_registered('sess_user_origin')) session_register('sess_user_origin');

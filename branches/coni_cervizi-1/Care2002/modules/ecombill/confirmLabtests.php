@@ -83,7 +83,7 @@ extract($TXT);
 		$qrystr=substr($qrystr,strpos($qrystr,"&"));
 		
 		$itmcd = substr($qrystr1,1,strlen($itmcd)-1);		
-		$lbqry="SELECT * FROM care_billing_item WHERE item_code='$itmcd'";
+		$lbqry="SELECT * FROM prezzi_".$_SESSION['assicurazione']." WHERE item_code='$itmcd'";
 		$resultlbqry=$db->Execute($lbqry);	
 		if(is_object($resultlbqry)) $item=$resultlbqry->FetchRow();
     	    	echo "</tr><tr bgColor=\"#eeeeee\">";
