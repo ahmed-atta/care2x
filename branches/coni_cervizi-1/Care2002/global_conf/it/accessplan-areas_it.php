@@ -42,6 +42,8 @@ $areaopt['fotolab']='Fotolab';
 $areaopt['test_order']='Konsil schreiben';
 $areaopt['test_receive']='Konsil empfangen';
 $areaopt['test_diagnose']='Konsil befunden';
+$areaopt['Amministrazione']='Amministrazione';
+$areaopt['ecombill']='Fatturazione';
 
 $area_opt=array(
 							/* Group start*/
@@ -125,7 +127,7 @@ $area_opt=array(
 						  '_a_2_dutyplanallread' => 'Personell Duty/Leave plan read only',
 						  
 							/* Group start*/
-						   'title_bill' => 'Billing',
+						  'title_bill' => 'Billing',
 						  '_a_1_billallwrite' => 'Billing (all areas) read & write',
 						  '_a_2_billallread' => 'Billing (all areas) read only',
 						  '_a_2_billpharmawrite' => 'Billing (pharmacy) read & write',
@@ -143,6 +145,13 @@ $area_opt=array(
 						  
 							/* Group start*/
 						   'title_dir' => 'Telephone Directory',
-						  '_a_1_teldirwrite' => 'Telephone & Beeper information write'
+						  '_a_1_teldirwrite' => 'Telephone & Beeper information write',
+						  
+						  /* Group start MESSO DA NOI*/
+						   'title_Amministrazione' => 'Amministrazione',
+						  '_a_1_Amministrazioneallwrite' => 'Amministrazione (all areas) write',
+						  '_a_2_AmministrazioneStatistichewrite'=> 'Amministrazione statistiche write',
+						  '_a_2_AmministrazioneFogliolavorowrite'=> 'Amministrazione stampare il foglio di lavoro write'
+						  
 						);
 ?>
