@@ -17,7 +17,7 @@ if(!isset($mode)){
 	include_once($root_path.'include/care_api_classes/class_measurement.php');
 	if(!isset($obj)) $obj=new Measurement;
 	include_once($root_path.'include/inc_date_format_functions.php');
-	$HTTP_POST_VARS['date']=@formatDate2STD($HTTP_POST_VARS['date'],$date_format);
+	$HTTP_POST_VARS['msr_date']=@formatDate2STD($HTTP_POST_VARS['msr_date'],$date_format);
 	//include('./include/save_prescription.inc.php');
 	include('./include/save_admission_data.inc.php');
 }
@@ -34,8 +34,8 @@ if($mode=='show'){
 		WHERE p.pid=".$HTTP_SESSION_VARS['sess_pid']." 
 			AND p.pid=e.pid 
 			AND e.encounter_nr=m.encounter_nr  
-			AND (m.type=6 OR m.type=7)
-			AND m.type=t.nr
+			AND (m.msr_type_nr=6 OR m.msr_type_nr=7)
+			AND m.msr_type_nr=t.nr
 			AND m.unit_nr=u.nr
 		ORDER BY m.modify_time DESC";
 		
@@ -43,7 +43,6 @@ if($mode=='show'){
 		$rows=$result->RecordCount();
 	}
 }
-
 
 $subtitle=$LDWtHt;
 $HTTP_SESSION_VARS['sess_file_return']=$thisfile;

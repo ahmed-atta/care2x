@@ -44,8 +44,6 @@ function popRecordHistory(table,pid) {
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
 <script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
-
-
 <?php 
 if($parent_admit) include($root_path.'include/inc_js_barcode_wristband_popwin.php');
 require($root_path.'include/inc_js_gethelp.php'); 

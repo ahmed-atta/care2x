@@ -4,16 +4,22 @@ if(!isset($obj)) $obj=new Measurement;
 $unit_types=$obj->getUnits();
 ?>
 
-<form method="post" >
+<form method="post" name="wtht_form">
  <table border=0 cellpadding=2 width=100%>
    <tr bgcolor="#f6f6f6">
      <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDate; ?></td>
-     <td><input type="text" name="date" size=10 maxlength=10  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"></td>
+     <td><input type="text" name="msr_date" size=10 maxlength=10  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+	 <a href="javascript:show_calendar('wtht_form.msr_date','<?php echo $date_format; ?>')"><img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
+	 </td>
    </tr>
-   
+<!--    <tr bgcolor="#f6f6f6">
+     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDTime; ?></td>
+     <td><input type="text" name="msr_time" size=10 maxlength=5 ></td>
+   </tr>
+ -->   
    <tr bgcolor="#f6f6f6">
      <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDMeasurement.' '.$LDType; ?></td>
-     <td><FONT SIZE=-1  FACE="Arial"><input type="radio" name="type" value="6"> <?php echo $LDWeight; ?> <input type="radio" name="type" value="7"> <?php echo $LDHeight; ?>
+     <td><FONT SIZE=-1  FACE="Arial"><input type="radio" name="msr_type_nr" value="6"> <?php echo $LDWeight; ?> <input type="radio" name="msr_type_nr" value="7"> <?php echo $LDHeight; ?>
          
      </td>
    </tr>

@@ -11,7 +11,8 @@ function popImmNotes(nr) {
   <tr bgcolor="#f6f6f6">
     <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDType; ?></td>
     <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDate; ?></td>
-    <td  <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDValue; ?></td>
+<!--     <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDTime; ?></td>
+ -->    <td  <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDValue; ?></td>
     <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDUnit; ?></td>
     <td  <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDEncounterNr; ?></td>
     <td width=25% <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDNotes; ?></td>
@@ -27,8 +28,9 @@ while($row=$result->FetchRow()){
 
   <tr bgcolor="<?php echo $bgc; ?>">
     <td valign="top"><FONT SIZE=-1  FACE="Arial"><?php echo $row['type_name']; ?></td>
-    <td valign="top"><FONT SIZE=-1  FACE="Arial"><?php echo @formatDate2Local($row['date'],$date_format); ?></td>
-    <td valign="top"><FONT SIZE=-1  FACE="Arial" color="#006600"><b><?php echo $row['value']; ?></b></td>
+    <td valign="top"><FONT SIZE=-1  FACE="Arial"><?php echo @formatDate2Local($row['msr_date'],$date_format); ?></td>
+<!--     <td valign="top"><FONT SIZE=-1  FACE="Arial" color="#006600"><b><?php echo $row['msr_time']; ?></b></td>
+ -->    <td valign="top"><FONT SIZE=-1  FACE="Arial" color="#006600"><b><?php echo $row['value']; ?></b></td>
     <td valign="top"><FONT SIZE=-1  FACE="Arial"><?php echo $row['unit_id']; ?></td>
     <td valign="top"><FONT SIZE=-1  FACE="Arial"><?php echo $HTTP_SESSION_VARS['sess_full_en']; ?></td>
     <td valign="top"><FONT SIZE=-1  FACE="Arial"><?php echo nl2br($row['notes']); ?></td>
