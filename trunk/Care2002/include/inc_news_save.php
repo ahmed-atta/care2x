@@ -25,7 +25,7 @@ if(is_uploaded_file($HTTP_POST_FILES['pic']['tmp_name']) && $HTTP_POST_FILES['pi
 {
     $picext=substr($HTTP_POST_FILES['pic']['name'],strrpos($HTTP_POST_FILES['pic']['name'],'.')+1);
                     
-    if(stristr($picext,'jpg')||stristr($picext,'gif'))
+    if(stristr($picext,'jpg')||stristr($picext,'gif')||stristr($picext,'png'))
     {
         $is_pic=1;	
     }
