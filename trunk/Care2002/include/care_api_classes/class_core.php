@@ -7,7 +7,7 @@
 class Core {
 
     var $coretable; # For the default db table
-	var $sql; # For SQL query. Can be extracted with the "getLastQuery()" method
+	var $sql=''; # For SQL query. Can be extracted with the "getLastQuery()" method
 	var $ref_array=array(); # For internal update/insert operations
 	var $data_array=array(); # For internal update/insert operations
 	var $buffer_array=array(); # For internal update/insert operations
@@ -22,19 +22,44 @@ class Core {
 	var $is_preloaded=FALSE;
 	# internal error message variable, usually used in debugging
 	var $error_msg='';
-	
+	# Status items used in sql queries "IN (???)"
 	var $dead_stat="'deleted','hidden','inactive','void'";
+	var $normal_stat="'','normal'";
 	
+	/**
+	* Sets the coretable variable to the name of the database table
+	* This points the core object to that database table and all core routines would use this table
+	* until the core table is reset or replaced with another table name
+	* @param $table (str), table name
+	* @return void
+	*/
 	function setTable($table) {
 	    $this->coretable=$table;
 	}
+	/**
+	* Points the reference array to the field names array.
+	* This field names array corresponds to  the database table set by the setTable() method
+	* @param $array (assoc array), passed by reference, the associative array holding the field names
+	* @return void
+	*/
 	function setRefArray(&$array) {
 	    if(!is_array($array)) return FALSE;
 	    $this->ref_array=$array;
 	}
+	/**
+	* Points the core data array to the external array that holds the data to be processed
+	* @param $array (assoc array), passed by reference, the associative array holding the data
+	* @return void
+	*/
 	function setDataArray(&$array){
 	    $this->data_array=$array;
 	}
+	/**
+	* Checks if a certain database record exists based onthe supplied query condition
+	* Should be used privately
+	* @param $cond (str), the query "where" condition without the WHERE 
+	* @return TRUE/FALSE
+	*/
 	function _RecordExists($cond=''){
 		global $db;
 		if(empty($cond)) return FALSE;
@@ -44,11 +69,33 @@ class Core {
 			}else{return FALSE;}
 		}else{return FALSE;}
 	}
+	/**
+	* Sets the internal sql query variable to the sql query
+	* @param $sql  (str), the query statement
+	* @return void
+	*/
 	function setSQL(&$sql){
 		$this->sql=$sql;
 	}
 	/**
-	* Transaction routine
+	* Transaction routine, ADODB transaction
+	* @param $sql  (str), the query statement. 
+	* @return TRUE/FALSE
+	* 
+	* $sql="INSERT INTO care_users (item) VALUES ('value')";
+	* $core->Transact($sql);
+	*
+	* If the query parameter is empty, the method will use the sql query stored internally.
+	* This internal sql query statement must be set with the setSQL() method or direct setting of variable before Transact() is called.
+	*
+	* $sql="INSERT INTO care_users (item) VALUES ('value')";
+	* $core->setSQL($sql);
+	* $core->Transact();
+	*
+	* or internally in class extensions 
+	*	
+	* $this->sql="INSERT INTO care_users (item) VALUES ('value')";
+	* $this->Transact();
 	*/
 	function Transact($sql='') {
 	    global $db;
@@ -95,29 +142,61 @@ class Core {
 	    $this->_prepSaveArray();
 		return $this->insertDataFromArray($this->buffer_array);
 	}
-
+	/**
+	* Returns all records with the needed items from the table. The table name must be set in the coretable first by setTable() method.
+	* @param $items (str), items to be returned from each record fetched from the table. The items should be separted with commas.
+	* @return ADODB record object
+	*
+	* $items="pid, name_last, name_first, birth_date, sex";
+	* $core->setTable('care_person');
+	* $persons = $core->getAllItemsObject($items);
+	* while($row=$persons->FetchRow()){
+	* ...
+	* }
+	*/
 	function getAllItemsObject(&$items) {
 	    global $db;
 	    $this->sql="SELECT $items  FROM $this->coretable WHERE 1";
         //echo $this->sql;
-        if($this->result=$db->Execute($this->sql)) {
-            if($this->result->RecordCount()) {
-				 return $this->result;	 
+        if($this->res['gaio']=$db->Execute($this->sql)) {
+            if($this->rec_count=$this->res['gaio']->RecordCount()) {
+				 return $this->res['gaio'];	 
 			} else { return FALSE; }
 		} else { return FALSE; }	
 	}
-	
+	/**
+	* Returns all records with the all items from the table. The table name must be set in the coretable first by setTable() method.
+	* @return ADODB record object
+	*
+	* $core->setTable('care_person');
+	* $persons = $core->getAllDataObject();
+	* while($row=$persons->FetchRow()){
+	* ...
+	* }
+	*/
 	function getAllDataObject() {
 	    global $db;
 	    $this->sql="SELECT *  FROM $this->coretable WHERE 1";
         //echo $this->sql;
-        if($this->result=$db->Execute($this->sql)) {
-            if($this->result->RecordCount()) {
-				 return $this->result;	 
+        if($this->res['gado']=$db->Execute($this->sql)) {
+            if($this->rec_count=$this->res['gado']->RecordCount()) {
+				 return $this->res['gado'];	 
 			} else { return FALSE; }
-		} else { return FALSE; }
+		} else { return FALSE; }	
 	}	
-	
+	/**
+	* Similar to getAllItemsObject() method but returns the records in an associative array.
+	* Returns all records with the needed items from the table. The table name must be set in the coretable first by setTable() method.
+	* @param $items (str), items to be returned from each record fetched from the table. The items should be separted with commas.
+	* @return associative array
+	*
+	* $items="pid, name_last, name_first, birth_date, sex";
+	* $core->setTable('care_person');
+	* $persons = $core->getAllItemsArray($items);
+	* while(list($x,$v)=each($persons)){
+	* ...
+	* }
+	*/
 	function getAllItemsArray(&$items) {
 	    global $db;
 	    $this->sql="SELECT $items  FROM $this->coretable WHERE 1";
@@ -129,7 +208,16 @@ class Core {
 			} else { return FALSE; }
 		} else { return FALSE; }	
 	}
-	
+	/**
+	* Returns all records with the all items from the table. The table name must be set in the coretable first by setTable() method.
+	* @return ADODB record object
+	*
+	* $core->setTable('care_person');
+	* $persons = $core->getAllDataArray();
+	* while(list($x,$v)=each($persons)){
+	* ...
+	* }
+	*/
 	function getAllDataArray() {
 	    global $db;
 	    $this->sql="SELECT *  FROM $this->coretable WHERE 1";
