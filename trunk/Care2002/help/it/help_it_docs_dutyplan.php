@@ -6,7 +6,7 @@
 
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Desidero creare un nuovo ordine di servizio per il mese visualizzato</b></font>
-<ul> <b>1: </b>Selezionare il bottone <img src="../img/it/it_newplan.gif" border=0 >.<br>
+<ul> <b>1: </b>Selezionare il bottone <img <?php echo createLDImgSrc('../','newplan.gif','0') ?> >.<br>
 </ul>
 <ul><b>2:</b>
  Se si è fatto login precedentemente e si hanno i privilegi di accesso sufficienti, the 

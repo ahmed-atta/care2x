@@ -1,7 +1,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
-Intranet Email - 
+Email - Intranet 
 <?php
 	switch($src)
 	{
@@ -9,23 +9,23 @@ Intranet Email -
 						{
 							case "": print "Log in";
 												break;
-							case "1": print "Registering a new user";
+							case "1": print "Registrando um novo usuário";
 												break;
 						}
 						break;
 	case "mail": switch($x1)
 						{
-							case "compose": print "Compose a new mail";
+							case "compose": print "Criar uma nova mensagem";
 												break;
-							case "listmail": print "Mail listing";
+							case "listmail": print "Lista de mensagens";
 												break;
-							case "sendmail": print "Mail sent";
+							case "sendmail": print "Mensagem enviada";
 												break;
 						}
 						break;
-	case "read": print "Reading mail";
+	case "read": print "Ler mensagens";
 						break;
-	case "address": print "Address book";
+	case "endereço": print "Livro de endereços";
 						break;
 
 	}
@@ -40,43 +40,43 @@ Intranet Email -
 <?php if($src=="pass") : ?>
 <?php if($x1=="") : ?>
 		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to log in?</b>
+Como fazer o log in?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Enter your intranet email address (without the @xxxxxx part) in the <nobr>"<span style="background-color:yellow" > Your email address: </span>"</nobr> field.<br>
- 	<b>Step 2: </b>Select the domain part  in the <nobr>"<span style="background-color:yellow" > @<select name="d">
-                                                                                          	<option value="Test Domain 1"> Test Domain 1</option>
-                                                                                          	<option value="Test Domain 2"> Test Domain 2</option>
+ 	<b>Passo 1: </b>Entre com o seu endereço de email da intranet (sem a parte @xxxxxx ) no campo <nobr>"<span style="background-color:yellow" > Seu endereço de email: </span>"</nobr> .<br>
+ 	<b>Passo 2: </b>Selecione a parte de domínio no campo <nobr>"<span style="background-color:yellow" > @<select name="d">
+                                                                                          	<option value="Teste Domínio 1"> Teste Domínio 1</option>
+                                                                                          	<option value="Teste Domínio 2"> Teste Domínio 2</option>
                                                                                           </select>
-                                                                                           </span>"</nobr> field.<br>
- 	<b>Step 3: </b>Click the <input type="button" value="Login"> button to log in.<br>
+                                                                                           </span>"</nobr> .<br>
+ 	<b>Passo 3: </b>Clique no botão <input type="button" value="Login"> para fazer o log in.<br>
 </ul>
 
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-I have no address yet. How to get an address?</b>
+Eu ainda não tenho endereço. Como consigo um endereço?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the link "<span style="background-color:yellow" > New user can register here. <img <?php echo createComIcon('../','bul_arrowgrnsm.gif','0') ?>> </span>" to open the
-	registration form.<br>
- 	<b>Step 2: </b>For further instructions, click the "Help" button once the register form is displayed.<br>
+ 	<b>Passo 1: </b>Clique no link "<span style="background-color:yellow" > Novo usuário pode se registrar aqui. <img <?php echo createComIcon('../','bul_arrowgrnsm.gif','0') ?>> </span>" para abrir o 
+	formulário de registro.<br>
+ 	<b>Passo 2: </b>Para maiores instruções, clique no botão "Ajuda" após o formulário de registro ter sido mostrado.<br>
 </ul>
 	<?php endif ?>		
 	<?php if($x1=="1") : ?>
 		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to register?</b>
+Como se registrar?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Enter the family and given name in the "<span style="background-color:yellow" > Name, Given name: </span>" field.<br>
- 	<b>Step 2: </b>Enter the email address of your choice  in the "<span style="background-color:yellow" > Choice email address: </span>" field.<p>
- 	<b>Step 3: </b>Select the domain part  in the <nobr>"<span style="background-color:yellow" > @<select name="d">
-                                                                                          	<option value="Test Domain 1"> Test Domain 1</option>
-                                                                                          	<option value="Test Domain 2"> Test Domain 2</option>
+ 	<b>Passo 1: </b>Entre com o sobrenome e nome no campo "<span style="background-color:yellow" > Sobrenome, nome: </span>" .<br>
+ 	<b>Passo 2: </b>Entre com o seu endereço de email de sua escolha no campo "<span style="background-color:yellow" > Escolha de endereço de email: </span>" .<p>
+ 	<b>Passo 3: </b>Selecione a parte de domínio  no campo  <nobr>"<span style="background-color:yellow" > @<select name="d">
+                                                                                          	<option value="Teste Domínio 1"> Teste Domínio 1</option>
+                                                                                          	<option value="Teste Domínio 2"> Teste Domínio 2</option>
                                                                                           </select>
-                                                                                           </span>"</nobr> field.<br>
- 	<b>Step 4: </b>Enter the alias of your choice  in the "<span style="background-color:yellow" > Alias: </span>" field.<p>
- 	<b>Step 5: </b>Enter the password of your choice in the "<span style="background-color:yellow" > Choice password: </span>" field.<br>
- 	<b>Step 6: </b>Reenter the password in the "<span style="background-color:yellow" > Reenter the password: </span>" field.<br>
- 	<b>Step 3: </b>Click the <input type="button" value="Register"> button to register.<br>
+                                                                                           </span>"</nobr> .<br>
+ 	<b>Passo 4: </b>Entre com o alias de sua escolha no campo "<span style="background-color:yellow" > Alias: </span>" .<p>
+ 	<b>Passo 5: </b>Entre com a senha de sua escolha no campo "<span style="background-color:yellow" > Senha escolhida: </span>" .<br>
+ 	<b>Passo 6: </b>Entre novamente com a senha no campo "<span style="background-color:yellow" > Entre novamente com a senha: </span>" .<br>
+ 	<b>Passo 7: </b>Clique no botão <input type="button" value="Registre"> para se registrar.<br>
 </ul>
 
 	<?php endif ?>		
@@ -85,94 +85,94 @@ How to register?</b>
 <?php if($src=="mail") : ?>
 <?php if($x1=="listmail") : ?>
 		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to open a mail?</b>
+Como abrir uma mensagem?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click either the mail's recipient or sender, or subject, or date, or the icons <img src="../img/c-mail.gif" border=0 align="absmiddle"> or <img src="../img/o-mail.gif" border=0 align="absmiddle">.<br>
+ 	<b>Passo 1: </b>Clique ou no destinatário da mensagem, ou em quem enviou, ou assunto, ou data, ou nos ícones <img src="../img/c-mail.gif" border=0 align="absmiddle"> ou <img src="../img/o-mail.gif" border=0 align="absmiddle">.<br>
 </ul>
 
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-What do the icons <img src="../img/c-mail.gif" border=0 align="absmiddle"> and <img src="../img/o-mail.gif" border=0 align="absmiddle"> mean?</b>
+O que os ícones <img src="../img/c-mail.gif" border=0 align="absmiddle"> e <img src="../img/o-mail.gif" border=0 align="absmiddle"> significam?</b>
 </font>
 <ul>       	
- 	<img src="../img/c-mail.gif" border=0 align="absmiddle"> = Mail is not yet read or opened. <br>
- 	<img src="../img/o-mail.gif" border=0 align="absmiddle"> = Mail was already  read or opened. <br>
+ 	<img src="../img/c-mail.gif" border=0 align="absmiddle"> = Mensagem ainda não foi aberta ou lida. <br>
+ 	<img src="../img/o-mail.gif" border=0 align="absmiddle"> = Mensagem já foi aberta ou lida. <br>
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to delete a mail?</b>
+Como apagar uma mensagem?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Check  the mail's <input type="checkbox" name="a" value="s" checked> checkbox to select it.<br>
- 	<b>Step 2: </b>Click the <input type="button" value="Delete"> button.<br>
+ 	<b>Passo 1: </b>Marque na caixa de verificação da mensagem <input type="checkbox" name="a" value="s" verificado> para selecioná-la.<br>
+ 	<b>Passo 2: </b>Clique no botão <input type="button" value="Apagar"> .<br>
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to go from one folder to another?</b>
+Como ir de um arquivo para outro?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Just click the folder's name.<br>
+ 	<b>Passo 1: </b> Clique no botão com o nome do arquivo.<br>
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to compose or write a new mail?</b>
+Como compor ou escrever uma nova mensagem?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the link "<span style="background-color:yellow" > New Email </span>".<br>
+ 	<b>Passo 1: </b>Clique no link "<span style="background-color:yellow" > Novo Email </span>".<br>
 </ul>
 	<?php endif ?>		
 	<?php if($x1=="compose") : ?>
 		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to write a new mail?</b>
+Como escrever uma nova mensagem?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Enter the email address of the recipient in the "<span style="background-color:yellow" > Recipient: </span>" field.<br>
- 	<b>Step 2: </b>If you want to send a copy to somebody enter his email address in the "<span style="background-color:yellow" > (CC) </span>" field.<br>
- 	<b>Step 3: </b>If you want to send a copy to somebody (without showing the address) enter his email address in the "<span style="background-color:yellow" > (BCC) </span>" field.<br>
- 	<b>Step 4: </b>Enter the subject of your message  in the "<span style="background-color:yellow" > Subject: </span>" field.<br>
- 	<b>Step 5: </b>Now type your message in the text input field.<br>
- 	<b>Step 6: </b>Click the <input type="button" value="Send"> button to send the mail.<br>
+ 	<b>Passo 1: </b>Entre com o endereço de email do destinatário no campo "<span style="background-color:yellow" > Destinatário: </span>" .<br>
+ 	<b>Passo 2: </b>Se você quiser enviar uma cópia para alguem entre com seu endereço de email no campo "<span style="background-color:yellow" > (CC) </span>" .<br>
+ 	<b>Passo 3: </b>Se você quiser enviar uma cópia para alguem (sem mostrar o endereço) entre seu endereço de email no campo "<span style="background-color:yellow" > (BCC) </span>" .<br>
+ 	<b>Passo 4: </b>Entre com o assunto de sua mensagem no campo "<span style="background-color:yellow" > Assunto: </span>" .<br>
+ 	<b>Passo 5: </b>Digite sua mensagem no campo de entrada de texto.<br>
+ 	<b>Passo 6: </b>Clique no botão <input type="button" value="Enviar"> para enviar a mensagem.<br>
 </ul>
 		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-I plan to save the mail as a draft. How to do it?</b>
+Eu planejo salvar a mensagem como rascunho. Como fazer isto?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Type your message in the text input field.<br>
- 	<b>Step 2: </b>After typing your message, click the <input type="button" value="Save as draft"> button.<br>
+ 	<b>Passo 1: </b>Digite sua mensagem no campo de entrada de text.<br>
+ 	<b>Passo 2: </b>Depois de digitar sua mensagem, clique no botão <input type="button" value="Salvar como rascunho"> .<br>
 </ul>
 		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to use email addresses from my address book directly?</b>
+Como usar endereços de email diretamente de meu livro de endereços?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the <input type="button" value="Show all"> button under the "Quick address".<br>
- 	<b>Step 2: </b>A small window will pop up showing your address book.<br>
- 	<b>Step 3: </b>Click the radio button of an address corresponding to the field where it should be copied.<p>
+ 	<b>Passo 1: </b>Clique no botão <input type="button" value="Mostre todos"> "Endereço rápido".<br>
+ 	<b>Passo 2: </b>Uma pequena janela se abrirá com o livro de endereços.<br>
+ 	<b>Passo 3: </b>Clique no botão do radio de um endereço correspondente ao campo para onde deve ser copiado.<p>
 <ul>   
-		Click "To<input type="radio" name="t" value="a">" to copy the address to the "Recipient" field.<br>
-		Click "CC<input type="radio" name="t" value="a">" to copy the address to the "CC" field.<br>
-		Click "BCC<input type="radio" name="t" value="a">" to copy the address to the "BCC" field.<p>
+		Clique "To<input type="radio" name="t" value="a">" para copiar o endereço para o campo "Destinatário" .<br>
+		Clique "CC<input type="radio" name="t" value="a">" para copiar o endereço para o campo "CC" .<br>
+		Clique "BCC<input type="radio" name="t" value="a">" para copiar o endereço para o campo "BCC" .<p>
 </ul>
-        <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <b>Note:</b>  If you want to
-		reset a radiobutton, click the corresponding <img src="../img/redpfeil.gif" border=0> icon.<br> 	
-        <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <b>Note:</b> You can select several addresses
-		at the same time. 	<p>
- 	<b>Step 4: </b>Click the <input type="button" value="Take over"> button to copy the selected addresses to the mail being composed.<br>
- 	<b>Step 5: </b>Click the "<span style="background-color:yellow" > <img src="../img/l_arrowGrnSm.gif" border=0> Close </span>"
-	 link to close the pop-up window.<br>
+        <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <b>Nota:</b>  Se você quiser 
+		desmarcar um botão do radio, clique no ícone do botão correspondente <img src="../img/redpfeil.gif" border=0> .<br> 	
+        <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <b>Nota:</b> Você pode selecionar vários endereços
+		ao mesmo tempo. 	<p>
+ 	<b>Passo 4: </b>Clique no botão <input type="button" value="Assumir"> para copiar os endereços selecionados para a mensagem que está sendo composta.<br>
+ 	<b>Passo 5: </b>Clique no botão "<span style="background-color:yellow" > <img src="../img/l_arrowGrnSm.gif" border=0> Close </span>"
+	 para fechar a janela aberta.<br>
 </ul>
 		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-What is this "Quick address" thing?</b>
+Como é que funciona o "Endereço rápido" ?</b>
 </font>
 <ul>       	
- 	<b>Note: </b>If you have email addresses stored in the "Quick address" cache, the first five will be listed in the "quick address".<p>
- 	<b>Step 1: </b>Click first in the entry field where you want to put the address (eg. "Recipient" or "CC" or "BCC") to focus it.<br>
- 	<b>Step 2: </b>Click the address in the "Quick address" list. This address will be copied to the entry field where you have previously clicked.<br>
+ 	<b>Nota: </b>Se você tem endereços de email armazenados em  "Endereço rápido" , oa cinco primeiros serão listados no "Endereço rápido".<p>
+ 	<b>Passo 1: </b>Clique primeiro no campo onde você quer por o endereço (por exemplo: "Destinatário" ou "CC" ou "BCC") .<br>
+ 	<b>Passo 2: </b>Clique no botão Endereço na lista do "Endereço rápido" . Este endereço será copiado para o campo de entrada que você clicou previamente.<br>
 </ul>
 
 	<?php endif ?>		
 <?php if(($x1=="sendmail")&&($x3=="1")) : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to compose or write a new mail?</b>
+Como compor ou escrever uma nova mensagem?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the link "<span style="background-color:yellow" > New Email </span>".<br>
+ 	<b>Passo 1: </b>Clique no link do botão  "<span style="background-color:yellow" > Novo Email </span>".<br>
 </ul>
 	<?php endif ?>		
 <?php endif ?>	
@@ -180,74 +180,74 @@ How to compose or write a new mail?</b>
 
 <?php if($src=="read") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to print the mail?</b>
+Como imprimir a mensagem?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the link "<span style="background-color:yellow" > Printer version <img src="../img/bul_arrowGrnSm.gif" border=0></span>".<br>
- 	<b>Step 2: </b>A window will pop up displaying a printer friendly version of the mail.<br>
- 	<b>Step 3: </b>Click the option "<span style="background-color:yellow" > < Print > </span>" to print.<br>
- 	<b>Step 4: </b>The Windows© printer menu will pop up. Click the button "OK".<br>
- 	<b>Step 5: </b>To close the printer version window, click the option "<span style="background-color:yellow" > < Close > </span>".<br>
+ 	<b>Passo 1: </b>Clique no link do botão  "<span style="background-color:yellow" > Versão de impressão <img src="../img/bul_arrowGrnSm.gif" border=0></span>".<br>
+ 	<b>Passo 2: </b>Uma janela abrirá mostrando uma versão de impressão da mensagem.<br>
+ 	<b>Passo 3: </b>Clique no botão opção "<span style="background-color:yellow" > < Print > </span>" para imprimir.<br>
+ 	<b>Passo 4: </b>O menu de impressoras do Windows© aparecerá. Clique no botão "OK".<br>
+ 	<b>Passo 5: </b>Para fechar a janela da versão de impressão, clique no botão de opção "<span style="background-color:yellow" > < Close > </span>".<br>
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to resend the mail?</b>
+Como re-enviar a mensagem?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the <input type="button" value="Resend"> button.<br>
- 	<b>Step 2: </b>Edit the email addresses if necessary.<br>
- 	<b>Step 3: </b>Click the <input type="button" value="Send"> button to finally resend the email.
+ 	<b>Passo 1: </b>Clique no botão <input type="button" value="Re-enviar"> .<br>
+ 	<b>Passo 2: </b>Edite os endereços da mensagem se necessário.<br>
+ 	<b>Passo 3: </b>Clique no botão <input type="button" value="Enviar"> para finalmente re-enviar a mensagem.
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to forward the mail?</b>
+Como encaminhar uma mensagem?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the <input type="button" value="Forward"> button.<br>
- 	<b>Step 2: </b>Enter the recipient's address.<br>
- 	<b>Step 3: </b>Click the <input type="button" value="Send"> button to finally forward the email.
+ 	<b>Passo 1: </b>Clique no botão <input type="button" value="Encaminhar"> .<br>
+ 	<b>Passo 2: </b>Entre com o endereço do destinatário.<br>
+ 	<b>Passo 3: </b>Clique no botão <input type="button" value="Enviar"> para finalmente encaminhar a mensagem.
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to delete the mail?</b>
+Como apagar uma mensagem?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the <input type="button" value="Delete"> button.<br>
- 	<b>Step 2: </b>You will be asked if you really want to delete the mail.<br>
- 	<b>Step 3: </b>Click the <input type="button" value="OK"> button to finally delete the email.<p>
-	<b>Note:</b> Mails that are deleted from the "Inbox" folder are temporarily stored in the "Recycle" folder.
+ 	<b>Passo 1: </b>Clique no botão <input type="button" value="Apagar"> .<br>
+ 	<b>Passo 2: </b>Você será perguntado se você realmente quer apagar a mensagem.<br>
+ 	<b>Passo 3: </b>Clique no botão <input type="button" value="OK"> para finalmente apagar a mensagem.<p>
+	<b>Note:</b> Mensagens que são apagadas do arquivo da "Caixa de entrada"  ficam temporariamente armazenados no arquivo "Reciclar" .
 </ul>
 	<?php endif ?>		
 	
-<?php if($src=="address") : ?>
+<?php if($src=="endereço") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to add an email address to the address book?</b>
+Como acrescentar um endereço de email ao livro de endereços?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the <input type="button" value="Add new email address"> button.<br>
- 	<b>Step 2: </b>An entry form will appear. Enter the name  in the "<span style="background-color:yellow" > Name, Given name: </span>" field.<br>
- 	<b>Step 3: </b>Enter the alias or nickname  in the "<span style="background-color:yellow" > Alias/Nickname: </span>" field.<br>
- 	<b>Step 4: </b>Enter the email address in the "<span style="background-color:yellow" > Email address: </span>" field.<br>
- 	<b>Step 5: </b>Select the domain part  in the <nobr>"<span style="background-color:yellow" > @<select name="d">
-                                                                                          	<option value="Test Domain 1"> Test Domain 1</option>
-                                                                                          	<option value="Test Domain 2"> Test Domain 2</option>
+ 	<b>Passo 1: </b>Clique no botão <input type="button" value="Acrescentar novo endereço de email"> .<br>
+ 	<b>Passo 2: </b>Um formulário de netrada aparecerá. Entre com o nome  no campo "<span style="background-color:yellow" > Sobrenome, Nome: </span>" .<br>
+ 	<b>Passo 3: </b>Entre com o alias ou apelido no campo "<span style="background-color:yellow" > Alias/Apelido: </span>" .<br>
+ 	<b>Passo 4: </b>Entre com o endereço de email no campo "<span style="background-color:yellow" > Endereço de Email: </span>" .<br>
+ 	<b>Passo 5: </b>Selecione a parte do domínio no campo  <nobr>"<span style="background-color:yellow" > @<select name="d">
+                                                                                          	<option value="Teste de Domínio 1"> Teste de Domínio 1</option>
+                                                                                          	<option value="Teste de Domínio 2"> Teste de Domínio 2</option>
                                                                                           </select>
-                                                                                           </span>"</nobr> field.<br>
- 	<b>Step 6: </b>Click the <input type="button" value="Save"> button.<br>
+                                                                                           </span>"</nobr> .<br>
+ 	<b>Passo 6: </b>Clique no botão <input type="button" value="Salvar"> .<br>
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to remove an email address from the address book?</b>
+Como remover um endereço de email do livro de endereços?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the checkbox <input type="checkbox" name="d" value="s" checked> of the address to be removed to select it.<br>
- 	<b>Step 2: </b>Click the <input type="button" value="Delete"> button.<br>
- 	<b>Step 3: </b>You will be asked if you really want to delete the mail.<br>
- 	<b>Step 4: </b>Click the <input type="button" value="OK"> button to finally remove the address.<p>
+ 	<b>Passo 1: </b>Clique na caixa de verificação <input type="checkbox" name="d" value="s" verificado> para selecionar o endereço que vai ser removido.<br>
+ 	<b>Passo 2: </b>Clique no botão <input type="button" value="Apagar"> .<br>
+ 	<b>Passo 3: </b>Você será perguntado se você realmente quer apagar o endereço.<br>
+ 	<b>Passo 4: </b>Clique no botão <input type="button" value="OK"> para finalmente remover o endereço.<p>
 </ul>
 	<?php endif ?>		
 
 	<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
-Note:</b>
+Nota:</b>
 </font>
 <ul>       	
- 	Intranet emails and addresses function ONLY WITHIN the intranet system and are not usable for the internet.<br>
+ 	A função de emails e endereços da intranet funcionam SOMENTE DENTRO do sistema da intranet e não podem ser usados para a internet.<br>
 </ul>
 	</form>
 

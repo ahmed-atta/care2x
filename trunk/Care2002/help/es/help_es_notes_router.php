@@ -1,11 +1,36 @@
-<font face="Verdana, Arial" size=3 color="#0000cc"> <b><?php echo $x1 ?></b></font> 
+<font face="Verdana, Arial" size=3 color="#0000cc"> <b><?php echo $x1 ?></b></font>
 <ul>
   <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
     <?php
 
 if($x2=='show'||$src=='sickness'){
 	if($x3){
-	
+?>
+<img <?php echo createComIcon('../','frage.gif','0') ?>>
+<font color="#990000"><b>How to display the registration data?</b></font>
+<ul>
+<b>Step: </b> Click the  <img <?php echo createLDImgSrc('../','reg_data.gif','0') ?>> button.<p>
+</ul>
+<img <?php echo createComIcon('../','frage.gif','0') ?>>
+<font color="#990000"><b>How to display the admission data?</b></font>
+<ul>
+<b>Step: </b> Click the  <img <?php echo createLDImgSrc('../','admission_data.gif','0') ?>> button.<p>
+<b>Note: </b> This button appears only when the person is currently admitted either as inpatient or outpatient.<p>
+</ul>
+<img <?php echo createComIcon('../','frage.gif','0') ?>>
+<font color="#990000"><b>How to display the report?</b></font>
+<ul> 
+<b>Step: </b> Click the  <img <?php echo createComIcon('../','info3.gif','0') ?>> button.<p>
+<b>Note: </b> This button appears only when the report data is not fully shown on the preview list.<p>
+</ul>
+<img <?php echo createComIcon('../','frage.gif','0') ?>>
+<font color="#990000"><b>How to generate a PDF document of the report?</b></font>
+<ul>
+<b>Step: </b> Click the  <img <?php echo createComIcon('../','pdf_icon.gif','0') ?>> button.<p>
+</ul>
+
+<?php
+
 	}else{
 
 		if($src=='sickness'){	

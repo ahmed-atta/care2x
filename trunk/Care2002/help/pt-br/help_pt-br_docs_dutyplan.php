@@ -1,37 +1,37 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Physician/Surgeon - Dutyplan</b></font>
+<b>Médico/Cirurgião - Plano de trabalho</b></font>
 <form action="#" >
 <p><font size=2 face="verdana,arial" >
 
 
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I want to create a new duty plan for the displayed month</b></font>
-<ul> <b>Step 1: </b>Click the button <img src="../img/en/en_newplan.gif" border=0 >.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Eu quero criar um novo plano de trabalho para o mes em exibição</b></font>
+<ul> <b>Passo 1: </b>Clique no botão <img <?php echo createLDImgSrc('../','newplan.gif','0') ?> > .<br>
 </ul>
-<ul><b>Step 2:</b>
- If you have logged in before and you have an access right for this function, the 
-		edit mode for editing a duty plan  will appear on the main frame.<br>
-		Otherwise, if you are not logged in, you will be required to enter your username and password. <p>
-		Enter your username and password and click the button <img <?php echo createLDImgSrc('../','continue.gif','0') ?>>.<p>
-		If you decide to cancel click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
+<ul><b>Passo 2:</b>
+ Se você tiver se logado antes e tem direito de acesso a esta função, o modo de edição para editar um plano de trabalho aparecerá na tela principal
+		.<br> 
+		De outra forma, se você não estiver logado, haverá a necessidade de entrar com o usuário e senha. <p>
+		Entre com seu usuário e senha e clique no botão <img <?php echo createLDImgSrc('../','continue.gif','0') ?>>.<p>
+		Se você decidir cancelar clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I want to create a plan for a certain month but the plan being displayed is for a different month.</b></font>
-<ul> <b>Step 1: </b>Click repeatedly on the clickable "Month" link until the month you wish is reached. <br>
-								Click on the right clickable "month" link to advance the month.<br>
-								Click on the left clickable "month" link to go back to earlier month.<br>
-		<b>Step 2: </b>Follow the earlier instructions on creating a new duty plan.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Eu quero criar um plano para um determinado mes, mas o plano que está sendo mostrado é de outro mes.</b></font>
+<ul> <b>Passo 1: </b>Clique repetidamente no link do "Mes" até alcançar o mes desejado. <br>
+								Clique à direita do link "mes" para avançar o mes.<br>
+								Clique à esquerda do link "mes" para voltar para um mes anterior.<br>
+		<b>Passo 2: </b>Siga as instruções anteriores para criar um novo plano de trabalho.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I want to go back to the quick view </b></font>
-<ul> <b>Step 1: </b>Click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?> >.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Eu quero voltar à visão rápida </b></font>
+<ul> <b>Passo 1: </b>Clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?> >.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I want to see the phone & beeper numbers of the physician/surgeon on duty </b></font>
-<ul> <b>Step 1: </b><span style="background-color:yellow" >Click on the person's name</span>.  A small pop-up window will appear showing relevant information.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Eu quero ver os números do bip e do telefone do médico/cirurgião em serviço </b></font>
+<ul> <b>Passo 1: </b><span style="background-color:yellow" >Clique no nome da pessoa</span>.  Uma pequena janela aparecerá mostrando a informação relevante.<br>
 </ul>
 
 
-<b>Note</b>
-<ul> If you decide to close the duty plan  click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
+<b>Nota</b>
+<ul> Se você decidir fechar o plano de trabalho clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
 </form>
 

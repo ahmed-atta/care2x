@@ -2,17 +2,17 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
 <?php
-if($x2=="pharma") print "Pharmacy - "; else print "Medical depot - ";
+if($x2=="pharma") print "Farmacia - "; else print "Suprimentos médicos - ";
 	switch($src)
 	{
-	case "input": if($x1=="update") print "Editing a product's Information";
-                          else print "Entering new product into the databank";
+	case "input": if($x1=="update") print "Editando uma informação de produto";
+                          else print "Inserindo um novo produto no banco de dados";
 					break;
-	case "search": print "Search a product";
+	case "search": print "Pesquisar um produto";
 					break;
-	case "mng": print "Manage products in the databank";
+	case "mng": print "Gerenciar produtos no banco de dados";
 					break;
-	case "delete": print "Removing a product from the databank";
+	case "delete": print "Removendo um produto do banco de dados";
 					break;
 	}
 
@@ -26,88 +26,88 @@ if($x2=="pharma") print "Pharmacy - "; else print "Medical depot - ";
 <?php if($src=="input") : ?>
 	<?php if($x1=="") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to enter a new product into the databank?</b>
+Como inserir um novo produto no banco da dados?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Enter first all available information about the product into their corresponding entry fields.<br>
+ 	<b>Passo 1: </b>Primeiro insira todas informações disponíveis sobre o produto nos seus campos correspondentes.<br>
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-I want to select a picture of the product. How to do it?</b>
+Eu quero selecionar uma figura do produto. Como fazer isso?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the button <input type="button" value="Browse..."> on the "<span style="background-color:yellow" > Picture file </span>" field.<br>
- 	<b>Step 2: </b>A small window for selecting a file will appear. Select the picture file of your choice and click "OK".<br>
+ 	<b>Passo 1: </b>Clique no botão <input type="button" value="Procurar..."> no campo "<span style="background-color:yellow" > arquivo da figura </span>" .<br>
+ 	<b>Passo 2: </b>Uma pequena janela para selecionar um arquivo irá aparecer. Selecione o arquivo com a figura de sua escolha e clique em "OK".<br>
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-I am finished entering all available product information. How to save it?</b>
+Finalizei a entrada de todas as informações de produto disponíveis. Como salvar?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the button <input type="button" value="Save">.<br>
+ 	<b>Passo 1: </b>Clique no botão <input type="button" value="Salvar">.<br>
 </ul>
 	<?php endif ?>	
 	<?php if($x1=="save") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to enter a new product into the databank?</b>
+Como inserir um novo produto no banco de dados?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the <input type="button" value="New product"> button.<br>
- 	<b>Step 2: </b>The entry form will appear.<br>
- 	<b>Step 3: </b>Enter the available information about the new product.<br>
- 	<b>Step 4: </b>Click the button <input type="button" value="Save"> to save the information.<br>
+ 	<b>Passo 1: </b>Clique no botão <input type="button" value="Novo produto"> .<br>
+ 	<b>Passo 2: </b>O formulário de entrada irá aparecer.<br>
+ 	<b>Passo 3: </b>Insira todas as informações disponíveis sobre o novo produto.<br>
+ 	<b>Passo 4: </b>Clique no botão <input type="button" value="Salvar"> para salvar as informações.<br>
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-I want to edit the product that is currently displayed How to do it?</b>
+Eu quero editar um produto que já está cadastrado. Como fazer isso?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the button <input type="button" value="Updte or edit">.<br>
- 	<b>Step 2: </b>The product information will be automatically entered into the editing form.<br>
- 	<b>Step 3: </b>Edit the information.<br>
- 	<b>Step 4: </b>Click the button <input type="button" value="Save"> to save the new information.<br>
+ 	<b>Passo 1: </b>Clique no botão <input type="button" value="Atualizar ou Editar">.<br>
+ 	<b>Passo 2: </b>A informação do produto será automaticamente mostrada junto ao formulário de edição.<br>
+ 	<b>Passo 3: </b>Edite a informação.<br>
+ 	<b>Passo 4: </b>Clique no botão <input type="button" value="Salvar"> para salvar a nova informação.<br>
 </ul>
 	
 	<?php endif ?>	
 	<?php if($x1=="update") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-I want to edit the product that is currently displayed How to do it?</b>
+Eu quero editar o produto que está sendo mostrado agora. Como fazer isso?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>If necessary delete first the existing data from an entry field.<p>
- 	<b>Step 2: </b>Type the new information in the appropriate entry field.<p>
- 	<b>Step 3: </b>Click the button <input type="button" value="Save"> to save the new information.<br>
+ 	<b>Passo 1: </b>Se necessário primeiramente apague as informações existentes em um campo.<p>
+ 	<b>Passo 2: </b>Digite a nova informação no campo apropriado.<p>
+ 	<b>Passo 3: </b>Clique no botão <input type="button" value="Salvar"> para salvar a nova informação.<br>
 </ul>
 	<?php endif ?>	
 <?php endif ?>	
 
 <?php if($src=="search") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to search a product?</b>
+Como pesquisar um produto?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Enter either a complete information or the first few letters of the articles brand name, or generic name, or order number, etc. in the 
-				<nobr><span style="background-color:yellow" >" Search a search keyword...: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> field.<br>
- 	<b>Step 2: </b>Click the button <input type="button" value="Search"> to find the article.<br>
- 	<b>Step 3: </b>If the search finds the article that exactly matches the search keyword, a detailed information on the article will be displayed.<br>
- 	<b>Step 4: </b>If the search finds several articles that approximate the search keyword, a list of the articles will be displayed.<br>
+ 	<b>Passo 1: </b>Insira uma informação completa ou as primeiras letras da marca, ou o nome genérico, ou o número do pedido, etc. No 
+ campo				<nobr><span style="background-color:yellow" >" Procura por palavra-chave...: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> .<br>
+ 	<b>Passo 2: </b>Clique no botão <input type="button" value="Pesquisar"> para encontrar o artigo.<br>
+ 	<b>Passo 3: </b>Se a pesquisa encontrou o artigo que exatamente coincide com a palavra-chave, serão exibidas informações detalhadas do artigo.<br>
+ 	<b>Passo 4: </b>Se a pesquisa encontrar diversos artigos relacionados com a palavra-chave, uma lista dos artigos será exibida.<br>
 </ul>
 	<?php if($x1!="multiple") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-A list of several articles is listed. How to see the information of a particular article?</b>
+Uma lista com diversos artigos está listada. Como ver as informações de um artigo em particular?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click either the button <img <?php echo createComIcon('../','info3.gif','0') ?>> or the article's name.<br>
+ 	<b>Passo 1: </b>Clique no botão <img <?php echo createComIcon('../','info3.gif','0') ?>> ou no nome do artigo.<br>
 </ul>
 	<?php endif ?>
 	<?php if($x1=="multiple") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-I want to see the previous list of articles. What should I do?</b>
+Desejo ver a lista prévia dos artigos. O que eu deveria fazer?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the button <input type="button" value="Go back">.<br>
+ 	<b>Passo 1: </b>Clique no botão <input type="button" value="Voltar">.<br>
 </ul>
 	<?php endif ?>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota:</b></font> 
 <ul>       	
- If you decide to cancel click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
+ Se você decidir cancelar clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
 
 <?php endif ?>
@@ -115,61 +115,64 @@ I want to see the previous list of articles. What should I do?</b>
 <?php if($src=="mng") : ?>
 	<?php if(($x3=="1")) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to edit the product information?</b>
+Como editar a informação de um produto?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Edit the information about the new product.<br>
- 	<b>Step 2: </b>Click the button <input type="button" value="Save"> to save the new information.<br>
+ 	<b>Passo 1: </b>Editar a informação sobre um novo produto.<br>
+ 	<b>Passo 2: </b>Clique no botão <input type="button" value="Salvar"> para salvar a nova informação.<br>
 </ul>
 	<?php endif ?>
 
 	<?php if($x1=="multiple") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to edit the information of the product currently displayed?</b>
+Como editar a informação do produto em exibição?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the button <input type="button" value="Update or edit">.<br>
- 	<b>Step 2: </b>The product information will be automatically entered into the editing form.<br>
- 	<b>Step 3: </b>Edit the information.<br>
- 	<b>Step 4: </b>Click the button <input type="button" value="Save"> to save the new information.<br>
+ 	<b>Passo 1: </b>Clique no botão <input type="button" value="Atualizar ou editar">.<br>
+ 	<b>Passo 2: </b>A informação do produto será automaticamente inserida no formulário de edição.<br>
+ 	<b>Passo 3: </b>Edite a informação.<br>
+ 	<b>Passo 4: </b>Clique no botão <input type="button" value="Salvar"> para salvar a nova informação.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to remove the product currently displayed?</b>
+Como remover o produto que está atualmente sendo exibido?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the button <input type="button" value="Remove from the databank">.<br>
- 	<b>Step 2: </b>You will be ask if you really want to remove the information from the databank<br>
- 	<b>Step 3: </b>If you really want to remove the product's information, click the button <input type="button" value="Yes, I'm dead sure. Remove data."><p>
- 	<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> Removal or deletion of the data cannot be undone.<br>
+ 	<b>Passo 1: </b>Clique no botão <input type="button" value="Remover do banco de dados">.<br>
+ 	<b>Passo 2: </b>Você será consultado se deseja realmente remover a informação do banco de dados.<br>
+ 	<b>Passo 3: </b>Se você realmente quer remover a informação do produto, clique no botão <input type="button" value="Sim, estou certo disso. Remova o dado."><p>
+ 	<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> Remover ou apagar um dado não pode ser desfeito.<br>
 </ul>	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-I do not want to remove the product's information. What should I do?</b>
+Eu não quero remover a informação do produto. O que devo fazer?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the link "<span style="background-color:yellow" > << No, do not delete. Go back </span>".<br>
+ 	<b>Passo 1: </b>Clique no link "<span style="background-color:yellow" > << Não, não apague. Volte </span>".<br>
 </ul>	
 <?php endif ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to manage a product in the databank?</b>
+Como gerenciar um produto no banco de dados?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Find the product article first. Enter either a complete information or the first few letters of the article's brand name, or generic name, or order number, etc. in the 
-				<nobr><span style="background-color:yellow" >" Search keyword: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> field.<br>
- 	<b>Step 2: </b>Click the button <input type="button" value="Search"> to find the article.<br>
- 	<b>Step 3: </b>If the search finds the article that exactly matches the search keyword, a detailed information on the article will be displayed.<br>
- 	<b>Step 4: </b>If the search finds several articles that approximate the search keyword, a list of the articles will be displayed.<br>
+ 	<b>Passo 1: </b>Primeiro encontre o artigo. Insira a informação completa ou as primeiras letras da marca do artigo, ou nome generico, ou numero do pedido, etc. no 
+			campo	<nobr><span style="background-color:yellow" >" Procura palavra-chave: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> .<br>
+ 	<b>Passo 2: </b>Clique no botão <input type="button" value="Pesquisar"> para encontrar o artigo.<br>
+ 	<b>Passo 3: </b>Se a pesquisa encontrou o artigo que exatamente coincide com a palavra-chave, serão exibidas informações detalhadas do artigo.<br>
+ 	<b>Passo 4: </b>Se a pesquisa encontrar diversos artigos relacionados com a palavra-chave, uma lista dos artigos será exibida.<br>
 </ul>
+
+
+
 	<?php if(($x1!="multiple")&&($x3=="")) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-A list of several articles is listed. How to see the information of a particular article?</b>
+Uma lista com diversos artigos está listada. Como ver as informações de um artigo em particular?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click either the button <img <?php echo createComIcon('../','info3.gif','0') ?>> or the article's name.<br>
+ 	<b>Passo 1: </b>Clique no botão <img <?php echo createComIcon('../','info3.gif','0') ?>> ou no nome do artigo.<br>
 </ul>
 	<?php endif ?>
 	<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> 
 <ul>       	
- If you decide to cancel click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
+ Se você decidir cancelar clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
 <?php endif ?>
 
@@ -177,23 +180,23 @@ A list of several articles is listed. How to see the information of a particular
 
 <?php if($src=="delete") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-I want to remove the product from the databank. What should I do?</b>
+Desejo remover o produto do banco de dados. O que devo fazer?</b>
 </font>
 <ul>       	
- 	<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> Removal or deletion of the product cannot be undone.<p>
- 	<b>Step 1: </b>If you are sure you want to delete the product, click the button <input type="button" value="Yes, I'm dead sure. Delete the data">.<br>
+ 	<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota:</b></font> Remover ou apagar um produto não pode ser desfeito.<p>
+ 	<b>Passo 1: </b>Se você estiver certo que deseja apagar o produto, clique no botão <input type="button" value="Sim, estou certo. Apague o dado.">.<br>
 </ul>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-I do not want to remove the product's information. What should I do?</b>
+Eu não quero remover a informação do produto. O que devo fazer?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the link "<span style="background-color:yellow" > << No, do not delete. Go back </span>".<br>
+ 	<b>Passo 1: </b>Clique no link "<span style="background-color:yellow" > << Não, não apague. Voltar </span>".<br>
 </ul>	
 
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota:</b></font> 
 <ul>       	
- If you decide to cancel click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
+ Se você decidir cancelar clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
 
 <?php endif ?>	
@@ -201,20 +204,20 @@ I do not want to remove the product's information. What should I do?</b>
 <?php if($src=="report") : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to write a report?</b>
+Como escrever um relatório?</b>
 </font>
 <ul>       	
- 	<b>Schritt 1: </b>Write your report in the
-				<nobr><span style="background-color:yellow" >" Report: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> field.<br>
- 	<b>Schritt 2: </b>Type your name in the
-				<nobr><span style="background-color:yellow" >" Reporter: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> field.<br>
- 	<b>Schritt 3: </b>Enter your personell number in teh
-				<nobr><span style="background-color:yellow" >" Personell Nr: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> field.<br>
- 	<b>Schritt 4: </b>Click the button <input type="button" value="Send"> to send the report.<br>
+ 	<b>Passo 1: </b>Escreva seu relatório no campo
+				<nobr><span style="background-color:yellow" >" Relatório: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> .<br>
+ 	<b>Passo 2: </b>Digite seu nome no campo
+				<nobr><span style="background-color:yellow" >" Relator: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> .<br>
+ 	<b>Passo 3: </b>Insire seu número pessoal no campo
+				<nobr><span style="background-color:yellow" >" Num pessoal: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> .<br>
+ 	<b>Passo 4: </b>Clique no botão <input type="button" value="Envia"> para enviar o relatório.<br>
 </ul>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b><br></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota:</b><br></font> 
        	
-If you decide to cancel or end click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
+Se você decidir cancelar ou finalizar clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
 <?php endif ?>	
 

@@ -3,13 +3,13 @@ $foreword='
 <form action="#">
 
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>How to start ';
+<b>Como iniciar ';
 
 switch($x1)
 {
- 	case "entry": print $foreword.'a new patient\'s admission'; break;
-	case "search": print $foreword.'search for a patient\'s admission data';break;
-	case "archiv": print $foreword.'researching in the archives';break;
+ 	case "entry": print $foreword.'uma nova admissão de paciente'; break;
+	case "search": print $foreword.'pesquisa por dados de admissão de um paciente';break;
+	case "archiv": print $foreword.'pesquisando nos arquivos';break;
  }
 ?>
 
@@ -22,29 +22,29 @@ switch($x1)
 <font face="Verdana, Arial" size=2>
 
 <?php if($src!=$x1) : ?>
-<b>Step 1</b>
-<ul> Click the button <img src="../img/en/en<?php switch($x1)
+<b>Passo 1</b>
+<ul> Clique no botão <img src="../gui/img/control/default/en/en<?php switch($x1)
 																			{
-																				case "entry": print '_ein-gray.gif'; break;
+																				case "entry": print '_admit-gray.gif'; break;
 																				case "search": print '_such-gray.gif'; break;
 																				case "archiv": print '_arch-gray.gif'; break;
 																			}
-?>" border="0">.
+?>" border="0"> .
 		
 </ul>
-<b>Step 2</b>
+<b>Passo 2</b>
 <?php endif ?>
-<ul> If you have logged in before and you have an access right for this function, the 
+<ul> Se você já estiver logado e tiver direito de acesso a esta função, o 
 <?php switch($x1)
 	{
-		case "entry": print 'patient\'s	admission form'; break;
-		case "search": print 'search field '; break;
-		case "archiv": print 'archive\'s search field'; break;
+		case "entry": print 'formulário de admissão do paciente'; break;
+		case "search": print 'campo de pesquisa '; break;
+		case "archiv": print 'campo de pesquisa de arquivo'; break;
 	}
-?>  will appear on the main frame.<br>
-		Otherwise, if you are not logged in, you will be required to enter your username and password. <p>
-		Enter your username and password and click the button <img <?php echo createLDImgSrc('../','continue.gif','0') ?>>.<p>
-		If you decide to cancel click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
+?>  aparecerá na tela principal.<br>
+		De outra forma, se você não estiver logado, haverá a necessidade de entrar com o usuário e senha. <p>
+		Entre com seu usuário e senha e clique no botão <img <?php echo createLDImgSrc('../','continue.gif','0) ?>>.<p>
+		Se você decidir cancelar clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 		
 </ul>
 

@@ -4,13 +4,13 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 $foreword='
 <form action="#">
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>How to start ';
+<b>Como iniciar ';
 
 switch($x1)
 {
- 	case "entry": print $foreword.'a new medocs document'; break;
-	case "search": print $foreword.'a search for a medocs document';break;
-	case "archiv": print $foreword.'researching in the medocs archives';break;
+ 	case "entry": print $foreword.'um documento de prontuário novo'; break;
+	case "search": print $foreword.'uma pesquisa por um documento de prontuário';break;
+	case "archiv": print $foreword.'pesquisando nos arquivos de prontuário';break;
  }
 ?>
 
@@ -23,8 +23,8 @@ switch($x1)
 <font face="Verdana, Arial" size=2>
 
 <?php if($src!=$x1) : ?>
-<b>Step 1</b>
-<ul> Click the button <img src="../img/en/en<?php switch($x1)
+<b>Passo 1</b>
+<ul> Clique no botão <img src="../img/en/en<?php switch($x1)
 																			{
 																				case "entry": print '_newdata-gray.gif'; break;
 																				case "search": print '_such-gray.gif'; break;
@@ -33,19 +33,19 @@ switch($x1)
 ?>" border="0">.
 		
 </ul>
-<b>Step 2</b>
+<b>Passo 2</b>
 <?php endif ?>
-<ul> If you have logged in before and you have an access right for this function, the 
+<ul> Se você estiver logado e com direito de acesso para esta função, o 
 <?php switch($x1)
 	{
-		case "entry": print 'initial document form'; break;
-		case "search": print 'search field '; break;
-		case "archiv": print 'archive\'s search field'; break;
+		case "entry": print 'formulário para o documento inicial'; break;
+		case "search": print 'campo de pesquisa'; break;
+		case "archiv": print 'campo de pesquisa de arquivo'; break;
 	}
-?>  will appear on the main frame.<br>
-		Otherwise, if you are not logged in, you will be required to enter your username and password. <p>
-		Enter your username and password and click the button <img <?php echo createLDImgSrc('../','continue.gif','0') ?>>.<p>
-		If you decide to cancel click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
+?>  aparecerá na tela principal.<br>
+		De outro modo, se você não estiver logado, será necessário você entrar com seu usuário e senha. <p>
+		Entre seu usuário e senha e clique no botão <img <?php echo createLDImgSrc('../','continue.gif','0') ?>>.<p>
+		Se você decidir cancelar clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 		
 </ul>
 

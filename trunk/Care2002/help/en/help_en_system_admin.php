@@ -5,9 +5,12 @@
 
 
 <form>
-Note</b>
+	Click the menu item on the "Admin index" frame to open it for configuration.
 <ul> 
+<b>Note</b>:
+<p>
 	Be careful in configuring the system.
+	</p>
 </ul>
 
 </font>

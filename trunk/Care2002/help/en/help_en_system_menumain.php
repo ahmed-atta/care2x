@@ -13,7 +13,7 @@ How to hide or unhide a menu item?</b></font>
 	<b>Note: </b>By default, all menu items are visible.<p>
 	<b>Note: </b> The following items cannot be hidden:
 	<ul>
-	EDP<br>
+	System Admin<br>
 	Login/Logout
 	</ul>
 </ul>

@@ -12,13 +12,13 @@
 <?php echo $src ?>
 <p><font color="#990000">What can I do here?</font></b><p>
 <font face="Verdana, Arial" size=2>
-This is a typical submenu. The submenu is generally arranged into three columns. 
+Este é um submenu típico. O submenu é geralmente organizado em três colunas. 
 <ul>
-<li><b>Column 1</b> : Icons. The icons are not clickable.<p>
-<li><b>Column 2</b> : Menu items. These are the clickable items which will either activate a function or lead to further functions or submenus. If you want to activate or open the function,
-click on the item.<p>
-<li><b>Column 3</b> : Descriptions. These are brief descriptions or overviews of the functions or purposes of the menu items
-		in the column 2.
+<li><b>Coluna 1</b> : Ícones. Os ícones não são clicáveis.<p>
+<li><b>Coluna 2</b> : Ítens do Menu. Estes são ítens clicáveis que irão ativar uma função ou conduzir a outras funções ou submenus. Se você desejar ativar ou abrir a função,
+clique no ítem.<p>
+<li><b>Coluna 3</b> : Descrições. Estas são descrições breves ou overviews das funções ou propostas do menu Ítems
+		na coluna 2.
 
 </ul>
 

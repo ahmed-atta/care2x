@@ -91,7 +91,7 @@ How to see my previous inquries and the technical department's replies to them?<
 How to read technical reports?</b></font>
 <ul> 
 		<b>Note: </b>Technical reports which have not been read or printed yet are listed immediately.<p>
-<b>Step 1: </b>Click on the button <img src="../img/upArrowGrnLrg.gif" border=0 width=16 height=16 align="absmiddle">  of the report that you wish to open. <br>
+<b>Step 1: </b>Click on the button <img <?php echo createComIcon('../','uparrowgrnlrg.gif','0') ?>>  of the report that you wish to open. <br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to search for particular technical reports?</b></font>
@@ -104,8 +104,8 @@ How to search for particular technical reports?</b></font>
 	enter the end date in the "<span style="background-color:yellow" > to: <input type="text" name="t" size=11 maxlength=4 value="Name"> </span>" field.<br>
 	</ul>
  <b>Step 2: </b>Click the <input type="button" value="Search"> button to start searching. <br>
-<b>Step 3: </b>The results will be listed. Click on the icon <img src="../img/upArrowGrnLrg.gif" border=0 width=16 height=16 align="absmiddle">  of the report that you wish to open. <br>
-	<b>Note: </b>Technical reports which are marked with <img src="../img/check-r.gif" border=0  align="absmiddle"> have been read or printed already.<p>
+<b>Step 3: </b>The results will be listed. Click on the icon <img <?php echo createComIcon('../','uparrowgrnlrg.gif','0') ?>>  of the report that you wish to open. <br>
+	<b>Note: </b>Technical reports which are marked with <img <?php echo createComIcon('../','check-r.gif','0') ?>> have been read or printed already.<p>
 
 </ul>
 </font>
