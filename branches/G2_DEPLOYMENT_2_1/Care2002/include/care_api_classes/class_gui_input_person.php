@@ -622,7 +622,7 @@ class GuiInputPerson {
 		$sDateJS= 'onFocus="this.select();"
 				onBlur="IsValidDate(this,\''.$date_format.'\')"
 				onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\')">
-				<a href="javascript:show_calendar(\'aufnahmeform.date_birth\',\''.$date_format.' \')">
+				<a href="javascript:show_calendar(\'aufnahmeform.date_birth\',\''.$date_format.'\')">
 				<img '.createComIcon($root_path,'show-calendar.gif','0','absmiddle').'></a>
 				<font size=1>[';
 
