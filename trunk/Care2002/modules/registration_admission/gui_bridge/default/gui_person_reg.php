@@ -400,7 +400,7 @@ createTR($errorethnicorig, 'ethnic_orig', $LDEthnicOrigin,$ethnic_orig,2);
 <td ><FONT SIZE=-1  FACE="Arial" ><FONT  SIZE=2  FACE="Arial"><font color=#ff0000><?php echo $LDRegBy ?></font>
 </td>
 <td colspan=2><FONT SIZE=-1  FACE="Arial"><nobr>
-<input  name="user_id" type="text" value=<?php if ($user_id!='') echo '"'.$user_id.'"' ; else echo '"'.$HTTP_COOKIE_VARS[$local_user.$sid].'"' ?> size="35" >
+<input  name="user_id" type="text" value=<?php if ($user_id!='') echo '"'.$user_id.'"' ; else echo '"'.$HTTP_COOKIE_VARS[$local_user.$sid].'"' ?> size="35" readonly>
 </nobr></td>
 </tr>
 
@@ -430,13 +430,14 @@ createTR($errorethnicorig, 'ethnic_orig', $LDEthnicOrigin,$ethnic_orig,2);
 
 <?php if($error==1) echo '<input  type="button" value="'.$LDForceSave.'" onClick="forceSave()">'; ?>
 
-<?php if($update) 
+<?php
+/* if($update) 
 	{ 
 		echo '<input type="button" value="'.$LDCancel.'" onClick="location.replace(\'';
 		if($target=='search') echo 'patient_register_show.php'.URL_REDIRECT_APPEND.'&lang='.$lang;
 			else echo 'patient_register_archive.php'.URL_REDIRECT_APPEND.'&newdata=1&lang='.$lang;
 		echo '\')"> '; 
-	}
+	}*/
 ?>
 </form>
 

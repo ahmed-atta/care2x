@@ -277,7 +277,18 @@ while($row=$result->FetchRow()){
 		if(!empty($row['short_notes'])) echo '[ '.hilite($row['short_notes']).' ]';
 	?>
 	</td>
-    <td align="center"><?php if (strlen($row['notes']) > $GLOBAL_CONFIG['notes_preview_maxlen']) echo '<a href="javascript:popNotesDetails(\''.$row['nr'].'\',\''.strtr($subtitle,"' ","´+").'\')"><img '.createComIcon($root_path,'info3.gif','0').'></a>'; ?></td>
+    <td align="center">
+	<?php
+	# Link to pdf generator
+	$topdf= '<a href="'.$root_path.'modules/pdfmaker/emr_generic/report.php'.URL_APPEND.'&enc='.$row['encounter_nr'].'&recnr='.$row['nr'].'&type_nr='.$this_type['nr'].'&LD_var='.$this_type['LD_var'].'" target=_blank><img '.createComIcon($root_path,'pdf_icon.gif','0').'></a>';
+	
+	 if (strlen($row['notes']) > $GLOBAL_CONFIG['notes_preview_maxlen']){
+	 	 echo '<a href="javascript:popNotesDetails(\''.$row['nr'].'\',\''.strtr($subtitle,"' ","´+").'\',\''.$this_type['LD_var'].'\')"><img '.createComIcon($root_path,'info3.gif','0').'></a>';
+		echo $topdf;
+	}elseif(!empty($row['notes'])){
+		echo $topdf;
+	}
+	 ?></td>
     <td><FONT SIZE=-1  FACE="Arial"><?php if($row['personell_name']) echo $row['personell_name']; ?></td>
     <?php 
 	if(!$parent_admit){
@@ -347,9 +358,10 @@ function chkform(d) {
  		?> ] </font>
 	 </td>
    </tr>
+        
    <tr bgcolor="#f6f6f6">
      <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDApplication.' '.$LDNotes; ?></td>
-     <td><textarea name="notes" cols=40 rows=8 wrap="physical"></textarea>
+     <td><textarea name="notes" cols=40 rows=8 wrap="virtual"></textarea>
          </td>
    </tr>
    <tr bgcolor="#f6f6f6">
@@ -362,7 +374,7 @@ function chkform(d) {
    </tr>
    <tr bgcolor="#f6f6f6">
      <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDBy; ?></td>
-     <td><input type="text" name="personell_name" size=50 maxlength=60 value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>"></td>
+     <td><input type="text" name="personell_name" size=50 maxlength=60 value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>" readonly></td>
    </tr>
  </table>
 <input type="hidden" name="encounter_nr" value="<?php echo $HTTP_SESSION_VARS['sess_en']; ?>">
@@ -459,7 +471,24 @@ while(list($x,$v)=each($types)){
            <?php Spacer(); ?>
 <?php
 }
+if($parent_admit){
 ?>
+               <TR bgColor=#eeeeee> <td align=center>
+			   <img <?php echo createComIcon($root_path,'icon_acro.gif','0');?>>
+			   </td>
+                <TD vAlign=top ><FONT 
+                  face="Verdana,Helvetica,Arial" size=2>
+				  <a href="<?php echo $root_path."modules/pdfmaker/emr_generic/report_all.php".URL_APPEND."&enc=".$HTTP_SESSION_VARS['sess_en']; ?>" target=_blank>
+				 <?php 
+				 	 echo $LDPrintPDFDocAllReport; 
+				 ?>
+				 </a>
+				   </FONT></TD>
+                </TR>
+<?php
+}
+?>
+				
 			</TBODY>
 		</TABLE>
 		</TD></TR>
@@ -474,6 +503,7 @@ while(list($x,$v)=each($types)){
 <p>
 
 <?php 
+
 if($parent_admit) {
 	include('./include/bottom_controls_admission_options.inc.php');
 }else{

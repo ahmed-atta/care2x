@@ -13,7 +13,7 @@ switch($HTTP_SESSION_VARS['sess_dicom_viewer']){
 				# Default viewer
 }
 
-/*** CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
+/*** CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -51,7 +51,7 @@ if($nogo){
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<HTML>
+<?php html_rtl($lang); ?>
 <HEAD>
 <TITLE>
 <?php echo $LDDicomViewer ?>

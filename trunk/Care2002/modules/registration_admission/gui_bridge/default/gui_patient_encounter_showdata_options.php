@@ -154,6 +154,15 @@ if($data_entry){
 	$TP_MEDOCS="<font color='#333333'>$LDMedocs</font>";
 }
 
+# Links to pdf doc generator
+if($data_entry){
+	$TP_PRINT_PDFDOC="<a href=\"".$root_path."modules/pdfmaker/admission/admitdata.php".URL_APPEND."&enc=".$HTTP_SESSION_VARS['sess_en']."\" target=_blank>$LDPrintPDFDoc</a>";
+}else{
+	$TP_PRINT_PDFDOC="<font color='#333333'>$LDPrintPDFDoc</font>";
+}
+
+
+
 # If encounter_status empty or 'allow_cancel', show the cancel option link
 //if(!$enc_status['is_discharged']&&!$enc_status['in_ward']&&!$enc_status['in_dept']&&(empty($enc_status['encounter_status'])||$enc_status['encounter_status']=='allow_cancel')){
 if(!$data_entry&&($enc_status['encounter_status']!='cancelled')&&!$enc_status['is_discharged']){

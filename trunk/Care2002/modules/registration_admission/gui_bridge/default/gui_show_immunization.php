@@ -57,7 +57,7 @@ while($row=$result->FetchRow()){
 </table>
 
 <?php
-if($parent_admit&&!is_discharged) {
+if($parent_admit&&!$is_discharged) {
 ?>
 <p>
 <img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle'); ?>>

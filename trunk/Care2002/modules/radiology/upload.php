@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
+* CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -14,11 +14,15 @@ require($root_path.'include/inc_environment_global.php');
 define('FILE_DISCRIM','.dcm'); # define here the file discrimator string 
 
 $thisfile=basename(__FILE__);
+
+$returnfile=$HTTP_SESSION_VARS['sess_file_return'];
+
 # Load paths und dirs
 require_once($root_path.'global_conf/inc_remoteservers_conf.php');
 # Create image object
 require_once($root_path.'include/care_api_classes/class_image.php');
 $img=new Image();
+
 
 if(!isset($mode)){
 	$mode='new';
@@ -146,8 +150,6 @@ if($mode=='show'&&$nr) {
 	$files=&$img->FilesListArray($imgpath,FILE_DISCRIM);
 	$rows=$img->LastRecordCount();
 }
-
-$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
 
 # Default nr of files
 if(!isset($maxpic)||!$maxpic||!is_numeric($maxpic)||$maxpic<0) $maxpic=4;
