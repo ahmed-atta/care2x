@@ -499,6 +499,9 @@ Calendar.prototype.format_data = function(p_day) {
 		case "dd.MM.yyyy" :
 			vData = vDD + "." + vMonth + "." + vY4;
 			break;
+		case "dd\/MM\/yyyy" :
+			vData = vDD + "\/" + vMonth + "\/" + vY4;
+			break;
 		case "MM\/dd\/yyyy" :
 			vData = vMonth + "\/" + vDD + "\/" + vY4;
 			break;

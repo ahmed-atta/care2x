@@ -101,10 +101,7 @@ function setDate(elindex, date_format, lang){
 				                    break;
 				case 'mm/dd/yyyy':  actual = monat + '/' + datum + '/' + jahr;
 				                   break;
-				case 'dd/mm/yyyy':  actual = datum + '/' + monat + '/' + jahr;
-				                    break;
-	            //default: actual = jahr + '-' + monat + '-' + datum; //* Default format is the standard yyyy-mm-dd
-				default: actual = ""; // Return empty by default 
+	            default: actual = jahr + '-' + monat + '-' + datum; //* Default format is the standard yyyy-mm-dd 
 			}
 			
 	   }		
