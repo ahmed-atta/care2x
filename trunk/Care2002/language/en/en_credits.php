@@ -148,7 +148,7 @@ science education products, open source software and local  linux distro.
 			<p>
 Mat&#277;j Hausenblas was born in Prague, Czech Republic, in 1981.
 He is a student on a math-informatics-physics university. After several years
-of using Windows he decided to have a look at Linux, as a worthy challenge
+of using MS-Windows he decided to have a look at GNU/Linux, as a worthy challenge
 and after some time, he decided to participate on the Open Source projects to
 improve some skills and also to return something back and to see how things
 work in this kind of society.
