@@ -8,7 +8,7 @@ $LDSaveBut='Save';
 $LDFinishBut='Finish';
 $LDArticle1='First (1) article';
 $LDArticle2='Second (2) article';
-$LDArticle3='Third (3) article';
+$DArticle3='Third (3) article';
 $LDArticle4='Fourth (4) article';
 $LDArticle5='Secondary (5) article';
 

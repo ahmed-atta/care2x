@@ -1,8 +1,8 @@
 <?php
 $LDOr='Operaèní sál';
-$LDLOGBOOK='Kniha sálu';
+$LDLOGBOOK='Sálová kniha';
 $LDOrDocument='Dokumentace operaèního sálu';
-$LDOrDocumentTxt='Documenting the operative services';
+$LDOrDocumentTxt='Dokumentace operaèních výkonù';
 
 /**
 *  A tiny dictionary:
@@ -17,137 +17,137 @@ $LDScheduler='Plánovaè';
 $LDQuickView='Rychlý náhled';
 $LDQviewTxtDocs='Rychlé nalezení lékaøe na telefonu';
 $LDOrLogBook='Záznamy sálové sestry';
-$LDOrLogBookTxt='Documenting the nursing services in OR, archive files';
+$LDOrLogBookTxt='Dokumentace výkonù sestry na operaèním sále, archívní soubory';
 $LDOrProgram='Program operaèního sálu';
 $LDOrProgramTxt='Zobrazit, editovat nebo vytvoøit program operaèního sálu';
-$LDQviewTxtNurse='Quick view of today\'s nurses\' on standby duty';
-$LDDutyPlanTxt='Show, edit, create ORNOC (OR Nurse-On-Call)';
+$LDQviewTxtNurse='Rychlý pøehled sester èekajících na  zavolání';
+$LDDutyPlanTxt='Zobrazení, editace a vytvoøení ORNOC(===pøelo¾it----OR Nurse-On-Call)';
 $LDOnCallDuty='Standby duty';
 $LDOnCallDutyTxt='Documenting the work during an On-Call duty';
 $LDAnaLogBook='Anesthesia logbook';
 $LDAnaLogBookTxt='Documenting the anesthesia services, archive files';
 $LDQviewTxtAna='Quick view of today\'s ORNOC for anesthesia';
-$LDNewDocu='New document';
-$LDSearch='Search';
-$LDArchive='Archive';
-$LDSee='See';
-$LDUpdate='Update';
-$LDCreate='Create';
-$LDCreatePersonList='Create a OR Nurses list';
-$LDDoctor='Physician/Surgeon';
-$LDNursing='Nursing';
-$LDAna='Anaesthesia';
+$LDNewDocu='Nový dokument';
+$LDSearch='Hledat';
+$LDArchive='Archív';
+$LDSee='Prohlédnout';
+$LDUpdate='Aktualizovat';
+$LDCreate='Vytvoøit';
+$LDCreatePersonList='Vytvoøit seznam sester na operaèním sále';
+$LDDoctor='Lékaø/Chirurg';
+$LDNursing='Sestry';
+$LDAna='Anastézie';
 
-$LDClose='Close';
-$LDSave='Save';
-$LDCancel='Cancel';
-$LDReset='Reset';
-$LDContinue='Continue...';
+$LDClose='Zavøít';
+$LDSave='Ulo¾it';
+$LDCancel='Zru¹it';
+$LDReset='Vymazat formuláø';
+$LDContinue='Pokraèovat...';
 
-$LDHideCat='Hide the cat';
-$LDPatientsFound='Several patients found!';
-$LDPlsClk1='Please click the right one.';
-$LDShowCat='I want to see the cat please!';
-$LDResearchArchive='Research in the archives';
-$LDSearchDocu='Search a document';
+$LDHideCat='Schovat koèièku';
+$LDPatientsFound='Bylo nalezeno více pacientù!';
+$LDPlsClk1='Prosím vyberte po¾adovaného pacienta ze seznamu.';
+$LDShowCat='Chci vidìt koèièku, prosím!';
+$LDResearchArchive='Prohledávat archív';
+$LDSearchDocu='Hledat dokument';
 
-$LDMinor='minor';
-$LDMiddle='middle';
-$LDMajor='major';
-$LDOperation='Operation';
+$LDMinor='zrcadlit';
+$LDMiddle='uprostøed';
+$LDMajor='hlavní';
+$LDOperation='Operace';
 
-$LDLastName='Family name';
-$LDName='Given name';
-$LDBday='Birthdate';
-$LDPatientNr='Patient nr.';
-$LDMatchCode='Matchcode Name';
-$LDOpDate='Operation date';
-$LDOperator='Surgeon';
-$LDStationary='Inpatient';
-$LDAmbulant='Outpatient';
-$LDInsurance='Insurance';
-$LDPrivate='Private';
-$LDSelfPay='Self pay';
+$LDLastName='Pøíjmení';
+$LDName='Jméno';
+$LDBday='Narození';
+$LDPatientNr='Èíslo pacienta.';
+$LDMatchCode='_____translate____Matchcode Name';
+$LDOpDate='Datum operace';
+$LDOperator='Chirurg';
+$LDStationary='Pacient z nemocnice';
+$LDAmbulant='Abulantní pacient';
+$LDInsurance='Poji¹tìní';
+$LDPrivate='Privátní';
+$LDSelfPay='Platí sám';
 
-$LDDiagnosis='Diagnosis/ICD-10';
-$LDLocalization='Localization';
-$LDTherapy='Therapy';
-$LDSpecials='Special notice';
-$LDClassification='Classification';
+$LDDiagnosis='Diagnóza/ICD-10';
+$LDLocalization='Lokalizace --- Hospitalizace---';
+$LDTherapy='Léèba';
+$LDSpecials='Zvlá¹tní poznámka';
+$LDClassification='Klasifikace';
 
 /**
 *  A tiny dictionary:
 *  OP = operation (surgical operation)
 */
-$LDOpStart='OP Start';
-$LDOpEnd='OP End';
+$LDOpStart='Zaèátek operace';
+$LDOpEnd='Konec operace';
 /**
 *  A tiny dictionary:
 *  Scrub nurse =  the nurse in sterile clothing assisting the surgeon, in charge of the sterile instruments and surgical materials
 */
-$LDScrubNurse='Scrub nurse';
-$LDOpRoom='OP room';
-$LDResetAll='Erase all entries';
-$LDUpdateData='Update data';
-$LDStartNewDocu='Start a new document';
-$LDSearchKeyword='Search keyword: eg. given name or family name';
+$LDScrubNurse='Scrub nurse Sterilnì obleèená sestra podávající nástroje';
+$LDOpRoom='Operaèní sál';
+$LDResetAll='Smazat v¹echny polo¾ky';
+$LDUpdateData='Doplnit èi modifikovat údaje';
+$LDStartNewDocu='Zaèít nový dokument';
+$LDSearchKeyword='Klíèové slovo:  napøíklad jméno èi pøíjmení';
 
 $LDSrcListElements=array(
 '',
-'Family name',
-'Given name',
-'Birthdate',
-'Patient nr.',
-'OP Date',
-'OR Department',
-'OP Nr.'
+'Pøíjmení',
+'Jméno',
+'Datum narození',
+'Èíslo pacienta',
+'Datum operace',
+'Oddìlení operaèno sálu',
+'Èíslo operaèního sálu'
 );
-$LDClk2Show='Click to show';
-$LDSrcCondition='Search keyword and/or condition';
-$LDNewArchiveSearch='New archive research';
+$LDClk2Show='Kliknutím se zobrazí ùdaje';
+$LDSrcCondition='Hledání podle klíèových slov nebo jiných podmínelk';
+$LDNewArchiveSearch='Nové prohledávání archivu';
 $tage=array(
-				'Sunday',
-				'Monday',
-				'Tuesday',
-				'Wednesday',
-				'Thursday',
-				'Friday',
-				'Saturday');
+				'Nedìle',
+				'Pondìlí',
+				'Úterý',
+				'Støeda',
+				'Ètvrtek',
+				'Pátek',
+				'Sobota');
 $monat=array('',
-				'January',
-				'February',
-				'March',
-				'April',
-				'May',
-				'June',
-				'July',
-				'august',
-				'September',
-				'October',
-				'November',
-				'December');
-$LDPrevDay='Previous day';
-$LDNextDay='Next day';
-$LDChange='Change';
+				'Leden',
+				'Únor',
+				'Bøezen',
+				'Duben',
+				'Kvìten',
+				'Èerven',
+				'Èervenec',
+				'Srpen',
+				'Záøí',
+				'Øíjen',
+				'Listopad',
+				'Prosinec');
+$LDPrevDay='Vèerej¹í den';
+$LDNextDay='Zítra';
+$LDChange='Zmìnit';
 $LDOpMainElements=array(
-										nr_date=>'Nr/Date',
-										patient=>'Patient',
-										diagnosis=>'Diagnosis',
-										operator=>'Surgeon/Assistant',
-										ana=>'Anästhesie',
+										nr_date=>'Èíslo dne',
+										patient=>'Pacient',
+										diagnosis=>'Diagnóza',
+										operator=>'Chirurg/Asistent',
+										ana=>'Anestézie',
 										cutclose=>'Cut/Suture',
-										therapy=>'Therapy',
-										result=>'Result',
-										inout=>'Entry/Exit'
+										therapy=>'Léèba/Therapy',
+										result=>'Výsledek',
+										inout=>'Vstup/Výstup'
 										);
-$LDOpCut='Cut';
+$LDOpCut='Øez';
 $LDOpClose='Suture';
-$LDOpIn='Entry';
-$LDOpOut='Exit';
+$LDOpIn='Vstup';
+$LDOpOut='Výstup';
 $LDOpInFull='Entry';
 $LDOpOutFull='Exit';
-$LDEditPatientData='Edit the logbook data of ~tagword~';
-$LDOpenPatientFolder='Open the nursing folder of ~tagword~';
+$LDEditPatientData='Editovat data v knize záznamù ze dne ~tagword~';
+$LDOpenPatientFolder='Otevøít poøadaè sestry ze dne ~tagword~';
 
 $tbuf=array('O','A','S','R');
 $cbuf=array('Surgeon','Assistant','Scrub nurse','Rotating nurse');
@@ -185,7 +185,7 @@ $LDShowLogbook='Show logbook';
 *  LA =  Local anesthesia (locally injected or applied)
 *  DS = Daemmerschlaf (a local dialect meaning analgesic sedation )
 *  AS = Analgesic sedation (german = Analgosidierung)
-*  Plexus = Anesthesia on the Plexus nerve 
+*  Plexus = Anesthesia on the Plexus nerve
 */
 
 $LDAnaTypes=array(
@@ -232,7 +232,7 @@ $LDPatNoExist='The patient is not yet entered in the logbook. Please close this 
 $opts=array('-',
 					'Patient arrived late in OR',
        				'Anesthesiologists arrived late in OR',
-       				'OR nurses arrived late in OR', 
+       				'OR nurses arrived late in OR',
 					'Cleaning team finished late',
        				'Special reason');
 $LDReason='Reason';
