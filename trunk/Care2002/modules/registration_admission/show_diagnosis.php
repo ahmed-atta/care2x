@@ -45,6 +45,7 @@ echo $sql;
 }
 
 $subtitle=$LDDRG;
+$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
 
 $buffer=str_replace('~tag~',$title.' '.$name_last,$LDNoRecordFor);
 $norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer); 

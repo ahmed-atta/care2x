@@ -47,9 +47,11 @@ echo $sql;
 }
 
 $subtitle=$LDPrescriptions;
+$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
 
 $buffer=str_replace('~tag~',$title.' '.$name_last,$LDNoRecordFor);
 $norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer); 
+
 
 /* Load GUI page */
 require('./gui_bridge/default/gui_show.php');

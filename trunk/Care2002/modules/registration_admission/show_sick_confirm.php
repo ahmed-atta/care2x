@@ -42,6 +42,7 @@ $subtitle=$LDSickReport;
 
 $buffer=str_replace('~tag~',$title.' '.$name_last,$LDNoRecordFor);
 $norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer); 
+$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
 
 /* Load all  medical depts info */
 require_once($root_path.'include/care_api_classes/class_department.php');

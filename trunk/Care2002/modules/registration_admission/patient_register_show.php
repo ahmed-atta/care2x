@@ -32,6 +32,7 @@ $admissionfile='aufnahme_start.php'.URL_APPEND;
 if((!isset($pid)||!$pid)&&$HTPP_SESSION_VARS['sess_pid']) $pid=$HTPP_SESSION_VARS['sess_pid'];
 
 $HTTP_SESSION_VARS['sess_path_referer']=$top_dir.$thisfile;
+$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
 $HTTP_SESSION_VARS['sess_pid']=$pid;
 $HTTP_SESSION_VARS['sess_full_pid']=$pid+$GLOBAL_CONFIG['person_id_nr_adder'];
 $HTTP_SESSION_VARS['sess_parent_mod']='registration';

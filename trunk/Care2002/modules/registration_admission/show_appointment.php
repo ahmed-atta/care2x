@@ -51,6 +51,7 @@ if($result=&$obj->getPersonsAppointmentsObj($pid)){
 }
 
 $subtitle=$LDAppointments;
+$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
 
 /* Load departments */
 require_once($root_path.'include/care_api_classes/class_department.php');
