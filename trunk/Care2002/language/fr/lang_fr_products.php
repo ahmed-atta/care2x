@@ -206,4 +206,18 @@ $LDDepotOrderBot='Medibot';
 /* 2002-10-15 EL */
 $LDCreatedOn='Created on';
 $LDTime='Time';
+/* 2002-11-5 EL */
+$LDInvalidPassword='Invalid password!';
+$LDUnknownValidator='Validator unknown!';
+$LDPlsEnterInfo='Please enter the correct info.';
+# 2003-08-17 EL
+$LDAlertInvalidMinorder='The minimum order has invalid character';
+$LDAlertInvalidMaxorder='The maximum order has invalid character';
+$LDAlertInvalidProorder='The nr.of pcs. per order has invalid character';
+$LDAlertMinHigherMax='Minimum greater than maximum is not allowed';
+$LDAlertNoNegativeOrder='Negative value is currently not allowed';
+# 2003-08-22 EL
+$LDYellowList='Yellow List';
+$LDYellowListTxt='German pharmaceutical index (needs internet line)';
+$LDClickSelectDept='Please click this to select a department.';
 ?>
