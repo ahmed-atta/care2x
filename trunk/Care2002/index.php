@@ -3,7 +3,7 @@
 CARE 2X Integrated Information System for Hospitals and Health Care Organizations and Services
 Care 2002, Care 2x, Copyright (C) 2002,2003,2004  Elpidio Latorilla
 								
-Beta version 1.0.05    2003-11-26
+Beta version deployment 1.1 (mysql) 2004-01-11
 								
 This script(s) is(are) free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public
@@ -286,7 +286,7 @@ $HTTP_SESSION_VARS['sess_tos']=date('His');
 include_once('include/inc_charset_fx.php');
 
 # Load the gui template
-if($lang=='ar') {
+if($lang=='ar'||$lang=='fa') {
 	require('gui/html_template/righttoliftdefault/tp_index.php');
 } else{
 	require('gui/html_template/default/tp_index.php');
