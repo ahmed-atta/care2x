@@ -31,11 +31,11 @@ require('./roots.php');
 // Error Meldungen unterdrücken, inc_environment_global.php includen, Standard-Sprachdateien einbinden,
 // Dateischutz etc
 //variabeln für inc_modul_top.php
-							 						 //Variable für die in diesem Modul benutzte Individual-Sprachdatei 
-													 $lang_thismodule_used="modulneu.php";
-													 
-													 //Cookiename setzen
-													 $this_cookie_name='ck_edv_user';
+//Variable für die in diesem Modul benutzte Individual-Sprachdatei
+$lang_thismodule_used="modulneu.php";
+
+//Cookiename setzen
+$this_cookie_name='ck_edv_user';
 require_once($root_path.$newmodule_includepath."inc_modul_top.php");
 
 // ggf. $breakfile und $returnfile neu definieren
@@ -79,12 +79,12 @@ function submitno(){
 require ($root_path.$newmodule_includepath."inc_body.php");
 
 // blauer Titelblock einbinden
-	 				//Variablen des Titelblocks
-										 //Hilfedatei
-										 $new_hlp_file="edv_modul_neu_hlp1.php";
-										 
-										 //Variable für Überschrift Titellesite
-										 $thismodulname=$LDEDP . " - " . $LDNeuesModulanlegen;
+//Variablen des Titelblocks
+//Hilfedatei
+$new_hlp_file="edv_modul_neu_hlp1.php";
+
+//Variable für Überschrift Titellesite
+$thismodulname=$LDEDP . " - " . $LDNeuesModulanlegen;
 										 
 include($root_path.$newmodule_includepath."inc_titelblock.php");
 ?>

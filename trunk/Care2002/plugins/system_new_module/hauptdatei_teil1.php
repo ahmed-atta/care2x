@@ -7,13 +7,13 @@
 // Datei <modulname.php> im neuen Verzeichnis erstellen 
 
 //Pfad für das neue Modul
-$pfad="../$ModulNeuBez/";
+$pfad=$root_path."modules/$ModulNeuBez/";
 
 //Dateiname generieren auf Grundlage des Modulnamens
 $dateiname=$ModulNeuBez . ".php";
 
 // Prüfen ob die Datei bereits existiert
-	if (is_file($pfad.$dateiname)){ 
+	if (is_file($pfad.$dateiname)){
 	    echo $dateiname." -Datei gibt es schon, bitte überprüfen sie den Ordner <strong>".$pfad."</strong>";
 			exit;
 			}
@@ -21,6 +21,8 @@ $dateiname=$ModulNeuBez . ".php";
  
 //Datei öffnen
 $datei=fopen($pfad . $dateiname,"w");
+
+if(!$datei) echo "wrong ".$pfad . $dateiname;
 
 //Inhalt dieser Datei in ein Array schreiben
 $mainline=array(55);

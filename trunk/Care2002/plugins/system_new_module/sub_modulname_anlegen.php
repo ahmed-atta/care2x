@@ -6,7 +6,7 @@
 // Datei sub_<modulname.php> im neuen Verzeichnis erstellen 
 
 //Pfad für das neue Modul
-$pfad="../$ModulNeuBez/";
+$pfad=$root_path."modules/$ModulNeuBez/";
 
 //Dateiname generieren auf Grundlage des Namensteils "sub_" und desModulnamens
 $dateiname="sub_" . $ModulNeuBez . ".php";

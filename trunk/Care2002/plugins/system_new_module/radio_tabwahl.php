@@ -7,12 +7,12 @@ require('./roots.php');
 
 // Error Meldungen unterdrücken, inc_environment_global.php includen, Standard-Sprachdateien einbinden,
 // Dateischutz etc
-	 						 //variabeln für inc_modul_top.php
-							 						 //Variable für die in diesem Modul benutzte Individual-Sprachdatei 
-													 $lang_thismodule_used="modulneu.php";
-													 
-													 //Cookiename setzen
-													 $this_cookie_name='ck_edv_user';
+ //variabeln für inc_modul_top.php
+//Variable für die in diesem Modul benutzte Individual-Sprachdatei
+$lang_thismodule_used="modulneu.php";
+
+//Cookiename setzen
+$this_cookie_name='ck_edv_user';
 require_once($root_path.$newmodule_includepath."inc_modul_top.php");
 $returnfile="check_patientwahl.php?sid=$sid&lang=$lang&ModulNeuBez=$ModulNeuBez";
 $breakfile=$root_path."main/startframe.php?sid=$sid&lang=$lang";
@@ -26,16 +26,16 @@ require_once($root_path.$newmodule_includepath."head_include.inc.php");
 require ($root_path.$newmodule_includepath."inc_body.php");
 
 // blauer Titelblock einbinden
- 	 				//Variablen des Titelblocks
-										 //Hilfedatei
-										 $new_hlp_file="edv_modul_neu_hlp1.php";
-										 
-										 //Variable für Überschrift Titellesite
-										 $thismodulname=$LDEDP . " - " . $LDNeuesModulanlegen;
-	
+//Variablen des Titelblocks
+//Hilfedatei
+$new_hlp_file="edv_modul_neu_hlp1.php";
+
+//Variable für Überschrift Titellesite
+$thismodulname=$LDEDP . " - " . $LDNeuesModulanlegen;
+
 //Name dieser Datei	ausgeben
 //echo "Diese Datei heisst <strong>radio_tabwahl.php</strong>.";
-										 
+
 include($root_path.$newmodule_includepath."inc_titelblock.php");
 //echo $pid."<br/>";
 //echo $pat_bez;
@@ -52,7 +52,7 @@ if ($pat_bez!="1"){
 <ul>
 <?php 
 // Variable festlegen für das Ziel des folgenden Formulars
-$radio1_file=$root_path."modules/system_new_module/hauptdatei_schreiben.php";
+$radio1_file=$root_path.$top_dir."hauptdatei_schreiben.php";
 ?>
 <!-- Form für vorhandene Tabelle in DBFORM bearbeiten erstellen -->
 <form action="<?php echo $radio1_file ?>">
@@ -93,19 +93,19 @@ $radio1_file=$root_path."modules/system_new_module/hauptdatei_schreiben.php";
 
 <!-- Form für selbst eine neue Tabelle anlegen und diese dann gleich einbinden -->
 <li> <FONT FACE='ARIAL' color="<?php echo $cfg['top_txtcolor']; ?>"><?PHP echo $LD_wahl2;?></FONT><br></li>
-<?$radio1_file=$root_path."modules/system_new_module/radio1_memofeld.php?sid=".$sid."&lang=".$lang."&pid=".$pid."&ModulNeuBez=".$ModulNeuBez."&pid=".$pid."&pat_bez=".$pat_bez;
+<?$radio1_file=$root_path.$top_dir."radio1_memofeld.php?sid=".$sid."&lang=".$lang."&pid=".$pid."&ModulNeuBez=".$ModulNeuBez."&pid=".$pid."&pat_bez=".$pat_bez;
 		 if($cfg['dhtml'])echo ' <a href="'.$radio1_file.'"><img '.createLDImgSrc($root_path,'ok_small.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 		 
 <br/><br/>
 <!--
 <li><FONT FACE='ARIAL' color="<?php echo $cfg['top_txtcolor']; ?>"><?PHP echo "Nichts, leere Seite";?></FONT></li><br/>
 <?
-$radio1_file=$root_path."modules/system_new_module/leo.php?sid=".$sid."&lang=".$lang."&pid=".$pid."&ModulNeuBez=".$ModulNeuBez."&tab_name=".$tab_name."&pid=".$pid."&pat_bez=".$pat_bez;
+$radio1_file=$root_path.$root_path.$top_dir."leo.php?sid=".$sid."&lang=".$lang."&pid=".$pid."&ModulNeuBez=".$ModulNeuBez."&tab_name=".$tab_name."&pid=".$pid."&pat_bez=".$pat_bez;
 		 if($cfg['dhtml'])echo ' <a href="'.$radio1_file.'"><img '.createLDImgSrc($root_path,'ok_small.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 -->
 
 <!-- Form für eine leere Seite anlegen -->		 
-<?php $radio1_file=$root_path."modules/system_new_module/hauptdatei_schreiben.php";?>		 
+<?php $radio1_file=$root_path.$top_dir."hauptdatei_schreiben.php";?>
 <form action="<?php echo $radio1_file ?>">
 <li>  
 	 <FONT FACE='ARIAL' color="<?php echo $cfg['top_txtcolor']; ?>"><?php echo $LD_wahl3;?></FONT></li>

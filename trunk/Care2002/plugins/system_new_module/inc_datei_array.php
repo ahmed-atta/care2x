@@ -74,9 +74,6 @@ $ix++;
 fclose($datei);
 fclose($zdatei);
 
-
-
-
 // funktionierener teil zweite datei
 $qdatei="person_search.php";
 $datei=fopen($quellpfad.$qdatei,"r");

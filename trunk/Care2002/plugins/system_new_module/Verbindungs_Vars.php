@@ -4,6 +4,6 @@
 $host="localhost";
 $user="root";
 $pwd="";
-$dbname="care2xdb";
+$dbname="caredb";
 $db_art="mysql";
 ?>

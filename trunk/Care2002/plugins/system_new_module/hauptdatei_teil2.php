@@ -1,7 +1,7 @@
 <?php
 /*** Zweiter Teil dieser Datei, dbForm-Datei anlegen ***/
 //Pfad für das neue Modul
-$pfad="../$ModulNeuBez/";
+$pfad=$root_path."modules/$ModulNeuBez/";
 //dbform-Datei schreiben
 $dateiname=$ModulNeuBez."_dbform.php";
 // Prüfen ob die Datei bereits existiert
@@ -13,6 +13,8 @@ $dateiname=$ModulNeuBez."_dbform.php";
 		
 //Datei öffnen
 $datei=fopen($pfad . $dateiname,"w");
+
+if(!$datei) echo $pfad . $dateiname;
 
 //Inhalt dieser Datei in ein Array schreiben
 $dbformline=array(35);

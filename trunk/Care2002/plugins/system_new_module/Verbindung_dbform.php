@@ -14,9 +14,9 @@ $suchfeld="sort_nr";
 */
 
 //include DBFORM
-include_once("../../../dbForm/formFields.inc");
-include_once("../../../dbForm/template.inc");
-include_once("../../../dbForm/dbForm.inc");
+include_once("./dbForm/formFields.inc");
+include_once("./dbForm/template.inc");
+include_once("./dbForm/dbForm.inc");
 
 //Herstellen einer Verbindung zu MySQL, und der Datenbank
 require_once("Verbindung.inc.php");

@@ -6,7 +6,7 @@
 // Datei <modulname.php> im neuen Verzeichnis erstellen 
 
 //Pfad für das neue Modul
-$pfad="../$ModulNeuBez/";
+$pfad=$root_path."modules/$ModulNeuBez/";
 
 //Dateiname generieren auf Grundlage des Modulnamens
 if ($ModulNeuBez=""){

@@ -3,7 +3,7 @@
 //1 Datei roots.php im neuen Verzeichnis erstellen und füllen		
 $dateiname=("roots.php");
 //Pfad für das neue Modul
-$pfad="../$ModulNeuBez/";
+$pfad=$root_path."modules/$ModulNeuBez/";
 
 //Datei öffnen
 $datei=fopen($pfad . $dateiname,"w");
@@ -29,7 +29,7 @@ fclose($datei);
 //2 Datei index.htm im neuen Verzeichnis erstellen und füllen
 $dateiname=("index.htm");
 //Pfad für das neue Modul
-$pfad="../$ModulNeuBez/";
+$pfad=$root_path."modules/$ModulNeuBez/";
 
 //Datei öffnen
 $datei=fopen($pfad . $dateiname,"w");
@@ -58,7 +58,7 @@ copy($pfad . $dateiname,$pfad . $dateiname . "l");
 //4 Datei index.php im neuen Verzeichnis erstellen und füllen
 $dateiname=("index.php");
 //Pfad für das neue Modul
-$pfad="../$ModulNeuBez/";
+$pfad=$root_path."modules/$ModulNeuBez/";
 
 //Datei öffnen
 $datei=fopen($pfad . $dateiname,"w");
