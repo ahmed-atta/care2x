@@ -1,4 +1,4 @@
-<HTML>
+<?php html_rtl($lang); ?>
 <HEAD>
 <?php 
 echo setCharSet(); 
@@ -32,7 +32,7 @@ else
 <?php
 }
 ?>
-	<FRAME NAME = "CONTENTS" SRC = "blank.php?lang=<?php echo "$lang&sid=$sid" ?>">
+	<FRAME NAME = "CONTENTS" SRC = "blank.php?lang=<?php echo "$lang&sid=$sid&root_path=" ?>">
 </frameset>
 <noframes>
 <BODY bgcolor=white>

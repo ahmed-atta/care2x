@@ -143,6 +143,6 @@ $area_opt=array(
 						  
 							/* Group start*/
 						   'title_dir' => 'Telephone Directory',
-						  '_a_1_teldirwrite' => 'Telephone & Beeper information write',
+						  '_a_1_teldirwrite' => 'Telephone & Beeper information write'
 						);
 ?>

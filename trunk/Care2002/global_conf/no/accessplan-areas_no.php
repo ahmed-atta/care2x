@@ -45,68 +45,68 @@ $areaopt['test_diagnose']='Konsil befunden';
 
 $area_opt=array(
 							/* Group start*/
-                           'title1' => 'Adgang til:',
-                           '_a_0_all' => 'Alle områder',
+                           'title1' => 'Permitted areas',
+                           '_a_0_all' => 'All areas',
 						   
 							/* Group start*/
-                           'title_adm' => 'Mottak',
-						   '_a_1_admissionwrite' => 'Motta pasienter, les & skriv',
-						   '_a_2_admissionread' =>  'Motta pasienter, bare les',
+                           'title_adm' => 'Admission',
+						   '_a_1_admissionwrite' => 'Admit patients, read & write',
+						   '_a_2_admissionread' =>  'Admit patients read only',
 						   
 							/* Group start*/
-                           'title2' => 'Sykepleie post',
-						   '_a_1_nursingstationallwrite' => 'Alle poster, les & skriv',
-						   '_a_2_nursingstationallread' =>  'Alle poster, bare les',
-						   '_a_1_nursingdutyplanwrite' => 'posts arbeidsplan, les og skriv',
-						   '_a_2_nursingdutyplanread' =>  'posts arbeidsplan, bare les',
+                           'title2' => 'Nursing station',
+						   '_a_1_nursingstationallwrite' => 'All nursing stations read & write',
+						   '_a_2_nursingstationallread' =>  'All nursing stations read only',
+						   '_a_1_nursingdutyplanwrite' => 'Station nurses\' duty plan read & write',
+						   '_a_2_nursingdutyplanread' =>  'Station nurses\' duty plan read only',
 							/* Group start*/
-						   'title3' => 'Tester, Diagnose, konsultering',
+						   'title3' => 'Test, Diagnostics, Consults',
 						   '_a_1_diagnosticsresultwrite' => 'Diagnostics results read  & write',
 						   '_a_3_diagnosticsresultread' => 'Diagnostics results read only',
 						   '_a_2_diagnosticsreceptionwrite'=> 'Diagnostics Request reception, read & write',
 						   '_a_3_diagnosticsrequest' => 'Diagnostics Request, request only',
 						   
 							/* Group start*/
-						   'title4' => 'Laboratorie',
-						   '_a_1_labresultswrite' => 'resultater, les & skriv',
-						   '_a_2_labresultsread' => 'resultater, bare les',
+						   'title4' => 'Laboratory',
+						   '_a_1_labresultswrite' => 'Laboratory results read & write',
+						   '_a_2_labresultsread' => 'Laboratory results read only',
 						   
 							/* Group start*/
-						   'title5' => 'Operasjonsrom',
-						   '_a_1_opdoctorallwrite' => 'Alle kirurgiske dokumenter, les & skriv',
-						   '_a_2_opnurseallwrite' => 'Alle sykepleie dokumenter, les & skriv',
-						   '_a_3_opnurseallread' => 'Allt, bare les',
-						   '_a_1_opnursedutyplanwrite' => 'sykepleie - arbeidsplan, les & skriv',
-						   '_a_2_opnursedutyplanread' => 'sykepleie - arbeidsplan, bare les',
+						   'title5' => 'Operating Room',
+						   '_a_1_opdoctorallwrite' => 'All OP docs (surgeon) read & write',
+						   '_a_2_opnurseallwrite' => 'All OP nursing docs read & write',
+						   '_a_3_opnurseallread' => 'All OP read only',
+						   '_a_1_opnursedutyplanwrite' => 'OP Nurses\' duty plan read & write',
+						   '_a_2_opnursedutyplanread' => 'OP Nurses\' duty plan read only',
 						   
 							/* Group start*/
-						   'title6' => 'Radiologi',
+						   'title6' => 'Radiology',
 						   '_a_1_radiowrite' => 'Radiology display, diagnosis read & write',
 						   '_a_2_radioread' => 'Radiology display  only, diagnosis read only',
 						   
 							/* Group start*/
-						   'title7' => 'Medisinske dokumenter',
-						   '_a_1_medocswrite' => 'les & skriv',
-						   '_a_2_medocsread' => 'bare les',
+						   'title7' => 'Medocs',
+						   '_a_1_medocswrite' => 'Medocs read & write',
+						   '_a_2_medocsread' => 'Medocs read only',
 						   
 							/* Group start*/
-						   'title8' => 'Apotek',
-						  '_a_1_pharmadbadmin' => 'Database admin',
-						  '_a_2_pharmareception' => 'Aktiver Ordrerobot, motta &  prosseser ordre',
-						  '_a_3_pharmaorder' => 'Send & les ordre',
-						  '_a_4_pharmaread' => 'Bare les ordre',
+						   'title8' => 'Pharmacy',
+						  '_a_1_pharmadbadmin' => 'Pharmacy database admin',
+						  '_a_2_pharmareception' => 'Pharmacy Orderbot activate, receive and process orders',
+						  '_a_3_pharmaorder' => 'Pharmacy send order and read only',
+						  '_a_4_pharmaread' => 'Pharmacy read order only, no send',
 						   
 							/* Group start*/
-						   'title9' => 'Medisinsk depot',
-						  '_a_1_meddepotdbadmin' => 'Database admin',
-						  '_a_2_meddepotreception' => 'Aktiver Medirobot, motta & prosseser ordre',
-						  '_a_3_meddepotorder' => 'Send & les ordre',
-						  '_a_4_meddepotread' => 'Bare & ordre',
+						   'title9' => 'Medical Depot',
+						  '_a_1_meddepotdbadmin' => 'Medical Depot database admin',
+						  '_a_2_meddepotreception' => 'Medical Depot Medibot activate, receive and process orders',
+						  '_a_3_meddepotorder' => 'Medical Depot send order and read only',
+						  '_a_4_meddepotread' => 'Medical Depot read order only, no send',
 						  
 							/* Group start*/
-						   'title_docs' => 'Doktor',
-						  '_a_1_doctorsdutyplanwrite' => 'Arbeidsplan, les & skriv',
-						  '_a_2_doctorsdutyplanread' => 'Arbeidspaln, bare les',
+						   'title_docs' => 'Doctors',
+						  '_a_1_doctorsdutyplanwrite' => 'Doctors\' duty plan read & write',
+						  '_a_2_doctorsdutyplanread' => 'Doctors\' duty plan read only',
 						  
 							/* Group start*/
 						   'title_foto' => 'Photo Studio',
@@ -114,7 +114,7 @@ $area_opt=array(
 						  '_a_2_photoread' => 'Photos display & read only',
 						  
 							/* Group start*/
-						   'title_tech' => 'Teknisk support',
+						   'title_tech' => 'Technical support',
 						  '_a_1_techreception' => 'Qbot & Repabot activate, receive, read and write',
 						  
 							/* Group start*/
@@ -125,7 +125,7 @@ $area_opt=array(
 						  '_a_2_dutyplanallread' => 'Personell Duty/Leave plan read only',
 						  
 							/* Group start*/
-						   'title_bill' => 'Regning',
+						   'title_bill' => 'Billing',
 						  '_a_1_billallwrite' => 'Billing (all areas) read & write',
 						  '_a_2_billallread' => 'Billing (all areas) read only',
 						  '_a_2_billpharmawrite' => 'Billing (pharmacy) read & write',
@@ -136,13 +136,13 @@ $area_opt=array(
 						  '_a_3_billlabread' => 'Billing (laboratory) read only',
 						  
 							/* Group start*/
-						   'title_news' => 'Nyheter',
+						   'title_news' => 'News',
 						  '_a_1_newsallwrite' => 'News (all areas) write',
 						  '_a_2_newscafewrite' => 'Cafe news, menu, prices write',
 						  '_a_2_newsallmoderatedwrite' => 'News (all areas, except menu & prices) moderated write',
 						  
 							/* Group start*/
-						   'title_dir' => 'Telefon katalog',
-						  '_a_1_teldirwrite' => 'Telefon & søker informasjon, skriv',
+						   'title_dir' => 'Telephone Directory',
+						  '_a_1_teldirwrite' => 'Telephone & Beeper information write',
 						);
 ?>
