@@ -4,9 +4,9 @@ $LDLOGBOOK='Registro';
 $LDOrDocument='Documentazione di sala operatoria';
 $LDOrDocumentTxt='Documentazione dei servizi di sala';
 
-$LDDOC="CRO";
-$LDORNOC="IROSO";
-$LDScheduler="Scheduler";
+$LDDOC='CRO';
+$LDORNOC='IROSO';
+$LDScheduler='Scheduler';
 
 $LDDutyPlan='Piano di reperibilità';
 $LDQuickView='Quadro di insieme';
@@ -242,7 +242,7 @@ $LDRemoveArticle='Rimuovere l\'articolo dalla lista';
 $LDArticleNoList='L\'articolo non è in banca dati';
 $LDPromptSearch='Inserire un criterio di ricerca.<br>
 							Per esempio il nome, il cognome, la data di nascita, etc.
-							(Leggere anche i <a href=\'ucons.php\'>Suggerimenti</a>.)';
+							(Leggere anche i <a href="#">Suggerimenti</a>.)';
 $LDKeyword='Parola chiave';
 $LDOtherFunctions='Altre funzioni';
 $LDInfoNotFound='Informazioni cercate non trovate!';

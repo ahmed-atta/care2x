@@ -121,4 +121,7 @@ $LDBilling='eComBill';
 /* 2003-05-18 EL */
 $LDPlsContactEDP='Prosím kontaktuje správce systému.';
 $LDPlsTryAgain='Zkuste Znovu.';
+/* 2003-07-11 EL */
+$LDAdministration='Vedení nemocnice';
+$LDOutpatientClinic='Outpatient clinic';
 ?>

@@ -27,6 +27,7 @@ $LDLifeRisk='Risk to life';
 $LDRarity='Rarity';
 $LDSpecTest='special Tests';
 $LDClinicalInfo='clinical info';
+
 $LDShortMonth=array('',
                                    'Gen',
 								   'Feb',
@@ -47,6 +48,13 @@ $LDBatchNumber='Batch nr.';
 $LDMaterial='Material:';
 $LDEmergencyProgram='The violet shaded fields belong to emergency program';
 $LDPhoneOrder=' = only after acknowledgement by phone';
+/* 2002-09-03 EL */							  
+$LDSearchPatient='Ricerca paziente';
+$LDPlsSelectPatientFirst='Please search for the patient first.';
+/* 2002-09-11 EL */
+$LDPendingTestRequest='Richiesta Test in Coda';
+/* 2002-10-14 EL */
+$LDDone='It\'s done! Move the form to the archive';
 
 /* Note: the following array uses strict medical terminology.
 *  If you are not sure about a translation, please leave the 
@@ -460,12 +468,4 @@ $LD_Elements = array('tx_1'=>'Clinical Chem.',
 								 'tx_28'=>'',
 								 'tx_29'=>'clinical info',
 								  );
-/* 2002-09-03 EL */							  
-$LDSearchPatient='Ricerca paziente';
-$LDPlsSelectPatientFirst='Please search for the patient first.';
-/* 2002-09-11 EL */
-$LDPendingTestRequest='Richiesta Test in Coda';
-/* 2002-10-14 EL */
-$LDDone='It\'s done! Move the form to the archive';
-
 ?>

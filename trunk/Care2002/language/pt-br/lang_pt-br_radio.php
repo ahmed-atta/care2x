@@ -1,56 +1,56 @@
 <?php
-$LDClose="Close";
-$LDCancel="Cancel";
-$LDResetEntry="Erase entries";
-$LDSave="Save";
+$LDClose="Fechar";
+$LDCancel="Cancelar";
+$LDResetEntry="Apagar entradas";
+$LDSave="Salvar";
 
-$LDSearchWordPrompt="Enter a search keyword, for example: a Family name, a name, or a birhtdate, etc.";
-$LDEnterData="Click to enter data";
-$LDClk2See="Click to see data";
-$LDFoundPatient="The search found <b>~nr~</b> patients";
-$LDWildCards="What are wildcards and how to use them";
-$LDNewSearch="New search";
+$LDSearchWordPrompt="Entre com a palavra-chave, por example: um Sobrenome, um nome, ou data de nascimento, etc.";
+$LDEnterData="Clique para entrar com os dados";
+$LDClk2See="Clique para exibir dados";
+$LDFoundPatient="A procura encontrou <b>~nr~</b> pacientes";
+$LDWildCards="O que são curingas e como usá-los";
+$LDNewSearch="Nova procura";
 
-$LDCaseNr="Patient nr.";
-$LDLastName="Family name";
-$LDName="Name";
-$LDBday="Birthdate";
-$LDOClock="o'clock";
-$LDBack="Go back";
+$LDCaseNr="Nr do paciente.";
+$LDLastName="Sobrenome";
+$LDName="Nome";
+$LDBday="Data de nascimento";
+$LDOClock="horas";
+$LDBack="Voltar";
 
 $LDOn="On";
 $LDAt="At";
-$LDClk2Edit="Click to edit this report";
+$LDClk2Edit="Clique para editar este relatório";
 
-$LDNew="New";
-$LDEdit="Edit";
-$LDCreate="Create";
-$LDValue="Value";
+$LDNew="Novo";
+$LDEdit="Editar";
+$LDCreate="Criar";
+$LDValue="Valor";
 
-$LDRadio="Radiology - X-ray";
-$LDXrayFilms="X-ray films";
-$LDXrayFilmsTxt="Display x-ray films, read or write diagnostic report, etc.";
-$LDNews="News";
-$LDNewsTxt="Read or write news pertaining to radiology";
+$LDRadio="Radiologia - Raio-X";
+$LDXrayFilms="Filmes de Raio-X";
+$LDXrayFilmsTxt="Exibir filmes de Raio-X, ler ou escrever relatório de diagnósticos, etc.";
+$LDNews="Notícias";
+$LDNewsTxt="Ler ou escrever notícias pertinentes a radiologia";
 $LDMemo="Memo";
-$LDMemoTxt="Read or write a memo";
-$LDSearchPat="Search patient";
-$LDCategory="Category";
-$LDPast3Days="Past 3 days";
-$LDPast3Months="Past 3 months";
-$LDPastAll="All";
-$LDSelect="Select";
+$LDMemoTxt="Ler ou escrever um memo";
+$LDSearchPat="Procurar paciente";
+$LDCategory="Categoria";
+$LDPast3Days="Ùltimos 3 dias";
+$LDPast3Months="Ùltimos 3 meses";
+$LDPastAll="Todos";
+$LDSelect="Selecionar";
 $LDShootDate="Shot date";
-$LDFullScreen="Full screen";
-$LDEditXrayDiag="Edit diagnostic report";
-$LDReadDiag="Read diagnosis";
-$LDWriteDiag="Write diagnosis";
+$LDFullScreen="Tela cheia";
+$LDEditXrayDiag="Editar relatório de diagnostico";
+$LDReadDiag="Ler diagnostico";
+$LDWriteDiag="Escrever diagnostico";
 $LDPreviewReport="Preview/Diagnosis";
 /* 2002-09-08 EL*/
-$LDTestRequestRadio="Test request";
-$LDTestRequestRadioTxt="Request for radiological tests";
+$LDTestRequestRadio="Requisição de teste";
+$LDTestRequestRadioTxt="Requisição para teste radiológico";
 /* 2002-09-10 EL */
-$LDTestReception="Pending Request";
-$LDTestReceptionTxt="Receive & process test requests, write results/diagnoses";
+$LDTestReception="Requisição pendente";
+$LDTestReceptionTxt="Receber & processar requisições de testes, escrever resulados/diagnósticos";
 
 ?>

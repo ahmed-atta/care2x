@@ -39,11 +39,13 @@ $LDNursing='Sykepleie';
 /* 2003-04-27 EL */
 $LDMedical='Medical';
 $LDSupport='Non-medical';
-$LDNews='News';
-$LDDepartment='Department';
+$LDNews='Nyheter';
+$LDDepartment='Poliklinik';
 $LDPressRelations='Presse';
 /* 2003-05-19 EL */
 $LDSelectDept='Select department';
 /*2003-06-15 EL*/
 $LDPlsSelectDept='Please select a department';
+$LD_AllMedicalDept='____All medical departments_____';
+$LDClinic='Klinik';
 ?>

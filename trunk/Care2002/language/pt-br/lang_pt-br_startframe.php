@@ -1,13 +1,16 @@
 <?php
 $LDMainTitle='Sistema Integrado de Informação Hospitalar Care 2002';
 
-/*$LDMainTitle='Marie hospital um Sistema Intergrado de InformaÃ§Ã£o Hospitalar 
+/*$LDMainTitle='Marie hospital um Sistema Intergrado de InformaÃ§Ã£o Hospitalar
 virtual';
 */
-$LDInviteAskMe='Entre com sua pergunta, por exemplo: "Qual é o telefone do M9d?"';
+$LDInviteAskMe='Entre com sua pergunta, por exemplo: "Qual é o telefone do
+M9d?"';
 $LDTipsLink='Dicas:';
-$LDTipsAskMe='Tente sinônimos, por exemplo digite "estação" em lugar de "repartição".';
-$LDTipsImgAlt='clique aqui para as dicas de como conseguir os melhores resultados.';
+$LDTipsAskMe='Tente sinônimos, por exemplo digite "estação" em lugar de
+"repartição".';
+$LDTipsImgAlt='Clique aqui para as dicas de como conseguir os melhores
+resultados.';
 $LDSubmitBut='Envie a pergunta';
 
 $LDQuickInfo='Informações Rápidas';
@@ -35,14 +38,11 @@ $LDMore='mais artigos';
 
 $LDEditTitle='Manchetes';
 $LDNewsDummy=array(1=>'primeira',2=>'segunda',3=>'terceira',4=>'quarta');
-/*$LDNoFrame='Este website usa frames para optimização de funcionamento. Por favor
+
+$LDNoFrame='Este website usa frames para optimização de funcionamento. Por favor
 instale um navegador adequado. Nós recomendamos o Microsoft Internet Explorer a
 partir da versão 5.0. Por favor ative o Javascript (JScript) e habilite
 automaticamente o recebimento de cookie';
-*/
-$LDNoFrame='Este website usa frames para optimização de funcionamento. Por favor
-instale um navegador adequado.  Por favor ative o Javascript (JScript) e habilite
-automaticamente o recebimento de cookie';// Removed the MSIE ref. 2003-04-25 Elpidio
 
 $LDClk2Write='Me clique para editar ';
 
@@ -57,16 +57,17 @@ $LDClkAfter='Mais tarde clique aqui.';
 $LDGoAheadEgal='clique aqui para começar o programa.';
 $LDGoAheadEgalCookie='Eu não quero aceitar cookies. Vá em frente e começe o
 programa de qualquer jeito.';
-$LDCookieRef='Se você quer saber mais a respeito dos cookies você pode ler os seguintes documentos:<br>	
-<a href=\'http://www.dtp-aus.com/cookies.htm\' target=\'pp\'>A few words about Cookies (Security and the lies)</a><br>	
-<a href=\'http://www.cookiecentral.com/content.phtml?area=4&id=10\' target=\'pp\'>Cookies and Privacy FAQ</a><br>';
-$LDPrivPolicy='Se você quiser ler a nossa política de privacidade por favor <a href=\'language/pt-br/pt-br_privacy.htm\' target=\'pp\'>clique aqui:</a>';
+$LDCookieRef='Se você quer saber mais a respeito dos cookies você pode ler os
+seguintes documentos:<br>	<a href=\'http://www.dtp-aus.com/cookies.htm\'
+target=\'pp\'>A few words about Cookies (Security and the lies)</a><br>	<a
+href=\'http://www.cookiecentral.com/content.phtml?area=4&id=10\'
+target=\'pp\'>Cookies and Privacy FAQ</a><br>';
+$LDPrivPolicy='Se você quiser ler a nossa política de privacidade por favor <a
+href=\'language/pt-br/pt-br_privacy.htm\' target=\'pp\'>clique aqui:</a>';
 $LDOurPrivPolicy='Nossa política de privacidade';
 $LDSubmitNews='Envie Notícias';
 $LDEditNews='Edite & envie notícias via editor online';
 /* 2002-10-17 EL */
 $LDCredits='Créditos';
-/* 2003-05-24 EL */
-$LDPublicItems='Public items';
 
 ?>

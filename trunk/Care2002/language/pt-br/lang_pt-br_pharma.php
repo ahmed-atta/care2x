@@ -2,60 +2,60 @@
 /**
 * IMPORTANT NOTICE: Do not replace the words or characters enclosed in ~ ~ .
 */
-$LDClose="Close";
-$LDCancel="Cancel";
-$LDResetEntry="Erase entries";
-$LDSave="Save";
+$LDClose="Fechar";
+$LDCancel="Cancelar";
+$LDResetEntry="Apagar entradas";
+$LDSave="Salvar";
 
-$LDPharmacy="Pharmacy";
+$LDPharmacy="Farmácia";
 
-$LDSearchWordPrompt="Enter a search keyword, for example: a Family name, a name, or a birhtdate, etc.";
-$LDEnterData="Click to enter data";
-$LDClk2See="Click to see data";
-$LDFoundPatient="The search found <b>~nr~</b> patients";
-$LDWildCards="What are wildcards and how to use them";
-$LDNewSearch="New search";
+$LDSearchWordPrompt="Entre com a palavra-chave, por example: um Sobrenome, um nome, ou data de nascimento, etc.";
+$LDEnterData="Clique para entrar com os dados";
+$LDClk2See="Clique para exibir dados";
+$LDFoundPatient="A procura encontrou <b>~nr~</b> pacientes";
+$LDWildCards="O que são curingas e como usá-los?";
+$LDNewSearch="Nova procura";
 
-$LDCaseNr="Patient nr.";
-$LDLastName="Family name";
-$LDName="Name";
-$LDBday="Birthdate";
-$LDOClock="o'clock";
-$LDBack="Go back";
+$LDCaseNr="Nr do paciente.";
+$LDLastName="Sobrenome";
+$LDName="Nome";
+$LDBday="Data de nascimento";
+$LDOClock="horas";
+$LDBack="Voltar";
 
 $LDOn="On";
 $LDAt="At";
-$LDClk2Edit="Click to edit this report";
+$LDClk2Edit="Clique para editar este relatório";
 
-$LDNew="New";
-$LDEdit="Edit";
-$LDCreate="Create";
-$LDValue="Value";
+$LDNew="Novo";
+$LDEdit="Editar";
+$LDCreate="Criar";
+$LDValue="Valor";
 
-$LDNews="News";
-$LDNewsTxt="Read or write news articles";
+$LDNews="Notícias";
+$LDNewsTxt="Ler ou escrever novos artigos";
 $LDMemo="Memo";
-$LDMemoTxt="Read or write a memo";
-$LDSearchPat="Search patient";
-$LDCategory="Category";
-$LDPast3Days="Past 3 days";
-$LDPast3Months="Past 3 months";
-$LDPastAll="All";
-$LDSelect="Select";
+$LDMemoTxt="Ler ou escrever um memo";
+$LDSearchPat="Procurar paciente";
+$LDCategory="Categoria";
+$LDPast3Days="Ùltimos 3 dias";
+$LDPast3Months="Ùltimos 3 meses";
+$LDPastAll="Todos";
+$LDSelect="Selecionar";
 
-$LDOrderArchive="Archive";
-$LDOrderArchiveTxt="View, edit, archive processed orders";
-$LDPharmaOrder="Ordering";
-$LDPharmaOrderTxt="Create and/or send order list";
-$LDHow2Order="How to order?";
-$LDHow2OrderTxt="How, what, when should I order?";
-$LDOrderCat="My product catalog";
-$LDOrderCatTxt="Create, edit, update, remove, etc.";
-$LDPharmaDb="Databank";
-$LDPharmaDbTxt="Managing product information";
-$LDRedList="Index of Medical Specialties";
-$LDRedListTxt="Detailed info about medical products";
+$LDOrderArchive="Arquivo";
+$LDOrderArchiveTxt="Ver, editar, ordem de arquivos processados";
+$LDPharmaOrder="Ordenação";
+$LDPharmaOrderTxt="Criar e/ou enviar lista ordenada";
+$LDHow2Order="Como ordenar?";
+$LDHow2OrderTxt="Como, o que, quando eu deve ordenar?";
+$LDOrderCat="Meu catálago de produtos";
+$LDOrderCatTxt="Criar, editar, atualizar, remover, etc.";
+$LDPharmaDb="Banco de datos";
+$LDPharmaDbTxt="Gerenciando informações de produtos";
+$LDRedList=" Indices de especialidades médicas  ";
+$LDRedListTxt="Informações detalhadas sobre produtos médicos";
 $LDOrderBotActivate="OrderBot";
-$LDOrderBotActivateTxt="Activate automatic reception of order lists.";
+$LDOrderBotActivateTxt="Ativar recepção automatica da lista de requisições.";
 
 ?>

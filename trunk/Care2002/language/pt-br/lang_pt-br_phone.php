@@ -11,10 +11,10 @@ $fieldname=array(
 							"Particular 2"
 							);
 
-$LDPhoneDir="Lista telefônica";
+$LDPhoneDir="Diretório Telefônico";
 $LDSearch="Procura";
-$LDDir="Diretorio";
-$LDNewData="Novo dado";
+$LDDir="Diretório";
+$LDNewData="Novos dados";
 $LDSEARCH="PROCURA";
 
 /**************** note the " ~nr~ " must not be erased it will be replaced by the script with the number of search results ******/
@@ -70,28 +70,28 @@ $LDDelete="Apagar";
 $LDReset="Reiniciar";
 $LDNewPhoneEntry="Entre com a nova informação do fone";
 $LDShow="Mostra";
-$LDActualDir="Actual directory contents";
+$LDActualDir="Conteúdo atual do diretório";
 $LDMoreInfo="Mais informações do diretório";
-$LDMaxItem="Total number of directory entries";
-$LDUpdateOk="The information is updated succesfully";
-$LDRows="Rows";
+$LDMaxItem="Número total de entradas do diretório";
+$LDUpdateOk="A informação foi atualizada com sucesso";
+$LDRows="Fila";
 
 $LDGoodMorning="Bom dia!";
 $LDGoodDay="Olá! É legal ver você!";
 $LDGoodEvening="Boa noite";
 
-$LDShowActualDir="Show latest directory entries";
+$LDShowActualDir="Exibir as últimas entradas do diretório";
 $LDYesDelete="Sim, apagar";
 $LDNoCancel="Não! CANCELAR";
 $LDDeleteEntry="Apagar entrada";
-$LDNoData="You did not enter anything. Please enter the data before clicking the \"Save\" button.";
+$LDNoData="Você não digitou nada. Por favor digite os dados antes de cliquar no botão \"Save\".";
 $LDReallyDelete="Você realmente quer apagar a entrada a seguir?";
 
 $LDHowManage="Como gerencia a lista";
-$LDHow2OpenDir="How to open the entire directory";
-$LDHowEnter="How to enter new phone information";
+$LDHow2OpenDir="Como abrir o diretório por inteiro";
+$LDHowEnter="Como entrar com novas informações telefônicas";
 $LDHow2SearchPhone="Como procurar por um número telefônico";
-$LDUpdate="Update data";
+$LDUpdate="Atualizar dados";
 
-$LDDirData="Edit directory entry nr. <font color=\"red\">~nr~</font>";
+$LDDirData="Editar a entrada do diretório nr. <font color=\"red\">~nr~</font>";
 ?>

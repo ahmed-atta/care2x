@@ -25,7 +25,7 @@ require_once($root_path.'include/inc_img_fx.php');
 
 <center>
 <FONT    SIZE=3 color=red  FACE="Arial">
-<b>Você não tem direito de acesso para abrir este documento!</b></font><p>
+<b>Você não tem permissão de acesso para abrir este documento!</b></font><p>
 <FORM >
 <INPUT type="button"  value=" OK "  onClick="<?php if ($mode=="close") print 'window.close()'; else print 'history.back()'; ?>"></FORM>
 <p>
@@ -61,9 +61,9 @@ em raros casos pode ter acontecido um erro na transferência de dados. Para corri
 <p>
 
 <?php
-require($root_path.'include/inc_load_copyrite.php'); 
+$path_root='../../';
+require('pt-br_copyrite.php'); 
 ?>
-
 </FONT>
 
 

@@ -148,28 +148,28 @@ $LD_MMsddsyyyy='mm/gg/aaaa';
 /* 2002-10-13 EL */
 $LDPlsSelectPatientFirst='Please find the person first.';
 /* 2002-11-30 EL */
-$LDPatientRegister='Patient registration';
-$LDRegDate='Registration date';
-$LDRegTime='Registration time';
-$LDRegBy='Registered by';
-$LDName2='Second name';
-$LDName3='Third name';
+$LDPatientRegister='Registrazione';
+$LDRegDate='Data di registrazione';
+$LDRegTime='Ora di registrazione';
+$LDRegBy='Registrato da';
+$LDName2='Secondo nome';
+$LDName3='Terzo nome';
 $LDNameMid='Middle name';
 $LDNameMaiden='Maiden name';
 $LDNameOthers='Other names';
 $LDStreet='Street';
-$LDStreetNr='Nr.';
+$LDStreetNr='Num.';
 $LDTownCity='Town/City';
 $LDProvState='Province/State';
 $LDRegion='Region';
 $LDCountry='Country';
-$LDCitizenship='Citizenship';
+$LDCitizenship='Cittadinanza';
 $LDCivilStatus='Stato civiles'; /* Civil status = married, single, divorced, widow */
-$LDSingle='Single';
-$LDMarried='Married';
-$LDDivorced='Divorced';
-$LDWidowed='Widowed';
-$LDSeparated='Separated';
+$LDSingle='Celibe/Nubile';
+$LDMarried='Sposato';
+$LDDivorced='Divorziato';
+$LDWidowed='Vedovo';
+$LDSeparated='Separato';
 $LDCellPhone='Cellphone.';
 $LDFax='Fax';
 $LDEmail='Email';
@@ -177,35 +177,35 @@ $LDZipCode='Zip';
 $LDPhoto='Photo';
 /* 2002-12-02 EL*/
 $LDPatientRegisterTxt='Register patient, search registrations, archive research';
-$LDAdmitNr='Admission Nr.';
-$LDPatient='Patient';
+$LDAdmitNr='Codice di accettazione';
+$LDPatient='Paziente';
 $LDVisit='Visit';
 $LDVisitTxt='Ambulatory or outpatient admission';
 $LDAdmissionTxt='Inpatient admission, search, research';
-$LDImmunization='Immunization';
+$LDImmunization='Immunizzazione';
 $LDESE='Enter, search, edit';
 $LDImmunizationTxt=$LDESE.' immunization report';
-$LDDRG='Diagnoses (DRG)';
+$LDDRG='DRG (composite)';
 $LDDRGTxt=$LDESE.' DRG (Diagnosis related groups)';
-$LDProcedures='Procedures';
+$LDProcedures='Procedure';
 $LDProceduresTxt=$LDESE.' therapy procedures';
-$LDPrescriptions='Prescriptions';
-$LDPrescriptionsTxt=$LDESE.' Prescriptions';
+$LDPrescriptions='Prescrizioni';
+$LDPrescriptionsTxt=$LDESE.' di prescrizione';
 /* 2002-12-03 EL*/
-$LDDiagXResults='Diagnostic Results';
+$LDDiagXResults='Resultati diagnostici';
 $LDDiagXResultsTxt='Search, research, display diagnostic results or reports';
-$LDAppointments='Appointments';
+$LDAppointments='Appuntamenti';
 $LDAppointmentsTxt=$LDESE.', research appointments or schedules';
-$LDPatientDev='Development';
+$LDPatientDev='Sviluppi';
 $LDPatientDevTxt=$LDESE.', display reports on patient\'s development';
-$LDWtHt='Weights & Heights';
+$LDWtHt='Pesi & Altezze';
 $LDWtHtTxt=$LDESE.' weights & heights data';
-$LDPregnancies='Pregnancies';
+$LDPregnancies='Gravidanze';
 $LDPregnanciesTxt=$LDESE.' pregnancy information';
-$LDBirthDetails='Birth details';
+$LDBirthDetails='Note di nascita';
 $LDBirthDetailsTxt=$LDESE.' birth details';
 /* 2002-12-07 EL*/
-$LDInsuranceCo='Insurance Company';
+$LDInsuranceCo='Compagnia di assicurazioni';
 $LDInsuranceNr_2='Extra Insurance Nr.';
 $LDInsuranceCo_2='Extra Insurance Co.';
 $LDBillType='Billing Type';
@@ -219,16 +219,16 @@ $LDRedirectToRegistry='Note: Your search will be redirected to the registration 
 /* 2002-12-24 EL */
 $LDSSSNr='SSS Nr.';
 $LDNatIdNr='National ID Nr.';
-$LDEthnicOrigin='Ethnic origin';
+$LDEthnicOrigin='Ethnia d\'origine';
 $LDOtherNr='Other number(s)';
 /* 2002-12-25 EL */
 $LDSendBill='Send bill to';
 $LDContactPerson='Contact person';
-$LDOptsForPerson='Options for this person';
+$LDOptsForPerson='Opzioni per questa persona';
 $LDSickReport='Certificato di malattia';
 $LDAnamnesisForm='Anamnesis form';
 $LDConsentDec='Consent declaration';
-$LDUpdate='Update';
+$LDUpdate='Aggiorna';
 /* 2002-12-29 EL */
 $LDGuarantor='Guarantor';
 $LDCareServiceClass='Care service class';
@@ -242,16 +242,16 @@ $LDQuickList='Quicklist';
 $LDSeveralInsurances='Patient has several insurances. Click here to edit.';
 $LDTop='Top';
 $LDInsuranceClass='Insurance class';
-$LDRecordsHistory='DB Record\'s History';
+$LDRecordsHistory='Storico di database';
 /* 2003-02-16 EL*/
 $LDNotYetAdmitted='Not yet admitted';
 $LDPatientCurrentlyAdmitted='Patient is currently admitted!';
-$LDOptions='Options';
+$LDOptions='Opzioni';
 /** note the ' ~nr~ ' must not be erased it will be replaced by the script with the number of search results ******/
 $LDSearchFoundAdmit='I found <font color=red><b>~nr~</b></font> relevant admission data.';
 $LDPatientNr='Patient Nr.';
 $LDNoRecordYet='~tag~ has no ~obj~ yet.';
-$LDNoRecordFor='No ~obj~ record for ~tag~ yet.';
+$LDNoRecordFor='Nessuna registrazione di ~obj~ per ~tag~ ancora.';
 $LDRegistrationNr='Registration Nr.';
 $LDDate='Date';
 $LDType='Type';
@@ -265,14 +265,14 @@ $LDTime='Time';
 $LDClass='Class';
 $LDOutcome='Outcome';
 $LDNrOfFetus='Nr. of Fetuses';
-$LDDetails='Details';
+$LDDetails='Dettagli';
 /* 2003-03-02 */
 $LDDosage='Dosage';
 $LDAppType='Application type';
 $LDAppBy='Application by';
-$LDNotes='Notes';
-$LDEnterNewRecord='Enter new record';
-$LDPrescription='Prescription';
+$LDNotes='Note';
+$LDEnterNewRecord='Inserisci una nuova registrazione';
+$LDPrescription='Prescrizioni';
 $LDDrugClass='Drug Class';
 $LDPrescribedBy='Prescribed by';
 $LDPharmOrderNr='Pharmacy Order Number';
@@ -286,13 +286,13 @@ $LDSickUntil='Unable to work until (inclusive)';
 $LDStartingFrom='Starting from';
 $LDConfirmedOn='Confirmed on';
 $LDInsurersCopy='Insurer\'s copy';
-$LDDiagnosis2='Diagnosis';
+$LDDiagnosis2='Diagnosi';
 /* 2003-03-03*/
 $LDBy='By';
 $LDSendCopyTo='Send copy to';
 /* 2003-03-05 EL*/
 $LDAndSym='&';
-$LDReports='Reports';
+$LDReports='Relazioni';
 $LDRefererDiagnosis='Referer Diagnosis';
 $LDRefererRecomTherapy='Referer recommended therapy';
 $LDShortNotes='Short Notes';
@@ -328,14 +328,14 @@ $LDScheduleNewAppointment='Schedule New Appointment';
 $LDNoPendingApptThisDay='There is no pending appointment for this day.';
 $LDNoPendingApptToday='There is no pending appointment today.';
 /* 2003-04-27 EL */
-$LDOptsForPatient='Options for this patient';
+$LDOptsForPatient='Opzione per questo paziente';
 /* 2003-05-06 EL */
-$LDRegisterNewPerson='Register a new person';
+$LDRegisterNewPerson='Registra una nuova persona';
 /* 2003-05-17 EL */
 $LDEnterPersonSearchKey='Enter search keyword: e.g. PID, first name, or family name';
 $LDPersonData='Personal data';
 /* 2003-05-26 EL*/
-$LDDiagnoses='Diagnoses';
+$LDDiagnoses='Diagnosi';
 $LDCreateNewForm='Create a form for';
 $LDOtherRecords='Other records';
 /*2003-06-17 El*/
@@ -344,5 +344,16 @@ $LDAllContents='All contents';
 $LDAllText='Dynamic contents only';
 $LDDataOnly='Encounter relevant data only';
 /*2003-06-21 EL*/
-$LDChartsRecords='Charts folder';
+$LDChartsRecords='Cartella dati';
+# 2003-07-26 EL
+$LDMode='Modo';
+$LDPatientIsDischarged='IL paziente è stato dimesso';
+$LDShow='Visualizza';
+$LDPlannedEncType='Planned admission type';
+# 2003-08-01 EL
+$LDListEncounters='Admissions\' list';
+$LDDischarged='Dimesso';
+$LDDischargeDate='Data di dimesso';
+# 2003-08-04 EL
+$LDCancelThisAdmission='Cancel this admission';
 ?>

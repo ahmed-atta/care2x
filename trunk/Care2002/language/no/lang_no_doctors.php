@@ -1,28 +1,28 @@
 <?php
 
-$Jan="Januar";
+$Jan='Januar';
 
-$Feb="Februar";
+$Feb='Februar';
 
-$Mae="Mars";
+$Mae='Mars';
 
-$Apr="April";
+$Apr='April';
 
-$Mai="Mai";
+$Mai='Mai';
 
-$Jun="Juni";
+$Jun='Juni';
 
-$Jul="Juli";
+$Jul='Juli';
 
-$Aug="August";
+$Aug='August';
 
-$Sep="September";
+$Sep='September';
 
-$Okt="Oktober";
+$Okt='Oktober';
 
-$Nov="November";
+$Nov='November';
 
-$Dez="Desember";
+$Dez='Desember';
 
 
 
@@ -32,165 +32,165 @@ $Dez="Desember";
 
 */
 
-$monat=array("",$Jan,$Feb,$Mar,$Apr,$Mai,$Jun,$Jul,$Aug,$Sep,$Okt,$Nov,$Des);
+$monat=array('',$Jan,$Feb,$Mar,$Apr,$Mai,$Jun,$Jul,$Aug,$Sep,$Okt,$Nov,$Des);
 
 
 
-$LDDoctors="Leger";
+$LDDoctors='Leger';
 
-$LDQView="Leger på vakt oversikt";  // DOC = doctor on call
+$LDQView='Leger på vakt oversikt';  // DOC = doctor on call
 
-$LDQViewTxt="Oversikt over dagens DOC (Leger på vakt)";
+$LDQViewTxt='Oversikt over dagens DOC (Leger på vakt)';
 
-$LDDutyPlan="Arbeidsplan";
+$LDDutyPlan='Arbeidsplan';
 
-$LDDutyPlanTxt="Arbeidsplan, Se på, oppdater, slett, velikehold, etc.";
+$LDDutyPlanTxt='Arbeidsplan, Se på, oppdater, slett, velikehold, etc.';
 
-$LDDocsList="List over leger";
+$LDDocsList='List over leger';
 
-$LDDocsListTxt="Lag eller oppdater liste over leger, Skriv inn data, etc..";
+$LDDocsListTxt='Lag eller oppdater liste over leger, Skriv inn data, etc..';
 
-$LDDocsForum="Forum";
+$LDDocsForum='Forum';
 
-$LDDocsForumTxt="Diskusjonsforum for leger";
+$LDDocsForumTxt='Diskusjonsforum for leger';
 
-$LDNews="Nyheter";
+$LDNews='Nyheter';
 
-$LDNewsTxt="Skriv, les, editer nyheter";
+$LDNewsTxt='Skriv, les, editer nyheter';
 
-$LDMemo="Memo";
+$LDMemo='Memo';
 
-$LDMemoTxt="Skriv, les, editer memo";
+$LDMemoTxt='Skriv, les, editer memo';
 
-$LDCloseAlt="Lukk legers/kirurgers vindu";
+$LDCloseAlt='Lukk legers/kirurgers vindu';
 
-$LDDocsOnDuty="Leger på vakt(beredskap)";
+$LDDocsOnDuty='Leger på vakt(beredskap)';
 
 
 
-$LDTabElements=array("Avdeling",
+$LDTabElements=array('Avdeling',
 
-								 "DOC 1",
+								 'DOC 1',
 
-								 "Personsøker/Telefon",
+								 'Personsøker/Telefon',
 
-								 "DOC 2",
+								 'DOC 2',
 
-								 "Personsøker/Telefon",
+								 'Personsøker/Telefon',
 
-								 "Vaktplan"
+								 'Vaktplan'
 
 								 );
 
-$LDShowActualPlan="Vis aktuell vaktplan";
+$LDShowActualPlan='Vis aktuell vaktplan';
 
-$LDShortDay=array("Sø",
+$LDShortDay=array('Sø',
 
-								"Ma",
+								'Ma',
 
-								"Ti",
+								'Ti',
 
-								"On",
+								'On',
 
-								"To",
+								'To',
 
-								"Fr",
+								'Fr',
 
-								"Lø"
-
-								);
-
-$LDFullDay=array("Søndag",
-
-								"Mandag",
-
-								"Tirsdag",
-
-								"Onsdag",
-
-								"Torsdag",
-
-								"Fredag",
-
-								"Lørdag"
+								'Lø'
 
 								);
 
-$LDDoc1="Leger-på-vakt 1";
+$LDFullDay=array('Søndag',
 
-$LDDoc2="Leger-på-vakt 2";
+								'Mandag',
 
-$LDClosePlan="Lukk denne listen";
+								'Tirsdag',
 
-$LDNewPlan="Lag en ny liste";
+								'Onsdag',
 
-$LDBack="Tilbake";
+								'Torsdag',
 
-$LDHelp="Hjelp";
+								'Fredag',
 
-$LDMakeDutyPlan="Lag vaktplant";
+								'Lørdag'
 
-$LDClk2Plan="Klikk for å åpne personalliste";
+								);
 
-$LDInfo4Duty="Informasjon";
+$LDDoc1='Leger-på-vakt 1';
 
-$LDStayIn="I huset vakt";
+$LDDoc2='Leger-på-vakt 2';
 
-$LDOnCall="På telefon vakt";
+$LDClosePlan='Lukk denne listen';
 
-$LDPhone="Telefon";
+$LDNewPlan='Lag en ny liste';
 
-$LDBeeper="Personsøker";
+$LDBack='Tilbake';
 
-$LDMoreInfo="Mer Informasjon";
+$LDHelp='Hjelp';
 
-$LDOn="På";
+$LDMakeDutyPlan='Lag vaktplant';
 
-$LDCloseWindow="Lukk vindu";
+$LDClk2Plan='Klikk for å åpne personalliste';
 
-$LDMonth="Måned";
+$LDInfo4Duty='Informasjon';
 
-$LDYear="År";
+$LDStayIn='I huset vakt';
 
-$LDPerElements=array("Etternavn",
+$LDOnCall='På telefon vakt';
 
-									"Fornavn",
+$LDPhone='Telefon';
 
-									"Fødselsdag",
+$LDBeeper='Personsøker';
 
-									"Personsøker",
+$LDMoreInfo='Mer Informasjon';
 
-									"Telefon",
+$LDOn='På';
 
-									"Personsøker",
+$LDCloseWindow='Lukk vindu';
 
-									"Telefon"
+$LDMonth='Måned';
+
+$LDYear='År';
+
+$LDPerElements=array('Etternavn',
+
+									'Fornavn',
+
+									'Fødselsdag',
+
+									'Personsøker',
+
+									'Telefon',
+
+									'Personsøker',
+
+									'Telefon'
 
 									);
 
-$LDChgDept="Endre avdeling: ";
+$LDChgDept='Endre avdeling: ';
 
-$LDChange="Endre";
+$LDChange='Endre';
 
-$LDCreatePersonList="Lag personell liste";
+$LDCreatePersonList='Lag personell liste';
 
-$LDNoPersonList="Listen over personale er ikke lagd. Lag listen først. Klikk på følgende knapp.";
+$LDNoPersonList='Listen over personale er ikke lagd. Lag listen først. Klikk på følgende knapp.';
 
-$LDShow="Vis";
+$LDShow='Vis';
 
 
 
-$LDDOCS="Leger-på-vakt kalender";
+$LDDOCS='Leger-på-vakt kalender';
 
-$LDDOCSTxt="Leger på telefonvakt kalender, planlegg, se på, oppdater, editer, etc.";
+$LDDOCSTxt='Leger på telefonvakt kalender, planlegg, se på, oppdater, editer, etc.';
 
-$LDDOCSR="DOCSR";
+$LDDOCSR='DOCSR';
 
-$LDDOCSRTxt="Forespørsel om kalender for leger på vakt";
+$LDDOCSRTxt='Forespørsel om kalender for leger på vakt';
 
 /* 2002-09-15 EL */
 
-$LDTestRequest="Test forespørsel";
+$LDTestRequest='Test forespørsel';
 /* 2003-03-16 EL */
 $LDContactInfo='Contact Info';
 $LDPersonalContactInfo='Personal Contact Info';

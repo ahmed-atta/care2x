@@ -41,16 +41,16 @@ $LDHowEnter='Como entrar com um novo telefone';
 $LDPhoneDir='Lista telefônica';
 $LDMakeDutyPlan='Create dutyplan';
 $LDDocsList='Lista de doutores';
-$LDNursingManage='Ward management';
+$LDNursingManage='Gerenciamnto de ala';
 
-$LDNursingStation='Nursing ward';
-$LDOrDocu='OR Documentation';
-$LDOrLogBook='OR nursing logbook';
-$LDOrNursing='OR nursing';
-$LDCreate='Create';
-$LDPersonList='Personnel list';
-$LDRepabotActivate='Activate Repabot';
-$LDQBotActivate='Activate Q-Bot';
+$LDNursingStation='Ala de enfermagem';
+$LDOrDocu='Documentação do CC';
+$LDOrLogBook='Livro de registro da enfermagem do CC';
+$LDOrNursing='Enfermagem do CC';
+$LDCreate='Criar';
+$LDPersonList='Lista do pessoal';
+$LDRepabotActivate='Ativar Repabot';
+$LDQBotActivate='Ativar Q-Bot';
 
 $LDMedLab='Laboratório Médico';
 $LDCancel='Cancela';
@@ -60,14 +60,14 @@ $LDOrderArchive='Arquivo';
 $LDPharmaOrder='Ordenação';
 $LDOrderCat='Meu catálago de produtos';
 $LDPharmaDb='Banco de dados';
-$LDPharmaOrderBot='Activate OrderBot';
+$LDPharmaOrderBot='Ativar OrderBot';
 
-$LDMedDepot='Medical Depot';
-$LDMediBotActivate='Activate Medibot';
-$LDSqlDb='SQL Databank';
-$LDManageAccess='Manage Access Rights';
-$LDListAll='List all';
-$LDSystemLogin='System Administrator Login';
+$LDMedDepot='Depósito médico';
+$LDMediBotActivate='Ativar Medibot';
+$LDSqlDb='Banco de dados SQL';
+$LDManageAccess='Gerenciar Permissões de Acesso';
+$LDListAll='Listar todos';
+$LDSystemLogin='Login do Administrador de Sistemas';
 $LDSeeData='Mostrar dado';
 $LDNewData='Entre com novo dado';
 
@@ -76,13 +76,13 @@ $LDLogin='Login';
 $LDChangeSaved='As mudanças foram salvas.';
 $LDPcID='Identidade atual deste computador';
 $LDDept='Departamento';
-$LDWard='Ward';
-$LDWardOR='Ward room or OR number';
-$LDPhoneNr='Room\'s telephone number';
+$LDWard='Ala';
+$LDWardOR='Quarto da ala ou número do CC';
+$LDPhoneNr='Número telefônico do quarto';
 $LDIntercomNr='Room\'s intercom number';
 $LDPcIP='Endereço IP deste computador';
 $LDSave='Salvar mudanças';
-$LDNoChange='Do not change current settings';
+$LDNoChange='Não mudar configuração atual';
 $LDClose='Fechar';
 $LDLogout='Log out';
 $LDNewLogin='Novo login';
@@ -90,24 +90,24 @@ $LDLogoutConfirm='Você realmente quer realizar o log out?';
 $LDOK='OK';
 $LDYes='Sim';
 $LDNotReally='Nao, realmente não.';
-$LDDOCScheduler='DOC Scheduler';
+$LDDOCScheduler='Agendador de plantão médico';
 $LDORNOCScheduler='ORNOC Scheduler';
 $LDFotolab='Fotolab';
 /* 2002-09-08 EL */
-$LDTestRequest='Diagnostic Test Request';
-$LDTestType=array('patho'=>'Pathology',
-                             'chemlabor'=>'Medical Laboratory',
-							 'baclabor'=>'Bacteriological Laboratory',
-							 'blood'=>'Blood Bank',
-							 'radio'=>'Radiology',
-							 'sono'=>'Sonography',
-							 'allamb'=>'General Ambulatory',
-							 'unfamb'=>'Emergency Ambulatory',
-							 'nuklear'=>'Nuclear Diagnostics',
-							 'inmed'=>'Internal Medicine');
-$LDBloodOrder='Request for blood products';
+$LDTestRequest='Diagnóstico para a requisição de teste';
+$LDTestType=array('patho'=>'Patologia',
+                             'chemlabor'=>'Laboratório Médico',
+							 'baclabor'=>'Laboratório Bacteriológico',
+							 'blood'=>'Banco de Sangue',
+							 'radio'=>'Radiologia',
+							 'sono'=>'Sonografia',
+							 'allamb'=>'Ambulatório Geral',
+							 'unfamb'=>'Ambulatório de Emergência',
+							 'nuklear'=>'Diagnósticos Nucleares',
+							 'inmed'=>'Medicina Interna');
+$LDBloodOrder='Requesição para materiais sanguíneos';
 /* 2002-09-22 EL */
-$LDPendingRequest='Pending request';
+$LDPendingRequest='Requisicão pendente';
 /* 2002-10-06 EL*/
 $LDLoggedOut='Logged out';
 /* 2003-03-18 EL */
@@ -121,4 +121,7 @@ $LDBilling='eComBill';
 /* 2003-05-18 EL */
 $LDPlsContactEDP='Please contact the EDP department.';
 $LDPlsTryAgain='Please try again';
+/* 2003-07-11 EL */
+$LDAdministration='Gerenciamento';
+$LDOutpatientClinic='Ambulatório';
 ?>

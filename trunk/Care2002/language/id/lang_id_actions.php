@@ -16,4 +16,8 @@ $LDAdmit='Admit';
 $LDArchive='Arsip';
 $LDStart='Mulai';
 $LDEnd='Selesai';
+# 2003-07-29 EL
+$LDListApptByDept='List appointments by department';
+$LDListApptByDoc='List appointments by clinician';
+$LDdone='Done';
 ?>

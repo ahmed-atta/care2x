@@ -20,6 +20,7 @@ $LDInterEmail='Posta internet';
 $LDSpecials='Speciali';
 $LDLogin='Login';
 $LDLogout='Logout';
+$LDAppointments='Appuntamenti';
 
 $VersionChgTarget='_top';
 $LDLanguage='Lingua';
@@ -39,4 +40,6 @@ $LDPortuguese='Português';
 $LDSpanish='Spanish';
 /* 2003-04-28 El */
 $LDDutch='Dutch';
+# 2003-08-04 EL
+$LDPerson='Persona';
 ?>

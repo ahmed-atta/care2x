@@ -718,4 +718,21 @@ $LDChangeRoom='Change of room';
 /*2003-06-14 EL*/
 $LDNrOfBedsRoom='The nr. of beds of room';
 $LDIsNotANumber='is not a valid number';
+$LDWaitingList='Waiting list';
+$LDShowAll='Show all';
+$LDShowWardOnly='Show ward only';
+$LDTransferToBed='Transfer to another bed in this ward';
+$LDTransferToWard='Transfer to another ward';
+$LDShowBeds='Show beds';
+$LDTransferPatient='Transfer patient';
+$LDDRG='DRG';
+$LDFinanceType='Insurance';
+#2003-08-02 EL
+$LDOutToInpatient='Change admission status to inpatient';
+$LDTransferClinic='Transfer to clinic or department';
+$LDClinic='Clinic';
+$LDOwnPatient='Own\'s patient';
+$LDNonOwnPatient='Non-own\'s patient';
+# 2003-08-04 EL
+$LDShowClinicOnly='This clinic only';
 ?>

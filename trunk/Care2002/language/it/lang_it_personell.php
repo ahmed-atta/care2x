@@ -38,5 +38,5 @@ $LDShowPersonalData='Show personal data';
 /* 2003-05-17 EL */
 $LDEnterEmployeeSearchKey='Enter search keyword: e.g. Employment-Nr., first name, or family name.';
 $LDPersonnelManagement='Gestione del personale';
-$LDNewEmployee='New employee';
+$LDNewEmployee='Nuova dipendente';
 ?>

@@ -68,61 +68,7 @@ $LDRequestTo='Request to the';
 $LDDepartment='department';
 $LDVisitRequested='Visit requested';
 $LDPatCanBeOrdered='Patient can be ordered';
-
-/* Note: the following arrays use strict medical terminology.
-*  If you are not sure about their translation, please leave the 
-*  english word untranslated
-*/
-$LDBacLabMaterialType = array(_mx_k_urin_=>'C.Urin',                                              
-                                              _mx_sputum_=>'Sputum',
-											  _mx_m_urin_=>'M.Urin',
-											  _mx_trachealsecrete_=>'Trac.scrt.',
-											  _mx_uricult_=>'Uricult',
-											  _mx_bronchiallavage_=>'B.lavage',
-											  _mx_wundabstrich_=>'W.smr',
-											  _mx_magensaft_=>'Gastrc.j.',
-											  _mx_augen_abstrich_right_=>'Ey.s.r.',
-											  _mx_secrete_=>'Secrete',
-											  _mx_augen_abstrich_left_=>'Ey.s.l.',
-											  _mx_exsudat_=>'Exsudat',
-											  _mx_ear_abstrich_right_=>'E.s.r.',
-											  _mx_punction_=>'Punctat',
-											  _mx_ear_abstrich_left_=>'E.s.l.',
-											  _mx_pleura_=>'Pleura',
-											  _mx_rachen_abstrich_=>'Th.smr',
-											  _mx_ascites_=>'Ascetis',
-											  _mx_tonsillen_abstrich_=>'Tons.s.',
-											  _mx_douglas_=>'Douglas',
-											  _mx_nose_abstrich_=>'N.smr',
-											  _mx_liquor_=>'Liquor',
-											  _mx_vaginal_abstrich_=>'Vag.s.',
-											  _mx_blood_culture_=>'Blood.C.');
-										  
-$LDBacLabTestType=array(_tx_special_body_material_=>'S.body.m.',
-                                        _tx_culture_aerob_=>'Aerob.C.',
-										_tx_op_material_=>'OP.Mat.',
-										_tx_culture_anaerob_=>'Anae.C.',
-										_tx_k_point_=>'Cat.tip',
-										_tx_fungus_culture_=>'Fungal.C.',
-										_tx_tubus_point_=>'Tube.tip',
-										_tx_stool_parasite_=>'St.f.paras.',
-										_tx_go_culture_=>'GO-Cult.',
-										_tx_stool_pathogen_=>'St.f.patho.',
-										_tx_hygiene_material_=>'Hygien.Mat.',
-										_tx_stool_dyspepsy_=>'St.f.Dysp.',
-										_tx_biopsy_material_=>'Biops.Mat.',
-										_tx_stool_clost_toxin_=>'St.f.C.Tox.',
-										_tx_stool_=>'Stool',
-										_tx_tbc_dye_=>'TBC.Stain',
-										_tx_stool_yersinia_=>'St.f.Yers.',
-										_tx_tbc_culture_=>'TBC.cult.',
-										_tx_stool_ehec_=>'St.f.EHEC',
-										_tx_liquor_antigen_=>'Liq.antigen',
-										_tx_own_blood_=>'Own blood',
-										_tx_gram_dye_=>'Gram.stain',
-										_tx_pharma_material_=>'Pharm.mat.',
-										_tx_go_dye_=>'GO-stain');
-										
+									
 $LDShortMonth=array('',
                                    'Ja',
 								   'Fe',
@@ -227,7 +173,7 @@ $LDPlsEnterDiagnosisQuiry='Please enter the diagnoses or inquiries.';
 $LDPlsSelectDept='Please select a department.';
 $LDPlsSelectDeptShort='pls. select department';
 /* 2002-12-09 EL */
-$LDPendingTestRequest='Pending Test Request';
+$LDPendingTestRequest='Richiesta Test in Coda';
 /* 2002-09-13 EL */
 $LDPrevRequest='Previous request';
 $LDNextRequest='Next request';
@@ -269,4 +215,57 @@ $LD1500='15.00';
 /* 2002-10-14 EL */
 $LDDone='It\'s done! Move the form to the archive';
 
+/* Note: the following arrays use strict medical terminology.
+*  If you are not sure about their translation, please leave the 
+*  english word untranslated
+*/
+$LDBacLabMaterialType = array(_mx_k_urin_=>'C.Urin',                                              
+                                              _mx_sputum_=>'Sputum',
+											  _mx_m_urin_=>'M.Urin',
+											  _mx_trachealsecrete_=>'Trac.scrt.',
+											  _mx_uricult_=>'Uricult',
+											  _mx_bronchiallavage_=>'B.lavage',
+											  _mx_wundabstrich_=>'W.smr',
+											  _mx_magensaft_=>'Gastrc.j.',
+											  _mx_augen_abstrich_right_=>'Ey.s.r.',
+											  _mx_secrete_=>'Secrete',
+											  _mx_augen_abstrich_left_=>'Ey.s.l.',
+											  _mx_exsudat_=>'Exsudat',
+											  _mx_ear_abstrich_right_=>'E.s.r.',
+											  _mx_punction_=>'Punctat',
+											  _mx_ear_abstrich_left_=>'E.s.l.',
+											  _mx_pleura_=>'Pleura',
+											  _mx_rachen_abstrich_=>'Th.smr',
+											  _mx_ascites_=>'Ascetis',
+											  _mx_tonsillen_abstrich_=>'Tons.s.',
+											  _mx_douglas_=>'Douglas',
+											  _mx_nose_abstrich_=>'N.smr',
+											  _mx_liquor_=>'Liquor',
+											  _mx_vaginal_abstrich_=>'Vag.s.',
+											  _mx_blood_culture_=>'Blood.C.');
+										  
+$LDBacLabTestType=array(_tx_special_body_material_=>'S.body.m.',
+                                        _tx_culture_aerob_=>'Aerob.C.',
+										_tx_op_material_=>'OP.Mat.',
+										_tx_culture_anaerob_=>'Anae.C.',
+										_tx_k_point_=>'Cat.tip',
+										_tx_fungus_culture_=>'Fungal.C.',
+										_tx_tubus_point_=>'Tube.tip',
+										_tx_stool_parasite_=>'St.f.paras.',
+										_tx_go_culture_=>'GO-Cult.',
+										_tx_stool_pathogen_=>'St.f.patho.',
+										_tx_hygiene_material_=>'Hygien.Mat.',
+										_tx_stool_dyspepsy_=>'St.f.Dysp.',
+										_tx_biopsy_material_=>'Biops.Mat.',
+										_tx_stool_clost_toxin_=>'St.f.C.Tox.',
+										_tx_stool_=>'Stool',
+										_tx_tbc_dye_=>'TBC.Stain',
+										_tx_stool_yersinia_=>'St.f.Yers.',
+										_tx_tbc_culture_=>'TBC.cult.',
+										_tx_stool_ehec_=>'St.f.EHEC',
+										_tx_liquor_antigen_=>'Liq.antigen',
+										_tx_own_blood_=>'Own blood',
+										_tx_gram_dye_=>'Gram.stain',
+										_tx_pharma_material_=>'Pharm.mat.',
+										_tx_go_dye_=>'GO-stain');
 ?>

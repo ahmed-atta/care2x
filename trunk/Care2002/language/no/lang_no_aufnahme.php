@@ -490,4 +490,15 @@ $LDAllText='Dynamic contents only';
 $LDDataOnly='Encounter relevant data only';
 /*2003-06-21 EL*/
 $LDChartsRecords='Charts folder';
+# 2003-07-26 EL
+$LDMode='Mode';
+$LDPatientIsDischarged='This patient is already discharged';
+$LDShow='Show';
+$LDPlannedEncType='Planned admission type';
+# 2003-08-01 EL
+$LDListEncounters='Admissions\' list';
+$LDDischarged='Discharged';
+$LDDischargeDate='Discharge date';
+# 2003-08-04 EL
+$LDCancelThisAdmission='Cancel this admission';
 ?>

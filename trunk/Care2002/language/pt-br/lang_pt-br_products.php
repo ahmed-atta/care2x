@@ -6,7 +6,7 @@ $LDSave='Salvar';
 $LDReset='Restaurar';
 
 $LDPharmacy='Farmácia';
-$LDMedDepot='Depósito Médico';
+$LDMedDepot='Almoxarifado';
 
 $LDSearchWordPrompt='Digite uma palavra-chave, por exemplo: um nº de requisição, um nº de produto, o nome do produto, etc.';
 $LDEnterData='Digitar dados';
@@ -31,7 +31,7 @@ $LDEdit='Editar';
 $LDCreate='Criar';
 $LDValue='Valor';
 
-$LDNews='News';
+$LDNews='Notícias';
 $LDNewsTxt='Ler ou escrever novas notícias/artigos pertencentes à farmácia';
 $LDMemo='Memorando';
 $LDMemoTxt='Ler ou escrever memorando';
@@ -44,7 +44,7 @@ $LDSelect='Selecionar';
 
 $LDOrderArchive='Arquivo';
 $LDOrderArchiveTxt='Visualizar, editar, requisições processadas para o arquivo';
-$LDPharmaOrder='requisitar';
+$LDPharmaOrder='Requisitar';
 $LDPharmaOrderTxt='Criar e/ou enviar uma lista de requisição';
 $LDHow2Order='Como requisitar?';
 $LDHow2OrderTxt='Como, que, quando devo eu requisitar?';

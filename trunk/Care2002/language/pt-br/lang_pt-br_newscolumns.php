@@ -26,7 +26,7 @@ $LDTitleTag=array
 					unfamb=>'Ambulatório de Emergência',
 					sono=>'Sonografia',
 					nuklear=>'Diagnósticos Nuclear',
-					inmed=>'Medicina Interna');			
+					inmed=>'Medicina Interna');
 
 $LDSubTitle=array
 					(headline=>'',
@@ -64,5 +64,4 @@ $LDWrittenBy='Escrito por';
 
 $LDNewsDummy=array(1=>'primeiro',2=>'segundo',3=>'terceiro',4=>'quarto');
 $LDClk2Compose='Clique-me para editar...'
-$LDClk2Write='Click here to start the editor';
 ?>

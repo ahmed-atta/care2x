@@ -109,4 +109,16 @@ $LDFinalFindings='Penemuan Final';
 
 $LDFillLabOnly='Hanya untuk penggunaan Lab';
 $LDLEN='NML';  /* LEN=Lab entry number -> NML= Nomor Masukan Lab */
+/*2003-07-11 EL*/
+$LDAdministration='Pengelolaan';
+$LDTestParameters='Test parameters';
+$LDTestParametersTxt='Enter or edit units or measure, values,  range, limits, etc.';
+$LDMsrUnit='Msr. Unit';
+$LDMedian='Median'; # Median = middle or average value
+$LDUpperBound='Upper boundary';
+$LDLowerBound='Lower boundary';
+$LDUpperCritical='Upper critical';
+$LDLowerCritical='Lower critical';
+$LDUpperToxic='Upper toxic';
+$LDLowerToxic='Lower toxic';
 ?>

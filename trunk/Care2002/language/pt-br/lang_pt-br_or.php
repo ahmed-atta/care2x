@@ -1,8 +1,8 @@
 <?php
-$LDOr='Centro Cirúrgico';
+$LDOr='Centro Cirúrgico (CC)';
 $LDLOGBOOK='Livro de registros';
-$LDOrDocument='CC documentação';
-$LDOrDocumentTxt='Documentando operações';
+$LDOrDocument='Documentação do CC';
+$LDOrDocumentTxt='Documentando serviço de operações';
 
 /**
 *  A tiny dictionary:
@@ -11,36 +11,36 @@ $LDOrDocumentTxt='Documentando operações';
 * Chamada da enfermeira a espera no Centro Cirurgico
 *  OR = operating room (surgery room)
 */
-$LDDOC='DOC';
+$LDDOC='Plantão médico';
 $LDORNOC='CEECC';
-$LDScheduler='Programado';
+$LDScheduler='Agendador';
 
 $LDQuickView='Visualizar';
-$LDQviewTxtDocs='Visualizar os documentos de hoje (Médico-em-chamada)';
-$LDOrLogBook='CC livro de registros de cuidados';
-$LDOrLogBookTxt='Documentando os serviços de cuidados no arquivo';
-$LDOrProgram='CC programa';
-$LDOrProgramTxt='Mostrar, editar, criar, etc. ou programa';
-$LDQviewTxtNurse='Visualizar as enfermeiras que estão na espera.';
-$LDDutyPlanTxt='Mostrar, editar, criar (enfermeira-em-chamada)';
-$LDOnCallDuty='À espera';
-$LDOnCallDutyTxt='Documentando o trabalho durante uma chamada à espera';
+$LDQviewTxtDocs='Visualizar os documentos de hoje dos médicos de plantão';
+$LDOrLogBook='Livro de registros de enfermagem do CC';
+$LDOrLogBookTxt='Documentando os serviços de enfermagem do CC, em arquivos';
+$LDOrProgram='Programação do CC';
+$LDOrProgramTxt='Mostrar, editar, criar, etc. ou programar';
+$LDQviewTxtNurse='Visualizar as enfermeiras que estão hoje de plantão.';
+$LDDutyPlanTxt='Mostrar, editar, criar EDP (enfermeira-de-plantão)';
+$LDOnCallDuty='Plantão';
+$LDOnCallDutyTxt='Documentando o trabalho durante o plantão';
 $LDAnaLogBook='Livro de registros de anestesia';
-$LDAnaLogBookTxt='Documentando os serviços de anestesia no arquivo';
-$LDQviewTxtAna='Ver as Chamadas de hoje do anestesista';
+$LDAnaLogBookTxt='Documentando os serviços de anestesia em arquivos';
+$LDQviewTxtAna='Ver as chamadas de hoje da EDP para anestesista';
 $LDNewDocu='Novo documentos';
 $LDSearch='Procurar';
 $LDArchive='Arquivo';
 $LDSee='Ver';
 $LDUpdate='Atualizar';
 $LDCreate='Criar';
-$LDCreatePersonList='Criar ou listar enfermeiras';
+$LDCreatePersonList='Criar uma lista enfermeiras do CC';
 $LDDoctor='Médico/Cirurgião';
-$LDNursing='Cuidados';
+$LDNursing='Enfermagem';
 $LDAna='Anestesia';
 
 $LDClose='Fechar';
-$LDSave='salvar';
+$LDSave='Salvar';
 $LDCancel='Cancelar';
 $LDReset='Restaurar';
 $LDContinue='Continuar...';
@@ -55,11 +55,11 @@ $LDSearchDocu='Procurar documentos';
 $LDMinor='menor';
 $LDMiddle='média';
 $LDMajor='maior';
-$LDOperation='operação';
+$LDOperation='Operação';
 
 $LDLastName='Sobrenome';
 $LDName='Nome';
-$LDBday='data de Nasc.';
+$LDBday='Data de Nasc.';
 $LDPatientNr='Nº paciente';
 $LDMatchCode='Matchcode';
 $LDOpDate='Data de operação';
@@ -67,21 +67,21 @@ $LDOperator='Cirurgião';
 $LDStationary='Entrada paciente';
 $LDAmbulant='Saida paciente';
 $LDInsurance='Seguro';
-$LDPrivate='Confidencial';
-$LDSelfPay='Pgto próprio';
+$LDPrivate='Privado';
+$LDSelfPay='Particular';
 
 $LDDiagnosis='Diagnóstico/ICD-10';
 $LDLocalization='Localização';
 $LDTherapy='Terapia';
-$LDSpecials='Noticias especiais';
+$LDSpecials='Notícias especiais';
 $LDClassification='Classificação';
 
 /**
 *  A tiny dictionary:
 *  OP = operation (surgical operation)
 */
-$LDOpStart='CC Start';
-$LDOpEnd='CC End';
+$LDOpStart='Começar operação';
+$LDOpEnd='Terminar operação';
 /**
 *  A tiny dictionary:
 *  Scrub nurse =  the nurse in sterile clothing assisting the surgeon, in charge of the sterile instruments and surgical materials
@@ -90,7 +90,7 @@ $LDScrubNurse='Enfermeira Instrumentalista';
 $LDOpRoom='Sala do CC';
 $LDResetAll='Apagar todos os dados';
 $LDUpdateData='Atualizar dados';
-$LDStartNewDocu='Start a new document';
+$LDStartNewDocu='Começar um novo documento';
 $LDSearchKeyword='Procurar por palavra-chave:';
 
 $LDSrcListElements=array(
@@ -136,19 +136,19 @@ $LDOpMainElements=array(
 										diagnosis=>'Diagnóstico',
 										operator=>'Cirurgião/Assisntente',
 										ana=>'Anestesista',
-										cutclose=>'corte/Sutura',
+										cutclose=>'Corte/Sutura',
 										therapy=>'Terapia',
 										result=>'Resultado',
-										inout=>'entrada/Saída'
+										inout=>'Entrada/Saída'
 										);
 $LDOpCut='Corte';
 $LDOpClose='Sutura';
 $LDOpIn='Entrada';
 $LDOpOut='Saída';
-$LDOpInFull='entrada';
+$LDOpInFull='Entrada';
 $LDOpOutFull='Saída';
 $LDEditPatientData='Editar o livro de registro de dados de ~tagword~';
-$LDOpenPatientFolder='Abrir a pasta de cuidados de ~tagword~';
+$LDOpenPatientFolder='Abrir a pasta de enfermagem de ~tagword~';
 
 $tbuf=array('O','A','S','R');
 $cbuf=array('Cirurgião','Assistente','Enfermeira instrumentalista','Enfermeira Assistente');
@@ -167,7 +167,7 @@ $LDOpPersonElements=array(
 
 $LDPatientNotFound='Paceinte não encontrado!';
 $LDPlsEnoughData='Entre com mais informações.';
-$LDOpNr='nº CC';
+$LDOpNr='nº da operação';
 $LDDate='Data';
 $LDClk2DropMenu='Clique para baixar o menu';
 $LDSaveLatest='Salvar os últimos dados';
@@ -175,7 +175,7 @@ $LDHelp='Abrir ajuda';
 
 $LDSearchPatient='Procurar paciente';
 $LDUsedMaterial='Materiais usados no CC';
-$LDContainer='Recipientes/materiais usados';
+$LDContainer='Recipientes/instrumentos usados';
 $LDDRG='DRG';
 $LDShowLogbook='Mostrar livro de registros';
 
@@ -186,7 +186,7 @@ $LDShowLogbook='Mostrar livro de registros';
 *  LA =  Local anesthesia (locally injected or applied)
 *  DS = Daemmerschlaf (a local dialect meaning analgesic sedation )
 *  AS = Analgesic sedation (german = Analgosidierung)
-*  Plexus = Anesthesia on the Plexus nerve 
+*  Plexus = Anesthesia on the Plexus nerve
 */
 
 $LDAnaTypes=array(
@@ -197,15 +197,15 @@ $LDAnaTypes=array(
 					'DS'=>'DS',
 					'AS'=>'AS',
 					'Plexus'=>'Plexus',
-					'Standby'=>'Standy'
+					'Standby'=>'Reserva'
 					);
 
-$LDAnaDoc='Anesthesiologist';
+$LDAnaDoc='Anestesiologista';
 $LDAnaPrefix='AN';
 $LDEnterPerson='Digite um novo ~tagword~';
 $LDExtraInfo='Informações adicionais';
-$LDFrom='De';
-$LDTo='Para';
+$LDFrom='de';
+$LDTo='às';
 $LDFunction='Função';
 $LDCurrentEntries='Dados atuais';
 $LDDeleteEntry='Apagar dados';
@@ -221,19 +221,19 @@ $LDJobIdTag=array(
 						);
 $LDQuickSelectList='Selecione a lista';
 $LDTimes='Hora';
-$LDPlasterCast='Plaster cast';
+$LDPlasterCast='Engessar';
 /**
 *  Reposition = repositioning of bone dislocation or fracture
 */
 $LDReposition='Reposição';
 $LDWaitTime='Tempo inativo';
-$LDStart='Inicio';
+$LDStart='Início';
 $LDEnd='Fim';
-$LDPatNoExist='O paciente não está cadastrado. reinicie o cadastro. Se o problema persistir, contate o CPD';
+$LDPatNoExist='O paciente não está cadastrado. Reinicie o cadastro. Se o problema persistir, contate o CPD';
 $opts=array('-',
 					'O paciente chegou tarde no CC',
        				'O anestesista chegou tarde no CC',
-       				'As enfermeiras chegaram tarde no CC', 
+       				'As enfermeiras chegaram tarde no CC',
 					'A equipe da limpeza terminou tarde',
        				'Razões especiais');
 $LDReason='Razões';
@@ -264,8 +264,8 @@ $LDContainerElements=array(
     								'Nº pçs',
     								'&nbsp;'
 									);
-$LDArticleNr='Nº Artigo';			
-$LDContainerNr='Nº Recipiente.';							
+$LDArticleNr='Nº do artigo';
+$LDContainerNr='Nº do recipiente.';
 $LDArticleNotFound='Artigo não encontrado!';
 $LDNoArticleTxt='O artigo não existe ou seu número está incorreto.';
 $LDClk2ManualEntry='Clique aqui para digitar um artigo manualmente';
@@ -275,10 +275,10 @@ $LDDbInfo='Informações do Banco de dados';
 $LDRemoveArticle='Remover o artigo desta lista';
 $LDArticleNoList='Artigo não listado no banco de dados';
 $LDPromptSearch='Digite uma palavra-chave.<br>por exemplo o Nome, Sobrenome, data de nascimento, etc.)';
-$LDKeyword='palavra-chave';
+$LDKeyword='Palavra-chave';
 $LDOtherFunctions='Outras funções';
 $LDInfoNotFound='Não foi encontrada nenhuma informação!';
-$LDButFf='mas o seguinte';
+$LDButFf='Mas o seguinte';
 $LDSimilar=' A entrada é';
 $LDSimilarMany=' As entradas são';
 $LDNeededInfo=' Procurar por palavras similares.';
@@ -288,32 +288,32 @@ $LDDepartment='Departamento';
 $LDRoom='Sala';
 $LDLastEntry='Última entrada no registro';
 $LDLastEntryMany='Últimas entradas no registro';
-$LDFrom='de';
+$LDFrom='dàs';
 $LDFromMany='de';
 $LDYesterday='ontem';
 $LDVorYesterday='há 2 dias';
 $LDDays='há dias';
 $LDChangeDept='Mudar o departamento ou Sala CC';
 
-$LDTabElements=array('OR Department',
-								 'À espera',
+$LDTabElements=array('Departamento CC',
+								 'Em plantão',
 								 'Beeper/Fone',
-								 'Em chamada',
+								 'À espera',
 								 'Beeper/Fone',
 								 'Planejamento das rotinas'
 								 );
-$LDStandbyPerson='À espera';
-$LDOnCallPerson='Em chamada';
+$LDStandbyPerson='Em plantão';
+$LDOnCallPerson='À espera';
 $LDMonth='Mês';
 $LDYear='Ano';
-$LDDutyElements = array('Data','&nbsp;','Sobrenome, Nome','de','para','Sala CC','diagnóstico e terapia.');
+$LDDutyElements = array('Data','&nbsp;','Sobrenome, Nome','de','para','Sala CC','Diagnóstico e Terapia.');
 $LDPrint='Imprimir';
 $LDAlertNoPrinter='Você deve imprimir manualmente. Clique na janela e selecione a impressora.';
 $LDAlertNotSavedYet='A última entrada não está salva ainda. Salvá-la primeiro?';
 $LDPhone='fome';
 $LDBeeper='Beeper';
 $LDOn='em';
-$LDNoPersonList='A lista de pessoas não foi criada ainda. Primeiro crie a lista. clique na seta.';
+$LDNoPersonList='A lista de pessoas não foi criada ainda. Primeiro crie a lista. Clique na seta.';
 $LDNoEntryFound='Nenhuma entrada foi encontrada!';
 $LDShow='Mostrar';
 $LDShowPrevLog='Mostre as entradas precedentes do registro';
@@ -330,13 +330,5 @@ $LD_MMsddsyyyy='mm/dd/yyyy';
 $LDStandbyInit='S'; /* S = Standby */
 $LDOncallInit='O'; /* O = Oncall */
 $LDDutyPlan='Plano de rotinas';
-/* 2003-03-18 EL */
-$LDSearchInAllDepts='Search in all departments';
-$LDAddNurseToList='Add a nurse to list';
-$LDNursesList='Nurses\' List';
-/* 2003-03-19 EL */
-$LDPlsSelectDept='Please select a department.';
-$LDSelectORoomNr='...and an OR.';
-$LDAlertNoDeptSelected=$LDPlsSelectDept;
-$LDAlertNoORSelected='Please select an operating room!';
+
 ?>

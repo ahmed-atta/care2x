@@ -124,4 +124,7 @@ $LDBilling='eComBill';
 /* 2003-05-18 EL */
 $LDPlsContactEDP='Vennligst kontakt IT avdelingen.';
 $LDPlsTryAgain='Vennligst prøv igjen';
+/* 2003-07-11 EL */
+$LDAdministration='Administration';
+$LDOutpatientClinic='Outpatient clinic';
 ?>

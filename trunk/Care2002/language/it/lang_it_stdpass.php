@@ -114,7 +114,7 @@ $LDPendingRequest='Richiesta in coda';
 $LDLoggedOut='Non connesso';
 /* 2003-03-18 EL */
 $LDNursesList='Elenco Personale Infermieristico';
-$LDAppointments='Appointments';
+$LDAppointments='Appuntamenti';
 /* 2003-04-27 */
 $LDInsuranceCoManager='Gestione Compagnie Assicurative';
 $LDAddressMngr='Gestioni Indirizzi';
@@ -123,4 +123,7 @@ $LDBilling='eComBill';
 /* 2003-05-18 EL */
 $LDPlsContactEDP='Si prega di contattare il CED.';
 $LDPlsTryAgain='Si prega di riprovare.';
+/* 2003-07-11 EL */
+$LDAdministration='Direzione';
+$LDOutpatientClinic='Day clinic';
 ?>

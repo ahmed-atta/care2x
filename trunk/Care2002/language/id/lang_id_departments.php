@@ -46,4 +46,6 @@ $LDPressRelations='Presse';
 $LDSelectDept='Select department';
 /*2003-06-15 EL*/
 $LDPlsSelectDept='Please select a department';
+$LD_AllMedicalDept='____All medical departments_____';
+$LDClinic='Clinic';
 ?>

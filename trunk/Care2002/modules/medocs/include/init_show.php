@@ -1,12 +1,21 @@
 <?php
 define('LANG_FILE','aufnahme.php');
-$local_user='medocs_user';
+# Resolve the local user based on the origin of the script
+if($HTTP_SESSION_VARS['sess_user_origin']=='admission') {
+	$breakfile=$root_path.'modules/registration_admission/aufnahme_daten_zeigen.php'.URL_APPEND.'&encounter_nr='.$HTTP_SESSION_VARS['sess_en'];
+	$local_user='aufnahme_user';
+}elseif($HTTP_SESSION_VARS['sess_user_origin']=='registration'){
+	$breakfile=$root_path.'modules/registration_admission/patient_register_show.php'.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'];
+	$local_user='aufnahme_user';
+}else{
+	$breakfile='medocs_pass.php';
+	$local_user='medocs_user';
+}
+
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
 require_once($root_path.'include/inc_date_format_functions.php');
 require_once($root_path.'include/care_api_classes/class_person.php');
 
-$breakfile='patient.php';
 $admissionfile='aufnahme_start.php'.URL_APPEND;
 
 if((!isset($pid)||!$pid)&&$HTTP_SESSION_VARS['sess_pid']) $pid=$HTTP_SESSION_VARS['sess_pid'];
