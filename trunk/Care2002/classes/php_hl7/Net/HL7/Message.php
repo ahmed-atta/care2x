@@ -386,4 +386,80 @@ class Net_HL7_Message {
     return $msg;
   }
 
+
+  function getSegmentAsString($index) {
+
+    $seg = $this->getSegmentByIndex($index);
+
+    if ($seg == NULL) {
+      return NULL;
+    }
+
+    $segStr = $seg->getName() . $this->_fieldSeparator;
+
+    foreach ($seg->getFields(($seg->getName() != "MSH" ? 1 : 2)) as $fld) {
+      
+      if (is_array($fld)) {
+	
+	for ($i = 0; $i < count($fld); $i++) {
+	  
+	  (is_array($fld[$i])) ? ($segStr .= join($this->_subcomponentSeparator, $fld[$i])) :
+	    ($segStr .= $fld[$i]);
+	  
+	  
+	  if ($i < (count($fld) - 1)) {
+	    $segStr .= $this->_componentSeparator;
+	  }
+	}
+      }
+      else {
+	$segStr .= $fld;
+      }
+      
+      $segStr .= $this->_fieldSeparator;
+    }
+
+    return $segStr;
+  }
+
+
+  /**
+   * Get the field identified by $fldIndex from segment $segIndex.
+   */
+  function getSegmentFieldAsString($segIndex, $fldIndex) {
+
+    $seg = $this->getSegmentByIndex($segIndex);    
+
+    if ($seg == NULL) {
+      return NULL;
+    }
+
+    $fld = $seg->getField($fldIndex);
+
+    if (! $fld) {
+      return "";
+    }
+
+    $fldStr = "";
+
+    if (is_array($fld)) {
+      
+      for ($i = 0; $i < count($fld); $i++) {
+	
+	(is_array($fld[$i])) ? ($fldStr .= join($this->_subcomponentSeparator, $fld[$i])) :
+	  ($fldStr .= $fld[$i]);
+	
+	
+	if ($i < (count($fld) - 1)) {
+	  $fldStr .= $this->_componentSeparator;
+	}
+      }
+    }
+    else {
+      $fldStr .= $fld;
+    }
+
+    return $fldStr;
+  }
+
 }

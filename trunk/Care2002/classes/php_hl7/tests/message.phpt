@@ -159,4 +159,20 @@ $msg =& new Net_HL7_Message($str);
 
 ok($msg->toString(1) == "$str\n", "Message from string and to string with subcomponents");
 
+// Segment as string
+$msg = new Net_HL7_Message("MSH*^~\\&*1\rPID*a^b^c*a^b1&b2^c*xxx\r");
+$xxx = new Net_HL7_Segment("XXX");
+$xxx->setField(2, array("a", array("b1", "b2"), "c"));
+
+$msg->addSegment($xxx);
+
+ok($msg->getSegmentAsString(0) == "MSH*^~\\&*1*", "MSH segment as string");
+
+ok($msg->getSegmentAsString(1) == "PID*a^b^c*a^b1&b2^c*xxx*", "PID segment as string");
+ok($msg->getSegmentAsString(2) == "XXX**a^b1&b2^c*", "XXX segment as string");
+
+// Get segment field as string
+ok($msg->getSegmentFieldAsString(0, 3) == "1", "MSH(3) as string");
+ok($msg->getSegmentFieldAsString(1, 2) == "a^b1&b2^c", "PID(2) as string");
+
 ?>
