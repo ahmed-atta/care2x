@@ -142,6 +142,7 @@ class Address extends Core {
 		* @global ADODB-db-link
 		*/
 	    global $db;
+	    //$db->debug=true;
 	    if(empty($nr)) return FALSE;
 		$this->sql="SELECT * FROM $this->tb_citytown WHERE nr=$nr";
 	    if($this->res['gcti']=$db->Execute($this->sql)) {

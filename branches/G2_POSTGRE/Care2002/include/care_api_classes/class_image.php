@@ -127,7 +127,8 @@ class Image extends Core{
 			$this->data_array=$data;
 			$nr=$this->data_array['nr'];
 			unset($this->data_array['nr']);
-			$this->data_array['notes']="CONCAT(notes,'[[".date('Y-m-d')."]]\n [[".$this->data_array['modify_id']."]]\n ".$this->data_array['notes']."\n')";
+			#$this->data_array['notes']="CONCAT(notes,'[[".date('Y-m-d')."]]\n [[".$this->data_array['modify_id']."]]\n ".$this->data_array['notes']."\n')";
+			$this->data_array['notes']=$this->ConcatNotes("[[".date('Y-m-d')."]]\n [[".$this->data_array['modify_id']."]]\n ".$this->data_array['notes']."\n");
 			return $this->updateDataFromInternalArray($nr);
 		}
 	}
@@ -188,17 +189,21 @@ class Image extends Core{
 	*/
 	function saveImageData(&$data){
 	    global $db;
-		$nr;
-		if($nr=$this->getLastShotNr($data)){
-			$data['shot_nr']=$nr+1;
+		$nr=0;
+		if(empty($data['encounter_nr'])){
+			return FALSE;
 		}else{
-			$data['shot_nr']=1;
-		}
-		$this->data_array=$data;
-		if($this->insertDataFromInternalArray()){
-			return $db->Insert_ID();
-		}else{
-			return false;
+			if($nr=$this->getLastShotNr($data)){
+				$data['shot_nr']=$nr+1;
+			}else{
+				$data['shot_nr']=1;
+			}
+			$this->data_array=$data;
+			if($this->insertDataFromInternalArray()){
+				return $db->Insert_ID();
+			}else{
+				return FALSE;
+			}
 		}
 	}
 	/**
@@ -390,6 +395,30 @@ class Image extends Core{
 				return $row['notes'];
 		    } else { return false;}
 		} else { return false;}
+	}
+	
+	/*
+	* Returns the GD version
+	*/
+	function gd_version() {
+		//  By Justin Greer ... source http://de.php.net/manual/en/function.imagecreatetruecolor.php
+		static $gd_version_number = null;
+		if ($gd_version_number === null) {
+		// Use output buffering to get results from phpinfo()
+ 		// without disturbing the page we're in.  Output
+		// buffering is "stackable" so we don't even have to
+		// worry about previous or encompassing buffering.
+			ob_start();
+			phpinfo(8);
+			$module_info = ob_get_contents();
+			ob_end_clean();
+			if (preg_match("/\bgd\s+version\b[^\d\n\r]+?([\d\.]+)/i", $module_info, $matches)) {
+				$gd_version_number = $matches[1];
+			} else {
+				$gd_version_number = 0;
+			}
+   		}
+   		return $gd_version_number;
 	}
 }
 ?>
