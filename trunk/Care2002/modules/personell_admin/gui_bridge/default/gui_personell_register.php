@@ -115,17 +115,18 @@ include('./gui_bridge/default/gui_tabs_personell_reg.php')
 
 # If the origin is admission link, show the search prompt
 if(!$pid&&!$personell_nr){
-
+	ob_start();
 ?>
-<table border=0>
-  <tr>
-    <td valign="bottom"><img <?php echo createComIcon($root_path,'angle_down_l.gif','0') ?>></td>
-    <td class="prompt"><?php echo $LDPlsFindPersonFirst ?></td>
-    <td><img <?php echo createMascot($root_path,'mascot1_l.gif','0','absmiddle') ?>></td>
-  </tr>
-</table>
-
+		<table border=0>
+			<tr>
+				<td valign="bottom"><img <?php echo createComIcon($root_path,'angle_down_l.gif','0') ?>></td>
+				<td class="prompt"><?php echo $LDPlsFindPersonFirst ?></td>
+				<td><img <?php echo createMascot($root_path,'mascot1_l.gif','0','absmiddle') ?>></td>
+			</tr>
+		</table>
 <?php
+		$sPretext=ob_get_contents();
+	ob_end_clean();
 
 	$user_origin='admit';
 	
@@ -146,7 +147,7 @@ if(!$pid&&!$personell_nr){
 
 	$psearch->setPrompt($LDEnterPersonSearchKey);
 
-	$psearch->pretext=$sTemp;
+	$psearch->pretext=$sPretext;
 
 	$psearch->display();
 
