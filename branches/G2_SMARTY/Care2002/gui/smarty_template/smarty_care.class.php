@@ -1,6 +1,6 @@
 <?php
 /**
-* SETUP Smarty for modul CARE2X 
+* SETUP Smarty for CARE2X 
 *
 * SMARTY.PHP 
 * 19.12.2003 Thomas Wiedmann
@@ -48,35 +48,15 @@ require_once ($root_path.'classes/Smarty-2.6.0/libs/Smarty.class.php');
 class smarty_care extends Smarty {
  
  /**
- * Konstruktor
+ * Constructor
  *
- * TODO:  PATH_DELIMITER = "\\" or "/"
- * TODO:  Basedirectory  = ""
+ * @param string modulname == directory /modules/$dirname
  */
  function smarty_care ($dirname) {
- 
+  
  	global $root_path, $templatedir, $default_template, $sDocRoot;
-	
-  //$sDocRoot = $_SERVER['DOCUMENT_ROOT'];
-  //$sDocRoot = $sDocRoot."/modules/nursing";
- 
+  
   $this->smarty();
-  
-  /**
-  * if (OS == Windows) then change / to \\
-  */
-  
-/*  if (substr(PHP_OS,0,3) == 'WIN') {
-    $this->template_dir = str_replace("/","\\\\",$sDocRoot.'/templates');
-    $this->compile_dir = str_replace("/","\\\\",$sDocRoot.'/templates_c');  
-    $this->config_dir = str_replace("/","\\\\",$sDocRoot.'/configs');  
-    $this->cache_dir = str_replace("/","\\\\",$sDocRoot.'/cache');    
-  } else {
-    $this->template_dir = $sDocRoot.'/templates';
-    $this->compile_dir = $sDocRoot.'/templates_c';  
-    $this->config_dir = $sDocRoot.'/configs';  
-    $this->cache_dir = $sDocRoot.'/cache';    
-  }*/
   
   # Another check if the working directory is really inside the template theme. 
   # If not, use default template theme.
@@ -88,31 +68,23 @@ class smarty_care extends Smarty {
       $this->compile_dir = $sDocRoot."/templates_c/$default_template/$dirname";  
   }
     
-	$this->config_dir = $sDocRoot.'/configs';  
-    $this->cache_dir = $sDocRoot.'/cache';    
+	 $this->config_dir = $sDocRoot.'/configs';  
+  $this->cache_dir = $sDocRoot.'/cache';    
   
-/*
-	For temporary debugging
-  echo     $this->template_dir."<p>";
-  echo  $this->compile_dir."<p>";  
-  echo  $this->config_dir."<p>";  
-  echo  $this->cache_dir."<p>";    
-*/
+//	For temporary debugging
+// echo  $this->template_dir."<p>";
+// echo  $this->compile_dir."<p>";  
+// echo  $this->config_dir."<p>";  
+// echo  $this->cache_dir."<p>";    
+
  
   /**
   * global configs
   */
-  //$Logo = $_SERVER['DOCUMENT_ROOT'];
-  //$Logo = $Logo."/classes/Smarty-2.6.0/misc/smarty_icon.gif";
   $Logo = $root_path.'classes/Smarty-2.6.0/misc/smarty_icon.gif';
   
-/*  if (substr(PHP_OS,0,3) == 'WIN') {
-   $Logo = str_replace("/","\\\\",$Logo);
-  }
-*/
 
   //$this->assign("SmartyLogo","<a href='http://smarty.php.net/'><img src='$Logo' border='00' height='31' width='88' /></a>");
-  //$this->debug = false;
   $this->debug = true;
   // $this->caching = true;
 
@@ -120,26 +92,26 @@ class smarty_care extends Smarty {
  
  function Copyright(){
  	global $root_path, $lang, $pgt;
-	ob_start();
-	if(file_exists($root_path.'language/'.$lang.'/'.$lang.'_copyrite.php')) include($root_path.'language/'.$lang.'/'.$lang.'_copyrite.php');
-  		else include($root_path.'language/en/en_copyrite.php');
-	$sTemp = ob_get_contents();
-	ob_end_clean();
+	 ob_start();
+	 if(file_exists($root_path.'language/'.$lang.'/'.$lang.'_copyrite.php')) include($root_path.'language/'.$lang.'/'.$lang.'_copyrite.php');
+  else include($root_path.'language/en/en_copyrite.php');
+	 $sTemp = ob_get_contents();
+	 ob_end_clean();
  	return $sTemp;
  }
  
  function PageTime(){
  	global $pgt;
-	ob_start();
-	if(defined('USE_PAGE_GEN_TIME')&&USE_PAGE_GEN_TIME){
-		$pgt->ende();
-		$pgt->ausgabe();
-	}	
-	$sTemp = ob_get_contents();
-	ob_end_clean();
+	 ob_start();
+	 if(defined('USE_PAGE_GEN_TIME')&&USE_PAGE_GEN_TIME){
+		 $pgt->ende();
+		 $pgt->ausgabe();
+	 }	
+	 $sTemp = ob_get_contents();
+	 ob_end_clean();
  	return $sTemp;
  }
  
-}
+} // end class
 
 ?>
