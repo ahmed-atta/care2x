@@ -55,9 +55,8 @@ $edit_form=0; /* Set form to non-editable*/
 $read_form=1; /* Set form to read */
 $edit=0; /* Set script mode to no edit*/
 
-$formtitle=$abtname[$subtarget];
-
 $db_request_table=$target;
+$dept_nr=$subtarget;
 
 /* Here begins the real work */
 /* Establish db connection */
@@ -105,6 +104,10 @@ if($dblink_ok)
 							      if($ergebnis=$db->Execute($sql))
        							  {
 									//echo $sql;
+								  	// Load the visual signalling functions
+									include_once($root_path.'include/inc_visual_signalling_fx.php');
+									// Set the visual signal 
+									setEventSignalColor($pn,SIGNAL_COLOR_DIAGNOSTICS_REPORT);									
 									 header("location:".$thisfile."?sid=$sid&lang=$lang&edit=$edit&saved=update&station=$station&user_origin=$user_origin&status=$status&target=$target&subtarget=$subtarget&noresize=$noresize");
 									 exit;
 								  }
@@ -282,7 +285,7 @@ if($batchrows)
 	<FONT  SIZE=1  FACE="verdana">  
 <?php
 /* The following routine creates the list of pending requests */
-include_once("inc_test_request_lister_fx.php");
+include_once($root_path.'include/inc_test_request_lister_fx.php');
 ?>
 </td>
 

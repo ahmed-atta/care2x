@@ -12,17 +12,14 @@ require($root_path.'include/inc_environment_global.php');
 */
 
 /* Start initializations */
+$lang_tables=array('departments.php');
 define('LANG_FILE','konsil.php');
-
-/* Globalize the variables */
-
 
 /* We need to differentiate from where the user is coming: 
 *  $user_origin != lab ;  from patient charts folder
 *  $user_origin == lab ;  from the laboratory
 *  and set the user cookie name and break or return filename
 */
-
 if($user_origin=='lab')
 {
   $local_user='ck_lab_user';
@@ -36,16 +33,17 @@ else
 
 require_once($root_path.'include/inc_front_chain_lang.php'); ///* invoke the script lock*/
 require_once($root_path.'include/inc_config_color.php'); ///* load color preferences*/
+require_once($root_path.'include/inc_diagnostics_report_fx.php');
 
 $thisfile='labor_test_request_admin_blood.php';
 
 $bgc1='#99ffcc'; /* The main background color of the form */
-$abtname=get_meta_tags($root_path."global_conf/$lang/konsil_tag_dept.pid");
 $edit_form=0; /* Set form to non-editable*/
 $read_form=1; /* Set form to read */
 $edit=0; /* Set script mode to no edit*/
 
-$formtitle=$abtname[$subtarget];
+$formtitle=$LDBloodBank;
+$dept_nr=43; // 43 = department nr. of blood bank
 
 $db_request_table=$subtarget;
 						
@@ -88,6 +86,7 @@ if($dblink_ok)
 								  
 							      if($ergebnis=$db->Execute($sql)){
 									//echo $sql;
+								     signalNewDiagnosticsReportEvent('','labor_test_request_printpop.php');
 									 header("location:".$thisfile."?sid=$sid&lang=$lang&edit=$edit&saved=update&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=$target&subtarget=$subtarget&batch_nr=$batch_nr&noresize=$noresize");
 									 exit;
 								  }else{
@@ -104,6 +103,10 @@ if($dblink_ok)
 								  
 							      if($ergebnis=$db->Execute($sql)){
 									//echo $sql;
+								  	// Load the visual signalling functions
+									include_once($root_path.'include/inc_visual_signalling_fx.php');
+									// Set the visual signal 
+									setEventSignalColor($pn,SIGNAL_COLOR_DIAGNOSTICS_REPORT);									
 									 header("location:".$thisfile."?sid=$sid&lang=$lang&edit=$edit&saved=update&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=$target&subtarget=$subtarget&noresize=$noresize");
 									 exit;
 								  }else{
@@ -264,7 +267,7 @@ require($root_path.'include/inc_test_request_lister_fx.php');
 if ($stored_request['release_via']!='' && $stored_request['mainlog_sign']!='' && $stored_request['status']!='done')
 {
 ?>
-<a href="<?php echo $thisfile."?sid=".$sid."&lang=".$lang."&edit=".$edit."&mode=done&target=".$target."&subtarget=".$subtarget."&batch_nr=".$batch_nr."&user_origin=".$user_origin."&noresize=".$noresize; ?>"><img <?php echo createLDImgSrc($root_path,'done.gif','0') ?> alt="<?php echo $LDDone ?>"></a>
+<a href="<?php echo $thisfile."?sid=".$sid."&lang=".$lang."&edit=".$edit."&mode=done&target=".$target."&subtarget=".$subtarget."&batch_nr=".$batch_nr."&pn=".$pn."&user_origin=".$user_origin."&noresize=".$noresize; ?>"><img <?php echo createLDImgSrc($root_path,'done.gif','0') ?> alt="<?php echo $LDDone ?>"></a>
 <?php
 }
 ?>
@@ -592,7 +595,7 @@ if($edit  || $read_form)
 if ($stored_request['release_via']!='' && $stored_request['mainlog_sign']!='' && $stored_request['status']!='done')
 {
 ?>
-<a href="<?php echo $thisfile."?sid=".$sid."&lang=".$lang."&edit=".$edit."&mode=done&target=".$target."&subtarget=".$subtarget."&batch_nr=".$batch_nr."&user_origin=".$user_origin."&noresize=".$noresize; ?>"><img <?php echo createLDImgSrc($root_path,'done.gif','0') ?> alt="<?php echo $LDDone ?>"></a>
+<a href="<?php echo $thisfile."?sid=".$sid."&lang=".$lang."&edit=".$edit."&mode=done&target=".$target."&subtarget=".$subtarget."&batch_nr=".$batch_nr."&pn=".$pn."&user_origin=".$user_origin."&noresize=".$noresize; ?>"><img <?php echo createLDImgSrc($root_path,'done.gif','0') ?> alt="<?php echo $LDDone ?>"></a>
 <?php
 }
 	

@@ -12,6 +12,7 @@ require($root_path.'include/inc_environment_global.php');
 */
 
 /* Start initializations */
+$lang_tables=array('departments.php');
 define('LANG_FILE','konsil_chemlabor.php');
 
 /* Globalize the variables */
@@ -36,12 +37,12 @@ require_once($root_path.'include/inc_config_color.php'); ///* load color prefere
 $thisfile='labor_test_request_admin_chemlabor.php';
 
 $bgc1='#fff3f3'; /* The main background color of the form */
-$abtname=get_meta_tags($root_path."global_conf/$lang/konsil_tag_dept.pid");
 $edit_form=0; /* Set form to non-editable*/
 $read_form=1; /* Set form to read */
 $edit=0; /* Set script mode to no edit*/
 
-$formtitle=$abtname[$konsil];
+$formtitle=$LDChemicalLaboratory;
+$dept_nr=24; // 24 = department Nr. chemical lab
 
 						
 /* Here begins the real work */
@@ -58,7 +59,11 @@ if($dblink_ok){
 								  
 							      if($ergebnis=$db->Execute($sql))
        							  {
+								  	include_once($root_path.'include/inc_diagnostics_report_fx.php');
 									//echo $sql;
+									/* If the findings are saved, signal the availability of report
+									*/
+								     signalNewDiagnosticsReportEvent('', 'labor_test_request_printpop.php');
 									 header("location:".$thisfile.URL_REDIRECT_APPEND."&edit=$edit&pn=$pn&user_origin=$user_origin&status=$status&target=$target&subtarget=$subtarget&noresize=$noresize");
 									 exit;
 								  }else{
@@ -262,14 +267,14 @@ require($root_path.'include/inc_test_request_lister_fx.php');
 <!-- Here begins the form  -->	
         
      <a href="javascript:printOut()"><img <?php echo createLDImgSrc($root_path,'printout.gif','0','absmiddle') ?> alt="<?php echo $LDPrintOut ?>"></a>
-     <a href="<?php echo $thisfile.URL_APPEND."&edit=".$edit."&mode=done&target=".$target."&subtarget=".$subtarget."&batch_nr=".$batch_nr."&user_origin=".$user_origin."&noresize=".$noresize; ?>"><img <?php echo createLDImgSrc($root_path,'done.gif','0','absmiddle') ?> alt="<?php echo $LDDone ?>"></a>
+     <a href="<?php echo $thisfile.URL_APPEND."&edit=".$edit."&mode=done&target=".$target."&subtarget=".$subtarget."&batch_nr=".$batch_nr."&pn=".$pn."&formtitle=".$formtitle."&user_origin=".$user_origin."&noresize=".$noresize; ?>"><img <?php echo createLDImgSrc($root_path,'done.gif','0','absmiddle') ?> alt="<?php echo $LDDone ?>"></a>
 
 <?php
 require_once($root_path.'include/inc_test_request_printout_chemlabor.php');
 ?>
 
      <a href="javascript:printOut()"><img <?php echo createLDImgSrc($root_path,'printout.gif','0','absmiddle') ?> alt="<?php echo $LDPrintOut ?>"></a>
-     <a href="<?php echo $thisfile.URL_APPEND."&edit=".$edit."&mode=done&target=".$target."&subtarget=".$subtarget."&batch_nr=".$batch_nr."&user_origin=".$user_origin."&noresize=".$noresize; ?>"><img <?php echo createLDImgSrc($root_path,'done.gif','0','absmiddle') ?> alt="<?php echo $LDDone ?>"></a>
+     <a href="<?php echo $thisfile.URL_APPEND."&edit=".$edit."&mode=done&target=".$target."&subtarget=".$subtarget."&batch_nr=".$batch_nr."&pn=".$pn."&formtitle=".$formtitle."&user_origin=".$user_origin."&noresize=".$noresize; ?>"><img <?php echo createLDImgSrc($root_path,'done.gif','0','absmiddle') ?> alt="<?php echo $LDDone ?>"></a>
 
 </td>
 

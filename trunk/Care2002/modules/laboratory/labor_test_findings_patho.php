@@ -10,7 +10,7 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-
+$lang_tables=array('departments.php');
 define('LANG_FILE','konsil.php');
 
 $local_user='ck_lab_user';
@@ -26,11 +26,11 @@ $returnfile='labor_test_request_admin_'.$subtarget.'.php'.URL_APPEND.'&target='.
 $thisfile='labor_test_findings_'.$subtarget.'.php';
 
 $bgc1='#cde1ec'; 
-$abtname=get_meta_tags($root_path."global_conf/$lang/konsil_tag_dept.pid");
 $edit=1; /* Assume to edit first */
 
-//$konsil="patho";
-$formtitle=$abtname[$subtarget];
+$formtitle=$LDPathology;
+$dept_nr=8; // 8 = department nr. of pathology
+
 $db_request_table=$subtarget;
 
 						
@@ -160,6 +160,10 @@ if($dblink_ok)
 										   WHERE batch_nr = '".$batch_nr."'";
 							          if($ergebnis=$db->Execute($sql))
        							      {
+								  		// Load the visual signalling functions
+										include_once($root_path.'include/inc_visual_signalling_fx.php');
+										// Set the visual signal 
+										setEventSignalColor($pn,SIGNAL_COLOR_DIAGNOSTICS_REPORT);									
 									     
 									     header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=insert&mode=edit&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=$target&subtarget=$subtarget&noresize=$noresize&batch_nr=$batch_nr&entry_date=$entry_date");
 									     exit;

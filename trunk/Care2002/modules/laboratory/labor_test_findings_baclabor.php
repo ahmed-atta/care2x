@@ -10,9 +10,8 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-
+$lang_tables=array('departments.php');
 define('LANG_FILE','konsil.php');
-
 $local_user='ck_lab_user';
 
 require_once($root_path.'include/inc_front_chain_lang.php');
@@ -33,15 +32,14 @@ $returnfile='labor_test_request_admin_'.$subtarget.'.php?sid='.$sid.'&lang='.$la
 $thisfile='labor_test_findings_'.$subtarget.'.php';
 
 $bgc1='#fff3f3'; 
-$abtname=get_meta_tags($root_path."global_conf/$lang/konsil_tag_dept.pid");
 $edit=0; /* Assume to not edit first */
 $read_form=1;
 $edit_findings=1;
 
 //$konsil="patho";
-$formtitle=$abtname[$subtarget];
+$formtitle=$LDBacteriologicalLaboratory;
+$dept_nr=25; // 25 = department nr. of bacteriological lab
 $db_request_table=$subtarget;
-
 						
 /* Here begins the real work */
 /* Establish db connection */
@@ -133,7 +131,7 @@ if($dblink_ok){
 
 							      if($ergebnis=$db->Execute($sql))
        							  {
-								     signalNewDiagnosticsReportEvent(formatDate2Local(date('Y-m-d'),$date_format));
+								     signalNewDiagnosticsReportEvent();
 									//echo $sql;
 									 header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=insert&mode=edit_findings&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=$target&subtarget=$subtarget&noresize=$noresize&batch_nr=$batch_nr&entry_date=$entry_date");
 									 exit;
@@ -160,7 +158,7 @@ if($dblink_ok){
 										   							  							
 							      if($ergebnis=$db->Execute($sql))
        							  {
-								     signalNewDiagnosticsReportEvent(formatDate2Local(date('Y-m-d'),$date_format));
+								     signalNewDiagnosticsReportEvent();
 									//echo $sql;
 									 header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=insert&mode=edit_findings&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=$target&subtarget=$subtarget&noresize=$noresize&batch_nr=$batch_nr&entry_date=$entry_date");
 									 exit;
@@ -191,6 +189,10 @@ if($dblink_ok){
 										   WHERE batch_nr = '".$batch_nr."'";
 							          if($ergebnis=$db->Execute($sql))
        							      {
+								  		// Load the visual signalling functions
+										include_once($root_path.'include/inc_visual_signalling_fx.php');
+										// Set the visual signal 
+										setEventSignalColor($pn,SIGNAL_COLOR_DIAGNOSTICS_REPORT);									
 									     header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=insert&mode=edit_findings&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=$target&subtarget=$subtarget&noresize=$noresize&batch_nr=$batch_nr&entry_date=$entry_date");
 									     exit;
 								       }

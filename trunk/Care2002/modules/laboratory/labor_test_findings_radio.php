@@ -10,9 +10,8 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-
+$lang_tables=array('departments.php');
 define('LANG_FILE','konsil.php');
-
 $local_user='ck_lab_user';
 
 require_once($root_path.'include/inc_front_chain_lang.php');
@@ -20,7 +19,7 @@ require_once($root_path.'include/inc_config_color.php'); // load color preferenc
 require_once($root_path.'global_conf/inc_global_address.php');
 require_once($root_path.'include/inc_diagnostics_report_fx.php');
 
-$breakfile='radiolog.php?sid='.$sid.'&lang='.$lang; 
+$breakfile=$root_path.'modules/radiology/radiolog.php?sid='.$sid.'&lang='.$lang; 
 $returnfile='labor_test_request_admin_'.$subtarget.'.php?sid='.$sid.'&lang='.$lang.'&target='.$target.'&subtarget='.$subtarget.'&user_origin='.$user_origin;
 $thisfile='labor_test_findings_'.$subtarget.'.php';
 
@@ -28,8 +27,8 @@ $bgc1='#ffffff';
 $abtname=get_meta_tags($root_path."global_conf/$lang/konsil_tag_dept.pid");
 $edit=1; /* Assume to edit first */
 
-//$konsil="patho";
-$formtitle=$abtname[$subtarget];
+$formtitle=$LDRadiology;
+$dept_nr=19; // 19 = department nr. of radiology
 $db_request_table=$subtarget;
 
 						
@@ -158,6 +157,10 @@ if($dblink_ok)
 										   WHERE batch_nr = '".$batch_nr."'";
 							          if($ergebnis=$db->Execute($sql))
        							      {
+								  		// Load the visual signalling functions
+										include_once($root_path.'include/inc_visual_signalling_fx.php');
+										// Set the visual signal 
+										setEventSignalColor($pn,SIGNAL_COLOR_DIAGNOSTICS_REPORT);									
 									     header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=insert&mode=edit&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=$target&subtarget=$subtarget&noresize=$noresize&batch_nr=$batch_nr&entry_date=$entry_date");
 									     exit;
 								       }
