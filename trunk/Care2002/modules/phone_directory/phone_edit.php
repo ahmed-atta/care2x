@@ -11,10 +11,17 @@ require_once($root_path.'include/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 define('LANG_FILE','phone.php');
-$local_user='phonedir_user';
+if(isset($user_origin)&&$user_origin=='pers'){
+	$local_user='aufnahme_user';
+}else{
+	$local_user='phonedir_user';
+}
 require_once($root_path.'include/inc_front_chain_lang.php');
-
+require_once($root_path.'include/care_api_classes/class_personell.php');
 require_once($root_path.'include/inc_config_color.php');
+
+/* Create employee object */
+$employee=new Personell();
 
 if(!isset($mode)) $mode='';
 if(!isset($name)) $name='';
@@ -25,18 +32,16 @@ $dbtable='care_phone';
 $curdate=date('Y-m-d');
 $curtime=date('H:i:s');
 
-if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
-if($dblink_ok) {
-   if ($mode=='save')
-    {
+if ($mode=='save'){
 	   // start checking input data
-	   if (($name!='') || ($vorname!='')) 
-	   {	
-				$sql="INSERT INTO ".$dbtable." 
+	if (($name!='') || ($vorname!='')) {	
+	
+		$sql="INSERT INTO ".$dbtable." 
 						(	
 							title,
 							name,
 							vorname,
+							personell_nr,
 							beruf,
 							bereich1,
 							bereich2,
@@ -56,7 +61,8 @@ if($dblink_ok) {
 						VALUES (
 							'$anrede',
 							'$name', 
-							'$vorname', 
+							'$vorname',
+							'$personell_nr', 
 							'$beruf', 
 							'$bereich1', 
 							'$bereich2', 
@@ -76,18 +82,16 @@ if($dblink_ok) {
 				
  						if($db->Execute($sql))
 						{ 
-							header('location:phone_list.php'.URL_REDIRECT_APPEND);
+							header('location:phone_list.php'.URL_REDIRECT_APPEND.'&user_origin='.$user_origin);
 							exit;
 						}
 			 			else {echo "<p>".$sql."<p>$LDDbNoSave.";};
-    	 }
-		 else
-		 {
-		    $error=1;
-		 }
- 	}
+    }else{
+		$error=1;
+	}
+}elseif($user_origin=='pers'&&$nr){
+	if(!$employee->loadPersonellData($nr)) $mode='';
 }
-else echo "$LDDbNoLink<br>"; 
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -143,6 +147,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
 <input type="hidden" name="newdata" value="<?php echo $newdata ?>">
 <input type="hidden" name="edit" value="<?php echo $edit ?>">
+<input type="hidden" name="user_origin" value="<?php echo $user_origin ?>">
 <INPUT type="submit"  value="<?php echo $LDShowActualDir ?>"></font></FORM>
 <p>
 </FONT>
@@ -151,7 +156,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 echo "<img ".createMascot($root_path,'mascot1_r.gif','0','absmiddle')."><FONT  COLOR=maroon  SIZE=+2  FACE=Arial> <b>$LDNewPhoneEntry</b><p>";
 }
 ?>
-<form method="get" action="phone_edit.php" enctype="">
+<form method="post" action="phone_edit.php" enctype="" name="entryform">
 <table bgcolor="#cceeff" border="1" cellpadding="5" cellspacing="1">
 <tr>
 <td colspan="3"><FONT    SIZE=-1  FACE="Arial">
@@ -163,18 +168,54 @@ echo "<img ".createMascot($root_path,'mascot1_r.gif','0','absmiddle')."><FONT  C
 </tr>
 <tr>
 <td>
-<FONT    SIZE=-1  FACE="Arial">
+<FONT    SIZE=-1  FACE="Arial"><b>
 <?php echo $LDEditFields[1] ?>&nbsp;
+<?php 
+if($user_origin=='pers'&&$employee->isPreLoaded()){
+	echo $employee->Title();
+?>
+<input type="hidden" name="anrede" value="<?php echo $employee->Title(); ?>">
+<?php
+}else{
+?>
 <input name=anrede type=text size="5" value=""><br>
+<?php
+}
+?>
+</b>
 </td>
 <td>
-<FONT    SIZE=-1  FACE="Arial">
+<FONT    SIZE=-1  FACE="Arial"><b>
 <?php echo $LDEditFields[2] ?>&nbsp;
-<input name=name type=text size="15" value=""><br>
+<?php 
+if($user_origin=='pers'&&$employee->isPreLoaded()){
+	echo $employee->LastName();
+?>
+<input type="hidden" name="name" value="<?php echo $employee->LastName(); ?>">
+<?php
+}else{
+?>
+<input name="name" type=text size="5" value=""><br>
+<?php
+}
+?>
+</b>
 </td>
-<td><FONT    SIZE=-1  FACE="Arial">
+<td><FONT    SIZE=-1  FACE="Arial"><b>
 <?php echo $LDEditFields[3] ?>&nbsp;
-<input type=text name=vorname size="15" value=""><br>
+<?php 
+if($user_origin=='pers'&&$employee->isPreLoaded()){
+	echo $employee->FirstName();
+?>
+<input type="hidden" name="vorname" value="<?php echo $employee->FirstName(); ?>">
+<?php
+}else{
+?>
+<input name="vorname" type=text size="5" value=""><br>
+<?php
+}
+?>
+</b>
 </td>
 <td><FONT    SIZE=-1  FACE="Arial">
 <?php echo $LDEditFields[4] ?>&nbsp;
@@ -258,6 +299,14 @@ echo "<img ".createMascot($root_path,'mascot1_r.gif','0','absmiddle')."><FONT  C
 <input type="hidden" name="newvalues" value="1">
 <input type="submit" value="<?php echo $LDSave ?>">
 <input type="reset" name="erase" value="<?php echo $LDReset ?>">
+<input type="hidden" name="user_origin" value="<?php echo $user_origin ?>">
+<?php 
+if($user_origin=='pers'&&$employee->isPreLoaded()){
+?>
+<input type="hidden" name="personell_nr" value="<?php echo $nr; ?>">
+<?php
+}
+?>
 &nbsp;
 </td>
 <td >
