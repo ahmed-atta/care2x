@@ -25,4 +25,5 @@ $LDProblem='Problemi';
 $LDDevelopment='Sviluppo';
 $LDAllergy='Allergia';
 $LDDietPlan='Pianificazione Dieta';
+$LDPrintPDFDocAllReport='PDF document of all reports';
 ?>

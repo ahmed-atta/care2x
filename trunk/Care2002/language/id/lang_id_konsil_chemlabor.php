@@ -4,7 +4,7 @@
 * Agus Ramdan 
 */
 $LDDiagnosticTest='Pesanan tes diagnosis';
-$LDHospitalName='CARE 2002';
+$LDHospitalName='CARE 2X';
 $LDCentralLab='Laboratorium Pusat';
 $LDLabel='Label';
 $LDRoomNr='No. Ruang';
