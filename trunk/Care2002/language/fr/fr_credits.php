@@ -53,7 +53,7 @@ Il a décidé de joindre activement la source libre car:<br><i>"Un tel monde idéal
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/gabriele_cicala.jpg"  border=0  align=right vspace=10>
-			<b>La traduction italienne de Care 2002 et www.care2x.cométait réalisée par Gabriele Cicala.</b>
+			<b>La traduction italienne de Care 2002 et www.care2x.com était réalisée par Gabriele Cicala.</b>
 			
 			<P><a href="mailto:gabcicala@tiscali.it"><u>Gabriele Cicala   peut être  contacté ici..</u></a>
 </TD></TR></TBODY></TABLE>
