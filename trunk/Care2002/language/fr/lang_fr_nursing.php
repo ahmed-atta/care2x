@@ -2,21 +2,21 @@
 /*
 *	IMPORTANT!	All words or characters inclosed with ~ ~ must not be changed.
 */
-$LDNursing='Nursing';
-$LDStation='Ward';
+$LDNursing='Infirmerie';
+$LDStation='Chambre';
 
-$LDQuickView='Quick view';
-$LDSearchPatient='Search a patient';
+$LDQuickView='Vue rapide';
+$LDSearchPatient='rechercher un patient';
 $LDArchive='Archive';
-$LDStationMan='Ward management';
+$LDStationMan='Gestion des salles';
 $LDNews='News';
 $LDMemo='Memo';
-$LDNursingForum='Nursing forum';
-$LDNursingStations='Nursing wards';
+$LDNursingForum='Forum Infirmerie';
+$LDNursingStations='Salle Infirmerie';
 
-$LDQuickViewTxt='Quick view of today\'s occupancy of the nursing wards.';
-$LDSearchPatientTxt='Search the wards for an admitted patient.';
-$LDArchiveTxt='Research in the wards\' archived files.';
+$LDQuickViewTxt='Vue rapide de l\'occupation actuelle des salles d\'infirmerie.';
+$LDSearchPatientTxt='Recherche la salle pour un patient admis.';
+$LDArchiveTxt='Rechercher les fichiers archiver pour les salles.';
 $LDStationManTxt='Create a ward, initialize parameters like number of beds, personnel, etc.';
 $LDNewsTxt='Read, compose, or edit a news article.';
 $LDMemoTxt='Read, compose, or edit a memo.';
