@@ -1,5 +1,14 @@
 <?php
 #
+# Definitions for tanzanian clinics
+#
+define('IS_TANZANIAN',true); 	// If TRUE use tanzanian modifications, else use standard care2x
+define('PID_PREFIX',00);		 	// Prefix for filenumbers (xx/00/00/01) Ex: 20/00/00/01
+
+
+
+
+#
 # Page generation time measurement
 # define to 1 to measure page generation time
 #

@@ -94,11 +94,37 @@ while($test_request=$requests->FetchRow())
   } 
   if($batch_nr!=$test_request['batch_nr'])
   {
-        echo "<img src=\"".$root_path."gui/img/common/default/pixel.gif\" border=0 width=4 height=7> <a href=\"".$thisfile.URL_APPEND."&target=".$target."&subtarget=".$subtarget."&pn=".$test_request['encounter_nr']."&batch_nr=".$test_request['batch_nr']."&user_origin=".$user_origin."&tracker=".$tracker."\">".$test_request['batch_nr']." ".$test_request['room_nr']."</a><br>";
+        echo "<img src=\"".$root_path."gui/img/common/default/pixel.gif\" border=0 width=4 height=7> 
+        <a onmouseover=\"showBallon('".$test_request['name_first']." ".$test_request['name_last']."',0,150,'#99ccff'); window.status='Care2x Tooltip'; return true;\"
+	onmouseout=\"hideBallon(); return true;\" href=\"".$thisfile.URL_APPEND."&target=".$target."&subtarget=".$subtarget."&pn=".$test_request['encounter_nr']."&batch_nr=".$test_request['batch_nr']."&user_origin=".$user_origin."&tracker=".$tracker."\">";
+			if($test_request['batch_nr']) 
+			{
+				if(IS_TANZANIAN) 
+				{
+					echo $enc_obj->showPID($test_request['batch_nr']); 
+				}
+				else 
+				{
+					echo $test_request['batch_nr'];
+				}
+			} 
+	echo " ".$test_request['room_nr']."</a><br>";
    }
    else
    {
-        echo "<img ".createComIcon($root_path,'redpfeil.gif','0','',TRUE)."> <FONT size=1 color=\"red\">".$test_request['batch_nr']." ".$test_request['room_nr']."</font><br>";
+        echo "<img ".createComIcon($root_path,'redpfeil.gif','0','',TRUE)."> <FONT size=1 color=\"red\">";
+			if($test_request['batch_nr']) 
+			{
+				if(IS_TANZANIAN) 
+				{
+					echo $enc_obj->showPID($test_request['batch_nr']); 
+				}
+				else 
+				{
+					echo $test_request['batch_nr'];
+				}
+			} 
+	echo " ".$test_request['room_nr']."</font><br>";
         $track_item=$tracker;
    }
    
