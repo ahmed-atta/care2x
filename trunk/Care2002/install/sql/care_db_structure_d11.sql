@@ -1417,7 +1417,7 @@ CREATE TABLE care_mail_private (
    sign varchar(255) NOT NULL,
    ask4ack tinyint(4) DEFAULT '0' NOT NULL,
    reply2 varchar(255) NOT NULL,
-   attachment varchar(255) NOT NULL,
+   attachment tinytext NOT NULL,
    attach_type varchar(30) NOT NULL,
    read_flag tinyint(4) DEFAULT '0' NOT NULL,
    mailgroup varchar(60) NOT NULL,
@@ -1426,7 +1426,7 @@ CREATE TABLE care_mail_private (
    exclude_addr text NOT NULL,
    send_dt datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
    send_stamp timestamp(14),
-   uid varchar(255) NOT NULL,
+   uid tinytext NOT NULL,
    KEY recipient (recipient)
 );
 
@@ -3451,85 +3451,85 @@ INSERT INTO care_complication VALUES (16, 1, 'Extrauterine pregnancy', 'LDExtraU
 #
 
 
-INSERT INTO care_config_global VALUES ('date_format', 'dd/MM/yyyy', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('time_format', 'HH.MM', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_reg_nr_adder', '10000000','', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('main_info_police_nr', '11?', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('main_info_fire_dept_nr', '12?', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('main_info_emgcy_nr', '13?', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('main_info_phone', '1234567', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('main_info_fax', '567890','', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('main_info_address', 'Virtualstr. 89AA\r\nCyberia 89300\r\nLas Vegas County', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('main_info_email', 'contact@care2x.com', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_id_nr_adder', '10000000', '', '', '', '', 00000000000000, '', 000000000000000);
-INSERT INTO care_config_global VALUES ('patient_outpatient_nr_adder', '500000','', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_inpatient_nr_adder', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_name_2_hide', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_name_3_hide', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_name_middle_hide', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_name_maiden_hide', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_ethnic_orig_hide', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_name_others_hide', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_nat_id_nr_hide', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_religion_hide', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_cellphone_2_nr_hide', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_phone_2_nr_hide', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_citizenship_hide', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_sss_nr_hide', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('language_default', 'en', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('language_single', '0', '', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('date_format', 'dd/MM/yyyy',  NULL,  NULL, '', '', 20031122181014, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('time_format', 'HH.MM', '', '', '', '', 20030105033839, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('patient_reg_nr_adder', '10000000', '', '', '', '', 20030105033839, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('main_info_police_nr', '11?',  NULL,  NULL, '', '', 20031126054933, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('main_info_fire_dept_nr', '12?',  NULL,  NULL, '', '', 20031126055017, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('main_info_emgcy_nr', '13?',  NULL,  NULL, '', '', 20031126055029, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('main_info_phone', '1234567',  NULL,  NULL, '', '', 20031126055043, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('main_info_fax', '567890',  NULL,  NULL, '', '', 20031028131444, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('main_info_address', 'Virtualstr. 89AA\r\nCyberia 89300\r\nLas Vegas County',  NULL,  NULL, '', '', 20031028131444, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('main_info_email', 'contact@care2x.com',  NULL,  NULL, '', '', 20031028131444, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_id_nr_adder', '10000000', '', '', '', '', 20030105033839, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('patient_outpatient_nr_adder', '500000', '', '', '', '', 20030805001440, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('patient_inpatient_nr_adder', '0', '', '', '', '', 20030510141916, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_name_2_hide', '0',  NULL,  NULL, '', '', 20030623153753, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_name_3_hide', '0',  NULL,  NULL, '', '', 20030623153753, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_name_middle_hide', '0',  NULL,  NULL, '', '', 20030623153753, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_name_maiden_hide', '0',  NULL,  NULL, '', '', 20030623153753, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_ethnic_orig_hide', '0',  NULL,  NULL, '', '', 20030623153753, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_name_others_hide', '0',  NULL,  NULL, '', '', 20030623153753, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_nat_id_nr_hide', '0',  NULL,  NULL, '', '', 20030623153753, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_religion_hide', '0',  NULL,  NULL, '', '', 20030623153753, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_cellphone_2_nr_hide', '0',  NULL,  NULL, '', '', 20030623153753, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_phone_2_nr_hide', '0',  NULL,  NULL, '', '', 20030623153753, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_citizenship_hide', '0',  NULL,  NULL, '', '', 20030623153753, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_sss_nr_hide', '0',  NULL,  NULL, '', '', 20030623153753, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('language_default', 'en',  NULL,  NULL, '', '', 20031126055106, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('language_single', '0',  NULL,  NULL, '', '', 20030825012325, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('mascot_hide', '', '', '', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('mascot_style', 'default', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('gui_frame_left_nav_width', '150', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('gui_frame_left_nav_border', '1', '', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('gui_frame_left_nav_width', '150',  NULL,  NULL, '', '', 20030825012325, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('gui_frame_left_nav_border', '1',  NULL,  NULL, '', '', 20030825012325, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('news_fotos_path', 'fotos/news/', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('news_headline_title_font_size', '5', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('news_headline_title_font_face', 'arial,verdana,helvetica,sans serif', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('news_headline_title_font_color', '#CC3333', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('news_headline_preface_font_size', '2', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('news_headline_preface_font_face', 'arial,verdana,helvetica,sans serif','', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('news_headline_preface_font_color', '#336666', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('news_headline_body_font_size', '2', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('news_headline_body_font_face', 'arial,verdana,helvetica,sans serif', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('news_headline_body_font_color', '#000033', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('news_normal_preview_maxlen', '600', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('news_headline_title_font_bold', '1', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('news_headline_preface_font_bold', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('news_normal_display_width', '100%', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_fax_hide', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_email_hide', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_phone_1_nr_hide', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_cellphone_1_nr_hide', '0', '', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('news_headline_title_font_size', '5',  NULL,  NULL, '', '', 20031108204810, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('news_headline_title_font_face', 'arial,verdana,helvetica,sans serif',  NULL,  NULL, '', '', 20031108204810, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('news_headline_title_font_color', '#CC3333',  NULL,  NULL, '', '', 20031108204810, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('news_headline_preface_font_size', '2',  NULL,  NULL, '', '', 20031108204810, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('news_headline_preface_font_face', 'arial,verdana,helvetica,sans serif',  NULL,  NULL, '', '', 20031108204810, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('news_headline_preface_font_color', '#336666',  NULL,  NULL, '', '', 20031108204810, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('news_headline_body_font_size', '2',  NULL,  NULL, '', '', 20031108204810, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('news_headline_body_font_face', 'arial,verdana,helvetica,sans serif',  NULL,  NULL, '', '', 20031108204810, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('news_headline_body_font_color', '#000033',  NULL,  NULL, '', '', 20031108204811, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('news_normal_preview_maxlen', '600',  NULL,  NULL, '', '', 20031108204811, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('news_headline_title_font_bold', '1',  NULL,  NULL, '', '', 20031108204810, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('news_headline_preface_font_bold', '',  NULL,  NULL, '', '', 20031108204810, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('news_normal_display_width', '100%',  NULL,  NULL, '', '', 20031108204811, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_fax_hide', '0',  NULL,  NULL, '', '', 20030623153753, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_email_hide', '0',  NULL,  NULL, '', '', 20030623153753, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_phone_1_nr_hide', '0',  NULL,  NULL, '', '', 20030623153753, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_cellphone_1_nr_hide', '0',  NULL,  NULL, '', '', 20030623153753, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('person_foto_path', 'fotos/registration/', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_service_care_hide', '1', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_service_room_hide', '1', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_service_att_dr_hide', '1', '', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('patient_service_care_hide', '1',  NULL,  NULL, '', '', 20030623153753, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('patient_service_room_hide', '1',  NULL,  NULL, '', '', 20030623153753, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('patient_service_att_dr_hide', '1',  NULL,  NULL, '', '', 20030623153753, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('patient_financial_class_single_result', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_name_2_show', '1', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_name_3_show', '1', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_name_middle_show', '1', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('theme_control_buttons', 'default', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('gui_frame_left_nav_bdcolor', '#990000', '', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('patient_name_2_show', '1',  NULL,  NULL, '', '', 20030623153753, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('patient_name_3_show', '1',  NULL,  NULL, '', '', 20030623153753, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('patient_name_middle_show', '1',  NULL,  NULL, '', '', 20030623153753, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('theme_control_buttons', 'default',  NULL,  NULL, '', '', 20031126054842, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('gui_frame_left_nav_bdcolor', '#990000',  NULL,  NULL, '', '', 20030825012325, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('theme_control_theme_list', 'default,blue_aqua', '', '', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('medocs_text_preview_maxlen', '100', '', '', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('personell_nr_adder', '100000', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('notes_preview_maxlen', '120', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_id_nr_init', '10000000', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('personell_nr_init', '100000', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('encounter_nr_init', '000000', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('encounter_nr_fullyear_prepend', '1', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('theme_mascot', 'default', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('pagin_address_list_max_block_rows', '20', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('pagin_address_search_max_block_rows', '25', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('pagin_insurance_list_max_block_rows', '30', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('pagin_insurance_search_max_block_rows', '25', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('pagin_personell_search_max_block_rows', '20', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('pagin_person_search_max_block_rows', '20', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('pagin_personell_list_max_block_rows', '20', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('pagin_patient_search_max_block_rows', '20', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('pagin_or_patient_search_max_block_rows', '5', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('timeout_inactive', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('timeout_time', '001500', '', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('notes_preview_maxlen', '120',  NULL,  NULL, '', '', 20030413100412, '', 20030412201004);
+INSERT INTO care_config_global VALUES ('person_id_nr_init', '10000000',  NULL,  NULL, '', '', 20030510094302, '', 20030510094028);
+INSERT INTO care_config_global VALUES ('personell_nr_init', '100000',  NULL,  NULL, '', '', 20030510094158, '', 20030510094158);
+INSERT INTO care_config_global VALUES ('encounter_nr_init', '000000',  NULL,  NULL, '', '', 20030510142050, '', 20030510113437);
+INSERT INTO care_config_global VALUES ('encounter_nr_fullyear_prepend', '1',  NULL,  NULL, '', '', 20030510141400, '', 20030510141400);
+INSERT INTO care_config_global VALUES ('theme_mascot', 'default',  NULL,  NULL, '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('pagin_address_list_max_block_rows', '20',  NULL,  NULL, '', '', 20031028024816, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('pagin_address_search_max_block_rows', '25',  NULL,  NULL, '', '', 20031028024816, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('pagin_insurance_list_max_block_rows', '30',  NULL,  NULL, '', '', 20031028024816, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('pagin_insurance_search_max_block_rows', '25',  NULL,  NULL, '', '', 20031028024816, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('pagin_personell_search_max_block_rows', '20',  NULL,  NULL, '', '', 20031028024816, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('pagin_person_search_max_block_rows', '20',  NULL,  NULL, '', '', 20031126054658, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('pagin_personell_list_max_block_rows', '20',  NULL,  NULL, '', '', 20031028024816, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('pagin_patient_search_max_block_rows', '20',  NULL,  NULL, '', '', 20031126054743, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('pagin_or_patient_search_max_block_rows', '5',  NULL,  NULL, '', '', 20031028024816, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('timeout_inactive', '0',  NULL,  NULL, '', '', 20031102210408, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('timeout_time', '001500',  NULL,  NULL, '', '', 20031126054628, '', 00000000000000);
     
 
 #
@@ -3633,7 +3633,7 @@ INSERT INTO care_menu_main VALUES ('16', '75', 'Intranet Email', 'LDIntraEmail',
 INSERT INTO care_menu_main VALUES ('17', '80', 'Internet Email', 'LDInterEmail', 'modules/nocc/index.php', '1', '', '', 20030922232015, 00000000000000);
 INSERT INTO care_menu_main VALUES ('18', '85', 'Special Tools', 'LDSpecials', 'main/spediens.php', '1', '', '', 20030922232015, 00000000000000);
 INSERT INTO care_menu_main VALUES ('19', '90', 'Login', 'LDLogin', 'main/login.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('20', '7', 'Appointments', 'LDAppointments', 'modules/appointment_scheduler/appt_main_pass.php', '1', '',  '', 20030922232015, 20030405000145);
+INSERT INTO care_menu_main VALUES ('20', '7', 'Appointments', 'LDAppointments', 'modules/appointment_scheduler/appt_main_pass.php', '1', '',  NULL, 20030922232015, 20030405000145);
 
 #
 # Dumping data for table care_method_induction
@@ -4360,4 +4360,4 @@ INSERT INTO care_unit_measurement VALUES (18, 1, 'µl', 'microliter', 'LDMicrolit
 # Dumping data for table care_version
 #
 
-INSERT INTO care_version VALUES ('CARE2X', 'deployment', '1.1', '1.0', '2004-01-11', '00:00:00', 'Elpidio Latorilla');
+INSERT INTO care_version VALUES ('CARE2X', 'pre-deployment', '1.0.10', '1.0', '2003-12-20', '00:00:00', 'Elpidio Latorilla');

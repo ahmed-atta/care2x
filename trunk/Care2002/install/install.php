@@ -114,7 +114,7 @@ if(isset($HTTP_POST_VARS['mode'])&&($HTTP_POST_VARS['mode']=='save')){
 				@runSqlQuery('./mysql/care_db_structure_d11.sql');
 				
 				# Extra insert config user preload data 
-				$sql='INSERT INTO care_config_user VALUES (\'default\', \'a:19:{s:4:"mask";s:1:"1";s:11:"idx_bgcolor";s:7:"#99ccff";s:12:"idx_txtcolor";s:7:"#000066";s:9:"idx_hover";s:7:"#ffffcc";s:9:"idx_alink";s:7:"#ffffff";s:11:"top_bgcolor";s:7:"#99ccff";s:12:"top_txtcolor";s:7:"#330066";s:12:"body_bgcolor";s:7:"#ffffff";s:13:"body_txtcolor";s:7:"#000066";s:10:"body_hover";s:7:"#cc0033";s:10:"body_alink";s:7:"#cc0000";s:11:"bot_bgcolor";s:7:"#cccccc";s:12:"bot_txtcolor";s:4:"gray";s:5:"bname";s:0:"";s:8:"bversion";s:0:"";s:2:"ip";s:0:"";s:3:"cid";s:0:"";s:5:"dhtml";s:1:"1";s:4:"lang";s:0:"";}\',  NULL,  NULL,  NULL, \'\', 20030210161831, \'\', 00000000000000)';
+				$sql='INSERT INTO care_config_user VALUES (\'default\', \'a:19:{s:4:"mask";s:1:"1";s:11:"idx_bgcolor";s:7:"#99ccff";s:12:"idx_txtcolor";s:7:"#000066";s:9:"idx_hover";s:7:"#ffffcc";s:9:"idx_alink";s:7:"#ffffff";s:11:"top_bgcolor";s:7:"#99ccff";s:12:"top_txtcolor";s:7:"#330066";s:12:"body_bgcolor";s:7:"#ffffff";s:13:"body_txtcolor";s:7:"#000066";s:10:"body_hover";s:7:"#cc0033";s:10:"body_alink";s:7:"#cc0000";s:11:"bot_bgcolor";s:7:"#cccccc";s:12:"bot_txtcolor";s:4:"gray";s:5:"bname";s:0:"";s:8:"bversion";s:0:"";s:2:"ip";s:0:"";s:3:"cid";s:0:"";s:5:"dhtml";s:1:"1";s:4:"lang";s:0:"";}\',  \'\',  \'\',  \'\', \'\', 20030210161831, \'\', 00000000000000)';
 		    	if( @ mysql_query($sql,$link)) {
 			  		// if (QUERY_MSG_SHOW) echo 'ok '.$sql.'<p>';
 				}elseif(QUERY_MSG_SHOW){
@@ -306,8 +306,8 @@ if(isset($HTTP_POST_VARS['mode'])&&($HTTP_POST_VARS['mode']=='save')){
        						fputs($fp,"\$fotoserver_ip='".$HTTP_POST_VARS['mainhost']."';\n\n");
        						fputs($fp,"# Transfer protocol. Use https if this runs on SSL server\n");
        						fputs($fp,"\$httprotocol='".$HTTP_POST_VARS['prot']."';\n\n");
-       						//fputs($fp,"# Set this to your database type. For details refer to ADODB manual or goto http://php.weblogs.com/ADODB/\n");
-       						//fputs($fp,"\$dbtype='mysql';\n");
+       						fputs($fp,"# Set this to your database type. For details refer to ADODB manual or goto http://php.weblogs.com/ADODB/\n");
+       						fputs($fp,"\$dbtype='mysql';\n");
        						fputs($fp,"?>");
         					fclose($fp);
 							$error_msg='OK';
