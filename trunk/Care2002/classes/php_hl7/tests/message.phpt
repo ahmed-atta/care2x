@@ -53,7 +53,7 @@ ok($comps[1][1] == "y", "Subcomposed field");
 #
 $msg = new Net_HL7_Message("MSH*^~\\&*1\rPID***xxx\r");
 
-ok($msg->toString() == "MSH*^~\\&*1*\rPID***xxx*\r", "String representation of message with * as field separator");
+ok($msg->toString() == "MSH*^~\&*1*\rPID***xxx*\r", "String representation of message with * as field separator");
 
 $seg0 = $msg->getSegmentByIndex(0);
 

@@ -7,6 +7,8 @@ require_once "test_base.php";
 
 # Basic stuff
 #
+$hl7 = new Net_HL7();
+
 $seg = new Net_HL7_Segment("PID");
 $seg->setField(0, "XXX");
 $seg->setField(3, "XXX");
@@ -36,11 +38,11 @@ ok($comps[2] == "3", "Constructor with array ref for composed fields");
 $seg = new Net_HL7_Segment("DG1");
 
 $seg->setField(3, array(1, 2, 3));
-$seg->setField(8, $GLOBALS["_Net_HL7_NULL"]);
+$seg->setField(8, $hl7->getNull());
 
 ok(is_array($seg->getField(3)), "Composed field 1^2^3");
 
-ok($seg->getField(8) == "\"\"" && $seg->getField(8) == $GLOBALS["_Net_HL7_NULL"], "HL7 NULL value");
+ok($seg->getField(8) == "\"\"" && $seg->getField(8) == $hl7->getNull(), "HL7 NULL value");
 
 $subFields = $seg->getField(3);
 

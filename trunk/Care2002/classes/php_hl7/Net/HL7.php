@@ -46,14 +46,14 @@ class Net_HL7 {
      */
     function Net_HL7() {
 
-        $_hl7Globals['SEGMENT_SEPARATOR'] = "\015";
-        $_hl7Globals["FIELD_SEPARATOR"] = "|";
-        $_hl7Globals["NULL"] = "\"\"";
-        $_hl7Globals["COMPONENT_SEPARATOR"] = "^";
-        $_hl7Globals["REPETITION_SEPARATOR"] = "~";
-        $_hl7Globals["ESCAPE_CHARACTER"] = "\\";
-        $_hl7Globals["SUBCOMPONENT_SEPARATOR"] = "&";
-        $_hl7Globals["HL7_VERSION"] = "2.2";
+        $this->_hl7Globals['SEGMENT_SEPARATOR'] = '\015';
+        $this->_hl7Globals['FIELD_SEPARATOR'] = '|';
+        $this->_hl7Globals['NULL'] = '""';
+        $this->_hl7Globals['COMPONENT_SEPARATOR'] = '^';
+        $this->_hl7Globals['REPETITION_SEPARATOR'] = '~';
+        $this->_hl7Globals['ESCAPE_CHARACTER'] = '\\';
+        $this->_hl7Globals['SUBCOMPONENT_SEPARATOR'] = '&';
+        $this->_hl7Globals['HL7_VERSION'] = '2.2';
     }
     
 
@@ -100,7 +100,7 @@ class Net_HL7 {
     {
         if (strlen($value) != 1) return false;
 
-        return _setGlobal('COMPONENT_SEPARATOR', $value);
+        return $this->_setGlobal('COMPONENT_SEPARATOR', $value);
     }
 
 
@@ -116,7 +116,7 @@ class Net_HL7 {
     {
         if (strlen($value) != 1) return false;
 
-        return _setGlobal('SUBCOMPONENT_SEPARATOR', $value);
+        return $this->_setGlobal('SUBCOMPONENT_SEPARATOR', $value);
     }
 
 
@@ -132,7 +132,7 @@ class Net_HL7 {
     {
         if (strlen($value) != 1) return false;
 
-        return _setGlobal('REPETITION_SEPARATOR', $value);
+        return $this->_setGlobal('REPETITION_SEPARATOR', $value);
     }
 
 
@@ -148,7 +148,7 @@ class Net_HL7 {
     {
         if (strlen($value) != 1) return false;
 
-        return _setGlobal('FIELD_SEPARATOR', $value);
+        return $this->_setGlobal('FIELD_SEPARATOR', $value);
     }
 
 
@@ -164,7 +164,7 @@ class Net_HL7 {
     {
         if (strlen($value) != 1) return false;
 
-        return _setGlobal('SEGMENT_SEPARATOR', $value);
+        return $this->_setGlobal('SEGMENT_SEPARATOR', $value);
     }
 
 
@@ -180,7 +180,7 @@ class Net_HL7 {
     {
         if (strlen($value) != 1) return false;
         
-        return _setGlobal('ESCAPE_CHARACTER', $value);
+        return $this->_setGlobal('ESCAPE_CHARACTER', $value);
     }
 
 
@@ -193,7 +193,7 @@ class Net_HL7 {
      */
     function setHL7Version($value)
     {
-        return _setGlobal('HL7_VERSION', $value);
+        return $this->_setGlobal('HL7_VERSION', $value);
     }
 
 
@@ -206,7 +206,7 @@ class Net_HL7 {
      */
     function setNull($value)
     {
-        return _setGlobal('NULL', $value);
+        return $this->_setGlobal('NULL', $value);
     }
 
 
@@ -218,6 +218,7 @@ class Net_HL7 {
      */
     function getNull() {
 
+        return $this->_hl7Globals['NULL'];
     }
 
 
@@ -231,7 +232,7 @@ class Net_HL7 {
      */
     function _setGlobal($name, $value)
     {
-        $_hl7Globals[$name] = $value;
+        $this->_hl7Globals[$name] = $value;
 
         return true;
     }
