@@ -33,7 +33,7 @@ if(isset($target)) {
 									$itemname=$LDInsuranceCo;
 							        break;
 									
-		case 'citytown' :    $sql='SELECT name AS `aufnahmeform.addr_citytown_name.value`,nr AS `aufnahmeform.addr_citytown_nr.value`,use_frequency FROM care_address_citytown WHERE ';
+		case 'citytown' :    $sql='SELECT name AS `aufnahmeform.addr_citytown_name.value`,nr AS `aufnahmeform.addr_citytown_nr.value`,zip_code AS `aufnahmeform.addr_zip.value`,use_frequency FROM care_address_citytown WHERE ';
 		                            if($mode=='search') {
 									    $sql.='name LIKE "'.$searchkey.'%" OR unece_locode LIKE "'.$searchkey.'%"';
 									} else {
