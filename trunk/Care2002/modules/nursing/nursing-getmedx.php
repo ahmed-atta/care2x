@@ -150,6 +150,7 @@ if($count){
   <tr bgcolor="#f6f6f6">
     <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDCurrentEntry; ?></td>
     <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDosage; ?></td>
+	<td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDNurse; ?></td>
   </tr>
 <?php
 	$toggle=0;
@@ -172,6 +173,7 @@ if($count){
   <tr  bgcolor="<?php echo $bgc; ?>"  valign="top">
     <td><FONT SIZE=-1  FACE="Arial"><?php if($row['article']) echo $row['article']; ?></td>
     <td><FONT SIZE=-1  FACE="Arial"><?php if($row['dosage']) echo $row['dosage']; ?></td>
+	<td><FONT SIZE=-1  FACE="Arial"><?php if($row['prescriber']) echo $row['prescriber']; ?></td>
   </tr>
 
 <?php
