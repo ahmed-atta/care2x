@@ -1,5 +1,5 @@
 <?php
-$LDMainTitle="Care 2002 Système hospitalier intégré d'information";
+$LDMainTitle="Care 2X Système hospitalier intégré d'information";
 
 /*$LDMainTitle="Marienhospital : un système virtuel intègré d'information
 hospitalière sur internet";
