@@ -6,7 +6,6 @@ if($news[$j])
 
 		 $picpath=$root_path.$news_fotos_path.$news[$j]['nr'].'.'.$news[$j]['pic_mime'];
 
-
 		if(!empty($news[$j]['body']))
 		{
 		    echo '<font size="'.$news_headline_title_font_size.'" face="'.$news_headline_title_font_face.'" color="'.$news_headline_title_font_color.'">';

@@ -1,7 +1,7 @@
 <?php
 $LDClose="Fechar";
 $LDCancel="Cancelar";
-$LDResetEntry="Apagar entradas";
+$LDResetEntry="Excluir registros";
 $LDSave="Salvar";
 $LDReset="Restaurar";
 
@@ -75,13 +75,13 @@ $LDBack2Menu="Voltar ao menu do banco de dados";
 $LDPageTop="Voltar ao topo";
 $LDPreview="Visualizar";
 $LDUpdateData="Atualizar ou editar";
-$LDRemoveFromDb="Apagar do banco de dados";
+$LDRemoveFromDb="Excluir do banco de dados";
 $LDDataRemoved="O produto foi removido do banco de dados!";
 
-$LDConfirmDelete="Você realmente quer <b>apagar</b> ou <b>remover</b> o dado a seguir do banco de dados ?";
+$LDConfirmDelete="Você realmente quer <b>excluir</b> ou <b>remover</b> o dado a seguir do banco de dados ?";
 $LDAlertDelete="<b>ATENÇÂO!</b> Exclução <b>NÂO PODE</b> ser desfeita!";
 $LDNoDelete="A exclusão dos dados falharam!<br>Por favor notifíque o departamento do CPD.";
-$LDYesDelete="Sim, Eu tenho certeza. Apagar permissão de acesso.";
+$LDYesDelete="Sim, Eu tenho certeza. Excluir permissão de acesso.";
 $LDNoBack="Não. Voltar.";
 $LDClk2Ack="Clique no botão para reconhecimento e/ou impressão da ordem de lista.";
 $LDOK="OK";
@@ -115,38 +115,56 @@ $LDAccessIndex=array(
 			 	);
 $LDChange="Mudar";
 $LDInitChange="M";
-$LDLock="Traar";
+$LDLock="Travar";
 $LDInitLock="T";
 $LDUnlock="Destravar";
 $LDInitUnlock="D";
-$LDDelete="Apagar";
-$LDInitDelete="A";
+$LDDelete="Excluir";
+$LDInitDelete="E";
 $LDUpdateRight="Atualizar permissão de acesso";
-$LDInputError="Your entry is either erroneous or some data are missing. Input fields marked red are to be filled in or the entry to be corrected.";
-$LDAccessRight="Access right";
-$LDSureLock="Are you sure you want to LOCK this access right?";
-$LDSureUnlock="Are you sure you want to UNLOCK this access right?";
-$LDSureDelete="Are you sure you want to DELETE this access right?";
-$LDYesSure="Yes, I'm sure.";
-$LDKeywordPrompt="Enter a search keyword";
-$LDSystemAdmin="System Administrator";
-$LDMySQLManage="Manage SQL databank with PHP MySQLAdmin";
-$LDSpexFunctions="Other special functions";
-$LDWelcome="Welcome";
-$LDForeWord="You now have the highest access privileges.<br>The following functions are available without restrictions. <br><b>Please be very careful with what you do.</b>";
+$LDInputError="Seu registro está errado ou falta alguns dados. Campos marcados em vermelho necessitam ser preenchidos ou a informação deve ser corrigida.";
+$LDAccessRight="Permissões de acesso";
+$LDSureLock="Você tem certeza que deseja TRAVAR essa permissão de acesso?";
+$LDSureUnlock="Você tem certeza que deseja DESTRAVAR essa permissão de acesso?";
+$LDSureDelete="Você tem certeza que deseja EXCLUIR essa permissão de acesso?";
+$LDYesSure="Sim, tenho certeza.";
+$LDKeywordPrompt="Digite uma palavra-chave para a procura";
+$LDSystemAdmin="Administrador de sistemar";
+$LDMySQLManage="Gerencie o banco de dados SQL com PHP MySQLAdmin";
+$LDSpexFunctions="Outro função especial";
+$LDWelcome="Bem vindo";
+$LDForeWord="Você agora tem os mais altas permissões de acesso.<br>As funções a seguir estão disponíveis sem restrisões. <br><b>Favor tenha muito cuidade com o que fará.</b>";
 
-$LDSetDateFormat="Set Date Format";
-$LDSelectDateFormat="Please select the needed date format:";
-# Date formats
-# Add additional date formats as array element.
-# Do not forget to add the correspondign sample text in the $LDDateFormatsTxt array.
-# Do not translate $LDDateFormats 
-$LDDateFormats=array('dd.MM.yyyy','yyyy-MM-dd','MM/dd/yyyy','dd/MM/yyyy');
+$LDSetDateFormat="Configure o formato de data";
+$LDSelectDateFormat="Favor selecionar o formado de data necessário:";
+/* Do not translate $LDDateFormats */
+$LDDateFormats=array("dd.MM.yyyy","yyyy-MM-dd","MM/dd/yyyy");
 
-$LDDateFormatsTxt= array("For example: 01.10.2002 (01 October 2002)",
-                                         "For example: 2002-10-01 (2002 October 01)",
-										 "For example: 10/01/2002 (October 01, 2002)",
-										 "For example: 01/10/2002 (01 October, 2002)");
+$LDDateFormatsTxt= array("Por exemplo: 01.10.2002 (01 Outubro 2002)",
+                                         "Por exemplo: 2002-10-01 (2002 Outubro 01)",
+										 "Por exemplo: 10/01/2002 (Outubro 01, 2002)");
+
+$LDNewDateFormatSaved="O novo formato de data agora está ativo.";
+
+$LDSetCurrency="Configurar moeda";
+$LDNewCurrencySet="A nova moeda está ativa.";
+$LDPlsSelectCurrency="Favor selecionar a moeda.";
+$LDAddCurrency="Adicione a nova moeda";
+$LDPlsAddCurrency="Favor digitar a informação a respeito da moeda. Então clique \"Salvar\".";
+$LDAddedNewCurrency="A informação a respeito da moeda está salva.";
+$LDmain="principal";
+$LDClk2AddCurrency="Para digitar a nova moeda, favor cliquar aqui.";
+$LDCurrencyShortName="Símbolo da moeda:";
+$LDCurrencyLongName="Descrisão do nome:";
+$LDCurrencyInfo="Informações adicionais:";
+$LDClk2SetCurrency="Para configuar a moeda principal, favor cliquar aqui.";
+$LDCurrencyUpdated="A informação da moeda está atualizada.";
+$LDUpdateCurrencyInfo="Edite informação da moeda";
+$LDPlsEnterUpdate="Favor selcionar a inforamção da moeda. Então pressione \"Atualizar\".";
+
+$LDEditInfo="Editar";
+$LDCurrencyAdmin="Currency administration";
+
 /**
 * The following lines must be modified according to the examples:
 * english:
@@ -165,36 +183,13 @@ $LDDateFormatsTxt= array("For example: 01.10.2002 (01 October 2002)",
 $LD_ddpMMpyyyy="dd.mm.yyyy";
 $LD_yyyyhMMhdd="yyyy-mm-dd";
 $LD_MMsddsyyyy="mm/dd/yyyy";
-$LD_ddsMMsyyyy='dd/mm/yyyy';
 /* END */
-
-$LDNewDateFormatSaved="The new date format is now in effect.";
-
-$LDSetCurrency="Set currency";
-$LDNewCurrencySet="The new currency is now active.";
-$LDPlsSelectCurrency="Please select currency.";
-$LDAddCurrency="Add new type of currency";
-$LDPlsAddCurrency="Please enter the information about the currency. Then click \"Save\".";
-$LDAddedNewCurrency="The information about the new currency is saved.";
-$LDmain="main";
-$LDClk2AddCurrency="To enter new currency type, please click here.";
-$LDCurrencyShortName="Currency's symbolic or short name:";
-$LDCurrencyLongName="Currency's descriptive name:";
-$LDCurrencyInfo="Additional information:";
-$LDClk2SetCurrency="To set the main currency, please click here.";
-$LDCurrencyUpdated="The currency information is updated.";
-$LDUpdateCurrencyInfo="Edit Currency Information";
-$LDPlsEnterUpdate="Please edit the currency information. Then press \"Update\".";
-
-$LDEditInfo="Edit";
-$LDCurrencyAdmin="Currency administration";
-
 /* 2002-10-22 EL */
-$LDUserInfoSaved='The user access was successfully created';
-$LDUserInfoNoSave='The access creation failed. Please check the entered information';
-$LDNoAreas='You have not selected any area!';
-$LDUserDouble='The access creation failed. Please use a different user login name.';
-$LDEnterNewUser='Create a new user access';
+$LDUserInfoSaved='A permissão de acesso foi criada com sucesso!';
+$LDUserInfoNoSave='A criação da permissão de acesso falhou. Favor checar as informações digitadas';
+$LDNoAreas='Você não selecionou nenhuma área!';
+$LDUserDouble='A criação da permissão de acesso falhou. Favor usar nome diferente para o usuário.';
+$LDEnterNewUser='Criar uma nova permissão de acesso';
 /* 2002-11-22 EL*/
 $LDDeleteCurrency='Are you sure, you really want to delete this currency?';
 $LDNoMainDelete='You cannot delete a main currency. \nPlease set a different main currency first.';

@@ -5,7 +5,7 @@ require($root_path.'include/inc_credits_openwin.php');
 <FONT    SIZE=1  FACE="Arial" color=gray>Polska wersja programu jest rozwijana i zarz±dzana przez Paw³a Cyrtê.
 Proszê kierowaæ do niego wszelkie w±tpliwo¶ci b±d¼ uwagi odno¶nie polskiej
 wersji jêzykowej.
- Oficjalna strona programu  : <a href="http://www.care2x.com" target=_new>CARE 2002 1.0.07 wersja Beta</a> 
+ Oficjalna strona programu  : <a href="http://www.care2x.com" target=_new>CARE 2002 1.0.08 wersja Beta</a> 
   prowadzona przez  Elpidio Latorilla i Intellin.org.  Oprogramowanie typu  open source jest dostêpne na podstawie : GPL license.
  Aplikacja CARE 2002 jest napisana i rozpowszechniana bez korzysci finsowych (nieodp³atnie) na podstawie : 
  the GNU General Public License. <br>Szczegó³owy tekst licencji do wgl¹du :

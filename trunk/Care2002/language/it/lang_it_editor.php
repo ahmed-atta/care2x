@@ -43,7 +43,7 @@ $LDFax='Fax';
 $LDAddress='Indirizzo';
 $LDEmail='Email';
 
-$LDOpenTimes ='Ore lavorate';
+$LDOpenTimes ='Orario di lavoro';
 $LDManagement ='Direzione';
 $LDDept ='Reparti';
 $LDCafenews ='News dalla mensa';

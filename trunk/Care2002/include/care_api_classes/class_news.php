@@ -101,17 +101,17 @@ class News extends Core {
 		for($i=1;$i<=$count;$i++) 
 		{
 		    $sql=$str_sql." AND art_num='".$i."'";
-		    $publish_when=" AND publish_date='".$today."'";
+		    $publish_when=" AND publish_date LIKE '".$today."'";
             if(defined('MODERATE_NEWS') && (MODERATE_NEWS==1)) {
 		 	    $sql.=$publish_when.$stat_pending;
             } else {
 		        $sql.=$publish_when;
 		    }
 		  
-		    $sql.=$order_by_desc;
-					
-			if($this->result=$db->Execute($sql)) {
-			    if($this->result->RecordCount()) {
+		    $this->sql=$sql.$order_by_desc;
+
+			if($this->result=$db->Execute($this->sql)) {
+			    if($this->rec_count=$this->result->RecordCount()) {
 				    $this->buffer[$i]=$this->result->FetchRow();
 					$this->headnrs[$i]=$this->buffer[$i]['nr'];
 				} else {
@@ -126,10 +126,10 @@ class News extends Core {
 					    $sql.=$publish_when;
 				    }									
 				
-				    $sql.=$order_by_desc;
-				  			
-				    if($this->result=$db->Execute($sql)) {
-					    if($this->result->RecordCount()) {
+				    $this->sql=$sql.$order_by_desc;
+			  			
+				    if($this->result=$db->Execute($this->sql)) {
+					    if($this->rec_count=$this->result->RecordCount()) {
 						    $this->buffer[$i]=$this->result->FetchRow();
 							$this->headnrs[$i]=$this->buffer[$i]['nr'];
 					    }
@@ -214,7 +214,7 @@ class News extends Core {
 	    
 		if(!$dept_nr) return false;
 				
-		$sql="INSERT INTO $this->tb
+		$this->sql="INSERT INTO $this->tb
 						(	
 						    lang,
 							dept_nr,
@@ -247,8 +247,8 @@ class News extends Core {
 							'".$HTTP_SESSION_VARS['sess_user_name']."',
 							NULL
 							)";
-		  							
-	    if($this->result=$db->Execute($sql)) {
+		 
+	    if($this->result=$db->Execute($this->sql)) {
             return $db->Insert_ID();
 		} else return false;
 	}

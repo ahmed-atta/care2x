@@ -448,9 +448,9 @@ class Obstetrics extends Core {
 	*/ 
 	function getClassification($nr=0){
 		global $db;
+		$this->rec_count=0;
 		if(!$nr) return false;
 		$this->sql="SELECT * FROM   $this->tb_classif WHERE nr=$nr"; 
-		
         if($this->res['gclasif']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['gclasif']->RecordCount()) {
 				return $this->res['gclasif']->FetchRow();
@@ -464,6 +464,7 @@ class Obstetrics extends Core {
 	*/ 
 	function AnaesthesiaTypes(){
 		global $db;
+		$this->rec_count=0;
 		$this->sql="SELECT * FROM   $this->tb_anest WHERE status NOT IN ($this->dead_stat) ORDER BY nr"; 
         if($this->res['anat']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['anat']->RecordCount()) {

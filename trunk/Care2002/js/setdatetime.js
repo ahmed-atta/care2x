@@ -44,7 +44,6 @@ function setDate(elindex, date_format, lang){
 	buf = elindex.value;
     buf = buf.toLowerCase();
 	buf = buf.charAt(buf.length - 1);
-	
 	/* Check whether it is a possible shortcut */
 	if (((buf<".")|| (buf > "9")) && (buf!="/") && (buf!='-'))
     {
@@ -80,7 +79,6 @@ function setDate(elindex, date_format, lang){
 		 {
 		       actual=''; //* Set to empty to erase the input
 		 }
-
 	    
 		//* If a short cut compose date according to format 
 		if(make_time == 1)

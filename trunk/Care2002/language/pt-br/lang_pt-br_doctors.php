@@ -40,7 +40,7 @@ $LDTabElements=array('Departamento',
 								 'Beeper/Fone',
 								 'Duty plan'
 								 );
-$LDShowActualPlan='Mostrar horário de serviço atual';
+$LDShowActualPlan='Exibir atual horário de serviço';
 $LDShortDay=array('Dom',
 								'Seg',
 								'Ter',
@@ -86,8 +86,8 @@ $LDPerElements=array('Nome da família',
 $LDChgDept='Mudar departamento: ';
 $LDChange='Mudar';
 $LDCreatePersonList='Criar uma lista para o pessoal';
-$LDNoPersonList='The list of personell is not yet created. Por favor crie a lista primeiro. Clique no botão a seguir.';
-$LDShow='Mostrar';
+$LDNoPersonList='A lista do pessoal não foi criada ainda. Por favor crie a lista primeiro. Clique no botão a seguir.';
+$LDShow='Exibir';
 
 $LDDOCS='Gerenciador de plantão médico';
 $LDDOCSTxt='Gerenciador de plantão médico, planejar, ver, atualizar, editar, etc.';
@@ -96,27 +96,27 @@ $LDDOCSRTxt='Solicitação de horário para plantão médico';
 /* 2002-09-15 EL */
 $LDTestRequest='Requirir teste';
 /* 2003-03-16 EL */
-$LDContactInfo='Contact Info';
+$LDContactInfo='Informações para contato';
 $LDPersonalContactInfo='Personal Contact Info';
 $LDOnCallContactInfo='On-Call Contact Info';
-$LDPlsSelectDept='Please select a department';
-$LDCreateDoctorsList='Create doctors\' list';
-$LDPlsCreateList='Please create the list first.';
-$LDPlsClickButton='Click on the following button.';
+$LDPlsSelectDept='Favor selecionar um departamento';
+$LDCreateDoctorsList='Criar a lista de médicos';
+$LDPlsCreateList='Favor criar a lista primeiro.';
+$LDPlsClickButton='Clique no botão a seguir.';
 $LDFamilyName='Nome de família';
 $LDGivenName='Sobrenome';
 $LDDateOfBirth='Data de nascimento';
-$LDEntryPrompt='Please enter a search keyword:<br>(e.g. family name, given name, personell number, etc.)<br>';
-$LDPersonellNr='Personell Nr.';
+$LDEntryPrompt='Favor entrar com uma palavra chave para a procura:<br>(ex. sobrenome, nome, número pessoal, etc.)<br>';
+$LDPersonellNr='Nr Pessoal';
 $LDFunction='Funções';
 $LDOptions='Opções';
-$LDSearchFound='Procura encontrou ~nr~ dados relevantes.';
-$LDAddDoctorToList='Adicionar um médico para a lista';
+$LDSearchFound='A procura encontrou ~nr~ dados relevantes.';
+$LDAddDoctorToList='Adicionar um médico a lista';
 $LDAdd='Adicionar';
-$LDDelete='Apagar';
-$LDSureToDeleteEntry='Você tem certeza que deseja apagar essa entrada?';
+$LDDelete='Excluir';
+$LDSureToDeleteEntry='Você tem certeza que deseja excluir esse registro?';
 /* 2003-03-18 EL */
 $LDChangeOnlyDept='Mudar o departamento';
-$LDCreateNursesList='Criar lista de enfermagem';
+$LDCreateNursesList='Criar lista de emfermeiras';
 
 ?>

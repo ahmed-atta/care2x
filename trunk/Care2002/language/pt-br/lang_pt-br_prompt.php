@@ -37,12 +37,12 @@ $LDAdmissionCancelled='Admissão foi cancelada com sucesso.';
 $LDCancelError='Um erro ocorreu! O cancelamento foi abortado.';
 $LDTellEdpIfPersist='Notifique o EDP de seu departamento caso o erro persista. Obrigado.';
 
-$LDPlsFindPersonFirst='Please find the person first.';
-$LDEnterRelatedInfo='If available, enter related information here';
+$LDPlsFindPersonFirst='Favor encontrar a pessoa primeiro.';
+$LDEnterRelatedInfo='Se disponível, digite a informação aqui';
 $LDRelatedEncNr='Related encounter\'s nr.';
 $LDRelatedDocsIds='Related documents\' ID\'s';
 $LDSeparateComma='Separate with commas';
-$LDPlsReadThis='Please read this';
+$LDPlsReadThis='Favor ler isto';
 # 2003-08-11 EL
 $LDPersonIsEmployed='This person is currently this hospital\'s employee!';
 # 2003-08-24 EL
@@ -50,25 +50,39 @@ $LDCachedInfo='This is a cached information!';
 $LDClkNoCache='Click >>this<< to get the non-cached information.';
 
 # 2003-08-25 EL
-$LDPlsEnterReport='Please enter your report or notes';
-$LDPlsEnterDosage='Please enter the dosage';
+$LDPlsEnterReport='Favor entrar com seu relatórios ou anotações';
+$LDPlsEnterDosage='Favor entrar com a dosagem';
 $LDPlsEnterMedicine='Please enter the name of medicine';
-$LDPlsEnterMedType='Please enter the type of medicine';
-$LDPlsSelectAppType='Please select the type of application';
-$LDPlsSelectPrescType='Please select the type of prescription';
-$LDPlsEnterValue='Please enter a value';
-$LDPlsSelectUnitMsr='Please select unit of measure';
+$LDPlsEnterMedType='Favor entrar com o tipo de medicina';
+$LDPlsSelectAppType='Favor selecione o tipo da aplicação';
+$LDPlsSelectPrescType='Favor selecione o tipo da prescrisão';
+$LDPlsEnterValue='Favor entrar com um valor';
+$LDPlsSelectUnitMsr='Favor selecionar a unidade de medida';
 
 # 2003-08-26 EL
-$LDEntryInvalidChar='An entry has an invalid value!';
-$LDNotNegValue='Negative value in not allowed!';
-$LDOptional='Optional';
+$LDEntryInvalidChar='Um registro tem o valor inválido!';
+$LDNotNegValue='Valor negativo não é permitido!';
+$LDOptional='Opcional';
 
-$LDSaveAnyway='Do you really want to save data anyway';
+$LDSaveAnyway='Você quer realmente salar a informação';
 #2003-08-27 EL
-$LDDeathDateIs='The entered date of death is';
-$LDIsCorrect='Is that correct?';
-$LDProceedSave='Do you want to proceed save?';
+$LDDeathDateIs='A data de entrada do falecimento é';
+$LDIsCorrect='Está correto?';
+$LDProceedSave='Você desejar salvar?';
 #2003-08-28 EL
-$LDPlsSelectWard='Please select a ward or station';
+$LDPlsSelectWard='Favor selecionar uma ala ou estação';
+# 2003-09-20 EL
+$LDPlsEnterTherapy='Please enter the therapy.';
+$LDPlsMedicalAdvice='Please specify whether the patient got medical advice or not.';
+# 2003-09-23 EL
+$LDPlsEnterJobFunction='Please enter the job function.';
+#2003-04-10 EL
+$LDPlsFillInfo='Please fill in the fields marked red';
+$LDPlsEnterLocalization='Please enter the localization';
+$LDPlsEnterNotes='Please enter notes';
+$LDPlsEnterClassification='Please enter the classifications';
+$LDPlsEnterStartTime='Please enter start time';
+$LDPlsEnterEndTime='Please enter end time';
+$LDPlsEnterScrubNurse='Please enter scrub nurse info';
+$LDPlsEnterORNr='Please enter the OR ID or number';
 ?>

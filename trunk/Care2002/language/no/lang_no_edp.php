@@ -123,12 +123,37 @@ $LDForeWord='Du har nå den høyeste tilgangsrettighet.<br>Følgende funksjoner er 
 
 $LDSetDateFormat='Sett dato format';
 $LDSelectDateFormat='Sett ønsket datoformat:';
-/* Do not translate $LDDateFormats */
-$LDDateFormats=array('dd.MM.yyyy','yyyy-MM-dd','MM/dd/yyyy');
+# Date formats
+# Add additional date formats as array element.
+# Do not forget to add the correspondign sample text in the $LDDateFormatsTxt array.
+# Do not translate $LDDateFormats 
+$LDDateFormats=array('dd.MM.yyyy','yyyy-MM-dd','MM/dd/yyyy','dd/MM/yyyy');
 
 $LDDateFormatsTxt= array('For eksempel: 01.10.2002 (01 Oktober 2002)',
                                          'For eksempel: 2002-10-01 (2002 Oktober 01)',
-										 'For eksempel: 10/01/2002 (Oktober 01, 2002)');
+										 'For eksempel: 10/01/2002 (Oktober 01, 2002)',
+										 'For eksempel: 01/10/2002 (01 Oktober, 2002)');
+/**
+* The following lines must be modified according to the examples:
+* english:
+* day = d , month = m, year = y
+* result => dd.mm.yyyy
+*
+* german:
+* day = t, month = m, year = j
+* result => tt.mm.jjjj
+*
+* indonesian:
+* day = h, month = b, year = t
+* result => hh.bb.tttt
+* 
+* BEGIN */
+
+$LD_ddpMMpyyyy='dd.mm.yyyy';
+$LD_yyyyhMMhdd='yyyy-mm-dd';
+$LD_MMsddsyyyy='mm/dd/yyyy';
+$LD_ddsMMsyyyy='dd/mm/yyyy';
+/* END */
 
 $LDNewDateFormatSaved='Det nye formatet er gjeldende.';							
 $LDSetCurrency='Velg valuta';
@@ -150,26 +175,6 @@ $LDPlsEnterUpdate='Editer valuta informasjon. Klikk deretter \'Oppdater\'.';
 $LDEditInfo='Editer';
 $LDCurrencyAdmin='Valuta administrasjon';
 
-/**
-* The following lines must be modified according to the examples:
-* english:
-* day = d , month = m, year = y
-* result => dd.mm.yyyy
-*
-* german:
-* day = t, month = m, year = j
-* result => tt.mm.jjjj
-*
-* indonesian:
-* day = h, month = b, year = t
-* result => hh.bb.tttt
-* 
-* BEGIN */
-
-$LD_ddpMMpyyyy='dd.mm.yyyy';
-$LD_yyyyhMMhdd='yyyy-mm-dd';
-$LD_MMsddsyyyy='mm/dd/yyyy';
-/* END */
 /* 2002-10-22 EL */
 $LDUserInfoSaved='Brukertilgang ble lagd';
 $LDUserInfoNoSave='Brukertilgang feilet. Sjekk infomasjonen som er skrevet inn';

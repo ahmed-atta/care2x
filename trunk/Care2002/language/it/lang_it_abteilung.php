@@ -1,8 +1,8 @@
 <?php
 $LDPageTitle='Dipartimenti';
 $LDDeptTxt='Dipartimento';
-$LDOpenHrsTxt='Ore lavorate';
-$LDChkHrsTxt='Ore di presidio medico';
+$LDOpenHrsTxt='Orario di lavoro';
+$LDChkHrsTxt='Orario di presidio medico';
 $LDClk4Info='Selezionare per ulteriori informazioni su';
 $LDDayTxt='Giorno';
 
@@ -11,7 +11,7 @@ $dept=array('Medicina generale',
 					'Chirurgia plastica',
 					'ENT',
 					'Oftalmologia',
-					'Pathology',
+					'Anatomia Patologica',
 					'Ginecologia',
 					'Fisioterapia',
 					'Medicina interna',

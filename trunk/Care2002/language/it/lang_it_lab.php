@@ -2,7 +2,7 @@
 
 $LDLab='Laboratori';
 $LDMedLab='Laboratorio medico';
-$LDPathLab='Laboratorio analisi patologiche';
+$LDPathLab='Anatomia Patologica';
 $LDBacLab='Laboratorio analisi batteriologiche';
 $LDClose='Chiudi';
 $LDSeeLabData='Ricerca e visualizza dati di laboratorio del paziente.';
@@ -44,7 +44,7 @@ $LDReportFoundMany='Referti di laboratorio per il paziente numero  ';
 $LDIfWantEdit='Se si desidera modificare il referto, selezionare il tasto freccia.';
 $LDIfWantEditMany='Se si desidera modificarne uno, selezionare il suo tasto freccia.';
 
-$LDJobIdNr='Batch n.';
+$LDJobIdNr='N. esame';
 $LDExamDate='Data esame';
 $LDOn='del';
 $LDAt='alle';
@@ -70,7 +70,7 @@ $LDAlertTestDate='Inserire prima la data dell\'esame';
 /* 2002-09-01 EL */
 $LDTestRequest='Richiesta di test';
 $LDFillUpSend='Compilare e spedire il modulo per ';
-$LDTestRequestPathoTxt=$LDFillUpSend.'test patologico/istologico';
+$LDTestRequestPathoTxt=$LDFillUpSend.'esame patologico/istologico';
 $LDTestRequestBacterioTxt=$LDFillUpSend.'test batteriologico';
 $LDTestRequestChemLabTxt=$LDFillUpSend.'test di laboratorio chimico';
 $LDBloodBank='Banca del sangue';
@@ -94,7 +94,7 @@ $LDSearchFound='Trovati ~nr~ pazienti.';
  /* 2002-09-04 EL */  
 $LDTestRequestFor='Richiesta per ';
 $LDTestType=array('chemlabor'=>'test di laboratorio chimico',
-                                    'patho'=>'test patologici',
+                                    'patho'=>'esami anatomopatologici',
          'baclabor'=>'test batteriologici',
          'blood'     =>'sangue');
  /* 2002-09-10 EL */

@@ -4,7 +4,7 @@ error_reporting(0);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /*
-CARE 2002 Integrated Information System  for Hospitals and Health Care Organizations and Services
+CARE 2X Integrated Information System  for Hospitals and Health Care Organizations and Services
 Copyright (C) 2002  Elpidio Latorilla & Intellin.org	
 
 GNU GPL. For details read file "copy_notice.txt".

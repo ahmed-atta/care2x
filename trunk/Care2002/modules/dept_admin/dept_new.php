@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
+* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
 * GNU General Public License
-* Copyright 2002 Elpidio Latorilla
+* Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -30,8 +30,15 @@ $dept_obj=new Department;
 #create com object
 $comm=new Comm;
 
+# Validate 3 most important inputs
+if(isset($mode)&&!empty($mode)&&$mode!='select'){
+	if(empty($HTTP_POST_VARS['name_formal'])||empty($HTTP_POST_VARS['type'])){
+		$inputerror=TRUE; # Set error flag
+	}
+	if($mode=='update'&&empty($HTTP_POST_VARS['id'])) $inputerror=TRUE;
+}
 
-if(!empty($mode)){
+if(!empty($mode)&&!$inputerror){
 
 	$is_img=false;
 	# If a pic file is uploaded move it to the right dir
@@ -153,17 +160,22 @@ $depttypes=$dept_obj->getTypes();
 <script language="javascript">
 <!-- 
 
-function check(d)
-{
-	if((d.station.value=="")||(d.name.value=="")||(d.station.start_no=="")||(d.end_no.value==""))
-	{
-		alert("<?php echo $LDAlertIncomplete ?>");
+function chkForm(d){
+
+	if(d.name_formal.value==""){
+		alert("<?php echo $LDPlsNameFormal ?>");
+		d.name_formal.focus();
 		return false;
-	}
-	if(parseInt(d.start_no.value)>=parseInt(d.end_no.value)) 
-	{
-		alert("<?php echo $LDAlertRoomNr ?>");
+	}else if(d.id.value==""){
+		alert("<?php echo $LDPlsDeptID ?>");
+		d.id.focus();
 		return false;
+	}else if(d.type.value==""){
+		alert("<?php echo $LDPlsSelectType ?>");
+		d.type.focus();
+		return false;
+	}else{
+		return true;
 	}
 }
 
@@ -195,27 +207,33 @@ div.pcont{ margin-left: 3; }
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10">
 <FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp; <?php echo "$LDDepartment :: "; if($mode=='select') echo $LDUpdate; else echo $LDCreate; ?></STRONG></FONT></td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp()"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
+<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('dept_create.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
 <tr valign=top >
 <td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
  <ul>
 
+ <?php
+ if(isset($inputerror)&&$inputerror){
+ 	echo "<font color=#ff0000 face='verdana,arial' size=2>$LDInputError</font>";
+ }
+ ?>
+ 
 <font face="Verdana, Arial" size=-1><?php echo $LDEnterAllFields ?>
-<form action="dept_new.php" method="post" name="newstat" ENCTYPE="multipart/form-data" >
+<form action="dept_new.php" method="post" name="newstat" ENCTYPE="multipart/form-data" onSubmit="return chkForm(this)">
 <table border=0>
   <tr>
-    <td class=pblock align=right bgColor="#eeeeee"><font color=#ff0000><b>*</b></font><?php echo $LDFormalName ?>: </td>
+    <td class=pblock align=right bgColor="#eeeeee"><font color=#ff0000><b>*</b><?php echo $LDFormalName ?></font>: </td>
     <td class=pblock><input type="text" name="name_formal" size=40 maxlength=40 value="<?php echo $name_formal ?>"><br>
 </td>
   </tr> 
   <tr>
-    <td class=pblock align=right bgColor="#eeeeee"><font color=#ff0000><b>*</b></font>
-	<?php echo $LDInternalID ?>: 
+    <td class=pblock align=right bgColor="#eeeeee"><font color=#ff0000><b>*</b>
+	<?php echo $LDInternalID ?></font>: 
 	</td>
     <td class=pblock>
 	<?php
-		if($mode=='select') { echo $id; } else {
+		if($mode=='select') { echo '<input type="hidden" name="id"  value="'.$id.'">'; } else {
 	?>
 	<input type="text" name="id" size=40 maxlength=40 value="<?php echo $id; ?>">
 	<?php
@@ -225,7 +243,7 @@ div.pcont{ margin-left: 3; }
   </tr> 
 
 <tr>
-    <td class=pblock align=right bgColor="#eeeeee"><font color=#ff0000><b>*</b></font><?php echo $LDTypeDept ?>: </td>
+    <td class=pblock align=right bgColor="#eeeeee"><font color=#ff0000><b>*</b><?php echo $LDTypeDept ?></font>: </td>
     <td class=pblock><select name="type">
 	<?php
 		

@@ -42,7 +42,6 @@ $news=array( 'category'=>$category,
 require_once($root_path.'include/care_api_classes/class_news.php');
 $newsobj=new News;
 if($news_nr = $newsobj->saveNews($dept_nr,$news)) {
-				
     if($is_pic)	{
 	    # Get the news foto path from global config 					
 		require_once($root_path.'include/care_api_classes/class_globalconfig.php');    

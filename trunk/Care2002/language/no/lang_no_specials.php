@@ -397,7 +397,7 @@ $LDDisplay2Txt="Bytt slik at man viser menyen i en flytende ramme. ";
 $LDNewPwDiffer="Passordene stemmer ikke overends.<br> Skriv inn passordet igjen.";
 /* 2003-03-22 EL*/
 $LDPersonellMngmnt='Personell Management';
-$LDPersonellMngmntTxt='Tools and functions for managing personell';
+$LDPersonellMngmntTxt='Tools and functions for managing personnel';
 /* 2003-04-25 EL */
 $LDBilling='eCombill';
 $LDBillingTxt='Bill patient, create billable items, generate bill reports, etc.';

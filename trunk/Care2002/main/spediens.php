@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.07 - 2003-08-29
+* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
 * GNU General Public License
-* Copyright 2002 Elpidio Latorilla
+* Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -142,6 +142,18 @@ href="javascript:gethelp('submenu1.php','<?php echo $LDSpexFunctions ?>')"><img 
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php echo $LDPhotoLabTxt ?> </FONT></TD></TR>
 
+<!--               <TR bgColor=#dddddd height=1>
+                <TD colSpan=3><IMG height=1 
+                  src="../../gui/img/common/default/pixel.gif" 
+                  width=5></TD></TR>
+              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'video.gif','0') ?>></td>
+                <TD vAlign=top ><FONT 
+                  face="Verdana,Helvetica,Arial" size=2><B>
+				 <a href="http://www.care2x.info/care-cam/login.php?ret_link=%2Fcare-cam%2Fswitchboard.php%3Fs_switchboard_name%3D1&type=notLogged">CARE-CAM</a> 
+				  </B></FONT></TD>
+                <TD><FONT face="Verdana,Helvetica,Arial" 
+                  size=2>Sven Köchel's advance camera monitoring system</FONT></TD></TR>				  
+ -->				  
               <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
@@ -251,7 +263,8 @@ href="javascript:gethelp('submenu1.php','<?php echo $LDSpexFunctions ?>')"><img 
                 <TD colSpan=3><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
                   width=5></TD></TR>
- -->              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'calendar.gif','0') ?>></td>
+ -->
+               <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'calendar.gif','0') ?>></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B><a href="<?php echo $root_path ?>modules/tools/calculator.php<?php echo URL_APPEND; ?>"><?php echo $LDCalc ?></a>
 				   </B></FONT></TD>
@@ -314,7 +327,7 @@ href="javascript:gethelp('submenu1.php','<?php echo $LDSpexFunctions ?>')"><img 
  					}
 				?>
       
- -->              <TR bgColor=#dddddd height=1>
+              <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
                   width=5></TD></TR>
@@ -325,7 +338,8 @@ href="javascript:gethelp('submenu1.php','<?php echo $LDSpexFunctions ?>')"><img 
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php echo $LDMyIntranetTxt ?></FONT></TD></TR>
-              <TR bgColor=#dddddd height=1>
+-->               
+			<TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
                   width=5></TD></TR>
@@ -336,11 +350,11 @@ href="javascript:gethelp('submenu1.php','<?php echo $LDSpexFunctions ?>')"><img 
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" size=2><?php echo $LDAccessPwTxt ?></FONT></TD></TR>
 
-				<TR bgColor=#dddddd height=1>
+<!--				<TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
                   width=5></TD></TR>
-<!--				  
+				  
               <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'templates.gif','0') ?> align="absmiddle"></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B>

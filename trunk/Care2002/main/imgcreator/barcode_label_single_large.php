@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /*
-CARE 2002 Integrated Information System beta 1.0.02 - 30.07.2002 for Hospitals and Health Care Organizations and Services
+CARE 2X Integrated Information System beta 1.0.02 - 30.07.2002 for Hospitals and Health Care Organizations and Services
 Copyright (C) 2002  Elpidio Latorilla & Intellin.org	
 
 GNU GPL. For details read file "copy_notice.txt".
@@ -152,10 +152,15 @@ else
 	if($location['bed_nr']) $locstr.=' '.strtoupper(chr($location['bed_nr']+96));
 	$locstr.=' '.$admit_type.' '.$LDInsShortID[$result['insurance_class_nr']];
 	
-	# Check if TTF text possible
-	if(function_exists(ImageTTFText)){
-		$arial='ARIAL.TTF';
-		$verdana='VERDANA.TTF';
+	# Check if ttf is ok
+	include_once($root_path.'include/inc_ttf_check.php');
+	
+	//$verdana='VERDANA.TTF';
+	
+	//if(function_exists(ImageTTFText)&&file_exists($font_path.$arial)&&file_exists($font_path.$verdana)){
+	
+	
+	if($ttf_ok){
 		
 		$tmargin=2;
 		$lmargin=6;

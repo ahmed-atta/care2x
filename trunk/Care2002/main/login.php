@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.07 - 2003-08-29
+* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
 * GNU General Public License
-* Copyright 2002 Elpidio Latorilla
+* Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -58,12 +58,9 @@ if ((($pass=='check')&&($keyword!=''))&&($userid!=''))
 			{	
 				if (!($zeile['lockflag']))
 				{								
-					//setcookie('ck_login_userid'.$sid,$zeile['login_id'],0,'/');
-					//setcookie('ck_login_username'.$sid,$zeile['name'],0,'/');
 					$HTTP_SESSION_VARS['sess_login_userid']=$zeile['login_id'];		
 					$HTTP_SESSION_VARS['sess_login_username']=$zeile['name'];		
-					/** Init the crypt object, encrypt the password, and store in cookie
-					*/
+					# Init the crypt object, encrypt the password, and store in cookie
     				$enc_login = new Crypt_HCEMD5($key_login,makeRand());
 										
 					$cipherpw=$enc_login->encodeMimeSelfRand($zeile['password']);
@@ -71,9 +68,7 @@ if ((($pass=='check')&&($keyword!=''))&&($userid!=''))
                     //setcookie('ck_login_pw'.$sid,$cipherpw,0,'/');
 					$HTTP_SESSION_VARS['sess_login_pw']=$cipherpw;		
 										
-					/**
-					* Set the login flag
-					*/
+					# Set the login flag
 					setcookie('ck_login_logged'.$sid,'true',0,'/');
 										
 					logentry($zeile['name'],$zeile['id'],$REMOTE_ADDR.' OK\'d','','');			
@@ -91,7 +86,6 @@ if ((($pass=='check')&&($keyword!=''))&&($userid!=''))
 
 $errbuf='Log in';
 $minimal=1;
-require_once($root_path.'include/inc_config_color.php');
 require($root_path.'include/inc_passcheck_head.php');
 ?>
 

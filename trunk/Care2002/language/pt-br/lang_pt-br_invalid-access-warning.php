@@ -8,7 +8,7 @@ require_once($root_path.'include/inc_img_fx.php');
 <HTML>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
- <TITLE>Invalid Access Warning</TITLE>
+ <TITLE>Página de Acesso Não Autorizado</TITLE>
 </HEAD>
 
 <BODY bgcolor="#ffffff">
@@ -61,8 +61,7 @@ em raros casos pode ter acontecido um erro na transferência de dados. Para corri
 <p>
 
 <?php
-$path_root='../../';
-require('pt-br_copyrite.php'); 
+require($root_path.'include/inc_load_copyrite.php'); 
 ?>
 </FONT>
 

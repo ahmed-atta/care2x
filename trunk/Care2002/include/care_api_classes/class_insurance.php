@@ -223,6 +223,39 @@ class Insurance extends Core {
 		    } else { return false; }
 	   } else { return false; }
    	}
+	/**
+	* Similar to getAllActiveFirmsInfo,  but returns limited data block
+	* @param $len (int) the max nr or rows returned, default 30
+	* @param $so (int) the index offset, defaul 0 = start
+	* param sortby (char) the field to sort, default is "name"
+	* param sortdir (char) = the sort direction, default is ASC
+	* returns adodb record object
+	*/
+	function getLimitActiveFirmsInfo($len=30,$so=0,$sortby='name',$sortdir='ASC'){
+		global $db;
+		$this->sql="SELECT * FROM $this->tb_insurance WHERE status NOT IN ('inactive','deleted','hidden','closed','void') ORDER BY $sortby $sortdir";
+	    if($this->res['glafi']=$db->SelectLimit($this->sql,$len,$so)) {
+	        if($this->rec_count=$this->res['glafi']->RecordCount()) {
+		        return $this->res['glafi'];
+		    } else { return false; }
+	   } else { return false; }
+   	}
+	/**
+	* Counts all active insurance firms
+	* returns the count value, else zero
+	*/
+	function countAllActiveFirms(){
+		global $db;
+		$this->sql="SELECT firm_id FROM $this->tb_insurance WHERE status NOT IN ('inactive','deleted','hidden','closed','void')";
+	    if($buffer=$db->Execute($this->sql)) {
+	    	return $buffer->RecordCount();
+	   } else { return 0; }
+   	}
+	/**
+	* Searches for all active firms based on the supplied search key
+	* @param $key (char) the search keyword
+	* return adodb record object, else false
+	*/
    	function searchActiveFirm($key){
 		global $db;
 		if(empty($key)) return false;
@@ -251,7 +284,74 @@ class Insurance extends Core {
 			}
 	   } else { return false; }
    	}
-			
+	/**
+	* Searches similar to searchActiveFirm() but returns limited data block
+	* @param $key (char) the search keyword
+	* @param $len (int) the maximum number of rows returned, default = 30 rows
+	* @param $so (int) the start index offset, default 0 = start
+	* @param $oitem (char) the field name to sort, default = "name"
+	* @param $odir (char) the sorting direction, default = ASC
+	* return adodb record object, else false
+	*/
+   	function searchLimitActiveFirm($key,$len=30,$so=0,$oitem='name',$odir='ASC'){
+		global $db;
+		if(empty($key)) return false;
+		$sortby=" ORDER BY $oitem $odir";
+		$select="SELECT firm_id,name,phone_main,fax_main,addr_email  FROM $this->tb_insurance ";
+		$append=" AND status NOT IN ('inactive','deleted','closed','hidden','void') $sortby";
+		$this->sql="$select WHERE ( firm_id LIKE '$key%' OR name LIKE '$key%' OR addr_email LIKE '$key%' ) $append";
+		if($this->res['saf']=$db->SelectLimit($this->sql,$len,$so)){
+			if($this->rec_count=$this->res['saf']->RecordCount()){
+				return $this->res['saf'];
+		    }else{	
+				$this->sql="$select WHERE ( firm_id LIKE '%$key' OR name LIKE '%$key' OR addr_email LIKE '%$key' ) $append";
+				if($this->res['saf']=$db->SelectLimit($this->sql,$len,$so)){
+					if($this->rec_count=$this->res['saf']->RecordCount()){
+						return $this->res['saf'];
+					}else{
+						$this->sql="$select WHERE ( firm_id LIKE '%$key%' OR name LIKE '%$key%' OR addr_email LIKE '%$key%' ) $append";
+						if($this->res['saf']=$db->SelectLimit($this->sql,$len,$so)){
+							if($this->rec_count=$this->res['saf']->RecordCount()){
+								return $this->res['saf'];
+							}else{return false;}
+						}else{return false;}
+					}
+				}else{return false;}
+			}
+	   } else { return false; }
+   	}
+	/**
+	* Searches similar to searchActiveFirm() but returns the resulting number of rows
+	* @param $key (char) the search keyword
+	* returns count value, else zero
+	*/
+   	function searchCountActiveFirm($key){
+		global $db;
+		if(empty($key)) return false;
+		$select="SELECT firm_id FROM $this->tb_insurance ";
+		$append=" AND status NOT IN ('inactive','deleted','closed','hidden','void')";
+		$this->sql="$select WHERE ( firm_id LIKE '$key%' OR name LIKE '$key%' OR addr_email LIKE '$key%' ) $append";
+		if($this->res['scaf']=$db->Execute($this->sql)){
+			if($this->rec_count=$this->res['scaf']->RecordCount()){
+				return $this->rec_count;
+			}else{	
+				$this->sql="$select WHERE ( firm_id LIKE '%$key' OR name LIKE '%$key' OR addr_email LIKE '%$key' ) $append";
+				if($this->res['scaf']=$db->Execute($this->sql)){
+					if($this->rec_count=$this->res['scaf']->RecordCount()){
+						return $this->rec_count;
+					}else{
+						$this->sql="$select WHERE ( firm_id LIKE '%$key%' OR name LIKE '%$key%' OR addr_email LIKE '%$key%' ) $append";
+						if($this->res['scaf']=$db->Execute($this->sql)){
+							if($this->rec_count=$this->res['scaf']->RecordCount()){
+								return $this->rec_count;
+							}else{return 0;}
+						}else{return 0;}
+					}
+				}else{return 0;}
+			}
+		}else{return 0;}
+   	}
+	
 }
 
 // ********** class PersonInsurance 

@@ -1,7 +1,7 @@
 <?php
 $LDClose='Fechar';
 $LDCancel='Cancelar';
-$LDResetEntry='Apagar entradas';
+$LDResetEntry='Excluir registros';
 $LDSave='Salvar';
 $LDReset='Reenicie';
 
@@ -34,18 +34,18 @@ $LDPrio='Prioridade';
 
 
 $LDPageTop='Voltar para o topo.';
-$LDPreview='Preview';
+$LDPreview='Visualizar';
 $LDUpdateData='Atualizar ou editar';
 
 $LDNoBack='Não. Voltar.';
 $LDOK='OK';
 $LDName='Nome';
 $LDPassword='Senha';
-$LDUserId='User login name';
+$LDUserId='Usuário';
 $LDChange='Mudar';
 $LDLock='Travar';
 $LDUnlock='Destravar';
-$LDDelete='Apagar';
+$LDDelete='Excluir';
 $LDYesSure='Sim, Eu tenho certeza.';
 $LDKeywordPrompt='Entre com uma palavra-chave';
 $LDWelcome='Seja bem vindo';
@@ -93,17 +93,17 @@ $LDChange='Mudar';
 $LDAskAck='Pedir confirmação';
 $LDCC='';
 $LDBCC='';
-$LDBCCTxt='BCC addresses will not be displayed on the main recipient.';
-$LDRecipient='Recipiente';
+$LDBCCTxt='O endereço BCC não será mostrado no destinatário.';
+$LDRecipient='Destinatário';
 $LDQuickAddr='Quick address';
-$LDInsertAddr='Insert';
-$LDFolderEmpty='The ~tagword~ folder is empty at the moment.';
-$LDNoteIntra='Please take note that intranet emails can be sent and received WITHIN THE INTRANET SYSTEM ONLY. <p>Please click here to open your inbox.';
-$LDEmailSent='The email was sent successfully!';
-$LDConfirmDelete='Are you sure you want to delete the marked emails?';
-$LDAlertNoRecipient='Recipient missing! Please enter a recipient email address.';
-$LDAlertNoSubject='Subject missing! If you want to send the email w/o a subject, click OK.';
-$LDAlertNoText='You have not written anything. Please write your message first before sending.';
+$LDInsertAddr='Inserir';
+$LDFolderEmpty='A ~tagword~ pasta está vazia no momento.';
+$LDNoteIntra='Favor percebe que o enviou e recebimento de amil somente funciona com SISTEMA INTRANET. <p>Favor cliquar aqui para abrir sua caixa.';
+$LDEmailSent='O emial foi enviado com sucesso!';
+$LDConfirmDelete='Você tem certeza que deseja deletar os email marcados?';
+$LDAlertNoRecipient='O destinatário está faltando! Favor entre com o email do destinatário.';
+$LDAlertNoSubject='Assunto está faltando! Se você quiser enviar o email sem o assunto, clique OK.';
+$LDAlertNoText='Você não digitou nada. Favor primeiro escrever sua mensagem antes de enviá-la.';
 $LDRead='Ler';
 $LDBack2='Voltar para';
 $LDReply2='Responder para';
@@ -113,7 +113,7 @@ $LDReplyAgain='Responder novamente';
 $LDForward='A diante';
 $LDClk4Printer='Clique para abrir a versão de impressão';
 $LDPrinterVersion='Versão de impressão';
-$LDAskDeleteMail='Voce tem certeza que deseja apagar este email?';
+$LDAskDeleteMail='Voce tem certeza que deseja excluir este email?';
 $LDPrint='Imprimir';
 $LDAttach='Anexo';
 $LDEmailAddr='Endereço de email';
@@ -128,23 +128,23 @@ $LDWriteEmail='Compose email';
 $LDAddNewAddr='Add new email address';
 $LDConfirmDeleteAddr='Are you sure you want to delete the marked email address?';
 
-$LDUrInfo='Your Information';
-$LDEmailProc='Email Processing';
-$LDProfile='Profile';
-$LDProfileTxt='Name, Alias, change, update';
-$LDPasswordChange='Change password';
-$LDSecretQ='Secret question';
-$LDSecretQChange='Change secret question';
-$LDMemberDir='Members\' directory';
-$LDMemberDirTxt='Register address in directory<br>&nbsp;or remove from directory';
-$LDReply2Txt='Change \'Reply to\' address';
-$LDEmailAddrChange='Change email address';
-$LDSignature='Signature';
-$LDSignatureTxt='Create signature<br>&nbsp;that automatically attaches<br>&nbsp;to every outgoing email.';
+$LDUrInfo='Suas informações';
+$LDEmailProc='Processando email';
+$LDProfile='Perfil';
+$LDProfileTxt='Nome, Apelido, mudar, atualizar';
+$LDPasswordChange='Mudar senha';
+$LDSecretQ='Pergunta secreta';
+$LDSecretQChange='Mudar pergunta secreta';
+$LDMemberDir='Membros da\' lista';
+$LDMemberDirTxt='Registra endereço na lista<br>&nbsp;ou remover da lista';
+$LDReply2Txt='Mudar \'Responder para\' endereço';
+$LDEmailAddrChange='Mudar endereço de email';
+$LDSignature='Assinatura';
+$LDSignatureTxt='Criar assinatura<br>&nbsp;que automaticamente indexa<br>&nbsp;para email que sai.';
 
-$LDEmail2Drafts='Email was saved as draft.';
-$LDNoEmailAddress='Email address mission! Please enter an email address';
+$LDEmail2Drafts='Email foi salvo como draft.';
+$LDNoEmailAddress='Objetivo do endereço de email! Favor digitar o email';
 $LDLogout='Logout';
-$LDNameIsUsed='The email address is already being used by somebody. Please choose another username.';
+$LDNameIsUsed='Este endereço de mail já está sendo usado por alguem. Favor escolha outro nome.';
 
 ?>

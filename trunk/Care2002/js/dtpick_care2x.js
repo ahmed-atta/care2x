@@ -1,3 +1,6 @@
+/* Original js code taken from the phpemPower authored by Biju Gopinath (http://www.bijugopinath.com/phpempower/)
+*  permission for modification and use for Care2x granted
+*/
 var weekend = [0,6];
 var weekendColor = "#e0e0e0";
 var fontface = "Verdana";
@@ -191,7 +194,8 @@ Calendar.prototype.show = function() {
 	var nextMM = nextMMYYYY[0];
 	var nextYYYY = nextMMYYYY[1];
 	
-	this.wwrite("<TABLE WIDTH='100%' BORDER=1 CELLSPACING=0 CELLPADDING=0 BGCOLOR='#e0e0e0'><TR><TD ALIGN=center>");
+	//this.wwrite("<TABLE WIDTH='100%' BORDER=1 CELLSPACING=0 CELLPADDING=0 BGCOLOR='#e0e0e0'><TR><TD ALIGN=center>");
+	this.wwrite("<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=0 BGCOLOR='#e0e0e0'><TR><TD ALIGN=center>");
 	this.wwrite("[<A HREF=\"" +
 		"javascript:window.opener.Build(" + 
 		"'" + this.gReturnItem + "', '" + this.gMonth + "', '" + (parseInt(this.gYear)-1) + "', '" + this.gFormat + "'" +
@@ -201,8 +205,9 @@ Calendar.prototype.show = function() {
 		"javascript:window.opener.Build(" + 
 		"'" + this.gReturnItem + "', '" + prevMM + "', '" + prevYYYY + "', '" + this.gFormat + "'" +
 		");" +
-		"\"><<\/A>]</TD><TD ALIGN=center>");
-	this.wwrite("[<A HREF=\"javascript:window.print();\">Print</A>]</TD><TD ALIGN=center>");
+		"\"><<\/A>]</TD><TD ALIGN=center>&nbsp;");
+	//this.wwrite("[<A HREF=\"javascript:window.print();\">Print</A>]</TD><TD ALIGN=center>"); // disabled: Elpidio Latorilla 2003-09-08
+	this.wwrite("</TD><TD ALIGN=center>");
 	this.wwrite("[<A HREF=\"" +
 		"javascript:window.opener.Build(" + 
 		"'" + this.gReturnItem + "', '" + nextMM + "', '" + nextYYYY + "', '" + this.gFormat + "'" +

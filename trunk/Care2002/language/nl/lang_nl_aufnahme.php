@@ -356,6 +356,8 @@ $LDDischargeDate='Afmeldingsdatum';
 # 2003-08-04 EL
 $LDCancelThisAdmission='Aanmelding annuleren';
 
+# These are short codes printed on the labels
+# Make them very short maximal four letters
 $LDInsShortID[1]='PRIV';  # privately paid insurance
 $LDInsShortID[2]='COM'; # Common state sponsored insurance
 $LDInsShortID[3]='SP';    # self pay, direct pay
@@ -369,4 +371,11 @@ $LDPlsEnterRefererNotes='Please enter referer\'s notes';
 $LDPlsSelectAdmissionType='Please select admission type';
 $LDForInpatient='For inpatient';
 $LDForOutpatient='For outpatient';
+#2003-09-18 EL
+$LDPersonSearch='Search a person';
+#2003-09-24 EL
+$LDShowing='Showing';
+$LDPrevious='Previous';
+$LDNext='Next';
+$LDAdvancedSearch='Advanced search';
 ?>

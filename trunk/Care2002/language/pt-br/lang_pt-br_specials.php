@@ -1,103 +1,103 @@
 <?php
 $LDNews='Notícias';
-$LDNewsTxt='Write headline news articles';
+$LDNewsTxt='Escreva novas manchetes';
 $LDMemo='Memo';
 $LDMemoTxt='Ler ou escrever um memo';
 
 $LDClose='Fechar';
 $LDCancel='Cancelar';
-$LDResetEntry='Apagar entradas';
+$LDResetEntry='Excluir registros';
 $LDSave='Salvar';
-$LDReset='Reset';
+$LDReset='Resetar';
 
-$LDNewSearch='New search';
-$LDSearch='Search';
+$LDNewSearch='Nova procura';
+$LDSearch='Procurar';
 
 $LDContinue='Continue';
-$LDBack='Go back';
+$LDBack='Voltar';
 
 $LDOn='On';
 $LDAt='At';
 
-$LDNew='New';
-$LDEdit='Edit';
-$LDCreate='Create';
+$LDNew='Novo';
+$LDEdit='Editar';
+$LDCreate='Criar';
 
-$LDPastAll='All';
-$LDSelect='Select';
+$LDPastAll='Todos';
+$LDSelect='Selecione';
 
-$LDOrderArchive='Archive';
+$LDOrderArchive='Arquivo';
 
-$LDGoodMorning='Good morning';
-$LDGoodDay='Hello, nice to see you';
-$LDGoodEvening='Good evening';
+$LDGoodMorning='Bom dia';
+$LDGoodDay='Olá, é bom ver você';
+$LDGoodEvening='Boa noite';
 
-$LDDate='Date';
-$LDDept='Department';
-$LDPrio='Priority';
+$LDDate='Data';
+$LDDept='Departamento';
+$LDPrio='Prioridade';
 
 
-$LDPageTop='Back to top.';
-$LDPreview='Preview';
-$LDUpdateData='Update or edit';
+$LDPageTop='De volta ao top';
+$LDPreview='Visualizar';
+$LDUpdateData='Atualizar ou editar';
 
-$LDNoBack='No. Go back.';
+$LDNoBack='Não. Quero voltar.';
 $LDOK='OK';
-$LDName='Name';
-$LDPassword='Password';
-$LDUserId='User login name';
-$LDChange='Change';
-$LDLock='Lock';
-$LDUnlock='Unlock';
-$LDDelete='Delete';
-$LDYesSure='Yes, I\'m sure.';
-$LDKeywordPrompt='Enter a search keyword';
-$LDWelcome='Welcome';
+$LDName='Nome';
+$LDPassword='Senha';
+$LDUserId='Nome do usuário';
+$LDChange='Mudar';
+$LDLock='Travar';
+$LDUnlock='Destravar';
+$LDDelete='Excluir';
+$LDYesSure='Sim, tenho certeza.';
+$LDKeywordPrompt='Entre com uma palavra-chave';
+$LDWelcome='Bem vindo';
 
 
 $LDLogin='Login';
 
-$LDFirstName='Given name';
+$LDFirstName='Nome';
 
-$LDOptions='Options';
-$LDHelp='Help';
-$LDSent='Sent';
+$LDOptions='Opções';
+$LDHelp='Ajuda';
+$LDSent='Enviado';
 $LDDrafts='Drafts';
-$LDDate='Date';
-$LDTime='Time';
-$LDSize='Size';
-$LDFrom='From';
-$LDTo='To';
-$LDSend='Send';
-$LDChange='Change';
-$LDInsertAddr='Insert';
-$LDRead='Read';
-$LDBack2='Back to';
-$LDReply2='Reply to';
-$LDPrint='Print';
-$LDMoreInfo='More info';
-$LDTakeOver='Take over';
-$LDJustReset='Reset';
-$LDMaximum='Maximum';
+$LDDate='Data';
+$LDTime='Hora';
+$LDSize='Tamanho';
+$LDFrom='De';
+$LDTo='Para';
+$LDSend='Enviar';
+$LDChange='Mudar';
+$LDInsertAddr='Inserir';
+$LDRead='Ler';
+$LDBack2='Voltar para';
+$LDReply2='Responder para';
+$LDPrint='Imprimir';
+$LDMoreInfo='Mais informações';
+$LDTakeOver='Substituir';
+$LDJustReset='Resetar';
+$LDMaximum='Máximo';
 
-$LDSpexFunctions='Special Functions';
+$LDSpexFunctions='Funções especiais';
 $LDDutyPlanOrg='Duty Plan Organizer';
 $LDDutyPlanOrgTxt='Duty planner and organizer, Bundy machine';
 $LDStandbyDuty='Standby duty';
 $LDStandbyDutyTxt='Documenting work performance in standby duty';
 $LDHandStat='Hand surgery statistics';
 $LDHandStatTxt='Documenting hand surgery operations';
-$LDCalendar='Calendar';
-$LDCalendarTxt='A multifunction calender';
-$LDBlackBoard='Blackboard';
+$LDCalendar='Calendário';
+$LDCalendarTxt='Um calendário multifunção';
+$LDBlackBoard='Quadro-negro';
 $LDBlackBoardTxt='Post or search any information';
 $LDForum='Forum';
 $LDForumTxt='Post, search, read discussion, ideas, or comments, etc.';
-$LDCalc='Calculator';
-$LDCalcTxt='An online calculator';
-$LDClock='Clock';
-$LDDigitalClock='A digital online clock';
-$LDColorOpt='Color options';
+$LDCalc='Calculadora';
+$LDCalcTxt='Uma calculadora online';
+$LDClock='Relógio';
+$LDDigitalClock='Um relógio digital online';
+$LDColorOpt='Opções de cor';
 $LDColorOptTxt='Set the colors for background or text.';
 $LDColorOptExt='Extended color options';
 $LDColorOptExtTxt='Set the colors for hyperlinks, mouseovers, etc.';
@@ -105,32 +105,32 @@ $LDMyIntranet='myIntranet';
 $LDMyIntranetTxt='My personal planner, organizer, diary, memo, calendar, etc.';
 $LDAccessPw='Access password';
 $LDAccessPwTxt='Change or update access password';
-$LDWebCam='Video Security';
+$LDWebCam='Video de segurança';
 $LDWebCamTxt='Intranet webcamera security surveillance';
-$LDPhotoLab='Photolab';
-$LDPhotoLabTxt='Save, document, index photos of patients';
+$LDPhotoLab='Laboratóro fotográfico';
+$LDPhotoLabTxt='Sava, documenta, index photos of patients';
 
 $LDBundyMachine='Bundy machine';
 $LDDutyPlanner='Duty planner';
 $LDPrevMonth='Previous month';
 $LDNextMonth='Next month';
 $monat=array('','January','February','March','April','May','June','July','August','September','October','November','December');
-$LDEntry='Entry';
-$LDExit='Exit';
+$LDEntry='Registro';
+$LDExit='Sair';
 $LDRemarks='Remarks';
 
 $tage=array('<font color="#ff0000">S</font>','M','T','W','T','F','S');
 $tagename=array('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday');
 
 $LDTotal='Total';
-$LDClk4Options='Click for options';
-$LDMonth='Month';
-$LDYear='Year';
-$LDGO='GO';
-$LDPlus1Year='Plus 1 year';
-$LDMinus1Year='Minus 1 year';
-$LDDirectDial='Direct select';
-$LDFor='for';
+$LDClk4Options='Clique para opções';
+$LDMonth='Mês';
+$LDYear='Ano';
+$LDGO='IR';
+$LDPlus1Year='Mais 1 ano';
+$LDMinus1Year='Menos 1 ano';
+$LDDirectDial='Seleção direta';
+$LDFor='para';
 
 $LDShowMyCalendar='Show my duty in the calendar.';
 $LDShowMySched='Show my appointments.';
@@ -184,7 +184,7 @@ $LDNewPics='pictures from a new patient';
 $LDMorePics='pictures from the same patient';
 $LDAdditional='Additional';
 $LDLinkBroken='Link to the photo server is broken.';
-$LDPicsSaved='The following photo files are renamed and saved in the databank:';
+$LDPicsSaved='The following photo files were renamed and saved in the databank:';
 $LDEditTitle='Headline';
 
 $LDAlertPhotoInfo='The information in the entry field number ';
@@ -203,7 +203,7 @@ $LDNewPwDiffer='The new passwords differ from each other.<br> Please enter the n
 $LDPersonellMngmnt='Personnel Management';
 $LDPersonellMngmntTxt='Tools and functions for managing personnel';
 /* 2003-04-25 EL */
-$LDBilling='eCombill';
+$LDBilling='Faturamento';
 $LDBillingTxt='Bill patient, create billable items, generate bill reports, etc.';
 $LDInsuranceCoMngr='Insurance Co. Manager';
 $LDInsuranceCoMngrTxt='Enter new, edit insurance company data';
@@ -212,21 +212,21 @@ $LDAddressMngrTxt='Enter, list, edit, & update address data';
 /* 2003-05-18 EL */
 $LDUserConfigOpt='Configuration options';
 $LDUserConfigOptTxt='User options for background & text colors, mascots, avatar, etc.';
-$LDMascotOpt='Mascot options';
+$LDMascotOpt='Opções de mascote';
 $LDMascotOptTxt='Hide, show, or select prompt mascots.';
-$LDMascot='Mascot';
+$LDMascot='Mascote';
 $LDSampleMascot='Sample mascots';
 /* 2003-04-24 EL*/
 $LDGUITemplate='GUI Template option';
 $LDGUITemplateTxt='Select a GUI (graphic user interface) template';
-$LDGUITheme='GUI Theme';
-$LDTheme='Theme';
+$LDGUITheme='GUI Tema';
+$LDTheme='Tema';
 # 2002-01-18 EL
 $LDTicketedSupport='Ticketed Support';
 $LDTicketedSupportTxt='Send a ticketed request to the project\'s online support';
-$LDNewsgroup='Newsgroup';
+$LDNewsgroup='Grupo de notícias';
 $LDNewsgroupTxt='Newsgroup mirroring the developers\' mailing list.';
 # 2002-08-19 EL
-$LDPharmaIndex='Pharma Index';
-$LDPharmaIndexTxt='Pharmaceutical indexes like Redlist, Yellowlist, IFAP, NIMS, or PIMS';
+$LDPharmaIndex='Índices da farmácia';
+$LDPharmaIndexTxt='Índice farmaceutico como Lista vermelha, lista amarela, IFAP, NIMS, or PIMS';
 ?>

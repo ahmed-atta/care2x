@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
 * GNU General Public License
-* Copyright 2002 Elpidio Latorilla
+* Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -23,6 +23,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 /* Resolve the department number
 * If no dept nr available, redirect to dept selector page
 */
+$HTTP_SESSION_VARS['sess_user_origin']='calendar_opt'; // set the origin
 if(!isset($forceback)||empty($forceback)){
 	if(!isset($dept_nr)||empty($dept_nr)){
 		if(isset($HTTP_SESSION_VARS['sess_dept_nr'])&&$HTTP_SESSION_VARS['sess_dept_nr']){
@@ -30,7 +31,6 @@ if(!isset($forceback)||empty($forceback)){
 		}elseif(isset($cfg['thispc_dept_nr'])&&$cfg['thispc_dept_nr']){
 			$dept_nr=$cfg['thispc_dept_nr'];
 		}else{
-			$HTTP_SESSION_VARS['sess_user_origin']='calendar_opt'; // set the origin
 			header("Location:".$root_path."modules/nursing_or/nursing-or-select-dept.php".URL_REDIRECT_APPEND."&target=calendar_opt&retpath=$retpath&year=$year&month=$month&day=$day");
 			exit;
 		}
@@ -89,12 +89,13 @@ if($dept_nr){
 <title><?php echo "$LDCalendar - $LDOptions" ?></title>
 
 </head>
-<body onLoad="window.resizeTo(600,600);<?php if(!$nofocus) echo 'if(window.focus) window.focus();'; ?>" vlink="#0000ff" alink="#0000ff" link="#0000ff" >
+<body onLoad="window.resizeTo(500,400);<?php if(!$nofocus) echo 'if(window.focus) window.focus();'; ?>" vlink="#0000ff" alink="#0000ff" link="#0000ff" >
 <font face="Verdana, Arial" size=2>
 
 <?php 
 if(isset($HTTP_COOKIE_VARS['ck_login_logged'.$sid])&&($HTTP_SESSION_VARS['sess_login_username'])) { 
 ?>
+<!-- 
 <b> <?php echo "$LDOptions $LDFor ".$HTTP_SESSION_VARS['sess_login_username']." ".$LDOn." ".formatDate2Local($i_date,$date_format) ?></b>
 <ul>
 <li><a href="#"><?php echo $LDShowMyCalendar ?></a></li>
@@ -110,7 +111,7 @@ if(isset($HTTP_COOKIE_VARS['ck_login_logged'.$sid])&&($HTTP_SESSION_VARS['sess_l
 	?>
 </ul>
 <p>
-
+ -->
 <?php 
 }elseif($forceback){
 ?>
@@ -125,11 +126,15 @@ window.close();
 <p>
 <b><?php echo "$LDOptions $LDFor ".$dept_name." (".formatDate2Local($i_date,$date_format).")"; ?></b>
 <ul>
+<!-- 
 <li><a href="#"><?php echo $LDORProgram ?></a></li>
-<li><a href="<?php echo $root_path ?>modules/nursing_or/nursing-or-dienstplan-day.php<?php echo URL_APPEND."&dept_nr=$dept_nr&pday=$day&pmonth=$month&pyear=$year" ?>&retpath=calendar_opt"><?php echo "$LDDutyPerson $LDOn (".formatDate2Local($i_date,$date_format).")" ?></a></li>
-<li><a href="<?php echo $root_path ?>modules/nursing_or/nursing-or-dienstplan.php<?php echo URL_APPEND."&dept_nr=$dept_nr&cday=$day&cmonth=$month&cyear=$year&pmonth=".((int)$month)."&pyear=".((int)$year) ?>&noedit=1&retpath=calendar_opt" onClick="window.resizeTo(600,700)"><?php echo "$LDDutyPerson ($LDMonth)" ?></a></li>
-<li><a href="#"><?php echo "$LDDocsOnDuty (".formatDate2Local($i_date,$date_format).")" ?></a></li>
-	<?php if($i_date==date('Y-m-d'))
+ -->
+ <li><a href="<?php echo $root_path ?>modules/nursing_or/nursing-or-dienstplan-day.php<?php echo URL_APPEND."&dept_nr=$dept_nr&pday=$day&pmonth=$month&pyear=$year" ?>&retpath=calendar_opt"><?php echo "$LDDutyPerson $LDOn (".formatDate2Local($i_date,$date_format).")" ?></a></li>
+<!--
+ <li><a href="<?php echo $root_path ?>modules/nursing_or/nursing-or-dienstplan.php<?php echo URL_APPEND."&dept_nr=$dept_nr&cday=$day&cmonth=$month&cyear=$year&pmonth=".((int)$month)."&pyear=".((int)$year) ?>&noedit=1&retpath=calendar_opt" onClick="window.resizeTo(600,700)"><?php echo "$LDDutyPerson ($LDMonth)" ?></a></li>
+<li><a href="<?php echo $root_path ?>modules/doctors/doctors-dienstplan.php<?php echo URL_APPEND."&dept_nr=$dept_nr&cday=$day&cmonth=$month&cyear=$year&pmonth=".((int)$month)."&pyear=".((int)$year) ?>&noedit=1&retpath=calendar_opt" onClick="window.resizeTo(600,700)"><?php echo "$LDDocsOnDuty (".formatDate2Local($i_date,$date_format).")" ?></a></li>
+ -->
+ <?php if($i_date==date('Y-m-d'))
 		{ echo '
 		<li><a href="'.$root_path.'modules/or_logbook/op-pflege-logbuch-pass.php'.URL_APPEND;
 			echo "&target=entry&lang=$lang&pday=$day&pmonth=$month&pyear=$year&dept_nr=$dept_nr";

@@ -6,9 +6,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
+* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
 * GNU General Public License
-* Copyright 2002 Elpidio Latorilla
+* Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -277,11 +277,11 @@ while(list($group_id,$param_group)=each($paralistarray)){
 			<td class="j">&nbsp;';
 			if(!empty($records[$jid][$group_id][$param])) {
 				if($tp[$param]['hi_bound']&&$records[$jid][$group_id][$param]>$tp[$param]['hi_bound']){
-					$txt.='<img '.createComIcon($root_path,'arrow_red_up_sm.gif','0').'> <font color="red">'.$records[$jid][$group_id][$param].'</font>';
+					$txt.='<img '.createComIcon($root_path,'arrow_red_up_sm.gif','0').'> <font color="red">'.htmlspecialchars($records[$jid][$group_id][$param]).'</font>';
 				}elseif($records[$jid][$group_id][$param]<$tp[$param]['lo_bound']){
-					$txt.='<img '.createComIcon($root_path,'arrow_red_dwn_sm.gif','0').'> <font color="red">'.$records[$jid][$group_id][$param].'</font>';
+					$txt.='<img '.createComIcon($root_path,'arrow_red_dwn_sm.gif','0').'> <font color="red">'.htmlspecialchars($records[$jid][$group_id][$param]).'</font>';
 				}else{
-					$txt.=$records[$jid][$group_id][$param];
+					$txt.=htmlspecialchars($records[$jid][$group_id][$param]);
 				}
 				$flag=true;
 			}

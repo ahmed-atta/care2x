@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.07 - 2003-08-29
+* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
 * GNU General Public License
-* Copyright 2002 Elpidio Latorilla
+* Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -86,7 +86,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
                 <TD vAlign=top width=180><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B>
 				 <img <?php echo createComIcon($root_path,'blaupfeil.gif','0','middle') ?>> 
-				 <a href="<?php echo $root_path; ?>modules/op_document/op-doku-pass.php?sid=<?php echo "$sid&lang=$lang" ?>" onmouseover="ssm('ALog'); clearTimeout(timer) " 
+				 <a href="<?php echo $root_path; ?>modules/op_document/op-doku-pass.php<?php echo URL_APPEND ?>" onmouseover="ssm('ALog'); clearTimeout(timer) " 
       onmouseout="timer=setTimeout('hsm()',1000)" ><?php echo $LDOrDocument ?></a>
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
@@ -101,7 +101,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
                 <TD vAlign=top width=180><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B> 
    				<img <?php echo createComIcon($root_path,'blaupfeil.gif','0','middle') ?>>  
-				<a href="<?php echo $root_path; ?>modules/doctors/doctors-dienst-schnellsicht.php?sid=<?php echo "$sid&lang=$lang" ?>&retpath=op"><?php echo "$LDDOC $LDQuickView" ?></a></B></FONT></TD>
+				<a href="<?php echo $root_path; ?>modules/doctors/doctors-dienst-schnellsicht.php<?php echo URL_APPEND ?>&retpath=op"><?php echo "$LDDOC $LDQuickView" ?></a></B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><nobr><?php echo $LDQviewTxtDocs ?></nobr></FONT></TD></TR>
               
@@ -137,7 +137,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
                 <TD vAlign=top width=180><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B>
 				 <img <?php echo createComIcon($root_path,'blaupfeil.gif','0','middle') ?>>  
-				 <a href="<?php echo $root_path ?>modules/or_logbook/op-pflege-logbuch-pass.php?sid=<?php echo "$sid&lang=$lang" ?>" onmouseover="ssm('PLog'); clearTimeout(timer) " 
+				 <a href="<?php echo $root_path ?>modules/or_logbook/op-pflege-logbuch-pass.php<?php echo URL_APPEND ?>" onmouseover="ssm('PLog'); clearTimeout(timer) " 
       onmouseout="timer=setTimeout('hsm()',1000)" ><?php echo $LDOrLogBook ?></a><br>
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
@@ -193,7 +193,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
                 <TD vAlign=top width=180><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B><nobr>
 				<img <?php echo createComIcon($root_path,'blaupfeil.gif','0','middle') ?>>
-				<a href="spediens-bdienst-zeit-erfassung.php?sid=<?php echo "$sid&lang=$lang&retpath=op&encoder=".$HTTP_COOKIE_VARS['ck_login_username'.$sid]; ?>" ><?php echo $LDOnCallDuty ?></a></nobr>
+				<a href="spediens-bdienst-zeit-erfassung.php<?php echo URL_APPEND."&retpath=op&encoder=".$HTTP_COOKIE_VARS['ck_login_username'.$sid]; ?>" ><?php echo $LDOnCallDuty ?></a></nobr>
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><nobr><?php echo $LDOnCallDutyTxt ?></nobr></FONT></TD></TR>
@@ -243,7 +243,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
                 <TD vAlign=top width=180><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B>
 				<img <?php echo createComIcon($root_path,'blaupfeil.gif','0','middle') ?>>  
-				<a href="<?php echo $root_path ?>modules/nursing_or/nursing-or-dienstplan.php?sid=<?php echo "$sid&lang=$lang" ?>&dept_nr=39&retpath=menu" onmouseover="ssm('AnaDienstplan'); clearTimeout(timer) " 
+				<a href="<?php echo $root_path ?>modules/nursing_or/nursing-or-dienstplan.php<?php echo URL_APPEND ?>&dept_nr=39&retpath=menu" onmouseover="ssm('AnaDienstplan'); clearTimeout(timer) " 
       onmouseout="timer=setTimeout('hsm()',1000)" ><?php echo "$LDORNOC $LDScheduler" ?></a>
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 

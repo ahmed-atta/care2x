@@ -242,10 +242,10 @@ class Lab extends Encounter {
 	* @param $key (mixed) = search keyword
 	* return adodb record object
 	*/
-	function searchEncounterLabResults($key=''){
+	function searchEncounterLabResults($key='',$add_opt='',$limit=FALSE,$len=30,$so=0){
 		global $db;
 		if(empty($key)) return false;
-		$this->sql="SELECT e.encounter_nr, e.encounter_class_nr, p.pid, p.name_last, p.name_first, p.date_birth 
+		$this->sql="SELECT e.encounter_nr, e.encounter_class_nr, p.pid, p.name_last, p.name_first, p.date_birth, p.sex
 				FROM ( $this->tb_enc AS e, $this->tb_find_chemlab AS f ) LEFT JOIN $this->tb_person AS p ON e.pid=p.pid";
 		if(is_numeric($key)){
 			$key=(int)$key;
@@ -259,15 +259,36 @@ class Lab extends Encounter {
 			if($enc_class) $sql.="	AND e.encounter_class_nr=$enc_class";
 		}
 		# Append the common condition
-		$this->sql.=' AND NOT e.is_discharged AND e.encounter_nr=f.encounter_nr ORDER BY p.name_last';
+		$this->sql.=" AND NOT e.is_discharged AND e.encounter_nr=f.encounter_nr GROUP BY e.encounter_nr $add_opt";
 		//echo $this->sql;
-	    if ($this->result=$db->Execute($this->sql)) {
-		   	if ($this->record_count=$this->result->RecordCount()) {
+		if($limit){
+	    	$this->res['selr']=$db->SelectLimit($this->sql,$len,$so);
+		}else{
+	    	$this->res['selr']=$db->Execute($this->sql);
+		}
+	    if ($this->res['selr']) {
+		   	if ($this->record_count=$this->res['selr']->RecordCount()) {
+				# Workaround
 				$this->rec_count=$this->record_count;
-				return $this->result;
+				return $this->res['selr'];
 			}else{return false;}
 		}else{return false;}
 	}	
+	/**
+	* searchLimitEncounterLabResults()  searches for encounters with existing lab results
+	* similar to searchEncounterLabResults() but returns a limited number of rows
+	* public
+	* @param $key (mixed) = search keyword
+	* return adodb record object
+	*/
+	function searchLimitEncounterLabResults($key,$len,$so,$sortitem='',$order='ASC'){
+		if(!empty($sortitem)){
+			$option=" ORDER BY $sortitem $order";
+		}else{
+			$option='';
+		}
+		return $this->searchEncounterLabResults($key,$option,TRUE,$len,$so); 
+	}
 	/**
 	* getLastModifyTime() gets the latest modify_time info of an encounters lab result
 	* public

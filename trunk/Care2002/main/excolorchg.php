@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.07 - 2003-08-29
+* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
 * GNU General Public License
-* Copyright 2002 Elpidio Latorilla
+* Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -14,7 +14,6 @@ $lang_tables=array('indexframe.php');
 define('LANG_FILE','specials.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
 
 $breakfile='config_options.php'.URL_APPEND;
 
@@ -136,7 +135,7 @@ if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$body_alink.' v
 <table border=1>
   <tr >
     <td rowspan=3 bgcolor=<?php echo $cfg['idx_bgcolor']; ?> width=100 >
-	<center><img <?php echo createComIcon($root_path,'care_logo.gif','0') ?>></center>
+	<center><img <?php echo createLogo($root_path,'care_logo.gif','0') ?>></center>
 
 
 <FONT    SIZE=1  FACE="Arial" color=<?php echo $cfg['idx_txtcolor']; ?>>

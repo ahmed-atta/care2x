@@ -3,19 +3,23 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /*
-CARE 2002 Integrated Information System beta 1.0.02 - 30.07.2002 for Hospitals and Health Care Organizations and Services
+CARE 2X Integrated Information System beta 1.0.08 - 2003-10-13 for Hospitals and Health Care Organizations and Services
 Copyright (C) 2002  Elpidio Latorilla & Intellin.org	
 
 GNU GPL. For details read file "copy_notice.txt".
 */
 
+# Define to true if you want to draw a border around the labels
+define('DRAW_BORDER',TRUE);
+
 if(!extension_loaded('gd')) dl('php_gd.dll');
+
 define('LANG_FILE','aufnahme.php');
 define('NO_CHAIN',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 header ('Content-type: image/png');
 
-/* Check the encounter number */
+# Check the encounter number
 if((!isset($en)||!$en)&&$HTTP_SESSION_VARS['sess_en']) $en=$HTTP_SESSION_VARS['sess_en'];
 
 /*
@@ -32,9 +36,11 @@ else
 	    // get orig data
 	    //$dbtable='care_patient_encounter';
 		$sql="SELECT c1.name_last, c1.name_first, c1.date_birth, c1.sex, c1.civil_status, c1.phone_1_nr,
-		          c1.religion, c1.addr_str, c1.addr_str_nr, c1.addr_zip, c1.addr_citytown_nr, c1.contact_person, c2.* 
+		          c1.religion, c1.addr_str, c1.addr_str_nr, c1.addr_zip, c1.addr_citytown_nr, c1.contact_person, c1.blood_group,  
+				  c2.*, ad.name
 				 FROM care_encounter as c2 
 				     LEFT JOIN care_person as c1 ON c1.pid=c2.pid 
+					 LEFT JOIN care_address_citytown AS ad ON c1.addr_citytown_nr=ad.nr
 				         WHERE c2.encounter_nr='$en'";
 						 
 	    if($ergebnis=$db->Execute($sql))
@@ -145,7 +151,7 @@ else
 	
     //for($a=0,$l=90;$a<sizeof($addr);$a++,$l+=15) ImageString($im,3,10,$l,$addr[$a],$black);
      ImageString($im,3,10,90,$result['addr_str'].' '.$result['addr_str_nr'],$black);
-     ImageString($im,3,10,105,$result['addr_zip'].' '.$result['addr_city_town'],$black);
+     ImageString($im,3,10,105,$result['addr_zip'].' '.$result['name'],$black);
 
 	 /* Bill payer information
 	 *  Note: the address format is german
@@ -155,7 +161,7 @@ else
 	 {
          ImageString($im,3,10,160,$result['name_last'].', '.$result['name_first'],$black);
          ImageString($im,3,10,175,$result['addr_str'].' '.$result['addr_str_nr'],$black);
-         ImageString($im,3,10,190,$result['addr_zip'].' '.$result['addr_city_town'],$black);
+         ImageString($im,3,10,190,$result['addr_zip'].' '.$result['name'],$black);
 	}
 	else
 	{
@@ -206,10 +212,11 @@ else
     $eblack = ImageColorAllocate ($label, 0, 0, 0);
 	// place the barcode
     ImageCopy($label,$bc,101,4,9,9,170,37);
- 
-	if(function_exists(ImageTTFText)){
-		$arial='ARIAL.TTF';
-		$verdana='VERDANA.TTF';
+
+	# Check if ttf is ok
+	include_once($root_path.'include/inc_ttf_check.php');
+
+	if($ttf_ok){
 		
 		$tmargin=2;
 		$lmargin=6;
@@ -221,11 +228,11 @@ else
 		# Family name, first name
     	ImageTTFText($label,16,0,$lmargin,$tmargin+56,$eblack,$arial,$result['name_last'].', '.$result['name_first']);
 		# Date of birth
-    	ImageTTFText($label,11,0,$lmargin,$tmargin+74,$eblack,$arial,$result['date_birth']);
+    	ImageTTFText($label,11,0,$lmargin,$tmargin+74,$eblack,$arial,formatDate2Local($result['date_birth'],$date_format));
 		# Address street nr, street name
     	ImageTTFText($label,11,0,$lmargin,$tmargin+93,$eblack,$arial,ucfirst($result['addr_str']).' '.$result['addr_str_nr']);
 		# Address, zip, city/town name
-    	ImageTTFText($label,11,0,$lmargin,$tmargin+108,$eblack,$arial,ucfirst($result['addr_zip']).' '.$result['citytown_name']);
+    	ImageTTFText($label,11,0,$lmargin,$tmargin+108,$eblack,$arial,ucfirst($result['addr_zip']).' '.$result['name']);
 		# Sex
     	ImageTTFText($label,14,0,$lmargin,$tmargin+130,$eblack,$arial,strtoupper($result['sex']));
 		# Family name, repeat print
@@ -242,90 +249,107 @@ else
 		}
 	}else{ # Use system fonts
 	   
-		// encounter number
+		# encounter number
     	ImageString($label,4,2,2,$full_en,$black);
-		// encounter date
+		# encounter date
    	 	ImageString($label,2,2,18,formatDate2Local($result['encounter_date'],$date_format),$black); 
     	ImageString($label,5,10,40,$result['name_last'].', '.$result['name_first'],$black);
     	ImageString($label,3,10,55,formatDate2Local($result['date_birth'],$date_format),$black);
-    	//for($a=0,$l=75;$a<sizeof($addr);$a++,$l+=15) ImageString($label,4,10,$l,$addr[$a],$black);
      	ImageString($label,4,10,75,$result['addr_str'].' '.$result['addr_str_nr'],$black);
-     	ImageString($label,4,10,90,$result['addr_zip'].' '.$result['addr_city_town'],$black);
+     	ImageString($label,4,10,90,$result['addr_zip'].' '.$result['name'],$black);
 	
     	ImageString($label,5,10,125,strtoupper($result['sex']),$black);
     	ImageString($label,5,30,125,$result['name_last'],$black);
-    	ImageString($label,4,10,140,$result['insurance_co_id'],$black);
+    	ImageString($label,4,10,140,$ins_obj->getFirmName($result['insurance_firm_id']),$black);
     	ImageString($label,3,10,160,$locstr,$black);
+		#Blood group
+		if(stristr('AB',$result['blood_group'])){
+    		ImageString($label,5,257,125,$result['blood_group'],$black);
+		}else{
+    		ImageString($label,5,265,125,$result['blood_group'],$black);
+		}
 	
 	}
 
 	
-    // -- create smaller label
+    # -- create smaller label
     $label2=ImageCreate(173,133);
     $e2white = ImageColorAllocate ($label2, 255,255,255); //white bkgrnd
     $black = ImageColorAllocate ($label2, 0, 0, 0);
-	// -- place barcode
+	# -- place barcode
     ImageCopy($label2,$bc,2,0,9,7,170,37);
 
-    ImageString($label2,2,10,34,$full_en,$black);
-    ImageString($label2,2,110,34,formatDate2Local($result['encounter_date'],$date_format),$black);
-    ImageString($label2,4,10,50,$result['name_last'].',',$black);
-    ImageString($label2,4,10,65,$result['name_first'],$black);
-    //$addr=explode("\r\n",$result[address]);
-    //for($a=0,$l=70;$a<sizeof($addr);$a++,$l+=15) ImageString($label2,2,5,$l,$addr[$a],$black);
-    ImageString($label2,4,10,85,strtoupper($result['sex']),$black);
-    ImageString($label2,3,50,85,formatDate2Local($result['date_birth'],$date_format),$black);
-    //ImageString($label2,4,30,90,$result[name],$black);
-    ImageString($label2,3,10,100,$result['insurance_co_id'],$black);
-    ImageString($label2,2,10,115,$locstr,$black);
-    
+	if($ttf_ok){
+    	ImageTTFText($label2,9,0,10,45,$black,$arial,$full_en);
+    	ImageTTFText($label2,9,0,105,45,$black,$arial,formatDate2Local($result['encounter_date'],$date_format));
+    	ImageTTFText($label2,11,0,10,60,$black,$arial,$result['name_last'].',');
+    	ImageTTFText($label2,11,0,10,75,$black,$arial,$result['name_first']);
+    	ImageTTFText($label2,11,0,10,95,$black,$arial,strtoupper($result['sex']));
+    	ImageTTFText($label2,10,0,50,95,$black,$arial,formatDate2Local($result['date_birth'],$date_format));
+    	ImageTTFText($label2,10,0,10,109,$black,$arial,$ins_obj->getFirmName($result['insurance_firm_id']));
+    	ImageTTFText($label2,9,0,10,124,$black,$arial,$locstr);
+    }else{
+		ImageString($label2,2,10,34,$full_en,$black);
+    	ImageString($label2,2,110,34,formatDate2Local($result['encounter_date'],$date_format),$black);
+    	ImageString($label2,4,10,50,$result['name_last'].',',$black);
+    	ImageString($label2,4,10,65,$result['name_first'],$black);
+    	ImageString($label2,4,10,85,strtoupper($result['sex']),$black);
+    	ImageString($label2,3,50,85,formatDate2Local($result['date_birth'],$date_format),$black);
+    	ImageString($label2,3,10,100,$result['insurance_co_id'],$black);
+    	ImageString($label2,2,10,115,$locstr,$black);
+    }
 	
 	
-    // ------------------------------------ create smaller label without barcode
+    # ----- create smaller label without barcode
     $label3=ImageCreate(173,133);
-    $e3white = ImageColorAllocate ($label3, 255,255,255); //white bkgrnd
+    $e3white = ImageColorAllocate ($label3, 255,255,255); # white bkgrnd
     $black = ImageColorAllocate ($label3, 0, 0, 0);
+	$addr1=$result['addr_str'].' '.$result['addr_str_nr'];
+	$addr2= $result['addr_zip'].' - '.$result['name'];
 	
-    ImageString($label3,4,10,2,$full_en,$black);
-    ImageString($label3,2,110,2,formatDate2Local($result['encounter_date'],$date_format),$black);
-    ImageString($label3,4,10,25,$result['name_last'].',',$black);
-    ImageString($label3,4,10,40,$result['name_first'],$black);
-    ImageString($label3,2,10,55,formatDate2Local($result['date_birth'],$date_format),$black);
-    //for($a=0,$l=75;$a<sizeof($addr);$a++,$l+=15) 
-	//ImageString($label3,2,10,$l,$addr[$a],$black);
-     ImageString($label3,2,10,75,$result['addr_str'].' '.$result['addr_str_nr'],$black);
-     ImageString($label3,2,10,90,$result['addr_zip'].' '.$result['addr_city_town'],$black);
+	if($ttf_ok){
+    	ImageTTFText($label3,12,0,10,11,$black,$arial,$full_en);
+    	ImageTTFText($label3,9,0,110,11,$black,$arial,formatDate2Local($result['encounter_date'],$date_format));
+    	ImageTTFText($label3,12,0,10,34,$black,$arial,$result['name_last'].',');
+    	ImageTTFText($label3,12,0,10,49,$black,$arial,$result['name_first']);
+    	ImageTTFText($label3,10,0,10,64,$black,$arial,formatDate2Local($result['date_birth'],$date_format));
+    	ImageTTFText($label3,10,0,10,84,$black,$arial,$addr1);
+    	ImageTTFText($label3,10,0,10,99,$black,$arial,$addr2);
+	}else{
+	
+    	ImageString($label3,4,10,2,$full_en,$black);
+    	ImageString($label3,2,110,2,formatDate2Local($result['encounter_date'],$date_format),$black);
+    	ImageString($label3,4,10,25,$result['name_last'].',',$black);
+    	ImageString($label3,4,10,40,$result['name_first'],$black);
+    	ImageString($label3,2,10,55,formatDate2Local($result['date_birth'],$date_format),$black);
+     	ImageString($label3,2,10,75,$addr1,$black);
+     	ImageString($label3,2,10,90,$addr2,$black);
+	} 
+	
     //-------------- place 6 labels
     for($i=0,$wi=359;$i<4;$i++,$wi+=179)
     {
         ImageCopy($im,$label,1,$wi,0,0,282,178);
         ImageCopy($im,$label,285,$wi,0,0,282,178);
-        //ImageLine($im,0,$wi,569,$wi,$blue);
+        if(defined('DRAW_BORDER')&&DRAW_BORDER) ImageLine($im,0,$wi,569,$wi,$blue);
     }
 
     // ---  place the smaller labels
     for($i=0,$j=1;$i<1080;$i+=135,$j++)
     {
-        if($j>4) ImageCopy($im,$label2,570,$i+1,0,0,173,133);
-	        else ImageCopy($im,$label3,570,$i+1,0,0,173,133);
-        //ImageLine($im,569,$i,$w-1,$i,$blue);
+        if($j>4) ImageCopy($im,$label2,570,$i+5,0,0,173,133);
+	        else ImageCopy($im,$label3,570,$i+5,0,0,173,133);
+        if(defined('DRAW_BORDER')&&DRAW_BORDER) ImageLine($im,569,$i,$w-1,$i,$blue);
     }
 	
-	// *******************************************************************
-    // * draw blue border lines - uncomment the following lines of code to create
-	// * border lines around the labels
-	// *******************************************************************
-	
-   /*
-   // START 
-    ImageLine($im,0,0,$w-1,0,$blue);
-    ImageLine($im,0,0,0,$h-1,$blue);
-    ImageLine($im,0,$h-1,$w-1,$h-1,$blue);
-    ImageLine($im,$w-1,0,$w-1,$h-1,$blue);
-    ImageLine($im,569,0,569,$h-1,$blue);
-    ImageLine($im,284,359,284,$h-1,$blue);
-	// END
-   */
+	if(defined('DRAW_BORDER')&&DRAW_BORDER){
+    	ImageLine($im,0,0,$w-1,0,$blue);
+    	ImageLine($im,0,0,0,$h-1,$blue);
+    	ImageLine($im,0,$h-1,$w-1,$h-1,$blue);
+    	ImageLine($im,$w-1,0,$w-1,$h-1,$blue);
+    	ImageLine($im,569,0,569,$h-1,$blue);
+    	ImageLine($im,284,359,284,$h-1,$blue);
+	}
 	
     Imagepng ($im);
 	

@@ -108,7 +108,7 @@ $LDCurrentFindings='Descobertas atuais';
 $LDFinalFindings='Descobertas finais';
 
 $LDFillLabOnly='Somente para uso do lab';
-$LDLEN='LEN';  /* Lab entry number */
+$LDLEN='NRL';  /* Lab entry number - Numero do Registro do Lab*/
 /*2003-07-11 EL*/
 $LDAdministration='Gerenciamento';
 $LDTestParameters='Parêmetro de teste';

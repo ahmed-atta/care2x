@@ -132,12 +132,36 @@ $LDForeWord='Si dispone ora del massimo livello di accesso.<br>Le seguenti funzi
 
 $LDSetDateFormat='Specificare il formato della data';
 $LDSelectDateFormat='Scegliere il formato richiesto:';
-/* Do not translate $LDDateFormats */
-$LDDateFormats=array('dd.MM.yyyy','yyyy-MM-dd','MM/dd/yyyy');
+# Date formats
+# Add additional date formats as array element.
+# Do not forget to add the correspondign sample text in the $LDDateFormatsTxt array.
+# Do not translate $LDDateFormats 
+$LDDateFormats=array('dd.MM.yyyy','yyyy-MM-dd','MM/dd/yyyy','dd/MM/yyyy');
 
 $LDDateFormatsTxt= array('Per esempio: 01.10.2002 (01 Ottobre 2002)',
                                          'Per esempio: 2002-10-01 (2002 Ottobre 01)',
-										 'Per esempio: 10/01/2002 (Ottobre 01, 2002)');
+										 'Per esempio: 10/01/2002 (Ottobre 01, 2002)',
+										 'Per esempio: 01/10/2002 (01 Ottobre 2002)');
+/**
+* The following lines must be modified according to the examples:
+* english:
+* day = d , month = m, year = y
+* result => dd.mm.yyyy
+*
+* german:
+* day = t, month = m, year = j
+* result => tt.mm.jjjj
+*
+* indonesian:
+* day = h, month = b, year = t
+* result => hh.bb.tttt
+* 
+* BEGIN */
+$LD_ddpMMpyyyy='gg.mm.aaaa';
+$LD_yyyyhMMhdd='aaaa-mm-gg';
+$LD_MMsddsyyyy='mm/gg/aaaa';
+$LD_ddsMMsyyyy='gg/mm/aaaa';
+/* END */
 
 $LDNewDateFormatSaved='Il nuovo formato di data è attivo.';
 									
@@ -160,25 +184,6 @@ $LDPlsEnterUpdate='Modificare queste informazioni valutarie, poi premere "Aggior
 $LDEditInfo='Modifica';
 $LDCurrencyAdmin='Gestione della valuta';
 
-/**
-* The following lines must be modified according to the examples:
-* english:
-* day = d , month = m, year = y
-* result => dd.mm.yyyy
-*
-* german:
-* day = t, month = m, year = j
-* result => tt.mm.jjjj
-*
-* indonesian:
-* day = h, month = b, year = t
-* result => hh.bb.tttt
-* 
-* BEGIN */
-$LD_ddpMMpyyyy='gg.mm.aaaa';
-$LD_yyyyhMMhdd='aaaa-mm-gg';
-$LD_MMsddsyyyy='mm/gg/aaaa';
-/* END */
 /* 2002-10-22 EL */
 $LDUserInfoSaved='The user access was successfully created';
 $LDUserInfoNoSave='The access creation failed. Please check the entered information';

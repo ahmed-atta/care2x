@@ -1,8 +1,8 @@
 <?php 
 
-$dbname='care2002'; 
+$dbname='maho'; 
 
-$dbusername='httpd'; 
+$dbusername='httpd';
 
 $dbhost='localhost'; 
 

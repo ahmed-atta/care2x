@@ -1,14 +1,14 @@
 <?php
 $LDClose='Fechar';
 $LDCancel='Cancelar';
-$LDResetEntry='Apagar entradas';
+$LDResetEntry='Excluir registros';
 $LDSave='Salvar';
 
-$LDSearchWordPrompt='Entre com a palavra-chave, por example: um Sobrenome, um nome, ou data de nascimento, etc.';
+$LDSearchWordPrompt='Entre com a palavra-chave, por examplo: um Sobrenome, um nome, ou data de nascimento, etc.';
 $LDEnterData='Clique para entrar com os dados';
 $LDClk2See='Clique para exibir dados';
 $LDFoundPatient='A procura encontrou <b>~nr~</b> pacientes';
-$LDWildCards='O que são curingas e como usá-los';
+$LDWildCards='O que são curingas e como usá-los?';
 $LDNewSearch='Nova procura';
 
 $LDCaseNr='Nr do paciente.';
@@ -46,38 +46,38 @@ $LDFullScreen='Tela cheia';
 $LDEditXrayDiag='Editar relatório de diagnostico';
 $LDReadDiag='Ler diagnostico';
 $LDWriteDiag='Escrever diagnostico';
-$LDPreviewReport='Preview/Diagnosis';
+$LDPreviewReport='Visualizar/Diagnósticos';
 /* 2002-09-08 EL*/
-$LDTestRequestRadio='Requisição de teste';
-$LDTestRequestRadioTxt='Requisição para teste radiológico';
+$LDTestRequestRadio='Requisição de exame';
+$LDTestRequestRadioTxt='Requisição para exame radiológico';
 /* 2002-09-10 EL */
 $LDTestReception='Requisição pendente';
-$LDTestReceptionTxt='Receber & processar requisições de testes, escrever resulados/diagnósticos';
+$LDTestReceptionTxt='Receber e processar requisições de exames, escrever resulados/diagnósticos';
 # 2003-08-08 EL
-$LDDicomImages='DICOM images';
-$LDDicomImagesTxt='View diagnostic images in DICOM format';
-$LDUploadDate='Upload date';
-$LDViewImage='View here';
-$LDViewInWindow='View in window';
-$LDNrImages='Nr.of slices';
-$LDDicomViewer='Dicom viewer';
-$LDViewInFrame='View in this frame';
-$LDUploadDicom='Upload DICOM';
-$LDUploadDicomTxt='Upload diagnostic images in DICOM format';
+$LDDicomImages='Imagens DICOM';
+$LDDicomImagesTxt='Visualizar imagem do diagnóstico em formato DICOM';
+$LDUploadDate='Atualizar data';
+$LDViewImage='Exibir aqui';
+$LDViewInWindow='Exibir em janela';
+$LDNrImages='Nr.de slides';
+$LDDicomViewer='Visualizador Dicom';
+$LDViewInFrame='Exibir neste quadro';
+$LDUploadDicom='Atualizar DICOM';
+$LDUploadDicomTxt='Atualizar imagem do diagnóstico em formato DICOM';
 $LDPID='PID';
-$LDImgNumber='Image number';
-$LDSingleImage='single image';
-$LDImageGroupNr='Image group number';
-$LDNewFileName='New filename';
-$LDUploadNew='I need to upload';
-$LDNewImageFiles='new image files';
+$LDImgNumber='Número da Imagem';
+$LDSingleImage='Única imagem';
+$LDImageGroupNr='Número do grupo da imagem';
+$LDNewFileName='Novo nome de arquivo';
+$LDUploadNew='Eu preciso atualizar';
+$LDNewImageFiles='novo arquivo gráfico';
 # 2003-08-09 EL
-$LDSelectViewer='Select viewer';
-$LDSelectViewerTxt='Select DICOM viewer program';
-$LDCurrentViewer='Current viewer';
-$LDNagoyaTechInst='Nagoya Tech. Institute';
+$LDSelectViewer='Selecione um visualizador';
+$LDSelectViewerTxt='Selecione um programa de visualização DICOM';
+$LDCurrentViewer='Visualizador atual';
+$LDNagoyaTechInst='Nagoya Tech. Instituto';
 $LDRAIMJAVA='RAIMJAVA©';
-$LDNoImageSaved='No image was saved!';
-$LDImageNotes='Image notes';
+$LDNoImageSaved='Nenhuma imagem foi salva!';
+$LDImageNotes='Anotações da imagem';
 
 ?>

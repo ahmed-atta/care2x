@@ -4,11 +4,9 @@ $LDMainTitle='Sistema Integrado de Informação Hospitalar Care 2002';
 /*$LDMainTitle='Marie hospital um Sistema Intergrado de InformaÃ§Ã£o Hospitalar
 virtual';
 */
-$LDInviteAskMe='Entre com sua pergunta, por exemplo: "Qual é o telefone do
-M9d?"';
+$LDInviteAskMe='Entre com sua pergunta, por exemplo: "Qual é o telefone do M9d?"';
 $LDTipsLink='Dicas:';
-$LDTipsAskMe='Tente sinônimos, por exemplo digite "estação" em lugar de
-"repartição".';
+$LDTipsAskMe='Tente sinônimos, por exemplo digite "estação" em lugar de "repartição".';
 $LDTipsImgAlt='Clique aqui para as dicas de como conseguir os melhores
 resultados.';
 $LDSubmitBut='Envie a pergunta';

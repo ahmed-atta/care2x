@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
 * GNU General Public License
-* Copyright 2002 Elpidio Latorilla
+* Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -31,49 +31,39 @@ $title=$HTTP_SESSION_VARS['sess_title'];
 <head>
 <?php echo setCharSet(); ?>
 <title></title>
-
 <script language="javascript">
-function chkForm(d)
-{
-	if(d.newstitle.value=="")
-	{
-		alert("<?php echo $LDAlertTitle ?>");
-		return false;
-	}
-	else if(d.newsbody.value=="")
-	{
-		alert("<?php echo $LDAlertNews ?>");
-		return false;
-	}
-	else if(d.author.value=="")
-	{
-		alert("<?php echo $LDAlertAuthor ?>");
-		return false;
-	}
-	else if(d.publishdate.value=="")
-	{
-		alert("<?php echo $LDAlertDate ?>");
-		return false;
-	}
-	else return true;
-		
-}
-
+<!-- 
 function showpic(d)
 {
 	if(d.value) document.images.headpic.src=d.value;
 }
 
-<?php require($root_path.'include/inc_checkdate_lang.php'); ?>
+<?php 
+# Load the javascript editor form checker 
+require_once($root_path.'include/inc_js_editor_chkform.php');
 
-</script>
+# Load the dates js values
+require($root_path.'include/inc_checkdate_lang.php'); 
+?>
+<!--  Root path for the html WYSIWYG editor -->
+var _editor_url="<?php echo $root_path.'js/html_editor/'; ?>";
+// -->
+ </script>
+<!-- load html editor scripts -->
+<script language="javascript"  type="text/javascript" src="<?php echo $root_path.'js/html_editor/'; ?>htmlarea.js"></script>
+<script language="javascript"  type="text/javascript" src="<?php echo $root_path.'js/html_editor/'; ?>lang/en.js"></script>
+<script language="javascript"  type="text/javascript" src="<?php echo $root_path.'js/html_editor/'; ?>dialog.js"></script>
+<style type="text/css">@import url("<?php echo $root_path.'js/html_editor/'; ?>htmlarea.css")</style>
+
 
 <script language="javascript" src="<?php echo $root_path ?>js/checkdate.js" type="text/javascript"></script>
 <script language="javascript" src="<?php echo $root_path ?>js/setdatetime.js"></script>
 <script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
 </head>
-<body onLoad="document.selectform.newstitle.focus()">
+<!-- <body onLoad="HTMLArea.replace('newsbody');document.selectform.newstitle.focus()"> -->
+<body onLoad="HTMLArea.replace('newsbody')">
+
 <form ENCTYPE="multipart/form-data" name="selectform" method="post" action="cafenews-edit-save.php" onSubmit="return chkForm(this)">
 <FONT  SIZE=6 COLOR="#cc6600" FACE="verdana,Arial">
 <img <?php echo createComIcon($root_path,'basket.gif','0') ?>> <b><?php echo $title ?></b></FONT>
@@ -84,14 +74,18 @@ function showpic(d)
     <td valign=top><img <?php echo createLDImgSrc($root_path,'x-blank.gif','0') ?> id="headpic"><br>
   </td>
 <?php endif ?>
-    <td bgcolor="ccffff" colspan=2><FONT FACE="verdana,Arial" color="#0000cc" size=3><b><?php echo $LDTitleTag ?>:</b><br>
+    <td bgcolor="#efefef" colspan=2><FONT FACE="verdana,Arial" color="#0000cc" size=3><b><?php echo $LDTitleTag ?>:</b><br>
 	<font size=1><?php echo $LDTitleMaxNote ?><br>
 	<input type="text" name="newstitle" size=50 maxlength=50><br>
 	<FONT FACE="verdana,Arial" color="#0000cc" size=3><b><?php echo $LDHeader ?>:</b><br>
 	<font size=1><?php echo $LDHeaderMaxNote ?><br>
-	<input type="text" name="preface" size=50 maxlength=50><br>
-	<FONT FACE="verdana,Arial" color="#0000cc" size=3><b><?php echo $LDNews ?>:</b><br>
-	<textarea name="newsbody" cols=50 rows=14 wrap="physical"></textarea><br>
+	
+	<textarea name="preface" cols=50 rows=5 wrap="physical" id="preface"></textarea><br>
+	
+	<FONT FACE="verdana,Arial" color="#0000cc" size=3><b><?php echo $LDNews ?>:</b></font><br>
+	
+	<textarea name="newsbody" cols=50 rows=14 wrap="physical" id="newsbody"></textarea><br>
+	
   	<FONT FACE="verdana,Arial" color="#0000cc" size=2><b><?php echo $LDPicFile ?>:</b><br>
 	<input type="file" name="pic" onChange="showpic(this)" ><br>
 <input type="button" value="<?php echo $LDPreviewPic ?>" onClick="showpic(document.selectform.pic)"><br>

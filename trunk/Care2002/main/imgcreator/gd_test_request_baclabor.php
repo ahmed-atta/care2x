@@ -5,7 +5,7 @@ if (eregi('inc_test_request_gd_baclabor.php',$PHP_SELF))
 /*------end------*/
 
 /**
-* CARE 2002 Integrated Hospital Information System
+* CARE 2X Integrated Hospital Information System
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com

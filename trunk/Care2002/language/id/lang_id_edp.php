@@ -137,11 +137,35 @@ $LDForeWord='Sekarang anda mendapat hak akses tertinggi.<br>Beberapa fungsi ters
 $LDSetDateFormat='Set Format tanggal';
 $LDSelectDateFormat='Silahkan pilih format data yang diprelukan:';
 
-$LDDateFormats=array('dd.MM.yyyy','yyyy-MM-dd','MM/dd/yyyy');
+# Date formats
+# Add additional date formats as array element.
+# Do not forget to add the correspondign sample text in the $LDDateFormatsTxt array.
+# Do not translate $LDDateFormats 
+$LDDateFormats=array('dd.MM.yyyy','yyyy-MM-dd','MM/dd/yyyy','dd/MM/yyyy');
 
 $LDDateFormatsTxt= array('Sebagai contoh: 01.10.2002 (01 Oktober 2002)',
                                      'Sebagai contoh: 2002-10-01 (2002 Oktober 01)',
-                                     'Sebagai contoh: 10/01/2002 (Oktober 01, 2002)');
+                                     'Sebagai contoh: 10/01/2002 (Oktober 01, 2002)',
+                                     'Sebagai contoh: 01/10/2002 (01 Oktober, 2002)');
+/**
+* The following lines must be modified according to the examples:
+* english:
+* day = d , month = m, year = y
+* result => dd.mm.yyyy
+*
+* german:
+* day = t, month = m, year = j
+* result => tt.mm.jjjj
+*
+* indonesian:
+* day = h, month = b, year = t
+* result => hh.bb.tttt
+* 
+* BEGIN */
+$LD_ddpMMpyyyy='hh.bb.tttt';
+$LD_yyyyhMMhdd='tttt-bb-hh';
+$LD_MMsddsyyyy='bb/hh/ttttt';
+$LD_ddsMMsyyyy='hh/bb/ttttt';
 
 $LDNewDateFormatSaved='Format tanggal yang baru sekarang berefek';
 $LDSetCurrency='Set mata uang';
@@ -167,9 +191,6 @@ $LDCurrencyAdmin='Administrasi mata uang';
 
 $LDPreview='Peninjauan';
 
-$LD_ddpMMpyyyy='hh.bb.tttt';
-$LD_yyyyhMMhdd='tttt-bb-hh';
-$LD_MMsddsyyyy='bb/hh/ttttt';
 /* 2002-10-22 EL */
 $LDUserInfoSaved='Akses Pengguna telah dibuat dengan sukses';
 $LDUserInfoNoSave='Pembuatan Akses gagal. Silakan cek informasi yang dimasukkan';

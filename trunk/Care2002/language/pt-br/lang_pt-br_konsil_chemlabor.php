@@ -1,19 +1,19 @@
 <?php
-$LDDiagnosticTest='Diagnostic Test Order';
+$LDDiagnosticTest='Requisição para exame de diagnósticos';
 $LDHospitalName='CARE 2002';
-$LDCentralLab='Central Laboratory';
-$LDLabel='Label';
-$LDRoomNr='Room-Nr.';
-$LDSamplingTime='Sampling Time';
-$LDDay='Day';
-$LDMinutes='Minutes';
-$LDHours='Hours';
-$LDBatchNr='Batch Nr.';
+$LDCentralLab='Laboratória Central';
+$LDLabel='Etiqueta';
+$LDRoomNr='Nr do quarto.';
+$LDSamplingTime='Amostra de tempo';
+$LDDay='Dia';
+$LDMinutes='Minutos';
+$LDHours='Horas';
+$LDBatchNr='Nr do lote.';
 $LDCaseNr='Case number';
-$LDHouse='House';
-$LDHematology='Hematology';
-$LDCoagulation='Coagulation';
-$LDUrine='Urine';
+$LDHouse='Cada';
+$LDHematology='Hematologia';
+$LDCoagulation='Coagulação';
+$LDUrine='Urina';
 $LDSerum='Serum';
 $LDGlucose='Glucose';
 $LD9Hour='9.00';
@@ -22,11 +22,11 @@ $LDSober='sober';
 $LDBloodSugar='BLS';
 $LDBLoodSugar1='BLS1';
 $LDBloodPlasma='BLP';
-$LDDoctorSignature='Doctor\'s signature';
-$LDLifeRisk='Risk to life';
-$LDRarity='Rarity';
-$LDSpecTest='special Tests';
-$LDClinicalInfo='clinical info';
+$LDDoctorSignature='Assinatura do médico';
+$LDLifeRisk='Risco de vida';
+$LDRarity='Raridade';
+$LDSpecTest='Examos especiais';
+$LDClinicalInfo='informações clínicas';
 $LDShortMonth=array('',
                                    'Jan',
 								   'Feb',
@@ -43,10 +43,10 @@ $LDShortMonth=array('',
 								   
 $LDShortDay=array('So','Mo','Tu','We','Th','Fr','Sa','So');
 				
-$LDBatchNumber='Batch nr.';
+$LDBatchNumber='Nr do lote.';
 $LDMaterial='Material:';
-$LDEmergencyProgram='The violet shaded fields belong to emergency program';
-$LDPhoneOrder=' = only after acknowledgement by phone';
+$LDEmergencyProgram='Os campos violtes sombreados pertence ao programa de emergência';
+$LDPhoneOrder=' = somente após confirmação após telefone';
 
 /* Note: the following array uses strict medical terminology.
 *  If you are not sure about their translation, please leave the 
@@ -342,7 +342,7 @@ $LD_Elements = array('tx_1'=>'Clinical Chem.',
 								 
 								 '_iron_'=>'Iron',
 								 '_hba_1c_'=>'HBA 1c',
-								 '_cathecholamines_in_p_'=>'Katecholam.i.P.',
+								 '_cathecholamines_in_p_'=>'Catecholam.i.P.',
 								 'tx_19'=>'Punctate',
 								 '_picoma_virus_antibody_'=>'Picoma-Virus-AB',
 								 '_pregnancy_hiv1_hiv2_antibody_'=>'HIV1/HIV2-AB',
@@ -357,7 +357,7 @@ $LD_Elements = array('tx_1'=>'Clinical Chem.',
 								 '_intrinsic_antibody_'=>'Intrinsic-AB',
 								 
 								 '_emx_osmolal_'=>'Osmolal.',
-								 '_capillary_blood_sample_'=>'Capill.Blutentn.',
+								 '_capillary_blood_sample_'=>'Capill.Bloodsamp.',
 								 '_oestradiol_'=>'Oestradiol',
 								 '_protein_in_punctat_'=>'Protein i.Punct.',
 								 '_reoteln_antibody_'=>'Röteln-AB',
@@ -365,7 +365,7 @@ $LD_Elements = array('tx_1'=>'Clinical Chem.',
 								 '_stone_analysis_'=>'Stone analysis',
 								 
 								 '_emx_lactat_in_p_'=>'Lactat i.P.',
-								 '_capillary_blood_sample_2_'=>'Capill.Blutentn.',
+								 '_capillary_blood_sample_2_'=>'Capill.Bloodsamp.',
 								 '_oestriol_'=>'Oestriol',
 								 '_ldh_in_punctat_'=>'LDH i.Punctat',
 								 '_roeteln_immune_status_'=>'Röt-Immunstat.',
@@ -461,11 +461,11 @@ $LD_Elements = array('tx_1'=>'Clinical Chem.',
 								 'tx_29'=>'clinical info',
 								  );
 /* 2002-09-03 EL */							  
-$LDSearchPatient='Search patient';
-$LDPlsSelectPatientFirst='Please search for the patient first.';
+$LDSearchPatient='Procurar paciente';
+$LDPlsSelectPatientFirst='Favor procurar pelo paciente primeiro.';
 /* 2002-09-11 EL */
-$LDPendingTestRequest='Pending Test Request';
+$LDPendingTestRequest='Requisição de exame pendente';
 /* 2002-10-14 EL */
-$LDDone='It\'s done! Move the form to the archive';
+$LDDone='Está feito! Mover o formulário para o arquivo';
 
 ?>

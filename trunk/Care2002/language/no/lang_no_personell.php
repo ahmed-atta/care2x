@@ -1,6 +1,6 @@
 <?php
 LDPlsFindPersonFirst='Please find the person first';
-$LDSearchPersonell='Search a personell';
+$LDSearchPersonell='Search a personnel';
 $LDPersonRegister='Person Registration';
 $LDShortID='Short ID';
 $LDJobNr='Job Nr';
@@ -24,9 +24,9 @@ $LDPersonCurrentlyEmployed='Person is currently employed';
 $LDRecordedBy='Recorded by';
 $LDNrDependent='Nr. of Dependents';
 $LDPersonellData='Personell Data';
-$LDEnterNewEmployment='Enter new personell\'s data';
+$LDEnterNewEmployment='Enter new personnel\'s data';
 $LDRegNewPerson='Register new person\'s basic data';
-$LDFindPersonell='Find a personell';
+$LDFindPersonell='Find a personnel';
 $LDPersonalID='Personal ID';
 $LDAssignDoctorDept='Assign as DOCTOR to a department';
 $LDAssignNurseDept='Assign as NURSE to a department';

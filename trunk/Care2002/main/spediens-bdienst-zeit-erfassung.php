@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.07 - 2003-08-29
+* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
 * GNU General Public License
-* Copyright 2002 Elpidio Latorilla
+* Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -383,13 +383,6 @@ function isgdatum(val,idx)
 	xdoc.elements[idx].value=xval3;
 
 }
-function gethelp(x,s,x1,x2,x3)
-{
-	if (!x) x="";
-	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
-	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
-	window.helpwin.moveTo(0,0);
-}
 
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
 
@@ -397,8 +390,12 @@ function gethelp(x,s,x1,x2,x3)
 </script>
 
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-
 <script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
+
+<?php
+require($root_path.'include/inc_js_gethelp.php');
+?>
 
 </HEAD>
 
@@ -450,6 +447,10 @@ if($content[$i]['date'])
 echo formatDate2Local($content[$i]['date'],$date_format).'<input type="hidden" name="date'.$i.'" value="'.$content[$i]['date'].'">';
  else echo'
 	<input type=text name="date'.$i.'" size=9 maxlength=10 value="" onBlur="IsValidDate(this,\''.$date_format.'\')" onKeyUp="setDate(this,\''.$date_format.'\',\''. $lang.'\')">';
+?>
+  	<a href="javascript:show_calendar('reportform.date<?php echo $i ?>','<?php echo $date_format ?>')">
+	<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
+<?php
 	
 echo '</FONT>
 </td>

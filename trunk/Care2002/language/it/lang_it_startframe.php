@@ -1,13 +1,13 @@
 <?php
-$LDMainTitle='Maryhospital.com, un ospedale virtuale con amministrazione integrata su Internet';
+$LDMainTitle='Care2X - LAVIM: un esempio di HIS';
 
 $LDInviteAskMe='Inserire la domanda, ad esempio: "Numero telefonico di M9d?"';
 $LDTipsLink='Suggerimenti:';
-$LDTipsAskMe='Provare con sinonimi, ad esempio "postazione guardia" invece di "guardia medica".';
+$LDTipsAskMe='Provare con sinonimi, ad esempio "postazione corsia" invece di "corsia medica".';
 $LDTipsImgAlt='Selezionare qui per suggerimenti per ottenere risultati migliori.';
 $LDSubmitBut='Invio domanda';
 
-$LDQuickInfo='Informazioni veloci';
+$LDQuickInfo='Informazioni rapide';
 $LDPhonePolice='Polizia';
 $LDPhoneFire='Vigili del fuoco';
 $LDAmbulance='Ambulanza';
@@ -16,7 +16,7 @@ $LDFax='Fax';
 $LDAddress='Indirizzo';
 $LDEmail='Email';
 
-$LDOpenTimes ='Ore lavorate';
+$LDOpenTimes ='Orario di lavoro';
 $LDManagement ='Direzione';
 $LDDept ='Dipartimenti';
 $LDCafenews ='News dalla mensa';
@@ -28,7 +28,7 @@ $LDPhyTherapy ='Terapia fisica';
 $LDHealthTips ='Suggerimenti medici';
 $LDCalendar ='Calendario';
 $LDHelp='Aiuto';
-$LDMore='more to article';
+$LDMore='continua...';
 
 $LDEditTitle='Sommario';
 $LDNewsDummy=array(1=>'primo',2=>'secondo',3=>'terzo',4=>'quarto');
@@ -58,8 +58,8 @@ $LDEditNews='Edit & submit news via online editor';
 /* 2002-10-17 EL */
 $LDCredits='Ringraziamenti';
 /* 2003-05-24 EL */
-$LDPublicItems='Public items';
+$LDPublicItems='Informazioni pubbliche';
 # 2003-08-28 EL
-$LDHeadline='Titoli';
+$LDHeadline='Notizie';
 
 ?>

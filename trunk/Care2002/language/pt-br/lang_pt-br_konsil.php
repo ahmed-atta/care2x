@@ -12,7 +12,7 @@ $LDSendLater='Enviar depois';
 $LDReset='Restaurar';
 $LDClose='Fechar';
 $LDSpeedTest='Teste urgente.';
-$LDDiagnosticTest='Pedir teste de diagóstico';
+$LDDiagnosticTest='Pedir exame de diagóstico';
 $LDRelayResult='Remeter diagóstico por telefone/sinalizador';
 $LDSpeedCut='Express cut.';
 $LDDate='Data';
@@ -30,9 +30,9 @@ $LDClinicalQuestions='Clinical Diagnoses, Reports, Queries:';
 $LDExtraInfo='Supporting information';
 $LDExtraInfoSample='(e.g. important Lab results, after Radiation in excision area, after Chemotherapy)';
 $LDForGynTests='For gynecological tests:';
-$LDLastPeriod='Last period:';
+$LDLastPeriod='Último período:';
 $LDPeriodType='Period type:';
-$LDGravidity='Gravida:';
+$LDGravidity='Gravidade:';
 $LDMenopauseSince='Menopause since:';
 $LDHormoneTherapy='Hormonal therapy:';
 $LDContraceptive='Contraceptive:';
@@ -40,25 +40,25 @@ $LDIUD='IUD:';
 $LDRepeatedTest='For repeated test:';
 $LDRepeatedTestPls='please enter the early Journal number with date';
 $LDHysterectomy='Hysterectomy:';
-$LDClinicalInfo='Clinical information';
+$LDClinicalInfo='Informação clínica';
 $LDReqTest='Requested diagnostic test';
 $LDNotesTempReport='Notes / Initial findings:';
 $LDRequestingDoc='Requesting doctor';
 $LDReportingDoc='Reporting doctor';
-$LDXrayNumber='X-ray Nr.:';
+$LDXrayNumber='Nr do raio-X:';
 $LD_r_cm2='r cm² :';
 $LDXrayTechnician='X-ray tech.';
 $LDYes='Yes';
 $LDNo='No';
 $LDXrayTest='X-ray diagnostics';
-$LDMammograph='Mammography';
-$LDSonograph='Sonography';
-$LDCT='Computer Tomography';
-$LDNuclear='Nuclear medicine';
+$LDMammograph='Mamografia';
+$LDSonograph='Sonografia';
+$LDCT='Tomografia computadorizada';
+$LDNuclear='Medicina nuclear';
 $LDMRT='Magnetic Resonance Tomography';
 
 $LDPatMobile='Patient mobile?';
-$LDAllergyKnown='Allergy known?';
+$LDAllergyKnown='Alguma alergia conhecida?';
 $LDHyperthyreosisKnown='Hyperthyreosis known?';
 $LDPregnantPossible='Pregnancy possible?';
 
@@ -230,18 +230,18 @@ $LDPlsSelectDeptShort='pls. select department';
 $LDPendingTestRequest='Pending Test Request';
 /* 2002-09-13 EL */
 $LDPrevRequest='Previous request';
-$LDNextRequest='Next request';
+$LDNextRequest='Próxima requisição';
 $LDEnterResult='Write findings/results for this test request';
-$LDPrintOut='Print this form';
-$LDSaveEntry='Save entries';
+$LDPrintOut='Imprimir esse formulário';
+$LDSaveEntry='Salvar registros';
 /* 2002-09-14 EL */
-$LDNoPendingRequest='There are no pending requests.';
+$LDNoPendingRequest='Não existe requisições pendentes.';
 /* 2002-09-15 EL */
 $LDTestFindings='Test findings';
 $LDCaseNr='Case number';
-$LDFamilyName='Family name';
-$LDName='First name';
-$LDBDay='Birthdate';
+$LDFamilyName='Sobrenome';
+$LDName='Primeiro nome';
+$LDBDay='Data de nascimento';
 /* 2002-09-15 EL */
 $LDMACROFindings='Macro findings';
 $LDMicroFindings='Micro findings';
@@ -254,9 +254,9 @@ $LDPlsEnterLEN='Please enter the Lab Entry Number (LEN)';
 $LDHospitalName='Care';
 
 /* 2002-09-29 EL */
-$LDHematology='Hematology';
-$LDCoagulation='Coagulation';
-$LDUrine='Urine';
+$LDHematology='Hematologia';
+$LDCoagulation='Coagulação';
+$LDUrine='Urina';
 $LDSerum='Serum';
 $LDNuechtern='sob';
 $LDGlucose='Glucose';
@@ -267,6 +267,6 @@ $LD900='9.00';
 $LD1500='15.00';
 
 /* 2002-10-14 EL */
-$LDDone='It\'s done! Move the form to the archive';
+$LDDone='Está feiot! Mover para o formulário';
 
 ?>

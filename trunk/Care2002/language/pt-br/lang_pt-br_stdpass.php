@@ -3,7 +3,7 @@ $LDUserPrompt='Usuário';
 $LDPwPrompt='Senha';
 $LDSubmitBut='Continua...';
 $LDPwNeeded='Senha requida';
-$LDIntroTo='Introduction to editing news articles in';
+$LDIntroTo='Introdução para edição de novos arquivos em';
 $LDWhatTo='O que e como eu edito notícias em ';
 
 $LDWrongEntry='Entrada errada!';
@@ -27,11 +27,11 @@ $LDAdmHow2Edit='Como editar dos dados de um paciente';
 $LDAdmHow2Search='Como procurar um certo dado de um paciente';
 $LDAdmHow2Archive='Como reprocurar em arquivo';
 
-$LDMedocs='SDM';
-$LDMedocsHow2Enter='Como começar um novo documentode SDM';
-$LDMedocsHow2Edit='Como editar um documento SDM';
-$LDMedocsHow2Search='Como procurar um certo dado de um documento SDM';
-$LDMedocsHow2Archive='Como pesquiar em arquivos SDM';
+$LDMedocs='Prontuário';
+$LDMedocsHow2Enter='Como começar um novo prontuário';
+$LDMedocsHow2Edit='Como editar um prontuário';
+$LDMedocsHow2Search='Como procurar um certo dado de um prontuário';
+$LDMedocsHow2Archive='Como pesquiar em arquivos de prontuários';
 
 $LDIntro2='Introdução para';
 $LDWhat2Do='Como fazer o que em';
@@ -39,7 +39,7 @@ $LDHowManage='Como gerenciar o diretório';
 $LDHowEnter='Como entrar com um novo telefone';
 
 $LDPhoneDir='Lista telefônica';
-$LDMakeDutyPlan='Create dutyplan';
+$LDMakeDutyPlan='Criar plano de plantão';
 $LDDocsList='Lista de doutores';
 $LDNursingManage='Gerenciamnto de ala';
 
@@ -91,7 +91,7 @@ $LDOK='OK';
 $LDYes='Sim';
 $LDNotReally='Nao, realmente não.';
 $LDDOCScheduler='Agendador de plantão médico';
-$LDORNOCScheduler='ORNOC Scheduler';
+$LDORNOCScheduler='ORNOC gerenciador';
 $LDFotolab='Fotolab';
 /* 2002-09-08 EL */
 $LDTestRequest='Diagnóstico para a requisição de teste';
@@ -111,22 +111,22 @@ $LDPendingRequest='Requisicão pendente';
 /* 2002-10-06 EL*/
 $LDLoggedOut='Logged out';
 /* 2003-03-18 EL */
-$LDNursesList='Nurses\' List';
-$LDAppointments='Appointments';
+$LDNursesList='Lista de enfermeiras';
+$LDAppointments='Agendamentos';
 /* 2003-04-27 */
 $LDInsuranceCoManager='Insurance Company Manager';
 $LDAddressMngr='Address Manager';
 /* 2003-04-30 EL*/
 $LDBilling='eComBill';
 /* 2003-05-18 EL */
-$LDPlsContactEDP='Please contact the EDP department.';
-$LDPlsTryAgain='Please try again';
+$LDPlsContactEDP='Favor contatar o CPD.';
+$LDPlsTryAgain='Favor tente novamente';
 /* 2003-07-11 EL */
 $LDAdministration='Gerenciamento';
 $LDOutpatientClinic='Ambulatório';
-$LDUploadDicom='Upload DICOM images';
-$LDViewDicom='View DICOM images';
+$LDUploadDicom='Atualizar imagens DICOM';
+$LDViewDicom='Visualizar imagens DICOM';
 # 2003-08-22 EL
-$LDYellowList='Yellow List';
-$LDRedList='Red List';
+$LDYellowList='Lista amarela';
+$LDRedList='Lista vermelha';
 ?>

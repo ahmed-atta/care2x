@@ -1,11 +1,11 @@
 <?php
 //error_reporting(E_ALL);
-$LDInitFindings='Initial findings';
-$LDCurrentFindings='Current findings';
-$LDFinalFindings='Final find';
+$LDInitFindings='Pesquisa inicial';
+$LDCurrentFindings='Pesquisa atual';
+$LDFinalFindings='Pesquisa final';
 
 $LDFillLabOnly='Somente de uso do Lab';
-$LDLEN='LEN';  /* LEN =  Lab entry number */
+$LDLEN='NRL - Número de registro do laboratório';  /* LEN =  Lab entry number */
 
 $LDDate='Data';
 $LDEye='Eye';
@@ -15,10 +15,10 @@ $LDBac_3='Bact.3';
 $LDBac_I='Patho.I';
 $LDBac_II='Patho.II';
 $LDBac_III='Patho.III';
-$LDFungi='Fungi';
-$LDResistanceTestAnaerob='Resistance test Anaerobe';				
-$LDResistanceTestAerob='Resistance test Aerobe';
-$LDTestFindings='Test results / Findings';
+$LDFungi='Fungos';
+$LDResistanceTestAnaerob='Exame de resistência Anaerobe';				
+$LDResistanceTestAerob='Exame de resistência Aerobe';
+$LDTestFindings='Resultado do exame / Findings';
 $LDMarkStreptocResistance='mark by streptococcus resistance';
 $LDBlockerNeg='Blocker negative';
 $LDBlockerPos='Blocker positive';

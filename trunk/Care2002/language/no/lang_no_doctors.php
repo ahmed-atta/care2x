@@ -172,7 +172,7 @@ $LDChgDept='Endre avdeling: ';
 
 $LDChange='Endre';
 
-$LDCreatePersonList='Lag personell liste';
+$LDCreatePersonList='Lag personnel liste';
 
 $LDNoPersonList='Listen over personale er ikke lagd. Lag listen først. Klikk på følgende knapp.';
 
@@ -202,7 +202,7 @@ $LDPlsClickButton='Click on the following button.';
 $LDFamilyName='Family name';
 $LDGivenName='Given name';
 $LDDateOfBirth='Date of birth';
-$LDEntryPrompt='Please enter a search keyword:<br>(e.g. family name, given name, personell number, etc.)<br>';
+$LDEntryPrompt='Please enter a search keyword:<br>(e.g. family name, given name, personnel number, etc.)<br>';
 $LDPersonellNr='Personell Nr.';
 $LDFunction='Function';
 $LDOptions='Options';

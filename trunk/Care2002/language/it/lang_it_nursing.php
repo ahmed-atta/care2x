@@ -1,21 +1,22 @@
 <?php
 #	IMPORTANT!	All words or characters inclosed with ~ ~ must not be changed.
 $LDNursing='Infermieri';
-$LDStation='Guardia medica';
+$LDStation='Corsia';
 
 $LDQuickView='Quadro di insieme';
 $LDSearchPatient='Ricerca un paziente';
 $LDArchive='Archivio';
-$LDStationMan='Gestione guardie mediche';
+$LDStationMan='Gestione corsie';
 $LDNews='News';
 $LDMemo='Memo';
 $LDNursingForum='Forum personale infermieristico';
 $LDNursingStations='Presidio infermieristico';
 
 $LDQuickViewTxt='Quadro di insieme dei turni di lavoro odierni per il presidio infermieristico.';
-$LDSearchPatientTxt='Ricerca le guardie per un paziente accettato.';
-$LDArchiveTxt='Ricerca nell\'archivio delle guardie mediche.';
-$LDStationManTxt='Assegna una guardia medica, inizializza parametri quali numero di letti, personale, etc.';
+$LDSearchPatientTxt='Ricerca un paziente accettato nelel corsie.';
+$LDArchiveTxt='Ricerca nell\'archivio delle corsie.';
+$LDStationManTxt='Assegna una corsia, inizializza parametri quali numero 
+di letti, personale, etc.';
 $LDNewsTxt='Leggi, crea o modifica una news.';
 $LDMemoTxt='Leggi, crea o modifica un memo.';
 $LDNursingForumTxt='Un\'area di discussione sulla professione di infermiere.';
@@ -82,16 +83,16 @@ $LDMinusYear='Anno precedente';
 $LDGo='VAI';
 $LDLastMonth='Mese scorso';
 $LDNextMonth='Prossimo mese';
-$LDNursingManage='Gestione guardie mediche';
+$LDNursingManage='Gestione corsie';
 $LDShowStationDataTxt='&nbsp;Visualizza, modifica, crea, <br> &nbsp;descrizione, numero di letti<br>	&nbsp;etc.';
 $LDLockBedTxt='&nbsp;oppure libera un letto';
 $LDAccessRightsTxt='&nbsp;Crea, blocca, modifica,<br>&nbsp;attiva, cancella, etc.';
-$LDShowStationData='Profilo guardia medica';
+$LDShowStationData='Profilo corsia';
 $LDLockBed='Assegna un letto';
 $LDAccessRights='Privilegi di accesso';
 $LDProfile='Profilo';
 $LDCreate='Crea';
-$LDNewStation='Nuova guardia medica';
+$LDNewStation='Nuova corsia';
 $LDDescription='Descrizione';
 $LDDept='Dipartimento';
 $LDRoom1Nr='Numero della prima stanza';
@@ -105,20 +106,20 @@ $LDBed2Prefix='Prefisso per il secondo letto';
 $LDHeadNurse='Caposala';
 $LDHeadNurse2='Aiuto caposala';
 $LDNurses='Pers. infermieristico';
-$LDCreateStation='Crea guardia medica';
+$LDCreateStation='Crea corsia';
 $LDEnterAllFields ='I campi identificati da <font color=#ff0000><b>*</b></font> vanno riempiti.';
 $LDPlsSelect='Scegliere un dipartimento';
-$LDStationExists='La guardia ~station~ esiste già!';
+$LDStationExists='La corsia ~station~ esiste già!';
 $LDAlertIncomplete='Mancano alcuni dati: si prega di inserirli.';
 $LDAlertRoomNr='Il numero dell\'ultima stanza dev\'essere MAGGIORE than the number della prima stanza!';
-$LDExistStations='Guardie esistenti. Scegliere quella desiderata.';
-$LDOtherStations='Altre guardie';
-$LDEditProfilo='Modifica profilo della guardia';
+$LDExistStations='Corsie esistenti. Scegliere quella desiderata.';
+$LDOtherStations='Altre corsie';
+$LDEditProfilo='Modifica profilo della corsia';
 $LDCreatedOn='Creato il:';
 $LDCreatedBy='Creato da:';
 
 /**********do not change the ~station~ **************************/
-$LDTemplateMissing='Il modello per la guardia ~station~ non esiste!';
+$LDTemplateMissing='Il modello per la corsia ~station~ non esiste!';
 $LDNoOrigData='Dati iniziali non trovati!';
 
 $LDShowLastList='Visualizza l\'ultima lista di occupazione.';
@@ -150,8 +151,8 @@ $LDFreeOccupy='Libera/Occupa';
 $LDMale='Maschio';
 $LDFemale='Femmina';
 /**********do not change the ~station~ **************************/
-$LDNoInit='La guardia ~station~ va inizializzata!';
-$LDIfInit='Per inizializzare la guardia, selezionare qui.';
+$LDNoInit='La corsia ~station~ va inizializzata!';
+$LDIfInit='Per inizializzare la corsia, selezionare qui.';
 $LDShowPatData='Apri l\'archivio dati del paziente';
 $LDReleasePatient='Dimetti paziente';
 $LDNoticeRW='Leggi o scrivi note';
@@ -314,13 +315,13 @@ $LDHour='Ora';
 $LDClkHere='Selezionare qui';
 
 $LDNoOccList='Non ci sono liste precedenti';
-$LDFromWard='per le guardie mediche ';
+$LDFromWard='per le corsie ';
 $LDWithinLast='durante gli ultimi ';
 $LDDays=' giorni.';
 $LDAvailable='';
 
 $LDQueries='Domande al Medico';
-$LDChangeWard='Modifica guardia';
+$LDChangeWard='Modifica corsia';
 $LDChangeBed='Modifica letto';
 
 $LDPatientDied='Decesso del paziente';
@@ -406,4 +407,7 @@ $LDOwnPatient='Own\'s patient';
 $LDNonOwnPatient='Non-own\'s patient';
 # 2003-08-04 EL
 $LDShowClinicOnly='This clinic only';
+# 2003-09-16 EL
+$LDAdmissionData='Admission data';
+$LDShowPhoto='Show photo';
 ?>

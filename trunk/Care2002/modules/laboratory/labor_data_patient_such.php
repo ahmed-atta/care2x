@@ -3,13 +3,19 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
+* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
 * GNU General Public License
-* Copyright 2002 Elpidio Latorilla
+* Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+# Default value for the maximum nr of rows per block displayed, define this to the value you wish
+# In normal cases this value is derived from the db table "care_config_global" using the "insurance_list_max_block_rows" element.
+define('MAX_BLOCK_ROWS',30); 
+
+$lang_tables[]='search.php';
+
 define('LANG_FILE','lab.php');
 $local_user='ck_lab_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
@@ -17,11 +23,38 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 $thisfile=basename(__FILE__);
 $breakfile='labor.php'.URL_APPEND;
 
-if(!isset($mode)) $mode='';
+# Workaround
+if(!isset($mode)){
+	$mode='';
+}elseif($mode=='edit'){
+	$editmode=TRUE;
+}
+	
 $keyword=trim($keyword);
 $toggle=0;
 
-if(($search)&&!empty($keyword)){
+# Initialize page's control variables
+if($mode=='paginate'){
+	$keyword=$HTTP_SESSION_VARS['sess_searchkey'];
+}else{
+	# Reset paginator variables
+	$pgx=0;
+	$totalcount=0;
+	$odir='ASC';
+	$oitem='name_last';
+
+	# Workaround: Resolve the search key variables
+	if(empty($keyword)&&!empty($searchkey)) $keyword=$searchkey;
+		
+	if(is_numeric($keyword)){
+		$keyword=(int) $keyword;
+	}else{
+		# Convert other wildcards
+		$keyword=strtr($keyword,'*&','%_');
+	}
+}
+
+if($search&&!empty($keyword)){
 
 	# Load the date formatter 
 	include_once($root_path.'include/inc_date_format_functions.php');
@@ -29,14 +62,48 @@ if(($search)&&!empty($keyword)){
 	include_once($root_path.'include/care_api_classes/class_lab.php');
 	
 	$lab_obj=new Lab();
-	# Get the existing lab reports
-	if($mode=='edit'){
-		$encounter=&$lab_obj->searchEncounterBasicInfo($keyword);  
+	
+	#Load and create paginator object
+	include_once($root_path.'include/care_api_classes/class_paginator.php');
+	$pagen=& new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
+
+	$GLOBAL_CONFIG=array();
+	include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+	$glob_obj=new GlobalConfig($GLOBAL_CONFIG);	
+	# Get the max nr of rows from global config
+	$glob_obj->getConfig('patient_search_max_block_rows');
+	if(empty($GLOBAL_CONFIG['patient_search_max_block_rows'])) $pagen->setMaxCount(MAX_BLOCK_ROWS); # Last resort, use the default defined at the start of this page
+		else $pagen->setMaxCount($GLOBAL_CONFIG['patient_search_max_block_rows']);
+
+	if($editmode){
+		# Search
+		$encounter=&$lab_obj->searchLimitEncounterBasicInfo($keyword,$pagen->MaxCount(),$pgx,$oitem,$odir);  
 	}else{
-		$encounter=&$lab_obj->searchEncounterLabResults($keyword);
+		$encounter=&$lab_obj->searchLimitEncounterLabResults($keyword,$pagen->MaxCount(),$pgx,$oitem,$odir);
+		# Get the number of results found
 	}  
-	# Get the number of results found
-	$linecount=$lab_obj->LastRecordCount();      
+	//echo $lab_obj->getLastQuery()."<p>";
+	# Get the resulting record count
+	if($linecount=$lab_obj->LastRecordCount()){
+	
+		if($mode!='paginate') $HTTP_SESSION_VARS['sess_searchkey']=$keyword;
+
+		$pagen->setTotalBlockCount($linecount);
+		# Count total available data
+		if(isset($totalcount)&&$totalcount){
+			$pagen->setTotalDataCount($totalcount);
+		}else{
+			if($editmode){
+				@$lab_obj->searchEncounterBasicInfo($keyword);
+			}else{
+				@$lab_obj->searchEncounterLabResults($keyword);
+			}
+			$totalcount=$lab_obj->LastRecordCount();
+			$pagen->setTotalDataCount($totalcount);
+		}
+		$pagen->setSortItem($oitem);
+		$pagen->setSortDirection($odir);
+	}
 }
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -66,7 +133,7 @@ function checkForm(v) {
 
 <BODY onLoad="document.sform.keyword.select()">
 
-<img <?php echo createComIcon($root_path,'micros.gif','0','absmiddle') ?>><FONT  COLOR="<?php echo $cfg[top_txtcolor] ?>"  SIZE=5  FACE="verdana"> <b><?php echo "$LDMedLab - "; if($mode=="edit") echo "$LDNewData"; else echo "$LDSeeData"; ?></b></font>
+<img <?php echo createComIcon($root_path,'micros.gif','0','absmiddle') ?>><FONT  COLOR="<?php echo $cfg[top_txtcolor] ?>"  SIZE=5  FACE="verdana"> <b><?php echo "$LDMedLab - "; if($editmode) echo "$LDNewData"; else echo "$LDSeeData"; ?></b></font>
 <table width=100% border=0 cellpadding="0" cellspacing="0">
 <tr>
 <td colspan=3><img <?php echo createLDImgSrc($root_path,'such-b.gif') ?>></td>
@@ -91,7 +158,7 @@ function checkForm(v) {
 <input type=hidden name="search" value=1>
 <input type=hidden name="sid" value=<?php echo $sid ?>>
 <input type=hidden name="lang" value=<?php echo $lang ?>>
-<input type=hidden name="mode" value=<?php echo $mode ?>>
+<input type=hidden name="editmode" value=<?php echo $editmode ?>>
 <INPUT type="image" <?php echo createLDImgSrc($root_path,'searchlamp.gif','0','absmiddle') ?>>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="javascript:gethelp('lab.php','search','<?php echo $mode ?>','<?php echo $linecount ?>','<?php echo $datafound ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?>></a>
 </FORM>
@@ -100,19 +167,47 @@ function checkForm(v) {
 
 $prev_nr=0;
 
-if($linecount){
-	$dcount=0;
-	# Print the search result message 
-	if($mode=='edit')	echo str_replace('~nr~',$linecount,$LDFoundPatient).'<p>';
-			
-	# Create the column descriptors 
-	echo "<table border=0 cellpadding=3 cellspacing=1> <tr bgcolor=#9f9f9f>";
+# Print the search result message 
+if($search||$mode=='paginate'){
+	if ($linecount) echo str_replace('~nr~',$totalcount,$LDSearchFound).' '.$LDShowing.' '.$pagen->BlockStartNr().' '.$LDTo.' '.$pagen->BlockEndNr().'.';
+	else echo str_replace('~nr~','0',$LDSearchFound);
+}
 
-	for($i=0;$i<sizeof($LDfieldname);$i++) {
+if($linecount){
+
+	$dcount=0;
+
+	$append="&search=1&editmode=$editmode";
+
+	$img_male=createComIcon($root_path,'spm.gif','0');
+	$img_female=createComIcon($root_path,'spf.gif','0');
+	$bgimg='tableHeaderbg3.gif';
+	$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
+
+	# Create the column descriptors 
+?>	
+	<table border=0 cellpadding=3 cellspacing=1> 
+	<tr bgcolor=#9f9f9f>
+
+     <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+	  <?php echo $pagen->makeSortLink($LDCaseNr,'encounter_nr',$oitem,$odir,$append);  ?></b></td>
+      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+	  <?php echo $pagen->makeSortLink($LDSex,'sex',$oitem,$odir,$append);  ?></b></td>
+      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+	  <?php echo $pagen->makeSortLink($LDLastName,'name_last',$oitem,$odir,$append);  ?></b></td>
+      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+	  <?php echo $pagen->makeSortLink($LDName,'name_first',$oitem,$odir,$append);  ?></b></td>
+      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+	  <?php echo $pagen->makeSortLink($LDBday,'date_birth',$oitem,$odir,$append);  ?></b></td>
+    	<td background="<?php echo createBgSkin($root_path,'tableHeaderbg.gif'); ?>" align=center><font face=arial size=2 color="#ffffff"><b><?php echo $LDSelect; ?></td>
+	</tr>
+
+<?php
+/*	for($i=0;$i<sizeof($LDfieldname);$i++) {
 		echo"<td><font face=arial size=2 color=#ffffff><b>".$LDfieldname[$i]."</b></td>";
 	}
-	
-	echo"<td>&nbsp;</td></tr>";
+*/
+
            
 	# List all the stored lab result documents of the patient 
 	while($zeile=$encounter->FetchRow()){
@@ -129,8 +224,16 @@ if($linecount){
 			echo '<td><font face=arial size=2>';
 			echo '&nbsp;'.$zeile['encounter_nr'];
 			if($zeile['encounter_class_nr']==2) echo ' <img '.createComIcon($root_path,'redflag.gif').'> <font size=1 color="red">'.$LDAmbulant.'</font>';
-        	echo '</td>
-					<td><font face=arial size=2>';
+        	echo '</td>';
+			
+						echo '<td>';
+						switch($zeile['sex']){
+							case 'f': echo '<img '.$img_female.'>'; break;
+							case 'm': echo '<img '.$img_male.'>'; break;
+							default: echo '&nbsp;'; break;
+						}
+			
+			echo '</td><td><font face=arial size=2>';
 			echo '&nbsp;'.ucfirst($zeile['name_last']);
 			echo '</td>
 					<td><font face=arial size=2>';
@@ -147,9 +250,9 @@ if($linecount){
 			echo'
 				<td><font face=arial size=2>&nbsp';
 						
-			if($mode=='edit'){ 
-				echo'<a href="labor_data_check_arch.php'.URL_APPEND.'&mode='.$mode.'&encounter_nr='.$zeile['encounter_nr'].'&update=1"  title="'.$LDEnterData.'">
-					<button onClick="javascript:window.location.href=\'labor_data_check_arch.php'.URL_REDIRECT_APPEND.'&mode='.$mode.'&encounter_nr='.$zeile['encounter_nr'].'&update=1\'"><img '.createComIcon($root_path,'update2.gif','0','absmiddle').' alt="'.$LDEnterData.'"><font size=1> '.$LDNewData;
+			if($editmode){ 
+				echo'<a href="labor_data_check_arch.php'.URL_APPEND.'&mode=edit&encounter_nr='.$zeile['encounter_nr'].'&update=1"  title="'.$LDEnterData.'">
+					<button onClick="javascript:window.location.href=\'labor_data_check_arch.php'.URL_REDIRECT_APPEND.'&mode=edit&encounter_nr='.$zeile['encounter_nr'].'&update=1\'"><img '.createComIcon($root_path,'update2.gif','0','absmiddle').' alt="'.$LDEnterData.'"><font size=1> '.$LDNewData;
 			}else{
 				echo'
 					<a href="labor_datalist_noedit.php'.URL_APPEND.'&encounter_nr='.$zeile['encounter_nr'].'&noexpand=1&nostat=1&user_origin=lab"  title="'.$LDClk2See.'">
@@ -161,11 +264,16 @@ if($linecount){
 
 		}
 	}
-	
+	if($totalcount>$pagen->MaxCount()){
+		echo '
+			<tr><td colspan=5><font face=arial size=2>'.$pagen->makePrevLink($LDPrevious,$append).'</td>
+						<td align=right><font face=arial size=2>'.$pagen->makeNextLink($LDNext,$append).'</td>
+			</tr>';
+	}
 	echo '</table>';
 					
 	# If result is more than 15 items, create an additional search entry mask below the list
-	if($dcount>15){
+	if($dcount>$pagen->MaxCount()){
 		echo '
 				<p><font color=red><B>'.$LDNewSearch.':</font>
 				<FORM action="'.$thisfile.'" method="post" name="form2" onSubmit="return checkForm(form2.keyword)">
@@ -175,7 +283,7 @@ if($linecount){
 				<input type=hidden name="search" value=1>
 				<input type=hidden name="sid" value="'.$sid.'">
 				<input type=hidden name="lang" value="'.$lang.'">
-				<input type=hidden name="mode" value="'.$mode.'">
+				<input type=hidden name="editmode" value="'.$editmode.'">
 				<INPUT type="image"  '.createLDImgSrc($root_path,'searchlamp.gif','0','absmiddle').'></font></FORM>
 				<p>';
 	}

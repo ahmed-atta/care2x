@@ -19,7 +19,7 @@ class Core {
 	# Private flags
 	var $do_intern;
 	var $ok;
-	var $is_preloaded=false;
+	var $is_preloaded=FALSE;
 	# internal error message variable, usually used in debugging
 	var $error_msg='';
 	
@@ -29,7 +29,7 @@ class Core {
 	    $this->coretable=$table;
 	}
 	function setRefArray(&$array) {
-	    if(!is_array($array)) return false;
+	    if(!is_array($array)) return FALSE;
 	    $this->ref_array=$array;
 	}
 	function setDataArray(&$array){
@@ -37,16 +37,19 @@ class Core {
 	}
 	function _RecordExists($cond=''){
 		global $db;
-		if(empty($cond)) return false;
+		if(empty($cond)) return FALSE;
 		if($this->result=$db->Execute("SELECT * FROM $this->coretable WHERE $cond")){
 			if($this->result->RecordCount()){
-				return true;
-			}else{return false;}
-		}else{return false;}
+				return TRUE;
+			}else{return FALSE;}
+		}else{return FALSE;}
 	}
 	function setSQL(&$sql){
 		$this->sql=$sql;
 	}
+	/**
+	* Transaction routine
+	*/
 	function Transact($sql='') {
 	    global $db;
 		if(!empty($sql)) $this->sql=$sql;
@@ -54,10 +57,10 @@ class Core {
         $this->ok=$db->Execute($this->sql);
         if($this->ok) {
             $db->CommitTrans();
-			return true;
+			return TRUE;
         } else {
 	        $db->RollbackTrans();
-			return false;
+			return FALSE;
 	    }
     }	
 	/**
@@ -72,7 +75,7 @@ class Core {
 		while(list($x,$v)=each($this->ref_array)) {
 	       // if(isset($this->data_array[$v])&&!empty($this->data_array[$v])) $this->buffer_array[$v]=$this->data_array[$v];
 	        if(isset($this->data_array[$v])) { 
-				$this->buffer_array[$v]=$this->data_array[$v]; //echo  $this->buffer_array[$v].'<br>';
+				$this->buffer_array[$v]=$this->data_array[$v]; 
 			}
 	    }
 		# Reset the source array index to start
@@ -85,7 +88,7 @@ class Core {
 	* This method also uses the field names from an internal array previously set by "use????" methods that point 
 	* the object to the proper table and fields names.
 	* public
-	* return true/false
+	* return TRUE/FALSE
 	*/		
     function insertDataFromInternalArray() {
 	    //$this->data_array=NULL;
@@ -100,8 +103,8 @@ class Core {
         if($this->result=$db->Execute($this->sql)) {
             if($this->result->RecordCount()) {
 				 return $this->result;	 
-			} else { return false; }
-		} else { return false; }	
+			} else { return FALSE; }
+		} else { return FALSE; }	
 	}
 	
 	function getAllDataObject() {
@@ -111,8 +114,8 @@ class Core {
         if($this->result=$db->Execute($this->sql)) {
             if($this->result->RecordCount()) {
 				 return $this->result;	 
-			} else { return false; }
-		} else { return false; }
+			} else { return FALSE; }
+		} else { return FALSE; }
 	}	
 	
 	function getAllItemsArray(&$items) {
@@ -123,8 +126,8 @@ class Core {
             if($this->result->RecordCount()) {
 				 while($this->ref_array=$this->result->FetchRow());
 				 return $this->ref_array; 
-			} else { return false; }
-		} else { return false; }	
+			} else { return FALSE; }
+		} else { return FALSE; }	
 	}
 	
 	function getAllDataArray() {
@@ -135,8 +138,8 @@ class Core {
             if($this->result->RecordCount()) {
 				 while($this->ref_array=$this->result->FetchRow());
 				 return $this->ref_array; 
-			} else { return false; }
-		} else { return false; }
+			} else { return FALSE; }
+		} else { return FALSE; }
 	}
 	/**
 	* insertDataFromArray() inserts data from an array  passed by reference into a table 
@@ -150,7 +153,7 @@ class Core {
 		$v='';
 		$index='';
 		$values='';
-		if(!is_array($array)) return false;
+		if(!is_array($array)) return FALSE;
 		while(list($x,$v)=each($array)) {
 		    $index.="$x,";
 			if(stristr($v,'null')) $values.='NULL,';
@@ -176,8 +179,8 @@ class Core {
 		$x='';
 		$v='';
 		$elems='';
-		if(empty($array)) return false;
-		if(empty($item_nr)||!is_numeric($item_nr)) return false;
+		if(empty($array)) return FALSE;
+		if(empty($item_nr)||!is_numeric($item_nr)) return FALSE;
 		while(list($x,$v)=each($array)) {
 		if(stristr($v,'concat')||stristr($v,'null')) $elems.="$x= $v,";
 		    else $elems.="$x='$v',";
@@ -201,7 +204,7 @@ class Core {
 	* @param $item_nr (int), the nr used in the update queries' "where" condition 
 	*/
     function updateDataFromInternalArray($item_nr='') {
-		if(empty($item_nr)||!is_numeric($item_nr)) return false;
+		if(empty($item_nr)||!is_numeric($item_nr)) return FALSE;
 	    $this->_prepSaveArray();
 		return $this->updateDataFromArray($this->buffer_array,$item_nr);
 	}
@@ -247,10 +250,10 @@ class Core {
 	* saveDBCache() saves temporary data to cache in database
 	* @param $id (char) = data id
 	* @param $data (mixed) (pass by referece) = data to be saved
-	* @param $bin (bool)  = false=nonbinary data, true=binary
-	* return true/false
+	* @param $bin (bool)  = FALSE=nonbinary data, TRUE=binary
+	* return TRUE/FALSE
 	*/
-	function saveDBCache($id,&$data,$bin=false){
+	function saveDBCache($id,&$data,$bin=FALSE){
 		if($bin) $elem='cbinary';
 			else $elem='ctext';
 		$this->sql="INSERT INTO care_cache (id,$elem) VALUES ('$id','$data')";
@@ -260,10 +263,10 @@ class Core {
 	* getDBCache() gets temporary data from the database cache 
 	* @param $id (char) = data id
 	* @param $data (mixed) (pass by referece) = variable for the data to be fetched
-	* @param $bin (bool)  = false=nonbinary data, true=binary
+	* @param $bin (bool)  = FALSE=nonbinary data, TRUE=binary
 	* return data
 	*/
-	function getDBCache($id,&$data,$bin=false){
+	function getDBCache($id,&$data,$bin=FALSE){
 		global $db;
 		$buf;
 		$row;
@@ -274,17 +277,17 @@ class Core {
             if($buf->RecordCount()) {
 				 $row=$buf->FetchRow();
 				 $data=$row[$elem];
-				 return true; 
-			} else { return false; }
-		} else { return false; }
+				 return TRUE; 
+			} else { return FALSE; }
+		} else { return FALSE; }
 	}
 	/**
 	* deleteDBCache() deletes data from the database cache 
 	* @param $id (char) = id of data for deletion
-	* return true/false
+	* return TRUE/FALSE
 	*/
 	function deleteDBCache($id){
-		if(empty($id)) return false;
+		if(empty($id)) return FALSE;
 		$this->sql="DELETE  FROM care_cache WHERE id LIKE '$id'";
 		return $this->Transact();
 	}
@@ -302,7 +305,7 @@ class Core {
 	* @param $path (str) the path of the filenames relative to the root path
 	* @param $filter (str) , discriminator string
 	* @param $sort (str), ASC or DESC, default to ASC (ascending)
-	* return array, else false
+	* return array, else FALSE
 	*/
 	function FilesListArray($path='',$filter='',$sort='ASC'){
 		$localpath=$path.'/.';
@@ -311,7 +314,7 @@ class Core {
 		if(file_exists($localpath)){
 			$handle=opendir($path); 
 			$count=0;
- 			while (false!==($file = readdir($handle))) { 
+ 			while (FALSE!==($file = readdir($handle))) { 
      			if ($file != "." && $file != ".."){ 
 					if(!empty($filter)){
 						if(stristr($file,$filter)){
@@ -335,7 +338,7 @@ class Core {
 					return $this->res['fla'];
 			}
 		}else{
-			return false;
+			return FALSE;
 		}
 	}
 }

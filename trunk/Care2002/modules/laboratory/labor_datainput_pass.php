@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
+* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
 * GNU General Public License
-* Copyright 2002 Elpidio Latorilla
+* Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -20,7 +20,7 @@ require_once($root_path.'global_conf/areas_allow.php');
 
 $allowedarea=&$allow_area['lab_w'];
 
-$fileforward="labor_data_patient_such.php?sid=$sid&lang=$lang&mode=edit";
+$fileforward="labor_data_patient_such.php?sid=$sid&lang=$lang&editmode=1";
 $thisfile=basename(__FILE__);
 
 $breakfile="labor.php?sid=".$sid."&lang=".$lang;

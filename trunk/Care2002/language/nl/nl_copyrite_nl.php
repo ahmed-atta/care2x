@@ -2,7 +2,7 @@
 require($root_path.'include/inc_credits_openwin.php');
 ?>
 <FONT    SIZE=1  FACE="Arial" color=gray>
- Deze toepassng wordt ondersteund  op <a href="http://www.care2x.com" target=_new>CARE 2002 beta version 1.0.07</a>. Een Open Source software pakket beschikbaar onder de GPL licentie.
+ Deze toepassng wordt ondersteund  op <a href="http://www.care2x.com" target=_new>CARE 2002 beta version 1.0.08</a>. Een Open Source software pakket beschikbaar onder de GPL licentie.
  CARE 2002 is onder de GNU General Public License geschreven en vrijgegeven. Voor details over deze licentie zie
  <a href="<?php echo $root_path ?>legal_gnu_gpl.htm" target=_new>copy of the license</a>. 
  Voor verdere informatie neem contact op met <a href=mailto:info@care2x.com>info@care2x.com</a>.

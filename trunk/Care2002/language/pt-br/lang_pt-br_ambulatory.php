@@ -13,11 +13,11 @@ $LDAdmissionTxt='Admissão/Liberação do ambulatório, pesquisa, arquivo';
 $LDNews='Notícias';
 $LDNewsTxt='Notícias específicas da clínica, memorando, info, etc.'; 
 # 2003-08-01 EL
-$LDAppointments='Agendamento';
-$LDAppointmentsTxt='Agendar paciente para esse departamentot';
-$LDPatientWaitingList='Lista de espera do paciente';
+$LDAppointments='Agendamentos';
+$LDAppointmentsTxt='Agendamento do paciente com este departamento';
+$LDPatientWaitingList='Lista de espera';
 $LDPWListTxt='Pacientes admitidos hoje na clínica';
-$LDOutpatientClinic='Clinica de ambulatório';
+$LDOutpatientClinic='Clínica ambulatorial';
 $LDGeneralAmbulatory='Ambulatório Geral';
 $LDAmbulatory='Ambulatório';
 ?>

@@ -43,7 +43,7 @@ $LDSearchPrompt='Entre com a palavra-chave.<br>	Por exemplo: Nome, Sobrenome, et
 $LDSearch='Procurar';
 $LDCancel='Cancelar';
 $LDHow2Search='Como posso encontrar um paciente?';
-$LDClk2Show='Mostrar dados';
+$LDClk2Show='Exibir dados';
 $LDDate='Data';
 $LDClockTime='Hora';
 
@@ -83,9 +83,9 @@ $LDGo='GO';
 $LDLastMonth='Último mês';
 $LDNextMonth='Próximo mês';
 $LDNursingManage='Gerenciador de ala';
-$LDShowStationDataTxt='&nbsp;Mostrar, editar, criar, <br> &nbsp;descrição, nº de camas<br>	&nbsp;etc.';
+$LDShowStationDataTxt='&nbsp;Exibir, editar, criar, <br> &nbsp;descrição, nº de camas<br>	&nbsp;etc.';
 $LDLockBedTxt='&nbsp;ou liberar uma cama';
-$LDAccessRightsTxt='&nbsp;Criar, fechamento, mudança,<br>&nbsp;ativação, apagar.';
+$LDAccessRightsTxt='&nbsp;Criar, fechamento, mudança,<br>&nbsp;ativação, excluir.';
 $LDShowStationData='Perfil dos dados da ala';
 $LDLockBed='Trancar uma cama';
 $LDAccessRights='Permissões de acessos';
@@ -120,7 +120,7 @@ $LDCreatedBy='Criado por:';
 $LDTemplateMissing='Modelo de ala ~station~ está faltando!';
 $LDNoOrigData='Dados originais não encontrados!';
 
-$LDShowLastList='Mostrar a última lista de ocupações.';
+$LDShowLastList='Exibir a última lista de ocupações.';
 $LDNoListYet='A lista de hoje não está criada';
 $LDLastList='Última lista de ocupação.';
 $LDNotToday='(Hoje não!!)';
@@ -167,7 +167,7 @@ $LDPatListElements=array(
 /********** NOTE: !! do not change the \'+b+\' and \'+r+\'  !! **************************/
 $LDConfirmUnlock='Você realmente deseja liberar a \'+b+\' cama no quarto \'+r+\' ?';
 /********** NOTE: !! do not change the \'+t+\' \'+n+\' and \'+r+b+\'  **************************/
-$LDConfirmDelete='Você realmente deseja apagar \'+t+\' \'+n+\' do quarto \'+r+b+\'?';
+$LDConfirmDelete='Você realmente deseja excluir \'+t+\' \'+n+\' do quarto \'+r+b+\'?';
 $LDConfirmLock='Você quer realmente travar esta cama?';
 $LDClk2Occupy='Clique para ocupar esta cama';
 $LDInsurance=array(
@@ -253,7 +253,7 @@ $LDEntryPrompt='Entre com a nova informação aqui';
 $LDConfirmSetDate='Você deseja indicar o  \'+dayID+\' ?';
 $LDStartDate='Data inicial';
 $LDEndDate='Data final';
-$LDShowCurveDate='Mostrar a curva com o seguinte';
+$LDShowCurveDate='Exibir a curva com o seguinte';
 $LDDailyDiagTher='Terapia, relatório, planejamento de enfermagem, etc.';
 $LDAntiCoagTxt='Anticoagulante - relatório diário';
 $LDSFormatPrompt='Entre com uma nova informação ou edite a atual:<br><font size=1 > Máximo de 16 caracteres.</font>';
@@ -302,7 +302,7 @@ $LDSpeedTest='Teste urgente.';
 $LDDiagnosticTest='Pedido de teste de diagnóstico';
 $LDRelayResult='Remeter diagnóstico por Fone/Beeper';
 $LDSpeedCut='Corte expresso.';
-$LDClk4Phone='Clique para mostrar informações de Fone/Beeper';
+$LDClk4Phone='Clique para exibir informações de Fone/Beeper';
 $LDHour='Hora';
 
 $LDClkHere='Clique aqui.';
@@ -386,18 +386,18 @@ $LDShowAll='Show all';
 $LDShowWardOnly='Show ward only';
 $LDTransferToBed='Transfer to another bed in this ward';
 $LDTransferToWard='Transfer to another ward';
-$LDShowBeds='Show beds';
-$LDTransferPatient='Transfer patient';
+$LDShowBeds='Exibir leitos';
+$LDTransferPatient='Transferir paciente';
 $LDDRG='DRG';
 $LDFinanceType='Insurance';
 #2003-08-02 EL
 $LDOutToInpatient='Change admission status to inpatient';
 $LDTransferClinic='Transfer to clinic or department';
-$LDClinic='Clinic';
+$LDClinic='Clínica';
 $LDOwnPatient='Own\'s patient';
 $LDNonOwnPatient='Non-own\'s patient';
 # 2003-08-04 EL
-$LDShowClinicOnly='This clinic only';
+$LDShowClinicOnly='Somente está clínica';
 # 2003-09-16 EL
 $LDAdmissionData='Admission data';
 $LDShowPhoto='Show photo';

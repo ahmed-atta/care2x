@@ -252,17 +252,25 @@ class Personell extends Core {
 		$this->depts=$depts;
 		return $this->_getOCQuicklist(14,$year,$month);
 	}	
-	
-	function searchPersonellBasicInfo($key){
+	/**
+	* Search and returns basic info: last name, first name, DOB, personnel nr. sex, PID, Job function title
+	* @param $key (char) the search key words
+	* @param $oitem (char) the field to sort, default = 'name_last'
+	* @param $odir (char) the sorting direction, default = ASC
+	* @param $limit (bool) whether the return is limited or not, default FALSE
+	* @param $len (int) the maximum number of rows returned, default 30 rows
+	* @param $so (int) the start index offset, default 0 = start
+	*/
+	function searchPersonellBasicInfo($key,$oitem='name_last',$odir='ASC',$limit=FALSE,$len=30,$so=0){
 		global $db;
 		if(empty($key)) return false;
-		$sql="SELECT ps.nr, ps.job_function_title, p.pid, p.name_last, p.name_first, p.date_birth, p.sex
+		$this->sql="SELECT ps.nr, ps.job_function_title, p.pid, p.name_last, p.name_first, p.date_birth, p.sex
 				FROM $this->tb AS ps, $this->tb_person AS p";
 		if(is_numeric($key)){
 			$key=(int)$key;
-			$sql.=" WHERE ps.nr = $key AND ps.pid=p.pid";
+			$this->sql.=" WHERE ps.nr = $key AND ps.pid=p.pid";
 		}else{
-			$sql.=" WHERE (ps.nr LIKE '$key%' 
+			$this->sql.=" WHERE (ps.nr LIKE '$key%' 
 						OR ps.job_function_title LIKE '$key%'
 						Or p.pid LIKE '$key%'
 						OR p.name_last LIKE '$key%'
@@ -270,17 +278,33 @@ class Personell extends Core {
 						OR p.date_birth LIKE '$key%')
 						AND p.pid=ps.pid";
 		}
-		$sql.=' ORDER BY p.name_last';
-	    if ($this->result=$db->Execute($sql)) {
-		   	if ($this->record_count=$this->result->RecordCount()) {
-				return $this->result;
-			} else {
-				return false;
-			}
-		}else {
-			return false;
+		if(!empty($oitem)){
+			if($oitem=='nr'||$oitem=='job_function_title') $this->sql.=" ORDER BY ps.$oitem $odir";
+				else  $this->sql.=" ORDER BY p.$oitem $odir";
 		}
+		if($limit){
+			$this->res['spbi']=$db->SelectLimit($this->sql,$len,$so);
+		}else{
+			$this->res['spbi']=$db->Execute($this->sql);
+		}
+	    if ($this->res['spbi']) {
+		   	if ($this->record_count=$this->res['spbi']->RecordCount()) {
+				$this->rec_count=$this->record_count; # Work around
+				return $this->res['spbi'];
+			}else{return false;}
+		}else{return false;}
 	}		
+	/**
+	* Search similar to searchPersonellBasicInfo but returns a limited nr of rows
+	* @param $key (char) the search key words
+	* @param $len (int) the maximum number of rows returned, default 30 rows
+	* @param $so (int) the start index offset, default 0 = start
+	* @param $oitem (char) the field to sort, default = 'name_last'
+	* @param $odir (char) the sorting direction, default = ASC
+	*/
+	function searchLimitPersonellBasicInfo($key,$len,$so,$oitem,$odir){
+		return $this->searchPersonellBasicInfo($key,$oitem,$odir,TRUE,$len,$so);
+	}
 	function Exists($pid=0){
 		global $db;
 		if(!$pid){
@@ -350,6 +374,26 @@ class Personell extends Core {
 	function PID(){
 	    //if(!$this->is_loaded) return false;
 		return $this->personell_data['pid'];
+	}	
+	function InPhone1(){
+	    //if(!$this->is_loaded) return false;
+		return $this->personell_data['inphone1'];
+	}	
+	function InPhone2(){
+	    //if(!$this->is_loaded) return false;
+		return $this->personell_data['inphone2'];
+	}	
+	function InPhone3(){
+	    //if(!$this->is_loaded) return false;
+		return $this->personell_data['inphone3'];
+	}	
+	function Beeper1(){
+	    //if(!$this->is_loaded) return false;
+		return $this->personell_data['funk1'];
+	}	
+	function Beeper2(){
+	    //if(!$this->is_loaded) return false;
+		return $this->personell_data['funk2'];
 	}	
 	function formattedAddress_DE(){
 	    //if(!$this->is_loaded) return false;

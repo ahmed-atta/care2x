@@ -204,9 +204,9 @@ $LDDepotOrderBot='Medibot';
 $LDCreatedOn='Criado em:';
 $LDTime='Hora';
 /* 2002-11-5 EL */
-$LDInvalidPassword='Invalid password!';
-$LDUnknownValidator='Validator unknown!';
-$LDPlsEnterInfo='Please enter the correct info.';
+$LDInvalidPassword='Senha inválida!';
+$LDUnknownValidator='Validador desconhecido!';
+$LDPlsEnterInfo='Favor entar com a informação correta.';
 # 2003-08-17 EL
 $LDAlertInvalidMinorder='The minimum order has invalid character';
 $LDAlertInvalidMaxorder='The maximum order has invalid character';

@@ -379,4 +379,7 @@ $LDOwnPatient='Own\'s patient';
 $LDNonOwnPatient='Non-own\'s patient';
 # 2003-08-04 EL
 $LDShowClinicOnly='This clinic only';
+# 2003-09-16 EL
+$LDAdmissionData='Admission data';
+$LDShowPhoto='Show photo';
 ?>

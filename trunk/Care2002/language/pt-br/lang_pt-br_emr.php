@@ -6,7 +6,7 @@ $LDConsultNotes='Anotações da consulta';
 $LDOpNotes='Anotações operatórias';
 $LDDailyNurseNotes='Anotações diárias da enfermaria';
 $LDOther='Outras anotações';
-$LDChartNotes='Anotações do prontuário';
+$LDChartNotes='Anotações do gráfico';
 $LDPTATGetc='Anotaçõess diárias PT, ATG, etc.';
 $LDIVDailyNotes='Anotações diáris de EV';
 $LDAnticoagDailyNotes='Anotações diárias de anticoagulantes';
@@ -22,5 +22,5 @@ $LDDoctorDirective='Solicitações do médico';
 $LDProblem='Problemas';
 $LDDevelopment='Desenvolvimento';
 $LDAllergy='Alergia';
-$LDDietPlan='Diet plan';
+$LDDietPlan='Plano de dieta';
 ?>

@@ -6,7 +6,7 @@
 require_once($root_path.'include/care_api_classes/class_notes.php');
 
 class Encounter extends Notes {
-    /* Table names related to encounter */
+    # Table names related to encounter
     var $tb_enc='care_encounter';
 	var $tb_fc='care_class_financial';
 	var $tb_enc_fc='care_encounter_financial_class';
@@ -20,14 +20,14 @@ class Encounter extends Notes {
 	var $tb_dept='care_department';
 	var $tb_insco='care_insurance_firm';
 	var $tb_appt='care_appointment';
-	/* Aux vars */
+	# Aux vars
 	var $enc_nr;
 	var $encoder;
-	var $ignore_status=false;
-	var $entire_record=false;
+	var $ignore_status=FALSE;
+	var $entire_record=FALSE;
 	var $encounter;
-	var $is_loaded=false;
-	var $single_result=false;
+	var $is_loaded=FALSE;
+	var $single_result=FALSE;
 	var $record_count;
 	var $type_nr;
 	var $loc_nr;
@@ -35,7 +35,7 @@ class Encounter extends Notes {
 	var $date;
 	var $time;
 	
-	/* Field names */
+	# Field names
 	var $tabfields=array('encounter_nr',
 	                           'pid',
 							   'encounter_date',
@@ -100,16 +100,16 @@ class Encounter extends Notes {
 	function setEncoder($encoder='') {
 	    $this->encoder=$encode;
 	}
-	function setIgnoreStatus($bool=false){
+	function setIgnoreStatus($bool=FALSE){
 	    $this->ignore_status=$bool;
 	}
-	function setGetEntireRecord($bool=false){
+	function setGetEntireRecord($bool=FALSE){
 	    $this->entire_record=$bool;
 	}
 	function setCoreTable($table){
 	    $this->setTable($table);
 	}
-	function setSingleResult($bool=false){
+	function setSingleResult($bool=FALSE){
 	    $this->single_result=$bool;
 	}
 	function getNewEncounterNr($ref_nr,$enc_class_nr){
@@ -127,7 +127,7 @@ class Encounter extends Notes {
 	function internResolveEncounterNr($enc_nr='') {
 	    if (empty($enc_nr)) {
 		    if(empty($this->enc_nr)) {
-			    return false;
+			    return FALSE;
 			} else { return true; }
 		} else {
 		     $this->enc_nr=$enc_nr;
@@ -137,8 +137,8 @@ class Encounter extends Notes {
     function getServiceClass($type,$enc_nr) {
         global $db;
 	    
-		if(empty($type)) return false;
-	    if(!$this->internResolveEncounterNr($enc_nr)) return false;
+		if(empty($type)) return FALSE;
+	    if(!$this->internResolveEncounterNr($enc_nr)) return FALSE;
 		
 		$this->sql="SELECT   enfc.class_nr       AS sc_".$type."_class_nr,  
 			                          enfc.date_start  AS sc_".$type."_start,
@@ -160,8 +160,8 @@ class Encounter extends Notes {
 		    if($this->result->RecordCount()) {
 			    // echo $this->sql.'<p>';
 				 return $this->result;
-		     } else { return false;}
-		} else { return false;}
+		     } else { return FALSE;}
+		} else { return FALSE;}
     }
 	function CareServiceClass($enc_nr) {
 	    return $this->getServiceClass('care',$enc_nr);
@@ -176,8 +176,8 @@ class Encounter extends Notes {
     {
 	    global $db;
     
-	    if(empty($type)||empty($val_array)) return false;
-        if(!$this->internResolveEncounterNr($enc_nr)) return false;
+	    if(empty($type)||empty($val_array)) return FALSE;
+        if(!$this->internResolveEncounterNr($enc_nr)) return FALSE;
 	
 	    $this->sql="INSERT INTO $this->tb_enc_fc
 	        (
@@ -221,7 +221,7 @@ class Encounter extends Notes {
     {
 	    global $db;
 	     
-		if(empty($val_array['sc_'.$type.'_class_nr'])) return false;
+		if(empty($val_array['sc_'.$type.'_class_nr'])) return FALSE;
 	    $this->sql="UPDATE $this->tb_enc_fc SET
 				   class_nr = '".$val_array['sc_'.$type.'_class_nr']."',
 				   date_start = '".$val_array['sc_'.$type.'_start']."',
@@ -247,13 +247,13 @@ class Encounter extends Notes {
 
     function getAllServiceClassesObject($type=''){
 	    global $db;
-		if(empty($type)) return false;
+		if(empty($type)) return FALSE;
 		$this->sql="SELECT class_nr,class_id,code,name,LD_var FROM $this->tb_fc WHERE type='$type'";
 		if($this->result=$db->Execute($this->sql)) {
 		    if($this->result->RecordCount()) {
 			    return $this->result;
-		    } else { return false;}
-		} else { return false;}
+		    } else { return FALSE;}
+		} else { return FALSE;}
     }		
 	
 	function AllCareServiceClassesObject(){
@@ -272,13 +272,13 @@ class Encounter extends Notes {
 		if($this->res['aec']=$db->Execute($this->sql)) {
 		    if($this->res['aec']->RecordCount()) {
 			    return $this->res['aec'];
-		    } else { return false;}
-		} else { return false;}
+		    } else { return FALSE;}
+		} else { return FALSE;}
 	}
 	
 	function loadEncounterData($enc_nr){
 	    global $db;
-		if(!$this->internResolveEncounterNr($enc_nr)) return false;
+		if(!$this->internResolveEncounterNr($enc_nr)) return FALSE;
 		$this->sql="SELECT e.*, p.pid, p.title,p.name_last, p.name_first, p.date_birth, p.sex,
 									p.addr_str,p.addr_str_nr,p.addr_zip, p.blood_group,
 									p.photo_filename, t.name AS citytown_name,p.death_date
@@ -295,148 +295,148 @@ class Encounter extends Notes {
 				//$this->result=NULL;
 			    $this->is_loaded=true;
 				return true;
-		    } else { return false;}
-		} else { return false;}
+		    } else { return FALSE;}
+		} else { return FALSE;}
 	}
 	
 	function LastName(){
-	    if(!$this->is_loaded) return false;
+	    if(!$this->is_loaded) return FALSE;
 		return $this->encounter['name_last'];
 	}
 	function FirstName(){
-	    if(!$this->is_loaded) return false;
+	    if(!$this->is_loaded) return FALSE;
 		return $this->encounter['name_first'];
 	}
 	function BirthDate(){
-	    if(!$this->is_loaded) return false;
+	    if(!$this->is_loaded) return FALSE;
 		return $this->encounter['date_birth'];
 	}
 	function PID(){
-	    if(!$this->is_loaded) return false;
+	    if(!$this->is_loaded) return FALSE;
 		return $this->encounter['pid'];
 	}
 	function EncounterDate(){
-	    if(!$this->is_loaded) return false;
+	    if(!$this->is_loaded) return FALSE;
 		return $this->encounter['encounter_date'];
 	}
 	function EncounterClass(){
-	    if(!$this->is_loaded) return false;
+	    if(!$this->is_loaded) return FALSE;
 		return $this->encounter['encounter_class_nr'];
 	}
 	function FinancialClass(){
-	    if(!$this->is_loaded) return false;
+	    if(!$this->is_loaded) return FALSE;
 		return $this->encounter['financial_class'];
 	}
 	function BillingClass(){
 		return $this->FinancialClass();
 	}
 	function RefererDiagnosis(){
-	    if(!$this->is_loaded) return false;
+	    if(!$this->is_loaded) return FALSE;
 		return $this->encounter['referrer_diagnosis'];
 	}
 	function RefererRecomTherapy(){
-	    if(!$this->is_loaded) return false;
+	    if(!$this->is_loaded) return FALSE;
 		return $this->encounter['referrer_recom_therapy'];
 	}
 	function RefererNotes(){
-	    if(!$this->is_loaded) return false;
+	    if(!$this->is_loaded) return FALSE;
 		return $this->encounter['referrer_notes'];
 	}
 	function Referer(){
-	    if(!$this->is_loaded) return false;
+	    if(!$this->is_loaded) return FALSE;
 		return $this->encounter['referrer_dr'];
 	}
 	function RefererDept(){
-	    if(!$this->is_loaded) return false;
+	    if(!$this->is_loaded) return FALSE;
 		return $this->encounter['referrer_dept'];
 	}
 	function RefererInstitution(){
-	    if(!$this->is_loaded) return false;
+	    if(!$this->is_loaded) return FALSE;
 		return $this->encounter['referrer_institution'];
 	}
 	function InsuranceNr(){
-	    if(!$this->is_loaded) return false;
+	    if(!$this->is_loaded) return FALSE;
 		return $this->encounter['insurance_nr'];
 	}
 	function InsuranceFirmID(){
-	    if(!$this->is_loaded) return false;
+	    if(!$this->is_loaded) return FALSE;
 		return $this->encounter['insurance_firm_id'];
 	}
 	function CurrentWardNr(){
-	    if(!$this->is_loaded) return false;
+	    if(!$this->is_loaded) return FALSE;
 		return $this->encounter['current_ward_nr'];
 	}
 	function CurrentRoomNr(){
-	    if(!$this->is_loaded) return false;
+	    if(!$this->is_loaded) return FALSE;
 		return $this->encounter['current_room_nr'];
 	}
 	function CurrentDeptNr(){
-	    if(!$this->is_loaded) return false;
+	    if(!$this->is_loaded) return FALSE;
 		return $this->encounter['current_dept_nr'];
 	}
 	function CurrentFirmNr(){
-	    if(!$this->is_loaded) return false;
+	    if(!$this->is_loaded) return FALSE;
 		return $this->encounter['current_firm_nr'];
 	}
 	function CurrentAttDrNr(){
-	    if(!$this->is_loaded) return false;
+	    if(!$this->is_loaded) return FALSE;
 		return $this->encounter['current_att_dr_nr'];
 	}
 	function In_Ward(){
-	    if(!$this->is_loaded) return false;
+	    if(!$this->is_loaded) return FALSE;
 		return $this->encounter['in_ward'];
 	}
 	function In_Dept(){
-	    if(!$this->is_loaded) return false;
+	    if(!$this->is_loaded) return FALSE;
 		return $this->encounter['in_dept'];
 	}
 	function Is_Discharged(){
-	    if(!$this->is_loaded) return false;
+	    if(!$this->is_loaded) return FALSE;
 		return $this->encounter['is_discharged'];
 	}
 	function EncounterStatus(){
-	    if(!$this->is_loaded) return false;
+	    if(!$this->is_loaded) return FALSE;
 		return $this->encounter['encounter_status'];
 	}
 	function EncounterType(){
-	    if(!$this->is_loaded) return false;
+	    if(!$this->is_loaded) return FALSE;
 		return $this->encounter['encounter_type'];
 	}
 	function ConsultingDr(){
-	    if(!$this->is_loaded) return false;
+	    if(!$this->is_loaded) return FALSE;
 		return $this->encounter['consulting_dr'];
 	}
 	function FollowUpDate(){
-	    if(!$this->is_loaded) return false;
+	    if(!$this->is_loaded) return FALSE;
 		return $this->encounter['followup_date'];
 	}
 	function FollowUpResponsibility(){
-	    if(!$this->is_loaded) return false;
+	    if(!$this->is_loaded) return FALSE;
 		return $this->encounter['followup_responsibility'];
 	}
 	function PostEncounterNotes(){
-	    if(!$this->is_loaded) return false;
+	    if(!$this->is_loaded) return FALSE;
 		return $this->encounter['post_encounter_notes'];
 	}
 	function RecordStatus(){
-	    if(!$this->is_loaded) return false;
+	    if(!$this->is_loaded) return FALSE;
 		return $this->encounter['status'];
 	}
 	function RecordHistory(){
-	    if(!$this->is_loaded) return false;
+	    if(!$this->is_loaded) return FALSE;
 		return $this->encounter['history'];
 	}
 	function RecordModifierID(){
-	    if(!$this->is_loaded) return false;
+	    if(!$this->is_loaded) return FALSE;
 		return $this->encounter['modify_id'];
 	}
 	function RecordCreatorID(){
-	    if(!$this->is_loaded) return false;
+	    if(!$this->is_loaded) return FALSE;
 		return $this->encounter['create_id'];
 	}
 	
     function updateEncounterFromInternalArray($item_nr='') {
-		if(empty($item_nr)) return false;
+		if(empty($item_nr)) return FALSE;
 		$this->where=" encounter_nr=$item_nr";
 		return $this->updateDataFromInternalArray($item_nr);
 	}
@@ -445,28 +445,28 @@ class Encounter extends Notes {
 	* public
 	* @param $nr (int) =  number
 	* @param $type (str) = type of param $nr (_ENC = encounter nr, _PID = pid nr) , defaults to _ENC = encounter nr.
-	* returns encounter nr. if true, else false
+	* returns encounter nr. if true, else FALSE
 	*/
 	function isCurrentlyAdmitted($nr,$type='_ENC'){
 	    global $db;
-		if(!$nr) return false;
+		if(!$nr) return FALSE;
 		if($type=='_ENC') $cond='encounter_nr';
 			elseif($type=='_PID') $cond='pid';
-			 	else return false;
+			 	else return FALSE;
 		$this->sql="SELECT encounter_nr FROM $this->tb_enc 
 						WHERE $cond='$nr' AND NOT (encounter_status LIKE 'cancelled') AND NOT is_discharged AND status NOT IN ($this->dead_stat)";
 		if($buf=$db->Execute($this->sql)){
 		    if($buf->RecordCount()) {
 				$buf2=$buf->FetchRow();
 				return $buf2['encounter_nr'];
-			}else{return false;}
-		}else{return false;}
+			}else{return FALSE;}
+		}else{return FALSE;}
 	}
 	/**
 	* isPIDCurrentlyAdmitted() checks if the person is currently admitted as encounter
 	* public
 	* @param $nr (int) = pid number
-	* returns encounter nr. if true, else false
+	* returns encounter nr. if true, else FALSE
 	*/
 	function isPIDCurrentlyAdmitted($nr){
 	    return $this->isCurrentlyAdmitted($nr,'_PID');
@@ -475,7 +475,7 @@ class Encounter extends Notes {
 	* isENCCurrentlyAdmitted() checks if a given encounter nr is currently admitted
 	* public
 	* @param $nr (int) = encounter number
-	* returns encounter nr. if true, else false
+	* returns encounter nr. if true, else FALSE
 	*/
 	function isENCCurrentlyAdmitted($nr){
 	    return $this->isCurrentlyAdmitted($nr,'_ENC');
@@ -483,12 +483,12 @@ class Encounter extends Notes {
 	
 	function setHistorySeen($encoder='',$enc_nr=''){
 	    global $db;
-		if(empty($encoder)) return false;
-		if(!$this->internResolveEncounterNr($enc_nr)) return false;
+		if(empty($encoder)) return FALSE;
+		if(!$this->internResolveEncounterNr($enc_nr)) return FALSE;
 		$this->sql="UPDATE $this->tb_enc SET history= CONCAT(history,'\nView ".date('Y-m-d H:i:s')." = $encoder') WHERE encounter_nr=$this->enc_nr";
 		
 		if($db->Execute($this->sql)) {return true;}
-		   else  {echo $this->sql;return false;}
+		   else  {echo $this->sql;return FALSE;}
 	}		
 	
 	function getEncounterClassInfo($class_nr){
@@ -498,9 +498,9 @@ class Encounter extends Notes {
 		    if($this->result->RecordCount()) {
 			    $this->row=$this->result->FetchRow();
 				return $this->row;
-			} else return false;
+			} else return FALSE;
 		}else {
-		    return false;
+		    return FALSE;
 		}
 	}
 	
@@ -511,39 +511,50 @@ class Encounter extends Notes {
 		    if($this->result->RecordCount()) {
 			    $this->row=$this->result->FetchRow();
 				return $this->row;
-			} else return false;
+			} else return FALSE;
 		}else {
-		    return false;
+		    return FALSE;
 		}
 	}
-	function _searchAdmissionBasicInfo($key,$enc_class=0,$add_opt=''){
+	/** 
+	* Private search function, usually called by a user API method
+	* @param $key (char) the search keyword
+	* @param $enc_class (int) the encounter class, default = 0
+	* @param $add_opt (char) the optional where clause like sorting
+	* @param $limit (bool)  wether the select query is limited or not, default false
+	* @param $len (int) the maximum nr. or rows returned in limited select, default = 30 rows
+	* @param $so (int) the start index offset, default 0 = start
+	* return adodb record object, else false
+	*/
+	function _searchAdmissionBasicInfo($key,$enc_class=0,$add_opt='',$limit=FALSE,$len=30,$so=0){
 		global $db;
-		//if(empty($key)) return false;
-		$sql="SELECT e.encounter_nr, e.encounter_class_nr, p.pid, p.name_last, p.name_first, p.date_birth,p.sex,p.blood_group
+		//if(empty($key)) return FALSE;
+		$this->sql="SELECT e.encounter_nr, e.encounter_class_nr, p.pid, p.name_last, p.name_first, p.date_birth, p.addr_zip, p.sex,p.blood_group
 				FROM $this->tb_enc AS e LEFT JOIN $this->tb_person AS p ON e.pid=p.pid";
 		if(is_numeric($key)){
 			$key=(int)$key;
-			$sql.=" WHERE e.encounter_nr = $key AND NOT e.is_discharged ".$add_opt;
+			$this->sql.=" WHERE e.encounter_nr = $key AND NOT e.is_discharged ".$add_opt;
 		}else{
-			$sql.=" WHERE (e.encounter_nr LIKE '$key%' 
+			$this->sql.=" WHERE (e.encounter_nr LIKE '$key%' 
 						OR p.pid LIKE '$key%'
 						OR p.name_last LIKE '$key%'
 						OR p.name_first LIKE '$key%'
 						OR p.date_birth LIKE '$key%')";
-			if($enc_class) $sql.="	AND e.encounter_class_nr=$enc_class";
-			$sql.="  AND NOT e.is_discharged AND e.status NOT IN ($this->dead_stat) ".$add_opt;
+			if($enc_class) $this->sql.="	AND e.encounter_class_nr=$enc_class";
+			$this->sql.="  AND NOT e.is_discharged AND e.status NOT IN ($this->dead_stat) ".$add_opt;
 		}
 		//echo $sql;
-	    if ($this->res['sabi']=$db->Execute($sql)) {
-		   	if ($this->record_count=$this->res['sabi']->RecordCount()) {
-				$this->rec_count=$this->record_count;
-				return $this->res['sabi'];
-			} else {
-				return false;
-			}
-		}else {
-			return false;
+		if($limit){
+	    	$this->res['sabi']=$db->SelectLimit($this->sql,$len,$so);
+		}else{
+	    	$this->res['sabi']=$db->Execute($this->sql);
 		}
+	    if ($this->res['sabi']){
+		   	if ($this->record_count=$this->res['sabi']->RecordCount()) {
+				$this->rec_count=$this->record_count; # workaround
+				return $this->res['sabi'];
+			} else{return FALSE;}
+		}else{return FALSE;}
 	}	
 	function searchInpatientBasicInfo($key){
 		return $this->_searchAdmissionBasicInfo($key,1); // 1 = inpatient (encounter class)
@@ -551,6 +562,11 @@ class Encounter extends Notes {
 	function searchOutpatientBasicInfo($key){
 		return $this->_searchAdmissionBasicInfo($key,2); // 2 = outpatient (encounter class)
 	}
+	/**
+	* Search returning basic last name, first name, encounter nr. and bday information
+	* @param $key (char) the search keyword
+	* return adodb record object, else false
+	*/
 	function searchEncounterBasicInfo($key,$sortitem='',$order=''){
 		if(!empty($sortitem)){
 			$option=' ORDER BY ';
@@ -566,6 +582,17 @@ class Encounter extends Notes {
 		
 		return $this->_searchAdmissionBasicInfo($key,0,$option); // 0 = all kinds of admission
 	}
+	/**
+	* Limited rows search returning basic last name, first name, encounter nr. and bday information
+	* @param $key (char) the search keyword
+	* return adodb record object, else false
+	*/
+	function searchLimitEncounterBasicInfo($key,$len,$so,$sortitem='',$order='ASC'){
+		if(!empty($sortitem)){
+			$option=" ORDER BY $sortitem $order";
+		}
+		return $this->_searchAdmissionBasicInfo($key,0,$option,TRUE,$len,$so); // 0 = all kinds of admission
+	}
 	function searchInpatientNotInWardBasicInfo($key){
 		return $this->_searchAdmissionBasicInfo($key,1,'AND NOT in_ward'); // 1 = outpatient (encounter class)
 	}
@@ -576,9 +603,9 @@ class Encounter extends Notes {
 		    if($this->result->RecordCount()) {
 			    $this->row=$this->result->FetchRow();
 				return $this->row['pid'];
-			} else return false;
+			} else return FALSE;
 		}else {
-		    return false;
+		    return FALSE;
 		}
 	}
 	function _InLocation($type_nr){
@@ -586,8 +613,8 @@ class Encounter extends Notes {
 		if($this->result=$db->Execute("SELECT nr FROM $this->tb_location WHERE encounter_nr=$this->enc_nr AND type_nr=$type_nr AND location_nr=$this->loc_nr AND (date_to='' OR date_to='0000-00-00')")){
 			if($this->result->RecordCount()){
 				return $this->result['nr'];
-			}else{return false;}
-		}else{return false;}
+			}else{return FALSE;}
+		}else{return FALSE;}
 	}
 	function InWard($enr,$loc_nr){
 		$this->enc_nr=$enr;
@@ -611,7 +638,7 @@ class Encounter extends Notes {
 	}
 	function _setLocation($enr=0,$type_nr=0,$loc_nr=0,$group_nr,$date='',$time=''){
 		global $HTTP_SESSION_VARS;
-		//if(!($enr&&$type_nr&&$loc_nr)) return false;
+		//if(!($enr&&$type_nr&&$loc_nr)) return FALSE;
 		if(empty($date)) $date=date('Y-m-d');
 		if(empty($time)) $time=date('H:i:s');
 		$user=$HTTP_SESSION_VARS['sess_user_name'];
@@ -649,21 +676,21 @@ class Encounter extends Notes {
 		}else{
 			if($this->assignInWard($enr,$ward_nr,$ward_nr,$date,$time)){
 				$ok=true;
-			}else{$ok=false;}
+			}else{$ok=FALSE;}
 		}
 		if($this->InRoom($enr,$room_nr)){
 			$ok=true;
 		}else{
 			if($this->assignInRoom($enr,$room_nr,$ward_nr,$date,$time)){
 				$ok=true;
-			}else{$ok=false;}
+			}else{$ok=FALSE;}
 		}
 		if($ok&&!$this->InBed($enr,$bed_nr)){
 			if($this->assignInBed($enr,$bed_nr,$ward_nr,$date,$time)){
 				return true;
-			}else{return false;}
+			}else{return FALSE;}
 		}else{
-			return false;
+			return FALSE;
 		}
 	}
 	/**
@@ -673,11 +700,11 @@ class Encounter extends Notes {
 	* @param $enr (int) = encounter nr
 	* @param $data (str) = the data for updating formatted in sql syntax
 	* @param $act (str) = modification action, defaults to "modified"
-	* return true/false
+	* return true/FALSE
 	*/
 	function _setCurrentAssignment($enr,$data='',$act='Modified'){
 		global $HTTP_SESSION_VARS;
-		if(!$enr||empty($data)) return false;
+		if(!$enr||empty($data)) return FALSE;
 		$data.=",history=CONCAT(history,'\n$act ".date('Y-m- H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."'), 
 						modify_id='".$HTTP_SESSION_VARS['sess_user_name']."',
 						modify_time='".date('YmdHis')."'";
@@ -736,11 +763,11 @@ class Encounter extends Notes {
 	* public
 	* @param enc_nr (int) = encounter nr
 	* @param by (str) = extra name of person responsible for cancellation
-	* return true/false
+	* return true/FALSE
 	*/
 	function Cancel($enc_nr=0,$by){
 		global $HTTP_SESSION_VARS;
-		if(!$this->internResolveEncounterNr($enc_nr)) return false;
+		if(!$this->internResolveEncounterNr($enc_nr)) return FALSE;
 		if(empty($by)) $by=$HTTP_SESSION_VARS['sess_user_name'];
 		$this->sql="UPDATE $this->tb_enc SET encounter_status='cancelled',status='void',is_discharged=1,
 						history=CONCAT(history,'\nCancelled ".date('Y-m- H:i:s')." by $by, logged-user ".$HTTP_SESSION_VARS['sess_user_name']."'), 
@@ -768,7 +795,7 @@ class Encounter extends Notes {
 	/**
 	* Get the discharge types data
 	* return = ADODB dataset object if ok
-	* return = false if not ok
+	* return = FALSE if not ok
 	*/
 	function getDischargeTypesData(){
 		global $db;
@@ -776,8 +803,8 @@ class Encounter extends Notes {
 		if($this->result=$db->Execute($this->sql)){
 			if($this->result->RecordCount()){
 				return $this->result;
-			}else{return false;}
-		}else{return false;}
+			}else{return FALSE;}
+		}else{return FALSE;}
 	}		
 	/**
 	* Complete discharge
@@ -797,7 +824,7 @@ class Encounter extends Notes {
 									modify_id='".$HTTP_SESSION_VARS['sess_user_name']."'
 							WHERE encounter_nr=$enr AND type_nr IN ($loc_types) AND date_to IN ('','0000-00-00')";
 		if($this->Transact($this->sql)){ return true;}
-		 else{echo $this->sql; return false;}
+		 else{echo $this->sql; return FALSE;}
 		//return $this->Transact($this->sql);
 	}
 	/**
@@ -807,8 +834,8 @@ class Encounter extends Notes {
 		if($this->_discharge($enr,"'1','2','3','4','5','6'",$d_type_nr,$date,$time)){
 			if($this->setIsDischarged($enr,$date,$time)){
 				return true;
-			}else{return false;}
-		}else{return false;}
+			}else{return FALSE;}
+		}else{return FALSE;}
 	}
 	/**
 	* Complete discharge of patient from the department, but patient remains admitted
@@ -824,7 +851,7 @@ class Encounter extends Notes {
 	function DischargeFromWard($enr,$d_type_nr,$date='',$time=''){
 		if($this->_discharge($enr,"'2','4','5','6'",$d_type_nr,$date,$time)){
 			return true;
-		}else{return false;}
+		}else{return FALSE;}
 	}
 	/**
 	* Complete discharge of patient from the room but patient remains in ward
@@ -832,7 +859,7 @@ class Encounter extends Notes {
 	function DischargeFromRoom($enr,$d_type_nr,$date='',$time=''){
 		if($this->_discharge($enr,"'4','5','6'",$d_type_nr,$date,$time)){
 			return true;
-		}else{return false;}
+		}else{return FALSE;}
 	}
 	/**
 	* Complete discharge of patient from the bed but patient remains in room
@@ -840,13 +867,13 @@ class Encounter extends Notes {
 	function DischargeFromBed($enr,$d_type_nr,$date='',$time=''){
 		if($this->_discharge($enr,"'5'",$d_type_nr,$date,$time)){
 			return true;
-		}else{return false;}
+		}else{return FALSE;}
 	}
 	/**
 	* saveDischargeNotesFromArray() saves the discharge notes of an encounter
 	* the data must be contained first in an array and passed to the function by reference
 	* @param $data_array (array) = the data in the array
-	* return true/false
+	* return true/FALSE
 	*/
 	function saveDischargeNotesFromArray(&$data_array){
 		$this->setTable($this->tb_notes);
@@ -855,13 +882,13 @@ class Encounter extends Notes {
 		if($this->_insertNotesFromInternalArray(3)){ // 3 = discharge summary note type
 			return true;
 		}else{
-			return false;
+			return FALSE;
 		}
 	}
 	function getLoadedEncounterData(){
 		if($this->is_loaded){
 			return $this->encounter;
-		}else{return false;}
+		}else{return FALSE;}
 	}	
 	/**
 	* getBasic4Data() returns an adodb object containing the encounter's first name, family name, birth date and sex
@@ -869,7 +896,7 @@ class Encounter extends Notes {
 	*/
 	function getBasic4Data($enc_nr){
 	    global $db;
-		if(!$this->internResolveEncounterNr($enc_nr)) return false;
+		if(!$this->internResolveEncounterNr($enc_nr)) return FALSE;
 		$this->sql="SELECT p.name_last, p.name_first, p.date_birth, p.sex
 							FROM $this->tb_enc AS e, 
 									 $this->tb_person AS p 
@@ -879,8 +906,8 @@ class Encounter extends Notes {
 		if($this->result=$db->Execute($this->sql)) {
 		    if($this->result->RecordCount()) {
 				return $this->result;
-		    } else { return false;}
-		} else { return false;}
+		    } else { return FALSE;}
+		} else { return FALSE;}
 	}
 	/**
 	* useSicknessConfirm() points  the core to the care_encounter_sickconfirm table and fields
@@ -894,12 +921,12 @@ class Encounter extends Notes {
 	/**
 	* getSicknessConfirm() gets a stored sickness confirmations of an encounter
 	* public
-	* @param $nr (int) = the item nr of the record , if $nr=0 return false
-	* return ADODB record object or false
+	* @param $nr (int) = the item nr of the record , if $nr=0 return FALSE
+	* return ADODB record object or FALSE
 	*/
 	function getSicknessConfirm($nr=0){
 	    global $db;
-		if(!$nr) return false;
+		if(!$nr) return FALSE;
 		$this->sql="SELECT s.*,d.sig_stamp,d.logo_mime_type 
 							FROM $this->tb_sickconfirm AS s 
 							LEFT JOIN $this->tb_dept AS d ON s.dept_nr=d.nr
@@ -908,19 +935,19 @@ class Encounter extends Notes {
 		if($this->result=$db->Execute($this->sql)) {
 		    if($this->rec_count=$this->result->RecordCount()) {
 				return $this->result;
-		    } else { return false;}
-		} else { return false;}
+		    } else { return FALSE;}
+		} else { return FALSE;}
 	}
 	/**
 	* allSicknessConfirm() gets all stored sickness confirmations of an encounter
 	* public
 	* @param $dept_nr (int) = the department id number , if $dept_nr==0 all records for the encounter nr will be fetched
 	* @param $enc_nr (int) = encounter number
-	* return ADODB record object or false
+	* return ADODB record object or FALSE
 	*/
 	function allSicknessConfirm($dept_nr=0,$enc_nr=0){
 	    global $db;
-		//if(!$this->internResolveEncounterNr($enc_nr)) return false;
+		//if(!$this->internResolveEncounterNr($enc_nr)) return FALSE;
 		$this->sql="SELECT s.*,d.LD_var,d.name_formal,d.sig_stamp,d.logo_mime_type
 						FROM $this->tb_sickconfirm AS s
 							LEFT JOIN $this->tb_dept AS d ON s.dept_nr=d.nr
@@ -932,17 +959,17 @@ class Encounter extends Notes {
 		if($this->result=$db->Execute($this->sql)) {
 		    if($this->rec_count=$this->result->RecordCount()) {
 				return $this->result;
-		    } else { return false;}
-		} else { return false;}
+		    } else { return FALSE;}
+		} else { return FALSE;}
 	}
 	/**
 	* saveSicknessConfirm() saves a sickness confirmation of an encounter
 	* public
 	* @param $data (array) = the data in arrray, passed by reference
-	* return true/false;
+	* return true/FALSE;
 	*/
 	function saveSicknessConfirm(&$data){
-		if(!is_array($data)) return false;
+		if(!is_array($data)) return FALSE;
 		$this->useSicknessConfirm();
 		$data['date_create']=date('Y-m-d H:i:s');
 		$this->data_array=$data;
@@ -952,11 +979,11 @@ class Encounter extends Notes {
 	* EncounterInsuranceData() returns the insurance relevant data of an encounter
 	* public
 	* @param $enc_nr (int) = encounter number
-	* return adodb object or false
+	* return adodb object or FALSE
 	*/
 	function EncounterInsuranceData($enc_nr=0){
 	    global $db;
-		if(!$this->internResolveEncounterNr($enc_nr)) return false;
+		if(!$this->internResolveEncounterNr($enc_nr)) return FALSE;
 		$this->sql="SELECT e.insurance_nr, i.name, i.sub_area FROM $this->tb_enc  AS e
 							LEFT JOIN $this->tb_insco AS i ON e.insurance_firm_id=i.firm_id
 						WHERE e.encounter_nr=$this->enc_nr AND e.status NOT IN ($this->dead_stat)";	
@@ -964,8 +991,8 @@ class Encounter extends Notes {
 		if($this->result=$db->Execute($this->sql)) {
 		    if($this->rec_count=$this->result->RecordCount()) {
 				return $this->result;
-		    } else { return false;}
-		} else { return false;}
+		    } else { return FALSE;}
+		} else { return FALSE;}
 	}
 	 /**
 	 * markAppointmentDone() marks an appointment's status as done and links the encounter number
@@ -973,11 +1000,11 @@ class Encounter extends Notes {
 	 * @param $appt_nr (int) = the appointment record number
 	 * @parm $class_nr (int) = the final type of encounter (1= inpatient, 2= outpatient)
 	 * @param $enc_nr (int) = the encounter number that resulted from the appointment
-	 * return true/false
+	 * return true/FALSE
 	 */
 	function markAppointmentDone($appt_nr=0,$class_nr=0,$enc_nr=0){
 	    global $HTTP_SESSION_VARS;
-		if(!$appt_nr||!$this->internResolveEncounterNr($enc_nr)) return false;
+		if(!$appt_nr||!$this->internResolveEncounterNr($enc_nr)) return FALSE;
 		$this->sql="UPDATE $this->tb_appt SET  appt_status='done',encounter_nr=$this->enc_nr,encounter_class_nr=$class_nr,
 							history=CONCAT(history,'\nDone ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."'),
 							modify_id='".$HTTP_SESSION_VARS['sess_user_name']."',
@@ -989,7 +1016,7 @@ class Encounter extends Notes {
 	* OutPatientsBasic() gets  basic info of all outpatients = encounter_class_nr=2; 
 	* public
 	* @param $dept_nr (int) = the department nr, if empty all departments will be searched
-	* return adodb record object, else false
+	* return adodb record object, else FALSE
 	*/
 	function OutPatientsBasic($dept_nr=0){
 		global $db;
@@ -1011,8 +1038,8 @@ class Encounter extends Notes {
         if($this->res['opb']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['opb']->RecordCount()) {
 				 return $this->res['opb'];	 
-			} else { return false; }
-		} else { return false; }	
+			} else { return FALSE; }
+		} else { return FALSE; }	
 	}
 	/**
 	* createWaitingOutpatientList() creates a list of outpatients waiting to be admitted in the clinic
@@ -1025,7 +1052,7 @@ class Encounter extends Notes {
 		if($dept_nr) $cond="AND current_dept_nr='$dept_nr'";
 			else $cond='';
 			//$cond='';
-		//if(empty($key)) return false;
+		//if(empty($key)) return FALSE;
 		$this->sql="SELECT e.encounter_nr, e.encounter_class_nr, e.current_dept_nr,
 									p.pid, p.name_last, p.name_first, p.date_birth, p.sex, 
 									d.nr AS dept_nr, d.name_short, d.LD_var AS dept_LDvar
@@ -1040,8 +1067,8 @@ class Encounter extends Notes {
 	    if ($this->res['cwol']=$db->Execute($this->sql)){
 		   	if ($this->rec_count=$this->res['cwol']->RecordCount()){
 				return $this->res['cwol'];
-			}else{return false;}
-		}else{return false;}
+			}else{return FALSE;}
+		}else{return FALSE;}
 	}
 	/**
 	* AllStatus() returns the status info and current locations of an encounter
@@ -1051,15 +1078,15 @@ class Encounter extends Notes {
 	*/
 	function AllStatus($enc_nr=0){
 	    global $db;
-		if(!$this->internResolveEncounterNr($enc_nr)) return false;
+		if(!$this->internResolveEncounterNr($enc_nr)) return FALSE;
 		$this->sql="SELECT encounter_status,current_ward_nr,current_room_nr,in_ward,current_dept_nr,in_dept,is_discharged,status
 						FROM $this->tb_enc	WHERE encounter_nr=$this->enc_nr AND status NOT IN ($this->dead_stat)";	
 		//echo $sql;
 		if($this->res['ast']=$db->Execute($this->sql)) {
 		    if($this->rec_count=$this->res['ast']->RecordCount()) {
 				return $this->res['ast'];
-		    } else { return false;}
-		} else { return false;}
+		    } else { return FALSE;}
+		} else { return FALSE;}
 	}
 }
 ?>

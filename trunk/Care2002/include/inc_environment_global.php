@@ -39,9 +39,9 @@ if (ini_get('session.use_trans_sid')!=1) {
 define('URL_REDIRECT_APPEND','?sid='.$sid.'&lang='.$lang);
 
 # Set the default template theme
-//$template_theme='biju';
+$template_theme='biju';
 //$template_theme='default';
-$template_theme='human_aqua_2';
+
 # Set the template path
 $template_path=$root_path.'gui/html_template/';
 # Page generation time start

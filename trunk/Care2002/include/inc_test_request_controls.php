@@ -11,8 +11,10 @@ if ($mode=="edit")
 <?php
 }
 ?>
+<!-- 
 <a href="javascript:sendLater()"><img <?php echo createLDImgSrc($root_path,'sendlater.gif','0') ?> alt="<?php echo $LDSendLater ?>"></a>
-<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDClose ?>"></a>
+ -->
+ <a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDClose ?>"></a>
 </td>
 </tr>
 </table>
