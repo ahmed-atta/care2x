@@ -6,7 +6,7 @@ require($root_path.'include/inc_environment_global.php');
 * CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
 * Copyright 2002,2003,2004,2005 Elpidio Latorilla
-* elpidio@care2x.org, elpidio@care2x.net
+* elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -18,22 +18,29 @@ require_once($root_path.'global_conf/areas_allow.php');
 
 $allowedarea=&$allow_area['admit'];
 $append=URL_REDIRECT_APPEND.'&from=pass&fwd_nr='.$fwd_nr; 
+
+#
+# Starting at version 2.0.2, the "new patient" button is hidden. It can be shown by defining the ADMISSION_EXT_TABS constant to TRUE
+# at the /include/inc_enviroment_global.php script
+#
+if(!defined('ADMISSION_EXT_TABS') || !ADMISSION_EXT_TABS){
+	if(isset($target) && $target == 'entry') $target = 'search';
+}
+
 switch($target){
-	#
-	# Starting at version 2.0.2, the "entry" target is ignored
-	#
-	//case 'entry':$fileforward='aufnahme_start.php'.$append;
-	//					$lognote='Admission ok';
-	//					break;
-	case 'search':$fileforward='aufnahme_daten_such.php'.$append; 
+
+	case 'entry':$fileforward='aufnahme_start.php'.$append;
+						$lognote='Admission ok';
+						break;
+	case 'search':$fileforward='aufnahme_daten_such.php'.$append;
 						$lognote='Admision search ok';
 						break;
 	case 'archiv':$fileforward='aufnahme_list.php'.$append;
 						$lognote='Admission archive ok';
 						 break;
 	default: $target='search';
-				$lognote='Admission ok';
-				$fileforward='aufnahme_start.php'.$append;
+						$lognote='Admission ok';
+						$fileforward='aufnahme_daten_such.php'.$append;
 }
 
 
@@ -81,11 +88,15 @@ echo '
 <td colspan=3>
 <?php 
 #
-# Starting at version 2.0.2, the "new patient" button is hidden
+# Starting at version 2.0.2, the "new patient" button is hidden. It can be shown by defining the ADMISSION_EXT_TABS constant to TRUE
+# at the /include/inc_enviroment_global.php script
 #
-//	if($target=="entry") echo '<img '.createLDImgSrc($root_path,'admit-blue.gif','0').' alt="'.$LDAdmit.'">';
-//		else{ echo'<a href="aufnahme_pass.php?sid='.$sid.'&target=entry&lang='.$lang.'"><img '.createLDImgSrc($root_path,'admit-gray.gif','0').' alt="'.$LDAdmit.'"'; if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';}
-	
+if(defined('ADMISSION_EXT_TABS') && ADMISSION_EXT_TABS){
+
+	if($target=="entry") echo '<img '.createLDImgSrc($root_path,'admit-blue.gif','0').' alt="'.$LDAdmit.'">';
+		else{ echo'<a href="aufnahme_pass.php?sid='.$sid.'&target=entry&lang='.$lang.'"><img '.createLDImgSrc($root_path,'admit-gray.gif','0').' alt="'.$LDAdmit.'"'; if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';}
+}
+
 	if($target=="search") echo '<img '.createLDImgSrc($root_path,'such-b.gif','0').' alt="'.$LDSearch.'">';
 		else{ echo '<a href="aufnahme_pass.php?sid='.$sid.'&target=search&lang='.$lang.'"><img '.createLDImgSrc($root_path,'such-gray.gif','0').' alt="'.$LDSearch.'" ';if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';}
 	if($target=="archiv") echo '<img '.createLDImgSrc($root_path,'arch-blu.gif','0').'  alt="'.$LDArchive.'">';

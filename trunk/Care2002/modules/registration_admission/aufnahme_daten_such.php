@@ -6,7 +6,7 @@ require($root_path.'include/inc_environment_global.php');
 * CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
 * Copyright 2002,2003,2004,2005 Elpidio Latorilla
-* elpidio@care2x.org, elpidio@care2x.net
+* elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -26,12 +26,8 @@ $toggle=0;
 if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 	else $breakfile='aufnahme_pass.php'.URL_APPEND.'&target=entry';
 
-# Set color values for the search mask 
-$searchmask_bgcolor='#f3f3f3';
+# Set value for the search mask
 $searchprompt=$LDEntryPrompt;
-$entry_block_bgcolor='#fff3f3';
-$entry_border_bgcolor='#6666ee';
-$entry_body_bgcolor='#ffffff';
 
 # Special case for direct access from patient listings
 # If forward nr ok, use it as searchkey
@@ -228,194 +224,158 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
  $smarty->assign('pbHelp',"javascript:gethelp('admission_how2search.php','$from')");
 
   # Onload Javascript code
- $smarty->assign('sOnLoadJs','onLoad="document.searchform.searchkey.select()"');
+ $smarty->assign('sOnLoadJs','onLoad="if(window.focus) window.focus();document.searchform.searchkey.select();"');
 
  # Hide the return button
  $smarty->assign('pbBack',FALSE);
 
-// Load tabs
-
+#
+# Load the tabs
+#
 $target='search';
 $parent_admit = TRUE;
-
 include('./gui_bridge/default/gui_tabs_patadmit.php');
 
- # Start buffering
+#
+# Prepare the javascript validator
+#
+if(!isset($searchform_count) || !$searchform_count){
+	$smarty->assign('sJSFormCheck','<script language="javascript">
+	<!--
+		function chkSearch(d){
+			if((d.searchkey.value=="") || (d.searchkey.value==" ")){
+				d.searchkey.focus();
+				return false;
+			}else	{
+				return true;
+			}
+		}
+	// -->
+	</script>');
+}
 
- ob_start();
-?>
+#
+# Prepare the form params
+#
+$sTemp = 'method="post" name="searchform';
+if($searchform_count) $sTemp = $sTemp."_".$searchform_count;
+$sTemp = $sTemp.'" onSubmit="return chkSearch(this)"';
+if(isset($search_script) && $search_script!='') $sTemp = $sTemp.' action="'.$search_script.'"';
+$smarty->assign('sFormParams',$sTemp);
+$smarty->assign('searchprompt',$searchprompt);
 
-&nbsp;
-<br>
+#
+# Prepare the hidden inputs
+#
+$smarty->assign('sHiddenInputs','<input type="image" '.createLDImgSrc($root_path,'searchlamp.gif','0','absmiddle').'>
+		<input type="hidden" name="sid" value="'.$sid.'">
+		<input type="hidden" name="lang" value="'.$lang.'">
+		<input type="hidden" name="noresize" value="'.$noresize.'">
+		<input type="hidden" name="target" value="'.$target.'">
+		<input type="hidden" name="user_origin" value="'.$user_origin.'">
+		<input type="hidden" name="origin" value="'.$origin.'">
+		<input type="hidden" name="retpath" value="'.$retpath.'">
+		<input type="hidden" name="aux1" value="'.$aux1.'">
+		<input type="hidden" name="ipath" value="'.$ipath.'">
+		<input type="hidden" name="mode" value="search">');
 
-	<table border=0 cellpadding=10 bgcolor="<?php echo $entry_border_bgcolor ?>">
-		<tr>
-			<td>
-				<?php
+$smarty->assign('sCancelButton','<a href="patient.php'.URL_APPEND.'&target=search"><img '.createLDImgSrc($root_path,'cancel.gif','0').'></a>');
 
-				include($root_path.'include/inc_patient_searchmask.php');
-
-				?>
-			</td>
-		</tr>
-   </table>
-
-
-<p>
-<a href=<?php  	echo '"patient.php'.URL_APPEND.'&target=search">'; ?><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a>
-<p>
-
-<?php
 if($mode=='search'||$mode=='paginate'){
-	if ($linecount) echo '<hr width=80% align=left>'.str_replace("~nr~",$totalcount,$LDSearchFound).' '.$LDShowing.' '.$pagen->BlockStartNr().' '.$LDTo.' '.$pagen->BlockEndNr().'.';
-		else echo str_replace('~nr~','0',$LDSearchFound); 
-		  
+	
+	if ($linecount) $smarty->assign('LDSearchFound',str_replace("~nr~",$totalcount,$LDSearchFound).' '.$LDShowing.' '.$pagen->BlockStartNr().' '.$LDTo.' '.$pagen->BlockEndNr().'.');
+		else $smarty->assign('LDSearchFound',str_replace('~nr~','0',$LDSearchFound));
+
 	if ($linecount) {
+
+		$smarty->assign('bShowResult',TRUE);
 
 		# Load the common icons and images
 		$img_options=createComIcon($root_path,'pdata.gif','0');
 		$img_male=createComIcon($root_path,'spm.gif','0');
 		$img_female=createComIcon($root_path,'spf.gif','0');
 
-		$bgimg='tableHeaderbg3.gif';
-		//$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
+		$smarty->assign('LDCaseNr',$pagen->makeSortLink($LDCaseNr,'encounter_nr',$oitem,$odir,$targetappend));
+		$smarty->assign('LDSex',$pagen->makeSortLink($LDSex,'sex',$oitem,$odir,$targetappend));
+		$smarty->assign('LDLastName',$pagen->makeSortLink($LDLastName,'name_last',$oitem,$odir,$targetappend));
+		$smarty->assign('LDFirstName',$pagen->makeSortLink($LDFirstName,'name_first',$oitem,$odir,$targetappend));
+		$smarty->assign('LDBday',$pagen->makeSortLink($LDBday,'date_birth',$oitem,$odir,$targetappend));
+		$smarty->assign('LDZipCode',$pagen->makeSortLink($LDZipCode,'addr_zip',$oitem,$odir,$targetappend));
+		$smarty->assign('LDOptions',$LDOptions);
 
-		echo '
-			<table border=0 cellpadding=2 cellspacing=1>
-			<tr class="wardlisttitlerow">';
-			
-?>
+		$sTemp = '';
+		while($zeile=$ergebnis->FetchRow()){
 
-      <td><b>
-	  <?php 
-	  	if($oitem=='encounter_nr') $flag=TRUE;
-			else $flag=FALSE; 
-		echo $pagen->SortLink($LDCaseNr,'encounter_nr',$odir,$flag); 
-			 ?></b></td>
-      <td><b>
-	  <?php 
-	  	if($oitem=='sex') $flag=TRUE;
-			else $flag=FALSE; 
-		echo $pagen->SortLink($LDSex,'sex',$odir,$flag); 
-			 ?></b></td>
-      <td><b>
-	  <?php 
-	  	if($oitem=='name_last') $flag=TRUE;
-			else $flag=FALSE; 
-		echo $pagen->SortLink($LDLastName,'name_last',$odir,$flag); 
-			 ?></b></td>
-      <td><b>
-	  <?php 
-	  	if($oitem=='name_first') $flag=TRUE;
-			else $flag=FALSE; 
-		echo $pagen->SortLink($LDFirstName,'name_first',$odir,$flag); 
-			 ?></b></td>
-      <td><b>
-	  <?php 
-	  	if($oitem=='date_birth') $flag=TRUE;
-			else $flag=FALSE; 
-		echo $pagen->SortLink($LDBday,'date_birth',$odir,$flag); 
-			 ?></b></td>
-      <td align='center'><b>
-	  <?php 
-	  	if($oitem=='addr_zip') $flag=TRUE;
-			else $flag=FALSE;
-		 echo $pagen->SortLink($LDZipCode,'addr_zip',$odir,$flag); 
-		 	
-		?></b></td>
-		<td background="<?php echo createBgSkin($root_path,'tableHeaderbg.gif'); ?>"><font color="#ffffff"><b><?php echo $LDOptions; ?></td>
+			$full_en=$zeile['encounter_nr'];
 
-<?php
+			$smarty->assign('toggle',$toggle);
+			$toggle = !$toggle;
 
-					echo"</tr>";
+			$smarty->assign('sCaseNr',$full_en);
 
-					while($zeile=$ergebnis->FetchRow())
-					{
-						$full_en=$zeile['encounter_nr'];
-						echo "
-							<tr class=";
-						if($toggle) { echo "wardlistrow2>"; $toggle=0;} else {echo "wardlistrow1>"; $toggle=1;};
-						echo '<td>';
-                        echo '&nbsp;'.$full_en;
-						if($zeile['encounter_class_nr']==2) echo ' <img '.createComIcon($root_path,'redflag.gif').'> <font size=1 color="red">'.$LDAmbulant.'</font>';
-                        echo '&nbsp;</td>';	
+			if($zeile['encounter_class_nr']==2){
+				$smarty->assign('sOutpatientIcon','<img '.createComIcon($root_path,'redflag.gif').'>');
+				$smarty->assign('LDAmbulant',$LDAmbulant);
+			}else{
+				$smarty->assign('sOutpatientIcon','');
+				$smarty->assign('LDAmbulant','');
+			}
 
-						echo '<td>';
-						switch($zeile['sex']){
-							case 'f': echo '<img '.$img_female.'>'; break;
-							case 'm': echo '<img '.$img_male.'>'; break;
-							default: echo '&nbsp;'; break;
-						}				
-                        echo '</td>
-						';
+			switch(strtolower($zeile['sex'])){
+				case 'f': $smarty->assign('sSex','<img '.$img_female.'>'); break;
+				case 'm': $smarty->assign('sSex','<img '.$img_male.'>'); break;
+				default: $smarty->assign('sSex','&nbsp;'); break;
+			}
+			$smarty->assign('sLastName',ucfirst($zeile['name_last']));
+			$smarty->assign('sFirstName',ucfirst($zeile['name_first']));
 
-						echo '<td>';
-						echo '&nbsp;'.ucfirst($zeile['name_last']);
-                        echo '</td>';	
-						echo '<td>';
-						echo '&nbsp;'.ucfirst($zeile['name_first']);
-                        echo '</td>';	
-						echo '<td>';
-						echo '&nbsp;'.formatDate2Local($zeile['date_birth'],$date_format);
-                        echo '</td>';	
-                        echo '</td>
-					    <td align=right>&nbsp; &nbsp;'.$zeile['addr_zip'].'</td>';
+			#
+			# If person is dead show a black cross
+			#
+			if($zeile['death_date']&&$zeile['death_date']!=$dbf_nodate) $smarty->assign('sCrossIcon','<img '.createComIcon($root_path,'blackcross_sm.gif','0','absmiddle').'>');
+				else $smarty->assign('sCrossIcon','');
 
-					    if($HTTP_COOKIE_VARS[$local_user.$sid]) echo '
-						<td>&nbsp;
-							<a href=aufnahme_daten_zeigen.php'.URL_APPEND.'&from=such&encounter_nr='.$zeile['encounter_nr'].'&target=search>
-							<img '.$img_options.' alt="'.$LDShowData.'"></a>&nbsp;';
-							
-                       if(!file_exists($root_path.'cache/barcodes/en_'.$full_en.'.png'))
-	      		       {
-			               echo "<img src='".$root_path."classes/barcode/image.php?code=".$full_en."&style=68&type=I25&width=180&height=50&xres=2&font=5&label=2&form_file=en' border=0 width=0 height=0>";
-		               }
-						echo '</td></tr>';
+			$smarty->assign('sBday',formatDate2Local($zeile['date_birth'],$date_format));
 
-					}
-					echo '
-						<tr><td colspan=6>'.$pagen->makePrevLink($LDPrevious).'</td>
-						<td align=right>'.$pagen->makeNextLink($LDNext).'</td>
-						</tr>
-						</table>';
-					if($linecount>$pagen->MaxCount())
-					{
-					    /* Set the appending nr for the searchform */
-					    $searchform_count=2;
-					?>
-						<p>
-		 				<table border=0 cellpadding=10 bgcolor="<?php echo $entry_border_bgcolor ?>">
-							<tr>
-								<td>
-<?php
-								include($root_path.'include/inc_patient_searchmask.php');
-?>
-								</td>
-							</tr>
-						</table>
-<?php
-					}
+			$smarty->assign('sZipCode',$zeile['addr_zip']);
+
+			$sTarget = "<a href=\"aufnahme_daten_zeigen.php".URL_APPEND."&from=such&encounter_nr=$full_en&target=search\">";
+			$sTarget=$sTarget.'<img '.$img_options.' title="'.$LDShowData.'"></a>';
+			$smarty->assign('sOptions',$sTarget);
+
+			if(!file_exists($root_path.'cache/barcodes/en_'.$full_en.'.png')){
+				$smarty->assign('sHiddenBarcode',"<img src='".$root_path."classes/barcode/image.php?code=".$full_en."&style=68&type=I25&width=180&height=50&xres=2&font=5&label=2' border=0 width=0 height=0>");
+			}
+			#
+			# Generate the row in buffer and append as string
+			#
+			ob_start();
+				$smarty->display('registration_admission/admit_search_list_row.tpl');
+				$sTemp = $sTemp.ob_get_contents();
+			ob_end_clean();
+		}
+
+		#
+		# Assign the rows string to template
+		#
+		$smarty->assign('sResultListRows',$sTemp);
+
+		$smarty->assign('sPreviousPage',$pagen->makePrevLink($LDPrevious));
+		$smarty->assign('sNextPage',$pagen->makeNextLink($LDNext));
 	}
 }
-?>
-<p>
-<hr width=80% align=left><p>
-<a href="aufnahme_start.php<?php echo URL_APPEND; ?>&mode=?"><?php echo $LDAdmWantEntry ?></a><br>
-<a href="aufnahme_list.php<?php echo URL_APPEND; ?>"><?php echo $LDAdmWantArchive ?></a>
-<p>
-
-<?php
+/*
+$smarty->assign('sPostText','<a href="aufnahme_start.php'.URL_APPEND.'&mode=?">'.$LDAdmWantEntry.'</a><br>
+	<a href="aufnahme_list.php'.URL_APPEND.'">'.$LDAdmWantArchive.'</a>');
+*/
+$smarty->assign('sPostText','<a href="aufnahme_list.php'.URL_APPEND.'">'.$LDAdmWantArchive.'</a>');
 
 # Stop buffering, assign contents and display template
 
-$sTemp = ob_get_contents();
-ob_end_clean();
-
-$smarty->assign('sMainDataBlock',$sTemp);
+$smarty->assign('sMainIncludeFile','registration_admission/admit_search_main.tpl');
 
 $smarty->assign('sMainBlockIncludeFile','registration_admission/admit_plain.tpl');
 
 $smarty->display('common/mainframe.tpl');
 
 ?>
-

@@ -2,13 +2,41 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
-/*** CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
+/*** CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
 * Copyright 2002,2003,2004,2005 Elpidio Latorilla
-* elpidio@care2x.org, elpidio@care2x.net
+* elpidio@care2x.org, 
 *
 * See the file 'copy_notice.txt' for the licence notice
 */
+
+/**
+* Internal function to check if the image files are existing in the image folder
+* @param string The directory path to the files with a trailing slash
+* @param string A filter string for filenames
+*/
+function containFiles($sDirPath='',$sDiscString=''){
+	$iFileCount=0;
+	if(empty($sDirPath)){
+		return FALSE;
+	}elseif(file_exists($sDirPath.'.')){
+		$handle=opendir($sDirPath.'.');
+		while (FALSE!==($filename = readdir($handle))) {
+			if ($filename != '.' && $filename != '..') {
+				if(empty($sDiscString)){
+					$iFileCount++;
+				}else{
+					if(stristr($filename,$sDiscString)) $iFileCount++;
+				}
+			}
+		}
+		closedir($sDirPath.'.');
+		return $iFileCount;
+	}else{
+		return FALSE;
+	}
+}
+
 define('LANG_FILE','radio.php');
 //define('NO_2LEVEL_CHK',1);
 $local_user='ck_radio_user';
@@ -182,8 +210,10 @@ if(!$pop_only){
     <td colspan=9 bgcolor="#0000ff"></td>
   </tr>
 <?php 
-if($mode=='search'&&$rows)
-{
+if($mode=='search'&&$rows){
+	#
+	# Prepare the image icons
+	#
 	$i=1;
 	$img_arrow=createComIcon($root_path,'bul_arrowblusm.gif','0','absmiddle'); // Load the torse icon image
 	$img_torso=createComIcon($root_path,'torso.gif','0'); // Load the torse icon image
@@ -196,7 +226,9 @@ if($mode=='search'&&$rows)
 	$img_t=createComIcon($root_path,'t_bl.gif','0'); // Load T
 	$img_info=createComIcon($root_path,'info2.gif','0','absmiddle'); // Load the info
 	
+	#
 	# Load the data in array
+	#
 	$pdata=array();
 	$z=0;
 	while($pdata[$z]=$result->Fetchrow()){
@@ -204,68 +236,94 @@ if($mode=='search'&&$rows)
 	}
 	
 
-	for($i=0;$i<$z;$i++)
-	{
+	for($i=0;$i<$z;$i++){
 		if($pdata[$i]['pid']!=$pdata[($i-1)]['pid']){
-		echo'
- 	<tr>
-    <td class="v12">&nbsp;</td>
-    <td class="v12">&nbsp;'.$pdata[$i]['name_last'].'&nbsp;</td>
-    <td class="v12">&nbsp;'.$pdata[$i]['name_first'].'&nbsp;</td>
-    <td class="v12">&nbsp;'.formatDate2Local($pdata[$i]['date_birth'],$date_format).'&nbsp;</td>
-    <td class="v12"><img ';
-	if($rows==1){
-		echo $img_s;
-	}else{
-		if($pdata[($i+1)]&&($pdata[$i]['pid']==$pdata[($i+1)]['pid'])) echo $img_t;
-			else echo $img_s;
-	}
-	echo '></td>
-    <td class="v12">&nbsp;'.formatDate2Local($pdata[$i]['upload_date'],$date_format).'&nbsp;';
-	if($pdata[$i]['note_len']) echo '<a href="javascript:popImgNotes(\''.$pdata[$i]['nr'].'\',\''.$sid.'\',\''.$lang.'\')"><img '.$img_info.'></a>';
-	echo '</td>
-    <td class="v12" align=center>&nbsp;'.$pdata[$i]['max_nr'].'&nbsp;</td>';
-	if(!$pop_only) echo '
-    <td class="v12" align=center><a href="dicom_launch.php'.URL_APPEND.'&img_nr='.$pdata[$i]['nr'].'&searchkey='.strtr($searchkey,' ','+').'" title="'.$LDViewInFrame.'"><img '.$img_torso.'></a></td>';
-	echo '
-    <td class="v12" align=center><a href="javascript:popDicom('.$pdata[$i]['nr'].')" title="'.$LDFullScreen.'"><img '.$img_torsowin.'></a></td>
-  </tr>
-  <tr>
-    <td colspan=9 bgcolor="#0000ff"><img '.$img_pix.' width=1 height=1></td>
-  </tr>';
-		continue;
+			echo'
+				<tr>
+				<td class="v12">&nbsp;</td>
+				<td class="v12">&nbsp;'.$pdata[$i]['name_last'].'&nbsp;</td>
+				<td class="v12">&nbsp;'.$pdata[$i]['name_first'].'&nbsp;</td>
+				<td class="v12">&nbsp;'.formatDate2Local($pdata[$i]['date_birth'],$date_format).'&nbsp;</td>
+				<td class="v12"><img ';
+			
+			if($rows==1){
+				echo $img_s;
+			}else{
+				if($pdata[($i+1)]&&($pdata[$i]['pid']==$pdata[($i+1)]['pid'])) echo $img_t;
+					else echo $img_s;
+			}
+
+			echo '></td>
+				<td class="v12">&nbsp;'.formatDate2Local($pdata[$i]['upload_date'],$date_format).'&nbsp;';
+			if($pdata[$i]['note_len']) echo '<a href="javascript:popImgNotes(\''.$pdata[$i]['nr'].'\',\''.$sid.'\',\''.$lang.'\')"><img '.$img_info.'></a>';
+			echo '</td>';
+
+			#
+			# Prepare the path to image
+			#
+			$sImagePath = $root_path.'radiology/dicom_img/'.$pdata[$i]['pid'].'/'.$pdata[$i]['nr'].'/';
+
+			if(containFiles($sImagePath,'.dcm')){
+			//if(file_exists($root_path.'radiology/dicom_img/'.$pdata[$i]['pid'].'/'.$pdata[$i]['nr'].'.dcm')){
+				echo '
+					<td class="v12" align=center>&nbsp;'.$pdata[$i]['max_nr'].'&nbsp;</td>';
+				if(!$pop_only) echo '
+					<td class="v12" align=center><a href="dicom_launch.php'.URL_APPEND.'&img_nr='.$pdata[$i]['nr'].'&searchkey='.strtr($searchkey,' ','+').'" title="'.$LDViewInFrame.'"><img '.$img_torso.'></a></td>';
+				echo '
+					<td class="v12" align=center><a href="javascript:popDicom('.$pdata[$i]['nr'].')" title="'.$LDFullScreen.'"><img '.$img_torsowin.'></a></td>
+				</tr>';
+			}else{
+				echo '<td colspan="3"><a href="javascript:gethelp(\'missing_file.php\',\''.$LDDicomImages.'\',\''.$sImagePath.'\')"><font color="red">'.$LDMissingImageFile.'</font></a></td>';
+			}
+			echo '
+				<tr>
+					<td colspan=9 bgcolor="#0000ff"><img '.$img_pix.' width=1 height=1></td>
+				</tr>';
+			continue;
 		
 		}
-		echo'
- <tr>
-    <td class="v12">&nbsp;';
-	if($pdata[$i]['encounter_nr']) echo $pdata[$i]['encounter_nr'];
-	echo '&nbsp;</td>
-    <td class="v12">&nbsp;</td>
-    <td class="v12">&nbsp;</td>
-    <td class="v12">&nbsp;</td>
-    <td class="v12"><img ';
-	if($i==$rows){
-		if($pdata[$i]['pid']==$pdata[($i-1)]['pid']) echo $img_dr;
-			else echo $img_s;
-	}else{
-		if($pdata[$i]['pid']==$pdata[($i+1)]['pid']) echo $img_x;
-			else echo $img_dr;
+		echo '
+		<tr>
+				<td class="v12">&nbsp;';
+		if($pdata[$i]['encounter_nr']) echo $pdata[$i]['encounter_nr'];
+		echo '&nbsp;</td>
+			<td class="v12">&nbsp;</td>
+			<td class="v12">&nbsp;</td>
+			<td class="v12">&nbsp;</td>
+			<td class="v12"><img ';
+		if($i==$rows){
+			if($pdata[$i]['pid']==$pdata[($i-1)]['pid']) echo $img_dr;
+				else echo $img_s;
+		}else{
+			if($pdata[$i]['pid']==$pdata[($i+1)]['pid']) echo $img_x;
+				else echo $img_dr;
+		}
+		echo '></td>
+			<td class="v12">&nbsp;'.formatDate2Local($pdata[$i]['upload_date'],$date_format).'&nbsp;';
+		if($pdata[$i]['note_len']) echo '<a href="javascript:popImgNotes(\''.$pdata[$i]['nr'].'\',\''.$sid.'\',\''.$lang.'\')"><img '.$img_info.'></a>';
+		echo '</td>';
+		#
+		# Prepare the path to image
+		#
+		$sImagePath = $root_path.'radiology/dicom_img/'.$pdata[$i]['pid'].'/'.$pdata[$i]['nr'].'/';
+
+		if(containFiles($sImagePath,'.dcm')){
+		//if(file_exists($root_path.'radiology/dicom_img/'.$pdata[$i]['pid'].'/'.$pdata[$i]['nr'].'.dcm')){
+			echo '
+				<td class="v12" align=center>&nbsp;'.$pdata[$i]['max_nr'].'&nbsp;</td>';
+			if(!$pop_only) echo '
+				<td class="v12" align=center><a href="dicom_launch.php'.URL_APPEND.'&img_nr='.$pdata[$i]['nr'].'&searchkey='.strtr($searchkey,' ','+').'" title="'.$LDViewInFrame.'"><img '.$img_torso.'></a></td>';
+			echo '
+				<td class="v12" align=center><a href="javascript:popDicom('.$pdata[$i]['nr'].')" title="'.$LDFullScreen.'"><img '.$img_torsowin.'></a></td>
+				</tr>';
+		}else{
+			echo '<td colspan="3"><a href="javascript:gethelp(\'missing_file.php\',\''.$LDDicomImages.'\',\''.$sImagePath.'\')"><font color="red">'.$LDMissingImageFile.'</font></a></td>';
+		}
+		echo '
+			<tr>
+				<td colspan=9 bgcolor="#0000ff"><img '.$img_pix.' width=1 height=1></td>
+			</tr>';
 	}
-	echo '></td>
-    <td class="v12">&nbsp;'.formatDate2Local($pdata[$i]['upload_date'],$date_format).'&nbsp;';
-	if($pdata[$i]['note_len']) echo '<a href="javascript:popImgNotes(\''.$pdata[$i]['nr'].'\',\''.$sid.'\',\''.$lang.'\')"><img '.$img_info.'></a>';
-	echo '</td>
-    <td class="v12" align=center>&nbsp;'.$pdata[$i]['max_nr'].'&nbsp;</td>';
-	if(!$pop_only) echo '
-    <td class="v12" align=center><a href="dicom_launch.php'.URL_APPEND.'&img_nr='.$pdata[$i]['nr'].'&searchkey='.strtr($searchkey,' ','+').'" title="'.$LDViewInFrame.'"><img '.$img_torso.'></a></td>';
-	echo '
-    <td class="v12" align=center><a href="javascript:popDicom('.$pdata[$i]['nr'].')" title="'.$LDFullScreen.'"><img '.$img_torsowin.'></a></td>
-  </tr>
-  <tr>
-    <td colspan=9 bgcolor="#0000ff"><img '.$img_pix.' width=1 height=1></td>
-  </tr>';
-  }	
 }
 ?>
   </table>

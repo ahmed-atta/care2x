@@ -1,12 +1,12 @@
 <?php
-error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+//error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
 * Copyright 2002,2003,2004,2005 Elpidio Latorilla
-* elpidio@care2x.org, elpidio@care2x.net
+* elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -14,12 +14,39 @@ $thisfile=basename(__FILE__);
 require_once($root_path.'include/care_api_classes/class_appointment.php');
 $obj=new Appointment();
 //$db->debug=true;
+
+$bPastDateError = FALSE;
+
+#
+# Save PID to session. Patch as result of bug report from Francesco and Marco.
+#
+$HTTP_SESSION_VARS['sess_pid'] = $pid;
+
 if(!isset($mode)){
 	$mode='show';
 } else{
+	
+	#
+	# Validate date against past date
+	#
 	if($mode=='create'||$mode=='update') {
 		include_once($root_path.'include/inc_date_format_functions.php');
 		$HTTP_POST_VARS['date']=@formatDate2STD($HTTP_POST_VARS['date'],$date_format);
+		$sBufDate = (int) str_replace('-','',$HTTP_POST_VARS['date']);
+		$sBufToday = (int) date('Ymd');
+		$sBufDate = ($sBufDate - $sBufToday);
+		#
+		# If date in the past, force mode to "select" and erase date data
+		#
+		if($sBufDate < 0 ){
+			$bPastDateError = TRUE;
+			$mode = 'select';
+			$date = '';
+		}
+	}
+
+	if($mode=='create'||$mode=='update') {
+
 		$HTTP_POST_VARS['time']=@convertTimeToStandard($HTTP_POST_VARS['time']);
 		if($mode=='update'){
 			if(!isset($HTTP_POST_VARS['remind_mail'])) $HTTP_POST_VARS['remind_mail']='0';
@@ -38,7 +65,8 @@ if(!isset($mode)){
 	}elseif(($mode=='select')&&!empty($nr)){
 		$appt_row=$obj->getAppointment($nr);
 		if(is_array($appt_row)){
-			while(list($x,$v)=each($appt_row)) $$x=$v;
+			extract($appt_row);
+			//while(list($x,$v)=each($appt_row)) $$x=$v;
 		}
 	}elseif($mode=='appt_cancel'&&!empty($nr)){
 			$HTTP_POST_VARS['history']=$obj->ConcatHistory("Cancel: ".date('Y-m-d H:i:s')." : ".$HTTP_SESSION_VARS['sess_user_name']."\n");

@@ -6,7 +6,7 @@ require($root_path.'include/inc_environment_global.php');
 * CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
 * Copyright 2002,2003,2004,2005 Elpidio Latorilla
-* elpidio@care2x.org, elpidio@care2x.net
+* elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -76,7 +76,7 @@ echo '
 <script language=javascript>
 <!--
  if (window.screen.width) 
- { if((window.screen.width)>1000) document.write(\'<img '.createComIcon($root_path,'monitor2.gif','0','absmiddle').'><FONT  COLOR="'.$cfg['top_txtcolor'].'"  SIZE=6  FACE="verdana"> <b>'.$buf.'</b></font>\');}
+ { if((window.screen.width)>1000) document.write(\'<img '.createComIcon($root_path,'smiley.gif','0','top').'><FONT  COLOR="'.$cfg['top_txtcolor'].'"  SIZE=6  FACE="verdana"> <b>'.$buf.'</b></font>\');}
  //-->
  </script>';
  }
@@ -88,13 +88,26 @@ echo '
 	<td colspan=3>
 <?php
 
-	#
-	# Starting at version 2.0.2, the entry
-	#
+#
+# Starting at version 2.0.2, the "new person" button is "new patient". 
+# It can be reverted to "new person"  by defining the ADMISSION_EXT_TABS constant to TRUE
+# at the /include/inc_enviroment_global.php script
+#
+	if(defined('ADMISSION_EXT_TABS') && ADMISSION_EXT_TABS){
+
+		#
+		# User "register new person" button
+		#
+		$sNewPatientButton ='register_green.gif';
+		$sNewPatientButtonGray ='register_gray.gif';
+	}else{
+		$sNewPatientButton ='new_patient_green.gif';
+		$sNewPatientButtonGray ='admit-gray.gif';
+	}
 	//if($target=="entry") echo '<img '.createLDImgSrc($root_path,'register_green.gif','0').' alt="'.$LDNewPerson.'" title="'.$LDNewPerson.'">';
 	//	else{ echo'<a href="patient_register_pass.php?sid='.$sid.'&target=entry&lang='.$lang.'"><img '.createLDImgSrc($root_path,'register_gray.gif','0').' alt="'.$LDNewPerson.'" title="'.$LDNewPerson.'" '; if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';}
-	if($target=="entry") echo '<img '.createLDImgSrc($root_path,'new_patient_green.gif','0').' alt="'.$LDNewPerson.'" title="'.$LDNewPerson.'">';
-		else{ echo'<a href="patient_register_pass.php?sid='.$sid.'&target=entry&lang='.$lang.'"><img '.createLDImgSrc($root_path,'admit-gray.gif','0').' alt="'.$LDNewPerson.'" title="'.$LDNewPerson.'" '; if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';}
+	if($target=="entry") echo '<img '.createLDImgSrc($root_path,$sNewPatientButton,'0').' alt="'.$LDNewPerson.'" title="'.$LDNewPerson.'">';
+		else{ echo'<a href="patient_register_pass.php?sid='.$sid.'&target=entry&lang='.$lang.'"><img '.createLDImgSrc($root_path,$sNewPatientButtonGray,'0').' alt="'.$LDNewPerson.'" title="'.$LDNewPerson.'" '; if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';}
 	if($target=="search") echo '<img '.createLDImgSrc($root_path,'search_green.gif','0').' alt="'.$LDSearch.'" title="'.$LDSearch.'">';
 		else{ echo '<a href="patient_register_pass.php?sid='.$sid.'&target=search&lang='.$lang.'"><img '.createLDImgSrc($root_path,'such-gray.gif','0').' alt="'.$LDSearch.'"  title="'.$LDSearch.'" ';if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';}
 	if($target=="archiv") echo '<img '.createLDImgSrc($root_path,'advsearch_green.gif','0').'  alt="'.$LDAdvancedSearch.'" title="'.$LDAdvancedSearch.'">';

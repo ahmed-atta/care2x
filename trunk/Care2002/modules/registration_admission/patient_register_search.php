@@ -6,7 +6,7 @@ require($root_path.'include/inc_environment_global.php');
 * CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
 * Copyright 2002,2003,2004,2005 Elpidio Latorilla
-* elpidio@care2x.org, elpidio@care2x.net
+* elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -58,6 +58,12 @@ $thisfile=basename(__FILE__);
  $smarty->assign('pbHelp',"javascript:gethelp('person_how2search.php')");
 
  $smarty->assign('pbBack',FALSE);
+ 
+ #
+ # Create the search object
+ #
+ require_once($root_path.'include/care_api_classes/class_gui_search_person.php');
+ $psearch = & new GuiSearchPerson;
 
 # Start buffering the text above  the search block
  ob_start();
@@ -66,9 +72,6 @@ $thisfile=basename(__FILE__);
 $tab_bot_line='#66ee66'; // Set the horizontal bottom line color
 require('./gui_bridge/default/gui_tabs_patreg.php');
 
-
-# Start buffering the output
-ob_start();
 
 /* If the origin is admission link, show the search prompt */
 if(isset($origin) && $origin=='pass')
@@ -87,9 +90,8 @@ if(isset($origin) && $origin=='pass')
  $sTemp = ob_get_contents();
  ob_end_clean();
 
-require_once($root_path.'include/care_api_classes/class_gui_search_person.php');
-
-$psearch = & new GuiSearchPerson;
+# Assign the preceding text
+$psearch->pretext=$sTemp;
 
 $psearch->setTargetFile('patient_register_show.php');
 
@@ -103,12 +105,10 @@ $psearch->setPrompt($LDEnterPersonSearchKey);
 # usually in the case of barcode scanner data
 $psearch->auto_show_bynumeric = TRUE;
 
+# Start buffering the appending post search text
+ob_start();
 
-$psearch->pretext=$sTemp;
-
-$psearch->display();
-
-/* If the origin is admission link, show a button for creating an empty form  */
+# If the origin is admission link, show a button for creating an empty form
 if(isset($origin) && $origin=='pass')
 {
 ?>
@@ -117,7 +117,6 @@ if(isset($origin) && $origin=='pass')
 <input type=hidden name="sid" value=<?php echo $sid; ?>>
 <input type=hidden name="lang" value="<?php echo $lang; ?>">
 </form>
-
 <?php
 }
 
@@ -126,7 +125,10 @@ if(isset($origin) && $origin=='pass')
 $sTemp = ob_get_contents();
 ob_end_clean();
 
-$smarty->assign('sMainDataBlock',$sTemp);
+# Assign the appending post search text
+$psearch->posttext = $sTemp;
+
+$smarty->assign('sMainDataBlock',$psearch->create());
 
 $smarty->assign('sMainBlockIncludeFile','registration_admission/reg_plain.tpl');
 
