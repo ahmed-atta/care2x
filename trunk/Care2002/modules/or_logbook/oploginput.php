@@ -489,7 +489,7 @@ function openDRGComposite()
 			h=650;';
 ?>
 	
-	drgcomp_<?php echo $pdata[encounter_nr]."_".$op_nr."_".$dept_nr."_".$saal ?>=window.open("drg-composite-start.php?sid=<?php echo "$sid&lang=$lang&display=composite&pn=$pdata[encounter_nr]&ln=$lname&fn=$fname&bd=$bdate&opnr=$op_nr&dept_nr=$dept_nr&oprm=$saal"; ?>","drgcomp_<?php echo $pdata[encounter_nr]."_".$op_nr."_".$dept_nr."_".$saal ?>","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=" + (h-60));
+	drgcomp_<?php echo $pdata[encounter_nr]."_".$op_nr."_".$dept_nr."_".$saal ?>=window.open("<?php echo $root_path ?>modules/drg/drg-composite-start.php?sid=<?php echo "$sid&lang=$lang&display=composite&pn=$pdata[encounter_nr]&ln=$lname&fn=$fname&bd=$bdate&opnr=$op_nr&dept_nr=$dept_nr&oprm=$saal"; ?>","drgcomp_<?php echo $pdata[encounter_nr]."_".$op_nr."_".$dept_nr."_".$saal ?>","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=" + (h-60));
 	window.drgcomp_<?php echo $pdata[encounter_nr]."_".$op_nr."_".$dept_nr."_".$saal ?>.moveTo(0,0);
 }
 //-->
@@ -659,15 +659,15 @@ style=" VISIBILITY: hidden; POSITION: absolute; top:20px">
 				if($sk&&stristr($pdata['date_birth'],$sk)) echo '<u><b><span style="background:yellow"> '.formatDate2Local($pdata['date_birth'],$date_format).'</span></b></u>';
  					else echo formatDate2Local($pdata['date_birth'],$date_format);				
  				echo ')  ';
-				switch($pdata['encounter_class_nr'])
+/*				switch($pdata['encounter_class_nr'])
 				{
 					case 1: $full_en=$pdata['encounter_nr']+$GLOBAL_CONFIG['patient_inpatient_nr_adder'];
 								break;
 					case 2: $full_en=$pdata['encounter_nr']+$GLOBAL_CONFIG['patient_outpatient_nr_adder'];
 								break;
 				}
-				if($sk&&stristr($pdata['encounter_nr'],$sk)) echo '<u><b><span style="background:yellow"> '.$full_en.'</span></b></u>';
- 					else echo $full_en;				
+*/				if($sk&&stristr($pdata['encounter_nr'],$sk)) echo '<u><b><span style="background:yellow"> '.$pdata['encounter_nr'].'</span></b></u>';
+ 					else echo $pdata['encounter_nr'];				
  				echo '<br> ';
 		}	
 		
@@ -730,7 +730,8 @@ if($pdata['encounter_nr']=='')
 		<a href="javascript:openfolder(\''.$pdata['encounter_nr'].'\')">
 		<img '.createComIcon($root_path,'info2.gif','0').' alt="'.str_replace("~tagword~",$lname,$LDOpenPatientFolder).'"></a>
 		<font color="#000000" size=2>';
-		echo ($pdata['encounter_class_nr']==1)?($pdata['encounter_nr']+$GLOBAL_CONFIG['patient_inpatient_nr_adder']) : ($pdata['encounter_nr']+$GLOBAL_CONFIG['patient_outpatient_nr_adder']);
+		//echo ($pdata['encounter_class_nr']==1)?($pdata['encounter_nr']+$GLOBAL_CONFIG['patient_inpatient_nr_adder']) : ($pdata['encounter_nr']+$GLOBAL_CONFIG['patient_outpatient_nr_adder']);
+		echo $pdata['encounter_nr'];
 		echo '</font><br>
 		<font  size=2>'.strtr($lname,"+"," ").', '.strtr($fname,"+"," ").'</font><br>
 		<font color="#000000" >'.formatDate2Local($bdate,$date_format).'</font><p>
@@ -745,7 +746,7 @@ if($pdata['encounter_nr']=='')
 
 <?php if($datafound)
 	{
-	 echo '<a href="drg-icd10.php?sid='.$sid.'&lang='.$lang;
+	 echo '<a href="'.$root_path.'modules/drg/drg-icd10.php?sid='.$sid.'&lang='.$lang;
 	 echo "&pn=$pdata[encounter_nr]&ln=$lname&fn=$fname&bd=$bdate&opnr=$op_nr&dept_nr=$dept_nr&oprm=$saal";
 	 echo '" target="OPLOGMAIN">'.$LDDiagnosis.':</a><br>
 <textarea name="diagnosis" cols=16 rows=8 wrap="physical" ></textarea>';
@@ -890,7 +891,7 @@ if($datafound)
 color="<?php if($datafound) echo "#0000cc"; else echo "#3f3f3f"; ?>">
 <?php if($datafound) 
 	{
-	 echo '<a href="drg-ops301.php?sid='.$sid.'&lang='.$lang;
+	 echo '<a href="'.$root_path.'modules/drg/drg-ops301.php?sid='.$sid.'&lang='.$lang;
 	 echo "&pn=$pdata[encounter_nr]&ln=$lname&fn=$fname&bd=$bdate&opnr=$op_nr&dept_nr=$dept_nr&oprm=$saal";
 	echo '" target="OPLOGMAIN">'.$LDTherapy.'/'.$LDOperation.'</a><br>
 	<TEXTAREA NAME="op_therapy" COLS="18" ROWS="8"></TEXTAREA>';
