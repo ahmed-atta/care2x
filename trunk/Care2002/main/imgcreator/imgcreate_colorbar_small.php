@@ -20,7 +20,7 @@ header ('Content-type: image/png');
 if(!isset($db)||$db) include($root_path.'include/inc_db_makelink.php');
 if($dblink_ok) {
 	    // get event signals
-	    $dbtable='care_nursing_station_patients_event_signaller';
+	    $dbtable='care_encounter_event_signaller';
 		
 	    $sql='SELECT yellow, black, blue_pale, brown, pink, 
 		                    yellow_pale, red, green_pale, violet, 

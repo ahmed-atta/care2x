@@ -2,6 +2,8 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
+require($root_path.'classes/datetimemanager/class.dateTimeManager.php');
+$dateshifter=new dateTimeManager();
 /*
 CARE 2002 Integrated Information System for Hospitals and Health Care Organizations and Services
 Copyright (C) 2002  Elpidio Latorilla & Intellin.org	
@@ -39,41 +41,36 @@ $xoffs=100; // The width of a day's column in pixels
 $xunit=$xoffs/24; // Unit of 1 hour in pixels = Width of day's column divided by 24 hours
 $yunit_temp=135/5; // Unit of y coord per temperature value in pixels
 $yunit_bp=135/200; // Unit of y coord per blood pressure value in pixels
-
+/**
+* Validate date value
+*/
+if(!isset($mo)||empty($mo)) $mo=date('m');
+if(!isset($dy)||empty($dy)) $dy=date('d');
+if(!isset($yr)||empty($yr)) $yr=date('Y');
 if(!extension_loaded('gd')) dl('php_gd.dll');
 
 if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
 if($dblink_ok){	
-    $dbtable='care_nursing_station_patients_curve';
-	
-	$sql="SELECT bp_temp FROM $dbtable WHERE patnum='$pn'";
+    $dbtable='care_encounter_measurement';
+	$start=date('Y-m-d',mktime(0,0,0,$mo,$dy,$yr));
+	$end=$dateshifter->shift_dates($start,-6,'d');
+	$ok=false;
+	$sql="SELECT msr_date,msr_time,value FROM $dbtable
+						WHERE encounter_nr=$pn AND msr_type_nr=8 AND msr_date BETWEEN '$start' AND '$end'
+						ORDER BY msr_date,msr_time";
 
-	if($ergebnis=$db->Execute($sql)){
-		if($rows=$ergebnis->RecordCount()){
-
-			$result=$ergebnis->FetchRow();
-			$arr=explode('_',$result['bp_temp']);
-			$actmonat=$mo;
-			$actjahr=$yr;
-					
-			for($i=$dy,$acttag=$dy,$d=0;$i<($dy+7);$i++,$d++,$acttag++){
-				aligndate(&$acttag,&$actmonat,&$actjahr); // function to align the date
-				$cbuf="sd=$actjahr$actmonat$acttag&rd=$acttag.$actmonat.$actjahr";
-		 		$loaded[$i]=0;
-				
-				while(list($x,$v)=each($arr)){
-					if(stristr($v,$cbuf))
-					{
-						$sbuf[$d]=$v;
-						$loaded[$d]=1;
-						break;
-					}
-				}// end of while
-				reset($arr);
-	 		}// end of for $i=0
-		}// end of if rows
-	}// end of if ergebnis
-} //else { print " $sql<br>"; }
+	if($bp_obj=$db->Execute($sql)){
+		$bprows=$bp_obj->RecordCount();
+		$ok=true;
+	}
+	$sql="SELECT msr_date,msr_time,value FROM $dbtable
+						WHERE encounter_nr=$pn AND msr_type_nr=3 AND msr_date BETWEEN '$start' AND '$end'
+						ORDER BY msr_date,msr_time";
+	if($temp_obj=$db->Execute($sql)){
+		$trows=$temp_obj->RecordCount();
+		$ok=true;
+	}
+}
   
 /* Initialize general  dimensions */ 
 $tabhi=135; // Height of graph chart in pixels
@@ -82,7 +79,6 @@ $tabcols=$tablen/28; // Total number of vertical lines
 $tabrows=$tabhi/20; // Total number of horizontal lines
 
 header ('Content-type: image/PNG');
-
 
 $im=@ImageCreateFromPNG($root_path.'main/imgcreator/datacurve.png'); // Loads the ready made image (makes this routine faster)
 
@@ -124,54 +120,46 @@ $text_blue = ImageColorAllocate ($im, 0, 0, 255);
 * $n = Column number of the chart = corresponding to a day
 * $xof= The current start x coord
 */
+if($ok){
+
 $ox1=0;$oy1=0;
 $tx1=0; $ty1=0;
 
 for($n=0,$xof=0;$n<7;$n++,$xof+=$xoffs)
 {
-	if(!$loaded[$n]) continue;
-	
-	if ($sbuf[$n]) 	parse_str($sbuf[$n],$abuf);
-	$b_t=explode("~",trim($abuf[e])); 
-	
+	$date=$dateshifter->shift_dates($start,-($n),'d');	
 //**************** begin of curve tracing  Blood Pressure***************
-    $b=explode("B",trim($b_t[0]));
-    if(!$b[0]) array_splice($b,0,1);
-    $b=array_unique($b);
-    sort($b,SORT_NUMERIC);
-
-    for($i=0;$i<(sizeof($b));$i++)
-    {
-        if(!$b[$i]) continue;
-        $bc=explode("b",$b[$i]);
-        if(($bc[0]==0)||($bc[1]==0)) continue;
-        $ox2=(($bc[0])*$xunit)+$xof; 
-	    $oy2=(($bc[1])-70)*$yunit_bp;$oy2=134-$oy2;
-        ImageArc($im,$ox2,$oy2,4,4,0,360,$text_red);
-        if($ox1 || $oy1) ImageLine($im,$ox1,$oy1,$ox2,$oy2,$text_red);
-        $ox1=$ox2;
-	    $oy1=$oy2;
-    }
-			
+	if($bprows){
+    	for($i=0;$i<$bprows;$i++)
+    	{
+        	$bp=$bp_obj->FetchRow();
+			if($bp['msr_date']!=$date) continue;
+        	if(empty($bp['msr_time'])||empty($bp['value'])) continue;
+        	$ox2=(($bp['msr_time'])*$xunit)+$xof; 
+	    	$oy2=(($bp['value'])-70)*$yunit_bp;$oy2=134-$oy2;
+        	ImageArc($im,$ox2,$oy2,4,4,0,360,$text_red);
+        	if($ox1 || $oy1) ImageLine($im,$ox1,$oy1,$ox2,$oy2,$text_red);
+        	$ox1=$ox2;
+	   	 	$oy1=$oy2;
+    	}
+		$bp_obj->MoveFirst();
+	}
 //**************** begin of curve tracing  Temperature***************
-    $b=explode("T",trim($b_t[1]));
-    if(!$b[1]) array_splice($b,0,1);
-    $b=array_unique($b);
-    sort($b,SORT_NUMERIC);
-
-    for($i=0;$i<(sizeof($b));$i++)
-    {
-        if(!$b[$i]) continue;
-        $bc=explode("t",$b[$i]);
-        if(($bc[0]==0)||($bc[1]==0)) continue;
-        $tx2=(($bc[0])*$xunit)+$xof; 
-	    $ty2=(($bc[1])-35)*$yunit_temp;$ty2=134-$ty2;
-        ImageFilledRectangle($im,$tx2-2,$ty2-2,$tx2+1,$ty2+1,$text_blue);
-        if($tx1 || $ty1) ImageLine($im,$tx1,$ty1,$tx2,$ty2,$text_blue);
-        $tx1=$tx2;$ty1=$ty2;
-    }
+	if($trows){
+		for($i=0;$i<$trows;$i++){
+        	$bc=$temp_obj->FetchRow();
+			if($bc['msr_date']!=$date) continue;
+        	if(empty($bc['msr_time'])||empty($bc['value'])) continue;
+        	$tx2=(($bc['msr_time'])*$xunit)+$xof; 
+		    $ty2=(($bc['value'])-35)*$yunit_temp;$ty2=134-$ty2;
+    	    ImageFilledRectangle($im,$tx2-2,$ty2-2,$tx2+1,$ty2+1,$text_blue);
+        	if($tx1 || $ty1) ImageLine($im,$tx1,$ty1,$tx2,$ty2,$text_blue);
+	        $tx1=$tx2;$ty1=$ty2;
+    	}
+		$temp_obj->MoveFirst();
+	}
 } // end of for $n
-
+}
 ImagePNG($im);
 ImageDestroy ($im);
  ?>
