@@ -80,21 +80,21 @@ class Net_HL7_Segments_MSH extends Net_HL7_Segment {
                 $this->setField(10, $this->getField(7) . rand(10000, 99999));
                 $this->setField(12, '2.2');
             }
-        }
-        else {
-            $this->setField(1, $hl7Globals['FIELD_SEPARATOR']);
-            $this->setField(2, 
-                            $hl7Globals['COMPONENT_SEPARATOR'] .
-                            $hl7Globals['REPETITION_SEPARATOR'] .
-                            $hl7Globals['ESCAPE_CHARACTER'] .
-                            $hl7Globals['SUBCOMPONENT_SEPARATOR']
-                            );
-            $this->setField(7, strftime("%Y%m%d%H%M%S"));
-            
-            // Set ID field
-            //
-            $this->setField(10, $this->getField(7) . rand(10000, 99999));
-            $this->setField(12, $hl7Globals['HL7_VERSION']);
+            else {
+                $this->setField(1, $hl7Globals['FIELD_SEPARATOR']);
+                $this->setField(2, 
+                                $hl7Globals['COMPONENT_SEPARATOR'] .
+                                $hl7Globals['REPETITION_SEPARATOR'] .
+                                $hl7Globals['ESCAPE_CHARACTER'] .
+                                $hl7Globals['SUBCOMPONENT_SEPARATOR']
+                                );
+                $this->setField(7, strftime("%Y%m%d%H%M%S"));
+                
+                // Set ID field
+                //
+                $this->setField(10, $this->getField(7) . rand(10000, 99999));
+                $this->setField(12, $hl7Globals['HL7_VERSION']);
+            }
         }
     }
 

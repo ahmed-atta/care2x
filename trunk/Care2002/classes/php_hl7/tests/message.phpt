@@ -37,6 +37,7 @@ $seg0 =& $msg->getSegmentByIndex(0);
 ok($msg->toString() == "MSH|^~\\&|1|\rPID|||xxx|\r", "String representation of message");
 
 ok($msg->toString(1) == "MSH|^~\\&|1|\nPID|||xxx|\n", "Pretty print representation of message");
+
 ok($seg0->getField(2) == "^~\\&", "Encoding characters (MSH(2))");
 
 # Constructor with components and subcomponents
@@ -102,7 +103,7 @@ $msg->removeSegmentByIndex(6);
 $seg5 =& new Net_HL7_Segment("ZZ1");
 
 # This shouldn't be possible
-$msg->insertSegment($seg5, 3);
+@$msg->insertSegment($seg5, 3);
 
 ok(! $msg->getSegmentByIndex(3), "Erroneous insert");
 
