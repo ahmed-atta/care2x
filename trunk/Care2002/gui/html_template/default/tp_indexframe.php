@@ -15,6 +15,11 @@ function changeLanguage(lang)
 	 ?>
 	return false;
 }
+function checkIfChanged(lang)
+{
+	if(lang=="<?php echo $lang; ?>") return false;
+		else changeLanguage(lang);
+}
 </script>
 </HEAD>
 
@@ -55,50 +60,24 @@ if($result){
 
 if(!$GLOBALCONFIG['language_single']){
 ?>
-
-
 <tr>
 <td>
 <FONT  FACE="Arial"  SIZE="-1">
-
-<form action="#" onSubmit="return changeLanguage(this.lang.value)">
+<form action="#" onSubmit="return checkIfChanged(this.lang.value)">
 <hr>
 <?php echo $LDLanguage ?><br>
-<select name="lang";>
-	<?php if($lang!='pt-br') : ?>
-	<option value="pt-br"> Brazilian</option>
-    <?php endif ?>
-	<?php if($lang!='cs-iso') : ?>
-	<option value="cs-iso"> Czech</option>
-	<?php endif ?>
-	<?php if($lang!='en') : ?>
-	<option value="en"> English</option>
-	<?php endif ?>
-	<?php if($lang!='fr') : ?>
-	<option value="fr"> French</option>
-	<?php endif ?>
-	<?php if($lang!='de') : ?>
-	<option value="de"> German</option>
-	<?php endif ?>
-	<?php if($lang!='it') : ?>
- 	<option value="it"> Italian</option>
-    <?php endif ?>
-	<?php if($lang!='id') : ?>
-	<option value="id"> Indonesian</option>
-    <?php endif ?>
-	<?php if($lang!='no') : ?>
-	<option value="no"> Norwegian</option>
-    <?php endif ?>
-	<?php if($lang!='pl') : ?>
-	<option value="pl"> Polish</option>
-    <?php endif ?>
-	<?php if($lang!='pt') : ?>
-	<option value="pt"> Portuguese</option>
-    <?php endif ?>
-	<?php if($lang!='es') : ?>
-	<option value="es"> Spanish</option>
-    <?php endif ?>
-
+<select name="lang">
+	<option value="pt-br" <?php if($lang=='pt-br') echo 'selected'; ?>> <?php echo $LDBrazilian ?></option>
+	<option value="cs-iso" <?php if($lang=='cs-iso') echo 'selected'; ?>> <?php echo $LDCzech ?></option>
+	<option value="en" <?php if($lang=='en') echo 'selected'; ?>> <?php echo $LDEnglish ?></option>
+	<option value="fr" <?php if($lang=='fr') echo 'selected'; ?>> <?php echo $LDFrench ?></option>
+	<option value="de" <?php if($lang=='de') echo 'selected'; ?>> <?php echo $LDGerman ?></option>
+ 	<option value="it" <?php if($lang=='it') echo 'selected'; ?>> <?php echo $LDItalian ?></option>
+	<option value="id" <?php if($lang=='id') echo 'selected'; ?>> <?php echo $LDIndonesian ?></option>
+	<option value="no" <?php if($lang=='no') echo 'selected'; ?>> <?php echo $LDNorwegian ?></option>
+	<option value="pl" <?php if($lang=='pl') echo 'selected'; ?>> <?php echo $LDPolish ?></option>
+	<option value="pt" <?php if($lang=='pt') echo 'selected'; ?>> <?php echo $LDPortuguese ?></option>
+	<option value="es" <?php if($lang=='es') echo 'selected'; ?>> <?php echo $LDSpanish ?></option>
 </select><br>
 <input type="submit" value="<?php echo $LDChange ?>">
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
@@ -107,7 +86,6 @@ if(!$GLOBALCONFIG['language_single']){
 <hr>
 </td>
 </tr>
-
 <?php
 }
 ?>
