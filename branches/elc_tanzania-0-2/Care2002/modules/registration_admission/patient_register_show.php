@@ -152,7 +152,7 @@ if($current_encounter){
 
 # Create new button to fresh input form
 $sNewRegBuffer='
-<form action="patient_register.php" method=post>
+<form action="patient_register_.php" method=post>
 <input type=submit value="'.$LDRegisterNewPerson.'">
 <input type=hidden name="sid" value="'.$sid.'">
 <input type=hidden name="lang" value="'.$lang.'">

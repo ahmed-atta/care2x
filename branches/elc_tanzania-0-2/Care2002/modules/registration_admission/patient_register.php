@@ -79,7 +79,6 @@ $inperson->pretext = $sTemp;
 $inperson->setDisplayFile('patient_register_show.php');
 
 $sRegForm=$inperson->create();
-
 $smarty->assign('sRegForm',$sRegForm);
 
 $smarty->assign('sSearchLink','<img '.createComIcon($root_path,'varrow.gif','0').'> <a href="patient_register_search.php'.URL_APPEND.'">'.$LDPatientSearch.'</a>');
