@@ -41,7 +41,7 @@ if(isset($fwd_nr)&&$fwd_nr&&is_numeric($fwd_nr)){
 
 if(!isset($mode)) $mode='';
 
-# Initialize page's control variables
+# Initialize page´s control variables
 if($mode=='paginate'){
 	$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
 }else{
@@ -58,6 +58,8 @@ $pagen=new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_p
 if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($searchkey)){
 	
 	include_once($root_path.'include/inc_date_format_functions.php');
+	
+	//$db->debug=true;
 
 	if($mode!='paginate'){
 		$HTTP_SESSION_VARS['sess_searchkey']=$searchkey;
@@ -85,8 +87,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 			if(empty($oitem)) $oitem='encounter_nr';			
 			if(empty($odir)) $odir='DESC'; # default, latest pid at top
 			
-			$sql2='	WHERE ( enc.encounter_nr="'.$suchwort.'"  OR enc.encounter_nr LIKE "%'.$suchwort.'" )';
-			
+			$sql2=" WHERE ( enc.encounter_nr='$suchwort'  OR enc.encounter_nr $sql_LIKE '%.$suchwort' )";
 	    } else {
 			# Try to detect if searchkey is composite of first name + last name
 			if(stristr($searchkey,',')){
@@ -119,31 +120,33 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 			
 			# Check the size of the comp
 			if(sizeof($comp)>1){
-				$sql2='	WHERE ( reg.name_last LIKE "'.strtr($ln,'+',' ').'%" 
-			                		AND reg.name_first LIKE "'.strtr($fn,'+',' ').'%") ';
-				if($bd){ $sql2.='
-			                		AND( reg.date_birth = "'.formatDate2STD($bd,$date_format).'"
-			                		OR reg.date_birth LIKE "%'.$bd.'%")';
+				$sql2=" WHERE ( reg.name_last $sql_LIKE '".strtr($ln,'+',' ')."%'
+			                		AND reg.name_first $sql_LIKE '".strtr($fn,'+',' ')."%')";
+				if($bd){ $sql2.="
+			                		AND( reg.date_birth = '".formatDate2STD($bd,$date_format)."'
+			                		OR reg.date_birth $sql_LIKE '%$bd%')";
 				}
 					
 				if(empty($odir)) $odir='DESC'; # default, latest birth at top
 		
 			}else{
 			
-				$sql2='	WHERE (reg.name_last LIKE "'.strtr($suchwort,'+',' ').'%" 
-			                		OR reg.name_first LIKE "'.strtr($suchwort,'+',' ').'%"
-			                		OR reg.date_birth = "'.formatDate2STD($suchwort,$date_format).'"
-			                		OR reg.date_birth LIKE "%'.$suchwort.'%"
-									)';
+				$sql2=" WHERE (reg.name_last $sql_LIKE '".strtr($suchwort,'+',' ')."%'
+			                		OR reg.name_first $sql_LIKE '".strtr($suchwort,'+',' ')."%'";
+				$bufdate=formatDate2STD($suchwort,$date_format);
+				if(!empty($bufdate)){
+					$sql2.= " OR reg.date_birth $sql_LIKE '$bufdate'";
+				}
+				$sql2.=")";
 				if(empty($odir)) $odir='ASC'; # default, ascending alphabetic
 			}
 		}
-			 
-			$sql2.=' AND enc.pid=reg.pid  
-					  AND enc.encounter_status <> "cancelled"
-					  AND NOT enc.is_discharged
-					  AND enc.status NOT IN ("void","hidden","inactive","deleted")  ORDER BY ';
-					  
+
+			$sql2.=" AND enc.pid=reg.pid
+					  AND enc.encounter_status <> 'cancelled'
+					  AND (enc.is_discharged = '' OR enc.is_discharged=0)
+					  AND enc.status NOT IN ('void','hidden','inactive','deleted')  ORDER BY ";
+
 			# Filter if it is personnel nr
 			if($oitem=='encounter_nr') $sql2.='enc.'.$oitem.' '.$odir;
 				else $sql2.='reg.'.$oitem.' '.$odir;
@@ -157,7 +160,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 			if($ergebnis=$db->SelectLimit($sql,$pagen->MaxCount(),$pagen->BlockStartIndex()))
        		{
 				if ($linecount=$ergebnis->RecordCount()) 
-				{ 
+				{
 					if(($linecount==1)&&$numeric&&$mode=='search')
 					{
 						$zeile=$ergebnis->FetchRow();
@@ -172,13 +175,19 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 						$pagen->setTotalDataCount($totalcount);
 					}else{
 						# Count total available data
-						$sql='SELECT COUNT(enc.encounter_nr) AS count '.$dbtable.$sql2;
-						
+						if($dbtype=='mysql'){
+							$sql='SELECT COUNT(enc.encounter_nr) AS "count" '.$dbtable.$sql2;
+						}else{
+							$sql='SELECT * '.$dbtable.$sql2;
+						}
+
 						if($result=$db->Execute($sql)){
-							if ($result->RecordCount()) {
-								$rescount=$result->FetchRow();
-    								$totalcount=$rescount['count'];
-    						}
+							if ($totalcount=$result->RecordCount()) {
+								if($dbtype=='mysql'){
+									$rescount=$result->FetchRow();
+    									$totalcount=$rescount['count'];
+								}
+    							}
 						}
 						$pagen->setTotalDataCount($totalcount);
 					}
@@ -186,7 +195,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 					$pagen->setSortItem($oitem);
 					$pagen->setSortDirection($odir);
 				}
-				else $mode="";
+				
 			}
 			 else {echo "<p>".$sql."<p>$LDDbNoRead";};
 }
