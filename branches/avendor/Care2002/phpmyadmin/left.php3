@@ -6,6 +6,7 @@
  * Gets the variables sent to this script, retains the db name that may have
  * been defined as startup option and include a core library
  */
+
 require('./grab_globals.inc.php3');
 if (!empty($db)) {
     $db_start = $db;
@@ -26,7 +27,6 @@ header('Pragma: no-cache'); // HTTP/1.0
 // Define the charset to be used
 header('Content-Type: text/html; charset=' . $charset);
 
-
 /**
  * Displays the frame
  */
@@ -35,6 +35,7 @@ header('Content-Type: text/html; charset=' . $charset);
 <html>
 
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     <title>phpMyAdmin</title>
     <base target="phpmain" />
     <!-- Collapsible tables list scripts -->

@@ -1,7 +1,27 @@
 <?php
-//print "$sid .............. $ck_sid";
-//exit;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+/**
+* The following lines are inserted for the purpose of integration to Care 2002
+* Beta 1.0.02   Release 30.07.2002
+*/
+/******* START *********/
+$old_reporting=error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+
+$entry=0;
+if($mode=="FORCE_ENABLE_PHP")
+{
+    define("INIT_DECODE",1); // set flag to decrypt
+    include("../include/inc_init_crypt.php"); // initialize crypt 
+    $clear_ck_sid = $dec_hcemd5->DecodeMimeSelfRand($s2);
+    if($clear_ck_sid==$s1) $entry=1;
+}
+if(!$entry)
+   {
+       define("LANG_FILE","edp.php");
+	   define("NO_2LEVEL_CHK",1);
+       require("../include/inc_front_chain_lang.php");
+	}
+error_reporting($old_reporting);
+/******** END  ***********/
 
 // Process config file to determine default server (if any)
 require('./grab_globals.inc.php3');
@@ -27,7 +47,9 @@ if (empty($HTTP_HOST)) {
 
 <frameset cols="150,*" rows="*" border="0" frameborder="0"> 
   <frame src="left.php3?server=<?php echo $server;?>&lang=<?php echo $lang; echo (empty($db)) ? '' : '&db=' . urlencode($db); ?>" name="nav">
-  <frame src="<?php echo (empty($db)) ? 'main.php3' : 'db_details.php3'; ?>?server=<?php echo $server;?>&lang=<?php echo $lang; echo (empty($db)) ? '' : '&db=' . urlencode($db); ?>" name="phpmain">
+
+<!-- The "&sid=$sid" code was inserted for the purpose of integration to Care 2002  -->
+  <frame src="<?php echo (empty($db)) ? 'main.php3' : 'db_details.php3'; ?>?server=<?php echo "$server&sid=$sid";?>&lang=<?php echo $lang; echo (empty($db)) ? '' : '&db=' . urlencode($db); ?>" name="phpmain">
 </frameset>
 <noframes>
 <body bgcolor="#FFFFFF">

@@ -25,7 +25,8 @@ if (empty($cfgLang)) {
         $lang_name = ucfirst(substr(strstr($tmplang[0], '|'), 1));
         echo "\n";
         ?>
-    [&nbsp;<a href="index.php3?server=<?php echo $server;?>&lang=<?php echo $id;?>" target="_top" title="<?php echo $lang_name;?>"><?php echo $id;?></a>&nbsp;]
+    [&nbsp;<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<a href="index.php3?server=<?php echo $server;?>&lang=<?php echo "$id&sid=$sid";?>" target="_parent" title="<?php echo $lang_name;?>"><?php echo $id;?></a>&nbsp;]
         <?php
     }
     echo "\n<p><br />\n";
