@@ -403,5 +403,4 @@ $LDShowClinicOnly='åÐå ÇáÚíÇÏÉ ÝÞØ';
 # 2003-09-16 EL
 $LDAdmissionData='ÈíÇäÇÊ ÇáÞÈæá';
 $LDShowPhoto='ÅÖåÇÑ ÇáÕæÑÉ';
-$LDOpenWardManagement='Open ward for administration';
 ?>

@@ -1,17 +1,17 @@
 <?php
 /* 2002-10-02 EL */
 $LDDepartments='ÇáÇÞÓÇã';
-$LDPendingRequest='ØáÈ ãÚáÞ';
+$LDPendingRequest='ØáÈ Ýí ÇáÇäÊÙÇÑ';
 $LDPendingRequestTxt='ÃÓÊÞÈÇá, ÞÇÆãÉ, ØÈÇÚÉ, ÅÏÎÇá äÊÇÆÌ ÇáÈÍË æ ÇáäÊÇÆÌ';
 $LDGeneralSurgery='ÌÑÇÍÉ ÚÇãÉ';
 $LDInternalMed='ÈÇØäÉ';
 $LDEmergency='Emergency Ambulatory';
 $LDSonography='Sonography';
-$LDNuclearMed='Nuclear Diagnostics';
+$LDNuclearMed='ÇáÊÔÎíÕ Çáäææí';
 $LDAdmission='ÇáÞÈæá';
 $LDAdmissionTxt='ÇáÞÈæá/ÇáÎÑæÌ ãÊÛíÑÇÊ, ÈÍË, ÃÑÔíÝ';
 $LDNews='ÇáÇÎÈÇÑ';
-$LDNewsTxt='Clinic specific news, memo, info, etc.';
+$LDNewsTxt='ÇÎÈÇÑ ÎÇÕÉ ÈÇáÚíÇÏÉ, memo, ãÚáæãÇÊ, ÇáÎ.';
 # 2003-08-01 EL
 $LDAppointments='ÇáãæÇÚíÏ';
 $LDAppointmentsTxt='ãæÇÚíÏ ÇáãÑÖì ãÚ åÐÇ ÇáÞÓã';

@@ -13,10 +13,10 @@ $LDDayTxt='Çáíæã';
 */
 $dept=array('ÌÑÇÍÉ ÚÇãÉ',
 					'ÌÑÇÍÉ ãÓÊÚÌáÉ',
-					'ÌÑÇÍÉ ÊŞæíãíÉ',
+					'ÌÑÇÍÉ ÊÌãíáíÉ',
 					'ÃĞä - Ãäİ - ÍäÌÑÉ',
-					'Opthalmology',
-					'Pathology',
+					'Úíæä',
+					'Úáã ÇáÇãÑÇÖ',
 					'ÇáäÓÇÁ æ ÇáæáÇÏÉ',
 					'ÚáÇÌ ØÈíÚí',
 					'ÈÇØäÉ',
@@ -24,11 +24,11 @@ $dept=array('ÌÑÇÍÉ ÚÇãÉ',
 					'ÇáÕíÇäÉ',
 					'ÇáÚäÇíÉ ÇáãÊæÓØÉ',
 					'ÇáÚäÇíÉ ÇáãÑßÒÉ',
-					'Medical Laboratory',
+					'ÇáãÚãá ÇáØÈí',
 					'Emergency Ambulatory',
 					'General Ambulatory',
 					'Sonography',
-					'Nuclear Diagnostics',
+					'ÇáÊÔÎíÕ Çáäææí',
 					'Internal Medicine Ambulatory');
 					
 /**

@@ -1,6 +1,6 @@
 <?php
 $LDSend='ÃÑÓá';
-$LDCancel='ÇÅáÛÇÁ ÇáÇãÑ';
+$LDCancel='ÅáÛÇÁ ÇáÇãÑ';
 $LDPrint='ÃØÈÚ';
 $LDStop='ÞÝ';
 $LDContinue='ÃÓÊãÑ';
@@ -17,8 +17,8 @@ $LDArchive='ÇÑÔíÝ';
 $LDStart='ÇÈÏÇÁ';
 $LDEnd='ÇäåÇÁ';
 # 2003-07-29 EL
-$LDListApptByDept='ÃÚÑÖ ÇáãæÇÚíÏ ÈæÇÓØÉ ÇáÞíã';
-$LDListApptByDoc='ÇÚÑÖ ÇáãæÇÚíÏ ÈæÇÓØÉ ÇáÚíÇÏÉ';
+$LDListApptByDept='ÇÚÑÖ ÇáãæÇÚíÏ ÈæÇÓØÉ ÇáÞÓã';
+$LDListApptByDoc='ÇÚÑÖ ÇáãæÇÚíÏ ÈæÇÓØÉ ÇáØÈíÈ';
 $LDdone='Êã';
 $LDOk='ãæÇÝÞ';
 $LDSelect='ÇÎÊíÇÑ';

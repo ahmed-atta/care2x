@@ -18,7 +18,7 @@ $LDExtraCodes='ÔÝÑÇÊ ÃÖÇÝíÉ Ãæ ÊÔÝíÑ';
 $LDAddCodes='ãáÇÍÙÇÊ Ãæ ÔÝÑÇÊ ÃÖÇÝíÉ';
 $LDApplySelection='ÊØÈíÞ ÇáÇÎÊíÇÑÇÊ';
 $LDSGBV='SGB_V';  // !! Do not translate !!
-$LDLocalization='ãÑßÒÉ';
+$LDLocalization='ÇáãæÖÚ';
 $LDOpsIntern='ÔÝÑÉ ÏÇÎáíÉ';
 $LDSearchCodes='ÈÍË Úä ÔÝÑÇÊ';
 $LDQuickList='ÞÇÆãÉ ÓÑíÚÉ';
@@ -54,23 +54,23 @@ $LDIatrogenic_s='I';
 $LDOther_s='O';
 
 $LDBothSides='ÇáÌÇäÈÇä';
-$LDLeft_s='S';
+$LDLeft_s='L';
 $LDRight_s='R';
 $LDBothSides_s='B';
 /* 2003-05-29 EL*/
 $LDQMarks='??????';
-$LDNonSpecifiedGroup='áã-íÌãÚ-ÈÚÏ';
+$LDNonSpecifiedGroup='áã-íÚÑÝ-ÈÚÏ';
 $LDSpecifyGroup='ÊÚÑíÝ ãÌãæÚÉ';
 $LDCreateGroupName='ÅäÔÇÁ ÃÓã ãÌãæÚÉ ÌÏíÏÉ';
 $LDSelect='ÃÎÊÇÑ';
 /*2003-06-01 EL*/
-$LDUseToGroupItems='Use this to group the not-yet-grouped items';
+$LDUseToGroupItems='ÃÓÊÎÏã åÐå áÊÌãíÚ ÈíÇäÇÊ áã-íÚÑÝ-ÈÚÏ';
 $LDItemsDegrouped='ÈÍÏÝ åÐå ÇáãÌãæÚÉ áä íÊã ÇáæÕæá ááÚäÇÕÑ ÇáãÑÊÈØÉ ÈåÇ';
 $LDOptions='ÎíÇÑÇÊ';
 /*2003-06-01 EL*/
 $LDCreateInternDRGGroup='ÅäÔÇÑ ãÌãæÚÉ DRG ÌÏíÏÉ';
 $LDInternalCodeNr='ÑÞã ÇáÔÝÑÉ ÇáÏÇÎáíÉ';
-$LDSynonyms='Synonyms or keywords';
+$LDSynonyms='ãÑÇÏÝÇÊ Çæ ãÝÇÊíÍ ßáãÇÊ';
 $LDSeparateCommas='ÃÝÕá ÇáßáãÇÊ ÈÝÇÕáÉ';
 $LDIsSubGroup='åá ÇáãÌãæÚÉ ÝÑÚíÉ¿';
 $LDParentCodeNr='ÑÞã ÔÝÑÉ ÇáãÕÏÑ';
@@ -87,8 +87,8 @@ $LDAlertNoDescription='ÃÏÎá æÕÝ ÇáÔÝÑÉ';
 $LDCode='ÔÝÑÉ';
 /*2003-06-13 EL*/
 $LDAddGroupEncounter='ÃÖÝ ÇáãÌãæÚÉ Çáì ÇáãÞÇÈáÉ';
-$LDMain_s='M';
+$LDMain_s='Ñ';
 $LDSupplemental='Êßãíáí';
-$LDSupp_s='S';
+$LDSupp_s='Ý';
 $LDCreateNew='ÅäÔÇÁ ÌÏíÏ';
 ?>
