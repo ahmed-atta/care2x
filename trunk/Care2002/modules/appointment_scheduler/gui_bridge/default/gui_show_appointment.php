@@ -40,10 +40,12 @@ while($row=$result->FetchRow()){
   <tr   bgcolor="<?php echo $bgc; ?>" >
     <td><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>"><?php echo @formatDate2Local($row['date'],$date_format); ?></td>
     <td rowspan=4 valign="top"><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>"><font color="<?php if(empty($tc)) echo '#0000cc'; else echo $tc; ?>"><b>
+	<a href="<?php echo $root_path.'modules/registration_admission/patient_register_show.php'.URL_APPEND.'&pid='.$row['pid']; ?>">
 	<?php 
 		echo ucfirst($row['name_last']).'</b></font>, '.ucfirst($row['name_first']).' ';
 		echo @formatDate2Local($row['date_birth'],$date_format).'</font>';
 	?>
+	</a>
 	</td>
     <td rowspan=4 valign="top"><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>">
 	<?php 
