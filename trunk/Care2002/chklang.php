@@ -154,7 +154,7 @@ if (empty($lang)) {
 $lang_file = $lang_path.$lang.'lang_'.$lang.'_nursing.php';
 if((!file_exists($lang_file))&&(!file_exists('../'.$lang_file))) 
 {
-	$lang="en";
+	$lang='en';
 }
 	
 // save language to cookie

@@ -1,19 +1,21 @@
 <?php
-error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-require_once('include/inc_vars_resolve.php'); // globalize POST, GET, & COOKIE  vars
-if(!lang)
+//error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require('include/inc_environment_global.php');
+if(!isset($lang)||!$lang)
 {
- 	$ck_lang_buffer="ck_lang$sid";
-	if(!$HTTP_COOKIE_VARS[$ck_lang_buffer]) include("chklang.php");
-	else $lang=$HTTP_COOKIE_VARS[$ck_lang_buffer];
+	if(!$HTTP_SESSION_VARS['sess_lang']) include('chklang.php');
 }
 
-if(file_exists("language/".$lang."/lang_".$lang."_indexframe.php")) include("language/".$lang."/lang_".$lang."_indexframe.php");
-    else include("language/en/lang_en_indexframe.php")
+if(file_exists('language/'.$lang.'/lang_'.$lang.'_indexframe.php')) include('language/'.$lang.'/lang_'.$lang.'_indexframe.php');
+    else include('language/en/lang_en_indexframe.php')
+
+
 ?><html>
 <?php 
 
 include_once('include/inc_charset_fx.php');
+
 echo setCharSet(); 
 
 ?>

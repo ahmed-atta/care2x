@@ -1,6 +1,6 @@
 <?php 
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-require_once('include/inc_vars_resolve.php'); // globalize POST, GET, & COOKIE  vars
+require_once('include/inc_environment_global.php');
 require("language/$lang/lang_".$lang."_startframe.php"); ?>
 <html>
 <head>
