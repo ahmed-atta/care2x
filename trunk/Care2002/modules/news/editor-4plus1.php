@@ -22,9 +22,9 @@ $default_file_return='newscolumns.php';
 $title=$HTTP_SESSION_VARS['sess_title'];
 
 $returnfile='editor-4plus1-select-art.php'.URL_APPEND;
-$breakfile=$HTTP_SESSION_VARS['sess_file_break'].URL_APPEND;
+$breakfile='newscolumns.php'.URL_APPEND;
 
-$HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
+//$HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
 
 ?>
 <html>
@@ -116,7 +116,7 @@ function showpic(d)
   <tr>
 
     <td align=right >
-	<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>
+	<a href="<?php echo $returnfile ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>
   </td>
 
      <td >

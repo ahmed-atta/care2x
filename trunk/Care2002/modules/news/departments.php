@@ -25,7 +25,7 @@ $HTTP_SESSION_VARS['sess_user_origin']='dept';
 
 $default_url_news='modules/news/newscolumns.php';
 
-$breakfile=$root_path.$HTTP_SESSION_VARS['sess_file_referer'].URL_APPEND;
+$breakfile=$root_path.$HTTP_SESSION_VARS['sess_path_referer'].URL_APPEND;
 $returnfile=$breakfile;
 
 $HTTP_SESSION_VARS['sess_path_referer']=$top_dir.basename(__FILE__);

@@ -10,8 +10,6 @@ require_once($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-session_register('sess_news_nr');
-
 define('LANG_FILE','startframe.php');
 define('NO_CHAIN',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
@@ -19,6 +17,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 $cksid='ck_sid'.$sid;
 if(!$HTTP_COOKIE_VARS[$cksid] && !$cookie) { header("location:".$root_path."cookies.php?lang=$lang&startframe=1"); exit;}
 
+if(!session_is_registered('sess_news_nr')) session_register('sess_news_nr');
 
 $readerpath='headline-read.php?sid='.$sid.'&lang='.$lang;
 // reset all 2nd level lock cookies
@@ -44,8 +43,8 @@ $news=&$newsobj->getHeadlinesPreview($dept_nr,$news_num_stop);
 if(!session_is_registered('sess_file_editor')) session_register('sess_file_editor');
 if(!session_is_registered('sess_file_reader')) session_register('sess_file_reader');
 
-$HTTP_SESSION_VARS['sess_file_break']=$thisfile;
-$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
+$HTTP_SESSION_VARS['sess_file_break']=$top_dir.$thisfile;
+$HTTP_SESSION_VARS['sess_file_return']=$top_dir.$thisfile;
 $HTTP_SESSION_VARS['sess_file_editor']='headline-edit-select-art.php';
 $HTTP_SESSION_VARS['sess_file_reader']='headline-read.php';
 $HTTP_SESSION_VARS['sess_dept_nr']='1'; // 1= press relations dept
@@ -113,7 +112,7 @@ function gethelp(x,s,x1,x2,x3)
 	</table>
 	
 	</td>
-<TD  VALIGN="top"   bgcolor="<?php echo $cfg['idx_txtcolor']; ?>" width=1>
+<TD  VALIGN="top"   bgcolor="<?php echo $cfg['body_txtcolor']; ?>" width=1>
 <img src="../../gui/img/common/default/pixel.gif" border=0 width=1 height=1>
     </TD>
 <TD WIDTH=150 VALIGN="top" >

@@ -10,9 +10,10 @@ require_once($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-$lang_tables=array('departments.php');
 
 define('MODERATE_NEWS',0);  // define to 1 if news is moderated
+
+$lang_tables=array('departments.php');
 define('LANG_FILE','newscolumns.php');
 define('NO_2LEVEL_CHK',1);
 
@@ -30,7 +31,7 @@ $default_editor_script='modules/news/editor-4plus1-select-art.php';
 $default_start_page='main/startframe.php';
 $thisfile=basename(__FILE__);
 
-$HTTP_SESSION_VARS['sess_file_break']= $thisfile;
+$HTTP_SESSION_VARS['sess_file_break']=$top_dir.$thisfile;
 
 if(isset($dept_nr) && $dept_nr) $HTTP_SESSION_VARS['sess_dept_nr']=$dept_nr;
     else  $dept_nr=$HTTP_SESSION_VARS['sess_dept_nr'];
@@ -51,7 +52,6 @@ if($dblink_ok) {
 	
 		$sql= 'SELECT dept.name_formal, dept.LD_var, reg.module_start_script, reg.news_editor_script FROM care_department as dept LEFT JOIN care_registry AS reg  ON dept.id=reg.registry_id WHERE dept.nr='.$dept_nr;
 	}
-	
 	
     if($result=$db->Execute($sql)) {
 	
@@ -77,7 +77,7 @@ if($dblink_ok) {
 	 /* Save to session */
 	$HTTP_SESSION_VARS['sess_title']=$title;
 	/* Check the editor script as forward file*/
-	if(isset($row['news_editor_script']) && !empty($row['news_editor_script'])) {
+	if(isset($row['news_editor_script']) && (trim($row['news_editor_script'])!='')) {
 		$HTTP_SESSION_VARS['sess_file_forward'] =$root_path.$row['news_editor_script'];
 		$HTTP_SESSION_VARS['sess_file_editor'] =$root_path.$row['news_editor_script'];
 	} else {

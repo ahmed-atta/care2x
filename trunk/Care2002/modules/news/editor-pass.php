@@ -24,8 +24,9 @@ if(!isset($HTTP_SESSION_VARS['sess_file_editor']) || empty($HTTP_SESSION_VARS['s
    else $fileforward=$HTTP_SESSION_VARS['sess_file_editor'].URL_REDIRECT_APPEND;
 
 if(!isset($HTTP_SESSION_VARS['sess_file_break']) || empty($HTTP_SESSION_VARS['sess_file_break'])) $breakfile=$default_breakfile.URL_APPEND;
-   else $breakfile=$HTTP_SESSION_VARS['sess_file_break'].URL_APPEND;
+   else $breakfile=$root_path.$HTTP_SESSION_VARS['sess_file_break'].URL_APPEND;
 
+   
 $title= (!empty($title)) ? $title : $HTTP_SESSION_VARS['sess_title']; 
    
 $lognote="$title+editor";

@@ -14,12 +14,12 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 /* Set navigation paths for this page*/
 $thisfile=basename(__FILE__);
-$breakfile=$HTTP_SESSION_VARS['sess_file_break'].URL_APPEND;
+$breakfile=$root_path.$HTTP_SESSION_VARS['sess_file_break'].URL_APPEND;
 
 if($HTTP_SESSION_VARS['sess_file_return']==$thisfile) $returnfile='start_page.php'.URL_APPEND;
-    else $returnfile=$HTTP_SESSION_VARS['sess_file_return'].URL_APPEND;
+    else $returnfile=$root_path.$HTTP_SESSION_VARS['sess_file_return'].URL_APPEND;
 	
-/* Set the new return file for the suceeding page */
+/* Set the new return file for the preview page */
 $HTTP_SESSION_VARS['sess_file_return']=$thisfile;
 
 $HTTP_SESSION_VARS['sess_file_forward']='headline-read.php';
@@ -78,7 +78,7 @@ function chkForm(d)
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
 <input type="hidden" name="lang" value="<?php echo $lang ?>">
 <input type="hidden" name="title" value="<?php echo $title ?>">
-<hr>
+<p>
 <?php 
 require($root_path.'include/inc_load_copyrite.php');
 ?>

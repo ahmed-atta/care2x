@@ -16,11 +16,11 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_config_color.php');
 
 /* Set the return paths */
-$returnfile=$HTTP_SESSION_VARS['sess_file_return'].URL_APPEND;
+$returnfile='editor-4plus1-select-art.php'.URL_APPEND;
 $breakfile='newscolumns.php'.URL_APPEND;
 
 /* Set the return file to this file*/
-$HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
+//$HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
 /* get the title = name of department */
 $title=$HTTP_SESSION_VARS['sess_title'];
 

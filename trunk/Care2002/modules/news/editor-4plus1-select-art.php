@@ -13,8 +13,11 @@ require_once($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','editor.php');
 $local_user='ck_editor_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
+/* Set the new return file for the preview page */
+$HTTP_SESSION_VARS['sess_file_return']=$top_dir.basename(__FILE__);
 
-$breakfile=$HTTP_SESSION_VARS['sess_file_return'];
+$breakfile='newscolumns.php'.URL_APPEND;
+$returnfile='editor-pass.php'.URL_APPEND;
 $title=$HTTP_SESSION_VARS['sess_title'];
 ?>
 <html>
@@ -56,7 +59,7 @@ function chkForm(d)
   </tr>
   <tr>
      <td >
-	<a href="javascript:window.history.back()"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>
+	<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>
 <input type="image" <?php echo createLDImgSrc($root_path,'continue.gif','0') ?>>
   </td>
     <td align=right >

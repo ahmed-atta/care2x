@@ -16,10 +16,10 @@ define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_config_color.php');
 
-$returnfile=$HTTP_SESSION_VARS['sess_file_return'].URL_APPEND;
+$returnfile='headline-edit-select-art.php'.URL_APPEND;
 $breakfile=$HTTP_SESSION_VARS['sess_file_break'].URL_APPEND;
 
-$HTTP_SESSION_VARS['sess_file_return']='start_page.php';
+//$HTTP_SESSION_VARS['sess_file_return']='start_page.php';
 
 /* Get the news article */
 require_once($root_path.'include/care_api_classes/class_news.php');
