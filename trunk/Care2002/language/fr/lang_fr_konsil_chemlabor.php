@@ -1,17 +1,17 @@
 <?php
-$LDDiagnosticTest='Diagnostic Test Order';
+$LDDiagnosticTest='Ordre des tests de diagnostics';
 $LDHospitalName='CARE 2002';
-$LDCentralLab='Central Laboratory';
-$LDLabel='Label';
-$LDRoomNr='Room-Nr.';
-$LDSamplingTime='Sampling Time';
-$LDDay='Day';
+$LDCentralLab='Laboratoire Central';
+$LDLabel='Initulé';
+$LDRoomNr='Nr. de chambre';
+$LDSamplingTime='Exemple d\'horaire';
+$LDDay='Jour';
 $LDMinutes='Minutes';
-$LDHours='Hours';
+$LDHours='Heures';
 $LDBatchNr='Batch Nr.';
-$LDCaseNr='Case number';
-$LDHouse='House';
-$LDHematology='Hematology';
+$LDCaseNr='Numéro de case';
+$LDHouse='Maison';
+$LDHematology='Hematologie';
 $LDCoagulation='Coagulation';
 $LDUrine='Urine';
 $LDSerum='Serum';
@@ -22,57 +22,57 @@ $LDSober='sober';
 $LDBloodSugar='BLS';
 $LDBLoodSugar1='BLS1';
 $LDBloodPlasma='BLP';
-$LDDoctorSignature='Doctor\'s signature';
-$LDLifeRisk='Risk to life';
-$LDRarity='Rarity';
-$LDSpecTest='special Tests';
-$LDClinicalInfo='clinical info';
+$LDDoctorSignature='Signature du Docteur';
+$LDLifeRisk='Risque vital';
+$LDRarity='Rareté';
+$LDSpecTest='Tests spéciaux';
+$LDClinicalInfo='Info clinique';
 $LDShortMonth=array('',
                                    'Jan',
-								   'Feb',
+								   'Fev',
 								   'Mar',
-								   'Apr',
-								   'May',
+								   'Avr',
+								   'Mai',
 								   'Jun',
 								   'Jul',
-								   'Aug',
+								   'Aou',
 								   'Sep',
 								   'Oct',
 								   'Nov',
 								   'Dec');
 								   
-$LDShortDay=array('So','Mo','Tu','We','Th','Fr','Sa','So');
+$LDShortDay=array('Di','Lu','Ma','Me','Je','Ve','Sa','Di');
 				
 $LDBatchNumber='Batch nr.';
-$LDMaterial='Material:';
-$LDEmergencyProgram='The violet shaded fields belong to emergency program';
-$LDPhoneOrder=' = only after acknowledgement by phone';
+$LDMaterial='Materiel:';
+$LDEmergencyProgram='Les champs transparents violets appartiennent à un programme d\'urgence';
+$LDPhoneOrder=' = Seulement après confirmation par téléphone';
 
 /* Note: the following array uses strict medical terminology.
 *  If you are not sure about their translation, please leave the 
 *  english word untranslated
 */
-$LD_Elements = array('tx_1'=>'Clinical Chem.',
+$LD_Elements = array('tx_1'=>'Chimie Clinique',
                                   'tx_2'=> 'Coagulation',
-								  'tx_3'=> 'Proteins',
-								  'tx_4'=>'Tumormarker',
-								  'tx_5'=>'Infect.serology',
-								  'tx_6'=>'Medicine',
+								  'tx_3'=> 'Proteines',
+								  'tx_4'=>'Marqueurs Tumoraux',
+								  'tx_5'=>'Sérologies Infectieuses',
+								  'tx_6'=>'Médicaments',
 								  'tx_7'=>'Urine/Spont.u.',
 								  
                                   '_iof__x__iof_2_' => 'IOF',
                                   '_marcumar_therapy_' => 'Marcumar-Ther.',
-								  '_emx_protein_total_' => 'total Protein',
+								  '_emx_protein_total_' => 'Protéine toatle',
 								  '_afp_' => 'AFP',
-								  'tx_8' => 'Serum - Liquor',
+								  'tx_8' => 'Serum - Lymphe',
 								  '_amiodaron_' => 'Amiodaron',
-								  '_emx_urin_status_' => 'Urine status',
+								  '_emx_urin_status_' => 'Status Urinaire',
 								  
 								  '_aof_'=>'AOF',
 								  '_heparin_therapy_'=>'Heparin ther.',
 								  '_albumin_'=>'Albumin',
 								  '_ca_15_3_'=>'CA 15-3',
-								  '_antisstaph_titer_'=>'Antistaph.Titer',
+								  '_antisstaph_titer_'=>'Titre Antistaph.',
 								  '_barbiturates_i_s_'=>'Barbiturate i.S.',
 								  '_emx_urin_amilase_'=>'Urine amylase',
 								  
@@ -82,7 +82,7 @@ $LD_Elements = array('tx_1'=>'Clinical Chem.',
 								  '_ca_19_9_'=>'CA 19-9',
 								  '_adenovirus_antibody_'=>'Adenovirus-AB',
 								  '_benzodiazepam_i_s_'=>'Benzodiazep.i.S.',
-								  '_urin_sugar_'=>'Urine sugar',
+								  '_urin_sugar_'=>'Urine Sucre',
 								  
 								  '_postop_'=>'postop',
 								  '_emx_quick_'=>'Quick',
@@ -105,20 +105,20 @@ $LD_Elements = array('tx_1'=>'Clinical Chem.',
 								  '_immunglobulin_quantity_'=>'Immu.glob.quant.',
 								  '_cyfra_21_1_'=>'Cyfra 21-1',
 								  '_brucellia_antibody_'=>'Brucellen-AB',
-								  '_emx_digitoxin_'=>'Digitoxin',
+								  '_emx_digitoxin_'=>'Digitoxine',
 								  '_emx_osmol_in_urine_'=>'Osmol i.U.',
 								  
 								  '_bilirubin_direct_'=>'Bili direct',
-								  '_emx_fibrinogen_'=>'Fibrinogen',
+								  '_emx_fibrinogen_'=>'Fibrinogène',
 								  '_ige_'=>'IgE',
 								  '_hcg_'=>'HCG',
 								  '_campylob_antibody_'=>'Campylob.-AB',
-								  '_emx_digoxin_'=>'Digoxin',
-								  '_emx_pregnancy_'=>'Pregnancy',
+								  '_emx_digoxin_'=>'Digoxine',
+								  '_emx_pregnancy_'=>'Gestante',
 								  
 								  '_emx_got_'=>'GOT',
 								  '_emx_soluble_fibrinogen_mon_'=>'Sol.Fibr.mon',
-								  '_haptoglobin_'=>'Haptoglobin',
+								  '_haptoglobin_'=>'Heptoglobin',
 								  '_nse_'=>'NSE',
 								  '_candida_antibody_'=>'Candida-AB',
 								  '_gentamycin_'=>'Gentamycin',
