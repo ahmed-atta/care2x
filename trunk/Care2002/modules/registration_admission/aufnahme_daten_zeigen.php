@@ -62,7 +62,8 @@ if($dblink_ok) {
 		
 		if($buff=&$encounter_obj->CareServiceClass()){
 		    $care_class=$buff->FetchRow();
-			while(list($x,$v)=each($care_class))	$$x=$v;      
+			//while(list($x,$v)=each($care_class))	$$x=$v;
+			extract($care_class);      
 			reset($care_class);
 		}    			  
 	}
@@ -72,7 +73,8 @@ if($dblink_ok) {
 		
 		if($buff=&$encounter_obj->RoomServiceClass()){
 			$room_class=$buff->FetchRow();
-			while(list($x,$v)=each($room_class))	$$x=$v;      
+			//while(list($x,$v)=each($room_class))	$$x=$v;
+			extract($room_class);      
 			reset($room_class);
 		}    			  
 	}
@@ -82,7 +84,8 @@ if($dblink_ok) {
 		
 		if($buff=&$encounter_obj->AttDrServiceClass()){
 			$att_dr_class=$buff->FetchRow();
-			while(list($x,$v)=each($att_dr_class))	$$x=$v;      
+			//while(list($x,$v)=each($att_dr_class))	$$x=$v;
+			extract($att_dr_class);      
 			reset($att_dr_class);
 		}    			  
 	}		
@@ -91,8 +94,8 @@ if($dblink_ok) {
 	if($encounter_obj->is_loaded) {
 		$row=&$encounter_obj->encounter;
 		//load data
-		while(list($x,$v)=each($row)) $$x=$v;
-	
+		//while(list($x,$v)=each($row)) $$x=$v;
+		extract($row);
 		$insurance_class=&$encounter_obj->getInsuranceClassInfo($insurance_class_nr);
 		$encounter_class=&$encounter_obj->getEncounterClassInfo($encounter_class_nr);
 
@@ -103,7 +106,8 @@ if($dblink_ok) {
 		$person_obj->setPID($pid);
 		if($row=&$person_obj->getValueByList($list))
 		{
-			while(list($x,$v)=each($row))	$$x=$v;      
+			//while(list($x,$v)=each($row))	$$x=$v;
+			extract($row);      
 		}      
 
 		$addr_citytown_name=$person_obj->CityTownName($addr_citytown_nr);

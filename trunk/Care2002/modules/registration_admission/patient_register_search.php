@@ -21,7 +21,7 @@ $keyword=trim($keyword);
 $dbtable='care_person';
 $toggle=0;
 $searchmask_bgcolor="#f3f3f3";
-$searchprompt=$LDEntryPrompt;
+$searchprompt=$LDEnterPersonSearchKey;
 
 if(empty($target)) $target='search';
 
@@ -211,8 +211,8 @@ if ($linecount)
 						echo "
 							<tr bgcolor=";
 						if($toggle) { echo "#efefef>"; $toggle=0;} else {echo "#ffffff>"; $toggle=1;};
-						echo"<td><font face=arial size=2>";
-						echo "&nbsp;".(ucfirst($zeile['pid'])+$GLOBAL_CONFIG['person_id_nr_adder']);
+						echo '<td align="right"><font face=arial size=2>';
+						echo "&nbsp;".$zeile['pid'];
                         echo "</td>";	
 						echo"<td><font face=arial size=2>";
 						echo "&nbsp;".ucfirst($zeile['name_last']);
@@ -231,9 +231,9 @@ if ($linecount)
 						echo '	
 							<img '.createLDImgSrc($root_path,'ok_small.gif','0').' alt="'.$LDTestThisPatient.'"></a>&nbsp;';
 							
-                       if(!file_exists("../cache/barcodes/pn_".($zeile['pid']+$GLOBAL_CONFIG['person_id_nr_adder']).".png"))
+                       if(!file_exists("../cache/barcodes/pn_".$zeile['pid'].".png"))
 	      		       {
-			               echo "<img src='".$root_path."classes/barcode/image.php?code=".($zeile['pid']+$GLOBAL_CONFIG['person_id_nr_adder'])."&style=68&type=I25&width=145&height=50&xres=2&font=5&label=2' border=0 width=0 height=0>";
+			               echo "<img src='".$root_path."classes/barcode/image.php?code=".$zeile['pid']."&style=68&type=I25&width=145&height=50&xres=2&font=5&label=2' border=0 width=0 height=0>";
 		               }
 						echo '</td></tr>';
 

@@ -21,7 +21,7 @@ require($root_path.'include/inc_front_chain_lang.php');
 	exit;
 }
 */
-require_once($root_path.'include/inc_config_color.php');
+//require_once($root_path.'include/inc_config_color.php');
 require_once($root_path.'include/inc_date_format_functions.php');
 require_once($root_path.'include/care_api_classes/class_person.php');
 require_once($root_path.'include/care_api_classes/class_insurance.php');
@@ -78,6 +78,7 @@ if($pid!='' || $encounter_nr!='')
         $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
         $glob_obj->getConfig('patient_%');
         $glob_obj->getConfig('person_foto_path'); 
+        $glob_obj->getConfig('encounter_%'); 
 		
 		if(!$GLOBAL_CONFIG['patient_service_care_hide']){
 			/* Get the care service classes*/
@@ -112,7 +113,8 @@ if($pid!='' || $encounter_nr!='')
 				    $insurance_show=true;
 				} elseif ($p_insurance->RecordCount()==1){
 				    $buffer= $p_insurance->FetchRow();
-					while(list($x,$v)=each($buffer)) {$$x=$v; }
+					//while(list($x,$v)=each($buffer)) {$$x=$v; }
+					extract($buffer);
 				    $insurance_show=true;
 				    $insurance_firm_name=$pinsure_obj->getFirmName($insurance_firm_id); 
 				} else { $insurance_show=false;}
@@ -201,13 +203,24 @@ if($pid!='' || $encounter_nr!='')
 					  else
 					  {
 					  	    $newdata=1;
+							/* Determine the format of the encounter number */
+							if($GLOBAL_CONFIG['encounter_nr_fullyear_prepend']) $ref_nr=(int)date('Y').$GLOBAL_CONFIG['encounter_nr_init'];
+								else $ref_nr=$GLOBAL_CONFIG['encounter_nr_init'];
+								
+							switch($HTTP_POST_VARS['encounter_class_nr'])
+							{
+								case '1': $HTTP_POST_VARS['encounter_nr']=$encounter_obj->getNewEncounterNr($ref_nr+$GLOBAL_CONFIG['patient_inpatient_nr_adder'],1);
+											break;
+								case '2': $HTTP_POST_VARS['encounter_nr']=$encounter_obj->getNewEncounterNr($ref_nr+$GLOBAL_CONFIG['patient_outpatient_nr_adder'],2);
+							}
+							
 									$HTTP_POST_VARS['encounter_date']=date('Y-m-d H:i:s');
 									$HTTP_POST_VARS['modify_id']=$encoder;
 									$HTTP_POST_VARS['modify_time']='NULL';
 									$HTTP_POST_VARS['create_id']=$encoder;
 									$HTTP_POST_VARS['create_time']=date('Y-m-d H:i:s');
 									$HTTP_POST_VARS['history']='Create: '.date('Y-m-d H:i:s').' = '.$encoder;
-									if(isset($HTTP_POST_VARS['encounter_nr'])) unset($HTTP_POST_VARS['encounter_nr']);					
+									//if(isset($HTTP_POST_VARS['encounter_nr'])) unset($HTTP_POST_VARS['encounter_nr']);					
 									
 									$encounter_obj->setDataArray($HTTP_POST_VARS);
 									
@@ -225,6 +238,7 @@ if($pid!='' || $encounter_nr!='')
 									    if(!$GLOBAL_CONFIG['patient_service_att_dr_hide']){
 										    $encounter_obj->saveAttDrServiceClass($att_dr_class);
 										}*/
+										//echo $encounter_obj->getLastQuery();
 							            header("Location: aufnahme_daten_zeigen.php".URL_REDIRECT_APPEND."&encounter_nr=$encounter_nr&origin=admit&target=entry&newdata=$newdata"); 
 								        exit;
 								    }
@@ -239,8 +253,8 @@ if($pid!='' || $encounter_nr!='')
 			  if($encounter_obj->is_loaded) {
 		          $zeile=&$encounter_obj->encounter;
 					//load data
-                  while(list($x,$v)=each($zeile)) $$x=$v;
-				  
+                  //while(list($x,$v)=each($zeile)) $$x=$v;
+				  extract($zeile);
 				  
                   /* Get insurance firm name*/
 			      $insurance_firm_name=$pinsure_obj->getFirmName($insurance_firm_id);
@@ -254,7 +268,8 @@ if($pid!='' || $encounter_nr!='')
 				if(!$GLOBAL_CONFIG['patient_service_care_hide']){
                 	if($buff=&$encounter_obj->CareServiceClass()){
 					    while($care_class=$buff->FetchRow()){
-							while(list($x,$v)=each($care_class))	$$x=$v;
+							//while(list($x,$v)=each($care_class))	$$x=$v;
+							extract($care_class);
 						}   
 						reset($care_class);
 					}    			  
@@ -262,7 +277,8 @@ if($pid!='' || $encounter_nr!='')
 				if(!$GLOBAL_CONFIG['patient_service_room_hide']){
                 	if($buff=&$encounter_obj->RoomServiceClass()){
 					    while($room_class=$buff->FetchRow()){
-							while(list($x,$v)=each($room_class))	$$x=$v;
+							//while(list($x,$v)=each($room_class))	$$x=$v;
+							extract($room_class);
 						}   
 						reset($room_class);
 					}    			  
@@ -270,7 +286,8 @@ if($pid!='' || $encounter_nr!='')
 				if(!$GLOBAL_CONFIG['patient_service_att_dr_hide']){
                 	if($buff=&$encounter_obj->AttDrServiceClass()){
 					    while($att_dr_class=$buff->FetchRow()){
-							while(list($x,$v)=each($att_dr_class))	$$x=$v;
+							//while(list($x,$v)=each($att_dr_class))	$$x=$v;
+							extract($att_dr_class);
 						}   
 						reset($att_dr_class);
 					}    			  
@@ -284,7 +301,8 @@ if($pid!='' || $encounter_nr!='')
               
 	$person_obj->setPID($pid);
 	if($data=&$person_obj->BasicDataArray($pid)){
-		while(list($x,$v)=each($data))	$$x=$v;      
+		//while(list($x,$v)=each($data))	$$x=$v;    
+		extract($data);  
 	}     
 	/* Get the citytown name */
 	$addr_citytown_name=$person_obj->CityTownName($addr_citytown_nr);
@@ -304,4 +322,3 @@ require_once($root_path.'include/inc_photo_filename_resolve.php');
 
 require('./gui_bridge/default/gui_aufnahme_start.php');
 ?>
-
