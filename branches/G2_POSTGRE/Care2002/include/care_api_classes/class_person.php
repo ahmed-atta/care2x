@@ -330,16 +330,13 @@ class Person extends Core {
 		if(!$this->internResolvePID($pid)) return false;
 		
 	    $this->sql="SELECT p.* , addr.name AS citytown 
-					FROM $this->tb_person AS p , $this->tb_citytown AS addr ON p.addr_citytown_nr=addr.nr
-					WHERE p.pid='$this->pid'";
+					FROM $this->tb_person AS p LEFT JOIN $this->tb_citytown AS addr ON p.addr_citytown_nr=addr.nr
+					WHERE p.pid=$this->pid";
         
-        if($this->result=$db->Execute($this->sql)) {
-	
-            if($this->result->RecordCount()) {
-			    $this->buffer=NULL;
-	            $this->row=$this->result->FetchRow();	 
-                while(list($x,$v)=each($this->row))	$this->buffer[$x]=$v;
-			    return $this->buffer;
+        	if($this->result=$db->Execute($this->sql)) {
+
+			if($this->result->RecordCount()) {
+				return $this->row=$this->result->FetchRow();
 			} else { return false; }
 		} else { return false; }
 	}
@@ -355,15 +352,17 @@ class Person extends Core {
 	*/
 	function getValue($item,$pid='') {
 	    global $db;
+
 	    if($this->is_preloaded) {
 		    if(isset($this->person[$item])) return $this->person[$item];
 		        else  return false;
 		} else {
-		    if(!$this->internResolvePID()) return false;
+		    if(!$this->internResolvePID($pid)) return false;
 		    $this->sql="SELECT $item FROM $this->tb_person WHERE pid=$this->pid";
-            if($this->result=$db->Execute($this->sql)) {
-                if($this->result->RecordCount()) {
-				     $this->person=$this->result->FetchRow();	 
+		    //return $this->sql;
+           		 if($this->result=$db->Execute($this->sql)) {
+                		if($this->result->RecordCount()) {
+				     $this->person=$this->result->FetchRow();
 				     return $this->person[$item];
 			    } else { return false; }
 		    } else { return false; }
@@ -383,7 +382,7 @@ class Person extends Core {
 	    global $db;
 	
 		if(empty($list)) return false;
-		if(!$this->internResolvePID()) return false;
+		if(!$this->internResolvePID($pid)) return false;
 		$this->sql="SELECT $list FROM $this->tb_person WHERE pid=$this->pid";
         if($this->result=$db->Execute($this->sql)) {
             if($this->result->RecordCount()) {
@@ -391,7 +390,7 @@ class Person extends Core {
 				return $this->person;
 			} else { return false; }
 		} else { return false; }
-	}	
+	}
 	/**
 	* Preloads the person registration data in the internal buffer <var>$person</var>.
 	*
@@ -758,7 +757,7 @@ class Person extends Core {
 	* @return mixed integer or boolean
 	*/
 	function Persons($searchkey=''){
-	    global $db;
+	    global $db, $sql_LIKE;
 		$searchkey=trim($searchkey);
 		if(is_numeric($searchkey)) {
             $searchkey=(int) $searchkey;
@@ -768,21 +767,15 @@ class Person extends Core {
             $order_item='name_last';
 			$this->is_nr=false;
 		}
-			 
-		$this->sql="SELECT pid, name_last, name_first, date_birth, sex FROM $this->tb_person";
-		if(empty($searchkey)){
-			$this->sql.=' WHERE';
-		}else{
-			$this->sql.=" WHERE ( pid='$suchwort'
-									OR  name_last LIKE '$searchkey%' 
-			                		OR name_first LIKE '$searchkey%'
-			                		OR pid LIKE '$searchkey' 
-									)
-									AND";
+		$this->sql="SELECT pid, name_last, name_first, date_birth, sex FROM $this->tb_person WHERE status NOT IN ($this->dead_stat) ";
+		if(!empty($searchkey)){
+			$this->sql.=" AND (name_last $sql_LIKE '$searchkey%'
+			                		OR name_first $sql_LIKE '$searchkey%'
+			                		OR pid $sql_LIKE '$searchkey' )";
 		}
-		$this->sql.=" status NOT IN ($this->dead_stat) ORDER BY $order_item";
+		$this->sql.="  ORDER BY $order_item";
 		if($this->res['pers']=$db->Execute($this->sql)){
-		    if($this->rec_count=$this->res['pers']->RecordCount()) {			
+		    if($this->rec_count=$this->res['pers']->RecordCount()) {
 				return $this->res['pers'];
 			}else{return false;}
 		}else{return false;}
@@ -799,7 +792,7 @@ class Person extends Core {
 	    global $db;
 		if(!$pid) return false;
 		$this->sql="SELECT nr FROM $this->tb_employ 
-							WHERE pid='$pid' AND NOT is_discharged AND status NOT IN ($this->dead_stat)";
+							WHERE pid='$pid' AND is_discharged IN ('',0) AND status NOT IN ($this->dead_stat)";
 		if($buf=$db->Execute($this->sql)){
 		    if($buf->RecordCount()) {
 				$buf2=$buf->FetchRow();

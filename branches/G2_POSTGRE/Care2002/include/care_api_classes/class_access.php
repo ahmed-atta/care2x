@@ -173,4 +173,16 @@ class Access extends Core {
 	function PermissionAreas(){
 		return $this->user['permission'];
 	}
+	/**
+	* Checks if the user is permitted in a given area.
+	*
+	* Use only after the access data was loaded by the constructor or loadAccess() method.
+	* @access public
+	* @param string The area to be checked.
+	* @return string
+	*/
+	function isPermitted($area=''){
+		if(empty($area)) return false;
+		return (strstr($this->user['permission'],$area));
+	}
 }
