@@ -79,6 +79,7 @@ if($mode!= '')
 						   login_id,
 						   password,
 						   permission,
+						   personell_nr,
 						   s_date,
 						   s_time,
 						   status,
@@ -92,6 +93,7 @@ if($mode!= '')
 						   "'.addslashes($userid).'",
 						   "'.addslashes($pass).'",
 						   "'.$p_areas.'",
+						   "'.$personell_nr.'",
 						   "'.date('Y-m-d').'",
 						   "'.date('H:i:s').'",
 						   "normal",
@@ -113,6 +115,7 @@ if($mode!= '')
 				$ok=$db->Execute($sql);
 				if($ok&&$db->CommitTrans())
 				{
+					//echo $sql;
 				      header('Location:edv_user_access_edit.php'.URL_REDIRECT_APPEND.'&userid='.strtr($userid,' ','+').'&mode=data_saved');
 				      exit;
 				}
@@ -162,19 +165,7 @@ if($mode!= '')
 <?php 
 require($root_path.'include/inc_js_gethelp.php');
 require($root_path.'include/inc_css_a_hilitebu.php');
-?><script language="javascript">
-<!-- 
-
-function gethelp(x,s,x1,x2,x3)
-{
-	if (!x) x="";
-	urlholder="<?php echo $root_path; ?>help-router.php<?php echo URL_REDIRECT_APPEND ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
-	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
-	window.helpwin.moveTo(0,0);
-}
-// -->
-</script>
-	
+?>	
 	</HEAD>
 
 	<BODY bgcolor=<?php echo $cfg['bot_bgcolor']; ?> topmargin=0 leftmargin=0 marginwidth=0 marginheight=0
@@ -248,10 +239,10 @@ echo ' '.$HTTP_COOKIE_VARS[$local_user.$sid];
 <?php 
 if($mode=='data_saved' || $edit)
 {
- echo '<input type="button" value="'.$LDEnterNewUser.'" onClick="javascript:window.location.href=\'edv_user_access_edit.php'.URL_APPEND.'&remark=fromlist\'">';
+ echo '<input type="button" value="'.$LDEnterNewUser.'" onClick="javascript:window.location.href=\'edv_user_access_edit.php'.URL_REDIRECT_APPEND.'&remark=fromlist\'">';
 }
 ?>
-
+<input type="button" value="Find an employee<?php echo $LDFindEmployee; ?>" onClick="javascript:window.location.href='edv_user_search_employee.php<?php echo URL_REDIRECT_APPEND; ?>&remark=fromlist'">
 
 <table border=0 bgcolor="#000000" cellpadding=0 cellspacing=0>
   <tr>
@@ -279,13 +270,18 @@ else { echo $LDName;} ?>
  {
     echo '<input type="hidden" name="username" value="'.$user['name'].'">'.'<b>'.$user['name'].'</b>';
  }
-  else
+  elseif(isset($is_employee)&&$is_employee)
   {
- ?>   
+ ?>  
+<input name="username" type="hidden" 
+<?php 
+	if ($username!="") echo ' value="'.$username.'"><br><b>'.$username.'</b>'; 
+		else echo '>';
 
-<input name="username" type="text"
+}else{
+?>
 
-<?php if ($username!="") echo "value=".$username ; ?>>
+<input name="username" type="text" <?php if ($username!="") echo ' value="'.$username.'"'; ?>>
 <?php
 }
 ?>
@@ -303,7 +299,7 @@ else { echo $LDUserId;} ?>
   {
  ?> 
 <input type=text name="userid"
-<?php if ($userid!="") echo "value=".$userid ; ?>>
+<?php if ($userid!="") echo 'value="'.$userid.'"'; ?>>
 <?php
 }
 ?>
@@ -426,6 +422,7 @@ while (list($x,$v)=each($area_opt))
 <tr bgcolor="#dddddd">
 <td colspan=3><FONT    SIZE=-1  FACE="Arial">
 <p>
+<input type="hidden" name="personell_nr" value="<?php echo $personell_nr; ?>">
 <input type="hidden" name="itemname" value="<?php echo $itemname ?>">
 <input type="hidden" name="sid" value="<?php echo $sid; ?>">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
