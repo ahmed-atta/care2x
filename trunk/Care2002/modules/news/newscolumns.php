@@ -67,7 +67,7 @@ if($dblink_ok) {
 		 /* default startpage */
 		$breakfile = $default_start_page;
 	}
-	$breakfile=$root_path.$top_dir.$URL_APPEND;
+	$breakfile=$root_path.$breakfile.URL_APPEND;
 	/* Check the title */
 	if(!isset($$row['LD_var'])||empty($$row['LD_var'])) {
 		$title=$row['name_formal'];
