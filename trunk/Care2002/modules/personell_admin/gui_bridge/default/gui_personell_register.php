@@ -59,8 +59,8 @@ function showcat()
 </script>
 
 <script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
 <?php 
 require('./include/js_popsearchwindow.inc.php');
@@ -326,13 +326,27 @@ if($GLOBAL_CONFIG['patient_name_middle_show'])
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDDateJoin; ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input name="date_join" type="text" size="30" value="<?php  if(isset($date_join)&&$date_join!='0000-00-00')   echo formatDate2Local($date_join,$date_format); ?>" >
+<td colspan=2 bgcolor="#eeeeee"><input name="date_join" type="text"  size="12" maxlength=10  value="<?php  if(isset($date_join)&&$date_join!='0000-00-00')   echo formatDate2Local($date_join,$date_format); ?>" 
+ onFocus="this.select();"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+<a href="javascript:show_calendar('aufnahmeform.date_join','<?php echo $date_format ?>')">
+ <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a> 
+ <font size=1>[ <?php   
+ $dfbuffer="LD_".strtr($date_format,".-/","phs");
+  echo $$dfbuffer;
+ ?> ] </font>
 </td>
 </tr>
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDDateExit ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input name="date_exit" type="text" size="30" value="<?php if(isset($date_exit)&&$date_exit!='0000-00-00')   echo formatDate2Local($date_exit,$date_format); ?>" >
+<td colspan=2 bgcolor="#eeeeee"><input name="date_exit" type="text"  size="12" maxlength=10  value="<?php if(isset($date_exit)&&$date_exit!='0000-00-00')   echo formatDate2Local($date_exit,$date_format); ?>" 
+ onFocus="this.select();"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+<a href="javascript:show_calendar('aufnahmeform.date_exit','<?php echo $date_format ?>')">
+ <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a> 
+ <font size=1>[ <?php   
+ $dfbuffer="LD_".strtr($date_format,".-/","phs");
+  echo $$dfbuffer;
+ ?> ] </font>
 </td>
 </tr>
 <tr>
@@ -344,14 +358,27 @@ if($GLOBAL_CONFIG['patient_name_middle_show'])
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDContractStart ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input name="contract_start" type="text" size="30" value="<?php  if(isset($contract_start)&&$contract_start!='0000-00-00')   echo formatDate2Local($contract_start,$date_format); ?>" >
-</td>
+<td colspan=2 bgcolor="#eeeeee"><input name="contract_start" type="text"  size="12" maxlength=10  value="<?php  if(isset($contract_start)&&$contract_start!='0000-00-00')   echo formatDate2Local($contract_start,$date_format); ?>" 
+ onFocus="this.select();"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+<a href="javascript:show_calendar('aufnahmeform.contract_start','<?php echo $date_format ?>')">
+ <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a> 
+ <font size=1>[ <?php   
+ $dfbuffer="LD_".strtr($date_format,".-/","phs");
+  echo $$dfbuffer;
+ ?> ] </font>
+ </td>
 </tr>
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDContractEnd ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input name="contract_end" type="text" size="30" value="<?php  if(isset($contract_end)&&$contract_end!='0000-00-00')   echo formatDate2Local($contract_end,$date_format); ?>" >
-</td>
+<td colspan=2 bgcolor="#eeeeee"><input name="contract_end" type="text" size="12" maxlength=10 value="<?php  if(isset($contract_end)&&$contract_end!='0000-00-00')   echo formatDate2Local($contract_end,$date_format); ?>" 
+ onFocus="this.select();"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+<a href="javascript:show_calendar('aufnahmeform.contract_end','<?php echo $date_format ?>')">
+ <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a> 
+ <font size=1>[ <?php   
+ $dfbuffer="LD_".strtr($date_format,".-/","phs");
+  echo $$dfbuffer;
+ ?> ] </font></td>
 </tr>
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDPayClass ?>:

@@ -59,16 +59,34 @@ $TP_care_logo=createLogo($root_path,'care_logo.gif','0','right');
 $date_checker='onBlur="IsValidDate(this,\''.$date_format.'\')" onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\')"';
 
 $TP_date_end='<input type="text" name="date_end" size=10 maxlength=10 '.$date_checker.'>';
+$TP_href_des='<a href="javascript:show_calendar(\'sickform.date_end\',\''.$date_format.'\')">';
 $TP_date_start='<input type="text" name="date_start" size=10 maxlength=10 '.$date_checker.'>';
+$TP_href_dss='<a href="javascript:show_calendar(\'sickform.date_start\',\''.$date_format.'\')">';
 $TP_date_confirm='<input type="text" name="date_confirm" size=10 maxlength=10 '.$date_checker.'>';
+$TP_href_dcs='<a href="javascript:show_calendar(\'sickform.date_confirm\',\''.$date_format.'\')">';
+$TP_href_end='</a>';
+
+
+$TP_img_calendar='<img '.createComIcon($root_path,'show-calendar.gif','0','absmiddle').'>';
+
+$dfbuffer="LD_".strtr($date_format,".-/","phs");
+$TP_date_format=$$dfbuffer;
+
 
 $TP_diagnosis='<textarea name="diagnosis" cols=40 rows=5 wrap="physical"></textarea>';
 
 # Signature stamp of the department
 $TP_dept_sigstamp=nl2br($dept['sig_stamp']); 
+
 # Logo of the department
-if(file_exists($root_path.'gui/img/logos_dept/dept_'.$dept_nr.'.'.$dept['logo_mime_type'])){
-	$TP_dept_logo=$root_path.'gui/img/logos_dept/dept_'.$dept_nr.'.'.$dept['logo_mime_type']; 
+$logobuff=$root_path.'gui/img/logos_dept/dept_'.$dept_nr.'.'.$dept['logo_mime_type'];
+if(file_exists($logobuff)){
+	$TP_dept_logo=$logobuff; 
+	# Check the logo dimensions
+	$logosize=GetImageSize($logobuff);
+	# If height > $logo_ht_limit, use limit
+	if($logosize[1]>$logo_ht_limit) $TP_height='height='.$logo_ht_limit;
+		else $TP_height='height='.$logosize[1];
 }else{
 	$TP_dept_logo=$root_path.'gui/img/common/default/pixel.gif'; # Else output a transparent pixel
 }

@@ -55,6 +55,14 @@ $TP_date_end=formatDate2Local($sickconfirm['date_end'],$date_format);
 $TP_date_start=formatDate2Local($sickconfirm['date_start'],$date_format);
 $TP_date_confirm=formatDate2Local($sickconfirm['date_confirm'],$date_format);
 
+$TP_href_des='';
+$TP_href_dss='';
+$TP_href_dcs='';
+$TP_href_end='';
+$TP_img_calendar='';
+$TP_date_format='';
+
+
 $TP_diagnosis=nl2br($sickconfirm['diagnosis']);
 
 # Get the address of the hospital from the global config table

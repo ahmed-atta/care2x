@@ -38,8 +38,8 @@ function popSearchWin(target,obj_val,obj_name) {
 </script>
 
 <script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
 <?php
 require($root_path.'include/inc_js_gethelp.php');
@@ -57,7 +57,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 
 <tr>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php echo $LDPatientRegister.' - '.$LDArchive ?></STRONG></FONT>
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+1  FACE="Arial"><STRONG> &nbsp;<?php echo $LDAdmission.' :: '.$LDArchive ?></STRONG></FONT>
 </td>
 
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
@@ -137,10 +137,13 @@ require('./gui_bridge/default/gui_tabs_patadmit.php');
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; <a href="'.$buf.'" title="'.$LDClk2Show.'">'.$result['name_last'].'</a></td>
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.$result['name_first'].'</a></td>
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;'.@formatDate2Local($result['date_birth'],$date_format).'</td>';
-	if($result['encounter_class_nr']==1) $adder=$GLOBAL_CONFIG['patient_inpatient_nr_adder'];
+/*	if($result['encounter_class_nr']==1) $adder=$GLOBAL_CONFIG['patient_inpatient_nr_adder'];
 	if($result['encounter_class_nr']==2) $adder=$GLOBAL_CONFIG['patient_outpatient_nr_adder'];
-	echo '
+echo '
     <td align=right><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;'.($result['encounter_nr']+$adder).'</td>
+*/
+echo '
+    <td align=right><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;'.$result['encounter_nr'].'</td>
     <td align=right><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.@formatDate2Local($result['encounter_date'],$date_format).'</a></td>
   </tr>
   <tr bgcolor=#0000ff>
@@ -177,17 +180,22 @@ createTR('encounter_nr', $LDAdmitNr,$encounter_nr);
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDAdmitDate ?>: 
 </td>
 <td bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">
-<input name="date_start" type="text" size=10 maxlength=10    onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-[ <?php   
+<input name="date_start" type="text" size=10 maxlength=10  value="<?php if(!empty($HTTP_POST_VARS['date_start'])) echo @formatDate2Local($HTTP_POST_VARS['date_start'],$date_format);  ?>"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+ <a href="javascript:show_calendar('aufnahmeform.date_start','<?php echo $date_format ?>')">
+ <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a> 
+ <font size=1>[ <?php   
  $dfbuffer="LD_".strtr($date_format,".-/","phs");
   echo $$dfbuffer;
- ?> ]
+ ?> ] </font>
 </td>
-<td bgcolor="#eeeeee"><nobr><FONT SIZE=-1  FACE="Arial"><?php echo $LDTo ?>: <input name="date_end" type="text" size=10 maxlength=10   onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-[ <?php   
+<td bgcolor="#eeeeee"><nobr><FONT SIZE=-1  FACE="Arial"><?php echo $LDTo ?>: 
+<input name="date_end" type="text" size=10 maxlength=10 value="<?php if(!empty($HTTP_POST_VARS['date_end'])) echo @formatDate2Local($HTTP_POST_VARS['date_end'],$date_format);  ?>"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+ <a href="javascript:show_calendar('aufnahmeform.date_end','<?php echo $date_format ?>')">
+ <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a> 
+ <font size=1>[ <?php   
  $dfbuffer="LD_".strtr($date_format,".-/","phs");
   echo $$dfbuffer;
- ?> ]
+ ?> ] </font>
 </nobr></td>
 </tr>
 
@@ -229,12 +237,14 @@ if(!isset($addr_city_town)) $addr_city_town='';
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDBday ?>:
 </td>
 <td bgcolor="#eeeeee" colspan=2><FONT SIZE=-1  FACE="Arial">
-<input name="date_birth" type="text" size="15" maxlength=10 value="<?php   echo $date_birth;  ?>"
+<input name="date_birth" type="text" size="15" maxlength=10 value="<?php if(!empty($HTTP_POST_VARS['date_birth'])) echo @formatDate2Local($HTTP_POST_VARS['date_birth'],$date_format);  ?>"
  onFocus="this.select();"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"> 
- [ <?php   
+ <a href="javascript:show_calendar('aufnahmeform.date_birth','<?php echo $date_format ?>')">
+ <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a> 
+ <font size=1>[ <?php   
  $dfbuffer="LD_".strtr($date_format,".-/","phs");
   echo $$dfbuffer;
- ?> ]
+ ?> ] </font>
 </td>
 </tr>
 

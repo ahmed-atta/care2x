@@ -1,10 +1,17 @@
-<form method="post" >
+<form method="post" name="appt_form">
  <table border=0 cellpadding=2 width=100%>
    <tr bgcolor="#f6f6f6">
      <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDate; ?></td>
      <td><input type="text" name="date" size=10 maxlength=10  
 	 	 value="<?php if(($mode!='update')&&!empty($date)&&($date!='0000-00-00')) echo formatDate2Local($date,$date_format); ?>" 
-	 	onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"></td>
+	 	onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+		<a href="javascript:show_calendar('appt_form.date','<?php echo $date_format ?>')">
+ 		<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a> 
+ 		<font size=1>[ <?php   
+ 		$dfbuffer="LD_".strtr($date_format,".-/","phs");
+  		echo $$dfbuffer;
+ 		?> ] </font>
+		</td>
    </tr>
    <tr bgcolor="#f6f6f6">
      <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDTime; ?></td>

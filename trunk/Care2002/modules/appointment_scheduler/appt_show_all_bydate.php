@@ -46,7 +46,7 @@ $HTTP_SESSION_VARS['sess_parent_mod']='';
 require_once($root_path.'include/care_api_classes/class_department.php');
 $dept_obj=new Department;
 $deptarray=$dept_obj->getAllMedical('name_formal');
-$breakfile=$root_path.'main/startframe.php';
+$breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
@@ -93,6 +93,11 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <?php 
 /*generate the calendar */
 include($root_path.'classes/calendar_jl/class.calendar.php'); 
+/** CREATE CALENDAR OBJECT **/
+$Calendar = new Calendar;
+/** WRITE CALENDAR **/
+$Calendar -> mkCalendar ($currYear, $currMonth, $currDay);
+
 /* show the appointments */
 if($appt_obj->count){
 	include('./gui_bridge/default/gui_show_appointment.php');

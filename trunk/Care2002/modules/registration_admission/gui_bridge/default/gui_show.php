@@ -1,6 +1,6 @@
 <?php
 $returnfile=$HTTP_SESSION_VARS['sess_file_return'];
-
+# Display the tabs
 require('./gui_bridge/default/gui_std_tags.php');
 
 $HTTP_SESSION_VARS['sess_file_return']=$thisfile;
@@ -41,8 +41,8 @@ function popRecordHistory(table,pid) {
 </script>
 
 <script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
 
 
@@ -202,6 +202,7 @@ if($parent_admit) include('./gui_bridge/default/gui_patient_encounter_showdata_o
 <td bgColor="#eeeeee" colspan=3 valign="top">
 
 <?php
+# If mode = show then display the data
 if($mode=='show'){
 
 	if($parent_admit) $bgimg='tableHeaderbg3.gif';

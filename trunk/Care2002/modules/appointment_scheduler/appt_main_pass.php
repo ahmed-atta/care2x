@@ -37,7 +37,7 @@ switch($target)
 
 
 $thisfile=basename(__FILE__);
-$breakfile='patient.php'.URL_APPEND;
+$breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 
 $userck='aufnahme_user';
 //reset cookie;
