@@ -34,6 +34,12 @@ function chkform(d) {
 		return true;
 	}
 }
+
+function popSearchWin(target,obj_val,obj_name){
+	urlholder="./data_search.php<?php echo URL_REDIRECT_APPEND; ?>&target="+target+"&obj_val="+obj_val+"&obj_name="+obj_name;
+	DSWIN<?php echo $sid ?>=window.open(urlholder,"wblabel<?php echo $sid ?>","menubar=no,width=400,height=550,resizable=yes,scrollbars=yes");
+}
+
 //  Script End -->
 </script>
 
@@ -41,13 +47,14 @@ function chkform(d) {
  <table border=0 cellpadding=2 width=100%>
    <tr bgcolor="#f6f6f6">
      <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDate; ?></td>
-     <td><input type="text" name="date" size=10 maxlength=10 onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+     <td><input type="text" name="date" value='<?php echo date("d/m/Y"); ?>' size=10 maxlength=10 onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
 	 	 <a href="javascript:show_calendar('reportform.date','<?php echo $date_format; ?>')"><img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
 	</td>
    </tr>
    <tr bgcolor="#f6f6f6">
      <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDType; ?></td>
-     <td><input type="text" name="type" size=50 maxlength=60></td>
+     <td><input type="text" name="type" size=40 maxlength=60 alue="<?php echo $type; ?>" >
+	     	<a href="javascript:popSearchWin('immunization','reportform.nr','reportform.type')"><img <?php echo createComIcon($root_path,'b-write_addr.gif','0') ?>></a></td>
    </tr>
    <tr bgcolor="#f6f6f6">
      <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDMedicine; ?></td>
@@ -64,7 +71,6 @@ function chkform(d) {
    <tr bgcolor="#f6f6f6">
      <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDRefreshDate; ?></td>
      <td><input type="text" name="refresh_date" size=10 maxlength=10 onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-	 	 <a href="javascript:show_calendar('reportform.refresh_date','<?php echo $date_format; ?>')"><img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
 	 </td>
    </tr>
    <tr bgcolor="#f6f6f6">
