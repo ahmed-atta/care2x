@@ -111,15 +111,15 @@ $LDMedocsElements=array(
 								'Datum',
 								'Zeit'
 								);
-$LDStartNewDoc='Start ein neues Medocs Dokument';
+$LDStartNewDoc='Starte ein neues Medocs Dokument';
 $LDNoMedocsFound='Kein Medocs Dokument von dem Patient gefunden!';
 $LDAt='um';
 
 $LDDept='Abteilung';
-$LDRoomNr='Zimmer nr';
+$LDRoomNr='Zimmernr.';
 $LDAdmitType='Aufnahmeart';		
 $LDCivilStat='Familienstand';
-$LDInsuranceNr='Versicherungsnr';
+$LDInsuranceNr='Versicherungsnr.';
 $LDNameAddr='Name & Adresse';
 $LDBillInfo='Rechnung an';
 $LDAdmitDiagnosis='Aufnahmediagnose';
@@ -168,7 +168,7 @@ $LDMarried='Verheiratet';
 $LDDivorced='Geschieden';
 $LDWidowed='Verwitwet';
 $LDSeparated='Getrennt';
-$LDCellPhone='Handy nr.';
+$LDCellPhone='Handynr.';
 $LDFax='Fax';
 $LDEmail='E-mail';
 $LDZipCode='PLZ';
@@ -321,7 +321,7 @@ $LDcancelled='storniert';
 $LDGotMedAdvice='Aufklärung';
 /* 2003-03-15 EL */
 $LDShowDocList='Die Dokumente auflisten';
-$LDScheduleNewAppointment='Neues Termin';
+$LDScheduleNewAppointment='Neuer Termin';
 /* 2003-04-04 EL */
 $LDNoPendingApptThisDay='Keine Termine an diesem Tag vorhanden.';
 $LDNoPendingApptToday='Keine Termine heute vorhanden.';
@@ -382,11 +382,11 @@ $LDPrintPDFDoc='PDF Dokument erstellen';
 $LDDeathDate='Death date';
 
 # 2003-10-14 NDHC
-$LDITA='Intratracheal anesthesie';
-$LDLA='Lokale anesthesie';
+$LDITA='Intratracheale Anesthesie';
+$LDLA='Lokale Anesthesie';
 $LDAS='Analgosedierung';
 $LDOral='Oral';
-$LDAnticoagulant='Antikoagulant';
+$LDAnticoagulant='Antikoagulantien';
 $LDHemolytic='Hämolytika';
 $LDDiuretic='Diuretika';
 $LDAntibiotic='Antibiotika';
