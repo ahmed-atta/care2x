@@ -378,13 +378,7 @@ echo '
 		';*/
         if($edit)
         {
-			  	if($lang=='ar' || $lang=='fa'){// Modified on ( 22/01/2004) By Walid Fathalla
-                echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large_ar.php?sid=$sid&lang=$lang&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
-                }else{
-                echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid=$sid&lang=$lang&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
-                }
-	   
-		  // echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid=$sid&lang=$lang&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
+		   echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
 		}
         elseif($pn=='')
 		{
