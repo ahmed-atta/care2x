@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
+* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@latorilla.com
+* elpidio@care2x.net, elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -22,17 +22,14 @@ if($from=='set') $returnfile='edv_system_format_currency_set.php'.URL_APPEND.'&f
 $dbtable='care_currency';
 
 if(($mode=='save')&&$short_name&&$long_name&&$info){
-  include('../include/inc_db_makelink.php');
-  if ($link&&$DBLink_OK){
+
     if($item_no){
 	   $sql="UPDATE ".$dbtable." SET short_name='".$short_name."',
 	                                               long_name='".$long_name."',
 												   info='".$info."'
 												   WHERE item_no=".$item_no;
-	   if($ergebnis=$db->Execute($sql))
-       {
-		 if(mysql_affected_rows($link))
-		 {
+	   if($ergebnis=$db->Execute($sql)){
+		 if($db->Affected_Rows()){
 	  	    $sql="UPDATE ".$dbtable." SET 
 												   modify_id='".$HTTP_COOKIE_VARS['ck_cafenews_user'.$sid]."',
 												   create_time=NULL
@@ -40,26 +37,21 @@ if(($mode=='save')&&$short_name&&$long_name&&$info){
 		   $db->Execute($sql);
 		   $new_currency_ok=1;
 		   $saved_msg=$LDCurrencyUpdated;
-		 }
-		   else
-		   {
+		 }else{
 		     $new_currency_ok=0;
 		   }
-		}
-		else echo "<p> $sql <p>$LDDbNoRead"; 
-	}
-	else
-	{
+		}else{
+			echo "<p> $sql <p>$LDDbNoRead";
+		} 
+	}else{
 		$info_exist=0;
 		
 	   // Check first if the info already exists
 	   
 	   $sql="SELECT item_no FROM $dbtable WHERE short_name='$short_name' AND long_name='$long_name'";
 	   
-	   if($ergebnis=$db->Execute($sql))
-       {
-		  if(!$ergebnis->RecordCount())
-		  {   
+	   if($ergebnis=$db->Execute($sql)){
+		  if(!$ergebnis->RecordCount()){   
 	
 		 	$sql="INSERT INTO $dbtable 
 			                          (short_name,
@@ -75,39 +67,32 @@ if(($mode=='save')&&$short_name&&$long_name&&$info){
 									  '".$HTTP_COOKIE_VARS['ck_cafenews_user'.$sid]."',
 									  NULL,
 									  NULL)";
-			if($ergebnis=$db->Execute($sql))
-       		{
-				if(mysql_affected_rows($link))
-				{
+			if($ergebnis=$db->Execute($sql)){
+				if($db->Affected_Rows()){
 				   $new_currency_ok=1;
 				   $saved_msg=$LDAddedNewCurrency;
-				   $item_no=mysql_insert_id($link);
+				   $item_no=$db->Insert_ID();
+				}else{
+					$new_currency_ok=0;
 				}
-				else $new_currency_ok=0;
-			}
-			  else echo "<p>".$sql."<p>$LDDbNoRead"; 
-		  }
-		  else
-		  {
+			}else{
+				echo "<p>".$sql."<p>$LDDbNoRead";
+			} 
+		  }else{
 		      $info_exist=1;
 		  }
-		}
-		 else echo "<p>".$sql."<p>$LDDbNoRead"; 
-	  }
-
-   } else { echo "$LDDbNoLink<br> $sql<br>"; }
+		}else{
+			echo "<p>".$sql."<p>$LDDbNoRead";
+		} 
+	}
 }
 
-if(($mode=='edit')&&$item_no)
-{
-  include('../include/inc_db_makelink.php');
-  if ($link&&$DBLink_OK)
-  {
+if(($mode=='edit')&&$item_no){
+
     $sql="SELECT short_name,long_name,info FROM care_currency WHERE item_no=".$item_no;
-	if($ergebnis=$db->Execute($sql))
-	{
-	  if($ergebnis->RecordCount())
-	  {
+	
+	if($ergebnis=$db->Execute($sql)){
+	  if($ergebnis->RecordCount()){
 	     $c_result=$ergebnis->FetchRow();
 		 $short_name=$c_result['short_name'];
 		 $long_name=$c_result['long_name'];
@@ -119,8 +104,6 @@ if(($mode=='edit')&&$item_no)
 	   $item_no='';
 	   echo "<p>$sql<p>$LDDbNoRead";
 	} 
-  }
-  else { echo "$LDDbNoLink<br> $sql<br>"; }
 }
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
