@@ -13,8 +13,9 @@ require($root_path.'include/inc_environment_global.php');
 $lang_tables=array('date_time.php','departments.php','actions.php','prompt.php');
 define('LANG_FILE','aufnahme.php');
 //define('NO_2LEVEL_CHK',1);
-define('NO_CHAIN',1);
-require_once($root_path.'include/inc_front_chain_lang.php');
+//define('NO_CHAIN',1);
+$local_user='aufnahme_user';
+require($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_date_format_functions.php');
 
 if(!isset($currDay)||!$currDay) $currDay=date('d');

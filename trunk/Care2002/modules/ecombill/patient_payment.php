@@ -73,6 +73,7 @@ $breakfile='patient_payment_links.php'.URL_APPEND.'&patientno='.$patientno.'&ful
 
 <html>
 <head>
+<?php echo setCharSet(); ?>
 <title>Bill Payment</title>
 <SCRIPT language="JavaScript">
 <!--

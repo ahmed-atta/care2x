@@ -23,6 +23,7 @@ extract($TXT);
 ?>
 <html>
 <head>
+<?php echo setCharSet(); ?>
 <Script language=JavaScript>
 
 function check()

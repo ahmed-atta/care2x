@@ -42,6 +42,7 @@ $breakfile='final_bill.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='.$ful
 <html>
 
 <head>
+<?php echo setCharSet(); ?>
 <title>Patient Name</title>
 <SCRIPT language="JavaScript">
 <!--

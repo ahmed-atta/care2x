@@ -30,9 +30,9 @@ $breakfile='billingmenu.php'.URL_APPEND;
 extract($TXT);
 
 ?>
-
 <html>
 <head>
+<?php echo setCharSet(); ?>
 <title><?php if($service=='LT')echo "Edit Laboratory Tests";?><?php if($service=='HS')echo "Edit Hospital Services";?></title>
 <SCRIPT language="JavaScript">
 <!--

@@ -32,10 +32,10 @@ $comm=new Comm;
 
 # Validate 3 most important inputs
 if(isset($mode)&&!empty($mode)&&$mode!='select'){
-	if(empty($HTTP_POST_VARS['name_formal'])||empty($HTTP_POST_VARS['type'])){
+	if(empty($HTTP_POST_VARS['name_formal'])||empty($HTTP_POST_VARS['id'])||empty($HTTP_POST_VARS['type'])){
 		$inputerror=TRUE; # Set error flag
 	}
-	if($mode=='update'&&empty($HTTP_POST_VARS['id'])) $inputerror=TRUE;
+	//if($mode=='update'&&empty($HTTP_POST_VARS['id'])) $inputerror=TRUE;
 }
 
 if(!empty($mode)&&!$inputerror){
@@ -204,9 +204,9 @@ div.pcont{ margin-left: 3; }
 
 <table width=100% border=0 cellpadding="0" cellspacing=0>
 <tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10">
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
 <FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp; <?php echo "$LDDepartment :: "; if($mode=='select') echo $LDUpdate; else echo $LDCreate; ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right>
 <?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('dept_create.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
 <tr valign=top >
@@ -233,7 +233,7 @@ div.pcont{ margin-left: 3; }
 	</td>
     <td class=pblock>
 	<?php
-		if($mode=='select') { echo '<input type="hidden" name="id"  value="'.$id.'">'; } else {
+		if($mode=='select') { echo '<input type="hidden" name="id"  value="'.$id.'">'.$id; } else {
 	?>
 	<input type="text" name="id" size=40 maxlength=40 value="<?php echo $id; ?>">
 	<?php

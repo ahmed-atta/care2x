@@ -142,8 +142,8 @@ else  echo 'topmargin=2 marginheight=2';
 		<tr bgcolor="#009900">
  		<td><font face=arial size=2 color=#ffffff><b><nobr><?php echo $LDOps301 ?></nobr></b></td>
  		<td ><font face=arial size=2 color=#ffffff><b><?php echo $LDDescription ?></b></td>
- 		<td ><font face=arial size=2 color=#ffffff><nobr><b><?php echo $LDCategory ?></b> <a href="javascript:gethelp()" ><img <?php echo createComIcon($root_path,'frage.gif','0','absmiddle') ?>></a></nobr></td>
- 		<td ><font face=arial size=2 color=#ffffff><nobr><b><?php echo $LDLocalization ?> <a href="javascript:gethelp()" ><img <?php echo createComIcon($root_path,'frage.gif','0','absmiddle') ?>></a></nobr></b></td>
+ 		<td ><font face=arial size=2 color=#ffffff><nobr><b><?php echo $LDCategory ?></b> <a href="javascript:gethelp('drg_proc_cat.php')" ><img <?php echo createComIcon($root_path,'frage.gif','0','absmiddle') ?>></a></nobr></td>
+ 		<td ><font face=arial size=2 color=#ffffff><nobr><b><?php echo $LDLocalization ?> <a href="javascript:gethelp('drg_proc_loc.php')" ><img <?php echo createComIcon($root_path,'frage.gif','0','absmiddle') ?>></a></nobr></b></td>
  		<td><font face=arial size=2 color=#ffffff><b><?php echo $LDDoneBy ?></b></td>
 <?php if($display=='composite') : ?>
  		<td><font face=arial size=2 color=#ffffff>&nbsp;</td>

@@ -7,6 +7,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 * developed by ecomscience.com http://www.ecomscience.com 
 * Dilip Bharatee
 * Abrar Hazarika
+* Prantar Deka
 * GPL License
 */
 require('./roots.php');
@@ -25,6 +26,7 @@ extract($TXT);
 <html>
 
 <head>
+<?php echo setCharSet(); ?>
 <title>Patient Name</title>
 </head>
 

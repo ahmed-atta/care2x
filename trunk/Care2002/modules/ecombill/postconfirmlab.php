@@ -5,6 +5,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 * (2003-04-30)
 * adapted from eComBill beta 0.2 
 * developed by ecomscience.com http://www.ecomscience.com 
+* Dilip Bharatee
+* Abrar Hazarika
+* Prantar Deka
 * GPL License
 */
 require('./roots.php');

@@ -20,6 +20,8 @@ $breakfile='patientbill.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='.$fu
 
 <html>
 <head>
+<?php echo setCharSet(); ?>
+
 <Script language=Javascript>
 function show()
 {	

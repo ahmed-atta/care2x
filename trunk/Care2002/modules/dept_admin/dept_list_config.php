@@ -15,9 +15,9 @@ define('LANG_FILE','edp.php');
 $local_user='ck_edv_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_department.php');
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
-$breakfile='dept_manage.php'.URL_APPEND;
+//$breakfile='dept_manage.php'.URL_APPEND;
+$breakfile=$root_path.'modules/system_admin/edv-system-admi-welcome.php'.URL_APPEND	;
 
 if($pday=='') $pday=date('d');
 if($pmonth=='') $pmonth=date('m');
@@ -29,8 +29,6 @@ $dept_obj=new Department;
 $deptarray=$dept_obj->getAllNoCondition('name_formal');
 
 ?>
-
-
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
@@ -57,20 +55,20 @@ div.pcont{ margin-left: 3; }
 
 <table width=100% border=0 cellpadding="0" cellspacing=0>
 <tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10">
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
 <FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp; <?php echo "$LDDepartment :: $LDList" ?>
 </STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right>
 <?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('dept_config.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
 <tr valign=top >
 <td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
  <ul>
-<?php if($rows) : ?>
+<?php if($rows) { ?>
 
 <img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"><font face="Verdana, Arial" size=3 color="#880000">
 <b><?php echo str_replace("~station~",strtoupper($station),$LDStationExists) ?></b></font><p>
-<?php endif ?>
+<?php } ?>
 <font face="Verdana, Arial" size=-1><?php echo $LDEnterAllFields ?>
 
 <table border=0>

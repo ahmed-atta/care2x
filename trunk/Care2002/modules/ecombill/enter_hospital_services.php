@@ -21,6 +21,7 @@ extract($TXT);
 ?>
 <html>
 <head>
+<?php echo setCharSet(); ?>
 <Script language=JavaScript>
 
 <!--
@@ -91,7 +92,7 @@ $TP_js='javascript:check()';
 $TP_img_1=createLDImgSrc($root_path,'savedisc.gif','0'); 
 $TP_img_2=createLDImgSrc($root_path,'cancel.gif','0');
 
-$TP_item_name=$NameLT;
+$TP_item_name=$NameHS;
 $TP_title=$HospitalServiceItem;
 $TP_input_1='LabTestName';
 $TP_input_2='TestCode';

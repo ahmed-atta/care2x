@@ -76,7 +76,7 @@ var _editor_url="<?php echo $root_path.'js/html_editor/'; ?>";
 <?php endif ?>
     <td bgcolor="#efefef" colspan=2><FONT FACE="verdana,Arial" color="#0000cc" size=3><b><?php echo $LDTitleTag ?>:</b><br>
 	<font size=1><?php echo $LDTitleMaxNote ?><br>
-	<input type="text" name="newstitle" size=50 maxlength=50><br>
+	<input type="text" name="newstitle" size=50 maxlength=255><br>
 	<FONT FACE="verdana,Arial" color="#0000cc" size=3><b><?php echo $LDHeader ?>:</b><br>
 	<font size=1><?php echo $LDHeaderMaxNote ?><br>
 	

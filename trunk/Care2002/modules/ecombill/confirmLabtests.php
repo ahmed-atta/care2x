@@ -28,6 +28,7 @@ $breakfile='select_services.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='
  ?> 
 <html>
 <head>
+<?php echo setCharSet(); ?>
 <title>Laboratory Tests</title>
 <script language="javascript">
 <!--

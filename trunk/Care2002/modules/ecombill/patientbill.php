@@ -23,8 +23,9 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 $breakfile='search.php'.URL_APPEND;
 ?>
 <html>
-
 <head>
+<?php echo setCharSet(); ?>
+
 <Script language=Javascript>
 <!--
 function subbill()

@@ -41,6 +41,7 @@ $breakfile='patient_bill_links.php'.URL_APPEND.'&patientno='.$patientno.'&full_e
 <html>
 
 <head>
+<?php echo setCharSet(); ?>
 <title>Patient Name</title>
 
 </head>

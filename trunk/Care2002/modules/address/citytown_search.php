@@ -12,7 +12,7 @@ require($root_path.'include/inc_environment_global.php');
 */
 
 # Default value for the maximum nr of rows per block displayed, define this to the value you wish
-# In normal cases this value is derived from the db table "care_config_global" using the "address_list_max_block_rows" element.
+# In normal cases this value is derived from the db table "care_config_global" using the "pagin_address_list_max_block_rows" element.
 define('MAX_BLOCK_ROWS',30); 
 
 $lang_tables[]='search.php';
@@ -42,14 +42,14 @@ if(empty($odir)) $odir='ASC';
 $GLOBAL_CONFIG=array();
 include_once($root_path.'include/care_api_classes/class_globalconfig.php');
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
-$glob_obj->getConfig('address_search_max_block_rows');
-if(empty($GLOBAL_CONFIG['address_search_max_block_rows'])) $GLOBAL_CONFIG['address_search_max_block_rows']=MAX_BLOCK_ROWS; # Last resort, use the default defined at the start of this page
+$glob_obj->getConfig('pagin_address_search_max_block_rows');
+if(empty($GLOBAL_CONFIG['pagin_address_search_max_block_rows'])) $GLOBAL_CONFIG['pagin_address_search_max_block_rows']=MAX_BLOCK_ROWS; # Last resort, use the default defined at the start of this page
 
 #Load and create paginator object
 require_once($root_path.'include/care_api_classes/class_paginator.php');
 $pagen=new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
 # Adjust the max nr of rows in a block
-$pagen->setMaxCount($GLOBAL_CONFIG['address_search_max_block_rows']);
+$pagen->setMaxCount($GLOBAL_CONFIG['pagin_address_search_max_block_rows']);
 
 
 if(isset($mode)&&($mode=='search'||$mode=='paginate')&&!empty($searchkey)){
@@ -61,7 +61,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&!empty($searchkey)){
 
 	# Search for the addresses
 	//$address=$address_obj->searchActiveCityTown($searchkey);
-	$address=$address_obj->searchLimitActiveCityTown($searchkey,$GLOBAL_CONFIG['address_search_max_block_rows'],$pgx,$oitem,$odir);
+	$address=$address_obj->searchLimitActiveCityTown($searchkey,$GLOBAL_CONFIG['pagin_address_search_max_block_rows'],$pgx,$oitem,$odir);
 	# Get the resulting record count
 	$linecount=$address_obj->LastRecordCount();
 	$pagen->setTotalBlockCount($linecount);

@@ -27,10 +27,9 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 $breakfile='patientbill.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='.$full_en;
 
 ?>
-
 <html>
-
 <head>
+<?php echo setCharSet(); ?>
 <title><?php if($service=='LT')echo "Select Laboratory Tests";?><?php if($service=='HS')echo "Select Hospital Services";?></title>
 <SCRIPT language="JavaScript">
 <!--
