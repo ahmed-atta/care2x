@@ -1,7 +1,7 @@
 <?php
-
-require_once('../../include/inc_vars_resolve.php');
-
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require_once('./roots.php');
+require_once($root_path.'include/inc_environment_global.php');
 ?>
 
 <?php html_rtl($lang); ?>
@@ -225,7 +225,7 @@ He decided to actively join open source because: <br><i>"Such an ideal world can
 
           <TD vAlign=top><font face="verdana,arial" size=2>
 
-			<P><img src="../../gui/img/control/default/<?php echo $lang ?>/<?php echo $lang ?>_x-blank.gif"  border=0  width=135 align=right vspace=10>
+            <P><img src="../../fotos/credits/thomas_wiedmann.jpg"  border=0  align=right vspace=10>
 
 			<b>Thomas Wiedmann (DE) contributed the ff:</b>
 
@@ -281,8 +281,6 @@ He decided to actively join open source because: <br><i>"Such an ideal world can
 
           <TD vAlign=top><font face="verdana,arial" size=2>
 
-			<P><img src="../../gui/img/control/default/<?php echo $lang ?>/<?php echo $lang ?>_x-blank.gif"  border=0  width=135 align=right vspace=10>
-
 			<b>Nino Novak (DE) edited the german edition of www.care2x.com.</b>
 
 			<p>
@@ -318,8 +316,6 @@ He decided to actively join open source because: <br><i>"Such an ideal world can
         <TR>
 
           <TD vAlign=top><font face="verdana,arial" size=2>
-
-			<P><img src="../../gui/img/control/default/<?php echo $lang ?>/<?php echo $lang ?>_x-blank.gif"  border=0  width=135 align=right vspace=10>
 
 			<b>Patxi Gomaríz (ES) did the spanish translations.</b>
 
@@ -360,8 +356,6 @@ He decided to actively join open source because: <br><i>"Such an ideal world can
         <TR>
 
           <TD vAlign=top><font face="verdana,arial" size=2>
-
-			<P><img src="../../gui/img/control/default/<?php echo $lang ?>/<?php echo $lang ?>_x-blank.gif"  border=0  width=135 align=right vspace=10>
 
 			<b>Daniele Frijia (DE) checked the security aspects of CARE 2X.</b>
 
