@@ -92,6 +92,17 @@ class Encounter extends Notes {
 	function setSingleResult($bool=false){
 	    $this->single_result=$bool;
 	}
+	function getNewEncounterNr($ref_nr,$enc_class_nr){
+		global $db;
+		$row=array();
+		$this->sql="SELECT encounter_nr FROM $this->tb_enc WHERE encounter_nr>=$ref_nr AND encounter_class_nr=$enc_class_nr ORDER BY encounter_nr DESC";
+		if($this->result=$db->SelectLimit($this->sql,1)){
+			if($this->result->RecordCount()){
+				$row=$this->result->FetchRow();
+				return $row['encounter_nr']+1;
+			}else{/*echo $this->sql.'no xount';*/return $ref_nr;}
+		}else{/*echo $this->sql.'no sql';*/return $ref_nr;}
+	}
 	function internResolveEncounterNr($enc_nr='') {
 	    if (empty($enc_nr)) {
 		    if(empty($this->enc_nr)) {
@@ -695,6 +706,30 @@ class Encounter extends Notes {
 		}else{
 			return false;
 		}
+	}
+	function getLoadedEncounterData(){
+		if($this->is_loaded){
+			return $this->encounter;
+		}else{return false;}
+	}	
+	/**
+	* getBasic4Data() returns an adodb object containing the encounter's first name, family name, birth date and sex
+	* param $enc_nr = the encounter number
+	*/
+	function getBasic4Data($enc_nr){
+	    global $db;
+		if(!$this->internResolveEncounterNr($enc_nr)) return false;
+		$this->sql="SELECT p.name_last, p.name_first, p.date_birth, p.sex
+							FROM $this->tb_enc AS e, 
+									 $this->tb_person AS p 
+							WHERE e.encounter_nr=$this->enc_nr
+								AND e.pid=p.pid";
+		//echo $sql;
+		if($this->result=$db->Execute($this->sql)) {
+		    if($this->result->RecordCount()) {
+				return $this->result;
+		    } else { return false;}
+		} else { return false;}
 	}
 }
 ?>

@@ -70,7 +70,7 @@ class Ward extends Encounter {
 	}
 	function getAllWardsItemsObject(&$items) {
 	    global $db;
-	    $this->sql="SELECT $items  FROM $this->tb_ward WHERE 1";
+	    $this->sql="SELECT $items  FROM $this->tb_ward WHERE status NOT IN ('hidden','deleted','closed','inactive')";
         //echo $this->sql;
         if($this->result=$db->Execute($this->sql)) {
             if($this->result->RecordCount()) {
@@ -91,12 +91,11 @@ class Ward extends Encounter {
 	}
 	function getAllWardsItemsArray(&$items) {
 	    global $db;
-	    $this->sql="SELECT $items  FROM $this->tb_ward WHERE 1";
+	    $this->sql="SELECT $items  FROM $this->tb_ward WHERE  status NOT IN ('hidden','deleted','closed','inactive')";
         //echo $this->sql;
         if($this->result=$db->Execute($this->sql)) {
             if($this->result->RecordCount()) {
-				 while($this->buffer_array[]=$this->result->FetchRow());
-				 return $this->buffer_array; 
+				 return $this->result->GetArray(); 
 			} else { return false; }
 		} else { return false; }	
 	}

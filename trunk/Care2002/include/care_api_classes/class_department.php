@@ -10,6 +10,7 @@ class Department extends Core {
 	var $tb='care_department'; // table name
 	var $tb_types='care_type_department';
 	var $tb_cphone='care_phone';
+	var $tb_room='care_room';
 	var $result;
 	var $preload_dept;
 	var $is_preloaded=false;
@@ -53,7 +54,7 @@ class Department extends Core {
 	function _getalldata($cond='1',$sort='name_formal'){
 	    global $db;
 		
-	    if ($this->result=$db->Execute("SELECT * FROM $this->tb WHERE $cond AND (status='' OR status<>'hidden') ORDER BY $sort")) {
+	    if ($this->result=$db->Execute("SELECT * FROM $this->tb WHERE $cond AND status NOT IN ('deleted','hidden','closed','inactive') ORDER BY $sort")) {
 		    if ($this->dept_count=$this->result->RecordCount()) {
 		        return $this->result->GetArray();
 			}else{
@@ -80,6 +81,9 @@ class Department extends Core {
 	}
 	
 	function getAll() {
+		return $this->_getalldata('1');
+	}
+	function getAllActive() {
 		return $this->_getalldata('1');
 	}
 	
@@ -261,8 +265,49 @@ class Department extends Core {
 			return false;
 		}
 	}
+	/**
+	* Sets the department number used by the object on run time
+	*/
 	function setDeptNr($nr){
 		$this->dept_nr=$nr;
+	}
+	/**
+	* Gets all active OR Room numbers
+	* return = adodb record object if successfully, else false
+	*/
+	function getAllActiveORNrs(){
+		global $db;
+		$this->sql="SELECT nr, room_nr FROM $this->tb_room 
+						WHERE type_nr=2 
+							AND (NOT is_temp_closed)
+							AND status NOT IN ('closed','inactive','deleted','hidden','void') 
+						ORDER BY room_nr";
+	    if ($this->result=$db->Execute($this->sql)) {
+		   	if ($this->result->RecordCount()) {
+				return $this->result;
+			}else{return false;}
+		}else{return false;}
+	}		
+	function isSurgery($dept_nr=0){
+		global $db;
+		if(!$dept_nr) return false;
+		$this->sql="SELECT nr FROM care_department WHERE nr=$dept_nr AND does_surgery=1";
+		if($this->result=$db->Execute($this->sql)){
+			if($this->result->RecordCount()){
+				return true;
+			}else{return false;}
+		}else{return false;}
+	}
+	function isOR($room_nr=0){
+		global $db;
+		if(!$room_nr) return false;
+		$this->sql="SELECT nr FROM care_room WHERE room_nr=$room_nr AND type_nr=2"; // 2=  op room type
+		if($this->result=$db->Execute($this->sql)){
+			if($this->result->RecordCount()){
+				return true;
+			}else{return false;}
+		}else{return false;}
+		
 	}
 }
 ?>

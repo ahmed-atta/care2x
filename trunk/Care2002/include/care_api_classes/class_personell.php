@@ -93,7 +93,15 @@ class Personell extends Core {
 		$this->setTable($this->tb);
 		$this->setRefArray($this->personell_fields);
 	}
-	
+	function InitPersonellNrExists($init_nr){
+		global $db;
+		$this->sql="SELECT nr FROM $this->tb WHERE nr=$init_nr";
+		if($this->result=$db->Execute($this->sql)){
+			if($this->result->RecordCount()){
+				return true;
+			} else { return false; }
+		} else { return false; }
+	}	
 	function getDoctorsOfDept($dept_nr=0){
 		if(!$dept_nr) return false;
 			else return $this->_getAllPersonell(1,17,$dept_nr); // 1= dept (location), 17 = doctor (role)
@@ -321,6 +329,7 @@ class Personell extends Core {
 			    $this->personell_data=$this->result->FetchRow();
 				$this->result=NULL;
 			    $this->is_loaded=true;
+			    $this->is_preloaded=true;
 				//echo $this->sql; 
 				return true;
 		    } else {echo $this->sql;  return false;}

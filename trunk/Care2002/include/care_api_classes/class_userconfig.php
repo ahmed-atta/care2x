@@ -11,26 +11,40 @@ class UserConfig {
 	var $row;
 	var $buffer;
 	var $bool=false;
+	var $is_preloaded=false;
+	var $sql;
+	var $ok;
 	
-	function _getDefault() {
+	function Transact($sql=''){
+	    global $db;
+		if(!empty($sql)) $this->sql=$sql;
+        $db->BeginTrans();
+        $this->ok=$db->Execute($this->sql);
+        if($this->ok){
+            $db->CommitTrans();
+			return true;
+        }else{
+	        $db->RollbackTrans();
+			return false;
+	    }
+    }	
+	function _getDefault(){
 	    global $db;
 		
 	    if ($this->result=$db->Execute("SELECT serial_config_data FROM $this->tb WHERE user_id='default'")) {
 		    if ($this->result->RecordCount()) {
 		        $this->row=$this->result->FetchRow();
 			    $this->buffer=unserialize($this->row['serial_config_data']);
-			   // return $this->buffer;
-			} else {
+			   	$this->is_preloaded=true;
+			   	return true;
+			}else{
 				return false;
 			}
-		}
-		else {
+		}else{
 		    return false;
 		}
 	}
-
-	
-	function getConfig($user_id='default') {
+	function getConfig($user_id='default'){
 	    global $db;
 	
 		if(empty($user_id)) return $this->_getDefault();
@@ -41,16 +55,16 @@ class UserConfig {
 			    $this->buffer=unserialize($this->row['serial_config_data']);
 				//echo $user_id.'<br>';
 				//while(list($x,$v)=each($this->buffer)) echo $x.'>'.$v.'<br>';
-			   // return $this->buffer;
-			} else {
+			   	//return $this->buffer;
+			   	$this->is_preloaded=true;
+			   	return true;
+			}else{
 				return $this->_getDefault();
 			}
-		}
-		else {
+		}else{
 		    return false;
 		}
 	}
-	
 	function exists($user_id='') {
 	    global $db;
 	
@@ -59,11 +73,10 @@ class UserConfig {
 	    if ($this->result=$db->Execute("SELECT user_id FROM $this->tb WHERE user_id='$user_id'")) {
 		    if ($this->result->RecordCount()) {
 				return true;			
-			} else {
+			}else{
 				return false;
 			}
-		}
-		else {
+		}else{
 		    return false;
 		}
 	}
@@ -74,14 +87,15 @@ class UserConfig {
 		if(empty($data)) return false;
 		
 	    $this->buffer=serialize($data);
-	    if($this->result=$db->Execute("REPLACE INTO $this->tb (user_id,serial_config_data) VALUES ('$user_id','$this->buffer')")) {
+	    $this->sql="REPLACE INTO $this->tb (user_id,serial_config_data) VALUES ('$user_id','$this->buffer')";
+	    return $this->Transact();
+/*	    if($this->result=$db->Execute("REPLACE INTO $this->tb (user_id,serial_config_data) VALUES ('$user_id','$this->buffer')")) {
 		    return true;
-		}
-		else {
+		}else{
 		    return false;
 		}
+*/
 	}
-	
 	function replaceItem($user_id='default',$type='',$value='') {
 	    global $db;
 	    
@@ -93,10 +107,15 @@ class UserConfig {
 		    $this->buffer[$type]=$value;
 			if($this->saveConfig($user_id,$this->buffer)) return true;
 			   else return false;
-		} else {
+		}else{
 		    return false;
 		}	         
-
+	}
+	function isPreLoaded(){
+		return $this->is_preloaded;
+	}
+	function getConfigData(){
+		return $this->buffer;
 	}
 }
 ?>

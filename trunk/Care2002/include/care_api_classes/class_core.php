@@ -15,11 +15,11 @@ class Core {
 	var $result;
 	var $where;
 	var $do_intern;
+	var $is_preloaded=false;
 	
 	function setTable($table) {
 	    $this->coretable=$table;
 	}
-
 	function setRefArray(&$array) {
 	    if(!is_array($array)) return false;
 	    $this->ref_array=$array;
@@ -27,7 +27,6 @@ class Core {
 	function setDataArray(&$array){
 	    $this->data_array=$array;
 	}
-	
 	function _RecordExists($cond=''){
 		global $db;
 		if(empty($cond)) return false;
@@ -37,12 +36,12 @@ class Core {
 			}else{return false;}
 		}else{return false;}
 	}
-			
-	
-	function Transact() {
-	
+	function setSQL(&$sql){
+		$this->sql=$sql;
+	}
+	function Transact($sql='') {
 	    global $db;
-		
+		if(!empty($sql)) $this->sql=$sql;
         $db->BeginTrans();
         $this->ok=$db->Execute($this->sql);
         if($this->ok) {
@@ -167,5 +166,8 @@ class Core {
 	}
 	function setWhereCondition($cond){
 		$this->where=$cond;
+	}
+	function isPreLoaded(){
+		return $this->is_preloaded;
 	}
 }
