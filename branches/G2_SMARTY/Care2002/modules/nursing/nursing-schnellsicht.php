@@ -18,7 +18,10 @@
  define('NO_2LEVEL_CHK',1);
  require_once($root_path.'include/inc_front_chain_lang.php');
 
- /**
+  /* Load date formatter */
+  include_once($root_path.'include/inc_date_format_functions.php'); 
+  
+  /**
  * LOAD Smarty
  */
 
@@ -30,6 +33,8 @@
  $breakfile='nursing.php'.URL_APPEND;
  $thisfile=basename(__FILE__);
 
+ $today=date('Y-m-d');
+ 
  // Let us make some interface for calendar class
  if($from=='arch'){
 	 if($pday=='') $pday=date('d');
@@ -38,6 +43,7 @@
 	 $currDay=$pday;
 	 $currMonth=$pmonth;
 	 $currYear=$pyear;
+ 	$s_date=formatDate2STD($pyear.'-'.$pmonth.'-'.$pday,'yyyy-mm-dd'); 
  } else {
 	 if($currDay=='') $currDay=date('d');
 	 if($currMonth=='') $currMonth=date('m');
@@ -45,24 +51,26 @@
 	 $pday=$currDay;
 	 $pmonth=$currMonth;
 	 $pyear=$currYear;
+	 # Resolve the date with leading zeroes
+ 	$s_date=formatDate2STD($pyear.'-'.$pmonth.'-'.$pday,'yyyy-mm-dd'); 
+	list($currYear,$currMonth,$currDay)=explode('-',$s_date);
  }
-
- $s_date=$pyear.'-'.$pmonth.'-'.$pday;
 
  if($s_date==date('Y-m-d')) $is_today=true;
 	else $is_today=false;
-	
+
  $dbtable='care_ward';
 
+if($s_date<=$today){
+ 
  # Establish db connection
  if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
  if($dblink_ok) {
-  /* Load date formatter */
-  include_once($root_path.'include/inc_date_format_functions.php');
+
 	
   # Get the wards' info
   $sql="SELECT nr,ward_id,name,room_nr_start,room_nr_end	FROM $dbtable 
-     WHERE NOT is_temp_closed AND status NOT IN ('hide','delete','void','inactive') AND date_create<='$s_date' ORDER BY nr";
+     WHERE is_temp_closed IN ('',0) AND status NOT IN ('hide','delete','void','inactive') AND date_create<='$s_date' ORDER BY nr";
  
   if($wards=$db->Execute($sql)) {
    $rows=$wards->RecordCount();
@@ -76,7 +84,7 @@
           FROM $dbtable AS w 
      LEFT JOIN care_room AS r 
             ON r.ward_nr=w.nr
-         WHERE NOT w.is_temp_closed  
+         WHERE w.is_temp_closed IN ('',0) 
            AND w.status NOT IN ('hide','delete','void','inactive')
            AND w.date_create<='$s_date'
          GROUP BY w.nr
@@ -96,7 +104,8 @@
   if($is_today) 
    $sql.=" AND '$s_date'>=l.date_from AND l.date_to IN ('0000-00-00','')";
   else 
-   $sql.=" AND '$s_date'>= l.date_from AND ('$s_date'<=l.date_to OR l.date_to IN ('0000-00-00',''))";
+   $sql.=" AND '$s_date'>= l.date_from AND '$s_date' <='".date('Y-m-d')."' AND ('$s_date'<=l.date_to OR l.date_to IN ('0000-00-00',''))";
+   
   $sql.=" WHERE NOT w.is_temp_closed  AND w.status NOT IN ('hide','delete','void','inactive')   AND w.date_create<='$s_date' ";
   $sql.="	GROUP BY w.nr ORDER BY w.nr";
      
@@ -112,7 +121,7 @@
   
  } // end if($dblink_ok)
 
-
+}
 
  /**
  * HEAD META definition
@@ -181,16 +190,17 @@
 
  $smarty->assign('gifVarrow',createComIcon($root_path,'varrow.gif','0') );
 
+ /**
+ * wards count
+ */
+ if($rows) {  
+ 
  // ECHO "DATE".date(Ymd);
  $smarty->assign('LDOld',$LDOld);
  $smarty->assign('LDTodays',$LDTodays);
  $smarty->assign('LDOccupancy',$LDOccupancy);
  $smarty->assign('formatDate2Local',formatDate2Local($pyear.'-'.$pmonth.'-'.$pday,$date_format));
 
- /**
- * wards count
- */
- if($rows) {  
   
   /* Load the common icons */
   $img_mangr=createComIcon($root_path,'man-gr.gif','0');
@@ -203,7 +213,7 @@
   $randommaxbett=0;
   $frei=0;
   
-  // srand(time());
+  $sWardrows = "";     
   
   while ($result=$wards->FetchRow())
   {
@@ -224,7 +234,7 @@
    /**
    * collect the hole ward block into $sWardrows
    */	
-   $sWardrows = "";   					
+					
    ob_start();
    echo '
      <tr bgcolor="#'.$bgc.'">';
@@ -245,20 +255,30 @@
    if(defined('USE_PIE_CHART')&&USE_PIE_CHART){
     echo '<img src="occupancy_pie_chart.php?qouta='.($roomrow['maxbed']-$bedrow['maxoccbed']).'&used='.$bedrow['maxoccbed'].'&bgc='.$bgc.'&uc='.PIE_CHART_USED_COLOR.'">';
    }else{
-    for ($n=0;$n<(10-$frei);$n++) echo '<img '.$img_mans_red.'>';
-    for ($n=0;$n<$frei;$n++) echo '<img '.$img_mans_gr.'>';
+       for ($n=0;$n<(10-$frei);$n++) echo '<img '.$img_mans_red.'>';
+       for ($n=0;$n<$frei;$n++) echo '<img '.$img_mans_gr.'>';
    }
+   
+   echo '
+    </td><td align=center>
+      <font face="verdana,arial" size="2" >'.$roomrow['maxbed'].'
+    </td>
+    </td>
+    <td align=center> <a href="javascript:statbel(\'1\',\''.$result['nr'].'\',\''.$result['ward_id'].'\')">
+	';
+	
+    if ($is_today) echo '<img '.$img_statbel.' alt="'.str_replace("~station~",$result['name'],$LDEditStation).'" border="0">';
+    
+	echo '
+    </a>
+    </td>
+  </tr>';
+   
    $sWardrows = $sWardrows . ob_get_contents();
    ob_end_clean();
-   
   
   } // end While
- } // if ($rows)
-
- /**
- * ========= start with GUI - Block =======================
- */
-
+  
  $smarty->assign('LDNrUnocc',$LDNrUnocc);
  $smarty->assign('gifImg_mangr',$img_mangr);
  $smarty->assign('LDStation',$LDStation);
@@ -270,11 +290,20 @@
  $smarty->assign('LDOptions',$LDOptions);
 
  $smarty->assign('WardRows',$sWardrows); 
+  
+ } // if ($rows)
 
- $smarty->assign('maxbed',$roomrow['maxbed']); 
- $smarty->assign('LINKstatbel','javascript:statbel(\'1\',\''.$result['nr'].'\',\''.$result['ward_id'].'\')' );
- $smarty->assign('altImg_statbel',str_replace("~station~",$result['name'],$LDEditStation));
- $smarty->assign('gifImg_statbel',$img_statbel); 
+ /**
+ * ========= start with GUI - Block =======================
+ */
+
+
+
+
+ //$smarty->assign('maxbed',$roomrow['maxbed']); 
+ //$smarty->assign('LINKstatbel','javascript:statbel(\'1\',\''.$result['nr'].'\',\''.$result['ward_id'].'\')' );
+ //$smarty->assign('altImg_statbel',str_replace("~station~",$result['name'],$LDEditStation));
+ //$smarty->assign('gifImg_statbel',$img_statbel); 
 
  /**
  * IF ($is_today)
@@ -285,6 +314,8 @@
  $smarty->assign('LDNoOcc',$LDNoOcc); 
  $smarty->assign('LDClk2Archive',$LDClk2Archive);  
 
+ $smarty->assign('nRows',$rows);
+ 
  /**
  * IF ($from == "arch")
  */
@@ -312,7 +343,4 @@
  
  $smarty->display('file:nursing/nursing-schnellansicht.tpl');
 // $smarty->display('debug.tpl');
-
-
 ?>
-

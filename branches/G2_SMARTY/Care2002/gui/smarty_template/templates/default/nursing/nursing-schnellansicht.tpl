@@ -53,44 +53,39 @@ var urlholder;
 
  <tr>
   <td bgcolor={{$body_bgcolor}} valign=top colspan=2>
+  
   {{$tblCalendar}}
+  
+  {{if $nRows}}   
+  
   <FONT    SIZE=4  FACE="Arial" color=red>
    <img {{$gifVarrow}} alt="">
    <b> {{if $is_today}} {{$LDTodays}} {{else}} {{$LDOld}} {{/if}} {{$LDOccupancy}} </b>
   </FONT> &nbsp;&nbsp;
   <font size="2" face="arial">
   </font>
- 
   ({{$formatDate2Local}})
+  
   <table  cellpadding="0" cellspacing=0 border="0"  width="100%">
+  
+
    <tr bgcolor="aqua" align=center><td><font face="verdana,arial" size="2" ><b>&nbsp;{{$LDStation}}&nbsp;</b></td>
     <td><img  {{$gifImg_mangr}} alt="{{$LDNrUnocc}}"> <font face="verdana,arial" size="2" ><b>{{$LDFreeBed}}</b></td>
     <td><font face="verdana,arial" size="2"  color="{{$PIE_CHART_USED_COLOR}}">&nbsp;<b>{{$LDOccupied}}</b></td>
     <td><font face="verdana,arial" size="2" >&nbsp;<b>{{$LDOccupancy}} (%)</b></td>
     <td><font face="verdana,arial" size="2" >&nbsp;<b>{{$LDBedNr}}</b></td>
-    <td><font face="verdana,arial" size="2" > <b>&nbsp{{$LDOptions}}&nbsp;</b></td>
-       
+    <td><font face="verdana,arial" size="2" > <b>&nbsp{{$LDOptions}}&nbsp;</b></td>       
    </tr>
 
     {{$WardRows}}
-    </td><td align=center>
-    <font face="verdana,arial" size="2" >{{$maxbed}}
-    </td>
-    </td>
-    <td align=center> <a href="{{$LINKstatbel}}">
-    {{if $is_today}}
-     <img {{$gifImg_statbel}} alt="{{$altImg_statbel}}" border="0">
-    {{/if}}
-    </a>
-    </td>
-  </tr>
+
 	 <tr>
    <td bgcolor="#0000ee" colspan="7">
     <img src="../../gui/img/common/default/pixel.gif" border=0 width=1 height=1>
    </td>
   </tr>
  </table>
- {{if $is_today}}
+ 
  <br>
  {{else}}
     <p>
@@ -105,6 +100,8 @@ var urlholder;
     </p>
     <br>&nbsp;
  {{/if}}
+ 
+
  
  {{if $from == "arch"}}
   <a href="{{$LINKArchiv}}">
