@@ -64,9 +64,9 @@ $LDNotNegValue='Negative Werte sind nicht erlaubt!';
 $LDOptional='Optional';
 $LDSaveAnyway='Wollen Sie trotzdem speichern?';
 #2003-08-27 EL
-$LDDeathDateIs='The entered date of death is';
-$LDIsCorrect='Is that correct?';
-$LDProceedSave='Do you want to proceed save?';
+$LDDeathDateIs='Das engegeben Todesdatum ist';
+$LDIsCorrect='Ist das richtig?';
+$LDProceedSave='Möchten Sie mit Speichern weitermachen?';
 #2003-08-28 EL
 $LDPlsSelectWard='Bitte wählen Sie eine Station aus.';
 # 2003-09-20 EL
@@ -83,5 +83,7 @@ $LDPlsEnterStartTime='Bitte geben Sie die Anfangszeit ein.';
 $LDPlsEnterEndTime='Bitte geben Sie die Endezeit ein.';
 $LDPlsEnterScrubNurse='Bitte geben Sie die instrumentierende Schwester ein.';
 $LDPlsEnterORNr='Bitte geben Sie die OP Saal Nummer ein.';
+$LDWrongLoginPW='Entweder Ihr Benutzername oder Passwort ist falsch.';
+$LDPlsORNr='Geben Sie bitte die Saalnummer ein.';
 
 ?>

@@ -136,23 +136,23 @@ $LDShortMonth=array('',
 								   'Oc',
 								   'No',
 								   'De');
-$LDBatchNumber='Batchnumber';
+$LDBatchNumber='Numero do lote';
 $LDMaterial='Material:';
-$LDDiagnosis='Diagnosis:';
-$LDImmuneSupp='Immune supp.';		
+$LDDiagnosis='Diagnóstico:';
+$LDImmuneSupp='Immune supp.';
 
-$LDRequestedTest='Requested Test';
-$LDLabel='Label';					
-$LDCentralLab='Central Laboratory';
+$LDRequestedTest='Exame requerido';
+$LDLabel='Etique';
+$LDCentralLab='Laboratório Central';
 
-$LDRequestOf='Request for ';
-$LDTelephone='Telephone';
-$LDToBloodBank='To the blood bank';
+$LDRequestOf='Requerido por ';
+$LDTelephone='Telefone';
+$LDToBloodBank='Para o banco de sangue';
 $LDWithMatchTest='with match test sample(s)';
-$LDByBloodBank='from the blood bank:';
+$LDByBloodBank='do banco de sangue:';
 
-$LDBloodGroup='Blood group:';
-$LDRhFactor='Rh-factor:';
+$LDBloodGroup='Grupo sanguíneo:';
+$LDRhFactor='Fator RH:';
 $LDKell='Kell';
 $LDDateProtNumber='Date & protocol nr. of test by:';
 $LDBloodSpecimen='Specimen';
@@ -206,30 +206,30 @@ $LDBookedOn='booked on';
 $LDFillByLab='To be filled up by blood bank only!';
 $LDFillByWard='Must be filled up at the ward!';
 
-/* 2002-09-03 EL */							  
-$LDSearchPatient='Search patient';
-$LDPlsSelectPatientFirst='Please search for the patient first.';
+/* 2002-09-03 EL */
+$LDSearchPatient='Procurar um paciente';
+$LDPlsSelectPatientFirst='Favor procurar pelo paciente primeiro.';
 /* 2002-09-07 EL*/
 $LDAlertQuickCut='The quick cut is selected.';
 $LDAlertQuickDiagnosis='The quick diagnosis is selected.';
-$LDPlsEnterPhone='Please enter the phone or beeper number.';
+$LDPlsEnterPhone='Favor digitar o telefone ou bepper.';
 $LDPlsEnterOpDate='Please enter the op date.';
-$LDPlsEnterDoctorName='Please enter the doctor\\\'s name.';
+$LDPlsEnterDoctorName='Favor digitar o nome do médico.';
 
 /* 2002-09-08 EL */
-$LDPlsEnterBloodGroup='Please enter the blood group.';
-$LDPlsEnterRhFactor='Please enter the Rh-factor.';
+$LDPlsEnterBloodGroup='Favor digitar o grupo sanguíneo.';
+$LDPlsEnterRhFactor='Favor digitar o fator RH.';
 $LDPlsEnterKell='Please enter the Kell value.';
 $LDPlsEnterBloodPcs='Please enter the blood product\'s number of pcs.';
-$LDPlsEnterDate='Please enter the date.';
+$LDPlsEnterDate='Favor dititar a data.';
 /* 2002-09-09 EL */
 $LDPlsEnterDiagnosisQuiry='Please enter the diagnoses or inquiries.';
-$LDPlsSelectDept='Please select a department.';
-$LDPlsSelectDeptShort='pls. select department';
+$LDPlsSelectDept='Favor selecionar um departamento.';
+$LDPlsSelectDeptShort='pls. selecione um departamento';
 /* 2002-12-09 EL */
 $LDPendingTestRequest='Pending Test Request';
 /* 2002-09-13 EL */
-$LDPrevRequest='Previous request';
+$LDPrevRequest='Requisição anterior';
 $LDNextRequest='Próxima requisição';
 $LDEnterResult='Write findings/results for this test request';
 $LDPrintOut='Imprimir esse formulário';

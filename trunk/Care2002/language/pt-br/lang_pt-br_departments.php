@@ -29,24 +29,24 @@ $LDRadiology='Radiologia';
 $LDOncology='Oncologia';
 $LDNeonatal='Neo-natal';
 $LDCentralLaboratory='Laboratório Médico';
-$LDSerologicalLaboratory='Laboratório Serológico';
+$LDSerologicalLaboratory='Serological Laboratory';
 $LDChemicalLaboratory='Laboratório Químico';
 $LDBacteriologicalLaboratory='Laboratório Bacteriológico';
 $LDTechnicalMaintenance='Manutenção';
-$LDITDepartment='Departamento de TI';
+$LDITDepartment='Departamento de TI';		
 $LDGeneralAmbulatory='Ambulatório Geral';
 $LDBloodBank='Banco de sangue';
 $LDNursing='Enfermagem';
 /* 2003-04-27 EL */
-$LDMedical='Medical';
-$LDSupport='Non-medical';
+$LDMedical='Médico';
+$LDSupport='Sem médico';
 $LDNews='Notícias';
 $LDDepartment='Departamento';
-$LDPressRelations='Imprensa';
+$LDPressRelations='Imprenssa';
 /* 2003-05-19 EL */
-$LDSelectDept='Selecione departamento';
+$LDSelectDept='Selecione o departamento';
 /*2003-06-15 EL*/
 $LDPlsSelectDept='Favor selecionar um departamento';
-$LD_AllMedicalDept='_Todos os departamentos médicos_';
+$LD_AllMedicalDept='____Todos os departamentos médicos_____';
 $LDClinic='Clínica';
 ?>

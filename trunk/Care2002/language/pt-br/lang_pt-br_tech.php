@@ -2,42 +2,42 @@
 /**
 * IMPORTANT NOTICE: Do not replace the words or characters enclosed in ~ ~ .
 */
-$LDClose="Fecahr";
+$LDClose="Fechar";
 $LDTech="Técnico";
 $LDTechRepair="Reparo técnico";
 $LDTechMaint="Manutenção técnica";
 $LDTechSupport="Suporte técnico";
 $LDTechInfo="Informação técnica";
 
-$LDReRepair="Requisição para suporte a reparo";
-$LDReRepairTxt="Relatórios de danos, compor & enviar requisição para serviçõs de reparos.";
+$LDReRepair="Requisição para serviços de reparo";
+$LDReRepairTxt="Relatórios de danos, compor e enviar requisição para serviços de reparos.";
 $LDRepabotActivate="Ativar Repabot";
-$LDRepabotActivateTxt="A robot for automatic reception of repair job requests.";
+$LDRepabotActivateTxt="Um receptor automático para pedidos de reparos.";
 $LDRepairReport="Relatório de reparos";
-$LDRepairReportTxt="Report finished repair jobs.";
+$LDRepairReportTxt="Reportar reparos finalizados.";
 $LDReportsArchive="Relatório de arquivos";
-$LDReportsArchiveTxt="Procurar em arquivos relatórios tecnicos";
+$LDReportsArchiveTxt="Procurar em arquivo de relatórios técnicos";
 $LDQuestions="Perguntar, Questões";
 $LDQuestionsTxt="Compor, ler, e enviar perguntas ou questõs";
 $LDQBotActivate="Ativar Q-Bot";
-$LDQBotActivateTxt="A robot for automatic reception of question or inquiries.";
+$LDQBotActivateTxt="Um receptor automático de questões.";
 $LDInfo="Informações";
-$LDInfoTxt="Navegue por informações de natureza tecnica.";
+$LDInfoTxt="Navegue por informações de natureza técnica.";
 
 $LDSendRequest="Enviar requisição";
 $LDSendReport="Enviar relatório";
-$LDSendInquiry="Enviar inquiry";
+$LDSendInquiry="Enviar pergunta";
 $LDReset="Resetar";
-$LDRepairArea="Localização do prejuizo";
+$LDRepairArea="Localização do prejuízo";
 $LDReporter="Requesitado por";
-$LDPersonnelNr="Nr do pessoal.";
-$LDPhoneNr="Nr telefônci.  <font size=1>(for eventual inquiries)</font>";
-$LDPlsDescribe="Por favor descreve a natureza do estrago";
+$LDPersonnelNr="Nr pessoal.";
+$LDPhoneNr="Nr telefônico.  <font size=1>(para eventuais perguntas)</font>";
+$LDPlsDescribe="Favor descrevar a natureza do estrago";
 
 $LDAlertName="Por favor entre com o seu nome.";
-$LDAlertDept="Por favor entre com o seu departamento ou localização do prejuizo.";
+$LDAlertDept="Por favor entre com o seu departamento ou localização do prejuízo.";
 $LDAlertDeptOnly="Por favor entre com o seu departamento.";
-$LDAlertPNr="Por favor entre com o seu número do pessoal.";
+$LDAlertPNr="Por favor entre com o seu número pessoal.";
 $LDAck="Reconhecimento";
 $LDYour="Seu";
 $LDReceived="foi recebido em";
@@ -46,27 +46,27 @@ $LDAtTech=". Obrigado. <i>Seu suporte técnico.</i>";
 $LDRequest="requisição";
 $LDReport="relatório";
 $LDThanksSir="Obrigado Senhor/Madame";
-$LDPlsTypeReport="Por favor descreva o serviço de reparo que voce fez.";
+$LDPlsTypeReport="Por favor descreva o serviço de reparo que você realizou.";
 $LDJobIdNr="Nr de ID do serviço.";
-$LDTechnician="Tecnico";
+$LDTechnician="Técnico";
 $LDPlsDoneOnly="(Por favor reporte somentes serviços de reparos terminados.)";
 $LDName="Nome";
 $LDDept="Departamento";
 $LDEnterQuestion="Por favor digite sua questão";
 $LDLogIn="Log in";
-$LDPlsNoRequest="(Não digite requisiçõs para repara aqui. Se você precisa reporta um dando e necessita de reparo clique aqui.";
-$LDLastQuestions="Ultima(s) ~tagword~ questao(oes) ou resposta(s)";
+$LDPlsNoRequest="(Não digite requisições para reparo aqui. Se você precisa reportar um dando e necessita de reparo clique aqui.";
+$LDLastQuestions="Última(s) ~tagword~ questao(oes) ou resposta(s)";
 $LDFrom="de";
 $LDTo="para";
 $LDAlertQuestion="Voce não digitou nenhuma questão.";
 $LDOn="on";
 $LDOClock="horas";
-$LDInquiry="Inquiry";
+$LDInquiry="Pergunta";
 $LDReply="Responder";
 $LDSearch="Procurar";
-$LDSearchReport="Procurar por relatórios";
+$LDSearchReport="Pesquisar por relatórios";
 $LDDate="Data";
-$LDReportListMany="A seguir estã os relatóros";
+$LDReportListMany="A seguir estão os relatóros";
 $LDNotReadMany=" não foi lido ou imprimido ainda.";
 $LDReportList="A seguir está o relatório";
 $LDNotRead=" não foi lido ou imprimido ainda..";
@@ -91,9 +91,9 @@ $LDNewReport="A seguir está a nova requisiçao chegada para reparo. ";
 $LDNewReportMany="A seguir estao as novas requisiçoe chegadas para reparo.";
 $LDReportArrived="Um requisiçao para repara chegou!";
 $LDShowRequest="Exibir requisição";
-$LDNoDataFound="Dados naõ encontrados.Um erro ocorreu em algum lugar. Clique no botão \"Fechar\" e tente abrir de reparo novamente.
-Se este problema persister apesar de varios attempts, por favor informe o pessoal do CPD e o departamento do superte técnico.";
-$LDAckPrint="Reconhcer e imprimir requisição.";
+$LDNoDataFound="Dados não encontrados. Um erro ocorreu em algum lugar. Clique no botão \"Fechar\" e tente abrir de reparo novamente.
+Se este problema persister após vários tentativas, por favor informe o pessoal do CPD e o departamento do superte técnico.";
+$LDAckPrint="Reconhecer e imprimir requisição.";
 $LDPrintRequest="Imprimir requisição";
 $LDArchiveRequest="Mover requisição para arquivo.";
 $LDAckBy="Reconhecido por";
@@ -122,5 +122,7 @@ $LDInfoCat=array(
 						"Sistema telefônico",
 						"Água, Suprimentos"
 						);
-$LDNoFound="Eu não achei nada que corresponda a palavra-chave pesquisada. <br>Por favo tente de novo e entre com algumas informações a mais.";
+$LDNoFound="Eu não achei nada que corresponda a palavra-chave pesquisada. <br>Favor tente de novo e entre com algumas informações adicionais.";
+/* 2003-02-11*/
+$LDCancel='Cancelar';
 ?>

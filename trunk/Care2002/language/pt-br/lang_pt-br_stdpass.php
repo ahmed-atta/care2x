@@ -40,7 +40,7 @@ $LDHowEnter='Como entrar com um novo telefone';
 
 $LDPhoneDir='Lista telefônica';
 $LDMakeDutyPlan='Criar plano de plantão';
-$LDDocsList='Lista de doutores';
+$LDDocsList='Lista de médicos';
 $LDNursingManage='Gerenciamnto de ala';
 
 $LDNursingStation='Ala de enfermagem';
@@ -62,37 +62,37 @@ $LDOrderCat='Meu catálago de produtos';
 $LDPharmaDb='Banco de dados';
 $LDPharmaOrderBot='Ativar OrderBot';
 
-$LDMedDepot='Depósito médico';
+$LDMedDepot='Almoxarifado';
 $LDMediBotActivate='Ativar Medibot';
 $LDSqlDb='Banco de dados SQL';
-$LDManageAccess='Gerenciar Permissões de Acesso';
+$LDManageAccess='Gerenciar permissões de acesso';
 $LDListAll='Listar todos';
-$LDSystemLogin='Login do Administrador de Sistemas';
+$LDSystemLogin='Usuário do administrador de sistema';
 $LDSeeData='Mostrar dado';
 $LDNewData='Entre com novo dado';
 
-$LDWelcome='Seja bem vindo';
+$LDWelcome='Seja bem-vindo';
 $LDLogin='Login';
 $LDChangeSaved='As mudanças foram salvas.';
 $LDPcID='Identidade atual deste computador';
 $LDDept='Departamento';
 $LDWard='Ala';
-$LDWardOR='Quarto da ala ou número do CC';
+$LDWardOR='Estação da ala ou número do CC';
 $LDPhoneNr='Número telefônico do quarto';
 $LDIntercomNr='Room\'s intercom number';
 $LDPcIP='Endereço IP deste computador';
 $LDSave='Salvar mudanças';
 $LDNoChange='Não mudar configuração atual';
 $LDClose='Fechar';
-$LDLogout='Log out';
-$LDNewLogin='Novo login';
-$LDLogoutConfirm='Você realmente quer realizar o log out?';
+$LDLogout='Fechar sessão';
+$LDNewLogin='Nova sessão';
+$LDLogoutConfirm='Você realmente deseja finalizar ?';
 $LDOK='OK';
 $LDYes='Sim';
-$LDNotReally='Nao, realmente não.';
-$LDDOCScheduler='Agendador de plantão médico';
+$LDNotReally='Não, realmente não.';
+$LDDOCScheduler='Gerenciador de plantão médico';
 $LDORNOCScheduler='ORNOC gerenciador';
-$LDFotolab='Fotolab';
+$LDFotolab='Laboratório Fotográfico';
 /* 2002-09-08 EL */
 $LDTestRequest='Diagnóstico para a requisição de teste';
 $LDTestType=array('patho'=>'Patologia',
@@ -109,24 +109,27 @@ $LDBloodOrder='Requesição para materiais sanguíneos';
 /* 2002-09-22 EL */
 $LDPendingRequest='Requisicão pendente';
 /* 2002-10-06 EL*/
-$LDLoggedOut='Logged out';
+$LDLoggedOut='Sessão finalizada';
 /* 2003-03-18 EL */
 $LDNursesList='Lista de enfermeiras';
 $LDAppointments='Agendamentos';
 /* 2003-04-27 */
-$LDInsuranceCoManager='Insurance Company Manager';
-$LDAddressMngr='Address Manager';
+$LDInsuranceCoManager='Administrador da seguradora';
+$LDAddressMngr='Catálogo de endereço';
 /* 2003-04-30 EL*/
-$LDBilling='eComBill';
+$LDBilling='Faturamento';
 /* 2003-05-18 EL */
 $LDPlsContactEDP='Favor contatar o CPD.';
-$LDPlsTryAgain='Favor tente novamente';
+$LDPlsTryAgain='Favor tentar novamente';
 /* 2003-07-11 EL */
-$LDAdministration='Gerenciamento';
+$LDAdministration='Administração';
 $LDOutpatientClinic='Ambulatório';
 $LDUploadDicom='Atualizar imagens DICOM';
 $LDViewDicom='Visualizar imagens DICOM';
 # 2003-08-22 EL
 $LDYellowList='Lista amarela';
 $LDRedList='Lista vermelha';
+#2003-11-22 EL
+$LDAdvancedSearch='Advanced search';
+$LDNewPerson='Register new person';
 ?>

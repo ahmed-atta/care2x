@@ -145,7 +145,6 @@ $LD_ddpMMpyyyy='hh.bb.tttt';
 $LD_yyyyhMMhdd='tttt-bb-hh';
 $LD_MMsddsyyyy='bb/hh/ttttt';
 /* 2002-10-13 EL */
-/* 2002-10-13 EL */
 $LDPlsSelectPatientFirst='Silakan cari pasien dahulu.';
 /* 2002-11-30 EL */
 $LDPatientRegister='Pendaftaran Pasien';
@@ -326,37 +325,37 @@ $LDGotMedAdvice='Apakah pasien menerima saran medis?';
 $LDShowDocList='Tampilkan daftar dokumen';
 $LDScheduleNewAppointment='Merencanakan pertemuan bariu';
 /* 2003-04-04 EL */
-$LDNoPendingApptThisDay='There is no pending appointment for this day.';
-$LDNoPendingApptToday='There is no pending appointment today.';
+$LDNoPendingApptThisDay='Tidak ada pertemuan menunggu untuk hari ini.';
+$LDNoPendingApptToday='tidak ada pertemuan menunggu untuk hari ini.';
 /* 2003-04-27 EL */
-$LDOptsForPatient='Options for this patient';
+$LDOptsForPatient='Pilihan(opsi) untuk pasien ini';
 /* 2003-05-06 EL */
-$LDRegisterNewPerson='Register a new person';
+$LDRegisterNewPerson='Daftarkan orang baru';
 /* 2003-05-17 EL */
-$LDEnterPersonSearchKey='Enter search keyword: e.g. PID, first name, or family name';
-$LDPersonData='Personal data';
+$LDEnterPersonSearchKey='Masukkan katakunci pencarian: contoh No. KTP(PID), Nama depan atau nama keluarga';
+$LDPersonData='Data pribadi';
 /* 2003-05-26 EL*/
-$LDDiagnoses='Diagnoses';
-$LDCreateNewForm='Create a form for';
-$LDOtherRecords='Other records';
+$LDDiagnoses='Diagnosis';
+$LDCreateNewForm='Buat form untuk';
+$LDOtherRecords='Rekaman lain';
 /*2003-06-17 El*/
-$LDFullForm='Full form';
-$LDAllContents='All contents';
-$LDAllText='Dynamic contents only';
-$LDDataOnly='Encounter relevant data only';
+$LDFullForm='form lengkap';
+$LDAllContents='Semua isi';
+$LDAllText='Hanya isi dinamis';
+$LDDataOnly='Hanya melihat data yang relevan';
 /*2003-06-21 EL*/
-$LDChartsRecords='Charts folder';
+$LDChartsRecords='Folder grafik';
 # 2003-07-26 EL
 $LDMode='Mode';
-$LDPatientIsDischarged='This patient is already discharged';
-$LDShow='Show';
-$LDPlannedEncType='Planned admission type';
+$LDPatientIsDischarged='pasien ini telah keluar';
+$LDShow='Tampilkan';
+$LDPlannedEncType='Tipe admisi terencana';
 # 2003-08-01 EL
-$LDListEncounters='Admissions\' list';
-$LDDischarged='Discharged';
-$LDDischargeDate='Discharge date';
+$LDListEncounters='Daftar admisi';
+$LDDischarged='dikeluarkan';
+$LDDischargeDate='tanggal pengeluaran';
 # 2003-08-04 EL
-$LDCancelThisAdmission='Cancel this admission';
+$LDCancelThisAdmission='Batalkan admisi ini';
 $LDInsShortID[1]='PRIV';  // privately paid insurance
 $LDInsShortID[2]='COM'; // Common state sponsored insurance
 $LDInsShortID[3]='SP';    // self pay, direct pay
@@ -377,4 +376,7 @@ $LDShowing='Showing';
 $LDPrevious='Previous';
 $LDNext='Next';
 $LDAdvancedSearch='Advanced search';
+#2003-10-28 EL
+$LDIncludeFirstName='Search for first names too.';
+$LDTipsTricks='Tips & tricks';
 ?>

@@ -5,6 +5,7 @@ require_once($root_path.'include/inc_environment_global.php');
 ?>
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <title>Credits</title>
 </head>
 <body onLoad="if(window.focus) window.focus()">

@@ -53,42 +53,42 @@ $LDNosocomial_s='N';
 $LDIatrogenic_s='I';
 $LDOther_s='O';
 
-$LDBothSides='Both sides';
+$LDBothSides='Ambos os lados';
 $LDLeft_s='S';
 $LDRight_s='R';
 $LDBothSides_s='B';
 /* 2003-05-29 EL*/
 $LDQMarks='??????';
 $LDNonSpecifiedGroup='Not-yet-grouped';
-$LDSpecifyGroup='Specify group';
-$LDCreateGroupName='Create new group name';
-$LDSelect='Select';
+$LDSpecifyGroup='Especificar um grupo';
+$LDCreateGroupName='Criar novo nome do grupo';
+$LDSelect='Selecionar';
 /*2003-06-01 EL*/
 $LDUseToGroupItems='Use this to group the not-yet-grouped items';
-$LDItemsDegrouped='Deleting this group will unlink the items linked to it.';
-$LDOptions='Options';
+$LDItemsDegrouped='Excluíndo este grupo, irá desvincular os itens atribuidos a ele.';
+$LDOptions='Opções';
 /*2003-06-01 EL*/
 $LDCreateInternDRGGroup='Create new internal DRG group';
 $LDInternalCodeNr='Internal code Nr.';
 $LDSynonyms='Synonyms or keywords';
-$LDSeparateCommas='Separate words with commas';
-$LDIsSubGroup='Is sub-group?';
+$LDSeparateCommas='Separar palavras por vírgulas';
+$LDIsSubGroup='É um sub-grupo?';
 $LDParentCodeNr='Parent Code Nr.';
-$LDIfSubGroup='If group is sub-group';
-$LDAuxillaryNotes='Auxillary notes';
+$LDIfSubGroup='Se o grupo é um sub-grupo';
+$LDAuxillaryNotes='Anotações auxiliares';
 $LDStdCodeNr='Standard code Nr.';
-$LDIfAvailable='If available';
-$LDYes='Yes';
-$LDNo='No';
-$LDExtraNotes='Extra notes';
-$LDAlertNoCode='Please enter the group\'s code.';
-$LDAlertNoDescription='Please enter the code\'s description.';
+$LDIfAvailable='Se disponível';
+$LDYes='Sim';
+$LDNo='Não';
+$LDExtraNotes='Anotações extras';
+$LDAlertNoCode='Favor digitar o código do grupo.';
+$LDAlertNoDescription='Favor digitar o código da descrição.';
 /*2003-06-07 EL*/
-$LDCode='Code';
+$LDCode='Código';
 /*2003-06-13 EL*/
-$LDAddGroupEncounter='Add group to encounter';
+$LDAddGroupEncounter='Adicionar ao grupo';
 $LDMain_s='M';
 $LDSupplemental='Supplemental';
 $LDSupp_s='S';
-$LDCreateNew='Create new';
+$LDCreateNew='Criar novo';
 ?>

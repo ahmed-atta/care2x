@@ -2,13 +2,33 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
+
 ?>
 <html>
 <head>
 <title>鸣谢</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
 </head>
 <body onLoad="if(window.focus) window.focus()">
 <font face="verdana,arial" size=6 color="#0000ff">鸣谢</fonts>
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+			<P><img src="../../fotos/credits/weining_chen.jpg" border=0  align=right vspace=10>
+			<b>Wei Ning Chen (CH)</b>
+			<p>
+			陈伟宁做了简体中文翻译工作
+			<p>
+			陈伟宁先生一九七一年出生于中国东部扬子江畔的南京市。
+			<p>
+			在一九九二年毕业于华东工学院并获得工程学学位后，陈伟宁先生一直在努力学习程序开发。出于对开发源代码项目的支持和多年程序开发的兴趣发展，陈伟宁先生决定参与开发源代码项目以促进技术并可从中学习到许多新东西。同时，也可以加深对开发源代码社区日常运作的了解。
+			<p>
+			尽管对医疗或健康保健部门不太熟悉，陈伟宁先生仍然决定加入Care 2002项目。因为他希望通过自身的努力，Care项目可以成功地应用于中国的医疗系统中。
+
+<P><a href="mailto:weining.chen@army.com"><u>与陈伟宁先生联系</u></a>
+</TD></TR></TBODY></TABLE>
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>

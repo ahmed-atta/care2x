@@ -93,11 +93,12 @@ $LDNewFormOtherPatient='Ein neues Formular für einen anderen Patient bereitstell
 $LDSearchPatient='Patient suchen';
 $LDSearchFound='Die Suche hat ~nr~ Patienten gefunden.';
 /* 2002-09-04 EL */		
-$LDTestRequestFor='Anforderung von ';
+$LDTestRequestFor='Anforderung für ';
 $LDTestType=array('chemlabor'=>'Laboruntersuchung',
                                      'patho'=>'Pathologie',
 								 'baclabor'=>'bakteriologische Untersuchung',
-								      'blood'=>'Blutkonserven');
+								      'blood'=>'Blutkonserven',
+									  'radio'=>'radiologische Untersuchung');
 /* 2002-09-10 EL */
 $LDTestReception='Anstehende Anforderung';
 $LDTestReceptionTxt='Anforderung verarbeiten, Befunde eingeben';

@@ -15,7 +15,7 @@ $LDNursingStations='Ala da enfermagem';
 $LDQuickViewTxt='Visualizar as ocupações de hoje da ala de emfermagem.';
 $LDSearchPatientTxt='Procurar a ala de um paciente admitido.';
 $LDArchiveTxt='Pesquisar nos arquivos da ala.';
-$LDStationManTxt='Criar ala, inicializar parâmetros como o número de camas, pessoal, etc.';
+$LDStationManTxt='Criar ala, inicializar parâmetros como o número de leitos, pessoal, etc.';
 $LDNewsTxt='Ler, compor ou editar notícias/artigos.';
 $LDMemoTxt='Ler, compor ou editar um memorando.';
 $LDNursingForumTxt='Fórum de discussão sobre enfermagem.';
@@ -25,13 +25,13 @@ $LDCloseBack2Main='Fechar e voltar para a página inicial';
 $LDOld='Idade';
 $LDTodays='de hoje';
 $LDOccupancy='Ocupação';
-$LDBedNr='Nº de camas';
+$LDBedNr='Nº de leitos';
 $LDOptions='Opções';
 $LDFreeBed='Desocupado';
 
 $LDNoOcc='A lista de ocupação diária não está disponível!';
 $LDClk2Archive='Ir para o arquivo.';
-$LDNrUnocc='Nº das camas desocupadas';
+$LDNrUnocc='Nº das leitos desocupadas';
 $LDEditStation='Editar dados na ala ~station~';
 $LDSearchKeyword='Procurar palavra-chave';
 $LDWasFound='Foram encontradas ~rows~ listas de ocupações!';
@@ -83,11 +83,11 @@ $LDGo='GO';
 $LDLastMonth='Último mês';
 $LDNextMonth='Próximo mês';
 $LDNursingManage='Gerenciador de ala';
-$LDShowStationDataTxt='&nbsp;Exibir, editar, criar, <br> &nbsp;descrição, nº de camas<br>	&nbsp;etc.';
-$LDLockBedTxt='&nbsp;ou liberar uma cama';
+$LDShowStationDataTxt='&nbsp;Exibir, editar, criar, <br> &nbsp;descrição, nº de leitos<br>	&nbsp;etc.';
+$LDLockBedTxt='&nbsp;ou liberar um leito';
 $LDAccessRightsTxt='&nbsp;Criar, fechamento, mudança,<br>&nbsp;ativação, excluir.';
 $LDShowStationData='Perfil dos dados da ala';
-$LDLockBed='Trancar uma cama';
+$LDLockBed='Trancar um leito';
 $LDAccessRights='Permissões de acessos';
 $LDProfile='Perfil';
 $LDCreate='Criar';
@@ -97,10 +97,10 @@ $LDDept='Departamento';
 $LDRoom1Nr='Nùmero do quarto do primeiro quarto';
 $LDRoom2Nr='Nùmero do quarto do último quarto';
 $LDRoomPrefix='Prefixo do quarto ';
-$LDNrBeds='Nº de camas no quarto';
-$LDMaxBeds='Total de camas disponíveis';
-$LDBed1Prefix='Prefixo da 1º cama';
-$LDBed2Prefix='Prefixo da 2º cama';
+$LDNrBeds='Nº de leitos no quarto';
+$LDMaxBeds='Total de leitos disponíveis';
+$LDBed1Prefix='Prefixo do 1º leito';
+$LDBed2Prefix='Prefixo do 2º leito';
 $LDHeadNurse='Enfermeira principal';
 $LDHeadNurse2='Enfermeira assistente';
 $LDNurses='Enfermeiras';
@@ -165,11 +165,11 @@ $LDPatListElements=array(
 										'Opções'
 										);
 /********** NOTE: !! do not change the \'+b+\' and \'+r+\'  !! **************************/
-$LDConfirmUnlock='Você realmente deseja liberar a \'+b+\' cama no quarto \'+r+\' ?';
+$LDConfirmUnlock='Você realmente deseja liberar o \'+b+\' leito no quarto \'+r+\' ?';
 /********** NOTE: !! do not change the \'+t+\' \'+n+\' and \'+r+b+\'  **************************/
 $LDConfirmDelete='Você realmente deseja excluir \'+t+\' \'+n+\' do quarto \'+r+b+\'?';
-$LDConfirmLock='Você quer realmente travar esta cama?';
-$LDClk2Occupy='Clique para ocupar esta cama';
+$LDConfirmLock='Você quer realmente travar este leito?';
+$LDClk2Occupy='Clique para ocupar este leito';
 $LDInsurance=array(
 								'x'=>'Particular',
 								'privat'=>'Privado',
@@ -290,8 +290,8 @@ $LDShotNr='nº de lançamento';
 $LDLastName='Sobrenome';
 $LDName='Nome';
 $LDBirthDate='Data de nasc.';
-$LDLockThisBed='Travar esta cama';
-$LDClk2LockBed='Clique para travar esta cama';
+$LDLockThisBed='Travar este leito';
+$LDClk2LockBed='Clique para travar este leito';
 $LDAssignOcc='Atribuir ocupante';
 $LDSearchFound='A busca encontrou <font color=red><b>~nr~</b></font> pacientes.';
 $LDAssign2Bed='Marcar este paciente como ocupante';
@@ -315,11 +315,11 @@ $LDAvailable='';
 
 $LDQueries='Inquérito para o médico';
 $LDChangeWard='Mudança de ala';
-$LDChangeBed='Mudança de cama';
+$LDChangeBed='Mudança de leito';
 $LDPatientDied='Morte do paciente';
 
 $LDFollowing='seguir';
-$LDErrorDuplicateBed='Erro: registro de ocupação de cama duplicado';
+$LDErrorDuplicateBed='Erro: registro de ocupação de leito duplicado';
 $LDNoFound='A busca não encontrou pacientes.';
 
 $LDNoWardsYet='Não há nenhuma ala dos cuidados.';
@@ -345,10 +345,10 @@ $LDNurseReport='Relatório da enfermeira (novo)';
 $LDDaily='Diário';
 $LDSaveChanges='Salvar mudanças';
 /* 2002-12-07*/
-$LDNoDiagReport='No diagnostic report available.';
+$LDNoDiagReport='Relatorio de diagnóstico não diponível.';
 /* 2003-03-23 EL */
-$LDNursesList='Nurses\' List';
-$LDNursesListTxt='List, View, Create, & Edit Nurses\' List';
+$LDNursesList='Lista de enfermeiras';
+$LDNursesListTxt='Listar, Exibir, Criar e editar lista de enfermeiras';
 /* 2003-04-18 */
 $LDInsurance='Geral';
 $LDPrivate='Confidencial';
@@ -356,13 +356,13 @@ $LDSelfPay='Pgto próprio';
 /* 2003-04-21 EL */
 $LDRoom='Room';
 $LDAdm_Nr='Adm.Nr.';
-$LDStatus='Status';
-$LDInWard='In Ward';
+$LDStatus='Situação';
+$LDInWard='Na ala';
 /* 2003-04-23 EL */
 $LDWard_ID='Ward ID';
-$LDNoSpecChars='No special characters allowed';
+$LDNoSpecChars='Caracteres especiais não permitidos';
 /* 2003-04-24 EL*/
-$LDTemporaryCloseWard='Temporarily close this ward';
+$LDTemporaryCloseWard='Ala temporariamente fechada';
 $LDIrreversiblyCloseWard='Irreversibly close this ward';
 $LDSureTemporaryClose='Are you sure you want to close this ward temporarily?';
 $LDSureIrreversibleClose='Are you sure you want to close this ward IRREVERSIBLY ?';
@@ -375,24 +375,24 @@ $LDReopenWard='Reopen this ward';
 $LDSureReopenWard='Are you sure you want to reopen this ward?';
 $LDShortDescription='Short description';
 $LDRoomShortDescription='Room\'s short description';
-$LDRoomNotCreated='Rooms not yet created';
+$LDRoomNotCreated='Quartos não estão criados';
 /* 2003-05-10 EL */
-$LDChangeRoom='Change of room';
+$LDChangeRoom='Trocar o quarto';
 /*2003-06-14 EL*/
-$LDNrOfBedsRoom='The nr. of beds of room';
-$LDIsNotANumber='is not a valid number';
-$LDWaitingList='Waiting list';
-$LDShowAll='Show all';
-$LDShowWardOnly='Show ward only';
-$LDTransferToBed='Transfer to another bed in this ward';
-$LDTransferToWard='Transfer to another ward';
+$LDNrOfBedsRoom='O nr. de leitos no quarto';
+$LDIsNotANumber='não é um número válido';
+$LDWaitingList='Lista de espera';
+$LDShowAll='Exibir tudo';
+$LDShowWardOnly='Exibir somente ala';
+$LDTransferToBed='Transferir para um outro leito nesta ala';
+$LDTransferToWard='Transferir para outra ala';
 $LDShowBeds='Exibir leitos';
 $LDTransferPatient='Transferir paciente';
 $LDDRG='DRG';
-$LDFinanceType='Insurance';
+$LDFinanceType='Seguro';
 #2003-08-02 EL
-$LDOutToInpatient='Change admission status to inpatient';
-$LDTransferClinic='Transfer to clinic or department';
+$LDOutToInpatient='Mudar situação da admissão do paciente';
+$LDTransferClinic='Transferir para clínica ou departamento';
 $LDClinic='Clínica';
 $LDOwnPatient='Own\'s patient';
 $LDNonOwnPatient='Non-own\'s patient';
@@ -400,5 +400,6 @@ $LDNonOwnPatient='Non-own\'s patient';
 $LDShowClinicOnly='Somente está clínica';
 # 2003-09-16 EL
 $LDAdmissionData='Admission data';
-$LDShowPhoto='Show photo';
+$LDShowPhoto='Exibir foto';
 ?>
+

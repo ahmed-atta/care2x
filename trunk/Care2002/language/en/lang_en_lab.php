@@ -95,7 +95,8 @@ $LDTestType=array('chemlabor'=>'chemical laboratory test',
                               'patho'=>'pathological test',
 								 'baclabor'=>'bacteriological test',
 								 'radio'=>'radiological test',
-								 'blood'=>'blood product');
+								 'blood'=>'blood product',
+								 'radio'=>'radiology');
 /* 2002-09-10 EL */
 $LDTestReception='Pending Request';
 $LDTestReceptionTxt='Receive & process requests, write results/findings/diagnoses';

@@ -54,7 +54,7 @@ if ((($pass=='check')&&($keyword!=''))&&($userid!=''))
 		{
 		    $zeile=$ergebnis->FetchRow();
 			
-			if (($zeile['password']==$keyword)&&($zeile['login_id']==$userid))
+			if (($zeile['password']==md5($keyword))&&($zeile['login_id']==$userid))
 			{	
 				if (!($zeile['lockflag']))
 				{								
@@ -63,7 +63,7 @@ if ((($pass=='check')&&($keyword!=''))&&($userid!=''))
 					# Init the crypt object, encrypt the password, and store in cookie
     				$enc_login = new Crypt_HCEMD5($key_login,makeRand());
 										
-					$cipherpw=$enc_login->encodeMimeSelfRand($zeile['password']);
+					$cipherpw=$enc_login->encodeMimeSelfRand($keyword);
 										
                     //setcookie('ck_login_pw'.$sid,$cipherpw,0,'/');
 					$HTTP_SESSION_VARS['sess_login_pw']=$cipherpw;		

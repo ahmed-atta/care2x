@@ -132,4 +132,7 @@ $LDViewDicom='View DICOM images';
 # 2003-08-22 EL
 $LDYellowList='Yellow List';
 $LDRedList='Red List';
+#2003-11-22 EL
+$LDAdvancedSearch='Advanced search';
+$LDNewPerson='Register new person';
 ?>

@@ -328,7 +328,7 @@ $LDNoPendingApptToday='Keine Termine heute vorhanden.';
 /* 2003-04-27 EL */
 $LDOptsForPatient='Optionen für diesen Patient';
 /* 2003-05-06 EL */
-$LDRegisterNewPerson='Eine neue Person aufnehmen';
+$LDRegisterNewPerson='Eine neue Person registrieren';
 /* 2003-05-17 EL */
 $LDEnterPersonSearchKey='Stichwort eingeben: z.B. Personen-Nr. (PID), Name, oder Vorname';
 $LDPersonData='Personendaten';
@@ -373,5 +373,8 @@ $LDPersonSearch='Eine Person suchen';
 $LDShowing='Zeige';
 $LDPrevious='Vorher';
 $LDNext='Nächste';
-$LDAdvancedSearch='Fortgeschrittene Suche';
+$LDAdvancedSearch='Erweiterte Suche';
+#2003-10-28 EL
+$LDIncludeFirstName='Suche auch nach dem Namen.';
+$LDTipsTricks='Tipps & Tricks';
 ?>

@@ -21,4 +21,9 @@ $LDWeek='Week';
 $LDNoon='Middag';
 $LDEvening='Avond';
 $LDNight='Nacht';
+#2003-11-11 EL
+$LD_ddpMMpyyyy='dd.mm.jjjj';
+$LD_yyyyhMMhdd='jjjj-mm-dd';
+$LD_MMsddsyyyy='mm/dd/jjjj';
+$LD_ddsMMsyyyy='dd/mm/jjjj';
 ?>

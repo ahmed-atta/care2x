@@ -5,4 +5,6 @@ $LDShowing='Zeige';
 $LDTo='bis';
 $LDSex='Geschlecht';
 $LDSelect='Auswahl';
+$LDPlsSearchDoctor='Bitte suchen Sie zuerst den Arzt.';
+$LDPlsSearchNurse='Bitte suchen Sie zuerst den Pfleger bzw. die Krankenschwester.';
 ?>

@@ -26,7 +26,7 @@ $LDCreate='Create';
 $LDValue='Value';
 
 $LDNews='News';
-$LDNewsTxt='Read or write news articles pertaining to edp department';
+$LDNewsTxt='Read or write news articles pertaining to sytem administration department';
 $LDMemo='Memo';
 $LDMemoTxt='Read or write a memo';
 $LDSearchPat='Search patient';
@@ -59,12 +59,12 @@ $LDSearchIn='Search after';
 $LDPlsEnterMore='Please enter some more information and try it again.';
 $LDNoSingleChar='A single character will be ignored.';
 
-$LDPlsInformDept='Please notify the ~tagword~ department and eventually the EDP department. Thank you.';
+$LDPlsInformDept='Please notify the ~tagword~ department and eventually the system admin department. Thank you.';
 
 $LDReports='Reports';
 $LDReportsTxt='Create, search, read reports, etc.';
 $LDInfo='Information';
-$LDInfoTxt='Search and read information pertaining to edp';
+$LDInfoTxt='Search and read information pertaining to system admin';
 $LDManage='Management';
 $LDUpdateOk='Update was <b>successful</b>!';
 $LDDataSaved='The following data was successully saved:';
@@ -79,7 +79,7 @@ $LDDataRemoved='The product was removed from the databank!';
 
 $LDConfirmDelete='Do you really want to <b>erase</b> or <b>remove</b> the following data from the databank ?';
 $LDAlertDelete='<b>ATTENTION!</b> Delete <b>CANNOT</b> be undone!';
-$LDNoDelete='Deletion of the data failed!<br>Please notify the EDP department.';
+$LDNoDelete='Deletion of the data failed!<br>Please notify the system admin department.';
 $LDYesDelete='Yes, I am dead sure. Delete access right.';
 $LDNoBack='No. Go back.';
 $LDClk2Ack='Click the arrow button to acknowledge and/or print the order list.';
@@ -90,12 +90,12 @@ $LDSqlDb='SQL Databank';
 $LDSqlDbTxt='Direct SQL access. <b>ATTENTION</b> only for experts';
 $LDSysOpLogin='System Admin';
 $LDSysOpLoginTxt='Login as system administrator';
-$LDEDP='EDP';
+$LDEDP='System admin';
 $LDNewAccess='Create new access permission';
-$LDListActual='List actual access permission';
+$LDListActual='List access permission';
 $LDName='Name';
 $LDPassword='Password';
-$LDUserId='User login name';
+$LDUserId='User login ';
 $LDArea='Area';
 $LDAllowedArea='Allowed areas are:';
 $LDActualAccess='Actual access permissions';
@@ -104,7 +104,7 @@ $LDFfActualAccess='Following are the actual access permissions.';
 
 $LDAccessIndex=array(
 				'Name',
-			 	'Login name',    
+			 	'Login ',    
 			 	'Password', 
 				'',
 			 	'Allowed areas', 
@@ -134,7 +134,7 @@ $LDSpexFunctions='More configuration options';
 $LDWelcome='Welcome';
 $LDForeWord='You now have the highest access privileges.<br>The following functions are available without restrictions. <br><b>Please be very careful with what you do.</b>';
 
-$LDSetDateFormat='Set Date Format';
+$LDSetDateFormat='Set date format';
 $LDSelectDateFormat='Please select the needed date format:';
 
 # Date formats
@@ -179,8 +179,8 @@ $LDPlsAddCurrency='Please enter the information about the currency. Then click "
 $LDAddedNewCurrency='The information about the new currency is saved.';
 $LDmain='main';
 $LDClk2AddCurrency='To enter new currency type, please click here.';
-$LDCurrencyShortName='Currency\'s symbolic or short name:';
-$LDCurrencyLongName='Currency\'s descriptive name:';
+$LDCurrencyShortName='Currency\'s symbolic or short :';
+$LDCurrencyLongName='Currency\'s descriptive :';
 $LDCurrencyInfo='Additional information:';
 $LDClk2SetCurrency='To set the main currency, please click here.';
 $LDCurrencyUpdated='The currency information is updated.';
@@ -188,14 +188,14 @@ $LDUpdateCurrencyInfo='Edit Currency Information';
 $LDPlsEnterUpdate='Please edit the currency information. Then press "Update".';
 
 $LDEditInfo='Edit';
-$LDCurrencyAdmin='Currency administration';
+$LDCurrencyAdmin='Currency';
 
 
 /* 2002-10-22 EL */
 $LDUserInfoSaved='The user access was successfully created';
 $LDUserInfoNoSave='The access creation failed. Please check the entered information';
 $LDNoAreas='You have not selected any area!';
-$LDUserDouble='The access creation failed. Please use a different user login name.';
+$LDUserDouble='The access creation failed. Please use a different user login .';
 $LDEnterNewUser='Create a new user access';
 /* 2002-11-22 EL*/
 $LDDeleteCurrency='Are you sure, you really want to delete this currency?';
@@ -220,7 +220,7 @@ $LDDefaultLang='Default language (if multi-language is not allowed)';
 $LDMainMenuItems='Main menu items';
 $LDMainMenuDisplay='Main menu display';
 $LDDataEntryForms='Data entry forms';
-$LDControlButImg='Control buttons & images\' theme';
+$LDControlButImg='Control buttons & images';
 $LDSampleButtons='Sample buttons';
 $LDTheme='Theme';
 $LDItem='Item';
@@ -263,4 +263,83 @@ $LDList='List';
 $LDUpdate='Update';
 # 2003-08-03 EL
 $LDFindEmployee='Find an employee';
+#2003-10-27 EL
+$LDMainMenu='Main menu';
+$LDHideShow='Hide/show';
+$LDSortOrder='sort order';
+$LDAdminIndex='Admin index';
+$LDUsers='Users';
+$LDCreateEditLock='Create, edit, lock';
+$LDDatabase='Database';
+$LDPhpMyAdmin='PhpMyAdmin';
+$LDGeneral='General';
+$LDQuickInformer='Quick informer';
+$LDEnterInfo='Please edit or enter the information. Then click "Save".';
+$LDPaginatorMaxRows='Paginator max rows';
+
+#2003-10-28 EL
+$LDAddressList='Address list';
+$LDAddressListTxt='When the address list is displayed in the  address manager module.';
+$LDAddressSearch='Address search';
+$LDAddressSearchTxt='When the search for addresses returns a list';
+$LDInsuranceList='Insurance companies list';
+$LDInsuranceListTxt='When the insurance companies list is displayed in the insurance company module.';
+$LDInsuranceSearch='Insurance search';
+$LDInsuranceSearchTxt='When the search for insurance company returns a list.';
+$LDPersonnelSearch='Employee search';
+$LDPersonnelSearchTxt='When the search for an employee returns a list.';
+$LDPersonnelList='Employee list';
+$LDPersonnelListTxt='When the employees list is displayed in the personnel manager module.';
+$LDPersonSearch='Person search';
+$LDPersonSearchTxt='When the search for a person returns a list.';
+$LDPatientSearch='Patient search';
+$LDPatientSearchTxt='When the search for a patient returns a list.';
+$LDORPatientSearch='Patient for operation search';
+$LDORPatientSearchTxt='When the search for patient for operation returns a list. 
+This value is usually less than 10 due to a narrow display space in the OR logbook module';
+$LDEnterMaxRows='Please enter the maximum number rows displayed  per page after a successful search.';
+#2003-11-01 EL
+$LDTimeOut='Time out';
+$LDTimeOutActive='Time out active';
+$LDTimeOutTxt='Should the password protected modules time out (lock itselt) after a set time of inactivity?';
+$LDTimeOutTime='Elapsed time';
+$LDTimeOutTimeTxt='Elapsed idle time (inactivity) that triggers the time out and locks the module. Note: 
+If your entry is invalid, the system will use the default maximum values.';
+#2003-11-09 EL
+$LDGUI='GUI';
+$LDNewsDisplay='News display';
+$LDTitleFontSize='Title font size';
+$LDTitleFontColor='Title font color';
+$LDTitleFont='Title font';
+$LDPrefaceFontSize='Lead summary font size';
+$LDPrefaceFontColor='Lead summary font color';
+$LDPrefaceFont='Lead summary font';
+$LDBodyFontSize='News body font size';
+$LDBodyFontColor='News body font color';
+$LDBodyFont='News body font';
+$LDPreviewMaxlen='News preview maximum characters';
+$LDTitleFontBold='Title font weight';
+$LDPrefaceFontBold='Lead summary font weight';
+$LDDisplayWidth='News display width (in pixel or %)';
+$LDBold='Bold';
+$LDNoteDefault='Note: If you enter an invalid value, the system will just replace it with the default value.';
+$LDUseDefault='Use default values';
+$LDClkPickColor='Click here to pick up the color';
+#2003-11-11 EL
+$LDORAdmin='OR administration';
+$LDListConfig='List & configure';
+$LDOR='OR';
+$LDORNr='OR number';
+$LDTempClosed='Is temporary closed?';
+$LDOwnerWard='Owner ward';
+$LDOwnerDept='Owner department';
+$LDDateCreation='Date of creation';
+$LDDateClose='Date of closure';
+$LDOPTableNr='Number of OP table';
+$LDORName='OR room name';
+$LDORNrExists='OR room number already exists!';
+$LDToggle='Toggle';
+$LDChange='Change';
+$LDClkNextNr='Click to use next available number';
+$LDOPTable='OP table';
 ?>

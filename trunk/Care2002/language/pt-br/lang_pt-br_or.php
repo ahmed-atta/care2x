@@ -2,13 +2,12 @@
 $LDOr='Centro Cirúrgico (CC)';
 $LDLOGBOOK='Livro de registros';
 $LDOrDocument='Documentação do CC';
-$LDOrDocumentTxt='Documentando serviço de operações';
+$LDOrDocumentTxt='Documentando operações';
 
 /**
 *  A tiny dictionary:
 *  DOC = doctor on call duty
-*  ORNOC = Operating room nurse on call duty
-* Chamada da enfermeira a espera no Centro Cirurgico
+*  ORNOC = Operating room nurse on call duty - Chamada da enfermeira a espera no Centro Cirurgico
 *  OR = operating room (surgery room)
 */
 $LDDOC='Plantão médico';
@@ -20,9 +19,9 @@ $LDQviewTxtDocs='Visualizar os documentos de hoje dos médicos de plantão';
 $LDOrLogBook='Livro de registros de enfermagem do CC';
 $LDOrLogBookTxt='Documentando os serviços de enfermagem do CC, em arquivos';
 $LDOrProgram='Programação do CC';
-$LDOrProgramTxt='Mostrar, editar, criar, etc. ou programar';
+$LDOrProgramTxt='Exibir, editar, criar, etc. ou programar';
 $LDQviewTxtNurse='Visualizar as enfermeiras que estão hoje de plantão.';
-$LDDutyPlanTxt='Mostrar, editar, criar EDP (enfermeira-de-plantão)';
+$LDDutyPlanTxt='Exibir, editar, criar EDP (enfermeira-de-plantão)';
 $LDOnCallDuty='Plantão';
 $LDOnCallDutyTxt='Documentando o trabalho durante o plantão';
 $LDAnaLogBook='Livro de registros de anestesia';
@@ -34,7 +33,7 @@ $LDArchive='Arquivo';
 $LDSee='Ver';
 $LDUpdate='Atualizar';
 $LDCreate='Criar';
-$LDCreatePersonList='Criar uma lista enfermeiras do CC';
+$LDCreatePersonList='Criar uma lista das enfermeiras do CC';
 $LDDoctor='Médico/Cirurgião';
 $LDNursing='Enfermagem';
 $LDAna='Anestesia';
@@ -49,7 +48,7 @@ $LDHideCat='Ocultar o mascote';
 $LDPatientsFound='Diversos pacientes encontrados!';
 $LDPlsClk1='Clique aqui.';
 $LDShowCat='Eu quero ver o mascote!';
-$LDResearchArchive='Buscar nos arquivos';
+$LDResearchArchive='Pesquisar em arquivos';
 $LDSearchDocu='Procurar documentos';
 
 $LDMinor='menor';
@@ -64,8 +63,8 @@ $LDPatientNr='Nº paciente';
 $LDMatchCode='Matchcode';
 $LDOpDate='Data de operação';
 $LDOperator='Cirurgião';
-$LDStationary='Entrada paciente';
-$LDAmbulant='Saida paciente';
+$LDStationary='Paciente interno';
+$LDAmbulant='Paciente ambulatorial';
 $LDInsurance='Seguro';
 $LDPrivate='Privado';
 $LDSelfPay='Particular';
@@ -208,7 +207,7 @@ $LDFrom='de';
 $LDTo='às';
 $LDFunction='Função';
 $LDCurrentEntries='Dados atuais';
-$LDDeleteEntry='Apagar dados';
+$LDDeleteEntry='Excluir registros';
 $LDSearchNewPerson='Procurar um novo ~tagword~';
 $LDSorryNotFound='Não foi encontrado nenhum registro.';
 $LDSearchPerson='Procurar ~tagword~';
@@ -310,10 +309,11 @@ $LDDutyElements = array('Data','&nbsp;','Sobrenome, Nome','de','para','Sala CC',
 $LDPrint='Imprimir';
 $LDAlertNoPrinter='Você deve imprimir manualmente. Clique na janela e selecione a impressora.';
 $LDAlertNotSavedYet='A última entrada não está salva ainda. Salvá-la primeiro?';
-$LDPhone='fome';
+$LDPhone='Fone';
 $LDBeeper='Beeper';
 $LDOn='em';
-$LDNoPersonList='A lista de pessoas não foi criada ainda. Primeiro crie a lista. Clique na seta.';
+//$LDNoPersonList='A lista de pessoas não foi criada ainda. Primeiro crie a lista. Clique na seta.';
+$LDNoPersonList='A lista de pessoas não foi criada ainda. Primeiro crie a lista.';
 $LDNoEntryFound='Nenhuma entrada foi encontrada!';
 $LDShow='Mostrar';
 $LDShowPrevLog='Mostre as entradas precedentes do registro';
@@ -329,6 +329,14 @@ $LD_MMsddsyyyy='mm/dd/yyyy';
 /* 2002-10-15 EL */
 $LDStandbyInit='S'; /* S = Standby */
 $LDOncallInit='O'; /* O = Oncall */
-$LDDutyPlan='Plano de rotinas';
-
+$LDDutyPlan='Plantão médico';
+/* 2003-03-18 EL */
+$LDSearchInAllDepts='Procurar em todos os departamentos';
+$LDAddNurseToList='Adicionar uma enfermeira à lista';
+$LDNursesList='Lista de enfermeira';
+/* 2003-03-19 EL */
+$LDPlsSelectDept='Favor selecionar um departamento.';
+$LDSelectORoomNr='...e uma sala cirúrgica.';
+$LDAlertNoDeptSelected=$LDPlsSelectDept;
+$LDAlertNoORSelected='Favor selecionar uma sala de cirúrgica!';
 ?>

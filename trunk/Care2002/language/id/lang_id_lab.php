@@ -95,7 +95,8 @@ $LDTestRequestFor='Permintaan untuk ';
 $LDTestType=array('chemlabor'=>'tes laboratorium kimia',
                                      'patho'=>'tes patologi',
 								 'baclabor'=>'tes bakteriologi',
-								 'blood'     =>'produk darah');
+								 'blood'     =>'produk darah',
+								 'radio'=>'tes radiologi');
 /* 2002-09-10 EL */
 $LDTestReception='Mengantrikan Permintaan';
 $LDTestReceptionTxt='Menerima dan memproses permintaan, tulis hasil/Penemuan/diagnosis';

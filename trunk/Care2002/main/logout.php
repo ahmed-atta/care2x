@@ -7,13 +7,18 @@ define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 if (!isset($logout)||!$logout) {header('Location:'.$root_path.'/language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 
 
-// reset all login cookies 
+# Reset all login cookies 
 
-setcookie('ck_login_pw'.$sid,'',0,'/');
-setcookie('ck_login_userid'.$sid,'',0,'/');
-setcookie('ck_login_username'.$sid,'',0,'/');
+//setcookie('ck_login_pw'.$sid,'',0,'/');
+//setcookie('ck_login_userid'.$sid,'',0,'/');
+//setcookie('ck_login_username'.$sid,'',0,'/');
 setcookie('ck_login_logged'.$sid,'',0,'/');
 setcookie('ck_login_reset'.$sid,false,0,'/');
+					
+# Empty login values
+$HTTP_SESSION_VARS['sess_login_userid']='';		
+$HTTP_SESSION_VARS['sess_login_username']='';		
+$HTTP_SESSION_VARS['sess_login_pw']='';		
 
 ?>
 

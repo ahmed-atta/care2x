@@ -626,7 +626,8 @@ $LDBeeper='Personsøker';
 
 $LDOn='på';
 
-$LDNoPersonList='Listen over ansatte er ikke lagd. Lag listen først. Klikk på følgende knapp.';
+//$LDNoPersonList='Listen over ansatte er ikke lagd. Lag listen først. Klikk på følgende knapp.';
+$LDNoPersonList='Listen over ansatte er ikke lagd. Lag listen først.';
 
 $LDNoEntryFound='Ingen data er funnet i listen!';
 

@@ -1,7 +1,7 @@
 <?php
 $LDClose='Fechar';
 $LDCancel='Cancelar';
-$LDResetEntry='Apagar entradas';
+$LDResetEntry='Excluir registros';
 $LDSave='Salvar';
 $LDReset='Restaurar';
 
@@ -208,13 +208,13 @@ $LDInvalidPassword='Senha inválida!';
 $LDUnknownValidator='Validador desconhecido!';
 $LDPlsEnterInfo='Favor entar com a informação correta.';
 # 2003-08-17 EL
-$LDAlertInvalidMinorder='The minimum order has invalid character';
-$LDAlertInvalidMaxorder='The maximum order has invalid character';
+$LDAlertInvalidMinorder='O pedido mínimo contém caracteres inválidos';
+$LDAlertInvalidMaxorder='O pedido máximo contém caracteres inválidos';
 $LDAlertInvalidProorder='The nr.of pcs. per order has invalid character';
-$LDAlertMinHigherMax='Minimum greater than maximum is not allowed';
-$LDAlertNoNegativeOrder='Negative value is currently not allowed';
+$LDAlertMinHigherMax='Mínimo maior que o máximo não é permitido';
+$LDAlertNoNegativeOrder='Valor negativo não é permitido';
 # 2003-08-22 EL
-$LDYellowList='Yellow List';
-$LDYellowListTxt='German pharmaceutical index (needs internet line)';
-$LDClickSelectDept='Please click this to select a department.';
+$LDYellowList='Lista amarela';
+$LDYellowListTxt='Índice farmaceutico alemão (precisa de acesso à internet)';
+$LDClickSelectDept='Favor cliquar aqui para selecionar um departamento.';
 ?>

@@ -331,7 +331,7 @@ $LDOptsForPatient='Options for this patient';
 /* 2003-05-06 EL */
 $LDRegisterNewPerson='Register a new person';
 /* 2003-05-17 EL */
-$LDEnterPersonSearchKey='Enter search keyword: e.g. PID, first name, or family name';
+$LDEnterPersonSearchKey='Enter search keyword: e.g. PID, first name, family name, or birth date';
 $LDPersonData='Personal data';
 /* 2003-05-26 EL*/
 $LDDiagnoses='Diagnoses';
@@ -375,4 +375,7 @@ $LDShowing='Showing';
 $LDPrevious='Previous';
 $LDNext='Next';
 $LDAdvancedSearch='Advanced search';
+#2003-10-28 EL
+$LDIncludeFirstName='Search for first names too.';
+$LDTipsTricks='Tips & tricks';
 ?>

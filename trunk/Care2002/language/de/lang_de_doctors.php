@@ -83,7 +83,7 @@ $LDPerElements=array('Name',
 $LDChgDept='Abteilung wechseln: ';
 $LDChange='Wechseln';
 $LDCreatePersonList='Personalliste erstellen bzw. ändern';
-$LDNoPersonList='Die Personalliste ist noch nicht vorhanden. Bitte erstellen Sie zuerst die Liste. Klicken Sie den Knopf an.';
+$LDNoPersonList='Die Personalliste ist noch nicht vorhanden. Bitte erstellen Sie zuerst die Liste.';
 $LDShow='Zeigen';
 
 $LDDOCS='Dienstplaner';
@@ -109,7 +109,7 @@ $LDPersonellNr='PersonalNr.';
 $LDFunction='Funktion';
 $LDOptions='Optionen';
 $LDSearchFound='Die Suche hat ~nr~ relevante daten gefunden.';
-$LDAddDoctorToList='Einen Arzt in die Liste einfügen';
+$LDAddDoctorToList='Einen Arzt in die Liste einfügen.';
 $LDAdd='Einfügen';
 $LDDelete='Löschen';
 $LDSureToDeleteEntry='Sind sie sicher dass Sie den Eintrag löschen?';

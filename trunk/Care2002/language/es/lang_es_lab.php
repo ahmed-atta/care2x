@@ -100,7 +100,8 @@ $LDTestType=array('chemlabor'=>'pruebas de laboratorio químico',
                               'patho'=>'pruebas de patología',
 								 'baclabor'=>'pruebas bacteriológicas',
 								 'radio'=>'pruebas radiológicas',
-								 'blood'=>'productos sanguíneos');
+								 'blood'=>'productos sanguíneos',
+								 'radio'=>'pruebas radiologias');
 /* 2002-09-10 EL */
 $LDTestReception='Solicitudes pendientes';
 $LDTestReceptionTxt='Recibir y procesar pedidos, escribir los resultados/hallazgos/diagnósticos';

@@ -41,7 +41,7 @@ $LDHowEnter='Come inserire nuovi dati nell\'elenco';
 $LDPhoneDir='Elenco telefonico';
 $LDMakeDutyPlan='Crea tabulato dei turni';
 $LDDocsList='Elenco dei medici';
-$LDNursingManage='Gestione guardie mediche';	// ward management
+$LDNursingManage='Gestione corsie';	// ward management
 
 $LDNursingStation='Turni infermieristici';
 $LDOrDocu='Documentazione di sala operatoria';	// OR ???
@@ -76,8 +76,8 @@ $LDLogin='Login';
 $LDChangeSaved='Modifiche salvate.';
 $LDPcID='Identificativo corrente di questo computer';
 $LDDept='Dipartimento';
-$LDWard='Guardia medica';
-$LDWardOR='Stanza guardia medica o caposala';
+$LDWard='Corsia';
+$LDWardOR='Stanza corsia  o caposala';
 $LDPhoneNr='Telefono della camera';
 $LDIntercomNr='Numero dell\'intercomunicante';
 $LDPcIP='indirizzo IP di questo computer';
@@ -96,16 +96,16 @@ $LDORNOCScheduler='ORNOC Scheduler';
 $LDFotolab='Photolab';
 /* 2002-09-08 EL */
 $LDTestRequest='Richiesta test';
-$LDTestType=array('patho'=>'Laboratorio analisi patologiche', 
+$LDTestType=array('patho'=>'Anatomia Patologica', 
                              'chemlabor'=>'Laboratorio medico', 
-							 'baclabor'=>'Laboratorio analisi batteriologiche',
-							 'blood'=>'Banca del Sangue',
-							 'radio'=>'Radiologico',
-							 'sono'=>'Sonograpico',
-							 'allamb'=>'Day Clinic General',
-							 'unfamb'=>'Pronto Soccorso',
-							 'nuklear'=>'Nuclear Diagnostics',
-							 'inmed'=>'Day Clinic di Medicina Interna');
+			'baclabor'=>'Laboratorio analisi batteriologiche',
+			 'blood'=>'Banca del Sangue',
+			 'radio'=>'Radiologia',
+			 'sono'=>'Ecografia',
+			 'allamb'=>'Day Hospital',
+			 'unfamb'=>'Pronto Soccorso',
+			 'nuklear'=>'Radiodiagnostica',
+			 'inmed'=>'Day Hospital di Medicina Interna');
 							 
 $LDBloodOrder='Richiesta scorte di sangue';
 /* 2002-09-22 EL */
@@ -131,4 +131,7 @@ $LDViewDicom='View DICOM images';
 # 2003-08-22 EL
 $LDYellowList='Yellow List';
 $LDRedList='Red List';
+#2003-11-22 EL
+$LDAdvancedSearch='Advanced search';
+$LDNewPerson='Register new person';
 ?>

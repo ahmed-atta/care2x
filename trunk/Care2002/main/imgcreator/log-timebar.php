@@ -30,7 +30,7 @@ $red =ImageColorAllocate ($im, 255, 0, 0);
 /* Establish db connection */
 if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
 if($dblink_ok){	
-	$sql="SELECT entry_out,cut_close,wait_time,bandage_time,repos_time FROM care_nursing_op_logbook 
+	$sql="SELECT entry_out,cut_close,wait_time,bandage_time,repos_time FROM care_encounter_op 
 			WHERE encounter_nr='$enc_nr' 
 			AND dept_nr='$dept_nr' 
 			AND op_room='$saal' 

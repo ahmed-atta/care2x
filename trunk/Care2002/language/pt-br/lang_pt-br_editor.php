@@ -32,7 +32,7 @@ $LDPublishDate='Data de publicação <font size=1>(\'T\' for today)</font>';
 $LDAlertTitle='Favor digitar o título';
 $LDAlertNews='Favor digitar o artigo';
 $LDAlertAuthor='Favor digitar o autor';
-$LDAlertDate='Please supply a publish date';
+$LDAlertDate='Favor digitar a data de publicação';
 
 $LDWrittenOn='Escrito em:';
 $LDWrittenFrom='Por:';
@@ -40,10 +40,10 @@ $LDWrittenFrom='Por:';
 $LDArticleSaved='O artigo foi salvo. Você está sendo pré-visualização.';
 $LDBackTxt='Voltar';
 
-$LDQuickInfo='Quick Informer';
-$LDPhonePolice='Policia';
+$LDQuickInfo='Informativo rápido';
+$LDPhonePolice='Polícia';
 $LDPhoneFire='Bombeiros.';
-$LDAmbulance='Emergencia';
+$LDAmbulance='Emergência';
 $LDPhone='Fone (Hospital)';
 $LDFax='Fax';
 $LDAddress='Endereço';
@@ -122,4 +122,10 @@ $LDMenuSaved='O menu está salvo.';
 $LD_ddpMMpyyyy='dd.mm.yyyy';
 $LD_yyyyhMMhdd='yyyy-mm-dd';
 $LD_MMsddsyyyy='mm/dd/yyyy';
+/* 2003-02-11*/
+$LDSubmitNews='Submeter notícias';
+$LDDelete='Excluir';
+$LDDeleteCurrency='Você tem certeza que deseja excluir está moeda?';
+$LDNoMainDelete='Você não pode excluir uma moeda em uso. \nFavor selecionar primeiro outra moeda para entrar em uso.';
+$LDCurrencyExisting='Está moeda já existe!';
 ?>

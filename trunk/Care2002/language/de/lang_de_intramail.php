@@ -44,7 +44,7 @@ $LDWelcome="Willkommen";
 
 $LDErrorLogin="Falsche Passwort oder Benutzername! Bitte korrigieren Sie die Eingaben.";
 $LDErrorForm="Das Formular ist nicht vollständig ausgefüllt!<br>Bitte füllen Sie es vollständig aus.";
-$LDErrorPassword="Die Passwortangaben sind nicht unterschiedlich! <br>Bitte korrigieren Sie die Angaben. Die Passwortangaben müssen unbedingt gleich sein.";
+$LDErrorPassword="Die Passwortangaben sind unterschiedlich! <br>Bitte korrigieren Sie die Angaben. Die Passwortangaben müssen unbedingt gleich sein.";
 $LDErrorIncomplete="Eingabe ist inkomplett!  Bitte geben Sie die erforderliche Information ein.";
 
 $LDIntraEmail="Intranet E-mail";

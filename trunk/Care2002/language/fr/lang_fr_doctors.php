@@ -1,16 +1,16 @@
 <?php
 $Jan='Janvier';
-$Feb='F&eacute;vrier';
+$Feb='Février';
 $Mae='Mars';
 $Apr='Avril';
 $Mai='Mai';
 $Jun='Juin';
 $Jul='Juillet';
-$Aug='Ao&ucirc;t';
+$Aug='Août';
 $Sep='Septembre';
 $Okt='Octobre';
 $Nov='Novembre';
-$Dez='D&eacute;cembre';
+$Dez='Décembre';
 
 /**
 * Note: the first element of $monat is set to empty string
@@ -18,26 +18,26 @@ $Dez='D&eacute;cembre';
 $monat=array('',$Jan,$Feb,$Mae,$Apr,$Mai,$Jun,$Jul,$Aug,$Sep,$Okt,$Nov,$Dez);
 
 $LDDoctors='Docteurs';
-$LDQView='L\'aper&ccedil;u rapide de DOC';  // DOC = doctor on call
-$LDQViewTxt='L\'aper&ccedil;u rapide du planning d\'aujourd\'hui de DOC (docteur en permanence)';
+$LDQView='L\'aperçu rapide de DOC';  // DOC = doctor on call
+$LDQViewTxt='L\'aperçu rapide du planning d\'aujourd\'hui de DOC (docteur en permanence)';
 $LDDutyPlan='Planning des devoirs';
-$LDDutyPlanTxt='Planning des devoirs, aper&ccedil;u, mise &agrave; jour, effacement, gestion, etc.';
+$LDDutyPlanTxt='Planning des devoirs, aperçu, mise à jour, effacement, gestion, etc.';
 $LDDocsList='La liste des docteurs';
-$LDDocsListTxt='Cr&eacute;er ou mettre &agrave; jour la liste des docteurs, entrer des donn&eacute;es, etc..';
+$LDDocsListTxt='Créer ou mettre à jour la liste des docteurs, entrer des données, etc..';
 $LDDocsForum='Forum';
 $LDDocsForumTxt='Forum de discussion pour les docteurs';
 $LDNews='Nouvelles';
-$LDNewsTxt='Composer, lire, &eacute;diter les nouvelles';
-$LDMemo='M&eacute;mo';
-$LDMemoTxt='Composer, lire, &eacute;diter les m&eacute;mo';
-$LDCloseAlt='La fen&ecirc;tre des m&eacute;decins/chirurgiens &agrave; proximit&eacute;';
+$LDNewsTxt='Composer, lire, éditer les nouvelles';
+$LDMemo='Mémo';
+$LDMemoTxt='Composer, lire, éditer les mémo';
+$LDCloseAlt='La fenêtre des médecins/chirurgiens à proximité';
 $LDDocsOnDuty='Docteurs en permanence';
 
-$LDTabElements=array('D&eacute;partement',
+$LDTabElements=array('Département',
 								 'DOC 1',
-								 'Beeper/T&eacute;lephone',
+								 'Beeper/Télephone',
 								 'DOC 2',
-								 'Beeper/T&eacute;lephone',
+								 'Beeper/Télephone',
 								 'Planning des devoirs'
 								 );
 $LDShowActualPlan='Afficher le planning actuel de devoirs';
@@ -60,62 +60,63 @@ $LDFullDay=array('Dimanche',
 $LDDoc1='Docteur en permanence 1';
 $LDDoc2='Docteur en permanence 2';
 $LDClosePlan='Fermer ce planning';
-$LDNewPlan='Cr&eacute;er nouveau planning';
-$LDBack='R&eacute;tour';
+$LDNewPlan='Créer nouveau planning';
+$LDBack='Rétour';
 $LDHelp='Aide';
-$LDMakeDutyPlan='Cr&eacute;er un planning de devoirs';
+$LDMakeDutyPlan='Créer un planning de devoirs';
 $LDClk2Plan='Cliquez pour ouvrir la liste du personnel';
 $LDInfo4Duty='Information';
 $LDStayIn='Rester en permanence';
 $LDOnCall='En permanence';
-$LDPhone='T&eacute;lephone';
+$LDPhone='Télephone';
 $LDBeeper='Beeper';
 $LDMoreInfo='Plus d\'info';
 $LDOn='le';
-$LDCloseWindow='Fermer la fen&ecirc;tre';
+$LDCloseWindow='Fermer la fenêtre';
 $LDMonth='Mois';
-$LDYear='Ann&eacute;e';
+$LDYear='Année';
 $LDPerElements=array('Nom de famille',
-									'Pr&eacute;nom',
+									'Prénom',
 									'Date de naissance',
 									'Beeper',
-									'T&eacute;lephone',
+									'Télephone',
 									'Beeper',
-									'T&eacute;lephone'
+									'Télephone'
 									);
-$LDChgDept='Changer le d&eacute;partement: ';
+$LDChgDept='Changer le département: ';
 $LDChange='Changer';
-$LDCreatePersonList='Cr&eacute;er une liste du personnel';
-$LDNoPersonList='La liste du personnel n\'est pas encore cr&eacute;&eacute;e. Veuillez cr&eacute;er d\'abord la liste. Cliquez sur le bouton suivant.';
+$LDCreatePersonList='Créer une liste du personnel';
+//$LDNoPersonList='La liste du personnel n\'est pas encore créée. Veuillez créer d\'abord la liste. Cliquez sur le bouton suivant.';
+$LDNoPersonList='La liste du personnel n\'est pas encore créée. Veuillez créer d\'abord la liste.';
 $LDShow='Montrer';
 
 $LDDOCS='Horaire des DOC';
-$LDDOCSTxt='Horaire des docteurs en permanence, planning, aper&ccedil;u, mise &agrave; jour, &eacute;diter, etc.';
+$LDDOCSTxt='Horaire des docteurs en permanence, planning, aperçu, mise à jour, éditer, etc.';
 $LDDOCSR='DOCSR';
-$LDDOCSRTxt='Requ&ecirc;te du horaire des docteurs en permanence';
+$LDDOCSRTxt='Requête du horaire des docteurs en permanence';
 /* 2002-09-15 EL */
-$LDTestRequest='Test de requ&ecirc;te';
+$LDTestRequest='Test de requête';
 /* 2003-03-16 EL */
 $LDContactInfo='Informations du contact';
 $LDPersonalContactInfo='Information du contact personnelle';
-$LDOnCallContactInfo='Informations t&eacute;lephoniques du contact';
-$LDPlsSelectDept='Choisissez un d&eacute;partement s\'il vous pla&icirc;t';
-$LDCreateDoctorsList='Cr&eacute;er une liste du docteur';
-$LDPlsCreateList='Veuillez d\'abord cr&eacute;er la liste.';
+$LDOnCallContactInfo='Informations télephoniques du contact';
+$LDPlsSelectDept='Choisissez un département s\'il vous plaît';
+$LDCreateDoctorsList='Créer une liste du docteur';
+$LDPlsCreateList='Veuillez d\'abord créer la liste.';
 $LDPlsClickButton='Cliquez le bouton qui suit.';
 $LDFamilyName='Nom de famille';
-$LDGivenName='Pr&eacute;nom';
+$LDGivenName='Prénom';
 $LDDateOfBirth='Date de naissance';
-$LDEntryPrompt='Entrez un mot &agrave; rechercher:<br>(par ex. nom de famille, pr&eacute;nom, num&eacute;ro du personnel etc.)<br>';
-$LDPersonellNr='Num&eacute;ro du personnel';
+$LDEntryPrompt='Entrez un mot à rechercher:<br>(par ex. nom de famille, prénom, numéro du personnel etc.)<br>';
+$LDPersonellNr='Numéro du personnel';
 $LDFunction='Fonction';
 $LDOptions='Options';
-$LDSearchFound='Recherche a trouv&eacute;e ~nr~ de donn&eacute;es en relation.';
-$LDAddDoctorToList='Ajouter docteur &agrave; la liste';
+$LDSearchFound='Recherche a trouvée ~nr~ de données en relation.';
+$LDAddDoctorToList='Ajouter docteur à la liste.';
 $LDAdd='Ajouter';
 $LDDelete='Supprimer';
-$LDSureToDeleteEntry='Vous &ecirc;tes s&ucirc;r de vouloir supprimer cette entr&eacute;e?';
+$LDSureToDeleteEntry='Vous êtes sûr de vouloir supprimer cette entrée?';
 /* 2003-03-18 EL */
-$LDChangeOnlyDept='Changer le d&eacute;partement';
-$LDCreateNursesList='Cr&eacute;er une liste d\'infirmi&egrave;res';
+$LDChangeOnlyDept='Changer le département';
+$LDCreateNursesList='Créer une liste d\'infirmières';
 ?>

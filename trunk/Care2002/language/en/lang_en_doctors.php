@@ -86,7 +86,7 @@ $LDPerElements=array('Family name',
 $LDChgDept='Change department: ';
 $LDChange='Change';
 $LDCreatePersonList='Create a list for personnel';
-$LDNoPersonList='The list of personnel is not yet created.';
+$LDNoPersonList='The list of personnel is not yet created. Please create the list first.';
 $LDShow='Show';
 
 $LDDOCS='DOC Scheduler';
@@ -111,7 +111,7 @@ $LDPersonellNr='Personell Nr.';
 $LDFunction='Function';
 $LDOptions='Options';
 $LDSearchFound='Search found ~nr~ relevant data.';
-$LDAddDoctorToList='Add a doctor to list';
+$LDAddDoctorToList='Add a doctor to list.';
 $LDAdd='Add';
 $LDDelete='Delete';
 $LDSureToDeleteEntry='Are you sure you want to delete this entry?';

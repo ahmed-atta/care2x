@@ -378,4 +378,7 @@ $LDShowing='Showing';
 $LDPrevious='Previous';
 $LDNext='Next';
 $LDAdvancedSearch='Advanced search';
+#2003-10-28 EL
+$LDIncludeFirstName='Search for first names too.';
+$LDTipsTricks='Tips & tricks';
 ?>

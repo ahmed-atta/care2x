@@ -258,4 +258,82 @@ $LDDept='Abteilung';
 $LDUpdate='Aktualisieren';
 # 2003-08-03 EL
 $LDFindEmployee='Mitarbeiter suchen';
+#2003-10-27 EL
+$LDMainMenu='Hauptmenu';
+$LDHideShow='Zeigen/verstecken';
+$LDSortOrder='Reihenfolge';
+$LDAdminIndex='Admin index';
+$LDUsers='Benutzer';
+$LDCreateEditLock='Erstellen, Verarbeiten, Sperren';
+$LDDatabase='Datenbank';
+$LDPhpMyAdmin='PhpMyAdmin';
+$LDGeneral='Allgemein';
+$LDQuickInformer='Quick informer';
+$LDEnterInfo='Bitte geben Sie die Information ein. Clicken Sie den "Speichern" anschliessend an.';
+$LDPaginatorMaxRows='Paginator max rows';
+
+#2003-10-28 EL
+$LDAddressList='Adressenliste';
+$LDAddressListTxt='Wenn die Adressenliste in Adressenverwaltung-Modul gezeigt wird.';
+$LDAddressSearch='Adressensuche';
+$LDAddressSearchTxt='Wenn die Suche eine Addresenliste ergibt.';
+$LDInsuranceList='Versicherer-Verwaltung';
+$LDInsuranceListTxt='Wenn die Vericherer-Liste in Versicherer-Verwaltung-Modul gezeigt wird.';
+$LDInsuranceSearch='Suche nach Versicherer';
+$LDInsuranceSearchTxt='Wenn die Suche eine Versichererliste ergibt.';
+$LDPersonnelSearch='Such nach Personal';
+$LDPersonnelSearchTxt='Wenn die Suche eine Personalliste ergibt.';
+$LDPersonnelList='Personalliste';
+$LDPersonnelListTxt='Wenn die Personalliste in Personalverwaltung-Modul gezeigt wird.';
+$LDPersonSearch='Suche nach Person';
+$LDPersonSearchTxt='Wenn die Suche eine Personenliste ergibt.';
+$LDPatientSearch='Suche nach Patient';
+$LDPatientSearchTxt='Wenn die Suche eine Patientenliste ergibt.';
+$LDORPatientSearch='Suche nach Patient zum OP';
+$LDORPatientSearchTxt='Wenn die Suche eine Patientenliste ergibt.  Ein Wert von weniger als 10 ist empfehlenswert, da der Platz zum zeigen 
+ziemlich klein.';
+$LDEnterMaxRows='Bitte geben Sie die maximale Anzahl der Reihe zum Zeigen nach einer erfolgreichen Suche ein.';
+#2003-11-01 EL
+$LDTimeOut='Zeitsperre';
+$LDTimeOutActive='Zeitsperre aktiv';
+$LDTimeOutTxt='Sollen sich die Passwort-geschützte Module nach einer bestimmten Zeit der Inaktivität sperren?';
+$LDTimeOutTime='Zeitdauer';
+$LDTimeOutTimeTxt='Dauer der Zeit ohne Aktivität. Beachte: Falls Ihre Eingaben unzulläsig sind werden die Standardwerte verwendet.';
+#2003-11-09 EL
+$LDGUI='GUI';
+$LDNewsDisplay='Nachrichtenanzeige';
+$LDTitleFontSize='Titel - Grosse';
+$LDTitleFontColor='Titel - Farbe';
+$LDTitleFont='Titel - Schrift';
+$LDPrefaceFontSize='Vorspann - Grosse';
+$LDPrefaceFontColor='Vorspann - Farbe';
+$LDPrefaceFont='Vorspann - Schrift';
+$LDBodyFontSize='Nachricht - Grosse';
+$LDBodyFontColor='Nachricht - Farbe';
+$LDBodyFont='Nachricht - Schrift';
+$LDPreviewMaxlen='Vorschau - Maximale Buchstaben';
+$LDTitleFontBold='Titel - Druck';
+$LDPrefaceFontBold='Vorpann - Druck';
+$LDDisplayWidth='Nachricht - Breite (im pixel oder %)';
+$LDBold='Fett';
+$LDNoteDefault='Beachte: Falls Sie unzulläsige Werte eingeben, werden Standardwerte verwendet.';
+$LDUseDefault='Standardwerte verwenden';
+$LDClkPickColor='Hier anklicken zur Farbauswahl';
+#2003-11-11 EL
+$LDORAdmin='OP-Verwaltung';
+$LDListConfig='Konfiguration';
+$LDOR='OP';
+$LDORNr='Saalnummer';
+$LDTempClosed='Geschlossen?';
+$LDOwnerWard='Mutterstation';
+$LDOwnerDept='Mutterabteilung';
+$LDDateCreation='Erstellungsdatum';
+$LDDateClose='Erschliessungsdatum';
+$LDOPTableNr='Anzahl der  OP Tische';
+$LDORName='Saalname';
+$LDORNrExists='Saalnummer ist bereits vorhanden!';
+$LDToggle='Wechseln';
+$LDChange='Ändern';
+$LDClkNextNr='Anclicken zur nächsten zulässigen Zahl.';
+$LDOPTable='OP Tisch';
 ?>

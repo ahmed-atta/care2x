@@ -174,7 +174,8 @@ $LDChange='Endre';
 
 $LDCreatePersonList='Lag personnel liste';
 
-$LDNoPersonList='Listen over personale er ikke lagd. Lag listen først. Klikk på følgende knapp.';
+//$LDNoPersonList='Listen over personale er ikke lagd. Lag listen først. Klikk på følgende knapp.';
+$LDNoPersonList='Listen over personale er ikke lagd. Lag listen først.';
 
 $LDShow='Vis';
 
@@ -207,7 +208,7 @@ $LDPersonellNr='Personell Nr.';
 $LDFunction='Function';
 $LDOptions='Options';
 $LDSearchFound='Search found ~nr~ relevant data.';
-$LDAddDoctorToList='Add a doctor to list';
+$LDAddDoctorToList='Add a doctor to list.';
 $LDAdd='Add';
 $LDDelete='Delete';
 $LDSureToDeleteEntry='Are you sure you want to delete this entry?';

@@ -6,13 +6,13 @@ $LDPlsEnterDiagnosis='Por favor, digite o diagnóstico';
 $LDPlsSelectStyle='Por favor, selecione um estilo';
 $LDCheckParamFirst='Por favor, primeiro marque o parametro que deseja exibir';
 # Do not edit ~ward_id~
-$LDChkWardConflict='Este paciente foi primariamente atribuído a outra enfermaria - (<b>~ward_id~</b>). Por favor, cheque esta informação 
+$LDChkWardConflict='Este paciente foi primariamente atribuído a outra enfermaria - (<b>~ward_id~</b>). Por favor, cheque esta informação
 antes de admití-lo em sua enfermaria. Obrigado.';
 $LDSelectRoomBed='Por favor, selecione o quarto e leito abaixo que deseja atribuir a seu paciente. Obrigado';
 $LDSureAssignRoomBed='Está certo que deseja atribuir este leito para o paciente ?';
 $LDWhereToTransfer='Para onde o paciente deve ser transferido?';
 $LDErrorOccured='Um erro ocorreu.';
-$LDTryOrNotifyEDP='Por favor, tente novamente e notifique o EDP de seu departamento caso persita. Obrigado.';
+$LDTryOrNotifyEDP='Por favor, tente novamente e notifique o CDP aso persista. Obrigado.';
 # 2003-07-30 EL
 $LDPlsEnterDate='Por favor, digite a data';
 $LDPlsEnterDoctor='Por favor, digite o nome do médico';
@@ -28,31 +28,31 @@ $LDGoToAppointments='Por favor, clique aqui para verificar compromissos pendente
 $LDSureTransferPatient='Você tem certeza que deseja transferir o paciente ?';
 $LDClkTransfer='Clique para transferir o paciente';
 $LDSureTakeOverPatient='Você tem certeza que deseja assumir este paciente?';
-$LDChkClinicConflict='Este paciente foi pré-atribuído a outro médico / departamento (<b>~dept_id~</b>). 
+$LDChkClinicConflict='Este paciente foi pré-atribuído a outro médico / departamento (<b>~dept_id~</b>).
 Por favor, cheque esta informação antes de assumir o paciente. Obrigado.';
 $LDSureToCancel='Tem certeza que deseja cancelar?';
 $LDPlsEnterFullName='Por favor, digite seu nome completo';
 $LDOk='Ok';
 $LDAdmissionCancelled='Admissão foi cancelada com sucesso.';
 $LDCancelError='Um erro ocorreu! O cancelamento foi abortado.';
-$LDTellEdpIfPersist='Notifique o EDP de seu departamento caso o erro persista. Obrigado.';
+$LDTellEdpIfPersist='Notifique o CDP caso o erro persista. Obrigado.';
 
 $LDPlsFindPersonFirst='Favor encontrar a pessoa primeiro.';
 $LDEnterRelatedInfo='Se disponível, digite a informação aqui';
 $LDRelatedEncNr='Related encounter\'s nr.';
 $LDRelatedDocsIds='Related documents\' ID\'s';
-$LDSeparateComma='Separate with commas';
+$LDSeparateComma='Separado por vírgulas';
 $LDPlsReadThis='Favor ler isto';
 # 2003-08-11 EL
-$LDPersonIsEmployed='This person is currently this hospital\'s employee!';
+$LDPersonIsEmployed='Está pessoa é funcionária do hospital!';
 # 2003-08-24 EL
-$LDCachedInfo='This is a cached information!';
-$LDClkNoCache='Click >>this<< to get the non-cached information.';
+$LDCachedInfo='Está é uma informação armazenada!';
+$LDClkNoCache='Clique >>aqui<< para conseguir uma informação atualizada.';
 
 # 2003-08-25 EL
 $LDPlsEnterReport='Favor entrar com seu relatórios ou anotações';
 $LDPlsEnterDosage='Favor entrar com a dosagem';
-$LDPlsEnterMedicine='Please enter the name of medicine';
+$LDPlsEnterMedicine='Favor digitar o nome da medicina';
 $LDPlsEnterMedType='Favor entrar com o tipo de medicina';
 $LDPlsSelectAppType='Favor selecione o tipo da aplicação';
 $LDPlsSelectPrescType='Favor selecione o tipo da prescrisão';
@@ -64,7 +64,7 @@ $LDEntryInvalidChar='Um registro tem o valor inválido!';
 $LDNotNegValue='Valor negativo não é permitido!';
 $LDOptional='Opcional';
 
-$LDSaveAnyway='Você quer realmente salar a informação';
+$LDSaveAnyway='Você quer realmente salvar a informação';
 #2003-08-27 EL
 $LDDeathDateIs='A data de entrada do falecimento é';
 $LDIsCorrect='Está correto?';
@@ -72,17 +72,19 @@ $LDProceedSave='Você desejar salvar?';
 #2003-08-28 EL
 $LDPlsSelectWard='Favor selecionar uma ala ou estação';
 # 2003-09-20 EL
-$LDPlsEnterTherapy='Please enter the therapy.';
-$LDPlsMedicalAdvice='Please specify whether the patient got medical advice or not.';
+$LDPlsEnterTherapy='Favor digitar a terapia.';
+$LDPlsMedicalAdvice='Favor especifique se o paciente recebeu ou não recomendação médica.';
 # 2003-09-23 EL
-$LDPlsEnterJobFunction='Please enter the job function.';
+$LDPlsEnterJobFunction='Favor digitar a função do trabalho.';
 #2003-04-10 EL
-$LDPlsFillInfo='Please fill in the fields marked red';
-$LDPlsEnterLocalization='Please enter the localization';
-$LDPlsEnterNotes='Please enter notes';
-$LDPlsEnterClassification='Please enter the classifications';
-$LDPlsEnterStartTime='Please enter start time';
-$LDPlsEnterEndTime='Please enter end time';
-$LDPlsEnterScrubNurse='Please enter scrub nurse info';
-$LDPlsEnterORNr='Please enter the OR ID or number';
+$LDPlsFillInfo='Favor preencher os campos marcados em vermelho';
+$LDPlsEnterLocalization='Favor digitar a localização';
+$LDPlsEnterNotes='Favor digitar as anotações';
+$LDPlsEnterClassification='Favor digitar a classificação';
+$LDPlsEnterStartTime='Favor digitar o tempo inicial';
+$LDPlsEnterEndTime='Favor digitar o tempo final';
+$LDPlsEnterScrubNurse='Favor digitar as informações da enfermeira';
+$LDPlsEnterORNr='Favor digitar o ID ou número do CC';
+$LDWrongLoginPW='Your login or password is wrong';
+$LDPlsORNr='Please enter the OR number';
 ?>

@@ -91,11 +91,12 @@ $LDSearchPatient='Zoek patiënt';
 $LDSearchFound='~nr~ patiënten zijn gevonden.';
 /* 2002-09-04 EL */		
 $LDTestRequestFor='Aanvraag voor ';
-$LDTestType=array('chemlabor'=>'chemicsch laboratorium test',
+$LDTestType=array('chemlabor'=>'chemisch laboratorium test',
                               'patho'=>'pathologische test',
 								 'baclabor'=>'bacteriologische test',
 								 'radio'=>'radiologische test',
-								 'blood'=>'bloed product');
+								 'blood'=>'bloed product',
+								 'radio'=>'radiologische test');
 /* 2002-09-10 EL */
 $LDTestReception='Openstaande aanvragen';
 $LDTestReceptionTxt='Ontvang en verwerk aanvragen, schrijf bevinden/resultaten/diagnoses';

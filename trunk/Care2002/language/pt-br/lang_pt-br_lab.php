@@ -7,15 +7,15 @@ $LDClose='Fechar';
 $LDSeeLabData='Procurar e mostrar dos dados de laboratório do paciente.';
 $LDSeeData='Exibir dados';
 $LDEnterLabData='Entre com os dados de laboratório do paciente';
-$LDNewData='Entre com novo dado';
-$LDEnterPrioParams='Estabelecer prioridade de parâmetrios';
+$LDNewData='Entre com novos dados';
+$LDEnterPrioParams='Estabelecer prioridade de parâmetros';
 $LDPrioParams='Parâmetros prioritários';
 $LDEnterNorms='Estabelecer uma escala normal.';
 $LDNorms='Escala normal';
 $LDOtherOptions='Outras opções';
 $LDOptions='Opções';
-$LDMemo='Ler ou compor um meno';
-$LDTitleMemo='Memo';
+$LDMemo='Ler ou compor um menorando';
+$LDTitleMemo='Memomenorando';
 
 $LDfieldname=array('Nr do paciente.','Sobrenome','Nome','Data de nascimento');
 $LDSearchWordPrompt='Entre com uma palavra-chave, por exemplo: um Sobrenome, um nome, ou uma data de nascimento, etc.';
@@ -26,7 +26,7 @@ $LDWildCards='O que são coringas e como usá-los';
 $LDNewSearch='Nova procura';
 
 $LDCaseNr='Nr do paciente.';
-$LDLabReport='Relatório Lab';
+$LDLabReport='Relatório laboratorial';
 $LDLastName='Sobrenome';
 $LDName='Nome';
 $LDBday='Data de nascimento';
@@ -53,8 +53,8 @@ $LDNewJob='Eu quero criar um novo relatório de lab!';
 $LDNew='Novo';
 $LDEdit='Editar';
 $LDCreate='Criar';
-$LDParamGroup='Grupo de parametro';
-$LDSelectParamGroup='Selecione o grupo de parametro';
+$LDParamGroup='Grupo de parâmetros';
+$LDSelectParamGroup='Selecione o grupo de parâmetros';
 $LDValue='Valor';
 
 $LDParamNoSee='O parâmetro que eu preciso não está exibido!';
@@ -67,38 +67,39 @@ $LDAlertJobId='Entre com o número do lote primeiro!';
 $LDAlertTestDate='Entre com a data do exame primeiro!';
 
 /* 2002-09-01 EL */
-$LDTestRequest='Requisição de teste';
+$LDTestRequest='Requisição de exame';
 $LDFillUpSend='Preencha e envie o formulário de requisição para ';
-$LDTestRequestPathoTxt=$LDFillUpSend.'teste patológico/histológico';
-$LDTestRequestBacterioTxt=$LDFillUpSend.'teste bacteriológico';
-$LDTestRequestChemLabTxt=$LDFillUpSend.'teste de laboratório químico';
+$LDTestRequestPathoTxt=$LDFillUpSend.'exame patológico/histológico';
+$LDTestRequestBacterioTxt=$LDFillUpSend.'exame bacteriológico';
+$LDTestRequestChemLabTxt=$LDFillUpSend.'exame de laboratório químico';
 $LDBloodBank='Banco de sangue';
 $LDBloodRequest='Requisição de sangue';
 $LDBloodRequestTxt=$LDFillUpSend.'Materiais sanguíneos';
 
-$LDRequestSent['insert']='A requisição de teste foi enviada. ';
+$LDRequestSent['insert']='A requisição do exame foi enviada. ';
 $LDFormSaved['insert']='O formulário foi salvo (não enviado ainda).';
-$LDRequestSent['update']='A atualização da requisição de teste foi enviado. ';
-$LDFormSaved['update']='A atualização da requisição de teste foi salva (não enviada ainda).';
+$LDRequestSent['update']='A atualização da requisição do exame foi enviado. ';
+$LDFormSaved['update']='A atualização da requisição do exame foi salva (não enviada ainda).';
 $LDWhatToDo=' O que você quer fazer agora?';
 
-$LDNewFormSamePatient='Criar uma nova requisição de teste para o <b>mesmo</b> paciente';
-$LDEditForm='Editar a mesma requisião de teste';
+$LDNewFormSamePatient='Criar uma nova requisição de exame para o <b>mesmo</b> paciente';
+$LDEditForm='Editar a mesma requisião de exame';
 $LDEndTestRequest='Eu terminei.';
-$LDNewFormOtherPatient='Criar uma requisição de teste para um <b>outro</b> paciente';
+$LDNewFormOtherPatient='Criar uma requisição de exame para um <b>outro</b> paciente';
 
 /* 2002-09-03 EL */
 $LDSearchPatient='Procurar paciente';
 $LDSearchFound='~nr~ pacientes foram encontrados.';
 /* 2002-09-04 EL */
 $LDTestRequestFor='Requisição para ';
-$LDTestType=array('chemlabor'=>'teste de laboratório quimico',
-                                     'patho'=>'teste patológico',
-								 'baclabor'=>'teste bacteriológico',
-								 'blood'     =>'material sanguíneo');
+$LDTestType=array('chemlabor'=>'exame de laboratório químico',
+                                     'patho'=>'exame patológico',
+								 'baclabor'=>'exame bacteriológico',
+								 'blood'     =>'material sanguíneo',
+								 'radio' => 'exame de radiologico');
 /* 2002-09-10 EL */
 $LDTestReception='Requisição pendente';
-$LDTestReceptionTxt='Receber & processar requisições, escrever resultados/descobertas/diagnósticos';
+$LDTestReceptionTxt='Receber e processar requisições, escrever resultados/descobertas/diagnósticos';
 /* 2002-09-15 EL */
 $LDPrintForm='Imprimir o formulário de requisição';
 
@@ -107,18 +108,18 @@ $LDInitFindings='Descobertas iniciais';
 $LDCurrentFindings='Descobertas atuais';
 $LDFinalFindings='Descobertas finais';
 
-$LDFillLabOnly='Somente para uso do lab';
+$LDFillLabOnly='Somente para uso do laboratório';
 $LDLEN='NRL';  /* Lab entry number - Numero do Registro do Lab*/
 /*2003-07-11 EL*/
 $LDAdministration='Gerenciamento';
-$LDTestParameters='Parêmetro de teste';
-$LDTestParametersTxt='Enter or edit units or measure, values,  range, limits, etc.';
-$LDMsrUnit='Msr. Unit';
-$LDMedian='Median';
-$LDUpperBound='Upper boundary';
-$LDLowerBound='Lower boundary';
-$LDUpperCritical='Upper critical';
-$LDLowerCritical='Lower critical';
-$LDUpperToxic='Upper toxic';
-$LDLowerToxic='Lower toxic';
+$LDTestParameters='Parêmetros do exame';
+$LDTestParametersTxt='Digite ou edite unidades ou medidas, valores, faixas,limites, etc.';
+$LDMsrUnit='Medida unitária';
+$LDMedian='Mediano';
+$LDUpperBound='Limite superior';
+$LDLowerBound='Limite inferior';
+$LDUpperCritical='superiormente crítico';
+$LDLowerCritical='inferiormente crítico';
+$LDUpperToxic='superiormente tóxico';
+$LDLowerToxic='inferiormente tóxico';
 ?>

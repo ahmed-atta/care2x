@@ -96,7 +96,8 @@ $LDTestRequestFor='Richiesta per ';
 $LDTestType=array('chemlabor'=>'test di laboratorio chimico',
                                     'patho'=>'esami anatomopatologici',
          'baclabor'=>'test batteriologici',
-         'blood'     =>'sangue');
+         'blood'     =>'sangue',
+		 'radio'=>'test di radiologici');
  /* 2002-09-10 EL */
 $LDTestReception='Richiesta in coda';
 $LDTestReceptionTxt='Ricevere ed elaborare le richieste di test, scrivere risultati/diagnosi';

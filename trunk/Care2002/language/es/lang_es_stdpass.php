@@ -136,4 +136,7 @@ $LDViewDicom='Ver las imágenes DICOM';
 # 2003-08-22 EL
 $LDYellowList='Lista Amarilla';
 $LDRedList='Lista Roja';
+#2003-11-22 EL
+$LDAdvancedSearch='Advanced search';
+$LDNewPerson='Register new person';
 ?>

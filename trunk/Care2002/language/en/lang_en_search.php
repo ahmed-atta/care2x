@@ -6,4 +6,6 @@ $LDTo='to';
 $LDSex='Sex';
 $LDSelect='Select';
 $LDZipCode='Zip code';
+$LDPlsSearchDoctor='Please search for the doctor first.';
+$LDPlsSearchNurse='Please search for the nurse first.';
 ?>

@@ -192,7 +192,8 @@ $LDTestType=array('chemlabor'=>'kjemisk labratorietest',
 
 								 'baclabor'=>'bakteriologisk test',
 
-								 'blood'     =>'blod produkt');
+								 'blood'     =>'blod produkt',
+								 'radio' =>'radiologisk test');
 
 /* 2002-09-10 EL */
 

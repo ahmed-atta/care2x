@@ -83,4 +83,6 @@ $LDPlsEnterStartTime='Please enter start time';
 $LDPlsEnterEndTime='Please enter end time';
 $LDPlsEnterScrubNurse='Please enter scrub nurse info';
 $LDPlsEnterORNr='Please enter the OR ID or number';
+$LDWrongLoginPW='Your login or password is wrong';
+$LDPlsORNr='Please enter the OR number';
 ?>

@@ -22,5 +22,10 @@ $LDNoon='Nachmittag';
 $LDEvening='Abend';
 $LDNight='Nacht';
 
+#2003-11-11 EL
+$LD_ddpMMpyyyy='tt.mm.jjjj';
+$LD_yyyyhMMhdd='jjjj-mm-tt';
+$LD_MMsddsyyyy='mm/tt/jjjj';
+$LD_ddsMMsyyyy='tt/mm/jjjj';
 
 ?>

@@ -6,19 +6,19 @@ $LDAmbulatory='Ambulatório';
 $LDMedocs='Prontuário';
 $LDDoctors='Médicos';
 $LDNursing='Enfermagem';
-$LDOR='Centro Cirurgico';
+$LDOR='Centro Cirúrgico';
 $LDLabs='Laboratórios';
 $LDRadiology='Radiologia';
 $LDPharmacy='Farmácia';
 $LDMedDepot='Almoxarifado';
-$LDDirectory='Lista telefônica';
+$LDDirectory='Diretório telefônico';
 $LDTechSupport='Suporte Técnico';
 $LDEDP='CPD';
 $LDIntraEmail='Intranet Email';
 $LDInterEmail='Internet Email';
-$LDSpecials='Especiais';
-$LDLogin='Login';
-$LDLogout='Logout';	
+$LDSpecials='Outros';
+$LDLogin='Iniciar Sessão';
+$LDLogout='Fechar Sessão';
 $LDAppointments='Agendamentos';
 				
 $VersionChgTarget='_top';
@@ -41,4 +41,6 @@ $LDSpanish='Espanhol';
 $LDDutch='Alemão';
 # 2003-08-04 EL
 $LDPerson='Pessoa';
+# 2003-09-05 EL
+$LDUser='Usuário';
 ?>

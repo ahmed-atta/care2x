@@ -79,5 +79,4 @@ $LDNagoyaTechInst='Nagoya Tech. Instituto';
 $LDRAIMJAVA='RAIMJAVA©';
 $LDNoImageSaved='Nenhuma imagem foi salva!';
 $LDImageNotes='Anotações da imagem';
-
 ?>
