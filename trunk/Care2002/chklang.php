@@ -152,7 +152,6 @@ if (empty($lang)) {
 /**
 * The following lines are inserted by Elpidio latorilla for CARE 2X - 19.07.2002/08:55
 * to ensure that the language files are available. If not, english will be used.
-* Debugged by Thomas Wiedmann
 */
 $lang_file = $lang_path.$lang.'/lang_'.$lang.'_nursing.php';
 //echo $lang_file;

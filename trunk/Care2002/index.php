@@ -2,8 +2,8 @@
 /*
 CARE 2X Integrated Information System for Hospitals and Health Care Organizations and Services
 Care 2002, Care 2x, Copyright (C) 2002,2003,2004  Elpidio Latorilla
-								
-Beta version deployment 1.1 (mysql) 2004-01-11
+
+Beta version 1.0.05    2003-11-26
 								
 This script(s) is(are) free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public
