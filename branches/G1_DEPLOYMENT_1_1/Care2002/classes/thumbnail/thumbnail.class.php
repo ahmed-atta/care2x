@@ -22,7 +22,10 @@ $myThumb->setMaxSize( 200, 200 ); // Specify maximum size (width, height)
 $myThumb->getThumbData( 'width' ) // This will get you pixel width of thumbnail image. getImageData arguments are width|height|type
 */
 
-class Thumbnail {
+require_once($root_path.'include/care_api_classes/class_image.php');
+
+
+class Thumbnail extends Image {
 	
 	# Added var definitions  by Elpidio Latorilla 2003-07-13 
 	var $source;
@@ -105,8 +108,11 @@ class Thumbnail {
 	// Creating a thumbnail
 	function Create( $dest )
 		{
-		# Modified by Elpidio Latorilla 2003-07-13 
-		if(function_exists(ImageCreateTrueColor))	$img_des = @ImageCreateTrueColor ( $this->GetThumbData('width'), $this->GetThumbData('height') );
+
+		# Modified by Elpidio Latorilla 2004-03-27
+		# Uses the gd_version method of the Image class from /include/care_api_classes/class_image.ph
+
+		if($this->gd_version>=2) $img_des = @ImageCreateTrueColor ( $this->GetThumbData('width'), $this->GetThumbData('height') );
 			else $img_des = ImageCreate( $this->GetThumbData('width'), $this->GetThumbData('height') );
 
 		switch ( $this->GetImageData('type') )
