@@ -19,18 +19,40 @@ $enc_obj=new Encounter($HTTP_SESSION_VARS['sess_full_en']);
 $thisfile=basename(__FILE__);
 
 if(!isset($mode)||empty($mode)){
-	
+
 	$sickconfirm_obj=&$enc_obj->allSicknessConfirm();
+	
+  # wenn keine alten (ausgefüllten) Bescheinigungen, dann zeige aktuelle Diagnose
+	$encounter_nr = intval($HTTP_SESSION_VARS['sess_en']);	
+	$sql="SELECT d.code, c.description, m.description AS parent_desc
+				FROM care_diagnosis_encounter AS e, care_diagnosis AS d, care_icd10_de AS c
+				LEFT OUTER JOIN care_icd10_de AS m ON d.code_parent=m.diagnosis_code AND d.code_parent NOT IN ('',' ')
+				WHERE e.diagnosis_nr=d.diagnosis_nr AND d.code=c.diagnosis_code AND e.encounter_nr=$encounter_nr
+				AND (e.status!='deleted' OR IsNull(e.status)) AND e.category_nr=7
+				ORDER BY e.date DESC";
 	if($rows=$enc_obj->LastRecordCount()){
 		$mode='show';
 		# If $get_nr is non-empty, get the  single record 
 		if(isset($get_nr)&&$get_nr){
 			if(!$single_obj=&$enc_obj->getSicknessConfirm($get_nr)) $get_nr=0;
+			# wenn eine bestimmte alte Bescheinigung angezeigt wird (ausgewählt)
+			$sql="SELECT d.code, c.description, m.description AS parent_desc
+						FROM care_encounter_sickconfirm AS s, care_diagnosis AS d, care_icd10_de AS c
+						LEFT OUTER JOIN care_icd10_de AS m ON d.code_parent=m.diagnosis_code AND d.code_parent NOT IN ('',' ')
+						WHERE s.nr=$get_nr AND s.diagnosis=d.diagnosis_nr AND d.code=c.diagnosis_code";
 		}else{
-			$get_nr=0;
+			$get_nr=0; $first=1; 			
 		}
 	}else{
 		$mode='';
+	}
+
+	$res=&$db->Execute($sql);	
+	if(!$res) $db->ErrorMsg(); else { 
+    $res->MoveFirst();	
+  	if(!$res->EOF){
+	    $diag_field="<b>".$res->fields[0]."</b>: ".$res->fields[2].": ".$res->fields[1].chr(13);		  
+		}	
 	}
 	
 }elseif($mode=='create'||$mode=='update') {
@@ -47,6 +69,26 @@ if(!isset($mode)||empty($mode)){
 	$HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
 	$HTTP_POST_VARS['create_time']=date('YmdHis');
 
+  # speichere die angezeigte Diagnose
+	$encounter_nr = intval($HTTP_SESSION_VARS['sess_en']);
+	$sql="SELECT e.nr
+				FROM care_diagnosis_encounter AS e
+				WHERE e.encounter_nr=$encounter_nr
+				AND (e.status!='deleted' OR IsNull(e.status)) AND e.category_nr=7
+				ORDER BY e.date DESC";
+	$res=&$db->Execute($sql);	
+	if(!$res) $db->ErrorMsg(); else { 
+    $res->MoveFirst();	
+  	if(!$res->EOF){
+	     	$HTTP_POST_VARS['diagnosis']=$res->fields[0];
+		}	
+	}
+
+  # Patch: Abteilung fehlt sonst bei erster Bescheinigung. Load the department class 
+	include_once($root_path.'include/care_api_classes/class_department.php');
+	$dept_obj=new Department($dept_nr);
+	$dept=&$dept_obj->getDeptAllInfo($dept_nr);
+
 	
 	if($enc_obj->saveSicknessConfirm($HTTP_POST_VARS)) {
 		$get_nr=$db->Insert_ID();
@@ -56,6 +98,21 @@ if(!isset($mode)||empty($mode)){
 }
 
 if($mode=='new'){
+  # bei neuem Erzeugen ebenfalls die aktuelle AU-Diagnose auswählen
+	$encounter_nr = intval($HTTP_SESSION_VARS['sess_en']);	
+	$sql="SELECT d.code, c.description, m.description AS parent_desc
+				FROM care_diagnosis_encounter AS e, care_diagnosis AS d, care_icd10_de AS c
+				LEFT OUTER JOIN care_icd10_de AS m ON d.code_parent=m.diagnosis_code AND d.code_parent NOT IN ('',' ')
+				WHERE e.diagnosis_nr=d.diagnosis_nr AND d.code=c.diagnosis_code AND e.encounter_nr=$encounter_nr
+				AND (e.status!='deleted' OR IsNull(e.status)) AND e.category_nr=7
+				ORDER BY e.date DESC";
+	$res=&$db->Execute($sql);	
+	if(!$res) $db->ErrorMsg(); else { 
+    $res->MoveFirst();	
+  	if(!$res->EOF){
+	    $diag_field="<b>".$res->fields[0]."</b>: ".$res->fields[2].": ".$res->fields[1].chr(13);		  
+		}	
+	}			  
 	# Load the department class 
 	include_once($root_path.'include/care_api_classes/class_department.php');
 	$dept_obj=new Department($dept_nr);

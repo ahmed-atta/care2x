@@ -561,6 +561,21 @@ function openDRGComposite()
 	drgcomp_<?php echo $pdata[encounter_nr]."_".$op_nr."_".$dept_nr."_".$saal ?>=window.open("<?php echo $root_path ?>modules/drg/drg-composite-start.php?sid=<?php echo "$sid&lang=$lang&display=composite&pn=".$pdata['encounter_nr']."&edit=$edit&ln=$lname&fn=$fname&bd=$bdate&opnr=$op_nr&dept_nr=$dept_nr&oprm=$saal"; ?>","drgcomp_<?php echo $pdata['encounter_nr']."_".$op_nr."_".$dept_nr."_".$saal ?>","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=" + (h-60));
 	window.drgcomp_<?php echo $pdata[encounter_nr]."_".$op_nr."_".$dept_nr."_".$saal ?>.moveTo(0,0);
 }
+
+function openICDComposite(){
+<?php if($cfg['dhtml'])
+	echo '
+			w=window.parent.screen.width;
+			h=window.parent.screen.height;';
+	else
+	echo '
+			w=800;
+			h=650;';
+?>
+	
+	drgcomp_<?php echo $HTTP_SESSION_VARS['sess_full_en']."_".$op_nr."_".$dept_nr."_".$saal ?>=window.open("<?php echo $root_path ?>modules/drg/drg-neu-start.php<?php echo URL_REDIRECT_APPEND."&display=composite&pn=".$pdata['encounter_nr']."&edit=$edit&ln=$name_last&fn=$name_first&bd=$date_birth&dept_nr=$dept_nr&oprm=$saal"; ?>","drgcomp_<?php echo $encounter_nr."_".$op_nr."_".$dept_nr."_".$saal ?>","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=" + (h-60));
+	window.drgcomp_<?php echo $HTTP_SESSION_VARS['sess_full_en']."_".$op_nr."_".$dept_nr."_".$saal ?>.moveTo(0,0);
+}
 //-->
 </script>
 
@@ -632,10 +647,10 @@ if($op_nr) {
 
 <?php } ?>
 <?php 
-if($datafound) { 
+if($datafound) {
 ?>
 <A onClick="document.oppflegepatinfo.xx2.value='drg'"
-    href="javascript:openDRGComposite()"><img <?php echo createLDImgSrc($root_path,'drg.gif','0','absmiddle') ?> 
+    href="javascript:openICDComposite()"><img <?php echo createLDImgSrc($root_path,'drg.gif','0','absmiddle') ?> 
 	alt="<?php echo $LDDRG ?>"></a><A onClick="document.oppflegepatinfo.xx2.value='material'"
     href="op-logbuch-material-parentframe.php?sid=<?php echo "$sid&lang=$lang&op_nr=$op_nr&enc_nr=".$pdata['encounter_nr']."&dept_nr=$dept_nr&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>" target="OPLOGMAIN"><img <?php echo createLDImgSrc($root_path,'material.gif','0','absmiddle') ?> 
 	alt="<?php echo $LDUsedMaterial ?>"></a><!-- <A onClick="document.oppflegepatinfo.xx2.value='container'"
@@ -822,10 +837,26 @@ if($pdata['encounter_nr']=='')
 
 <?php 
 if($datafound){
-	 echo '<a href="'.$root_path.'modules/drg/drg-icd10.php?sid='.$sid.'&lang='.$lang;
+	 echo '<a href="'.$root_path.'modules/drg/drg-neu-icd.php?sid='.$sid.'&lang='.$lang;
 	 echo "&pn=".$pdata['encounter_nr']."&ln=$lname&fn=$fname&bd=$bdate&opnr=$op_nr&dept_nr=$dept_nr&oprm=$saal";
-	 echo '" target="OPLOGMAIN">'.$LDDiagnosis.':</a><br>
-	<textarea name="diagnosis" cols=16 rows=8 wrap="physical" ></textarea>';
+	 echo '" target="OPLOGMAIN">'.$LDDiagnosis.':</a><br><br>';
+#	<textarea name="diagnosis" cols=16 rows=8 wrap="physical" >blabla</textarea>';
+   $encounter_nr = $pdata['encounter_nr'];
+	 $sql="SELECT d.code, c.description, m.description AS parent_desc
+				FROM care_diagnosis_encounter AS e, care_diagnosis AS d, care_icd10_de AS c
+				LEFT OUTER JOIN care_icd10_de AS m ON d.code_parent=m.diagnosis_code AND d.code_parent NOT IN ('',' ')
+				WHERE e.diagnosis_nr=d.diagnosis_nr AND d.code=c.diagnosis_code AND e.encounter_nr=$encounter_nr
+				AND (e.status!='deleted' OR IsNull(e.status)) AND e.category_nr!=7
+				ORDER BY e.category_nr ASC, e.date DESC";
+		$res=&$db->Execute($sql);
+		if(!$res) $db->ErrorMsg(); else { 
+      $res->MoveFirst();	
+  	  while(!$res->EOF){
+	      $diag_field.="<b>".$res->fields[0]."</b>: ".$res->fields[1].": ".$res->fields[2]."<br>".chr(13);
+		    $res->MoveNext();
+		  }	
+	  }
+   echo $diag_field;
 }else{
 	echo $LDDiagnosis;
 }

@@ -319,6 +319,21 @@ function returnifok(){
 	}
 	else history.back()
 	}
+
+function openICDComposite(){
+<?php if($cfg['dhtml'])
+	echo '
+			w=window.parent.screen.width;
+			h=window.parent.screen.height;';
+	else
+	echo '
+			w=800;
+			h=650;';
+?>
+	
+	drgcomp_<?php echo $HTTP_SESSION_VARS['sess_full_en']."_".$op_nr."_".$dept_nr."_".$saal ?>=window.open("<?php echo $root_path ?>modules/drg/drg-neu-start.php<?php echo URL_REDIRECT_APPEND."&display=composite&pn=".$pn."&edit=$edit&ln=$name_last&fn=$name_first&bd=$date_birth&dept_nr=$dept_nr&oprm=$saal"; ?>","drgcomp_<?php echo $encounter_nr."_".$op_nr."_".$dept_nr."_".$saal ?>","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=" + (h-60));
+	window.drgcomp_<?php echo $HTTP_SESSION_VARS['sess_full_en']."_".$op_nr."_".$dept_nr."_".$saal ?>.moveTo(0,0);
+}	
 //-->
 </script>
 <?php
@@ -486,18 +501,34 @@ echo ' src="'.$root_path.'main/imgcreator/datacurve.php'.URL_APPEND.'&pn='.$pn.'
 		
 /******************** Main diagnose Therapy *****************************************/
 if($edit){
-	echo '
-		 <a href="javascript:popgetinfowin(\'diag_ther\',\''.$pn.'\',\''.$jahr.'\',\''.$kmonat.'\',\''.$tag.'\',\''.$tag.'\',\''.$tagname.'\')">'.$LDDiagnosisTherapy.'
-		<img '.createComIcon($root_path,'clip2.gif','0').' alt="'.str_replace("~tagword~",$LDDiagnosisTherapy,$LDClk2Enter).'" ></a>';
+  echo '<a href="javascript:openICDComposite()">'.$LDICDneu.'<img '.createComIcon($root_path,'clip2.gif','0').' alt="'.str_replace("~tagword~",$LDDiagnosisTherapy,$LDClk2Enter).'" ></a>';
 }else{
 	echo $LDDiagnosisTherapy;
 }
-		if(is_object($diagnosis)){
+  $sql="SELECT d.code, c.description, m.description AS parent_desc
+				FROM care_diagnosis_encounter AS e, care_diagnosis AS d, care_icd10_de AS c
+				LEFT OUTER JOIN care_icd10_de AS m ON d.code_parent=m.diagnosis_code AND d.code_parent NOT IN ('',' ')
+				WHERE e.diagnosis_nr=d.diagnosis_nr AND d.code=c.diagnosis_code AND e.encounter_nr=$pn 
+				AND (e.status!='deleted' OR IsNull(e.status)) AND e.category_nr!=7
+				ORDER BY e.category_nr ASC, e.date DESC";
+	$res=&$db->Execute($sql);	
+	if(!$res) $db->ErrorMsg(); else { 
+    $res->MoveFirst();
+  	while(!$res->EOF){
+	    $diag_field.='<b>'.$res->fields[0].'</b>: '.$res->fields[1].': '.$res->fields[2].chr(13);
+		  $res->MoveNext();
+	  }	
+	}
+	#echo '<br><br><textarea name="diagnosis" cols=40 rows=5 wrap="physical" readonly>';
+	echo "<br><br>".nl2br($diag_field);
+	#echo '</textarea>';
+
+	/* alt	if(is_object($diagnosis)){
 			while($buff=$diagnosis->FetchRow()){
 				echo '<br>'.hilite(nl2br($buff['notes']));
 			}
 		}
-		echo '</td>';
+		echo '</td>';  */
 		
 //********************************** diagnose therapie daily report ****************************
 $actmonat=$kmonat;
