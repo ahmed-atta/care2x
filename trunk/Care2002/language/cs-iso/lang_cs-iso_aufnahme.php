@@ -45,8 +45,8 @@ $LDCancel="Zru¹it";
 
 $LDCancelClose="Zru¹it a vrátit se na úvodní stránku";
 $LDCloseWin="Uzavøít okno pro pøíjem pacienta";
-$LDError="Prosím doplnte chybìjící informaci v  <font color=red> èervenì </font> oznaèeném poli!";
-$LDErrorS="Prosím doplnte chybìjící informace v  <font color=red> èervenì </font> oznaèench polích!";
+$LDError="Prosím doplòte chybìjící informaci v  <font color=red> èervenì </font> oznaèeném poli!";
+$LDErrorS="Prosím doplòte chybìjící informace v  <font color=red> èervenì </font> oznaèench polích!";
 
 $fieldname=array("Pacient èíslo","Pøíjmení","Jméno","Datum narození","Zobrazit");
 $LDEntryPrompt="Zadejte klíèové slovo pro hledání napøíklad: pøíjmení nebo jméno nebo datum narození a pod.";
@@ -97,10 +97,10 @@ $LDNo="Ne";
 
 $LDEditOn="Datum zdokumentování";
 $LDEditBy="Zdokumentoval";
-$LDKeyNr="Kez number";
+$LDKeyNr="Klíè èíslo";
 $LDDocSearch="Hledat v systému MEDOCS";
 
-$LDMedDocOf="Medocs document of";
+$LDMedDocOf="Medocs dokument pro pacienta";
 $LDMedocsElements=array(
 								"",
 								"Pøíjmení",

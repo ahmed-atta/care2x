@@ -20,27 +20,27 @@ $monat=array("",$Jan,$Feb,$Mae,$Apr,$Mai,$Jun,$Jul,$Aug,$Sep,$Okt,$Nov,$Dez);
 $LDDoctors="Lékaøi";
 $LDQView="Rychlý pøehled lékaøù na telefonu";  // DOC = doctor on call
 $LDQViewTxt="Rychlý pøehled dne¹ního èasového rozpisu  lékaøù na telefonu";
-$LDDutyPlan="Duty plan";
-$LDDutyPlanTxt="Duty plan, view, update, delete, manage, etc.";
-$LDDocsList="Doctors' list";
-$LDDocsListTxt="Create or update doctors' list, enter data, etc..";
-$LDDocsForum="Forum";
-$LDDocsForumTxt="Discussions forum for doctors";
-$LDNews="News";
-$LDNewsTxt="Compose, read, edit news";
-$LDMemo="Memo";
-$LDMemoTxt="Compose, read, edit memo";
-$LDCloseAlt="Close physicians/surgeons' window";
-$LDDocsOnDuty="Doctors on Call";
+$LDDutyPlan="Plán práce";
+$LDDutyPlanTxt="Prohlí¾ení, úprava, smazání plánu práce";
+$LDDocsList="Seznam lékaøù";
+$LDDocsListTxt="Vytvoøit nebo zmìnit seznam lékaøù";
+$LDDocsForum="Nástìnka";
+$LDDocsForumTxt="Nástìnka pro diskuzi lékaøù";
+$LDNews="Novinky";
+$LDNewsTxt="Vytvoøení, modifikace a prohlí¾ení novinek";
+$LDMemo="Poznámky, záznamy";
+$LDMemoTxt="Vytvoøit, èíst nebo editovat poznámky";
+$LDCloseAlt="Zavøít okno ===physicians/surgeons++++";
+$LDDocsOnDuty="Lékaøi na telefonu ";
 
-$LDTabElements=array("Department",
-								 "DOC 1",
-								 "Beeper/Phone",
-								 "DOC 2",
-								 "Beeper/Phone",
-								 "Duty plan"
+$LDTabElements=array("Oddìlení",
+								 "Lékaø 1",
+								 "Operátor / Telefon",
+								 "Lékaø 2",
+								 "Operátor / Telefon",
+								 "Plán práce"
 								 );
-$LDShowActualPlan="Show actual duty plan";
+$LDShowActualPlan="Zobrazit aktuální plán práce";
 $LDShortDay=array("Ne",
 								"Po",
 								"Út",
@@ -57,42 +57,42 @@ $LDFullDay=array("Nedìle",
 								"Pátek",
 								"Sobota"
 								);
-$LDDoc1="První lékaø na telefonu  ";
+$LDDoc1="První lékaø na telefonu ";
 $LDDoc2="Druhý lékaø na telefonu";
-$LDClosePlan="Close this plan";
-$LDNewPlan="Create a new plan";
-$LDBack="Back";
-$LDHelp="Help";
-$LDMakeDutyPlan="Create dutyplan";
-$LDClk2Plan="Click to open personell list";
-$LDInfo4Duty="Information";
-$LDStayIn="Stay-in duty";
-$LDOnCall="On call duty";
-$LDPhone="Phone";
-$LDBeeper="Beeper";
-$LDMoreInfo="More Info";
-$LDOn="on";
-$LDCloseWindow="Close window";
-$LDMonth="Month";
-$LDYear="Year";
-$LDPerElements=array("Family name",
-									"Given name",
-									"Date of birth",
-									"Beeper",
-									"Phone",
-									"Beeper",
-									"Phone"
+$LDClosePlan="Zavøi plán práce";
+$LDNewPlan="Vytvoøit nový plán";
+$LDBack="Zpìt";
+$LDHelp="Pomoc";
+$LDMakeDutyPlan="Vytvoøit plán práce";
+$LDClk2Plan="Kliknìte zde pro otevøení seznamu";
+$LDInfo4Duty="Informace";
+$LDStayIn="Pohotovostní lékaø";
+$LDOnCall="Pohotovostní lékaø na telefonu";
+$LDPhone="Telefon";
+$LDBeeper="Operátor";
+$LDMoreInfo="Více informací";
+$LDOn="na den";
+$LDCloseWindow="Zavøít okno";
+$LDMonth="Mìsíc";
+$LDYear="Rok";
+$LDPerElements=array("Pøíjmení",
+									"Jméno",
+									"Datum narození",
+									"Operátor",
+									"Telefon",
+									"Operátor",
+									"Telefon"
 									);
-$LDChgDept="Change department: ";
-$LDChange="Change";
-$LDCreatePersonList="Create a list for personell";
-$LDNoPersonList="The list of personell is not yet created. Please create the list first. Click on the following button.";
-$LDShow="Show";
+$LDChgDept="Zmìnit oddìlení: ";
+$LDChange="Zmìnit";
+$LDCreatePersonList="Vytvoøit list zamìstnancù";
+$LDNoPersonList="List zamìstnancù není je¹tì vytvoøen.Prosím vytvoøte tento list kliknutím na tlaèítko vytvoøit list zamìstnancù.";
+$LDShow="Zobrazit";
 
-$LDDOCS="DOC Scheduler";
-$LDDOCSTxt="Doctor On Call Scheduler, plan, view, update, edit, etc.";
-$LDDOCSR="DOCSR";
-$LDDOCSRTxt="Doctor On Call Schedule Requester";
+$LDDOCS="Plán práce lékaøù na telefonu";
+$LDDOCSTxt="Plán práce lékaøù na telefonu - plánování, vytvoøení, prohlí¾ení, modifikace.";
+$LDDOCSR="AVLET";
+$LDDOCSRTxt="Automatické volání lékaøe na telefonu";
 /* 2002-09-15 EL */
 $LDTestRequest="Test request";
 
