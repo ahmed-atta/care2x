@@ -10,35 +10,41 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+$lang_tables=array('date_time.php');
 define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
-$thisfile="nursing-getdailyinfo.php";
+$thisfile=basename(__FILE__);
+/* Create charts object */
+require_once($root_path.'include/care_api_classes/class_charts.php');
+$charts_obj= new Charts;
 
 switch($winid)
 {
 	case "diag_ther_dailyreport": $title=$LDDailyDiagTher;
 							$element=diag_ther_dailyreport;
+							$notes_type_nr=7;
 							break;
 	case "kg_atg_etc": $title=$LDPtAtgEtcTxt;
 							$element="kg_atg_etc";
+							$notes_type_nr=8;
 							break;
 	case "diet": $title=$LDDiet;
 							$element="diet";
 							$sformat=1;
+							$notes_type_nr=23;
 							break;
 	case "anticoag_dailydose": $title=$LDAntiCoagTxt;
 							$element="anticoag_dailydose";
 							$sformat=1;
+							$notes_type_nr=10;
 							break;
 	case "iv_needle": $title=$LDIvPort;
 							$element="iv_needle";
 							$sformat=1;
-							break;
-	case "bp_temp": $title=$LDBpTemp;
-							$element="bp_temp";
+							$notes_type_nr=9;
 							break;
 }
 
@@ -49,94 +55,28 @@ if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
 if($dblink_ok){	
 	/* Load date formatter */
     include_once($root_path.'include/inc_date_format_functions.php');
-	// get orig data
 
+	if($mode=='save'&&$sformat&&(trim($short_notes)=='')) $mode='';
+	if($mode=='save'&&!$sformat&&(trim($notes)=='')) $mode='';
+	
 	if($mode=='save'){
-
-				// check if entry is already existing
-				$sql="SELECT $element FROM $dbtable WHERE patnum='$pn'";
-				if($ergebnis=$db->Execute($sql))
-       			{
-					//echo $sql." checked <br>";
-					$rows=$ergebnis->RecordCount();
-					if($rows==1)
-						{
-							$content=$ergebnis->FetchRow();
-							if(($actual)||($newdata))
-								$dbuf=strtr("sd=$yr$mo$dy&rd=$dy.$mo.$yr&e=$actual$newdata\r\n"," <>","+()");
-								else $dbuf="";
-							if($content[$element]!="")
-							{
-								$cbuf="sd=$yr$mo$dy&rd=$dy.$mo.$yr";
-								//echo $content[$element]."<br>".$cbuf;
-								if(stristr($content[$element],$cbuf))
-								{
-									$ebuf=explode("_",$content[$element]);
-									for($i=0;$i<sizeof($ebuf);$i++)
-									{
-										//echo $v." v <br>";
-										if(stristr($ebuf[$i],$cbuf))
-										{ $ebuf[$i]=$dbuf; 
-											$dbuf=implode("_",$ebuf);
-											break;
-										}
-									}
-								}
-								 else $dbuf=$content[$element]."_".$dbuf;		
-							}		
-							// $dbuf=htmlspecialchars($dbuf);
-							$sql="UPDATE $dbtable SET $element='$dbuf'	WHERE patnum='$pn'";
-							if($ergebnis=$db->Execute($sql))
-       							{
-									//echo $sql." new update <br>";
-									
-									header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=1&pn=$pn&station=$station&winid=$winid&yr=$yr&mo=$mo&dy=$dy&dyidx=$dyidx&yrstart=$yrstart&monstart=$monstart&dystart=$dystart&dyname=$dyname");
-								}
-								else {echo "<p>$sql$LDDbNoRead";}
-						} // else create new entry
-						else
-						{
-							$dbuf=strtr("sd=$yr$mo$dy&rd=$dy.$mo.$yr&e=$newdata"," <>","+()")."\r\n";
-							$sql="INSERT INTO $dbtable 
-										(
-										patnum,
-										$element,
-										fe_date
-										)
-									 	VALUES
-										(
-										'$pn',
-										'$dbuf',
-										'".date("d.m.Y")."'
-										)";
-
-							if($ergebnis=$db->Execute($sql))
-       							{
-									//echo $sql." new insert <br>";
-									
-									header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=1&pn=$pn&station=$station&winid=$winid&yr=$yr&mo=$mo&dy=$dy&dyidx=$dyidx&yrstart=$yrstart&monstart=$monstart&dystart=$dystart&dyname=$dyname");
-								}
-								else {echo "<p>$sql$LDDbNoSave";}
-						}//end of else
-					} // end of if ergebnis
-		 }// end of if(mode==save)
-		 else
-		 {
-		 	$sql="SELECT * FROM $dbtable WHERE patnum='$pn'";
-
-			if($ergebnis=$db->Execute($sql))
-       		{
-				if($rows=$ergebnis->RecordCount())
-				{
-					$result=$ergebnis->FetchRow();
-					//echo $sql."<br>";
-				}
-			}
-				else {echo "<p>$sql$LDDbNoRead";}
-	 	}
+		$HTTP_POST_VARS['encounter_nr']=$pn;
+		$HTTP_POST_VARS['date']=date('Y-m-d',mktime(0,0,0,$mo,$dy,$yr));
+		$HTTP_POST_VARS['personell_name']=$HTTP_SESSION_VARS['sess_user_name'];
+		if($charts_obj->saveChartNotesFromArray($HTTP_POST_VARS,$notes_type_nr)){
+			header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=1&pn=$pn&station=$station&winid=$winid&yr=$yr&mo=$mo&dy=$dy&dystart=$dystart&dyname=$dyname&sformat=$sformat");
+		}
+	}else{// end of if(mode==save)
+ 	
+		$count=0;
+		$chartnotes=$charts_obj->getDayChartNotes($pn,$notes_type_nr,date('Y-m-d',mktime(0,0,0,$mo,$dy,$yr)));		
+		if(is_object($chartnotes)){
+			$count=$chartnotes->RecordCount();
+			include_once($root_path.'include/inc_editor_fx.php');
+			include_once($root_path.'include/inc_date_format_functions.php');
+		}	
 	}
-	else 
-		{ echo "$LDDbNoLink<br>$sql<br>"; }
+}else{ echo "$LDDbNoLink<br>$sql<br>"; }
 
 
 ?>
@@ -183,14 +123,14 @@ div.box { border: double; border-width: thin; width: 100%; border-color: black; 
 </style>
 
 </HEAD>
-<BODY  bgcolor="#dfdfdf" TEXT="#000000" LINK="#0000FF" VLINK="#800080"  topmargin="0" marginheight="0" 
+<BODY  bgcolor="#99ccff" TEXT="#000000" LINK="#0000FF" VLINK="#800080"  topmargin="0" marginheight="0" 
 onLoad="<?php if($saved) echo "parentrefresh();"; ?>if (window.focus) window.focus(); window.focus();document.infoform.newdata.focus();" >
 <table border=0 width="100%">
   <tr>
     <td><b><font face=verdana,arial size=5 color=maroon>
 <?php 
 	echo $title.'<br><font size=4>';	
-	echo $LDFullDayName[$dyidx].' ('.formatDate2Local("$yr-$mo-$dy",$date_format).')</font>';
+	echo $LDFullDayName[$dyidx].' ('.formatDate2Local(date('Y-m-d',mktime(0,0,0,$mo,$dy,$yr)),$date_format).')</font>';
 ?>
 	</font></b>
 	</td>
@@ -204,65 +144,59 @@ onLoad="<?php if($saved) echo "parentrefresh();"; ?>if (window.focus) window.foc
 <form name="infoform" action="<?php echo $thisfile ?>" method="post" onSubmit="return pruf(this)">
 <font face=verdana,arial size=2 >
 <?php
-$cbuf="sd=$yr$mo$dy&rd=$dy.$mo.$yr";
-	$arr=explode("_",$result[$element]);
-		while(list($x,$v)=each($arr))
-		{
-			if(stristr($v,$cbuf))
-			{
-				$sbuf=$v;
-				break;
-			}
-		}
-
-
-if ($sbuf) 	parse_str($sbuf,$abuf);
+if($count){
+	$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/tableHeaderbg3.gif"';
 ?>
-
-<?php if($sformat) : ?>
-	<?php echo $LDSFormatPrompt ?>
-<p>
-<input type="hidden" name="actual" value="">
-<input type="text" name="newdata" value="<?php echo $abuf[e] ?>" size=16 maxlength=16>
-<?php else : ?>
-<?php 	
-	echo "$LDCurrentEntry:<br>";
-	$cbuf="sd=$yr$mo$dy&rd=$dy.$mo.$yr";
-	$arr=explode("_",$result[$element]);
-		while(list($x,$v)=each($arr))
-		{
-			if(stristr($v,$cbuf))
-			{
-				$sbuf=$v;
-				break;
-			}
-		}
-
-
-if ($abuf[e]) 
-{
-echo '
-<textarea cols="35" rows="4" name="actual">'.stripcslashes($abuf[e]).'</textarea>
-<br>
-		 &nbsp;<a href="javascript:sethilite(document.infoform.actual)"><img '.createComIcon($root_path,'hilite-s.gif','0').'></a>
-		<a href="javascript:endhilite(document.infoform.actual)"><img '.createComIcon($root_path,'hilite-e.gif','0').'></a>
-';
+ <table border=0 cellpadding=4 cellspacing=1 width=100%>
+  <tr bgcolor="#f6f6f6">
+    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDCurrentEntry; ?></td>
+    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDTime; ?></td>
+    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDCreatedBy; ?></td>
+  </tr>
+<?php
+	$toggle=0;
+	while($row=$chartnotes->FetchRow()){
+		if($toggle) $bgc='#efefef';
+			else $bgc='#f0f0f0';
+		$toggle=!$toggle;
+		//if(!empty($row['short_notes'])) $bgc='yellow';
 	
-}
-  else
-  echo '<input type="hidden" name="actual" value="">';
 ?>
 
+
+  <tr  bgcolor="<?php echo $bgc; ?>"  valign="top">
+    <td><FONT SIZE=-1  FACE="Arial" color="#000033">
+	<?php 
+		if(!$sformat&&!empty($row['notes'])) echo deactivateHotHtml(nl2br($row['notes'])); 
+		 elseif($sformat&&!empty($row['short_notes'])) echo '[ '.deactivateHotHtml($row['short_notes']).' ]';
+	?>
+	</td>
+    <td><FONT SIZE=1  FACE="Arial"><?php if($row['time']) echo $row['time']; ?></td>
+    <td><FONT SIZE=1  FACE="Arial"><?php if($row['personell_name']) echo $row['personell_name']; ?></td>
+  </tr>
+
+<?php
+	}
+?>
+</table>
+<?php
+}
+
+if($sformat) {
+	echo $LDSFormatPrompt 
+?>
+<p>
+<input type="text" name="short_notes" value="<?php echo $short_notes ?>" size=16 maxlength=16>
+<?php }else{ ?>
 
 <p>
 <font face=verdana,arial size=2 ><b><?php echo $LDEntryPrompt ?>:</b><br></font>
-<textarea cols="35" rows="4" name="newdata"><?php echo $newdata ?></textarea>
-
+<textarea cols="16" rows="10" name="notes" wrap="physical"><?php echo $notes ?></textarea>
 
 <br>
-		 &nbsp;<a href="javascript:sethilite(document.infoform.newdata)"><img <?php echo createComIcon($root_path,'hilite-s.gif','0') ?>></a>
-		<a href="javascript:endhilite(document.infoform.newdata)"><img <?php echo createComIcon($root_path,'hilite-e.gif','0') ?>></a>
-<?php endif ?>
+		 &nbsp;<a href="javascript:sethilite(document.infoform.notes)"><img <?php echo createComIcon($root_path,'hilite-s.gif','0') ?>></a>
+		<a href="javascript:endhilite(document.infoform.notes)"><img <?php echo createComIcon($root_path,'hilite-e.gif','0') ?>></a>
+<?php } ?>
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
 <input type="hidden" name="lang" value="<?php echo $lang ?>">
 <input type="hidden" name="winid" value="<?php echo $winid ?>">
@@ -280,18 +214,18 @@ echo '
 <input type="hidden" name="sformat" value="<?php echo $sformat ?>">
 <input type="hidden" name="mode" value="save">
 
-</form>
 <p>
-<a href="javascript:document.infoform.submit();"><img <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?> alt="<?php echo $LDSave ?>"></a>
+<input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?>>
 &nbsp;&nbsp;
-<a href="javascript:resetinput()"><img <?php echo createLDImgSrc($root_path,'reset.gif','0') ?> alt="<?php echo $LDReset ?>"></a>
-&nbsp;&nbsp;
+<!-- <a href="javascript:resetinput()"><img <?php echo createLDImgSrc($root_path,'reset.gif','0') ?> alt="<?php echo $LDReset ?>"></a>
+ -->&nbsp;&nbsp;
 <?php if($saved)  : ?>
 <a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"></a>
 <?php else : ?>
-<a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>" border="0" alt="<?php echo $LDClose ?>">
+<a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> border="0" alt="<?php echo $LDClose ?>">
 </a>
 <?php endif ?>
+</form>
 
 </BODY>
 

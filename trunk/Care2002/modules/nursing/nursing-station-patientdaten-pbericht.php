@@ -16,15 +16,17 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 if($edit&&!$HTTP_COOKIE_VARS[$local_user.$sid]) {header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 
 require_once($root_path.'include/inc_config_color.php'); // load color preferences
  
-
 $thisfile=basename(__FILE__);
 $breakfile="nursing-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$pn&edit=$edit";
 
 /* Create encounter object */
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 $enc_obj= new Encounter;
+/* Create nursing notes object */
+require_once($root_path.'include/care_api_classes/class_notes_nursing.php');
+$report_obj= new NursingNotes;
 /* Load global configs */
-include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 $GLOBAL_CONFIG=array();
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('patient_%');	
@@ -33,20 +35,62 @@ $glob_obj->getConfig('patient_%');
 if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
 if($dblink_ok)
 {
-	   /* Load date formatter */
-       include_once($root_path.'include/inc_date_format_functions.php');
+	/* Load date formatter */
+    include_once($root_path.'include/inc_date_format_functions.php');
        
+	if($mode=='save'){
+		if(($dateput&&$timeput&&$berichtput&&$author)||($dateput2&&$berichtput2&&$author2)){
+		    // Load the editor functions 
+			include_once($root_path.'include/inc_editor_fx.php');
+		    // Load the visual signalling functions
+			include_once($root_path.'include/inc_visual_signalling_fx.php');
+			// Prepare  the date 
+			if($dateput&&$timeput&&$berichtput&&$author){
+				if($dateput)  $HTTP_POST_VARS['dateput']=formatDate2STD($dateput,$date_format);
+				$HTTP_POST_VARS['timeput']=$HTTP_POST_VARS['timeput'].':00'; // adjust time to 00:00:00 format
+				$HTTP_POST_VARS['berichtput']=deactivateHotHtml($berichtput);
+				if($report_obj->saveNursingReport($HTTP_POST_VARS)){
+					// Get the last insert id
+					$HTTP_POST_VARS['ref_notes_nr']=$db->Insert_ID();
+					// Set the visual signal 
+					setEventSignalColor($pn, SIGNAL_COLOR_NURSE_REPORT, SIGNAL_COLOR_LEVEL_FULL);
+					$saved=true;
+				}else{
+					$saved=false;
+					echo "<p>$report_obj->sql$LDDbNoSave";
+				}
+			}
+			if($dateput2&&$berichtput2&&$author2){
+				if(!$HTTP_POST_VARS['ref_notes_nr']) $HTTP_POST_VARS['timeput']=date('H:i:s');
+				if($dateput2) $HTTP_POST_VARS['dateput2']=formatDate2STD($dateput2,$date_format);
+				$HTTP_POST_VARS['berichtput2']=deactivateHotHtml($berichtput2);
+				if($report_obj->saveEffectivityReport($HTTP_POST_VARS)){
+					// Set the visual signal 
+					setEventSignalColor($pn, SIGNAL_COLOR_NURSE_REPORT, SIGNAL_COLOR_LEVEL_FULL);
+					$saved=true;
+				}else{
+					$saved=false;
+					echo "<p>$report_obj->sql$LDDbNoSave";
+				}
+			}
+			if($saved){
+					header("location:$thisfile?sid=$sid&lang=$lang&saved=1&pn=$pn&station=$station&edit=$edit");
+			}
+		}else{
+			$saved=false;
+		}
+	}else{
+	// end of if(mode==save)
 		$enc_obj->where=" encounter_nr=$pn";
-	    if( $enc_obj->loadEncounterData($pn)) {
+    	if( $enc_obj->loadEncounterData($pn)) {
 			switch ($enc_obj->EncounterClass())
 			{
-		    	case '1': $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-		                   break;
+	    		case '1': $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
+	                   		break;
 				case '2': $full_en = ($pn + $GLOBAL_CONFIG['patient_outpatient_nr_adder']);
 							break;
 				default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
 			}						
-
 			if( $enc_obj->is_loaded){
 				$result=&$enc_obj->encounter;		
 				$rows=$enc_obj->record_count;	
@@ -55,118 +99,14 @@ if($dblink_ok)
 			echo "$sql<br>$LDDbNoRead";
 			$mode='?';
 		} 	
-		if($mode=='save')
-		{
-			if((($dateput)&&($timeput)&&($berichtput)&&($author))||(($dateput2)&&($berichtput2)&&($author2)))
-			{
-			    /* Load the editor functions */
-				include_once($root_path.'include/inc_editor_fx.php');
-			
-				/* Prepare  the date */
-				if($dateput)  $dateput=formatDate2STD($dateput,$date_format);
-				if($dateput2) $dateput2=formatDate2STD($dateput2,$date_format);
-				
-				$report="d=$dateput&t=$timeput&b=".deactivateHotHtml($berichtput)."&a=$author&w=$warn\r\n";
-				$report=strtr($report,' ','+');
-				$np_report="d=$dateput2&t=$timeput2&b=".deactivateHotHtml($berichtput2)."&a=$author2&w=$warn2\r\n";
-				
-				$np_report=strtr($np_report," ","+");
-				
-				
-				if((!$dateput)&&($dateput2)) $dateput=$dateput2;
-				
-				
-				// check if entry is already existing
-				$dbtable='care_nursing_station_patients_report';
-				
-				$sql="SELECT report,np_report FROM $dbtable WHERE patnum='$pn'";
-				if($ergebnis=$db->Execute($sql))
-       			{
-					$rows=$ergebnis->RecordCount();
-					
-					/* Load visual signalling functions */
-					include_once($root_path.'include/inc_visual_signalling_fx.php');
-					
-					if($rows==1)
-						{
-							$content=$ergebnis->FetchRow();
-							$report=$content[report].'_'.$report;
-							$np_report=$content[np_report].'_'.$np_report;
-							
-							$sql="UPDATE $dbtable SET report='$report', np_report='$np_report',le_date='$dateput' WHERE patnum='$pn'";
-									
-							if($ergebnis=$db->Execute($sql))
-       							{
-									//echo $sql;									
-									/* Set the visual signal */
-									setEventSignalColor($pn, SIGNAL_COLOR_NURSE_REPORT, SIGNAL_COLOR_LEVEL_FULL);
-									header("location:$thisfile?sid=$sid&lang=$lang&saved=1&pn=$pn&station=$station&edit=$edit");
-								}
-								else {echo "<p>$sql$LDDbNoUpdate";}
-						} // else create new entry
-						else
-						{
-							$sql="INSERT INTO $dbtable 
-										(
-										patnum,
-										name,
-										vorname,
-										gebdatum,
-										fe_date,
-										le_date,
-										report,
-										np_report,
-										create_id,
-										create_time
-										)
-									 	VALUES
-										(
-										'$pn',
-										'".$result['name']."',
-										'".$result['vorname']."',
-										'".$result['gebdatum']."',
-										'$dateput',
-										'$dateput',
-										'$report',
-										'$np_report',
-										'".$HTTP_COOKIE_VARS[$local_user.$sid]."',
-										NULL
-										)";
-
-							if($ergebnis=$db->Execute($sql))
-       							{
-									//echo $sql;
-									/* Set the visual signal */
-		
-									setEventSignalColor($pn, SIGNAL_COLOR_NURSE_REPORT, SIGNAL_COLOR_LEVEL_FULL);
-
-									header("location:$thisfile?sid=$sid&lang=$lang&saved=1&pn=$pn&station=$station&edit=$edit");
-								}
-								else {echo "<p>$sql$LDDbNoSave";}
-						}
-				}
-				else {echo "<p>$sql$LDDbNoRead";}
-			}
-			else $saved=0;
-		}// end of if(mode==save)
-		
-		$dbtable='care_nursing_station_patients_report';
-		
-		$sql="SELECT * FROM $dbtable WHERE patnum='$pn' ";
-		if($ergebnis=$db->Execute($sql))
-       		{
-				if($rows=$ergebnis->RecordCount())
-					{
-						$content=$ergebnis->FetchRow();
-						//echo $sql;
-						//echo $content[report];
-					}
-				}
-			else{echo "<p>$sql$LDDbNoRead";}
-			
+		// Load the nursing and effectivity reports in one instance
+		$neff_report=&$report_obj->getNursingAndEffectivityReport($pn);
+		// Load the date range
+		$neff_date_range=&$report_obj->getNursingReportDateRange($pn);
 	}
-	else 
-		{ echo "$LDDbNoLink<br>$sql<br>"; }
+}else{
+	echo "$LDDbNoLink<br>$sql<br>";
+}
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -260,7 +200,7 @@ topmargin=0 leftmargin=0 marginwidth=0 marginheight=0
 <td bgcolor=<?php echo $cfg['body_bgcolor']; ?> colspan=2>
  <ul>
 
-<form name="berichtform" method="get" action="<?php echo $thisfile ?>" onSubmit="return pruf(this)">
+<form name="berichtform" method="post" action="<?php echo $thisfile ?>" onSubmit="return pruf(this)">
 <table   cellpadding="0" cellspacing=1 border="0"  width="650">
 <tr  valign="top">
 <td colspan=4 bgcolor="#99ccff"  width="50%">
@@ -282,9 +222,9 @@ echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid
 
 echo '<font size="6"  >'.$LDNursingReport.' <p><font size=2>'.$LDPage.' 1/1
 		<br><font size=1>'.$LDFrom.'</font> ';
-		if($content['fe_date']) echo formatDate2Local($content['fe_date'],$date_format);
+		if($neff_date_range['fe_date']) echo formatDate2Local($neff_date_range['fe_date'],$date_format);
 		echo ' <font size=1>'.$LDTo.'</font> ';
-		if($content['le_date']) echo formatDate2Local($content['le_date'],$date_format).' ';
+		if($neff_date_range['le_date']) echo formatDate2Local($neff_date_range['le_date'],$date_format).' ';
 ?>
 </div></td></tr>
 <?php
@@ -298,45 +238,66 @@ echo '	<tr bgcolor="#99ccff">
 		<td><div class=fva2_ml3><b>'.$LDDate.'</b></div></td><td><div class=fva2_ml3>&nbsp;</div></td><td><div class=fva2_ml3><b>'.$LDSignature.'</b></div></td>
 		</tr>';	
 		
-$repbuf=explode("_",$content[report]); 
-$npbuf=explode("_",$content[np_report]);
+if(is_object($neff_report)) $cnt=$neff_report->RecordCount();
+	else $cnt=15;
+$buf=array();
+if($cnt){
+	if($cnt<15) $cnt=15;
+	for ($i=0;$i<$cnt;$i++){
 		
-if(($cnt=sizeof($repbuf))<15) $cnt=15;
-
-for ($i=0;$i<$cnt;$i++){
-		$buff=array();
-		parse_str(trim($repbuf[$i]),$buf);
-		parse_str(trim($npbuf[$i]),$buf2);
-		
-		echo '	
-		<tr bgcolor="#99ccff">
-		<td><div class=fa2_ml3>';
-		if($buf['d']) echo formatDate2Local($buf['d'],$date_format);
-		echo '&nbsp;</div>
-		</td>
-		<td><div class=fa2_ml3>'.$buf[t].'</div>
-		</td>
-		<td><div class=fva2_ml3><i>';
-		if($buf[w]) echo '<img '.createComIcon($root_path,'warn.gif','0','absmiddle').'> ';
-		$strbuf=str_replace('~~','</span>',stripcslashes(nl2br($buf[b])));	
-		echo str_replace('~','<span style="background:yellow">',$strbuf).'</i></div>
-		</td>
-		<td>
-		<div class=fa2_ml3>'.$buf[a].'</div>
-		</td>
-		<td><div class=fa2_ml3>';
-		if($buf2['d']) echo formatDate2Local($buf2['d'],$date_format);
-		echo '</div>
-		</td>
-		<td><div class=fva2_ml3><i>';
-		if($buf2[w]) echo '<img '.createComIcon($root_path,'warn.gif','0','absmiddle').'> ';
-		$strbuf=str_replace('~~','</span>',stripcslashes(nl2br($buf2[b])));	
-		echo str_replace('~','<span style="background:yellow">',$strbuf).'</i></div>
-		</td><td><div class=fa2_ml3>'.$buf2[a].'</div></td>
-		</tr>';	
+		if(is_object($neff_report)) $buf=$neff_report->FetchRow();
+		if($buf['type_nr']==17){
+			if($buf['ref_notes_nr']) continue;
+			$buf['eff_date']=$buf['date'];
+			$buf['date']='';
+			$buf['eff_time']=$buf['time'];
+			$buf['time']='';
+			$buf['eff_notes']=$buf['notes'];
+			$buf['notes']='';
+			$buf['eff_personell_name']=$buf['personell_name'];
+			$buf['personell_name']='';
+			$buf['eff_aux_notes']=$buf['aux_notes'];
+			$buf['aux_notes']='';
 		}
+		echo '	
+		<tr bgcolor="#99ccff">';
+			//  Column for the nursing report		
+			echo '
+			<td><div class=fa2_ml3>';
+			if($buf['date']) echo formatDate2Local($buf['date'],$date_format);
+			echo '&nbsp;</div>
+			</td>
+			<td><div class=fa2_ml3>'.$buf['time'].'</div>
+			</td>
+			<td><div class=fva2_ml3><i>';
+			if(stristr($buf['aux_notes'],'warn')) echo '<img '.createComIcon($root_path,'warn.gif','0','absmiddle').'> ';
+			$strbuf=str_replace('~~','</span>',stripcslashes(nl2br($buf['notes'])));	
+			echo str_replace('~','<span style="background:yellow">',$strbuf).'</i></div>
+			</td>
+			<td>
+			<div class=fa2_ml3>'.$buf['personell_name'].'</div>
+			</td>';
+
+				// Column for the effectivity report
+				echo '
+				<td><div class=fa2_ml3>';
+				if($buf['eff_date']) echo formatDate2Local($buf['eff_date'],$date_format);
+				echo '&nbsp;</div>
+				</td>
+				<td><div class=fva2_ml3><i>';
+				if(stristr($buf['eff_aux_notes'],'warn')) echo '<img '.createComIcon($root_path,'warn.gif','0','absmiddle').'> ';
+				$strbuf=str_replace('~~','</span>',stripcslashes(nl2br($buf['eff_notes'])));	
+				echo str_replace('~','<span style="background:yellow">',$strbuf).'</i></div>
+				</td>
+				<td>
+				<div class=fa2_ml3>'.$buf['eff_personell_name'].'</div>
+				</td>';
+		echo'</tr>';	
+	}
+}
+		
+if($edit) { 
 ?>
-<?php if($edit) : ?>
 		<tr>
 		<td colspan=7 bgcolor="#ffffff">&nbsp;
 		</td>
@@ -360,7 +321,7 @@ for ($i=0;$i<$cnt;$i++){
  -->		</td>
 		
 		<td><font face="verdana,arial" size="2" ><?php echo $LDNursingReport ?>:<br>&nbsp;<textarea rows="4" cols="25" name="berichtput"><?php if(!$saved) echo $berichtput; ?></textarea><br>
-		<input type="checkbox" name="warn" <?php if((!$saved)&&($warn)) echo "checked"; ?> value="1"> <img <?php echo createComIcon($root_path,'warn.gif','0','top') ?>>
+		<input type="checkbox" name="warn" <?php if((!$saved)&&($warn)) echo "checked"; ?> value="warn"> <img <?php echo createComIcon($root_path,'warn.gif','0','top') ?>>
 		 <font size=1 face=arial><?php echo $LDInsertSymbol ?><br>
 		 &nbsp;<a href="javascript:sethilite(document.berichtform.berichtput)"><img <?php echo createComIcon($root_path,'hilite-s.gif','0') ?>></a>
 		<a href="javascript:endhilite(document.berichtform.berichtput)"><img <?php echo createComIcon($root_path,'hilite-e.gif','0') ?>></a>
@@ -379,7 +340,7 @@ for ($i=0;$i<$cnt;$i++){
         </td>
 		
 		<td><font face="verdana,arial" size="2" ><?php echo $LDEffectReport ?>:<br>&nbsp;<textarea rows="4" cols="25"  name="berichtput2"><?php if(!$saved) echo $berichtput2; ?></textarea><br>
-		<input type="checkbox" name="warn2" <?php if((!$saved)&&($warn2)) echo "checked"; ?> value="1"> <img <?php echo createComIcon($root_path,'warn.gif','0','top') ?>> 
+		<input type="checkbox" name="warn2" <?php if((!$saved)&&($warn2)) echo "checked"; ?> value="warn"> <img <?php echo createComIcon($root_path,'warn.gif','0','top') ?>> 
 		<font size=1 face=arial><?php echo $LDInsertSymbol ?><br>
 		 &nbsp;<a href="javascript:sethilite(document.berichtform.berichtput2)"><img <?php echo createComIcon($root_path,'hilite-s.gif','0') ?>></a>
 		<a href="javascript:endhilite(document.berichtform.berichtput2)"><img <?php echo createComIcon($root_path,'hilite-e.gif','0') ?>></a>
@@ -388,7 +349,9 @@ for ($i=0;$i<$cnt;$i++){
 		</td>
 		</tr>
 		
-<?php endif ?>
+<?php 
+} 
+?>
 		</table>
 
 
@@ -402,11 +365,11 @@ for ($i=0;$i<$cnt;$i++){
 </td>
 <?php endif ?>
 <td>
-<?php if($edit) : ?>
+<!-- <?php if($edit) : ?>
 <a href="javascript:resetinput()"><img <?php echo createLDImgSrc($root_path,'reset.gif','0') ?>  width=156 height=24 alt="<?php echo $LDReset ?>"></a>
 &nbsp;&nbsp;
-<?php endif ?>
-<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"></a>
+<?php endif ?> -->
+<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDClose ?>"></a>
 </td>
 
 
@@ -418,22 +381,14 @@ for ($i=0;$i<$cnt;$i++){
 <input type="hidden" name="pn" value="<?php echo $pn ?>">
 <input type="hidden" name="edit" value="<?php echo $edit ?>">
 <input type="hidden" name="mode" value="save">
-
 </form>
-
-
 </FONT>
-
 </ul>
-
 <p>
 </td>
-
-
 </tr>
 </table>        
 <p>
-
 <?php
 require($root_path.'include/inc_load_copyrite.php');
 ?>

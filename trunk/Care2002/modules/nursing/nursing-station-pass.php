@@ -25,7 +25,7 @@ require_once($root_path.'global_conf/areas_allow.php');
 $allowedarea=&$allow_area['wards'];
 
 //$fileforward="nursing-station.php".URL_REDIRECT_APPEND."&edit=$edit&retpath=$retpath&station=".$HTTP_SESSION_VARS['sess_nursing_station'];
-$fileforward="nursing-station.php".URL_REDIRECT_APPEND."&edit=$edit&retpath=$retpath&station=$station";
+$fileforward="nursing-station.php".URL_REDIRECT_APPEND."&edit=$edit&retpath=$retpath&station=$station&ward_nr=$ward_nr";
 //$fileforward="nursing-station.php?sid=$sid&edit=$edit&retpath=$retpath&station=$station";
 $thisfile="nursing-station-pass.php";
 if($retpath=="quick") $breakfile="nursing-schnellsicht.php".URL_APPEND;

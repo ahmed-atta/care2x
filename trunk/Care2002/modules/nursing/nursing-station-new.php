@@ -163,7 +163,7 @@ div.pcont{ margin-left: 3; }
 <table border=0>
   <tr>
     <td class=pblock align=right><font color=#ff0000><b>*</b></font><?php echo $LDStation ?>: </td>
-    <td class=pblock><input type="text" name="station" size=20 maxlength=40 value="<?php echo //$station ?>"><br>
+    <td class=pblock><input type="text" name="station" size=20 maxlength=40 value="<?php echo $station ?>"><br>
 </td>
   </tr> 
 <tr>

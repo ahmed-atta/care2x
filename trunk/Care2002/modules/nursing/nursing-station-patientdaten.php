@@ -66,7 +66,7 @@ if($dblink_ok)
 
 					if($edit&&$result['is_discharged']) $edit=0;
 					
-					$event_table= 'care_nursing_station_patients_event_signaller';
+					$event_table= 'care_encounter_event_signaller';
 					
 					/* If mode = save_event_changes, save the color bar status */
 					

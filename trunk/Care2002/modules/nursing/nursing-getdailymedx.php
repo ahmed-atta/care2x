@@ -16,180 +16,60 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
 $thisfile=basename(__FILE__);
+/* Create charts object */
+require_once($root_path.'include/care_api_classes/class_charts.php');
+$charts_obj= new Charts;
 
-switch($winid)
-{
-	case 'medication': $title="$LDMedication/$LDDosage";
-							$maxelement=10;
-							break;
-}
-
-$dbtable='care_nursing_station_patients_curve';
-
+$title="$LDMedication/$LDDosage";
+							
 /* Establish db connection */
 if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok)
-	{	
-	  /* Load date formatter */
-      include_once($root_path.'include/inc_date_format_functions.php');
-      				
+if($dblink_ok){	
+	/* Load date formatter */
+	include_once($root_path.'include/inc_date_format_functions.php');
 
-    	// get orig data
-
-		if($mode=='save')
-		{
-		 	$element="medication_dailydose";
-					
-				// check if entry is already existing
-				$sql="SELECT $element FROM $dbtable WHERE patnum='$pn'";
-				if($ergebnis=$db->Execute($sql))
-       			{
-					//echo $sql." checked <br>";
-					//$bbuf="";
-					//$tbuf="";
-					$bbuf=$r0;
-					for($i=1;$i<$maxelement;$i++)
-					{
-						$dx="r".$i;
-						$bbuf=$bbuf."|".$$dx;
-					}
-					$newdata=$bbuf;
-					if($newdata) $dbuf=strtr("sd=$yr$mo$dy&rd=$dy.$mo.$yr&e=$newdata\r\n"," <>","+()");
-							else $dbuf="";
-					
-					$rows=$ergebnis->RecordCount();
-					if($rows==1)
-						{
-							$content=$ergebnis->FetchRow();
-							if($content[$element]!='')
-							{
-								$cbuf="sd=$yr$mo$dy&rd=$dy.$mo.$yr";
-								//echo $content[$element]."<br>".$cbuf;
-								if(stristr($content[$element],$cbuf))
-								{
-									$ebuf=explode("_",$content[$element]);
-									for($i=0;$i<sizeof($ebuf);$i++)
-									{
-										//echo $v." v <br>";
-										if(stristr($ebuf[$i],$cbuf))
-										{ $ebuf[$i]=$dbuf; 
-											$dbuf=implode("_",$ebuf);
-											break;
-										}
-									}
-								}
-								 else $dbuf=$content[$element]."_".$dbuf;		
-							}		
-							// $dbuf=htmlspecialchars($dbuf);
-							$sql="UPDATE $dbtable SET $element='$dbuf'	WHERE patnum='$pn'";
-							if($ergebnis=$db->Execute($sql))
-       							{
-									//echo $sql." new update <br>";
-									
-									header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=1&pn=$pn&station=$station&winid=$winid&yr=$yr&mo=$mo&dy=$dy&dyidx=$dyidx&yrstart=$yrstart&monstart=$monstart&dystart=$dystart&dyname=$dyname");
-								}
-								else echo "<p>".$sql."<p>Das Lesen  aus der Datenbank $dbtable ist gescheitert."; 
-						} // else create new entry
-						else
-						{
-							//$dbuf=strtr("sd=$yr$mo$dy&rd=$dy.$mo.$yr&e=$newdata"," <>","+()")."\r\n";
-							$sql="INSERT INTO $dbtable 
-										(
-										patnum,
-										$element,
-										fe_date
-										)
-									 	VALUES
-										(
-										'$pn',
-										'$dbuf',
-										'".date("d.m.Y")."'
-										)";
-
-							if($ergebnis=$db->Execute($sql))
-       							{
-									//echo $sql." new insert <br>";
-									
-									header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=1&pn=$pn&station=$station&winid=$winid&yr=$yr&mo=$mo&dy=$dy&dyidx=$dyidx&yrstart=$yrstart&monstart=$monstart&dystart=$dystart&dyname=$dyname");
-								}
-								else {echo "<p>$sql$LDDbNoSave";}
-						}//end of else
-					} // end of if ergebnis
-		 }// end of if(mode==save)
-		 else
-		 {
-		 	// get medication info
-			$element='medication';
-
-		 	$sql="SELECT * FROM $dbtable WHERE patnum='$pn'";
-
-			if($ergebnis=$db->Execute($sql))
-       		{
-				if($rows=$ergebnis->RecordCount())
-				{
-					$result=$ergebnis->FetchRow();
-					$medbuf=$result[$element];
-					//echo $sql."<br>";
-					// get daily dose info
-					$element="medication_dailydose";
-					$sql="SELECT * FROM $dbtable WHERE patnum='$pn'";
-
-					if($ergebnis=$db->Execute($sql))
-       				{
-						if($rows=$ergebnis->RecordCount())
-						{
-							$result=$ergebnis->FetchRow();
-							$dosebuf=$result[$element];
-							//echo $sql."<br>";
-						}
-					}
-					else {echo "<p>$sql$LDDbNoRead";} 
+	if($mode=='save'){
+		$saved=false;
+		$data_array=array();
+		for($i=0;$i<$maxelement;$i++){
+			
+			$notes='r'.$i;
+			$prev='prev'.$i;
+			$notes_nr='notes_nr'.$i;
+			$presc_nr='p_nr'.$i;
+			
+			if(!empty($$notes)){
+				$data_array['short_notes']=$$prev.' '.$$notes;
+				if(empty($$notes_nr)){
+					$data_array['prescription_nr']=$$presc_nr;
+					$data_array['date']=date('Y-m-d',mktime(0,0,0,$mo,$dy,$yr));
+					if($charts_obj->savePrescriptionNotesFromArray($data_array)) $saved=true;
+				}else{
+					$data_array['prescription_nr']='';
+					if(isset($data_array['date'])) unset($data_array['date']);
+					if(isset($data_array['prescription_nr'])) unset($data_array['prescription_nr']);
+					if($charts_obj->updatePrescriptionNotesFromArray($$notes_nr,$data_array)) $saved=true;
 				}
 			}
-				else {echo "<p>$sql$LDDbNoRead";}
-	 	}
-	}
-	else 
-		{ echo "$LDDbNoLink<br>$sql<br>"; }
-
-
-		
-	$cbuf="sd=$yr$mo$dy&rd=$dy.$mo.$yr";
-	$arr=explode("_",$dosebuf);
-		while(list($x,$v)=each($arr))
-		{
-			if(stristr($v,$cbuf))
-			{
-				$sbuf=$v;
-				break;
-			}
+		}
+			
+		if($saved){
+			header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=1&pn=$pn&station=$station&winid=$winid&yr=$yr&mo=$mo&dy=$dy&dyidx=$dyidx&yrstart=$yrstart&monstart=$monstart&dystart=$dystart&dyname=$dyname");
+			exit;
 		}
 
-
-if ($sbuf) 	parse_str($sbuf,$abuf);
-//echo $abuf[e]."<br>";
-$dose=trim($abuf[e]);
-//echo $b_t[0]." ".$b_t[1];
-
-
-$mdc=explode("~",$medbuf);
-array_unique($mdc);
-
-if(strchr($mdc[0],"|")||(!$mdc[0])) $maxelement=10;
- else
- {
- 	$maxelement=(int) trim($mdc[0]);
-	array_splice($mdc,0,1);
+	}
+	
+ 	// end of if(mode==save)
+	$count=0;
+	$medis=$charts_obj->getDayPrescriptionNotes($pn,date('Y-m-d',mktime(0,0,0,$mo,$dy,$yr)));		
+	if(is_object($medis)){
+		$count=$medis->RecordCount();
+	}	
+	$maxelement=$count;
+}else{
+	echo "$LDDbNoLink<br>$sql<br>";
 }
-// check if encoder protocol is attached at the end 
-if(!strchr($mdc[(sizeof($mdc)-1)],"|")) 
-{
- 	$enc=$mdc[(sizeof($mdc)-1)];
-	array_splice($mdc,(sizeof($mdc)-1),1);
-}
-
-$mdcsize=sizeof($mdc);
-//echo $b_t[0]." ".$b_t[1];
 ?>
 <HTML>
 <HEAD>
@@ -225,14 +105,14 @@ div.box { border: double; border-width: thin; width: 100%; border-color: black; 
 </style>
 
 </HEAD>
-<BODY  bgcolor="#dfdfdf" TEXT="#000000" LINK="#0000FF" VLINK="#800080" 
+<BODY  bgcolor="#99ccff" TEXT="#000000" LINK="#0000FF" VLINK="#800080" 
 onLoad="<?php if($saved) echo "parentrefresh();"; ?>if (window.focus) window.focus(); window.focus();" >
 <table border=0 width="100%">
   <tr>
     <td><b><font face=verdana,arial size=5 color=maroon>
 <?php 
 	echo $title.'<br><font size=4>';	
-	echo $LDFullDayName[$dyidx].' ('.formatDate2Local("$yr-$mo-$dy",$date_format).')</font>';
+	echo $LDFullDayName[$dyidx].' ('.formatDate2Local(date('Y-m-d',mktime(0,0,0,$mo,$dy,$yr)),$date_format).')</font>';
 ?>
 	</font></b>
 	</td>
@@ -257,31 +137,34 @@ onLoad="<?php if($saved) echo "parentrefresh();"; ?>if (window.focus) window.foc
    			 <td  align=center class="v12"  bgcolor="#cfcfcf" ><?php echo $LDTodaysReport ?>:</td>
 		  </tr>
 		<?php 
-		$ds=explode("|",$dose);
-		if($mdcsize)
+		if($count)
 		{
-			for($i=0;$i<$mdcsize;$i++)
+			for($i=0;$i<$maxelement;$i++)
 			{
 				//if(!$mdc[$i]) continue;
-				$v=explode("|",$mdc[$i]);
-				if(!$v[1]) continue;
+				$v=$medis->FetchRow();
 				echo '
  						 <tr>
-   						 <td  class="v12" bgcolor="#ffffff">&nbsp;'.$v[1].'&nbsp;
+   						 <td  class="v12" bgcolor="#ffffff">&nbsp;'.$v['article'].'&nbsp;
         				</td>
-   						 <td class="v12" bgcolor="#ffffff"> &nbsp;'.$v[2].'&nbsp;</td>
-   						 <td class="v12" bgcolor="#ffffff">&nbsp;
-						 <input type="text" name="r'.$i.'" value="'.$ds[$i].'" size=16 maxlength=18>&nbsp;</td>
+   						 <td class="v12" bgcolor="#ffffff"> &nbsp;'.$v['dosage'].'&nbsp;</td>
+   						 <td class="v12" bgcolor="#ffffff" align="right">&nbsp;'.$v['day_notes'].'
+						 <input type="text" name="r'.$i.'" size=4 maxlength=10>&nbsp;
+						 <input type="hidden" name="prev'.$i.'" value="'.$v['day_notes'].'">
+						 <input type="hidden" name="notes_nr'.$i.'" value="'.$v['notes_nr'].'">
+						 <input type="hidden" name="p_nr'.$i.'" value="'.$v['nr'].'">
+						 </td>
   						</tr>
  						 ';
 				}
-		}
-		else echo '
+		}else{
+			echo '
 		 				<tr>
    						 <td  colspan="3" bgcolor="#ffffff"><img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'>
         				<font face="Verdana, Arial" size=4 color="#800000">'.$LDNoMedicineYet.'&nbsp;</font></td>
   						</tr>
  						 ';
+		}
  		?>
 </table>
 </td>
@@ -304,21 +187,22 @@ onLoad="<?php if($saved) echo "parentrefresh();"; ?>if (window.focus) window.foc
 <input type="hidden" name="pn" value="<?php echo $pn ?>">
 <input type="hidden" name="edit" value="<?php echo $edit ?>">
 <input type="hidden" name="mode" value="save">
+<input type="hidden" name="maxelement" value="<?php echo $maxelement ?>">
 
 </form>
 <p>
-<?php if($mdcsize) : ?>
+<?php if($count) { ?>
 <a href="javascript:document.infoform.submit();"><img <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?> alt="<?php echo $LDSave ?>"></a>
 &nbsp;&nbsp;
-<a href="javascript:resetinput()"><img <?php echo createLDImgSrc($root_path,'reset.gif','0') ?> alt="<?php echo $LDReset ?>"></a>
-&nbsp;&nbsp;
-<?php endif ?>
-<?php if($saved)  : ?>
+<!-- <a href="javascript:resetinput()"><img <?php echo createLDImgSrc($root_path,'reset.gif','0') ?> alt="<?php echo $LDReset ?>"></a>
+ -->&nbsp;&nbsp;
+<?php } ?>
+<?php if($saved)  { ?>
 <a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"></a>
-<?php else : ?>
+<?php }else{ ?>
 <a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>" border="0" alt="<?php echo $LDClose ?>">
 </a>
-<?php endif ?>
+<?php } ?>
 
 </BODY>
 

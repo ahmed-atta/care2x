@@ -68,7 +68,7 @@ function belegen(anum){
 
              <?php
             echo '
-	          urlholder="nursing-station.php?mode=newdata&sid='.$sid.'&lang='.$lang.'&rm='.$rm.'&bd='.$bd.'&pyear='.$py.'&pmonth='.$pm.'&pday='.$pd.'&pn="+anum+"&station='.$s.'";
+	          urlholder="nursing-station.php?mode=newdata&sid='.$sid.'&lang='.$lang.'&rm='.$rm.'&bd='.$bd.'&pyear='.$py.'&pmonth='.$pm.'&pday='.$pd.'&pn="+anum+"&station='.$s.'&ward_nr='.$wnr.'";
 			  ';
              ?>
 	          window.opener.location.replace(urlholder);
@@ -149,6 +149,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
  <input type="hidden" name="pm" value="<?php echo $pm; ?>">
  <input type="hidden" name="pd" value="<?php echo $pd; ?>">
  <input type="hidden" name="d" value="<?php echo $d; ?>">                                                      
+ <input type="hidden" name="wnr" value="<?php echo $wnr; ?>">                                                      
  <input type="hidden" name="mode" value="search">
   <p>
 </FONT>

@@ -14,10 +14,15 @@ define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-if($edit&&!$HTTP_COOKIE_VARS[$local_user.$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+if($edit&&!$HTTP_COOKIE_VARS[$local_user.$sid]) {header("Location:../language/$lang/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 require_once($root_path.'include/inc_config_color.php'); // load color preferences
+require_once($root_path.'include/inc_editor_fx.php'); 
 
-$thisfile='nursing-station-patientdaten-kurve.php';
+/* Load the data time shifter and create object */
+require_once($root_path.'classes/datetimemanager/class.dateTimeManager.php');
+$dateshifter=new dateTimeManager();
+
+$thisfile=basename(__FILE__);
 $breakfile="nursing-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$pn&edit=$edit";
 
 if(!$kmonat) $kmonat=date('n');
@@ -72,22 +77,12 @@ if($dayback)
 $tagname=date("w",mktime(0,0,0,$kmonat,$tag,$jahr));
 $tagnamebuf=$tagname;
 
+$date_start=date('Y-m-d',mktime(0,0,0,$kmonat,$tag,$jahr));
+$date_end=$dateshifter->shift_dates($date_start,-6,'d');
+
 /* Establish db connection */
 if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok)
-	{	
-	// get orig data
-/*	$dbtable='care_admission_patient';
-	$sql="SELECT * FROM $dbtable WHERE patnum='$pn' ";
-	if($ergebnis=$db->Execute($sql))
-       	{
-			$rows=0;
-			if( $result=$ergebnis->FetchRow()) $rows++;
-			if($rows)
-				{
-					mysql_data_seek($ergebnis,0);
-					$result=$ergebnis->FetchRow();
-*/					//if($edit&&$result[discharge_date]) $edit=0;
+if($dblink_ok){	
 	/* Create encounter object */
 	include_once($root_path.'include/care_api_classes/class_encounter.php');
 	$enc_obj= new Encounter;
@@ -97,65 +92,85 @@ if($dblink_ok)
 	$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 	$glob_obj->getConfig('patient_%');	
 
-		$enc_obj->where=" encounter_nr=$pn";
-	    if( $enc_obj->loadEncounterData($pn)) {
-			switch ($enc_obj->EncounterClass())
-			{
-		    	case '1': $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
+	$enc_obj->where=" encounter_nr=$pn";
+	// Preload the patient encounter object
+	if( $enc_obj->loadEncounterData($pn)) {
+		switch ($enc_obj->EncounterClass())
+		{
+		    case '1': $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
 		                   break;
-				case '2': $full_en = ($pn + $GLOBAL_CONFIG['patient_outpatient_nr_adder']);
+			case '2': $full_en = ($pn + $GLOBAL_CONFIG['patient_outpatient_nr_adder']);
 							break;
-				default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-			}						
+			default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
+		}						
 
-			if( $enc_obj->is_loaded){
-				$result=&$enc_obj->encounter;		
-				$rows=$enc_obj->record_count;	
+		if( $enc_obj->is_loaded){
+			$result=&$enc_obj->encounter;		
+			$rows=$enc_obj->record_count;	
+			/* Create charts object */
+			include_once($root_path.'include/care_api_classes/class_charts.php');
+			$charts_obj= new Charts;
 		
-					$sql="SELECT * FROM care_nursing_station_patients_curve WHERE patnum='$pn' ";
-					if($ergebnis=$db->Execute($sql))
-       					{
-							if($rows=$ergebnis->RecordCount())
-							{
-								$content=$ergebnis->FetchRow();
-							}
-						}
-						else {echo "<p>$sql$LDDbNoRead"; exit;}
-				}
+			// get Allergy notes
+			$allergy=&$charts_obj->getChartNotes($pn,22);
+			// get Diagnosis notes
+			$diagnosis=&$charts_obj->getChartNotes($pn,12);
+			// get extra diagnosis notes
+			$x_diagnosis=&$charts_obj->getChartNotes($pn,14);
+			// get additional notes
+			$lot_mat=&$charts_obj->getChartNotes($pn,11);
+			// get daily Diet plans
+			$diet=&$charts_obj->getChartDailyDietPlans($pn,$date_start,$date_end);
+			// get daily main notes (diag/therapy)
+			$main_notes=$charts_obj->getChartDailyMainNotes($pn,$date_start,$date_end);
+			// get daily etc notes (pt-atg-etc)
+			$daily_etc=$charts_obj->getChartDailyEtcNotes($pn,$date_start,$date_end);
+			// get daily anticoag notes (diag/therapy)
+			$daily_anticoag=$charts_obj->getChartDailyAnticoagNotes($pn,$date_start,$date_end);
+			// get daily iv notes (diag/therapy)
+			$daily_iv=$charts_obj->getChartDailyIVNotes($pn,$date_start,$date_end);
+			// get all current medicine prescriptions
+			$medis=$charts_obj->getAllCurrentPrescription($pn);
+			// get daily prescription notes
+			$daily_medis=$charts_obj->getChartDailyPrescriptionNotes($pn,$date_start,$date_end);
 		}
-		else {echo "<p>$sql$LDDbNoRead"; exit;}
-		include_once($root_path.'include/inc_date_format_functions.php');
-	}
-	else 
-		{ echo "$LDDbNoLink<br>$sql<br>"; }
-
-function hilite($str)
-{
-	$sbuf=str_replace('**','</span>',$str);
-	return str_replace('*','<span style="background:yellow">',$sbuf);
+	}else {echo "<p>$sql$LDDbNoRead"; exit;}
+	include_once($root_path.'include/inc_date_format_functions.php');
+}else{
+	echo "$LDDbNoLink<br>$sql<br>";
 }
 
-function getdata(&$info,$d,$m,$y)
+function getlatestdata($info,$d,$m,$y)
 {
-	$sbuf="";$ok=0;
-		$cbuf="sd=$y$m$d&rd=$d.$m.$y";
-		$arr=explode("_",$info);
-		while(list($x,$v)=each($arr))
-		{
-			if(stristr($v,$cbuf))
-			{
-				$sbuf=$v;
-				$ok=1;
+	if(is_object($info)){
+		$ok=false;
+		$date=date('Y-m-d',mktime(0,0,0,$m,$d,$y));
+		while($data=$info->FetchRow()){
+			if($data['date']==$date) {
+				$ok=true;
 				break;
 			}
 		}
-		
-	if($ok)
-	{
-		parse_str($sbuf,$abuf);
-		 return hilite(nl2br($abuf[e]));
-	}
-	else return "";
+		$info->MoveFirst();
+		if($ok){
+			 return $data;
+		}else{return false;}
+	}else{return false;}
+}
+
+function getdata($info,$d,$m,$y,$short=0){
+	if(is_object($info)){
+		$content='';
+		$date=date('Y-m-d',mktime(0,0,0,$m,$d,$y));
+		while($data=$info->FetchRow()){
+			if($data['date']==$date) {
+				if($short) $content=$data['short_notes']."\n".$content;
+					else $content=$data['notes']."\n".$content;
+			}
+		}
+		$info->MoveFirst();
+		return $content;
+	}else{return false;}
 }
 
 function aligndate(&$ad,&$am,&$ay)
@@ -245,7 +260,7 @@ function popgetdailymedx(winID,patientID,jahrID,monatID,tagID,tagIDX,jahrS,monat
 	}
 	
 function setStartDate(winID,patientID,jahrID,monatID,tagID,station,tagN)
-	{
+{
 	if(event.button==2)
 		{
 		//alert("right click");
@@ -264,7 +279,7 @@ function setStartDate(winID,patientID,jahrID,monatID,tagID,station,tagN)
 		urlholder="nursing-station-patientdaten-kurve.php?sid=<?php echo "$sid&lang=$lang&edit=$edit" ?>&"+winID+"=1&pn=" + patientID + "&jahr=" + jahrID + "&kmonat=" + monatID + "&tag="+ tagID + "&station="+station+"&tagname="+ tagN ;
  		window.location.replace(urlholder);
    		}
-	}
+}
 
 function closeifok()
 {
@@ -341,12 +356,17 @@ echo '
 		<table   cellpadding="0" cellspacing=1 border="0" >
 		<tr  >
 		<td bgcolor="aqua" class=pblock><font size="2" ><div class=pcont><b>'.$full_en.'</b></div></td>
-		<td bgcolor="white" ><font face="verdana,arial" size="2" 
-		color=red >'.$LDAllergy.':';
-		if($edit) echo '
-		<a href="javascript:popgetinfowin(\'allergy\',\''.$pn.'\',\''.$jahr.'\',\''.$kmonat.'\',\''.$tag.'\',\''.$tag.'\',\''.$tagname.'\')">
-		<img '.createComIcon($root_path,'clip2.gif','0').' alt="'.str_replace("~tagword~",$LDAllergy,$LDClk2Enter).'" ></a>
-		';
+		<td bgcolor="white" >';
+		if($edit){
+			echo '
+			<a href="javascript:popgetinfowin(\'allergy\',\''.$pn.'\',\''.$jahr.'\',\''.$kmonat.'\',\''.$tag.'\',\''.$tag.'\',\''.$tagname.'\')">
+			<font face="verdana,arial" size="2" color=red >'.$LDAllergy.':
+			<img '.createComIcon($root_path,'clip2.gif','0').' alt="'.str_replace("~tagword~",$LDAllergy,$LDClk2Enter).'" ></a>
+			';
+		}else{
+			echo '
+			<font face="verdana,arial" size="2" color=red >'.$LDAllergy.':';
+		}
 		echo '
 		</td>';
 //****************************** DAy scale ********************************
@@ -389,7 +409,7 @@ for ($i=$tag,$acttag=$tag,$d=0,$tgbuf=$tagname;$i<($tag+7);$i++,$d++,$tgbuf++,$a
 $actmonat=$kmonat;
 $actjahr=$jahr;
 
-//****************************** daily kost diet ********************************
+//****************************** daily  diet plan ********************************
 echo '</tr><tr>';
 for ($i=$tag,$acttag=$tag,$d=0;$i<($tag+7);$i++,$d++,$acttag++)
 {
@@ -402,8 +422,9 @@ for ($i=$tag,$acttag=$tag,$d=0;$i<($tag+7);$i++,$d++,$acttag++)
 	echo '
 	<font face="verdana,arial" size="2" color="#0" >';
 	
-	if($r=getdata(&$content[diet],$i,$kmonat,$jahr))  echo $r;
+	if($r=getlatestdata($diet,$i,$kmonat,$jahr))  echo hilite($r['short_notes']);
 	 	else  echo $LDDiet;
+		
 }
 //**************** Patient personal data ************************************
 	if($edit) echo '</a>';
@@ -421,7 +442,13 @@ echo '</td>
 
 //**************** allergy data ************************************
 echo'
-		<td bgcolor=white ><font face="verdana,arial" size="2" color=red ><img '.createComIcon($root_path,'scale.gif','0','right').'>'.hilite(nl2br($content['allergy'])).'<br></td>';
+		<td bgcolor=white ><font face="verdana,arial" size="2" color=red ><img '.createComIcon($root_path,'scale.gif','0','right').'>';
+		if(is_object($allergy)){
+			while($buff=$allergy->FetchRow()){
+				echo hilite(nl2br($buff['notes'])).'<br>';
+			}
+		}
+		echo '</td>';
 
 //**************** curve graph ************************************
 echo '
@@ -451,14 +478,23 @@ echo ' src="'.$root_path.'main/imgcreator/datacurve.php'.URL_APPEND.'&pn='.$pn.'
 		</td>
 		</tr>
 		<tr   valign="top" >
-		<td bgcolor=white colspan="2" height="150">&nbsp 
-		<font size=1 face="verdana,arial">
-		&nbsp;'.$LDDiagnosisTherapy;
-if($edit) echo '
-		 <a href="javascript:popgetinfowin(\'diag_ther\',\''.$pn.'\',\''.$jahr.'\',\''.$kmonat.'\',\''.$tag.'\',\''.$tag.'\',\''.$tagname.'\')">
+		<td bgcolor=white colspan="2" height="150">
+		<font size=1 face="verdana,arial">';;
+		
+/******************** Main diagnose Therapy *****************************************/
+if($edit){
+	echo '
+		 <a href="javascript:popgetinfowin(\'diag_ther\',\''.$pn.'\',\''.$jahr.'\',\''.$kmonat.'\',\''.$tag.'\',\''.$tag.'\',\''.$tagname.'\')">'.$LDDiagnosisTherapy.'
 		<img '.createComIcon($root_path,'clip2.gif','0').' alt="'.str_replace("~tagword~",$LDDiagnosisTherapy,$LDClk2Enter).'" ></a>';
-		echo '
-		<br>'.hilite(nl2br($content[diag_ther])).'</td>';
+}else{
+	echo $LDDiagnosisTherapy;
+}
+		if(is_object($diagnosis)){
+			while($buff=$diagnosis->FetchRow()){
+				echo '<br>'.hilite(nl2br($buff['notes']));
+			}
+		}
+		echo '</td>';
 		
 //********************************** diagnose therapie daily report ****************************
 $actmonat=$kmonat;
@@ -472,8 +508,7 @@ for ($i=$tag,$acttag=$tag,$d=0;$i<($tag+7);$i++,$d++,$acttag++)
 	if($edit) echo '
 		<a href="javascript:popgetdailyinfo(\'diag_ther_dailyreport\',\''.$pn.'\',\''.$actjahr.'\',\''.$actmonat.'\',\''.$acttag.'\',\''.($d+$tagnamebuf).'\',\''.$jahr.'\',\''.$kmonat.'\',\''.$tag.'\',\''.$tagname.'\')">';
 
-	if($r=getdata(&$content[diag_ther_dailyreport],$acttag,$actmonat,$actjahr)) 
-	 echo $r;
+	if($r=&getdata($main_notes,$i,$kmonat,$jahr))  echo hilite(nl2br($r));
 	else 
 	  if($edit) echo '<img src="'.$root_path.'gui/img/common/default/pixel.gif" width="97" height="148"  border=0 alt="'.str_replace("~tagword~",$LDDiagnosisTherapy,$LDClk2EnterDaily).'" >';
 	if($edit) echo "</a>";
@@ -486,11 +521,19 @@ echo '
 		</tr>
 		<tr   valign="top">
 		<td bgcolor=white colspan="2" height="50">
-<font size=1 face="verdana,arial">'.$LDSpecialsExtra;
-if($edit) echo '
-<a href="javascript:popgetinfowin(\'xdiag_specials\',\''.$pn.'\',\''.$jahr.'\',\''.$kmonat.'\',\''.$tag.'\',\''.$tag.'\',\''.$tagname.'\')"><img '.createComIcon($root_path,'clip2.gif','0').' alt="'.str_replace("~tagword~",$LDSpecialsExtra,$LDClk2Enter).'" ></a>';
-echo '
-	<br>'.hilite(nl2br($content[xdiag_specials])).'</td>';
+<font size=1 face="verdana,arial">';
+if($edit){
+	echo '
+	<a href="javascript:popgetinfowin(\'xdiag_specials\',\''.$pn.'\',\''.$jahr.'\',\''.$kmonat.'\',\''.$tag.'\',\''.$tag.'\',\''.$tagname.'\')">'.$LDSpecialsExtra.' <img '.createComIcon($root_path,'clip2.gif','0').' alt="'.str_replace("~tagword~",$LDSpecialsExtra,$LDClk2Enter).'" ></a>';
+}else{
+	echo $LDSpecialsExtra;
+}
+		if(is_object($x_diagnosis)){
+			while($buff=$x_diagnosis->FetchRow()){
+				echo '<br>'.hilite(nl2br($buff['notes']));
+			}
+		}
+echo '</td>';
 
 	//***************************  KG ATG etc .  daily report ***************************
 $actmonat=$kmonat;
@@ -508,7 +551,7 @@ for ($i=$tag,$acttag=$tag,$d=0;$i<($tag+7);$i++,$d++,$acttag++)
 	echo '<br>';
 		$sbuf="";
 
-		if($r=getdata(&$content[kg_atg_etc],$acttag,$actmonat,$actjahr))  echo $r;
+		if($r=&getdata($daily_etc,$i,$kmonat,$jahr))  echo hilite($r);
 
 	echo "
 		</td>";
@@ -536,7 +579,7 @@ $actjahr=$jahr;
 for ($i=$tag,$acttag=$tag,$d=0;$i<($tag+7);$i++,$d++,$acttag++)
 {
 	aligndate(&$acttag,&$actmonat,&$actjahr); // function to align the date
-	$r=getdata(&$content[anticoag_dailydose],$acttag,$actmonat,$actjahr);
+	$r=&getdata($daily_anticoag,$i,$kmonat,$jahr,1);
 	echo '
 	<td ';
 	if($r) echo "bgcolor=aqua"; else echo "bgcolor=white";
@@ -557,27 +600,30 @@ for ($i=$tag,$acttag=$tag,$d=0;$i<($tag+7);$i++,$d++,$acttag++)
 echo '
 		</tr>
 		<tr   valign="top">';
-// ************** Angaben ************************
+// ************** Notes (Angaben) Lot-Mat-Ch.nr ************************
 echo '
 		<td bgcolor=white valign="top" width="130" class="a10">
-		'.$LDExtraNotes.':';
-if($edit) echo ' <a href="javascript:popgetinfowin(\'lot_mat_etc\',\''.$pn.'\',\''.$jahr.'\',\''.$kmonat.'\',\''.$tag.'\',\''.$tag.'\',\''.$tagname.'\')"><img '.createComIcon($root_path,'clip2.gif','0').'  alt="'.str_replace("~tagword~",$LDExtraNotes,$LDClk2Enter).'" ></a>';
-echo '<br>'.hilite(nl2br($content[lot_mat_etc])).'
-		</td>';
+		';
+if($edit){
+	echo ' <a href="javascript:popgetinfowin(\'lot_mat_etc\',\''.$pn.'\',\''.$jahr.'\',\''.$kmonat.'\',\''.$tag.'\',\''.$tag.'\',\''.$tagname.'\')">'.$LDExtraNotes.': <img '.createComIcon($root_path,'clip2.gif','0').'  alt="'.str_replace("~tagword~",$LDExtraNotes,$LDClk2Enter).'" ></a>';
+}else{
+	echo $LDExtraNotes;
+}
+	if(is_object($lot_mat)){
+			while($buff=$lot_mat->FetchRow()){
+				echo '<br>'.hilite(nl2br($buff['notes']));
+			}
+		}
+
+echo '</td>';
 		
 // ************** medication ************************
-if($content[medication]) $mdx=explode("~",$content[medication]);
-	else $mdx[0]=0;
-
-
-// check if element number exists else set to 10
-if(strchr($mdx[0],"|")||(!$mdx[0])) $maxmedx=10;
- else
- {
- 	$maxmedx=(int) trim($mdx[0]);
-	array_splice($mdx,0,1);
+if(is_object($medis)){
+	$maxmedx=$medis->RecordCount();
+}else{
+	$maxmedx=10;
 }
-
+if(!$maxmedx||$maxmedx<10) $maxmedx=10;
 
 echo '
 		<td bgcolor="#ffffff" ><font size=1 face="verdana,arial" ><nobr>';
@@ -592,12 +638,12 @@ echo '
 	<table border="0" cellpadding="0"  cellspacing="1" width="100%">';
 $toggle=0;
 for ($i=0;$i<$maxmedx;$i++){
-		$m=explode("|",$mdx[$i]);
+		$m=$medis->FetchRow();
 		if ($toggle) $bgc="#efefef"; else $bgc="#ffffff";
 		echo '<tr><td ';
-		if($m[1]) 
+		if($m['article']) 
 		{
-			switch($m[3])
+			switch($m['color_marker'])
 			{
 				case "n": echo ' bgcolor="'.$bgc.'"'; $cat[$i]="n"; break;
 				case "a": echo ' bgcolor="#00ff00"'; $cat[$i]="a";break;
@@ -609,7 +655,7 @@ for ($i=0;$i<$maxmedx;$i++){
 		}
 		else echo  'bgcolor='.$bgc;
 		echo ' class="a10">';
-		if($m[1]) echo $m[1]; else echo '&nbsp;';
+		if($m['article']) echo $m['article'].' '.$m['dosage']; else echo '&nbsp;';
 		echo '
 			</td></tr>';
 		echo "\n";
@@ -619,8 +665,6 @@ echo '</table>
 </td>
   </tr>
 </table>';
-
-	
 echo	'</td>';
 
 // ************** iv zugang dailydose ************************
@@ -629,7 +673,7 @@ $actjahr=$jahr;
 for ($i=$tag,$acttag=$tag,$d=0;$i<($tag+7);$i++,$d++,$acttag++)
 {
 	aligndate(&$acttag,&$actmonat,&$actjahr); // function to align the date
-	$r=getdata(&$content[iv_needle],$acttag,$actmonat,$actjahr);
+	$r=&getdata($daily_iv,$i,$kmonat,$jahr,1);
 	echo '
 	<td valign="bottom" ';
 	if($r) echo "bgcolor=#ff99cc"; else echo "bgcolor=white";
@@ -641,22 +685,37 @@ for ($i=$tag,$acttag=$tag,$d=0;$i<($tag+7);$i++,$d++,$acttag++)
 
 	if($r)  echo $r;
 		else
-		 if($edit) echo '<img src="../../gui/img/common/default/pixel.gif" width="95" height="12"  align="absmiddle"  border=0 alt="'.str_replace("~tagword~",$LDIvPort,$LDClk2EnterDaily).'">';
+		 if($edit) echo '<img src="../../gui/img/common/default/pixel.gif" width="95" height="9"  align="absmiddle"  border=0 alt="'.str_replace("~tagword~",$LDIvPort,$LDClk2EnterDaily).'">';
 	if($edit) echo '</a>';
 	
 // ************** medication dailydose ************************
-	$dosebuf=getdata(&$content[medication_dailydose],$acttag,$actmonat,$actjahr);
-	$dosis=explode("|",$dosebuf);
-	
+	//$dosis=&getdata($daily_medis,$acttag,$actmonat,$actjahr);
+	$date=date('Y-m-d',mktime(0,0,0,$kmonat,$i,$jahr));
+	$toggle=0;
+	$dosis=array();
 	echo '
 	<table border=0 border="0" cellpadding="0"  cellspacing="0" width="100%">
   <tr>
     <td bgcolor="#cfcfcf">
 	<table border="0" cellpadding="0"  cellspacing="1" width="100%">';
+	if(is_object($medis)) $medis->MoveFirst(); // reset medication object
 	for ($j=0;$j<$maxmedx;$j++){
 		if ($toggle) $bgc="#efefef"; else $bgc="#ffffff";
 		echo '<tr><td ';
-		switch($cat[$j])
+		$ok=false;
+		if(is_object($daily_medis)&&is_object($medis)){
+			$med=$medis->FetchRow();
+			while($dosis=$daily_medis->FetchRow()){
+				if(($dosis['date']==$date)&&($dosis['nr']==$med['nr'])){
+				//if(($dosis['date']==$date)){
+					$ok=true;
+					break;
+				}
+			}
+			$daily_medis->MoveFirst();
+		}
+		//switch($med['color_marker'])  // <== use this line if the entire row must have marker color
+		switch($dosis['color_marker']) // <== use this line if only the non-empty block must have marker color
 			{
 				case "n": echo ' bgcolor="'.$bgc.'"';break;
 				case "a": echo ' bgcolor="#00ff00"';break;
@@ -665,15 +724,17 @@ for ($i=$tag,$acttag=$tag,$d=0;$i<($tag+7);$i++,$d++,$acttag++)
 				case "i": echo ' bgcolor="#ff6699"'; break;
 				default:echo ' bgcolor="'.$bgc.'"';
 			}
-	echo ' class="a10">&nbsp;';
-	if($edit) echo '<a href="javascript:popgetdailymedx(\'medication\',\''.$pn.'\',\''.$actjahr.'\',\''.$actmonat.'\',\''.$acttag.'\',\''.($d+$tagnamebuf).'\',\''.$jahr.'\',\''.$kmonat.'\',\''.$tag.'\',\''.$tagname.'\')" title="'.str_replace("~tagword~",$LDMedication,$LDClk2PlanDaily).'">';
+
+		echo ' class="a10">&nbsp;';
+		if($edit) echo '<a href="javascript:popgetdailymedx(\'medication\',\''.$pn.'\',\''.$actjahr.'\',\''.$actmonat.'\',\''.$acttag.'\',\''.($d+$tagnamebuf).'\',\''.$jahr.'\',\''.$kmonat.'\',\''.$tag.'\',\''.$tagname.'\')" title="'.str_replace("~tagword~",$LDMedication,$LDClk2PlanDaily).'">';
 	
-	if($dosis[$j]) echo $dosis[$j]; else echo'<img src="../../gui/img/common/default/pixel.gif" width="90" height="12"  align="absmiddle"  border=0>';
-	if($edit) echo '</a>';
-	echo '</td></tr>';
+	
+		if($ok) echo $dosis['short_notes']; else echo'<img src="../../gui/img/common/default/pixel.gif" width="90" height="9"  align="absmiddle"  border=0>';
+		if($edit) echo '</a>';
+		echo '</td></tr>';
 		$toggle=!$toggle;	
 		echo "\n";
-		}
+	}
 		echo '</table>
 		</td>
   </tr>
@@ -698,10 +759,8 @@ echo
 </ul>
 </td>
 
-
 </tr>
 </table>        
-<hr>
 <?php
 require($root_path.'include/inc_load_copyrite.php');
 ?>

@@ -123,6 +123,10 @@ if($dblink_ok)
 							      if($ergebnis=$db->Execute($sql))
        							  {
 									//echo $sql;
+								  	// Load the visual signalling functions
+									include_once($root_path.'include/inc_visual_signalling_fx.php');
+									// Set the visual signal 
+									setEventSignalColor($pn,SIGNAL_COLOR_DIAGNOSTICS_REQUEST);									
 									
 									 header("location:".$root_path."modules/laboratory/labor_test_request_aftersave.php".URL_REDIRECT_APPEND."&edit=$edit&saved=insert&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=$target&noresize=$noresize&batch_nr=$batch_nr");
 									 exit;
@@ -155,6 +159,10 @@ if($dblink_ok)
 							      if($ergebnis=$db->Execute($sql))
        							  {
 									//echo $sql;
+								  	// Load the visual signalling functions
+									include_once($root_path.'include/inc_visual_signalling_fx.php');
+									// Set the visual signal 
+									setEventSignalColor($pn,SIGNAL_COLOR_DIAGNOSTICS_REQUEST);									
 									
 									 header("location:".$root_path."modules/laboratory/labor_test_request_aftersave.php".URL_REDIRECT_APPEND."&edit=$edit&saved=update&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=$target&batch_nr=$batch_nr&noresize=$noresize");
 									 exit;
@@ -385,7 +393,7 @@ elseif(!$read_form && !$no_proc_assist)
         elseif($pn=="")
 		{
 		    $searchmask_bgcolor="#f3f3f3";
-            include("inc_test_request_searchmask.php");
+            include($root_path.'include/inc_test_request_searchmask.php');
         }
         ?>
      </td> 

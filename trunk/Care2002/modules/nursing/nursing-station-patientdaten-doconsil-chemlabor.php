@@ -21,76 +21,68 @@ function prepareTestElements()
 {
     global $HTTP_POST_VARS, $paramlist, $sday, $sample_time;
 	
-			                   /* Prepare the parameters 
-							   *  Check the first char of the POST_VARS. Concatenate all POST vars with
-							   *  the content having "_" as the first character , then save it to  "parameters"
-							   */
-							   $paramlist="";
-							   
-							   while(list($x,$v)=each($HTTP_POST_VARS))
-							   {
-							      if((substr($x,0,1)=="_")&&($HTTP_POST_VARS[$x]==1))
-								  {
-								    if($paramlist=="") $paramlist=$x."=1";
-								      else $paramlist.="&".$x."=1";
-								  }
-								}
+	/* Prepare the parameters 
+	*  Check the first char of the POST_VARS. Concatenate all POST vars with
+	*  the content having "_" as the first character , then save it to  "parameters"
+	*/
+	$paramlist='';
+					   
+	while(list($x,$v)=each($HTTP_POST_VARS)){
+    	if((substr($x,0,1)=='_')&&($HTTP_POST_VARS[$x]==1)){
+	    	if($paramlist==''){
+				$paramlist=$x.'=1';
+			}else{
+				$paramlist.='&'.$x.'=1';
+			}
+		}
+	}
 								
-							/* If the paramlist is not empty then the user had set a test parameter,
-							*  go ahead and prepare the other data for saving
-							*  otherwise, the user sent a form without setting any test parameter.
-							*  In such a case, do not save data and show the form again.
-							*/
-							 if($paramlist!="")
-							 {
-								/* Prepare the sampling minutes */
-								for($i=15;$i<46;$i=$i+15)
-								{
-								   $hmin="min_".$i;
-								   if($HTTP_POST_VARS[$hmin])
-								   {
-								      $tmin=$i;
-									  break;
-									}
-								}
-								if(!$tmin) $tmin=0;
+	/* If the paramlist is not empty then the user had set a test parameter,
+	*  go ahead and prepare the other data for saving
+	*  otherwise, the user sent a form without setting any test parameter.
+	*  In such a case, do not save data and show the form again.
+	*/
+	if($paramlist!=''){
+		/* Prepare the sampling minutes */
+		for($i=15;$i<46;$i=$i+15){
+			$hmin="min_".$i;
+			if($HTTP_POST_VARS[$hmin]){
+				$tmin=$i;
+				break;
+			}
+		}
+		if(!$tmin) $tmin=0;
+							
+		/* Prepare the sampling ten hours */
+		if($HTTP_POST_VARS['hrs_20']) $th=20;
+			elseif($HTTP_POST_VARS['hrs_10']) $th=10;
 								
-								/* Prepare the sampling ten hours */
-                                if($HTTP_POST_VARS['hrs_20']) $th=20;
-								 elseif($HTTP_POST_VARS['hrs_10']) $th=10;
+		/* Prepare the sampling one hours */
+		for($i=0;$i<10;$i++){
+			$h1s='hrs_'.$i;
+			if($HTTP_POST_VARS[$h1s]){
+				$to=$i;
+				break;
+			}
+		}
+		if(!$to) $to=0;
 								
-								/* Prepare the sampling one hours */
-								for($i=0;$i<10;$i++)
-								{
-								   $h1s="hrs_".$i;
-								   if($HTTP_POST_VARS[$h1s])
-								   {
-									  $to=$i;
-									  break;
-									}
-								}
-								if(!$to) $to=0;
+		/* Prepare the weekday */
+		for($i=0;$i<7;$i++){
+			$tday="day_".$i;
+			if($HTTP_POST_VARS[$tday]){
+				$sday=$i;
+				break;
+			}
+		}
 								
-								/* Prepare the weekday */
-								for($i=0;$i<7;$i++)
-								{
-								   $tday="day_".$i;
-								   if($HTTP_POST_VARS[$tday])
-								   {
-									  $sday=$i;
-									  break;
-									}
-								}
+		/* Finalize sampling time in TIME format */
+		$sample_time=($th+$to).":".$tmin.":00";
 								
-								/* Finalize sampling time in TIME format */
-								$sample_time=($th+$to).":".$tmin.":00";
-								
-								return 1;
-							}
-							else
-							{ 
-							   return 0;
-							}
+		return 1;
+	}else{ 
+		return 0;
+	}
 }
 
 /* Start initializations */
@@ -178,41 +170,6 @@ if($dblink_ok){
 		case 'save':
 							  if(prepareTestElements())
 							  {
-/*							     $sql="INSERT INTO care_test_request_".$db_request_table." 
-										(
-										batch_nr,	   
-										encounter_nr,		
-										room_nr,
-										dept,		  
-										parameters,	
-										doctor_sign,
-										highrisk,
-										notes,
-										send_date,	
-										sample_time, 
-										sample_weekday,
-										status,		 
-										create_id, 
-										create_time
-										)
-									 	VALUES
-										(
-										'".$lang."',  
-										'".$batch_nr."',   
-										'".$pn."',		  
-										'".addslashes($room_nr)."',
-										'".$dept."',
-										'".$paramlist."',
-										'".htmlspecialchars($doctor_sign)."',
-										'".$highrisk."',
-										'".htmlspecialchars($add_notes)."',
-										'".date('Y-m-d H:i:s')."',
-										'".$sample_time."',
-										'".$sday."',
-										'".$status."',  
-										'".$HTTP_COOKIE_VARS[$local_user.$sid]."', 
-										NULL
-										)";*/
 								$data['batch_nr']=$batch_nr;
 								$data['encounter_nr']=$pn;
 								$data['room_nr']=$room_nr;
@@ -231,6 +188,10 @@ if($dblink_ok){
 								$data['create_time']='NULL';
 								$diag_obj->setDataArray($data);
 							    if($diag_obj->insertDataFromInternalArray()){
+								  	// Load the visual signalling functions
+									include_once($root_path.'include/inc_visual_signalling_fx.php');
+									// Set the visual signal 
+									setEventSignalColor($pn,SIGNAL_COLOR_DIAGNOSTICS_REQUEST);									
 									//echo $sql;
 									 header("location:".$root_path."modules/laboratory/labor_test_request_aftersave.php".URL_REDIRECT_APPEND."&edit=$edit&saved=insert&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=chemlabor&noresize=$noresize&batch_nr=$batch_nr");
 									 exit;
@@ -244,22 +205,7 @@ if($dblink_ok){
 							
 			case 'update':
 							  if(prepareTestElements()){
-/*							     $sql="UPDATE care_test_request_".$db_request_table."  SET
-										room_nr='".addslashes($room_nr)."',
-										dept='".$dept."',
-										parameters='".$paramlist."',
-										doctor_sign='".htmlspecialchars($doctor_sign)."',
-										highrisk='".$highrisk."',
-										notes='".htmlspecialchars($add_notes)."',
-										sample_time='".$sample_time."',
-										sample_weekday='".$sday."',
-										status='".$status."',
-										modify_id='".$HTTP_COOKIE_VARS[$local_user.$sid]."'
-										WHERE batch_nr='".$batch_nr."'";
-									
-							      if($ergebnis=$db->Execute($sql))
-       							  {
-*/										//echo $sql;
+								//echo $sql;
 								$data['room_nr']=$room_nr;
 								$data['dept_nr']=$dept_nr;
 								$data['parameters']=$paramlist;
@@ -274,6 +220,10 @@ if($dblink_ok){
 								$diag_obj->setDataArray($data);
 								$diag_obj->setWhereCond(" batch_nr=$batch_nr");
 							    if($diag_obj->updateDataFromInternalArray($batch_nr)){									
+								  	// Load the visual signalling functions
+									include_once($root_path.'include/inc_visual_signalling_fx.php');
+									// Set the visual signal 
+									setEventSignalColor($pn,SIGNAL_COLOR_DIAGNOSTICS_REQUEST);									
 									 header("location:".$root_path."modules/laboratory/labor_test_request_aftersave.php".URL_REDIRECT_APPEND."&edit=$edit&saved=update&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=chemlabor&batch_nr=$batch_nr&noresize=$noresize");
 									 exit;
 								  }

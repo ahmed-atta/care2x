@@ -21,10 +21,10 @@ require_once($root_path.'include/inc_config_color.php');
 
 $toggler=0;
 $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
-
-$dbtable='care_nursing_station';
-
 /* Establish db connection */
+
+/*$dbtable='care_nursing_station';
+
 if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
 if($dblink_ok) {
          $sql="SELECT item, station, dept FROM $dbtable ORDER BY station";
@@ -33,10 +33,16 @@ if($dblink_ok) {
         } else echo "$sql<br>$LDDbNoRead"; 
 } else { 
     echo "$LDDbNoLink<br>"; 
-} 
+} */
+
+require_once($root_path.'include/care_api_classes/class_ward.php');
+// Load the wards info 
+$ward_obj=new Ward;
+$items='nr,ward_id';
+$ward_info=&$ward_obj->getAllWardsItemsObject($items);
+
 $HTTP_SESSION_VARS['sess_file_return']=$top_dir.basename(__FILE__);
 ?>
-
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
@@ -71,6 +77,61 @@ require($root_path.'include/inc_css_a_hilitebu.php');
             <TABLE cellSpacing=1 cellPadding=3 width=600 bgColor=#999999 
             border=0>
               <TBODY>
+              
+              <TR bgColor="#eeeeee"><td align=center><img <?php echo createComIcon($root_path,'team_wksp.gif','0') ?>></td>
+                <TD vAlign=top width="150"><FONT 
+                  face="Verdana,Helvetica,Arial" size="2" color="<?php echo $cfg['body_txtcolor']; ?>"><B>
+				    <nobr><?php echo $LDNursingStations ?>&nbsp;<img <?php echo createComIcon($root_path,'dwn-arrow-grn.gif','0','absmiddle') ?>></nobr>
+				  </B></FONT></TD>
+                <TD><FONT face="Verdana,Helvetica,Arial" 
+                  size=2><?php echo $LDNursingStationsTxt ?></FONT></TD></TR>
+              <TR bgColor="#dddddd" >
+                <TD colSpan=3>
+				  <FONT face="Verdana,Helvetica,Arial" 
+                  size=2>
+				  <ul>
+				  <?php
+				  	 if(is_object($ward_info))
+					 {
+						$i=0;
+						while($stations=$ward_info->FetchRow())
+						{
+
+							echo '<a href="'.strtr('nursing-station-pass.php'.URL_APPEND.'&rt=pflege&edit=1&station='.$stations['ward_id'].'&location_id='.$stations['ward_id'].'&ward_nr='.$stations['nr'],' ',' ').'"><font color="green"><b>'.strtoupper($stations['ward_id']).'</b></font></a> &nbsp;';
+							$i++;
+							if($i==4)
+							{
+								echo "<br>\r\n";
+								$i=0;
+							}
+						}
+					 }
+					 else
+					 {
+					     echo $LDNoWardsYet.'<br><img '.createComIcon($root_path,'redpfeil.gif','0','absmiddle').'> <a href="nursing-station-manage-pass.php'.URL_APPEND.'">'.$LDClk2CreateWard.'</a>';
+					  }
+	/*			  	 if(!empty($rows))
+					 {
+						$i=0;
+						while($stations=$ergebnis->FetchRow())
+						{
+
+							echo '<a href="'.strtr('nursing-station-pass.php'.URL_APPEND.'&rt=pflege&edit=1&station='.$stations['station'],' ',' ').'">'.$stations['station'].'</a> &nbsp;';
+							$i++;
+							if($i==4)
+							{
+								echo "<br>\r\n";
+								$i=0;
+							}
+						}
+					 }
+					 else
+					 {
+					     echo $LDNoWardsYet.'<br><img '.createComIcon($root_path,'redpfeil.gif','0','absmiddle').'> <a href="nursing-station-manage-pass.php'.URL_APPEND.'">'.$LDClk2CreateWard.'</a>';
+					  }*/
+				?>
+			</UL>  
+				  </TD></TR>
               <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'eye_s.gif','0') ?> border=0 width=16 height=16></td>
                 <TD vAlign=top width=150><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B><nobr>
@@ -156,46 +217,11 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><nobr><?php echo $LDNursingForumTxt ?></nobr></FONT></TD></TR>
-              <TR bgColor=#dddddd height=1>
+<!--               <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
                   width=5></TD></TR>
-              
-              <TR bgColor="#eeeeee"><td align=center><img <?php echo createComIcon($root_path,'team_wksp.gif','0') ?>></td>
-                <TD vAlign=top width="150"><FONT 
-                  face="Verdana,Helvetica,Arial" size="2" color="<?php echo $cfg['body_txtcolor']; ?>"><B>
-				    <nobr><?php echo $LDNursingStations ?>&nbsp;<img <?php echo createComIcon($root_path,'dwn-arrow-grn.gif','0','absmiddle') ?>></nobr>
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDNursingStationsTxt ?></FONT></TD></TR>
-              <TR bgColor="#dddddd" >
-                <TD colSpan=3>
-				  <FONT face="Verdana,Helvetica,Arial" 
-                  size=2>
-				  <ul>
-				  <?php
-				  	 if(!empty($rows))
-					 {
-						$i=0;
-						while($stations=$ergebnis->FetchRow())
-						{
-
-							echo '<a href="'.strtr('nursing-station-pass.php'.URL_APPEND.'&rt=pflege&edit=1&station='.$stations['station'],' ',' ').'">'.$stations['station'].'</a> &nbsp;';
-							$i++;
-							if($i==4)
-							{
-								echo "<br>\r\n";
-								$i=0;
-							}
-						}
-					 }
-					 else
-					 {
-					     echo $LDNoWardsYet.'<br><img '.createComIcon($root_path,'redpfeil.gif','0','absmiddle').'> <a href="nursing-station-manage-pass.php'.URL_APPEND.'">'.$LDClk2CreateWard.'</a>';
-					  }
-				?>
-			</UL>  
-				  </TD></TR>
+ -->
 		</TBODY>
 		</TABLE>
 		</TD></TR>

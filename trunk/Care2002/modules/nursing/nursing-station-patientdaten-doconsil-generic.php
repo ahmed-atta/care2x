@@ -34,9 +34,9 @@ else
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
-$thisfile="nursing-station-patientdaten-doconsil-generic.php";
+$thisfile=basename(__FILE__);
 
-$bgc1='#bbdbc4'; 
+$bgc1='#bbdbc4'; // <= Set the background color of the form here
 $abtname=get_meta_tags($root_path."global_conf/$lang/konsil_tag_dept.pid");
 
 $target='generic';
@@ -44,22 +44,21 @@ $target='generic';
 $db_request_table=$target;
 
 $formtitle=$abtname[$konsil];
-
-define('_BATCH_NR_INIT_',50000000); 
+/*
+*  The following are  batch nr inits for each type of test request
+*   chemlabor = 10000000; patho = 20000000; baclabor = 30000000; blood = 40000000; generic = 50000000; 
+*/
+define('_BATCH_NR_INIT_',50000000);  // define the initial batch nr for generic forms
 
 /* Create department object and load all medical depts */
 require_once($root_path.'include/care_api_classes/class_department.php');
 $dept_obj= new Department;
 $medical_depts=$dept_obj->getAllMedical();
-/*
-*  The following are  batch nr inits for each type of test request
-*   chemlabor = 10000000; patho = 20000000; baclabor = 30000000; blood = 40000000; generic = 50000000; 
-*/
+
 /* Here begins the real work */
 /* Establish db connection */
 if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok)
-{	
+if($dblink_ok){	
     /* Load the date format functions and get the local format */
 	require_once($root_path.'include/inc_date_format_functions.php');
      /* Check for the patient number = $pn. If available get the patients data, otherwise set edit to 0 */
@@ -91,13 +90,11 @@ if($dblink_ok)
 	   }		
 	}
 	   
-	 if(!isset($mode))   $mode='';
+	if(!isset($mode))   $mode='';
 		
-		  switch($mode)
-		  {
-				     case 'save':
-							
-                                 $sql="INSERT INTO care_test_request_".$db_request_table." 
+	switch($mode)
+	{
+	     case 'save':	$sql="INSERT INTO care_test_request_".$db_request_table." 
 										 (
 										 batch_nr, encounter_nr, testing_dept, visit, 
 										 order_patient, diagnosis_quiry, send_date, 
@@ -114,8 +111,12 @@ if($dblink_ok)
 										 '".$HTTP_SESSION_VARS['sess_user_name']."', '".$HTTP_SESSION_VARS['sess_user_name']."',NULL
 										 )";
 
-							      if($ergebnis=$db->Execute($sql))
+								if($ergebnis=$db->Execute($sql))
        							  {
+								  	// Load the visual signalling functions
+									include_once($root_path.'include/inc_visual_signalling_fx.php');
+									// Set the visual signal 
+									setEventSignalColor($pn,SIGNAL_COLOR_DIAGNOSTICS_REQUEST);									
 									//echo $sql;
 									 header("location:".$root_path."modules/laboratory/labor_test_request_aftersave.php?sid=".$sid."&lang=".$lang."&edit=".$edit."&saved=insert&pn=".$pn."&station=".$station."&user_origin=".$user_origin."&status=".$status."&target=".$target."&dept_nr=".$dept_nr."&noresize=".$noresize."&batch_nr=".$batch_nr);
 									 exit;
@@ -128,7 +129,7 @@ if($dblink_ok)
 								
 								break; // end of case 'save'
 								
-		     case 'update':
+			case 'update':
 			 
 							      $sql="UPDATE care_test_request_".$db_request_table." SET 
 											testing_dept = '".$dept_nr."', 
@@ -145,6 +146,10 @@ if($dblink_ok)
 									  							
 							      if($ergebnis=$db->Execute($sql))
        							  {
+								  	// Load the visual signalling functions
+									include_once($root_path.'include/inc_visual_signalling_fx.php');
+									// Set the visual signal 
+									setEventSignalColor($pn,SIGNAL_COLOR_DIAGNOSTICS_REQUEST);									
 									//echo $sql;
 									 header("location:".$root_path."modules/laboratory/labor_test_request_aftersave.php?sid=".$sid."&lang=".$lang."&edit=".$edit."&saved=update&pn=".$pn."&station=".$station."&user_origin=".$user_origin."&status=".$status."&target=".$target."&dept_nr=".$dept_nr."&batch_nr=".$batch_nr."&noresize=".$noresize);
 									 exit;
@@ -172,30 +177,28 @@ if($dblink_ok)
 						 break; ///* End of case 'edit': */
 			 default: $mode='';
 						   
-		  }// end of switch($mode)
-  
-          if(!$mode) /* Get a new batch number */
-		  {
-		                $sql="SELECT batch_nr FROM care_test_request_".$db_request_table." ORDER BY batch_nr DESC LIMIT 1";
-		                if($ergebnis=$db->Execute($sql))
-       		            {
-				            if($batchrows=$ergebnis->RecordCount())
-					        {
-						       $bnr=$ergebnis->FetchRow();
-							   $batch_nr=$bnr['batch_nr'];
-							   if(!$batch_nr) $batch_nr=_BATCH_NR_INIT_; else $batch_nr++;
-					         }
-					         else
-					         {
-					            $batch_nr=_BATCH_NR_INIT_;
-					          }
-			             }
-			               else {echo "<p>$sql<p>$LDDbNoRead"; exit;}
-						 $mode="save";   
-		   }	    
+	}// end of switch($mode)
+	
+	/* Get a new batch number */
+	if(!$mode){
+		$sql="SELECT batch_nr FROM care_test_request_".$db_request_table." ORDER BY batch_nr DESC LIMIT 1";
+		if($ergebnis=$db->Execute($sql)){
+			if($batchrows=$ergebnis->RecordCount()){
+				$bnr=$ergebnis->FetchRow();
+				$batch_nr=$bnr['batch_nr'];
+				if(!$batch_nr) $batch_nr=_BATCH_NR_INIT_; else $batch_nr++;
+			}else{
+				$batch_nr=_BATCH_NR_INIT_;
+			}
+		}else{
+			echo "<p>$sql<p>$LDDbNoRead";
+			exit;
+		}
+		$mode="save";   
+	}	    
+}else{
+	echo "$LDDbNoLink<br>$sql<br>";
 }
-else 
- { echo "$LDDbNoLink<br>$sql<br>"; }
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">

@@ -10,115 +10,75 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+$lang_tables=array('date_time.php');
 define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
-$thisfile='nursing-getdailybp_t.php';
+$thisfile=basename(__FILE__);
+/* Create charts object */
+require_once($root_path.'include/care_api_classes/class_charts.php');
+$charts_obj= new Charts;
 
-switch($winid)
-{
-	case 'bp_temp': $title=$LDBpTemp;
-							$element='bp_temp';
-							$maxelement=15;
-							break;
-}
+$title=$LDBpTemp;
+$maxelement=10;
 
-$dbtable='care_nursing_station_patients_curve';
 /* Establish db connection */
 if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
 if($dblink_ok){	
-	  /* Load date formatter */
+	/* Load date formatter */
       include_once($root_path.'include/inc_date_format_functions.php');
 	// get orig data
-		if($mode=='save')
+	if($mode=='save'){
+		$saved=0;
+		$data_array=array();
+		$data_array['encounter_nr']=$pn;
+		$data_array['unit_nr']=14; // 14 = mmHg unit of measurement , must be set to local standards
+		$data_array['msr_date']=date('Y-m-d',mktime(0,0,0,$mo,$dy,$yr)); 
+		// Save the blood pressure data
+		for($i=0;$i<$maxelement;$i++)
 		{
-				// check if entry is already existing
-				$sql="SELECT $element FROM $dbtable WHERE patnum='$pn'";
-				if($ergebnis=$db->Execute($sql))
-       			{
-					//echo $sql." checked <br>";
-					//$bbuf="";
-					//$tbuf="";
-					for($i=0;$i<$maxelement;$i++)
-					{
-						$tdx="btime".$i;$ddx="bdata".$i;
-						if(!$$tdx || !$$ddx) continue;
-						$bbuf=$bbuf."B".$$tdx."b".$$ddx;
-					}
-					for($i=0;$i<$maxelement;$i++)
-					{
-						$tdx="ttime".$i;$ddx="tdata".$i;
-						if(!$$tdx || !$$ddx) continue;
-						$tbuf=$tbuf."T".$$tdx."t".$$ddx;
-					}
-					$newdata=strtr(($bbuf."~".$tbuf),",",".");
-					if($newdata) $dbuf=strtr("sd=$yr$mo$dy&rd=$dy.$mo.$yr&e=$newdata\r\n"," <>","+()");
-							else $dbuf="";
-					
-					$rows=$ergebnis->RecordCount();
-					if($rows==1)
-						{
-							$content=$ergebnis->FetchRow();
-							if($content[$element]!="")
-							{
-								$cbuf="sd=$yr$mo$dy&rd=$dy.$mo.$yr";
-								//echo $content[$element]."<br>".$cbuf;
-								if(stristr($content[$element],$cbuf))
-								{
-									$ebuf=explode("_",$content[$element]);
-									for($i=0;$i<sizeof($ebuf);$i++)
-									{
-										//echo $v." v <br>";
-										if(stristr($ebuf[$i],$cbuf))
-										{ $ebuf[$i]=$dbuf; 
-											$dbuf=implode("_",$ebuf);
-											break;
-										}
-									}
-								}
-								 else $dbuf=$content[$element]."_".$dbuf;		
-							}		
-							// $dbuf=htmlspecialchars($dbuf);
-							$sql="UPDATE $dbtable SET $element='$dbuf'	WHERE patnum='$pn'";
-							if($ergebnis=$db->Execute($sql))
-       							{
-									//echo $sql." new update <br>";
-									
-									header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=1&pn=$pn&station=$station&winid=$winid&yr=$yr&mo=$mo&dy=$dy&dyidx=$dyidx&yrstart=$yrstart&monstart=$monstart&dystart=$dystart&dyname=$dyname");
-								}
-								else {echo "<p>$sql$LDDbNoRead";}
-						} // else create new entry
-						else
-						{
-							//$dbuf=strtr("sd=$yr$mo$dy&rd=$dy.$mo.$yr&e=$newdata"," <>","+()")."\r\n";
-							$sql="INSERT INTO $dbtable 
-										(
-										patnum,
-										$element,
-										fe_date
-										)
-									 	VALUES
-										(
-										'$pn',
-										'$dbuf',
-										'".date("d.m.Y")."'
-										)";
+			$tdx="btime".$i;$ddx="bdata".$i;
+			if(empty($$tdx) || empty($$ddx)) continue;
+			//$bbuf=$bbuf."B".$$tdx."b".$$ddx;
+			$data_array['msr_time']=$$tdx;
+			$data_array['value']=$$ddx;
+			//echo $$ddx.$$tdx;
+			if($charts_obj->saveBPFromArray($data_array)) $saved=1;
+		}
+		$data_array['unit_nr']=15; // 15 = Celsius unit of measurement , must be set to local standards
+		// Save the temperature data
+		for($i=0;$i<$maxelement;$i++)
+		{
+			$tdx="ttime".$i;$ddx="tdata".$i;
+			if(empty($$tdx) || empty($$ddx)) continue;
+			//$bbuf=$bbuf."B".$$tdx."b".$$ddx;
+			$data_array['msr_time']=$$tdx;
+			$data_array['value']=$$ddx;
+			if($charts_obj->saveTemperatureFromArray($data_array)) $saved=1;
+		}
+		
+		if($saved){
+			header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=1&pn=$pn&station=$station&winid=$winid&yr=$yr&mo=$mo&dy=$dy&dyidx=$dyidx&yrstart=$yrstart&monstart=$monstart&dystart=$dystart&dyname=$dyname");
+			exit;
+		}	
+	}else{ // end of if(mode==save)
+		include_once($root_path.'include/inc_editor_fx.php');
+		include_once($root_path.'include/inc_date_format_functions.php');
+		$bpcount=0;
+		$tempcount=0;
+		$chart_bp=$charts_obj->getDayBP($pn,date('Y-m-d',mktime(0,0,0,$mo,$dy,$yr)));		
+		if(is_object($chart_bp)){
+			$bpcount=$chart_bp->RecordCount();
+		}	
+		$chart_temp=$charts_obj->getDayTemperature($pn,date('Y-m-d',mktime(0,0,0,$mo,$dy,$yr)));		
+		if(is_object($chart_temp)){
+			$tempcount=$chart_temp->RecordCount();
+		}	
 
-							if($ergebnis=$db->Execute($sql))
-       							{
-									//echo $sql." new insert <br>";
-									
-									header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=1&pn=$pn&station=$station&winid=$winid&yr=$yr&mo=$mo&dy=$dy&dyidx=$dyidx&yrstart=$yrstart&monstart=$monstart&dystart=$dystart&dyname=$dyname");
-								}
-								else {echo "<p>$sql$LDDbNoSave";}
-						}//end of else
-					} // end of if ergebnis
-		 }// end of if(mode==save)
-		 else
-		 {
-		 	$sql="SELECT * FROM $dbtable WHERE patnum='$pn'";
+
+/*		 	$sql="SELECT * FROM $dbtable WHERE patnum='$pn'";
 
 			if($ergebnis=$db->Execute($sql))
        		{
@@ -128,11 +88,11 @@ if($dblink_ok){
 					//echo $sql."<br>";
 				}
 			}
-				else {echo "<p>$sql$LDDbNoRead";}
-	 	}
-	}
-	else 
-		{ echo "$LDDbNoLink<br>$sql<br>"; }
+				else {echo "<p>$sql$LDDbNoRead";}*/
+	 }
+}else{
+	echo "$LDDbNoLink<br>$sql<br>";
+}
 ?>
 <HTML>
 <HEAD>
@@ -169,14 +129,14 @@ div.box { border: double; border-width: thin; width: 100%; border-color: black; 
 </style>
 
 </HEAD>
-<BODY  bgcolor="#dfdfdf" TEXT="#000000" LINK="#0000FF" VLINK="#800080"   topmargin="0" marginheight="0" 
+<BODY  bgcolor="#99ccff" TEXT="#000000" LINK="#0000FF" VLINK="#800080"   topmargin="0" marginheight="0" 
 onLoad="<?php if($saved) echo "parentrefresh();"; ?>if (window.focus) window.focus(); window.focus();" >
 <table border=0 width="100%">
   <tr>
     <td><b><font face=verdana,arial size=5 color=maroon>
 <?php 
 	echo $title.'<br><font size=4>';	
-	echo $LDFullDayName[$dyidx].' ('.formatDate2Local("$yr-$mo-$dy",$date_format).')</font>';
+	echo $LDFullDayName[$dyidx].' ('.formatDate2Local(date('Y-m-d',mktime(0,0,0,$mo,$dy,$yr)),$date_format).')</font>';
 ?>
 	</font></b>
 	</td>
@@ -188,33 +148,95 @@ onLoad="<?php if($saved) echo "parentrefresh();"; ?>if (window.focus) window.foc
 <font face=verdana,arial size=3 >
 <form name="infoform" action="<?php echo $thisfile ?>" method="post" onSubmit="return pruf(this)">
 <font face=verdana,arial size=2 >
-<?php
-$cbuf="sd=$yr$mo$dy&rd=$dy.$mo.$yr";
-	$arr=explode("_",$result[$element]);
-		while(list($x,$v)=each($arr))
-		{
-			if(stristr($v,$cbuf))
-			{
-				$sbuf=$v;
-				break;
-			}
-		}
 
-
-if ($sbuf) 	parse_str($sbuf,$abuf);
-//echo $abuf[e]."<br>";
-$b_t=explode("~",trim($abuf[e]));
-//echo $b_t[0]." ".$b_t[1];
-?>
 
 <table border=0 width=100% bgcolor="#6f6f6f" cellspacing=0 cellpadding=0>
   <tr>
     <td>
 <table border=0 width=100% cellspacing=1>
+<?php
+if($bpcount||$tempcount){
+	$rcount=($bpcount<$tempcount)?$tempcount:$bpcount;
+?>
+  <tr>
+    <td align=center bgcolor="#ffffff">
+	
+<?php
+	$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/tableHeaderbg3.gif"';
+?>
+ <table border=0 cellpadding=1 cellspacing=1 width=100%>
+  <tr bgcolor="#f6f6f6">
+    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDTime; ?></td>
+    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDCurrentEntry; ?></td>
+  </tr>
+<?php
+	$toggle=0;
+	$bb=array();
+	for($i=0;$i<$rcount;$i++){
+		if($bpcount) $bb=$chart_bp->FetchRow();	
+		if($toggle) $bgc='#efefef';
+			else $bgc='#f0f0f0';
+		$toggle=!$toggle;	
+?>
+
+  <tr  bgcolor="<?php echo $bgc; ?>"  valign="top">
+    <td><FONT SIZE=1  FACE="Arial" color="#000033">
+	<?php 
+		if(!empty($bb['msr_time'])) echo $bb['msr_time']; 
+	?>
+	</td>
+    <td><FONT SIZE=-1  FACE="Arial"><?php if($bb['value']) echo $bb['value'];else echo '&nbsp;'; ?></td>
+  </tr>
+
+<?php
+	}
+?>
+</table>
+
+	</td>
+    <td align=center bgcolor="#ffffff" >
+	
+	<table border=0 cellpadding=1 cellspacing=1 width=100%>
+  <tr bgcolor="#f6f6f6">
+    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDTime; ?></td>
+    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDCurrentEntry; ?></td>
+  </tr>
+<?php
+	$toggle=0;
+	$bb=array();
+	for($i=0;$i<$rcount;$i++){
+		if($tempcount) $bb=$chart_temp->FetchRow();
+		if($toggle) $bgc='#efefef';
+			else $bgc='#f0f0f0';
+		$toggle=!$toggle;
+?>
+
+  <tr  bgcolor="<?php echo $bgc; ?>"  valign="top">
+    <td><FONT SIZE=1  FACE="Arial" color="#000033">
+	<?php 
+		if(!empty($bb['msr_time'])) echo $bb['msr_time']; 
+	?>
+	</td>
+    <td><FONT SIZE=-1  FACE="Arial"><?php if($bb['value']) echo $bb['value']; else echo '&nbsp;';?></td>
+  </tr>
+
+<?php
+	}
+?>
+</table>
+	
+	</td>
+  </tr>
+<?php
+}
+?>
+
   <tr>
     <td  align=center bgcolor="#cfcfcf" class="v13"><font color="#ff0000"><?php echo $LDBp ?></td>
     <td  align=center bgcolor="#cfcfcf" class="v13"><font color="#0000ff"><?php echo $LDTemp ?></td>
   </tr>
+
+
   <tr>
     <td align=center bgcolor="#ffffff">
 	
@@ -224,18 +246,15 @@ $b_t=explode("~",trim($abuf[e]));
    			 <td  align=center class="v12"><?php echo $LDBp ?>:</td>
 		  </tr>
 			<?php 
-			$b=explode("B",trim($b_t[0]));
-			sort($b,SORT_NUMERIC);
-			if(!$b[0]) array_splice($b,0,1);
-			
+			$bb=array();
 			for($i=0;$i<$maxelement;$i++)
 			{
-				$bb=explode("b",$b[$i]);
+				if($bpcount) $bb=$chart_bp->FetchRow();
 				echo '
  						 <tr>
-   						 <td ><input type="text" name="btime'.$i.'" size=6 maxlength=5 value="'.$bb[0].'" onKeyUp="isvalidtime(this,\''.$lang.'\')">
+   						 <td ><input type="text" name="btime'.$i.'" size=6 maxlength=5 value="'.$bb['msr_time'].'" onKeyUp="isvalidtime(this,\''.$lang.'\')">
         				</td>
-   						 <td class="v12"><input type="text" name="bdata'.$i.'" size=8 maxlength=7 value="'.$bb[1].'">mm/Hg</td>
+   						 <td class="v12"><input type="text" name="bdata'.$i.'" size=8 maxlength=7 value="'.$bb['value'].'">mm/Hg'.$GLOBAL_CONFIG['measure_bp_unit_id'].'</td>
   						</tr>
  						 ';
 				}
@@ -251,18 +270,14 @@ $b_t=explode("~",trim($abuf[e]));
    			 <td  align=center class="v12"><?php echo $LDTemp ?>:</td>
 		  </tr>
 			<?php 
-			$b=explode("T",trim($b_t[1]));
-			sort($b,SORT_NUMERIC);
-			if(!$b[0]) array_splice($b,0,1);
-
 			for($i=0;$i<$maxelement;$i++)
 			{
-				$bb=explode("t",$b[$i]);
+				if($tempcount) $bb=$chart_temp->FetchRow();
 				echo '
  						 <tr>
-   						 <td><input type="text" name="ttime'.$i.'" size=6 maxlength=5 value="'.$bb[0].'" onKeyUp="isvalidtime(this,\''.$lang.'\')">
+   						 <td><input type="text" name="ttime'.$i.'" size=6 maxlength=5 value="'.$bb['msr_time'].'" onKeyUp="isvalidtime(this,\''.$lang.'\')">
         				</td>
-   						 <td class="v12"><input type="text" name="tdata'.$i.'" size=8 maxlength=7 value="'.$bb[1].'">°C</td>
+   						 <td class="v12"><input type="text" name="tdata'.$i.'" size=8 maxlength=7 value="'.$bb['value'].'">°C'.$GLOBAL_CONFIG['measure_temp_unit_id'].'</td>
   						</tr>
   						';
 			}
@@ -275,25 +290,6 @@ $b_t=explode("~",trim($abuf[e]));
 </td>
   </tr>
 </table>
-
-
-
-
-
-
-<?php 	
-	$cbuf="sd=$yr$mo$dy&rd=$dy.$mo.$yr";
-	$arr=explode("_",$result[$element]);
-		while(list($x,$v)=each($arr))
-		{
-			if(stristr($v,$cbuf))
-			{
-				$sbuf=$v;
-				break;
-			}
-		}
-?>
-
 
 
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
@@ -317,8 +313,8 @@ $b_t=explode("~",trim($abuf[e]));
 <p>
 <a href="javascript:document.infoform.submit();"><img <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?> alt="<?php echo $LDSave ?>"></a>
 &nbsp;&nbsp;
-<a href="javascript:resetinput()"><img <?php echo createLDImgSrc($root_path,'reset.gif','0') ?> alt="<?php echo $LDReset ?>"></a>
-&nbsp;&nbsp;
+<!-- <a href="javascript:resetinput()"><img <?php echo createLDImgSrc($root_path,'reset.gif','0') ?> alt="<?php echo $LDReset ?>"></a>
+ -->&nbsp;&nbsp;
 <?php if($saved)  : ?>
 <a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"></a>
 <?php else : ?>

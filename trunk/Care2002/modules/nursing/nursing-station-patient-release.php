@@ -16,212 +16,80 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_config_color.php'); // load color preferences
 require_once($root_path.'global_conf/inc_remoteservers_conf.php');
 
-/* Check whether the content is language dependent and set the lang appendix */
-if(defined('LANG_DEPENDENT') && (LANG_DEPENDENT==1))
-{
-    $lang_append=' AND lang=\''.$lang.'\'';
-}
-else 
-{
-    $lang_append='';
-}
-
 if(!$encoder) $encoder=$HTTP_COOKIE_VARS[$local_user.$sid];
 
-$breakfile='javascript:window.history.back()';
-$thisfile='nursing-station-patient-release.php';
+$breakfile="nursing-station.php".URL_APPEND."&edit=1&station=$station&ward_nr=$ward_nr";
+$thisfile=basename(__FILE__);
 
 /* Establish db connection */
 if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
 if($dblink_ok){	
 	
 	  /* Load date formatter */
-      include_once($root_path.'include/inc_date_format_functions.php');
-      				
-      
-	  /* Load editor functions */
-      //include_once('../include/inc_editor_fx.php');
-	  
-	  /*// get orig data */
-/*		$dbtable='care_admission_patient';
+	include_once($root_path.'include/inc_date_format_functions.php');
+	include_once($root_path.'include/care_api_classes/class_encounter.php');
+	$enc_obj=new Encounter;
+	
+	if( $enc_obj->loadEncounterData($pn)) {
 		
-		$sql='SELECT * FROM '.$dbtable.' WHERE patnum=\''.$pn.'\'';
-		
-		if($ergebnis=$db->Execute($sql))
-       		{
-				$rows=0;
-				if( $result=$ergebnis->FetchRow()) $rows++;
-				if($rows)
-					{
-						mysql_data_seek($ergebnis,0);
-						$result=$ergebnis->FetchRow();
-					}
-			}
-			else {echo "<p>$sql<p>$LDDbNoRead"; exit;}*/
-		include_once($root_path.'include/care_api_classes/class_encounter.php');
-		$enc_obj=new Encounter;
-	    if( $enc_obj->loadEncounterData($pn)) {
-		
-			include_once($root_path.'include/care_api_classes/class_globalconfig.php');
-			$GLOBAL_CONFIG=array();
-			$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
-			$glob_obj->getConfig('patient_%');	
-			$glob_obj->getConfig('person_%');	
-			switch ($enc_obj->EncounterClass())
-			{
-		    	case '1': $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-		                   break;
-				case '2': $full_en = ($pn + $GLOBAL_CONFIG['patient_outpatient_nr_adder']);
-							break;
-				default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-			}						
-			$result=&$enc_obj->encounter;
-			/* Check whether config foto path exists, else use default path */			
-			$default_photo_path='fotos/registration';
-			$photo_filename=$result['photo_filename'];
-			$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $default_photo_path;
-			require_once($root_path.'include/inc_photo_filename_resolve.php');
-		}
-		
-		if(($mode=='release')&&(!$lock))
+		include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+		$GLOBAL_CONFIG=array();
+		$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
+		$glob_obj->getConfig('patient_%');	
+		$glob_obj->getConfig('person_%');	
+		switch ($enc_obj->EncounterClass())
 		{
-							$dbtable='care_nursing_station_patients';
-							
-							$sql='SELECT *	FROM '.$dbtable.' WHERE  s_date=\''.$s_date.'\' AND	station=\''.$station.'\''.$lang_append;
-														
-							$ergebnis=$db->Execute($sql);
-							if($ergebnis)
-       						{
-								$rows=$ergebnis->RecordCount();
-								if($rows==1)
-								{
-									$rbuf='';
-									$content=$ergebnis->FetchRow();
-									$buf=explode('_',$content[bed_patient]);
-									//$sbuf="r=$rm&b=$bd&e=$full_en&n=$pn";
-									$sbuf="r=$rm&b=$bd";
-									for($i=0;$i<sizeof($buf);$i++)
-									{
-										if($rbuf=strstr($buf[$i],$sbuf)) 
-										{
-/*											$dbuf=explode(".",$x_date);
-											$dbuf=array_reverse($dbuf);
-											$s_date=implode(".",$dbuf);
-*/											
-                                            //echo $rbuf;
-											parse_str($rbuf,$pstr);
-											
-											$dbtable='care_nursing_station_patients_release';
-											
-											
-											$sql="INSERT INTO $dbtable 
-											(
-											    lang,
-												station,
-												dept,
-												name,
-												patnum,
-												lastname,
-												firstname,
-												bday,
-												x_time,
-												relart,
-												s_date,
-												discharge_rem,
-												ward_rem,
-												create_id,
-												create_time
-											)
-											VALUES
-											(
-											    '$lang',
-												'$station',
-												'".$content['dept']."',
-												'".$content['name']."',
-												'$pstr[n]',
-												'$pstr[ln]',
-												'$pstr[fn]',
-												'$pstr[g]',
-												'$x_time',
-												'$relart',
-												'".formatDate2Std($x_date,$date_format)."',
-												'$info',
-												'$pstr[rem]',
-												'$encoder',
-												NULL
-											)";
-											
-										if($ergebnis=$db->Execute($sql)) 
-										{
-										   $new_row=$db->Insert_ID();
-										   
-										   if($new_row)
-										   {
-												array_splice($buf,$i,1);
-												$content[bed_patient]=implode("_",$buf);
-												$used=$content[usedbed]-1;
+	    	case '1': $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
+	                   break;
+			case '2': $full_en = ($pn + $GLOBAL_CONFIG['patient_outpatient_nr_adder']);
+						break;
+			default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
+		}						
+		$result=&$enc_obj->encounter;
+		/* Check whether config foto path exists, else use default path */			
+		$default_photo_path='fotos/registration';
+		$photo_filename=$result['photo_filename'];
+		$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $default_photo_path;
+		require_once($root_path.'include/inc_photo_filename_resolve.php');
+		/* Load the discharge types */
+		$discharge_types=&$enc_obj->getDischargeTypesData();
+	}
+		
+	if(($mode=='release')&&!(isset($lock)||$lock)){
+		$date=(empty($x_date))?date('Y-m-d'):formatDate2STD($x_date,$date_format);
+		$time=(empty($x_time))?date('H:i:s'):convertTimeToStandard($x_time);
+		switch($relart)
+		{
+			case 1: {}
+			case 2: {}
+			case 7: {}
+			case 3: $released=$enc_obj->Discharge($pn,$relart,$date,$time);
+						break;
+			case 4: $released=$enc_obj->DischargeFromWard($pn,$relart,$date,$time);
+						break;
+			case 5: $released=$enc_obj->DischargeFromRoom($pn,$relart,$date,$time);
+						break;
+			case 6: $released=$enc_obj->DischargeFromBed($pn,$relart,$date,$time);
+						break;
+			default: $released=false;
+		}
 												
-												$dbtable='care_nursing_station_patients';
-												
-												$sql="UPDATE $dbtable SET bed_patient='$content[bed_patient]',
-														freebed='".($content[freebed]+1)."',
-														usedbed='$used',
-														usebed_percent='".ceil((($used+$content[closedbeds])/$content[maxbed])*100)."' 
-														WHERE s_date='".formatDate2Std($x_date,$date_format)."' AND station='$station'".$lang_append;
-														
-												if($ergebnis=$db->Execute($sql)) 
-												{
+		if($released){
+			if(!empty($info)){
+				$data_array['notes']=$info;
+				$data_array['encounter_nr']=$pn;
+				$data_array['date']=$date;
+				$data_array['time']=$time;
+				$data_array['personell_name']=$encoder;
+				$enc_obj->saveDischargeNotesFromArray($data_array);
+			}
+			header("location:$thisfile?sid=$sid&lang=$lang&pn=$pn&bd=$bd&rm=$rm&pyear=$pyear&pmonth=$pmonth&pday=$pday&mode=$mode&released=1&lock=1&x_date=$x_date&x_time=$x_time&relart=$relart&encoder=".strtr($encoder," ","+")."&info=".strtr($info," ","+")."&station=$station&ward_nr=$ward_nr");
+			exit;
+		}
 
-														$dbtable='care_encounter';
-														
-												        if(($relart!='chg_ward')&&($relart!='chg_bed'))
-													    {														
-														   $sql="UPDATE $dbtable SET is_discharged=0 WHERE encounter_nr='$pn'";
-												         }		
-														 else
-														 {														
-														   $sql="UPDATE $dbtable SET in_ward=0 WHERE encounter_nr='$pn'";
-														  }
-														  
-														if($ergebnis=$db->Execute($sql)) 
-														{
-															$released=1;
-														}
-														else
-														{
-														   echo "$sql<br>$LDDbNoSave";
-														}
-
-													
-													
-													if($released) 
-													{
-														header("location:$thisfile?sid=$sid&lang=$lang&pn=$pn&bd=$bd&rm=$rm&pyear=$pyear&pmonth=$pmonth&pday=$pday&mode=$mode&released=1&lock=1&x_date=$x_date&x_time=$x_time&relart=$relart&encoder=".strtr($encoder," ","+")."&info=".strtr($info," ","+")."&station=$station");
-														exit;
-													}
-												}
-												
-												if(!$released)
-												{
-													$dbtable='care_nursing_station_patients_release';
-												
-													$sql='DELETE FROM '.$dbtable.' WHERE item=\''.$new_row.'\'';
-													$db->Execute($sql);
-												 	echo "$LDDbNoDelete<br>$sql";
-												 }
-											  } // end of if($new_row)
-											}
-											else echo "$LDDbNoSave<br>$sql";
-										break;
-										}// end of if(rbuf=
-									}// end of while
-								
-					 			}// end if(rows)
-							}
-				 			else {echo "<p>$sql<p>$LDDbNoRead"; exit;}
-			}	// end of if (mode=release)		
-			
-			if(!$dept)
+	}	// end of if (mode=release)		
+/*			
+		if(!$dept)
 			{
 				// translate station to dept
 				$dbtable='care_station2dept';
@@ -236,9 +104,10 @@ if($dblink_ok){
 			
 	
 			
-	}
-	else 
-		{ echo "$LDDbNoLink<br>$sql<br>"; }
+*/
+}else{
+	echo "$LDDbNoLink<br>";
+}
 
 
 ?>
@@ -416,7 +285,7 @@ echo '
   <tr>
   <tr>
     <td class=vn><?php echo $LDPatListElements[0] ?>:</td>
-    <td class=vl>&nbsp;<?php echo $rm.$bd ?></td>
+    <td class=vl>&nbsp;<?php echo $rm.strtoupper(chr($bd+96));//$rm.$bd ?></td>
   </tr>
     <td class=vn><?php echo $LDDate ?>:</td>
     <td class=vl>&nbsp;
@@ -435,25 +304,39 @@ echo '
   </tr>
   <tr>
     <td class=vn><?php echo $LDReleaseType ?>:</td>
-    <td class=vl>
+    <td class=vl>&nbsp;
 	<?php if($released) 
 	{
-		switch($relart)
-		{
-			case 'reg':	echo $LDRegularRelease; break;
-			case 'self': echo $LDSelfRelease; break;
-			case 'emgcy': echo $LDEmRelease; break;
-			case 'chg_ward': echo $LDChangeWard; break;
-			case 'chg_bed': echo $LDChangeBed; break;
-			case 'pat_death': echo $LDPatientDied; break;
-		} 
-	}else echo '	
+		while($dis_type=$discharge_types->FetchRow()){
+			if($dis_type['nr']==$relart){
+				if(isset($$dis_type['LD_var'])&&!empty($$dis_type['LD_var'])) echo $$dis_type['LD_var'];
+					else echo $dis_type['name'];
+				break;
+			}
+		}
+	}else{ 
+		$init=1;
+		while($dis_type=$discharge_types->FetchRow()){
+			echo '<input type="radio" name="relart" value="'.$dis_type['nr'].'"';
+			if($init){
+				echo ' checked';
+				$init=0;
+			}
+			echo '>';
+			if(isset($$dis_type['LD_var'])&&!empty($$dis_type['LD_var'])) echo $$dis_type['LD_var'];
+				else echo $dis_type['name'];
+			echo '<br>
+			';
+		}
+			
+/*	echo '	
 					<input type="radio" name="relart" value="reg" checked> '.$LDRegularRelease.'<br>
                  	<input type="radio" name="relart" value="self"> '.$LDSelfRelease.'<br>
                  	<input type="radio" name="relart" value="emgcy"> '.$LDEmRelease.'<br>
                  	<input type="radio" name="relart" value="chg_ward"> '.$LDChangeWard.'<br>
                  	<input type="radio" name="relart" value="chg_bed"> '.$LDChangeBed.'<br>
                  	<input type="radio" name="relart" value="pat_death"> '.$LDPatientDied.'<br>';
+*/	}
 	?>
                  </td>
   </tr>
@@ -470,13 +353,13 @@ echo '
 	?>
                    </td>
   </tr>
-<?php if(!(($mode=="release")&&($released))) : ?>
+<?php if(!(($mode=='release')&&($released))) { ?>
   <tr>
     <td class=vn><input type="submit" value="<?php echo $LDRelease ?>"></td>
     <td class=vn>	<input type="checkbox" name="sure" value="1"> <?php echo $LDYesSure ?><br>
                  </td>
   </tr>
-<?php endif ?>
+<?php } ?>
 </table>
 
 <input type="hidden" name="mode" value="release">
@@ -486,6 +369,7 @@ echo '
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
 <input type="hidden" name="lang" value="<?php echo $lang ?>">
 <input type="hidden" name="station" value="<?php echo $station ?>">
+<input type="hidden" name="ward_nr" value="<?php echo $ward_nr ?>">
 <input type="hidden" name="dept" value="<?php echo $dept ?>">
 <input type="hidden" name="dept_nr" value="<?php echo $dept_nr ?>">
 <input type="hidden" name="pday" value="<?php echo $pday ?>">
@@ -495,12 +379,10 @@ echo '
 <input type="hidden" name="bd" value="<?php echo $bd ?>">
 <input type="hidden" name="pn" value="<?php echo $pn ?>">
 <input type="hidden" name="s_date" value="<?php echo "$pyear-$pmonth-$pday" ?>">
-
 </form>
 <p>
 
-
-<br><a href="nursing-station.php<?php echo URL_APPEND; ?>&edit=1&station=<?php echo $station ?>">
+<br><a href="<?php echo $breakfile; ?>">
 <?php if(($mode=='release')&&($released)) : ?>
 <img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>>
 <?php else : ?>
@@ -508,9 +390,7 @@ echo '
 <?php endif ?></a>
 
 </FONT>
-
 </ul>
-
 <p>
 </td>
 </tr>

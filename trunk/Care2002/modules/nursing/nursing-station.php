@@ -12,45 +12,6 @@ require($root_path.'include/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 
-function flagPatientAtStation($pn,$at=1,$stat=''){
-    global $link, $db;
-	
-	if(empty($stat)){
-	   $sql='UPDATE care_encounter SET in_ward='.$at.' WHERE encounter_nr=\''.$pn.'\'';
-	}else{
-	   $sql='UPDATE care_encounter SET current_ward_nr=\''.$stat.'\', in_ward='.$at.' WHERE encounter_nr=\''.$pn.'\'';
-    }
-	
-	if($ergebnis=$db->Execute($sql)) {
-	    return 1;
-	}else{
-	    return 0;
-	}
-}
-/*
-function flagPatientAtStation($pn,$at=1,$stat='')
-{
-    global $link, $db;
-	
-	if($stat=='' || !$stat)
-	{
-	   $sql='UPDATE care_admission_patient SET at_station=\''.$at.'\' WHERE patnum=\''.$pn.'\'';
-	}
-	else
-	{
-	   $sql='UPDATE care_admission_patient SET station=\''.$stat.'\', at_station=\''.$at.'\' WHERE patnum=\''.$pn.'\'';
-    }
-	
-	if($ergebnis=$db->Execute($sql)) 
-	{
-	    return 1;
-	}
-	else
-	{
-	    return 0;
-	}
-}
-*/
 define('LANG_FILE','nursing.php');
 define('NO_2LEVEL_CHK',1);
 $local_user='ck_pflege_user';
@@ -73,499 +34,61 @@ if(!isset($pmonth)||empty($pmonth)) $pmonth=date('m');
 if(!isset($pyear)||empty($pyear)) $pyear=date('Y');
 $s_date=$pyear."-".$pmonth."-".$pday;
 
-/* Check whether the content is language dependent and set the lang appendix */
-if(defined('LANG_DEPENDENT') && (LANG_DEPENDENT==1))
-{
-    $lang_append=' AND lang=\''.$lang.'\'';
-}
-else 
-{
-    $lang_append='';
-}
-
 if(!isset($mode)) $mode="";
 
 if(isset($retpath)&&$retpath=="quick") $breakfile="nursing-schnellsicht.php?sid=".$sid."&lang=".$lang;
  else $breakfile="nursing.php?sid=".$sid."&lang=".$lang;
+
+/* Create ward object */
+require_once($root_path.'include/care_api_classes/class_ward.php');
+$ward_obj= new Ward;
 			
 /* Establish db connection */
 if(!isset($db)||$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok) {
+if($dblink_ok){
    /* Load date formatter */
     include_once($root_path.'include/inc_date_format_functions.php');
 	/* Load editor functions */
     //include_once('../include/inc_editor_fx.php');
   
 	if(($mode=='')||($mode=='fresh')){
-	
-		$dbtable='care_nursing_station_patients';
-
-		$sql='SELECT *	FROM '.$dbtable.' WHERE  s_date=\''.$s_date.'\'	AND	station=\''.$station.'\''.$lang_append;
-
-		$ergebnis=$db->Execute($sql);
-		if($ergebnis){
-			$rows=$ergebnis->RecordCount();
-			if($rows){
-				$result=$ergebnis->FetchRow();
-				$occup='ja';
-				$dept=$result['dept'];
+		if($ward_info=&$ward_obj->getWardInfo($ward_nr)){
+			$room_obj=&$ward_obj->getRoomInfo($ward_nr,$ward_info['room_nr_start'],$ward_info['room_nr_end']);
+			if(is_object($room_obj)) {
+				$room_ok=true;
 			}else{
-				$dbtable='care_nursing_station';
-							
-				$sql='SELECT * FROM '.$dbtable.' WHERE station=\''.$station.'\''.$lang_append;
-				if($ergebnis=$db->Execute($sql)){
-					if($rows=$ergebnis->RecordCount()){
-						$result=$ergebnis->FetchRow();
-						$occup='template';
-						if(!$result['maxbed']) $result['maxbed']=($result['end_no']-$result['start_no'])*$result['bedtype'];
-						$dept=$result['dept'];
-					}else{
-						$occup="?";
-					}
-				}
+				$room_ok=false;
 			}
+			$patients_obj=&$ward_obj->getWardOccupants($ward_nr);
+			if(is_object($patients_obj)) $patients_ok=true;
+				else $patients_ok=false;
+			include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+			$GLOBAL_CONFIG=array();
+			$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
+			$glob_obj->getConfig('patient_%');				
+			$ward_ok=true;
 		}else{
-			echo "<p>".$sql."<p>$LDDbNoRead";
+			$ward_ok=false;
 		}
-	}else{
-		
-		switch($mode)
-		{	
+	}elseif($mode=='newdata'){	
 				
-        	case "getlast": 
-							
-							$dbtable='care_nursing_station_patients';
-							
-							$ed=gregoriantojd(date('m'),date('d'),date('Y'))-31; 
-							$ed=jdtogregorian($ed);
-							$buff=explode("/",$ed);
-							if($buff[0]<10) $buff[0]="0".$buff[0];
-							if($buff[1]<10) $buff[1]="0".$buff[1];
-							$ed=$buff[2]."-".$buff[0]."-".$buff[1];
-							$s_date=$pyear.'-'.$pmonth.'-'.$pday;	 
-							
-							$sql='SELECT *	FROM '.$dbtable.' WHERE s_date<=\''.$s_date.'\'
-																		AND s_date >=\''.$ed.'\' 
-																		AND	station=\''.$station.'\'
-																		'.$lang_append.'
-																		ORDER BY s_date DESC';
-																		
-							if($ergebnis=$db->Execute($sql))
-       						{
-								if($rows=$ergebnis->RecordCount())
-								{
-									$result=$ergebnis->FetchRow();
-									$occup="last";
-									// get the day difference
-									$today=gregoriantojd(date('m'),date('d'),date('Y'));
-									$buf=explode("-",$result['s_date']);
-									$ld=gregoriantojd($buf[1],$buf[2],$buf[0]);
-									$c=$today-$ld;
-									// change the date 
-									$pday=$buf[2];
-									$pmonth=$buf[1];
-									$pyear=$buf[0];
-									$s_date=$pyear."-".$pmonth."-".$pday;
-									//echo $c;
-									$dept=$result['dept'];
-					 			}
-								else
-								{  
-							//echo "it is checked but no rows ".$sql;
-									
-									//echo "location:nursing-station-nobelegungsliste.php?sid=$sid&lang=$lang&station=$station&c=32&edit=$edit";
-									header ("location:nursing-station-nobelegungsliste.php".URL_REDIRECT_APPEND."&c=32&edit=$edit&station=$station"); 
-									exit; 
-								}
-							}
-				 			else {echo "<p>$sql<p>$LDDbNoRead"; exit;}
-						break;
-			case "copylast":
-							$dbtable='care_nursing_station_patients';
-							$sql='SELECT *	FROM '.$dbtable.' WHERE s_date=\''.$s_date.'\'  AND	station=\''.$station.'\''.$lang_append;
-							if($ergebnis=$db->Execute($sql))
-       						{
-								if($rows=$ergebnis->RecordCount())
-								{
-									$result=$ergebnis->FetchRow();
-									//echo $b_p;
-									// create new occupancy table
-									$sql="INSERT INTO ".$dbtable." 
-											(
-											    lang,		    		 station,		  dept,
-												s_date,				   info,			  start_no,
-												end_no,				  bedtype,		  roomprefix,
-												bed_id1,			  bed_id2,		  maxbed,
-												freebed,			  closedbeds,	 usedbed,
-												usebed_percent,	 bed_patient,   create_id,
-												create_time
-											)
-											VALUES
-											(
-											    '".$lang."',				'".$station."',      	'".$result['dept']."',
-												'".date('Y-m-d')."',	'".$result['info']."',   '".$result['start_no']."',
-												'".$result['end_no']."','".$result['bedtype']."','".$result['roomprefix']."',
-												'".$result['bed_id1']."','".$result['bed_id2']."','".$result['maxbed']."',
-												'".$result['freebed']."','".$result['closedbeds']."','".$result['usedbed']."',
-												'".$result['usebed_percent']."','".addslashes($result['bed_patient'])."','".$HTTP_COOKIE_VARS[$local_user.$sid]."',
-												NULL
-											)";
-									if($ergebnis=$db->Execute($sql)) 
-										{
-											
-											$pday=date('d');
-											$pmonth=date('m');
-											$pyear=date('Y');
-											header("location:nursing-station.php".URL_REDIRECT_APPEND."&mode=&edit=1&pday=".$pday."&pmonth=".$pmonth."&pyear=".$pyear."&station=".$station);
-											exit;
-										}
-										else echo $LDDbNoSave."<br>".$sql;
-					 			} else echo $LDDbNoLastData."<br>".$sql;
-						} else {echo $sql."<br>".$LDDbNoRead; exit;}
-						break;
-				case 'newdata': 
-				
-						if(($pn=='lock')||($pn=='unlock')){
-														
-							$dbtable='care_nursing_station_patients';
-														
-							// check if station occupancy exists
-							$sql='SELECT bed_patient, maxbed, freebed, closedbeds, usedbed
-									FROM '.$dbtable.' WHERE s_date=\''.$s_date.'\' AND station=\''.$station.'\''.$lang_append;	
-																  																
-							if($ergebnis=$db->Execute($sql)){
-								if($rows=$ergebnis->RecordCount()){
-									$result=$ergebnis->FetchRow();
-																// update the existing occupancy table
-																// s = l means locked
-																if($pn=="lock")
-																{
-																	$b_p=$result[bed_patient]."_r=$rm&b=$bd&n=!&s=l\r\n";
-																	$sql="UPDATE $dbtable SET bed_patient='".addslashes($b_p)."', 
-																									 freebed='".($result['freebed']-1)."',
-																									 closedbeds='".($result['closedbeds']+1)."',
-																									 usebed_percent='".ceil((($result['usedbed']+$result['closedbeds']+1)/$result['maxbed'])*100)."',
-																									 modify_id='".$HTTP_COOKIE_VARS[$local_user.$sid]."' 
-																									  WHERE s_date='$s_date' AND station='$station'".$lang_append;
-																}
-																else
-																{
-																	$b_p=str_replace("_r=$rm&b=".strtolower($bd)."&n=!&s=l","",$result['bed_patient']);
-																	$sql="UPDATE $dbtable SET bed_patient='".addslashes($b_p)."', 
-																									 freebed='".($result[freebed]+1)."',
-																									 closedbeds='".($result[closedbeds]-1)."',
-																									 usebed_percent='".ceil((($result[usedbed]+$result[closedbeds]-1)/$result[maxbed])*100)."',
-																									 modify_id='".$HTTP_COOKIE_VARS[$local_user.$sid]."' 
-																									  WHERE s_date='$s_date' AND station='$station'".$lang_append;
-																}
-																if($ergebnis=$db->Execute($sql)) 
-																		{
-																			
-																			header("location:nursing-station.php".URL_REDIRECT_APPEND."&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station");
-																			exit;
-																		}
-																		else echo "$LDDbNoUpdate $sql";
-															}
-															else
-															{  
-																$dbtable='care_nursing_station';
-																
-																$sql='SELECT * FROM '.$dbtable.' WHERE station=\''.$station.'\''.$lang_append;
-																if($ergebnis=$db->Execute($sql))
-       															{
-																	if($rows=$ergebnis->RecordCount())
-																	{
-																		$template=$ergebnis->FetchRow();
-																		$s_date=$pyear."-".$pmonth."-".$pday;
-																		$b_p="_r=$rm&b=$bd&n=!&s=l\r\n";
-																		//echo $b_p;
-																		
-																		/* create new occupancy table*/
-																		
-																		$dbtable='care_nursing_station_patients';
-																		
-																		if(!$template[maxbed]) $template[maxbed]=($template[end_no]-$template[start_no])*$template[bedtype];
-																		$sql="INSERT INTO $dbtable 
-																					(
-																					    lang,
-																						station,
-																						dept,
-																						s_date,
-																						start_no,
-																						end_no,
-																						bedtype,
-																						roomprefix,
-																						bed_id1,
-																						bed_id2,
-																						maxbed,
-																						freebed,
-																						closedbeds,
-																						usedbed,
-																						usebed_percent,
-																						bed_patient,
-																						create_id,
-																						create_time
-																					)
-																					VALUES
-																					(
-																					    '$lang',
-																						'$station',
-																						'$template[dept]',
-																						'$s_date',
-																						'$template[start_no]',
-																						'$template[end_no]',
-																						'$template[bedtype]',
-																						'$template[roomprefix]',
-																						'$template[bed_id1]',
-																						'$template[bed_id2]',
-																						'$template[maxbed]',
-																						'".($template[maxbed]-1)."',
-																						'1',
-																						'0',
-																						'".ceil((1/$template[maxbed])*100)."',
-																						'$b_p',
-																						'".$HTTP_COOKIE_VARS[$local_user.$sid]."',
-																						NULL
-																					)";
-																		if($ergebnis=$db->Execute($sql)) 
-																		{
-																			header("location:nursing-station.php?sid=$sid&lang=$lang&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station");
-																			exit;
-																		}
-																		else echo "$LDDbNoSave<br>$sql";
-					 												}
-																	else
-																	{  
-																		echo str_replace("~station~",$station,$LDTemplateMissing);
-																	}
-																}
-				 												else {echo "<p>".$sql."<p>$LDDbNoRead"; exit;}
-																// update the existing occupancy table
-					 										}
-
-														}
-				 										else {echo "<p>".$sql."<p>$LDDbNoRead"; exit;}
-							}
-							else
-							{
-												/* fetch the orig data*/
-/*												$dbtable='care_admission_patient';
-												
-												$sql='SELECT patnum, title, name, vorname, gebdatum, sex, kasse FROM '.$dbtable.'
-															WHERE patnum=\''.$patnum.'\'';
-															
-												if($ergebnis=$db->Execute($sql))
-       											{
-												if($rows=$ergebnis->RecordCount())
-													{
-														$dbdata=$ergebnis->FetchRow();*/
-														
-											include_once($root_path.'include/care_api_classes/class_encounter.php');
-											$enc_obj=new Encounter;
-	   										if( $enc_obj->loadEncounterData($pn)) {
-		
-												include_once($root_path.'include/care_api_classes/class_globalconfig.php');
-												$GLOBAL_CONFIG=array();
-												$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
-												$glob_obj->getConfig('patient_%');	
-												switch ($enc_obj->EncounterClass())
-												{
-		    										case '1': $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-		                   										break;
-													case '2': $full_en = ($pn + $GLOBAL_CONFIG['patient_outpatient_nr_adder']);
-																break;
-													default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-												}						
-												
-												if($enc_obj->is_loaded){
-													
-													$dbdata=&$enc_obj->encounter;
-
-														
-														//foreach($dbdata as $v) echo $v;
-														
-														$dbtable='care_nursing_station_patients';
-														
-														/* check if station occupancy exists*/
-                                                    	$sql='SELECT bed_patient, maxbed, freebed, usedbed, closedbeds,roomprefix FROM '.$dbtable.' WHERE s_date=\''.$s_date.'\' AND station=\''.$station.'\''.$lang_append;																	
-														if($ergebnis=$db->Execute($sql))
-       													{
-															$rows=$ergebnis->RecordCount();
-															if($rows)
-															{
-																$result=$ergebnis->FetchRow();
-																// update the existing occupancy table
-																if(trim($result['bed_patient'])=="") 
-																	$b_p="r=".$rm."&b=".$bd."&e=".$full_en."&n=".$dbdata['encounter_nr']."&t=".$dbdata['title']."&ln=".strtr($dbdata['name_last']," ","+")."&fn=".strtr($dbdata['name_first']," ","+")."&g=".$dbdata['date_birth']."&s=".$dbdata['sex']."&k=".$dbdata['insurance_class_nr']."&rem=\r\n";
-																else
-																	$b_p=$result['bed_patient']."_r=".$rm."&b=".$bd."&e=".$full_en."&n=".$dbdata['encounter_nr']."&t=".$dbdata['title']."&ln=".strtr($dbdata['name_last']," ","+")."&fn=".strtr($dbdata['name_first']," ","+")."&g=".$dbdata['date_birth']."&s=".$dbdata['sex']."&k=".$dbdata['insurance_class_nr']."&rem=\r\n";
-																
-																$used=$result['usedbed']+1;
-																
-																$sql="UPDATE $dbtable SET bed_patient='".addslashes($b_p)."', 
-																									 freebed='".($result['freebed']-1)."',
-																									 usedbed='$used',
-																									 usebed_percent='".ceil((($used+$result['closedbeds'])/$result['maxbed'])*100)."',
-																									 modify_id='".$HTTP_COOKIE_VARS[$local_user.$sid]."' 
-																									  WHERE s_date='$s_date' AND station='$station'".$lang_append;
-																									  
-																if($ergebnis=$db->Execute($sql)) 
-																		{
-/*																			$sql="UPDATE care_admission_patient SET station='".$station."', at_station=1 WHERE patnum='".$patnum."'";
-																			
-																			$db->Execute($sql);
-*/																			
-                                                                            flagPatientAtStation($pn,1,$station);
-																			
-																			header("location:nursing-station.php".URL_REDIRECT_APPEND."&edit=1&mode=&pday=".$pday."&pmonth=".$pmonth."&pyear=".$pyear."&station=".$station);
-																			//
-																			exit;
-																		}
-																		else echo "$LDDbNoUpdate<br>$sql";
-					 										}
-															else
-															{  
-																$dbtable='care_nursing_station';
-																
-																$sql='SELECT * FROM '.$dbtable.' WHERE station=\''.$station.'\''.$lang_append;
-																
-																if($ergebnis=$db->Execute($sql))
-       															{
-																	if($rows=$ergebnis->RecordCount())
-																	{
-																		$template=$ergebnis->FetchRow();
-																		
-																		$s_date=$pyear."-".$pmonth."-".$pday;
-																		$b_p="r=".$rm."&b=".$bd."&e=".$full_en."&n=".$dbdata['encounter_nr']."&t=".$dbdata['title']."&ln=".strtr($dbdata['name']," ","+")."&fn=".strtr($dbdata['vorname']," ","+")."&g=".$dbdata['gebdatum']."&s=".$dbdata['sex']."&k=".$dbdata['kasse']."&rem=\r\n";
-																		//echo $b_p;
-																		
-																		/* create new occupancy table*/
-																		$dbtable='care_nursing_station_patients';
-																		
-																		if(!$template['maxbed']) $template['maxbed']=($template['end_no']-($template['start_no']-1))*$template['bedtype'];
-																		
-																		$sql="INSERT INTO $dbtable 
-																					(
-																					    lang,
-																						station,
-																						dept,
-																						s_date,
-																						start_no,
-																						end_no,
-																						bedtype,
-																						roomprefix,
-																						bed_id1,
-																						bed_id2,
-																						maxbed,
-																						freebed,
-																						closedbeds,
-																						usedbed,
-																						usebed_percent,
-																						bed_patient,
-																						create_id,
-																					    create_time
-																					)
-																					VALUES
-																					(
-																					    '".$lang."',
-																						'".$station."',
-																						'".$template['dept']."',
-																						'".$s_date."',
-																						'".$template['start_no']."',
-																						'".$template['end_no']."',
-																						'".$template['bedtype']."',
-																						'".$template['roomprefix']."',
-																						'".$template['bed_id1']."',
-																						'".$template['bed_id2']."',
-																						'".$template['maxbed']."',
-																						'".($template['maxbed']-1)."',
-																						'".$template['closedbeds']."',
-																						'1',
-																						'".ceil((1/$template['maxbed'])*100)."',
-																						'".$b_p."',
-																						'".$HTTP_COOKIE_VARS[$local_user.$sid]."',
-																						NULL
-																					)";
-																		if($ergebnis=$db->Execute($sql)) 
-																		{
-																		    
-																			flagPatientAtStation($dbdata['encounter_nr'],1,$station);
-																		    
-																			header("location:nursing-station.php".URL_REDIRECT_APPEND."&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station");
-																			
-																			exit;
-																		}
-																		else echo "$LDDbNoSave<br>$sql";
-					 												}
-																	else
-																	{  
-																		echo str_replace("~station~",$station,$LDTemplateMissing);
-																	}
-																}
-				 												else {echo "<p>".$sql."<p>$LDDbNoRead"; exit;}
-																// update the existing occupancy table
-					 										}
-										}else {echo "<p>".$sql."<p>$LDDbNoRead"; exit;}
-					 				}else{  
-										echo"$LDNoOrigData<br>$sql";
-									}
-								}else {echo "<p>".$sql."<p>$LDDbNoRead"; exit;}
-							}
-							break;
-							
-				case "delete":
-				
-						$dbtable='care_nursing_station_patients';
+		if(($pn=='lock')||($pn=='unlock')){
 						
-						/* check if station occupancy exists */
-                       $sql='SELECT bed_patient, maxbed, freebed, usedbed FROM '.$dbtable.' WHERE s_date=\''.$s_date.'\' AND station=\''.$station.'\''.$lang_append;																	
+			if($pn=='lock') $ward_obj->closeBed($ward_nr,$rm,$bd);
+				else $ward_obj->openBed($ward_nr,$rm,$bd);
 						
-						if($ergebnis=$db->Execute($sql))
-       						{
-								$rows=$ergebnis->RecordCount();
-								if($rows==1)
-									{
-										$rm="r=$rm&b=$bd";//echo "$rm<br>";
-										$result=$ergebnis->FetchRow();
-										$buf=explode("_",$result['bed_patient']);
-										for($i=0;$i<sizeof($buf);$i++)
-											{
-												//echo $buf[$i];
-												if(substr_count(trim($buf[$i]),$rm))
-													{ array_splice($buf,$i,1); break; }
-											}
-										$result[bed_patient]=implode("_",$buf);
-										$used=$result[usedbed]-1;
-										
-										$sql="UPDATE $dbtable SET bed_patient='$result[bed_patient]',
-														freebed='".($result['freebed']+1)."',
-														usedbed='$used',
-														usebed_percent='".ceil((($used+$result['closedbeds'])/$result['maxbed'])*100)."' 
-														WHERE s_date='$s_date' AND station='$station'".$lang_append;
-														
-										if($ergebnis=$db->Execute($sql)) 
-											{
-												
-												header("location:nursing-station.php".URL_REDIRECT_APPEND."&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station");
-												exit;
-											}
-											else echo "$LDDbNoDelete<br>$sql";
-									}
-							} else {echo "<p>$sql<p>$LDDbNoRead"; exit;}
-						break;
-				}// end of switch ($mode)
+			header("location:nursing-station.php".URL_REDIRECT_APPEND."&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station&ward_nr=$ward_nr");
+			exit;
+
+		}else{
+			if($ward_obj->AdmitInWard($pn,$ward_nr,$rm,$bd)){
+				//echo "ok";
+				$ward_obj->setAdmittedInWard($pn,$ward_nr,$rm,$bd);
+			}
+			header("location:nursing-station.php".URL_REDIRECT_APPEND."&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station&ward_nr=$ward_nr");
+			exit;
+		}
 	}
-				/* translate station to dept*/
-	if(!$dept){
-		$dbtable='care_station2dept';
-				
-		$sql='SELECT dept 	FROM '.$dbtable.' WHERE station LIKE \'%'.$station.'%\' AND op=0';
-		//echo $sql."<br>";
-		$s2dresult=$db->Execute($sql);
-		$stat2dept=$s2dresult->FetchRow();
-		$dept=$stat2dept['dept'];
-	}
-			
 	/* now get the doctor on duty */
 	$dbtable='care_doctors_dutyplan';
 			
@@ -587,34 +110,34 @@ if($dblink_ok) {
 <!-- 
   var urlholder;
 
-function getinfo(pid,pdata){
+function getinfo(pn){
 <?php /* if($edit)*/
 	{ echo '
 	urlholder="nursing-station-patientdaten.php'.URL_REDIRECT_APPEND;
-	echo '&pn="+pid+"&patient=" + pdata + "';
+	echo '&pn=" + pn + "';
 	echo "&pday=$pday&pmonth=$pmonth&pyear=$pyear&edit=$edit&station=$station"; 
 	echo '";';
 	echo '
-	patientwin=window.open(urlholder,pid,"width=700,height=600,menubar=no,resizable=yes,scrollbars=yes");
+	patientwin=window.open(urlholder,pn,"width=700,height=600,menubar=no,resizable=yes,scrollbars=yes");
 	';
 	}
 	/*else echo '
 	window.location.href=\'nursing-station-pass.php'.URL_APPEND.'&rt=pflege&edit=1&station='.$station.'\'';*/
 ?>
 	}
-function getrem(pid,pdata){
-	urlholder="nursing-station-remarks.php<?php echo URL_REDIRECT_APPEND; ?>&pn="+pid+"&patient=" + pdata + "<?php echo "&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station"; ?>";
-	patientwin=window.open(urlholder,pid,"width=700,height=500,menubar=no,resizable=yes,scrollbars=yes");
+function getrem(pn){
+	urlholder="nursing-station-remarks.php<?php echo URL_REDIRECT_APPEND; ?>&pn="+pn+"<?php echo "&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station"; ?>";
+	patientwin=window.open(urlholder,pn,"width=700,height=500,menubar=no,resizable=yes,scrollbars=yes");
 	}
 	
 function indata(room,bed)
 {
-	urlholder="nursing-station-bettbelegen.php<?php echo URL_REDIRECT_APPEND; ?>&rm="+room+"&bd="+bed+"<?php echo "&py=".$pyear."&pm=".$pmonth."&pd=".$pday."&tb=".str_replace("#","",$cfg['top_bgcolor'])."&tt=".str_replace("#","",$cfg['top_txtcolor'])."&bb=".str_replace("#","",$cfg['body_bgcolor'])."&d=".$cfg['dhtml']; ?>&s=<?php echo $station; ?>";
+	urlholder="nursing-station-bettbelegen.php<?php echo URL_REDIRECT_APPEND; ?>&rm="+room+"&bd="+bed+"<?php echo "&py=".$pyear."&pm=".$pmonth."&pd=".$pday."&tb=".str_replace("#","",$cfg['top_bgcolor'])."&tt=".str_replace("#","",$cfg['top_txtcolor'])."&bb=".str_replace("#","",$cfg['body_bgcolor'])."&d=".$cfg['dhtml']; ?>&s=<?php echo $station; ?>&wnr=<?php echo $ward_nr; ?>";
 	indatawin=window.open(urlholder,"bedroom","width=700,height=450,menubar=no,resizable=yes,scrollbars=yes");
 }
 function release(room,bed,pid)
 {
-	urlholder="nursing-station-patient-release.php<?php echo URL_REDIRECT_APPEND; ?>&rm="+room+"&bd="+bed+"&pn="+pid+"<?php echo "&pyear=".$pyear."&pmonth=".$pmonth."&pday=".$pday."&tb=".str_replace("#","",$cfg['top_bgcolor'])."&tt=".str_replace("#","",$cfg['top_txtcolor'])."&bb=".str_replace("#","",$cfg['body_bgcolor'])."&d=".$cfg['dhtml']; ?>&station=<?php echo $station; ?>";
+	urlholder="nursing-station-patient-release.php<?php echo URL_REDIRECT_APPEND; ?>&rm="+room+"&bd="+bed+"&pn="+pid+"<?php echo "&pyear=".$pyear."&pmonth=".$pmonth."&pday=".$pday."&tb=".str_replace("#","",$cfg['top_bgcolor'])."&tt=".str_replace("#","",$cfg['top_txtcolor'])."&bb=".str_replace("#","",$cfg['body_bgcolor'])."&d=".$cfg['dhtml']; ?>&station=<?php echo $station; ?>&ward_nr=<?php echo $ward_nr; ?>";
 	//indatawin=window.open(urlholder,"bedroom","width=700,height=450,menubar=no,resizable=yes,scrollbars=yes"
 	window.location.href=urlholder;
 }
@@ -623,7 +146,7 @@ function unlock(b,r)
 {
 <?php
 	echo '
-	urlholder="nursing-station.php'.URL_REDIRECT_APPEND.'&mode=newdata&pn=unlock&rm="+r+"&bd="+b+"&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday.'&station='.$station.'";
+	urlholder="nursing-station.php'.URL_REDIRECT_APPEND.'&mode=newdata&pn=unlock&rm="+r+"&bd="+b+"&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday.'&station='.$station.'&ward_nr='.$ward_nr.'";
 	';
 ?>
 	if(confirm('<?php echo $LDConfirmUnlock ?>'))
@@ -701,6 +224,7 @@ if(($occup=="template")&&(!$mode)&&(!isset($list)||!$list))
  			<input type="hidden" name="pmonth" value="'.$pmonth.'">
   			<input type="hidden" name="pday" value="'.$pday.'">
 			<input type="hidden" name="station" value="'.$station.'">
+			<input type="hidden" name="ward_nr" value="'.$ward_nr.'">
 			<input type="hidden" name="mode" value="getlast">
 			<input type="hidden" name="c" value="1">       
 			<input type="hidden" name="edit" value="'.$edit.'">
@@ -723,6 +247,7 @@ if(($occup=="template")&&(!$mode)&&(!isset($list)||!$list))
  			<input type="hidden" name="pmonth" value="'.$pmonth.'">
   			<input type="hidden" name="pday" value="'.$pday.'">
 			<input type="hidden" name="station" value="'.$station.'">
+			<input type="hidden" name="ward_nr" value="'.$ward_nr.'">
 			<input type="hidden" name="mode" value="copylast">&nbsp;&nbsp;&nbsp;';
 			if($c>2) echo '<input type="submit" value="'.$LDCopyAnyway.'">';
 			else echo '
@@ -735,7 +260,7 @@ if(($occup=="template")&&(!$mode)&&(!isset($list)||!$list))
 			}
 //echo $statdata[$bd.$rm];
 
-if($occup!="?")
+if($ward_ok)
 {
 
 if($pday.$pmonth.$pyear<date('dmY'))
@@ -860,87 +385,103 @@ echo'
 <td><font face="verdana,arial" size="2" color="#ffffff"><b>'.$LDPatListElements[$n].' &nbsp;&nbsp;</b></td>';
 echo '</tr>';
 
-
-//foreach($buf as $v) echo $v;
-for ($i=$result['start_no'];$i<=$result['end_no'];$i++)
- {
-   for($j=$result['bed_id1'];$j<=$result['bed_id2'];$j++)
-	{
-	
-		for($k=0;$k<sizeof($buf);$k++)
-		{
-			parse_str(trim($buf[$k]),$helper);
-			//foreach($helper as $v) echo $v;
-			if  (isset($helper['r'])&&($helper['r']==$i)&&($helper['b']==$j))  break; 
-			$helper="";
-		}	
-		
+$toggle=1;
+$room_info=array();
+for ($i=$ward_info['room_nr_start'];$i<=$ward_info['room_nr_end'];$i++){
+ 	
+	if($room_ok){
+		$room_info=$room_obj->FetchRow();
+	}else{
+		$room_info['nr_of_beds']=1;
+		$edit=false;
+	}
+	for($j=1;$j<=$room_info['nr_of_beds'];$j++){
+	// Scan the patients object if the patient is assigned to the bed & room
+	if($patients_ok){
+		$is_patient=false;
+		//$pbuff=$patients_obj;
+		//echo $pbuff->RecordCount();
+		while($bed=$patients_obj->FetchRow()){
+			if($i==$bed['room_nr']&&$j==$bed['bed_nr']){
+				$is_patient=true;
+				break;
+			}
+		}
+		$patients_obj->MoveFirst();
+	}
+	// Check if bed is locked
 	echo '
 			<tr bgcolor=';
-	if ($j=="a") echo '"#fefefe">'; else echo '"#dfdfdf">';
+	if ($toggle) echo '"#fefefe">'; else echo '"#dfdfdf">';
+	$toggle=!$toggle;
 	
 	echo '
 			<td>';
-	if($helper&&($helper['s']!="l")&&$edit)
+	if(stristr($room_info['closed_beds'],$j.'/')){
+		$bed_locked=true;
+	}else{
+		$bed_locked=false;
+	}
+	// If patient and edit show small color bars
+	if($is_patient&&$edit)
 	{  
-	     
-		 echo '<a href="javascript:getinfo(\''.$helper['n'].'\',\''.strtr($helper['fn']," ","+").'\')">
-		 <img src="'.$root_path.'main/imgcreator/imgcreate_colorbar_small.php'.URL_APPEND.'&pn='.$helper['n'].'" alt="'.$LDSetColorRider.'" align="absmiddle" border=0 width=80 height=18>
+		 echo '<a href="javascript:getinfo(\''.$bed['encounter_nr'].'\')">
+		 <img src="'.$root_path.'main/imgcreator/imgcreate_colorbar_small.php'.URL_APPEND.'&pn='.$bed['encounter_nr'].'" alt="'.$LDSetColorRider.'" align="absmiddle" border=0 width=80 height=18>
 		 </a>';
     }
 	echo '
 			</td>
 			<td align=center><font face="verdana,arial" size="2" >';
-			
-	if(stristr($j,"a")) echo strtoupper($result['roomprefix']).$i; else echo "&nbsp;";
+	// If bed nr  is 1, show the room number		
+	if($j==1) echo strtoupper($ward_info['roomprefix']).$i; else echo "&nbsp;";
 	
 	echo '
-			</td><td align=left><font face="verdana,arial" size="2" > '.strtoupper($j).' ';
-	
-	if($helper)
+			</td><td align=left><font face="verdana,arial" size="2" > '.strtoupper(chr($j+96)).' ';
+	// If patient, show image by sex
+	if($is_patient)
 	{
-		switch(strtolower($helper['s']))
+		switch(strtolower($bed['sex']))
 		{
 			case "f": echo '<img '.createComIcon($root_path,'mans-red.gif','0').'>';break;
 			case "m": echo '<img '.createComIcon($root_path,'mans-gr.gif','0').'>';break;
-			case "l": echo '<img '.createComIcon($root_path,'delete2.gif','0').'>';break;
 			default:echo '<img '.createComIcon($root_path,'man-whi.gif','0').'>';break;
 		}
 	}
-	elseif($edit)
+	elseif($edit&&!$bed_locked) // Else show the image link to assign bed to patient
 	{
 	   echo '<a href="javascript:indata(\''.$i.'\',\''.$j.'\')"><img '.createComIcon($root_path,'plus2.gif','0').' alt="'.$LDClk2Occupy.'"></a>';
+	}elseif($bed_locked){
+		echo '<img '.createComIcon($root_path,'delete2.gif','0').'>';
 	}
-	
 	echo "
 	</td>";
 	echo '
 			<td><font face="verdana,arial" size="2" >';
-			
-	if($edit&&($helper['n']!=""))
+	// Show the patients name with link to open charts
+	if($edit)
 	{
 	  echo '<a href="javascript:';
-	    if($helper['n']!="!") echo 'getinfo(\''.$helper['n'].'\',\''.strtr($helper['fn']," ","+").'\')" title="'.$LDShowPatData.'">'; // ln=last name fn=first name
+	    if(!$bed_locked) echo 'getinfo(\''.$bed['encounter_nr'].'\')" title="'.$LDShowPatData.'">'; // ln=last name fn=first name
 	      else echo 'unlock(\''.strtoupper($j).'\',\''.$i.'\')" title="'.$LDInfoUnlock.'">'.$LDLocked; //$j=bed   $i=room number
 	   
 	}
 	else 
 	{
-	    if($helper['n']!="!") echo $helper['fn']; // ln=last name fn=first name
+	    if(!$bed_locked) echo $bed['name_first']; // ln=last name fn=first name
 	      else echo $LDLocked; //$j=bed   $i=room number
 	}
 	
-	if($helper&&($helper['n']!=""))
+	if($is_patient&&($bed['encounter_nr']!=""))
 	{
-		echo $helper['t']." ";
+		echo ucfirst($bed['title'])." ";
 		
-	  	if(isset($sln)&&$sln) echo eregi_replace($sln,'<span style="background:yellow">'.ucfirst($sln).'</span>',ucfirst($helper['ln']));
-	 		else echo ucfirst($helper['ln']); 
+	  	if(isset($sln)&&$sln) echo eregi_replace($sln,'<span style="background:yellow">'.ucfirst($sln).'</span>',ucfirst($bed['name_last']));
+	 		else echo ucfirst($bed['name_last']); 
 			
-		if($helper['ln']) echo ",";
+		if($bed['name_last']) echo ",";
 		
-		if(isset($sfn)&&$sfn) echo eregi_replace($sfn,'<span style="background:yellow">'.ucfirst($sln).'</span>',ucfirst($helper['fn']));
-			else echo ucfirst($helper['fn']);
+		if(isset($sfn)&&$sfn) echo eregi_replace($sfn,'<span style="background:yellow">'.ucfirst($sln).'</span>',ucfirst($bed['name_first']));
+			else echo ucfirst($bed['name_first']);
 	}
 	else
 	{
@@ -951,31 +492,32 @@ for ($i=$result['start_no'];$i<=$result['end_no'];$i++)
 	
 	echo '
 			</td><td align=right><font face="verdana,arial" size="2" >&nbsp;';
-    if($helper['g'])
+    if($bed['date_birth'])
 	{
-	   if(isset($sg)&&$sg) echo eregi_replace($sg,"<font color=#ff0000><b>".ucfirst($sg)."</b></font>",formatDate2Local($helper['g'],$date_format));
-		 else echo formatDate2Local($helper['g'],$date_format);
+	   if(isset($sg)&&$sg) echo eregi_replace($sg,"<font color=#ff0000><b>".ucfirst($sg)."</b></font>",formatDate2Local($bed['date_birth'],$date_format));
+		 else echo formatDate2Local($bed['date_birth'],$date_format);
     }
 	echo '
 			</td><td align=center><font face="verdana,arial" size="2" >&nbsp;';
-	if ($helper['e']!="!") echo $helper['e'];
+	if ($bed['encounter_nr']) echo ($bed['encounter_nr']+$GLOBAL_CONFIG['patient_inpatient_nr_adder']);
 	echo "\r\n";
 	echo '
 			</td><td ><font face="verdana,arial" size="2" >&nbsp;';
-	if(strchr($helper['k'],"privat")) echo '<font color="#0000ff">';
-	if($helper['k']) echo $LDInsurance[$helper['k']];
+	if($bed['insurance_class_nr']!=2) echo '<font color="#ff0000">';
+	if(isset($$bed['insurance_LDvar'])&&!empty($$bed['insurance_LDvar'])) echo $$bed['insurance_LDvar'];
+		else echo $bed['insurance_name'];
 	echo '</td>';
 	
 	if($edit)
 	{
 		echo '
 			<td>';
-		if(($helper)&&($helper['n']!="!")&&($helper['n']!="")){	echo '&nbsp;
-		<a href="javascript:getinfo(\''.$helper['n'].'\',\''.strtr($helper['fn']," ","+").'\')"><img '.createComIcon($root_path,'open.gif','0').' alt="'.$LDShowPatData.'"></a>
-	 	<a href="javascript:getrem(\''.$helper['n'].'\',\''.strtr($helper['fn']," ","+").'\')"><img ';
-		if($helper['rem']) echo createComIcon($root_path,'bubble3.gif','0'); else echo createComIcon($root_path,'bubble2.gif','0');
+		if(($is_patient)&&!empty($bed['encounter_nr'])){	echo '&nbsp;
+		<a href="javascript:getinfo(\''.$bed['encounter_nr'].'\')"><img '.createComIcon($root_path,'open.gif','0').' alt="'.$LDShowPatData.'"></a>
+	 	<a href="javascript:getrem(\''.$bed['encounter_nr'].'\')"><img ';
+		if($bed['ward_notes']) echo createComIcon($root_path,'bubble3.gif','0'); else echo createComIcon($root_path,'bubble2.gif','0');
 		echo ' alt="'.$LDNoticeRW.'"></a>
-		 <a href="javascript:release(\''.$helper['r'].'\',\''.$helper['b'].'\',\''.$helper['n'].'\')"><img '.createComIcon($root_path,'bestell.gif','0').' alt="'.$LDReleasePatient.'"></a>';
+		 <a href="javascript:release(\''.$bed['room_nr'].'\',\''.$bed['bed_nr'].'\',\''.$bed['encounter_nr'].'\')"><img '.createComIcon($root_path,'bestell.gif','0').' alt="'.$LDReleasePatient.'"></a>';
 		 //<a href="javascript:deletePatient(\''.$helper[r].'\',\''.$helper[b].'\',\''.$helper[t].'\',\''.$helper[ln].'\')"><img src="../img/delete.gif" border=0 width=19 height=19 alt="Löschen (Passwort erforderlich)"></a>';
 		 }
 		 else echo "&nbsp;";

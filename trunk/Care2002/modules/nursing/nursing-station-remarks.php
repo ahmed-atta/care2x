@@ -10,20 +10,14 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+$lang_tables=array('date_time.php');
 define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_config_color.php'); // load color preferences
-
-/* Check whether the content is language dependent and set the lang appendix */
-if(defined('LANG_DEPENDENT') && (LANG_DEPENDENT==1))
-{
-    $lang_append=' AND lang=\''.$lang.'\'';
-}
-else 
-{
-    $lang_append='';
-}
+/* Create nursing notes object */
+require_once($root_path.'include/care_api_classes/class_notes_nursing.php');
+$report_obj= new NursingNotes;
 
 if ($station=='') { $station='p3a';  }
 if($pday=='') $pday=date('d');
@@ -31,75 +25,29 @@ if($pmonth=='') $pmonth=date('m');
 if($pyear=='') $pyear=date('Y');
 $s_date=$pyear.'-'.$pmonth.'-'.$pday;
 
-$dbtable='care_nursing_station_patients';
+$thisfile=basename(__FILE__);
 			
 /* Establish db connection */
 if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok)
-{
-
+if($dblink_ok){
     include_once($root_path.'include/inc_date_format_functions.php');
-    
-
-	$sql='SELECT bed_patient FROM '.$dbtable.' WHERE  s_date=\''.$s_date.'\' AND station=\''.$station.'\''.$lang_append;
-																		
-																		
-	if($ergebnis=$db->Execute($sql))
-    {
-		if($rows=$ergebnis->RecordCount())
-		{
-			$result=$ergebnis->FetchRow();
-			$occup="1";
+	if($mode=='save'){
+		if($report_obj->saveDailyWardNotes($HTTP_POST_VARS)){
+			header("Location:$thisfile".URL_REDIRECT_APPEND."&pn=$pn&station=$station&location_nr=$location_nr");
+			exit;
+		}else{echo "$sql<p>$LDDbNoUpdate";}
+	}else{
+		if($d_notes=&$report_obj->getDailyWardNotes($pn)){
+    		include_once($root_path.'include/inc_editor_fx.php');
+			$occup=true;
 		}
+		/* Create nursing notes object */
+		include_once($root_path.'include/care_api_classes/class_ward.php');
+		$ward_obj= new Ward;
 	}
-	else {echo "$sql<p>$LDDbNoRead"; exit;}
-							
-	if($mode=='save')
-	{
-		//echo $result[bed_patient]."<br>";
-		$remarks=strtr($remarks,"_","-");
-		$buf1="r=$r&b=$b&e=$e&n=$n&t=$t&ln=$ln&fn=$fn&g=$g&s=$s&k=$k";
-		//echo $buf1."<br>";
-		$buf1=strtr($buf1,"+"," ");
-		$buf3=explode("_",$result['bed_patient']);
-		for($i=0;$i<sizeof($buf3);$i++)
-		{
-			$buf3[$i]=strtr($buf3[$i],"+"," ");
-			if(substr_count($buf3[$i],$buf1))
-			{
-				$buf3[$i]=$buf1."&rem=".strtr($remarks," ","+");
-				break;
-			}
-		}
-		
-		$result[bed_patient]=implode("_",$buf3);
-		
-		$sql="UPDATE $dbtable SET bed_patient='".addslashes($result['bed_patient'])."'
-										 WHERE  s_date='$s_date'
-										 	AND	station='$station'
-											".$lang_append;
-											
-		if($ergebnis=$db->Execute($sql))
-        {
-			$sql="SELECT bed_patient FROM $dbtable WHERE  s_date=\"$s_date\" AND	station=\"$station\"".$lang_append;
-			
-			if($ergebnis=$db->Execute($sql))
-       		{
-
-				if($rows=$ergebnis->RecordCount())
-				{
-					$remark_saved=1;
-					$result=$ergebnis->FetchRow();
-					$occup="1";
-				}
-			}
-			else {echo "$sql<p>$LDDbNoRead"; exit;}
-							
-		}
-		else {echo "$sql<p>$LDDbNoUpdate"; exit;}
-	} // end of if (mode = save)
-}
-else { echo "$LDDbNoLink<br>"; } 
+}else{
+	echo "$LDDbNoLink<br>";
+} 
 
 ?>
 
@@ -112,10 +60,10 @@ else { echo "$LDDbNoLink<br>"; }
 <script language="javascript">
 <!-- 
 var n=false;
-function checkForm()
+function checkForm(f)
 {
-	if(n) return true;
-	return false;
+	if(f.notes.value==""||f.personell_name=="") return false;
+	 else return true;
 }
 function setChg()
 {
@@ -159,43 +107,70 @@ td.vn { font-family:verdana,arial; color:#000088; font-size:10}
 </td></tr>
 <tr valign=top >
 <td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
- <ul><font face="Verdana, Arial" color=#800000>
-<?php if($occup)
-{
-
-//echo $result[bed_patient];
-$buf=explode("_",trim($result['bed_patient']));
+ 
+<?php
+if($occup){
+	$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/tableHeaderbg3.gif"';
+?>
+ <table border=0 cellpadding=4 cellspacing=1 width=100%>
+  <tr bgcolor="#f6f6f6">
+    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDate; ?></td>
+    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDTime; ?></td>
+    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDNotes; ?></td>
+    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDCreatedBy; ?></td>
+  </tr>
+<?php
+	$toggle=0;
+	while($row=$d_notes->FetchRow()){
+		if($toggle) $bgc='#efefef';
+			else $bgc='#f0f0f0';
+		$toggle=!$toggle;
+		if(!empty($row['short_notes'])) $bgc='yellow';
 	
-		for($k=0;$k<sizeof($buf);$k++)
-		{
-			parse_str(trim($buf[$k]),$helper);
-			//foreach($helper as $v) echo $v;
-			if  ((trim($helper[n])==$pn)&&(trim($helper[fn])==$patient)){  break;} 
-			$helper="";
-		}
-echo "<font color=0> ".$LDPatListElements[0].":  $helper[r] $helper[b] - </font>".ucfirst($helper['ln']).", ".ucfirst($helper['fn'])." ".formatDate2Local($helper[g],$date_format); 
+?>
+
+
+  <tr  bgcolor="<?php echo $bgc; ?>"  valign="top">
+    <td><FONT SIZE=-1  FACE="Arial"><?php if(!empty($row['date'])) echo @formatDate2Local($row['date'],$date_format); ?></td>
+    <td><FONT SIZE=-1  FACE="Arial"><?php if($row['time']) echo $row['time']; ?></td>
+    <td><FONT SIZE=-1  FACE="Arial" color="#000033">
+	<?php 
+		if(!empty($row['notes'])) echo deactivateHotHtml(nl2br($row['notes'])); 
+		if(!empty($row['short_notes'])) echo '<br>[ '.deactivateHotHtml($row['short_notes']).' ]';
+	?>
+	</td>
+    <td><FONT SIZE=-1  FACE="Arial"><?php if($row['personell_name']) echo $row['personell_name']; ?></td>
+  </tr>
+
+<?php
+	}
+?>
+</table>
+<?php
 }
 ?>
-<form method=post name=remform action="nursing-station-remarks.php" onSubmit="return checkForm()">
-<textarea name="remarks" cols=60 rows=17 wrap="physical" onKeyup="setChg()"><?php  echo str_replace("\\","",$helper['rem']);?></textarea>
+
+ <ul>
+ 
+ <font face="Verdana, Arial" color=#800000>
+<?php if($occup)
+{
+	//echo "<font color=0> ".$LDPatListElements[0].":  $helper[r] $helper[b] - </font>".ucfirst($buf['ln']).", ".ucfirst($buf['fn'])." ".formatDate2Local($buf[g],$date_format); 
+}
+?>
+<form method="post" name=remform action="nursing-station-remarks.php" onSubmit="return checkForm(this)">
+<textarea name="notes" cols=60 rows=5 wrap="physical" onKeyup="setChg()"></textarea>
+<input type="text" name="personell_name" size=60 maxlength=60 value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>">
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
 <input type="hidden" name="lang" value="<?php echo $lang ?>">
-<input type="hidden" name="r" value="<?php echo $helper['r'] ?>">
-<input type="hidden" name="b" value="<?php echo $helper['b'] ?>">
-<input type="hidden" name="n" value="<?php echo $helper['n'] ?>">
-<input type="hidden" name="e" value="<?php echo $helper['e'] ?>">
-<input type="hidden" name="t" value="<?php echo strtr($helper['t']," ","+") ?>">
-<input type="hidden" name="ln" value="<?php echo strtr($helper['ln']," ","+") ?>">
-<input type="hidden" name="fn" value="<?php echo strtr($helper['fn']," ","+") ?>">
-<input type="hidden" name="g" value="<?php echo $helper['g'] ?>">
-<input type="hidden" name="s" value="<?php echo $helper['s'] ?>">
-<input type="hidden" name="k" value="<?php echo $helper['k'] ?>"><br>
 <input type="hidden" name="station" value="<?php echo $station ?>">
+<input type="hidden" name="location_nr" value="<?php echo $location_nr; ?>">
+<input type="hidden" name="location_id" value="<?php echo $ward_obj->WardName($location_nr); ?>">
+<input type="hidden" name="location_type" value="2"> <!--  location type 2 = ward -->
 <input type="hidden" name="mode" value="save">
 <input type="hidden" name="pn" value="<?php echo $pn ?>">
-<input type="hidden" name="patient" value="<?php echo $patient ?>">
 <!-- <input type="submit" value="<?php echo $LDSave ?>">
- -->
+ --><p>
  <input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif') ?>>
  
 </form>
@@ -203,7 +178,6 @@ echo "<font color=0> ".$LDPatListElements[0].":  $helper[r] $helper[b] - </font>
 </font>
 <p>
 <a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>></a>
-
 </ul>
 
 <p>
