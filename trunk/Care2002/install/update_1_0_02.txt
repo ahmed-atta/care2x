@@ -1,0 +1,44 @@
+Updating to Beta 1.0.02.
+
+NOTE: Update files are only useful if you already have a running Care 2002 installation. 
+      Otherwise, download the entire beta 1.0.02 package and install it. Follow the 
+	  installation procedure. The installation document is available from http://care2x.com.
+	  
+HOW TO UPDATE TO Beta 1.0.02 ?
+-------------------------------
+1.) Download the update files from http://www.sourceforge.net/projects/care2002/ if you have
+not done it yet.
+
+2.) Uncompress the files into a temporary directory.
+
+3.) There are new  directories in the beta 1.0.02. Create these  directories manually in
+your current Care 2002 installation.
+   
+     /development
+     /development/dev-docs
+     /development/script-templates
+	 
+     /pear
+     /pear/crypt
+	 
+     /include
+
+4.) Copy the update files to their respective directories in your current Care 2002 installation. Follow
+the directory tree of the updates files to know the appropriate directories.
+
+5.) Delete the /req directory from your current installation. This directory will not be supported anymore
+in the future releases.
+
+6.)Open the file "inc_init_crypt.php in the directory "/include". Change the following 
+three secret keys with unique keys of your choice. 
+
+			$key           : The secret key for the first level script lock.<br>
+			$key_2level    : The secret key for the second level script lock.<br>
+			$ley_login     : The secret key for the third level script lock.
+		
+REMEMBER: DO NOT PROCEED TO STARTING THE PROGRAM UNTIL YOU HAVE CHANGED THE SECRET KEYS!
+
+7. That's all. You can now start the Care 2002 using your browser.
+
+
+
