@@ -42,22 +42,42 @@ if(!isset($mode)){
 if($mode=='show'){
 	# Clean doc
 	if(isset($aux)) $aux=trim($aux);
+	if(isset($qua)) $qua=trim($qua);
 	# Get the appointments basing on some conditions
 	if((isset($dept_nr)&&$dept_nr)){
 		# Get by department
-		$result=&$appt_obj->getAllByDeptObj($currYear,$currMonth,$currDay,$dept_nr);
+		if($qua!=''&& ($qua==14 || $qua==13))
+		#$result=&$appt_obj->getAllByDeptandQuaObj($currYear,$currMonth,$currDay,$dept_nr,$qua);
+		$result=&$appt_obj->getAllByDeptandQuaObj($currYear,$currMonth,$currDay,$dept_nr,$qua,$ordin);
+		else if ($qua!='' && $qua==2)
+		#$result=&$appt_obj->getAllByDeptandNotQuaObj($currYear,$currMonth,$currDay,$dept_nr);
+		$result=&$appt_obj->getAllByDeptandNotQuaObj($currYear,$currMonth,$currDay,$dept_nr,$ordin);
+		else
+		#$result=&$appt_obj->getAllByDeptObj($currYear,$currMonth,$currDay,$dept_nr);
+		$result=&$appt_obj->getAllByDeptObj($currYear,$currMonth,$currDay,$dept_nr,$ordin);
 	}elseif(isset($aux)&&!empty($aux)){
 		# Get by doctor
-		$result=&$appt_obj->getAllByDocObj($currYear,$currMonth,$currDay,$aux);
+		#$result=&$appt_obj->getAllByDocObj($currYear,$currMonth,$currDay,$aux);
+		$result=&$appt_obj->getAllByDocObj($currYear,$currMonth,$currDay,$aux,$ordin);
+	}elseif(isset($qua)&&!empty($qua)){
+		# Get by QUALIFICA DELLA PERSONA
+		if ($qua==13 || $qua==14)
+		#$result=&$appt_obj->getAllByQuaObj($currYear,$currMonth,$currDay,$qua);
+		$result=&$appt_obj->getAllByQuaObj($currYear,$currMonth,$currDay,$qua,$ordin);
+		else
+		#$result=&$appt_obj->getAllByNonQuaObj($currYear,$currMonth,$currDay);
+		$result=&$appt_obj->getAllByNonQuaObj($currYear,$currMonth,$currDay,$ordin);
 	}else{
 		# Get all appointments
-		$result=&$appt_obj->getAllByDateObj($currYear,$currMonth,$currDay);
+		#$result=&$appt_obj->getAllByDateObj($currYear,$currMonth,$currDay);
+		$result=&$appt_obj->getAllByDateObj($currYear,$currMonth,$currDay,$ordin);
 	}
 }
 
 $HTTP_SESSION_VARS['sess_parent_mod']='';
 $HTTP_SESSION_VARS['sess_appt_dept_nr']='';
 $HTTP_SESSION_VARS['sess_appt_doc']='';
+$HTTP_SESSION_VARS['sess_appt_qua']='';
 # Create encounter object
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 $enc_obj=new Encounter;
@@ -156,24 +176,15 @@ $Calendar -> mkCalendar ($currYear, $currMonth, $currDay,$dept_nr,$aux);
 </td>
 <td bgcolor="<?php echo $cfg['body_bgcolor']; ?>" valign="top">
 <font  SIZE=2  FACE="Arial,verdana">
+
 <form name="bydept">
-<?php echo $LDListApptByDept; ?>:<br>
-<select name="dept_nr">
-	<option value=""><?php echo $LD_AllMedicalDept; ?></option>
-<?php
-# Display options
-echo $options;
-?>
-</select>
-<input type="submit" value="<?php echo $LDShow; ?>">
-<input type="hidden"  name="currYear" value="<?php echo $currYear; ?>">
-<input type="hidden"  name="currMonth" value="<?php echo $currMonth; ?>">
-<input type="hidden"  name="currDay" value="<?php echo $currDay; ?>">
-<input type="hidden"  name="sid" value="<?php echo $sid; ?>">
-<input type="hidden"  name="lang" value="<?php echo $lang; ?>">
+
 </form>
+
+<!--
 <form name="bydoc">
 <?php echo $LDListApptByDoc; ?>:<br>
+
 <input type="text" name="aux" size=35 maxlength=40 value="<?php echo $aux; ?>">
 <input type="submit" value="<?php echo $LDShow; ?>">
 <input type="hidden"  name="name_last" value="">
@@ -185,16 +196,72 @@ echo $options;
 <input type="hidden"  name="currDay" value="<?php echo $currDay; ?>">
 <input type="hidden"  name="sid" value="<?php echo $sid; ?>">
 <input type="hidden"  name="lang" value="<?php echo $lang; ?>">
+
 </form>
+-->
+<form name="byqual">
+<?php echo $LDListApptByDoc; ?>:<br>
+<select title="Qualifica" name="qua">
+<option value="0" <?php if ($qua=='0') echo 'selected' ?>  >Qualsiasi</option>
+<option value="14" <?php if ($qua=='14') echo 'selected' ?>>P.O.</option>
+<option value="13" <?php if ($qua=='13') echo 'selected' ?>>I.N.</option>
+<!--<option value="3">Atleta</option>-->
+<option value="2" <?php if ($qua=='2') echo 'selected' ?>>Privato</option>
+</select>
+<BR>
+
+<?php echo $LDListApptByDept; ?>:<br>
+<select name="dept_nr">
+	<option value=""><?php echo $LD_AllMedicalDept; ?></option>
+	
+<?php
+# Display options
+echo $options;
+?>
+<option value="18"><? echo "Laboratorio"; ?></option>
+</select>
+<!--<input type="submit" value="<?php echo $LDShow; ?>">-->
+<input type="hidden"  name="name_last" value="">
+<input type="hidden"  name="name_first" value="">
+<input type="hidden"  name="date_birth" value="">
+<input type="hidden"  name="currYear" value="<?php echo $currYear; ?>">
+<input type="hidden"  name="currMonth" value="<?php echo $currMonth; ?>">
+<input type="hidden"  name="currDay" value="<?php echo $currDay; ?>">
+<input type="hidden"  name="sid" value="<?php echo $sid; ?>">
+<input type="hidden"  name="lang" value="<?php echo $lang; ?>">
+
+<BR>
+Ordina appuntamenti per:<BR>	
+	<select title="ordinamento" name="ordin">
+	<option value="ora" <?php if ($ordin=='ora') echo 'selected' ?>   >Ora</option>
+	<option value="cognome" <?php if ($ordin=='cognome' || $ordin=='') echo 'selected' ?> >Cognome</option>
+	</select>
+<br>
+
+<input type="submit" value="<?php echo $LDShow; ?>">
+
+<?php
+//DEBUG DELLE VARIABILI UTILIZZATE PER LA SELEZIONE
+//echo "<br>dept_nr=".$dept_nr."<br>---qua=".$qua."<br>---ordin=".$ordin."<br>--mode=".$mode."<br>--aux=".$aux."<br>";
+?>
+
+</form>
+
+	
 </td>
+
 </tr>
 
 <tr>
+
 <td bgcolor="<?php echo $cfg['body_bgcolor']; ?>" colspan=2>
+<br />
 <?php
 /* show the appointments */
+
 if($appt_obj->count){
 	include('./gui_bridge/default/gui_show_appointment.php');
+
 }else{
 ?>
 <table border=0>
@@ -202,11 +269,18 @@ if($appt_obj->count){
     <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','absmiddle') ?>></td>
     <td><font color="#000099" SIZE=3  FACE="verdana,Arial"> <b><?php echo ((date('Y-m-d'))==$currYear.'-'.$currMonth.'-'.$currDay) ? $LDNoPendingApptToday : $LDNoPendingApptThisDay; ?></b></font></td>
   </tr>
+  
 </table>
+<img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle'); ?>>
+<a href="../registration_admission/patient_register_pass.php?lang=it&target=search&pid="<?php echo $HTTP_SESSION_VARS['sess_pid']; ?>"&target=search&mode=new"> 
+<font size=+1 color="#000066" face="verdana,arial">
+<?php echo $LDScheduleNewAppointment; ?>
+</font>
+</a>
 <?php
 }
 ?>
-	
+
 <p>
 <a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>">
 </a></FONT>
