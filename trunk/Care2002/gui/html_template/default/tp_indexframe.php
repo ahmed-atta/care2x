@@ -31,12 +31,12 @@ function checkIfChanged(lang)
 echo 'bgcolor='.$cfg['idx_bgcolor'];
  if(!$cfg['dhtml']) echo ' link='.$cfg['idx_txtcolor'].' vlink='.$cfg['idx_txtcolor'].' alink='.$cfg['idx_alink']; ?> 
  >
-<center><img <?php echo createComIcon('../','care_logo.gif','0') ?>></center>
+<center><img <?php echo createLogo($root_path,'care_logo.gif','0') ?>></center>
 <TABLE CELLPADDING=2 CELLSPACING=0 border=0 >
 <FONT  FACE="Arial"  SIZE="-1">
 
 <?php
-
+//echo $HTTP_COOKIE_VARS['ck_config']; // used only in debugging related to user config data
 if($result){
 	while($menu=$result->FetchRow()){
 		if (eregi('LDLogin',$menu['LD_var'])){
@@ -66,20 +66,16 @@ if(!$GLOBALCONFIG['language_single']){
 <form action="#" onSubmit="return checkIfChanged(this.lang.value)">
 <hr>
 <?php echo $LDLanguage ?><br>
-<select name="lang">
-	<option value="pt-br" <?php if($lang=='pt-br') echo 'selected'; ?>> <?php echo $LDBrazilian ?></option>
-	<option value="cs-iso" <?php if($lang=='cs-iso') echo 'selected'; ?>> <?php echo $LDCzech ?></option>
-	<option value="nl" <?php if($lang=='nl') echo 'selected'; ?>> <?php echo $LDDutch ?></option>
-	<option value="en" <?php if($lang=='en') echo 'selected'; ?>> <?php echo $LDEnglish ?></option>
-	<option value="fr" <?php if($lang=='fr') echo 'selected'; ?>> <?php echo $LDFrench ?></option>
-	<option value="de" <?php if($lang=='de') echo 'selected'; ?>> <?php echo $LDGerman ?></option>
- 	<option value="it" <?php if($lang=='it') echo 'selected'; ?>> <?php echo $LDItalian ?></option>
-	<option value="id" <?php if($lang=='id') echo 'selected'; ?>> <?php echo $LDIndonesian ?></option>
-	<option value="no" <?php if($lang=='no') echo 'selected'; ?>> <?php echo $LDNorwegian ?></option>
-	<option value="pl" <?php if($lang=='pl') echo 'selected'; ?>> <?php echo $LDPolish ?></option>
-	<option value="pt" <?php if($lang=='pt') echo 'selected'; ?>> <?php echo $LDPortuguese ?></option>
-	<option value="es" <?php if($lang=='es') echo 'selected'; ?>> <?php echo $LDSpanish ?></option>
-</select><br>
+ <select name="lang"> 
+<?php
+
+require($root_path.'include/care_api_classes/class_language.php');
+$lang_obj=new Language;
+$langselect= $lang_obj->createSelectForm($lang);
+echo $langselect;
+?>
+</select>
+<br>
 <input type="submit" value="<?php echo $LDChange ?>">
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
 <input type="hidden" name="mask" value="<?php echo $mask ?>">
