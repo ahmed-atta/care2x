@@ -16,7 +16,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 // reset all 2nd level lock cookies
 require($root_path.'include/inc_2level_reset.php');
 
-$fileforward='login-pc-config.php'.URL_REDIRECT_APPEND;
+$fileforward='startframe.php'.URL_REDIRECT_APPEND;
 $thisfile='login.php';
 $breakfile='startframe.php'.URL_APPEND;
 
