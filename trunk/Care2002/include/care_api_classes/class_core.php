@@ -165,39 +165,38 @@ class Core {
 	* @access public
 	*/
 	function Transact($sql='') {
-	    global $db;
+		global $db;
 		if(!empty($sql)) $this->sql=$sql;
-        $db->BeginTrans();
-        $this->ok=$db->Execute($this->sql);
-        if($this->ok) {
-            $db->CommitTrans();
+		$db->BeginTrans();
+		$this->ok=$db->Execute($this->sql);
+		if($this->ok) {
+			$db->CommitTrans();
 			return TRUE;
-        } else {
-	        $db->RollbackTrans();
+		} else {
+			$db->RollbackTrans();
 			return FALSE;
-	    }
-    }	
+		}
+	}
 	/**
 	* Filters the data array intended for saving, removing the key-value pairs that do not correspond to the table's field names.
 	* @access private 
 	* @return int Size of the resulting data array. 
 	*/		
-    function _prepSaveArray(){
+	function _prepSaveArray(){
 		$x='';
 		$v='';
-		//$this->buffer_array=NULL;	
-		# Check if  "create_time" key has a value, if no, create a new value
-		if(!isset($this->data_array['create_time'])||empty($this->data_array['create_time'])) $this->data_array['create_time']=date('YmdHis');
+
 		while(list($x,$v)=each($this->ref_array)) {
-	       // if(isset($this->data_array[$v])&&!empty($this->data_array[$v])) $this->buffer_array[$v]=$this->data_array[$v];
-	        if(isset($this->data_array[$v])) { 
-				$this->buffer_array[$v]=$this->data_array[$v]; 
+
+			if(isset($this->data_array[$v])&&($this->data_array[$v]!='')) {
+				$this->buffer_array[$v]=$this->data_array[$v];
+				if($v=='create_time' && $this->data['create_time']!='') $this->buffer_array[$v] = date('YmdHis');
 			}
-	    }
+		}
 		# Reset the source array index to start
 		reset($this->ref_array);
 		return sizeof($this->buffer_array);
-    }	
+	}
 	/**
 	* Inserts data from the internal array previously filled with data by the <var>setDataArray()</var> method. 
 	*
@@ -206,9 +205,11 @@ class Core {
 	* @access public
 	* @return boolean
 	*/		
-    function insertDataFromInternalArray() {
-	    //$this->data_array=NULL;
-	    $this->_prepSaveArray();
+	function insertDataFromInternalArray() {
+		//$this->data_array=NULL;
+		$this->_prepSaveArray();
+		# Check if  "create_time" key has a value, if no, create a new value
+		//if(!isset($this->buffer_array['create_time'])||empty($this->buffer_array['create_time'])) $this->buffer_array['create_time']=date('YmdHis');
 		return $this->insertDataFromArray($this->buffer_array);
 	}
 	/**
@@ -461,7 +462,7 @@ class Core {
 	function saveDBCache($id,&$data,$bin=FALSE){
 		if($bin) $elem='cbinary';
 			else $elem='ctext';
-		$this->sql="INSERT INTO care_cache (id,$elem) VALUES ('$id','$data')";
+		$this->sql="INSERT INTO care_cache (id,$elem,tstamp) VALUES ('$id','$data','".date('YmdHis')."')";
 		return $this->Transact();
 	}
 	/**
@@ -478,7 +479,7 @@ class Core {
 		$row;
 		if($bin) $elem='cbinary';
 			else $elem='ctext';
-		$this->sql="SELECT $elem FROM care_cache WHERE id='$id'";
+		$this->sql="SELECT $elem FROM care_cache WHERE id = '$id'";
         if($buf=$db->Execute($this->sql)) {
             if($buf->RecordCount()) {
 				 $row=$buf->FetchRow();
@@ -494,8 +495,9 @@ class Core {
 	* @return boolean
 	*/
 	function deleteDBCache($id){
+		global $sql_LIKE;
 		if(empty($id)) return FALSE;
-		$this->sql="DELETE  FROM care_cache WHERE id LIKE '$id'";
+		$this->sql="DELETE  FROM care_cache WHERE id = '$id'";
 		return $this->Transact();
 	}
 	/**
@@ -607,13 +609,13 @@ class Core {
 		global $dbtype;
 
 		switch($dbtype){
-			case 'mysql': return "CONCAT($fieldname,'".str."')";
+			case 'mysql': return "CONCAT($fieldname,'$str')";
 				break;
-			case 'postgres': return "($fieldname || '".$str."')";
+			case 'postgres': return "$fieldname || '$str'";
 				break;
-			case 'postgres7':return "($fieldname || '".$str."')";
+			case 'postgres7':return "$fieldname || '$str'";
 				break;
-			default: return "($fieldname || '".$str."')";
+			default: return "$fieldname || '$str'";
 		}
 	}
 	/**
@@ -655,3 +657,4 @@ class Core {
 		}
 	}
 }
+?>

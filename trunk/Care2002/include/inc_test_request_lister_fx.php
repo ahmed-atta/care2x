@@ -64,7 +64,7 @@ if($tracker>1)
    $requests->MoveFirst();
 
 ?>
-<a href="<?php echo $thisfile.URL_APPEND."&target=".$target."&subtarget=".$subtarget."&pn=".$pn."&batch_nr=".$test_request['batch_nr']."&user_origin=".$user_origin."&tracker=".($tracker-1); ?>"><img <?php echo createComIcon($root_path,'uparrowgrnlrg.gif','0','left') ?> alt="<?php echo $LDPrevRequest ?>"></a>
+<a href="<?php echo $thisfile.URL_APPEND."&target=".$target."&subtarget=".$subtarget."&pn=".$test_request['encounter_nr']."&batch_nr=".$test_request['batch_nr']."&user_origin=".$user_origin."&tracker=".($tracker-1); ?>"><img <?php echo createComIcon($root_path,'uparrowgrnlrg.gif','0','left') ?> alt="<?php echo $LDPrevRequest ?>"></a>
 <?php
 }
 if($tracker<$batchrows)
@@ -72,7 +72,7 @@ if($tracker<$batchrows)
    $requests->Move($tracker);
    $test_request=$requests->FetchRow();
 ?>
-<a href="<?php echo $thisfile.URL_APPEND."&target=".$target."&subtarget=".$subtarget."&pn=".$pn."&batch_nr=".$test_request['batch_nr']."&user_origin=".$user_origin."&tracker=".($tracker+1); ?>"><img <?php echo createComIcon($root_path,'dwnarrowgrnlrg.gif','0','right') ?>  alt="<?php echo $LDNextRequest ?>"></a>
+<a href="<?php echo $thisfile.URL_APPEND."&target=".$target."&subtarget=".$subtarget."&pn=".$test_request['encounter_nr']."&batch_nr=".$test_request['batch_nr']."&user_origin=".$user_origin."&tracker=".($tracker+1); ?>"><img <?php echo createComIcon($root_path,'dwnarrowgrnlrg.gif','0','right') ?>  alt="<?php echo $LDNextRequest ?>"></a>
 <?php
 }
 
@@ -103,9 +103,9 @@ while($test_request=$requests->FetchRow())
    }
    
    /* Check for the barcode png image, if nonexistent create it in the cache */
-   if(!file_exists($root_path."cache/barcodes/pn_".$test_request['encounter_nr'].".png"))
+   if(!file_exists($root_path."cache/barcodes/en_".$test_request['encounter_nr'].".png"))
    {
-	  echo "<img src='".$root_path."classes/barcode/image.php?code=".$test_request['encounter_nr']."&style=68&type=I25&width=145&height=50&xres=2&font=5&label=2' border=0 width=0 height=0>";
+	  echo "<img src='".$root_path."classes/barcode/image.php?code=".$test_request['encounter_nr']."&style=68&type=I25&width=145&height=50&xres=2&font=5&label=2&form_file=en' border=0 width=0 height=0>";
 	}
    
   $tracker++;
