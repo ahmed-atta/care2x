@@ -11,7 +11,8 @@ if(file_exists('language/'.$lang.'/lang_'.$lang.'_indexframe.php')) include('lan
     else include('language/en/lang_en_indexframe.php')
 
 
-?><html>
+?>
+<?php html_rtl($lang) ?>
 <?php 
 
 include_once('include/inc_charset_fx.php');
