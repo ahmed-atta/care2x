@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
+* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@latorilla.com
+* elpidio@care2x.net, elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -15,6 +15,9 @@ $local_user='ck_cafenews_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 $breakfile='cafenews.php'.URL_APPEND;
 $returnfile='cafenews-edit-menu-select-week.php'.URL_APPEND;
+
+require_once($root_path.'include/care_api_classes/class_core.php');
+$core=& new Core();
 
  $daytag=date("w");
  $day=date("d");
@@ -74,7 +77,9 @@ if($dblink_ok)
 	 	case 'save':
 				if($update)
 				{
-					$sql="UPDATE $dbtable SET menu='$menuplan',modify_id='".$HTTP_COOKIE_VARS[$local_user.$sid]."' WHERE  item='".$item."'";	
+					$sql="UPDATE $dbtable SET menu='$menuplan',
+					modify_id='".$HTTP_COOKIE_VARS[$local_user.$sid]."',
+					modify_time='".date('YmdHis')."'  WHERE  item='".$item."'";
 				}
 				else
 				{
@@ -83,7 +88,6 @@ if($dblink_ok)
 						    lang,
 						    cdate,
 							menu,
-							modify_time,
 							create_id,
 							create_time
 							) VALUES 
@@ -91,22 +95,28 @@ if($dblink_ok)
 						    '$lang',
 						    '".formatDate2STD($myear."-".$mmonth."-".$mday,"yyyy-mm-dd")."',
 							'$menuplan',
-							'',
 							'".$HTTP_COOKIE_VARS[$local_user.$sid]."',
-							NULL
+							'".date('YmdHis')."'
 							)";
 				}					
-				
+				//echo $sql;
 				if($ergebnis=$db->Execute($sql))
        				{
-					    if(!$update) $item=$db->Insert_ID();
+					if(!$update){
+						if($db_type=='mysql'){
+							$item=$db->Insert_ID();
+						}else{
+							$item=$core->postgre_Insert_ID($dbtable,'item',$db->Insert_ID());
+						}
+					}
+					    //echo $item;
 						header("Location: cafenews-edit-menu.php?sid=$sid&lang=$lang&mode=saveok&item=$item&week=$week&mday=$mday&mmonth=$mmonth&myear=$myear"); exit;
 					}
-					else echo "<p>".$sql."<p>$LDDbNoSave"; 				
+					else echo "<p>".$sql."<p>$LDDbNoSave";
 				break;
 				
 		default:
-		 	if($item) 
+		 	if($item)
 			{
 			    $sql="SELECT item, menu FROM $dbtable WHERE item='".$item."'" ;
 			}
@@ -114,12 +124,12 @@ if($dblink_ok)
 			{
                 $sql="SELECT item, menu FROM $dbtable WHERE cdate='".formatDate2STD($myear."-".$mmonth."-".$mday,"yyyy-mm-dd")."'" ;
  
-	            if(defined('LANG_DEPENDENT') && (LANG_DEPENDENT==1))
+	            if(defined('LANG_DEPENDENT') && (LANG_DEPENDENT))
                 {
 	                $sql.="' AND lang='".$lang."'";
                  }
 	         }		
-			
+
 			//echo $sql;
 			if($ergebnis=$db->Execute($sql))
        		{
@@ -192,9 +202,11 @@ function aligndate(&$ad,&$am,&$ay)
 <?php for ($i=0,$acttag=$day,$dyidx=$daytag-1;$i<7;$i++,$acttag++,$dyidx++)
 	{
 	$spot=0;
-	if ($mday==$acttag) 	$spot=1;
 	aligndate($acttag,$month,$year);
-	echo ' 
+
+	if ((int)$mday==(int)$acttag) 	$spot=1;
+	
+	echo '
     <td class="v18_b" ';
 	if ($spot)  echo ' bgcolor="yellow">';
 		else echo ' bgcolor="#ccffff">';

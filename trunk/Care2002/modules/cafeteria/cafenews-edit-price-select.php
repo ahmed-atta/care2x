@@ -3,17 +3,16 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
+* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@latorilla.com
+* elpidio@care2x.net, elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
 */
 define('LANG_FILE','editor.php');
 $local_user='ck_cafenews_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
 
 if(isset($groupopt)) {
     switch($groupopt)
@@ -87,6 +86,11 @@ function chkForm(d)
 
 <?php if($cfg['dhtml']) include("/include/inc_css_a_hilitebu.php"); ?>
 
+<SCRIPT LANGUAGE="javascript" >
+function chkRadioButton(e){
+	if(e) e.checked=true;
+}
+</SCRIPT>
 </head>
 <body>
 <FONT  SIZE=8 COLOR="#cc6600" FACE="verdana,Arial">
@@ -131,7 +135,10 @@ function chkForm(d)
     <td>&nbsp;</td>
     <td bgcolor="ccffff" colspan=2><FONT FACE="verdana,Arial"><p><br>
 		<input type="radio" name="groupopt" value="newgroup" <?php if (!$rows) echo "checked"; ?>> 
-		<a href="#" <?php if($rows) echo 'onClick="document.selectform.groupopt['.$i.'].checked=true"';?>><?php echo $LDCreateGroup ?></a><br><p>
+		<a href="#" <?php 
+			if(!$rows) $i=0;
+			echo 'onClick="document.selectform.groupopt['.$i.'].checked=true"';
+			?>><?php echo $LDCreateGroup ?></a><br><p>
   </td>
   </tr>
   <tr>
@@ -141,8 +148,11 @@ function chkForm(d)
     <td>&nbsp;</td>
     <td bgcolor="ccffff" colspan=2><p><br><FONT FACE="verdana,Arial">
 		<input type="radio" name="groupopt" value="set_currency" <?php if (!$rows) echo "checked"; ?>> 
-		<a href="#" <?php $i++; if($rows) echo 'onClick="document.selectform.groupopt['.$i.'].checked=true"';?>><?php echo $LDSetCurrency ?></a>
-		<p>
+ 		<a href="#" <?php 
+		if(!$rows) $i=1; else $i++;
+		echo 'onClick="document.selectform.groupopt['.$i.'].checked=true"';
+		?>><?php echo $LDSetCurrency ?></a>
+ 		<p>
  </td>
   </tr>
   <tr>
