@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
 * Copyright 2002,2003,2004,2005 Elpidio Latorilla
-* elpidio@care2x.org, elpidio@care2x.net
+* elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -58,15 +58,6 @@ $rows=$OR_obj->LastRecordCount();
 ob_start();
 
 ?>
-
-<ul>
-<?php if($rows) { ?>
-
-<img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"><font face="Verdana, Arial" size=3 color="#880000">
-<b><?php echo str_replace("~station~",strtoupper($station),$LDStationExists) ?></b></font><p>
-<?php } ?>
-
-<?php echo $LDEnterAllFields ?>
 
 <table border=0>
 <tbody class="submenu">
@@ -135,8 +126,6 @@ if(is_object($OR_rooms)){
 <p>
 
 <a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> border="0"></a>
-
-</ul>
 
 <?php
 

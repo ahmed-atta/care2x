@@ -4,10 +4,10 @@ require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 //error_reporting(E_WARNING);
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
 * Copyright 2002,2003,2004,2005 Elpidio Latorilla
-* elpidio@care2x.org, elpidio@care2x.net
+* elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -60,7 +60,7 @@ require($root_path.'include/inc_passcheck_head.php');
 
 <P>
 
-<img <?php echo createComIcon($root_path,'monitor2.gif','0','absmiddle') ?>>
+<img <?php echo createComIcon($root_path,'wheelchair.gif','0','top') ?>>
 <FONT  COLOR="<?php echo $cfg[top_txtcolor] ?>"  SIZE=6  FACE="verdana"> <b><?php echo "$LDNursingStation ".stripslashes($station); ?></b></font>
 
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 

@@ -1,30 +1,45 @@
 <?php
 $returnfile=$HTTP_SESSION_VARS['sess_file_return'];
 
-require('./gui_bridge/default/gui_std_tags.php');
+# Start Smarty templating here
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
 
-//$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('common');
 
-function createTR($ld_text, $input_val, $colspan = 1)
-{
-    global $toggle, $root_path;
+if($parent_admit) $sTitleNr= ($HTTP_SESSION_VARS['sess_full_en']);
+	else $sTitleNr = ($HTTP_SESSION_VARS['sess_full_pid']);
+
+# Title in the toolbar
+ $smarty->assign('sToolbarTitle',"$page_title $encounter_nr");
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('submenu1.php','$LDPatientRegister')");
+
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('title',"$page_title $encounter_nr");
+
+ # Onload Javascript code
+ $smarty->assign('sOnLoadJs',"if (window.focus) window.focus();");
+
+ # href for help button
+ $smarty->assign('pbHelp',"javascript:gethelp('medocs_entry.php')");
+
+  # href for return button
+ $smarty->assign('pbBack',$returnfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=show&type_nr='.$type_nr);
+
+
+# Buffer extra javascript code
+
+ob_start();
+
 ?>
-
-<tr>
-<td bgColor="#eeeeee" ><FONT SIZE=-1  FACE="Arial,verdana,sans serif"><?php echo $ld_text ?>:
-</td>
-<td colspan=<?php echo $colspan; ?> bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial,verdana,sans serif"><?php echo $input_val; ?>
-</td>
-</tr>
-
-<?php
-$toggle=!$toggle;
-}
-
-echo StdHeader();
-echo setCharSet(); 
-?>
- <TITLE><?php echo $title ?></TITLE>
 
 <script  language="javascript">
 <!-- 
@@ -44,226 +59,174 @@ function popRecordHistory(table,pid) {
 <script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
 <?php 
-require($root_path.'include/inc_js_gethelp.php'); 
-require($root_path.'include/inc_css_a_hilitebu.php');
-?>
-</HEAD>
 
-<BODY bgcolor="<?php echo $cfg['bot_bgcolor'];?>" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="if (window.focus) window.focus();" 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
-
-<table width=100% border=0 cellspacing="0"  cellpadding=0 >
-
-<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php echo $page_title ?></STRONG> 
-<font size=+2>(<?php echo $encounter_nr; ?>)</font></FONT>
-</td>
-
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
-<a href="<?php echo $returnfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=show&type_nr='.$type_nr; ?>" ><img 
-<?php echo createLDImgSrc($root_path,'back2.gif','0'); ?> <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';?>><a 
-href="javascript:gethelp('medocs_entry.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
- echo $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
-</td>
-</tr>
-
-<?php
-/* Create the tabs */
+$sTemp = ob_get_contents();
+ob_end_clean();
+$smarty->append('JavaScript',$sTemp);
 
 require('./gui_bridge/default/gui_tabs_medocs.php');
 
-?>
-
-<tr>
-<td colspan=3   bgcolor="<?php echo $cfg['body_bgcolor']; ?>">
-
-<FONT    SIZE=-1  FACE="Arial">
-
-<table border=0 cellspacing=1 cellpadding=0 width=100%>
-<tr bgcolor="#ffffff">
-<td colspan=3 valign="top">
-
-<table border=0 width=100% cellspacing=1 cellpadding=3>
-<?php
 if($enc_obj->Is_Discharged()){
-?>
-  <tr>
-    <td bgcolor="red" colspan=3>&nbsp;<FONT    SIZE=2  FACE="verdana,Arial" color="#ffffff"><img <?php echo createComIcon($root_path,'warn.gif','0','absmiddle'); ?>> <b><?php echo $LDPatientIsDischarged; ?></b></font></td>
-  </tr>
 
-<?php
-}
-?>
-<tr>
-<td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial">
-<?php 
-echo $LDAdmitNr;
-?>
-</td>
-<td width="30%"  bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial" color="#800000">
-<?php 
- echo ($HTTP_SESSION_VARS['sess_en']) ;
-?>
-</td>
+	$smarty->assign('is_discharged',TRUE);
+	$smarty->assign('sWarnIcon',"<img ".createComIcon($root_path,'warn.gif','0','absmiddle').">");
+	$smarty->assign('sDischarged',$LDPatientIsDischarged);
 
-<td valign="top" rowspan=8 align="center" bgcolor="#ffffee" ><FONT SIZE=-1  FACE="Arial"><img <?php echo $img_source; ?>>
-</td>
-</tr>
-
-<tr>
-<td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php echo $LDTitle ?>:
-</td>
-<td  bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial">
-<?php echo $title ?>
-</td>
-
-</tr>
-<tr>
-<td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php  echo $LDLastName ?>:
-</td>
-<td  bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial" color="#990000"><b><?php echo $name_last; ?></b>
-</td>
-</tr>
-
-<tr>
-<td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php echo $LDFirstName ?>:
-</td>
-<td bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial" color="#990000"><b><?php echo $name_first; ?></b>
-<?php
-# If person is dead show a black cross
-if($death_date&&$death_date!='0000-00-00') echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0').'>';
-?>
-</td>
-</tr>
-
-<?php
-if (!$GLOBAL_CONFIG['person_name_2_hide']&&$name_2)
-{
-createTR($LDName2,$name_2);
 }
 
-if (!$GLOBAL_CONFIG['person_name_3_hide']&&$name_3)
-{
-createTR( $LDName3,$name_3);
+# Set the table columns´ classes
+$smarty->assign('sClassItem','class="adm_item"');
+$smarty->assign('sClassInput','class="adm_input"');
+
+$smarty->assign('LDCaseNr',$LDAdmitNr);
+
+$smarty->assign('sEncNrPID',$HTTP_SESSION_VARS['sess_en']);
+
+$smarty->assign('img_source',"<img $img_source>");
+
+$smarty->assign('LDTitle',$LDTitle);
+$smarty->assign('title',$title);
+$smarty->assign('LDLastName',$LDLastName);
+$smarty->assign('name_last',$name_last);
+$smarty->assign('LDFirstName',$LDFirstName);
+$smarty->assign('name_first',$name_first);
+
+# If person is dead show a black cross and assign death date
+
+if($death_date && $death_date != DBF_NODATE){
+	$smarty->assign('sCrossImg','<img '.createComIcon($root_path,'blackcross_sm.gif','0').'>');
+	$smarty->assign('sDeathDate',@formatDate2Local($death_date,$date_format));
 }
 
-if (!$GLOBAL_CONFIG['person_name_middle_hide']&&$name_middle)
-{
-createTR($LDNameMid,$name_middle);
+	# Set a row span counter, initialize with 7
+	$iRowSpan = 7;
+
+	if($GLOBAL_CONFIG['patient_name_2_show']&&$name_2){
+		$smarty->assign('LDName2',$LDName2);
+		$smarty->assign('name_2',$name_2);
+		$iRowSpan++;
+	}
+
+	if($GLOBAL_CONFIG['patient_name_3_show']&&$name_3){
+		$smarty->assign('LDName3',$LDName3);
+		$smarty->assign('name_3',$name_3);
+		$iRowSpan++;
+	}
+
+	if($GLOBAL_CONFIG['patient_name_middle_show']&&$name_middle){
+		$smarty->assign('LDNameMid',$LDNameMid);
+		$smarty->assign('name_middle',$name_middle);
+		$iRowSpan++;
+	}
+
+$smarty->assign('sRowSpan',"rowspan=\"$iRowSpan\"");
+
+$smarty->assign('LDBday',$LDBday);
+$smarty->assign('sBdayDate',@formatDate2Local($date_birth,$date_format));
+
+$smarty->assign('LDSex',$LDSex);
+if($sex=='m') $smarty->assign('sSexType',$LDMale);
+	elseif($sex=='f') $smarty->assign('sSexType',$LDFemale);
+
+$smarty->assign('LDBloodGroup',$LDBloodGroup);
+if($blood_group){
+	$buf='LD'.$blood_group;
+	$smarty->assign('blood_group',$$buf);
 }
 
-if (!$GLOBAL_CONFIG['person_name_maiden_hide']&&$name_maiden)
-{
-createTR($LDNameMaiden,$name_maiden);
-}
+$smarty->assign('LDDate',$LDDate);
+$smarty->assign('LDDiagnosis',$LDDiagnosis);
+$smarty->assign('LDTherapy',$LDTherapy);
+$smarty->assign('LDDetails',$LDDetails);
+$smarty->assign('LDBy',$LDBy);
 
-if (!$GLOBAL_CONFIG['person_name_others_hide']&&$name_others)
-{
-createTR($LDNameOthers,$name_others);
-}
-?>
+$smarty->assign('LDExtraInfo',$LDExtraInfo);
+$smarty->assign('LDInsurance',$LDInsurance);
+$smarty->assign('LDGotMedAdvice',$LDGotMedAdvice);
+$smarty->assign('LDYes',$LDYes);
+$smarty->assign('LDNo',$LDNo);
 
-<tr>
-<td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php echo $LDBday ?>:
-</td>
-<td  bgcolor="#ffffee" ><FONT SIZE=-1  FACE="Arial"  color="#990000">
-<b><?php       echo @formatDate2Local($date_birth,$date_format);  ?></b>
-<?php
-# If person is dead show a black cross
-if($death_date&&$death_date!='0000-00-00'){
-	echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0').'>&nbsp;<font color="#000000">'.formatDate2Local($death_date,$date_format).'</font>';
-}
-?>
-</td>
-
-</tr>
-
-<tr>
-<td bgColor="#eeeeee" ><FONT SIZE=-1  FACE="Arial"><?php  echo $LDSex ?>: 
-</td>
-<td bgcolor="#ffffee" ><FONT SIZE=-1  FACE="Arial"><?php if($sex=="m") echo  $LDMale; elseif($sex=="f") echo $LDFemale ?>
-</td>
-</tr>
-
-
-<?php
 if($mode=='show'){
 	if($rows){
-		$bgimg='tableHeaderbg3.gif';
-		$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
-?>
-</table>
-<table border=0 cellpadding=4 cellspacing=1 width=100%>
-  <tr bgcolor="#f6f6f6">
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDate; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDiagnosis; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDTherapy; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDetails; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066">&nbsp;</td>
-   <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDBy; ?></td>
-  </tr>
-<?php
-$toggle=0;
-while($row=$result->FetchRow()){
-	if($toggle) $bgc='#efefef';
-		else $bgc='#f0f0f0';
-	$toggle=!$toggle;
-?>
+
+		# Set the document list template file
+		
+		$smarty->assign('sDocsBlockIncludeFile','medocs/docslist_frame.tpl');
+
+		$smarty->assign('LDDetails',$LDDetails);
+
+		$sTemp = '';
+		$toggle=0;
+		while($row=$result->FetchRow()){
+			if($toggle) $smarty->assign('sRowClass','class="wardlistrow2"');
+				else $smarty->assign('sRowClass','class="wardlistrow1"');
+			$toggle=!$toggle;
+			if(!empty($row['date'])) $smarty->assign('sDate',@formatDate2Local($row['date'],$date_format));
+				else $smarty->assign('sDate','?');
 
 
-  <tr  bgcolor="<?php echo $bgc; ?>"  valign="top">
-    <td><FONT SIZE=-1  FACE="Arial"><?php if(!empty($row['date'])) echo @formatDate2Local($row['date'],$date_format); else echo '?'; ?></td>
-    <td><FONT SIZE=-1  FACE="Arial" color="#000033"><?php if(!empty($row['diagnosis'])) echo substr($row['diagnosis'],0,$GLOBAL_CONFIG['medocs_text_preview_maxlen']).'<br>'; ?>
-	<?php
-		if(!empty($row['short_notes'])) echo '[ '.$row['short_notes'].' ]';
-	?>
-	</td>
-    <td><FONT SIZE=-1  FACE="Arial" color="#000033"><?php if(!empty($row['therapy'])) echo substr($row['therapy'],0,$GLOBAL_CONFIG['medocs_text_preview_maxlen']).'<br>'; ?>
+			if(!empty($row['diagnosis'])) $smarty->assign('sDiagnosis',substr($row['diagnosis'],0,$GLOBAL_CONFIG['medocs_text_preview_maxlen']).'<br>');
+			if(!empty($row['short_notes'])) $smarty->assign('sShortNotes','[ '.$row['short_notes'].' ]');
+			
+			if(!empty($row['therapy'])) $smarty->assign('sTherapy',substr($row['therapy'],0,$GLOBAL_CONFIG['medocs_text_preview_maxlen']));
 
-	</td>    
-	<td align="center"><a href="<?php echo $thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&encounter_nr='.$HTTP_SESSION_VARS['sess_en'].'&target='.$target.'&mode=details&type_nr='.$type_nr.'&nr='.$row['nr']; ?>"><img <?php echo createComIcon($root_path,'info3.gif','0'); ?>></a></td>
-	<td align="center"><a href="<?php echo $root_path."modules/pdfmaker/medocs/report.php".URL_APPEND."&enc=".$HTTP_SESSION_VARS['sess_en']."&mnr=".$row['nr'].'&target='.$target; ?>" target=_blank><img <?php echo createComIcon($root_path,'pdf_icon.gif','0'); ?>></a></td>
-    <td><FONT SIZE=-1  FACE="Arial"><?php if($row['personell_name']) echo $row['personell_name']; ?></td>
-  </tr>
+			$smarty->assign('sDetailsIcon','<a href="'.$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&encounter_nr='.$HTTP_SESSION_VARS['sess_en'].'&target='.$target.'&mode=details&type_nr='.$type_nr.'&nr='.$row['nr'].'"><img '.createComIcon($root_path,'info3.gif','0').'></a>');
+			$smarty->assign('sMakePdfIcon','<a href="'.$root_path.'modules/pdfmaker/medocs/report.php'.URL_APPEND.'&enc='.$HTTP_SESSION_VARS['sess_en'].'&mnr='.$row['nr'].'&target='.$target.'" target=_blank><img '.createComIcon($root_path,'pdf_icon.gif','0').'></a>');
+			if($row['personell_name']) $smarty->assign('sAuthor',$row['personell_name']);
+			
+			ob_start();
+				$smarty->display('medocs/docslist_row.tpl');
+				$sTemp = $sTemp.ob_get_contents();
+			ob_end_clean();
+		}
 
-<?php
-}
-?>
-</table>
-
-<?php	
+		$smarty->assign('sDocsListRows',$sTemp);
+	
 	}else{
-?>
-</table>
-<table border=0>
-  <tr>
-    <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','absmiddle') ?>></td>
-    <td><font color="#000099" SIZE=3  FACE="verdana,Arial"> <b>
-	<?php 
-		echo $norecordyet;
-	?></b></font></td>
-  </tr>
-</table>
-<?php
+	
+		# Show no record prompt
+
+		$smarty->assign('bShowNoRecord',TRUE);
+
+		$smarty->assign('sMascotImg','<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'>');
+		$smarty->assign('norecordyet',$norecordyet);
+
 	}
 }elseif($mode=='details'){
 
-$TP_aux_notes=nl2br($row['aux_notes']);
+	# Show the record details
 
-if(stristr($row['short_notes'],'got_medical_advice')) $TP_YesNo=$LDYes; 
-	else $TP_YesNo=$LDNo; 
+	# Set the include file
+
+	$smarty->assign('sDocsBlockIncludeFile','medocs/form.tpl');
 	
-$TP_diagnosis=nl2br($row['diagnosis']);
-$TP_therapy=nl2br($row['therapy']);
-$TP_date=formatDate2Local($row['date'],$date_format);
-$TP_personell_name=$row['personell_name'];
-# Load and output the template 
-$TP_form=$TP_obj->load('medocs/tp_medocs_showdata.htm');
-eval("echo $TP_form;");
+	$smarty->assign('sExtraInfo',nl2br($row['aux_notes']));
 
-# Create a new form
+	if(stristr($row['short_notes'],'got_medical_advice')) $smarty->assign('sYesNo',$LDYes);
+		else $smarty->assign('sYesNo',$LDNo);
+	
+	$smarty->assign('sDiagnosis',nl2br($row['diagnosis']));
+	$smarty->assign('sTherapy',nl2br($row['therapy']));
+	$smarty->assign('sDate',formatDate2Local($row['date'],$date_format));
+	$smarty->assign('sAuthor',$row['personell_name']);
+
+# Create a new form for data entry
+
 }else {
+
+	# Create a new entry form
+
+	# Set the include file
+
+	$smarty->assign('sDocsBlockIncludeFile','medocs/form.tpl');
+	
+	# Set form table as active form
+	$smarty->assign('bSetAsForm',TRUE);
+
+	# Collect extra javascript
+	
+	ob_start();
+
 ?>
 
 
@@ -299,20 +262,30 @@ function chkForm(d) {
 //  Script End -->
 </script>
 
-<form method="post" name="entryform" onSubmit="return chkForm(this)">
-<?php 
+<?php
 
-	$TP_date_validate='value="'.formatDate2Local(date('Y-m-d'),$date_format).'" onBlur="IsValidDate(this,\''.$date_format.'\')" onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\')"';
+	$sTemp = ob_get_contents();
+	ob_end_clean();
+
+	$smarty->assign('sDocsJavaScript',$sTemp);
+
+	$smarty->assign('sDateValidateJs','value="'.@formatDate2Local(date('Y-m-d'),$date_format).'" onBlur="IsValidDate(this,\''.$date_format.'\')" onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\')"');
+	
+	$smarty->assign('sYesRadio',"<input type='radio' name='short_notes' value='got_medical_advice'>");
+	$smarty->assign('sNoRadio',"<input type='radio' name='short_notes' value=''>");
 	$TP_href_date="javascript:show_calendar('entryform.date','".$date_format."')";
-
 	$dfbuffer="LD_".strtr($date_format,".-/","phs");
 	$TP_date_format=$$dfbuffer;
+	$TP_img_calendar='<img '.createComIcon($root_path,'show-calendar.gif','0','absmiddle').'>';
+	
+	$smarty->assign('sDateMiniCalendar','<a href="'.$TP_href_date.'">'.$TP_img_calendar.'</a> <font size=1>['.$TP_date_format.']</font>');
 
-	$TP_img_calendar=createComIcon($root_path,'show-calendar.gif','0','absmiddle');
-	$TP_user_name=$HTTP_SESSION_VARS['sess_user_name'];
-	# Load and output the template 
-	$TP_form=$TP_obj->load('medocs/tp_medocs_newform.htm');
-	eval("echo $TP_form;");
+	$smarty->assign('TP_user_name',$HTTP_SESSION_VARS['sess_user_name']);
+
+	# Collect hidden inputs
+	
+	ob_start();
+
 ?>
 <input type="hidden" name="encounter_nr" value="<?php echo $HTTP_SESSION_VARS['sess_en']; ?>">
 <input type="hidden" name="pid" value="<?php echo $HTTP_SESSION_VARS['sess_pid']; ?>">
@@ -324,74 +297,37 @@ function chkForm(d) {
 <input type="hidden" name="edit" value="<?php echo $edit; ?>">
 <input type="hidden" name="is_discharged" value="<?php echo $is_discharged; ?>">
 <input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0'); ?>>
-
-</form>
 <?php
+
+	$sTemp = ob_get_contents();
+	ob_end_clean();
+
+	$smarty->assign('sHiddenInputs',$sTemp);
+
 } 
 
-if(($mode=='show'||$mode=='details')&&!$enc_obj->Is_Discharged()){
-?>
 
-<p>
-<img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle'); ?>>
-<a href="<?php echo $thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&encounter_nr='.$HTTP_SESSION_VARS['sess_en'].'&target='.$target.'&mode=new&type_nr='.$type_nr; ?>"> 
-<?php echo $LDEnterNewRecord; ?>
-</a><br>
-<?php
+if(($mode=='show'||$mode=='details')&&!$enc_obj->Is_Discharged()){
+	
+	$smarty->assign('sNewLinkIcon','<img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle').'>');
+	$smarty->assign('sNewRecLink','<a href="'.$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&encounter_nr='.$HTTP_SESSION_VARS['sess_en'].'&target='.$target.'&mode=new&type_nr='.$type_nr.'">'.$LDEnterNewRecord.'</a>');
+
 	if($mode=='details'){
-?>
-<img <?php echo createComIcon($root_path,'icon_acro.gif','0','absmiddle'); ?>>
-<a href="<?php echo $root_path."modules/pdfmaker/medocs/report.php".URL_APPEND."&enc=".$HTTP_SESSION_VARS['sess_en']."&mnr=".$nr.'&target='.$target; ?>" target=_blank>
-<?php echo $LDPrintPDFDoc; ?>
-</a><br>
-<?php
+		$smarty->assign('sPdfLinkIcon','<img '.createComIcon($root_path,'icon_acro.gif','0','absmiddle').'>');
+		$smarty->assign('sMakePdfLink','<a href="'.$root_path."modules/pdfmaker/medocs/report.php".URL_APPEND."&enc=".$HTTP_SESSION_VARS['sess_en']."&mnr=".$nr.'&target='.$target.'" target=_blank>'.$LDPrintPDFDoc.'</a>');
 	}
 } 
 if(($mode!='show'&&!$nolist) ||($mode=='show'&&$nolist&&$rows>1)){
-?>
-<img <?php echo createComIcon($root_path,'l-arrowgrnlrg.gif','0','absmiddle'); ?>>
-<a href="<?php echo $thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&encounter_nr='.$HTTP_SESSION_VARS['sess_en'].'&target='.$target.'&mode=show&type_nr='.$type_nr; ?>"> 
-<?php echo $LDShowDocList; ?>
-</a>
-<?php
-} 
-?>
-</td>
-<!-- Load the options table  -->
-<td rowspan=2  valign="top">
-&nbsp;
-</td>
-</tr>
 
-</table>
-<p>
+	$smarty->assign('sListLinkIcon','<img '.createComIcon($root_path,'l-arrowgrnlrg.gif','0','absmiddle').'>');
+	$smarty->assign('sListRecLink','<a href="'.$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&encounter_nr='.$HTTP_SESSION_VARS['sess_en'].'&target='.$target.'&mode=show&type_nr='.$type_nr.'">'.$LDShowDocList.'</a>');
 
-<?php 
-if($parent_admit) {
-	include('./include/bottom_controls_admission_options.inc.php');
-}else{
-	include('./include/bottom_controls_registration_options.inc.php');
 }
-?>
 
-<p>
-</ul>
+$smarty->assign('pbBottomClose','<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'cancel.gif','0').'  title="'.$LDCancelClose.'"  align="absmiddle"></a>');
 
-</FONT>
-<p>
-</td>
-</tr>
-</table>        
-<ul>
-<p>
-<a href="<?php echo $breakfile?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
+$smarty->assign('sMainBlockIncludeFile','medocs/main.tpl');
 
-<p>
-</ul>
-<?php
-require($root_path.'include/inc_load_copyrite.php');
- ?>
-</FONT>
-<?php
-StdFooter();
+$smarty->display('common/mainframe.tpl');
+
 ?>

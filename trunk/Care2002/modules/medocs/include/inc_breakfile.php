@@ -13,4 +13,8 @@ if($HTTP_SESSION_VARS['sess_user_origin']=='admission') {
 }else{
 	$breakfile='medocs_pass.php';
 }
+
+# Patch for break urls that have lang param already
+
+if(!stristr($breakfile,'lang=')) $breakfile.=URL_APPEND;
 ?>

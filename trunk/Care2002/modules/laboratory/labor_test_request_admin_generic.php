@@ -6,7 +6,7 @@ require($root_path.'include/inc_environment_global.php');
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
 * Copyright 2002,2003,2004,2005 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* , elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -256,7 +256,7 @@ function printOut()
 {
 	urlholder="labor_test_request_printpop.php?sid=<?php echo $sid ?>&lang=<?php echo $lang ?>&user_origin=<?php echo $user_origin ?>&target=<?php echo $target ?>&subtarget=<?php echo $subtarget ?>&batch_nr=<?php echo $batch_nr ?>&pn=<?php echo $pn ?>";
 	testprintout<?php echo $sid ?>=window.open(urlholder,"testprintout<?php echo $sid ?>","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
-    testprintout<?php echo $sid ?>.print();
+    //testprintout<?php echo $sid ?>.print();
 }
 
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>

@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
 * Copyright 2002,2003,2004,2005 Elpidio Latorilla
-* elpidio@care2x.org, elpidio@care2x.net
+* elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -73,7 +73,7 @@ require($root_path.'include/inc_passcheck_head.php');
 
 <p>
 <FONT    SIZE=-1  FACE="Arial">
-<img src="../../gui/img/common/default/soft.png" border=0 width=64 height=64>
+<img src="../../gui/img/common/default/soft.png" border=0 width=64 height=64 align="middle">
 <FONT  COLOR="<?php echo $cfg[top_txtcolor] ?>"  SIZE=5  FACE="verdana"> <b><?php echo "$LDMedDepot :: $title" ?></b></font>
 <p>
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 

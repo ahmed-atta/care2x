@@ -3,14 +3,29 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
 * Copyright 2002,2003,2004,2005 Elpidio Latorilla
-* elpidio@care2x.org, elpidio@care2x.net
+* elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define('PREVIEW_SIZE',400); // define here the width of the preview image
+
+#
+# Define here the width of the preview image
+#
+define('PREVIEW_SIZE',400);
+
+#
+# The ImageJ applet control panel height
+# Microsoft = ~100
+# Linux = ~90
+#
+define('IMAGEJ_PANEL_HEIGHT', 100);
+#
+# The ImageJ applet control panel height
+#
+define('IMAGEJ_PANEL_WIDTH_MIN', 250);
 
 $lang_tables=array('images.php');
 define('LANG_FILE','nursing.php');
@@ -33,20 +48,21 @@ if(isset($pn)&&$pn){
 	//$db->debug=true;
 	if(isset($mode)&&$mode=='save'){
 
-		#$HTTP_POST_VARS['history']="CONCAT(history,'Notes ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n')";
+		//$HTTP_POST_VARS['history']="CONCAT(history,'Notes ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n')";
 		$HTTP_POST_VARS['history']=$img_obj->ConcatHistory("Notes ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
 		$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
 		$HTTP_POST_VARS['modify_time']=date('YmdHis');
 		//$img_obj->setDataArray($HTTP_POST_VARS);
 		if($img_obj->updateImageNotes($HTTP_POST_VARS)){
-			header('Location:'.basename(__FILE__).URL_REDIRECT_APPEND.'&pn='.$pn.'&nr='.$nr);
+			header('Location:'.basename(__FILE__).URL_REDIRECT_APPEND.'&pn='.$pn.'&nr='.$nr.'&bShowImageJApplet='.$bShowImageJApplet);
 			exit;
 		}
 	}
 	
 	if($img_data=$img_obj->getImageData($nr)){
 		$image=$img_data->FetchRow();
-		$picsource=$final_path.$image['nr'].'.'.$image['mime_type'];
+		$sImgFileName = $image['nr'].'.'.$image['mime_type'];
+		$picsource=$final_path.$sImgFileName;
 	}
 }
 
@@ -60,16 +76,35 @@ function check(d) {
 	if(d.notes.value=="") return false;
 		else return true;
 }
-
+//-->
 </script>
 <?php echo setCharSet(); ?>
 </head>
-<body topmargin=0 marginheight=0><font size=5 face=arial color=maroon>
+<body topmargin=0 marginheight=0>
 <form name="picnotes" method="post" onSubmit="return check(this)">
 <?php //echo $LDPreview ?>
 <?php 
-	if(file_exists($picsource)){
+	
+if(file_exists($picsource)){
+	#
+	# If java applet class exists, show link
+	#
+	if(file_exists($root_path.'modules/fotolab/IJBasicViewer.class') && file_exists($root_path.'modules/fotolab/ij.jar')){
+		echo '<font face=arial><a href="'.basename(__FILE__).URL_APPEND.'&pn='.$pn.'&nr='.$nr.'&bShowImageJApplet='.(!$bShowImageJApplet).'">';
+		if($bShowImageJApplet) echo $LDHideJavaApplet;
+			else echo $LDShowJavaApplet;
+		echo '</a>&nbsp;</font>';
+	}
+	#
+	# If ImageJ applet class exists, show link
+	#
+	if(file_exists($root_path.'modules/fotolab/IJApplet.class') && file_exists($root_path.'modules/fotolab/ij.jar')){
+		echo '<font face=arial>
+		<a href="ijapplet_launcher.php'.URL_APPEND.'&pn='.$pn.'&img='.$sImgFileName.'&bShowImageJApplet='.(!$bShowImageJApplet).'">'.$LDEditWithImageJ.'</a>
+		</font>';
+	}
 ?>
+<p>
 <table border=0 cellspacing=0 cellpadding=0>
   <tr>
     <td><font size=2 face=arial color=maroon><?php echo $LDShotDate ?>:
@@ -86,44 +121,58 @@ if(!isset($preview_size)) $preview_size=0;
 
 list($w,$h,$t,$wh)=getImageSize($picsource); // get the size of the image
 
-if(PREVIEW_SIZE<$w){
-	$toggle_pic=true;
-	if($preview_size) $preview_size=0;
-		else $preview_size=PREVIEW_SIZE;
+if(isset($bShowImageJApplet) && $bShowImageJApplet){
+	#
+	# Set applet´s dimensions
+	#
+	$iAppletHeight=$h + IMAGEJ_PANEL_HEIGHT;
+
+	if($w < IMAGEJ_PANEL_WIDTH_MIN ) $iAppletWidth = IMAGEJ_PANEL_WIDTH_MIN;
+		else $iAppletWidth = $w;
+
+	echo '<applet code="IJBasicViewer.class"  archive="ij.jar" width='.$iAppletWidth.' height="'.$iAppletHeight.'">
+				<param name="img" value="'.$picsource.'">
+				</applet>';
 }else{
-	$toggle_pic=false;
-	$preview_size=$w;
-}
 
-	
-if($toggle_pic) echo '<a href="'.basename(__FILE__).URL_APPEND.'&pn='.$pn.'&nr='.$nr.'&preview_size='.$preview_size.'">';
+	if(PREVIEW_SIZE<$w){
+		$toggle_pic=true;
+		if($preview_size) $preview_size=0;
+			else $preview_size=PREVIEW_SIZE;
+	}else{
+		$toggle_pic=false;
+		$preview_size=$w;
+	}
 
-if($t==1){
+	if($toggle_pic) echo '<a href="'.basename(__FILE__).URL_APPEND.'&pn='.$pn.'&nr='.$nr.'&preview_size='.$preview_size.'">';
+
+	if($t==1){
 
 ?>
 
 <img src="<?php	echo $picsource; ?>" <?php if($preview_size) echo 'width="'.$preview_size.'"'; else echo $wh; ?> border=0  name="preview"
 <?php 
 
-}elseif(($toggle_pic&&!$preview_size)||(!$toggle_pic&&$preview_size)){
+	}elseif(($toggle_pic&&!$preview_size)||(!$toggle_pic&&$preview_size)){
 ?>
 <img src="<?php	echo $picsource; ?>" <?php if($preview_size) echo 'width="'.$preview_size.'"'; else echo $wh; ?> border=0  name="preview"
 <?php
-}else{
+	}else{
 ?>
 <img src="<?php	echo $root_path.'main/imgcreator/thumbnail.php?mx='.$preview_size.'&my='.$preview_size.'&imgfile=/'.$fotoserver_localpath.$pn.'/'.$image['nr'].'.'.$image['mime_type'] ?>" border=0  name="preview"
 <?php
-}
+	}
 
-if($toggle_pic){
+	if($toggle_pic){
 ?>
  alt="<?php if($preview_size) echo $LDTogglePreviewOrig; else echo $LDToggleOrigPreview; ?>" 
   title="<?php  if($preview_size) echo $LDTogglePreviewOrig; else echo $LDToggleOrigPreview; ?>"
 <?php
-}
+	}
 ?>>
 <?php
 	if($toggle_pic) echo '</a>';
+}
 ?>
 <br>
 <?php
@@ -152,6 +201,7 @@ if(!empty($image['notes'])){
 <input type="hidden" name="nr" value="<?php echo $nr ?>">
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
 <input type="hidden" name="lang" value="<?php echo $lang ?>">
+<input type="hidden" name="bShowImageJApplet" value="<?php echo $bShowImageJApplet ?>">
 <input type="hidden" name="preview_size" value="<?php if(isset($preview_size)) echo $preview_size ?>">
 <input type="hidden" name="mode" value="save">
 <input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0'); ?>>

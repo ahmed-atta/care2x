@@ -64,7 +64,7 @@ require($root_path.'include/inc_passcheck_head.php');
 
 <P>
 
-<img <?php echo createComIcon($root_path,'monitor2.gif','0','absmiddle') ?>>
+<img <?php echo createComIcon($root_path,'swimring.gif','0','top') ?>>
 <FONT  COLOR="<?php echo $cfg[top_txtcolor] ?>"  SIZE=6  FACE="verdana"> <b><?php echo $LDOrDocu ?></b></font>
 
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
