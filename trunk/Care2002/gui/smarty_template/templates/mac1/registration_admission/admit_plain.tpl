@@ -5,8 +5,14 @@
     </tr>
     <tr>
       <td>
-			{{$sMainDataBlock}}
-	  </td>
+
+				{{$sMainDataBlock}}
+
+				{{if $sMainIncludeFile}}
+					{{include file=$sMainIncludeFile}}
+				{{/if}}
+
+			</td>
     </tr>
   </tbody>
 </table>

@@ -4,7 +4,7 @@
   <tbody>
   {{if $bShowTabs}}
     <tr>
-      <td height=24><div align="center"><!--{{$pbNew}}-->{{$pbSearch}}{{$pbAdvSearch}}{{$sHSpacer}}{{$pbSwitchMode}}</div></td>
+      <td height=24><div align="center">{{$pbNew}}{{$pbSearch}}{{$pbAdvSearch}}{{$sHSpacer}}{{$pbSwitchMode}}</div></td>
     </tr>
   {{/if}}
     <tr>
