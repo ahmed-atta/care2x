@@ -20,7 +20,7 @@ function Cond($item,$k){
 	global $where,$tab,$HTTP_POST_VARS;
 	if(empty($HTTP_POST_VARS[$item])) return false;
 	else{
-		$buf=" $tab.$item LIKE \"".$HTTP_POST_VARS[$item]."%\"";
+		$buf=" $tab.$item LIKE '".$HTTP_POST_VARS[$item]."%'";
 		if(!empty($where)) $where.=' AND '.$buf;
 		 else $where=$buf;
 	}
@@ -30,7 +30,7 @@ function fCond($item,$k){
 	global $orwhere,$tab,$HTTP_POST_VARS;
 	if(empty($HTTP_POST_VARS[$item])) return false;
 	else{
-		$buf=" f.class_nr LIKE \"".$HTTP_POST_VARS[$item]."%\"";
+		$buf=" f.class_nr LIKE '".$HTTP_POST_VARS[$item]."%'";
 		if(!empty($orwhere)) $orwhere.=' OR '.$buf;
 		 else $orwhere=$buf;
 	}
@@ -152,7 +152,7 @@ if (isset($mode) && ($mode=='search'||$mode=='paginate')){
 			}
 		}
 	
-		$sql="$select$from WHERE $where AND NOT (e.encounter_status LIKE 'cancelled') AND e.status NOT IN ('void','inactive','hidden','deleted') ORDER by ";
+		$sql="$select$from WHERE $where AND e.encounter_status <> 'cancelled' AND e.status NOT IN ('void','inactive','hidden','deleted') ORDER by ";
 		$HTTP_SESSION_VARS['sess_searchkey']=$sql;
 	
 	}
