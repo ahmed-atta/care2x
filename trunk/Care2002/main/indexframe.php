@@ -61,7 +61,7 @@ $targetfile=array("startframe.php",
 					"medlager.php",
 					"edv.php",
 					"intra-email-pass.php",
-					"..\\nocc\\",
+					"../nocc/index.php",
 					"spediens.php",
 					"login.php"
 					);
