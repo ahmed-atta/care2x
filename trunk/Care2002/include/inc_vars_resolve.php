@@ -55,8 +55,7 @@ if(empty($reg_glob_ini)||(!$reg_glob_ini))
     //while(list($x,$v)=each($HTTP_GET_VARS))    
     while(list($x,$v)=each($global_vars))    
     {
-      $global_var_buf=$x;
-	  $$global_var_buf=$v;
+		$$x=$v;
     }
     reset($global_vars);
   }
@@ -69,8 +68,7 @@ if(empty($reg_glob_ini)||(!$reg_glob_ini))
     //while(list($x,$v)=each($HTTP_POST_VARS)) 
     while(list($x,$v)=each($global_vars))    
     {
-      $global_var_buf=$x;
-	  $$global_var_buf=$v;
+		$$x=$v;
     }
     //reset($HTTP_POST_VARS);
     reset($global_vars);
@@ -84,8 +82,7 @@ if(empty($reg_glob_ini)||(!$reg_glob_ini))
     //while(list($x,$v)=each($HTTP_COOKIE_VARS)) 
     while(list($x,$v)=each($global_vars))    
     {
-      $global_var_buf=$x;
-	  $$global_var_buf=$v;
+		$$x=$v;
     }
     //reset($HTTP_COOKIE_VARS);
     reset($global_vars);
@@ -99,18 +96,27 @@ if(empty($reg_glob_ini)||(!$reg_glob_ini))
     //while(list($x,$v)=each($HTTP_SERVER_VARS)) 
     while(list($x,$v)=each($global_vars))    
     {
-      $global_var_buf=$x;
-	  $$global_var_buf=$v;
+		$$x=$v;
     }
     //reset($HTTP_SERVER_VARS);
     reset($global_vars);
   }
   
- /* Globalize POST FILES */
-/*if(isset($_FILES)) $HTTP_POST_FILES=$_FILES;
-   else $HTTP_POST_FILES=$GLOBALS['HTTP_POST_FILES'];
-*/ 
-    
+/* Process SESSION vars */  
+/*  if(sizeof($global_vars=&importGlobalVariable('session')))
+  {
+    //while(list($x,$v)=each($HTTP_SERVER_VARS)) 
+    while(list($x,$v)=each($global_vars))    
+    {
+		$$x=$v;
+    }
+    //reset($HTTP_SERVER_VARS);
+    reset($global_vars);
+  }  
+  
+*/
+
+
 }
 
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */

@@ -37,8 +37,9 @@ if($link&&$DBLink_OK)
        		{
 				$rows=mysql_num_rows($ergebnis);
 				if($rows) $report=mysql_fetch_array($ergebnis);
+				  else $report['script_call']='diagnostics-report-none.php?pn='.$pn; // If no report is available, load the non-availability page
 			}
-			else{echo "<p>$sql$LDDbNoRead";exit;}
+			else{echo "<p>$sql$LDDbNoRead";}
 
        
 	}

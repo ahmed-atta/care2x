@@ -344,13 +344,13 @@ for ($i=0;$i<$cnt;$i++){
 		</td>
  -->		
         <td valign="top"><font face="verdana,arial" size="2" ><?php echo $LDDate ?>:<br>
-		<input type=text size="8" maxlength=8 name="dateput" onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onFocus=this.select() value="<?php if(!$saved) echo $dateput; ?>" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"><br>
+		<input type=text size=10 maxlength=10 name="dateput" onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onFocus=this.select() value="<?php if(!$saved) echo $dateput; ?>" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"><br>
 <!-- 		<a href="javascript:document.berichtform.dateput.value='h';setDate(document.berichtform.dateput);"><img <?php echo createComIcon('../','arrow-t.gif','0') ?> alt="<?php echo $LDInsertDate ?>"></a>
  -->		
          </td>
 		 
 		<td valign="top"><font face="verdana,arial" size="2" ><?php echo $LDClockTime ?>:<br>
-		<input type=text size="4" maxlength=5 name="timeput" value="<?php if(!$saved) echo $timeput; ?>" onKeyUp=setTime(this,'<?php echo $lang ?>') onFocus=this.select()><br>
+		<input type=text size=4 maxlength=5 name="timeput" value="<?php if(!$saved) echo $timeput; ?>" onKeyUp=setTime(this,'<?php echo $lang ?>') onFocus=this.select()><br>
 <!-- 		<a href="javascript:document.berichtform.timeput.value='j';setTime(document.berichtform.timeput);"><img <?php echo createComIcon('../','arrow-t.gif','0') ?> alt="<?php echo $LDInsertTimeNow ?>"></a>
  -->		</td>
 		
@@ -368,7 +368,7 @@ for ($i=0;$i<$cnt;$i++){
 		<a href="javascript:document.berichtform.dateput2.value='h';setDate(document.berichtform.dateput2);"><img <?php echo createComIcon('../','arrow-t.gif','0') ?> alt="<?php echo $LDInsertDate ?>"></a>
 		</td>
  -->		
-		<td valign="top"><font face="verdana,arial" size="2" ><?php echo $LDDate ?>:<br><input type=text size="8" maxlength=8 name="dateput2" value="<?php if(!$saved) echo $dateput2; ?>" onBlur="IsValidDate(this,'<?php echo $date_format ?>')"  onFocus="this.select()" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"><br>
+		<td valign="top"><font face="verdana,arial" size="2" ><?php echo $LDDate ?>:<br><input type=text size=10 maxlength=10 name="dateput2" value="<?php if(!$saved) echo $dateput2; ?>" onBlur="IsValidDate(this,'<?php echo $date_format ?>')"  onFocus="this.select()" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"><br>
 <!-- 		<a href="javascript:document.berichtform.dateput2.value='h';setDate(document.berichtform.dateput2);"><img <?php echo createComIcon('../','arrow-t.gif','0') ?> alt="<?php echo $LDInsertDate ?>"></a>
  -->		
         </td>

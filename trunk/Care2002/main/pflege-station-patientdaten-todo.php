@@ -11,7 +11,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
 require_once('../include/inc_front_chain_lang.php');
-if($edit&&!$HTTP_COOKIE_VARS[$local_user.$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+if($edit&&!$HTTP_COOKIE_VARS[$local_user.$sid]) {header('Location:../language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 
 require_once('../include/inc_config_color.php'); // load color preferences
 
 $thisfile='pflege-station-patientdaten-todo.php';
@@ -362,7 +362,7 @@ for ($i=0;$i<$cnt;$i++){
 		</td>
  -->		
         <td valign="top"><font face="verdana,arial" size="2" ><?php echo $LDDate ?>:<br>
-		<input type=text size="8" name="dateput" onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')" onFocus=this.select() value="<?php if(!$saved) echo $dateput; ?>"><br>
+		<input type=text size=10 maxlength=10  name="dateput" onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')" onFocus=this.select() value="<?php if(!$saved) echo $dateput; ?>"><br>
 <!-- 		<a href="javascript:document.berichtform.dateput.value='h';setDate(document.berichtform.dateput);"><img <?php echo createComIcon('../','arrow-t.gif','0') ?> alt="<?php echo $LDInsertDate ?>"></a>
  -->		
          </td>
@@ -382,7 +382,7 @@ for ($i=0;$i<$cnt;$i++){
 		<a href="javascript:document.berichtform.dateput2.value='h';setDate(document.berichtform.dateput2);"><img <?php echo createComIcon('../','arrow-t.gif','0') ?> alt="<?php echo $LDInsertDate ?>"></a>
 		</td>
  -->		
-		<td valign="top"><font face="verdana,arial" size="2" ><?php echo $LDDate ?>:<br><input type=text size="8" name="dateput2" value="<?php if(!$saved) echo $dateput2; ?>" onBlur="IsValidDate(this,'<?php echo $date_format ?>')"  onFocus="this.select()" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"><br>
+		<td valign="top"><font face="verdana,arial" size="2" ><?php echo $LDDate ?>:<br><input type=text size=10 maxlength=10  name="dateput2" value="<?php if(!$saved) echo $dateput2; ?>" onBlur="IsValidDate(this,'<?php echo $date_format ?>')"  onFocus="this.select()" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"><br>
 <!-- 		<a href="javascript:document.berichtform.dateput2.value='h';setDate(document.berichtform.dateput2);"><img <?php echo createComIcon('../','arrow-t.gif','0') ?> alt="<?php echo $LDInsertDate ?>"></a>
  -->		
         </td>

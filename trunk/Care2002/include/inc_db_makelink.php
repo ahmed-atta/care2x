@@ -17,7 +17,7 @@ if(!isset($root_path)||empty($root_path)) $root_path='../'; // default language 
 
 
 /* This line loads those variables */
-include_once('../include/inc_init_main.php');
+require($root_path.'include/inc_init_main.php');
 
 
 
@@ -45,6 +45,6 @@ if ($link=mysql_connect($dbhost,$dbusername,$dbpassword))
 }
 
 /* Load the database functions */
-require_once('../include/inc_db_fx.php');
+require_once($root_path.'include/inc_db_fx.php');
 
 ?>

@@ -8,19 +8,36 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+
+function setColorSignals()
+{
+
+    global $pn, $mark_antibiotic, $mark_diuretic, $mark_anticoag, $mark_iv;
+	
+    /* Set the visual signals */
+	
+    if ($mark_antibiotic) setEventSignalColor($pn, SIGNAL_COLOR_ANTIBIOTIC, SIGNAL_COLOR_LEVEL_FULL);
+									
+    if ($mark_diuretic) setEventSignalColor($pn, SIGNAL_COLOR_DIURETIC, SIGNAL_COLOR_LEVEL_FULL);
+									
+    if ($mark_anticoag) setEventSignalColor($pn, SIGNAL_COLOR_ANTICOAG, SIGNAL_COLOR_LEVEL_FULL);
+	
+    if ($mark_iv) setEventSignalColor($pn, SIGNAL_COLOR_IV, SIGNAL_COLOR_LEVEL_FULL);
+}
+
 define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
 require_once('../include/inc_front_chain_lang.php');
 require_once('../include/inc_config_color.php'); // load color preferences
 
-$thisfile="pflege-getmedx.php";
+$thisfile='pflege-getmedx.php';
 
 if(!isset($encoder)||empty($encoder)) $encoder=$HTTP_COOKIE_VARS[$local_user.$sid];
 
 switch($winid)
 {
-	case "medication": $title="$LDMedication/$LDDosage";
-							$element="medication";
+	case 'medication': $title="$LDMedication/$LDDosage";
+							$element='medication';
 							//$maxelement=10;
 							break;
 }
@@ -30,22 +47,26 @@ $dbtable='care_nursing_station_patients_curve';
 /* Establish db connection */
 require('../include/inc_db_makelink.php');
 if($link&&$DBLink_OK) 
-	{	
-	// get orig data
-
-		if($mode=='save')
-		{
+{	
+	if($mode=='save')
+	{
+		/* Reset colorbar flags */
+		$mark_antibiotic=0;
+	    $mark_diuretic=0;
+		$mark_anticoag=0;
+		
 		 // get the basic patient data
-			$sql="SELECT * FROM care_admission_patient WHERE patnum='$pn'";
+		$sql="SELECT * FROM care_admission_patient WHERE patnum='$pn'";
 
-			if($ergebnis=mysql_query($sql,$link))
-       		{
-				$rows=0;
-				if( $result=mysql_fetch_array($ergebnis)) $rows++;
-				if($rows)
-				{
-					mysql_data_seek($ergebnis,0);
-					$result=mysql_fetch_array($ergebnis);		
+		if($ergebnis=mysql_query($sql,$link))
+       	{
+			if($rows=mysql_num_rows($ergebnis))
+			{
+
+				/* Load visual signalling functions */
+				include_once('../include/inc_visual_signalling_fx.php');
+
+				$result=mysql_fetch_array($ergebnis);		
 					
 				// check if entry is already existing
 				$sql="SELECT $element,encoding FROM $dbtable WHERE patnum='$pn'";
@@ -53,15 +74,35 @@ if($link&&$DBLink_OK)
        			{
 					//echo $sql." checked <br>";
 					//$bbuf="";
-					//$tbuf="";
-					$dbuf=$maxelement."~0|".$m0."|".$d0."|".$c0;
+					//$tbuf='';
+					switch($c0)
+					{
+						case 'a': $mark_antibiotic = 1;
+						case 'w': $mark_diuretic = 1;
+					    case 'c': $mark_anticoag = 1;
+						case 'i': $mark_iv = 1;
+					}			
+								
+					$dbuf=$maxelement.'~0|'.$m0.'|'.$d0.'|'.$c0;
+					
 					for($i=1;$i<$maxelement;$i++)
 					{
-						$tdx="m".$i;$ddx="d".$i;$cdx="c".$i;
-						$dbuf=$dbuf."~".$i."|".$$tdx."|".$$ddx."|".$$cdx;
+						$tdx='m'.$i;
+						$ddx='d'.$i;
+						$cdx='c'.$i;
+						
+						switch($$cdx)
+						{
+						    case 'a': $mark_antibiotic = 1;
+							case 'w': $mark_diuretic = 1;
+							case 'c': $mark_anticoag = 1;
+							case 'i': $mark_iv = 1;
+						}
+						
+						$dbuf=$dbuf.'~'.$i.'|'.$$tdx.'|'.$$ddx.'|'.$$cdx;
 					}
 					//$dbuf=$dbuf."~".$enc."\r\n".$encoder." ".date("d.m.Y")." ".date("H.i");
-					$dbuf=$dbuf."~".$encoder." ".date("d.m.Y")." ".date("H.i");
+					$dbuf=$dbuf.'~'.$encoder.' '.date('d.m.Y').' '.date('H.i');
 					//$dbuf=strtr($dbuf," ","+");
 					$rows=0;
 					if( $content=mysql_fetch_array($ergebnis)) $rows++;
@@ -70,10 +111,13 @@ if($link&&$DBLink_OK)
 							// $dbuf=htmlspecialchars($dbuf);
 							mysql_data_seek($ergebnis,0);
 							$content=mysql_fetch_array($ergebnis);
-							$content[encoding].=" ~e=".$encoder."&d=".date("d.m.Y")."&t=".date("H.i")."&a=".$element;
+							$content[encoding].=' ~e='.$encoder.'&d='.date('d.m.Y').'&t='.date('H.i').'&a='.$element;
 							$sql="UPDATE $dbtable SET $element='$dbuf',encoding='$content[encoding]'	WHERE patnum='$pn'";
 							if($ergebnis=mysql_query($sql,$link))
        							{
+								    /* Set the color bars for event signalling */
+								    setColorSignals();
+								
 									//echo $sql." new update <br>";
 									mysql_close($link);
 									header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=1&pn=$pn&station=$station&winid=$winid&yr=$yr&mo=$mo&dy=$dy&dyidx=$dyidx&dystart=$dystart&dyname=$dyname");
@@ -96,16 +140,19 @@ if($link&&$DBLink_OK)
 									 	VALUES
 										(
 										'$pn',
-										'$result[name]',
-										'$result[vorname]',
-										'$result[gebdatum]',
+										'".$result['name']."',
+										'".$result['vorname']."',
+										'".$result['gebdatum']."',
 										'$dbuf',
-										'".date("d.m.Y")."',
+										'".date('d.m.Y')."',
 										'e=".$encoder."&d=".date("d.m.Y")."&t=".date("H.i")."&a=".$element."'
 										)";
 
 							if($ergebnis=mysql_query($sql,$link))
        							{
+								    /* Set the color bars for event signalling */
+								    setColorSignals();
+									
 									//echo $sql." new insert <br>";
 									mysql_close($link);
 									header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=1&pn=$pn&station=$station&winid=$winid&yr=$yr&mo=$mo&dy=$dy&dyidx=$dyidx&dystart=$dystart&dyname=$dyname");
@@ -124,11 +171,8 @@ if($link&&$DBLink_OK)
 
 			if($ergebnis=mysql_query($sql,$link))
        		{
-				$rows=0;
-				if( $result=mysql_fetch_array($ergebnis)) $rows++;
-				if($rows)
+				if($rows=mysql_num_rows($ergebnis))
 				{
-					mysql_data_seek($ergebnis,0);
 					$result=mysql_fetch_array($ergebnis);
 					//echo $sql."<br>";
 				}

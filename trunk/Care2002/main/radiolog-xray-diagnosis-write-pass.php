@@ -8,18 +8,18 @@ require_once('../global_conf/areas_allow.php');
 
 $allowedarea=&$allow_area['radio'];
 
-$fileforward="radiolog-xray-diagnosis-write.php?sid=".$sid."&lang=".$lang;
+$fileforward='radiolog-xray-diagnosis-write.php?sid='.$sid.'&lang='.$lang;
 
-if($retpath=="read_diagnosis") $breakfile="radiolog-xray-diagnosis.php?sid=".$sid."&lang=".$lang;
+if($retpath=='read_diagnosis') $breakfile='radiolog-xray-diagnosis.php?sid='.$sid.'&lang='.$lang;
  	else $breakfile="javascript:window.top.location.replace('radiolog-xray-javastart.php?sid=$sid&lang=$lang&mode=display1')";
 	
-$thisfile="radiolog-xray-diagnosis-write-pass.php";
+$thisfile='radiolog-xray-diagnosis-write-pass.php';
 
-$userck="ck_radio_user";
+$userck='ck_radio_user';
 //reset cookie;
 // reset all 2nd level lock cookies
 setcookie($userck.$sid,'');
-require('../include/inc_2level_reset.php'); setcookie(ck_2level_sid.$sid,"");
+require('../include/inc_2level_reset.php'); setcookie(ck_2level_sid.$sid,'');
 
 require('../include/inc_passcheck_internchk.php');
 if ($pass=='check') 	
@@ -69,7 +69,7 @@ echo '</STRONG></FONT>';
 <?php if(!$passtag) echo'
 <td>
 
-<img src="../img/ned2r.gif" border=0 width=100 height=138 >
+<img '.createMascot('../','mascot3_r').'>
 </td>
 ';
 ?>
@@ -81,9 +81,6 @@ echo '</STRONG></FONT>';
 <table cellpadding=20 bgcolor=#eeeeee >
 <tr>
 <td>
-
-
-
 
 <font color=maroon size=3>
 <b><?php echo $LDPwNeeded ?>!</b></font><p>
@@ -97,8 +94,8 @@ echo '</STRONG></FONT>';
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
 <input type="hidden" name="mode" value="<?php echo $mode ?>">
 <input type="hidden" name="nointern" value="1"><p>
-<input type="image" src="<?php echo showLDImg('continue.gif') ?>" border=0 width=110 height=24>&nbsp;&nbsp;
-<a href="<?php echo $breakfile; ?>"><img <?php echo createLDImgSrc('../','cancel.gif','0') ?>" border=0 width=103 height=24 alt="<?php echo $LDCancel ?>" align="absmiddle"></a>
+<input type="image" <?php echo createLDImgSrc('../','continue.gif','0') ?>>&nbsp;&nbsp;
+<a href="<?php echo $breakfile; ?>"><img <?php echo createLDImgSrc('../','cancel.gif','0') ?> alt="<?php echo $LDCancel ?>" align="absmiddle"></a>
 </font></td>
 </tr>
 </table>

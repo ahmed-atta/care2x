@@ -87,8 +87,8 @@ $LDShowStationData='Stationsprofil';
 $LDLockBed='Bett sperren';
 $LDAccessRights='Zugangsberechtigungen';
 $LDProfile='Profil';
-$LDCreate='Erschaffen';
-$LDNewStation='Neue station';
+$LDCreate='Neue Station';
+$LDNewStation='Neue station erstellen';
 $LDDescription='Beschreibung';
 $LDDept='Abteilung';
 $LDRoom1Nr='Nummer des ersten Zimmers';
@@ -160,7 +160,7 @@ $LDPatListElements=array(
 										'Kasse',
 										'Optionen'
 										);
-$LDConfirmUnlock='Die Sperre des Bett \'+b+\' im Zimmer \'+r+\'  aufheben?';							
+$LDConfirmUnlock='Die Sperre des Bettes \'+b+\' im Zimmer \'+r+\'  aufheben?';							
 $LDConfirmDelete='Wollen Sie wirklich \'+t+\' \'+n+\' aus dem Zimmer \'+r+b+\' entfernen?';
 $LDConfirmLock='Wollen Sie wirklich dieses Bett sperren?';
 $LDClk2Occupy='Klick hier zum belegen';
@@ -324,7 +324,7 @@ $LDQueryDoctor='Frage an den Arzt';
 $LDDoctorInfo='Arztanordung';
 $LDDiagnosticsReport='Neuer Befund angekommen';
 $LDInfusionTherapy='Infusionstherapie-/programm';
-$LDMonitorFluidDischarge='Ausscheidung dok.';
+$LDMonitorFluidDischarge='Ausscheidung/Diuretika';
 $LDBloodProgram='Blutprobe-/transfusion';
 $LDVitalStatistics='Vitalzeichen';
 $LDAntibioticsProgram='Antibiotikatherapie';
@@ -334,7 +334,6 @@ $LDTestConsultRequested='Konsil erstellt';
 $LDNurseReport='Neuer Pflegebericht';
 $LDDaily='Täglich';
 $LDSaveChanges='Änderungen speichern';
-
-
-$LD
+/* 2002-12-07*/
+$LDNoDiagReport='Kein Befund vorhanden.';
 ?>

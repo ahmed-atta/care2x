@@ -70,9 +70,9 @@ if($link&&$DBLink_OK)
 								$rows=mysql_num_rows($ergebnis);
 								if($rows==1)
 								{
-									$rbuf="";
+									$rbuf='';
 									$content=mysql_fetch_array($ergebnis);
-									$buf=explode("_",$content[bed_patient]);
+									$buf=explode('_',$content[bed_patient]);
 									$sbuf="r=$rm&b=$bd&n=$pn";
 									for($i=0;$i<sizeof($buf);$i++)
 									{
@@ -154,8 +154,8 @@ if($link&&$DBLink_OK)
 																discharge_time='".$x_time.":00',
 																discharge_sdate='".formatDate2Std($x_date,$date_format)." ".$x_time.":00',
 																discharge_art='$relart',
-																at_station='0',
-																WHERE patnum='$pn'";
+																at_station='0'
+																WHERE patnum='".$pn."'";
 												         }		
 														 else
 														 {														
@@ -165,6 +165,10 @@ if($link&&$DBLink_OK)
 														if($ergebnis=mysql_query($sql,$link)) 
 														{
 															$released=1;
+														}
+														else
+														{
+														   echo "$sql<br>$LDDbNoSave";
 														}
 
 													

@@ -32,10 +32,11 @@ function createElement($item,$err, $f_size=7, $mx=5)
 	   if($mode=='') $ret_str.='" onClick="hidecat()"';
 	     else $ret_str.='"';
 		 
+	   if($isTimeElement)  $ret_str.= ' onKeyUp="setTime(this,\''.$lang.'\')">';
+	     else $ret_str.='>';		 
 	 }
 	   
-	   if($isTimeElement)  $ret_str.= ' onKeyUp="setTime(this,\''.$lang.'\')">';
-	     else $ret_str.='>';
+
 	   
 	   return $ret_str;
 }

@@ -4,6 +4,7 @@ if (eregi('inc_date_format_functions.php',$PHP_SELF))
 	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 
+
 /**
 * getDateFormat gets the date format stored in the databank
 * if unsuccesful, it will get the default from the defaults.ini
@@ -14,14 +15,20 @@ if (eregi('inc_date_format_functions.php',$PHP_SELF))
 function getDateFormat($link,$DBLink_OK)
 {
 
+    global $root_path;
+
 	$errFormat=0;
 
     /* If no link to db, make own link*/
     if(!isset($link) || !$link)
 	{
 	    
-	    include('../include/inc_init_main.php');
-	  
+		if(!isset($root_path) || !$root_path) $local_path='../';
+		  else $local_path=$root_path;
+		
+	     include($local_path.'include/inc_init_main.php');
+		   // include('../include/inc_init_main.php');
+  
 	     if ($link=mysql_connect($dbhost,$dbusername,$dbpassword))
         {
 	       if(mysql_select_db($dbname,$link)) 
@@ -35,7 +42,7 @@ function getDateFormat($link,$DBLink_OK)
 	
 	if($link&&$DBLink_OK) 
 	{
-	  $sql='SELECT date_format FROM care_global_config';
+	  $sql='SELECT value AS date_format FROM care_global_config WHERE type="date_format"';
 	  if($result=mysql_query($sql,$link))
 	  {
 	    if(mysql_num_rows($result))
@@ -81,7 +88,7 @@ function formatDate2Local($stdDate,$localFormat,$retTime,$timeOnly,&$sepChars)
    if(strchr($stdDate,':'))
    {
       list($stdDate,$stdTime) = explode(' ',$stdDate);
-	  if($timeOnly) return $stdTime; /* It time only is needed */
+	  if($timeOnly) return $stdTime; /* If time only is needed */
    }
 
    $stdArray=explode('-',$stdDate);

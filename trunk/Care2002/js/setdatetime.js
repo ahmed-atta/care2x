@@ -18,6 +18,7 @@
 function setDate(elindex, date_format, lang){
 
     var make_time = 0;
+	var actual = '';
 	
     /* Prepare the language dependent shortcuts */
 	switch(lang.toLowerCase())
@@ -42,10 +43,11 @@ function setDate(elindex, date_format, lang){
 	/* Extract the value of the input element an convert to lower case to be sure */
 	buf = elindex.value;
     buf = buf.toLowerCase();
+	buf = buf.charAt(buf.length - 1);
 	
 	/* Check whether it is a possible shortcut */
-	if ((buf<".")||(buf>"9")||(buf=="/"))
-	{
+	if (((buf<".")|| (buf > "9")) && (buf!="/") && (buf!='-'))
+    {
 	    /* Get the date today */
 	    jetzt=new Date();
 	    datum=jetzt.getDate();
@@ -103,10 +105,11 @@ function setDate(elindex, date_format, lang){
 				                   break;
 	            default: actual = jahr + '-' + monat + '-' + datum; //* Default format is the standard yyyy-mm-dd 
 			}
-		}		
-		
-		elindex.value=actual; //* Now set the value of the element
-		return true;
+			
+	   }		
+	
+	    elindex.value=actual; //* Now set the value of the element
+	    return true;
 	}
 	else
 	{

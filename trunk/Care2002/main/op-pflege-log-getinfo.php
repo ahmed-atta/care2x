@@ -65,7 +65,7 @@ if($link&&$DBLink_OK)
 			}
 				else { echo "$LDDbNoRead<br>"; } 
 				
-		$dbtable="personell_data_quicklist";
+		$dbtable="care_personell_data_quicklist";
 		
 		$sql="SELECT lastname,firstname,profession FROM $dbtable
 					 WHERE dept='$dept'

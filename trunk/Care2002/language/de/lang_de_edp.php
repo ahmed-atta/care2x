@@ -167,4 +167,8 @@ $LDUserInfoNoSave='Der Zugang konnte nicht erstellt werden. <br>Bitte prüfen Sie
 $LDNoAreas='Sie haben keine Bereiche ausgewählt!';
 $LDUserDouble='Der Zugang konnte nicht erstellt werden. <br>Bitte geben Sie eine andere Benutzerkennung ein.';
 $LDEnterNewUser='Einen neuen Benutzer erstellen';
+/* 2002-11-22 EL*/
+$LDDeleteCurrency='Wollen Sie diese Währungsinformation wirklich löschen?';
+$LDNoMainDelete='Die Hauptwährung darf nicht gelöscht werden!. \nBitte stellen Sie zuerst eine andere Hauptwährung ein.';
+$LDCurrencyExisting='Diese Währungsinformation ist bereits vorhanden!';
 ?>

@@ -615,7 +615,7 @@ function unlock(b,r)
 	urlholder="pflege-station.php?mode=newdata&patnum=unlock&sid='.$sid.'&lang='.$lang.'&station='.$station.'&rm="+r+"&bd="+b+"&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday.'";
 	';
 ?>
-	if(confirm("<?php echo $LDConfirmUnlock ?>"))
+	if(confirm('<?php echo $LDConfirmUnlock ?>'))
 	{
 		window.location.replace(urlholder);
 	}

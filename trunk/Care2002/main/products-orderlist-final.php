@@ -47,58 +47,59 @@ $count=0;
 /* Load the date formatter */
 require_once('../include/inc_date_format_functions.php');
 
-
-
-if(($mode=='send')&&($order_nr))
+if(($mode=='send') && isset($order_nr) && $order_nr)
 {
 	include('../include/inc_db_makelink.php');
 	if($link&&$DBLink_OK)
-		{
+	{
+	   
+	   /* Check password of the validator */
+	   
+	   $sql='SELECT password FROM care_users WHERE login_id="'.$validator.'"';
+	   
+	   if($ergebnis=mysql_query($sql,$link))
+	   {
 			
-		$sql='UPDATE '.$dbtable.' SET 										
-							 		validator="'.$validator.'@'.crypt($vpw).'",
+		  if(mysql_num_rows($ergebnis))
+		  {
+		     $result=mysql_fetch_array($ergebnis);
+			 
+			 if ($result['password'] == $vpw)
+			 {
+			 
+		         $sql='UPDATE '.$dbtable.' SET 										
+							 		validator="'.$validator.'",
 									priority="'.$prior.'",
 									status="pending",
 									sent_datetime="'.date('Y-m-d H:i:s').'"
 							   		WHERE order_nr="'.$order_nr.'"
 									AND dept="'.$dept.'"';		// save aux data to the order list
 		
-		 if($ergebnis=mysql_query($sql,$link))
-			{
+		         if($ergebnis=mysql_query($sql,$link))
+		         {
 				//echo $sql;
 					$ofinal=true;
-					
-/*				//$dbtable="pharma_orderlist_todo"; // select pharma table		
-				if($cat=='pharma') $dbtable='care_pharma_orderlist_todo'; 
-					else $dbtable=$dbtable='care_med_orderlist_todo';
-				// the column t_stamp is not included in the sql to cause its auto update	
-				$sql="INSERT INTO ".$dbtable." 
-						(	rec_date,
-							rec_time,
-							order_id,
-							dept,
-							clerk,
-							done_date,
-							status,
-							priority ) 
-						VALUES (
-							'".strftime("%Y.%m.%d")."',
-							'".str_replace("00","24",strftime("%H.%M"))."',
-							'$order_nr',
-							'$dept',
-							'',
-							'',
-							'o_todo',
-							'$prior' )";
-        		if($ergebnis=mysql_query($sql,$link))
-				{
-				//echo $sql;
-*/					$sendok=true;			
-/*				}
-*/			}	
+				    $sendok=true;			
+			    }	
 			//echo $sql;
+			}
+			else
+			{
+			    $error='password';
+			    $mode='';
+			}
+		 }
+		 else
+		 { 
+			$error='validator';
+			$mode='';
+		 } 
+	  }
+	  else
+	  { echo "$sql<br>$LDDbNoRead<br>"; } 
+		
 	}
-  	 else { echo "$LDDbNoLink<br>"; } 
+  	 else { echo "$sql<br>$LDDbNoLink<br>"; } 
 }
 ?>
 <html>
@@ -158,36 +159,51 @@ echo "bgcolor=".$cfg['body_bgcolor']; if (!$cfg['dhtml']){ echo ' link='.$cfg['b
 
 <a href="javascript:gethelp('products.php','final','<?php echo $sendok ?>','<?php echo $cat ?>')"><img <?php echo createComIcon('../','frage.gif','0','right') ?> alt="<?php echo $LDOpenHelp ?>"></a>
 
-<?php if($sendok)
-	echo '
-			<font face="Verdana, Arial" size=2 color="#800000">'.$LDOrderSent.'<p></font>';
+<?php
 
-//$dbtable="pharma_orderlist_".$dept;
+/* Display event messages */
+
+if ($sendok) echo '
+			<font face="Verdana, Arial" size=2 color="#800000">'.$LDOrderSent.'<p></font>';
+			
+if ($error )
+{
+?>
+
+<table border=0>
+  <tr>
+    <td><img <?php echo createMascot('../','mascot1_r.gif') ?>></td>
+    <td><font face="Verdana, Arial" size=3 color="#800000"><b><?php echo ($error=='password') ? $LDInvalidPassword : $LDUnknownValidator; echo '<br>'.$LDPlsEnterInfo; ?></b></font></td>
+  </tr>
+</table>
+<hr>
+<?php
+}
 
 if($cat=='pharma') $dbtable='care_pharma_orderlist';
 	else $dbtable=$dbtable='care_med_orderlist';
 
-$rows=0;
-include('../include/inc_db_makelink.php');
+
+include_once('../include/inc_db_makelink.php');
+
 if($link&&$DBLink_OK)
 		{
-				$sql='SELECT * FROM '.$dbtable.' 
-						WHERE order_nr="'.$order_nr.'"
-						AND dept="'.$dept.'"';
+				$sql='SELECT * FROM '.$dbtable.' WHERE order_nr="'.$order_nr.'"	AND dept="'.$dept.'"';
+						
         		if($ergebnis=mysql_query($sql,$link))
 				{
-					//count rows=linecount
-					while ($content=mysql_fetch_array($ergebnis)) $rows++;					
-					//reset result
-					if ($rows)	mysql_data_seek($ergebnis,0);
-				}else  { echo "$LDDbNoRead<br>"; } 
+                    $rows=mysql_num_rows($ergebnis);
+				}
+				else  
+				{ echo "$LDDbNoRead<br>"; } 
 			//echo $sql;
 	}
   	 else { echo "$LDDbNoLink<br>"; } 
-	
-if($rows>0)
-{
+	 
 //++++++++++++++++++++++++ show the actual list +++++++++++++++++++++++++++
+	
+if ($rows>0)
+{
 
 $tog=1;
 $content=mysql_fetch_array($ergebnis);
@@ -227,15 +243,24 @@ for($n=0;$n<sizeof($artikeln);$n++)
  	}
 	echo '</table></td></tr></table><font face=Verdana,Arial size=2 color="#800000">';
 	
-	if(!($mode=='send')&&(!$sendok))
+	if(($mode!='send')&&(!$sendok))
 	{
 		echo '
-			<form action="'.$thisfile.'" method="get" onSubmit="return checkform(this)">'.$LDListindex[4].'<br>
+			<form action="'.$thisfile.'" method="post" onSubmit="return checkform(this)">'.$LDListindex[4].'<br>
 			<input type="text" name="sender" size=30 maxlength=40 value="';
+		
 		echo $HTTP_COOKIE_VARS[$local_user.$sid]; 
+		
 		echo '"> 
-			 &nbsp;'.$LDNormal.'<input type="radio" name="prior" value="normal" checked> 
-			'.$LDUrgent.'<input type="radio" name="prior" value="urgent" > <br>
+			 &nbsp;'.$LDNormal.'<input type="radio" name="prior" value="normal" ';
+			 
+			 if(!isset($prior) || $prior=='normal' || $prior=='') echo ' checked';
+			 echo '> 
+			'.$LDUrgent.'<input type="radio" name="prior" value="urgent" ';
+			
+			 if(isset($prior) && $prior=='urgent') echo ' checked';
+			
+			echo '> <br>
    			<p>
 			'.$LDValidatedBy.':<br>
 			<input type="text" name="validator" size=30 maxlength=40 value="'.$validator.'"><br>

@@ -27,7 +27,7 @@ switch($target)
 	case 'radiology' : $breakfile='radiolog.php?sid='.$sid.'&lang='.$lang; break;
 	case 'pharmacy' : $breakfile='apotheke.php?sid='.$sid.'&lang='.$lang;break;
 	case 'edp' : $breakfile='edv.php?sid='.$sid.'&lang='.$lang;break;
-	case 'doctors' : $breakfile='aerzte.php?sid='.$sid.'&lang='.$lang;break;
+	case 'doctors' : $breakfile='doctors.php?sid='.$sid.'&lang='.$lang;break;
 	case 'nursing' : $breakfile='pflege.php?sid='.$sid.'&lang='.$lang;break;
 	
 	default: $title=$LDTitleTag[$target];

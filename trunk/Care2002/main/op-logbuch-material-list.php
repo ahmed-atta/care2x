@@ -30,6 +30,7 @@ if($link&&$DBLink_OK)
 					AND op_nr='$op_nr'
 					AND op_src_date='$pyear$pmonth$pday'
 					AND patnum='$patnum'";
+					
 		if($mat_result=mysql_query($sql,$link))
        	{
 			$matrows=0;
@@ -76,7 +77,9 @@ if($link&&$DBLink_OK)
 				}
 			}
 			else break;
-			echo $sql."<br>";
+			
+			//echo $sql."<br>";
+			
 				if($ergebnis=mysql_query($sql,$link))
        			{
 					$art_avail=0;
@@ -126,7 +129,9 @@ if($link&&$DBLink_OK)
 								AND op_nr='$op_nr'
 								AND op_src_date='$pyear$pmonth$pday'
 								AND patnum='$patnum'";
-						echo $sql;
+						
+						//echo $sql;
+						
 						if($mat_result=mysql_query($sql,$link))
 						{
 							mysql_close($link);
@@ -139,8 +144,11 @@ if($link&&$DBLink_OK)
 					}
 					//else echo "<p>".$sql."<p>Multiple entries found pls notify the edv."; 
 				}
-				else { echo "$LDDbNoRead<br>"; } 
+				else 
+				{ echo "$LDDbNoRead<br>"; } 
+				
 				break;
+				
 		case "delete":
 			//echo "hello delete".$art_idx;
 			$matbuf=explode("~",$matlist[0]);
@@ -162,7 +170,9 @@ if($link&&$DBLink_OK)
 			break;
 			
 		case 'update':
+		
 			$matbuf=explode("~",$matlist[0]);
+			
 			for($i=0;$i<sizeof($matbuf);$i++)
 				{
 					$pcs="pcs".$i;
@@ -170,7 +180,9 @@ if($link&&$DBLink_OK)
 					parse_str(trim($matbuf[$i]),$parsedstr);
 					$matbuf[$i]="b=$parsedstr[b]&a=$parsedstr[a]&n=$parsedstr[n]&g=$parsedstr[g]&i=$parsedstr[i]&c=".$$pcs."\r\n";
 				}
+				
 			$matlist[0]=implode("~",$matbuf);
+			
 			$sql="UPDATE $dbtable SET material_codedlist='$matlist[0]'
 								WHERE dept='$dept'
 								AND op_room='$saal'
@@ -178,12 +190,16 @@ if($link&&$DBLink_OK)
 								AND op_src_date='$pyear$pmonth$pday'
 								AND patnum='$patnum'";
 			//echo "update ".$sql;
+			
 			if($mat_result=mysql_query($sql,$link))
 			{
 				mysql_close($link);
   				header("location:op-logbuch-material-list.php?$globdata");
 				exit;
-			}	else { echo "$LDDbNosave<br>"; }  
+			}	
+			else 
+			{ echo "$LDDbNosave<br>"; } 
+			 
 			break;
 		} //end of switch($mode
 }
