@@ -4,11 +4,11 @@ $LDInitFindings='Initial findings';
 $LDCurrentFindings='Current findings';
 $LDFinalFindings='Final find';
 
-$LDFillLabOnly='For lab use only';
+$LDFillLabOnly='A usage du labortoire seulement';
 $LDLEN='LEN';  /* LEN =  Lab entry number */
 
 $LDDate='Date';
-$LDEye='Eye';
+$LDEye='Oeil';
 $LDBac_1='Bact.1'; /* Note: Bact. means bacteria or pathogen */
 $LDBac_2='Bact.2';
 $LDBac_3='Bact.3';
@@ -16,9 +16,9 @@ $LDBac_I='Patho.I';
 $LDBac_II='Patho.II';
 $LDBac_III='Patho.III';
 $LDFungi='Fungi';
-$LDResistanceTestAnaerob='Resistance test Anaerobe';				
-$LDResistanceTestAerob='Resistance test Aerobe';
-$LDTestFindings='Test results / Findings';
+$LDResistanceTestAnaerob='Résistance Test Anaerob.';				
+$LDResistanceTestAerob='Résistance test Aerob.';
+$LDTestFindings='Test resultats / Findings';
 $LDMarkStreptocResistance='mark by streptococcus resistance';
 $LDBlockerNeg='Blocker negative';
 $LDBlockerPos='Blocker positive';
