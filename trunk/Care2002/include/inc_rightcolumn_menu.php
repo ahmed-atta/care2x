@@ -8,6 +8,7 @@ if (eregi("inc_rightcolumn_menu.php",$PHP_SELF))
 $config_type='main_info_%';
 require($root_path.'include/inc_get_global_config.php');
 
+/* Prepare the url links variables */
 $url_open="open-time.php".URL_APPEND;
 $url_mgmt="newscolumns.php".URL_APPEND."&dept_nr=28";
 $url_dept="".$root_path.'modules/news/'."departments.php".URL_APPEND;
@@ -23,6 +24,7 @@ $url_jshelp="javascript:gethelp()";
 $url_news="editor-pass.php".URL_APPEND;
 $url_jscredits="javascript:openCreditsWindow()";
 
+$TP_com_img_path=$root_path.'gui/img/common';
 // Load the template
 require($root_path.'include/care_api_classes/class_template.php');
 $tp_obj=new Template($root_path,$template_path,$template_theme);
@@ -30,4 +32,3 @@ $tp=&$tp_obj->load('tp_rightcolumn_menu.htm');
 // Output display
 eval ("echo $tp;");
 ?>
-

@@ -795,7 +795,7 @@ class Encounter extends Notes {
 	*/
 	function allSicknessConfirm($dept_nr=0,$enc_nr=0){
 	    global $db;
-		if(!$this->internResolveEncounterNr($enc_nr)) return false;
+		//if(!$this->internResolveEncounterNr($enc_nr)) return false;
 		$this->sql="SELECT s.*,d.LD_var,d.name_formal,d.sig_stamp,d.logo_mime_type
 						FROM $this->tb_sickconfirm AS s
 							LEFT JOIN $this->tb_dept AS d ON s.dept_nr=d.nr
@@ -803,7 +803,7 @@ class Encounter extends Notes {
 		if($dept_nr) $this->sql=$this->sql." AND s.dept_nr=$dept_nr";
 		$this->sql.=' ORDER BY s.date_confirm DESC';
 		
-		//echo $sql;
+		//echo $this->sql;
 		if($this->result=$db->Execute($this->sql)) {
 		    if($this->rec_count=$this->result->RecordCount()) {
 				return $this->result;

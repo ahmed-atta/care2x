@@ -105,14 +105,15 @@ if(isset($lang_tables)&&is_array($lang_tables)&&sizeof($lang_tables)) include_on
 /**
 *  Load additional environment files 
 */
+require_once($root_path.'include/inc_config_color.php'); // load user configurations
 require_once($root_path.'include/inc_img_fx.php'); // image functions
 require_once($root_path.'include/inc_charset_fx.php'); // charset functions
 
+// Resolve the template theme
+if(isset($cfg['template_theme'])&&!empty($cfg['template_theme'])) $template_theme=$cfg['template_theme'];
 /**
 * define environment constants
 */
 //define('MODERATE_NEWS',0);  // define to 1 if news is moderated
 //define('LANG_DEPENDENT',0); // define to 1 if the news contents are language dependent
-
-//define('MASCOT_SHOW',1);    // define to 1 to show the mascots
 ?>

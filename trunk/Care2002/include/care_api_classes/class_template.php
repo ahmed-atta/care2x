@@ -91,8 +91,7 @@ class Template{
 			$fn=fopen($this->filename,'r');
 			$this->template=fread($fn,filesize($this->filename));
 			fclose($fn);
-			$this->template=str_replace('\\','\\\\',$this->template);
-			$this->template=str_replace('"','\\"',$this->template);
+			$this->template=$this->neutralize($this->template);
 			return '"'.$this->template.'"';
 		}else{return false;}
 	}
@@ -138,5 +137,17 @@ class Template{
 	function getTemplateList(){
 		$this->_getTemplates();
 		return $this->tp_dirs;
+	}
+	/**
+	* neutralize() converts all \ to \\ and " to \" of the string
+	* public
+	* @param $str (string) = the string to be neutralized
+	* return void
+	*/
+	function neutralize(&$str){
+		$str=str_replace('\\','\\\\',$str);
+		$str=str_replace('"','\\"',$str);
+		return $str;
+		echo $str;
 	}
 }

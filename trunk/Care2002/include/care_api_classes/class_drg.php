@@ -20,17 +20,30 @@ class DRG extends Encounter{
 	var $tb_qlist='care_drg_quicklist';
 	var $tb_related='care_drg_related_codes';		
 	var $tb_cat_diag='care_category_diagnosis';
+	var $tb_cat_proc='care_category_procedure';
 	var $tb_type_loc='care_type_localization';
+	var $tb_enc_drg='care_encounter_drg_intern';
+	var $tb_drg='care_drg_intern';
+	var $tb_qlist='care_drg_quicklist';
 	
+	var $dept_nr;
+	
+	/**
+	* Limits the select output
+	 */
+	var $sel_limit=50;
+					
 	/**
 	* Fields names of related tables
 	*/
 	var $fld_diagnosis=array(
 			'diagnosis_nr',
 			'encounter_nr',
+			'op_nr',
 			'date',
 			'code',
 			'code_parent',
+			'group_nr',
 			'code_version',
 			'localcode',
 			'category_nr',
@@ -48,9 +61,11 @@ class DRG extends Encounter{
 	var $fld_procedure=array(
 			'procedure_nr',
 			'encounter_nr',
+			'op_nr',
 			'date',
 			'code',
 			'code_parent',
+			'group_nr',
 			'code_version',
 			'localcode',
 			'category_nr',
@@ -63,9 +78,53 @@ class DRG extends Encounter{
 			'modify_time',
 			'create_id',
 			'create_time');
+			
+	var $fld_enc_drg=array(
+			'nr',
+			'encounter_nr',
+			'date',
+			'group_nr',
+			'clinician',
+			'dept_nr',
+			'status',
+			'history',
+			'modify_id',
+			'modify_time',
+			'create_id',
+			'create_time');
+			
+	var $fld_drg=array(
+			'nr',
+			'code',
+			'description',
+			'synonyms',
+			'notes',
+			'std_code',
+			'sub_level',
+			'parent_code',
+			'status',
+			'history',
+			'modify_id',
+			'modify_time',
+			'create_id',
+			'create_time');
+			
+	var $fld_qlist=array(
+				'nr',
+				'code',
+				'code_parent',
+				'dept_nr',
+				'qlist_type',
+				'rank',
+				'status',
+				'history',
+				'modify_id',
+				'modify_time',
+				'create_id',
+				'create_time');
 
 	var $icd_version='10'; // default ICD version nr.
-	var $ops_version='301'; // default OPS version nr.
+	var $ops_version='301'; // default OPS/ICPM version nr.
 	
 	/**
 	* source code table names
@@ -76,9 +135,10 @@ class DRG extends Encounter{
 	/**
 	* Constructor
 	*/
-	function DRG($enc_nr=0){
+	function DRG($enc_nr=0,$dept_nr){
 		global $lang;
 		$this->enc_nr=$enc_nr;
+		$this->dept_nr=$dept_nr;
 		$this->coretable=$this->tb_diagnosis;
 		$this->ref_array=$this->fld_diagnosis;
 		$this->tb_diag_codes='care_icd'.$this->icd_version.'_'.$lang; // construct the code source table e.g. "care_icd10_en"
@@ -86,7 +146,7 @@ class DRG extends Encounter{
 		$this->tb_proc_codes='care_ops'.$this->ops_version.'_de'; // construct the procedure source table "care_ops302_de" because it is the only available
 	}
 	/**
-	* Sets the core object to point to the diagnosis tables and fields
+	* Sets the core object to point to the encounter's diagnosis (care_encounter_diagnosis) table and fields
 	* public
 	* return void
 	*/
@@ -95,13 +155,40 @@ class DRG extends Encounter{
 		$this->ref_array=$this->fld_diagnosis;
 	}
 	/**
-	* Sets the core object to point to the procedure tables and fields
+	* Sets the core object to point to the encounter's procedure (care_encounter_procedure) table and fields
 	* public
 	* return void
 	*/
 	function useProcedure(){
 		$this->coretable=$this->tb_procedure;
 		$this->ref_array=$this->fld_procedure;
+	}
+	/**
+	* Sets the core object to point to the local encounter DRG groups (care_encounter_drg_intern) table and fields
+	* public
+	* return void
+	*/
+	function useInternalDRG(){
+		$this->coretable=$this->tb_enc_drg;
+		$this->ref_array=$this->fld_enc_drg;
+	}
+	/**
+	* Sets the core object to point to the internal DRG groups (care_drg_intern) table and fields
+	* public
+	* return void
+	*/
+	function useInternalDRGCodes(){
+		$this->coretable=$this->tb_drg;
+		$this->ref_array=$this->fld_drg;
+	}
+	/**
+	* Sets the core object to point to the quick list (care_drg_quicklist) table and fields
+	* public
+	* return void
+	*/
+	function useQuicklistCodes(){
+		$this->coretable=$this->tb_qlist;
+		$this->ref_array=$this->fld_qlist;
 	}
 	/**
 	* Returns the ICD code version (Diagnosis codes)
@@ -111,7 +198,7 @@ class DRG extends Encounter{
 		return $this->icd_version;
 	}
 	/**
-	* Returns the OPD code version (Procedure codes)
+	* Returns the OPS code version (Procedure codes)
 	* public
 	*/
 	function OPSVersion(){
@@ -122,18 +209,21 @@ class DRG extends Encounter{
 	* @param $enc_nr (int) = encounter number
 	* return ADODB record set
 	*/
-	function DiagnosisCodes($enc_nr=0){
+	function DiagnosisCodes($grp_nr=0,$enc_nr=0){
 	    global $db;
 		if(!$this->internResolveEncounterNr($enc_nr)) return false;
-		$this->sql="SELECT d.*,c.description , m.description AS parent_desc
-							FROM (
-										$this->tb_diagnosis AS d,
-										 $this->tb_diag_codes AS c
-									)
-									 LEFT JOIN $this->tb_diag_codes AS m ON d.code_parent=m.diagnosis_code
+		$this->sql="SELECT d.*,c.description , m.description AS parent_desc,
+								cat.LD_var AS cat_LD_var, cat.LD_var_short_code AS cat_LD_var_short_code, cat.short_code AS cat_short_code, cat.name AS cat_name,
+								loc.LD_var AS loc_LD_var, loc.LD_var_short_code AS loc_LD_var_short_code, loc.short_code AS loc_short_code,loc.name AS loc_name
+							FROM 	$this->tb_diagnosis AS d
+									LEFT JOIN $this->tb_diag_codes AS c ON d.code=c.diagnosis_code
+									 LEFT JOIN $this->tb_diag_codes AS m ON d.code_parent=m.diagnosis_code AND d.code_parent NOT IN ('',' ')
+									 LEFT JOIN $this->tb_cat_diag AS cat ON d.category_nr=cat.nr
+									 LEFT JOIN $this->tb_type_loc AS loc ON d.localization=loc.nr
 									 WHERE d.encounter_nr=$this->enc_nr 
+									 	AND d.group_nr=$grp_nr
 									 	AND d.status NOT IN ($this->dead_stat)
-										AND  d.code=c.diagnosis_code ORDER BY d.category_nr,d.date";
+										ORDER BY d.category_nr,d.date";
 		//echo $this->sql;
 		if($this->result=$db->Execute($this->sql)) {
 		    if($this->result->RecordCount()) {
@@ -146,7 +236,7 @@ class DRG extends Encounter{
 	* @param $enc_nr (int) = encounter number
 	* return ADODB record set
 	*/
-	function ProcedureCodes($enc_nr=0){
+	function ProcedureCodes($grp_nr=0,$enc_nr=0){
 	    global $db;
 		if(!$this->internResolveEncounterNr($enc_nr)) return false;
 		$this->sql="SELECT p.*, c.description, m.description AS parent_desc
@@ -156,9 +246,34 @@ class DRG extends Encounter{
 									)
 									 LEFT JOIN $this->tb_proc_codes AS m ON p.code_parent=m.code
 									 WHERE p.encounter_nr=$this->enc_nr 
+									 	AND p.group_nr=$grp_nr
 									 	AND p.status NOT IN ($this->dead_stat)
 										AND  p.code=c.code ORDER BY p.category_nr,p.date";
 		//echo $sql;
+		if($this->result=$db->Execute($this->sql)) {
+		    if($this->result->RecordCount()) {
+				return $this->result;
+		    } else { return false;}
+		} else { return false;}
+	}
+	/**
+	* Gets the internal DRG groups of an encounter
+	* public
+	* @param $enc_nr (int) = encounter number
+	* return ADODB record set
+	*/
+	function InternDRGGroups($enc_nr){
+	    global $db;
+		if(!$this->internResolveEncounterNr($enc_nr)) return false;
+		$this->sql="SELECT e.*, d.code,d.description,d.notes
+							FROM (
+										$this->tb_enc_drg AS e,
+									 	$this->tb_drg AS d
+									)								 
+									 WHERE e.encounter_nr=$this->enc_nr 
+									 	AND e.status NOT IN ($this->dead_stat)
+										AND  e.group_nr=d.nr ORDER BY e.date";
+		//echo $this->sql;
 		if($this->result=$db->Execute($this->sql)) {
 		    if($this->result->RecordCount()) {
 				return $this->result;
@@ -197,6 +312,24 @@ class DRG extends Encounter{
 						history=CONCAT(history,'Delete ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n'),
 						modify_id='".$HTTP_SESSION_VARS['sess_user_name']."'			
 						 WHERE procedure_nr=$proc_nr";
+		//echo $sql;
+		return $this->Transact($this->sql);
+	}
+	/**
+	* "Deletes" an internal DRG group number entry from the encounter
+	* public
+	* The entry is actually not deleted from the table but its status is set to "deleted"
+	* @param $drg_nr (int) = the drg group  entry
+	* return true/false
+	*/
+	function deleteEncounterDRGGroup($drg_nr=0){
+	    global $db, $HTTP_SESSION_VARS;
+		if(!$drg_nr) return false;
+		$this->sql="UPDATE $this->tb_enc_drg 
+						SET status='deleted',
+						history=CONCAT(history,'Delete ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n'),
+						modify_id='".$HTTP_SESSION_VARS['sess_user_name']."'			
+						 WHERE nr=$drg_nr";
 		//echo $sql;
 		return $this->Transact($this->sql);
 	}
@@ -303,6 +436,19 @@ class DRG extends Encounter{
 		} else { return false;}
 	}
 	/**
+	* Gets the procedure categories
+	* return ADODB record object
+	*/
+	function ProcedureCategories(){
+	    global $db;
+		$this->sql="SELECT * FROM $this->tb_cat_proc WHERE status NOT IN ($this->dead_stat)";
+		if($this->result=$db->Execute($this->sql)) {
+		    if($this->result->RecordCount()) {
+				return $this->result;
+		    } else { return false;}
+		} else { return false;}
+	}
+	/**
 	* Gets the localization types
 	* return ADODB record object
 	*/
@@ -315,4 +461,384 @@ class DRG extends Encounter{
 		    } else { return false;}
 		} else { return false;}
 	}
+	/**
+	* nongroupedDiagnosis() checks if non grouped encounter diagnosis entries  exist
+	* @param $enc_nr (int) = encounter number
+	*/
+	function nongroupedDiagnosisExists($enc_nr){
+	    global $db;
+		if(!$this->internResolveEncounterNr($enc_nr)) return false;
+		$this->sql="SELECT diagnosis_nr FROM $this->tb_diagnosis WHERE encounter_nr=$this->enc_nr AND group_nr=0 AND status NOT IN ($this->dead_stat)";
+		if($this->result=$db->Execute($this->sql)) {
+		    if($this->result->RecordCount()) {
+				return true;
+		    } else {return false;}
+		} else {return false;}
+	}
+	/**
+	* nongroupedProcedure() checks if non grouped encounter procedure entries  exist
+	* @param $enc_nr (int) = encounter number
+	*/
+	function nongroupedProcedureExists($enc_nr){
+	    global $db;
+		if(!$this->internResolveEncounterNr($enc_nr)) return false;
+		$this->sql="SELECT procedure_nr FROM $this->tb_procedure WHERE encounter_nr=$this->enc_nr AND NOT group_nr  AND status NOT IN ($this->dead_stat)";
+		if($this->result=$db->Execute($this->sql)) {
+		    if($this->result->RecordCount()) {
+				return true;
+		    } else { return false;}
+		} else { return false;}
+	}
+	/**
+	* searchGroup() searches for a local  DRG group code
+	* @param $key (mixed) = the search key
+	* return ADODB record object if search finds result, false otherwise
+	*/
+	function searchGroup($key,$order='description'){
+	    global $db;
+		if(strlen($key)<3) $this->sql="SELECT nr,code,description FROM $this->tb_drg WHERE code LIKE '$key%' OR description LIKE '$key%'";
+			else $this->sql="SELECT nr,code,description FROM $this->tb_drg WHERE code LIKE '%$key%' OR description LIKE '%$key%'";
+		$this->sql.=" ORDER BY $order";
+		if($this->result=$db->Execute($this->sql)) {
+		    if($this->result->RecordCount()) {
+				return $this->result;
+		    }else{
+				$this->sql="SELECT nr,code,description FROM $this->tb_drg WHERE synonyms LIKE '%$key%' ORDER BY $order";
+				if($this->result=$db->Execute($this->sql)) {
+		    		if($this->result->RecordCount()) {
+						return $this->result;
+					}else{return false;}
+				}else{return false;}
+			}
+		}else{return false;}
+	}
+	/**
+	* EncounterDRGGroupExists() checks if the local  DRG group exists for the encounter
+	* @param $group_nr (int) = the group number to be checked
+	* @param $enc_nr (int) = encounter number
+	*/
+	function EncounterDRGGroupExists($grp_nr,$enc_nr=0){
+		global $db;
+		if(!$this->internResolveEncounterNr($enc_nr)) return false;
+		$this->sql="SELECT nr FROM $this->tb_enc_drg WHERE encounter_nr=$this->enc_nr AND group_nr=$grp_nr AND status NOT IN ($this->dead_stat)";
+		if($this->result=$db->Execute($this->sql)) {
+		    if($this->result->RecordCount()){
+				return true;
+		    }else{return false;}
+		}else{return false;}
+	}
+	/**
+	* groupNonGroupedItems() sets the group number of all non-grouped diagnosis and procedure entries of an encounter
+	* public
+	* @param $grp_nr (int) = group number
+	* @param $enc_nr (int) = encounter number
+	* return true/false
+	*/
+	function groupNonGroupedItems($grp_nr,$enc_nr){
+	    global $db, $HTTP_SESSION_VARS;
+		if(!$this->internResolveEncounterNr($enc_nr)||!$grp_nr) return false;
+		$buf;
+		
+		$this->sql="UPDATE $this->tb_diagnosis 
+						SET group_nr='$grp_nr',
+						history=CONCAT(history,'Set group ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n'),
+						modify_id='".$HTTP_SESSION_VARS['sess_user_name']."'			
+						WHERE encounter_nr=$this->enc_nr AND NOT group_nr AND status NOT IN ($this->dead_stat)";
+		
+		$buf=$this->Transact($this->sql);
+		
+		$this->sql="UPDATE $this->tb_procedure 
+						SET group_nr='$grp_nr',
+						history=CONCAT(history,'Set group ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n'),
+						modify_id='".$HTTP_SESSION_VARS['sess_user_name']."'			
+						WHERE encounter_nr=$this->enc_nr AND NOT group_nr AND status NOT IN ($this->dead_stat)";
+		 return $buf | $this->Transact($this->sql);
+	}
+	/**
+	* ungroupDiagnoses() will set the group number of diagnosis entries of an encounter to 0 (no group)
+	* @param $grp_nr (int) = the current group number
+	* @param $enc_nr (int) = the encounter number
+	* return true/false
+	*/
+	function ungroupDiagnoses($grp_nr,$enc_nr){
+	    global $db, $HTTP_SESSION_VARS;
+		if(!$this->internResolveEncounterNr($enc_nr)||!$grp_nr) return false;
+		$this->sql="UPDATE $this->tb_diagnosis 
+						SET group_nr=0,
+						history=CONCAT(history,'Ungroup ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n'),
+						modify_id='".$HTTP_SESSION_VARS['sess_user_name']."'			
+						WHERE encounter_nr=$this->enc_nr AND group_nr=$grp_nr AND status NOT IN ($this->dead_stat)";
+		return $this->Transact($this->sql);
+	}
+	/**
+	* ungroupProcedures() will set the group number of procedure entries of an encounter to 0 (no group)
+	* @param $grp_nr (int) = the current group number
+	* @param $enc_nr (int) = the encounter number
+	* return true/false
+	*/
+	function ungroupProcedures($grp_nr,$enc_nr){
+	    global $db, $HTTP_SESSION_VARS;
+		if(!$this->internResolveEncounterNr($enc_nr)||!$grp_nr) return false;
+		$this->sql="UPDATE $this->tb_procedure 
+						SET group_nr=0,
+						history=CONCAT(history,'Ungroup ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n'),
+						modify_id='".$HTTP_SESSION_VARS['sess_user_name']."'			
+						WHERE encounter_nr=$this->enc_nr AND group_nr=$grp_nr AND status NOT IN ($this->dead_stat)";
+		return $this->Transact($this->sql);
+	}
+	/**
+	* internResolveDeptNr() tries to get the department number
+	* @param $dept_nr (int) = department number
+	* returns department number/true/false
+	*/
+	function internResolveDeptNr($dept_nr='') {
+	    if (empty($dept_nr)) {
+		    if(empty($this->dept_nr)) {
+			    return false;
+			} else { return true; }
+		} else {
+		     $this->dept_nr=$dept_nr;
+			return true;
+		}
+	}
+	/**
+	* DeptQuicklist() returns the quicklist code items of a department
+	* The record count is stored in the rec_count variable and can be fetched via the LastRecordCount()
+	* @param $dept_nr (int) = department number
+	* @param $type = quicklist items type (drg_intern, diagnosis, procedure)
+	* return ADODB record set
+	*/
+	function DeptQuicklist($type='',$dept_nr=0){
+		global $db;
+		//if(!$this->internResolveDeptNr($dept_nr)||empty($type)) return false;
+		$this->dept_nr=1;
+		switch($type){
+			case 'drg_intern':
+			{
+				$cond="q.code AS nr,d.code AS code, d.description FROM $this->tb_qlist AS q  LEFT JOIN $this->tb_drg AS d ON q.code=d.nr";
+				break;
+			}
+			case 'diagnosis':
+			{
+				$cond="q.code,q.code_parent ,d.diagnosis_code AS nr, d.description, p.description AS parent_desc FROM $this->tb_qlist AS q  
+								LEFT JOIN $this->tb_diag_codes AS d ON q.code=d.diagnosis_code
+								LEFT JOIN $this->tb_diag_codes AS p ON q.code_parent=p.diagnosis_code";
+				break;
+			}
+			case 'procedure':
+			{
+				$cond="q.code,q.code_parent ,d.code AS nr, d.description, p.description AS parent_desc FROM $this->tb_qlist AS q  
+								LEFT JOIN $this->tb_proc_codes AS d ON q.code=d.code
+								LEFT JOIN $this->tb_proc_codes AS p ON q.code_parent=p.code";
+				break;
+			}
+			//default: return false;
+		}
+		$this->sql="SELECT $cond WHERE q.dept_nr=$this->dept_nr AND q.qlist_type='$type' ORDER BY q.rank DESC";
+		if($this->result=$db->SelectLimit($this->sql,$this->sel_limit)) {
+		    if($this->rec_count=$this->result->RecordCount()){
+				return $this->result;
+		    }else{return false;}
+		}else{return false;}
+	}
+	/**
+	* QuickCodeExists() checks if the code exists in the quicklist
+	* The record count is stored in the rec_count variable and can be fetched via the LastRecordCount()
+	* @param $code (string) = code
+	* return record entry number if exist, else false
+	*/
+	function QuickCodeExists($code=0){
+		global $db;
+		if(!$code) return false;
+		$this->sql="SELECT nr FROM $this->tb_qlist WHERE code='$code'";
+		if($this->result=$db->Execute($this->sql)) {
+		    if($this->rec_count=$this->result->RecordCount()){
+				$row=$this->result->FetchRow();
+				return $row['nr'];
+		    }else{return false;}
+		}else{return false;}
+	}
+	/**
+	* upRankQuickCode() increases the ranking of the code in the quicklist by $step value
+	* @param $code (str) = the code
+	* @param $step (int) = increase step (default =1)
+	* return true/false
+	*/
+	function upRankQuickCode($code=0,$step=1){
+		if(!$code) return false;
+		$this->sql="UPDATE $this->tb_qlist SET rank=(rank+$step) WHERE code='$code'";
+		return $this->Transact();
+	}
+	/**
+	* addQuickCode() inserts a new code entry in the quicklist
+	* @param $code (str) = the code
+	* @param $step (int) = increase step (default =1)
+	* return void
+	*/
+	function addQuickCode(&$data){
+		global $HTTP_SESSION_VARS;
+		if(!is_array($data)) return false;
+		if($this->QuickCodeExists($data['code'])){
+			return $this->upRankQuickCode($data['code']);
+		}else{
+			$this->sql="INSERT INTO $this->tb_qlist (code,code_parent,dept_nr,qlist_type,rank,history,modify_id,create_id,create_time)
+									VALUES ('".$data['code']."','".$data['code_parent']."','1','".$data['qlist_type']."','1','Create ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."','".$HTTP_SESSION_VARS['sess_user_name']."','".$HTTP_SESSION_VARS['sess_user_name']."',NULL)";
+			return $this->Transact();
+		}
+	}
+	/**
+	* DRGRelatedCodeExists() checks if drg related code exists in the table
+	* The record count is stored in the rec_count variable and can be fetched via the LastRecordCount()
+	* @param $group_nr (int) = the drg group number
+	* @param $relcode (string) = the related code
+	* @param $code_type (string) = type of the related code (diagnosis, procedure)
+	* return record entry number if exist, else false
+	*/
+	function DRGRelatedCodeExists($group_nr=0,$relcode=0,$code_type=0){
+		global $db;
+		if(!($relcode&&$group_nr&&$code_type)) return false;
+		$this->sql="SELECT nr FROM $this->tb_related WHERE group_nr=$group_nr AND code='$relcode' AND code_type='$code_type'";
+		if($this->result=$db->Execute($this->sql)) {
+		    if($this->rec_count=$this->result->RecordCount()){
+				$row=$this->result->FetchRow();
+				return $row['nr'];
+		    }else{return false;}
+		}else{return false;}
+	}
+	/**
+	* upRankDRGRelatedCode() increases the ranking of a drg  related code by $step value
+	* @param $group_nr (int) = the drg group number
+	* @param $relcode (string) = the related code
+	* @param $code_type (string) = type of the related code (diagnosis, procedure)
+	* @param $step (int) = increase step (default =1)
+	* return true/false
+	*/
+	function upRankDRGRelatedCode($group_nr=0,$relcode=0,$code_type=0,$step=1){
+		if(!($relcode&&$group_nr&&$code_type)) return false;
+		$this->sql="UPDATE $this->tb_related SET rank=(rank+$step) WHERE group_nr=$group_nr AND code='$relcode' AND code_type='$code_type'";
+		return $this->Transact();
+	}
+	/**
+	* addDRGRelatedCode() inserts a new related code entry in the care_drg_related_codes table
+	* @param $data (array) reference pass = the data in array
+	* return true/false
+	*/
+	function addDRGRelatedCode(&$data){
+		global $HTTP_SESSION_VARS;
+		if(!is_array($data)) return false;
+		if($this->DRGRelatedCodeExists($data['group_nr'],$data['code'],$data['code_type'])){
+			return $this->upRankDRGRelatedCode($data['group_nr'],$data['code'],$data['code_type']);
+		}else{
+			$this->sql="INSERT INTO $this->tb_related (group_nr,code,code_parent,code_type,rank,history,modify_id,create_id,create_time)
+									VALUES ('".$data['group_nr']."','".$data['code']."','".$data['code_parent']."','".$data['code_type']."','1','Create ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."','".$HTTP_SESSION_VARS['sess_user_name']."','".$HTTP_SESSION_VARS['sess_user_name']."',NULL)";
+			return $this->Transact();
+		}
+	}
+	/**
+	* RelatedDiagnoses() gets the diagnosis codes related to the internal drg group number
+	* public
+	* @param $group_nr (int) = the number of the intern drg group
+	* return adodb record object or false
+	*/
+	function RelatedDiagnoses($group_nr=0){
+		global $db;
+		if(!$group_nr) return false;
+		$this->sql="SELECT c.nr,c.code, c.code_parent,d.description, p.description AS parent_desc
+							FROM  $this->tb_related AS c
+									LEFT JOIN $this->tb_diag_codes AS d ON c.code=d.diagnosis_code
+									LEFT JOIN $this->tb_diag_codes AS p ON c.code_parent=p.diagnosis_code
+							 WHERE c.group_nr=$group_nr 
+									AND c.code_type='diagnosis'
+									AND c.status NOT IN ($this->dead_stat)
+							ORDER BY c.rank DESC";
+		if($this->result=$db->SelectLimit($this->sql,$this->sel_limit)) {
+		    if($this->rec_count=$this->result->RecordCount()){
+				return $this->result;
+		    }else{return false;}
+		}else{return false;}
+	}
+	/**
+	* RelatedProcedures() gets the procedure codes related to the internal drg group number
+	* public
+	* @param $group_nr (int) = the number of the intern drg group
+	* return adodb record object or false
+	*/
+	function RelatedProcedures($group_nr=0){
+		global $db;
+		if(!$group_nr) return false;
+		$this->sql="SELECT c.nr,c.code, c.code_parent,d.description, p.description AS parent_desc
+							FROM  $this->tb_related AS c
+									LEFT JOIN $this->tb_proc_codes AS d ON c.code=d.code
+									LEFT JOIN $this->tb_proc_codes AS p ON c.code_parent=p.code
+							 WHERE c.group_nr=$group_nr 
+									AND c.code_type='procedure'
+									AND c.status NOT IN ($this->dead_stat)
+							ORDER BY c.rank DESC";
+		if($this->result=$db->SelectLimit($this->sql,$this->sel_limit)) {
+		    if($this->rec_count=$this->result->RecordCount()){
+				return $this->result;
+		    }else{return false;}
+		}else{return false;}
+	}
+	/**
+	* Gets the diagnosis codes for an encounter's operative intervention
+	* @param $op_nr (int) = operation number
+	* @param $enc_nr (int) = encounter number
+	* return ADODB record set
+	*/
+	function OPDiagnosisCodes($op_nr=0,$enc_nr=0){
+	    global $db;
+		//if(!$this->internResolveEncounterNr($enc_nr)||!$op_nr) return false;
+		if(!$this->internResolveEncounterNr($enc_nr)) return false;
+		$this->sql="SELECT d.*,c.description , m.description AS parent_desc,
+								cat.LD_var AS cat_LD_var, cat.LD_var_short_code AS cat_LD_var_short_code, cat.short_code AS cat_short_code, cat.name AS cat_name,
+								loc.LD_var AS loc_LD_var, loc.LD_var_short_code AS loc_LD_var_short_code, loc.short_code AS loc_short_code,loc.name AS loc_name
+							FROM 	$this->tb_diagnosis AS d
+									LEFT JOIN $this->tb_diag_codes AS c ON d.code=c.diagnosis_code
+									 LEFT JOIN $this->tb_diag_codes AS m ON d.code_parent=m.diagnosis_code AND d.code_parent NOT IN ('',' ')
+									 LEFT JOIN $this->tb_cat_diag AS cat ON d.category_nr=cat.nr
+									 LEFT JOIN $this->tb_type_loc AS loc ON d.localization=loc.nr
+									 WHERE d.encounter_nr=$this->enc_nr 
+									 	AND d.op_nr=$op_nr
+									 	AND d.status NOT IN ($this->dead_stat)
+										ORDER BY d.category_nr,d.date";
+		//echo $this->sql;
+		if($this->result=$db->Execute($this->sql)) {
+		    if($this->result->RecordCount()) {
+				return $this->result;
+		    } else { return false;}
+		} else { return false;}
+	}
+	/**
+	* Gets the procedure codes for an encounter's operative intervention
+	* @param $op_nr (int) = operation number
+	* @param $enc_nr (int) = encounter number
+	* return ADODB record set
+	*/
+	function OPProcedureCodes($op_nr=0,$enc_nr=0){
+	    global $db;
+		//if(!$this->internResolveEncounterNr($enc_nr)||!$op_nr) return false;
+		if(!$this->internResolveEncounterNr($enc_nr)) return false;
+		$this->sql="SELECT p.*, c.description, m.description AS parent_desc,
+								cat.LD_var AS cat_LD_var, cat.LD_var_short_code AS cat_LD_var_short_code, cat.short_code AS cat_short_code, cat.name AS cat_name,
+								loc.LD_var AS loc_LD_var, loc.LD_var_short_code AS loc_LD_var_short_code, loc.short_code AS loc_short_code,loc.name AS loc_name	
+							FROM (
+										$this->tb_procedure AS p,
+									 	$this->tb_proc_codes AS c
+									)
+									 LEFT JOIN $this->tb_proc_codes AS m ON p.code_parent=m.code
+									 LEFT JOIN $this->tb_cat_proc AS cat ON p.category_nr=cat.nr
+									 LEFT JOIN $this->tb_type_loc AS loc ON p.localization=loc.nr
+							 WHERE p.encounter_nr=$this->enc_nr 
+									 	AND p.op_nr=$op_nr
+									 	AND p.status NOT IN ($this->dead_stat)
+										AND  p.code=c.code ORDER BY p.category_nr,p.date";
+		//echo $sql;
+		if($this->result=$db->Execute($this->sql)) {
+		    if($this->result->RecordCount()) {
+				return $this->result;
+		    } else { return false;}
+		} else { return false;}
+	}
+
 }

@@ -16,6 +16,9 @@ class Core {
 	var $where;
 	var $do_intern;
 	var $is_preloaded=false;
+	var $rec_count;
+	
+	var $dead_stat="'deleted','hidden','inactive','void'";
 	
 	function setTable($table) {
 	    $this->coretable=$table;
@@ -169,5 +172,11 @@ class Core {
 	}
 	function isPreLoaded(){
 		return $this->is_preloaded;
+	}
+	/**
+	* LastRecordCount() returns the value of rec_count 
+	*/
+	function LastRecordCount(){
+		return $this->rec_count;
 	}
 }
