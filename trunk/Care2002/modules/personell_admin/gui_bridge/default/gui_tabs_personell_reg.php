@@ -8,8 +8,8 @@ if(!isset($notabs)||!$notabs){
 
 <!-- Tabs  -->
 <tr  bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
-<td colspan=3><?php if($target=="personell_reg") $img='employment_blue.gif'; //echo '<img '.createLDImgSrc($root_path,'such-b.gif','0').' alt="'.$LDSearch.'">';
-								else{ $img='employment_gray.gif'; }
+<td colspan=3><?php if($target=="personell_reg") $img='add_employee_blue.gif'; //echo '<img '.createLDImgSrc($root_path,'such-b.gif','0').' alt="'.$LDSearch.'">';
+								else{ $img='add_employee_gray.gif'; }
 							echo '<a href="personell_register.php'.URL_APPEND.'&target=personell_reg"><img '.createLDImgSrc($root_path,$img,'0').' alt="'.$LDEnterNewEmployment.'" ';if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';
 							if($target=="personell_search") $img='src_emp_blu.gif'; //echo '<img '.createLDImgSrc($root_path,'arch-blu.gif','0').'  alt="'.$LDArchive.'">';
 								else{$img='src_emp_gray.gif'; }
