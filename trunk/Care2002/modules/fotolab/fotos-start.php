@@ -21,14 +21,30 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 <title><?php echo $LDPhotos ?></title>
 
 </head>
+<?php
+if($lang=='ar'||$lang=='fa'){
+?>
+<frameset cols="*,30%">
+  <frame name="FOTOS_PREVIEW" src="fotos-preview.php?sid=<?php echo "$sid&lang=$lang" ?>">
+  <frame name="FOTOS_INDEX" src="fotos-index.php?sid=<?php echo "$sid&lang=$lang&edit=$edit&pn=$pn&station=$station&fileroot=$fileroot" ?>" >
+<noframes>
+<body>
+</body>
+</noframes>
+</frameset>
+<?php
+}else{
+?>
 <frameset cols="30%,*">
   <frame name="FOTOS_INDEX" src="fotos-index.php?sid=<?php echo "$sid&lang=$lang&edit=$edit&pn=$pn&station=$station&fileroot=$fileroot" ?>" >
   <frame name="FOTOS_PREVIEW" src="fotos-preview.php?sid=<?php echo "$sid&lang=$lang" ?>">
 <noframes>
 <body>
-
-
 </body>
 </noframes>
 </frameset>
+<?php
+}
+?>
+
 </html>

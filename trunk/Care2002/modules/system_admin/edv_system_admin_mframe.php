@@ -20,6 +20,20 @@ if(isset($ck_edv_admin_user)) setcookie('ck_edvzugang_user',$ck_edv_admin_user);
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <title></title>
 </head>
+<?php
+if($lang=='ar'||$lang=='fa'){
+?>
+<frameset cols="*,22%">
+  <frame name="SYSADMIN_WFRAME" src="edv-system-admi-welcome.php<?php echo URL_REDIRECT_APPEND ?>">
+  <frame name="SYSADMIN_INDEX" src="edv-system-admi-menu.php<?php echo URL_REDIRECT_APPEND ?>">
+<noframes>
+<body>
+</body>
+</noframes>
+</frameset>
+<?php
+}else{
+?>
 <frameset cols="22%,*">
   <frame name="SYSADMIN_INDEX" src="edv-system-admi-menu.php<?php echo URL_REDIRECT_APPEND ?>">
   <frame name="SYSADMIN_WFRAME" src="edv-system-admi-welcome.php<?php echo URL_REDIRECT_APPEND ?>">
@@ -28,4 +42,7 @@ if(isset($ck_edv_admin_user)) setcookie('ck_edvzugang_user',$ck_edv_admin_user);
 </body>
 </noframes>
 </frameset>
+<?php
+}
+?>
 </html>

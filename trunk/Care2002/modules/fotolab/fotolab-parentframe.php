@@ -20,14 +20,30 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 <title></title>
 
 </head>
+
+<?php
+if($lang=='ar'||$lang=='fa'){
+?>
+<frameset cols="*,49%">
+   <frame name="PREVIEWFRAME" src="fotolab-preview.php?sid=<?php echo "$sid&lang=$lang" ?>">
+  <frame name="SELECTFRAME" src="upload_search_patient.php?sid=<?php echo "$sid&lang=$lang" ?>">
+<noframes>
+<body>
+</body>
+</noframes>
+</frameset>
+<?php
+}else{
+?>
 <frameset cols="49%,*">
   <frame name="SELECTFRAME" src="upload_search_patient.php?sid=<?php echo "$sid&lang=$lang" ?>">
    <frame name="PREVIEWFRAME" src="fotolab-preview.php?sid=<?php echo "$sid&lang=$lang" ?>">
 <noframes>
 <body>
-
-
 </body>
 </noframes>
 </frameset>
+<?php
+}
+?>
 </html>
