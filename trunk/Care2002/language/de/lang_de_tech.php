@@ -71,7 +71,7 @@ $LDClk2Read="Clicken Sie den weiss-grünen Pfeil an, um den Inhalt zu sehen.";
 $LDLikeSearch=" der den Suchbedingungen entspricht.";
 $LDLikeSearchMany=" die den Suchbedingungen entsprechen.";
 
-$LDTelephoneNr="Telefon nr.";
+$LDTelephoneNr="Telefon Nr.";
 
 $bcatindex=array("&nbsp;","&nbsp;",$LDTechnician,$LDDept,"Eingegangen am",$LDAt,"&nbsp;");
 $blistindex=array("Bericht $LDFrom",$LDOn,$LDAt,$LDDept,$LDJobIdNr);
