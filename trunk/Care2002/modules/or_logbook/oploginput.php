@@ -18,7 +18,7 @@ if($pmonth=='') $pmonth=date('m');
 if($pday=='') $pday=date('d');
 
 /********************************* Resolve the department and op room ***********************/
-require($root_path.'include/inc_resolve_opr_dept.php');
+//require($root_path.'include/inc_resolve_opr_dept.php');
 
 $datafound=0;
 
@@ -51,7 +51,7 @@ if($dblink_ok)
 				$dbtable='care_nursing_op_logbook';
 				
 				// check if entry is already existing
-				$sql="SELECT entry_out,cut_close,encoding FROM $dbtable 
+				$sql="SELECT nr,entry_out,cut_close,encoding FROM $dbtable 
 						WHERE encounter_nr='$enc_nr' 
 							AND op_nr='$op_nr'
 							AND dept_nr='$dept_nr'
@@ -64,6 +64,7 @@ if($dblink_ok)
 					
 					if($rows==1)
 						{
+						 	$item=$ergebnis->FetchRow();
 							// $dbuf=htmlspecialchars($dbuf);
 							$content=$ergebnis->FetchRow();
 							
@@ -87,18 +88,26 @@ if($dblink_ok)
 							}
 
 							$sql="UPDATE $dbtable 
-									SET encoding='".$content['encoding']."',
-									diagnosis='".htmlspecialchars($diagnosis)."',
-									anesthesia='$anesthesia',
+									SET encoding='".$content['encoding']."'";
+							if(!empty($diagnosis)){
+								$sql.=",diagnosis=CONCAT(diagnosis,'".htmlspecialchars($diagnosis)."\n')";
+							}
+							$sql.=",anesthesia='$anesthesia',
 									entry_out='".$content['entry_out']."',
-									cut_close='".$content['cut_close']."',
-									op_therapy='".htmlspecialchars($op_therapy)."',
-									result_info='".htmlspecialchars($result_info)."'
-									WHERE encounter_nr='$enc_nr' 
+									cut_close='".$content['cut_close']."'";
+							if(!empty($op_therapy)){
+								$sql.=",op_therapy=CONCAT(op_therapy,'".htmlspecialchars($op_therapy)."\n')";
+							}
+							if(!empty($result_info)){
+								$sql.=",result_info=CONCAT(result_info,'".htmlspecialchars($result_info)."\n')";
+							}
+							$sql.="	WHERE nr=".$item['nr']; 
+
+/*							$sql.="	WHERE encounter_nr='$enc_nr' 
 											AND op_nr='$op_nr'
 											AND dept_nr='$dept_nr'
 											AND op_room='$saal'";
-											
+*/											
 							if($ergebnis=$db->Execute($sql))
        							{
 									//echo $sql." new update <br>";
@@ -163,10 +172,10 @@ if($dblink_ok)
 										'$op_date',
 										'".date(Ymd)."',
 										'$enc_nr',
-										'".htmlspecialchars($diagnosis)."',
+										'".htmlspecialchars($diagnosis)."\n',
 										'$anesthesia',
-										'".htmlspecialchars($op_therapy)."',
-										'".htmlspecialchars($result_info)."',
+										'".htmlspecialchars($op_therapy)."\n',
+										'".htmlspecialchars($result_info)."\n',
 										'$eobuf',
 										'$ccbuf',
 										'e=".$encoder."&d=".date('Y-m-d')."&t=".date('H:i:s')."',
@@ -739,7 +748,7 @@ if($pdata['encounter_nr']=='')
 	 echo '<a href="drg-icd10.php?sid='.$sid.'&lang='.$lang;
 	 echo "&pn=$pdata[encounter_nr]&ln=$lname&fn=$fname&bd=$bdate&opnr=$op_nr&dept_nr=$dept_nr&oprm=$saal";
 	 echo '" target="OPLOGMAIN">'.$LDDiagnosis.':</a><br>
-<textarea name="diagnosis" cols=16 rows=10 wrap="physical" >'.stripcslashes($pdata[diagnosis]).'</textarea>';
+<textarea name="diagnosis" cols=16 rows=8 wrap="physical" ></textarea>';
 	}
 	else echo $LDDiagnosis;
 ?>
@@ -884,7 +893,7 @@ color="<?php if($datafound) echo "#0000cc"; else echo "#3f3f3f"; ?>">
 	 echo '<a href="drg-ops301.php?sid='.$sid.'&lang='.$lang;
 	 echo "&pn=$pdata[encounter_nr]&ln=$lname&fn=$fname&bd=$bdate&opnr=$op_nr&dept_nr=$dept_nr&oprm=$saal";
 	echo '" target="OPLOGMAIN">'.$LDTherapy.'/'.$LDOperation.'</a><br>
-	<TEXTAREA NAME="op_therapy" COLS="18" ROWS="10">'.stripcslashes($pdata['op_therapy']).'</TEXTAREA>';
+	<TEXTAREA NAME="op_therapy" COLS="18" ROWS="8"></TEXTAREA>';
 	}
 	else echo $LDTherapy.'/'.$LDOperation;
 ?>
@@ -893,7 +902,7 @@ color="<?php if($datafound) echo "#0000cc"; else echo "#3f3f3f"; ?>">
 <TD valign="top" width=140><font face=verdana,arial size=1 color="<?php if($datafound) echo "#0000cc"; else echo "#3f3f3f"; ?>"><?php echo $LDOpMainElements[result] ?><br>
 <?php if($datafound) echo '
 <TEXTAREA NAME="result_info" Content-Type="text/html"
-	COLS="18" ROWS="10">'.stripcslashes($pdata['result_info']).'</TEXTAREA>';
+	COLS="18" ROWS="8"></TEXTAREA>';
 ?>
 </TD>
 

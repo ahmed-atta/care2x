@@ -183,7 +183,7 @@ function waitwin()
 	wwin=window.open("waitwin.htm","wait","menubar=no,resizable=no,scrollbars=no,width=400,height=200");
 }
 function getinfo(pid,dept,pdata){
-	urlholder="<?php echo $root_path; ?>modules/nursing/nursing-station-patientdaten.php<?php echo URL_APPEND; ?>&pn="+pid+"&patient=" + pdata + "&station="+dept+"&op_shortcut=<?php echo strtr($ck_op_pflegelogbuch_user," ","+") ?>";
+	urlholder="<?php echo $root_path; ?>modules/nursing/nursing-station-patientdaten.php<?php echo URL_REDIRECT_APPEND; ?>&pn="+pid+"&patient=" + pdata + "&station="+dept+"&op_shortcut=<?php echo strtr($ck_op_pflegelogbuch_user," ","+") ?>";
 	patientwin=window.open(urlholder,pid,"width=700,height=450,menubar=no,resizable=yes,scrollbars=yes");
 }
 // -->
@@ -478,10 +478,10 @@ if($mode=='search')
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="javascript:gethelp('oplog.php','search','<?php echo $mode ?>','<?php echo $rows ?>','<?php echo $datafound ?>')"><?php echo "$LDHelp" ?></a><br>
 
 <p>
-<a href="javascript:window.opener.focus();window.close();"><img border=0 align="right" <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>"  alt="<?php echo $LDCancel ?>"></a>
+<a href="javascript:window.opener.focus();window.close();"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>  alt="<?php echo $LDCancel ?>"></a>
 </ul>
 <p>
-<hr>
+
 <?php
 require($root_path.'include/inc_load_copyrite.php');
 ?>

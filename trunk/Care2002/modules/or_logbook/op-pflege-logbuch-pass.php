@@ -13,10 +13,10 @@ $allowedarea=&$allow_area['op_room'];
 
 if($retpath=="calendar_opt"){
 	$append=URL_APPEND."&dept_nr=$dept_nr&retpath=$retpath&pday=$pday&pmonth=$pmonth&pyear=$pyear"; 
-	$breakfile="calendar-options.php".URL_APPEND."&dept_nr=$dept_nr&retpath=$retpath&day=$pday&month=$pmonth&year=$pyear";
+	$breakfile=$root_path."modules/calendar/calendar-options.php".URL_APPEND."&dept_nr=$dept_nr&retpath=$retpath&day=$pday&month=$pmonth&year=$pyear";
 }else{
 	$append=URL_APPEND; 
- 	$breakfile="op-doku.php".URL_APPEND;
+ 	$breakfile=$root_path."main/op-doku.php".URL_APPEND;
 }
 
 if(!isset($dept_nr)) $dept_nr='';
@@ -79,25 +79,17 @@ require($root_path.'include/inc_passcheck_head.php');
 							if($target=="archiv") echo '<img '.createLDImgSrc($root_path,'arch-blu.gif','0').' alt="'.$LDArchive.'">';
 								else{ echo '<a href="'.$thisfile.$append.'&target=archiv"><img '.createLDImgSrc($root_path,'arch-gray.gif','0').' alt="'.$LDArchive.'"  ';if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';}
 						?></td>
-
 </tr>
-
-
 <?php require($root_path.'include/inc_passcheck_mask.php') ?>  
-
 <p>
 <!-- <img src="../img/small_help.gif"> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo "$LDIntro2 $LDOrLogBook" ?></a><br>
 <img src="../img/small_help.gif"> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo "$LDWhat2Do $LDOrLogBook" ?></a><br>
- --><HR>
-<p>
 
+<p>
+ -->
 <?php
 require($root_path.'include/inc_load_copyrite.php');
 ?>
-
-
 </FONT>
-
-
 </BODY>
 </HTML>

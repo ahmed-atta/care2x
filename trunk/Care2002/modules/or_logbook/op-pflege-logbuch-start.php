@@ -28,7 +28,7 @@ if (!$internok&&!$HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]) {header("Lo
 
 <?php else : ?>
     <frame name= "OPLOGMAIN"  src="blank.htm" >
-    <frame name="LOGINPUT"  src="oploginput.php?sid=<?php echo "$sid&lang=$lang&internok=$internok&dept_nr=$dept_nr" ?>">
+    <frame name="LOGINPUT"  src="oploginput.php?sid=<?php echo "$sid&lang=$lang&internok=$internok&dept_nr=$dept_nr&saal=$saal" ?>">
   </frameset>
   <frameset cols="15%,*">
     <frame name= "OPLOGINPUT"  SRC = "blank.htm">

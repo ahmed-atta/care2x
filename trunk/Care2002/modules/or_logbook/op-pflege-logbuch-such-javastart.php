@@ -14,10 +14,10 @@ define('LANG_FILE','or.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_config_color.php'); // this is important for determining to expand the window
-if(!isset($dept_nr)||!$dept_nr){
+/*if(!isset($dept_nr)||!$dept_nr){
 	header('Location:op-nursing-select-dept.php'.URL_REDIRECT_APPEND.'&target=search&retpath='.$retpath);
 	exit;
-}
+}*/
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">

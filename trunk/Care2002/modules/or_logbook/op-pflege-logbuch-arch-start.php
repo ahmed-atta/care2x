@@ -24,9 +24,7 @@ $breakfile='javascript:window.close()';
 
 require_once($root_path.'include/inc_config_color.php');
 
-if(!isset($saal)||!$saal) $saal='a';  //default or room
-/********************************* Resolve the department and op room ***********************/
-require($root_path.'include/inc_resolve_opr_dept.php');
+if(!isset($saal)||!$saal) $saal=1;  //default or room
 
 $pdata=array();
 $filetitles=array();
@@ -48,6 +46,9 @@ $dept_obj=new Department;
 $dept_obj->preloadDept($dept_nr);
 /* Load all operative departments */
 $surgery_arr=&$dept_obj->getAllActiveWithSurgery();
+/* Get list of all active OR numbers */
+$ORNrs=&$dept_obj->getAllActiveORNrs();
+
 /* Create the global object, load the patient configs*/
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
@@ -208,43 +209,15 @@ $ty=$pyear;
 
 <script  language="javascript">
 <!-- 
-
-function syncDept(d)
-{
-	var s=document.chgdept.saal;
-	//alert(d.value);
-	switch(d.value)
-	{
-		case 'plop': s.options[0].selected=true;break;
-		case 'hnop': s.options[10].selected=true;break;
-		case 'gyn_op': s.options[3].selected=true;break;
-		case 'allg_op': s.options[2].selected=true;break;
-		case 'unfall_op': s.options[8].selected=true;break;
-		case 'augen_op': s.options[16].selected=true;break;
-		default: s.options[0].selected=true;
-	}
-	
-}
-
-function syncSaal(d)
-{
-	var v=d.value;
-	var s=document.chgdept.dept;
-	if((v=='a')||(v=='b')||(v=='11')||(v=='12')) s.options[0].selected=true;
-	if((v=='9')||(v=='10')) s.options[1].selected=true;
-	if((v=='1')||(v=='4')||(v=='5')||(v=='6')) s.options[2].selected=true;
-	if((v=='7')||(v=='8')) s.options[3].selected=true;
-	if((v=='2')||(v=='3')||(v=='13')||(v=='14')) s.options[4].selected=true;
-	if(v=='15') s.options[5].selected=true;
-
-}
-
 function pruf(d)
 {
-	if((d.dept_nr.value=="<?php echo $dept_nr;?>")&&(d.saal.value=="<?php echo $saal;?>")) return false;
-	return true;
+	if((d.dept_nr.value=="<?php echo $dept_nr;?>")&&(d.saal.value=="<?php echo $saal;?>")){
+		return false;
+	}else{
+		return true;
+	}
 }
-<?php if ($datafound) : ?>
+<?php if ($datafound) { ?>
 function openeditwin(filename,y,m,d)
 {
 	url="op-pflege-logbuch-arch-edit.php?mode=edit&fileid="+filename+"&sid=<?php echo $sid; ?>&user=<?php echo str_replace(" ","+",$user); ?>&pyear="+y+"&pmonth="+m+"&pday="+d+"&dept_nr=<?php echo $dept_nr;?>&saal=<?php echo $saal;?>";
@@ -255,17 +228,12 @@ function openeditwin(filename,y,m,d)
 	window.archeditwin.moveTo(0,0);
 }
 
-/*function getinfo(pid,pdata){
-	urlholder="pflege-station-patientdaten.php?sid=<?php echo $sid; ?>&lang=<?php echo $lang; ?>&pn="+pid+"&patient=" + pdata + "&station=<?php echo "$dept_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>";
-	patientwin=window.open(urlholder,pid,"width=700,height=450,menubar=no,resizable=yes,scrollbars=yes");
-	}
-	*/
 function getinfo(pid,pdata){
-	urlholder="<?php echo $root_path; ?>modules/nursing/nursing-station-patientdaten.php<?php echo URL_REDIRECT_APPEND; ?>&pn="+pid+"&patient=" + pdata + "&station=<?php echo "$dept_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear&op_shortcut=".$HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]; ?>";
+	urlholder="<?php echo $root_path; ?>modules/nursing/nursing-station-patientdaten.php<?php echo URL_REDIRECT_APPEND; ?>&pn="+pid+"&patient=" + pdata + "&station=<?php echo "$dept_nr&dept_nr=$dept_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear&op_shortcut=".$HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]; ?>";
 	patientwin=window.open(urlholder,pid,"width=700,height=450,menubar=no,resizable=yes,scrollbars=yes");
 	}
 	
-<?php endif ?>	
+<?php } ?>	
 
 // -->
 </script>
@@ -607,7 +575,7 @@ echo '
 						if($x==42) continue;
 						echo'
 					<option value="'.$v['nr'].'"';
-						if ($dept_nr==$v['nr']) echo " selected";
+						if ($dept_nr==$v['nr']) echo ' selected';
 						echo '>';
 						$buffer=$v['LD_var'];
 						if(isset($$buffer)&&!empty($$buffer)) echo $$buffer;
@@ -617,20 +585,20 @@ echo '
 				?>
 					
 				</select>
-<!-- <select name="saal" size=1 onChange=syncSaal(this)> -->
-<select name="saal" size=1 onChange=syncSaal(this)>
+			<select name="saal" size=1>
 				<?php
-				reset($Or2Dept);
-					while(list($x,$v)=each($Or2Dept))
+				if(is_object($ORNrs)){
+                    while($ORnr=$ORNrs->FetchRow())
 					{
 						echo'
-					<option value="'.$x.'"';
-						if ($saal==$x) echo " selected";
-						echo '> '.$x.'</option>';
+					<option value="'.$ORnr['room_nr'].'"';
+						if ($saal==$ORnr['room_nr']) echo ' selected';
+						echo '> '.$ORnr['room_nr'].'</option>';
 					}
+				}
 				?>
-
-</select></nobr>
+			</select>
+			</nobr>
 <input type="submit" value="<?php echo $LDChange ?>">
 
 </form><p>

@@ -34,17 +34,21 @@ if($saal==NULL) $saal="a";
 */
 if(!isset($saal)||empty($saal)) $saal=1; // default is op room #1
 
-$Or2Dept=get_meta_tags($root_path.'global_conf/resolve_or2ordept.pid');
 setcookie(firstentry,'1');
 
 require_once($root_path.'include/care_api_classes/class_department.php');
 $dept_obj=new Department;
+/* Preload the deparment info */
 $dept_obj->preloadDept($dept_nr);
+/* Get list of all the OR room numbers */
+$ORNrs=&$dept_obj->getAllActiveORNrs();
+
 /* Create the global object, load the patient configs*/
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('patient_%');
 
+/* Get list of all available departments*/
 $surgery_arr=&$dept_obj->getAllActiveWithSurgery();
 
 /* Establish db connection */
@@ -53,10 +57,6 @@ if($dblink_ok)
 {
     /* Load the date formatter */
     include_once($root_path.'include/inc_date_format_functions.php');
-    
-	
-    /* Load editor functions for time format converter */
-    //include_once('../include/inc_editor_fx.php');
 	
 	// get orig data
 
@@ -210,13 +210,15 @@ echo '
 				<!-- <select name="saal" size=1 onChange="syncSaal(this,document.chgdept.dept)"> -->
 				<select name="saal" size=1>
 				<?php
-                    while(list($x,$v)=each($Or2Dept))
+				if(is_object($ORNrs)){
+                    while($ORnr=$ORNrs->FetchRow())
 					{
 						echo'
-					<option value="'.$x.'"';
-						if ($saal==$x) echo " selected";
-						echo '> '.$x.'</option>';
+					<option value="'.$ORnr['room_nr'].'"';
+						if ($saal==$ORnr['room_nr']) echo ' selected';
+						echo '> '.$ORnr['room_nr'].'</option>';
 					}
+				}
 				?>
 				</select>
 			</td>
@@ -406,13 +408,11 @@ if(!$datafound)
 		 </DIV>
 <?php
 		/*echo '<img src="../img/'.$lang.'/'.$lang.'_cat-com2.gif">';*/
-	}
-	elseif(!$firstentry)
-	{
-		if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) $buffy=str_replace(" ","+",$HTTP_COOKIE_VARS["ck_login_username".$sid]); 
-			else $buffy=str_replace(" ","+",$HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]);
+	}elseif(!$firstentry){
+	
+		$buffy=str_replace(" ","+",$HTTP_SESSION_VARS['sess_user_name']); 
 		 echo '<img src="'.$root_path.'main/imgcreator/catcom.php?lang='.$lang.'&person='.$buffy.'">';
-		 }
+	}
 }
 ?>
 
