@@ -20,4 +20,14 @@ $LDEnd='Eind';
 $LDListApptByDept='Sorteer afspraken op afdeling';
 $LDListApptByDoc='Sorteer afspraken op specialist';
 $LDdone='Klaar!';
+$LDOk='Ok';
+$LDSelect='Select';
+
+$LDHelp="Help";
+$LDCloseHelpWin="Close help window";
+
+$LDRefreshWindow = 'Refresh display';
+
+$LDNext = 'Next';
+$LDPrevious = 'Previous';
 ?>

@@ -9,7 +9,7 @@ wersji jêzykowej.
   prowadzona przez  Elpidio Latorilla i Intellin.org.  Oprogramowanie typu  open source jest dostêpne na podstawie : GPL license.
  Aplikacja CARE 2X jest napisana i rozpowszechniana bez korzysci finsowych (nieodp³atnie) na podstawie : 
  the GNU General Public License. <br>Szczegó³owy tekst licencji do wgl¹du :
- <a href="<?php echo $root_path ?>license.htm" target=_new>Tre¶æ Licencji</a>. 
+ <a href="<?php echo $root_path ?>legal_gnu_gpl.htm" target=_new>Tre¶æ Licencji</a>. 
 Dalszych wyczerpuj¹cych informacji udziela <a href=mailto:info@care2x.com>info@care2x.com</a> email'ujac.
  <p>
 <font size=1 face="arial">
