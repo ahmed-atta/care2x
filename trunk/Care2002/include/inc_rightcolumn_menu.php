@@ -1,7 +1,7 @@
 <?php
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
 if (eregi("inc_rightcolumn_menu.php",$PHP_SELF)) 
-	die("<meta http-equiv='refresh' content='0; url=../'>");
+	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 
 if ($cfg[dhtml])
@@ -70,6 +70,8 @@ else print '<p>';
 	&nbsp;<A HREF="javascript:gethelp()"><?php echo $LDHelp ?></A>
 	<br>
 	&nbsp;<a href="editor-pass.php?sid=<?php echo "$sid&lang=$lang" ?>&target=headline&title=<?php echo $LDEditTitle ?>"><?php echo $LDSubmitNews ?></A>
+	<br>
+	&nbsp;<a href="javascript:openCreditsWindow()"><?php echo $LDCredits ?></a>
 	</FONT>
 <?php if($cfg[dhtml])
 print '

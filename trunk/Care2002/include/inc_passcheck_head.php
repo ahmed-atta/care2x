@@ -1,13 +1,14 @@
 <?php
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (eregi("inc_passcheck_head.php",$PHP_SELF)) 
-	die("<meta http-equiv='refresh' content='0; url=../'>");
+if (eregi('inc_passcheck_head.php',$PHP_SELF)) 
+	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
+
+
 ?>
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
  <TITLE></TITLE>
  
 <script language="javascript">
@@ -27,7 +28,7 @@ function gethelp(x,s,x1,x2,x3)
 </script>
  
  <?php 
-include("../include/inc_css_a_hilitebu.php");
+include('../include/inc_css_a_hilitebu.php');
 ?>
  
 </HEAD>

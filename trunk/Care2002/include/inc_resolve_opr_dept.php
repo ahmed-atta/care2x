@@ -1,7 +1,7 @@
 <?php
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
 if (eregi("inc_resolve_opr_dept.php",$PHP_SELF)) 
-	die("<meta http-equiv='refresh' content='0; url=../'>");
+	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 
 if(!$dept)

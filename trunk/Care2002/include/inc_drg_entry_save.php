@@ -1,10 +1,10 @@
 <?php
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (eregi("inc_drg_entry_save.php",$PHP_SELF)) 
-	die("<meta http-equiv='refresh' content='0; url=../'>");
+if (eregi('inc_drg_entry_save.php',$PHP_SELF)) 
+	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 
-	$dbtable="nursing_op_logbook";
+	$dbtable='care_nursing_op_logbook';
 	for($i=0;$i<$lastindex;$i++)
 	{
 		$selx="$itemselector$i";
@@ -16,10 +16,10 @@ if (eregi("inc_drg_entry_save.php",$PHP_SELF))
 	
 	if(trim($linebuf)!="")
 	{
-		include("../include/inc_db_makelink.php");
+		include('../include/inc_db_makelink.php');
 		if($link&&$DBLink_OK) 
 		{	
-		 					$sql="SELECT $element,op_date FROM $dbtable WHERE op_nr='$opnr' AND patnum='$pn' AND dept='$dept' AND op_room='$oprm'";
+		 					$sql="SELECT ".$element.",op_date FROM ".$dbtable." WHERE op_nr='".$opnr."' AND patnum='".$pn."' AND dept='".$dept."' AND op_room='".$oprm."'";
 							//print $sql;
 							if($ergebnis=mysql_query($sql,$link))
        						{
@@ -32,12 +32,12 @@ if (eregi("inc_drg_entry_save.php",$PHP_SELF))
 									list($d,$m,$y)=explode(".",$pdata['op_date']);
 								}
 							}
-    			$sql="UPDATE $dbtable SET $element='$linebuf' WHERE op_nr='$opnr' AND patnum='$pn' AND dept='$dept' AND op_room='$oprm'";
+    			$sql="UPDATE ".$dbtable." SET ".$element."='$linebuf' WHERE op_nr='".$opnr."' AND patnum='".$pn."' AND dept='".$dept."' AND op_room='".$oprm."'";
 
         		$ergebnis=mysql_query($sql,$link);
 				if($ergebnis)
        			{
-					$sql="SELECT code_description,rank FROM drg_quicklist_".$lang." WHERE dept='$dept' AND type='$target' ORDER BY rank";
+					$sql="SELECT code_description,rank FROM care_drg_quicklist WHERE dept='".$dept."' AND type='".$target."' AND lang='".$lang."' ORDER BY rank";
 					if($result=mysql_query($sql,$link))
        				{
 						//print $sql;
@@ -53,7 +53,7 @@ if (eregi("inc_drg_entry_save.php",$PHP_SELF))
 								{
 									if(stristr($zeile['code_description'],$qlist[$i])) // if entry in list increase rank
 									{
-										$sql="UPDATE drg_quicklist_".$lang." SET rank='".($zeile[rank]+1)."' WHERE dept='$dept' AND type='$target' AND code_description='".$zeile['code_description']."'";
+										$sql="UPDATE care_drg_quicklist SET rank='".($zeile[rank]+1)."' WHERE dept='$dept' AND lang='".$lang."' AND type='$target' AND code_description='".$zeile['code_description']."'";
 										$ergebnis=mysql_query($sql,$link);
 										$isranked=1; //set flag
 										//print $sql;
@@ -62,7 +62,7 @@ if (eregi("inc_drg_entry_save.php",$PHP_SELF))
 								}
 								if(!$isranked) // if not in list, insert new entry
 								{
-										$sql="INSERT INTO drg_quicklist_".$lang." (dept,type,code_description,rank) VALUES ('$dept','$target','$qlist[$i]','1')";
+										$sql="INSERT INTO care_drg_quicklist (lang,dept,type,code_description,rank) VALUES ('".$lang."','".$dept."','".$target."','".$qlist[$i]."','1')";
 										$ergebnis=mysql_query($sql,$link);
 								}
 							}
@@ -71,7 +71,7 @@ if (eregi("inc_drg_entry_save.php",$PHP_SELF))
 						{
 							for($i=0;$i<sizeof($qlist);$i++)
 							{
-										$sql="INSERT INTO drg_quicklist_".$lang." (dept,type,code_description,rank) VALUES ('$dept','$target','$qlist[$i]','1')";
+										$sql="INSERT INTO care_drg_quicklist (lang,dept,type,code_description,rank) VALUES ('".$lang."','".$dept."','".$target."','".$qlist[$i]."','1')";
 										$ergebnis=mysql_query($sql,$link);
 							}
 						}
@@ -98,7 +98,7 @@ if (eregi("inc_drg_entry_save.php",$PHP_SELF))
 					
 						if($parsedcode['code']!="")
 						{
-					 		$sql="SELECT $element_related,rank FROM drg_related_codes_".$lang." WHERE code='".$parsedcode['code']."' ORDER BY rank";
+					 		$sql="SELECT ".$element_related.",rank FROM care_drg_related_codes WHERE code='".$parsedcode['code']."' AND lang='".$lang."'  ORDER BY rank";
 					 		if($result=mysql_query($sql,$link))
        				 		{
 								//print $sql;
@@ -114,7 +114,7 @@ if (eregi("inc_drg_entry_save.php",$PHP_SELF))
 										{
 											if(stristr($zeile[$element_related],$qlist[$i])) // if entry in list increase rank
 											{
-												$sql="UPDATE drg_related_codes_".$lang." SET rank='".($zeile[rank]+1)."' WHERE code='".$parsedcode['code']."' AND $element_related='$zeile[$element_related]'";
+												$sql="UPDATE care_drg_related_codes SET rank='".($zeile[rank]+1)."' WHERE code='".$parsedcode['code']."' AND $element_related='".$zeile[$element_related]."' AND lang='".$lang."'";
 												$ergebnis=mysql_query($sql,$link);
 												$isranked=1; //set flag
 												//print $sql;
@@ -123,7 +123,7 @@ if (eregi("inc_drg_entry_save.php",$PHP_SELF))
 										}
 										if(!$isranked) // if not in list, insert new entry
 										{
-											$sql="INSERT INTO drg_related_codes_".$lang." (code,$element_related,rank) VALUES ('".$parsedcode['code']."','$qlist[$i]','1')";
+											$sql="INSERT INTO care_drg_related_codes (lang,code,".$element_related.",rank) VALUES ('".$lang."','".$parsedcode['code']."','".$qlist[$i]."','1')";
 											$ergebnis=mysql_query($sql,$link);
 										}
 									}
@@ -132,7 +132,7 @@ if (eregi("inc_drg_entry_save.php",$PHP_SELF))
 								{
 									for($i=0;$i<sizeof($qlist);$i++)
 									{
-											$sql="INSERT INTO drg_related_codes_".$lang." (code,$element_related,rank) VALUES ('".$parsedcode['code']."','$qlist[$i]','1')";
+											$sql="INSERT INTO care_drg_related_codes (lang,code,$element_related,rank) VALUES ('".$lang."','".$parsedcode['code']."','".$qlist[$i]."','1')";
 										$ergebnis=mysql_query($sql,$link);
 									}
 								}

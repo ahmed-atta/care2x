@@ -1,7 +1,7 @@
 <?php
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (eregi("inc_products_search_mod.php",$PHP_SELF)) 
-	die("<meta http-equiv='refresh' content='0; url=../'>");
+if (eregi('inc_products_search_mod.php',$PHP_SELF)) 
+	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 
 /**
@@ -12,17 +12,16 @@ if (eregi("inc_products_search_mod.php",$PHP_SELF))
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-if($cat=="pharma") $dbtable="pharma_products_main";
-	else $dbtable="med_products_main";
-
+if($cat=='pharma') $dbtable='care_pharma_products_main';
+	else $dbtable='care_med_products_main';
 //clean input data
 $keyword=addslashes(trim($keyword));
 
 //this is the search module
-if((($mode=="search")||$update)&&($keyword!="")) 
+if((($mode=='search')||$update)&&($keyword!='')) 
 {
 //init db parameters
-	include("../include/inc_db_makelink.php");
+	include('../include/inc_db_makelink.php');
  	if($link&&$DBLink_OK)
 		{
 			if($update)

@@ -1,16 +1,16 @@
 <?php
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (eregi("inc_passcheck_internchk.php",$PHP_SELF)) 
-	die("<meta http-equiv='refresh' content='0; url=../'>");
+if (eregi('inc_passcheck_internchk.php',$PHP_SELF)) 
+	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
-if(isset($HTTP_COOKIE_VARS["ck_login_logged".$sid])&&isset($HTTP_COOKIE_VARS["ck_login_userid".$sid]))
+if(isset($HTTP_COOKIE_VARS['ck_login_logged'.$sid])&&isset($HTTP_COOKIE_VARS['ck_login_userid'.$sid]))
 {
-    if(!empty($HTTP_COOKIE_VARS["ck_login_logged".$sid])&&!empty($HTTP_COOKIE_VARS["ck_login_userid".$sid])&&(!isset($nointern)||!$nointern))
+    if(!empty($HTTP_COOKIE_VARS['ck_login_logged'.$sid])&&!empty($HTTP_COOKIE_VARS['ck_login_userid'.$sid])&&(!isset($nointern)||!$nointern))
     {
-        $userid=$HTTP_COOKIE_VARS["ck_login_userid".$sid];
+        $userid=$HTTP_COOKIE_VARS['ck_login_userid'.$sid];
         $checkintern=1;
-        $lognote="Direct access ".$lognote;
-        $pass="check";
+        $lognote='Direct access '.$lognote;
+        $pass='check';
     }
 }
 ?>

@@ -1,7 +1,7 @@
 <?php
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
 if (eregi("inc_init_crypt.php",$PHP_SELF)) 
-	die("<meta http-equiv='refresh' content='0; url=../'>");
+	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 
 /**
@@ -15,16 +15,25 @@ function makeRand()
     return pack('i*', $rand);
 }
 
-if(defined('FROM_ROOT')&&FROM_ROOT==1) require_once 'pear/crypt/hcemd5.php';
-   else require_once '../pear/crypt/hcemd5.php';
-
 /**
-* This is the secret key used for the security script chaining
-* IMPORTANT!!!  Change this key immediately after  installing CARE
+* NOTE!!!  The variable declarations for the chaining keys were moved 
+* to the inc_init_main.php   script since beta 1.0.03. 
+* If you want to manually change the
+* keys please open the inc_init_main.php script.
 */
-$key = "change this key now";
-$key_2level="change this 2nd level key now";
-$key_login="replace this login key now";
+
+if(defined('FROM_ROOT')&&FROM_ROOT==1)
+{
+   include_once('classes/pear/crypt/hcemd5.php');
+   include_once('include/inc_init_main.php');   // This loads the chaining keys
+}
+ else
+{
+   include_once('../classes/pear/crypt/hcemd5.php');
+   include_once('../include/inc_init_main.php');   // This loads the chaining keys
+}
+
+
 /**
 * The INIT_DECODE  must be defined at the calling script before including this script
 * INIT_DECODE=1  // will not start creation of random key and create decoder object

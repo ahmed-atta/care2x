@@ -1,7 +1,7 @@
 <?php
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (eregi("inc_left_menu_url.php",$PHP_SELF)) 
-	die("<meta http-equiv='refresh' content='0; url=../'>");
+if (eregi('inc_left_menu_url.php',$PHP_SELF)) 
+	die('<meta http-equiv=\'refresh\' content=\'0; url=../\'>');
 /*------end------*/
 
 /**
@@ -14,22 +14,23 @@ if (eregi("inc_left_menu_url.php",$PHP_SELF))
 * filename of the module's starting script as an additional element of the
 * following array.
 */
-$targetfile=array("startframe.php",
-					"telesuch.php",
-					"aufnahme_pass.php",
-					"medopass.php",
-					"aerzte.php",
-					"pflege.php",
-					"op-doku.php",
-					"technik.php",
-					"labor.php",
-					"radiolog.php",
-					"apotheke.php",
-					"medlager.php",
-					"edv.php",
-					"intra-email-pass.php",
-					"../nocc/",
-					"spediens.php",
-					"login.php"
+$targetfile=array('startframe.php',
+					'aufnahme_pass.php',
+					'ambulatory.php',
+					'medopass.php',
+					'aerzte.php',
+					'pflege.php',
+					'op-doku.php',
+					'labor.php',
+					'radiolog.php',
+					'apotheke.php',
+					'medlager.php',
+					'telesuch.php',
+					'technik.php',
+					'edv.php',
+					'intra-email-pass.php',
+					'../nocc/',
+					'spediens.php',
+					'login.php'
 					);
 ?>

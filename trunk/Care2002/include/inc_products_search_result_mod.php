@@ -1,7 +1,7 @@
 <?php
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
 if (eregi("inc_products_search_result_mod.php",$PHP_SELF)) 
-	die("<meta http-equiv='refresh' content='0; url=../'>");
+	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 
 if($bcat) $LDMSRCindex[]=""; // if parent is order catalog add one empty column at the end
@@ -56,7 +56,7 @@ if($update||($mode=="search"))
 						 }
 						print ' >'; 
 					}
-					else print '<img src="../img/pixel.gif" border=0 name="prevpic"  >';
+					else print '<img src="../gui/img/common/default/pixel.gif" border=0 name="prevpic"  >';
 					print '</td>';
 					print '
     						</tr>
@@ -226,12 +226,16 @@ if($update||($mode=="search"))
 					}
 					print "</tr>";
 
+					/* Load common icons */
+					$img_info=createComIcon('../','info3.gif','0');
+					$img_arrow=createComIcon('../','dwnarrowgrnlrg.gif','0');
+					
 					while($zeile=mysql_fetch_array($ergebnis))
 					{
 						print "<tr bgcolor=";
 						if($toggle) { print "#dfdfdf>"; $toggle=0;} else {print "#fefefe>"; $toggle=1;};
 						print '
-									<td valign="top"><a href="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&keyword='.$zeile[bestellnum].'&mode=search&from=multiple&cat='.$cat.'&userck='.$userck.'"><img src="../img/info3.gif" width=16 height=16 border=0 alt="'.$LDOpenInfo.$zeile[artikelname].'"></a></td>
+									<td valign="top"><a href="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&keyword='.$zeile[bestellnum].'&mode=search&from=multiple&cat='.$cat.'&userck='.$userck.'"><img '.$img_info.' alt="'.$LDOpenInfo.$zeile[artikelname].'"></a></td>
 									<td valign="top"><font face=verdana,arial size=1>'.$zeile[bestellnum].'</td>
 									<td valign="top"><font face=verdana,arial size=1>'.$zeile[artikelnum].'</td>
 									<td valign="top"><font face=verdana,arial size=1>'.$zeile[industrynum].'</td>
@@ -241,7 +245,7 @@ if($update||($mode=="search"))
 									';
 						// if parent is order catalog add this option column at the end
 						if($bcat) print'
-									<td valign="top"><a href="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&mode=save&artname='.str_replace("&","%26",strtr($zeile[artikelname]," ","+")).'&bestellnum='.$zeile[bestellnum].'&proorder='.str_replace(" ","+",$zeile[proorder]).'&hit=0&cat='.$cat.'&userck='.$userck.'"><img src="../img/dwnArrowGrnLrg.gif" width=16 height=16 border=0 alt="'.$LDPut2Catalog.'"></a></td>';				
+									<td valign="top"><a href="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&mode=save&artname='.str_replace("&","%26",strtr($zeile[artikelname]," ","+")).'&bestellnum='.$zeile[bestellnum].'&proorder='.str_replace(" ","+",$zeile[proorder]).'&hit=0&cat='.$cat.'&userck='.$userck.'"><img '.$img_arrow.' alt="'.$LDPut2Catalog.'"></a></td>';				
 						print    '
 									</tr>';
 					}
@@ -256,7 +260,7 @@ if($update||($mode=="search"))
 	}
 	else
 		print '<font face=verdana,arial size=2>
-			<p><img src="../img/catr.gif" width=88 height=80 border=0 align=middle>
+			<p><img '.createMascot('../','mascot1_r.gif','0','middle').'>
 			'.$LDNoDataFound;
 
 }

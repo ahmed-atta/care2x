@@ -1,16 +1,16 @@
  <?php
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (eregi("inc_products_db_save_mod.php",$PHP_SELF)) 
-	die("<meta http-equiv='refresh' content='0; url=../'>");
+if (eregi('inc_products_db_save_mod.php',$PHP_SELF)) 
+	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 
-if(isset($cat)&&($cat=="pharma")) $dbtable="pharma_products_main";
-	else $dbtable="med_products_main";
+if(isset($cat)&&($cat=='pharma')) $dbtable='care_pharma_products_main';
+	else $dbtable='care_med_products_main';
 
-include("../include/inc_db_makelink.php");
+include('../include/inc_db_makelink.php');
 
 // if mode is save then save the data
-if(isset($mode)&&($mode=="save"))
+if(isset($mode)&&($mode=='save'))
 {
     $saveok=false;
     $error=false;
@@ -18,9 +18,9 @@ if(isset($mode)&&($mode=="save"))
     $error_name=false;
     $error_besc=false;
 
-    $bestellnum=trim($bestellnum);if ($bestellnum=="") { $error_bnum=true; $error=true;};
-    $artname=trim($artname); if ($artname=="") { $error_name=true; $error=true; };
-    $besc=trim($besc);if ($besc=="") { $error_besc=true; $error=true; };
+    $bestellnum=trim($bestellnum);if ($bestellnum=='') { $error_bnum=true; $error=true;};
+    $artname=trim($artname); if ($artname=='') { $error_name=true; $error=true; };
+    $besc=trim($besc);if ($besc=='') { $error_besc=true; $error=true; };
 
     if(!$update)
 	{	
@@ -32,36 +32,36 @@ if(isset($mode)&&($mode=="save"))
 							if( $result=mysql_fetch_array($ergebnis)) $rows++;
 							if($rows)
 							{
-								$error="order_nr_exists";
-								$bestellnum="";
+								$error='order_nr_exists';
+								$bestellnum='';
 							}
 						}
-			 			else {print "<p>".$sql."<p>".$LDDbNoSave;};
+			 			else {print '<p>'.$sql.'<p>'.$LDDbNoSave;};
 	}
 
 if(!$error) 
 	{	
 		//clean and check input data variables
 		$encoder=trim($encoder); 
-		if($encoder=="") 	$encoder=$ck_prod_db_user; 
+		if($encoder=='') 	$encoder=$ck_prod_db_user; 
 		// save the uploaded picture
 		// if a pic file is uploaded move it to the right dir
-		if($HTTP_POST_FILES['bild']['tmp_name']&&$HTTP_POST_FILES['bild']['size'])
+		if(is_uploaded_file($HTTP_POST_FILES['bild']['tmp_name']) && $HTTP_POST_FILES['bild']['size'])
 		{
-			$picext=substr($HTTP_POST_FILES['bild']['name'],strrpos($HTTP_POST_FILES['bild']['name'],".")+1);
+			$picext=substr($HTTP_POST_FILES['bild']['name'],strrpos($HTTP_POST_FILES['bild']['name'],'.')+1);
 			/**
 			* Check if the file format is allowed
 			*/
-			if(stristr($picext,"gif")||stristr($picext,"jpg")||stristr($picext,"png"))
+			if(stristr($picext,'gif')||stristr($picext,'jpg')||stristr($picext,'png'))
 			{
 			    $n=0;
 			    $picfilename=$HTTP_POST_FILES['bild']['name'];
-			    list($f,$x)=explode(".",$picfilename);
-			    $idx=substr($picfilename,strpos($picfilename,"[")+1);
+			    list($f,$x)=explode('.',$picfilename);
+			    $idx=substr($picfilename,strpos($picfilename,'[')+1);
 			    if($idx)
 				{
-				    $cf=substr($picfilename,0,strpos($picfilename,"["));
-					$lx=substr($idx,0,strpos($idx,"]"));
+				    $cf=substr($picfilename,0,strpos($picfilename,'['));
+					$lx=substr($idx,0,strpos($idx,']'));
 					$n=$lx;
 				}			
 			   while(file_exists($imgpath.$picfilename))
@@ -74,7 +74,7 @@ if(!$error)
 		    }
 			else
 			{
-			   $picext="";
+			   $picext='';
 			}
 		}
 

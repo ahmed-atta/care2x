@@ -1,7 +1,7 @@
  <?php
  /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
 if (eregi("inc_news_display.php",$PHP_SELF)) 
-	die("<meta http-equiv='refresh' content='0; url=../'>");
+	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 
  /**
@@ -12,14 +12,19 @@ for($j=1;$j<=$news_num_stop;$j++)
 		$picalign=($j==2)?"right":"left";
  ?>
 
-  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <tr>
     <td>
 <?php  
+
+$nofile=0;
+
 if($art[$j])
 	{
-		$picpath="../news_service/".$lang."/fotos/".$art[$j][pic_file];
-		if(file_exists($picpath)&&file_exists($newspath.$art[$j][head_file]))
+	
+
+		 $picpath=$newspath.'fotos/'.$art[$j][pic_file];
+
+		if(file_exists($picpath)&&file_exists($newspath.'news/'.$art[$j][head_file]))
 		{
 			$picsize=GetImageSize($picpath);
 		 	print '
@@ -28,10 +33,10 @@ if($art[$j])
 				else print $picsize[3].'> ';
 		}
 		
-		if(file_exists($newspath.$art[$j][head_file]))
+		if(file_exists($newspath.'news/'.$art[$j][head_file]))
 		{
 			//print "<nobr>";
-			 include($newspath.$art[$j][head_file]);
+			 include($newspath.'news/'.$art[$j][head_file]);
 		 	print'
 		 	<a href="'.$readerpath.$art[$j][main_file].'&sid='.$sid.'&lang='.$lang.'&picfile='.$art[$j][pic_file].'&palign=right&title='.$LDEditTitle.'"><font size=1 color="#ff0000" face="arial">'.$LDMore.'...</font></a>';
 			//print "</nobr>";
@@ -46,8 +51,9 @@ if($art[$j])
 	{ 
 		$i=$j;
 		print '
- 		<img src="../img/pplanu-s.jpg" border=0 width=130 height=98 align="'.$picalign.'">';
-		include("../language/".$lang."/lang_".$lang."_newsdummy.php");
+ 		<img '.createComIcon('../','pplanu-s.jpg','0',$picalign).'>';
+		if(file_exists("../language/".$lang."/lang_".$lang."_newsdummy.php")) include ("../language/".$lang."/lang_".$lang."_newsdummy.php");
+		 else include("../language/en/lang_en_newsdummy.php");
 		if(!isset($editor_path)||empty($editor_path)) $editor_path='editor-pass.php?sid='.$sid.'&lang='.$lang.'&target=headline&title='.$LDEditTitle;
 		print '
 		<font size=1 face="verdana,arial"><a href="'.$editor_path.'">'.$LDClk2Write.'</a>';
