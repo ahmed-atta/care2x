@@ -3,10 +3,10 @@ $LDLab="Labor";
 $LDMedLab="Medizinisches Labor";
 $LDPathLab="Pathologisches Labor";
 $LDBacLab="Bakteriologisches Labor";
-$LDClose="Schliessen";
-$LDSeeLabData="Suchen und anzeigen von Laborwerte bzw. Laborbefunde";
+$LDClose="Schließen";
+$LDSeeLabData="Suchen und Anzeigen von Laborwerten bzw. Laborbefunden";
 $LDSeeData="Laborwerte";
-$LDEnterLabData="Eingabe von Laborwerte bzw. Laborbefunde";
+$LDEnterLabData="Eingabe von Laborwerten bzw. Laborbefunden";
 $LDNewData="Neue Eingabe";
 $LDEnterPrioParams="Prioritätsparameter einstellen";
 $LDPrioParams="Prioritätsparameter";
@@ -14,11 +14,11 @@ $LDEnterNorms="Normbereiche einstellen";
 $LDNorms="Normbereich";
 $LDOtherOptions="Andere Optionen";
 $LDOptions="Optionen";
-$LDMemo="Lesen oder schreiben von Rundbrief";
+$LDMemo="Lesen oder Schreiben von Rundbriefen";
 $LDTitleMemo="Rundbrief";
 
 $LDfieldname=array("Fallnummer","Name","Vorname","Geburtsdatum");
-$LDSearchWordPrompt="Stichwort eingeben. z.B. Fallnummer, Name, Vorname, Geburtsdatum, oder Abkürzung u.s.w.";
+$LDSearchWordPrompt="Stichwort eingeben. z.B. Fallnummer, Name, Vorname, Geburtsdatum, Abkürzung usw.";
 $LDEnterData="Klick um Daten einzugeben";
 $LDClk2See="Klick zum zeigen";
 $LDFoundPatient="Die Suche hat <b>~nr~</b> Patient(en) gefunden.";
@@ -37,13 +37,13 @@ $LDNormalValue="Normbereich";
 $LDOClock="Uhr";
 $LDClk2Graph="Klick für grafische Kurve";
 $LDClk2SelectAll="Klick um alles zu wählen";
-$LDGraph="Grapische darstellung";
+$LDGraph="Grafische darstellung";
 $LDBack="Zurück";
 
-$LDReportFound="Folgendes is ein Laborbefund von Patient nummer ";
-$LDReportFoundMany="Folgende sind Laborbefunde von Patient nummer ";
-$LDIfWantEdit="Falls Sie den Befund bearbeiten möchten, klicken Sie den weiss-grünen Pfeil an.";
-$LDIfWantEditMany="Falls Sie einen Befund bearbeiten möchten, klicken Sie den entsprechenden weiss-grünen Pfeil an.";
+$LDReportFound="Folgendes ist ein Laborbefund von Patient Nr. ";
+$LDReportFoundMany="Folgende sind Laborbefunde von Patient Nr. ";
+$LDIfWantEdit="Falls Sie den Befund bearbeiten möchten, klicken Sie den weiß-grünen Pfeil an.";
+$LDIfWantEditMany="Falls Sie einen Befund bearbeiten möchten, klicken Sie den entsprechenden weiß-grünen Pfeil an.";
 
 $LDJobIdNr="Auftragsnummer";
 $LDExamDate="Untersuchungsdatum";
@@ -60,23 +60,23 @@ $LDSelectParamGroup="Parametergruppe auswählen";
 $LDValue="Wert";
 
 $LDParamNoSee="Der Parameter, den ich brauche, ist nicht angezeigt!";
-$LDOnlyPair="Aber, ich muss nur ein Paar Werte eingeben!";
+$LDOnlyPair="Aber ich muss nur ein paar Werte eingeben!";
 $LDHow2Save="Wie soll ich die Werte speichern?";
 $LDWrongValueHow="Ich habe einen falschen Wert gespeichert. Wie korrigiere ich das?";
-$LDVal2Note="I muss einen Vermerk anstatt Wert eingeben. Wie geht das?";
+$LDVal2Note="I muss einen Vermerk anstatt eines Werts eingeben. Wie geht das?";
 $LDImDone="Ich bin fertig. Was nun?";
 $LDAlertJobId="Bitte geben Sie die Auftragsnummer ein!";
 $LDAlertTestDate="Bitte geben Sie das Untersuchungsdatum ein!";
 
 /* 2002-09-01 EL */
 $LDTestRequest="Anforderung";
-$LDFillUpSend="Anforderung von ";
-$LDTestRequestPathoTxt=$LDFillUpSend." pathologishen/histologischen Untersuchung";
-$LDTestRequestBacterioTxt=$LDFillUpSend."bakteriologischen Untersuchung";
-$LDTestRequestChemLabTxt=$LDFillUpSend."Blut bzw chemischen Untersuchung";
+$LDFillUpSend="Anforderung ";
+$LDTestRequestPathoTxt=$LDFillUpSend." einer pathologischen/histologischen Untersuchung";
+$LDTestRequestBacterioTxt=$LDFillUpSend."einer bakteriologischen Untersuchung";
+$LDTestRequestChemLabTxt=$LDFillUpSend."von Bluttests bzw. einer chemischen Untersuchung";
 $LDBloodBank="Blutzentrale";
 $LDBloodRequest="Blutkonserven";
-$LDBloodRequestTxt=$LDFillUpSend."Blutkonserven bzw -präparate";
+$LDBloodRequestTxt=$LDFillUpSend."Blutkonserven bzw. -präparaten";
 
 $LDRequestSent= array('insert'=>"Die Anforderung wurde gesendet.",
                                     'update'=>"Die aktualisierte Anforderung wurde gesendet.");

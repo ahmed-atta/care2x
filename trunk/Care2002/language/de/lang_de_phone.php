@@ -87,8 +87,8 @@ $LDShowActualDir="Die aktuelle Einträge zeigen";
 $LDYesDelete="Ja, löschen";
 $LDNoCancel="NEIN! Abbrechen!";
 $LDDeleteEntry="Eintrag löschen";
-$LDNoData="Sie haben keine Daten eingegeben. Bitte geben Sie sie in die richtige Felder ein.";
-$LDReallyDelete="Wollen Sie den folgenden Telefoneintrag wirklich löschen?";
+$LDNoData="Sie haben keine Daten eingegeben. Bitte geben Sie sie in die richtigen Felder ein.";
+$LDReallyDelete="Wollen Sie den folgenden Telefonbuch-Eintrag wirklich löschen?";
 
 $LDHowManage="Wie verwalte ich das Telefonverzeichnis?";
 $LDHow2OpenDir="Wie öffne ich das Telefonverzeichnis?";
@@ -96,5 +96,5 @@ $LDHowEnter="Wie gebe ich neue Telefondaten ein?";
 $LDHow2SearchPhone="Wie finde ich eine Telefonnummer?";
 $LDUpdate="Aktualisieren bzw. ändern";
 
-$LDDirData="Verzeichniseintrag nr. <font color=\"red\">~nr~</font> aktualisieren bzw. ändern.";
+$LDDirData="Verzeichniseintrag nr. <font color=\"red\">~nr~</font> aktualisieren bzw. ändern";
 ?>

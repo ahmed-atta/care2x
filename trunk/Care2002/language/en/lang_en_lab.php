@@ -18,7 +18,7 @@ $LDMemo='Read or compose a memo';
 $LDTitleMemo='Memo';
 
 $LDfieldname=array('Patient nr.','Family name','Name','Birthdate');
-$LDSearchWordPrompt='Enter a search keyword, for example: a Family name, a name, or a birhtdate, etc.';
+$LDSearchWordPrompt='Enter a search keyword, e.g. a family name, a name, a birthdate, etc.';
 $LDEnterData='Click to enter data';
 $LDClk2See='Click to see data';
 $LDFoundPatient='The search found <b>~nr~</b> patients';

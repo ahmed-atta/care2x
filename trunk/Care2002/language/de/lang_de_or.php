@@ -8,18 +8,18 @@ $LDORNOC='Dienst';
 $LDScheduler='Planer';
 $LDDutyPlan='Dienstplan';
 $LDQuickView='Schnellsicht';
-$LDQviewTxtDocs='Übersicht über die gegenwärtige diensthabende Ärzte';
+$LDQviewTxtDocs='Übersicht über die gegenwärtig diensthabenden Ärzte';
 $LDOrLogBook='OP Pflege Logbuch';
-$LDOrLogBookTxt='Dokumentation der Pflege Leistung in OP, Archive';
-$LDOrProgram='OP Program';
-$LDOrProgramTxt='OP Program ansehen, erstellen, verarbeiten, u.s.w.';
-$LDQviewTxtNurse='Übersicht über die gegenwärtige diensthabende OP Pfleger';
-$LDDutyPlanTxt='Dienstplan erstellen, ansehen, verarbeiten, u.s.w.';
+$LDOrLogBookTxt='Dokumentation der Pflegeleistung im OP, Archiv';
+$LDOrProgram='OP Programm';
+$LDOrProgramTxt='OP Programm ansehen, erstellen, verarbeiten, usw.';
+$LDQviewTxtNurse='Übersicht über die gegenwärtig diensthabenden OP-Pfleger';
+$LDDutyPlanTxt='Dienstplan erstellen, ansehen, verarbeiten, usw.';
 $LDOnCallDuty='Bereitschaftsdienst';
 $LDOnCallDutyTxt='Zeiterfassung der Arbeitsleistung in Bereitschaft';
 $LDAnaLogBook='Anästhesie Logbuch';
-$LDAnaLogBookTxt='Dokumentation der Leistung in Anästhese, Archive';
-$LDQviewTxtAna='Übersicht über die diensthabende Anästhesie Pfleger';
+$LDAnaLogBookTxt='Dokumentation der Leistung in Anästhese, Archiv';
+$LDQviewTxtAna='Übersicht über die diensthabenden Anästhesie-Pfleger';
 $LDNewDocu='Neue Eingabe';
 $LDSearch='Suchen';
 $LDArchive='Archiv';
@@ -31,7 +31,7 @@ $LDDoctor='Arzt';
 $LDNursing='Pflege';
 $LDAna='Narkose';
 
-$LDClose='Schliessen';
+$LDClose='Schließen';
 $LDSave='Speichern';
 $LDCancel='Abbrechen';
 $LDReset='Zurücksetzen';
@@ -66,7 +66,7 @@ $LDDiagnosis='Diagnose/ICD-10';
 $LDLocalization='Lokalisation';
 $LDTherapy='Therapie';
 $LDSpecials='Besonderheiten';
-$LDClassification='Klasifikation';
+$LDClassification='Klassifikation';
 
 $LDOpStart='OP Beginn';
 $LDOpEnd='OP Ende';
@@ -113,7 +113,7 @@ $monat=array('',
 				'November',
 				'Dezember');
 $LDPrevDay='Vortag';
-$LDNextDay='Folgenden Tag';
+$LDNextDay='Folgender Tag';
 $LDChange='Wechseln';
 $LDOpMainElements=array(
 										nr_date=>'OP/Datum',
@@ -146,16 +146,16 @@ $LDOpPersonElements=array(
 											ana=>'Narkosearzt'
 											);
 
-$LDPatientNotFound='Der Patient ist nicht gefunden!';
-$LDPlsEnoughData='Bitte geben Sie ausreichende Information ein.';
+$LDPatientNotFound='Der Patient wurde nicht gefunden!';
+$LDPlsEnoughData='Bitte geben Sie ausreichende Informationen ein.';
 $LDOpNr='OP Nummer';
 $LDDate='Datum';
-$LDClk2DropMenu='Klick um Menu zu sehen';
-$LDSaveLatest='Aktuelle Eintragung speichern';
+$LDClk2DropMenu='Klick um Menü zu sehen';
+$LDSaveLatest='Aktuellen Eintrag speichern';
 $LDHelp='Hilfe öffnen';
 
 $LDSearchPatient='Patient suchen';
-$LDUsedMaterial='Verbrauchte OP Material';
+$LDUsedMaterial='Verbrauchte OP-Materialien';
 $LDContainer='Benutzte Siebe/Container';
 $LDDRG='DRG';
 $LDShowLogbook='Logbuch einblenden';
@@ -202,9 +202,7 @@ $LDReposition='Reposition';
 $LDWaitTime='Wartezeit';
 $LDStart='Anfang';
 $LDEnd='Ende';
-$LDPatNoExist='Patient ist noch nicht im Log Buch eingetragen. Bitte Schliessen Sie dieses Fenster
-										und öffnen Sie das Log Buch wieder. Falls dieses weiterhin besteht, benachrichtigen
-										Sie bitte die EDV Abteilung.';
+$LDPatNoExist='Patient ist noch nicht im Logbuch eingetragen. Bitte schließen Sie dieses Fenster und öffnen Sie das Logbuch nochmals. Falls das Problem weiterhin besteht, benachrichtigen Sie bitte die EDV-Abteilung.';
 $opts=array('-',
 					'Patient nicht rechzeitig im OP',
        				'Anästhesie nicht rechtzeitig im OP',
@@ -243,23 +241,21 @@ $LDContainerElements=array(
 $LDArticleNr='Artikelnummer';		
 $LDContainerNr='Sieb/Container Nr.';							
 $LDArticleNotFound='Artikel nicht gefunden!';
-$LDNoArticleTxt='Das Artikel ist entweder nicht in der Datenbank vorhanden <br>oder Sie haben die falsche Artikelnummer eingetippt.';
-$LDClk2ManualEntry='Artikel manuell eingeben! <b>Click hier.</b>';
-$LDPlsClkArticle='Bitte klicken Sie das richtige Artikel an!';
-$LDSelectArticle='Dieses Artikel eingeben';
+$LDNoArticleTxt='Der Artikel ist entweder nicht in der Datenbank vorhanden <br>oder Sie haben eine falsche Artikelnummer eingetippt.';
+$LDClk2ManualEntry='<b>Klicken Sie hier</b>, um den Artikel manuell einzugeben.';
+$LDPlsClkArticle='Bitte klicken Sie den richtige Artikel an!';
+$LDSelectArticle='Diesen Artikel eingeben';
 $LDDbInfo='Info aus der Datenbank';
 $LDRemoveArticle='Artikel aus der Liste entfernen';
 $LDArticleNoList='Artikel nicht in der datenbank verzeichnet';
-$LDPromptSearch='Bitte geben Sie das Stichwort zum Suchen ein. <br>
-							Z.B. die Aufnahmenummer, oder den Namen, oder den Vornamen, oder das Geburtsdatum. 
-							(Sehen Sie auch die <a href=\'ucons.php\'>Tips</a>.)';
+$LDPromptSearch='Bitte geben Sie das Stichwort zum Suchen ein, <br> z.B. die Aufnahmenummer, den Namen, den Vornamen oder das Geburtsdatum. (Beachten Sie auch die <a href=\'ucons.php\'>Tips</a>.)';
 $LDKeyword='Stichwort';
 $LDOtherFunctions='Weitere Funktionen';
-$LDInfoNotFound='Die gesuchte Information ist nicht gefunden!';
-$LDButFf='Aber, folgende';
+$LDInfoNotFound='Die gesuchte Information wurde nicht gefunden!';
+$LDButFf='Aber folgende';
 $LDSimilar='Eintrag entspricht';
 $LDSimilarMany='Einträge entsprechen';
-$LDNeededInfo='dem gesuchten am nähesten';
+$LDNeededInfo='dem gesuchten am nächsten';
 $LDPatLogbook='Patient ist im OP Logbuch wie folgt eingetragen.';
 $LDPatLogbookMany='Patient ist in OP Logbüchern wie folgt eingetragen';
 $LDDepartment='Abteilung';
@@ -286,7 +282,7 @@ $LDMonth='Monat';
 $LDYear='Jahr';
 $LDDutyElements = array('Datum','&nbsp;','Name, Vorname','Von','Bis','OP Saal','Diagnose & Therapie');
 $LDPrint='Drucken';
-$LDAlertNoPrinter='In Ihrem Browser müssen Sie den Ausdruck leider manuell starten. Gehen Sie dazu bitte mit der Maus auf das Dokument,  die rechte Maustaste drücken und Drucken wählen!';
+$LDAlertNoPrinter='In Ihrem Browser müssen Sie den Ausdruck leider manuell starten. Gehen Sie dazu bitte mit der Maus auf das Dokument, drücken Sie die rechte Maustaste und wählen Drucken!';
 $LDAlertNotSavedYet='Die Daten sind noch nicht gespeichert! Wollen Sie sie speichern?';
 $LDPhone='Telefon';
 $LDBeeper='Funk';

@@ -70,17 +70,17 @@ $LDDelete="Delete";
 $LDReset="Reset";
 $LDNewPhoneEntry="Enter new phone information";
 $LDShow="Show";
-$LDActualDir="Actual directory contents";
+$LDActualDir="Current contents of directory";
 $LDMoreInfo="More directory info";
 $LDMaxItem="Total number of directory entries";
-$LDUpdateOk="The information is updated succesfully";
+$LDUpdateOk="The information was updated succesfully";
 $LDRows="Rows";
 
 $LDGoodMorning="Good Morning!";
 $LDGoodDay="Hi! Nice to see you!";
 $LDGoodEvening="Good Evening";
 
-$LDShowActualDir="Show latest directory entries";
+$LDShowActualDir="Show current directory entries";
 $LDYesDelete="Yes, delete";
 $LDNoCancel="NO! CANCEL";
 $LDDeleteEntry="Delete entry";
