@@ -17,7 +17,7 @@ $LDNursingStations='Nursing wards';
 $LDQuickViewTxt='Quick view of today\'s occupancy of the nursing wards.';
 $LDSearchPatientTxt='Search the wards for an admitted patient.';
 $LDArchiveTxt='Research in the wards\' archived files.';
-$LDStationManTxt='Create a ward, initialize parameters like number of beds, personell, etc.';
+$LDStationManTxt='Create a ward, initialize parameters like number of beds, personnel, etc.';
 $LDNewsTxt='Read, compose, or edit a news article.';
 $LDMemoTxt='Read, compose, or edit a memo.';
 $LDNursingForumTxt='Discussions forum about nursing.';
@@ -26,12 +26,12 @@ $LDNursingStationsTxt='Occupancy, patient\' charts, photos, etc.';
 $LDCloseBack2Main='Close and go back to start page';
 $LDOld='Old';
 $LDTodays='Today\'s';
-$LDOccupancy='occupancy';
+$LDOccupancy='Occupancy';
 $LDBedNr='No. of beds';
 $LDOptions='Options';
 $LDFreeBed='Unoccupied';
 
-$LDNoOcc='Today\'s occupancy list is not available!';
+$LDNoOcc='The occupancy list is not available!';
 $LDClk2Archive='Click this to go to archive.';
 $LDNrUnocc='Number of unoccupied beds';
 $LDEditStation='Edit data in ward ~station~';
@@ -138,23 +138,23 @@ $LDAttention='Attention!';
 $LDOccupied='Occupied';
 $LDFree='Free';
 $LDLocked='Locked';
-$LDDutyDoctor='<b>Doctor</b><br>(on Duty)';
+$LDDutyDoctor='<b>Doctor</b> (on Duty)';
 $LDShortMale='M';
 $LDShortFemale='F';
 $LDLegend='Legend';
 
-$LDOpenFile='Open file';
+$LDOpenFile='Open charts';
 $LDNotesEmpty='Empty notice';
-$LDNotes='Notice';
-$LDRelease='Dismiss';
+$LDNotes='Notes';
+$LDRelease='Discharge';
 $LDFreeOccupy='Free/Occupy';
 $LDMale='Male';
 $LDFemale='Female';
 /**********do not change the ~station~ **************************/
 $LDNoInit='The ward ~station~ is not yet initialized!';
 $LDIfInit='To initialize the ward, please click here.';
-$LDShowPatData='Open patient\'s data file';
-$LDReleasePatient='Dismiss patient';
+$LDShowPatData='Open patient\'s charts folder';
+$LDReleasePatient='Discharge patient';
 $LDNoticeRW='Read or write notice';
 $LDInfoUnlock='Read info or unlock';
 $LDPatListElements=array(
@@ -172,25 +172,26 @@ $LDConfirmUnlock='Do you really want to unlock the \'+b+\' bed in room \'+r+\' ?
 $LDConfirmDelete='Do you really want to delete \'+t+\' \'+n+\' from room \'+r+b+\'?';
 $LDConfirmLock='Do you really want to lock this bed?';
 $LDClk2Occupy='Click to occupy this bed';
-$LDInsurance=array(
+/*$LDInsurance=array(
 								'x'=>'Self pay',
 								'privat'=>'Private',
 								'kasse'=>'General'
 								);
+*/
 $LDSave='Save';
 $LDNurse='Nurse';
-$LDYesSure='Yes, I\'m sure. Dismiss the patient.';
+$LDYesSure='Yes, I\'m sure. Discharge the patient.';
 $LDFtpAttempted='Attempted to connect to the FTP server.<br>The FTP server may be down or busy. If this problem persists for a long time, contact the EDP dept.';
 $LDFtpNoLink='FTP login failed';
-$LDJustReleased='The patient was dismissed. Click \'Close\' to go back to ward\'s occupancy list.';
-$LDReleaseType='Dismissal type';
-$LDRegularRelease='Regular dismissal';
-$LDSelfRelease='Patient left the hospital on his own will';
-$LDEmRelease='Emergency dismissal';
+$LDJustReleased='The patient was discharged. Click \'Close\' to go back to ward\'s occupancy list.';
+$LDReleaseType='Discharge type';
+$LDRegularRelease='Regular discharge';
+$LDSelfRelease='Patient left hospital on his own will';
+$LDEmRelease='Emergency discharge';
 $LDAlertNoName='Please enter your name.';
-$LDAlertNoDate='Enter the date in the ff: format: dd.mm.YYYY.';
+$LDAlertNoDate='Enter the date in this format:';
 $LDAlertNoTime='Enter the time in the ff: format: HH.mm.';
-$LDPatDataFolder='Patient\'s data folder';
+$LDPatDataFolder='Patient\'s charts folder';
 
 $LDClose='Close';
 $LDHelp='Help';
@@ -199,7 +200,7 @@ $LDReset='Reset';
 $LDNoLabReport='No lab reports available!';
 $LDFeverCurve='Fever chart';
 $LDNursingReport='Nursing report';
-$LDDocsPrescription='Doctor\'s directives';
+$LDDocsPrescription='Physician\'s orders';
 $LDNursingPlan='Nursing plan';
 $LDRootData='Root data';
 $LDReports='Diagnostic reports';
@@ -251,7 +252,7 @@ $LDFullDayName=array(
 									);
 $LDCurrentEntry='Current entries';
 $LDEntryPrompt='Please enter the new information here';
-$LDConfirmSetDate='Do you want to set the \'+dayID+\' ?';
+$LDConfirmSetDate='Do you want to set the "+dayID+" ?';
 $LDStartDate='Start date';
 $LDEndDate='End date';
 $LDShowCurveDate='Show the curve with the following';
@@ -327,23 +328,80 @@ $LDNoWardsYet='There are no nursing wards yet.';
 $LDClk2CreateWard='To create a ward, please click here.';
 /* 2002-10-12 EL */
 $LDToCreateNewList='To create a new list';
-$LD_ddpMMpyyyy="dd.mm.yyyy";
-$LD_yyyyhMMhdd="yyyy-mm-dd";
-$LD_MMsddsyyyy="mm/dd/yyyy";
+$LD_ddpMMpyyyy='dd.mm.yyyy';
+$LD_yyyyhMMhdd='yyyy-mm-dd';
+$LD_MMsddsyyyy='mm/dd/yyyy';
 /* 2002-10-23 EL*/
 $LDQueryDoctor='Query to doctor';
 $LDDoctorInfo='Doctor\'s info, instructions';
 $LDDiagnosticsReport='Diagnostics report arrived';
 $LDInfusionTherapy='Infusion therapy/program';
-$LDMonitorFluidDischarge='Monitor fluids discharge';
+$LDMonitorFluidDischarge='Fluids discharge/Diuretic';
 $LDBloodProgram='Blood sample/transfusion';
 $LDVitalStatistics='Vital statistics';
 $LDAntibioticsProgram='Antibiotics therapy/program';
 $LDAnticoagProgram='Anticoagulants';
 $LDSpecialCare='Special care, vital statistics';
 $LDTestConsultRequested='Test/Consult requested';
-$LDNurseReport='Nurse report (new)';
+$LDNurseReport='New nurse report';
 $LDDaily='Daily';
 $LDSaveChanges='Save changes';
-
+/* 2002-12-07*/
+$LDNoDiagReport='No diagnostic report available.';
+/* 2003-03-23 EL */
+$LDNursesList='Nurses\' List';
+$LDNursesListTxt='List, View, Create, & Edit Nurses\' List';
+/* 2003-04-18 */
+$LDInsurance='Health Fund';
+$LDPrivate='Private';
+$LDSelfPay='Self pay';
+/* 2003-04-21 EL */
+$LDRoom='Room';
+$LDAdm_Nr='Adm.Nr.';
+$LDStatus='Status';
+$LDInWard='In Ward';
+/* 2003-04-23 EL */
+$LDWard_ID='Ward ID';
+$LDNoSpecChars='No special characters allowed';
+/* 2003-04-24 EL*/
+$LDTemporaryCloseWard='Temporarily close this ward';
+$LDIrreversiblyCloseWard='Irreversibly close this ward';
+$LDSureTemporaryClose='Are you sure you want to close this ward temporarily?';
+$LDSureIrreversibleClose='Are you sure you want to close this ward IRREVERSIBLY ?';
+/* Do not translate the ~str~ , it will be replaced with the ward's name by the program */
+$LDWardNoClose='The ~str~ ward  cannot be closed because patients are still admitted.<br>You need to discharge all patients from the ward before closing it.';
+$LDBackToWardProfile='To go back to ward\'s profile';
+$LDShowWardOccupancy='To display the ward\'s occupancy list';
+$LDTemporaryClosed='Temporary closed';
+$LDReopenWard='Reopen this ward';
+$LDSureReopenWard='Are you sure you want to reopen this ward?';
+$LDShortDescription='Short description';
+$LDRoomShortDescription='Room\'s short description';
+$LDRoomNotCreated='Rooms not yet created';
+/* 2003-05-10 EL */
+$LDChangeRoom='Change of room';
+/*2003-06-14 EL*/
+$LDNrOfBedsRoom='The nr. of beds of room';
+$LDIsNotANumber='is not a valid number';
+$LDWaitingList='Waiting list';
+$LDShowAll='Show all';
+$LDShowWardOnly='Show ward only';
+$LDTransferToBed='Transfer to another bed in this ward';
+$LDTransferToWard='Transfer to another ward';
+$LDShowBeds='Show beds';
+$LDTransferPatient='Transfer patient';
+$LDDRG='DRG';
+$LDFinanceType='Insurance';
+#2003-08-02 EL
+$LDOutToInpatient='Change admission status to inpatient';
+$LDTransferClinic='Transfer to clinic or department';
+$LDClinic='Clinic';
+$LDOwnPatient='Own\'s patient';
+$LDNonOwnPatient='Non-own\'s patient';
+# 2003-08-04 EL
+$LDShowClinicOnly='This clinic only';
+# 2003-09-16 EL
+$LDAdmissionData='Admission data';
+$LDShowPhoto='Show photo';
+$LDOpenWardManagement='Open ward for administration';
 ?>
