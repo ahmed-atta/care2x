@@ -2,7 +2,7 @@
 $LDSend='Envoyer';
 $LDCancel='Annuler';
 $LDPrint='Imprimer';
-$LDStop='Arreter';
+$LDStop='Arrêter';
 $LDContinue='Continuer';
 $LDSearch='Chercher';
 $LDBack='Rétour';
