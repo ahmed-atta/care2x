@@ -1,12 +1,97 @@
 <?php
 require_once('../../include/inc_vars_resolve.php');
 ?>
-<html>
+<?php html_rtl($lang); ?>
 <head>
 <title>Credits</title>
 </head>
 <body onLoad="if(window.focus) window.focus()">
-<font face="verdana,arial" size=6 color="#0000ff">Credits</fonts>
+<font face="verdana,arial" size=6 color="#0000ff">Credits</fonts><BR>
+<FONT SIZE=2 color="#000000">Alphabetisch nach Vornamen geordnet</FONT>
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD><IMG height=15 
+            src="../../gui/img/common/default/pixel.gif" 
+            width=5 border=0></TD></TR>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+			<b>Daniele Frijia (DE) hat die Sicherheitsaspekten des Programms durchcheckt.</b>
+			<br>
+			Er hat u.a. folgendes beigetragen:<p>
+			<font size=1>
+			Vorschläge zur Sicherheitsverbesserungen<br>
+			Schnelle Lösungen zur php Fragen<br>
+			Er ist der 'Sentinel' des Projekts
+		</font>
+		    <p>
+			Daniele Frijia (geb. 81) arbeitet momentan bei einem ISP in Nürnberg. Sein PHP Wissen setzt er ein, um
+			die allgemeine Sicherheit von Care2x zu verbessern. Sein Ziel ist es, einen neuen Softwarebereich - den
+			medizinischen - mit Hilfe von Care2x zu erschliessen.
+
+			<P><a href="mailto:daniele@infra.de"><u>Daniele Frijia kann hier kontaktiert werden.</u></a>
+</TD></TR></TBODY></TABLE>
+
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD><IMG height=15 
+            src="../../gui/img/common/default/pixel.gif" 
+            width=5 border=0></TD></TR>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+			<b>Nino Novak (DE) hat die deutsche Fassung von www.care2x.com komplett überarbeitet.</b>
+			<p>
+			Nino Novak ist ein einsamer alter Cowboy, der besser schießen kann als denken. Manchmal
+			etwas pingelig. Diskutiert gerne mit (echten) Gurus.
+			Möchte helfen, die Welt zu verbessern. Kam zu Care2x, weil sich seine medizinisch-wissenschaftliche Vergangenheit
+			mal wieder zu Wort gemeldet hat. Ist aber ansonsten harmlos :-)
+			<P><a href="mailto:nino@kflog.org"><u>Nino Novak kann hier kontaktiert werden.</u></a>
+</TD></TR></TBODY></TABLE>
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+<TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+			<P><b>Stephan Pfefferkorn (DE)</b>
+			<p>
+			Stephan hilft bei der Korrektur und Verbesserung von PPT Präsentationen.
+			<P><a href="mailto:info@pfefferkorn-online.de"><u>Stephan  kann hier kontaktiert werden.</u></a>
+			</font>
+</TD></TR>	
+</TBODY></TABLE>
+
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+<TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+		  <P><img src="../../fotos/credits/sven_koechel.jpg" border=0  align=right vspace=10 >
+			<P><b>Sven Köchel (AT)</b>
+			<p>
+			Erstellung und Verwaltung von <a href="http://www.care2x.at" target="_blank">"Team Austria"</a> Webseite für Care2x.<br>
+			Entwicklungsarbeit an CARE-CAM zur Beobachtung und Kamerasteuerung.
+			<p>
+			Sven Köchel kann hier kontaktiert werden
+			<br><a href="mailto:sid61@users.sourceforge.net"><u>sid61(at)users.sourceforge.net</u></a>
+			</font>
+</TD></TR>	
+</TBODY></TABLE>
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+		  <P><img src="../../fotos/credits/timon_desktop.jpg" border=0  align=right vspace=10 >
+		  <P>
+			<b>Timon Royer (DE) </b>
+			<p>
+			Timon hat den "Care2x-Knoppix" Desktop-Hintergrund erstellt und dem Projekt zur freien Verfügung gestellt.
+			<P><a href="mailto:timon@plasmata.com"><u>Timon Royer kann hier kontaktiert werden.</u></a>
+</TD></TR></TBODY></TABLE>
+
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
@@ -57,67 +142,7 @@ require_once('../../include/inc_vars_resolve.php');
 </TD></TR>	
 </TBODY></TABLE>
 
-<hr>
-<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
-        <TBODY>
-<TR>
-          <TD vAlign=top><font face="verdana,arial" size=2>
-		  <P><img src="../../fotos/credits/sven_koechel.jpg" border=0  align=right vspace=10 >
-			<P><b>Sven Köchel (AT)</b>
-			<p>
-			Erstellung und Verwaltung von <a href="http://www.care2x.at" target="_blank">"Team Austria"</a> Webseite für Care2x.<br>
-			Entwicklungsarbeit an CARE-CAM zur Beobachtung und Kamerasteuerung.
-			<p>
-			Sven Köchel kann hier kontaktiert werden
-			<br><a href="mailto:sid61@users.sourceforge.net"><u>sid61(at)users.sourceforge.net</u></a>
-			</font>
-</TD></TR>	
-</TBODY></TABLE>
-
-
-<hr>
-<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
-        <TBODY>
-        <TR>
-          <TD><IMG height=15 
-            src="../../gui/img/common/default/pixel.gif" 
-            width=5 border=0></TD></TR>
-        <TR>
-          <TD vAlign=top><font face="verdana,arial" size=2>
-			<b>Nino Novak (DE) hat die deutsche Fassung von www.care2x.com komplett überarbeitet.</b>
-			<p>
-			Nino Novak ist ein einsamer alter Cowboy, der besser schießen kann als denken. Manchmal
-			etwas pingelig. Diskutiert gerne mit (echten) Gurus.
-			Möchte helfen, die Welt zu verbessern. Kam zu Care2x, weil sich seine medizinisch-wissenschaftliche Vergangenheit
-			mal wieder zu Wort gemeldet hat. Ist aber ansonsten harmlos :-)
-			<P><a href="mailto:nino@kflog.org"><u>Nino Novak kann hier kontaktiert werden.</u></a>
-</TD></TR></TBODY></TABLE>
-<hr>
-<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
-        <TBODY>
-        <TR>
-          <TD><IMG height=15 
-            src="../../gui/img/common/default/pixel.gif" 
-            width=5 border=0></TD></TR>
-        <TR>
-          <TD vAlign=top><font face="verdana,arial" size=2>
-			<b>Daniele Frijia (DE) hat die Sicherheitsaspekten des Programms durchcheckt.</b>
-			<br>
-			Er hat u.a. folgendes beigetragen:<p>
-			<font size=1>
-			Vorschläge zur Sicherheitsverbesserungen<br>
-			Schnelle Lösungen zur php Fragen<br>
-			Er ist der 'Sentinel' des Projekts
-		</font>
-		    <p>
-			Daniele Frijia (geb. 81) arbeitet momentan bei einem ISP in Nürnberg. Sein PHP Wissen setzt er ein, um
-			die allgemeine Sicherheit von Care2x zu verbessern. Sein Ziel ist es, einen neuen Softwarebereich - den
-			medizinischen - mit Hilfe von Care2x zu erschliessen.
-
-			<P><a href="mailto:daniele@infra.de"><u>Daniele Frijia kann hier kontaktiert werden.</u></a>
-</TD></TR></TBODY></TABLE>
-
-<hr>
+<!-- <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>       
 		 <TR>
@@ -127,7 +152,7 @@ require_once('../../include/inc_vars_resolve.php');
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/giuseppe_scarpi.jpg"  border=0  width=135 align=right vspace=10>
-			<b>Die italienische Fassung von Care 2002 wurde von  Giuseppe Scarpi (IT) bearbeitet.</b>
+			<b>Die italienische Fassung von CARE 2X wurde von  Giuseppe Scarpi (IT) bearbeitet.</b>
 			<p>
 			Giuseppe Scarpi wurde vor 35 Jahren in Rom in Italien geboren. 
 			<p>Er ist Diplom Elektroengineur und hat schon bei mehreren biomedizinische Firmen gearbeitet wo er
@@ -138,9 +163,9 @@ Er entchied sich für "open-source" denn: <br><i>"Eine ideale Welt kann nur überl
 etwas nimmt, sollte man etwas in gleicher Proportion zurückgeben."</i>
 
 			<P><a href="mailto:kalbun@inwind.it"><u>Giuseppe Scarpi kann hier kontaktiert werden.</u></a>
-</TD></TR></TBODY></TABLE>
+</TD></TR></TBODY></TABLE> -->
 
-<hr>
+<!-- <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
         <TR>
@@ -153,9 +178,9 @@ etwas nimmt, sollte man etwas in gleicher Proportion zurückgeben."</i>
 			<b>Die italienische Fassung von www.care2x.com wurde von  Gabriele Cicala  (IT) bearbeitet.</b>
 			
 			<P><a href="mailto:gabcicala@tiscali.it"><u>Gabriele Cicala kann hier kontaktiert werden.</u></a>
-</TD></TR></TBODY></TABLE>
+</TD></TR></TBODY></TABLE> -->
 
-<hr>
+<!-- <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
         <TR>
@@ -165,11 +190,11 @@ etwas nimmt, sollte man etwas in gleicher Proportion zurückgeben."</i>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/daniel_zilli.jpg"  border=0  align=right vspace=10>
-			<b>Die brazilianishe Fassung von Care 2002 und www.care2x.com wurde von  Daniel Zilli (PT-BR)  bearbeitet.</b>
+			<b>Die brazilianishe Fassung von CARE 2X und www.care2x.com wurde von  Daniel Zilli (PT-BR)  bearbeitet.</b>
 			
 			<P><a href="mailto:danielz@cco.matrix.com.br"><u>Daniel Zilli kann hier kontaktiert werden.</u></a>
 </TD></TR></TBODY></TABLE>
-
+ -->
 
 <hr>
 <font face="verdana,arial" size=3 color="#0000ff">Weitere Credits</font>

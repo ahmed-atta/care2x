@@ -377,4 +377,21 @@ $LDAdvancedSearch='Erweiterte Suche';
 #2003-10-28 EL
 $LDIncludeFirstName='Suche auch nach dem Namen.';
 $LDTipsTricks='Tipps & Tricks';
+#2003-12-06 EL
+$LDPrintPDFDoc='PDF Dokument erstellen';
+$LDDeathDate='Death date';
+
+# 2003-10-14 NDHC
+$LDITA='Intratracheal anesthesie';
+$LDLA='Lokale anesthesie';
+$LDAS='Analgosedierung';
+$LDOral='Oral';
+$LDAnticoagulant='Antikoagulant';
+$LDHemolytic='Hämolytika';
+$LDDiuretic='Diuretika';
+$LDAntibiotic='Antibiotika';
+$LDMask='Maske';
+$LDIntravenous='Intravenös';
+$LDSubcutaneous='Subcutan';
+$LDPreAdmission='Voraufnahme';
 ?>

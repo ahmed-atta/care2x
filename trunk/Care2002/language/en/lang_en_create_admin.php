@@ -4,8 +4,8 @@ $LDLoginExists='The login/username already exists. Please use a different login/
 $LDAdminOk='The system admin is now created. Please delete the create_admin.php script from the root path 
 of this application, otherwise Care2x refuses to run.';
 $LDDeleteWarning='Very important!  You must delete this create_admin.php script after successfully creating an admin access!';
-$LDCreateAdminWarning='You have not yet deleted the create_admin.php script!  
-You must delete the create_admin.php script  otherwise Care2x will refuse to run!';
+$LDCreateAdminWarning='You have not yet deleted the "/create_admin.php" script!  
+You must delete the "/create_admin.php" script  otherwise Care2x will refuse to run!';
 $LDWarning='Warning!';
 $LDInstallWarning='You have not yet deleted the "install/initialize.php" script!  
 You must delete the "install/initialize.php" script  NOW otherwise another person can change your database access information!';

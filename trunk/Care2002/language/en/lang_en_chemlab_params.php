@@ -57,11 +57,11 @@ $klinichemie_list0=array(
 	'0tri'=>'Tri',
 	'0tro'=>'Troponin T' );
 
-// Liquor parameter
+// Cerebrospinal parameters
 $liquor_list1=array(
-	'1stat'=>'Liquor status',
-	'1elp'=>'Liquor elpho',
-	'1oli'=>'Oligoclonales IgG',
+	'1stat'=>'CSF status',
+	'1elp'=>'CSF elpho',
+	'1oli'=>'Oligoclonal IgG',
 	'1sch'=>'Reiber Scheme',
 	'1a1'=>'A1');
 
@@ -76,15 +76,15 @@ $gerinnung_list2=array(
 	'2fsp'=>'FSP dimer',
 	'2coag'=>'Thr.Coag.',
 	'2at3'=>'AT III',
-	'2f8'=>'Faktor VII',
+	'2f8'=>'Factor VII',
 	'2apc'=>'APC Resistance',
 	'2prc'=>'Protein C',
 	'2prs'=>'Protein S',
 	'2bt'=>'Bleeding time');
 
-//Hämatologie parameter
+//Hematology parameter
 $haematologie_list3=array(
-	'3ret'=>'Retikulocytes',
+	'3ret'=>'Reticulocytes',
 	'3mal'=>'Malaria',
 	'3hbe'=>'Hb Elpho',
 	'3hla'=>'HLA B 27',
@@ -106,9 +106,9 @@ $blutzucker_list4=array(
 
 // Säugling parameter
 $saeugling_list5=array(
-	'5bil'=>'Neonate bilirubin',
+	'5bil'=>'Neonatal bilirubin',
 	'5bilc'=>'Cord bilirubin',
-	'5bild'=>'Bilirubin direct',
+	'5bild'=>'Bilirrubin direct',
 	'5glo1'=>'Neonate sugar 1',
 	'5glo2'=>'Neonate sugar 2',
 	'5ret'=>'Reticulocytes',
@@ -163,16 +163,16 @@ $hormone_list8=array(
 	'8osd'=>'Ostriol',
 	'8ssw'=>'SSW:',
 	'8par'=>'Parat hormone',
-	'8prg'=>'Progesteron',
+	'8prg'=>'Progesterone',
 	'8pr1'=>'Prolactin I',
 	'8pr2'=>'Prolactin II',
 	'8ren'=>'Renin',
 	'8ser'=>'Serotonin',
 	'8som'=>'Somatomedin C',
-	'8tes'=>'Testosteron',
+	'8tes'=>'Testosterone',
 	'8c1'=>'C1');
 
-// Tumormarker parameter
+// Tumor marker parameter
 $tumormarker_list9=array(
 	'9afp'=>'AFP',
 	'9c153'=>'CA. 15 3',
@@ -279,10 +279,10 @@ $infektion_list14=array(
 
 // Medikamente 
 $medikamente_list15=array(
-	'15ami'=>'Amiodaron',
+	'15ami'=>'Amiodarone',
 	'15bar'=>'Barbiturate.i.S.',
 	'15ben'=>'Benzodiazep.i.S.',
-	'15car'=>'Carbamazepin',
+	'15car'=>'Carbamazepine',
 	'15clo'=>'Clonazepam',
 	'15dig'=>'Digitoxin',
 	'15dgo'=>'Digoxin',
@@ -290,7 +290,7 @@ $medikamente_list15=array(
 	'15lit'=>'Lithium',
 	'15phe'=>'Phenobarbital',
 	'15pny'=>'Phenytoin',
-	'15pri'=>'Primidon',
+	'15pri'=>'Primidone',
 	'15sal'=>'Salicylic acid',
 	'15the'=>'Theophyllin',
 	'15tob'=>'Tobramycin',
@@ -301,7 +301,7 @@ $medikamente_list15=array(
 	'15bau'=>'Barbiturate.i.u.',
 	'15beu'=>'Benzodiazep.i.u.',
 	'15can'=>'Cannabinol.i.u.',
-	'15coc'=>'Cocain.i.u',
+	'15coc'=>'Cocaine.i.u',
 	'15met'=>'Methadon.i.u.',
 	'15opi'=>'Opiate.i.u.');
 

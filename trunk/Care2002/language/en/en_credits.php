@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 ?>
-<html>
+<?php html_rtl($lang); ?>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <title>Credits</title>
@@ -65,7 +65,7 @@ Website: www.cerebroperiferico.com
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/daniel_zilli.jpg"  border=0  align=right vspace=10>
-			<b>Daniel Zilli (BR) translated Care 2002 and www.care2x.com website to  brazilian-portuguese.</b>
+			<b>Daniel Zilli (BR) translated CARE 2X and www.care2x.com website to  brazilian-portuguese.</b>
 			<p>
 			Daniel is a nice guy who loves to live a happy life. He likes computers, football, and good music.
 He  loves computers and has 10 years of computer experience it.
@@ -78,7 +78,7 @@ science education products, open source software and local  linux distro.
         <TBODY>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-			<b>Daniele Frijia (DE) checked the security aspects of Care 2002.</b>
+			<b>Daniele Frijia (DE) checked the security aspects of CARE 2X.</b>
 			<br>
 			A few of his many contributions:<p>
 			<font size=1>
@@ -100,7 +100,7 @@ science education products, open source software and local  linux distro.
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/elpidio_latorilla_3.jpg" border=0  align=right vspace=10>
-			<b>The first beta version of CARE 2002 was created by Elpidio Latorilla (DE/PH):</b>
+			<b>The first beta version of CARE 2X was created by Elpidio Latorilla (DE/PH):</b>
 			<p>
 			Professions: <br>Programmer, Surgery Nurse, Electronics & telecommunications technician
 			<p>
@@ -134,7 +134,7 @@ believe.
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/giuseppe_scarpi.jpg"  border=0  width=135 height=170 align=right vspace=10>
-			<b>Giuseppe Scarpi (IT) translated Care 2002 to italian.</b>
+			<b>Giuseppe Scarpi (IT) translated CARE 2X to italian.</b>
 			<p>
 			Giuseppe Scarpi was born in Rome, Italy, 35 years ago. 
 			<p>He has a degree in Electronic Engineering and has worked for several companies in the biomedical sector, 
@@ -178,7 +178,7 @@ He decided to actively join open source because: <br><i>"Such an ideal world can
         <TBODY>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-			<b>Matej Hausenblas (FR) did the french translations of Care 2002</b>
+			<b>Matej Hausenblas (FR) did the french translations of CARE 2X</b>
 			<p>
 Matej Hausenblas was born in Prague, Czech Republic, in 1981.
 He is a student on a math-informatics-physics university. After several years 
@@ -194,6 +194,22 @@ work in this kind of community.
         <TBODY>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
+            <P><img src="../../fotos/credits/luca_romoli.jpg"  border=0  align=right vspace=10>
+			<b>Luca Romoli (BR/IT) </b><p>
+			PPT Presentations and templates<br>
+			Project management tools<br>
+			Financial management and marketing tools<br>
+			Marketing campaigns in Brazil<p>
+			Luca is an experienced business consultant specializing in web applications. His target is to make the first productive installation of Care2x
+			in Brazilian hospitals.
+			<P><a href="mailto:luca@camocim.com"><u>Muhammad Panji can be contacted here.</u></a>
+</TD></TR></TBODY></TABLE>
+
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/muhammad_panji.png"  border=0  align=right vspace=10>
 			<b>Muhammad Panji (ID) </b><p>
 			Indonesian translations of Care 2X and www.care2x.com website.<br>
@@ -201,7 +217,6 @@ work in this kind of community.
 			
 			<P><a href="mailto:sumodirjo@users.sourceforge.net"><u>Muhammad Panji can be contacted here.</u></a>
 </TD></TR></TBODY></TABLE>
-
 
 
 <hr>
@@ -337,6 +352,10 @@ Despite the fact that he is neither working in medical nor in health sector, he 
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;eComBill billing module</font></td>
   </tr>
   <tr>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> A. Djem (ID)</font></nobr>&nbsp;</td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Grahic designs, website design</font></td>
+  </tr>
+  <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Akhmad Daniel Sembiring (ID)</font></nobr>&nbsp;</td>
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Debugging of eCombill</font></td>
   </tr>
@@ -399,6 +418,10 @@ Despite the fact that he is neither working in medical nor in health sector, he 
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Simone Aveotti (IT)</font></nobr>&nbsp;</td>
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Additional italian translations</font></td>
+  </tr>
+  <tr>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Stephan Pfefferkorn (DE)</font></nobr>&nbsp;</td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Editing PPT presentations</font></td>
   </tr>
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Victor Christianto</font></nobr>&nbsp;</td>

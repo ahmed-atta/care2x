@@ -393,4 +393,5 @@ $LDShowClinicOnly='Nur diese Ambulanz';
 # 2003-09-16 EL
 $LDAdmissionData='Aufnahmedaten';
 $LDShowPhoto='Bild zeigen';
+$LDOpenWardManagement='Diese Station zum Verwalten öffnen';
 ?>

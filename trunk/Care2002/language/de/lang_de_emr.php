@@ -24,4 +24,5 @@ $LDDevelopment='Entwicklung';
 /* 2003-05-17 EL */
 $LDDietPlan='Diät Plan';
 $LDAllergy='Allergien';
+$LDPrintPDFDocAllReport='PDF Dokumente aller Berichte';
 ?>

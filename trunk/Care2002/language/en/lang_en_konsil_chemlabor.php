@@ -1,6 +1,6 @@
 <?php
 $LDDiagnosticTest='Diagnostic Test Order';
-$LDHospitalName='CARE 2002';
+$LDHospitalName='CARE 2X';
 $LDCentralLab='Central Laboratory';
 $LDLabel='Label';
 $LDRoomNr='Room-Nr.';

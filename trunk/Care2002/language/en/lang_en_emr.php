@@ -23,4 +23,5 @@ $LDProblem='Problems';
 $LDDevelopment='Development';
 $LDAllergy='Allergy';
 $LDDietPlan='Diet plan';
+$LDPrintPDFDocAllReport='PDF document of all reports';
 ?>

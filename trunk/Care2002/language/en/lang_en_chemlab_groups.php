@@ -3,7 +3,7 @@
 $parametergruppe=array(
 	'priority'=>'Priority',
 	'clinical_chem'=>'Clinical chemistry',
-	'liquor'=>'Liquor',
+	'liquor'=>'CSF',
 	'coagulation'=>'Coagulation',
 	'hematology'=>'Hematology',
 	'blood_sugar'=>'Blood sugar',
