@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
+* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@latorilla.com
+* elpidio@care2x.net, elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -20,7 +20,7 @@ if (!isset($pn)||!$pn) {header("Location:".$root_path."language/".$lang."/lang_"
 if($saveok) { ?>
 
  <script language="javascript" >
- window.opener.parent.location.href='<?php echo "drg-composite-start.php?sid=$sid&lang=$lang&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&group_nr=$group_nr&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=composite&newsave=1" ?>';
+ window.opener.parent.location.href='<?php echo "drg-composite-start.php?sid=$sid&lang=$lang&pn=$pn&opnr=$opnr&edit=1&ln=$ln&fn=$fn&bd=$bd&group_nr=$group_nr&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=composite&newsave=1" ?>';
  window.close();
 </script>
 
