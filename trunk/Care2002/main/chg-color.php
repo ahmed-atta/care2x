@@ -30,9 +30,10 @@ $breakfile='javascript:window.close()';
 
 function set(c)
 {
-<?php if($mode=="ex") echo "url='excolorchg.php?sid=$sid&lang=$lang&item=$item&mode=change&uid=$r&sid=$sid&color='+c;"; 
-			else echo "url='colorchg.php??sid=$sid&lang=$lang&item=$item&mode=change&uid=$r&sid=$sid&color='+c;"; 
+<?php if($mode=="ex") echo "url='excolorchg.php?sid=$sid&lang=$lang&item=$item&mode=change&uid=$r&color='+c;"; 
+			else echo "url='colorchg.php?sid=$sid&lang=$lang&item=$item&mode=change&uid=$r&color='+c;"; 
 ?>
+	
 	window.opener.location.replace(url);
 	window.close();
 }
