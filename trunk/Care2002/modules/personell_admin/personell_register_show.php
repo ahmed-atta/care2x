@@ -22,7 +22,7 @@ require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 $GLOBAL_CONFIG=array();
 
 $thisfile=basename(__FILE__);
-$breakfile='personell_admin_pass.php?sid='.$sid.'&lang='.$lang;
+$breakfile='personell_admin_pass.php'.URL_APPEND;
 
 $personell_obj=new Personell();
 //$person_obj=new Person();

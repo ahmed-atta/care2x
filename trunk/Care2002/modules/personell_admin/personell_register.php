@@ -31,10 +31,10 @@ require_once($root_path.'include/care_api_classes/class_ward.php');
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 require_once($root_path.'include/care_api_classes/class_personell.php');
 
+$breakfile='personell_admin_pass.php'.URL_APPEND.'&target='.$target;
 $thisfile=basename(__FILE__);
-if($origin=='patreg_reg') $returnfile='personell_register_show.php'.URL_APPEND.'&pid='.$pid;
+$returnfile=$breakfile;
    
-$breakfile=$root_path.$HTTP_SESSION_VARS['sess_path_referer'].URL_APPEND.'&pid='.$pid;
 
 $newdata=1;
 
@@ -62,7 +62,7 @@ $patregtable='care_person';  // The table of the patient registration data
 /* Create new person's insurance object */
 $pinsure_obj=new PersonInsurance($pid);	 
 /* Get the insurance classes */
-$insurance_classes=&$pinsure_obj->getInsuranceClassInfoObject($root_path.'include/care_api_classes/class_nr,name,LD_var');
+$insurance_classes=&$pinsure_obj->getInsuranceClassInfoObject('class_nr,name,LD_var');
 
 /* Create new person object */
 $person_obj=new Person($pid);
@@ -83,11 +83,11 @@ if($pid||$personell_nr){
         if ($pid){	
 		  /* Check whether the person is currently admitted. If yes jump to display admission data */
 			if(!$update&&$personell_nr=$personell_obj->Exists($pid)){
-		      header('Location:personell_register_show.php'.URL_REDIRECT_APPEND.'&personell_nr='.$personell_nr.'&origin=admit&sem=isadmitted&target=personell_reg');
-			  exit;
-		}
+		     	 header('Location:personell_register_show.php'.URL_REDIRECT_APPEND.'&personell_nr='.$personell_nr.'&origin=admit&sem=isadmitted&target=personell_reg');
+			  	exit;
+			}
 			 /* Get the related insurance data */
-/*			 $p_insurance=&$pinsure_obj->getPersonInsuranceObject($pid);
+			 $p_insurance=&$pinsure_obj->getPersonInsuranceObject($pid);
 			 if($p_insurance==false) {
 				$insurance_show=true;
 			 } else {
@@ -100,7 +100,7 @@ if($pid||$personell_nr){
 				    $insurance_firm_name=$pinsure_obj->getFirmName($insurance_firm_id); 
 				} else { $insurance_show=false;}
 			 } 
-*/
+
             if (($mode=='save')){
 
                  if(!$error) {	

@@ -26,7 +26,7 @@ $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('person_%');
 		
 $thisfile=basename(__FILE__);
-$breakfile='patient.php';
+$breakfile='personell_admin_pass.php'.URL_APPEND.'&target='.$target;
 $admissionfile='aufnahme_start.php'.URL_APPEND;
 
 if((!isset($pid)||!$pid)&&$HTPP_SESSION_VARS['sess_pid']) $pid=$HTPP_SESSION_VARS['sess_pid'];

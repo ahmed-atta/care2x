@@ -25,13 +25,7 @@ $person_obj=new Person($pid);
 $pinsure_obj=new PersonInsurance($pid);
 
 $thisfile=basename(__FILE__);
-$default_filebreak=$root_path.'main/startframe.php'.URL_APPEND;
-
-if(empty($HTTP_SESSION_VARS['sess_path_referer']) || !file_exists($root_path.$HTTP_SESSION_VARS['sess_path_referer'])) {
-    $breakfile=$default_filebreak;
-} else {
-    $breakfile=$root_path.$HTTP_SESSION_VARS['sess_path_referer'].URL_APPEND;
-}
+$breakfile='personell_admin_pass.php'.URL_APPEND.'&target=person_reg';
 
 if(!session_is_registered('sess_pid')) session_register('sess_pid');
 if(!isset($insurance_show)) $insurance_show=true;
@@ -239,7 +233,7 @@ if($dblink_ok) {
 	 
 	 /* Get the insurance classes */
 
-	 $insurance_classes=&$pinsure_obj->getInsuranceClassInfoObject($root_path.'include/care_api_classes/class_nr,name,LD_var');
+	$insurance_classes=&$pinsure_obj->getInsuranceClassInfoObject('class_nr,name,LD_var');
 	 
 } else { 
     echo "$LDDbNoLink<br>"; 

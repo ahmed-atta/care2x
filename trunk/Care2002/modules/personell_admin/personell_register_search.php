@@ -31,16 +31,7 @@ $entry_block_bgcolor='#fff3f3';
 $entry_border_bgcolor='#66ee66';
 $entry_body_bgcolor='#ffffff';
 
-switch($origin)
-{
-    case 'archive': $breakfile='patient_register_archive.php';
-	                         break;
-    case 'admit': $breakfile='patient.php';
-	                         break;
-    default : $breakfile='patient.php';
-}
-
-$breakfile.=URL_APPEND;
+$breakfile='personell_admin_pass.php'.URL_APPEND.'&target=personell_search';
 $GLOBAL_CONFIG=array();
 
 if(isset($mode)&&($mode=='search')&&isset($searchkey)&&($searchkey))
@@ -126,9 +117,8 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php echo $LDPatientRegister." - ".$LDSearch ?></STRONG></FONT>
 </td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
-<a href="javascript:gethelp('')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
-if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo "startframe.php?sid=".$sid."&lang=".$lang; 
-	else echo$breakfile."?sid=$sid&target=entry&lang=$lang"; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
+<a href="javascript:gethelp('')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml']) echo 'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
+ echo $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </td>
 </tr>
 
@@ -183,7 +173,7 @@ if(isset($origin) && $origin=='pass')
 if ($linecount) 
 	{ 
          echo '<hr width=80% align=left><p>'.str_replace("~nr~",$linecount,$LDSearchFound).'<p>';
-					mysql_data_seek($ergebnis,0);
+					//mysql_data_seek($ergebnis,0);
 
 					echo '
 						<table border=0 cellpadding=2 cellspacing=1> <tr bgcolor="#66ee66" background="'.$root_path.'gui/img/common/default/tableHeaderbg.gif">';
