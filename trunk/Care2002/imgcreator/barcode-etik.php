@@ -7,7 +7,7 @@ Copyright (C) 2002  Elpidio Latorilla & Intellin.org
 GNU GPL. For details read file "copy_notice.txt".
 */
 
-if(!extension_loaded("gd")) dl("php_gd.dll");
+if(!extension_loaded('gd')) dl('php_gd.dll');
 define("LANG_FILE","aufnahme.php");
 define("NO_CHAIN",1);
 require("../include/inc_front_chain_lang.php");
@@ -24,11 +24,11 @@ if(file_exists("../cache/barcodes/pn_".$pn."_bclabel_".$lang.".png"))
 else
 {
 */
-    include("../include/inc_db_makelink.php");
+    include('../include/inc_db_makelink.php');
     if($link&&$DBLink_OK)
 	{	
 	    // get orig data
-	    $dbtable="mahopatient";
+	    $dbtable="care_admission_patient";
 	    $sql="SELECT * FROM $dbtable WHERE patnum='$pn' ";
 	    if($ergebnis=mysql_query($sql,$link))
        	{
@@ -38,10 +38,15 @@ else
 				{
 					mysql_data_seek($ergebnis,0);
 					$result=mysql_fetch_array($ergebnis);
-					if($edit&&$result[discharge_date]) $edit=0;
+					if($edit&&$result['discharge_date']) $edit=0;
 				}
 		}
 		else {print "<p>$sql$LDDbNoRead"; exit;}
+       
+	   include_once("../include/inc_date_format_functions.php");
+       $date_format=getDateFormat($link,$DBLink_OK);
+	   
+	   $result['gebdatum']=formatDate2Local($result['gebdatum'],$date_format);
 	}
 	else 
 		{ print "$LDDbNoLink<br>$sql<br>"; }

@@ -5,7 +5,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
 Fotolabor - 
-<?
+<?php
 	switch($src)
 	{
 	case "init": print "Initialisieren";
@@ -24,7 +24,7 @@ Fotolabor -
 <p><font size=2 face="verana,arial" >
 <form action="#" >
 <?php if($src=="input") : ?>
-		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Die Eingabefelder sind jetzt eingeblendet. Was mache ich jetzt?</b>
 </font>
 <ul>       	
@@ -48,13 +48,13 @@ Die Eingabefelder sind jetzt eingeblendet. Was mache ich jetzt?</b>
 	Dies ist nur sinnvoll wenn Sie den Schritt 10 schon gemacht haben.<p>
  	<b>Schritt 11: </b>Klickt den <input type="button" value="Speichern"> Knopf an um die Bilder in die Datenbank zu speichern.<br>
 </ul>
-		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie sehe die Vorschau eines Bildes?</b>
 </font>
 <ul>       	
  	<b>Schritt 1: </b>Klickt den <img src="../img/lilcamera.gif" border=0> Knopf des Bildes an.<br>
 </ul>
-		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Ich kann den Patient nicht finden. Kann ich einfach seine Daten in die Eingabefelder manuell eingeben?</b>
 </font>
 <ul>       	
@@ -63,7 +63,7 @@ Ich kann den Patient nicht finden. Kann ich einfach seine Daten in die Eingabefe
 <?php endif ?>	
 
 <?php if($src=="maindata") : ?>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie finde ich die Patientendaten?</b>
 </font>
 <ul>	
@@ -76,7 +76,7 @@ Wie finde ich die Patientendaten?</b>
  	<img src="../img/warn.gif" border=0><b> Note: </b>Wenn ein oder einige Bildern ein anderes Aufnahmedatum haben soll, gibt dieses Datum in das entsprechende Eingabefeld ein. 
 	Dies ist nur sinnvoll wenn Sie den Schritt 5 schon gemacht haben.<p>
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Ich kann den Patient nicht finden. Kann ich einfach seine Daten in die Eingabefelder manuell eingeben?</b>
 </font>
 <ul>       	
@@ -85,7 +85,7 @@ Ich kann den Patient nicht finden. Kann ich einfach seine Daten in die Eingabefe
 
 	<?php endif ?>	
 <?php if($src=="save") : ?>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie kann ich weitere Fotos von dem selben Patient speichern?</b>
 </font>
 <ul>	
@@ -93,7 +93,7 @@ Wie kann ich weitere Fotos von dem selben Patient speichern?</b>
  	<b>Schritt 2: </b>Klickt den <input type="button" value="GO"> Knopf an.<br>
 </ul>
 
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie kann ich Fotos von einem anderen Patient speichern?</b>
 </font>
 <ul>	
@@ -105,7 +105,7 @@ Wie kann ich Fotos von einem anderen Patient speichern?</b>
 	
 <?php if($src=="init") : ?>
 	<?php if($x1=="") : ?>
-		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie speichere ich Fotos in die Datenbank?</b>
 </font>
 <ul>       	

@@ -43,7 +43,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 <?php if(($src=="?")||($x1>1)) : ?>
 
  <br>
- 		Um einen Patient in der Liste zu dokumentieren,  den nebenstehenden <img src="../img/R_arrowGrnSm.gif" border=0 height=12 border=0> , oder
+ 		Um einen Patient in der Liste zu dokumentieren,  den nebenstehenden <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> , oder
 		den Namen, oder den Vornamen, oder die Fallnummer oder das Aufnahmedatum anklicken.
 
 </ul>
@@ -78,7 +78,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 </ul>
 <?php endif ?>
 <b>Achtung!</b>
-<ul> Falls Sie abbrechen möchten, den  <img src="../img/de/de_cancel.gif" border=0 > anklicken.
+<ul> Falls Sie abbrechen möchten, den  <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> > anklicken.
 		
 </ul>
 

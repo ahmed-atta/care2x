@@ -1,14 +1,16 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require_once('../include/inc_vars_resolve.php'); // globalize POST, GET, & COOKIE  vars
+
 /*
 CARE 2002 Integrated Information System beta 1.0.02 - 30.07.2002 for Hospitals and Health Care Organizations and Services
 Copyright (C) 2002  Elpidio Latorilla & Intellin.org	
 
 GNU GPL. For details read file "copy_notice.txt".
 */
-require("../include/inc_labor_param_group.php");
+require('../include/inc_labor_param_group.php');
 
-if(!extension_loaded("gd")) dl("php_gd.dll");
+if(!extension_loaded('gd')) dl('php_gd.dll');
 
 /**
 * search the paramgroup of the parameter
@@ -22,7 +24,7 @@ for($i=0;$i<sizeof($parametergruppe);$i++)
 	}
 }
 
-$dbuf=explode("~",$tid);
+$dbuf=explode('~',$tid);
 $cols=sizeof($dbuf);
 $srctid=" tid='$dbuf[0]'";
 
@@ -32,10 +34,10 @@ if($parameterselect=="") $parameterselect=0;
 
 $parameters=$paralistarray[$parameterselect];					
 
-require("../include/inc_db_makelink.php");
+require('../include/inc_db_makelink.php');
 if($link&&$DBLink_OK) 
 { 			
-      $dbtable="lab_test_data";
+      $dbtable='care_lab_test_data';
       $sql="SELECT $groupname,tid FROM $dbtable WHERE patnum='$patnum' AND ($srctid) ORDER BY tid";
       if($ergebnis=mysql_query($sql,$link))
       {
@@ -57,10 +59,10 @@ $tablen=$tabcols*$cols;
 $ox=$tabcols/2;
 $tabrows=$tabhi/10;
 
-header ("Content-type: image/PNG");
+header ('Content-type: image/PNG');
 
 $im = @ImageCreate ($tablen, $tabhi)
-     or die ("Cannot Initialize new GD image stream");
+     or die ('Cannot Initialize new GD image stream');
 // $background_color = ImageColorAllocate ($im, 205,225,236);
 $background_color = ImageColorAllocate ($im, 255,255,255);
 $text_color = ImageColorAllocate ($im, 204, 255, 204);

@@ -27,19 +27,19 @@ if($src=="search")
 
 
 <?php if($src=="search") : ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie finde ich einen Patient?</b>
 </font>
 	
 	<ul>       	
  	<b>Schritt 1: </b>Gibt entweder eine vollständige Information oder die erste Zeichen von der Fallnummer vom Patient, von seinem Namen, oder von seinem Vornamen, oder
 	von seinem Geburtstdatum in das entsprechende Eingabefeld ein. <br>
- 	<b>Schritt 2: </b>Klickt den <img src="../img/de/de_searchlamp.gif" border=0> Knopf an um die Suche zu starten.<p> 
+ 	<b>Schritt 2: </b>Klickt den <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> Knopf an um die Suche zu starten.<p> 
 <ul>       	
  	<b>Achtung! </b>Wenn die Suche ein Ergebnis bzw. mehrere Ergebnisse liefert wird eine Liste gezeigt. <p>
 	</ul>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie kann ich die Vorschau des Röntgenbildes und den Befund zeigen lassen?</b>
 </font>
 	
@@ -48,15 +48,15 @@ Wie kann ich die Vorschau des Röntgenbildes und den Befund zeigen lassen?</b>
 	Die Vorschau des Röntgenbildes wird in den unteren linken Rahmen eingeblendet.<br> 
 	Der Befund wird in den unteren rechten Rahmen gezeigt.<br> 
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie kann ich das Röntgenbild in voller Große zeigen lassen?</b>
 </font>
 	<ul>       	
- 	<b>Schritt 1: </b>Klickt das Symbol  <img src="../img/torso.gif" border=0> an.<br>
+ 	<b>Schritt 1: </b>Klickt das Symbol  <img <?php echo createComIcon('../','torso.gif','0') ?>> an.<br>
 </ul>
-<img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b> Achtung!</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Achtung!</b></font> 
 <ul>       	
- Wenn Sie abbrechen möchten klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an.
+ Wenn Sie abbrechen möchten klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.
 </ul>
 <?php endif ?>
 

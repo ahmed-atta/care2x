@@ -2,7 +2,7 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
 Intranet Email - 
-<?
+<?php
 	switch($src)
 	{
 	case "pass": switch($x1)
@@ -39,7 +39,7 @@ Intranet Email -
 
 <?php if($src=="pass") : ?>
 <?php if($x1=="") : ?>
-		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to log in?</b>
 </font>
 <ul>       	
@@ -52,17 +52,17 @@ How to log in?</b>
  	<b>Step 3: </b>Click the <input type="button" value="Login"> button to log in.<br>
 </ul>
 
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 I have no address yet. How to get an address?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the link "<span style="background-color:yellow" > New user can register here. <img src="../img/bul_arrowGrnSm.gif" width=12 height=12 border=0> </span>" to open the
+ 	<b>Step 1: </b>Click the link "<span style="background-color:yellow" > New user can register here. <img <?php echo createComIcon('../','bul_arrowgrnsm.gif','0') ?>> </span>" to open the
 	registration form.<br>
  	<b>Step 2: </b>For further instructions, click the "Help" button once the register form is displayed.<br>
 </ul>
 	<?php endif ?>		
 	<?php if($x1=="1") : ?>
-		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to register?</b>
 </font>
 <ul>       	
@@ -84,34 +84,34 @@ How to register?</b>
 
 <?php if($src=="mail") : ?>
 <?php if($x1=="listmail") : ?>
-		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to open a mail?</b>
 </font>
 <ul>       	
  	<b>Step 1: </b>Click either the mail's recipient or sender, or subject, or date, or the icons <img src="../img/c-mail.gif" border=0 align="absmiddle"> or <img src="../img/o-mail.gif" border=0 align="absmiddle">.<br>
 </ul>
 
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 What do the icons <img src="../img/c-mail.gif" border=0 align="absmiddle"> and <img src="../img/o-mail.gif" border=0 align="absmiddle"> mean?</b>
 </font>
 <ul>       	
  	<img src="../img/c-mail.gif" border=0 align="absmiddle"> = Mail is not yet read or opened. <br>
  	<img src="../img/o-mail.gif" border=0 align="absmiddle"> = Mail was already  read or opened. <br>
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to delete a mail?</b>
 </font>
 <ul>       	
  	<b>Step 1: </b>Check  the mail's <input type="checkbox" name="a" value="s" checked> checkbox to select it.<br>
  	<b>Step 2: </b>Click the <input type="button" value="Delete"> button.<br>
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to go from one folder to another?</b>
 </font>
 <ul>       	
  	<b>Step 1: </b>Just click the folder's name.<br>
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to compose or write a new mail?</b>
 </font>
 <ul>       	
@@ -119,7 +119,7 @@ How to compose or write a new mail?</b>
 </ul>
 	<?php endif ?>		
 	<?php if($x1=="compose") : ?>
-		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to write a new mail?</b>
 </font>
 <ul>       	
@@ -130,14 +130,14 @@ How to write a new mail?</b>
  	<b>Step 5: </b>Now type your message in the text input field.<br>
  	<b>Step 6: </b>Click the <input type="button" value="Send"> button to send the mail.<br>
 </ul>
-		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 I plan to save the mail as a draft. How to do it?</b>
 </font>
 <ul>       	
  	<b>Step 1: </b>Type your message in the text input field.<br>
  	<b>Step 2: </b>After typing your message, click the <input type="button" value="Save as draft"> button.<br>
 </ul>
-		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to use email addresses from my address book directly?</b>
 </font>
 <ul>       	
@@ -149,15 +149,15 @@ How to use email addresses from my address book directly?</b>
 		Click "CC<input type="radio" name="t" value="a">" to copy the address to the "CC" field.<br>
 		Click "BCC<input type="radio" name="t" value="a">" to copy the address to the "BCC" field.<p>
 </ul>
-        <img src="../img/warn.gif" border=0 align="absmiddle"> <b>Note:</b>  If you want to
+        <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <b>Note:</b>  If you want to
 		reset a radiobutton, click the corresponding <img src="../img/redpfeil.gif" border=0> icon.<br> 	
-        <img src="../img/warn.gif" border=0 align="absmiddle"> <b>Note:</b> You can select several addresses
+        <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <b>Note:</b> You can select several addresses
 		at the same time. 	<p>
  	<b>Step 4: </b>Click the <input type="button" value="Take over"> button to copy the selected addresses to the mail being composed.<br>
  	<b>Step 5: </b>Click the "<span style="background-color:yellow" > <img src="../img/l_arrowGrnSm.gif" border=0> Close </span>"
 	 link to close the pop-up window.<br>
 </ul>
-		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 What is this "Quick address" thing?</b>
 </font>
 <ul>       	
@@ -168,7 +168,7 @@ What is this "Quick address" thing?</b>
 
 	<?php endif ?>		
 <?php if(($x1=="sendmail")&&($x3=="1")) : ?>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to compose or write a new mail?</b>
 </font>
 <ul>       	
@@ -179,7 +179,7 @@ How to compose or write a new mail?</b>
 
 
 <?php if($src=="read") : ?>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to print the mail?</b>
 </font>
 <ul>       	
@@ -189,7 +189,7 @@ How to print the mail?</b>
  	<b>Step 4: </b>The Windows© printer menu will pop up. Click the button "OK".<br>
  	<b>Step 5: </b>To close the printer version window, click the option "<span style="background-color:yellow" > < Close > </span>".<br>
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to resend the mail?</b>
 </font>
 <ul>       	
@@ -197,7 +197,7 @@ How to resend the mail?</b>
  	<b>Step 2: </b>Edit the email addresses if necessary.<br>
  	<b>Step 3: </b>Click the <input type="button" value="Send"> button to finally resend the email.
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to forward the mail?</b>
 </font>
 <ul>       	
@@ -205,7 +205,7 @@ How to forward the mail?</b>
  	<b>Step 2: </b>Enter the recipient's address.<br>
  	<b>Step 3: </b>Click the <input type="button" value="Send"> button to finally forward the email.
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to delete the mail?</b>
 </font>
 <ul>       	
@@ -217,7 +217,7 @@ How to delete the mail?</b>
 	<?php endif ?>		
 	
 <?php if($src=="address") : ?>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to add an email address to the address book?</b>
 </font>
 <ul>       	
@@ -232,7 +232,7 @@ How to add an email address to the address book?</b>
                                                                                            </span>"</nobr> field.<br>
  	<b>Step 6: </b>Click the <input type="button" value="Save"> button.<br>
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to remove an email address from the address book?</b>
 </font>
 <ul>       	
@@ -243,7 +243,7 @@ How to remove an email address from the address book?</b>
 </ul>
 	<?php endif ?>		
 
-	<img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
 Note:</b>
 </font>
 <ul>       	

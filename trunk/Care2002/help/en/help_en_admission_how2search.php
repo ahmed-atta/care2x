@@ -22,7 +22,7 @@
 </ul>
 
 <b>Note</b>
-<ul> If you decide to cancel search click the button <img src="../img/en/en_cancel.gif" border=0>.
+<ul> If you decide to cancel search click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
 
 

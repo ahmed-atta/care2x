@@ -12,7 +12,7 @@ Bagaimana untuk memasukan seorang pasient baru<p>
 <ul> Jika anda login sebelumnya dan anda mempunyai hak akses untuk fungsi ini, pasient
 admission form akan terlihat pada frame utama.<br>
 Sebaliknya, jika anda tidak login , anda perlu untuk memasukan username dan password.
-Masukan username dan password dan click button <img src="../img/<?="$lang/$lang" ?>_continue.gif" border=0>.
+Masukan username dan password dan click button <img src="../img/<?php "$lang/$lang" ?>_continue.gif" border=0>.
 </ul>
 <p>
 <b>Step 3</b>

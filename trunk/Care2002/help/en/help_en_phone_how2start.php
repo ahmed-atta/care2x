@@ -1,7 +1,6 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>How to 
-<?
+<?php
 switch($x1)
 {
  	case "search": print 'search for a phone number'; break;
@@ -14,7 +13,7 @@ switch($x1)
 <?php if($x1=="search") : ?>
 	<?php if($src=="newphone") : ?>
 	<b>Step 1</b>
-	<ul> Click the button <img src="../img/en/en_such-gray.gif" border="0">.
+	<ul> Click the button <img <?php echo createLDImgSrc('../','such-gray.gif','0') ?>>.
 	</ul>
 	<?php endif ?>
 <b>Step <?php if($src=="newphone") print "2"; else print "1"; ?></b>
@@ -36,31 +35,31 @@ switch($x1)
 <?php endif ?>
 <?php if($x1=="dir") : ?>
 <b>Step 1</b>
-<ul> Click the button <img src="../img/en/en_phonedir-gray.gif" border="0">.
+<ul> Click the button <img <?php echo createLDImgSrc('../','phonedir-gray.gif','0') ?>>.
 </ul>
 <?php endif ?>
 <?php if($x1=="newphone") : ?>
 	<?php if($src=="search") : ?>
 <b>Step 1</b>
-<ul> Click the button <img src="../img/en/en_newdata-gray.gif" border="0">.
+<ul> Click the button <img <?php echo createLDImgSrc('../','newdata-gray.gif','0') ?>>.
 </ul>
 <b>Step 2</b>
 <ul> If you have logged in before and you have an access right for this function, the 
 		entry form for new phone information  will appear on the main frame.<br>
 		Otherwise, if you are not logged in, you will be required to enter your username and password. <p>
 	<?php endif ?>
-		Enter your username and password and click the button <img src="../img/en/en_continue.gif" border=0>.<p>
+		Enter your username and password and click the button <img <?php echo createLDImgSrc('../','continue.gif','0') ?>>.<p>
 		
 </ul><?php endif ?>
 
 <b>Note</b>
 <ul> If you decide to cancel 
-<?
+<?php
 switch($x1)
 {
- 	case "search": print 'search click the button <img src="../img/en/en_cancel.gif" border=0>.'; break;
+ 	case "search": print 'search click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.'; break;
 	case "dir": print ' the directory click the button <input type="button" value="Cancel">.';break;
-	case "newphone": print ' click the button <img src="../img/en/en_cancel.gif" border=0>.';break;
+	case "newphone": print ' click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.';break;
  }
  ?>
 </ul>

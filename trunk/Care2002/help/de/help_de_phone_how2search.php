@@ -33,23 +33,23 @@ oder Zimmernummer.
 <?php endif ?>
 <?php if($src=="dir") : ?>
 <b>Schritt 1</b>
-<ul> Den <img src="../img/de/de_phonedir-gray.gif" border="0"> anklicken.
+<ul> Den <img <?php echo createLDImgSrc('../','phonedir-gray.gif','0') ?>> anklicken.
 </ul>
 <?php endif ?>
 <?php if($src=="newphone") : ?>
 <b>Schritt 1</b>
-<ul> Den <img src="../img/de/de_newdata-gray.gif" border="0"> anklicken.
+<ul> Den <img <?php echo createLDImgSrc('../','newdata-gray.gif','0') ?>> anklicken.
 </ul>
 <b>Schritt 2</b>
 <ul> Wenn Sie sich vorher angemeldet haben und ein Zugangsrecht in dieser Funktion haben wird das Eingabeformular eingeblendet.<br>
 		Ansonsten werden Sie nach Ihrem Benutzernamen und Passwort gefragt.<p>
-		Geben Sie Ihren Benutzernamen und Passwort ein und klicken Sie den <img src="../img/de/de_continue.gif" border=0> an.<br>
-		Falls Sie abbrechen möchten den <img src="../img/de/de_cancel.gif" border=0> anklicken.
+		Geben Sie Ihren Benutzernamen und Passwort ein und klicken Sie den <img <?php echo createLDImgSrc('../','continue.gif','0') ?>> an.<br>
+		Falls Sie abbrechen möchten den <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> anklicken.
 		
 </ul><?php endif ?>
 
 <b>Achtung!</b>
-<ul> Falls Sie abbrechen möchten den <img src="../img/de/de_cancel.gif" border=0> anklicken.
+<ul> Falls Sie abbrechen möchten den <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> anklicken.
 </ul>
 
 

@@ -4,9 +4,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <title>CARE 2002</title>
 </head>
-<body onLoad="if (window.focus) window.focus()">
-<img src="../img/<?php echo $lang."/".$lang ?>_help_main.gif"  border=0><p>
-<font face="Verdana, Arial" size=2>
+<body onLoad="if (window.focus) window.focus()" marginheight=0 marginwidht=0 leftmargin=0 topmargin=0>
+<img <?php echo createLDImgSrc('../','help_main.gif','0') ?>><p>
+<blockquote><font face="Verdana, Arial" size=2>
+<img <?php echo createComIcon('../','butft2_d.gif') ?>><p>
 <b>Primi passi nell'uso di <br>CARE 2002</b><p>
 Con la potenza di CARE 2002 e di Internet (o Intranet), tutte le informazioni nella vostra struttura si trovano e modificano facilmente.
 Basta clickare su una delle voci seguenti per iniziare. Le informazioni nella zona a sinistra (indice) mostreranno
@@ -21,6 +22,6 @@ Se non conoscete ancora CARE 2002, troverete qui le informazioni che servono.
 <a href="#"><u>Introduzione a CARE 2002</u></a><br>
 <a href="#"><u>Lavorare presto e bene con CARE 2002</u></a><br>
 <a href="#"><u>Ricerca di informazioni</u></a><br>
-</font>
+</font></blockquote>
 </body>
 </html>

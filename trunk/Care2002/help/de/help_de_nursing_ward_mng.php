@@ -42,7 +42,7 @@ Zugangsberechtigung sind  nur innerhalb der Station berechtigt.
 
 <?php if($src=="new") : ?>
 
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie kann ich eine neue Station erschaffen?</b>
 </font>
 <ul>       	
@@ -58,57 +58,57 @@ Wie kann ich eine neue Station erschaffen?</b>
  	<b>Schritt 10: </b>Klickt den <input type="button" value="Station erschaffen"> Knopf an um die Station zu erschaffen.<br>
 	</ul>
 <b>Achtung!</b>
-<ul>  Falls Sie abbrechen möchten den <img src="../img/de/de_cancel.gif" border=0> anklicken.
+<ul>  Falls Sie abbrechen möchten den <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> anklicken.
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Kann ich die Anzahl der Betten in einem Zimmer einstellen?</b>
 </font>
 <ul>       	
  	<b>Nein. </b>In dieser Version des Programms, die Anzahl der Betten ist auf 2 eingestellt. Sie können sie nicht ändern.<br>
 	</ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Kann ich die Bettenmarkierung einstellen?</b>
 </font>
 <ul>       	
  	<b>Nein. </b>In dieser Version des Programms, die Bettenmarkierung  ist auf A bzw. B eingestellt. Sie können sie nicht ändern.<br>
 	</ul>
 <b>Achtung!</b>
-<ul>Falls Sie abbrechen möchten den <img src="../img/de/de_cancel.gif" border=0> anklicken.
+<ul>Falls Sie abbrechen möchten den <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> anklicken.
 </ul>
 <?php endif ?>
 	
 <?php if($src=="show") : ?>
 	<?php if($x1=="1") : ?>
 
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie kann ich das Stationsprofil speichern?</b>
 </font>
 <ul>       	
  	<b>Schritt 1: </b>Klickt den <input type="button" value="Speichern"> Knopf an.<br>
 	</ul>
 <b>Achtung!</b>
-<ul> Falls Sie abbrechen möchten den <img src="../img/de/de_cancel.gif" border=0> anklicken.
+<ul> Falls Sie abbrechen möchten den <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> anklicken.
 </ul>
 
 	<?php else : ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie bearbeite ich das Stationsprofil?</b>
 </font>
 <ul>       	
  	<b>Schritt 1: </b>Klickt den <input type="button" value="Profil aktualisieren bzw. ändern"> Knopf an.<br>
 	</ul>
 <b>Achtung!</b>
-<ul>  Falls Sie abbrechen möchten den <img src="../img/de/de_cancel.gif" border=0> anklicken.
+<ul>  Falls Sie abbrechen möchten den <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> anklicken.
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Ich möchte das Profil einer anderen Station bearbeiten. Was soll ich tun?</b>
 </font>
 <ul>       	
- 	<b>Schritt 1:</b> Klickt den "<span style="background-color:yellow" > <img src="../img/L-arrowGrnLrg.gif" width=16 height=16 border=0> Andere Stationen </span>" Knopf um andere Stationen aufzulisten.<br>
+ 	<b>Schritt 1:</b> Klickt den "<span style="background-color:yellow" > <img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>> Andere Stationen </span>" Knopf um andere Stationen aufzulisten.<br>
  	<b>Schritt 2:</b> Klicken Sie die Station in der Liste dessen Profil Sie bearbeiten möchten.
 	</ul>
 <b>Achtung!</b>
-<ul> Falls Sie abbrechen möchten den <img src="../img/de/de_cancel.gif" border=0> anklicken.
+<ul> Falls Sie abbrechen möchten den <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> anklicken.
 </ul>
 
 <?php endif ?>
@@ -117,14 +117,14 @@ Ich möchte das Profil einer anderen Station bearbeiten. Was soll ich tun?</b>
 
 <?php if($src=="") : ?>
 
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie wähle ich eine Station zum bearbeiten aus?</b>
 </font>
 <ul>       	
  	<b>Schritt 1: </b>Klicken Sie die Station in der Liste an dessen Profil Sie bearbeiten möchten.<br>
 	</ul>
 <b>Achtung!</b>
-<ul> Wenn Sie abbrechen wollen, click den <img src="../img/de/de_cancel.gif" border=0> an.
+<ul> Wenn Sie abbrechen wollen, click den <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> an.
 </ul>
 
 <?php endif ?>

@@ -6,7 +6,10 @@ Copyright (C) 2002  Elpidio Latorilla & Intellin.org
 
 GNU GPL. For details read file "copy_notice.txt".
 */
-if(!extension_loaded("gd")) dl("php_gd.dll");
+
+require_once('../include/inc_vars_resolve.php'); // globalize POST, GET, & COOKIE  vars
+
+if(!extension_loaded('gd')) dl('php_gd.dll');
 
 $tabhi=90;
 $tablen=3000; //original length
@@ -26,7 +29,7 @@ require("../include/inc_db_makelink.php");
 
 if($link&&$DBLink_OK) 
 	{	
-		 	$sql="SELECT entry_out,cut_close,wait_time,bandage_time,repos_time FROM nursing_op_logbook 
+		 	$sql="SELECT entry_out,cut_close,wait_time,bandage_time,repos_time FROM care_nursing_op_logbook 
 						WHERE patnum='$patnum' 
 						AND dept='$dept' 
 						AND op_room='$saal' 

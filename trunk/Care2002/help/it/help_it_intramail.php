@@ -32,7 +32,7 @@ Posta intranet -
 <form action="#" >
 <?php if($src=="pass") : ?>
 <?php if($x1=="") : ?>
-		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare ad effettuare il login?</b>
 </font>
 <ul>       	
@@ -45,17 +45,17 @@ Come fare ad effettuare il login?</b>
  	<b>3: </b>Selezionare il bottone <input type="button" value="Login">  </span>per accedere.<br>
 </ul>
 
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Non ho ancora un indirizzo di posta, come faccio a procurarmene uno?</b>
 </font>
 <ul>       	
- 	<b>1: </b>Selezionare il link "<span style="background-color:yellow" > Registrazione nuovi utenti. <img src="../img/bul_arrowGrnSm.gif" width=12 height=12 border=0> </span>" per aprire
+ 	<b>1: </b>Selezionare il link "<span style="background-color:yellow" > Registrazione nuovi utenti. <img <?php echo createComIcon('../','bul_arrowgrnsm.gif','0') ?>> </span>" per aprire
 	il modulo di registrazione.<br>
  	<b>2: </b>Premere il bottone "Aiuto" una volta per avere altre istruzioni.<br>
 </ul>
 	<?php endif ?>		
 	<?php if($x1=="1") : ?>
-		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a registrarsi?</b>
 </font>
 <ul>       	
@@ -75,33 +75,33 @@ Come fare a registrarsi?</b>
 <?php endif ?>	
 <?php if($src=="mail") : ?>
 <?php if($x1=="listmail") : ?>
-		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare per aprire una mail?</b>
 </font>
 <ul>       	
  	<b>1: </b>Selezionare oggetto, data, mittente o destinatario della mail oppure le icone <img src="../img/c-mail.gif" border=0 align="absmiddle"> or <img src="../img/o-mail.gif" border=0 align="absmiddle">.<br>
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Che cosa sono le icone <img src="../img/c-mail.gif" border=0 align="absmiddle"> e <img src="../img/o-mail.gif" border=0 align="absmiddle">?</b>
 </font>
 <ul>       	
  	<img src="../img/c-mail.gif" border=0 align="absmiddle"> = La mail non è ancora stata aperta.<br>
  	<img src="../img/o-mail.gif" border=0 align="absmiddle"> = La mail è già stata aperta.<br>
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a cancellare una mail?</b>
 </font>
 <ul>       	
  	<b>1: </b>Selezionare la casella <input type="checkbox" name="a" value="s" checked> della mail da cancellare.<br>
  	<b>2: </b>Selezionare il bottone <input type="button" value="Cancella">.<br>
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a passare da una cartella di posta ad un'altra?</b>
 </font>
 <ul>       	
  	<b>1: </b>E' sufficiente selezionare il nome della cartella.<br>
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a scrivere una nuova mail?</b>
 </font>
 <ul>       	
@@ -109,7 +109,7 @@ Come fare a scrivere una nuova mail?</b>
 </ul>
 	<?php endif ?>		
 	<?php if($x1=="compose") : ?>
-		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a scrivere una nuova mail?</b>
 </font>
 <ul>       	
@@ -120,14 +120,14 @@ Come fare a scrivere una nuova mail?</b>
  	<b>5: </b>Ora si può inserire il testo del messaggio.<br>
  	<b>6: </b>Selezionare il bottone <input type="button" value="Invia"> to send the mail.<br>
 </ul>
-		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 E' possibile salvare una mail in bozza senza spedirla?</b>
 </font>
 <ul>       	
  	<b>1: </b>Inserire il testo del messaggio.<br>
  	<b>2: </b>Selezionare il bottone <input type="button" value="Salva as draft">.<br>
 </ul>
-		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare ad usare un indirizzo che è nella mia rubrica?</b>
 </font>
 <ul>       	
@@ -139,15 +139,15 @@ Come fare ad usare un indirizzo che è nella mia rubrica?</b>
 		Click "CC<input type="radio" name="t" value="a">" per copiare l'indirizzo nel campo "CC".<br>
 		Click "BCC<input type="radio" name="t" value="a">" per copiare l'indirizzo nel campo "BCC".<p>
 </ul>
-        <img src="../img/warn.gif" border=0 align="absmiddle"> <b>Nota:</b>  per annullare la
+        <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <b>Nota:</b>  per annullare la
         scelta, selezionare la corrispondente icona <img src="../img/redpfeil.gif" border=0>.<br> 	
-        <img src="../img/warn.gif" border=0 align="absmiddle"> <b>Nota:</b> E' anche possibile
+        <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <b>Nota:</b> E' anche possibile
         selezionare più di un indirizzo per volta.<p>
  	<b>4: </b>Selezionare il bottone <input type="button" value="Copia"> per copiare gli indirizzi selezionati.<br>
  	<b>5: </b>Selezionare il link "<span style="background-color:yellow" > <img src="../img/l_arrowGrnSm.gif" border=0> Chiudi </span>"
 	 per chiudere la finestrella.<br>
 </ul>
-		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come funziona "Quick address"?</b>
 </font>
 <ul>       	
@@ -158,7 +158,7 @@ Come funziona "Quick address"?</b>
 </ul>
 <?php endif ?>		
 <?php if(($x1=="sendmail")&&($x3=="1")) : ?>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a scrivere una nuova mail?</b>
 </font>
 <ul>       	
@@ -167,7 +167,7 @@ Come fare a scrivere una nuova mail?</b>
 	<?php endif ?>		
 <?php endif ?>	
 <?php if($src=="read") : ?>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a stampare una mail?</b>
 </font>
 <ul>       	
@@ -177,7 +177,7 @@ Come fare a stampare una mail?</b>
  	<b>4: </b>Quando appare il menu stampante di Windows©, scegliere il bottone "OK".<br>
  	<b>5: </b>Per chiudere la finestra con la versione stampabile, scegliere l'opzione "<span style="background-color:yellow" > < Chiudi > </span>".<br>
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare ad inviare di nuovo una mail?</b>
 </font>
 <ul>       	
@@ -185,7 +185,7 @@ Come fare ad inviare di nuovo una mail?</b>
  	<b>2: </b>Modificare gli indirizzi se necessario.<br>
  	<b>3: </b>Selezionare il bottone <input type="button" value="Invia"> per ripetere la spedizione della mail.
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a mandare a qualcuno copia di una mail?</b>
 </font>
 <ul>       	
@@ -194,7 +194,7 @@ Come fare a mandare a qualcuno copia di una mail?</b>
  	<b>2: </b>Inserire l'indirizzo di destinazione.<br>
  	<b>3: </b>Selezionare il bottone <input type="button" value="Invia"> per inoltrare la mail.
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a cancellare una mail?</b>
 </font>
 <ul>       	
@@ -205,7 +205,7 @@ Come fare a cancellare una mail?</b>
 </ul>
 	<?php endif ?>		
 <?php if($src=="address") : ?>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare ad aggiungere un indirizzo alla rubrica?</b>
 </font>
 <ul>       	
@@ -220,7 +220,7 @@ Come fare ad aggiungere un indirizzo alla rubrica?</b>
                                                                                            </span>"</nobr>.<br>
  	<b>6: </b>Selezionare il bottone <input type="button" value="Salva">.<br>
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a rimuovere un indirizzo dalla rubrica?</b>
 </font>
 <ul>       	
@@ -230,7 +230,7 @@ Come fare a rimuovere un indirizzo dalla rubrica?</b>
  	<b>4: </b>Selezionare il bottone <input type="button" value="OK"> per cancellare l'indirizzo.<p>
 </ul>
 	<?php endif ?>		
-	<img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
 Nota:</b>
 </font>
 <ul>       	

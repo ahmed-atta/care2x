@@ -20,6 +20,6 @@ Untuk melihat data admission dari patient yang adna cari, klik icon <img src="..
 </ul>
 
 <b>Catatan</b>
-<ul> Jika anda  memutuskan untuk membatalkan pencarian click tombol  <img src="../img/id/id_cancel.gif" border=0>.</ul>
+<ul> Jika anda  memutuskan untuk membatalkan pencarian click tombol  <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0>.</ul>
 </form>
 

@@ -1,7 +1,6 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 ?>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
 <?php
@@ -17,7 +16,7 @@ switch($x1)
 <?php if($x1=="search") : ?>
 	<?php if($src=="newphone") : ?>
 	<b>Schritt 1</b>
-	<ul> Den <img src="../img/de/de_such-gray.gif" border="0"> anklicken.
+	<ul> Den <img <?php echo createLDImgSrc('../','such-gray.gif','0') ?>> anklicken.
 	</ul>
 	<?php endif ?>
 <b>Schritt <?php if($src=="newphone") print "2"; else print "1"; ?></b>
@@ -39,19 +38,19 @@ oder Zimmernummer.
 <?php endif ?>
 <?php if($x1=="dir") : ?>
 <b>Schritt 1</b>
-<ul> Den <img src="../img/de/de_phonedir-gray.gif" border="0"> anklicken.
+<ul> Den <img <?php echo createLDImgSrc('../','phonedir-gray.gif','0') ?>> anklicken.
 </ul>
 <?php endif ?>
 <?php if($x1=="newphone") : ?>
 	<?php if($src=="search") : ?>
 <b>Schritt 1</b>
-<ul> Den <img src="../img/de/de_newdata-gray.gif" border="0"> anklicken.
+<ul> Den <img <?php echo createLDImgSrc('../','newdata-gray.gif','0') ?>> anklicken.
 </ul>
 <b>Schritt 2</b>
 <ul>  Wenn Sie sich vorher angemeldet haben und ein Zugangsrecht in dieser Funktion haben wird das Eingabeformular eingeblendet.<br>
 		Ansonsten werden Sie nach Ihrem Benutzernamen und Passwort gefragt.<p>
 	<?php endif ?>
-		Geben Sie Ihren Benutzernamen und Passwort ein und klicken Sie den <img src="../img/de/de_continue.gif" border=0> an.<br>
+		Geben Sie Ihren Benutzernamen und Passwort ein und klicken Sie den <img <?php echo createLDImgSrc('../','continue.gif','0') ?>> an.<br>
 		
 </ul><?php endif ?>
 
@@ -60,9 +59,9 @@ oder Zimmernummer.
 <?php
 switch($x1)
 {
- 	case "search": print ' die Suche abbrechen möchten den <img src="../img/de/de_cancel.gif" border=0> anklicken.'; break;
+ 	case "search": print ' die Suche abbrechen möchten den <img '.createLDImgSrc('../','cancel.gif','0').'> anklicken.'; break;
 	case "dir": print ' das Verzeichnis schliessen möchten den <input type="button" value="Abbrechen"> anklicken.';break;
-	case "newphone": print  ' abbrechen möchten den <img src="../img/de/de_cancel.gif" border=0> anklicken.';break;
+	case "newphone": print  ' abbrechen möchten den <img '.createLDImgSrc('../','cancel.gif','0').'> anklicken.';break;
  }
  ?>
 </ul>

@@ -14,20 +14,20 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 </ul>
 <b>Schritt 2</b>
 
-<ul> Zum speichern den <img src="../img/de/de_savedisc.gif" border=0> anklicken.<p>
-		Falls Sie die Eingaben löschen möchten den<img src="../img/de/de_reset.gif" border=0> anklicken.
+<ul> Zum speichern den <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> anklicken.<p>
+		Falls Sie die Eingaben löschen möchten den<img <?php echo createLDImgSrc('../','reset.gif','0') ?>> anklicken.
 		
 </ul>
 <b>Achtung!</b>
 
 <ul> Falls eine Information fehlt werden alle Eingaben erneut gezeigt und Sie werden aufgefordert die fehlende Information in die rot markierte Eingabefelder einzugeben.
- Anschliessend den <img src="../img/de/de_savedisc.gif" border=0> anklicken um die Information zu speichern.<p>
+ Anschliessend den <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> anklicken um die Information zu speichern.<p>
 </ul>
 <b>Achtung!</b>
 <ul> Falls Sie die unvollständige Information doch speichern möchten, den <input type="button" value="Trotzdem, speichern"> anklicken.
 </ul>
 <b>Achtung!</b>
-<ul> Falls Sie abbrechen möchten, den <img src="../img/de/de_cancel.gif" border=0> anklicken.
+<ul> Falls Sie abbrechen möchten, den <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> anklicken.
 		
 </ul>
 

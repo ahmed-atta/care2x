@@ -5,9 +5,11 @@
 
 </head>
 <body onLoad="if (window.focus) window.focus()" marginheight=0 marginwidht=0 leftmargin=0 topmargin=0>
-<img src="../img/<?php echo $lang."/".$lang ?>_help_main.gif"  border=0><p>
+<img <?php echo createLDImgSrc('../','help_main.gif','0') ?>><p>
 <font face="Verdana, Arial" size=2>
-<blockquote><b>Langkah awal untuk pengunaan<br>
+<blockquote>
+<img <?php echo createComIcon('../','butft2_d.gif') ?>><p>
+<b>Langkah awal untuk pengunaan<br>
 CARE 2002</b><p>
 Dengan kekuatan dari CARE 2002 dan Internet atau intranet, anda dapat menemukan proses setiap jenis informasi  dalam organisasi anda.
 Dengan mudah klik tipik dibawah ini untuk memulai

@@ -1,4 +1,3 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>Come cercare un medoc</b></font>
 <p><font size=2 face="verdana,arial" >
@@ -13,25 +12,25 @@
 		<br>Esempio 3: inserire "Mario" o "mar".
 </ul>
 <b>2</b>
-<ul> Selezionare il bottone <img src="../img/it/it_searchlamp.gif" border=0> per avviare la ricerca.<p>
+<ul> Selezionare il bottone <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> per avviare la ricerca.<p>
 </ul>
 <b>3</b>
 <ul> Se la ricerca trova un solo medoc, questo sarà immediatamente mostrato.
 Se ne vengono trovati più di uno, apparirà una lista per la selezione..<p>
-Per visualizzare i documenti del paziente desiderato, selezionare il bottone <img src="../img/R_arrowGrnSm.gif" border=0 height=12> corrispondente,
+Per visualizzare i documenti del paziente desiderato, selezionare il bottone <img <?php echo createComIcon('../','r_arrowgrnsm.gif') ?>> corrispondente,
 oppure il cognome, il codice del documento o la data.
 </ul>
 <?php endif ?>
 <?php if($x1>1) : ?>
-Per visualizzare i documenti del paziente desiderato, selezionare il bottone <img src="../img/R_arrowGrnSm.gif" border=0 height=12> corrispondente,
+Per visualizzare i documenti del paziente desiderato, selezionare il bottone <img <?php echo createComIcon('../','r_arrowgrnsm.gif') ?>> corrispondente,
 oppure il cognome, il codice del documento o la data.
 <?php endif ?>
 <?php if(($src!="?")&&($x1=="1")) : ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Desidero aggiornare il documento</b></font>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Desidero aggiornare il documento</b></font>
 <ul> Per aggiornare il documento visualizzato, selezionare il bottone <input type="button" value="Update data">.
 </ul>
 <?php endif ?>
 <b>Nota</b>
-<ul> Per annullare la ricerca, selezionare il bottone <img src="../img/it/it_close2.gif" border=0>.
+<ul> Per annullare la ricerca, selezionare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
 </form>

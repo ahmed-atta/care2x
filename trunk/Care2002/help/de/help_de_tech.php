@@ -36,7 +36,7 @@ switch($src)
 
 <?php if($src=="request") : ?>
 <p>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie kann ich eine Reparaturanforderung erstellen?</b></font>
 <ul> <b>Schritt 1: </b>Gibt die Lokalisation des Schaden in das Feld
 <nobr>"<span style="background-color:yellow" > Lokalisation des Schaden <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> ein.<p>
@@ -47,12 +47,12 @@ Wie kann ich eine Reparaturanforderung erstellen?</b></font>
      <b>Schritt 6: </b>Klickt den <input type="button" value="Anforderung senden"> Knopf um die Anforderung zu senden. <br>
 </ul>
 <b>Achtung!</b>
-<ul>Wenn Sie abbrechen möchten klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an.
+<ul>Wenn Sie abbrechen möchten klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.
 </ul>
 <?php endif ?>
 <?php if($src=="report") : ?>
 <p>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie berichte ich eine erledigte Reparaturarbeit?</b></font>
 <ul> <b>Schritt 1: </b>Gibt die Lokalisation des Schaden in das Feld
 <nobr>"<span style="background-color:yellow" > Lokalisation des Schaden <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> ein.<p>
@@ -63,19 +63,19 @@ Wie berichte ich eine erledigte Reparaturarbeit?</b></font>
      <b>Schritt 6: </b>Klickt den <input type="button" value="Meldung senden"> Knopf um den Bericht zu senden. <br>
 </ul>
 <b>Achtung!</b>
-<ul>Wenn Sie abbrechen möchten klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an.
+<ul>Wenn Sie abbrechen möchten klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.
 </ul>
 <?php endif ?>
 <?php if($src=="queries") : ?>
 <p>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie sende ich eine Anfrage an die Technik?</b></font>
 <ul> <b>Schritt 1: </b>Tippt Ihre Anfrage in das Feld <nobr>"<span style="background-color:yellow" > Bitte geben Sie Ihre Frage hier ein: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> ein.<br>
 <b>Schritt 2: </b>Gibt Ihren Namen in das Feld <nobr>"<span style="background-color:yellow" > Name: <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> ein.<br>
 <b>Schritt 3: </b>Gibt die Abteilung in das Feld <nobr>"<span style="background-color:yellow" > Abteilung: <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> ein.<br>
      <b>Schritt 4: </b>Klickt den <input type="button" value="Frage senden"> Knopf um die Anfrage zu senden. <br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie kann ich meine letzte Anfragen sehen und die Antwort von der Technik?</b></font>
 <ul> <b>Schritt 1: </b>Melden Sie sich zuerst an. Gibt Ihren Namen in das Feld <nobr>"<span style="background-color:yellow" > von: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> in der oberen rechten Ecken ein.<br>
  <b>Schritt 2: </b>Klickt den <input type="button" value="Anmelden"> Knopf an. <br>
@@ -84,18 +84,18 @@ Wie kann ich meine letzte Anfragen sehen und die Antwort von der Technik?</b></f
  <b>Schritt 5: </b>Klickt die Frage in der Liste um die Antwort zu lesen. <br>
 </ul>
 <b>Achtung!</b>
-<ul>Wenn Sie abbrechen möchten klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an.
+<ul>Wenn Sie abbrechen möchten klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.
 </ul>
 <?php endif ?>
 <?php if($src=="arch") : ?>
 
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie kann ich technische Berichte öffnen zum lesen?</b></font>
 <ul> 
 		<b>Achtung! </b>Technische Berichte die noch nicht gelesen bzw. nicht gedruckt wurden werden sofort aufgelistet.<p>
 <b>Schritt 1: </b>Klickt den  <img src="../img/upArrowGrnLrg.gif" border=0 width=16 height=16 align="absmiddle"> Knopf des Berichts den Sie lesen möchten. <br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie finde ich einen bestimmten Bericht?</b></font>
 <ul> <b>Schritt 1: </b>Gibt entweder eine vollständige Information oder deren erste Zeichen in das entsprechende Feld ein.<br>
 	<ul type=disc> 
@@ -114,16 +114,16 @@ Wie finde ich einen bestimmten Bericht?</b></font>
 </font>
 <?php endif ?>
 <?php if($src=="showarch") : ?>
-<img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
 Ein Bericht als "gesehen" markieren.</b></font>
 <ul> <b>Schritt 1: </b>Klickt den  <input type="button" value="Als [gesehen] markieren"> Knopf an.<p>
 	<b>Achtung! </b>Wenn ein Bericht als "gelesen" markiert ist, wird er am Anfang nicht sofort aufgelistet. Man kann ihn trotzdem suchen.<p>
 </ul>
-<img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
 Den Bericht ausdrucken.</b></font>
 <ul> <b>Schritt 1: </b>Klickt den  <input type="button" value="Ausdrucken"> Knopf an.<p>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie komme ich zum Suchen im Archiv zurück?</b></font>
 <ul> <b>Schritt 1: </b>Klickt den  <input type="button" value="<< Zurück"> Knopf an.<p>
 </ul>

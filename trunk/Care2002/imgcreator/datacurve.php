@@ -11,6 +11,8 @@ GNU GPL. For details read file "copy_notice.txt".
 * This routine creates graphical chart for blood pressure and temperature
 */
 
+require_once('../include/inc_vars_resolve.php'); // globalize POST, GET, & COOKIE  vars
+
 /**
 * This function aligns the date to the start of the grahical chart
 */
@@ -39,57 +41,60 @@ $xunit=$xoffs/24; // Unit of 1 hour in pixels = Width of day's column divided by
 $yunit_temp=135/5; // Unit of y coord per temperature value in pixels
 $yunit_bp=135/200; // Unit of y coord per blood pressure value in pixels
 
-if(!extension_loaded("gd")) dl("php_gd.dll");
+if(!extension_loaded('gd')) dl('php_gd.dll');
 
-include("../include/inc_db_makelink.php");
+include('../include/inc_db_makelink.php');
 if($link&&$DBLink_OK) 
 {	
-    $dbtable="nursing_station_patients_curve";
-		 	$sql="SELECT bp_temp FROM $dbtable WHERE patnum='$pn'";
+    $dbtable='care_nursing_station_patients_curve';
+	
+	$sql="SELECT bp_temp FROM $dbtable WHERE patnum='$pn'";
 
-			if($ergebnis=mysql_query($sql,$link))
-       		{
-				$rows=0;
-				if( $result=mysql_fetch_array($ergebnis)) $rows++;
-				if($rows)
+	if($ergebnis=mysql_query($sql,$link))
+    {
+		
+		if($rows=mysql_num_rows($ergebnis))
+		{
+
+			$result=mysql_fetch_array($ergebnis);
+			$arr=explode('_',$result[bp_temp]);
+					
+			$actmonat=$mo;
+			$actjahr=$yr;
+					
+			for($i=$dy,$acttag=$dy,$d=0;$i<($dy+7);$i++,$d++,$acttag++)
+		 	{
+				aligndate(&$acttag,&$actmonat,&$actjahr); // function to align the date
+				$cbuf="sd=$actjahr$actmonat$acttag&rd=$acttag.$actmonat.$actjahr";
+		 		$loaded[$i]=0;
+				
+				while(list($x,$v)=each($arr))
 				{
-					mysql_data_seek($ergebnis,0);
-					$result=mysql_fetch_array($ergebnis);
-					$arr=explode("_",$result[bp_temp]);
-					
-					$actmonat=$mo;
-					$actjahr=$yr;
-					
-					for($i=$dy,$acttag=$dy,$d=0;$i<($dy+7);$i++,$d++,$acttag++)
-		 			{
-						aligndate(&$acttag,&$actmonat,&$actjahr); // function to align the date
-						$cbuf="sd=$actjahr$actmonat$acttag&rd=$acttag.$actmonat.$actjahr";
-		 				$loaded[$i]=0;
-						while(list($x,$v)=each($arr))
-						{
-							if(stristr($v,$cbuf))
-							{
-								$sbuf[$d]=$v;
-								$loaded[$d]=1;
-								break;
-							}
-						}// end of while
-						reset($arr);
-	 				}// end of for $i=0
-				}// end of if rows
-			}// end of if ergebnis
-
-  } //else { print " $sql<br>"; }
+					if(stristr($v,$cbuf))
+					{
+						$sbuf[$d]=$v;
+						$loaded[$d]=1;
+						break;
+					}
+				}// end of while
+				
+				reset($arr);
+				
+	 		}// end of for $i=0
+		}// end of if rows
+	}// end of if ergebnis
+} //else { print " $sql<br>"; }
   
+/* Initialize general  dimensions */ 
 $tabhi=135; // Height of graph chart in pixels
 $tablen=700; // Total width of graph chart in pixels
 $tabcols=$tablen/28; // Total number of vertical lines
 $tabrows=$tabhi/20; // Total number of horizontal lines
 
-header ("Content-type: image/PNG");
+header ('Content-type: image/PNG');
 
 
-$im=@ImageCreateFromPNG("datacurve.png"); // Loads the ready made image (makes this routine faster)
+$im=@ImageCreateFromPNG('../imgcreator/datacurve.png'); // Loads the ready made image (makes this routine faster)
 
 /**
 * The next set of codes create the graph chart on-the-fly 

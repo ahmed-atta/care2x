@@ -6,7 +6,7 @@ Copyright (C) 2002  Elpidio Latorilla & Intellin.org
 
 GNU GPL. For details read file "copy_notice.txt".
 */
-if(!extension_loaded("gd")) dl("php_gd.dll");
+if(!extension_loaded('gd')) dl('php_gd.dll');
 
 header ("Content-type: image/png");
 
@@ -14,7 +14,7 @@ define("LANG_FILE","nursing.php");
 define("NO_CHAIN",1);
 require("../include/inc_front_chain_lang.php");
 
-$im = ImageCreateFromPNG("../img/cat-com8.png");
+$im = ImageCreateFromPNG('../gui/img/common/'.$theme_control.'/cat-com8.png');
 $blue=ImageColorAllocate ($im, 0, 0, 255);
 $black = ImageColorAllocate ($im, 0, 0, 0);
 

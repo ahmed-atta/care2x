@@ -1,21 +1,55 @@
 <?php
-$allow_area['admit']=array("admit","all","System_Admin");
-$allow_area['cafe']=array("cafe","all","System_Admin");
-$allow_area['medocs']=array("medocs","all","System_Admin");
-$allow_area['phonedir']=array("all","System_Admin");
-$allow_area['doctors']=array("doc","all","System_Admin");
-$allow_area['wards']=array("wards","all","System_Admin");
-$allow_area['op_room']=array("op_room","all_op_room","doc_op","duty_op","all","System_Admin");
-$allow_area['tech']=array("tech","all","System_Admin");
-$allow_area['lab_r']=array("lab_read","all","System_Admin");
-$allow_area['lab_w']=array("lab_read","lab_write","all","System_Admin");
-$allow_area['radio']=array("radio","doc","doc_op","all","System_Admin");
-$allow_area['pharma']=array("pharma","all","System_Admin");
-$allow_area['depot']=array("meddepot","all","System_Admin");
-$allow_area['edp']=array("System_Admin");
-$allow_area['news']=array("news","all","System_Admin");
-$allow_area['op_docs']=array("doc_op","all","System_Admin");
-$allow_area['duty_op']=array("duty_op","all","System_Admin");
-$allow_area['cafenews']=array("cafenews","news","all","System_Admin");
-$allow_area['fotolab']=array("fotolab,all,System_Admin");
+
+$allow_area['admit']=array('_a_1_admissionwrite');
+
+$allow_area['cafe']=array('_a_1_newsallwrite', '_a_1_newscafewrite');
+
+$allow_area['medocs']=array('_a_1_medocswrite');
+
+$allow_area['phonedir']=array($all, $sysadmin);
+
+$allow_area['doctors']=array('_a_1_opdoctorallwrite', '_a_1_doctorsdutyplanwrite');
+
+$allow_area['wards']=array('_a_1_doctorsdutyplanwrite', '_a_1_opdoctorallwrite', '_a_1_nursingstationallwrite',  $all, $sysadmin);
+
+$allow_area['op_room']=array('_a_1_opdoctorallwrite', '_a_1_opnursedutyplanwrite', '_a_2_opnurseallwrite');
+
+$allow_area['tech']=array('_a_1_techreception');
+
+$allow_area['lab_r']=array('_a_1_labresultswrite', '_a_2_labresultsread');
+
+$allow_area['lab_w']=array('_a_1_labresultswrite');
+
+$allow_area['radio']=array('_a_1_radiowrite', '_a_1_opdoctorallwrite', '_a_2_opnurseallwrite');
+
+$allow_area['pharma_db']=array('_a_1_pharmadbadmin');
+
+$allow_area['pharma_receive']=array('_a_1_pharmadbadmin', '_a_2_pharmareception');
+
+$allow_area['pharma']=array('_a_1_pharmadbadmin', '_a_2_pharmareception',  '_a_3_pharmaorder');
+
+$allow_area['depot_db']=array('_a_1_meddepotdbadmin');
+
+$allow_area['depot_receive']=array('_a_1_meddepotdbadmin', '_a_2_meddepotreception');
+
+$allow_area['depot']=array('_a_1_meddepotdbadmin', '_a_2_meddepotreception', '_a_3_meddepotorder');
+
+$allow_area['edp']=array('no_allow_type_all',);
+
+$allow_area['news']=array('_a_1_newsallwrite');
+
+$allow_area['cafenews']=array('_a_1_newsallwrite', '_a_2_newscafewrite');
+
+$allow_area['op_docs']=array('_a_1_opdoctorallwrite');
+
+$allow_area['duty_op']=array('_a_1_opnursedutyplanwrite');
+
+$allow_area['fotolab']=array('_a_1_photowrite');
+
+$allow_area['test_diagnose']=array('_a_1_diagnosticsresultwrite', '_a_1_labresultswrite');
+
+$allow_area['test_receive']=array('_a_1_diagnosticsresultwrite', '_a_1_labresultswrite', '_a_2_diagnosticsreceptionwrite');
+
+$allow_area['test_order']=array('_a_1_diagnosticsresultwrite', '_a_1_labresultswrite', '_a_2_diagnosticsreceptionwrite',   '_a_3_diagnosticsrequest');
+
 ?>

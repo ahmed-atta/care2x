@@ -25,7 +25,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 </ul>
 
 <b>Achtung!</b>
-<ul> Falls Sie abbrechen möchten den <img src="../img/de/de_close2.gif" border=0> anklicken.
+<ul> Falls Sie abbrechen möchten den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> anklicken.
 </ul>
 
 

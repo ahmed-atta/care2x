@@ -7,8 +7,8 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 <p><font size=2 face="verdana,arial" >
 
 <?php if($src=="") : ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> 
-<font color="#990000"><b>Was soll diese Farbbalken  <img src="../img/colorcodebar3.gif" border=0 > bedeuten? </b></font>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> 
+<font color="#990000"><b>Was soll diese Farbbalken  <img <?php echo createComIcon('../','colorcodebar3.gif','0') ?> > bedeuten? </b></font>
 <ul> <b>Achtung! </b>Sie sind "Signalfarben". <p>Jede Farbe in diesem Balken (wenn gesetzt) bedeutet  Änderung, Anordnung, Fragen, Befund, Beobachtung,
 		usw.<br>
 			Die Bedeutung einer Farbe lässt sich für jede Station einstellen. <p>
@@ -16,7 +16,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 			Die Reihe von 24 rosa Farbbalken signalisieren die 24 Stunden des Tages.<br>
 			Zum Beispiel: Der sechste rosa Farbbalke bedeutet "6 Uhr", der zehnte bedeutet "10 Uhr", usw.
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Was bewirken diese Knöpfe?</b></font>
 <ul> <input type="button" value="Patientenkurve">
 	<ul>
@@ -68,7 +68,7 @@ Was bewirken diese Knöpfe?</b></font>
 	Dieser Knopf öffnet den Fotokatalog vom Patient.
 	</ul>	
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Was ist die Funktion von diesem Auswahlfeld </b>	<select name="d"><option value="">bitte auswählen</option></select>?
 </font>
 <ul>       	<b>Achtung! </b>Hier können Sie einen neuen Konsilschein auswählen.<br>
@@ -80,13 +80,13 @@ Was ist die Funktion von diesem Auswahlfeld </b>	<select name="d"><option value=
 <?php endif ?>
 
 <?php if($src=="labor") : ?>
-<img src="../img/warn.gif" border=0 align="absmiddle"> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> 
 <font color="#990000"><b>Kein Laborbefund vorhanden. </b></font>
 <ul> Klickt den <input type="button" value="OK"> Knopf an um in die Patientenmappe zurück zu gehen.</ul>
 <?php else  : ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Wie schliesse ich die Patientenmappe? </b></font>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Wie schliesse ich die Patientenmappe? </b></font>
 <ul> <b>Achtung! </b>Wenn Sie die Patientenmappe schliessen möchten klicken Sie den 
-<img src="../img/de/de_close2.gif" border=0 align="absmiddle"> Knopf an.</ul>
+<img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle"> Knopf an.</ul>
 
 <?php endif ?>
 

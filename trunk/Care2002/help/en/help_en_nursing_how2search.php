@@ -1,6 +1,6 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
-<?
+<?php
 switch($x2)
 {
 	case "search": print "How to "; 
@@ -35,9 +35,9 @@ switch($x2)
 <ul> If the search finds several results, a list of the results will be displayed.<p>
 </ul>
 <b>Note</b>
-<ul> If you decide to cancel search click the button <img src="../img/en/en_cancel.gif" border=0>.
+<ul> If you decide to cancel search click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul><?php endif ?>
-<b>Step <?php if($x1) print "1"; else print "5"; ?></b><ul>Click the button <img src="../img/bul_arrowBluSm.gif" width=12 height=12 border=0>,
+<b>Step <?php if($x1) print "1"; else print "5"; ?></b><ul>Click the button <img <?php echo createComIcon('../','bul_arrowblusm.gif','0') ?>>,
  or the date, or the ward to display the ward's occupancy list.
 <p><b>Note:</b> The search keyword will be highlighted in the list.
 <br><b>Note:</b> The list is not editable "read only mode". If you attempt to open the patient's data folder by clicking on its name, you will be prompted to
@@ -46,18 +46,18 @@ enter your username and password.
 <?php endif ?>
 <?php if($x2=="quick") : ?>
 	<?php if($x1) : ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to show the ward's occupancy list?</b>
 </font>
 <ul>       	
  	<b>Step 1: </b>Click the ward's id or name on the left column.<br>
 	<b>Note: </b>The occupancy list that will be displayed is "read only". You cannot edit or change any patients' data.<br>
 	</ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to show  the ward's occupancy list for editing or updating data?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the icon <img src="../img/statbel2.gif" width=20 height=20 border=0> corresponding to the chosen ward.<br>
+ 	<b>Step 1: </b>Click the icon <img <?php echo createComIcon('../','statbel2.gif','0') ?>> corresponding to the chosen ward.<br>
  	<b>Step 2: </b>If you have logged in before and you have access right for the function, the occupancy list will be displayed immediately.<br>
 		Otherwise,  you will be asked to enter your username and password.<br>
  	<b>Step 3: </b>If asked, enter your username and password.<br>
@@ -67,32 +67,32 @@ How to show  the ward's occupancy list for editing or updating data?</b>
 		You can also open the patients' data folder for further editing.<br>
 	</ul>
 	<?php else : ?>
-<img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
 There is no available occupancy list at the moment!</b>
 </font><p>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to display previous occupancy quickviews using the archive?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click "<span style="background-color:yellow" > Click this to go to archive <img src="../img/bul_arrowGrnLrg.gif" width=16 height=16 border=0> </span>".<br>
+ 	<b>Step 1: </b>Click "<span style="background-color:yellow" > Click this to go to archive <img <?php echo createComIcon('../','bul_arrowgrnlrg.gif','0') ?>> </span>".<br>
  	<b>Step 2: </b>A guide calendar will appear.<br>
  	<b>Step 3: </b>Click on a date in the calendar to display the occupancy quickview for that day.<br>
 	</ul>
 	
 	<?php endif ?>
 <b>Note</b>
-<ul> If you decide to close the quickview click the button <img src="../img/en/en_close2.gif" border=0>.
+<ul> If you decide to close the quickview click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul><?php endif ?>
 
 <?php if($x2=="arch") : ?>
 
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to display previous occupancy quickviews using the archive?</b>
 </font>
 <ul>       	
  	<b>Step 1: </b>Click on a date in the calendar to display the occupancy quickview for that day.<br>
 	</ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to change the guide calendar's month?</b>
 </font>
 <ul>       	

@@ -2,7 +2,7 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
 Ward management 
-<?
+<?php
 switch($src)
 {
 	case "main": print "";
@@ -35,18 +35,18 @@ access only in that particular ward.
 <?php endif ?>
 <?php if($x2=="quick") : ?>
 	<?php if($x1) : ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to show the ward's occupancy list?</b>
 </font>
 <ul>       	
  	<b>Step 1: </b>Click the ward's id or name on the left column.<br>
 	<b>Note: </b>The occupancy list that will be displayed is "read only". You cannot edit or change any patients' data.<br>
 	</ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to show  the ward's occupancy list for editing or updating data?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the icon <img src="../img/statbel2.gif" width=20 height=20 border=0> corresponding to the chosen ward.<br>
+ 	<b>Step 1: </b>Click the icon <img <?php echo createComIcon('../','statbel2.gif','0') ?>> corresponding to the chosen ward.<br>
  	<b>Step 2: </b>If you have logged in before and you have access right for the function, the occupancy list will be displayed immediately.<br>
 		Otherwise,  you will be asked to enter your username and password.<br>
  	<b>Step 3: </b>If asked, enter your username and password.<br>
@@ -56,26 +56,26 @@ How to show  the ward's occupancy list for editing or updating data?</b>
 		You can also open the patients' data folder for further editing.<br>
 	</ul>
 	<?php else : ?>
-<img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
 There is no available occupancy list at the moment!</b>
 </font><p>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to display previous occupancy quickviews using the archive?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click "<span style="background-color:yellow" > Click this to go to archive <img src="../img/bul_arrowGrnLrg.gif" width=16 height=16 border=0> </span>".<br>
+ 	<b>Step 1: </b>Click "<span style="background-color:yellow" > Click this to go to archive <img <?php echo createComIcon('../','bul_arrowgrnlrg.gif','0') ?>> </span>".<br>
  	<b>Step 2: </b>A guide calendar will appear.<br>
  	<b>Step 3: </b>Click on a date in the calendar to display the occupancy quickview for that day.<br>
 	</ul>
 	
 	<?php endif ?>
 <b>Note</b>
-<ul> If you decide to close the quickview click the button <img src="../img/en/en_close2.gif" border=0>.
+<ul> If you decide to close the quickview click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul><?php endif ?>
 
 <?php if($src=="new") : ?>
 
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to create a new ward?</b>
 </font>
 <ul>       	
@@ -91,57 +91,57 @@ How to create a new ward?</b>
  	<b>Step 10: </b>Click the <input type="button" value="Create the ward"> button to create the ward.<br>
 	</ul>
 <b>Note</b>
-<ul> If you decide to cancel click the button <img src="../img/en/en_cancel.gif" border=0>.
+<ul> If you decide to cancel click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Can I set the numbers of beds in a room?</b>
 </font>
 <ul>       	
  	<b>No. </b>In this current program version the number or beds in a room is fixed to 2. You cannot change it.<br>
 	</ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Can I set the prefix (or id) for a bed?</b>
 </font>
 <ul>       	
  	<b>No. </b>In this current program version the prefix (of id) for a bed is fixed to either a or b . You cannot change it.<br>
 	</ul>
 <b>Note</b>
-<ul> If you decide to cancel click the button <img src="../img/en/en_cancel.gif" border=0>.
+<ul> If you decide to cancel click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
 <?php endif ?>
 	
 <?php if($src=="show") : ?>
 	<?php if($x1=="1") : ?>
 
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to save the ward's profile?</b>
 </font>
 <ul>       	
  	<b>Step 1: </b>Click the <input type="button" value="Save"> button.<br>
 	</ul>
 <b>Note</b>
-<ul> If you decide to cancel click the button <img src="../img/en/en_cancel.gif" border=0>.
+<ul> If you decide to cancel click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
 
 	<?php else : ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to edit the ward's profile?</b>
 </font>
 <ul>       	
  	<b>Step 1: </b>Click the <input type="button" value="Edit ward's profile"> button.<br>
 	</ul>
 <b>Note</b>
-<ul> If you decide to cancel click the button <img src="../img/en/en_cancel.gif" border=0>.
+<ul> If you decide to cancel click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 I want to edit a station's profile other than the one currently displayed. What should I do?</b>
 </font>
 <ul>       	
- 	<b>Step 1:</b> Click the "<span style="background-color:yellow" > <img src="../img/L-arrowGrnLrg.gif" width=16 height=16 border=0> Other wards </span>" link to list the available wards.<br>
+ 	<b>Step 1:</b> Click the "<span style="background-color:yellow" > <img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>> Other wards </span>" link to list the available wards.<br>
  	<b>Step 2:</b> Once the wards are listed, click the ward you wish to edit.
 	</ul>
 <b>Note</b>
-<ul> If you decide to cancel click the button <img src="../img/en/en_cancel.gif" border=0>.
+<ul> If you decide to cancel click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
 
 <?php endif ?>
@@ -150,14 +150,14 @@ I want to edit a station's profile other than the one currently displayed. What 
 
 <?php if($src=="") : ?>
 
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to select a ward for editing its profile?</b>
 </font>
 <ul>       	
  	<b>Step 1: </b>Click the ward on the list that you wish to edit.<br>
 	</ul>
 <b>Note</b>
-<ul> If you decide to cancel click the button <img src="../img/en/en_cancel.gif" border=0>.
+<ul> If you decide to cancel click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
 
 <?php endif ?>

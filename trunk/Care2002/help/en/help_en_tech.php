@@ -33,7 +33,7 @@ switch($src)
 
 <?php if($src=="request") : ?>
 <p>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to send a request for repair service?</b></font>
 <ul> <b>Step 1: </b>Enter the localization of the damage in the 
 <nobr>"<span style="background-color:yellow" > Localization of the damage <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> field.<p>
@@ -44,12 +44,12 @@ How to send a request for repair service?</b></font>
  <b>Step 6: </b>Click the <input type="button" value="Send"> button to send your request. <br>
 </ul>
 <b>Note</b>
-<ul> If you decide to close the request form click the button <img src="../img/en/en_close2.gif" border=0>.
+<ul> If you decide to close the request form click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
 <?php endif ?>
 <?php if($src=="report") : ?>
 <p>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to report a done repair service?</b></font>
 <ul> <b>Step 1: </b>Enter the localization of the damage in the 
 <nobr>"<span style="background-color:yellow" > Localization of the damage <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> field.<p>
@@ -60,19 +60,19 @@ How to report a done repair service?</b></font>
  <b>Step 6: </b>Click the <input type="button" value="Send report"> button to send your report. <br>
 </ul>
 <b>Note</b>
-<ul> If you decide to close the request form click the button <img src="../img/en/en_close2.gif" border=0>.
+<ul> If you decide to close the request form click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
 <?php endif ?>
 <?php if($src=="queries") : ?>
 <p>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to send an inquiry or question to the technical support department?</b></font>
 <ul> <b>Step 1: </b>Type your inquiry or question in the <nobr>"<span style="background-color:yellow" > Please type your question: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> field.<br>
 <b>Step 2: </b>Enter your name in the <nobr>"<span style="background-color:yellow" > Name: <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> field.<br>
  <b>Step 3: </b>Enter your department in the <nobr>"<span style="background-color:yellow" > Department: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> field.<br>
  <b>Step 4: </b>Click the <input type="button" value="Send inquiry"> button to send your inquiry. <br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to see my previous inquries and the technical department's replies to them?</b></font>
 <ul> <b>Step 1: </b>You have to log in first. Type your name in the <nobr>"<span style="background-color:yellow" > from: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> field on the upper right corner.<br>
  <b>Step 2: </b>Click the <input type="button" value="Log in">. <br>
@@ -82,18 +82,18 @@ How to see my previous inquries and the technical department's replies to them?<
  <b>Step 5: </b>To read your inquiry and the technical department's reply to it, click on it. <br>
 </ul>
 <b>Note</b>
-<ul> If you decide to close the inquriy form click the button <img src="../img/en/en_close2.gif" border=0>.
+<ul> If you decide to close the inquriy form click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
 <?php endif ?>
 <?php if($src=="arch") : ?>
 
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to read technical reports?</b></font>
 <ul> 
 		<b>Note: </b>Technical reports which have not been read or printed yet are listed immediately.<p>
 <b>Step 1: </b>Click on the button <img src="../img/upArrowGrnLrg.gif" border=0 width=16 height=16 align="absmiddle">  of the report that you wish to open. <br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to search for particular technical reports?</b></font>
 <ul> <b>Step 1: </b>Enter either a complete information or the first few letters in the corresponding fields as explained in the following.<br>
 	<ul type=disc> 
@@ -111,23 +111,23 @@ How to search for particular technical reports?</b></font>
 </font>
 <?php endif ?>
 <?php if($src=="showarch") : ?>
-<img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
 Marking the report as read.</b></font>
 <ul> <b>Step 1: </b>Click the button <input type="button" value="Mark as 'Read'">.<p>
 	<b>Note: </b>When the report has been marked as read, it will not be listed immediately at every start of archive search. They can only be found again
 	through the usual archive search methods.<p>
 </ul>
-<img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
 Printing the report.</b></font>
 <ul> <b>Step 1: </b>Click the button <input type="button" value="Print">.<p>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to go back to the start of archive search?</b></font>
 <ul> <b>Step 1: </b>Click the button <input type="button" value="<< Go back">.<p>
 </ul>
 <?php endif ?>
 <?php if($src=="dutydoc") : ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to document a work done during duty hours?</b></font>
 <ul> <b>Step 1: </b>Enter the date in the " Date <input type="text" name="d" size=10 maxlength=10> " field.<p>
 	<ul> <b>Tip: </b>Enter either "t" or "T" (meaning TODAY) to automatically enter today's date.<br>
@@ -144,12 +144,12 @@ How to document a work done during duty hours?</b></font>
  <b>Step 8: </b>Enter the on-call nurse's name in the <nobr>"<span style="background-color:yellow" > On call: <input type="text" name="d" size=5 maxlength=5> </span>"</nobr> field if necessary.<br>
  <b>Step 1: </b>Click the <input type="button" value="Save"> button to save the document. <br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>How to print out the document list?</b></font>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>How to print out the document list?</b></font>
 <ul> <b>Step 1: </b>Click the <input type="button" value="Print"> button and the print window will pop up.<br>
 	<b>Step 2: </b>Follow the instructions in the print window.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>I have saved the document and wish to close it, what should I do? </b></font>
-<ul> <b>Step 1: </b>If you are finished, click the <img src="../img/en/en_close2.gif" border=0> button. <br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I have saved the document and wish to close it, what should I do? </b></font>
+<ul> <b>Step 1: </b>If you are finished, click the <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> button. <br>
 </ul>
 <?php endif ?>
 

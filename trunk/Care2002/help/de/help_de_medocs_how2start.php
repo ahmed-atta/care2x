@@ -25,13 +25,15 @@ switch($x1)
 
 <?php if($src!=$x1) : ?>
 <b>Schritt 1</b>
-<ul> Den <img src="../img/de/de<?php switch($x1)
-																			{
-																				case "entry": print '_newdata-gray.gif'; break;
-																				case "search": print '_such-gray.gif'; break;
-																				case "archiv": print '_arch-gray.gif'; break;
-																			}
-?>" border="0"> anklicken.
+<ul> Den <img 
+<?php 
+switch($x1)
+   {
+     case "entry": echo  createLDImgSrc('../','newdata-gray.gif'); break;
+	 case "search": echo createLDImgSrc('../','such-gray.gif'); break;
+	 case "archiv": echo createLDImgSrc('../','arch-gray.gif'); break;
+  }
+?>> anklicken.
 		
 </ul>
 <b>Schritt 2</b>
@@ -45,8 +47,8 @@ switch($x1)
 	}
 ?>  eingeblendet.<p>
 		Ansonsten werden Sie nach Ihrem Benutzernamen und Passwort gefragt.<p>
-		Geben Sie Ihren Benutzernamen und Passwort ein und klicken Sie den <img src="../img/de/de_continue.gif" border=0> an.<br>
-		Falls Sie abbrechen möchten, klicken Sie den <img src="../img/de/de_cancel.gif" border=0> an.
+		Geben Sie Ihren Benutzernamen und Passwort ein und klicken Sie den <img <?php echo createLDImgSrc('../','continue.gif','0') ?>> an.<br>
+		Falls Sie abbrechen möchten, klicken Sie den <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> an.
 		
 </ul>
 

@@ -10,7 +10,7 @@ define("LANG_FILE","aufnahme.php");
 define("NO_CHAIN",1);
 require("../include/inc_front_chain_lang.php");
 
-if(!extension_loaded("gd")) dl("php_gd.dll");
+if(!extension_loaded('gd')) dl('php_gd.dll');
 /**
 * We will check again if gd is loaded, if yes create the image
 */
@@ -20,7 +20,7 @@ header ("Content-type: image/png");
 //header ("Content-type: image/jpeg");
 //header ("Content-type: image/gif");
 //$person=str_replace("+"," ",$person);
-$im = ImageCreateFrompng("../img/cat-com5.png");
+$im = ImageCreateFrompng('../gui/img/common/'.$theme_control.'/cat-com5.png');
 /*
 $im=ImageCreate(200,100);
 $background_color = ImageColorAllocate ($im, 255,102,102);

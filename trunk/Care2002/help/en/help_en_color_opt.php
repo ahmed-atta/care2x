@@ -2,7 +2,7 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
 Color options 
-<?
+<?php
 	switch($src)
 	{
 	case "ext": print " - Extended";
@@ -13,7 +13,7 @@ Color options
 <p><font size=2 face="verana,arial" >
 <form action="#" >
 <?php if($src=="") : ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to select the background color?</b>
 </font>
 <ul>       	
@@ -23,7 +23,7 @@ How to select the background color?</b>
  	<b>Step 4: </b>Click the <input type="button" value="Apply"> button to apply the color.<br>
  	<b>Step 5: </b>If you are finished, click the <input type="button" value="OK"> button.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to select the text color?</b>
 </font>
 <ul>       	
@@ -34,7 +34,7 @@ How to select the text color?</b>
  	<b>Step 4: </b>Click the <input type="button" value="Apply"> button to apply the color.<br>
  	<b>Step 5: </b>If you are finished, click the <input type="button" value="OK"> button.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to select the hover and link colors?</b>
 </font>
 <ul>       	
@@ -43,7 +43,7 @@ How to select the hover and link colors?</b>
 <?php endif ?>
 
 <?php if($src=="ext") : ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to select the active link color?</b>
 </font>
 <ul>       	
@@ -54,7 +54,7 @@ How to select the active link color?</b>
  	<b>Step 4: </b>Click the <input type="button" value="Apply"> button to apply the color.<br>
  	<b>Step 5: </b>If you are finished, click the <input type="button" value="OK"> button.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to select the hover link color?</b>
 </font>
 <ul>       	

@@ -9,7 +9,7 @@
 Kalender</b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
-	<img src="../img/warn.gif" border=0 align="absmiddle">  <b><font color="#990000">Tip:
+	<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>>  <b><font color="#990000">Tip:
 </font>
     </b>
 <ul>       	
@@ -17,7 +17,7 @@ Kalender</b></font>
     akan muncul untuk user yang login dan departmentnya.
 </ul>
 
-<img src="../img/frage.gif" border=0 align="absmiddle">  <b><font color="#990000">Bagaimana
+<img <?php echo createComIcon('../','frage.gif','0') ?>>  <b><font color="#990000">Bagaimana
     untuk menampilkan bulan sebelumnya?
 </font>
     </b>
@@ -25,7 +25,7 @@ Kalender</b></font>
  	<b>Step 1: </b>Klik link "<span style="background-color:yellow" > << Bulan
     sebelumnya </span>" pada bagian atas sebelah kiri pada kalender.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle">  <b><font color="#990000">Bagaimana
+<img <?php echo createComIcon('../','frage.gif','0') ?>>  <b><font color="#990000">Bagaimana
     untuk menampilkan bulan yang berikutnya?
 </font>
     </b>
@@ -33,7 +33,7 @@ Kalender</b></font>
  	<b>Step 1: </b>Klik link "<span style="background-color:yellow" > Berikutnya
     bulan >> </span>" pada bagian atas sebelah kanan pada kalender.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle">  <font color="#990000"><b>Bagaimana
+<img <?php echo createComIcon('../','frage.gif','0') ?>>  <font color="#990000"><b>Bagaimana
     untuk memilih sebuah bulan secara langsung?</b>
 </font>
 <ul>       	
@@ -43,9 +43,9 @@ Kalender</b></font>
     Tahun </span>" field.<p>
 	<ul>    
 	<b>Tip:</b><br>
-    Klik button&nbsp; <img src="../img/varrow-u.gif" border=0 align="absmiddle">
+    Klik button&nbsp; <img <?php echo createComIcon('../','varrow-u.gif','0','absmiddle') ?>>
     untuk menambah tahun.<br>
-    Klik button&nbsp; <img src="../img/varrow-d.gif" border=0 align="absmiddle"> 
+    Klik button&nbsp; <img <?php echo createComIcon('../','varrow-d.gif','0','absmiddle') ?>> 
     untuk menguarangi tahun.<br>
 	</ul>
  	<b>Step 3: </b>Klik tombol <input type="button" value="Go">.

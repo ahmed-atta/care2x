@@ -10,21 +10,21 @@
 </ul>
 <b>Step 2</b>
 
-<ul> To save the data click the button <img src="../img/en/en_savedisc.gif" border=0>.<p>
-		If you decide to erase all the entered data click the button <img src="../img/en/en_reset.gif" border=0>.
+<ul> To save the data click the button <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>>.<p>
+		If you decide to erase all the entered data click the button <img <?php echo createLDImgSrc('../','reset.gif','0') ?>>.
 		
 </ul>
 <b>Note</b>
 
 <ul> If an information is missing, the entries will be redisplayed and a message will appear prompting you to
-		enter the information in the field or fields marked red. Afterwards, click the button <img src="../img/en/en_savedisc.gif" border=0> to
+		enter the information in the field or fields marked red. Afterwards, click the button <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> to
 		save the complete information.<p>
 </ul>
 <b>Note</b>
 <ul> If you want to save an incomplete information click the button <input type="button" value="Save anyway">.
 </ul>
 <b>Note</b>
-<ul> If you decide to cancel admission click the button <img src="../img/en/en_cancel.gif" border=0>.
+<ul> If you decide to cancel admission click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 		
 </ul>
 

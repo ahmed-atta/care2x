@@ -45,7 +45,7 @@ switch($x1)
 ?>  akan muncul dalam frame utama .<br>
 Sebaliknya, jika anda tidak login , anda perlu untuk memasukan username dan password.
 Masukan username dan password dan click button <img src="../img/<?php echo "$lang/$lang" ?>_continue.gif" border=0>.
-Jika anda  memutuskan untuk membatalkan klik tombol  <img src="../img/id/id_cancel.gif" border=0>.
+Jika anda  memutuskan untuk membatalkan klik tombol  <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0>.
 </ul>
 
 

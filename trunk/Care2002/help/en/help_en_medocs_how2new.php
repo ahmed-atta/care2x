@@ -41,7 +41,7 @@
 <?php if(($src=="?")||($x1>1)) : ?>
 
  <br>To document a patient on the list,
-		click either the button <img src="../img/R_arrowGrnSm.gif" border=0 height=12 border=0> corresponding to it, or
+		click either the button <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> corresponding to it, or
 		the Family name, or the Given name, or the patient's number, or the admission date.
 </ul>
 <?php endif ?>
@@ -75,7 +75,7 @@
 </ul>
 <?php endif ?>
 <b>Note</b>
-<ul> If you decide to cancel the document click the button <img src="../img/en/en_cancel.gif" border=0>.
+<ul> If you decide to cancel the document click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 		
 </ul>
 

@@ -28,21 +28,21 @@ switch($src)
 </ul>
 <?php endif ?>
 <?php if($src=="dir") : ?>
-<ul> Selezionare il bottone <img src="../img/it/it_phonedir-gray.gif" border="0">.
+<ul> Selezionare il bottone <img <?php echo createLDImgSrc('../','phonedir-gray.gif','0') ?>>.
 </ul>
 <?php endif ?>
 <?php if($src=="newphone") : ?>
 <b>1:</b>
-<ul> Selezionare il bottone <img src="../img/it/it_newdata-gray.gif" border="0">.
+<ul> Selezionare il bottone <img <?php echo createLDImgSrc('../','newdata.gif','0') ?>>.
 </ul>
 <b>2:</b>
 <ul> Se si è fatto login precedentemente e si hanno i diritti di accesso sufficienti, apparirà un
 		modulo in cui inserire il nuovo telefono.<br>
 		Se invece non si è ancora effettuato il login, verrà richiesto di inserire username e password. <p>
-		Inserire i propri dati e premere il bottone <img src="../img/it/it_continue.gif" border=0>.<p>
-		Per annullare l'operazione, premere <img src="../img/it/it_cancel.gif" border=0>.
+		Inserire i propri dati e premere il bottone <img <?php echo createLDImgSrc('../','continue.gif','0') ?>>.<p>
+		Per annullare l'operazione, premere <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0>.
 </ul><?php endif ?>
 <b>Nota</b>
-<ul> Per annullare l'operazione di ricerca, premere <img src="../img/it/it_cancel.gif" border=0>.
+<ul> Per annullare l'operazione di ricerca, premere <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0>.
 </ul>
 </form>

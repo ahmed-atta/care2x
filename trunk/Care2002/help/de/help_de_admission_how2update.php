@@ -18,7 +18,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 </ul>
 <?php endif ?>
 <b>Achtung!</b>
-<ul> Wenn Sie fertig sind den <img src="../img/de/de_cancel.gif" border=0> anklicken.
+<ul> Wenn Sie fertig sind den <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> anklicken.
 		
 </ul>
 </form>

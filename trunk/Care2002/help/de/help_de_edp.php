@@ -35,7 +35,7 @@ EDV -
 
 <?php if($src=="access") : ?>
 	<?php if($x1=="") : ?>
-		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie erschaffe ich eine neue Zugangsberechtigung?</b>
 </font>
 <ul>       	
@@ -48,7 +48,7 @@ Wie erschaffe ich eine neue Zugangsberechtigung?</b>
 	<b>Achtung!</b> Ein Benutzer kann maximal 10 Bereiche haben.<p>
 </ul>
 
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Ich bin fertig. Wie kann ich die Daten speichern?</b>
 </font>
 <ul>       	
@@ -56,7 +56,7 @@ Ich bin fertig. Wie kann ich die Daten speichern?</b>
 </ul>
 	<?php endif ?>	
 	<?php if($x1=="save") : ?>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Die Zugangsberechtigung is jetzt gespeichert. Wie erschaffe ich eine neue?</b>
 </font>
 <ul>       	
@@ -64,7 +64,7 @@ Die Zugangsberechtigung is jetzt gespeichert. Wie erschaffe ich eine neue?</b>
  	<b>Schritt 2: </b>Ein neues Eingabeformular wird gezeigt.<br>
  	<b>Schritt 3: </b>Klickt den "Hilfe" Knopf an um weitere Hilfsanweisung zu lesen.<br>
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie kann ich alle Zugangsberechtigungen aufgelistet sehen?</b>
 </font>
 <ul>       	
@@ -74,14 +74,14 @@ Wie kann ich alle Zugangsberechtigungen aufgelistet sehen?</b>
 	
 	<?php endif ?>	
 	<?php if($x1=="list") : ?>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
-Was bedeuten die beiden Knöpfe <img src="../img/padlock.gif" border=0 align="absmiddle"> und <img src="../img/arrow-gr.gif" border=0 align="absmiddle"> ?</b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
+Was bedeuten die beiden Knöpfe <img <?php echo createComIcon('../','padlock.gif','0','absmiddle') ?>> und <img <?php echo createComIcon('../','arrow-gr.gif','0','absmiddle') ?>> ?</b>
 </font>
 <ul>       	
- 	<img src="../img/padlock.gif" border=0 align="absmiddle"> = Die Zugangsberechtigung ist gesperrt. Der Benutzer hat kein Zugang zu den Bereichen.<br>
- 	<img src="../img/arrow-gr.gif" border=0 align="absmiddle"> = Die Zugangsberechtigung ist freigegeben. Der Benutzer hat Zugang zu den Bereichen.<br>
+ 	<img <?php echo createComIcon('../','padlock.gif','0','absmiddle') ?>> = Die Zugangsberechtigung ist gesperrt. Der Benutzer hat kein Zugang zu den Bereichen.<br>
+ 	<img <?php echo createComIcon('../','arrow-gr.gif','0','absmiddle') ?>> = Die Zugangsberechtigung ist freigegeben. Der Benutzer hat Zugang zu den Bereichen.<br>
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Was bedeuten die Optionen "A", "S", "L", und "F" ?</b>
 </font>
 <ul>       	
@@ -90,25 +90,25 @@ Was bedeuten die Optionen "A", "S", "L", und "F" ?</b>
  	<b>L: </b> = Löschen.<br>
  	<b>F: </b> = Freigabe oder Sperre aufheben.<br>
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie kann ich die Zugangsberechtigung ändern bzw. bearbeiten?</b>
 </font>
 <ul>       	
  	Klickt die Option "<span style="background-color:yellow" > Ä </span>" an.<br>
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie kann ich die Zugangsberechtigung sperren?</b>
 </font>
 <ul>       	
  	Klickt die Option "<span style="background-color:yellow" > S </span>" an.<br>
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie kann ich die Sperre aufheben?</b>
 </font>
 <ul>       	
  	Klickt die Option "<span style="background-color:yellow" > F </span>" an.<br>
 </ul>
-		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie kann ich die Zugangsberechtigung löschen?</b>
 </font>
 <ul>       	
@@ -118,14 +118,14 @@ Wie kann ich die Zugangsberechtigung löschen?</b>
 	<?php endif ?>	
 	
 	<?php if($x1=="update") : ?>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie kann ich eine Zugangsberechtigung ändern?</b>
 </font>
 <ul>       	
  	<b>Schritt 1: </b>Bearbeiten Sie die Information.<br>
  	<b>Schritt 2: </b>Anschliessend klicken Sie den <input type="button" value="Speichern"> Knopf an.<br>
 </ul>
-	<img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
 Achtung!</b>
 </font>
 <ul>       	
@@ -134,14 +134,14 @@ Achtung!</b>
 	
 	<?php endif ?>		
 	<?php if($x1=="delete") : ?>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie lösche ich eine Zugangsberechtigung?</b>
 </font>
 <ul>       	
  	<b>Schritt 1: </b>Wenn Sie sicher sind die Zugangsberechtigung zu löschen,<br>
 	 klicken Sie den <input type="button" value="Ja, ich bin sicher. Berechtigung löschen."> Knopf an.<br>
 </ul>
-	<img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
 Achtung!</b>
 </font>
 <ul>       	
@@ -151,14 +151,14 @@ Achtung!</b>
 	<?php endif ?>		
 	
 	<?php if($x1=="lock") : ?>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie kann ich eine  <?php if($x2=="0") print "Zugangsberechtigung sperren"; else print "Sperre aufheben"; ?>?</b>
 </font>
 <ul>       	
  	<b>Schritt 1: </b>Wenn Sie sicher sind die <?php if($x2=="0") print "Zugangsberechtigung zu sperren"; else print "Sperre aufzuheben"; ?>,<br>
 	 klicken Sie den <input type="button" value="Ja, ich bin sicher."> Knopf an.<br>
 </ul>
-	<img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
 Achtung!</b>
 </font>
 <ul>       	

@@ -13,7 +13,7 @@ Color options
 <p><font size=2 face="verdana,arial" >
 <form action="#" >
 <?php if($src=="") : ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come scegliere il colore di sfondo?</b>
 </font>
 <ul>       	
@@ -23,7 +23,7 @@ Come scegliere il colore di sfondo?</b>
  	<b>4: </b>Selezionare sul bottone <input type="button" value="Applica"> per confermare.<br>
  	<b>5: </b>Al termine, premere il bottone <input type="button" value="OK">.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come scegliere il colore del testo?</b>
 </font>
 <ul>       	
@@ -34,7 +34,7 @@ Come scegliere il colore del testo?</b>
  	<b>4: </b>Selezionare sul bottone <input type="button" value="Applica"> per confermare.<br>
  	<b>5: </b>Al termine, premere il bottone <input type="button" value="OK">.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come scegliere i colori dei link?</b>
 </font>
 <ul>       	
@@ -43,7 +43,7 @@ Come scegliere i colori dei link?</b>
 <?php endif ?>
 
 <?php if($src=="ext") : ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come scegliere il colore dei link attivi?</b>
 </font>
 <ul>       	
@@ -54,7 +54,7 @@ Come scegliere il colore dei link attivi?</b>
  	<b>4: </b>Selezionare sul bottone <input type="button" value="Applica"> per confermare.<br>
  	<b>5: </b>Al termine, premere il bottone <input type="button" value="OK">.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come scegliere il colore dei link puntati dal mouse?</b>
 </font>
 <ul>       	

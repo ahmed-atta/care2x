@@ -16,27 +16,27 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 		
 </ul>
 <b>Schritt 2</b>
-<ul> Den <img src="../img/de/de_searchlamp.gif"> anklicken.<p>
+<ul> Den <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> anklicken.<p>
 </ul>
 <b>Schritt 3</b>
 
 <ul> Wenn die Suche ein einziges Ergebnis findet werden die Daten sofort gezeigt.<p>
 		Wenn die Suche allerdings mehrere Ergebnisse liefert wird eine Liste gezeigt.<br>
-		Um das Dokument eines Patienten zu sehen, den nebenstehenden <img src="../img/R_arrowGrnSm.gif" border=0 height=12 border=0> , oder
+		Um das Dokument eines Patienten zu sehen, den nebenstehenden <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> , oder
 		den Namen, oder die Dokumentnummer, oder die Zeit anklicken.
 </ul>
 <?php endif ?>
 <?php if($x1>1) : ?>
-		Um das Dokument eines Patienten zu sehen, den nebenstehenden <img src="../img/R_arrowGrnSm.gif" border=0 height=12 border=0> , oder
+		Um das Dokument eines Patienten zu sehen, den nebenstehenden <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> , oder
 		den Namen, oder die Dokumentnummer, oder die Zeit.
 <?php endif ?>
 <?php if(($src!="?")&&($x1=="1")) : ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Wie kann ich das Dokument aktualisieren bzw. ändern?</b></font>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Wie kann ich das Dokument aktualisieren bzw. ändern?</b></font>
 <ul> Den <input type="button" value="Daten aktualisieren"> anklicken.
 </ul>
 <?php endif ?><p>
 <b>Achtung!</b>
-<ul> Falls Sie abbrechen möchten den <img src="../img/de/de_close2.gif" border=0> anklicken.
+<ul> Falls Sie abbrechen möchten den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> anklicken.
 </ul>
 
 

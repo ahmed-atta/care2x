@@ -41,7 +41,7 @@ Intranet Email -
 
 <?php if($src=="pass") : ?>
 <?php if($x1=="") : ?>
-		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie kann ich mich einloggen?</b>
 </font>
 <ul>       	
@@ -54,17 +54,17 @@ Wie kann ich mich einloggen?</b>
  	<b>Schritt 3: </b>klickt den <input type="button" value="Login"> Knopf an zum einloggen.<br>
 </ul>
 
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Ich have noch keine Adresse. Wie bekomme ich eine Adresse?</b>
 </font>
 <ul>       	
- 	<b>Schritt 1: </b>Sie müssen sich registrieren lassen. Klickt die Option "<span style="background-color:yellow" > Neuer Benutzer kann sich hier registrieren lassen. <img src="../img/bul_arrowGrnSm.gif" width=12 height=12 border=0> </span>" an.
+ 	<b>Schritt 1: </b>Sie müssen sich registrieren lassen. Klickt die Option "<span style="background-color:yellow" > Neuer Benutzer kann sich hier registrieren lassen. <img <?php echo createComIcon('../','bul_arrowgrnsm.gif','0') ?>> </span>" an.
 	Das Anmeldeformular blendet sich ein.<br>
  	<b>Schritt 2: </b>Wenn das Formular sichtbar ist können Sie weitere Hilfsanweisung durch den "Hilfe" Knopf sehen.<br>
 </ul>
 	<?php endif ?>		
 	<?php if($x1=="1") : ?>
-		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie kann ich mich anmelden?</b>
 </font>
 <ul>       	
@@ -86,34 +86,34 @@ Wie kann ich mich anmelden?</b>
 
 <?php if($src=="mail") : ?>
 <?php if($x1=="listmail") : ?>
-		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie öffne ich einen Email zum lesen?</b>
 </font>
 <ul>       	
  	<b>Schritt 1: </b>Klickt entweder den Empfänger des Emails, oder seinen Sender, oder das Datum, oder das Symbol <img src="../img/c-mail.gif" border=0 align="absmiddle"> oder <img src="../img/o-mail.gif" border=0 align="absmiddle"> an.<br>
 </ul>
 
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Was bedeuten diese Symbole  <img src="../img/c-mail.gif" border=0 align="absmiddle"> und <img src="../img/o-mail.gif" border=0 align="absmiddle">?</b>
 </font>
 <ul>       	
  	<img src="../img/c-mail.gif" border=0 align="absmiddle"> = Email ist noch nicht geöffnet bzw. gelesen. <br>
  	<img src="../img/o-mail.gif" border=0 align="absmiddle"> = Email wurde geöffnet bzw. gelesen. <br>
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie entferne ich einen Email?</b>
 </font>
 <ul>       	
  	<b>Schritt 1: </b>Klickt den Checkbox <input type="checkbox" name="a" value="s" checked> des Emails an um ihn auszuwählen.<br>
  	<b>Schritt 2: </b>Klickt den <input type="button" value="Löschen"> Knopf an.<br>
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie öffne ich einen anderen Ordner?</b>
 </font>
 <ul>       	
  	<b>Schritt 1: </b>Klicken Sie einfach den Ordner an.<br>
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie schreibe ich einen Email?</b>
 </font>
 <ul>       	
@@ -121,7 +121,7 @@ Wie schreibe ich einen Email?</b>
 </ul>
 	<?php endif ?>		
 	<?php if($x1=="compose") : ?>
-		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie schreibe ich einen Email?</b>
 </font>
 <ul>       	
@@ -132,14 +132,14 @@ Wie schreibe ich einen Email?</b>
  	<b>Schritt 5: </b>Jetzt schreiben Sie Ihre Nachricht in das Texteingabefeld.<br>
  	<b>Schritt 6: </b>Klickt den<input type="button" value="Senden"> Knopf an zum schicken.<br>
 </ul>
-		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Ich möchte nur eine Vorlage bzw. einen Entwurf schreiben. Wie geht das?</b>
 </font>
 <ul>       	
  	<b>Schritt 1: </b>Schreiben Sie Ihre Nachricht im Texteingabefeld.<br>
  	<b>Schritt 2: </b>Anschliessend klicken Sie den <input type="button" value="Als Vorlage speichern"> Knopf an.<br>
 </ul>
-		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie kann ich Adressen aus meinem Adressenbuch übernehmen?</b>
 </font>
 <ul>       	
@@ -151,14 +151,14 @@ Wie kann ich Adressen aus meinem Adressenbuch übernehmen?</b>
 		Klickt den "CC<input type="radio" name="t" value="a">" an um die Adresse in das "CC" Feld zu übertragen.<br>
 		Klickt den "BCC<input type="radio" name="t" value="a">" an um die Adresse in das "BCC" Feld zu übertragen.<p>
 </ul>
-        <img src="../img/warn.gif" border=0 align="absmiddle"> <b>Achtung!</b> Wenn Sie eine Auswahl rücksetzen möchten klicken Sie
+        <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <b>Achtung!</b> Wenn Sie eine Auswahl rücksetzen möchten klicken Sie
 		das nebenstehende Symbol <img src="../img/redpfeil.gif" border=0> an.<br> 	
-        <img src="../img/warn.gif" border=0 align="absmiddle"> <b>Achtung!</b> Sie können mehrere Adressen auf einmal auswählen. 	<p>
+        <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <b>Achtung!</b> Sie können mehrere Adressen auf einmal auswählen. 	<p>
  	<b>Schritt 4: </b>Klickt den <input type="button" value="Übertragen"> Knopf an um die ausgewählte Adressen in den Email zu übertragen.<br>
  	<b>Schritt 5: </b>Klickt die Option "<span style="background-color:yellow" > <img src="../img/l_arrowGrnSm.gif" border=0> Schliessen </span>"
 	 an um das Fenster zu schliessen.<br>
 </ul>
-		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Was bringt die "Schnelladresse" Option?</b>
 </font>
 <ul>       	
@@ -169,7 +169,7 @@ Was bringt die "Schnelladresse" Option?</b>
 
 	<?php endif ?>		
 <?php if(($x1=="sendmail")&&($x3=="1")) : ?>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie schreibe ich einen Email?</b>
 </font>
 <ul>       	
@@ -180,7 +180,7 @@ Wie schreibe ich einen Email?</b>
 
 
 <?php if($src=="read") : ?>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie kann ich einen Email ausdrucken?</b>
 </font>
 <ul>       	
@@ -190,7 +190,7 @@ Wie kann ich einen Email ausdrucken?</b>
  	<b>Schritt 4: </b>Das Windows© Druckmenu öffnet sich. Klickt den "OK" bzw. "Drucken" an.<br>
  	<b>Schritt 5: </b>Um das Fenster mit der Version zum ausdrucken zu schliessen, klickt die Option "<span style="background-color:yellow" > < Schliessen > </span>" an.<br>
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie kann ich den Email erneut senden?</b>
 </font>
 <ul>       	
@@ -198,7 +198,7 @@ Wie kann ich den Email erneut senden?</b>
  	<b>Schritt 2: </b>Falls erforderlich bearbeiten Sie den Email.<br>
  	<b>Schritt 3: </b>Klickt den <input type="button" value="Senden">Knopf an um den Email erneut zu senden.
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie leite ich den Email weiter?</b>
 </font>
 <ul>       	
@@ -206,7 +206,7 @@ Wie leite ich den Email weiter?</b>
  	<b>Schritt 2: </b>Gibt die Adresse des Empfängers ein.<br>
  	<b>Schritt 3: </b>Klickt den <input type="button" value="Senden">Knopf an um den Email weiterzuleiten.
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie lösche ich den Email?</b>
 </font>
 <ul>       	
@@ -218,7 +218,7 @@ Wie lösche ich den Email?</b>
 	<?php endif ?>		
 	
 <?php if($src=="address") : ?>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie kann ich eine Adresse in mein Adressenbuch speichern?</b>
 </font>
 <ul>       	
@@ -233,7 +233,7 @@ Wie kann ich eine Adresse in mein Adressenbuch speichern?</b>
                                                                                            </span>"</nobr> aus.<br>
  	<b>Schritt 6: </b>Klickt den <input type="button" value="Speichern"> Knopf an.<br>
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie entferne ich eine Adresse aus meinem Adressenbuch?</b>
 </font>
 <ul>       	
@@ -244,7 +244,7 @@ Wie entferne ich eine Adresse aus meinem Adressenbuch?</b>
 </ul>
 	<?php endif ?>		
 
-	<img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
 Achtung!</b>
 </font>
 <ul>       	

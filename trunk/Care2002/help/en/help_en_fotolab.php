@@ -2,7 +2,7 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
 Photolab - 
-<?
+<?php
 	switch($src)
 	{
 	case "init": print "Initializing";
@@ -21,7 +21,7 @@ Photolab -
 <p><font size=2 face="verana,arial" >
 <form action="#" >
 <?php if($src=="input") : ?>
-		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 The entry fields are displayed. What to do next?</b>
 </font>
 <ul>       	
@@ -44,13 +44,13 @@ The entry fields are displayed. What to do next?</b>
  	<img src="../img/warn.gif" border=0><b> Achtung! </b>If one or some photos must have a different date, enter the unique date into the photo's corresponding "Shotdate" field. You can only do this after you are finished with step 10.<p>
  	<b>Step 11: </b>Click the button <input type="button" value="Save"> to store the photos in the databank.<br>
 </ul>
-		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to preview the photo?</b>
 </font>
 <ul>       	
  	<b>Step 1: </b>Click the photo's corresponding <img src="../img/lilcamera.gif" border=0> button.<br>
 </ul>
-		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 I cannot find the patient through his patient number. Can I simply enter his data manually and save the photos?</b>
 </font>
 <ul>       	
@@ -59,7 +59,7 @@ I cannot find the patient through his patient number. Can I simply enter his dat
 <?php endif ?>	
 
 <?php if($src=="maindata") : ?>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to find the patient's data?</b>
 </font>
 <ul>	
@@ -71,7 +71,7 @@ How to find the patient's data?</b>
 	automatically appear in the "Shotdate" fields on the left frame.<p>
  	<img src="../img/warn.gif" border=0><b> Achtung! </b>If one or some photos must have a different date, enter the unique date into the photo's corresponding "Shotdate" field. You can only do this after you are finished with step 5.<p>
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 I cannot find the patient through his patient number. Can I simply enter his data manually and save the photos?</b>
 </font>
 <ul>       	
@@ -80,7 +80,7 @@ I cannot find the patient through his patient number. Can I simply enter his dat
 
 	<?php endif ?>	
 <?php if($src=="save") : ?>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 I want to store additional photos from the same patient. How to do it?</b>
 </font>
 <ul>	
@@ -88,7 +88,7 @@ I want to store additional photos from the same patient. How to do it?</b>
  	<b>Step 2: </b>Click the button <input type="button" value="Go">.<br>
 </ul>
 
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 I want to store photos from another patient. How to do it?</b>
 </font>
 <ul>	
@@ -100,7 +100,7 @@ I want to store photos from another patient. How to do it?</b>
 	
 <?php if($src=="init") : ?>
 	<?php if($x1=="") : ?>
-		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to store photos in the databank?</b>
 </font>
 <ul>       	
@@ -110,7 +110,7 @@ How to store photos in the databank?</b>
 </ul>
 	<?php endif ?>	
 	<?php if($x1=="save") : ?>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 The new access right is now saved. How to create another access right?</b>
 </font>
 <ul>       	
@@ -118,7 +118,7 @@ The new access right is now saved. How to create another access right?</b>
  	<b>Step 2: </b>The entry form will appear.<br>
  	<b>Step 3: </b>To see further instructions on creating an access right, click the "Help" button.<br>
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 I want to see the list of the existing access rights. How to do it?</b>
 </font>
 <ul>       	
@@ -128,14 +128,14 @@ I want to see the list of the existing access rights. How to do it?</b>
 	
 	<?php endif ?>	
 	<?php if($x1=="list") : ?>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
-What do the buttons <img src="../img/arrow-r.gif" border=0 align="absmiddle"> and <img src="../img/arrow-gr.gif" border=0 align="absmiddle"> mean?</b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
+What do the buttons <img src="../img/arrow-r.gif" border=0 align="absmiddle"> and <img <?php echo createComIcon('../','arrow-gr.gif','0','absmiddle') ?>> mean?</b>
 </font>
 <ul>       	
  	<img src="../img/arrow-r.gif" border=0 align="absmiddle"> = The user's access right is locked or "freezed". He cannot enter the areas set as accessible.<br>
- 	<img src="../img/arrow-gr.gif" border=0 align="absmiddle"> = The user's access right is not locked . He can enter the areas set as accessible.<br>
+ 	<img <?php echo createComIcon('../','arrow-gr.gif','0','absmiddle') ?>> = The user's access right is not locked . He can enter the areas set as accessible.<br>
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 What do the options "C","L", and "D", or "U" mean?</b>
 </font>
 <ul>       	
@@ -144,25 +144,25 @@ What do the options "C","L", and "D", or "U" mean?</b>
  	<b>D: </b> = Delete the user's access right.<br>
  	<b>U: </b> = Unlock the user's access right (if currently locked).<br>
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to change or edit the user's access data?</b>
 </font>
 <ul>       	
  	Click the option "<span style="background-color:yellow" > C </span>" corresponding to the user.<br>
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to lock the user's access data?</b>
 </font>
 <ul>       	
  	Click the option "<span style="background-color:yellow" > L </span>" corresponding to the user.<br>
 </ul>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to unlock the user's access data? (if currently locked)</b>
 </font>
 <ul>       	
  	Click the option "<span style="background-color:yellow" > U </span>" corresponding to the user.<br>
 </ul>
-		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to delete an access right?</b>
 </font>
 <ul>       	
@@ -172,14 +172,14 @@ How to delete an access right?</b>
 	<?php endif ?>	
 	
 	<?php if($x1=="update") : ?>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to edit an access right?</b>
 </font>
 <ul>       	
  	<b>Step 1: </b>Edit the information.<br>
  	<b>Step 2: </b>Click the button <input type="button" value="Save">.<br>
 </ul>
-	<img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
 Achtung!</b>
 </font>
 <ul>       	
@@ -188,14 +188,14 @@ Achtung!</b>
 	
 	<?php endif ?>		
 	<?php if($x1=="delete") : ?>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to delete an access right?</b>
 </font>
 <ul>       	
  	<b>Step 1: </b>If you are sure you want to delete the access right,<br>
 	 click the button <input type="button" value="Yes, I am dead sure. Delete access right.">.<br>
 </ul>
-	<img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
 Achtung!</b>
 </font>
 <ul>       	
@@ -205,14 +205,14 @@ Achtung!</b>
 	<?php endif ?>		
 	
 	<?php if($x1=="lock") : ?>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to <?php if($x2=="0") print "lock"; else print "unlock"; ?> an access right?</b>
 </font>
 <ul>       	
  	<b>Step 1: </b>If you are sure you want to <?php if($x2=="0") print "lock"; else print "unlock"; ?> the access right,<br>
 	 click the button <input type="button" value="Yes, I'm sure.">.<br>
 </ul>
-	<img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
 Achtung!</b>
 </font>
 <ul>       	

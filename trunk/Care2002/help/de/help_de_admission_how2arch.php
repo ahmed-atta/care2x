@@ -8,24 +8,24 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 <p><font size=2 face="verdana,arial" >
 
 <?php if($src=="select") : ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Wie kann ich die Daten aktualisieren bzw. ändern?</b></font>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Wie kann ich die Daten aktualisieren bzw. ändern?</b></font>
 <ul> <b>Schritt : </b>Den <input type="button" value="Daten aktualisieren"> anklicken.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Wie kann ich eine neue Suche im Archiv starten?</b></font>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Wie kann ich eine neue Suche im Archiv starten?</b></font>
 <ul> <b>Schritt : </b>Den <input type="button" value="Neue Suche im Archiv"> anklicken.<br>
 </ul>
 <?php elseif($src=="search") : ?>
 <b>Achtung!</b>
 <ul> Wenn die Suche ein einziges Ergebnis findet werden die Daten sofort gezeigt.<br>
 		Wenn die Suche allerdings mehrere Ergebnisse liefert wird eine Liste gezeigt.<br>
-		Um die Patientendaten zu sehen den nebenstehenden <img src="../img/R_arrowGrnSm.gif" border=0 height=12 border=0> , oder
+		Um die Patientendaten zu sehen den nebenstehenden <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> , oder
 		den Namen, oder den Familiennamen, oder das Aufnahmedatum anklicken.
 </ul>
 <b>Achtung!</b>
 <ul> Falls Sie eine neue Recherche starten möchten, den <input type="button" value="Neue Suche im Archiv"> anklicken.
 </ul>
 <?php else : ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Alle Aufnahmen heute anzeigen</b></font>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Alle Aufnahmen heute anzeigen</b></font>
 <ul> <b>Schritt 1: </b>Das heutige Datum in das Feld "Aufnahmedatum ab:" eingeben. <br>
 		<ul><font size=1 color="#000099">
 		<b>Tipp:</b> Geben Sie entweder "h" oder "H" in das Feld ein um das heutige Datum automatisch zeigen zu lassen.<br>
@@ -33,7 +33,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 		</ul><b>Schritt 2: </b>Lassen Sie das Feld "bis:" leer.<br>
 		<b>Schritt 3: </b>Den <input type="button" value="SUCHEN">  anklicken um die Suche zu starten.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Alle Aufnahmen zwischen zwei Datum inklusiv zeigen.</b></font>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Alle Aufnahmen zwischen zwei Datum inklusiv zeigen.</b></font>
 <ul> <b>Schritt 1: </b>Das Anfangsdatum in das Feld "Aufnahmedatum ab:" eingeben. <br>
 		<ul><font size=1 color="#000099">
 		<b>Tipp:</b> Geben Sie entweder "h" oder "H" in das Feld ein um das heutige Datum automatisch zeigen zu lassen.<br>
@@ -42,47 +42,47 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 		</ul><b>Schritt 2: </b>Das Enddatum in das Feld "bis:" eingeben. <br>
 		<b>Schritt 3: </b>Den <input type="button" value="SUCHEN">  anklicken um die Suche zu starten.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Alle männliche Patienten zeigen </b></font>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Alle männliche Patienten zeigen </b></font>
 <ul> <b>Schritt 1: </b>Den radio button  "Geschlecht <input type="radio" name="r" value="1">männlich" anklicken. <br>
 		<b>Schritt 2: </b>Lassen Sie die andere Eingabefelder leer.<br>
 		<b>Schritt 3: </b>Den <input type="button" value="SUCHEN">  anklicken um die Suche zu starten.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Alle weibliche Patienten zeigen </b></font>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Alle weibliche Patienten zeigen </b></font>
 <ul> <b>Schritt 1: </b>Den radio button  "<input type="radio" name="r" value="1">weiblich" anklicken. <br>
 		<b>Schritt 2: </b>Lassen Sie die andere Eingabefelder leer.<br>
 		<b>Schritt 3: </b>Den <input type="button" value="SUCHEN">  anklicken um die Suche zu starten.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Alle ambulante Patienten zeigen</b></font>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Alle ambulante Patienten zeigen</b></font>
 <ul> <b>Schritt 1: </b>Den radio button  "<input type="radio" name="r" value="1">Ambulant" anklicken. <br>
 		<b>Schritt 2: </b>Lassen Sie die andere Eingabefelder leer.<br>
 		<b>Schritt 3: </b>Den <input type="button" value="SUCHEN">  anklicken um die Suche zu starten.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Alle stationäre Patienten zeigen</b></font>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Alle stationäre Patienten zeigen</b></font>
 <ul> <b>Schritt 1: </b>Den radio button  "<input type="radio" name="r" value="1">Stationär" anklicken. <br>
 		<b>Schritt 2: </b>Lassen Sie die andere Eingabefelder leer.<br>
 		<b>Schritt 3: </b>Den <input type="button" value="SUCHEN">  anklicken um die Suche zu starten.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Alle selbtszahlende Patienten zeigen</b></font>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Alle selbtszahlende Patienten zeigen</b></font>
 <ul> <b>Schritt 1: </b>Den radio button  "<input type="radio" name="r" value="1">Selbstzahler" anklicken. <br>
 		<b>Schritt 2: </b>Lassen Sie die andere Eingabefelder leer.<br>
 		<b>Schritt 3: </b>Den <input type="button" value="SUCHEN">  anklicken um die Suche zu starten.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Alle privat versicherte Patienten zeigen</b></font>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Alle privat versicherte Patienten zeigen</b></font>
 <ul> <b>Schritt 1: </b>Den radio button  "<input type="radio" name="r" value="1">Privat" anklicken. <br>
 		<b>Schritt 2: </b>Lassen Sie die andere Eingabefelder leer.<br>
 		<b>Schritt 3: </b>Den <input type="button" value="SUCHEN">  anklicken um die Suche zu starten.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Alle allgemein versicherte Patienten zeigen</b></font>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Alle allgemein versicherte Patienten zeigen</b></font>
 <ul> <b>Schritt 1: </b>Den radio button  "<input type="radio" name="r" value="1">Krankenkasse" anklicken. <br>
 		<b>Schritt 2: </b>Lassen Sie die andere Eingabefelder leer.<br>
 		<b>Schritt 3: </b>Den <input type="button" value="SUCHEN">  anklicken um die Suche zu starten.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Patienten mit bestimmter Krankenkasse anzeigen</b></font>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Patienten mit bestimmter Krankenkasse anzeigen</b></font>
 <ul> <b>Schritt 1: </b>Geben Sie die Krankenkasse oder deren Abkürzung in das Feld "Krankenkasse" ein. <br>
 		<b>Schritt 2: </b>Lassen Sie die andere Eingabefelder leer.<br>
 		<b>Schritt 3: </b>Den <input type="button" value="SUCHEN">  anklicken um die Suche zu starten.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Patienten nach bestimmten Worten suchen</b></font>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Patienten nach bestimmten Worten suchen</b></font>
 <ul> <b>Schritt 1: </b>Geben Sie das Suchwort in das Feld ein. Das Suchwort könnte ein vollständiges Wort oder dessen erste Buchstaben sein. <br>
 		<ul><font size=1 color="#000099" >
 		<b>Beispiel:</b> Um nach Diagnose zu suchen geben Sie das Suchwort in das Feld "Diagnose" ein.<br>
@@ -93,7 +93,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 		</ul><b>Schritt 2: </b>Lassen Sie die andere Eingabefelder leer.<br>
 		<b>Schritt 3: </b>Den <input type="button" value="SUCHEN">  anklicken um die Suche zu starten.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Patient nach bestimmten Patientendaten suchen </b></font>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Patient nach bestimmten Patientendaten suchen </b></font>
 <ul> <b>Schritt 1: </b>Geben Sie das Suchwort in das Feld ein. Das Suchwort könnte ein vollständiges Wort oder dessen erste Buchstaben sein. <br>
 		<ul><font size=1 color="#000099" >
 		<b>Die folgende Eingabefelder könnte mit Suchwörtern ausgefüllt werden:</b>
@@ -117,7 +117,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 <b>Achtung!</b>
 <ul> Wenn die Suche ein einziges Ergebnis findet werden die Daten sofort gezeigt.<br>
 		Wenn die Suche allerdings mehrere Ergebnisse liefert wird eine Liste gezeigt.<br>
-		Um die Patientendaten zu sehen, das nebenstehende Symbol <img src="../img/R_arrowGrnSm.gif" border=0 height=12 border=0> , oder
+		Um die Patientendaten zu sehen, das nebenstehende Symbol <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> , oder
 		den Namen, oder den Familiennamen, oder das Aufnahmedatum anklicken.
 </ul>
 

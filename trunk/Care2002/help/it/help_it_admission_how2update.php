@@ -14,6 +14,6 @@
 </ul>
 <?php endif ?>
 <b>Note</b>
-<ul> Alla fine, selezionare il bottone <img src="../img/it/it_cancel.gif" border=0>.
+<ul> Alla fine, selezionare il bottone <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0>.
 </ul>
 </form>

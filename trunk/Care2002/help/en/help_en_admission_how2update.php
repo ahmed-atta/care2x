@@ -14,7 +14,7 @@
 </ul>
 <?php endif ?>
 <b>Note</b>
-<ul> If you are finished  click the button <img src="../img/en/en_cancel.gif" border=0>.
+<ul> If you are finished  click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 		
 </ul>
 

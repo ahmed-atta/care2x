@@ -34,7 +34,7 @@ Se invece la ricerca trova più risultati, apparirà un elenco.
 <?php endif ?>
 <?php if(($src=="?")||($x1>1)) : ?>
  <br>Per inserire documenti di un paziente nella lista,
-		selezionare il bottone <img src="../img/R_arrowGrnSm.gif" border=0 height=12 border=0> corrispondente, oppure
+		selezionare il bottone <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> corrispondente, oppure
 		il cognome, il nome, il codice paziente, o la data di accettazione.
 </ul>
 <?php endif ?>
@@ -66,6 +66,6 @@ Se invece la ricerca trova più risultati, apparirà un elenco.
 </ul>
 <?php endif ?>
 <b>Nota</b>
-<ul> Per cancellare il documento selezionare il bottone <img src="../img/it/it_cancel.gif" border=0>.
+<ul> Per cancellare il documento selezionare il bottone <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0>.
 </ul>
 </form>

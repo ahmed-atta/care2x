@@ -37,10 +37,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 <p>
 <font color="#990000" face="Verdana, Arial">Was kann ich hier sehen?</font></b><p>
 <font face="Verdana, Arial" size=2>
-<img src="../img/update.gif" width=19 height=19 align="absmiddle"><b> Sie können zusätzliche Information (falls vorhanden) über die diensthabende Schwester/Pfleger lesen.</b>
+<img <?php echo createComIcon('../','update.gif','0','absmiddle') ?>><b> Sie können zusätzliche Information (falls vorhanden) über die diensthabende Schwester/Pfleger lesen.</b>
 <ul>Um zusätzliche Information zu sehen , die <span style="background-color:yellow" >Name des Diensthabenden</span> anklicken. Ein kleines Fenster mit der relevanten Information wird sich öffnen .</ul><p>
-<img src="../img/update.gif" width=19 height=19 align="absmiddle"><b> Sie können den Dienstplan für einen ganzen Monat sehen.</b>
-<ul>Um den Dienstplan eines ganzen Monats zu sehen, den entsprechenden Knopf &nbsp;<button><img src="../img/new_address.gif" border=0 width=20 height=20 align="absmiddle"> <font size=1>Zeigen</font></button> anklicken.<br>
+<img <?php echo createComIcon('../','update.gif','0','absmiddle') ?>><b> Sie können den Dienstplan für einen ganzen Monat sehen.</b>
+<ul>Um den Dienstplan eines ganzen Monats zu sehen, den entsprechenden Knopf &nbsp;<button><img <?php echo createComIcon('../','new_address.gif','0','absmiddle') ?>> <font size=1>Zeigen</font></button> anklicken.<br>
 			Der Dienstplan wird eingeblendet.</ul><p>
 <font face="Verdana, Arial" size=3 color="#990000">
 <p><b>Was will die Schnellsicht mir sagen?</b></font></b><p>
@@ -50,45 +50,45 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 <li><b>Funk/Telefon</b> :<ul>Funk und Telefonnummer des Bereitschaftsdienstes.</ul>
 <li><b>Arzt 2</b> :<ul>Der Rufdienst.</ul><p>
 <li><b>Funk/Telefon</b> :<ul>Funk und Telefonnummer des Rufdienstes.</ul><p>
-<li><b>Dienstplan</b> :<ul> Verbindung zum Monatsdienstplan einer Abteilung. Diesen Knopf&nbsp;<button><img src="../img/new_address.gif" border=0 width=20 height=20 align="absmiddle"> <font size=1>Zeigen</font></button>
+<li><b>Dienstplan</b> :<ul> Verbindung zum Monatsdienstplan einer Abteilung. Diesen Knopf&nbsp;<button><img <?php echo createComIcon('../','new_address.gif','0','absmiddle') ?>> <font size=1>Zeigen</font></button>
 			 anklicken wenn Sie den Dienstplan aktualisieren bzw. erstellen oder ändern möchten.</ul>
 
 
 <?php endif ?>
 <?php if($src=="show") : ?>
 <p>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Ich möchte einen neuen Dienstplan für diesen Monat erstellen.</b></font>
-<ul> <b>Schritt 1: </b>Den <img src="../img/de/de_newplan.gif" border=0 > anklicken.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Ich möchte einen neuen Dienstplan für diesen Monat erstellen.</b></font>
+<ul> <b>Schritt 1: </b>Den <img <?php echo createLDImgSrc('../','newplan.gif','0') ?> > anklicken.<br>
 </ul>
 <ul><b>Schritt 2:</b>
 Wenn Sie sich vorher angemeldet haben und ein Zugangsrecht in dieser Funktion haben wird das Eingabeformular eingeblendet.<p>
 		Ansonsten werden Sie nach Ihrem Benutzernamen und Passwort gefragt.<p>
-		Geben Sie Ihren Benutzernamen und Passwort ein und klicken Sie den <img src="../img/de/de_continue.gif" border=0> an.<br>
-		Falls Sie abbrechen möchten den <img src="../img/de/de_cancel.gif" border=0> anklicken.
+		Geben Sie Ihren Benutzernamen und Passwort ein und klicken Sie den <img <?php echo createLDImgSrc('../','continue.gif','0') ?>> an.<br>
+		Falls Sie abbrechen möchten den <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> anklicken.
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Ich möchte einen neuen Dienstplan für einen anderen Monat erstellen.</b></font>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Ich möchte einen neuen Dienstplan für einen anderen Monat erstellen.</b></font>
 <ul> <b>Schritt 1: </b>Clicken Sie den "Monat" so oft an bis den gewünschten Monat angezeigt wird. <br>
 								Klicken Sie den "Monat" auf der rechten Seite an um den nächsten Monat zu zeigen.<br>
 								Klicken Sie den "Monat" auf der linken Seite an um den vorherigen Monat zu zeigen.<br>
 		<b>Schritt 2: </b>Folgen Sie den Anweisungen wie man einen neuen Dienstplan erstellt.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Ich möchte die Schnellsicht nochmal sehen.</b></font>
-<ul> <b>Schritt 1: </b>Den <img src="../img/de/de_close2.gif" border=0 > anklicken.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Ich möchte die Schnellsicht nochmal sehen.</b></font>
+<ul> <b>Schritt 1: </b>Den <img <?php echo createLDImgSrc('../','close2.gif','0') ?> > anklicken.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Ich möchte die Funk bzw. Telefonnummer des Diensthabenden sehen. </b></font>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Ich möchte die Funk bzw. Telefonnummer des Diensthabenden sehen. </b></font>
 <ul> <b>Schritt 1: </b><span style="background-color:yellow" >Klicken Sie den Namen an.</span>  Ein kleines Fenster mit der relevanten Information wird sich öffnen.<br>
 </ul>
 
 
 <b>Achtung!</b>
-<ul> Falls Sie den Dienstplan schliessen möchten den <img src="../img/de/de_close2.gif" border=0> anklicken.
+<ul> Falls Sie den Dienstplan schliessen möchten den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> anklicken.
 </ul>
 <?php endif ?>
 <?php if($src=="plan") : ?>
 
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Ich möchte eine Schwester bzw. einen Pfleger einplanen anhand der Personalliste. Wie geht das?</b></font>
-<ul> <b>Schritt 1: </b>Den  &nbsp;<button><img src="../img/patdata.gif" width=20 height=20 border=0></button> Knopf des entsprechenden Tages anklicken um die Personalliste zu öffnen. <br>
+<ul> <b>Schritt 1: </b>Den  &nbsp;<button><img <?php echo createComIcon('../','patdata.gif','0') ?>></button> Knopf des entsprechenden Tages anklicken um die Personalliste zu öffnen. <br>
 			Ein kleines Fenster mit der Personalliste wird sich öffnen .<br>
 			<ul type=disc>
 			<li>Um eine Schwester bzw. einen Pfleger in Anwesenheitsdienst einzuplanen klicken Sie den Knopf auf der linken Spalte an.<br>
@@ -96,30 +96,30 @@ Ich möchte eine Schwester bzw. einen Pfleger einplanen anhand der Personalliste.
 			</ul>
 		<b>Schritt 2: </b><span style="background-color:yellow" >Den Namen der Schwester/Pfleger</span> in der Personalliste anklicken um ihn in den Dienstplan zu übertragen.<br>
 		<b>Schritt 3: </b>Falls Sie den falschen Namen angeklickt haben wiederholen Sie den Schritt 2.<br>
-		<b>Schritt 4: </b>Wenn Sie fertig sind den <img src="../img/de/de_close2.gif" border=0> Knopf in der Personalliste anklicken.<br>
+		<b>Schritt 4: </b>Wenn Sie fertig sind den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf in der Personalliste anklicken.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Ich möchte eine Schwester bzw. einen Pfleger manuell einplanen. Wie geht das?</b></font>
 <ul> <b>Schritt 1: </b>Das Eingabefeld  "<input type="text" name="t" size=11 maxlength=4 >" des entsprechenden Tages anklicken.<br>
 		<b>Schritt 2: </b>Tippen Sie den Namen manuell ein. <br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Ich möchte eine Schwester bzw. einen Pfleger aus dem Dienstplan entfernen. Wie geht das?</b></font>
 <ul> <b>Schritt 1: </b>Das Eingabefeld  "<input type="text" name="t" size=11 maxlength=4 >" des entsprechenden Namen anklicken.<br>
 		<b>Schritt 2: </b>Entfernen Sie manuell den Namen. Benutzen Sie dafür die Tasten "Ent" oder "Rücktaste" der Tastatur.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Wie kann ich den plan speichern?</b></font>
-<ul> <b>Schritt 1: </b>Den <img src="../img/de/de_savedisc.gif" border=0> Knopf anklicken.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Wie kann ich den plan speichern?</b></font>
+<ul> <b>Schritt 1: </b>Den <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> Knopf anklicken.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Ich habe den Plan gespeichert und ich möchte jetzt beenden. Was soll ich tun? </b></font>
-<ul> <b>Schritt 1: </b>Wenn Sie fertig sind den <img src="../img/de/de_close2.gif" border=0> Knopf anklicken. <br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Ich habe den Plan gespeichert und ich möchte jetzt beenden. Was soll ich tun? </b></font>
+<ul> <b>Schritt 1: </b>Wenn Sie fertig sind den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf anklicken. <br>
 </ul>
 
 </font>
 <?php endif ?>
 <?php if($src=="personlist") : ?>
 
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Die angezeigte Abteilung is falsch. Wie kann ich die richtige Abteilung zeigen lassen.</b></font>
 <ul> <b>Schritt 1: </b>Wählen Sie die richtige Abteilung aus dem Feld <nobr>"<span style="background-color:yellow" >Abteilung wechseln: </span><select name="s">
                                                                      	<option value="Beispiel Abteilung 1" selected> Beispiel Abteilung 1</option>
@@ -130,21 +130,21 @@ Die angezeigte Abteilung is falsch. Wie kann ich die richtige Abteilung zeigen l
                                                                      <br>
 		<b>Schritt 2: </b>Den <input type="button" value="Wechseln"> Knopf anklicken um die richtige Abteilung zeigen zu lassen.
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Ich möchte einen Namen aus der Liste entfernen. Wie geht das?</b></font>
 <ul> <b>Schritt 1: </b>Das Eingabefeld "<input type="text" name="t" size=11 maxlength=4 value="Name">" des Namens anklicken.<br>
 		<b>Schritt 2: </b>Entfernen Sie manuell den Namen. Benutzen Sie dafür die Tasten "Entf" oder "Rücktaste" der Tastatur.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Wie kann ich die Liste speichern</b></font>
-<ul> <b>Schritt 1: </b>Den <img src="../img/de/de_savedisc.gif" border=0> Knopf anklicken.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Wie kann ich die Liste speichern</b></font>
+<ul> <b>Schritt 1: </b>Den <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> Knopf anklicken.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Ich habe die Liste gespeichert und möchte jetzt beenden. Was soll ich tun? </b></font>
-<ul> <b>Schritt 1: </b>Wenn Sie fertig sind den <img src="../img/de/de_close2.gif" border=0> Knopf anklicken. <br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Ich habe die Liste gespeichert und möchte jetzt beenden. Was soll ich tun? </b></font>
+<ul> <b>Schritt 1: </b>Wenn Sie fertig sind den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf anklicken. <br>
 </ul>
 
 <?php endif ?>
 <?php if($src=="dutydoc") : ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie dokumentiere ich die Arbeitsleistung im Dienst?</b></font>
 <ul> <b>Schritt 1: </b>Gibt das Datum in das Feld " Datum <input type="text" name="d" size=10 maxlength=10> " ein.<p>
 	<ul>
@@ -163,12 +163,12 @@ Wie dokumentiere ich die Arbeitsleistung im Dienst?</b></font>
  <b>Schritt 8: </b>Gibt den Namen des Rufdienstes in das Feld <nobr>"<span style="background-color:yellow" > Rufdienst: <input type="text" name="d" size=5 maxlength=5> </span>"</nobr> ein.<br>
  <b>Schritt 1: </b>Den <input type="button" value="Speichern"> Knopf anklicken um das Dokument zu speichern.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Wie drucke ich das Dokument aus?</b></font>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Wie drucke ich das Dokument aus?</b></font>
 <ul> <b>Schritt 1: </b>Klickt den <input type="button" value="Drucken"> Knopf an und ein Fenster öffnet sich.<br>
 	<b>Schritt 2: </b>Folgen Sie die Anweisung im Fenster.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Ich habe das Dokument gespeichert. Was mache ich jetzt? </b></font>
-<ul> <b>Schritt 1: </b>Wenn Sie fertig sind klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an. <br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Ich habe das Dokument gespeichert. Was mache ich jetzt? </b></font>
+<ul> <b>Schritt 1: </b>Wenn Sie fertig sind klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an. <br>
 </ul>
 <?php endif ?>
 

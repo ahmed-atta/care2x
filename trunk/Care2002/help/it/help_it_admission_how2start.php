@@ -43,8 +43,8 @@ switch($x1)
 	}
 ?>  appariranno nella finestra principale.<br>
 		Altrimenti, se non si è fatto il login, il sistema chiederà username e password. <p>
-		Inserire i dati richiesti e selezionare il bottone <img src="../img/it/it_continue.gif" border=0>.<p>
-		Per annullare, selezionare il bottone <img src="../img/it/it_cancel.gif" border=0>.
+		Inserire i dati richiesti e selezionare il bottone <img <?php echo createLDImgSrc('../','continue.gif','0') ?>>.<p>
+		Per annullare, selezionare il bottone <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0>.
 </ul>
 </form>
 <?php endif ?>

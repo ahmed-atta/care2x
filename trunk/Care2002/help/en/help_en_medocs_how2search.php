@@ -13,26 +13,26 @@
 		
 </ul>
 <b>Step 2</b>
-<ul> Click the button <img src="../img/en/en_searchlamp.gif" border=0>  to start the search.<p>
+<ul> Click the button <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  to start the search.<p>
 </ul>
 <b>Step 3</b>
 <ul> If the search finds a single result the complete medocs document will be displayed.
 		If however, the search finds several results, a list will be displayed.<p>
-		To see the medocs document of the patient you are looking for, click the button <img src="../img/R_arrowGrnSm.gif" border=0 height=12 border=0> corresponding to it, or
+		To see the medocs document of the patient you are looking for, click the button <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> corresponding to it, or
 		the Family name, or the document number, or time.
 </ul>
 <?php endif ?>
 <?php if($x1>1) : ?>
-		To see the medocs document of the patient you are looking for, click the button <img src="../img/R_arrowGrnSm.gif" border=0 height=12 border=0> corresponding to it, or
+		To see the medocs document of the patient you are looking for, click the button <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> corresponding to it, or
 		the Family name, or the document number, or time.<p>
 <?php endif ?>
 <?php if(($src!="?")&&($x1=="1")) : ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>I want to update the document</b></font>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I want to update the document</b></font>
 <ul> If you want to update the displayed document, click the button <input type="button" value="Update data">.
 </ul>
 <?php endif ?>
 <b>Note</b>
-<ul> If you decide to cancel search click the button <img src="../img/en/en_close2.gif" border=0>.
+<ul> If you decide to cancel search click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
 
 

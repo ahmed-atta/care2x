@@ -44,8 +44,8 @@ finestra principale apparirà
 	}
 ?>.<br>
 		Se invece non si è ancora effettuato il login, verrà richiesto di inserire username e password. <p>
-		Inserire username e password, poi selezionare il bottone <img src="../img/it/it_continue.gif" border=0>.<p>
-		Per annullare selezionare il bottone <img src="../img/it/it_cancel.gif" border=0>.
+		Inserire username e password, poi selezionare il bottone <img <?php echo createLDImgSrc('../','continue.gif','0') ?>>.<p>
+		Per annullare selezionare il bottone <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0>.
 </ul>
 </form>
 <?php endif ?>

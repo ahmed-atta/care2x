@@ -6,7 +6,7 @@
 <p><font size=2 face="verdana,arial" >
 
 <?php if($src=="main") : ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come si fa per...</b></font>
 <ul type="disc"> 
 		<li><a href="#cbp">...Inserire temperatura o pressione sanguigna.</a>
@@ -25,7 +25,7 @@ Come si fa per...</b></font>
 		<li><a href="#iv">...Specificare trattamenti endovena giornalieri e relativi dosaggi.</a>
 </ul>
 <hr>
-<a name="cbp"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
+<a name="cbp"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Come inserire temperatura o pressione sanguigna</b></font>
 <ul> <b>1: </b>Selezionare sul grafico in prossimit&agrave della data desiderata.<br>
 		<b>2: </b>Comparir&agrave una finestrella in cui inserire temperatura e/o pressione.<br>
@@ -40,21 +40,21 @@ Come inserire temperatura o pressione sanguigna</b></font>
 		<font color="#000099" size=1><b>Nota:</b> per inserire l'orario attuale , premere "a" o "A"  nel campo 'orario'.</font>
 		</ul>
 		<b>4: </b>Se ci sono molti dati, inserirli tutti prima di salvare.<br>
-		<b>5: </b>Premere il bottone <img src="../img/it/it_savedisc.gif" border=0> per salvare i dati appena inseriti.<br>
+		<b>5: </b>Premere il bottone <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> per salvare i dati appena inseriti.<br>
 		<b>6: </b>Se si desidera correggere un errore, clickare sul dato sbagliato e sostituirlo.<br>
-		<b>5: </b>Alla fine, clickare il bottone <img src="../img/it/it_close2.gif" border=0> per chiudere la finestra e ritornare al grafico.<br>
-		<font color="#000099" size=1><a href="#howto"><img src="../img/arrow-t.gif" width=12 height=12 border=0> Tornare a "Come si fa per..."</a></font>
+		<b>5: </b>Alla fine, clickare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> per chiudere la finestra e ritornare al grafico.<br>
+		<font color="#000099" size=1><a href="#howto"><img <?php echo createComIcon('../','arrow-t.gif','0') ?>> Tornare a "Come si fa per..."</a></font>
 </ul>
-<a name="movedate"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
+<a name="movedate"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Come modificare la data del grafico</b></font>
 <ul> 
 	<li><font color="#660000"><b>Per spostare la data un giorno indietro:</b></font><br>
-	<b>1: </b>Selezionare sull'icona <img src="../img/l_arrowGrnSm.gif" width=12 height=12 border=0> nella colonna data <span style="background-color:yellow" >pi&ugrave a sinistra</span> nel grafico.<p>
+	<b>1: </b>Selezionare sull'icona <img <?php echo createComIcon('../','l_arrowgrnsm.gif','0') ?>> nella colonna data <span style="background-color:yellow" >pi&ugrave a sinistra</span> nel grafico.<p>
 	<li><font color="#660000"><b>Per spostare la data un giorno avanti:</b></font><br>
-	<b>1: </b>Selezionare sull'icona <img src="../img/bul_arrowGrnSm.gif" width=12 height=12 border=0> nella colonna data <span style="background-color:yellow" >pi&ugrave  destra</span> nel grafico.
+	<b>1: </b>Selezionare sull'icona <img <?php echo createComIcon('../','bul_arrowgrnsm.gif','0') ?>> nella colonna data <span style="background-color:yellow" >pi&ugrave  destra</span> nel grafico.
                                                                      <p>
 	<li><font color="#660000"><b>Per impostare una nuova data iniziale:</b></font><br>
-	<b>1: </b>Selezionare con il <span style="background-color:yellow" >tasto destro</span> sull'icona <img src="../img/l_arrowGrnSm.gif" width=12 height=12 border=0> della colonna data <span style="background-color:yellow" >pi&ugrave a sinistra</span> nel grafico.<br>
+	<b>1: </b>Selezionare con il <span style="background-color:yellow" >tasto destro</span> sull'icona <img <?php echo createComIcon('../','l_arrowgrnsm.gif','0') ?>> della colonna data <span style="background-color:yellow" >pi&ugrave a sinistra</span> nel grafico.<br>
 	<b>2: </b>Selezionare <input type="button" value="OK"> per confermare.<br>
 	<b>3: </b>Apparir&agrave una finestrella che chiede di inserire la nuova data iniziale.<br>
 	<b>4: </b>Inserire giorno, mese ed anno.<br>
@@ -62,130 +62,130 @@ Come modificare la data del grafico</b></font>
 	La finestrella si chiuder&agrave ed nel grafico la data iniziale risulter&agrave aggiornata.<p>
 	
 	<li><font color="#660000"><b>Per impostare una nuova data finale:</b></font><br>
-	<b>1: </b>Selezionare con il <span style="background-color:yellow" >tasto destro</span> sull'icona <img src="../img/bul_arrowGrnSm.gif" width=12 height=12 border=0> della colonna data <span style="background-color:yellow" >pi&ugrave a destra</span> nel grafico.<br>
+	<b>1: </b>Selezionare con il <span style="background-color:yellow" >tasto destro</span> sull'icona <img <?php echo createComIcon('../','bul_arrowgrnsm.gif','0') ?>> della colonna data <span style="background-color:yellow" >pi&ugrave a destra</span> nel grafico.<br>
 	<b>2: </b>Selezionare <input type="button" value="OK"> per confermare.<br>
 	<b>3: </b>Apparir&agrave una finestrella che chiede di inserire la nuova data finale.<br>
 	<b>4: </b>Inserire giorno, mese ed anno.<br>
 	<b>5: </b>Selezionare il bottone <input type="button" value="OK"> per confermare la variazione.<br>
 	La finestrella si chiuder&agrave ed nel grafico la data finale risulter&agrave aggiornata.<br>
-		<font color="#000099" size=1><a href="#howto"><img src="../img/arrow-t.gif" width=12 height=12 border=0> Tornare a "Come fare per ...."</a></font>
+		<font color="#000099" size=1><a href="#howto"><img <?php echo createComIcon('../','arrow-t.gif','0') ?>> Tornare a "Come fare per ...."</a></font>
 </ul>
-<a name="diet"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
+<a name="diet"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Come inserire un piano di dieta</b></font>
 <ul> <b>1: </b>Selezionare "<span style="background-color:yellow" >dieta</span>" in corrispondenza della data desiderata.<br>
 		<b>2: </b>Apparir&agrave una finestrella in cui inserire o modificare il piano di dieta.<br>
 		<b>3: </b>Inserire la dieta.<br>
-		<b>4: </b>Selezionare il bottone <img src="../img/it/it_savedisc.gif" border=0> per salvare il nuovo piano.<br>
-  		<b>Nota: </b>Per annullare l'operazione, clickare il bottone <img src="../img/it/it_cancel.gif" border=0 align="absmiddle">.<br>
+		<b>4: </b>Selezionare il bottone <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> per salvare il nuovo piano.<br>
+  		<b>Nota: </b>Per annullare l'operazione, clickare il bottone <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0 align="absmiddle">.<br>
 		<b>5: </b>Per correggere un errore, clickare sul dato sbagliato e sostituirlo con quello giusto.<br>
-		<b>6: </b>Al termine, clickare il bottone <img src="../img/it/it_close2.gif" border=0> per tornare al grafico.<br>
-		<font color="#000099" size=1><a href="#howto"><img src="../img/arrow-t.gif" width=12 height=12 border=0> Tornare a "Come fare per ...."</a></font>
+		<b>6: </b>Al termine, clickare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> per tornare al grafico.<br>
+		<font color="#000099" size=1><a href="#howto"><img <?php echo createComIcon('../','arrow-t.gif','0') ?>> Tornare a "Come fare per ...."</a></font>
 </ul>
-<a name="allergy"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
+<a name="allergy"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Come inserire informazioni allergologiche</b></font>
 <ul> 
-	<b>1: </b>Selezionare sull'icona <img src="../img/clip.gif" width=20 height=10 border=0> nella colonna "<span style="background-color:yellow" >Allergie<img src="../img/clip.gif" width=20 height=10 border=0> </span>".<br>
+	<b>1: </b>Selezionare sull'icona <img <?php echo createComIcon('../','clip.gif','0') ?>> nella colonna "<span style="background-color:yellow" >Allergie<img <?php echo createComIcon('../','clip.gif','0') ?>> </span>".<br>
 	<b>2: </b>Apparir&agrave una finestrella in cui inserire le informazioni allergologiche.<br>
 	<b>3: </b>Inserire allergie o CAVE nel campo<br> "<span style="background-color:yellow" > Inserire qui le nuove informazioni: </span>".<br>
   		<b>Nota: </b>Se occorre, &egrave possibile modificare i dati correnti <br>dal campo "<span style="background-color:yellow" >Dati correnti:</span>".<br>
-  		<b>Nota: </b>Per annullare l'operazione, clickare il bottone <img src="../img/it/it_cancel.gif" border=0 align="absmiddle">.<br>
-		<b>4: </b>Selezionare il bottone <img src="../img/it/it_savedisc.gif" border=0> per salvare.<br>
+  		<b>Nota: </b>Per annullare l'operazione, clickare il bottone <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0 align="absmiddle">.<br>
+		<b>4: </b>Selezionare il bottone <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> per salvare.<br>
 		<b>5: </b>Se si desidera correggere un errore, clickare sul dato sbagliato e sostituirlo.<br>
-		<b>6: </b>Al termine, clickare il bottone <img src="../img/it/it_close2.gif" border=0> per tornare al grafico.<br>
-		<font color="#000099" size=1><a href="#howto"><img src="../img/arrow-t.gif" width=12 height=12 border=0> Tornare a "Come fare per ...."</a></font>
+		<b>6: </b>Al termine, clickare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> per tornare al grafico.<br>
+		<font color="#000099" size=1><a href="#howto"><img <?php echo createComIcon('../','arrow-t.gif','0') ?>> Tornare a "Come fare per ...."</a></font>
 </ul>
 
-<a name="diag"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
+<a name="diag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Come inserire la diagnosi o terapia principali</b></font>
 <ul> 
-	<b>1: </b>Selezionare sull'icona <img src="../img/clip.gif" width=20 height=10 border=0> in "<span style="background-color:yellow" > Diagnosis/Therapy <img src="../img/clip.gif" width=20 height=10 border=0> </span>".<br>
+	<b>1: </b>Selezionare sull'icona <img <?php echo createComIcon('../','clip.gif','0') ?>> in "<span style="background-color:yellow" > Diagnosis/Therapy <img <?php echo createComIcon('../','clip.gif','0') ?>> </span>".<br>
 	<b>2: </b>Apparir&agrave una finestrella in cui inserire la diagnosi/terapia.<br>
 	<b>3: </b>Inserire le informazioni di diagnosi o terapia nel campo <br> "<span style="background-color:yellow" >Inserire qui le nuove informazioni: </span>".<br>
   		<b>Nota: </b>Se occorre, &egrave possibile modificare i dati correnti <br>dal campo "<span style="background-color:yellow" >Dati correnti:</span>".<br>
-  		<b>Nota: </b>Per annullare l'operazione, clickare il bottone <img src="../img/it/it_cancel.gif" border=0 align="absmiddle">.<br>
-		<b>4: </b>Selezionare il bottone <img src="../img/it/it_savedisc.gif" border=0> per salvare.<br>
+  		<b>Nota: </b>Per annullare l'operazione, clickare il bottone <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0 align="absmiddle">.<br>
+		<b>4: </b>Selezionare il bottone <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> per salvare.<br>
 		<b>5: </b>Se si desidera correggere un errore, clickare sul dato sbagliato e sostituirlo.<br>
-		<b>6: </b>Al termine, clickare il bottone <img src="../img/it/it_close2.gif" border=0> per tornare al grafico.<br>
-		<font color="#000099" size=1><a href="#howto"><img src="../img/arrow-t.gif" width=12 height=12 border=0> Tornare a "Come fare per ...."</a></font>
+		<b>6: </b>Al termine, clickare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> per tornare al grafico.<br>
+		<font color="#000099" size=1><a href="#howto"><img <?php echo createComIcon('../','arrow-t.gif','0') ?>> Tornare a "Come fare per ...."</a></font>
 </ul>
-<a name="daydiag"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
+<a name="daydiag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Come inserire la diagnosi o il piano terapeutico giornalieri</b></font>
 <ul> 
 	<b>1: </b>Selezionare o la colonna vuota o la diagnosi/terapia giornaliera corrispondente alla data scelta.<br>
 	<b>2: </b>Apparir&agrave una finestrella in cui inserire la diagnosi/terapia per la data scelta.<br>
 	<b>3: </b>Inserire le informazioni di diagnosi o terapia nel campo <br> "<span style="background-color:yellow" >Inserire qui le nuove informazioni: </span>".<br>
   		<b>Nota: </b>Se occorre, &egrave possibile modificare i dati correnti <br>dal campo "<span style="background-color:yellow" >Dati correnti:</span>".<br>
-  		<b>Nota: </b>Per annullare l'operazione, clickare il bottone <img src="../img/it/it_cancel.gif" border=0 align="absmiddle">.<br>
-		<b>4: </b>Selezionare il bottone <img src="../img/it/it_savedisc.gif" border=0> per salvare.<br>
+  		<b>Nota: </b>Per annullare l'operazione, clickare il bottone <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0 align="absmiddle">.<br>
+		<b>4: </b>Selezionare il bottone <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> per salvare.<br>
 		<b>5: </b>Se si desidera correggere un errore, clickare sul dato sbagliato e sostituirlo.<br>
-		<b>6: </b>Al termine, clickare il bottone <img src="../img/it/it_close2.gif" border=0> per tornare al grafico.<br>
-		<font color="#000099" size=1><a href="#howto"><img src="../img/arrow-t.gif" width=12 height=12 border=0> Tornare a "Come fare per ...."</a></font>
+		<b>6: </b>Al termine, clickare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> per tornare al grafico.<br>
+		<font color="#000099" size=1><a href="#howto"><img <?php echo createComIcon('../','arrow-t.gif','0') ?>> Tornare a "Come fare per ...."</a></font>
 </ul>
-<a name="extra"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
+<a name="extra"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Come inserire note, diagnosi aggiuntive, etc.</b></font>
 <ul> 
-	<b>1: </b>Selezionare l'icona <img src="../img/clip.gif" width=20 height=10 border=0> in "<span style="background-color:yellow" > Note, diagnosi aggiuntive <img src="../img/clip.gif" width=20 height=10 border=0> </span>".<br>
+	<b>1: </b>Selezionare l'icona <img <?php echo createComIcon('../','clip.gif','0') ?>> in "<span style="background-color:yellow" > Note, diagnosi aggiuntive <img <?php echo createComIcon('../','clip.gif','0') ?>> </span>".<br>
 	<b>2: </b>Apparir&agrave una finestrella in cui inserire notes and extra diagnoses.<br>
 	<b>3: </b>Inserire le note o diagnosi aggiuntive nel campo <br> "<span style="background-color:yellow" >Inserire qui le nuove informazioni: </span>".<br>
   		<b>Nota: </b>Se occorre, &egrave possibile modificare i dati correnti <br>dal campo "<span style="background-color:yellow" >Dati correnti:</span>".<br>
-  		<b>Nota: </b>Per annullare l'operazione, clickare il bottone <img src="../img/it/it_cancel.gif" border=0 align="absmiddle">.<br>
-		<b>4: </b>Selezionare il bottone <img src="../img/it/it_savedisc.gif" border=0> per salvare.<br>
+  		<b>Nota: </b>Per annullare l'operazione, clickare il bottone <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0 align="absmiddle">.<br>
+		<b>4: </b>Selezionare il bottone <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> per salvare.<br>
 		<b>5: </b>Se si desidera correggere un errore, clickare sul dato sbagliato e sostituirlo.<br>
-		<b>6: </b>Al termine, clickare il bottone <img src="../img/it/it_close2.gif" border=0> per tornare al grafico.<br>
-		<font color="#000099" size=1><a href="#howto"><img src="../img/arrow-t.gif" width=12 height=12 border=0> Tornare a "Come fare per ...."</a></font>
+		<b>6: </b>Al termine, clickare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> per tornare al grafico.<br>
+		<font color="#000099" size=1><a href="#howto"><img <?php echo createComIcon('../','arrow-t.gif','0') ?>> Tornare a "Come fare per ...."</a></font>
 </ul>
-<a name="pt"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
+<a name="pt"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Come inserire informazioni su terapia fisica giornaliera, ginnastica anti-trombosi, etc.</b></font>
 <ul> 
 	<b>1: </b>Click the "<span style="background-color:yellow" > Pt,Atg,etc: </span>" corresponding to the chosen date.<br>
 	<b>2: </b>Apparir&agrave una finestrella in cui inserire the chosen date.<br>
 	<b>3: </b>Inserire la terapia fisica giornaliera nel campo <br> "<span style="background-color:yellow" >Inserire qui le nuove informazioni: </span>".<br>
   		<b>Nota: </b>Se occorre, &egrave possibile modificare i dati correnti <br>dal campo "<span style="background-color:yellow" >Dati correnti:</span>".<br>
-  		<b>Nota: </b>Per annullare l'operazione, clickare il bottone <img src="../img/it/it_cancel.gif" border=0 align="absmiddle">.<br>
-		<b>4: </b>Selezionare il bottone <img src="../img/it/it_savedisc.gif" border=0> per salvare.<br>
+  		<b>Nota: </b>Per annullare l'operazione, clickare il bottone <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0 align="absmiddle">.<br>
+		<b>4: </b>Selezionare il bottone <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> per salvare.<br>
 		<b>5: </b>Se si desidera correggere un errore, clickare sul dato sbagliato e sostituirlo.<br>
-		<b>6: </b>Al termine, clickare il bottone <img src="../img/it/it_close2.gif" border=0> per tornare al grafico.<br>
-		<font color="#000099" size=1><a href="#howto"><img src="../img/arrow-t.gif" width=12 height=12 border=0> Tornare a "Come fare per ...."</a></font>
+		<b>6: </b>Al termine, clickare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> per tornare al grafico.<br>
+		<font color="#000099" size=1><a href="#howto"><img <?php echo createComIcon('../','arrow-t.gif','0') ?>> Tornare a "Come fare per ...."</a></font>
 </ul>
-<a name="coag"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
+<a name="coag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Come specificare gli anticoagulanti</b></font>
 <ul> 
-	<b>1: </b>Click the <img src="../img/clip.gif" width=20 height=10 border=0> (clip) icon on the "<span style="background-color:yellow" > Anticoagulants <img src="../img/clip.gif" width=20 height=10 border=0> </span>".<br>
+	<b>1: </b>Click the <img <?php echo createComIcon('../','clip.gif','0') ?>> (clip) icon on the "<span style="background-color:yellow" > Anticoagulants <img <?php echo createComIcon('../','clip.gif','0') ?>> </span>".<br>
 	<b>2: </b>Apparir&agrave una finestrella in cui inserire anticoagulants.<br>
 	<b>3: </b>Specificare gli anticoagulanti e/o il dosaggio nel campo <br> "<span style="background-color:yellow" > Inserire qui le nuove informazioni: </span>" field.<br>
   		<b>Nota: </b>Se occorre, &egrave possibile modificare i dati correnti <br>dal campo "<span style="background-color:yellow" >Dati correnti:</span>".<br>
-  		<b>Nota: </b>Per annullare l'operazione, clickare il bottone <img src="../img/it/it_cancel.gif" border=0 align="absmiddle">.<br>
-		<b>4: </b>Selezionare il bottone <img src="../img/it/it_savedisc.gif" border=0> per salvare.<br>
+  		<b>Nota: </b>Per annullare l'operazione, clickare il bottone <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0 align="absmiddle">.<br>
+		<b>4: </b>Selezionare il bottone <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> per salvare.<br>
 		<b>5: </b>Se si desidera correggere un errore, clickare sul dato sbagliato e sostituirlo.<br>
-		<b>6: </b>Al termine, clickare il bottone <img src="../img/it/it_close2.gif" border=0> per tornare al grafico.<br>
-		<font color="#000099" size=1><a href="#howto"><img src="../img/arrow-t.gif" width=12 height=12 border=0> Tornare a "Come fare per ...."</a></font>
+		<b>6: </b>Al termine, clickare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> per tornare al grafico.<br>
+		<font color="#000099" size=1><a href="#howto"><img <?php echo createComIcon('../','arrow-t.gif','0') ?>> Tornare a "Come fare per ...."</a></font>
 </ul>
-<a name="daycoag"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
+<a name="daycoag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Come inserire informazioni sulla terapia anticoagulatoria giornaliera</b></font>
 <ul> 
 	<b>1: </b>Selezionare o sulla colonna vuota o sulle informazioni esistenti sugli anticoagulanti corrispondenti alla data scelta.<br>
 	<b>2: </b>Apparir&agrave una finestrella in cui inserire la terapia anticoagulatoria giornaliera per la data scelta.<br>
 	<b>3: </b>Inserire il dosaggio oppure il terapista nel campo <br> "<span style="background-color:yellow" > Inserire nuove informazioni o modificare quelle esistenti:</span>" .<br>
-  		<b>Nota: </b>Per annullare l'operazione, clickare il bottone <img src="../img/it/it_cancel.gif" border=0 align="absmiddle">.<br>
-		<b>4: </b>Selezionare il bottone <img src="../img/it/it_savedisc.gif" border=0> per salvare.<br>
+  		<b>Nota: </b>Per annullare l'operazione, clickare il bottone <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0 align="absmiddle">.<br>
+		<b>4: </b>Selezionare il bottone <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> per salvare.<br>
 		<b>5: </b>Se si desidera correggere un errore, clickare sul dato sbagliato e sostituirlo.<br>
-		<b>6: </b>Al termine, clickare il bottone <img src="../img/it/it_close2.gif" border=0> per tornare al grafico.<br>
-		<font color="#000099" size=1><a href="#howto"><img src="../img/arrow-t.gif" width=12 height=12 border=0> Tornare a "Come fare per ...."</a></font>
+		<b>6: </b>Al termine, clickare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> per tornare al grafico.<br>
+		<font color="#000099" size=1><a href="#howto"><img <?php echo createComIcon('../','arrow-t.gif','0') ?>> Tornare a "Come fare per ...."</a></font>
 </ul>
-<a name="lot"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
+<a name="lot"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Come inserire note su innesti, LOT nr, charge nr, etc?</b></font>
 <ul> 
-	<b>1: </b>Selezionare l'icona <img src="../img/clip.gif" width=20 height=10 border=0> in  "<span style="background-color:yellow" > Notes <img src="../img/clip.gif" width=20 height=10 border=0> </span>".<br>
+	<b>1: </b>Selezionare l'icona <img <?php echo createComIcon('../','clip.gif','0') ?>> in  "<span style="background-color:yellow" > Notes <img <?php echo createComIcon('../','clip.gif','0') ?>> </span>".<br>
 	<b>2: </b>Apparir&agrave una finestrella in cui inserire le note ausiliarie.<br>
 	<b>3: </b>Inserire le informazioni su innesti, LOT, charge nr, nel campo <br> "<span style="background-color:yellow" > Inserire qui le nuove informazioni: </span>".<br>
   		<b>Nota: </b>Se occorre, &egrave possibile modificare i dati correnti <br>dal campo "<span style="background-color:yellow" >Dati correnti:</span>".<br>
-  		<b>Nota: </b>Per annullare l'operazione, clickare il bottone <img src="../img/it/it_cancel.gif" border=0 align="absmiddle">.<br>
-		<b>4: </b>Selezionare il bottone <img src="../img/it/it_savedisc.gif" border=0> per salvare.<br>
+  		<b>Nota: </b>Per annullare l'operazione, clickare il bottone <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0 align="absmiddle">.<br>
+		<b>4: </b>Selezionare il bottone <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> per salvare.<br>
 		<b>5: </b>Se si desidera correggere un errore, clickare sul dato sbagliato e sostituirlo.<br>
-		<b>6: </b>Al termine, clickare il bottone <img src="../img/it/it_close2.gif" border=0> per tornare al grafico.<br>
-		<font color="#000099" size=1><a href="#howto"><img src="../img/arrow-t.gif" width=12 height=12 border=0> Tornare a "Come fare per ...."</a></font>
+		<b>6: </b>Al termine, clickare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> per tornare al grafico.<br>
+		<font color="#000099" size=1><a href="#howto"><img <?php echo createComIcon('../','arrow-t.gif','0') ?>> Tornare a "Come fare per ...."</a></font>
 </ul>
-<a name="med"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
+<a name="med"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Come specificare medicinali e piano di dosaggio</b></font>
 <ul> 
 	<b>1: </b>Selezionare "<span style="background-color:yellow" > Medicinali </span>".<br>
@@ -202,49 +202,49 @@ Come specificare medicinali e piano di dosaggio</b></font>
 	</ul>
  		<b>Nota: </b>Se occorre, &egrave possibile modificare i dati correnti.<br>
 	<b>6: </b>Inserire il proprio nome nel campo "<span style="background-color:yellow" > Terapeuta: </span>".<br> 
-  		<b>Nota: </b>Per annullare l'operazione, clickare il bottone <img src="../img/it/it_cancel.gif" border=0 align="absmiddle">.<br>
-		<b>7: </b>Selezionare il bottone <img src="../img/it/it_savedisc.gif" border=0> to save the medication plan.<br>
+  		<b>Nota: </b>Per annullare l'operazione, clickare il bottone <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0 align="absmiddle">.<br>
+		<b>7: </b>Selezionare il bottone <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> to save the medication plan.<br>
 		<b>8: </b>Se si desidera correggere un errore, clickare sul dato sbagliato e sostituirlo.<br>
-		<b>9: </b>Al termine, clickare il bottone <img src="../img/it/it_close2.gif" border=0> per tornare al grafico.<br>
-		<font color="#000099" size=1><a href="#howto"><img src="../img/arrow-t.gif" width=12 height=12 border=0> Tornare a "Come fare per ...."</a></font>
+		<b>9: </b>Al termine, clickare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> per tornare al grafico.<br>
+		<font color="#000099" size=1><a href="#howto"><img <?php echo createComIcon('../','arrow-t.gif','0') ?>> Tornare a "Come fare per ...."</a></font>
 </ul>
-<a name="daymed"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
+<a name="daymed"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Come specificare medicinali da erogare giornalmente e relativi dosaggi</b></font>
 <ul> 
 	<b>1: </b>Selezionare o sulla colonna vuota o sulle informazioni esistenti corrispondenti alla data scelta.<br>
 	<b>2: </b>Apparir&agrave una finestrella in cui inserire medicinali e piano di dosaggio per la data scelta.<br>
 	<b>3: </b>Selezionare il campo corrispondente al medicinale scelto.<br>
 	<b>4: </b>Inserire il dosaggio, il terapeuta e/o i simboli di inizio/fine.<br>
-  		<b>Nota: </b>Per annullare l'operazione, clickare il bottone <img src="../img/it/it_cancel.gif" border=0 align="absmiddle">.<br>
+  		<b>Nota: </b>Per annullare l'operazione, clickare il bottone <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0 align="absmiddle">.<br>
 		<b>5: </b>Se ci sono molti dati, inserirli tutti prima di salvare.<br>
-		<b>6: </b>Selezionare il bottone <img src="../img/it/it_savedisc.gif" border=0> per salvare.<br>
+		<b>6: </b>Selezionare il bottone <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> per salvare.<br>
 		<b>7: </b>Se si desidera correggere un errore, clickare sul dato sbagliato e sostituirlo.<br>
-		<b>8: </b>Al termine, clickare il bottone <img src="../img/it/it_close2.gif" border=0> per tornare al grafico.<br>
-		<font color="#000099" size=1><a href="#howto"><img src="../img/arrow-t.gif" width=12 height=12 border=0> Tornare a "Come fare per ...."</a></font>
+		<b>8: </b>Al termine, clickare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> per tornare al grafico.<br>
+		<font color="#000099" size=1><a href="#howto"><img <?php echo createComIcon('../','arrow-t.gif','0') ?>> Tornare a "Come fare per ...."</a></font>
 </ul>
-<a name="iv"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
+<a name="iv"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Come specificare trattamenti endovena giornalieri e relativi dosaggi</b></font>
 <ul> 
 	<b>1: </b>Selezionare o sulla colonna vuota o sulle informazioni esistenti accanto al campo <br>"<span style="background-color:yellow" > Endovena>> </span>" corrispondente alla data scelta.<br>
 	<b>2: </b>Apparir&agrave una finestrella in cui specificare le medicazioni endovenose del giorno.<br>
 	<b>3: </b>Inserire il dosaggio, il terapeuta e/o i simboli di inizio/fine nel campo "<span style="background-color:yellow" > Inserire o modificare i dati: </span>".<br>
-  		<b>Nota: </b>Per annullare l'operazione, clickare il bottone <img src="../img/it/it_cancel.gif" border=0 align="absmiddle">.<br>
-		<b>4: </b>Selezionare il bottone <img src="../img/it/it_savedisc.gif" border=0> per salvare.<br>
+  		<b>Nota: </b>Per annullare l'operazione, clickare il bottone <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0 align="absmiddle">.<br>
+		<b>4: </b>Selezionare il bottone <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> per salvare.<br>
 		<b>5: </b>Se si desidera correggere un errore, clickare sul dato sbagliato e sostituirlo.<br>
-		<b>6: </b>Al termine, clickare il bottone <img src="../img/it/it_close2.gif" border=0> per tornare al grafico.<br>
-		<font color="#000099" size=1><a href="#howto"><img src="../img/arrow-t.gif" width=12 height=12 border=0> Tornare a "Come fare per ...."</a></font>
+		<b>6: </b>Al termine, clickare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> per tornare al grafico.<br>
+		<font color="#000099" size=1><a href="#howto"><img <?php echo createComIcon('../','arrow-t.gif','0') ?>> Tornare a "Come fare per ...."</a></font>
 </ul>
 <?php elseif(($src=="")&&($x1=="template")) : ?>
 
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Che fare se <span style="background-color:yellow" >la lista occupazione letti non esiste ancora</span>?</b></font>
 <ul> <b>1: </b>Selezionare il bottone <input type="button" value="Mostra lista occupazione letti"> per cercare l'ultima lista archiviata.<br>
 		<b>2: </b>Se esiste almeno una lista archiviata negli ultimi 31 giorni, essa verr&agrave mostrata.<br>
 		<b>3: </b>Selezionare il bottone <input type="button" value="Usa questa lista come lista di oggi"><br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Non voglio cercare la lista occupazione letti. Come posso crearne una nuova?</b></font>
-<ul> <b>1: </b>Selezionare sul bottone <img src="../img/plus2.gif" border=0> corrispondente al numero di camera e di letto.
+<ul> <b>1: </b>Selezionare sul bottone <img <?php echo createComIcon('../','plus2.gif','0') ?>> corrispondente al numero di camera e di letto.
 <br>
 		<b>2: </b>Apparir&agrave una finestrella per la ricerca paziente.<br>
 		<b>3: </b>Prima di tutto, cercare il paziente inserendo una parola chiave in uno dei tanti campi di ricerca.<br>
@@ -254,21 +254,21 @@ Non voglio cercare la lista occupazione letti. Come posso crearne una nuova?</b>
 		<li>in base al nome, inserirne qualche lettera nel campo <br>"<span style="background-color:yellow" >Nome:</span><input type="text" name="t" size=19 maxlength=10 value="Mario">".
 		<li>in base alla data di nascita, inserire la data o le prime cifre nel campo <br>"<span style="background-color:yellow" >Data:</span><input type="text" name="t" size=19 maxlength=10 value="27.1.1967">".
 		</ul>
-		<b>4: </b>Selezionare il bottone <img src="../img/it/it_searchlamp.gif" border=0> per avviare la ricerca.<br>
+		<b>4: </b>Selezionare il bottone <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> per avviare la ricerca.<br>
 		<b>5: </b>Se la ricerca identifica qualche paziente, apparir&agrave una lista da cui scegliere.<br>
-		<b>6: </b>Per scegliere il paziente giusto, clickare il bottone&nbsp;<button><img src="../img/post_discussion.gif" width=20 height=20 border=0></button> corrispondente.<br>
+		<b>6: </b>Per scegliere il paziente giusto, clickare il bottone&nbsp;<button><img <?php echo createComIcon('../','post_discussion.gif','0') ?>></button> corrispondente.<br>
 </ul>
 <?php elseif(($src=="getlast")&&($x1=="last")) : ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come copiare l'ultima lista occupazione letti archiviata nella lista di oggi?</b></font>
 <ul>Selezionare il bottone <input type="button" value="Usa questa lista come lista di oggi"> per copiare l'ultima lista archiviata.
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Sto visualizzando l'ultima lista occupazione letti, ma non voglio copiarla. Come creare una nuova lista?</b></font>
 <ul>Selezionare il bottone <input type="button" value="Non copiare, crea nuova lista"> per creare una lista nuova.
 </ul>
 <?php elseif($src=="assign") : ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come assegnare un letto ad un paziente?</b></font>
 <ul><b>1: </b>Prima di tutto, cercare il paziente inserendo una parola chiave in uno dei tanti campi di ricerca.<br>
 		Se si desidera trovare il paziente...<ul type="disc">
@@ -277,32 +277,32 @@ Come assegnare un letto ad un paziente?</b></font>
 		<li>in base al nome, inserirne qualche lettera nel campo <br>"<span style="background-color:yellow" >Nome:</span><input type="text" name="t" size=19 maxlength=10 value="Mario">".
 		<li>in base alla data di nascita, inserire la data o le prime cifre nel campo <br>"<span style="background-color:yellow" >Data:</span><input type="text" name="t" size=19 maxlength=10 value="27.1.1967">".
 		</ul>
-		<b>2: </b>Selezionare il bottone <img src="../img/it/it_searchlamp.gif" border=0> per avviare la ricerca.<br>
+		<b>2: </b>Selezionare il bottone <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> per avviare la ricerca.<br>
 		<b>3: </b>Se la ricerca identifica qualche paziente, apparir&agrave una lista da cui scegliere.<br>
-		<b>4: </b>Per scegliere il paziente giusto, clickare il bottone&nbsp;<button><img src="../img/post_discussion.gif" width=20 height=20 border=0></button> corrispondente.<br>
+		<b>4: </b>Per scegliere il paziente giusto, clickare il bottone&nbsp;<button><img <?php echo createComIcon('../','post_discussion.gif','0') ?>></button> corrispondente.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come bloccare un letto?</b></font>
-<ul><b>1: </b>Selezionare "<span style="background-color:yellow" ><img src="../img/delete2.gif" border=0 align="absmiddle"> <font color="#0000ff">Bloccare un letto</font> </span>".<br>
+<ul><b>1: </b>Selezionare "<span style="background-color:yellow" ><img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> <font color="#0000ff">Bloccare un letto</font> </span>".<br>
 		<b>2: </b>Scegliere <button>OK</button> per confermare.<p>
 </ul>
-<b>Nota: </b>Per annullare l'operazione, clickare il bottone <img src="../img/it/it_cancel.gif" border=0 align="absmiddle">.</ul>
+<b>Nota: </b>Per annullare l'operazione, clickare il bottone <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0 align="absmiddle">.</ul>
 <?php elseif($src=="remarks") : ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come scrivere osservazioni e note su un paziente?</b></font>
 <ul><b>1: </b>Selezionare il campo testo.<br>
 		<b>2: </b>Inserire osservazioni e note<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Ho finito di scrivere: come faccio a salvare le mie note?</b></font>
 <ul><b>1: </b>Selezionare il bottone <input type="button" value="Salva">.<p>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Ho salvato le note: come faccio a chiudere la finestra?</b></font>
-<ul>Selezionare il bottone <img src="../img/it/it_close2.gif" border=0 align="absmiddle"> per chiudere la finestra.<p>
+<ul>Selezionare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle"> per chiudere la finestra.<p>
 </ul>
 <?php elseif($src=="discharge") : ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come dimettere un paziente?</b></font>
 <ul> <b>1: </b>Scegliere il tipo di dimissione premendo il bottone corrispondente<br>
 <ul><br>
@@ -314,14 +314,14 @@ Come dimettere un paziente?</b></font>
 		<b>3: </b>Inserire il proprio nome nel campo "<span style="background-color:yellow" > Assistente medico: <input type="text" name="a" size=20 maxlength=20></span>" se questo è vuoto. <br>
 		<b>4: </b>Selezionare la casella " <span style="background-color:yellow" ><input type="checkbox" name="d" value="d">Confermo la dimissione del paziente</span>". <br>
 		<b>5: </b>Selezionare il bottone <input type="button" value="dimetti"> per dimettere il paziente.<p>
-		<b>6: </b>Selezionare il bottone <img src="../img/it/it_close2.gif" border=0 align="absmiddle"> per ritornare alla lista occupazione letti.<p>
+		<b>6: </b>Selezionare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle"> per ritornare alla lista occupazione letti.<p>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Ho clickato il bottone <input type="button" value="dimetti">, ma non è successo niente: perché?</b></font>
 <ul> E' necessario che la casella <br>
  " <span style="background-color:yellow" ><input type="checkbox" name="d" value="d" checked>Confermo la dimissione del paziente</span>" sia selezionata.<br>
  Se non lo è, occorre selezionarla.
 </ul>
-  <b>Nota: </b>Per annullare l'operazione, clickare il bottone <img src="../img/it/it_cancel.gif" border=0 align="absmiddle">.</ul>
+  <b>Nota: </b>Per annullare l'operazione, clickare il bottone <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0 align="absmiddle">.</ul>
 <?php endif ?>
 </form>
