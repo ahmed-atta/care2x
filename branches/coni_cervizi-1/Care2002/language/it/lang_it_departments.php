@@ -14,7 +14,7 @@ $LDEmergencySurgery='Chirurgia di emergenza';
 $LDPlasticSurgery='Chirurgia plastica';
 $LDEarNoseThroath='ENT';
 $LDOpthalmology='Oftalmologia';
-$LDPathology='Anatomia Patologica';
+$LDPathology='Pathology';
 $LDObGynecology='Ginecologia';
 $LDPhysicalTherapy='Fisioterapia';
 $LDInternalMedicine='Medicina interna';
@@ -22,6 +22,7 @@ $LDIntermediateCareUnit='Intermediate Care Unit';
 $LDIntensiveCareUnit='Terapia intensiva';
 $LDEmergencyAmbulatory='Pronto Soccorso';
 $LDInternalMedicineAmbulatory='Day Hospital di Medicina Interna';
+
 $LDSonography='Ecografia';
 $LDNuclearDiagnostics='Radiodiagnostica';
 $LDRadiology='Radiologia';
@@ -31,7 +32,7 @@ $LDCentralLaboratory='Laboratorio clinico';
 $LDSerologicalLaboratory='Laboratorio serologico';
 $LDChemicalLaboratory='Laboratorio medico';
 $LDBacteriologicalLaboratory='Laboratorio analisi batteriologiche';
-$LDTechnicalMaintenance='Manutenzione tecnica';
+$LDTechnicalMaintenance='Laboratorio di Analisi';
 $LDITDepartment='CED';
 $LDGeneralAmbulatory='Ambulatorio';
 $LDBloodBank='Banca del Sangue';
@@ -48,4 +49,24 @@ $LDSelectDept='Scegli un dipartimento';
 $LDPlsSelectDept='Per favore scegli un dipartimento';
 $LD_AllMedicalDept='____Tutti i dipartimenti medici_____';
 $LDClinic='Clinica';
+
+//Aggiunti da noi
+$LDMedicina="Medicina";
+$LDNutrizione="Nutrizione";
+$LDCardiologia="Cardiologia";
+$LDFisioterapia="Fisioterapia";
+$LDOrtopedia="Ortopedia";
+$LDDiagnostica="Diagnostica Eco Rx";
+$LDNeuroElettro="Neurologia ed Elettroencefalografia";
+$LDOtorinolaringoiatria="Otorinolaringoiatria";
+$LDOftalmologia="Oftalmologia";
+$LDGinecologia="Ginecologia";
+$LDEcoInternistica="Eco Internistica";
+$LDEndocrinologia="Endocrinologia";
+$LDUrologia="Urologia";
+$LDAngiologia="Angiologia";
+$LDImmunoAllergo="Immunologia e Allergologia";
+
+
+
 ?>

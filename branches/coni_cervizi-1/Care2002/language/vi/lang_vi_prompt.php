@@ -104,8 +104,4 @@ $LDPlsEnterStartTime='H&#227;y nh&#7853;p v&#224;o th&#7901;i gian b&#7855;t &#2
 $LDPlsEnterEndTime='H&#227;y nh&#7853;p v&#224;o th&#7901;i gian k&#7871;t th&#250;c';//'Please enter end time';
 $LDPlsEnterScrubNurse='H&#227;y nh&#7853;p v&#224;o th&#244;ng tin y t&#225; c&#7885; r&#7917;a';//'Please enter scrub nurse info';
 $LDPlsEnterORNr='H&#227;y nh&#7853;p v&#224;o m&#227; ho&#7863;c s&#7889; ph&#242;ng ph&#7851;u thu&#7853;t';//'Please enter the OR ID or number';
-
-#2004-08-06 EL
-$LDInvalidDate ='The entered date was invalid.';
-$LDNoPastDate = 'Dates in the past are not accepted.';
 ?>

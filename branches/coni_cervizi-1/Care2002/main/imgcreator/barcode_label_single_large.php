@@ -174,7 +174,7 @@ else
 		# Date of birth
     	ImageTTFText($label,11,0,$lmargin,$tmargin+74,$eblack,$arial,$result['date_birth']);
 		# Address street nr, street name
-    	ImageTTFText($label,11,0,$lmargin,$tmargin+93,$eblack,$arial,ucfirst($result['addr_str']).' '.$result['addr_str_nr']);
+    	//ImageTTFText($label,11,0,$lmargin,$tmargin+93,$eblack,$arial,ucfirst($result['addr_str']).' '.$result['addr_str_nr']);
 		# Address, zip, city/town name
     	ImageTTFText($label,11,0,$lmargin,$tmargin+108,$eblack,$arial,ucfirst($result['addr_zip']).' '.$result['citytown_name']);
 		# Sex
@@ -204,15 +204,15 @@ else
 	
     	//for($a=0,$l=75;$a<sizeof($addr);$a++,$l+=15) ImageString($label,4,10,$l,$addr[$a],$eblack);
 		# Address street nr, street name
-    	ImageString($label,4,10,75,strtoupper($result['addr_str']).' '.$result['addr_str_nr'],$eblack);
+    	//ImageString($label,4,10,75,strtoupper($result['addr_str']).' '.$result['addr_str_nr'],$eblack);
 		# Address, zip, city/town name
-    	ImageString($label,4,10,90,strtoupper($result['addr_zip']).' '.$result['citytown_name'],$eblack);
+    	//ImageString($label,4,10,90,strtoupper($result['addr_zip']).' '.$result['citytown_name'],$eblack);
 		# Sex
-    	ImageString($label,5,10,125,strtoupper($result['sex']),$eblack);
+    	ImageString($label,5,10,125,"Sesso: ".strtoupper($result['sex']),$eblack);
 		# Family name, repeat print
-    	ImageString($label,5,30,125,$result['name_last'],$eblack);
+    	//ImageString($label,5,30,125,$result['name_last'],$eblack);
 		# Insurance co name
-    	ImageString($label,4,10,140,$ins_obj->getFirmName($result['insurance_firm_id']),$eblack);
+    	//ImageString($label,4,10,140,$ins_obj->getFirmName($result['insurance_firm_id']),$eblack);
 		# Location
     	ImageString($label,3,10,160,$locstr,$eblack);
 		#Blood group

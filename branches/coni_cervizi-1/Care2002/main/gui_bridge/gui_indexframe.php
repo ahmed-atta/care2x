@@ -63,11 +63,17 @@ if($result){
 	# Load the menu item template
 	$tp =&$TP_obj->load('tp_main_index_menu_item.htm');
 	while($menu=$result->FetchRow()){
+		
+		//se l'utente non è Massimo Piccinini non visualizza la voce Archivio
+		if ($menu['name']=="Archivio" &&  $HTTP_SESSION_VARS['sess_login_username']!="Massimo Piccinini"){
+			continue;
+		}
+		
 		if (eregi('LDLogin',$menu['LD_var'])){
 			if ($HTTP_COOKIE_VARS['ck_login_logged'.$sid]=='true'){
 				$menu['url']='main/logout_confirm.php';
 				$menu['LD_var']='LDLogout';
-			}	
+			}
 		}
 		$TP_menu_item='<a href="'.$root_path.$menu['url'].URL_APPEND.'" TARGET="CONTENTS" REL="child">';
 		if(isset($$menu['LD_var'])&&!empty($$menu['LD_var'])) $TP_menu_item.=$$menu['LD_var'];
@@ -114,6 +120,7 @@ echo $langselect;
 <?php echo  $HTTP_SESSION_VARS['sess_login_username']; ?><br>
 <?php echo $dept->FormalName($cfg['thispc_dept_nr']); ?><br>
 <?php echo $ward->WardName($cfg['thispc_ward_nr']); ?><br>
+
 </FONT>
 </td>
 </tr>
@@ -123,5 +130,30 @@ echo $langselect;
 <center>
 <a href="http://www.opensource.org/" target="_blank"><img src="<?php echo $root_path ?>gui/img/common/default/osilogo.gif" border=0></a>
 </center>
+<br /><br />
+<?php 
+	if ($HTTP_SESSION_VARS['sess_login_username']=="Francesco" ||$HTTP_SESSION_VARS['sess_login_username']=="Roberto Ciardo" ||$HTTP_SESSION_VARS['sess_login_username']=="Berlutti Giovanna" ||$HTTP_SESSION_VARS['sess_login_username']=="Giuseppe Marcello" ||$HTTP_SESSION_VARS['sess_login_username']=="Filippo Quattrini" ||$HTTP_SESSION_VARS['sess_login_username']=="Amedeo Bagarone" ||$HTTP_SESSION_VARS['sess_login_username']=="Vincenzino Siani") 
+	{
+	?>
+	<td vAlign=top width=180><font 
+                  face="Verdana,Helvetica,Arial" size=2><b><nobr>
+				 <img src="../gui/img/common/default/blaupfeil.gif" border=0 align="middle" width="4" height="7">  
+    <a target="CONTENTS" href="../modules/medocs/rel_concl_med_gen.php" >Relazioni <br />  &nbsp; Conclusive&nbsp;<br /> Medicina</a><br>
+				  </nobr></b></font></td>
+<?php
+	}
+	if ($HTTP_SESSION_VARS['sess_login_username']=="Francesco" || $HTTP_SESSION_VARS['sess_login_username']=="Claudia Telesca" ||$HTTP_SESSION_VARS['sess_login_username']=="Giuseppe Marcello" ||$HTTP_SESSION_VARS['sess_login_username']=="Filippo Quattrini" ||$HTTP_SESSION_VARS['sess_login_username']=="Alessandro Biffi" ||$HTTP_SESSION_VARS['sess_login_username']=="Antonio Pelliccia" ||$HTTP_SESSION_VARS['sess_login_username']=="Antonio Spataro" ||$HTTP_SESSION_VARS['sess_login_username']=="Roberto Ciardo" ||$HTTP_SESSION_VARS['sess_login_username']=="Fernando Di Paolo" ||$HTTP_SESSION_VARS['sess_login_username']=="Frederik Fernando") 
+	{
+	?>
+	<td vAlign=top width=180><font 
+                  face="Verdana,Helvetica,Arial" size=2><b><nobr>
+				 <img src="../gui/img/common/default/blaupfeil.gif" border=0 align="middle" width="4" height="7">  
+    <a target="CONTENTS" href="../modules/medocs/rel_concl_cardiologia.php" >Relazioni <br />  &nbsp; Conclusive <br />  &nbsp;Cardiologia</a><br>
+				  </nobr></b></font></td>
+<?php
+	}
+?>
 </BODY>
+
 </HTML>
+

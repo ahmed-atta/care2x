@@ -17,9 +17,11 @@ $LDTechSupport='Supporto tecnico';
 $LDEDP='CED';
 $LDIntraEmail='Posta intranet';
 $LDInterEmail='Posta internet';
-$LDSpecials='Speciali';
-$LDLogin='Login';
-$LDLogout='Logout';
+$LDSpecials='Fatturazione';
+$LDLogin='<font size="+1" color="yellow">Login</font>';
+//$LDLogin='Login';
+//$LDLogout='Logout';
+$LDLogout='<font size="+1" color="yellow">Logout</font>';
 $LDAppointments='Appuntamenti';
 
 $VersionChgTarget='_top';

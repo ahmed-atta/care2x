@@ -35,7 +35,7 @@ else
     if($dblink_ok) {
 	    // get orig data
 	    //$dbtable='care_patient_encounter';
-		$sql="SELECT c1.name_last, c1.name_first, c1.date_birth, c1.sex, c1.civil_status, c1.phone_1_nr,
+		$sql="SELECT c1.name_last, c1.name_first, c1.date_birth, c1.sex, c1.civil_status, c1.phone_1_nr, c1.sss_nr, c1.nat_id_nr,
 		          c1.religion, c1.addr_str, c1.addr_str_nr, c1.addr_zip, c1.addr_citytown_nr, c1.contact_person, c1.blood_group,  
 				  c2.*, ad.name
 				 FROM care_encounter as c2 
@@ -139,29 +139,31 @@ else
     ImageString($im,4,485,34,$result['civil_status'],$black);
     ImageString($im,1,290,51,"$LDPhone:",$black);
     ImageString($im,4,350,60,$result['phone_1_nr'],$black);
-    ImageString($im,1,290,78,"$LDInsurance:",$black);
-    ImageString($im,4,300,95,$result['insurance_co_id'],$black);
+    #Questo vuole caricare il codice fiscale
+	ImageString($im,1,290,78,"$LDInsurance:",$black);
+	ImageString($im,4,360,195,$result['insurance_nr'],$black);
+    //ImageString($im,4,300,95,$result['insurance_co_id'],$black);
     ImageString($im,1,290,195,"$LDInsuranceNr:",$black);
-    ImageString($im,4,360,195,$result['insurance_nr'],$black);
+	//ImageString($im,4,360,195,$result['insurance_nr'],$black);
     // name & address
-    ImageString($im,1,5,40,"$LDNameAddr:",$black);
+    ImageString($im,1,5,40,"Federazione",$black);
 	// place the barcode 
     ImageCopy($im,$bc,110,28,9,9,170,37);
     ImageString($im,3,10,70,$result['name_last'].', '.$result['name_first'],$black);
 	
     //for($a=0,$l=90;$a<sizeof($addr);$a++,$l+=15) ImageString($im,3,10,$l,$addr[$a],$black);
-     ImageString($im,3,10,90,$result['addr_str'].' '.$result['addr_str_nr'],$black);
-     ImageString($im,3,10,105,$result['addr_zip'].' '.$result['name'],$black);
+    // ImageString($im,3,10,90,$result['addr_str'].' '.$result['addr_str_nr'],$black);
+     ImageString($im,3,10,105,$result['religion']/*.' '.$result['name']*/,$black);
 
 	 /* Bill payer information
 	 *  Note: the address format is german
      */
-     ImageString($im,1,5,145,"$LDBillInfo:",$black);
+     ImageString($im,1,5,145,"Societa' Sportiva",$black);
 	 if ($result['payer_other']=='')
 	 {
          ImageString($im,3,10,160,$result['name_last'].', '.$result['name_first'],$black);
-         ImageString($im,3,10,175,$result['addr_str'].' '.$result['addr_str_nr'],$black);
-         ImageString($im,3,10,190,$result['addr_zip'].' '.$result['name'],$black);
+         //ImageString($im,3,10,175,$result['addr_str'].' '.$result['addr_str_nr'],$black);
+         ImageString($im,3,10,190,$result['nat_id_nr']/*.' '.$result['name']*/,$black);
 	}
 	else
 	{
@@ -174,13 +176,15 @@ else
 			
 	}
     // diagnosis, therapie, 
+	  ImageCopy($im,$bc,110,28,9,9,170,37);
+	/*
     ImageString($im,3,10,225,$LDDiagnosis.': '.$result['referrer_diagnosis'],$black);
     ImageString($im,3,10,240,$LDRecBy.': '.$result['referrer'],$black);
     ImageString($im,3,10,255,$LDTherapy.': '.$result['referrer_recom_therapy'],$black);
     ImageString($im,3,10,270,$LDSpecials.': '.$result['referrer_notes'],$black);
     ImageString($im,3,10,285,$LDAdmitDiagnosis.': '.$result['referrer_diagnosis'],$black);
     ImageString($im,3,10,300,$LDInfo2.': '.$result[info2],$black);
-	
+	*/
 	// Contact person
 	if($result['contact_person']!='')
 	{
@@ -230,9 +234,9 @@ else
 		# Date of birth
     	ImageTTFText($label,11,0,$lmargin,$tmargin+74,$eblack,$arial,formatDate2Local($result['date_birth'],$date_format));
 		# Address street nr, street name
-    	ImageTTFText($label,11,0,$lmargin,$tmargin+93,$eblack,$arial,ucfirst($result['addr_str']).' '.$result['addr_str_nr']);
+    	//ImageTTFText($label,11,0,$lmargin,$tmargin+93,$eblack,$arial,ucfirst($result['addr_str']).' '.$result['addr_str_nr']);
 		# Address, zip, city/town name
-    	ImageTTFText($label,11,0,$lmargin,$tmargin+108,$eblack,$arial,ucfirst($result['addr_zip']).' '.$result['name']);
+    	ImageTTFText($label,11,0,$lmargin,$tmargin+108,$eblack,$arial,ucfirst($result['nat_id_nr'])/*.' '.$result['name']*/);
 		# Sex
     	ImageTTFText($label,14,0,$lmargin,$tmargin+130,$eblack,$arial,strtoupper($result['sex']));
 		# Family name, repeat print
@@ -255,12 +259,12 @@ else
    	 	ImageString($label,2,2,18,formatDate2Local($result['encounter_date'],$date_format),$black); 
     	ImageString($label,5,10,40,$result['name_last'].', '.$result['name_first'],$black);
     	ImageString($label,3,10,55,formatDate2Local($result['date_birth'],$date_format),$black);
-     	ImageString($label,4,10,75,$result['addr_str'].' '.$result['addr_str_nr'],$black);
-     	ImageString($label,4,10,90,$result['addr_zip'].' '.$result['name'],$black);
+     	//ImageString($label,4,10,75,$result['addr_str'].' '.$result['addr_str_nr'],$black);
+     	ImageString($label,4,10,90,$result['nat_id_nr']/*.' '.$result['name']*/,$black);
 	
     	ImageString($label,5,10,125,strtoupper($result['sex']),$black);
     	ImageString($label,5,30,125,$result['name_last'],$black);
-    	ImageString($label,4,10,140,$ins_obj->getFirmName($result['insurance_firm_id']),$black);
+    	//ImageString($label,4,10,140,$ins_obj->getFirmName($result['insurance_firm_id']),$black);
     	ImageString($label,3,10,160,$locstr,$black);
 		#Blood group
 		if(stristr('AB',$result['blood_group'])){
@@ -286,7 +290,7 @@ else
     	ImageTTFText($label2,11,0,10,75,$black,$arial,$result['name_first']);
     	ImageTTFText($label2,11,0,10,95,$black,$arial,strtoupper($result['sex']));
     	ImageTTFText($label2,10,0,50,95,$black,$arial,formatDate2Local($result['date_birth'],$date_format));
-    	ImageTTFText($label2,10,0,10,109,$black,$arial,$ins_obj->getFirmName($result['insurance_firm_id']));
+    	//ImageTTFText($label2,10,0,10,109,$black,$arial,$ins_obj->getFirmName($result['insurance_firm_id']));
     	ImageTTFText($label2,9,0,10,124,$black,$arial,$locstr);
     }else{
 		ImageString($label2,2,10,34,$full_en,$black);
@@ -295,7 +299,7 @@ else
     	ImageString($label2,4,10,65,$result['name_first'],$black);
     	ImageString($label2,4,10,85,strtoupper($result['sex']),$black);
     	ImageString($label2,3,50,85,formatDate2Local($result['date_birth'],$date_format),$black);
-    	ImageString($label2,3,10,100,$result['insurance_co_id'],$black);
+    	//ImageString($label2,3,10,100,$result['insurance_co_id'],$black);
     	ImageString($label2,2,10,115,$locstr,$black);
     }
 	
@@ -304,8 +308,8 @@ else
     $label3=ImageCreate(173,133);
     $e3white = ImageColorAllocate ($label3, 255,255,255); # white bkgrnd
     $black = ImageColorAllocate ($label3, 0, 0, 0);
-	$addr1=$result['addr_str'].' '.$result['addr_str_nr'];
-	$addr2= $result['addr_zip'].' - '.$result['name'];
+	//$addr1=$result['addr_str'].' '.$result['addr_str_nr'];
+	$addr2= $result['nat_id_nr']/*.' - '.$result['name']*/;
 	
 	if($ttf_ok){
     	ImageTTFText($label3,12,0,10,11,$black,$arial,$full_en);

@@ -201,7 +201,7 @@ $LDNewPwDiffer='La nuova password e quella di controllo non coincidono: inserirl
 $LDPersonellMngmnt='Gestione del personale';
 $LDPersonellMngmntTxt='Strumenti e funzioni per la gestione del personale';
 /* 2003-04-25 EL */
-$LDBilling='eCombill';
+$LDBilling='Fatturazione';
 $LDBillingTxt='Fattura per pazienti, creazione voci fatturabili, creazione di fatture, etc.';
 $LDInsuranceCoMngr='Gestione compagnie assicurative';
 $LDInsuranceCoMngrTxt='Inserire o modificare dati di una compagnia assicuratrice';

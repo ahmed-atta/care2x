@@ -270,10 +270,13 @@ $LDPlsEnterDept='<b>Please enter your department, clinic, or work area.</b><br>(
 //Luu lai ngay bay gio
 $LDOkSaveNow='L&#x1B0;u l&#x1EA1;i ngay bây gi&#x1EDD;';//'OK save now';
 
-$LD_ddpMMpyyyy='dd.mm.yyyy';
-$LD_yyyyhMMhdd='yyyy-mm-dd';
-$LD_MMsddsyyyy='mm/dd/yyyy';
-$LD_ddsMMsyyyy='dd/mm/yyyy';
+#  =  = day
+# t = thang = month
+# n = nam = year
+$LD_ddpMMpyyyy='dd.tt.nnnn';
+$LD_yyyyhMMhdd='nnnn-tt-dd';
+$LD_MMsddsyyyy='tt/dd/nnnn';
+$LD_ddsMMsyyyy='dd/tt/nnnn';
 /* 2002-10-13 EL */
 $LDPlsSelectPatientFirst='Tr&#x1B0;&#x1EDB;c h&#x1EBF;t hãy tìm b&#x1EC7;nh nhân';//'Please find the patient first.';
 /* 2002-11-30 EL */
@@ -682,10 +685,4 @@ $LDSimilarData2='The following listed persons have similar personal data.';
 $LDPlsCheckFirst='Please check it out first before you decide the next step.';
 $LDPlsCheckFirst2='Please check them out first before you decide the next step.';
 $LDShowDetails='Show details';
-
-# 2004-05-22 KB
-$LDNr='Nr.';
-$LDOtherHospitalNr='Other Hospital Nr.';
-$LDSelectOtherHospital = 'Select other hospital to change the number';
-$LDNoNrNoDelete = 'no number = delete';
 ?>

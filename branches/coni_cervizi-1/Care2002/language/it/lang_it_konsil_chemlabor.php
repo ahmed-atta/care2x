@@ -1,14 +1,14 @@
 <?php
-$LDDiagnosticTest='Diagnostic Test Order';
-$LDHospitalName='CARE';
-$LDCentralLab='Laboratorio zentrale';
+$LDDiagnosticTest='Analisi Chimico-Cliniche';
+$LDHospitalName='G.Onesti';
+$LDCentralLab='Laboratorio';
 $LDLabel='Label';
 $LDRoomNr='Room-Nr.';
-$LDSamplingTime='Sampling Time';
+$LDSamplingTime='Orario di inizio richiesta';
 $LDDay='Giorno';
-$LDMinutes='Minutes';
-$LDHours='Hours';
-$LDBatchNr='Batch Nr.';
+$LDMinutes='Minuto';
+$LDHours='Ora';
+$LDBatchNr='Nr.';
 $LDCaseNr='Case number';
 $LDHouse='House';
 $LDHematology='Hematology';
@@ -44,13 +44,13 @@ $LDShortMonth=array('',
 								   
 $LDShortDay=array('Do','Lu','Ma','Me','Gi','Ve','Sa','Do');
 				
-$LDBatchNumber='Batch nr.';
+$LDBatchNumber='Nr.';
 $LDMaterial='Material:';
-$LDEmergencyProgram='The violet shaded fields belong to emergency program';
-$LDPhoneOrder=' = only after acknowledgement by phone';
+$LDEmergencyProgram=' Gli esami in rosso sono compiuti presso la BIOS';
+$LDPhoneOrder=' ';
 /* 2002-09-03 EL */							  
 $LDSearchPatient='Ricerca paziente';
-$LDPlsSelectPatientFirst='Please search for the patient first.';
+$LDPlsSelectPatientFirst='Ricercare prima il paziente.';
 /* 2002-09-11 EL */
 $LDPendingTestRequest='Richiesta Test in Coda';
 /* 2002-10-14 EL */

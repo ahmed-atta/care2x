@@ -152,6 +152,14 @@ suo ideatore e tutti i suoi collaboratori.
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Thomas Wiedmann (DE)</font></nobr>&nbsp;</td>
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Test, debugging e validazione degli script</font></td>
   </tr>
+ <tr>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Marco Bernardi (IT)</font></nobr>&nbsp;</td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Test, debugging e miglioramenti della fatturazione e della traduzione in italiano</font></td>
+  </tr>
+ <tr>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Francesco Immè (IT)</font></nobr>&nbsp;</td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Test, debugging e miglioramenti della fatturazione e della traduzione in italiano</font></td>
+  </tr>
 </table>
 
 <font face="verdana,arial" size=1>Nota: questa è solo una lista parziale. Presto ci saranno ulteriori ringraziamenti.</font>

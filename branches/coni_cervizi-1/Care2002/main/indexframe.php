@@ -63,3 +63,4 @@ $ward=new Ward();
 
 require('./gui_bridge/gui_indexframe.php');
 ?>
+

@@ -69,27 +69,33 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <tr valign=top>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  
 SIZE=+3  FACE="Arial">
-<STRONG> &nbsp;<?php echo $LDLogin ?></STRONG></FONT></td>
+<STRONG> &nbsp <?php echo $LDLogin ?></STRONG></FONT></td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right><a href="javascript:gethelp('login_config.php');"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?>  
  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="startframe.php?sid=<?php echo "$sid&lang=$lang" ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?>   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </td></tr>
 <tr>
 <td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
 <ul>
-
-<table>
-<tr bgcolor=<?php echo $cfg['body_bgcolor']; ?>>
-<td align=right><img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"></td>
-<td >
-<?php if ($saved) : ?>
-<FONT  face="Verdana,Helvetica,Arial" size=3 color="#990000"><?php echo $LDChangeSaved ?><br>
-<?php else : ?>
+<table align=center>
+<tr  bgcolor=<?php echo $cfg['body_bgcolor']; ?>>
+<!--<img src="../logo_coni.bmp">-->
+<td>
+<?php /*if ($saved) :*/ ?>
+<!--<FONT  face="Verdana,Helvetica,Arial" size=3 color="#990000"><?php echo $LDChangeSaved ?>-->
+<?php /*else : */?>
+<img src="../logo_coni.jpg">
+</td>
+</tr>
+<td align=center>
+<br>
+<br>
 <FONT  face="Verdana,Helvetica,Arial" size=5><font color="#cc0000" ><?php echo $LDWelcome ?>!</font><br>
 <?php echo $HTTP_SESSION_VARS['sess_login_username'] ?>
-<?php endif ?>
+</td>
+<?php //endif ?>
 </td></tr>
 </table>
-
+<!--
 <form name="pcids"  method="post" action="login-pc-config.php">
 <TABLE cellSpacing=0 cellPadding=0  bgColor=#999999 border=0>
         <TBODY>
@@ -208,6 +214,7 @@ SIZE=+3  FACE="Arial">
 <input type="submit" value="<?php echo $LDSave ?>">
 <input type="button" value="<?php echo $LDNoChange ?>" onClick="window.location.href='startframe.php?sid=<?php echo "$sid&lang=$lang" ?>'">&nbsp;<a href="startframe.php?sid=<?php echo "$sid&lang=$lang" ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0','top') ?>  alt="<?php echo $LDClose ?>" ></a>
 </form>
+-->
 <p>
 </ul>
 

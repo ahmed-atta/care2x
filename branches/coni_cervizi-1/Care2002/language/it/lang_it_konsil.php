@@ -65,7 +65,7 @@ $LDPregnantPossible='Pregnancy possible?';
 $LDDiagnosesInquiries='Diagnoses / Inquiries:';
 $LDDeptReport='Department\'s Report:';
 $LDRequestTo='Request to the';
-$LDDepartment='department';
+$LDDepartment='Dipartimento';
 $LDVisitRequested='Visit requested';
 $LDPatCanBeOrdered='Patient can be ordered';
 									
