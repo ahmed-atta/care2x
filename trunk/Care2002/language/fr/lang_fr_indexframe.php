@@ -1,42 +1,47 @@
 <?php
-$LDHome='D&eacute;part';
+$LDHome='Home';
 $LDPatient='Patient';
 $LDAdmission='Admission';
 $LDAmbulatory='Ambulatoire';
 $LDMedocs='Medocs';
 $LDDoctors='Docteurs';
-$LDNursing='Infirmerie';
+$LDNursing='Nursing';
 $LDOR='OR';
 $LDLabs='Laboratoires';
 $LDRadiology='Radiologie';
 $LDPharmacy='Pharmacie';
-$LDMedDepot='D&eacute;pot m&eacute;dical';
+$LDMedDepot='Dépot médical';
 $LDDirectory='Annuaire';
 $LDTechSupport='Support Technique';
 $LDEDP='EDP';
-$LDIntraEmail='Courriels Intranet';
-$LDInterEmail='Courriels Internet';
-$LDSpecials='Sp&eacute;ciaux';
-$LDLogin='Connexion';
-$LDLogout='D&eacute;connexion';
+$LDIntraEmail='Intranet Email';
+$LDInterEmail='Internet Email';
+$LDSpecials='Spéciaux';
+$LDLogin='Login';
+$LDLogout='Logout';
+$LDAppointments='Rendez-vous';
 
 $VersionChgTarget='_haut';
-$LDLanguage='Langue';
-$LDPlsWaitInit='Veuillez patienter. Le proc&egrave;s d\'initialisation est en route....';
+$LDLanguage='Langage';
+$LDPlsWaitInit='Veuillez patienter. Le procès d`initialisation est en route....';
 
 $LDChange='Modifier';
 /* 2003-04-27 EL */
-$LDBrazilian='Br&eacute;silien';
-$LDCzech='Tch&egrave;que';
+$LDBrazilian='Brésilien';
+$LDCzech='Tchèque';
 $LDEnglish='English';
-$LDFrench='Fran&ccedil;ais';
+$LDFrench='Français';
 $LDGerman='Allemand';
-$LDIndonesian='Indon&eacute;sien';
+$LDIndonesian='Indonésien';
 $LDItalian='Italien';
-$LDNorwegian='Norv&eacute;gien';
+$LDNorwegian='Norvégien';
 $LDPolish='Polonais';
 $LDPortuguese='Portugal';
 $LDSpanish='Espagnol';
 /* 2003-04-28 El */
-$LDDutch='N&eacute;erlandais';
+$LDDutch='Néerlandais';
+# 2003-08-04 EL
+$LDPerson='Person';
+# 2003-09-05 EL
+$LDUser='User';
 ?>
