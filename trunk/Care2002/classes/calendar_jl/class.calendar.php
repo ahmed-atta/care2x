@@ -1,5 +1,5 @@
 <?php
-/*
+/**
 *    class.Calendar by Jürgen Lang - www.getinspired.at
 *   Modifications done by elpidio latorilla for Care2002 
 */
@@ -37,6 +37,21 @@ class Calendar {
 		var $intDayPadding = 1;
 		// Calendar spacing
 		var $intDaySpacing = 1;
+		
+		// Flag to deactivate "future" link : added by Elpidio Latorilla 2003-04-25
+		var $deactivate_future=0;
+		// future date color
+		var $strFutureDayColor='gray';
+		
+	/* Function to set the activate "future" day : Added by Elpidio Latorilla 2003-04-25 */
+	function activateFutureDay(){
+		$this->deactivate_future=0;
+	}
+	/* Function to set the activate "future" day : Added by Elpidio Latorilla 2003-04-25 */
+	function deactivateFutureDay(){
+		$this->deactivate_future=1;
+	}
+		
 
 	/** MAIN FUNCTION **/
 	function mkCalendar ($intYear = "", $intMonth = "", $intDay = "") {
@@ -162,9 +177,21 @@ class Calendar {
 				$DayAppend = "";
 			}
 			// Write Day
-			echo "
+/*			echo "
 								<TD align=\"center\" bgcolor=\"$currBGColor\"><font size=1 face=\"verdana,arial\"><A href=\"$PHP_SELF".URL_APPEND."&currYear=$intYear&currMonth=$intMonth&currDay=$i\">$DayPrepend$i$DayAppend</A></font></TD>
 			";
+*/			
+			/* Modified by Elpidio Latorilla 2003-04-25 for the future day activation/deactivation */
+			if($this->deactivate_future&&("$intYear-$intMonth-$i">date('Y-m-d'))){
+				echo "
+								<TD align=\"center\" bgcolor=\"$currBGColor\"><font size=1 face=\"verdana,arial\" color=\"$this->strFutureDayColor\">$DayPrepend$i$DayAppend</font></TD>
+				";
+			}else{ 
+				echo "
+								<TD align=\"center\" bgcolor=\"$currBGColor\"><font size=1 face=\"verdana,arial\"><A href=\"$PHP_SELF".URL_APPEND."&currYear=$intYear&currMonth=$intMonth&currDay=$i\">$DayPrepend$i$DayAppend</A></font></TD>
+				";
+			}
+			
 			if (date ("w", $intCurrMonthTS) == 0 && $i < $intDaysInMonth) {
 				$intWeekDay = 0;
 				echo "
@@ -197,7 +224,7 @@ class Calendar {
 }
 
 /** CREATE CALENDAR OBJECT **/
-$Calendar = new Calendar;
+//$Calendar = new Calendar;
 /** WRITE CALENDAR **/
-$Calendar -> mkCalendar ($currYear, $currMonth, $currDay);
+//$Calendar -> mkCalendar ($currYear, $currMonth, $currDay);
 ?>
