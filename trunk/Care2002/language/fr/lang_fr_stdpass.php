@@ -3,7 +3,7 @@ $LDUserPrompt='Nom d\'utilisateur';
 $LDPwPrompt='Mot de passe';
 $LDSubmitBut='Continuer...';
 $LDPwNeeded='Mot de passe nécessaire';
-$LDIntroTo='Introduction à l\'édition de nouveau article';
+$LDIntroTo='Introduction à l\'édition de nouveaux articles';
 $LDWhatTo='Edition de nouveaux articles : Ce que c\'est et comment faire';
 
 $LDWrongEntry='Entrées incorrectes!';
@@ -17,7 +17,7 @@ $LDSearch='Rechercher';
 $LDArchive='Archiver';
 $LDAdmission='Admission d\'un patient';
 $LDAdmTargetEntry='Admission';
-$LDAdmTargetSearch='Rechercher les patiens admis';
+$LDAdmTargetSearch='Rechercher les patients admis';
 $LDAdmTargetArchive='Rechercher dans l\'historique';
 $LDAdmWantEntry='J\'ai besoin d\'admettre un patient';
 $LDAdmWantSearch='Je suis à la recherhce d\'un patient';
@@ -47,7 +47,7 @@ $LDNursingStation='Salle d\'accouchement';
 $LDOrDocu='OR Documentation';
 $LDOrLogBook='OR Accouchement livre d\'inscription';
 $LDOrNursing='OR Accouchement';
-$LDCreate='Crèer';
+$LDCreate='Créer';
 $LDPersonList='Liste du Personnel';
 $LDRepabotActivate='Activer Repabot';
 $LDQBotActivate='Activer Q-Bot';
@@ -95,20 +95,20 @@ $LDORNOCScheduler='ORNOC Agenda';
 $LDFotolab='Laboratoire Photo';
 /* 2002-09-08 EL */
 $LDTestRequest='Requâte pour un test Diagnostic';
-$LDTestType=array('patho'=>'Pathologie',
-                             'chemlabor'=>'Laboratoire Medical',
-							'baclabor'=>'Laboratoire Bacteriologique',
-							 'blood'=>'Banque de sang',
-							'radio'=>'Radiologie',
-							'sono'=>'Sonographie',
-							 'allamb'=>'Ambulatoire
-Générale',
-							 'unfamb'=>'Urgence Ambulatoire',
-							'nuklear'=>'Diagnostic Nucléaire',
-							 'inmed'=>'Médicine Interne');
-$LDBloodOrder='Requâte pour un produit sanguin';
+$LDTestType=array(	'patho'=>'Pathologie',
+			'chemlabor'=>'Laboratoire Medical',
+			'baclabor'=>'Laboratoire Bacteriologique',
+			'blood'=>'Banque de sang',
+			'radio'=>'Radiologie',
+			'sono'=>'Sonographie',
+			'allamb'=>'Ambulatoire Générale',
+			'unfamb'=>'Urgence Ambulatoire',
+			'nuklear'=>'Diagnostic Nucléaire',
+			'inmed'=>'Médicine Interne');
+
+$LDBloodOrder='Demande de une prise de sanguin';
 /* 2002-09-22 EL */
-$LDPendingRequest='Requête en attente';
+$LDPendingRequest='Demande en attente';
 /* 2002-10-06 EL*/
 $LDLoggedOut='Déconnecté';
 /* 2003-03-18 EL */
@@ -116,7 +116,7 @@ $LDNursesList='Liste des sages-femmes';
 $LDAppointments='Encaissement';
 /* 2003-04-27 */
 $LDInsuranceCoManager='Gèrer les compagnies d\'assurance';
-$LDAddressMngr='Gestionnaire d\'adresse';
+$LDAddressMngr='Gestionnaire d\'adresses';
 /* 2003-04-30 EL*/
 $LDBilling='eComBill';
 /* 2003-05-18 EL */
