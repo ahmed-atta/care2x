@@ -1,15 +1,28 @@
 <?php
+/**
+* Care2x beta 2.0.0 auto-installer
+* copyright 2004 Elpidio Latorilla elpidio@care2x.net
+*/
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 $root_path='../';
 
 $notable=1;
+
+# Set the comment chars and dump file id
+if($HTTP_POST_VARS['dbtype']=='mysql'){
+	$comment = '#';
+	$dbid = 'my';
+}elseif($HTTP_POST_VARS['dbtype']=='postgres7'){
+	$comment = '--';
+	$dbid='pg';
+}
 
 #define('QUERY_MSG_SHOW', FALSE);
 define('QUERY_MSG_SHOW', TRUE);
 
 # Function to parse the sql file and execute the query
 function runSqlQuery($file){
-   global $link;
+   global $link, $comment,$HTTP_POST_VARS;
 
  //if(QUERY_MSG_SHOW) echo $file.'<br>';
 
@@ -20,13 +33,19 @@ function runSqlQuery($file){
 	    $str=chop($str);
        if(eregi(';',$str)){
 		    $sql.=(str_replace(';','',$str));
-		    if( @ mysql_query($sql,$link)) {
+			//echo "$sql<br>";
+			if($HTTP_POST_VARS['dbtype']=='mysql'){
+				$qresult= @ mysql_query($sql,$link);
+			}elseif($HTTP_POST_VARS['dbtype']=='postgres7'){
+				$qresult= @ pg_query($link,$sql);
+			}
+		    if($qresult) {
 			  // if (QUERY_MSG_SHOW) echo 'ok '.$sql.'<p>';
 			}elseif(QUERY_MSG_SHOW){
 			  echo 'SQL query failed:<br> '.$sql.'<p>';
 			}
            $sql = '';
-		}elseif(eregi('#',$str)){
+		}elseif(eregi($comment,$str)){
 		   $sql='';
 		}elseif($str !=''){
            $sql.=$str;
@@ -68,10 +87,16 @@ if(isset($HTTP_POST_VARS['mode'])&&($HTTP_POST_VARS['mode']=='save')){
 	$HTTP_POST_VARS['admin_user']=trim($HTTP_POST_VARS['admin_user']);
 	$HTTP_POST_VARS['admin_pw']=trim($HTTP_POST_VARS['admin_pw']);
 	# Clean values
-	$HTTP_POST_VARS['dbusername']=trim($HTTP_POST_VARS['dbusername']);
+/*	$HTTP_POST_VARS['dbusername']=trim($HTTP_POST_VARS['dbusername']);
 	$HTTP_POST_VARS['dbhost']=trim($HTTP_POST_VARS['dbhost']);
 	$HTTP_POST_VARS['dbpassword']=trim($HTTP_POST_VARS['dbpassword']);
+*/
 	$HTTP_POST_VARS['mainhost']=trim($HTTP_POST_VARS['mainhost']);
+	
+	# Debugged by Bededikt Wismans
+	$dbusername=trim($HTTP_POST_VARS['dbusername']);
+	$dbhost=trim($HTTP_POST_VARS['dbhost']);
+	$dbpassword=trim($HTTP_POST_VARS['dbpassword']);
 	
 	# If db values empty, use default values
 	if(empty($HTTP_POST_VARS['dbusername'])) $HTTP_POST_VARS['dbusername']='root';
@@ -92,63 +117,83 @@ if(isset($HTTP_POST_VARS['mode'])&&($HTTP_POST_VARS['mode']=='save')){
 		
 		# Start creating the database
 		echo 'Connecting to the database server...<br>';
-		if ($link=mysql_connect($dbhost,$dbusername,$dbpassword)){
-			$DBLink_OK=TRUE;
-			if(mysql_select_db($HTTP_POST_VARS['dbname'],$link)) {	
-				$DBName_OK=TRUE;
-			}else{ 
-				$DBName_OK=FALSE;
-				if(mysql_create_db($HTTP_POST_VARS['dbname'],$link)){
-					echo 'Selecting the database '.$HTTP_POST_VARS['dbname'].'...<br>';
-					if(mysql_select_db($HTTP_POST_VARS['dbname'],$link)) {	
-						$DBName_OK=TRUE;
-					}else{ 
-						$DBName_OK=FALSE;
+
+		if($HTTP_POST_VARS['dbtype']=='mysql'){
+			if ($link=mysql_connect($HTTP_POST_VARS['dbhost'],$HTTP_POST_VARS['dbusername'],$HTTP_POST_VARS['dbpassword'])){
+				$DBLink_OK=TRUE;
+				if(mysql_select_db($HTTP_POST_VARS['dbname'],$link)) {
+					$DBName_OK=TRUE;
+				}else{
+					$DBName_OK=FALSE;
+					if(mysql_create_db($HTTP_POST_VARS['dbname'],$link)){
+						echo 'Selecting the database '.$HTTP_POST_VARS['dbname'].'...<br>';
+						if(mysql_select_db($HTTP_POST_VARS['dbname'],$link)) {
+							$DBName_OK=TRUE;
+						}else{
+							$DBName_OK=FALSE;
+						}
 					}
 				}
 			}
+		}elseif($HTTP_POST_VARS['dbtype']=='postgres7'){
+			$connstring="host=".$HTTP_POST_VARS['dbhost']." user=".$HTTP_POST_VARS['dbusername']." password=".$HTTP_POST_VARS['dbpassword']." dbname=";
+			if($link=pg_connect($connstring.$HTTP_POST_VARS['dbname'])){
+				$DBLink_OK=TRUE;
+				$DBName_OK=TRUE;
+			}elseif($link=pg_connect($connstring."template1")){
+				$DBLink_OK=TRUE;
+				echo 'Creating  the database '.$HTTP_POST_VARS['dbname'].'...<br>';
+				if(pg_query($link,"CREATE DATABASE ".$HTTP_POST_VARS['dbname']."  WITH TEMPLATE=template0")){
+					if($link=pg_connect("host=".$HTTP_POST_VARS['dbhost']." password=".$HTTP_POST_VARS['dbpassword']." user=".$HTTP_POST_VARS['dbusername']." dbname=".$HTTP_POST_VARS['dbname'])){
+						$DBName_OK=TRUE;
+					}else{
+						$DBName_OK=FALSE;
+					}
+				}else{
+					$DBName_OK=FALSE;
+				}
+			}
+		}else{
+			$DBName_OK = FALSE;
+			$DBLink_OK = FALSE;
+		}
+
+		if($DBLink_OK){
 			# Proceed to create the db schema
 			if($DBName_OK){
-			
-				echo 'Creating the database structure...<br>';
-				@runSqlQuery('./mysql/care_db_structure_d11.sql');
+
+				echo "Creating the database structure... /".$HTTP_POST_VARS['dbtype']."/auto/care_db_structure_b200_auto_$dbid.sql<br>";
+				@runSqlQuery("./".$HTTP_POST_VARS['dbtype']."/auto/care_db_structure_b200_auto_$dbid.sql");
+
+				# Extra insert config user preload data
 				
-				# Extra insert config user preload data 
-				$sql='INSERT INTO care_config_user VALUES (\'default\', \'a:19:{s:4:"mask";s:1:"1";s:11:"idx_bgcolor";s:7:"#99ccff";s:12:"idx_txtcolor";s:7:"#000066";s:9:"idx_hover";s:7:"#ffffcc";s:9:"idx_alink";s:7:"#ffffff";s:11:"top_bgcolor";s:7:"#99ccff";s:12:"top_txtcolor";s:7:"#330066";s:12:"body_bgcolor";s:7:"#ffffff";s:13:"body_txtcolor";s:7:"#000066";s:10:"body_hover";s:7:"#cc0033";s:10:"body_alink";s:7:"#cc0000";s:11:"bot_bgcolor";s:7:"#cccccc";s:12:"bot_txtcolor";s:4:"gray";s:5:"bname";s:0:"";s:8:"bversion";s:0:"";s:2:"ip";s:0:"";s:3:"cid";s:0:"";s:5:"dhtml";s:1:"1";s:4:"lang";s:0:"";}\',  \'\',  \'\',  \'\', \'\', 20030210161831, \'\', 00000000000000)';
-		    	if( @ mysql_query($sql,$link)) {
+				$sql='INSERT INTO care_config_user (user_id,serial_config_data,notes, status, history, modify_id, modify_time, create_id, create_time) VALUES (\'default\', \'a:19:{s:4:"mask";s:1:"1";s:11:"idx_bgcolor";s:7:"#99ccff";s:12:"idx_txtcolor";s:7:"#000066";s:9:"idx_hover";s:7:"#ffffcc";s:9:"idx_alink";s:7:"#ffffff";s:11:"top_bgcolor";s:7:"#99ccff";s:12:"top_txtcolor";s:7:"#330066";s:12:"body_bgcolor";s:7:"#ffffff";s:13:"body_txtcolor";s:7:"#000066";s:10:"body_hover";s:7:"#cc0033";s:10:"body_alink";s:7:"#cc0000";s:11:"bot_bgcolor";s:7:"#cccccc";s:12:"bot_txtcolor";s:4:"gray";s:5:"bname";s:0:"";s:8:"bversion";s:0:"";s:2:"ip";s:0:"";s:3:"cid";s:0:"";s:5:"dhtml";s:1:"1";s:4:"lang";s:0:"";}\',  \'default values\',  \'normal\',  \'installed '.date('Y-m.d H:i:s').'\', \'auto-installer\', 0, \'auto-installer\', 0)';
+
+				if($HTTP_POST_VARS['dbtype']=='mysql'){
+					$qresult= @ mysql_query($sql,$link);
+				}elseif($HTTP_POST_VARS['dbtype']=='postgres7'){
+					$qresult= @ pg_query($link,$sql);
+				}
+				if( $qresult) {
 			  		// if (QUERY_MSG_SHOW) echo 'ok '.$sql.'<p>';
 				}elseif(QUERY_MSG_SHOW){
 			  		echo 'SQL query (insert of default user config values) failed:<br> '.$sql.'<p>';
 				}
 				# Insert the admin user
-				$sql='INSERT INTO care_users (name,login_id,password,permission,exc,s_date,s_time,modify_id,modify_time,create_id,create_time) VALUES (\'admin\', \''.$HTTP_POST_VARS['admin_user'].'\',\''.md5($HTTP_POST_VARS['admin_pw']).'\',\'System_Admin\',1,\''.date('Y-m-d').'\',\''.date('H:i:s').'\',\'script\',00000000000000, \'script\', 00000000000000)';
-		    	if( @ mysql_query($sql,$link)) {
+				$sql='INSERT INTO care_users (name,login_id,password,permission,exc,s_date,s_time,modify_id,modify_time,create_id,create_time) VALUES (\'admin\', \''.$HTTP_POST_VARS['admin_user'].'\',\''.md5($HTTP_POST_VARS['admin_pw']).'\',\'System_Admin\',1,\''.date('Y-m-d').'\',\''.date('H:i:s').'\',\'auto-installer\',00000000000000, \'auto-installer\', 00000000000000)';
+		    	
+				if($HTTP_POST_VARS['dbtype']=='mysql'){
+					$qresult= @ mysql_query($sql,$link);
+				}elseif($HTTP_POST_VARS['dbtype']=='postgres7'){
+					$qresult= @ pg_query($link,$sql);
+				}
+
+
+				if($qresult) {
 			  		// if (QUERY_MSG_SHOW) echo 'ok '.$sql.'<p>';
 				}elseif(QUERY_MSG_SHOW){
 			  		echo 'SQL query (insert of admin permission) failed:<br> '.$sql.'<p>';
 				}
-/*				
-				 if (empty($DOCUMENT_ROOT)) {
-       				 if (!empty($_SERVER) && isset($_SERVER['DOCUMENT_ROOT'])) {
-           				$DOCUMENT_ROOT = $_SERVER['DOCUMENT_ROOT'];
-        			}
-        			else if (!empty($HTTP_SERVER_VARS) && isset($HTTP_SERVER_VARS['DOCUMENT_ROOT'])) {
-           				 $DOCUMENT_ROOT = $HTTP_SERVER_VARS['DOCUMENT_ROOT'];
-        			}
-        			else if (!empty($_ENV) && isset($_ENV['DOCUMENT_ROOT'])) {
-            			$DOCUMENT_ROOT = $_ENV['DOCUMENT_ROOT'];
-        			}
-        			else if (!empty($HTTP_ENV_VARS) && isset($HTTP_ENV_VARS['DOCUMENT_ROOT'])) {
-            			$DOCUMENT_ROOT = $HTTP_ENV_VARS['DOCUMENT_ROOT'];
-       				}
-        			else if (@getenv('DOCUMENT_ROOT')) {
-            			$DOCUMENT_ROOT = getenv('DOCUMENT_ROOT');
-        			}
-        			else {
-            			$DOCUMENT_ROOT = '.';
-        			}
-    			} // end if
-*/	
 				# Start SQL  loading of data
 				if($HTTP_POST_VARS['icd10_en']){
 					echo 'Loading ICD10 english codes...<br>';
@@ -167,11 +212,20 @@ if(isset($HTTP_POST_VARS['mode'])&&($HTTP_POST_VARS['mode']=='save')){
 					@runSqlQuery('./sql/icd10_br/insert-data-a2l.sql');
 					@runSqlQuery('./sql/icd10_br/insert-data-m2z.sql');
 				}
+				if($HTTP_POST_VARS['icd10_es']){
+					echo 'Loading ICD10 Spanish codes...<br>';
+					@runSqlQuery('./sql/icd10_es/insert-data-a2o.sql');
+					@runSqlQuery('./sql/icd10_es/insert-data-p2z.sql');
+				}
 				if($HTTP_POST_VARS['ops_de']){
 					echo 'Loading OPS301 german codes...<br>';
-					@runSqlQuery('./sql/ops301/insert-data-1-5-499.sql');
-					@runSqlQuery('./sql/ops301/insert-data-55-57.sql');
-					@runSqlQuery('./sql/ops301/insert-data-58-94.sql');
+					@runSqlQuery('./sql/ops301_de/insert-data-1-5-499.sql');
+					@runSqlQuery('./sql/ops301_de/insert-data-55-57.sql');
+					@runSqlQuery('./sql/ops301_de/insert-data-58-94.sql');
+				}
+				if($HTTP_POST_VARS['ops_es']){
+					echo 'Loading OPS301 spanish codes...<br>';
+					@runSqlQuery('./sql/ops301_es/insert-data-1.sql');
 				}
 			}else{
 				$DBName_OK=FALSE;
@@ -179,7 +233,7 @@ if(isset($HTTP_POST_VARS['mode'])&&($HTTP_POST_VARS['mode']=='save')){
 				$error_msg= 'Database '.$HTTP_POST_VARS['dbname'].' not available or could not be created. Possible solution: Create the database manually first.<p>';
 			}
 		}else{
-			$DBLink_OK=FALSE; 
+			$DBLink_OK=FALSE;
 			$mode='new';
 			$error_msg= 'Could not connect to the database. Possible causes: wrong access information or access not permitted<p>';
 		
@@ -288,7 +342,7 @@ if(isset($HTTP_POST_VARS['mode'])&&($HTTP_POST_VARS['mode']=='save')){
        						fputs($fp,"<?php\n");
        						fputs($fp,"# This is the database name\n");
        						fputs($fp,"\$dbname='".$HTTP_POST_VARS['dbname']."';\n\n");
-       						fputs($fp,"# Database user name, default is root or httpd\n");
+       						fputs($fp,"# Database user name, default is root or httpd for mysql, or postgres for postgresql\n");
        						fputs($fp,"\$dbusername='".$HTTP_POST_VARS['dbusername']."';\n\n");
        						fputs($fp,"# Database user password, default is empty char\n");
        						fputs($fp,"\$dbpassword='".$HTTP_POST_VARS['dbpassword']."';\n\n");
@@ -307,7 +361,7 @@ if(isset($HTTP_POST_VARS['mode'])&&($HTTP_POST_VARS['mode']=='save')){
        						fputs($fp,"# Transfer protocol. Use https if this runs on SSL server\n");
        						fputs($fp,"\$httprotocol='".$HTTP_POST_VARS['prot']."';\n\n");
        						fputs($fp,"# Set this to your database type. For details refer to ADODB manual or goto http://php.weblogs.com/ADODB/\n");
-       						fputs($fp,"\$dbtype='mysql';\n");
+       						fputs($fp,"\$dbtype='".$HTTP_POST_VARS['dbtype']."';\n");
        						fputs($fp,"?>");
         					fclose($fp);
 							$error_msg='OK';
@@ -419,7 +473,8 @@ if($mode==''||$mode=='new'){
 	<table border=0 bgcolor="#ffffff" width=100%>
    <tr>
      <td><font size=5 color=#800000 face="verdana,arial,helvetica">Setting the primary installation values</font><br>
-	 <font size=3 color=#ff0000 face="verdana,arial,helvetica">NOTE: This installs ONLY in a mySQL database!</font>
+	 <font size=3 color=#ff0000 face="verdana,arial,helvetica">NOTE: If you install in PostgreSQL, make sure that the php's postgresql module is active before proceeding!<br>
+	 Installing ICD/OPS codes in PostgreSQL takes much longer than in mySQL, so please be patient until it is finished.</font>
 </td>
    </tr>
  </table>
@@ -438,6 +493,9 @@ if($mode==''||$mode=='new'){
      <td><font face="verdana,arial,helvetica">
 <font size=2 color=maroon>
 <form onSubmit="return chkForm(this)" method=post>
+Database type:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="radio" checked name="dbtype" value="mysql"> mySQL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="radio" name="dbtype" value="postgres7"> PostgreSQL<p>
 <b><font color=#ff0000>* </font></b>Database name (If this database is existing, it will be used. If not, the installer will attempt to create it.)<br>
 <input type="text" name="dbname" size=40 maxlength=60 value="<?php echo $HTTP_POST_VARS['dbname'] ?>"><br>
 Database username (If left blank, the installer will use "root" as username.)<br>
@@ -472,7 +530,9 @@ Note: If Care2x is stored in a subdirectory e.g http://www.care2x.net/hospital/ 
 	<input type="checkbox" name="icd10_en" value="1" <?php if($HTTP_POST_VARS['icd10_en']=='1') echo 'checked';  ?>> ICD10 (English language)<br>
 	<input type="checkbox" name="icd10_de" value="1" <?php if($HTTP_POST_VARS['icd10_de']=='1') echo 'checked';  ?>> ICD10 (German language)<br>
 	<input type="checkbox" name="icd10_br" value="1" <?php if($HTTP_POST_VARS['icd10_br']=='1') echo 'checked';  ?>> ICD10 (Brazilian language)<br>
-	<input type="checkbox" name="ops_de" value="1" <?php if($HTTP_POST_VARS['ops_de']=='1') echo 'checked';  ?>> OPS302 (German language)<br></font>
+	<input type="checkbox" name="icd10_es" value="1" <?php if($HTTP_POST_VARS['icd10_br']=='1') echo 'checked';  ?>> ICD10 (Spanish language)<br>
+	<input type="checkbox" name="ops_de" value="1" <?php if($HTTP_POST_VARS['ops_de']=='1') echo 'checked';  ?>> OPS301 (German language)<br>
+	<input type="checkbox" name="ops_es" value="1" <?php if($HTTP_POST_VARS['ops_de']=='1') echo 'checked';  ?>> OPS301 (Spanish language)<br></font>
 	<p>
 <input type="submit" value="Install Care2x">
 <input type="hidden" name="mode" value="save">
