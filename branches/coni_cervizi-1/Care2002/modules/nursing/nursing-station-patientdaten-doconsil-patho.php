@@ -275,12 +275,12 @@ function chkForm(d){
 		return false;
 	}
 	
-    if((d.doctor_sign.value=='')||(d.doctor_sign.value==' '))
+    /* if((d.doctor_sign.value=='')||(d.doctor_sign.value==' '))
 	{
 		alert("<?php echo $LDPlsEnterDoctorName ?>");
 		d.doctor_sign.focus();
 		return false;
-	}
+	}*/
 }
 
 function sendLater()

@@ -125,19 +125,19 @@ if(($mode=='')||($mode=='fresh')){
 }elseif($mode=='newdata'){	
 				
 	if(($pn=='lock')||($pn=='unlock')){
-		//$db->debug=true;
+						
 		if($pn=='lock') $ward_obj->closeBed($ward_nr,$rm,$bd);
 			else $ward_obj->openBed($ward_nr,$rm,$bd);
-
-		//header("location:nursing-station.php".URL_REDIRECT_APPEND."&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station&ward_nr=$ward_nr");
-		//exit;
+						
+		#header("location:nursing-station.php".URL_REDIRECT_APPEND."&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station&ward_nr=$ward_nr");
+		#exit;
 	}else{
 		if($ward_obj->AdmitInWard($pn,$ward_nr,$rm,$bd)){
 			//echo "ok";
 			$ward_obj->setAdmittedInWard($pn,$ward_nr,$rm,$bd);
 		}
-		//header("location:nursing-station.php".URL_REDIRECT_APPEND."&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station&ward_nr=$ward_nr");
-		//exit;
+		#header("location:nursing-station.php".URL_REDIRECT_APPEND."&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station&ward_nr=$ward_nr");
+		#exit;
 	}
 	header("location:nursing-station.php".URL_REDIRECT_APPEND."&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station&ward_nr=$ward_nr");
 	exit;
@@ -387,8 +387,8 @@ for ($i=$ward_info['room_nr_start'];$i<=$ward_info['room_nr_end'];$i++){
 	# If patient, show images by sex
 	if($is_patient)
 	{
-		$occ_list.='<a href="javascript:popPic(\''.$bed['pid'].'\')">';
-	    switch(strtolower($bed['sex']))
+		 $occ_list.='<a href="javascript:popPic(\''.$bed['name_last'].', '.$bed['name_first'].' '.formatDate2Local($bed['date_birth'],$date_format).'\',\''.$bed['photo_filename'].'\')">';
+		switch(strtolower($bed['sex']))
 		{
 			case 'f': $occ_list.='<img '.createComIcon($root_path,'spf.gif','0').'>'; $females++; break;
 			case 'm': $occ_list.='<img '.createComIcon($root_path,'spm.gif','0').'>'; $males++; break;

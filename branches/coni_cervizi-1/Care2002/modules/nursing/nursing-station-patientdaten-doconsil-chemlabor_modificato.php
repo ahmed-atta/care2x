@@ -127,9 +127,8 @@ define('_BATCH_NR_INIT_',10000000);
 *   chemlabor = 10000000; patho = 20000000; baclabor = 30000000; blood = 40000000; generic = 50000000;
 */
 						
-
-						
 /* Here begins the real work */
+
  /* Check for the patietn number = $pn. If available get the patients data, otherwise set edit to 0 */
 if(isset($pn)&&$pn) {	
     include_once($root_path.'include/care_api_classes/class_encounter.php');
@@ -173,7 +172,7 @@ if($dblink_ok){
 							  if(prepareTestElements())
 							  {
 								$data['batch_nr']=$batch_nr;
-								$data['encounter_nr']=$pn;								
+								$data['encounter_nr']=$pn;
 								$data['room_nr']=$room_nr;
 								$data['dept_nr']=$dept_nr;
 								$data['parameters']=$paramlist;
@@ -316,7 +315,6 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <script language="javascript">
 <!-- 
 
-
 function chkForm(d)
 { 
    return true 
@@ -408,281 +406,6 @@ topmargin=0 leftmargin=0 marginwidth=0 marginheight=0
 <?php 
 }
 ?>
-<?
-//if($_GET['pn'])
-//{
-?>
-<script language="javascript">
-<!-- 
-<!--QUI INIZIANO LE FUNZIONI JAVASCRIPT DA NOI AGGIUNTE-->
-var arr=new Array();
-
-/*Consente di sapere se una analisi ? stata gi? selezionata*/
-function esiste(valore)
-{
-
-ret=-1;
- for(var i=0;i<document.lista2.lista21.length;i++)
- {
-  if(document.lista1.lista11.options[document.lista1.lista11.selectedIndex].value==document.lista2.lista21.options[i].value) ret=i;
- }
-
- return ret;
-}
-
-function esiste2(valore)
-{
-
-ret=-1;
- for(var i=0;i<document.lista1.lista11.length;i++)
- {
-  if(valore==document.lista1.lista11.options[i].value) ret=i;
- }
-
- return ret;
-}
-
-/*Consente di aggiungere una analisi di laboratorio*/
-function aggiungi()
-{
- 
-indice=esiste(document.lista1.lista11.options[document.lista1.lista11.selectedIndex].value);
-if(indice!=-1)
-{
-  window.alert("Analisi inserita precedentemente");
-// arr[document.lista1.lista11.options[document.lista1.lista11.selectedIndex].value]++;
-// document.lista2.lista21.options[indice].text="Q.t�("+arr[document.lista1.lista11.options[document.lista1.lista11.selectedIndex].value]+") "+document.lista1.lista11.options[document.lista1.lista11.selectedIndex].text;
-
-}
-else if(document.lista1.lista11.options[document.lista1.lista11.selectedIndex].text=='ROUTINE P.O.')
-{		
-if(arr[document.lista1.lista11.options[document.lista1.lista11.selectedIndex].value]==1)
-{window.alert('ROUTINE P.O. inserita precedentemente!');
-exit;}
-arr[document.lista1.lista11.options[document.lista1.lista11.selectedIndex].value]=1;	
-
-stringa='';
-stringa2='';
-		if(esiste('CO160,1')==-1 && (arr['CO160,1']==null || arr['CO160,1']==0))
-		{arr['CO160,1']=1;
- 		document.lista2.lista21.options[document.lista2.lista21.length]=null;
-		new1=new Option('Glicemia','CO160,1');
-		document.lista2.lista21.options[document.lista2.lista21.options.length]=new1;
-		} 
-		else {stringa=' Glicemia';}
-		
-		if(esiste('CO404,1')==-1 && (arr['CO404,1']==null || arr['CO404,1']==0))
-		{arr['CO404,1']=1;
- 		document.lista2.lista21.options[document.lista2.lista21.length]=null;
- 		new2=new Option('Urea Sierica','CO404,1');
- 		document.lista2.lista21.options[document.lista2.lista21.options.length]=new2;
-		}
-		else {stringa=stringa+', Urea Sierica';}
-		
-		if(esiste('CO111,1')==-1 && (arr['CO111,1']==null || arr['CO111,1']==0))
-		{arr['CO111,1']=1;
-  		new3=new Option('Creatinina Sierica','CO111,1');
- 		document.lista2.lista21.options[document.lista2.lista21.options.length]=new3;
-		} 
-		else {stringa=stringa+', Creatinina Sierica';}
-		
-		if(esiste('CO78,1')==-1  && (arr['CO78,1']==null || arr['CO78,1']==0))
-		{arr['CO78,1']=1;
-  		new20=new Option('Colesterolo HDL','CO78,1');
- 		document.lista2.lista21.options[document.lista2.lista21.options.length]=new20;
-		} 
-		else {stringa=stringa+', Colesterolo totale';}
-		
-		if(esiste('CO80,1')==-1  && (arr['CO80,1']==null || arr['CO80,1']==0))
-		{arr['CO80,1']=1;  
-		new4=new Option('Colesterolo totale','CO80,1');
- 		document.lista2.lista21.options[document.lista2.lista21.options.length]=new4;
-		}
-		else {stringa=stringa+' , Colesterolo totale';}
-		
-		if(esiste('CO400,1')==-1  && (arr['CO400,1']==null || arr['CO400,1']==0))
-		{arr['CO400,1']=1;  
-		new5=new Option('Trigliceridi','CO400,1');
- 		document.lista2.lista21.options[document.lista2.lista21.options.length]=new5;
-		}
-		else {stringa=stringa+', Trigliceridi';}
-		
-		if(esiste('CO406,1')==-1  && (arr['CO406,1']==null || arr['CO406,1']==0))
-		{arr['CO406,1']=1;
-  		new6=new Option('Uricemia','CO406,1');
- 		document.lista2.lista21.options[document.lista2.lista21.options.length]=new6;
-		}
-		else {stringa=stringa+', Uricemia';}
-		
-		if(esiste('CO252,1')==-1  && (arr['CO252,1']==null || arr['CO252,1']==0))
-		{arr['CO252,1']=1;
-  		new7=new Option('Proteine Totali','CO252,1');
- 		document.lista2.lista21.options[document.lista2.lista21.options.length]=new7;
-		}
-		else {stringa=stringa+' , Proteine Totali';}
-		
-		if(esiste('CO397,1')==-1  && (arr['CO397,1']==null || arr['CO397,1']==0))
-		{arr['CO397,1']=1;
-  		new8=new Option('Transaminasi GOT/AST','CO397,1');
- 		document.lista2.lista21.options[document.lista2.lista21.options.length]=new8;
-		}  
-		else {stringa=stringa+', Transaminasi GOT/AST';}
- 		
- 		if(esiste('CO398,1')==-1  && (arr['CO398,1']==null || arr['CO398,1']==0))
- 		{arr['CO398,1']=1;
-  		new9=new Option('Transaminasi GPT/ALT','CO398,1');
- 		document.lista2.lista21.options[document.lista2.lista21.options.length]=new9;
-  		}
-  		else {stringa=stringa+', Transaminasi GPT/ALT';}
-  		
-  		if(esiste('CO64,1')==-1  && (arr['CO64,1']==null || arr['CO64,1']==0))
-  		{arr['CO64,1']=1;
-  		new10=new Option('Bilirubina totale e frazionata','CO64,1');
- 		document.lista2.lista21.options[document.lista2.lista21.options.length]=new10;
-  		}
-  		else {stringa=stringa+', Bilirubina totale e frazionata';}
-  		
-  		if(esiste('CO157,1')==-1  && (arr['CO157,1']==null || arr['CO157,1']==0))
-  		{arr['CO157,1']=1;
-  		new11=new Option('Gamma glutammil-transpeptidasi (gamma-GT)','CO157,1');
- 		document.lista2.lista21.options[document.lista2.lista21.options.length]=new11;
- 		}
- 		else {stringa=stringa+', Gamma glutammil-transpeptidasi (gamma-GT)';}
- 		
- 		if(esiste('CO149,1')==-1  && (arr['CO149,1']==null || arr['CO149,1']==0))
- 		{arr['CO149,1']=1;
-  		new12=new Option('Fosfatasi Alcalina','CO149,1');
- 		document.lista2.lista21.options[document.lista2.lista21.options.length]=new12;
- 		}
- 		else {stringa=stringa+', Fosfatasi Alcalina';}
- 		
- 		if(esiste('CO384,1')==-1  && (arr['CO384,1']==null || arr['CO384,1']==0))
-  		{arr['CO384,1']=1;
-  		new13=new Option('Sideremia','CO384,1');
- 		document.lista2.lista21.options[document.lista2.lista21.options.length]=new13;
- 		}
- 	    else {stringa=stringa+', Sideremia';}
- 		
- 		if(esiste('CO399,1')==-1  && (arr['CO399,1']==null || arr['CO399,1']==0))
- 		{arr['CO399,1']=1;
-  		new14=new Option('Transferrina','CO399,1');
- 		document.lista2.lista21.options[document.lista2.lista21.options.length]=new14;
- 		}
- 		else {stringa=stringa+', Transferrina';}
- 		
- 		if(esiste('CO146,1')==-1  && (arr['CO146,1']==null || arr['CO146,1']==0))
- 		{arr['CO146,1']=1;
-  		new15=new Option('Ferritina','CO146,1');
- 		document.lista2.lista21.options[document.lista2.lista21.options.length]=new15;
- 		}
- 		else {stringa=stringa+', Ferritina';}
- 		
- 		if(esiste('CO385,1')==-1  && (arr['CO385,1']==null || arr['CO385,1']==0))
- 		{arr['CO385,1']=1;
-  		new16=new Option('Sodio Sierico','CO385,1');
- 		document.lista2.lista21.options[document.lista2.lista21.options.length]=new16;
- 		}
- 	    else {stringa=stringa+', Sodio Sierico';}
- 		
- 		if(esiste('CO244,1')==-1  && (arr['CO244,1']==null || arr['CO244,1']==0))
- 		{arr['CO244,1']=1;
-  		new17=new Option('Potassio Sierico','CO244,1');
- 		document.lista2.lista21.options[document.lista2.lista21.options.length]=new17;
- 		}
- 		else {stringa=stringa+', Potassio Sierico';}
- 		
- 		if(esiste('CO130,0')==-1  && (arr['CO130,0']==null || arr['CO130,0']==0))
- 		{arr['CO130,0']=1;
-  		new18=new Option('Esame emocromocitometrico e morfologico completo','CO130,0');
- 		document.lista2.lista21.options[document.lista2.lista21.options.length]=new18;
- 		}
- 		else {stringa=stringa+', Esame emocromocitometrico e morfologico completo';}
- 		
- 		if(esiste('CO408,1')==-1  && (arr['CO408,1']==null || arr['CO408,1']==0))
- 		{arr['CO408,1']=1;
-  		new19=new Option('Urine:esame chimico, fisico e microscopico','CO408,1');
- 		document.lista2.lista21.options[document.lista2.lista21.options.length]=new19;
- 		}
- 		else {stringa=stringa+', Urine:esame chimico, fisico e microscopico';}
- 		
- 		if(esiste('CO413,1')==-1  && (arr['CO413,1']==null || arr['CO413,1']==0))
- 		{arr['CO413,1']=1;
-  		new21=new Option('Velocita di eritrosedimentazione (VES)','CO413,1');
- 		document.lista2.lista21.options[document.lista2.lista21.options.length]=new21;
- 		}
- 		else {stringa=stringa+', Velocita di eritrosedimentazione (VES)';}
- 		
- 		if(esiste('CO253,1')==-1  && (arr['CO253,1']==null || arr['CO253,1']==0))
-		{arr['CO253,1']=1;  
-		new22=new Option('Protidogramma','CO253,1');
- 		document.lista2.lista21.options[document.lista2.lista21.options.length]=new22;
-		}
-		else {stringa=stringa+', Protidogramma';}
-		
- 		if(stringa!='')
- 		{
- 		//stringa=trim(stringa);
- 		stringa2=stringa.substr(1);
- 		window.alert(stringa2+" gia' presenti e quindi non re-inseriti!");
-		}
-}
-else
-{
-arr[document.lista1.lista11.options[document.lista1.lista11.selectedIndex].value]=1;
- document.lista2.lista21.options[document.lista2.lista21.length]=null;
-new1=new Option(document.lista1.lista11.options[document.lista1.lista11.selectedIndex].text,document.lista1.lista11.options[document.lista1.lista11.selectedIndex].value);
- document.lista2.lista21.options[document.lista2.lista21.options.length]=new1;
- }
-}
-
-/*consente di estrarre la descrizione di una analisi*/
-function estrai_descr(codice)
-{
- 
- for(var i=0;i<document.lista1.lista11.length;i++)
- {
-  if(document.lista1.lista11.options[i].value==codice) 
-{
-return document.lista1.lista11.options[i].text;
-break;
-}
- }
-
-}
-/* Consente di rimuovere una analisi selezionata*/
-function rimuovi()
-{
-descrizione=estrai_descr(document.lista2.lista21.options[document.lista2.lista21.selectedIndex].value);
-
-arr[document.lista2.lista21.options[document.lista2.lista21.selectedIndex].value]--;
-
- document.lista2.lista21.options[document.lista2.lista21.selectedIndex].text="Q.t�("+ arr[document.lista2.lista21.options[document.lista2.lista21.selectedIndex].value]+") "+descrizione ;
-
-if(arr[document.lista2.lista21.options[document.lista2.lista21.selectedIndex].value]==0) document.lista2.lista21.options[document.lista2.lista21.selectedIndex]=null;
-
-}
-//QUESTA FUNZIONE CI PERMETTE DI INVIARE ALLA PAGINA CHE VIENE RICHIAMATA I DATI RELATIVI ALLE ANALISI CLINICHE SELEZIONATE PER UN DATO PAZIENTE
-function inviaDati()
-{
-  var analisiselezionate=""; 
-  if (document.lista2.lista21.length<1) window.alert("Si deve selezionare ALMENO una anlisi, altrimenti cliccare su Chiudi.");
-  else
-    {
-     for (var i=0; i<document.lista2.lista21.length; i++)
-     { 
-       analisiselezionate += (document.lista2.lista21.options[i].value + "=" + arr[document.lista2.lista21[i].value] + "#");
-     }
-     document.lista2.analisiselezionate.value=analisiselezionate;
-     document.lista2.submit();
-    }
-}
-
-
-//-->
-</script>
-<?
-//}
-?>
 
 <table width=100% border=0 cellpadding="5" cellspacing=0>
 <tr>
@@ -715,7 +438,7 @@ if($edit)
 
 $controls_table_width=745;
 
-//require($root_path.'include/inc_test_request_controls.php');
+require($root_path.'include/inc_test_request_controls.php');
 
 }
 elseif(!$read_form && !$no_proc_assist)
@@ -733,7 +456,6 @@ elseif(!$read_form && !$no_proc_assist)
 }
 ?>
    
-</form>
 
 <!-- outermost table for the form -->
 
@@ -751,9 +473,9 @@ elseif(!$read_form && !$no_proc_assist)
 		<table   cellpadding=0 cellspacing=0 border=0 width=745>
 	<tr  valign="top">
 
-      <td bgcolor="#A0C6E5" width=215>
+      <td bgcolor="<?php echo $bgc1 ?>">
 	  <div class="lmargin">
-	  <font size=4 color="black" face="arial">
+	  <font size=3 color="#990000" face="arial">
     
        <?php echo $LDHospitalName ?><br>
        <?php echo $LDCentralLab ?><p><font size=2>
@@ -997,7 +719,7 @@ elseif(!$read_form && !$no_proc_assist)
 	   echo '</td>';
    */   
 ?>
-   <td colspan=8><font size=1 face="arial" color= "black"></td>
+   <td colspan=8><font size=1 face="arial" color= "purple"></td>
 
    </tr>
    
@@ -1071,8 +793,8 @@ elseif(!$read_form && !$no_proc_assist)
 </td>
 
 <!-- Middle block of first row -->
-      <td bgcolor="#A0C6E5" align="left">
-		 <table border=0 cellpadding=5 bgcolor="#0000EE">
+      <td bgcolor="<?php echo $bgc1 ?>">
+		 <table border=0 cellpadding=10 bgcolor="#ee6666">
      <tr>
        <td>
    
@@ -1094,7 +816,7 @@ elseif(!$read_form && !$no_proc_assist)
 </td>
 
 
-         <td  bgcolor="#A0C6E5"  align="right">
+         <td  bgcolor="<?php echo $bgc1 ?>"  align="right">
 <!--  Block for the casenumber codes -->  
  <table border=0 cellspacing=0 cellpadding=0>
 <?php
@@ -1167,12 +889,12 @@ for($n=0;$n<8;$n++)
 
   */	
 	/* Prepare the narrow batch nr barcode for specimen labels */
-   /*   
+    /*
 	if(!file_exists('../cache/barcodes/lab_'.$batch_nr.'.png'))
 	{
           echo "<img src='".$root_path."classes/barcode/image.php?code=".$batch_nr."&style=68&type=I25&width=145&height=60&xres=1&font=5&label=1&form_file=lab' border=0 width=0 height=0>";
 	}
-   */
+    */
 ?>	
 	</td>
   </tr>
@@ -1186,9 +908,9 @@ for($n=0;$n<8;$n++)
 
 <!--
 	<tr bgcolor="<?php echo $bgc1 ?>">	    
-	<td align="left"  colspan=3>
-	<font size=1 color="black" face="verdana,arial"><?php echo $LDBatchNumber ?><font color="#000000" size=2> <?php echo $batch_nr ?>	
--->
+	<td align="right"  colspan=3>
+	<font size=1 color="purple" face="verdana,arial"><?php echo $LDBatchNumber ?><font color="#000000" size=2> <?php echo $batch_nr ?>
+-->	
 <?php //COMMENTATO DA NOI QUESTO PHP!!!!!!!!!
 /*
 	for($i=0;$i<30;$i++)
@@ -1371,73 +1093,167 @@ for($n=0;$n<8;$n++)
  </table><!-- End of table simulating the border --> 
 	</td>
   </tr>
-<?php
- if ($_GET['pn'])
+<!--AGGIUNTA DI FRANCESCO-->
+<?
+    if ($pn)
 {
-  
-  $qryLT="SELECT * FROM prezzi_1 WHERE item_type='LT' ORDER BY item_description asc";
-  $resultqryLT=$db->Execute($qryLT);
-    if(is_object($resultqryLT)) $cntLT=$resultqryLT->RecordCount();
-
 ?>
-<table border=0 cellpadding=0 cellspacing=0>
-<tr><td colspan=3 style="height:20px;"></td></tr>
-<tr>
-<td valign=top>
+<head>
 
-<table border=0 cellpadding=0 cellspacing=0 width=327>
-<tr>
-<td bgcolor="#A0C6E5" style="padding:4px;"><!--<img src="http://207.68.162.24/i.p.cont.group.gif" border=0 hspace="1">-->
- <font class="BB">Analisi Chimico-Cliniche</font>
-<tr>
-<td>
-<form name=lista1 >
-<select name="lista11" size="12" width="327" style="width:327px;">
-<?php
-   
-   for($cnt=0;$cnt<$cntLT;$cnt++)
-     {
-       $item=$resultqryLT->FetchRow();
-       echo "<option value=".'"'.$item['item_code'].",".$item['WHO'].'">'.$item['item_description']."</option>\n";
-     }    
-?>
-<option value="ROUTINE P.O.">ROUTINE P.O.</option>
-</select>
-</form>
-</td>				
-</tr>
-</table>
-</td>
-<td valign=middle align=center style="padding:10px;">
-<input type="button" style="width: 75px;" value="Aggiungi &gt;&gt;"  onClick="javascript:aggiungi();">
-<p>				
-<input type="button" style="width: 75px;" value="&lt;&lt; Rimuovi" onClick="javascript:rimuovi();">
-</td>
 
-<td valign=top>
-<table border=0 cellpadding=0 cellspacing=0 width=327>
-<tr><td bgcolor="#A0C6E5" style="padding:4px;"><!--<img src="http://207.68.162.24/i.p.cont.group.gif" border=0 hspace="1">-->
- <font class="BB">Analisi selezionate</font></td></tr>
-<tr>
-<td>
+<SCRIPT language="JavaScript">
+<!--
+function submitform()
+{
+	var sel = new Array(document.selectlab.elements.length);
+	var temp;
+	var tempstr;
+	var counter;
+	str = document.selectlab.hidden.value;
+	querystr = "confirmLabtests.php?";
 
-<form name=lista2 method="POST" action="../../invoice/req_srv.php">
-<select name="lista21" size="12" width="327" style="width:327px;">
-</select>
-<input type="hidden" name="analisiselezionate" value="">
-<input type="hidden" name="pn" value="<?php echo $pn; ?>">
-<input type="hidden" name="batch_nr" value="<?php echo $batch_nr; ?>">
-<input type="hidden" name="data" value="<?php echo date('Y-m-d H:i:s'); ?>">
-</form>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-</table><!--  End of the outermost table bordering the form -->
-<?php
+	counter = 1;
+	for (i=0;i<document.selectlab.elements.length;i++)
+	{	
+		temp = str.indexOf("#");
+		if(document.selectlab.elements[i].type=="checkbox")
+		{
+			tempstr = str.substring(0,temp);
+			str=str.substring(temp+1,str.length);					
+			if(document.selectlab.elements[i].checked == true)
+				querystr=querystr+"itemcode"+counter+"="+tempstr+"&";
+			counter = counter + 1;					
+		}		
+	}
+	document.selectlab.action = querystr;
+	document.selectlab.submit();
 }
+
+//-->
+</SCRIPT>
+
+
+</head>
+
+<body bgcolor="#FFFFFF" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0>
+<table border="0" width="101%" bgcolor=#99ccff>
+     
+    </table>
+
+<!-- Questo blocco lo abbiamo inserito noi   -->
+
+<br>
+	  <form action="nursing-station-patientdaten-doconsil-chemlabor.php?lang=it&pn="<?= $pn ?>"&edit=1&status=&target=chemlabor&user_origin=lab&noresize=1&mode=ricerca="ricerca  >
+  <p align = "center">
+	  <input type="text" size=20 name="ricerca">
+	 <br> <br>
+	     <input type="image"  src="../../gui/img/control/default/it/it_searchlamp.gif">	         
+	       
+	      </button>
+  </p>
+</form>
+
+
+
+
+<!-- fine blocco -->
+
+<blockquote>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </p>
+  <form name="selectlab" id="selectlab" method="POST" action="">
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+    <div align="center">
+      <center>
+      <table cellSpacing="1" cellPadding="3" width="450" bgColor="#999999" border="0" height="138">
+<?php
+    $query="SELECT insurance_firm_id FROM care_encounter WHERE encounter_nr='".$pn."'";
+    $risultato=$db->Execute($query);
+$risultato=$risultato->FetchRow();
+$assicurazione=$risultato['insurance_firm_id'];
+if ($_GET['ricerca']) $ricerca=$_GET['ricerca'];
+else $ricerca="##########";
+
+if($ricerca!="##########") $qryLT="SELECT * FROM prezzi_".$assicurazione['insurance_firm_id'] ." WHERE item_type='LT' AND item_description LIKE '%".$ricerca."%'";
+ else $qryLT="SELECT * FROM prezzi_".$assicurazione['insurance_firm_id'] ." WHERE item_type='LT' ";
+
+
+    $resultqryLT=$db->Execute($qryLT);
+    $cntLT=$resultqryLT->RecordCount();     
+ echo "<tr bgColor=\"#eeeeee\">";
+	echo "<td align=\"left\" height=\"73\" width=\"7666\" colspan=\"6\"><font size=\"5\" color=\"#FF0000\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+	 echo $SelectLaboratoryTests;
+	echo "<p><font color=\"#800000\" size=\"4\">";
+	echo $PleaseSelectLaboratoryTestsforthePatient;
+	echo "</font></td>";
+	echo "<tr bgColor=\"#eeeeee\">";
+	echo "<th align=\"center\" height=\"7\" width=\"133\" bgcolor=\"#CCCCCC\">&nbsp;</th>";
+	echo "<th align=\"center\" height=\"7\" width=\"514\" bgcolor=\"#CCCCCC\">$TestName</th>";
+	echo "<th height=\"7\" width=\"826\" align=\"center\" bgcolor=\"#CCCCCC\">$TestCode</th>";
+	echo "<th height=\"7\" width=\"623\" align=\"center\" bgcolor=\"#CCCCCC\">$Costperunit</th>";
+	echo "<th height=\"7\" width=\"1014\" align=\"center\" valign=\"middle\" bgcolor=\"#CCCCCC\">$NumberofUnits</th>";
+	
+if($cntLT){
+	for($cnt=0;$cnt<$cntLT;$cnt++)
+	{
+		$item=$resultqryLT->FetchRow();
+		$itemcode="";
+		echo "</tr>";
+		echo "<tr bgColor=\"#eeeeee\">";
+		echo "<td align=\"center\" height=\"7\" width=\"133\"><input type=\"checkbox\" name=\"selectitem.$cnt\" id=\"nounits.$cnt\" value=\"ON\"></td>";
+		echo "<td align=\"center\" height=\"7\" width=\"514\">".$item['item_description'];
+		echo "</td>";
+		echo "<td height=\"7\" width=\"826\" align=\"center\">".$item['item_code'];
+		echo "</td>";
+		echo "<td height=\"7\" width=\"623\" align=\"center\">".$item['item_unit_cost'];
+		echo "</td>";
+		echo "<td height=\"7\" width=\"1014\" align=\"center\" valign=\"middle\"><select size=\"1\" name=nounits.$cnt id=nounits.$cnt>";
+		echo "<option selected>1</option>";
+		echo "<option>2</option>";
+		echo "<option>3</option>";
+		echo "<option>4</option>";
+		echo "<option>5</option>";	
+		echo "</select></td>";          
+		echo "</tr>";
+		if($cnt != ($cntLT-1))
+		{
+			echo "<tr bgColor=\"#dddddd\" height=\"1\">";
+			echo "<td height=\"5\" width=\"7666\" colspan=\"6\"><img height=\"1\" src=\"pics/hor_bar.bmp\" width=\"5\"></td>";
+			echo "</tr>";
+		}
+		$itemcode=$item['item_code'];
+		$itemcode1=$itemcode1.$itemcode;
+		$itemcode1=$itemcode1."#";
+	}
+	}
+    $itemcode=$itemcode1;
+
+
 ?>
+<input type="hidden" name="hidden" value="<?php echo $itemcode; ?>">
+<input type="hidden" name="patientno" value="<?php echo $pn; ?>">
+<input type="hidden" name="service" value="<?php echo $service; ?>">
+<input type="hidden" name="lang" value="<?php echo $lang ?>">
+<input type="hidden" name="sid" value="<?php echo $sid ?>">
+<input type="hidden" name="full_en" value="<?php echo $full_en ?>">    
+  </table>
+    &nbsp;<p>
+    <input type="button" onclick="javascript:submitform();" value="<?php echo $AddtoPatientBill; ?>" name="B1">
+	&nbsp;&nbsp;<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0','bottom'); ?>></a>      
+
+      </center>
+    </div>
+    <p>&nbsp;</p>
+  </form>
+</blockquote>
+
+</body>
+<?
+		 }
+?>
+<!--QUI FINISCE LA AGGIUNTA DI FRANCESCO -->
+</table><!--  End of the outermost table bordering the form -->
+
 <p>
 
 <?php
@@ -1445,15 +1261,14 @@ if($edit)
 {
 
 /* If in edit mode display the control buttons */
+require($root_path.'include/inc_test_request_controls.php');
 
-/*QUESTI DUE REQUIRE RICHIAMANO DEI BOTTONI INVIA E ANNULLA E NOI LI LEVIAMO PER CREARNE DEI NOSTRI CHE FANNO QUELLO CHE CI SERVE*/
-//require($root_path.'include/inc_test_request_controls.php');
-
-//require($root_path.'include/inc_test_request_hiddenvars.php');
+require($root_path.'include/inc_test_request_hiddenvars.php');
 
 ?>
 
 </form>
+
 <?php
 }
 ?>
@@ -1466,25 +1281,8 @@ if($edit)
 </tr>
 </table>        
 <p>
+
 <?php
-if ($edit)
-{
-?>
-<tr>
-<td>
-   <p align="center">
-
-<a href="javascript:inviaDati()"><img src="../../gui/img/control/default/it/it_abschic.gif" border=0 width="103" height="24"  alt="" align="middle"></a>
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="../laboratory/labor.php?lang=it"><img src="../../gui/img/control/default/it/it_close2.gif" border=0 width="103" height="24"  alt="" align="middle"></a>
-
-&nbsp;&nbsp;&nbsp;&nbsp;
-</p>
-</td>
-</tr>
-<?php
-   }
 require($root_path.'include/inc_load_copyrite.php');
 ?>
 <a name="bottom"></a>
