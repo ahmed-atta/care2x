@@ -558,7 +558,7 @@ class PersonInsurance extends Insurance {
 		if(!is_array($array)) return FALSE;
 		while(list($x,$v)=each($array)) {
 		    $index.="$x,";
-		    $values.="$v,";
+		    $values.="'$v',";
 		}
 		    $index=substr_replace($index,'',(strlen($index))-1);
 		    $values=substr_replace($values,'',(strlen($values))-1);

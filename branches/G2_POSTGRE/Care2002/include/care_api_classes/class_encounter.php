@@ -621,7 +621,8 @@ class Encounter extends Notes {
 	*/			
 	function AllEncounterClassesObject(){
 	    global $db;
-		$this->sql="SELECT class_nr,class_id,name,LD_var FROM $this->tb_ec WHERE 1";
+	    //$db->debug=true;
+		$this->sql="SELECT class_nr,class_id,name,LD_var AS \"LD_var\" FROM $this->tb_ec ";
 		if($this->res['aec']=$db->Execute($this->sql)) {
 		    if($this->res['aec']->RecordCount()) {
 			    return $this->res['aec'];
@@ -1047,7 +1048,7 @@ class Encounter extends Notes {
 			elseif($type=='_PID') $cond='pid';
 			 	else return FALSE;
 		$this->sql="SELECT encounter_nr FROM $this->tb_enc 
-						WHERE $cond='$nr' AND NOT (encounter_status LIKE 'cancelled') AND NOT is_discharged AND status NOT IN ($this->dead_stat)";
+						WHERE $cond='$nr' AND encounter_status <> 'cancelled' AND (is_discharged='' OR is_discharged=0) AND status NOT IN ($this->dead_stat)";
 		if($buf=$db->Execute($this->sql)){
 		    if($buf->RecordCount()) {
 				$buf2=$buf->FetchRow();
@@ -1081,14 +1082,17 @@ class Encounter extends Notes {
 	* @return boolean
 	*/
 	function setHistorySeen($encoder='',$enc_nr=''){
-	    global $db;
+	    global $db, $dbtype;
 		if(empty($encoder)) return FALSE;
 		if(!$this->internResolveEncounterNr($enc_nr)) return FALSE;
-		$this->sql="UPDATE $this->tb_enc SET history= CONCAT(history,'\nView ".date('Y-m-d H:i:s')." = $encoder') WHERE encounter_nr=$this->enc_nr";
-		
+		if($dbtype=='mysql')
+			$this->sql="UPDATE $this->tb_enc SET history= CONCAT(history,'\nView ".date('Y-m-d H:i:s')." = $encoder') WHERE encounter_nr=$this->enc_nr";
+		else
+			$this->sql="UPDATE $this->tb_enc SET history= (history || '\nView ".date('Y-m-d H:i:s')." = $encoder') WHERE encounter_nr=$this->enc_nr";
+
 		if($db->Execute($this->sql)) {return true;}
 		   else  {echo $this->sql;return FALSE;}
-	}		
+	}
 	/**
 	* Gets the encounter class' information based on its class_nr key.
 	*
@@ -1405,15 +1409,16 @@ class Encounter extends Notes {
 	* @return boolean
 	*/
 	function _setLocation($enr=0,$type_nr=0,$loc_nr=0,$group_nr,$date='',$time=''){
-		global $HTTP_SESSION_VARS;
+		global $HTTP_SESSION_VARS, $db;
+		$db->debug=1;
 		//if(!($enr&&$type_nr&&$loc_nr)) return FALSE;
 		if(empty($date)) $date=date('Y-m-d');
 		if(empty($time)) $time=date('H:i:s');
 		$user=$HTTP_SESSION_VARS['sess_user_name'];
 		$history="Create: ".date('Y-m-d H:i:s')." ".$user."\n";
-		$this->sql="INSERT INTO $this->tb_location (encounter_nr,type_nr,location_nr,group_nr,date_from,time_from,history,modify_id,create_id,create_time) 
+		$this->sql="INSERT INTO $this->tb_location (encounter_nr,type_nr,location_nr,group_nr,date_from,time_from,history,create_id,create_time)
 						VALUES 
-						('$enr','$type_nr','$loc_nr','$group_nr','$date','$time','$history','$user','$user','".date('YmdHis')."')";
+						('$enr','$type_nr','$loc_nr','$group_nr','$date','$time','$history','$user','".date('YmdHis')."')";
 		//echo $this->sql;
 		//if($this->Transact($this->sql))	return true; else	echo $this->sql;
 		return $this->Transact($this->sql);
@@ -1522,11 +1527,15 @@ class Encounter extends Notes {
 	* @return boolean
 	*/
 	function _setCurrentAssignment($enr,$data='',$act='Modified'){
-		global $HTTP_SESSION_VARS;
+		global $HTTP_SESSION_VARS, $dbtype;
 		if(!$enr||empty($data)) return FALSE;
-		$data.=",history=CONCAT(history,'\n$act ".date('Y-m- H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."'), 
-						modify_id='".$HTTP_SESSION_VARS['sess_user_name']."',
-						modify_time='".date('YmdHis')."'";
+		if($dbtype=='mysql'){
+			$data.=",history=CONCAT(history,'\n$act ".date('Y-m- H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."'), ";
+		}else{
+			$data.=",history=(history || '\n$act ".date('Y-m- H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."'), ";
+		}
+		$data.="	modify_id='".$HTTP_SESSION_VARS['sess_user_name']."',
+				modify_time='".date('YmdHis')."'";
 		$this->sql="UPDATE $this->tb_enc SET $data WHERE encounter_nr=$enr";
 		return $this->Transact($this->sql);
 	}
@@ -2035,20 +2044,24 @@ class Encounter extends Notes {
 	*/
 	function OutPatientsBasic($dept_nr=0){
 		global $db;
+		//$db->debug=1;
 		if($dept_nr) $cond="e.current_dept_nr=$dept_nr AND";
 			else $cond='';
 			//$cond='';
-		$this->sql="SELECT e.encounter_nr,e.pid,e.insurance_class_nr,
-									p.title,p.name_last,p.name_first,p.date_birth,p.sex, p.photo_filename,
-									a.time,a.urgency,
-									i.LD_var,i.name AS insurance_name,
+		$this->sql="SELECT e.encounter_nr,e.pid,e.insurance_class_nr,p.title,p.name_last,p.name_first,p.date_birth,p.sex, p.photo_filename,
+									a.date, a.time,a.urgency, i.LD_var AS \"LD_var\",i.name AS insurance_name,
 									n.nr AS notes
-							FROM ($this->tb_enc AS e, $this->tb_person AS p) 
+							FROM $this->tb_enc AS e  
+									LEFT JOIN $this->tb_person AS p ON e.pid=p.pid
 									LEFT JOIN $this->tb_appt AS a ON e.encounter_nr=a.encounter_nr
 									LEFT JOIN $this->tb_ic AS i ON e.insurance_class_nr=i.class_nr
-									LEFT JOIN $this->tb_notes as n ON e.encounter_nr=n.encounter_nr AND n.type_nr=6
-							WHERE $cond e.encounter_class_nr=2 AND e.pid=p.pid AND NOT e.is_discharged  AND e.in_dept AND e.status NOT IN ($this->dead_stat)
-							GROUP BY e.encounter_nr";
+									LEFT JOIN $this->tb_notes as n ON (e.encounter_nr=n.encounter_nr AND n.type_nr=6)
+							WHERE $cond e.encounter_class_nr=2 AND
+									(e.is_discharged='' OR e.is_discharged=0)  AND 
+									e.in_dept<>'' AND e.in_dept<>0 AND e.status NOT IN ($this->dead_stat)
+							ORDER BY e.encounter_nr";
+							/*GROUP BY e.encounter_nr,e.pid,e.insurance_class_nr,p.title,p.name_last,p.name_first,p.date_birth,p.sex,
+							p.photo_filename,a.time,a.urgency,i.LD_var,i.name, n.nr";*/
 							
         if($this->res['opb']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['opb']->RecordCount()) {
@@ -2080,18 +2093,17 @@ class Encounter extends Notes {
 	*/
 	function createWaitingOutpatientList($dept_nr=0){
 		global $db;
+		//$db->debug=1;
 		if($dept_nr) $cond="AND current_dept_nr='$dept_nr'";
 			else $cond='';
-			//$cond='';
-		//if(empty($key)) return FALSE;
 		$this->sql="SELECT e.encounter_nr, e.encounter_class_nr, e.current_dept_nr,
 									p.pid, p.name_last, p.name_first, p.date_birth, p.sex, 
-									d.nr AS dept_nr, d.name_short, d.LD_var AS dept_LDvar
-				FROM $this->tb_enc AS e 
+									d.nr AS dept_nr, d.name_short, d.LD_var AS \"dept_LDvar\"
+				FROM $this->tb_enc AS e
 					LEFT JOIN $this->tb_person AS p ON e.pid=p.pid
 					LEFT JOIN $this->tb_dept AS d ON e.current_dept_nr=d.nr
-				WHERE e.encounter_class_nr='2' AND NOT e.is_discharged $cond 
-							AND NOT e.in_dept AND NOT (e.encounter_status LIKE 'cancelled')
+				WHERE e.encounter_class_nr='2' AND (e.is_discharged='' OR e.is_discharged=0) $cond
+							AND  (e.in_dept='' OR e.in_dept=0) AND e.encounter_status <> 'cancelled'
 							AND e.status NOT IN ($this->dead_stat)
 				ORDER BY p.name_last";
 		//echo $sql;

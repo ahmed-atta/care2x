@@ -234,7 +234,7 @@ class Personell extends Core {
 	* @param int Department number
 	*/
 	function _getAllPersonell($loc_type_nr,$role_nr=0,$dept_nr){
-	    global $db;
+	    global $db, $dbf_nodate;
 		$row=array();
 		
 		$sql="SELECT a.nr, a.personell_nr, ps.job_function_title, p.name_last, p.name_first, p.date_birth, p.sex
@@ -244,8 +244,8 @@ class Personell extends Core {
 				WHERE a.role_nr=$role_nr 
 					AND a.location_type_nr=$loc_type_nr 
 					AND a.location_nr=$dept_nr
-					AND (a.date_end='' OR a.date_end='0000-00-00' OR a.date_end>='".date('Y-m-d')."')
-					AND NOT (a.status='deleted' OR a.status='hidden' OR a.status='void')
+					AND (a.date_end='$dbf_nodate' OR a.date_end>='".date('Y-m-d')."')
+					AND a.status NOT IN ($this->dead_stat)
 					AND a.personell_nr=ps.nr
 					AND ps.pid=p.pid 
 				ORDER BY a.list_frequency DESC";
