@@ -1,4 +1,8 @@
 <?php
+/* Indonesian Translations by:
+*  Muhammad Panji <Sumodirjo@users.sourceforge.net>
+* Agus Ramdan 
+*/
 $LDPageTitle='Departement';
 $LDDeptTxt='Departement';
 $LDOpenHrsTxt='Jam Kerja';

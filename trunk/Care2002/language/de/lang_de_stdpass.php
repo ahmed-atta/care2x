@@ -6,9 +6,9 @@ $LDPwNeeded='Passwort erforderlich';
 $LDIntroTo='Einführung in die';
 $LDWhatTo='Wie mache ich was mit';
 
-$LDWrongEntry='Falsche Eingabe';
-$LDNoAuth='Keine Berechtigung';
-$LDAuthLocked='Zugang gesperrt';
+$LDWrongEntry='Falsche Eingabe!';
+$LDNoAuth='Sie haben keine Zugangsberechtigung!';
+$LDAuthLocked='Ihre Zugangsberechtigung ist gesperrt!';
 
 $LDEdit='Bearbeiten';
 $LDNewData='Eingabe';
@@ -120,4 +120,7 @@ $LDInsuranceCoManager='Versicherer-Verwaltung';
 $LDAddressMngr='Addressenverwaltung';
 /* 2003-04-30 EL*/
 $LDBilling='eComBill';
+/* 2003-05-18 EL */
+$LDPlsContactEDP='Bitte melden Sie sich bei der EDV Abteilung.';
+$LDPlsTryAgain='Bitte versuchen Sie es noch mal.';
 ?>

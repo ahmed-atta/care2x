@@ -109,7 +109,7 @@ $LDProdGroup='Grup produk';
 $LDClk2End='Untuk penyelesaian silahkan klik ini >> ';
 $LDPriceSaved='Beserta produk dan harga disimpan.';
 
-$LDMenuSaved='The menu is saved.';
+$LDMenuSaved='The menu was saved.';
 
 /* 2002-10-12 EL */
 $LD_ddpMMpyyyy='hh.bb.tttt';

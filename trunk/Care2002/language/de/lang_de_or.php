@@ -300,7 +300,7 @@ $LDShowGuideCal='Den Leitkalender zeigen';
 $LDShow='Zeigen';
 $LDPerformance='Leistungen';
 /* 2002-10-13 EL */
-$LDPlsSelectPatientFirst='Suche Sie bitte zuerst den Patient.';
+$LDPlsSelectPatientFirst='Bitte suchen Sie zuerst den Patient.';
 $LD_ddpMMpyyyy='TT.MM.YYYY';
 $LD_yyyyhMMhdd='YYYY-MM-TT';
 $LD_MMsddsyyyy='MM/TT/YYYY';

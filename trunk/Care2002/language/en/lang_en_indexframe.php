@@ -19,6 +19,7 @@ $LDInterEmail='Internet Email';
 $LDSpecials='Special Tools';
 $LDLogin='Login';
 $LDLogout='Logout';
+$LDAppointments='Appointments';
 
 $VersionChgTarget='_top';
 $LDLanguage='Language';
@@ -37,4 +38,6 @@ $LDNorwegian='Norwegian';
 $LDPolish='Polish';
 $LDPortuguese='Portuguese';
 $LDSpanish='Spanish';
+/* 2003-04-28 El */
+$LDDutch='Dutch';
 ?>

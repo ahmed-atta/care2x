@@ -36,7 +36,7 @@ Hij werkt als ICT-adviseur bij een middelgrote gemeente en is daarnaast zelfstan
 
 			<P><img src="../../fotos/credits/are_kristensen.jpg"  border=0  width=135 align=right vspace=10>
 
-			<b>Are Kristensen (NO) verzorgde de Norwegische vertaling van  Care 2002.</b>
+			<b>Are Kristensen (NO) verzorgde de Noors vertaling van  Care 2002.</b>
 
 			<p>
 
@@ -143,8 +143,8 @@ Hij  houdt van computers en heeft er 10 jaar ervaring mee. Daniel is eigenaar va
             width=5 border=0></TD></TR>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-			<P><img src="../../gui/img/common/default/pixel.gif"   border=0  width=135 align=right vspace=10>
-			<b> Thomas Wiedman (Duitsland) heeft bijgedragen aan:</b>
+			<P><img src="../../fotos/credits/thomas_wiedmann.jpg"   border=0  align=right vspace=10>
+			<b> Thomas Wiedmann (Duitsland) heeft bijgedragen aan:</b>
 			<p><font size=1>
 			Volledig testen <br>
 			Oplossen van fouten<br>
@@ -155,7 +155,7 @@ Hij  houdt van computers en heeft er 10 jaar ervaring mee. Daniel is eigenaar va
 		Thomas Wiedmann is sinds lange tijd sofware ontwikkelaar en werkt in de Duitse stad Stuttgard. Sinds 7 jaar werkt hij met Gupta Team Developer en IBM DB2  en is daarnaast ook  IBM Certified UDB DB2 Administrator. Lees meer over DB2 in zijn boek book "DB2" ISBN 3-932311-80-9. Hij schrijft voor TOOLBOX (www.toolbox-mag.de),
 			een Duits blad voor ontwikkelaars.
 
-			<P><a href="mailto:tho123@users.sourceforge.net"><u>Contact leggen met Tomas Wiedman kan hier.</u></a>
+			<P><a href="mailto:tho123@users.sourceforge.net"><u>Contact leggen met Thomas Wiedmann kan hier.</u></a>
 </TD></TR></TBODY></TABLE>
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>

@@ -16,7 +16,7 @@ require_once('../../include/inc_vars_resolve.php');
             width=5 border=0></TD></TR>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-			<P><img src="../../gui/img/control/default/<?php echo $lang ?>/<?php echo $lang ?>_x-blank.gif"  border=0  width=135 align=right vspace=10>
+			<P><img src="../../fotos/credits/thomas_wiedmann.jpg"  border=0   align=right vspace=10>
 			<b>Thomas Wiedmann (DE) hat u.a. folgendes zu dem Projekt beigetragen:</b>
 			<p><font size=1>
 		     Javascripts zur Validierung von Datum & Zahlen<br>
@@ -33,6 +33,7 @@ require_once('../../include/inc_vars_resolve.php');
 			für Software-Entwickler (www.toolbox-mag.de).
 
 			<P><a href="mailto:tho123@users.sourceforge.net"><u>Thomas Wiedmann kann hier kontaktiert werden.</u></a>
+			<br><a href="http://www.twiedmann.de" target="_new"><u>Mehr Info bei www.twiedmann.de</u></a>
 </TD></TR></TBODY></TABLE>
 
 <hr>
@@ -44,7 +45,7 @@ require_once('../../include/inc_vars_resolve.php');
             width=5 border=0></TD></TR>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-			<P><img src="../../gui/img/control/default/<?php echo $lang ?>/<?php echo $lang ?>_x-blank.gif"  border=0  width=135 align=right vspace=10>
+			<P><img src="../../gui/img/common/default/pixel.gif"  border=0  width=135 align=right vspace=10>
 			<b>Nino Novak (DE) hat die deutsche Fassung von www.care2x.com komplett überarbeitet.</b>
 			<p>
 			Nino Novak ist ein einsamer alter Cowboy, der besser schießen kann als denken. Manchmal
@@ -64,7 +65,7 @@ require_once('../../include/inc_vars_resolve.php');
             width=5 border=0></TD></TR>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-			<P><img src="../../gui/img/control/default/<?php echo $lang ?>/<?php echo $lang ?>_x-blank.gif"  border=0  width=135 align=right vspace=10>
+			<P><img src="../../gui/img/common/default/pixel.gif" border=0  width=135 align=right vspace=10>
 			<b>Daniele Frijia (DE) hat die Sicherheitsaspekten des Programms durchcheckt.</b>
 			<br>
 			Er hat u.a. folgendes beigetragen:<p>
@@ -91,7 +92,7 @@ require_once('../../include/inc_vars_resolve.php');
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/giuseppe_scarpi.jpg"  border=0  width=135 align=right vspace=10>
-			<b>Die italienische Fassung von Care 2002 wurde von  Giuseppe Scarpi bearbeitet.</b>
+			<b>Die italienische Fassung von Care 2002 wurde von  Giuseppe Scarpi (IT) bearbeitet.</b>
 			<p>
 			Giuseppe Scarpi wurde vor 35 Jahren in Rom in Italien geboren. 
 			<p>Er ist Diplom Elektroengineur und hat schon bei mehreren biomedizinische Firmen gearbeitet wo er
@@ -114,7 +115,7 @@ etwas nimmt, sollte man etwas in gleicher Proportion zurückgeben."</i>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/gabriele_cicala.jpg"  border=0  align=right vspace=10>
-			<b>Die italienische Fassung von www.care2x.com wurde von  Gabriele Cicala  bearbeitet.</b>
+			<b>Die italienische Fassung von www.care2x.com wurde von  Gabriele Cicala  (IT) bearbeitet.</b>
 			
 			<P><a href="mailto:gabcicala@tiscali.it"><u>Gabriele Cicala kann hier kontaktiert werden.</u></a>
 </TD></TR></TBODY></TABLE>
@@ -129,7 +130,7 @@ etwas nimmt, sollte man etwas in gleicher Proportion zurückgeben."</i>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/daniel_zilli.jpg"  border=0  align=right vspace=10>
-			<b>Die brazilianishe Fassung von Care 2002 und www.care2x.com wurde von  Daniel Zilli bearbeitet.</b>
+			<b>Die brazilianishe Fassung von Care 2002 und www.care2x.com wurde von  Daniel Zilli (PT-BR)  bearbeitet.</b>
 			
 			<P><a href="mailto:danielz@cco.matrix.com.br"><u>Daniel Zilli kann hier kontaktiert werden.</u></a>
 </TD></TR></TBODY></TABLE>
@@ -141,8 +142,20 @@ etwas nimmt, sollte man etwas in gleicher Proportion zurückgeben."</i>
 
 <table border=0 cellspacing=1 cellpadding=1>
   <tr>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Abrar H. Hazariki (IN)</font></nobr>&nbsp;</td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;eComBill</font></td>
+  </tr>
+  <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Agus M. Ramdan (ID)</font></nobr>&nbsp;</td>
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Revisionen am code, care2x.com CMS</font></td>
+  </tr>
+  <tr>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Alfredo Rodrigues (PT)</font></nobr>&nbsp;</td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Übersetzung auf portugiesisch</font></td>
+  </tr>
+  <tr>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Are Kristensen (NO)</font></nobr>&nbsp;</td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Übersetzung auf norwegisch</font></td>
   </tr>
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Daniele Frijia (DE)</font></nobr>&nbsp;</td>
@@ -173,6 +186,10 @@ etwas nimmt, sollte man etwas in gleicher Proportion zurückgeben."</i>
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Übersetzung auf polnisch</font></td>
   </tr>
   <tr>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Petr Roupec (CZ)</font></nobr>&nbsp;</td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Übersetzung auf tschechisch</font></td>
+  </tr>
+  <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Prantar Deka (IN)</font></nobr>&nbsp;</td>
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Generisches Abrechnungsmodul</font></td>
   </tr>
@@ -189,7 +206,7 @@ etwas nimmt, sollte man etwas in gleicher Proportion zurückgeben."</i>
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Testen, Debuggen, Validationskripten</font></td>
   </tr>
   <tr>
-    <td  colspan=2>&nbsp;<br><font face="verdana,arial" size=1 color="#0000ff">Achtung: Diese Liste ist unvollständig. Weitere Anerkennungen kommen noch dazu.</font></td>
+    <td  colspan=2>&nbsp;<br><font face="verdana,arial" size=1 color="#0000ff">Achtung: Diese Liste ist unvollständig. Weitere Credits kommen noch dazu.</font></td>
   </tr>
 </table>
 

@@ -198,15 +198,27 @@ $LDDisplay1Txt="Switch over to the display with the menu always on the left fram
 $LDDisplay2="Display 2";
 $LDDisplay2Txt="Switch over to the display with the menu on a floating frame. ";
 
-$LDNewPwDiffer="The new passwords differ from each other.<br> Please enter the new password again.";
+$LDNewPwDiffer="Password yang baru bebeda satu sama lain.<br> Silakan masukkan password baru lagi.";
 /* 2003-03-22 EL*/
-$LDPersonellMngmnt='Personell Management';
-$LDPersonellMngmntTxt='Tools and functions for managing personell';
+$LDPersonellMngmnt='Manajemen Perosnalia';
+$LDPersonellMngmntTxt='Perangkat dan fungsi untuk memenej peronel';
 /* 2003-04-25 EL */
 $LDBilling='eCombill';
-$LDBillingTxt='Bill patient, create billable items, generate bill reports, etc.';
-$LDInsuranceCoMngr='Insurance Co. Manager';
-$LDInsuranceCoMngrTxt='Enter new, edit insurance company data';
-$LDAddressMngr='Address Manager';
-$LDAddressMngrTxt='Enter, list, edit, & update address data';
+$LDBillingTxt='Tagihan patient, Membuat item bisa ditagih, membuat laporan tagihan, dll.';
+$LDInsuranceCoMngr='Manajer Perusahaan Asuransi';
+$LDInsuranceCoMngrTxt='Masukan baru, edit data perusahaan asuransi';
+$LDAddressMngr='Manajer Alamat';
+$LDAddressMngrTxt='Masukkan, daftar, edit, & mutakhirkan data alamat';
+/* 2003-05-18 EL */
+$LDUserConfigOpt='Configuration options';
+$LDUserConfigOptTxt='User options for background & text colors, mascots, avatar, etc.';
+$LDMascotOpt='Mascot options';
+$LDMascotOptTxt='Hide, show, or select prompt mascots.';
+$LDMascot='Mascot';
+$LDSampleMascot='Sample mascots';
+/* 2003-04-24 EL*/
+$LDGUITemplate='GUI Template option';
+$LDGUITemplateTxt='Select a GUI (graphic user interface) template';
+$LDGUITheme='GUI Theme';
+$LDTheme='Theme';
 ?>

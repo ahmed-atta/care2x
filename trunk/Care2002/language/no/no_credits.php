@@ -199,7 +199,7 @@ Grunnen til at han ble med på 'Åpen kildekode' er: <br><i>"En ideel verdan kan b
 
           <TD vAlign=top><font face="verdana,arial" size=2>
 
-			<P><img src="../../gui/img/control/default/<?php echo $lang ?>/<?php echo $lang ?>_x-blank.gif"  border=0  width=135 align=right vspace=10>
+			<P><img src="../../fotos/credits/thomas_wiedmann.jpg"  width=137 border=0  align=right vspace=10>
 
 			<b>Thomas Wiedmann (DE) bistod med ff:</b>
 
@@ -219,7 +219,7 @@ Grunnen til at han ble med på 'Åpen kildekode' er: <br><i>"En ideel verdan kan b
 
 			Thomas Wiedmann har utviklet programmvare i lengre tid og arbeider i Stuttgart, Tyskland. Han har arbeidet med Gupta Team Developer og IBM DB2 i 7 år og er en IBM sertifisert UDB DB2 Administrator. Les mer om DB2 i hans bok	"DB2" ISBN 3-932311-80-9. Han er forfatter for TOOLBOX (www.toolbox-mag.de),
 
-			a Geman developer magazine.
+			a German developer magazine.
 
 		
 
@@ -249,7 +249,7 @@ Grunnen til at han ble med på 'Åpen kildekode' er: <br><i>"En ideel verdan kan b
 
           <TD vAlign=top><font face="verdana,arial" size=2>
 
-			<P><img src="../../gui/img/control/default/<?php echo $lang ?>/<?php echo $lang ?>_x-blank.gif"  border=0  width=135 align=right vspace=10>
+			<P><img src="../../gui/img/common/default/pixel.gif"  border=0  width=135 align=right vspace=10>
 
 			<b>Nino Novak (DE) editerte den tyske versjonen av www.care2x.com.</b>
 
@@ -283,7 +283,7 @@ Grunnen til at han ble med på 'Åpen kildekode' er: <br><i>"En ideel verdan kan b
 
           <TD vAlign=top><font face="verdana,arial" size=2>
 
-			<P><img src="../../gui/img/control/default/<?php echo $lang ?>/<?php echo $lang ?>_x-blank.gif"  border=0  width=135 align=right vspace=10>
+			<P><img src="../../gui/img/common/default/pixel.gif"  border=0  width=135 align=right vspace=10>
 
 			<b>Patxi Gomaríz (ES) oversatte Care2x til spansk.</b>
 
@@ -317,7 +317,7 @@ Grunnen til at han ble med på 'Åpen kildekode' er: <br><i>"En ideel verdan kan b
 
           <TD vAlign=top><font face="verdana,arial" size=2>
 
-			<P><img src="../../gui/img/control/default/<?php echo $lang ?>/<?php echo $lang ?>_x-blank.gif"  border=0  width=135 align=right vspace=10>
+			<P><img src="../../gui/img/common/default/pixel.gif"  border=0  width=135 align=right vspace=10>
 
 			<b>Daniele Frijia (DE) sjekket sikkerheten på Care 2002.</b>
 

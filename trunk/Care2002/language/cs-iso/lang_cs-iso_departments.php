@@ -35,4 +35,13 @@ $LDTechnicalMaintenance='Technical Maintenance';
 $LDITDepartment='IT Department';
 $LDGeneralAmbulatory='General Ambulatory';
 $LDBloodBank='Krevní Banka';
+$LDNursing='Sestry';
+/* 2003-04-27 EL */
+$LDMedical='Medical';
+$LDSupport='Non-medical';
+$LDNews='News';
+$LDDepartment='Department';
+$LDPressRelations='Presse';
+/* 2003-05-19 EL */
+$LDSelectDept='Select department';
 ?>

@@ -2,7 +2,7 @@
 
 require($root_path.'include/inc_credits_openwin.php');
 ?>
- <font size="1" face="Arial" color="gray"> La version française est développée et managée par Mat&#277;j Hausenblas.
+ <font size="1" face="Arial" color="gray"> La version française est développée et managée par Matej Hausenblas.
 Veuillez bien diriger toutes les questions concernant la version française 
 vers lui. Version Beta 1.0.04 </font> <font size="1" face="Arial" color="gray">CARE 2002 est écrite et
 distribuée librement sous la licence GNU General Public License. Pour

@@ -30,9 +30,13 @@ $LDFindPersonell='Mecari Personil';
 $LDPersonalID='ID Personil';
 $LDAssignDoctorDept='Tugaskan sebagai dokter di sebuah departemen';
 $LDAssignNurseDept='Tugaskan sebagai perawat di sebuah departemen';
-$LDAssignNurseDept='Tugaskan sebagai perawat di sebuah departemen';
 $LDAddPhoneInfo='Sisipkan Info elepon/beeper';
 $LDOptions4Employee='Opsi untuk pegawai ini';
 $LDPayrollOptions='Opsi Pembayaran';
 $LDLegalDocuments='Dokumen resmi';
+$LDShowPersonalData='Show personal data';
+/* 2003-05-17 EL */
+$LDEnterEmployeeSearchKey='Enter search keyword: e.g. Employment-Nr., first name, or family name.';
+$LDPersonnelManagement='Personnel Management';
+$LDNewEmployee='New employee';
 ?>

@@ -173,11 +173,12 @@ $LDConfirmUnlock='Realmente desean abrir la \'+b+\' cama en la habitación \'+r+\
 $LDConfirmDelete='Realmente deseo suprimir \'+t+\' \'+n+\' de la habitación \'+r+b+\'?';
 $LDConfirmLock='¿Realmente desea bloquear esta cama?';
 $LDClk2Occupy='Click para ocupar esta cama';
-$LDInsurance=array(
+/*$LDInsurance=array(
 								x=>'Pago',
 								privat=>'Privado',
 								kasse=>'General'
 								);
+*/
 $LDSave='Guardar';
 $LDNurse='Enfermera';
 $LDYesSure='Sí, estoy seguro. Alta al paciente.';
@@ -355,4 +356,13 @@ $LDNoDiagReport='No diagnostic report available.';
 /* 2003-03-23 EL */
 $LDNursesList='Nurses\' List';
 $LDNursesListTxt='List, View, Create, & Edit Nurses\' List';
+/* 2003-04-18 */
+$LDInsurance='General';
+$LDPrivate='Privado';
+$LDSelfPay='Pago';
+/* 2003-04-21 EL */
+$LDRoom='Room';
+$LDAdm_Nr='Adm.Nr.';
+$LDStatus='Status';
+$LDInWard='In Ward';
 ?>

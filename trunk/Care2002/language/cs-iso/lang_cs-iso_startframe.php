@@ -55,4 +55,6 @@ $LDSubmitNews='Publikovat zprávy';
 $LDEditNews='Editace a publikace zpráv pomocí on-line editoru';
 /* 2002-10-17 EL */
 $LDCredits='Credits';
+/* 2003-05-24 EL */
+$LDPublicItems='Public items';
 ?>

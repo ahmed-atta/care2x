@@ -249,4 +249,9 @@ $LDInactive='Inactive';
 $LDActive='Active';
 $LDDeptStatus='Department\'s status';
 $LDRecordStatus='Record\'s status';
+/* 2003-03-30 EL*/
+$LDConfigOptions='Configuration Options';
+$LDDoesSurgeryOp='Does operative surgery?';
+$LDList='List';
+$LDUpdate='Update';
 ?>

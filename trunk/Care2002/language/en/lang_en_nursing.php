@@ -378,4 +378,6 @@ $LDSureReopenWard='Are you sure you want to reopen this ward?';
 $LDShortDescription='Short description';
 $LDRoomShortDescription='Room\'s short description';
 $LDRoomNotCreated='Rooms not yet created';
+/* 2003-05-10 EL */
+$LDChangeRoom='Change of room';
 ?>

@@ -42,4 +42,6 @@ $LDSupport='Non-medical';
 $LDNews='News';
 $LDDepartment='Department';
 $LDPressRelations='Presse';
+/* 2003-05-19 EL */
+$LDSelectDept='Select department';
 ?>

@@ -1,6 +1,6 @@
 <?php
 $LDPlsFindPersonFirst='Please find the person first';
-$LDSearchPersonell='Search a personell';
+$LDSearchPersonell='Search an employee';
 $LDPersonRegister='Person Registration';
 $LDShortID='Short ID';
 $LDJobNr='Job Nr';
@@ -19,20 +19,24 @@ $LDNrWorkDay='Nr. of Workdays';
 $LDNrWeekHour='Nr. of Weekhours';
 $LDNrVacationDay='Nr. of Vacation days';
 $LDMultipleEmployer='Multiple employed?';
-$LDPersonellNr='Personell Nr.';
+$LDPersonellNr='Employee Nr.';
 $LDPersonCurrentlyEmployed='Person is currently employed';
 $LDRecordedBy='Recorded by';
 $LDNrDependent='Nr. of Dependents';
-$LDPersonellData='Personell Data';
-$LDEnterNewEmployment='Enter new personell\'s data';
+$LDPersonellData='Employee\'s Data';
+$LDEnterNewEmployment='Enter new employee\'s data';
 $LDRegNewPerson='Register new person\'s basic data';
-$LDFindPersonell='Find a personell';
+$LDFindPersonell='Find an employee';
 $LDPersonalID='Personal ID';
 $LDAssignDoctorDept='Assign as DOCTOR to a department';
-$LDAssignNurseDept='Assign as NURSE to a department';
 $LDAssignNurseDept='Assign as NURSE to a department';
 $LDAddPhoneInfo='Add phone/beeper info';
 $LDOptions4Employee='Options for this employee';
 $LDPayrollOptions='Payroll options';
 $LDLegalDocuments='Legal documents';
+$LDShowPersonalData='Show personal data';
+/* 2003-05-17 EL */
+$LDEnterEmployeeSearchKey='Enter search keyword: e.g. Employment-Nr., first name, or family name.';
+$LDPersonnelManagement='Personnel Management';
+$LDNewEmployee='New employee';
 ?>

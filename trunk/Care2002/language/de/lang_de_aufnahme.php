@@ -50,14 +50,14 @@ $LDErrorS='In <font color=red>rot</font> gekennzeichneten Feldern fehlen Informa
 
 $fieldname=array('Pat.nummer','Name','Vorname','Geburtsdatum','Optionen');
 
-$LDEntryPrompt='Stichwort eingeben. z.B. Fallnummer, Name, Vorname, Geburtsdatum, oder Abkürzung u.s.w.';
+$LDEntryPrompt='Stichwort eingeben. z.B. Fallnummer, Name, Vorname, Geburtsdatum, oder Abkürzung';
 $LDSEARCH='SUCHEN';
 $LDAdmWantEntry='Ich möchte einen Patient aufnehmen';
 $LDAdmWantSearch='Ich suche einen Patient';
 $LDAdmWantArchive='Ich möchte zum Archiv';
 
 /**************** note the ' ~nr~ ' must not be erased it will be replaced by the script with the number of search results ******/
-$LDSearchFound='Es wurde(n) <font color=red><b>~nr~</b></font> Patientendaten gefunden.';
+$LDSearchFound='Es wurde(n) <font color=red><b>~nr~</b></font> relevante daten gefunden.';
 
 $LDShowData='Zeige Daten';
 $LDPatientData='Aufnahmedaten';
@@ -144,7 +144,7 @@ $LD_ddpMMpyyyy='TT.MM.JJJJ';
 $LD_yyyyhMMhdd='JJJJ-MM-TT';
 $LD_MMsddsyyyy='MM/TT/JJJJ';
 /* 2002-10-13 EL */
-$LDPlsSelectPatientFirst='Bitte, suchen Sie zuerst den Patient.';
+$LDPlsSelectPatientFirst='Bitte, suchen Sie zuerst die Person.';
 /* 2002-11-30 EL */
 $LDPatientRegister='Personenanmeldung';
 $LDRegDate='Anmeldedatum';
@@ -198,7 +198,7 @@ $LDPatientDev='Entwicklung';
 $LDPatientDevTxt=$LDESE.', Anzeigen von Patientenentwicklungsmeldung';
 $LDWtHt='Gewicht & Grösse';
 $LDWtHtTxt=$LDESE.' von Gewicht & Grössen';
-$LDPregnancies='Pregnancies';
+$LDPregnancies='Schwangerschaften';
 $LDPregnanciesTxt=$LDESE.' von Schwangerschaftsdaten';
 $LDBirthDetails='Geburtsinformation';
 $LDBirthDetailsTxt=$LDESE.' von Geburtsinformation';
@@ -249,7 +249,7 @@ $LDOptions='Optionen';
 $LDSearchFoundAdmit='Ich habe <font color=red><b>~nr~</b></font> relevante Aufnahmedaten gefunden.';
 $LDPatientNr='PatientenNr.';
 $LDNoRecordYet='~tag~ hat noch kein ~obj~ .';
-$LDNoRecordFor='Noch kein ~obj~  von ~tag~ .';
+$LDNoRecordFor='Noch keine Daten vorhanden.';
 $LDRegistrationNr='AnmeldungsNr.';
 $LDDate='Datum';
 $LDType='Art';
@@ -328,5 +328,8 @@ $LDNoPendingApptToday='Keine Termine heute vorhanden.';
 /* 2003-04-27 EL */
 $LDOptsForPatient='Optionen für diesen Patient';
 /* 2003-05-06 EL */
-$LDRegisterNewPerson='Eine neue person aufnehmen';
+$LDRegisterNewPerson='Eine neue Person aufnehmen';
+/* 2003-05-17 EL */
+$LDEnterPersonSearchKey='Stichwort eingeben: z.B. Personen-Nr. (PID), Name, oder Vorname';
+$LDPersonData='Personendaten';
 ?>

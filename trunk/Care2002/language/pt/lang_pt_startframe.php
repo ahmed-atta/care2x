@@ -32,10 +32,12 @@ $LDMore='Mais artigos';
 
 $LDEditTitle='Cabeçalho';
 $LDNewsDummy=array(1=>'primeiro',2=>'segundo',3=>'terceiro',4=>'quarto');
-
-$LDNoFrame='Este site utiliza frames para optimizar o seu funcionamento. Por favor instale um browser apropriado. Recomendamos
+/*$LDNoFrame='Este site utiliza frames para optimizar o seu funcionamento. Por favor instale um browser apropriado. Recomendamos
 						a utilização do Microsoft Internet Explorer a partir da versão 5.0. Por favor active a execução de javascript e 
 						a aceitação automática de cookies';
+*/
+$LDNoFrame='Este site utiliza frames para optimizar o seu funcionamento. Por favor instale um browser apropriado. 
+					 Por favor active a execução de javascript e a aceitação automática de cookies'; // Removed the MSIE ref. 2003-04-25 Elpidio
 						
 $LDClk2Write='Clique aqui para editar';
 
@@ -55,4 +57,6 @@ $LDSubmitNews='Submeter Notícias';
 $LDEditNews='Editar e submeter notícias através do editor online';
 /* 2002-10-17 EL */
 $LDCredits='Créditos';
+/* 2003-05-24 EL */
+$LDPublicItems='Public items';
 ?>

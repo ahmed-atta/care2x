@@ -55,7 +55,8 @@ $LDAdmWantSearch='Sto cercando un paziente';
 $LDAdmWantArchive='Devo cercare in archivio';
 
 /**************** note the ' ~nr~ ' must not be erased it will be replaced by the script with the number of search results ******/
-$LDSearchFound='La ricerca ha trovato <font color=red><b>~nr~</b></font> dati relativi al paziente.';
+//$LDSearchFound='La ricerca ha trovato <font color=red><b>~nr~</b></font> dati relativi al paziente.';
+$LDSearchFound='La ricerca ha trovato <font color=red><b>~nr~</b></font> dati relativi.';
 
 $LDShowData='Visualizza dati';
 $LDPatientData='Dati paziente';
@@ -132,20 +133,20 @@ $LDServiceType='Tipo di servizio';
 
 $LDClick2Print='Selezionare le etichette con codice a barre per stampare';
 
-$LDEnterDiagnosisNote="Attach links to diagnosis related notes & publications:";
-$LDEnterTherapyNote="Attach links to therapy related notes & publications:";
-$LDSeeDiagnosisNote="Diagnosis related notes & publications:";
-$LDSeeTherapyNote="Therapy related notes & publications:";
-$LDMakeBarcodeLabels="Make barcode labels";
+$LDEnterDiagnosisNote='Attach links to diagnosis related notes & publications:';
+$LDEnterTherapyNote='Attach links to therapy related notes & publications:';
+$LDSeeDiagnosisNote='Diagnosis related notes & publications:';
+$LDSeeTherapyNote='Therapy related notes & publications:';
+$LDMakeBarcodeLabels='Make barcode labels';
 
-$LDPlsEnterDept="<b>Please enter your department, clinic, or work area.</b><br>(e.g. PLOP, Internal Med2, or M4A, etc.)";
-$LDOkSaveNow="OK save now";
+$LDPlsEnterDept='<b>Please enter your department, clinic, or work area.</b><br>(e.g. PLOP, Internal Med2, or M4A, etc.)';
+$LDOkSaveNow='OK save now';
 
-$LD_ddpMMpyyyy="gg.mm.aaaa";
-$LD_yyyyhMMhdd="aaaa-mm-gg";
-$LD_MMsddsyyyy="mm/gg/aaaa";
+$LD_ddpMMpyyyy='gg.mm.aaaa';
+$LD_yyyyhMMhdd='aaaa-mm-gg';
+$LD_MMsddsyyyy='mm/gg/aaaa';
 /* 2002-10-13 EL */
-$LDPlsSelectPatientFirst='Please find the patient first.';
+$LDPlsSelectPatientFirst='Please find the person first.';
 /* 2002-11-30 EL */
 $LDPatientRegister='Patient registration';
 $LDRegDate='Registration date';
@@ -163,7 +164,7 @@ $LDProvState='Province/State';
 $LDRegion='Region';
 $LDCountry='Country';
 $LDCitizenship='Citizenship';
-$LDCivilStatus='Civil status'; /* Civil status = married, single, divorced, widow */
+$LDCivilStatus='Stato civiles'; /* Civil status = married, single, divorced, widow */
 $LDSingle='Single';
 $LDMarried='Married';
 $LDDivorced='Divorced';
@@ -330,4 +331,7 @@ $LDNoPendingApptToday='There is no pending appointment today.';
 $LDOptsForPatient='Options for this patient';
 /* 2003-05-06 EL */
 $LDRegisterNewPerson='Register a new person';
+/* 2003-05-17 EL */
+$LDEnterPersonSearchKey='Enter search keyword: e.g. PID, first name, or family name';
+$LDPersonData='Personal data';
 ?>

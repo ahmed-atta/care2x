@@ -53,4 +53,6 @@ $LDSubmitNews='Voeg nieuws toe';
 $LDEditNews='Wijzig en voeg nieuws toe via de online editor';
 /* 2002-10-17 EL */
 $LDCredits='Credits';
+/* 2003-05-24 EL */
+$LDPublicItems='Public items';
 ?>

@@ -34,10 +34,12 @@ $LDMore="Dalszy ci¹g";
 
 $LDEditTitle="Nag³ówek";
 $LDNewsDummy=array(1=>"pierwszy",2=>"drugi",3=>"trzeci",4=>"czwarty");
-
-$LDNoFrame='Ta strona u¿ywa ramki do optymalnej pracy. Proszê zainstalowaæ odpowiedni¹ przegl¹darkê. Zalecamy pos³ugiwanie siê
+/*$LDNoFrame='Ta strona u¿ywa ramki do optymalnej pracy. Proszê zainstalowaæ odpowiedni¹ przegl¹darkê. Zalecamy pos³ugiwanie siê
 						Microsoft Internet Explorer wersje od 5.0 wzwy¿. Proszê uaktywniæ  Javascript (JScript) oraz
  						w³¹czyæ automatyczny odbiór cookies';
+*/
+$LDNoFrame='Ta strona u¿ywa ramki do optymalnej pracy. Proszê zainstalowaæ odpowiedni¹ przegl¹darkê. 
+						Proszê uaktywniæ  Javascript (JScript) oraz 	w³¹czyæ automatyczny odbiór cookies'; // Removed the MSIE ref. 2003-04-25 Elpidio
 						
 $LDClk2Write="Kliknij by edytowaæ";
 
@@ -57,5 +59,7 @@ $LDSubmitNews="Zatwierdzone wiadomo¶ci";
 $LDEditNews="Edytuj i zatwierdz wiadomo¶æ online poprzez editor";
 /* 2002-10-17 EL */
 $LDCredits='Kredyty';
+/* 2003-05-24 EL */
+$LDPublicItems='Public items';
 
 ?>

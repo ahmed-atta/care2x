@@ -6,9 +6,9 @@ $LDPwNeeded='Vennligst angi passord';
 $LDIntroTo='Beksrivelse på editering av nyhetsartikler i';
 $LDWhatTo='Hva og hvordan kan jeg editere nyhetsartikler i';
 
-$LDWrongEntry='Feil innlegg!';
-$LDNoAuth='Ingen tilgangsrettigheter';
-$LDAuthLocked='Tilgangsrettighet stengt.';
+$LDWrongEntry='Du har tastet feil!';
+$LDNoAuth='Du har ingen tilgang!';
+$LDAuthLocked='Dine aksess rettigheter er låst!';
 
 $LDNewData='Ny Data';
 $LDEdit='Editer';
@@ -119,4 +119,9 @@ $LDAppointments='Appointments';
 /* 2003-04-27 */
 $LDInsuranceCoManager='Insurance Company Manager';
 $LDAddressMngr='Address Manager';
+/* 2003-04-30 EL*/
+$LDBilling='eComBill';
+/* 2003-05-18 EL */
+$LDPlsContactEDP='Vennligst kontakt IT avdelingen.';
+$LDPlsTryAgain='Vennligst prøv igjen';
 ?>

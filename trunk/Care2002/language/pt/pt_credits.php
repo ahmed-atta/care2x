@@ -9,6 +9,39 @@ require_once('../../include/inc_vars_resolve.php');
 <body onLoad="if(window.focus) window.focus()">
 <font face="verdana,arial" size=6 color="#0000ff">Créditos</fonts>
 <hr>
+<table cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <tbody>
+        <tr>
+          <td><img height=15 
+            src="../../gui/img/common/default/pixel.gif" 
+            width=5 border=0></td></tr>
+        <tr>
+          <td vAlign=top><font face="verdana,arial" size=2>
+			<p><img src="../../fotos/credits/lopo_l_almeida.jpg"  
+                                width=135 height=170 border=0  align=right vspace=10>
+			<b>Lopo Lencastre de Almeida (PT)</b> is one of the most productive developers. 
+			Some of his contributions to the project are:
+                        <p><font size=1>
+			Marketing, Promotion and Public Relations<br>
+			Web and Logo design<br>
+			Implementation &amp; maintenance of several web tools (Bugtracker, Forum, etc.)<br>
+			Implementation &amp; maintenance of the new web site (almost done)<br>
+			Forum moderation and administration<br>
+			Code finder/digger<br>
+			Consultations on PHP<br>
+			Advises on security<br>
+			Abstraction Layers Advisor (DB, Template, etc.)<br>
+			Debugging<br>
+			Ideas, discussions, hints, tips, etc.
+			</font><p>
+			Lopo L. de Almeida was born in Angola in 1966. He is working in the computer sector - ranging from commercial automation 
+			to industrial automation - as a software developer and interface designer for more than 16 years now . During the last 5 years he 
+			worked mostly  in web development and company management. He is the CEO/CTO of HumanEasy - a 
+			partner of Care2002 project in charge of its <b>Public Relations and Marketing Management</b>.<br>
+			He is also involved in many other GNU/GPL projects; some of them are in use at Care2x's site.<br>
+			<p><a href="http://www.humaneasy.com" target="_blank"><u>Lopo L. de Almeida can be contacted here.</u></a>
+</td></tr></tbody></table>
+<hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
         <TR>
@@ -117,7 +150,7 @@ O Daniel tem uma empresa onde trabalha com produtos para ensino de informática, 
             width=5 border=0></TD></TR>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-			<P><img src="../../gui/img/control/default/<?php echo $lang ?>/<?php echo $lang ?>_x-blank.gif"  border=0  width=135 align=right vspace=10>
+			<P><img src="../../fotos/credits/thomas_wiedmann.jpg"  border=0  width=135 align=right vspace=10>
 			<b>Thomas Wiedmann (DE) contribuiu com:</b>
 			<p><font size=1>
 			Testes completos<br>
@@ -145,7 +178,7 @@ O Daniel tem uma empresa onde trabalha com produtos para ensino de informática, 
             width=5 border=0></TD></TR>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-			<P><img src="../../gui/img/control/default/<?php echo $lang ?>/<?php echo $lang ?>_x-blank.gif"  border=0  width=135 align=right vspace=10>
+			<P><img src="../../gui/img/common/default/pixel.gif"  border=0  width=135 align=right vspace=10>
 			<b>Nino Novak (DE) editou o site www.care2x.com em Alemão.</b>
 			<p>
 			Nino Novak é um pobre e solitário cowboy. Dispara mais depressa do que pensa. As vezes é um pouco inquieto.
@@ -164,7 +197,7 @@ O Daniel tem uma empresa onde trabalha com produtos para ensino de informática, 
             width=5 border=0></TD></TR>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-			<P><img src="../../gui/img/control/default/<?php echo $lang ?>/<?php echo $lang ?>_x-blank.gif"  border=0  width=135 align=right vspace=10>
+			<P><img src="../../gui/img/common/default/pixel.gif"  border=0  width=135 align=right vspace=10>
 			<b>Patxi Gomaríz (ES) traduziu o Care 2002 para Espanhol.</b>
 			<p>
 			Patxi Gomaríz nasceu na primavera de 1966 em Murcia, Espanha. A sua vida e o seu trabalho centram-se principalmente na fotografia,
@@ -184,7 +217,7 @@ O Daniel tem uma empresa onde trabalha com produtos para ensino de informática, 
             width=5 border=0></TD></TR>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-			<P><img src="../../gui/img/control/default/<?php echo $lang ?>/<?php echo $lang ?>_x-blank.gif"  border=0  width=135 align=right vspace=10>
+			<P><img src="../../gui/img/common/default/pixel.gif"  border=0  width=135 align=right vspace=10>
 			<b>Daniele Frijia (DE) verificou o Care 2002 no que diz respeito a segurança.</b>
 			<br>
 			Algumas das suas contribuições:<p>

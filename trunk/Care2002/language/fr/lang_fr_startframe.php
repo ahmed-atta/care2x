@@ -35,10 +35,13 @@ $LDMore="plus sur l`article";
 $LDEditTitle="Titre";
 $LDNewsDummy=array(1=>"premier",2=>"second",3=>"troisième",4=>"quatrième");
 
-$LDNoFrame="Ce site web utilise des cadres afin de fonctionner mieux. Veuillez installer un navigateur approprié. Nous conseillons
+/*$LDNoFrame="Ce site web utilise des cadres afin de fonctionner mieux. Veuillez installer un navigateur approprié. Nous conseillons
 						Microsoft Internet Explorer à partir de la version 5.0. Activez Javascript (JScript) s'il vous plaît et
 						activez la réception automatique des cookies";
-
+*/
+						// Removed the MSIE ref. 2003-04-25 Elpidio
+$LDNoFrame="Ce site web utilise des cadres afin de fonctionner mieux. Veuillez installer un navigateur approprié.  Activez Javascript (JScript) s'il vous plaît et
+						activez la réception automatique des cookies";  
 $LDClk2Write="Cliquez-moi pour éditer";
 
 $LDAlertOldBrowser="Votre navigateur est plus vieux que 5.0!<br> Nous conseillons la version 5.0 et supérieure. <br> L'utilisation des versions plus anciennes peut conduire à
@@ -57,5 +60,7 @@ $LDSubmitNews="Poster des nouvelles";
 $LDEditNews="Éditer et poster les nouvelles via l'éditeur en-ligne";
 /* 2002-10-17 EL */
 $LDCredits='Crédits';
+/* 2003-05-24 EL */
+$LDPublicItems='Public items';
 
 ?>

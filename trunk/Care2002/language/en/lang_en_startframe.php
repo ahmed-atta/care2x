@@ -56,4 +56,6 @@ $LDSubmitNews='Submit News';
 $LDEditNews='Edit & submit news via online editor';
 /* 2002-10-17 EL */
 $LDCredits='Credits';
+/* 2003-05-24 EL */
+$LDPublicItems='Public items';
 ?>

@@ -191,5 +191,16 @@ $LDInsuranceCoMngr='Versicherer-Verwaltung';
 $LDInsuranceCoMngrTxt='Versicherer-Stammdaten eingeben, bearbeiten, aktualisieren';
 $LDAddressMngr='Addressenverwaltung';
 $LDAddressMngrTxt='Neue Adressendaten eingeben, bearbeiten, aktualisieren';
-
+/* 2003-05-18 EL */
+$LDUserConfigOpt='Einstellungen';
+$LDUserConfigOptTxt='Benutzerdefinierbare Einstellungen z.B. Hintergrund- bzw. Textfarbe, Mascottchen, u.v.m.';
+$LDMascotOpt='Mascottchen - Einstellungen';
+$LDMascotOptTxt='Anzeige von Mascottchen aus- bzw. einschalten oder Auswahl';
+$LDMascot='Mascottchen';
+$LDSampleMascot='Vorschau';
+/* 2003-04-24 EL*/
+$LDGUITemplate='GUI Themen';
+$LDGUITemplateTxt='Eine GUI (graphic user interface) Theme auswählen ';
+$LDGUITheme='GUI Theme';
+$LDTheme='Theme';
 ?>

@@ -6,9 +6,9 @@ $LDPwNeeded='Prosím zadejte u¾ivatelské jméno a heslo';
 $LDIntroTo='Návod na editaci nových zpráv v sekci';
 $LDWhatTo='Co a jak  mohu editovat v sekci ';
 
-$LDWrongEntry='©patnì zadané polo¾ky!';
-$LDNoAuth='Nemáte dostateèná pøístupová práva';
-$LDAuthLocked='Prosím kontaktujte administrátora systému';
+$LDWrongEntry='Nesprávné údaje!';
+$LDNoAuth='Nemáte dostateèná pøístupová práva!';
+$LDAuthLocked='Vá¹ úèet byl uzamèen!';
 
 $LDNewData='Nové údaje';
 $LDEdit='Editovat';
@@ -113,4 +113,12 @@ $LDLoggedOut='Odhlá¹en';
 /* 2003-03-18 EL */
 $LDNursesList='Nurses\' List';
 $LDAppointments='Appointments';
+/* 2003-04-27 */
+$LDInsuranceCoManager='Insurance Company Manager';
+$LDAddressMngr='Address Manager';
+/* 2003-04-30 EL*/
+$LDBilling='eComBill';
+/* 2003-05-18 EL */
+$LDPlsContactEDP='Prosím kontaktuje správce systému.';
+$LDPlsTryAgain='Zkuste Znovu.';
 ?>

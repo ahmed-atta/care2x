@@ -35,4 +35,9 @@ $LDAddPhoneInfo='Add phone/beeper info';
 $LDOptions4Employee='Options for this employee';
 $LDPayrollOptions='Payroll options';
 $LDLegalDocuments='Legal documents';
+$LDShowPersonalData='Show personal data';
+/* 2003-05-17 EL */
+$LDEnterEmployeeSearchKey='Enter search keyword: e.g. Employment-Nr., first name, or family name.';
+$LDPersonnelManagement='Personnel Management';
+$LDNewEmployee='New employee';
 ?>

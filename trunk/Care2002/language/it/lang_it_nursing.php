@@ -325,47 +325,67 @@ $LDQueries='Domande al Medico';
 $LDChangeWard='Modifica guardia';
 $LDChangeBed='Modifica letto';
 
-$LDPatientDied='Death of patient';
+$LDPatientDied='Decesso del paziente';
 
-$LDFollowing='following';
-$LDErrorDuplicateBed='Error: Duplicate bed occupancy record in table nursing_station_patients';
-$LDNoFound='Search found no patient.';
+$LDFollowing='seguente';
+$LDErrorDuplicateBed='Errore: letto già occupato nella tabella nursing_station_patients';
+$LDNoFound='Nessun paziente trovato.';
 
-$LDNoWardsYet='There are no nursing wards yet.';
-$LDClk2CreateWard='To create a ward, please click here.';
+$LDNoWardsYet='Non ci sono ancora corsie.';
+$LDClk2CreateWard='Per crearne una, selezionare qui.';
 
 /* 2002-10-12 EL */
-$LDToCreateNewList='To create a new list';
-$LD_ddpMMpyyyy="gg.mm.aaaa";
-$LD_yyyyhMMhdd="aaaa-mm-gg";
-$LD_MMsddsyyyy="mm/gg/aaaa";
+$LDToCreateNewList='Per creare una nuova lista';
+$LD_ddpMMpyyyy='gg.mm.aaaa';
+$LD_yyyyhMMhdd='aaaa-mm-gg';
+$LD_MMsddsyyyy='mm/gg/aaaa';
 /* 2002-10-23 EL*/
-$LDQueryDoctor='Query to doctor';
-$LDDoctorInfo='Doctor\'s info, instructions';
-$LDDiagnosticsReport='Diagnostics report arrived';
-$LDInfusionTherapy='Infusion therapy/program';
-$LDMonitorFluidDischarge='Monitor fluids discharge';
-$LDBloodProgram='Blood sample/transfusion';
-$LDVitalStatistics='Vital statistics';
-$LDAntibioticsProgram='Antibiotics therapy/program';
-$LDAnticoagProgram='Anticoagulants';
-$LDSpecialCare='Special care, vital statistics';
-$LDTestConsultRequested='Test/Consult requested';
-$LDNurseReport='Nurse report (new)';
-$LDDaily='Daily';
-$LDSaveChanges='Save changes';
+$LDQueryDoctor='Richieste per il medico';
+$LDDoctorInfo='Informazioni o istruzioni per il medico';
+$LDDiagnosticsReport='Diagnosi pervenute';
+$LDInfusionTherapy='Programma/terapia di infusione';
+$LDMonitorFluidDischarge='Controllo dello scarico fluidi';
+$LDBloodProgram='Analisi/trasfusioni sangue';
+$LDVitalStatistics='Parametri vitali';
+$LDAntibioticsProgram='Programma/terapia antibiotici';
+$LDAnticoagProgram='Anticoagulanti';
+$LDSpecialCare='Cure speciali, parametri statistici';
+$LDTestConsultRequested='Esami/consulti rischiesti';
+$LDNurseReport='Rapporto infermieristico (nuovo)';
+$LDDaily='Giornaliero';
+$LDSaveChanges='Salva modifiche';
 /* 2002-12-07*/
-$LDNoDiagReport='No diagnostic report available.';
+$LDNoDiagReport='Nessuna diagnosi disponibile.';
 /* 2003-03-23 EL */
-$LDNursesList='Elenco Personal Infermieristico';
-$LDNursesListTxt='List, View, Create, & Edit Nurses\' List';
+$LDNursesList='Elenco personale infermieristico';
+$LDNursesListTxt='Visualizza, crea e modifica elenco infermieri';
 /* 2003-04-18 */
 $LDInsurance='Generale';
 $LDPrivate='Privato';
 $LDSelfPay='A propio carico';
 /* 2003-04-21 EL */
 $LDRoom='Room';
-$LDAdm_Nr='Adm.Nr.';
-$LDStatus='Status';
-$LDInWard='In Ward';
+$LDAdm_Nr='Cod.Acc.';
+$LDStatus='Stato';
+$LDInWard='nella corsia';
+/* 2003-04-23 EL */
+$LDWard_ID='codice corsia';
+$LDNoSpecChars='Non si possono inserire caratteri speciali';
+/* 2003-04-24 EL*/
+$LDTemporaryCloseWard='Chiudi temporaneamente la corsia';
+$LDIrreversiblyCloseWard='Chiudi definitivamente la corsia';
+$LDSureTemporaryClose='Si desidera realmente effettuare la chiusura?';
+$LDSureIrreversibleClose='Si desidera realmente chiudere la corsia in modo IRREVERSIBILE?';
+/* Do not translate the ~str~ , it will be replaced with the ward's name by the program */
+$LDWardNoClose='La corsia ~str~ non può essere chiusa perché ci sono ancora pazienti.<br>Dimettere o spostare i pazienti prima di riprovare.';
+$LDBackToWardProfile='Tornare al profilo della corsia';
+$LDShowWardOccupancy='Mostrare la lista di occupazione della corsia';
+$LDTemporaryClosed='Temporaneamente chiusa';
+$LDReopenWard='Riapri la corsia';
+$LDSureReopenWard='Si desidera realmente riaprire la corsia?';
+$LDShortDescription='Descrizione breve';
+$LDRoomShortDescription='Descrizione breve della sala';
+$LDRoomNotCreated='Non ci sono ancora sale';
+/* 2003-05-10 EL */
+$LDChangeRoom='Cambio sala';
 ?>

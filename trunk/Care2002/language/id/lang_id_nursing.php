@@ -14,42 +14,42 @@ $LDMemo='Memo';
 $LDNursingForum='Forum perawat';
 $LDNursingStations='Perewat Ruangan';
 
-$LDQuickViewTxt='Tinjauan Cepat penginap hari ini di ruangan perawat.';
-$LDSearchPatientTxt='Cari di bangsal untuk seorang Pasien masuk.';
-$LDArchiveTxt='Pencarian di Arsip Berkas(file) bangsal.';
-$LDStationManTxt='buat sebuah bangsal, Inisialisasi parameter seperti jumlah bed, personel, dll.';
-$LDNewsTxt='Baca, Tulis, atau edit Sebuah artikel berita.';
-$LDMemoTxt='Baca, Tulis, atau edit Sebuah memo.';
+$LDQuickViewTxt='Tinjauan cepat penginap saat ini di ruang perawat.';
+$LDSearchPatientTxt='Mencari bangsal untuk pasien yang diizinkan(admitted).';
+$LDArchiveTxt='Mencari di file arsip bangsal.';
+$LDStationManTxt='buat bangsal, inisialisasi parameter seperti jumlah bed, personel, dll.';
+$LDNewsTxt='Baca, tulis, atau edit sebuah artikel berita.';
+$LDMemoTxt='baca, tulis, atau edit Sebuah memo.';
 $LDNursingForumTxt='Forum diskusi tentang keperawatan.';
-$LDNursingStationsTxt='Menginap, Grafik pasien, Foto, dll.';
+$LDNursingStationsTxt='penginap, grafik pasien, foto , etc.';
 
 $LDCloseBack2Main='Tutup dan kembali ke halaman awal';
-$LDOld='Tua';
-$LDTodays='Hari ini';
-$LDOccupancy='Menginap';
-$LDBedNr='Jumlah bed';
+$LDOld='Old';
+$LDTodays='hari ini';
+$LDOccupancy='Penginap';
+$LDBedNr='Jml. Bed';
 $LDOptions='Opsi';
 $LDFreeBed='Tidak menginap';
 
 $LDNoOcc='Daftar penginap hari ini tidak tersedia!';
-$LDClk2Archive='Klik ini untuk pergi ke Arsip.';
-$LDNrUnocc='Jumlah bed tidak terpakai';
+$LDClk2Archive='Klik ini untuk pergi ke arsip.';
+$LDNrUnocc='Jumlah bed yang tidak ditempati';
 $LDEditStation='Edit data di bangsal ~station~';
-$LDSearchKeyword='Kata Kunci Pencarian';
-$LDWasFound='menemukan di ~rows~ daftar penginap!';
-$LDPlsClk='Silakan Klik salah satu yang benar.';
-$LDMoreFunctions='Fungsi Lanjutan';
-$LDSrcKeyword='Kata Kunci Pencarian';
-$LDSearchArchive='Masukkan arsip di pencarian.';
-$LDSearchPrompt='Silakan masukkan kata kunci pencarian.<br>	Misalnya: Nama depan, Nama belakang, atau keduanya, dll.';
+$LDSearchKeyword='Kata kunci pencarian';
+$LDWasFound='di temukan ~rows~ daftar penginap!';
+$LDPlsClk='Silakan klik salah satu yang benar.';
+$LDMoreFunctions='Fungsi lanjutan';
+$LDSrcKeyword='Kata kunci pencarian';
+$LDSearchArchive='Masukan arsip kedalam pencarian.';
+$LDSearchPrompt='Silakan masukkan kata kunci pencarian.<br>	Contoh: nama, Nama belakang, atau keduanya, dll.';
 $LDSearch='Cari';
 $LDCancel='Batal';
-$LDHow2Search='Tolong! Bagaimana cara saya mencari pasien?';
-$LDClk2Show='Klik untuk Menampilkan data';
+$LDHow2Search='Tolong! Bagaimana saya bisa mencari pasien?';
+$LDClk2Show='Klik untuk menampilkan data';
 $LDDate='Tanggal';
-$LDClockTime='Jam';
+$LDClockTime='Waktu';
 
-$LDClkDate='Klik pada data yang diinginkan.';
+$LDClkDate='Klik tanggal yang diinginkan.';
 $monat=array('','Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember');
 $tage=array('Aha','Sen','Sel','Rab','Kam','Jum','Sab');
 			
@@ -57,159 +57,159 @@ $LDDay='Hari';
 $LDMonth='Bulan';
 $LDYear='Tahun';
 
-$LDDirectSelect='Pemilihan langsung';
-$LDPlusYear='Tambah satu tahun';
-$LDMinusYear='Kurangi Satu tahun';
+$LDDirectSelect='Seleksi langsung';
+$LDPlusYear='Tambahkan satu tahun';
+$LDMinusYear='kurangi satu tahun';
 $LDGo='GO';
-$LDLastMonth='Bulan kemarin';
+$LDLastMonth='Bulan lalu';
 $LDNextMonth='Bulan depan';
-$LDNursingManage='Manajemen Bangsal';
-$LDShowStationDataTxt='&nbsp;Tampilkan, edit, buat, <br> &nbsp; Deskripsi, Jumlah bed<br>&nbsp;dll.';
-$LDLockBedTxt='&nbsp;atau kosongkan sebuah bed';
-$LDAccessRightsTxt='&nbsp;buat, kunci, rubah,<br>&nbsp;aktifkan, hapus, usw.';
-$LDShowStationData='Data Profil Bangsal';
+$LDNursingManage='Manajemen bangsal';
+$LDShowStationDataTxt='&nbsp;tampilkan, edit, buat, <br> &nbsp;deskripsi, Jumlah bed<br>&nbsp;dll.';
+$LDLockBedTxt='&nbsp;atau membebaskan bed';
+$LDAccessRightsTxt='&nbsp;buat, kunci, rubah,<br>&nbsp;Mengaktifkan, hapus, usw.';
+$LDShowStationData='Data profil bangsal';
 $LDLockBed='Kunci sebuah bed';
-$LDAccessRights='Hak Akses';
+$LDAccessRights='Hak akses';
 $LDProfile='Profil';
-$LDCreate='Buat';
-$LDNewStation='Bangsal baru';
+$LDCreate='buat';
+$LDNewStation='bangsal baru';
 $LDDescription='Deskripsi';
-$LDDept='Departmen';
-$LDRoom1Nr='Nomor Ruang untuk ruang pertama';
-$LDRoom2Nr='Nomor Ruang untuk ruang terakhir';
-$LDRoomPrefix='Awalan (prefix) ruangan';
+$LDDept='Departemen';
+$LDRoom1Nr='Nomor ruang untuk ruang pertama';
+$LDRoom2Nr='Nomor ruang untuk ruang terakhir';
+$LDRoomPrefix='Prefiks ruangan';
 $LDNrBeds='Jumlah bed di sebuah ruangan';
-$LDMaxBeds='Maximale Anzahl der Betten';
-$LDMaxBeds='Jumlah bed tersedia';
-$LDBed1Prefix='Awalan untuk bed pertama';
-$LDBed2Prefix='Awalan untuk bed kedua';
-$LDHeadNurse='Kepala Perawat';
+$LDMaxBeds='Jumlah bed masimal';
+$LDMaxBeds='Jumlah maksimal bed yang tersedia';
+$LDBed1Prefix='Prefiks untuk bed pertama';
+$LDBed2Prefix='Prefiks untuk bed kedua';
+$LDHeadNurse='Kepala perawat';
 $LDHeadNurse2='Asisten Kepala Perawat';
-$LDNurses='Perawat-perawat';
-$LDCreateStation='Buat Bangsal';
-$LDEnterAllFields ='Kolom yang ditandai dengan <font color=#ff0000><b>*</b></font> <b>harus</b> diisi.';
-$LDPlsSelect='Silakan Pilih sebuah departemen';
+$LDNurses='Perawat';
+$LDCreateStation='Buat bangsal';
+$LDEnterAllFields ='kolom yang ditandai dengan <font color=#ff0000><b>*</b></font> harus diisi.';
+$LDPlsSelect='Silakan pilih sebuah departemen';
 $LDStationExists='Bangsal ~station~ Telah ada!';
-$LDAlertIncomplete='Beberapa informasi hilang. Silakan isi informasi yang penting.';
-$LDAlertRoomNr='Nomor ruang terakhir HARUS LEBIH BESAR daripada nomor ruang pertama!';
-$LDExistStations='Bangsal yang ada. Silakan klik salah satu yang diinginkan.';
+$LDAlertIncomplete='Beberapa informasi hilang. Silakan masukkan informasi yang penting.';
+$LDAlertRoomNr='nomor ruang terakhir HARUS LEBIH BESAR daripada nomor ruang pertama!';
+$LDExistStations='Bangsal yang telah ada. Silakan klik salah satu yang diinginkan.';
 $LDOtherStations='Bangsal lain';
 $LDEditProfile='Edit profil bangsal';
-$LDCreatedOn='Dibuat pada:';
-$LDCreatedBy='Dibuat oleh:';
+$LDCreatedOn='Dibuat pada :';
+$LDCreatedBy='Dibuat oleh :';
 
 /**********do not change the ~station~ **************************/
-$LDTemplateMissing='Template untuk bangsal ~station~ hilang!';
+$LDTemplateMissing='Template untuk bangsal ~station~ tidak ditemukan!';
 $LDNoOrigData='data asli tidak ditemukan!';
 
-$LDShowLastList='Tampilkan data penginap terakhir.';
+$LDShowLastList='Tampilkan daftar penginap terakhir.';
 $LDNoListYet='Daftar hari ini belum dibuat!';
-$LDLastList='Daftar penginap sebelumnya.';
-$LDNotToday='(Tidak hari ini!!)';
+$LDLastList='Daftar penginap terakhir.';
+$LDNotToday='(tidak hari ini!!)';
 $LDFromYesterday='(daftar kemarin!!)';
 /**********do not change the ~nr~ **************************/
-$LDListFrom='Daftar ini sudah basi selama ~nr~ hari.';
-$LDCopyAnyway='kopikan daftar ini ke daftar hari ini.';
+$LDListFrom='Daftar telah berumur ~nr~ hari.';
+$LDCopyAnyway='Kopikan daftar ini untuk hari ini bagaimanapun juga.';
 $LDTakeoverList='Kopikan daftar ini untuk hari ini.';
-$LDDoNotCopy='Jangan kopi ini! Buat daftar baru.';
-$LDOldList='Ini adalah sebuah daftar yang usang!';
-$LDQuickInformer='Penginformasi cepat'; //(quick Informer)
+$LDDoNotCopy='Jangan kopi ini! buat daftar baru.';
+$LDOldList='Ini adalah daftar kuno!';
+$LDQuickInformer='Penginformasi cepat';
 $LDAttention='Perhatian!';
-$LDOccupied='Menginap';
-$LDFree='Bebas(kosong)';
-$LDLocked='Dikunci';
-$LDDutyDoctor='<b>Dokter</b><br>(Dalam tugas)';
-$LDShortMale='P'; //Male -> Pria
-$LDShortFemale='W'; // Female -> wanita
+$LDOccupied='Occupied';
+$LDFree='Bebas';
+$LDLocked='Terkunci';
+$LDDutyDoctor='<b>Dokter</b><br>(dalam tugas)';
+$LDShortMale='P'; /* Male=Pria */
+$LDShortFemale='W'; /* Female=wanita */
 $LDLegend='Legenda';
 
 $LDOpenFile='Buka file';
-$LDNotesEmpty='Pemberitahuan Kosong';
-$LDNotes='Pemberitahuan';
-$LDRelease='Batalkan';
-$LDFreeOccupy='Bebas(kosong)/Menginap';
+$LDNotesEmpty='Peringatan kosong';
+$LDNotes='peringatan';
+$LDRelease='Menolak';
+$LDFreeOccupy='Free/Occupy';
 $LDMale='Pria';
 $LDFemale='Wanita';
 /**********do not change the ~station~ **************************/
 $LDNoInit='Bangsal ~station~ Belum diinisialisasi!';
-$LDIfInit='Untuk menginisialisasi bangsal, Silakan klik disini.';
+$LDIfInit='Untuk menginisialisasi bangsal, silakan klik disini.';
 $LDShowPatData='Buka file data pasien';
-$LDReleasePatient='Menolak Pasien'; //Dismiss patient
-$LDNoticeRW='Baca atau tulis pemberitahuan';
-$LDInfoUnlock='Baca Info atau buka kunci';
+$LDReleasePatient='Tolak pasien';
+$LDNoticeRW='Baca atau tulis peringatan';
+$LDInfoUnlock='Baca info atau buka kunci';
 $LDPatListElements=array(
 										'Ruang',
 										'Bed',
-										'Nama keluarga, Nama',
-										'Tanggal Lahir',
+										'Nama Keluarga, Nama',
+										'Tanggal lahir',
 										'No. Pasien',
 										'Asuransi',
 										'Opsi'
 										);
 /********** NOTE: !! do not change the \'+b+\' and \'+r+\'  !! **************************/
-$LDConfirmUnlock='Anda yakin ingin membuka kunci penggunaan  "+b+" bed di ruang "+r+" ?';
+$LDConfirmUnlock='anda yakin ingin membuka kunci bed \'+b+\' di ruang \'+r+\' ?';
 /********** NOTE: !! do not change the \'+t+\' \'+n+\' and \'+r+b+\'  **************************/
-$LDConfirmDelete='anda yakin mau menghapus "+t+" "+n+" dari ruang "+r+b+"?';
-$LDConfirmLock='Anda yakin mau mengunci bed ini?';
-$LDClk2Occupy='Klik untuk menggunakan bed ini';
+$LDConfirmDelete='Anda yakin mau menghapus  \'+t+\' \'+n+\' dari ruang \'+r+b+\'?';
+$LDConfirmLock='Anda yakin mau membuka kunci bed ini?';
+$LDClk2Occupy='Klik untuk memakai(to occupy) bed ini';
 $LDInsurance=array(
-								x=>'Membayar sendiri',
-								privat=>'Privat',
-								kasse=>'Umum'
+								x=>'Membayar sendir',
+								privat=>'Private',
+								kasse=>'umum'
 								);
 $LDSave='Simpan';
 $LDNurse='Perawat';
-$LDYesSure='Ya, Saya yakin. Keluarkan Pasien.';
-$LDFtpAttempted='Tidak bisa melakukan koneksi ke Server FTP.<br>Server FTP Mungkin down atau sibuk. Jika masalah ini berlanjut dalam jangka waktu lama, kontak dept PDE.';
-$LDFtpNoLink='Login FTP salah ';
-$LDJustReleased='Pasien dikeluarkan. klik \'Tutup\' untuk melanjutkan.';
-$LDReleaseType='Tipe pengeluaran ';
-$LDRegularRelease='Pengeluaran biasa';
-$LDSelfRelease='Pasien keluar dari Rumah Sakit atas keinginannya sendiri';
+$LDYesSure='Ya, saya yakin. Keluarkan pasien.';
+$LDFtpAttempted='Tidak bisa melakukan koneksi ke Server FTP.<br>Server FTP boleh jadi down atau sibuk. Jika masalah ini bertahan untuk waktu yang lama, silakan kontak departemen PDE.';
+$LDFtpNoLink='FTP login gagal';
+$LDJustReleased='Pasien dikeluarkan. Klik \'tutup\' untuk melanjutkan.';
+$LDReleaseType='Tipe pengeluaran';
+$LDRegularRelease='Pengeluaran umum';
+$LDSelfRelease='Pasien keluar dari Rumah Sakit karena keinginannya sendiri';
 $LDEmRelease='Pengeluaran darurat';
 $LDAlertNoName='Silakan masukkan nama anda.';
-$LDAlertNoDate='Masukkan tanggal dalam format ff: dd.mm.YYYY.';
-$LDAlertNoTime='Masukkan waktu dalam format ff: HH.mm.';
-$LDPatDataFolder='Folder data pasien';
+$LDAlertNoDate='silakan masukkan tanggal dalam format ff: dd.mm.YYYY.';
+$LDAlertNoTime='Silakan masukkan waktu dalam format ff : HH.mm.';
+$LDPatDataFolder='folder data pasien';
 
 $LDClose='Tutup';
-$LDHelp='Bantuan';
+$LDHelp='Pertolongan';
 $LDReset='Reset';
 
-$LDNoLabReport='Tidak ada laopran lab yang tersedia!';
-$LDFeverCurve='Grafik Demam';
+$LDNoLabReport='Tidak ada laporan lab yang tersedia!';
+$LDFeverCurve='Grafik demam';
 $LDNursingReport='Laporan keperawatan';
 $LDDocsPrescription='Perintah dokter';
-$LDNursingPlan='Rencana Keperawatan';
+$LDNursingPlan='rencana perawat';
 $LDRootData='Data induk';
-$LDReports='Laporan Diagnostik';
+$LDReports='Laporan diagnostik';
 $LDLabReports='Laporan Lab';
 $LDPhotos='Foto';
-$LDChkUpRequests='Permintaan CheckUp';
+$LDChkUpRequests='Permintaan Cek up';
 $LDPleaseSelect='Pilih permintaan tes diagnostik';
-$LDSetColorRider='Klik untuk menset atau mereset rider warna';
-$LDDiet='Diet'; 
-$LDBackDay='Mundurkan 1 hari. (klik kanan untuk memasukkan tanggal apapun)';
-$LDFwdDay='Majukan 1 hari. (Klik kanan untuk memasukkan tanggal apapun)';
-$LDClk2PlanDiet='Klik untuk merencanakan diet hari ini';
+$LDSetColorRider='klik untuk menset atau reset pemilih warna';
+$LDDiet='rencana diet';
+$LDBackDay='Mundur 1 hari. (klik kanan untuk memasukkan tanggal bebas)';
+$LDFwdDay='Maju 1 hari. (Klik kanan untuk memasukkan tanggal bebas)';
+$LDClk2PlanDiet='Klik untuk merencanakan diet untuk hari ini';
 
 $LDAllergy='Alergi';
 $LDDiagnosisTherapy='Diagnosis / Terapi';
-$LDBpTemp='Suhu / Tekanan Darah';
+$LDBpTemp='Suhu/Tekanan Darah';
 $LDPtAtgEtc='PT,Atg,etc';
-$LDAntiCoag='Anticoagulant(s)';
+$LDAntiCoag='Antikoagulan(s)';
 $LDExtraNotes='Catatan';
 $LDMedication='Pengobatan';
 $LDIvPort='Intravenous';
-$LDPtAtgEtcTxt='Terapi Fisik, Anti Trombosis, dll.';
+$LDPtAtgEtcTxt='Terapi Fisik, Anti thrombosis, dll.';
 $LDExtraNotesTxt='Catatan, LOT, Charge nr., dll.';
 
-$LDBp='Tekanan Darah';
+$LDBp='Tekanan darah';
 $LDTemp='Suhu';
 
-$LDClk2Enter='Klik untuk memasuki ~tagword~';
-$LDClk2EnterDaily='Klik untuk memasuki ~tagword~ untuk hari ini';
-$LDSpecialsExtra='Catatan, diagnosis ekstra';
+$LDClk2Enter='Klik untuk memasukkan ~tagword~';
+$LDClk2EnterDaily='Klik untuk memasukkan ~tagword~ untuk hari ini';
+$LDSpecialsExtra='Catatan, Diagnosis ekstra';
 $LDClk2PlanDaily='Klik untuk merencanakan ~tagword~ untuk hari ini';
 $LDInputWin='Jendela masukan';
 $LDFullDayName=array(
@@ -218,142 +218,145 @@ $LDFullDayName=array(
 									'Selasa',
 									'Rabu',
 									'Kamis',
-									'Jumat',
+									'Jum\'at',
 									'Sabtu',
 									'Ahad',
 									'Senin',
 									'Selasa',
 									'Rabu',
 									'Kamis',
-									'Jumat',
+									'Jum\'at',
 									'Sabtu',
-									'Ahad');
+									'Ahad'
+									);
 $LDCurrentEntry='Masukan saat ini';
 $LDEntryPrompt='Silakan masukkan informasi baru disini';
-$LDConfirmSetDate='Apakah anda ingin mengeset "+dayID+" ?';
+$LDConfirmSetDate='Apakah anda ingin menset \'+dayID+\' ?';
 $LDStartDate='Tanggal mulai';
-$LDEndDate='Tanggal akhir';
-$LDShowCurveDate='Tampilkan kurva dengan ';
-$LDDailyDiagTher='Terapi, laporan, rencana keperawatan, dll.';
-$LDAntiCoagTxt='Antikoagulan - Laporan harian';
-$LDSFormatPrompt='Masukkan informasi baru disini atau edit masukan saat ini:<br><font size=1 > Maksimum 16 karakter.</font>';
+$LDEndDate='Tanggal berakhir';
+$LDShowCurveDate='Tampilkan kurva beserta ';
+$LDDailyDiagTher='Terapi, Laporan, rencana keperawatan, dll.';
+$LDAntiCoagTxt='Antikoagulan - laporan harian';
+$LDSFormatPrompt='masukan informasi baru disini atau edit masukan saat ini:<br><font size=1 > Maksimal 16 karakter.</font>';
 $LDDosage='Dosis';
-$LDColorMark='Warnai tanda dengan';
+$LDColorMark='Warna ditandai dengan';
 $LDNormal='Normal';
 $LDAntibiotic='Antibiotik';
-$LDDialytic='Dialitik'; //Dialytic;
-$LDHemolytic='Hemolitik';//Hemolytic
+$LDDialytic='Dialitik';
+$LDHemolytic='Hemolotik';
 $LDIntravenous='Intravenous';
 $LDTodaysReport='Laporan hari ini';
 $LDNoMedicineYet='Belum ada pengobatan!';
-$LDEffectReport='Laporan Efektifitas';
-$LDFrom='Dari';
-$LDTo='Untuk';
-$LDPage='Halaman';
+$LDEffectReport='Laporan efektifitas';
+$LDFrom='dari';
+$LDTo='untuk';
+$LDPage='halaman';
 $LDSignature='Tandai';
 $LDInsertSymbol='Tempatkan simbol ini di awal.';
-$LDInsertDate='Masukkan tanggal hari ini';
-$LDInsertTimeNow='Masukkan waktu sekarang';
-$LDSpecialNotice='Pemberitahuan khusus';
+$LDInsertDate='Masukkan Tanggal saat ini';
+$LDInsertTimeNow='Masukkan waktu saat ini';
+$LDSpecialNotice='Peringatan kbusus';
 $LDAddendum='Informasi tambahan';
-$LDDiagnosticReport='Laporan Diagnostik';
+$LDDiagnosticReport='Laporan diagnostik';
 $LDDoctor='Dokter';
 $LDPassword='Password';
-$LDCallBackPhone='Untuk Panggilan penyelidikan';
+$LDCallBackPhone='untuk panggilan penyelidikan';
 
 $LDPicShots='Shots';
-$LDClk2Preview='Klik untuk Preview';
+$LDClk2Preview='Klik untuk menampilkan';
 $LDPreview='Preview';
-$LDShotDate='Shot date';
-$LDShotNr='Shot nr.';
+$LDShotDate='Tanggal pengambilan';
+$LDShotNr='No. Pengambilan';
 
 $LDLastName='Nama Keluarga';
 $LDName='Nama';
-$LDBirthDate='Tanggal lahir';
-$LDLockThisBed='Kunci bed ini';
+$LDBirthDate='Tanggal Lahir';
+$LDLockThisBed='Kunci Bed ini';
 $LDClk2LockBed='Klik untuk mengunci bed ini';
 $LDAssignOcc='Tandai penginap';
-$LDSearchFound='Pencarian menemukan <font color=red><b>~nr~</b></font> Pasien.';
+$LDSearchFound='Pencarian menemukan<font color=red><b>~nr~</b></font> Pasien.';
 $LDAssign2Bed='Tandai pasien ini sebagai penginap';
-$LDSend='Kirim';
+$LDSend='kirim';
 $LDSendLater='Kirim nanti';
-$LDReqTest='Tes diagnostik diminta';
-$LDSpeedTest='Tes penting.';
+$LDReqTest='Tes diagnostik yang diminta';
+$LDSpeedTest='Tes mendesak.';
 $LDDiagnosticTest='Meminta tes diagnostik';
-$LDRelayResult='Relay diagnosis pada telepon/Beeper';
+$LDRelayResult='Merelay diagnosis lewat telepon/Beeper';
 $LDSpeedCut='Express cut.';
-$LDClk4Phone='Klik untuk menampilkan info telepon/Beeper';
+$LDClk4Phone='klik untuk menampilkan info telepon/Beeper';
 $LDHour='Jam';
 
-$LDClkHere='Silakan Klik disini';
+$LDClkHere='Silakan klik disini';
 
-$LDNoOccList='Tidak ada data lalu tersedia';
-$LDFromWard='Daftar dari bangsal ';
-$LDWithinLast='dalam ';
+$LDNoOccList='tidak ada masalalu(past) yang tersedia';
+$LDFromWard='daftar dari bangsal ';
+$LDWithinLast='kurang dari ';
 $LDDays=' hari.';
 $LDAvailable='';
 
-$LDQueries='Inquiries Ke dokter';
-$LDChangeWard='Perubahan bangsal';
+$LDQueries='Penyelidikan ke Dokter';
+$LDChangeWard='Rubah bangsal';
 $LDChangeBed='Perubahan bed';
 $LDPatientDied='Meninggalnya pasien';
 
 $LDFollowing='Berikut';
-$LDErrorDuplicateBed='Error: Duplikasi rekaman penginap dibed di tabel nursing_station_patients';
+$LDErrorDuplicateBed='Error: Duplikasi penggunaan bed di tabel table nursing_station_patients';
 $LDNoFound='Pencarian tidak menemukan pasien.';
 
-$LDNoWardsYet='Belum ada Ruang perawat.';
-$LDClk2CreateWard='Untuk membuat sebuah bangsal. Silakan klik disini.';
+$LDNoWardsYet='Belum ada ruang/bangsal perawat.';
+$LDClk2CreateWard='Untuk membuat bangsal, silakan klik disini.';
 /* 2002-10-12 EL */
-$LDToCreateNewList='Untuk Membuat Daftar baru';
+$LDToCreateNewList='Untuk membuat daftar baru';
 $LD_ddpMMpyyyy='hh.bb.tttt';
 $LD_yyyyhMMhdd='tttt-bb-hh';
 $LD_MMsddsyyyy='bb/hh/ttttt';
 /* 2002-10-23 EL*/
 $LDQueryDoctor='Permintaan ke dokter';
 $LDDoctorInfo='info dokter, instruksi';
-$LDDiagnosticsReport='Laporan diagnostik Datang';
-$LDInfusionTherapy='terapi/program Infus';
-$LDMonitorFluidDischarge='Pantau cairan pengganti';
-$LDBloodProgram='Contoh/transfusi darah';
-$LDVitalStatistics='Statistik Penting';
-$LDAntibioticsProgram='Terapi/program antibiotik';
-$LDAnticoagProgram='Antikoagulasi'; //Anticoagulant
-$LDSpecialCare='Perawatan spesial, Statistik penting';
-$LDTestConsultRequested='Perintaan Test/konsultasi';
+$LDDiagnosticsReport='Laporan diagnostik tersedia';
+$LDInfusionTherapy='Terapi/program Infusion';
+$LDMonitorFluidDischarge='Monitor fluids discharge';
+$LDBloodProgram='Contoh darah/transfusi';
+$LDVitalStatistics='Statistik Vital';
+$LDAntibioticsProgram='Terapi/program Antibiotik';
+$LDAnticoagProgram='Antikoagulan';
+$LDSpecialCare='Perawatan khusus, Statistik vital';
+$LDTestConsultRequested='Tes/konsultasi diminta';
 $LDNurseReport='Laporan perawat (baru)';
 $LDDaily='Harian';
-$LDSaveChanges='Simpan Perubahan';
+$LDSaveChanges='Simpan perubahan';
 /* 2002-12-07*/
-$LDNoDiagReport='Tidak ada laporan diagnosis tersedia.';
+$LDNoDiagReport='Tidak ada laporan diagnostik yang tersedia.';
 /* 2003-03-23 EL */
-$LDNursesList='Daftar Perawat';
-$LDNursesListTxt='Daftar, Lihat, Buat, & Edit Daftar perawat';
+$LDNursesList='Daftar perawat';
+$LDNursesListTxt='Daftar, lihat, buat, & Edit daftar perawat';
 /* 2003-04-18 */
-$LDInsurance='Health Fund';
+$LDInsurance='Dana Kesehatab';
 $LDPrivate='Private';
-$LDSelfPay='Self pay';
+$LDSelfPay='Membayar sendiri';
 /* 2003-04-21 EL */
-$LDRoom='Room';
+$LDRoom='Ruang';
 $LDAdm_Nr='Adm.Nr.';
 $LDStatus='Status';
-$LDInWard='In Ward';
+$LDInWard='di bangsal';
 /* 2003-04-23 EL */
-$LDWard_ID='Ward ID';
-$LDNoSpecChars='No special characters allowed';
+$LDWard_ID='ID bangsal';
+$LDNoSpecChars='tidak ada karakter khusus yang diizinkan';
 /* 2003-04-24 EL*/
-$LDTemporaryCloseWard='Temporarily close this ward';
-$LDIrreversiblyCloseWard='Irreversibly close this ward';
-$LDSureTemporaryClose='Are you sure you want to close this ward temporarily?';
-$LDSureIrreversibleClose='Are you sure you want to close this ward IRREVERSIBLY ?';
+$LDTemporaryCloseWard='Tutup bangsal ini untuk sementara waktu';
+$LDIrreversiblyCloseWard='Tutup bangsal ini selamanya';
+$LDSureTemporaryClose='Apakah anda yakin ingin menutup bangsal ini sementara waktu?';
+$LDSureIrreversibleClose='Apakah anda yakin ingin menutup bangsal ini selamanya?';
 /* Do not translate the ~str~ , it will be replaced with the ward's name by the program */
-$LDWardNoClose='The ~str~ ward  cannot be closed because patients are still admitted.<br>You need to discharge all patients from the ward before closing it.';
-$LDBackToWardProfile='To go back to ward\'s profile';
-$LDShowWardOccupancy='To display the ward\'s occupancy list';
-$LDTemporaryClosed='Temporary closed';
-$LDReopenWard='Reopen this ward';
-$LDSureReopenWard='Are you sure you want to reopen this ward?';
-$LDShortDescription='Short description';
-$LDRoomShortDescription='Room\'s short description';
-$LDRoomNotCreated='Rooms not yet created';
+$LDWardNoClose='Bangsal ~str~ tidak bisa ditutup karena masih ada pasien didalam.<br>Anda harus mengeluarkan semua pasien sebelum menutupnya.';
+$LDBackToWardProfile='Untuk kembali ke profil bangsal';
+$LDShowWardOccupancy='Untuk menampilkan daftar penginap di bangsal';
+$LDTemporaryClosed='Ditutup untuk sementara waktu';
+$LDReopenWard='Buka ulang bangsal ini';
+$LDSureReopenWard='Anda yakin mau membuka ulang bangsal ini?';
+$LDShortDescription='Deskripsi singkat';
+$LDRoomShortDescription='Deskripsi singkat ruang ';
+$LDRoomNotCreated='Ruangan belum dibuat';
+/* 2003-05-10 EL */
+$LDChangeRoom='Change of room';
 ?>

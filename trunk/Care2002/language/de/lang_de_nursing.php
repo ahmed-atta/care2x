@@ -265,7 +265,7 @@ $LDFrom='Von';
 $LDTo='bis';
 $LDPage='Blatt';
 $LDSignature='Hz';
-$LDInsertSymbol='Dieses Symbol vorm Bericht einfugen.';
+$LDInsertSymbol='Dieses Symbol vor dem Bericht einfugen.';
 $LDInsertDate='Das heutige Datum einfügen';
 $LDInsertTimeNow='Die jetzige Uhrzeit einfügen';
 $LDSpecialNotice='Besonderheiten';
@@ -368,4 +368,6 @@ $LDSureReopenWard='Sind Sie sicher, Sie möchten diese Station wieder öffnen?';
 $LDShortDescription='Kurzbeschreibung';
 $LDRoomShortDescription='Kurzbeschreibung von der Station';
 $LDRoomNotCreated='Zimmer noch nicht vorhanden';
+/* 2003-05-10 EL */
+$LDChangeRoom='Zimmerwechsel';
 ?>

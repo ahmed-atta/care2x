@@ -14,4 +14,6 @@ $LDRegistration='Registration';
 $LDAdmission='Admission';
 $LDAdmit='Admit';
 $LDArchive='Archive';
+$LDStart='Start';
+$LDEnd='End';
 ?>

@@ -104,16 +104,16 @@ $LDPlsClickButton='Bitte den folgenden Knopf anklicken.';
 $LDFamilyName='Name';
 $LDGivenName='Vorname';
 $LDDateOfBirth='Geburstdatum';
-$LDEntryPrompt='Bitte geben Sie ein Stichwort ein:<br>(z.B. Name, Vorname, Personalnummer, u.s.w.)<br>';
+$LDEntryPrompt='Bitte geben Sie ein Stichwort ein:<br>(z.B. Name, Vorname, oder Personalnummer)<br>';
 $LDPersonellNr='PersonalNr.';
 $LDFunction='Funktion';
 $LDOptions='Optionen';
 $LDSearchFound='Die Suche hat ~nr~ relevante daten gefunden.';
 $LDAddDoctorToList='Einen Arzt in die Liste eintfügen';
-$LDAdd='Addieren';
+$LDAdd='Einfügen';
 $LDDelete='Löschen';
-$LDSureToDeleteEntry='Sind sie sicher dass den Eintrage löschen?';
+$LDSureToDeleteEntry='Sind sie sicher dass Sie den Eintrag löschen?';
 /* 2003-03-18 EL */
-$LDChangeOnlyDept='Einen Abteiung auwählen';
+$LDChangeOnlyDept='Eine Abteilung auswählen';
 $LDCreateNursesList='Anzeigen von Pflegekräften';
 ?>

@@ -1,4 +1,8 @@
 <?php
+/* Indonesian Translations by:
+*  Muhammad Panji <Sumodirjo@users.sourceforge.net>
+* Agus Ramdan 
+*/
 $LDDiagnosticTest='Pesanan tes diagnosis';
 $LDHospitalName='CARE 2002';
 $LDCentralLab='Laboratorium Pusat';

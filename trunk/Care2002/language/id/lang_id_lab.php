@@ -2,7 +2,7 @@
 $LDLab='Laboratorium';
 $LDMedLab='Laboratorium Medis';
 $LDPathLab='Laboratorium Patologi';
-$LDBacLab='Laboratorium Bacteriologi';
+$LDBacLab='Laboratorium Bakteriologi';
 $LDClose='Tutup';
 $LDSeeLabData='Cari dan Tampilkan Data Pasien Laboratorium.';
 $LDSeeData='Tampilkan data';
@@ -67,46 +67,46 @@ $LDAlertJobId='Pertama, masukkan nomor batch!';
 $LDAlertTestDate='Pertama masukkan tanggal test!';
 
 /* 2002-09-01 EL */
-$LDTestRequest='Test Request';
-$LDFillUpSend='Fill up and send request form for ';
-$LDTestRequestPathoTxt=$LDFillUpSend.'pathology/histology test';
-$LDTestRequestBacterioTxt=$LDFillUpSend.'bacteriological test';
-$LDTestRequestChemLabTxt=$LDFillUpSend.'chemical laboratory test';
-$LDBloodBank='Blood bank';
-$LDBloodRequest='Blood Request';
-$LDBloodRequestTxt=$LDFillUpSend.'blood products';
+$LDTestRequest='Permintaan Test';
+$LDFillUpSend='Isi dan kirim form permintaan untuk ';
+$LDTestRequestPathoTxt=$LDFillUpSend.'Tes Patologi/histologi';
+$LDTestRequestBacterioTxt=$LDFillUpSend.'Tes Bakteriologi';
+$LDTestRequestChemLabTxt=$LDFillUpSend.'Tes Laboratorium Kimia';
+$LDBloodBank='Bank Darah';
+$LDBloodRequest='Permintaan darah';
+$LDBloodRequestTxt=$LDFillUpSend.'Produk darah';
 
-$LDRequestSent['insert']='The test request was sent. ';
-$LDFormSaved['insert']='The form was saved (not yet sent).';
-$LDRequestSent['update']='The update test request was sent. ';
-$LDFormSaved['update']='The updated test was saved (not yet sent).';
-$LDWhatToDo=' What do you want to do now?';
+$LDRequestSent['insert']='Permintaan tes telah dikirim. ';
+$LDFormSaved['insert']='Form telah disimpan(belum dikirim).';
+$LDRequestSent['update']='Pemutakhiran permintaan tes telah dikirim. ';
+$LDFormSaved['update']='Pemutakhiran permintaan tes telah disimpan(Belum dikirim).';
+$LDWhatToDo=' Apa yang ingin anda lakukan sekarang?';
 
-$LDNewFormSamePatient='Create a new test request for the <b>same</b> patient';
-$LDEditForm='Edit the same test request';
-$LDEndTestRequest='I\'m finished.';
-$LDNewFormOtherPatient='Create a test request for <b>another</b> patient';
+$LDNewFormSamePatient='Buat Permintaan tes untuk pasien yang <b>sama</b>';
+$LDEditForm='Edit permintaan tes yang sama';
+$LDEndTestRequest='Saya selesai.';
+$LDNewFormOtherPatient='Buat permintaan tes untuk pasien <b>Lainnya</b>';
 
 /* 2002-09-03 EL */							  
-$LDSearchPatient='Search patient';
-$LDSearchFound='~nr~ patients were found.';
+$LDSearchPatient='Cari Pasien';
+$LDSearchFound='Ditemukan ~nr~ orang pasien .';
 /* 2002-09-04 EL */		
-$LDTestRequestFor='Request for ';
-$LDTestType=array('chemlabor'=>'chemical laboratory test',
-                                     'patho'=>'pathological test',
-								 'baclabor'=>'bacteriological test',
-								 'blood'     =>'blood product');
+$LDTestRequestFor='Permintaan untuk ';
+$LDTestType=array('chemlabor'=>'tes laboratorium kimia',
+                                     'patho'=>'tes patologi',
+								 'baclabor'=>'tes bakteriologi',
+								 'blood'     =>'produk darah');
 /* 2002-09-10 EL */
-$LDTestReception='Pending Request';
-$LDTestReceptionTxt='Receive & process requests, write results/findings/diagnoses';
+$LDTestReception='Mengantrikan Permintaan';
+$LDTestReceptionTxt='Menerima dan memproses permintaan, tulis hasil/Penemuan/diagnosis';
 /* 2002-09-15 EL */
-$LDPrintForm='Print the request form';
+$LDPrintForm='Cetak form permintaan';
 
 /* 2002-09-21 EL */
-$LDInitFindings='Initial findings';
-$LDCurrentFindings='Current findings';
-$LDFinalFindings='Final findings';
+$LDInitFindings='Inisialisasi penemuan';
+$LDCurrentFindings='Penemuan saat ini';
+$LDFinalFindings='Penemuan Final';
 
-$LDFillLabOnly='For lab use only';
-$LDLEN='LEN';  /* Lab entry number */
+$LDFillLabOnly='Hanya untuk penggunaan Lab';
+$LDLEN='NML';  /* LEN=Lab entry number -> NML= Nomor Masukan Lab */
 ?>

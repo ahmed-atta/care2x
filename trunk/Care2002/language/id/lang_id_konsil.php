@@ -1,4 +1,8 @@
 <?php
+/* Indonesian Translations by:
+*  Muhammad Panji <Sumodirjo@users.sourceforge.net>
+* Agus Ramdan 
+*/
 $LDEntryDate='Tanggal Masukan';
 $LDJournalNumber='Nomor Jurnal';
 $LDBlockNumber='Nomor Blok';

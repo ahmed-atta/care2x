@@ -1,7 +1,7 @@
 <?php
 $LDUserPrompt='Usuário';
 $LDPwPrompt='Senha';
-$LDSubmitBut='Continue...';
+$LDSubmitBut='Continua...';
 $LDPwNeeded='Senha requida';
 $LDIntroTo='Introduction to editing news articles in';
 $LDWhatTo='O que e como eu edito notícias em ';
@@ -113,4 +113,12 @@ $LDLoggedOut='Logged out';
 /* 2003-03-18 EL */
 $LDNursesList='Nurses\' List';
 $LDAppointments='Appointments';
+/* 2003-04-27 */
+$LDInsuranceCoManager='Insurance Company Manager';
+$LDAddressMngr='Address Manager';
+/* 2003-04-30 EL*/
+$LDBilling='eComBill';
+/* 2003-05-18 EL */
+$LDPlsContactEDP='Please contact the EDP department.';
+$LDPlsTryAgain='Please try again';
 ?>

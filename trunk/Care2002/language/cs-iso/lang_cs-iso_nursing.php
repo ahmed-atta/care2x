@@ -172,11 +172,11 @@ $LDConfirmUnlock='Do you really want to unlock the \'+b+\' bed in room \'+r+\' ?
 $LDConfirmDelete='Do you really want to delete \'+t+\' \'+n+\' from room \'+r+b+\'?';
 $LDConfirmLock='Do you really want to lock this bed?';
 $LDClk2Occupy='Click to occupy this bed';
-$LDInsurance=array(
+/*$LDInsurance=array(
 								'x'=>'Self pay',
 								'privat'=>'Private',
 								'kasse'=>'General'
-								);
+								);*/
 $LDSave='Save';
 $LDNurse='Nurse';
 $LDYesSure='Yes, I\'m sure. Dismiss the patient.';
@@ -350,4 +350,12 @@ $LDNoDiagReport='No diagnostic report available.';
 /* 2003-03-23 EL */
 $LDNursesList='Nurses\' List';
 $LDNursesListTxt='List, View, Create, & Edit Nurses\' List';
+$LDInsurance='Health Fund';
+$LDPrivate='Private';
+$LDSelfPay='Self pay';
+/* 2003-04-21 EL */
+$LDRoom='Room';
+$LDAdm_Nr='Adm.Nr.';
+$LDStatus='Status';
+$LDInWard='In Ward';
 ?>

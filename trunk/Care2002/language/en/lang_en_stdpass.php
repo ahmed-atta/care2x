@@ -7,8 +7,8 @@ $LDIntroTo='Introduction to editing news articles in';
 $LDWhatTo='What and how can I edit news articles in';
 
 $LDWrongEntry='Wrong entries!';
-$LDNoAuth='No access right';
-$LDAuthLocked='Access right frozen.';
+$LDNoAuth='You have no access permission!';
+$LDAuthLocked='Your access permission is locked!';
 
 $LDNewData='New Data';
 $LDEdit='Edit';
@@ -113,4 +113,12 @@ $LDLoggedOut='Logged out';
 /* 2003-03-18 EL */
 $LDNursesList='Nurses\' List';
 $LDAppointments='Appointments';
+/* 2003-04-27 */
+$LDInsuranceCoManager='Insurance Company Manager';
+$LDAddressMngr='Address Manager';
+/* 2003-04-30 EL*/
+$LDBilling='eComBill';
+/* 2003-05-18 EL */
+$LDPlsContactEDP='Please contact the EDP department.';
+$LDPlsTryAgain='Please try again';
 ?>

@@ -223,7 +223,7 @@ $LDOtherNr='Other number(s)';
 /* 2002-12-25 EL */
 $LDSendBill='Send bill to';
 $LDContactPerson='Contact person';
-$LDOptsFor='Options for this';
+$LDOptsForPerson='Options for this person';
 $LDSickReport='Confirmation of inability to work';
 $LDAnamnesisForm='Anamnesis form';
 $LDConsentDec='Consent declaration';
@@ -323,4 +323,14 @@ $LDGotMedAdvice='Did patient receive medical advice?';
 /* 2003-03-15 EL */
 $LDShowDocList='Show document list';
 $LDScheduleNewAppointment='Schedule New Appointment';
+/* 2003-04-04 EL */
+$LDNoPendingApptThisDay='There is no pending appointment for this day.';
+$LDNoPendingApptToday='There is no pending appointment today.';
+/* 2003-04-27 EL */
+$LDOptsForPatient='Options for this patient';
+/* 2003-05-06 EL */
+$LDRegisterNewPerson='Register a new person';
+/* 2003-05-17 EL */
+$LDEnterPersonSearchKey='Enter search keyword: e.g. PID, first name, or family name';
+$LDPersonData='Personal data';
 ?>

@@ -27,6 +27,39 @@ require_once($root_path.'include/inc_vars_resolve.php');
 			<P><a href="mailto:elpidio@latorilla.com"><u>Elpidio Latorilla can be contacted here.</u></a>
 </TD></TR></TBODY></TABLE>
 <hr>
+<table cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <tbody>
+        <tr>
+          <td><img height=15 
+            src="../../gui/img/common/default/pixel.gif" 
+            width=5 border=0></td></tr>
+        <tr>
+          <td vAlign=top><font face="verdana,arial" size=2>
+			<p><img src="../../fotos/credits/lopo_l_almeida.jpg"  
+                                width=135 height=170 border=0  align=right vspace=10>
+			<b>Lopo Lencastre de Almeida (PT)</b> is one of the most productive developers. 
+			Some of his contributions to the project are:
+                        <p><font size=1>
+			Marketing, Promotion and Public Relations<br>
+			Web and Logo design<br>
+			Implementation &amp; maintenance of several web tools (Bugtracker, Forum, FAQ, etc.)<br>
+			Implementation &amp; maintenance of the new web site (almost done)<br>
+			Forum moderation and administration<br>
+			Code finder/digger<br>
+			Consultations on PHP<br>
+			Advises on security<br>
+			Abstraction Layers Advisor (DB, Template, etc.)<br>
+			Debugging<br>
+			Ideas, discussions, hints, tips, etc.
+			</font><p>
+			Lopo L. de Almeida was born in Angola in 1966. He is working in the computer sector - ranging from commercial automation 
+			to industrial automation - as a software developer and interface designer for more than 16 years now . During the last 5 years he 
+			worked mostly  in web development and company management. He is the CEO/CTO of HumanEasy - a 
+			partner of Care2002 project in charge of its <b>Public Relations and Marketing Management</b>.<br>
+			He is also involved in many other GNU/GPL projects; some of them are in use at Care2x's site.<br>
+			<p><a href="http://www.humaneasy.com" target="_blank"><u>Lopo L. de Almeida can be contacted here.</u></a>
+</td></tr></tbody></table>
+<hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
         <TR>
@@ -92,6 +125,20 @@ Daniel owns a company that produces computer
 science education products, open source software and local  linux distro.
 			<P><a href="mailto:danielz@cco.matrix.com.br"><u>Daniel Zilli can be contacted here.</u></a>
 </TD></TR></TBODY></TABLE>
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD><IMG height=15 
+            src="../../gui/img/common/default/pixel.gif" 
+            width=5 border=0></TD></TR>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+            <P><img src="../../fotos/credits/muhammad_panji.png"  border=0  align=right vspace=10>
+			<b>Muhammad Panji (ID) cotranslated Care 2002 and www.care2x.com website to indonesian.</b>
+			
+			<P><a href="mailto:sumodirjo@users.sourceforge.net"><u>Muhammad Panji can be contacted here.</u></a>
+</TD></TR></TBODY></TABLE>
 
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
@@ -116,7 +163,7 @@ science education products, open source software and local  linux distro.
             width=5 border=0></TD></TR>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-			<P><img src="../../gui/img/control/default/<?php echo $lang ?>/<?php echo $lang ?>_x-blank.gif"  border=0  width=135 align=right vspace=10>
+			<P><img src="../../fotos/credits/thomas_wiedmann.jpg"  border=0  width=135 align=right vspace=10>
 			<b>Thomas Wiedmann (DE) contributed the ff:</b>
 			<p><font size=1>
 			Complete testing <br>
@@ -144,21 +191,21 @@ science education products, open source software and local  linux distro.
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../gui/img/control/default/<?php echo $lang ?>/<?php echo $lang ?>_x-blank.gif"  border=0  width=135 align=right vspace=10>
-			<b>Mat&#277;j Hausenblas (FR) did the french translations of Care 2002</b>
+			<b>Matej Hausenblas (FR) did the french translations of Care 2002</b>
 			<p>
-Mat&#277;j Hausenblas was born in Prague, Czech Republic, in 1981.
-He is a student on a math-informatics-physics university. After several years
-of using MS-Windows he decided to have a look at GNU/Linux, as a worthy challenge
-and after some time, he decided to participate on the Open Source projects to
-improve some skills and also to return something back and to see how things
+Matej Hausenblas was born in Prague, Czech Republic, in 1981.
+He is a student on a math-informatics-physics university. After several years 
+of using Windows he decided to have a look at Linux, as a worthy challenge 
+and after some time, he decided to participate on the Open Source projects to 
+improve some skills and also to return something back and to see how things 
 work in this kind of society.
-			<P><a href="mailto:matejh@users.sourceforge.net"><u>Mat&#277;j Hausenblas can be contacted here.</u></a>
+			<P><a href="mailto:matejh@users.sourceforge.net"><u>Matej Hausenblas can be contacted here.</u></a>
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
         <TR>
-          <TD><IMG height=15
-            src="../../gui/img/common/default/pixel.gif"
+          <TD><IMG height=15 
+            src="../../gui/img/common/default/pixel.gif" 
             width=5 border=0></TD></TR>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
@@ -224,8 +271,20 @@ work in this kind of society.
 
 <table border=0 cellspacing=1 cellpadding=1>
   <tr>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Abrar H. Hazarika (ID)</font></nobr>&nbsp;</td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;eComBill billing module</font></td>
+  </tr>
+  <tr>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Are Kristensen (NO)</font></nobr>&nbsp;</td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Norwegian translations & online demo</font></td>
+  </tr>
+  <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Agus M. Ramdan (ID)</font></nobr>&nbsp;</td>
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Code revisions, care2x.com CMS</font></td>
+  </tr>
+  <tr>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Biju Gopinath (IN)</font></nobr>&nbsp;</td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Alternate GUI design</font></td>
   </tr>
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Daniele Frijia (DE)</font></nobr>&nbsp;</td>
@@ -236,11 +295,15 @@ work in this kind of society.
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;ecomscience.com, full time programmers</font></td>
   </tr>
   <tr>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Erik de Wild (NL)</font></nobr>&nbsp;</td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Dutch translation, server package</font></td>
+  </tr>
+  <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Luki Rustianto (ID)</font></nobr>&nbsp;</td>
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Security enhancements</font></td>
   </tr>
   <tr>
-    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Mat&#277;j Hausenblas (FR)</font></nobr>&nbsp;</td>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Matêj Hausenblas (FR)</font></nobr>&nbsp;</td>
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;French translation</font></td>
   </tr>
   <tr>
@@ -258,6 +321,10 @@ work in this kind of society.
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Pawel Cyrta (PL)</font></nobr>&nbsp;</td>
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Polish translation</font></td>
+  </tr>
+  <tr>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Petr Roupec(CZ)</font></nobr>&nbsp;</td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Czech translation</font></td>
   </tr>
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Prantar Deka (IN)</font></nobr>&nbsp;</td>

@@ -55,7 +55,7 @@ $LDAdmWantSearch='I am looking for a patient';
 $LDAdmWantArchive='I need to research in the archive';
 
 /**************** note the ' ~nr~ ' must not be erased it will be replaced by the script with the number of search results ******/
-$LDSearchFound='The search found <font color=red><b>~nr~</b></font> relevant patient\'s data.';
+$LDSearchFound='The search found <font color=red><b>~nr~</b></font> relevant data.';
 
 $LDShowData='Show data';
 $LDPatientData='Admission Data';
@@ -145,9 +145,9 @@ $LD_ddpMMpyyyy='dd.mm.yyyy';
 $LD_yyyyhMMhdd='yyyy-mm-dd';
 $LD_MMsddsyyyy='mm/dd/yyyy';
 /* 2002-10-13 EL */
-$LDPlsSelectPatientFirst='Please find the patient first.';
+$LDPlsSelectPatientFirst='Please find the person first.';
 /* 2002-11-30 EL */
-$LDPatientRegister='Patient registration';
+$LDPatientRegister='Person registration';
 $LDRegDate='Registration date';
 $LDRegTime='Registration time';
 $LDRegBy='Registered by';
@@ -184,7 +184,7 @@ $LDAdmissionTxt='Inpatient admission, search, research';
 $LDImmunization='Immunization';
 $LDESE='Enter, search, edit';
 $LDImmunizationTxt=$LDESE.' immunization report';
-$LDDRG='Diagnoses (DRG)';
+$LDDRG='DRG\'s';
 $LDDRGTxt=$LDESE.' DRG (Diagnosis related groups)';
 $LDProcedures='Procedures';
 $LDProceduresTxt=$LDESE.' therapy procedures';
@@ -223,7 +223,7 @@ $LDOtherNr='Other number(s)';
 /* 2002-12-25 EL */
 $LDSendBill='Send bill to';
 $LDContactPerson='Contact person';
-$LDOptsFor='Options for this';
+$LDOptsForPerson='Options for this person';
 $LDSickReport='Confirmation of inability to work';
 $LDAnamnesisForm='Anamnesis form';
 $LDConsentDec='Consent declaration';
@@ -326,4 +326,13 @@ $LDScheduleNewAppointment='Schedule New Appointment';
 /* 2003-04-04 EL */
 $LDNoPendingApptThisDay='There is no pending appointment for this day.';
 $LDNoPendingApptToday='There is no pending appointment today.';
+/* 2003-04-27 EL */
+$LDOptsForPatient='Options for this patient';
+/* 2003-05-06 EL */
+$LDRegisterNewPerson='Register a new person';
+/* 2003-05-17 EL */
+$LDEnterPersonSearchKey='Enter search keyword: e.g. PID, first name, or family name';
+$LDPersonData='Personal data';
+/* 2003-05-26 EL*/
+$LDDiagnoses='Diagnoses';
 ?>

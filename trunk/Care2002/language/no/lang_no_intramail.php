@@ -7,7 +7,7 @@ $LDReset='Sett tilbake';
 $LDNewSearch='Nutt søk';
 $LDSearch='Søk';
 $LDContinue='Fortsett';
-$LDBack='Gå tilnake'
+$LDBack='Gå tilnake';
 $LDOn='På';
 $LDAt='Ved';
 $LDNew='Ny';
@@ -23,8 +23,6 @@ $LDGoodMorning='God morgen';
 $LDGoodDay='Hallo, godt å se deg';
 
 $LDGoodEvening='God kveld';
-
-
 
 $LDDate='Dato';
 
@@ -70,15 +68,11 @@ $LDErrorPassword='De innskrevne passord er ikke like! <br>Rett på feilen. Passor
 
 $LDErrorIncomplete='Dataene som er skrevet inn er ikke komplette. Skriv inn mer informasjon for å gjøre skjemaet ferdig.';
 
-
-
 $LDIntraEmail='Intranett E-post';
 
 $LDLogin='Logginn';
 
 $LDUrEmailAddr='Din E-post adresse';
-
-
 
 $LDNotRegUser= 'Du er ikke registrert enda. Fyll ut følgende skjema for å bli registrert.';
 
@@ -95,8 +89,6 @@ $LDPassword2x='Skriv passordet på nytt';
 $LDRegister='Registrer';
 
 $LDNewReg='Nye brukere kan registrere seg her.';
-
-
 
 $LDInbox='Inboks';
 
@@ -158,7 +150,7 @@ $LDInsertAddr='Sett inn';
 
 $LDFolderEmpty='~tagword~ katalog er tom.';
 
-$LDNoteIntra='Intranet E-post kan bare blit sendt og mottatt innenfor INTRANET SYSTEMET. <p>Klikk her for å åpne din innkurv.';
+$LDNoteIntra='Intranet E-post kan bare blit sendt og mottatt innen for INTRANET SYSTEMET. <p>Klikk her for å åpne din innkurv.';
 
 $LDEmailSent='E-posten ble sendt!';
 

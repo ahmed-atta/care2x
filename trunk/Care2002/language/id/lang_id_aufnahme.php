@@ -330,4 +330,9 @@ $LDNoPendingApptThisDay='There is no pending appointment for this day.';
 $LDNoPendingApptToday='There is no pending appointment today.';
 /* 2003-04-27 EL */
 $LDOptsForPatient='Options for this patient';
+/* 2003-05-06 EL */
+$LDRegisterNewPerson='Register a new person';
+/* 2003-05-17 EL */
+$LDEnterPersonSearchKey='Enter search keyword: e.g. PID, first name, or family name';
+$LDPersonData='Personal data';
 ?>

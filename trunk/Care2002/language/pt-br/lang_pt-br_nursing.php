@@ -65,13 +65,13 @@ $monat=array('Janeiro',
 					'Dezembro'
 					);
 $tage=array(
-					'Dom',
 					'Seg',
 					'Ter',
 					'Qua',
 					'Qui',
 					'Sex',
-					'Sab'
+					'Sab',
+					'Dom'
 					);
 					
 $LDDay='Dia';					
@@ -172,11 +172,12 @@ $LDConfirmUnlock='Você realmente deseja liberar a \'+b+\' cama na sala \'+r+\' ?
 $LDConfirmDelete='Você realmente deseja apagar \'+t+\' \'+n+\' da sala \'+r+b+\'?';
 $LDConfirmLock='Você quer realmente travar esta cama?';
 $LDClk2Occupy='Clique para ocupar esta cama';
-$LDInsurance=array(
+/*$LDInsurance=array(
 								'x'=>'Pgto próprio',
 								'privat'=>'Confidencial',
 								'kasse'=>'Geral'
 								);
+*/
 $LDSave='Salvar';
 $LDNurse='Enfermeira';
 $LDYesSure='Sim, dar alta ao paciente';
@@ -350,4 +351,13 @@ $LDNoDiagReport='No diagnostic report available.';
 /* 2003-03-23 EL */
 $LDNursesList='Nurses\' List';
 $LDNursesListTxt='List, View, Create, & Edit Nurses\' List';
+/* 2003-04-18 */
+$LDInsurance='Geral';
+$LDPrivate='Confidencial';
+$LDSelfPay='Pgto próprio';
+/* 2003-04-21 EL */
+$LDRoom='Room';
+$LDAdm_Nr='Adm.Nr.';
+$LDStatus='Status';
+$LDInWard='In Ward';
 ?>

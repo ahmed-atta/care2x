@@ -1,7 +1,8 @@
 <?php 
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-require_once('../../include/inc_vars_resolve.php'); // globalize POST, GET, & COOKIE  vars
-require_once('../../include/inc_img_fx.php');
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
+require_once($root_path.'include/inc_img_fx.php');
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>

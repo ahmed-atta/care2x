@@ -11,34 +11,34 @@ require_once('../../include/inc_vars_resolve.php');
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
         <TR>
-          <TD><IMG height=15
-            src="../../gui/img/common/default/pixel.gif"
+          <TD><IMG height=15 
+            src="../../gui/img/common/default/pixel.gif" 
             width=5 border=0></TD></TR>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-			<P><img src="../../gui/img/control/default/fr/fr_x-blank.gif" width=135 border=0  align=right vspace=10>
-			<b>La traduction française de Care 2002 était réalisée par Mat&#277;j Hausenblas.</b>
+			<P><img src="../../gui/img/common/default/pixel.gif" width=135 border=0  align=right vspace=10>
+			<b>La traduction française de Care 2002 était réalisée par Matej Hausenblas.</b>
 			<p>
-			Mat&#277;j Hausenblas est né à Prague, République Tchèque, en 1981.<p>
-Il est étudiant à l'université de maths-informatique-physique. Après quelques
-années d'utilisation de MS-Windows il a décidé jeter un coup d'oeil sur GNU/Linux,
-comme un challenge considérable et après quelques temps il a décidé
-participer à des projets d'Open Source afin d'améliorer ses savoir-faire et
-également pour retourner quelque chose et enfin pour voir comment les choses
+			Matej Hausenblas est né à Prague, République Tchéque, en 1981.<p>
+Il est étudiant à l'université de maths-informatique-physique. Après quelques 
+années d'utilisation de Windows il a décidé jeter un coup d'oeil sur Linux, 
+comme un challenge considérable et après quelques temps il a décidé 
+participer à des projets d'Open Source afin d'améliorer ses savoir-faire et 
+également pour retourner quelque chose et enfin pour voir comment les choses 
 marchent dans une telle société.
-			<P><a href="mailto:matejh@users.sourceforge.net"><u>Mat&#277;j Hausenblas peut être contacté ici..</u></a>
+			<P><a href="mailto:matejh@users.sourceforge.net"><u>Matej Hausenblas peut être contacté ici..</u></a>
 </TD></TR></TBODY></TABLE>
 
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
         <TR>
-          <TD><IMG height=15
-            src="../../gui/img/common/default/pixel.gif"
+          <TD><IMG height=15 
+            src="../../gui/img/common/default/pixel.gif" 
             width=5 border=0></TD></TR>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-			<P><img src="../../gui/img/control/default/fr/fr_x-blank.gif"  border=0  width=135 align=right vspace=10>
+			<P><img src="../../fotos/credits/giuseppe_scarpi.jpg"  border=0  width=135 align=right vspace=10>
 			<b>La traduction italienne de Care 2002 était réalisée par Giuseppe Scarpi (IT):</b>
 			<p>
 			Giuseppe Scarpi est né à Rome, Italie, il y a 35 ans.
@@ -109,7 +109,7 @@ pour l`éducation de la science d`ordinateurs, les logiciels libres et distributi
             width=5 border=0></TD></TR>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-			<P><img src="../../gui/img/control/default/<?php echo $lang ?>/<?php echo $lang ?>_x-blank.gif"  border=0  width=135 align=right vspace=10>
+			<P><img src="../../fotos/credits/thomas_wiedmann.jpg"  border=0  align=right vspace=10>
 			<b>Thomas Wiedmann (DE) a contribué aux fonctions suivantes:</b>
 			<p><font size=1>
 			Les tests complets <br>
@@ -137,7 +137,7 @@ pour l`éducation de la science d`ordinateurs, les logiciels libres et distributi
             width=5 border=0></TD></TR>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-			<P><img src="../../gui/img/control/default/<?php echo $lang ?>/<?php echo $lang ?>_x-blank.gif"  border=0  width=135 align=right vspace=10>
+			<P><img src="../../gui/img/common/default/pixel.gif"  border=0  width=135 align=right vspace=10>
 			<b>Nino Novak (DE) a édité la version allemande de www.care2x.com.</b>
 			<p>
 			Nino Novak est un cowboy pauvre et solitaire. Il tire plus vite qu'il pense. Parfois un peu difficile.
@@ -156,7 +156,7 @@ pour l`éducation de la science d`ordinateurs, les logiciels libres et distributi
             width=5 border=0></TD></TR>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-			<P><img src="../../gui/img/control/default/<?php echo $lang ?>/<?php echo $lang ?>_x-blank.gif"  border=0  width=135 align=right vspace=10>
+			<P><img src="../../gui/img/common/default/pixel.gif"  border=0  width=135 align=right vspace=10>
 			<b>Patxi Gomaríz (ES) a fait la traduction espagnole.</b>
 			<p>
 			Patxi Gomaríz est né au printemps 1966 à Murcia, Espagne. Sa vie et son travail tourne surtout autor de la photographie.
@@ -177,7 +177,7 @@ pour l`éducation de la science d`ordinateurs, les logiciels libres et distributi
             width=5 border=0></TD></TR>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-			<P><img src="../../gui/img/control/default/<?php echo $lang ?>/<?php echo $lang ?>_x-blank.gif"  border=0  width=135 align=right vspace=10>
+			<P><img src="../../gui/img/common/default/pixel.gif"  border=0  width=135 align=right vspace=10>
 			<b>Daniele Frijia (DE) a contrôlé les aspects de sécurité de Care 2002.</b>
 			<br>
 			Quelques de ses multiples contributions:<p>
@@ -213,7 +213,7 @@ pour l`éducation de la science d`ordinateurs, les logiciels libres et distributi
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Extensions de sécurité</font></td>
   </tr>
   <tr>
-    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Mat&#277;j Hausenblas (FR)</font></nobr>&nbsp;</td>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Matej Hausenblas (FR)</font></nobr>&nbsp;</td>
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;La traduction fran&ccedil;aise</font></td>
   </tr>
   <tr>

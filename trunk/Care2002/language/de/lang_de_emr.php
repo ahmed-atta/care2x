@@ -1,6 +1,6 @@
 <?php
-$LDAdmitHistoPhysical='Aufnahmegeschicte und Physical';
-$LDDoctorDailyNotes='Tägliche Ärztesbericht';
+$LDAdmitHistoPhysical='Aufnahmegeschichte';
+$LDDoctorDailyNotes='Täglicher Ärztbericht';
 $LDDischargeSummary='Entlassungsbericht';
 $LDConsultNotes='Besprechungsbericht';
 $LDOpNotes='OP Bericht';
@@ -11,14 +11,17 @@ $LDPTATGetc='PT, ATG, etc.';
 $LDIVDailyNotes='Berichte über Infusionen';
 $LDAnticoagDailyNotes='Berichte über Antikoagulantien';
 $LDMaterialLOTChargeNr='Material LOT, Charge NR.';
-$LDDiagnosis='Diagnoses';
-$LDTherapy='Therapie';
-$LDExtraNotes='Zusatsmeldungen';
+$LDDiagnosis='Diagnosen';
+$LDTherapy='Therapien';
+$LDExtraNotes='Zusatzmeldungen';
 $LDNursingReport='Pflegeberichte';
 $LDNursingProblemReport='Pflegeprobleme';
 $LDNursingEffectivityReport='Berichte über die Effectivität';
 $LDInquiryToDoctor='Fragen an den Arzt';
-$LDDoctorDirective='Arztanordnung';
+$LDDoctorDirective='Arztanordnungen';
 $LDProblem='Probleme';
 $LDDevelopment='Entwicklung';
+/* 2003-05-17 EL */
+$LDDietPlan='Diät Plan';
+$LDAllergy='Allergien';
 ?>

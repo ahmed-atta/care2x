@@ -7,8 +7,8 @@ $LDIntroTo='Istruzioni per inserire un nuovo articolo nelle news';
 $LDWhatTo='Come inserire un nuovo articolo';
 
 $LDWrongEntry='I dati inseriti sono errati!';
-$LDNoAuth='Privilegi d\'accesso insufficienti';
-$LDAuthLocked='Privilegi d\'accesso bloccati.';
+$LDNoAuth='Privilegi d\'accesso insufficienti!';
+$LDAuthLocked='Privilegi d\'accesso bloccati!';
 
 $LDNewData='Nuovi dati';
 $LDEdit='Modifica';
@@ -120,4 +120,7 @@ $LDInsuranceCoManager='Gestione Compagnie Assicurative';
 $LDAddressMngr='Gestioni Indirizzi';
 /* 2003-04-30 EL*/
 $LDBilling='eComBill';
+/* 2003-05-18 EL */
+$LDPlsContactEDP='Si prega di contattare il CED.';
+$LDPlsTryAgain='Si prega di riprovare.';
 ?>

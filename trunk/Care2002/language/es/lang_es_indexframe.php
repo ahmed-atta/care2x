@@ -37,4 +37,6 @@ $LDNorwegian='Norwegian';
 $LDPolish='Polish';
 $LDPortuguese='Português';
 $LDSpanish='Español';
+/* 2003-04-28 El */
+$LDDutch='Dutch';
 ?>

@@ -204,28 +204,33 @@ $LDDeptConfigOptions='Einstellungen, Aktualisieren, inaktivieren, aktivieren, ve
 $LDDescription='Beschreibung';
 /* 2003-023-01 EL*/
 $LDFormalName='Offizieler Name';
-$LDInternalID='IdentifikationsCode';
-$LDPlsSelect=' Bitte wählen Sie einen';
+$LDInternalID='Kennung';
+$LDPlsSelect=' Bitte wählen Sie aus';
 $LDTypeDept='Abteilungsart';
-$LDIsSubDept='Ist Abteiung ein untergeordneten Abteilung?';
+$LDIsSubDept='Ist eine untergeordnete Abteilung?';
 $LDParentDept='Hauptabteilung';
-$LDLangVariable='Sprachvariable';
+$LDLangVariable='Namensvariabel (programmintern)';
 $LDShortName='Kurzer name';
-$LDAlternateName='AltenativeNamen';
-$LDAdmitsOutpatients='Nimmt Patienten auf?';
-$LDAdmitsInpatients='Nimmt nur Ambulante auf ?';
-$LDBelongsToInst='Intern angestellt ?';
+$LDAlternateName='Altenativer Name';
+$LDAdmitsOutpatients='Nimmt ambulante Patienten auf?';
+$LDAdmitsInpatients='Nimmt stationäre Patienten  auf ?';
+$LDBelongsToInst='Gehört zu diesem Krankenhaus?';
 $LDWorkHrs='Arbeitszeiten';
 $LDConsultationHrs='Sprechstunde';
 $LDSigLine='Signaturzeile';
-$LDSigStampTxt='Signatur und Abteilungsstempel';
+$LDSigStampTxt='Signatur bzw. Addresse';
 $LDDeptLogo='Abteilungslogo';
 $LDHidden='Versteckt';
 $LDNormal='Normal';
 $LDInactive='Inaktiv';
 $LDActive='Aktiv';
-$LDDeptStatus='Abteilungsstatus';
-$LDRecordStatus='Status der Akte';
+$LDDeptStatus='Status';
+$LDRecordStatus='Datensatz';
 /* 2003-03-30 EL*/
 $LDConfigOptions='Einstellungssoptionen';
+/* 2003-04-27 EL */
+$LDDoesSurgeryOp='Ist chirurgisch operativ tätig?';
+$LDList='Liste';
+$LDDept='Abteilung';
+$LDUpdate='Aktualisieren';
 ?>
