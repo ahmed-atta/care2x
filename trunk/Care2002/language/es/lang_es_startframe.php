@@ -4,7 +4,7 @@
 * Correcciones: Dr. med. Daniel Hinostroza C.
 */
 
-$LDMainTitle="Care 2002, Sistema de Información Integrada para Hospitales";
+$LDMainTitle="CARE 2X, Sistema de Información Integrada para Hospitales";
 
 /*$LDMainTitle="Marienhospital, un Sistema virtual de Información Integrada para Hospitales en internet";
 */

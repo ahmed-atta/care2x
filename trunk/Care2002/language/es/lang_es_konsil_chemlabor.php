@@ -5,7 +5,7 @@
 */
 
 $LDDiagnosticTest='Orden de prueba diagnóstica';
-$LDHospitalName='CARE 2002';
+$LDHospitalName='CARE 2X';
 $LDCentralLab='Laboratorio central';
 $LDLabel='Etiqueta';
 $LDRoomNr='Número de habitación';

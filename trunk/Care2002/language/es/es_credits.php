@@ -1,7 +1,7 @@
 <?php
 require_once('../../include/inc_vars_resolve.php');
 ?>
-<html>
+<?php html_rtl($lang); ?>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <title>Créditos</title>
@@ -13,7 +13,7 @@ require_once('../../include/inc_vars_resolve.php');
         <TBODY>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-          <b>Patxi Gomaríz (ES)<br> La traducción Española de Care 2002.</b> 
+          <b>Patxi Gomaríz (ES)<br> La traducción Española de CARE 2X.</b> 
         <p>
 			Patxi Gomaríz nació en la primavera del año 1966 en Murcia (España).
         <p> Su vida laboral gira entorno a la fotografía, es especialista en fotografía 
@@ -31,7 +31,7 @@ require_once('../../include/inc_vars_resolve.php');
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/hinostroza.jpg"  border=0  width=135 align=right vspace=10> 
-          <b>Dr. med Daniel Hinostroza C. (EC)<br> La traducción Española de Care 2002.</b> 
+          <b>Dr. med Daniel Hinostroza C. (EC)<br> La traducción Española de CARE 2X.</b> 
         <p>
 <li>Autor y coautor de numerosos textos médicos.<br>
 <li>5 años como Director del Centro de Informática Médica Grünenthal, Quito
@@ -54,7 +54,7 @@ Website: www.cerebroperiferico.com
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/javier.jpg"  border=0  width=135 align=right vspace=10> 
-          <b>Javier Alberto Arias (AR)<br> La traducción Española de Care 2002.</b> 
+          <b>Javier Alberto Arias (AR)<br> La traducción Española de CARE 2X.</b> 
         <p>
 
         <P><a href="mailto:javisxx@hotmail.com"><u>Puede Ponerse en contacto con Javier Alberto Arias</u></a>
@@ -65,7 +65,7 @@ Website: www.cerebroperiferico.com
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/gonzalo.jpg"  border=0  width=135 align=right vspace=10> 
-          <b>Gonzalo Gomez Sotelo (AR)<br> La traducción Española de Care 2002.</b> 
+          <b>Gonzalo Gomez Sotelo (AR)<br> La traducción Española de CARE 2X.</b> 
         <p>
 
         <P><a href="mailto:gonzalo@smandes.com.ar"><u>Puede Ponerse en contacto con Gonzalo Gomez Sotelo</u></a>
@@ -80,7 +80,7 @@ Website: www.cerebroperiferico.com
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/giuseppe_scarpi.jpg"  border=0  width=135 height=170 align=right vspace=10> 
-          <b>La traducción Italiana de Care 2002 fue hecha por Giuseppe Scarpi:</b> 
+          <b>La traducción Italiana de CARE 2X fue hecha por Giuseppe Scarpi:</b> 
         <p> Giuseppe Scarpi nació en Roma, Italia, hace 35 años. 
         <p>Graduado en ingeniería electrónica ha trabajado para 
           varias compañías en el sector biomédico, donde 
@@ -120,7 +120,7 @@ Website: www.cerebroperiferico.com
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/daniel_zilli.jpg"  border=0  align=right vspace=10> 
-          <b>La traducción brasileña-Portuguesa de Care 2002 y www.care2x.com 
+          <b>La traducción brasileña-Portuguesa de CARE 2X y www.care2x.com 
           fue hecha por Daniel Zilli.</b> 
         <P><a href="mailto:danielz@cco.matrix.com.br"><u>Puede Ponerse en contacto con Daniel Zilli aquí.</u></a>
 </TD></TR></TBODY></TABLE>

@@ -388,15 +388,19 @@ $LDIntravenous='Intravenoso';
 $LDSubcutaneous='Subcutáneo';
 $LDPreAdmission='PreIngreso';
 
-#2003-09-18 EL
-$LDPersonSearch='Search a person';
-#2003-09-24 EL
-$LDShowing='Showing';
-$LDPrevious='Previous';
-$LDNext='Next';
-$LDAdvancedSearch='Advanced search';
-#2003-10-28 EL
-$LDIncludeFirstName='Search for first names too.';
-$LDTipsTricks='Tips & tricks';
+#2003-09-18 NDHC
+$LDPersonSearch='Buscar a persona';
+#2003-09-24 NDHC
+$LDShowing='Mostrando';
+$LDPrevious='Anterior';
+$LDNext='Siguiente';
+$LDAdvancedSearch='Búsqueda avanzada';
 
+#2003-10-28 NDHC
+$LDIncludeFirstName='Busque también entre los nombres.';
+$LDTipsTricks='Consejos y trucos';
+
+#2003-12-06 EL
+$LDPrintPDFDoc='Make PDF document';
+$LDDeathDate='Death date';
 ?>
