@@ -4392,7 +4392,3 @@ INSERT INTO care_icd10_en VALUES ( 'Y89.-', 'Sequelae of other external causes',
 INSERT INTO care_icd10_en VALUES ( 'Y89.0', 'Sequelae of legal intervention', '', '', '', '', '', '', '4', '', '', '');
 INSERT INTO care_icd10_en VALUES ( 'Y89.1', 'Sequelae of war operations', '', '', '', '', '', '', '4', '', '', '');
 INSERT INTO care_icd10_en VALUES ( 'Y89.9', 'Sequelae of unspecified external cause', '', '', '', '', '', '', '4', '', '', '');
-
-
-
-
