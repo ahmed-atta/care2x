@@ -36,25 +36,25 @@ $LDEditTitle="Titre";
 $LDNewsDummy=array(1=>"premier",2=>"second",3=>"troisième",4=>"quatrième");
 
 $LDNoFrame='Ce site web utilise des cadres afin de fonctionner mieux. Veuillez installer un navigateur approprié. Nous conseillons
-						Microsoft Internet Explorer à partir de la version 5.0. Activez s`il vous plaît le Javascript (JScript) et
-						allumez la réception automatique des cookies';
+						Microsoft Internet Explorer à partir de la version 5.0. Activez Javascript (JScript) s`il vous plaît et
+						activez la réception automatique des cookies';
 
 $LDClk2Write="Cliquez-moi pour éditer";
 
-$LDAlertOldBrowser="Your browser version is older than 5.0!<br> We recommend the version 5.0 or later. <br> Using older versions might lead to
-								functional unreliability of the program.";
-$LDAlertNoCookie="You or your  browser might have rejected the cookie(s).<br>This program is dependent on them. Otherwise the program will not
-							function properly.<br>Please set your browser to automatically accept cookies.<br>";
-$LDClkAfter="Afterwards click this.";
-$LDGoAheadEgal="Click here to start the program.";
-$LDGoAheadEgalCookie="I don't want to accept cookies. Go ahead and start the program anyway.";
-$LDCookieRef="If you want to know more about cookies you can read the following documents:<br>
-						<a href=\"http://www.dtp-aus.com/cookies.htm\" target=\"pp\">A few words about Cookies (Security and the lies)</a><br>
-						<a href=\"http://www.cookiecentral.com/content.phtml?area=4&id=10\" target=\"pp\">Cookies and Privacy FAQ</a><br>";
-$LDPrivPolicy="If you want to read our privacy policy please <a href=\"language/en/en_privacy.htm\" target=\"pp\">click this:</a>";
-$LDOurPrivPolicy="Our Privacy Policy";
-$LDSubmitNews="Submit News";
-$LDEditNews="Edit & submit news via online editor";
+$LDAlertOldBrowser="Votre navigateur est plus vieux que 5.0!<br> Nous conseillons la version 5.0 et supérieure. <br> L'utilisation des versions plus anciennes peut conduire à
+								une fiabilité de fonction moins élevée du programme.";
+$LDAlertNoCookie="Vous ou votre navigateur a peut-être rejeté la (les) cookie(s).<br>Ce programme en dépend. Autrement le programme ne va pas finctionner correctement
+							.<br> Veuillez configurer votre navigateur afin d'accepter les cookies automatiquement, s'il vous plaît.<br>";
+$LDClkAfter="Veuillez cliquer ici ensuite.";
+$LDGoAheadEgal="Cliquez ici pour lancer le programme.";
+$LDGoAheadEgalCookie="Je ne veux pas accepter les cookies. Allez-y et demarrez le programme quand même.";
+$LDCookieRef="Si vous voulez en savoir plus sur les cookies, vous pouvez lire les documents suivants:<br>
+						<a href=\"http://www.dtp-aus.com/cookies.htm\" target=\"pp\">Quelques mots sur les Cookies (Sécurité et les mensonges)</a><br>
+						<a href=\"http://www.cookiecentral.com/content.phtml?area=4&id=10\" target=\"pp\">FAQ sur Cookies et la vie privée</a><br>";
+$LDPrivPolicy="Si vous souhaitez lire notre politique de discrétion, veuillez <a href=\"language/fr/fr_privacy.htm\" target=\"pp\">cliquer ici:</a>";
+$LDOurPrivPolicy="Notre politique de discrétion";
+$LDSubmitNews="Poster des nouvelles";
+$LDEditNews="Éditer et poster les nouvelles via l`éditeur en-ligne";
 /* 2002-10-17 EL */
 $LDCredits='Crédits';
 

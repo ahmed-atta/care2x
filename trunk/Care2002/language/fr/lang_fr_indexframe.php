@@ -4,7 +4,7 @@ $indextag=array('Home',
 				'Ambulatoire',
 				'Medocs',
 				'Docteurs',
-				'Nursing',
+				'Infirmiérie',
 				'OR',
 				'Laboratoires',
 				'Radiologie',
@@ -16,11 +16,11 @@ $indextag=array('Home',
 				'Intranet Email',
 				'Internet Email',
 				'Spéciaux ',
-				'Login '
+				'Connexion '
 				);
 
 $VersionChgTarget='_haut';
-$LDLanguage='Langage';
+$LDLanguage='Langue';
 $LDPlsWaitInit='Veuillez patienter. Le procès d`initialisation est en route....';
 
 $LDChange='Modifier';
