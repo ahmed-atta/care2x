@@ -46,9 +46,11 @@ if(!session_is_registered('sess_cur_page')) session_register('sess_cur_page');
 
 define('FROM_ROOT',1);
 
-if(!isset($mask)) $mask='';
-if(!isset($cookie)) $cookie='';
-if(!isset($boot)) $boot='';
+if(!isset($mask)) $mask=false;
+if(!isset($cookie)) $cookie=false;
+if(!isset($_chg_lang_)) $_chg_lang_=false;
+if(!isset($boot)) $boot=false;
+
 
 $bname='';
 $bversion='';
@@ -180,14 +182,14 @@ if(!$GLOBALCONFIG['language_single']) {
         /**
         * We get the language code
         */
-//echo $lang;
-    if(isset($lang)&&$lang) {
+    if($_chg_lang_&&!empty($lang)) {
 		    $savelang=1;
-    } else {
+	}else{
         if($USERCONFIG['lang']) $lang=$USERCONFIG['lang'];
 			    else  include('chklang.php');
 	 } 
-} else {
+}else{
+
     // If single language is configured, we get the user configured lang
 	if(!empty($USERCONFIG['lang']) && file_exists('language/'.$USERCONFIG['lang'].'/lang_'.$USERCONFIG['lang'].'_startframe.php')) {
 	    $lang=$USERCONFIG['lang'];

@@ -10,7 +10,7 @@ require($root_path.'include/inc_css_a_sublinker_d.php');
 <script language="javascript">
 function changeLanguage(lang)
 {
-    <?php if(($cfg[mask]==1)||($cfg[mask]==""))  echo "window.top.location.replace(\"../index.php?lang=\"+lang+\"&mask=$cfg[mask]&sid=$sid&egal=1\");";
+    <?php if(($cfg[mask]==1)||($cfg[mask]==""))  echo "window.top.location.replace(\"../index.php?lang=\"+lang+\"&mask=$cfg[mask]&sid=$sid&egal=1&_chg_lang_=1\");";
 	 else echo "window.opener.top.location.replace(\"../index.php?lang=\"+lang+\"&mask=$cfg[mask]&sid=$sid&egal=1\");";
 	 ?>
 	return false;
@@ -69,6 +69,7 @@ if(!$GLOBALCONFIG['language_single']){
 <select name="lang">
 	<option value="pt-br" <?php if($lang=='pt-br') echo 'selected'; ?>> <?php echo $LDBrazilian ?></option>
 	<option value="cs-iso" <?php if($lang=='cs-iso') echo 'selected'; ?>> <?php echo $LDCzech ?></option>
+	<option value="nl" <?php if($lang=='nl') echo 'selected'; ?>> <?php echo $LDDutch ?></option>
 	<option value="en" <?php if($lang=='en') echo 'selected'; ?>> <?php echo $LDEnglish ?></option>
 	<option value="fr" <?php if($lang=='fr') echo 'selected'; ?>> <?php echo $LDFrench ?></option>
 	<option value="de" <?php if($lang=='de') echo 'selected'; ?>> <?php echo $LDGerman ?></option>
@@ -83,6 +84,7 @@ if(!$GLOBALCONFIG['language_single']){
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
 <input type="hidden" name="mask" value="<?php echo $mask ?>">
 <input type="hidden" name="egal" value="1">
+<input type="hidden" name="chg_lang" value="1">
 <hr>
 </td>
 </tr>
