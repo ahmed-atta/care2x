@@ -6,9 +6,9 @@ $LDSave='Speichern';
 
 $LDSearchWordPrompt='Stichwort eingeben. z.B. Fallnummer, Name, Vorname, Geburtsdatum, oder Abkürzung u.s.w.';
 $LDEnterData='Klick um Daten einzugeben';
-$LDClk2See='Klick zum zeigen';
-$LDFoundPatient='The search found <b>~nr~</b> patients.';
-$LDWildCards='Was sind \'Wildcards\' and wie benutze ich sie beim suchen?';
+$LDClk2See='Klick zum Zeigen';
+$LDFoundPatient='Die Suche hat <b>~nr~</b> Patienten gefunden.';
+$LDWildCards='Was sind \'Wildcards\' and wie benutze ich sie beim Suchen?';
 $LDNewSearch='Neue Suche';
 
 $LDCaseNr='Fallnummer';
@@ -49,7 +49,7 @@ $LDWriteDiag='Befund schreiben';
 $LDPreviewReport='Vorschau/Befund';
 /* 2002-09-08 EL*/
 $LDTestRequestRadio='Anforderung';
-$LDTestRequestRadioTxt='Anforderung von radiologischer Untersuchung';
+$LDTestRequestRadioTxt='Anforderung einer radiologischen Untersuchung';
 /* 2002-09-10 EL */
 $LDTestReception='Anstehende Anforderung';
 $LDTestReceptionTxt='Anforderung verarbeiten, Befunde eingeben';
@@ -77,7 +77,7 @@ $LDSelectViewerTxt='DICOM Betrachter auswählen';
 $LDCurrentViewer='Betrachter heute';
 $LDNagoyaTechInst='Nagoya Tech. Institute';
 $LDRAIMJAVA='RAIMJAVA©';
-$LDNoImageSaved='Kein Bild is gespeichert!';
+$LDNoImageSaved='Kein Bild ist gespeichert!';
 $LDImageNotes='Information';
 
 ?>

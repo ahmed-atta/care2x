@@ -26,7 +26,7 @@ $LDEncounterClosed='Dieser Fall ist bereits abgeschlossen';
 $LDNoOutpatients='Es gibt noch  keine ambulante Patienten in der Ambulanz.';
 $LDGoToAppointments='Um Termine zu sehen, bitte hier anclicken.';
 $LDSureTransferPatient='Sind Sie sicher? Sie möchten diesen Patient überweisen?';
-$LDClkTransfer='Click zum Überweisen';
+$LDClkTransfer='Klick zum Überweisen';
 $LDSureTakeOverPatient='Sind Sie sicher? Sie möchten den Patient übernehmen?';
 $LDChkClinicConflict='Dieser Patient ist für eine andere Ambulanz bzw. Abteilung  (<b>~dept_id~</b>) vorgesehen. 
 Bitte klären Sie diesen Konflikt mit der Aufnahme bzw. anderen Abteilung ab bevor sie den Patient übernehmen. Danke.';
@@ -45,7 +45,7 @@ $LDPlsReadThis='Bitte lesen Sie hier';
 # 2003-08-11 EL
 $LDPersonIsEmployed='Diese Person ist gerade Angestellter dieser Einrichtung!';
 # 2003-08-24 EL
-$LDCachedInfo='Diese Information kommt aus der Cache!';
+$LDCachedInfo='Diese Information kommt aus dem Cache!';
 $LDClkNoCache='Hier >>klicken<< für aktuelle Daten.';
 
 # 2003-08-25 EL
