@@ -85,13 +85,13 @@ if(empty($is_discharged)){
 <td bgcolor="#eeeeee">
 <FONT SIZE=-1  FACE="Arial" ><FONT SIZE=-1  FACE="Arial" color="#800000">&nbsp;<b><?php echo $full_en; ?></b><br>
 <?php #
-if(file_exists($root_path.'cache/barcodes/en_'.$full_en.'.png')) echo '<img src="'.$root_path.'cache/barcodes/en_'.$full_en.'.png" border=0 width=145 height=35>';
+if(file_exists($root_path.'cache/barcodes/en_'.$full_en.'.png')) echo '<img src="'.$root_path.'cache/barcodes/en_'.$full_en.'.png" border=0 width=180 height=35>';
   else 
   {
 
-    echo "<img src='".$root_path."classes/barcode/image.php?code=".$full_en."&style=68&type=I25&width=145&height=50&xres=2&font=5&label=2&form_file=en' border=0 width=0 height=0>";
+    echo "<img src='".$root_path."classes/barcode/image.php?code=".$full_en."&style=68&type=I25&width=180&height=50&xres=2&font=5&label=2&form_file=en' border=0 width=0 height=0>";
 
-    echo "<img src='".$root_path."classes/barcode/image.php?code=".$full_en."&style=68&type=I25&width=145&height=40&xres=2&font=5' border=0>";
+    echo "<img src='".$root_path."classes/barcode/image.php?code=".$full_en."&style=68&type=I25&width=180&height=40&xres=2&font=5' border=0>";
   }
 ?>
 </td>

@@ -121,7 +121,10 @@ function Spacer()
 				   </FONT></TD>
                 </TR>
 				
-		  <?php// if($sex=='f') { ?>
+		  <?php
+		  /* If the sex is female, show the pregnancies option link */
+		   if($sex=='f') { 
+		   ?>
            <?php Spacer(); ?>
 				  
 				  <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'man-whi.gif','0') ?>></td>
@@ -130,7 +133,7 @@ function Spacer()
 				<a href="show_pregnancy.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&target=<?php echo $target ?>"><?php echo $LDPregnancies ?></a>
 				   </FONT></TD>
                 </TR>				  
-		  <?php //} ?>
+		  <?php } ?>
 		  
            <?php Spacer(); ?>
 				  

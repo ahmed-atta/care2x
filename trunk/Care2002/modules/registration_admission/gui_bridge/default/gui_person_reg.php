@@ -13,7 +13,7 @@ function createTR($error_handler, $input_name, $ld_text, $input_val, $colspan = 
 <tr>
 <td><FONT SIZE=-1  FACE="Arial,verdana,sans serif"><?php if ($error_handler) echo '<font color="'.$error_fontcolor.'">'; ?><?php echo $ld_text ?>:
 </td>
-<td colspan=<?php echo $colspan; ?>><input name="<?php echo $input_name; ?>" type="text" size="<?php echo $input_size; ?>" value="<?php echo $input_val; ?>" onFocus=hidecat()>
+<td colspan=<?php echo $colspan; ?>><input name="<?php echo $input_name; ?>" type="text" size="<?php echo $input_size; ?>" value="<?php echo $input_val; ?>" >
 </td>
 </tr>
 
@@ -85,8 +85,8 @@ function popSearchWin(target,obj_val,obj_name) {
 </script>
 
 <script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
 <?php 
 require($root_path.'include/inc_js_gethelp.php'); 
@@ -96,7 +96,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 </HEAD>
 
 
-<BODY bgcolor="<?php echo $cfg['bot_bgcolor'];?>" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="if (window.focus) window.focus();loadcat();" 
+<BODY bgcolor="<?php echo $cfg['bot_bgcolor'];?>" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="if (window.focus) window.focus();" 
 <?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
 
 
@@ -123,7 +123,7 @@ require('./gui_bridge/default/gui_tabs_patreg.php');
 <tr>
 <td colspan=3   bgcolor="<?php echo $cfg['body_bgcolor']; ?>">
 
- <div class="cats">
+<!--  <div class="cats">
 <a href="javascript:hidecat()"><img
 <?php if($from=='pass')
 { 
@@ -135,7 +135,7 @@ else
 }
 ?>
 align=right id=catcom border=0></a>
-</div> 
+</div>  -->
 
 <ul>
 
@@ -164,7 +164,7 @@ align=right id=catcom border=0></a>
 <td  rowspan=6 ><FONT SIZE=-1  FACE="Arial">
 <a href="#"  onClick="showpic(document.aufnahmeform.photo_filename)"><img <?php echo $img_source; ?> width=137  id="headpic" name="headpic"></a>
 <br>
-<?php echo $LDPhoto ?><br><input name="photo_filename" type="file" size="15" onFocus="hidecat()"  onChange="showpic(this)" value="<?php if(isset($photo_filename)) echo $photo_filename ?>">
+<?php echo $LDPhoto ?><br><input name="photo_filename" type="file" size="15"   onChange="showpic(this)" value="<?php if(isset($photo_filename)) echo $photo_filename ?>">
 
 </td>
 </tr>
@@ -190,7 +190,7 @@ align=right id=catcom border=0></a>
 <td><FONT SIZE=-1  FACE="Arial"><?php echo $LDTitle ?>:
 </td>
 <td >
-<input type="text" name="title" size=14 maxlength=25 value="<?php echo $title ?>" onFocus="hidecat(); this.select();">
+<input type="text" name="title" size=14 maxlength=25 value="<?php echo $title ?>" onFocus="this.select();">
 </td>
 </tr>
 
@@ -244,19 +244,21 @@ createTR($errornameothers, 'name_others', $LDNameOthers,$name_others);
 	 echo formatDate2Local(date('Y-m-d'),$date_format);
        }*/
  ?>"
- onFocus="hidecat(); this.select();"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"> 
- [ <?php   
+ onFocus="this.select();"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"> 
+ <a href="javascript:show_calendar('aufnahmeform.date_birth','<?php echo $date_format ?>')">
+ <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a> 
+ <font size=1>[ <?php   
  $dfbuffer="LD_".strtr($date_format,".-/","phs");
   echo $$dfbuffer;
- ?> ]
+ ?> ] </font>
 </td>
 <td>
 <FONT SIZE=-1  FACE="Arial">
 <?php 
 if ($errorsex) echo "<font color=red>";  
 echo $LDSex;
- ?>: <input name="sex" type="radio" value="m" onClick="hidecat()" <?php if($sex=="m") echo "checked"; ?>><?php echo $LDMale ?>&nbsp;&nbsp;
-<input name="sex" type="radio" value="f" onClick="hidecat()" <?php if($sex=="f") echo "checked"; ?>>
+ ?>: <input name="sex" type="radio" value="m"  <?php if($sex=="m") echo "checked"; ?>><?php echo $LDMale ?>&nbsp;&nbsp;
+<input name="sex" type="radio" value="f"  <?php if($sex=="f") echo "checked"; ?>>
 <?php 
 echo $LDFemale;
 if ($errorsex) echo "</font>";  
@@ -269,11 +271,11 @@ if ($errorsex) echo "</font>";
 <tr>
 <td><FONT SIZE=-1  FACE="Arial"><?php if ($errorcivil) echo "<font color=red>"; ?><?php echo $LDCivilStatus ?>:
 </td>
-<td colspan=2><FONT SIZE=-1  FACE="Arial"> <input name="civil_status" type="radio" value="single" onClick="hidecat()" <?php if($civil_status=="single") echo "checked"; ?>><?php echo $LDSingle ?>&nbsp;&nbsp;
-<input name="civil_status" type="radio" value="married" onClick="hidecat()" <?php if($civil_status=="married") echo "checked"; ?>><?php echo $LDMarried ?>
-<FONT SIZE=-1  FACE="Arial"> <input name="civil_status" type="radio" value="divorced" onClick="hidecat()" <?php if($civil_status=="divorced") echo "checked"; ?>><?php echo $LDDivorced ?>&nbsp;&nbsp;
-<input name="civil_status" type="radio" value="widowed" onClick="hidecat()" <?php if($civil_status=="widowed") echo "checked"; ?>><?php echo $LDWidowed ?>
-<FONT SIZE=-1  FACE="Arial"> <input name="civil_status" type="radio" value="separated" onClick="hidecat()" <?php if($civil_status=="separated") echo "checked"; ?>><?php echo $LDSeparated ?>&nbsp;&nbsp;
+<td colspan=2><FONT SIZE=-1  FACE="Arial"> <input name="civil_status" type="radio" value="single"  <?php if($civil_status=="single") echo "checked"; ?>><?php echo $LDSingle ?>&nbsp;&nbsp;
+<input name="civil_status" type="radio" value="married"  <?php if($civil_status=="married") echo "checked"; ?>><?php echo $LDMarried ?>
+<FONT SIZE=-1  FACE="Arial"> <input name="civil_status" type="radio" value="divorced"  <?php if($civil_status=="divorced") echo "checked"; ?>><?php echo $LDDivorced ?>&nbsp;&nbsp;
+<input name="civil_status" type="radio" value="widowed"  <?php if($civil_status=="widowed") echo "checked"; ?>><?php echo $LDWidowed ?>
+<FONT SIZE=-1  FACE="Arial"> <input name="civil_status" type="radio" value="separated"  <?php if($civil_status=="separated") echo "checked"; ?>><?php echo $LDSeparated ?>&nbsp;&nbsp;
 </td>
 </tr>
 
@@ -286,18 +288,18 @@ if ($errorsex) echo "</font>";
 <tr>
 <td><FONT SIZE=-1  FACE="Arial"><?php if ($errorstreet) echo "<font color=red>"; ?><?php echo $LDStreet ?>:
 </td>
-<td><input name="addr_str" type="text" size="35" value="<?php echo $addr_str; ?>" onFocus=hidecat()>
+<td><input name="addr_str" type="text" size="35" value="<?php echo $addr_str; ?>" >
 </td>
-<td>&nbsp;&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if ($errorstreetnr) echo "<font color=red>"; ?><?php echo $LDStreetNr ?>:<input name="addr_str_nr" type="text" size="10" value="<?php echo $addr_str_nr; ?>" onFocus=hidecat()>
+<td>&nbsp;&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if ($errorstreetnr) echo "<font color=red>"; ?><?php echo $LDStreetNr ?>:<input name="addr_str_nr" type="text" size="10" value="<?php echo $addr_str_nr; ?>" >
 </td>
 </tr>
 
 <tr>
 <td><FONT SIZE=-1  FACE="Arial"><?php if ($errortown) echo "<font color=red>"; ?><?php echo $LDTownCity ?>:
 </td>
-<td><input name="addr_citytown_name" type="text" size="35" value="<?php echo $addr_citytown_name; ?>" onFocus=hidecat()><a href="javascript:popSearchWin('citytown','aufnahmeform.addr_citytown_nr','aufnahmeform.addr_citytown_name')"><img <?php echo createComIcon($root_path,'l-arrowgrnlrg.gif','0') ?>></a>
+<td><input name="addr_citytown_name" type="text" size="35" value="<?php echo $addr_citytown_name; ?>" ><a href="javascript:popSearchWin('citytown','aufnahmeform.addr_citytown_nr','aufnahmeform.addr_citytown_name')"><img <?php echo createComIcon($root_path,'b-write_addr.gif','0') ?>></a>
 </td>
-<td>&nbsp;&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if ($errorzip) echo "<font color=red>"; ?><?php echo $LDZipCode ?>:<input name="addr_zip" type="text" size="10" value="<?php echo $addr_zip; ?>" onFocus=hidecat()>
+<td>&nbsp;&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if ($errorzip) echo "<font color=red>"; ?><?php echo $LDZipCode ?>:<input name="addr_zip" type="text" size="10" value="<?php echo $addr_zip; ?>" >
 
 </td>
 </tr>
@@ -315,7 +317,7 @@ if($insurance_show) {
 if($insurance_classes!=false){
     while($result=$insurance_classes->FetchRow()) {
 ?>
-<input name="insurance_class_nr" type="radio"  value="<?php echo $result['class_nr']; ?>" onClick="hidecat()" <?php if($insurance_class_nr==$result['class_nr']) echo 'checked'; ?>>
+<input name="insurance_class_nr" type="radio"  value="<?php echo $result['class_nr']; ?>"  <?php if($insurance_class_nr==$result['class_nr']) echo 'checked'; ?>>
 <?php 
         $LD=$result['LD_var'];
         if(isset($$LD)&&!empty($$LD)) echo $$LD; else echo $result['name'];
@@ -328,7 +330,7 @@ if($insurance_classes!=false){
 <tr>
 <td><FONT SIZE=-1  FACE="Arial"><?php if ($errorinsurancecoid) echo '<font color="'.$error_fontcolor.'">'; ?><?php echo $LDInsuranceCo ?>:
 </td>
-<td colspan=2><input name="insurance_firm_name" type="text" size="35" value="<?php echo $insurance_firm_name; ?>" onFocus=hidecat()><a href="javascript:popSearchWin('insurance','aufnahmeform.insurance_firm_id','aufnahmeform.insurance_firm_name')"><img <?php echo createComIcon($root_path,'l-arrowgrnlrg.gif','0') ?>></a>
+<td colspan=2><input name="insurance_firm_name" type="text" size="35" value="<?php echo $insurance_firm_name; ?>" ><a href="javascript:popSearchWin('insurance','aufnahmeform.insurance_firm_id','aufnahmeform.insurance_firm_name')"><img <?php echo createComIcon($root_path,'b-write_addr.gif','0') ?>></a>
 </td>
 </tr>
 <?php
@@ -404,7 +406,7 @@ createTR($errorethnicorig, 'ethnic_orig', $LDEthnicOrigin,$ethnic_orig,2);
 <td ><FONT SIZE=-1  FACE="Arial" ><FONT  SIZE=2  FACE="Arial"><?php echo $LDRegBy ?>
 </td>
 <td colspan=2><FONT SIZE=-1  FACE="Arial"><nobr>
-<input  name="user_id" type="text" value=<?php if ($user_id!='') echo '"'.$user_id.'"' ; else echo '"'.$HTTP_COOKIE_VARS[$local_user.$sid].'"' ?> size="35" onFocus=hidecat()>
+<input  name="user_id" type="text" value=<?php if ($user_id!='') echo '"'.$user_id.'"' ; else echo '"'.$HTTP_COOKIE_VARS[$local_user.$sid].'"' ?> size="35" >
 </nobr></td>
 </tr>
 
@@ -429,8 +431,8 @@ createTR($errorethnicorig, 'ethnic_orig', $LDEthnicOrigin,$ethnic_orig,2);
 }
 ?>
 
-<input  type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?> onClick=hidecat() alt="<?php echo $LDSaveData ?>" align="absmiddle"> 
-<a href="javascript:document.aufnahmeform.reset()"><img <?php echo createLDImgSrc($root_path,'reset.gif','0') ?> alt="<?php echo $LDResetData ?>" onClick=hidecat()  align="absmiddle"></a>
+<input  type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?>  alt="<?php echo $LDSaveData ?>" align="absmiddle"> 
+<a href="javascript:document.aufnahmeform.reset()"><img <?php echo createLDImgSrc($root_path,'reset.gif','0') ?> alt="<?php echo $LDResetData ?>"   align="absmiddle"></a>
 
 <?php if($error==1) echo '<input  type="button" value="'.$LDForceSave.'" onClick="forceSave()">'; ?>
 
@@ -451,7 +453,7 @@ createTR($errorethnicorig, 'ethnic_orig', $LDEthnicOrigin,$ethnic_orig,2);
 <input type=hidden name=patnum value="">
 <input type=hidden name="lang" value="<?php echo $lang; ?>">
 <input type=hidden name="date_format" value="<?php echo $date_format; ?>">
-<input type=submit value="<?php echo $LDNewForm ?>" onClick=hidecat()>
+<input type=submit value="<?php echo $LDNewForm ?>" >
 </form>
 <?php endif; ?>
 
@@ -471,9 +473,9 @@ createTR($errorethnicorig, 'ethnic_orig', $LDEthnicOrigin,$ethnic_orig,2);
 
 <p>
 <a href="
-<?php if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo 'startframe.php';
+<?php if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) echo 'startframe.php';
 	else echo 'aufnahme_pass.php';
-	echo "?sid=".$sid."&lang=".$lang;
+	echo URL_APPEND;
 ?>
 "><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
 </ul>

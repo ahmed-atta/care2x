@@ -59,7 +59,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 
 <tr>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php echo $LDPatientRegister ?></STRONG> <font size=+2>(<?php echo ($pid+$GLOBAL_CONFIG['person_id_nr_adder']) ?>)</font></FONT>
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php echo $LDPatientRegister ?></STRONG> <font size=+2>(<?php echo ($pid) ?>)</font></FONT>
 </td>
 
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
@@ -85,7 +85,7 @@ require('./gui_bridge/default/gui_tabs_patreg.php');
 <tr>
 <td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php echo $LDRegistryNr ?>:
 </td>
-<td width="30%"  bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo $pid+$GLOBAL_CONFIG['person_id_nr_adder']; ?>
+<td width="30%"  bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo $pid; ?>
 </td>
 
 <td valign="top" rowspan=7 align="center" bgcolor="#ffffee" ><FONT SIZE=-1  FACE="Arial"><img <?php echo $img_source; ?> width=137>
@@ -326,8 +326,10 @@ createTR($LDEthnicOrigin,$ethnic_orig,2);
 <?php echo createLDImgSrc($root_path,'update_data.gif','0','absmiddle') ?>></a>
 <a href="<?php echo $admissionfile ?>&pid=<?php echo $pid ?>&origin=patreg_reg&encounter_class_nr=1"><img <?php echo createLDImgSrc($root_path,'admit_inpatient.gif','0','absmiddle') ?>></a>
 <a href="<?php echo $admissionfile ?>&pid=<?php echo $pid ?>&origin=patreg_reg&encounter_class_nr=2"><img <?php echo createLDImgSrc($root_path,'admit_outpatient.gif','0','absmiddle') ?>></a>
+
+
 <form action="patient_register.php" method=post>
-<input type=submit value="<?php echo $LDNewForm ?>" onClick=hidecat()>
+<input type=submit value="<?php echo $LDRegisterNewPerson ?>" >
 <input type=hidden name="sid" value=<?php echo $sid; ?>>
 <input type=hidden name="lang" value="<?php echo $lang; ?>">
 </form>
@@ -349,7 +351,7 @@ createTR($LDEthnicOrigin,$ethnic_orig,2);
 
 <p>
 <a href="
-<?php if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) echo 'startframe.php'.URL_APPEND;
+<?php if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) echo $root_path.'main/startframe.php'.URL_APPEND;
 	else echo $breakfile.URL_APPEND;
 	echo ;
 ?>

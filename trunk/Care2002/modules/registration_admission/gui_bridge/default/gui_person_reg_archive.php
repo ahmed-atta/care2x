@@ -37,8 +37,8 @@ function popSearchWin(target,obj_val,obj_name) {
 </script>
 
 <script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
 <?php
 require($root_path.'include/inc_js_gethelp.php');
@@ -126,7 +126,7 @@ for($j=0;$j<sizeof($LDElements);$j++)
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; <a href="'.$buf.'" title="'.$LDClk2Show.'">'.$result['name_last'].'</a></td>
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.$result['name_first'].'</a></td>
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;'.@formatDate2Local($result['date_birth'],$date_format).'</td>
-    <td align=right><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;'.($result['pid']+$GLOBAL_CONFIG['person_id_nr_adder']).'</td>
+    <td align=right><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;'.$result['pid'].'</td>
     <td align=right><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.@formatDate2Local($result['date_reg'],$date_format).'</a></td>
   </tr>
   <tr bgcolor=#0000ff>
@@ -165,17 +165,21 @@ createTR( 'user_id', $LDRegBy,$user_id);
 <td><FONT SIZE=-1  FACE="Arial"><?php echo $LDRegDate ?>: 
 </td>
 <td ><FONT SIZE=-1  FACE="Arial">
-<input name="date_start" type="text" size=10 maxlength=10    onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-[ <?php   
+<input name="date_start" type="text" size=10 maxlength=10   value="<?php if(!empty($date_start)) echo @formatDate2Local($date_start,$date_format);  ?>"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+ <a href="javascript:show_calendar('aufnahmeform.date_start','<?php echo $date_format ?>')">
+ <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a> 
+ <font size=1>[ <?php   
  $dfbuffer="LD_".strtr($date_format,".-/","phs");
   echo $$dfbuffer;
- ?> ]
+ ?> ] </font>
 </td>
-<td><nobr><FONT SIZE=-1  FACE="Arial"><?php echo $LDTo ?>: <input name="date_end" type="text" size=10 maxlength=10   onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-[ <?php   
+<td><nobr><FONT SIZE=-1  FACE="Arial"><?php echo $LDTo ?>: <input name="date_end" type="text" size=10 maxlength=10  value="<?php if(!empty($date_end))  echo @formatDate2Local($date_end,$date_format);  ?>"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+ <a href="javascript:show_calendar('aufnahmeform.date_end','<?php echo $date_format ?>')">
+ <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a> 
+ <font size=1>[ <?php   
  $dfbuffer="LD_".strtr($date_format,".-/","phs");
   echo $$dfbuffer;
- ?> ]
+ ?> ] </font>
 </nobr></td>
 </tr>
 
@@ -227,12 +231,14 @@ if(!isset($addr_city_town)) $addr_city_town='';
 <td><FONT SIZE=-1  FACE="Arial"><?php echo $LDBday ?>:
 </td>
 <td><FONT SIZE=-1  FACE="Arial">
-<input name="date_birth" type="text" size="15" maxlength=10 value="<?php   echo $date_birth;  ?>"
+<input name="date_birth" type="text" size="15" maxlength=10 value="<?php  if(!empty($date_birth))  echo @formatDate2Local($date_birth,$date_format);  ?>"
  onFocus="this.select();"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"> 
- [ <?php   
+<a href="javascript:show_calendar('aufnahmeform.date_birth','<?php echo $date_format ?>')">
+ <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a> 
+ <font size=1>[ <?php   
  $dfbuffer="LD_".strtr($date_format,".-/","phs");
   echo $$dfbuffer;
- ?> ]
+ ?> ] </font>
 </td>
 <td colspan=2><FONT SIZE=-1  FACE="Arial"><?php echo $LDSex ?>: <input name="sex" type="radio" value="m"><?php echo $LDMale ?>&nbsp;&nbsp;
 <input name="sex" type="radio" value="f"><?php echo $LDFemale ?>
