@@ -11,7 +11,7 @@ switch($src)
  ?></b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
-<? if($src=="search") : ?>
+<?php if($src=="search") : ?>
 <b>Step 1</b>
 
 <ul> Enter  in the "<span style="background-color:yellow" >Enter search keyword.</span>" field either a full information or a few letters, like for example the ward's or department's code, a name, or Given name,
@@ -28,13 +28,13 @@ switch($src)
 <b>Step 3</b>
 <ul> If the search finds result(s), a list will be displayed.<p>
 </ul>
-<? endif ?>
-<? if($src=="dir") : ?>
+<?php endif ?>
+<?php if($src=="dir") : ?>
 <b>Step 1</b>
 <ul> Click the button <img src="../img/en/en_phonedir-gray.gif" border="0">.
 </ul>
-<? endif ?>
-<? if($src=="newphone") : ?>
+<?php endif ?>
+<?php if($src=="newphone") : ?>
 <b>Step 1</b>
 <ul> Click the button <img src="../img/en/en_newdata-gray.gif" border="0">.
 </ul>
@@ -45,7 +45,7 @@ switch($src)
 		Enter your username and password and click the button <img src="../img/en/en_continue.gif" border=0>.<p>
 		If you decide to cancel click the button <img src="../img/en/en_cancel.gif" border=0>.
 		
-</ul><? endif ?>
+</ul><?php endif ?>
 
 <b>Note</b>
 <ul> If you decide to cancel search click the button <img src="../img/en/en_cancel.gif" border=0>.

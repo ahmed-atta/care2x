@@ -1,10 +1,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b><?="Patient's Data - $x3" ?></b></font>
+<b><?php echo "Patient's Data - $x3" ?></b></font>
 <form action="#" >
 <p><font size=2 face="verdana,arial" >
 
-<? if($src=="") : ?>
+<?php if($src=="") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>What do these  <img src="../img/colorcodebar3.gif" border=0 > color bars mean? </b></font>
 <ul> <b>Note: </b>Each of these color bars when "set visible" signalize the availability of a particular information, an instruction, a change, or a query, etc.<br>
 			The meaning of a color can be set for every ward. <br>
@@ -72,16 +72,16 @@ What is the function of this selection box </b>	<select name="d"><option value="
 		<b>Step 2: </b>Click on the chosen clinic, department, or diagnostic test.<br>
 		<b>Step 3: </b>The request form will be automatically opened.<br>
 </ul>
-<? endif ?>
+<?php endif ?>
 
-<? if($src=="labor") : ?>
+<?php if($src=="labor") : ?>
 <img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b>There is no laboratory report available at the moment. </b></font>
 <ul> Click the button <input type="button" value="OK"> to go back to the patient's data folder.</ul>
-<? else  : ?>
+<?php else  : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>How to close the patient's data folder? </b></font>
 <ul> <b>Note: </b>If you want to close, click the button <img src="../img/en/en_close2.gif" border=0 align="absmiddle">.</ul>
 
-<? endif ?>
+<?php endif ?>
 
 </form>
 

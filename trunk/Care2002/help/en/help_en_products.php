@@ -34,7 +34,7 @@ if($x2=="pharma") print "Pharmacy - "; else print "Medical depot - ";
  ?></b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
-<? if($src=="maincat") : ?>
+<?php if($src=="maincat") : ?>
 
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to add an article into the order catalog?</b>
@@ -79,12 +79,12 @@ How to remove an article from the catalog list?</b>
  	<b>Step 1: </b>Click the button <img src="../img/delete2.gif" border=0 align=absmiddle> of the article.<br>
 </ul>
 
-<? endif ?>
+<?php endif ?>
 
-<? if($src=="how2") : ?>
+<?php if($src=="how2") : ?>
 
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
-How to order <? if($x2=="pharma") print "pharmaceutical products"; else print "products from medical depot"; ?>?
+How to order <?php if($x2=="pharma") print "pharmaceutical products"; else print "products from medical depot"; ?>?
 </b>
 </font>
 <ul>       	
@@ -139,12 +139,12 @@ Can I change the number of pieces in the order basket?
 All the articles I need are in the basket now. What should I do next?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>You can proceed to sending the order list to the  <? if($x2=="pharma") print "pharmacy"; else print "medical depot"; ?>. <br>Click the button <input type="button" value="Finalize order list"> to start the procedure.<br>
+ 	<b>Step 1: </b>You can proceed to sending the order list to the  <?php if($x2=="pharma") print "pharmacy"; else print "medical depot"; ?>. <br>Click the button <input type="button" value="Finalize order list"> to start the procedure.<br>
  	<b>Step 2: </b>The order list will be displayed again. Enter your name in the <nobr>"<span style="background-color:yellow" > Created by <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> field.<br>
  	<b>Step 3: </b>Select the priority status of the order between "<span style="background-color:yellow" > Normal<input type="radio" name="x" value="s" checked> Urgent<input type="radio" name="x" > </span>". Check the appropriate radio button.<br>
  	<b>Step 4: </b>The validator (physician or surgeon) must enter his name in the <nobr>"<span style="background-color:yellow" > Validated by <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> field.<br>
  	<b>Step 5: </b>The validator (physician or surgeon) must enter his password in the <nobr>"<span style="background-color:yellow" > Password: <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> field.<br>
- 	<b>Step 6: </b>Click the button <input type="button" value="Send this order list to the <? if($x2=="pharma") print "pharmacy"; else print "medical depot"; ?>"> to send the order list.<br>
+ 	<b>Step 6: </b>Click the button <input type="button" value="Send this order list to the <?php if($x2=="pharma") print "pharmacy"; else print "medical depot"; ?>"> to send the order list.<br>
 </ul>
 <img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b> Note:</b></font> 
 <ul>       	
@@ -154,7 +154,7 @@ All the articles I need are in the basket now. What should I do next?</b>
 I want to end the ordering now. What should I do?</b>
 </font>
 <ul>     
- 	<b>Step 1: </b>Click the link "<span style="background-color:yellow" > <img src="../img/arrow-blu.gif" border=0> End ordering </span>" to go back to the <? if($x2=="pharma") print "pharmacy"; else print "medical depot"; ?>'s submenu.<br>
+ 	<b>Step 1: </b>Click the link "<span style="background-color:yellow" > <img src="../img/arrow-blu.gif" border=0> End ordering </span>" to go back to the <?php if($x2=="pharma") print "pharmacy"; else print "medical depot"; ?>'s submenu.<br>
 </ul>	
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 I want to create a new order list. What should I do?</b>
@@ -170,13 +170,13 @@ I want to create a new order list. What should I do?</b>
 <ul>       	
  If you decide to close click the button <img src="../img/en/en_close2.gif" border=0>.
 </ul>
-<? endif ?>
+<?php endif ?>
 
 
-<? if($src=="head") : ?>
+<?php if($src=="head") : ?>
 
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
-How to order <? if($x2=="pharma") print "pharmaceutical products"; 
+How to order <?php if($x2=="pharma") print "pharmaceutical products"; 
 						else print "products from the medical depot"; ?>?
 </b>
 </font>
@@ -193,9 +193,9 @@ How to order <? if($x2=="pharma") print "pharmaceutical products";
 <ul>       	
  If you decide to close click the button <img src="../img/en/en_close2.gif" border=0>.
 </ul>
-<? endif ?>
+<?php endif ?>
 
-<? if($src=="catalog") : ?>
+<?php if($src=="catalog") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to put an article in the basket (order list)?
 </b>
@@ -237,10 +237,10 @@ How to remove an article from the catalog list?</b>
  	<b>Step 1: </b>Click the button <img src="../img/delete2.gif" border=0 align=absmiddle> of the article.<br>
 </ul>
 
-<? endif ?>
+<?php endif ?>
 
-<? if($src=="orderlist") : ?>
-	<? if($x1=="0") : ?>
+<?php if($src=="orderlist") : ?>
+	<?php if($x1=="0") : ?>
 <img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b> Note:</b></font> 
 <ul>       	
  The basket is empty at the moment.<p>
@@ -259,7 +259,7 @@ How to put an article in the basket (order list)?
  For detailed instructions on how to search, select, and put articles from catalog list into the basket, click the <img src="../img/frage.gif" border=0 align="absmiddle"> button within the order catalog frame on the right.<p>
 </ul>
 
-	<? else : ?>
+	<?php else : ?>
 
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Can I change the number of pieces in the order basket?
@@ -297,13 +297,13 @@ All the articles I need are in the basket now. What should I do next?</b>
 <ul>       	
  If you decide to cancel sending of the order list, click the link "<span style="background-color:yellow" > << Go back and edit list </span>" to go back to the order list.
 </ul>
-	<? endif ?>
+	<?php endif ?>
 
-<? endif ?>
+<?php endif ?>
 
 
-<? if($src=="final") : ?>
-	<? if($x1=="1") : ?>
+<?php if($src=="final") : ?>
+	<?php if($x1=="1") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 I want to end the ordering now. What should I do?</b>
 </font>
@@ -315,7 +315,7 @@ I want to create a new order list. What should I do?</b>
 </font>
 <ul>     
  	<b>Step 1: </b>Click the link "<span style="background-color:yellow" > <img src="../img/arrow-blu.gif" border=0> Start a new order list </span>" to create an empty order basket.<br>
-</ul>		<? else : ?>
+</ul>		<?php else : ?>
 
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to send the final order list?</b>
@@ -331,11 +331,11 @@ How to send the final order list?</b>
 <ul>       	
  If you decide to cancel sending of the order list, click the link "<span style="background-color:yellow" > << Go back and edit list </span>" to go back to the order list.
 </ul>
-	<? endif ?>
+	<?php endif ?>
 
-<? endif ?>
+<?php endif ?>
 <!-- ++++++++++++++++++++++++++++++++++ archive +++++++++++++++++++++++++++++++++++++++++++ -->
-<? if($src=="arch") : ?>
+<?php if($src=="arch") : ?>
 
 
 <img src="../img/frage.gif" border=0 align="absmiddle"> 
@@ -365,9 +365,9 @@ How to send the final order list?</b>
 </ul>
 
 
-	<? endif ?>
+	<?php endif ?>
 	
-<? if($src=="archshow") : ?>
+<?php if($src=="archshow") : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 I want to see more information about an article in the order list. What should I do?</b>
 </font>
@@ -395,11 +395,11 @@ I want to see the list of archived orders again. What should I do?</b>
 <b>Step 3: </b>Click the button <input type="button" value="Search"> to find the article.<br>
  	<b>Step 4: </b>If the search finds the order  or orders that approximate the search keyword, a list will be displayed.<br>
 </ul>
-	<? endif ?>	
+	<?php endif ?>	
 	
 
-<? if($src=="db") : ?>
-	<? if($x1=="") : ?>
+<?php if($src=="db") : ?>
+	<?php if($x1=="") : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to enter a new product into the databank?</b>
 </font>
@@ -419,8 +419,8 @@ I am finished entering all available product information. How to save it?</b>
 <ul>       	
  	<b>Step 1: </b>Click the button <input type="button" value="Save">.<br>
 </ul>
-	<? endif ?>	
-	<? if($x1=="save") : ?>
+	<?php endif ?>	
+	<?php if($x1=="save") : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to enter a new product into the databank?</b>
 </font>
@@ -440,7 +440,7 @@ I want to edit the product that is currently displayed How to do it?</b>
  	<b>Step 4: </b>Click the button <input type="button" value="Save"> to save the new information.<br>
 </ul>
 	
-	<? endif ?>	
-<? endif ?>	
+	<?php endif ?>	
+<?php endif ?>	
 </form>
 

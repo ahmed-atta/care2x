@@ -1,4 +1,6 @@
-<?
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+
 $foreword='
 <form action="#">
 
@@ -13,17 +15,17 @@ switch($x1)
  }
 ?>
 
-<? if(!$x1) : ?>
-		<? require("help_de_main.php"); ?>
-<? else : ?>
+<?php if(!$x1) : ?>
+		<?php require("help_de_main.php"); ?>
+<?php else : ?>
 </b></font>
  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <p>
 <font face="Verdana, Arial" size=2>
 
-<? if($src!=$x1) : ?>
+<?php if($src!=$x1) : ?>
 <b>Schritt 1</b>
-<ul> Den  <img src="../img/de/de<? switch($x1)
+<ul> Den  <img src="../img/de/de<?php switch($x1)
 																			{
 																				case "entry": print '_ein-gray.gif'; break;
 																				case "search": print '_such-gray.gif'; break;
@@ -33,9 +35,9 @@ switch($x1)
 		
 </ul>
 <b>Schritt 2</b>
-<? endif ?>
+<?php endif ?>
 <ul> Wenn sie sich vorher angemeldet haben und ein Zugangsrecht in dieser Funktion haben, wird 
-<? switch($x1)
+<?php switch($x1)
 	{
 		case "entry": print 'das Formular zur Aufnahme von Patienten'; break;
 		case "search": print 'die Suchfelder '; break;
@@ -50,4 +52,4 @@ switch($x1)
 
 
 </form>
-<? endif ?>
+<?php endif ?>

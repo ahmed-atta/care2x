@@ -4,14 +4,14 @@
 <form action="#" >
 <p><font size=2 face="verdana,arial" >
 
-<? if($src=="select") : ?>
+<?php if($src=="select") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>I want to update the displayed data</b></font>
 <ul> <b>Step : </b>Click the button <input type="button" value="Update data"> to start editing the data.<br>
 </ul>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>I want to start a new search in the archives</b></font>
 <ul> <b>Step : </b>Click the button <input type="button" value="New research in archive"> to start a new search.<br>
 </ul>
-<? elseif($src=="search") : ?>
+<?php elseif($src=="search") : ?>
 <b>Note</b>
 <ul> If the search finds a single result, the complete information will be displayed immediately.<br>
 		However, if the search finds several results, a list will be displayed.<br>
@@ -21,7 +21,7 @@
 <b>Note</b>
 <ul> If you want to start a new research  click the button <input type="button" value="New research in archive">.
 </ul>
-<? else : ?>
+<?php else : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>I want to list all admitted patients today</b></font>
 <ul> <b>Step 1: </b>Enter today's date in the field "Admission date: from:". <br>
 		<ul><font size=1 color="#000099">
@@ -118,7 +118,7 @@
 		the name, or the Family name or the admission date.
 </ul>
 
-<? endif ?>
+<?php endif ?>
 <b>Note</b>
 <ul> If you decide to cancel research  click the button <input type="button" value="Cancel">.
 </ul>

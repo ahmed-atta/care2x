@@ -1,7 +1,7 @@
 <?
 require("../chklang.php");
 $notable=1;
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK) 
 	{
 		$sql="select * from mahopass";
@@ -18,9 +18,9 @@ if (!$notable)
 	else 
 	{
 		 $usid=uniqid("");
-		 //print "hello";
-		 setcookie(ck_sid,$usid);
-	}
+		 include("../include/inc_init_crypt.php"); // initialize crypt
+         $ciphersid=$enc_hcemd5->encodeMimeSelfRand($usid);
+    }
 ?>
 <html>
 <head>
@@ -38,13 +38,15 @@ else document.write('<img src="../img/catr.gif" border=0  align="left">');
 <p>
 
 <p><br>
-<form action="../phpmyadmin/index.php3">
+<form action="../phpmyadmin/index.php3" method=post>
 <input type="submit" value="Start phpMyAdmin">
-      <input type="hidden" name="sid" value="<?=$usid ?>">
-      <input type="hidden" name="ck_sid" value="<?=$usid ?>">
-      <input type="hidden" name="lang" value="<?=$lang ?>">
+      <input type="hidden" name="s1" value="<?php echo $usid ?>">
+      <input type="hidden" name="s2" value="<?php echo $ciphersid ?>">
+      <input type="hidden" name="mode" value="FORCE_ENABLE_PHP">
+      <input type="hidden" name="lang" value="<?php echo $lang ?>">
       
 <input type="button" value="Cancel" onClick="window.location.replace('../blank.htm');">
 </form>
 </body>
 </html>
+

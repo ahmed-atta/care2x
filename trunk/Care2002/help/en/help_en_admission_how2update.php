@@ -4,15 +4,15 @@
 <b>To update or change data</b>
 <ul> If you want to make changes in the information click the button <input type="button" value="Update data">.
 </ul>
-<? if($src=="search") : ?>
+<?php if($src=="search") : ?>
 <b>New search</b>
 <ul> If you want to start a new search click the button <input type="button" value="Back to search">.
 </ul>
-<? else : ?>
+<?php else : ?>
 <b>To start a new admission of a new patient</b>
 <ul> If you want to start new admission click the button <input type="button" value="Back to admission">.
 </ul>
-<? endif ?>
+<?php endif ?>
 <b>Note</b>
 <ul> If you are finished  click the button <img src="../img/en/en_cancel.gif" border=0>.
 		

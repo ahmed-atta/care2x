@@ -4,25 +4,25 @@
 <form action="#" >
 <p><font size=2 face="verdana,arial" >
 
-<? if($src=="select") : ?>
+<?php if($src=="select") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>I want to update the displayed medocs document</b></font>
 <ul> <b>Step : </b>Click the button <input type="button" value="Update data"> to start editing the document.<br>
 </ul>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>I want to start a new research in the archives</b></font>
 <ul> <b>Step : </b>Click the button <input type="button" value="New research in archive"> to start a new research.<br>
 </ul>
-<? elseif(($src=="search")&&($x1)) : ?>
+<?php elseif(($src=="search")&&($x1)) : ?>
 <b>Note</b>
-<ul><? if($x1==1) : ?> If the search finds a single result, the complete document will be displayed immediately.<br>
+<ul><?php if($x1==1) : ?> If the search finds a single result, the complete document will be displayed immediately.<br>
 		However, if the search finds several results, a list will be displayed.<br>
-		<? endif ?>
+		<?php endif ?>
 		To see the information for the patient you are looking for, click either the button <img src="../img/R_arrowGrnSm.gif" border=0 height=12 border=0> corresponding to it, or
 		the name, or the Family name or the admission date.
 </ul>
 <b>Note</b>
 <ul> If you want to start a new research  click the button <input type="button" value="New research in archive">.
 </ul>
-<? else : ?>
+<?php else : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>I want to list all medocs documents of a certain department</b></font>
 <ul> <b>Step 1: </b>Enter the department's code in the field "Department:". <br>
 		<b>Step 2: </b>Leave all other fields blank or empty.<br>
@@ -110,7 +110,7 @@
 		the name, or the Family name or the admission date.
 </ul>
 
-<? endif ?>
+<?php endif ?>
 <b>Note</b>
 <ul> If you decide to cancel research  click the button <input type="button" value="Close">.
 </ul>

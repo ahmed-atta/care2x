@@ -1,11 +1,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <a name="howto">
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b><?="$x3" ?></b></font>
+<b><?php echo "$x3" ?></b></font>
 <form action="#" >
 <p><font size=2 face="verdana,arial" >
 
-<? if($src=="bp_temp") : ?>
+<?php if($src=="bp_temp") : ?>
 <a name="cbp"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 How to enter a temperature or blood pressure?</b></font>
 <ul> <b>Step 1: </b>Enter the time and data.<br>
@@ -25,8 +25,8 @@ How to enter a temperature or blood pressure?</b></font>
 		<b>Step 5: </b>If you are finished, click the button <img src="../img/en/en_close2.gif" border=0> to close the window and go back to the chart.<br>
 		
 </ul>
-<? endif ?>
-<? if($src=="diet") : ?>
+<?php endif ?>
+<?php if($src=="diet") : ?>
 
 <a name="diet"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 How to enter a diet plan?</b></font>
@@ -37,8 +37,8 @@ How to enter a diet plan?</b></font>
 		<b>Step 4: </b>If you are finished, click the button <img src="../img/en/en_close2.gif" border=0> to close the window and go back to the chart.<br>
 		
 </ul>
-<? endif ?>
-<? if($src=="allergy") : ?>
+<?php endif ?>
+<?php if($src=="allergy") : ?>
 <a name="allergy"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 How to enter allergy information?</b></font>
 <ul> 
@@ -50,8 +50,8 @@ How to enter allergy information?</b></font>
 		<b>Step 4: </b>If you are finished, click the button <img src="../img/en/en_close2.gif" border=0> to close the window and go back to the chart.<br>
 		
 </ul>
-<? endif ?>
-<? if($src=="diag_ther") : ?>
+<?php endif ?>
+<?php if($src=="diag_ther") : ?>
 <a name="diag"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 How to enter main diagnosis and/or therapy?</b></font>
 <ul> 
@@ -63,8 +63,8 @@ How to enter main diagnosis and/or therapy?</b></font>
 		<b>Step 4: </b>If you are finished, click the button <img src="../img/en/en_close2.gif" border=0> to close the window and go back to the chart.<br>
 		
 </ul>
-<? endif ?>
-<? if($src=="diag_ther_dailyreport") : ?>
+<?php endif ?>
+<?php if($src=="diag_ther_dailyreport") : ?>
 <a name="daydiag"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 How to enter information on daily diagnosis or therapy plan?</b></font>
 <ul> 
@@ -76,8 +76,8 @@ How to enter information on daily diagnosis or therapy plan?</b></font>
 		<b>Step 4: </b>If you are finished, click the button <img src="../img/en/en_close2.gif" border=0> to close the window and go back to the chart.<br>
 		
 </ul>
-<? endif ?>
-<? if($src=="xdiag_specials") : ?>
+<?php endif ?>
+<?php if($src=="xdiag_specials") : ?>
 <a name="extra"><a name="diag"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a></a>
 How to enter notes, extra diagnoses?</b></font>
 <ul> 
@@ -89,8 +89,8 @@ How to enter notes, extra diagnoses?</b></font>
 		<b>Step 4: </b>If you are finished, click the button <img src="../img/en/en_close2.gif" border=0> to close the window and go back to the chart.<br>
 		
 </ul>
-<? endif ?>
-<? if($src=="kg_atg_etc") : ?>
+<?php endif ?>
+<?php if($src=="kg_atg_etc") : ?>
 <a name="pt"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 How to enter  information on daily physical therapy (PT), anti-thrombosis gymnastic (Atg), etc.?</b></font>
 <ul> 
@@ -102,8 +102,8 @@ How to enter  information on daily physical therapy (PT), anti-thrombosis gymnas
 		<b>Step 4: </b>If you are finished, click the button <img src="../img/en/en_close2.gif" border=0> to close the window and go back to the chart.<br>
 		
 </ul>
-<? endif ?>
-<? if($src=="anticoag") : ?>
+<?php endif ?>
+<?php if($src=="anticoag") : ?>
 <a name="coag"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 How to enter anticoagulants?</b></font>
 <ul> 
@@ -115,8 +115,8 @@ How to enter anticoagulants?</b></font>
 		<b>Step 4: </b>If you are finished, click the button <img src="../img/en/en_close2.gif" border=0> to close the window and go back to the chart.<br>
 		
 </ul>
-<? endif ?>
-<? if($src=="anticoag_dailydose") : ?>
+<?php endif ?>
+<?php if($src=="anticoag_dailydose") : ?>
 <a name="daycoag"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 How to enter information on daily anticoagulant application?</b></font>
 <ul> 
@@ -127,8 +127,8 @@ How to enter information on daily anticoagulant application?</b></font>
 		<b>Step 4: </b>If you are finished, click the button <img src="../img/en/en_close2.gif" border=0> to close the window and go back to the chart.<br>
 		
 </ul>
-<? endif ?>
-<? if($src=="lot_mat_etc") : ?>
+<?php endif ?>
+<?php if($src=="lot_mat_etc") : ?>
 <a name="lot"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 How to enter notes on implants, LOT nr, charge nr, etc?</b></font>
 <ul> 
@@ -140,8 +140,8 @@ How to enter notes on implants, LOT nr, charge nr, etc?</b></font>
 		<b>Step 4: </b>If you are finished, click the button <img src="../img/en/en_close2.gif" border=0> to close the window and go back to the chart.<br>
 		
 </ul>
-<? endif ?>
-<? if($src=="medication") : ?>
+<?php endif ?>
+<?php if($src=="medication") : ?>
 <a name="med"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 How to enter  medication and dosage plan?</b></font>
 <ul> 
@@ -163,9 +163,9 @@ How to enter  medication and dosage plan?</b></font>
 		<b>Step 7: </b>If you are finished, click the button <img src="../img/en/en_close2.gif" border=0> to close the window and go back to the chart.<br>
 		
 </ul>
-<? endif ?>
-<? if($src=="medication_dailydose") : ?>
-	<? if($x2) : ?>
+<?php endif ?>
+<?php if($src=="medication_dailydose") : ?>
+	<?php if($x2) : ?>
 
 <a name="daymed"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 How to enter information on daily medication application and dosage?</b></font>
@@ -179,7 +179,7 @@ How to enter information on daily medication application and dosage?</b></font>
 		<b>Step 6: </b>If you are finished, click the button <img src="../img/en/en_close2.gif" border=0> to close the window and go back to the chart.<br>
 		
 </ul>
-	<? else : ?>
+	<?php else : ?>
 <a name="daymed"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 It says "There is no medication yet". What should I do?</b></font>
 <ul> 
@@ -203,9 +203,9 @@ It says "There is no medication yet". What should I do?</b></font>
 		<b>Step 9: </b>If you want to correct any errors, click on the erroneous data and replace it with the correct one and save again.<br>
 		<b>Step 10: </b>If you are finished, click the button <img src="../img/en/en_close2.gif" border=0> to close the window and go back to the chart.<br>
 </ul>
-	<? endif ?>
-<? endif ?>
-<? if($src=="iv_needle") : ?>
+	<?php endif ?>
+<?php endif ?>
+<?php if($src=="iv_needle") : ?>
 <a name="iv"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 How to enter information on daily intravenous medication application and dosage?</b></font>
 <ul> 
@@ -217,7 +217,7 @@ How to enter information on daily intravenous medication application and dosage?
 		
 </ul>
 
-<? endif ?>
+<?php endif ?>
 
 </form>
 

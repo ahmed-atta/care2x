@@ -1,11 +1,13 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+?>
 <a name="howto">
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b><?="$x3" ?></b></font>
+<b><?php echo "$x3" ?></b></font>
 <form action="#" >
 <p><font size=2 face="verdana,arial" >
 
-<? if($src=="bp_temp") : ?>
+<?php if($src=="bp_temp") : ?>
 <a name="cbp"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 Wie kann ich Temperatur und Blutdruck eingeben?</b></font>
 <ul>
@@ -24,8 +26,8 @@ Wie kann ich Temperatur und Blutdruck eingeben?</b></font>
 		<b>Schritt 4: </b>Wenn Sie einen Fehler korrigieren möchten klickt die fehlerhafte Daten an, gibt das richtige ein und speichere erneut ab.<br>
 		<b>Schritt 5: </b>Wenn Sie fertig sind klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an um das Fenster zu schliessen und in die Kurve zurück zu gehen.<br>
 </ul>
-<? endif ?>
-<? if($src=="diet") : ?>
+<?php endif ?>
+<?php if($src=="diet") : ?>
 
 <a name="diet"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 Wie kann ich einen Kostplan eingeben?</b></font>
@@ -35,8 +37,8 @@ Wie kann ich einen Kostplan eingeben?</b></font>
 		<b>Schritt 3: </b>Wenn Sie einen Fehler korrigieren möchten klicken Sie die fehlerhafte Daten an, gibt das richtige ein und speichere erneut ab.<br>
 		<b>Schritt 4: </b>Wenn Sie fertig sind klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an um das Fenster zu schliessen und in die Kurve zurück zu gehen.<br>
 </ul>
-<? endif ?>
-<? if($src=="allergy") : ?>
+<?php endif ?>
+<?php if($src=="allergy") : ?>
 <a name="allergy"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 Wie kann ich Information über Allergie eingeben?</b></font>
 <ul> 
@@ -47,8 +49,8 @@ Wie kann ich Information über Allergie eingeben?</b></font>
 		<b>Schritt 3: </b>Wenn Sie einen Fehler korrigieren möchten klicken Sie die fehlerhafte Daten an, gibt das richtige ein und speichere erneut ab.<br>
 		<b>Schritt 4: </b>Wenn Sie fertig sind klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an um das Fenster zu schliessen und in die Kurve zurück zu gehen.<br>
 </ul>
-<? endif ?>
-<? if($src=="diag_ther") : ?>
+<?php endif ?>
+<?php if($src=="diag_ther") : ?>
 <a name="diag"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 Wie kann ich die Hauptdiagnose bzw. Therapie eingeben?</b></font>
 <ul> 
@@ -59,8 +61,8 @@ Wie kann ich die Hauptdiagnose bzw. Therapie eingeben?</b></font>
 		<b>Schritt 3: </b>Wenn Sie einen Fehler korrigieren möchten klicken Sie die fehlerhafte Daten an, gibt das richtige ein und speichere erneut ab.<br>
 		<b>Schritt 4: </b>Wenn Sie fertig sind klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an um das Fenster zu schliessen und in die Kurve zurück zu gehen.<br>
 </ul>
-<? endif ?>
-<? if($src=="diag_ther_dailyreport") : ?>
+<?php endif ?>
+<?php if($src=="diag_ther_dailyreport") : ?>
 <a name="daydiag"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 Wie kann ich tägliche Information über Diagnose oder Therapieplan eingeben?</b></font>
 <ul> 
@@ -71,8 +73,8 @@ Wie kann ich tägliche Information über Diagnose oder Therapieplan eingeben?</b><
 		<b>Schritt 3: </b>Wenn Sie einen Fehler korrigieren möchten klicken Sie die fehlerhafte Daten an, gibt das richtige ein und speichere erneut ab.<br>
 		<b>Schritt 4: </b>Wenn Sie fertig sind klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an um das Fenster zu schliessen und in die Kurve zurück zu gehen.<br>
 </ul>
-<? endif ?>
-<? if($src=="xdiag_specials") : ?>
+<?php endif ?>
+<?php if($src=="xdiag_specials") : ?>
 <a name="extra"><a name="diag"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a></a>
 Wie kann ich Besonderheiten oder Nebendiagnose eingeben?</b></font>
 <ul> 
@@ -83,8 +85,8 @@ Wie kann ich Besonderheiten oder Nebendiagnose eingeben?</b></font>
 		<b>Schritt 3: </b>Wenn Sie einen Fehler korrigieren möchten klickt die fehlerhafte Daten an, gibt das richtige ein und speichere erneut ab.<br>
 		<b>Schritt 4: </b>Wenn Sie fertig sind klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an um das Fenster zu schliessen und in die Kurve zurück zu gehen.<br>
 </ul>
-<? endif ?>
-<? if($src=="kg_atg_etc") : ?>
+<?php endif ?>
+<?php if($src=="kg_atg_etc") : ?>
 <a name="pt"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 Wie kann ich tägliche Information über PT, ATG, usw eingeben?</b></font>
 <ul> 
@@ -95,8 +97,8 @@ Wie kann ich tägliche Information über PT, ATG, usw eingeben?</b></font>
 		<b>Schritt 3: </b>Wenn Sie einen Fehler korrigieren möchten klicken Sie die fehlerhafte Daten an, gibt das richtige ein und speichere erneut ab.<br>
 		<b>Schritt 4: </b>Wenn Sie fertig sind klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an um das Fenster zu schliessen und in die Kurve zurück zu gehen.<br>
 </ul>
-<? endif ?>
-<? if($src=="anticoag") : ?>
+<?php endif ?>
+<?php if($src=="anticoag") : ?>
 <a name="coag"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 Wie kann ich Antikoagulant(ien) eingeben?</b></font>
 <ul> 
@@ -107,8 +109,8 @@ Wie kann ich Antikoagulant(ien) eingeben?</b></font>
 		<b>Schritt 3: </b>Wenn Sie einen Fehler korrigieren möchten klicken Sie die fehlerhafte Daten an, gibt das richtige ein und speichere erneut ab.<br>
 		<b>Schritt 4: </b>Wenn Sie fertig sind klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an um das Fenster zu schliessen und in die Kurve zurück zu gehen.<br>
 </ul>
-<? endif ?>
-<? if($src=="anticoag_dailydose") : ?>
+<?php endif ?>
+<?php if($src=="anticoag_dailydose") : ?>
 <a name="daycoag"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 Wie kann ich tägliche Information über Antikoagulant(ien) und deren Verabreichung eingeben?</b></font>
 <ul> 
@@ -117,8 +119,8 @@ Wie kann ich tägliche Information über Antikoagulant(ien) und deren Verabreichun
 		<b>Schritt 3: </b>Wenn Sie einen Fehler korrigieren möchten klicken Sie die fehlerhafte Daten an, gibt das richtige ein und speichere erneut ab.<br>
 		<b>Schritt 4: </b>Wenn Sie fertig sind klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an um das Fenster zu schliessen und in die Kurve zurück zu gehen.<br>
 </ul>
-<? endif ?>
-<? if($src=="lot_mat_etc") : ?>
+<?php endif ?>
+<?php if($src=="lot_mat_etc") : ?>
 <a name="lot"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 Wie kann ich Angaben eingeben?</b></font>
 <ul> 
@@ -129,8 +131,8 @@ Wie kann ich Angaben eingeben?</b></font>
 		<b>Schritt 3: </b>Wenn Sie einen Fehler korrigieren möchten klicken Sie die fehlerhafte Daten an, gibt das richtige ein und speichere erneut ab.<br>
 		<b>Schritt 4: </b>Wenn Sie fertig sind klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an um das Fenster zu schliessen und in die Kurve zurück zu gehen.<br>
 </ul>
-<? endif ?>
-<? if($src=="medication") : ?>
+<?php endif ?>
+<?php if($src=="medication") : ?>
 <a name="med"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 Wie kann ich Medikamente und deren Dosierungsplan eingeben?</b></font>
 <ul> 
@@ -151,9 +153,9 @@ Wie kann ich Medikamente und deren Dosierungsplan eingeben?</b></font>
 		<b>Schritt 6: </b>Wenn Sie einen Fehler korrigieren möchten klicken Sie die fehlerhafte Daten an, gibt das richtige ein und speichere erneut ab.<br>
 		<b>Schritt 7: </b>Wenn Sie fertig sind klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an um das Fenster zu schliessen und in die Kurve zurück zu gehen.<br>
 </ul>
-<? endif ?>
-<? if($src=="medication_dailydose") : ?>
-	<? if($x2) : ?>
+<?php endif ?>
+<?php if($src=="medication_dailydose") : ?>
+	<?php if($x2) : ?>
 
 <a name="daymed"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 Wie kann ich tägliche Information über Medikamente und deren Verabreichung bzw. Dosierung eingeben?</b></font>
@@ -166,7 +168,7 @@ Wie kann ich tägliche Information über Medikamente und deren Verabreichung bzw. 
 		<b>Schritt 5: </b>Wenn Sie einen Fehler korrigieren möchten klickt die fehlerhafte Daten an, gibt das richtige ein und speichere erneut ab.<br>
 		<b>Schritt 6: </b>Wenn Sie fertig sind klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an um das Fenster zu schliessen und in die Kurve zurück zu gehen.<br>
 </ul>
-	<? else : ?>
+	<?php else : ?>
 <a name="daymed"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 Es heisst "Es gibt noch keine Medikamente". Was soll ich tun?</b></font>
 <ul> 
@@ -190,9 +192,9 @@ Es heisst "Es gibt noch keine Medikamente". Was soll ich tun?</b></font>
 		<b>Schritt 9: </b>Wenn Sie einen Fehler korrigieren möchten klicken Sie die fehlerhafte Daten an, gibt das richtige ein und speichere erneut ab.<br>
 		<b>Schritt 10: </b>Wenn Sie fertig sind klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an um das Fenster zu schliessen und in die Kurve zurück zu gehen.<br>
 </ul>
-	<? endif ?>
-<? endif ?>
-<? if($src=="iv_needle") : ?>
+	<?php endif ?>
+<?php endif ?>
+<?php if($src=="iv_needle") : ?>
 <a name="iv"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 Wie kann ich tägliche Information über i.v. Medikamente und deren Dosierung bzw. Verabreichung eingeben?</b></font>
 <ul> 
@@ -202,7 +204,7 @@ Wie kann ich tägliche Information über i.v. Medikamente und deren Dosierung bzw.
 		<b>Schritt 3: </b>Wenn Sie einen Fehler korrigieren möchten klicken Sie die fehlerhafte Daten an, gibt das richtige ein und speichere erneut ab.<br>
 		<b>Schritt 4: </b>Wenn Sie fertig sind klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an um das Fenster zu schliessen und in die Kurve zurück zu gehen.<br>
 </ul>
-<? endif ?>
+<?php endif ?>
 
 </form>
 

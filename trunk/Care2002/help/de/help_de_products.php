@@ -1,7 +1,9 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+?>
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
-<?
+<?php
 if($x2=="pharma") print "Apotheke - "; else print "Medicallager - ";
 	switch($src)
 	{
@@ -34,7 +36,7 @@ if($x2=="pharma") print "Apotheke - "; else print "Medicallager - ";
  ?></b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
-<? if($src=="maincat") : ?>
+<?php if($src=="maincat") : ?>
 
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie stelle ich einen Artikel in den Bestellkatalog?</b>
@@ -80,16 +82,16 @@ Wie entferne ich einen Artikel aus dem Katalog?</b>
  	<b>Schritt 1: </b>Klickt den <img src="../img/delete2.gif" border=0 align=absmiddle> Knopf des Artikels an.<br>
 </ul>
 
-<? endif ?>
+<?php endif ?>
 
-<? if($src=="how2") : ?>
+<?php if($src=="how2") : ?>
 
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
-Wie bestelle ich <? if($x2=="pharma") print "Arzneimittel"; else print "Produkte aus dem Medicallager"; ?>?
+Wie bestelle ich <?php if($x2=="pharma") print "Arzneimittel"; else print "Produkte aus dem Medicallager"; ?>?
 </b>
 </font>
 <ul>       	
- 	<b>Schritt 1: </b>Klickt die Option "<span style="background-color:yellow" > <img src="../img/bestell.gif" border=0> <? if($x2=="pharma") print "Apothekenbestellung"; else print "Bestellung"; ?> </span>" an um in den Bestellmodus zu gehen.<br>
+ 	<b>Schritt 1: </b>Klickt die Option "<span style="background-color:yellow" > <img src="../img/bestell.gif" border=0> <?php if($x2=="pharma") print "Apothekenbestellung"; else print "Bestellung"; ?> </span>" an um in den Bestellmodus zu gehen.<br>
  	<b>Schritt 2: </b>Wenn Sie sich vorher angemeldet haben werden die Bestellkorb und Bestellkatalog gezeigt. Ansonsten werden Sie nach Ihrem
 	Benutzernamen und Passwort gefragt.<br>
 
@@ -142,13 +144,13 @@ Kann ich die Stückzahl des Artikels im Bestellkorb ändern?
 Alle Artikel zum Bestellen sind jetzt im Bestellkorb. Was soll ich jetzt tun?</b>
 </font>
 <ul>       	
- 	<b>Schritt 1: </b>Sende die Bestellungsliste in  <? if($x2=="pharma") print "die Apotheke"; else print "den Medicallager"; ?>. 
+ 	<b>Schritt 1: </b>Sende die Bestellungsliste in  <?php if($x2=="pharma") print "die Apotheke"; else print "den Medicallager"; ?>. 
 	<br>Klickt den <input type="button" value="Endgültige Bestellungsliste erstellen"> Knopf an um weiter zu gehen.<br>
  	<b>Schritt 2: </b>Die Bestellungsliste wird wieder gezeigt. Gibt Ihren Namen in das Feld <nobr>"<span style="background-color:yellow" > Erstellt von <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> ein.<br>
  	<b>Schritt 3: </b>Wähle die Prioritätklasse der Bestellung zwischen "<span style="background-color:yellow" > Normal<input type="radio" name="x" value="s" checked> Eilig<input type="radio" name="x" > </span>" aus. Klickt den entsprechenden Knopf an.<br>
  	<b>Schritt 4: </b>Der Arzt muss seinen Namen in das Feld  <nobr>"<span style="background-color:yellow" > Bestätigt von <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> eingeben.<br>
  	<b>Schritt 5: </b>Der Arzt muss sein Passwort in das Feld <nobr>"<span style="background-color:yellow" > Passwort: <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> eingeben.<br>
- 	<b>Schritt 6: </b>Klickt den <input type="button" value="Bestellungsliste an <? if($x2=="pharma") print "die Apotheke"; else print "den Medicallager"; ?> senden"> Knopf an.<br>
+ 	<b>Schritt 6: </b>Klickt den <input type="button" value="Bestellungsliste an <?php if($x2=="pharma") print "die Apotheke"; else print "den Medicallager"; ?> senden"> Knopf an.<br>
 </ul>
 <img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b> Achtung!</b></font> 
 <ul>       	
@@ -158,7 +160,7 @@ Wenn Sie die Bestellungsliste nicht senden möchten klicken Sie die Option "<span
 Ich möchte die Bestellung beenden. Wie geht das?</b>
 </font>
 <ul>     
- 	<b>Schritt 1: </b>Klickt die Option "<span style="background-color:yellow" > <img src="../img/arrow-blu.gif" border=0> Bestellung beenden und verlassen</span>" an um in <? if($x2=="pharma") print "die Apotheke"; else print "den Medicallager"; ?> zurück zu gehen.<br>
+ 	<b>Schritt 1: </b>Klickt die Option "<span style="background-color:yellow" > <img src="../img/arrow-blu.gif" border=0> Bestellung beenden und verlassen</span>" an um in <?php if($x2=="pharma") print "die Apotheke"; else print "den Medicallager"; ?> zurück zu gehen.<br>
 </ul>	
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie erstelle ich eine neue Bestellungsliste?</b>
@@ -174,13 +176,13 @@ Wie erstelle ich eine neue Bestellungsliste?</b>
 <ul>       	
 Wenn Sie abbrechen möchten klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an.
 </ul>
-<? endif ?>
+<?php endif ?>
 
 
-<? if($src=="head") : ?>
+<?php if($src=="head") : ?>
 
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
-Wie bestelle ich <? if($x2=="pharma") print "Arzneimittel"; else print "Produkte aus dem Medicallager"; ?>?
+Wie bestelle ich <?php if($x2=="pharma") print "Arzneimittel"; else print "Produkte aus dem Medicallager"; ?>?
 </b>
 </font>
 <ul>       	
@@ -195,9 +197,9 @@ Wie bestelle ich <? if($x2=="pharma") print "Arzneimittel"; else print "Produkte
 <ul>       	
 Wenn Sie abbrechen möchten klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an.
 </ul>
-<? endif ?>
+<?php endif ?>
 
-<? if($src=="catalog") : ?>
+<?php if($src=="catalog") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie stelle ich einen Artikel in den Bestellkatalog?</b>
 </b>
@@ -241,10 +243,10 @@ Wie entferne ich einen Artikel aus dem Katalog?</b>
  	<b>Schritt 1: </b>Klickt den <img src="../img/delete2.gif" border=0 align=absmiddle> Knopf des Artikels an.<br>
 </ul>
 
-<? endif ?>
+<?php endif ?>
 
-<? if($src=="orderlist") : ?>
-	<? if($x1=="0") : ?>
+<?php if($src=="orderlist") : ?>
+	<?php if($x1=="0") : ?>
 <img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b> Achtung!</b></font> 
 <ul>       	
 Der Bestellkorb ist momentan leer.<p>
@@ -262,7 +264,7 @@ Wie stelle ich einen Artikel in den Bestellkatalog?</b>
  Um weitere Hilfe wie man einen Artikel sucht, auswählt, bestellt, usw. zu bekommen, klickt das Symbol <img src="../img/frage.gif" border=0 align="absmiddle"> im Katalog an.<p>
 </ul>
 
-	<? else : ?>
+	<?php else : ?>
 
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Kann ich die Stückzahl des Artikels im Bestellkorb ändern?
@@ -289,30 +291,30 @@ Wie entferne ich einen Artikel aus dem Katalog?</b>
 Alle Artikel zum Bestellen sind jetzt im Bestellkorb. Was soll ich jetzt tun?</b>
 </font>
 <ul>       	
- 	<b>Schritt 1: </b>Sende die Bestellungsliste in  <? if($x2=="pharma") print "die Apotheke"; else print "den Medicallager"; ?>. 
+ 	<b>Schritt 1: </b>Sende die Bestellungsliste in  <?php if($x2=="pharma") print "die Apotheke"; else print "den Medicallager"; ?>. 
 	<br>Klickt den <input type="button" value="Endgültige Bestellungsliste erstellen"> Knopf an um weiter zu gehen.<br>
  	<b>Schritt 2: </b>Die Bestellungsliste wird wieder gezeigt. Gibt Ihren Namen in das Feld <nobr>"<span style="background-color:yellow" > Erstellt von <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> ein.<br>
  	<b>Schritt 3: </b>Wähle die Prioritätklasse der Bestellung zwischen "<span style="background-color:yellow" > Normal<input type="radio" name="x" value="s" checked> Eilig<input type="radio" name="x" > </span>" aus. Klickt den entsprechenden Knopf an.<br>
  	<b>Schritt 4: </b>Der Arzt muss seinen Namen in das Feld  <nobr>"<span style="background-color:yellow" > Bestätigt von <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> eingeben.<br>
  	<b>Schritt 5: </b>Der Arzt muss sein Passwort in das Feld <nobr>"<span style="background-color:yellow" > Passwort: <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> eingeben.<br>
- 	<b>Schritt 6: </b>Klickt den <input type="button" value="Bestellungsliste an <? if($x2=="pharma") print "die Apotheke"; else print "den Medicallager"; ?> senden"> Knopf an.<br>
+ 	<b>Schritt 6: </b>Klickt den <input type="button" value="Bestellungsliste an <?php if($x2=="pharma") print "die Apotheke"; else print "den Medicallager"; ?> senden"> Knopf an.<br>
 </ul>
 <img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b> Achtung!</b></font> 
 <ul>       	
 Wenn Sie die Bestellungsliste nicht senden möchten klicken Sie die Option "<span style="background-color:yellow" > << Zurück und noch mal bearbeiten </span>" an.
 </ul>
-	<? endif ?>
+	<?php endif ?>
 
-<? endif ?>
+<?php endif ?>
 
 
-<? if($src=="final") : ?>
-	<? if($x1=="1") : ?>
+<?php if($src=="final") : ?>
+	<?php if($x1=="1") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Ich möchte die Bestellung beenden. Wie geht das?</b>
 </font>
 <ul>     
- 	<b>Schritt 1: </b>Klickt die Option "<span style="background-color:yellow" > <img src="../img/arrow-blu.gif" border=0> Bestellung beenden und verlassen</span>" an um in <? if($x2=="pharma") print "die Apotheke"; else print "den Medicallager"; ?> zurück zu gehen.<br>
+ 	<b>Schritt 1: </b>Klickt die Option "<span style="background-color:yellow" > <img src="../img/arrow-blu.gif" border=0> Bestellung beenden und verlassen</span>" an um in <?php if($x2=="pharma") print "die Apotheke"; else print "den Medicallager"; ?> zurück zu gehen.<br>
 </ul>	
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie erstelle ich eine neue Bestellungsliste?</b>
@@ -320,7 +322,7 @@ Wie erstelle ich eine neue Bestellungsliste?</b>
 <ul>     
  	<b>Schritt 1: </b>Klickt die Option "<span style="background-color:yellow" > <img src="../img/arrow-blu.gif" border=0> Eine neue Bestellungsliste erstellen bzw. einen leeren Bestellkorb erzeugen </span>" an.<br>
 </ul>
-	<? else : ?>
+	<?php else : ?>
 
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie sende ich die endgültige Bestellungsliste?</b>
@@ -330,18 +332,18 @@ Wie sende ich die endgültige Bestellungsliste?</b>
  	<b>Schritt 2: </b>Wähle die Prioritätklasse der Bestellung zwischen "<span style="background-color:yellow" > Normal<input type="radio" name="x" value="s" checked> Eilig<input type="radio" name="x" > </span>" aus. Klickt den entsprechenden Knopf an.<br>
  	<b>Schritt 3: </b>Der Arzt muss seinen Namen in das Feld  <nobr>"<span style="background-color:yellow" > Bestätigt von <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> eingeben.<br>
  	<b>Schritt 4: </b>Der Arzt muss sein Passwort in das Feld <nobr>"<span style="background-color:yellow" > Passwort: <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> eingeben.<br>
- 	<b>Schritt 5: </b>Klickt den <input type="button" value="Bestellungsliste an <? if($x2=="pharma") print "die Apotheke"; else print "den Medicallager"; ?> senden"> Knopf an.<br>
+ 	<b>Schritt 5: </b>Klickt den <input type="button" value="Bestellungsliste an <?php if($x2=="pharma") print "die Apotheke"; else print "den Medicallager"; ?> senden"> Knopf an.<br>
 
 </ul>
 <img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b> Achtung!</b></font> 
 <ul>       	
 Wenn Sie die Bestellungsliste nicht senden möchten klicken Sie die Option "<span style="background-color:yellow" > << Zurück und noch mal bearbeiten </span>" an.
 </ul>
-	<? endif ?>
+	<?php endif ?>
 
-<? endif ?>
+<?php endif ?>
 <!-- ++++++++++++++++++++++++++++++++++ archive +++++++++++++++++++++++++++++++++++++++++++ -->
-<? if($src=="arch") : ?>
+<?php if($src=="arch") : ?>
 
 
 <img src="../img/frage.gif" border=0 align="absmiddle"> 
@@ -372,9 +374,9 @@ Gibt entweder eine vollständige Information oder die erste Zeichen von Namen der
 </ul>
 
 
-	<? endif ?>
+	<?php endif ?>
 	
-<? if($src=="archshow") : ?>
+<?php if($src=="archshow") : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Ich möchte mehr Information über den Artikel sehen. Was soll ich tun?</b>
 </font>
@@ -404,11 +406,11 @@ Ich möchte die Liste wieder sehen. Was soll ich tun?</b>
  	<b>Schritt 4: </b>Wenn die Suche Ergebnisse findet wird eine Liste gezeigt.<br>
  	<b>Schritt 5: </b>Klickt den <img src="../img/uparrowGrnLrg.gif" width=16 height=16 border=0> Knopf einer Bestellungsliste an. Die Details werden gezeigt.<br>
 </ul>
-	<? endif ?>	
+	<?php endif ?>	
 	
 
-<? if($src=="db") : ?>
-	<? if($x1=="") : ?>
+<?php if($src=="db") : ?>
+	<?php if($x1=="") : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie gebe ich ein neues Produkt in die Datenbank ein?</b>
 </font>
@@ -428,8 +430,8 @@ I am finished entering all available product information. How to save it?</b>
 <ul>       	
  	<b>Schritt 1: </b>Click the button <input type="button" value="Save">.<br>
 </ul>
-	<? endif ?>	
-	<? if($x1=="save") : ?>
+	<?php endif ?>	
+	<?php if($x1=="save") : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to enter a new product into the databank?</b>
 </font>
@@ -449,7 +451,7 @@ I want to edit the product that is currently displayed How to do it?</b>
  	<b>Schritt 4: </b>Click the button <input type="button" value="Save"> to save the new information.<br>
 </ul>
 	
-	<? endif ?>	
-<? endif ?>	
+	<?php endif ?>	
+<?php endif ?>	
 </form>
 

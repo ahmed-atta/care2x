@@ -1,8 +1,10 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+?>
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
 Radiologie - 
-<?
+<?php
 
 if($src=="search")
 {
@@ -24,7 +26,7 @@ if($src=="search")
 <form action="#" >
 
 
-<? if($src=="search") : ?>
+<?php if($src=="search") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie finde ich einen Patient?</b>
 </font>
@@ -56,7 +58,7 @@ Wie kann ich das Röntgenbild in voller Große zeigen lassen?</b>
 <ul>       	
  Wenn Sie abbrechen möchten klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an.
 </ul>
-<? endif ?>
+<?php endif ?>
 
 </form>
 

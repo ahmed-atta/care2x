@@ -1,7 +1,9 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+?>
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
-<?
+<?php
 switch($src)
 {
  	case "search": print 'Suchen nach Telefonnummern'; break;
@@ -11,7 +13,7 @@ switch($src)
  ?></b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
-<? if($src=="search") : ?>
+<?php if($src=="search") : ?>
 <b>Schritt 1</b>
 
 <ul> Geben Sie in das Feld "<span style="background-color:yellow" >Suchbegriff eingeben.</span>" entweder die vollständige Information oder die erste Zeichen wie zum Beispiel Name, oder Vorname, oder Station's Name oder deren Abkürzung
@@ -28,13 +30,13 @@ oder Zimmernummer.
 <b>Schritt 3</b>
 <ul> Wenn die Suche Ergebnisse liefert wird eine Liste gezeigt.<br>
 </ul>
-<? endif ?>
-<? if($src=="dir") : ?>
+<?php endif ?>
+<?php if($src=="dir") : ?>
 <b>Schritt 1</b>
 <ul> Den <img src="../img/de/de_phonedir-gray.gif" border="0"> anklicken.
 </ul>
-<? endif ?>
-<? if($src=="newphone") : ?>
+<?php endif ?>
+<?php if($src=="newphone") : ?>
 <b>Schritt 1</b>
 <ul> Den <img src="../img/de/de_newdata-gray.gif" border="0"> anklicken.
 </ul>
@@ -44,7 +46,7 @@ oder Zimmernummer.
 		Geben Sie Ihren Benutzernamen und Passwort ein und klicken Sie den <img src="../img/de/de_continue.gif" border=0> an.<br>
 		Falls Sie abbrechen möchten den <img src="../img/de/de_cancel.gif" border=0> anklicken.
 		
-</ul><? endif ?>
+</ul><?php endif ?>
 
 <b>Achtung!</b>
 <ul> Falls Sie abbrechen möchten den <img src="../img/de/de_cancel.gif" border=0> anklicken.

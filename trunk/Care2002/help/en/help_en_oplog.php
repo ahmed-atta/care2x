@@ -83,29 +83,29 @@ if($src=="arch")
  ?></b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
-<? if($src=="person") : ?>
+<?php if($src=="person") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
-How to enter <?=$person ?> via quick select list?</b>
+How to enter <?php echo $person ?> via quick select list?</b>
 </font>
 <ul>       	
- 	<b>Note: </b>If <?=$person ?> was selected in a previous operation, his name will be listed in the quick select list.<p>
+ 	<b>Note: </b>If <?php echo $person ?> was selected in a previous operation, his name will be listed in the quick select list.<p>
  	<b>Step 1: </b>Check first whether his function is correctly selected in the " OR Function " selection box. If not, select his correct OR function.<br>
- 	<b>Step 2: </b>Click on <?=$person ?>'s family name, or given name, or the 
-	<nobr>"<span style="background-color:yellow" > <img src="../img/upArrowGrnLrg.gif" width=16 height=16 border=0> Enter this person as <?=$person ?>... </span>"</nobr> link.
+ 	<b>Step 2: </b>Click on <?php echo $person ?>'s family name, or given name, or the 
+	<nobr>"<span style="background-color:yellow" > <img src="../img/upArrowGrnLrg.gif" width=16 height=16 border=0> Enter this person as <?php echo $person ?>... </span>"</nobr> link.
 	The surgeon will be automatically added in the "current entries"  list.<p>
 </ul>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
-<?=ucfirst($person) ?> does not appear on the quick select list. How to enter <?=$person ?>?</b>
+<?php echo ucfirst($person) ?> does not appear on the quick select list. How to enter <?php echo $person ?>?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Enter either a complete information of the first few letters of <?=$person ?>'s family name or given name in the field "<span style="background-color:yellow" > Search a new <?=substr($person,2) ?>... </span>".<br>
- 	<b>Step 2: </b>Click the <input type="button" value="OK"> button to start searching for <?=$person ?>.<br>
- 	<b>Step 3: </b>The search will list the results. Click the family name, or the given name, or the <nobr>"<span style="background-color:yellow" > <img src="../img/upArrowGrnLrg.gif" width=16 height=16 border=0> Enter this person as <?=$person ?>... </span>"</nobr> link corresponding to <?=$person ?> you want to document.
+ 	<b>Step 1: </b>Enter either a complete information of the first few letters of <?php echo $person ?>'s family name or given name in the field "<span style="background-color:yellow" > Search a new <?php echo substr($person,2) ?>... </span>".<br>
+ 	<b>Step 2: </b>Click the <input type="button" value="OK"> button to start searching for <?php echo $person ?>.<br>
+ 	<b>Step 3: </b>The search will list the results. Click the family name, or the given name, or the <nobr>"<span style="background-color:yellow" > <img src="../img/upArrowGrnLrg.gif" width=16 height=16 border=0> Enter this person as <?php echo $person ?>... </span>"</nobr> link corresponding to <?php echo $person ?> you want to document.
 </ul>
 
 
 <img src="../img/frage.gif" border=0 align="absmiddle"> 
-<font color="#990000"><b> How to delete <?=$person ?> from the list?</b></font> 
+<font color="#990000"><b> How to delete <?php echo $person ?> from the list?</b></font> 
 <ul>       	
  	<b>Step 1: </b>Click the icon <img src="../img/delete2.gif" border=0 align="absmiddle"> on the right of the person's name.<br>
  
@@ -113,17 +113,17 @@ How to enter <?=$person ?> via quick select list?</b>
 <img src="../img/frage.gif" border=0 align="absmiddle"> 
 <font color="#990000"><b> I am finished. How to go back to the logbook?</b></font> 
 <ul>       	
- 	<b>Step 1: </b>Click the button <img src="../img/en/en_close2.gif" border=0 align="absmiddle"> that will appear after you have selected <?=$person ?>.<br>
+ 	<b>Step 1: </b>Click the button <img src="../img/en/en_close2.gif" border=0 align="absmiddle"> that will appear after you have selected <?php echo $person ?>.<br>
  
 </ul>
 <img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b> Note:</b></font> 
 <ul>       	
  If you decide to cancel click the button <img src="../img/en/en_cancel.gif" border=0>.
 </ul>
-<? endif ?>
+<?php endif ?>
 
-<? if($src=="time") : ?>
-	<? if($x1=="entry_out") : ?>
+<?php if($src=="time") : ?>
+	<?php if($x1=="entry_out") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to document the entry and exit times?</b>
 </font>
@@ -136,8 +136,8 @@ How to document the entry and exit times?</b>
  	<b>Note: </b>You can enter several entry and exit times all at once before you save the information.<p>
 </ul>
 
-	<? endif ?>
-	<? if($x1=="cut_close") : ?>
+	<?php endif ?>
+	<?php if($x1=="cut_close") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to document cut and suture times?</b>
 </font>
@@ -150,8 +150,8 @@ How to document cut and suture times?</b>
  	<b>Note: </b>You can enter several cut and suture times all at once before you save the information.<p>
 </ul>
 
-	<? endif ?>
-	<? if($x1=="wait_time") : ?>
+	<?php endif ?>
+	<?php if($x1=="wait_time") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to document idle (waiting) times?</b>
 </font>
@@ -165,8 +165,8 @@ How to document idle (waiting) times?</b>
  	<b>Note: </b>You can enter several start, end times, and reasons all at once before you save the information.<p>
 </ul>
 
-	<? endif ?>
-	<? if($x1=="bandage_time") : ?>
+	<?php endif ?>
+	<?php if($x1=="bandage_time") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to document plaster cast times?</b>
 </font>
@@ -179,8 +179,8 @@ How to document plaster cast times?</b>
  	<b>Note: </b>You can enter several start and end times all at once before you save the information.<p>
 </ul>
 
-	<? endif ?>
-	<? if($x1=="repos_time") : ?>
+	<?php endif ?>
+	<?php if($x1=="repos_time") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to document reposition times?</b>
 </font>
@@ -193,7 +193,7 @@ How to document reposition times?</b>
  	<b>Note: </b>You can enter several start and end times all at once before you save the information.<p>
 </ul>
 
-	<? endif ?>
+	<?php endif ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to save the information?</b>
 </font>
@@ -215,11 +215,11 @@ How to save the information?</b>
 <ul>       	
  If you decide to cancel click the button <img src="../img/en/en_cancel.gif" border=0>.
 </ul>
-<? endif ?>
+<?php endif ?>
 
 
-<? if($src=="create") : ?>
-	<? if($x1=="logmain") : ?>
+<?php if($src=="create") : ?>
+	<?php if($x1=="logmain") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to edit an operation's log entry?</b>
 </font>
@@ -241,8 +241,8 @@ How to change to other department and/or operating room?</b>
 <ul>       	
  	<b>Step 1: </b>Select the department from the selection box 
 				<select name="dept" size=1>
-				<?
-					$Or2Dept=get_meta_tags("../global_conf/resolve_or2ordept.pid");
+				<?php
+$Or2Dept=get_meta_tags("../global_conf/resolve_or2ordept.pid");
 					$opabt=get_meta_tags("../global_conf/$lang/op_tag_dept.pid");
 
 					while(list($x,$v)=each($opabt))
@@ -258,9 +258,8 @@ How to change to other department and/or operating room?</b>
 				</select>.
 <br>
  	<b>Step 2: </b>Select the operating room from the selection box <select name="saal" size=1 >
-				<?
-
-					while(list($x,$v)=each($Or2Dept))
+				<?php
+while(list($x,$v)=each($Or2Dept))
 					{
 						print'
 					<option value="'.$x.'"';
@@ -284,9 +283,9 @@ How to display the log entries of a certain day other than the one currently dis
 
 <hr>
 
-	<? endif ?>
+	<?php endif ?>
 	
-	<? if($x2=="material") : ?>
+	<?php if($x2=="material") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to document a material used for the operation?</b>
 </font>
@@ -333,9 +332,9 @@ How to display the main logbook back again?</b>
  	<b>Step 1: </b>Click the "<span style="background-color:yellow" > <img src="../img/manfldr.gif" border=0> Show logbook. </span>" link.<br> 
 </ul>
 <hr>
-	<? endif ?>
+	<?php endif ?>
 
-	<? if(($x1=="")||($x1=="fresh")) : ?>
+	<?php if(($x1=="")||($x1=="fresh")) : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to start a log document for an operation?</b>
 </font>
@@ -355,7 +354,7 @@ How to start a log document for an operation?</b>
 
 </ul>
 
-	<? else : ?>
+	<?php else : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to enter the diagnosis for the operation?</b>
 </font>
@@ -488,14 +487,14 @@ How to start a new log document?</b>
 <b>Note</b>
 <ul> If you decide to close click the button <img src="../img/en/en_close2.gif" border=0>.
 </ul>
-	<? endif ?>
+	<?php endif ?>
 
-<? endif ?>
+<?php endif ?>
 
 
 
-<? if($src=="search") : ?>
-	<? if(($x1=="fresh")||($x1=="")) : ?>
+<?php if($src=="search") : ?>
+	<?php if(($x1=="fresh")||($x1=="")) : ?>
 
 
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
@@ -511,8 +510,8 @@ How to search for a document of a particular patient?</b>
 	Click on the patient's family name to display its document.<p> 
 	</ul>
 </ul>
-	<? endif ?>
-<? if(($x1=="search")&&($x3!="1")) : ?>
+	<?php endif ?>
+<?php if(($x1=="search")&&($x3!="1")) : ?>
 	
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to select a particular document for display?</b>
@@ -521,8 +520,8 @@ How to select a particular document for display?</b>
  	<b>Note: </b> Click on the patient's family name to display its document.<p> 
 </ul>
 
-	<? endif ?>
-<? if(($x1=="get")||($x3=="1")) : ?>
+	<?php endif ?>
+<?php if(($x1=="get")||($x3=="1")) : ?>
 
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to update or edit a displayed log document?</b>
@@ -539,7 +538,7 @@ How to open the patient's data folder?</b>
  	<b>Step 2: </b>The patient's data folder will pop up. Click the "Help" button in the window if you need further instructions.<p> 
 	</ul>
 
-<? endif ?>
+<?php endif ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to continue searching?</b>
 </font>
@@ -551,21 +550,21 @@ How to continue searching?</b>
 <ul>       	
  If you decide to close click the button <img src="../img/en/en_close2.gif" border=0>.
 </ul>
-<? endif ?>
+<?php endif ?>
 
-<? if($src=="arch") : ?>
-	<? if($x2=="1") : ?>
+<?php if($src=="arch") : ?>
+	<?php if($x2=="1") : ?>
 <img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b> Note: Latest log entry (entries)</b></font> 
 <ul>  Every time you switch over to the archive, the last logged operations will be displayed immediately.
 </ul>
-	<? endif ?>
-	<? if(($x3=="")&&($x1!="0")) : ?>
+	<?php endif ?>
+	<?php if(($x3=="")&&($x1!="0")) : ?>
 <img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b> No operation done on this day.</b></font> 
 <ul>       	
 Click the "Options" to open the option box.<br>
 Click the "Search" to switch over to search mode.</ul>
 	
-	<? endif ?>
+	<?php endif ?>
 	
 
 
@@ -593,7 +592,7 @@ Click the "Search" to switch over to search mode.</ul>
 		department will automatically adjust.<br>																																		  																																		  
 		<b>Step 3: </b>Click the button <input type="button" value="Change">  to switch to the new department or operating room.<br>
 </ul>
-<? if(($x3!="")) : ?>
+<?php if(($x3!="")) : ?>
 
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to update or edit a displayed log document?</b>
@@ -609,7 +608,7 @@ How to open the patient's data folder?</b>
  	<b>Step 1: </b>Click the <img src="../img/info2.gif" border=0> button on the left of the patient number.<br>
  	<b>Step 2: </b>The patient's data folder will pop up. Click the "Help" button in the window if you need further instructions.<p> 
 	</ul>
-	<? endif ?>
+	<?php endif ?>
 	
 <img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b> Note:</b></font> 
 <ul>       	
@@ -617,7 +616,7 @@ How to open the patient's data folder?</b>
 </ul>
 
 
-	<? endif ?>
+	<?php endif ?>
 
 
 </form>

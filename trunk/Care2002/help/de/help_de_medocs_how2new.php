@@ -1,9 +1,11 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+?>
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>Erstellen eines Medocs Dokuments</b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
-<? if($src=="?") : ?>
+<?php if($src=="?") : ?>
 <b>Schritt 1</b>
 
 <ul> Suchen Sie zuerst den Patient.<br>
@@ -36,25 +38,25 @@
 <b>Schritt 3</b>
 <ul> Wenn die Suche ein einziges Ergebnis findet werden die Daten sofort gezeigt.<br>
 		Wenn die Suche allerdings mehrere Ergebnisse liefert wird eine Liste gezeigt.<br>
-<? endif ?>
+<?php endif ?>
 
-<? if(($src=="?")||($x1>1)) : ?>
+<?php if(($src=="?")||($x1>1)) : ?>
 
  <br>
  		Um einen Patient in der Liste zu dokumentieren,  den nebenstehenden <img src="../img/R_arrowGrnSm.gif" border=0 height=12 border=0> , oder
 		den Namen, oder den Vornamen, oder die Fallnummer oder das Aufnahmedatum anklicken.
 
 </ul>
-<? endif ?>
+<?php endif ?>
 
-<? if($src=="?") : ?>
+<?php if($src=="?") : ?>
 <b>Schritt 4</b>
-<? endif ?>
+<?php endif ?>
 
-<? if(($src!="?")&&($x1==1)) : ?>
+<?php if(($src!="?")&&($x1==1)) : ?>
 <b>Schritt 1</b>
-<? endif ?>
-<? if(($x1=="1")||($src=="?")) : ?>
+<?php endif ?>
+<?php if(($x1=="1")||($src=="?")) : ?>
 <ul> Wenn die Patientendaten eingeblendet sind können Sie folgendes tun: 
 		<Ul type="disc">		
     	<li>Zusatzangaben über die Krankenkasse bzw. Versicherung in das Feld "weitere Angaben:" eingeben,<br>
@@ -71,10 +73,10 @@
 <ul> Falls Sie alle Eingaben löschen möchten den <input type="button" value="Rücksetzen"> anklicken.
 </ul>
 
-<b>Schritt <? if($src!="?") print "2"; else print "5"; ?></b>
+<b>Schritt <?php if($src!="?") print "2"; else print "5"; ?></b>
 <ul> Den <input type="button" value="Speichern"> anklicken um das Dokument zu speichern.
 </ul>
-<? endif ?>
+<?php endif ?>
 <b>Achtung!</b>
 <ul> Falls Sie abbrechen möchten, den  <img src="../img/de/de_cancel.gif" border=0 > anklicken.
 		

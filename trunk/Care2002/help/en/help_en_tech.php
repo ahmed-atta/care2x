@@ -11,7 +11,7 @@
 <font  size=3 color="#0000cc">
 <b>
 
-<?
+<?php
 print "Technical support - ";	
 switch($src)
 	{
@@ -31,7 +31,7 @@ switch($src)
 </font>
 <p>
 
-<? if($src=="request") : ?>
+<?php if($src=="request") : ?>
 <p>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to send a request for repair service?</b></font>
@@ -46,8 +46,8 @@ How to send a request for repair service?</b></font>
 <b>Note</b>
 <ul> If you decide to close the request form click the button <img src="../img/en/en_close2.gif" border=0>.
 </ul>
-<? endif ?>
-<? if($src=="report") : ?>
+<?php endif ?>
+<?php if($src=="report") : ?>
 <p>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to report a done repair service?</b></font>
@@ -62,8 +62,8 @@ How to report a done repair service?</b></font>
 <b>Note</b>
 <ul> If you decide to close the request form click the button <img src="../img/en/en_close2.gif" border=0>.
 </ul>
-<? endif ?>
-<? if($src=="queries") : ?>
+<?php endif ?>
+<?php if($src=="queries") : ?>
 <p>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to send an inquiry or question to the technical support department?</b></font>
@@ -84,8 +84,8 @@ How to see my previous inquries and the technical department's replies to them?<
 <b>Note</b>
 <ul> If you decide to close the inquriy form click the button <img src="../img/en/en_close2.gif" border=0>.
 </ul>
-<? endif ?>
-<? if($src=="arch") : ?>
+<?php endif ?>
+<?php if($src=="arch") : ?>
 
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to read technical reports?</b></font>
@@ -109,8 +109,8 @@ How to search for particular technical reports?</b></font>
 
 </ul>
 </font>
-<? endif ?>
-<? if($src=="showarch") : ?>
+<?php endif ?>
+<?php if($src=="showarch") : ?>
 <img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Marking the report as read.</b></font>
 <ul> <b>Step 1: </b>Click the button <input type="button" value="Mark as 'Read'">.<p>
@@ -125,8 +125,8 @@ Printing the report.</b></font>
 How to go back to the start of archive search?</b></font>
 <ul> <b>Step 1: </b>Click the button <input type="button" value="<< Go back">.<p>
 </ul>
-<? endif ?>
-<? if($src=="dutydoc") : ?>
+<?php endif ?>
+<?php if($src=="dutydoc") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to document a work done during duty hours?</b></font>
 <ul> <b>Step 1: </b>Enter the date in the " Date <input type="text" name="d" size=10 maxlength=10> " field.<p>
@@ -151,7 +151,7 @@ How to document a work done during duty hours?</b></font>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>I have saved the document and wish to close it, what should I do? </b></font>
 <ul> <b>Step 1: </b>If you are finished, click the <img src="../img/en/en_close2.gif" border=0> button. <br>
 </ul>
-<? endif ?>
+<?php endif ?>
 
 </form>
 </body>

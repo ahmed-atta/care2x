@@ -1,11 +1,13 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+?>
 <a name="howto">
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>Kurve</b></font>
 <form action="#" >
 <p><font size=2 face="verdana,arial" >
 
-<? if($src=="main") : ?>
+<?php if($src=="main") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie kann ich...?</b></font>
 <ul type="disc"> 
@@ -235,7 +237,7 @@ Wie kann ich tägliche Information über i.v. Medikamente und deren Dosierung bzw.
 </ul>
 
 
-<? endif ?>
+<?php endif ?>
 
 </form>
 

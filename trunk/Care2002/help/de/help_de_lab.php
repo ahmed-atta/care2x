@@ -1,4 +1,6 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+?>
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
 Medizinisches Labor - 
@@ -41,24 +43,24 @@ if($src=="input")
 
 
 
-<? if($src=="search") : ?>
-<? if(($x2!="")&&($x2!="0")) : ?>
+<?php if($src=="search") : ?>
+<?php if(($x2!="")&&($x2!="0")) : ?>
 	
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
-Wie wähle ich einen Patient aus dessen Labortestwerte ich <? if($x1=="edit") print "bearbeiten"; else print "sehen"; ?> möchte?</b>
+Wie wähle ich einen Patient aus dessen Labortestwerte ich <?php if($x1=="edit") print "bearbeiten"; else print "sehen"; ?> möchte?</b>
 </font>
 <ul>       	
- 	<b>Schritt 1: </b>Klickt den &nbsp;<button><img src="../img/update2.gif" border=0> <font size=1>Laborbefund</font></button> Knopf des Patienten den Sie <? if($x1=="edit") print "bearbeiten"; else print "sehen"; ?> möchten.<p> 
+ 	<b>Schritt 1: </b>Klickt den &nbsp;<button><img src="../img/update2.gif" border=0> <font size=1>Laborbefund</font></button> Knopf des Patienten den Sie <?php if($x1=="edit") print "bearbeiten"; else print "sehen"; ?> möchten.<p> 
 </ul>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie suche ich weiter?</b>
 </font>
-	<? endif ?>
-	<? if(($x2=="")||($x2=="0")) : ?>
+	<?php endif ?>
+	<?php if(($x2=="")||($x2=="0")) : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie finde ich einen Patient?</b>
 </font>
-	<? endif ?>
+	<?php endif ?>
 	
 	<ul>       	
  	<b>Schritt 1: </b>Gibt entweder eine vollständige Information oder deren ersten Zeichen von dem Namen vom Patient, oder Vorname, oder 
@@ -67,25 +69,25 @@ Wie finde ich einen Patient?</b>
 <ul>       	
  	<b>Achtung! </b>Wenn die Suche ein Ergebnis bzw. mehrere Ergebnisse liefert, wird eine Liste gezeigt.<p>
 	</ul>
-	<? if(($x2=="")||($x2=="0")) : ?>
- 	<b>Schritt 3: </b>Klickt den &nbsp;<button><img src="../img/update2.gif" border=0> <font size=1>Laborbefund</font></button> Knopf des Patienten den Sie <? if($x1=="edit") print "bearbeiten"; else print "sehen"; ?> möchten.<p> 
-	<? endif ?>
+	<?php if(($x2=="")||($x2=="0")) : ?>
+ 	<b>Schritt 3: </b>Klickt den &nbsp;<button><img src="../img/update2.gif" border=0> <font size=1>Laborbefund</font></button> Knopf des Patienten den Sie <?php if($x1=="edit") print "bearbeiten"; else print "sehen"; ?> möchten.<p> 
+	<?php endif ?>
 </ul>
 
 <img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b> Achtung!</b></font> 
 <ul>       	
 Wenn Sie abbrechen möchten klickt den <img src="../img/de/de_cancel.gif" border=0> Knopf an.
 </ul>
-<? endif ?>
+<?php endif ?>
 
 
-<? if($src=="input") : ?>
-	<? if($x1=="main") : ?>
+<?php if($src=="input") : ?>
+	<?php if($x1=="main") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie gebe ich Labortestwerte ein?</b>
 </font>
 <ul>       	
-		<? if($x2=="") 
+		<?php if($x2=="") 
 			print '
  			<b>Schritt 1: </b>Gibt die Auftragsnummer in das Feld "<span style="background-color:yellow" > Auftragsnummer: </span>" ein.<br>	
  			<b>Schritt 2: </b>Gibt falls erforderlich das Untersuchungsdatum in das Feld "<span style="background-color:yellow" > Untersuchungsdatum </span>" ein.<br>	';
@@ -93,16 +95,16 @@ Wie gebe ich Labortestwerte ein?</b>
 		?>
 
 	
- 	<b>Schritt	<? if($x2=="") 
+ 	<b>Schritt	<?php if($x2=="") 
 			print "3"; else print "1";
 		?>:</b> Gibt die Testwerte in die entsprechende Eingbefelder ein.<br>	
- 	<b>Schritt <? if($x2=="") 
+ 	<b>Schritt <?php if($x2=="") 
 			print "4"; else print "2";
 		?>: </b>Klickt den <img src="../img/de/de_savedisc.gif" border=0> Knopf an um die Werte zu speichern.<p> 
  	<b>Achtung! </b>Wenn Sie die Werte gespeichert haben und die Eingabe beenden möchten,<br> klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an.<br> 
 </ul>
-	<? endif ?>
-<? if($x1=="few") : ?>
+	<?php endif ?>
+<?php if($x1=="few") : ?>
 	
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Ich muss nur ein Paar Werte eingeben. Wie soll ich das tun?</b>
@@ -112,8 +114,8 @@ Ich muss nur ein Paar Werte eingeben. Wie soll ich das tun?</b>
  	<b>Schritt 2: </b>Klickt den <img src="../img/de/de_savedisc.gif" border=0> Knopf an um die Werte zu speichern.<p> 
  	<b>Achtung! </b>Wenn Sie die Werte gespeichert haben und die Eingabe beenden möchten,<br> klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an.<br> 
 </ul>
-	<? endif ?>
-	<? if($x1=="param") : ?>
+	<?php endif ?>
+	<?php if($x1=="param") : ?>
 	
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Der Parameter den ich brauche ist nicht angezeigt! Wie kann ich die richtige Parametergruppe zeigen lassen?</b>
@@ -123,8 +125,8 @@ Der Parameter den ich brauche ist nicht angezeigt! Wie kann ich die richtige Par
      <option value="Sample parameter"> Beispiel Parameter</option> </select> </span>"</nobr> aus.<p> 
  	<b>Schritt 2: </b>Klickt den <img src="../img/de/de_auswahl2.gif" border=0> Knopf an um die richtige Parametergruppe zu zeigen.<p> 
 </ul>
-	<? endif ?>
-	<? if($x1=="save") : ?>
+	<?php endif ?>
+	<?php if($x1=="save") : ?>
 	
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie soll ich die Werte speichern?</b>
@@ -133,8 +135,8 @@ Wie soll ich die Werte speichern?</b>
  	<b>Schritt 1: </b>Klickt den <img src="../img/de/de_savedisc.gif" border=0> Knopf an um die Werte zu speichern.<p> 
  	<b>Achtung! </b>Wenn Sie die Werte gespeichert haben und die Eingabe beenden möchten,<br> klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an.<br> 
 </ul>
-	<? endif ?>
-	<? if($x1=="correct") : ?>
+	<?php endif ?>
+	<?php if($x1=="correct") : ?>
 	
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Ich habe einen falschen Wert eingegeben. Wie korrigiere ich das?</b>
@@ -144,8 +146,8 @@ Ich habe einen falschen Wert eingegeben. Wie korrigiere ich das?</b>
  	<b>Schritt 2: </b>Klickt den <img src="../img/de/de_savedisc.gif" border=0> Knopf an um die Werte zu speichern.<p> 
  	<b>Achtung! </b>Wenn Sie die Werte gespeichert haben und die Eingabe beenden möchten,<br> klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an.<br> 
 </ul>
-	<? endif ?>
-	<? if($x1=="note") : ?>
+	<?php endif ?>
+	<?php if($x1=="note") : ?>
 	
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Ich muss einen Vermerk anstatt einen Wert eingeben. Wie geht das?</b>
@@ -155,8 +157,8 @@ Ich muss einen Vermerk anstatt einen Wert eingeben. Wie geht das?</b>
  	<b>Schritt 2: </b>Klickt den <img src="../img/de/de_savedisc.gif" border=0> Knopf an um die Information zu speichern.<p> 
  	<b>Achtung! </b>Wenn Sie die Werte gespeichert haben und die Eingabe beenden möchten,<br> klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an.<br> 
 </ul>
-	<? endif ?>
-	<? if($x1=="done") : ?>
+	<?php endif ?>
+	<?php if($x1=="done") : ?>
 	
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Ich bin fertig. Was nun?</b>
@@ -165,13 +167,13 @@ Ich bin fertig. Was nun?</b>
  	<b>Schritt 2: </b>Klickt den <img src="../img/de/de_savedisc.gif" border=0> Knopf an um die Werte zu speichern.<p> 
  	<b>Achtung! </b>Klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an.<br> 
 </ul>
-	<? endif ?>
+	<?php endif ?>
 	
 
 <img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b> Achtung!</b></font> 
 <ul>       	
 Wenn Sie abbrechen möchten klickt den <img src="../img/de/de_cancel.gif" border=0> Knopf an.
 </ul>
-<? endif ?>
+<?php endif ?>
 </form>
 

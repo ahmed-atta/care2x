@@ -1,3 +1,6 @@
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+?>
 <html>
 
 <head>
@@ -11,7 +14,7 @@
 <font  size=3 color="#0000cc">
 <b>
 
-<?
+<?php
 	switch($src)
 	{
 		case "show": print "Dienstplan";
@@ -30,7 +33,7 @@
 </font>
 <p>
 
-<? if($src=="quick") : ?>
+<?php if($src=="quick") : ?>
 <p>
 <font color="#990000" face="Verdana, Arial">Was kann ich hier sehen?</font></b><p>
 <font face="Verdana, Arial" size=2>
@@ -51,8 +54,8 @@
 			 anklicken wenn Sie den Dienstplan aktualisieren bzw. erstellen oder ändern möchten.</ul>
 
 
-<? endif ?>
-<? if($src=="show") : ?>
+<?php endif ?>
+<?php if($src=="show") : ?>
 <p>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Ich möchte einen neuen Dienstplan für diesen Monat erstellen.</b></font>
 <ul> <b>Schritt 1: </b>Den <img src="../img/de/de_newplan.gif" border=0 > anklicken.<br>
@@ -80,8 +83,8 @@ Wenn Sie sich vorher angemeldet haben und ein Zugangsrecht in dieser Funktion ha
 <b>Achtung!</b>
 <ul> Falls Sie den Dienstplan schliessen möchten den <img src="../img/de/de_close2.gif" border=0> anklicken.
 </ul>
-<? endif ?>
-<? if($src=="plan") : ?>
+<?php endif ?>
+<?php if($src=="plan") : ?>
 
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Ich möchte eine Schwester bzw. einen Pfleger einplanen anhand der Personalliste. Wie geht das?</b></font>
@@ -113,8 +116,8 @@ Ich möchte eine Schwester bzw. einen Pfleger aus dem Dienstplan entfernen. Wie g
 </ul>
 
 </font>
-<? endif ?>
-<? if($src=="personlist") : ?>
+<?php endif ?>
+<?php if($src=="personlist") : ?>
 
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Die angezeigte Abteilung is falsch. Wie kann ich die richtige Abteilung zeigen lassen.</b></font>
@@ -139,8 +142,8 @@ Ich möchte einen Namen aus der Liste entfernen. Wie geht das?</b></font>
 <ul> <b>Schritt 1: </b>Wenn Sie fertig sind den <img src="../img/de/de_close2.gif" border=0> Knopf anklicken. <br>
 </ul>
 
-<? endif ?>
-<? if($src=="dutydoc") : ?>
+<?php endif ?>
+<?php if($src=="dutydoc") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie dokumentiere ich die Arbeitsleistung im Dienst?</b></font>
 <ul> <b>Schritt 1: </b>Gibt das Datum in das Feld " Datum <input type="text" name="d" size=10 maxlength=10> " ein.<p>
@@ -167,7 +170,7 @@ Wie dokumentiere ich die Arbeitsleistung im Dienst?</b></font>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Ich habe das Dokument gespeichert. Was mache ich jetzt? </b></font>
 <ul> <b>Schritt 1: </b>Wenn Sie fertig sind klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an. <br>
 </ul>
-<? endif ?>
+<?php endif ?>
 
 </form>
 </body>

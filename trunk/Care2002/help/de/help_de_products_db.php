@@ -1,11 +1,15 @@
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+?>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
-<?
+<?php
 if($x2=="pharma") print "Apotheke - "; else print "Medicallager - ";
 	switch($src)
 	{
-	case "input": print "Eingabe von neuen Produkten in die Datenbank";
+	case "input": if($x1=="update") print "Aktualisieren von Produktinformation";
+                         else print "Eingabe von neuen Produkten in die Datenbank";
 					break;
 	case "search": print "Suchen nach einem Produkt";
 					break;
@@ -24,8 +28,8 @@ if($x2=="pharma") print "Apotheke - "; else print "Medicallager - ";
 
 	
 
-<? if($src=="input") : ?>
-	<? if($x1=="") : ?>
+<?php if($src=="input") : ?>
+	<?php if($x1=="") : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie gebe ich ein neues Produkt in die Datenbank ein?</b>
 </font>
@@ -45,8 +49,8 @@ Ich habe alle Information eingegeben. Wie kann ich sie speichern?</b>
 <ul>       	
  	<b>Schritt 1: </b>Klickt den <input type="button" value="Speichern"> Knopf an.<br>
 </ul>
-	<? endif ?>	
-	<? if($x1=="save") : ?>
+	<?php endif ?>	
+	<?php if($x1=="save") : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie gebe ich ein neues Produkt in die Datenbank ein?</b>
 </font>
@@ -66,10 +70,20 @@ Wie kann ich die Information des Produkts bearbeiten bzw. aktualisieren?</b>
  	<b>Schritt 4: </b>Klickt den <input type="button" value="Speichern"> Knopf an um die aktuelle Änderung zu speichern.<br>
 </ul>
 	
-	<? endif ?>	
-<? endif ?>	
+	<?php endif ?>	
+	<?php if($x1=="update") : ?>
+	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+Wie kann ich die Information des Produkts bearbeiten bzw. aktualisieren?</b>
+</font>
+<ul>       	
+ 	<b>Schritt 1: </b>Falls nötig löschen Sie zuerst die alte Information aus dem betroffenen Feld.<p>
+ 	<b>Schritt 2: </b>Geben Sie die aktuelle Information in das entsprechende Feld ein.<p>
+ 	<b>Schritt 3: </b>Klickt den <input type="button" value="Speichern"> Knopf an um die aktuelle Änderung zu speichern.<br>
+</ul>
+	<?php endif ?>	
+<?php endif ?>	
 
-<? if($src=="search") : ?>
+<?php if($src=="search") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie finde ich ein Produkt?</b>
 </font>
@@ -81,31 +95,31 @@ Wie finde ich ein Produkt?</b>
  	<b>Schritt 3: </b>Wenn die Suche einen Artikel findet der dem Suchbegriff exakt anspricht, werden alle Information über den Artikel gezeigt.<br>
  	<b>Schritt 4: </b>Wenn mehrere Artikel gefunden werden, wird eine Liste gezeigt.<br>
 </ul>
-	<? if($x1!="multiple") : ?>
+	<?php if($x1!="multiple") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Mehrere Artikel sind aufgelistet. Wie kann ich die komplette Information eines Artikels sehen?</b>
 </font>
 <ul>       	
  	<b>Schritt 1: </b>Klickt entweder den Namen des Artikels oder das Symbol <img src="../img/info3.gif" border=0> an.<br>
 </ul>
-	<? endif ?>
-	<? if($x1=="multiple") : ?>
+	<?php endif ?>
+	<?php if($x1=="multiple") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Ich möchte die leztet Liste der Artikel noch mal sehen. Was soll ich tun?</b>
 </font>
 <ul>       	
  	<b>Schritt 1: </b>Klickt den <input type="button" value="Zurück"> Knopf an.<br>
 </ul>
-	<? endif ?>
+	<?php endif ?>
 <img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b> Achtung!</b></font> 
 <ul>       	
 Wenn Sie abbrechen möchten klickt den <img src="../img/de/de_cancel.gif" border=0> Knopf an.
 </ul>
 
-<? endif ?>
+<?php endif ?>
 
-<? if($src=="mng") : ?>
-	<? if(($x3=="1")&&($x1!="multiple")) : ?>
+<?php if($src=="mng") : ?>
+	<?php if(($x3=="1")&&($x1!="multiple")) : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie bearbeite ich die Information eines Produkts?</b>
 </font>
@@ -113,9 +127,9 @@ Wie bearbeite ich die Information eines Produkts?</b>
  	<b>Schritt 1: </b>Bearbeite die Information.<br>
  	<b>Schritt 2: </b>Klickt den <input type="button" value="Speichern"> Knopf an um die aktuelle Änderung zu speichern.<br>
 </ul>
-	<? endif ?>
+	<?php endif ?>
 
-	<? if($x1=="multiple") : ?>
+	<?php if($x1=="multiple") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie kann ich die Information des Produkts der gerade gezeigt wird bearbeiten bzw. aktualisieren?</b>
 </font>
@@ -140,7 +154,7 @@ Ich möchte das Produkt NICHT aus der Datenbank entfernen. Was soll ich jetzt tun
 <ul>       	
  	<b>Schritt 1: </b>Klickt die Option "<span style="background-color:yellow" > << Nein, zurück </span>" an.<br>
 </ul>	
-<? endif ?>
+<?php endif ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie verwalte ich ein Produkt in der Datenbank?</b>
 </font>
@@ -152,23 +166,23 @@ Wie verwalte ich ein Produkt in der Datenbank?</b>
  	<b>Schritt 3: </b>Wenn die Suche einen Artikel findet der dem Suchbegriff exakt anspricht, werden alle Information über den Artikel gezeigt.<br>
  	<b>Schritt 4: </b>Wenn mehrere Artikel gefunden werden, wird eine Liste gezeigt.<br>
 </ul>
-	<? if(($x1!="multiple")&&($x3=="")) : ?>
+	<?php if(($x1!="multiple")&&($x3=="")) : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Mehrere Artikel sind aufgelistet. Wie kann ich die komplette Information eines Artikels sehen?</b>
 </font>
 <ul>       	
  	<b>Schritt 1: </b>Klickt entweder den Namen des Artikels oder das Symbol <img src="../img/info3.gif" border=0> an.<br>
 </ul>
-	<? endif ?>
+	<?php endif ?>
 	<img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b> Achtung!</b></font> 
 <ul>       	
 Wenn Sie abbrechen möchten klickt den <img src="../img/de/de_cancel.gif" border=0> Knopf an.
 </ul>
-<? endif ?>
+<?php endif ?>
 
 
 
-<? if($src=="delete") : ?>
+<?php if($src=="delete") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie entferne ich das Produkt der gerade gezeigt wird aus der Datenbank?</b>
 </font>
@@ -190,9 +204,9 @@ Ich möchte das Produkt NICHT aus der Datenbank entfernen. Was soll ich jetzt tun
 Wenn Sie abbrechen möchten klickt den <img src="../img/de/de_cancel.gif" border=0> Knopf an.
 </ul>
 
-<? endif ?>	
+<?php endif ?>	
 
-<? if($src=="report") : ?>
+<?php if($src=="report") : ?>
 
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie schreibe ich einen Bericht?</b>
@@ -210,6 +224,6 @@ Wie schreibe ich einen Bericht?</b>
        	
 Wenn Sie abbrechen bzw. beenden möchten klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an.
 </ul>
-<? endif ?>	
+<?php endif ?>	
 </form>
 

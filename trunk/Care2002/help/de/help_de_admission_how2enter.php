@@ -1,4 +1,6 @@
-
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+?>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <form action="#">
 
@@ -12,7 +14,7 @@ Aufnahme eines neuen Patienten<p>
 <b>Schritt 2</b>
 <ul> Falls Sie sich vorher angemeldet haben, wird sofort das Formular zur Aufnahme von Patienten eingeblendet.<br>
 		Ansonsten werden Sie nach Ihrem Benutzernamen und Passwort gefragt.
-		Geben Sie Ihren Benutzernamen und Passwort ein und klicken Sie den <img src="../img/<?="$lang/$lang" ?>_continue.gif" border=0> an.
+		Geben Sie Ihren Benutzernamen und Passwort ein und klicken Sie den <img src="../img/<?php echo "$lang/$lang" ?>_continue.gif" border=0> an.
 </ul>
 <p>
 <b>Schritt 3</b>

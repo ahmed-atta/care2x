@@ -14,7 +14,7 @@ switch($src)
  ?></b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
-<? if($src=="main") : ?>
+<?php if($src=="main") : ?>
 
 <b>Create</b>
 
@@ -32,9 +32,9 @@ default ward will displayed. Locking a bed requires a valid password with access
 <ul> In this option you can create, edit, lock, or delete access rights for a particular ward. All the access rights created will have an 
 access only in that particular ward.
 </ul>
-<? endif ?>
-<? if($x2=="quick") : ?>
-	<? if($x1) : ?>
+<?php endif ?>
+<?php if($x2=="quick") : ?>
+	<?php if($x1) : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to show the ward's occupancy list?</b>
 </font>
@@ -55,7 +55,7 @@ How to show  the ward's occupancy list for editing or updating data?</b>
 	<b>Note: </b>The occupancy list that will be displayed can be "edited". Options for editing or updataing patients' data will be displayed.
 		You can also open the patients' data folder for further editing.<br>
 	</ul>
-	<? else : ?>
+	<?php else : ?>
 <img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 There is no available occupancy list at the moment!</b>
 </font><p>
@@ -68,12 +68,12 @@ How to display previous occupancy quickviews using the archive?</b>
  	<b>Step 3: </b>Click on a date in the calendar to display the occupancy quickview for that day.<br>
 	</ul>
 	
-	<? endif ?>
+	<?php endif ?>
 <b>Note</b>
 <ul> If you decide to close the quickview click the button <img src="../img/en/en_close2.gif" border=0>.
-</ul><? endif ?>
+</ul><?php endif ?>
 
-<? if($src=="new") : ?>
+<?php if($src=="new") : ?>
 
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to create a new ward?</b>
@@ -108,10 +108,10 @@ Can I set the prefix (or id) for a bed?</b>
 <b>Note</b>
 <ul> If you decide to cancel click the button <img src="../img/en/en_cancel.gif" border=0>.
 </ul>
-<? endif ?>
+<?php endif ?>
 	
-<? if($src=="show") : ?>
-	<? if($x1=="1") : ?>
+<?php if($src=="show") : ?>
+	<?php if($x1=="1") : ?>
 
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to save the ward's profile?</b>
@@ -123,7 +123,7 @@ How to save the ward's profile?</b>
 <ul> If you decide to cancel click the button <img src="../img/en/en_cancel.gif" border=0>.
 </ul>
 
-	<? else : ?>
+	<?php else : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to edit the ward's profile?</b>
 </font>
@@ -144,11 +144,11 @@ I want to edit a station's profile other than the one currently displayed. What 
 <ul> If you decide to cancel click the button <img src="../img/en/en_cancel.gif" border=0>.
 </ul>
 
-<? endif ?>
-<? endif ?>
+<?php endif ?>
+<?php endif ?>
 
 
-<? if($src=="") : ?>
+<?php if($src=="") : ?>
 
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to select a ward for editing its profile?</b>
@@ -160,7 +160,7 @@ How to select a ward for editing its profile?</b>
 <ul> If you decide to cancel click the button <img src="../img/en/en_cancel.gif" border=0>.
 </ul>
 
-<? endif ?>
+<?php endif ?>
 
 
 </form>

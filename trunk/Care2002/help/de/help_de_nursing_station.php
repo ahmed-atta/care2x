@@ -1,10 +1,12 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+?>
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b><?="$x3 - $x2" ?></b></font>
+<b><?php echo "$x3 - $x2" ?></b></font>
 <form action="#" >
 <p><font size=2 face="verdana,arial" >
 
-<? if((($src=="")&&($x1=="ja"))||(($src=="fresh")&&($x1=="template"))) : ?>
+<?php if((($src=="")&&($x1=="ja"))||(($src=="fresh")&&($x1=="template"))) : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie gebe ich einem Patient ein Bett?</b></font>
 <ul> <b>Schritt 1: </b>Den <img src="../img/plus2.gif" border=0> Knopf der Zimmernummer und Bett anklicken.
@@ -66,7 +68,7 @@ Jede Farbe in dieser Farbbalken (wenn gesetzt) signalisiert das Vorhandensein ei
  <font color="#990000"><b>Was bedeutet dieses Symbol <img src="../img/bestell.gif" width=16 height=16 border=0> ? </b></font>
 <ul> <b>Achtung! </b>Dies ist die Entlassung. Um einen Patient zu entlassen klickt dieses Symbol an.<br>
 </ul>
-<? elseif(($src=="")&&($x1=="template")) : ?>
+<?php elseif(($src=="")&&($x1=="template")) : ?>
 
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Was soll ich tun wenn <span style="background-color:yellow" >Die Belegung für heute ist noch nicht erstellt</span> angezeigt ist?</b></font>
@@ -91,7 +93,7 @@ Ich möchte die letzte Belegungsliste nicht sehen. Wie erstelle ich eine neue Lis
 		<b>Schritt 5: </b>Wenn die Suche ein Ergebnis bzw. mehrere Ergebnisse liefert wird eine Liste gezeigt.<br>
 		<b>Schritt 6: </b>Um den richtigen Patient auszuwählen klickt den nebensteheden &nbsp;<button><img src="../img/post_discussion.gif" width=20 height=20 border=0></button> Knopf an.<br>
 </ul>
-<? elseif(($src=="getlast")&&($x1=="last")) : ?>
+<?php elseif(($src=="getlast")&&($x1=="last")) : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie übernehme ich die letzte Belegungsliste für die heutige Belegung?</b></font>
 <ul> <b>Schritt 1: </b>Klickt den <input type="button" value="Diese Belegungsliste auf heute übernehmen."> Knopf an um die letzte Belegungsliste zu übernehmen.
@@ -100,7 +102,7 @@ Wie übernehme ich die letzte Belegungsliste für die heutige Belegung?</b></font>
 Die letzte Belegungsliste ist angezeigt aber ich möchte sie nicht übernehmen. Wie kann ich eine neue Liste erstellen? </b></font>
 <ul> <b>Schritt 1: </b>Klickt den <input type="button" value="Nicht übernehmen!  Eine neue Belegungsliste erstellen."> Knopf an um eine neue Liste zu erstellen.
 </ul>
-<? elseif($src=="assign") : ?>
+<?php elseif($src=="assign") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie gebe ich einem Patient ein Bett?</b></font>
 <ul>
@@ -123,7 +125,7 @@ Wie sperre ich ein Bett??</b></font>
 </ul>
   <b>Achtung! </b> Falls Sie abbrechen möchten den <img src="../img/de/de_cancel.gif" border=0> anklicken.</ul>
   
-<? elseif($src=="remarks") : ?>
+<?php elseif($src=="remarks") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie schreibe ich Vermerke bzw Notizen über den Patient?</b></font>
 <ul> <b>Schritt 1: </b>Klickt das Eingabefeld an.<br>
@@ -137,7 +139,7 @@ Ich bin fertig. Wie kann ich den Vermerk speichern?</b></font>
 Ich habe den Vermerk gespeichert. Wie kann ich das jetzt beenden?</b></font>
 <ul> 	<b>Schritt 1: </b>Den <img src="../img/de/de_close2.gif" border=0 align="absmiddle"> Knopf anklicken.<p>
 </ul>
-<? elseif($src=="discharge") : ?>
+<?php elseif($src=="discharge") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie kann ich einen Patient entlassen?</b></font>
 <ul> <b>Schritt 1: </b>Wählen Sie die Art der Entlassung. Klickt die entsprechende Auswahl an.<br>
@@ -160,15 +162,15 @@ Ich habe versucht ohne Ergebnis den <input type="button" value="Entlassen"> Knop
 </ul>
   <b>Achtung! </b> Falls Sie abbrechen möchten den <img src="../img/de/de_cancel.gif" border=0> anklicken.</ul>
 
-<? endif ?>
-<? if(($src!="assign")&&($src!="remarks")&&($src!="discharge")) : ?>
+<?php endif ?>
+<?php if(($src!="assign")&&($src!="remarks")&&($src!="discharge")) : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> 
 <font color="#990000"><b>Was bedeutet dies "<span style="background-color:yellow" > <img src="../img/delete2.gif" border=0 align="absmiddle"> <font color="#0000ff">Gesperrt</font> </span>" ? </b></font>
 <ul> <b>Achtung! </b>Dies bedeutet "Dieses Bett ist gesperrt". Um die Sperre aufzuheben klickt den "<span style="background-color:yellow" ><font color="#0000ff">Gesperrt</font></span>" an und klickt den&nbsp;<button>OK</button>
 			wenn Sie nach einer Bestätigung gefragt werden.<p>
  <b>Achtung! </b>Abhängig von der Version des Programms, eine Bettsperre aufzuheben könnte die Angabe eines Passworts erfordern.</ul>
 
-<? endif ?>
+<?php endif ?>
 
 </form>
 

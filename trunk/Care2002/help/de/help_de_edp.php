@@ -1,8 +1,11 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+?>
+</b><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
 EDV - 
-<?
+<?php
 	switch($src)
 	{
 	case "access": switch($x1)
@@ -30,8 +33,8 @@ EDV -
 
 	
 
-<? if($src=="access") : ?>
-	<? if($x1=="") : ?>
+<?php if($src=="access") : ?>
+	<?php if($x1=="") : ?>
 		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie erschaffe ich eine neue Zugangsberechtigung?</b>
 </font>
@@ -51,8 +54,8 @@ Ich bin fertig. Wie kann ich die Daten speichern?</b>
 <ul>       	
  	<b>Schritt 1: </b>Klickt den  <input type="button" value="Speichern"> Knopf an.<br>
 </ul>
-	<? endif ?>	
-	<? if($x1=="save") : ?>
+	<?php endif ?>	
+	<?php if($x1=="save") : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Die Zugangsberechtigung is jetzt gespeichert. Wie erschaffe ich eine neue?</b>
 </font>
@@ -69,8 +72,8 @@ Wie kann ich alle Zugangsberechtigungen aufgelistet sehen?</b>
  	<b>Schritt 2: </b>Alle Zugangsberechtigungen werden gezeigt.<br>
 </ul>
 	
-	<? endif ?>	
-	<? if($x1=="list") : ?>
+	<?php endif ?>	
+	<?php if($x1=="list") : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Was bedeuten die beiden Knöpfe <img src="../img/padlock.gif" border=0 align="absmiddle"> und <img src="../img/arrow-gr.gif" border=0 align="absmiddle"> ?</b>
 </font>
@@ -112,9 +115,9 @@ Wie kann ich die Zugangsberechtigung löschen?</b>
  	Klickt die Option "<span style="background-color:yellow" > L </span>" an.<br>
 </ul>
 
-	<? endif ?>	
+	<?php endif ?>	
 	
-	<? if($x1=="update") : ?>
+	<?php if($x1=="update") : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie kann ich eine Zugangsberechtigung ändern?</b>
 </font>
@@ -129,8 +132,8 @@ Achtung!</b>
  	Wenn Sie nicht bearbeiten möchten klicken Sie den <input type="button" value="Abbrechen"> Knopf an.<br>
 </ul>
 	
-	<? endif ?>		
-	<? if($x1=="delete") : ?>
+	<?php endif ?>		
+	<?php if($x1=="delete") : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie lösche ich eine Zugangsberechtigung?</b>
 </font>
@@ -145,26 +148,26 @@ Achtung!</b>
  	Wenn Sie nicht löschen möchten klicken Sie den <input type="button" value="Nein. Zurück."> Knopf an.<br>
 </ul>
 	
-	<? endif ?>		
+	<?php endif ?>		
 	
-	<? if($x1=="lock") : ?>
+	<?php if($x1=="lock") : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
-Wie kann ich eine  <? if($x2=="0") print "Zugangsberechtigung sperren"; else print "Sperre aufheben"; ?>?</b>
+Wie kann ich eine  <?php if($x2=="0") print "Zugangsberechtigung sperren"; else print "Sperre aufheben"; ?>?</b>
 </font>
 <ul>       	
- 	<b>Schritt 1: </b>Wenn Sie sicher sind die <? if($x2=="0") print "Zugangsberechtigung zu sperren"; else print "Sperre aufzuheben"; ?>,<br>
+ 	<b>Schritt 1: </b>Wenn Sie sicher sind die <?php if($x2=="0") print "Zugangsberechtigung zu sperren"; else print "Sperre aufzuheben"; ?>,<br>
 	 klicken Sie den <input type="button" value="Ja, ich bin sicher."> Knopf an.<br>
 </ul>
 	<img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Achtung!</b>
 </font>
 <ul>       	
- 	Wenn Sie <? if($x2=="0") print "nicht sperren"; else print "die Sperre nicht aufheben"; ?> möchten
+ 	Wenn Sie <?php if($x2=="0") print "nicht sperren"; else print "die Sperre nicht aufheben"; ?> möchten
 	 klicken Sie den  <input type="button" value="Nein. Zurück."> Knopf an.<br>
 </ul>
 	
-	<? endif ?>		
-<? endif ?>	
+	<?php endif ?>		
+<?php endif ?>	
 
 	</form>
 

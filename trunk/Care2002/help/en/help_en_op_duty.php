@@ -30,7 +30,7 @@
 </font>
 <p>
 
-<? if($src=="quick") : ?>
+<?php if($src=="quick") : ?>
 <p><font color="#990000" face="Verdana, Arial">What can I do here?</font></b><p>
 <font face="Verdana, Arial" size=2>
 <img src="../img/update.gif" width=19 height=19 align="absmiddle"><b> Get additional information (if available) on the nurses on duty.</b>
@@ -50,8 +50,8 @@ person on the list. A small pop-up window will appear showing relevant informati
 <li><b>Duty plan</b> :<ul>Clickable icon. Link to the department's duty plan for the whole month. Click the icon&nbsp;<button><img src="../img/new_address.gif" border=0 width=20 height=20 align="absmiddle"> <font size=1>Show</font></button>
 			if you want to open the duty plan for the whole month and evetually create or edit the duty plan.</ul>
 
-<? endif ?>
-<? if($src=="show") : ?>
+<?php endif ?>
+<?php if($src=="show") : ?>
 <p>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>I want to create a new duty plan for the displayed month</b></font>
 <ul> <b>Step 1: </b>Click the button <img src="../img/en/en_newplan.gif" border=0 >.<br>
@@ -81,8 +81,8 @@ person on the list. A small pop-up window will appear showing relevant informati
 <b>Note</b>
 <ul> If you decide to close the duty plan  click the button <img src="../img/en/en_close2.gif" border=0>.
 </ul>
-<? endif ?>
-<? if($src=="plan") : ?>
+<?php endif ?>
+<?php if($src=="plan") : ?>
 
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 I want to schedule a nurse for duty using the nurses' list</b></font>
@@ -113,8 +113,8 @@ I want to delete a name on the duty plan</b></font>
 <ul> <b>Step 1: </b>If you are finished, click the <img src="../img/en/en_close2.gif" border=0> button. <br>
 </ul>
 </font>
-<? endif ?>
-<? if($src=="personlist") : ?>
+<?php endif ?>
+<?php if($src=="personlist") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 The displayed department is wrong. I want to change to the right department.</b></font>
 <ul> <b>Step 1: </b>Select the department on the <nobr>"<span style="background-color:yellow" >Change department or OP room: </span><select name="s">
@@ -137,8 +137,8 @@ I want to delete a name on the list</b></font>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>I have saved the list and wish to close it, what should I do? </b></font>
 <ul> <b>Step 1: </b>If you are finished, click the <img src="../img/en/en_close2.gif" border=0> button. <br>
 </ul>
-<? endif ?>
-<? if($src=="dutydoc") : ?>
+<?php endif ?>
+<?php if($src=="dutydoc") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to document a work done during duty hours?</b></font>
 <ul> <b>Step 1: </b>Enter the date in the " Date <input type="text" name="d" size=10 maxlength=10> " field.<p>
@@ -163,7 +163,7 @@ How to document a work done during duty hours?</b></font>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>I have saved the document and wish to close it, what should I do? </b></font>
 <ul> <b>Step 1: </b>If you are finished, click the <img src="../img/en/en_close2.gif" border=0> button. <br>
 </ul>
-<? endif ?>
+<?php endif ?>
 
 </form>
 </body>

@@ -11,13 +11,13 @@ switch($x1)
  ?></b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
-<? if($x1=="search") : ?>
-	<? if($src=="newphone") : ?>
+<?php if($x1=="search") : ?>
+	<?php if($src=="newphone") : ?>
 	<b>Step 1</b>
 	<ul> Click the button <img src="../img/en/en_such-gray.gif" border="0">.
 	</ul>
-	<? endif ?>
-<b>Step <? if($src=="newphone") print "2"; else print "1"; ?></b>
+	<?php endif ?>
+<b>Step <?php if($src=="newphone") print "2"; else print "1"; ?></b>
 
 <ul> Enter  in the "<span style="background-color:yellow" >Enter search keyword.</span>" field either a full information or a few letters, like for example the ward's or department's code, a name, or Given name,
 		or a room number.
@@ -27,20 +27,20 @@ switch($x1)
 		<br>Example 4: enter "op11" or "OP11" or "op".
 		
 </ul>
-<b>Step <? if($src=="newphone") print "3"; else print "2"; ?></b>
+<b>Step <?php if($src=="newphone") print "3"; else print "2"; ?></b>
 <ul> Click the button <input type="button" value="SEARCH"> to start the search.<p>
 </ul>
-<b>Step <? if($src=="newphone") print "4"; else print "3"; ?></b>
+<b>Step <?php if($src=="newphone") print "4"; else print "3"; ?></b>
 <ul> If the search finds result(s), a list will be displayed.<p>
 </ul>
-<? endif ?>
-<? if($x1=="dir") : ?>
+<?php endif ?>
+<?php if($x1=="dir") : ?>
 <b>Step 1</b>
 <ul> Click the button <img src="../img/en/en_phonedir-gray.gif" border="0">.
 </ul>
-<? endif ?>
-<? if($x1=="newphone") : ?>
-	<? if($src=="search") : ?>
+<?php endif ?>
+<?php if($x1=="newphone") : ?>
+	<?php if($src=="search") : ?>
 <b>Step 1</b>
 <ul> Click the button <img src="../img/en/en_newdata-gray.gif" border="0">.
 </ul>
@@ -48,10 +48,10 @@ switch($x1)
 <ul> If you have logged in before and you have an access right for this function, the 
 		entry form for new phone information  will appear on the main frame.<br>
 		Otherwise, if you are not logged in, you will be required to enter your username and password. <p>
-	<? endif ?>
+	<?php endif ?>
 		Enter your username and password and click the button <img src="../img/en/en_continue.gif" border=0>.<p>
 		
-</ul><? endif ?>
+</ul><?php endif ?>
 
 <b>Note</b>
 <ul> If you decide to cancel 

@@ -1,3 +1,6 @@
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+?>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
@@ -20,7 +23,7 @@ Fotolabor -
  ?></b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
-<? if($src=="input") : ?>
+<?php if($src=="input") : ?>
 		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Die Eingabefelder sind jetzt eingeblendet. Was mache ich jetzt?</b>
 </font>
@@ -57,9 +60,9 @@ Ich kann den Patient nicht finden. Kann ich einfach seine Daten in die Eingabefe
 <ul>       	
  	<b>Nein. </b>Mit dieser Version des Programs können Sie die Fotos eines Patienten ohne Fallnummer nicht speichern.<br>
 </ul>
-<? endif ?>	
+<?php endif ?>	
 
-<? if($src=="maindata") : ?>
+<?php if($src=="maindata") : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie finde ich die Patientendaten?</b>
 </font>
@@ -80,8 +83,8 @@ Ich kann den Patient nicht finden. Kann ich einfach seine Daten in die Eingabefe
  	<b>Nein. </b>Mit dieser Version des Programs können Sie die Fotos eines Patienten ohne Fallnummer nicht speichern.<br>
 </ul>
 
-	<? endif ?>	
-<? if($src=="save") : ?>
+	<?php endif ?>	
+<?php if($src=="save") : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie kann ich weitere Fotos von dem selben Patient speichern?</b>
 </font>
@@ -98,10 +101,10 @@ Wie kann ich Fotos von einem anderen Patient speichern?</b>
  	<b>Schritt 2: </b>Klickt den <input type="button" value="GO"> Knopf an.<br>
 </ul>
 
-	<? endif ?>	
+	<?php endif ?>	
 	
-<? if($src=="init") : ?>
-	<? if($x1=="") : ?>
+<?php if($src=="init") : ?>
+	<?php if($x1=="") : ?>
 		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie speichere ich Fotos in die Datenbank?</b>
 </font>
@@ -110,9 +113,9 @@ Wie speichere ich Fotos in die Datenbank?</b>
  	<b>Schritt 2: </b>Klickt den <input type="button" value="OK Weiter..."> Knopf an.<br>
  	<b>Schritt 3: </b>Die Eingabefelder für die Fotos werden eingeblendet. Klick die "Hilfe" Knopf um weitere Hilfsanweisung zu lesen.<br>
 </ul>
-	<? endif ?>	
+	<?php endif ?>	
 	
-<? endif ?>	
+<?php endif ?>	
 
 	</form>
 

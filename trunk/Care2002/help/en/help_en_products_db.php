@@ -5,7 +5,8 @@
 if($x2=="pharma") print "Pharmacy - "; else print "Medical depot - ";
 	switch($src)
 	{
-	case "input": print "Entering new product into the databank";
+	case "input": if($x1=="update") print "Editing a product's Information";
+                          else print "Entering new product into the databank";
 					break;
 	case "search": print "Search a product";
 					break;
@@ -22,8 +23,8 @@ if($x2=="pharma") print "Pharmacy - "; else print "Medical depot - ";
 
 	
 
-<? if($src=="input") : ?>
-	<? if($x1=="") : ?>
+<?php if($src=="input") : ?>
+	<?php if($x1=="") : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to enter a new product into the databank?</b>
 </font>
@@ -43,8 +44,8 @@ I am finished entering all available product information. How to save it?</b>
 <ul>       	
  	<b>Step 1: </b>Click the button <input type="button" value="Save">.<br>
 </ul>
-	<? endif ?>	
-	<? if($x1=="save") : ?>
+	<?php endif ?>	
+	<?php if($x1=="save") : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to enter a new product into the databank?</b>
 </font>
@@ -64,10 +65,20 @@ I want to edit the product that is currently displayed How to do it?</b>
  	<b>Step 4: </b>Click the button <input type="button" value="Save"> to save the new information.<br>
 </ul>
 	
-	<? endif ?>	
-<? endif ?>	
+	<?php endif ?>	
+	<?php if($x1=="update") : ?>
+	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+I want to edit the product that is currently displayed How to do it?</b>
+</font>
+<ul>       	
+ 	<b>Step 1: </b>If necessary delete first the existing data from an entry field.<p>
+ 	<b>Step 2: </b>Type the new information in the appropriate entry field.<p>
+ 	<b>Step 3: </b>Click the button <input type="button" value="Save"> to save the new information.<br>
+</ul>
+	<?php endif ?>	
+<?php endif ?>	
 
-<? if($src=="search") : ?>
+<?php if($src=="search") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to search a product?</b>
 </font>
@@ -78,31 +89,31 @@ How to search a product?</b>
  	<b>Step 3: </b>If the search finds the article that exactly matches the search keyword, a detailed information on the article will be displayed.<br>
  	<b>Step 4: </b>If the search finds several articles that approximate the search keyword, a list of the articles will be displayed.<br>
 </ul>
-	<? if($x1!="multiple") : ?>
+	<?php if($x1!="multiple") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 A list of several articles is listed. How to see the information of a particular article?</b>
 </font>
 <ul>       	
  	<b>Step 1: </b>Click either the button <img src="../img/info3.gif" border=0> or the article's name.<br>
 </ul>
-	<? endif ?>
-	<? if($x1=="multiple") : ?>
+	<?php endif ?>
+	<?php if($x1=="multiple") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 I want to see the previous list of articles. What should I do?</b>
 </font>
 <ul>       	
  	<b>Step 1: </b>Click the button <input type="button" value="Go back">.<br>
 </ul>
-	<? endif ?>
+	<?php endif ?>
 <img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b> Note:</b></font> 
 <ul>       	
  If you decide to cancel click the button <img src="../img/en/en_cancel.gif" border=0>.
 </ul>
 
-<? endif ?>
+<?php endif ?>
 
-<? if($src=="mng") : ?>
-	<? if(($x3=="1")) : ?>
+<?php if($src=="mng") : ?>
+	<?php if(($x3=="1")) : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to edit the product information?</b>
 </font>
@@ -110,9 +121,9 @@ How to edit the product information?</b>
  	<b>Step 1: </b>Edit the information about the new product.<br>
  	<b>Step 2: </b>Click the button <input type="button" value="Save"> to save the new information.<br>
 </ul>
-	<? endif ?>
+	<?php endif ?>
 
-	<? if($x1=="multiple") : ?>
+	<?php if($x1=="multiple") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to edit the information of the product currently displayed?</b>
 </font>
@@ -137,7 +148,7 @@ I do not want to remove the product's information. What should I do?</b>
 <ul>       	
  	<b>Step 1: </b>Click the link "<span style="background-color:yellow" > << No, do not delete. Go back </span>".<br>
 </ul>	
-<? endif ?>
+<?php endif ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to manage a product in the databank?</b>
 </font>
@@ -148,23 +159,23 @@ How to manage a product in the databank?</b>
  	<b>Step 3: </b>If the search finds the article that exactly matches the search keyword, a detailed information on the article will be displayed.<br>
  	<b>Step 4: </b>If the search finds several articles that approximate the search keyword, a list of the articles will be displayed.<br>
 </ul>
-	<? if(($x1!="multiple")&&($x3=="")) : ?>
+	<?php if(($x1!="multiple")&&($x3=="")) : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 A list of several articles is listed. How to see the information of a particular article?</b>
 </font>
 <ul>       	
  	<b>Step 1: </b>Click either the button <img src="../img/info3.gif" border=0> or the article's name.<br>
 </ul>
-	<? endif ?>
+	<?php endif ?>
 	<img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b> Note:</b></font> 
 <ul>       	
  If you decide to cancel click the button <img src="../img/en/en_cancel.gif" border=0>.
 </ul>
-<? endif ?>
+<?php endif ?>
 
 
 
-<? if($src=="delete") : ?>
+<?php if($src=="delete") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 I want to remove the product from the databank. What should I do?</b>
 </font>
@@ -185,9 +196,9 @@ I do not want to remove the product's information. What should I do?</b>
  If you decide to cancel click the button <img src="../img/en/en_cancel.gif" border=0>.
 </ul>
 
-<? endif ?>	
+<?php endif ?>	
 
-<? if($src=="report") : ?>
+<?php if($src=="report") : ?>
 
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to write a report?</b>
@@ -205,7 +216,7 @@ How to write a report?</b>
        	
 If you decide to cancel or end click the button <img src="../img/en/en_close2.gif" border=0>.
 </ul>
-<? endif ?>	
+<?php endif ?>	
 
 </form>
 

@@ -1,8 +1,11 @@
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+?>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
 Farbenoptionen
-<?
+<?php
 	switch($src)
 	{
 	case "ext": print " - Erweitert";
@@ -12,7 +15,7 @@ Farbenoptionen
 </b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
-<? if($src=="") : ?>
+<?php if($src=="") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie stelle ich die Hintergrundfarbe ein?</b>
 </font>
@@ -40,9 +43,9 @@ Wie stelle ich die Farben für "hover" und "link" ein?</b>
 <ul>       	
  	<b>Schritt 5: </b>Klickt den <input type="button" value="Erweiterte Farbenoptionen"> Knopf an um den erweiterten Modus zu starten.<br>
 </ul>
-<? endif ?>
+<?php endif ?>
 
-<? if($src=="ext") : ?>
+<?php if($src=="ext") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie stelle ich die Farbe für "active link" ein?</b>
 </font>
@@ -66,6 +69,6 @@ Wie stelle ich die Farbe für "hover" ein?</b>
  	<b>Schritt 5: </b>Wenn Sie fertig sind klickt den <input type="button" value="OK"> Knopf an.<br>
 </ul>
 
-<? endif ?>
+<?php endif ?>
 	</form>
 

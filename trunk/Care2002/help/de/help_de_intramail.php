@@ -1,8 +1,10 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+?>
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
 Intranet Email - 
-<?
+<?php
 	switch($src)
 	{
 	case "pass": switch($x1)
@@ -37,8 +39,8 @@ Intranet Email -
 
 	
 
-<? if($src=="pass") : ?>
-<? if($x1=="") : ?>
+<?php if($src=="pass") : ?>
+<?php if($x1=="") : ?>
 		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie kann ich mich einloggen?</b>
 </font>
@@ -60,8 +62,8 @@ Ich have noch keine Adresse. Wie bekomme ich eine Adresse?</b>
 	Das Anmeldeformular blendet sich ein.<br>
  	<b>Schritt 2: </b>Wenn das Formular sichtbar ist können Sie weitere Hilfsanweisung durch den "Hilfe" Knopf sehen.<br>
 </ul>
-	<? endif ?>		
-	<? if($x1=="1") : ?>
+	<?php endif ?>		
+	<?php if($x1=="1") : ?>
 		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie kann ich mich anmelden?</b>
 </font>
@@ -79,11 +81,11 @@ Wie kann ich mich anmelden?</b>
  	<b>Schritt 3: </b>Klickt den <input type="button" value="Registrieren"> Knopf an zum anmelden.<br>
 </ul>
 
-	<? endif ?>		
-<? endif ?>	
+	<?php endif ?>		
+<?php endif ?>	
 
-<? if($src=="mail") : ?>
-<? if($x1=="listmail") : ?>
+<?php if($src=="mail") : ?>
+<?php if($x1=="listmail") : ?>
 		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie öffne ich einen Email zum lesen?</b>
 </font>
@@ -117,8 +119,8 @@ Wie schreibe ich einen Email?</b>
 <ul>       	
  	<b>Schritt 1: </b>Klickt die Option "<span style="background-color:yellow" > Neue Email </span>" an.<br>
 </ul>
-	<? endif ?>		
-	<? if($x1=="compose") : ?>
+	<?php endif ?>		
+	<?php if($x1=="compose") : ?>
 		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie schreibe ich einen Email?</b>
 </font>
@@ -165,19 +167,19 @@ Was bringt die "Schnelladresse" Option?</b>
  	<b>Schritt 2: </b>Klicken Sie eine Adresse in der "Schnelladresse" Liste an. Diese Adresse wird sofort in das Feld das  Sie vorher anklickten übertragen.<br>
 </ul>
 
-	<? endif ?>		
-<? if(($x1=="sendmail")&&($x3=="1")) : ?>
+	<?php endif ?>		
+<?php if(($x1=="sendmail")&&($x3=="1")) : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie schreibe ich einen Email?</b>
 </font>
 <ul>       	
  	<b>Schritt 1: </b>Klickt die Option "<span style="background-color:yellow" > Neue Email </span>" an.<br>
 </ul>
-	<? endif ?>		
-<? endif ?>	
+	<?php endif ?>		
+<?php endif ?>	
 
 
-<? if($src=="read") : ?>
+<?php if($src=="read") : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie kann ich einen Email ausdrucken?</b>
 </font>
@@ -213,9 +215,9 @@ Wie lösche ich den Email?</b>
  	<b>Schritt 3: </b>Klickt den <input type="button" value="OK"> Knopf an um den Email zu löschen.<p>
 	<b>Achtung!</b> Die gelöschte Emails aus dem "Posteingang" werden vorübergehend in den "Recycle" gespeichert.
 </ul>
-	<? endif ?>		
+	<?php endif ?>		
 	
-<? if($src=="address") : ?>
+<?php if($src=="address") : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie kann ich eine Adresse in mein Adressenbuch speichern?</b>
 </font>
@@ -240,7 +242,7 @@ Wie entferne ich eine Adresse aus meinem Adressenbuch?</b>
  	<b>Schritt 3: </b>Sie werden nach einer Bestätigung gefragt.<br>
  	<b>Schritt 4: </b>Klickt den <input type="button" value="OK"> Knopf an um die Adresse zu löschen.<p>
 </ul>
-	<? endif ?>		
+	<?php endif ?>		
 
 	<img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Achtung!</b>

@@ -12,7 +12,7 @@ How to enter a new patient's admission<p>
 <ul> If you have logged in before and you have an access right for this function, the patient's
 		admission form will appear on the main frame.<br>
 		Otherwise, if you are not logged in, you will be required to enter your username and password. 
-		Enter your username and password and click the button <img src="../img/<?="$lang/$lang" ?>_continue.gif" border=0>.
+		Enter your username and password and click the button <img src="../img/<?php echo "$lang/$lang" ?>_continue.gif" border=0>.
 </ul>
 <p>
 <b>Step 3</b>

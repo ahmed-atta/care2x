@@ -1,11 +1,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <a name="howto">
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b><?="$x3" ?></b></font>
+<b><?php echo "$x3" ?></b></font>
 <form action="#" >
 <p><font size=2 face="verdana,arial" >
 
-<? if($src=="main") : ?>
+<?php if($src=="main") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to...?</b></font>
 <ul type="disc"> 
@@ -235,7 +235,7 @@ How to enter information on daily intravenous medication application and dosage?
 		<b>Step 6: </b>If you are finished, click the button <img src="../img/en/en_close2.gif" border=0> to close the window and go back to the chart.<br>
 		<font color="#000099" size=1><a href="#howto"><img src="../img/arrow-t.gif" width=12 height=12 border=0> Back to "How to...?"</a></font>
 </ul>
-<? elseif(($src=="")&&($x1=="template")) : ?>
+<?php elseif(($src=="")&&($x1=="template")) : ?>
 
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 What should I do when <span style="background-color:yellow" >today's list is not yet created</span>?</b></font>
@@ -260,7 +260,7 @@ I don't want to see the last occupancy list. How to create a new list?</b></font
 		<b>Step 5: </b>If the search finds the patient or several patients, a list of patients will be displayed.<br>
 		<b>Step 6: </b>To select the right patient, click on the button&nbsp;<button><img src="../img/post_discussion.gif" width=20 height=20 border=0></button> corresponding to it.<br>
 </ul>
-<? elseif(($src=="getlast")&&($x1=="last")) : ?>
+<?php elseif(($src=="getlast")&&($x1=="last")) : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to copy the displayed last recorded list for today's occupancy list?</b></font>
 <ul> <b>Step 1: </b>Click on the button <input type="button" value="Copy this list for today anyway."> to copy the last recorded list.
@@ -269,7 +269,7 @@ How to copy the displayed last recorded list for today's occupancy list?</b></fo
 The last occupancy list is being displayed but I don't want to copy it. How to start a new list? </b></font>
 <ul> <b>Step 1: </b>Click on the button <input type="button" value="Do not copy this! Create a new list."> to start creating a new list.
 </ul>
-<? elseif($src=="assign") : ?>
+<?php elseif($src=="assign") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to assign a bed to a patient?</b></font>
 <ul> <b>Step 1: </b>Find first the patient by entering a search keyword into one of several entry fields.<br>
@@ -290,7 +290,7 @@ How to lock a bed?</b></font>
 </ul>
   <b>Note: </b>If you want to cancel, click the button <img src="../img/en/en_cancel.gif" border=0 align="absmiddle">.</ul>
   
-<? elseif($src=="remarks") : ?>
+<?php elseif($src=="remarks") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to write remarks or notes about the patient?</b></font>
 <ul> <b>Step 1: </b>Click on the text entry field.<br>
@@ -304,7 +304,7 @@ I am finished writing. How to save the remarks or notes?</b></font>
 I have saved the remarks. How to close the window?</b></font>
 <ul> 	<b>Step 1: </b>Click the button <img src="../img/en/en_close2.gif" border=0 align="absmiddle"> to close the window.<p>
 </ul>
-<? elseif($src=="discharge") : ?>
+<?php elseif($src=="discharge") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to discharge a patient?</b></font>
 <ul> <b>Step 1: </b>Select the type of dischargeal by clicking on its corresponding button<br>
@@ -327,7 +327,7 @@ I tried clicking the <input type="button" value="discharge"> button, but there i
 </ul>
   <b>Note: </b>If you want to cancel, click the button <img src="../img/en/en_cancel.gif" border=0 align="absmiddle">.</ul>
 
-<? endif ?>
+<?php endif ?>
 
 </form>
 

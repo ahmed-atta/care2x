@@ -1,17 +1,20 @@
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+?>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>Recherchieren im Archiv</b></font>
 <form action="#" >
 <p><font size=2 face="verdana,arial" >
 
-<? if($src=="select") : ?>
+<?php if($src=="select") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Wie kann ich die Daten aktualisieren bzw. ändern?</b></font>
 <ul> <b>Schritt : </b>Den <input type="button" value="Daten aktualisieren"> anklicken.<br>
 </ul>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Wie kann ich eine neue Suche im Archiv starten?</b></font>
 <ul> <b>Schritt : </b>Den <input type="button" value="Neue Suche im Archiv"> anklicken.<br>
 </ul>
-<? elseif($src=="search") : ?>
+<?php elseif($src=="search") : ?>
 <b>Achtung!</b>
 <ul> Wenn die Suche ein einziges Ergebnis findet werden die Daten sofort gezeigt.<br>
 		Wenn die Suche allerdings mehrere Ergebnisse liefert wird eine Liste gezeigt.<br>
@@ -21,7 +24,7 @@
 <b>Achtung!</b>
 <ul> Falls Sie eine neue Recherche starten möchten, den <input type="button" value="Neue Suche im Archiv"> anklicken.
 </ul>
-<? else : ?>
+<?php else : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Alle Aufnahmen heute anzeigen</b></font>
 <ul> <b>Schritt 1: </b>Das heutige Datum in das Feld "Aufnahmedatum ab:" eingeben. <br>
 		<ul><font size=1 color="#000099">
@@ -118,7 +121,7 @@
 		den Namen, oder den Familiennamen, oder das Aufnahmedatum anklicken.
 </ul>
 
-<? endif ?>
+<?php endif ?>
 <b>Achtung!</b>
 <ul> Falls Sie die Recherche abbrechen möchten, den <input type="button" value="Abbrechen"> anklicken.
 </ul>

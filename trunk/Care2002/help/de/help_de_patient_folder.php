@@ -1,10 +1,12 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+?>
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b><?="Patientenmappe" ?></b></font>
+<b><?php echo "Patientenmappe" ?></b></font>
 <form action="#" >
 <p><font size=2 face="verdana,arial" >
 
-<? if($src=="") : ?>
+<?php if($src=="") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> 
 <font color="#990000"><b>Was soll diese Farbbalken  <img src="../img/colorcodebar3.gif" border=0 > bedeuten? </b></font>
 <ul> <b>Achtung! </b>Sie sind "Signalfarben". <p>Jede Farbe in diesem Balken (wenn gesetzt) bedeutet  Änderung, Anordnung, Fragen, Befund, Beobachtung,
@@ -75,18 +77,18 @@ Was ist die Funktion von diesem Auswahlfeld </b>	<select name="d"><option value=
 		<b>Schritt 2: </b>Klickt die Abteilung an.<br>
 		<b>Schritt 3: </b>Ein neuer Konsilschein wird eingeblendet.<br>
 </ul>
-<? endif ?>
+<?php endif ?>
 
-<? if($src=="labor") : ?>
+<?php if($src=="labor") : ?>
 <img src="../img/warn.gif" border=0 align="absmiddle"> 
 <font color="#990000"><b>Kein Laborbefund vorhanden. </b></font>
 <ul> Klickt den <input type="button" value="OK"> Knopf an um in die Patientenmappe zurück zu gehen.</ul>
-<? else  : ?>
+<?php else  : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Wie schliesse ich die Patientenmappe? </b></font>
 <ul> <b>Achtung! </b>Wenn Sie die Patientenmappe schliessen möchten klicken Sie den 
 <img src="../img/de/de_close2.gif" border=0 align="absmiddle"> Knopf an.</ul>
 
-<? endif ?>
+<?php endif ?>
 
 </form>
 

@@ -1,28 +1,30 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+?>
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>Recherchieren im Medocs Archiv</b></font>
 <form action="#" >
 <p><font size=2 face="verdana,arial" >
 
-<? if($src=="select") : ?>
+<?php if($src=="select") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Wie kann ich die Daten aktualisieren bzw. ändern?</b></font>
 <ul> <b>Schritt : </b>Den <input type="button" value="Daten aktualisieren"> anklicken.<br>
 </ul>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Wie kann ich eine neue Suche im Archiv starten?</b></font>
 <ul> <b>Schritt : </b>Den <input type="button" value="Neue Suche im Archiv"> anklicken.<br>
 </ul>
-<? elseif(($src=="search")&&($x1)) : ?>
+<?php elseif(($src=="search")&&($x1)) : ?>
 <b>Achtung!</b>
-<ul><? if($x1==1) : ?> Wenn die Suche ein einziges Ergebnis findet werden die Daten sofort gezeigt.<br>
+<ul><?php if($x1==1) : ?> Wenn die Suche ein einziges Ergebnis findet werden die Daten sofort gezeigt.<br>
 		Wenn die Suche allerdings mehrere Ergebnisse liefert wird eine Liste gezeigt.<br>
-		<? endif ?>
+		<?php endif ?>
 		Um das Dokument zu sehen den nebenstehenden <img src="../img/R_arrowGrnSm.gif" border=0 height=12 border=0> , oder
 		den Namen, oder den Vornamen, oder die Dokumentnummer oder das Bearbeitungsdatum anklicken.
 </ul>
 <b>Achtung!</b>
 <ul>Falls Sie eine neue Recherche starten möchten den <input type="button" value="Neue Suche im Archiv"> anklicken.
 </ul>
-<? else : ?>
+<?php else : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>Alle Medocs Dokumente einer Abteilung zeigen</b></font>
 <ul> <b>Schritt 1: </b>Geben Sie den Abteilungsnamen oder deren Abkürzung in das Feld "Abteilung" ein. <br>
 		<b>Schritt 2: </b>Lassen Sie die andere Eingabefelder leer.<br>
@@ -111,7 +113,7 @@ die Aufklärung erhalten haben, und deren Therapie ein Wort haben das mit "lipo" 
 		den Namen, oder den Vornamen, oder die Dokumentnummer, oder das Bearbeitungsdatum anklicken.
 </ul>
 
-<? endif ?>
+<?php endif ?>
 <b>Achtung!</b>
 <ul> Falls Sie die Recherche abbrechen möchten, den  <img src="../img/de/de_close2.gif" border=0 > anklicken.
 </ul>

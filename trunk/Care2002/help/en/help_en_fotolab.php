@@ -20,7 +20,7 @@ Photolab -
  ?></b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
-<? if($src=="input") : ?>
+<?php if($src=="input") : ?>
 		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 The entry fields are displayed. What to do next?</b>
 </font>
@@ -56,9 +56,9 @@ I cannot find the patient through his patient number. Can I simply enter his dat
 <ul>       	
  	<b>No. </b>In this program version, you can not save photos of a patient when he has no valid patient or case number.<br>
 </ul>
-<? endif ?>	
+<?php endif ?>	
 
-<? if($src=="maindata") : ?>
+<?php if($src=="maindata") : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to find the patient's data?</b>
 </font>
@@ -78,8 +78,8 @@ I cannot find the patient through his patient number. Can I simply enter his dat
  	<b>No. </b>In this program version, you can not save photos of a patient when he has no valid patient or case number.<br>
 </ul>
 
-	<? endif ?>	
-<? if($src=="save") : ?>
+	<?php endif ?>	
+<?php if($src=="save") : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 I want to store additional photos from the same patient. How to do it?</b>
 </font>
@@ -96,10 +96,10 @@ I want to store photos from another patient. How to do it?</b>
  	<b>Step 2: </b>Click the button <input type="button" value="Go">.<br>
 </ul>
 
-	<? endif ?>	
+	<?php endif ?>	
 	
-<? if($src=="init") : ?>
-	<? if($x1=="") : ?>
+<?php if($src=="init") : ?>
+	<?php if($x1=="") : ?>
 		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to store photos in the databank?</b>
 </font>
@@ -108,8 +108,8 @@ How to store photos in the databank?</b>
  	<b>Step 2: </b>Click the button <input type="button" value="OK Continue...">.<br>
  	<b>Step 3: </b>The entry fields for photos will appear. Click the button "Help" for further instructions.<br>
 </ul>
-	<? endif ?>	
-	<? if($x1=="save") : ?>
+	<?php endif ?>	
+	<?php if($x1=="save") : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 The new access right is now saved. How to create another access right?</b>
 </font>
@@ -126,8 +126,8 @@ I want to see the list of the existing access rights. How to do it?</b>
  	<b>Step 2: </b>The existing access rights will be listed<br>
 </ul>
 	
-	<? endif ?>	
-	<? if($x1=="list") : ?>
+	<?php endif ?>	
+	<?php if($x1=="list") : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 What do the buttons <img src="../img/arrow-r.gif" border=0 align="absmiddle"> and <img src="../img/arrow-gr.gif" border=0 align="absmiddle"> mean?</b>
 </font>
@@ -169,9 +169,9 @@ How to delete an access right?</b>
  	Click the option "<span style="background-color:yellow" > D </span>" corresponding to the user.<br>
 </ul>
 
-	<? endif ?>	
+	<?php endif ?>	
 	
-	<? if($x1=="update") : ?>
+	<?php if($x1=="update") : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to edit an access right?</b>
 </font>
@@ -186,8 +186,8 @@ Achtung!</b>
  	If you decide not to edit click the button <input type="button" value="Cancel">.<br>
 </ul>
 	
-	<? endif ?>		
-	<? if($x1=="delete") : ?>
+	<?php endif ?>		
+	<?php if($x1=="delete") : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to delete an access right?</b>
 </font>
@@ -202,25 +202,25 @@ Achtung!</b>
  	If you decide not to delete click the button <input type="button" value="No. Go back.">.<br>
 </ul>
 	
-	<? endif ?>		
+	<?php endif ?>		
 	
-	<? if($x1=="lock") : ?>
+	<?php if($x1=="lock") : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
-How to <? if($x2=="0") print "lock"; else print "unlock"; ?> an access right?</b>
+How to <?php if($x2=="0") print "lock"; else print "unlock"; ?> an access right?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>If you are sure you want to <? if($x2=="0") print "lock"; else print "unlock"; ?> the access right,<br>
+ 	<b>Step 1: </b>If you are sure you want to <?php if($x2=="0") print "lock"; else print "unlock"; ?> the access right,<br>
 	 click the button <input type="button" value="Yes, I'm sure.">.<br>
 </ul>
 	<img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Achtung!</b>
 </font>
 <ul>       	
- 	If you decide not to <? if($x2=="0") print "lock"; else print "unlock"; ?> click the button <input type="button" value="No. Go back.">.<br>
+ 	If you decide not to <?php if($x2=="0") print "lock"; else print "unlock"; ?> click the button <input type="button" value="No. Go back.">.<br>
 </ul>
 	
-	<? endif ?>		
-<? endif ?>	
+	<?php endif ?>		
+<?php endif ?>	
 
 	</form>
 

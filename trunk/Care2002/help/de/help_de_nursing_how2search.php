@@ -1,7 +1,9 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+?>
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
-<?
+<?php
 switch($x2)
 {
 	case "search": 
@@ -15,8 +17,8 @@ switch($x2)
  ?></b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
-<? if($x2=="search") : ?>
-<? if(!$x1) : ?>
+<?php if($x2=="search") : ?>
+<?php if(!$x1) : ?>
 <b>Schritt 1</b>
 
 <ul>
@@ -38,17 +40,17 @@ Geben Sie in das Feld "<span style="background-color:yellow" >Bitte ein Stichwor
 </ul>
 <b>Achtung!</b>
 <ul>  Falls Sie abbrechen möchten den <img src="../img/de/de_cancel.gif" border=0> anklicken.
-</ul><? endif ?>
-<b>Schritt <? if($x1) print "1"; else print "5"; ?></b>
+</ul><?php endif ?>
+<b>Schritt <?php if($x1) print "1"; else print "5"; ?></b>
 <ul>Um die Belegungsliste zu sehen, den <img src="../img/bul_arrowBluSm.gif" width=12 height=12 border=0>,
 oder das Datum, oder den Stationsnamen anklicken.
 <p><b>Achtung!</b> Das Stichwort wird in der Belegungsliste hervorgehoben.
 <br><b>Achtung!</b> Die Belegungsliste is nur zum sehen. Sie lässt sich nicht bearbeiten. Wenn Sie trotzdem versuchen die Liste zu bearbeiten werden Sie nach Ihrem 
 Benutzername und Passwort gefragt.
 </ul>
-<? endif ?>
-<? if($x2=="quick") : ?>
-	<? if($x1) : ?>
+<?php endif ?>
+<?php if($x2=="quick") : ?>
+	<?php if($x1) : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie kann ich die Belegungsliste einer Station sehen?</b>
 </font>
@@ -70,7 +72,7 @@ Wie kann ich die Belegungsliste zeigen lassen zum aktualisieren bzw. ändern?</b>
 	auch eingeblendet.
 		Sie können auch die Patientenmappe öffnen zum sehen bzw. bearbeiten.<br>
 	</ul>
-	<? else : ?>
+	<?php else : ?>
 <img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Keine Stationsbelegung vorhanden!</b>
 </font><p>
@@ -83,12 +85,12 @@ Wie lassen sich die alte Belegungslisten über das Archiv zeigen?</b>
  	<b>Schritt 3: </b>Klicken Sie das Datum im Kalender um die Belegungslisten von diesem Tag zu sehen.<br>
 	</ul>
 	
-	<? endif ?>
+	<?php endif ?>
 <b>Achtung!</b>
 <ul> Falls Sie die Schnellsicht schliessen möchten den <img src="../img/de/de_close2.gif" border=0> anklicken.
-</ul><? endif ?>
+</ul><?php endif ?>
 
-<? if($x2=="arch") : ?>
+<?php if($x2=="arch") : ?>
 
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie lassen sich die alte Belegungslisten über das Archiv zeigen?</b>
@@ -106,7 +108,7 @@ Wie kann ich den Monat des Leitkalenders wechseln?</b>
 								Klicken Sie so oft wie nötig bis der gewünschte Monat angezeigt ist.<br>
 	</ul>
 	
-	<? endif ?>
+	<?php endif ?>
 
 
 </form>

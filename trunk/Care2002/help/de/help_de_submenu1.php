@@ -1,3 +1,6 @@
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+?>
 <html>
 
 <head>
@@ -9,7 +12,7 @@
 
 <font face="Verdana, Arial" size=3>
 <b>
-<?=$src ?>
+<?php echo $src ?>
 <p><font color="#990000">Was ist das hier?</font></b><p>
 <font face="Verdana, Arial" size=2>
 Dies ist ein typisches Untermenu. Das Untermenu is in drei Spalten geteilt. 

@@ -37,8 +37,8 @@ Intranet Email -
 
 	
 
-<? if($src=="pass") : ?>
-<? if($x1=="") : ?>
+<?php if($src=="pass") : ?>
+<?php if($x1=="") : ?>
 		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to log in?</b>
 </font>
@@ -60,8 +60,8 @@ I have no address yet. How to get an address?</b>
 	registration form.<br>
  	<b>Step 2: </b>For further instructions, click the "Help" button once the register form is displayed.<br>
 </ul>
-	<? endif ?>		
-	<? if($x1=="1") : ?>
+	<?php endif ?>		
+	<?php if($x1=="1") : ?>
 		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to register?</b>
 </font>
@@ -79,11 +79,11 @@ How to register?</b>
  	<b>Step 3: </b>Click the <input type="button" value="Register"> button to register.<br>
 </ul>
 
-	<? endif ?>		
-<? endif ?>	
+	<?php endif ?>		
+<?php endif ?>	
 
-<? if($src=="mail") : ?>
-<? if($x1=="listmail") : ?>
+<?php if($src=="mail") : ?>
+<?php if($x1=="listmail") : ?>
 		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to open a mail?</b>
 </font>
@@ -117,8 +117,8 @@ How to compose or write a new mail?</b>
 <ul>       	
  	<b>Step 1: </b>Click the link "<span style="background-color:yellow" > New Email </span>".<br>
 </ul>
-	<? endif ?>		
-	<? if($x1=="compose") : ?>
+	<?php endif ?>		
+	<?php if($x1=="compose") : ?>
 		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to write a new mail?</b>
 </font>
@@ -166,19 +166,19 @@ What is this "Quick address" thing?</b>
  	<b>Step 2: </b>Click the address in the "Quick address" list. This address will be copied to the entry field where you have previously clicked.<br>
 </ul>
 
-	<? endif ?>		
-<? if(($x1=="sendmail")&&($x3=="1")) : ?>
+	<?php endif ?>		
+<?php if(($x1=="sendmail")&&($x3=="1")) : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to compose or write a new mail?</b>
 </font>
 <ul>       	
  	<b>Step 1: </b>Click the link "<span style="background-color:yellow" > New Email </span>".<br>
 </ul>
-	<? endif ?>		
-<? endif ?>	
+	<?php endif ?>		
+<?php endif ?>	
 
 
-<? if($src=="read") : ?>
+<?php if($src=="read") : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to print the mail?</b>
 </font>
@@ -214,9 +214,9 @@ How to delete the mail?</b>
  	<b>Step 3: </b>Click the <input type="button" value="OK"> button to finally delete the email.<p>
 	<b>Note:</b> Mails that are deleted from the "Inbox" folder are temporarily stored in the "Recycle" folder.
 </ul>
-	<? endif ?>		
+	<?php endif ?>		
 	
-<? if($src=="address") : ?>
+<?php if($src=="address") : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to add an email address to the address book?</b>
 </font>
@@ -241,7 +241,7 @@ How to remove an email address from the address book?</b>
  	<b>Step 3: </b>You will be asked if you really want to delete the mail.<br>
  	<b>Step 4: </b>Click the <input type="button" value="OK"> button to finally remove the address.<p>
 </ul>
-	<? endif ?>		
+	<?php endif ?>		
 
 	<img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Note:</b>

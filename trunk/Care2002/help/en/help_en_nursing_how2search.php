@@ -1,4 +1,3 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
 <?
@@ -15,8 +14,8 @@ switch($x2)
  ?></b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
-<? if($x2=="search") : ?>
-<? if(!$x1) : ?>
+<?php if($x2=="search") : ?>
+<?php if(!$x1) : ?>
 <b>Step 1</b>
 
 <ul> Enter  in the "<span style="background-color:yellow" >Please enter a search keyword.</span>" 
@@ -37,16 +36,16 @@ switch($x2)
 </ul>
 <b>Note</b>
 <ul> If you decide to cancel search click the button <img src="../img/en/en_cancel.gif" border=0>.
-</ul><? endif ?>
-<b>Step <? if($x1) print "1"; else print "5"; ?></b><ul>Click the button <img src="../img/bul_arrowBluSm.gif" width=12 height=12 border=0>,
+</ul><?php endif ?>
+<b>Step <?php if($x1) print "1"; else print "5"; ?></b><ul>Click the button <img src="../img/bul_arrowBluSm.gif" width=12 height=12 border=0>,
  or the date, or the ward to display the ward's occupancy list.
 <p><b>Note:</b> The search keyword will be highlighted in the list.
 <br><b>Note:</b> The list is not editable "read only mode". If you attempt to open the patient's data folder by clicking on its name, you will be prompted to
 enter your username and password.
 </ul>
-<? endif ?>
-<? if($x2=="quick") : ?>
-	<? if($x1) : ?>
+<?php endif ?>
+<?php if($x2=="quick") : ?>
+	<?php if($x1) : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to show the ward's occupancy list?</b>
 </font>
@@ -67,7 +66,7 @@ How to show  the ward's occupancy list for editing or updating data?</b>
 	<b>Note: </b>The occupancy list that will be displayed can be "edited". Options for editing or updataing patients' data will be displayed.
 		You can also open the patients' data folder for further editing.<br>
 	</ul>
-	<? else : ?>
+	<?php else : ?>
 <img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 There is no available occupancy list at the moment!</b>
 </font><p>
@@ -80,12 +79,12 @@ How to display previous occupancy quickviews using the archive?</b>
  	<b>Step 3: </b>Click on a date in the calendar to display the occupancy quickview for that day.<br>
 	</ul>
 	
-	<? endif ?>
+	<?php endif ?>
 <b>Note</b>
 <ul> If you decide to close the quickview click the button <img src="../img/en/en_close2.gif" border=0>.
-</ul><? endif ?>
+</ul><?php endif ?>
 
-<? if($x2=="arch") : ?>
+<?php if($x2=="arch") : ?>
 
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to display previous occupancy quickviews using the archive?</b>
@@ -103,7 +102,7 @@ How to change the guide calendar's month?</b>
 								Click as many times as needed until the desired month is displayed.<br>
 	</ul>
 	
-	<? endif ?>
+	<?php endif ?>
 
 
 </form>

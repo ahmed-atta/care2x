@@ -12,7 +12,7 @@ Color options
 </b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
-<? if($src=="") : ?>
+<?php if($src=="") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to select the background color?</b>
 </font>
@@ -40,9 +40,9 @@ How to select the hover and link colors?</b>
 <ul>       	
  	<b>Step 5: </b>Click the <input type="button" value="Extended color options"> to switch over to extended color options.<br>
 </ul>
-<? endif ?>
+<?php endif ?>
 
-<? if($src=="ext") : ?>
+<?php if($src=="ext") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to select the active link color?</b>
 </font>
@@ -66,6 +66,6 @@ How to select the hover link color?</b>
  	<b>Step 5: </b>If you are finished, click the <input type="button" value="OK"> button.<br>
 </ul>
 
-<? endif ?>
+<?php endif ?>
 	</form>
 

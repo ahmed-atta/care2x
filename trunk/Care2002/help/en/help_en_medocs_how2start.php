@@ -1,7 +1,8 @@
-<?
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+
 $foreword='
 <form action="#">
-
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>How to start ';
 
@@ -13,17 +14,17 @@ switch($x1)
  }
 ?>
 
-<? if(!$x1) : ?>
-		<? require("help_en_main.php"); ?>
-<? else : ?>
+<?php if(!$x1) : ?>
+		<?php require("help_en_main.php"); ?>
+<?php else : ?>
 </b></font>
  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <p>
 <font face="Verdana, Arial" size=2>
 
-<? if($src!=$x1) : ?>
+<?php if($src!=$x1) : ?>
 <b>Step 1</b>
-<ul> Click the button <img src="../img/en/en<? switch($x1)
+<ul> Click the button <img src="../img/en/en<?php switch($x1)
 																			{
 																				case "entry": print '_newdata-gray.gif'; break;
 																				case "search": print '_such-gray.gif'; break;
@@ -33,9 +34,9 @@ switch($x1)
 		
 </ul>
 <b>Step 2</b>
-<? endif ?>
+<?php endif ?>
 <ul> If you have logged in before and you have an access right for this function, the 
-<? switch($x1)
+<?php switch($x1)
 	{
 		case "entry": print 'initial document form'; break;
 		case "search": print 'search field '; break;
@@ -50,4 +51,4 @@ switch($x1)
 
 
 </form>
-<? endif ?>
+<?php endif ?>

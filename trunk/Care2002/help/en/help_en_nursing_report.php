@@ -1,15 +1,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <a name="howto">
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b><? if($x1=="docs") print "Doctor's directives"; else print "Nursing report"; ?></b></font>
+<b><?php if($x1=="docs") print "Doctor's directives"; else print "Nursing report"; ?></b></font>
 <form action="#" >
 <p><font size=2 face="verdana,arial" >
 
-<? if($src=="") : ?>
+<?php if($src=="") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
-How to enter a <? if($x1=="docs") print "doctor's directive"; else print "nursing report"; ?>?</b></font>
+How to enter a <?php if($x1=="docs") print "doctor's directive"; else print "nursing report"; ?>?</b></font>
 <ul> 
-	<b>Step 1: </b>Enter the date in the "<span style="background-color:yellow" > Date: <input type="text" name="d" size=10 maxlength=10 value="10.10.2002"> </span>" field in the "<? if($x1=="docs") print "Doctor's directives"; else print "Nursing report"; ?>" column.<br>
+	<b>Step 1: </b>Enter the date in the "<span style="background-color:yellow" > Date: <input type="text" name="d" size=10 maxlength=10 value="10.10.2002"> </span>" field in the "<?php if($x1=="docs") print "Doctor's directives"; else print "Nursing report"; ?>" column.<br>
 		<font color="#000099" size=1><b>Tips:</b>
 		<ul type=disc>
 		<li>To enter the current date, type "t" or "T" (meaning TODAY) in the date field. The current date will appear automatically in the date field.
@@ -17,18 +17,18 @@ How to enter a <? if($x1=="docs") print "doctor's directive"; else print "nursin
 		<li>To enter yesterday's date, type "y" or "Y" (meaning YESTERDAY) in the date field. Yesterday's date will appear automatically in the date field.
 		</font>
 		</ul>
-	<b>Step 2: </b>Enter the time in the "<span style="background-color:yellow" > Time: <input type="text" name="d" size=5 maxlength=5 value="10.35"> </span>" field in the "<? if($x1=="docs") print "Doctor's directives"; else print "Nursing report"; ?>" column.<br>
+	<b>Step 2: </b>Enter the time in the "<span style="background-color:yellow" > Time: <input type="text" name="d" size=5 maxlength=5 value="10.35"> </span>" field in the "<?php if($x1=="docs") print "Doctor's directives"; else print "Nursing report"; ?>" column.<br>
 		<font color="#000099" size=1><b>Tip:</b>
 		<ul type=disc>
 		<li>To enter the current time, type "n" or "N" (meaning NOW) in the time field. The current time will appear automatically in the time field.
 		<li>Or click on the button <img src="../img/arrow-t.gif" width=12 height=12 border=0> below the time field. The current time will appear automatically in the time field.
 		</font>
 		</ul>
-	<b>Step 3: </b>Type the <? if($x1=="docs") print "doctor's directive"; else print "nursing report"; ?> in the "<span style="background-color:yellow" > <? if($x1=="docs") print "Doctor's directives"; else print "Nursing report"; ?>: <input type="text" name="d" size=10 maxlength=10 value="test report"> </span>" field.<br>
+	<b>Step 3: </b>Type the <?php if($x1=="docs") print "doctor's directive"; else print "nursing report"; ?> in the "<span style="background-color:yellow" > <?php if($x1=="docs") print "Doctor's directives"; else print "Nursing report"; ?>: <input type="text" name="d" size=10 maxlength=10 value="test report"> </span>" field.<br>
 		<font color="#000099" size=1><b>Tips:</b>
 		<ul type=disc>
-		<li>Click the checkbox "<span style="background-color:yellow" > <input type="checkbox" name="c" value="c"> <img src="../img/warn.gif" width=16 height=16 border=0>Place this symbol at the start. </span>", if you want that the symbol <img src="../img/warn.gif" width=16 height=16 border=0> appears at the start of the <? if($x1=="docs") print "doctor's directive"; else print "nursing report"; ?>.
-		<li>If you want to highlight part of the <? if($x1=="docs") print "directive or"; ?> report, click the icon <img src="../img/hilite-s.gif" width=48 height=14 border=0> before typing the word or sentence. To end the
+		<li>Click the checkbox "<span style="background-color:yellow" > <input type="checkbox" name="c" value="c"> <img src="../img/warn.gif" width=16 height=16 border=0>Place this symbol at the start. </span>", if you want that the symbol <img src="../img/warn.gif" width=16 height=16 border=0> appears at the start of the <?php if($x1=="docs") print "doctor's directive"; else print "nursing report"; ?>.
+		<li>If you want to highlight part of the <?php if($x1=="docs") print "directive or"; ?> report, click the icon <img src="../img/hilite-s.gif" width=48 height=14 border=0> before typing the word or sentence. To end the
 		highlight, click the icon <img src="../img/hilite-e.gif" width=48 height=14 border=0> after typing the last letter of the highlighted part.
 		</font>
 		</ul>
@@ -38,9 +38,9 @@ How to enter a <? if($x1=="docs") print "doctor's directive"; else print "nursin
 		<b>Step 6: </b>If you are finished, click the button <img src="../img/en/en_close2.gif" border=0> to close the window and go back to the patient's data folder.<br>
 </ul>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
-How to enter <? if($x1=="docs") print "an inquiry to the physician"; else print "an effectivity report"; ?>?</b></font>
+How to enter <?php if($x1=="docs") print "an inquiry to the physician"; else print "an effectivity report"; ?>?</b></font>
 <ul> 
-	<b>Step 1: </b>Enter the date in the "<span style="background-color:yellow" > Date: <input type="text" name="d" size=10 maxlength=10 value="10.10.2002"> </span>" field in the "<? if($x1=="docs") print "Inquiries to the physician"; else print "Effectivity report"; ?>" column.<br>
+	<b>Step 1: </b>Enter the date in the "<span style="background-color:yellow" > Date: <input type="text" name="d" size=10 maxlength=10 value="10.10.2002"> </span>" field in the "<?php if($x1=="docs") print "Inquiries to the physician"; else print "Effectivity report"; ?>" column.<br>
 		<font color="#000099" size=1><b>Tips:</b>
 		<ul type=disc>
 		<li>To enter the current date, type "t" or "T" (meaning TODAY) in the date field. The current date will appear automatically in the date field.
@@ -48,11 +48,11 @@ How to enter <? if($x1=="docs") print "an inquiry to the physician"; else print 
 		<li>To enter yesterday's date, type "y" or "Y" (meaning YESTERDAY) in the date field. Yesterday's date will appear automatically in the date field.
 		</font>
 		</ul>
-	<b>Step 2: </b>Type the <? if($x1=="docs") print "inquiry"; else print "effectivity report"; ?> in the "<span style="background-color:yellow" > <? if($x1=="docs") print "Inquiries to the physician"; else print "Effectivity report"; ?>: <input type="text" name="d" size=10 maxlength=10 value="test report"> </span>" field.<br>
+	<b>Step 2: </b>Type the <?php if($x1=="docs") print "inquiry"; else print "effectivity report"; ?> in the "<span style="background-color:yellow" > <?php if($x1=="docs") print "Inquiries to the physician"; else print "Effectivity report"; ?>: <input type="text" name="d" size=10 maxlength=10 value="test report"> </span>" field.<br>
 		<font color="#000099" size=1><b>Tips:</b>
 		<ul type=disc>
-		<li>Click the checkbox "<span style="background-color:yellow" > <input type="checkbox" name="c" value="c"> <img src="../img/warn.gif" width=16 height=16 border=0>Place this symbol at the start. </span>", if you want that the symbol <img src="../img/warn.gif" width=16 height=16 border=0> appears at the start of the <? if($x1=="docs") print "inquiry"; else print "effectivity report"; ?>.
-		<li>If you want to highlight part of the <? if($x1=="docs") print "directive or"; ?> report, click the icon <img src="../img/hilite-s.gif" width=48 height=14 border=0> before typing the word or sentence. To end the
+		<li>Click the checkbox "<span style="background-color:yellow" > <input type="checkbox" name="c" value="c"> <img src="../img/warn.gif" width=16 height=16 border=0>Place this symbol at the start. </span>", if you want that the symbol <img src="../img/warn.gif" width=16 height=16 border=0> appears at the start of the <?php if($x1=="docs") print "inquiry"; else print "effectivity report"; ?>.
+		<li>If you want to highlight part of the <?php if($x1=="docs") print "directive or"; ?> report, click the icon <img src="../img/hilite-s.gif" width=48 height=14 border=0> before typing the word or sentence. To end the
 		highlight, click the icon <img src="../img/hilite-e.gif" width=48 height=14 border=0> after typing the last letter of the highlighted part.
 		</font>
 		</ul>
@@ -64,10 +64,10 @@ How to enter <? if($x1=="docs") print "an inquiry to the physician"; else print 
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 NOTE:</b></font>
 <ul> 
-	You can also enter both the <? if($x1=="docs") print "doctor's directive and inquiries to the physician"; else print "nursing and effectivity report"; ?> at the same time.</ul>
+	You can also enter both the <?php if($x1=="docs") print "doctor's directive and inquiries to the physician"; else print "nursing and effectivity report"; ?> at the same time.</ul>
 
-<? endif ?>
-<? if($src=="diagnosis") : ?>
+<?php endif ?>
+<?php if($src=="diagnosis") : ?>
 <a name="extra"><a name="diag"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a></a>
 How to display a diagnostic report?</b></font>
 <ul> 
@@ -75,8 +75,8 @@ How to display a diagnostic report?</b></font>
   		<b>Note: </b>The first report on the list will be displayed immediately.<p>
 	<b>Step 1: </b>Click on the short note of the diagnostic report you wish to display.<br>	
 </ul>
-<? endif ?>
-<? if($src=="kg_atg_etc") : ?>
+<?php endif ?>
+<?php if($src=="kg_atg_etc") : ?>
 <a name="pt"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 How to enter  information on daily physical therapy (PT), anti-thrombosis gymnastic (Atg), etc.?</b></font>
 <ul> 
@@ -88,15 +88,15 @@ How to enter  information on daily physical therapy (PT), anti-thrombosis gymnas
 		<b>Step 4: </b>If you are finished, click the button <img src="../img/en/en_close2.gif" border=0> to close the window and go back to the chart.<br>
 		
 </ul>
-<? endif ?>
-<? if($src=="fotos") : ?>
+<?php endif ?>
+<?php if($src=="fotos") : ?>
 <a name="coag"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 How to preview a photo?</b></font>
 <ul> 
 	<b>Step 1: </b>Click on a thumbnail on the left frame. The full size image will be displayed on the right frame including the shot date and shot number.<br>
 </ul>
-<? endif ?>
-<? if($src=="anticoag_dailydose") : ?>
+<?php endif ?>
+<?php if($src=="anticoag_dailydose") : ?>
 <a name="daycoag"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 How to enter information on daily anticoagulant application?</b></font>
 <ul> 
@@ -107,8 +107,8 @@ How to enter information on daily anticoagulant application?</b></font>
 		<b>Step 4: </b>If you are finished, click the button <img src="../img/en/en_close2.gif" border=0> to close the window and go back to the chart.<br>
 		
 </ul>
-<? endif ?>
-<? if($src=="lot_mat_etc") : ?>
+<?php endif ?>
+<?php if($src=="lot_mat_etc") : ?>
 <a name="lot"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 How to enter notes on implants, LOT nr, charge nr, etc?</b></font>
 <ul> 
@@ -120,8 +120,8 @@ How to enter notes on implants, LOT nr, charge nr, etc?</b></font>
 		<b>Step 4: </b>If you are finished, click the button <img src="../img/en/en_close2.gif" border=0> to close the window and go back to the chart.<br>
 		
 </ul>
-<? endif ?>
-<? if($src=="medication") : ?>
+<?php endif ?>
+<?php if($src=="medication") : ?>
 <a name="med"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 How to enter  medication and dosage plan?</b></font>
 <ul> 
@@ -143,9 +143,9 @@ How to enter  medication and dosage plan?</b></font>
 		<b>Step 7: </b>If you are finished, click the button <img src="../img/en/en_close2.gif" border=0> to close the window and go back to the chart.<br>
 		
 </ul>
-<? endif ?>
-<? if($src=="medication_dailydose") : ?>
-	<? if($x2) : ?>
+<?php endif ?>
+<?php if($src=="medication_dailydose") : ?>
+	<?php if($x2) : ?>
 
 <a name="daymed"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 How to enter information on daily medication application and dosage?</b></font>
@@ -159,7 +159,7 @@ How to enter information on daily medication application and dosage?</b></font>
 		<b>Step 6: </b>If you are finished, click the button <img src="../img/en/en_close2.gif" border=0> to close the window and go back to the chart.<br>
 		
 </ul>
-	<? else : ?>
+	<?php else : ?>
 <a name="daymed"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 It says "There is no medication yet". What should I do?</b></font>
 <ul> 
@@ -183,9 +183,9 @@ It says "There is no medication yet". What should I do?</b></font>
 		<b>Step 9: </b>If you want to correct any errors, click on the erroneous data and replace it with the correct one and save again.<br>
 		<b>Step 10: </b>If you are finished, click the button <img src="../img/en/en_close2.gif" border=0> to close the window and go back to the chart.<br>
 </ul>
-	<? endif ?>
-<? endif ?>
-<? if($src=="iv_needle") : ?>
+	<?php endif ?>
+<?php endif ?>
+<?php if($src=="iv_needle") : ?>
 <a name="iv"><img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b></a>
 How to enter information on daily intravenous medication application and dosage?</b></font>
 <ul> 
@@ -197,7 +197,7 @@ How to enter information on daily intravenous medication application and dosage?
 		
 </ul>
 
-<? endif ?>
+<?php endif ?>
 
 </form>
 

@@ -30,8 +30,8 @@ EDP -
 
 	
 
-<? if($src=="access") : ?>
-	<? if($x1=="") : ?>
+<?php if($src=="access") : ?>
+	<?php if($x1=="") : ?>
 		<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to create a new access right?</b>
 </font>
@@ -50,8 +50,8 @@ I am finished entering all relevant information. How to save it?</b>
 <ul>       	
  	<b>Step 1: </b>Click the button <input type="button" value="Save">.<br>
 </ul>
-	<? endif ?>	
-	<? if($x1=="save") : ?>
+	<?php endif ?>	
+	<?php if($x1=="save") : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 The new access right is now saved. How to create another access right?</b>
 </font>
@@ -68,8 +68,8 @@ I want to see the list of the existing access rights. How to do it?</b>
  	<b>Step 2: </b>The existing access rights will be listed<br>
 </ul>
 	
-	<? endif ?>	
-	<? if($x1=="list") : ?>
+	<?php endif ?>	
+	<?php if($x1=="list") : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 What do the buttons <img src="../img/padlock.gif" border=0 align="absmiddle"> and <img src="../img/arrow-gr.gif" border=0 align="absmiddle"> mean?</b>
 </font>
@@ -111,9 +111,9 @@ How to delete an access right?</b>
  	Click the option "<span style="background-color:yellow" > D </span>" corresponding to the user.<br>
 </ul>
 
-	<? endif ?>	
+	<?php endif ?>	
 	
-	<? if($x1=="update") : ?>
+	<?php if($x1=="update") : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to edit an access right?</b>
 </font>
@@ -128,8 +128,8 @@ Note:</b>
  	If you decide not to edit click the button <input type="button" value="Cancel">.<br>
 </ul>
 	
-	<? endif ?>		
-	<? if($x1=="delete") : ?>
+	<?php endif ?>		
+	<?php if($x1=="delete") : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to delete an access right?</b>
 </font>
@@ -144,25 +144,25 @@ Note:</b>
  	If you decide not to delete click the button <input type="button" value="No. Go back.">.<br>
 </ul>
 	
-	<? endif ?>		
+	<?php endif ?>		
 	
-	<? if($x1=="lock") : ?>
+	<?php if($x1=="lock") : ?>
 	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
-How to <? if($x2=="0") print "lock"; else print "unlock"; ?> an access right?</b>
+How to <?php if($x2=="0") print "lock"; else print "unlock"; ?> an access right?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>If you are sure you want to <? if($x2=="0") print "lock"; else print "unlock"; ?> the access right,<br>
+ 	<b>Step 1: </b>If you are sure you want to <?php if($x2=="0") print "lock"; else print "unlock"; ?> the access right,<br>
 	 click the button <input type="button" value="Yes, I'm sure.">.<br>
 </ul>
 	<img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Note:</b>
 </font>
 <ul>       	
- 	If you decide not to <? if($x2=="0") print "lock"; else print "unlock"; ?> click the button <input type="button" value="No. Go back.">.<br>
+ 	If you decide not to <?php if($x2=="0") print "lock"; else print "unlock"; ?> click the button <input type="button" value="No. Go back.">.<br>
 </ul>
 	
-	<? endif ?>		
-<? endif ?>	
+	<?php endif ?>		
+<?php endif ?>	
 
 	</form>
 

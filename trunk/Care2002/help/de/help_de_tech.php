@@ -1,3 +1,6 @@
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+?>
 <html>
 
 <head>
@@ -11,7 +14,7 @@
 <font  size=3 color="#0000cc">
 <b>
 
-<?
+<?php
 print "Technische Unterstützung - ";	
 switch($src)
 	{
@@ -31,7 +34,7 @@ switch($src)
 </font>
 <p>
 
-<? if($src=="request") : ?>
+<?php if($src=="request") : ?>
 <p>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie kann ich eine Reparaturanforderung erstellen?</b></font>
@@ -46,8 +49,8 @@ Wie kann ich eine Reparaturanforderung erstellen?</b></font>
 <b>Achtung!</b>
 <ul>Wenn Sie abbrechen möchten klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an.
 </ul>
-<? endif ?>
-<? if($src=="report") : ?>
+<?php endif ?>
+<?php if($src=="report") : ?>
 <p>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie berichte ich eine erledigte Reparaturarbeit?</b></font>
@@ -62,8 +65,8 @@ Wie berichte ich eine erledigte Reparaturarbeit?</b></font>
 <b>Achtung!</b>
 <ul>Wenn Sie abbrechen möchten klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an.
 </ul>
-<? endif ?>
-<? if($src=="queries") : ?>
+<?php endif ?>
+<?php if($src=="queries") : ?>
 <p>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie sende ich eine Anfrage an die Technik?</b></font>
@@ -83,8 +86,8 @@ Wie kann ich meine letzte Anfragen sehen und die Antwort von der Technik?</b></f
 <b>Achtung!</b>
 <ul>Wenn Sie abbrechen möchten klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an.
 </ul>
-<? endif ?>
-<? if($src=="arch") : ?>
+<?php endif ?>
+<?php if($src=="arch") : ?>
 
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie kann ich technische Berichte öffnen zum lesen?</b></font>
@@ -109,8 +112,8 @@ Wie finde ich einen bestimmten Bericht?</b></font>
 
 </ul>
 </font>
-<? endif ?>
-<? if($src=="showarch") : ?>
+<?php endif ?>
+<?php if($src=="showarch") : ?>
 <img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Ein Bericht als "gesehen" markieren.</b></font>
 <ul> <b>Schritt 1: </b>Klickt den  <input type="button" value="Als [gesehen] markieren"> Knopf an.<p>
@@ -124,7 +127,7 @@ Den Bericht ausdrucken.</b></font>
 Wie komme ich zum Suchen im Archiv zurück?</b></font>
 <ul> <b>Schritt 1: </b>Klickt den  <input type="button" value="<< Zurück"> Knopf an.<p>
 </ul>
-<? endif ?>
+<?php endif ?>
 
 </form>
 </body>

@@ -1,10 +1,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b><?="Laboratory - $x3" ?></b></font>
+<b><?php echo "Laboratory - $x3" ?></b></font>
 <form action="#" >
 <p><font size=2 face="verdana,arial" >
 
-<? if($src=="") : ?>
+<?php if($src=="") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 How to display the graphical chart for test parameters?</b>
 </font>
@@ -26,13 +26,13 @@ How to deselect all parameters?</b>
 <ul>      
 		<b>Step 1: </b>Click on the button <img src="../img/dwnArrowGrnLrg.gif" width=16 height=16 border=0 border=0> once again to DESELECT all parameters.<br>
 </ul>
-<? endif ?>
-<? if($src=="graph") : ?>
+<?php endif ?>
+<?php if($src=="graph") : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>How to go back to the test results w/o graphic charts? </b></font>
 <ul> <b>Note: </b>If you want to go back, click the button <img src="../img/en/en_back2.gif" border=0 align="absmiddle">.</ul>
-<? endif ?>
+<?php endif ?>
 
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>How to close the laboratory <?=$x3 ?>? </b></font>
+<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>How to close the laboratory <?php echo $x3 ?>? </b></font>
 <ul> <b>Note: </b>If you want to close, click the button <img src="../img/en/en_close2.gif" border=0 align="absmiddle">.</ul>
 
 

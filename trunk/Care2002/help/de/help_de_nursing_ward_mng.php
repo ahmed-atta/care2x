@@ -1,8 +1,11 @@
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+?>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
 Stationsverwaltung 
-<?
+<?php
 switch($src)
 {
 	case "main": print "";
@@ -17,7 +20,7 @@ switch($src)
  ?></b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
-<? if($src=="main") : ?>
+<?php if($src=="main") : ?>
 
 <b>Erschaffen</b>
 
@@ -35,9 +38,9 @@ angemeldet ist wird die standard Station gezeigt. Sperren von Betten erfordert e
 <ul> Mit dieser Option können Sie Zugangsberechtigungen für eine bestimmte Station erstellen, sperren, ändern, löschen, oder freigeben. Die erstellte
 Zugangsberechtigung sind  nur innerhalb der Station berechtigt.
 </ul>
-<? endif ?>
+<?php endif ?>
 
-<? if($src=="new") : ?>
+<?php if($src=="new") : ?>
 
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie kann ich eine neue Station erschaffen?</b>
@@ -72,10 +75,10 @@ Kann ich die Bettenmarkierung einstellen?</b>
 <b>Achtung!</b>
 <ul>Falls Sie abbrechen möchten den <img src="../img/de/de_cancel.gif" border=0> anklicken.
 </ul>
-<? endif ?>
+<?php endif ?>
 	
-<? if($src=="show") : ?>
-	<? if($x1=="1") : ?>
+<?php if($src=="show") : ?>
+	<?php if($x1=="1") : ?>
 
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie kann ich das Stationsprofil speichern?</b>
@@ -87,7 +90,7 @@ Wie kann ich das Stationsprofil speichern?</b>
 <ul> Falls Sie abbrechen möchten den <img src="../img/de/de_cancel.gif" border=0> anklicken.
 </ul>
 
-	<? else : ?>
+	<?php else : ?>
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie bearbeite ich das Stationsprofil?</b>
 </font>
@@ -108,11 +111,11 @@ Ich möchte das Profil einer anderen Station bearbeiten. Was soll ich tun?</b>
 <ul> Falls Sie abbrechen möchten den <img src="../img/de/de_cancel.gif" border=0> anklicken.
 </ul>
 
-<? endif ?>
-<? endif ?>
+<?php endif ?>
+<?php endif ?>
 
 
-<? if($src=="") : ?>
+<?php if($src=="") : ?>
 
 <img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
 Wie wähle ich eine Station zum bearbeiten aus?</b>
@@ -121,10 +124,10 @@ Wie wähle ich eine Station zum bearbeiten aus?</b>
  	<b>Schritt 1: </b>Klicken Sie die Station in der Liste an dessen Profil Sie bearbeiten möchten.<br>
 	</ul>
 <b>Achtung!</b>
-<ul> If you decide to cancel click the button <img src="../img/de/de_cancel.gif" border=0>.
+<ul> Wenn Sie abbrechen wollen, click den <img src="../img/de/de_cancel.gif" border=0> an.
 </ul>
 
-<? endif ?>
+<?php endif ?>
 
 
 </form>

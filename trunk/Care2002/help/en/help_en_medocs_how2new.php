@@ -3,7 +3,7 @@
 <b>How to document a patient in medocs</b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
-<? if($src=="?") : ?>
+<?php if($src=="?") : ?>
 <b>Step 1</b>
 
 <ul> Find the patient's basic data.<br>
@@ -36,24 +36,24 @@
 <b>Step 3</b>
 <ul> If the search finds a single result, a new document form with the patient's basic data will be displayed.
 		If however, the search finds several results, a list will be displayed.
-<? endif ?>
+<?php endif ?>
 
-<? if(($src=="?")||($x1>1)) : ?>
+<?php if(($src=="?")||($x1>1)) : ?>
 
  <br>To document a patient on the list,
 		click either the button <img src="../img/R_arrowGrnSm.gif" border=0 height=12 border=0> corresponding to it, or
 		the Family name, or the Given name, or the patient's number, or the admission date.
 </ul>
-<? endif ?>
+<?php endif ?>
 
-<? if($src=="?") : ?>
+<?php if($src=="?") : ?>
 <b>Step 4</b>
-<? endif ?>
+<?php endif ?>
 
-<? if(($src!="?")&&($x1==1)) : ?>
+<?php if(($src!="?")&&($x1==1)) : ?>
 <b>Step 1</b>
-<? endif ?>
-<? if(($x1=="1")||($src=="?")) : ?>
+<?php endif ?>
+<?php if(($x1=="1")||($src=="?")) : ?>
 <ul> Once a new document form with patient's data is displayed, you can do the following: 
 		<Ul type="disc">		
     	<li>enter additional information on the insurer or insurance in the "Extra information:" field,<br>
@@ -70,10 +70,10 @@
 <ul> If you decide to erase your entries click the button <input type="button" value="Reset">.
 </ul>
 
-<b>Step <? if($src!="?") print "2"; else print "5"; ?></b>
+<b>Step <?php if($src!="?") print "2"; else print "5"; ?></b>
 <ul> Click the button <input type="button" value="Save"> to save the document.
 </ul>
-<? endif ?>
+<?php endif ?>
 <b>Note</b>
 <ul> If you decide to cancel the document click the button <img src="../img/en/en_cancel.gif" border=0>.
 		
