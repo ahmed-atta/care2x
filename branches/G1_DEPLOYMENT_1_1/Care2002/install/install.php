@@ -68,10 +68,16 @@ if(isset($HTTP_POST_VARS['mode'])&&($HTTP_POST_VARS['mode']=='save')){
 	$HTTP_POST_VARS['admin_user']=trim($HTTP_POST_VARS['admin_user']);
 	$HTTP_POST_VARS['admin_pw']=trim($HTTP_POST_VARS['admin_pw']);
 	# Clean values
-	$HTTP_POST_VARS['dbusername']=trim($HTTP_POST_VARS['dbusername']);
+/*	$HTTP_POST_VARS['dbusername']=trim($HTTP_POST_VARS['dbusername']);
 	$HTTP_POST_VARS['dbhost']=trim($HTTP_POST_VARS['dbhost']);
 	$HTTP_POST_VARS['dbpassword']=trim($HTTP_POST_VARS['dbpassword']);
+*/
 	$HTTP_POST_VARS['mainhost']=trim($HTTP_POST_VARS['mainhost']);
+	
+	# Debugged by Bededikt Wismans
+	$dbusername=trim($HTTP_POST_VARS['dbusername']);
+	$dbhost=trim($HTTP_POST_VARS['dbhost']);
+	$dbpassword=trim($HTTP_POST_VARS['dbpassword']);
 	
 	# If db values empty, use default values
 	if(empty($HTTP_POST_VARS['dbusername'])) $HTTP_POST_VARS['dbusername']='root';
