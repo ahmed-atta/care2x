@@ -318,7 +318,7 @@ if($parent_admit) {
 }
 ?>
 <img <?php echo createComIcon($root_path,'l-arrowgrnlrg.gif','0','absmiddle'); ?>>
-<a href="<?php echo $returnfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=show&type_nr='.$type_nr; ?>"> 
+<a href="<?php echo $returnfile.URL_APPEND.'&encounter_nr='.$HTTP_SESSION_VARS['sess_full_en'].'&target='.$target.'&mode=show&type_nr='.$type_nr; ?>"> 
 <?php echo $LDBackToOptions;  ?>
 </a>
 

@@ -11,7 +11,6 @@ For details read file "copy_notice.txt".
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 require_once($root_path.'include/care_api_classes/class_person.php');
 require_once($root_path.'include/care_api_classes/class_insurance.php');
@@ -19,17 +18,17 @@ require_once($root_path.'include/care_api_classes/class_ward.php');
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 
 if(!session_is_registered('sess_parent_mod')) session_register('sess_parent_mod');
-
-$GLOBAL_CONFIG=array();
-
+# Create objects
 $encounter_obj=new Encounter($encounter_nr);
 $person_obj=new Person();
 $insurance_obj=new Insurance;
 $ward_obj=new Ward;
-$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 
-$thisfile='aufnahme_daten_zeigen.php';
-$breakfile='aufnahme_pass.php?sid='.$sid.'&lang='.$lang;
+$thisfile=basename(__FILE__);
+$breakfile='aufnahme_pass.php'.URL_APPEND;
+
+$GLOBAL_CONFIG=array();
+$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 
 /* Get the patient global configs */	
 $glob_obj->getConfig('patient_%');
@@ -139,6 +138,7 @@ $HTTP_SESSION_VARS['sess_en']=$encounter_nr;
 $HTTP_SESSION_VARS['sess_full_en']=$full_en;
 $HTTP_SESSION_VARS['sess_parent_mod']='admission';
 $HTTP_SESSION_VARS['sess_user_origin']='admission';
+$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
 
 /* Prepare the photo filename */
 require_once($root_path.'include/inc_photo_filename_resolve.php');
