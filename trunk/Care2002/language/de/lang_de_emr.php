@@ -1,6 +1,6 @@
 <?php
 $LDAdmitHistoPhysical='Aufnahmegeschichte';
-$LDDoctorDailyNotes='Täglicher Ärztbericht';
+$LDDoctorDailyNotes='Täglicher Arztbericht';
 $LDDischargeSummary='Entlassungsbericht';
 $LDConsultNotes='Besprechungsbericht';
 $LDOpNotes='OP Bericht';
