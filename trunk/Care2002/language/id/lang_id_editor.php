@@ -115,4 +115,10 @@ $LDMenuSaved='The menu was saved.';
 $LD_ddpMMpyyyy='hh.bb.tttt';
 $LD_yyyyhMMhdd='tttt-bb-hh';
 $LD_MMsddsyyyy='bb/hh/ttttt';
+/* 2003-02-11*/
+$LDSubmitNews='Submit News';
+$LDDelete='Delete';
+$LDDeleteCurrency='Are you sure, you really want to delete this currency?';
+$LDNoMainDelete='You cannot delete a main currency. \nPlease set a different main currency first.';
+$LDCurrencyExisting='This currency exists already!';
 ?>

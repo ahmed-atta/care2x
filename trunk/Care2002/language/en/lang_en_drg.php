@@ -90,4 +90,5 @@ $LDAddGroupEncounter='Add group to encounter';
 $LDMain_s='M';
 $LDSupplemental='Supplemental';
 $LDSupp_s='S';
+$LDCreateNew='Create new';
 ?>

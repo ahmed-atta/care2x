@@ -334,11 +334,13 @@ $LDEnterPersonSearchKey='Stichwort eingeben: z.B. Personen-Nr. (PID), Name, oder
 $LDPersonData='Personendaten';
 /* 2003-05-26 EL*/
 $LDDiagnoses='Diagnosen';
-$LDCreateNewForm='Create a form for';
+$LDCreateNewForm='Formular für Abteilung';
 $LDOtherRecords='Andere Einträge';
 /*2003-06-17 El*/
 $LDFullForm='Komplettes Formular';
 $LDAllContents='Alle Inhalte';
 $LDAllText='Nur dynamische Inhalte';
 $LDDataOnly='Nur fallrelevante Daten';
+/*2003-06-21 EL*/
+$LDChartsRecords='Patientenkurve';
 ?>

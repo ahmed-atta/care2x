@@ -219,33 +219,22 @@ $LDPreviewPic='Forhåndsvis bilde';
 $LDCafeEditorial='Editor for cafenyheter';
 
 $LDHealthTips='Helsetips';
-
 $LDClk2Write='Klikk her for å starte editoren';
-
-
-
 $LDOr='Eller';
-
 $LDSetCurrency='Sett valuta';
-
 $LDNewCurrencySet='Den nye valutaen er nå aktivert.';
-
 $LDPlsSelectCurrency='Velg valuta.';
-
 $LDmain='main';
-
 $LDClk2AddCurrency='For å skrive inn valuta type, klikk her. (OBS: Du forlater nå cafe nyheter!)';
-
-
-
 $LDMenuSaved='Menyen er lagret.';
-
 /* 2002-10-13 EL */
-
 $LD_ddpMMpyyyy='dd.mm.yyyy';
-
 $LD_yyyyhMMhdd='yyyy-mm-dd';
-
 $LD_MMsddsyyyy='mm/dd/yyyy';
-
+/* 2003-02-11*/
+$LDSubmitNews='Submit News';
+$LDDelete='Delete';
+$LDDeleteCurrency='Are you sure, you really want to delete this currency?';
+$LDNoMainDelete='You cannot delete a main currency. \nPlease set a different main currency first.';
+$LDCurrencyExisting='This currency exists already!';
 ?>

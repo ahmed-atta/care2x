@@ -253,7 +253,7 @@ if($mode=='show'){
 ?>
 "><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
 </ul>
-<hr>
+
 <?php
 require($root_path.'include/inc_load_copyrite.php');
  ?>

@@ -303,4 +303,7 @@ $LDAddNurseToList='Add a nurse to list';
 $LDNursesList='Nurses\' List';
 /* 2003-03-19 EL */
 $LDPlsSelectDept='Please select a department.';
+$LDSelectORoomNr='...and an OR.';
+$LDAlertNoDeptSelected=$LDPlsSelectDept;
+$LDAlertNoORSelected='Please select an operating room!';
 ?>

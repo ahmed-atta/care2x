@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 require_once($root_path.'include/inc_vars_resolve.php');

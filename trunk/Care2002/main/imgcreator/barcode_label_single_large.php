@@ -31,6 +31,7 @@ else
 			$result=&$obj->encounter;
 		}
 		
+		$fen=$en;
 	    /*// get orig data
 	    $dbtable="care_admission_patient";
 	    $sql="SELECT * FROM $dbtable WHERE patnum='$pn' ";
@@ -129,11 +130,9 @@ else
 	//ImageFillToBorder($label,2,2,$egray,$ewhite);
 	ImageRectangle($label,0,0,281,177,$egray);
 	
-	
-    if($bc) ImageCopy($label,$bc,145,4,9,9,134,37);
     
     ImageString($label,4,2,2,$fen,$eblack);
-    ImageString($label,2,80,2,$result['pdate'],$eblack);
+    ImageString($label,2,2,18,$result['pdate'],$eblack);
     ImageString($label,5,10,40,$result['name_last'].', '.$result['name_first'],$eblack);
     ImageString($label,3,10,55,$result['date_birth'],$eblack);
     for($a=0,$l=75;$a<sizeof($addr);$a++,$l+=15) ImageString($label,4,10,$l,$addr[$a],$eblack);
@@ -145,6 +144,8 @@ else
     //ImageString($label,4,5,150,"$result[dept]   $result['ward']   $result['doc_art']   $result['s_code']",$black);
     ImageString($label,3,10,160,"PLA      P3B      WA      65p",$eblack);
 
+	// place the barcode img
+    if($bc) ImageCopy($label,$bc,110,4,9,9,170,37);
 
 	if(!$child_img)
 	{

@@ -64,4 +64,32 @@ $LDNonSpecifiedGroup='Noch nicht benannte Gruppe';
 $LDSpecifyGroup='Gruppe benennen';
 $LDCreateGroupName='Neue Gruppenname anlegen';
 $LDSelect='Auswahl';
+/*2003-06-01 EL*/
+$LDUseToGroupItems='Nehme diese Gruppe';
+$LDItemsDegrouped='Das löschen dieser Gruppe führt zur Trennung der dazugehörigen Schlüsseln.';
+$LDOptions='Optionen';
+/*2003-06-01 EL*/
+$LDCreateInternDRGGroup='Neue DRG Gruppe anlegen';
+$LDInternalCodeNr='Interner Schlüssel-Nr.';
+$LDSynonyms='Synonyme  bzw. Stichwörter';
+$LDSeparateCommas='Wörter mit Komma trennen';
+$LDIsSubGroup='Ist Untergruppe?';
+$LDParentCodeNr='Schlüssel-Nr der Hauptgruppe.';
+$LDIfSubGroup='Falls Gruppe ist Untergruppe';
+$LDAuxillaryNotes='Nebenbemerkungen';
+$LDStdCodeNr='Standard Schlüssel-Nr.';
+$LDIfAvailable='Falls vorhanden';
+$LDYes='Ja';
+$LDNo='Nein';
+$LDExtraNotes='Zusatzbemerkungen';
+$LDAlertNoCode='Gruppenschlüssel-Nr. bitte eingeben.';
+$LDAlertNoDescription='Bescheibung bitte eingeben.';
+/*2003-06-07 EL*/
+$LDCode='Schlüssel';
+/*2003-06-13 EL*/
+$LDAddGroupEncounter='Gruppe zum Fall einorden';
+$LDMain_s='H';
+$LDSupplemental='Nebentherapie';
+$LDSupp_s='N';
+$LDCreateNew='Neue Gruppe';
 ?>

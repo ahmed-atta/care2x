@@ -123,7 +123,8 @@ else
     ImageString($im,4,360,195,$result['insurance_nr'],$black);
     // name & address
     ImageString($im,1,5,40,"$LDNameAddr:",$black);
-    ImageCopy($im,$bc,110,28,9,9,134,37);
+	// place the barcode 
+    ImageCopy($im,$bc,110,28,9,9,170,37);
     ImageString($im,3,10,70,$result['name_last'].', '.$result['name_first'],$black);
 	
     //for($a=0,$l=90;$a<sizeof($addr);$a++,$l+=15) ImageString($im,3,10,$l,$addr[$a],$black);
@@ -185,10 +186,13 @@ else
     $elightgreen= ImageColorAllocate ($im, 205, 225, 236);
     $eblue=ImageColorAllocate($im, 0, 127, 255);
     $eblack = ImageColorAllocate ($im, 0, 0, 0);
-    ImageCopy($label,$bc,145,4,9,9,134,37);
+	// place the barcode
+    ImageCopy($label,$bc,101,4,9,9,170,37);
     
+	// encounter number
     ImageString($label,4,2,2,$full_en,$black);
-    ImageString($label,2,80,2,formatDate2Local($result['encounter_date'],$date_format),$black);
+	// encounter date
+    ImageString($label,2,2,18,formatDate2Local($result['encounter_date'],$date_format),$black); 
     ImageString($label,5,10,40,$result['name_last'].', '.$result['name_first'],$black);
     ImageString($label,3,10,55,formatDate2Local($result['date_birth'],$date_format),$black);
     //for($a=0,$l=75;$a<sizeof($addr);$a++,$l+=15) ImageString($label,4,10,$l,$addr[$a],$black);
@@ -205,9 +209,10 @@ else
     // -- create smaller label
     $label2=ImageCreate(173,133);
     $e2white = ImageColorAllocate ($label2, 255,255,255); //white bkgrnd
-    ImageCopy($label2,$bc,35,0,9,7,134,37);
+	// -- place barcode
+    ImageCopy($label2,$bc,2,0,9,7,170,37);
 
-    ImageString($label2,2,35,34,$full_en,$black);
+    ImageString($label2,2,10,34,$full_en,$black);
     ImageString($label2,2,110,34,formatDate2Local($result['encounter_date'],$date_format),$black);
     ImageString($label2,4,10,50,$result['name_last'].',',$black);
     ImageString($label2,4,10,65,$result['name_first'],$black);

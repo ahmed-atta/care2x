@@ -102,5 +102,33 @@ $LDNonSpecifiedGroup='Non-specified group';
 $LDSpecifyGroup='Specify group';
 $LDCreateGroupName='Create new group name';
 $LDSelect='Select';
+/*2003-06-01 EL*/
+$LDUseToGroupItems='Use this to group the not-yet-grouped items';
+$LDItemsDegrouped='Deleting this group will unlink the items linked to it.';
+$LDOptions='Options';
+/*2003-06-01 EL*/
+$LDCreateInternDRGGroup='Create new internal DRG group';
+$LDInternalCodeNr='Internal code Nr.';
+$LDSynonyms='Synonyms or keywords';
+$LDSeparateCommas='Separate words with commas';
+$LDIsSubGroup='Is sub-group?';
+$LDParentCodeNr='Parent Code Nr.';
+$LDIfSubGroup='If group is sub-group';
+$LDAuxillaryNotes='Auxillary notes';
+$LDStdCodeNr='Standard code Nr.';
+$LDIfAvailable='If available';
+$LDYes='Yes';
+$LDNo='No';
+$LDExtraNotes='Extra notes';
+$LDAlertNoCode='Please enter the group\'s code.';
+$LDAlertNoDescription='Please enter the code\'s description.';
+/*2003-06-07 EL*/
+$LDCode='Code';
+/*2003-06-13 EL*/
+$LDAddGroupEncounter='Add group to encounter';
+$LDMain_s='M';
+$LDSupplemental='Supplemental';
+$LDSupp_s='S';
+$LDCreateNew='Create new';
 
 ?>

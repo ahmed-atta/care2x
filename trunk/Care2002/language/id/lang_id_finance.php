@@ -39,4 +39,3 @@ $LDSearch='Cari';
 $LDSearchTxt='Cari untuk sebuah Firma Asuransi';
 $LDSearchPrompt='Silakan masukkan nama firma, ID, atau Alamat Email';
 ?>
-

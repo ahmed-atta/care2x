@@ -1,9 +1,10 @@
 <?php		
 $LDHome='Página Inicial';
-$LDPatient='Patient';
+$LDPatient='Paciente';
 $LDAdmission='Admissão';
 $LDAmbulatory='Ambulatório';
-$LDMedocs='Documentação Médica';
+//$LDMedocs='Documentação Médica';
+$LDMedocs='Doc. Médica';
 $LDDoctors='Médicos';
 $LDNursing='Enfermagem';
 $LDOR='Bloco Operatório';
@@ -13,10 +14,12 @@ $LDPharmacy='Farmácia';
 $LDMedDepot='Medicamentos';
 $LDDirectory='Diretório';
 $LDTechSupport='Suporte Técnico';
-$LDEDP='Admininistração do Sistema';
+//$LDEDP='Admininistração do Sistema';
+$LDEDP='Admin. do Sistema';
 $LDIntraEmail='Intranet Email';
 $LDInterEmail='Internet Email';
-$LDSpecials='Funcionalidades Especiais';
+//$LDSpecials='Funcionalidades Especiais';
+$LDSpecials='Func. Especiais';
 $LDLogin='Iniciar Sessão';
 $LDLogout='Logout';							
 

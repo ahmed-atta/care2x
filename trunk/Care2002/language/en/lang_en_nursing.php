@@ -191,7 +191,7 @@ $LDEmRelease='Emergency dismissal';
 $LDAlertNoName='Please enter your name.';
 $LDAlertNoDate='Enter the date in the ff: format: dd.mm.YYYY.';
 $LDAlertNoTime='Enter the time in the ff: format: HH.mm.';
-$LDPatDataFolder='Patient\'s data folder';
+$LDPatDataFolder='Patient\'s charts folder';
 
 $LDClose='Close';
 $LDHelp='Help';

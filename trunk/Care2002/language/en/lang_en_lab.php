@@ -94,6 +94,7 @@ $LDTestRequestFor='Request for ';
 $LDTestType=array('chemlabor'=>'chemical laboratory test',
                                      'patho'=>'pathological test',
 								 'baclabor'=>'bacteriological test',
+								 'radio'=>'radiological test',
 								 'blood'     =>'blood product');
 /* 2002-09-10 EL */
 $LDTestReception='Pending Request';

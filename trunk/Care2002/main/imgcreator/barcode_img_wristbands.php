@@ -64,14 +64,16 @@ header ('Content-type: image/png');
 	else { print "$LDDbNoLink<br>$sql<br>"; exit;}
 	
 	/* Create full admission number */
-	switch ($result['encounter_class_nr'])
+/*	switch ($result['encounter_class_nr'])
     {
     case '2' :     $full_en = $en+ $GLOBAL_CONFIG['patient_outpatient_nr_adder'];
 						break;
 	case '1' :     $full_en = $en + $GLOBAL_CONFIG['patient_inpatient_nr_adder'];
 	default:       $full_en = $en + $GLOBAL_CONFIG['patient_inpatient_nr_adder'];
     }
-
+*/
+	$full_en=$en;
+	
     if($lang=='de') $result['sex']=strtr($result['sex'],'mfMF','mwMW');
 
 	/* Load the barcode image*/
@@ -134,36 +136,36 @@ header ('Content-type: image/png');
 	$topm=$topmargin+15;
 	$topm2=$topmargin+60;
 
-    ImageCopy($im,$bc,$leftmargin+225,$topm,9,9,134,37);
+    ImageCopy($im,$bc,$leftmargin+220,$topm,9,9,170,37);
 	ImageString($im,2,$leftmargin+225,$topm-13,$full_en,$black);
-    ImageCopy($im,$bc,$leftmargin+485,$topm2,9,9,134,37);
+    ImageCopy($im,$bc,$leftmargin+480,$topm2,9,9,170,37);
 	ImageString($im,2,$leftmargin+485,$topm2-13,$full_en,$black);
 	/* Print admit nr vertically*/
-	ImageStringUp($im,5,$leftmargin+420,$topm+70,$full_en,$black);
+	ImageStringUp($im,5,$leftmargin+420,$topm+78,$full_en,$black);
 	
 	$topm+=$yoffset;
 	$topm2+=$yoffset;
-    ImageCopy($im,$bc,$leftmargin+205,$topm,9,9,134,37);
+    ImageCopy($im,$bc,$leftmargin+200,$topm,9,9,170,37);
 	ImageString($im,2,$leftmargin+205,$topm-13,$full_en,$black);
-    ImageCopy($im,$bc,$leftmargin+435,$topm2,9,9,134,37);
+    ImageCopy($im,$bc,$leftmargin+430,$topm2,9,9,170,37);
 	ImageString($im,2,$leftmargin+435,$topm2-13,$full_en,$black);
 	/* Print admit nr vertically*/
-	ImageStringUp($im,5,$leftmargin+380,$topm+70,$full_en,$black);
+	ImageStringUp($im,5,$leftmargin+380,$topm+78,$full_en,$black);
 	
 	$topm+=$yoffset;
 	$topm2+=$yoffset;
-    ImageCopy($im,$bc,$leftmargin+175,$topm,9,9,134,37);
+    ImageCopy($im,$bc,$leftmargin+160,$topm,9,9,170,37);
 	ImageString($im,2,$leftmargin+175,$topm-13,$full_en,$black);
-    ImageCopy($im,$bc,$leftmargin+355,$topm2,9,9,134,37);
+    ImageCopy($im,$bc,$leftmargin+340,$topm2,9,9,170,37);
 	ImageString($im,2,$leftmargin+355,$topm2-13,$full_en,$black);
 	/* Print admit nr vertically*/
-	ImageStringUp($im,5,$leftmargin+325,$topm+70,$full_en,$black);
+	ImageStringUp($im,5,$leftmargin+325,$topm+78,$full_en,$black);
 	
 	$topm+=$yoffset;
-    ImageCopy($im,$bc,$leftmargin+215,$topm,9,9,134,37);
+    ImageCopy($im,$bc,$leftmargin+200,$topm,9,9,170,37);
 	ImageString($im,2,$leftmargin+215,$topm-13,$full_en,$black);
 	/* Print admit nr vertically*/
-	ImageStringUp($im,5,$leftmargin+370,$topm+70,$full_en,$black);
+	ImageStringUp($im,5,$leftmargin+370,$topm+78,$full_en,$black);
 	
     //* Place the name labels*/
 	

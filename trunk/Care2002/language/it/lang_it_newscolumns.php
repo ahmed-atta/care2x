@@ -63,4 +63,5 @@ $LDWrittenBy='Scritto da';
 
 $LDNewsDummy=array(1=>'primo',2=>'secondo',3=>'terzo',4=>'quarto');
 $LDClk2Compose='Selezionare per comporre...'
+$LDClk2Write='Click here to start the editor';
 ?>

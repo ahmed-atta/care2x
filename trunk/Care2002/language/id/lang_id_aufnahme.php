@@ -344,4 +344,6 @@ $LDFullForm='Full form';
 $LDAllContents='All contents';
 $LDAllText='Dynamic contents only';
 $LDDataOnly='Encounter relevant data only';
+/*2003-06-21 EL*/
+$LDChartsRecords='Charts folder';
 ?>

@@ -2,15 +2,13 @@
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
 if (eregi('save_admission_data.inc.php',$PHP_SELF)) 
 	die('<meta http-equiv="refresh" content="0; url=../">');	
+
 	
-if(!isset($db)||!$db) include_once($root_path.'include/inc_db_makelink.php');
-if($dblink_ok){
+$obj->setDataArray($HTTP_POST_VARS);
 	
-	$obj->setDataArray($HTTP_POST_VARS);
-	
-	switch($mode)
-	{	
-		case 'create': 
+switch($mode)
+{	
+	case 'create': 
 								if($obj->insertDataFromInternalArray()) {
 									if(isset($redirect)&&$redirect){
 										header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&mode=details&encounter_nr=".$HTTP_SESSION_VARS['sess_en']."&nr=".$HTTP_POST_VARS['ref_notes_nr']);
@@ -18,7 +16,7 @@ if($dblink_ok){
 									}
 								} else echo "$obj->sql<br>$LDDbNoSave";
 								break;
-		case 'update': 
+	case 'update': 
 								$obj->where=' nr='.$nr;
 								if($obj->updateDataFromInternalArray($nr)) {
 									if($redirect){
@@ -28,6 +26,6 @@ if($dblink_ok){
 									}
 								} else echo "$obj->sql<br>$LDDbNoUpdate";
 								break;
-	}// end of switch
-} else { echo "$LDDbNoLink<br>"; } 
+}// end of switch
+
 ?>

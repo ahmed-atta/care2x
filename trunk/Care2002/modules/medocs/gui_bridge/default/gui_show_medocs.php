@@ -40,10 +40,8 @@ function popRecordHistory(table,pid) {
 </script>
 
 <script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-
-
+<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
 <?php 
 require($root_path.'include/inc_js_gethelp.php'); 
@@ -234,72 +232,38 @@ while($row=$result->FetchRow()){
 <?php
 	}
 }elseif($mode=='details'){
-?>
- <table border=0 cellpadding=2 width=100%>
-   <tr bgcolor="#f6f6f6">
-     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo "$LDExtraInfo<br>($LDInsurance)"; ?></td>
-     <td><FONT SIZE=-1  FACE="Arial" color="#000000"><?php echo $row['aux_notes']; ?>
-         </td>
-   </tr>
-   <tr bgcolor="#f6f6f6">
-     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDGotMedAdvice; ?></td>
-     <td><FONT SIZE=-1  FACE="Arial" color="#000000"><?php if(stristr($row['short_notes'],'got_medical_advice')) echo $LDYes; else echo $LDNo; ?>
-         </td>
-   </tr>
-   <tr bgcolor="#f6f6f6">
-     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDiagnosis; ?></td>
-     <td><FONT SIZE=-1  FACE="Arial" color="#000000"><?php echo $row['diagnosis']; ?>
-         </td>
-   </tr>
-   <tr bgcolor="#f6f6f6">
-     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDTherapy; ?></td>
-     <td><FONT SIZE=-1  FACE="Arial" color="#000000"><?php echo $row['therapy']; ?>
-         </td>
-   </tr>
-   <tr bgcolor="#f6f6f6">
-     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDate; ?></td>
-     <td><FONT SIZE=-1  FACE="Arial" color="#000000"><?php echo formatDate2Local(date('Y-m-d'),$date_format); ?></td>
-   </tr>
-   <tr bgcolor="#f6f6f6">
-     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDBy; ?></td>
-     <td><FONT SIZE=-1  FACE="Arial" color="#000000"><?php echo $row['personell_name']; ?></td>
-   </tr>
- </table>
-<?php
+
+$TP_aux_notes=nl2br($row['aux_notes']);
+
+if(stristr($row['short_notes'],'got_medical_advice')) $TP_YesNo=$LDYes; 
+	else $TP_YesNo=$LDNo; 
+	
+$TP_diagnosis=nl2br($row['diagnosis']);
+$TP_therapy=nl2br($row['therapy']);
+$TP_date=formatDate2Local($row['date'],$date_format);
+$TP_personell_name=$row['personell_name'];
+# Load and output the template 
+$TP_form=$TP_obj->load('medocs/tp_medocs_showdata.htm');
+eval("echo $TP_form;");
+
+# Create a new form
 }else {
 ?>
-<form method="post" >
- <table border=0 cellpadding=2 width=100%>
-   <tr bgcolor="#f6f6f6">
-     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo "$LDExtraInfo<br>($LDInsurance)"; ?></td>
-     <td><textarea name="aux_notes" cols=60 rows=2 wrap="physical"></textarea>
-         </td>
-   </tr>
-   <tr bgcolor="#f6f6f6">
-     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDGotMedAdvice; ?></td>
-     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><input type="radio" name="short_notes" value="got_medical_advice"> <?php echo $LDYes; ?>
-         	<input type="radio" name="short_notes" value=""> <?php echo $LDNo; ?>
-         </td>
-   </tr>
-   <tr bgcolor="#f6f6f6">
-     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDiagnosis; ?></td>
-     <td><textarea name="text_diagnosis" cols=60 rows=8 wrap="physical"></textarea>
-         </td>
-   </tr>
-   <tr bgcolor="#f6f6f6">
-     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDTherapy; ?></td>
-     <td><textarea name="text_therapy" cols=60 rows=8 wrap="physical"></textarea>
-         </td>
-   </tr>
-   <tr bgcolor="#f6f6f6">
-     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDate; ?></td>
-     <td><input type="text" name="date" size=10 maxlength=10 value="<?php echo formatDate2Local(date('Y-m-d'),$date_format); ?>" onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"></td>
-   </tr>
-   <tr bgcolor="#f6f6f6">
-     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDBy; ?></td>
-     <td><input type="text" name="personell_name" size=50 maxlength=60 value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>"></td>
-   </tr>
- </table>
+<form method="post" name="entryform">
+<?php 
+
+	$TP_date_validate='value="'.formatDate2Local(date('Y-m-d'),$date_format).'" onBlur="IsValidDate(this,\''.$date_format.'\')" onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\')"';
+	$TP_href_date="javascript:show_calendar('entryform.date','".$date_format."')";
+
+	$dfbuffer="LD_".strtr($date_format,".-/","phs");
+	$TP_date_format=$$dfbuffer;
+
+	$TP_img_calendar=createComIcon($root_path,'show-calendar.gif','0','absmiddle');
+	$TP_user_name=$HTTP_SESSION_VARS['sess_user_name'];
+	# Load and output the template 
+	$TP_form=$TP_obj->load('medocs/tp_medocs_newform.htm');
+	eval("echo $TP_form;");
+?>
 <input type="hidden" name="encounter_nr" value="<?php echo $HTTP_SESSION_VARS['sess_en']; ?>">
 <input type="hidden" name="pid" value="<?php echo $HTTP_SESSION_VARS['sess_pid']; ?>">
 <input type="hidden" name="modify_id" value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>">
@@ -369,7 +333,7 @@ if($parent_admit) {
 "><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
 
 <p>
-<hr>
+</ul>
 <?php
 require($root_path.'include/inc_load_copyrite.php');
  ?>

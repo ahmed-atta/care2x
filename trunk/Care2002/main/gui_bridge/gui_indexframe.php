@@ -46,11 +46,7 @@ if(!$cfg['dhtml']){
 
 $TP_logo=createLogo($root_path,'care_logo.gif','0');
 
-# Load the template class
-include($root_path.'include/care_api_classes/class_template.php');
-$tp_obj =new Template($root_path,$template_path,$template_theme);
-
-$tp_body=&$tp_obj->load('tp_main_index_menu_body.htm');
+$tp_body=&$TP_obj->load('tp_main_index_menu_body.htm');
 eval("echo $tp_body;");
 ?>
 
@@ -63,7 +59,7 @@ if($result){
 	$TP_img1= '<img '.createComIcon('../','blue_bullet.gif','0','middle').'>';
 	$TP_com_img_path=$root_path.'gui/img/common';
 	$buf='';
-	$tp =&$tp_obj->load('tp_main_index_menu_item.htm');
+	$tp =&$TP_obj->load('tp_main_index_menu_item.htm');
 	while($menu=$result->FetchRow()){
 		if (eregi('LDLogin',$menu['LD_var'])){
 			if ($HTTP_COOKIE_VARS['ck_login_logged'.$sid]=='true'){

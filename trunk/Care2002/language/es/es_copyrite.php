@@ -3,7 +3,7 @@ if($root_path=='') $root_path='../';
 require($root_path.'include/inc_credits_openwin.php');
 ?>
 <FONT    SIZE=1  FACE="Arial" color=gray> El proveedor de esta aplicación 
-es<a href="http://www.care2x.com" target=_new> CARE 2002 beta version 1.0.04</a>. Un software de código abierto disponible 
+es<a href="http://www.care2x.com" target=_new> CARE 2002 beta version 1.0.05</a>. Un software de código abierto disponible 
 con categoría de licencia GLP. CARE 2002se escribe y se distribuye libre 
 bajo licencia pública general GNU. Para más detalles sobre esta 
 lea la <a href="<?php echo $root_path ?>legal_gnu_gpl.htm" target=_new>copia 

@@ -202,7 +202,7 @@ if(defined('MASCOT_SHOW') && MASCOT_SHOW==1)
 <a href="<?php echo $breakfile.URL_APPEND;?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
 </ul>
 <p>
-<hr>
+
 <?php
 require($root_path.'include/inc_load_copyrite.php');
 ?>

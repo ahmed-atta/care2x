@@ -333,4 +333,15 @@ $LDRegisterNewPerson='Register a new person';
 /* 2003-05-17 EL */
 $LDEnterPersonSearchKey='Enter search keyword: e.g. PID, first name, or family name';
 $LDPersonData='Personal data';
+/* 2003-05-26 EL*/
+$LDDiagnoses='Diagnoses';
+$LDCreateNewForm='Create a form for';
+$LDOtherRecords='Other records';
+/*2003-06-17 El*/
+$LDFullForm='Full form';
+$LDAllContents='All contents';
+$LDAllText='Dynamic contents only';
+$LDDataOnly='Encounter relevant data only';
+/*2003-06-21 EL*/
+$LDChartsRecords='Charts folder';
 ?>
