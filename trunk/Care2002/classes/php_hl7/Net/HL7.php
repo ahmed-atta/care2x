@@ -52,44 +52,44 @@
    * Field separator for this message. In general '|' is used.
    *
    */
-  $_Net_HL7_FIELD_SEPARATOR = "|";
+  $GLOBALS["_Net_HL7_FIELD_SEPARATOR"] = "|";
 
   /** 
    * HL7 NULL field, defaults to "". This is therefore different from
    * not setting the fields at all.
    */
-  $_Net_HL7_NULL = "\"\"";
+$GLOBALS["_Net_HL7_NULL"] = "\"\"";
 
 
   /**
    * Separator used in fields supporting components. Usually this is
    * the '^' character.
    */
-  $_Net_HL7_COMPONENT_SEPARATOR    = "^";
+  $GLOBALS["_Net_HL7_COMPONENT_SEPARATOR"]    = "^";
 
 
   /**
    * Separator for fields that may be repeated. Defaults to '~'.
    */
-  $_Net_HL7_REPETITION_SEPARATOR   = "~";
+  $GLOBALS["_Net_HL7_REPETITION_SEPARATOR"]   = "~";
 
 
   /**
    * Escape character for escaping special characters. Defaults to '\'.
    */
-  $_Net_HL7_ESCAPE_CHARACTER       = "\\";
+  $GLOBALS["_Net_HL7_ESCAPE_CHARACTER"]       = "\\";
 
 
   /**
    * Separator used in fields supporting subcomponents. Usually this
    * is the '&' character.
    */
-  $_Net_HL7_SUBCOMPONENT_SEPARATOR = "&";
+  $GLOBALS["_Net_HL7_SUBCOMPONENT_SEPARATOR"] = "&";
 
 
   /**
    * This is the version used in the MSH(12) field. Defaults to 2.2.
    */
-  $_Net_HL7_HL7_VERSION            = "2.2";
+  $GLOBALS["_Net_HL7_HL7_VERSION"]            = "2.2";
 //}
 ?>

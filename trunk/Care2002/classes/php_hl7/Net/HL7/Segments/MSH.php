@@ -55,20 +55,21 @@ class Net_HL7_Segments_MSH extends Net_HL7_Segment {
    * MSH segment will be created with the MSH 1,2,7,10 and 12 fields
    * filled in for convenience.
    */
-  function MSH($fields) {
+  function Net_HL7_Segments_MSH($fields = array()) {
     
-    parent::_init("MSH", $fields);
+    parent::Net_HL7_Segment("MSH", $fields);
     
     // Only fill default fields if no fields array is given 
     //
-    if (! $fields) {
-      $this->setField(1, $Net_HL7_FIELD_SEPARATOR);
+    if (count($fields) == 0) {
+      
+      $this->setField(1, $GLOBALS["_Net_HL7_FIELD_SEPARATOR"]);
       $this->setField(
 		      2, 
-		      $Net_HL7_COMPONENT_SEPARATOR . 
-		      $Net_HL7_REPETITION_SEPARATOR .
-		      $Net_HL7_ESCAPE_CHARACTER .
-		      $Net_HL7_SUBCOMPONENT_SEPARATOR
+		      $GLOBALS["_Net_HL7_COMPONENT_SEPARATOR"] . 
+		      $GLOBALS["_Net_HL7_REPETITION_SEPARATOR"] .
+		      $GLOBALS["_Net_HL7_ESCAPE_CHARACTER"] .
+		      $GLOBALS["_Net_HL7_SUBCOMPONENT_SEPARATOR"]
 		      );
       
       $this->setField(7, strftime("%Y%m%d%H%M%S"));

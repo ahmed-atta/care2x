@@ -123,19 +123,19 @@ class Net_HL7_Message {
       }
       
       // Set field separator based on control segment
-      $this->fieldSeparator        = $fldSep;
+      $this->_fieldSeparator        = $fldSep;
       
       // Set other separators
-      $this->componentSeparator    = $compSep; 
-      $this->subcomponentSeparator = $subCompSep;
-      $this->escapeChar       = $esc;
-      $this->repetitionSeparator   = $repSep;
+      $this->_componentSeparator    = $compSep; 
+      $this->_subcomponentSeparator = $subCompSep;
+      $this->_escapeChar            = $esc;
+      $this->_repetitionSeparator   = $repSep;
       
       // Do all segments
       //
       for ($i = 0; $i < count($segments); $i++) {
 	
-	$fields = split($this->fieldSeparator, $segments[$i]);
+	$fields = split($this->_fieldSeparator, $segments[$i]);
 	$name = array_shift($fields);
 	
 	// Now decompose fields if necessary, into arrays
@@ -148,11 +148,11 @@ class Net_HL7_Message {
 	    next;
 	  }
 	  
-	  $comps = split($this->componentSeparator, $fields[$j]);
+	  $comps = split($this->_componentSeparator, $fields[$j]);
 	  
 	  for ($k = 0; $k < count($comps); $k++) {
 	    
-	    $subComps = split($this->subcomponentSeparator, $comps[$k]);
+	    $subComps = split($this->_subcomponentSeparator, $comps[$k]);
 	    
 	    // Make it a ref or just the value
 	    (count($subComps) == 1) ? ($comps[$k] = $subComps[0]) : ($comps[$k] = $subComps);
@@ -166,8 +166,8 @@ class Net_HL7_Message {
 	
 	// Let's see whether it's a special segment
 	//
-	if ( eval("require $segClass.php;") ) {
-	  array_unshift($fields, $this->fieldSeparator);
+	if ( eval("require \"Net/HL7/Segments/$name.php;\"") ) {
+	  array_unshift($fields, $this->_fieldSeparator);
 	  $seg = eval("new $segClass($fields)");
 	}
 	else {

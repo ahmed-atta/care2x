@@ -27,9 +27,17 @@
    This is the first release.
   </notes>
   <filelist>
-   <dir name="/" baseinstalldir="Net_HL7">
-    <file role="php">HL7.php</file>
-    <dir name="Segments" role="php">
+    <dir name="Net">
+      <file role="php">HL7.php</file>
+    </dir>
+    <dir name="Net/HL7" role="php">
+      <file>Segment.php</file>
+      <file>Message.php</file>
+      <file>Request.php</file>
+      <file>Response.php</file>
+      <file>Connection.php</file>
+    </dir>
+    <dir name="Net/HL7/Segments" role="php">
      <file>MSH.php</file>
     </dir>
     <dir name="docs" role="doc">
@@ -37,6 +45,14 @@
      <dir name="examples" role="doc">
      </dir>
     </dir>
+   </dir>
+   <dir name="tests" role="test">
+     <file name="test_base.phpt"/>
+     <file name="segment.phpt"/>
+     <file name="message.phpt"/>
+     <file name="msh.phpt"/>
+     <file name="ack.phpt"/>
+     <file name="connection.phpt"/>
    </dir>
   </filelist>
  </release>

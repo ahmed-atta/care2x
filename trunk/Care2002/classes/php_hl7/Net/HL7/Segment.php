@@ -52,7 +52,7 @@ class Net_HL7_Segment {
    * subsubarrays. Repeated fields can not be supported the same way, since
    * we can't distinguish between composed fields and repeated fields.
    */
-  function Segment($name, $fields) {
+  function Net_HL7_Segment($name, $fields = array()) {
     
     // Is the name 3 upper case characters?
     //
@@ -89,12 +89,17 @@ class Net_HL7_Segment {
    * This will render the field as the double quote ("").
    * If values are not provided at all, the method will just return.
    */
-  function setField($index, $value) {
+  function setField($index, $value= "") {
 
     if (! ($index && $value)) {
       return NULL;
     }
     
+    // Fill in the blanks...
+    for ($i = count($this->_FIELDS); $i < $index; $i++) {
+      $this->_FIELDS[$i] = "";
+    }
+
     $this->_FIELDS[$index] = $value;
     
     return 1;
@@ -120,7 +125,7 @@ class Net_HL7_Segment {
  */
   function size() {
 
-    return count($this->_FIELDS);
+    return count($this->_FIELDS) - 1;
   }
 
 
@@ -129,13 +134,13 @@ class Net_HL7_Segment {
    * only the 'from' value is provided, all fields from this index till the
    * end of the segment will be returned.
    */
-  function getFields($from = 0, $to) {
+  function getFields($from = 0, $to = 0) {
 
     if (! $to) {
       $to = count($this->_FIELDS);
     }
 
-    return array_slice($this->_FIELDS, $from, $to - $from);
+    return array_slice($this->_FIELDS, $from, $to - $from + 1);
   }    
 
 
