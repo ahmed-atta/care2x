@@ -1,13 +1,14 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-require_once('../../include/inc_vars_resolve.php');
-require_once('../../include/inc_img_fx.php');
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
+require_once($root_path.'include/inc_img_fx.php');
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
- <TITLE>Invalid Access Warning</TITLE>
+ <TITLE>Accès non authorisé de la page</TITLE>
 </HEAD>
 
 <BODY bgcolor="#ffffff">
@@ -15,7 +16,7 @@ require_once('../../include/inc_img_fx.php');
 <table width=100% border=1>
 <tr>
 <td bgcolor="navy">
-<FONT  COLOR="white"  SIZE=+3  FACE="Arial"><STRONG>&nbsp;Acc&egrave;s non authoris&eacute; de la page</STRONG></FONT>
+<FONT  COLOR="white"  SIZE=+3  FACE="Arial"><STRONG>&nbsp;Accès non authorisé de la page</STRONG></FONT>
 </td>
 </tr>
 <tr>
@@ -24,9 +25,9 @@ require_once('../../include/inc_img_fx.php');
 
 <center>
 <FONT    SIZE=3 color=red  FACE="Arial">
-<b>Vous n'avez pas les droits d'acc&egrave;s pour ouvrir ce document!</b></font><p>
+<b>Vous n'avez pas les droits d'accès pour ouvrir ce document!</b></font><p>
 <FORM >
-<INPUT type="button"  value=" OK "  onClick="<?php if ($mode=="close") print 'window.close()'; else print 'history.back()'; ?></FORM>
+<INPUT type="button"  value=" OK "  onClick="<?php if ($mode=="close") print 'window.close()'; else print 'history.back()'; ?>"></FORM>
 <p>
 </font>
 </center>
@@ -57,13 +58,9 @@ Dans de rares cas il a pu y avoir une erreur dans le transfert des données. Afin
 </tr>
 </table>        
 <p>
-
 <?php
-$path_root='../../';
-require('fr_copyrite.php'); 
+require($root_path.'include/inc_load_copyrite.php'); 
 ?>
 </FONT>
-
-
 </BODY>
 </HTML>
