@@ -60,7 +60,7 @@
 
 if($edit  || $read_form)
         {
-		   echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid=$sid&lang=$lang&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
+		   echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
 		}
 
 		?>
@@ -130,7 +130,7 @@ if($edit  || $read_form)
      </tr>
      <tr>
        <td><div class=fva2b_ml10><font size=1><?php echo $LDTransfusionDate ?></font></div></td>
-       <td><font face="arial" size=2 color="#0000ff"><?php  if($stored_request['transfusion_date'] && $stored_request['transfusion_date']!="0000-00-00") echo formatDate2Local($stored_request['transfusion_date'],$date_format); ?></font></td>
+       <td><font face="arial" size=2 color="#0000ff"><?php  if($stored_request['transfusion_date'] && $stored_request['transfusion_date']!=DBF_NODATE) echo formatDate2Local($stored_request['transfusion_date'],$date_format); ?></font></td>
      </tr>
      <tr>
        <td colspan=2><div class=fva2b_ml10><b><?php echo $LDDiagnosis ?></b><br><img src="<?php echo $root_path ?>gui/img/common/default/pixel.gif" border=0 width=10 height=30 align="left">
@@ -205,11 +205,9 @@ if($edit  || $read_form)
            <td colspan=4>&nbsp;<font size=2 face="verdana,arial"><b><?php echo $LDLabServices ?></b></font></td>
            <td colspan=4 rowspan=4 width=50%>&nbsp;<font size=1 face="arial"><?php echo $LDLabTimeStamp ?></font><br>
 		   &nbsp;<font size=2 face="verdana,arial"><?php 
-/*		   if($stored_request['lab_stamp'] && $stored_request['lab_stamp']!="0000-00-00 00:00:00") echo $stored_request['lab_stamp'];
-		     else echo date('Y-m-d H:i:s'); 
-*/
-		   if($stored_request['lab_stamp'] && $stored_request['lab_stamp']!="0000-00-00 00:00:00") echo formatDate2Local($stored_request['lab_stamp'],$date_format).' '.convertTimeToLocal(formatDate2Local($stored_request['lab_stamp'],$date_format,0,1));
-		     else echo formatDate2Local(date('Y-m-d H:i:s'),$date_format).' '.convertTimeToLocal(formatDate2Local(date('Y-m-d H:i:s'),$date_format,0,1)); 
+
+		   if($stored_request['lab_stamp'] && $stored_request['lab_stamp'] != DBF_NODATETIME ) echo formatDate2Local($stored_request['lab_stamp'],$date_format).' '.convertTimeToLocal(formatDate2Local($stored_request['lab_stamp'],$date_format,0,1));
+			 else echo formatDate2Local(date('Y-m-d H:i:s'),$date_format).' '.convertTimeToLocal(formatDate2Local(date('Y-m-d H:i:s'),$date_format,0,1));
 			 
 			 ?>
 			 </font>
@@ -289,9 +287,9 @@ if($edit  || $read_form)
            <td>&nbsp;<font face="arial" size=2 color="#000000"><?php  if($stored_request['x_test_2_count']) echo $stored_request['x_test_2_count']; ?></font></td>
            <td>&nbsp;<font face="arial" size=2 color="#000000"><?php  if($stored_request['x_test_2_price']!="0.00") echo $stored_request['x_test_2_price']; ?></font></td>
            <td>&nbsp;<font size=1 face="arial"><?php echo $LDBookedOn ?></font></td>
-           <td>&nbsp;<font face="arial" size=2 color="#000000"><?php  if($stored_request['mainlog_date']!="0000-00-00") echo formatDate2Local($stored_request['mainlog_date'],$date_format); else echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'; ?></font></td>
+           <td>&nbsp;<font face="arial" size=2 color="#000000"><?php  if($stored_request['mainlog_date']!=DBF_NODATE) echo formatDate2Local($stored_request['mainlog_date'],$date_format); else echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'; ?></font></td>
            <td>&nbsp;<font size=1 face="arial"><?php echo $LDDate ?></font></td>
-           <td>&nbsp;<font face="arial" size=2 color="#000000"><?php  if($stored_request['lab_date']!="0000-00-00") echo formatDate2Local($stored_request['lab_date'],$date_format); else echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'; ?></font></td>
+           <td>&nbsp;<font face="arial" size=2 color="#000000"><?php  if($stored_request['lab_date']!=DBF_NODATE) echo formatDate2Local($stored_request['lab_date'],$date_format); else echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'; ?></font></td>
          </tr>
          <tr bgcolor="<?php echo $bgc1 ?>">
            <td>&nbsp;<font face="arial" size=1 color="#000000"><?php  if($stored_request['x_test_3_code']) echo $stored_request['x_test_3_code']; ?></font></td>

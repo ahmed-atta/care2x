@@ -11,8 +11,8 @@ require_once($root_path.'include/care_api_classes/class_core.php');
 *  Address methods.
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance.
 * @author Elpidio Latorilla
-* @version beta 1.0.09
-* @copyright 2002,2003 Elpidio Latorilla
+* @version beta 2.0.0
+* @copyright 2002,2003,2004,2005 Elpidio Latorilla
 * @package care_api
 */
 class Address extends Core {
@@ -119,12 +119,13 @@ class Address extends Core {
 	* @return boolean
 	*/
 	function CityTownExists($name='',$country='') {
+
 		/**
 		* @global ADODB-db-link
 		*/
-	    global $db;
+	    global $db, $sql_LIKE;
 	    if(empty($name)) return FALSE;
-		$this->sql="SELECT nr FROM $this->tb_citytown WHERE name LIKE '$name' AND iso_country_id LIKE '$country'";
+		$this->sql="SELECT nr FROM $this->tb_citytown WHERE name $sql_LIKE '$name' AND iso_country_id $sql_LIKE '$country'";
 	    if($buf=$db->Execute($this->sql)) {
 	        if($buf->RecordCount()) {
 			    return TRUE;
@@ -185,7 +186,7 @@ class Address extends Core {
 		if(isset($this->data_array['create_id'])) unset($this->data_array['create_id']);
 		// clear the where condition
 		$this->where='';
-		$this->data_array['history']="CONCAT(history,'Update: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n')";
+		$this->data_array['history']=$this->ConcatHistory("Update: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
 		$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
 		return $this->updateDataFromInternalArray($nr);
 	}
@@ -196,21 +197,21 @@ class Address extends Core {
 	* @return mixed
 	*/
    	function searchActiveCityTown($key){
-		global $db;
+		global $db, $sql_LIKE;
 		if(empty($key)) return FALSE;
 		$select="SELECT *  FROM $this->tb_citytown ";
 		$append=" AND status NOT IN ('inactive','deleted','closed','hidden','void')";
-		$this->sql="$select WHERE ( name LIKE '$key%' OR unece_locode LIKE '$key%' ) $append";
+		$this->sql="$select WHERE ( name $sql_LIKE '$key%' OR unece_locode $sql_LIKE '$key%' ) $append";
 		if($this->result=$db->Execute($this->sql)){
 			if($this->result->RecordCount()){
 				return $this->result;
 		    }else{	
-				$this->sql="$select WHERE ( name LIKE '%$key' OR unece_locode LIKE '%$key' ) $append";
+				$this->sql="$select WHERE ( name $sql_LIKE '%$key' OR unece_locode $sql_LIKE '%$key' ) $append";
 				if($this->result=$db->Execute($this->sql)){
 					if($this->result->RecordCount()){
 						return $this->result;
 					}else{
-						$this->sql="$select WHERE ( name LIKE '%$key%' OR unece_locode LIKE '%$key%' ) $append";
+						$this->sql="$select WHERE ( name $sql_LIKE '%$key%' OR unece_locode $sql_LIKE '%$key%' ) $append";
 						if($this->result=$db->Execute($this->sql)){
 							if($this->result->RecordCount()){
 								return $this->result;
@@ -235,21 +236,22 @@ class Address extends Core {
 		/**
 		* @global ADODB-db-link
 		*/
-		global $db;
+		global $db, $sql_LIKE;
+        $db->debug=true;
 		if(empty($key)) return FALSE;
 		$select="SELECT *  FROM $this->tb_citytown ";
-		$append=" AND status NOT IN ('inactive','deleted','closed','hidden','void') ORDER BY $oitem $odir";
-		$this->sql="$select WHERE ( name LIKE '$key%' OR unece_locode LIKE '$key%' ) $append";
+		$append=" AND status NOT IN ($this->dead_stat) ORDER BY $oitem $odir";
+		$this->sql="$select WHERE ( name $sql_LIKE '$key%' OR unece_locode $sql_LIKE '$key%' ) $append";
 		if($this->res['slact']=$db->SelectLimit($this->sql,$len,$so)){
 			if($this->rec_count=$this->res['slact']->RecordCount()){
 				return $this->res['slact'];
-		    }else{	
-				$this->sql="$select WHERE ( name LIKE '%$key' OR unece_locode LIKE '%$key' ) $append";
+		    }else{
+				$this->sql="$select WHERE ( name $sql_LIKE '%$key' OR unece_locode $len '%$key' ) $append";
 				if($this->res['slact']=$db->SelectLimit($this->sql,$len,$so)){
 					if($this->rec_count=$this->res['slact']->RecordCount()){
 						return $this->res['slact'];
 					}else{
-						$this->sql="$select WHERE ( name LIKE '%$key%' OR unece_locode LIKE '%$key%' ) $append";
+						$this->sql="$select WHERE ( name $sql_LIKE '%$key%' OR unece_locode $sql_LIKE '%$key%' ) $append";
 						if($this->res['slact']=$db->SelectLimit($this->sql,$len,$so)){
 							if($this->rec_count=$this->res['slact']->RecordCount()){
 								return $this->res['slact'];
@@ -270,21 +272,21 @@ class Address extends Core {
 		/**
 		* @global ADODB-db-link
 		*/
-		global $db;
+		global $db, $sql_LIKE;
 		if(empty($key)) return FALSE;
 		$select="SELECT nr FROM $this->tb_citytown ";
-		$append=" AND status NOT IN ('inactive','deleted','closed','hidden','void')";
-		$this->sql="$select WHERE ( name LIKE '$key%' OR unece_locode LIKE '$key%' ) $append";
+		$append=" AND status NOT IN ($this->dead_stat)";
+		$this->sql="$select WHERE ( name $sql_LIKE '$key%' OR unece_locode $sql_LIKE '$key%' ) $append";
 		if($this->res['scact']=$db->Execute($this->sql)){
 			if($this->rec_count=$this->res['scact']->RecordCount()){
 				return $this->rec_count;
 			}else{	
-				$this->sql="$select WHERE ( name LIKE '%$key' OR unece_locode LIKE '%$key' ) $append";
+				$this->sql="$select WHERE ( name $sql_LIKE '%$key' OR unece_locode $sql_LIKE '%$key' ) $append";
 				if($this->res['scact']=$db->Execute($this->sql)){
 					if($this->rec_count=$this->res['scact']->RecordCount()){
 						return $this->rec_count;
 					}else{
-						$this->sql="$select WHERE ( name LIKE '%$key%' OR unece_locode LIKE '%$key%' ) $append";
+						$this->sql="$select WHERE ( name $sql_LIKE '%$key%' OR unece_locode $sql_LIKE '%$key%' ) $append";
 						if($this->res['scact']=$db->Execute($this->sql)){
 							if($this->rec_count=$this->res['scact']->RecordCount()){
 								return $this->rec_count;

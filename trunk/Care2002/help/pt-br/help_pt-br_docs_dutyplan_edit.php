@@ -1,37 +1,37 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Médico/cirurgião - Criar ou editar um plano de trabalho</b></font>
+<b>Physician/surgeon - Create or edit duty plan</b></font>
 <form action="#" >
 <p><font size=2 face="verdana,arial" >
 
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Eu quero por em escala de serviço um médico/cirurgião usando a lista dos médicos/cirurgiões</b></font>
-<ul> <b>Passo 1: </b>clique no botão do ícone &nbsp;<button><img <?php echo createComIcon('../','patdata.gif','0') ?>></button> do dia selecionado para abrir a lista de médicos/cirurgiões. <br>
-			Uma pequena janela aparecerá mostrando a lista de médicos/cirurgiões.<br>
+I want to schedule a physician/surgeon for duty using the physician/surgeons' list</b></font>
+<ul> <b>Step 1: </b>Click on the icon button &nbsp;<button><img <?php echo createComIcon('../','patdata.gif','0') ?>></button> of the selected day to open the physician/surgeons' list. <br>
+			A small pop-up window will appear showing the list of physician/surgeons.<br>
 			<ul type=disc>
-			<li>clique no ícone na coluna da esquerda para escalar um médico/cirurgião 1.<br>
-			<li>clique no ícone na coluna da direita para escalar um médico/cirurgião 2.
+			<li>Click the icon on the left column to schedule a physician/surgeon 1.<br>
+			<li>Click the icon on the right column to schedule a physician/surgeon 2.
 			</ul>
-		<b>Passo 2: </b><span style="background-color:yellow" >clique no nome do médico/cirurgião</span> para copiá-lo para o plano de trabalho.<br>
-		<b>Passo 3: </b>Se você tiver clicado no nome errado, repita o passo 2 e clique no nome certo.<br>
-		<b>Passo 4: </b>Se você terminou, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> na janela da lista dos médicos/cirurgiões.<br>
+		<b>Step 2: </b><span style="background-color:yellow" >Click the name of physician/surgeon</span> to copy it to the duty plan.<br>
+		<b>Step 3: </b>If you have clicked the wrong name, just repeat step 2 and hit the right name.<br>
+		<b>Step 4: </b>If you are finished, click the <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> button on the physician/surgeons' list window.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Eu quero entrar manualmente com o nome do médico/cirurgião no plano de trabalho</b></font>
-<ul> <b>Passo 1: </b>clique no campo de entrada de texto "<input type="text" name="t" size=11 maxlength=4 >" do dia selecionado.<br>
-        	 <b>Passo 2: </b>Digite manualmente o nome do médico/cirurgião<br>
+I want to manually enter the physician/surgeon's name on the duty plan</b></font>
+<ul> <b>Step 1: </b>Click on the text input field "<input type="text" name="t" size=11 maxlength=4 >" of the selected day.<br>
+		<b>Step 2: </b>Type manually the name of the physician/surgeon<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Eu quero apagar um nome do plano de trabalho</b></font>
-<ul> <b>Passo 1: </b>clique no campo de entrada de texto "<input type="text" name="t" size=11 maxlength=4 value="Nome">" o nome a ser apagado.<br>
-		<b>Passo 2: </b>Apague o nome manualmente usando as teclas backspace ou delete .<br>
+I want to delete a name on the duty plan</b></font>
+<ul> <b>Step 1: </b>Click on the text input field "<input type="text" name="t" size=11 maxlength=4 value="Name">" of the name to be deleted.<br>
+		<b>Step 2: </b>Delete the name manually using keyboard's backspace or delete keys.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Eu quero salvar o plano de trabalho</b></font>
-<ul> <b>Passo 1: </b>clique no botão <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> .<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I want to save the duty plan</b></font>
+<ul> <b>Step 1: </b>click the <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> button.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Já salvei o plano e quero terminar o planejamento, o que devo fazer? </b></font>
-<ul> <b>Passo 1: </b>Se você terminou, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> . <br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I have saved the plan and wish to end the planning, what should I do? </b></font>
+<ul> <b>Step 1: </b>If you are finished, click the <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> button. <br>
 </ul>
 </form>
 

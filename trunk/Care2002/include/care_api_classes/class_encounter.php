@@ -10,8 +10,8 @@ require_once($root_path.'include/care_api_classes/class_notes.php');
 *  Patient encounter.
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance.
 * @author Elpidio Latorilla
-* @version deployment 1.1 (mysql) 2004-01-11
-* @copyright 2002,2003,2004,2004 Elpidio Latorilla
+* @version beta 2.0.0
+* @copyright 2002,2003,2004,2005 Elpidio Latorilla
 * @package care_api
 */
 class Encounter extends Notes {
@@ -101,7 +101,7 @@ class Encounter extends Notes {
 	*/
 	var $entire_record=FALSE;
 	/**
-	* Current department number
+	* Current encounter data in array
 	* @var int
 	*/
 	var $encounter;
@@ -313,7 +313,7 @@ class Encounter extends Notes {
 									  enfc.nr               AS sc_".$type."_nr,
 									  fc.name             AS sc_".$type."_name,
 									  fc.code              AS sc_".$type."_code,
-									  fc.LD_var           AS sc_".$type."_LD_var
+									  fc.LD_var           AS \"sc_".$type."_LD_var\"
 							FROM
 							          $this->tb_fc AS fc,
 									  $this->tb_enc_fc AS enfc
@@ -489,7 +489,7 @@ class Encounter extends Notes {
 	* @param string service class 'care', 'room', 'att_dr'
 	* @param array Service data for saving. Associative. By reference.
 	* @return boolean
-	*/			
+	*/
     function updateServiceClass($type, &$val_array)
     {
 	    global $db;
@@ -499,7 +499,7 @@ class Encounter extends Notes {
 				   class_nr = '".$val_array['sc_'.$type.'_class_nr']."',
 				   date_start = '".$val_array['sc_'.$type.'_start']."',
 				   date_end = '".$val_array['sc_'.$type.'_end']."',
-				   history =(CONCAT(history,'\n Update ".date('Y-m-d H:i:s')." = ".$val_array['encoder']."')),
+				   history =".$this->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$val_array['encoder']."\n").",
 				   modify_id = '".$val_array['encoder']."'
 			WHERE nr = '".$val_array['sc_'.$type.'_nr']."'";
 		return $this->Transact();
@@ -573,7 +573,7 @@ class Encounter extends Notes {
     function getAllServiceClassesObject($type=''){
 	    global $db;
 		if(empty($type)) return FALSE;
-		$this->sql="SELECT class_nr,class_id,code,name,LD_var FROM $this->tb_fc WHERE type='$type'";
+		$this->sql="SELECT class_nr,class_id,code,name,LD_var AS \"LD_var\" FROM $this->tb_fc WHERE type='$type'";
 		if($this->result=$db->Execute($this->sql)) {
 		    if($this->result->RecordCount()) {
 			    return $this->result;
@@ -621,7 +621,8 @@ class Encounter extends Notes {
 	*/			
 	function AllEncounterClassesObject(){
 	    global $db;
-		$this->sql="SELECT class_nr,class_id,name,LD_var FROM $this->tb_ec WHERE 1";
+	    //$db->debug=true;
+		$this->sql="SELECT class_nr,class_id,name,LD_var AS \"LD_var\" FROM $this->tb_ec ";
 		if($this->res['aec']=$db->Execute($this->sql)) {
 		    if($this->res['aec']->RecordCount()) {
 			    return $this->res['aec'];
@@ -663,7 +664,7 @@ class Encounter extends Notes {
 									p.addr_str,p.addr_str_nr,p.addr_zip, p.blood_group,
 									p.photo_filename, t.name AS citytown_name,p.death_date
 							FROM $this->tb_enc AS e, 
-									 $this->tb_person AS p 
+									 $this->tb_person AS p
 									 LEFT JOIN $this->tb_citytown AS t ON p.addr_citytown_nr=t.nr
 							WHERE e.encounter_nr=$this->enc_nr
 								AND e.pid=p.pid";
@@ -683,45 +684,78 @@ class Encounter extends Notes {
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return mixed string or boolean
 	*/			
-	function LastName(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['name_last'];
+	function LastName($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['name_last'];
+		}else{
+			if($enr) return $this->getValue('name_last',$enr,TRUE);
+				else return FALSE;
+		}
 	}
 	/**
 	* Returns first or given name.
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return mixed string or boolean
 	*/			
-	function FirstName(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['name_first'];
+	function FirstName($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['name_first'];
+		}else{
+			if($enr) return $this->getValue('name_first',$enr,TRUE);
+				else return FALSE;
+		}
 	}
 	/**
 	* Returns date of birth in yyyy-mm-format.
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return mixed string or boolean
 	*/			
-	function BirthDate(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['date_birth'];
+	function BirthDate($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['date_birth'];
+		}else{
+			if($enr) return $this->getValue('date_birth',$enr,TRUE);
+				else return FALSE;
+		}
 	}
 	/**
 	* Returns PID number.
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return mixed integer or boolean
-	*/			
-	function PID(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['pid'];
+	*/
+	function PID($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['pid'];
+		}else{
+			if($enr) return $this->getValue('pid',$enr,TRUE);
+				else return FALSE;
+		}
+	}
+	/**
+	* Returns blood group
+	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
+	* @return mixed integer or boolean
+	*/
+	function BloodGroup($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['blood_group'];
+		}else{
+			if($enr) return $this->getValue('blood_group',$enr,TRUE);
+				else return FALSE;
+		}
 	}
 	/**
 	* Returns date of admission.
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return mixed string or boolean
 	*/			
-	function EncounterDate(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['encounter_date'];
+	function EncounterDate($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['encounter_date'];
+		}else{
+			if($enr) return $this->getValue('encounter_date',$enr);
+				else return FALSE;
+		}
 	}
 	/**
 	* Returns encounter or admission class.
@@ -731,9 +765,13 @@ class Encounter extends Notes {
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return mixed integer or boolean
 	*/			
-	function EncounterClass(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['encounter_class_nr'];
+	function EncounterClass($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['encounter_class_nr'];
+		}else{
+			if($enr) return $this->getValue('encounter_class_nr',$enr);
+				else return FALSE;
+		}
 	}
 	/**
 	* Returns financial class.
@@ -743,159 +781,227 @@ class Encounter extends Notes {
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return mixed integer or boolean
 	*/			
-	function FinancialClass(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['financial_class'];
+	function FinancialClass($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['financial_class'];
+		}else{
+			if($enr) return $this->getValue('financial_class',$enr);
+				else return FALSE;
+		}
 	}
 	/**
 	* Alias of <var>FinancialClass()</var>
 	*/			
-	function BillingClass(){
-		return $this->FinancialClass();
+	function BillingClass($enr=0){
+		return $this->FinancialClass($enr);
 	}
 	/**
 	* Returns referer's diagnosis text.
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return mixed string or boolean
 	*/			
-	function RefererDiagnosis(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['referrer_diagnosis'];
+	function RefererDiagnosis($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['referrer_diagnosis'];
+		}else{
+			if($enr) return $this->getValue('referrer_diagnosis',$enr);
+				else return FALSE;
+		}
 	}
 	/**
 	* Returns referer's recommended therapy text.
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return mixed string or boolean
 	*/			
-	function RefererRecomTherapy(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['referrer_recom_therapy'];
+	function RefererRecomTherapy($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['referrer_recom_therapy'];
+		}else{
+			if($enr) return $this->getValue('referrer_recom_therapy',$enr);
+				else return FALSE;
+		}
 	}
 	/**
 	* Returns referer's extra notes text.
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return mixed string or boolean
 	*/			
-	function RefererNotes(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['referrer_notes'];
+	function RefererNotes($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['referrer_notes'];
+		}else{
+			if($enr) return $this->getValue('referrer_notes',$enr);
+				else return FALSE;
+		}
 	}
 	/**
 	* Returns referer's name.
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return mixed string or boolean
 	*/			
-	function Referer(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['referrer_dr'];
+	function Referer($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['referrer_dr'];
+		}else{
+			if($enr) return $this->getValue('referrer_dr',$enr);
+				else return FALSE;
+		}
 	}
 	/**
 	* Returns refererring department.
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return mixed string or boolean
 	*/			
-	function RefererDept(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['referrer_dept'];
+	function RefererDept($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['referrer_dept'];
+		}else{
+			if($enr) return $this->getValue('referrer_dept',$enr);
+				else return FALSE;
+		}
 	}
 	/**
 	* Returns referring institution.
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return mixed string or boolean
 	*/			
-	function RefererInstitution(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['referrer_institution'];
+	function RefererInstitution($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['referrer_institution'];
+		}else{
+			if($enr) return $this->getValue('referrer_institution',$enr);
+				else return FALSE;
+		}
 	}
 	/**
 	* Returns insurance number used in the encounter.
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return mixed string or boolean
 	*/			
-	function InsuranceNr(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['insurance_nr'];
+	function InsuranceNr($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['insurance_nr'];
+		}else{
+			if($enr) return $this->getValue('insurance_nr',$enr);
+				else return FALSE;
+		}
 	}
 	/**
 	* Returns insurance company's id used in the encounter.
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return mixed string or boolean
 	*/			
-	function InsuranceFirmID(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['insurance_firm_id'];
+	function InsuranceFirmID($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['insurance_firm_id'];
+		}else{
+			if($enr) return $this->getValue('insurance_firm_id',$enr);
+				else return FALSE;
+		}
 	}
 	/**
 	* Returns current ward number.
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return mixed string or boolean
 	*/			
-	function CurrentWardNr(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['current_ward_nr'];
+	function CurrentWardNr($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['current_ward_nr'];
+		}else{
+			if($enr) return $this->getValue('current_ward_nr',$enr);
+				else return FALSE;
+		}
 	}
 	/**
 	* Returns current room number.
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return mixed string or boolean
 	*/			
-	function CurrentRoomNr(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['current_room_nr'];
+	function CurrentRoomNr($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['current_room_nr'];
+		}else{
+			if($enr) return $this->getValue('current_room_nr',$enr);
+				else return FALSE;
+		}
 	}
 	/**
 	* Returns current department number.
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return mixed string or boolean
 	*/			
-	function CurrentDeptNr(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['current_dept_nr'];
+	function CurrentDeptNr($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['current_dept_nr'];
+		}else{
+			if($enr) return $this->getValue('current_dept_nr',$enr);
+				else return FALSE;
+		}
 	}
 	/**
 	* Returns current firm number.
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return mixed string or boolean
 	*/			
-	function CurrentFirmNr(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['current_firm_nr'];
+	function CurrentFirmNr($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['current_firm_nr'];
+		}else{
+			if($enr) return $this->getValue('current_firm_nr',$enr);
+				else return FALSE;
+		}
 	}
 	/**
 	* Returns current attending physician number.
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return mixed string or boolean
 	*/			
-	function CurrentAttDrNr(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['current_att_dr_nr'];
+	function CurrentAttDrNr($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['current_att_dr_nr'];
+		}else{
+			if($enr) return $this->getValue('current_att_dr_nr',$enr);
+				else return FALSE;
+		}
 	}
 	/**
 	* Returns status flag if patient is finally admitted in ward.
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return boolean
 	*/			
-	function In_Ward(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['in_ward'];
+	function In_Ward($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['in_ward'];
+		}else{
+			if($enr) return $this->getValue('in_ward',$enr);
+				else return FALSE;
+		}
 	}
 	/**
 	* Returns status flag if patient is finally admitted in department.
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return boolean
 	*/			
-	function In_Dept(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['in_dept'];
+	function In_Dept($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['in_dept'];
+		}else{
+			if($enr) return $this->getValue('in_dept',$enr);
+				else return FALSE;
+		}
 	}
 	/**
 	* Returns status flag if patient is finally discharged.
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return boolean
 	*/			
-	function Is_Discharged(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['is_discharged'];
+	function Is_Discharged($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['is_discharged'];
+		}else{
+			if($enr) return $this->getValue('is_discharged',$enr);
+				else return FALSE;
+		}
 	}
 	/**
 	* Returns encounter status.
@@ -910,9 +1016,13 @@ class Encounter extends Notes {
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return mixed string or boolean
 	*/			
-	function EncounterStatus(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['encounter_status'];
+	function EncounterStatus($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['encounter_status'];
+		}else{
+			if($enr) return $this->getValue('encounter_status',$enr);
+				else return FALSE;
+		}
 	}
 	/**
 	* Returns encounter type. <b>Currently reserved.</b>
@@ -927,45 +1037,65 @@ class Encounter extends Notes {
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return mixed string or boolean
 	*/			
-	function EncounterType(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['encounter_type'];
+	function EncounterType($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['encounter_type'];
+		}else{
+			if($enr) return $this->getValue('encounter_type',$enr);
+				else return FALSE;
+		}
 	}
 	/**
 	* Returns consulting physician's name.
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return mixed string or boolean
 	*/			
-	function ConsultingDr(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['consulting_dr'];
+	function ConsultingDr($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['consulting_dr'];
+		}else{
+			if($enr) return $this->getValue('consulting_dr',$enr);
+				else return FALSE;
+		}
 	}
 	/**
 	* Returns follow-up date in yyyy-mm-dd format.
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return mixed string or boolean
 	*/			
-	function FollowUpDate(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['followup_date'];
+	function FollowUpDate($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['followup_date'];
+		}else{
+			if($enr) return $this->getValue('followup_date',$enr);
+				else return FALSE;
+		}
 	}
 	/**
 	* Returns the name of physician or service responsible for follow-up.
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return mixed string or boolean
 	*/			
-	function FollowUpResponsibility(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['followup_responsibility'];
+	function FollowUpResponsibility($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['followup_responsibility'];
+		}else{
+			if($enr) return $this->getValue('followup_responsibility',$enr);
+				else return FALSE;
+		}
 	}
 	/**
 	* Returns post encounter notes. Short notes after discharge, not to be used for discharge summary report.
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return mixed string or boolean
 	*/			
-	function PostEncounterNotes(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['post_encounter_notes'];
+	function PostEncounterNotes($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['post_encounter_notes'];
+		}else{
+			if($enr) return $this->getValue('post_encounter_notes',$enr);
+				else return FALSE;
+		}
 	}
 	/**
 	* Returns the record entry's status. This status is technical and has nothing to do with the encounter status.
@@ -982,45 +1112,65 @@ class Encounter extends Notes {
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return mixed string or boolean
 	*/			
-	function RecordStatus(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['status'];
+	function RecordStatus($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['status'];
+		}else{
+			if($enr) return $this->getValue('status',$enr);
+				else return FALSE;
+		}
 	}
 	/**
 	* Returns record entry's history. This is the techical history of the record entry, not of the admission.
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return mixed string or boolean
 	*/			
-	function RecordHistory(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['history'];
+	function RecordHistory($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['history'];
+		}else{
+			if($enr) return $this->getValue('history',$enr);
+				else return FALSE;
+		}
 	}
 	/**
 	* Returns record's modifier id or name. Technical.
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return mixed string or boolean
 	*/			
-	function RecordModifierID(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['modify_id'];
+	function RecordModifierID($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['modify_id'];
+		}else{
+			if($enr) return $this->getValue('modify_id',$enr);
+				else return FALSE;
+		}
 	}
 	/**
 	* Returns record's creator id or name. Technical.
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return mixed string or boolean
 	*/			
-	function RecordCreatorID(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['create_id'];
+	function RecordCreatorID($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['create_id'];
+		}else{
+			if($enr) return $this->getValue('create_id',$enr);
+				else return FALSE;
+		}
 	}
 	/**
 	* Returns filename of the person's picture id.
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
 	* @return mixed string or boolean
 	*/			
-	function PhotoFilename(){
-	    if(!$this->is_loaded) return FALSE;
-		return $this->encounter['photo_filename'];
+	function PhotoFilename($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['photo_filename'];
+		}else{
+			if($enr) return $this->getValue('photo_filename',$enr,TRUE);
+				else return FALSE;
+		}
 	}
 	/**
 	* Updates the encounter record with data from the internal buffer array.
@@ -1047,7 +1197,7 @@ class Encounter extends Notes {
 			elseif($type=='_PID') $cond='pid';
 			 	else return FALSE;
 		$this->sql="SELECT encounter_nr FROM $this->tb_enc 
-						WHERE $cond='$nr' AND NOT (encounter_status LIKE 'cancelled') AND NOT is_discharged AND status NOT IN ($this->dead_stat)";
+						WHERE $cond='$nr' AND encounter_status <> 'cancelled' AND (is_discharged='' OR is_discharged=0) AND status NOT IN ($this->dead_stat)";
 		if($buf=$db->Execute($this->sql)){
 		    if($buf->RecordCount()) {
 				$buf2=$buf->FetchRow();
@@ -1081,14 +1231,23 @@ class Encounter extends Notes {
 	* @return boolean
 	*/
 	function setHistorySeen($encoder='',$enc_nr=''){
-	    global $db;
+	    global $db, $dbtype;
 		if(empty($encoder)) return FALSE;
 		if(!$this->internResolveEncounterNr($enc_nr)) return FALSE;
-		$this->sql="UPDATE $this->tb_enc SET history= CONCAT(history,'\nView ".date('Y-m-d H:i:s')." = $encoder') WHERE encounter_nr=$this->enc_nr";
-		
-		if($db->Execute($this->sql)) {return true;}
+		/*
+		if($dbtype=='mysql')
+			$this->sql="UPDATE $this->tb_enc SET history= CONCAT(history,'\nView ".date('Y-m-d H:i:s')." = $encoder') WHERE encounter_nr=$this->enc_nr";
+		else
+			$this->sql="UPDATE $this->tb_enc SET history= (history || '\nView ".date('Y-m-d H:i:s')." = $encoder') WHERE encounter_nr=$this->enc_nr";
+		*/
+		$this->sql="UPDATE $this->tb_enc SET history= ".$this->ConcatHistory("\nView ".date('Y-m-d H:i:s')." = $encoder")." WHERE encounter_nr=$this->enc_nr";
+
+        return $this->Transact($this->sql);
+        /*
+        if($db->Execute($this->sql)) {return true;}
 		   else  {echo $this->sql;return FALSE;}
-	}		
+        */
+	}
 	/**
 	* Gets the encounter class' information based on its class_nr key.
 	*
@@ -1104,7 +1263,7 @@ class Encounter extends Notes {
 	*/
 	function getEncounterClassInfo($class_nr){
 	    global $db;
-		$this->sql="SELECT class_id,name,LD_var FROM $this->tb_ec WHERE class_nr=$class_nr";
+		$this->sql="SELECT class_id,name, LD_var AS \"LD_var\" FROM $this->tb_ec WHERE class_nr=$class_nr";
 		if($this->result=$db->Execute($this->sql)){
 		    if($this->result->RecordCount()) {
 			    $this->row=$this->result->FetchRow();
@@ -1129,7 +1288,7 @@ class Encounter extends Notes {
 	*/
     function getInsuranceClassInfo($class_nr){
 	    global $db;
-		$this->sql="SELECT class_id,name,LD_var FROM $this->tb_ic WHERE class_nr=$class_nr";
+		$this->sql="SELECT class_id,name, LD_var AS \"LD_var\" FROM $this->tb_ic WHERE class_nr=$class_nr";
 		if($this->result=$db->Execute($this->sql)){
 		    if($this->result->RecordCount()) {
 			    $this->row=$this->result->FetchRow();
@@ -1165,23 +1324,28 @@ class Encounter extends Notes {
 	* @return mixed adodb record object or boolean
 	*/
 	function _searchAdmissionBasicInfo($key,$enc_class=0,$add_opt='',$limit=FALSE,$len=30,$so=0){
-		global $db;
+		global $db,$sql_LIKE;
+		
+
 		//if(empty($key)) return FALSE;
 		$this->sql="SELECT e.encounter_nr, e.encounter_class_nr, p.pid, p.name_last, p.name_first, p.date_birth, p.addr_zip, p.sex,p.blood_group
 				FROM $this->tb_enc AS e LEFT JOIN $this->tb_person AS p ON e.pid=p.pid";
+
 		if(is_numeric($key)){
 			$key=(int)$key;
-			$this->sql.=" WHERE e.encounter_nr = $key AND NOT e.is_discharged ".$add_opt;
+			$this->sql.=" WHERE e.encounter_nr = $key AND  e.is_discharged IN ('',0)".$add_opt;
+		}elseif($key=='%'||$key=='*'){
+			$this->sql.=" WHERE e.is_discharged IN ('',0) AND e.status NOT IN ($this->dead_stat) ".$add_opt;
 		}else{
-			$this->sql.=" WHERE (e.encounter_nr LIKE '$key%' 
-						OR p.pid LIKE '$key%'
-						OR p.name_last LIKE '$key%'
-						OR p.name_first LIKE '$key%'
-						OR p.date_birth LIKE '$key%')";
+			$this->sql.=" WHERE (e.encounter_nr $sql_LIKE '$key%'
+						OR p.pid $sql_LIKE '$key%'
+						OR p.name_last $sql_LIKE '$key%'
+						OR p.name_first $sql_LIKE '$key%'
+						OR p.date_birth $sql_LIKE '$key%')";
 			if($enc_class) $this->sql.="	AND e.encounter_class_nr=$enc_class";
-			$this->sql.="  AND NOT e.is_discharged AND e.status NOT IN ($this->dead_stat) ".$add_opt;
+			$this->sql.="  AND  e.is_discharged IN ('',0) AND e.status NOT IN ($this->dead_stat) ".$add_opt;
 		}
-		//echo $sql;
+
 		if($limit){
 	    	$this->res['sabi']=$db->SelectLimit($this->sql,$len,$so);
 		}else{
@@ -1266,7 +1430,6 @@ class Encounter extends Notes {
 			}
 			$option.=$order;
 		}
-		
 		return $this->_searchAdmissionBasicInfo($key,0,$option); // 0 = all kinds of admission
 	}
 	/**
@@ -1322,7 +1485,7 @@ class Encounter extends Notes {
 	* Checks if the encounter is in a location based on the  location's type number.
 	*
 	* If the encounter is in the said location, its record primary key number will be returned, else FALSE.
-	* This method uses the internaly buffered encounter number. The number must be set first before using 
+	* This method uses the internaly buffered encounter number. The number must be set first before using
 	* this method either  with <var>setEncounterNr()</var> or by directly assigning to the <var>$enc_nr</var> variable .
 	* @access private
 	* @param int Encounter number
@@ -1405,15 +1568,16 @@ class Encounter extends Notes {
 	* @return boolean
 	*/
 	function _setLocation($enr=0,$type_nr=0,$loc_nr=0,$group_nr,$date='',$time=''){
-		global $HTTP_SESSION_VARS;
+		global $HTTP_SESSION_VARS, $db;
+		//$db->debug=1;
 		//if(!($enr&&$type_nr&&$loc_nr)) return FALSE;
 		if(empty($date)) $date=date('Y-m-d');
 		if(empty($time)) $time=date('H:i:s');
 		$user=$HTTP_SESSION_VARS['sess_user_name'];
 		$history="Create: ".date('Y-m-d H:i:s')." ".$user."\n";
-		$this->sql="INSERT INTO $this->tb_location (encounter_nr,type_nr,location_nr,group_nr,date_from,time_from,history,modify_id,create_id,create_time) 
+		$this->sql="INSERT INTO $this->tb_location (encounter_nr,type_nr,location_nr,group_nr,date_from,time_from,history,create_id,create_time)
 						VALUES 
-						('$enr','$type_nr','$loc_nr','$group_nr','$date','$time','$history','$user','$user','".date('YmdHis')."')";
+						('$enr','$type_nr','$loc_nr','$group_nr','$date','$time','$history','$user','".date('YmdHis')."')";
 		//echo $this->sql;
 		//if($this->Transact($this->sql))	return true; else	echo $this->sql;
 		return $this->Transact($this->sql);
@@ -1522,11 +1686,18 @@ class Encounter extends Notes {
 	* @return boolean
 	*/
 	function _setCurrentAssignment($enr,$data='',$act='Modified'){
-		global $HTTP_SESSION_VARS;
+		global $HTTP_SESSION_VARS, $dbtype;
 		if(!$enr||empty($data)) return FALSE;
-		$data.=",history=CONCAT(history,'\n$act ".date('Y-m- H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."'), 
-						modify_id='".$HTTP_SESSION_VARS['sess_user_name']."',
-						modify_time='".date('YmdHis')."'";
+		/*
+		if($dbtype=='mysql'){
+			$data.=",history=CONCAT(history,'\n$act ".date('Y-m- H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."'), ";
+		}else{
+			$data.=",history=(history || '\n$act ".date('Y-m- H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."'), ";
+		}
+		*/
+		$data.=",history=".$this->ConcatHistory("\n$act ".date('Y-m- H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']).", ";
+		$data.="	modify_id='".$HTTP_SESSION_VARS['sess_user_name']."',
+				modify_time='".date('YmdHis')."'";
 		$this->sql="UPDATE $this->tb_enc SET $data WHERE encounter_nr=$enr";
 		return $this->Transact($this->sql);
 	}
@@ -1695,7 +1866,7 @@ class Encounter extends Notes {
 		if(!$this->internResolveEncounterNr($enc_nr)) return FALSE;
 		if(empty($by)) $by=$HTTP_SESSION_VARS['sess_user_name'];
 		$this->sql="UPDATE $this->tb_enc SET encounter_status='cancelled',status='void',is_discharged=1,
-						history=CONCAT(history,'\nCancelled ".date('Y-m- H:i:s')." by $by, logged-user ".$HTTP_SESSION_VARS['sess_user_name']."'), 
+						history=".$this->ConcatHistory("Cancelled ".date('Y-m- H:i:s')." by $by, logged-user ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
 						modify_id='".$HTTP_SESSION_VARS['sess_user_name']."',
 						modify_time='".date('YmdHis')."' 
 						WHERE encounter_nr=$this->enc_nr AND encounter_status IN ('','0','allow_cancel')";
@@ -1722,7 +1893,7 @@ class Encounter extends Notes {
 	*/
 	function setIsDischarged($enr,$date,$time){
 		//$this->sql="UPDATE $this->tb_enc SET is_discharged=1, discharge_date='$date',discharge_time='$time', current_ward_nr=0,current_room_nr=0,current_dept_nr=0,current_firm_nr=0,in_ward=0 WHERE encounter_nr=$enr AND NOT is_discharged";
-		$this->sql="UPDATE $this->tb_enc SET is_discharged=1, discharge_date='$date',discharge_time='$time', in_ward=0,in_dept=0 WHERE encounter_nr=$enr AND NOT is_discharged";
+		$this->sql="UPDATE $this->tb_enc SET is_discharged=1, discharge_date='$date',discharge_time='$time', in_ward=0,in_dept=0 WHERE encounter_nr=$enr AND is_discharged IN ('',0)";
 		//if($this->Transact($this->sql)) return true; else echo $this->sql;
 		return $this->Transact($this->sql);
 	}
@@ -1738,7 +1909,8 @@ class Encounter extends Notes {
 	*/
 	function getDischargeTypesData(){
 		global $db;
-		$this->sql="SELECT nr,name,LD_var FROM $this->tb_dis_type WHERE 1 ORDER BY nr";
+		//$db->debug=1;
+		$this->sql="SELECT nr,name,LD_var AS \"LD_var\" FROM $this->tb_dis_type ORDER BY nr";
 		if($this->result=$db->Execute($this->sql)){
 			if($this->result->RecordCount()){
 				return $this->result;
@@ -1746,7 +1918,7 @@ class Encounter extends Notes {
 		}else{return FALSE;}
 	}		
 	/**
-	* Complete discharge or encounter.
+	* Discharge an encounter.
 	* Avoid using this function directly. Use the appropriate methods
 	* @access private
 	* @param int Encounter number
@@ -1757,19 +1929,30 @@ class Encounter extends Notes {
 	* @return boolean
 	*/
 	function _discharge($enr,$loc_types,$d_type_nr,$date='',$time=''){
-		global $HTTP_SESSION_VARS;
+		global $HTTP_SESSION_VARS, $dbf_nodate, $dbtype;
 		if(empty($date)) $date=date('Y-m-d');
 		if(empty($time)) $time=date('H:i:s');
 		$this->sql="UPDATE $this->tb_location
 							SET	discharge_type_nr=$d_type_nr,
 									date_to='$date',
 									time_to='$time',
-									status='discharged',
-									history=CONCAT(history,'\nUpdate (discharged): ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."'),
-									modify_id='".$HTTP_SESSION_VARS['sess_user_name']."'
-							WHERE encounter_nr=$enr AND type_nr IN ($loc_types) AND date_to IN ('','0000-00-00')";
-		if($this->Transact($this->sql)){ return true;}
-		 else{echo $this->sql; return FALSE;}
+									status='discharged',";
+        /*
+        if($dbtype=='mysql'){
+			$this->sql.=" history=CONCAT(history,'\nUpdate (discharged): ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."'),";
+		}else{
+			$this->sql.=" history= history || '\nUpdate (discharged): ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."' ,";
+		}
+        */
+            $this->sql.= "history =".$this->ConcatHistory("Update (discharged): ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n").",";
+            $this->sql.=" modify_id='".$HTTP_SESSION_VARS['sess_user_name']."'
+							WHERE encounter_nr=$enr AND type_nr IN ($loc_types) AND date_to ='$dbf_nodate'";
+		if($this->Transact($this->sql)){
+           return true;
+        }else{
+              //echo $this->sql;
+              return FALSE;
+         }
 		//return $this->Transact($this->sql);
 	}
 	/**
@@ -2002,10 +2185,10 @@ class Encounter extends Notes {
 	    global $HTTP_SESSION_VARS;
 		if(!$appt_nr||!$this->internResolveEncounterNr($enc_nr)) return FALSE;
 		$this->sql="UPDATE $this->tb_appt SET  appt_status='done',encounter_nr=$this->enc_nr,encounter_class_nr=$class_nr,
-							history=CONCAT(history,'\nDone ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."'),
+							history=".$this->ConcatHistory("Done ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
 							modify_id='".$HTTP_SESSION_VARS['sess_user_name']."',
 							modify_time='".date('YmdHis')."'
-							WHERE nr=$appt_nr";	
+							WHERE nr=$appt_nr";
 		return $this->Transact();
 	}
 	/**
@@ -2035,20 +2218,24 @@ class Encounter extends Notes {
 	*/
 	function OutPatientsBasic($dept_nr=0){
 		global $db;
+		//$db->debug=1;
 		if($dept_nr) $cond="e.current_dept_nr=$dept_nr AND";
 			else $cond='';
 			//$cond='';
-		$this->sql="SELECT e.encounter_nr,e.pid,e.insurance_class_nr,
-									p.title,p.name_last,p.name_first,p.date_birth,p.sex, p.photo_filename,
-									a.time,a.urgency,
-									i.LD_var,i.name AS insurance_name,
+		$this->sql="SELECT e.encounter_nr,e.pid,e.insurance_class_nr,p.title,p.name_last,p.name_first,p.date_birth,p.sex, p.photo_filename,
+									a.date, a.time,a.urgency, i.LD_var AS \"LD_var\",i.name AS insurance_name,
 									n.nr AS notes
-							FROM ($this->tb_enc AS e, $this->tb_person AS p) 
+							FROM $this->tb_enc AS e  
+									LEFT JOIN $this->tb_person AS p ON e.pid=p.pid
 									LEFT JOIN $this->tb_appt AS a ON e.encounter_nr=a.encounter_nr
 									LEFT JOIN $this->tb_ic AS i ON e.insurance_class_nr=i.class_nr
-									LEFT JOIN $this->tb_notes as n ON e.encounter_nr=n.encounter_nr AND n.type_nr=6
-							WHERE $cond e.encounter_class_nr=2 AND e.pid=p.pid AND NOT e.is_discharged  AND e.in_dept AND e.status NOT IN ($this->dead_stat)
-							GROUP BY e.encounter_nr";
+									LEFT JOIN $this->tb_notes as n ON (e.encounter_nr=n.encounter_nr AND n.type_nr=6)
+							WHERE $cond e.encounter_class_nr=2 AND
+									(e.is_discharged='' OR e.is_discharged=0)  AND 
+									e.in_dept<>'' AND e.in_dept<>0 AND e.status NOT IN ($this->dead_stat)
+							ORDER BY e.encounter_nr";
+							/*GROUP BY e.encounter_nr,e.pid,e.insurance_class_nr,p.title,p.name_last,p.name_first,p.date_birth,p.sex,
+							p.photo_filename,a.time,a.urgency,i.LD_var,i.name, n.nr";*/
 							
         if($this->res['opb']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['opb']->RecordCount()) {
@@ -2080,18 +2267,17 @@ class Encounter extends Notes {
 	*/
 	function createWaitingOutpatientList($dept_nr=0){
 		global $db;
+		//$db->debug=1;
 		if($dept_nr) $cond="AND current_dept_nr='$dept_nr'";
 			else $cond='';
-			//$cond='';
-		//if(empty($key)) return FALSE;
 		$this->sql="SELECT e.encounter_nr, e.encounter_class_nr, e.current_dept_nr,
 									p.pid, p.name_last, p.name_first, p.date_birth, p.sex, 
-									d.nr AS dept_nr, d.name_short, d.LD_var AS dept_LDvar
-				FROM $this->tb_enc AS e 
+									d.nr AS dept_nr, d.name_short, d.LD_var AS \"dept_LDvar\"
+				FROM $this->tb_enc AS e
 					LEFT JOIN $this->tb_person AS p ON e.pid=p.pid
 					LEFT JOIN $this->tb_dept AS d ON e.current_dept_nr=d.nr
-				WHERE e.encounter_class_nr='2' AND NOT e.is_discharged $cond 
-							AND NOT e.in_dept AND NOT (e.encounter_status LIKE 'cancelled')
+				WHERE e.encounter_class_nr='2' AND (e.is_discharged='' OR e.is_discharged=0) $cond
+							AND  (e.in_dept='' OR e.in_dept=0) AND e.encounter_status <> 'cancelled'
 							AND e.status NOT IN ($this->dead_stat)
 				ORDER BY p.name_last";
 		//echo $sql;
@@ -2131,6 +2317,38 @@ class Encounter extends Notes {
 				return $this->res['ast'];
 		    } else { return FALSE;}
 		} else { return FALSE;}
+	}
+	/**
+	* Gets a particular encounter item based on its encounter number key.
+	*
+	* For details on field names of items that can be fetched, see the <var>$tab_fields</var> array.
+	* @access private
+	* @param string Field name of the item to be fetched
+	* @param int encounter number
+	* @return mixed string, integer, or boolean
+	*/
+	function getValue($item,$enr='',$person=FALSE) {
+	    global $db;
+
+	    if($this->is_loaded) {
+		    if(isset($this->encounter[$item])) return $this->encounter[$item];
+		        else  return false;
+		} else {
+			if($this->internResolveEncounterNr($enr)){
+				if($person){
+					$this->sql="SELECT p.$item FROM $tb_enc AS e, $tb_person AS p WHERE e.encounter_nr=$this->enc_nr AND e.pid=p.pid";
+				}else{
+					$this->sql="SELECT $item FROM $tb_enc WHERE encounter_nr=$this->enc_nr";
+				}
+			//return $this->sql;
+		 		if($result=$db->Execute($this->sql)) {
+					if($result->RecordCount()) {
+						$row=$this->result->FetchRow();
+						return $row[$item];
+					} else { return false; }
+				} else { return false; }
+			}else{ return false; }
+		}
 	}
 }
 ?>

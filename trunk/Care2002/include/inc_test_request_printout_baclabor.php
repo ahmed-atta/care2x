@@ -1,4 +1,9 @@
-		<table   cellpadding=0 cellspacing=0 border=0 width=745 class="lab">
+<table border="0">
+  <tbody>
+    <tr>
+      <td>
+
+	<table   cellpadding=0 cellspacing=0 border=0 width=745 class="lab">
 		
     <tr >
       <td colspan=4 bgcolor="#ffe3e3"  align="center"><font size=3 color="#ee6666" face="verdana,arial"><b> <?php echo $LDCentralLab." - ".$formtitle ?></b></td>
@@ -169,7 +174,7 @@
 
  if($edit || $edit_findings || $read_form || $edit_form)
         {
-		   echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid=$sid&lang=$lang&pn='.$result['patnum'].'" width=282 height=178>';
+		   echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&pn='.$result['patnum'].'" width=282 height=178>';
 		}
 
 ?>
@@ -340,7 +345,7 @@ for($n=0;$n<8;$n++)
 	
 	  <tr bgcolor="#fff3f3"  valign="top">
     <td colspan=3><?php
-          echo "<img src='".$root_path."classes/barcode/image.php?code=".$batch_nr."&style=68&type=I25&width=145&height=40&xres=2&font=5' border=0>";
+          echo "<img src='".$root_path."classes/barcode/image.php?code=".$batch_nr."&style=68&type=I25&width=180&height=40&xres=2&font=5' border=0>";
 ?>	</td>
     <td>&nbsp;</td>
     <td align="right" rowspan=7>
@@ -365,7 +370,7 @@ for($n=0;$n<8;$n++)
 
 	<tr bgcolor="<?php echo $bgc1 ?>" valign="top">	    
 	<td align="right" ><font size=1 color="#cc0000" face="verdana,arial">
-	<?php echo $LDImmuneSupp ?></td>	
+	<?php echo $LDImmuneSupp ?></td>
 	<td colspan=2><?php printRadioButton('immune_supp',1)  ?> <?php echo $LDYes ?>	<?php printRadioButton('immune_supp',0) ?> <?php echo $LDNo ?><br>
     </td>
 	</tr>	
@@ -393,13 +398,13 @@ for($n=0;$n<8;$n++)
     if($edit_findings)
 	 {
 	    echo '&nbsp;<input type="text" name="rec_date" size=10 maxlength=10 value="';
-	    if($stored_findings['rec_date'] && $stored_findings['rec_date']!='0000-00-00') echo formatDate2Local($stored_findings['rec_date'],$date_format);
+	    if($stored_findings['rec_date'] && $stored_findings['rec_date']!=DBF_NODATE) echo formatDate2Local($stored_findings['rec_date'],$date_format);
 		  else echo formatDate2Local(date('Y-m-d'),$date_format);
 		echo '" onBlur="IsValidDate(this,\''.$date_format.'\')">';
 	 }
 	 else
 	 {
-	    if($stored_findings['rec_date']) echo  formatDate2Local($stored_findings['rec_date'],$date_format);
+	    if($stored_findings['rec_date'] && $stored_findings['rec_date']!=DBF_NODATE) echo  formatDate2Local($stored_findings['rec_date'],$date_format);
 	  }
     ?></font></td>
   </tr>
@@ -471,6 +476,10 @@ for($n=0;$n<8;$n++)
 
 	?>
     </td>
-	</tr>		
-	
+	</tr>
 	</table>
+	
+	</td>
+    </tr>
+  </tbody>
+</table>

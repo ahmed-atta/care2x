@@ -2,192 +2,165 @@
 <b><?php echo "$x3 - $x2" ?></b></font>
 <form action="#" >
 <p><font size=2 face="verdana,arial" >
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Como admitir um paciente a partir de uma lista de espera?</b></font>
-<ul> <b>Passo 1: </b>Clique no nome do paciente da lista de espera.<p>
-<img src="../help/en/img/en_ambulatory_waitlist.png" border=0 width=301 height=156>
-                                                                     <p>
-		<b>Passo 2: </b>Uma janela aparecerá mostrando a lista de ocupação da ala.<br>
-		<b>Passo 3: </b>Clique no botão <img <?php echo createLDImgSrc('../','assign_here.gif','0') ?>> da cama assinalada ao paciente.<br>
-</ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Como assinalar uma cama a um paciente?</b> (Método antigo)</font>
-<ul> 
-<b>Note: </b> Este é o método antigo de admissão de um paciente internado para uma ala. O método preferido atualmente é o de usar a lista de espera. Veja os passos acima.<p>
-<b>Passo 1: </b>Clique no botão <img <?php echo createComIcon('../','plus2.gif','0') ?>> correspondente ao número do quarto e cama. 
-                                                                     <br>
-		<b>Passo 2: </b>Uma janela aparecerá para a pesquisa de paciente.<br>
-		<b>Passo 3: </b>Primeiro encontre o paciente entrando com uma palavra chave de pesquisa em um dos vários campos de entradas.<br>
-		Se você quiser encontrar o paciente...<ul type="disc">
-		<li>pelo seu número de paciente, entre com o número no campo <br>"<span style="background-color:yellow" >Patient no.:</span><input type="text" name="t" size=19 maxlength=10 value="22000109">" .
-		<li>pelo seu sobrenome, entre seu sobrenome ou as primeiras poucas letras no campo <br>"<span style="background-color:yellow" >Sobrenome:</span><input type="text" name="t" size=19 maxlength=10 value="Schmitt">" .
-		<li>pelo seu nome, entre seu nome ou as primeiras poucas letras no campo <br>"<span style="background-color:yellow" >Nome:</span><input type="text" name="t" size=19 maxlength=10 value="Peter">" .
-		<li>pela sua data de nascimento, entre sua data de nascimento ou os primeiro poucos números no campo <br>"<span style="background-color:yellow" >Data de nascimento:</span><input type="text" name="t" size=19 maxlength=10 value="10.10.1966">" .
-		</ul>
-		<b>Passo 4: </b>Clique no botão <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> para iniciar a pesquisa de paciente.<br>
-		<b>Passo 5: </b>Se a pesquisa encontrar um paciente ou vários pacientes, uma lista de pacientes será exibida.<br>
-		<b>Passo 6: </b>Para selecionar o paciente certo, clique no botão&nbsp;<button><img <?php echo createComIcon('../','post_discussion.gif','0') ?>></button> correspondente a ele.<br>
-</ul>
 
 <?php if((($src=="")&&($x1=="ja"))||(($src=="fresh")&&($x1=="template"))) : ?>
-
-
-<font face="Verdana, Arial" size=2>
-<a name="open"></a>
-<b>
-<p><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000">Como abrir os gráficoa dos pacientes?</font></b><p>
-<font face="Verdana, Arial" size=2>
-<ul>
-<b>Passo:</b> Clique nas barras coloridas para abrir o arquivo dos gráficos...<p>
-<img src="../help/en/img/en_ambulatory_sbars.png" border=0 width=434 height=84><p>
-<b>OU:</b> Clique no ícone <img <?php echo createComIcon($root_path,'open.gif','0'); ?>> para abrir o arquivo dos gráficos...<p>
-<img src="../help/en/img/en_admission_folder.png" border=0 width=456 height=92>
-</ul>
-<a name="adata"></a>
-<font face="Verdana, Arial" size=2>
-<b>
-<p><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000">Como exibir a data de admissão de um paciente?</font></b><p>
-<font face="Verdana, Arial" size=2>
-<ul>
-<b>Passo:</b> Clique no ícone <img <?php echo createComIcon($root_path,'pdata.gif','0'); ?>> exibir a data de admissão ...<p>
-<img src="../help/en/img/en_admission_listlink.png" border=0 width=456 height=92><p>
-<b>OU:</b> Clique no sobrenome do paciente para a exibição da data de admissão.<p>
-<img src="../help/en/img/en_ambulatory_name.png" border=0 width=434 height=84>
-</ul>
-
-<a name="transfer"></a>
-<font face="Verdana, Arial" size=2>
-<b>
-<p><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000">Como transferir um paciente?</font></b><p>
-<font face="Verdana, Arial" size=2>
-<ul>
-<b>Passo:</b> Clique no ícone <img <?php echo createComIcon($root_path,'xchange.gif','0'); ?>> para abrir a janela de transferência.<p>
-<img src="../help/en/img/en_admission_transfer.png" border=0 width=456 height=92>
-</ul>
-
-
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Como liberar um paciente da ala?</b></font>
-<ul> <b>Passo 1: </b>Clique no botão <img <?php echo createComIcon('../','bestell.gif','0') ?>> correspondente ao paciente.
-                                                                     <p>
-<img src="../help/en/img/en_admission_discharge.png" border=0 width=456 height=92><p>
-		<b>Passo 2: </b>O formulário de liberação do paciente apareceráT.<br>
-		<b>Passo 3: </b>Se você tiver certeza em liberar o paciente, <br>clique no campo da caixa de verificação 
-		"<input type="checkbox" name="g" ><span style="background-color:yellow" > Sim, tenho certeza. Libere o paciente.</span>" para
-		ativá-la.<br>
-       	<b>Passo 4: </b>Clique no botão <input type="button" value="libere"> para liberar o paciente.<p>
-       	<b>Note: </b>Se você quiser cancelar, clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> e o paciente não será liberado.<br>
-</ul>
-
-
-
-
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Como bloquear uma cama?</b></font>
-<ul> <b>Passo 1: </b>Clique no botão <img <?php echo createComIcon('../','plus2.gif','0') ?>>correspondente ao número do quarto e cama.
+How to assign a bed to a patient?</b></font>
+<ul> <b>Step 1: </b>Click on the <img <?php echo createComIcon('../','plus2.gif','0') ?>> button corresponding to the room number and bed.
                                                                      <br>
-		<b>Passo 2: </b>Uma janela para a pesquisa do paciente aparecerá.<br>
-		<b>Passo 3: </b>Clique no botão "<span style="background-color:yellow" > <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> <font color="#0000ff">Bloqueie esta cama</font> </span>".<br>
-		<b>Passo 4: </b>Choose&nbsp;<button>OK</button> quando perguntado por confirmação.<br>
+		<b>Step 2: </b>A pop-up window for searching the patient will appear.<br>
+		<b>Step 3: </b>Find first the patient by entering a search keyword into one of several entry fields.<br>
+		If you  want to find the patient...<ul type="disc">
+		<li>by its patient number, enter the number into the <br>"<span style="background-color:yellow" >Patient nr.:</span><input type="text" name="t" size=19 maxlength=10 value="22000109">" field.
+		<li>by its Family name, enter its Family name or the first few letters into the <br>"<span style="background-color:yellow" >Family name:</span><input type="text" name="t" size=19 maxlength=10 value="Schmitt">" field.
+		<li>by its Given name, enter its Given name or the first few letters into the <br>"<span style="background-color:yellow" >Given name:</span><input type="text" name="t" size=19 maxlength=10 value="Peter">" field.
+		<li>by its birthdate, enter its birthdate or the first few numbers into the <br>"<span style="background-color:yellow" >Birthdate:</span><input type="text" name="t" size=19 maxlength=10 value="10.10.1966">" field.
+		</ul>
+		<b>Step 4: </b>Click the button <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> to start searching for the patient.<br>
+		<b>Step 5: </b>If the search finds the patient or several patients, a list of patients will be displayed.<br>
+		<b>Step 6: </b>To select the right patient, click on the button&nbsp;<button><img <?php echo createComIcon('../','post_discussion.gif','0') ?>></button> corresponding to it.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Eu quero apagar um paciente da lista</b></font>
-<ul> <b>Nota: </b>Você NÃO PODE simplesmante apagar um paciente da lista. Para remover o paciente você deve liberá-lo regularmente. Para fazer isto,
-				siga as instruções de como liberar um paciente da ala conforme anteriormente descrito.<br>
+How to discharge a patient from the ward?</b></font>
+<ul> <b>Step 1: </b>Click on the <img <?php echo createComIcon('../','bestell.gif','0') ?>> button corresponding to the patient.
+                                                                     <br>
+		<b>Step 2: </b>The patient dischargeal form will appear.<br>
+		<b>Step 3: </b>If you are sure to discharge the patient, <br>click the checkbox 
+		"<input type="checkbox" name="g" ><span style="background-color:yellow" > Yes, I am sure. discharge the patient.</span>" field to
+		activate it.<br>
+       	<b>Step 4: </b>Click the button <input type="button" value="discharge"> to discharge the patient.<p>
+       	<b>Note: </b>If you want to cancel, click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> and the patient will not be dischargeed.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>O que estas barras  <img <?php echo createComIcon('../','s_colorbar.gif','0') ?>> coloridas significam? </b></font>
-<ul> <b>Nota: </b>Cada uma desta barras coloridas quando "assinaladas visíveis" sinalizam a disponibilidade de uma informação em particular, uma instrução, uma mudança, ou uma pergunta, etc.<br>
-			O significado de cada barra colorida pode ser assinalado em cada ala. 
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
+How to lock a bed?</b></font>
+<ul> <b>Step 1: </b>Click on the <img <?php echo createComIcon('../','plus2.gif','0') ?>> button corresponding to the room number and bed.
+                                                                     <br>
+		<b>Step 2: </b>A pop-up window for searching the patient will appear.<br>
+		<b>Step 3: </b>Click on the "<span style="background-color:yellow" > <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> <font color="#0000ff">Lock this bed</font> </span>".<br>
+		<b>Step 4: </b>Choose&nbsp;<button>OK</button> when asked for confirmation.<br>
 </ul>
-<!-- <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>O que significa este ícone <img <?php echo createComIcon('../','patdata.gif','0') ?>> ? </b></font>
-<ul> <b>Nota: </b>Este é o botão de arquivo de dados do paciente. Para exibir o arquivo de dados do paciente, clique neste ícone. Uma janela aparecerá
-			mostrando a informação básica do paciente, sua foto de identificação se disponível, e muitas outras opções.<br>
-</ul> -->
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>O que significa este ícone <img <?php echo createComIcon('../','bubble2.gif','0') ?>> ? </b></font>
-<ul> <b>Nota: </b>Este é o botão de Ler/Escrever notas. Clicando nele Uma janela aparecerá para ler ou escrever notas a respeito do paciente.<br>
-			O ícone simples <img <?php echo createComIcon('../','bubble2.gif','0') ?>> significa que não há notas ou observações sobre o paciente. Para escrever uma nota ou observação clique neste ícone.
-			O ícone <img <?php echo createComIcon('../','bubble3.gif','0') ?>> significa que há uma nota ou observação armazenada sobre o paciente. Para ler ou anexar notas ou observações
-			clique neste ícone.
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
+I want to delete a patient from the list</b></font>
+<ul> <b>Note: </b>You CANNOT just simply delete a patient from the list. To remove the patient, you have to discharge him regularly. To do it,
+				follow the instructions on how to discharge a patient from the ward described above.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>O que significa este ícone <img <?php echo createComIcon('../','bestell.gif','0') ?>> ? </b></font>
-<ul> <b>Nota: </b>Este é o botão de liberação do paciente. Para liberar um paciente, clique para abrir o formulário de liberação do paciente.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>What do these  <img <?php echo createComIcon('../','s_colorbar.gif','0') ?>> color bars mean? </b></font>
+<ul> <b>Note: </b>Each of these color bars when "set visible" signalize the availability of a particular information, an instruction, a change, or a query, etc.<br>
+			The meaning of a color can be set for every ward. 
+</ul>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>What does this icon <img <?php echo createComIcon('../','patdata.gif','0') ?>> mean? </b></font>
+<ul> <b>Note: </b>This is the patient's data file button. To display the patient's data file folder, click this icon. A pop-up window will appear
+			showing the basic information on the patient, its id picture if available, and several other options.<br>
+</ul>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>What does this icon <img <?php echo createComIcon('../','bubble2.gif','0') ?>> mean? </b></font>
+<ul> <b>Note: </b>This is the Read/Write notice button. Clicking it will open a pop-up window for reading or writing notices regarding the patient.<br>
+			The  plain <img <?php echo createComIcon('../','bubble2.gif','0') ?>> icon means that there is no current notes or remarks about the patient. To write a note or remarks click on this icon.
+			The icon <img <?php echo createComIcon('../','bubble3.gif','0') ?>> means that there is an stored note or remark about the patient. To read  or append notes or remarks
+			click on this icon.
+</ul>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>What does this icon <img <?php echo createComIcon('../','bestell.gif','0') ?>> mean? </b></font>
+<ul> <b>Note: </b>This is the patient dischargeal button. To discharge a patient, click this to open the patient dischargeal form.<br>
 </ul>
 <?php elseif(($src=="")&&($x1=="template")) : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-O que eu devo fazer quando <span style="background-color:yellow" >a lista de hoje ainda não foi criada</span>?</b></font>
-<ul> <b>Passo 1: </b>Clique no botão <input type="button" value="Mostre a última lista de ocupação"> para encontrara a última lista gravada.
+What should I do when <span style="background-color:yellow" >today's list is not yet created</span>?</b></font>
+<ul> <b>Step 1: </b>Click on the button <input type="button" value="Show last occupancy list"> to find the last recorded list.
                                                                      <br>
-		<b>Passo 2: </b>Quando uma lista gravada é encontrada dentro dos últimos 31 dias, ela será exibida.<br>
-		<b>Passo 3: </b>Clique no botão <input type="button" value="Copie esta lista para hoje."><br>
+		<b>Step 2: </b>When a recorded list is found within the last 31 days, it will be displayed.<br>
+		<b>Step 3: </b>Click on the button <input type="button" value="Copy this list for today anyway."><br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Eu não quero ver a última lista de ocupação. Como criar a nova lista?</b></font>
-<ul> <b>Passo 1: </b>Clique no botão <img <?php echo createComIcon('../','plus2.gif','0') ?>> correspondente ao número do quarto e cama.
+I don't want to see the last occupancy list. How to create a new list?</b></font>
+<ul> <b>Step 1: </b>Click on the <img <?php echo createComIcon('../','plus2.gif','0') ?>> button corresponding to the room number and bed.
                                                                      <br>
-		<b>Passo 2: </b>Uma janela para a pesquisa do paciente aparecerá.<br>
-		<b>Passo 3: </b>Primeiro encontre o paciente entrando com uma palavra chave de pesquisa em um dos vários campos de entradas.<br>
-		Se você quiser encontrar o paciente...<ul type="disc">
-		<li>pelo seu número de paciente, entre com o número no campo <br>"<span style="background-color:yellow" >No. paciente:</span><input type="text" name="t" size=19 maxlength=10 value="22000109">" .
-		<li>pelo seu sobrenome, entre seu sobrenome ou as primeiras poucas letras no campo <br>"<span style="background-color:yellow" >Sobrenome:</span><input type="text" name="t" size=19 maxlength=10 value="Schmitt">" .
-		<li>pelo seu nome, entre seu nome ou as primeiras poucas letras no campo <br>"<span style="background-color:yellow" >Nome:</span><input type="text" name="t" size=19 maxlength=10 value="Peter">" .
-		<li>pela sua data de nascimento, entre sua data de nascimento ou os primeiro poucos números no campo <br>"<span style="background-color:yellow" >Data de nascimento:</span><input type="text" name="t" size=19 maxlength=10 value="10.10.1966">" .
+		<b>Step 2: </b>A pop-up window for searching the patient will appear.<br>
+		<b>Step 3: </b>Find first the patient by entering a search keyword into one of several entry fields.<br>
+		If you  want to find the patient...<ul type="disc">
+		<li>by its patient number, enter the number into the <br>"<span style="background-color:yellow" >Patient nr.:</span><input type="text" name="t" size=19 maxlength=10 value="22000109">" field.
+		<li>by its Family name, enter its Family name or the first few letters into the <br>"<span style="background-color:yellow" >Family name:</span><input type="text" name="t" size=19 maxlength=10 value="Schmitt">" field.
+		<li>by its Given name, enter its Given name or the first few letters into the <br>"<span style="background-color:yellow" >Given name:</span><input type="text" name="t" size=19 maxlength=10 value="Peter">" field.
+		<li>by its birthdate, enter its birthdate or the first few numbers into the <br>"<span style="background-color:yellow" >Birthdate:</span><input type="text" name="t" size=19 maxlength=10 value="10.10.1966">" field.
 		</ul>
-		<b>Passo 4: </b>Clique no botão <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> para iniciar a pesquisa de paciente.<br>
-		<b>Passo 5: </b>Se a pesquisa encontrar um paciente ou vários pacientes, uma lista de pacientes será exibida.<br>
-		<b>Passo 6: </b>Para selecionar o paciente certo, clique no botão&nbsp;<button><img <?php echo createComIcon('../','post_discussion.gif','0') ?>></button> correspondente a ele.<br>
+		<b>Step 4: </b>Click the button <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> to start searching for the patient.<br>
+		<b>Step 5: </b>If the search finds the patient or several patients, a list of patients will be displayed.<br>
+		<b>Step 6: </b>To select the right patient, click on the button&nbsp;<button><img <?php echo createComIcon('../','post_discussion.gif','0') ?>></button> corresponding to it.<br>
 </ul>
 <?php elseif(($src=="getlast")&&($x1=="last")) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Como copiar a última lista gravada exibida para a lista de ocupação de hoje?</b></font>
-<ul> <b>Passo 1: </b>Clique no botão <input type="button" value="Copie esta lista para hoje."> para copiar a última lista gravada.
+How to copy the displayed last recorded list for today's occupancy list?</b></font>
+<ul> <b>Step 1: </b>Click on the button <input type="button" value="Copy this list for today anyway."> to copy the last recorded list.
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-A última lista de ocupação está sendo exibida mas eu não quero copiá-la. Como iniciar uma nova lista? </b></font>
-<ul> <b>Passo 1: </b>Clique no botão <input type="button" value="Não copie isto! Crie uma nova lista."> para iniciar uma nova lista.
+The last occupancy list is being displayed but I don't want to copy it. How to start a new list? </b></font>
+<ul> <b>Step 1: </b>Click on the button <input type="button" value="Do not copy this! Create a new list."> to start creating a new list.
 </ul>
 <?php elseif($src=="assign") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Como assinalar uma cama a um paciente?</b></font>
-<ul> <b>Passo 1: </b>Primeiro encontre o paciente entrando com uma palavra chave de pesquisa em um dos vários campos de entradas.<br>
-		Se você quiser encontrar o paciente...<ul type="disc">
-		<li>pelo seu número de paciente, entre com o número no campo <br>"<span style="background-color:yellow" >No. paciente:</span><input type="text" name="t" size=19 maxlength=10 value="22000109">" .
-		<li>pelo seu sobrenome, entre seu sobrenome ou as primeiras poucas letras no campo <br>"<span style="background-color:yellow" >Sobrenome:</span><input type="text" name="t" size=19 maxlength=10 value="Schmitt">" .
-		<li>pelo seu nome, entre seu nome ou as primeiras poucas letras no campo <br>"<span style="background-color:yellow" >Nome:</span><input type="text" name="t" size=19 maxlength=10 value="Peter">" .
-		<li>pela sua data de nascimento, entre sua data de nascimento ou os primeiro poucos números no campo <br>"<span style="background-color:yellow" >Data de nascimento:</span><input type="text" name="t" size=19 maxlength=10 value="10.10.1966">" .
+How to assign a bed to a patient?</b></font>
+<ul> <b>Step 1: </b>Find first the patient by entering a search keyword into one of several entry fields.<br>
+		If you  want to find the patient...<ul type="disc">
+		<li>by its patient number, enter the number into the <br>"<span style="background-color:yellow" >Patient nr.:</span><input type="text" name="t" size=19 maxlength=10 value="22000109">" field.
+		<li>by its Family name, enter its Family name or the first few letters into the <br>"<span style="background-color:yellow" >Family name:</span><input type="text" name="t" size=19 maxlength=10 value="Schmitt">" field.
+		<li>by its Given name, enter its Given name or the first few letters into the <br>"<span style="background-color:yellow" >Given name:</span><input type="text" name="t" size=19 maxlength=10 value="Peter">" field.
+		<li>by its birthdate, enter its birthdate or the first few numbers into the <br>"<span style="background-color:yellow" >Birthdate:</span><input type="text" name="t" size=19 maxlength=10 value="10.10.1966">" field.
 		</ul>
-		<b>Passo 2: </b>Clique no botão <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> para iniciar a pesquisa de paciente.<br>
-		<b>Passo 3: </b>Se a pesquisa encontrar um paciente ou vários pacientes, uma lista de pacientes será exibida.<br>
-		<b>Passo 4: </b>Para selecionar o paciente certo, clique no botão&nbsp;<button><img <?php echo createComIcon('../','post_discussion.gif','0') ?>></button> correspondente a ele.<br>
+		<b>Step 2: </b>Click the button <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> to start searching for the patient.<br>
+		<b>Step 3: </b>If the search finds the patient or several patients, a list of patients will be displayed.<br>
+		<b>Step 4: </b>To select the right patient, click on the button&nbsp;<button><img <?php echo createComIcon('../','post_discussion.gif','0') ?>></button> corresponding to it.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Como bloquear uma cama?</b></font>
-<ul> <b>Passo 1: </b>Clique em "<span style="background-color:yellow" > <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> <font color="#0000ff">Bloqueie esta cama</font> </span>".<br>
-		<b>Passo 2: </b>Choose&nbsp;<button>OK</button> quando for perguntado por confirmação.<p>
+How to lock a bed?</b></font>
+<ul> <b>Step 1: </b>Click on the "<span style="background-color:yellow" > <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> <font color="#0000ff">Lock this bed</font> </span>".<br>
+		<b>Step 2: </b>Choose&nbsp;<button>OK</button> when asked for confirmation.<p>
 </ul>
-  <b>Nota: </b>Se você quiser cancelar, clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.</ul>
+  <b>Note: </b>If you want to cancel, click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.</ul>
   
-<?php endif ?>
-
-<?php if(($src!="assign")&&($src!="remarks")&&($src!="discharge")) : ?>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>O que significa "<span style="background-color:yellow" > <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> <font color="#0000ff">Bloqueado</font> </span>" ? </b></font>
-<ul> <b>Nota: </b>Isto significa que a cama está bloqueada e não pode ser assinalada a um paciente. Para desbloqueá-la, clique no botão "<span style="background-color:yellow" ><font color="#0000ff">Bloqueado</font></span>" and choose&nbsp;<button>OK</button>
-			quando for perguntado por confirmação.<br>
- <b>Nota: </b>Dependendo da configuração da versão do programa ou configurações de setup, para desfazer o bloqueamento de uma cama pode ser necessário uma senha.</ul>
-
-<?php endif ?>
-
-<a name="pic"></a>
-<font face="Verdana, Arial" size=2>
-<b>
-<p><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000">Como exibir a foto de identificação de um paciente?</font></b><p>
-<font face="Verdana, Arial" size=2>
-<ul>
-<b>Passo:</b> Clique no ícone <img <?php echo createComIcon($root_path,'spf.gif','0'); ?>> ou  <img <?php echo createComIcon($root_path,'spm.gif','0'); ?>> .<p>
-<img src="../help/en/img/en_ambulatory_sex.png" border=0 width=434 height=84>
+<?php elseif($src=="remarks") : ?>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
+How to write remarks or notes about the patient?</b></font>
+<ul> <b>Step 1: </b>Click on the text entry field.<br>
+		<b>Step 2: </b>Type your remarks or notes<br>
 </ul>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
+I am finished writing. How to save the remarks or notes?</b></font>
+<ul> 	<b>Step 1: </b>Click the button <input type="button" value="Save"> to save.<p>
+</ul>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
+I have saved the remarks. How to close the window?</b></font>
+<ul> 	<b>Step 1: </b>Click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle"> to close the window.<p>
+</ul>
+<?php elseif($src=="discharge") : ?>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
+How to discharge a patient?</b></font>
+<ul> <b>Step 1: </b>Select the type of dischargeal by clicking on its corresponding button<br>
+	<ul><br>
+		<input type="radio" name="relart" value="reg" checked> Regular dischargeal<br>
+                 	<input type="radio" name="relart" value="self"> Patient left the hospital on his own will<br>
+                 	<input type="radio" name="relart" value="emgcy"> Emergency dischargeal<br>  <br>
+	</ul>
+		<b>Step 2: </b>Type additional notice or notes about the dischargeal in the "<span style="background-color:yellow" > Notice: </span>" field if available. <br>
+		<b>Step 3: </b>Type your name in the "<span style="background-color:yellow" > Nurse: <input type="text" name="a" size=20 maxlength=20></span>" field if it is empty. <br>
+		<b>Step 4: </b>Check the " <span style="background-color:yellow" ><input type="checkbox" name="d" value="d"> Yes, I'm sure. discharge the patient. </span>" field. <br>
+		<b>Step 5: </b>Click the button <input type="button" value="discharge"> to discharge the patient.<p>
+		<b>Step 6: </b>Click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle"> to go back to the ward's new occupancy list.<p>
+</ul>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
+I tried clicking the <input type="button" value="discharge"> button, but there is no response. Why?</b></font>
+<ul> <b>Note: </b>The following checkbox field must be checked and look like this: <br>
+ " <span style="background-color:yellow" ><input type="checkbox" name="d" value="d" checked> Yes, I'm sure. discharge the patient. </span>". <p>
+		<b>Step 1: </b>Click the checkbox if it is not checked.<p>
+</ul>
+  <b>Note: </b>If you want to cancel, click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.</ul>
 
+<?php endif ?>
+<?php if(($src!="assign")&&($src!="remarks")&&($src!="discharge")) : ?>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>What does this "<span style="background-color:yellow" > <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> <font color="#0000ff">Locked</font> </span>" mean? </b></font>
+<ul> <b>Note: </b>This means that the bed is locked and cannot be assigned to a patient. To unlock it, click on the "<span style="background-color:yellow" ><font color="#0000ff">Locked</font></span>" and choose&nbsp;<button>OK</button>
+			when asked for confirmation.<br>
+ <b>Note: </b>Depending on the program's version or setup configurations, undoing a locked bed might require a password.</ul>
+
+<?php endif ?>
 
 </form>
 

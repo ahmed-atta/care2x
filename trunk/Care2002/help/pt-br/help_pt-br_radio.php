@@ -1,11 +1,11 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
-Radiologia Raio X - 
+Radiology Xray - 
 <?php
 
 if($src=="search")
 {
-	print "Pesquisar um paciente";	
+	print "Search a patient";	
 }
 
  ?>
@@ -16,35 +16,35 @@ if($src=="search")
 
 <?php if($src=="search") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Como pesquisar um paciente?</b>
+How to search for a  patient?</b>
 </font>
 	
 	<ul>       	
- 	<b>Passo 1: </b>Insira uma informação completa ou os primeiros dígitos do númenro do paciente, ou nome de família, 
-	ou primeiro nome no campo correspondente. <br>
- 	<b>Passo 2: </b>Clique no botão <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> para iniciar a pesquisa pelo paciente.<p> 
+ 	<b>Step 1: </b>Enter either a complete information or the first few digits of the patient's number, or family name, 
+	or given name in the corresponding field. <br>
+ 	<b>Step 2: </b>Click the button <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> to start searching for the patient.<p> 
 <ul>       	
- 	<b>Nota: </b>Se a pesquisa encotrar um resultado, uma lista será exibida. <p>
+ 	<b>Note: </b>If the search delivers a result,  a list will be displayed. <p>
 	</ul>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Como fazer uma visualização prévia do filme do Raio X do paciente e seu diagnóstico?</b>
+How to preview a patient's xray film and its diagnos?</b>
 </font>
 	
 	<ul>       	
- 	<b>Passo 1: </b>Clique no link ou no botão rádio "<span style="background-color:yellow" > <font color="#0000cc">Visualizar/Diagnóstico</font> <input type="radio" name="d" value="a"> </span>".<br>
-	A miniatura do filme do Raio X irá ser exibido no quadro esquerdo abaixo.<br> 
-	O diagnóstico do filme do Raio X será exibido no quadro direito abaixo.<br> 
+ 	<b>Step 1: </b>Click the link or radio button "<span style="background-color:yellow" > <font color="#0000cc">Preview/Diagnosis</font> <input type="radio" name="d" value="a"> </span>".<br>
+	The xray film's thumbnail will appear on the lower left frame.<br> 
+	The xray film's diagnosis will appear on the lower right frame.<br> 
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Como exibir o filme de Raio X do paciente em tela inteira?</b>
+How to display patient's xray film in full view?</b>
 </font>
 	<ul>       	
- 	<b>Step 1: </b>Clique no botão  <img <?php echo createComIcon('../','torso.gif','0') ?>> correspondente ao paciente para escolher entre tela inteira ou não.<br>
+ 	<b>Step 1: </b>Click the  <img <?php echo createComIcon('../','torso.gif','0') ?>> button corresponding to the patient to switch over to full screen mode.<br>
 </ul>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> 
 <ul>       	
- Se você decidir fechar clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
+ If you decide to close click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
 <?php endif ?>
 

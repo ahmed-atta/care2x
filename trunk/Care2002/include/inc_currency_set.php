@@ -16,7 +16,10 @@ if($dblink_ok)
  {
   	$new_main_currency=0;
 
-       $sql="UPDATE care_currency SET status='main', modify_id='".$HTTP_COOKIE_VARS['ck_cafenews_user'.$sid]."' WHERE item_no=".$new_main_item;
+       $sql="UPDATE care_currency SET status='main', 
+       		modify_id='".$HTTP_COOKIE_VARS['ck_cafenews_user'.$sid]."',
+		modify_time='".date('YmdHis')."'
+		WHERE item_no=".$new_main_item;
 
 	   $date_result= $db->Execute($sql);
 
@@ -25,7 +28,7 @@ if($dblink_ok)
 	  
   	      $new_main_currency=1;
       
-	      $sql="UPDATE care_currency SET status='' WHERE item_no=".$old_main_item;
+	      $sql="UPDATE care_currency SET status='',  modify_time='".date('YmdHis')."' WHERE item_no=".$old_main_item;
 	  
 	      $date_result=$db->Execute($sql);
       
@@ -41,7 +44,7 @@ if($dblink_ok)
 	
  } 
  
-  $sql="SELECT * FROM care_currency WHERE status<>'hidden'";
+  $sql="SELECT * FROM care_currency WHERE status<>'hidden' ORDER BY short_name";
   if($ergebnis=$db->Execute($sql))
   {
      $rows=$ergebnis->RecordCount();

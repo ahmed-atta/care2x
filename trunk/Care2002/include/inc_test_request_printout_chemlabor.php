@@ -398,6 +398,8 @@ for($n=0;$n<8;$n++)
 	
 <table border=0 cellpadding=0 cellspacing=0 width=745 bgcolor="<?php echo $bgc1 ?>">
  <?php
+# Start buffering output
+ob_start();
  
     $tdcount=0; /* $tdcount limits the number of  columns (7) for test elements */
 	
@@ -407,18 +409,18 @@ for($n=0;$n<8;$n++)
 	  <tr class="lab">';
 	  
 	   /* If test element is part of emergency program change bgcolor */
-	   if(eregi("_emx_",$x)) $tdbgcolor='bgcolor="#f9def9"'; else  $tdbgcolor="";
-	   
-	  if(eregi("tx_",$x))
+
+	   if(strpos($x,"_emx_")!==FALSE) $tdbgcolor='bgcolor="#f9def9"'; else  $tdbgcolor="";
+
+	  if(strpos($x,"tx_")!==FALSE)
 	  {
 	    echo '
 		                  <td bgcolor="#ee6666" width=104 colspan=2><font color="white">&nbsp;<b>'.$v.'</b></font></td>';
-	  }
-	  else
+	  }	 else
 	  {
 		 
 		 
-	     if(eregi("_x_",$x)) /* Check if the element has two marker fields */
+	     if(strpos($x,"_x_")!==FALSE) /* Check if the element has two marker fields */
 		 {
 		    $elem_index=explode("_x_",$x);
 			
@@ -495,7 +497,8 @@ for($n=0;$n<8;$n++)
 			echo $v.'</td>';
 			
 		   /* Check for the code of telephone then show telephone icon*/
-		   if(eregi("_telx_",$x))
+
+		   if(strpos($x,"_telx_")!==FALSE)
 		   {
 		      echo '
 			          <td align="right" '.$tdbgcolor.'><img '.createComIcon($root_path,'violet_phone.gif').'></td>';
@@ -526,6 +529,7 @@ for($n=0;$n<8;$n++)
 		 $tdcount++;
 	   }
 	}
+ob_end_flush();
 ?>
   <tr>
     <td colspan=9>&nbsp;<font size=2 face="verdana,arial" color="black"><?php if($stored_request['doctor_sign']) echo stripslashes($stored_request['doctor_sign']); ?></td>

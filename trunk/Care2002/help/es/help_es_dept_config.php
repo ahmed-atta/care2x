@@ -4,17 +4,20 @@
 <font size=2 face="verdana,arial" >
 
 <form>
-<font size=2 face="verdana,arial" >
-<a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-¿Cómo veo la información detallada de un departamento?</b></font>
-<ul> 
-	<b>Paso: </b>Dé clic al nombre del Departamento.<p>
-</ul>
-
-<a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-¿Cómo cambio el status de un Departamento?</b></font>
-<ul> 
-	<b>Paso: </b>Dé clic al enlace "Cambiar" del Departamento.<p>
+  <font size=2 face="verdana,arial" > <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>><strong><font color="990000"> 
+  </font></strong></a><font color="990000"><strong>¿Cómo veo la información detallada 
+  de un departamento?</strong></font></font> 
+  <ul>
+    <b>Paso: </b><font size="2" face="Verdana, Arial, Helvetica, sans-serif">Dé 
+    clic al nombre del Departamento.</font>
+  </ul>
+  <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
+  </a> <font color="990000"><strong>¿Cómo cambio el status de un Departamento? 
+  </strong></font></font> 
+  <ul>
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso: </b>Dé clic al 
+    enlace "Cambiar" del Departamento.</font>
+    <p>
 </ul>
 </form>
 

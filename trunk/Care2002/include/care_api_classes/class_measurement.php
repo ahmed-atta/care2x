@@ -9,8 +9,8 @@ require_once($root_path.'include/care_api_classes/class_core.php');
 *  Measurement methods. 
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
-* @version deployment 1.1 (mysql) 2004-01-11
-* @copyright 2002,2003,2004,2004 Elpidio Latorilla
+* @version beta 2.0.0
+* @copyright 2002,2003,2004,2005 Elpidio Latorilla
 * @package care_api
 */
 class Measurement extends Core {
@@ -105,7 +105,7 @@ class Measurement extends Core {
 	function getAllMsrTypes(){
 	    global $db;
 	
-	    if ($this->result=$db->Execute("SELECT nr,type,name,LD_var FROM $this->tb_msr_types WHERE 1")) {
+	    if ($this->result=$db->Execute("SELECT nr,type,name,LD_var AS \"LD_var\" FROM $this->tb_msr_types")) {
 		    if ($this->result->RecordCount()) {
 		        return $this->result->GetArray();
 			} else {
@@ -131,9 +131,10 @@ class Measurement extends Core {
 	* @param boolean Flag for the return type. FALSE (default) = 2 dimensional array, TRUE = adodb record object.
 	* @return mixed 2 dimensional array or boolean
 	*/
-	function _getUnits($cond='1',$ret_obj=FALSE){
+	function _getUnits($cond='',$ret_obj=FALSE){
 	    global $db;
-		$this->sql="SELECT nr,unit_type_nr,id,name,LD_var  FROM $this->tb_units WHERE $cond";
+		$this->sql="SELECT nr,unit_type_nr,id,name,LD_var AS \"LD_var\"  FROM $this->tb_units";
+		if(!empty($cond)) $this->sql.=" WHERE $cond";
 	    if ($this->res['_gunits']=$db->Execute($this->sql)) {
 		    if ($this->rec_count=$this->res['_gunits']->RecordCount()) {
 				if($ret_obj) return $this->res['_gunits'];

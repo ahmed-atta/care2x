@@ -56,6 +56,10 @@ class Access extends Core {
 	*/
 	var $lock_status=FALSE;
 	/**
+	* Internal buffer for the login id (username)
+	*/
+	var $login_id;
+	/**
 	* Constructor. If login and password are passed as parameters, the access data are immediately loaded.
 	*
 	* For example:
@@ -74,9 +78,10 @@ class Access extends Core {
 	*/
 	function Access($login='',$pw=''){
 		$this->coretable=$tb_user;
+		$this->login_id =$login;
 		if(!empty($login)&&!empty($pw)){
 			return $this->loadAccess($login,$pw);
-		}else{return FALSE;}
+		}
 	}
 	
 	/**
@@ -167,13 +172,22 @@ class Access extends Core {
 		return !$this->lock_status;
 	}
 	/**
-	* Returns the user's name. 
+	* Returns the user's registered name.
 	* Use only after the access data was loaded by the constructor or loadAccess() method.
 	* @access public
-	* @return string 
+	* @return string
 	*/
 	function Name(){
 		return $this->user['name'];
+	}
+	/**
+	* Returns the user's login name ( login username ).
+	* Use only after the access data was loaded by the constructor or loadAccess() method.
+	* @access public
+	* @return string
+	*/
+	function LoginName(){
+		return $this->user['login_id'];
 	}
 	/**
 	* Returns the permission areas of the user. No interpretation is returned.
@@ -239,4 +253,87 @@ class Access extends Core {
 			return FALSE;           // otherwise the user has no access permission in the area, return false
 		}
 	}
+	/**
+	*  Checks the  data if user exists based on his username (login id)
+	*
+	* @public
+	* @param string Username or login id
+	* @return mixed adodb record or boolean FALSE
+	*/
+	function UserExists($login_id){
+		global $db;
+		if(!empty($login_id)) $this->login_id=$login_id;
+			elseif(empty($this->login_id)) return FALSE;
+
+		$this->sql="SELECT * FROM care_users WHERE login_id='".addslashes($this->login_id)."'";
+
+		if ($this->res['_ud']=$db->Execute($this->sql)) {
+			if ($this->res['_ud']->RecordCount()) {
+				$this->user = $this->res['_ud']->FetchRow();
+				$this->lock_status = $this->user['lockflag'];
+				return TRUE;
+			} else {
+				$this->usr_status=FALSE;
+				return false;
+			}
+		} else {
+			$this->usr_status=FALSE;
+			return false;
+		}
+	}
+	/**
+	*  Changes the lock status of the user
+	*
+	* @private
+	* @param boolean
+	* @return boolean
+	*/
+	function _changelock($newlockflag=0){
+		$this->sql="UPDATE $this->tb_user SET lockflag='$newlockflag' WHERE login_id='$this->login_id'";
+		return $this->Transact($this->sql);
+	}
+	/**
+	*  Locks access permission of the user
+	*
+	* @public
+	* @return boolean
+	*/
+	function Lock(){
+		return $this->_changelock(1);
+	}
+	/**
+	*  UNlocks access permission of the user
+	*
+	* @public
+	* @return boolean
+	*/
+	function UnLock(){
+		return $this->_changelock(0);
+	}
+	/**
+	*  Deletes the user if exists based on his username (login id)
+	*
+	* @public
+	* @param string Username or login id
+	* @return mixed adodb record or boolean FALSE
+	*/
+	function Delete($login_id){
+		global $db;
+		if(!empty($login_id)) $this->login_id=$login_id;
+			elseif(empty($this->login_id)) return FALSE;
+
+		$this->sql="DELETE FROM $this->tb_user  WHERE login_id='$this->login_id'";
+
+		if ($this->Transact($this->sql)) {
+			$this->user = NULL;
+			$this->allowedareas = NULL;
+			$this->usr_status=FALSE;
+			$this->pw_status=FALSE;
+			$this->lock_status=FALSE;
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
 }
+?>

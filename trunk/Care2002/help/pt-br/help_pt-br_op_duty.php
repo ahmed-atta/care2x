@@ -13,15 +13,15 @@
 <?php
 	switch($src)
 	{
-		case "show": print "Enfermeiros de plantão - Plano de trabalho";
+		case "show": print "Nurses on duty - Dutyplan";
 							break;
-		case "quick": print "Enfermeiros de plantão - Visão rápida";
+		case "quick": print "Nurses on duty - Quickview";
 							break;
-		case "plan": print "Enfermeiros de plantão - Criar plano de trabalho";
+		case "plan": print "Nurses on duty - Create dutyplan";
 							break;
-		case "personlist": print "Criar uma lista de pessoal";
+		case "personlist": print "Create personnel list";
 							break;
-		case "dutydoc": print "Enfermeiros de plantão - Documentando trabalho executado em horário de plantão";
+		case "dutydoc": print "Nurses on duty - Documenting work done on duty hours";
 							break;
 	}
 ?>
@@ -30,138 +30,137 @@
 <p>
 
 <?php if($src=="quick") : ?>
-<p><font color="#990000" face="Verdana, Arial">O que eu posso fazer aqui?</font></b><p>
+<p><font color="#990000" face="Verdana, Arial">What can I do here?</font></b><p>
 <font face="Verdana, Arial" size=2>
-<img <?php echo createComIcon('../','update.gif','0','absmiddle') ?>><b> Obter informação adicional (se disponível) sobre os enfermeiros de plantão.</b>
-<ul>Para ver a informação adicional, <span style="background-color:yellow" >clique no nome</span> da
-pessoa sa lista. Uma janela aparecerá mostrando infromação relevante.</ul><p>
-<img <?php echo createComIcon('../','update.gif','0','absmiddle') ?>><b> Veja o plano de trabalho para o mes inteiro.</b>
-<ul>Para exibir o plano de trabalho para o mes inteiro, clique no ícone correspondente &nbsp;<button><img <?php echo createComIcon('../','new_address.gif','0','absmiddle') ?>> <font size=1>Mostre</font></button>.<br>
-			O plano de trabalho será exibido.</ul><p>
+<img <?php echo createComIcon('../','update.gif','0','absmiddle') ?>><b> Get additional information (if available) on the nurses on duty.</b>
+<ul>To see the additional information, <span style="background-color:yellow" >click on the name</span> of the
+person on the list. A small pop-up window will appear showing relevant information.</ul><p>
+<img <?php echo createComIcon('../','update.gif','0','absmiddle') ?>><b> See the duty plan for the whole month.</b>
+<ul>To display the duty plan for the whole month, click on the corresponding icon &nbsp;<button><img <?php echo createComIcon('../','new_address.gif','0','absmiddle') ?>> <font size=1>Show</font></button>.<br>
+			The duty plan will be displayed.</ul><p>
 <font face="Verdana, Arial" size=3 color="#990000">
-<p><b>O que o visão rápida irá exibir?</b></font></b><p>
+<p><b>What does the quickview display want me to show?</b></font></b><p>
 <font face="Verdana, Arial" size=2>
-</b><li><b>Departamento OR</b> :<ul>A lista dos departamentos existentes que tem médicos/cirurgiões de prontidão e/ou em plantão.</ul><p>
-<li><b>Prontidão </b> :<ul>O enfermeiro de prontidão.</ul><p>
-<li><b>Bip/Telefone</b> :<ul>Informação de bip/telefone do enfermeiro de prontidão</ul>
-<li><b>Sobre-aviso </b> :<ul>O enfermeiro de sobre-aviso.</ul><p>
-<li><b>Bip/Telefone</b> :<ul>Informação de Bip/Telefone de quem está de sobre-aviso.</ul><p>
-<li><b>Plano de trabalho</b> :<ul>Ícone clicável. Faz o link ao plano de trabalho do departamento para o mes inteiro. Clique no ícone&nbsp;<button><img <?php echo createComIcon('../','new_address.gif','0','absmiddle') ?>> <font size=1>Show</font></button>
-			se você quiser abrir o plano de trabalho para o mes inteiro e eventualmente criar ou editar o plano de trabalho.</ul>
+</b><li><b>OR Department</b> :<ul>The list of existing departments which have physicians/surgeons on standby and/or oncall duty.</ul><p>
+<li><b>Standby </b> :<ul>The nurse on standby duty.</ul><p>
+<li><b>Beeper/Phone</b> :<ul>Beeper and phone information of the nurse on standby duty.</ul>
+<li><b>On-call </b> :<ul>The nurse on on-call duty.</ul><p>
+<li><b>Beeper/Phone</b> :<ul>Beeper and phone information of the on-call duty.</ul><p>
+<li><b>Duty plan</b> :<ul>Clickable icon. Link to the department's duty plan for the whole month. Click the icon&nbsp;<button><img <?php echo createComIcon('../','new_address.gif','0','absmiddle') ?>> <font size=1>Show</font></button>
+			if you want to open the duty plan for the whole month and evetually create or edit the duty plan.</ul>
 
 <?php endif ?>
 <?php if($src=="show") : ?>
 <p>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Eu quero criar um novo plano de trabalho para o mes que está sendo exibido</b></font>
-<ul> <b>Passo 1: </b>Clique no botão  <img <?php echo createLDImgSrc('../','newplan.gif','0') ?>> .<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I want to create a new duty plan for the displayed month</b></font>
+<ul> <b>Step 1: </b>Click the button <img src="../img/en/en_newplan.gif" border=0 >.<br>
 </ul>
-<ul><b>Passo 2:</b>
- Se você estiver logado e tem direito de acesso a esta função, o 
-		modo de edição para o plano de trabalho  aparecerá na tela principal.<br>
-		De outro modo, você será solicitado a entrar com seu nome de usuário e senha. <p>
-		Entre com seu nome de usuário e senha e clique no botão <img <?php echo createLDImgSrc('../','continue.gif','0') ?>>.<p>
-		Se você quiser cancelar, clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
+<ul><b>Step 2:</b>
+ If you have logged in before and you have an access right for this function, the 
+		edit mode for editing a duty plan  will appear on the main frame.<br>
+		Otherwise, if you are not logged in, you will be required to enter your username and password. <p>
+		Enter your username and password and click the button <img <?php echo createLDImgSrc('../','continue.gif','0') ?>>.<p>
+		If you decide to cancel click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Eu quero to criar um plano para um certo mes, mas o plano que está sendo exibido é para um mes diferente.</b></font>
-<ul> <b>Passo 1: </b>Clique repetidamente no link clicável "Mes" até que o mes que você quer apareça. <br>
-								Clique à direita do link clicável "mes" para avançar o mes.<br>
-								Clique à esquerda do link clicável "mes" para retroceder o mes.<br>
-		<b>Passo 2: </b>Siga as instruções anteriores para criar um novo plano de trabalho.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I want to create a plan for a certain month but the plan being displayed is for a different month.</b></font>
+<ul> <b>Step 1: </b>Click repeatedly on the clickable "Month" link until the month you wish is reached. <br>
+								Click on the right clickable "month" link to advance the month.<br>
+								Click on the left clickable "month" link to go back to earlier month.<br>
+		<b>Step 2: </b>Follow the earlier instructions on creating a new duty plan.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Eu quero voltar à visão rápida </b></font>
-<ul> <b>Passo 1: </b>Clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?> >.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I want to go back to the quick view </b></font>
+<ul> <b>Step 1: </b>Click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?> >.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Eu quero ver os números do bip e telefone dos enfermeiros de plantão </b></font>
-<ul> <b>Passo 1: </b><span style="background-color:yellow" >Clique no nome da pessoa</span>.  Uma janela aparecerá mostrando as informações relevantes.<br>
-<u1>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I want to see the phone & beeper numbers of the nurses on duty </b></font>
+<ul> <b>Step 1: </b><span style="background-color:yellow" >Click on the person's name</span>.  A small pop-up window will appear showing relevant information.<br>
+</ul>
 
 
-<b>Nota</b>
-<ul> Se você decidir fechar o plano de trabalho  clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
+<b>Note</b>
+<ul> If you decide to close the duty plan  click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
 <?php endif ?>
 <?php if($src=="plan") : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Eu quero agendar um enfermeiro para plantão isando a lista de enfermeiros</b></font>
-<ul> <b>Passo 1: </b>Clique no botão &nbsp;<button><img <?php echo createComIcon('../','patdata.gif','0') ?>></button> do dia selecionado para abrir a lista de enfermeiros. <br>
-			Uma janela aparecerá mostrando a lista de enfermeiros.<br>
+I want to schedule a nurse for duty using the nurses' list</b></font>
+<ul> <b>Step 1: </b>Click on the button &nbsp;<button><img <?php echo createComIcon('../','patdata.gif','0') ?>></button> of the selected day to open the nurses' list. <br>
+			A small pop-up window will appear showing the list of nurses.<br>
 			<ul type=disc>
-			<li>Clique no ícone na coluna da esquerda "Prontidão" para agendar um plantão em prontidão.<br>
-			<li>Clique no ícone na coluna da direita "On-call" para agendar um sobre-aviso de plantão.
+			<li>Click the icon on the left "Standby" column to schedule a standby duty.<br>
+			<li>Click the icon on the right "On-call" column to schedule an on-call duty.
 			</ul>
-		<b>Passo 2: </b><span style="background-color:yellow" >Clique no nome do enfermeiro</span> para copiá-lo ao plano de trabalho.<br>
-		<b>Passo 3: </b>Se você clicou no nome errado, repita o passo 2 e clique no nome correto.<br>
-		<b>Passo 4: </b>Se você terminou, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> na janela da lista de enfermeiros.<br>
+		<b>Step 2: </b><span style="background-color:yellow" >Click the name of nurse</span> to copy it to the duty plan.<br>
+		<b>Step 3: </b>If you have clicked the wrong name, just repeat step 2 and hit the right name.<br>
+		<b>Step 4: </b>If you are finished, click the <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> button on the nurses' list window.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Eu quero entrar manualmente com o nome do enfermeiro no plano de trabalho</b></font>
-<ul> <b>Passo 1: </b>Clique no campo de entrada de texto "<input type="text" name="t" size=11 maxlength=4 >" do dia selecionado.<br>
-		<b>Passo 2: </b>Digite manualmente o nome do enfermeiro<br>
+I want to manually enter the nurse's name on the duty plan</b></font>
+<ul> <b>Step 1: </b>Click on the text input field "<input type="text" name="t" size=11 maxlength=4 >" of the selected day.<br>
+		<b>Step 2: </b>Type manually the name of the nurse<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Eu quero apagar um nome do plano de trabalho</b></font>
-<ul> <b>Passo 1: </b>Clique no campo de entrada de texto "<input type="text" name="t" size=11 maxlength=4 value="Nome">" do nome a ser apagado.<br>
-		<b>Passo 2: </b>Apague manualmente o nome, usando as teclas backspace ou delete do teclado.<br>
+I want to delete a name on the duty plan</b></font>
+<ul> <b>Step 1: </b>Click on the text input field "<input type="text" name="t" size=11 maxlength=4 value="Name">" of the name to be deleted.<br>
+		<b>Step 2: </b>Delete the name manually using keyboard's backspace or delete keys.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Eu quero salvar o plano de trabalho</b></font>
-<ul> <b>Passo 1: </b>clique no botão <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> .<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I want to save the duty plan</b></font>
+<ul> <b>Step 1: </b>click the <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> button.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Eu salvei o plano e desejo terminar o planejamento, o que devo fazer? </b></font>
-<ul> <b>Passo 1: </b>Se você terminou, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> . <br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I have saved the plan and wish to end the planning, what should I do? </b></font>
+<ul> <b>Step 1: </b>If you are finished, click the <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> button. <br>
 </ul>
 </font>
 <?php endif ?>
 <?php if($src=="personlist") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-O departamento exibido está errado. Eu quero mudar para o departamento certo.</b></font>
-<ul> <b>Passo 1: </b>Selecione o departamento no campo <nobr>"<span style="background-color:yellow" >Altere departamento ou sala OP: </span><select name="s">
-                                                                     	<option value="Departamento exemplo 1" selected> Departamento exemplo 1</option>
-                                                                     	<option value="Departamento exemplo 2"> Departamento exemplo 2</option>
-                                                                     	<option value="Departamento exemplo 3"> Departamento exemplo 3</option>
-                                                                     	<option value="Departamento exemplo 4"> Departamento exemplo 4</option>
-                                                                     </select>"</nobr> .
+The displayed department is wrong. I want to change to the right department.</b></font>
+<ul> <b>Step 1: </b>Select the department on the <nobr>"<span style="background-color:yellow" >Change department or OP room: </span><select name="s">
+                                                                     	<option value="Sample department 1" selected> Sample department 1</option>
+                                                                     	<option value="Sample department 2"> Sample department 2</option>
+                                                                     	<option value="Sample department 3"> Sample department 3</option>
+                                                                     	<option value="Sample department 4"> Sample department 4</option>
+                                                                     </select>"</nobr> field.
                                                                      <br>
-		<b>Passo 2: </b>Clique no botão <input type="button" value="Altere"> para alterar o departamento selecionado.
+		<b>Step 2: </b>Click the button <input type="button" value="Change"> to change to the selected department.
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Eu quero apagar um nome da lista</b></font>
-<ul> <b>Passo 1: </b>Clique no campo de entrada de texto "<input type="text" name="t" size=11 maxlength=4 value="Nome">" do nome a ser apagado.<br>
-		<b>Passo 2: </b>Apague manualmente o nome, usando as teclas backspace ou delete do teclado.<br>
+I want to delete a name on the list</b></font>
+<ul> <b>Step 1: </b>Click on the text input field "<input type="text" name="t" size=11 maxlength=4 value="Name">" of the name to be deleted.<br>
+		<b>Step 2: </b>Delete the name manually using keyboard's backspace or delete keys.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Eu quero salvar a lista de pessoal</b></font>
-<ul> <b>Passo 1: </b>clique no botão <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>>.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I want to save the personal list</b></font>
+<ul> <b>Step 1: </b>click the <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> button.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Eu salvei a lista e quero fechá-la,o que devo fazer? </b></font>
-<ul> <b>Passo 1: </b>Se você terminou, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> . <br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I have saved the list and wish to close it, what should I do? </b></font>
+<ul> <b>Step 1: </b>If you are finished, click the <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> button. <br>
 </ul>
 <?php endif ?>
 <?php if($src=="dutydoc") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Como documentar um trabalho feito durante o horário de plantão?</b></font>
-<ul> <b>Passo 1: </b>Entre com a data no campo " Data <input type="text" name="d" size=10 maxlength=10> ".<p>
-	<ul> <b>Dica: </b>Entre ou com "t" ou com "T" (significando HOJE) para automaticamente entrar com a data de hoje.<br>
-		<b>Dica: </b>Entre ou com "y" ou "Y" (significando ONTEM) para automaticamente entrar com a data de ontem.<p>
+How to document a work done during duty hours?</b></font>
+<ul> <b>Step 1: </b>Enter the date in the " Date <input type="text" name="d" size=10 maxlength=10> " field.<p>
+	<ul> <b>Tip: </b>Enter either "t" or "T" (meaning TODAY) to automatically enter today's date.<br>
+		<b>Tip: </b>Enter either "y" or "Y" (meaning YESTERDAY) to automatically enter yesterday's date.<p>
 		</ul>
-		<b>Passo 2: </b>Entre com o nome do enfermeiro de plantão no campo <nobr>"<span style="background-color:yellow" > Sobrenome, nome <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> .<br>
- <b>Passo 3: </b>Entre com o horário do início do trabalho no campo "<span style="background-color:yellow" > de <input type="text" name="d" size=5 maxlength=5> </span>" .<br>
- <b>Passo 4: </b>Entre com o horário do fim do trabalho no campo "<span style="background-color:yellow" > até <input type="text" name="d" size=5 maxlength=5> </span>" .<p>
-	<ul> <b>Dica: </b>Entre ou com "n" ou com "N" (significando AGORA) para automaticamente entrar com o horário atual.<p>
-		</ul>.<p>
+		<b>Step 2: </b>Enter the name of the nurse on duty in the <nobr>"<span style="background-color:yellow" > Family name, given name <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> field.<br>
+ <b>Step 3: </b>Enter the work's start time in the "<span style="background-color:yellow" > from <input type="text" name="d" size=5 maxlength=5> </span>" field.<br>
+ <b>Step 4: </b>Enter the work's end time in the "<span style="background-color:yellow" > to <input type="text" name="d" size=5 maxlength=5> </span>" field.<p>
+	<ul> <b>Tip: </b>Enter either "n" or "N" (meaning NOW) to automatically enter the current time.<p>
 		</ul>
- <b>Passo 5: </b>Entre com o número OR no campo "<span style="background-color:yellow" > Sala OP <input type="text" name="d" size=5 maxlength=5> </span>" .<br>
- <b>Passo 6: </b>Entre com o diagnóstico, terapia, ou operação no campo <nobr>"<span style="background-color:yellow" > Diagnóstico/Terapia <input type="text" name="d" size=5 maxlength=5> </span>"</nobr> .<br>
- <b>Passo 7: </b>Entre com o nome do enfermeiro de prontidão no campo <nobr>"<span style="background-color:yellow" > Prontidão: <input type="text" name="d" size=5 maxlength=5> </span>"</nobr> .<br>
- <b>Passo 8: </b>Entre com o nome do enfermeiro de serviço no campo <nobr>"<span style="background-color:yellow" > Em serviço: <input type="text" name="d" size=5 maxlength=5> </span>"</nobr> se necessário.<br>
- <b>Passo 1: </b>Clique no botão <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> para salvar o documento. <br>
+ <b>Step 5: </b>Enter the OR number in the "<span style="background-color:yellow" > OP Room <input type="text" name="d" size=5 maxlength=5> </span>" field.<br>
+ <b>Step 6: </b>Enter the diagnosis, therapy, or operation in the <nobr>"<span style="background-color:yellow" > Diagnosis/Therapy <input type="text" name="d" size=5 maxlength=5> </span>"</nobr> field.<br>
+ <b>Step 7: </b>Enter the standby nurse's name in the <nobr>"<span style="background-color:yellow" > Standby: <input type="text" name="d" size=5 maxlength=5> </span>"</nobr> field.<br>
+ <b>Step 8: </b>Enter the on-call nurse's name in the <nobr>"<span style="background-color:yellow" > On call: <input type="text" name="d" size=5 maxlength=5> </span>"</nobr> field if necessary.<br>
+ <b>Step 1: </b>Click the <input type="button" value="Save"> button to save the document. <br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Como imprimir o documento da lista?</b></font>
-<ul> <b>Passo 1: </b>Clique no botão <img <?php echo createLDImgSrc('../','printout.gif','0') ?>>  e a janela de impressão aparecerá.<br>
-	<b>Passo 2: </b>Siga as instruções da janela de impressão.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>How to print out the document list?</b></font>
+<ul> <b>Step 1: </b>Click the <input type="button" value="Print"> button and the print window will pop up.<br>
+	<b>Step 2: </b>Follow the instructions in the print window.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Eu salvei o documento e quero fechá-lo, o que devo fazer? </b></font>
-<ul> <b>Passo 1: </b>Se você terminou, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> . <br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I have saved the document and wish to close it, what should I do? </b></font>
+<ul> <b>Step 1: </b>If you are finished, click the <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> button. <br>
 </ul>
 <?php endif ?>
 

@@ -52,7 +52,7 @@ function setEventSignalColor($pn, $color, $status = SIGNAL_COLOR_LEVEL_FULL )
    	if($ergebnis=$db->Execute($sql))
    	{
    		if($ergebnis->RecordCount()){
-   			$sql='UPDATE '.$event_table.' SET '.$color.'="'.$status.'" WHERE encounter_nr="'.$pn.'"'; 
+   			$sql="UPDATE $event_table SET $color ='$status' WHERE encounter_nr=$pn";
 			$db->Execute($sql);
 			if(!$db->Affected_Rows()){
    				//echo $sql;

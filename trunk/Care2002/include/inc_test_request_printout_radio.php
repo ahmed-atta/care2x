@@ -17,7 +17,7 @@ if (!isset($subtarget) || !$subtarget) $subtarget=$target;
  <?php
         if($edit || $read_form)
         {
-		   echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid=$sid&lang=$lang&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
+		   echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
 		}
 		?></td>
       <td bgcolor="<?php echo $bgc1 ?>"  class=fva2_ml10><div   class=fva2_ml10><font size=5 color="#0000ff"><b><?php echo $formtitle ?></b></font>
@@ -126,7 +126,7 @@ if (!isset($subtarget) || !$subtarget) $subtarget=$target;
 		<font face="courier" size=2 color="#000000">
         <?php 
 		
-		            if($printmode && $stored_request['xray_date']!="0000-00-00")
+		            if($printmode && $stored_request['xray_date']!=DBF_NODATE)
 					{
 					  echo formatDate2Local($stored_request['xray_date'],$date_format); 
 					}
@@ -147,7 +147,7 @@ if (!isset($subtarget) || !$subtarget) $subtarget=$target;
 		<td colspan=2 align="right"><div class=fva2_ml10><font color="#000099">
 		 <?php echo $LDDate ?>&nbsp;<font face="courier" size=2 color="#000000">
         <?php 
-					 if($stored_request['results_date']!="0000-00-00") echo formatDate2Local($stored_request['results_date'],$date_format); 
+					 if($stored_request['results_date']!=DBF_NODATE) echo formatDate2Local($stored_request['results_date'],$date_format);
 				  ?>&nbsp;&nbsp;
 	   </font><font color="#000099">
   <?php echo $LDReportingDoc ?></font>&nbsp;<font color="#000000">

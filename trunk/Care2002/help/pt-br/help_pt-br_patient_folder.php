@@ -5,86 +5,81 @@
 <p><font size=2 face="verdana,arial" >
 
 <?php if($src=="") : ?>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>O que estas barras coloridas significam?</b> <img <?php echo createComIcon('../','colorcodebar3.gif','0') ?> ></font>
-<ul> <b>Nota: </b>Quando cada uma destas barras estiver visível, sinalizam a disponibilidade de uma informação particular, uma instrução, uma mundança, ou um pedido, etc.<br>
-			O significado das cores pode ser modificado para cada ala. <br>
-			A barra com a série cor-de-rosa na direita representa a aproximação do tempo quando uma instrução deve ser carregada.<br>
-			Por exemplo: a sexta cor-de-rosa significa a "sexta hora" ou "6:00", a 22a cor da barra significa a "vigésima segunda hora" ou "22:00".
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>What do these  <img <?php echo createComIcon('../','colorcodebar3.gif','0') ?> > color bars mean? </b></font>
+<ul> <b>Note: </b>Each of these color bars when "set visible" signalize the availability of a particular information, an instruction, a change, or a query, etc.<br>
+			The meaning of a color can be set for every ward. <br>
+			The series of pink color bars on the right represents the approximate time when an instruction is to be carried out.<br>
+			For example: the sixth pink color bar means "6th Hour" or "6 o'clock AM", the 22nd color bar means "22nd Hour" or "10 o'clock PM".
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-O que são os seguintes botões?</b></font>
-<ul> <input type="button" value="Gráfico de febre">
+What are these following buttons?</b></font>
+<ul> <input type="button" value="Fever chart">
 	<ul>
-		Este irá abrir o gráfico diário de febre do paciente. Você pode entrar, editar, ou deletar febre e dados BP no gráfico.<br>
-		Os campos de dados editáveis adicionais:
+		This will open the patient's daily fever chart. You can enter, edit, or delete fever and BP data in the chart.<br>
+		Additional editable data fields are:
 	<ul type="disc">
-	<li>Alergia<br>
-	<li>Plano de dieta diário<br>
-	<li>Diagnóstico principal/terapia<br>
-	<li>Diagnóstico diário/terapia<br>
-	<li>Notas, diagnósticos extras<br>
-	<li>Tp (Terapia física), Atg (ginástica anti-trombose), etc.<br>
-	<li>Anticoagulantes<br>
-	<li>Documentação diária para anticoagulantes<br>
-	<li>Medicação intravenosa & Bandage dressing<br> ??
-	<li>Documentação diária para medicação intravenosa<br>
-	<li>Notas<br>
-	<li>Medicação (list)<br>
-	<li>Documentação diária para medicação e dosagem<br>
+	<li>Allergy<br>
+	<li>Daily diet plan<br>
+	<li>Main diagnosis/therapy<br>
+	<li>daily diagnosis/therapy<br>
+	<li>Notes, extra diagnoses<br>
+	<li>Pt (Physical therapy), Atg (anti-thrombosis gymnastics), etc.<br>
+	<li>Anticoagulants<br>
+	<li>Daily documentation for anticoagulants<br>
+	<li>Intravenous medication & Bandage dressing<br>
+	<li>Daily documentation for intravenous medication<br>
+	<li>Notes<br>
+	<li>Medication (list)<br>
+	<li>Daily documentation for medication and dosage<br>
 	</ul>		
 	</ul>
-<input type="button" value="Relatório de enfermagem">
+<input type="button" value="Nursing report">
 	<ul>
-		Este irá abrir o formulário de relatório de enfermagem. Você pode documentar sua atividade de enfermagem, sua efetividade, observações, chamados, ou recomendações, etc.
+		This will open the nursing report form. You can document your nursing activity, its effectivity, observations, queries, or recommendations, etc.
 	</ul>
-	<input type="button" value="Ordens médicas">
+	<input type="button" value="Doctor's directives">
 	<ul>
-	O médico responsável irá inserir aqui suas instruções, medicação, dosagem, respostas aos chamados de enfermeiros, ou instruções para mudanças, etc.
+	The doctor in charge will enter here his instructions, medication, dosage, answers to nurses' queries, or instructions for changes, etc.
 	</ul>	
-	<input type="button" value="Relatórios de diagnóstico">
+	<input type="button" value="Diagnostic reports">
 	<ul>
-	Este armazena os relatórios de diagnósticos oriundos de diferentes clínicas de diagnóstico ou departamentos.
+	This stores the diagnostic reports coming from different diagnostic clinics or departments.
 	</ul>	
-<!-- 	<input type="button" value="Dados básicos">
+	<input type="button" value="Root data">
 	<ul>
-	Este armazena os dados básicos de pacientes e informações pessoais como nome, primeiro nome, etc. Esta é também a documentação inicial da
-	anamnese do paciente ou histórico médico que serve como fundamentação  para o plano de enfermagem individual.
+	This stores the patients root data and personal information like name, given name, etc. This is also the initial documentation of the
+	patient's anamnesis or medical history that serves as foundation for the individual nursing plan.
 	</ul>	
-	<input type="button" value="Plano de enfermagem">
+	<input type="button" value="Nursing Plan">
 	<ul>
-	Este é o plano individual de enfermagem. Você pode criar, editar, ou deletar o plano.
+	This is the individual nursing plan. You can create, edit, or delete the plan.
 	</ul>	
- -->	
- <input type="button" value="DRG">
+	<input type="button" value="Lab Reports">
 	<ul>
-	Abre a janela composta de DRG.
+	This stores both the medical and pathological laboratory reports.
 	</ul>	
- <input type="button" value="Relatórios de Laboratório">
+	<input type="button" value="Photos">
 	<ul>
-	Este armazena ambos relatórios médicos e de laboratórios patológicos.
-	</ul>	
-	<input type="button" value="Fotos">
-	<ul>
-	Este irá abrir o catálogo de fotos do paciente.
+	This will open the photo catalog of the patient.
 	</ul>	
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Qual é a função desta caixa de seleção  </b>	<select name="d"><option value="">Selecione a requisição de teste diagnóstico</option></select>?
+What is the function of this selection box </b>	<select name="d"><option value="">Select diagnostic test request</option></select>?
 </font>
-<ul>       	<b>Nota: </b>Este irá selecionar o formulário de requisição para um teste diagnóstico em particular.<br>
- 	<b>Passo 1: </b>Clique no <select name="d"><option value="">Selecione a requisição de teste diagnóstico</option></select>
+<ul>       	<b>Note: </b>This will select the request form for a particular diagnostic test.<br>
+ 	<b>Step 1: </b>Click on the <select name="d"><option value="">Select diagnostic test request</option></select>
                                                                      <br>
-		<b>Passo 2: </b>Clique na clínica escolhida, departamento, ou teste diagnostico.<br>
-		<b>Passo 3: </b>O formulário de requisição será automaticamente aberto.<br>
+		<b>Step 2: </b>Click on the chosen clinic, department, or diagnostic test.<br>
+		<b>Step 3: </b>The request form will be automatically opened.<br>
 </ul>
 <?php endif ?>
 
 <?php if($src=="labor") : ?>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>Não há relatório de laboratório disponível no momento. </b></font>
-<ul> Clique no botão  <input type="button" value="OK"> para voltar à pasta de dados do paciente.</ul>
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>There is no laboratory report available at the moment. </b></font>
+<ul> Click the button <input type="button" value="OK"> to go back to the patient's data folder.</ul>
 <?php else  : ?>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Como fechar a pasta de dados do paciente? </b></font>
-<ul> <b>Nota: </b>Se você decidir fechar, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle">.</ul>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>How to close the patient's data folder? </b></font>
+<ul> <b>Note: </b>If you want to close, click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle">.</ul>
 
 <?php endif ?>
 

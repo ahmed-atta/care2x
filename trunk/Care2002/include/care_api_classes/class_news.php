@@ -9,8 +9,8 @@ require_once($root_path.'include/care_api_classes/class_core.php');
 *  News methods. 
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
-* @version deployment 1.1 (mysql) 2004-01-11
-* @copyright 2002,2003,2004,2004 Elpidio Latorilla
+* @version beta 1.0.08
+* @copyright 2002,2003,2004,2005 Elpidio Latorilla
 * @package care_api
 */
 class News extends Core {
@@ -39,6 +39,13 @@ class News extends Core {
 	* @var array
 	*/
 	var $headnrs=array();
+	
+	/**
+	* Constructor
+	*/
+	function News(){
+		$this->coretable=$this->tb;
+	}
 	/**
 	* Gets a news item based on its primary key number.
 	*
@@ -158,8 +165,12 @@ class News extends Core {
 	*/			
 	function getNews($nr) {
 	    global $db;
-	
-	    if ($this->result=$db->Execute("SELECT nr,title,preface,body,pic_mime,art_num,author,publish_date,submit_date FROM $this->tb WHERE nr='$nr'")) {
+
+	    //$this->sql="SELECT nr,title,preface,body,pic_mime,art_num,author,publish_date,submit_date FROM $this->tb WHERE nr=$nr";
+	    $this->sql="SELECT * FROM $this->tb WHERE nr=$nr";
+		//echo $this->sql;
+
+	    if ($this->result=$db->Execute($this->sql)) {
 		    if ($this->result->RecordCount()) {
 		        return $this->result->FetchRow();
 			} else {
@@ -184,12 +195,12 @@ class News extends Core {
 	* @return mixed 2 dimensional array or boolean
 	*/			
 	function getHeadlinesPreview($dept_nr=0,$count) {
-	    global $db;
+	    global $db, $sql_LIKE;
 		
 		$i=1;
 		$today=date('Y-m-d');
 	
-		$str_sql="SELECT nr,title,preface,body,pic_mime FROM ".$this->tb." WHERE dept_nr=".$dept_nr;
+		$str_sql="SELECT nr,title,preface,body,pic_mime,pic_file FROM ".$this->tb." WHERE dept_nr=".$dept_nr;
 						
 		$stat_pending=" AND status<>'pending'";
 		$order_by_desc=" ORDER BY create_time DESC";
@@ -197,7 +208,7 @@ class News extends Core {
 		for($i=1;$i<=$count;$i++) 
 		{
 		    $sql=$str_sql." AND art_num='".$i."'";
-		    $publish_when=" AND publish_date LIKE '".$today."'";
+		    $publish_when=" AND publish_date $sql_LIKE  '".$today."'";
             if(defined('MODERATE_NEWS') && (MODERATE_NEWS==1)) {
 		 	    $sql.=$publish_when.$stat_pending;
             } else {
@@ -365,8 +376,12 @@ class News extends Core {
 	* @return mixed adodb record object or boolean
 	*/			
 	function saveNews($dept_nr=0, &$news) {
-	    global $db, $lang, $HTTP_SESSION_VARS;
-	    
+	    global $db, $lang, $HTTP_SESSION_VARS, $dbtype;
+	    //$db->debug=true;
+	    # Seed random gen
+	    srand();
+	    $imgfname=rand();
+	    $ts=date('YmdHis');
 		if(!$dept_nr){
 			$this->sql="No department number supplied!";
 			$this->error_msg=$this->sql;
@@ -383,6 +398,7 @@ class News extends Core {
 							body,
 							pic_mime,
 							art_num,
+							pic_file,
 							author,
 							submit_date,
 							publish_date,
@@ -399,17 +415,20 @@ class News extends Core {
 							'".addslashes($news['body'])."',
 							'".$news['pic_mime']."',
 							'".$news['art_num']."',
+							'".$imgfname."',
 							'".$news['author']."',
 							'".date('Y-m-d H:i:s')."',
 							'".$news['publish_date']."',
 							'".$HTTP_SESSION_VARS['sess_user_name']."',
 							'".$HTTP_SESSION_VARS['sess_user_name']."',
-							NULL
+							".$ts."
 							)";
-		 
-			if($this->result=$db->Execute($this->sql)) {
-           		return $db->Insert_ID();
+			//echo $this->sql."<p>";
+			if($this->result=$this->Transact($this->sql)) {
+				$pk =  $db->Insert_ID();
+				return $this->LastInsertPK('nr',$pk);
 			} else {return false;}
+
 		}
 	}
 	

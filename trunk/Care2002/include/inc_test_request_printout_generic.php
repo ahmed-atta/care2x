@@ -65,7 +65,7 @@ $formtitle=$abtname[$stored_request['testing_dept']];
 		<td ><div class=fva2_ml10><font color="#000099">
 		 <?php echo $LDDate ?>:
 		  <font face="verdana,arial,courier" size=2 color="#000000">
-		<?php if($stored_request['result_date']!="0000-00-00") echo formatDate2Local($stored_request['result_date'],$date_format); ?>
+		<?php if($stored_request['result_date'] != DBF_NODATE) echo formatDate2Local($stored_request['result_date'],$date_format); ?>
 		</font>
   </div></td>
 			<td align="right"><div class=fva2_ml10><font color="#000099">

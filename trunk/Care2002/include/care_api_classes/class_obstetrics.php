@@ -8,8 +8,8 @@ require_once($root_path.'include/care_api_classes/class_core.php');
 *  Obstetrics methods. 
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
-* @version deployment 1.1 (mysql) 2004-01-11
-* @copyright 2002,2003,2004 Elpidio Latorilla
+* @version beta 2.0.0
+* @copyright 2002,2003,2004,2005 Elpidio Latorilla
 * @package care_api
 */
 class Obstetrics extends Core {
@@ -259,7 +259,7 @@ class Obstetrics extends Core {
 	*/ 
 	function DiseaseCategories(){
 		global $db;
-		$this->sql="SELECT * FROM   $this->tb_diseases WHERE group_nr=2 AND status NOT IN ($this->dead_stat) ORDER BY nr"; # group_nr = 2 is Neonatal
+		$this->sql="SELECT *,LD_var AS \"LD_var\" FROM   $this->tb_diseases WHERE group_nr=2 AND status NOT IN ($this->dead_stat) ORDER BY nr"; # group_nr = 2 is Neonatal
         if($this->res['_dcat']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['_dcat']->RecordCount()) {
 				 return $this->res['_dcat'];
@@ -273,7 +273,7 @@ class Obstetrics extends Core {
 	*/ 
 	function FeedingTypes(){
 		global $db;
-		$this->sql="SELECT * FROM   $this->tb_feeds WHERE group_nr=2 AND status NOT IN ($this->dead_stat) ORDER BY nr"; # group_nr = 2 is Neonatal
+		$this->sql="SELECT *, LD_var AS \"LD_var\" FROM   $this->tb_feeds WHERE group_nr=2 AND status NOT IN ($this->dead_stat) ORDER BY nr"; # group_nr = 2 is Neonatal
         if($this->res['_feed']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['_feed']->RecordCount()) {
 				return $this->res['_feed'];
@@ -287,7 +287,7 @@ class Obstetrics extends Core {
 	*/ 
 	function Outcomes(){
 		global $db;
-		$this->sql="SELECT * FROM   $this->tb_outcomes WHERE group_nr=2 AND status NOT IN ($this->dead_stat) ORDER BY nr"; # group_nr = 2 is Neonatal
+		$this->sql="SELECT *,LD_var AS \"LD_var\" FROM   $this->tb_outcomes WHERE group_nr=2 AND status NOT IN ($this->dead_stat) ORDER BY nr"; # group_nr = 2 is Neonatal
         if($this->res['_outs']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['_outs']->RecordCount()) {
 				return $this->res['_outs'];
@@ -301,7 +301,7 @@ class Obstetrics extends Core {
 	*/ 
 	function DeliveryModes(){
 		global $db;
-		$this->sql="SELECT * FROM   $this->tb_dmodes WHERE group_nr=2 AND status NOT IN ($this->dead_stat) ORDER BY nr"; # group_nr = 2 is Neonatal
+		$this->sql="SELECT *, LD_var AS \"LD_var\" FROM   $this->tb_dmodes WHERE group_nr=2 AND status NOT IN ($this->dead_stat) ORDER BY nr"; # group_nr = 2 is Neonatal
         if($this->res['_dmodes']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['_dmodes']->RecordCount()) {
 				return $this->res['_dmodes'];
@@ -316,7 +316,7 @@ class Obstetrics extends Core {
 	*/ 
 	function deactivateBirthDetails($pid){
 		global $HTTP_SESSION_VARS;
-		$this->sql="UPDATE  $this->tb_neonatal SET status='inactive', history=CONCAT(history,'Deactivated ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n') WHERE pid=$pid"; 
+		$this->sql="UPDATE  $this->tb_neonatal SET status='inactive', history=".$this->ConcatHistory("Deactivated ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n")." WHERE pid=$pid"; 
 		return $this->Transact();
 	}
 	/**
@@ -328,7 +328,7 @@ class Obstetrics extends Core {
 	function getDiseaseCategory($nr){
 		global $db;
 		if(!$nr) return false;
-		$this->sql="SELECT * FROM   $this->tb_diseases WHERE group_nr=2 AND nr=$nr AND status NOT IN ($this->dead_stat)"; # group_nr = 2 is Neonatal
+		$this->sql="SELECT *, LD_var AS \"LD_var\" FROM   $this->tb_diseases WHERE group_nr=2 AND nr=$nr AND status NOT IN ($this->dead_stat)"; # group_nr = 2 is Neonatal
         if($this->res['_gdcat']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['_gdcat']->RecordCount()) {
 				 return $this->res['_gdcat']->FetchRow();
@@ -344,7 +344,7 @@ class Obstetrics extends Core {
 	function getFeedingType($nr){
 		global $db;
 		if(!$nr) return false;
-		$this->sql="SELECT * FROM   $this->tb_feeds WHERE group_nr=2 AND nr=$nr AND status NOT IN ($this->dead_stat)"; # group_nr = 2 is Neonatal
+		$this->sql="SELECT *,LD_var AS \"LD_var\" FROM   $this->tb_feeds WHERE group_nr=2 AND nr=$nr AND status NOT IN ($this->dead_stat)"; # group_nr = 2 is Neonatal
         if($this->res['_gfeed']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['_gfeed']->RecordCount()) {
 				return $this->res['_gfeed']->FetchRow();
@@ -360,7 +360,7 @@ class Obstetrics extends Core {
 	function getOutcome($nr){
 		global $db;
 		if(!$nr) return false;
-		$this->sql="SELECT * FROM   $this->tb_outcomes WHERE group_nr=2 AND nr=$nr AND status NOT IN ($this->dead_stat)"; # group_nr = 2 is Neonatal
+		$this->sql="SELECT *,LD_var AS \"LD_var\" FROM   $this->tb_outcomes WHERE group_nr=2 AND nr=$nr AND status NOT IN ($this->dead_stat)"; # group_nr = 2 is Neonatal
         if($this->res['_gout']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['_gout']->RecordCount()) {
 				return $this->res['_gout']->FetchRow();
@@ -376,7 +376,7 @@ class Obstetrics extends Core {
 	function getDeliveryMode($nr){
 		global $db;
 		if(!$nr) return false;
-		$this->sql="SELECT * FROM   $this->tb_dmodes WHERE group_nr=2 AND nr=$nr AND status NOT IN ($this->dead_stat)"; # group_nr = 2 is Neonatal
+		$this->sql="SELECT *,LD_var AS \"LD_var\" FROM   $this->tb_dmodes WHERE group_nr=2 AND nr=$nr AND status NOT IN ($this->dead_stat)"; # group_nr = 2 is Neonatal
         if($this->res['_gdmode']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['_gdmode']->RecordCount()) {
 				return $this->res['_gdmode']->FetchRow();
@@ -426,7 +426,7 @@ class Obstetrics extends Core {
 	*/ 
 	function deactivatePregnancy($nr){
 		global $HTTP_SESSION_VARS;
-		$this->sql="UPDATE  $this->tb_preg SET status='inactive', history=CONCAT(history,'Deactivated ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n') 
+		$this->sql="UPDATE  $this->tb_preg SET status='inactive', history=".$this->ConcatHistory("Deactivated ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n")."
 							WHERE nr=$nr"; 
 		return $this->Transact();
 	}
@@ -439,7 +439,7 @@ class Obstetrics extends Core {
 	function InductionMethods($grp=1){
 		global $db;
 		# Group nr. 1 = pregnancy group
-		$this->sql="SELECT * FROM   $this->tb_indmethod WHERE group_nr=$grp AND status NOT IN ($this->dead_stat) ORDER BY nr"; 
+		$this->sql="SELECT *,LD_var AS \"LD_var\" FROM   $this->tb_indmethod WHERE group_nr=$grp AND status NOT IN ($this->dead_stat) ORDER BY nr"; 
         if($this->res['_indm']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['_indm']->RecordCount()) {
 				return $this->res['_indm'];
@@ -456,7 +456,7 @@ class Obstetrics extends Core {
 		global $db;
 		if(!$nr) return false;
 		# Group nr. 1 = pregnancy group
-		$this->sql="SELECT * FROM   $this->tb_indmethod WHERE nr=$nr"; 
+		$this->sql="SELECT *,LD_var AS \"LD_var\" FROM   $this->tb_indmethod WHERE nr=$nr";
 		
         if($this->res['_gin']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['_gin']->RecordCount()) {
@@ -471,7 +471,7 @@ class Obstetrics extends Core {
 	*/ 
 	function Perineums(){
 		global $db;
-		$this->sql="SELECT * FROM   $this->tb_perineum WHERE status NOT IN ($this->dead_stat) ORDER BY nr"; 
+		$this->sql="SELECT *,LD_var AS \"LD_var\" FROM   $this->tb_perineum WHERE status NOT IN ($this->dead_stat) ORDER BY nr";
         if($this->res['_peri']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['_peri']->RecordCount()) {
 				return $this->res['_peri'];
@@ -487,7 +487,7 @@ class Obstetrics extends Core {
 	function getPerineum($nr=0){
 		global $db;
 		if(!$nr) return false;
-		$this->sql="SELECT * FROM   $this->tb_perineum WHERE nr=$nr"; 
+		$this->sql="SELECT *,LD_var AS \"LD_var\" FROM   $this->tb_perineum WHERE nr=$nr";
 		
         if($this->res['_gper']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['_gper']->RecordCount()) {
@@ -502,7 +502,7 @@ class Obstetrics extends Core {
 	*/ 
 	function Classifications(){
 		global $db;
-		$this->sql="SELECT * FROM   $this->tb_classif WHERE status NOT IN ($this->dead_stat) ORDER BY nr"; 
+		$this->sql="SELECT *,LD_var AS \"LD_var\" FROM   $this->tb_classif WHERE status NOT IN ($this->dead_stat) ORDER BY nr";
         if($this->res['classif']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['classif']->RecordCount()) {
 				return $this->res['classif'];
@@ -519,7 +519,7 @@ class Obstetrics extends Core {
 		global $db;
 		$this->rec_count=0;
 		if(!$nr) return false;
-		$this->sql="SELECT * FROM   $this->tb_classif WHERE nr=$nr"; 
+		$this->sql="SELECT *,LD_var AS \"LD_var\" FROM   $this->tb_classif WHERE nr=$nr";
         if($this->res['gclasif']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['gclasif']->RecordCount()) {
 				return $this->res['gclasif']->FetchRow();
@@ -534,7 +534,7 @@ class Obstetrics extends Core {
 	function AnaesthesiaTypes(){
 		global $db;
 		$this->rec_count=0;
-		$this->sql="SELECT * FROM   $this->tb_anest WHERE status NOT IN ($this->dead_stat) ORDER BY nr"; 
+		$this->sql="SELECT *,LD_var AS \"LD_var\" FROM   $this->tb_anest WHERE status NOT IN ($this->dead_stat) ORDER BY nr";
         if($this->res['anat']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['anat']->RecordCount()) {
 				return $this->res['anat'];
@@ -550,7 +550,7 @@ class Obstetrics extends Core {
 	function getAnaesthesia($nr=0){
 		global $db;
 		if(!$nr) return false;
-		$this->sql="SELECT * FROM   $this->tb_anest WHERE nr=$nr"; 
+		$this->sql="SELECT *,LD_var AS \"LD_var\" FROM   $this->tb_anest WHERE nr=$nr";
 		
         if($this->res['gana']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['gana']->RecordCount()) {
@@ -589,10 +589,10 @@ class Obstetrics extends Core {
 	* @return string
 	*/
 	function ChildNrAtParent($child_nr=0,$parent_nr=0){
-		global $db;
+		global $db, $sql_LIKE;
 		if(!$child_nr||!$parent_nr) return false;
 		if($this->EncounterPregnancyExists($parent_nr)){
-			$this->sql="SELECT encounter_nr FROM   $this->tb_preg WHERE encounter_nr=$parent_nr AND child_encounter_nr LIKE '%$child_nr%' AND status NOT IN ($this->dead_stat)"; 
+			$this->sql="SELECT encounter_nr FROM   $this->tb_preg WHERE encounter_nr=$parent_nr AND child_encounter_nr $sql_LIKE '%$child_nr%' AND status NOT IN ($this->dead_stat)";
 		
 			if($this->res['_cnbp']=$db->Execute($this->sql)) {
            		if($this->rec_count=$this->res['_cnbp']->RecordCount()) {
@@ -624,8 +624,8 @@ class Obstetrics extends Core {
 		{
 			case '_NO_CHILD': # Update
 				$this->sql="UPDATE $this->tb_preg 
-								SET child_encounter_nr=CONCAT(child_encounter_nr,' $child_nr'),
-										history=CONCAT(history,'Updated by child  ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n')
+								SET child_encounter_nr=".$this->ConcatFieldString('child_encounter_nr', '".$child_nr."').",
+										history=".$this->ConcatHistory("Updated by child  ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n")."
 								WHERE encounter_nr=$parent_nr AND status NOT IN ($this->dead_stat)";
 				return $this->Transact();
 				break; 
@@ -639,8 +639,6 @@ class Obstetrics extends Core {
 									delivery_mode,
 									outcome,
 									history,
-									modify_id,
-									modify_time,
 									create_id,
 									create_time
 									) 
@@ -652,8 +650,6 @@ class Obstetrics extends Core {
 									'".$birth['delivery_mode']."',
 									'".$birth['outcome']."',
 									'Created by child ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n',
-									'".$HTTP_SESSION_VARS['sess_user_name']."',
-									'".date('YmdHis')."',
 									'".$HTTP_SESSION_VARS['sess_user_name']."',
 									'".date('YmdHis')."')";
 				return $this->Transact();

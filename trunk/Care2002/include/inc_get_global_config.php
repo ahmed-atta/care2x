@@ -1,6 +1,6 @@
 <?php
 
-	    $sql='SELECT type,value FROM care_config_global WHERE type LIKE "'.$config_type.'"';
+	    $sql="SELECT type,value FROM care_config_global WHERE type LIKE '$config_type'";
 	 //   $sql='SELECT type,value FROM care_config_global';
 
 	    $global_result=$db->Execute($sql);

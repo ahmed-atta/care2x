@@ -25,7 +25,7 @@ function getDateFormat()
     if($dblink_ok)
     {
 	 
-	    $sql='SELECT value AS date_format FROM care_config_global WHERE type="date_format"';
+	    $sql="SELECT value AS date_format FROM care_config_global WHERE type='date_format'";
 	  
         if($result=$db->Execute($sql)) {
 
@@ -209,7 +209,7 @@ function convertTimeToStandard($time_val)
 
 /**
 * convertTimeLocal() will return a time in the local format 
-* param $time_val = the time value to be converted
+* param $time_val = the time value to be converted in HHxMMxSS, where x is the separator which will be converted to ":"
 * return = the time in the format HH:mm:ss
 */
 function convertTimeToLocal($time_val)

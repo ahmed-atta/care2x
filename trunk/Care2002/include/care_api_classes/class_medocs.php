@@ -9,8 +9,8 @@ require_once($root_path.'include/care_api_classes/class_notes.php');
 *  Medocs methods. Medocs = Textual documentation for diagnosis and therapy procedures as opposite of the DRG (code based documentation).
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
-* @version deployment 1.1 (mysql) 2004-01-11
-* @copyright 2002,2003,2004,2004 Elpidio Latorilla
+* @version beta 2.0.0
+* @copyright 2002,2003,2004,2005 Elpidio Latorilla
 * @package care_api
 */
 class Medocs extends Notes {
@@ -126,7 +126,7 @@ class Medocs extends Notes {
 		
         if($this->res['gmd']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['gmd']->RecordCount()) {
-				 return $this->res['gmd']->FetchRow();	 
+				 return $this->res['gmd']->FetchRow(); 
 			} else { return false; }
 		} else { return false; }
 	}

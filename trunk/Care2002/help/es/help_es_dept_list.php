@@ -4,10 +4,12 @@
 <font size=2 face="verdana,arial" >
 
 <form>
-<a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-¿Cómo puedo leer información detallada de un Departamento?</b></font>
-<ul> 
-	<b>Paso: </b>Dé clic al nombre del Departamento.<p>
+  <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>></a><font color="990000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong>¿Cómo 
+  puedo leer información detallada de un Departamento? </strong></font> 
+  <ul>
+    <b><font size="2" face="Verdana, Arial, Helvetica, sans-serif">Paso: </font></b><font size="2" face="Verdana, Arial, Helvetica, sans-serif">Dé 
+    clic al nombre del Departamento.</font>
+    <p>
 </ul>
 
 </form>

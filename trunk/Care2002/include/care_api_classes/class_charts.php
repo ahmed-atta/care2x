@@ -13,8 +13,8 @@ require_once($root_path.'include/care_api_classes/class_notes_nursing.php');
 *  Charts methods.
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance.
 * @author Elpidio Latorilla
-* @version deployment 1.1 (mysql) 2004-01-11
-* @copyright 2002,2003,2004 Elpidio Latorilla
+* @version beta 2.0.0
+* @copyright 2002,2003,2004,2005 Elpidio Latorilla
 * @package care_api
 */
 class Charts extends NursingNotes {
@@ -32,8 +32,9 @@ class Charts extends NursingNotes {
 	* Table name for prescription notes data
 	* @var string
 	*/
-	var $tb_presc_notes='care_encounter_prescription_notes';
-	/**
+	//var $tb_presc_notes='care_enc_prescnotes';
+    var $tb_presc_notes='care_encounter_prescription_notes';
+    /**
 	* Field names of care_encounter_measurement table
 	* @var array
 	*/
@@ -194,11 +195,11 @@ class Charts extends NursingNotes {
 		$this->ref_array=$this->fld_measure;
 		$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
 		$this->data_array['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
-		$this->data_array['create_time']='NULL';	
+		$this->data_array['create_time']=date('YmdHis');
 		$this->data_array['history']="Create: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
 	}
 	/**
-	* Saves a blood pressure data. 
+	* Saves a blood pressure data.
 	* Data must be contained in an associative array and passed by reference.
 	* @param array Data contained in an associative array. Reference pass.
 	* @access public
@@ -269,9 +270,9 @@ class Charts extends NursingNotes {
 		$this->_usePrescriptionTable();
 		$this->data_array=$data;
 		$this->data_array['prescribe_date']=date('Y-m-d');
-		$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		$this->data_array['modify_id']='';
 		$this->data_array['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
-		$this->data_array['create_time']='NULL';	
+		$this->data_array['create_time']=date('YmdHis');
 		$this->data_array['history']="Create: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
 		if($this->insertDataFromInternalArray()){
 			return true;
@@ -290,7 +291,8 @@ class Charts extends NursingNotes {
 		$this->data_array=$data;
 		if(isset($this->data_array['prescribe_date'])) unset($this->data_array['prescribe_date']);
 		$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-		$this->data_array['history']="CONCAT(history,'Update: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n')";
+        $this->data_array['modify_time']=date('YmdHis');
+		$this->data_array['history']=$this->ConcatHistory("Update: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
 		if($this->updateDataFromInternalArray($nr)){
 			return true;
 		}else{return false;}
@@ -299,7 +301,7 @@ class Charts extends NursingNotes {
 	* Stops or marks the end of prescription data based on the nr key.
 	* @param int Record number key
 	* @return boolean
-	*/			
+	*/
 	function EndPrescription($nr){
 		global $HTTP_SESSION_VARS;
 		$this->data_array=NULL;
@@ -307,7 +309,7 @@ class Charts extends NursingNotes {
 		$this->data_array['is_stopped']=1;
 		$this->data_array['stop_date']=date('Y-m-d');
 		$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-		$this->data_array['history']="CONCAT(history,'Ended: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n')";
+		$this->data_array['history']=$this->ConcatHistory("Ended: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
 		if($this->updateDataFromInternalArray($nr)){
 			return true;
 		}else{return false;}
@@ -316,10 +318,10 @@ class Charts extends NursingNotes {
 	* Gets all current prescription data based on the encounter_nr key.
 	* @param int Encounter number
 	* @return mixed adodb record object or boolean
-	*/			
+	*/
 	function getAllCurrentPrescription($enr){
 		global $db;
-		$this->sql="SELECT * FROM $this->tb_prescription WHERE encounter_nr=$enr AND NOT is_stopped ORDER BY nr";
+		$this->sql="SELECT * FROM $this->tb_prescription WHERE encounter_nr=$enr AND is_stopped IN ('',0) ORDER BY nr";
 		if($this->result=$db->Execute($this->sql)){
 			return $this->result;
 		}else{
@@ -336,7 +338,7 @@ class Charts extends NursingNotes {
 		global $db;
 		$this->sql="SELECT m.*,n.nr AS notes_nr,n.short_notes AS day_notes 
 							FROM $this->tb_prescription AS m LEFT JOIN $this->tb_presc_notes AS n ON m.nr=n.prescription_nr AND n.date='$date'
-							WHERE m.encounter_nr=$enr AND NOT m.is_stopped";
+							WHERE m.encounter_nr=$enr AND  m.is_stopped IN ('',0)";
 		//echo $this->sql;
 		if($this->result=$db->Execute($this->sql)){
 			return $this->result;
@@ -349,15 +351,15 @@ class Charts extends NursingNotes {
 	* Data must be contained in an associative array and passed by reference.
 	* @param array Data contained in an associative array. Reference pass.
 	* @return boolean
-	*/			
+	*/
 	function savePrescriptionNotesFromArray(&$data){
 		global $HTTP_SESSION_VARS;
 		$this->data_array=$data;
 		$this->coretable=$this->tb_presc_notes;
 		$this->ref_array=$this->fld_presc_notes;
-		$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		//$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
 		$this->data_array['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
-		$this->data_array['create_time']='NULL';	
+		$this->data_array['create_time']=date('YmdHis');
 		$this->data_array['history']="Create: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
 		if($this->insertDataFromInternalArray()){
 			return true;
@@ -376,7 +378,8 @@ class Charts extends NursingNotes {
 		$this->coretable=$this->tb_presc_notes;
 		$this->ref_array=$this->fld_presc_notes;
 		$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-		$this->data_array['history']="CONCAT(history,'Update: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n')";
+        $this->data_array['modify_time']=date('YmdHis');
+		$this->data_array['history']=$this->ConcatHistory("Update: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
 		if($this->updateDataFromInternalArray($nr)){
 			return true;
 		}else{return false;}
@@ -394,7 +397,7 @@ class Charts extends NursingNotes {
 	function _getChartDailyData($enr,$notes_id,$type_nr,$start,$end){
 		global $db;
 		$this->Notes(); # call Notes constructor to set the table and field names
-		$this->sql="SELECT date,$notes_id FROM $this->tb_notes WHERE encounter_nr=$enr AND type_nr=$type_nr AND date BETWEEN '$start' AND '$end' ORDER BY modify_time DESC";
+		$this->sql="SELECT date,$notes_id FROM $this->tb_notes WHERE encounter_nr=$enr AND type_nr=$type_nr AND date >= '$start' AND date <= '$end' ORDER BY modify_time DESC";
 		if($this->result=$db->Execute($this->sql)){
 			if($this->result->RecordCount()){
 				return true;
@@ -470,16 +473,16 @@ class Charts extends NursingNotes {
 	*/			
 	function getChartDailyPrescriptionNotes($enr,$start,$end){
 		global $db;
-		$this->sql="SELECT p.nr,n.date,n.short_notes,p.color_marker
-						FROM $this->tb_prescription AS p
-							LEFT JOIN $this->tb_presc_notes AS n  ON p.nr=n.prescription_nr  /* AND n.prescribed_date BETWEEN '$start' AND '$end' */
-						 WHERE p.encounter_nr=$enr AND NOT p.is_stopped ORDER BY p.nr";
-		if($this->result=$db->Execute($this->sql)){
+
+        $this->sql="SELECT p.nr,n.date,n.short_notes,p.color_marker
+                        FROM $this->tb_prescription AS p
+                            LEFT JOIN $this->tb_presc_notes AS n  ON p.nr=n.prescription_nr
+                         WHERE p.encounter_nr=$enr AND p.is_stopped IN ('',0) ORDER BY p.nr";
+        if($this->result=$db->Execute($this->sql)){
 			return $this->result;
 		}else{ //echo $this->sql;
 			return false;
 		}
 	}
-
 }
 ?>

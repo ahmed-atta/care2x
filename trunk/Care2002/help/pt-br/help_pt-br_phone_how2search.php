@@ -1,73 +1,56 @@
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Como
+<b>How to 
 <?php
-switch($x1)
+switch($src)
 {
- 	case "search": print 'pesquisa um número de telefone'; break;
-	case "dir": print 'abre toda a lista telefônica';break;
-	case "newphone": print 'insere uma nova informação de telefone';break;
+ 	case "search": print 'search for a phone number'; break;
+	case "dir": print 'open the entire directory';break;
+	case "newphone": print 'enter new phone information';break;
  }
  ?></b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
-<?php if($x1=="search") { ?>
-	<?php if($src=="newphone") { ?>
-	<b>Step 1</b>
-	<ul> Clique no botão <img <?php echo createLDImgSrc('../','such-gray.gif','0') ?>>.
-	</ul>
-	<?php } ?>
-<b>Passo <?php if($src=="newphone") print "2"; else print "1"; ?></b>
-
-<ul> Insira o campo "<span style="background-color:yellow" >Insira a palavra chave.</span>" com uma informação completa ou algumas letras, como por exemplo o hospital ou código do departamento, nome de família, ou primeiro nome,
-		ou o número do quarto.
-	<br>Exemplo 1: insira  "m9a" ou "M9A" ou "M9".
-		<br>Exemplo 2: insira "Guerero" ou "gue".
-		<br>Exemplo 3: insira "Alfredo" ou "Alf".
-		<br>Exemplo 4: insira "op11" ou "OP11" ou "op".
-		
-</ul>
-<b>Passo <?php if($src=="newphone") print "3"; else print "2"; ?></b>
-<ul> Clique no botão <input type="button" value="Pesquisa"> para iniciar a pesquisa.<p>
-</ul>
-<b>Passo <?php if($src=="newphone") print "4"; else print "3"; ?></b>
-<ul> Se a pesquisa encontrar resultado(s), uma lista será exibida.<p>
-</ul>
-<?php } ?>
-
-<?php if($x1=="dir") { ?>
-<b>Passo 1</b>
-<ul> Clique no botão <img <?php echo createLDImgSrc('../','phonedir-gray.gif','0') ?>>.
-</ul>
-<?php 
-} 
-
- if($x1=="newphone") { 
-	 if($src=="search") { 
-?>
+<?php if($src=="search") : ?>
 <b>Step 1</b>
-<ul> Clique no botão <img <?php echo createLDImgSrc('../','newdata-gray.gif','0') ?>>.
-</ul>
-<b>Passo 2</b>
-<ul> Se você estiver logado anteriormente a tem um direito de acesso para esta função, o formulário de entrada para uma 
-		nova informação de telefone irá aparecer no quadro principal.<br>
-		De outra forma, se você não estiver logado, você será requisitado a inserir seu nome de usuário e senha. <p>
-	<?php } ?>
-		Insira seu nome de usuário e senha e clique no botão <img <?php echo createLDImgSrc('../','continue.gif','0') ?>>.<p>
+
+<ul> Enter  in the "<span style="background-color:yellow" >Enter search keyword.</span>" field either a full information or a few letters, like for example the ward's or department's code, a name, or Given name,
+		or a room number.
+		<br>Example 1: enter "m9a" or "M9A" or "M9".
+		<br>Example 2: enter "Guerero" or "gue".
+		<br>Example 3: enter "Alfredo" or "Alf".
+		<br>Example 4: enter "op11" or "OP11" or "op".
 		
 </ul>
-<?php } ?>
-
-<b>Nota</b>
-<ul> Se você decidir cancelar
-<?php
-switch($x1)
-{
- 	case "search": print 'search click the button <img '.createLDImgSrc('../','cancel.gif','0').'>.'; break;
-	case "dir": print ' the directory click the button <input type="button" value="Cancel">.';break;
-	case "newphone": print ' click the button <img '.createLDImgSrc('../','cancel.gif','0').'>.';break;
- }
- ?>
+<b>Step 2</b>
+<ul> Click the button <input type="button" value="SEARCH"> to start the search.<p>
 </ul>
+<b>Step 3</b>
+<ul> If the search finds result(s), a list will be displayed.<p>
+</ul>
+<?php endif ?>
+<?php if($src=="dir") : ?>
+<b>Step 1</b>
+<ul> Click the button <img src="../img/en/en_phonedir-gray.gif" border="0">.
+</ul>
+<?php endif ?>
+<?php if($src=="newphone") : ?>
+<b>Step 1</b>
+<ul> Click the button <img src="../img/en/en_newdata-gray.gif" border="0">.
+</ul>
+<b>Step 2</b>
+<ul> If you have logged in before and you have an access right for this function, the 
+		entry form for new phone information  will appear on the main frame.<br>
+		Otherwise, if you are not logged in, you will be required to enter your username and password. <p>
+		Enter your username and password and click the button <img <?php echo createLDImgSrc('../','continue.gif','0') ?>>.<p>
+		If you decide to cancel click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
+		
+</ul><?php endif ?>
+
+<b>Note</b>
+<ul> If you decide to cancel search click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
+</ul>
+
 
 </form>
 

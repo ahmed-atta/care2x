@@ -9,8 +9,8 @@ require_once($root_path.'include/care_api_classes/class_encounter.php');
 *  Laboratory methods. 
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
-* @version deployment 1.1 (mysql) 2004-01-11
-* @copyright 2002,2003,2004,2004 Elpidio Latorilla
+* @version beta 2.0.0
+* @copyright 2002,2003,2004,2005 Elpidio Latorilla
 * @package care_api
 */
 class Lab extends Encounter {
@@ -162,7 +162,7 @@ class Lab extends Encounter {
 	*/
 	function hideResultIfExists($enc_nr,$job_id,$grp_id){
 		global $HTTP_SESSION_VARS;
-		$this->sql="UPDATE $this->tb_find_chemlab SET status='hidden',history=CONCAT(history,'Hide ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n')
+		$this->sql="UPDATE $this->tb_find_chemlab SET status='hidden',history=".$this->ConcatHistory("Hide ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n")."
 								WHERE encounter_nr='$enc_nr' AND job_id='$job_id' AND group_id='$grp_id' AND status NOT IN ($this->dead_stat)";
 		return $this->Transact();
 	}
@@ -237,7 +237,7 @@ class Lab extends Encounter {
 		global $db;
 		if(empty($group_id)) $cond='';
 			else $cond="group_id='$group_id' AND";
-		$this->sql="SELECT * FROM $this->tb_test_param WHERE $cond status NOT IN ($this->dead_stat)";
+		$this->sql="SELECT * FROM $this->tb_test_param WHERE $cond status NOT IN ($this->dead_stat) ORDER BY name";
 		if($this->tparams=$db->Execute($this->sql)){
 		    if($this->rec_count=$this->tparams->RecordCount()) {
 				return $this->tparams;

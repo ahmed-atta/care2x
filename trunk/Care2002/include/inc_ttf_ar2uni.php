@@ -1,6 +1,6 @@
 <?php
 	#====================================================================================================#
-	# ar2uni v0.1 (Arabic-win1256 encoder to Unicode)                                                    # 
+	# ar2uni v0.1 (Arabic-win1256 encoder to Unicode)                                                                                                            # 
 	#====================================================================================================#
 	# Information:                                                                                       #
 	#        This is PHP function for covert Arabic encoding string to                                   #
@@ -69,6 +69,19 @@
 	
 	function ar2uni($sti){
 	global $ar2unimap,$ar2unimap2,$ar2unimap3,$ar2unimap4,$ar2unimap5,$ar2unimap6;
+	
+	
+	# Patch by Elpidio 2004-02-06
+	# If the text is encoded in unicode, reverse the order and return
+	if(strstr($sti,'&#')&&strstr($sti,';')){
+		$buf=explode(';',$sti);
+		$buf=array_reverse($buf);
+		# Remove the first element which is empty
+		unset($buf[0]);
+		$sti=implode(';',$buf);
+	 	return trim($sti).';';
+	 }else{
+		
 	$sti .= " ";
     $temp = $sti;
     $sti = strrev($temp);
@@ -221,5 +234,6 @@
 	}
 	}
 	return $sto;
+	}
 	}
 ?>

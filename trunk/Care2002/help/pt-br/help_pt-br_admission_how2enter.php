@@ -2,28 +2,28 @@
 <form action="#">
 
 <font face="Verdana, Arial" size=3>
-Como entrar com a admissão de um novo paciente<p>
+How to enter a new patient's admission<p>
 <font face="Verdana, Arial" size=2>
-<b>Passo 1</b>
-<ul>Clique  "Admissão" na tela do menu principal.
+<b>Step 1</b>
+<ul>Click  "Admission" on the main menu frame.
 </ul>
 <p>
-<b>Passo 2</b>
-<ul> Se você tiver se logado antes e tem direito de acesso a esta função, o formulário de
-		admissão de paciente aparecerá na tela principal.<br>
-		De outra forma, se você não estiver logado, haverá a necessidade de entrar com o usuário e senha. 
-		Entre com seu usuário e senha e clique no botão <img src="../img/<?php echo "$lang/$lang" ?>_continue.gif" border=0>.
+<b>Step 2</b>
+<ul> If you have logged in before and you have an access right for this function, the patient's
+		admission form will appear on the main frame.<br>
+		Otherwise, if you are not logged in, you will be required to enter your username and password. 
+		Enter your username and password and click the button <img src="../img/<?php echo "$lang/$lang" ?>_continue.gif" border=0>.
 </ul>
 <p>
-<b>Passo 3</b>
-<ul>Entre com os dados pessoais do paciente. Clique então no botão <input type="button" value="Salvar">
- 		para salvar os dados. Se uma informação estiver faltando, uma
-		messagem aparecerá com o cursor marcando onde você deve entrar com as informações no campo ou campos marcados em vermelho. Se você quiser salvar mesmo sem
-		completar as informações, clique no botão <input type="button" value="Salve assim mesmo">.
+<b>Step 3</b>
+<ul>Enter the patient's personal data. Then click the button <input type="button" value="Save">
+ 		to save the data. If an information is missing, a
+		message will appear prompting you to enter the information in the field or fields marked red. If you want to forcibly
+		save without the complete information, click the button <input type="button" value="Save anyway">.
 </ul>
 <p>
-<b>Passo 4</b>
-<ul>Clique a "Admissão" à esquerda do quadro de menu.
+<b>Step 4</b>
+<ul>Click the "Admission" on the left menu frame.
 </ul>
 <p>
 <p>

@@ -11,7 +11,7 @@ if (eregi('inc_db_makelink.php',$PHP_SELF)) die('<meta http-equiv="refresh" cont
 
 if(!isset($root_path)) $root_path='../'; // default language table root path is "../"
 if(!isset($lang)) include($root_path.'chklang.php');
-
+//if(!isset($dbtype) || empty($dbtype)) $dbtype='mysql';
 
 /*********************************************************
 *   the following lines establish connection to the database 
@@ -29,24 +29,37 @@ if(!isset($lang)) include($root_path.'chklang.php');
 # This line loads those variables
 require($root_path.'include/inc_init_main.php');
 
-# Default to msql if dbtype is missing
-if(!isset($dbtype) || empty($dbtype)) $dbtype='mysql';
-
 # Adjust some  db dependent sql peculiarities
 # Set the "LIKE" comparison operator, postgre needs "ILIKE" for case-insensitive comparison
-# Set the "no-date" value based on the dbtype
+# Set the "no-date" value based on the dbtype, Values defined at include/inc_environment_global.php
 switch($dbtype){
-	case 'mysql': $dbf_nodate=NODATE_MYSQL; 
-				$sql_LIKE='LIKE';
-				break;
-	case 'postgres7': $dbf_nodate=NODATE_POSTGRE; 
-				$sql_LIKE = 'ILIKE';
-				break;
-	case 'postgres': $dbf_nodate=NODATE_POSTGRE; 
-				$sql_LIKE='ILIKE';
-				break;
-	default: $dbf_nodate=NODATE_DEFAULT;
-				$sql_LIKE='LIKE';
+	case 'mysql':
+                    $dbf_nodate=NODATE_MYSQL;
+					$dbf_nodatetime=NODATE_MYSQL.' 00:00:00';
+                    define('DBF_NODATE',NODATE_MYSQL);
+					 define('DBF_NODATETIME',NODATE_MYSQL.' 00:00:00');
+				    $sql_LIKE='LIKE';
+				    break;
+	case 'postgres7':
+                     $dbf_nodate=NODATE_POSTGRE;
+					$dbf_nodatetime=NODATE_POSTGRE.' 00:00:00';
+					 define('DBF_NODATE',NODATE_POSTGRE);
+					 define('DBF_NODATETIME',NODATE_POSTGRE.' 00:00:00');
+					 $sql_LIKE = 'ILIKE';
+				     break;
+	case 'postgres':
+                    $dbf_nodate=NODATE_POSTGRE;
+					$dbf_nodatetime=NODATE_POSTGRE.' 00:00:00';
+					define('DBF_NODATE',NODATE_POSTGRE);
+					define('DBF_NODATETIME',NODATE_POSTGRE.' 00:00:00');
+					$sql_LIKE='ILIKE';
+	                break;
+
+	default:        $dbf_nodate=NODATE_DEFAULT;
+					$dbf_nodatetime=NODATE_DEFAULT.' 00:00:00';
+					define('DBF_NODATE',NODATE_DEFAULT);
+					define('DBF_NODATETIME',NODATE_DEFAULT.' 00:00:00');
+					$sql_LIKE='LIKE';
 }
 
 # Load the db error messages lang table
@@ -78,11 +91,19 @@ else $dblink_ok=1;
 $db->SetDatabase($dbname);
 */
 
+# Set dbtype to mysql if not set or empty
+if(!isset($dbtype)||empty($dbtype)) $dbtype='mysql';
+
 # ADODB connection
 require_once($root_path.'classes/adodb/adodb.inc.php');
 $db = &ADONewConnection($dbtype);
 
+//if ($db) echo "ok"; else echo "no ok";
+
+
 $dblink_ok = $db -> Connect($dbhost,$dbusername,$dbpassword,$dbname);
+
+//if($dblink_ok) echo "db ok"; else echo "no link";
 
 # Establish a link
 # Native mySQL connection

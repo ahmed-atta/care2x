@@ -16,8 +16,8 @@ require_once($root_path.'include/care_api_classes/class_notes.php');
 *  Nursing Notes and Documentation methods.
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance.
 * @author Elpidio Latorilla
-* @version deployment 1.1 (mysql) 2004-01-11
-* @copyright 2002,2003,2004,2004 Elpidio Latorilla
+* @version beta 2.0.0
+* @copyright 2002,2003,2004,2005 Elpidio Latorilla
 * @package care_api
 */
 class NursingNotes extends Notes {
@@ -90,17 +90,18 @@ class NursingNotes extends Notes {
 	*/			
 	function getNursingAndEffectivityReport($enr){
 		global $db;
-		if($this->result=$db->Execute("SELECT n.*,
-														e.nr AS eff_nr,
-														e.notes AS eff_notes,
-														e.aux_notes AS eff_aux_notes,
-														e.date AS eff_date,
-														e.time AS eff_time,
-														e.personell_name AS eff_personell_name
-														 FROM $this->tb_notes AS n LEFT JOIN $this->tb_notes AS e ON n.nr=e.ref_notes_nr AND e.encounter_nr=$enr
-													WHERE (n.type_nr=15 AND n.encounter_nr=$enr)
-														OR (n.type_nr=17 AND n.encounter_nr=$enr)
-													 ORDER BY date,time")){
+		$this->sql="SELECT n.*,
+						e.nr AS eff_nr,
+						e.notes AS eff_notes,
+						e.aux_notes AS eff_aux_notes,
+						e.date AS eff_date,
+						e.time AS eff_time,
+						e.personell_name AS eff_personell_name
+					FROM $this->tb_notes AS n LEFT JOIN $this->tb_notes AS e ON n.nr=e.ref_notes_nr AND e.encounter_nr=$enr
+					WHERE (n.type_nr=15 AND n.encounter_nr=$enr)
+						OR (n.type_nr=17 AND n.encounter_nr=$enr)
+					ORDER BY date,time";
+		if($this->result=$db->Execute($this->sql)){
 			if($this->result->RecordCount()){
 				return $this->result;
 			}else{return false;}
@@ -126,9 +127,7 @@ class NursingNotes extends Notes {
 			$this->data_array['personell_name']=$data['author'];
 			$this->data_array['aux_notes']=$data['warn'];
 		}
-		if($this->_insertNotesFromInternalArray(15)){
-			return true;
-		}else{return false;}
+		return $this->_insertNotesFromInternalArray(15);
 	}
 	/**
 	* Saves a nursing effectivity report.
@@ -149,9 +148,7 @@ class NursingNotes extends Notes {
 			$this->data_array['aux_notes']=$data['warn2'];
 			$this->data_array['ref_notes_nr']=$data['ref_notes_nr'];
 		}
-		if($this->_insertNotesFromInternalArray(17)){
-			return true;
-		}else{return false;}
+		return $this->_insertNotesFromInternalArray(17);
 	}
 	/**
 	* Gets the date range of a nursing report.
@@ -191,9 +188,7 @@ class NursingNotes extends Notes {
 			$this->data_array['location_id']=$data['station'];
 			$this->data_array['date']=date('Y-m-d');
 			$this->data_array['time']=date('H:i:s');
-			if($this->_insertNotesFromInternalArray(6)){
-				return true;
-			}else{return false;}
+			return $this->_insertNotesFromInternalArray(6);
 		}
 	}
 }

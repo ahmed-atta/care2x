@@ -7,7 +7,12 @@ if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_baclabor.php
   else include_once($root_path.'language/'.LANG_DEFAULT.'/lang_'.LANG_DEFAULT.'_konsil_baclabor.php');
 ?>
 
-		<table   cellpadding=0 cellspacing=0 border=0 width=745 class="lab">
+<table>
+  <tbody>
+    <tr>
+      <td>
+
+	<table   cellpadding=0 cellspacing=0 border=0 width=745 class="lab">
 		
     <tr >
       <td colspan=4 bgcolor="#ffe3e3"  align="center"><font size=3 color="#ee6666" face="verdana,arial"><b> <?php echo $LDCentralLab." - ".$formtitle ?></b></td>
@@ -1334,10 +1339,14 @@ for($n=0;$n<8;$n++)
  </table>	 
  
 	 </td>
-	 
    </tr>
- </table>	
- 
+ </table>
+
  </td>
   </tr>
+</table>
+
+  </td>
+    </tr>
+  </tbody>
 </table>

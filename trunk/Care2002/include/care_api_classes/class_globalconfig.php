@@ -3,14 +3,18 @@
 * @package care_api
 */
 /**
-*  Global configuration methods. 
+*/
+require_once($root_path.'include/care_api_classes/class_core.php');
+
+/**
+*  Global configuration methods.
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
-* @version deployment 1.1 (mysql) 2004-01-11
-* @copyright 2002,2003,2004 Elpidio Latorilla
+* @version beta 2.0.0
+* @copyright 2002,2003,2004,2005 Elpidio Latorilla
 * @package care_api
 */
-class GlobalConfig {
+class GlobalConfig  extends Core{
 	/**
 	* Table name for encounter (admission) data
 	* @var string
@@ -60,12 +64,12 @@ class GlobalConfig {
 	* @return mixed string or boolean
 	*/
 	function getConfig($type='') {
-	    global $db;
+	    global $db, $sql_LIKE;
 		
 	    if(empty($type)||!$type) {
 		    $this->condition='1';
 		} else {
-		    $this->condition="type LIKE '$type'";
+		    $this->condition="type $sql_LIKE '$type'";
 		}
 		if($this->result=$db->Execute("SELECT type,value FROM $this->tb WHERE $this->condition")) {
             if ($this->result->RecordCount()) {
@@ -88,19 +92,27 @@ class GlobalConfig {
 	* @return boolean
 	*/
 	function saveConfigItem($type='',$value='') {
-	    global $db;
-		
+		global $db;
+		//$db->debug=1;
 		if(empty($type)) return false;
-		
-		$db->BeginTrans();
-	    $this->ok=$db->Execute("REPLACE INTO $this->tb (type,value) VALUES ('$type','$value')");
-	    if($this->ok&&$db->Affected_Rows()) {
-	       $db->CommitTrans();
-	       return true;
-	    } else { 
-           $db->RollbackTrans();	  
-		   return false;
-	    }
+		$buf=$this->getConfigValue($type);
+
+		if($buf!=''){
+			$this->sql="UPDATE $this->tb SET type='$type',value='$value' WHERE type='$type'";
+			$db->BeginTrans();
+			$this->ok=$db->Execute($this->sql);
+			if($this->ok&&$db->Affected_Rows()) {
+				$db->CommitTrans();
+				return true;
+			} else {
+				$db->RollbackTrans();
+				return false;
+			}
+		}else{
+			$this->sql="INSERT INTO $this->tb (type,value,status,history,modify_id,modify_time,create_id,create_time)
+							VALUES ('$type','$value','','Created ".date('Y-m-d H:i:s')."','','0','System','".date('YmdHis')."')";
+			return $this->Transact();
+		}
 	}
 	/**
 	* Saves configuration values stored in an associative array.
@@ -117,7 +129,7 @@ class GlobalConfig {
 	* @return boolean
 	*/
 	function saveConfigArray(&$data_array,$filter='',$numeric=FALSE,$def_value='',$addslash=FALSE) {
-		
+
 		if(!is_array($data_array)||empty($filter)) return FALSE;
 		
 		while(list($x,$v)=each($data_array)){

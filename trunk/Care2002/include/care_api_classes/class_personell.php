@@ -9,8 +9,8 @@ require_once($root_path.'include/care_api_classes/class_core.php');
 *  Personnel methods. 
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
-* @version deployment 1.1 (mysql) 2004-01-11
-* @copyright 2002,2003,2004,2004 Elpidio Latorilla
+* @version beta 2.0.0
+* @copyright 2002,2003,2004,2005 Elpidio Latorilla
 * @package care_api
 */
 class Personell extends Core {
@@ -234,7 +234,7 @@ class Personell extends Core {
 	* @param int Department number
 	*/
 	function _getAllPersonell($loc_type_nr,$role_nr=0,$dept_nr){
-	    global $db;
+	    global $db, $dbf_nodate;
 		$row=array();
 		
 		$sql="SELECT a.nr, a.personell_nr, ps.job_function_title, p.name_last, p.name_first, p.date_birth, p.sex
@@ -244,8 +244,8 @@ class Personell extends Core {
 				WHERE a.role_nr=$role_nr 
 					AND a.location_type_nr=$loc_type_nr 
 					AND a.location_nr=$dept_nr
-					AND (a.date_end='' OR a.date_end='0000-00-00' OR a.date_end>='".date('Y-m-d')."')
-					AND NOT (a.status='deleted' OR a.status='hidden' OR a.status='void')
+					AND (a.date_end='$dbf_nodate' OR a.date_end>='".date('Y-m-d')."')
+					AND a.status NOT IN ($this->dead_stat)
 					AND a.personell_nr=ps.nr
 					AND ps.pid=p.pid 
 				ORDER BY a.list_frequency DESC";
@@ -344,7 +344,7 @@ class Personell extends Core {
 		if(!$role_nr||!$dept_nr||!$year||!$month){
 			return FALSE;
 		}else{
-			$this->sql="SELECT $elems FROM $this->tb_dpoc WHERE role_nr=$role_nr AND dept_nr=$dept_nr AND year=$year AND month=$month";
+			$this->sql="SELECT $elems FROM $this->tb_dpoc WHERE role_nr='$role_nr' AND dept_nr='$dept_nr' AND year='$year' AND month='$month'";
 	    	if ($this->res['_godp']=$db->Execute($this->sql)) {
 		    	if ($this->rec_count=$this->res['_godp']->RecordCount()) {
 					return $this->res['_godp']->FetchRow();
@@ -403,7 +403,7 @@ class Personell extends Core {
 				FROM $this->tb AS ps, 
 						$this->tb_person AS p LEFT JOIN
 						$this->tb_cphone AS c ON c.personell_nr=$nr
-				WHERE ps.nr=$nr
+				WHERE ps.nr='$nr'
 				 AND ps.pid=p.pid";
 				 
 	    if ($this->result=$db->Execute($sql)) {
@@ -437,11 +437,12 @@ class Personell extends Core {
 			return FALSE;
 		}else{
 			list($x,$v)=each($d);
-			$dept_list='dept_nr='.$v['nr'];
+			$dept_list=$v['nr'];
 			while(list($x,$v)=each($d)){
-				$dept_list.=' OR dept_nr='.$v['nr'];
+				$dept_list.=','.$v['nr'];
 			}
-			$sql="SELECT dept_nr FROM $this->tb_dpoc WHERE role_nr=$role_nr AND ($dept_list) AND year=$year AND month=$month";
+
+			$sql="SELECT dept_nr FROM $this->tb_dpoc WHERE role_nr=$role_nr AND dept_nr IN ($dept_list) AND year='$year' AND month='$month'";
 			
 	    	if ($this->result=$db->Execute($sql)) {
 		    	if ($this->record_count=$this->result->RecordCount()) {
@@ -506,7 +507,7 @@ class Personell extends Core {
 	* @return mixed adodb record object  or boolean
 	*/
 	function searchPersonellBasicInfo($key,$oitem='name_last',$odir='ASC',$limit=FALSE,$len=30,$so=0){
-		global $db;
+		global $db, $sql_LIKE;
 		if(empty($key)) return FALSE;
 		$this->sql="SELECT ps.nr, ps.job_function_title, p.pid, p.name_last, p.name_first, p.date_birth, p.sex
 				FROM $this->tb AS ps, $this->tb_person AS p";
@@ -514,12 +515,12 @@ class Personell extends Core {
 			$key=(int)$key;
 			$this->sql.=" WHERE ps.nr = $key AND ps.pid=p.pid";
 		}else{
-			$this->sql.=" WHERE (ps.nr LIKE '$key%' 
-						OR ps.job_function_title LIKE '$key%'
-						Or p.pid LIKE '$key%'
-						OR p.name_last LIKE '$key%'
-						OR p.name_first LIKE '$key%'
-						OR p.date_birth LIKE '$key%')
+			$this->sql.=" WHERE (ps.nr $sql_LIKE '$key%'
+						OR ps.job_function_title $sql_LIKE '$key%'
+						Or p.pid $sql_LIKE '$key%'
+						OR p.name_last $sql_LIKE '$key%'
+						OR p.name_first $sql_LIKE '$key%'
+						OR p.date_birth $sql_LIKE '$key%')
 						AND p.pid=ps.pid";
 		}
 		if(!empty($oitem)){
@@ -567,10 +568,10 @@ class Personell extends Core {
 			return FALSE;
 		}else{
 			$sql="SELECT nr FROM $this->tb WHERE pid=$pid";
-	    	if ($this->result=$db->Execute($sql)) {
-		    	if ($this->result->RecordCount()) {
+			if ($this->result=$db->Execute($sql)) {
+		    		if ($this->result->RecordCount()) {
 					$this->row=$this->result->FetchRow();
-		    		return $this->row['nr'];
+		    			return $this->row['nr'];
 				} else {
 					return FALSE;
 				}
@@ -596,18 +597,24 @@ class Personell extends Core {
 		$this->sql="SELECT ps.*, p.title, p.name_last, p.name_first, p.date_birth, p.sex,
 							p.addr_str,p.addr_str_nr,p.addr_zip, 
 							p.photo_filename,
+							c.item_nr AS phone_pk,
+							c.beruf,
+							c.bereich1,
+							c.bereich2,
+							c.exphone1,
+							c.exphone2,
 							c.funk1,
 							c.funk2,
 							c.inphone1,
 							c.inphone2,
 							c.inphone3,
+							c.roomnr,
 							t.name AS citytown_name 
 				FROM $this->tb AS ps, 
 						$this->tb_person AS p 
 						LEFT JOIN $this->tb_cphone AS c ON c.personell_nr=$nr
 						LEFT JOIN $this->tb_citytown AS t ON p.addr_citytown_nr=t.nr
-				WHERE ps.nr=$nr
-						AND ps.pid=p.pid";
+				WHERE ps.nr=$nr AND ps.pid=p.pid";
 		if($this->result=$db->Execute($this->sql)) {
 		    if($this->record_count=$this->result->RecordCount()) {
 			    $this->personell_data=$this->result->FetchRow();
@@ -657,40 +664,96 @@ class Personell extends Core {
 		return $this->personell_data['date_birth'];
 	}
 	/**
+	* Returns profession info
+	*/
+	function Profession(){
+	    //if(!$this->is_loaded) return FALSE;
+		return $this->personell_data['beruf'];
+	}
+	/**
+	* Returns room nr.
+	*/
+	function RoomNr(){
+	    //if(!$this->is_loaded) return FALSE;
+		return $this->personell_data['beruf'];
+	}
+	/**
+	* Returns the primary key of the phone record
+	*/
+	function PhoneKey(){
+	    //if(!$this->is_loaded) return FALSE;
+		return $this->personell_data['phone_pk'];
+	}
+	/**
 	* Returns first internal phone number
 	*/
 	function InPhone1(){
 	    //if(!$this->is_loaded) return FALSE;
 		return $this->personell_data['inphone1'];
-	}	
+	}
 	/**
 	* Returns second internal phone number
 	*/
 	function InPhone2(){
 	    //if(!$this->is_loaded) return FALSE;
 		return $this->personell_data['inphone2'];
-	}	
+	}
 	/**
 	* Returns third internal phone number
 	*/
 	function InPhone3(){
 	    //if(!$this->is_loaded) return FALSE;
 		return $this->personell_data['inphone3'];
-	}	
+	}
+	/**
+	* Returns first external phone number
+	*/
+	function ExPhone1(){
+	    //if(!$this->is_loaded) return FALSE;
+		return $this->personell_data['exphone1'];
+	}
+	/**
+	* Returns second external phone number
+	*/
+	function ExPhone2(){
+	    //if(!$this->is_loaded) return FALSE;
+		return $this->personell_data['exphone2'];
+	}
+	/**
+	* Returns third external phone number
+	*/
+	function ExPhone3(){
+	    //if(!$this->is_loaded) return FALSE;
+		return $this->personell_data['exphone3'];
+	}
+	/**
+	* Returns first dept
+	*/
+	function Dept1(){
+	    //if(!$this->is_loaded) return FALSE;
+		return $this->personell_data['bereich1'];
+	}
+	/**
+	* Returns second dept
+	*/
+	function Dept2(){
+	    //if(!$this->is_loaded) return FALSE;
+		return $this->personell_data['bereich2'];
+	}
 	/**
 	* Returns first pager number
 	*/
 	function Beeper1(){
 	    //if(!$this->is_loaded) return FALSE;
 		return $this->personell_data['funk1'];
-	}	
+	}
 	/**
 	* Returns second pager number
 	*/
 	function Beeper2(){
 	    //if(!$this->is_loaded) return FALSE;
 		return $this->personell_data['funk2'];
-	}	
+	}
 	/**
 	* Returns full address in german format
 	*/

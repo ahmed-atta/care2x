@@ -1,12 +1,13 @@
 <?php
+
 # define to 1 to measure page generation time
 define('USE_PAGE_GEN_TIME',1);
 
 # Define the time when the doc-on-duty will change in 24 hours H.M format (eg. 3 PM = 15.00, 12 PM = 0.00)
-define('DOC_CHANGE_TIME','7.30'); 
+define('DOC_CHANGE_TIME','7.30');
 
 # Define the time when the nurse-on-duty will change in 24 hours H.M format (eg. 3 PM = 15.00, 12 PM = 0.00)
-define('NOC_CHANGE_TIME','7.30'); 
+define('NOC_CHANGE_TIME','7.30');
 
 # Define to TRUE if you want to send the html output in base64 encrypted form
 define('ENCRYPT_PAGE_BASE64',FALSE);
@@ -29,7 +30,8 @@ if(defined('ENCRYPT_PAGE_BASE64')&&ENCRYPT_PAGE_BASE64){
 }
 
 # globalize the POST, GET, & COOKIE variables
-require_once($root_path.'include/inc_vars_resolve.php'); 
+require_once($root_path.'include/inc_vars_resolve.php');
+
 
 # Set global defines 
 if(!defined('LANG_DEFAULT')) define ('LANG_DEFAULT','en');
@@ -37,7 +39,10 @@ if(!defined('LANG_DEFAULT')) define ('LANG_DEFAULT','en');
 # Establish db connection 
 require_once($root_path.'include/inc_db_makelink.php');
 
+
 if(!defined('NOSTART_SESSION')||(defined('NOSTART_SESSION')&&!NOSTART_SESSION)){
+	# If the session is existing, destroy it. This is a workaround for php engines which are configured to session autostart = On
+	if(session_id()) session_destroy();	
 	# Set sessions handler to "user"
 	ini_set('session.save_handler','user');
 	# Set transparent session id
@@ -53,6 +58,7 @@ if(!defined('NOSTART_SESSION')||(defined('NOSTART_SESSION')&&!NOSTART_SESSION)){
 	include_once($root_path.'classes/adodb/adodb-session.php');
 	session_start();
 }
+
 
 # Set the url append data
 if (ini_get('session.use_trans_sid')!=1) {

@@ -37,7 +37,6 @@ $img_path_com_icon='gui/img/common/'.$theme_com_icon.'/'; # the path for non-lan
 $img_path_mascot='gui/img/mascot/'.$theme_mascot.'/'; # the path for non-language dependent mascot
 $img_path_skin='gui/img/skin/'.$theme_skin.'/'; # the path for non-language dependent mascot
 
-
 /**
 * createLDImgSrc will display a language dependent image
 * if the filename does not exists, the default version will be displayed
@@ -158,15 +157,17 @@ function createLogo($froot, $fn, $border='', $align=''){
 	# save the orig icon path
 	$icon_path=$img_path_com_icon;
 	# set the logo path
-	$img_path_com_icon='gui/img/logos/'.$theme_logo.'/'.$lang.'/'; # the path for  logo
+	$img_path_com_icon='gui/img/logos/'.$theme_logo.'/'.$lang.'/'; # the path for language dependent logo
 	if(!file_exists($froot.$img_path_com_icon.$fn)){
-		$img_path_com_icon='gui/img/logos/'.$theme_logo.'/default/'; # the path for  logo
-		if(!file_exists($froot.$img_path_com_icon.$fn)) 	$img_path_com_icon='gui/img/logos/default/';
+		$img_path_com_icon='gui/img/logos/'.$theme_logo.'/'; # the path for default dependent logo
+		if(!file_exists($froot.$img_path_com_icon.$fn)) $fn = 'care_logo.gif';
 	}
+	if(!file_exists($froot.$img_path_com_icon.$fn)) $img_path_com_icon='gui/img/logos/default/';
+
 	# create the icon/logo
 	$img_src=createComIcon($froot,$fn,$border,$align);
 	# reset the orig icon path
-	$img_path_com_icon=$icon_path; 
+	$img_path_com_icon=$icon_path;
 	return $img_src;
 }
 /**

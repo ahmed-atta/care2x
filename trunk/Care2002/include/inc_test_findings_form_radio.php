@@ -59,7 +59,9 @@ function createInputBlock($param, $value)
 	      echo $batch_nr.'&nbsp;&nbsp;<br>';
           echo "<img src='".$root_path."classes/barcode/image.php?code=$batch_nr&style=68&type=I25&width=145&height=40&xres=2&font=5' border=0>";
          ?>&nbsp;&nbsp;<br>
-		 <?php echo $LDXrayDate.'&nbsp;&nbsp;<br>'.formatDate2Local($entry_date,$date_format) ?>&nbsp;&nbsp;</font>
+		 <?php echo $LDXrayDate.'&nbsp;&nbsp;<br>';
+		 if(!empty($entry_date) && $entry_date!= DBF_NODATE) echo formatDate2Local($entry_date,$date_format); ?>
+		 &nbsp;&nbsp;</font>
 		</td></tr>
 		
 	<tr bgcolor="<?php echo $bgc1 ?>">

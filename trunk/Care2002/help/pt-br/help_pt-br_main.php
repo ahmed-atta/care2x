@@ -2,33 +2,30 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>CARE 2X</title>
+<title>CARE 2002</title>
 
 </head>
 <body onLoad="if (window.focus) window.focus()" marginheight=0 marginwidht=0 leftmargin=0 topmargin=0>
-
-<img src="../help/pt-br/img/pt-br_carelogo_help.png" border=0 width=250 height=74>
-<p>
+<!-- <img src="../img/maho4.gif" width=115 height=61 border=0>
+ -->
+ <img src="../help/pt-br/img/pt-br_carelogo_help.png"><p>
 <blockquote><font face="Verdana, Arial" size=2>
 <img <?php echo createComIcon('../','butft2_d.gif') ?>><p>
-<b>Passos iniciais para usar<br>
-CARE 2X</b><p>
-Com o apoio do CARE 2X e da Internet ou Intranet, você pode encontrar e processar cada tipo de informação dentro de sua organização de saúde. Simplesmente clique no "Manual online" 
- no lado esquerdo (lado do índice) e você pode encontrar informação adicional que ajudará você a trabalhar facilmente com o seu sistema e o CARE 2X.
+<b>Initial steps in using<br>
+CARE 2002</b><p>
+With the power of CARE 2002 and the Internet or Intranet, you can find and process every kind of information within your organization. Simply click the above topics to begin. In the
+help topics on the left side (index side) you can find additional information which will help you in working easily with your system and CARE 2002.
 <p>
-<a href="../help/en/help_en_basic_usage.php"><u>Uso básico</u></a><br>
+<a href="#"><u>Basic setup</u></a><br>
 <p>
-<a href="../help/en/help_en_setpermit.php"><u>Configurando uma permissão de acesso</u></a><p>
+<a href="#"><u>Setting an access right</u></a><p>
+<a href="#"><u>Information about CARE 2002.</u></a><br>
+If you are new to CARE 2002, you can find here the information you need. 
 <p>
-<a href="../help/en/help_en_onlineman.php"><u>How to use the online manual</u></a><p>
-<a href="http://care2x.org/index.php?lang=<?php echo $lang ?>"><u>Informação sobre o projeto CARE 2X.</u></a> (necessário acesso à internet)<br>
-Se você não conhece o projeto CARE 2X, você pode encontrar aqui a informação que você precisa. 
-<p>
-<!-- <a href="#"><u>Introdução ao CARE 2X</u></a><br>
-<a href="#"><u>Aprendendo como realizar o trabalho mais rápido e mais facilmente usando o CARE 2X</u></a><br>
-<a href="#"><u>Pesquise por informação</u></a><br> -->
-</font>
-</blockquote>
+<a href="#"><u>Introduction to CARE 2002</u></a><br>
+<a href="#"><u>Learning how to do the job faster and easier using CARE 2002</u></a><br>
+<a href="#"><u>Search for information</u></a><br>
+</font></blockquote>
 
 </body>
 </html>

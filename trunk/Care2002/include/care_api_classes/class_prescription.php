@@ -9,8 +9,8 @@ require_once($root_path.'include/care_api_classes/class_core.php');
 *
 * Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
-* @version deployment 1.1 (mysql) 2004-01-11
-* @copyright 2002,2003,2004 Elpidio Latorilla
+* @version beta 2.0.0
+* @copyright 2002,2003,2004,2005 Elpidio Latorilla
 * @package care_api
 */
 class Prescription extends Core {
@@ -100,7 +100,7 @@ class Prescription extends Core {
 	function getPrescriptionTypes(){
 	    global $db;
 	
-	    if ($this->result=$db->Execute("SELECT nr,type,name,LD_var FROM $this->tb_pres_types WHERE 1")) {
+	    if ($this->result=$db->Execute("SELECT nr,type,name,LD_var AS \"LD_var\" FROM $this->tb_pres_types")) {
 		    if ($this->result->RecordCount()) {
 		        return $this->result->GetArray();
 			} else {
@@ -128,7 +128,7 @@ class Prescription extends Core {
 	function getAppTypes(){
 	    global $db;
 	
-	    if ($this->result=$db->Execute("SELECT nr,group_nr,type,name,LD_var,description FROM $this->tb_app_types WHERE 1")) {
+	    if ($this->result=$db->Execute("SELECT nr,group_nr,type,name,LD_var AS \"LD_var\" ,description FROM $this->tb_app_types")) {
 		    if ($this->result->RecordCount()) {
 		        return $this->result->GetArray();
 			} else {
@@ -156,7 +156,7 @@ class Prescription extends Core {
 	function getAppTypeInfo($type_nr){
 	    global $db;
 	
-	    if ($this->result=$db->Execute("SELECT type,group_nr,name,LD_var,description FROM $this->tb_app_types WHERE nr=$type_nr")) {
+	    if ($this->result=$db->Execute("SELECT type,group_nr,name,LD_var AS \"LD_var\" ,description FROM $this->tb_app_types WHERE nr=$type_nr")) {
 		    if ($this->result->RecordCount()) {
 		        return $this->result->FetchRow();
 			} else {
@@ -183,7 +183,7 @@ class Prescription extends Core {
 	function getPrescriptionTypeInfo($type_nr){
 	    global $db;
 	
-	    if ($this->result=$db->Execute("SELECT type,name,LD_var,description FROM $this->tb_pres_types WHERE nr=$type_nr")) {
+	    if ($this->result=$db->Execute("SELECT type,name,LD_var  AS \"LD_var\",description FROM $this->tb_pres_types WHERE nr=$type_nr")) {
 		    if ($this->result->RecordCount()) {
 		        return $this->result->FetchRow();
 			} else {

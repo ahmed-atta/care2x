@@ -53,7 +53,7 @@ if(empty($reg_glob_ini)||(!$reg_glob_ini))
   if(sizeof($global_vars=&importGlobalVariable('get')))
   {
     //while(list($x,$v)=each($HTTP_GET_VARS))    
-    while(list($x,$v)=each($global_vars))    
+    while(list($x,$v)=each($global_vars))
     {
 		$$x=$v;
     }
@@ -80,7 +80,7 @@ if(empty($reg_glob_ini)||(!$reg_glob_ini))
   if(sizeof($global_vars=&importGlobalVariable('cookie')))
   {
     //while(list($x,$v)=each($HTTP_COOKIE_VARS)) 
-    while(list($x,$v)=each($global_vars))    
+    while(list($x,$v)=each($global_vars))
     {
 		$$x=$v;
     }
@@ -97,7 +97,7 @@ $HTTP_COOKIE_VARS=&importGlobalVariable('cookie');
   if(sizeof($global_vars=&importGlobalVariable('server')))
   {
     //while(list($x,$v)=each($HTTP_SERVER_VARS)) 
-    while(list($x,$v)=each($global_vars))    
+    while(list($x,$v)=each($global_vars))
     {
 		$$x=$v;
     }

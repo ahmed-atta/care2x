@@ -3,23 +3,21 @@
 <b>
 EDP - 
 <?php
-	if($x1=='edit') $x1='update';
 	switch($src)
 	{
-	case "access": 
-		switch($x1)
+	case "access": switch($x1)
 						{
-							case "": print "Criando direito de acesso";
+							case "": print "Creating access right";
 												break;
-							case "save": print "Direito de novo acesso salvo";
+							case "save": print "New access right saved";
 												break;
-							case "list": print "Direitos de acesso existentes";
+							case "list": print "Existing access rights";
 												break;
-							case "update": print "Editando um direito de acesso existente";
+							case "update": print "Editing an existing access right";
 												break;
-							case "lock":  if($x2=="0") print "Bloqueando"; else print "Desbloqueando"; print  " um direito existente";
+							case "lock":  if($x2=="0") print "Locking"; else print "Unlocking"; print  " an existing right";
 												break;
-							case "delete": print "Apagando um direito de acesso";
+							case "delete": print "Deleting an access right";
 												break;
 						}
 						break;
@@ -35,139 +33,132 @@ EDP -
 <?php if($src=="access") : ?>
 	<?php if($x1=="") : ?>
 		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Como criar permissões de acesso para um colaborador do hospital ?</b>
+How to create a new access right?</b>
 </font>
 <ul>       	
- 	<b>Passo 1: </b>Primeiro encontre o colaborador. clique no botão <input type="button" value="Encontre um colaborador"> .<p>
- 	<b>Passo 2: </b>Uma página de pesquisa aparecerá. Siga as intruções de ajuda suplementar em como pesquisar pelo colaborador.<p>
-</ul>
-
-		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Como criar um novo direito de acesso?</b>
-</font>
-<ul>       	
- 	<b>Passo 1: </b>Entre com o nome completo da pessoa, ou departamento, ou clínica, etc no campo "<span style="background-color:yellow" > Nome </span>" .<br>
- 	<b>Passo 2: </b>Entre com o nome de usuário no campo "<span style="background-color:yellow" > nome de login de usuário </span>" .<p>
-	<b>Nota:</b> A tecla de Espaço não é permitida para o nome de usuário.<p>
- 	<b>Passo 3: </b>Entre com a senha para o nome do usuário no campo "<span style="background-color:yellow" > Senha </span>" .<p>
- 	<b>Passo 4: </b>Verifique as areas tem permissão de acessar na "árvore" de permissões.<p>
+ 	<b>Step 1: </b>Enter the complete name of the person, or the department, or clinic, etc in the "<span style="background-color:yellow" > Name </span>" field.<br>
+ 	<b>Step 2: </b>Enter the username  in the "<span style="background-color:yellow" > User login name </span>" field.<p>
+	<b>Note:</b> Space is not allowed for the username.<p>
+ 	<b>Step 3: </b>Enter the password for the username "<span style="background-color:yellow" > Password </span>" field.<br>
+ 	<b>Step 4: </b>Select the areas where the user is allowed to enter in the  "<span style="background-color:yellow" > Area # </span>" field.<p>
+	<b>Note:</b> A user can have a maximum of ten accessible areas (Area 1 up to Area 10).<p>
 </ul>
 
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Eu terminei de entrar com todas as informações relevantes. Como salvo?</b>
+I am finished entering all relevant information. How to save it?</b>
 </font>
 <ul>       	
- 	<b>Passo 1: </b>Clique no botão <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> .<br>
+ 	<b>Step 1: </b>Click the button <input type="button" value="Save">.<br>
 </ul>
 	<?php endif ?>	
 	<?php if($x1=="save") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-O novo direito de acesso está salvo agora. Como criar outro direito de acesso?</b>
+The new access right is now saved. How to create another access right?</b>
 </font>
 <ul>       	
- 	<b>Passo 1: </b>Clique no botão <input type="button" value="OK"> .<br>
- 	<b>Passo 2: </b>O formulário para entrada de dados aparecerá.<br>
- 	<b>Passo 3: </b>Para ver mais instruções de como criar um direito de acesso, clique no botão "Ajuda" .<br>
+ 	<b>Step 1: </b>Click the <input type="button" value="OK"> button.<br>
+ 	<b>Step 2: </b>The entry form will appear.<br>
+ 	<b>Step 3: </b>To see further instructions on creating an access right, click the "Help" button.<br>
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Eu quero ver a lista dos direitos de acesso existentes. Como é que eu faço?</b>
+I want to see the list of the existing access rights. How to do it?</b>
 </font>
 <ul>       	
- 	<b>Passo 1: </b>Clique no botão <input type="button" value="Liste os direitos de acesso atuais">.<br>
- 	<b>Passo 2: </b>Os direitos de acesso atuais serão listados<br>
+ 	<b>Step 1: </b>Click the button <input type="button" value="List actual access rights">.<br>
+ 	<b>Step 2: </b>The existing access rights will be listed<br>
 </ul>
 	
 	<?php endif ?>	
 	<?php if($x1=="list") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-O que significam os botões <img <?php echo createComIcon('../','padlock.gif','0','absmiddle') ?>> e <img <?php echo createComIcon('../','arrow-gr.gif','0','absmiddle') ?>> ?</b>
+What do the buttons <img <?php echo createComIcon('../','padlock.gif','0','absmiddle') ?>> and <img <?php echo createComIcon('../','arrow-gr.gif','0','absmiddle') ?>> mean?</b>
 </font>
 <ul>       	
- 	<img <?php echo createComIcon('../','padlock.gif','0','absmiddle') ?>> = O direito de acesso do usuário está bloqueado ou "congelado". Ele não pode entrar nas áreas marcadas como acessíveis.<br>
- 	<img <?php echo createComIcon('../','arrow-gr.gif','0','absmiddle') ?>> = O direito de acesso do usuário não está bloqueado . Ele pode entrar nas áreas marcadas como acessíveis.<br>
+ 	<img <?php echo createComIcon('../','padlock.gif','0','absmiddle') ?>> = The user's access right is locked or "freezed". He cannot enter the areas set as accessible.<br>
+ 	<img <?php echo createComIcon('../','arrow-gr.gif','0','absmiddle') ?>> = The user's access right is not locked . He can enter the areas set as accessible.<br>
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-O que significam as opções "C","L", e "D", ou "U" ?</b>
+What do the options "C","L", and "D", or "U" mean?</b>
 </font>
 <ul>       	
- 	<b>C: </b> = Altera ou edita os dados de acesso do usuário.<br>
- 	<b>L: </b> = Bloqueia os direitos de acesso do usuário.<br>
- 	<b>D: </b> = Apaga os direitos de acesso do usuário.<br>
- 	<b>U: </b> = Libera os direitos de acesso do usuário (se estiver bloqueado).<br>
+ 	<b>C: </b> = Change or edit the user's access data.<br>
+ 	<b>L: </b> = Lock the user's access right.<br>
+ 	<b>D: </b> = Delete the user's access right.<br>
+ 	<b>U: </b> = Unlock the user's access right (if currently locked).<br>
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Como mudar ou editar os dados do direito de acesso do usuário?</b>
+How to change or edit the user's access data?</b>
 </font>
 <ul>       	
- 	Clique na opção "<span style="background-color:yellow" > C </span>" correspondente ao usuário.<br>
+ 	Click the option "<span style="background-color:yellow" > C </span>" corresponding to the user.<br>
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Como bloquear os direitos de acesso do usuário?</b>
+How to lock the user's access data?</b>
 </font>
 <ul>       	
- 	Clique na opção "<span style="background-color:yellow" > L </span>" correspondente ao usuário.<br>
+ 	Click the option "<span style="background-color:yellow" > L </span>" corresponding to the user.<br>
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Como liberar os direitos de acesso do usuário? (se estiver bloqueado)</b>
+How to unlock the user's access data? (if currently locked)</b>
 </font>
 <ul>       	
- 	Clique na opção "<span style="background-color:yellow" > U </span>" correspondente ao usuário.<br>
+ 	Click the option "<span style="background-color:yellow" > U </span>" corresponding to the user.<br>
 </ul>
 		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Como apagar um direito de acesso?</b>
+How to delete an access right?</b>
 </font>
 <ul>       	
- 	Clique na opção "<span style="background-color:yellow" > D </span>" correspondente ao usuário.<br>
+ 	Click the option "<span style="background-color:yellow" > D </span>" corresponding to the user.<br>
 </ul>
 
 	<?php endif ?>	
 	
 	<?php if($x1=="update") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Como editar um direito de acesso?</b>
+How to edit an access right?</b>
 </font>
 <ul>       	
- 	<b>Passo 1: </b>Edite a informação.<br>
- 	<b>Passo 2: </b>Clique no botão <img <?php echo createLDImgSrc('../','savedisc.gif','0','absmiddle') ?>>  .<br>
+ 	<b>Step 1: </b>Edit the information.<br>
+ 	<b>Step 2: </b>Click the button <input type="button" value="Save">.<br>
 </ul>
 	<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
-Nota:</b>
+Note:</b>
 </font>
 <ul>       	
- 	Se você decidir não editar, clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0','absmiddle') ?>>  .<br>
+ 	If you decide not to edit click the button <input type="button" value="Cancel">.<br>
 </ul>
 	
 	<?php endif ?>		
 	<?php if($x1=="delete") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Como deletar um direito de acesso?</b>
+How to delete an access right?</b>
 </font>
 <ul>       	
- 	<b>Passo 1: </b>Se você tem certeza de que quer apagar o direito de acesso,<br>
-	 clique no botão <input type="button" value="Sim, tenho certeza absoluta. Apague o direito de acesso.">.<br>
+ 	<b>Step 1: </b>If you are sure you want to delete the access right,<br>
+	 click the button <input type="button" value="Yes, I am dead sure. Delete access right.">.<br>
 </ul>
 	<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
-Nota:</b>
+Note:</b>
 </font>
 <ul>       	
- 	Se você decidir não apagar clique no botão <input type="button" value="Não. Volte.">.<br>
+ 	If you decide not to delete click the button <input type="button" value="No. Go back.">.<br>
 </ul>
 	
 	<?php endif ?>		
 	
 	<?php if($x1=="lock") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Como <?php if($x2=="0") print "bloquear"; else print "liberar"; ?> um direito de acesso?</b>
+How to <?php if($x2=="0") print "lock"; else print "unlock"; ?> an access right?</b>
 </font>
 <ul>       	
- 	<b>Passo 1: </b>Se você tem certeza de que quer <?php if($x2=="0") print "bloquear"; else print "liberar"; ?> o direito de acesso,<br>
-	 clique no botão <input type="button" value="Sim, tenho certeza.">.<br>
+ 	<b>Step 1: </b>If you are sure you want to <?php if($x2=="0") print "lock"; else print "unlock"; ?> the access right,<br>
+	 click the button <input type="button" value="Yes, I'm sure.">.<br>
 </ul>
 	<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
 Note:</b>
 </font>
 <ul>       	
- 	Se você decidir não <?php if($x2=="0") print "bloquear"; else print "lliberar"; ?> clique no botão <input type="button" value="Não. Volte.">.<br>
+ 	If you decide not to <?php if($x2=="0") print "lock"; else print "unlock"; ?> click the button <input type="button" value="No. Go back.">.<br>
 </ul>
 	
 	<?php endif ?>		

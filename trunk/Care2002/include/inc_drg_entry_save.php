@@ -18,7 +18,7 @@ if(!isset($opnr)) $opnr=0;
 # Bug patch 2003-06-19
 $DRG_obj=new DRG($pn); // Create a drg object
 
-/* Prepare the common data */
+# Prepare the common data
 $data['encounter_nr']=$pn;
 $data['date']=date('Y-m-d H:i:s');
 $data['op_nr']=$opnr;
@@ -27,7 +27,7 @@ $data['category_nr']=99; // This is a dummy entry to force the new entries to ap
 $data['history']="Create ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
 $data['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
 $data['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
-$data['create_time']='NULL';
+$data['create_time']=date('YmdHis');
 
 switch($element)
 {

@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
 *  A help function to either create input elements for lab's intern entries or
 *  to show the entries in case of status != pending
@@ -105,7 +105,7 @@ while($test_request=$requests->FetchRow())
    /* Check for the barcode png image, if nonexistent create it in the cache */
    if(!file_exists($root_path."cache/barcodes/en_".$test_request['encounter_nr'].".png"))
    {
-	  echo "<img src='".$root_path."classes/barcode/image.php?code=".$test_request['encounter_nr']."&style=68&type=I25&width=145&height=50&xres=2&font=5&label=2&form_file=en' border=0 width=0 height=0>";
+	  echo "<img src='".$root_path."classes/barcode/image.php?code=".$test_request['encounter_nr']."&style=68&type=I25&width=180&height=50&xres=2&font=5&label=2&form_file=en' border=0 width=0 height=0>";
 	}
    
   $tracker++;

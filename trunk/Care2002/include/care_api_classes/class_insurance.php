@@ -9,8 +9,8 @@ require_once($root_path.'include/care_api_classes/class_core.php');
 *  Insurance methods. 
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
-* @version deployment 1.1 (mysql) 2004-01-11
-* @copyright 2002,2003,2004,2004 Elpidio Latorilla
+* @version beta 2.0.0
+* @copyright 2002,2003,2004,2005 Elpidio Latorilla
 * @package care_api
 */
 class Insurance extends Core {
@@ -131,7 +131,7 @@ class Insurance extends Core {
 	* @param string Field names of values to be fetched
 	* @return mixed adodb record object or boolean
 	*/
-    function getInsuranceClassInfoObject($items='class_nr,class_id,name,LD_var,description,status,history') {
+    function getInsuranceClassInfoObject($items='class_nr,class_id,name,LD_var AS "LD_var", description,status,history') {
     
 	    global $db;
 	
@@ -148,15 +148,16 @@ class Insurance extends Core {
 	* @param string Field names of values to be fetched
 	* @return mixed adodb record object or boolean
 	*/
-    function getInsuranceClassInfoArray($items='class_nr,class_id,name,LD_var,description,status,history') {
+    function getInsuranceClassInfoArray($items='class_nr,class_id,name,LD_var AS "LD_var", description,status,history') {
     
 	    global $db;
 	
         if ($this->result=$db->Execute("SELECT $items  FROM $this->tb_class")) {
             if ($this->result->RecordCount()) {
-			    $this->row=NULL;
-                while($this->row[]=$this->result->FetchRow());
-				return $this->row;
+		return $this->result->GetArray();
+		 //$this->row=NULL;
+		//while($this->row[]=$this->result->FetchRow());
+		//		return $this->row;
             } else {return FALSE;}
 		} else { return FALSE; }
     }
@@ -170,7 +171,7 @@ class Insurance extends Core {
 	function Firm_exists($firm_id='') {
 	    global $db;
 	    if(!$this->_internResolveFirmID($firm_id)) return FALSE;
-	    if($this->result=$db->Execute("SELECT firm_id FROM $this->tb_insurance WHERE firm_id=$this->firm_id")) {
+	    if($this->result=$db->Execute("SELECT firm_id FROM $this->tb_insurance WHERE firm_id='$this->firm_id'")) {
 	        if($this->result->RecordCount()) {
 			    return TRUE;
 		    } else { return FALSE; }
@@ -210,16 +211,17 @@ class Insurance extends Core {
 	* @return boolean
 	*/
 	function updateUseFrequency($firm_id='',$step=1) {
-	
-	    global $db;
-		
-	    if(!$this->_internResolveFirmID($firm_id)) return FALSE;
-		$this->buffer=getUseFrequency($this->firm_id);
-	    if($this->result=$db->Execute("UPDATE $this->tb_insurance SET use_frequency=".($this->buffer+$step)." WHERE firm_id=$this->firm_id")) {
-	        if($this->result->Affected_Rows()) {
-			    return TRUE;
-		    } else { return FALSE; }
-	   } else { return FALSE; }
+
+		if(!$this->_internResolveFirmID($firm_id)) return FALSE;
+		# Get last usage frequency value
+		//$this->buffer=getUseFrequency($this->firm_id);
+		//$this->sql="UPDATE $this->tb_insurance SET use_frequency=".($this->buffer+$step)." WHERE firm_id=$this->firm_id";
+		$this->sql="UPDATE $this->tb_insurance SET use_frequency=(use_frequency + 1) WHERE firm_id=$this->firm_id";
+		if($this->result=$this->Transact($this->sql)) {
+			if($this->result->Affected_Rows()) {
+				return TRUE;
+			} else { return FALSE; }
+		} else { return FALSE; }
    }
 	/**
 	* Gets the insurance company's name.
@@ -274,9 +276,9 @@ class Insurance extends Core {
 		$this->_useInsurance();
 		$this->data_array=$data;
 		$this->data_array['history']="Create: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
-		$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		//$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
 		$this->data_array['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
-		$this->data_array['create_time']='NULL';
+		$this->data_array['create_time']=date('YmdHis');
 		return $this->insertDataFromInternalArray();
 	}
 	/**
@@ -294,14 +296,16 @@ class Insurance extends Core {
 		global $HTTP_SESSION_VARS;
 		$this->_useInsurance();
 		$this->data_array=$data;
-		// remove probable existing array data to avoid replacing the stored data
+		# remove probable existing array data to avoid replacing the stored data
 		if(isset($this->data_array['firm_id'])) unset($this->data_array['firm_id']);
 		if(isset($this->data_array['create_id'])) unset($this->data_array['create_id']);
-		// clear the where condition
+		# Set the where condition
 		$this->where="firm_id='$nr'";
-		$this->data_array['history']="CONCAT(history,'Update: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n')";
+		$this->data_array['history']=$this->ConcatHistory("Update: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
 		$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-		return $this->updateDataFromInternalArray($nr,FALSE); # param FALSE disables strict numeric id behaviour of the method
+		$this->data_array['modify_time']=date('YmdHis');
+		##### param FALSE disables strict numeric id behaviour of the method
+		return $this->updateDataFromInternalArray($nr,FALSE);
 	}
 	/**
 	* Gets all active insurance firms' information.
@@ -316,7 +320,7 @@ class Insurance extends Core {
 	function getAllActiveFirmsInfo($sortby='name'){
 		global $db;
 		if($sortby=='use_frequency') $sortby.=' DESC';
-		$this->sql="SELECT * FROM $this->tb_insurance WHERE status NOT IN ('inactive','deleted','hidden','closed','void') ORDER BY $sortby";
+		$this->sql="SELECT * FROM $this->tb_insurance WHERE status NOT IN ($this->dead_stat) ORDER BY $sortby";
 	    if($this->result=$db->Execute($this->sql)) {
 	        if($this->result->RecordCount()) {
 		        return $this->result;
@@ -338,7 +342,7 @@ class Insurance extends Core {
 	*/
 	function getLimitActiveFirmsInfo($len=30,$so=0,$sortby='name',$sortdir='ASC'){
 		global $db;
-		$this->sql="SELECT * FROM $this->tb_insurance WHERE status NOT IN ('inactive','deleted','hidden','closed','void') ORDER BY $sortby $sortdir";
+		$this->sql="SELECT * FROM $this->tb_insurance WHERE status NOT IN ($this->dead_stat) ORDER BY $sortby $sortdir";
 	    if($this->res['glafi']=$db->SelectLimit($this->sql,$len,$so)) {
 	        if($this->rec_count=$this->res['glafi']->RecordCount()) {
 		        return $this->res['glafi'];
@@ -352,7 +356,7 @@ class Insurance extends Core {
 	*/
 	function countAllActiveFirms(){
 		global $db;
-		$this->sql="SELECT firm_id FROM $this->tb_insurance WHERE status NOT IN ('inactive','deleted','hidden','closed','void')";
+		$this->sql="SELECT firm_id FROM $this->tb_insurance WHERE status NOT IN ($this->dead_stat)";
 	    if($buffer=$db->Execute($this->sql)) {
 	    	return $buffer->RecordCount();
 	   } else { return 0; }
@@ -373,23 +377,23 @@ class Insurance extends Core {
 	* @return mixed adodb record object or boolean
 	*/
    	function searchActiveFirm($key){
-		global $db;
+		global $db, $sql_LIKE;
 		if(empty($key)) return FALSE;
 		if(is_numeric($key)) $sortby=" ORDER BY firm_id";
 			else $sortby=" ORDER BY name";
 		$select="SELECT firm_id,name,phone_main,fax_main,addr_email  FROM $this->tb_insurance ";
-		$append=" AND status NOT IN ('inactive','deleted','closed','hidden','void') $sortby";
-		$this->sql="$select WHERE ( firm_id LIKE '$key%' OR name LIKE '$key%' OR addr_email LIKE '$key%' ) $append";
+		$append=" AND status NOT IN ($this->dead_stat) $sortby";
+		$this->sql="$select WHERE ( firm_id $sql_LIKE '$key%' OR name $sql_LIKE '$key%' OR addr_email $sql_LIKE '$key%' ) $append";
 		if($this->result=$db->Execute($this->sql)){
 			if($this->result->RecordCount()){
 				return $this->result;
 		    }else{	
-				$this->sql="$select WHERE ( firm_id LIKE '%$key' OR name LIKE '%$key' OR addr_email LIKE '%$key' ) $append";
+				$this->sql="$select WHERE ( firm_id $sql_LIKE '%$key' OR name $sql_LIKE '%$key' OR addr_email $sql_LIKE '%$key' ) $append";
 				if($this->result=$db->Execute($this->sql)){
 					if($this->result->RecordCount()){
 						return $this->result;
 					}else{
-						$this->sql="$select WHERE ( firm_id LIKE '%$key%' OR name LIKE '%$key%' OR addr_email LIKE '%$key%' ) $append";
+						$this->sql="$select WHERE ( firm_id $sql_LIKE '%$key%' OR name $sql_LIKE '%$key%' OR addr_email $sql_LIKE '%$key%' ) $append";
 						if($this->result=$db->Execute($this->sql)){
 							if($this->result->RecordCount()){
 								return $this->result;
@@ -413,22 +417,22 @@ class Insurance extends Core {
 	* @return mixed adodb record object or boolean
 	*/
    	function searchLimitActiveFirm($key,$len=30,$so=0,$oitem='name',$odir='ASC'){
-		global $db;
+		global $db, $sql_LIKE;
 		if(empty($key)) return FALSE;
 		$sortby=" ORDER BY $oitem $odir";
 		$select="SELECT firm_id,name,phone_main,fax_main,addr_email  FROM $this->tb_insurance ";
-		$append=" AND status NOT IN ('inactive','deleted','closed','hidden','void') $sortby";
-		$this->sql="$select WHERE ( firm_id LIKE '$key%' OR name LIKE '$key%' OR addr_email LIKE '$key%' ) $append";
+		$append=" AND status NOT IN ($this->dead_stat) $sortby";
+		$this->sql="$select WHERE ( firm_id $sql_LIKE '$key%' OR name $sql_LIKE '$key%' OR addr_email $sql_LIKE '$key%' ) $append";
 		if($this->res['saf']=$db->SelectLimit($this->sql,$len,$so)){
 			if($this->rec_count=$this->res['saf']->RecordCount()){
 				return $this->res['saf'];
 		    }else{	
-				$this->sql="$select WHERE ( firm_id LIKE '%$key' OR name LIKE '%$key' OR addr_email LIKE '%$key' ) $append";
+				$this->sql="$select WHERE ( firm_id $sql_LIKE '%$key' OR name $sql_LIKE '%$key' OR addr_email $sql_LIKE '%$key' ) $append";
 				if($this->res['saf']=$db->SelectLimit($this->sql,$len,$so)){
 					if($this->rec_count=$this->res['saf']->RecordCount()){
 						return $this->res['saf'];
 					}else{
-						$this->sql="$select WHERE ( firm_id LIKE '%$key%' OR name LIKE '%$key%' OR addr_email LIKE '%$key%' ) $append";
+						$this->sql="$select WHERE ( firm_id $sql_LIKE '%$key%' OR name $sql_LIKE '%$key%' OR addr_email $sql_LIKE '%$key%' ) $append";
 						if($this->res['saf']=$db->SelectLimit($this->sql,$len,$so)){
 							if($this->rec_count=$this->res['saf']->RecordCount()){
 								return $this->res['saf'];
@@ -447,21 +451,21 @@ class Insurance extends Core {
 	* @return integer
 	*/
    	function searchCountActiveFirm($key){
-		global $db;
+		global $db, $sql_LIKE;
 		if(empty($key)) return FALSE;
 		$select="SELECT firm_id FROM $this->tb_insurance ";
-		$append=" AND status NOT IN ('inactive','deleted','closed','hidden','void')";
-		$this->sql="$select WHERE ( firm_id LIKE '$key%' OR name LIKE '$key%' OR addr_email LIKE '$key%' ) $append";
+		$append=" AND status NOT IN ($this->dead_stat)";
+		$this->sql="$select WHERE ( firm_id $sql_LIKE '$key%' OR name $sql_LIKE '$key%' OR addr_email $sql_LIKE '$key%' ) $append";
 		if($this->res['scaf']=$db->Execute($this->sql)){
 			if($this->rec_count=$this->res['scaf']->RecordCount()){
 				return $this->rec_count;
 			}else{	
-				$this->sql="$select WHERE ( firm_id LIKE '%$key' OR name LIKE '%$key' OR addr_email LIKE '%$key' ) $append";
+				$this->sql="$select WHERE ( firm_id $sql_LIKE '%$key' OR name $sql_LIKE '%$key' OR addr_email $sql_LIKE '%$key' ) $append";
 				if($this->res['scaf']=$db->Execute($this->sql)){
 					if($this->rec_count=$this->res['scaf']->RecordCount()){
 						return $this->rec_count;
 					}else{
-						$this->sql="$select WHERE ( firm_id LIKE '%$key%' OR name LIKE '%$key%' OR addr_email LIKE '%$key%' ) $append";
+						$this->sql="$select WHERE ( firm_id $sql_LIKE '%$key%' OR name $sql_LIKE '%$key%' OR addr_email $sql_LIKE '%$key%' ) $append";
 						if($this->res['scaf']=$db->Execute($this->sql)){
 							if($this->rec_count=$this->res['scaf']->RecordCount()){
 								return $this->rec_count;
@@ -481,8 +485,8 @@ class Insurance extends Core {
 *  Personinsurance methods. 
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
-* @version deployment 1.1 (mysql) 2004-01-11
-* @copyright 2002,2003,2004,2004 Elpidio Latorilla
+* @version beta 2.0.0
+* @copyright 2002,2003,2004,2005 Elpidio Latorilla
 * @package care_api
 */
 class PersonInsurance extends Insurance {
@@ -563,7 +567,7 @@ class PersonInsurance extends Insurance {
 		    $index=substr_replace($index,'',(strlen($index))-1);
 		    $values=substr_replace($values,'',(strlen($values))-1);
 
-        $this->sql="INSERT INTO $this->tb_person_insurance ($index) VALUES ($values)";		
+        	$this->sql="INSERT INTO $this->tb_person_insurance ($index) VALUES ($values)";
 		return $this->Transact();
 	}
 	/**
@@ -618,7 +622,7 @@ class PersonInsurance extends Insurance {
     function getInsuranceClassInfo($class_nr) {
         global $db;
 		
-        if($this->result=$db->Execute("SELECT class_nr,class_id,name,LD_var,description,status,history FROM $this->tb_class WHERE class_nr=$class_nr")) {
+        if($this->result=$db->Execute("SELECT class_nr,class_id,name,LD_var AS  \"LD_var\", description,status,history FROM $this->tb_class WHERE class_nr=$class_nr")) {
             if($this->result->RecordCount()) {
 				 $this->row= $this->result->FetchRow();
 				 return $this->row;	 

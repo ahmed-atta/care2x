@@ -6,8 +6,8 @@
 *  User configuration methods. 
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
-* @version deployment 1.1 (mysql) 2004-01-11
-* @copyright 2002,2003,2004 Elpidio Latorilla
+* @version beta 2.0.0
+* @copyright 2002,2003,2004,2005 Elpidio Latorilla
 * @package care_api
 */
 class UserConfig {
@@ -38,12 +38,12 @@ class UserConfig {
 	* Universal flag
 	* @var boolean
 	*/
-	var $bool=false;
+	var $bool=FALSE;
 	/**
 	* Preloaded data flag
 	* @var boolean
 	*/
-	var $is_preloaded=false;
+	var $is_preloaded=FALSE;
 	/**
 	* SQL query
 	* @var string
@@ -69,10 +69,10 @@ class UserConfig {
         $this->ok=$db->Execute($this->sql);
         if($this->ok){
             $db->CommitTrans();
-			return true;
+			return TRUE;
         }else{
 	        $db->RollbackTrans();
-			return false;
+			return FALSE;
 	    }
     }	
 	/**
@@ -113,13 +113,13 @@ class UserConfig {
 		    if ($this->result->RecordCount()) {
 		        $this->row=$this->result->FetchRow();
 			    $this->buffer=unserialize($this->row['serial_config_data']);
-			   	$this->is_preloaded=true;
-			   	return true;
+			   	$this->is_preloaded=TRUE;
+			   	return TRUE;
 			}else{
 				return $this->getConfig(); # Returns default config
 			}
 		}else{
-		    return false;
+		    return FALSE;
 		}
 	}
 	/**
@@ -131,17 +131,13 @@ class UserConfig {
 	function exists($user_id='') {
 	    global $db;
 	
-		if(empty($user_id)) return false;
+		if(empty($user_id)) return FALSE;
 		
 	    if ($this->result=$db->Execute("SELECT user_id FROM $this->tb WHERE user_id='$user_id'")) {
 		    if ($this->result->RecordCount()) {
-				return true;			
-			}else{
-				return false;
-			}
-		}else{
-		    return false;
-		}
+				return TRUE;
+			}else{ return FALSE;}
+		}else{ return FALSE; }
 	}
 	/**
 	* Saves  the user's configuration data.
@@ -153,13 +149,17 @@ class UserConfig {
 	* @return boolean
 	*/
 	function saveConfig($user_id='default',&$data) {
-	    global $db;
+		global $db;
 	    
-		if(empty($data)) return false;
-		
-	    $this->buffer=serialize($data);
-	    $this->sql="REPLACE INTO $this->tb (user_id,serial_config_data) VALUES ('$user_id','$this->buffer')";
-	    return $this->Transact();
+		if(empty($data)) return FALSE;
+
+		$this->buffer=serialize($data);
+		if($this->exists($user_id)){
+			$this->sql="UPDATE $this->tb SET serial_config_data='$this->buffer', modify_id='system',modify_time='".date('YmdHis')."' WHERE user_id='$user_id'";
+		}else{
+			$this->sql="INSERT INTO $this->tb (user_id,serial_config_data,create_time) VALUES ('$user_id','$this->buffer','".date('YmdHis')."')";
+		}
+		return $this->Transact();
 	}
 	/**
 	* Replaces (updates)  a configuration item.
@@ -173,16 +173,16 @@ class UserConfig {
 	function replaceItem($user_id='default',$type='',$value='') {
 	    global $db;
 	    
-		if(empty($type)||empty($value)) return false;
+		if(empty($type)||empty($value)) return FALSE;
 		
 		$this->buffer=$this->getConfig($user_id);
 		
-		if($this->buffer!=false)  {
+		if($this->buffer!=FALSE)  {
 		    $this->buffer[$type]=$value;
-			if($this->saveConfig($user_id,$this->buffer)) return true;
-			   else return false;
+			if($this->saveConfig($user_id,$this->buffer)) return TRUE;
+			   else return FALSE;
 		}else{
-		    return false;
+		    return FALSE;
 		}	         
 	}
 	/**

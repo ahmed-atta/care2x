@@ -7,7 +7,6 @@ if (eregi('inc_products_db_save_mod.php',$PHP_SELF))
 if(isset($cat)&&($cat=='pharma')) $dbtable='care_pharma_products_main';
 	else $dbtable='care_med_products_main';
 
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
 
 // if mode is save then save the data
 if(isset($mode)&&($mode=='save')){
@@ -53,6 +52,7 @@ if(isset($mode)&&($mode=='save')){
 
 	if(!$error){	
 		//clean and check input data variables
+
 		$encoder=trim($encoder); 
 		if($encoder=='') 	$encoder=$ck_prod_db_user; 
 		// save the uploaded picture
@@ -90,8 +90,6 @@ if(isset($mode)&&($mode=='save')){
 			}
 		}
 
-		if($dblink_ok){			
-			
 			$oktosql=true;
 					
 			if(!($update)){
@@ -107,12 +105,16 @@ if(isset($mode)&&($mode=='save')){
 							'minorder'=>$minorder,
 							'maxorder'=>$maxorder,
 							'proorder'=>$proorder,
-							'encoder'=>$encoder,
+							'encoder'=>$HTTP_SESSION_VARS['sess_user_name'],
 							'enc_date'=>$dstamp,
 							'enc_time'=>$tstamp,
 							'lock_flag'=>$lockflag,
 							'medgroup'=>$medgroup,
-							'cave'=>$caveflag );
+							'cave'=>$caveflag,
+							'history'=>"Created ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n",
+							'create_id'=>$HTTP_SESSION_VARS['sess_user_name'],
+							'create_time'=>date('YmdHis')
+							 );
 							
 							# Set core to main products
 							$product_obj->useProduct($cat);
@@ -122,45 +124,47 @@ if(isset($mode)&&($mode=='save')){
 							$oktosql=false;
 			}else{
 					 	$updateok=true;
-					 	$tail='generic="'.$generic.'",
-							description="'.$besc.'",
-							packing="'.$pack.'",
-							minorder="'.$minorder.'",
-							maxorder="'.$maxorder.'",
-							proorder="'.$proorder.'",';
+					 	$tail="generic='$generic',
+							description='$besc',
+							packing='$pack',
+							minorder='$minorder',
+							maxorder='$maxorder',
+							proorder='$proorder',";
 						
 						# If the image filename extension is empty do not update picfile
 						
-						if($picext!="") $tail.='picfile="'.$picfilename.'",';
-						
-						$tail.='encoder="'.$encoder.'",
-							enc_date="'.$dstamp.'",
-							enc_time="'.$tstamp.'",
-							lock_flag="'.(int)$lockflag.'",
-							medgroup="'.$medgroup.'",
-							cave="'.$caveflag.'"';
-					 
-						$sql='UPDATE '.$dbtable.' SET ';
-						
+						if($picext!="") $tail.="picfile='$picfilename',";
+
+						$tail.="encoder='$encoder',
+							enc_date='$dstamp',
+							enc_time='$tstamp',
+							lock_flag='".(int)$lockflag."',
+							medgroup='$medgroup',
+							cave='$caveflag',
+							history=".$product_obj->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
+							create_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+							create_time = '".date('YmdHis')."'";
+
+						$sql="UPDATE $dbtable SET ";
+
 						if($ref_bnum==$bestellnum)
-							$sql=$sql.'artikelnum="'.$artnum.'", industrynum="'.$indusnum.'", artikelname="'.$artname.'", '.$tail.' WHERE bestellnum="'.$bestellnum.'"';
+							$sql=$sql."artikelnum='$artnum', industrynum='$indusnum', artikelname='$artname', $tail  WHERE bestellnum='$bestellnum'";
 							else if ($ref_artnum==$artnum)
-								$sql=$sql.'bestellnum="'.$bestellnum.'", industrynum="'.$indusnum.'", artikelname="'.$artname.'", '.$tail.' WHERE artikelnum="'.$artnum.'"';
+								$sql=$sql."bestellnum='$bestellnum', industrynum='$indusnum', artikelname='$artname', $tail WHERE artikelnum='$artnum'";
 								else if($ref_indusnum==$indusnum)
-									$sql=$sql.'bestellnum="'.$bestellnum.'", artikelnum="'.$artnum.'", artikelname="'.$artname.'", '.$tail.' WHERE industrynum="'.$indusnum.'"';
+									$sql=$sql."bestellnum='$bestellnum', artikelnum='$artnum', artikelname='$artname', $tail WHERE industrynum='$indusnum'";
 									else if($ref_artname==$artname)
-									$sql=$sql.'bestellnum="'.$bestellnum.'", artikelnum="'.$artnum.'", industrynum="'.$indusnum.'", '.$tail.' WHERE artikelname="'.$artname.'"';
-									else 
+									$sql=$sql."bestellnum='$bestellnum', artikelnum='$artnum', industrynum='$indusnum', $tail WHERE artikelname='$artname'";
+									else
 									{	$updateok=false; $oktosql=false;}
 							if($updateok) $keyword=$bestellnum;else  $keyword=$ref_bnum;
 			}
-			//echo $sql;	
+			//echo $sql;
 			if($oktosql){
-				if($db->Execute($sql)){ 
+				if($product_obj->Transact($sql)){
 					$saveok=true;
 				}else{print "no save<p>".$sql."<p>$LDDbNoSave";};
  			}
-		}else{print "now save $sql<p>$LDDbNoLink<br>";}
 	}
 }
 ?>

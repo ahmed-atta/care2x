@@ -18,7 +18,7 @@ require_once($root_path.'include/inc_db_makelink.php');
 
 # The function getLang gets the language code and stores it to the lang variable
 # The ck_language variable is a cookie which holds the language code stored at the beginning of
-# browser's session. After acquiring the language code, the existence of the language table is
+# browser´s session. After acquiring the language code, the existence of the language table is
 # checked. If language table does not exist, function returns 0.
 #
 # param chk_file =  filename of the language table
@@ -43,7 +43,7 @@ function getLang($chk_file)
 require_once($root_path.'include/inc_charset_fx.php'); // charset functions
 
 # The following lines of code is the script chaining detector. It compares the sid values propagated via
-# the relative url with the ck_sid+sid (decrypted) cookie values. If the two don't match, a warning message will apear and
+# the relative url with the ck_sid+sid (decrypted) cookie values. If the two don´t match, a warning message will apear and
 # the script exits stopping the execution. If the caller script does not require chaining, it must set the
 # constant NO_CHAIN to 1 before including this script.
 
@@ -128,11 +128,11 @@ if(!defined('NO_CHAIN')||NO_CHAIN!=1){
 
        if(getLang('invalid-access-warning.php')) {
 
-	       header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php?lang='.$lang); 
+	       header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); 
 	   }
 	     else {
 
-		     header('Location:'.$root_path.'language/'.LANG_DEFAULT.'/lang_'.LANG_DEFAULT.'_invalid-access-warning.php?lang='.$lang);
+		     header('Location:'.$root_path.'language/'.LANG_DEFAULT.'/lang_'.LANG_DEFAULT.'_invalid-access-warning.php');
 		 } 
        
 	   exit;

@@ -11,8 +11,8 @@ require_once($root_path.'include/care_api_classes/class_core.php');
 *  Appointment methods.
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance.
 * @author Elpidio Latorilla
-* @version deployment 1.1 (mysql) 2004-01-11
-* @copyright 2002,2003,2004 Elpidio Latorilla
+* @version beta 2.0.0
+* @copyright 2002,2003,2004,2005 Elpidio Latorilla
 * @package care_api
 */
 class Appointment extends Core {
@@ -149,7 +149,8 @@ class Appointment extends Core {
 	* @return mixed adodb record object or boolean
 	*/
 	function _getAll($y=0,$m=0,$d=0,$by='',$val=''){
-		global $db;
+		global $db, $sql_LIKE;
+		
 		# Set to defaults if empty
 		if(!$y) $y=date('Y');
 		if(!$m) $b=date('m');
@@ -159,7 +160,7 @@ class Appointment extends Core {
 				WHERE a.date='$y-$m-$d'";
 		switch($by){
 			case '_DEPT': $this->sql.=" AND a.to_dept_nr=$val"; break;
-			case '_DOC': $this->sql.=" AND a.to_personell_name  LIKE '%$val%'"; break;
+			case '_DOC': $this->sql.=" AND a.to_personell_name  $sql_LIKE '%$val%'"; break;
 		}
 		$this->sql.=" AND a.status NOT IN ($this->dead_stat) ORDER BY a.date DESC";
 		if($this->res['_ga']=$db->Execute($this->sql)){
@@ -245,9 +246,10 @@ class Appointment extends Core {
 	*/
 	function cancelAppointment($nr='',$reason='',$by=''){	
 		if(empty($nr)) return false;
-		$buffer['history']="CONCAT(history,'Cancel: ".date('Y-m-d H:i:s')." : ".$by."\n')";
+		$buffer['history']=$this->ConcatHistory("Cancel: ".date('Y-m-d H:i:s')." : ".$by."\n");
 		$buffer['appt_status']='cancelled';
 		$buffer['cancel_reason']=$reason;
+        $buffer['modify_time']=date('YmdHis');
 		$this->setDataArray($buffer);
 		$this->where=' nr='.$nr;
 		if($this->updateDataFromInternalArray($nr)) {
@@ -255,3 +257,4 @@ class Appointment extends Core {
 		}else return false;
 	}
 }
+?>

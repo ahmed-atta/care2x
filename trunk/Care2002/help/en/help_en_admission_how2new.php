@@ -1,36 +1,3 @@
-<?php
-if($x1=1){
-?>
-<form>
-<font size=2 face="verdana,arial" >
-<a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-A similar person already exists in the registration what should I do?</b></font>
-<ul> 
-	<b>Step :</b> Click the "Show details" option of the listed person to see the details.
-</ul>
-
-<a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-This is really the same person. What should I do?</b></font>
-<ul> 
-	<b>Step 1:</b> Decide to update the listed person's registration data.<br>
-	<b>Step 2:</b> Click the "Update" option of the listed person.<br>
-	<b>Step 3:</b> Update and save the data.<br>
-
-</ul>
-
-<a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-This is NOT the same person. What should I do?</b></font>
-<ul> 
-	<b>Step 1:</b> Decide to save the new person's data as new registration.<br>
-	<b>Step 2:</b> Scroll down to the bottom of the registration page.<br>
-	<b>Step 3:</b> Click the <input type="button" value="Save anyway"> button.<br>
-
-</ul>
-</form>
-<?php
-}
-?>
-
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>How to admit a patient</b></font>
 <p><font size=2 face="verana,arial" >

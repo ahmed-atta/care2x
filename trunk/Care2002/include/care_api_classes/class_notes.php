@@ -10,8 +10,8 @@ require_once($root_path.'include/care_api_classes/class_core.php');
 *  Notes methods.
 *  Note: this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance.
 * @author Elpidio Latorilla
-* @version deployment 1.1 (mysql) 2004-01-11
-* @copyright 2002,2003,2004,2004 Elpidio Latorilla
+* @version beta 2.0.0
+* @copyright 2002,2003,2004,2005 Elpidio Latorilla
 * @package care_api
 */
 class Notes extends Core {
@@ -116,7 +116,7 @@ class Notes extends Core {
 	
 		if(empty($sort)) $sort=" ORDER BY nr";
 			else $sort=" ORDER BY $sort";
-	    if ($this->result=$db->Execute("SELECT nr,type,name,LD_var FROM $this->tb_types WHERE 1 $sort")) {
+	    if ($this->result=$db->Execute("SELECT nr,type,name,LD_var AS \"LD_var\" FROM $this->tb_types  $sort")) {
 		    if ($this->result->RecordCount()) {
 		        return $this->result->GetArray();
 			} else {
@@ -151,7 +151,7 @@ class Notes extends Core {
 	function getType($nr=1){
 	    global $db;
 
-	    if ($this->res['gt']=$db->Execute("SELECT nr,type,name,LD_var FROM $this->tb_types WHERE nr=$nr")) {
+	    if ($this->res['gt']=$db->Execute("SELECT nr,type,name,LD_var AS \"LD_var\" FROM $this->tb_types WHERE nr=$nr")) {
 		    if ($this->res['gt']->RecordCount()) {
 		        return $this->res['gt']->FetchRow();
 			} else {
@@ -187,20 +187,18 @@ class Notes extends Core {
 	* @access private
 	* @param string Type number of the notes data to be saved.
 	* @return boolean
-	*/			
+	*/
 	function _insertNotesFromInternalArray($type_nr=''){
 		global $HTTP_SESSION_VARS;
 		if(empty($type_nr)) return false;
 		if(empty($this->data_array['date'])) $this->data_array['date']=date('Y-m-d');
 		if(empty($this->data_array['time'])) $this->data_array['time']=date('H:i:s');
 		$this->data_array['type_nr']=$type_nr;
-		$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		//$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
 		$this->data_array['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
-		$this->data_array['create_time']='NULL';	
+		$this->data_array['create_time']=date('YmdHis');
 		$this->data_array['history']="Create: ".date('Y-m-d H-i-s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n\r";	
-		if($this->insertDataFromInternalArray()){
-			return true;
-		}else{ return false;}
+        	return $this->insertDataFromInternalArray();
 	}
 	/**
 	* Updates a notes data record based on the primary record key "nr".
@@ -213,10 +211,14 @@ class Notes extends Core {
 	function _updateNotesFromInternalArray($nr){
 		global $HTTP_SESSION_VARS;
 		$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-		$this->data_array['history']="CONCAT(history,'Update: ".date('Y-m-d H-i-s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n\r')";	
+		$this->data_array['modify_time']=date('YmdHis');
+		$this->data_array['history']=$this->ConcatHistory("Update: ".date('Y-m-d H-i-s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n\r");
+		return $this->updateDataFromInternalArray($nr);
+		/*
 		if($this->updateDataFromInternalArray($nr)){
 			return true;
 		}else{ return false; }
+		*/
 	}
 	/**
 	* Gets the date range of a certain notes type that fits to a given condition.

@@ -4,7 +4,7 @@ if (eregi('inc_mozillapatch_redirect.php',$PHP_SELF))
 	die('<meta http-equiv="refresh" content="0; url=../">');
 #------end-----
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <head>
 <?php echo setCharSet(); ?>
 <title></title>

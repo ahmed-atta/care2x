@@ -8,7 +8,7 @@ if (eregi('inc_passcheck.php',$PHP_SELF))
 * CARE 2002 Integrated Hospital Information System
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
-* elpidio@latorilla.com
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -56,7 +56,7 @@ function logentry(&$userid,$key,$report,&$remark1,&$remark2)
 
 if($dblink_ok) 
 {*/	
-    $sql='SELECT name, login_id, password, permission, lockflag FROM care_users WHERE login_id="'.addslashes($userid).'"';
+    $sql='SELECT name, login_id, password, permission, lockflag FROM care_users WHERE login_id=\''.addslashes($userid).'\'';
 
 	if($ergebnis=$db->Execute($sql))
 	{

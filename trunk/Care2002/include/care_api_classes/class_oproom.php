@@ -19,8 +19,8 @@ require_once($root_path.'include/care_api_classes/class_core.php');
 *
 *  Note: this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance.
 * @author Elpidio Latorilla
-* @version deployment 1.1 (mysql) 2004-01-11
-* @copyright 2002,2003,2004,2004 Elpidio Latorilla
+* @version beta 2.0.0
+* @copyright 2002,2003,2004,2005 Elpidio Latorilla
 * @package care_api
 */
 class OPRoom extends Core {
@@ -103,9 +103,12 @@ class OPRoom extends Core {
 	* @return boolean
 	*/
 	function ORNrExists($rm_nr){
+		return $this->_RecordExists("type_nr=2 AND room_nr=$rm_nr");
+		/*
 		if($this->_RecordExists("type_nr=2 AND room_nr=$rm_nr")){
 			return true;
 		}else{return false;}
+		*/
 	}
 	/**
 	* Returns OP room information.
@@ -176,14 +179,18 @@ class OPRoom extends Core {
 		if(empty($sort)) $sort=" ORDER BY room_nr";
 			else $sort=" ORDER BY $sort";
 		
-		if(empty($cond)) $cond='1';
+		if(empty($cond)) $cond='';
 		
 		$this->sql="SELECT o.*, w.ward_id, w.name AS wardname, d.name_formal AS deptname, d.name_short AS deptshort, d.LD_var AS \"LD_var\"
 						 FROM $this->tb_room AS o
 						 			LEFT JOIN $this->tb_ward AS w ON o.ward_nr=w.nr
 									LEFT JOIN $this->tb_dept AS d ON o.dept_nr=d.nr
-						WHERE o.type_nr=$this->OR_typenr AND $cond $sort";
-		//echo $this->sql;
+						WHERE o.type_nr=$this->OR_typenr";
+		
+		if(!empty($cond)) $this->sql.=" AND $cond";
+
+		$this->sql.=" $sort";
+
 		if ($this->res['aaoi']=$db->Execute($this->sql)) {
 		    if ($this->rec_count=$this->res['aaoi']->RecordCount()) {
 		        return $this->res['aaoi'];
@@ -210,14 +217,14 @@ class OPRoom extends Core {
 	* @return mixed adodb record object or boolean
 	*/ 
 	function AllActiveORInfo($sort=''){
-		return $this->AllORInfo($sort,"o.is_temp_closed='' AND o.status NOT IN('inactive','hidden')");
+		return $this->AllORInfo($sort,"o.is_temp_closed IN ('',0) AND o.status NOT IN('inactive','hidden')");
 	}
 	/**
 	* Returns the type number of OP room.
 	* @access public
 	* @return integer
 	*/
-	function ORTypeNr(){
+	function ORTypeNr(){ 
 		return $this->OR_typenr;
 	}
 	/**
@@ -255,7 +262,6 @@ class OPRoom extends Core {
 	* Returns a line of text of all room numbers separated by comma.
 	*
 	* Used for validation purposes by searching a users input against this text.
-	* Returns an empty string if no room available.
 	* @access public
 	* @return string
 	*/

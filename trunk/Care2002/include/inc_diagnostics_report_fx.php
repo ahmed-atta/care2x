@@ -16,10 +16,14 @@ function signalNewDiagnosticsReportEvent($report_date='', $script_name='labor_te
 	# Check if the formatDate2Local function is loaded 
 	if(!function_exists('formatDate2Local'))   include_once($root_path.'include/inc_date_format_functions.php');
 
-	# Load the visual signalling defined constants 
+	# Load the visual signalling defined constants
 	if(!function_exists('setEventSignalColor')) include_once($root_path.'include/inc_visual_signalling_fx.php');
-   
-									
+	
+	# Create a core object
+	include_once($root_path.'include/care_api_classes/class_core.php');
+	$core = & new Core;
+
+
     $entry_table='care_encounter_diagnostics_report';
 									
     $report_exits=0; # assume that report does not exist yet
@@ -46,8 +50,9 @@ function signalNewDiagnosticsReportEvent($report_date='', $script_name='labor_te
 						report_date='".$report_date."',
 						report_time='".date('H:i:s')."',
 						status='pending',
-						history=CONCAT(history,'Update: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n\r'),
-						modify_id='".$HTTP_SESSION_VARS['sess_user_name']."'
+						history=".$core->ConcatHistory("Update: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
+						modify_id='".$HTTP_SESSION_VARS['sess_user_name']."',
+						modify_time='".date('YmdHis')."'
 						WHERE item_nr='".$report['item_nr']."'";
 		}
 		else
@@ -63,7 +68,6 @@ function signalNewDiagnosticsReportEvent($report_date='', $script_name='labor_te
 						script_call,
 						status,
 						history,
-						modify_id,
 						create_id,
 						create_time
 					)
@@ -79,14 +83,13 @@ function signalNewDiagnosticsReportEvent($report_date='', $script_name='labor_te
 						'pending',
 						'Initial report: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n\r',
 						'".$HTTP_SESSION_VARS['sess_user_name']."',
-						'".$HTTP_SESSION_VARS['sess_user_name']."',
-						NULL
+						'".date('YmdHis')."'
 					)";
 																						
 		}
 		 //echo $sql;
 									    
-		if($ergebnis=$db->Execute($sql))
+		if($ergebnis=$core->Transact($sql))
 		{
 		    /* If the findings are succesfully saved, make an entry into the care_encounter_diagnostics_report table
 		    *  for signalling purposes

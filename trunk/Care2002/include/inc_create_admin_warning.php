@@ -1,4 +1,4 @@
-<?php html_rtl($lang); ?>
+<html>
 <head>
 <?php echo setCharSet($lang) ?>
 <title></title>
@@ -10,7 +10,7 @@
     <td>
 	<table border=0 bgcolor="#ffffff" width=100%>
    <tr>
-     <td align=center><font size=6 color=#ff0000 face="verdana,arial,helvetica"><?php echo $LDWarning ?></font></td>
+     <td align=center><font size=6 color=#800000 face="verdana,arial,helvetica"><?php echo $LDWarning ?></font></td>
    </tr>
  </table>
  
@@ -26,7 +26,7 @@
     <td>
 	<table border=0 bgcolor="#ffffff" width=100%>
    <tr>
-     <td align=center><font size=5 color=#800000 face="verdana,arial,helvetica"><?php echo $LDCreateAdminWarning ?></font></td>
+     <td align=center><font size=5 color=#ff0000 face="verdana,arial,helvetica"><?php echo $LDCreateAdminWarning ?></font></td>
    </tr>
  </table>
  

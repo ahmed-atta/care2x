@@ -6,34 +6,34 @@
 
 <?php if($src=="") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Como mostrar os gráficos dos parâmetros de teste?</b>
+How to display the graphical chart for test parameters?</b>
 </font>
 <ul>      
- 	<b>Passo 1: </b>Clique na caixa de seleção <input type="checkbox" name="s" value="s" verififcado> correspondente ao parâmetro escolhido para selecioná-lo.<br>
-		<b>Passo 2: </b>Se você quiser mostrar vários parâmetros de uma só vez, clique nas caixas de seleção correspondentes.<br>
-		<b>Passo 3: </b>Clique no ícone <img <?php echo createComIcon('../','chart.gif','0') ?>>  para a exibição do gráfico.<br>
+ 	<b>Step 1: </b>Click on the checkbox <input type="checkbox" name="s" value="s" checked> corresponding to the chosen parameter to select it.<br>
+		<b>Step 2: </b>If you want to display several parameters at once, click on their corresponding checkboxes.<br>
+		<b>Step 3: </b>Click on the icon <img src="../img/chart.gif" width=16 height=17 border=0> to display the graphical chart.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Eu quero selecionar todos os parâmetros. Há um modo rápido de selecionar todos os parâmetros de uma só vez?</b>
+I want to select all parameters. Is there a fast way to select them all at once?</b>
 </font>
 <ul>      
-		<b>Sim, há!</b><br>
-		<b>Passo 1: </b>Clique  no botão <img <?php echo createComIcon('../','dwnarrowgrnlrg.gif','0') ?> border=0> para selecionar todos os parâmetros.<br>
+		<b>Yes there is!</b><br>
+		<b>Step 1: </b>Click on the button <img <?php echo createComIcon('../','dwnarrowgrnlrg.gif','0') ?> border=0> to select all parameters.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Como desmarcar todos os parâmetros?</b>
+How to deselect all parameters?</b>
 </font>
 <ul>      
-		<b>Passo 1: </b>Clique no botão <img <?php echo createComIcon('../','dwnarrowgrnlrg.gif','0') ?> border=0> novamente para DESMARCAR todos os parâmetros.<br>
+		<b>Step 1: </b>Click on the button <img <?php echo createComIcon('../','dwnarrowgrnlrg.gif','0') ?> border=0> once again to DESELECT all parameters.<br>
 </ul>
 <?php endif ?>
 <?php if($src=="graph") : ?>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Como voltar para os resultados dos testes sem os gráficos? </b></font>
-<ul> <b>Nota: </b>Se você quiser voltar, clique no botão <img <?php echo createLDImgSrc('../','back2.gif','0','absmiddle') ?>>.</ul>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>How to go back to the test results w/o graphic charts? </b></font>
+<ul> <b>Note: </b>If you want to go back, click the button <img <?php echo createLDImgSrc('../','back2.gif','0','absmiddle') ?>>.</ul>
 <?php endif ?>
 
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Como fechar o laboratório <?php echo $x3 ?>? </b></font>
-<ul> <b>Nota: </b>Se você quiser fechar, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle">.</ul>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>How to close the laboratory <?php echo $x3 ?>? </b></font>
+<ul> <b>Note: </b>If you want to close, click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle">.</ul>
 
 
 </form>

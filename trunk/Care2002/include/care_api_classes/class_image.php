@@ -10,8 +10,8 @@ require_once($root_path.'include/care_api_classes/class_core.php');
 *  Image methods. 
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
-* @version beta 1.0.09
-* @copyright 2002,2003,2004 Elpidio Latorilla
+* @version beta 2.0.0
+* @copyright 2002,2003,2004,2005 Elpidio Latorilla
 * @package care_api
 */
 class Image extends Core{
@@ -29,7 +29,7 @@ class Image extends Core{
 	* Default filter string for allowed file extensions
 	* @var string
 	*/
-	var $mimefilter='jpg,gif,png,bmp';
+	var $mimefilter='jpg,jpeg,gif,png,bmp';
 	/**
 	* Holder for the uploaded file' extension/mime type
 	* @var string
@@ -286,7 +286,7 @@ class Image extends Core{
 	* @return mixed adodb record object or boolean
 	*/
 	function DicomImages($key=''){
-		global $db;
+		global $db, $sql_LIKE;
 		$this->sql="SELECT i.nr, i.encounter_nr, i.upload_date, i.max_nr, LENGTH(i.notes) AS note_len,
 						p.pid, p.name_last, p.name_first, p.date_birth
 				FROM $this->tb_img_diag AS i, $this->tb_person AS p";
@@ -295,10 +295,10 @@ class Image extends Core{
 				$key=(int)$key;
 				$this->sql.=" WHERE (i.encounter_nr = $key OR i.pid = $key)";
 			}else{
-				$this->sql.=" WHERE (i.encounter_nr LIKE '$key%' 
-						OR i.pid LIKE '$key%'
-						OR p.name_last LIKE '$key%'
-						OR p.name_first LIKE '$key%' )";
+				$this->sql.=" WHERE (i.encounter_nr $sql_LIKE '$key%' 
+						OR i.pid $sql_LIKE '$key%'
+						OR p.name_last $sql_LIKE '$key%'
+						OR p.name_first $sql_LIKE '$key%' )";
 			}
 			$this->sql.=' AND';
 		}else{

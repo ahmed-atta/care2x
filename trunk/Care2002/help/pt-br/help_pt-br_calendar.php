@@ -1,6 +1,7 @@
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
-Calendário  
+Calendar  
 </b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
@@ -8,33 +9,33 @@ Calendário
 Tip:</b>
 </font>
 <ul>       	
- 	Se você clicar em uma data do calendário, aparecerá uma janela pop up mostrando várias opções tanto para o usuário que estiver logado como para o departmento.<br>
+ 	If you click on a date in the calendar, a window will pop up showing several options for both the logged-in user and department.<br>
 </ul>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Como mostrar o mes anterior?</b>
+How to display the previous month?</b>
 </font>
 <ul>       	
- 	<b>Passo 1: </b>Clique no link "<span style="background-color:yellow" > << mes anterior </span>" no canto superior esquerdo do calendário.<br>
+ 	<b>Step 1: </b>Click the link "<span style="background-color:yellow" > << previous month </span>" on the upper left part of the calendar.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Como mostrar o mes seguinte?</b>
+How to display the following month?</b>
 </font>
 <ul>       	
- 	<b>Passo 1: </b>Clique no link "<span style="background-color:yellow" >  próximo mes >> </span>" no canto superior direito do calendário.<br>
+ 	<b>Step 1: </b>Click the link "<span style="background-color:yellow" >  next month >> </span>" on the upper right part of the calendar.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Como selecionar um determinado mes?</b>
+How to select a month directly?</b>
 </font>
 <ul>       	
- 	<b>Passo 1: </b>Selecione o mes a partir da caixa de seleção "<span style="background-color:yellow" >  Mes </span>".<br>
- 	<b>Passo 2: </b>Entre com o ano no campo "<span style="background-color:yellow" >  Year </span>" .<p>
+ 	<b>Step 1: </b>Select the month from the selection box "<span style="background-color:yellow" >  Month </span>".<br>
+ 	<b>Step 2: </b>Enter the year in the "<span style="background-color:yellow" >  Year </span>" field.<p>
 	<ul>    
-	<b>Dica:</b><br>
-		Clique no botão <img <?php echo createComIcon('../','varrow-u.gif','0','absmiddle') ?>> para aumentar o ano.<br>
-		Clique no botão <img <?php echo createComIcon('../','varrow-d.gif','0','absmiddle') ?>> para diminuir o ano.<br>
+	<b>Tip:</b><br>
+		Click the button <img <?php echo createComIcon('../','varrow-u.gif','0','absmiddle') ?>> to increase the year.<br>
+		Click the button <img <?php echo createComIcon('../','varrow-d.gif','0','absmiddle') ?>> to decrease the year.<br>
 	</ul>
- 	<b>Passo 3: </b>Clique no botão <input type="button" value="OK">.
+ 	<b>Step 3: </b>Click the button <input type="button" value="Go">.
 </ul>
 	
 

@@ -21,9 +21,9 @@ if($cfg['dhtml'])
 ?>
 <script language="JavaScript">
 <!--
-function popPic(nd,fn){
+function popPic(pid,nm){
 
-	regpicwindow = window.open("<?php echo $root_path ?>main/pop_reg_pic.php<?php echo URL_REDIRECT_APPEND ?>&nm="+nd+"&fn="+fn,"regpicwin","toolbar=no,scrollbars,width=180,height=250");
+	if(pid!="") regpicwindow = window.open("<?php echo $root_path ?>main/pop_reg_pic.php<?php echo URL_REDIRECT_APPEND ?>&pid="+pid+"&nm="+nm,"regpicwin","toolbar=no,scrollbars,width=180,height=250");
 
 }
 // -->
