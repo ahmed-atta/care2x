@@ -189,7 +189,7 @@ pour l`éducation de la science d`ordinateurs, les logiciels libres et distributi
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../gui/img/control/default/<?php echo $lang ?>/<?php echo $lang ?>_x-blank.gif"  border=0  width=135 align=right vspace=10>
-			<b>Daniele Frijia (DE) contrôlée les aspects de sécurité de Care 2002.</b>
+			<b>Daniele Frijia (DE) a contrôlé les aspects de sécurité de Care 2002.</b>
 			<br>
 			Quelques de ses multiples contributions:<p>
 			<font size=1>
@@ -198,11 +198,11 @@ pour l`éducation de la science d`ordinateurs, les logiciels libres et distributi
 			Il est le "sentinel" du projet
 		</font>
 		    <p>
-			Daniele Frijia (née en 81), travaille actuellement pour un ISP à Nuremberg, Allemagne, dédie sa connaissance de php
+			Daniele Frijia (né en 81), travaille actuellement pour un ISP à Nuremberg, Allemagne, dédie sa connaissance de php
 			afin d'améliorer la sécurité de Care2x. L'intention est d'ouvrir un nouveau "marché" (médical)
 			pour la communauté du logiciel libre.
 
-			<P><a href="mailto:daniele@infra.de"><u>Daniele Frijia peut être contactée ici...</u></a>
+			<P><a href="mailto:daniele@infra.de"><u>Daniele Frijia peut être contacté ici...</u></a>
 </TD></TR></TBODY></TABLE>
 
 
