@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.0, created on 2004-07-06 22:55:35
+<?php /* Smarty version 2.6.0, created on 2004-11-23 17:03:39
          compiled from registration_admission/reg_form.tpl */ ?>
 				<?php echo $this->_tpl_vars['sRegFormJavaScript']; ?>
 
@@ -148,6 +148,7 @@ unset($_smarty_tpl_vars);
 
 				<tr>
 				<td colspan=3>
+				  <br>
 					<?php echo $this->_tpl_vars['LDAddress']; ?>
 
 				</td>
@@ -232,8 +233,7 @@ unset($_smarty_tpl_vars);
 				</tr>
 			<?php endif; ?>
 
-				
-				<?php echo $this->_tpl_vars['sPhone1']; ?>
+								<?php echo $this->_tpl_vars['sPhone1']; ?>
 
 				<?php echo $this->_tpl_vars['sPhone2']; ?>
 

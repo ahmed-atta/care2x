@@ -92,7 +92,6 @@ class smarty_care extends Smarty {
 
 		# Another check if the working directory is really inside the template theme.
 		# If not, use default template theme.
-
 		if(file_exists($this->sDocRoot."/templates/$this->templatedir/$dirname/.")){
 			$this->template_dir = $this->sDocRoot."/templates/$this->templatedir";
 			//$this->compile_dir = $this->sDocRoot."/templates_c/$this->templatedir/$dirname";
