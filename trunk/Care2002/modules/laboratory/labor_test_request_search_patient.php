@@ -44,6 +44,11 @@ switch($target)
 						  $entry_body_bgcolor="#ffffff";
 						  $breakfile="nursing-station-patientdaten-doconsil-blood.php?sid=".$sid."&lang=".$lang."&target=".$target."&noresize=1&user_origin=".$user_origin;
 						  break;
+  case 'radio': $entry_block_bgcolor="#efefef";
+                          $entry_border_bgcolor="#fcfcfc";
+						  $entry_body_bgcolor="#ffffff";
+						  $breakfile="nursing-station-patientdaten-doconsil-radio.php?sid=".$sid."&lang=".$lang."&target=".$target."&noresize=1&user_origin=".$user_origin;
+						  break;
   default            : $entry_block_bgcolor="#fff3f3";
                           $entry_border_bgcolor="#ee6666";
 						  $entry_body_bgcolor="#ffffff";
