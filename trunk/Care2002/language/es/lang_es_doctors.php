@@ -1,7 +1,7 @@
 <?php
 
 /**
-* Correcciones: Dr. med. Daniel Hinostroza C.
+* Correcciones: Dr. med. Daniel Hinostroza C. y Dr. Manuel Montemayor
 */
 
 $Jan='Enero';
@@ -23,8 +23,8 @@ $Dez='Diciembre';
 $monat=array('',$Jan,$Feb,$Mae,$Apr,$Mai,$Jun,$Jul,$Aug,$Sep,$Okt,$Nov,$Dez);
 
 $LDDoctors='Doctores';
-$LDQView='Vista rápida para el médico de llamada';  // DOC = doctor on call
-$LDQViewTxt='Vista rápida del itinerario de trabajo del médico de llamada';
+$LDQView='Vista rápida para el médico de guardia';  // DOC = doctor on call
+$LDQViewTxt='Vista rápida del itinerario de trabajo del médico de guardia';
 $LDDutyPlan='Plan de actividades';
 $LDDutyPlanTxt='Plan de actividades, ver, actualizar, borrar, administrar, etc.';
 $LDDocsList='Lista de los médicos';
@@ -36,13 +36,13 @@ $LDNewsTxt='Componer, leer, editar noticias';
 $LDMemo='Memo';
 $LDMemoTxt='Componer, leer, editar memo';
 $LDCloseAlt='Cerrar la ventana de los médicos y cirujanos';
-$LDDocsOnDuty='Médicos de llamada';
+$LDDocsOnDuty='Médicos de guardia';
 
 $LDTabElements=array('Departamento',
 								 'DOC 1',
-								 'Buscapersonas/Teléfono',
+								 'Beeper/Teléfono',
 								 'DOC 2',
-								 'Buscapersonas/Teléfono',
+								 'Beeper/Teléfono',
 								 'Plan de actividades'
 								 );
 $LDShowActualPlan='Mostrar plan actual de actividades';
@@ -62,8 +62,8 @@ $LDFullDay=array('Domingo',
 								'Viernes',
 								'Sábado'
 								);
-$LDDoc1='Médico de llamada 1';
-$LDDoc2='Médico de llamada 2';
+$LDDoc1='Médico de guardia 1';
+$LDDoc2='Médico de guardia 2';
 $LDClosePlan='Cerrar este plan';
 $LDNewPlan='Crear un nuevo plan ';
 $LDBack='Volver';
@@ -71,8 +71,8 @@ $LDHelp='Ayuda';
 $LDMakeDutyPlan='Crear un plan de actividades';
 $LDClk2Plan='Click para abrir la lista de personal';
 $LDInfo4Duty='Información';
-$LDStayIn='Stay-in duty';
-$LDOnCall='On call duty';
+$LDStayIn='Activo';
+$LDOnCall='De guardia';
 $LDPhone='Teléfono';
 $LDBeeper='Beeper';
 $LDMoreInfo='Más información';
@@ -94,16 +94,16 @@ $LDCreatePersonList='Crear la lista de personal';
 $LDNoPersonList='La lista del personal todavía no se ha creado' ;
 $LDShow='Mostrar';
 
-$LDDOCS='Actividades para el médico de llamada';
-$LDDOCSTxt='Agenda del médico de llamada, planificar, ver, editar, etc.';
+$LDDOCS='Actividades para el médico de guardia';
+$LDDOCSTxt='Agenda del médico de guardia, planificar, ver, editar, etc.';
 $LDDOCSR='DOCSR';
-$LDDOCSRTxt='Solicitante de horario - Médico de llamada';
+$LDDOCSRTxt='Solicitante de horario - Médico de guardia';
 /* 2002-09-15 EL */
 $LDTestRequest='Petición de prueba ';
 /* 2003-03-16 EL */
 $LDContactInfo='Información de contacto';
 $LDPersonalContactInfo='Información de contacto personal';
-$LDOnCallContactInfo='Información para contactar al médico de llamada';
+$LDOnCallContactInfo='Información para contactar al médico de guardia';
 $LDPlsSelectDept='Por favor seleccione el Departamento';
 $LDCreateDoctorsList='Crear la lista de los médicos';
 $LDPlsCreateList='Por favor, cree la lista primero.';

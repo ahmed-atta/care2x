@@ -1,9 +1,7 @@
 <?php
-
 /**
 * Correcciones: Dr. med. Daniel Hinostroza C.
 */
-
 print '
 		<FONT  SIZE=+1 COLOR="#cc0000" FACE="verdana,Arial">
 		<b>'.ucfirst($LDNewsDummy[$i]).' artículo</b>
@@ -16,5 +14,5 @@ print '
 			 El redactor le guiará paso a paso.
 
 			Usted puede incluir una fotografía para completar el artículo.<p>
-			Escriba su artículo ahora...</font><br>';
+			Escriba su artículo ahora...</font>';
 ?>

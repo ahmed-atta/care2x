@@ -22,4 +22,12 @@ $LDListApptByDoc='ÇÚÑÖ ÇáãæÇÚíÏ ÈæÇÓØÉ ÇáØÈíÈ';
 $LDdone='Êã';
 $LDOk='ãæÇÝÞ';
 $LDSelect='ÇÎÊíÇÑ';
+
+$LDHelp="Help";
+$LDCloseHelpWin="Close help window";
+
+$LDRefreshWindow = 'Refresh display';
+
+$LDNext = 'Next';
+$LDPrevious = 'Previous';
 ?>

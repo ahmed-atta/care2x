@@ -80,4 +80,6 @@ $LDRAIMJAVA='RAIMJAVA©';
 $LDNoImageSaved='Kein Bild is gespeichert!';
 $LDImageNotes='Information';
 
+#2004-08-05 EL
+$LDMissingImageFile = 'Missing image file(s)!';
 ?>

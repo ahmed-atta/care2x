@@ -406,5 +406,10 @@ $LDSimilarData2='ÇáÇÔÎÇÕ Ýí ÇáÞÇÆãÉ ÇáÊÇáíÉ áÐíåã äÝÓ ÇáÈíÇäÇÊ ÇáÔÎÕíÉ.';
 $LDPlsCheckFirst='ÊÃßÏ ãäå ÇæáÇ ÞÈá Çä ÊÞÑÑ ÇáÎØæÉ ÇáÊÇáíÉ';
 $LDPlsCheckFirst2='ÊÃßÏ ãäåã ÇæáÇ ÞÈá Çä ÊßÑÑ ÇáÎØæÉ ÇáÊÇáíÉ.';
 $LDShowDetails='ÇÖåÇÑ ÇáÊÝÇÕíá';
-?>
 
+# 2004-05-22 KB
+$LDNr='Nr.';
+$LDOtherHospitalNr='Other Hospital Nr.';
+$LDSelectOtherHospital = 'Select other hospital to change the number';
+$LDNoNrNoDelete = 'no number = delete';
+?>

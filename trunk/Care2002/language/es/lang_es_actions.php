@@ -27,4 +27,12 @@ $LDListApptByDoc='Mostrar la lista de citas según el Tratante';
 $LDdone='Hecho';
 $LDOk='Ok';
 $LDSelect='Seleccionar';
+
+$LDHelp="Ayudar";
+$LDCloseHelpWin="Close help window";
+
+$LDRefreshWindow = 'Refresh display';
+
+$LDNext = 'Next';
+$LDPrevious = 'Previous';
 ?>

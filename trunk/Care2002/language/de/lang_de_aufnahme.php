@@ -401,4 +401,10 @@ $LDSimilarData2='Die folgende Personen in der Liste haben die gleiche Stammdaten
 $LDPlsCheckFirst='Bitte prüfen Sie sie nach bevor Sie den nächsten Schritt machen.';
 $LDPlsCheckFirst2='Bitte prüfen Sie sie nach bevor Sie den nächsten Schritt machen.';
 $LDShowDetails='Details zeigen';
+
+# 2004-05-22 KB
+$LDNr='Nr.';
+$LDOtherHospitalNr='Andere KH Nr.';
+$LDSelectOtherHospital = 'Ein anderes KH wählen zum Nummernwechsel';
+$LDNoNrNoDelete = 'keine Nummer = Löschen';
 ?>

@@ -396,8 +396,8 @@ $LDFinanceType='Insurance';
 $LDOutToInpatient='Change admission status to inpatient';
 $LDTransferClinic='Transfer to clinic or department';
 $LDClinic='Clinic';
-$LDOwnPatient='Own\'s patient';
-$LDNonOwnPatient='Non-own\'s patient';
+$LDOwnPatient='This ward\'s patient';
+$LDNonOwnPatient='Not this ward\'s patient';
 # 2003-08-04 EL
 $LDShowClinicOnly='This clinic only';
 # 2003-09-16 EL

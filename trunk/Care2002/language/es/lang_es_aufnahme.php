@@ -1,7 +1,7 @@
 <?php
 
 /**
-* Correcciones: Dr. med. Daniel Hinostroza C.
+* Correcciones: Dr. med. Daniel Hinostroza C. y Dr. Manuel Montemayor
 */
 
 $LDAdmission='Admisión';
@@ -22,7 +22,7 @@ $LDAmbulant='Consulta externa';
 $LDStationary='Paciente hospitalizado';
 $LDSelfPay='No tiene seguro';
 $LDPrivate='Seguro privado';
-$LDInsurance='Seguro estatal';
+$LDInsurance='Seguro social';
 $LDDiagnosis='Diagnóstico';
 $LDRecBy='Referido por';
 $LDTherapy='Terapia';
@@ -401,13 +401,19 @@ $LDIncludeFirstName='Busque también entre los nombres.';
 $LDTipsTricks='Consejos y trucos';
 
 #2003-12-06 EL
-$LDPrintPDFDoc='Make PDF document';
-$LDDeathDate='Death date';
+$LDPrintPDFDoc='Hacer un documento PDF ';
+$LDDeathDate='Fecha de Defunción';
 #2004-01-01 EL
-$LDPersonDuplicate='This person seems to be registered already.';
-$LDSimilarData='The following listed person has similar personal data.';
-$LDSimilarData2='The following listed persons have similar personal data.';
-$LDPlsCheckFirst='Please check it out first before you decide the next step.';
-$LDPlsCheckFirst2='Please check them out first before you decide the next step.';
-$LDShowDetails='Show details';
+$LDPersonDuplicate='Al parecer ésta persona ya fué registrada.';
+$LDSimilarData='Estas personas tienen datos personales similares.';
+$LDSimilarData2='Las siguientes personas tienen datos personales similares.';
+$LDPlsCheckFirst='Favor de verificarlo primero antes de decidir el siguiente paso.';
+$LDPlsCheckFirst2='Favor de verificarlo primero antes de decidir el siguiente paso.';
+$LDShowDetails='Mostrar detalles';
+
+# 2004-05-22 KB
+$LDNr='Nr.';
+$LDOtherHospitalNr='Other Hospital Nr.';
+$LDSelectOtherHospital = 'Select other hospital to change the number';
+$LDNoNrNoDelete = 'no number = delete';
 ?>

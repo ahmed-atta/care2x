@@ -4,7 +4,7 @@
 */
 
 /**
-* Correcciones: Dr. med. Daniel Hinostroza C.
+* Correcciones: Dr. med. Daniel Hinostroza C. y Dr. Manuel Montemayor
 */
 
 $LDNursing='Enfermería';
@@ -17,7 +17,7 @@ $LDStationMan='Dirección de enf.';
 $LDNews='Noticias';
 $LDMemo='Memo';
 $LDNursingForum='Foro de enfermería';
-$LDNursingStations='Estaciones';
+$LDNursingStations='Estaciones de enfermería';
 
 $LDQuickViewTxt='Vista rápida de la ocupación de hoy, de las estaciones de enfermeria.';
 $LDSearchPatientTxt='Busque en las estaciones para admitir el paciente.';
@@ -411,7 +411,7 @@ $LDNonOwnPatient='No es paciente propio';
 # 2003-08-04 EL
 $LDShowClinicOnly='Solamente a esta clínica';
 # 2003-09-16 EL
-$LDAdmissionData='Admission data';
-$LDShowPhoto='Show photo';
-$LDOpenWardManagement='Open ward for administration';
+$LDAdmissionData='Datos de Admisión';
+$LDShowPhoto='Mostrar Foto';
+$LDOpenWardManagement='Abrir pabellon para administración';
 ?>

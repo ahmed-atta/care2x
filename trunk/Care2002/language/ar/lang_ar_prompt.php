@@ -84,4 +84,8 @@ $LDPlsEnterScrubNurse='ÃÏÎá ãÚáæãÇÊ ÚäÕÑ ÇáÊãÑíÖ';
 $LDPlsEnterORNr='ÃÏÎá ÊÚÑíÝ Ã, ÑÞã ÍÌÑÉ ÇáÚãáíÇÊ';
 $LDWrongLoginPW='ÇÓã ÇáãÓÊÎÏã Çæ ßáãÉ ÇáÓÑ ÛíÑ ÕÍíÍÉ';
 $LDPlsORNr='ÇÏÎá ÑÞã ÛÑÝÉ ÇáÚãáíÇÊ';
+
+#2004-08-06 EL
+$LDInvalidDate ='The entered date was invalid.';
+$LDNoPastDate = 'Dates in the past are not accepted.';
 ?>

@@ -210,4 +210,34 @@ $LDNewsgroupTxt='Spiegel der Mailingliste von den Projektentwicklern.';
 # 2002-08-19 EL
 $LDPharmaIndex='Rote Liste';
 $LDPharmaIndexTxt='Pharmaindizes wie z.B Rote Liste, Gelbe Liste, oder IFAP';
+
+#2004-05-23 EL
+$LDPlugins='Plugins';
+$LDNoPluginsPrompt='Es gibt noch kein installiertes Plugin. Um Plugins zu holen bitte gehen zu http://www.care2x-plugins.org.';
+$LDPluginsTxt='Collection of plugin tools and modules';
+
+#2004-06-13 EL
+$LDCssThemes = 'CSS Themes - Design';
+$LDCssThemesTxt= 'Randfarbe, Randdekoration, Schrift & Schriftgröße, u.v.m.';
+$LDDescription = 'Beschreibung';
+$LDScreenshot = 'Screenshot';
+
+#2004-06-30
+$LDSmartyTemplate = 'Smarty Template - Design';
+$LDSmartyTemplateTxt = 'Select smarty based GUI template theme';
+
+#2004-07-08
+$LDControlButtons = 'Steuerknöpfe - Stil';
+$LDControlButtonsTxt = 'Stil der Steuerknöpfe auswählen';
+$LDComIcons = 'Icons - Stil';
+$LDComIconsTxt = 'Icons auswählen <br>(Merke: in Kombination mit manchen CSS Design werden die Icons übergangen)';
+$LDDevDesigner = 'Entwickler/Entwurf von';
+$LDNoIcon = 'Keine Icons';
+$LDNoIconTxt = 'Icons in Untermenüs werden nicht gezeigt.';
+
+#2004-07-29
+$LDMainMenuTree = 'Hauptmenu - Anzeigestruktur';
+$LDMainMenuTreeTxt = 'Anzeigestruktur des Hauptmenus auswählen';
+$LDStyle = 'Stil';
+$LDRefreshBrowser = 'Laden Sie den Browser erneut um die Änderung(en) zu sehen';
 ?>

@@ -4,7 +4,7 @@
 
 /**
 
-* Traducido por: Dr. med. Daniel Hinostroza C.
+* Correcciones: Dr. med. Daniel Hinostroza C. y Dr. Manuel Montemayor
 
 */
 
@@ -180,9 +180,9 @@ $LDTrauma='Trauma';
 
 $LDNeonatalJaundice='Ictericia neonatal';
 
-$LDExchangeTransfusion='Exanguineotransfusión';
+$LDExchangeTransfusion='Exanguineo-transfusión';
 
-$LDPhotoTherapy='Fototherapy';
+$LDPhotoTherapy='Fototerapia';
 
 $LDH_I_Encephalopathy='Encefalopatía hipóxica isquémica';
 
@@ -239,10 +239,10 @@ $LD['time_to_spont_resp']='Tiempo hasta la respiración espontánea';
 $LDMinutes='Minutos';
 
 # 2003-08-26 EL
-$LDParentEncNrMissing='Mother\'s encounter number of the delivery is missing.\\n Save anyway?';
-$LDPlsEnterDeliveryPlace='Please enter delivery place.';
-$LDPlsSelectDeliveryMode='Please select delivery mode.';
-$LDPlsEnterDeliveryDate='Please enter delivery date.';
-$LDPlsEnterDeliveryTime='Please enter delivery time.';
+$LDParentEncNrMissing='El número de encuentros con la madre está perdido.\\n Salvar de cualquier modo?';
+$LDPlsEnterDeliveryPlace='Escriba el lugar del alumbramiento.';
+$LDPlsSelectDeliveryMode='Escriba el modo del alumbramiento.';
+$LDPlsEnterDeliveryDate='Escriba la fecha del alumbramiento.';
+$LDPlsEnterDeliveryTime='Escriba la hora del alumbramiento.';
 ?>
 

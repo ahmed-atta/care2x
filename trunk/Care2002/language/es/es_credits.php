@@ -15,25 +15,8 @@ require_once($root_path.'include/inc_environment_global.php');
         <TBODY>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-          <b>Patxi Gomaríz (ES)<br> La traducción Española de CARE 2X.</b> 
-        <p>
-			Patxi Gomaríz nació en la primavera del año 1966 en Murcia (España).
-        <p> Su vida laboral gira entorno a la fotografía, es especialista en fotografía 
-          de Oftalmología (fundus camera). Apasionado por Internet, también construye 
-          sitios web. 
-        <p> "<i>Pienso que el código abierto es una manera eficaz de luchar contra 
-          la localización económica, especialmente en asuntos tan fundamentales 
-          como la salud, por eso me siento orgulloso de mi pequeña aportación 
-          a este gran proyecto</i>". 
-        <P><a href="mailto:pgomariz@ono.com"><u>Puede Ponerse en contacto con Patxi Gomaríz aquí</u></a>
-</TD></TR></TBODY></TABLE>
-<hr>
-<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
-        <TBODY>
-        <TR>
-          <TD vAlign=top><font face="verdana,arial" size=2>
-			<P><img src="../../fotos/credits/hinostroza.jpg"  border=0  width=135 align=right vspace=10> 
-          <b>Dr. med Daniel Hinostroza C. (EC)<br> La traducción Española de CARE 2X.</b> 
+			<P><img src="../../fotos/credits/hinostroza.jpg"  border=0  width=135 align=right vspace=10>
+          <b>Dr. med Daniel Hinostroza C. (EC)<br> La traducción Española de CARE 2X.</b>
         <p>
 <li>Autor y coautor de numerosos textos médicos.<br>
 <li>5 años como Director del Centro de Informática Médica Grünenthal, Quito
@@ -51,12 +34,54 @@ Website: www.cerebroperiferico.com
         <P><a href="mailto:postmaster@cerebroperiferico.com"><u>Puede Ponerse en contacto con Dr. Daniel Hinostroza aquí</u></a>
 </TD></TR></TBODY></TABLE>
 <hr>
+<table cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <tbody>
+				       <tr>
+
+          <td vAlign=top><font face="verdana,arial" size=2>
+
+			<p><img src="../../fotos/credits/dr_juan_manuel_montemayor.jpg"  border=0  align=right vspace=10>
+          <b>Dr. Juan Manuel Montemayor (MX)</b> <p>
+		  Creation of high resolution, high quality graphic slides for promotional presentations of Care2x.
+			<br>
+			Promotion of Care2x in Mexico.
+			<br>
+			Spanish translation of help files and images.<br>
+			Spanish ICD10 and OPS data.
+			<br>
+
+			Online demo installation of Care2x.
+        <p>
+
+        <p><a href="mailto:manuel@esinergia.com"><u>Dr. J. M. Montemayor can be contacted here.</u></a>
+</td></tr>
+</tbody></table>
+
+<hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-			<P><img src="../../fotos/credits/javier.jpg"  border=0  width=135 align=right vspace=10> 
-          <b>Javier Alberto Arias (AR)<br> La traducción Española de CARE 2X.</b> 
+          <b>Patxi Gomaríz (ES)<br> La traducción Española de CARE 2X.</b> 
+        <p>
+			Patxi Gomaríz nació en la primavera del año 1966 en Murcia (España).
+        <p> Su vida laboral gira entorno a la fotografía, es especialista en fotografía 
+          de Oftalmología (fundus camera). Apasionado por Internet, también construye 
+          sitios web. 
+        <p> "<i>Pienso que el código abierto es una manera eficaz de luchar contra 
+          la localización económica, especialmente en asuntos tan fundamentales 
+          como la salud, por eso me siento orgulloso de mi pequeña aportación 
+          a este gran proyecto</i>". 
+        <P><a href="mailto:pgomariz@ono.com"><u>Puede Ponerse en contacto con Patxi Gomaríz aquí</u></a>
+</TD></TR></TBODY></TABLE>
+<hr>
+
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+			<P><img src="../../fotos/credits/javier.jpg"  border=0  width=135 align=right vspace=10>
+          <b>Javier Alberto Arias (AR)<br> La traducción Española de CARE 2X.</b>
         <p>
 
         <P><a href="mailto:javisxx@hotmail.com"><u>Puede Ponerse en contacto con Javier Alberto Arias</u></a>

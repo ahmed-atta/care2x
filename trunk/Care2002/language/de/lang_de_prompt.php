@@ -86,4 +86,7 @@ $LDPlsEnterORNr='Bitte geben Sie die OP Saal Nummer ein.';
 $LDWrongLoginPW='Entweder Ihr Benutzername oder Passwort ist falsch.';
 $LDPlsORNr='Geben Sie bitte die Saalnummer ein.';
 
+#2004-08-06 EL
+$LDInvalidDate ='Das Datum war ungültig.';
+$LDNoPastDate = 'Datum in Vergangenheit wird nicht akzeptiert!';
 ?>

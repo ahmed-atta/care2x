@@ -448,4 +448,3 @@ $LDYellowListTxt='Índice de productos farmacéuticos en Alemania (requiere conexi
 $LDClickSelectDept='Por favor, dé clic aquí para seleccionar un Departamento';
 
 ?>
-

@@ -1,7 +1,7 @@
 <?php
 
 /**
-* Traducido por: Dr. med. Daniel Hinostroza C.
+* Traducido por: Dr. med. Daniel Hinostroza C. Corregido por: Dr. Manuel Montemayor
 */
 
 $LDClose='Cerrar';
@@ -196,7 +196,7 @@ $LDUpdateCurrencyInfo='Edite la información de la moneda';
 $LDPlsEnterUpdate='Por favor, edite la información de la moneda. Luego dé clic en "Actualizar".';
 
 $LDEditInfo='Editar';
-$LDCurrencyAdmin='Administración de la moneda';
+$LDCurrencyAdmin='Administración de moneda';
 /* 2002-10-22 EL */
 $LDUserInfoSaved='El acceso para el usuario fue creado exitosamente';
 $LDUserInfoNoSave='La creación de acceso falló.  Por favor, revise la información que ingresó';
@@ -270,82 +270,82 @@ $LDUpdate='Actualizar';
 # 2003-08-03 EL
 $LDFindEmployee='Hallar un empleado';
 #2003-10-27 EL
-$LDMainMenu='Main menu';
-$LDHideShow='Hide/show';
-$LDSortOrder='sort order';
-$LDAdminIndex='Admin index';
-$LDUsers='Users';
-$LDCreateEditLock='Create, edit, lock';
-$LDDatabase='Database';
+$LDMainMenu='Menú principal';
+$LDHideShow='Ocultar/Mostrar';
+$LDSortOrder='Ordenar';
+$LDAdminIndex='indice Admin';
+$LDUsers='Usuarios';
+$LDCreateEditLock='Crear, editar, cerrar';
+$LDDatabase='Base de datos';
 $LDPhpMyAdmin='PhpMyAdmin';
 $LDGeneral='General';
-$LDQuickInformer='Quick informer';
-$LDEnterInfo='Please edit or enter the information. Then click "Save".';
-$LDPaginatorMaxRows='Paginator max rows';
+$LDQuickInformer='Informe rápido';
+$LDEnterInfo='Edite o ingrese la información. Luego "Sálvelo".';
+$LDPaginatorMaxRows='Paginador máximo de renglones';
 
 #2003-10-28 EL
-$LDAddressList='Address list';
-$LDAddressListTxt='When the address list is displayed in the  address manager module.';
-$LDAddressSearch='Address search';
-$LDAddressSearchTxt='When the search for addresses returns a list';
-$LDInsuranceList='Insurance companies list';
-$LDInsuranceListTxt='When the insurance companies list is displayed in the insurance company module.';
-$LDInsuranceSearch='Insurance search';
-$LDInsuranceSearchTxt='When the search for insurance company returns a list.';
-$LDPersonnelSearch='Employee search';
-$LDPersonnelSearchTxt='When the search for an employee returns a list.';
-$LDPersonnelList='Employee list';
-$LDPersonnelListTxt='When the employees list is displayed in the personnel manager module.';
-$LDPersonSearch='Person search';
-$LDPersonSearchTxt='When the search for a person returns a list.';
-$LDPatientSearch='Patient search';
-$LDPatientSearchTxt='When the search for a patient returns a list.';
-$LDORPatientSearch='Patient for operation search';
-$LDORPatientSearchTxt='When the search for patient for operation returns a list. 
-This value is usually less than 10 due to a narrow display space in the OR logbook module';
-$LDEnterMaxRows='Please enter the maximum number rows displayed  per page after a successful search.';
+$LDAddressList='Lista de direcciones';
+$LDAddressListTxt='Cuando se despliegue la lista de direcciones en el modulo de direcciones.';
+$LDAddressSearch='Buscar dirección';
+$LDAddressSearchTxt='Cuando la búsqueda de direcciones devuelve una lista';
+$LDInsuranceList='Lista de Aseguradoras';
+$LDInsuranceListTxt='Cuando la lista de aseguradoras se muestra en el módulo de Aseguradoras.';
+$LDInsuranceSearch='Buscar Aseguradora';
+$LDInsuranceSearchTxt='Cuando la búsqueda de Aseguradoras devuelve una lista.';
+$LDPersonnelSearch='Buscar empleado';
+$LDPersonnelSearchTxt='Cuando la búsqueda de empleado devuelve una lista.';
+$LDPersonnelList='Lista de Empleados';
+$LDPersonnelListTxt='Cuando la lista de empleados se muestra en el módulo de administración de personal.';
+$LDPersonSearch='Buscar Persona';
+$LDPersonSearchTxt='Cuando la búsqueda de una persona devuelve una lista.';
+$LDPatientSearch='Buscar Paciente';
+$LDPatientSearchTxt='Cuando la búsqueda de un paciente devuelve una lista.';
+$LDORPatientSearch='Buscar Paciente para cirugía';
+$LDORPatientSearchTxt='Cuando la búsqueda de un paciente para cirugía devuelve una lista. 
+Éste valor es usualmente menor de 10 debido al poco espacio de la vista en el módulo de Quirofanos o logbook';
+$LDEnterMaxRows='Escriba el número maximo de renglones a mostrar por página después de una búsqueda exitosa.';
 #2003-11-01 EL
-$LDTimeOut='Time out';
-$LDTimeOutActive='Time out active';
-$LDTimeOutTxt='Should the password protected modules time out (lock itselt) after a set time of inactivity?';
-$LDTimeOutTime='Elapsed time';
-$LDTimeOutTimeTxt='Elapsed idle time (inactivity) that triggers the time out and locks the module. Note: 
-If your entry is invalid, the system will use the default maximum values.';
+$LDTimeOut='Sesión expirada';
+$LDTimeOutActive='Sesión expirada, activa';
+$LDTimeOutTxt='Deberían cerrarse solos los módulos protegidos con contraseña después de un tiempo de inactividad?';
+$LDTimeOutTime='Tiempo transcurrido';
+$LDTimeOutTimeTxt='Tiempo transcurrido en inactividad que provoca la Sesión expirada y el cierre  del módulo. Nota: 
+Si tu ingreso es inválido, el sistema usará los valores máximos preestablecidos.';
 #2003-11-09 EL
 $LDGUI='GUI';
-$LDNewsDisplay='News display';
-$LDTitleFontSize='Title font size';
-$LDTitleFontColor='Title font color';
-$LDTitleFont='Title font';
-$LDPrefaceFontSize='Lead summary font size';
-$LDPrefaceFontColor='Lead summary font color';
-$LDPrefaceFont='Lead summary font';
-$LDBodyFontSize='News body font size';
-$LDBodyFontColor='News body font color';
-$LDBodyFont='News body font';
-$LDPreviewMaxlen='News preview maximum characters';
-$LDTitleFontBold='Title font weight';
-$LDPrefaceFontBold='Lead summary font weight';
-$LDDisplayWidth='News display width (in pixel or %)';
-$LDBold='Bold';
-$LDNoteDefault='Note: If you enter an invalid value, the system will just replace it with the default value.';
-$LDUseDefault='Use default values';
-$LDClkPickColor='Click here to pick up the color';
+$LDNewsDisplay='Pantalla de noticias';
+$LDTitleFontSize='Tamaño de la fuente del título';
+$LDTitleFontColor='Color de la fuente del título';
+$LDTitleFont='Fuente del título';
+$LDPrefaceFontSize='Tamaño de la fuente del resumen';
+$LDPrefaceFontColor='Color de la fuente del resumen';
+$LDPrefaceFont='Fuente del resumen';
+$LDBodyFontSize='Tamaño de la fuente del cuerpo de noticias';
+$LDBodyFontColor='Color de la fuente del cuerpo de noticias';
+$LDBodyFont='Fuente del cuerpo de noticias';
+$LDPreviewMaxlen='Máximo de caracteres de la noticia';
+$LDTitleFontBold='Peso de la fuente del título';
+$LDPrefaceFontBold='Peso de la fuente del resumen';
+$LDDisplayWidth='Ancho de la vista de noticias en pixeles o %)';
+$LDBold='Negrita';
+$LDNoteDefault='Note: Si su ingreso es inválido, el sistema usará los valores máximos preestablecidos.';
+$LDUseDefault='Usar valores máximos preestablecidos.';
+$LDClkPickColor='Clic aquí para cargar el color';
 #2003-11-11 EL
-$LDORAdmin='OR administration';
-$LDListConfig='List & configure';
-$LDOR='OR';
-$LDORNr='OR number';
-$LDTempClosed='Is temporary closed?';
-$LDOwnerWard='Owner ward';
-$LDOwnerDept='Owner department';
-$LDDateCreation='Date of creation';
-$LDDateClose='Date of closure';
-$LDOPTableNr='Number of OP table';
-$LDORName='OR room name';
-$LDORNrExists='OR room number already exists!';
+$LDORAdmin='Administración de Quirófanos';
+$LDListConfig='Listar y configurar';
+$LDOR='Quirófano';
+$LDORNr='Num de Quirófano';
+$LDTempClosed='Está cerrado temporalmente?';
+$LDOwnerWard='Pabellón propio';
+$LDOwnerDept='Departamento propio';
+$LDDateCreation='Fecha de creación';
+$LDDateClose='Fecha de finalización';
+$LDOPTableNr='Num de mesa de operaciones';
+$LDORName='Nombre del quirófano';
+$LDORNrExists='Num de Quirófanos existentes!';
 $LDToggle='Toggle';
-$LDChange='Change';
-$LDClkNextNr='Click to use next available number';
-$LDOPTable='OP table';
+$LDChange='Cambiar';
+$LDClkNextNr='Pulse para usar el siguiente número disponible';
+$LDOPTable='Mesa de operaciones';
 ?>

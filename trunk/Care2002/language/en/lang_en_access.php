@@ -100,4 +100,8 @@ $_a_2_newsallmoderatedwrite = 'News (all areas, except menu & prices) moderated 
 $title_dir = 'Telephone Directory';
 $_a_1_teldirwrite = 'Telephone & Beeper information write';
 
+// Group start
+$title_hxpserver = 'HXP Server';
+$_a_1_hxpserver = 'HXP Server access';
+
 ?>

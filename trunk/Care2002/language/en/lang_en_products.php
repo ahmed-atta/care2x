@@ -53,8 +53,7 @@ $LDOrderCatTxt='Create, edit, update, remove, etc.';
 $LDPharmaDb='Databank';
 $LDPharmaDbTxt='Managing product information';
 $LDRedList='Index of Medical Specialties';
-//$LDRedListTxt='Pharmaceutical index (needs internet line)';
-$LDRedListTxt='Pharmaceutical index';
+$LDRedListTxt='Pharmaceutical index (needs internet line)';
 $LDOrderBotActivate='OrderBot';
 $LDOrderBotActivateTxt='Activate automatic reception of order lists.';
 

@@ -136,33 +136,87 @@ open-source environment, he is very interested in every kind of project
 of this movement. Despite the
 fact that he is neither working in medical nor in health sector, he decided
 to join the Care project because
-he believes in the same things that the Care's creator and contributors
+he believes in the same things that the Care´s creator and contributors
 believe.
 			
 			<P><a href="mailto:gabcicala@tiscali.it"><u>Gabriele Cicala can be contacted here.</u></a>
-</TD></TR></TBODY></TABLE>
+</TD>
+</TR>
+</TBODY>
+</TABLE>
+
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
-        <TBODY>
-        <TR>
-          <TD vAlign=top><font face="verdana,arial" size=2>
-			<P><img src="../../fotos/credits/giuseppe_scarpi.jpg"  border=0  width=135 height=170 align=right vspace=10>
-			<b>Giuseppe Scarpi (IT) translated CARE 2X to italian.</b>
-			<p>
-			Giuseppe Scarpi was born in Rome, Italy, 35 years ago. 
-			<p>He has a degree in Electronic Engineering and has worked for several companies in the biomedical sector, 
-			where he developed an understanding about the relationships between medical and informatics worlds.<br>
-He uses and appreciates both Linux and Windows, "<i>as both are the result of a great human work that must be respected</i>".<p>
-He decided to actively join open source because: <br><i>"Such an ideal world can survive only if perfectly balanced. If you take something,
- you should also give back in proportion."</i>
+ <TBODY>
+	<TR>
+	<TD vAlign=top><font face="verdana,arial" size=2>
 
-			<P><a href="mailto:kalbun@inwind.it"><u>Giuseppe Scarpi can be contacted here.</u></a>
-</TD></TR></TBODY></TABLE>
+		<P><img src="../../fotos/credits/giuseppe_scarpi.jpg"  border=0  width=135 height=170 align=right vspace=10>
+		<b>Giuseppe Scarpi (IT) translated CARE 2X to italian.</b>
+		<p>
+		Giuseppe Scarpi was born in Rome, Italy, 35 years ago.
+		<p>He has a degree in Electronic Engineering and has worked for several companies in the biomedical sector,
+			where he developed an understanding about the relationships between medical and informatics worlds.<br>
+		He uses and appreciates both Linux and Windows, "<i>as both are the result of a great human work that must be respected</i>".<p>
+		He decided to actively join open source because: <br><i>"Such an ideal world can survive only if perfectly balanced. If you take something,
+		you should also give back in proportion."</i>
+
+		<P><a href="mailto:kalbun@inwind.it"><u>Giuseppe Scarpi can be contacted here.</u></a>
+		</TD>
+	</TR>
+</TBODY>
+</TABLE>
+
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+ <TBODY>
+	<TR>
+	<TD vAlign=top><font face="verdana,arial" size=2>
+
+		<P><img src="../../fotos/credits/hcc24_135.gif"  border=0  width=135  align=right vspace=10>
+		<b>Joachim Mollin & HCC GmbH (DE)</b>
+		<p>
+		<font size=1>
+		Development of a new menu GUI structure and custom HL7 functionalities that are being used in <a href="http://www.mycare2x.de" target="_blank">mycare2x</a>, the german customization of Care2x.
+		<p>
+		Organizing and leading the mycare2x consortium of german companies that aims to promote and implement
+		Care2x based products in the german healthcare market.
+
+		</font>
+		<p>Joachim Mollin is the CEO of <a href="http://www.hccgmbh.com" target="_blank">HCC Gmbh</a>, a consulting company specializing in the german healthcare..
+
+		<P><a href="mailto:mollin@hccgmbh.com"><u>Joachim Mollin can be contacted here.</u></a>
+		</TD>
+	</TR>
+</TBODY>
+</TABLE>
+
 <hr>
 <table cellSpacing=0 cellPadding=0 border=0 width=100%>
         <tbody>
+				       <tr>
+
+          <td vAlign=top><font face="verdana,arial" size=2>
+
+			<p><img src="../../fotos/credits/dr_juan_manuel_montemayor.jpg"  border=0  align=right vspace=10>
+          <b>Dr. Juan Manuel Montemayor (MX)</b> <p>
+		  Creation of high resolution, high quality graphic slides for promotional presentations of Care2x.
+			<br>
+			Promotion of Care2x in Mexico.
+			<br>
+			Spanish translation of help files and images.<br>
+			Spanish ICD10 and OPS data.
+			<br>
+
+			Online demo installation of Care2x.
+        <p>
+
+        <p><a href="mailto:manuel@esinergia.com"><u>Dr. J. M. Montemayor can be contacted here.</u></a>
+</td></tr>
+
         <tr>
           <td vAlign=top><font face="verdana,arial" size=2>
+		  <hr>
 			<p><img src="../../fotos/credits/lopo_l_almeida.jpg"  
                                 width=135 height=170 border=0  align=right vspace=10>
 			<b>Lopo Lencastre de Almeida (PT)</b> is one of the most productive developers. 
@@ -184,9 +238,12 @@ He decided to actively join open source because: <br><i>"Such an ideal world can
 			to industrial automation - as a software developer and interface designer for more than 16 years now . During the last 5 years he 
 			worked mostly  in web development and company management. He is the CEO/CTO of HumanEasy - a 
 			partner of Care2002 project in charge of its <b>Public Relations and Marketing Management</b>.<br>
-			He is also involved in many other GNU/GPL projects; some of them are in use at Care2x's site.<br>
+			He is also involved in many other GNU/GPL projects; some of them are in use at Care2x´s site.<br>
 			<p><a href="http://www.humaneasy.com" target="_blank"><u>Lopo L. de Almeida can be contacted here.</u></a>
-</td></tr></tbody></table>
+</td>
+</tr>
+</tbody>
+</table>
 
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
@@ -276,6 +333,21 @@ work in this kind of community.
 
 			<P><a href="mailto:pgomariz@ono.com"><u>Patxi Gomaríz can be contacted here.</u></a>
 </TD></TR></TBODY></TABLE>
+
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+			<P><img src="../../fotos/credits/suman_bhat.jpg"  border=0  align=right vspace=10>
+			<b>Dr. Suman Bhusan Bhattacharyya (IN)</b>
+			<p>
+			Development of several plugins like vital statistics, gestation age and expected delivery date calculators,
+			automatic immunization scheduler, etc.
+
+			<P><a href="mailto:sbbhattacharyya@yahoo.com"><u>Dr. Suman Bhanttacharyya can be contacted here.</u></a>
+</TD></TR></TBODY></TABLE>
+
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
@@ -295,7 +367,7 @@ work in this kind of community.
 			IBM Certified UDB DB2 Administrator, too. Read more about DB2 in his book
 			"DB2" ISBN 3-932311-80-9. He is an author for TOOLBOX (www.toolbox-mag.de),
 			a German developer magazine.
-		
+
 
 			<P><a href="mailto:tho123@users.sourceforge.net"><u>Thomas Wiedmann can be contacted here.</u></a>
 </TD></TR></TBODY></TABLE>
@@ -335,26 +407,6 @@ Despite the fact that he is neither working in medical nor in health sector, he 
 
 <P><a href="mailto:weining.chen@army.com"><u>Wei Ning Chen can be contacted here.</u></a>
 </TD></TR></TBODY></TABLE>
-<hr>
-<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
-        <TBODY>
-<TR>
-          <TD vAlign=top><font face="verdana,arial" size=2>
-		  <P><img src="../../fotos/credits/wilfried_goedert.jpg" border=0  align=right vspace=10 >
-			<P><b>Dr. med Wilfried Gödert (DE)</b><br>
-			contributes the following:
-			<p><font size=1>
-		     Hosting and admin of:<br>
-			 www.care2x.de<br>News Server, OTRS Support System<br>
-			 Promotion, Press relation<br>
-			 Consultation
-			<p>
-			</font>
-			Profession: Physician, with additional Medical Informatics degree
-			<p><a href="mailto:goedert@users.sourceforge.net"><u>Dr. Wilfried Gödert can be contacted here</u></a>
-</TD></TR>	
-</TBODY></TABLE>
-
 
 <hr>
 <font face="verdana,arial" size=3 color="#0000ff">More credits</font>
@@ -404,6 +456,10 @@ Despite the fact that he is neither working in medical nor in health sector, he 
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Javier Alberto Arias (AR)</font></nobr>&nbsp;</td>
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Spanish translations</font></td>
+  </tr>
+    <tr>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Kurt Brauchli (CH)</font></nobr>&nbsp;</td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Configuration improvements, HXP clients</font></td>
   </tr>
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Luki Rustianto (ID)</font></nobr>&nbsp;</td>

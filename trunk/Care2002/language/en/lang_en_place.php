@@ -39,4 +39,9 @@ $LDPlsChangeName='Please enter a different name';
 $LDAddressNameExists='The address\'s is already existing.';
 $LDAddressInfoSaved='The address data was successfully saved.';
 $LDSearchPrompt='Please enter an address\' name or local code';
+#2004-09-02
+$LDWrongUneceLocCode = 'UNECE location code type accepts only numbers between 0 and 99.';
+$LDEnterZero = 'If you do not know the value please enter 0';
+$LDEnterISOCountryCode = 'Please enter the ISO country code.';
+$LDEnterQMark ='If you do not know the code please enter a question mark (?)';
 ?>

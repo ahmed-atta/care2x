@@ -1,7 +1,7 @@
 <?php
 
 /**
-* Correcciones: Dr. med. Daniel Hinostroza C.
+* Correcciones: Dr. med. Daniel Hinostroza C. y Dr. Manuel Montemayor
 */
 
 $LDWhereTo='¿Dónde desea colocar el artículo?';
@@ -125,9 +125,9 @@ $LDClk2AddCurrency='Para ingresar el nuevo tipo de moneda, Por favor pulse aquí.
 
 $LDMenuSaved='El menú fue grabado.';
 /* 2002-10-13 EL */
-$LD_ddpMMpyyyy='dd.mm.yyyy';
-$LD_yyyyhMMhdd='yyyy-mm-dd';
-$LD_MMsddsyyyy='mm/dd/yyyy';
+$LD_ddpMMpyyyy='dd.mm.aaaa';
+$LD_yyyyhMMhdd='aaaa-mm-dd';
+$LD_MMsddsyyyy='mm/dd/aaaa';
 /* 2003-02-11*/
 $LDSubmitNews='Enviar noticias';
 $LDDelete='Borrar';

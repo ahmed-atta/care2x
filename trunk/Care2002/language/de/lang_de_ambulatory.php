@@ -21,4 +21,3 @@ $LDOutpatientClinic='Ambulanz';
 $LDGeneralAmbulatory='Ambulanz der Allgemeinchirurgie';
 $LDAmbulatory='Ambulanz';
 ?>
-
