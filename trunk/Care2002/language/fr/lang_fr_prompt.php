@@ -1,7 +1,7 @@
 <?php
-$LDPlsEnterEndDate='Please enter end date';
-$LDPlsEnterStartDate='Please enter start date';
-$LDPlsEnterConfirmDate='Please enter confirm date';
-$LDPlsEnterDiagnosis='Please enter the diagnosis';
-$LDPlsSelectStyle='Please select a style';
+$LDPlsEnterEndDate='Svp, entrez une date de fin';
+$LDPlsEnterStartDate='Svp, entrez une date de début';
+$LDPlsEnterConfirmDate='Svp, entrez une date de confirmation';
+$LDPlsEnterDiagnosis='Svp, entrez un diagnostic';
+$LDPlsSelectStyle='Svp, selectionnez un style';
 ?>

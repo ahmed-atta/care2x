@@ -1,63 +1,65 @@
 <?php
-$LDClose='Close';
-$LDCancel='Cancel';
-$LDResetEntry='Erase entries';
-$LDSave='Save';
-$LDReset='Reset';
+$LDClose='Fermer';
+$LDCancel='Annuler';
+$LDResetEntry='Effacer les entrées';
+$LDSave='Sauver';
+$LDReset='Reinitialiser';
 
-$LDPharmacy='Pharmacy';
-$LDMedDepot='Medical Depot';
+$LDPharmacy='Pharmacie';
+$LDMedDepot='Dépot Médical';
 
-$LDSearchWordPrompt='Enter a search keyword, for example: an order number, a product number, or a product name, etc.';
-$LDEnterData='Click to enter data';
-$LDClk2See='Click to see data';
+$LDSearchWordPrompt='Entrez un mot clé, par exemple: un numéro d\'ordrer, un
+numéro de produit ou un nom de produit ...';
+$LDEnterData='Cliquer pour entrer une donnée';
+$LDClk2See='Cliquer pour voir une donnée';
 
 /**************** note the ' ~nr~ ' must not be erased it will be replaced by the script with the number of search results ******/
-$LDFoundPatient='The search found <b>~nr~</b> patients';
-$LDWildCards='What are wildcards and how to use them';
-$LDNewSearch='New search';
-$LDSearch='Search';
+$LDFoundPatient='La recher a trouvé <b>~nr~</b> patients';
+$LDWildCards='Ce que sont les wildcards et comment les utiliser';
+$LDNewSearch='Nouvelle recherche';
+$LDSearch='Rechercher';
 
-$LDOClock='o\'clock';
-$LDContinue='Continue';
-$LDBack='Go back';
+$LDOClock='';
+$LDContinue='Continuer';
+$LDBack='Retour';
 
-$LDOn='On';
-$LDAt='At';
-$LDClk2Edit='Click to edit this report';
+$LDOn='Sur';
+$LDAt='à';
+$LDClk2Edit='Cliquer pour éditer un rapport';
 
-$LDNew='New';
-$LDEdit='Edit';
-$LDCreate='Create';
-$LDValue='Value';
+$LDNew='Nouveau';
+$LDEdit='Editer';
+$LDCreate='Crèer';
+$LDValue='Valeur';
 
-$LDNews='News';
-$LDNewsTxt='Read or write news articles pertaining to pharmacy';
+$LDNews='Nouvelles';
+$LDNewsTxt='Lire ou écrire de nouveaux articles concernant la pharmacie';
 $LDMemo='Memo';
-$LDMemoTxt='Read or write a memo';
-$LDSearchPat='Search patient';
-$LDCategory='Category';
-$LDPast3Days='Past 3 days';
-$LDPast3Months='Past 3 months';
-$LDPastAll='All';
-$LDSelect='Select';
+$LDMemoTxt='Lire ou écrire un memo';
+$LDSearchPat='Rechercher un patient';
+$LDCategory='Categorie';
+$LDPast3Days='les trois derniers jours';
+$LDPast3Months='les trois derniers mois';
+$LDPastAll='Tous';
+$LDSelect='Selectionner';
 
-$LDOrderArchive='Archive';
-$LDOrderArchiveTxt='View, edit, archive processed orders';
-$LDPharmaOrder='Ordering';
-$LDPharmaOrderTxt='Create and/or send order list';
-$LDHow2Order='How to order?';
-$LDHow2OrderTxt='How, what, when should I order?';
-$LDOrderCat='My product catalog';
-$LDOrderCatTxt='Create, edit, update, remove, etc.';
-$LDPharmaDb='Databank';
-$LDPharmaDbTxt='Managing product information';
-$LDRedList='Index of Medical Specialties';
-$LDRedListTxt='Detailed info about medical products';
+$LDOrderArchive='Archiver';
+$LDOrderArchiveTxt='Voir, éditer, archiver les ordres passés';
+$LDPharmaOrder='Ordonner';
+$LDPharmaOrderTxt='Crèer et/ou envoyer une liste d\'ordre';
+$LDHow2Order='Comment crèer un ordre ?';
+$LDHow2OrderTxt='Comment, pourquoi et quand envoyer un ordre?';
+$LDOrderCat='Mon catalogue de produit';
+$LDOrderCatTxt='Crèer, éditer, mettre à jour, retirer, etc.';
+$LDPharmaDb='Banque de donnée';
+$LDPharmaDbTxt='Gèrer les informations produits';
+$LDRedList='Index des spécialités médicales';
+$LDRedListTxt='Info Detaillée au sujet de produits médicaux';
 $LDOrderBotActivate='OrderBot';
-$LDOrderBotActivateTxt='Activate automatic reception of order lists.';
+$LDOrderBotActivateTxt='Activer la reception automatique  d\'une liste
+d\'ordre.';
 
-$LDNotSent='Not yet sent!';
+$LDNotSent='Pas encore envoyé!';
 $LDcatindex=array('','Article','Pcs.','','Order nr.','','');
 $LDFinindex=array('','Article','Pcs.','','Order nr.');
 $LDListindex=array('','','Created on','Time','Created  by','');
