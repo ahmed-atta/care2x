@@ -85,7 +85,7 @@ while($row=$result->FetchRow()){
 	<?php
 		if($row['appt_status']!='cancelled'){
 	?>
-	<a href="<?php echo $editorfile.URL_APPEND.'&pid='.$row['pid'].'&target='.$target.'&mode=select&nr='.$row['nr']; ?>"><img <?php echo createLDImgSrc($root_path,'edit_sm.gif','0'); ?>></a> 
+	<a href="<?php echo $editorfile.URL_APPEND.'&pid='.$row['pid'].'&target=&mode=select&nr='.$row['nr']; ?>"><img <?php echo createLDImgSrc($root_path,'edit_sm.gif','0'); ?>></a> 
 	<?php
 		}
 		if($row['appt_status']=='pending'){
