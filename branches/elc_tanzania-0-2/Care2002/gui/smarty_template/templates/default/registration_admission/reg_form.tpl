@@ -116,7 +116,7 @@
 						{{$sStreetInput}}
 					</td>
 					<td class="reg_input">
-						{{$LDStreetNr}} &nbsp;&nbsp; {{$sStreetNrInput}}
+						{{*$LDStreetNr*}} &nbsp;&nbsp; {{*$sStreetNrInput*}}
 					</td>
 				</tr>
 
