@@ -1,15 +1,43 @@
 <?php
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
+// +----------------------------------------------------------------------+
+// | PHP version 4                                                        |
+// +----------------------------------------------------------------------+
+// | Copyright (c) 1997-2004 The PHP Group                                |
+// +----------------------------------------------------------------------+
+// | This source file is subject to version 3.0 of the PHP license,       |
+// | that is bundled with this package in the file LICENSE, and is        |
+// | available through the world-wide-web at the following url:           |
+// | http://www.php.net/license/3_0.txt.                                  |
+// | If you did not receive a copy of the PHP license and are unable to   |
+// | obtain it through the world-wide-web, please send a note to          |
+// | license@php.net so we can mail you a copy immediately.               |
+// +----------------------------------------------------------------------+
+// | Authors: D.A.Dokter <dokter@w20e.com>                                |
+// +----------------------------------------------------------------------+
+//
+// $Id$
 
 class Net_HL7_Messages_ACK extends Net_HL7_Message {
 
   var $_ACK_TYPE;
   
   /**
+   * Usage:
+   * <code>
    * $ack = new Net_HL7_Messages_ACK($request);
+   * </code>
    *
    * Convenience module implementing an acknowledgement (ACK) message. This
    * can be used in HL7 servers to create an acknowledgement for an
    * incoming message.
+   *
+   * @version    0.10
+   * @author     D.A.Dokter <dokter@w20e.com>
+   * @access     public
+   * @category   Networking
+   * @package    Net_HL7
+   * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
    */
   function Net_HL7_Messages_ACK($req = "") {
 
@@ -68,6 +96,11 @@ class Net_HL7_Messages_ACK extends Net_HL7_Message {
    * reject respectively. The ACK module will determine the right answer
    *  mode (normal or enhanced) based upon the request, if not provided.
    * The message provided in $msg will be set in MSA 3.
+   *
+   * @param mixed Code to use in acknowledgement
+   * @param mixed Acknowledgement message
+   * @return boolean
+   * @access public
    */
   function setAckCode($code, $msg = "") {
 
@@ -86,6 +119,8 @@ class Net_HL7_Messages_ACK extends Net_HL7_Message {
     $seg1 =& $this->getSegmentByIndex(1);
     $seg1->setField(1, $code);
     if ($msg) $seg1->setField(3, $msg);
+
+    return True;
   }
 
 
@@ -93,10 +128,15 @@ class Net_HL7_Messages_ACK extends Net_HL7_Message {
    * Set the error message for the acknowledgement. This will also set the
    * error code to either AE or CE, depending on the mode of the incoming
    * message.
+   * 
+   * @param mixed Error message
+   * @return boolean
+   * @access public
    */
   function setErrorMessage($msg) {
 
     $this->setAckCode("E", $msg);
+    return True;
   }
 }
 

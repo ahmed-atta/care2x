@@ -22,10 +22,13 @@ require_once 'Net/HL7/Segment.php';
 require_once 'Net/HL7.php';
 
 /**
- * $seg = new Net_HL7_Segments_MSH();
+ * Usage:
+ * <code>
+ * $seg =& new Net_HL7_Segments_MSH();
  *
  * $seg->setField(9, "ADT^A24");
  * echo $seg->getField(1);
+ * </code>
  *
  * The Net_HL7_Segments_MSH is an implementation of the
  * Net_HL7_Segment class. The MSH segment is a bit different from
@@ -91,18 +94,23 @@ class Net_HL7_Segments_MSH extends Net_HL7_Segment {
    * index 2 will change the values of COMPONENT_SEPARATOR,
    * REPETITION_SEPARATOR, ESCAPE_CHARACTER and SUBCOMPONENT_SEPARATOR
    * for the message, if the string is of length 4.
+   * 
+   * @param int Index of field
+   * @param mixed Value
+   * @return boolean
+   * @access public
    */
   function setField($index, $value) {
     
     if ($index == 1) {
       if (strlen($value) != 1) {
-	return NULL;
+	return False;
       }
     }
     
     if ($index == 2) {
       if (strlen($value) != 4) {
-	return NULL;
+	return False;
       }
     }
     

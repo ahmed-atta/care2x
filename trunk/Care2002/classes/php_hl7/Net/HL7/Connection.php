@@ -22,40 +22,42 @@ require_once 'Net/HL7/Response.php';
 
 
 /**
- * $conn = new Net::HL7::Connection('localhost', 8089);
+ * Usage:
+ * <code>
+ * $conn =& new Net_HL7_Connection('localhost', 8089);
  *
- * $req = new Net::HL7::Request();
+ * $req =& new Net_HL7_Request();
  * 
  * ... set some request attributes
  * 
- *  $res = $conn->send($req);
+ * $res = $conn->send($req);
  * 
  * $conn->close();
+ * </code>
  *
- *
- * The Net::HL7::Connection object represents the tcp connection to the
+ * The Net_HL7_Connection object represents the tcp connection to the
  * HL7 message broker. The Connection has only two useful methods (apart
  * from the constructor), send and close. The 'send' method takes a
- * L<Net::HL7::Request|Net::HL7::Request> as argument, and returns a
- * L<Net::HL7::Response|Net::HL7::Response>. The send method can be used
+ * Net_HL7_Request as argument, and returns a
+ * Net_HL7_Response. The send method can be used
  * more than once, before the connection is closed.
  *
  * The Connection object holds the following fields:
  *
- * MESSAGE_PREFIX
+ * _MESSAGE_PREFIX
  *
  * The prefix to be sent to the HL7 server to initiate the
  * message. Defaults to \013.
  *
- * MESSAGE_SUFFIX
+ * _MESSAGE_SUFFIX
  * End of message signal for HL7 server. Defaults to \034\015.
  * 
  *
- * @version    
+ * @version    0.10
  * @author     D.A.Dokter <dokter@w20e.com>
  * @access     public
- * @category   
- * @package    
+ * @category   Networking
+ * @package    Net_HL7
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
  */
 class Net_HL7_Connection {
@@ -68,6 +70,10 @@ class Net_HL7_Connection {
   /**
    * Creates a connection to a HL7 server, or returns undef when a
    * connection could not be established.are:
+   *
+   * @param mixed Host to connect to
+   * @param int Port to connect to
+   * @return boolean
    */
   function Net_HL7_Connection($host, $port) {
     
@@ -75,20 +81,30 @@ class Net_HL7_Connection {
     $this->_MESSAGE_PREFIX = "\013";
     $this->_MESSAGE_SUFFIX = "\034\015";
     $this->_MAX_READ       = 8192;
+
+    return True;
   }
 
 
+  /**
+   * Connect to specified host and port
+   *
+   * @param mixed Host to connect to
+   * @param int Port to connect to
+   * @return socket
+   * @access private
+   */
   function _connect($host, $port) {
     
     $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
     if ($socket < 0) {
-      echo "socket_create() failed: reason: " . socket_strerror($socket) . "\n";
+      trigger_error("create failed: " . socket_strerror($socket), E_USER_ERROR);
     }
 
     $result = socket_connect($socket, $host, $port);
 
     if ($result < 0) {
-      echo "socket_connect() failed.\nReason: ($result) " . socket_strerror($result) . "\n";
+      trigger_error("connect failed: " . socket_strerror($result), E_USER_ERROR);
     }
 
     return $socket;
@@ -97,6 +113,11 @@ class Net_HL7_Connection {
 
   /**
    * Sends a Net_HL7_Request object over this connection.
+   * 
+   * @param object Instance of Net_HL7_Message
+   * @return object Instance of Net_HL7_Response
+   * @access public
+   * @see Net_HL7_Message
    */
   function send($req) {
 
@@ -114,7 +135,7 @@ class Net_HL7_Connection {
 	break;
     }
 
-    # Remove message prefix and suffix
+    // Remove message prefix and suffix
     $data = preg_replace("/^" . $this->_MESSAGE_PREFIX . "/", "", $data);
     $data = preg_replace("/" . $this->_MESSAGE_SUFFIX . "$/", "", $data);
 
@@ -124,10 +145,15 @@ class Net_HL7_Connection {
 
   /**
    * Close the connection.
+   * 
+   * @access public
+   * @return boolean
    */
   function close() {
 
     socket_close($this->_HANDLE);
+    return True
   }
 }
+
 ?>

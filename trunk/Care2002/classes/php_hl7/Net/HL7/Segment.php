@@ -17,29 +17,10 @@
 // +----------------------------------------------------------------------+
 //
 // $Id$
-?>
-
-
-<?php
 
 class Net_HL7_Segment {
 
-  var $_FIELDS;
-
-  /**
-   *
-   * $seg = new Net_HL7_Segment("PID");
-   *
-   * $seg->setField(3, "12345678");
-   * echo $seg->getField(1);
-   *
-   * @version    0.10
-   * @author     D.A.Dokter <dokter@w20e.com>
-   * @access     public
-   * @category   Networking
-   * @package    Net_HL7
-   * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
-   */
+  var $_fields;
 
   /**
    * Create an instance of this segment. A segment may be created with just
@@ -51,6 +32,23 @@ class Net_HL7_Segment {
    * fields and subcomponents, the array may hold subarrays and
    * subsubarrays. Repeated fields can not be supported the same way, since
    * we can't distinguish between composed fields and repeated fields.
+   *
+   * Example: <code>
+   *
+   * $seg =& new Net_HL7_Segment("PID");
+   *
+   * $seg->setField(3, "12345678");
+   * echo $seg->getField(1);
+   * </code>
+   *
+   * @version    0.10
+   * @author     D.A.Dokter <dokter@w20e.com>
+   * @access     public
+   * @category   Networking
+   * @package    Net_HL7
+   * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
+   * @param mixed Name of the segment
+   * @param array Fields for segment
    */
   function Net_HL7_Segment($name, $fields = array()) {
     
@@ -60,9 +58,9 @@ class Net_HL7_Segment {
       trigger_error("Name should be 3 characters, uppercase", E_USER_ERROR);
     }
 
-    $this->_FIELDS = array();
+    $this->_fields = array();
 
-    $this->_FIELDS[0] = $name;
+    $this->_fields[0] = $name;
 
     if (is_array($fields)) {
 
@@ -82,50 +80,62 @@ class Net_HL7_Segment {
    * to support composed fields (and subcomponents).
    * 
    * To set a field to the HL7 null value, instead of omitting a field, can
-   * be achieved with the Net::HL7::Message::NULL type, like:
-   *
-   *   $segment->setField(8, $Net::HL7::Message::NULL);
-   * 
+   * be achieved with the _Net_HL7_NULL type, like:
+   * <code>
+   *   $segment->setField(8, $_Net_HL7_NULL);
+   * </code>
    * This will render the field as the double quote ("").
    * If values are not provided at all, the method will just return.
+   *
+   * @param int Index to set
+   * @param mixed Value for field
+   * @return boolean
+   * @access public
    */
   function setField($index, $value= "") {
 
     if (! ($index && $value)) {
-      return NULL;
+      return False;
     }
     
     // Fill in the blanks...
-    for ($i = count($this->_FIELDS); $i < $index; $i++) {
-      $this->_FIELDS[$i] = "";
+    for ($i = count($this->_fields); $i < $index; $i++) {
+      $this->_fields[$i] = "";
     }
 
-    $this->_FIELDS[$index] = $value;
+    $this->_fields[$index] = $value;
     
-    return 1;
+    return True;
   }
 
 
-/**
- * Get the field at index. If the field is a composed field, you might
- * ask for the result to be an array like so:
- * 
- * my @subfields = $seg->getField(9)
- * 
- * otherwise the thing returned will be a reference to an array.
- */
+  /**
+   * Get the field at index. If the field is a composed field, you might
+   * ask for the result to be an array like so:
+   * <code>
+   * $subfields = $seg->getField(9)
+   * </code>
+   * otherwise the thing returned will be a reference to an array.
+   *
+   * @param int Index of field
+   * @return mixed The value of the field
+   * @access public
+   */
   function getField($index) {
 
-    return $this->_FIELDS[$index];
+    return $this->_fields[$index];
   }
 
 
-/**
- * Get the number of fields for this segment, not including the name
- */
+  /**
+   * Get the number of fields for this segment, not including the name
+   *
+   * @return int number of fields
+   * @access public
+   */
   function size() {
 
-    return count($this->_FIELDS) - 1;
+    return count($this->_fields) - 1;
   }
 
 
@@ -133,23 +143,31 @@ class Net_HL7_Segment {
    * Get the fields in the specified range, or all if nothing specified. If
    * only the 'from' value is provided, all fields from this index till the
    * end of the segment will be returned.
+   *
+   * @param int Start range at this index
+   * @param int Stop range at this index
+   * @return array List of fields
+   * @access public
    */
   function getFields($from = 0, $to = 0) {
 
     if (! $to) {
-      $to = count($this->_FIELDS);
+      $to = count($this->_fields);
     }
 
-    return array_slice($this->_FIELDS, $from, $to - $from + 1);
+    return array_slice($this->_fields, $from, $to - $from + 1);
   }    
 
 
   /**
    * Get the name of the segment. This is basically the value at index 0
+   * 
+   * @return mixed Name of segment
+   * @access public
    */
   function getName() {
 
-    return $this->_FIELDS[0];
+    return $this->_fields[0];
   }
 }
 ?>

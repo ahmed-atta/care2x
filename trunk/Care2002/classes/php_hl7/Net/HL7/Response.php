@@ -29,7 +29,10 @@ require_once 'Net/HL7/Message.php';
  * @category   Networking
  * @package    Net_HL7
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
+ * @see        Net_HL7_Message
  */
 class Net_HL7_Response extends Net_HL7_Message {
 
 }
+
+?>
