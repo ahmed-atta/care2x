@@ -44,20 +44,19 @@ if(!$cfg['dhtml']){
 }
 
 
-$TP_logo=createLogo($root_path,'care_logo.gif','0');
-# Load the template
+$TP_logo=createLogo($root_path,'care_logo_'.$dbtype.'.gif','0');
+
 $tp_body=&$TP_obj->load('tp_main_index_menu_body.htm');
 eval("echo $tp_body;");
 ?>
 
-<TABLE CELLPADDING=0 CELLSPACING=0 border=0  dir=ltr>
+<TABLE CELLPADDING=0 CELLSPACING=0 border=0 >
 
 <?php
 //echo $HTTP_COOKIE_VARS['ck_config']; // used only in debugging related to user config data
 if($result){
 	$gui='';
 	$TP_img1= '<img '.createComIcon($root_path,'blue_bullet.gif','0','middle').'>';
-	
 	$TP_com_img_path=$root_path.'gui/img/common';
 	$buf='';
 	# Load the menu item template
@@ -110,7 +109,10 @@ echo $langselect;
 
 <tr >
 <td colspan=3>
-<font FACE="Arial" SIZE=1 color="#6f6f6f"><nobr><b><?php echo $LDUser ?>:</b></nobr><br>
+<font FACE="Arial" SIZE=1 color="#6f6f6f">
+<?php echo $dbtype; ?>
+<br>
+<nobr><b><?php echo $LDUser ?>:</b></nobr><br>
 <?php echo  $HTTP_SESSION_VARS['sess_login_username']; ?><br>
 <?php echo $dept->FormalName($cfg['thispc_dept_nr']); ?><br>
 <?php echo $ward->WardName($cfg['thispc_ward_nr']); ?><br>

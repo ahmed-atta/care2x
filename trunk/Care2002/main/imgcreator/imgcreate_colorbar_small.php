@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /*
-CARE 2X Integrated Information System beta 1.0.02 - 30.07.2002 for Hospitals and Health Care Organizations and Services
+CARE2X Integrated Information System beta 1.0.02 - 30.07.2002 for Hospitals and Health Care Organizations and Services
 Copyright (C) 2002  Elpidio Latorilla & Intellin.org	
 
 GNU GPL. For details read file "copy_notice.txt".
@@ -15,16 +15,13 @@ define('NO_CHAIN',1);
 require($root_path.'include/inc_front_chain_lang.php');
 header ('Content-type: image/png');
 
-
-/* Establish db connection */
-if(!isset($db)||$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok) {
 	    // get event signals
 	    $dbtable='care_encounter_event_signaller';
 		
-	    $sql='SELECT yellow, black, blue_pale, brown, pink, 
-		                    yellow_pale, red, green_pale, violet, 
-							blue, biege, orange FROM '.$dbtable.' WHERE encounter_nr="'.$pn.'"';
+	    $sql="SELECT yellow, black, blue_pale, brown, pink,
+		                    yellow_pale, red, green_pale, violet,
+							blue, biege, orange 
+					FROM $dbtable WHERE encounter_nr='$pn'";
 							
 	    if($ergebnis = @$db->Execute($sql))
        	{
@@ -36,10 +33,7 @@ if($dblink_ok) {
 		
 		if (!isset($result['yellow'])) 	$result=array('yellow'=>0,'black'=>0,'blue_pale'=>0,'brown'=>0,'pink'=>0,'yellow_pale'=>0,'red'=>0,'green_pale'=>0,'violet'=>0,'blue'=>0,'biege'=>0,'orange'=>0);
 
-}
-	
-	/* Load the barcode img if it exists */
-	 
+
 	 /* Dimensions of the small colorbar signaller*/
 	 $label_w=60; 
 	 $label_h=18;

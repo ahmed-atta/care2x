@@ -5,10 +5,10 @@ if (eregi('inc_test_request_gd_baclabor.php',$PHP_SELF))
 /*------end------*/
 
 /**
-* CARE 2X Integrated Hospital Information System
+* CARE2X Integrated Hospital Information System
 * GNU General Public License
-* copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* Copyright 2002 Elpidio Latorilla
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -444,7 +444,9 @@ $mark_v_offset=1; /* Vertical offset of the marking blocks */
 	$sx=$left_border+($hdiv*9);
 	doWriteTop($LDDate); // Date
 	$sx=$left_border+($hdiv*11);
-	ImageString($im,2,$sx,($sy-9),formatDate2Local($stored_findings['rec_date'],$date_format),$purple); // Date
+	if($stored_findings['rec_date'] && $stored_findings['rec_date']!=DBF_NODATE){
+		ImageString($im,2,$sx,($sy-9),formatDate2Local($stored_findings['rec_date'],$date_format),$purple); // Date
+	}
 	
 	/* Create test type elements */
 		

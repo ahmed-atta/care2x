@@ -39,7 +39,7 @@
     // write item labels
 	if($ttf_render){
 	
-ImageTTFText($im,9,0,5,11,$black,$arial,"$LDCaseNr:");
+	ImageTTFText($im,9,0,5,11,$black,$arial,"$LDCaseNr:");
     ImageTTFText($im,10,0,5,24,$black,$arial,$full_en);
     ImageTTFText($im,9,0,100,11,$black,$arial,':'."$LDAdmitDate:");
     ImageTTFText($im,10,0,105,24,$black,$arial,formatDate2Local($result['encounter_date'],$date_format));
@@ -153,7 +153,7 @@ ImageTTFText($im,9,0,5,11,$black,$arial,"$LDCaseNr:");
      ImageString($im,1,5,145,"$LDBillInfo:",$black);	
 	 }
 	
-	// place the barcode 
+	// place the barcode
     ImageCopy($im,$bc,110,28,9,9,170,37);
 
 

@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -387,20 +387,20 @@ href="javascript:gethelp('submenu1.php','<?php echo $LDSpexFunctions ?>')"><img 
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php if(($cfg['mask']==1)||($cfg['mask']=='')) echo $LDDisplay2Txt; else echo $LDDisplay1Txt; ?></FONT></TD></TR> -->
-				  
-       <!--        <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
+<!--
+              <TR bgColor=#dddddd height=1>
+                <TD colSpan=3><IMG height=1
+                  src="../../gui/img/common/default/pixel.gif"
                   width=5></TD></TR>
               <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'top_help.gif','0') ?> align="absmiddle"></td>
-                <TD vAlign=top ><FONT 
+                <TD vAlign=top ><FONT
                   face="Verdana,Helvetica,Arial" size=2><B>
 				 <a href="http://care2x.de/otrs/customer.pl">
-				<?php  echo $LDTicketedSupport; ?></a> 
+				<?php  echo $LDTicketedSupport; ?></a>
 				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php  echo $LDTicketedSupportTxt;  ?></FONT></TD></TR> 
-				   -->
+                <TD><FONT face="Verdana,Helvetica,Arial"
+                  size=2><?php  echo $LDTicketedSupportTxt;  ?></FONT></TD></TR>
+ -->
               <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
@@ -408,7 +408,7 @@ href="javascript:gethelp('submenu1.php','<?php echo $LDSpexFunctions ?>')"><img 
               <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'discussions.gif','0') ?> align="absmiddle"></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B>
-				 <a href="http://www.mail-archive.com/care2002-developers@lists.sourceforge.net">
+				 <a href="http://www.arzt-seite.info/newsgroup/gotodoc.medizin.care2002.dev/thread_frameset.php3?name=gotodoc.medizin.care2002.dev">
 				<?php  echo $LDNewsgroup; ?></a> 
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 

@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@care2x.net, elpidio@care2x.org
@@ -13,19 +13,24 @@ require($root_path.'include/inc_environment_global.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'global_conf/inc_remoteservers_conf.php');
+require_once($root_path.'include/inc_date_format_functions.php');
+require_once($root_path.'include/care_api_classes/class_person.php');
+$person=& new Person($pid);
+$person->preloadPersonInfo();
 ?>
 <?php html_rtl($lang); ?>
 <head>
-<title><?php echo $nm ?></title>
+<title><?php echo $person->LastName().', '.$person->FirstName().' ['.formatDate2Local($person->Birthdate(),$date_format).']';  ?></title>
 <?php echo setCharSet(); ?>
 
 </head>
 <body onLoad="if (window.focus) window.focus()">
-<font size=2 face="verdana,arial"><?php echo $nm ?></font><br>
+<font size=2 face="verdana,arial"><?php echo $person->LastName().', '.$person->FirstName().' ['.formatDate2Local($person->Birthdate(),$date_format).']';  ?><br>
+<!-- <img src="<?php echo "$httprotocol://$main_domain" ?>/fotos/registration/<?php echo $person->PhotoFilename();  ?>"> -->
 <?php
-if(!empty($fn) && file_exists($root_path."fotos/registration/$fn")){
+if($person->PhotoFilename()&&file_exists($root_path.'fotos/registration/'.$person->PhotoFilename())){
 ?>
-<img src="<?php echo "$httprotocol://$main_domain" ?>/fotos/registration/<?php echo $fn ?>">
+<img src="<?php echo $root_path ?>fotos/registration/<?php echo $person->PhotoFilename(); ?>">
 <?php
 }
 ?>

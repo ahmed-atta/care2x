@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.09 - 30.11.2003
+* CARE 2002 Integrated Hospital Information System beta 2.0.0 - 30.11.2003
 * GNU General Public License
-* copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* Copyright 2002 Elpidio Latorilla
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 *

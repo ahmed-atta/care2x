@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /*
-CARE 2X Integrated Information System for Hospitals and Health Care Organizations and Services
+CARE2X Integrated Information System for Hospitals and Health Care Organizations and Services
 Copyright (C) 2002  Elpidio Latorilla & Intellin.org	
 
 GNU GPL. For details read file "copy_notice.txt".
@@ -109,14 +109,14 @@ for($i=0,$j=1;$i<sizeof($element);$i++,$j++)
    {
       parse_str($datarray[$n],$dat);
 
-      if((!$dat[s]&&!$dat[e])) continue;
+      if((!$dat['s']&&!$dat['e'])) continue;
 	  
-      if($dat[s]!=NULL)
+      if($dat['s']!=NULL)
       {
-  	        $dat[s]=(float) $dat[s];
-  	        if($dat[s]==0) $dat[s]=0.01;
-  	        $buf= (int) trim($dat[s]);
-  	        $buff= (int) (($dat[s]-$buf)*100);
+  	        $dat['s']=(float) $dat['s'];
+  	        if($dat['s']==0) $dat['s']=0.01;
+  	        $buf= (int) trim($dat['s']);
+  	        $buff= (int) (($dat['s']-$buf)*100);
   	        $buff=$buf+($buff/60);
   	        //print $buff."<p> dats";
 			
@@ -125,27 +125,27 @@ for($i=0,$j=1;$i<sizeof($element);$i++,$j++)
             // * uncomment the following line to use ttf font and comment the default line
             // *******************************************************************
 
-  	        // ImageTTFText ($im, 9, 45,($buff*$tabcols),($tabrows*(0.50+$j)), $black, "arial.ttf",$dat[s]);
+  	        // ImageTTFText ($im, 9, 45,($buff*$tabcols),($tabrows*(0.50+$j)), $black, "arial.ttf",$dat['s']);
 
             // ******************************************************************
             // * the following code is the default - uses system fonts
             // * comment the following line if you use the ttf font line above
             // ******************************************************************
-  	        ImageString($im,1,($buff*$tabcols),($tabrows*$j+1),$dat[s],$black);
+  	        ImageString($im,1,($buff*$tabcols),($tabrows*$j+1),strtr($dat['s'],'.',':'),$black);
       }
 	  
-  	  if($dat[e]!=NULL)
+  	  if($dat['e']!=NULL)
       {
-  	        $dat[e]=(float) $dat[e];
+  	        $dat['e']=(float) $dat['e'];
 			
 			// *******************************************************************
 			// * uncomment the following line if you want to display midnight as 24.00
 			// *******************************************************************
 			
-  	        //if($dat[e]==0) $dat[e]=24.00;
+  	        //if($dat['e']==0) $dat['e']=24.00;
 			
-  	        $buf2=(int) trim($dat[e]);
-  	        $buff2= (int) (($dat[e]-$buf2)*100);
+  	        $buf2=(int) trim($dat['e']);
+  	        $buff2= (int) (($dat['e']-$buf2)*100);
   	        $buff2=$buf2+($buff2/60);
 
 			// *******************************************************************
@@ -153,21 +153,21 @@ for($i=0,$j=1;$i<sizeof($element);$i++,$j++)
             // * uncomment the following line to use ttf font and comment the default line
             // *******************************************************************
 
-  	        // ImageTTFText ($im, 9, 45,($buff2*$tabcols),($tabrows*(0.50+$j)), $black, "arial.ttf",$dat[e]);
+  	        // ImageTTFText ($im, 9, 45,($buff2*$tabcols),($tabrows*(0.50+$j)), $black, "arial.ttf",$dat['e']);
 
             // ******************************************************************
             // * the following code is the default - uses system fonts
             // * comment the following line if you use the ttf font line above
             // ******************************************************************
 
-  	        ImageString($im,1,($buff2*$tabcols),($tabrows*$j+1),$dat[e],$black);
+  	        ImageString($im,1,($buff2*$tabcols),($tabrows*$j+1),strtr($dat['e'],'.',':'),$black);
       }
 	  
- 	  if(($buff<$buff2)||($dat[e]==NULL))
+ 	  if(($buff<$buff2)||($dat['e']==NULL))
  	  {
-  	        if(($dat[s]!=NULL)&&($dat[e]!=NULL)) ImageFilledRectangle($im,($buff*$tabcols),($tabrows*(0.65+$j)),($buff2*$tabcols),($tabrows*(0.85+$j)),$red);
-  	        if(($dat[s]!=NULL)&&($dat[e]==NULL)) ImageFilledRectangle($im,($buff*$tabcols),($tabrows*(0.65+$j)),(($buff*$tabcols)+4),($tabrows*(0.85+$j)),$red);
-  	        if(($dat[s]==NULL)&&($dat[e]!=NULL)) ImageFilledRectangle($im,(($buff2*$tabcols)+4),($tabrows*(0.65+$j)),($buff2*$tabcols),($tabrows*(0.85+$j)),$red);
+  	        if(($dat['s']!=NULL)&&($dat['e']!=NULL)) ImageFilledRectangle($im,($buff*$tabcols),($tabrows*(0.65+$j)),($buff2*$tabcols),($tabrows*(0.85+$j)),$red);
+  	        if(($dat['s']!=NULL)&&($dat['e']==NULL)) ImageFilledRectangle($im,($buff*$tabcols),($tabrows*(0.65+$j)),(($buff*$tabcols)+4),($tabrows*(0.85+$j)),$red);
+  	        if(($dat['s']==NULL)&&($dat['e']!=NULL)) ImageFilledRectangle($im,(($buff2*$tabcols)+4),($tabrows*(0.65+$j)),($buff2*$tabcols),($tabrows*(0.85+$j)),$red);
 	  }
 	  else
 	  {

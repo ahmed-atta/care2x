@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -14,7 +14,7 @@ $lang_tables=array('indexframe.php');
 define('LANG_FILE','specials.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
+
 $breakfile='config_options.php'.URL_APPEND;
 
 $config_new=array();
@@ -64,7 +64,7 @@ if ($mode=='change'){
 	$config_new=$cfg;
 }
 // Get the menu items for simulation
-$sql='SELECT name,LD_var FROM care_menu_main WHERE is_visible=1 OR LD_var="LDEDP" OR LD_var="LDLogin" ORDER by sort_nr ';
+$sql="SELECT name,LD_var FROM care_menu_main WHERE is_visible=1 OR LD_var='LDEDP' OR LD_var='LDLogin' ORDER by sort_nr";
 
 $menu_obj=$db->Execute($sql);
 

@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System deployment 1.1 (mysql) 2004-01-11
+* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -28,60 +28,48 @@ if(!session_is_registered('sess_login_userid')) session_register('sess_login_use
 if(!session_is_registered('sess_login_username')) session_register('sess_login_username');
 if(!session_is_registered('sess_login_pw')) session_register('sess_login_pw');
 
-function logentry(&$userid,$key,$report)
-{
-			$logpath='logs/access/'.date('Y').'/';
-			if (file_exists($logpath))
-			{
-				$logpath=$logpath.date('Y_m_d').'.log';
-				$file=fopen($logpath,'a');
-				if ($file)
-				{	if ($userid=='') $userid='blank'; 
-					$line=date('Y-m-d H:i:s').' '.'Main Login: '.$report.'  Username='.$userid.'  UserID='.$key;
-					fputs($file,$line);fputs($file,"\r\n");
-					fclose($file);
-				}
-			}
+function logentry($userid,$key,$report){
+	$logpath='logs/access/'.date('Y').'/';
+	if (file_exists($logpath)){
+		$logpath=$logpath.date('Y_m_d').'.log';
+		$file=fopen($logpath,'a');
+		if ($file){	
+			if ($userid=='') $userid='blank';
+			$line=date('Y-m-d H:i:s').' '.'Main Login: '.$report.'  Username='.$userid.'  UserID='.$key;
+			fputs($file,$line);fputs($file,"\r\n");
+			fclose($file);
+		}
+	}
 }
 
 if ((($pass=='check')&&($keyword!=''))&&($userid!=''))
 {
-    if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
-    if($dblink_ok) {	
-	    $sql='SELECT * FROM care_users WHERE login_id="'.addslashes($userid).'"';
-							
-		if($ergebnis=$db->Execute($sql))
+	include_once($root_path.'include/care_api_classes/class_access.php');
+	$user = & new Access($userid,$keyword);
+
+	if($user->isKnown() && $user->hasValidPassword())
+	{
+		if($user->isNotLocked())
 		{
-		    $zeile=$ergebnis->FetchRow();
-			
-			if (($zeile['password']==md5($keyword))&&($zeile['login_id']==$userid))
-			{	
-				if (!($zeile['lockflag']))
-				{								
-					$HTTP_SESSION_VARS['sess_login_userid']=$zeile['login_id'];		
-					$HTTP_SESSION_VARS['sess_login_username']=$zeile['name'];		
-					# Init the crypt object, encrypt the password, and store in cookie
-    				$enc_login = new Crypt_HCEMD5($key_login,makeRand());
-										
-					$cipherpw=$enc_login->encodeMimeSelfRand($keyword);
-										
-                    //setcookie('ck_login_pw'.$sid,$cipherpw,0,'/');
-					$HTTP_SESSION_VARS['sess_login_pw']=$cipherpw;		
-										
-					# Set the login flag
-					setcookie('ck_login_logged'.$sid,'true',0,'/');
-										
-					logentry($zeile['name'],$zeile['id'],$REMOTE_ADDR.' OK\'d','','');			
-										
-					header("Location: $fileforward");		
-					exit;
-										
-				}else { $passtag=3;}
-			}else {$passtag=1;};
-		}
-		else {$passtag=1;};
-	}
-    else { echo "$LDDbNoLink<br>"; } 
+			$HTTP_SESSION_VARS['sess_login_userid']=$user->LoginName();
+			$HTTP_SESSION_VARS['sess_login_username']=$user->Name();
+			# Init the crypt object, encrypt the password, and store in cookie
+    			$enc_login = new Crypt_HCEMD5($key_login,makeRand());
+
+			$cipherpw=$enc_login->encodeMimeSelfRand($keyword);
+
+			$HTTP_SESSION_VARS['sess_login_pw']=$cipherpw;
+
+			# Set the login flag
+			setcookie('ck_login_logged'.$sid,'true',0,'/');
+
+			logentry($user->Name(),$user->LoginName(),$REMOTE_ADDR." OK'd","","");
+
+			header("Location: $fileforward");
+			exit;
+
+		}else { $passtag=3;}
+	}else {$passtag=1;}
 }
 
 $errbuf='Log in';

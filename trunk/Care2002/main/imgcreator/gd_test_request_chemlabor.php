@@ -5,10 +5,10 @@ if (eregi('inc_test_request_gd_chemlabor.php',$PHP_SELF))
 /*------end------*/
 
 /**
-* CARE 2X Integrated Hospital Information System
+* CARE2X Integrated Hospital Information System
 * GNU General Public License
-* copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* Copyright 2002 Elpidio Latorilla
+* elpidio@care2x.org, elpidio@care2x.net
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -399,7 +399,7 @@ $mark_v_offset=1; /* Vertical offset of the marking blocks */
 	   
 	  if($tdcount>4) $len=5; else $len=6;
 	   
-	  if(eregi("tx_",$x)) /* If titel */
+	  if(strpos($x,"tx_")!==FALSE) /* If titel */
 	  {
 	   doTitel($v,$len); 
 	  }
@@ -407,13 +407,13 @@ $mark_v_offset=1; /* Vertical offset of the marking blocks */
 	  {
 		 
 	     /* If test element is part of emergency program change bgcolor */
-	     if(eregi("_emx_",$x)) 
+	     if(strpos($x,"_emx_")!==FALSE)
 		 { 
 		    $bgcolor=&$light_violet; 
 		  	 doBgColor($len);
 	     }
 		 
-	     if(eregi("_x_",$x)) /* Check if the element has two marker fields */
+	     if(strpos($x,"_x_")!==FALSE) /* Check if the element has two marker fields */
 		 {
 		    $elem_index=explode("_x_",$x);
 			
@@ -450,10 +450,10 @@ $mark_v_offset=1; /* Vertical offset of the marking blocks */
 				{
 				  doBlock();
 				}
-			
-							
+
+
 		   /* Check for the code of telephone then show telephone icon*/
-		   if(eregi("_telx_",$x))
+		  if(strpos($x,"_telx_")!==FALSE)
 		   {
 
 			   $sx+=($hdiv*($len-1)); /* Move x pointer to the right */
