@@ -192,15 +192,14 @@ science education products, open source software and local  linux distro.
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../gui/img/control/default/<?php echo $lang ?>/<?php echo $lang ?>_x-blank.gif"  border=0  width=135 align=right vspace=10>
-			<b>Matej Hausenblas (FR) did the french translations of Care 2002</b>
+			<b>Mat&#283;j Hausenblas (FR) did the french translations of Care 2002</b>
 			<p>
-Matej Hausenblas was born in Prague, Czech Republic, in 1981.
-He is a student on a math-informatics-physics university. After several years 
-of using Windows he decided to have a look at Linux, as a worthy challenge 
-and after some time, he decided to participate on the Open Source projects to 
-improve some skills and also to return something back and to see how things 
-work in this kind of society.
-			<P><a href="mailto:matejh@users.sourceforge.net"><u>Matej Hausenblas can be contacted here.</u></a>
+Mat&#283;j Hausenblas was born in Prague, Czech Republic, in 1981.
+He is a student at math-IT-physics university. After some experience with computers
+he decided to have a look at GNU/Linux, he decided to participate on the Open Source
+projects to improve some skills and also to return something back to the community and
+to see how things work in this development model.
+			<P><a href="mailto:matejh@users.sourceforge.net"><u>Mat&#283;j Hausenblas can be contacted here.</u></a>
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
