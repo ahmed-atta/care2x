@@ -23,7 +23,8 @@ if(!isset($mode)){
 	//include('./include/save_prescription.inc.php');
 	include('./include/save_admission_data.inc.php');
 }
-$lang_tables=array('legal.php');
+
+$lang_tables=array('departments.php','legal.php');
 require('./include/init_show.php');
 
 $sql="SELECT e.insurance_nr,e.current_dept_nr,f.name AS insurers_name 
@@ -37,7 +38,7 @@ if($result=$db->Execute($sql)){
 		$encounter=$result->FetchRow();
 	}
 }else{
-echo $sql;
+	echo $sql;
 }
 $subtitle=$LDSickReport;
 
@@ -49,6 +50,7 @@ $HTTP_SESSION_VARS['sess_file_return']=$thisfile;
 require_once($root_path.'include/care_api_classes/class_department.php');
 $dept_obj=new Department;
 $dept_med=$dept_obj->getAllMedical();
+
 if(isset($deptnr)&&!empty($deptnr)) $encounter['current_dept_nr']=$deptnr;
 $dept_address=$dept_obj->Address($encounter['current_dept_nr']);
 $dept_sigstamp=$dept_obj->SignatureStamp($encounter['current_dept_nr']);

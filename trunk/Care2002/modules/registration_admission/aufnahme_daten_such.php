@@ -16,10 +16,6 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_date_format_functions.php');
 
 require_once($root_path.'include/inc_config_color.php');
-$keyword=strtr($keyword,'%',' ');
-$keyword=trim($keyword);
-
-$dbtable='care_admission_patient';
 
 $toggle=0;
 
@@ -39,11 +35,7 @@ if(($mode=='search')and($searchkey))
     if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
     if($dblink_ok) {
 				
-			/* Load global config */
-/*           $config_type='patient_%';
-           include('../include/inc_get_global_config.php');
-*/
-
+		/* Load global config */
 		include_once($root_path.'include/care_api_classes/class_globalconfig.php');
         $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
         $glob_obj->getConfig('patient_%');
@@ -53,7 +45,9 @@ if(($mode=='search')and($searchkey))
 			{
 				$suchwort=(int) $suchwort;
 				$numeric=1;
-				//if($suchwort < $patient_inpatient_nr_adder) $suchbuffer=$suchwort+$patient_inpatient_nr_adder; else $suchbuffer=$suchwort;
+				if($suchwort < $GLOBAL_CONFIG['patient_inpatient_nr_adder']) $suchbuffer= $suchwort; 
+					else $suchbuffer=($suchwort - $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
+			}else{
 				$suchbuffer=$suchwort;
 			}
 			
@@ -64,9 +58,10 @@ if(($mode=='search')and($searchkey))
 			               reg.name_last LIKE "'.addslashes($suchwort).'%" 
 			              OR reg.name_first LIKE "'.addslashes($suchwort).'%"
 			              OR reg.date_birth LIKE "'.@formatDate2Std($suchwort,$date_format).'%"
-			              OR enc.encounter_nr LIKE "'.addslashes($suchbuffer).'"
+			              OR enc.encounter_nr LIKE "'.(int)$suchbuffer.'"
 					  )
 					  AND enc.pid=reg.pid  
+					  AND NOT enc.is_discharged
 			          ORDER BY enc.encounter_nr ';
 					  
 			if($ergebnis=$db->Execute($sql))
@@ -81,12 +76,11 @@ if(($mode=='search')and($searchkey))
 						exit;
 					}
 				}
-			}
-			 else {echo "<p>".$sql."<p>$LDDbNoRead";};
-	}
-  	 else { echo "$LDDbNoLink<br>"; }
+			}else{echo "<p>".$sql."<p>$LDDbNoRead";};
+	}else{ echo "$LDDbNoLink<br>"; }
+}else{
+	$mode='';
 }
-else $mode='';
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">

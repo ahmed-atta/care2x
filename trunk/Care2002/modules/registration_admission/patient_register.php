@@ -96,7 +96,7 @@ if($dblink_ok) {
             if(is_uploaded_file($HTTP_POST_FILES['photo_filename']['tmp_name']) && $HTTP_POST_FILES['photo_filename']['size']) {
                 $picext=substr($HTTP_POST_FILES['photo_filename']['name'],strrpos($HTTP_POST_FILES['photo_filename']['name'],'.')+1);
                 // if(stristr($picext,'jpg')||stristr($picext,'gif')||stristr($picext,'bmp'))
-                if (eregi($picext,'gif jpg bmp')) {
+                if (eregi($picext,'gif,jpg,png,bmp')) {
                     /* Load the string cleaner function */				
                     include_once($root_path.'include/inc_string_cleaner.php');
                     /* Now create the new filename for the image */				
@@ -140,8 +140,7 @@ if($dblink_ok) {
 						 
 			   if ($old_fn!=$photo_filename) $sql.=' photo_filename="'.$photo_filename.'",';
 			  
-			   $sql.=' history= (CONCAT('.$dbtable.'.history," Update '.date('Y-m-d H:i:s').' ='.$user_id."\n".'")),
-			 			 modify_id="'.$user_id.'" WHERE pid='.$pid;
+			   $sql.=' history=CONCAT(history," Update '.date('Y-m-d H:i:s').' '.$user_id."\n".'"), modify_id="'.$user_id.'" WHERE pid='.$pid;
 			
 			  $db->BeginTrans();
 			  $ok=$db->Execute($sql);
@@ -172,6 +171,7 @@ if($dblink_ok) {
 					  }
                  }				
 			      $newdata=1;
+				  //echo $sql;
 			
 			      header("Location: patient_register_show.php".URL_REDIRECT_APPEND."&pid=$pid&from=$from&newdata=1&target=entry");
 			      exit;     
@@ -199,7 +199,7 @@ if($dblink_ok) {
 		               if(!$update) $pid=$db->Insert_ID();
 			
 			          $newdata=1;
-			
+						
 			          header("Location: patient_register_show.php".URL_REDIRECT_APPEND."&pid=$pid&from=$from&newdata=1&target=entry");
 			          exit;     
 		         }
@@ -232,15 +232,12 @@ if($dblink_ok) {
 				} else { $insurance_show=false;}
 			 } 
 	      }
-
     } else {
 	     $date_reg=date('Y-m-d H:i:s');
      }			
 	 
 	 /* Get the insurance classes */
-
 	 $insurance_classes=&$pinsure_obj->getInsuranceClassInfoObject('class_nr,name,LD_var');
-	 
 } else { 
     echo "$LDDbNoLink<br>"; 
 }
