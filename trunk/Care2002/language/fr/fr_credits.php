@@ -19,11 +19,12 @@ require_once('../../include/inc_vars_resolve.php');
 			<P><img src="../../fotos/credits/elpidio_latorilla_3.jpg" border=0  align=right vspace=10>
 			<b>La première version bêta de CARE 2002 était créée par Elpidio Latorilla:</b>
 			<p>
-			Professions: <br>Programmeur, Infirmier de chirurgie, technicien en électronique & télecommunications
+			Professions: <br>Programmeur, Infirmier de chirurgie, Technicien en électronique & télecommunications
 			<p>
 			Secteurs d`intérêt: <br>C, C++, PHP, Javascript, SQL, TCL/TK, HTML, Perl, ASP, Java
 			<P><a href="mailto:elpidio@latorilla.com"><u>Elpidio Latorilla peut être contacté ici...</u></a>
 </TD></TR></TBODY></TABLE>
+
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
@@ -36,8 +37,9 @@ require_once('../../include/inc_vars_resolve.php');
 			<P><img src="../../gui/img/control/default/fr/fr_x-blank.gif" width=135 border=0  align=right vspace=10>
 			<b>La traduction française de Care 2002 était réalisée par Matej Hausenblas.</b>
 			
-			<P><a href="mailto:matejh@users.sourceforge.net"><u>Matej Hausenblas  peut être  contacté ici..</u></a>
+			<P><a href="mailto:matejh@users.sourceforge.net"><u>Matej Hausenblas peut être contacté ici..</u></a>
 </TD></TR></TBODY></TABLE>
+
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
@@ -48,7 +50,7 @@ require_once('../../include/inc_vars_resolve.php');
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../gui/img/control/default/fr/fr_x-blank.gif"  border=0  width=135 align=right vspace=10>
-			<b>La traduction italienne de Care 2002 était réalisée par Giuseppe Scarpi:</b>
+			<b>La traduction italienne de Care 2002 était réalisée par Giuseppe Scarpi (IT):</b>
 			<p>
 			Giuseppe Scarpi est né à Rome, Italie, il y a 35 ans.
 			<p>Il a un diplôme d'Ingénieur en Électronique et il a travaillé pour plusieures companies dans le secteur biomédical,
@@ -57,7 +59,7 @@ Il utilise et apprécie les deux, Linux et Windows, "<i>en tant que résultat d'un
 Il a décidé de joindre activement la source libre car:<br><i>"Un tel monde idéal peut survivre uniquement s'il est parfaitement équilibré. Si vous prenez quelque chose,
  vous devriez rendre quelque chose en proportion."</i>
 
-			<P><a href="mailto:kalbun@inwind.it"><u>Giuseppe Scarpi  peut être  contacté ici..</u></a>
+			<P><a href="mailto:kalbun@inwind.it"><u>Giuseppe Scarpi peut être contacté ici..</u></a>
 </TD></TR></TBODY></TABLE>
 
 <hr>
@@ -70,24 +72,28 @@ Il a décidé de joindre activement la source libre car:<br><i>"Un tel monde idéal
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/gabriele_cicala.jpg"  border=0  align=right vspace=10>
-			<b>La traduction italienne de Care 2002 et www.care2x.com était réalisée par Gabriele Cicala.</b>
+			<b>La traduction italienne de Care 2002 et www.care2x.com était réalisée par Gabriele Cicala (IT).</b>
 			
-			<P><a href="mailto:gabcicala@tiscali.it"><u>Gabriele Cicala   peut être  contacté ici..</u></a>
+			<P><a href="mailto:gabcicala@tiscali.it"><u>Gabriele Cicala peut être contacté ici..</u></a>
 </TD></TR></TBODY></TABLE>
 
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
         <TR>
-          <TD><IMG height=15 
-            src="../../gui/img/common/default/pixel.gif" 
+          <TD><IMG height=15
+            src="../../gui/img/common/default/pixel.gif"
             width=5 border=0></TD></TR>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/daniel_zilli.jpg"  border=0  align=right vspace=10>
-			<b>La traduction brésilien-portugaise de Care 2002 et www.care2x.com était réalisée par Daniel Zilli.</b>
-			
-			<P><a href="mailto:danielz@cco.matrix.com.br"><u>Daniel Zilli   peut être  contacté ici..</u></a>
+			<b>La traduction brésilien-portugaise de Care 2002 et www.care2x.com était réalisée par Daniel Zilli (BR).</b>
+			<p>
+			Daniel est un type agréable qui adore vivre une vie heureuse. Il aime les ordinateurs, football, et bonne musique.
+Il a 10 ans de l`expérience avec les ordinateurs et il adore ce qu`il fait.
+Daniel est propriétaire d'une entreprise qui produit des produits
+pour l`éducation de la science d`ordinateurs, les logiciels libres et distribution locale de linux.
+			<P><a href="mailto:danielz@cco.matrix.com.br"><u>Daniel Zilli peut être contacté ici..</u></a>
 </TD></TR></TBODY></TABLE>
 
 <hr>
@@ -100,7 +106,7 @@ Il a décidé de joindre activement la source libre car:<br><i>"Un tel monde idéal
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/agus_mr.jpg"  border=0  align=right vspace=10>
-			<b>La traduction indonésienne de Care 2002 et www.care2x.com était réalisée par Agus Muhammad Ramdan.</b>
+			<b>La traduction indonésienne de Care 2002 et www.care2x.com était réalisée par Agus Muhammad Ramdan (ID).</b>
 			
 			<P><a href="mailto:agusmr@mweb.co.id"><u>Agus M. Ramdan  peut être  contacté ici..</u></a>
 </TD></TR></TBODY></TABLE>
@@ -119,7 +125,7 @@ Il a décidé de joindre activement la source libre car:<br><i>"Un tel monde idéal
 			<p><font size=1>
 			Les tests complets <br>
 			Déboggage <br>
-			DB 'le concept de serrure optimistique' concept<br>
+			DB 'le concept de serrure optimistique'<br>
 			DB optimalisations <br>
 			Scripts de validation pour les dates et numéros<p>
 			</font>
@@ -133,10 +139,76 @@ Il a décidé de joindre activement la source libre car:<br><i>"Un tel monde idéal
 			<P><a href="mailto:tho123@users.sourceforge.net"><u>Thomas Wiedmann peut être contacté ici...</u></a>
 </TD></TR></TBODY></TABLE>
 
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD><IMG height=15
+            src="../../gui/img/common/default/pixel.gif" 
+            width=5 border=0></TD></TR>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+			<P><img src="../../gui/img/control/default/<?php echo $lang ?>/<?php echo $lang ?>_x-blank.gif"  border=0  width=135 align=right vspace=10>
+			<b>Nino Novak (DE) a édité la version allemande de www.care2x.com.</b>
+			<p>
+			Nino Novak est un cowboy pauvre et solitaire. Il tire plus vite qu'il pense. Parfois un peu difficile.
+			Il aime les "vrai gourou" et des discussions sophistiquées avec eux. Il veut aider créer un meilleur monde.
+			Il a un peu d'expérience dans le milieu médical et scientifique (ainsi il a joint le projet care2x).
+
+
+			<P><a href="mailto:nino@kflog.org"><u>Nino Novak peut  être contacté ici...</u></a>
+</TD></TR></TBODY></TABLE>
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD><IMG height=15
+            src="../../gui/img/common/default/pixel.gif"
+            width=5 border=0></TD></TR>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+			<P><img src="../../gui/img/control/default/<?php echo $lang ?>/<?php echo $lang ?>_x-blank.gif"  border=0  width=135 align=right vspace=10>
+			<b>Patxi Gomaríz (ES) a fait la traduction espagnole.</b>
+			<p>
+			Patxi Gomaríz est né au printemps 1966 à Murcia, Espagne. Sa vie et son travail tourne surtout autor de la photographie.
+			Il est un spécialiste en photographie pour l'ophtalmologie (fundus camera). Il est un passionné d'internet et fait également
+			le design des sites web.<p>
+			"<i>Je pense que le code à source ouverte est une arme effective contre les effets négatifs de la globalisation économique avant tout
+			dans les secteurs fundamentaux qui sont importants pour l'humanité tels que la santé. Pour cette raison je me sens fier de ma petite
+			contribution à ce grand projet.</i>"
+
+			<P><a href="mailto:pgomariz@ono.com"><u>Patxi Gomaríz peut être contacté ici...</u></a>
+</TD></TR></TBODY></TABLE>
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD><IMG height=15
+            src="../../gui/img/common/default/pixel.gif"
+            width=5 border=0></TD></TR>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+			<P><img src="../../gui/img/control/default/<?php echo $lang ?>/<?php echo $lang ?>_x-blank.gif"  border=0  width=135 align=right vspace=10>
+			<b>Daniele Frijia (DE) contrôlée les aspects de sécurité de Care 2002.</b>
+			<br>
+			Quelques de ses multiples contributions:<p>
+			<font size=1>
+			Conseils sur la sécurité<br>
+			Consultations en matière de php<br>
+			Il est le "sentinel" du projet
+		</font>
+		    <p>
+			Daniele Frijia (née en 81), travaille actuellement pour un ISP à Nuremberg, Allemagne, dédie sa connaissance de php
+			afin d'améliorer la sécurité de Care2x. L'intention est d'ouvrir un nouveau "marché" (médical)
+			pour la communauté du logiciel libre.
+
+			<P><a href="mailto:daniele@infra.de"><u>Daniele Frijia peut être contactée ici...</u></a>
+</TD></TR></TBODY></TABLE>
+
 
 <hr>
 <font face="verdana,arial" size=3 color="#0000ff">Autres crédits</font>
-<font face="verdana,arial" size=1 > (dand l'ordre alphabétique)</font>
+<font face="verdana,arial" size=1 > (dans l'ordre alphabétique)</font>
 
 <table border=0 cellspacing=1 cellpadding=1>
   <tr>
