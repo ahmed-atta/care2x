@@ -33,7 +33,7 @@ $LDHelp='Pomoc';
 $LDMore='více o èlánku';
 
 $LDEditTitle='Zprávy na domovské stránce';
-$LDNewsDummy=array(1=>'první',2=>'druhý',3=>'tøetí',4=>'èvrtý');
+$LDNewsDummy=array(1=>'První',2=>'Druhý',3=>'Tøetí',4=>'Èvrtý');
 
 $LDNoFrame='Vá¹ prohlí¾eè nepodporuje\'frames\'.<br> Prosím nainstalujte si novìj¹í verzi prohlí¾eèe';
 
