@@ -1,40 +1,40 @@
 <?php
 $LDTitleTag=array
-					(headline=>'Headline',
-					cafenews=>'Cafeteria News',
-					management=>'Management',
-					healthtips=>'Health Tips',
-					adv_studies=>'Advance Studies',
+					(headline=>'Titre',
+					cafenews=>'Nouvelles de la cafeteria',
+					management=>'Gestion',
+					healthtips=>'Trucs de santé',
+					adv_studies=>'Etudes avancées',
 					prof_training=>'Education',
-					physiotherapy=>'Physical Therapy',
-					events=>'Exhibitions',
-					dept_generalsurgery=>'General Surgery',
-					dept_emergency=>'Emergency',
-					dept_plasticsurgery=>'Plastic Surgery',
+					physiotherapy=>'Thérapie physique',
+					events=>'Démonstrations',
+					dept_generalsurgery=>'Chirurgie générale',
+					dept_emergency=>'Urgence',
+					dept_plasticsurgery=>'Chirurgie plastique',
 					dept_ent=>'ENT',
-					dept_eyesurgery=>'Opthalmology',
-					dept_pathology=>'Pathology',
-					dept_gynecology=>'Gynecology',
-					dept_internalmed=>'Internal Medicine',
-					dept_oncology=>'Oncology',
-					dept_techservice=>'Technical maintenance',
-					dept_IMCU=>'Intermediate Care',
-					dept_ICU=>'Intensive Care Unit',
-					dept_lab=>'Medical Laboratory',
+					dept_eyesurgery=>'Opthalmologie',
+					dept_pathology=>'Pathologie',
+					dept_gynecology=>'Gynecologie',
+					dept_internalmed=>'Médecine interne',
+					dept_oncology=>'Oncologie',
+					dept_techservice=>'Maintenance technique',
+					dept_IMCU=>'Soin Intermediaire',
+					dept_ICU=>'Unité de soins intensifs',
+					dept_lab=>'Laboratoire médical',
 					patient_admission=>'Admission',
-					allamb=>'General Ambulatory',
-					unfamb=>'Emergency Ambulatory',
-					sono=>'Sonography',
-					nuklear=>'Nuclear Diagnostics',
-					inmed=>'Internal Medicine Ambulatory');
+					allamb=>'Ambulatoire générale',
+					unfamb=>'Urgence Ambulatoire',
+					sono=>'Sonographie',
+					nuklear=>'Diagnostics nucléaires',
+					inmed=>'Ambulatoire d emédecine interne');
 					
 $LDSubTitle=array
-					(headline=>'',
-					cafenews=>'',
-					management=>'',
-					healthtips=>'More Health Tips',
-					adv_studies=>'Relevant Information about Advance Studies',
-					prof_training=>'Relevant Information about Education',
+					(headline=>'Titre',
+					cafenews=>'Nouvelle de la cafeteria',
+					management=>'Gestion',
+					healthtips=>'Plus de turcs de santé',
+					adv_studies=>'Données pertientes au sujet des études avancées',
+					prof_training=>'Données pertinentes au sujet de l\'éducation',
 					physiotherapy=>'',
 					events=>'',
 					dept_generalsurgery=>'',
@@ -50,18 +50,18 @@ $LDSubTitle=array
 					dept_IMCU=>'',
 					dept_ICU=>'',
 					dept_lab=>'',
-					patient_admission=>'More Information about Admission',
-					SBDefault=>'More Information');
+					patient_admission=>'Plus d\'information sur les admissions',
+					SBDefault=>'Plus d\'information');
 
 
-$LDMore='more to article';
-$LDBackTxt='Back';
-$LDClk2Read='Click to read';
+$LDMore='Plus sur les articles';
+$LDBackTxt='Retour';
+$LDClk2Read='Cliquer pour lire';
 
 $LDArticle='Article';
-$LDWrittenOn='on';
-$LDWrittenBy='Written by';
+$LDWrittenOn='Sur';
+$LDWrittenBy='Ecrit par';
 
-$LDNewsDummy=array(1=>'first',2=>'second',3=>'third',4=>'fourth');
-$LDClk2Compose='Click here to compose...'
+$LDNewsDummy=array(1=>'Premier',2=>'Second',3=>'Troisième',4=>'Quatrième');
+$LDClk2Compose='Cliquer pour composer...'
 ?>
