@@ -16,6 +16,10 @@
       <td><font size=4>{{$LDMascotOpt}}</font><br><font size=2>{{$LDMascotOptTxt}}</font></td>
     </tr>
     <tr>
+      <td>&nbsp;&nbsp;{{$LDMainMenuTreeImg}}</td>
+      <td><font size=4>{{$LDMainMenuTree}}</font><br><font size=2>{{$LDMainMenuTreeTxt}}</font></td>
+    </tr>
+    <tr>
       <td>&nbsp;&nbsp;{{$LDGUITemplateImg}}</td>
       <td><font size=4>{{$LDGUITemplate}}</font><br><font size=2>{{$LDGUITemplateTxt}}</font></td>
     </tr>
