@@ -9,8 +9,12 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 */
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
+//define('NO_CHAIN',1);
+define('LANG_FILE','billing.php');
+
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
+
 
     /* include('includes/condb.php');
     error_reporting(0);
@@ -21,8 +25,10 @@ require_once($root_path.'include/inc_front_chain_lang.php');
         $patient_no=$patnum;
     }
 $breakfile='search.php'.URL_APPEND;
+# Extract the language variable
+extract($TXT);
 ?>
-<html>
+<?php html_rtl($lang); ?>
 <head>
 <?php echo setCharSet(); ?>
 
@@ -63,13 +69,13 @@ function finalbill()
 //-->
 </script>
 
-<title>Patient Name</title>
+<title><?php echo $PatientName; ?></title>
 </head>
 
 <body bgcolor="#FFFFFF" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0>
 <table border="0" width="101%" bgcolor=#99ccff>
       <tr>
-        <td width="101%"><font color="#330066" size="+2" face="Arial"><strong>eComBill</strong></font></td>
+        <td width="101%"><font color="#330066" size="+2" face="Arial"><strong><?php echo $eComBill; ?></strong></font></td>
       </tr>
     </table>
 
@@ -77,21 +83,24 @@ function finalbill()
   <input type="hidden" name="patientno" value="<?php echo $patient_no; ?>">
  
   <?php //echo "<blockquote><blockquote>&nbsp;&nbsp;&nbsp;&nbsp;<b>Patient Number : ".$patient_no."</b></blockquote></blockquote>"; ?>
-  <?php echo "<blockquote><blockquote>&nbsp;&nbsp;&nbsp;&nbsp;<b>Patient Number : ".$full_en."</b></blockquote></blockquote>"; ?>
+
+<!-- 19.oct.2003 Daniel Hinostroza: Split the following line into two echoes to allow translation  -->
+  <p><blockquote><b><?php echo $PatientNumber; ?>: </b>  <?php echo "<b>".$full_en."</b></blockquote>"; ?>
+
   <div align="center">
     <center>
     <table border="1" width="585" height="11" bordercolor="#000000" style="border-style: solid">
       <tr>
         <td width="348" height="155" valign="top" bordercolor="#FFFFFF">
-          <a href="javascript:subHS()">Select Hospital Services</a>
+          <a href="javascript:subHS()"><?php echo $SelectHospitalServices; ?></a>
 
-          <p><a href="javascript:subLT()">Select Laboratory Tests</a></p>
+          <p><a href="javascript:subLT()"><?php echo $SelectLaboratoryTests; ?></a></p>
 
 
 
-<p><a href=javascript:subbill()>View Bill</a>
-<p><a href=javascript:subpayment()>View Payment</a>
-<p><a href=javascript:show()>Make a New Payment</a>
+<p><a href=javascript:subbill()><?php echo $ViewBill; ?></a>
+<p><a href=javascript:subpayment()><?php echo $ViewPayment; ?></a>
+<p><a href=javascript:show()><?php echo $MakeNewPayment; ?></a>
 
 <?php
 
@@ -104,7 +113,7 @@ if(is_object($chkfinalresult)) $chkexists=$chkfinalresult->RecordCount();
 //if($chkexists<1)
 if(!$chkexists)
 {
-	echo "<p><a href=javascript:finalbill()>Generate the Final Bill</a>";
+	echo "<p><a href=javascript:finalbill()>$GenerateFinalBill</a></p>";
 }
 
 ?>
@@ -118,7 +127,7 @@ if(!$chkexists)
            
     	if($chkexists>0)
     	{ 
-     		echo "<br><br><h4>This patient has cleared all the bills.</h4>";
+     		echo "<br><br><h4>$Patienthasclearedallthebills</h4>";
      	}
      	
       ?>

@@ -23,7 +23,7 @@ $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
 # Extract the language variable
 extract($TXT);
 ?>
-<html>
+<?php html_rtl($lang); ?>
 
 <head>
 <?php echo setCharSet(); ?>

@@ -4,9 +4,10 @@ require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 
 # Define to true to echo the sql query, for debugging 
-define('SHOW_SQLQUERY',1);
+define('SHOW_SQLQUERY',FALSE);
 
 $lang_tables[]='search.php';
+$lang_tables[]='billing.php';
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
@@ -122,7 +123,7 @@ if(($mode=='search'||$mode=='paginate')&&!empty($searchkey)){
 		if ($linecount=$ergebnis->RecordCount()){ 
 			if(($linecount==1)&&$numeric&&(!defined('SHOW_SQLQUERY')||!SHOW_SQLQUERY)){
 				$zeile=$ergebnis->FetchRow();
-				header('location:patientbill.php'.URL_REDIRECT_APPEND.'&patnum='.$zeile['encounter_nr'].'&update=1&mode='.$mode.'&full_en='.$full_en);
+				header('location:patientbill.php'.URL_REDIRECT_APPEND.'&patnum='.$zeile['encounter_nr'].'&update=1&mode='.$mode.'&full_en='.$zeile['encounter_nr']);
 				exit;
 			}
 		}
@@ -150,18 +151,18 @@ if(($mode=='search'||$mode=='paginate')&&!empty($searchkey)){
 ?>
 
 
-<html>
+<?php html_rtl($lang); ?>
 
 <head>
 <?php echo setCharSet(); ?>
 
-<title>Patient Name</title>
+<title><?php echo $LDPatientName ?></title>
 </head>
 
 <body topmargin=0 leftmargin=0 marginwidth=0 marginheight=0  onLoad="document.searchform.searchkey.select()" >
 <table border="0" width="101%" bgcolor=#99ccff>
       <tr>
-        <td width="101%"><font color="#330066" size="+2" face="Arial"><strong>eComBill - Search</strong></font></td>
+        <td width="101%"><font color="#330066" size="+2" face="Arial"><strong><?php echo "$LDeComBill - $LDSearch" ?></strong></font></td>
       </tr>
     </table>
 

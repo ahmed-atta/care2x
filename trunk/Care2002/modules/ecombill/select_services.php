@@ -9,6 +9,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 */
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
+
+//define('NO_CHAIN',1);
+define('LANG_FILE','billing.php');
+
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
@@ -26,11 +30,15 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 */
 $breakfile='patientbill.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='.$full_en;
 
+# Extract the language variable
+extract($TXT);
+
 ?>
-<html>
+
+<?php html_rtl($lang); ?>
 <head>
 <?php echo setCharSet(); ?>
-<title><?php if($service=='LT')echo "Select Laboratory Tests";?><?php if($service=='HS')echo "Select Hospital Services";?></title>
+<title><?php if($service=='LT')echo $SelectLaboratoryTests;?><?php if($service=='HS')echo $SelectHospitalServices;?></title>
 <SCRIPT language="JavaScript">
 <!--
 function submitform()
@@ -67,8 +75,8 @@ function submitform()
 <body bgcolor="#FFFFFF" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0>
 <table border="0" width="101%" bgcolor=#99ccff>
       <tr>
-        <td width="101%"><font color="#330066" size="+2" face="Arial"><strong>eComBill-
-          <?php if($service=='LT')echo "Select Laboratory Tests";if($service=='HS')echo "Select Hospital Services"; ?></strong></font></td>
+        <td width="101%"><font color="#330066" size="+2" face="Arial"><strong><?php echo $eComBill; ?>-
+          <?php if($service=='LT')echo $SelectLaboratoryTests;if($service=='HS')echo $SelectHospitalServices; ?></strong></font></td>
       </tr>
     </table>
 <blockquote>
@@ -82,16 +90,16 @@ function submitform()
 <?php
 	echo "<tr bgColor=\"#eeeeee\">";
 	echo "<td align=\"left\" height=\"73\" width=\"7666\" colspan=\"6\"><font size=\"5\" color=\"#FF0000\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-	if($service=='LT') echo "Select Laboratory Tests";?><?php if($service=='HS')echo "Select Hospital Services";
+	if($service=='LT') echo $SelectLaboratoryTests;?><?php if($service=='HS')echo $SelectHospitalServices;
 	echo "<p><font color=\"#800000\" size=\"4\">";
-	if($service=='LT') echo "Please select Laboratory Tests for the patient:";?><?php if($service=='HS') echo "Please select Hospital Services for the patient:";
+	if($service=='LT') echo $PleaseSelectLaboratoryTestsforthePatient;?><?php if($service=='HS') echo $PleaseSelectHospitalServicesforthePatient;
 	echo "</font></td>";
 	echo "<tr bgColor=\"#eeeeee\">";
 	echo "<th align=\"center\" height=\"7\" width=\"133\" bgcolor=\"#CCCCCC\">&nbsp;</th>";
-	echo "<th align=\"center\" height=\"7\" width=\"514\" bgcolor=\"#CCCCCC\">Test Name&nbsp;</th>";
-	echo "<th height=\"7\" width=\"826\" align=\"center\" bgcolor=\"#CCCCCC\">Test code</th>";
-	echo "<th height=\"7\" width=\"623\" align=\"center\" bgcolor=\"#CCCCCC\">Cost per unit</th>";
-	echo "<th height=\"7\" width=\"1014\" align=\"center\" valign=\"middle\" bgcolor=\"#CCCCCC\">No.of units</th>";
+	echo "<th align=\"center\" height=\"7\" width=\"514\" bgcolor=\"#CCCCCC\">$TestName</th>";
+	echo "<th height=\"7\" width=\"826\" align=\"center\" bgcolor=\"#CCCCCC\">$TestCode</th>";
+	echo "<th height=\"7\" width=\"623\" align=\"center\" bgcolor=\"#CCCCCC\">$Costperunit</th>";
+	echo "<th height=\"7\" width=\"1014\" align=\"center\" valign=\"middle\" bgcolor=\"#CCCCCC\">$NumberofUnits</th>";
 	if($cntLT){
 	for($cnt=0;$cnt<$cntLT;$cnt++)
 	{
@@ -135,7 +143,7 @@ function submitform()
 <input type="hidden" name="full_en" value="<?php echo $full_en ?>">
       </table>
     &nbsp;<p>
-    <input type="button" onclick="javascript:submitform();" value="Add to patient's bill" name="B1">
+    <input type="button" onclick="javascript:submitform();" value="<?php echo $AddtoPatientBill; ?>" name="B1">
 	&nbsp;&nbsp;<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0','bottom'); ?>></a>      
 
       </center>

@@ -6,6 +6,11 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 * adapted from eComBill beta 0.2 
 * developed by ecomscience.com http://www.ecomscience.com 
 * GPL License
+*
+*  Daniel Hinostroza: originally was: $TP_item_name=$NameLT; changed to: $TP_item_name=$NameHS;
+*  Changed alert functions for language recognition
+*  Almost irrelevant changes to the tables at tp_enter_hs.htm
+*  Shouldn't all references to LabTest change to HospitalService in this page?
 */
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
@@ -19,7 +24,7 @@ $breakfile='billingmenu.php'.URL_APPEND;
 # Extract the language variable
 extract($TXT);
 ?>
-<html>
+<?php html_rtl($lang); ?>
 <head>
 <?php echo setCharSet(); ?>
 <Script language=JavaScript>
@@ -34,28 +39,28 @@ function check()
 	DC=document.hos.Discount.value;
 	if(LTN=="")
 	{
-		alert("Enter Name of Hospital Service");
+		alert("<?php echo "$alertNameHospitalService"; ?>"); 
 	}
 	else if(TC=="")
 	{
-		alert("Enter Service Code/no.");
+		alert("<?php echo "$alertEnterServiceCodeNo"; ?>"); 
 	}
 	else if(LP=="")
 	{
-		alert("Enter Price per Unit");
+		alert("<?php echo "$alertEnterPriceperUnit"; ?>"); 
 	}
 	else if(DC=="")
 	{
-		alert("Enter Discount allowed on this service");
+		alert("<?php echo "$alertEnterDiscountallowed"; ?>"); 
 	}
 	else if(isNaN(LP))
 	{
-		alert("Enter Numeric Value for Price");
+		alert("<?php echo "$alertEnterNumericValueforPrice"; ?>"); 
 
 	}
 	else if(isNaN(DC))
 	{
-		alert("Enter Numeric Value for Discount");
+		alert("<?php echo "$alertEnterNumericValueforDiscount"; ?>"); 
 
 	}
 	else
@@ -72,7 +77,7 @@ function check()
 
 
 
-<title>Hospital Service</title>
+<title><?php echo "$HospitalService"; ?></title>
 </head>
 
 <body bgcolor="#FFFFFF" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0>

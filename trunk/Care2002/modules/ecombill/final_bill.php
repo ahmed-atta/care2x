@@ -28,7 +28,7 @@ $breakfile='patientbill.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='.$fu
            
     if($chkcnt>0)
     {
-    	echo "<HTML>";
+    	html_rtl($lang); 
     	echo "<table border=0 width=101% bgcolor=#99ccff>";
 	echo "<tr>";
 	echo "<td width=101%><font color=#330066 size=+3 face=Arial><strong>eComBill</strong></font></td>";
@@ -119,7 +119,7 @@ $breakfile='patientbill.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='.$fu
     }
 */
 ?>
-<html>
+<?php html_rtl($lang); ?>
 <head>
 <?php echo setCharSet(); ?>
 <title>Patient Name</title>

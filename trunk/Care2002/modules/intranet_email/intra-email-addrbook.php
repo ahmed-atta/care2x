@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
+* CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -111,7 +111,7 @@ if($dblink_ok) {
   		else { echo "$LDDbNoLink<br>$sql"; } 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<HTML>
+<?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
 
@@ -190,12 +190,20 @@ href="javascript:gethelp('intramail.php','address','<?php echo $mode ?>','<?php 
 <FONT face="Verdana,Helvetica,Arial" size=2>
   &nbsp; <b><a href="intra-email.php'.URL_APPEND.'&mode=listmail">'.$LDInbox.'</a> | 
   <a href="intra-email.php'.URL_APPEND.'&mode=compose">'.$LDNewEmail.'</a> | '.$LDAddrBook.' |
+   <a href="javascript:gethelp(\'intramail.php\',\'address\',\''.$mode.'\',\''.$folder.'\')">'.$LDHelp.'</a>| 
+	<a href="intra-email-pass.php'.URL_APPEND.'">'.$LDLogout.'</a></b>
+  <hr color=#000080>
+   &nbsp; <FONT  color="#800000">'.$HTTP_COOKIE_VARS[$local_user.$sid].'</font>';
+/* echo '
+<FONT face="Verdana,Helvetica,Arial" size=2>
+  &nbsp; <b><a href="intra-email.php'.URL_APPEND.'&mode=listmail">'.$LDInbox.'</a> | 
+  <a href="intra-email.php'.URL_APPEND.'&mode=compose">'.$LDNewEmail.'</a> | '.$LDAddrBook.' |
    <a href="intra-email-options.php'.URL_APPEND.'">'.$LDOptions.'</a> | 
    <a href="javascript:gethelp(\'intramail.php\',\'address\',\''.$mode.'\',\''.$folder.'\')">'.$LDHelp.'</a>| 
 	<a href="intra-email-pass.php'.URL_APPEND.'">'.$LDLogout.'</a></b>
   <hr color=#000080>
    &nbsp; <FONT  color="#800000">'.$HTTP_COOKIE_VARS[$local_user.$sid].'</font>';
-
+*/
 ?>
 
 <?php if($task=="newadd") : ?>

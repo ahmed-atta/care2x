@@ -9,6 +9,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 */
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
+
+//define('NO_CHAIN',1);
+define('LANG_FILE','billing.php');
+
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
@@ -25,11 +29,15 @@ require_once($root_path.'include/inc_front_chain_lang.php');
     $no=explode("#",$no);
 	
 $breakfile='select_services.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='.$full_en.'&service='.$service;
+
+# Extract the language variable
+extract($TXT);
+
  ?> 
-<html>
+<?php html_rtl($lang); ?>
 <head>
 <?php echo setCharSet(); ?>
-<title>Laboratory Tests</title>
+<title><?php echo $LaboratoryTests; ?></title>
 <script language="javascript">
 <!--
 	function confirmlabtest()
@@ -43,8 +51,8 @@ $breakfile='select_services.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='
 <body bgcolor="#FFFFFF" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0>
 <table border="0" width="101%" bgcolor=#99ccff>
       <tr>
-        <td width="101%"><font color="#330066" size="+3" face="Arial"><strong>eComBill-
-          <?php if($service=='LT')echo "Select Laboratory Tests";?><?php if($service=='HS')echo "Select Hospital Services";?></strong></font></td>
+        <td width="101%"><font color="#330066" size="+3" face="Arial"><strong><?php echo $eComBill; ?> -
+          <?php if($service=='LT')echo $ConfirmLaboratoryTests;if($service=='HS')echo $ConfirmHospitalServices; ?></strong></font></td>
       </tr>
     </table>
 <blockquote>
@@ -52,14 +60,15 @@ $breakfile='select_services.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='
   </p>
   <form name="confirmlab" id="selectlab" method="POST" action="">
     
-    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
     <div align="center">
       <center>
-      <table cellSpacing="1" cellPadding="3" width="507" bgColor="#999999" border="0" height="25">
-<tr bgColor="#eeeeee"><th align="center" height="1" width="1" bgcolor="#CCCCCC" valign="middle">Test
-    Name&nbsp;</th><th align="center" height="1" width="60" align="center" bgcolor="#CCCCCC">&nbsp;&nbsp;&nbsp;&nbsp;
-    Test code</th><th align="center" height="1" width="43" align="center" bgcolor="#CCCCCC">Cost per unit</th>
-    <th align="center" height="1" width="36" align="center" valign="middle" bgcolor="#CCCCCC">No.of units</th>
+      <table cellSpacing="1" cellPadding="3" width="90%" bgColor="#999999" border="0" height="25">
+	<tr bgColor="#eeeeee">
+		<th align="center" height="1" width="25%" bgcolor="#CCCCCC" valign="middle"><?php echo $TestName ?></th>
+		<th align="center" height="1" width="25%" bgcolor="#CCCCCC" valign="middle"><?php echo $TestCode ?></th>
+		<th align="center" height="1" width="20%" bgcolor="#CCCCCC" valign="middle"><?php echo $Costperunit ?></th>
+		<th align="center" height="1" width="20%" bgcolor="#CCCCCC" valign="middle"><?php echo $NumberofUnits ?></th>
     
     <?php
 	   

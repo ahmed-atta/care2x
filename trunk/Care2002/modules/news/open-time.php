@@ -2,8 +2,9 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
+
 /**
-* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
+* CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -16,7 +17,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<HTML>
+<?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
  <TITLE><?php echo $LDOpenHrsTxt ?></TITLE>

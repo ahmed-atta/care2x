@@ -74,7 +74,7 @@ $fieldnames=array("no.","Pat.nummer","Anrede","Name","Vorname","Geburstdatum");
 
 ?>
 
-<HTML>
+<?php html_rtl($lang); ?>
 <HEAD>
  <TITLE>EDV - Zugangsberechtigunge löschen</TITLE>
 </HEAD>

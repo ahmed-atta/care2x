@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /*
-CARE 2X Integrated Information System beta 1.0.08 - 2003-10-05 for Hospitals and Health Care Organizations and Services
+CARE 2X Integrated Information System beta 1.0.09 - 2003-11-25 for Hospitals and Health Care Organizations and Services
 Copyright (C) 2002  Elpidio Latorilla & Intellin.org	
 
 GNU GPL. For details read file "copy_notice.txt".
@@ -26,7 +26,7 @@ $HTTP_SESSION_VARS['sess_file_forward']='headline-read.php';
 
 $title= $HTTP_SESSION_VARS['sess_title']; 
 ?>
-<html>
+<?php html_rtl($lang); ?>
 <head>
 <?php echo setCharSet(); ?>
 <title></title>

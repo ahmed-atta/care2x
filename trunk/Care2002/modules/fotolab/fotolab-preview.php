@@ -11,7 +11,7 @@ define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 */
 ?>
-<html>
+<?php html_rtl($lang); ?>
 <head>
 <?php
 /*require_once($root_path.'include/inc_charset_fx.php');

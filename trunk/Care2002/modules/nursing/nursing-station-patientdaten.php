@@ -229,7 +229,7 @@ $fr=strtolower(str_replace('.','-',($result['encounter_nr'].'_'.$result['name_la
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<HTML>
+<?php html_rtl($lang); ?>
 <META http-equiv='Cache-Control' content='no-cache, must-revalidate'>
 <META http-equiv='Pragma: no-cache'>
 <HEAD>

@@ -11,6 +11,7 @@ require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 //define('NO_CHAIN',1);
 define('LANG_FILE','billing.php');
+
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
@@ -28,12 +29,11 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 $breakfile='billingmenu.php'.URL_APPEND;
 # Extract the language variable
 extract($TXT);
-
 ?>
-<html>
+<?php html_rtl($lang); ?>
 <head>
 <?php echo setCharSet(); ?>
-<title><?php if($service=='LT')echo "Edit Laboratory Tests";?><?php if($service=='HS')echo "Edit Hospital Services";?></title>
+<title><?php if($service=='LT')echo "$EditLaboratoryTests"; ?><?php if($service=='HS')echo "$EditHospitalServices"; ?></title>
 <SCRIPT language="JavaScript">
 <!--
 function submitform()
@@ -48,8 +48,8 @@ function submitform()
 <body bgcolor="#FFFFFF" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0>
 <table border="0" width="101%" bgcolor=#99ccff>
       <tr>
-        <td width="101%"><font color="#330066" size="+2" face="Arial"><strong>eComBill-
-          <?php if($service=='LT')echo "Edit Laboratory Test Items";if($service=='HS')echo "Edit Hospital Service Items"; ?></strong></font></td>
+        <td width="101%"><font color="#330066" size="+2" face="Arial"><strong><?php echo $eComBill; ?> -
+          <?php if($service=='LT')echo "$EditLaboratoryTestItems";if($service=='HS')echo "$EditHospitalServiceItems"; ?></strong></font></td>
       </tr>
     </table>
 <blockquote>

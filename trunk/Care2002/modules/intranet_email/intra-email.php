@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
+* CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -320,7 +320,7 @@ $content[body]";
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<HTML>
+<?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
  <script language="javascript" >
@@ -460,13 +460,19 @@ href="javascript:gethelp('intramail.php','mail','<?php echo $mode ?>','<?php ech
   if($mode!='compose') echo '<a href="intra-email.php'.URL_APPEND.'&mode=compose">'.$LDNewEmail.'</a> | ';
   	else echo $LDNewEmail.' | ';
 	echo '<a href="intra-email-addrbook.php'.URL_APPEND.'&mode='.$mode.'&folder='.$folder.'">'.$LDAddrBook.'</a> | 
+	<a href="javascript:gethelp(\'intramail.php\',\'mail\',\''.$mode.'\',\''.$folder.'\',\''.$sendok.'\')">'.$LDHelp.'</a>| 
+	<a href="intra-email-pass.php'.URL_APPEND.'">'.$LDLogout.'</a></b>
+  <hr color=#000080>
+   &nbsp; <FONT  color="#800000">'.$HTTP_COOKIE_VARS[$local_user.$sid].'</font><br>
+';
+/*	echo '<a href="intra-email-addrbook.php'.URL_APPEND.'&mode='.$mode.'&folder='.$folder.'">'.$LDAddrBook.'</a> | 
 	<a href="intra-email-options.php'.URL_APPEND.'">'.$LDOptions.'</a> | 
 	<a href="javascript:gethelp(\'intramail.php\',\'mail\',\''.$mode.'\',\''.$folder.'\',\''.$sendok.'\')">'.$LDHelp.'</a>| 
 	<a href="intra-email-pass.php'.URL_APPEND.'">'.$LDLogout.'</a></b>
   <hr color=#000080>
    &nbsp; <FONT  color="#800000">'.$HTTP_COOKIE_VARS[$local_user.$sid].'</font><br>
 ';
-/**
+*//**
 * Compose routine
 */
 if(($mode=='compose')||($mode=='sendmail'))

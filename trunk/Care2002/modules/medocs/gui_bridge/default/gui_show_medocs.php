@@ -200,7 +200,8 @@ if($mode=='show'){
     <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDiagnosis; ?></td>
     <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDTherapy; ?></td>
     <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDetails; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDBy; ?></td>
+    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066">&nbsp;</td>
+   <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDBy; ?></td>
   </tr>
 <?php
 $toggle=0;
@@ -220,7 +221,9 @@ while($row=$result->FetchRow()){
 	</td>
     <td><FONT SIZE=-1  FACE="Arial" color="#000033"><?php if(!empty($row['therapy'])) echo substr($row['therapy'],0,$GLOBAL_CONFIG['medocs_text_preview_maxlen']).'<br>'; ?>
 
-	</td>    <td align="center"><a href="<?php echo $thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&encounter_nr='.$HTTP_SESSION_VARS['sess_en'].'&target='.$target.'&mode=details&type_nr='.$type_nr.'&nr='.$row['nr']; ?>"><img <?php echo createComIcon($root_path,'info3.gif','0'); ?>></a></td>
+	</td>    
+	<td align="center"><a href="<?php echo $thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&encounter_nr='.$HTTP_SESSION_VARS['sess_en'].'&target='.$target.'&mode=details&type_nr='.$type_nr.'&nr='.$row['nr']; ?>"><img <?php echo createComIcon($root_path,'info3.gif','0'); ?>></a></td>
+	<td align="center"><a href="<?php echo $root_path."modules/pdfmaker/medocs/report.php".URL_APPEND."&enc=".$HTTP_SESSION_VARS['sess_en']."&mnr=".$row['nr'].'&target='.$target; ?>" target=_blank><img <?php echo createComIcon($root_path,'pdf_icon.gif','0'); ?>></a></td>
     <td><FONT SIZE=-1  FACE="Arial"><?php if($row['personell_name']) echo $row['personell_name']; ?></td>
   </tr>
 
@@ -335,6 +338,14 @@ if(($mode=='show'||$mode=='details')&&!$enc_obj->Is_Discharged()){
 <?php echo $LDEnterNewRecord; ?>
 </a><br>
 <?php
+	if($mode=='details'){
+?>
+<img <?php echo createComIcon($root_path,'icon_acro.gif','0','absmiddle'); ?>>
+<a href="<?php echo $root_path."modules/pdfmaker/medocs/report.php".URL_APPEND."&enc=".$HTTP_SESSION_VARS['sess_en']."&mnr=".$nr.'&target='.$target; ?>" target=_blank>
+<?php echo $LDPrintPDFDoc; ?>
+</a><br>
+<?php
+	}
 } 
 if(($mode!='show'&&!$nolist) ||($mode=='show'&&$nolist&&$rows>1)){
 ?>

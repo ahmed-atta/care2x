@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
+* CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -86,8 +86,20 @@ if(($mode=='search'||$mode=='paginate')&&($searchkey))
 								reg.death_date';
 			$dbtable ='
 			          FROM 	care_encounter as enc,
-					  			care_person as reg ';
-			$sql2= '
+					  			care_person as reg
+					  WHERE  ';
+
+			if($numeric) $sql2.=' enc.encounter_nr LIKE "'.addslashes($suchbuffer).'"';
+				else $sql2.= '( reg.name_last LIKE "'.addslashes($suchwort).'%" 
+			              OR reg.name_first LIKE "'.addslashes($suchwort).'%")';
+			
+			$sql2.='  AND enc.pid=reg.pid  
+					  AND enc.encounter_status<>"cancelled"
+					  AND NOT enc.is_discharged
+					  AND (enc.in_ward OR enc.in_dept)
+					  AND enc.status NOT IN ("void","hidden","deleted","inactive")
+			          ORDER BY ';
+/*			$sql2= '
 			          WHERE
 					  (
 			               reg.name_last LIKE "'.addslashes($suchwort).'%" 
@@ -101,7 +113,7 @@ if(($mode=='search'||$mode=='paginate')&&($searchkey))
 					  AND (enc.in_ward OR enc.in_dept)
 					  AND enc.status NOT IN ("void","hidden","deleted","inactive")
 			          ORDER BY ';
-					  
+*/					  
 		if($oitem=='encounter_nr') $sql2.="enc.$oitem $odir";	
 			else $sql2.="reg.$oitem $odir";	
 				
@@ -148,7 +160,7 @@ if(($mode=='search'||$mode=='paginate')&&($searchkey))
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<HTML>
+<?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
  <TITLE></TITLE>

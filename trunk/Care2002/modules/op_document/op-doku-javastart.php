@@ -8,7 +8,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
  ?>
 
 
-<HTML>
+<?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
 

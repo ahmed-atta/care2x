@@ -9,6 +9,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 define('NO_CHAIN',1);
+$lang_tables[]='billing.php';
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
@@ -32,10 +33,10 @@ require_once($root_path.'include/inc_date_format_functions.php');
 $breakfile='patient_payment.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='.$full_en;
 	
 ?>
-<html>
+<?php html_rtl($lang); ?>
 <head>
 <?php echo setCharSet(); ?>
-<title>Bill Payment</title>
+<title><?php echo $LDBillPayment; ?></title>
 <SCRIPT language="JavaScript">
 <!--
 	function submitform()
@@ -50,8 +51,8 @@ $breakfile='patient_payment.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='
 
 <table border="0" width="101%" bgcolor=#99ccff>
       <tr>
-        <td width="101%"><font color="#330066" size="+2" face="Arial"><strong>eComBill-
-          Payment Preview</strong></font></td>
+        <td width="101%"><font color="#330066" size="+2" face="Arial"><strong><?php echo $LDeComBill; ?> -
+          <?php echo $LDPaymentPreview; ?></strong></font></td>
       </tr>
     </table>
 <blockquote>
@@ -63,14 +64,14 @@ $breakfile='patient_payment.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='
     
     <table border="0" width="95%" bordercolor="#000000">
      	<tr>
-             	<td colspan=5 valign="top" height=30 bordercolor="#FFFFFF"><b>General Information:</b></td>
+             	<td colspan=5 valign="top" height=30 bordercolor="#FFFFFF"><b><?php echo $LDGeneralInfo; ?>:</b></td>
               </tr>         
                
               <tr>
-                   <td valign=top width="20%">Patient Name:</td>
+                   <td valign=top width="20%"><?php echo $LDPatientName; ?>:</td>
     	           <td valign=top width="20%"><?php echo $patient['title'].' '.$patient['name_first'].' '.$patient['name_last'];?></td>
 	               <td valign=top width="20%">&nbsp;</td>
-                   <td valign=top width="10%">Receipt No:</td>
+                   <td valign=top width="10%"><?php echo $LDReceiptNumber; ?>:</td>
                    <td valign=top width="30%">
                    <?php 
     		       echo $receipt_no;
@@ -79,10 +80,10 @@ $breakfile='patient_payment.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='
               </tr>
               
               <tr>
-                   <td valign=top width="20%">Patient's Address:</td>
+                   <td valign=top width="20%"><?php echo $LDPatientAddress; ?>:</td>
                <td valign=top width="20%"><?php echo $patient['addr_str'].' '.$patient['addr_str_nr'].'<br>'.$patient['addr_zip'].' '.$patient['addr_citytown_nr'];?></td>
                    <td valign=top width="20%">&nbsp;</td>
-                   <td valign=top width="10%">Bill Date:</td>
+                   <td valign=top width="10%"><?php echo $LDBillDate; ?>:</td>
                    <td valign=top width="30%">
                    <?php 
                    if($receiptid=="")
@@ -108,7 +109,7 @@ $breakfile='patient_payment.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='
               </tr>
                  
      	 <tr>
-                   <td valign=top width="20%">Patient Type:</td>
+                   <td valign=top width="20%"><?php echo $LDPatientType; ?>:</td>
                    <td valign=top width="20%"><?php echo $patient['encounter_class_nr'];?></td>
                    <td valign=top width="20%">&nbsp;</td>
                    <td valign=top width="10%">&nbsp;</td>
@@ -116,7 +117,7 @@ $breakfile='patient_payment.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='
               </tr>
                  
               <tr>
-                   <td valign=top width="20%">Date of Birth:</td>
+                   <td valign=top width="20%"><?php echo $LDDateofBirth; ?>:</td>
                    <td valign=top width="20%"><?php echo $patient['date_birth'];?></td>
                    <td valign=top width="20%">&nbsp;</td>
      	      <td valign=top width="10%">&nbsp;</td>
@@ -124,7 +125,7 @@ $breakfile='patient_payment.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='
               </tr>
                  
               <tr>
-                   <td valign=top width="20%">Sex :</td>
+                   <td valign=top width="20%"><?php echo $LDSex; ?>:</td>
                    <td valign=top width="20%"><?php echo $patient['sex'];?></td>
                    <td valign=top width="20%">&nbsp;</td>
      	      <td valign=top width="10%">&nbsp;</td>
@@ -132,7 +133,7 @@ $breakfile='patient_payment.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='
               </tr>
                  
               <tr>
-                   <td valign=top width="20%">Patient No:</td>
+                   <td valign=top width="20%"><?php echo $LDPatientNumber; ?>:</td>
                    <td valign=top width="20%"><?php echo $full_en;?></td>
                    <td valign=top width="20%">&nbsp;</td>
      	      <td valign=top width="10%">&nbsp;</td>
@@ -140,7 +141,7 @@ $breakfile='patient_payment.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='
               </tr>
                  
               <tr>
-     	     <td valign=top width="20%">Date of Admission:</td>
+     	     <td valign=top width="20%"><?php echo $LDDateofAdmission; ?>:</td>
      	     <td valign=top width="20%"><?php echo formatDate2Local($patient['encounter_date'],$date_format);?></td>
      	     <td valign=top width="20%">&nbsp;</td>
      	     <td valign=top width="10%">&nbsp;</td>
@@ -152,7 +153,7 @@ $breakfile='patient_payment.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='
               </tr>
               
               <tr>
-                  <td colspan="5" height="30" width="641" bordercolor="#FFFFFF"><p><b>Payment Information:</b></p></td>
+                  <td colspan="5" height="30" width="641" bordercolor="#FFFFFF"><p><b><?php echo $LDPaymentInformation; ?>:</b></p></td>
               </tr>
                  
           </table>
@@ -163,15 +164,15 @@ $breakfile='patient_payment.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='
         
   <table cellSpacing="1" cellPadding="3" width="522" bgColor="#999999" border="0" height="138">
  	<tr bgColor="#eeeeee">
-	   <td align="left" height="37" width="7738"><font size="4" color="#FF0000">&nbsp;Mode of Payment :</font></td>
+	   <td align="left" height="37" width="7738"><font size="4" color="#FF0000">&nbsp;<?php echo $LDModeofPayment; ?>:</font></td>
 	   <?php
 	      if(strstr(getenv('QUERY_STRING'),"mode1")!="")
 	      {
 		  echo "<tr bgColor=\"#eeeeee\">";
 		  echo "<td align=\"center\" height=\"7\" width=\"3182\">";
 		  echo "<p align=\"left\">";
-		  echo "<i><b>Cash</b></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>";
-		  echo "<p align=\"left\">Amount&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+		  echo "<i><b>$LDCash</b></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>";
+		  echo "<p align=\"left\">$LDAmount&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 		  echo $amtcash;
 		  echo "<input type=\"hidden\" name=\"amtcash\" value=\"".$amtcash."\">";
 	      }
@@ -184,10 +185,11 @@ $breakfile='patient_payment.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='
 		  echo "<td height=\"5\" width=\"7738\">";
 		  echo "<img height=\"1\" src=\"pics/hor_bar.bmp\" width=\"5\"></td></tr><tr bgColor=\"#eeeeee\"><td align=\"center\" height=\"7\" width=\"3182\">";
 		  echo "<p style=\"line-height: 150%\" align=\"left\">";
-		  echo "<i><b>Credit card</b></i>";
+		  echo "<i><b>$LDCreditCard</b></i>";
 		  echo "<p style=\"line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0\" align=\"left\">";
-		  echo "Card Number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$cdno."&nbsp;</p>";
-		  echo "<p style=\"line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0\" align=\"left\">Amount&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$amtcc."</p>";
+		  echo "$LDCardNumber&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$cdno."&nbsp;</p>";
+		  echo "<p style=\"line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0\" align=\"left\">
+			$LDAmount&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$amtcc."</p>";
 		  
 		echo "</td></tr>";
 		echo "<input type=\"hidden\" name=\"cdno\" value=\"".$cdno."\">";
@@ -201,11 +203,11 @@ $breakfile='patient_payment.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='
 	    echo "<img height=\"1\" src=\"pics/hor_bar.bmp\" width=\"5\">";
 	    echo "</td></tr>";
 	    echo "<tr bgColor=\"#eeeeee\"><td align=\"center\" height=\"7\" width=\"3182\">";
-	     echo "<p style=\"line-height: 150%; word-spacing: 0; margin: 0\" align=\"left\"><i><b>Cheque</b>&nbsp;</i>";
-	    echo "<p style=\"line-height: 100%; word-spacing: 0; margin: 0\" align=\"left\">Cheque Number";
-	      echo $chkno;
-	      echo "<p style=\"line-height: 100%; word-spacing: 0; margin: 0\" align=\"left\">Amount&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-	      echo $amtcheque;
+	    echo "<p style=\"line-height: 150%; word-spacing: 0; margin: 0\" align=\"left\"><i><b>$LDCheck</b>&nbsp;</i>";
+	    echo "<p style=\"line-height: 100%; word-spacing: 0; margin: 0\" align=\"left\">$LDCheckNumber";
+	    echo $chkno;
+	    echo "<p style=\"line-height: 100%; word-spacing: 0; margin: 0\" align=\"left\">$LDAmount&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+	    echo $amtcheque;
 	    echo "</td></tr>";
 	    echo "<input type=\"hidden\" name=\"chkno\" value=\"".$chkno."\">";
 	    echo "<input type=\"hidden\" name=\"amtcheque\" value=\"".$amtcheque."\">";
@@ -214,10 +216,10 @@ $breakfile='patient_payment.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='
     
     <input type="hidden" name="patientno" value="<?php echo $patientno; ?>">
     <input type="hidden" name="hidden" value="C6#C7#C8#">
-     <input type="hidden" name="receipt_no" value="<?php echo $receipt_no; ?>">   
-	<input type="hidden" name="lang" value="<?php echo $lang ?>">
-	<input type="hidden" name="sid" value="<?php echo $sid ?>">
-	<input type="hidden" name="full_en" value="<?php echo $full_en ?>">
+    <input type="hidden" name="receipt_no" value="<?php echo $receipt_no; ?>">   
+    <input type="hidden" name="lang" value="<?php echo $lang ?>">
+    <input type="hidden" name="sid" value="<?php echo $sid ?>">
+    <input type="hidden" name="full_en" value="<?php echo $full_en ?>">
     </table>		
     <p>&nbsp;
 	<a href="javascript:submitform();"><img <?php echo createLDImgSrc($root_path,'savedisc.gif','0'); ?>></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

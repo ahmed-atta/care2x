@@ -6,12 +6,17 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 * adapted from eComBill beta 0.2 
 * developed by ecomscience.com http://www.ecomscience.com 
 * GPL License
+*
+* 19.Oct.2003 Daniel Hinostroza: Switch language implemented, but... What is the translation of outstanding?
 */
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
+//define('NO_CHAIN',1);
+define('LANG_FILE','billing.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_date_format_functions.php');
+
 
 /*	include('includes/condb.php');
 	error_reporting(0);
@@ -116,11 +121,15 @@ $breakfile='patient_bill_links.php'.URL_APPEND.'&patientno='.$patientno.'&full_e
 		$itemcnt=$cntHS;
 
 	$itemcnt1=$cntLT+$cntHS;
+
+# Extract the language variable
+extract($TXT);
+
 ?>
-<html>
+<?php html_rtl($lang); ?>
 <head>
 <?php echo setCharSet(); ?>
-<title>Patient Name</title>
+<title><?php echo $PatientName ?></title>
 <script language="javascript">
 <!--
 	function printsavebill()
@@ -146,7 +155,7 @@ $breakfile='patient_bill_links.php'.URL_APPEND.'&patientno='.$patientno.'&full_e
 <body bgcolor="#FFFFFF" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0>
 <table border="0" width="101%" bgcolor=#99ccff>
       <tr>
-        <td width="101%"><font color="#330066" size="+2" face="Arial"><strong>eComBill - Bill</strong></font></td>
+        <td width="101%"><font color="#330066" size="+2" face="Arial"><strong><?php echo $eComBill; ?> - <?php echo $Bill; ?></strong></font></td>
       </tr>
     </table>
 
@@ -161,14 +170,14 @@ $breakfile='patient_bill_links.php'.URL_APPEND.'&patientno='.$patientno.'&full_e
 
     <table border="0" width="95%" bordercolor="#000000">
 	<tr>
-        	<td colspan=5 valign="top" height=30 bordercolor="#FFFFFF"><b>General Information:</b></td>
+        	<td colspan=5 valign="top" height=30 bordercolor="#FFFFFF"><b><?php echo $GeneralInfo ?></b></td>
          </tr>
 
          <tr>
-              <td valign=top width="20%">Patient Name:</td>
+              <td valign=top width="20%"><?php echo $PatientName ?>:</td>
 			  <td valign=top width="20%"><?php echo $patient['title'].' '.$patient['name_first'].' '.$patient['name_last'];?></td>
               <td valign=top width="20%">&nbsp;</td>
-              <td valign=top width="10%">Bill No:</td>
+              <td valign=top width="10%"><?php echo $BillNo ?>:</td>
               <td valign=top width="30%">
               <?php
               if($billid=="currentbill")
@@ -184,10 +193,10 @@ $breakfile='patient_bill_links.php'.URL_APPEND.'&patientno='.$patientno.'&full_e
          </tr>
 
          <tr>
-              <td valign=top width="20%">Patient's Address:</td>
+              <td valign=top width="20%"><?php echo $PatientAddress ?>:</td>
 				<td valign=top width="20%"><?php echo $patient['addr_str'].$patient['addr_str_nr'].'<br>'.$patient['addr_zip'].$patient['addr_citytown_nr'];?></td>
               <td valign=top width="20%">&nbsp;</td>
-              <td valign=top width="10%">Bill Date:</td>
+              <td valign=top width="10%"><?php echo $BillDate ?>:</td>
               <td valign=top width="30%">
               <?php
               if($billid=="currentbill")
@@ -211,7 +220,7 @@ $breakfile='patient_bill_links.php'.URL_APPEND.'&patientno='.$patientno.'&full_e
          </tr>
 
 	 <tr>
-              <td valign=top width="20%">Patient Type:</td>
+              <td valign=top width="20%"><?php echo $PatientType ?>:</td>
               <td valign=top width="20%"><?php echo $patient['encounter_class_nr'];?></td>
               <td valign=top width="20%">&nbsp;</td>
               <td valign=top width="10%">&nbsp;</td>
@@ -219,7 +228,7 @@ $breakfile='patient_bill_links.php'.URL_APPEND.'&patientno='.$patientno.'&full_e
          </tr>
 
          <tr>
-              <td valign=top width="20%">Date of Birth:</td>
+              <td valign=top width="20%"><?php echo $DateofBirth ?>:</td>
               <td valign=top width="20%"><?php echo formatDate2Local($patient['date_birth'],$date_format);?></td>
               <td valign=top width="20%">&nbsp;</td>
 	      <td valign=top width="10%">&nbsp;</td>
@@ -227,7 +236,7 @@ $breakfile='patient_bill_links.php'.URL_APPEND.'&patientno='.$patientno.'&full_e
          </tr>
 
          <tr>
-              <td valign=top width="20%">Sex :</td>
+              <td valign=top width="20%"><?php echo $Sex ?>:</td>
               <td valign=top width="20%"><?php echo $patient['sex'];?></td>
               <td valign=top width="20%">&nbsp;</td>
 	      <td valign=top width="10%">&nbsp;</td>
@@ -235,7 +244,7 @@ $breakfile='patient_bill_links.php'.URL_APPEND.'&patientno='.$patientno.'&full_e
          </tr>
 
          <tr>
-              <td valign=top width="20%">Patient No:</td>
+              <td valign=top width="20%"><?php echo $PatientNumber ?>:</td>
               <td valign=top width="20%"><?php echo $full_en;?></td>
               <td valign=top width="20%">&nbsp;</td>
 	      <td valign=top width="10%">&nbsp;</td>
@@ -243,7 +252,7 @@ $breakfile='patient_bill_links.php'.URL_APPEND.'&patientno='.$patientno.'&full_e
          </tr>
 
          <tr>
-	     <td valign=top width="20%">Date of Admission:</td>
+	     <td valign=top width="20%"><?php echo $DateofAdmission ?>:</td>
 	     <td valign=top width="20%"><?php echo formatDate2Local($patient['encounter_date'],$date_format);?></td>
 	     <td valign=top width="20%">&nbsp;</td>
 	     <td valign=top width="10%">&nbsp;</td>
@@ -255,17 +264,17 @@ $breakfile='patient_bill_links.php'.URL_APPEND.'&patientno='.$patientno.'&full_e
          </tr>
 
          <tr>
-             <td colspan="5" height="30" width="641" bordercolor="#FFFFFF"><p><b>Billing Information:</b></p></td>
+             <td colspan="5" height="30" width="641" bordercolor="#FFFFFF"><p><b><?php echo $BillingInformation ?>:</b></p></td>
          </tr>
 
           </table>
           <table border="0" width="100%" bordercolor="#000000" bgcolor=#999999 height="139" cellspacing="1" cellpadding="3">
 	              <tr>
-	                <th width="30%" valign="middle" align="left" height="38" bgcolor="#CCCCCC">Description</th>
-	                <th width="15%" valign="middle" align="center" height="38" bgcolor="#CCCCCC">Cost/unit</th>
-	                <th width="3%" valign="middle" align="center" height="38" bgcolor="#CCCCCC">Units</th>
-	                <th width="20%" valign="middle" align="center" height="38" bgcolor="#CCCCCC">Total Cost</th>
-	                <th width="25%" valign="middle" align="center" height="38" bgcolor="#CCCCCC">Item Type</th>
+	                <th width="30%" valign="middle" align="left" height="38" bgcolor="#CCCCCC"><?php echo $Description ?></th>
+	                <th width="15%" valign="middle" align="center" height="38" bgcolor="#CCCCCC"><?php echo $CostperUnit ?></th>
+	                <th width="3%" valign="middle" align="center" height="38" bgcolor="#CCCCCC"><?php echo $Units ?></th>
+	                <th width="20%" valign="middle" align="center" height="38" bgcolor="#CCCCCC"><?php echo $TotalCost ?></th>
+	                <th width="25%" valign="middle" align="center" height="38" bgcolor="#CCCCCC"><?php echo $ItemType ?></th>
 
 	              </tr>
 
@@ -307,11 +316,11 @@ $breakfile='patient_bill_links.php'.URL_APPEND.'&patientno='.$patientno.'&full_e
 	  		      $type=$lb1['item_type'];
 	  			if($type=="HS")
 	  			{
-	  				echo "Medical Services";
+	  				echo $MedicalServices;
 	  			}
 	  			else if($type=="LT")
 	  			{
-	  				echo "Laboratory Tests";
+	  				echo $LaboratoryTests;
 	  			}
 	  		      echo "</td>";
 	  		   echo "</tr>";
@@ -358,11 +367,11 @@ $breakfile='patient_bill_links.php'.URL_APPEND.'&patientno='.$patientno.'&full_e
 	        		$itemtyp=$it['item_type'];
 	        		if($itemtyp=="HS")
 	        		{
-	        			$itemtyp="Medical Services";
+	        			$itemtyp=$MedicalServices;
 	        		}
 	        		else if($itemtyp=="LT")
 	        		{
-	        			$itemtyp="Laboratory Tests";
+	        			$itemtyp=$LaboratoryTests;
 	        		}
 
 	        		echo "<tr>";
@@ -402,7 +411,7 @@ $breakfile='patient_bill_links.php'.URL_APPEND.'&patientno='.$patientno.'&full_e
 	          </tr>
 
 	              <tr>
-	                <th colspan=3 width="11%" valign="middle" align="left" height="19" bgcolor="#EEEEEE">Total</th>
+	                <th colspan=3 width="11%" valign="middle" align="left" height="19" bgcolor="#EEEEEE"><?php echo $Total ?></th>
 	                <th width="11%" valign="middle" align="right" height="19" bgcolor="#EEEEEE">
 	                <?php
 	                if($billid=="currentbill")
@@ -488,7 +497,7 @@ $breakfile='patient_bill_links.php'.URL_APPEND.'&patientno='.$patientno.'&full_e
 
           <table border="0" width="100%" height="127">
             <tr>
-              <td width="56%" valign="middle" align="left" height="18">Total bill amount</td>
+              <td width="56%" valign="middle" align="left" height="18"><?php echo $TotalBillAmount ?></td>
               <td width="44" valign="middle" align="left" height="18"> <b>
               <?php
               if($billid=="currentbill")
@@ -504,11 +513,11 @@ $breakfile='patient_bill_links.php'.URL_APPEND.'&patientno='.$patientno.'&full_e
             </tr>
 
             <tr>
-              <td width="56%" valign="middle" align="left" height="18">Outstanding Amount:&nbsp;</td>
+              <td width="56%" valign="middle" align="left" height="18"><?php echo $OutstandingAmount ?>:&nbsp;</td>
               <td width="44%" valign="middle" align="left" height="18"><?php if($billid=="currentbill") $outstanding; else $outstanding=$oldbilloutstanding; if($outstanding<0) echo "0"; else echo $outstanding;?>&nbsp;</td>
             </tr>
             <tr>
-              <td width="56%" valign="middle" align="left" height="19"><b>Amount due</b></td>
+              <td width="56%" valign="middle" align="left" height="19"><b><?php echo $AmountDue ?></b></td>
               <td width="44%" valign="middle" align="left" height="19"><b><?php if($billid=="currentbill") echo $totaldue; else echo $oldbilltotal+$oldbilloutstanding; ?></b>&nbsp;</td>
             </tr>
           </table>

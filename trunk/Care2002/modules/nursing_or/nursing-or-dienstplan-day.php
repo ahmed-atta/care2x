@@ -82,7 +82,7 @@ $photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<HTML>
+<?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
  <TITLE><?php echo "$LDOR $LDNursing $LDOnCallDuty" ?></TITLE>

@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
+* CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -23,8 +23,7 @@ if(!isset($mode)){
 	$mode='show';
 } elseif(($mode=='create'||$mode=='update')
 				&&!empty($HTTP_POST_VARS['text_diagnosis'])
-				&&!empty($HTTP_POST_VARS['text_therapy'])
-				&&!empty($HTTP_POST_VARS['short_notes'])) {
+				&&!empty($HTTP_POST_VARS['text_therapy'])) {
 	# Prepare the posted data for saving in databank
 	include_once($root_path.'include/inc_date_format_functions.php');
 	# If date is empty,default to today
@@ -109,8 +108,7 @@ if($mode=='show')
 						nd.personell_name,
 						nt.notes AS therapy
 		FROM 	care_encounter_notes AS nd LEFT JOIN care_encounter_notes AS nt ON nd.nr=nt.ref_notes_nr
-		WHERE   nd.nr=$nr
-		ORDER BY nd.create_time DESC";
+		WHERE   nd.nr=$nr";
 
 	if($result=$db->Execute($sql)){
 		if($rows=$result->RecordCount()) $row=$result->FetchRow();

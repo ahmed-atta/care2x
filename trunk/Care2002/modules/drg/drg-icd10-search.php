@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
+* CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -16,10 +16,12 @@ require_once('drg_inc_local_user.php');
 
 require_once($root_path.'include/inc_front_chain_lang.php');
 //if (!isset($opnr) || !$opnr) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require_once($root_path.'include/inc_config_color.php');
 
-if($saveok) 
-{
+# Create drg object
+require_once($root_path.'include/care_api_classes/class_drg.php');
+$drg=& new DRG;
+
+if($saveok){
 ?>
 <script language="javascript" >
 	window.opener.location.replace('drg-icd10.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&opnr=$opnr&edit=$edit&ln=$ln&fn=$fn&bd=$bd&group_nr=$group_nr&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=composite&newsave=1"; ?>');
@@ -46,39 +48,30 @@ if($mode=='save'){
 }else{
 
 	$keyword=trim($keyword);
-	if(($keyword) && ($keyword!=' ')){
+	if(!empty($keyword)){
 	 
 		$fielddata='diagnosis_code,description,sub_level,inclusive,exclusive,notes,remarks,extra_subclass,extra_codes,std_code';
 		
-		/* Search routine starts here */
-
-	if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-	if($dblink_ok){	
-		
-            /* Check if table exists otherwise use default table */
-	       $dbtable=checkTableExist('care_icd10_'.$lang, 'care_icd10_en');	
-					
+		# Search routine starts here
 	
-			if(strlen($keyword)<3)
-				$sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE (diagnosis_code LIKE "%'.$keyword.'%" OR description LIKE "'.$keyword.'%") AND type <> "table" LIMIT 0,50';
-				else
-					$sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE (diagnosis_code LIKE "%'.$keyword.'%" OR description LIKE "%'.$keyword.'%") AND type <> "table" LIMIT 0,50';
-        	$ergebnis=$db->Execute($sql);
-			if($ergebnis)
-       		{
-				$linecount=0;
-				if ($linecount=$ergebnis->RecordCount())
-				{
-					if(strlen($keyword)<3)
-						$advsql='SELECT sub_level FROM '.$dbtable.' WHERE (diagnosis_code LIKE "%'.$keyword.'%" OR description LIKE "'.$keyword.'%") AND type <> "table" LIMIT 0,50';
-						else
-							$advsql='SELECT sub_level FROM '.$dbtable.' WHERE (diagnosis_code LIKE "%'.$keyword.'%" OR description LIKE "%'.$keyword.'%") AND type <> "table" LIMIT 0,50';
-        			$adv=$db->Execute($advsql);
-				}
-				
+		if(strlen($keyword)<3){
+			$sql='SELECT '.$fielddata.' FROM '.$drg->tb_diag_codes.' WHERE (diagnosis_code LIKE "%'.$keyword.'%" OR description LIKE "'.$keyword.'%") AND type <> "table" LIMIT 0,50';
+			}else{
+				$sql='SELECT '.$fielddata.' FROM '.$drg->tb_diag_codes.' WHERE (diagnosis_code LIKE "%'.$keyword.'%" OR description LIKE "%'.$keyword.'%") AND type <> "table" LIMIT 0,50';
 			}
-			 else {echo "<p>".$sql."<p>$LDDbNoRead"; };
-		} else {echo "<p>".$sql."<p>$LDDbNoLink"; };
+     	//echo $sql;
+		$ergebnis=$db->Execute($sql);
+		if($ergebnis){
+			$linecount=0;
+			if ($linecount=$ergebnis->RecordCount()){
+				if(strlen($keyword)<3){
+					$advsql='SELECT sub_level FROM '.$drg->tb_diag_codes.' WHERE (diagnosis_code LIKE "%'.$keyword.'%" OR description LIKE "'.$keyword.'%") AND type <> "table" LIMIT 0,50';
+				}else{
+					$advsql='SELECT sub_level FROM '.$drg->tb_diag_codes.' WHERE (diagnosis_code LIKE "%'.$keyword.'%" OR description LIKE "%'.$keyword.'%") AND type <> "table" LIMIT 0,50';
+				}
+        		$adv=$db->Execute($advsql);
+			}
+		}else {echo "<p>".$sql."<p>$LDDbNoRead"; };
 	}
 }
 
@@ -96,7 +89,7 @@ $img['reset']=createComIcon($root_path,'button_reset.gif','0','absmiddle');
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<HTML>
+<?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
  <TITLE><?php echo $LDIcd10Search ?></TITLE>

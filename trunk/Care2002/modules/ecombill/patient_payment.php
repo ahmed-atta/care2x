@@ -1,16 +1,20 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* eComBill 1.0.04 for Care2002 beta 1.0.04 
+* eComBill 1.0.04 for Care2002 beta 1.0.8 
 * (2003-04-30)
 * adapted from eComBill beta 0.2 
 * developed by ecomscience.com http://www.ecomscience.com 
 */
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
+
+//define('NO_CHAIN',1);
+define('LANG_FILE','billing.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_date_format_functions.php');
+
 
 	/*include('includes/condb.php');
 	error_reporting(0);
@@ -69,39 +73,42 @@ require_once($root_path.'include/inc_date_format_functions.php');
 	}	
 $breakfile='patient_payment_links.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='.$full_en;
 
+# Extract the language variable
+extract($TXT);
+
 ?>
 
-<html>
+<?php html_rtl($lang); ?>
 <head>
 <?php echo setCharSet(); ?>
-<title>Bill Payment</title>
+<title><?php echo $BillPayment; ?></title>
 <SCRIPT language="JavaScript">
 <!--
 	function submitform()
 	{
 		if(isNaN(document.payment.amtcash.value))
 		{
-			alert("Enter Numeric Value for cash amount");
+			alert("<?php echo $alertEnterNumericValueforCashAmount; ?>");
 
 		}
 		else if(isNaN(document.payment.cdno.value))
 		{
-			alert("Enter Numeric Value for credit-card no");
+			alert("<?php echo $alertEnterNumericValueforCreditCardNo; ?>");
 
 		}
 		else if(isNaN(document.payment.amtcc.value))
 		{
-			alert("Enter Numeric Value for credit card amount");
+			alert("<?php echo $alertEnterNumericValueforCreditCardAmount; ?>");
 		
 		}
 		else if(isNaN(document.payment.chkno.value))
 		{
-			alert("Enter Numeric Value for cheque no");
+			alert("<?php echo $alertEnterNumericValueforChequeNo; ?>");
 		
 		}
 		else if(isNaN(document.payment.amtcheque.value))
 		{
-			alert("Enter Numeric Value for cheque amount");
+			alert("<?php echo $alertEnterNumericValueforChequeAmount; ?>");
 		
 		}
 		else
@@ -130,7 +137,7 @@ $breakfile='patient_payment_links.php'.URL_APPEND.'&patientno='.$patientno.'&ful
 		}
 		if(querystr == "confirmpayment.php?")
 		{
-			alert("Please select atleast one mode of payment");
+			alert("<?php echo $alertPleaseSelectatleastOneModeofPayment; ?>");
 		}
 		else
 		{
@@ -146,8 +153,8 @@ $breakfile='patient_payment_links.php'.URL_APPEND.'&patientno='.$patientno.'&ful
 
 <table border="0" width="101%" bgcolor=#99ccff>
       <tr>
-        <td width="101%"><font color="#330066" size="+2" face="Arial"><strong>eComBill-
-          Payment Receipt </strong></font></td>
+        <td width="101%"><font color="#330066" size="+2" face="Arial"><strong><?php echo $eComBill; ?> -
+          <?php echo $PaymentReceipt; ?></strong></font></td>
       </tr>
     </table>
 <blockquote>
@@ -158,14 +165,14 @@ $breakfile='patient_payment_links.php'.URL_APPEND.'&patientno='.$patientno.'&ful
   
  <table border="0" width="95%" bordercolor="#000000">
  	<tr>
-         	<td colspan=5 valign="top" height=30 bordercolor="#FFFFFF"><b>General Information:</b></td>
+         	<td colspan=5 valign="top" height=30 bordercolor="#FFFFFF"><b><?php echo $GeneralInfo; ?>:</b></td>
           </tr>         
            
           <tr>
-               <td valign=top width="20%">Patient Name:</td>
+               <td valign=top width="20%"><?php echo $PatientName; ?>:</td>
                <td valign=top width="20%"><?php echo $patient['title'].' '.$patient['name_first'].' '.$patient['name_last'];?> <?php echo mysql_result($resultpatqry,0,"name_last");?></td>
                <td valign=top width="20%">&nbsp;</td>
-               <td valign=top width="10%">Receipt No:</td>
+               <td valign=top width="10%"><?php echo $ReceiptNumber; ?>:</td>
                <td valign=top width="30%">
                <?php 
 		       echo $receipt_no;
@@ -174,10 +181,10 @@ $breakfile='patient_payment_links.php'.URL_APPEND.'&patientno='.$patientno.'&ful
           </tr>
           
           <tr>
-               <td valign=top width="20%">Patient's Address:</td>
+               <td valign=top width="20%"><?php echo $PatientAddress; ?>:</td>
                <td valign=top width="20%"><?php echo $patient['addr_str'].' '.$patient['addr_str_nr'].'<br>'.$patient['addr_zip'].' '.$patient['addr_citytown_nr'];?></td>
                <td valign=top width="20%">&nbsp;</td>
-               <td valign=top width="10%">Bill Date:</td>
+               <td valign=top width="10%"><?php echo $BillDate; ?>:</td>
                <td valign=top width="30%">
                <?php 
                    if($receiptid=="")
@@ -210,7 +217,7 @@ $breakfile='patient_payment_links.php'.URL_APPEND.'&patientno='.$patientno.'&ful
           </tr>
              
  	 <tr>
-               <td valign=top width="20%">Patient Type:</td>
+               <td valign=top width="20%"><?php echo $PatientType; ?>:</td>
                <td valign=top width="20%"><?php echo $patient['encounter_class_nr'];?></td>
                <td valign=top width="20%">&nbsp;</td>
                <td valign=top width="10%">&nbsp;</td>
@@ -218,7 +225,7 @@ $breakfile='patient_payment_links.php'.URL_APPEND.'&patientno='.$patientno.'&ful
           </tr>
              
           <tr>
-               <td valign=top width="20%">Date of Birth:</td>
+               <td valign=top width="20%"><?php echo $DateofBirth; ?>:</td>
                <td valign=top width="20%"><?php echo formatDate2Local($patient['date_birth'],$date_format);?></td>
                <td valign=top width="20%">&nbsp;</td>
  	      <td valign=top width="10%">&nbsp;</td>
@@ -226,7 +233,7 @@ $breakfile='patient_payment_links.php'.URL_APPEND.'&patientno='.$patientno.'&ful
           </tr>
              
           <tr>
-               <td valign=top width="20%">Sex :</td>
+               <td valign=top width="20%"><?php echo $Sex; ?>:</td>
                <td valign=top width="20%"><?php echo $patient['sex'];?></td>
                <td valign=top width="20%">&nbsp;</td>
  	      <td valign=top width="10%">&nbsp;</td>
@@ -234,7 +241,7 @@ $breakfile='patient_payment_links.php'.URL_APPEND.'&patientno='.$patientno.'&ful
           </tr>
              
           <tr>
-               <td valign=top width="20%">Patient No:</td>
+               <td valign=top width="20%"><?php echo $PatientNumber; ?>:</td>
                <td valign=top width="20%"><?php echo $full_en;?></td>
                <td valign=top width="20%">&nbsp;</td>
  	      <td valign=top width="10%">&nbsp;</td>
@@ -242,7 +249,7 @@ $breakfile='patient_payment_links.php'.URL_APPEND.'&patientno='.$patientno.'&ful
           </tr>
              
           <tr>
- 	     <td valign=top width="20%">Date of Admission:</td>
+ 	     <td valign=top width="20%"><?php echo $DateofAdmission; ?>:</td>
  	     <td valign=top width="20%"><?php echo formatDate2Local($patient['encounter_date'],$date_format);?></td>
  	     <td valign=top width="20%">&nbsp;</td>
  	     <td valign=top width="10%">&nbsp;</td>
@@ -254,7 +261,7 @@ $breakfile='patient_payment_links.php'.URL_APPEND.'&patientno='.$patientno.'&ful
           </tr>
           
           <tr>
-              <td colspan="5" height="30" width="641" bordercolor="#FFFFFF"><p><b>Payment Information:</b></p></td>
+              <td colspan="5" height="30" width="641" bordercolor="#FFFFFF"><p><b><?php echo $PaymentInformation; ?>:</b></p></td>
           </tr>
              
           </table> 
@@ -264,27 +271,38 @@ $breakfile='patient_payment_links.php'.URL_APPEND.'&patientno='.$patientno.'&ful
       
         
 		  <table cellSpacing="1" cellPadding="3" width="522" bgColor="#999999" border="0" height="138">
-<tr bgColor="#eeeeee"><td align="left" height="37" width="7738"><font size="4" color="#FF0000">&nbsp;Select
-    the Mode of Current Payment :</font></td><tr bgColor="#eeeeee"><td align="center" height="7" width="3182">
+<tr bgColor="#eeeeee"><td align="left" height="37" width="7738"><font size="4" color="#FF0000">&nbsp;<?php echo $SelecttheModeofCurrentPayment; ?>:</font></td><tr bgColor="#eeeeee"><td align="center" height="7" width="3182">
     <p align="left">
                 <input type="checkbox" name="C6" value="ON"><i>
-                <b>Cash</b></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-    <p align="left">Amount&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <b><?php echo $Cash; ?></b></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+    <p align="left"><?php echo $Amount; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <input type="text" name="amtcash" size="7">
-  </td></tr><tr bgColor="#dddddd" height="1"><td height="5" width="7738"><img height="1" src="pics/hor_bar.bmp" width="5"></td></tr><tr bgColor="#eeeeee"><td align="center" height="7" width="3182">
-                <p style="line-height: 150%" align="left"><i><input type="checkbox" name="C7" value="ON"><b>Credit
-                card</b></i><p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0" align="left">Card
-                Number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="cdno" size="12">&nbsp;</p>
-                <p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0" align="left">Amount&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="amtcc" size="7"></p>
-                <comment><p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0" align="left">Type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="V5" checked name="R1">Master&nbsp;
+  </td></tr><tr bgColor="#dddddd" height="1"><td height="5" width="7738"><img height="1" src="pics/hor_bar.bmp" width="5"></td></tr>
+		<tr bgColor="#eeeeee"><td align="center" height="7" width="3182">
+                <p style="line-height: 150%" align="left"><i><input type="checkbox" name="C7" value="ON"><b><?php echo $CreditCard; ?></b></i>
+		    <p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0" align="left"><?php echo $CardNumber; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="cdno" size="12">&nbsp;</p>
+                <p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0" align="left"><?php echo $Amount; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="text" name="amtcc" size="7"></p>
+<!-- Credit Card Types were invisible with <comment></comment> instead of <p></p> -->
+                <p>
+		    <p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0" align="left"><?php echo $CCType; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="radio" value="V5" checked name="R1">Mastercard&nbsp;
                 <input type="radio" name="R1" value="V6">Visa&nbsp;
-                <input type="radio" name="R1" value="V7">American Express</p></comment>
-  </td></tr><tr bgColor="#dddddd" height="1"><td height="5" width="7738"><img height="1" src="pics/hor_bar.bmp" width="5"></td></tr><tr bgColor="#eeeeee"><td align="center" height="7" width="3182">
-                <p style="line-height: 150%; word-spacing: 0; margin: 0" align="left"><i><input type="checkbox" name="C8" value="ON"><b>Cheque</b>&nbsp;</i><p style="line-height: 100%; word-spacing: 0; margin: 0" align="left">Cheque Number
-                <input type="text" name="chkno" size="12"><p style="line-height: 100%; word-spacing: 0; margin: 0" align="left">Amount&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="R1" value="V7">American Express</p>
+		    </p>
+<!-- End of Credit Card Types -->
+
+  </td></tr><tr bgColor="#dddddd" height="1">
+			<td height="5" width="7738"><img height="1" src="pics/hor_bar.bmp" width="5"></td></tr>
+		<tr bgColor="#eeeeee"><td align="center" height="7" width="3182">
+                <p style="line-height: 150%; word-spacing: 0; margin: 0" align="left">
+			<i><input type="checkbox" name="C8" value="ON"><b><?php echo $Check; ?></b>&nbsp;</i>
+		    <p style="line-height: 100%; word-spacing: 0; margin: 0" align="left">
+			<?php echo $CheckNumber; ?>
+                <input type="text" name="chkno" size="12"><p style="line-height: 100%; word-spacing: 0; margin: 0" align="left">
+			<?php echo $Amount; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <input type="text" name="amtcheque" size="7"></td></tr>
-    <input type="hidden" name="patientno" value=<?php echo $patientno; ?>>
+    <input type="hidden" name="patientno" value="<?php echo $patientno; ?>">
     <input type="hidden" name="hidden" value="C6#C7#C8#">
     <input type="hidden" name="receipt_no" value="<?php echo $receipt_no; ?>"> 
  	<input type="hidden" name="lang" value="<?php echo $lang ?>">

@@ -39,7 +39,7 @@ require_once($root_path.'include/inc_date_format_functions.php');
 $breakfile='final_bill.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='.$full_en;
 
 ?>
-<html>
+<?php html_rtl($lang); ?>
 
 <head>
 <?php echo setCharSet(); ?>

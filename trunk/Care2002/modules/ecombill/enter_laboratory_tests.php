@@ -21,7 +21,7 @@ $breakfile='billingmenu.php'.URL_APPEND;
 # Extract the language variable
 extract($TXT);
 ?>
-<html>
+<?php html_rtl($lang); ?>
 <head>
 <?php echo setCharSet(); ?>
 <Script language=JavaScript>
