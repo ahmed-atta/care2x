@@ -3,25 +3,25 @@ $indextag=array('Home',
 				'Admission',
 				'Ambulatoire',
 				'Medocs',
-				'Doctors',
+				'Docteurs',
 				'Nursing',
 				'OR',
-				'Laboratories',
-				'Radiology',
-				'Pharmacy',
-				'Medical Depot',
-				'Directory',
-				'Tech Support',
+				'Laboratoires',
+				'Radiologie',
+				'Pharmacie',
+				'Dépot médical',
+				'Annuaire',
+				'Support Technique',
 				'EDP ',
 				'Intranet Email',
 				'Internet Email',
-				'Specials ',
+				'Spéciaux ',
 				'Login '
 				);
 
-$VersionChgTarget='_top';
-$LDLanguage='Language';
-$LDPlsWaitInit='Please hold on. Initialization process is going on....';
+$VersionChgTarget='_haut';
+$LDLanguage='Langage';
+$LDPlsWaitInit='Veuillez patienter. Le procès d`initialisation est en route....';
 
 $LDChange='Modifier';
 ?>

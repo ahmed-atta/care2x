@@ -7,9 +7,9 @@ $LDGeneralSurgery='Ambulatoire général';
 $LDInternalMed='Ambulatoire médecine interne';
 $LDEmergency='Urgence ambulatoire';
 $LDSonography='Sonographie';
-$LDNuclearMed='Nuclear Diagnostics';
+$LDNuclearMed='Diagnostiques Nucléaires';
 $LDAdmission='Admission';
-$LDAdmissionTxt='Admission/discharge of ambulatory, search, archive';
+$LDAdmissionTxt='Admission/renvoi de l`ambulatoire, recherche, archive';
 $LDNews='Nouvelles';
 $LDNewsTxt='Nouvelles spécifiques pour la clinique, mémo, info, etc.';
 

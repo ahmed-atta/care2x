@@ -5,12 +5,12 @@ print '
 			</FONT>
 		<BR>
 		<font size=-1 color="#000000" face="arial">
-		<b>The '.$LDNewsDummy[$i].' news article or information will be shown here.</b><p>
-			You can publish your news, information, memoranda, etc. in this area.
-			With the user friendly editor you can compose and publish your article 
-			in a very short time and in a very easy way. The editor will show you
-			how along the way.
+		<b>L`article '.$LDNewsDummy[$i].' de nouvelles ou d`information va être affiché ici.</b><p>
+			Vous pouvez publier vos nouvelles, informations, notes, etc. dans cet espace.
+			Avec l`éditeur amical vous pouvez composer et publier votre article dans un
+			temps très court et dans une manière très facile. L`éditeur vous montrer comment
+			le long du chemin.
 
-			You can also attach a picture to enhance the article.<p>
-			Write your article now...</font><br>';
+			Vous pouvez également attacher une image afin d`améliorer l`article.<p>
+			Écrivez votre article maintenant...</font><br>';
 ?>

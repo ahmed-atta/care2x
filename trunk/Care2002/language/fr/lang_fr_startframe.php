@@ -1,45 +1,45 @@
 <?php
-$LDMainTitle="Care 2002 Integrated Hospital Information System";
+$LDMainTitle="Care 2002 Système hospitalier intégré d`information";
 
 /*$LDMainTitle="Marienhospital a virtual Integrated Hospital Information System in Internet";
 */
-$LDInviteAskMe='Enter your query, for example: "What is the phone number of M9d?"';
-$LDTipsLink='Tips:';
-$LDTipsAskMe='Try synonyms, for example type "station" in place of "ward".';
-$LDTipsImgAlt="Click here for tips on how to get the best results.";
-$LDSubmitBut="Send query";
+$LDInviteAskMe='Entrez votre demande, par exemple: "Quel est le numéro de télephone de M9d?"';
+$LDTipsLink='Astuces:';
+$LDTipsAskMe='Essayez des synonymes, par exemple tapez "chambre" à la place de "salle".';
+$LDTipsImgAlt="Cliquez ici pour des astuces comment obtenir les meilleurs résultats.";
+$LDSubmitBut="Envoyer la demande";
 
-$LDQuickInfo="Quick Informer";
+$LDQuickInfo="L`informeur rapide";
 $LDPhonePolice="Police";
-$LDPhoneFire="Fire Dept.";
-$LDAmbulance="Emergency";
-$LDPhone="Phone (Hospital)";
+$LDPhoneFire="Pompiers";
+$LDAmbulance="Émergence";
+$LDPhone="Télephone (Hôpital)";
 $LDFax="Fax";
-$LDAddress="Address";
+$LDAddress="Addresse";
 $LDEmail="Email";
 
-$LDOpenTimes ="Admission Hours";
+$LDOpenTimes ="Horaire d`Admission";
 $LDManagement ="Management";
-$LDDept ="Departments";
-$LDCafenews ="Cafeteria News";
+$LDDept ="Départements";
+$LDCafenews ="Les nouvelles de Caféteria";
 $LDAdmission ="Admission";
-$LDExhibition ="Exhibitions";
-$LDEducation ="Education";
-$LDAdvStudies ="Studies";
-$LDPhyTherapy ="Physical Therapy";
-$LDHealthTips ="Health tips";
-$LDCalendar ="Calendar";
-$LDHelp="Help";
-$LDMore="more to article";
+$LDExhibition ="Exposions";
+$LDEducation ="Éducation";
+$LDAdvStudies ="Études";
+$LDPhyTherapy ="Thérapie Physique";
+$LDHealthTips ="Astuces de santé";
+$LDCalendar ="Calendrier";
+$LDHelp="Aide";
+$LDMore="plus sur l`article";
 
-$LDEditTitle="Headline";
-$LDNewsDummy=array(1=>"first",2=>"second",3=>"third",4=>"fourth");
+$LDEditTitle="Titre";
+$LDNewsDummy=array(1=>"premier",2=>"second",3=>"troisième",4=>"quatrième");
 
-$LDNoFrame='This website uses frames for optimal functioning. Please install a proper browser. We recommend the
-						Microsoft Internet Explorer starting from version 5.0. Please activate the Javascript (JScript) and 
-						turn on the automatic cookie reception';
-						
-$LDClk2Write="Click me to edit";
+$LDNoFrame='Ce site web utilise des cadres afin de fonctionner mieux. Veuillez installer un navigateur approprié. Nous conseillons
+						Microsoft Internet Explorer à partir de la version 5.0. Activez s`il vous plaît le Javascript (JScript) et
+						allumez la réception automatique des cookies';
+
+$LDClk2Write="Cliquez-moi pour éditer";
 
 $LDAlertOldBrowser="Your browser version is older than 5.0!<br> We recommend the version 5.0 or later. <br> Using older versions might lead to
 								functional unreliability of the program.";
