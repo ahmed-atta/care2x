@@ -1,0 +1,1 @@
+<?php $_config_vars = unserialize('a:3:{s:5:"title";s:18:"Welcome to Smarty!";s:11:"cutoff_size";s:2:"40";s:4:"bold";b:1;}'); ?>
