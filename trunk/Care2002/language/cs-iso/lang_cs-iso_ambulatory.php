@@ -3,7 +3,7 @@
 $LDDepartments='Ambulatní o¹etøení';
 $LDPendingRequest='Nevyøízený po¾adavek';
 $LDPendingRequestTxt='Pøíjem, Výpis, Tisk výsledkù a Hledání nevyøízených po¾adavkù';
-$LDGeneralSurgery='Obecné o¹tøení';
+$LDGeneralSurgery='Obecné o¹etøení';
 $LDInternalMed='Interní medicína';
 $LDEmergency='Urgentní ambulance';
 $LDSonography='Sonografie';
