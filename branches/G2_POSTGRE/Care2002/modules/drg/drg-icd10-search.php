@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -55,19 +55,19 @@ if($mode=='save'){
 		# Search routine starts here
 	
 		if(strlen($keyword)<3){
-			$sql='SELECT '.$fielddata.' FROM '.$drg->tb_diag_codes.' WHERE (diagnosis_code LIKE "%'.$keyword.'%" OR description LIKE "'.$keyword.'%") AND type <> "table" LIMIT 0,50';
+			$sql="SELECT $fielddata FROM $drg->tb_diag_codes WHERE (diagnosis_code $sql_LIKE '%$keyword%' OR description LIKE $keyword%') AND type <> 'table' LIMIT 0,50";
 			}else{
-				$sql='SELECT '.$fielddata.' FROM '.$drg->tb_diag_codes.' WHERE (diagnosis_code LIKE "%'.$keyword.'%" OR description LIKE "%'.$keyword.'%") AND type <> "table" LIMIT 0,50';
+				$sql="SELECT $fielddata FROM $drg->tb_diag_codes WHERE (diagnosis_code LIKE '%$keyword%' OR description LIKE '%$keyword%') AND type <> 'table' LIMIT 0,50";
 			}
-     	//echo $sql;
+//echo $sql;
 		$ergebnis=$db->Execute($sql);
 		if($ergebnis){
 			$linecount=0;
 			if ($linecount=$ergebnis->RecordCount()){
 				if(strlen($keyword)<3){
-					$advsql='SELECT sub_level FROM '.$drg->tb_diag_codes.' WHERE (diagnosis_code LIKE "%'.$keyword.'%" OR description LIKE "'.$keyword.'%") AND type <> "table" LIMIT 0,50';
+					$advsql="SELECT sub_level FROM $drg->tb_diag_codes WHERE (diagnosis_code LIKE '%$keyword%' OR description $sql_LIKE '$keyword%') AND type <> 'table' LIMIT 0,50";
 				}else{
-					$advsql='SELECT sub_level FROM '.$drg->tb_diag_codes.' WHERE (diagnosis_code LIKE "%'.$keyword.'%" OR description LIKE "%'.$keyword.'%") AND type <> "table" LIMIT 0,50';
+					$advsql="SELECT sub_level FROM $drg->tb_diag_codes WHERE (diagnosis_code LIKE '%$keyword%' OR description LIKE '%$keyword%') AND type <> 'table' LIMIT 0,50";
 				}
         		$adv=$db->Execute($advsql);
 			}
