@@ -1,0 +1,48 @@
+###############################################################################
+#
+# HL7 API: README
+#
+###############################################################################
+
+Contents
+--------
+
+1.0 Introduction
+2.0 Usage
+2.1 Creating messages
+2.2 Sending/receiving
+2.3 Other modules and this API
+3.0 History
+
+
+1.0 Introduction
+----------------
+
+This is the PHP HL7 API. It is a very simple, but rather flexible API
+for use in PHP applications. The API is a word for word translation of
+the Perl Net-HL7 package, based on version 0.72.
+
+The focus of this API is on providing functionality for the
+composition, manipulation and decomposition of HL7 messages, not
+providing hundreds of prefab HL7 messages. In HL7 terms: this API
+focuses on the HL7 syntax, not the semantics. This makes the API
+support all versions that use the classic HL7 syntax, that is,
+versions untill 3.x. This API does not do XML!
+
+
+2.0 Usage
+---------
+
+2.1 Creating messages
+---------------------
+
+
+2.2 Sending/receiving
+---------------------
+
+
+3.0 History
+-----------
+
+version 0.10:
+* Initial version
