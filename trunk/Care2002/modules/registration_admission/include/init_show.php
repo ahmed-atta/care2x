@@ -4,6 +4,7 @@ $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_config_color.php');
 require_once($root_path.'include/inc_date_format_functions.php');
+require_once($root_path.'include/inc_editor_fx.php');
 require_once($root_path.'include/care_api_classes/class_person.php');
 
 $breakfile='patient.php';
@@ -38,6 +39,8 @@ require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('person_%');
 $glob_obj->getConfig('patient_%');
+$glob_obj->getConfig('notes_%');
+if(!$GLOBAL_CONFIG['notes_preview_maxlen']) $GLOBAL_CONFIG['notes_preview_maxlen']=60; // hardcoded default value;
 
 $HTTP_SESSION_VARS['sess_full_pid']=$pid+$GLOBAL_CONFIG['person_id_nr_adder'];
 		

@@ -16,7 +16,7 @@ if(!isset($mode)){
 } elseif($mode=='create'||$mode=='update') {
 
 }
-
+$lang_tables=array('departments.php');
 require('./include/init_show.php');
 
 if($parent_admit){
@@ -25,18 +25,21 @@ $sql="SELECT dr.*, e.encounter_class_nr FROM care_encounter AS e, care_person AS
 			AND p.pid=e.pid 
 			AND e.encounter_nr=".$HTTP_SESSION_VARS['sess_en']." 
 			AND e.encounter_nr=dr.encounter_nr 
-		ORDER BY dr.modify_time DESC";
+		ORDER BY dr.create_time DESC";
 }else{
 $sql="SELECT dr.*, e.encounter_class_nr FROM care_encounter AS e, care_person AS p, care_encounter_diagnostics_report AS dr 
 		WHERE p.pid=".$HTTP_SESSION_VARS['sess_pid']." AND p.pid=e.pid AND e.encounter_nr=dr.encounter_nr 
-		ORDER BY dr.modify_time DESC";
+		ORDER BY dr.create_time DESC";
 }
 
 		
 if($result=$db->Execute($sql)){
 	$rows=$result->RecordCount();
+	include_once($root_path.'include/care_api_classes/class_department.php');
+	$dept_obj=new Department();
+	$depts_array=&$dept_obj->getAll();
 }else{
-echo $sql;
+	echo $sql;
 }
 
 $subtitle=$LDDiagXResults;

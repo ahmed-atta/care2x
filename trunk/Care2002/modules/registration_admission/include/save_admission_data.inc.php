@@ -20,7 +20,7 @@ if($dblink_ok){
 								$obj->where=' nr='.$nr;
 								if($obj->updateDataFromInternalArray($nr)) {
 										header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&pid=".$HTTP_SESSION_VARS['sess_pid']);
-										echo "$obj->sql<br>$LDDbNoUpdate";
+										//echo "$obj->sql<br>$LDDbNoUpdate";
 										exit;
 								} else echo "$obj->sql<br>$LDDbNoUpdate";
 								break;
