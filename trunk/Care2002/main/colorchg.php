@@ -1,19 +1,19 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","specials.php");
-define("NO_2LEVEL_CHK",1);
-require("../include/inc_front_chain_lang.php");
+define('LANG_FILE','specials.php');
+define('NO_2LEVEL_CHK',1);
+require_once('../include/inc_front_chain_lang.php');
 require("../language/".$lang."/lang_".$lang."_indexframe.php");
-require("../include/inc_config_color.php");
-$breakfile="spediens.php?sid=$sid&lang=$lang";
+require_once('../include/inc_config_color.php');
+$breakfile="spediens.php?sid=".$sid."&lang=".$lang;
 
 if ($mode=="change")
 {
@@ -88,7 +88,7 @@ header ("Pragma: no-cache");                          // HTTP/1.0
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 
 <script language="javascript">
 
@@ -97,7 +97,7 @@ var urlholder;
   function chgcolor(p){
 	winspecs="width=550,height=600,menubar=no,resizable=yes,scrollbars=yes";
 <?php 
-	print 'urlholder="chg-color.php?item="+p+"&sid='.$sid.'&lang='.$lang.'&tb='.str_replace('#','',$cfg['top_bgcolor']).'&tt='.str_replace('#','',$cfg['top_txtcolor']).'&bb='.str_replace('#','',$cfg['body_bgcolor']).'&btb='.str_replace('#','',$cfg['bot_bgcolor']).'&d='.$cfg['dhtml'].'";';
+	echo 'urlholder="chg-color.php?item="+p+"&sid='.$sid.'&lang='.$lang.'&tb='.str_replace('#','',$cfg['top_bgcolor']).'&tt='.str_replace('#','',$cfg['top_txtcolor']).'&bb='.str_replace('#','',$cfg['body_bgcolor']).'&btb='.str_replace('#','',$cfg['bot_bgcolor']).'&d='.$cfg['dhtml'].'";';
 ?>
 	colorwin=window.open(urlholder,"colorwin",winspecs);
 	}
@@ -117,7 +117,7 @@ function gethelp(x,s,x1,x2,x3)
 </script>
 
 <?php if($cfg['dhtml'])
-{ print' 
+{ echo' 
 	<script language="javascript" src="../js/hilitebu.js">
 	</script>
 
@@ -138,60 +138,61 @@ function gethelp(x,s,x1,x2,x3)
 <BODY  topmargin=0 leftmargin=0  marginwidth=0 marginheight=0 bgcolor=silver 
 <?php if($idxreload=="j")
 {
- print 'onLoad="window.parent.STARTPAGE.location.replace(\'indexframe.php?sid='.$sid.'&lang='.$lang.'\'); ';
- if($cfg[mask]==2) print 'window.parent.MENUBAR.location.replace(\'menubar2.php?sid='.$sid.'&lang='.$lang.'\');'; 
- print '"';
+ echo 'onLoad="window.parent.STARTPAGE.location.replace(\'indexframe.php?sid='.$sid.'&lang='.$lang.'\'); ';
+ if($cfg[mask]==2) echo 'window.parent.MENUBAR.location.replace(\'menubar2.php?sid='.$sid.'&lang='.$lang.'\');'; 
+ echo '"';
  }
-if (!$cfg['dhtml']){ print 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
 
 <table width=100% border=0 cellspacing=0 height=100%>
 
 <tr valign=top height=10>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10"><FONT  COLOR="<?php print  $cfg['top_txtcolor']; ?>"  SIZE=+3  FACE="Arial">
-<STRONG>&nbsp;<img src="../img/settings_tree.gif"  height=23 border=0> <?php echo $LDColorOpt ?></STRONG></FONT></td>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right><?php if($cfg['dhtml']) print'<a href="javascript:window.history.back()"><img src="../img/'.$lang.'/'.$lang.'_back2.gif" width=110 height=24 border=0  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('color_opt.php','')"><img src="../img/<?php echo "$lang/$lang"; ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10"><FONT  COLOR="<?php echo  $cfg['top_txtcolor']; ?>"  SIZE=+3  FACE="Arial">
+<STRONG>&nbsp;<img <?php echo createComIcon('../','settings_tree.gif','0') ?>> <?php echo $LDColorOpt ?></STRONG></FONT></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right><?php if($cfg['dhtml']) echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc('../','back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('color_opt.php','')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
 <tr valign=top >
-<td bgcolor="<?php print $cfg['body_bgcolor']; ?>" valign=top colspan=2><p><br>
+<td bgcolor="<?php echo $cfg['body_bgcolor']; ?>" valign=top colspan=2><p><br>
 <ul>
 
 <table border=1>
   <tr >
-    <td rowspan=3 bgcolor="<?php print $idxfrm_bgcolor; ?>" width=100 align=left>
-	<center><img src="../img/maho4.gif" width=115 height=61 border=0 ></center>
+    <td rowspan=3 bgcolor="<?php echo $idxfrm_bgcolor; ?>" width=100 align=left>
+	<center><img <?php echo createComIcon('../','care_logo.gif','0') ?>></center>
 
 <a href="#" title="<?php echo $LDClk4TxtColor ?>" onClick=chgcolor('idxfrm_txtcolor')>
-<FONT    SIZE=1  FACE="Arial" color=<?php print $idxfrm_txtcolor; ?>>
+<FONT    SIZE=1  FACE="Arial" color=<?php echo $idxfrm_txtcolor; ?>>
 <?php
 while(list($x,$v)=each($indextag))
-print "&nbsp;$v<br>";
+echo "&nbsp;$v<br>";
 ?>
 <p>
-<a href="#" title="<?php echo $LDClk4BgColor ?>" onClick=chgcolor('idxfrm_bgcolor')><?php echo $LDBgColor ?> <img src="../img/settings_tree.gif" border=0 width=16 height=17 >
+<a href="#" title="<?php echo $LDClk4BgColor ?>" onClick=chgcolor('idxfrm_bgcolor')><?php echo $LDBgColor ?> <img <?php echo createComIcon('../','settings_tree.gif','0') ?> >
 </a>
 </td>
-    <td bgcolor="<?php print $topfrm_bgcolor; ?>" ><p><FONT    SIZE=1  FACE="Arial">
-	&nbsp;&nbsp;&nbsp;<a href="#" title="<?php echo $LDClk4TxtColor ?>" onClick=chgcolor('topfrm_txtcolor')><font size=3 color=<?php print $topfrm_txtcolor; ?>><?php echo $LDTxtColor ?></font></a>&nbsp;&nbsp;&nbsp;
-<a href="#" title="<?php echo $LDClk4BgColor ?>" onClick=chgcolor('topfrm_bgcolor')><?php echo $LDBgColor ?> <img src="../img/settings_tree.gif" border=0 width=16 height=17 alt="<?php echo $LDClk4BgColor ?>">
+    <td bgcolor="<?php echo $topfrm_bgcolor; ?>" ><p><FONT    SIZE=1  FACE="Arial">
+	&nbsp;&nbsp;&nbsp;<a href="#" title="<?php echo $LDClk4TxtColor ?>" onClick=chgcolor('topfrm_txtcolor')><font size=3 color=<?php echo $topfrm_txtcolor; ?>><?php echo $LDTxtColor ?></font></a>&nbsp;&nbsp;&nbsp;
+<a href="#" title="<?php echo $LDClk4BgColor ?>" onClick=chgcolor('topfrm_bgcolor')><?php echo $LDBgColor ?> <img <?php echo createComIcon('../','settings_tree.gif','0') ?> alt="<?php echo $LDClk4BgColor ?>">
 </a></td>
   </tr>
   <tr>
   
-<td bgcolor="<?php print $bodyfrm_bgcolor; ?>" width=400 ><p><br>
+<td bgcolor="<?php echo $bodyfrm_bgcolor; ?>" width=400 ><p><br>
 	<FONT    SIZE=4 FACE="Arial">	<a href="#" onClick=chgcolor('bodyfrm_txtcolor')><?php echo $LDMainFrame ?></a><p><FONT    SIZE=1 FACE="Arial">	
-	<a href="#" title="<?php echo $LDClk4BgColor ?>" onClick=chgcolor('bodyfrm_bgcolor')><?php echo $LDBgColor ?> <img src="../img/settings_tree.gif" border=0 width=16 height=17 alt="<?php echo $LDClk4BgColor ?>">
+	<a href="#" title="<?php echo $LDClk4BgColor ?>" onClick=chgcolor('bodyfrm_bgcolor')><?php echo $LDBgColor ?> <img <?php echo createComIcon('../','settings_tree.gif','0') ?> alt="<?php echo $LDClk4BgColor ?>">
 	</a><p><br>
 </td>
   </tr>
   <tr>
  
-    <td bgcolor="<?php print $botfrm_bgcolor; ?>">
+    <td bgcolor="<?php echo $botfrm_bgcolor; ?>">
 <FONT    SIZE=1  FACE="Arial">
 <?php
-require("../language/$lang/".$lang."_copyrite.php");
- ?>
+if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
+include('../language/'.$lang.'/'.$lang.'_copyrite.php');
+  else include('../language/en/en_copyrite.php');?>
 
-<p><a href="#" title="<?php echo $LDClk4BgColor ?>" onClick=chgcolor('botfrm_bgcolor')><?php echo $LDBgColor ?> <img src="../img/settings_tree.gif" border=0 width=16 height=17 alt="<?php echo $LDClk4BgColor ?>">
+<p><a href="#" title="<?php echo $LDClk4BgColor ?>" onClick=chgcolor('botfrm_bgcolor')><?php echo $LDBgColor ?> <img <?php echo createComIcon('../','settings_tree.gif','0') ?> alt="<?php echo $LDClk4BgColor ?>">
 </a>
 </FONT>
 </td>
@@ -204,10 +205,10 @@ require("../language/$lang/".$lang."_copyrite.php");
 
 <FORM >
 <input type="button" value="<?php echo $LDOK ?>" onClick=ok()>
-<INPUT type="button"  value="<?php echo $LDCancel ?>" onClick=location.replace("spediens.php?sid=<?php print "$sid&lang=$lang"; ?>")>
-<input type="button" value="<?php echo $LDApply ?>" onClick=location.replace("colorchg.php?mode=remain&sid=<?php print "$sid&lang=$lang"; ?>")>
+<INPUT type="button"  value="<?php echo $LDCancel ?>" onClick=location.replace("spediens.php?sid=<?php echo "$sid&lang=$lang"; ?>")>
+<input type="button" value="<?php echo $LDApply ?>" onClick=location.replace("colorchg.php?mode=remain&sid=<?php echo "$sid&lang=$lang"; ?>")>
 <?php if ($cfg['dhtml'])
-print '&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="'.$LDColorOptExt.'" onClick=location.replace("excolorchg.php?sid='.$sid.'&lang='.$lang.'")>';
+echo '&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="'.$LDColorOptExt.'" onClick=location.replace("excolorchg.php?sid='.$sid.'&lang='.$lang.'")>';
 ?>
 </FORM></font>
 <p>
@@ -219,11 +220,12 @@ print '&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="'.$LDColorOptExt.'" o
 </tr>
 
 <tr valign=top >
-<td bgcolor=<?php print $cfg['bot_bgcolor']; ?> height=70 colspan=2>
+<td bgcolor=<?php echo $cfg['bot_bgcolor']; ?> height=70 colspan=2>
 
 <?php
-require("../language/$lang/".$lang."_copyrite.php");
- ?>
+if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
+include('../language/'.$lang.'/'.$lang.'_copyrite.php');
+  else include('../language/en/en_copyrite.php');?>
 </td>
 </tr>
 </table>        

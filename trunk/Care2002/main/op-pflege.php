@@ -6,7 +6,7 @@ setcookie(currentuser,"");
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
  <TITLE>OP Pflege</TITLE>
 
 <style type="text/css">
@@ -40,12 +40,12 @@ setcookie(currentuser,"");
 <td valign=top bgcolor=#cde1ec colspan=2><p><br>
 <ul>
 <FONT    SIZE=-1  FACE="Arial">
-<img src="../img/varrow.gif" width="20" height="15"> <a href="op-pflege-dienst-schnellsicht.php">Schnellübersicht über die gegenwärtige diensthabende OP Pfleger</a><br>
-<img src="../img/varrow.gif" width="20" height="15"> <a href="op-pflege-logbuch-pass.php">OP Logbuch</a><br>
-<img src="../img/varrow.gif" width="20" height="15"> <a href="#" ONCLICK="bdienstwin()">Bereitschaftsdienst - Zeiterfassung</a><br>
-<img src="../img/varrow.gif" width="20" height="15"> <a href="#">Dienstplan</a><br>
-<img src="../img/varrow.gif" width="20" height="15"> <a href="#">Nachrichten</a><br>
-<img src="../img/varrow.gif" width="20" height="15"> <a href="#">Rundbrief</a><br>
+<img <?php echo createComIcon('../','varrow.gif','0') ?>> <a href="op-pflege-dienst-schnellsicht.php">Schnellübersicht über die gegenwärtige diensthabende OP Pfleger</a><br>
+<img <?php echo createComIcon('../','varrow.gif','0') ?>> <a href="op-pflege-logbuch-pass.php">OP Logbuch</a><br>
+<img <?php echo createComIcon('../','varrow.gif','0') ?>> <a href="#" ONCLICK="bdienstwin()">Bereitschaftsdienst - Zeiterfassung</a><br>
+<img <?php echo createComIcon('../','varrow.gif','0') ?>> <a href="#">Dienstplan</a><br>
+<img <?php echo createComIcon('../','varrow.gif','0') ?>> <a href="#">Nachrichten</a><br>
+<img <?php echo createComIcon('../','varrow.gif','0') ?>> <a href="#">Rundbrief</a><br>
 <p>
 <FORM action="startframe.php" >
 <INPUT type="submit"  value="Schliessen"></font></FORM>

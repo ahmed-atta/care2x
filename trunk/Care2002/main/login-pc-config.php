@@ -1,18 +1,18 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","stdpass.php");
-define("NO_2LEVEL_CHK",1);
-require("../include/inc_front_chain_lang.php");
+define('LANG_FILE','stdpass.php');
+define('NO_2LEVEL_CHK',1);
+require_once('../include/inc_front_chain_lang.php');
 
-if(isset($mode)&&($mode=="save"))
+if(isset($mode)&&($mode=='save'))
 {
 	$OneYear=time()+(3600*24*365);
 	setcookie(ck_thispc_dept,$HTTP_POST_VARS['pcdept'],$OneYear); //expires in 1 year
@@ -23,13 +23,13 @@ if(isset($mode)&&($mode=="save"))
 	header("location: login-pc-config.php?sid=$sid&lang=$lang&saved=1");
 }
 
-require("../include/inc_config_color.php");
+require_once('../include/inc_config_color.php');
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
  
 <script language="javascript" >
 <!-- 
@@ -48,29 +48,29 @@ function gethelp(x,s,x1,x2,x3)
 // -->
 </script> 
 <?php 
-require("../include/inc_css_a_hilitebu.php");
+require('../include/inc_css_a_hilitebu.php');
 ?>
 
 </HEAD>
 
 <BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0  onLoad="window.parent.STARTPAGE.location.href='indexframe.php?sid=<?php echo "$sid&lang=$lang" ?>'" 
-<?php if (!$cfg['dhtml']){ print 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
 <tr valign=top>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10"><FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  
 SIZE=+3  FACE="Arial">
 <STRONG> &nbsp;<?php echo $LDLogin ?></STRONG></FONT></td>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right><a href="javascript:gethelp('');"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 align="absmiddle"  
- <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="js_allrestart.htm?sid=<?php echo $sid;?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 align="absmiddle"   <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right><a href="javascript:gethelp('');"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0','absmiddle') ?>  
+ <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="js_allrestart.htm?sid=<?php echo $sid;?>"><img <?php echo createLDImgSrc('../','close2.gif','0','absmiddle') ?>   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </td></tr>
 <tr>
-<td bgcolor=<?php print $cfg['body_bgcolor']; ?> valign=top colspan=2>
+<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
 <ul>
 
 <table>
-<tr bgcolor=<?php print $cfg['body_bgcolor']; ?>>
-<td align=right><img src="../img/catr.gif" border=0 width=88 height=80 align="absmiddle"></td>
+<tr bgcolor=<?php echo $cfg['body_bgcolor']; ?>>
+<td align=right><img <?php echo createMascot('../','mascot1_r.gif','0','bottom') ?> align="absmiddle"></td>
 <td >
 <?php if ($saved) : ?>
 <FONT  face="Verdana,Helvetica,Arial" size=3 color="#990000"><?php echo $LDChangeSaved ?><br>
@@ -92,7 +92,7 @@ SIZE=+3  FACE="Arial">
               <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><FONT 
                   face="Verdana,Helvetica,Arial" size=2> <?php echo $LDPcID ?></TD></TR>
-              <TR bgColor=#eeeeee><td align=center><img src="../img/home.gif" width=21 height=10 border=0></td>
+              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon('../','home.gif') ?>></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B><nobr>
 				 <input type="text" name="pcdept" size=20 maxlength=25 value="<?php echo $HTTP_COOKIE_VARS['ck_thispc_dept'] ?>">
@@ -101,9 +101,9 @@ SIZE=+3  FACE="Arial">
                   size=2><nobr><?php echo $LDDept ?></nobr></FONT></TD>
               <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
-                  src="../img/pixel.gif" 
+                  src="../gui/img/common/default/pixel.gif" 
                   width=5></TD></TR>
-              <TR bgColor=#eeeeee><td align=center><img src="../img/statbel2.gif" width=20 height=20 border=0></td>
+              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon('../','statbel2.gif') ?>></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B><nobr>
 				 <input type="text" name="pcstation" size=20 maxlength=25 value="<?php echo $HTTP_COOKIE_VARS['ck_thispc_station'] ?>">
@@ -112,9 +112,9 @@ SIZE=+3  FACE="Arial">
                   size=2><nobr><?php echo $LDWard ?></nobr></FONT></TD>
               <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
-                  src="../img/pixel.gif" 
+                  src="../gui/img/common/default/pixel.gif" 
                   width=5></TD></TR>
-                <TR bgColor=#eeeeee><td align=center><img src="../img//button_info.gif" width=15 height=15 border=0></td>
+                <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon('../','button_info.gif') ?>></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B>
 				 <input type="text" name="pcroom" size=20 maxlength=25 value="<?php echo $HTTP_COOKIE_VARS['ck_thispc_room'] ?>">
@@ -123,9 +123,9 @@ SIZE=+3  FACE="Arial">
                   size=2><?php echo $LDWardOR ?></FONT></TD></TR>
               <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
-                  src="../img/pixel.gif" 
+                  src="../gui/img/common/default/pixel.gif" 
                   width=5></TD></TR>
-              <TR bgColor=#eeeeee>  <td align=center><img src="../img/profile.gif" width=14 height=14 border=0></td>
+              <TR bgColor=#eeeeee>  <td align=center><img <?php echo createComIcon('../','profile.gif') ?>></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B>
 				 <input type="text" name="pcphone" size=20 maxlength=25 value="<?php echo $HTTP_COOKIE_VARS['ck_thispc_phone'] ?>">
@@ -134,9 +134,9 @@ SIZE=+3  FACE="Arial">
                   size=2><?php echo $LDPhoneNr ?></FONT></TD></TR>
               <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
-                  src="../img/pixel.gif" 
+                  src="../gui/img/common/default/pixel.gif" 
                   width=5></TD></TR>
-              <TR bgColor=#eeeeee>  <td align=center><img src="../img/listen-sm-legend.gif" width=15 height=15 border=0></td>
+              <TR bgColor=#eeeeee>  <td align=center><img <?php echo createComIcon('../','listen-sm-legend.gif') ?>></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B>
 				 <input type="text" name="pcintercom" size=20 maxlength=25 value="<?php echo $HTTP_COOKIE_VARS['ck_thispc_intercom'] ?>">
@@ -145,12 +145,12 @@ SIZE=+3  FACE="Arial">
                   size=2><?php echo $LDIntercomNr ?></FONT></TD></TR>
               <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
-                  src="../img/pixel.gif" 
+                  src="../gui/img/common/default/pixel.gif" 
                   width=5></TD></TR>
-              <TR bgColor=#eeeeee>  <td align=center><img src="../img/lightning.gif" width=17 height=17 border=0></td>
+              <TR bgColor=#eeeeee>  <td align=center><img <?php echo createComIcon('../','lightning.gif') ?>></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B>
-			 <?php echo $REMOTE_ADDR ?>
+			 <?php echo $HTTP_SERVER_VARS['REMOTE_ADDR']; ?>
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php echo $LDPcIP ?></FONT></TD></TR>
@@ -166,8 +166,7 @@ SIZE=+3  FACE="Arial">
 <input type="hidden" name="lang" value="<?php echo $lang ?>">
 <input type="hidden" name="mode" value="save">
 <input type="submit" value="<?php echo $LDSave ?>">
-<input type="button" value="<?php echo $LDNoChange ?>" onClick="window.location.href='startframe.php?sid=<?php echo "$sid&lang=$lang" ?>'">&nbsp;
-<a href="startframe.php?sid=<?php echo "$sid&lang=$lang" ?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0  alt="<?php echo $LDClose ?>" align="absmiddle"></a>
+<input type="button" value="<?php echo $LDNoChange ?>" onClick="window.location.href='startframe.php?sid=<?php echo "$sid&lang=$lang" ?>'">&nbsp;<a href="startframe.php?sid=<?php echo "$sid&lang=$lang" ?>"><img <?php echo createLDImgSrc('../','close2.gif','0','top') ?>  alt="<?php echo $LDClose ?>" ></a>
 </form>
 <p>
 </ul>
@@ -178,10 +177,11 @@ SIZE=+3  FACE="Arial">
 </tr>
 
 <tr>
-<td bgcolor=<?php print $cfg['bot_bgcolor']; ?> height=70 colspan=2>
+<td bgcolor=<?php echo $cfg['bot_bgcolor']; ?> height=70 colspan=2>
 <?php
-require("../language/$lang/".$lang."_copyrite.php");
- ?>
+if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
+include('../language/'.$lang.'/'.$lang.'_copyrite.php');
+  else include('../language/en/en_copyrite.php');?>
 </td>
 </tr>
 </table>        

@@ -1,17 +1,17 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","nursing.php");
-$local_user="ck_pflege_user";
-require("../include/inc_front_chain_lang.php");
-require("../include/inc_config_color.php"); // load color preferences
+define('LANG_FILE','nursing.php');
+$local_user='ck_pflege_user';
+require_once('../include/inc_front_chain_lang.php');
+require_once('../include/inc_config_color.php'); // load color preferences
 
 $thisfile="pflege-getdailymedx.php";
 
@@ -22,18 +22,23 @@ switch($winid)
 							break;
 }
 
-$dbtable="nursing_station_patients_curve";
+$dbtable='care_nursing_station_patients_curve';
 
-require("../include/inc_db_makelink.php");
+/* Establish db connection */
+require('../include/inc_db_makelink.php');
 if($link&&$DBLink_OK) 
 	{	
-	// get orig data
+	  /* Load date formatter */
+      include_once('../include/inc_date_format_functions.php');
+      				
 
-		if($mode=="save")
+    	// get orig data
+
+		if($mode=='save')
 		{
 		 	$element="medication_dailydose";
 		// get the basic patient data
-			$sql="SELECT * FROM mahopatient WHERE patnum='$pn'";
+			$sql="SELECT * FROM care_admission_patient WHERE patnum='$pn'";
 
 			if($ergebnis=mysql_query($sql,$link))
        		{
@@ -48,7 +53,7 @@ if($link&&$DBLink_OK)
 				$sql="SELECT $element FROM $dbtable WHERE patnum='$pn'";
 				if($ergebnis=mysql_query($sql,$link))
        			{
-					//print $sql." checked <br>";
+					//echo $sql." checked <br>";
 					//$bbuf="";
 					//$tbuf="";
 					$bbuf=$r0;
@@ -70,13 +75,13 @@ if($link&&$DBLink_OK)
 							if($content[$element]!="")
 							{
 								$cbuf="sd=$yr$mo$dy&rd=$dy.$mo.$yr";
-								//print $content[$element]."<br>".$cbuf;
+								//echo $content[$element]."<br>".$cbuf;
 								if(stristr($content[$element],$cbuf))
 								{
 									$ebuf=explode("_",$content[$element]);
 									for($i=0;$i<sizeof($ebuf);$i++)
 									{
-										//print $v." v <br>";
+										//echo $v." v <br>";
 										if(stristr($ebuf[$i],$cbuf))
 										{ $ebuf[$i]=$dbuf; 
 											$dbuf=implode("_",$ebuf);
@@ -90,11 +95,11 @@ if($link&&$DBLink_OK)
 							$sql="UPDATE $dbtable SET $element='$dbuf'	WHERE patnum='$pn'";
 							if($ergebnis=mysql_query($sql,$link))
        							{
-									//print $sql." new update <br>";
+									//echo $sql." new update <br>";
 									mysql_close($link);
 									header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=1&pn=$pn&station=$station&winid=$winid&yr=$yr&mo=$mo&dy=$dy&dyidx=$dyidx&yrstart=$yrstart&monstart=$monstart&dystart=$dystart&dyname=$dyname");
 								}
-								else print "<p>".$sql."<p>Das Lesen  aus der Datenbank $dbtable ist gescheitert."; 
+								else echo "<p>".$sql."<p>Das Lesen  aus der Datenbank $dbtable ist gescheitert."; 
 						} // else create new entry
 						else
 						{
@@ -120,15 +125,15 @@ if($link&&$DBLink_OK)
 
 							if($ergebnis=mysql_query($sql,$link))
        							{
-									//print $sql." new insert <br>";
+									//echo $sql." new insert <br>";
 									mysql_close($link);
 									header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=1&pn=$pn&station=$station&winid=$winid&yr=$yr&mo=$mo&dy=$dy&dyidx=$dyidx&yrstart=$yrstart&monstart=$monstart&dystart=$dystart&dyname=$dyname");
 								}
-								else {print "<p>$sql$LDDbNoSave";}
+								else {echo "<p>$sql$LDDbNoSave";}
 						}//end of else
 					} // end of if ergebnis
 				}// end of if rows
-				else {print "<p>$sql$LDDbNoRead";}
+				else {echo "<p>$sql$LDDbNoRead";}
 			}//end of   if ergebnis
 			else $saved=0;
 		 }// end of if(mode==save)
@@ -148,7 +153,7 @@ if($link&&$DBLink_OK)
 					mysql_data_seek($ergebnis,0);
 					$result=mysql_fetch_array($ergebnis);
 					$medbuf=$result[$element];
-					//print $sql."<br>";
+					//echo $sql."<br>";
 					// get daily dose info
 					$element="medication_dailydose";
 					$sql="SELECT * FROM $dbtable WHERE patnum='$pn'";
@@ -162,17 +167,17 @@ if($link&&$DBLink_OK)
 							mysql_data_seek($ergebnis,0);
 							$result=mysql_fetch_array($ergebnis);
 							$dosebuf=$result[$element];
-							//print $sql."<br>";
+							//echo $sql."<br>";
 						}
 					}
-					else {print "<p>$sql$LDDbNoRead";} 
+					else {echo "<p>$sql$LDDbNoRead";} 
 				}
 			}
-				else {print "<p>$sql$LDDbNoRead";}
+				else {echo "<p>$sql$LDDbNoRead";}
 	 	}
 	}
 	else 
-		{ print "$LDDbNoLink<br>$sql<br>"; }
+		{ echo "$LDDbNoLink<br>$sql<br>"; }
 
 
 		
@@ -189,9 +194,9 @@ if($link&&$DBLink_OK)
 
 
 if ($sbuf) 	parse_str($sbuf,$abuf);
-//print $abuf[e]."<br>";
+//echo $abuf[e]."<br>";
 $dose=trim($abuf[e]);
-//print $b_t[0]." ".$b_t[1];
+//echo $b_t[0]." ".$b_t[1];
 
 
 $mdc=explode("~",$medbuf);
@@ -211,14 +216,14 @@ if(!strchr($mdc[(sizeof($mdc)-1)],"|"))
 }
 
 $mdcsize=sizeof($mdc);
-//print $b_t[0]." ".$b_t[1];
+//echo $b_t[0]." ".$b_t[1];
 ?>
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 <TITLE><?php echo "$title $LDInputWin" ?></TITLE>
 <?php
-require("../include/inc_css_a_hilitebu.php");
+require('../include/inc_css_a_hilitebu.php');
 ?>
 
 <script language="javascript">
@@ -254,17 +259,17 @@ div.box { border: double; border-width: thin; width: 100%; border-color: black; 
 
 </HEAD>
 <BODY  bgcolor="#dfdfdf" TEXT="#000000" LINK="#0000FF" VLINK="#800080" 
-onLoad="<?php if($saved) print "parentrefresh();"; ?>if (window.focus) window.focus(); window.focus();" >
+onLoad="<?php if($saved) echo "parentrefresh();"; ?>if (window.focus) window.focus(); window.focus();" >
 <table border=0 width="100%">
   <tr>
     <td><b><font face=verdana,arial size=5 color=maroon>
 <?php 
-	print $title.'<br><font size=4>';	
-	print $LDFullDayName[$dyidx]." ($dy".".".$mo.".".$yr.")</font>";
+	echo $title.'<br><font size=4>';	
+	echo $LDFullDayName[$dyidx].' ('.formatDate2Local("$yr-$mo-$dy",$date_format).')</font>';
 ?>
 	</font></b>
 	</td>
-    <td align="right" valign="top"><a href="javascript:gethelp('nursing_feverchart_xp.php','medication_dailydose','','<?php echo $mdcsize ?>','<?php echo $title ?>')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:window.close()" ><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr>
+    <td align="right" valign="top"><a href="javascript:gethelp('nursing_feverchart_xp.php','medication_dailydose','','<?php echo $mdcsize ?>','<?php echo $title ?>')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:window.close()" ><img <?php echo createLDImgSrc('../','close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr>
 </td>
   </tr>
 </table>
@@ -293,7 +298,7 @@ onLoad="<?php if($saved) print "parentrefresh();"; ?>if (window.focus) window.fo
 				//if(!$mdc[$i]) continue;
 				$v=explode("|",$mdc[$i]);
 				if(!$v[1]) continue;
-				print '
+				echo '
  						 <tr>
    						 <td  class="v12" bgcolor="#ffffff">&nbsp;'.$v[1].'&nbsp;
         				</td>
@@ -304,9 +309,9 @@ onLoad="<?php if($saved) print "parentrefresh();"; ?>if (window.focus) window.fo
  						 ';
 				}
 		}
-		else print '
+		else echo '
 		 				<tr>
-   						 <td  colspan="3" bgcolor="#ffffff"><img src="../img/catr.gif" border=0 width=88 height=80 align="absmiddle">
+   						 <td  colspan="3" bgcolor="#ffffff"><img '.createMascot('../','mascot1_r.gif','0','absmiddle').'>
         				<font face="Verdana, Arial" size=4 color="#800000">'.$LDNoMedicineYet.'&nbsp;</font></td>
   						</tr>
  						 ';
@@ -336,15 +341,15 @@ onLoad="<?php if($saved) print "parentrefresh();"; ?>if (window.focus) window.fo
 </form>
 <p>
 <?php if($mdcsize) : ?>
-<a href="javascript:document.infoform.submit();"><img src="../img/<?php echo "$lang/$lang" ?>_savedisc.gif" border="0" alt="<?php echo $LDSave ?>"></a>
+<a href="javascript:document.infoform.submit();"><img <?php echo createLDImgSrc('../','savedisc.gif','0') ?> alt="<?php echo $LDSave ?>"></a>
 &nbsp;&nbsp;
-<a href="javascript:resetinput()"><img src="../img/<?php echo "$lang/$lang" ?>_reset.gif" border="0" alt="<?php echo $LDReset ?>"></a>
+<a href="javascript:resetinput()"><img <?php echo createLDImgSrc('../','reset.gif','0') ?> alt="<?php echo $LDReset ?>"></a>
 &nbsp;&nbsp;
 <?php endif ?>
 <?php if($saved)  : ?>
-<a href="javascript:window.close()"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border="0" alt="<?php echo $LDClose ?>"></a>
+<a href="javascript:window.close()"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> alt="<?php echo $LDClose ?>"></a>
 <?php else : ?>
-<a href="javascript:window.close()"><img src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" border="0" alt="<?php echo $LDClose ?>">
+<a href="javascript:window.close()"><img <?php echo createLDImgSrc('../','cancel.gif','0') ?>" border="0" alt="<?php echo $LDClose ?>">
 </a>
 <?php endif ?>
 

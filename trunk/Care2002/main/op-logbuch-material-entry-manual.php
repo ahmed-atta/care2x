@@ -1,17 +1,17 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-define("LANG_FILE","or.php");
-$local_user="ck_op_pflegelogbuch_user";
-require("../include/inc_front_chain_lang.php");
+define('LANG_FILE','or.php');
+$local_user='ck_op_pflegelogbuch_user';
+require_once('../include/inc_front_chain_lang.php');
 
 $globdata="sid=$sid&lang=$lang&op_nr=$op_nr&dept=$dept&saal=$saal&patnum=$patnum&pday=$pday&pmonth=$pmonth&pyear=$pyear";
 
 if(($mode=="force_add")&&$artikelname&&$pcs)
 {
-include("../include/inc_db_makelink.php");
+include('../include/inc_db_makelink.php');
 if($link&&$DBLink_OK) 
 	{	
-	  	$dbtable="nursing_op_logbook";
+	  	$dbtable='care_nursing_op_logbook';
 		$sql="SELECT material_codedlist FROM $dbtable 
 					WHERE dept='$dept'
 					AND op_room='$saal'
@@ -28,12 +28,12 @@ if($link&&$DBLink_OK)
 				$matlist=mysql_fetch_array($mat_result);
 						//$datafound=1;
 						//$pdata=mysql_fetch_array($ergebnis);
-						//print $sql."<br>";
-						//print $rows;
+						//echo $sql."<br>";
+						//echo $rows;
 			}
-					//else print "<p>".$sql."<p>Multiple entries found pls notify the edv."; 
+					//else echo "<p>".$sql."<p>Multiple entries found pls notify the edv."; 
 		}
-		else { print "$LDDbNoRead<br>$sql"; } 
+		else { echo "$LDDbNoRead<br>$sql"; } 
 
 		$newmat="b=?&a=?$artikelnum&n=$artikelname&g=$generic&i=$industrynum&c=$pcs\r\n";
 		
@@ -50,30 +50,30 @@ if($link&&$DBLink_OK)
 						
 						$matlist[0]=strtr($matlist[0]," ","+");
 						
-						$dbtable="nursing_op_logbook";
+						$dbtable='care_nursing_op_logbook';
 						$sql="UPDATE $dbtable SET material_codedlist='$matlist[0]'
 								WHERE dept='$dept'
 								AND op_room='$saal'
 								AND op_nr='$op_nr'
 								AND op_src_date='$pyear$pmonth$pday'
 								AND patnum='$patnum'";
-						//print $sql;
+						//echo $sql;
 						if($mat_result=mysql_query($sql,$link))
 						{
   							header("location:op-logbuch-material-list.php?$globdata&item_idx=$item_idx&chg=1");
 							exit;
-						}	else { print "$LDDbNoSave<br>$sql"; } 
+						}	else { echo "$LDDbNoSave<br>$sql"; } 
 						
-						//print $sql."<br>";
-						//print $rows;
+						//echo $sql."<br>";
+						//echo $rows;
 	}
-  	else { print "$LDDbNoLink<br>"; } 
+  	else { echo "$LDDbNoLink<br>"; } 
 }
 
 ?>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 
  <style type="text/css" name="s2">
 .v12{ font-family:verdana,arial; color:#000000; font-size:12;}
@@ -85,7 +85,7 @@ if($link&&$DBLink_OK)
 
 function popinfo(b)
 {
-	urlholder="products-bestellkatalog-popinfo.php?sid=<?php print $sid; ?>&keyword="+b+"&mode=search&cat=pharma";
+	urlholder="products-bestellkatalog-popinfo.php?sid=<?php echo $sid; ?>&keyword="+b+"&mode=search&cat=pharma";
 	ordercatwin=window.open(urlholder,"ordercat","width=850,height=550,menubar=no,resizable=yes,scrollbars=yes");
 	}
 
@@ -127,7 +127,7 @@ var brwsVer=parseInt(navigator.appVersion);var timer;var curSubMenu='';
 <tr>
 <?php
   for($i=0;$i<sizeof($LDMaterialElements);$i++)
-  print '
+  echo '
     <td class="v12b"><b>&nbsp;'.$LDMaterialElements[$i].'</b></td>';
 ?>
  <!--    <td class="v12b"><b>&nbsp;Art.Nr.</b></td>
@@ -159,10 +159,10 @@ var brwsVer=parseInt(navigator.appVersion);var timer;var curSubMenu='';
 <input type="hidden" name="pmonth" value="<?php echo $pmonth ?>">
 <input type="hidden" name="pyear" value="<?php echo $pyear ?>">
 <p>
-<input type="image" src="../img/<?php echo "$lang/$lang" ?>_savedisc.gif" border=0 width=99 height=24 align="absmiddle" alt="<?php echo $LDSave ?>">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:document.plist.reset()" title="<?php echo $LDReset ?>"><img src="../img/<?php echo "$lang/$lang" ?>_reset.gif" width=156 height=24 border=0 align=absmiddle></a>
+<input type="image" <?php echo createLDImgSrc('../','savedisc.gif','0','absmiddle') ?>  alt="<?php echo $LDSave ?>">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:document.plist.reset()" title="<?php echo $LDReset ?>"><img <?php echo createLDImgSrc('../','reset.gif','0','absmiddle') ?>></a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="op-logbuch-material-list.php?<?php echo $globdata ?>"><img src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" width=103 height=24 border=0 align=absmiddle alt="<?php echo $LDCancel ?>"></a>
+<a href="op-logbuch-material-list.php?<?php echo $globdata ?>"><img <?php echo createLDImgSrc('../','cancel.gif','0','absmiddle') ?> alt="<?php echo $LDCancel ?>"></a>
 </form>
 
 

@@ -28,7 +28,7 @@ $stationen=array("M4A","M4B","M4C","M4D","M5A","M5B","M5C","M5D","M6A",
   var urlholder;
 
   function getinfo(patientID){
-	urlholder="pflege-station.php?route=validroute&patient=" + patientID + "&user=<?php print $aufnahme_user.'"' ?>;
+	urlholder="pflege-station.php?route=validroute&patient=" + patientID + "&user=<?php echo $aufnahme_user.'"' ?>;
 	patientwin=window.open(urlholder,patientID,"width=600,height=400,menubar=no,resizable=yes,scrollbars=yes");
 	}
 -->
@@ -42,22 +42,22 @@ $stationen=array("M4A","M4B","M4C","M4D","M5A","M5B","M5C","M5D","M6A",
 <table width=100% border=1 cellpadding="5">
 <tr>
 <td bgcolor="navy">
-<FONT  COLOR="white"  SIZE=+3  FACE="Arial"><STRONG>Dientshabende Ärzte - <?php print $datum; ?></STRONG></FONT>
+<FONT  COLOR="white"  SIZE=+3  FACE="Arial"><STRONG>Dientshabende Ärzte - <?php echo $datum; ?></STRONG></FONT>
 </td>
 </tr>
 <tr>
 <td >
  
 <?php
-print '<table  cellpadding="2" cellspacing=0 border="0" >';
+echo '<table  cellpadding="2" cellspacing=0 border="0" >';
 
-print '<tr bgcolor="aqua" align=center><td><font face="verdana,arial" size="2" ><b>Zimmer &nbsp;&nbsp;</b></td>';
-print '<td><font face="verdana,arial" size="2" ><b>&nbsp; Bett &nbsp;</b></td>';
-print '<td ><font face="verdana,arial" size="2" ><b>&nbsp; Arzt/Ärztin &nbsp;</b></td>';
-print '<td><font face="verdana,arial" size="2" > <b>&nbsp; Funknummer &nbsp;</b></td>';
-print '<td><font face="verdana,arial" size="2" > <b>&nbsp; Telefonnummer &nbsp;</b></td>';
-print '<td><font face="verdana,arial" size="2" > <b>&nbsp; Kasse &nbsp;</b></td>';
-print '</tr>';
+echo '<tr bgcolor="aqua" align=center><td><font face="verdana,arial" size="2" ><b>Zimmer &nbsp;&nbsp;</b></td>';
+echo '<td><font face="verdana,arial" size="2" ><b>&nbsp; Bett &nbsp;</b></td>';
+echo '<td ><font face="verdana,arial" size="2" ><b>&nbsp; Arzt/Ärztin &nbsp;</b></td>';
+echo '<td><font face="verdana,arial" size="2" > <b>&nbsp; Funknummer &nbsp;</b></td>';
+echo '<td><font face="verdana,arial" size="2" > <b>&nbsp; Telefonnummer &nbsp;</b></td>';
+echo '<td><font face="verdana,arial" size="2" > <b>&nbsp; Kasse &nbsp;</b></td>';
+echo '</tr>';
 
 $bettperroom=2;
 $randombett=0;
@@ -74,21 +74,21 @@ for ($i=0;$i<sizeof($stationen);$i++)
 	{
 
 	if ($toggler==0) 
-		{ print '<tr bgcolor="#ffffcc">'; $toggler=1;} 
-		else { print '<tr bgcolor="silver">'; $toggler=0;}
+		{ echo '<tr bgcolor="#ffffcc">'; $toggler=1;} 
+		else { echo '<tr bgcolor="silver">'; $toggler=0;}
 	
-	print '<td align=center><font face="verdana,arial" size="1" >'.$stationen[$i].'</td><td align=center><font face="verdana,arial" size="1" ><img src="../img/mans-gr.gif">&nbsp;</td>';
-	print '<td><font face="verdana,arial" size="2" ><a href="#" onClick=getinfo()>Dr. Keilbach, Michael</a>';
+	echo '<td align=center><font face="verdana,arial" size="1" >'.$stationen[$i].'</td><td align=center><font face="verdana,arial" size="1" ><img src="../img/mans-gr.gif">&nbsp;</td>';
+	echo '<td><font face="verdana,arial" size="2" ><a href="#" onClick=getinfo()>Dr. Keilbach, Michael</a>';
 	
-	print '</td><td align=center><font face="verdana,arial" size="1" >2109</td>';
-	print '</td><td align=center><font face="verdana,arial" size="1" >2639</td>';
-	print '</td><td align=center> <a href="#" onClick=getinfo()><img src="../img/man-whi.gif" alt="Gehe zu Station '.$stationen[$i].'" border="0"></a> &nbsp; <img src="../img/email.gif" alt="Email an die Station '.$stationen[$i].'"></td></tr>';
-	print "\n";
+	echo '</td><td align=center><font face="verdana,arial" size="1" >2109</td>';
+	echo '</td><td align=center><font face="verdana,arial" size="1" >2639</td>';
+	echo '</td><td align=center> <a href="#" onClick=getinfo()><img src="../img/man-whi.gif" alt="Gehe zu Station '.$stationen[$i].'" border="0"></a> &nbsp; <img src="../img/email.gif" alt="Email an die Station '.$stationen[$i].'"></td></tr>';
+	echo "\n";
 
 
 	}
 
-print '</table>';
+echo '</table>';
 
 
 ?>

@@ -5,7 +5,7 @@ $dbname="maho";
 $dbhost="localhost";
 $dbusername="httpd";
 $dbpassword="";
-$dbtable="mahophone";
+$dbtable='care_phone';
 
 $breakfile="labor.php";
 
@@ -14,9 +14,9 @@ $toggle=0;
 $fieldname=array("Name","Vorname","Telefon 1","Telefon 2","Telefon 3",
 					"Funk 1","Funk 2","Privat 1",
 					"Privat 2");
-$fielddata="mahophone_name, mahophone_vorname, mahophone_inphone1, mahophone_inphone2,
-			mahophone_inphone3, mahophone_funk1,
-			mahophone_funk2, mahophone_exphone1, mahophone_exphone2";
+$fielddata="name, vorname, inphone1, inphone2,
+			inphone3, funk1,
+			funk2, exphone1, exphone2";
 
 ?>
 
@@ -51,11 +51,11 @@ $fielddata="mahophone_name, mahophone_vorname, mahophone_inphone1, mahophone_inp
 <FORM action="telesuch.php" method="post">
 <font face="Arial,Verdana"  color="#000000" size=-1>
 <B>Stichwort eingeben. z.B. Name, Vorname, Geburstdatum, Fallnummer, Abteilung, oder Abkürzung u.s.w.</B><p>
-<INPUT type="text" name="keyword" size="14" maxlength="25" value=<?php print $keyword ?>> 
+<INPUT type="text" name="keyword" size="14" maxlength="25" value=<?php echo $keyword ?>> 
 <INPUT type="submit" name="versand" value="SUCHEN"></font></FORM>
 
 <p>
-<FORM action="<?php print $breakfile ?>" >
+<FORM action="<?php echo $breakfile ?>" >
 <INPUT type="submit"  value="Abbrechen"></FORM>
 <p>
 
@@ -69,40 +69,40 @@ if($versand!="")
 
 		if(mysql_select_db($dbname,$link)) 
 		{
-			$sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE mahophone_name LIKE "'.$suchwort.'%" OR mahophone_vorname LIKE "'.$suchwort.'%"';
+			$sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE name LIKE "'.$suchwort.'%" OR vorname LIKE "'.$suchwort.'%"';
         	$ergebnis=mysql_query($sql,$link);
 			$linecount=0;
 			if($ergebnis)
        		{
 				while ($zeile=mysql_fetch_array($ergebnis)) $linecount++;
-				print "<hr width=80% align=left><p>Die Suche hat <font color=red><b>".$linecount."</b></font> Telefonnummer gefunden.<p>";
+				echo "<hr width=80% align=left><p>Die Suche hat <font color=red><b>".$linecount."</b></font> Telefonnummer gefunden.<p>";
 				if ($linecount>0) 
 				{ 
 					mysql_data_seek($ergebnis,0);
-					print "<table border=0 cellpadding=3 cellspacing=1> <tr bgcolor=orange>";
+					echo "<table border=0 cellpadding=3 cellspacing=1> <tr bgcolor=orange>";
 					for($i=0;$i<sizeof($fieldname);$i++) 
 					{
-						print"<td><font face=arial size=2><b>".$fieldname[$i]."</b></td>";
+						echo"<td><font face=arial size=2><b>".$fieldname[$i]."</b></td>";
 		
 					}
-					print "</tr>";
+					echo "</tr>";
 					while($zeile=mysql_fetch_array($ergebnis))
 					{
-						print "<tr bgcolor=";
-						if($toggle) { print "#cecece>"; $toggle=0;} else {print "#ffffaa>"; $toggle=1;};
+						echo "<tr bgcolor=";
+						if($toggle) { echo "#cecece>"; $toggle=0;} else {echo "#ffffaa>"; $toggle=1;};
 	
 						for($i=0;$i<mysql_num_fields($ergebnis);$i++) 
 						{
-							print"<td><font face=arial size=2>";
-							if($zeile[$i]=="")print "&nbsp;"; else print $zeile[$i];
-							print "</td>";
+							echo"<td><font face=arial size=2>";
+							if($zeile[$i]=="")echo "&nbsp;"; else echo $zeile[$i];
+							echo "</td>";
 						}
-						print "</tr>";
+						echo "</tr>";
 					}
-					print "</table>";
+					echo "</table>";
 					if($linecount>15)
 					{
-						print '
+						echo '
 						<p><font color=red><B>Neue Suche:</font>
 						<FORM action="telesuch.php" method="post">
 						<font face="Arial,Verdana"  color="#000000" size=-1>
@@ -116,12 +116,12 @@ if($versand!="")
 					}
 				}
 			}
-			 else {print "<p>".$sql."<p>Das Lesen von Daten aus der Datenbank ist gescheitert.";};
-		} else print " Tabelle konnte nicht ausgewählt werden.";
+			 else {echo "<p>".$sql."<p>Das Lesen von Daten aus der Datenbank ist gescheitert.";};
+		} else echo " Tabelle konnte nicht ausgewählt werden.";
 	  mysql_close($link);
 	}
   	 else 
-		{ print "Verbindung zur Datenbank konnte nicht hergestellt werden.<br>"; }
+		{ echo "Verbindung zur Datenbank konnte nicht hergestellt werden.<br>"; }
 
 	
 }

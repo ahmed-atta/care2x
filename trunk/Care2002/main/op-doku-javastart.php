@@ -1,14 +1,14 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-define("LANG_FILE","stdpass.php");
-define("NO_2LEVEL_CHK",1);
-require("../include/inc_front_chain_lang.php");
+define('LANG_FILE','stdpass.php');
+define('NO_2LEVEL_CHK',1);
+require_once('../include/inc_front_chain_lang.php');
  ?>
 
 
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 
 <script language="javascript">
 <!-- 
@@ -18,9 +18,9 @@ function startwindow(){
 	h=window.parent.screen.height;
 	opdokuwin=window.open("<?php switch($target)
 											{
-												case "entry": print "op-doku-start.php"; break;
-												case "search": print "op-doku-search.php";break;
-												case "archiv": print "op-doku-archiv.php";
+												case 'entry': echo "op-doku-start.php"; break;
+												case 'search': echo "op-doku-search.php";break;
+												case 'archiv': echo "op-doku-archiv.php";
 											}
 										?>?sid=<?php echo "$sid&lang=$lang&user=$opdoku_user"; ?>","opdokuwin","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=" + (h-60) );
 	window.opdokuwin.moveTo(0,0);

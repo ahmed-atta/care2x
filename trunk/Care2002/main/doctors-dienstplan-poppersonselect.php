@@ -1,27 +1,32 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","doctors.php");
-define("NO_2LEVEL_CHK",1);
-require("../include/inc_front_chain_lang.php");
+define('LANG_FILE','doctors.php');
+define('NO_2LEVEL_CHK',1);
+require_once('../include/inc_front_chain_lang.php');
 
-require("../include/inc_db_makelink.php");
+/* Establish db connection */
+require('../include/inc_db_makelink.php');
 if($link&&$DBLink_OK) 
-	{	
-	// get orig data
+{	
+        /* Load date formatter */
+        include_once('../include/inc_date_format_functions.php');
+        
 
-	  		$dbtable="doctors_dept_personell_quicklist";
+        // get orig data
+
+	  		$dbtable='care_doctors_dept_personell_quicklist';
 		 	$sql="SELECT list FROM $dbtable 
 					WHERE dept='$dept'
 					ORDER BY year DESC";
-			//print $sql;
+			//echo $sql;
 			if($ergebnis=mysql_query($sql,$link))
        		{
 				$rows=0;
@@ -31,21 +36,21 @@ if($link&&$DBLink_OK)
 					mysql_data_seek($ergebnis,0); //reset the variable
 					$datafound=1;
 					$pdata=mysql_fetch_array($ergebnis);
-					//print $sql."<br>";
-					//print $rows;
+					//echo $sql."<br>";
+					//echo $rows;
 				}
-				//else print "<p>".$sql."<p>Multiple entries found pls notify the edv."; 
+				//else echo "<p>".$sql."<p>Multiple entries found pls notify the edv."; 
 			}
-				else print "<p>".$sql."<p>$LDDbNoRead"; 
+				else echo "<p>".$sql."<p>$LDDbNoRead"; 
 	}
-  	 else { print "$LDDbNoLink<br>"; } 
+  	 else { echo "$LDDbNoLink<br>"; } 
 
 $wkday=date("w",mktime(0,0,0,$month,$elemid+1,$year));
 ?>
 
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 <TITLE><?php echo $LDInfo4Duty ?></TITLE>
 
 <script language="javascript">
@@ -97,12 +102,15 @@ div.box { border: double; border-width: thin; width: 100%; border-color: black; 
 <font face=verdana,arial size=4 color=maroon>
 <b>
 <?php echo $LDDutyPlan ?><br>
-<?php if ($mode=="a") print '<font color="#006666">'.$LDDoc1.'</font>'; else print $LDDoc2;
-print ' '.$LDOn.'<br>';
+<?php if ($mode=="a") echo '<font color="#006666">'.$LDDoc1.'</font>'; else echo $LDDoc2;
+echo ' '.$LDOn.'<br>';
 
- print '<font color=navy>'.($elemid+1).'.';
- if($month<10) print '0'.$month; else print $month;
- print '.'.$year.'</font> '.$LDFullDay[$wkday]; 
+ echo '<font color=navy>';
+/* if($month<10) echo '0'.$month; else echo $month;
+*/
+ echo formatDate2Local($year.'-'.$month.'-'.($elemid+1),$date_format);
+
+ echo '</font> '.$LDFullDay[$wkday]; 
 ?>
 </b>
 </font>
@@ -111,35 +119,35 @@ print ' '.$LDOn.'<br>';
 <?php
 if($datafound)
 {
-    print '<ul>
+    echo '<ul>
 	    <font face="verdana,arial" size=2>';
 
-    //print $pdata['list'];
+    //echo $pdata['list'];
     $pbuf=explode("~",$pdata['list']);
     for ($i=0;$i<sizeof($pbuf);$i++)
     {
 	    parse_str(trim($pbuf[$i]),$persons);
-	    print '
-	    <a href="#" onClick=addelem(\''.$mode.$elemid.'\',\'h'.$mode.$elemid.'\',\''.ucfirst($persons[l]).'\',\''.ucfirst($persons[f]).'\',\''.ucfirst($persons[b]).'\')>
-	    <img src="../img/mans-';
-	    if ($mode=="a") print 'gr.gif'; else print 'red.gif';
-	    print '" border="0"> '.ucfirst($persons[l]).', '.ucfirst($persons[f]).'</a>
+	    echo '
+	    <a href="#" onClick="addelem(\''.$mode.$elemid.'\',\'h'.$mode.$elemid.'\',\''.ucfirst($persons[l]).'\',\''.ucfirst($persons[f]).'\',\''.ucfirst($persons[b]).'\')">
+	    <img ';
+	    if ($mode=="a") echo createComIcon('../','mans-gr.gif','0') ; else echo  createComIcon('../','mans-red.gif','0');
+	    echo '> '.ucfirst($persons[l]).', '.ucfirst($persons[f]).'</a>
 	    <br>';
     }
-    print '
+    echo '
 	</font></ul>';
 }
 else
 {
-    print '<form><font face="verdana,arial" size=2>
-    <img src="../img/catr.gif" border=0 width=88 height=80 align=left> '.$LDNoPersonList.'
+    echo '<form><font face="verdana,arial" size=2>
+    <img '.createMascot('../','mascot1_r.gif','0','left').'  > '.$LDNoPersonList.'
     <p>
     <input type="button" value="'.$LDCreatePersonList.'" onClick="window.opener.location.href=\'doctors-dienst-personalliste.php?sid='.$sid.'&lang='.$lang.'&dept='.$dept.'&pmonth='.$month.'&pyear='.$year.'&retpath='.$retpath.'&ipath=plan\';window.opener.focus();window.close();">
     </form>';
 }
 ?>
 <p><br>
-<a href="javascript:closethis()"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border="0" alt="<?php echo $LDCloseWindow ?>"></a>
+<a href="javascript:closethis()"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> alt="<?php echo $LDCloseWindow ?>"></a>
 
 </BODY>
 

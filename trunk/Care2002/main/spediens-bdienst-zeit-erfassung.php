@@ -1,85 +1,95 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","or.php");
-define("NO_2LEVEL_CHK",1);
-require("../include/inc_front_chain_lang.php");
-require("../include/inc_config_color.php"); // load color preferences
+define('LANG_FILE','or.php');
+define('NO_2LEVEL_CHK',1);
+require_once('../include/inc_front_chain_lang.php');
+require_once('../include/inc_config_color.php'); // load color preferences
 
-if(!isset($pyear)||empty($pyear)) $pyear=date(Y);
-if(!isset($pmonth)||empty($pmonth)) $pmonth=date(m);
-if(!isset($pday)||empty($pday)) $pday=date(d);
+/* Check the date values */
+if(!isset($pyear)||empty($pyear)) $pyear=date('Y');
+if(!isset($pmonth)||empty($pmonth)) $pmonth=date('m');
+if(!isset($pday)||empty($pday)) $pday=date('d');
 
-$opabt=get_meta_tags("../global_conf/$lang/op_tag_dept.pid");
+$opabt=get_meta_tags('../global_conf/'.$lang.'/op_tag_dept.pid');
 
-$dbtable="duty_performance_report";
-$thisfile="spediens-bdienst-zeit-erfassung.php";
-if($retpath=="spec") $breakfile="spediens.php?sid=$sid&lang=$lang";
- else $breakfile="op-doku.php?sid=$sid&lang=$lang";
+$dbtable='care_standby_duty_report';
+
+$thisfile='spediens-bdienst-zeit-erfassung.php';
+if($retpath=='spec') $breakfile="spediens.php?sid=".$sid."&lang=".$lang;
+ else $breakfile="op-doku.php?sid=".$sid."&lang=".$lang;
 
 /********************************* Resolve the department and op room ***********************/
-require("../include/inc_resolve_opr_dept.php");
+require('../include/inc_resolve_opr_dept.php');
 
-require("../include/inc_db_makelink.php");
+
+/* Establish db connection */
+require('../include/inc_db_makelink.php');
 if($link&&$DBLink_OK) 
-	{	
-	// get orig data
+{	
+	    /* Load date formatter */
+        include_once('../include/inc_date_format_functions.php');
+        
+		
+		//include_once('../include/inc_editor_fx.php');
 
-		if($mode=="save")
+		if($mode=='save')
 		{
+				
+				$history_txt=$encoder." ".date('Y-m-d H:i:s')."\n\r";
 
-					//print $sql." checked <br>";
+					//echo $sql." checked <br>";
 				for($i=0;$i<$maxelement;$i++)
 				{
-					$tg="tag".$i;
+					$tg='tag'.$i;
 					if($$tg)
 					{
-						$dt="datum".$i;
-						$an="aname".$i;
-						$av="avon".$i;
-						$ab="abis".$i;
-						$rn="rname".$i;
-						$rv="rvon".$i;
-						$rb="rbis".$i;
-						$op="opsaal".$i;
-						$dg="diagnosis".$i;
-						$td="tid".$i;
-						$en="enc".$i;
+						$dt='date'.$i;
+						$an='standby_name'.$i;
+						$av='standby_start'.$i;
+						$ab='standby_end'.$i;
+						$rn='oncall_name'.$i;
+						$rv='oncall_start'.$i;
+						$rb='oncall_end'.$i;
+						$op='op_room'.$i;
+						$dg='diagnosis'.$i;
+						$td='report_nr'.$i;
+						$en='encoding'.$i;
+						$hist='history'.$i;
+						
 						if($$td)
 							{
 
 							// $dbuf=htmlspecialchars($dbuf);
 								$sql="UPDATE $dbtable 
-										SET a_name='".$$an."',
-											  a_stime='".$$av."',
-										      a_etime='".$$ab."',
-    						                  r_name='".$$rn."',
-										      r_stime='".$$rv."',
-										      r_etime='".$$rb."',
+										SET standby_name='".$$an."',
+											  standby_start='".convertTimeToStandard($$av)."',
+										      standby_end='".convertTimeToStandard($$ab)."',
+    						                  oncall_name='".$$rn."',
+										      oncall_start='".convertTimeToStandard($$rv)."',
+										      oncall_end='".convertTimeToStandard($$rb)."',
 										      op_room='".$$op."',
-										      diag_therapy='".$$dg."',
-											  encoding='".$$en." ~e=$encoder&a=$a_enc&r=$r_enc&d=".date("d.m.Y")."&t=".date("H.i")."',
-											  tid='".$$td."'
-										WHERE dept='$dept'
-										AND date='$pday.$pmonth.$pyear'
-										AND tid='".$$td."'";
+										      diagnosis_therapy='".htmlspecialchars($$dg)."',
+											  encoding='".$$en." ~e=$encoder&a=$a_enc&r=$r_enc&d=".date('Y-m-d')."&t=".date('H:i:s')."',
+											  history='".$$hist."Updated: ".$history_txt."'
+										WHERE report_nr='".$$td."'";
 											
 								if($ergebnis=mysql_query($sql,$link))
        							{
-									//print $sql." new update <br>";
+									//echo $sql." new update <br>";
 									//mysql_close($link);
 									//header("location:$thisfile?sid=$sid&saved=1&dept=$dept&pmonth=$pmonth&pyear=$pyear");
 								}
 								else
 								{
-									print "$sql <p>";
+									echo "$sql <p>";
 									exit;
 								}//end of else
 							}// end of if rows
@@ -87,48 +97,51 @@ if($link&&$DBLink_OK)
 							{
 							 if($$dt&&($$an||$$rn)&&$$op&&$$dg)
 							  {
+							  
 							  	list($id,$im,$iy)=explode(".",$$dt);
 								if(strlen($id)<2) $id="0".$id;
 								if(strlen($im)<2) $im="0".$im;
-								$srcdt=$iy.$im.$id;
+								
 							 	$sql="INSERT INTO $dbtable 
 									(
 										dept,
 										date,
-										src_date,
-										a_name,
-										a_stime,
-										a_etime,
-										r_name,
-										r_stime,
-										r_etime,
+										standby_name,
+										standby_start,
+										standby_end,
+										oncall_name,
+										oncall_start,
+										oncall_end,
 										op_room,
-										diag_therapy,
-										encoding
+										diagnosis_therapy,
+										encoding,
+										status,
+										history,
+										modify_id,
+										create_id,
+										create_time
 									) 
 									VALUES 
 									( 
 										'".$dept."',
-										'".$$dt."',
-										'".$srcdt."',
+										'".formatDate2STD($$dt,$date_format)."',
 										'".$$an."',
-										'".$$av."',
-										'".$$ab."',
+										'".convertTimeToStandard($$av)."',
+										'".convertTimeToStandard($$ab)."',
 										'".$$rn."',
-										'".$$rv."',
-										'".$$rb."',
+										'".convertTimeToStandard($$rv)."',
+										'".convertTimeToStandard($$rb)."',
 										'".$$op."',
-										'".$$dg."',
-										'e=$encoder&a=$a_enc&r=$r_enc&d=".date("d.m.Y")."&t=".date("H.i")."'
+										'".htmlspecialchars($$dg)."',
+										'e=$encoder&a=$a_enc&r=$r_enc&d=".date('Y-m-d')."&t=".date('H:i:s')."',
+										'pending',
+										'Created: ".$history_txt."',
+										'".$HTTP_COOKIE_VARS[$local_user.$sid]."',
+										'".$HTTP_COOKIE_VARS[$local_user.$sid]."',
+										NULL
 									)";
 
-									if($ergebnis=mysql_query($sql,$link))
-       								{
-										//print $sql." new insert <br>";
-										//mysql_close($link);
-										//header("location:$thisfile?sid=$sid&saved=1&dept=$dept&pmonth=$pmonth&pyear=$pyear&retpath=$retpath&ipath=$ipath");
-									}
-									else print "<p>".$sql."<p>$LDDbNoSave"; 
+									if(!$ergebnis=mysql_query($sql,$link))  echo "<p>".$sql."<p>$LDDbNoSave"; 
 								 } // end of if
 							}// end of else	
 					  } // end of if $$tg
@@ -137,8 +150,8 @@ if($link&&$DBLink_OK)
 		 }// end of if(mode==save)
 		 else
 		 {
-			$sql="SELECT * FROM $dbtable WHERE  src_date='$pyear$pmonth$pday'";
-			if(date(Hi)<830) // if time is early morning recover the data of yesterday
+			$sql="SELECT * FROM $dbtable WHERE  date='$pyear-$pmonth-$pday'";
+			if(date('Hi')<830) // if time is early morning recover the data of yesterday
 			{
 				if ($pday==1)
 				{
@@ -159,9 +172,9 @@ if($link&&$DBLink_OK)
 				{
 						$td=$pday-1; $tm=$pmonth; $ty=$pyear;
 				}
-				$sql.=" OR ( src_date='$ty$tm$td'  AND tid>".$ty.$tm.$td."153000) ORDER BY src_date";
+				$sql.=" OR  date='$ty-$tm-$td'   ORDER BY date";
 			}
-			//print $sql."<br>file found!";
+			//echo $sql."<br>file found!";
 			if($ergebnis=mysql_query($sql,$link))
        		{
 				$rows=0; 
@@ -173,13 +186,13 @@ if($link&&$DBLink_OK)
 				if($rows)
 				{
 					mysql_data_seek($ergebnis,0);
-					//print $sql."<br>file found!";
+					//echo $sql."<br>file found!";
 				}
 			}
-				else print "<p>".$sql."<p>$LDDbNoRead"; 
+				else echo "<p>".$sql."<p>$LDDbNoRead"; 
 	 	}// end of else
 }
-  else { print "$LDDbNoLink<br>"; } 
+  else { echo "$LDDbNoLink<br>"; } 
 
 
 ?>
@@ -187,10 +200,10 @@ if($link&&$DBLink_OK)
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 
 <?php 
-require("../include/inc_css_a_hilitebu.php");
+require('../include/inc_css_a_hilitebu.php');
 ?>
 
 <script language="javascript">
@@ -243,10 +256,12 @@ function isnum(val,idx)
 		{
 		xval2=val.slice(i,i+1);
 		//if (!isNaN(xval3 + xval2)) {xval3=xval3 + xval2;}
+		
+		/* If input is not numeric envoke the auto-date-entry function */
 		if (isNaN(xval2))
 		 {
 			xdoc.elements[idx].value=xval2;
-			setTime(xdoc.elements[idx]);
+			setTime(xdoc.elements[idx],'<?php echo $lang ?>');
 			return;
 			}
 		}
@@ -374,11 +389,15 @@ function gethelp(x,s,x1,x2,x3)
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
+
+<?php require('../include/inc_checkdate_lang.php'); ?>
+
 //-->
 </script>
 
-<script language="javascript" src="../js/setdatetime.js">
-</script>
+<script language="javascript" src="../js/checkdate.js" type="text/javascript"></script>
+
+<script language="javascript" src="../js/setdatetime.js"></script>
 
 </HEAD>
 
@@ -387,9 +406,9 @@ function gethelp(x,s,x1,x2,x3)
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0" >
 <tr valign=top>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>"  height="35"><FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>"  height="35"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG>
  &nbsp;<?php echo "$LDOnCallDuty ".$opabt['$dept']; ?></STRONG></FONT></td>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();"><img src="../img/<?php echo "$lang/$lang" ?>_back2.gif" border=0 width=110 height=24 align="absmiddle" style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="javascript:gethelp('op_duty.php','dutydoc','<?php echo $rows ?>')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 align="absmiddle" style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="<?php echo $breakfile ?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 align="absmiddle" style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();"><img <?php echo createLDImgSrc('../','back2.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="javascript:gethelp('op_duty.php','dutydoc','<?php echo $rows ?>')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc('../','close2.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a></td>
 </tr>
 <tr>
 <td bgcolor=#cde1ec valign=top colspan=2><p>
@@ -405,7 +424,7 @@ function gethelp(x,s,x1,x2,x3)
 
 for ($i=0;$i<sizeof($LDDutyElements);$i++)
 	{
-		print '<td ><FONT    SIZE=-1  FACE="Arial">&nbsp;'.$LDDutyElements[$i].'</FONT></td>';
+		echo '<td ><FONT    SIZE=-1  FACE="Arial">&nbsp;'.$LDDutyElements[$i].'</FONT></td>';
 
 	};
 ?>
@@ -418,83 +437,86 @@ $entries=sizeof($content)+2; $toggle=0;
 
 for ($i=0;$i<$entries;$i++)
 {
-print '
+echo '
 <tr ';
-if($toggle){ print 'bgcolor="#f9f9f9"';}else { print 'bgcolor="#cfcfcf"'; }
+if($toggle){ echo 'bgcolor="#f9f9f9"';}else { echo 'bgcolor="#cfcfcf"'; }
 $toggle=!$toggle;
-print '>
+echo '>
 <td rowspan=2 valign=top>
 	<FONT    SIZE=-1  FACE="Arial">';
-if($content[$i][tid])
-print $content[$i][date].'<input type="hidden" name="datum'.$i.'" value="'.$content[$i][date].'">';
- else print'
-	<input type=text name="datum'.$i.'" size=9 maxlength=10 value="'.$content[$i][date].'" onKeyUp="isgdatum(this.value,this.name);newdata(\''.$i.'\'); ">';
-print '</FONT>
+	
+if($content[$i]['date'])
+echo formatDate2Local($content[$i]['date'],$date_format).'<input type="hidden" name="date'.$i.'" value="'.$content[$i]['date'].'">';
+ else echo'
+	<input type=text name="date'.$i.'" size=9 maxlength=10 value="" onBlur="IsValidDate(this,\''.$date_format.'\')" onKeyUp="setDate(this,\''.$date_format.'\',\''. $lang.'\')">';
+	
+echo '</FONT>
 </td>
 <td >
 	<FONT    SIZE=-1  FACE="Arial" color=#ff0000>
-	<b>A</b>
+	<b>'.$LDStandbyInit.'</b>
 	</FONT>
 </td>
 <td valign=top>
 	<FONT    SIZE=-1  FACE="Arial">
-	<input type=text name="aname'.$i.'" value="'.$content[$i]['a_name'].'" size=20 width=20 onKeyUp=newdata(\''.$i.'\') >
+	<input type=text name="standby_name'.$i.'" value="'.$content[$i]['standby_name'].'" size=20 width=20 onKeyUp=newdata(\''.$i.'\') >
 	</FONT>
 </td>
 <td valign=top>
 	<FONT    SIZE=-1  FACE="Arial">
-	<input type=text name="avon'.$i.'" value="'.$content[$i]['a_stime'].'" size=5 maxlength=5 onKeyUp="isnum(this.value,this.name);newdata(\''.$i.'\');">
+	<input type=text name="standby_start'.$i.'" value="'.convertTimeToLocal($content[$i]['standby_start']).'" size=5 maxlength=5 onKeyUp="isnum(this.value,this.name);newdata(\''.$i.'\');">
 	</FONT>
 </td>
 <td valign=top>
 	<FONT    SIZE=-1  FACE="Arial">
-	<input type=text name="abis'.$i.'" value="'.$content[$i]['a_etime'].'" size=5 maxlength=5  onKeyUp="isnum(this.value,this.name);newdata(\''.$i.'\');">
+	<input type=text name="standby_end'.$i.'" value="'.convertTimeToLocal($content[$i]['standby_end']).'" size=5 maxlength=5  onKeyUp="isnum(this.value,this.name);newdata(\''.$i.'\');">
 	</FONT>
 </td>
 <td rowspan=2 valign=top>
 	<FONT    SIZE=-1  FACE="Arial">
-	<input type=text name="opsaal'.$i.'" size=3 value="';
+	<input type=text name="op_room'.$i.'" size=3 value="';
 	
-if($content[$i]['op_room']) print $content[$i]['op_room']; else print $saal;
+if($content[$i]['op_room']) echo $content[$i]['op_room']; else echo $saal;
 
-print '" onKeyUp=newdata(\''.$i.'\')>
+echo '" onKeyUp=newdata(\''.$i.'\')>
 </FONT>
 </td>
 <td  rowspan="2">
 	<FONT    SIZE=-1  FACE="Arial">
-	<textarea  name="diagnosis'.$i.'" cols="30" rows="2" onKeyUp=newdata(\''.$i.'\')>'.$content[$i]['diag_therapy'].'</textarea>
+	<textarea  name="diagnosis'.$i.'" cols="30" rows="2" onKeyUp=newdata(\''.$i.'\')>'.$content[$i]['diagnosis_therapy'].'</textarea>
 	</FONT>
 </td>
 </tr>
 
 <tr ';
-if(!$toggle){ print 'bgcolor="#f9f9f9"';}else { print 'bgcolor="#cfcfcf"'; }
+if(!$toggle){ echo 'bgcolor="#f9f9f9"';}else { echo 'bgcolor="#cfcfcf"'; }
 
-print '>
+echo '>
 <td >
 	<FONT    SIZE=-1  FACE="Arial" color=green>
-	<b>R</b>
+	<b>'.$LDOncallInit.'</b>
 	</FONT>
 </td>
 <td valign=top>
 	<FONT    SIZE=-1  FACE="Arial">
-	<input type=text name="rname'.$i.'" value="'.$content[$i]['r_name'].'" size=20 width=20 onKeyUp=newdata(\''.$i.'\')>
+	<input type=text name="oncall_name'.$i.'" value="'.$content[$i]['oncall_name'].'" size=20 width=20 onKeyUp=newdata(\''.$i.'\')>
 	</FONT>
 </td>
 <td valign=top>
 	<FONT    SIZE=-1  FACE="Arial">
-	<input type=text name="rvon'.$i.'" value="'.$content[$i]['r_stime'].'" size=5  maxlength=5 onKeyUp="isnum(this.value,this.name);newdata(\''.$i.'\');">
+	<input type=text name="oncall_start'.$i.'" value="'.convertTimeToLocal($content[$i]['oncall_start']).'" size=5  maxlength=5 onKeyUp="isnum(this.value,this.name);newdata(\''.$i.'\');">
 	</FONT>
 </td>
 <td valign=top>
 	<FONT    SIZE=-1  FACE="Arial">
-	<input type=text name="rbis'.$i.'" value="'.$content[$i]['r_etime'].'" size=5  maxlength=5 onKeyUp="isnum(this.value,this.name);newdata(\''.$i.'\');"> 
+	<input type=text name="oncall_end'.$i.'" value="'.convertTimeToLocal($content[$i]['oncall_end']).'" size=5  maxlength=5 onKeyUp="isnum(this.value,this.name);newdata(\''.$i.'\');"> 
 	</FONT>
-	<input type="hidden" name="tid'.$i.'" value="'.$content[$i]['tid'].'">
-	<input type="hidden" name="enc'.$i.'" value="'.$content[$i]['encoding'].'">
+	<input type="hidden" name="report_nr'.$i.'" value="'.$content[$i]['report_nr'].'">
+	<input type="hidden" name="encoding'.$i.'" value="'.$content[$i]['encoding'].'">
+	<input type="hidden" name="history'.$i.'" value="'.$content[$i]['history'].'">
 	<input type="hidden" name="tag'.$i.'" value="';
-if($content[$i][tid]) print '1';
-print '">
+if($content[$i]['tid']) echo '1';
+echo '">
 </td>
 </tr>
 ';
@@ -534,13 +556,17 @@ print '">
 <input type="hidden" name="encoder" value="<?php echo $encoder ?>">
 <input type="hidden" name="retpath" value="<?php echo $retpath ?>">
 <input type="hidden" name="mode" value="save">
-<input type=submit value="<?php echo $LDSave ?>">  
+<!-- <input type=submit value="<?php echo $LDSave ?>">  
+ -->
+ <input type="image" <?php echo createLDImgSrc('../','savedisc.gif','0','absmiddle') ?>>  
 <input type=reset value="<?php echo $LDReset ?>" onClick=winreset()>
 </td>
 <td align="right">
 
-<INPUT TYPE="BUTTON" VALUE="<?php echo $LDPrint ?>" ONCLICK="if (window.print) {window.print();} else {window.alert('<?php echo $LDAlertNoPrinter ?>');}">
-&nbsp;&nbsp;<a href="javascript:closeifok()"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 align=absmiddle></a>
+<!-- <INPUT TYPE="BUTTON" VALUE="<?php echo $LDPrint ?>" ONCLICK="if (window.echo) {window.echo();} else {window.alert('<?php echo $LDAlertNoechoer ?>');}">
+ -->
+ <img <?php echo createLDImgSrc('../','printout.gif','0','absmiddle') ?> ONCLICK="if (window.print) {window.print();} else {window.alert('<?php echo $LDAlertNoechoer ?>');}">
+&nbsp;&nbsp;<a href="javascript:closeifok()"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> align=absmiddle></a>
 </td>
 </tr>
 </table>
@@ -556,8 +582,9 @@ print '">
 <tr>
 <td bgcolor=silver height=70 colspan=2>
 <?php
-require("../language/$lang/".$lang."_copyrite.php");
- ?>
+if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
+include('../language/'.$lang.'/'.$lang.'_copyrite.php');
+  else include('../language/en/en_copyrite.php');?>
 </td>
 </tr>
 </table>        

@@ -1,29 +1,35 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","tech.php");
-define("NO_2LEVEL_CHK",1);
-require("../include/inc_front_chain_lang.php");
+define('LANG_FILE','tech.php');
+define('NO_2LEVEL_CHK',1);
+require_once('../include/inc_front_chain_lang.php');
 
-$thisfile="technik-fragebot.php";
-$dbtable="tech_questions";
+$thisfile='technik-fragebot.php';
+$dbtable='care_tech_questions';
 
 $rows=0;
-require("../include/inc_db_makelink.php");
+/* Establish db connection */
+require('../include/inc_db_makelink.php');
 if($link&&$DBLink_OK) 
-		{
+{
+
+    /* Load the date formatter */
+    include_once('../include/inc_date_format_functions.php');
+    
+
 		 switch($mode)
 		 {
-			case "answer":
+			case 'answer':
 				{
-				$sql='UPDATE '.$dbtable.' SET  tid="'.$tid.'", reply="'.$reply.'", answered=1, ansby="'.$von.'", astamp="'.date("d.m.Y H.m").'"
+				$sql='UPDATE '.$dbtable.' SET  tid="'.$tid.'", reply="'.htmlspecialchars($reply).'", answered=1, ansby="'.htmlspecialchars($von).'", astamp="'.date('Y-m-d H:i:s').'"
 							WHERE dept="'.$dept.'" 
 								AND inquirer="'.$inquirer.'" 
 								AND tdate="'.$tdate.'"
@@ -44,12 +50,12 @@ if($link&&$DBLink_OK)
 								$saved=true; 
 								$inhalt=mysql_fetch_array($ergebnis);
 							}
-							else {print "<p>".$sql."$LDDbNoRead<br>"; };
+							else {echo "<p>".$sql."$LDDbNoRead<br>"; };
 					}
-					else {print "<p>".$sql."$LDDbNoUpdate<br>"; };
+					else {echo "<p>".$sql."$LDDbNoUpdate<br>"; };
 					break;
 				}
-			case "read":
+			case 'read':
 				{
 					$sql='SELECT * FROM '.$dbtable.' 
 							WHERE dept="'.$dept.'" 
@@ -63,10 +69,10 @@ if($link&&$DBLink_OK)
 						$saved=true;
 						$inhalt=mysql_fetch_array($ergebnis);
 					}
-					else {print "<p>".$sql."$LDDbNoRead<br>"; };
+					else {echo "<p>".$sql."$LDDbNoRead<br>"; };
 					break;
 				}
-			case "archive":
+			case 'archive':
 				{
 				$sql='UPDATE '.$dbtable.' SET  tid="'.$tid.'", archive=1
 							WHERE dept="'.$dept.'" 
@@ -74,7 +80,7 @@ if($link&&$DBLink_OK)
 								AND tdate="'.$tdate.'"
 								AND ttime="'.$ttime.'"
 								AND tid="'.$tid.'"';
-					if(!mysql_query($sql,$link)) {print "<p>".$sql."$LDDbNoUpdate<br>"; };
+					if(!mysql_query($sql,$link)) {echo "<p>".$sql."$LDDbNoUpdate<br>"; };
 					 break;
 					}// end of case "archive":
 
@@ -87,23 +93,42 @@ if($link&&$DBLink_OK)
 					while ($content=mysql_fetch_array($ergebnis)) $rows++;					
 					//reset result
 					if ($rows)	mysql_data_seek($ergebnis,0);
-				}else {print "<p>".$sql."$LDDbNoRead<br>"; };
-			//print $sql;
+				}else {echo "<p>".$sql."$LDDbNoRead<br>"; };
+			//echo $sql;
 		}
-  		 else { print "$LDDbNoLink<br>"; } 
+  		 else { echo "$LDDbNoLink<br>"; } 
 ?>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<?php if(!isset($mode)||empty($mode)) print '<meta http-equiv="refresh" content="30, url: technik-fragebot.php">'; ?>
+<?php echo setCharSet(); ?>
+<?php if(!isset($mode)||empty($mode)) echo '<meta http-equiv="refresh" content="30, url: technik-fragebot.php">'; ?>
 <title><?php echo $LDQBotActivate ?></title>
 <script language=javascript>
+
+function chkForm(d)
+{
+   if(d.reply.value=='' || d.reply.value==' ')
+   {
+       return false;
+   }
+   else if(d.von.value=='' || d.von.value==' ')
+   {
+      alert('<?php echo $LDAlertName ?>');
+	  d.von.focus(); 
+	  return false;
+    }
+	else
+	{
+	   return true;
+	}
+}
+
 function goactive()
 	{
 <?php
-if (!$nofocus) print "	
+if (!$nofocus) echo '	
  	self.focus();
- 	";
+ 	';
 	if($nofocus) $nofocus=0; // toggle it to reset 	
 ?>
 	self.resizeTo(800,600);
@@ -111,8 +136,8 @@ if (!$nofocus) print "
 	
 function show_order(d,o,s,t)
 {
-	url="technik-fragebot-print.php?sid=<?php print"$sid&lang=$lang"; ?>&dept="+d+"&tdate="+o+"&ttime="+s+"&tid="+t;
-	frageprintwin=window.open(url,"frageprintwin","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
+	url="technik-fragebot-print.php?sid=<?php echo"$sid&lang=$lang"; ?>&dept="+d+"&tdate="+o+"&ttime="+s+"&tid="+t;
+	frageechowin=window.open(url,"frageprintwin","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
 }
 </script>
 <style type="text/css" name="s2">
@@ -120,35 +145,30 @@ td.vn { font-family:verdana,arial; color:#000088; font-size:12;background-color:
 </style>
 
 </head>
-<body <?php 	if($rows) print " bgcolor=#ffffee  onLoad=goactive() "; else print " bgcolor=#006600"; ?>
-	>
-<font face="Verdana, Arial" size=2 color=#800000>
-<MARQUEE dir=ltr scrollAmount=3 scrollDelay=120 width=150
-      height=10 align="middle"><b><?php echo $LDImQBot ?>...</b></MARQUEE></font>
-<p>
+<body <?php 	if($rows) echo " bgcolor=#ffffee  onLoad=goactive() "; else echo " bgcolor=#006600"; ?>>
 <?php if(($mode!="")&&($saved))
 	{	
-		print '<table cellspacing=0 cellpadding=1 border=0 bgcolor="#999999" align=center>
+		echo '<table cellspacing=0 cellpadding=1 border=0 bgcolor="#999999" align=center>
 				<tr>
 				<td>
 				<table  cellspacing=0 cellpadding=2 >
 				<tr><td bgcolor=#999999 >	<FONT  SIZE=2 FACE="verdana,Arial" color=white>';
-		print "<b>$LDInquiry $LDFrom ".$inhalt['inquirer']." ".$LDOn." ".$inhalt['tdat']." ".$LDAt." ".$inhalt['ttime']." ".$LDOClock." ".$LDTelephoneNr.": ".$inhalt['tphone']."</b>";
-		print '	</td>
+		echo "<b>$LDInquiry $LDFrom ".$inhalt['inquirer']." ".$LDOn." ".formatDate2Local($inhalt['tdate'],$date_format)." ".$LDAt." ".convertTimeToLocal($inhalt['ttime'])." ".$LDOClock." ".$LDTelephoneNr.": ".$inhalt['tphone']."</b>";
+		echo '	</td>
 				</tr>
 				<tr><td class="vn">';
-		print "	\" ".nl2br($inhalt[query])." \"</td></tr> ";
+		echo "	\" ".nl2br($inhalt['query'])." \"</td></tr> ";
 		
-			print '	<tr><td bgcolor=#999999 >	<FONT  SIZE=2 FACE="verdana,Arial" color=white>';
+			echo '	<tr><td bgcolor=#999999 >	<FONT  SIZE=2 FACE="verdana,Arial" color=white>';
 
-		if($inhalt['answered'])	print "	<b>$LDReply $LDFrom ".$inhalt['ansby']." ".$LDOn." ".$inhalt['astamp']." :</b>";
-		 	else print "	<b>$LDYourReply :</b>";
-			print '	</td>
+		if($inhalt['answered'])	echo "	<b>$LDReply $LDFrom ".$inhalt['ansby']." ".$LDOn." ".formatDate2Local($inhalt['astamp'],$date_format)." ".convertTimeToLocal(formatDate2Local($inhalt['astamp'],$date_format,0,1)).":</b>";
+		 	else echo "	<b>$LDYourReply :</b>";
+			echo '	</td>
 					</tr>
 					<tr><td class="vn">';
-		if(isset($mode)&&($mode=="read"))
+		if(isset($mode)&&($mode=='read'))
 		{
-			print '	<form action="'.$thisfile.'" method="post" name="repform">
+			echo '	<form action="'.$thisfile.'" method="post" name="repform" onSubmit="return chkForm(this)">
 						<textarea name="reply" cols=70 rows=10 wrap="physical">'.$inhalt['reply'].'</textarea><br>
 						'.$LDAlertName.'<br>
 						<input type="text" name="von" size=25 maxlength=40 value="'.$inhalt['ansby'].'"><br>
@@ -164,7 +184,7 @@ td.vn { font-family:verdana,arial; color:#000088; font-size:12;background-color:
 						<input type="hidden" name="tid" value="'.$inhalt['tid'].'">
       					</form>';
 		}
-		else print '<i>"'.nl2br($inhalt['reply']).'"</i><br>
+		else echo '<i>"'.nl2br($inhalt['reply']).'"</i><br>
 			<form action="'.$thisfile.'" method="get" name="closer">
 			<input type="submit" value="'.$LDClose.'">
 			<input type="hidden" name="dept" value="'.$inhalt['dept'].'">
@@ -172,37 +192,37 @@ td.vn { font-family:verdana,arial; color:#000088; font-size:12;background-color:
 			<input type="hidden" name="lang" value="'.$lang.'">
 			<input type="hidden" name="showlist" value="'.$showlist.'">
 			</form>';
-			print '</td> 
+			echo '</td> 
 				</tr>';
 
-		print '
+		echo '
 				</table>
 
 				</td>
 				</tr>
 				</table>';
-		print "<hr>";
+		echo "<hr>";
 	}
 
 
-//print "$rows <br>";
+//echo "$rows <br>";
 if($rows)
 {
 	if($showlist)
 	{
-	print '<center><font face=Verdana,Arial size=2>';
-			if ($rows>1) print $LDNewInquiryMany; else print $LDNewInquiry; 
-			print'.<br> '.$LDClk2Reply.'<br></font><p>';
+	echo '<center><font face=Verdana,Arial size=2>';
+			if ($rows>1) echo $LDNewInquiryMany; else echo $LDNewInquiry; 
+			echo'.<br> '.$LDClk2Reply.'<br></font><p>';
 
 		$tog=1;
-		print '
+		echo '
 				<table border=0 cellspacing=0 cellpadding=0 bgcolor="#666666"><tr><td>
 				<table border=0 cellspacing=1 cellpadding=3>
   				<tr bgcolor="#ffffff">';
 		for ($i=0;$i<sizeof($queryindex);$i++)
-		print '
+		echo '
 				<td><font face=Verdana,Arial size=2 color="#000080">'.$queryindex[$i].'</td>';
-		print '
+		echo '
 				</tr>';	
 
 		$i=$rows;
@@ -210,39 +230,40 @@ if($rows)
 		while($content=mysql_fetch_array($ergebnis))
  		{
 			if($tog)
-			{ print '<tr bgcolor="#dddddd">'; $tog=0; }else{ print '<tr bgcolor="#efefff">'; $tog=1; }
-			print'
+			{ echo '<tr bgcolor="#dddddd">'; $tog=0; }else{ echo '<tr bgcolor="#efefff">'; $tog=1; }
+			echo'
 				<td><font face=Verdana,Arial size=2>'.$i.'</td>
 				<td><a href="technik-fragebot.php?sid='.$sid.'&lang='.$lang.'&dept='.$content['dept'].'&inquirer='.$content['inquirer'].'&tdate='.$content['tdate'].'&ttime='.$content['ttime'].'&tid='.$content['tid'].'&mode=read&showlist=1">
-						<img src="../img/upArrowGrnLrg.gif" width=16 height=16 border=0 alt="'.$LDShow.'"></a></td>
+						<img '.createComIcon('../','uparrowgrnlrg.gif','0').' alt="'.$LDShow.'"></a></td>
 				<td ><font face=Verdana,Arial size=2>'.$content['inquirer'].' </td>
 				<td ><font face=Verdana,Arial size=2>'.strtoupper($content['dept']).' </td>
 				<td><font face=Verdana,Arial size=2>';
-			//$buf=explode(".",$content[tdate]);
-			//print $buf[2].'.'.$buf[1].'.'.$buf[0].'</td>
-			print $content[tdate].'</td>
-				 <td><font face=Verdana,Arial size=2>'.str_replace("24","00",$content['ttime']).'</td>
+
+
+			echo formatDate2Local($content['tdate'],$date_format).'</td>
+				 <td><font face=Verdana,Arial size=2>'.convertTimeToLocal(str_replace('24','00',$content['ttime'])).'</td>
 				<td align="center">';
-			if($content[answered])
+
+			if($content['answered'])
 				{
-					 print '<a href="technik-fragebot.php?sid='.$sid.'&lang='.$lang.'&dept='.$content['dept'].'&inquirer='.$content['inquirer'].'&tdate='.$content['tdate'].'&ttime='.$content['ttime'].'&tid='.$content['tid'].'&mode=archive&showlist=1">
-					 <img src="../img/bul_arrowgrnlrg.gif" width=16 height=16 border=0 alt="'.$LDMove2Archive.'"></a>';
+					 echo '<a href="technik-fragebot.php?sid='.$sid.'&lang='.$lang.'&dept='.$content['dept'].'&inquirer='.$content['inquirer'].'&tdate='.$content['tdate'].'&ttime='.$content['ttime'].'&tid='.$content['tid'].'&mode=archive&showlist=1">
+					 <img '.createComIcon('../','bul_arrowgrnlrg.gif','0').' alt="'.$LDMove2Archive.'"></a>';
 				}
 
-			print '
+			echo '
 					</td>
 				</tr>';
 			$i--;
 
  		}
-		print '
+		echo '
 			</table>
 			</td></tr></table>
 			</center>';
 	}
 	else 
 	{
- 	print '<center><img src="../img/nedr.gif" width=100 height=138  border=0 align=middle>
+ 	echo '<center><img '.createMascot('../','mascot2_r.gif','0','middle').'>
 			<font face="Verdana, Arial" size=3 color=#ff0000>
 			&nbsp;<b>'.$LDInquiryArrived.'</b><p>
 			<form name=ack>
@@ -259,12 +280,23 @@ if($rows)
 else if($showlist) 
 	{	
 		$showlist=0;
-		print '
+		echo '
 				<script language=javascript>
 				self.resizeTo(300,150);
-				window.location.replace("technik-fragebot.php?='.$sid.'&lang='.$lang.'&dept='.$dept.'");
 				</script>';
 	}
+	else
+	{
+	    echo '<img '.createComIcon('../','butft2_d.gif').'>';
+?>
+<font face="Verdana, Arial" size=2 color=#800000>
+<MARQUEE dir=ltr scrollAmount=3 scrollDelay=120 width=150
+      height=10 align="middle"><b><?php echo $LDImQBot ?>...</b></MARQUEE></font>
+<p>
+
+<?php
+
+}
 ?>
 </body>
 </html>

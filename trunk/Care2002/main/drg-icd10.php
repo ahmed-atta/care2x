@@ -1,122 +1,146 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","drg.php");
-$local_user="ck_op_pflegelogbuch_user";
-require("../include/inc_front_chain_lang.php");
+define('LANG_FILE','drg.php');
+$local_user='ck_op_pflegelogbuch_user';
+require_once('../include/inc_front_chain_lang.php');
 
-require("../language/".$lang."/lang_".$lang."_drg.php");
-require("../include/inc_config_color.php");
+/* Load additional language table */
+/*if(file_exists('../language/'.$lang.'/lang_'.$lang.'_drg.php')) include_once('../language/'.$lang.'/lang_'.$lang.'_drg.php');
+ else include_once('../language/en/lang_en_drg.php');
+*/
+require_once('../include/inc_config_color.php');
 
 $toggle=0;
-$thisfile="drg-icd10.php";
-if($opnr)
+$thisfile='drg-icd10.php';
+if(isset($opnr) && $opnr)
 {
-	include("../include/inc_db_makelink.php");
+	include('../include/inc_db_makelink.php');
 	if($link&&$DBLink_OK) 
 	{	
-		$dbtable="nursing_op_logbook";
-				$sql="SELECT icd_code  FROM $dbtable WHERE op_nr='$opnr' AND patnum='$pn' AND dept='$dept' AND op_room='$oprm'";
-        		$ergebnis=mysql_query($sql,$link);
-				$linecount=0;
-				if($ergebnis)
-       			{
-					if ($zeile=mysql_fetch_array($ergebnis)) $linecount++;
-					if($linecount)
-					{
-						mysql_data_seek($ergebnis,0);
-						switch($mode)
-						{
-							case "delete": 
-												$zeile=mysql_fetch_array($ergebnis);
-												$linebuf=trim($zeile[icd_code]);
-												if($linebuf=="") break;
+		$dbtable='care_nursing_op_logbook';
+		
+		$sql="SELECT icd_code  FROM $dbtable WHERE op_nr='$opnr' AND patnum='$pn' AND dept='$dept' AND op_room='$oprm'";
+				
+        $ergebnis=mysql_query($sql,$link);
+		$linecount=0;
+		if($ergebnis)
+       	{
+			if ($zeile=mysql_fetch_array($ergebnis)) $linecount++;
+			if($linecount)
+			{
+				mysql_data_seek($ergebnis,0);
+				switch($mode)
+				{
+					case "delete": 
+										$zeile=mysql_fetch_array($ergebnis);
+										$linebuf=trim($zeile[icd_code]);
+										
+										if($linebuf=="") break;
+										
+										$arrbuf=explode("~",$linebuf);
+										array_unique($arrbuf);
+										array_splice($arrbuf,$item,1);
+										
+										$linebuf=addslashes(implode("~",$arrbuf));
+										
+										$sql="UPDATE $dbtable SET icd_code='$linebuf' WHERE patnum='$pn' AND op_nr='$opnr' AND dept='$dept' AND op_room='$oprm'";
+        								
+										if($ergebnis=mysql_query($sql,$link)) 
+										{
+											header("location:$thisfile?sid=$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=1");
+											exit;
+										}
+										else {echo "<p>".$sql."<p>$LDDbNoWrite";};
+										
+										break;
+										
+					case "update_stat":
+					
+										$sql="SELECT icd_code FROM $dbtable WHERE patnum='$pn' AND op_nr='$opnr' AND dept='$dept' AND op_room='$oprm'";
+        								
+										if($ergebnis=mysql_query($sql,$link)) 
+										{
+											if($zeile=mysql_fetch_array($ergebnis))
+											{
+												$linebuf=str_replace("&stat=1","&stat=2",$zeile[icd_code]);
 												$arrbuf=explode("~",$linebuf);
-												array_unique($arrbuf);
-												array_splice($arrbuf,$item,1);
-												$linebuf=addslashes(implode("~",$arrbuf));
+												//$arrbuf[$itemx]=str_replace("&stat=2","&stat=1",$arrbuf[$itemx]);
+												parse_str($arrbuf[$itemx],$parsed);
+												$arrbuf[$itemx]="code=$parsed[code]&cat=$parsed[cat]&des=$parsed[des]&stat=1&loc=$parsed[loc]&byna=$parsed[byna]&bynr=$parsed[bynr]";
+												
+												if($itemx!=0)
+												{
+													$helpbuf=$arrbuf[$itemx];
+													$arrbuf[$itemx]=$arrbuf[0];													
+													$arrbuf[0]=$helpbuf;
+												}
+												
+												$linebuf=implode("~",$arrbuf);
+														
 												$sql="UPDATE $dbtable SET icd_code='$linebuf' WHERE patnum='$pn' AND op_nr='$opnr' AND dept='$dept' AND op_room='$oprm'";
-        										if($ergebnis=mysql_query($sql,$link)) 
+        										
+												if($ergebnis=mysql_query($sql,$link)) 
 												{
 													header("location:$thisfile?sid=$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=1");
 													exit;
 												}
-												else {print "<p>".$sql."<p>$LDDbNoWrite";};
-											break;
-							case "update_stat":
-												$sql="SELECT icd_code FROM $dbtable WHERE patnum='$pn' AND op_nr='$opnr' AND dept='$dept' AND op_room='$oprm'";
-        										if($ergebnis=mysql_query($sql,$link)) 
-												{
-													if($zeile=mysql_fetch_array($ergebnis))
-													{
-														$linebuf=str_replace("&stat=1","&stat=2",$zeile[icd_code]);
-														$arrbuf=explode("~",$linebuf);
-														//$arrbuf[$itemx]=str_replace("&stat=2","&stat=1",$arrbuf[$itemx]);
-														parse_str($arrbuf[$itemx],$parsed);
-														$arrbuf[$itemx]="code=$parsed[code]&cat=$parsed[cat]&des=$parsed[des]&stat=1&loc=$parsed[loc]&byna=$parsed[byna]&bynr=$parsed[bynr]";
-														if($itemx!=0)
-														{
-															$helpbuf=$arrbuf[$itemx];
-															$arrbuf[$itemx]=$arrbuf[0];													
-															$arrbuf[0]=$helpbuf;
-														}
-														$linebuf=implode("~",$arrbuf);
+												else {echo "<p>".$sql."<p>$LDDbNoWrite";};
+											}
+										}
+										else {echo "<p>".$sql."<p>$LDDbNoWrite";};
+										
+										break;
+										
+					case "update_loc":
+										
+										$sql="SELECT icd_code FROM $dbtable WHERE patnum='$pn' AND op_nr='$opnr' AND dept='$dept' AND op_room='$oprm'";
+        								
+										if($ergebnis=mysql_query($sql,$link)) 
+										{
+											if($zeile=mysql_fetch_array($ergebnis))
+											{
+												$arrbuf=explode("~",$zeile[icd_code]);
+												parse_str($arrbuf[$itemx],$parsed);
+												$arrbuf[$itemx]="code=$parsed[code]&cat=$parsed[cat]&des=$parsed[des]&stat=$parsed[stat]&loc=$val&byna=$parsed[byna]&bynr=$parsed[bynr]";
+												$linebuf=implode("~",$arrbuf);
 														
-														$sql="UPDATE $dbtable SET icd_code='$linebuf' WHERE patnum='$pn' AND op_nr='$opnr' AND dept='$dept' AND op_room='$oprm'";
-        												if($ergebnis=mysql_query($sql,$link)) 
-														{
-															header("location:$thisfile?sid=$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=1");
-															exit;
-														}
-														else {print "<p>".$sql."<p>$LDDbNoWrite";};
-													
-													}
-												}
-												else {print "<p>".$sql."<p>$LDDbNoWrite";};
-											break;
-							case "update_loc":
-												$sql="SELECT icd_code FROM $dbtable WHERE patnum='$pn' AND op_nr='$opnr' AND dept='$dept' AND op_room='$oprm'";
-        										if($ergebnis=mysql_query($sql,$link)) 
+												$sql="UPDATE $dbtable SET icd_code='$linebuf' WHERE patnum='$pn' AND op_nr='$opnr' AND dept='$dept' AND op_room='$oprm'";
+        										
+												if($ergebnis=mysql_query($sql,$link)) 
 												{
-													if($zeile=mysql_fetch_array($ergebnis))
-													{
-														$arrbuf=explode("~",$zeile[icd_code]);
-														parse_str($arrbuf[$itemx],$parsed);
-														$arrbuf[$itemx]="code=$parsed[code]&cat=$parsed[cat]&des=$parsed[des]&stat=$parsed[stat]&loc=$val&byna=$parsed[byna]&bynr=$parsed[bynr]";
-														$linebuf=implode("~",$arrbuf);
-														
-														$sql="UPDATE $dbtable SET icd_code='$linebuf' WHERE patnum='$pn' AND op_nr='$opnr' AND dept='$dept' AND op_room='$oprm'";
-        												if($ergebnis=mysql_query($sql,$link)) 
-														{
-															header("location:$thisfile?sid=$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=1");
-															exit;
-														}
-														else {print "<p>".$sql."<p>$LDDbNoWrite";};
-													
-													}
+													header("location:$thisfile?sid=$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=1");
+													exit;
 												}
-												else {print "<p>".$sql."<p>$LDDbNoWrite";};
-											break;
-						}
-					}
+												else {echo "<p>".$sql."<p>$LDDbNoWrite";};
+													
+											}
+										}
+										else {echo "<p>".$sql."<p>$LDDbNoWrite";};
+										
+										break;
+						} // end of switch
+					} // end of if($linecount)
 				}
-				 else {print "<p>".$sql."<p>$LDDbNoRead";};
-		}
+				 else {echo "<p>".$sql."<p>$LDDbNoRead";}; // end of if($ergebnis)
+		} // end of if($link)
 }	
 $uid="$dept_$oprm_$pn_$opnr"; 
+/* Load the icon images */
+$img_delete=createComIcon('../','delete2.gif','0','right');
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
  <TITLE></TITLE>
  
   <script language="javascript">
@@ -163,7 +187,7 @@ function openQuicklist(t)
 </script>
  
   <?php 
-require("../include/inc_css_a_hilitebu.php");
+require('../include/inc_css_a_hilitebu.php');
 ?>
 <?php if($newsave) : ?>
  <script language="javascript" >
@@ -173,15 +197,15 @@ window.parent.opener.location.href='<?php echo "oploginput.php?sid=$sid&lang=$la
 </HEAD>
 
 <BODY 
-<?php if($display=="composite") print 'topmargin=0 marginheight=0 leftmargin=0 marginwidth=0';
-else  print 'topmargin=2 marginheight=2';
+<?php if($display=="composite") echo 'topmargin=0 marginheight=0 leftmargin=0 marginwidth=0';
+else  echo 'topmargin=2 marginheight=2';
 ?>
- onLoad="if(window.focus) window.focus()" bgcolor=<?php print $cfg['body_bgcolor']; ?>
- bgcolor=<?php print $cfg['body_bgcolor']; ?>
-<?php if (!$cfg['dhtml']){ print ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+ onLoad="if(window.focus) window.focus()" bgcolor=<?php echo $cfg['body_bgcolor']; ?>
+ bgcolor=<?php echo $cfg['body_bgcolor']; ?>
+<?php if (!$cfg['dhtml']){ echo ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 <form>
 <?php if($display!="composite") : ?>
-<a href="javascript:window.history.back()" ><img src="../img/<?php echo "$lang/$lang" ?>_back2.gif" border=0 width=110 height=24 align="right"></a>
+<a href="javascript:window.history.back()" ><img <?php echo createLDImgSrc('../','back2.gif','0') ?> width=110 height=24 align="right"></a>
 <FONT    SIZE=3  FACE="verdana,Arial" color="#0000aa">
 <b><?php echo $LDIcd10 ?></b></font>&nbsp;
 <!--  <input type="button" value="<?php echo $LDSearch4ICD10 ?>" onClick="javascript:openICDsearch('','0')">&nbsp;
@@ -218,9 +242,9 @@ if ($linecount>0)
 							{
 								parse_str(trim($arrbuf[$i]),$parsedline);
 								if($parsedline[stat]=="1") $fcolor="#0000ff"; else $fcolor="#000000";
-								print "<tr bgcolor=";
-								if($toggle) { print "#efefef>"; $toggle=0;} else {print "#ffffff>"; $toggle=1;};
-								print '
+								echo "<tr bgcolor=";
+								if($toggle) { echo "#efefef>"; $toggle=0;} else {echo "#ffffff>"; $toggle=1;};
+								echo '
 								<td><font face=arial size=2><a href="javascript:openICDsearch(\''.$parsedline[code].'\',\'1\')">'.stripslashes($parsedline[code]).'</a>
 								</td>
 								<td><font face=arial size=2 color="'.$fcolor.'">'.stripslashes($parsedline[cat]).'
@@ -228,29 +252,29 @@ if ($linecount>0)
 								<td><font face=arial size=2 color="'.$fcolor.'">'.stripslashes($parsedline[des]).'
 								</td>
 								<td><font face=arial size=2  color="'.$fcolor.'">';
-								if($parsedline[stat]=="1") print "<b>$LDMain</b>";
+								if($parsedline[stat]=="1") echo "<b>$LDMain</b>";
 								elseif($display=="composite")
 								{
 ?>
 								<select name="opstat_<?php echo $i ?>"  onChange="makeChange(this.value,'<?php echo $i ?>','update_stat')">
- 						       	<option value="1" <?php if($parsedline[stat]=="1") print "selected"; ?>><?php echo $LDMain ?></option>
-        						<option value="2" <?php if(($parsedline[stat]=="2")||!$parsedline[stat]) print "selected"; ?>><?php echo $LDAux ?></option>
+ 						       	<option value="1" <?php if($parsedline[stat]=="1") echo "selected"; ?>><?php echo $LDMain ?></option>
+        						<option value="2" <?php if(($parsedline[stat]=="2")||!$parsedline[stat]) echo "selected"; ?>><?php echo $LDAux ?></option>
         						</select>
 <?php
 /*								<font face=arial size=2>'.stripslashes($parsedline[stat]).'
 */								
 								}
-								else print $LDAux;
-								print '</td>
+								else echo $LDAux;
+								echo '</td>
 								<td>';
 								if($display!="composite")
 								{
-									print '<font face=arial size=2  color="'.$fcolor.'">';
+									echo '<font face=arial size=2  color="'.$fcolor.'">';
 									switch($parsedline[loc])
 									{
-										case "r": print $LDRight; break;
-										case "l": print $LDLeft; break;
-										case "b": print $LDBoth; break;
+										case "r": echo $LDRight; break;
+										case "l": echo $LDLeft; break;
+										case "b": echo $LDBoth; break;
 									}
 								}
 								else
@@ -258,26 +282,26 @@ if ($linecount>0)
 ?>
 								<select name="local_<?php echo $i ?>"  onChange="makeChange(this.value,'<?php echo $i ?>','update_loc')">
         						<option value="">  </option>
- 						       	<option value="r" <?php if($parsedline[loc]=="r") print "selected"; ?>><?php echo $LDRight ?></option>
-        						<option value="l" <?php if($parsedline[loc]=="l") print "selected"; ?>><?php echo $LDLeft ?></option>
-        						<option value="b" <?php if($parsedline[loc]=="b") print "selected"; ?>><?php echo $LDBoth ?></option>
+ 						       	<option value="r" <?php if($parsedline[loc]=="r") echo "selected"; ?>><?php echo $LDRight ?></option>
+        						<option value="l" <?php if($parsedline[loc]=="l") echo "selected"; ?>><?php echo $LDLeft ?></option>
+        						<option value="b" <?php if($parsedline[loc]=="b") echo "selected"; ?>><?php echo $LDBoth ?></option>
         						</select>
 								
 <?php       
 /*								<font face=arial size=2>'.stripslashes($parsedline[loc]).'
 								*/
 								}
-								print '</td>
+								echo '</td>
 								<td><font face=arial size=2>'.stripslashes($parsedline[byna]).' - '.$parsedline[bynr].'
 								</td>';
 								if($display=="composite")
-								{ print '
+								{ echo '
 									<td><a href="';
-									print "javascript:deleteItem('$i')";
-									print '"><img src="../img/delete2.gif" border=0 width=20 height=20 alt="'.$LDDeleteEntry.'" align="absmiddle"></a>
+									echo "javascript:deleteItem('$i')";
+									echo '"><img '.$img_delete.' alt="'.$LDDeleteEntry.'"></a>
 									</td>';
 								}
-								print "</tr>";
+								echo "</tr>";
 							}
 						}
 				}
@@ -301,19 +325,19 @@ if ($linecount>0)
 <input type="hidden" name="val" value="">
 <input type="hidden" name="itemx" value="">
 <input type="hidden" name="mode" value="">
-<input type="hidden" name="sid" value="<?php print $sid; ?>">
-<input type="hidden" name="lang" value="<?php print $lang; ?>">
-<input type="hidden" name="pn" value="<?php print $pn; ?>">
-<input type="hidden" name="opnr" value="<?php print $opnr; ?>">
-<input type="hidden" name="ln" value="<?php print $ln; ?>">
-<input type="hidden" name="fn" value="<?php print $fn; ?>">
-<input type="hidden" name="bd" value="<?php print $bd; ?>">
-<input type="hidden" name="dept" value="<?php print $dept; ?>">
-<input type="hidden" name="oprm" value="<?php print $oprm; ?>">
-<input type="hidden" name="display" value="<?php print $display; ?>">
-<input type="hidden" name="y" value="<?php print $y; ?>">
-<input type="hidden" name="m" value="<?php print $m; ?>">
-<input type="hidden" name="d" value="<?php print $d; ?>">
+<input type="hidden" name="sid" value="<?php echo $sid; ?>">
+<input type="hidden" name="lang" value="<?php echo $lang; ?>">
+<input type="hidden" name="pn" value="<?php echo $pn; ?>">
+<input type="hidden" name="opnr" value="<?php echo $opnr; ?>">
+<input type="hidden" name="ln" value="<?php echo $ln; ?>">
+<input type="hidden" name="fn" value="<?php echo $fn; ?>">
+<input type="hidden" name="bd" value="<?php echo $bd; ?>">
+<input type="hidden" name="dept" value="<?php echo $dept; ?>">
+<input type="hidden" name="oprm" value="<?php echo $oprm; ?>">
+<input type="hidden" name="display" value="<?php echo $display; ?>">
+<input type="hidden" name="y" value="<?php echo $y; ?>">
+<input type="hidden" name="m" value="<?php echo $m; ?>">
+<input type="hidden" name="d" value="<?php echo $d; ?>">
 </form>
 </FONT>
 

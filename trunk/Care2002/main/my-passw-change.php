@@ -1,24 +1,34 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-define("LANG_FILE","specials.php");
-define("NO_2LEVEL_CHK",1);
-require("../include/inc_front_chain_lang.php");
-require("../include/inc_config_color.php");
-$breakfile="spediens.php?sid=$sid&lang=$lang";
-$thisfile="my-passw-change.php";
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define('LANG_FILE','specials.php');
+define('NO_2LEVEL_CHK',1);
+require_once('../include/inc_front_chain_lang.php');
+require_once('../include/inc_config_color.php');
+
+$breakfile="spediens.php?sid=".$sid."&lang=".$lang;
+$thisfile='my-passw-change.php';
+
 if($n==$n2)
 {
 	$screenall=1;
 	$fileforward="my-passw-change-update.php?sid=$sid&lang=$lang&userid=$userid&n=$n";
-	if ($pass=="check") 	
-		include("../include/inc_passcheck.php");
+	if ($pass=='check') 	
+		include('../include/inc_passcheck.php');
 }
 else $n_error=1;
 ?>
 
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
  
 <script language=javascript>
 function pruf(d)
@@ -38,54 +48,60 @@ function gethelp(x,s,x1,x2,x3)
 </script>
  
 <?php
-require("../include/inc_css_a_hilitebu.php");
+require('../include/inc_css_a_hilitebu.php');
 ?>
 </HEAD>
 
-<BODY topmargin=0 leftmargin=0 marginheight=0 marginwidth=0 bgcolor=<?php print $cfg['bot_bgcolor']; if($mode!="pwchg") print ' onLoad="document.pwchanger.userid.focus()"'; ?>>
+<BODY topmargin=0 leftmargin=0 marginheight=0 marginwidth=0 bgcolor=<?php echo $cfg['bot_bgcolor']; if($mode!="pwchg") echo ' onLoad="document.pwchanger.userid.focus()"'; ?>>
 
 <P>
 
 
 <table width=100% border=0 cellspacing=0>
 <tr>
-<td bgcolor="<?php print $cfg['top_bgcolor'];?>">
-<FONT  COLOR="<?php print $cfg['top_txtcolor'];?>"  SIZE=+2  FACE="Arial"><STRONG>&nbsp;<?php echo $LDPWChange ?>
+<td bgcolor="<?php echo $cfg['top_bgcolor'];?>">
+<FONT  COLOR="<?php echo $cfg['top_txtcolor'];?>"  SIZE=+2  FACE="Arial"><STRONG>&nbsp;<?php echo $LDPWChange ?>
 </STRONG></FONT>
 </td>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])print'<a href="javascript:window.history.back()"><img src="../img/'.$lang.'/'.$lang.'_back2.gif" width=110 height=24 border=0  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('')"><img src="../img/<?php echo "$lang/$lang"; ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
+<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc('../','back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
 <tr>
-<td bgcolor=<?php print $cfg['body_bgcolor']; ?> valign=top colspan=2><p><br>
+<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2><p><br>
 <?php if($n_error) : ?><font face="verdana,arial" size=3 color="#990000">
-<img src="../img/catr.gif" border=0 width=88 height=80 align="absmiddle"> <?php echo $LDNewPwDiffer ?>
+<img <?php echo createMascot('../','mascot1_r.gif','0','bottom') ?> align="absmiddle"> <?php echo $LDNewPwDiffer ?>
 </font>
 <?php endif ?>
 <ul>
 
-<?php if($mode=="pwchg") : ?>
+<?php if($mode=='pwchg') : ?>
 <font face="verdana,arial" size=3 color="#009900">
-	<img src="../img/catr.gif" border=0 width=88 height=80 align="absmiddle"><b><?php echo $LDPWChanged ?></b></font>
+	<img <?php echo createMascot('../','mascot1_r.gif','0','bottom') ?> align="absmiddle"><b><?php echo $LDPWChanged ?></b></font>
 <?php else : ?>
 
-<?php if (($pass=="check")&&$passtag) 
+<?php if (($pass=='check')&&$passtag) 
 {
-print '<FONT  COLOR="red"  SIZE=+2  FACE="Arial"><STRONG>';
+echo '<FONT  COLOR="red"  SIZE=+2  FACE="Arial"><STRONG>';
 
 $errbuf=$title;
 
-
+/*
 switch($passtag)
 {
-case 1:$errbuf=$errbuf.$LDWrongEntry; print '<img src=../img/'.$lang.'/'.$lang.'_cat-fe.gif >';break;
-case 2:$errbuf=$errbuf.$LDNoAuth; print '<img src=../img/'.$lang.'/'.$lang.'_cat-noacc.gif >';break;
-default:$errbuf=$errbuf.$LDAuthLocked; print '<img src=../img/'.$lang.'/'.$lang.'_cat-sperr.gif >'; 
+case 1:$errbuf=$errbuf.$LDWrongEntry; echo '<img src=../img/'.$lang.'/'.$lang.'_cat-fe.gif >';break;
+case 2:$errbuf=$errbuf.$LDNoAuth; echo '<img src=../img/'.$lang.'/'.$lang.'_cat-noacc.gif >';break;
+default:$errbuf=$errbuf.$LDAuthLocked; echo '<img src=../img/'.$lang.'/'.$lang.'_cat-sperr.gif >'; 
+}*/
+switch($passtag)
+{
+case 1:$errbuf="$errbuf $LDWrongEntry"; print '<img '.createLDImgSrc('../','cat-fe.gif','0').'>';break;
+case 2:$errbuf="$errbuf $LDNoAuth"; print '<img '.createLDImgSrc('../','cat-noacc.gif','0').'>';break;
+default:$errbuf="$errbuf $LDAuthLocked"; print '<img '.createLDImgSrc('../','cat-sperr.gif','0').'>'; 
 }
 
 logentry($userid,$keyword,$errbuf,$thisfile,$fileforward);
 
-print '</STRONG></FONT>';
+echo '</STRONG></FONT><p>';
 
 }
 ?>
@@ -115,8 +131,8 @@ print '</STRONG></FONT>';
 </tr>
 
 <tr><td>
-		<input type="hidden" name="sid" value="<?php print $sid; ?>">
-		<input type="hidden" name="lang" value="<?php print $lang; ?>">
+		<input type="hidden" name="sid" value="<?php echo $sid; ?>">
+		<input type="hidden" name="lang" value="<?php echo $lang; ?>">
 		<input type="hidden" name="mode" value="change">
  		<input type="hidden" name="pass" value="check">
  		<input type="submit" value="<?php echo $LDChangePw ?>"><p>
@@ -135,11 +151,12 @@ print '</STRONG></FONT>';
 </tr>
 </table>        
 <p>
-<a href="<?php print $breakfile; ?>"><img src="../img/<?php echo "$lang/$lang" ?>_<?php if($mode=="pwchg") print 'close2.gif'; else print 'cancel.gif'; ?>" width=103 height=24 border=0>
+<a href="<?php echo $breakfile; ?>"><img <?php if($mode=='pwchg') echo createLDImgSrc('../','close2.gif','0'); else echo createLDImgSrc('../','cancel.gif','0'); ?>>
 </a>
 <p>
 <?php
-require("../language/$lang/".$lang."_copyrite.php");
- ?>
+if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
+include('../language/'.$lang.'/'.$lang.'_copyrite.php');
+  else include('../language/en/en_copyrite.php');?>
 </BODY>
 </HTML>

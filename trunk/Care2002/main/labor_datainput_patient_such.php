@@ -5,7 +5,7 @@ $dbname="maho";
 $dbhost="localhost";
 $dbusername="httpd";
 $dbpassword="";
-$dbtable="mahopatient";
+$dbtable='care_admission_patient';
 $thisfile="labor_datainput_patient_such.php";
 $breakfile="labor.php";
 
@@ -13,7 +13,7 @@ $toggle=0;
 
 $fieldname=array("Pat.nummer","Name","Vorname","Geburtsdatum");
 
-$fielddata="mahopatient_patnum, mahopatient_name, mahopatient_vorname, mahopatient_gebdatum, mahopatient_item";
+$fielddata="care_admission_patient_patnum, care_admission_patient_name, care_admission_patient_vorname, care_admission_patient_gebdatum, care_admission_patient_item";
 
 ?>
 
@@ -45,10 +45,10 @@ $fielddata="mahopatient_patnum, mahopatient_name, mahopatient_vorname, mahopatie
 <ul>
 <FONT    SIZE=-1  FACE="Arial">
 
-<FORM action="<? print $thisfile; ?>" method="post">
+<FORM action="<? echo $thisfile; ?>" method="post">
 <font face="Arial,Verdana"  color="#000000" size=-1>
 <B>Stichwort eingeben. z.B. Name, Vorname, Geburtsdatum, oder Abkürzung u.s.w.</B></font><p>
-<font size=3><INPUT type="text" name="keyword" size="14" maxlength="40" value=<? print $keyword ?>></font> 
+<font size=3><INPUT type="text" name="keyword" size="14" maxlength="40" value=<? echo $keyword ?>></font> 
 <INPUT type="submit" name="versand" value="SUCHEN"></FORM>
 
 
@@ -66,49 +66,49 @@ if(($versand!="")and($keyword))
 		{
 			if($suchwort<20000000) $suchbuffer=$suchwort+20000000; else $suchbuffer=$suchwort;
 			$sql='SELECT '.$fielddata.' FROM '.$dbtable.' 
-			WHERE mahopatient_name LIKE "'.$suchwort.'%" 
-			OR mahopatient_vorname LIKE "'.$suchwort.'%"
-			OR mahopatient_gebdatum LIKE "'.$suchwort.'%"
-			OR mahopatient_patnum LIKE "'.$suchbuffer.'" 
-			ORDER BY mahopatient_patnum';
+			WHERE care_admission_patient_name LIKE "'.$suchwort.'%" 
+			OR care_admission_patient_vorname LIKE "'.$suchwort.'%"
+			OR care_admission_patient_gebdatum LIKE "'.$suchwort.'%"
+			OR care_admission_patient_patnum LIKE "'.$suchbuffer.'" 
+			ORDER BY care_admission_patient_patnum';
 
         	$ergebnis=mysql_query($sql,$link);
 			$linecount=0;
 			if($ergebnis)
        		{
 				while ($zeile=mysql_fetch_array($ergebnis)) $linecount++;
-				print "<hr width=80% align=left><p>Die Suche hat <font color=red><b>".$linecount."</b></font> Patientendaten gefunden.<p>";
+				echo "<hr width=80% align=left><p>Die Suche hat <font color=red><b>".$linecount."</b></font> Patientendaten gefunden.<p>";
 				if ($linecount>0) 
 				{ 
 					mysql_data_seek($ergebnis,0);
-					print "<table border=0 cellpadding=3 cellspacing=1> <tr bgcolor=orange>";
+					echo "<table border=0 cellpadding=3 cellspacing=1> <tr bgcolor=orange>";
 					for($i=0;$i<sizeof($fieldname);$i++) 
 					{
-						print"<td><font face=arial size=2><b>".$fieldname[$i]."</b></td>";
+						echo"<td><font face=arial size=2><b>".$fieldname[$i]."</b></td>";
 		
 					}
-					 print"<td>&nbsp;</td></tr>";
+					 echo"<td>&nbsp;</td></tr>";
 
 					while($zeile=mysql_fetch_array($ergebnis))
 					{
-						print "<tr bgcolor=";
-						if($toggle) { print "#cecece>"; $toggle=0;} else {print "#ffffaa>"; $toggle=1;};
+						echo "<tr bgcolor=";
+						if($toggle) { echo "#cecece>"; $toggle=0;} else {echo "#ffffaa>"; $toggle=1;};
 	
 						for($i=0;$i<mysql_num_fields($ergebnis)-1;$i++) 
 						{
-							print"<td><font face=arial size=2>";
-							if($zeile[$i]=="")print "&nbsp;"; else print $zeile[$i];
-							print "</td>";
+							echo"<td><font face=arial size=2>";
+							if($zeile[$i]=="")echo "&nbsp;"; else echo $zeile[$i];
+							echo "</td>";
 						}
-					    print'<td><font face=arial size=2>&nbsp;
-							<a href=labor_datainput.php?route=validroute&from=such&itemname='.$zeile[mahopatient_item].'>
+					    echo'<td><font face=arial size=2>&nbsp;
+							<a href=labor_datainput.php?route=validroute&from=such&itemname='.$zeile[care_admission_patient_item].'>
 							<img src=../img/file_update.gif border=0 alt="Laborwerte diesem Patient eingeben"></a>&nbsp;</td></tr>';
 
 					}
-					print "</table>";
+					echo "</table>";
 					if($linecount>15)
 					{
-						print '
+						echo '
 						<p><font color=red><B>Neue Suche:</font>
 						<FORM action="'.$thisfile.'" method="post">
 						<font face="Arial,Verdana"  color="#000000" size=-1>
@@ -119,12 +119,12 @@ if(($versand!="")and($keyword))
 					}
 				}
 			}
-			 else {print "<p>".$sql."<p>Das Lesen von Daten aus der Datenbank ist gescheitert.";};
-		} else print " Tabelle konnte nicht ausgewählt werden.";
+			 else {echo "<p>".$sql."<p>Das Lesen von Daten aus der Datenbank ist gescheitert.";};
+		} else echo " Tabelle konnte nicht ausgewählt werden.";
 	  mysql_close($link);
 	}
   	 else 
-		{ print "Verbindung zur Datenbank konnte nicht hergestellt werden.<br>"; }
+		{ echo "Verbindung zur Datenbank konnte nicht hergestellt werden.<br>"; }
 
 	
 }
@@ -132,7 +132,7 @@ if(($versand!="")and($keyword))
 ?>
 <p>
 <p>
-<FORM action="<? print $breakfile; ?>" >
+<FORM action="<? echo $breakfile; ?>" >
 <INPUT type="submit"  value="Abbrechen">
 </FORM>
 </ul>

@@ -1,34 +1,37 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","aufnahme.php");
-$local_user="aufnahme_user";
-require("../include/inc_front_chain_lang.php");
+define('LANG_FILE','aufnahme.php');
+$local_user='aufnahme_user';
+require_once('../include/inc_front_chain_lang.php');
 
-require("../include/inc_config_color.php");
+require_once('../include/inc_config_color.php');
 $keyword=strtr($keyword,"%"," ");
 $keyword=trim($keyword);
 
-$dbtable="mahopatient";
+$dbtable='care_admission_patient';
 
 $toggle=0;
 
 
-$fielddata="patnum, name, vorname, gebdatum, item";
+$fielddata='patnum, name, vorname, gebdatum, item';
 
 
-if(($mode=="search")and($keyword))
+if(($mode=='search')and($keyword))
   {
-		include("../include/inc_db_makelink.php");
+		include('../include/inc_db_makelink.php');
 		if($link&&$DBLink_OK) 
 		{
+            include_once('../include/inc_date_format_functions.php');
+            
+		
 			$suchwort=trim($keyword);
 			if(is_numeric($suchwort))
 			{
@@ -39,7 +42,7 @@ if(($mode=="search")and($keyword))
 			$sql='SELECT '.$fielddata.' FROM '.$dbtable.' 
 			WHERE name LIKE "'.$suchwort.'%" 
 			OR vorname LIKE "'.$suchwort.'%"
-			OR gebdatum LIKE "'.$suchwort.'%"
+			OR gebdatum LIKE "'.formatDate2STD($suchwort,$date_format).'%"
 			OR patnum LIKE "'.$suchbuffer.'" 
 			ORDER BY patnum';
 
@@ -62,23 +65,31 @@ if(($mode=="search")and($keyword))
 				else $mode="";
 
 			}
-			 else {print "<p>".$sql."<p>$LDDbNoRead";};
+			 else {echo "<p>".$sql."<p>$LDDbNoRead";};
 	}
-  	 else { print "$LDDbNoLink<br>"; }
+  	 else { echo "$LDDbNoLink<br>"; }
 
 	
 }
 else $mode="";
+
+require_once('../include/inc_date_format_functions.php');
+
+if(empty($date_format))
+{
+   
+}
+
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
  <TITLE></TITLE>
  
   <?php 
-require("../include/inc_css_a_hilitebu.php");
+require('../include/inc_css_a_hilitebu.php');
 ?>
 <script language="javascript">
 <!-- 
@@ -94,26 +105,32 @@ function gethelp(x,s,x1,x2,x3)
  
 </HEAD>
 
-<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0  onLoad="document.sform.keyword.select()" bgcolor=<?php print $cfg['body_bgcolor']; 
- if (!$cfg['dhtml']){ print ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0  onLoad="document.sform.keyword.select()" bgcolor=<?php echo $cfg['body_bgcolor']; 
+ if (!$cfg['dhtml']){ echo ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 
 <table width=100% border=0 cellspacing="0">
 
 <tr>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>">
-<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+3  FACE="Arial"><STRONG> &nbsp;<?php echo $LDPatientSearch ?></STRONG></FONT>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+3  FACE="Arial"><STRONG> &nbsp;<?php echo $LDPatientSearch ?></STRONG></FONT>
 </td>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" align="right">
-<a href="javascript:gethelp('admission_how2search.php')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
-if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) print "startframe.php?sid=$sid&lang=$lang"; 
-	else print "aufnahme_pass.php?sid=$sid&target=entry&lang=$lang"; ?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 alt="<?php echo $LDCloseWin ?>" width=93 height=41  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
+<a href="javascript:gethelp('admission_how2search.php')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
+if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo "startframe.php?sid=".$sid."&lang=".$lang; 
+	else echo "aufnahme_pass.php?sid=$sid&target=entry&lang=$lang"; ?>"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </td>
 </tr>
 </table>
 <ul>
 <table width=90% border=0 cellpadding="0" cellspacing="0">
 <tr>
-<td colspan=3><a href="<?php if($HTTP_COOKIE_VARS[$local_user.$sid]) print 'aufnahme_start.php?sid='.$sid.'&mode=?&lang='.$lang; else print 'aufnahme_pass.php?sid='.$sid.'&lang='.$lang; ?>"><img src="../img/<?php echo "$lang/$lang" ?>_ein-gray.gif" alt="<?php echo $LDAdmit ?>" border=0 width=130 height=25 <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><img src="../img/<?php echo "$lang/$lang" ?>_such-b.gif" alt="<?php echo $LDSearch ?>" border=0 width=130 height=25  ><a href="<?php if($HTTP_COOKIE_VARS[$local_user.$sid]) print 'aufnahme_list.php?sid='.$sid.'&lang='.$lang; else print 'aufnahme_pass.php?sid='.$sid.'&lang='.$lang.'&target=archiv'; ?>"><img src="../img/<?php echo "$lang/$lang" ?>_arch-gray.gif"  alt="<?php echo $LDArchive ?>" border=0 width=130 height=25  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
+<td colspan=3><a href="<?php if($HTTP_COOKIE_VARS[$local_user.$sid]) echo 'aufnahme_start.php?sid='.$sid.'&mode=?&lang='.$lang; 
+else echo 'aufnahme_pass.php?sid='.$sid.'&lang='.$lang; ?>"><img <?php echo createLDImgSrc('../','ein-gray.gif','0') ?> 
+alt="<?php echo $LDAdmit ?>" <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) 
+onMouseOut=hilite(this,0)>';?></a><img <?php echo createLDImgSrc('../','such-b.gif','0') ?> alt="<?php echo $LDSearch ?>"><a href="<?php if($HTTP_COOKIE_VARS[$local_user.$sid]) echo 'aufnahme_list.php?sid='.$sid.'&lang='.$lang; 
+else echo 'aufnahme_pass.php?sid='.$sid.'&lang='.$lang.'&target=archiv'; ?>"><img <?php echo createLDImgSrc('../','arch-gray.gif','0') ?>  
+alt="<?php echo $LDArchive ?>" <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) 
+onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
 <tr >
 <td bgcolor=#333399 colspan=3>
@@ -129,65 +146,75 @@ if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) print "startframe.php?sid=$sid&lan
 <FORM action="aufnahme_daten_such.php" method="post" name=sform>
 <font face="Arial,Verdana"  color="#000000" size=-1>
 <B><?php echo $LDEntryPrompt ?></B></font><p>
-<font size=3><INPUT type="text" name="keyword" size="14" maxlength="40" value=<?php print $keyword ?>></font> 
-<input type="hidden" name="sid" value="<?php print $sid; ?>">
-<input type="hidden" name="lang" value="<?php print $lang; ?>">
+<font size=3><INPUT type="text" name="keyword" size="14" maxlength="40" value=<?php echo $keyword ?>></font> 
+<input type="hidden" name="sid" value="<?php echo $sid; ?>">
+<input type="hidden" name="lang" value="<?php echo $lang; ?>">
 <input type="hidden" name="mode" value="search">
-<INPUT type="submit" value="<?php echo $LDSEARCH ?>">
+<!-- <INPUT type="submit" value="<?php echo $LDSEARCH ?>"> -->
+<input type="image" <?php echo createLDImgSrc('../','searchlamp.gif','0','absmiddle') ?>>
 </FORM>
 
 <p>
 <a href=
-<?php if($mode=="search") print '"aufnahme_daten_such.php?sid='.$sid.'&lang='.$lang.'">'; 
+<?php if($mode=='search') echo '"aufnahme_daten_such.php?sid='.$sid.'&lang='.$lang.'">'; 
 	else
 	{
-	  if($HTTP_COOKIE_VARS["ck_login_logged".$sid])   print '"startframe.php?sid='.$sid.'&lang='.$lang.'">'; 
+	  if($HTTP_COOKIE_VARS["ck_login_logged".$sid])   echo '"startframe.php?sid='.$sid.'&lang='.$lang.'">'; 
 	  else 
-	  	print '"aufnahme_pass.php?sid='.$sid.'&target=search&lang='.$lang.'">'; 
+	  	echo '"aufnahme_pass.php?sid='.$sid.'&target=search&lang='.$lang.'">'; 
 	}	
-?><img src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" width=103 height=24 border=0></a>
+?><img <?php echo createLDImgSrc('../','cancel.gif','0') ?>></a>
 <p>
 
 <?php
-//print $mode;
-print '<hr width=80% align=left><p>'.str_replace("~nr~",$linecount,$LDSearchFound).'<p>';
+//echo $mode;
+echo '<hr width=80% align=left><p>'.str_replace("~nr~",$linecount,$LDSearchFound).'<p>';
 if ($linecount) 
 	{ 
 					mysql_data_seek($ergebnis,0);
+					
+					/* Load the common icons */
+					$img_options=createComIcon('../','statbel2.gif','0');
 
-					print '
+					echo '
 						<table border=0 cellpadding=2 cellspacing=1> <tr bgcolor="#0000aa">';
 					for($i=0;$i<sizeof($fieldname);$i++) 
 					{
-						print'
+						echo'
 						<td><font face=arial size=2 color="#ffffff"><b>'.$fieldname[$i].'</b></td>';
 		
 					}
-					print"</tr>";
+					echo"</tr>";
 
 					while($zeile=mysql_fetch_array($ergebnis))
 					{
-						print "
+						echo "
 							<tr bgcolor=";
-						if($toggle) { print "#efefef>"; $toggle=0;} else {print "#ffffff>"; $toggle=1;};
-	
-						for($i=0;$i<mysql_num_fields($ergebnis)-1;$i++) 
-						{
-							print"<td><font face=arial size=2>";
-							if($zeile[$i]=="")print "&nbsp;"; else print $zeile[$i];
-							print "</td>";
-						}
-					    if($HTTP_COOKIE_VARS[$local_user.$sid]) print '
+						if($toggle) { echo "#efefef>"; $toggle=0;} else {echo "#ffffff>"; $toggle=1;};
+						echo"<td><font face=arial size=2>";
+						echo "&nbsp;".ucfirst($zeile['patnum']);
+                        echo "</td>";	
+						echo"<td><font face=arial size=2>";
+						echo "&nbsp;".ucfirst($zeile['name']);
+                        echo "</td>";	
+						echo"<td><font face=arial size=2>";
+						echo "&nbsp;".ucfirst($zeile['vorname']);
+                        echo "</td>";	
+						echo"<td><font face=arial size=2>";
+						echo "&nbsp;".formatDate2Local($zeile['gebdatum'],$date_format);
+                        echo "</td>";	
+
+					    if($HTTP_COOKIE_VARS[$local_user.$sid]) echo '
 						<td><font face=arial size=2>&nbsp;
 							<a href=aufnahme_daten_zeigen.php?sid='.$sid.'&lang='.$lang.'&from=such&itemname='.$zeile[item].'>
-							<img src="../img/statbel2.gif" width=20 height=20 border=0 alt="'.$LDShowData.'"></a>&nbsp;</td></tr>';
+							<img '.$img_options.' alt="'.$LDShowData.'"></a>&nbsp;</td></tr>';
 
 					}
-					print "
+					echo "
 						</table>";
 					if($linecount>15)
 					{
-						print '
+						echo '
 						<p><font color=red><B>Neue Suche:</font>
 						<FORM action="aufnahme_daten_such.php" method="post">
 						<font face="Arial,Verdana"  color="#000000" size=-1>
@@ -209,8 +236,8 @@ if ($linecount)
 ?>
 <p>
 <hr width=80% align=left><p>
-<a href="aufnahme_start.php?sid=<?php print "$sid&lang=$lang"; ?>&mode=?"><?php echo $LDAdmWantEntry ?></a><br>
-<a href="aufnahme_list.php?sid=<?php print "$sid&lang=$lang"; ?>"><?php echo $LDAdmWantArchive ?></a>
+<a href="aufnahme_start.php?sid=<?php echo "$sid&lang=$lang"; ?>&mode=?"><?php echo $LDAdmWantEntry ?></a><br>
+<a href="aufnahme_list.php?sid=<?php echo "$sid&lang=$lang"; ?>"><?php echo $LDAdmWantArchive ?></a>
 </ul>
 &nbsp;
 </FONT>
@@ -228,8 +255,9 @@ if ($linecount)
 </ul>
 <p>
 <?php
-require("../language/$lang/".$lang."_copyrite.php");
- ?>
+if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
+include('../language/'.$lang.'/'.$lang.'_copyrite.php');
+  else include('../language/en/en_copyrite.php');?>
 
 </FONT>
 

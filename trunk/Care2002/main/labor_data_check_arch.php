@@ -1,32 +1,40 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","lab.php");
-$local_user="ck_lab_user";
-require("../include/inc_front_chain_lang.php");
-require("../include/inc_config_color.php");
+define('LANG_FILE','lab.php');
+$local_user='ck_lab_user';
+require_once('../include/inc_front_chain_lang.php');
+require_once('../include/inc_config_color.php');
 
-$thisfile="labor_data_check_arch.php";
+$thisfile='labor_data_check_arch.php';
 $breakfile="labor_data_patient_such.php?sid=$sid&lang=$lang&mode=edit";
 
 $toggle=0;
 
-$fielddata="patnum, name, vorname, gebdatum, item";
+$fielddata='patnum, name, vorname, gebdatum, item';
 
 $keyword=trim($keyword);
 
-$dbtable="lab_test_data";
+$dbtable='care_lab_test_data';
 
-require("../include/inc_db_makelink.php");
+/* Establish db connection */
+require('../include/inc_db_makelink.php');
 if($link&&$DBLink_OK) 
-		{
+{
+    /* Load the date formatter */
+    require_once('../include/inc_date_format_functions.php');
+    
+	
+    /* Load editor functions for time format converter */
+    //include_once('../include/inc_editor_fx.php');
+
 			$sql="SELECT job_id,test_date,test_time,encoding FROM $dbtable WHERE patnum='$patnum' ORDER BY tid DESC";
 
         	$ergebnis=mysql_query($sql,$link);
@@ -45,15 +53,15 @@ if($link&&$DBLink_OK)
 					mysql_close($link);
 					switch($mode)
 					{
-						case "list": header("location:pflege-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$patnum&nodoc=labor");break;
+						case 'list': header("location:pflege-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$patnum&nodoc=labor");break;
 						default: header("location:labor_datainput.php?sid=$sid&lang=$lang&patnum=$patnum&newid=1&mode=$mode");
 					}
 				}
 			}
-			 else {print "<p>$sql$LDDbNoRead";}
+			 else {echo "<p>$sql$LDDbNoRead";}
 	}
 	else 
-		{ print "$LDDbNoLink<br>$sql<br>"; }
+		{ echo "$LDDbNoLink<br>$sql<br>"; }
 
 ?>
 
@@ -64,7 +72,7 @@ if($link&&$DBLink_OK)
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
  <TITLE>Labor Check Archive</TITLE>
  <style type="text/css" name="1">
 .va12_w{font-family:verdana,arial; font-size:12; color:#ffffff}
@@ -76,10 +84,10 @@ if($link&&$DBLink_OK)
 
 <BODY BACKGROUND="leinwand.gif">
 
-<img src=../img/micros.gif align="absmiddle"><FONT  COLOR="<?php echo $cfg[top_txtcolor] ?>"  SIZE=5  FACE="verdana"> <b><?php echo "$LDLabReport - $LDNewData" ?></b></font>
+<img <?php echo createComIcon('../','micros.gif','0','absmiddle') ?>><FONT  COLOR="<?php echo $cfg[top_txtcolor] ?>"  SIZE=5  FACE="verdana"> <b><?php echo "$LDLabReport - $LDNewData" ?></b></font>
 <table width=100% border=0 cellpadding="0" cellspacing="0">
 <tr>
-<td colspan=3><img src="../img/<?php echo "$lang/$lang" ?>_newdata-b.gif" border=0 width=130 height=25><a href="labor_data_patient_such.php?sid=<?php echo "$sid&mode=$mode" ?>"><img src="../img/<?php echo "$lang/$lang" ?>_such-gray.gif" border=0 width=130 height=25></a></td>
+<td colspan=3><img <?php echo createLDImgSrc('../','newdata-b.gif','0') ?>><a href="labor_data_patient_such.php?sid=<?php echo "$sid&lang=$lang&mode=$mode" ?>"><img <?php echo createLDImgSrc('../','such-gray.gif','0') ?>></a></td>
 </tr>
 <tr >
 <td bgcolor=#333399 colspan=3>
@@ -93,47 +101,51 @@ if($link&&$DBLink_OK)
 <FONT    SIZE=-1  FACE="Arial">
 
 <?php 
-if($linecount>1) print "<p>$LDReportFoundMany";
-	else print "<p>$LDReportFound";
-print " <font color=red><b>$patnum</b></font>.";
-if($linecount>1) print "<br> $LDIfWantEditMany<p>";
-	else print "<br> $LDIfWantEdit<p>";
+if($linecount>1) echo "<p>$LDReportFoundMany";
+	else echo "<p>$LDReportFound";
+echo " <font color=red><b>$patnum</b></font>.";
+if($linecount>1) echo "<br> $LDIfWantEditMany<p>";
+	else echo "<br> $LDIfWantEdit<p>";
 					//	$abuf=array(); $last=array();
 				
-					print "<table border=0 cellpadding=3 cellspacing=1> <tr bgcolor=#9f9f9f>";
+					echo "<table border=0 cellpadding=3 cellspacing=1> <tr bgcolor=#9f9f9f>";
 					
-						print'
+					/* Print the column descriptors */
+						echo'
 						<td class="va12_w"><b>'.$LDJobIdNr.'</b></td>
 						<td class="va12_w"><b>'.$LDExamDate.'</b></td>
-					 <td class="va12_w">&nbsp;'.$LDOn.'</td>
 					 <td class="va12_w">&nbsp;'.$LDAt.'</td>
+					 <td class="va12_w">&nbsp;</td>
 					 </tr>';
-
+					 
+                    /* Print the list of the stored test results */
 					while($zeile=mysql_fetch_array($ergebnis))
 					{
-						$abuf=explode("~",$zeile[encoding]);	
+						$abuf=explode('~',$zeile['encoding']);	
 						$abuf=array_pop($abuf);
 						parse_str(trim($abuf),$last);
-					print "<tr bgcolor=";
-						if($toggle) { print "#dfdfdf>"; $toggle=0;} else {print "#ffffff>"; $toggle=1;};
+						
+					    echo '<tr bgcolor=';
+						
+						if($toggle) { echo "#dfdfdf>"; $toggle=0;} else {echo "#ffffff>"; $toggle=1;};
 	
-							print'
+	                         /* Print the job id or batch nr., test date and time */
+							echo'
 							<td><font face=arial size=2>
-							&nbsp;<a href=labor_datainput.php?&patnum='.$patnum.'&job_id='.$zeile[job_id].'>'.$zeile[job_id].'</a>
+							&nbsp;<a href=labor_datainput.php?&patnum='.$patnum.'&job_id='.$zeile['job_id'].'>'.$zeile['job_id'].'</a>
 							</td>
-							<td><font face=arial size=2>&nbsp;'.$zeile[test_date].'
+							<td><font face=arial size=2>&nbsp;'.formatDate2Local($zeile['test_date'],$date_format).'
 							</td>
-							<td><font face=arial size=2>&nbsp;'.$zeile[test_time].'
-							</td>
-							<td><font face=arial size=2>
-							&nbsp;'.$last[e].'
+							<td><font face=arial size=2>&nbsp;'.convertTimeToLocal($zeile['test_time']).'
 							</td>';
-						print'<td><font face=arial size=2>&nbsp';
-					   print'<a href=labor_datainput.php?sid='.$sid.'&lang='.$lang.'&patnum='.$patnum.'&job_id='.$zeile[job_id].'&mode='.$mode.'&update=1><img 
-										src="../img/bul_arrowgrnlrg.gif" width=16 height=16 border=0 alt="'.$LDClk2Edit.'"></a>&nbsp;</td></tr>';
+						    echo'<td><font face=arial size=2>&nbsp';
+						
+						    /* Create the link button */
+					        echo '<a href=labor_datainput.php?sid='.$sid.'&lang='.$lang.'&patnum='.$patnum.'&job_id='.$zeile['job_id'].'&mode='.$mode.'&update=1><img 
+										'.createComIcon('../','bul_arrowgrnlrg.gif','0').' alt="'.$LDClk2Edit.'"></a>&nbsp;</td></tr>';
 
 					}
-					print "</table>";
+					echo "</table>";
 
 ?><p>
 <form action="labor_datainput.php" method="get"><font face=verdana,arial size=4>
@@ -150,7 +162,7 @@ if($linecount>1) print "<br> $LDIfWantEditMany<p>";
 <p>
 <p>
 <hr width=80% align=left>
-<a href="<?php echo $breakfile ?>"><img src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" border=0>
+<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>
 </a><p>
 
 </ul>
@@ -169,8 +181,9 @@ if($linecount>1) print "<br> $LDIfWantEditMany<p>";
 </table>        
 <p>
 <?php
-require("../language/$lang/".$lang."_copyrite.php");
- ?>
+if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
+include('../language/'.$lang.'/'.$lang.'_copyrite.php');
+  else include('../language/en/en_copyrite.php');?>
 
 </FONT>
 

@@ -4,7 +4,7 @@ if (($sid==NULL)||($sid!=$$ck_sid_buffer)||($user==NULL)) {header("Location: inv
 srand(time()*10000);
 $r=rand(1,10000);
 // initializations
-require("../include/inc_config_color.php");
+require_once('../include/inc_config_color.php');
 
 
 
@@ -44,7 +44,7 @@ function getlastnum($xyr,$xmon,$xday)
 
 	if ($xyr<1950) break; //limits the backwards lookup 
 	$xpath="op/abteilung/".strtolower($dept)."/op_saal_".strtolower($saal)."/opbuch/".$xyr."/".$xmonat[(int)$xmon-1]."/".$xday."/";
-//  print $xday." ".$xpath."   ".$lastnum[0]; print "<br>";
+//  echo $xday." ".$xpath."   ".$lastnum[0]; echo "<br>";
 	if(file_exists($xpath))
 	{ 
 	  $xhandle=opendir($xpath); 
@@ -71,15 +71,15 @@ function getlastnum($xyr,$xmon,$xday)
 
 switch($mode)
 {
- case "edit":
+ case 'edit':
 	{
 		$filename=$mainpath.$fileid;
 
 		if (file_exists($filename)) $pdata=get_meta_tags($filename);
-		else print "alert('File not found '.$filename.')"; 
+		else echo "alert('File not found '.$filename.')"; 
 		break;
 	}
- case "save":
+ case 'save':
 	{
 
 		$filename=$mainpath.$opnumber."_".$pyear."-".$pmonth."-".$md.".opb";
@@ -170,7 +170,7 @@ switch($mode)
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
  <TITLE>OP Pflege Logbuch (Eingabefenster)</TITLE>
 
 <script language="javascript">
@@ -352,7 +352,7 @@ function checksubmit()
 </script>
 
  <?php if($cfg['dhtml'])
-{ print' 
+{ echo' 
 	<script language="javascript" src="../js/hilitebu.js">
 	</script>
 	
@@ -370,10 +370,10 @@ function checksubmit()
 
 <BODY background="../img/gray2.jpg" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="if (window.focus) window.focus(); 
 <?php  
-if($mode=="save") print 'window.opener.location.reload(true);window.close()';
-print '"';
-//print  ' bgcolor='.$cfg['body_bgcolor']; 
- if (!$cfg['dhtml']){ print ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } 
+if($mode=='save') echo 'window.opener.location.reload(true);window.close()';
+echo '"';
+//echo  ' bgcolor='.$cfg['body_bgcolor']; 
+ if (!$cfg['dhtml']){ echo ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } 
 ?>
   >
 
@@ -394,78 +394,78 @@ Hilfe &nbsp;
 
 <FORM METHOD="post" ACTION="op-pflege-logbuch-arch-edit.php?mode=save" name="oppflegepatinfo" onSubmit="return checksubmit()">
 
-<input type="hidden" name="processer" value="<?php print $op_pflegelogbuch_user; ?>">
-<input type="hidden" name="opnumber" value="<?php print $pdata['opnumber']; ?>">
-<input type="hidden" name="pmonth" value="<?php print $pmonth; ?>">
-<input type="hidden" name="pyear"  value="<?php print $pyear; ?>">
-<input type="hidden" name="pday" value="<?php print $pday; ?>">
-<input type="hidden" name="user" value="<?php print str_replace(" ","+",$user); ?>">
-<input type="hidden" name="sid" value="<?php print $sid; ?>">
-<input type="hidden" name="saal" value="<?php print $saal; ?>">
-<input type="hidden" name="dept" value="<?php print $dept; ?>">
+<input type="hidden" name="processer" value="<?php echo $op_pflegelogbuch_user; ?>">
+<input type="hidden" name="opnumber" value="<?php echo $pdata['opnumber']; ?>">
+<input type="hidden" name="pmonth" value="<?php echo $pmonth; ?>">
+<input type="hidden" name="pyear"  value="<?php echo $pyear; ?>">
+<input type="hidden" name="pday" value="<?php echo $pday; ?>">
+<input type="hidden" name="user" value="<?php echo str_replace(" ","+",$user); ?>">
+<input type="hidden" name="sid" value="<?php echo $sid; ?>">
+<input type="hidden" name="saal" value="<?php echo $saal; ?>">
+<input type="hidden" name="dept" value="<?php echo $dept; ?>">
 
-<font face=verdana,arial size=2>OP Nummer <FONT face=arial COLOR="red"  SIZE=3 > <b><?php print $pdata['opnumber']; ?></b> </FONT>
+<font face=verdana,arial size=2>OP Nummer <FONT face=arial COLOR="red"  SIZE=3 > <b><?php echo $pdata['opnumber']; ?></b> </FONT>
 Datum: 
 
 <?php if (($mode!="") && ($mode!="fresh"))
 {
-	print '<font size=2 face=arial><b>'.$pdata['date'].'</b></font>';print "\r\n";
-	print '<input name="date" type="hidden" value="'.$pdata['date'].'">'; 
+	echo '<font size=2 face=arial><b>'.$pdata['date'].'</b></font>';echo "\r\n";
+	echo '<input name="date" type="hidden" value="'.$pdata['date'].'">'; 
 }
 else
 {
-  	print '<INPUT NAME="date" TYPE="text" VALUE="'.strftime("%d.%m.%Y").'" SIZE="10">'; print "\r\n";
+  	echo '<INPUT NAME="date" TYPE="text" VALUE="'.strftime("%d.%m.%Y").'" SIZE="10">'; echo "\r\n";
 }
 ?>
 
 &nbsp;
 &nbsp; <!-- 
-<a href="op-pflege-logbuch-arch-edit.php?mode=fresh&filename=<?php print $filename.'&pyear='.date(Y).'&pmonth='.date(m).'&pday='.date(d); ?>"><img src="../img/newpat2.gif" border=0></a>
+<a href="op-pflege-logbuch-arch-edit.php?mode=fresh&filename=<?php echo $filename.'&pyear='.date(Y).'&pmonth='.date(m).'&pday='.date(d); ?>"><img src="../img/newpat2.gif" border=0></a>
  -->
 <TABLE  CELLPADDING=1 CELLSPACING=0 border=1 bgcolor=#dddddd>
 <tr>
 	<TD><font face=verdana,arial size=1>
-AufnahmeNr: <INPUT NAME="patnumber" TYPE="text" VALUE="<?php print $pdata['patnumber']; ?>" onKeyUp="isvalnum(this.value,this.name)" SIZE="9">
-Name, Vorname<br><INPUT NAME="pname" TYPE="text" VALUE="<?php stripcslashes(print $pdata['pname']); ?>" SIZE="20"><BR>
-	Geburtsdatum<br><INPUT NAME="gdatum" TYPE="text" VALUE="<?php print $pdata['gdatum']; ?>" SIZE="20" onKeyUp="isgdatum(this.value,this.name)"><BR> 
+AufnahmeNr: <INPUT NAME="patnumber" TYPE="text" VALUE="<?php echo $pdata['patnumber']; ?>" onKeyUp="isvalnum(this.value,this.name)" SIZE="9">
+Name, Vorname<br><INPUT NAME="pname" TYPE="text" VALUE="<?php stripcslashes(echo $pdata['pname']); ?>" SIZE="20"><BR>
+	Geburtsdatum<br><INPUT NAME="gdatum" TYPE="text" VALUE="<?php echo $pdata['gdatum']; ?>" SIZE="20" onKeyUp="isgdatum(this.value,this.name)"><BR> 
 	Addresse<br><TEXTAREA NAME="addresse" Content-Type="text/html"
-	COLS="17" ROWS="4"><?php print stripcslashes($pdata['addresse']); ?></TEXTAREA></TD>
+	COLS="17" ROWS="4"><?php echo stripcslashes($pdata['addresse']); ?></TEXTAREA></TD>
 
 <TD><font face=verdana,arial size=1>Diagnose:<br><TEXTAREA NAME="diagnose" Content-Type="text/html"
-	COLS="18" ROWS="10"><?php print stripcslashes($pdata['diagnose']); ?></TEXTAREA></TD>
+	COLS="18" ROWS="10"><?php echo stripcslashes($pdata['diagnose']); ?></TEXTAREA></TD>
 
 <TD valign=top><font face=verdana,arial size=1>Operateur/Assistent<br><TEXTAREA NAME="opdoc1" Content-Type="text/html"
-	COLS="17" ROWS="4"><?php print stripcslashes($pdata['opdoc1']); ?></TEXTAREA><br>
+	COLS="17" ROWS="4"><?php echo stripcslashes($pdata['opdoc1']); ?></TEXTAREA><br>
 	Instrumenteur/Springer<br><TEXTAREA NAME="instru1" Content-Type="text/html"
-	COLS="17" ROWS="4"><?php print stripcslashes($pdata['instru1']); ?></TEXTAREA>
+	COLS="17" ROWS="4"><?php echo stripcslashes($pdata['instru1']); ?></TEXTAREA>
 </TD>
 
 <TD valign=top><font face=verdana,arial size=1>Narkoseart<br><select NAME="narkose"   SIZE="1">
-	<option value=ITN <?php if($pdata['narkose']=="ITN") print "selected";?>>ITN</option>
-	<option value=LA <?php if($pdata['narkose']=="LA") print "selected";?>>LA</option>
-	<option value=DS <?php if($pdata['narkose']=="DS") print "selected";?>>DS</option>
-	<option value=Plexus <?php if($pdata['narkose']=="Plexus") print "selected";?>>Plexus</option>
-	<option value=Standy <?php if($pdata['narkose']=="Standby") print "selected";?>>Standby</option>
+	<option value=ITN <?php if($pdata['narkose']=="ITN") echo "selected";?>>ITN</option>
+	<option value=LA <?php if($pdata['narkose']=="LA") echo "selected";?>>LA</option>
+	<option value=DS <?php if($pdata['narkose']=="DS") echo "selected";?>>DS</option>
+	<option value=Plexus <?php if($pdata['narkose']=="Plexus") echo "selected";?>>Plexus</option>
+	<option value=Standy <?php if($pdata['narkose']=="Standby") echo "selected";?>>Standby</option>
 	<option value="X">...</option>
 	</select>
 	
 
 <BR>
 	Anästhesist<br><TEXTAREA NAME="anadoc1" Content-Type="text/html"
-	COLS="17" ROWS="2"><?php print stripcslashes($pdata['anadoc1']); ?></TEXTAREA>
+	COLS="17" ROWS="2"><?php echo stripcslashes($pdata['anadoc1']); ?></TEXTAREA>
 	<p>
 
 <table cellpadding="0" cellspacing="0" border=0 width=100%> 
 <tr>
 <td><font face=verdana,arial size=1>
-	Schnitt:<br><INPUT NAME="schnitt1" TYPE="text" VALUE="<?php print $pdata['schnitt1']; ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)"> 
+	Schnitt:<br><INPUT NAME="schnitt1" TYPE="text" VALUE="<?php echo $pdata['schnitt1']; ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)"> 
 	<BR>
-	Naht:<br><INPUT NAME="naht1" TYPE="text" VALUE="<?php print $pdata['naht1']; ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)">
+	Naht:<br><INPUT NAME="naht1" TYPE="text" VALUE="<?php echo $pdata['naht1']; ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)">
 </td>
 <td><font face=verdana,arial size=1>
-	Einschleusen:<br><INPUT NAME="ein1" TYPE="text" VALUE="<?php print $pdata['ein1']; ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)"> 
+	Einschleusen:<br><INPUT NAME="ein1" TYPE="text" VALUE="<?php echo $pdata['ein1']; ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)"> 
 	<BR>
-	Ausschleusen:<br><INPUT NAME="aus1" TYPE="text" VALUE="<?php print $pdata['aus1']; ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)">
+	Ausschleusen:<br><INPUT NAME="aus1" TYPE="text" VALUE="<?php echo $pdata['aus1']; ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)">
 </td>
 </tr>
 </table>
@@ -475,11 +475,11 @@ Name, Vorname<br><INPUT NAME="pname" TYPE="text" VALUE="<?php stripcslashes(prin
 
 
 <TD><font face=verdana,arial size=1>Therapie/OP<br><TEXTAREA NAME="therapie" Content-Type="text/html"
-	COLS="17" ROWS="10"><?php print stripcslashes($pdata['therapie']); ?></TEXTAREA></TD>
+	COLS="17" ROWS="10"><?php echo stripcslashes($pdata['therapie']); ?></TEXTAREA></TD>
 
 
 <TD><font face=verdana,arial size=1>Ausgang<br><TEXTAREA NAME="ausgang1" Content-Type="text/html"
-	COLS="17" ROWS="10"><?php print stripcslashes($pdata['ausgang1']); ?></TEXTAREA></TD>
+	COLS="17" ROWS="10"><?php echo stripcslashes($pdata['ausgang1']); ?></TEXTAREA></TD>
 
 
 

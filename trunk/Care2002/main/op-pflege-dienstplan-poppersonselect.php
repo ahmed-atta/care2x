@@ -1,50 +1,48 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-/*if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$$ck_sid_buffer)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_or.php");
-*/
-define("LANG_FILE","or.php");
-define("NO_2LEVEL_CHK",1);
-require("../include/inc_front_chain_lang.php");
-$opabt=get_meta_tags("../global_conf/$lang/op_tag_dept.pid");
+define('LANG_FILE','or.php');
+define('NO_2LEVEL_CHK',1);
+require_once('../include/inc_front_chain_lang.php');
+$opabt=get_meta_tags('../global_conf/'.$lang.'/op_tag_dept.pid');
 
-require("../include/inc_db_makelink.php");
+/* Establish db connection */
+require('../include/inc_db_makelink.php');
 if($link&&$DBLink_OK) 
 {
+        /* Load date formatter */
+        include_once('../include/inc_date_format_functions.php');
+        
+		
 	// get orig data
 
-	  		$dbtable="nursing_dept_personell_quicklist";
+	  		$dbtable='care_nursing_dept_personell_quicklist';
+			
 		 	$sql="SELECT list FROM $dbtable 
 					WHERE dept='$dept'
 					ORDER BY year DESC";
-			//print $sql;
+					
+			//echo $sql;
 			if($ergebnis=mysql_query($sql,$link))
        		{
-				$rows=0;
-				if( $pdata=mysql_fetch_array($ergebnis)) $rows++;
-				if($rows)
+				if($rows=mysql_num_rows($ergebnis))
 				{
-					mysql_data_seek($ergebnis,0); //reset the variable
 					$datafound=1;
 					$pdata=mysql_fetch_array($ergebnis);
-					//print $sql."<br>";
-					//print $rows;
+					//echo $sql."<br>";
+					//echo $rows;
 				}
-				//else print "<p>".$sql."<p>Multiple entries found pls notify the edv."; 
+				//else echo "<p>".$sql."<p>Multiple entries found pls notify the edv."; 
 			}
-				else print "<p>".$sql."<p>Das Lesen  aus der Datenbank $dbtable ist gescheitert."; 
+				else echo "<p>".$sql."<p>$LDDbNoRead"; 
 }
-  else { print "$LDDbNoLink<br>"; } 
+  else { echo "$LDDbNoLink<br>"; } 
 
 
 ?>
 
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 <TITLE><?php echo "$opabt[$dept]" ?></TITLE>
 
 <script language="javascript">
@@ -76,15 +74,13 @@ div.box { border: double; border-width: thin; width: 100%; border-color: black; 
 
 <font face=verdana,arial size=4 color=maroon>
 <b>
-<?php print "$opabt[$dept] "; 
-if ($mode=="a") print ' <font color="#006666">'.$LDTabElements[1].'</font>'; else print $LDTabElements[3];
-print " $LDOn <br>";
+<?php echo "$opabt[$dept] "; 
+if ($mode=="a") echo ' <font color="#006666">'.$LDTabElements[1].'</font>'; else echo $LDTabElements[3];
+echo " $LDOn <br>";
 
 $iday=$elemid+1;
- print '<font color=navy>';
- if(strlen($iday)<2) print "0$iday."; else print "$iday.";
- if($month<10) print '0'.$month; else print $month;
- print '.'.$year.'</font> '.$tage[date("w",mktime(0,0,0,$month,$iday,$year))]; 
+ echo '<font color=navy>';
+ echo formatDate2Local($year.'-'.$month.'-'.$iday,$date_format);
 ?>
 </b>
 </font>
@@ -92,28 +88,28 @@ $iday=$elemid+1;
 
 <?php if($datafound)
 {
-print '<ul>
+echo '<ul>
 	<font face="verdana,arial" size=2>';
 
-//print $pdata['list'];
+//echo $pdata['list'];
 $pbuf=explode("~",$pdata['list']);
 for ($i=0;$i<sizeof($pbuf);$i++)
 {
 	parse_str(trim($pbuf[$i]),$persons);
-	print '
+	echo '
 	<a href="#" onClick=addelem(\''.$mode.$elemid.'\',\'h'.$mode.$elemid.'\',\''.ucfirst($persons[l]).'\',\''.ucfirst($persons[f]).'\',\''.ucfirst($persons[b]).'\')>
-	<img src="../img/mans-';
-	if ($mode=="a") print 'gr.gif'; else print 'red.gif';
-	print '" border="0"> '.ucfirst($persons[l]).', '.ucfirst($persons[f]).'</a>
+	<img ';
+	if ($mode=="a") echo createComIcon('../','mans-gr.gif','0'); else echo createComIcon('../','mans-red.gif','0');
+	echo '> '.ucfirst($persons[l]).', '.ucfirst($persons[f]).'</a>
 	<br>';
 }
-print '
+echo '
 	</font></ul>';
 }
 else
 {
-print '<form><font face="verdana,arial" size=2>
-<img src="../img/catr.gif" border=0 width=88 height=80 align=left> '.$LDNoPersonList.'
+echo '<form><font face="verdana,arial" size=2>
+<img '.createMascot('../','mascot1_r.gif','0','left').'  '.$LDNoPersonList.'
 <p>
 <input type="button" value="'.$LDCreatePersonList.'" onClick="window.opener.location.href=\'op-pflege-dienst-personalliste.php?sid='.$sid.'&lang='.$lang.'&dept='.$dept.'&pmonth='.$month.'&pyear='.$year.'&retpath='.$retpath.'&ipath=plan\';window.opener.focus();window.close();">
 </form>
@@ -123,7 +119,7 @@ print '<form><font face="verdana,arial" size=2>
 
 ?>
 <p><br>
-<a href="javascript:closethis()"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border="0" alt="<?php echo $LDClose ?>"></a>
+<a href="javascript:closethis()"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> alt="<?php echo $LDClose ?>"></a>
 
 </BODY>
 

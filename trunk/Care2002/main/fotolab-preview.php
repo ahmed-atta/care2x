@@ -1,8 +1,11 @@
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php 
+require_once('../include/inc_charset_fx.php');
+echo setCharSet(); 
+?>
 </head>
 <body>
-<img src="../img/pixel.gif" border=0 name="previewpic">
+<img src="../gui/img/common/default/pixel.gif" border=0 name="previewpic">
 </body>
 </html>

@@ -1,35 +1,39 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","nursing.php");
-define("NO_2LEVEL_CHK",1);
-require("../include/inc_front_chain_lang.php");
+define('LANG_FILE','nursing.php');
+define('NO_2LEVEL_CHK',1);
+require_once('../include/inc_front_chain_lang.php');
 
-require("../include/inc_config_color.php"); // load color preferences
+require_once('../include/inc_config_color.php'); // load color preferences
 
-$breakfile="pflege.php?sid=$sid&lang=$lang";
+$breakfile="pflege.php?sid=".$sid."&lang=".$lang;
 
 if($pday=="") $pday=date(d);
 if($pmonth=="") $pmonth=date(m);
 if($pyear=="") $pyear=date(Y);
-$t_date=$pday.".".$pmonth.".".$pyear;
+$s_date=$pyear."-".$pmonth."-".$pday;
+
+/* Load the date formatter */
+require_once('../include/inc_date_format_functions.php');
 
 
-if($mode=="such")
+
+if($mode=='such')
 {
 	$srcword=trim($srcword);
 	//prepare the seach word detect several types
 	if(is_numeric($srcword)) $srcword=(int) $srcword;
 	if(substr_count($srcword,","))  // detect comma
 	{
-		$buf=str_replace(",","",$srcword);//print $buf;
+		$buf=str_replace(",","",$srcword);//echo $buf;
 		$wx=explode(" ",trim($buf));
 		$sln=$wx[0];$sfn=$wx[1];$sg=$wx[2];
 		switch(sizeof($wx))
@@ -50,18 +54,18 @@ if($mode=="such")
 			default: $sw=$srcword; $sln=$sw;$sfn=$sw;$sg=$sw;
 		}
 	}
-	//print $sw;
-	//print $srcword;
+	//echo $sw;
+	//echo $srcword;
 	
-	$dbtable="nursing_station_patients";
-	include("../include/inc_db_makelink.php");
+	$dbtable='care_nursing_station_patients';
+	include('../include/inc_db_makelink.php');
 		if($link&&$DBLink_OK)
 		{
-					if(!$arch)	$sql="SELECT station, t_date, info FROM $dbtable
-									WHERE t_date='".date("d.m.Y")."' 
+					if(!$arch)	$sql="SELECT station, s_date, info FROM $dbtable
+									WHERE s_date='".date('Y-m-d')."' 
 												AND bed_patient LIKE '%$sw%' 
 												AND info<>'template' ORDER BY s_date DESC";
-						else 	$sql="SELECT station, t_date, info FROM $dbtable
+						else 	$sql="SELECT station, s_date, info FROM $dbtable
 									WHERE bed_patient LIKE '%$sw%' 
 												AND info<>'template' ORDER BY s_date DESC";
 					if($ergebnis=mysql_query($sql,$link))
@@ -71,7 +75,7 @@ if($mode=="such")
 							if($rows>1)
 							{
 								mysql_data_seek($ergebnis,0);
-								//print $srcword;
+								//echo $srcword;
 							}
 							elseif($rows==1)
 							{
@@ -84,9 +88,9 @@ if($mode=="such")
 								exit;
 							}
 						}
-						else print "$sql<br>$LDDbNoRead"; 
+						else echo "$sql<br>$LDDbNoRead"; 
 		}
-  		 else { print "$LDDbNoLink<br>"; } 
+  		 else { echo "$LDDbNoLink<br>"; } 
 
 }
 
@@ -94,7 +98,7 @@ if($mode=="such")
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 
 <script  language="javascript">
 <!-- 
@@ -111,7 +115,7 @@ function gethelp(x,s,x1,x2,x3)
 
 
  <?php if($cfg['dhtml'])
-{ print' 
+{ echo' 
 	<script language="javascript" src="../js/hilitebu.js">
 	</script>
 	
@@ -133,8 +137,8 @@ function gethelp(x,s,x1,x2,x3)
 
 <BODY  topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="if (window.focus) window.focus();document.suchlogbuch.srcword.select();"
 <?php 
- print  ' bgcolor='.$cfg['body_bgcolor']; 
- if (!$cfg['dhtml']){ print ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } 
+ echo  ' bgcolor='.$cfg['body_bgcolor']; 
+ if (!$cfg['dhtml']){ echo ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } 
   ?>>
  
  
@@ -142,22 +146,22 @@ function gethelp(x,s,x1,x2,x3)
 <table width=100% border=0 cellspacing="0">
 
 <tr>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10">
-<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+3  FACE="Arial"><STRONG> &nbsp; <?php echo "$LDNursing - $LDSearchPatient" ?></STRONG></FONT></td>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])print'<a href="javascript:window.history.back()"><img src="../img/'.$lang.'/'.$lang.'_back2.gif" width=110 height=24 border=0  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('nursing_how2search.php','<?php echo $mode ?>','<?php echo $rows ?>','search')"><img src="../img/<?php echo "$lang/$lang"; ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 alt="<?php echo $LDCloseAlt ?>"  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10">
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+3  FACE="Arial"><STRONG> &nbsp; <?php echo "$LDNursing - $LDSearchPatient" ?></STRONG></FONT></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
+<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc('../','back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('nursing_how2search.php','<?php echo $mode ?>','<?php echo $rows ?>','search')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
 <tr>
-<td colspan=3  bgcolor="<?php print $cfg['body_bgcolor']; ?>"><p><br>
+<td colspan=3  bgcolor="<?php echo $cfg['body_bgcolor']; ?>"><p><br>
 
 <ul>
 <FONT    SIZE=-1  FACE="Arial">
 <?php if($rows>1) : ?>
 <table border=0>
   <tr>
-    <td><img src="../img/catr.gif" border=0 width=88 height=80 align="absmiddle"></td>
+    <td><img <?php echo createMascot('../','mascot1_r.gif','0','bottom') ?> align="absmiddle"></td>
     <td><FONT  SIZE=3 FACE="verdana,Arial" color=#800000>
-<b><?php print "$LDSearchKeyword <font color=#0000ff>\"$srcword\"</font> ".str_replace("~rows~",$rows,$LDWasFound) ?> <br>
+<b><?php echo "$LDSearchKeyword <font color=#0000ff>\"$srcword\"</font> ".str_replace("~rows~",$rows,$LDWasFound) ?> <br>
 <?php echo $LDPlsClk ?></b></font></td>
   </tr>
 </table>
@@ -172,22 +176,22 @@ function gethelp(x,s,x1,x2,x3)
  $toggle=0;
  while($result=mysql_fetch_array($ergebnis))
  {
- 	print'
+ 	echo'
   <tr ';
-  if($toggle){ print "bgcolor=#efefef"; $toggle=0;} else {print "bgcolor=#ffffff"; $toggle=1;}
-  $dbuf=explode(".",$result[t_date]);
-	$buf="pflege-station.php?sid=$sid&lang=$lang&sln=".$sln."&sfn=".$sfn."&sg=".$sg."&station=".$result[station]."&pday=".$dbuf[0]."&pmonth=".$dbuf[1]."&pyear=".$dbuf[2];
-  print '>
+  if($toggle){ echo "bgcolor=#efefef"; $toggle=0;} else {echo "bgcolor=#ffffff"; $toggle=1;}
+  $dbuf=explode('-',$result['s_date']);
+	$buf="pflege-station.php?sid=$sid&lang=$lang&sln=".$sln."&sfn=".$sfn."&sg=".$sg."&station=".$result[station]."&pday=".$dbuf[2]."&pmonth=".$dbuf[1]."&pyear=".$dbuf[0];
+  echo '>
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">';
-	if($result[t_date]<>date("d.m.Y")) print '<img src="../img/bul_arrowblusm.gif" width=12 height=12 border=0>';
-		else print '<img src="../img/R_arrowGrnSm.gif" width=12 height=12 border=0>';
-	print'
+	if($result['s_date'] <> (date('Y-m-d'))) echo '<img '.createComIcon('../','bul_arrowblusm.gif','0').'>';
+		else echo '<img '.createComIcon('../','r_arrowgrnsm.gif','0').'>';
+	echo'
 	</a></td>
-    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; <a href="'.$buf.'" title="'.$LDClk2Show.'">'.$result[t_date].'</a></td>
-    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.$result[station].'</a>&nbsp;</td>
+    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; <a href="'.$buf.'" title="'.$LDClk2Show.'">'.formatDate2Local($result['s_date'],$date_format).'</a></td>
+    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.$result['station'].'</a>&nbsp;</td>
   </tr>
   <tr bgcolor=#0000ff>
-  <td colspan=9 height=1><img src="../img/pixel.gif" border=0 width=1 height=1 align="absmiddle"></td>
+  <td colspan=9 height=1><img '.createComIcon('../','pixel.gif','0','absmiddle').'></td>
   </tr>';
   }
  ?>
@@ -205,11 +209,11 @@ function gethelp(x,s,x1,x2,x3)
 		<table border=0 cellspacing=0 cellpadding=5 bgcolor="#eeeeee">
     <tr>
       <td>	<font color=maroon size=2><b><?php echo $LDSrcKeyword ?>:</b></font><br>
-          		<input type="text" name="srcword" size=40 maxlength=100 value="<?php if ($srcword!=NULL) print $srcword; ?>">
-				<input type="hidden" name="sid" value="<?php print $sid; ?>">
-  				<input type="hidden" name="lang" value="<?php print $lang; ?>">
+          		<input type="text" name="srcword" size=40 maxlength=100 value="<?php if ($srcword!=NULL) echo $srcword; ?>">
+				<input type="hidden" name="sid" value="<?php echo $sid; ?>">
+  				<input type="hidden" name="lang" value="<?php echo $lang; ?>">
   			<input type="hidden" name="mode" value="such"><br>
-				<font size=2><input type="checkbox" name="arch" value="1" <?php if($arch) print "checked"; ?>> <?php echo $LDSearchArchive ?></font><br>
+				<font size=2><input type="checkbox" name="arch" value="1" <?php if($arch) echo "checked"; ?>> <?php echo $LDSearchArchive ?></font><br>
     			 
     
            	</td>
@@ -237,17 +241,18 @@ function gethelp(x,s,x1,x2,x3)
 <ul>
 <FONT    SIZE=2  FACE="Arial">
 <b><?php echo $LDMoreFunctions ?>:</b><br>
-<img src="../img/varrow.gif" width="20" height="15"> <a href="pflege-station-archiv.php?sid=<?php echo "$sid&lang=$lang";?>&user=<?php print str_replace(" ","+",$user);?>"><?php echo $LDArchive ?></a><br>
-<img src="../img/varrow.gif" width="20" height="15"> <a href="javascript:gethelp('nursing_how2search.php','<?php echo $mode ?>','<?php echo $rows ?>','search')"><?php echo $LDHow2Search ?></a><br>
+<img <?php echo createComIcon('../','varrow.gif','0') ?>> <a href="pflege-station-archiv.php?sid=<?php echo "$sid&lang=$lang";?>&user=<?php echo str_replace(" ","+",$user);?>"><?php echo $LDArchive ?></a><br>
+<img <?php echo createComIcon('../','varrow.gif','0') ?>> <a href="javascript:gethelp('nursing_how2search.php','<?php echo $mode ?>','<?php echo $rows ?>','search')"><?php echo $LDHow2Search ?></a><br>
 
 <p>
-<a href="pflege.php?sid=<?php print "$sid&lang=$lang"; ?>"><img border=0 src="../img/<?php echo "$lang/$lang" ?>_cancel.gif"  alt="<?php echo $LDCancel ?>"></a>
+<a href="pflege.php?sid=<?php echo "$sid&lang=$lang"; ?>"><img <?php echo createLDImgSrc('../','cancel.gif','0') ?>  alt="<?php echo $LDCancel ?>"></a>
 </ul>
 <p>
 <hr>
 <?php
-require("../language/$lang/".$lang."_copyrite.php");
- ?>
+if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
+include('../language/'.$lang.'/'.$lang.'_copyrite.php');
+  else include('../language/en/en_copyrite.php');?>
 </FONT>
 
 

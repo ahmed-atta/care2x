@@ -1,22 +1,17 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-/*if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$$ck_sid_buffer)||!$ck_op_dienstplan_user) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_or.php");
-*/
-define("LANG_FILE","or.php");
-$local_user="ck_op_dienstplan_user";
-require("../include/inc_front_chain_lang.php");
-require("../include/inc_config_color.php"); // load color preferences
 
-$thisfile="op-pflege-dienstplan-planen.php";
+define('LANG_FILE','or.php');
+$local_user='ck_op_dienstplan_user';
+require_once('../include/inc_front_chain_lang.php');
+require_once('../include/inc_config_color.php'); // load color preferences
+
+$thisfile='op-pflege-dienstplan-planen.php';
 
 $vardate="&pmonth=$pmonth&pyear=$pyear";
 
 
-if($retpath=="calendar_opt") 
+if($retpath=='calendar_opt') 
 	{
 	$fixdate= "&cday=$cday&cmonth=$cmonth&cyear=$cyear";
 	$updatetarget="$thisfile?sid=$sid&lang=$lang&retpath=$retpath&dept=$dept$fixdate";
@@ -29,31 +24,32 @@ if($retpath=="calendar_opt")
 		$updatetarget="$thisfile?sid=$sid&lang=$lang&retpath=$retpath&dept=$dept";
 		$savedtarget="$thisfile?sid=$sid&lang=$lang&saved=1&dept=$dept$vardate&retpath=$retpath";
 		if($saved) 	$rettarget="op-pflege-dienstplan.php?sid=$sid&lang=$lang&dept=$dept$vardate&retpath=$retpath";
-			else $rettarget="op-doku.php?sid=$sid&lang=$lang";
+			else $rettarget="op-doku.php?sid=".$sid."&lang=".$lang;
 	}
 	
-$opabt=get_meta_tags("../global_conf/$lang/op_tag_dept.pid");
+$opabt=get_meta_tags('../global_conf/'.$lang.'/op_tag_dept.pid');
 /********************************* Resolve the department and op room ***********************/
-$saal="exclude";
-require("../include/inc_resolve_opr_dept.php");
+$saal='exclude';
+require('../include/inc_resolve_opr_dept.php');
 
-if ($pmonth=="") $pmonth=date('n');
-if ($pyear=="") $pyear=date(Y);
-
+if ($pmonth=='') $pmonth=date('n');
+if ($pyear=='') $pyear=date(Y);
 
 if(strlen($pmonth)<2) $tm="0".$pmonth; else $tm=$pmonth;
-if(($pyear.$tm)<(date("Ym")))
+
+if(($pyear.$tm)<(date('Ym')))
  {
- 	if($retpath=="calendar_opt") header("location:calendar.php?sid=$sid&lang=$lang&dept=$dept$vardate&retpath=$retpath");
+ 	if($retpath=='calendar_opt') header("location:calendar.php?sid=$sid&lang=$lang&dept=$dept$vardate&retpath=$retpath");
 	 else header("location:op-pflege-dienstplan.php?sid=$sid&lang=$lang&dept=$dept$vardate&retpath=$retpath");
 }
 
-$dbtable="nursing_dutyplan";
+$dbtable='care_nursing_dutyplan';
 
-require("../include/inc_db_makelink.php");
+/* Establish db connection */
+require('../include/inc_db_makelink.php');
 if($link&&$DBLink_OK) 
 {	
-		if($mode=="save")
+		if($mode=='save')
 		{
 				// check if entry is already existing
 				$sql="SELECT tid,encoding FROM $dbtable 
@@ -62,7 +58,7 @@ if($link&&$DBLink_OK)
 							AND month='$pmonth'";
 				if($ergebnis=mysql_query($sql,$link))
        			{
-					//print $sql." checked <br>";
+					//echo $sql." checked <br>";
 					//$bbuf="";
 					//$tbuf="";
 					if($a0!="") $adbuf=$ha0."&s=".$a0; else $adbuf="?";
@@ -96,11 +92,11 @@ if($link&&$DBLink_OK)
 											
 							if($ergebnis=mysql_query($sql,$link))
        							{
-									//print $sql." new update <br>";
+									//echo $sql." new update <br>";
 									mysql_close($link);
 									header("location:$savedtarget");
 								}
-								else print "<p>".$sql."<p>$LDDbNoRead"; 
+								else echo "<p>".$sql."<p>$LDDbNoRead"; 
 						} // else create new entry
 						else
 						{
@@ -126,11 +122,11 @@ if($link&&$DBLink_OK)
 
 							if($ergebnis=mysql_query($sql,$link))
        							{
-									//print $sql." new insert <br>";
+									//echo $sql." new insert <br>";
 									mysql_close($link);
 									header("location:$savedtarget");
 								}
-								else print "<p>".$sql."<p>Das Lesen  aus der Datenbank $dbtable ist gescheitert."; 
+								else echo "<p>".$sql."<p>Das Lesen  aus der Datenbank $dbtable ist gescheitert."; 
 						}//end of else
 					} // end of if ergebnis
 		 }// end of if(mode==save)
@@ -149,13 +145,13 @@ if($link&&$DBLink_OK)
 				{
 					mysql_data_seek($ergebnis,0);
 					$result=mysql_fetch_array($ergebnis);
-					//print $sql."<br>";
+					//echo $sql."<br>";
 				}
 			}
-				else print "<p>".$sql."<p>$LDDbNoRead"; 
+				else echo "<p>".$sql."<p>$LDDbNoRead"; 
 	 	}
 }
-  else { print "$LDDbNoLink<br>"; } 
+  else { echo "$LDDbNoLink<br>"; } 
 
   
   
@@ -204,7 +200,7 @@ function makefwdpath($path,$dpt,$mo,$yr,$saved)
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 
 <style type="text/css">
 	A:link  {text-decoration: none; }
@@ -233,7 +229,7 @@ div.a3 {font-family: arial; font-size: 14; margin-left: 3; margin-right:3; }
 
 function popselect(elem,mode)
 {
-	eval("document.images.icon"+mode+elem+".src='../img/warn.gif';");
+	eval("document.images.icon"+mode+elem+".src='../gui/img/common/default/warn.gif';");
 	w=window.screen.width;
 	h=window.screen.height;
 	ww=300;
@@ -274,12 +270,12 @@ function cal_update()
 <form name="dienstplan" action="op-pflege-dienstplan-planen.php" method="post">
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0" >
 <tr valign=top>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" ><FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG> &nbsp;<?php echo "$LDCreate $LDDutyPlan" ?> <font color="<?php print $cfg['top_txtcolor']; ?>"><?php echo $opabt[$dept]; ?></font></STRONG></FONT></td>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" align=right><a 
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" ><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
+<STRONG> &nbsp;<?php echo "$LDCreate $LDDutyPlan" ?> <font color="<?php echo $cfg['top_txtcolor']; ?>"><?php echo $opabt[$dept]; ?></font></STRONG></FONT></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right><a 
 href="javascript:history.back();killchild();"><img 
-src="../img/<?php echo "$lang/$lang" ?>_back2.gif" border=0 width=110 height=24 align="absmiddle"></a><a 
-href="javascript:gethelp('op_duty.php','plan','<?php echo $rows ?>')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 align="absmiddle"></a><a href="<?php echo $rettarget ?>" onClick=killchild()><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 align="absmiddle"></a></td>
+<?php echo createLDImgSrc('../','back2.gif','0','absmiddle') ?>></a><a 
+href="javascript:gethelp('op_duty.php','plan','<?php echo $rows ?>')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0','absmiddle') ?>></a><a href="<?php echo $rettarget ?>" onClick=killchild()><img <?php echo createLDImgSrc('../','close2.gif','0','absmiddle') ?>></a></td>
 </tr>
 <tr>
 <td bgcolor=#cde1ec valign=top colspan=2><p><br>
@@ -290,10 +286,10 @@ href="javascript:gethelp('op_duty.php','plan','<?php echo $rows ?>')"><img src="
 <?php
 for ($i=1;$i<13;$i++)
 	{
-	 print '<option  value="'.$i.'" ';
-	 if (($pmonth)==$i) print 'selected';
-	 print '>'.$monat[$i].'</option>';
-  	 print "\n";
+	 echo '<option  value="'.$i.'" ';
+	 if (($pmonth)==$i) echo 'selected';
+	 echo '>'.$monat[$i].'</option>';
+  	 echo "\n";
 	}
 ?>
 </select>
@@ -302,10 +298,10 @@ for ($i=1;$i<13;$i++)
 <?php
 for ($i=2000;$i<2016;$i++)
 	{
-	 print '<option  value="'.$i.'" ';
-	 if ($pyear==$i) print 'selected';
-	 print '>'.$i.'</option>';
-  	 print "\n";
+	 echo '<option  value="'.$i.'" ';
+	 if ($pyear==$i) echo 'selected';
+	 echo '>'.$i.'</option>';
+  	 echo "\n";
 	}
 
 ?>
@@ -344,34 +340,34 @@ for ($i=1,$n=0;$i<=$maxdays;$i++,$n++){
 	
 	parse_str(trim($aduty[$n]),$aelems);
 	parse_str(trim($rduty[$n]),$relems);
-	print '
+	echo '
 	<tr >
 	<td  height=5 '.$backcolor.'><div class="a3"><font face="arial" size=2>'.$i.'</div>
 	</td>
 	<td height=5 '.$backcolor.'><div class=a3><font face=arial size=2>';
-	if ($wd=="So") print '<font color=red>';
-	print $wd.'</div>
+	if ($wd=="So") echo '<font color=red>';
+	echo $wd.'</div>
 	</td>
 	<td height=5 '.$backcolor.'><div class="a3"><font face="arial" size=2>
-	&nbsp;<a href="javascript:popselect(\''.$n.'\',\'a\')"><button onclick="javascript:popselect(\''.$n.'\',\'a\')"><img src="../img/patdata.gif" width=20 height=20 border=0></button></a>
+	&nbsp;<a href="javascript:popselect(\''.$n.'\',\'a\')"><button onclick="javascript:popselect(\''.$n.'\',\'a\')"><img '.createComIcon('../','patdata.gif','0').'></button></a>
 	';
-	print '
+	echo '
 	<input type="hidden" name="ha'.$n.'" value="l='.$aelems[l].'&f='.$aelems[f].'&b='.$aelems[b].'">
 	<input type="text" name="a'.$n.'" size="20" onFocus=this.select() value="'.$aelems[s].'"> </div>
 	</td>
 	<td height=5 '.$backcolor.'>&nbsp;';
-		if ($aelems[s]=="") print '<img src="../img/pixel.gif" border=0 width=16 height=16'; else print '<img src="../img/mans-gr.gif"  border=0 width=12 height=15';
-	print ' id="icona'.$n.'">&nbsp;
+		if ($aelems[s]=="") echo '<img src="../gui/img/common/default/pixel.gif" border=0 width=16 height=16'; else echo '<img <img '.createComIcon('../','mans-gr.gif','0');
+	echo ' id="icona'.$n.'">&nbsp;
 	</td>
 	<td height=5 '.$backcolor.'><div class=a3><font face=arial size=2>
-	&nbsp;<a href="javascript:popselect(\''.$n.'\',\'r\')"><button onclick="javascript:popselect(\''.$n.'\',\'r\')"><img src="../img/patdata.gif" width=20 height=20 border=0></button></a>';
-	print '&nbsp;
+	&nbsp;<a href="javascript:popselect(\''.$n.'\',\'r\')"><button onclick="javascript:popselect(\''.$n.'\',\'r\')"><img <img '.createComIcon('../','patdata.gif','0').'></button></a>';
+	echo '&nbsp;
 	<input type="hidden" name="hr'.$n.'" value="l='.$relems[l].'&f='.$relems[f].'&b='.$relems[b].'">
 	<input type="text" size="20" name="r'.$n.'" onFocus=this.select() value="'.$relems[s].'"></div>
 	</td>
 	<td height=5 '.$backcolor.'>&nbsp;';
-	if ($relems[s]=="") print '<img src="../img/pixel.gif" border=0 width=16 height=16'; else print '<img src="../img/mans-red.gif " border=0 width=12 height=15';
-	print ' id="iconr'.$n.'">&nbsp;
+	if ($relems[s]=="") echo '<img src="../gui/img/common/default/pixel.gif" border=0 width=16 height=16'; else echo '<img <img '.createComIcon('../','mans-red.gif','0');
+	echo ' id="iconr'.$n.'">&nbsp;
 	</td>
 	</tr>';
 	if ($d==6) $d=0; else $d++;
@@ -386,16 +382,16 @@ for ($i=1,$n=0;$i<=$maxdays;$i++,$n++){
 	
 </td>
 <td valign="top" align="left">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="image" src="../img/<?php echo "$lang/$lang" ?>_savedisc.gif" border=0><p>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<?php echo $rettarget ?>"><img src="../img/<?php ($saved) ? print "$lang/$lang"."_close2.gif" : print "$lang/$lang"."_cancel.gif"; ?>" border="0"></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="image" <?php echo createLDImgSrc('../','savedisc.gif','0') ?>><p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<?php echo $rettarget ?>"><img <?php if($saved)  echo  createLDImgSrc('../','close2.gif','0'); else echo createLDImgSrc('../','cancel.gif','0'); ?>></a>
 
 </td>
 </tr>
 </table>
 
 <p>
-<input type="image" src="../img/<?php echo "$lang/$lang" ?>_savedisc.gif" border=0>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="<?php echo $rettarget ?>"><img src="../img/<?php ($saved) ? print "$lang/$lang"."_close2.gif" : print "$lang/$lang"."_cancel.gif"; ?>" border="0"></a>
+<input type="image" <?php echo createLDImgSrc('../','savedisc.gif','0') ?>>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="<?php echo $rettarget ?>"><img <?php if($saved)  echo  createLDImgSrc('../','close2.gif','0'); else echo createLDImgSrc('../','cancel.gif','0'); ?>></a>
 <p>
 </ul>
 
@@ -407,26 +403,27 @@ for ($i=1,$n=0;$i<=$maxdays;$i++,$n++){
 <tr>
 <td bgcolor=silver height=70 colspan=2>
 <?php
-require("../language/$lang/".$lang."_copyrite.php");
- ?>
+if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
+include('../language/'.$lang.'/'.$lang.'_copyrite.php');
+  else include('../language/en/en_copyrite.php');?>
 </td>
 </tr>
 </table>        
 &nbsp;
 <input type="hidden" name="mode" value="save">
-<input type="hidden" name="sid" value="<?php print $sid; ?>">
-<input type="hidden" name="lang" value="<?php print $lang; ?>">
-<input type="hidden" name="dept" value="<?php print $dept; ?>">
-<input type="hidden" name="pmonth" value="<?php print $pmonth; ?>">
-<input type="hidden" name="pyear" value="<?php print $pyear; ?>">
-<input type="hidden" name="planid" value="<?php print $ck_plan; ?>">
-<input type="hidden" name="maxelement" value="<?php print $maxdays; ?>">
-<input type="hidden" name="encoder" value="<?php print $ck_op_dienstplan_user; ?>">
-<input type="hidden" name="retpath" value="<?php print $retpath; ?>">
+<input type="hidden" name="sid" value="<?php echo $sid; ?>">
+<input type="hidden" name="lang" value="<?php echo $lang; ?>">
+<input type="hidden" name="dept" value="<?php echo $dept; ?>">
+<input type="hidden" name="pmonth" value="<?php echo $pmonth; ?>">
+<input type="hidden" name="pyear" value="<?php echo $pyear; ?>">
+<input type="hidden" name="planid" value="<?php echo $ck_plan; ?>">
+<input type="hidden" name="maxelement" value="<?php echo $maxdays; ?>">
+<input type="hidden" name="encoder" value="<?php echo $ck_op_dienstplan_user; ?>">
+<input type="hidden" name="retpath" value="<?php echo $retpath; ?>">
 <?php if($retpath=="calendar_opt") : ?>
-	<input type="hidden" name="cday" value="<?php print $cday; ?>">
-	<input type="hidden" name="cmonth" value="<?php print $cmonth; ?>">
-	<input type="hidden" name="cyear" value="<?php print $cyear; ?>">
+	<input type="hidden" name="cday" value="<?php echo $cday; ?>">
+	<input type="hidden" name="cmonth" value="<?php echo $cmonth; ?>">
+	<input type="hidden" name="cyear" value="<?php echo $cyear; ?>">
 <?php endif ?>
 </form>
 

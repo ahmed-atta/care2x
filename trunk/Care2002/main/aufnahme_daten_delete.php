@@ -7,7 +7,7 @@ $dbhost="localhost";
 $dbusername="httpd";
 $dbpassword="";
 $dbname="maho";
-$dbtable="mahopatient";
+$dbtable='care_admission_patient';
 $forwardfile="aufnahme_list.php";
 $breakfile="aufnahme_list.php";
 $thisfile="aufnahme_daten_delete.php";
@@ -28,25 +28,25 @@ $fieldnames=array("no.","Pat.nummer","Anrede","Name","Vorname","Geburstdatum");
 									// first renumber the remaining data
 										for ($i=$itemname+1;$i<=$linecount;$i++)
 										{
-											$sql='UPDATE '.$dbtable.' SET mahopatient_item="'.($i*10000).'" WHERE mahopatient_item="'.$i.'"';	
-											if (!(mysql_query($sql,$link))) print $sql."  Vorbereitung der Daten zum Löschen ist gescheitert.";
+											$sql='UPDATE '.$dbtable.' SET care_admission_patient_item="'.($i*10000).'" WHERE care_admission_patient_item="'.$i.'"';	
+											if (!(mysql_query($sql,$link))) echo $sql."  Vorbereitung der Daten zum Löschen ist gescheitert.";
 										}
 									// then delete the  data
-										$sql='DELETE FROM '.$dbtable.' WHERE mahopatient_item="'.$itemname.'"';	
-										if (!(mysql_query($sql,$link))) print $sql."  Das Löschen der Daten ist gescheitert.";
+										$sql='DELETE FROM '.$dbtable.' WHERE care_admission_patient_item="'.$itemname.'"';	
+										if (!(mysql_query($sql,$link))) echo $sql."  Das Löschen der Daten ist gescheitert.";
 
 									// then correctly itemize the remaining data
 										for ($i=$itemname+1;$i<=$linecount;$i++)
 										{
-											$sql='UPDATE '.$dbtable.' SET mahopatient_item="'.($i-1).'" WHERE mahopatient_item="'.($i*10000).'"';	
-											if (!(mysql_query($sql,$link))) print $sql."  Vorbereitung der Daten zum Löschen ist gescheitert.";
+											$sql='UPDATE '.$dbtable.' SET care_admission_patient_item="'.($i-1).'" WHERE care_admission_patient_item="'.($i*10000).'"';	
+											if (!(mysql_query($sql,$link))) echo $sql."  Vorbereitung der Daten zum Löschen ist gescheitert.";
 										}	
 										
 									}else 									
 										// if item is the last then simply delete the  data
 										{
-											$sql='DELETE FROM '.$dbtable.' WHERE mahopatient_item="'.$itemname.'"';	
-											if (!(mysql_query($sql,$link))) print $sql."  Das Löschen der Daten ist gescheitert.";										
+											$sql='DELETE FROM '.$dbtable.' WHERE care_admission_patient_item="'.$itemname.'"';	
+											if (!(mysql_query($sql,$link))) echo $sql."  Das Löschen der Daten ist gescheitert.";										
 										}
 
 									// check if the pagecount is reduced
@@ -58,10 +58,10 @@ $fieldnames=array("no.","Pat.nummer","Anrede","Name","Vorname","Geburstdatum");
 									header("Location: aufnahme_list.php?route=validroute&remark=itemdelete&batchnum=".$batchnum."&displaysize=".$displaysize."&linecount=".$linecount."&pagecount=".$pagecount); exit;
 								}else 
 									{
-										$sql='SELECT * FROM '.$dbtable.' WHERE mahopatient_item="'.$itemname.'"';
+										$sql='SELECT * FROM '.$dbtable.' WHERE care_admission_patient_item="'.$itemname.'"';
 										$ergebnis=mysql_query($sql,$link);
 										if($ergebnis) $zeile=mysql_fetch_array($ergebnis); 
-											else print "Das Lesen von Daten aus der Datenbank ist gescheitert.";
+											else echo "Das Lesen von Daten aus der Datenbank ist gescheitert.";
 									}
 						
 	
@@ -69,7 +69,7 @@ $fieldnames=array("no.","Pat.nummer","Anrede","Name","Vorname","Geburstdatum");
 				mysql_close($link);
 				}
 				 else 
-				{ print "Verbindung zur Datenbank konnte nicht hergestellt werden.<br>"; }
+				{ echo "Verbindung zur Datenbank konnte nicht hergestellt werden.<br>"; }
 
 
 ?>
@@ -115,7 +115,7 @@ Wollen Sie die folgende Patientendaten wirklich löschen?<p>
 for($i=0;$i<(sizeof($fieldnames));$i++) 
  	{	
 		if($zeile[$i]!="") 	
-		print "<td nowrap><FONT color=#0000cc SIZE=2  FACE=Arial><b>".$fieldnames[$i]."</b></td>\n";
+		echo "<td nowrap><FONT color=#0000cc SIZE=2  FACE=Arial><b>".$fieldnames[$i]."</b></td>\n";
    	}
 
 ?>
@@ -125,7 +125,7 @@ for($i=0;$i<(sizeof($fieldnames));$i++)
 for($i=0;$i<(sizeof($fieldnames));$i++) 
  	{	
 		if($zeile[$i]!="") 	
-		print "<td nowrap><FONT color=#000000 SIZE=2  FACE=Arial><nobr>".$zeile[$i]."</td>\n";
+		echo "<td nowrap><FONT color=#000000 SIZE=2  FACE=Arial><nobr>".$zeile[$i]."</td>\n";
    	}
 
 ?>
@@ -135,22 +135,22 @@ for($i=0;$i<(sizeof($fieldnames));$i++)
 </table>
 
 <br>
-<FORM action="<?php print $thisfile ?>" method="post">
-<INPUT type="hidden" name="itemname" value="<?php print $itemname ?>">
+<FORM action="<?php echo $thisfile ?>" method="post">
+<INPUT type="hidden" name="itemname" value="<?php echo $itemname ?>">
 <input type=hidden name=finalcommand value="delete">
 <input type=hidden name=route value="validroute">
-<input type=hidden name=batchnum value="<?php print $batchnum ?>">
-<input type=hidden name=displaysize value="<?php print $displaysize ?>">
-<input type=hidden name=linecount value="<?php print $linecount ?>">
-<input type=hidden name=pagecount value="<?php print $pagecount ?>">
+<input type=hidden name=batchnum value="<?php echo $batchnum ?>">
+<input type=hidden name=displaysize value="<?php echo $displaysize ?>">
+<input type=hidden name=linecount value="<?php echo $linecount ?>">
+<input type=hidden name=pagecount value="<?php echo $pagecount ?>">
 <img src="../img/delete.gif"> <INPUT type="submit" name="versand" value="Ja, löschen"></font></FORM>
 
 <FORM  method=post action="<?php echo $breakfile ?>" >
 <input type=hidden name=route value="validroute">
-<input type=hidden name=batchnum value="<?php print $batchnum ?>">
-<input type=hidden name=displaysize value="<?php print $displaysize ?>">
-<input type=hidden name=linecount value="<?php print $linecount ?>">
-<input type=hidden name=pagecount value="<?php print $pagecount ?>">
+<input type=hidden name=batchnum value="<?php echo $batchnum ?>">
+<input type=hidden name=displaysize value="<?php echo $displaysize ?>">
+<input type=hidden name=linecount value="<?php echo $linecount ?>">
+<input type=hidden name=pagecount value="<?php echo $pagecount ?>">
 <img src="../img/suspend.gif"> <INPUT type="submit"  value="Nein, Abbrechen"></font></FORM>
 
 </center>
@@ -168,8 +168,8 @@ for($i=0;$i<(sizeof($fieldnames));$i++)
 <p>
 <hr>
 <p>
-<img src="../img/varrow.gif" width="20" height="15"> <a href="edv-accessplan-wie.htm">Wie verwalte ich die Zugangsberechtigungen?</a><br>
-<img src="../img/varrow.gif" width="20" height="15"> <a href="edv-accessplan-werwo.htm">Wer hat wo Zugangsberechtigung?</a><br>
+<img <?php echo createComIcon('../','varrow.gif','0') ?>> <a href="edv-accessplan-wie.htm">Wie verwalte ich die Zugangsberechtigungen?</a><br>
+<img <?php echo createComIcon('../','varrow.gif','0') ?>> <a href="edv-accessplan-werwo.htm">Wer hat wo Zugangsberechtigung?</a><br>
 <HR>
 <p>
 

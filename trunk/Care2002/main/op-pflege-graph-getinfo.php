@@ -6,12 +6,12 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 if (!$sid||($sid!=$$ck_sid_buffer)||!$ck_op_pflegelogbuch_user||!$winid||!$patnum) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 require("../language/".$lang."/lang_".$lang."_or.php");
 */
-define("LANG_FILE","or.php");
-$local_user="ck_op_pflegelogbuch_user";
-require("../include/inc_front_chain_lang.php");
-require("../include/inc_config_color.php"); // load color preferences
+define('LANG_FILE','or.php');
+$local_user='ck_op_pflegelogbuch_user';
+require_once('../include/inc_front_chain_lang.php');
+require_once('../include/inc_config_color.php'); // load color preferences
 
-$dbtable="nursing_op_logbook";
+$dbtable='care_nursing_op_logbook';
 $thisfile="op-pflege-graph-getinfo.php";
 
 switch($winid)
@@ -49,12 +49,13 @@ switch($winid)
 	default:{header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 }
 
-require("../include/inc_db_makelink.php");
+/* Establish db connection */
+require('../include/inc_db_makelink.php');
 if($link&&$DBLink_OK) 
 	{	
 	// get orig data
 
-		if($mode=="save")
+		if($mode=='save')
 		{
 					
 				// check if entry is already existing
@@ -70,7 +71,7 @@ if($link&&$DBLink_OK)
 					
 					if($rows==1)
 					 {
-						//print $sql." checked <br>";
+						//echo $sql." checked <br>";
 						for($i=0;$i<$maxelement;$i++)
 						{
 							$sx="tstart".$i;$ex="tend".$i;
@@ -91,18 +92,18 @@ if($link&&$DBLink_OK)
 											
 							if($ergebnis=mysql_query($sql,$link))
        							{
-									//print $sql." new update <br>";
+									//echo $sql." new update <br>";
 									mysql_close($link);
 									header("location:$thisfile?sid=$sid&lang=$lang&saved=1&patnum=$patnum&winid=$winid&dept=$dept&saal=$saal&op_nr=$op_nr&year=$pyear&pmonth=$pmonth&pday=$pday");
 								}
 								else
 								{
-									print $LDPatNoExist;
+									echo $LDPatNoExist;
 									exit;
 								}//end of else
 						}// end of if rows
 				}
-				else { print "$LDDbNoRead<br>"; } 
+				else { echo "$LDDbNoRead<br>"; } 
 		 }// end of if(mode==save)
 		 else
 		 {
@@ -120,20 +121,20 @@ if($link&&$DBLink_OK)
 				{
 					mysql_data_seek($ergebnis,0);
 					$result=mysql_fetch_array($ergebnis);
-					//print $sql."<br>file found!";
+					//echo $sql."<br>file found!";
 				}
 			}
-				else { print "$LDDbNoRead<br>"; } 
+				else { echo "$LDDbNoRead<br>"; } 
 	 	}
 }
-  else { print "$LDDbNoLink<br>"; } 
+  else { echo "$LDDbNoLink<br>"; } 
 
 
 ?>
 
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 <TITLE><?php echo $title ?></TITLE>
 
 <script language="javascript">
@@ -304,9 +305,9 @@ function isgdatum(val,idx)
 function updatebar(x)
 {
 	if(x=="main")
-	window.opener.parent.LOGINPUT.location.replace('<?php print "oploginput.php?sid=$sid&lang=$lang&mode=edit&patnum=$patnum&op_nr=$op_nr&dept=$dept&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday";?>');
+	window.opener.parent.LOGINPUT.location.replace('<?php echo "oploginput.php?sid=$sid&lang=$lang&mode=edit&patnum=$patnum&op_nr=$op_nr&dept=$dept&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday";?>');
 	else
-	window.opener.parent.OPLOGIMGBAR.location.replace('<?php print "oplogtimebar.php?sid=$sid&lang=$lang&winid=$winid&patnum=$patnum&op_nr=$op_nr&dept=$dept&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday";?>');
+	window.opener.parent.OPLOGIMGBAR.location.replace('<?php echo "oplogtimebar.php?sid=$sid&lang=$lang&winid=$winid&patnum=$patnum&op_nr=$op_nr&dept=$dept&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday";?>');
 }
 //$imgsrc="../imgcreator/log-timebar.php?sid=$sid&winid=$winid&patnum=$patnum&op_nr=$op_nr&dept=$dept&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday";
 function gethelp(x,s,x1,x2,x3)
@@ -334,17 +335,17 @@ div.box { border: double; border-width: thin; width: 100%; border-color: black; 
 onLoad="<?php if($saved) 
 				{
 					if(($winid=="entry_out")||($winid=="cut_close")) $buf="main";
-					print "updatebar('$buf');"; 
+					echo "updatebar('$buf');"; 
 				}
 			?>if (window.focus) window.focus(); window.focus();" >
 
-<a href="javascript:gethelp('oplog.php','time','<?php echo $winid ?>')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 alt="<?php echo $LDHelp ?>" align="right"></a>
+<a href="javascript:gethelp('oplog.php','time','<?php echo $winid ?>')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0') ?> alt="<?php echo $LDHelp ?>" align="right"></a>
 
 <font face=verdana,arial size=5 color=maroon>
 <b>
 <?php 
-	//print "$title $patnum $dept $saal $op_nr $pday $pmonth $pyear $winid";
-	print $title;
+	//echo "$title $patnum $dept $saal $op_nr $pday $pmonth $pyear $winid";
+	echo $title;
 ?>
 </b>
 </font>
@@ -380,7 +381,7 @@ onLoad="<?php if($saved)
 			for($i=0;$i<$counter;$i++)
 			{
 				parse_str(trim($b[$i]),$bb);
-				print '
+				echo '
  						 <tr>
    						 <td class="v12">'.strtolower($LDFrom).': <input type="text" name="tstart'.$i.'" size=6 maxlength=5 value="'.$bb[s].'"  onKeyUp="isnum(this.value,this.name)">&nbsp;&nbsp;
         				</td>
@@ -433,15 +434,15 @@ onLoad="<?php if($saved)
 </form>
 <p>
 <div align=right> 
-<a href="javascript:window.close()"><img src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" border="0" alt="<?php echo $LDClose ?>">
+<a href="javascript:window.close()"><img <?php echo createLDImgSrc('../','cancel.gif','0') ?>" border="0" alt="<?php echo $LDClose ?>">
 </a>
 &nbsp;&nbsp;
-<a href="javascript:resetinput()"><img src="../img/<?php echo "$lang/$lang" ?>_reset.gif" border="0" alt="<?php echo $LDReset ?>"></a>
+<a href="javascript:resetinput()"><img <?php echo createLDImgSrc('../','reset.gif','0') ?> alt="<?php echo $LDReset ?>"></a>
 &nbsp;&nbsp;
 <?php if($saved)  : ?>
-<a href="javascript:window.close()"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border="0" alt="<?php echo $LDClose ?>"></a>
+<a href="javascript:window.close()"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> alt="<?php echo $LDClose ?>"></a>
 <?php else : ?>
-<a href="javascript:document.infoform.submit();"><img src="../img/<?php echo "$lang/$lang" ?>_savedisc.gif" border="0" alt="<?php echo $LDSave ?>"></a>
+<a href="javascript:document.infoform.submit();"><img <?php echo createLDImgSrc('../','savedisc.gif','0') ?> alt="<?php echo $LDSave ?>"></a>
 <?php endif ?>
 </div>
 </BODY>

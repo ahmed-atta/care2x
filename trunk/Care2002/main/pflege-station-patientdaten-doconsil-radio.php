@@ -1,143 +1,210 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","nursing.php");
-$local_user="ck_pflege_user";
-require("../include/inc_front_chain_lang.php");
-require("../include/inc_config_color.php"); // load color preferences
+define('LANG_FILE','konsil.php');
 
-$thisfile="pflege-station-patientdaten-doconsil-radio.php";
-$breakfile="pflege-station-patientdaten.php?sid=$sid&lang=$lang&edit=$edit&station=$station&pn=$pn";
+/* Globalize the variables */
+require_once('../include/inc_vars_resolve.php');
+
+/* We need to differentiate from where the user is coming: 
+*  $user_origin != lab ;  from patient charts folder
+*  $user_origin == lab ;  from the laboratory
+*  and set the user cookie name and break or return filename
+*/
+if($user_origin=='lab')
+{
+  $local_user='ck_lab_user';
+  if($target=="radio") $breakfile="radiolog.php?sid=".$sid."&lang=".$lang; 
+   else $breakfile="labor.php?sid=".$sid."&lang=".$lang;  
+}
+else
+{
+  $local_user='ck_pflege_user';
+  $breakfile="pflege-station-patientdaten.php?sid=$sid&lang=$lang&edit=$edit&station=$station&pn=$pn";
+}
+
+require_once('../include/inc_front_chain_lang.php');
+require_once('../include/inc_config_color.php'); // load color preferences
+require_once('../global_conf/inc_global_address.php');
+
+$thisfile='pflege-station-patientdaten-doconsil-radio.php';
 
 $bgc1="#ffffff";  // entry form's background color
 
 $abtname=get_meta_tags("../global_conf/$lang/konsil_tag_dept.pid");
 
-$formtitle=$abtname[$konsil];
+$formtitle=$abtname[$target];
 						
-require("../include/inc_db_makelink.php");
+$db_request_table=$target;
+define('_BATCH_NR_INIT_',60000000); 
+/*
+*  The following are  batch nr inits for each type of test request
+*   chemlabor = 10000000; patho = 20000000; baclabor = 30000000; blood = 40000000; generic = 50000000; radio = 60000000
+*/
+						
+/* Here begins the real work */
+/* Establish db connection */
+require('../include/inc_db_makelink.php');
 if($link&&$DBLink_OK)
-	{	
-		// get orig data
-		$dbtable="mahopatient";
-		$sql="SELECT * FROM $dbtable WHERE patnum='$pn' ";
+{	
+   
+   require_once('../include/inc_date_format_functions.php');
+   
+
+     /* Check for the patient number = $pn. If available get the patients data, otherwise set edit to 0 */
+     if(isset($pn)&&$pn)
+	 {		
+	    $dbtable='care_admission_patient';
+	    /* Get original data */
+		$sql="SELECT * FROM $dbtable WHERE patnum='".$pn."'";
 		if($ergebnis=mysql_query($sql,$link))
-       		{
-				$rows=0;
-				if( $result=mysql_fetch_array($ergebnis)) $rows++;
-				if($rows)
+       	{
+				if( $rows=mysql_num_rows($ergebnis)) 
 					{
-						mysql_data_seek($ergebnis,0);
 						$result=mysql_fetch_array($ergebnis);
 					}
-				}
-			else {print "<p>$sql<p>$LDDbNoRead"; exit;}
-		
-		
-		if($mode=="save")
-		{
-			if((($dateput)&&($timeput)&&($berichtput)&&($author))||(($dateput2)&&($berichtput2)&&($author2)))
-			{
-				$report="d=$dateput&t=$timeput&b=$berichtput&a=$author&w=$warn\r\n";
-				$report=strtr($report," ","+");
-				$np_report="d=$dateput2&t=$timeput2&b=$berichtput2&a=$author2&w=$warn2\r\n";
-				$np_report=strtr($np_report," ","+");
-				if((!$dateput)&&($dateput2)) $dateput=$dateput2;
-				
-				// check if entry is already existing
-				$dbtable="nursing_station_patients_diagnostic_request";
-				$sql="SELECT report FROM $dbtable WHERE patnum='$pn' AND dept='$konsil'";
-				if($ergebnis=mysql_query($sql,$link))
-       			{
-					$rows=0;
-					if( $content=mysql_fetch_array($ergebnis)) $rows++;
-					if($rows==1)
-						{
-							mysql_data_seek($ergebnis,0);
-							$content=mysql_fetch_array($ergebnis);
-							$report=$content['report']."_".$report;
-							$np_report=$content['np_report']."_".$np_report;
-							
-							$sql="UPDATE $dbtable SET report='$report'
-									WHERE patnum='$pn' AND dept='$konsil'";
-							if($ergebnis=mysql_query($sql,$link))
-       							{
-									mysql_close($link);
-									header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=1&pn=$pn&station=$station");
-								}
-								else {print "<p>$sql<p>$LDDbNoUpdate"; exit;}
-						} // else create new entry
-						else
-						{
-							$sql="INSERT INTO $dbtable 
-										(
-										patnum,
-										lastname,
-										firstname,
-										bday,
-										fe_date,
-										le_date,
-										report,
-										np_report
-										)
-									 	VALUES
-										(
-										'$pn',
-										'".$result['name']."',
-										'".$result['vorname']."',
-										'".$result['gebdatum']."',
-										'$dateput',
-										'$dateput',
-										'$report',
-										'$np_report'
-										)";
+		}
+	   else 
+	   {
+	      $edit=0;
+		  $mode="";
+		  $pn="";
+	   }		
+     }
+	 
 
-							if($ergebnis=mysql_query($sql,$link))
-       							{
-									//print $sql;
-									mysql_close($link);
-									header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=1&pn=$pn&station=$station");
-								}
-								else {print "<p>$sql<p>$LDDbNoSave"; exit;}
-						}
-				}
-				else {print "<p>$sql<p>$LDDbNoRead"; exit;}
-			}
-			else $saved=0;
-		}// end of if(mode==save)
+	   
+	 if(!isset($mode))   $mode="";
 		
-		$dbtable="nursing_station_patients_report";
-		$sql="SELECT * FROM $dbtable WHERE patnum='$pn' ";
-		if($ergebnis=mysql_query($sql,$link))
-       		{
-				$rows=0;
-				if( $content=mysql_fetch_array($ergebnis)) $rows++;
-				if($rows)
-					{
-						mysql_data_seek($ergebnis,0);
-						$content=mysql_fetch_array($ergebnis);
-					}
-				}
-			else {print "<p>$sql<p>$LDDbNoRead"; exit;}
-	}
-	else 
-		{ print "$LDDbNoLink<br>$sql<br>"; }
+		  switch($mode)
+		  {
+				     case 'save':
+							
+                                 $sql="INSERT INTO care_test_request_".$db_request_table." 
+                                          (lang, batch_nr, patnum, dept, 
+										  xray, ct, sono, mammograph, mrt, nuclear, 
+										  if_patmobile, if_allergy, if_hyperten, if_pregnant, 
+										  clinical_info, test_request, send_date, 
+										  send_doctor, status, create_id, create_time) 
+										  VALUES 
+										  (
+										   '".$lang."','".$batch_nr."','".$pn."','".$dept."',
+										   '".$xray."','".$ct."','".$sono."','".$mammograph."','".$mrt."','".$nuclear."',
+										   '".$if_patmobile."','".$if_allergy."','".$if_hyperten."','".$if_pregnant."',
+										   '".htmlspecialchars($clinical_info)."','".htmlspecialchars($test_request)."','".formatDate2Std($send_date,$date_format)."',
+										   '".htmlspecialchars($send_doctor)."', 'pending', '".$HTTP_COOKIE_VARS[$local_user.$sid]."', NULL
+										   )";
+
+							      if($ergebnis=mysql_query($sql,$link))
+       							  {
+									//echo $sql;
+									mysql_close($link);
+									 header("location:labor_test_request_aftersave.php?sid=$sid&lang=$lang&edit=$edit&saved=insert&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=$target&noresize=$noresize&batch_nr=$batch_nr");
+									 exit;
+								  }
+								  else 
+								  {
+								     echo "<p>$sql<p>$LDDbNoSave"; 
+									 $mode="";
+								  }
+								
+								break; // end of case 'save'
+								
+		     case 'update':
+			 
+							      $sql="UPDATE care_test_request_".$db_request_table." SET 
+								          lang = '".$lang."', dept = '', 
+										  xray='".$xray."', ct='".$ct."', sono='".$sono."', 
+										  mammograph='".$mammograph."', mrt='".$mrt."', nuclear='".$nuclear."', 
+										  if_patmobile='".$if_patmobile."', if_allergy='".$if_allergy."', 
+										  if_hyperten='".$if_hyperten."', if_pregnant='".$if_pregnant."', 
+										  clinical_info='".htmlspecialchars($clinical_info)."', test_request='".htmlspecialchars($test_request)."', 
+										  send_date='".formatDate2Std($send_date,$date_format)."', 
+										  send_doctor='".htmlspecialchars($send_doctor)."', status='".$status."', modify_id='".$HTTP_COOKIE_VARS[$local_user.$sid]."'
+										   WHERE batch_nr = '".$batch_nr."'";
+										  							
+							      if($ergebnis=mysql_query($sql,$link))
+       							  {
+									//echo $sql;
+									mysql_close($link);
+									 header("location:labor_test_request_aftersave.php?sid=$sid&lang=$lang&edit=$edit&saved=update&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=$target&batch_nr=$batch_nr&noresize=$noresize");
+									 exit;
+								  }
+								  else
+								   {
+								      echo "<p>$sql<p>$LDDbNoSave"; 
+								      $mode="";
+								   }
+								
+								break; // end of case 'save'
+								
+								
+	        /* If mode is edit, get the stored test request when its status is either "pending" or "draft"
+			*  otherwise it is not editable anymore which happens when the lab has already processed the request,
+			*  or when it is discarded, hidden, locked, or otherwise. 
+			*/
+			case 'edit':
+			
+		                $sql="SELECT * FROM care_test_request_".$db_request_table." WHERE batch_nr='".$batch_nr."' AND (status='pending' OR status='draft')";
+		                if($ergebnis=mysql_query($sql,$link))
+       		            {
+				            if($editable_rows=mysql_num_rows($ergebnis))
+					        {
+							
+     					       $stored_request=mysql_fetch_array($ergebnis);
+							   
+							   $edit_form=1;
+
+					         }
+			             }
+						 
+						 break; ///* End of case 'edit': */
+			
+			 default: $mode="";
+						   
+		  }// end of switch($mode)
+  
+          if(!$mode) /* Get a new batch number */
+		  {
+		                $sql="SELECT batch_nr FROM care_test_request_".$db_request_table." ORDER BY batch_nr DESC LIMIT 1";
+		                if($ergebnis=mysql_query($sql,$link))
+       		            {
+				            if($batchrows=mysql_num_rows($ergebnis))
+					        {
+						       $bnr=mysql_fetch_array($ergebnis);
+							   $batch_nr=$bnr['batch_nr'];
+							   if(!$batch_nr) $batch_nr=_BATCH_NR_INIT_; else $batch_nr++;
+					         }
+					         else
+					         {
+					            $batch_nr=_BATCH_NR_INIT_;
+					          }
+			             }
+			               else 
+						   {
+						     echo "<p>$sql<p>$LDDbNoRead";
+						   }
+						 $mode="save";   
+		   }	    
+}
+else 
+ { echo "$LDDbNoLink<br>$sql<br>"; }
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
  <TITLE><?php echo "$LDDiagnosticTest $station" ?></TITLE>
 <?php
-require("../include/inc_css_a_hilitebu.php");
+require('../include/inc_css_a_hilitebu.php');
 ?>
 <style type="text/css">
 
@@ -145,57 +212,35 @@ div.fva2_ml10 {font-family: verdana,arial; font-size: 12; margin-left: 10;}
 div.fa2_ml10 {font-family: arial; font-size: 12; margin-left: 10;}
 div.fva2_ml3 {font-family: verdana; font-size: 12; margin-left: 3; }
 div.fa2_ml3 {font-family: arial; font-size: 12; margin-left: 3; }
-.fva2_ml10 {font-family: verdana,arial; font-size: 12; margin-left: 10; color:#000099;}
+.fva2_ml10 {font-family: verdana,arial; font-size: 12; margin-left: 10; color:#000000;}
 .fva2b_ml10 {font-family: verdana,arial; font-size: 12; margin-left: 10; color:#000000;}
-.fva0_ml10 {font-family: verdana,arial; font-size: 10; margin-left: 10; color:#000099;}
+.fva0_ml10 {font-family: verdana,arial; font-size: 10; margin-left: 10; color:#000000;}
 </style>
 
 <script language="javascript">
 <!-- 
-  var urlholder;
-  var focusflag=0;
-  var formsaved=0;
-  
-function pruf(d){
-	if(((d.dateput.value)&&(d.timeput.value)&&(d.berichtput.value)&&(d.author.value))||((d.dateput2.value)&&(d.berichtput2.value)&&(d.author2.value))) return true;
-	else 
+function chkForm(d){
+
+    if((d.test_request.value=='')||(d.test_request.value==' '))
 	{
-		alert("<?php echo $LDAlertIncomplete ?>");
+		alert("<?php echo $LDPlsEnterDiagnosisQuiry ?>");
+		d.test_request.focus();
 		return false;
 	}
+	else if((d.send_doctor.value=='')||(d.send_doctor.value==' '))
+	{
+		alert("<?php echo $LDPlsEnterDoctorName ?>");
+		d.send_doctor.focus();
+		return false;
+	}
+	else if((d.send_date.value=='')||(d.send_date.value==' '))
+	{
+		alert("<?php echo $LDPlsEnterDate ?>");
+		d.send_date.focus();
+		return false;
+	}
+	else return true;
 }
-
-function submitform(){
-	document.forms[0].submit();
-	}
-
-function closewindow(){
-	opener.window.focus();
-	window.close();
-	}
-
-function resetinput(){
-	document.berichtform.reset();
-	}
-
-function select_this(formtag){
-		document.berichtform.elements[formtag].select();
-	}
-	
-function getinfo(patientID){
-	urlholder="pflege-station.php?route=validroute&patient=" + patientID + "&user=<?php echo $HTTP_COOKIE_VARS[$local_user.$sid].'"' ?>;
-	patientwin=window.open(urlholder,patientID,"width=600,height=400,menubar=no,resizable=yes,scrollbars=yes");
-	}
-function sethilite(d){
-	d.focus();
-	d.value=d.value+"~";
-	d.focus();
-	}
-function endhilite(d){
-	d.focus();
-	d.value=d.value+"~~";
-	d.focus();
-	}
 
 function gethelp(x,s,x1,x2,x3)
 {
@@ -205,117 +250,284 @@ function gethelp(x,s,x1,x2,x3)
 	window.helpwin.moveTo(0,0);
 }
 
--->
+function sendLater()
+{
+   document.form_test_request.status.value="draft";
+   if(chkForm(document.form_test_request)) document.form_test_request.submit(); 
+}
+
+function printOut()
+{
+	urlholder="labor_test_request_printpop.php?sid=<?php echo $sid ?>&lang=<?php echo $lang ?>&user_origin=<?php echo $user_origin ?>&subtarget=<?php echo $target ?>&batch_nr=<?php echo $batch_nr ?>&pn=<?php echo $stored_request['patnum'] ?>";
+	testprintout<?php echo $sid ?>=window.open(urlholder,"testprintout<?php echo $sid ?>","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
+    testprintout<?php echo $sid ?>.print();
+}
+
+<?php require('../include/inc_checkdate_lang.php'); ?>
+//-->
 </script>
-<script language="javascript" src="../js/setdatetime.js">
-</script>
+
+<script language="javascript" src="../js/setdatetime.js"></script>
+
+<script language="javascript" src="../js/checkdate.js"></script>
+
 </HEAD>
 
-<BODY bgcolor=<?php print $cfg['body_bgcolor']; ?> 
+<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> 
 onLoad="if (window.focus) window.focus(); 
-<?php if(($mode=="save")||($saved)) print ";window.location.href='#bottom';document.berichtform.berichtput.focus()"; ?>"  
+<?php if($pn=="") echo "document.searchform.searchkey.focus();" ?>" 
 topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ print 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+
+<?php if(!$noresize)
+{
+?>
 
 <script>	
-window.moveTo(0,0);
+      window.moveTo(0,0);
 	 window.resizeTo(1000,740);
 </script>
 
+<?php 
+}
+?>
+
 <table width=100% border=0 cellpadding="5" cellspacing=0>
 <tr>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php print "$LDDiagnosticTest ($station)"; ?></STRONG></FONT>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php echo $LDDiagnosticTest; if($user_origin!="lab") echo " (".$station.")"; ?></STRONG></FONT>
 </td>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp()"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:window.parent.location.replace('<?php echo $breakfile ?>');" ><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr>
+<?php 
+if($user_origin=='lab')
+{
+?>
+<a href="<?php echo $thisfile."?sid=$sid&lang=$lang&station=$station&user_origin=$user_origin&status=$status&target=$target&noresize=$noresize"; ?>"><img <?php echo createLDImgSrc('../','newpat2.gif','0') ?>></a>
+&nbsp;
+<?php
+}
+?><a href="javascript:gethelp()"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc('../','close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
 </tr>
 <tr>
-<td bgcolor=<?php print $cfg['body_bgcolor']; ?> colspan=2>
+<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> colspan=2>
  <ul>
 
-<form name="berichtform" method="get" action="<?php echo $thisfile ?>" onSubmit="return pruf(this)">
 <?php
-print '
-		<table   cellpadding="0" cellspacing=1 border="0" width=700>';
-print '
-		<tr  valign="top">
-		<td  bgcolor="#ffffff" ><div class=fva2b_ml10><span style="background:yellow"><b>'.$result[patnum].'</b></span><br>
+if($edit)
+{
+?>
+
+<form name="form_test_request" method="post" action="<?php echo $thisfile ?>" onSubmit="return chkForm(this)">
+
+<?php
+
+/* If in edit mode display the control buttons */
+
+$controls_table_width=700;
+
+require('../include/inc_test_request_controls.php');
+
+}
+elseif(!$read_form && !$no_proc_assist)
+{
+?>
+
+<table border=0>
+  <tr>
+    <td valign="bottom"><img <?php echo createComIcon('../','angle_down_l.gif','0') ?>></td>
+    <td><font color="#000099" SIZE=3  FACE="verdana,Arial"> <b><?php echo $LDPlsSelectPatientFirst ?></b></font></td>
+    <td><img <?php echo createMascot('../','mascot1_l.gif','0','absmiddle') ?>></td>
+  </tr>
+</table>
+<?php
+}
+?>
+   
+   <!--  outermost table creating form border -->
+<table border=0 bgcolor="#000000" cellpadding=1 cellspacing=0>
+  <tr>
+    <td>
+	
+	<table border=0 bgcolor="#ffffff" cellpadding=0 cellspacing=0>
+   <tr>
+     <td>
+	
+	   <table   cellpadding=0 cellspacing=1 border=0 width=700>
+   <tr  valign="top">
+   <td  bgcolor="#ffffff" rowspan=2>
+ <?php
+/*echo '
+		<div class=fva2b_ml10><span style="background:yellow"><b>'.$result[patnum].'</b></span><br>
 		<b>'.$result[name].', '.$result[vorname].'</b> <br>
-		<font color=maroon>'.$result[gebdatum].'</font> <br><font size=1>
+		<font color=maroon>'.formatDate2Local($result[gebdatum],$date_format).'</font> <br><font size=1>
 		'.nl2br($result[address]).'<p>
-		'.$station.'&nbsp;'.$result[kasse].' '.$result[kassename].'</div></td>';
-print '
-		<td bgcolor="'.$bgc1.'"  class=fva2_ml10><div   class=fva2_ml10><font size=5 color="#0000ff"><b>'.$formtitle.'</b></font>
-		 <p>'.$LDStation.'/'.$LDDept.':<br>
+		'.$station.'&nbsp;'.$result[kasse].' '.$result[kassename].'</div>';
+echo '
 		<input type="text" name="stat_dept" value="'.strtoupper($station).'" size=25 maxlength=30>
   		</div>
-		</td></tr>';
+		';*/
+        if($edit)
+        {
+		   echo '<img src="../imgcreator/barcode_label_single_large.php?sid=$sid&lang=$lang&pn='.$result['patnum'].'" width=282 height=178>';
+		}
+        elseif($pn=="")
+		{
+		    $searchmask_bgcolor="#f3f3f3";
+            include("../include/inc_test_request_searchmask.php");
+        }
+		?></td>
+      <td bgcolor="<?php echo $bgc1 ?>"  class=fva2_ml10><div   class=fva2_ml10><font size=5 color="#0000ff"><b><?php echo $formtitle ?></b></font>
+		 <br><?php echo $global_address[$target].'<br>'.$LDTel.'&nbsp;'.$global_phone[$target]; ?>
+		 </td>
+		 </tr>
+	 <tr>
+      <td bgcolor="<?php echo $bgc1 ?>" align="right" valign="bottom">	 
+	  <?php
+		    echo '<font size=1 color="#990000" face="verdana,arial">'.$batch_nr.'</font>&nbsp;&nbsp;<br>';
+			  echo "<img src='../classes/barcode/image.php?code=".$batch_nr."&style=68&type=I25&width=145&height=40&xres=2&font=5' border=0>";
+     ?>
+	     </td>
+		 </tr>
+		 	
+		<tr bgcolor="<?php echo $bgc1 ?>">
+		<td  valign="top" colspan=2 >
+		
+		<table border=0 cellpadding=1 cellspacing=1 width=100%>
+    <tr>
+      <td align="right"><div class=fva2_ml10><?php echo $LDXrayTest ?></td><br>
+      <td><input type="checkbox" name="xray" value="1" <?php if(($edit_form || $read_form) && $stored_request['xray']) echo "checked" ?>></td>
+      <td align="right"><div class=fva2_ml10><?php echo $LDSonograph ?></td>
+      <td><input type="checkbox" name="sono" value="1" <?php if(($edit_form || $read_form) && $stored_request['sono']) echo "checked" ?>></td>
+    </tr>
+    <tr>
+      <td align="right"><div class=fva2_ml10><?php echo $LDCT ?></td>
+      <td><input type="checkbox" name="ct" value="1" <?php if(($edit_form || $read_form) && $stored_request['ct']) echo "checked" ?>></td>
+      <td align="right"><div class=fva2_ml10><?php echo $LDMammograph ?></td>
+      <td><input type="checkbox" name="mammograph" value="1" <?php if(($edit_form || $read_form) && $stored_request['mammograph']) echo "checked" ?>></td>
+    </tr>
+    <tr>
+      <td align="right"><div class=fva2_ml10><?php echo $LDMRT ?></td>
+      <td><input type="checkbox" name="mrt" value="1" <?php if(($edit_form || $read_form) && $stored_request['mrt']) echo "checked" ?>></td>
+      <td align="right"><div class=fva2_ml10><?php echo $LDNuclear ?></td>
+      <td><input type="checkbox" name="nuclear" value="1" <?php if(($edit_form || $read_form) && $stored_request['nuclear']) echo "checked" ?>></td>
+    </tr>
+	
+    <tr>
+      <td colspan=4><hr></td>
+    </tr>
 
-
-?>
+    <tr>
+      <td align="right"><div class=fva2_ml10><?php echo $LDPatMobile ?> &nbsp;<?php echo $LDYes ?></td>
+      <td><font size=2 face="verdana,arial">
+	  <input type="radio" name="if_patmobile" value="1" <?php if(($edit_form || $read_form) && $stored_request['if_patmobile']) echo "checked" ?>> &nbsp;<?php echo $LDNo ?>
+	  <input type="radio" name="if_patmobile" value="0" <?php if(($edit_form || $read_form) && !$stored_request['if_patmobile']) echo "checked" ?>></td>
+      <td align="right"><div class=fva2_ml10><?php echo $LDAllergyKnown ?> &nbsp;<?php echo $LDYes ?></td>
+      <td><font size=2 face="verdana,arial">
+	  <input type="radio" name="if_allergy" value="1" <?php if(($edit_form || $read_form) && $stored_request['if_allergy']) echo "checked" ?>> &nbsp;<?php echo $LDNo ?>
+	  <input type="radio" name="if_allergy" value="0" <?php if(($edit_form || $read_form) && !$stored_request['if_allergy']) echo "checked" ?>></td>
+    </tr>
+    <tr>
+      <td align="right"><div class=fva2_ml10><?php echo $LDHyperthyreosisKnown ?> &nbsp;<?php echo $LDYes ?></td>
+      <td><font size=2 face="verdana,arial">
+	  <input type="radio" name="if_hyperten" value="1" <?php if(($edit_form || $read_form) && $stored_request['if_hyperten']) echo "checked" ?>> &nbsp;<?php echo $LDNo ?>
+	  <input type="radio" name="if_hyperten" value="0" <?php if(($edit_form || $read_form) && !$stored_request['if_hyperten']) echo "checked" ?>></td>
+      <td align="right"><div class=fva2_ml10><?php echo $LDPregnantPossible ?> &nbsp;<?php echo $LDYes ?></td>
+      <td><font size=2 face="verdana,arial">
+	  <input type="radio" name="if_pregnant" value="1" <?php if(($edit_form || $read_form) && $stored_request['if_pregnant']) echo "checked" ?>> &nbsp;<?php echo $LDNo ?>
+	  <input type="radio" name="if_pregnant" value="0" <?php if(($edit_form || $read_form) && !$stored_request['if_pregnant']) echo "checked" ?>></td>
+    </tr>
+  </table>
+  
+		
+  </td>
+</tr>
+		 
 	<tr bgcolor="<?php echo $bgc1 ?>">
-		<td colspan=2><div class=fva2_ml10>&nbsp;<br><?php echo $LDReqTest ?>:<br>
-		<textarea name="prep_info" cols=80 rows=10 wrap="physical"></textarea>
+		<td colspan=2><div class=fva2_ml10><?php echo $LDClinicalInfo ?>:<br>
+		<textarea name="clinical_info" cols=80 rows=6 wrap="physical"><?php if($edit_form || $read_form) echo stripslashes($stored_request['clinical_info']) ?></textarea>
+				</td>
+		</tr>	
+	<tr bgcolor="<?php echo $bgc1 ?>">
+		<td colspan=2><div class=fva2_ml10><?php echo $LDReqTest ?>:<br>
+		<textarea name="test_request" cols=80 rows=5 wrap="physical"><?php if($edit_form || $read_form) echo stripslashes($stored_request['test_request']) ?></textarea>
 				</td>
 		</tr>	
 
+
+	
 	<tr bgcolor="<?php echo $bgc1 ?>">
-		<td ><div class=fva2_ml10><font color="#000099">
-<?php echo $LDAddendum ?> :
-  </div></td>
-			<td ><div class=fva2_ml10><font color="#000099">
-		<input type="text" name="hws_info" size=40 maxlength=60>
-		
-  </div></td>
-</tr>
-	<tr bgcolor="<?php echo $bgc1 ?>">
-		<td  valign=top><div class=fva0_ml10><font color="#000099">
-		<?php echo $LDSpeedTest ?>:<br><input type="text" name="sb_info" size=20 maxlength=25><br>&nbsp;
-  </div></td>
-			<td  valign=top><div class=fva0_ml10><font color="#000099">
-		 <?php echo $LDSpecialNotice ?>:<br>
-		<input type="text" name="specials" size=55 maxlength=60><br>&nbsp;
-		
-  </div></td>
-</tr>
-	<tr bgcolor="<?php echo $bgc1 ?>">
-		<td ><div class=fva2_ml10><font color="#000099">
+		<td colspan=2 align="right"><div class=fva2_ml10><font color="#000099">
 		 <?php echo $LDDate ?>:
-		<input type="text" name="edate" value="<?php echo date("d.m.Y") ?>" size=10 maxlength=10>
-  </div></td>
-			<td ><div class=fva2_ml10><font color="#000099">
-		<?php echo $LDDoctor ?>:
-		<input type="text" name="encoder" size=25 maxlength=30>
-		<?php echo $LDPassword ?>:
-		<input type="password" name="encoder" size=15 maxlength=20>
-  </div></td>
-</tr>
-		</table>
-
-
-<p>
-<table width="650"  cellpadding="0" cellspacing="0">
-<tr><td>
-<a href="<?php echo $breakfile ?>"><img src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" border="0" width=103 height=24 alt="<?php echo $LDClose ?>"></a>
-</td>
-<td align=right>
-<a href="<?php echo $breakfile ?>"><img src="../img/<?php echo "$lang/$lang" ?>_sendlater.gif" border="0" width=156 height=24alt="<?php echo $LDSendLater ?>"></a>
-&nbsp;&nbsp;
-<a href="javascript:resetinput()"><img src="../img/<?php echo "$lang/$lang" ?>_reset.gif" border="0"  width=156 height=24 alt="<?php echo $LDReset ?>"></a>
-&nbsp;&nbsp;
-<input type="image" src="../img/<?php echo "$lang/$lang" ?>_abschic.gif" border=0 width=110 height=24 alt="<?php echo $LDSend ?>">
-</td>
-</tr>
+		<input type="text" name="send_date" 
+		value="<?php 
+		
+		            if($edit_form || $read_form)
+					{
+					  echo formatDate2Local($stored_request['send_date'],$date_format); 
+					}
+					else
+					{
+					  echo formatDate2Local(date("Y-m-d"),$date_format);
+					}
+				  ?>" size=10 maxlength=10 onBlur="IsValidDate(this,'<?php echo $date_format ?>')"  onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+  <?php echo $LDRequestingDoc ?>:
+		<input type="text" name="send_doctor" size=40 maxlength=40 value="<?php if($edit_form || $read_form) echo $stored_request['send_doctor'] ?>"></div><br>
+		</td>
+    </tr>
+	<tr bgcolor="<?php echo $bgc1 ?>">
+		<td  colspan=2 bgcolor="#cccccc"><div class=fva2_ml10><font color="#000099">
+		 <?php echo $LDXrayNumber ?>
+		<img src="../gui/img/common/default/gray_pixel.gif" border=0 width=100 height=20 align="absmiddle" vspace=3>
+  <?php echo $LD_r_cm2 ?>
+		<img src="../gui/img/common/default/gray_pixel.gif" border=0 width=50 height=20 align="absmiddle" vspace=3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		 <?php echo $LDXrayTechnician ?>&nbsp;<img src="../gui/img/common/default/gray_pixel.gif" border=0 width=150 height=20 align="absmiddle" vspace=3>
+		<?php echo $LDDate ?>&nbsp;<img src="../gui/img/common/default/gray_pixel.gif" border=0 width=100 height=20 align="absmiddle" vspace=3>
+     
+	  </div>
+    </tr>	
+	<tr bgcolor="<?php echo $bgc1 ?>">
+		<td colspan=2> 
+		 <div class=fva2_ml10>&nbsp;<br><font color="#969696"><?php echo $LDNotesTempReport ?></font><br>
+		<img src="../gui/img/common/default/gray_pixel.gif" border=0 width=675 height=120>
+				</td>
+		</tr>	
+		
+	<tr bgcolor="<?php echo $bgc1 ?>">
+		<td colspan=2 align="right"><div class=fva2_ml10><font color="#969696">
+		 <?php echo $LDDate ?>
+		<img src="../gui/img/common/default/gray_pixel.gif" border=0 width=100 height=20 align="absmiddle" vspace=3>
+  <?php echo $LDReportingDoc ?>
+		<img src="../gui/img/common/default/gray_pixel.gif" border=0 width=250 height=20 align="absmiddle" vspace=3></div>
+		</td>
+    </tr>
+		</table> 
+	 
+	 </td>
+   </tr>
+ </table>
+	
+	</td>
+  </tr>
 </table>
-<input type="hidden" name="sid" value="<?php echo $sid ?>">
-<input type="hidden" name="lang" value="<?php echo $lang ?>">
-<input type="hidden" name="station" value="<?php echo $station ?>">
-<input type="hidden" name="pn" value="<?php echo $pn ?>">
-<input type="hidden" name="edit" value="<?php echo $edit ?>">
-<input type="hidden" name="konsil" value="<?php echo $konsil ?>">
-<input type="hidden" name="mode" value="save">
+<p>
+
+<?php
+if($edit)
+{
+
+/* If in edit mode display the control buttons */
+require('../include/inc_test_request_controls.php');
+
+require("../include/inc_test_request_hiddenvars.php");
+
+?>
 
 </form>
+
+<?php
+}
+?>
+
 </FONT>
 
 </ul>
@@ -325,8 +537,10 @@ print '
 </table>        
 <p>
 <?php
-require("../language/$lang/".$lang."_copyrite.php");
- ?>
-<a name="bottom"></a>
+
+if(file_exists("../language/$lang/".$lang."_copyrite.php")) include("../language/$lang/".$lang."_copyrite.php");
+  else include("../language/en/en_copyrite.php");
+  
+?>
 </BODY>
 </HTML>

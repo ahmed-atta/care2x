@@ -33,7 +33,7 @@
 <center>
 
 
-<?php if (($username!="")or($keyword!="")&&($passtag=="wrong")) : ?>
+<?php if (($username!="")or($keyword!='')&&($passtag=="wrong")) : ?>
 
 <FONT  COLOR="red"  SIZE=+2  FACE="Arial"><STRONG>Sorry, aber Ihre Eingaben sind falsch.
 Versuchen Sie es noch ein mal.</STRONG></FONT><P>
@@ -71,9 +71,9 @@ Kennwort eingeben:<br>
 <p>
 <hr>
 <p>
-<img src="../img/varrow.gif" width="20" height="15"><a href="ucons.php<?php echo "?lang=$lang" ?>">Laborstandards</a><br>
-<img src="../img/varrow.gif" width="20" height="15"><a href="ucons.php<?php echo "?lang=$lang" ?>">Nachrichten</a><br>
-<img src="../img/varrow.gif" width="20" height="15"><a href="ucons.php<?php echo "?lang=$lang" ?>">Rundbrief</a><br>
+<img <?php echo createComIcon('../','varrow.gif','0') ?>><a href="ucons.php<?php echo "?lang=$lang" ?>">Laborstandards</a><br>
+<img <?php echo createComIcon('../','varrow.gif','0') ?>><a href="ucons.php<?php echo "?lang=$lang" ?>">Nachrichten</a><br>
+<img <?php echo createComIcon('../','varrow.gif','0') ?>><a href="ucons.php<?php echo "?lang=$lang" ?>">Rundbrief</a><br>
 <HR>
 
 

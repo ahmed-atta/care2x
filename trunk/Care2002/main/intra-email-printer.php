@@ -1,24 +1,29 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","intramail.php");
-$local_user="ck_intra_email_user";
-require("../include/inc_front_chain_lang.php");
+define('LANG_FILE','intramail.php');
+$local_user='ck_intra_email_user';
+require_once('../include/inc_front_chain_lang.php');
 
-$thisfile="intra-email-printer.php";
+$thisfile="intra-email-echoer.php";
 
-$dbtable="mail_private";
+$dbtable='care_mail_private';
 
-require("../include/inc_db_makelink.php");
+/* Establish db connection */
+require('../include/inc_db_makelink.php');
 if($link&&$DBLink_OK) 
-	{	
+{	
+    /* Load the date formatter */
+    include_once('../include/inc_date_format_functions.php');
+    
+
 		switch($folder)
 		{
 			case "inbox":$sql='SELECT * FROM '.$dbtable.' WHERE  sender="'.$from.'" 
@@ -45,15 +50,15 @@ if($link&&$DBLink_OK)
 					{
 						$mailok=0;
 					}
-				}else { print "$LDDbNoRead<br>$sql"; } 
+				}else { echo "$LDDbNoRead<br>$sql"; } 
 	}
-  		else { print "$LDDbNoLink<br>$sql"; } 
+  		else { echo "$LDDbNoLink<br>$sql"; } 
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
  <script language="javascript" >
 <!-- 
 function gethelp(x,s,x1,x2,x3)
@@ -67,7 +72,7 @@ function gethelp(x,s,x1,x2,x3)
 </script> 
 
 <?php 
-require("../include/inc_css_a_hilitebu.php");
+require('../include/inc_css_a_hilitebu.php');
 ?>
 
 
@@ -75,21 +80,21 @@ require("../include/inc_css_a_hilitebu.php");
 
 <BODY bgcolor="#ffffff" onLoad="if (window.focus) window.focus()">
 <pre><?php
-print '
-'.$LDFrom.': <b>'.$content[sender].'</b>
-'.$LDReply2.': <b>'.$content[reply2].'</b>
-'.$LDTo.': <b>'.$content[recipient].'</b>
-CC: <b>'.$content[cc].'</b>
-BCC: <b>'.$content[bcc].'</b>
-'.$LDSubject.': <b>'.$content[subject].'</b>
+echo '
+'.$LDFrom.': <b>'.$content['sender'].'</b>
+'.$LDReply2.': <b>'.$content['reply2'].'</b>
+'.$LDTo.': <b>'.$content['recipient'].'</b>
+CC: <b>'.$content['cc'].'</b>
+BCC: <b>'.$content['bcc'].'</b>
+'.$LDSubject.': <b>'.$content['subject'].'</b>
 '.$LDAttach.':
-'.$LDDate.':'.$LDTime.': <b>'.$content[send_dt].'</b>';
+'.$LDDate.':'.$LDTime.': <b>'.formatDate2Local($content['send_dt'],$date_format).' '.convertTimeToLocal(formatDate2Local($content['send_dt'],$date_format,0,1)).'</b>';
 
 ?>
 <hr>
 <?php
 //$content[body]=chunk_split($content[body],100);
-print nl2br($content[body]);
+echo nl2br($content['body']);
 ?>
 <hr>
 </pre><p><FONT face="verdana,Arial" size=2 >

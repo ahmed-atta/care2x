@@ -1,22 +1,22 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","or.php");
-define("NO_2LEVEL_CHK",1);
-require("../include/inc_front_chain_lang.php");
-require("../include/inc_config_color.php");
+define('LANG_FILE','or.php');
+define('NO_2LEVEL_CHK',1);
+require_once('../include/inc_front_chain_lang.php');
+require_once('../include/inc_config_color.php');
 
 $fixdate="&cday=$cday&cmonth=$cmonth&cyear=$cyear";
 switch($retpath)
 {
-	case "menu": $rettarget="op-doku.php?sid=$sid&lang=$lang"; break;
+	case "menu": $rettarget="op-doku.php?sid=".$sid."&lang=".$lang; break;
 	case "qview": $rettarget="op-pflege-dienst-schnellsicht.php?sid=$sid&lang=$lang&hilitedept=$dept"; break;
 	case "calendar_opt":$rettarget="calendar-options.php?sid=$sid&lang=$lang&dept=$dept&day=$cday&month=$cmonth&year=$cyear";break;
 	case "calendar_main":$rettarget="calendar.php?sid=$sid&lang=$lang&dept=$dept";break;
@@ -25,7 +25,7 @@ switch($retpath)
 
 /********************************* Resolve the or department  only ***********************/
 $saal="exclude";
-require("../include/inc_resolve_opr_dept.php");
+require('../include/inc_resolve_opr_dept.php');
 
 setcookie(username,"");
 setcookie(ck_plan,"1");
@@ -35,9 +35,10 @@ $thisfile="op-pflege-dienstplan.php";
 
 $abtname=get_meta_tags("../global_conf/$lang/op_tag_dept.pid");
 
-$dbtable="nursing_dutyplan";
+$dbtable='care_nursing_dutyplan';
 
-require("../include/inc_db_makelink.php");
+/* Establish db connection */
+require('../include/inc_db_makelink.php');
 if($link&&$DBLink_OK) 
 	{	
 		
@@ -54,12 +55,12 @@ if($link&&$DBLink_OK)
 				{
 					mysql_data_seek($ergebnis,0);
 					$result=mysql_fetch_array($ergebnis);
-					//print $sql."<br>";
+					//echo $sql."<br>";
 				}
 			}
-				else print "<p>".$sql."<p>$LDDbNoRead"; 
+				else echo "<p>".$sql."<p>$LDDbNoRead"; 
 	}
-  	 else { print "$LDDbNoLink<br>"; } 
+  	 else { echo "$LDDbNoLink<br>"; } 
 
 $firstday=date("w",mktime(0,0,0,$pmonth,1,$pyear));
 
@@ -70,7 +71,7 @@ $maxdays=date("t",mktime(0,0,0,$pmonth,1,$pyear));
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 
 <style type="text/css">
 	A:link  {text-decoration: none; }
@@ -98,10 +99,10 @@ div.a3 {font-family: arial; font-size: 14; margin-left: 3; margin-right:3; }
 function newplan()
 {
 <?php if($retpath=="calendar_opt") : ?>
-	window.opener.location.href="op-pflege-dienstplan-pass.php?dept=<?php print "$dept&sid=$sid&lang=$lang&pmonth=$pmonth&pyear=$pyear&retpath=$retpath$fixdate"; ?>";
+	window.opener.location.href="op-pflege-dienstplan-pass.php?dept=<?php echo "$dept&sid=$sid&lang=$lang&pmonth=$pmonth&pyear=$pyear&retpath=$retpath$fixdate"; ?>";
 	window.close();
 <?php else : ?>
-	window.location.href="op-pflege-dienstplan-pass.php?dept=<?php print "$dept&sid=$sid&lang=$lang&pmonth=$pmonth&pyear=$pyear&retpath=$retpath"; ?>";
+	window.location.href="op-pflege-dienstplan-pass.php?dept=<?php echo "$dept&sid=$sid&lang=$lang&pmonth=$pmonth&pyear=$pyear&retpath=$retpath"; ?>";
 <?php endif ?>
 }
 
@@ -112,7 +113,7 @@ function popinfo(l,f,b)
 	h=window.screen.height;
 	ww=400;
 	wh=400;
-	urlholder="op-pflege-dienstplan-popinfo.php?<?php echo "sid=$sid&lang=$lang" ?>&ln="+l+"&fn="+f+"&bd="+b+"&dept=<?php echo $dept ?>&route=validroute&user=<?php print $aufnahme_user.'"' ?>;
+	urlholder="op-pflege-dienstplan-popinfo.php?<?php echo "sid=$sid&lang=$lang" ?>&ln="+l+"&fn="+f+"&bd="+b+"&dept=<?php echo $dept ?>&route=validroute&user=<?php echo $aufnahme_user.'"' ?>;
 	
 	infowin=window.open(urlholder,"infowin","width=" + ww + ",height=" + wh +",menubar=no,resizable=yes,scrollbars=yes");
 	window.infowin.moveTo((w/2)+20,(h/2)-(wh/2));
@@ -138,34 +139,34 @@ function killchild() {
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0" >
 <tr valign=top>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" ><FONT  size=+2 COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+1  FACE="Arial">
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" ><FONT  size=+2 COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+1  FACE="Arial">
 <STRONG><?php echo "$LDOr - $LDDutyPlan $abtname[$dept]"; ?></STRONG></FONT></td>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" align="right"><a href="javascript:history.back();"><img 
-src="../img/<?php echo "$lang/$lang" ?>_back2.gif" border=0 width=110 height=24 align="absmiddle" alt="<?php echo $LDBack ?>"></a><a 
-href="javascript:gethelp('op_duty.php','show','<?php echo $rows ?>')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 align="absmiddle" alt="<?php echo $LDHelp ?>"></a><a href="<?php echo $rettarget ?>" onClick=killchild()><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 align="absmiddle" alt="<?php echo $LDClosePlan ?>"></a></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right"><a href="javascript:history.back();"><img 
+<?php echo createLDImgSrc('../','back2.gif','0','absmiddle') ?> alt="<?php echo $LDBack ?>"></a><a 
+href="javascript:gethelp('op_duty.php','show','<?php echo $rows ?>')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0','absmiddle') ?> alt="<?php echo $LDHelp ?>"></a><a href="<?php echo $rettarget ?>" onClick=killchild()><img <?php echo createLDImgSrc('../','close2.gif','0','absmiddle') ?> alt="<?php echo $LDClosePlan ?>"></a></td>
 </tr>
 <tr>
-<td bgcolor="<?php print $cfg['body_bgcolor']; ?>" valign=top colspan=2><p>
+<td bgcolor="<?php echo $cfg['body_bgcolor']; ?>" valign=top colspan=2><p>
 <ul>
 
 
 <FONT    SIZE=-1  FACE="Arial">
 
 <table border=0>
-<tr><td align=left><a href="<?php print $thisfile.'?sid='.$sid.'&lang='.$lang.'&retpath='.$retpath.'&dept='.$dept.'&pmonth=';
-if ($pmonth==1) print '12'.'&pyear='.($pyear-1); 
-else print ($pmonth-1).'&pyear='.$pyear;
-print $fixdate; ?>">
-<font size=2 face=arial color=gray><b><?php if ($pmonth==1) print $monat[12]; else print $monat[$pmonth-1]; ?></b></a></td>
+<tr><td align=left><a href="<?php echo $thisfile.'?sid='.$sid.'&lang='.$lang.'&retpath='.$retpath.'&dept='.$dept.'&pmonth=';
+if ($pmonth==1) echo '12'.'&pyear='.($pyear-1); 
+else echo ($pmonth-1).'&pyear='.$pyear;
+echo $fixdate; ?>">
+<font size=2 face=arial color=gray><b><?php if ($pmonth==1) echo $monat[12]; else echo $monat[$pmonth-1]; ?></b></a></td>
 <td align=center><font size=4 face=arial color=navy>
-<?php print $monat[(int)$pmonth].'&nbsp;&nbsp;'.$pyear; ?>
+<?php echo $monat[(int)$pmonth].'&nbsp;&nbsp;'.$pyear; ?>
 </font></td>
 
-<td align=right><a href="<?php print $thisfile.'?sid='.$sid.'&lang='.$lang.'&retpath='.$retpath.'&dept='.$dept.'&pmonth=';
-if ($pmonth==12) print '1'.'&pyear='.($pyear+1); 
-else print ($pmonth+1).'&pyear='.$pyear;
-print $fixdate; ?>">
-<font size=2 face=arial color=gray><b><?php if ($pmonth==12) print $monat[1];else print $monat[$pmonth+1]; ?></b></td>
+<td align=right><a href="<?php echo $thisfile.'?sid='.$sid.'&lang='.$lang.'&retpath='.$retpath.'&dept='.$dept.'&pmonth=';
+if ($pmonth==12) echo '1'.'&pyear='.($pyear+1); 
+else echo ($pmonth+1).'&pyear='.$pyear;
+echo $fixdate; ?>">
+<font size=2 face=arial color=gray><b><?php if ($pmonth==12) echo $monat[1];else echo $monat[$pmonth+1]; ?></b></td>
 <td>&nbsp;</td></tr>
 
 
@@ -195,19 +196,19 @@ for ($i=1,$n=0,$wd=$firstday;$i<=$maxdays;$i++,$n++,$wd++){
 	
 	parse_str(trim($aduty[$n]),$aelems);
 	parse_str(trim($rduty[$n]),$relems);
-	print '
+	echo '
 	<tr >
 	<td  height=5 '.$backcolor.'><div class="a3"><font face="arial" size=2>'.$i.'</div>
 	</td>
 	<td height=5 '.$backcolor.'><div class=a3><font face=arial size=2>';
-	if (!$wd) print '<font color=red>';
-	print $LDShortDay[$wd].'</div>
+	if (!$wd) echo '<font color=red>';
+	echo $LDShortDay[$wd].'</div>
 	</td>
 	<td height=5 '.$backcolor.'><div class="a3"><font face="arial" size=2>';
-	print '&nbsp;<a href="javascript:popinfo(\''.$aelems[l].'\',\''.$aelems[f].'\',\''.$aelems[b].'\')">'.$aelems[s].'</a></div>
+	echo '&nbsp;<a href="javascript:popinfo(\''.$aelems[l].'\',\''.$aelems[f].'\',\''.$aelems[b].'\')">'.$aelems[s].'</a></div>
 	</td>
 	<td height=5 '.$backcolor.'><div class=a3><font face=arial size=2>';
-	print '&nbsp;<a href="javascript:popinfo(\''.$relems[l].'\',\''.$relems[f].'\',\''.$relems[b].'\')">'.$relems[s].'</a></div>
+	echo '&nbsp;<a href="javascript:popinfo(\''.$relems[l].'\',\''.$relems[f].'\',\''.$relems[b].'\')">'.$relems[s].'</a></div>
 	</td>
 	</tr>';
 	if ($wd==6)  $wd=-1;
@@ -225,19 +226,19 @@ for ($i=1,$n=0,$wd=$firstday;$i<=$maxdays;$i++,$n++,$wd++){
 
 
 <td valign="top">
-<!-- <a href="op-pflege-dienstplan-pass.php?dept=<?php print $dept.'&sid='.$sid.'&lang='.$lang.'&pmonth='.$pmonth.'&pyear='.$pyear.'&retpath='.$retpath.'&lang='.$lang; ?>"><img src="../img/<?php echo "$lang/$lang" ?>_newplan.gif" border="0" alt="<?php echo $LDNewPlan ?>"></a>
- --><a href="javascript:newplan()"><img src="../img/<?php echo "$lang/$lang" ?>_newplan.gif" border="0" alt="<?php echo $LDNewPlan ?>"></a>
+<!-- <a href="op-pflege-dienstplan-pass.php?dept=<?php echo $dept.'&sid='.$sid.'&lang='.$lang.'&pmonth='.$pmonth.'&pyear='.$pyear.'&retpath='.$retpath.'&lang='.$lang; ?>"><img <?php echo createLDImgSrc('../','newplan.gif','0') ?> alt="<?php echo $LDNewPlan ?>"></a>
+ --><a href="javascript:newplan()"><img <?php echo createLDImgSrc('../','newplan.gif','0') ?> alt="<?php echo $LDNewPlan ?>"></a>
 <br>
-<a href="<?php echo $rettarget ?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border="0"  alt="<?php echo $LDClosePlan ?>"></a>
+<a href="<?php echo $rettarget ?>"><img <?php echo createLDImgSrc('../','close2.gif','0') ?>  alt="<?php echo $LDClosePlan ?>"></a>
 </td>
 </tr>
 </table>
 
 <p>
-<!-- <a href="op-pflege-dienstplan-pass.php?dept=<?php print $dept.'&sid='.$sid.'&lang='.$lang.'&pmonth='.$pmonth.'&pyear='.$pyear.'&retpath='.$retpath.'&lang='.$lang; ?>"><img src="../img/<?php echo "$lang/$lang" ?>_newplan.gif" border="0" alt="<?php echo $LDNewPlan ?>"></a>
- --><a href="javascript:newplan()"><img src="../img/<?php echo "$lang/$lang" ?>_newplan.gif" border="0" alt="<?php echo $LDNewPlan ?>"></a>
+<!-- <a href="op-pflege-dienstplan-pass.php?dept=<?php echo $dept.'&sid='.$sid.'&lang='.$lang.'&pmonth='.$pmonth.'&pyear='.$pyear.'&retpath='.$retpath.'&lang='.$lang; ?>"><img <?php echo createLDImgSrc('../','newplan.gif','0') ?> alt="<?php echo $LDNewPlan ?>"></a>
+ --><a href="javascript:newplan()"><img <?php echo createLDImgSrc('../','newplan.gif','0') ?> alt="<?php echo $LDNewPlan ?>"></a>
 &nbsp;&nbsp;&nbsp;&nbsp;
-<a href="<?php echo $rettarget ?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border="0" alt="<?php echo $LDClosePlan ?>"></a>
+<a href="<?php echo $rettarget ?>"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> alt="<?php echo $LDClosePlan ?>"></a>
 <p>
 </ul>
 
@@ -249,8 +250,9 @@ for ($i=1,$n=0,$wd=$firstday;$i<=$maxdays;$i++,$n++,$wd++){
 <tr>
 <td bgcolor="<?php echo $cfg[bot_bgcolor] ?>" height=70 colspan=2>
 <?php
-require("../language/$lang/".$lang."_copyrite.php");
- ?>
+if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
+include('../language/'.$lang.'/'.$lang.'_copyrite.php');
+  else include('../language/en/en_copyrite.php');?>
 </td>
 </tr>
 </table>        

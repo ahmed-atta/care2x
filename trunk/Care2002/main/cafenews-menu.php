@@ -1,16 +1,16 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","editor.php");
-define("NO_2LEVEL_CHK",1);
-require("../include/inc_front_chain_lang.php");
+define('LANG_FILE','editor.php');
+define('NO_2LEVEL_CHK',1);
+require_once('../include/inc_front_chain_lang.php');
 
 if(!$week) $week=1;
  $daytag=date("w");
@@ -24,7 +24,7 @@ if(!$mday)
 	$mmonth=$month;
 	$myear=$year;
 } 
-//print $daytag.$day.$month.$year."<p>";
+//echo $daytag.$day.$month.$year."<p>";
 
  if(($daytag!=1)||($week!=1))
  {
@@ -38,7 +38,7 @@ if(!$mday)
 		case 3: $JDday+=14; break;
 	}
 
-	$datebuf=JDToGregorian($JDday);//print $datebuf;
+	$datebuf=JDToGregorian($JDday);//echo $datebuf;
 	$arraybuf=explode("/",$datebuf);
 	$month=$arraybuf[0];
 	$day=$arraybuf[1];
@@ -47,22 +47,33 @@ if(!$mday)
  }
  
 
-$dbtable="cafe_menu_".$lang;
+$dbtable="care_cafe_menu";
 
-require("../include/inc_db_makelink.php");
+/* Establish db connection */
+require('../include/inc_db_makelink.php');
  if ($link&&$DBLink_OK)
  {
+    include_once('../include/inc_date_format_functions.php');
+    
 
-		 	$sql="SELECT menu FROM $dbtable WHERE cyear='$myear' AND cmonth='$mmonth' AND cday='$mday'";
-			//print $sql;
-			if($ergebnis=mysql_query($sql,$link))
-       		{
-								$content=mysql_fetch_array($ergebnis);
-			}
-				else print "<p>".$sql."<p>$LDDbNoRead"; 
-			if(!$content[menu]) $content[menu]=$LDNoMenu;
+	$sql="SELECT menu FROM $dbtable WHERE cdate='".formatDate2STD($myear."-".$mmonth."-".$mday,"yyyy-mm-dd")."'";
+    
+	if(defined('LANG_DEPENDENT') && (LANG_DEPENDENT==1))
+    {
+	    $sql.="' AND lang='".$lang."'";
+    }
 
-  } else { print "$LDDbNoLink<br> $sql<br>"; }
+	
+	//echo $sql;
+	if($ergebnis=mysql_query($sql,$link))
+    {
+		$content=mysql_fetch_array($ergebnis);
+	}
+	else echo "<p>".$sql."<p>$LDDbNoRead"; 
+				
+	if(!$content['menu']) $content['menu']=$LDNoMenu;
+
+  } else { echo "$LDDbNoLink<br> $sql<br>"; }
 
 function aligndate(&$ad,&$am,&$ay)
 {
@@ -84,7 +95,7 @@ function aligndate(&$ad,&$am,&$ay)
 ?>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 <title></title>
 
 <style type="text/css" name="s2">
@@ -107,7 +118,7 @@ function editcafe()
 </head>
 <body>
 <FONT  SIZE=8 COLOR="#cc6600" FACE="verdana,Arial">
-<a href="javascript:editcafe()"><img src="../img/basket.gif" width=74 height=70 border=0></a> <b><?php echo $LDCafeMenu ?></b></FONT>
+<a href="javascript:editcafe()"><img <?php echo createComIcon('../','basket.gif','0') ?>></a> <b><?php echo $LDCafeMenu ?></b></FONT>
 <form action="cafenews-menu.php" method="post">
 
 <table border=0 bgcolor="#000000" cellspacing=0 cellpadding=0>
@@ -136,17 +147,17 @@ function editcafe()
 	$spot=0; if($dyidx==7) $dyidx=0;
 	aligndate($acttag,$month,$year);
 	if ($mday.$mmonth.$myear==$acttag.$month.$year) 	$spot=1;
-	print ' 
+	echo ' 
     <td class="v18_b" ';
-	if ($spot)  print ' bgcolor="yellow">';
-		else print ' bgcolor="#ccffff">';
-	print '<a href="';
-	if($spot) print "#\""; else print 'cafenews-menu.php?sid='.$sid.'&lang='.$lang.'&week='.$week.'&myear='.$year.'&mmonth='.$month.'&mday='.$acttag.'" ';
-	print ' title="'.$acttag.'.'.$month.'.'.$year.'">';
-	if($spot) print '<font color="#0000cc">';else print '<font color="#d6d6d6">';
-	print '<b>'.$dayname[$dyidx].'</b>';
-	if ($spot) print '</a>';
-	print '</td>
+	if ($spot)  echo ' bgcolor="yellow">';
+		else echo ' bgcolor="#ccffff">';
+	echo '<a href="';
+	if($spot) echo "#\""; else echo 'cafenews-menu.php?sid='.$sid.'&lang='.$lang.'&week='.$week.'&myear='.$year.'&mmonth='.$month.'&mday='.$acttag.'" ';
+	echo ' title="'.formatDate2Local($year.'-'.$month.'-'.$acttag,$date_format).'">';
+	if($spot) echo '<font color="#0000cc">';else echo '<font color="#d6d6d6">';
+	echo '<b>'.$dayname[$dyidx].'</b>';
+	if ($spot) echo '</a>';
+	echo '</td>
 	';
 	}
 ?>
@@ -169,7 +180,7 @@ function editcafe()
 
  <tr>    
  <td colspan=3><p><br><FONT  SIZE=2  FACE="verdana,Arial">
-<a href="cafenews.php?sid=<?php echo "$sid&lang=$lang" ?>"><img src="../img/L-arrowGrnLrg.gif" width=16 height=16 border=0> <?php echo $LDBack2CafeNews ?></a></td>
+<a href="cafenews.php?sid=<?php echo "$sid&lang=$lang" ?>"><img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>> <?php echo $LDBack2CafeNews ?></a></td>
   </tr>
  </table>
 <input type="hidden" name="sid" value="<?php echo $sid ?>">

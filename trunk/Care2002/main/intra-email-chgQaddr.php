@@ -1,27 +1,28 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","intramail.php");
-$local_user="ck_intra_email_user";
-require("../include/inc_front_chain_lang.php");
+define('LANG_FILE','intramail.php');
+$local_user='ck_intra_email_user';
+require_once('../include/inc_front_chain_lang.php');
 
-require("../include/inc_config_color.php"); // load color preferences
+require_once('../include/inc_config_color.php'); // load color preferences
 
 $thisfile="intra-email-chgQaddr.php";
 
 //init db parameters
-$dbtable="mail_private_users";
+$dbtable='care_mail_private_users';
 
 $linecount=0;
 
-require("../include/inc_db_makelink.php");
+/* Establish db connection */
+require('../include/inc_db_makelink.php');
 if($link&&$DBLink_OK) 
 	{	
 				$sql='SELECT addr_book, lastcheck FROM '.$dbtable.' WHERE  email="'.addslashes($eadd).'"';
@@ -36,7 +37,7 @@ if($link&&$DBLink_OK)
 						
 					} //end of if rows
 
-				}else { print "$LDDbNoRead<br>$sql"; } 
+				}else { echo "$LDDbNoRead<br>$sql"; } 
 	
 		if($mode=="saveQadd")
 		{
@@ -44,17 +45,17 @@ if($link&&$DBLink_OK)
 			for($i=0;$i<5;$i++)
 			{
 				
-				$abuf="qadres$i";//print "$abuf<br>".$$abuf."<br>";
+				$abuf="qadres$i";//echo "$abuf<br>".$$abuf."<br>";
 				if($$abuf=="") continue;
 				if($buf=="") $buf=$$abuf;
-				else $buf.="; ".$$abuf; //print "$buf<br>".$$abuf."<br>";
+				else $buf.="; ".$$abuf; //echo "$buf<br>".$$abuf."<br>";
 			}
 				$sql='UPDATE '.$dbtable.' SET addr_quick="'.$buf.'", lastcheck="'.$content[lastcheck].'" WHERE  email="'.addslashes($eadd).'"';
 				if($ergebnis=mysql_query($sql,$link))
 				{
 					$saveok=1;
 				}
-				 else { print "$LDDbNoUpdate<br>$sql"; } 
+				 else { echo "$LDDbNoUpdate<br>$sql"; } 
 		}
 		
 				$sql='SELECT addr_quick FROM '.$dbtable.' WHERE  email="'.addslashes($eadd).'"';
@@ -68,23 +69,23 @@ if($link&&$DBLink_OK)
 						$result=mysql_fetch_array($ergebnis);
 						
 					} //end of if rows
-				}else { print "$LDDbNoRead<br>$sql"; } 
+				}else { echo "$LDDbNoRead<br>$sql"; } 
 	}
-  		else { print "$LDDbNoLink<br>$sql"; } 
+  		else { echo "$LDDbNoLink<br>$sql"; } 
 
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
  <TITLE><?php echo "$LDIntraEmail $LDQuickAddr"; ?></TITLE>
 
  <script language="javascript" >
 <!-- 
 var chgTag=false;
-<?php if($saveok) print "var saveTag=true;"; 
-else print "var saveTag=false;"; 
+<?php if($saveok) echo "var saveTag=true;"; 
+else echo "var saveTag=false;"; 
 ?>
 
 function chkform(d)
@@ -132,14 +133,14 @@ window.close();
 </script> 
 
 <?php 
-require("../include/inc_css_a_hilitebu.php");
+require('../include/inc_css_a_hilitebu.php');
 ?>
 
 </HEAD>
 
 <BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="if (window.focus) window.focus()" 
 <?php 
- if (!$cfg['dhtml']){ print ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+ if (!$cfg['dhtml']){ echo ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
  
 <?php if($mode=="saveQadd") : ?>
 <script language=javascript>
@@ -147,14 +148,14 @@ require("../include/inc_css_a_hilitebu.php");
 </script>
 <?php endif?>
 
-<?php //foreach($argv as $v) print "$v "; ?>
+<?php //foreach($argv as $v) echo "$v "; ?>
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
 <tr valign=top>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>"  height="30">
-<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG>&nbsp;<?php echo "$LDIntraEmail $LDQuickAddr"; ?></STRONG></FONT></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>"  height="30">
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG>&nbsp;<?php echo "$LDIntraEmail $LDQuickAddr"; ?></STRONG></FONT></td>
 </tr>
 <tr valign=top >
-<td bgcolor=<?php print $cfg['body_bgcolor']; ?> valign=top >
+<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top >
 
 <FONT face="Verdana,Helvetica,Arial" size=2>
 
@@ -175,7 +176,7 @@ $a_info=explode("_",$content[addr_book]);
 	for ($i=0;$i<sizeof($a_info);$i++)
 	{
 		parse_str($a_info[$i],$c);
-		print' <option value="'.trim($c[e]).'">'.trim($c[e]).'</option>';
+		echo' <option value="'.trim($c[e]).'">'.trim($c[e]).'</option>';
 	}
 ?>
         </select>
@@ -185,21 +186,21 @@ $a_info=explode("_",$content[addr_book]);
         </td>
     <td>
 <?php
-print '
+echo '
 	<select name="quick" size=5>';
 	$c=explode("; ",trim($result[addr_quick]));
 	$maxrow=sizeof($c);
 	if(($maxrow==1)&&(trim($c[0])=="")) $maxrow=0;
 	for ($i=0;$i<$maxrow;$i++)
 	{
-		print' 
+		echo' 
 				<option value="'.trim($c[$i]).'">'.trim($c[$i]).'</option>';
 	}
-	print '	
+	echo '	
 		</select>';
 	for ($i=0;$i<5;$i++)
 	{
-		print' 
+		echo' 
 				<input type="hidden" name="qadres'.$i.'" value="'.trim($c[$i]).'">';
 	}
 ?>
@@ -228,7 +229,7 @@ print '
 
   &nbsp; &nbsp;
    <font size=1><a href="javascript:closeit()">
-   <img src="../img/l_arrowGrnSm.gif" width=12 height=12 border=0 align=middle> <?php echo $LDClose; ?>
+   <img <?php echo createComIcon('../','l_arrowgrnsm.gif','0','middle') ?>> <?php echo $LDClose; ?>
 </a></font>
   
   

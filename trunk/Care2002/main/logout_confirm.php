@@ -1,13 +1,13 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-define("LANG_FILE","stdpass.php");
-define("NO_2LEVEL_CHK",1);
-require("../include/inc_front_chain_lang.php");
+define('LANG_FILE','stdpass.php');
+define('NO_2LEVEL_CHK',1);
+require_once('../include/inc_front_chain_lang.php');
 ?>
 
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 <TITLE></TITLE>
 <script language="javascript">
 
@@ -21,7 +21,7 @@ require("../include/inc_front_chain_lang.php");
 <FONT  FACE="Arial" SIZE=+4 ><b><?php echo $LDLogoutConfirm ?></b></FONT>
 <p>
 <br><FONT  FACE="Arial" SIZE=5 color=navy>
-<?php print $nm.'<br>'; ?>
+<?php echo $nm.'<br>'; ?>
 
 <form name="okbut" action="logout.php">
 <input type="hidden"  name="sid" value="<?php echo $sid ?>" >

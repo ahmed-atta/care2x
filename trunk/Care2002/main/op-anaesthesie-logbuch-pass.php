@@ -62,7 +62,7 @@ if ($versand=="Abschicken")
 				mysql_close($link);
 				}
 				 else 
-				{ print "Verbindung zur Datenbank konnte nicht hergestellt werden.<br>"; }
+				{ echo "Verbindung zur Datenbank konnte nicht hergestellt werden.<br>"; }
 }
 
 
@@ -71,7 +71,7 @@ if ($versand=="Abschicken")
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
  <TITLE>OP Pflege Logbuch</TITLE>
 </HEAD>
 
@@ -104,24 +104,24 @@ if ($versand=="Abschicken")
 <center>
 
 
-<?php if (($username!="")or($keyword!="")&&($passtag)) 
+<?php if (($username!="")or($keyword!='')&&($passtag)) 
 {
-print '<FONT  COLOR="red"  SIZE=+2  FACE="Arial"><STRONG>';
+echo '<FONT  COLOR="red"  SIZE=+2  FACE="Arial"><STRONG>';
 
 $errbuf="OP Pflege Logbuch ";
 
 switch($passtag)
 {
-case 1:$errbuf=$errbuf."Falsche Eingabe"; print 'Sorry, aber Ihre Eingaben sind falsch. Versuchen Sie es noch ein mal.';break;
-case 2:$errbuf=$errbuf."Keine Berechtigung"; print 'Sie sind nicht berechtigt in den Bereich zu gehen!';break;
-default:$errbuf=$errbuf."Zugang gesperrt"; print 'Ihre Zugangsberechtigung ist gesperrt. Setzen Sie sich bitte mit der EDV in Verbindung.'; 
+case 1:$errbuf=$errbuf."Falsche Eingabe"; echo 'Sorry, aber Ihre Eingaben sind falsch. Versuchen Sie es noch ein mal.';break;
+case 2:$errbuf=$errbuf."Keine Berechtigung"; echo 'Sie sind nicht berechtigt in den Bereich zu gehen!';break;
+default:$errbuf=$errbuf."Zugang gesperrt"; echo 'Ihre Zugangsberechtigung ist gesperrt. Setzen Sie sich bitte mit der EDV in Verbindung.'; 
 }
 
 
 logentry($username,$keyword,$errbuf,$thisfile,$fileforward);
 
 
-print '</STRONG></FONT><P>';
+echo '</STRONG></FONT><P>';
 
 }
 ?>
@@ -130,7 +130,7 @@ print '</STRONG></FONT><P>';
 <tr>
 <td bgcolor="#ffffaa">
 <p><br>
-<FORM action="<?php print $thisfile ?>" method="post" name="passwindow">
+<FORM action="<?php echo $thisfile ?>" method="post" name="passwindow">
 <INPUT type="hidden" name="usernum" value="861661832">
 <INPUT type="hidden" name="cpv" value="1">
 <font face="Arial,Verdana"  color="#000000" size=-1>
@@ -138,7 +138,7 @@ Benutzername eingeben:<br></font>
 <INPUT type="text" name=username size="14" maxlength="25"> <p>
 <font face="Arial,Verdana"  color="#000000" size=-1>Passwort eingeben:</font><br>
 <INPUT type="password" name="keyword" size="14" maxlength="25"> 
-<input type=hidden name=direction value="<?php print $direction; ?>">
+<input type=hidden name=direction value="<?php echo $direction; ?>">
 <input type=hidden name="versand" value="Abschicken">
 <INPUT type="image"  src="../img/abschic.gif" border=0></font>
 
@@ -155,7 +155,7 @@ Benutzername eingeben:<br></font>
 
 </script>
 
-<FORM action="<?php print $breakfile ?>"  name=cancelbut>
+<FORM action="<?php echo $breakfile ?>"  name=cancelbut>
 <INPUT type="image"  src="../img/abbrech.gif" border=0></font></FORM>
 
 

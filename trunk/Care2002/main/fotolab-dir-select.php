@@ -1,32 +1,36 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","specials.php");
-$local_user="ck_fotolab_user";
-require("../include/inc_front_chain_lang.php");
-require("../include/inc_config_color.php");
+define('LANG_FILE','specials.php');
+$local_user='ck_fotolab_user';
+require_once('../include/inc_front_chain_lang.php');
+require_once('../include/inc_config_color.php');
 
-$thisfile="fotolab-dir-select.php";
+/* Load date formatter */
+require_once('../include/inc_date_format_functions.php');
+				
+
+
+$thisfile='fotolab-dir-select.php';
 $breakfile="javascript:window.parent.location.replace('spediens.php?sid=$sid&lang=$lang')";
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
  <style type="text/css" name="s2">
 .indx{ font-family:verdana,arial; color:#ffffff; font-size:12; background-color:#6666ff}
 </style>
 
- <script language="javascript" src="../js/setdatetime.js">
-</script>
+
 
 <script language="javascript">
 <!-- 
@@ -100,46 +104,66 @@ function gethelp(x,s,x1,x2,x3)
 	window.helpwin.moveTo(0,0);
 }
 
+<?php require('../include/inc_checkdate_lang.php'); ?>
+
+
 // -->
 </script>
 
+<script language="javascript" src="../js/checkdate.js" type="text/javascript"></script>
+
+<script language="javascript" src="../js/setdatetime.js"></script>
+
 <?php 
-require("../include/inc_css_a_hilitebu.php");
+require('../include/inc_css_a_hilitebu.php');
 ?>
 
 </HEAD>
 
-<BODY  topmargin=0 leftmargin=0  marginwidth=0 marginheight=0 bgcolor=silver <?php if(!$same_pat) print ' onLoad="window.parent.MAINDATAFRAME.location.replace(\'fotolab-maindata.php?sid='.$sid.'&lang='.$lang.'&maxpic='.$maxpic.'\');window.parent.PREVIEWFRAME.location.replace(\'fotolab-preview.php?sid='.$sid.'&lang='.$lang.'\');" ';
-else print ' onLoad="window.parent.PREVIEWFRAME.location.replace(\'fotolab-preview.php?sid='.$sid.'&lang='.$lang.'\');window.parent.MAINDATAFRAME.document.maindata.maxpic.value='.$maxpic.'" '; ?> 
-<?php if (!$cfg['dhtml']){ print 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+<BODY  topmargin=0 leftmargin=0  marginwidth=0 marginheight=0 bgcolor=silver <?php if(!$same_pat) echo ' onLoad="window.parent.MAINDATAFRAME.location.replace(\'fotolab-maindata.php?sid='.$sid.'&lang='.$lang.'&maxpic='.$maxpic.'\');window.parent.PREVIEWFRAME.location.replace(\'fotolab-preview.php?sid='.$sid.'&lang='.$lang.'\');" ';
+else echo ' onLoad="window.parent.PREVIEWFRAME.location.replace(\'fotolab-preview.php?sid='.$sid.'&lang='.$lang.'\');window.parent.MAINDATAFRAME.document.maindata.maxpic.value='.$maxpic.'" '; ?> 
+<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
 
 <table width=100% border=0 cellspacing=0 height=100%>
 
 <tr valign=top height=10>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" >
-<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG>&nbsp;<?php echo $LDFotoLab ?></STRONG></FONT></td>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();"><img 
-src="../img/<?php echo "$lang/$lang" ?>_back2.gif" border=0 width=110 height=24 align="absmiddle" 
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" >
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG>&nbsp;<?php echo $LDFotoLab ?></STRONG></FONT></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();"><img 
+<?php echo createLDImgSrc('../','back2.gif','0','absmiddle') ?> 
 style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a 
-href="javascript:gethelp('fotolab.php','input','')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 align="absmiddle" style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="<?php echo $breakfile ?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 align="absmiddle" style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a></td>
+href="javascript:gethelp('fotolab.php','input','')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc('../','close2.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a></td>
 </tr>
 <tr valign=top >
-<td bgcolor=<?php print $cfg['body_bgcolor']; ?> valign=top colspan=2>
+<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
 <p><font face=verdana,arial size=1 color="#cc0000">
-<?php if($nopatdata) print '
-	<img src="../img/catr.gif" border=0 width=88 height=80> <font size=2>'.$LDAlertNoPatientData.'<br></font>';
+<?php if($nopatdata) echo '
+	<img '.createMascot('../','mascot1_r.gif','0','bottom').'> <font size=2>'.$LDAlertNoPatientData.'<br></font>';
 ?>
 <form ENCTYPE="multipart/form-data"  action="fotolab-pic-save.php" method="post"  name="srcform" onSubmit="return chkform(this)">
 <INPUT TYPE="hidden" name="MAX_FILE_SIZE" value="2000000">
-<?php for ($i=0;$i<$maxpic;$i++)
+<?php 
+/* Load the common icons*/
+$img_cam=createComIcon('../','lilcamera.gif','0');
+
+for ($i=0;$i<$maxpic;$i++)
 {
- print $LDShotDate.'
+/* echo $LDShotDate.'
 <input type="text" name="sdate'.$i.'" size=12 maxlength=12 onFocus="this.select();previewpic(document.srcform.picfile'.$i.'.value)"  onKeyUp=setDate(this)>
  '.$LDNr.' 
  <input type="text" name="nr'.$i.'" size=4 maxlength=4 onFocus="previewpic(document.srcform.picfile'.$i.'.value)" value="'.($i+1+$lastnr).'" >
 <input type="file" name="picfile'.$i.'" size="30" onFocus="previewpic(this.value)" >  
 <a href="javascript:previewpic(document.srcform.picfile'.$i.'.value)" title="'.$LDPreview.'">
-<img src="../img/lilcamera.gif" width=23 height=16 border=0></a>     
+<img '.$img_cam.'></a>     
+<hr>
+';*/
+ echo $LDShotDate.'
+<input type="text" name="sdate'.$i.'" size=12 maxlength=12 onFocus="this.select();previewpic(document.srcform.picfile'.$i.'.value)"  onBlur="IsValidDate(this,\''.$date_format.'\')"   onKeyUp="setDate(this,\''.$date_format.'\',\''. $lang.'\')">
+ '.$LDNr.' 
+ <input type="text" name="nr'.$i.'" size=4 maxlength=4 onFocus="previewpic(document.srcform.picfile'.$i.'.value)" value="'.($i+1+$lastnr).'" >
+<input type="file" name="picfile'.$i.'" size="30" onFocus="previewpic(this.value)" >  
+<a href="javascript:previewpic(document.srcform.picfile'.$i.'.value)" title="'.$LDPreview.'">
+<img '.$img_cam.'></a>     
 <hr>
 ';
 }

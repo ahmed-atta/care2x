@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -10,8 +10,8 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 */
 parse_str($ck_comdat,$varia);
 $fileforward="oplogtimebar.php?sid=$sid&lang=$lang&patnum=$varia[patnum]&op_nr=$varia[op_nr]&dept=$varia[dept]&saal=$varia[saal]&pyear=$varia[pyear]&pmonth=$varia[pmonth]&pday=$varia[pday]&scrolltab=$v";
-//print $g;
-//print $fileforward;
+//echo $g;
+//echo $fileforward;
 switch($g)
 {
 	case "entry_out": $title="Einschleusse- Ausschleusezeiten";
@@ -46,11 +46,12 @@ switch($g)
 							break;
 	default:{header("Location: invalid-access-warning.php?mode=close"); exit;}; 
 }
-//print $g;
+//echo $g;
 
-$dbtable="nursing_op_logbook";
+$dbtable='care_nursing_op_logbook';
 
-require("../include/inc_db_makelink.php");
+/* Establish db connection */
+require('../include/inc_db_makelink.php');
 if($link&&$DBLink_OK) 
 {	
 
@@ -62,7 +63,7 @@ if($link&&$DBLink_OK)
 						AND op_nr='$varia[op_nr]'";
 				if($ergebnis=mysql_query($sql,$link))
        			{
-					//print $sql." checked <br>";
+					//echo $sql." checked <br>";
 					
 					$rows=0;
 					if( $content=mysql_fetch_array($ergebnis)) $rows++;
@@ -72,7 +73,7 @@ if($link&&$DBLink_OK)
 							$content=mysql_fetch_array($ergebnis);
     						if((trim($content[$element])!="")&&($content[$element]!=NULL))
 							{							
-								//print "im here";
+								//echo "im here";
 								$ebuf=explode("~",trim($content[$element]));
 
 								sort($ebuf,SORT_REGULAR);
@@ -80,7 +81,7 @@ if($link&&$DBLink_OK)
 								$append=0;
 								$vf=(float) $v;
 								$esize=sizeof($ebuf);
-								//print $v."<br>";
+								//echo $v."<br>";
 								for($i=0;$i<$esize;$i++)
 								{
 									parse_str(trim($ebuf[$i]),$elem);
@@ -119,7 +120,7 @@ if($link&&$DBLink_OK)
 										if($elem[s]!="")
 										{
 									// 			if($vf>$sf)
-											//print "its here in the elem";
+											//echo "its here in the elem";
 											{ if (($elem[e]=="")||(($vf<$ef)&&($vf>$sf))) {$ebuf[$i]="s=".$elem[s]."&e=".$v;$append=0;  if(!$i) $resetmainput=1;break;}
 											}
 											//else{ $append=0; break;} 
@@ -139,7 +140,7 @@ if($link&&$DBLink_OK)
 								sort($ebuf,SORT_REGULAR);
 								$dbuf=implode("~",$ebuf);
 								if($i==0) $resetmainput=1;
-								//print $dbuf;
+								//echo $dbuf;
 				 			}// end of if (sizeof (ebuf)
 							else
 							{
@@ -148,7 +149,7 @@ if($link&&$DBLink_OK)
 								if(($g=="entry_out")||($g=="cut_close")) $resetmainput=1;
 							}	
 					 		// $dbuf=htmlspecialchars($dbuf);
-							//print $dbuf;
+							//echo $dbuf;
 							$sql="UPDATE $dbtable SET $element='$dbuf',tid='$content[tid]'
 										WHERE patnum='$varia[patnum]'
 											AND dept='$varia[dept]'
@@ -157,7 +158,7 @@ if($link&&$DBLink_OK)
 											
 							if($ergebnis=mysql_query($sql,$link))
        							{
-									//print $sql." new update <br> resetmain= $resetmainput";
+									//echo $sql." new update <br> resetmain= $resetmainput";
 									mysql_close($link);
 									//if((($g=="entry_out")||($g=="cut_close"))&&$resetmainput) header("Location: $fileforward&resetmainput=1");
  											//else header("Location: $fileforward");									
@@ -166,7 +167,7 @@ if($link&&$DBLink_OK)
 								}
 								else
 								{
-									print "Patient ist noch nicht im Log Buch eingetragen. Bitte Schliessen Sie dieses Fenster
+									echo "Patient ist noch nicht im Log Buch eingetragen. Bitte Schliessen Sie dieses Fenster
 										und öffnen Sie das Log Buch wieder. Falls dieses weiterhin besteht, benachrichtigen
 										Sie bitte die EDV Abteilung.";
 									exit;
@@ -175,16 +176,16 @@ if($link&&$DBLink_OK)
 		 				}// end of if rows
 		 				else
 		 				{
-							print $sql;
-		 						print "Patient ist noch nicht im Log Buch eingetragen. Bitte Schliessen Sie dieses Fenster
+							echo $sql;
+		 						echo "Patient ist noch nicht im Log Buch eingetragen. Bitte Schliessen Sie dieses Fenster
 										und öffnen Sie das Log Buch wieder. Falls dieses weiterhin besteht, benachrichtigen
 										Sie bitte die EDV Abteilung.";
 									exit;
 							}
 				
-	 			}else print "<p>".$sql."<p>Das Lesen  aus der Datenbank $dbtable ist gescheitert."; 
+	 			}else echo "<p>".$sql."<p>Das Lesen  aus der Datenbank $dbtable ist gescheitert."; 
 
-  } else { print "$db_noconnect $sql<br>"; }
+  } else { echo "$db_noconnect $sql<br>"; }
 
 header("Location: $fileforward");
 ?>

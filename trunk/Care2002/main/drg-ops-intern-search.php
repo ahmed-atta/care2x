@@ -1,17 +1,17 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","drg.php");
-$local_user="ck_op_pflegelogbuch_user";
-require("../include/inc_front_chain_lang.php");
-require("../include/inc_config_color.php");
+define('LANG_FILE','drg.php');
+$local_user='ck_op_pflegelogbuch_user';
+require_once('../include/inc_front_chain_lang.php');
+require_once('../include/inc_config_color.php');
 if (!$opnr||!$pn) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;}; 
 
 if($saveok)
@@ -30,7 +30,7 @@ $toggle=0;
 
 $thisfile="drg-ops-intern-search.php";
 
-if($mode=="save")
+if($mode=='save')
 {
 	$target="ops-intern";
 	$element="ops_intern_code";
@@ -45,40 +45,49 @@ else
 
 	if(($keyword)and($keyword!=" "))
   	{
-		$dbtable="ops_intern_".$lang;
+		$dbtable="care_drg_ops_intern";
 
-		include("../include/inc_db_makelink.php");
+		include('../include/inc_db_makelink.php');
 		if($link&&$DBLink_OK) 
 		{	
 
 		if(strlen($keyword)<3)
-			$sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE (code LIKE "%'.$keyword.'%" OR description LIKE "'.$keyword.'%")  LIMIT 0,100';
+			$sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE (code LIKE "%'.$keyword.'%" OR description LIKE "'.$keyword.'%") AND lang="'.$lang.'" LIMIT 0,100';
 			else
-				$sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE (code LIKE "%'.$keyword.'%" OR description LIKE "%'.$keyword.'%")  LIMIT 0,100';
+				$sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE (code LIKE "%'.$keyword.'%" OR description LIKE "%'.$keyword.'%") AND lang="'.$lang.'"  LIMIT 0,100';
 			if($ergebnis=mysql_query($sql,$link))
        		{
 				$linecount=0;
 				if ($zeile=mysql_fetch_array($ergebnis)) $linecount++;
 				else
 				{
-					$sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE synonyms LIKE "%'.$keyword.'%"  LIMIT 0,100';
+					$sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE synonyms LIKE "%'.$keyword.'%"  AND lang="'.$lang.'" LIMIT 0,100';
         		
 					if($ergebnis=mysql_query($sql,$link))
        				{
 						if ($zeile=mysql_fetch_array($ergebnis)) $linecount++;
 					}
 				}
-				
+				//echo $sql;
 			}
-			 else {print "<p>".$sql."<p>$LDDbNoRead"; exit;};
-		}else {print "<p>".$sql."<p>$LDDbNoLink"; exit;};
+			 else {echo "<p>".$sql."<p>$LDDbNoRead"; };
+		}else {echo "<p>".$sql."<p>$LDDbNoLink"; };
 	}
-}
+}	
+
+/* Load the icon images */
+$img_delete=createComIcon('../','delete2.gif','0','right');
+$img_arrow=createComIcon('../','l_arrowgrnsm.gif','0','absmiddle');
+$img_info=createComIcon('../','button_info.gif','0','absmiddle');
+$img_bubble=createComIcon('../','bubble2.gif','0','absmiddle');
+$img_blue=createComIcon('../','l2-blue.gif','0');
+$img_t2=createComIcon('../','t2-blue.gif','0');
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
  <TITLE><?php echo $LDOps301 ?></TITLE>
   <script language="javascript" src="../js/showhide-div.js">
 </script>
@@ -117,7 +126,7 @@ function checkselect(d)
 </script>
  
   <?php 
-require("../include/inc_css_a_hilitebu.php");
+require('../include/inc_css_a_hilitebu.php');
 ?>
  
 </HEAD>
@@ -126,32 +135,32 @@ require("../include/inc_css_a_hilitebu.php");
 <?php if(!$showonly) : ?>
 document.searchdata.keyword.select();document.searchdata.keyword.focus();
 <?php endif ?>
-" bgcolor=<?php print $cfg['body_bgcolor']; ?>
-<?php if (!$cfg['dhtml']){ print ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+" bgcolor=<?php echo $cfg['body_bgcolor']; ?>
+<?php if (!$cfg['dhtml']){ echo ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 
 <FONT    SIZE=-1  FACE="Arial">
 <ul>
 <FORM action="<?php echo $thisfile ?>" method="post" name="searchdata" onSubmit="return pruf(this)">
-<a href="javascript:window.close()"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 align="right"></a>
+<a href="javascript:window.close()"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="right"></a>
 <?php if(!$showonly) : ?>
 <FONT    SIZE=3  FACE="verdana,Arial" color="#660000"><b><?php echo $LDOperation ?></b>&nbsp;
 </font>
 <font size=3>
-<INPUT type="text" name="keyword" size="50" maxlength="60" onfocus=this.select() value="<?php print $keyword ?>"></font> 
+<INPUT type="text" name="keyword" size="50" maxlength="60" onfocus=this.select() value="<?php echo $keyword ?>"></font> 
 <INPUT type="submit" name="versand" value="<?php echo $LDSearch ?>">
 <?php else : ?>
 <input type="hidden" name="keyword" value="">
 <?php endif ?>
-<input type="hidden" name="sid" value="<?php print $sid; ?>">
-<input type="hidden" name="lang" value="<?php print $lang; ?>">
-<input type="hidden" name="pn" value="<?php print $pn; ?>">
-<input type="hidden" name="opnr" value="<?php print $opnr; ?>">
-<input type="hidden" name="ln" value="<?php print $ln; ?>">
-<input type="hidden" name="fn" value="<?php print $fn; ?>">
-<input type="hidden" name="bd" value="<?php print $bd; ?>">
-<input type="hidden" name="dept" value="<?php print $dept; ?>">
-<input type="hidden" name="oprm" value="<?php print $oprm; ?>">
-<input type="hidden" name="display" value="<?php print $display; ?>">
+<input type="hidden" name="sid" value="<?php echo $sid; ?>">
+<input type="hidden" name="lang" value="<?php echo $lang; ?>">
+<input type="hidden" name="pn" value="<?php echo $pn; ?>">
+<input type="hidden" name="opnr" value="<?php echo $opnr; ?>">
+<input type="hidden" name="ln" value="<?php echo $ln; ?>">
+<input type="hidden" name="fn" value="<?php echo $fn; ?>">
+<input type="hidden" name="bd" value="<?php echo $bd; ?>">
+<input type="hidden" name="dept" value="<?php echo $dept; ?>">
+<input type="hidden" name="oprm" value="<?php echo $oprm; ?>">
+<input type="hidden" name="display" value="<?php echo $display; ?>">
 </FORM>
 <p>
 
@@ -161,7 +170,7 @@ document.searchdata.keyword.select();document.searchdata.keyword.focus();
 <tr bgcolor="#660000">
 <td width="20">
 <?php if(!$showonly) : ?>
-<img src="../img/delete2.gif" border=0 width=20 height=20 alt="<?php echo $LDReset ?>" onClick="javascript:document.ops301.reset()">
+<img <?php echo $img_delete ?> alt="<?php echo $LDReset ?>" onClick="javascript:document.ops301.reset()">
 <?php endif ?>
 </td>
 <td><font face=arial size=2 color=#ffffff>&nbsp;<b><nobr><?php echo $LDOpsIntern ?></nobr></b>&nbsp;</td>
@@ -179,10 +188,11 @@ function cleandata(&$buf)
 
 function drawAdditional($tag,&$codebuf,&$databuf,$bkcolor,&$alttag)
 {
-	global $LDClose;
+	global $LDClose, $img_delete;
 	
-							//print '&nbsp;<a href="javascript:ssm(\''.$tag.'_'.cleandata($codebuf).'\'); clearTimeout(timer)"><img src="../img/l_arrowGrnSm.gif" border=0 width=12 height=12 alt="'.$alttag.'" align="absmiddle"></a>';
-							print '<DIV id='.$tag.'_'.cleandata($codebuf).'
+	
+							//echo '&nbsp;<a href="javascript:ssm(\''.$tag.'_'.cleandata($codebuf).'\'); clearTimeout(timer)"><img src="../img/l_arrowGrnSm.gif" border=0 width=12 height=12 alt="'.$alttag.'" align="absmiddle"></a>';
+							echo '<DIV id='.$tag.'_'.cleandata($codebuf).'
 									style=" VISIBILITY: hidden; POSITION: absolute;">
 									<TABLE cellSpacing=1 cellPadding=0 bgColor="#000000" border=0>
   									<TR>
@@ -190,102 +200,100 @@ function drawAdditional($tag,&$codebuf,&$databuf,$bkcolor,&$alttag)
       									<TABLE cellSpacing=1 cellPadding=7 width="100%" bgColor="#'.$bkcolor.'" border=0><TBODY>
         								<TR>
 										<TD bgColor="#'.$bkcolor.'">
-										<a href="javascript:hsm()"><img src="../img/delete2.gif" border=0 width=20 height=20 alt="'.$LDClose.'" align="right"></a>
+										<a href="javascript:hsm()"><img '.$img_delete.' alt="'.$LDClose.'" ></a>
 										<font face=arial size=2><b><font color="#003300">'.$alttag.':</font></b><br>'.$databuf.'
 										</TD></TR></TABLE></TD></TR></TBODY></TABLE></div>';
 }
 
 function drawdata(&$data)
 {
-	global $toggle,$LDInclusive,$LDExclusive,$LDNotes,$LDRemarks,$LDExtraCodes,$LDAddCodes;
- 	global $idx,$keyword,$showonly;
+	global $toggle,$LDInclusive,$LDExclusive,$LDNotes,$LDRemarks,$LDExtraCodes,$LDAddCodes,
+	         $idx,$keyword,$showonly,$img_arrow,$img_info, $img_bubble, $img_blue, $img_t2;
+
 	
-						print "
+						echo "
 						<tr bgcolor=";
-						if($toggle) { print "#efefef>"; $toggle=0;} else {print "#ffffff>"; $toggle=1;};
-						print '
+						if($toggle) { echo "#efefef>"; $toggle=0;} else {echo "#ffffff>"; $toggle=1;};
+						echo '
 						<td>';
 						if(!$showonly)
 							{
 								$valbuf="code=$data[code]";
 								if(!stristr($data[code],".")) $valbuf.="&des=$data[description]";
 									else $valbuf.="&des=$parentdata[description] <b>$data[description]</b>";
-						 		print '<input type="checkbox" name="sel'.$idx.'" value="'.$valbuf.'">';
+						 		echo '<input type="checkbox" name="sel'.$idx.'" value="'.$valbuf.'">';
 								 $idx++;
 							}
-						print '
+						echo '
 							</td>
 							<td><font face=arial size=2><nobr>';
-						//print " *$parentcode +$grandcode";
-						 print "$data[code]&nbsp;";		
-						print "&nbsp;</nobr></td>";
+						//echo " *$parentcode +$grandcode";
+						 echo "$data[code]&nbsp;";		
+						echo "&nbsp;</nobr></td>";
 						switch($data[sub_level])
 							{
-								case 0:print '
+								case 0:echo '
 													<td colspan=7>';
 											break;
-								case 1:print '
+								case 1:echo '
 													<td colspan=7>';
 											break;
-								case 2: print '
+								case 2: echo '
 													<td colspan=2>&nbsp;</td>
 													<td valign="top">';
-											print '&nbsp;';
-											print '
+											echo '&nbsp;';
+											echo '
 													</td><td colspan=4>';
 											break;
-								case 3: print '
+								case 3: echo '
 													<td colspan=3>&nbsp;</td>
 													<td valign="top">';
-											if($advdata[sub_level]<$data[sub_level]) print '<img src="../img/l2-blue.gif" border=0 width="20" height="21">'; else print '<img src="../img/t2-blue.gif" border=0 width="20" height="21">';
-											print '</td>
+											if($advdata[sub_level]<$data[sub_level]) echo '<img '.$img_blue.'>'; else echo '<img '.$img_t2.'>';
+											echo '</td>
 													<td colspan=3>';
 											break;
-								case 4: print '
+								case 4: echo '
 													<td colspan=4>&nbsp;</td>
 													<td valign="top">';
-											if($advdata[sub_level]<$data[sub_level]) print '<img src="../img/l2-blue.gif" border=0 width="20" height="21">'; else print '<img src="../img/t2-blue.gif" border=0 width="20" height="21">';
-											print '</td>
+											if($advdata[sub_level]<$data[sub_level]) echo '<img '.$img_blue.'>'; else echo '<img '.$img_t2.'>';
+											echo '</td>
 													<td colspan=2>&nbsp;';
 											break;
-								case 5: print '
+								case 5: echo '
 													<td colspan=5>&nbsp;</td>
 													<td valign="top">';
-											if($advdata[sub_level]<$data[sub_level]) print '<img src="../img/l2-blue.gif" border=0 width="20" height="21">'; else print '<img src="../img/t2-blue.gif" border=0 width="20" height="21">';
-											print '</td>
+											if($advdata[sub_level]<$data[sub_level]) echo '<img '.$img_blue.'>'; else echo '<img '.$img_t2.'>';
+											echo '</td>
 													<td>&nbsp;';
 											break;
 							}
-						//print '<font face=arial size=2>'.trim($data[description]);
-						print '<font face=arial size=2>';
-						print "$data[description]&nbsp;";		
+						//echo '<font face=arial size=2>'.trim($data[description]);
+						echo '<font face=arial size=2>';
+						echo "$data[description]&nbsp;";		
 						
 						if($data[inclusive])
 						{
-							print '&nbsp;<a href="javascript:ssm(\'i_'.cleandata($data[code]).'\');"><img src="../img/l_arrowGrnSm.gif" border=0 width=12 height=12 alt="'.$LDInclusive.'" align="absmiddle"></a>';
+							echo '&nbsp;<a href="javascript:ssm(\'i_'.cleandata($data[code]).'\');"><img '.$img_arrow.' alt="'.$LDInclusive.'"></a>';
 							drawAdditional("i",$data[code],$data[inclusive],"00ffcc",$LDInclusive);
 						}
-						//if($data[inclusive]) print '<br><font size=2 color="#00aa00">'.$data[inclusive].'</font>';
+						//if($data[inclusive]) echo '<br><font size=2 color="#00aa00">'.$data[inclusive].'</font>';
 						if($data[exclusive])
 						{
-							print '&nbsp;<a href="javascript:ssm(\'e_'.cleandata($data[code]).'\');"><img src="../img/warn.gif" border=0 width=16 height=16 alt="'.$LDExclusive.'" align="absmiddle"></a>';
+							echo '&nbsp;<a href="javascript:ssm(\'e_'.cleandata($data[code]).'\');"><img '.$img_warn.' alt="'.$LDExclusive.'"></a>';
 							drawAdditional("e",$data[code],$data[exclusive],"ffccee",$LDExclusive);
 						}
 						if($data[notes]) 
 						{
-							print '&nbsp;<a href="javascript:ssm(\'n_'.cleandata($data[code]).'\');"><img src="../img/button_info.gif" border=0 width=15 height=15 alt="'.$LDNotes.'" align="absmiddle"></a>';
+							echo '&nbsp;<a href="javascript:ssm(\'n_'.cleandata($data[code]).'\');"><img '.$img_info.' alt="'.$LDNotes.'"></a>';
 							drawAdditional("n",$data[code],$data[notes],"ffcc99",$LDNotes);
 						}
 						if($data[remarks]) 
 						{
-							print '&nbsp;<a href="javascript:ssm(\'r_'.cleandata($data[code]).'\');"><img src="../img/bubble2.gif" border=0 width=15 height=14 alt="'.$LDRemarks.'" align="absmiddle"></a>';
+							echo '&nbsp;<a href="javascript:ssm(\'r_'.cleandata($data[code]).'\');"><img '.$img_bubble.' alt="'.$LDRemarks.'"></a>';
 							drawAdditional("r",$data[code],$data[remarks],"cceeff",$LDRemarks);
 						}
-						//if($data[extra_codes]) print '&nbsp;<img src="../img/plus2.gif" border=0 width=16 height=16 alt="'.$LDExtraCodes.'" align="absmiddle">';
-						//if($data[extra_codes]) print '&nbsp;<img src="../img/closed.gif" border=0 width=20 height=20 alt="'.$LDExtraCodes.'" align="absmiddle">';
-						//if($data[extra_subclass]) print '&nbsp;<img src="../img/button_reset.gif" border=0 width=15 height=15 alt="'.$LDAddCodes.'" align="absmiddle">';
-						print '</td>';
-					print "</tr>";
+						echo '</td>';
+					echo "</tr>";
 }
 
 			if ($linecount>0) 
@@ -304,41 +312,41 @@ function drawdata(&$data)
 <?php if(!$showonly&&($linecount>0)) : ?>
 <input type="hidden" name="lastindex" value="<?php echo $idx ?>">
 <input type="submit" value="<?php echo $LDApplySelection ?>">
-<input type="hidden" name="sid" value="<?php print $sid; ?>">
-<input type="hidden" name="lang" value="<?php print $lang; ?>">
-<input type="hidden" name="pn" value="<?php print $pn; ?>">
-<input type="hidden" name="opnr" value="<?php print $opnr; ?>">
-<input type="hidden" name="ln" value="<?php print $ln; ?>">
-<input type="hidden" name="fn" value="<?php print $fn; ?>">
-<input type="hidden" name="bd" value="<?php print $bd; ?>">
-<input type="hidden" name="dept" value="<?php print $dept; ?>">
-<input type="hidden" name="oprm" value="<?php print $oprm; ?>">
-<input type="hidden" name="display" value="<?php print $display; ?>">
+<input type="hidden" name="sid" value="<?php echo $sid; ?>">
+<input type="hidden" name="lang" value="<?php echo $lang; ?>">
+<input type="hidden" name="pn" value="<?php echo $pn; ?>">
+<input type="hidden" name="opnr" value="<?php echo $opnr; ?>">
+<input type="hidden" name="ln" value="<?php echo $ln; ?>">
+<input type="hidden" name="fn" value="<?php echo $fn; ?>">
+<input type="hidden" name="bd" value="<?php echo $bd; ?>">
+<input type="hidden" name="dept" value="<?php echo $dept; ?>">
+<input type="hidden" name="oprm" value="<?php echo $oprm; ?>">
+<input type="hidden" name="display" value="<?php echo $display; ?>">
 <input type="hidden" name="mode" value="save">
 
 </form>
 <?php else : ?>
 <p>
-<a href="javascript:window.close()"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24></a>
+<a href="javascript:window.close()"><img <?php echo createLDImgSrc('../','close2.gif','0') ?>></a>
 <?php endif ?>
 <?php if(($linecount>15)&&!$showonly) : ?>
 
 						<p>
 						<FORM action="<?php echo $thisfile ?>" method="post" onSubmit="return pruf(this)" name="form2">
-						<a href="javascript:window.close()"><img src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" width=103 height=24 border=0 align="right"></a>
+						<a href="javascript:window.close()"><img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="right"></a>
 						<font face="Arial,Verdana"  color="#000000" size=-1>
 						<INPUT type="text" name="keyword" size="14" maxlength="25" value="<?php echo $keyword ?>"> 
 						<INPUT type="submit" name="versand" value="<?php echo $LDSearch ?>">
-						<input type="hidden" name="sid" value="<?php print $sid; ?>">
-<input type="hidden" name="lang" value="<?php print $lang; ?>">
-<input type="hidden" name="pn" value="<?php print $pn; ?>">
-<input type="hidden" name="opnr" value="<?php print $opnr; ?>">
-<input type="hidden" name="ln" value="<?php print $ln; ?>">
-<input type="hidden" name="fn" value="<?php print $fn; ?>">
-<input type="hidden" name="bd" value="<?php print $bd; ?>">
-<input type="hidden" name="dept" value="<?php print $dept; ?>">
-<input type="hidden" name="oprm" value="<?php print $oprm; ?>">
-<input type="hidden" name="display" value="<?php print $display; ?>">
+						<input type="hidden" name="sid" value="<?php echo $sid; ?>">
+<input type="hidden" name="lang" value="<?php echo $lang; ?>">
+<input type="hidden" name="pn" value="<?php echo $pn; ?>">
+<input type="hidden" name="opnr" value="<?php echo $opnr; ?>">
+<input type="hidden" name="ln" value="<?php echo $ln; ?>">
+<input type="hidden" name="fn" value="<?php echo $fn; ?>">
+<input type="hidden" name="bd" value="<?php echo $bd; ?>">
+<input type="hidden" name="dept" value="<?php echo $dept; ?>">
+<input type="hidden" name="oprm" value="<?php echo $oprm; ?>">
+<input type="hidden" name="display" value="<?php echo $display; ?>">
 </font></FORM>			
 						<p>
 <?php endif ?>

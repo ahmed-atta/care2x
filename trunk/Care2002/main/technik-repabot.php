@@ -1,23 +1,31 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","tech.php");
-define("NO_2LEVEL_CHK",1);
-require("../include/inc_front_chain_lang.php");
+define('LANG_FILE','tech.php');
+define('NO_2LEVEL_CHK',1);
+require_once('../include/inc_front_chain_lang.php');
 
-$dbtable="tech_repair_job";
+$dbtable='care_tech_repair_job';
 
 $rows=0;
-	require("../include/inc_db_makelink.php");
-		if($link&&$DBLink_OK) 
-		{
+	/* Establish db connection */
+require('../include/inc_db_makelink.php');
+if($link&&$DBLink_OK) 
+{
+    /* Load the date formatter */
+    include_once('../include/inc_date_format_functions.php');
+    
+	
+    /* Load editor functions for time format converter */
+    //include_once('../include/inc_editor_fx.php');
+
 				$sql='SELECT * FROM '.$dbtable.' WHERE archive=0  ORDER BY tid DESC';
         		if($ergebnis=mysql_query($sql,$link))
 				{
@@ -25,64 +33,59 @@ $rows=0;
 					while ($content=mysql_fetch_array($ergebnis)) $rows++;					
 					//reset result
 					if ($rows)	mysql_data_seek($ergebnis,0);
-				}else {print "<p>".$sql."$LDDbNoRead<br>"; };
-			//print $sql;
-		}
-  		 else { print "$LDDbNoLink<br>"; } 
+				}else {echo "<p>".$sql."$LDDbNoRead<br>"; };
+			//echo $sql;
+}
+else
+ { echo "$LDDbNoLink<br>"; } 
 ?>
 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 <meta http-equiv="refresh" content="30, url: technik-repabot.php">
 <title><?php echo $LDRepabotActivate ?></title>
 <script language=javascript>
 function goactive()
 	{
 <?php
-if (!$nofocus) print "	
- 	self.focus();
+if ($nofocus=='') echo "	
+ 	if(window.focus) window.focus();
  	";
-	if($nofocus) $nofocus=0; // toggle it to reset 	
 ?>
-	self.resizeTo(800,600);
+	window.resizeTo(800,600);
 	}
 	
 function show_order(d,o,s,t)
 {
-	url="technik-repabot-print.php?sid=<?php print "$sid&lang=$lang"; ?>&dept="+d+"&tdate="+o+"&ttime="+s+"&tid="+t;
-	repaprintwin=window.open(url,"repaprintwin","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
+	url="technik-repabot-print.php?sid=<?php echo "$sid&lang=$lang"; ?>&dept="+d+"&tdate="+o+"&ttime="+s+"&tid="+t;
+	repaechowin=window.open(url,"repaprintwin","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
 }
 </script>
 
 </head>
-<body <?php 	if($rows) print " bgcolor=#ffffee  onLoad=goactive() "; ?>
-	>
-<font face="Verdana, Arial" size=2 color=#800000>
-<MARQUEE dir=ltr scrollAmount=3 scrollDelay=120 width=150
-      height=10 align="middle"><b><?php echo $LDImRepabot ?>...</b></MARQUEE></font>
-<p>
+<body <?php 	if($rows && !$nofocus) echo " bgcolor=#ffffee  onLoad=goactive() "; ?>>
 <?php
-//print "$rows <br>";
+//echo "$rows <br>";
 if($rows)
 {
 	if($showlist)
 	{
-	print '<center>
+	echo '<center>
 			<font face=Verdana,Arial size=2>
 			<p>';
-			if ($rows>1) print $LDNewReportMany; else print $LDNewReport;
-			print '<br>'.$LDClk2Read.'<br></font><p>';
+			if ($rows>1) echo $LDNewReportMany; else echo $LDNewReport;
+			echo '<br>'.$LDClk2Read.'<br></font><p>';
 
 		$tog=1;
-		print '
+		echo '
 				<table border=0 cellspacing=0 cellpadding=0 bgcolor="#666666"><tr><td>
 				<table border=0 cellspacing=1 cellpadding=3>
   				<tr bgcolor="#ffffff">';
 		for ($i=0;$i<sizeof($reportindex);$i++)
-		print '
+		echo '
 				<td><font face=Verdana,Arial size=2 color="#000080">'.$reportindex[$i].'</td>';
-		print '
+		echo '
 				</tr>';	
 
 		$i=$rows;
@@ -90,36 +93,39 @@ if($rows)
 		while($content=mysql_fetch_array($ergebnis))
  		{
 			if($tog)
-			{ print '<tr bgcolor="#dddddd">'; $tog=0; }else{ print '<tr bgcolor="#efefff">'; $tog=1; }
-			print'
+			{ echo '<tr bgcolor="#dddddd">'; $tog=0; }else{ echo '<tr bgcolor="#efefff">'; $tog=1; }
+			echo'
 				<td><font face=Verdana,Arial size=2>'.$i.'</td>
 				<td><a href="javascript:show_order(\''.$content[dept].'\',\''.$content[tdate].'\',\''.$content[ttime].'\',\''.$content[tid].'\')">
-						<img src="../img/upArrowGrnLrg.gif" width=16 height=16 border=0 alt="'.$LDShowReport.'"></a></td>
-				<td ><font face=Verdana,Arial size=2>'.strtoupper($content[dept]).'</td>
+						<img '.createComIcon('../','uparrowgrnlrg.gif','0').' alt="'.$LDShowReport.'"></a></td>
+				<td ><font face=Verdana,Arial size=2>'.strtoupper($content['dept']).'</td>
 				<td><font face=Verdana,Arial size=2>';
-			$buf=explode(".",$content[tdate]);
-			print $buf[2].'.'.$buf[1].'.'.$buf[0].'</td>
-				 <td><font face=Verdana,Arial size=2>'.str_replace("24","00",$content[ttime]).'</td>
+				
+			echo formatDate2Local($content['tdate'],$date_format);
+			
+			echo '</td>
+				 <td><font face=Verdana,Arial size=2>'.convertTimeToLocal(str_replace('24','00',$content['ttime'])).'</td>
 				<td align="center">';
-			if($content[seen])
+				
+			if($content['seen'])
 				{
-					 print '<img src="../img/check2.gif" width=21 height=15 border=0 alt="OK">';
+					 echo '<img '.createComIcon('../','check2.gif','0').' alt="OK">';
 				}
 
-			print '
+			echo '
 					</td>
 				</tr>';
 			$i--;
 
  		}
-		print '
+		echo '
 			</table>
 			</td></tr></table>
 			</center>';
 	}
 	else 
 	{
- 	print '<center><img src="../img/nedr.gif" width=100 height=138  border=0 align=middle>
+ 	echo '<center><img '.createMascot('../','mascot2_r.gif','0','middle').'>
 			<font face="Verdana, Arial" size=3 color=#ff0000>
 			&nbsp;<b>'.$LDReportArrived.'</b><p>
 			<form name=ack>
@@ -136,12 +142,24 @@ if($rows)
 else if($showlist) 
 	{	
 		$showlist=0;
-		print '
+		echo '
 				<script language=javascript>
 				self.resizeTo(300,150);
-				window.location.replace("technik-repabot.php?sid='.$sid.'&lang='.$lang.'&dept='.$dept.'");
 				</script>';
 	}
+	else
+	{
+	    echo '<img '.createComIcon('../','butft2_d.gif').'>';
+?>
+
+<font face="Verdana, Arial" size=2 color=#800000>
+<MARQUEE dir=ltr scrollAmount=3 scrollDelay=120 width=150
+      height=10 align="middle"><b><?php echo $LDImRepabot ?>...</b></MARQUEE></font>
+<p>
+
+<?php
+
+}
 ?>
 </body>
 </html>

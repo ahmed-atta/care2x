@@ -1,29 +1,30 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","intramail.php");
-$local_user="ck_intra_email_user";
-require("../include/inc_front_chain_lang.php");
+define('LANG_FILE','intramail.php');
+$local_user='ck_intra_email_user';
+require_once('../include/inc_front_chain_lang.php');
 // check the info params for completeness
 $addr=trim($addr);
 if(($mode=="saveadd")&&($addr=="")) { header("location:intra-email-addrbook.php?sid=$sid&lang=$lang"); exit;}
-require("../include/inc_config_color.php"); // load color preferences
+require_once('../include/inc_config_color.php'); // load color preferences
 
 $thisfile="intra-email-showaddr.php";
 
-$dbtable="mail_private_users";
+$dbtable='care_mail_private_users';
 
 $linecount=0;
 $modetypes=array("sendmail","listmail");
 
-require("../include/inc_db_makelink.php");
+/* Establish db connection */
+require('../include/inc_db_makelink.php');
 if($link&&$DBLink_OK) 
 	{	
 	
@@ -39,16 +40,16 @@ if($link&&$DBLink_OK)
 						
 					} //end of if rows
 
-				}else { print "$LDDbNoRead<br>$sql"; } 
+				}else { echo "$LDDbNoRead<br>$sql"; } 
 	}
-  		else { print "$LDDbNoLink<br>$sql"; } 
+  		else { echo "$LDDbNoLink<br>$sql"; } 
 
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
  <TITLE><?php echo "$LDIntraEmail - $LDAddrBook" ?></TITLE>
 
  <script language="javascript" >
@@ -93,20 +94,20 @@ function resit(d)
 </script> 
 
 <?php 
-require("../include/inc_css_a_hilitebu.php");
+require('../include/inc_css_a_hilitebu.php');
 ?>
 
 </HEAD>
 
-<BODY bgcolor=<?php print $cfg['body_bgcolor']; ?> topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="if (window.focus) window.focus()" 
+<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="if (window.focus) window.focus()" 
 <?php 
- if (!$cfg['dhtml']){ print ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+ if (!$cfg['dhtml']){ echo ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
 <?php echo $test ?>
-<?php //foreach($argv as $v) print "$v "; ?>
+<?php //foreach($argv as $v) echo "$v "; ?>
 <table width=100% border=0  cellpadding="0" cellspacing="0">
 <tr valign=top>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG>&nbsp;<?php echo "$LDIntraEmail - $LDAddrBook" ?></STRONG></FONT></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG>&nbsp;<?php echo "$LDIntraEmail - $LDAddrBook" ?></STRONG></FONT></td>
 </tr>
 
 </table>   
@@ -115,7 +116,7 @@ require("../include/inc_css_a_hilitebu.php");
 
  <?php
  
-print '
+echo '
 	<font color="#800000">&nbsp;'.$HTTP_COOKIE_VARS[$local_user.$sid].'</font>';
 // ******************************** show address book***************************************
 
@@ -125,14 +126,14 @@ print '
 	$maxrow=sizeof($arrlist);
 	if(($maxrow==1)&&($arrlist[0]=="")) $maxrow=0;
 	
- 	print '</b>
+ 	echo '</b>
 		<form name="addrlist" action="intra-email-addrbook.php" method="post"  onSubmit="return chkDelete(this,'.sizeof($arrlist).')">
 	';
-	if ($maxrow>6) print '&nbsp;
+	if ($maxrow>6) echo '&nbsp;
   	<input type="button" value="applyAddr()">
 	<br>';
-	print '	<table border=0 cellspacing=0 width=100% cellpadding=0>
-	<tr ><td  colspan=6 height=1><img src="../img/pixel.gif" border=0 height=3 width=1></td></tr>
+	echo '	<table border=0 cellspacing=0 width=100% cellpadding=0>
+	<tr ><td  colspan=6 height=1><img src="../gui/img/common/default/pixel.gif" border=0 height=3 width=1></td></tr>
      <tr bgcolor="#0060ae">
        <td>&nbsp;</td>
        <td><FONT face="Arial" size=1 color="#ffffff"><b>'.$LDTo.':</b><br>
@@ -142,8 +143,8 @@ print '
        <td><FONT face="Arial" size=1 color="#ffffff"><b>BCC:</b><br>
            </td>
        <td><FONT face="Verdana,Helvetica,Arial" size=2 >';
-	   if($l2h) print '<a href="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&l2h=0&mode='.$mode.'&folder='.$folder.'" title="'.$LDSortName.'"><img src="../img/arw_down.gif" '; else print '<a href="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&l2h=1&mode='.$mode.'&folder='.$folder.'" title="'.$LDSortName.'"><img src="../img/arw_up.gif" ';
-	   print '
+	   if($l2h) echo '<a href="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&l2h=0&mode='.$mode.'&folder='.$folder.'" title="'.$LDSortName.'"><img src="../img/arw_down.gif" '; else echo '<a href="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&l2h=1&mode='.$mode.'&folder='.$folder.'" title="'.$LDSortName.'"><img src="../img/arw_up.gif" ';
+	   echo '
 	   width=12 height=20 border=0 align=absmiddle alt="'.$LDSortName.'"><font color="#ffffff"> &nbsp;<b>'.$LDName.','.$LDFirstName.':</b></td>
        <td><FONT face="Verdana,Helvetica,Arial" size=2 color="#ffffff">&nbsp;&nbsp;<b>'.$LDAlias.'/'.$LDShortName.':
 		</b></td>
@@ -154,7 +155,7 @@ print '
 	    parse_str(trim($arrlist[$i]),$minfo);
 		//$buf="intra-email-read.php?sid=$sid&ua=$ck_intra_email_user&s_stamp=$minfo[t]&read=$minfo[r]&from=$minfo[f]&subj=".strtr($minfo[s]," ","+")."&date=".strtr($minfo[d]," ","+")."&size=$minfo[z]&l2h=$l2h&folder=$folder";
  		//$delbuf="n=$minfo[n]&a=$minfo[a]&e=$minfo[e]";
-     	print ' <tr bgcolor="#ffffff">
+     	echo ' <tr bgcolor="#ffffff">
        		<td>&nbsp;</td>
 			<td>	<input type="radio" name="sel'.$i.'" value="to"><br>
            	</td>
@@ -167,15 +168,15 @@ print '
        		<td><input type="hidden" name="eaddr'.$i.'" value="'.$minfo[e].'">
              <FONT face="Verdana,Helvetica,Arial" size=1>&nbsp;&nbsp;'.$minfo[e].'</td>
 	    	</tr>
-			<tr ><td bgcolor="#66aace" colspan=7 height=1><img src="../img/pixel.gif" border=0 height=1 width=1></td></tr>';
+			<tr ><td bgcolor="#66aace" colspan=7 height=1><img src="../gui/img/common/default/pixel.gif" border=0 height=1 width=1></td></tr>';
 		}
-	print '
-	<tr ><td  colspan=7 height=1><img src="../img/pixel.gif" border=0 height=3 width=1></td></tr>
+	echo '
+	<tr ><td  colspan=7 height=1><img src="../gui/img/common/default/pixel.gif" border=0 height=3 width=1></td></tr>
 	</table>';
-	if($maxrow) print '&nbsp;
+	if($maxrow) echo '&nbsp;
 		<input type="button" value="'.$LDTakeOver.'" onClick="applyAddr()">&nbsp; <input type="reset" value="'.$LDReset.'">
                                                                  ';
-	print '
+	echo '
 		<br><input type="hidden" name="task" value="delete">
 	<input type="hidden" name="maxrow" value="'.$maxrow.'">
 	<input type="hidden" name="sid" value="'.$sid.'">
@@ -189,7 +190,7 @@ print '
 ?>
   &nbsp; &nbsp;
    <font size=1><a href="javascript:window.close()" >
-   <img src="../img/l_arrowGrnSm.gif" width=12 height=12 border=0 align=middle> <?php echo $LDClose ?>
+   <img <?php echo createComIcon('../','l_arrowgrnsm.gif','0','middle') ?>> <?php echo $LDClose ?>
 </a></font>
 </FONT>
 </BODY>

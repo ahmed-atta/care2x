@@ -1,21 +1,21 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","or.php");
-define("NO_2LEVEL_CHK",1);
-require("../include/inc_front_chain_lang.php");
+define('LANG_FILE','or.php');
+define('NO_2LEVEL_CHK',1);
+require_once('../include/inc_front_chain_lang.php');
 setcookie(username,"");
 setcookie(ck_plan,"1");
 
 $saal="exclude";
-require("../include/inc_resolve_opr_dept.php");
+require('../include/inc_resolve_opr_dept.php');
 
 
 if($pmonth=="") $pmonth=date('n');
@@ -30,9 +30,10 @@ switch($retpath)
 	default: $rettarget="javascript:window.history.back()";
 }
 
-$dbtable="nursing_dutyplan";
+$dbtable='care_nursing_dutyplan';
 
-require("../include/inc_db_makelink.php");
+/* Establish db connection */
+require('../include/inc_db_makelink.php');
 if($DBLink_OK)
 {	
 		 	$sql="SELECT a_dutyplan,r_dutyplan FROM $dbtable 
@@ -71,12 +72,12 @@ if($DBLink_OK)
 						}
 						
 						
-					//print $sql."<br>";
+					//echo $sql."<br>";
 				}
 			}
-				else print "<p>".$sql."<p>$LDDbNoRead."; 
+				else echo "<p>".$sql."<p>$LDDbNoRead."; 
 				
-			$sql="SELECT list FROM nursing_dept_personell_quicklist
+			$sql="SELECT list FROM care_nursing_dept_personell_quicklist
 							WHERE dept LIKE '$dept'";	
 							
 			if($ergebnis=mysql_query($sql,$link))
@@ -87,8 +88,8 @@ if($DBLink_OK)
 				{
 					mysql_data_seek($ergebnis,0);
 					$ftinfo=mysql_fetch_array($ergebnis);
-					//print $result[$i][a_dutyplan];
-					//print $sql."<br>";
+					//echo $result[$i][a_dutyplan];
+					//echo $sql."<br>";
 					
 					$ndl="l=$a_parsed[l]&f=$a_parsed[f]&b=$a_parsed[b]";
 					$lbuf=explode("~",$ftinfo['list']);
@@ -113,7 +114,7 @@ if($DBLink_OK)
 					
 				}
 			}
-				else print "<p>".$sql."<p>$LDDbNoRead"; 
+				else echo "<p>".$sql."<p>$LDDbNoRead"; 
 }
 
 ?>
@@ -121,7 +122,7 @@ if($DBLink_OK)
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
  <TITLE><?php echo "$LDOR $LDNursing $LDOnCallDuty" ?></TITLE>
 
 <style type="text/css">
@@ -153,7 +154,7 @@ function popinfo(l,f,b)
 	h=window.screen.height;
 	ww=400;
 	wh=400;
-	urlholder="op-pflege-dienstplan-popinfo.php?ln="+l+"&fn="+f+"&bd="+b+"&dept=<?php echo "$dept&sid=$sid&lang=$lang" ?>&route=validroute&user=<?php print $aufnahme_user.'"' ?>;
+	urlholder="op-pflege-dienstplan-popinfo.php?ln="+l+"&fn="+f+"&bd="+b+"&dept=<?php echo "$dept&sid=$sid&lang=$lang" ?>&route=validroute&user=<?php echo $aufnahme_user.'"' ?>;
 	
 	infowin=window.open(urlholder,"infowin","width=" + ww + ",height=" + wh +",menubar=no,resizable=yes,scrollbars=yes");
 	window.infowin.moveTo((w/2)+20,(h/2)-(wh/2));
@@ -167,7 +168,7 @@ function popinfo(l,f,b)
 <BODY  bgcolor="#ffffff" alink="navy" vlink="navy"  onLoad="window.resizeTo(600,450)">
 <font face="Verdana, Arial" size=2>
 
-<b> <?php print "$LDOnCallDuty ($dept) $LDOn $pday.$pmonth.$pyear" ?></b>
+<b> <?php echo "$LDOnCallDuty ($dept) $LDOn $pday.$pmonth.$pyear" ?></b>
 <p>
 <?php if($rows&&($a_duty||$r_duty)) : ?>
 <table border=0 >
@@ -177,9 +178,9 @@ function popinfo(l,f,b)
 </td>
 </tr>
 <tr>
-<td><font face=verdana,arial size=2 ><ul><font size=3 color="#990000"><b><?php if($a_duty) print $a_parsed[l].", ".$a_parsed[f]; ?></b></font>
-<br><ul><b><?php echo $LDBeeper ?>:</b><font color=red> <?php print $a_f[df]; ?><br> 
-<font color=navy><b><?php echo $LDPhone ?>:</b> <?php print $a_f[dp]; ?><br></font></ul></ul>
+<td><font face=verdana,arial size=2 ><ul><font size=3 color="#990000"><b><?php if($a_duty) echo $a_parsed[l].", ".$a_parsed[f]; ?></b></font>
+<br><ul><b><?php echo $LDBeeper ?>:</b><font color=red> <?php echo $a_f[df]; ?><br> 
+<font color=navy><b><?php echo $LDPhone ?>:</b> <?php echo $a_f[dp]; ?><br></font></ul></ul>
 </td>
 </tr>
 <tr>
@@ -188,10 +189,10 @@ function popinfo(l,f,b)
 </td>
 </tr>
 <tr>
-<td><font face=verdana,arial size=2 ><ul><font size=3 color="#990000"><b><?php if($r_duty) print $r_parsed[l].", ".$r_parsed[f]; ?></b></font>
-<br><ul><b><?php echo $LDBeeper ?>:</b><font color=red> <?php print $r_f[of]; ?>
+<td><font face=verdana,arial size=2 ><ul><font size=3 color="#990000"><b><?php if($r_duty) echo $r_parsed[l].", ".$r_parsed[f]; ?></b></font>
+<br><ul><b><?php echo $LDBeeper ?>:</b><font color=red> <?php echo $r_f[of]; ?>
 <br>
-<font color=navy><b><?php echo $LDPhone ?>:</b> <?php print $r_f[op]; ?><br></font></ul></ul>
+<font color=navy><b><?php echo $LDPhone ?>:</b> <?php echo $r_f[op]; ?><br></font></ul></ul>
 </td>
 </tr>
 
@@ -200,7 +201,7 @@ function popinfo(l,f,b)
 <?php else : ?>
 <table border=0>
   <tr>
-    <td><img src="../img/catr.gif" width=88 height=80 border=0></td>
+    <td><img <?php echo createMascot('../','mascot1_r.gif','0') ?>></td>
     <td><font face="Verdana, Arial" size=3 color="#cc0000"><b><?php echo $LDNoEntryFound ?></b></font></td>
   </tr>
 </table>
@@ -208,7 +209,7 @@ function popinfo(l,f,b)
 <?php endif ?>
 
 <p>
-<a href="<?php echo $rettarget ?>"><img src="../img/<?php echo "$lang/$lang" ?>_back2.gif" width=110 height=24 border=0></a>
+<a href="<?php echo $rettarget ?>"><img <?php echo createLDImgSrc('../','back2.gif','0') ?>></a>
 </FONT>
 </BODY>
 </HTML>

@@ -1,17 +1,17 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","doctors.php");
-define("NO_2LEVEL_CHK",1);
-require("../include/inc_front_chain_lang.php");
-require("../include/inc_config_color.php");
+define('LANG_FILE','doctors.php');
+define('NO_2LEVEL_CHK',1);
+require_once('../include/inc_front_chain_lang.php');
+require_once('../include/inc_config_color.php');
 
 setcookie(username,"");
 setcookie(ck_plan,"1");
@@ -23,9 +23,10 @@ $thisfile="doctors-dienstplan.php";
 $filename="../global_conf/$lang/doctors_abt_list.pid";
 $abtname=get_meta_tags($filename);
 
-$dbtable="doctors_dutyplan";
+$dbtable='care_doctors_dutyplan';
 
-require("../include/inc_db_makelink.php");
+/* Establish db connection */
+require('../include/inc_db_makelink.php');
 if($link&&$DBLink_OK) 
 	{	
 		
@@ -42,12 +43,12 @@ if($link&&$DBLink_OK)
 				{
 					mysql_data_seek($ergebnis,0);
 					$result=mysql_fetch_array($ergebnis);
-					//print $sql."<br>";
+					//echo $sql."<br>";
 				}
 			}
-				else print "<p>".$sql."<p>$LDDbNoRead"; 
+				else echo "<p>".$sql."<p>$LDDbNoRead"; 
 	}
-  	 else { print "$LDDbNoLink<br>"; } 
+  	 else { echo "$LDDbNoLink<br>"; } 
 
 $firstday=date("w",mktime(0,0,0,$pmonth,1,$pyear));
 
@@ -58,7 +59,7 @@ $maxdays=date("t",mktime(0,0,0,$pmonth,1,$pyear));
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
  <TITLE></TITLE>
 
 <style type="text/css">
@@ -90,10 +91,10 @@ function popinfo(l,f,b)
 	h=window.screen.height;
 	ww=400;
 	wh=400;
-	urlholder="doctors-dienstplan-popinfo.php?<?php echo "sid=$sid&lang=$lang" ?>&ln="+l+"&fn="+f+"&bd="+b+"&dept=<?php echo $dept ?>&route=validroute&user=<?php print $aufnahme_user.'"' ?>;
+	urlholder="doctors-dienstplan-popinfo.php?<?php echo "sid=$sid&lang=$lang" ?>&ln="+l+"&fn="+f+"&bd="+b+"&dept=<?php echo $dept ?>&route=validroute&user=<?php echo $aufnahme_user.'"' ?>;
 	
-	infowin=window.open(urlholder,"infowin","width=" + ww + ",height=" + wh +",menubar=no,resizable=yes,scrollbars=yes");
-	window.infowin.moveTo((w/2)+20,(h/2)-(wh/2));
+	infowin<?php echo $sid ?>=window.open(urlholder,"infowin<?php echo $sid ?>","width=" + ww + ",height=" + wh +",menubar=no,resizable=yes,scrollbars=yes");
+	window.infowin<?php echo $sid ?>.moveTo((w/2)+20,(h/2)-(wh/2));
 
 }
 function gethelp(x,s,x1,x2,x3)
@@ -112,31 +113,31 @@ function gethelp(x,s,x1,x2,x3)
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0" >
 <tr valign=top>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" ><FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><font color="<?php print $cfg['top_txtcolor']; ?>"> &nbsp; <?php echo "$LDDoctors - $LDDutyPlan" ?></font> <?php echo strtoupper($abtname[$dept]); ?></STRONG></FONT></td>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" align="right"><a href="javascript:history.back();"><img src="../img/<?php echo "$lang/$lang" ?>_back2.gif" border=0 width=110 height=24 align="absmiddle"
- alt="<?php echo $LDBack ?>"></a><a href="javascript:gethelp('docs_dutyplan.php','<?php echo $mode ?>','<?php echo $rows ?>')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 align="absmiddle"
-  alt="<?php echo $LDHelp ?>"></a><a href="op-pflege-dienst-schnellsicht.php?sid=<?php echo $sid ?>" onClick=killchild()><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 align="absmiddle" alt="<?php echo $LDClosePlan ?>"></a></td></tr>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" ><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><font color="<?php echo $cfg['top_txtcolor']; ?>"> &nbsp; <?php echo "$LDDoctors - $LDDutyPlan" ?></font> <?php echo strtoupper($abtname[$dept]); ?></STRONG></FONT></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right"><a href="javascript:history.back();"><img <?php echo createLDImgSrc('../','back2.gif','0','absmiddle') ?>
+ alt="<?php echo $LDBack ?>"></a><a href="javascript:gethelp('docs_dutyplan.php','<?php echo $mode ?>','<?php echo $rows ?>')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0','absmiddle') ?>
+  alt="<?php echo $LDHelp ?>"></a><a href="op-pflege-dienst-schnellsicht.php?sid=<?php echo $sid ?>" onClick=killchild()><img <?php echo createLDImgSrc('../','close2.gif','0','absmiddle') ?> alt="<?php echo $LDClosePlan ?>"></a></td></tr>
 
 <tr>
-<td bgcolor="<?php print $cfg['body_bgcolor']; ?>" valign=top colspan=2><p>
+<td bgcolor="<?php echo $cfg['body_bgcolor']; ?>" valign=top colspan=2><p>
 <ul>
 
 
 <FONT    SIZE=-1  FACE="Arial">
 
 <table border=0>
-<tr><td align=left><a href="<?php print $thisfile.'?sid='.$sid.'&lang='.$lang.'&retpath='.$retpath.'&dept='.$dept.'&pmonth=';
-if ($pmonth==1) print '12'.'&pyear='.($pyear-1); 
-else print ($pmonth-1).'&pyear='.$pyear; ?>">
-<font size=2 face=arial color=gray><b><?php if ($pmonth==1) print $monat[12]; else print $monat[$pmonth-1]; ?></b></a></td>
+<tr><td align=left><a href="<?php echo $thisfile.'?sid='.$sid.'&lang='.$lang.'&retpath='.$retpath.'&dept='.$dept.'&pmonth=';
+if ($pmonth==1) echo '12'.'&pyear='.($pyear-1); 
+else echo ($pmonth-1).'&pyear='.$pyear; ?>">
+<font size=2 face=arial color=gray><b><?php if ($pmonth==1) echo $monat[12]; else echo $monat[$pmonth-1]; ?></b></a></td>
 <td align=center><font size=4 face=arial color=navy>
-<?php print ucfirst($monat[$pmonth]).'&nbsp;&nbsp;'.$pyear; ?>
+<?php echo ucfirst($monat[$pmonth]).'&nbsp;&nbsp;'.$pyear; ?>
 </font></td>
 
-<td align=right><a href="<?php print $thisfile.'?sid='.$sid.'&lang='.$lang.'&retpath='.$retpath.'&dept='.$dept.'&pmonth=';
-if ($pmonth==12) print '1'.'&pyear='.($pyear+1); 
-else print ($pmonth+1).'&pyear='.$pyear; ?>">
-<font size=2 face=arial color=gray><b><?php if ($pmonth==12) print $monat[1];else print $monat[$pmonth+1]; ?></b></td>
+<td align=right><a href="<?php echo $thisfile.'?sid='.$sid.'&lang='.$lang.'&retpath='.$retpath.'&dept='.$dept.'&pmonth=';
+if ($pmonth==12) echo '1'.'&pyear='.($pyear+1); 
+else echo ($pmonth+1).'&pyear='.$pyear; ?>">
+<font size=2 face=arial color=gray><b><?php if ($pmonth==12) echo $monat[1];else echo $monat[$pmonth+1]; ?></b></td>
 <td>&nbsp;</td></tr>
 
 
@@ -166,19 +167,19 @@ for ($i=1,$n=0,$wd=$firstday;$i<=$maxdays;$i++,$n++,$wd++){
 	
 	parse_str(trim($aduty[$n]),$aelems);
 	parse_str(trim($rduty[$n]),$relems);
-	print '
+	echo '
 	<tr >
 	<td  height=5 '.$backcolor.'><div class="a3"><font face="arial" size=2>'.$i.'</div>
 	</td>
 	<td height=5 '.$backcolor.'><div class=a3><font face=arial size=2>';
-	if (!$wd) print '<font color=red>';
-	print $LDShortDay[$wd].'</div>
+	if (!$wd) echo '<font color=red>';
+	echo $LDShortDay[$wd].'</div>
 	</td>
 	<td height=5 '.$backcolor.'><div class="a3"><font face="arial" size=2>';
-	print '&nbsp;<a href="javascript:popinfo(\''.$aelems[l].'\',\''.$aelems[f].'\',\''.$aelems[b].'\')">'.$aelems[s].'</a></div>
+	echo '&nbsp;<a href="javascript:popinfo(\''.$aelems[l].'\',\''.$aelems[f].'\',\''.$aelems[b].'\')">'.$aelems[s].'</a></div>
 	</td>
 	<td height=5 '.$backcolor.'><div class=a3><font face=arial size=2>';
-	print '&nbsp;<a href="javascript:popinfo(\''.$relems[l].'\',\''.$relems[f].'\',\''.$relems[b].'\')">'.$relems[s].'</a></div>
+	echo '&nbsp;<a href="javascript:popinfo(\''.$relems[l].'\',\''.$relems[f].'\',\''.$relems[b].'\')">'.$relems[s].'</a></div>
 	</td>
 	</tr>';
 	if ($wd==6)  $wd=-1;
@@ -196,24 +197,24 @@ for ($i=1,$n=0,$wd=$firstday;$i<=$maxdays;$i++,$n++,$wd++){
 <?php
 switch($retpath)
 {
-	case "menu": $rettarget="aerzte.php?sid=$sid&lang=$lang"; break;
+	case "menu": $rettarget="aerzte.php?sid=".$sid."&lang=".$lang; break;
 	case "qview": $rettarget="doctors-dienst-schnellsicht.php?sid=$sid&lang=$lang&hilitedept=$dept"; break;
 	default: $rettarget="javascript:window.history.back()";
 }
 ?>
 
 <td valign="top">
-<a href="doctors-main-pass.php?target=dutyplan&dept=<?php print $dept.'&sid='.$sid.'&pmonth='.$pmonth.'&pyear='.$pyear.'&retpath='.$retpath.'&lang='.$lang; ?>"><img src="../img/<?php echo "$lang/$lang" ?>_newplan.gif" border="0" alt="<?php echo $LDNewPlan ?>"></a>
+<a href="doctors-main-pass.php?target=dutyplan&dept=<?php echo $dept.'&sid='.$sid.'&pmonth='.$pmonth.'&pyear='.$pyear.'&retpath='.$retpath.'&lang='.$lang; ?>"><img <?php echo createLDImgSrc('../','newplan.gif','0') ?> alt="<?php echo $LDNewPlan ?>"></a>
 <br>
-<a href="<?php echo $rettarget ?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border="0"  alt="<?php echo $LDClosePlan ?>"></a>
+<a href="<?php echo $rettarget ?>"><img <?php echo createLDImgSrc('../','close2.gif','0') ?>  alt="<?php echo $LDClosePlan ?>"></a>
 </td>
 </tr>
 </table>
 
 <p>
-<a href="doctors-main-pass.php?target=dutyplan&dept=<?php print $dept.'&sid='.$sid.'&pmonth='.$pmonth.'&pyear='.$pyear.'&retpath='.$retpath.'&lang='.$lang; ?>"><img src="../img/<?php echo "$lang/$lang" ?>_newplan.gif" border="0" alt="<?php echo $LDNewPlan ?>"></a>
+<a href="doctors-main-pass.php?target=dutyplan&dept=<?php echo $dept.'&sid='.$sid.'&pmonth='.$pmonth.'&pyear='.$pyear.'&retpath='.$retpath.'&lang='.$lang; ?>"><img <?php echo createLDImgSrc('../','newplan.gif','0') ?> alt="<?php echo $LDNewPlan ?>"></a>
 &nbsp;&nbsp;&nbsp;&nbsp;
-<a href="<?php echo $rettarget ?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border="0" alt="<?php echo $LDClosePlan ?>"></a>
+<a href="<?php echo $rettarget ?>"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> alt="<?php echo $LDClosePlan ?>"></a>
 <p>
 </ul>
 
@@ -225,8 +226,9 @@ switch($retpath)
 <tr>
 <td bgcolor="<?php echo $cfg[bot_bgcolor] ?>" height=70 colspan=2>
 <?php
-require("../language/$lang/".$lang."_copyrite.php");
- ?>
+if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
+include('../language/'.$lang.'/'.$lang.'_copyrite.php');
+  else include('../language/en/en_copyrite.php');?>
 </td>
 </tr>
 </table>        

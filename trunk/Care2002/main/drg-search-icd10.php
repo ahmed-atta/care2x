@@ -3,7 +3,7 @@
 		else $lang=$ck_language;
 //if (!$sid||($sid!=$$ck_sid_buffer)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 //require("../language/".$lang."/lang_".$lang."_drg.php");
-require("../include/inc_config_color.php");
+require_once('../include/inc_config_color.php');
 
 $toggle=0;
 
@@ -18,7 +18,7 @@ $dbhost="localhost";  //,,, format is "host:port"
 $dbname="drg";
 $dbusername="httpd";
 $dbpassword="";
-$dbtable="icd10";
+$dbtable="care_icd10";
 
 /***************** the ff: is to establish connection DO NOT EDIT ..................
   							the variable $DBLink_OK will be tested in the script to determine
@@ -42,7 +42,7 @@ $dbtable="icd10";
 				while ($zeile=mysql_fetch_array($ergebnis)) $linecount++;
 				
 			}
-			 else {print "<p>".$sql."<p>$LDDbNoRead";};
+			 else {echo "<p>".$sql."<p>$LDDbNoRead";};
 
 }
 
@@ -50,7 +50,7 @@ $dbtable="icd10";
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
  <TITLE></TITLE>
  
   <script language="javascript">
@@ -70,57 +70,57 @@ function gethelp(x,s,x1,x2,x3)
 </script>
  
   <?php 
-require("../include/inc_css_a_hilitebu.php");
+require('../include/inc_css_a_hilitebu.php');
 ?>
  
 </HEAD>
 
-<BODY  onLoad="document.searchdata.keyword.select();document.searchdata.keyword.focus();" bgcolor=<?php print $cfg['body_bgcolor']; ?>
-<?php if (!$cfg['dhtml']){ print ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+<BODY  onLoad="document.searchdata.keyword.select();document.searchdata.keyword.focus();" bgcolor=<?php echo $cfg['body_bgcolor']; ?>
+<?php if (!$cfg['dhtml']){ echo ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 
 <FONT    SIZE=-1  FACE="Arial">
 <ul>
-<FORM action="drg-search-icd10.php" method="post" name="searchdata" onSubmit="return pruf(this)">
+<FORM action="drg-search-care_icd10.php" method="post" name="searchdata" onSubmit="return pruf(this)">
 <font face="Arial,Verdana"  color="#000000" size=-1>
-<input type="hidden" name="sid" value="<?php print $sid; ?>">
+<input type="hidden" name="sid" value="<?php echo $sid; ?>">
 <B><?php echo $LDKeywordPrompt ?></B></font><p>
-<font size=3><INPUT type="text" name="keyword" size="14" maxlength="40" onfocus=this.select() value="<?php print $keyword ?>"></font> 
+<font size=3><INPUT type="text" name="keyword" size="14" maxlength="40" onfocus=this.select() value="<?php echo $keyword ?>"></font> 
 <INPUT type="submit" name="versand" value="<?php echo $LDSEARCH ?>"></FORM>
 
 <p>
-<a href="startframe.php?sid=<?php print "$sid&lang=$lang"; ?>"><img src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" width=103 height=24 border=0></a>
+<a href="startframe.php?sid=<?php echo "$sid&lang=$lang"; ?>"><img <?php echo createLDImgSrc('../','cancel.gif','0') ?>></a>
 <p>
 
 <?php
 if ($linecount>0) 
 				{ 
-					print "".str_replace("~nr~",$linecount,$LDPhoneFound)."<p>";
+					echo "".str_replace("~nr~",$linecount,$LDPhoneFound)."<p>";
 					mysql_data_seek($ergebnis,0);
-					print "<form><table border=0 cellpadding=1 cellspacing=1> <tr bgcolor=#0000aa>";
+					echo "<form><table border=0 cellpadding=1 cellspacing=1> <tr bgcolor=#0000aa>";
 
-						print"<td></td><td><font face=arial size=2 color=#ffffff><b>ICD-10 Code</b></td>";
-						print"<td><font face=arial size=2 color=#ffffff><b>Beschreibung</b></td>";
+						echo"<td></td><td><font face=arial size=2 color=#ffffff><b>ICD-10 Code</b></td>";
+						echo"<td><font face=arial size=2 color=#ffffff><b>Beschreibung</b></td>";
 		
-					print "</tr>";
+					echo "</tr>";
 					while($zeile=mysql_fetch_array($ergebnis))
 					{
-						print "<tr bgcolor=";
-						if($toggle) { print "#efefef>"; $toggle=0;} else {print "#ffffff>"; $toggle=1;};
-						print '<td><input type="checkbox" name="sel'.$i.'"></td>';
+						echo "<tr bgcolor=";
+						if($toggle) { echo "#efefef>"; $toggle=0;} else {echo "#ffffff>"; $toggle=1;};
+						echo '<td><input type="checkbox" name="sel'.$i.'"></td>';
 						for($i=0;$i<mysql_num_fields($ergebnis);$i++) 
 						{
-							print '<td><font face=arial size=2>';
-							if($zeile[$i]=="")print "&nbsp;"; else print $zeile[$i];
-							print "</td>";
+							echo '<td><font face=arial size=2>';
+							if($zeile[$i]=="")echo "&nbsp;"; else echo $zeile[$i];
+							echo "</td>";
 						}
-						print "</tr>";
+						echo "</tr>";
 					}
-					print "</table></form>";
+					echo "</table></form>";
 					if($linecount>15)
 					{
-						print '
+						echo '
 						<p><font color=red><B>Neue Suche:</font>
-						<FORM action="search-icd10.php" method="post" onSubmit="return pruf(this)" name="form2">
+						<FORM action="search-care_icd10.php" method="post" onSubmit="return pruf(this)" name="form2">
 						<font face="Arial,Verdana"  color="#000000" size=-1>
 						Suchbegriff eingeben. z.B. Name oder Abteilung, u.s.w.</B><p>
 						<INPUT type="text" name="keyword" size="14" maxlength="25" value="'.$keyword.'"> 

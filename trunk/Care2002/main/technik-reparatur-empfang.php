@@ -1,35 +1,39 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","tech.php");
-define("NO_2LEVEL_CHK",1);
-require("../include/inc_front_chain_lang.php");
-require("../include/inc_config_color.php");
-$breakfile="technik.php?sid=$sid&lang=$lang";
+define('LANG_FILE','tech.php');
+define('NO_2LEVEL_CHK',1);
+require_once('../include/inc_front_chain_lang.php');
+require_once('../include/inc_config_color.php');
+$breakfile='technik.php?sid='.$sid.'&lang='.$lang;
 
- if($repair=="ask") 
+ if($repair=='ask') 
  {
  	$target=$LDRequest;
-	$returnfile="technik-reparatur-anfordern.php?sid=$sid&lang=$lang";
+	$returnfile='technik-reparatur-anfordern.php?sid='.$sid.'&lang='.$lang;
  }
  else
  {
   $target=$LDReport;
-  $returnfile="technik-reparatur-melden.php?sid=$sid&lang=$lang";
+  $returnfile='technik-reparatur-melden.php?sid='.$sid.'&lang='.$lang;
  }
- 
+
+/* Load date formatter */
+include_once('../include/inc_date_format_functions.php');
+
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 
 <script language="javascript" >
 <!-- 
@@ -44,23 +48,23 @@ function gethelp(x,s,x1,x2,x3)
 // -->
 </script>
 <?php 
-require("../include/inc_css_a_hilitebu.php");
+require('../include/inc_css_a_hilitebu.php');
 ?>
 </HEAD>
 
 <BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ print 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
 
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
 <tr valign=top>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="45"><FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="45"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
 <STRONG> &nbsp; <?php echo $LDTechSupport ?></STRONG></FONT></td>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])print'<a href="javascript:window.history.back()"><img src="../img/'.$lang.'/'.$lang.'_back2.gif" width=110 height=24 border=0  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('')"><img src="../img/<?php echo "$lang/$lang"; ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
+<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc('../','back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
 <tr>
-<td colspan=2 bgcolor=<?php print $cfg['body_bgcolor']; ?>>
+<td colspan=2 bgcolor=<?php echo $cfg['body_bgcolor']; ?>>
  
 <FONT    SIZE=4  FACE="Arial" >
 <ul>
@@ -71,12 +75,12 @@ require("../include/inc_css_a_hilitebu.php");
 <table align="center"  cellpadding="15"  border="0">
 <tr>
 <td>
-<img src="../img/catr.gif" border=0 width=88 height=80 align=left>
+<img <?php echo createMascot('../','mascot1_r.gif','0','bottom') ?> align=left>
 </td>
 <td bgcolor=#fefefe>
 <FONT    SIZE=2  FACE="Verdana,Arial" color="#990000">
-<?php echo $LDThanksSir ?> <b><?php print("$reporter") ?></b>. <p>
-<?php echo $LDYour ?> <?php echo $target ?> <?php echo $LDReceived ?> <b><?php print($tdate); ?></b> <?php echo $LDAt ?>   <b><?php print($ttime); ?></b> 
+<?php echo $LDThanksSir ?> <b><?php echo("$reporter") ?></b>. <p>
+<?php echo $LDYour ?> <?php echo $target ?> <?php echo $LDReceived ?> <b><?php echo formatDate2Local($tdate,$date_format); ?></b> <?php echo $LDAt ?>   <b><?php echo convertTimeToLocal($ttime); ?></b> 
 <?php echo $LDAtTech ?>
 </td>
 
@@ -98,13 +102,13 @@ require("../include/inc_css_a_hilitebu.php");
 <ul>
 <p>
 <FONT    SIZE=-1  FACE="Arial">
-<img src="../img/varrow.gif" width="20" height="15">
+<img <?php echo createComIcon('../','varrow.gif','0') ?>>
 <a href="technik-reparatur-anfordern.php?sid=<?php echo "$sid&lang=$lang" ?>"><?php echo $LDReRepairTxt ?></a><br>
-<img src="../img/varrow.gif" width="20" height="15">
+<img <?php echo createComIcon('../','varrow.gif','0') ?>>
 <a href="technik-reparatur-melden.php?sid=<?php echo "$sid&lang=$lang" ?>"><?php echo $LDRepairReportTxt ?></a><br>
-<img src="../img/varrow.gif" width="20" height="15">
+<img <?php echo createComIcon('../','varrow.gif','0') ?>>
 <a href="technik-questions.php?sid=<?php echo "$sid&lang=$lang" ?>"><?php echo $LDQuestionsTxt ?></a><br>
-<img src="../img/varrow.gif" width="20" height="15">
+<img <?php echo createComIcon('../','varrow.gif','0') ?>>
 <a href="technik-info.php?sid=<?php echo "$sid&lang=$lang" ?>"> <?php echo $LDInfoTxt ?></a><br>
 </FONT>
 </ul>
@@ -112,8 +116,9 @@ require("../include/inc_css_a_hilitebu.php");
 <HR>
 
 <?php
-require("../language/$lang/".$lang."_copyrite.php");
- ?>
+if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
+include('../language/'.$lang.'/'.$lang.'_copyrite.php');
+  else include('../language/en/en_copyrite.php');?>
 
 </td>
 </tr>

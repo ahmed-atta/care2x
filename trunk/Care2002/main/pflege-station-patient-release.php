@@ -1,31 +1,51 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","nursing.php");
-$local_user="ck_pflege_user";
-require("../include/inc_front_chain_lang.php");
-require("../include/inc_config_color.php"); // load color preferences
+define('LANG_FILE','nursing.php');
+$local_user='ck_pflege_user';
+require_once('../include/inc_front_chain_lang.php');
+require_once('../include/inc_config_color.php'); // load color preferences
+require_once('../global_conf/inc_remoteservers_conf.php');
 
-require("../global_conf/inc_remoteservers_conf.php");
+/* Check whether the content is language dependent and set the lang appendix */
+if(defined('LANG_DEPENDENT') && (LANG_DEPENDENT==1))
+{
+    $lang_append=' AND lang=\''.$lang.'\'';
+}
+else 
+{
+    $lang_append='';
+}
 
-if(!$encoder) $encoder=$HTTP_COOKIE_VARS["ck_pflege_user".$sid];
+if(!$encoder) $encoder=$HTTP_COOKIE_VARS[$local_user.$sid];
 
-$breakfile="javascript:window.history.back()";
-$thisfile="pflege-station-patient-release.php";
+$breakfile='javascript:window.history.back()';
+$thisfile='pflege-station-patient-release.php';
 
-require("../include/inc_db_makelink.php");
+/* Establish db connection */
+require('../include/inc_db_makelink.php');
 if($link&&$DBLink_OK)
 	{	
-		// get orig data
-		$dbtable="mahopatient";
-		$sql="SELECT * FROM $dbtable WHERE patnum='$pn' ";
+	
+	  /* Load date formatter */
+      include_once('../include/inc_date_format_functions.php');
+      				
+      
+	  /* Load editor functions */
+      //include_once('../include/inc_editor_fx.php');
+	  
+	  /*// get orig data */
+		$dbtable='care_admission_patient';
+		
+		$sql='SELECT * FROM '.$dbtable.' WHERE patnum=\''.$pn.'\'';
+		
 		if($ergebnis=mysql_query($sql,$link))
        		{
 				$rows=0;
@@ -36,23 +56,21 @@ if($link&&$DBLink_OK)
 						$result=mysql_fetch_array($ergebnis);
 					}
 			}
-			else {print "<p>$sql<p>$LDDbNoRead"; exit;}
+			else {echo "<p>$sql<p>$LDDbNoRead"; exit;}
 		
-		if(($mode=="release")&&(!$lock))
+		if(($mode=='release')&&(!$lock))
 		{
-							$dbtable="nursing_station_patients";
-							$sql="SELECT *	FROM $dbtable WHERE  t_date=\"$t_date\"
-																		AND	station=\"$station\"";
+							$dbtable='care_nursing_station_patients';
+							
+							$sql='SELECT *	FROM '.$dbtable.' WHERE  s_date=\''.$s_date.'\' AND	station=\''.$station.'\''.$lang_append;
 														
 							$ergebnis=mysql_query($sql,$link);
 							if($ergebnis)
        						{
-								$rows=0;
-								while( $content=mysql_fetch_array($ergebnis)) $rows++;
+								$rows=mysql_num_rows($ergebnis);
 								if($rows==1)
 								{
 									$rbuf="";
-					 				mysql_data_seek($ergebnis,0);
 									$content=mysql_fetch_array($ergebnis);
 									$buf=explode("_",$content[bed_patient]);
 									$sbuf="r=$rm&b=$bd&n=$pn";
@@ -60,15 +78,19 @@ if($link&&$DBLink_OK)
 									{
 										if($rbuf=strstr($buf[$i],$sbuf)) 
 										{
-											$dbuf=explode(".",$x_date);
+/*											$dbuf=explode(".",$x_date);
 											$dbuf=array_reverse($dbuf);
 											$s_date=implode(".",$dbuf);
-											
+*/											
+                                            
 											parse_str($rbuf,$pstr);
 											
-											$dbtable="nursing_station_patients_release";
+											$dbtable='care_nursing_station_patients_release';
+											
+											
 											$sql="INSERT INTO $dbtable 
 											(
+											    lang,
 												station,
 												dept,
 												name,
@@ -76,60 +98,77 @@ if($link&&$DBLink_OK)
 												lastname,
 												firstname,
 												bday,
-												x_date,
 												x_time,
 												relart,
 												s_date,
 												discharge_rem,
 												ward_rem,
-												encoder
+												create_id,
+												create_time
 											)
 											VALUES
 											(
+											    '$lang',
 												'$station',
-												'$content[dept]',
-												'$content[name]',
+												'".$content['dept']."',
+												'".$content['name']."',
 												'$pstr[n]',
 												'$pstr[ln]',
 												'$pstr[fn]',
 												'$pstr[g]',
-												'$x_date',
 												'$x_time',
 												'$relart',
-												'$s_date',
+												'".formatDate2Std($x_date,$date_format)."',
 												'$info',
 												'$pstr[rem]',
-												'$encoder'
+												'$encoder',
+												NULL
 											)";
+											
 										if($ergebnis=mysql_query($sql,$link)) 
-											{
+										{
+										   $new_row=mysql_insert_id($link);
+										   
+										   if($new_row)
+										   {
 												array_splice($buf,$i,1);
 												$content[bed_patient]=implode("_",$buf);
 												$used=$content[usedbed]-1;
 												
-												$dbtable="nursing_station_patients";
+												$dbtable='care_nursing_station_patients';
 												
 												$sql="UPDATE $dbtable SET bed_patient='$content[bed_patient]',
 														freebed='".($content[freebed]+1)."',
 														usedbed='$used',
 														usebed_percent='".ceil((($used+$content[closedbeds])/$content[maxbed])*100)."' 
-														WHERE t_date='$t_date' AND station='$station'";
+														WHERE s_date='".formatDate2Std($x_date,$date_format)."' AND station='$station'".$lang_append;
+														
 												if($ergebnis=mysql_query($sql,$link)) 
 												{
-													if(($relart!="chg_ward")&&($relart!="chg_bed"))
-													{
-														$dbtable="mahopatient";
-														$sql="UPDATE $dbtable SET discharge_date='$x_date',
-																discharge_time='$x_time',
-																discharge_sdate='$s_date',
-																discharge_art='$relart'
+
+														$dbtable='care_admission_patient';
+														
+												        if(($relart!='chg_ward')&&($relart!='chg_bed'))
+													    {														
+														   $sql="UPDATE $dbtable SET 
+																discharge_time='".$x_time.":00',
+																discharge_sdate='".formatDate2Std($x_date,$date_format)." ".$x_time.":00',
+																discharge_art='$relart',
+																at_station='0',
 																WHERE patnum='$pn'";
+												         }		
+														 else
+														 {														
+														   $sql="UPDATE $dbtable SET at_station='0' WHERE patnum='$pn'";
+														  }
+														  
 														if($ergebnis=mysql_query($sql,$link)) 
 														{
 															$released=1;
 														}
-													}
-													else $released=1;
+
+													
+													
 													if($released) 
 													{
 														header("location:$thisfile?sid=$sid&lang=$lang&pn=$pn&station=$station&bd=$bd&rm=$rm&pyear=$pyear&pmonth=$pmonth&pday=$pday&mode=$mode&released=1&lock=1&x_date=$x_date&x_time=$x_time&relart=$relart&encoder=".strtr($encoder," ","+")."&info=".strtr($info," ","+"));
@@ -139,37 +178,42 @@ if($link&&$DBLink_OK)
 												
 												if(!$released)
 												{
-													$dbtable="nursing_station_patients_release";
+													$dbtable='care_nursing_station_patients_release';
 												
-													$sql="DELETE FROM $dbtable 
-															WHERE x_date='$x_date' AND station='$station'";
+													$sql='DELETE FROM '.$dbtable.' WHERE item=\''.$new_row.'\'';
 													mysql_query($sql,$link);
-												 	print "$LDDbNoDelete<br>$sql";
+												 	echo "$LDDbNoDelete<br>$sql";
 												 }
+											  } // end of if($new_row)
 											}
-											else print "$LDDbNoSave<br>$sql";
+											else echo "$LDDbNoSave<br>$sql";
 										break;
 										}// end of if(rbuf=
 									}// end of while
 								
 					 			}// end if(rows)
 							}
-				 			else {print "<p>$sql<p>$LDDbNoRead"; exit;}
+				 			else {echo "<p>$sql<p>$LDDbNoRead"; exit;}
 			}	// end of if (mode=release)		
 			
 			if(!$dept)
 			{
 				// translate station to dept
-				$dbtable="station2dept_table";
-				$sql="SELECT dept FROM $dbtable WHERE station LIKE \"%$station%\" AND op=0";
-				//print $sql."<br>";
+				$dbtable='care_station2dept';
+				
+				$sql='SELECT dept FROM '.$dbtable.' WHERE station LIKE \'%'.$station.'%\' AND op=0';
+				
+				//echo $sql."<br>";
 				$s2dresult=mysql_query($sql,$link);
 				$stat2dept=mysql_fetch_array($s2dresult);
-				$dept=$stat2dept[dept];
+				$dept=$stat2dept['dept'];
 			}
+			
+	
+			
 	}
 	else 
-		{ print "$LDDbNoLink<br>$sql<br>"; }
+		{ echo "$LDDbNoLink<br>$sql<br>"; }
 
 
 ?>
@@ -177,10 +221,10 @@ if($link&&$DBLink_OK)
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 
 <?php
-require("../include/inc_css_a_hilitebu.php");
+require('../include/inc_css_a_hilitebu.php');
 ?>
 <style type="text/css" name="s2">
 td.vn { font-family:verdana,arial; color:#000088; font-size:12}
@@ -216,51 +260,55 @@ function gethelp(x,s,x1,x2,x3)
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
+
+<?php require('../include/inc_checkdate_lang.php'); ?>
+
 //-->
 </script>
-<script language="javascript" src="../js/setdatetime.js">
-</script>
+
+<script language="javascript" src="../js/checkdate.js"></script>
+<script language="javascript" src="../js/setdatetime.js"></script>
 
 </HEAD>
 
-<BODY bgcolor=<?php print $cfg['body_bgcolor']; ?> onLoad="if (window.focus) window.focus()" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ print 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> onLoad="if (window.focus) window.focus()" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
+<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 
 <table width=100% border=0 cellpadding="5" cellspacing=0>
 <tr>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2 FACE="Arial"><STRONG><?php echo $LDReleasePatient ?> </STRONG></FONT>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2 FACE="Arial"><STRONG><?php echo $LDReleasePatient ?> </STRONG></FONT>
 </td>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>"  align=right ><nobr>
-<!-- <a href="javascript:window.history.back()"><img src="../img/<?php echo "$lang/$lang" ?>_back2.gif" width=110 height=24 border=0  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a> --><a href="javascript:gethelp('nursing_station.php','discharge','','<?php echo $station ?>','<?php echo $LDReleasePatient ?>')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>"  align=right ><nobr>
+<!-- <a href="javascript:window.history.back()"><img <?php echo createLDImgSrc('../','back2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a> --><a href="javascript:gethelp('nursing_station.php','discharge','','<?php echo $station ?>','<?php echo $LDReleasePatient ?>')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc('../','close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
 </tr>
 <tr>
-<td bgcolor="<?php print $cfg['body_bgcolor']; ?>" colspan=2>
+<td bgcolor="<?php echo $cfg['body_bgcolor']; ?>" colspan=2>
  <ul>
 <?php
-print '<table   cellpadding="2" cellspacing=0 border="0" >
+echo '<table   cellpadding="2" cellspacing=0 border="0" >
 		<tr bgcolor="aqua" ><td><font face="verdana,arial" size="2" ><b>&nbsp;&nbsp;</b></td>
 		<td bgcolor="aqua"><font face="verdana,arial" size="2" ><b>'.$result[patnum].'</b></td>
 		<td bgcolor="aqua"><font face="verdana,arial" size="2" ><b>&nbsp;</b></td>
 		</tr>';
 
 
-print '
+echo '
 <tr bgcolor="#ffffcc"><td><font face="verdana,arial" size="2" ><b> &nbsp;&nbsp;</b></td>
 		<td valign="top" width="250"><font face="verdana,arial" size="2" >&nbsp;<br>
 		'.$result[title].'<br>
 		<b>'.$result[name].', '.$result[vorname].'</b> <br>
-		<font color=maroon>'.$result[gebdatum].'</font> <p>
+		<font color=maroon>'.formatDate2Local($result[gebdatum],$date_format).'</font> <p>
 		'.nl2br($result[address]);
 
 
 
-print '<p><font face="verdana,arial" size="1" >'.strtoupper($station).' &nbsp; &nbsp; '.$result[kasse].' '.$result[kassename].'<p>
-		'.$pday.'.'.$pmonth.'.'.$pyear.'</font></td>';
-print '<td bgcolor="#ffffcc" valign="top"><font face="verdana,arial" size="2" >';
+echo '<p><font face="verdana,arial" size="1" >'.strtoupper($station).' &nbsp; &nbsp; '.$result['kasse'].' '.$result['kassename'].'<p>
+		'.formatDate2Local("$pyear-$pmonth-$pday",$date_format).'</font></td>';
+echo '<td bgcolor="#ffffcc" valign="top"><font face="verdana,arial" size="2" >';
 
 //******************* check cache if pix exists *************
-$fr=strtolower("$result[patnum]_$result[name]_$result[vorname]_".(str_replace(".","-",$result[gebdatum])));
+$fr=strtolower("$result[patnum]_$result[name]_$result[vorname]_".(str_replace('.','-',$result['gebdatum'])));
 
 $fname=strtolower($fr."_main.jpg");
 $frmain='/'.$fr.'/'.$fname;
@@ -269,7 +317,7 @@ $cpix="../cache/$fname";
 
 if(file_exists($cpix))
 {
-	print '<img src="'.$cpix.'" width="150">';
+	echo '<img src="'.$cpix.'" width="150">';
 }
 else
 {
@@ -279,9 +327,9 @@ else
 		$cpix=$fotoserver_localpath.$fname;
 		if(file_exists($cpix))
 		{
-			print '<img src="'.$cpix.'" width="150">';
+			echo '<img src="'.$cpix.'" width="150">';
 		}
-		else print '<img src="'.$fotoserver_localpath.'foto-na.jpg">';
+		else echo '<img src="'.$fotoserver_localpath.'foto-na.jpg">';
 	}
 	else
 	{
@@ -302,14 +350,14 @@ else
 		 	{ 
   				$fn=ftp_pwd($conn_id);       
 				$f_e=ftp_size($conn_id,"$fn$frmain");
-  		  		//if(strpos(file("$frmain"),"warning")) print '<img src="'.$frmain.'">';
+  		  		//if(strpos(file("$frmain"),"warning")) echo '<img src="'.$frmain.'">';
 				if($f_e>0)
 				{
-			 		print '<img src="'.$fotoserver_http.$frmain.'" width="150">';
+			 		echo '<img src="'.$fotoserver_http.$frmain.'" width="150">';
 					// now save the pix in cache
 					ftp_get($conn_id,$cpix,"$fn$frmain",FTP_BINARY);	
 				}
-				else print '<img src="'.$fotoserver_localpath.'foto-na.jpg">';
+				else echo '<img src="'.$fotoserver_localpath.'foto-na.jpg">';
   			}
 		 	else	echo "$LDFtpNoLink<p>";
 			// close the FTP stream 
@@ -317,13 +365,13 @@ else
 		}	
 		else 
 		{
-			print '<img src="'.$fotoserver_localpath.'foto-na.jpg"><br>';
+			echo '<img src="'.$fotoserver_localpath.'foto-na.jpg"><br>';
 			echo $LDFtpAttempted; 
 		}
 	}
  }
 
-print '
+echo '
 		</td>
 		</tr></table>';
 
@@ -343,16 +391,16 @@ print '
   <tr>
     <td class=vn><?php echo $LDDate ?>:</td>
     <td class=vl>&nbsp;
-	<?php if($released) print nl2br($x_date); 
-			else print '<input type="text" name="x_date" size=12 maxlength=12 value="'.date("d.m.Y").'" onKeyUp=setDate(this)>';
+	<?php if($released) echo nl2br($x_date); 
+			else echo '<input type="text" name="x_date" size=12 maxlength=10 value="'.formatdate2Local(date('Y-m-d'),$date_format).'"  onBlur="IsValidDate(this,\''.$date_format.'\')"  onKeyUp="setDate(this,\''.$date_format.'\',\''. $lang.'\')">';
 	?>
                  </td>
   </tr>
   <tr>
     <td class=vn><?php echo $LDClockTime ?>:</td>
     <td class=vl>&nbsp;
-	<?php if($released) print nl2br($x_time); 
-			else print '<input type="text" name="x_time" size=12 maxlength=12 value="'.date("H.i").'" onKeyUp=setTime(this)>';
+	<?php if($released) echo nl2br($x_time); 
+			else echo '<input type="text" name="x_time" size=12 maxlength=12 value="'.convertTimeToLocal(date('H:i')).'" onKeyUp=setTime(this,\''.$lang.'\')>';
 	?>
 	</td>
   </tr>
@@ -363,14 +411,14 @@ print '
 	{
 		switch($relart)
 		{
-			case "reg":	print $LDRegularRelease;break;
-			case "self": print $LDSelfRelease;break;
-			case "emgcy": print $LDEmRelease;
-			case "chg_ward": print $LDChangeWard;
-			case "chg_bed": print $LDChangeBed;
-			case "pat_death": print $LDPatientDied;
+			case 'reg':	echo $LDRegularRelease; break;
+			case 'self': echo $LDSelfRelease; break;
+			case 'emgcy': echo $LDEmRelease; break;
+			case 'chg_ward': echo $LDChangeWard; break;
+			case 'chg_bed': echo $LDChangeBed; break;
+			case 'pat_death': echo $LDPatientDied; break;
 		} 
-	}else print '	
+	}else echo '	
 					<input type="radio" name="relart" value="reg" checked> '.$LDRegularRelease.'<br>
                  	<input type="radio" name="relart" value="self"> '.$LDSelfRelease.'<br>
                  	<input type="radio" name="relart" value="emgcy"> '.$LDEmRelease.'<br>
@@ -383,13 +431,13 @@ print '
   <tr>
     <td class=vn><?php echo $LDNotes ?>:</td>
     <td class=vl>&nbsp;
-	<?php if($released) print nl2br($info); else print '<textarea name="info" cols=40 rows=3></textarea>';
+	<?php if($released) echo nl2br($info); else echo '<textarea name="info" cols=40 rows=3></textarea>';
 	?></td>
   </tr>
   <tr>
     <td class=vn><?php echo $LDNurse ?>:</td>
     <td class=vl>&nbsp;
-	<?php if($released) print $encoder; else print '<input type="text" name="encoder" size=25 maxlength=30 value="'.$encoder.'">';
+	<?php if($released) echo $encoder; else echo '<input type="text" name="encoder" size=25 maxlength=30 value="'.$encoder.'">';
 	?>
                    </td>
   </tr>
@@ -416,7 +464,7 @@ print '
 <input type="hidden" name="rm" value="<?php echo $rm ?>">
 <input type="hidden" name="bd" value="<?php echo $bd ?>">
 <input type="hidden" name="pn" value="<?php echo $pn ?>">
-<input type="hidden" name="t_date" value="<?php echo $pday.".".$pmonth.".".$pyear ?>">
+<input type="hidden" name="s_date" value="<?php echo "$pyear-$pmonth-$pday" ?>">
 
 </form>
 <p>
@@ -424,9 +472,9 @@ print '
 
 <br><a href="pflege-station.php?sid=<?php echo "$sid&lang=$lang" ?>&edit=1&station=<?php echo $station ?>">
 <?php if(($mode=="release")&&($released)) : ?>
-<img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border="0">
+<img <?php echo createLDImgSrc('../','close2.gif','0') ?>>
 <?php else : ?>
-<img src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" border="0">
+<img <?php echo createLDImgSrc('../','cancel.gif','0') ?>" border="0">
 <?php endif ?></a>
 
 </FONT>
@@ -439,8 +487,9 @@ print '
 </table>        
 <p>
 <?php
-require("../language/$lang/".$lang."_copyrite.php");
- ?>
+if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
+include('../language/'.$lang.'/'.$lang.'_copyrite.php');
+  else include('../language/en/en_copyrite.php');?>
 
 </BODY>
 </HTML>

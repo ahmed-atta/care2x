@@ -1,18 +1,18 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","drg.php");
-$local_user="ck_op_pflegelogbuch_user";
-require("../include/inc_front_chain_lang.php");
+define('LANG_FILE','drg.php');
+$local_user='ck_op_pflegelogbuch_user';
+require_once('../include/inc_front_chain_lang.php');
 if (!$opnr||!$pn) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;}; 
-require("../include/inc_config_color.php");
+require_once('../include/inc_config_color.php');
 ?>
 <?php if($saveok) : ?>
 <?php
@@ -68,26 +68,26 @@ $toggle=0;
 
 $thisfile="drg-quicklist.php";
 
-if($mode=="save")
+if($mode=='save')
 {
 	$itemselector="sel";
 	include("../include/inc_drg_entry_save.php");
 }
 else
 {
-	$fielddata="code_description,rank";
-	$dbtable="drg_quicklist_".$lang;
-		include("../include/inc_db_makelink.php");
+	$fielddata="item, code_description, rank";
+	$dbtable="care_drg_quicklist";
+		include('../include/inc_db_makelink.php');
 		if($link&&$DBLink_OK) 
 		 {
 
-			$sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE dept="'.$dept.'" AND type="'.$target.'" ORDER BY rank DESC';
+			$sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE dept="'.$dept.'" AND type="'.$target.'" AND lang="'.$lang.'" ORDER BY rank DESC';
 			if($ergebnis=mysql_query($sql,$link))
        		{
 				$linecount=0;
 				if ($zeile=mysql_fetch_array($ergebnis)) $linecount++;
 			}
-			 else {print "<p>".$sql."<p>$LDDbNoRead"; exit;};
+			 else {echo "<p>".$sql."<p>$LDDbNoRead"; exit;};
 
 		}
 }
@@ -95,7 +95,7 @@ else
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
  <TITLE><?php echo "$LDQuickList $title" ?></TITLE>
   <script language="javascript" src="../js/showhide-div.js">
 </script>
@@ -134,15 +134,15 @@ function checkselect(d)
 </script>
  
   <?php 
-require("../include/inc_css_a_hilitebu.php");
+require('../include/inc_css_a_hilitebu.php');
 ?>
  
 </HEAD>
 
-<BODY   onLoad="if(window.focus) window.focus();" bgcolor=<?php print $cfg['body_bgcolor']; ?>
-<?php if (!$cfg['dhtml']){ print ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+<BODY   onLoad="if(window.focus) window.focus();" bgcolor=<?php echo $cfg['body_bgcolor']; ?>
+<?php if (!$cfg['dhtml']){ echo ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 <FONT    SIZE=3  FACE="Arial" color="<?php echo $rowcolor ?>">
-<a href="javascript:window.close()"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 align="right"></a>
+<a href="javascript:window.close()"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="right"></a>
 <b><?php echo "$LDQuickList $title" ?></b>
 <ul>
 
@@ -153,7 +153,7 @@ require("../include/inc_css_a_hilitebu.php");
 <table border=0 cellpadding=0 cellspacing=0 width='100%'> 
 <tr bgcolor="<?php echo $rowcolor ?>">
 <td width="20">
-<img src="../img/delete2.gif" border=0 width=20 height=20 alt="<?php echo $LDReset ?>" onClick="javascript:document.quicklist.reset()">
+<img <?php echo createComIcon('../','delete2.gif','0') ?> alt="<?php echo $LDReset ?>" onClick="javascript:document.quicklist.reset()">
 </td>
 <td><font face=arial size=2 color=#ffffff>&nbsp;<b><nobr><?php echo $title ?></nobr></b>&nbsp;</td>
 
@@ -168,25 +168,25 @@ function drawdata(&$data)
 	global $toggle,$LDInclusive,$LDExclusive,$LDNotes,$LDRemarks,$LDExtraCodes,$LDAddCodes;
  	global $idx,$keyword,$showonly;
 						parse_str($data,$parsed);
-						print "
+						echo "
 						<tr bgcolor=";
-						if($toggle) { print "#efefef>"; $toggle=0;} else {print "#ffffff>"; $toggle=1;};
-						print '
+						if($toggle) { echo "#efefef>"; $toggle=0;} else {echo "#ffffff>"; $toggle=1;};
+						echo '
 						<td>';
-						 		print '<input type="checkbox" name="sel'.$idx.'" value="'.$data.'">';
+						 		echo '<input type="checkbox" name="sel'.$idx.'" value="'.$data.'">';
 								 $idx++;
-						print '
+						echo '
 							</td>
 							<td><font face=arial size=2><nobr>';
-						//print " *$parentcode +$grandcode";
-						 print "$parsed[code]&nbsp;";		
-						print "&nbsp;</nobr></td><td>&nbsp;";
-						//print '<font face=arial size=2>'.trim($data[description]);
-						print '<font face=arial size=2>';
-						print "$parsed[des]&nbsp;";		
+						//echo " *$parentcode +$grandcode";
+						 echo "$parsed[code]&nbsp;";		
+						echo "&nbsp;</nobr></td><td>&nbsp;";
+						//echo '<font face=arial size=2>'.trim($data[description]);
+						echo '<font face=arial size=2>';
+						echo "$parsed[des]&nbsp;";		
 						
-						print '</td>';
-					print "</tr>";
+						echo '</td>';
+					echo "</tr>";
 }
 
 			if ($linecount>0) 
@@ -205,26 +205,26 @@ function drawdata(&$data)
 <?php if($linecount>0) : ?>
 <input type="hidden" name="lastindex" value="<?php echo $idx ?>">
 <input type="submit" value="<?php echo $LDApplySelection ?>">
-<input type="hidden" name="sid" value="<?php print $sid; ?>">
-<input type="hidden" name="lang" value="<?php print $lang; ?>">
-<input type="hidden" name="pn" value="<?php print $pn; ?>">
-<input type="hidden" name="opnr" value="<?php print $opnr; ?>">
-<input type="hidden" name="ln" value="<?php print $ln; ?>">
-<input type="hidden" name="fn" value="<?php print $fn; ?>">
-<input type="hidden" name="bd" value="<?php print $bd; ?>">
-<input type="hidden" name="dept" value="<?php print $dept; ?>">
-<input type="hidden" name="oprm" value="<?php print $oprm; ?>">
-<input type="hidden" name="display" value="<?php print $display; ?>">
-<input type="hidden" name="target" value="<?php print $target; ?>">
+<input type="hidden" name="sid" value="<?php echo $sid; ?>">
+<input type="hidden" name="lang" value="<?php echo $lang; ?>">
+<input type="hidden" name="pn" value="<?php echo $pn; ?>">
+<input type="hidden" name="opnr" value="<?php echo $opnr; ?>">
+<input type="hidden" name="ln" value="<?php echo $ln; ?>">
+<input type="hidden" name="fn" value="<?php echo $fn; ?>">
+<input type="hidden" name="bd" value="<?php echo $bd; ?>">
+<input type="hidden" name="dept" value="<?php echo $dept; ?>">
+<input type="hidden" name="oprm" value="<?php echo $oprm; ?>">
+<input type="hidden" name="display" value="<?php echo $display; ?>">
+<input type="hidden" name="target" value="<?php echo $target; ?>">
 <input type="hidden" name="mode" value="save">
 
 </form>
 <?php else : ?>
 <p>
-<img src="../img/catr.gif" border=0 width=88 height=80 align="bottom"><?php echo $LDNoQuickList ?> 
+<img <?php echo createMascot('../','mascot1_r.gif','0','bottom') ?> align="bottom"><?php echo $LDNoQuickList ?> 
 <a href="<?php echo "$searchfile?sid=$sid&lang=$lang&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&dept=$dept&oprm=$oprm&display=$display&target=$target" ?>"><u><?php echo $LDClick2Search ?></u></a> 
 <p>
-<a href="javascript:window.close()"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24></a>
+<a href="javascript:window.close()"><img <?php echo createLDImgSrc('../','close2.gif','0') ?>></a>
 <?php endif ?>
 
 </ul>

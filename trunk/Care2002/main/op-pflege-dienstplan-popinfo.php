@@ -1,17 +1,13 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-/*if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$$ck_sid_buffer)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_or.php");
-*/
-define("LANG_FILE","or.php");
-define("NO_2LEVEL_CHK",1);
-require("../include/inc_front_chain_lang.php");
-$dbtable="personell_data";
 
-require("../include/inc_db_makelink.php");
+define('LANG_FILE','or.php');
+define('NO_2LEVEL_CHK',1);
+require_once('../include/inc_front_chain_lang.php');
+$dbtable='care_personell_data';
+
+/* Establish db connection */
+require('../include/inc_db_makelink.php');
 if($link&&$DBLink_OK) 
 	{	
 
@@ -27,12 +23,13 @@ if($link&&$DBLink_OK)
 				{
 					mysql_data_seek($ergebnis,0);
 					$pinfo=mysql_fetch_array($ergebnis);
-					//print $result[$i][a_dutyplan];
-					//print $sql."<br>";
+					//echo $result[$i][a_dutyplan];
+					//echo $sql."<br>";
 				}
 			}
-				else print "<p>".$sql."<p>$LDDbNoRead"; 
-		 	$sql="SELECT list FROM nursing_dept_personell_quicklist
+				else echo "<p>".$sql."<p>$LDDbNoRead"; 
+				
+		 	$sql="SELECT list FROM care_nursing_dept_personell_quicklist
 							WHERE dept LIKE '$dept'";	
 							
 			if($ergebnis=mysql_query($sql,$link))
@@ -43,18 +40,18 @@ if($link&&$DBLink_OK)
 				{
 					mysql_data_seek($ergebnis,0);
 					$ftinfo=mysql_fetch_array($ergebnis);
-					//print $result[$i][a_dutyplan];
-					//print $sql."<br>";
+					//echo $result[$i][a_dutyplan];
+					//echo $sql."<br>";
 				}
 			}
-				else print "<p>".$sql."<p>$LDDbNoRead"; 
+				else echo "<p>".$sql."<p>$LDDbNoRead"; 
 }
-  	 else { print "$LDDbNoLink<br>"; } 
+  	 else { echo "$LDDbNoLink<br>"; } 
 
 ?>
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 <TITLE><?php echo "$ln, $fn" ?></TITLE>
 
 <script language="javascript">
@@ -77,7 +74,7 @@ div.box { border: double; border-width: thin; width: 100%; border-color: black; 
 <font face=verdana,arial size=5 color=maroon>
 <b>
 <?php
-print $ln.', '.ucfirst($fn);
+echo $ln.', '.ucfirst($fn);
 
 		$ndl="l=$ln&f=$fn&b=$bd";
 		$lbuf=explode("~",$ftinfo['list']);
@@ -97,37 +94,37 @@ print $ln.', '.ucfirst($fn);
 
 <table border=0 >
 <tr>
-<td bgcolor=#ffffcc><img src="../img/authors.gif" width=16 height=15 border=0>&nbsp;<font face=verdana,arial size=2 ><b><?php echo $LDStandbyPerson ?></b><br></font>
+<td bgcolor=#ffffcc><img <?php echo createComIcon('../','authors.gif','0') ?>>&nbsp;<font face=verdana,arial size=2 ><b><?php echo $LDStandbyPerson ?></b><br></font>
 </td>
 </tr>
 <tr>
-<td><font face=verdana,arial size=2 ><ul><b><?php echo $LDBeeper ?>:</b><font color=red> <?php print $tf[df]; ?><br>
-<font color=navy><b><?php echo $LDPhone ?>:</b> <?php print $tf[dp]; ?><br></font></ul>
+<td><font face=verdana,arial size=2 ><ul><b><?php echo $LDBeeper ?>:</b><font color=red> <?php echo $tf[df]; ?><br>
+<font color=navy><b><?php echo $LDPhone ?>:</b> <?php echo $tf[dp]; ?><br></font></ul>
 </td>
 </tr>
 <tr>
-<td bgcolor=#ffffcc><img src="../img/listen-sm-legend.gif" width=15 height=15 border=0>&nbsp;<font face=verdana,arial size=2 ><b><?php echo $LDOnCallPerson ?></b><br></font>
+<td bgcolor=#ffffcc><img <?php echo createComIcon('../','listen-sm-legend.gif','0') ?>>&nbsp;<font face=verdana,arial size=2 ><b><?php echo $LDOnCallPerson ?></b><br></font>
 </td>
 </tr>
 <tr>
-<td><font face=verdana,arial size=2 ><ul><b><?php echo $LDBeeper ?>:</b><font color=red> <?php print $tf["of"]; ?>
+<td><font face=verdana,arial size=2 ><ul><b><?php echo $LDBeeper ?>:</b><font color=red> <?php echo $tf["of"]; ?>
 <br>
-<font color=navy><b><?php echo $LDPhone ?>:</b> <?php print $tf["op"]; ?><br></font></ul>
+<font color=navy><b><?php echo $LDPhone ?>:</b> <?php echo $tf["op"]; ?><br></font></ul>
 </td>
 </tr>
 
 <tr>
-<td bgcolor=#ffffcc><img src="../img/warn.gif" width=16 height=16>&nbsp;<font face=verdana,arial size=2 ><b><?php echo $LDExtraInfo ?></b><br></font>
+<td bgcolor=#ffffcc><img <?php echo createComIcon('../','warn.gif','0') ?>>&nbsp;<font face=verdana,arial size=2 ><b><?php echo $LDExtraInfo ?></b><br></font>
 </td>
 </tr>
 <tr>
-<td><ul><font face=verdana,arial size=2 ><?php print $pinfo["info"]; ?></font></ul>
+<td><ul><font face=verdana,arial size=2 ><?php echo $pinfo["info"]; ?></font></ul>
 </td>
 </tr>
 </table>
 <p>
 
-<a href="javascript:closethis()"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border="0" alt="<?php echo $LDClose ?>"></a>
+<a href="javascript:closethis()"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> alt="<?php echo $LDClose ?>"></a>
 
 </BODY>
 

@@ -1,44 +1,45 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","products.php");
-$local_user=$userck;
-require("../include/inc_front_chain_lang.php");
-require("../include/inc_config_color.php");
+define('LANG_FILE','products.php');
+$local_user='ck_prod_db_user';
+require_once('../include/inc_front_chain_lang.php');
+require_once('../include/inc_config_color.php');
 
 $thisfile="products-datenbank-functions-datadelete.php";
 switch($cat)
 {
 	case "pharma":
 							$title=$LDPharmacy;
-							$dbtable="pharma_products_main";
+							$dbtable="care_pharma_products_main";
 							$imgpath="../pharma/img/";
 							$breakfile="apotheke-datenbank-functions.php?sid=$sid&lang=$lang&userck=$userck";
 							break;
 	case "medlager":
 							$title=$LDMedDepot;
-							$dbtable="med_products_main";
+							$dbtable="care_med_products_main";
 							$imgpath="../med_depot/img/";
 							$breakfile="medlager-datenbank-functions.php?sid=$sid&lang=$lang&userck=$userck";
 							break;
 	default:  {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 }
 
-if(($mode=="delete")&&($sure)&&($keyword!="")&&($keytype!="")) 
+if(($mode=='delete')&&($sure)&&($keyword!='')&&($keytype!="")) 
 {
 
 $deleteok=false;
 
 
 //init db parameters
-require("../include/inc_db_makelink.php");
+/* Establish db connection */
+require('../include/inc_db_makelink.php');
  	if($link&&$DBLink_OK) 
 		{
 
@@ -48,9 +49,9 @@ require("../include/inc_db_makelink.php");
 					header ("location:products-datenbank-functions-manage.php?sid=$sid&lang=$lang&from=deleteok&cat=$cat&userck=$userck");
 					$deleteok=true;
 				}
-			print $sql;
+			echo $sql;
 		}
-  		 else { print "$LDDbNoLink<br>"; } 
+  		 else { echo "$LDDbNoLink<br>"; } 
 }
 
 	//simulate update to search the keyword
@@ -61,7 +62,7 @@ require("../include/inc_db_makelink.php");
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
  <TITLE> <?php echo $title ?> - Verwalten </TITLE>
 
  <script language="javascript" >
@@ -78,26 +79,26 @@ function gethelp(x,s,x1,x2,x3)
 </script> 
 
 <?php 
-require("../include/inc_css_a_hilitebu.php");
+require('../include/inc_css_a_hilitebu.php');
 ?>
 
 </HEAD>
 
 <BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ print 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
 
 <a name="pagetop"></a>
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
 <tr valign=top>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="45">
-<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="45">
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
 <STRONG> &nbsp; <?php echo "$LDPharmacy $LDPharmaDb $LDManage" ?></STRONG></FONT></td>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])print'<a href="javascript:window.history.back()"><img src="../img/'.$lang.'/'.$lang.'_back2.gif" width=110 height=24 border=0  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('products_db.php','delete','<?php echo $from ?>','<?php echo $cat ?>')"><img src="../img/<?php echo "$lang/$lang"; ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
+<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc('../','back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('products_db.php','delete','<?php echo $from ?>','<?php echo $cat ?>')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
 <tr valign=top >
-<td bgcolor=<?php print $cfg['body_bgcolor']; ?> valign=top colspan=2>
+<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
 <ul>
 <FONT face="Verdana,Helvetica,Arial" size=2>
 <p><br>
@@ -107,10 +108,10 @@ require("../include/inc_css_a_hilitebu.php");
 <?php 
 if(!$sure)
 {
-	 print '
+	 echo '
 	 	<table border=0>
      <tr>
-       <td><img src="../img/catr.gif" width=88 height=80 border=0 align=middle></td>
+       <td><img '.createMascot('../','mascot1_r.gif','0','middle').'></td>
        <td><FONT face="Verdana,Helvetica,Arial" size=3  color="#800000">
 		'.$LDConfirmDelete.'</font><br>
 		<font size=2>'.$LDAlertDelete.'</font><p>
@@ -120,8 +121,8 @@ if(!$sure)
 }
 else
 {
-	if(!$deleteok) print'
-			<img src="../img/catr.gif" width=88 height=80 border=0 align=middle><FONT face="Verdana,Helvetica,Arial" size=3  color="#800000">
+	if(!$deleteok) echo'
+			<img '.createMascot('../','mascot1_r.gif','0','middle').'><FONT face="Verdana,Helvetica,Arial" size=3  color="#800000">
 		'.$LDNoDelete.'</font><p>';
 }
 	//simulate saved condition to force the static display of data
@@ -132,12 +133,12 @@ require("../include/inc_products_search_result_mod.php");
 
 ?>
 <p>
-<a href="<?php echo $breakfile ?>"><img src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" border=0 width=103 height=24 align=right></a>
+<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc('../','cancel.gif','0','right') ?>></a>
 
 
 <?php if(!$sure)
 
-print'
+echo'
 	<form action="'.$thisfile.'" method="get" name=delform>
  <input type="hidden" name="sure" value="1">
  <input type="hidden" name="sid" value="'.$sid.'">
@@ -158,11 +159,11 @@ print'
 </td>
 </tr>
 <tr>
-<td bgcolor=<?php print $cfg['bot_bgcolor']; ?> height=70 colspan=2>
+<td bgcolor=<?php echo $cfg['bot_bgcolor']; ?> height=70 colspan=2>
 <?php
-require("../language/$lang/".$lang."_copyrite.php");
-
- ?>
+if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
+include('../language/'.$lang.'/'.$lang.'_copyrite.php');
+  else include('../language/en/en_copyrite.php');?>
 </td>
 </tr>
 </table>        

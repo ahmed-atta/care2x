@@ -1,8 +1,8 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-define("LANG_FILE","stdpass.php");
-define("NO_2LEVEL_CHK",1);
-require("../include/inc_front_chain_lang.php");
+define('LANG_FILE','stdpass.php');
+define('NO_2LEVEL_CHK',1);
+require_once('../include/inc_front_chain_lang.php');
 if (!$logout) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 
 // reset all login cookies 
@@ -17,7 +17,7 @@ setcookie("ck_login_reset".$sid,"false");
 
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 <TITLE></TITLE>
 <script language="javascript">
 
@@ -32,10 +32,10 @@ function pruf(d)
 
 <BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#800080" onLoad="window.parent.STARTPAGE.location.href='indexframe.php?sid=<?php echo "$sid&lang=$lang" ?>'">
 <center>
-<FONT  FACE="Arial" SIZE=+4 ><b><?php echo $LDLogout ?></b></FONT>
+<FONT  FACE="Arial" SIZE=+4 ><b><?php echo $LDLoggedOut ?></b></FONT>
 <p>
 <br><FONT  FACE="Arial" SIZE=5 color=navy>
-<?php print $nm.'<br>'; ?>
+<?php echo $nm.'<br>'; ?>
 
 <form name="okbut" action="startframe.php">
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
@@ -54,16 +54,15 @@ function pruf(d)
 <INPUT type="text" name="userid" size="14" maxlength="25"> <p>
 <font face="Arial,Verdana"  color="navy" size=-1><b><?php echo $LDPwPrompt ?>:</b></font><br>
 <INPUT type="password" name="keyword" size="14" maxlength="25"> 
-<input type=hidden name=direction value=<?php print $direction; ?>>
+<input type=hidden name=direction value=<?php echo $direction; ?>>
 <br>
 <input type="hidden" name="pass" value="check">
-<input type="hidden" name="sid" value="<?php print $sid; ?>">
-<input type="hidden" name="lang" value="<?php print $lang; ?>">
+<input type="hidden" name="sid" value="<?php echo $sid; ?>">
+<input type="hidden" name="lang" value="<?php echo $lang; ?>">
 <p>
-
-<a href="javascript:top.location.reload()"><img src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" border="0" alt="<?php echo $LDCancel ?>"></a>
+<INPUT type="image"  <?php echo createLDImgSrc('../','continue.gif') ?>></font>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<INPUT type="image"  src="../img/<?php echo "$lang/$lang" ?>_continue.gif" border=0 ></font>
+<a href="javascript:top.location.reload()"><img <?php echo createLDImgSrc('../','cancel.gif','0') ?> alt="<?php echo $LDCancel ?>"></a>
 
 </FORM>
 

@@ -40,7 +40,7 @@
 <HR>
 
 
-<img src="../img/varrow.gif" width="20" height="15"><a href="mede1.php"> Ein neues Dokument erstellen.</a> <br>
+<img <?php echo createComIcon('../','varrow.gif','0') ?>><a href="mede1.php"> Ein neues Dokument erstellen.</a> <br>
 </FONT>
 
 

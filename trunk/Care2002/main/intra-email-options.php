@@ -1,17 +1,17 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","intramail.php");
-$local_user="ck_intra_email_user";
-require("../include/inc_front_chain_lang.php");
-require("../include/inc_config_color.php"); // load color preferences
+define('LANG_FILE','intramail.php');
+$local_user='ck_intra_email_user';
+require_once('../include/inc_front_chain_lang.php');
+require_once('../include/inc_config_color.php'); // load color preferences
 
 $thisfile="intra-email-options.php";
 $breakfile="intra-email.php.?sid=$sid&lang=$lang&mode=listmail";
@@ -20,7 +20,7 @@ $breakfile="intra-email.php.?sid=$sid&lang=$lang&mode=listmail";
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 
  <script language="javascript" >
 <!-- 
@@ -32,12 +32,12 @@ function submitForm(r)
 	d.submit();
 }
 
-function printer_v()
+function echoer_v()
 {
 <?php		$buf="&s_stamp=$content[send_stamp]&from=$content[sender]&date=".strtr($content[send_dt]," ","+")."&folder=$folder";
 ?>
-	urlholder="intra-email-printer.php?sid=<?php print "$sid&lang=$lang$buf"; ?>";
-	printwin=window.open(urlholder,"printwin","width=700,height=600,menubar=no,resizable=yes,scrollbars=yes");
+	urlholder="intra-email-echoer.php?sid=<?php echo "$sid&lang=$lang$buf"; ?>";
+	echowin=window.open(urlholder,"echowin","width=700,height=600,menubar=no,resizable=yes,scrollbars=yes");
 	//window.location.href=urlholder
 	}
 function gethelp(x,s,x1,x2,x3)
@@ -51,27 +51,27 @@ function gethelp(x,s,x1,x2,x3)
 </script> 
 
 <?php 
-require("../include/inc_css_a_hilitebu.php");
+require('../include/inc_css_a_hilitebu.php');
 ?>
 
 </HEAD>
 
 <BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ print 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
 <?php echo $test ?>
-<?php //foreach($argv as $v) print "$v "; ?>
+<?php //foreach($argv as $v) echo "$v "; ?>
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
 <tr valign=top>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="30"><FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="30"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
 <STRONG> <?php echo "$LDIntraEmail - $LDOptions" ?></STRONG></FONT></td>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();"><img src="../img/<?php echo "$lang/$lang" ?>_back2.gif" border=0 width=110 height=24 align="absmiddle" style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="javascript:gethelp()"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 align="absmiddle" style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="<?php echo $breakfile ?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 align="absmiddle" style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();"><img <?php echo createLDImgSrc('../','back2.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="javascript:gethelp()"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc('../','close2.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a></td>
 </tr>
 <tr valign=top >
-<td bgcolor=<?php print $cfg['body_bgcolor']; ?> valign=top colspan=2>
+<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
 
 <FONT face="Verdana,Helvetica,Arial" size=2>
 <?php
- print '
+ echo '
 <FONT face="Verdana,Helvetica,Arial" size=2>
   &nbsp; <b><a href="intra-email.php?sid='.$sid.'&lang='.$lang.'&mode=listmail">'.$LDInbox.'</a> | 
   <a href="intra-email.php?sid='.$sid.'&lang='.$lang.'&mode=compose">'.$LDNewEmail.'</a> | 
@@ -117,10 +117,11 @@ require("../include/inc_css_a_hilitebu.php");
 </td>
 </tr>
 <tr>
-<td bgcolor=<?php print $cfg['bot_bgcolor']; ?>  colspan=2>
+<td bgcolor=<?php echo $cfg['bot_bgcolor']; ?>  colspan=2>
 <?php
-require("../language/$lang/".$lang."_copyrite.php");
- ?>
+if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
+include('../language/'.$lang.'/'.$lang.'_copyrite.php');
+  else include('../language/en/en_copyrite.php');?>
 </td>
 </tr>
 </table>        

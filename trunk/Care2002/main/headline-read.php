@@ -1,18 +1,30 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-define("LANG_FILE","editor.php");
-define("NO_2LEVEL_CHK",1);
-require("../include/inc_front_chain_lang.php");
-require("../include/inc_config_color.php");
+define('LANG_FILE','editor.php');
+define('NO_2LEVEL_CHK',1);
+require_once('../include/inc_front_chain_lang.php');
+require_once('../include/inc_config_color.php');
+
+/* Check whether the content is language dependent */
+if(defined('LANG_DEPENDENT') && (LANG_DEPENDENT==1))
+{
+    $newspath='../news_service/'.$lang.'/';
+}
+else 
+{
+    $newspath='../news_service/all_language/';
+}
+
+
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"><TITLE><?php echo $title ?></TITLE>
+<?php echo setCharSet(); ?><TITLE><?php echo $title ?></TITLE>
 
 <?php if($cfg['dhtml'])
-{ print' <STYLE TYPE="text/css">
+{ echo' <STYLE TYPE="text/css">
 
 	A:link  {text-decoration: none; color: '.$cfg['idx_txtcolor'].';}
 	A:hover {text-decoration: underline; color: '.$cfg['body_hover'].';}
@@ -36,9 +48,9 @@ function gethelp(x,s,x1,x2,x3)
 </script>
 </HEAD>
 <BODY bgcolor=<?php if ($cfg) 
-{	print $cfg['body_bgcolor']; 
-	 if (!$cfg['dhtml']){ print ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } 
- }else print '"#ffffff"';
+{	echo $cfg['body_bgcolor']; 
+	 if (!$cfg['dhtml']){ echo ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } 
+ }else echo '"#ffffff"';
 ?>>
 <!-- 
 <img src="../img/groupcopy2.jpg" width="598" height="70" border="0"> -->
@@ -46,7 +58,7 @@ function gethelp(x,s,x1,x2,x3)
 <?php if($mode=="preview4saved") : ?>
 <table border=0>
   <tr>
-    <td><img src="../img/catr.gif" width=88 height=80 border=0></td>
+    <td><img <?php echo createMascot('../','mascot1_r.gif','0') ?>></td>
     <td colspan=2>
 	<FONT FACE="verdana,Arial"><FONT  SIZE=3 COLOR="#000066" FACE="verdana,Arial"><?php echo $LDArticleSaved ?></font>
 <hr>
@@ -60,23 +72,23 @@ function gethelp(x,s,x1,x2,x3)
 <TR >
 <TD WIDTH=80% VALIGN="top" >
 <?php 
-	$picpath="../news_service/".$lang."/fotos/".$picfile;
-	if(file_exists($picpath)&&file_exists("../news_service/$lang/news/$file"))
+	$picpath=$newspath.'/fotos/'.$picfile;
+	if(file_exists($picpath)&&file_exists($newspath.'/news/'.$file))
 		{
 			$picsize=GetImageSize($picpath);
-		 	print '
+		 	echo '
 			<img src="'.$picpath.'" border=0 align="'.$palign.'" ';
-			if(!$picsize||($picsize[0]>150)) print 'width="150">';
-				else print $picsize[3].'>';
+			if(!$picsize||($picsize[0]>150)) echo 'width="150">';
+				else echo $picsize[3].'>';
 		}
-	if(file_exists("../news_service/$lang/news/$file")) include("../news_service/$lang/news/$file"); 
+	if(file_exists($newspath.'/news/'.$file)) include($newspath.'/news/'.$file); 
 ?>
 <p>
-<a href="<?php if($mode=="preview4saved") print "startframe.php?sid=$sid&lang=$lang"; else print "javascript:window.history.back()"; ?>"><img src="../img/L-arrowGrnLrg.gif" width=16 height=16 border=0> <font face="arial" color="#006600"><?php echo $LDBackTxt ?></a>
+<a href="<?php if($mode=="preview4saved") echo "startframe.php?sid=".$sid."&lang=".$lang; else echo "javascript:window.history.back()"; ?>"><img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>> <font face="arial" color="#006600"><?php echo $LDBackTxt ?></a>
 
 </TD>
 	
-<td valign=top width="1" bgcolor="<?php print $cfg['idx_txtcolor']; ?>" ><img src="../img/pixel.gif" width="1" height="1" border=0>
+<td valign=top width="1" bgcolor="<?php echo $cfg['idx_txtcolor']; ?>" ><img src="../gui/img/common/default/pixel.gif" width="1" height="1" border=0>
 </td>
 
 <TD WIDTH=20% VALIGN="top" >
@@ -89,10 +101,11 @@ function gethelp(x,s,x1,x2,x3)
 <tr>
 <td colspan=3>
 <hr>
-<a href="editor-pass.php?<?php echo "sid=$sid&lang=$lang" ?>&target=headline&title=<?php echo $title ?>"><img src="../img/news.gif" width=16 height=14 border=0></a>
 <?php
-require("../language/".$lang."/".$lang."_copyrite.php");
- ?>
+if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
+include('../language/'.$lang.'/'.$lang.'_copyrite.php');
+  else include('../language/en/en_copyrite.php');?>
+
 </td>
 </tr>
 </TABLE>

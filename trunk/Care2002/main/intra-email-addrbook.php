@@ -1,16 +1,16 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","intramail.php");
-$local_user="ck_intra_email_user";
-require("../include/inc_front_chain_lang.php");
+define('LANG_FILE','intramail.php');
+$local_user='ck_intra_email_user';
+require_once('../include/inc_front_chain_lang.php');
 
 /**
 * check the info params for completeness
@@ -18,16 +18,17 @@ require("../include/inc_front_chain_lang.php");
 $addr=trim($addr);
 if(($mode=="saveadd")&&($addr=="")) { header("location:intra-email-addrbook.php?sid=$sid&lang=$lang"); exit;}
 
-require("../include/inc_config_color.php"); // load color preferences
+require_once('../include/inc_config_color.php'); // load color preferences
 
 $thisfile="intra-email-addrbook.php";
 $breakfile="intra-email.php.?sid=$sid&lang=$lang&mode=listmail";
-$dbtable="mail_private_users";
+$dbtable='care_mail_private_users';
 
 $linecount=0;
 $modetypes=array("sendmail","listmail");
 
-require("../include/inc_db_makelink.php");
+/* Establish db connection */
+require('../include/inc_db_makelink.php');
 if($link&&$DBLink_OK) 
 	{	
 	
@@ -58,7 +59,7 @@ if($link&&$DBLink_OK)
 									header("location:intra-email-addrbook.php?sid=$sid&lang=$lang&l2h=$l2h&folder=$folder"); 
 									exit;
 								 }
-								 else { print "$LDDbNoUpdate<br>$sql"; } 
+								 else { echo "$LDDbNoUpdate<br>$sql"; } 
 								 break;
 							}
 							// if mode is delete entry
@@ -72,12 +73,12 @@ if($link&&$DBLink_OK)
 											$delbuf="del$n";
 											if(!$$delbuf) continue;
 											$delbuf2=trim(strtr($$delbuf,"+"," "));
-											//print "$delbuf2<br>$inb[$i]<br>"; 
-												//print "vor comp $delbuf2<br>$inb[$i]<br>";
+											//echo "$delbuf2<br>$inb[$i]<br>"; 
+												//echo "vor comp $delbuf2<br>$inb[$i]<br>";
 											if(!strcmp($delbuf2,strtolower(trim($inb[$i]))))
 											{
-												//print "nach comp $delbuf2<br>$inb[$i]<br>";
-												$trash=array_splice($inb,$i,1);//print "trash <br>";
+												//echo "nach comp $delbuf2<br>$inb[$i]<br>";
+												$trash=array_splice($inb,$i,1);//echo "trash <br>";
 												$i--;
 												break;
 											}
@@ -91,20 +92,20 @@ if($link&&$DBLink_OK)
 								 	mysql_close($link);
 									header("location:intra-email-addrbook.php?sid=$sid&lang=$lang&l2h=$l2h&folder=$folder"); exit;
 								 	}
-								 	else  { print "$LDDbNoUpdate<br>$sql"; } 
+								 	else  { echo "$LDDbNoUpdate<br>$sql"; } 
 								 	break;
 							}
 						} // end of switch mode
 						
 					} //end of if rows
-				}else { print "$LDDbNoRead<br>$sql"; } 
+				}else { echo "$LDDbNoRead<br>$sql"; } 
 	}
-  		else { print "$LDDbNoLink<br>$sql"; } 
+  		else { echo "$LDDbNoLink<br>$sql"; } 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 
  <script language="javascript" >
 <!-- 
@@ -157,32 +158,32 @@ function gethelp(x,s,x1,x2,x3)
 </script> 
 
 <?php 
-require("../include/inc_css_a_hilitebu.php");
+require('../include/inc_css_a_hilitebu.php');
 ?>
 
 </HEAD>
 
 <BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
 <?php 
-if($mode=="newadd") print ' onLoad="document.newform.name.focus()"';
- if (!$cfg['dhtml']){ print ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+if($mode=="newadd") echo ' onLoad="document.newform.name.focus()"';
+ if (!$cfg['dhtml']){ echo ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
 <?php echo $test ?>
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
 <tr valign=top>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="30"><FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="30"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
 <STRONG> <?php echo "$LDIntraEmail - $LDAddrBook" ?></STRONG></FONT></td>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();"><img 
-src="../img/<?php echo "$lang/$lang" ?>_back2.gif" border=0 width=110 height=24 align="absmiddle" 
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();"><img 
+<?php echo createLDImgSrc('../','back2.gif','0','absmiddle') ?> 
 style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a 
-href="javascript:gethelp('intramail.php','address','<?php echo $mode ?>','<?php echo $folder ?>')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 align="absmiddle" style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="<?php echo $breakfile ?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 align="absmiddle" style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a></td>
+href="javascript:gethelp('intramail.php','address','<?php echo $mode ?>','<?php echo $folder ?>')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc('../','close2.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a></td>
 </tr>
 <tr valign=top >
-<td bgcolor=<?php print $cfg['body_bgcolor']; ?> valign=top colspan=2>
+<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
 
 <FONT face="Verdana,Helvetica,Arial" size=2>
 <?php
- print '
+ echo '
 <FONT face="Verdana,Helvetica,Arial" size=2>
   &nbsp; <b><a href="intra-email.php?sid='.$sid.'&lang='.$lang.'&mode=listmail">'.$LDInbox.'</a> | 
   <a href="intra-email.php?sid='.$sid.'&lang='.$lang.'&mode=compose">'.$LDNewEmail.'</a> | '.$LDAddrBook.' |
@@ -217,10 +218,10 @@ href="javascript:gethelp('intramail.php','address','<?php echo $mode ?>','<?php 
 	<?php require("../include/inc_email_domains_options.php"); 
 		for ($j=0;$j<sizeof($email_domains);$j++)
 	{
-		 print '
+		 echo '
 		<option value="'.$email_domains[$j].'"';
-		if ($dept==$email_domains[$j]) print "selected"; 
-		print '>'.$email_domains[$j].'</option>';
+		if ($dept==$email_domains[$j]) echo "selected"; 
+		echo '>'.$email_domains[$j].'</option>';
 	}
 	?>
      </select>
@@ -253,21 +254,21 @@ href="javascript:gethelp('intramail.php','address','<?php echo $mode ?>','<?php 
 	$maxrow=sizeof($arrlist);
 	if(($maxrow==1)&&($arrlist[0]=="")) $maxrow=0;
 	
- 	print '</b></font>
+ 	echo '</b></font>
 		<form name="addrlist" action="intra-email-addrbook.php" method="post"  onSubmit="return chkDelete(this,'.sizeof($arrlist).')">
 	';
-	if ($maxrow>6) print '
+	if ($maxrow>6) echo '
   	<input type="submit" value="'.$LDDelete.'"> &nbsp;  &nbsp; <input type="button" value="'.$LDNewAddr.'" onClick="newAddr()">
 	<br>';
-	print '	<table border=0 cellspacing=0 width=100% cellpadding=0>
-	<tr ><td  colspan=6 height=1><img src="../img/pixel.gif" border=0 height=3 width=1></td></tr>
+	echo '	<table border=0 cellspacing=0 width=100% cellpadding=0>
+	<tr ><td  colspan=6 height=1><img src="../gui/img/common/default/pixel.gif" border=0 height=3 width=1></td></tr>
      <tr bgcolor="#0060ae">
        <td>&nbsp;</td>
        <td>	<input type="checkbox" name="sel_all" value="1" onClick="selectAll(this,'.$maxrow.')"><br>
            </td>
        <td><FONT face="Verdana,Helvetica,Arial" size=2 >';
-	   if($l2h) print '<a href="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&l2h=0&mode='.$mode.'&folder='.$folder.'" title="'.$LDSortName.'"><img src="../img/arw_down.gif" '; else print '<a href="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&l2h=1&mode='.$mode.'&folder='.$folder.'" title="'.$LDSortName.'"><img src="../img/arw_up.gif" ';
-	   print '
+	   if($l2h) echo '<a href="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&l2h=0&mode='.$mode.'&folder='.$folder.'" title="'.$LDSortName.'"><img src="../img/arw_down.gif" '; else echo '<a href="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&l2h=1&mode='.$mode.'&folder='.$folder.'" title="'.$LDSortName.'"><img src="../img/arw_up.gif" ';
+	   echo '
 	   width=12 height=20 border=0 align=absmiddle alt="'.$LDSortName.'"><font color="#ffffff"> &nbsp;<b>'.$LDName.','.$LDFirstName.':</b></td>
        <td><FONT face="Verdana,Helvetica,Arial" size=2 color="#ffffff">&nbsp;&nbsp;<b>'.$LDAlias.'/'.$LDShortName.':
 		</b></td>
@@ -278,7 +279,7 @@ href="javascript:gethelp('intramail.php','address','<?php echo $mode ?>','<?php 
 	    parse_str(trim($arrlist[$i]),$minfo);
 		//$buf="intra-email-read.php?sid=$sid&ua=$ck_intra_email_user&s_stamp=$minfo[t]&read=$minfo[r]&from=$minfo[f]&subj=".strtr($minfo[s]," ","+")."&date=".strtr($minfo[d]," ","+")."&size=$minfo[z]&l2h=$l2h&folder=$folder";
  		$delbuf="n=$minfo[n]&a=$minfo[a]&e=$minfo[e]";
-     	print ' <tr bgcolor="#ffffff">
+     	echo ' <tr bgcolor="#ffffff">
        		<td>&nbsp;</td>
 			<td>	<input type="checkbox" name="del'.$i.'" value="'.strtr($delbuf," ","+").'"><br>
            	</td>
@@ -286,14 +287,14 @@ href="javascript:gethelp('intramail.php','address','<?php echo $mode ?>','<?php 
        		<td><FONT face="Verdana,Helvetica,Arial" size=1>&nbsp;&nbsp;'.$minfo[a].'</td>
        		<td><FONT face="Verdana,Helvetica,Arial" size=1>&nbsp;&nbsp;'.$minfo[e].'</td>
 	    	</tr>
-			<tr ><td bgcolor="#66aace" colspan=6 height=1><img src="../img/pixel.gif" border=0 height=1 width=1></td></tr>';
+			<tr ><td bgcolor="#66aace" colspan=6 height=1><img src="../gui/img/common/default/pixel.gif" border=0 height=1 width=1></td></tr>';
 		}
-	print '
-	<tr ><td  colspan=6 height=1><img src="../img/pixel.gif" border=0 height=3 width=1></td></tr>
+	echo '
+	<tr ><td  colspan=6 height=1><img src="../gui/img/common/default/pixel.gif" border=0 height=3 width=1></td></tr>
 	</table>';
-	if($maxrow) print '
+	if($maxrow) echo '
 		<input type="submit" value="'.$LDDelete.'"> ';
-	print '&nbsp;  &nbsp; <input type="button" value="'.$LDAddNewAddr.'" onClick=newAddr()>
+	echo '&nbsp;  &nbsp; <input type="button" value="'.$LDAddNewAddr.'" onClick=newAddr()>
 		<br><input type="hidden" name="task" value="delete">
 	<input type="hidden" name="maxrow" value="'.$maxrow.'">
 	<input type="hidden" name="sid" value="'.$sid.'">
@@ -303,19 +304,19 @@ href="javascript:gethelp('intramail.php','address','<?php echo $mode ?>','<?php 
 	<input type="hidden" name="mode" value="'.$mode.'">
  </form>	
 	';
-print ' &nbsp; &nbsp;
+echo ' &nbsp; &nbsp;
    <font size=1><a href="intra-email.php?sid='.$sid.'&lang='.$lang.'&mode='.$mode.'&l2h='.$l2h.'&folder='.$folder.'">
-   <img src="../img/l_arrowGrnSm.gif" width=12 height=12 border=0 align=middle> '.$LDBack2.' ';
-if($mode=="compose") print $LDWriteEmail;
+   <img '.createComIcon('../','l_arrowgrnsm.gif','0','middle').'> '.$LDBack2.' ';
+if($mode=="compose") echo $LDWriteEmail;
 	else
 		switch($folder)
 		{
-		case "inbox": print $LDInbox; break;
-		case "sent": print $LDSent; break;
-		case "drafts": print $LDDrafts; break;
-		case "trash": print $LDRecycle; break;
+		case "inbox": echo $LDInbox; break;
+		case "sent": echo $LDSent; break;
+		case "drafts": echo $LDDrafts; break;
+		case "trash": echo $LDRecycle; break;
 		}
-print '</a></font>';
+echo '</a></font>';
  
 ?>
  </FONT>
@@ -323,10 +324,11 @@ print '</a></font>';
 </td>
 </tr>
 <tr>
-<td bgcolor=<?php print $cfg['bot_bgcolor']; ?>  colspan=2>
+<td bgcolor=<?php echo $cfg['bot_bgcolor']; ?>  colspan=2>
 <?php
-require("../language/$lang/".$lang."_copyrite.php");
- ?>
+if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
+include('../language/'.$lang.'/'.$lang.'_copyrite.php');
+  else include('../language/en/en_copyrite.php');?>
 </td>
 </tr>
 </table>        

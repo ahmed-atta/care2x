@@ -1,21 +1,26 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","editor.php");
-$local_user="ck_cafenews_user";
-require("../include/inc_front_chain_lang.php");
-$breakfile="cafenews.php?sid=$sid&lang=$lang";
+define('LANG_FILE','editor.php');
+$local_user='ck_cafenews_user';
+require_once('../include/inc_front_chain_lang.php');
+$breakfile='cafenews.php?sid='.$sid.'&lang='.$lang;
+
+/* Load the date formatter */
+require_once('../include/inc_date_format_functions.php');
+
+
 ?>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 <title></title>
 
 <script language="javascript">
@@ -44,22 +49,29 @@ function chkForm(d)
 	else return true;
 		
 }
+
 function showpic(d)
 {
 	if(d.value) document.images.headpic.src=d.value;
 }
+
+<?php require('../include/inc_checkdate_lang.php'); ?>
+
 </script>
+
+<script language="javascript" src="../js/checkdate.js" type="text/javascript"></script>
+
 <script language="javascript" src="../js/setdatetime.js"></script>
 </head>
 <body onLoad="document.selectform.newstitle.focus()">
 <form ENCTYPE="multipart/form-data" name="selectform" method="post" action="cafenews-edit-save.php" onSubmit="return chkForm(this)">
 <FONT  SIZE=6 COLOR="#cc6600" FACE="verdana,Arial">
-<img src="../img/basket.gif" width=74 height=70 border=0> <b><?php echo $title ?></b></FONT>
+<img <?php echo createComIcon('../','basket.gif','0') ?>> <b><?php echo $title ?></b></FONT>
 <hr>
 <table border=0>
   <tr >
 <?php if($artopt!=2) : ?>
-    <td valign=top><img src="../img/x-blank.gif" border=0 id="headpic" width="150"><br>
+    <td valign=top><img <?php echo createLDImgSrc('../','x-blank.gif','0') ?> id="headpic"><br>
   </td>
 <?php endif ?>
     <td bgcolor="ccffff" colspan=2><FONT FACE="verdana,Arial" color="#0000cc" size=3><b><?php echo $LDTitleTag ?>:</b><br>
@@ -76,25 +88,32 @@ function showpic(d)
   	<FONT FACE="verdana,Arial" color="#0000cc" size=2><b><?php echo $LDAuthor ?>:</b><br>
 	<input type="text" name="author" size=30 maxlength=40><br>
   	<FONT FACE="verdana,Arial" color="#0000cc" size=2><b><?php echo $LDPublishDate ?>:</b><br>
-	<input type="text" name="publishdate" size=10 maxlength=10 onKeyUp="setDate(this)">
- 
+	<!-- <input type="text" name="publishdate" size=10 maxlength=10 onKeyUp="setDate(this)"> -->
+ 	<input type="text" name="publishdate" size=10 maxlength=10 onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+  [ <?php   
+ $dfbuffer="LD_".strtr($date_format,".-/","phs");
+  echo $$dfbuffer;
+ ?> ]
 </td>
 <?php if($artopt==2) : ?>
-    <td valign=top><img src="../img/x-blank.gif" border=0 id="headpic" width="150"><br>
+    <td valign=top><img <?php echo createLDImgSrc('../','x-blank.gif','0') ?> id="headpic" ><br>
   </td>
 <?php endif ?>
   </tr>
   <tr>
 <?php if($artopt!=2) : ?>
-    <td align=right >&nbsp;
+    <td align=right >
+	<a href="javascript:window.history.back()"><img <?php echo createLDImgSrc('../','back2.gif','0') ?>></a>
   </td>
 <?php endif ?>
-    <td ><FONT FACE="verdana,Arial">
-	<a href="javascript:window.history.back()"><img src="../img/<?php echo $lang ?>/<?php echo $lang ?>_back2.gif" border=0></a>
-	<a href="<?php echo $breakfile ?>"><img src="../img/<?php echo $lang ?>/<?php echo $lang ?>_cancel.gif" border=0></a>
+    <td >
+<?php if($artopt==2) : ?>
+	<a href="javascript:window.history.back()"><img <?php echo createLDImgSrc('../','back2.gif','0') ?>></a>
+<?php endif ?>
+<input type="image" <?php echo createLDImgSrc('../','continue.gif','0') ?>>
   </td>
-    <td align=right ><FONT FACE="verdana,Arial">
-<input type="image" src="../img/<?php echo $lang ?>/<?php echo $lang ?>_continue.gif" border=0>
+    <td>
+	<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc('../','cancel.gif','0') ?>></a>
   </td>
 <?php if($artopt==2) : ?>
     <td align=right >&nbsp;

@@ -79,7 +79,7 @@ header ("Pragma: no-cache");                          // HTTP/1.0
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
  <TITLE>Stationsbelegung</TITLE>
 
 <script language="javascript">
@@ -87,20 +87,20 @@ header ("Pragma: no-cache");                          // HTTP/1.0
   var urlholder;
 
 function getinfo(pid,pdata){
-	urlholder="pflege-station-patientdaten.php?sid=<?php print $sid; ?>&patient=" + pdata + "&station=<?php print $station; ?>";
+	urlholder="pflege-station-patientdaten.php?sid=<?php echo $sid; ?>&patient=" + pdata + "&station=<?php echo $station; ?>";
 	patientwin=window.open(urlholder,pid,"width=700,height=450,menubar=no,resizable=yes,scrollbars=yes");
 	}
 	
 function indata(room,bed)
 {
-	urlholder="pflege-station-bettbelegen.php?sid=<?php print $sid; ?>&s=<?php print $station; ?>&rm="+room+"&bd="+bed+"<?php print "&py=".$pyear."&pm=".$pmonth."&pd=".$pday."&tb=".str_replace("#","",$cfg['top_bgcolor'])."&tt=".str_replace("#","",$cfg['top_txtcolor'])."&bb=".str_replace("#","",$cfg['body_bgcolor'])."&d=".$cfg['dhtml']; ?>";
+	urlholder="pflege-station-bettbelegen.php?sid=<?php echo $sid; ?>&s=<?php echo $station; ?>&rm="+room+"&bd="+bed+"<?php echo "&py=".$pyear."&pm=".$pmonth."&pd=".$pday."&tb=".str_replace("#","",$cfg['top_bgcolor'])."&tt=".str_replace("#","",$cfg['top_txtcolor'])."&bb=".str_replace("#","",$cfg['body_bgcolor'])."&d=".$cfg['dhtml']; ?>";
 	indatawin=window.open(urlholder,"bedroom","width=700,height=450,menubar=no,resizable=yes,scrollbars=yes");
 }
 
 function unlock(b,r)
 {
 <?php
-	print '
+	echo '
 	urlholder="pflege-station.php?mode=newdata&patnum=unlock&rt=pflege&sid='.$sid.'&station='.$station.'&rm="+r+"&bd="+b+"&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday.'";
 	';
 ?>
@@ -114,43 +114,43 @@ function unlock(b,r)
 </script>
 
 <?php
-require("../include/inc_css_a_hilitebu.php");
+require('../include/inc_css_a_hilitebu.php');
 ?>
 
 </HEAD>
 
-<BODY bgcolor=<?php print $cfg['body_bgcolor']; ?> onLoad="if (window.focus) window.focus()" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ print 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> onLoad="if (window.focus) window.focus()" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
+<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 
 
 <table width=100% border=0 cellpadding="0" cellspacing=0>
 <tr>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;&nbsp; Pflegestation-Belegung <?php print strtoupper($station).' ('.$pday.'.'.$pmonth.'.'.$pyear.')'; ?> </STRONG></FONT>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;&nbsp; Pflegestation-Belegung <?php echo strtoupper($station).' ('.$pday.'.'.$pmonth.'.'.$pyear.')'; ?> </STRONG></FONT>
 </td>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right>
-<a href="#"><img src="../img/hilfe.gif" border=0  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
-<a href="#" onClick=window.close()><img src="../img/fenszu.gif" border=0  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td></tr>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
+<a href="#"><img src="../img/hilfe.gif" border=0  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
+<a href="#" onClick=window.close()><img src="../img/fenszu.gif" border=0  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td></tr>
 <tr valign=top >
-<td bgcolor=<?php print $cfg['body_bgcolor']; ?> valign=top colspan=2>
+<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
  <ul>
 <?php
 if($deffile)
 		 	{
-			 print'<font face="verdana,arial" size="2"  color=red>Die Belegung für heute ist noch nicht erstellt!</font><br>';
+			 echo'<font face="verdana,arial" size="2"  color=red>Die Belegung für heute ist noch nicht erstellt!</font><br>';
 			 }
 		
-//print $statdata[$bd.$rm];
-print '<table  cellpadding="2" cellspacing=0 border="0" >';
+//echo $statdata[$bd.$rm];
+echo '<table  cellpadding="2" cellspacing=0 border="0" >';
 
-print '<tr bgcolor="aqua" align=center><td><font face="verdana,arial" size="2" ><b>Zimmer &nbsp;&nbsp;</b></td>';
-print '<td><font face="verdana,arial" size="2" ><b>Bett &nbsp;</b></td>';
-print '<td ><font face="verdana,arial" size="2" ><b>Name, Vorname &nbsp;</b></td>';
-print '<td><font face="verdana,arial" size="2" > <b>&nbsp; Geburtsdatum &nbsp;</b></td>';
-print '<td><font face="verdana,arial" size="2" > <b>AufnahmeNr. &nbsp;</b></td>';
-print '<td><font face="verdana,arial" size="2" > <b>Kasse &nbsp;</b></td>';
-print '<td><font face="verdana,arial" size="2" > <b>Optionen &nbsp;</b></td>';
-print '</tr>';
+echo '<tr bgcolor="aqua" align=center><td><font face="verdana,arial" size="2" ><b>Zimmer &nbsp;&nbsp;</b></td>';
+echo '<td><font face="verdana,arial" size="2" ><b>Bett &nbsp;</b></td>';
+echo '<td ><font face="verdana,arial" size="2" ><b>Name, Vorname &nbsp;</b></td>';
+echo '<td><font face="verdana,arial" size="2" > <b>&nbsp; Geburtsdatum &nbsp;</b></td>';
+echo '<td><font face="verdana,arial" size="2" > <b>AufnahmeNr. &nbsp;</b></td>';
+echo '<td><font face="verdana,arial" size="2" > <b>Kasse &nbsp;</b></td>';
+echo '<td><font face="verdana,arial" size="2" > <b>Optionen &nbsp;</b></td>';
+echo '</tr>';
 
 
 
@@ -175,42 +175,42 @@ for ($i=$statdata['startnumber'];$i<=$statdata['endnumber'];$i++)
 	$buf2=str_replace(" ","_",$buf2);
 	$buf2=str_replace("+","xpx",$buf2);
 	
-	print '<tr bgcolor="';
-	if ($j=="a") print '#ffffcc">'; else print 'silver">';
+	echo '<tr bgcolor="';
+	if ($j=="a") echo '#ffffcc">'; else echo 'silver">';
 	
-	print '<td align=center><font face="verdana,arial" size="1" >';
-	if($j=="a") print ($i); else print "&nbsp;";
-	print '</td><td align=left><font face="verdana,arial" size="1" > '.strtoupper($j).' ';
+	echo '<td align=center><font face="verdana,arial" size="1" >';
+	if($j=="a") echo ($i); else echo "&nbsp;";
+	echo '</td><td align=left><font face="verdana,arial" size="1" > '.strtoupper($j).' ';
 	$helper=explode(" ",str_replace("-"," ",$buf[1]));
 	switch(strtolower($helper[0]))
 	{
-		case "fr.": print '<img src="../img/mans-red.gif">';break;
-		case "frau": print '<img src="../img/mans-red.gif">';break;		
-		case "hr.": print '<img src="../img/mans-gr.gif">';break;
-		case "herr": print '<img src="../img/mans-gr.gif">';break;		
-		case "gesperrt": print '<img src="../img/suspend.gif">';break;
-		default: print '<img src="../img/plus2.gif" border=0 alt="Bett ist unbelegt">';break;
+		case "fr.": echo '<img src="../img/mans-red.gif">';break;
+		case "frau": echo '<img src="../img/mans-red.gif">';break;		
+		case "hr.": echo '<img src="../img/mans-gr.gif">';break;
+		case "herr": echo '<img src="../img/mans-gr.gif">';break;		
+		case "gesperrt": echo '<img src="../img/suspend.gif">';break;
+		default: echo '<img src="../img/plus2.gif" border=0 alt="Bett ist unbelegt">';break;
 	}
-	print "\r\n</td>";
-	print '<td><font face="verdana,arial" size="2" ><a href="#" onClick=';
-	if($buf[0]!="!") print 'getinfo(\''.$buf[0].'\',\''.$buf2.'\') title="Click für mehr Info">';
-	else print 'unlock(\''.strtoupper($j).'\',\''.$i.'\') title="Click für Info bzw. zum Aufheben der Sperre.">'; //$j=bed   $i=room number
-	print str_replace("-"," ",$buf[1]).' <b>'.$buf[2].'</b> '.$buf[3].'</a>';
-	print "\r\n";
+	echo "\r\n</td>";
+	echo '<td><font face="verdana,arial" size="2" ><a href="#" onClick=';
+	if($buf[0]!="!") echo 'getinfo(\''.$buf[0].'\',\''.$buf2.'\') title="Click für mehr Info">';
+	else echo 'unlock(\''.strtoupper($j).'\',\''.$i.'\') title="Click für Info bzw. zum Aufheben der Sperre.">'; //$j=bed   $i=room number
+	echo str_replace("-"," ",$buf[1]).' <b>'.$buf[2].'</b> '.$buf[3].'</a>';
+	echo "\r\n";
 	
-	print '</td><td align=center><font face="verdana,arial" size="1" >&nbsp;'.$buf[4].'</td>';
-	print '</td><td align=center><font face="verdana,arial" size="1" >&nbsp;';
-	if ($buf[0]!="!") print $buf[0];
-	print "\r\n";
-	print '</td><td ><font face="verdana,arial" size="1" >&nbsp;';
-	if(strchr($buf[5],"P")) print '<font color=red>';
-	print str_replace("-"," ",$buf[5]).'</td><td><a href="#"><img src="../img/patdata.gif" alt="Patientendaten zeigen" border="0"></a>&nbsp;
+	echo '</td><td align=center><font face="verdana,arial" size="1" >&nbsp;'.$buf[4].'</td>';
+	echo '</td><td align=center><font face="verdana,arial" size="1" >&nbsp;';
+	if ($buf[0]!="!") echo $buf[0];
+	echo "\r\n";
+	echo '</td><td ><font face="verdana,arial" size="1" >&nbsp;';
+	if(strchr($buf[5],"P")) echo '<font color=red>';
+	echo str_replace("-"," ",$buf[5]).'</td><td><a href="#"><img src="../img/patdata.gif" alt="Patientendaten zeigen" border="0"></a>&nbsp;
 	 <img src="../img/email.gif" alt="Email an die Station ">&nbsp;
 	 </td></tr>';
-	print "\r\n";
+	echo "\r\n";
 	}
 }
-	print '</table>';
+	echo '</table>';
 
 ?>
 <p>
@@ -226,8 +226,9 @@ for ($i=$statdata['startnumber'];$i<=$statdata['endnumber'];$i++)
 <p>
 
 <?php
-require("../language/$lang/".$lang."_copyrite.php");
- ?>
+if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
+include('../language/'.$lang.'/'.$lang.'_copyrite.php');
+  else include('../language/en/en_copyrite.php');?>
 
 </BODY>
 </HTML>

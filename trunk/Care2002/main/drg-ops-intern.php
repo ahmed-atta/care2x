@@ -1,57 +1,71 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-define("LANG_FILE","drg.php");
-$local_user="ck_op_pflegelogbuch_user";
-require("../include/inc_front_chain_lang.php");
-require("../include/inc_config_color.php");
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define('LANG_FILE','drg.php');
+$local_user='ck_op_pflegelogbuch_user';
+require_once('../include/inc_front_chain_lang.php');
+require_once('../include/inc_config_color.php');
 
 $toggle=0;
 
 if($opnr)
 {
-	include("../include/inc_db_makelink.php");
+	include('../include/inc_db_makelink.php');
 	if($link&&$DBLink_OK) 
 	{	
-				$dbtable="nursing_op_logbook";
+	       /* Load the date formatter */
+           include_once('../include/inc_date_format_functions.php');
+           
+	   
+				$dbtable='care_nursing_op_logbook';
+				
 				$sql="SELECT ops_intern_code  FROM $dbtable WHERE op_nr='$opnr' AND patnum='$pn' AND dept='$dept' AND op_room='$oprm'";
+				
         		$ergebnis=mysql_query($sql,$link);
 				$linecount=0;
 				if($ergebnis)
        			{
-					if ($zeile=mysql_fetch_array($ergebnis)) $linecount++;
-					if($linecount)
+					if($linecount=mysql_num_rows($ergebnis))
 					{
-						mysql_data_seek($ergebnis,0);
 						switch($mode)
 						{
-							case "delete": 
+							case 'delete': 
 												$zeile=mysql_fetch_array($ergebnis);
 												$linebuf=trim($zeile[ops_intern_code]);
-												if($linebuf=="") break;
-												$arrbuf=explode("~",$linebuf);
+												if($linebuf=='') break;
+												$arrbuf=explode('~',$linebuf);
 												array_unique($arrbuf);
 												array_splice($arrbuf,$item,1);
-												$linebuf=addslashes(implode("~",$arrbuf));
+												$linebuf=addslashes(implode('~',$arrbuf));
 												$sql="UPDATE $dbtable SET ops_intern_code='$linebuf' WHERE patnum='$pn' AND op_nr='$opnr' AND dept='$dept' AND op_room='$oprm'";
         										if($ergebnis=mysql_query($sql,$link)) 
 												{
 													header("location:drg-ops-intern.php?sid=$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=1");
 													exit;
 												}
-												else {print "<p>".$sql."<p>$LDDbNoWrite";};
+												else {echo "<p>".$sql."<p>$LDDbNoWrite";};
 											break;
 						}
 					}
 				}
-				 else {print "<p>".$sql."<p>$LDDbNoRead";};
+				 else {echo "<p>".$sql."<p>$LDDbNoRead";};
 	}
 }
 $uid="$dept_$oprm_$pn_$opnr"; 
+/* Load the icon images */
+$img_delete=createComIcon('../','delete2.gif','0','right');
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
  <TITLE></TITLE>
  
   <script language="javascript">
@@ -89,11 +103,11 @@ function openQuicklist(t)
 function openRelatedCodes()
 {
 <?php if($cfg['dhtml'])
-	print '
+	echo '
 			w=window.parent.screen.width-75;
 			h=window.parent.screen.height-50;';
 	else
-	print '
+	echo '
 			w=800;
 			h=650;';
 ?>
@@ -107,7 +121,7 @@ function openRelatedCodes()
 </script>
  
   <?php 
-require("../include/inc_css_a_hilitebu.php");
+require('../include/inc_css_a_hilitebu.php');
 ?>
  <?php if($newsave) : ?>
  <script language="javascript" >
@@ -118,18 +132,18 @@ window.parent.opener.location.href='<?php echo "oploginput.php?sid=$sid&lang=$la
 </HEAD>
 
 <BODY 
-<?php if($display=="composite") print 'topmargin=0 marginheight=0 leftmargin=0 marginwidth=0';
-else  print 'topmargin=2 marginheight=2';
+<?php if($display=="composite") echo 'topmargin=0 marginheight=0 leftmargin=0 marginwidth=0';
+else  echo 'topmargin=2 marginheight=2';
 ?> 
-onLoad="if(window.focus) window.focus();" bgcolor="<?php print $cfg['body_bgcolor']; ?>" 
-<?php if (!$cfg['dhtml']){ print ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+onLoad="if(window.focus) window.focus();" bgcolor="<?php echo $cfg['body_bgcolor']; ?>" 
+<?php if (!$cfg['dhtml']){ echo ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 <form name="ops_intern" action="drg-ops-intern.php" method="post">
 <FONT    SIZE=2  FACE="verdana,Arial" >
-<?php print "$ln, $fn $bd - $pn";
-	if($opnr) print" - OP# $opnr - $dept OP $oprm"; 
+<?php echo "$ln, $fn ".formatDate2Local($bd,$date_format)." - $pn";
+	if($opnr) echo" - OP# $opnr - $dept OP $oprm"; 
 ?>
 <?php if($display!="composite") : ?>
-<a href="javascript:window.history.back()" ><img src="../img/<?php echo "$lang/$lang" ?>_back2.gif" border=0 width=110 height=24 align="right"></a>
+<a href="javascript:window.history.back()" ><img <?php echo createLDImgSrc('../','back2.gif','0') ?> width=110 height=24 align="right"></a>
 
 <b><?php echo $LDOps301 ?></b></font>&nbsp;
  <input type="button" value="<?php echo $LDSearch4OPS301 ?>" onClick="javascript:openOPSsearch()">&nbsp;
@@ -150,28 +164,40 @@ onLoad="if(window.focus) window.focus();" bgcolor="<?php print $cfg['body_bgcolo
 if ($linecount>0) 
 				{ 
 						mysql_data_seek($ergebnis,0);
+						
 						$zeile=mysql_fetch_array($ergebnis);
+						
 						$linebuf=trim($zeile[ops_intern_code]);
+						
 						if($linebuf)
 						{
-							$arrbuf=explode("~",trim($linebuf));
+							$arrbuf=explode('~',trim($linebuf));
+							
 							array_unique($arrbuf);
+							
 							for($i=0;$i<sizeof($arrbuf); $i++)
 							{
 								parse_str(trim($arrbuf[$i]),$parsedline);
+								
 								if($i==0) $main_code=$parsedline[code];
-								print "<tr bgcolor=";
-								if($toggle) { print "#efefef>"; $toggle=0;} else {print "#ffffff>"; $toggle=1;};
-								print '
+								
+								echo '<tr bgcolor=';
+								
+								if($toggle) { echo '#efefef>'; $toggle=0;} else {echo '#ffffff>'; $toggle=1;};
+								
+								echo '
 									<td><font face=arial size=2>'.stripslashes($parsedline[code]).'
 									</td>
 									<td><font face=arial size=2>'.stripslashes($parsedline[des]).'
 									</td>
 									<td><a href="';
-								print "javascript:deleteItem('$i')";
-								print '"><img src="../img/delete2.gif" border=0 width=20 height=20 alt="'.$LDDeleteEntry.'" align="absmiddle"></a>
+								
+								echo 'javascript:deleteItem(\''.$i.'\')';
+								
+								echo '"><img '.$img_delete.' alt="'.$LDDeleteEntry.'"></a>
 									</td>';
-								print "</tr>";
+									
+								echo '</tr>';
 							}
 						}
 				}
@@ -182,7 +208,7 @@ if ($linecount>0)
 	</td>
 	 <td valign="top" bgcolor="#990000"><font face=arial size=2 color=#ffffff>
 	<?php if($display!="composite") : ?>   
-	<a href="javascript:window.history.back()" ><img src="../img/<?php echo "$lang/$lang" ?>_back2.gif" border=0 width=110 height=24></a>
+	<a href="javascript:window.history.back()" ><img <?php echo createLDImgSrc('../','back2.gif','0') ?> width=110 height=24></a>
  	<p>
 	<?php else : ?>
 	<input type="button" value="<?php echo $LDSearch ?>" onClick="javascript:openOPSsearch()">&nbsp;

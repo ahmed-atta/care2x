@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -9,20 +9,20 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 * See the file "copy_notice.txt" for the licence notice
 */
 define("LANG_FILE","radio.php");
-define("NO_2LEVEL_CHK",1);
-require("../include/inc_front_chain_lang.php");
+define('NO_2LEVEL_CHK',1);
+require_once('../include/inc_front_chain_lang.php');
 require("../language/".$lang."/lang_".$lang."_radio.php");
 
 $thisfile="radiolog-xray-pat-list.php";
 
-if($mode=="search")
+if($mode=='search')
 {
- include("../include/inc_db_makelink.php");
+ include('../include/inc_db_makelink.php');
 	if($link&&$DBLink_OK) 
 	{	
 	// get orig data
 
-	  		$dbtable="mahopatient";
+	  		$dbtable='care_admission_patient';
 		 	$sqlinit="SELECT patnum,name,vorname,gebdatum FROM $dbtable";
 			
 			if(isset($patnum)&&!empty($patnum))
@@ -51,7 +51,7 @@ if($mode=="search")
 			if(!empty($sql))
 			{
 				$sql=$sql." ORDER BY name";
-				//print $sql;
+				//echo $sql;
 				if($ergebnis=mysql_query($sql,$link))
        			{
 					$rows=0;
@@ -61,22 +61,22 @@ if($mode=="search")
 						mysql_data_seek($ergebnis,0); //reset the variable
 						//$datafound=1;
 						//$pdata=mysql_fetch_array($ergebnis);
-						//print $sql."<br>";
-						//print $rows;
+						//echo $sql."<br>";
+						//echo $rows;
 					}
-					//else print "<p>".$sql."<p>Multiple entries found pls notify the edv."; 
+					//else echo "<p>".$sql."<p>Multiple entries found pls notify the edv."; 
 				}
-				else print "$sql<br>$LDDbNoRead";
+				else echo "$sql<br>$LDDbNoRead";
 			}
 		}
-  		 else { print "$LDDbNoLink<br>"; }
+  		 else { echo "$LDDbNoLink<br>"; }
 
 }
 
 ?>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 
  <style type="text/css" name="s2">
 .v12{ font-family:verdana,arial; color:#000000; font-size:12;}
@@ -118,24 +118,26 @@ function hilite_bg(x)
 if($rows)
 {
 	$i=0;
+	$img_arrow=createComIcon('../','bul_arrowblusm.gif','0','absmiddle'); // Load the torse icon image
+	$img_torso=createComIcon('../','torso.gif','0'); // Load the torse icon image
 	while($pdata=mysql_fetch_array($ergebnis))
 	{
-		print'
+		echo'
  <tr>
     <td class="v12">&nbsp;'.$pdata[patnum].'&nbsp;</td>
     <td class="v12">&nbsp;'.$pdata[name].'&nbsp;</td>
     <td class="v12">&nbsp;'.$pdata[vorname].'&nbsp;</td>
     <td class="v12">&nbsp;'.$pdata[gebdatum].'&nbsp;</td>
-    <td class="v12">&nbsp;<a href="javascript:demopreview('.$i.')">'.$LDPreviewReport.' <img src="../img/bul_arrowblusm.gif" border=0 width=12 height=12 align="absmiddle"></a><input type="radio" name="xray_pic" value="1" onFocus="demopreview('.$i.')" >&nbsp;</td>
+    <td class="v12">&nbsp;<a href="javascript:demopreview('.$i.')">'.$LDPreviewReport.' <img '.$img_arrow.'></a><input type="radio" name="xray_pic" value="1" onFocus="demopreview('.$i.')" >&nbsp;</td>
     <td class="v12">&nbsp;'.$pdata[gebdatum].'&nbsp;</td>
-    <td class="v12"><a href="javascript:window.top.location.replace(\'radiolog-xray-javastart.php?sid='.$sid.'&lang='.$lang.'&mode=display1\')" title="'.$LDFullScreen.'"><img src="../img/torso.gif" width=18 height=18 border=0></a></td>
+    <td class="v12"><a href="javascript:window.top.location.replace(\'radiolog-xray-javastart.php?sid='.$sid.'&lang='.$lang.'&mode=display1\')" title="'.$LDFullScreen.'"><img '.$img_torso.'></a></td>
   </tr>
   <tr>
     <td colspan=7 bgcolor="#0000ff"></td>
   </tr>';
   	$i++;
   }
-	print '<input type="hidden" name="xray_pic" value="">';
+	echo '<input type="hidden" name="xray_pic" value="">';
 }
 ?>
   </table>

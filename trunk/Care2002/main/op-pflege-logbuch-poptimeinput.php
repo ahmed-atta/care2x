@@ -7,7 +7,7 @@ $template=array();
 
 switch ($mode)
 {
-	case "save":
+	case 'save':
 	{
 		if (file_exists($filename)) $pdata=get_meta_tags($filename);
 		$file=fopen($filename,"w+");
@@ -37,7 +37,7 @@ switch ($mode)
 
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 <TITLE>Eingabefenster für die Kurve</TITLE>
 <META name="description" content="">
 <META name="keywords" content="">
@@ -52,7 +52,7 @@ switch ($mode)
 
 function resettimebars()
 {
-	window.opener.parent.OPLOGIMGBAR.location.replace('oplogtimebar.php?filename=<?php print $filename; ?>');
+	window.opener.parent.OPLOGIMGBAR.location.replace('oplogtimebar.php?filename=<?php echo $filename; ?>');
 	window.opener.top.focus();
 	window.focus();
 }
@@ -121,7 +121,7 @@ div.box { border: double; border-width: thin; width: 100%; border-color: black; 
 
 </HEAD>
 <BODY  background=img/gray2.jpg TEXT="#000000" LINK="#0000FF" VLINK="#800080" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0
-onLoad="if (window.focus) window.focus();<?php if ($mode=="save") print 'resettimebars();'; if($scope==3) print 'window.resizeTo(600,500)'; else print 'window.resizeTo(450,500)';?>" >
+onLoad="if (window.focus) window.focus();<?php if ($mode=='save') echo 'resettimebars();'; if($scope==3) echo 'window.resizeTo(600,500)'; else echo 'window.resizeTo(450,500)';?>" >
 
 <table width=100% cellspacing="0" cellpadding="3" border=0>
 <tr>
@@ -130,16 +130,16 @@ onLoad="if (window.focus) window.focus();<?php if ($mode=="save") print 'resetti
 <?php
 $thisurl="op-pflege-logbuch-poptimeinput.php?rt=optimeinput&filename=";
 
-if($scope==1) print '<font color=silver>Ein/Aus &nbsp;</font>';
-	else print '<a href="'.$thisurl.$filename.'&scope=1"><font color=white>Ein/Aus</a> &nbsp;</font>';
-if($scope==2) print '<font color=silver>Schnitt/Naht &nbsp;</font>';
-	else print '<a href="'.$thisurl.$filename.'&scope=2"><font color=white>Schnitt/Naht</a> &nbsp;</font>';
-if($scope==3) print '<font color=silver>Wartezeit &nbsp;</font>';
-	else print '<a href="'.$thisurl.$filename.'&scope=3"><font color=white>Wartezeit</a> &nbsp;</font>';
-if($scope==4) print '<font color=silver>Gipsen &nbsp;</font>';
-	else print '<a href="'.$thisurl.$filename.'&scope=4"><font color=white>Gipsen</a> &nbsp;</font>';
-if($scope==5) print '<font color=silver>Reposition &nbsp;</font>';
-	else print '<a href="'.$thisurl.$filename.'&scope=5"><font color=white>Reposition</a> &nbsp;</font>';
+if($scope==1) echo '<font color=silver>Ein/Aus &nbsp;</font>';
+	else echo '<a href="'.$thisurl.$filename.'&scope=1"><font color=white>Ein/Aus</a> &nbsp;</font>';
+if($scope==2) echo '<font color=silver>Schnitt/Naht &nbsp;</font>';
+	else echo '<a href="'.$thisurl.$filename.'&scope=2"><font color=white>Schnitt/Naht</a> &nbsp;</font>';
+if($scope==3) echo '<font color=silver>Wartezeit &nbsp;</font>';
+	else echo '<a href="'.$thisurl.$filename.'&scope=3"><font color=white>Wartezeit</a> &nbsp;</font>';
+if($scope==4) echo '<font color=silver>Gipsen &nbsp;</font>';
+	else echo '<a href="'.$thisurl.$filename.'&scope=4"><font color=white>Gipsen</a> &nbsp;</font>';
+if($scope==5) echo '<font color=silver>Reposition &nbsp;</font>';
+	else echo '<a href="'.$thisurl.$filename.'&scope=5"><font color=white>Reposition</a> &nbsp;</font>';
 
 
 ?>
@@ -156,27 +156,27 @@ Zeiteingabe
 <p>
 <ul>
 
-<form method="post" name="timeform" action="op-pflege-logbuch-poptimeinput.php?mode=save&rt=optimeinput&scope=<?php print $scope; ?>&filename=<?php echo $filename; ?>" onSubmit=checkform()>
+<form method="post" name="timeform" action="op-pflege-logbuch-poptimeinput.php?mode=save&rt=optimeinput&scope=<?php echo $scope; ?>&filename=<?php echo $filename; ?>" onSubmit=checkform()>
 
 <font face=verdana,arial size=2>
 <?php if (($scope==1)||($scope==0))
 {
-	print '<font face=verdana,arial size=5 color=navy ><b>Ein-/Ausschleusen:</b></font><br>';
+	echo '<font face=verdana,arial size=5 color=navy ><b>Ein-/Ausschleusen:</b></font><br>';
 	for ($n=1;$n<10;$n++)
 	{
-		print '<b>'.$n.'</b> Ein <input align=right type="text" size=5 size=5 value="'.$pdata['ein'.$n].'" name=ein'.$n.' onKeyUp="isnum(this.value,this.name)"> 
+		echo '<b>'.$n.'</b> Ein <input align=right type="text" size=5 size=5 value="'.$pdata['ein'.$n].'" name=ein'.$n.' onKeyUp="isnum(this.value,this.name)"> 
 				Aus <input type="text" size=5 value="'.$pdata['aus'.$n].'" name=aus'.$n.' onKeyUp="isnum(this.value,this.name)"><br> ';
-		print "\r\n";
+		echo "\r\n";
 	}
 }
 
 if (($scope==2)||($scope==0))
 {
-	print '<p><font face=verdana,arial size=5 color=navy ><b>Schnitt/Naht:</b></font><br>';
+	echo '<p><font face=verdana,arial size=5 color=navy ><b>Schnitt/Naht:</b></font><br>';
 	for ($n=1;$n<10;$n++)
 	{
-		print '<b>'.$n.'</b> Schnitt <input type="text" size=5 size=5 value="'.$pdata['schnitt'.$n].'" name=schnitt'.$n.' onKeyUp="isnum(this.value,this.name)"> Naht <input type="text" size=5 value="'.$pdata['naht'.$n].'" name=naht'.$n.' onKeyUp="isnum(this.value,this.name)"><br> ';
-		print "\r\n";
+		echo '<b>'.$n.'</b> Schnitt <input type="text" size=5 size=5 value="'.$pdata['schnitt'.$n].'" name=schnitt'.$n.' onKeyUp="isnum(this.value,this.name)"> Naht <input type="text" size=5 value="'.$pdata['naht'.$n].'" name=naht'.$n.' onKeyUp="isnum(this.value,this.name)"><br> ';
+		echo "\r\n";
 	}
 }
 
@@ -184,31 +184,31 @@ if (($scope==2)||($scope==0))
 										
 if (($scope==3)||($scope==0))
 {
-print '<p><font face=verdana,arial size=5 color=navy ><b>Wartezeit:</b></font><br>';
+echo '<p><font face=verdana,arial size=5 color=navy ><b>Wartezeit:</b></font><br>';
 	for ($n=1;$n<10;$n++)
 	{
-		print '<b>'.$n.'</b> Start <input type="text" size=5 size=5 value="'.$pdata['bwarte'.$n].'" name=bwarte'.$n.' onKeyUp="isnum(this.value,this.name)"> Ende <input type="text" size=5 value="'.$pdata['ewarte'.$n].'" name=ewarte'.$n.' onKeyUp="isnum(this.value,this.name)"> Grund: <input type="text" size=35 value="'.$pdata['warte'.$n.'grund'].'" name=warte'.$n.'grund><br> ';
-		print "\r\n";
+		echo '<b>'.$n.'</b> Start <input type="text" size=5 size=5 value="'.$pdata['bwarte'.$n].'" name=bwarte'.$n.' onKeyUp="isnum(this.value,this.name)"> Ende <input type="text" size=5 value="'.$pdata['ewarte'.$n].'" name=ewarte'.$n.' onKeyUp="isnum(this.value,this.name)"> Grund: <input type="text" size=35 value="'.$pdata['warte'.$n.'grund'].'" name=warte'.$n.'grund><br> ';
+		echo "\r\n";
 	}
 }
 
 if (($scope==4)||($scope==0))
 {
-print '<p><font face=verdana,arial size=5 color=navy ><b>Gipsen:</b></font><br>';
+echo '<p><font face=verdana,arial size=5 color=navy ><b>Gipsen:</b></font><br>';
 	for ($n=1;$n<10;$n++)
 	{
-		print '<b>'.$n.'</b> Start <input type="text" size=5 size=5 value="'.$pdata['bgips'.$n].'" name=bgips'.$n.' onKeyUp="isnum(this.value,this.name)"> Ende <input type="text" size=5 value="'.$pdata['egips'.$n].'" name=egips'.$n.' onKeyUp="isnum(this.value,this.name)"><br> ';
-		print "\r\n";
+		echo '<b>'.$n.'</b> Start <input type="text" size=5 size=5 value="'.$pdata['bgips'.$n].'" name=bgips'.$n.' onKeyUp="isnum(this.value,this.name)"> Ende <input type="text" size=5 value="'.$pdata['egips'.$n].'" name=egips'.$n.' onKeyUp="isnum(this.value,this.name)"><br> ';
+		echo "\r\n";
 	}
 }
 
 if (($scope==5)||($scope==0))
 {
-print '<p><font face=verdana,arial size=5 color=navy ><b>Reposition:</b></font><br>';
+echo '<p><font face=verdana,arial size=5 color=navy ><b>Reposition:</b></font><br>';
 	for ($n=1;$n<10;$n++)
 	{
-		print '<b>'.$n.'</b> Start <input type="text" size=5 size=5 value="'.$pdata['brepos'.$n].'" name=brepos'.$n.' onKeyUp="isnum(this.value,this.name)"> Ende <input type="text" size=5 value="'.$pdata['erepos'.$n].'" name=erepos'.$n.' onKeyUp="isnum(this.value,this.name)"><br> ';
-		print "\r\n";
+		echo '<b>'.$n.'</b> Start <input type="text" size=5 size=5 value="'.$pdata['brepos'.$n].'" name=brepos'.$n.' onKeyUp="isnum(this.value,this.name)"> Ende <input type="text" size=5 value="'.$pdata['erepos'.$n].'" name=erepos'.$n.' onKeyUp="isnum(this.value,this.name)"><br> ';
+		echo "\r\n";
 	}
 }
 
@@ -223,8 +223,8 @@ print '<p><font face=verdana,arial size=5 color=navy ><b>Reposition:</b></font><
 <a href="#" onClick="document.timeform.reset()"><img src="../img/verwerf.gif" border="0" alt="Eingaben verwerfen (Zuvor gespeicherte Eingaben bleiben)" align="right"></a>
 </ul>
 
-<?php if((($scope==1)||($scope==2))&&($mode=="save")) 
-								print '<script language=javascript>
+<?php if((($scope==1)||($scope==2))&&($mode=='save')) 
+								echo '<script language=javascript>
 										window.opener.parent.OPLOGMAIN.location.reload();
 										window.opener.parent.LOGINPUT.location.reload();
 										window.opener.top.focus();

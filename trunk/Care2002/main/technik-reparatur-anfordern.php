@@ -1,28 +1,28 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","tech.php");
-define("NO_2LEVEL_CHK",1);
-require("../include/inc_front_chain_lang.php");
-require("../include/inc_config_color.php");
+define('LANG_FILE','tech.php');
+define('NO_2LEVEL_CHK',1);
+require_once('../include/inc_front_chain_lang.php');
+require_once('../include/inc_config_color.php');
 
 $deptnames=get_meta_tags("../global_conf/$lang/doctors_abt_list.pid");
-include("../include/inc_resolve_dept_dept.php");
+include('../include/inc_resolve_dept_dept.php');
 
-$breakfile="technik.php?sid=$sid&lang=$lang";
+$breakfile='technik.php?sid='.$sid.'&lang='.$lang;
 
 if($job!=NULL)
 {
-$dbtable="tech_repair_job";
+$dbtable='care_tech_repair_job';
 
-	include("../include/inc_db_makelink.php");
+	include('../include/inc_db_makelink.php');
 	if($link&&$DBLink_OK) 
 		{
 						$sql="INSERT INTO ".$dbtable." 
@@ -34,32 +34,37 @@ $dbtable="tech_repair_job";
 							tdate,
 							ttime,
 							done,
-							d_idx ) 
+							d_idx,
+							status
+							 ) 
 						VALUES 
 						(
-							'$dept',
-							'$job',
-							'$reporter',
-							'$id', 
-							'$tphone',
+							'".htmlspecialchars($dept)."',
+							'".htmlspecialchars($job)."',
+							'".htmlspecialchars($reporter)."',
+							'".htmlspecialchars($id)."', 
+							'".htmlspecialchars($tphone)."',
 							'$tdate', 
 							'$ttime', 
 							'0',
-							'".date(Ymd)."'	)";
+							'".date('Ymd')."',
+							'pending'
+							)";
+							
 						if(mysql_query($sql,$link))
 						{ 
 							mysql_close($link);
 							header("Location: technik-reparatur-empfang.php?sid=$sid&lang=$lang&repair=ask&dept=$dept&reporter=$reporter&tdate=$tdate&ttime=$ttime"); exit;
 						}
-			 			else {print "<p>".$sql."$LDDbNoSave<br>"; };
+			 			else {echo "<p>".$sql."$LDDbNoSave<br>"; };
 	}
-  	 else { print "$LDDbNoLink<br>"; } 
+  	 else { echo "$LDDbNoLink<br>"; } 
 }
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
  <script language="javascript" >
 <!-- 
 function checkform(d)
@@ -93,28 +98,28 @@ function gethelp(x,s,x1,x2,x3)
 </script> 
 
 <?php 
-require("../include/inc_css_a_hilitebu.php");
+require('../include/inc_css_a_hilitebu.php');
 ?>
 
 </HEAD>
 
 <BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ print 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
 <tr valign=top>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="45"><FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="45"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
 <STRONG> &nbsp; <?php echo $LDTechSupport ?></STRONG></FONT></td>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])print'<a href="javascript:window.history.back()"><img src="../img/'.$lang.'/'.$lang.'_back2.gif" width=110 height=24 border=0  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('tech.php','request')"><img src="../img/<?php echo "$lang/$lang"; ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
+<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc('../','back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('tech.php','request')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
 <tr valign=top >
-<td bgcolor=<?php print $cfg['body_bgcolor']; ?> valign=top colspan=2><p><br>
+<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2><p><br>
 <ul>
 
 
 <FONT    SIZE=4  FACE="Arial" color=red>
-<img src="../img/varrow.gif" width="20" height="15">
+<img <?php echo createComIcon('../','varrow.gif','0') ?>>
 <b><?php echo $LDReRepairTxt ?></b></FONT>
 
 <form ENCTYPE="multipart/form-data" action="technik-reparatur-anfordern.php" method="post" onSubmit="return checkform(this)"> 
@@ -145,8 +150,8 @@ require("../include/inc_css_a_hilitebu.php");
 </table>
 <p>
 
-<input type="hidden" name="tdate" value="<?php print strftime("%d.%m.%Y") ?>" >
-<input type="hidden" name="ttime" value= "<?php print strftime("%H.%M") ?>">
+<input type="hidden" name="tdate" value="<?php echo date('Y-m-d') ?>" >
+<input type="hidden" name="ttime" value= "<?php echo date('H:i:s') ?>">
 <input type="hidden" name="sid" value= "<?php echo $sid ?>">
 <input type="hidden" name="lang" value= "<?php echo $lang ?>">
 <input type="submit"  value="<?php echo $LDSendRequest ?>"  >  
@@ -155,14 +160,14 @@ require("../include/inc_css_a_hilitebu.php");
 
 
 <p>
-<a href="technik.php?sid=<?php echo "$sid&lang=$lang" ?>" ><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0  width=103 height=24  alt="<?php echo $LDClose ?>" align="middle"></a>
+<a href="technik.php?sid=<?php echo "$sid&lang=$lang" ?>" ><img <?php echo createLDImgSrc('../','close2.gif','0') ?> alt="<?php echo $LDClose ?>" align="middle"></a>
 <p>
 <FONT    SIZE=-1  FACE="Arial">
-<img src="../img/varrow.gif" width="20" height="15">
+<img <?php echo createComIcon('../','varrow.gif','0') ?>>
 <a href="technik-reparatur-melden.php?sid=<?php echo "$sid&lang=$lang" ?>"><?php echo $LDRepairReportTxt ?></a><br>
-<img src="../img/varrow.gif" width="20" height="15">
+<img <?php echo createComIcon('../','varrow.gif','0') ?>>
 <a href="technik-questions.php?sid=<?php echo "$sid&lang=$lang" ?>"><?php echo $LDQuestionsTxt ?></a><br>
-<img src="../img/varrow.gif" width="20" height="15">
+<img <?php echo createComIcon('../','varrow.gif','0') ?>>
 <a href="technik-info.php?sid=<?php echo "$sid&lang=$lang" ?>"><?php echo $LDInfoTxt ?></a><br>
 </FONT>
 
@@ -174,11 +179,12 @@ require("../include/inc_css_a_hilitebu.php");
 </tr>
 
 <tr>
-<td bgcolor=<?php print $cfg['bot_bgcolor']; ?> height=70 colspan=2>
+<td bgcolor=<?php echo $cfg['bot_bgcolor']; ?> height=70 colspan=2>
 
 <?php
-require("../language/$lang/".$lang."_copyrite.php");
- ?>
+if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
+include('../language/'.$lang.'/'.$lang.'_copyrite.php');
+  else include('../language/en/en_copyrite.php');?>
 
 </td>
 </tr>

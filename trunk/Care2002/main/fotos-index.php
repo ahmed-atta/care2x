@@ -1,21 +1,21 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","nursing.php");
-define("NO_2LEVEL_CHK",1);
-require("../include/inc_front_chain_lang.php");
-require("../include/inc_config_color.php");
+define('LANG_FILE','nursing.php');
+define('NO_2LEVEL_CHK',1);
+require_once('../include/inc_front_chain_lang.php');
+require_once('../include/inc_config_color.php');
 
 $breakfile="pflege-station-patientdaten.php?sid=$sid&lang=$lang&edit=$edit&station=$station&pn=$pn";
 
-require("../global_conf/inc_remoteservers_conf.php");
+require('../global_conf/inc_remoteservers_conf.php');
 
 $conn_id=NULL;
 $fileroot=strtolower($fileroot);
@@ -23,14 +23,19 @@ $filename=array();
 //$path="../fotos/".$fileroot."/"; // for local file storage
 $path=$fotoserver_http.$fileroot."/"; // for  file storage if source is  server 
 $localpath="$fotoserver_localpath$fileroot/"; // for file storage if in disc mode only
+
+/* Load date formatter */
+include_once('../include/inc_date_format_functions.php');
+				
+
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 <?php
-require("../include/inc_css_a_hilitebu.php");
+require('../include/inc_css_a_hilitebu.php');
 ?>
 <style type="text/css">
 	.a12_w {font-family: arial; color: navy; font-size:12; background-color:#ffffff}
@@ -49,7 +54,7 @@ function showfoto(srcimg)
 
 function preview(s,d,p)
 {
-	imgsrc="<?php if($disc_pix_mode) print $localpath; else print $path; ?>"+s;
+	imgsrc="<?php if($disc_pix_mode) echo $localpath; else echo $path; ?>"+s;
 	window.parent.FOTOS_PREVIEW.document.images.preview.src=imgsrc;
 	window.parent.FOTOS_PREVIEW.document.picnotes.sdate.value=d;
 	window.parent.FOTOS_PREVIEW.document.picnotes.nr.value=p;
@@ -70,23 +75,23 @@ function gethelp(x,s,x1,x2,x3)
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0" >
 <tr valign=top>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php print "$LDPhotos"; ?></STRONG></FONT>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php echo "$LDPhotos"; ?></STRONG></FONT>
 </td>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp('nursing_report.php','fotos','','<?php echo $station ?>','<?php print "$LDPhotos"; ?>')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:window.parent.location.replace('<?php echo $breakfile ?>');" ><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp('nursing_report.php','fotos','','<?php echo $station ?>','<?php echo "$LDPhotos"; ?>')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:window.parent.location.replace('<?php echo $breakfile ?>');" ><img <?php echo createLDImgSrc('../','close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
 </tr>
 
 <tr>
 <td bgcolor=#cde1ec valign=top colspan=2><p><br>
 <ul>
 <?php
-print "<font face=arial font size=3 color=maroon><font size=5 >";
+echo "<font face=arial font size=3 color=maroon><font size=5 >";
 
 $buf=explode("_",$fileroot);
 
-print ucfirst($buf[0])."<br></font>".ucfirst($buf[1]).", ".ucfirst($buf[2])." (";
-print str_replace("-",".",$buf[3]).")<br>";
-print "</font>";
+echo ucfirst($buf[0])."<br></font>".ucfirst($buf[1]).", ".ucfirst($buf[2])." (";
+echo formatDate2Local($buf[3],$date_format).')<br>';
+echo "</font>";
 
 ?>
 
@@ -110,7 +115,7 @@ if($disc_pix_mode)
      	} 
 	}
  closedir($handle); 
- //print $localpath;
+ //echo $localpath;
 
 }
 else
@@ -130,15 +135,15 @@ if($conn_id)
 
 	if($login_result)
 	{ 
-	//print "<p>";
-	//print ($fn=ftp_pwd($conn_id));
+	//echo "<p>";
+	//echo ($fn=ftp_pwd($conn_id));
 	//$fn=ftp_pwd($conn_id);
 	//ftp_pasv($conn_id,true);
 	//$curdir=ftp_pwd($conn_id);
-	//print $curdir."<br>";
+	//echo $curdir."<br>";
 	//ftp_chdir($conn_id,$curdir."/");
 	$filename=ftp_nlist($conn_id,$fileroot."/.");
-	 //while(list($x,$v)=each($filename)) print "<br>".$v;
+	 //while(list($x,$v)=each($filename)) echo "<br>".$v;
 	}
 	else echo "$LDFtpNoLink<p>";
 
@@ -151,38 +156,38 @@ if($conn_id)
 $fs=sizeof($filename); 
 
 //".$path."/".$filename[$i]."
-print "<b>$LDPhotos";
-print " ".$fs." $LDPicShots";
-print '</b><br>
+echo "<b>$LDPhotos";
+echo " ".$fs." $LDPicShots";
+echo '</b><br>
 	<table border=0>';
 
 array_multisort($filename, SORT_DESC);
-//while(list($x,$v)=each($filename)) print $v."<br>";
+//while(list($x,$v)=each($filename)) echo $v."<br>";
 for($i=0;$i<$fs;$i++)  
 {
 	if(stristr($filename[$i],".log")) continue; // skip the log file
 	 $buf=explode('.',$filename[$i]);
 	 $buf=explode('_',$buf[0]);
-	$buf1=explode("-",$buf[4]);
+	//$buf1=explode("-",$buf[4]);
 	//$buf1=array_reverse($buf1);
 	
-	print '
+	echo '
 	   <tr>
-     <td class="a12_w">'. ($dy=implode(".",$buf1));
-	if(sizeof($buf)>5) print ' <font color=red size="1">Bild '.$buf[5].'</font>';
+     <td class="a12_w">'. ($dy=formatDate2Local($buf[4],$date_format));
+	if(sizeof($buf)>5) echo ' <font color=red size="1">Bild '.$buf[5].'</font>';
  
-     print '
+     echo '
 	 </td>
 	 <td class="a12_gry"><a href="javascript:preview(\''.$filename[$i].'\',\''.$dy.'\',\''.$buf[5].'\')" title="'.$LDClk2Preview.'">
 	 <img src="';
-	 if($disc_pix_mode) print $localpath; else print $path;
-	 print $filename[$i].'" border=0  width="60"></a> </td>
+	 if($disc_pix_mode) echo $localpath; else echo $path;
+	 echo $filename[$i].'" border=0  width="60"></a> </td>
    </tr>';
 
 	
 	}
 	
-	print '
+	echo '
 	 </table>';
 
 
@@ -190,16 +195,16 @@ for($i=0;$i<$fs;$i++)
  ?>
 
 <p>
-<a href="javascript:window.parent.location.replace('<?php echo $breakfile ?>');"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24></a>
+<a href="javascript:window.parent.location.replace('<?php echo $breakfile ?>');"><img <?php echo createLDImgSrc('../','close2.gif','0') ?>></a>
 
 </nobr>
 </td>
 <td>
-<img src="../img/pixel.gif" width=50 border="0">
+<img src="../gui/img/common/default/pixel.gif" width=50 border="0">
 
 </td>
 <td>
-<img src="../img/pixel.gif" border="0" name="foto">
+<img src="../gui/img/common/default/pixel.gif" border="0" name="foto">
 
 </td>
 </tr>
@@ -218,8 +223,9 @@ for($i=0;$i<$fs;$i++)
 <tr>
 <td bgcolor=silver height=70 colspan=2>
 <?php
-require("../language/$lang/".$lang."_copyrite.php");
- ?>
+if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
+include('../language/'.$lang.'/'.$lang.'_copyrite.php');
+  else include('../language/en/en_copyrite.php');?>
 </td>
 </tr>
 </table>        

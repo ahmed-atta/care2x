@@ -1,248 +1,266 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","products.php");
-$local_user=$userck;
-require("../include/inc_front_chain_lang.php");
-require("../include/inc_config_color.php");
+define('LANG_FILE','products.php');
+$local_user='ck_prod_order_user';
+require_once('../include/inc_front_chain_lang.php');
+require_once('../include/inc_config_color.php');
 
 if(!isset($dept)||!$dept)
 {
 	if(isset($HTTP_COOKIE_VARS['ck_thispc_dept'])&&!empty($HTTP_COOKIE_VARS['ck_thispc_dept'])) $dept=$HTTP_COOKIE_VARS['ck_thispc_dept'];
-	 else $dept="plop";//default is plop dept
+	 else $dept='plop';//default is plop dept
 }
 
-$thisfile="products-bestellkorb.php";
+$thisfile='products-bestellkorb.php';
 
-if($cat=="pharma") 
+if($cat=='pharma') 
  {
- 	$dbtable="pharma_orderlist";
+ 	$dbtable='care_pharma_orderlist';
 	$title=$LDPharmacy;
  }
  else
  {
- 	$dbtable="med_orderlist";
+ 	$dbtable='care_med_orderlist';
 	$title=$LDMedDepot;
  }
  
 $encbuf=$HTTP_COOKIE_VARS[$local_user.$sid];
+
 // define the content array
 $rows=0;
 $count=0;
 
-if($mode!="")
+/* Load the date formatter */
+require_once('../include/inc_date_format_functions.php');
+
+
+
+if($mode!='')
 {
-	include("../include/inc_db_makelink.php");
+	include('../include/inc_db_makelink.php');
 		if($link&&$DBLink_OK)
 		{
-				$sql='SELECT * FROM '.$dbtable.' 
-							WHERE order_id="'.$dept.$order_id.'"
+			$sql='SELECT * FROM '.$dbtable.' 
+							WHERE order_nr="'.$order_nr.'"
 							AND dept="'.$dept.'"';
-        		if($ergebnis=mysql_query($sql,$link))
-				{
-				//count rows=linecount
-					while ($content=mysql_fetch_array($ergebnis)) $rows++;					
-					//reset result
-					if ($rows)	mysql_data_seek($ergebnis,0);
-		
-				}else { print "$LDDbNoRead<br>"; } 
+							
+        	if($ergebnis=mysql_query($sql,$link))
+			{
+				$rows=mysql_num_rows($ergebnis);
+			}
+			else { echo "$LDDbNoRead<br>"; } 
+			
 		 	$content=mysql_fetch_array($ergebnis);
-			$artikeln=explode(" ",$content[articles]);
+			$artikeln=explode(' ',$content['articles']);
 			$ocount=sizeof($artikeln);
-			//print $sql;
-		if(($mode=="delete")&&($idx!=""))
+			//echo $sql;
+			
+		if(($mode=='delete')&&($idx!=''))
 		{
 			if($ocount==1)
 		 	{
-				$sql='DELETE LOW_PRIORITY FROM '.$dbtable.' 
-							WHERE order_id="'.$dept.$order_id.'"
-							AND dept="'.$dept.'"';
+				$sql='DELETE LOW_PRIORITY FROM '.$dbtable.' WHERE order_nr="'.$order_nr.'" AND dept="'.$dept.'"';
+							
         		$ergebnis=mysql_query($sql,$link);
 		 	}
 		 	else
 		 	{
-			$trash=array_splice($artikeln,$idx-1,1);
-			$content[articles]=implode(" ",$artikeln);
-			$sql='UPDATE '.$dbtable.' SET 
-							 		order_date="'.$content[order_date].'",
-							  		articles="'.$content[articles].'",
-									extra1="'.$content[extra1].'",
-									extra2="'.$content[extra2].'",
-									encoder="'.$content[encoder].'",
-									validator="'.$content[validator].'",
-									order_time="'.$content[order_time].'",
-									sent_stamp="'.$content[sent_stamp].'",
-									ip_addr="'.$content[ip_addr].'",
-									priority="'.$content[priority].'"
-							   		WHERE order_id="'.$content[order_id].'"
+			
+			    $trash=array_splice($artikeln,$idx-1,1);
+			    $content['articles']=implode(' ',$artikeln);
+			
+			    $sql='UPDATE '.$dbtable.' SET 
+							 		order_date="'.$content['order_date'].'",
+							  		articles="'.$content['articles'].'",
+									extra1="'.$content['extra1'].'",
+									extra2="'.$content['extra2'].'",
+									validator="'.$content['validator'].'",
+									order_time="'.$content['order_time'].'",
+									sent_stamp="'.$content['sent_stamp'].'",
+									ip_addr="'.$content['ip_addr'].'",
+									priority="'.$content['priority'].'",
+									modify_id="'.$HTTP_COOKIE_VARS[$local_user.$sid].'"
+							   		WHERE order_nr="'.$content['order_nr'].'"
 									AND dept="'.$dept.'"';
-			 if($ergebnis=mysql_query($sql,$link))
-				{
-				}else { print "$LDDbNoSave<br>"; } 
+									
+			     if(!$ergebnis=mysql_query($sql,$link)) { echo "$sql<br>$LDDbNoSave<br>"; } 
 		  	}	
 		}
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		if($mode=="add")
+
+//*** Mode add ******
+
+		if($mode=='add')
 		{
 
-			//$dbtable="pharma_products_main"; // set main pharma db table
-			if($cat=="pharma") $dbtable="pharma_products_main"; 
-				else $dbtable="med_products_main"; 
+			// set main pharma db table
+			
+			if($cat=='pharma') $dbtable='care_pharma_products_main'; 
+				else $dbtable='care_med_products_main'; 
+				
 			for($i=1;$i<=$maxcount;$i++)
 			{
-					$o="order".$i; 
+					$o='order'.$i; 
 					if(!$$o) continue;
-					$b="bestellnum".$i; 
+					$b='bestellnum'.$i; 
 					// get the needed info from the main pharma db
-					$sql='SELECT artikelname, proorder FROM '.$dbtable.' WHERE bestellnum="'.$$b.'"';
+					$sql='SELECT artikelname, minorder, maxorder, proorder FROM '.$dbtable.' WHERE bestellnum="'.$$b.'"';
         			if($ergeb=mysql_query($sql,$link))
 					{
 						$result=mysql_fetch_array($ergeb);
 							$a='artname'.$i;
-							$$a=str_replace("&","%26",strtr($result[artikelname]," ","+")); 
+							$$a=str_replace('&','%26',strtr($result['artikelname'],' ','+')); 
+							$mi='minorder'.$i;
+							$$mi=$result['minorder'];
+							$mx='maxorder'.$i;
+							$$mx=$result['maxorder'];
 							$po='porder'.$i;
-							$$po=$result[proorder];
-					}else { print "$LDDbNoRead<br>"; } 
+							$$po=$result['proorder'];
+					}else { echo "$sql<br>$LDDbNoRead<br>"; } 
 			}
-		if($rows) $tart=$content[articles]; else $tart="";
-		for ($i=1;$i<=$maxcount;$i++)
+			
+		    if($rows) $tart=$content['articles']; else $tart="";
+		    
+			for ($i=1;$i<=$maxcount;$i++)
 			{
-				$o="order".$i; 
+				$o='order'.$i; 
 				if(!$$o) continue;
-				$b="bestellnum".$i; 
-				$a="artname".$i;
-				$po="porder".$i;
-				$pc="p".$i;
-				$tart.=" bestellnum=".$$b."&artikelname=".$$a."&pcs=".$$pc."&proorder=".$$po; // append new bestellnum to articles
+				$b='bestellnum'.$i; 
+				$a='artname'.$i;
+				$po='porder'.$i;
+				$pc='p'.$i;
+				$tart.=' bestellnum='.$$b.'&artikelname='.$$a.'&pcs='.$$pc.'&minorder='.$$mi.'&maxorder='.$$mx.'&proorder='.$$po; // append new bestellnum to articles
 				$tart=trim($tart);
-				//print $tart;
+				//echo $tart;
 			}
-		if($rows) $content[articles]=$tart;
-		else
-		{
-			$content=array(	"order_id"=>$dept.$order_id, 
-								"order_date"=>strftime("%Y.%m.%d"),// format date to year.mon.day for easier sorting
-								"articles"=>$tart,
-								"extra1"=>"",
-								"extra2"=>"",
-								"encoder"=>$encbuf,
-								"validator"=>"",
-								"order_time"=>str_replace("00","24",strftime("%H.%M")), // set 00.00 to 24.00 for easier sorting
-								"ip_addr"=>$REMOTE_ADDR,
-								"priority"=>"",
-								"sent_stamp"=>"");
-		}
-		//}
-	
-		$saveok=false;
-		//save actual data to  catalog
-		if($cat=="pharma") $dbtable="pharma_orderlist";
-			else $dbtable="med_orderlist";
+			
+		    $saveok=false;
+		
+		    //save actual data to  catalog
+		    if($cat=='pharma') $dbtable='care_pharma_orderlist';
+			    else $dbtable='care_med_orderlist';
 
-			if($rows) $sql='UPDATE '.$dbtable.' SET 
-							 		order_date="'.$content[order_date].'",
-							  		articles="'.$content[articles].'",
-									extra1="'.$content[extra1].'",
-									extra2="'.$content[extra2].'",
-									encoder="'.$content[encoder].'",
-									validator="'.$content[validator].'",
-									order_time="'.$content[order_time].'",
-									ip_addr="'.$content[ip_addr].'",
-									priority="'.$content[priority].'",
-									sent_stamp=""
-							   		WHERE order_id="'.$content[order_id].'"
-											AND dept="'.$dept.'"';
+			if($rows)
+			{
 
+			    $sql='UPDATE '.$dbtable.' SET articles="'.$tart.'", 	
+				                                            modify_id="'.$encbuf.'"
+							   		                        WHERE order_nr="'.$content['order_nr'].'" AND dept="'.$dept.'"';            
+			}
 			else 
+			{
 				$sql="INSERT INTO ".$dbtable." 
 						(	
 							dept,
-							order_id,
 							order_date,
 							articles,
-							extra1,
-							extra2,
-							encoder,
-							validator,
 							order_time,
 							ip_addr,
-							priority,
-							sent_stamp ) 
+							status,
+							modify_id,
+							create_id,
+							create_time
+							) 
 						VALUES (
 							'$dept',
-							'$content[order_id]',
-							'$content[order_date]',
-							'$content[articles]',
-							'$content[extra1]',
-							'$content[extra2]',
-							'$content[encoder]',
-							'$content[validator]',
-							'$content[order_time]',
-							'$content[ip_addr]',
-							'$content[priority]',
-							'')";
-							
+							'".date('Y-m-d')."',
+							'".$tart."',
+							'".date('H:i:s')."',
+							'".$REMOTE_ADDR."',
+							'draft',
+							'".$encbuf."',
+							'".$encbuf."',
+							NULL
+							)";
+			}
         		if($ergebnis=mysql_query($sql,$link))
 				{
-				//print "ok $sql";
+				    // echo $sql;
+					if(!$rows) $order_nr=mysql_insert_id($link); // if the last action was insert get the last id
+				
+				   /**
+				   * The following routine will increase the "hit" count of a product and update it in the catalog list
+				   */
+				    if($cat=='pharma') $cat_table='care_pharma_ordercatalog';
+			          else $cat_table='care_med_ordercatalog';
+					for($i=1;$i<=$maxcount;$i++)
+			       {
+					 $b='bestellnum'.$i; 
+				    	// get the needed info from the main pharma db
+					 $sql='SELECT hit FROM '.$cat_table.' WHERE bestellnum="'.$$b.'" AND dept=\''.$dept.'\'';
+        			 if($ergeb=mysql_query($sql,$link))
+					 {
+					 	$resulthit=mysql_fetch_array($ergeb);
+					    $sql='UPDATE '.$cat_table.' SET hit='.($resulthit['hit']+1).' WHERE bestellnum="'.$$b.'" AND dept=\''.$dept.'\'';
+        			    mysql_query($sql,$link);
+					 }
+					 /* end of routine */
+                   }
 					$saveok=true;
 				}
-				else { print "$LDDbNoSave<br>"; } 
-			//print $sql;
+				else { echo "$sql<br>$LDDbNoSave<br>"; } 
 		}// end of if ($mode=="add")
 //++++++++++++++++++++++++++++++++++++++++
 	}
-  	 else { print "$LDDbNoLink<br>"; } 
+  	 else { echo "$LDDbNoLink<br>"; } 
 }
+
+// echo $sql;
 
 $rows=0;
 $wassent=false;
 
-require("../include/inc_db_makelink.php");
+/* Establish db connection */
+require('../include/inc_db_makelink.php');
 if($link&&$DBLink_OK)
 		{
 				$sql='SELECT * FROM '.$dbtable.' 
-						WHERE order_id="'.$dept.$order_id.'"
+						WHERE order_nr="'.$order_nr.'"
 						AND dept="'.$dept.'"';
+						
         		if($ergebnis=mysql_query($sql,$link))
 				{
-					//count rows=linecount
-					while ($content=mysql_fetch_array($ergebnis)) $rows++;					
 					//reset result
-					if ($rows)	
+					if ($rows=mysql_num_rows($ergebnis))	
 					{
-						mysql_data_seek($ergebnis,0);					
 						// check status again to be sure that the list is not sent by somebody else
 					   $content=mysql_fetch_array($ergebnis);
-						if(($content[sent_stamp]>0)||($content[validator]!=""))
+						if(($content['sent_datetime']>0)||($content['validator']!=''))
 						{
 							$wassent=true;
 							 $rows=0;
 						} // if sent_stamp or validator filled then reject this data
 					}
-				}else { print "$LDDbNoRead<br>"; } 
+				}else { echo "$LDDbNoRead<br>"; } 
 		
-			//print $sql;
+			//echo $sql;
 	}
-  	 else { print "$LDDbNoLink<br>"; } 
+  	 else { echo "$LDDbNoLink<br>"; } 
+	 
+/* Load common icon images */	 
+$img_warn=createComIcon('../','warn.gif','0');	
+$img_uparrow=createComIcon('../','uparrowgrnlrg.gif','0');
+$img_info=createComIcon('../','info3.gif','0');
+$img_delete=createComIcon('../','delete2.gif','0');
+ 
 ?>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 <?php 
-require("../include/inc_css_a_hilitebu.php");
+require('../include/inc_css_a_hilitebu.php');
 ?>
 <script language=javascript>
 function popinfo(b)
 {
-	urlholder="products-bestellkatalog-popinfo.php?sid=<?php print "$sid&lang=$lang&userck=$userck"; ?>&keyword="+b+"&mode=search&cat=<?php echo $cat ?>";
+	urlholder="products-bestellkatalog-popinfo.php?sid=<?php echo "$sid&lang=$lang&userck=$userck"; ?>&keyword="+b+"&mode=search&cat=<?php echo $cat ?>";
 	ordercatwin=window.open(urlholder,"ordercat","width=850,height=550,menubar=no,resizable=yes,scrollbars=yes");
 	}
 function gethelp(x,s,x1,x2,x3)
@@ -253,18 +271,21 @@ function gethelp(x,s,x1,x2,x3)
 	window.helpwin.moveTo(0,0);
 }
 </script>
+
+<script language="javascript" src="../js/products_validate_order_num.js"></script>
+
 </head>
 <BODY  topmargin=5 leftmargin=10  marginwidth=10 marginheight=5 
 <?php 
 switch($mode)
 {
-	case "add":print ' onLoad="location.replace(\'#bottom\')"   '; break;
-	case "delete":print ' onLoad="location.replace(\'#'.($idx-1).'\')"   '; break;
+	case "add":echo ' onLoad="location.replace(\'#bottom\')"   '; break;
+	case "delete":echo ' onLoad="location.replace(\'#'.($idx-1).'\')"   '; break;
 }
-print "bgcolor=".$cfg['body_bgcolor']; if (!$cfg['dhtml']){ print ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
-<?php // foreach($argv as $v) print "$v<br>"; ?>
+echo "bgcolor=".$cfg['body_bgcolor']; if (!$cfg['dhtml']){ echo ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+<?php // foreach($argv as $v) echo "$v<br>"; ?>
 
-<a href="javascript:gethelp('products.php','orderlist','<?php echo $rows ?>','<?php echo $cat ?>')"><img src="../img/frage.gif" border=0 width=15 height=15 align="right" alt="<?php echo $LDOpenHelp ?>"></a>
+<a href="javascript:gethelp('products.php','orderlist','<?php echo $rows ?>','<?php echo $cat ?>')"><img <?php echo createComIcon('../','frage.gif','0','right') ?> alt="<?php echo $LDOpenHelp ?>"></a>
 
 
 <?php
@@ -275,48 +296,53 @@ if($rows>0)
 
 $tog=1;
 //$content=mysql_fetch_array($ergebnis);
-print '<form name=actlist>
+echo '<form name=actlist>
 		<font face="Verdana, Arial" size=2 color="#800000">'.$LDActualOrder.':</font>
-		<font face="Arial" size=1> (am: ';
-		$dt=explode(".",$content[order_date]);
-		print "$dt[2].$dt[1].$dt[0]";
-		print ' zeit: '.str_replace("24","00",$content[order_time]).')</font>
+		<font face="Arial" size=1> ('.$LDOn.': ';
+		
+		echo formatDate2Local($content['order_date'],$date_format);
+
+		echo ' '.$LDTime.': '.str_replace('24','00',convertTimeToLocal($content['order_time'])).')</font>
 		<table border=0 cellspacing=1 cellpadding=3>
   		<tr bgcolor="#ffffee">';
 	for ($i=0;$i<sizeof($LDcatindex);$i++)
-	print '
+	echo '
 		<td><font face=Verdana,Arial size=1 color="#000080">'.$LDcatindex[$i].'</td>';
-	print '</tr>';	
+	echo '</tr>';	
 
 $i=1;
-$artikeln=explode(" ",$content[articles]);
+$artikeln=explode(" ",$content['articles']);
 for($n=0;$n<sizeof($artikeln);$n++)
  	{
 	
 	parse_str($artikeln[$n],$r);
+	if(!$r['minorder']) $r['minorder']=0;
+	if(!$r['maxorder']) $r['maxorder']=0;
 	if($tog)
-	{ print '<tr bgcolor="#dddddd">'; $tog=0; }else{ print '<tr bgcolor="#efefff">'; $tog=1; }
-	print'
+	{ echo '<tr bgcolor="#dddddd">'; $tog=0; }else{ echo '<tr bgcolor="#efefff">'; $tog=1; }
+	echo'
 				<td>';
-	if($mode=="delete") print '<a name="'.$i.'"></a>';
-	print'	
+	if($mode=='delete') echo '<a name="'.$i.'"></a>';
+	echo'	
 				<font face=Arial size=1 color="#000080">'.$i.'</td>
-				<td><font face=Verdana,Arial size=1>'.$r[artikelname].'</td>
-				 <td><input type="text" name="order_v'.$i.'" size=3 maxlength=3 value="'.$r[pcs].'"></td>
-				<td ><font face=Verdana,Arial size=1><nobr>X '.$r[proorder].'</nobr></td>
-				<td><font face=Verdana,Arial size=1>'.$r[bestellnum].'</td>
-				<td><a href="#" onClick="popinfo(\''.$r[bestellnum].'\')" ><img src="../img/info3.gif" width=16 height=16 border=0 alt="'.$complete_info.$r[artikelname].'"></a></td>
-				<td><a href="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&order_id='.$order_id.'&mode=delete&cat='.$cat.'&idx='.$i.'&userck='.$userck.'" ><img src="../img/delete2.gif" width=16 height=16 border=0 alt="'.$LDRemoveArticle.'"></a></td>
+				<td><font face=Verdana,Arial size=1>'.$r['artikelname'].'</td>';
+/*				 <td><input type="text"  onBlur="validate_min(this,'.$r['minorder'].')"  onKeyUp="validate_value(this,'.$r['maxorder'].')" name="order_v'.$i.'" size=3 maxlength=3 value="'.$r[pcs].'"></td>
+*/				 
+    echo '<td><font face=Verdana,Arial size=1>'.$r['pcs'].'</td>
+				<td ><font face=Verdana,Arial size=1><nobr>X '.$r['proorder'].'</nobr></td>
+				<td><font face=Verdana,Arial size=1>'.$r['bestellnum'].'</td>
+				<td><a href="#" onClick="popinfo(\''.$r['bestellnum'].'\')" ><img '.$img_info.' alt="'.$complete_info.$r['artikelname'].'"></a></td>
+				<td><a href="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&order_nr='.$order_nr.'&mode=delete&cat='.$cat.'&idx='.$i.'&userck='.$userck.'" ><img '.$img_delete.' alt="'.$LDRemoveArticle.'"></a></td>
 				</tr>';
 	$i++;
 
  	}
-	print '</table>
+	echo '</table>
 			</form>
-			<form action="products-orderlist-final.php" method="get">
+			<form action="products-orderlist-final.php" method="post">
 			<input type="hidden" name="sid" value="'.$sid.'">
    			<input type="hidden" name="lang" value="'.$lang.'">
-   			<input type="hidden" name="order_id" value="'.$order_id.'">
+   			<input type="hidden" name="order_nr" value="'.$order_nr.'">
    			<input type="hidden" name="cat" value="'.$cat.'">
    			<input type="hidden" name="userck" value="'.$userck.'">
 			<input type="submit" value="'.$LDFinalizeList.'">   
@@ -327,79 +353,81 @@ for($n=0;$n<sizeof($artikeln);$n++)
 else
 if($wassent)
 {
-	print '
+	echo '
 			<script language="javascript">window.parent.location.replace(\'apotheke-bestellung.php?sid='.$sid.'&lang='.$lang.'&itwassent=1&userck='.$userck.'\')</script>';
 }	
 else
 {
 	if($itwassent)
-	print '
+	echo '
 		<font face="Verdana,Arial" size=2>'.$LDWasSent.'<p></font>';
 
-	print '<img src="../img/catr.gif" width=88 height=80 border=0 align=middle><font face=Verdana,Arial size=2>'.$LDBasketEmpty.'<p>';
+	echo '<img '.createMascot('../','mascot1_r.gif','0','middle').'><font face=Verdana,Arial size=2>'.$LDBasketEmpty.'<p>';
 
 // get all lists that are not sent
 
-$rows=0;
-include("../include/inc_db_makelink.php");
-if($link&&$DBLink_OK)
-		{
+    $rows=0;
+    
+	include('../include/inc_db_makelink.php');
+    
+	if($link&&$DBLink_OK)
+	{
 				$sql='SELECT * FROM '.$dbtable.' 
-						WHERE sent_stamp ="0" 
+						WHERE (sent_datetime="" OR sent_datetime="0000-00-00 00:00:00")
 						AND validator="" 
+						AND (status="draft" OR status="")
 						AND dept="'.$dept.'"
 						ORDER BY order_date ';
+						
         		if($ergebnis=mysql_query($sql,$link))
 				{
-					//count rows=linecount
-					while ($content=mysql_fetch_array($ergebnis)) $rows++;					
-					//reset result
-					if ($rows)	mysql_data_seek($ergebnis,0);
-				}else { print "$LDDbNoRead<br>"; } 
-					//print $sql;
+					$rows=mysql_num_rows($ergebnis);
+				}
+				else { echo "$LDDbNoRead<br>"; } 
+					//echo $sql;
 	}
-  	 else { print "$LDDbNoLink<br>"; } 
+  	 else { echo "$LDDbNoLink<br>"; } 
 		
 //++++++++++ show the last lists+++++++++++++++++++++++++++++++++++++++++
 
 	if($rows>0)
 	{	
 	
-		if ($rows>1) print $LDListNotSentMany;
-			 else print $LDListNotSent; 
-		print $LDClk2SeeEdit.'<br></font><p>';
+		if ($rows>1) echo $LDListNotSentMany;
+			 else echo $LDListNotSent; 
+		echo $LDClk2SeeEdit.'<br></font><p>';
 
 		$tog=1;
-		print '
+		echo '
 		<font face="Verdana, Arial" size=2 color="#800000">'.$last_orderlist.strtoupper($dept).':</font>
 		<table border=0 cellspacing=1 cellpadding=3>
   		<tr bgcolor="#ffffee">';
 		for ($i=0;$i<sizeof($LDListindex);$i++)
-		print '
+		echo '
 			<td><font face=Verdana,Arial size=1 color="#000080">'.$LDListindex[$i].'</td>';
-		print '</tr>';	
+		echo '</tr>';	
 
 		$i=1;
 
 		while($content=mysql_fetch_array($ergebnis))
  		{
 			if($tog)
-			{ print '<tr bgcolor="#dddddd">'; $tog=0; }else{ print '<tr bgcolor="#efefff">'; $tog=1; }
-			print'
+			{ echo '<tr bgcolor="#dddddd">'; $tog=0; }else{ echo '<tr bgcolor="#efefff">'; $tog=1; }
+			echo'
 				<td><font face=Verdana,Arial size=1>'.$i.'</td>
-				<td><a href="products-bestellung.php?sid='.$sid.'&lang='.$lang.'&cat='.$cat.'&oid='.$content[order_id].'&userck='.$userck.'"  target="_parent" ><img src="../img/upArrowGrnLrg.gif" width=16 height=16 border=0 alt="'.$LDEditList.'"></a></td>
-				<td><font face=Verdana,Arial size=1>';
-			$buf=explode(".",$content[order_date]);
-			print $buf[2].'.'.$buf[1].'.'.$buf[0].'</td>
-				 <td><font face=Verdana,Arial size=1>'.str_replace("24","00",$content[order_time]).'</td>
-				<td ><font face=Verdana,Arial size=1>'.$content[encoder].'</td>
-				<td align="center"><font face=Verdana,Arial size=1><img src="../img/warn.gif" width=16 height=16 border=0 alt="'.$LDNotSent.'">
+				<td><a href="products-bestellung.php?sid='.$sid.'&lang='.$lang.'&cat='.$cat.'&order_nr='.$content['order_nr'].'&userck='.$userck.'"  target="_parent" ><img '.$img_uparrow.' alt="'.$LDEditList.'"></a></td>
+				<td><font face=Verdana,Arial size=1>'.formatDate2Local($content['order_date'],$date_format);
+				
+			echo '</td>
+				 <td><font face=Verdana,Arial size=1>'.convertTimeToLocal(str_replace('24','00',$content['order_time'])).'</td>
+				<td ><font face=Verdana,Arial size=1>'.$content['modify_id'].'</td>
+				<td align="center"><font face=Verdana,Arial size=1><img '.$img_warn.' alt="'.$LDNotSent.'">
 			 	</td>
 				</tr>';
 			$i++;
 
  		}
-		print '</table>';
+		echo '</table>';
 	}
 }
 ?>

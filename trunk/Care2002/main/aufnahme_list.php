@@ -1,49 +1,48 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","aufnahme.php");
-$local_user="aufnahme_user";
-require("../include/inc_front_chain_lang.php");
+define('LANG_FILE','aufnahme.php');
+$local_user='aufnahme_user';
+require_once('../include/inc_front_chain_lang.php');
 
-require("../include/inc_config_color.php");
-$thisfile="aufnahme_list.php";
+require_once('../include/inc_config_color.php');
+$thisfile='aufnahme_list.php';
 
-$dbtable="mahopatient";
+$dbtable='care_admission_patient';
 
-if($dept=="") $dept="plop";
+if($dept=='') $dept='plop';
+
+/* Load the date formatter */
+require_once('../include/inc_date_format_functions.php');
+
 
 $linecount=0;
-if(($mode=="search")||($mode=="select"))
+if(($mode=='search')||($mode=='select'))
 {
-	include("../include/inc_db_makelink.php");
+	include('../include/inc_db_makelink.php');
 	if($link&&$DBLink_OK) 
 	{	
 		switch($mode)
 		{
-			case "search":
+			case 'search':
 							$sql="SELECT * FROM $dbtable WHERE ";
 							$s2="";
 							if($name) $s2.=" name=\"$name\"";
 							if($date_start)
 								{
-									$buf=explode(".",$date_start);
-									$buf=array_reverse($buf);
-									$date_start=implode(".",$buf);
-								}
+								    $date_start=formatDate2STD($date_start,$date_format);
+  								}
 							if($date_end)
 								{
-									$buf=explode(".",$date_end);
-									$buf=array_reverse($buf);
-									$date_end=implode(".",$buf);
-								}
-							
+								    $date_end=formatDate2STD($date_end,$date_format);
+							   }
 							if(($date_start)&&($date_end))
 								{
 									if($s2) $s2.=" AND sdate>=\"$date_start\" AND sdate<=\"$date_end\""; else $s2.=" sdate>=\"$date_start\" AND sdate<=\"$date_end\"";
@@ -66,7 +65,11 @@ if(($mode=="search")||($mode=="select"))
 							if($vorname)
 								if($s2) $s2.=" AND vorname=\"$vorname\""; else $s2.=" vorname=\"$vorname\"";
 							if($gebdatum)
+							  {
+							    $gebdatum=formatDate2STD($gebdatum,$date_format);
+								
 								if($s2) $s2.=" AND gebdatum=\"$gebdatum\""; else $s2.=" gebdatum=\"$gebdatum\"";
+							  }
 							if($address)
 								if($s2) $s2.=" AND address LIKE \"%$address%\""; else $s2.=" address LIKE \"%$address%\"";
 							if($sex)
@@ -87,7 +90,7 @@ if(($mode=="search")||($mode=="select"))
 								if($s2) $s2.=" AND besonder LIKE \"%$besonder%\""; else $s2.=" besonder LIKE \"%$besonder%\"";
 								
 							$sql=$sql.$s2." AND patnum<>'' ORDER BY	name";
-							//print $sql;
+							//echo $sql;
 							if($s2!="")
 								if($ergebnis=mysql_query($sql,$link)) 
 								{			
@@ -97,14 +100,14 @@ if(($mode=="search")||($mode=="select"))
 									{
 										mysql_data_seek($ergebnis,0);
 									}
-								}else print "$LDDbNoRead<p> $sql <p>";
+								}else echo "$LDDbNoRead<p> $sql <p>";
 							if($rows==1)
 							 {
 								$result=mysql_fetch_array($ergebnis);
 								$mode="select";
 							}
 							break;
-			case "select":
+			case 'select':
 							$sql='SELECT * FROM '.$dbtable.' WHERE  item="'.$i.'" 
 																			AND pdate="'.$dt.'"
 																			AND patnum="'.$n.'" 
@@ -120,21 +123,22 @@ if(($mode=="search")||($mode=="select"))
 									mysql_data_seek($ergebnis,0);
 									$result=mysql_fetch_array($ergebnis);
 								}
-							}else print "$LDDbNoRead<p> $sql <p>";
-							//print $sql;
+							}else echo "$LDDbNoRead<p> $sql <p>";
+							//echo $sql;
 							break;
 		} // end of switch
   }   	
-   else { print "$LDDbNoLink<br>"; }
+   else { echo "$LDDbNoLink<br>"; }
 }
+      
+
+
 ?>
 
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 <TITLE></TITLE>
-<script language="javascript" src="../js/setdatetime.js">
-</script>
 <script language="javascript">
 <!-- 
 function gethelp(x,s,x1,x2,x3)
@@ -144,30 +148,38 @@ function gethelp(x,s,x1,x2,x3)
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
+
+<?php require('../include/inc_checkdate_lang.php'); ?>
+
 // -->
 </script>
+
+<script language="javascript" src="../js/checkdate.js" type="text/javascript"></script>
+
+<script language="javascript" src="../js/setdatetime.js"></script>
+
 <?php 
-require("../include/inc_css_a_hilitebu.php");
+require('../include/inc_css_a_hilitebu.php');
 ?>
 
 </HEAD>
 <BODY  topmargin=0 leftmargin=0 marginwidth=0 marginheight=0
- bgcolor=<?php print $cfg['body_bgcolor']; 
- if (!$cfg['dhtml']){ print ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; }
- if(($mode!="select")&&(!$rows)) print ' onLoad="document.archivform.patnum.select()" '; ?>>
+ bgcolor=<?php echo $cfg['body_bgcolor']; 
+ if (!$cfg['dhtml']){ echo ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; }
+ if(($mode!="select")&&(!$rows)) echo ' onLoad="document.archivform.patnum.select()" '; ?>>
 
 
 
 <table width=100% border=0 cellspacing="0">
 
 <tr>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>">
-<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+3  FACE="Arial"><STRONG> &nbsp;<?php echo $LDAdmArchive ?></STRONG></FONT>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+3  FACE="Arial"><STRONG> &nbsp;<?php echo $LDAdmArchive ?></STRONG></FONT>
 </td>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" align="right">
-<a href="javascript:gethelp('admission_how2arch.php','<?php echo $mode ?>')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
-if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) print "startframe.php?sid=$sid&lang=$lang"; 
-	else print "aufnahme_pass.php?sid=$sid&target=archiv&lang=$lang"; ?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 alt="<?php echo $LDCloseWin ?>" width=93 height=41  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
+<a href="javascript:gethelp('admission_how2arch.php','<?php echo $mode ?>')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
+if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo "startframe.php?sid=".$sid."&lang=".$lang; 
+	else echo "aufnahme_pass.php?sid=$sid&target=archiv&lang=$lang"; ?>"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </td>
 </tr>
 </table>
@@ -175,7 +187,14 @@ if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) print "startframe.php?sid=$sid&lan
 
 <table  border=0 cellpadding=0 cellspacing=0 width="90%">
 <tr>
-<td colspan=3><a href="<?php if($HTTP_COOKIE_VARS[$local_user.$sid]) print "aufnahme_start.php?sid=$sid&mode=?&lang=$lang"; else print "aufnahme_pass.php?sid=$sid&lang=$lang"; ?>"><img src="../img/<?php echo "$lang/$lang" ?>_ein-gray.gif" alt="<?php echo $LDAdmit ?>" border=0 width=130 height=25 <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php if($HTTP_COOKIE_VARS[$local_user.$sid]) print "aufnahme_daten_such.php?sid=$sid&mode=?&lang=$lang"; else print "aufnahme_such_pass.php?sid=$sid&lang=$lang"; ?>" ><img src="../img/<?php echo "$lang/$lang" ?>_such-gray.gif" alt="<?php echo $LDSearch ?>" border=0 width=130 height=25  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><img src="../img/<?php echo "$lang/$lang" ?>_arch-blu.gif" alt="<?php echo $LDArchive ?>" border=0 width=130 height=25 ></td>
+<td colspan=3><a href="<?php if($HTTP_COOKIE_VARS[$local_user.$sid]) echo "aufnahme_start.php?sid=$sid&mode=?&lang=$lang"; 
+else echo "aufnahme_pass.php?sid=".$sid."&lang=".$lang; ?>"><img <?php echo createLDImgSrc('../','ein-gray.gif','0') ?> 
+alt="<?php echo $LDAdmit ?>" <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) 
+onMouseOut=hilite(this,0)>';?></a><a href="<?php if($HTTP_COOKIE_VARS[$local_user.$sid]) 
+echo "aufnahme_daten_such.php?sid=$sid&mode=?&lang=$lang"; else echo "aufnahme_such_pass.php?sid=".$sid."&lang=".$lang; ?>" ><img <?php echo createLDImgSrc('../','such-gray.gif','0') ?> 
+alt="<?php echo $LDSearch ?>" <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) 
+onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><img <?php echo createLDImgSrc('../','arch-blu.gif','0') ?> 
+alt="<?php echo $LDArchive ?>"></td>
 </tr>
 
 <tr>
@@ -189,13 +208,13 @@ if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) print "startframe.php?sid=$sid&lan
 
 
 <ul>
-<?php if($mode=="search") print '<FONT  SIZE=2 FACE="verdana,Arial">'.$LDSearchKeyword.': '.$s2; ?>
+<?php if($mode=='search') echo '<FONT  SIZE=2 FACE="verdana,Arial">'.$LDSearchKeyword.': '.$s2; ?>
 <?php if($rows>1) : ?>
 <table border=0>
   <tr>
-    <td><img src="../img/catr.gif" border=0 width=88 height=80 align="absmiddle"></td>
+    <td><img <?php echo createMascot('../','mascot1_r.gif','0','bottom') ?> align="absmiddle"></td>
     <td><FONT  SIZE=3 FACE="verdana,Arial" color=#800000>
-<b><?php print str_replace("~nr~",$rows,$LDFoundData); ?></b></font></td>
+<b><?php echo str_replace("~nr~",$rows,$LDFoundData); ?></b></font></td>
   </tr>
 </table>
 
@@ -203,28 +222,31 @@ if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) print "startframe.php?sid=$sid&lan
   <tr bgcolor=#0000aa>
   <?php
 for($j=0;$j<sizeof($LDElements);$j++)
-		print '
+		echo '
 			<td><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>&nbsp;&nbsp;'.$LDElements[$j].'</b></td>';
 	?>
   </tr>
  <?php 
+ /* Load common icons*/
+ $img_arrow=createComIcon('../','r_arrowgrnsm.gif','0');
+ 
  $toggle=0;
  while($result=mysql_fetch_array($ergebnis))
  {
- 	print'
+ 	echo'
   <tr ';
-  if($toggle){ print "bgcolor=#efefef"; $toggle=0;} else {print "bgcolor=#ffffff"; $toggle=1;}
+  if($toggle){ echo "bgcolor=#efefef"; $toggle=0;} else {echo "bgcolor=#ffffff"; $toggle=1;}
   $buf='aufnahme_list.php?sid='.$sid.'&lang='.$lang.'&mode=select&i='.$result[item].'&dt='.$result[pdate].'&n='.$result[patnum].'&ln='.strtr($result[name]," ","+").'&fn='.strtr($result[vorname]," ","+").'&bd='.$result[gebdatum];
-  print '>
-    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'"><img src="../img/r_arrowgrnsm.gif" width=12 height=12 border=0></a></td>
+  echo '>
+    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'"><img '.$img_arrow.'></a></td>
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; <a href="'.$buf.'" title="'.$LDClk2Show.'">'.$result[name].'</a></td>
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.$result[vorname].'</a></td>
-    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;'.$result[gebdatum].'</td>
+    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;'.formatDate2Local($result[gebdatum],$date_format).'</td>
     <td align=right><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;'.$result[patnum].'</td>
-    <td align=right><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.$result[pdate].'</a></td>
+    <td align=right><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.formatDate2Local($result[pdate],$date_format).'</a></td>
   </tr>
   <tr bgcolor=#0000ff>
-  <td colspan=8 height=1><img src="../img/pixel.gif" border=0 width=1 height=1 align="absmiddle"></td>
+  <td colspan=8 height=1><img src="../gui/img/common/default/pixel.gif" border=0 width=1 height=1 align="absmiddle"></td>
   </tr>';
   }
  ?>
@@ -239,20 +261,47 @@ for($j=0;$j<sizeof($LDElements);$j++)
                              </form>
 <?php else :?>
 
-<form method="post" action="<?php if($mode=="select") print "aufnahme_start.php"; else print $thisfile; ?>" name=archivform>
+<form method="post" action="<?php if($mode=="select") echo "aufnahme_start.php"; else echo $thisfile; ?>" name="archivform">
 
 <table border="0" cellspacing=0>
 
 <tr>
-<td><FONT SIZE=-1  FACE="Arial"><?php echo $LDAdmitDate ?>: <?php if ($mode!="select") print $LDFrom; ?>:
+<td><FONT SIZE=-1  FACE="Arial"><?php echo $LDAdmitDate ?>: <?php if ($mode!="select") echo $LDFrom; ?>:
 </td>
-<td ><?php if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo $result[pdate] ?> <?php else : ?>
-<input name="date_start" type="text" value="" size="14"  onKeyUp=setDate(this)> <?php endif ?>
+<td><FONT SIZE=-1  FACE="Arial">
+<?php if($mode=="select") : ?>
+
+    <FONT SIZE=-1  FACE="Arial" color="#800000">
+    <?php echo formatDate2Local($result['pdate'],$date_format) ?> 
+
+<?php else : ?>
+
+<!--     <input name="date_start" type="text" value="" size="14"  onKeyUp=setDate(this)>  -->
+    <input name="date_start" type="text" value="" size="14"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"> 
+   [
+   <?php   
+ 
+      $dfbuffer="LD_".strtr($date_format,".-/","phs");
+      echo $$dfbuffer;
+   ?> 
+   ]
+
+<?php endif ?>
 </td>
 <?php if ($mode!="select") : ?>
 <td align=right><FONT SIZE=-1  FACE="Arial"><?php echo $LDTo ?>:
 </td>
-<td ><input name="date_end" type="text" value="" size="14"  onKeyUp=setDate(this)>
+<td><FONT SIZE=-1  FACE="Arial">
+<!-- <input name="date_end" type="text" value="" size="14"  onKeyUp=setDate(this)>
+ -->
+ <input name="date_end" type="text" value="" size="14" onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+   [
+   <?php   
+ 
+      $dfbuffer="LD_".strtr($date_format,".-/","phs");
+      echo $$dfbuffer;
+   ?> 
+   ]
 </td>
 <?php endif ?>
 </tr>
@@ -292,8 +341,8 @@ for($j=0;$j<sizeof($LDElements);$j++)
 <td align=right><FONT SIZE=-1  FACE="Arial"><?php echo $LDSex ?>:
 </td>
 <td colspan=3><?php if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo strtr($result[sex],"fm","WM") ?> <?php else : ?>
-<FONT SIZE=-1  FACE="Arial"><input name="sex" type="radio" value="m"  <?php if($sex=="m") print "checked"; ?>><?php echo $LDMale ?>&nbsp;&nbsp;
-<input name="sex" type="radio" value="f"  <?php if($sex=="f") print "checked"; ?>><?php echo $LDFemale ?>
+<FONT SIZE=-1  FACE="Arial"><input name="sex" type="radio" value="m"  <?php if($sex=="m") echo "checked"; ?>><?php echo $LDMale ?>&nbsp;&nbsp;
+<input name="sex" type="radio" value="f"  <?php if($sex=="f") echo "checked"; ?>><?php echo $LDFemale ?>
 <?php endif ?>
 </td>
 
@@ -314,14 +363,30 @@ for($j=0;$j<sizeof($LDElements);$j++)
 <td><FONT SIZE=-1  FACE="Arial"><?php echo $LDFirstName ?>:
 </td>
 <td colspan=2><?php if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo $result[vorname] ?> <?php else : ?>
-<input name="vorname" type="text" size="14" value="<?php print $vorname; ?>" ><?php endif ?>
+<input name="vorname" type="text" size="14" value="<?php echo $vorname; ?>" ><?php endif ?>
 </td>
 </tr>
 <tr>
 <td><FONT SIZE=-1  FACE="Arial"><?php echo $LDBday ?>:
 </td>
-<td  colspan=2><?php if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo $result[gebdatum] ?> <?php else : ?>
-<input name="gebdatum" type="text" size="14" value="" ><?php endif ?>
+<td  colspan=2><FONT SIZE=-1  FACE="Arial">
+<?php if($mode=="select") : ?>
+    
+	<FONT color="#800000">
+    <?php echo formatDate2Local($result[gebdatum],$date_format) ?>
+
+<?php else : ?>
+    
+	<input name="gebdatum" type="text" size="14" value="" onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"> 
+   [
+   <?php   
+ 
+      $dfbuffer="LD_".strtr($date_format,".-/","phs");
+      echo $$dfbuffer;
+   ?> 
+   ]
+
+<?php endif ?>
 </td>
 </tr>
 <tr>
@@ -378,8 +443,8 @@ for($j=0;$j<sizeof($LDElements);$j++)
 
 </table>
 <p>
-<input type=hidden name="sid" value="<?php print $sid; ?>">
-<input type=hidden name="lang" value="<?php print $lang; ?>">
+<input type=hidden name="sid" value="<?php echo $sid; ?>">
+<input type=hidden name="lang" value="<?php echo $lang; ?>">
 <?php if($mode=="select") : ?>
 <input type="hidden" name="itemname" value="<?php echo $result[item] ?>">
 <input type="hidden" name="mode" value="?">
@@ -387,14 +452,16 @@ for($j=0;$j<sizeof($LDElements);$j++)
 <input  type="submit"   value="<?php echo $LDUpdateData ?>"> &nbsp;&nbsp;
 </form>
 <form action="<?php echo $thisfile ?>" method="post">
-<input type=hidden name="sid" value="<?php print $sid; ?>">
-<input type=hidden name="lang" value="<?php print $lang; ?>">
+<input type=hidden name="sid" value="<?php echo $sid; ?>">
+<input type=hidden name="lang" value="<?php echo $lang; ?>">
 <input type="submit" value="<?php echo $LDNewArchive ?>">
 <input type="hidden" name="mode" value="?">
 </form>
 <?php else : ?>
 <input type="hidden" name="mode" value="search">
-<input  type="submit" value="<?php echo $LDSearch ?>"> 
+<!-- <input  type="submit" value="<?php echo $LDSearch ?>"> 
+ -->
+<input type="image" <?php echo createLDImgSrc('../','searchlamp.gif') ?>>
 </form>
 <?php endif ?>
 
@@ -414,14 +481,14 @@ for($j=0;$j<sizeof($LDElements);$j++)
 </table>        
 <form 
 <?php 
-if($mode=="select") print 'action="'.$thisfile.'">'; 
+if($mode=="select") echo 'action="'.$thisfile.'">'; 
 	else
 	{
-		if($from=="entry") print 'action="aufnahme_start.php">';
+		if($from=="entry") echo 'action="aufnahme_start.php">';
 		else
 		{ 
-			if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) print 'action="startframe.php">';
-				else print 'action="aufnahme_pass.php">
+			if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) echo 'action="startframe.php">';
+				else echo 'action="aufnahme_pass.php">
 						<input type="hidden" name="target" value="'.$LDArchive.'"> 
 						';
 		}
@@ -429,13 +496,15 @@ if($mode=="select") print 'action="'.$thisfile.'">';
 ?>
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
 <input type="hidden" name="lang" value="<?php echo $lang ?>">
-<input type="submit" value="<?php echo $LDCancel ?>"> 
+<!-- <input type="submit" value="<?php echo $LDCancel ?>">  -->
+<input type="image" <?php echo createLDImgSrc('../','cancel.gif') ?>>
 </form>
 <p>
 
 <?php
-require("../language/$lang/".$lang."_copyrite.php");
- ?>
+if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
+include('../language/'.$lang.'/'.$lang.'_copyrite.php');
+  else include('../language/en/en_copyrite.php');?>
 
     
 </BODY>

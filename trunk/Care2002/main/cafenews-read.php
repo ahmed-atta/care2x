@@ -1,39 +1,51 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","editor.php");
-define("NO_2LEVEL_CHK",1);
-require("../include/inc_front_chain_lang.php");
+define('LANG_FILE','editor.php');
+define('NO_2LEVEL_CHK',1);
+require_once('../include/inc_front_chain_lang.php');
 
-require("../include/inc_db_makelink.php");
+$dbtable_menu='care_cafe_menu';
+
+/* Check whether the content is language dependent */
+if(defined('LANG_DEPENDENT') && (LANG_DEPENDENT==1))
+{
+    $newspath='../news_service/'.$lang.'/';
+	/* Set the sql query for fetching the menu */
+    $sql_menu="SELECT menu FROM $dbtable_menu WHERE cdate='".date("Y-m-d")."' AND lang='".$lang."'";
+}
+else 
+{
+    $newspath='../news_service/all_language/';
+	/* Set the sql query for fetching the menu */
+    $sql_menu="SELECT menu FROM $dbtable_menu WHERE cdate='".date("Y-m-d")."'";
+}
+
+/* Establish db connection */
+require('../include/inc_db_makelink.php');
  if ($link&&$DBLink_OK)
  {
 		// now fetch today's menu
-		$dbtable="cafe_menu_".$lang;
-		 	$sql="SELECT menu FROM $dbtable 
-					WHERE cyear='".date("Y")."' 
-						AND cmonth='".date("m")."' 
-						AND cday='".date("d")."'";
 
-			if($ergebnis=mysql_query($sql,$link))
+			if($ergebnis=mysql_query($sql_menu,$link))
        		{
 					$menu=mysql_fetch_array($ergebnis);
 			}
 			if(!$menu[menu]) $menu[menu]=$LDNoMenu;
-  } else { print "$LDDbNoLink<br> $sql<br>"; }
+  } else { echo "$LDDbNoLink<br> $sql<br>"; }
 
 
 ?><!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"><TITLE></TITLE>
+<?php echo setCharSet(); ?><TITLE></TITLE>
 
 <script language="javascript" >
 function editcafe()
@@ -57,7 +69,7 @@ function editcafe()
 <?php if($mode=="preview4saved") : ?>
 <table border=0>
   <tr>
-    <td><img src="../img/catr.gif" width=88 height=80 border=0></td>
+    <td><img <?php echo createMascot('../','mascot1_r.gif','0') ?>></td>
     <td colspan=2>
 	<FONT FACE="verdana,Arial"><FONT  SIZE=3 COLOR="#000066" FACE="verdana,Arial"><?php echo $LDArticleSaved ?></font>
 <hr>
@@ -67,7 +79,7 @@ function editcafe()
 <?php endif ?>
 
 <FONT  SIZE=8 COLOR="#cc6600" FACE="verdana,Arial">
-<a href="javascript:editcafe()"><img src="../img/basket.gif" width=74 height=70 border=0></a> <b><?php echo $LDCafeNews ?></b></FONT>
+<a href="javascript:editcafe()"><img <?php echo createComIcon('../','basket.gif','0') ?>></a> <b><?php echo $LDCafeNews ?></b></FONT>
 
 <TABLE CELLSPACING=10 cellpadding=0 border="0" width="590">
 <tr>
@@ -82,25 +94,27 @@ function editcafe()
 <TD WIDTH=80% VALIGN="top" >
 
 <?php
-$picpath="../news_service/".$lang."/fotos/".$picfile;
-	if(file_exists($picpath)&&file_exists("../news_service/$lang/news/$file"))
+
+	$picpath=$newspath.'/fotos/'.$picfile;
+
+	if(file_exists($picpath)&&file_exists($newspath.'/news/'.$file))
 		{
 			$picsize=GetImageSize($picpath);
-		 	print '
+		 	echo '
 			<img src="'.$picpath.'" border=0 align="'.$palign.'" ';
-			if(!$picsize||($picsize[0]>150)) print 'width="150">';
-				else print $picsize[3].'>';
+			if(!$picsize||($picsize[0]>150)) echo 'width="150">';
+				else echo $picsize[3].'>';
 		}
-	if(file_exists("../news_service/$lang/news/$file")) include("../news_service/$lang/news/$file"); 
+	if(file_exists($newspath.'/news/'.$file)) include($newspath.'/news/'.$file); 
 	 
 ?>
 
 <p>
-<a href="<?php if($mode=="preview4saved") print "cafenews.php?sid=$sid&lang=$lang"; else print "javascript:window.history.back()"; ?>"><img src="../img/L-arrowGrnLrg.gif" width=16 height=16 border=0> <font face="arial" color="#006600"><?php echo $LDBackTxt ?></a>
+<a href="<?php if($mode=="preview4saved") echo "cafenews.php?sid=".$sid."&lang=".$lang; else echo "javascript:window.history.back()"; ?>"><img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>> <font face="arial" color="#006600"><?php echo $LDBackTxt ?></a>
 
 </TD>
 	
-<td valign=top width="1" bgcolor="maroon"><img src="../img/pixel.gif" width="1" height="1">
+<td valign=top width="1" bgcolor="maroon"><img src="../gui/img/common/default/pixel.gif" width="1" height="1">
 </td>
 
 
@@ -115,7 +129,7 @@ $picpath="../news_service/".$lang."/fotos/".$picfile;
 </td>
 </tr>
 <tr>
-<td bgcolor="#ffffcc" class="vn"><nobr><?php print nl2br($menu[menu]); ?></nobr>
+<td bgcolor="#ffffcc" class="vn"><nobr><?php echo nl2br($menu[menu]); ?></nobr>
 </td> 
 </tr>
 
@@ -125,11 +139,11 @@ $picpath="../news_service/".$lang."/fotos/".$picfile;
 </tr>
 <tr >
 <td><p><br>
-<img src="../img/frage.gif" width=15 height=15 border=0>
+<img <?php echo createComIcon('../','frage.gif','0') ?> border=0>
 <br>
 <FONT  SIZE=-1 FACE="Arial" >
 		&nbsp;<A HREF="cafenews-menu.php?<?php echo "sid=$sid&lang=$lang" ?>"><?php echo $LDMenuAll ?></A><br>
-<img src="../img/frage.gif" width=15 height=15 border=0>
+<img <?php echo createComIcon('../','frage.gif','0') ?> border=0>
 <br>
 	&nbsp;<A HREF="cafenews-prices.php?<?php echo "sid=$sid&lang=$lang" ?>"><?php echo $LDPrices ?></A>
 </td>

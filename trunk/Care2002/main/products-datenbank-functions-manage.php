@@ -1,18 +1,17 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","products.php");
-if(!isset($userck)) $userck="";
-$local_user=$userck;
-require("../include/inc_front_chain_lang.php");
-require("../include/inc_config_color.php");
+define('LANG_FILE','products.php');
+$local_user='ck_prod_db_user';
+require_once('../include/inc_front_chain_lang.php');
+require_once('../include/inc_config_color.php');
 
 $thisfile="products-datenbank-functions-manage.php";
 
@@ -34,19 +33,19 @@ switch($cat)
 	default:  {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 }
 
-if($mode=="save")
+if($mode=='save')
 {
 include("../include/inc_products_db_save_mod.php");
 }
 
-if($mode!="") include("../include/inc_products_search_mod.php");
+if($mode!="") include('../include/inc_products_search_mod.php');
 
 if($linecount==1) {  $from="multiple"; }
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
  <script language="javascript" >
 <!-- 
 
@@ -96,30 +95,30 @@ function gethelp(x,s,x1,x2,x3)
 </script> 
 
 <?php 
-require("../include/inc_css_a_hilitebu.php");
+require('../include/inc_css_a_hilitebu.php');
 ?>
 
 </HEAD>
 
 <BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="document.suchform.keyword.select()" 
-<?php if (!$cfg['dhtml']){ print 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
 
 <a name="pagetop"></a>
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
 <tr valign=top>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="45">
-<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="45">
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
 <STRONG> &nbsp; <?php echo "$title $LDPharmaDb $LDManage" ?></STRONG></FONT></td>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])print'<a href="javascript:window.history.back()"><img src="../img/'.$lang.'/'.$lang.'_back2.gif" width=110 height=24 border=0  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('products_db.php','mng','<?php echo $from ?>','<?php echo $cat ?>','<?php echo $update ?>')"><img src="../img/<?php echo "$lang/$lang"; ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
+<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc('../','back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('products_db.php','mng','<?php echo $from ?>','<?php echo $cat ?>','<?php echo $update ?>')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
 <tr valign=top >
-<td bgcolor=<?php print $cfg['body_bgcolor']; ?> valign=top colspan=2>
+<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
 <ul>
 <FONT face="Verdana,Helvetica,Arial" size=2>
 <p><br>
-<?php if($from=="deleteok") print'
+<?php if($from=="deleteok") echo'
 	<FONT size=3 color="#800000">'.$LDDataRemoved.'</font>
 	<hr>';
 ?>
@@ -154,14 +153,14 @@ require("../include/inc_css_a_hilitebu.php");
   </form>
 
 <hr>
-<?php if($linecount==1) print '
+<?php if($linecount==1) echo '
 				<form ENCTYPE="multipart/form-data" action="'.$thisfile.'" method="post" name="inputform" >';
 
-if($mode=="save")
-	if($saveok)print' 
-		<img src="../img/catr.gif" border=0 width=88 height=80 align="absmiddle"><FONT face="Verdana,Helvetica,Arial" size=2 color="#800000">
+if($mode=='save')
+	if($saveok)echo' 
+		<img '.createMascot('../','mascot1_r.gif','0','absmiddle').'><FONT face="Verdana,Helvetica,Arial" size=2 color="#800000">
 		'.$LDDataSaved.'</font>';
-	else print '		
+	else echo '		
 		<FONT face="Verdana,Helvetica,Arial" size=2 color="#800000">'.$LDDataNoSaved.'<br>
 		<font color="#000000">	<a href="apotheke-datenbank-functions-eingabe.php?sid='.$sid.'&lang='.$lang.'">
 			<u>'.$LDClk2EnterNew.'</u></a></font></font>';
@@ -173,7 +172,7 @@ if($linecount==1)
 {
 /*<input type="hidden" name="picfilename" value="'.$zeile[picfile].'"> 
 */
-print '
+echo '
 <input type="hidden" name="encoder" value="'.strtr($HTTP_COOKIE_VARS[$local_user.$sid]," ","+").'">
 <input type="hidden" name="dstamp" value="'.str_replace("_",".",date(Y_m_d)).'">
 <input type="hidden" name="tstamp" value="'.str_replace("_",".",date(H_i)).'">
@@ -187,8 +186,8 @@ print '
 <INPUT TYPE="hidden" name="MAX_FILE_SIZE" value="2000000">
 ';
 
-if($mode=="search")
-	{ print'
+if($mode=='search')
+	{ echo'
 	  <input type="hidden" name="ref_bnum" value="'.$zeile[bestellnum].'">
 	  <input type="hidden" name="ref_artnum" value="'.$zeile[artikelnum].'">
  	 <input type="hidden" name="ref_indusnum" value="'.$zeile[industrynum].'">
@@ -196,7 +195,7 @@ if($mode=="search")
  	 ';
 	}
 	else
-	{ print'
+	{ echo'
  	 <input type="hidden" name="ref_bnum" value="'.$ref_bnum.'">
 	  <input type="hidden" name="ref_artnum" value="'.$ref_artnum.'">
  	 <input type="hidden" name="ref_indusnum" value="'.$ref_indusnum.'">
@@ -206,7 +205,7 @@ if($mode=="search")
 	
 	if($update&&(!$saveok))
 	{
-		print'
+		echo'
  		<input type="hidden" name="mode" value="save">
 		<input type="hidden" name="picref" value="'.$zeile[picfile].'">
   		<input type="submit" value="'.$LDSave.'"
@@ -214,33 +213,33 @@ if($mode=="search")
 	}
 	else
 	{
-		print'
+		echo'
 		<input type="hidden" name="mode" value="search">
 		<input type="submit" value="'.$LDUpdateData.'">
 		</form>';
 
-		print'
+		echo'
 		<form action="products-datenbank-functions-datadelete.php" method="get" name="delform">
   		<input type="hidden" name="sid" value="'.$sid.'">
 		<input type="hidden" name="lang" value="'.$lang.'">
 		<input type="hidden" name="userck" value="'.$userck.'">
 		<input type="hidden" name="cat" value="'.$cat.'">';
-		if($zeile[bestellnum]!="") print '
+		if($zeile[bestellnum]!="") echo '
   		<input type="hidden" name="keyword" value="'.$zeile[bestellnum].'">
 		<input type="hidden" name="keytype" value="bestellnum">';
-		else if($zeile[artikelnum]!="") print '
+		else if($zeile[artikelnum]!="") echo '
   				<input type="hidden" name="keyword" value="'.$zeile[artikelnum].'">
 				<input type="hidden" name="keytype" value="artikelnum">';
-		else if($zeile[industrynum]!="") print '
+		else if($zeile[industrynum]!="") echo '
   				<input type="hidden" name="keyword" value="'.$zeile[industrynum].'">
 				<input type="hidden" name="keytype" value="industrynum">';
-		else if($zeile[artikelname]!="") print '
+		else if($zeile[artikelname]!="") echo '
   				<input type="hidden" name="keyword" value="'.$zeile[artikelname].'">
 				<input type="hidden" name="keytype" value="artikelname">';
-		else if($zeile[generic]!="") print '
+		else if($zeile[generic]!="") echo '
   				<input type="hidden" name="keyword" value="'.$zeile[generic].'">
 				<input type="hidden" name="keytype" value="generic">';
-		print'
+		echo'
   		<input type="hidden" name="mode" value="delete">
 		<input type="hidden" name="sure" value="0">
 		<input type="hidden" name="cat" value="'.$cat.'">
@@ -251,10 +250,10 @@ if($mode=="search")
 }
 ?>
 <p>
-<a href="<?php echo $breakfile ?>"><img src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" border=0 width=103 height=24 align="left"></a>
+<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc('../','cancel.gif','0','left') ?>></a>
 <?php if ($from=="multiple")
-print '
-<a href="javascript:history.back()"><img src="../img/'.$lang.'/'.$lang.'_back2.gif" width="110" height="24" border="0" alt="'.$LDBack.'" align="absmiddle "></a>
+echo '
+<a href="javascript:history.back()"><img '.createLDImgSrc('../','back2.gif','0','absmiddle').' alt="'.$LDBack.'"></a>
 ';
 ?>
 </ul>
@@ -265,10 +264,11 @@ print '
 </tr>
 
 <tr>
-<td bgcolor=<?php print $cfg['bot_bgcolor']; ?> height=70 colspan=2>
+<td bgcolor=<?php echo $cfg['bot_bgcolor']; ?> height=70 colspan=2>
 <?php
-require("../language/$lang/".$lang."_copyrite.php");
- ?>
+if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
+include('../language/'.$lang.'/'.$lang.'_copyrite.php');
+  else include('../language/en/en_copyrite.php');?>
 </td>
 </tr>
 </table>        

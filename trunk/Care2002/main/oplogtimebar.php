@@ -1,8 +1,8 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-define("LANG_FILE","or.php");
+define('LANG_FILE','or.php');
 define("NO_CHAIN",1);
-require("../include/inc_front_chain_lang.php");
+require_once('../include/inc_front_chain_lang.php');
 
 $template=array();
 
@@ -36,14 +36,14 @@ $minute="05";
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 
 <script language="javascript">
 function refreshparent()
 {
 	<?php $comdat='&dept='.$dept.'&saal='.$saal.'&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday.'&op_nr='.$op_nr; ?>
-	window.top.LOGINPUT.location.replace("<?php print "oploginput.php?sid=$sid&lang=$lang&patnum=$patnum&mode=notimereset$comdat"; ?>");
-	window.top.OPLOGMAIN.location.replace("<?php print "oplogmain.php?sid=$sid&lang=$lang&gotoid=$patnum$comdat"; ?>");
+	window.top.LOGINPUT.location.replace("<?php echo "oploginput.php?sid=$sid&lang=$lang&patnum=$patnum&mode=notimereset$comdat"; ?>");
+	window.top.OPLOGMAIN.location.replace("<?php echo "oplogmain.php?sid=$sid&lang=$lang&gotoid=$patnum$comdat"; ?>");
 }
 function pruf(t)
 {
@@ -91,9 +91,9 @@ function s(h,m,x)
 <BODY  topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 bgcolor=#cde1ec alink="navy" vlink="navy" 
 onLoad="
 <?php
-if($resetmainput) print 'refreshparent();'; 
-	if($scrolltab) print 'scroll2input(\''.$scrolltab.'\');setTimeout(\'scroll2time()\',30000);';
-	 else print 'scroll2time();';
+if($resetmainput) echo 'refreshparent();'; 
+	if($scrolltab) echo 'scroll2input(\''.$scrolltab.'\');setTimeout(\'scroll2time()\',30000);';
+	 else echo 'scroll2time();';
 ?>setInterval('scroll2time()',900000);">
 
 <table cellpadding="0" cellspacing="0" border=0 width=100%> 
@@ -107,14 +107,14 @@ $clas=array("$LDOpIn/$LDOpOut","$LDOpCut/$LDOpClose",$LDWaitTime,$LDPlasterCast,
 $group=array("entry_out","cut_close","wait_time","bandage_time","repos_time");
 for($n=$tabrows,$m=0;$n<$hi;$n+=$tabrows,$m++)
 {
-	print '<AREA SHAPE="RECT" COORDS="0,'.$n.','.($min2-1).','.($n+$tabrows-1).'" href="opfclic.php?lang='.$lang.'&v='.$hr.'.0&g='.$group[$m].'"  alt="'.$hr.'.00 ('.$clas[$m].')" >';
-	print "\r\n";
+	echo '<AREA SHAPE="RECT" COORDS="0,'.$n.','.($min2-1).','.($n+$tabrows-1).'" href="opfclic.php?lang='.$lang.'&v='.$hr.'.0&g='.$group[$m].'"  alt="'.$hr.'.00 ('.$clas[$m].')" >';
+	echo "\r\n";
 	while($i<$wid)
 	{
 		$line='<AREA SHAPE="RECT" COORDS="'.$i.','.$n.','.(($i+$min)-1).','.($n+$tabrows-1).'" href="opfclic.php?lang='.$lang.'&v='.$hr.'.'.$minute.'&g='.$group[$m].'" alt="'.$hr.'.'.$minute.' ('.$clas[$m].')" >';
 
-		print $line;
-		print "\n";
+		echo $line;
+		echo "\n";
 		$i+=$min;
 		if($minute==55) {$minute=0; $hr++;} else {$minute+=5;}
 		if ($minute<10) $minute="0".$minute;
@@ -129,14 +129,14 @@ $group=array("e","c","w","b","r");
 
 for($n=$tabrows,$m=0;$n<$hi;$n+=$tabrows,$m++)
 {
-	print '<AREA SHAPE="RECT" COORDS="0,'.$n.','.($min2-1).','.($n+$tabrows-1).'" href="javascript:s(\''.$hr.'\',\'0\',\''.$group[$m].'\')">';
-	print "\r\n";
+	echo '<AREA SHAPE="RECT" COORDS="0,'.$n.','.($min2-1).','.($n+$tabrows-1).'" href="javascript:s(\''.$hr.'\',\'0\',\''.$group[$m].'\')">';
+	echo "\r\n";
 	while($i<$wid)
 	{
 		$line='<AREA SHAPE="RECT" COORDS="'.$i.','.$n.','.(($i+$min)-1).','.($n+$tabrows-1).'" href="javascript:s(\''.$hr.'\',\''.$minute.'\',\''.$group[$m].'\')">';
 
-		print $line;
-		print "\n";
+		echo $line;
+		echo "\n";
 		$i+=$min;
 		if($minute==55) {$minute=0; $hr++;} else {$minute+=5;}
 		if ($minute<10) $minute="0".$minute;
@@ -149,7 +149,7 @@ for($n=$tabrows,$m=0;$n<$hi;$n+=$tabrows,$m++)
 
 
 ?>
-</map><img ismap usemap="#timebar" src="<?php print $imgsrc; ?>" border=0>
+</map><img ismap usemap="#timebar" src="<?php echo $imgsrc; ?>" border=0>
 </td>
 </tr>
 

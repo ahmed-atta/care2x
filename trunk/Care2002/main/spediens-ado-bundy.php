@@ -1,23 +1,23 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","specials.php");
-define("NO_2LEVEL_CHK",1);
-require("../include/inc_front_chain_lang.php");
-require("../include/inc_config_color.php");
+define('LANG_FILE','specials.php');
+define('NO_2LEVEL_CHK',1);
+require_once('../include/inc_front_chain_lang.php');
+require_once('../include/inc_config_color.php');
 
 $thisfile="spediens-ado-bundy.php";
-$breakfile="spediens-ado.php?sid=$sid&lang=$lang";
+$breakfile="spediens-ado.php?sid=".$sid."&lang=".$lang;
 
 $saal="exclude";
-require("../include/inc_resolve_opr_dept.php");
+require('../include/inc_resolve_opr_dept.php');
 
 if(($mondir)&&($month))
 {
@@ -46,15 +46,16 @@ if($year=="") $year=date(Y);
 if(!$month) $month=date(m);
 //if(!$day) $day=date(d);
 }
-require("../include/inc_db_makelink.php");
+/* Establish db connection */
+require('../include/inc_db_makelink.php');
 if($link&&$DBLink_OK)  
 	{	
 	// get orig data
 
-	  		$dbtable="nursing_dept_personell_quicklist";
+	  		$dbtable="care_nursing_dept_personell_quicklist";
 		 	$sql="SELECT list FROM $dbtable 
 					WHERE dept='$dept'";
-			//print $sql;
+			//echo $sql;
 			if($ergebnis=mysql_query($sql,$link))
        		{
 				$rows=0;
@@ -64,20 +65,20 @@ if($link&&$DBLink_OK)
 					mysql_data_seek($ergebnis,0); //reset the variable
 					$datafound=1;
 					$pdata=mysql_fetch_array($ergebnis);
-					//print $sql."<br>";
-					//print $rows;
+					//echo $sql."<br>";
+					//echo $rows;
 				}
-				//else print "<p>".$sql."<p>Multiple entries found pls notify the edv."; 
+				//else echo "<p>".$sql."<p>Multiple entries found pls notify the edv."; 
 			}
-				else  { print "$LDDbNoRead<br>$sql"; } 
+				else  { echo "$LDDbNoRead<br>$sql"; } 
 	}
-  		else { print "$LDDbNoLink<br>$sql"; } 
+  		else { echo "$LDDbNoLink<br>$sql"; } 
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 
  <script language="javascript" >
 <!-- 
@@ -92,40 +93,40 @@ function gethelp(x,s,x1,x2,x3)
 </script> 
 
 <?php 
-require("../include/inc_css_a_hilitebu.php");
+require('../include/inc_css_a_hilitebu.php');
 ?>
 
 </HEAD>
 
 <BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ print 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
 
 <a name="pagetop"></a>
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
 <tr valign=top>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>"  height="35">
-<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>"  height="35">
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
 <STRONG> &nbsp;<?php echo $LDDutyPlanOrg ?></STRONG></FONT></td>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" align=right   height="35"><a href="javascript:history.back();"><img 
-src="../img/<?php echo "$lang/$lang" ?>_back2.gif" border=0 width=110 height=24 align="absmiddle" 
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right   height="35"><a href="javascript:history.back();"><img 
+<?php echo createLDImgSrc('../','back2.gif','0','absmiddle') ?> 
 style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a 
-href="javascript:gethelp()"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 
+href="javascript:gethelp()"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0') ?> 
 align="absmiddle" style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a 
-href="<?php echo $breakfile ?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 
+href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> 
 width=103 height=24 align="absmiddle" style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a></td>
 </tr>
 <tr valign=top >
-<td bgcolor=<?php print $cfg['body_bgcolor']; ?> valign=top colspan=2>
+<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
 <ul>
 <br><p>
 <FONT face="Verdana,Helvetica,Arial" size=4>
-<img src="../img/icon_clock.gif" width=30 height=23 border=0> <?php echo $LDBundyMachine ?><p></font>
+<img <?php echo createComIcon('../','icon_clock.gif','0') ?>> <?php echo $LDBundyMachine ?><p></font>
 
 <FONT face="Verdana,Helvetica,Arial" size=3>
-<font size=1><a href="spediens-ado-bundy.php?sid=<?php echo "$sid&lang=$lang&month=$month&year=$year" ?>&mondir=-1"><img src="../img/L-arrowGrnLrg.gif" width=16 height=16 border=0> <?php echo $LDPrevMonth ?></a></font> 
-<b>&nbsp;<?php print $monat[(int)$month]." ".$year; ?>&nbsp;</b> 
-<font size=1><a href="spediens-ado-bundy.php?sid=<?php echo "$sid&lang=$lang&month=$month&year=$year" ?>&mondir=1"><?php echo $LDNextMonth ?> <img src="../img/bul_arrowgrnlrg.gif" width=16 height=16 border=0></a></font>
+<font size=1><a href="spediens-ado-bundy.php?sid=<?php echo "$sid&lang=$lang&month=$month&year=$year" ?>&mondir=-1"><img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>> <?php echo $LDPrevMonth ?></a></font> 
+<b>&nbsp;<?php echo $monat[(int)$month]." ".$year; ?>&nbsp;</b> 
+<font size=1><a href="spediens-ado-bundy.php?sid=<?php echo "$sid&lang=$lang&month=$month&year=$year" ?>&mondir=1"><?php echo $LDNextMonth ?> <img <?php echo createComIcon('../','bul_arrowgrnlrg.gif','0') ?>></a></font>
 
 
 <FONT face="Verdana,Helvetica,Arial" size=2>
@@ -133,7 +134,7 @@ width=103 height=24 align="absmiddle" style=filter:alpha(opacity=70) onMouseover
 <?php
 if($datafound)
 {
-	print '<tr><td>&nbsp;</td>
+	echo '<tr><td>&nbsp;</td>
 	<td> '.$LDEntry.' </td>
 	<td> '.$LDExit.' </td>
 	<td> '.$LDRemarks.' </td>
@@ -142,16 +143,16 @@ if($datafound)
    for ($i=0;$i<sizeof($pbuf);$i++)
    {
 	   parse_str(trim($pbuf[$i]),$persons);
-	   print '
+	   echo '
 	    <tr>
         <td><FONT face="Verdana,Helvetica,Arial" size=2>
 	   ';
-	   print ucfirst($persons[l]).', '.ucfirst($persons[f]).'
+	   echo ucfirst($persons[l]).', '.ucfirst($persons[f]).'
 	   <br></td>
 	   <td>&nbsp;</td>
 	   <td>&nbsp;</td>
 	   <td>&nbsp;</td>';
-       print '</tr>';
+       echo '</tr>';
     }
 }
 ?>
@@ -159,7 +160,7 @@ if($datafound)
 
 
 <p><br>
-<a href="<?php echo $breakfile ?>"><img src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" border=0 width=103 height=24 alt="<?php echo $LDCancel ?>" align="middle"></a>
+<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc('../','cancel.gif','0','middle') ?> alt="<?php echo $LDCancel ?>"></a>
 
 </FONT>
 <p>
@@ -168,11 +169,12 @@ if($datafound)
 </tr>
 
 <tr>
-<td bgcolor=<?php print $cfg['bot_bgcolor']; ?> height=70 colspan=2>
+<td bgcolor=<?php echo $cfg['bot_bgcolor']; ?> height=70 colspan=2>
 
 <?php
-require("../language/$lang/".$lang."_copyrite.php");
- ?>
+if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
+include('../language/'.$lang.'/'.$lang.'_copyrite.php');
+  else include('../language/en/en_copyrite.php');?>
 </td>
 </tr>
 </table>        

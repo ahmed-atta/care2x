@@ -1,31 +1,45 @@
-<?php if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-require("../language/".$lang."/lang_".$lang."_help.php");
-		
-//if(($sid==NULL)||($sid!=$$ck_sid_buffer)) { header("location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=closeparent"); exit;}
-
-//require("../language/".$lang."/lang_".$lang."_helppages.php");
+<?php 
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","help.php");
+define("NO_CHAIN",1);
+require_once('../include/inc_front_chain_lang.php');
 ?>
 <html>
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 <title></title>
 
 </head>
 <body onLoad="if (window.focus) window.focus()">
 
-<?php  if($helpidx=="") : ?>
-
-	<?php  include("../help/".$lang."/help_".$lang."_main.htm"); ?>
-
-<?php else : ?>
-	<?php 
-		if(file_exists("../help/".$lang."/help_".$lang."_".$helpidx)) include("../help/".$lang."/help_".$lang."_".$helpidx);else include("../help/".$lang."/help_".$lang."_main.htm");
-	?>
-<?php endif ?>
+<?php 
+   if($helpidx=="") 
+     {
+	   if(file_exists("../help/".$lang."/help_".$lang."_main.php")) include("../help/".$lang."/help_".$lang."_main.php");
+	     else include("../help/en/help_en_main.php");  
+     }
+     else
+	 {
+		if(file_exists("../help/".$lang."/help_".$lang."_".$helpidx)) include("../help/".$lang."/help_".$lang."_".$helpidx);
+		  else 
+		   {
+	           if(file_exists("../help/".$lang."/help_".$lang."_main.php")) include("../help/".$lang."/help_".$lang."_main.php");
+	             else include("../help/en/help_en_main.php");  
+		   }
+      }
+?>
 <hr>
-<a href="javascript:window.parent.close()"><img src="../img/<?php echo "$lang/$lang"; ?>_closehelp.gif" height=24 border=0 alt="<?php echo $LDCloseHelpWin ?>"></a>
+<ul>
+<a href="javascript:window.parent.close()"><img <?php echo createLDImgSrc('../','closehelp.gif','0') ?> alt="<?php echo $LDCloseHelpWin ?>"></a>
+</ul>
 </body>
 </html>

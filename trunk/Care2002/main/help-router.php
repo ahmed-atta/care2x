@@ -1,6 +1,11 @@
+<?php 
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require_once('../include/inc_vars_resolve.php'); // globalize POST, GET, & COOKIE  vars
+require_once('../include/inc_charset_fx.php') // load the charset functions
+?>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 <title>?</title>
 
 </head>

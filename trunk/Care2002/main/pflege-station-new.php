@@ -1,19 +1,19 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","nursing.php");
-$local_user="ck_pflege_user";
-require("../include/inc_front_chain_lang.php");
-require("../include/inc_config_color.php"); // load color preferences
+define('LANG_FILE','nursing.php');
+$local_user='ck_pflege_user';
+require_once('../include/inc_front_chain_lang.php');
+require_once('../include/inc_config_color.php'); // load color preferences
 
-$breakfile="pflege.php?sid=$sid&lang=$lang";
+$breakfile="pflege.php?sid=".$sid."&lang=".$lang;
 
 if($pday=="") $pday=date(d);
 if($pmonth=="") $pmonth=date(m);
@@ -22,30 +22,28 @@ $t_date=$pday.".".$pmonth.".".$pyear;
 
 if($mode)
 {
-	$dbtable="nursing_station_".$lang;
+	$dbtable="care_nursing_station";
 			
-	include("../include/inc_db_makelink.php");
+	include('../include/inc_db_makelink.php');
 	if($link&&$DBLink_OK) 
 		{
 			switch($mode)
 			{	
 				case "create": 
-					// check if already exists
-					$sql="SELECT info FROM $dbtable
-									WHERE station='$station'";
+					/* check if ward already exists */
+					$sql="SELECT info FROM $dbtable	WHERE station='$station' AND lang='".$lang."'";
 					if($ergebnis=mysql_query($sql,$link))
        					{
-							$rows=0;
-							if( $dbdata=mysql_fetch_array($ergebnis)) $rows++;
+							$rows=mysql_num_rows($ergebnis);
 							if(!$rows)
 								{
 									$maxbed=($end_no-($start_no-1))*$bedtype;
 									$sql="INSERT INTO $dbtable 
 												(
+												    lang,
 													station,
 													dept,
 													description,
-													t_date,
 													s_date,
 													info,
 													start_no,
@@ -58,16 +56,16 @@ if($mode)
 													headnurse_1,
 													headnurse_2,
 													nurses,
-													encoder,
-													edit_date
+													create_id,
+													create_time
 												)
 												VALUES
 												(
+												    '$lang',
 													'$station',
 													'$dept',
 													'$description',
-													'".date("d.m.Y")."',
-													'".date("Ymd")."',
+													'".date("Y-m-d H:i:s")."',
 													'template',
 													'$start_no',
 													'$end_no',
@@ -80,7 +78,7 @@ if($mode)
 													'$asst',
 													'$nurses',
 													'".$HTTP_COOKIE_VARS[$local_user.$sid]."',
-													'".date("d.m.Y")."'
+													NULL
 												)";
 									if($ergebnis=mysql_query($sql,$link)) 
 										{
@@ -88,13 +86,13 @@ if($mode)
 											header("location:pflege-station.php?sid=$sid&lang=$lang&station=$station&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear");
 											exit;
 										}
-										else print "$sql<br>$LDDbNoSave";
+										else echo "$sql<br>$LDDbNoSave";
 					 			}
-						}else print "$sql<br>$LDDbNoRead";
+						}else echo "$sql<br>$LDDbNoRead";
 					break;
 				}// end of switch
 		}
-  		 else { print "$LDDbNoLink<br>"; } 
+  		 else { echo "$LDDbNoLink<br>"; } 
 }
 ?>
 
@@ -102,7 +100,7 @@ if($mode)
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 
 <script language="javascript">
 <!-- 
@@ -132,7 +130,7 @@ function gethelp(x,s,x1,x2,x3)
 </script>
 
 <?php
-require("../include/inc_css_a_hilitebu.php");
+require('../include/inc_css_a_hilitebu.php');
 ?>
 <style type="text/css" name="formstyle">
 td.pblock{ font-family: verdana,arial; font-size: 12}
@@ -145,23 +143,23 @@ div.pcont{ margin-left: 3; }
 
 </HEAD>
 
-<BODY bgcolor=<?php print $cfg['body_bgcolor']; ?> onLoad="if (window.focus) window.focus()" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ print 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> onLoad="if (window.focus) window.focus()" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
+<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 
 
 <table width=100% border=0 cellpadding="0" cellspacing=0>
 <tr>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10">
-<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+3  FACE="Arial"><STRONG> &nbsp; <?php echo "$LDCreate $LDNewStation" ?></STRONG></FONT></td>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])print'<a href="javascript:window.history.back()"><img src="../img/'.$lang.'/'.$lang.'_back2.gif" width=110 height=24 border=0  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('nursing_ward_mng.php','new')"><img src="../img/<?php echo "$lang/$lang"; ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 alt="<?php echo $LDCloseAlt ?>"  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10">
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+3  FACE="Arial"><STRONG> &nbsp; <?php echo "$LDCreate $LDNewStation" ?></STRONG></FONT></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
+<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc('../','back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('nursing_ward_mng.php','new')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
 <tr valign=top >
-<td bgcolor=<?php print $cfg['body_bgcolor']; ?> valign=top colspan=2>
+<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
  <ul>
 <?php if($rows) : ?>
 
-<img src="../img/catr.gif" border=0 width=88 height=80 align="absmiddle"><font face="Verdana, Arial" size=3 color="#880000">
+<img <?php echo createMascot('../','mascot1_r.gif','0','bottom') ?> align="absmiddle"><font face="Verdana, Arial" size=3 color="#880000">
 <b><?php echo str_replace("~station~",strtoupper($station),$LDStationExists) ?></b></font><p>
 <?php endif ?>
 <font face="Verdana, Arial" size=-1><?php echo $LDEnterAllFields ?>
@@ -181,12 +179,12 @@ div.pcont{ margin-left: 3; }
 		$abtname=get_meta_tags($filename);
 		
 		while(list($x,$v)=each($abtname))
-			print '
+			echo '
 				<option value="'.$x.'">'.$v.'</option>';
 
 	?>
                      </select>
-		<img src="../img/l_arrowGrnSm.gif" width=12 height=12 border=0> <?php echo $LDPlsSelect ?>
+		<img <?php echo createComIcon('../','l_arrowgrnsm.gif','0') ?>> <?php echo $LDPlsSelect ?>
 </td>
   </tr>
   <tr>
@@ -206,7 +204,7 @@ div.pcont{ margin-left: 3; }
   </tr>
   <tr>
     <td class=pblock align=right><font color=#ff0000><b>*</b></font><?php echo $LDRoomPrefix ?>: </td>
-    <td class=pblock><input type="text" name="roomprefix" size=4 maxlength=4 value="<?php // if(!$roomprefix) print strtoupper(substr($station,0,1)); else print $roomprefix; ?>"><br>
+    <td class=pblock><input type="text" name="roomprefix" size=4 maxlength=4 value="<?php // if(!$roomprefix) echo strtoupper(substr($station,0,1)); else echo $roomprefix; ?>"><br>
 </td>
   </tr>
   <tr>
@@ -245,7 +243,7 @@ div.pcont{ margin-left: 3; }
 </form>
 <p>
 
-<a href="javascript:history.back()"><img src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" border="0"></a>
+<a href="javascript:history.back()"><img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border="0"></a>
 </FONT>
 
 </ul>
@@ -257,8 +255,9 @@ div.pcont{ margin-left: 3; }
 <p>
 
 <?php
-require("../language/$lang/".$lang."_copyrite.php");
- ?>
+if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
+include('../language/'.$lang.'/'.$lang.'_copyrite.php');
+  else include('../language/en/en_copyrite.php');?>
 
 </BODY>
 </HTML>

@@ -1,16 +1,16 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","nursing.php");
-$local_user="ck_pflege_user";
-require("../include/inc_front_chain_lang.php");
+define('LANG_FILE','nursing.php');
+$local_user='ck_pflege_user';
+require_once('../include/inc_front_chain_lang.php');
 
 switch($winid)
 {
@@ -30,7 +30,7 @@ $yr=date(Y);
 
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 <TITLE><?php echo $title ?></TITLE>
 
 <script language="javascript">
@@ -54,12 +54,12 @@ div.box { border: double; border-width: thin; width: 100%; border-color: black; 
 
 </HEAD>
 <BODY  bgcolor="#dfdfdf" TEXT="#000000" LINK="#0000FF" VLINK="#800080" 
-onLoad="<?php if($saved) print "parentrefresh();"; ?>if (window.focus) window.focus(); window.focus();" >
+onLoad="<?php if($saved) echo "parentrefresh();"; ?>if (window.focus) window.focus(); window.focus();" >
 
 <font face=verdana,arial size=3 color=maroon>
 
 <?php 
-	print "$LDShowCurveDate <br><b>$title</b>";	
+	echo "$LDShowCurveDate <br><b>$title</b>";	
 ?>
 
 </font>
@@ -79,10 +79,10 @@ onLoad="<?php if($saved) print "parentrefresh();"; ?>if (window.focus) window.fo
     <td><select name="day">
 	<?php for($i=1;$i<32;$i++)
 		{
-			print '
+			echo '
         		<option value="'.$i.'" ';
-		 	if($dy==$i) print "selected"; 
-		 	print '> '.$i.'</option>';
+		 	if($dy==$i) echo "selected"; 
+		 	echo '> '.$i.'</option>';
 		 }
 	?>
         </select>
@@ -90,10 +90,10 @@ onLoad="<?php if($saved) print "parentrefresh();"; ?>if (window.focus) window.fo
     <td><select name="month">
  	<?php for($i=1;$i<13;$i++)
 		{
-			print '
+			echo '
         		<option value="'.$i.'" ';
-		 	if($mo==$i) print "selected"; 
-		 	print '> '.$monat[$i-1].'</option>';
+		 	if($mo==$i) echo "selected"; 
+		 	echo '> '.$monat[$i-1].'</option>';
 		 }
 	?>
 
@@ -102,10 +102,10 @@ onLoad="<?php if($saved) print "parentrefresh();"; ?>if (window.focus) window.fo
     <td><select name="year">
  	<?php for($i=1999;$i<2011;$i++)
 		{
-			print '
+			echo '
         		<option value="'.$i.'" ';
-		 	if($yr==$i) print "selected"; 
-		 	print '> '.$i.'</option>';
+		 	if($yr==$i) echo "selected"; 
+		 	echo '> '.$i.'</option>';
 		 }
 	?>
         </select>&nbsp;
@@ -118,7 +118,7 @@ onLoad="<?php if($saved) print "parentrefresh();"; ?>if (window.focus) window.fo
 <p>
 <br>
 &nbsp;<p>
-<a href="javascript:window.close()"><img src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" border="0" alt="<?php echo $LDClose ?>">
+<a href="javascript:window.close()"><img <?php echo createLDImgSrc('../','cancel.gif','0') ?>" border="0" alt="<?php echo $LDClose ?>">
 </a>
 
 

@@ -1,53 +1,54 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","phone.php");
-$local_user="phonedir_user";
-require("../include/inc_front_chain_lang.php");
+define('LANG_FILE','phone.php');
+$local_user='phonedir_user';
+require_once('../include/inc_front_chain_lang.php');
 
-require("../include/inc_config_color.php");
+require_once('../include/inc_config_color.php');
 
 $newdata=1;
-$dbtable="mahophone";
-$curdate=date("Y.m.d");
-$curtime=date("H.i");
+$dbtable='care_phone';
+$curdate=date('Y-m-d');
+$curtime=date('H:i:s');
 
-include("../include/inc_db_makelink.php");
+include('../include/inc_db_makelink.php');
 if($link&&$DBLink_OK) 
 {	
-   if ($mode=="save")
+   if ($mode=='save')
     {
 	   // start checking input data
-	   if (($name!="")or($vorname!="")) 
+	   if (($name!='') || ($vorname!='')) 
 	   {	
 				$sql="INSERT INTO ".$dbtable." 
-						(	mahophone_item,
-							mahophone_title,
-							mahophone_name,
-							mahophone_vorname,
-							mahophone_beruf,
-							mahophone_bereich1,
-							mahophone_bereich2,
-							mahophone_inphone1,
-							mahophone_inphone2,
-							mahophone_inphone3,
-							mahophone_exphone1,
-							mahophone_exphone2,
-							mahophone_funk1,
-							mahophone_funk2,
-							mahophone_roomnr,
-							mahophone_date,
-							mahophone_time,
-							mahophone_encoder ) 
+						(	
+							title,
+							name,
+							vorname,
+							beruf,
+							bereich1,
+							bereich2,
+							inphone1,
+							inphone2,
+							inphone3,
+							exphone1,
+							exphone2,
+							funk1,
+							funk2,
+							roomnr,
+							date,
+							time,
+							create_id,
+							create_time
+							 ) 
 						VALUES (
-							'$itemno',
 							'$anrede',
 							'$name', 
 							'$vorname', 
@@ -64,70 +65,60 @@ if($link&&$DBLink_OK)
 							'$zimmerno',
 							'$curdate', 
 							'$curtime',
-							'".$HTTP_COOKIE_VARS[$local_user.$sid]."')";
+							'".$HTTP_COOKIE_VARS[$local_user.$sid]."',
+							NULL
+							)";
 				
  						if(mysql_query($sql,$link))
 						{ 
 							header("location:telesuch_phonelist.php?sid=$sid&lang=$lang&newdata=1&edit=1");
 							exit;
 						}
-			 			else {print "<p>".$sql."<p>$LDDbNoSave.";};
+			 			else {echo "<p>".$sql."<p>$LDDbNoSave.";};
     	 }
 		 else
 		 {
 		    $error=1;
 		 }
  	}
-	else
-	{
-			$sql="SELECT * FROM $dbtable ORDER BY mahophone_item DESC";
-        	$ergebnis=mysql_query($sql,$link);
-			if($ergebnis)
-       		{
-				if($zeile=mysql_fetch_array($ergebnis)) $itemno=$zeile[mahophone_item]+1;
-				 	else $itemno=1;
-			}
-			 else print "<p>".$sql."<p>$LDDbNoRead";
-	}
 }
-else print "$LDDbNoLink<br>"; 
+else echo "$LDDbNoLink<br>"; 
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 
 <HTML>
 	<HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
  	<TITLE></TITLE>
 	 
 <?php 
-require("../include/inc_css_a_hilitebu.php");
+require('../include/inc_css_a_hilitebu.php');
 ?>
 
 	</HEAD>
 
-	<BODY bgcolor=<?php print $cfg['body_bgcolor']; ?>
-<?php if (!$cfg['dhtml']){ print 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+	<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?>
+<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 
 	<FONT  COLOR="<?php echo $cfg[top_txtcolor] ?>" SIZE=6  FACE="verdana"> <b><?php echo "$LDPhoneDir $LDNewData" ?></b></font>
 
 	<table width=100% border=0 cellspacing=0 cellpadding=0>
 	<tr>
 	<td colspan=3><nobr>
-	<a href="telesuch_phonelist.php?sid=<?php print "$sid&lang=$lang&edit=$edit"; ?>"><img src=../img/<?php echo "$lang/$lang" ?>_phonedir-gray.gif border=0 <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><img src=../img/<?php echo "$lang/$lang" ?>_newdata-b.gif border=0></nobr></td>
+	<a href="telesuch_phonelist.php?sid=<?php echo "$sid&lang=$lang&edit=$edit"; ?>"><img <?php echo createLDImgSrc('../','phonedir-gray.gif','0') ?> <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><img <?php echo createLDImgSrc('../','newdata-b.gif','0') ?>></nobr></td>
 	</tr>
 	<tr>
 	<td bgcolor=#333399 colspan=3 >
-	<FONT  SIZE=2  FACE=verdana,Arial color="#ffffff"><b>
+	<FONT  SIZE=2  FACE=verdana,Arial color="#ffffff">&nbsp;<b>
    <?php
-   	   if(($newvalues=="")and($remark!="fromlist")) 
+   	   if(($newvalues=="")&&($remark!="fromlist")) 
 		{
-		
-		$curtime=date("G");
-		if ($curtime<9) print $LDGoodMorning;
-		if (($curtime>9)&&($curtime<18)) print $LDGoodDay;
-		if ($curtime>18) print $LDGoodEvening;
-		print " ".$HTTP_COOKIE_VARS[$local_user.$sid];
+		$nowtime=date(G);
+		if(($nowtime>=0)&&($nowtime<10)) echo $LDGoodMorning;
+		elseif(($nowtime > 9)&&($curtime<18)) echo $LDGoodDay;
+		elseif($nowtime > 18) echo $LDGoodEvening;
+		echo " ".$HTTP_COOKIE_VARS[$local_user.$sid];
 		}
 	?>&nbsp;&nbsp;</b>
 	</FONT>
@@ -144,16 +135,16 @@ require("../include/inc_css_a_hilitebu.php");
 
 <FONT    SIZE=-1  FACE="Arial"><p>
 <FORM action="telesuch_phonelist.php" method="post" name="newentry">
-<input type="hidden" name="sid" value="<?php print $sid; ?>">
-<input type="hidden" name="lang" value="<?php print $lang; ?>">
-<input type="hidden" name="newdata" value="<?php print $newdata ?>">
-<input type="hidden" name="edit" value="<?php print $edit ?>">
+<input type="hidden" name="sid" value="<?php echo $sid; ?>">
+<input type="hidden" name="lang" value="<?php echo $lang; ?>">
+<input type="hidden" name="newdata" value="<?php echo $newdata ?>">
+<input type="hidden" name="edit" value="<?php echo $edit ?>">
 <INPUT type="submit"  value="<?php echo $LDShowActualDir ?>"></font></FORM>
 <p>
 </FONT>
-<?php if (($error)&&($mode=="save"))
+<?php if (($error)&&($mode=='save'))
 {
-print "<img src=\"../img/catr.gif\" border=0 width=88 height=80 align=\"absmiddle\"><FONT  COLOR=maroon  SIZE=+2  FACE=Arial> <b>$LDNewPhoneEntry</b><p>";
+echo "<img ".createMascot('../','mascot1_r.gif','0','absmiddle')."><FONT  COLOR=maroon  SIZE=+2  FACE=Arial> <b>$LDNewPhoneEntry</b><p>";
 }
 ?>
 <form method="get" action="telesuch_edit.php" enctype="">
@@ -256,9 +247,8 @@ print "<img src=\"../img/catr.gif\" border=0 width=88 height=80 align=\"absmiddl
 <tr>
 <td colspan=3><FONT    SIZE=-1  FACE="Arial">
 <p>
-<input type="hidden" name="itemno" value="<?php print $itemno ?>">
-<input type="hidden" name="sid" value="<?php print $sid; ?>">
-<input type="hidden" name="lang" value="<?php print $lang; ?>">
+<input type="hidden" name="sid" value="<?php echo $sid; ?>">
+<input type="hidden" name="lang" value="<?php echo $lang; ?>">
 <input type="hidden" name="mode" value="save">
 <input type="hidden" name="edit" value="<?php echo $edit ?>">
 <input type="hidden" name="newvalues" value="1">
@@ -275,8 +265,8 @@ print "<img src=\"../img/catr.gif\" border=0 width=88 height=80 align=\"absmiddl
 <FONT    SIZE=-1  FACE="Arial">
 <p>
 <FORM action="telesuch.php" name="breaker">
-<input type="hidden" name="sid" value="<?php print $sid; ?>">
-<input type="hidden" name="lang" value="<?php print $lang; ?>">
+<input type="hidden" name="sid" value="<?php echo $sid; ?>">
+<input type="hidden" name="lang" value="<?php echo $lang; ?>">
 <INPUT type="submit"  value="<?php echo $LDCancel ?>"></font></FORM>
 <p>
 </FONT>
@@ -293,8 +283,9 @@ print "<img src=\"../img/catr.gif\" border=0 width=88 height=80 align=\"absmiddl
 </table>        
 <p>
 <?php
-require("../language/".$lang."/".$lang."_copyrite.php");
- ?>
+if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
+include('../language/'.$lang.'/'.$lang.'_copyrite.php');
+  else include('../language/en/en_copyrite.php');?>
 </FONT>
 </BODY>
 </HTML>

@@ -1,100 +1,121 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","products.php");
+
+/* Check if register globals is "on" */
+
+$reg_glob_ini=ini_get('register_globals');
+
+if(empty($reg_glob_ini)||(!$reg_glob_ini))
+{
+   include_once('../include/inc_vars_resolve.php');
+}
+
+define('LANG_FILE','products.php');
+
+if(!isset($userck)) 
+  if(isset($HTTP_GET_VARS['userck'])) $userck=$HTTP_GET_VARS['userck'];
+    elseif(isset($HTTP_POST_VARS['userck'])) $userck=$HTTP_POST_VARS['userck'];
 $local_user=$userck;
-require("../include/inc_front_chain_lang.php");
+require_once('../include/inc_front_chain_lang.php');
+
 
 switch($cat)
 {
-	case "pharma":	if ($HTTP_COOKIE_VARS[$local_user.$sid]==NULL) $cat="";  
+	case 'pharma':	if ($HTTP_COOKIE_VARS[$local_user.$sid]==NULL) $cat="";  
 							$title="$LDPharmacy - $LDOrderBotActivate";
-							$dbtable="pharma_orderlist_todo";
+							$bot_name=$LDPharmaOrderBot;
+							$dbtable='care_pharma_orderlist';
 							break;
-	case "medlager":if ($HTTP_COOKIE_VARS[$local_user.$sid]==NULL) $cat="";  
+	case 'medlager':if ($HTTP_COOKIE_VARS[$local_user.$sid]==NULL) $cat="";  
 							$title="$LDMedDepot - $LDOrderBotActivate";
-							$dbtable="med_orderlist_todo";
+							$bot_name=$LDDepotOrderBot;
+							$dbtable='care_med_orderlist';
 							break;
-	default:   {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;}; 
+	//default:   {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;}; 
 }
 
 $rows=0;
-require("../include/inc_db_makelink.php");
+/* Establish db connection */
+require('../include/inc_db_makelink.php');
 if($link&&$DBLink_OK) 
-		{
-				$sql='SELECT * FROM '.$dbtable.' WHERE status LIKE "o_%" ORDER BY t_stamp DESC';;
+{
+    /* Load the date formatter */
+    include_once('../include/inc_date_format_functions.php');
+    
+	
+    /* Load editor functions for time format converter */
+    //include_once('../include/inc_editor_fx.php');
+
+				//$sql='SELECT * FROM '.$dbtable.' WHERE status LIKE "o_%" ORDER BY t_stamp DESC';;
+				$sql='SELECT * FROM '.$dbtable.' WHERE status="pending" OR status="ack_print" ORDER BY sent_datetime DESC';;
         		if($ergebnis=mysql_query($sql,$link))
 				{
 					//count rows=linecount
 					while ($content=mysql_fetch_array($ergebnis)) $rows++;					
 					//reset result
 					if ($rows)	mysql_data_seek($ergebnis,0);
-				}else{ print "$LDDbNoRead<br>"; } 
-			//print $sql;
-		}
-  		 else { print "$LDDbNoLink<br>"; } 
+				}else{ echo "$LDDbNoRead<br>"; } 
+			//echo $sql;
+}
+else 
+{ echo "$LDDbNoLink<br>"; } 
 
 ?>
 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<meta http-equiv="refresh" content="30, url: products-bestellbot.php">
+<?php echo setCharSet(); ?>
+<meta http-equiv="refresh" content="15, url: products-bestellbot.php<?php echo "$sid&lang=$lang&userck=$userck"; ?>&cat=<?php echo $cat ?>">
 <title><?php echo $title ?></title>
 <script language=javascript>
 function goactive()
 	{
 <?php
-if (!$nofocus) print "	
- 	self.focus();
+if ($nofocus=='') echo "	
+ 	if(window.focus) window.focus();
  	";
-	if($nofocus) $nofocus=0; // toggle it to reset 	
 ?>
-	self.resizeTo(800,600);
+	window.resizeTo(800,600);
 	}
 	
 function show_order(d,o,s,t)
 {
-	url="products-bestellbot-print.php?sid=<?php print "$sid&lang=$lang&userck=$userck"; ?>&cat=<?php echo $cat ?>&dept="+d+"&order_id="+o+"&status="+s+"&t_stamp="+t;
-	powin=window.open(url,"powin","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
+	url="products-bestellbot-print.php?sid=<?php echo "$sid&lang=$lang&userck=$userck"; ?>&cat=<?php echo $cat ?>&dept="+d+"&order_nr="+o+"&status="+s+"&sent_datetime="+t;
+	<?php echo $cat.'powin'.$sid; ?>=window.open(url,"<?php echo $cat.'powin'.$sid; ?>","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
 }
 </script>
 
 </head>
-<body <?php 	if($rows) print ' bgcolor="#ffffee"  onLoad="goactive()" '; ?>
-	>
-<font face="Verdana, Arial" size=2 color=#800000>
-<MARQUEE dir=ltr scrollAmount=3 scrollDelay=120 width=150
-      height=10 align="middle"><b><?php echo "$LDIm $title" ?>...</b></MARQUEE></font>
-<p>
+<body <?php 	if($rows && !$nofocus) echo ' bgcolor="#ffffee"  onLoad="goactive()" '; ?>>
 <?php
-//print "$rows <br>";
+//echo "$rows <br>";
 if($rows)
 {
 	if($showlist)
 	{
-	print '<center>
+	echo '<center>
 			<font face=Verdana,Arial size=2>
 			<p>';
-			if ($rows>1) print $LDNewOrderMany; else print $LDNewOrder; 
-			print'<br> '.$LDClk2Ack.'<br></font><p>';
+			if ($rows>1) echo $LDNewOrderMany; else echo $LDNewOrder; 
+			echo'<br> '.$LDClk2Ack.'<br></font><p>';
 
 		$tog=1;
-		print '
+		echo '
 				<table border=0 cellspacing=0 cellpadding=0 bgcolor="#666666"><tr><td>
 				<table border=0 cellspacing=1 cellpadding=3>
   				<tr bgcolor="#ffffff">';
 		for ($i=0;$i<sizeof($LDOrderIndex);$i++)
-		print '
+		echo '
 				<td><font face=Verdana,Arial size=2 color="#000080">'.$LDOrderIndex[$i].'</td>';
-		print '
+		echo '
 				</tr>';	
 
 		$i=$rows;
@@ -102,36 +123,45 @@ if($rows)
 		while($content=mysql_fetch_array($ergebnis))
  		{
 			if($tog)
-			{ print '<tr bgcolor="#dddddd">'; $tog=0; }else{ print '<tr bgcolor="#efefff">'; $tog=1; }
-			print'
+			{ 
+			    echo '<tr bgcolor="#dddddd">'; $tog=0; }else{ echo '<tr bgcolor="#efefff">'; $tog=1;
+			}
+			
+			echo'
 				<td><font face=Verdana,Arial size=2>'.$i.'</td>
-				<td><a href="#" onClick="show_order(\''.$content[dept].'\',\''.$content[order_id].'\',\''.$content[status].'\',\''.$content[t_stamp].'\')"><img src="../img/upArrowGrnLrg.gif" width=16 height=16 border=0 alt="'.$LDClk2Ack.'"></a></td>
+				<td><a href="#" onClick="show_order(\''.$content['dept'].'\',\''.$content['order_nr'].'\',\''.$content['status'].'\',\''.$content['sent_datetime'].'\')"><img '.createComIcon('../','uparrowgrnlrg.gif','0').' alt="'.$LDClk2Ack.'"></a></td>
 				<td ><font face=Verdana,Arial size=2>'.strtoupper($content[dept]).'</td>
 				<td><font face=Verdana,Arial size=2>';
-			$buf=explode(".",$content[rec_date]);
-			print $buf[2].'.'.$buf[1].'.'.$buf[0].'</td>
-				 <td><font face=Verdana,Arial size=2>'.str_replace("24","00",$content[rec_time]).'</td>
+				
+			$buf=explode(' ',$content['sent_datetime']);
+			
+			echo formatDate2Local($buf[0],$date_format).'</td>
+				 <td><font face=Verdana,Arial size=2>'.convertTimeToLocal(str_replace('24','00',$buf[1])).'</td>
 				<td align="center">';
-			if($content[status]=="o_seen")
-				{
-				if($content[priority]=="urgent") print '<img src="../img/check-r.gif" width=21 height=15  border=0 alt="'.$LDUrgent.'">';
-				 else print '<img src="../img/check2.gif" width=21 height=15 border=0 alt="'.$LDOK.'">';
-				}
-				else if($content[priority]=="urgent")  print '<img src="../img/warn.gif" width=16 height=16  border=0 alt="'.$LDUrgent.'">';
+		   
+		   if($content['status']=='ack')
+		   {
+				 if($content['priority']=='urgent') echo '<img '.createComIcon('../','check-r.gif','0').' alt="'.$LDUrgent.'">';
+				     else echo '<img '.createComIcon('../','check2.gif','0').' alt="'.$LDOK.'">';
+			}
+			else
+			{
+			     if($content['priority']=='urgent')  echo '<img '.createComIcon('../','warn.gif','0').' alt="'.$LDUrgent.'">';
+			}
 
-			print '
+			echo '
 					</td>
 				</tr>';
 			$i--;
  		}
-		print '
+		echo '
 			</table>
 			</td></tr></table>
 			</center>';
 	}
 	else 
 	{
- 	print '<center><img src="../img/nedr.gif" width=100 height=138  border=0 align=middle>
+ 	echo '<center><img '.createMascot('../','mascot1_r.gif','0','middle').'>
 			<font face="Verdana, Arial" size=3 color=#ff0000>
 			&nbsp;<b>'.$LDOrderArrived.'</b><p>
 			<form name=ack>
@@ -147,15 +177,26 @@ if($rows)
 	
 
 }
-else if($showlist) 
+elseif($showlist) 
 	{	
 		$showlist=0;
-		print '
+		echo '
 				<script language=javascript>
-				self.resizeTo(300,150);
-				window.location.replace("products-bestellbot.php?='.$sid.'&lang='.$lang.'&cat='.$cat.'&userck='.$userck.'");
+				self.resizeTo(200,180);
 				</script>';
 	}
+	else
+	{
+	    echo '<img '.createComIcon('../','butft2_d.gif').'>';
+?>
+<font face="Verdana, Arial" size=2 color=#800000>
+<MARQUEE dir=ltr scrollAmount=3 scrollDelay=120 width=150
+      height=10 align="middle"><b><?php echo "$LDIm $bot_name" ?>...</b></MARQUEE></font>
+<p>
+<?php
+	}
+
+	    
 ?>
 </body>
 </html>

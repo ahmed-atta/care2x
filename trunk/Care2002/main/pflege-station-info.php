@@ -1,48 +1,56 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","nursing.php");
-$local_user="ck_pflege_user";
-require("../include/inc_front_chain_lang.php");
-require("../include/inc_config_color.php"); // load color preferences
-$breakfile="pflege-station-manage.php?sid=$sid&lang=$lang";
+define('LANG_FILE','nursing.php');
+$local_user='ck_pflege_user';
+require_once('../include/inc_front_chain_lang.php');
+require_once('../include/inc_config_color.php'); // load color preferences
+$breakfile='pflege-station-manage.php?sid='.$sid.'&lang='.$lang;
 
 $filename="../global_conf/$lang/doctors_abt_list.pid";
 $abtname=get_meta_tags($filename);
 
-$dbtable="nursing_station_".$lang;
+$dbtable='care_nursing_station';
 			
-	require("../include/inc_db_makelink.php");
-	if($link&&$DBLink_OK) 
-		{
+/* Establish db connection */
+require('../include/inc_db_makelink.php');
+if($link&&$DBLink_OK) 
+{
+    /* Load the date formatter */
+    include_once('../include/inc_date_format_functions.php');
+    
+		
 			switch($mode)
 			{	
-				case "show": 
+				case 'show': 
+				
 					// check if already exists
-					$sql="SELECT * FROM $dbtable WHERE station='$station'";
+					$sql='SELECT * FROM '.$dbtable.' WHERE station=\''.$station.'\'';
 					if($ergebnis=mysql_query($sql,$link))
        					{
-							$rows=0;
-							while( $dbdata=mysql_fetch_array($ergebnis)) $rows++;
-							if($rows)
+
+							if($rows = mysql_num_rows($ergebnis))
 								{
-									mysql_data_seek($ergebnis,0);
+
 									$result=mysql_fetch_array($ergebnis);
+									
 					 			}
-						}else print "$sql<br>$LDDbNoRead";
+						}else echo "$sql<br>$LDDbNoRead";
+						
 					break;
-				case "update":
+					
+				case 'update':
 									$maxbed=($bed_id2-$bed_id2)*$bedtype;
 									$sql="UPDATE $dbtable SET
 													dept='$dept',
-													description='$description',
+													description='".htmlspecialchars($description)."',
 													start_no='$start_no',
 													end_no='$end_no',
 													bedtype='$bedtype',
@@ -50,11 +58,10 @@ $dbtable="nursing_station_".$lang;
 													bed_id2='$bed_id2',
 													maxbed='$maxbed',
 													roomprefix='$roomprefix',
-													headnurse_1='$headnurse',
-													headnurse_2='$asst',
-													nurses='$nurses',
-													editor='".$HTTP_COOKIE_VARS[$local_user.$sid]."',
-													edit_date='".date("d.m.Y")."'
+													headnurse_1='".htmlspecialchars($headnurse)."',
+													headnurse_2='".htmlspecialchars($asst)."',
+													nurses='".htmlspecialchars($nurses)."',
+													modify_id='".$HTTP_COOKIE_VARS[$local_user.$sid]."'
 												WHERE
 													station='$station'";
 													
@@ -64,29 +71,28 @@ $dbtable="nursing_station_".$lang;
 											header("location:pflege-station-info.php?sid=$sid&lang=$lang&station=$station&edit=0&mode=show");
 											exit;
 										}
-										else print "$sql<br>$LDDbNoSave";
+										else echo "$sql<br>$LDDbNoSave";
 								break;
 				default:					
 					$sql="SELECT * FROM $dbtable ORDER BY station";
 					if($ergebnis=mysql_query($sql,$link))
        					{
-							$rows=0;
-							while( $dbdata=mysql_fetch_array($ergebnis)) $rows++;
-							if($rows)
-								{
-									mysql_data_seek($ergebnis,0);
-					 			}
-						}else print "$sql<br>$LDDbNoRead";
-			}
-		}
-  		 else { print "$LDDbNoLink<br>"; } 
+							$rows=mysql_num_rows($ergebnis);
+							
+							if($rows==1) $result=mysql_fetch_array($ergebnis);
+							
+						}else echo "$sql<br>$LDDbNoRead";
+			}	
+			
+}
+else { echo "$LDDbNoLink<br>"; } 
 
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 
 <script language="javascript">
 <!-- 
@@ -115,7 +121,7 @@ function gethelp(x,s,x1,x2,x3)
 </script>
 
 <?php
-require("../include/inc_css_a_hilitebu.php");
+require('../include/inc_css_a_hilitebu.php');
 ?>
 <style type="text/css" name="formstyle">
 td.pblock{ font-family: verdana,arial; font-size: 12; background-color: #ffffff}
@@ -129,30 +135,36 @@ div.pcont{ margin-left: 3; }
 
 </HEAD>
 
-<BODY bgcolor=<?php print $cfg['body_bgcolor']; ?> onLoad="if (window.focus) window.focus()" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ print 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> onLoad="if (window.focus) window.focus()" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
+<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 
 
 <table width=100% border=0 cellpadding="0" cellspacing=0>
 <tr>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10">
-<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+3  FACE="Arial"><STRONG> &nbsp; <?php echo "$LDNursing $LDStation - $LDProfile" ?></STRONG></FONT></td>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])print'<a href="javascript:window.history.back()"><img src="../img/'.$lang.'/'.$lang.'_back2.gif" width=110 height=24 border=0  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('nursing_ward_mng.php','<?php echo $mode ?>','<?php echo $edit ?>')"><img src="../img/<?php echo "$lang/$lang"; ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 alt="<?php echo $LDCloseAlt ?>"  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10">
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+3  FACE="Arial"><STRONG> &nbsp; <?php echo "$LDNursing $LDStation - $LDProfile" ?></STRONG></FONT></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
+<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc('../','back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('nursing_ward_mng.php','<?php echo $mode ?>','<?php echo $edit ?>')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
 <tr valign=top >
-<td bgcolor=<?php print $cfg['body_bgcolor']; ?> valign=top colspan=2>
+<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
  <ul>
 <?php if($rows==1) : ?>
 <p><br>
-<?php 	parse_str($result[bed_patient],$buf); ?>
-	
+<?php 	
+
+
+parse_str($result[bed_patient],$buf); 
+
+?>
+
+
 <font face="Verdana, Arial" size=-1>
-<form action="pflege-station-info.php" method="post" name="newstat" <?php if($edit) print ' onSubmit="return check(this)"'; ?>>
+<form action="pflege-station-info.php" method="post" name="newstat" <?php if($edit) echo ' onSubmit="return check(this)"'; ?>>
 <table border=0 cellpadding=3>
   <tr>
     <td class=pblock align=right><?php echo $LDStation ?>: </td>
-    <td class=pv><?php print $result[station]; ?>
+    <td class=pv><?php echo $result['station']; ?>
 </td>
   </tr>
 <tr>
@@ -160,37 +172,37 @@ div.pcont{ margin-left: 3; }
     <td class=pv><?php
                        if($edit) 
 						{
-							print '
+							echo '
 									<select name="dept" >';
 							while(list($x,$v)=each($abtname))
 							{
-								print '
+								echo '
 									<option value="'.$x.'"';
-								if($x==$result[dept]) print ' selected';
-								print '>'.$v.'</option>';
+								if($x==$result[dept]) echo ' selected';
+								echo '>'.$v.'</option>';
 							}
-							print '
+							echo '
 									</select>';
 						}
-							else print $abtname[$result[dept]]; ?>
+							else echo $abtname[$result['dept']]; ?>
 </td>
   </tr>
   <tr>
     <td class=pblock align=right valign="top"><?php echo $LDDescription ?>: </td>
-    <td class=pv><?php if($edit) print '<textarea name="description" cols=40 rows=4 wrap="physical">'.$result[description].'</textarea>';
-							else print nl2br($result[description]); ?>
+    <td class=pv><?php if($edit) echo '<textarea name="description" cols=40 rows=4 wrap="physical">'.$result['description'].'</textarea>';
+							else echo nl2br($result['description']); ?>
 </td>
   </tr>
   <tr>
     <td class=pblock align=right></font><?php echo $LDRoom1Nr ?>: </td>
-    <td class=pv><?php if($edit) print '<input type="text" name="start_no" size=4 maxlength=4 value="'.$result[start_no].'">';
-							else print $result[start_no]; ?>
+    <td class=pv><?php if($edit) echo '<input type="text" name="start_no" size=4 maxlength=4 value="'.$result['start_no'].'">';
+							else echo $result['start_no']; ?>
 </td>
   </tr>
   <tr>
     <td class=pblock align=right></font><?php echo $LDRoom2Nr ?>: </td>
-    <td class=pv><?php if($edit) print '<input type="text" name="end_no" size=4 maxlength=4 value="'.$result[end_no].'">';
-							else print $result[end_no]; ?>
+    <td class=pv><?php if($edit) echo '<input type="text" name="end_no" size=4 maxlength=4 value="'.$result['end_no'].'">';
+							else echo $result['end_no']; ?>
 </td>
   </tr>
   <tr>
@@ -209,40 +221,40 @@ div.pcont{ margin-left: 3; }
   </tr>
   <tr>
     <td class=pblock align=right><?php echo $LDRoomPrefix ?>: </td>
-    <td class=pv><?php if($edit) print '<input type="text" name="roomprefix" size=4 maxlength=4 value="'.$result[roomprefix].'">';
-							else print $result[roomprefix]; ?>
+    <td class=pv><?php if($edit) echo '<input type="text" name="roomprefix" size=4 maxlength=4 value="'.$result[roomprefix].'">';
+							else echo $result['roomprefix']; ?>
 </td>
   </tr>
 <!--   <tr>
     <td class=pblock align=right><?php echo $LDMaxBeds ?>: </td>
-    <td class=pv><?php if(!$edit) print $result[maxbed]; ?>
+    <td class=pv><?php if(!$edit) echo $result['maxbed']; ?>
 </td>
   </tr>
  -->  <tr>
     <td class=pblock align=right><?php echo $LDHeadNurse ?>: </td>
-    <td class=pv><?php if($edit) print '<input type="text" name="headnurse" size=40 maxlength=50 value="'.$result[headnurse_1].'">';
-							else print $result[headnurse_1]; ?></td>
+    <td class=pv><?php if($edit) echo '<input type="text" name="headnurse" size=40 maxlength=50 value="'.$result[headnurse_1].'">';
+							else echo $result['headnurse_1']; ?></td>
   </tr>
   <tr>
     <td class=pblock align=right><?php echo $LDHeadNurse2 ?>:</td>
-    <td class=pv><?php if($edit) print '<input type="text" name="asst" size=40 maxlength=50 value="'.$result[headnurse_2].'">';
-							else print $result[headnurse_2]; ?></td>
+    <td class=pv><?php if($edit) echo '<input type="text" name="asst" size=40 maxlength=50 value="'.$result[headnurse_2].'">';
+							else echo $result['headnurse_2']; ?></td>
   </tr>
   <tr>
     <td class=pblock align=right valign="top"><?php echo $LDNurses ?>:</td>
-    <td class=pv><?php if($edit) print '<textarea name="nurses" cols=40 rows=8 wrap="physical">'.$result[nurses].'</textarea>';
-							else print nl2br($result[nurses]); ?>
+    <td class=pv><?php if($edit) echo '<textarea name="nurses" cols=40 rows=8 wrap="physical">'.$result[nurses].'</textarea>';
+							else echo nl2br($result['nurses']); ?>
                      </td>
   </tr>
  <?php if(!$edit) : ?>
   <tr>
     <td class=pblock align=right><?php echo $LDCreatedOn ?></td>
-    <td class=pv><?php echo $result[edit_date] ?>
+    <td class=pv><?php echo formatDate2Local($result['s_date'],$date_format) ?>
                      </td>
   </tr>
   <tr>
     <td class=pblock align=right><?php echo $LDCreatedBy ?></td>
-    <td class=pv><?php echo $result[encoder] ?>
+    <td class=pv><?php echo $result['create_id'] ?>
                      </td>
   </tr>
   <?php endif ?>
@@ -253,7 +265,7 @@ div.pcont{ margin-left: 3; }
 	<?php if($edit) : ?>
 	<input type="hidden" name="mode" value="update">
 	<input type="hidden" name="edit" value="1">
-	<input type="submit" value="<?php echo $LDSave ?>">
+	<input type="image" <?php echo createLDImgSrc('../','savedisc.gif','0') ?>>
 	<?php else : ?>
 	<input type="hidden" name="mode" value="show">
     <input type="hidden" name="edit" value="1">
@@ -261,8 +273,18 @@ div.pcont{ margin-left: 3; }
 	<?php endif ?>
 </form>
 <p>
-<font face="Verdana, Arial" size=2><a href="pflege-station-info.php?sid=<?php echo "$sid&lang=$lang" ?>">
-<img src="../img/L-arrowGrnLrg.gif" width=16 height=16 border=0 align=absmiddle> <?php echo $LDOtherStations ?>:</a>
+<font face="Verdana, Arial" size=2>
+
+<?php
+if($rows>1)
+{
+?>
+<a href="pflege-station-info.php?sid=<?php echo "$sid&lang=$lang" ?>">
+<img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?> align=absmiddle> <?php echo $LDOtherStations ?>:</a>
+<?php
+}
+?>
+
 <p>
 <?php elseif($rows) : ?><font face="Verdana, Arial" size=2><p><br>
 <font color="#0000cc"><b><?php echo $LDExistStations ?></b></font><p><ul>
@@ -271,9 +293,9 @@ div.pcont{ margin-left: 3; }
 	while($result=mysql_fetch_array($ergebnis))
 	{
 		$buf='pflege-station-info.php?sid='.$sid.'&lang='.$lang.'&mode=show&station='.$result[station];
-		print '
+		echo '
 	<tr bgcolor="#efefef">
-    <td>&nbsp;<a href="'.$buf.'"><img src="../img/bul_arrowgrnsm.gif" border=0 width=12 height=12 align="absmiddle">&nbsp;&nbsp;<font face="Verdana, Arial" size=2>'.strtoupper($result[station]).'</a> &nbsp;
+    <td>&nbsp;<a href="'.$buf.'"><img '.createComIcon('../','bul_arrowgrnsm.gif','0','absmiddle').'>&nbsp;&nbsp;<font face="Verdana, Arial" size=2>'.strtoupper($result[station]).'</a> &nbsp;
 	</td> 
 	<td>&nbsp;<font face="Verdana, Arial" size=2> '.ucfirst($result['dept']).' &nbsp;  
 	</td> 
@@ -288,7 +310,7 @@ div.pcont{ margin-left: 3; }
 <?php endif ?>
 
 <a href="<?php echo $breakfile ?>">
-<img src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" border="0"></a>
+<img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border="0"></a>
 </FONT>
 
 </ul>
@@ -300,8 +322,10 @@ div.pcont{ margin-left: 3; }
 <p>
 
 <?php
-require("../language/$lang/".$lang."_copyrite.php");
- ?>
+if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
+include('../language/'.$lang.'/'.$lang.'_copyrite.php');
+  else include('../language/en/en_copyrite.php');
+  ?>
 
 </BODY>
 </HTML>

@@ -1,8 +1,8 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-define("LANG_FILE","or.php");
-$local_user="ck_op_pflegelogbuch_user";
-require("../include/inc_front_chain_lang.php");
+define('LANG_FILE','or.php');
+$local_user='ck_op_pflegelogbuch_user';
+require_once('../include/inc_front_chain_lang.php');
 $parsedstr=array();
 $globdata="sid=$sid&lang=$lang&op_nr=$op_nr&dept=$dept&saal=$saal&patnum=$patnum&pday=$pday&pmonth=$pmonth&pyear=$pyear";
 // clean the input data
@@ -10,10 +10,11 @@ $material_nr=strtr($material_nr,"§%&?/\+*~#';:,!$","                ");// conver
 $material_nr=trim($material_nr);
 //$material_nr=str_replace(" ","",$material_nr);
 
-require("../include/inc_db_makelink.php");
+/* Establish db connection */
+require('../include/inc_db_makelink.php');
 if($link&&$DBLink_OK) 
 	{	
-	  	$dbtable="nursing_op_logbook";
+	  	$dbtable='care_nursing_op_logbook';
 		$sql="SELECT container_codedlist FROM $dbtable 
 					WHERE dept='$dept'
 					AND op_room='$saal'
@@ -30,16 +31,16 @@ if($link&&$DBLink_OK)
 				$matlist=mysql_fetch_array($mat_result);
 						//$datafound=1;
 						//$pdata=mysql_fetch_array($ergebnis);
-						//print $sql."<br>";
-						//print $rows;
+						//echo $sql."<br>";
+						//echo $rows;
 			}
-					//else print "<p>".$sql."<p>Multiple entries found pls notify the edv."; 
+					//else echo "<p>".$sql."<p>Multiple entries found pls notify the edv."; 
 		}
-		else { print "$LDDbNoRead<br>$sql"; } 
+		else { echo "$LDDbNoRead<br>$sql"; } 
 
 		switch($mode)	
 		{
-		case "search":
+		case 'search':
 	  		$dbtable="steri_products_main";
 			
 			
@@ -65,12 +66,12 @@ if($link&&$DBLink_OK)
 				}
 			}
 			else break;
-			//print $sql."<br>";
+			//echo $sql."<br>";
 				if($ergebnis=mysql_query($sql,$link))
        			{
 					$art_avail=0;
 					while( $pdata=mysql_fetch_array($ergebnis)) $art_avail++;
-					//print $art_avail;
+					//echo $art_avail;
 					if($art_avail)	mysql_data_seek($ergebnis,0); //reset the variable
 						//$datafound=1;
 					if(($art_avail==1)&&(!$nonumeric))
@@ -90,7 +91,7 @@ if($link&&$DBLink_OK)
 									 $parsedstr[c]=$parsedstr[c]+1;
 									 $matbuf[$i]="b=$parsedstr[b]&a=$parsedstr[a]&n=$parsedstr[n]&i=$parsedstr[i]&c=$parsedstr[c]\r\n";
 									 $item_idx=$i;
-									 //print $i."found ".$matbuf[$i]."<br>";
+									 //echo $i."found ".$matbuf[$i]."<br>";
 									 $listchg=1;
 									 break;
 								}
@@ -110,30 +111,30 @@ if($link&&$DBLink_OK)
 						
 						$matlist[0]=strtr($matlist[0]," ","+");
 						
-						$dbtable="nursing_op_logbook";
+						$dbtable='care_nursing_op_logbook';
 						$sql="UPDATE $dbtable SET container_codedlist='$matlist[0]'
 								WHERE dept='$dept'
 								AND op_room='$saal'
 								AND op_nr='$op_nr'
 								AND op_src_date='$pyear$pmonth$pday'
 								AND patnum='$patnum'";
-						//print $sql;
+						//echo $sql;
 						if($mat_result=mysql_query($sql,$link))
 						{
 							mysql_close($link);
   							header("location:op-logbuch-container-list.php?$globdata&item_idx=$item_idx&chg=1");
 							exit;
-						}	else { print "$LDDbNoSave<br>$sql"; } 
+						}	else { echo "$LDDbNoSave<br>$sql"; } 
 						
-						//print $sql."<br>";
-						//print $rows;
+						//echo $sql."<br>";
+						//echo $rows;
 					}
-					//else print "<p>".$sql."<p>Multiple entries found pls notify the edv."; 
+					//else echo "<p>".$sql."<p>Multiple entries found pls notify the edv."; 
 				}
-				else { print "$LDDbNoRead<br>$sql"; } 
+				else { echo "$LDDbNoRead<br>$sql"; } 
 				break;
 		case "delete":
-			//print "hello delete".$art_idx;
+			//echo "hello delete".$art_idx;
 			$matbuf=explode("~",$matlist[0]);
 			array_splice($matbuf,$art_idx,1);
 			$matlist[0]=implode("~",$matbuf);
@@ -143,16 +144,16 @@ if($link&&$DBLink_OK)
 								AND op_nr='$op_nr'
 								AND op_src_date='$pyear$pmonth$pday'
 								AND patnum='$patnum'";
-			//print $sql;
+			//echo $sql;
 			if($mat_result=mysql_query($sql,$link))
 			{
 				mysql_close($link);
   				header("location:op-logbuch-container-list.php?$globdata");
 				exit;
-			}	else { print "$LDDbNoSave<br>$sql"; } 
+			}	else { echo "$LDDbNoSave<br>$sql"; } 
 			break;
 			
-		case "update":
+		case 'update':
 			$matbuf=explode("~",$matlist[0]);
 			for($i=0;$i<sizeof($matbuf);$i++)
 				{
@@ -168,23 +169,23 @@ if($link&&$DBLink_OK)
 								AND op_nr='$op_nr'
 								AND op_src_date='$pyear$pmonth$pday'
 								AND patnum='$patnum'";
-			//print "update ".$sql;
+			//echo "update ".$sql;
 			if($mat_result=mysql_query($sql,$link))
 			{
 				mysql_close($link);
   				header("location:op-logbuch-container-list.php?$globdata");
 				exit;
-			}	else { print "$LDDbNosave<br>$sql"; }  
+			}	else { echo "$LDDbNosave<br>$sql"; }  
 			break;
 		} //end of switch($mode
 }
-  else { print "$LDDbNoLink<br>"; } 
+  else { echo "$LDDbNoLink<br>"; } 
 
 
 ?>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 
  <style type="text/css" name="s2">
 .v12{ font-family:verdana,arial; color:#000000; font-size:12;}
@@ -197,14 +198,14 @@ if($link&&$DBLink_OK)
 
 function popinfo(b)
 {
-	urlholder="products-bestellkatalog-popinfo.php?sid=<?php print "$sid&lang=$lang"; ?>&keyword="+b+"&mode=search&cat=steri";
+	urlholder="products-bestellkatalog-popinfo.php?sid=<?php echo "$sid&lang=$lang"; ?>&keyword="+b+"&mode=search&cat=steri";
 	ordercatwin=window.open(urlholder,"ordercat","width=850,height=550,menubar=no,resizable=yes,scrollbars=yes");
 	}
 	
 <?php if(empty($material_nr)||($art_avail==1)) : ?>	
 function delete_item(x)
 {
-	window.location.replace('op-logbuch-container-list.php?<?php print $globdata; ?>&mode=delete&art_idx='+x);
+	window.location.replace('op-logbuch-container-list.php?<?php echo $globdata; ?>&mode=delete&art_idx='+x);
 }
 
 // -->
@@ -252,14 +253,14 @@ $rows=sizeof($matbuf);
 if(($rows==1)&&(trim($matbuf[0])=="")) $rows=0;
 if($rows)
 {
-print'
+echo'
 <form action="op-logbuch-container-list.php" method="post" name="plist" onReset="hsm()">
 <table border=0 cellpadding=0 cellspacing=0 width="100%">
   <tr>';
   for($i=0;$i<sizeof($LDContainerElements);$i++)
-  print '
+  echo '
     <td class="v12b"><b>&nbsp;'.$LDContainerElements[$i].'</b></td>';
-	print '
+	echo '
   </tr>
    <tr>
     <td colspan=7 bgcolor="#0000ff"></td>
@@ -271,17 +272,17 @@ print'
 		reset($parsedstr);
 		parse_str(trim($matbuf[$i]),$parsedstr);
 		if(strstr($parsedstr[a],"?")) $f_class="v12g"; else $f_class="v12";
-		print'
+		echo'
  	<tr ';
- 		if (($chg)&&($i==$item_idx)) print 'bgcolor="#00cccc"';
- 		print '
+ 		if (($chg)&&($i==$item_idx)) echo 'bgcolor="#00cccc"';
+ 		echo '
  		>
     <td class="'.$f_class.'">&nbsp;'.$parsedstr[a].'&nbsp;</td>
     <td class="'.$f_class.'">&nbsp;'.$parsedstr[n].'&nbsp;</td>
     <td class="'.$f_class.'">&nbsp;';
-	if($f_class=="v12") print '<a href="javascript:popinfo(\''.$parsedstr[a].'\')"><img src="../img/info3.gif" alt="'.$LDDbInfo.'" width=16 height=16 border=0 ></a>';
-		else print '<a href="#"><img src="../img/info3-pale.gif" alt="'.$LDArticleNoList.'" width=16 height=16 border=0 ></a>';
-	print '
+	if($f_class=="v12") echo '<a href="javascript:popinfo(\''.$parsedstr[a].'\')"><img src="../img/info3.gif" alt="'.$LDDbInfo.'" width=16 height=16 border=0 ></a>';
+		else echo '<a href="#"><img src="../img/info3-pale.gif" alt="'.$LDArticleNoList.'" width=16 height=16 border=0 ></a>';
+	echo '
 	&nbsp;</td>
     <td class="'.$f_class.'">&nbsp;'.$parsedstr[i].'&nbsp;</td>
     <td class="'.$f_class.'">&nbsp;'.$parsedstr[b].'&nbsp;</td>
@@ -293,7 +294,7 @@ print'
   </tr>';
   }
   
-  print '
+  echo '
 </table>
 <input type="hidden" name="sid" value="'.$sid.'">
 <input type="hidden" name="lang" value="'.$lang.'">
@@ -320,31 +321,31 @@ else
 	if($art_avail)
 	{
 
-		print '
+		echo '
 			<font size=2 face="verdana,arial">
  			<font size=4 color="#009900">
- 			<img src="../img/catr.gif" width=88 height=80 border=0 align=absmiddle> <b>'.$LDPlsClkArticle.'</b></font> 
+ 			<img '.createMascot('../','mascot1_r.gif','0','absmiddle').'> <b>'.$LDPlsClkArticle.'</b></font> 
 			<br>';
-		print'
+		echo'
 			<table border=0 cellpadding=0 cellspacing=0 width="100%">
   			<tr>
 			<td >&nbsp;</td>';
 		for($i=0;$i<(sizeof($LDContainerElements)-2);$i++)
-			print '
+			echo '
     		<td class="v12b"><b>'.$LDContainerElements[$i].'</b></td>';
-		print '
+		echo '
   			</tr>
    			<tr>
     		<td colspan=6 bgcolor="#0000ff"></td>
   			</tr>';
 	while($pdata=mysql_fetch_array($ergebnis))
 	{
-		print'
+		echo'
  		<tr bgcolor="#ffffff">
-    	<td class="v12" valign="top">&nbsp;<a href="op-logbuch-container-list.php?'.$globdata.'&mode=search&material_nr='.$pdata[bestellnum].'"><img src="../img/bul_arrowgrnlrg.gif" width=16 height=16 border=0 alt="'.$LDSelectArticle.'"></a></td>
+    	<td class="v12" valign="top">&nbsp;<a href="op-logbuch-container-list.php?'.$globdata.'&mode=search&material_nr='.$pdata[bestellnum].'"><img '.createComIcon('../','bul_arrowgrnlrg.gif','0','absmiddle').' alt="'.$LDSelectArticle.'"></a></td>
     	<td class="v12" valign="top">&nbsp;<a href="op-logbuch-container-list.php?'.$globdata.'&mode=search&material_nr='.$pdata[bestellnum].'" title="'.$LDSelectArticle.'">'.$pdata[containernum].'</a>&nbsp;</td>
     	<td class="v12" valign="top"><a href="op-logbuch-container-list.php?'.$globdata.'&mode=search&material_nr='.$pdata[bestellnum].'" title="'.$LDSelectArticle.'">'.$pdata[containername].'</a>&nbsp;</td>
-   	 	<td class="v12" valign="top">&nbsp;<a href="javascript:popinfo(\''.$pdata[bestellnum].'\')"><img src="../img/info3.gif" alt="'.$LDDbInfo.'" width=16 height=16 border=0 ></a>&nbsp;</td>
+   	 	<td class="v12" valign="top">&nbsp;<a href="javascript:popinfo(\''.$pdata[bestellnum].'\')"><img '.createComIcon('../','info3.gif','0').'></a>&nbsp;</td>
     	<td class="v12" valign="top">&nbsp;'.$pdata[industrynum].'&nbsp;</td>
     	<td class="v12" valign="top">&nbsp;'.$pdata[bestellnum].'&nbsp;</td>
  		</tr>
@@ -352,22 +353,22 @@ else
     		<td colspan=6 bgcolor="#0000ff"></td>
   		</tr>';
  	 }
-	print '
+	echo '
 	  </table>';
 			
 	}
 	else
 	{
- 		print '<center>
+ 		echo '<center>
  			<font size=2 face="verdana,arial">
  			<font size=4 color="#cc0000">
- 			<img src="../img/catr.gif" width=88 height=80 border=0 align=absmiddle> <b>'.$LDArticleNotFound.'</b><p></font> '.$LDNoArticleTxt.'<p>';
+ 			<img '.createMascot('../','mascot1_r.gif','0','absmiddle').'> <b>'.$LDArticleNotFound.'</b><p></font> '.$LDNoArticleTxt.'<p>';
 			$databuf="$sid&lang=$lang&op_nr=$op_nr&dept=$dept&saal=$saal&patnum=$patnum&pday=$pday&pmonth=$pmonth&pyear=$pyear&artikelnum=$material_nr";
-		print '
-			<a href="op-logbuch-container-entry-manual.php?sid='.$databuf.'"><img src="../img/accessrights.gif" width=35 height=35 border=0 align=absmiddle> 
+		echo '
+			<a href="op-logbuch-container-entry-manual.php?sid='.$databuf.'"><img '.createComIcon('../','accessrights.gif','0','absmiddle').'> 
 			<font size=3 > '.$LDClk2ManualEntry.'</font></a>
 			</font><p>
-			<a href="op-logbuch-container-list.php?sid='.$databuf.'"><img src="../img/'.$lang.'/'.$lang.'_cancel.gif" border="0" alt="'.$LDCancel.'">
+			<a href="op-logbuch-container-list.php?sid='.$databuf.'"><img '.createLDImgSrc('../','cancel.gif','0').' alt="'.$LDCancel.'">
 			</a>
 			</center>
 			';

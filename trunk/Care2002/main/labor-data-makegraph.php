@@ -1,29 +1,29 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","lab.php");
-define("NO_2LEVEL_CHK",1);
-require("../include/inc_front_chain_lang.php");
-if($from!="station")
-	if(!$HTTP_COOKIE_VARS["ck_lab_user".$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+define('LANG_FILE','lab.php');
+define('NO_2LEVEL_CHK',1);
+require_once('../include/inc_front_chain_lang.php');
+if($from!='station')
+	if(!$HTTP_COOKIE_VARS['ck_lab_user'.$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 
-require("../include/inc_config_color.php");
+require_once('../include/inc_config_color.php');
 
-$thisfile="labor_datainput.php";
-//$breakfile="labor_data_patient_such.php?sid=$sid&lang=$lang";
-$breakfile="javascript:window.history.back()";
-$fielddata="patnum,name,vorname,gebdatum";
+$thisfile='labor_datainput.php';
+//$breakfile="labor_data_patient_such.php?sid=".$sid."&lang=".$lang;
+$breakfile='javascript:window.history.back()';
+$fielddata='patnum,name,vorname,gebdatum';
 
-require("../include/inc_labor_param_group.php");
+require('../include/inc_labor_param_group.php');
 
-if($parameterselect=="") $parameterselect=0;
+if($parameterselect=='') $parameterselect=0;
 
 $parameters=$paralistarray[$parameterselect];					
 //$paramname=$parametergruppe[$parameterselect];
@@ -35,7 +35,7 @@ if($nostat) $ret="labor_data_patient_such.php?sid=$sid&lang=$lang&versand=1&keyw
 <HTML>
 <HEAD>
       <title><?php echo "$LDLabReport - $LDGraph" ?></title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
 <style type="text/css" name="1">
 .va12_n{font-family:verdana,arial; font-size:12; color:#000099}
 .a10_b{font-family:arial; font-size:10; color:#000000}
@@ -44,7 +44,7 @@ if($nostat) $ret="labor_data_patient_such.php?sid=$sid&lang=$lang&versand=1&keyw
 .j{font-family:verdana; font-size:12; color:#000000}
 </style>
 <?php 
-require("../include/inc_css_a_hilitebu.php");
+require('../include/inc_css_a_hilitebu.php');
 ?>
 <script language="javascript">
 <!-- Script Begin
@@ -60,14 +60,14 @@ function gethelp(x,s,x1,x2,x3)
 </script></HEAD>
 
 <BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ print 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
 
 <table  border=0 cellspacing=0 cellpadding=0 width=100%>
 <tr>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php echo "$LDLabReport - $LDGraph" ?></STRONG></FONT>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php echo "$LDLabReport - $LDGraph" ?></STRONG></FONT>
 </td>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp('lab_list.php','graph','','','<?php echo $LDGraph ?>')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp('lab_list.php','graph','','','<?php echo $LDGraph ?>')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc('../','close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
 </tr>
 
 <tr>
@@ -81,15 +81,15 @@ function gethelp(x,s,x1,x2,x3)
 <tr>
 <td bgcolor=#ffffff><FONT SIZE=-1  FACE="Arial"><?php echo $LDCaseNr ?>:
 </td>
-<td bgcolor=#ffffee><FONT SIZE=-1  FACE="Arial">&nbsp;<?php print $patnum; ?>&nbsp;
+<td bgcolor=#ffffee><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $patnum; ?>&nbsp;
 </td>
 </tr>
 
 <tr>
 <td bgcolor=#ffffff><FONT SIZE=-1  FACE="Arial"><?php echo "$LDLastName, $LDName, $LDBday" ?>:
 </td>
-<td bgcolor=#ffffee><FONT SIZE=-1  FACE="Arial">&nbsp;<b><?php print  $name; ?>, 
-<?php print  $vorname; ?>&nbsp;&nbsp;<?php print  $gebdatum; ?></b>
+<td bgcolor=#ffffee><FONT SIZE=-1  FACE="Arial">&nbsp;<b><?php echo  $name; ?>, 
+<?php echo  $vorname; ?>&nbsp;&nbsp;<?php echo  $gebdatum; ?></b>
 </td>
 </tr>
 </table>
@@ -104,34 +104,34 @@ function gethelp(x,s,x1,x2,x3)
 <table border=0 cellpadding=0 cellspacing=1>
 <?php 
 
-print'
+echo'
    <tr bgcolor="#dd0000" >
      <td class="va12_n"><font color="#ffffff"> &nbsp;<b>'.$LDParameter.'</b>
 	</td>
 	<td  class="j"><font color="#ffffff">&nbsp;<b>'.$LDNormalValue.'</b>&nbsp;</td>';
 	for($i=0;$i<$colsize;$i++)
 	{
-	print '
+	echo '
 	<td class="a12_b"><font color="#ffffff">&nbsp;<b>';
 	$dbuf="date".$i;
-	print $$dbuf.'</b>&nbsp;</td>';
+	echo $$dbuf.'</b>&nbsp;</td>';
 	}
-	print '
+	echo '
    </tr>';
 
-print'
+echo'
    <tr bgcolor="#ffddee" >
      <td class="va12_n"><font color="#ffffff"> &nbsp;
 	</td>
 	<td  class="j"><font color="#ffffff">&nbsp;</td>';
 	for($i=0;$i<$colsize;$i++)
 	{
-	print '
+	echo '
 	<td class="a12_b"><font color="#0000cc">&nbsp;<b>';
 	$dbuf="time".$i;
-	print $$dbuf.'</b> '.$LDOClock.'&nbsp;</td>';
+	echo $$dbuf.'</b> '.$LDOClock.'&nbsp;</td>';
 	}
-	print '
+	echo '
        </tr>';
 
 $pname=explode("~",$params);
@@ -147,20 +147,20 @@ for($i=1;$i<$colsize;$i++)
 
 for($l=0;$l<$rowsize;$l++)
 {
-	print'
+	echo'
    <tr bgcolor=';
-	 if($toggle) {print '"#ffdddd"'; $toggle=(!$toggle); }else { print '"#ffeeee"';$toggle=(!$toggle);}
-   print '>
+	 if($toggle) {echo '"#ffdddd"'; $toggle=(!$toggle); }else { echo '"#ffeeee"';$toggle=(!$toggle);}
+   echo '>
      <td class="va12_n"> &nbsp;<nobr><a href="#">'.strtr($pname[$l],"_-",". ").'</a></nobr> 
 	</td>
 	<td class="j">&nbsp;&nbsp;</td>
 	<td class="j"  colspan="'.$colsize.'">
 	<img src="../imgcreator/labor-datacurve.php?sid='.$sid.'&lang='.$lang.'&patnum='.$patnum.'&parameter='.$pname[$l].'&tid='.$tid.'" border=0>
 	</td>';
-	print '
+	echo '
 	</tr>';
 }
-	print '
+	echo '
 </table>';     
 
 ?>                                         
@@ -170,7 +170,7 @@ for($l=0;$l<$rowsize;$l++)
 
 <ul>
 <p>
-<a href="<?php echo $breakfile ?>"><img src="../img/<?php echo "$lang/$lang" ?>_back2.gif" border="0" width=110 height=24 alt="<?php echo $LDBack ?>"></a>
+<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> alt="<?php echo $LDBack ?>"></a>
 
 
 </UL>
@@ -179,8 +179,9 @@ for($l=0;$l<$rowsize;$l++)
 
 
 <?php
-require("../language/$lang/".$lang."_copyrite.php");
- ?>
+if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
+include('../language/'.$lang.'/'.$lang.'_copyrite.php');
+  else include('../language/en/en_copyrite.php');?>
 
 </td>
 </tr>

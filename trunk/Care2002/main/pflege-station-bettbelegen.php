@@ -1,31 +1,32 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define("LANG_FILE","nursing.php");
-$local_user="ck_pflege_user";
-require("../include/inc_front_chain_lang.php");
-require("../include/inc_config_color.php");
+define('LANG_FILE','nursing.php');
+$local_user='ck_pflege_user';
+require_once('../include/inc_front_chain_lang.php');
+require_once('../include/inc_config_color.php');
 
-$datum=strftime("%d.%m.%Y");
-$zeit=strftime("%H.%M");
+/* Load date formatter */
+require_once('../include/inc_date_format_functions.php');
+
+
+$datum=date('Y-m-d');
+$zeit=date('H:m:s');
 $toggler=0;
 // init sql dbase 
 
-$dbtable="mahopatient";
+$dbtable='care_admission_patient';
 
 $fieldname=array($LDPatListElements[4],$LDLastName,$LDName,$LDBirthDate);
 			
-$fielddata="patnum, 
-		name, 
-		vorname, 
-		gebdatum";
+$fielddata="patnum, name, vorname, gebdatum";
 
 if(($pnum=="")&&($name=="")&&($vname=="")&&($gdatum=="")) $mode="";
 
@@ -35,7 +36,7 @@ if(is_numeric($pnum)) $pnum=(int)$pnum;
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php echo setCharSet(); ?>
  <TITLE><?php echo $LDAssignOcc ?></TITLE>
 
 
@@ -58,7 +59,7 @@ function belegen(anum)
 		if((anum=="lock")&&(!confirm("<?php echo $LDConfirmLock ?>")))  return;
 
              <?php
-            print '
+            echo '
 	          urlholder="pflege-station.php?mode=newdata&sid='.$sid.'&lang='.$lang.'&station='.$s.'&rm='.$rm.'&bd='.$bd.'&pyear='.$py.'&pmonth='.$pm.'&pday='.$pd.'&patnum="+anum;
 	               ';
              ?>
@@ -77,10 +78,18 @@ function gethelp(x,s,x1,x2,x3)
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
+
+<?php require('../include/inc_checkdate_lang.php'); ?>
+
 // -->
 </script>
+
+<script language="javascript" src="../js/checkdate.js" type="text/javascript"></script>
+
+<script language="javascript" src="../js/setdatetime.js"></script>
+
 <?php if($d)
-{ print' 
+{ echo' 
 	<script language="javascript" src="../js/hilitebu.js">
 	</script>';
 }
@@ -90,15 +99,15 @@ function gethelp(x,s,x1,x2,x3)
 <BODY bgcolor=white  topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 link="#800080" vlink="#800080" onLoad="if (window.focus) window.focus();document.psearch.pnum.select();">
 <table width=100% border=0 cellpadding="5" cellspacing=0 >
 <tr>
-<td bgcolor="<?php print "#".$tb; ?>" >
-<FONT  COLOR="<?php print "#".$tt; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php print "$LDAssignOcc $s"; ?></STRONG></FONT>
+<td bgcolor="<?php echo "#".$tb; ?>" >
+<FONT  COLOR="<?php echo "#".$tt; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php echo "$LDAssignOcc $s"; ?></STRONG></FONT>
 </td>
-<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp('nursing_station.php','assign','','<?php echo $s ?>','<?php echo $LDAssignOcc ?>')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:window.close();" ><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp('nursing_station.php','assign','','<?php echo $s ?>','<?php echo $LDAssignOcc ?>')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:window.close();" ><img <?php echo createLDImgSrc('../','close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
 </tr>
 <tr>
 <td colspan=2>
-<font face=verdana,arial ><?php echo $LDPatListElements[0] ?>: <b><?php print $rm; ?></b> &nbsp;<?php echo $LDPatListElements[1] ?>: <b><?php print $bd; ?></b>&nbsp;
-<a href="javascript:belegen('lock')" title="<?php echo $LDClk2LockBed ?>"><img src="../img/delete2.gif" border=0 width=20 height=20 alt="<?php echo $LDClk2LockBed ?>" align="absmiddle"><?php echo $LDLockThisBed ?></a>
+<font face=verdana,arial ><?php echo $LDPatListElements[0] ?>: <b><?php echo $rm; ?></b> &nbsp;<?php echo $LDPatListElements[1] ?>: <b><?php echo $bd; ?></b>&nbsp;
+<a href="javascript:belegen('lock')" title="<?php echo $LDClk2LockBed ?>"><img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?> alt="<?php echo $LDClk2LockBed ?>"> <?php echo $LDLockThisBed ?></a>
 <p>
  <ul>
  
@@ -131,9 +140,9 @@ function gethelp(x,s,x1,x2,x3)
 	  </tr>
 	  <tr>
 	    <td align=right><font face=verdana,arial size=2><?php echo $LDBirthDate ?>:</td>
- 	   <td><input type="text" name="gdatum" size=20 maxlength=20 value=<?php echo $gdatum; ?>>
+ 	   <td><input type="text" name="gdatum" size=8 maxlength=8 value="<?php echo $gdatum; ?>"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')"   onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"> <font face=verdana,arial size=2>[ <?php $dbuf='LD_'.strtr($date_format,'./-','psh'); echo $$dbuf; ?> ]
  	       </td>
-		   <td><input type="reset" value="<?php echo $LDReset ?>">
+		   <td> <a href="javascript:window.close()"><img <?php echo createLDImgSrc('../','cancel.gif','0') ?>></a>
 	       </td>
 	  </tr>
 	</table>
@@ -141,82 +150,171 @@ function gethelp(x,s,x1,x2,x3)
    </tr>
  </table>
   
- <input type="hidden" name="sid" value="<?php print $sid; ?>">
- <input type="hidden" name="lang" value="<?php print $lang; ?>">
- <input type="hidden" name="tb" value="<?php print $tb; ?>">
- <input type="hidden" name="tt" value="<?php print $tt; ?>">
- <input type="hidden" name="bb" value="<?php print $bb; ?>">
- <input type="hidden" name="s" value="<?php print $s; ?>">
- <input type="hidden" name="rm" value="<?php print $rm; ?>">
- <input type="hidden" name="bd" value="<?php print $bd; ?>">
- <input type="hidden" name="py" value="<?php print $py; ?>">
- <input type="hidden" name="pm" value="<?php print $pm; ?>">
- <input type="hidden" name="pd" value="<?php print $pd; ?>">
- <input type="hidden" name="d" value="<?php print $d; ?>">                                                      
+ <input type="hidden" name="sid" value="<?php echo $sid; ?>">
+ <input type="hidden" name="lang" value="<?php echo $lang; ?>">
+ <input type="hidden" name="tb" value="<?php echo $tb; ?>">
+ <input type="hidden" name="tt" value="<?php echo $tt; ?>">
+ <input type="hidden" name="bb" value="<?php echo $bb; ?>">
+ <input type="hidden" name="s" value="<?php echo $s; ?>">
+ <input type="hidden" name="rm" value="<?php echo $rm; ?>">
+ <input type="hidden" name="bd" value="<?php echo $bd; ?>">
+ <input type="hidden" name="py" value="<?php echo $py; ?>">
+ <input type="hidden" name="pm" value="<?php echo $pm; ?>">
+ <input type="hidden" name="pd" value="<?php echo $pd; ?>">
+ <input type="hidden" name="d" value="<?php echo $d; ?>">                                                      
  <input type="hidden" name="mode" value="search">
   <p>
-<input type="image" src="../img/<?php echo "$lang/$lang" ?>_searchlamp.gif" border=0 width=108 height=24 alt="<?php echo $LDSearchPatient ?>" align="absmiddle">
 </FONT>
- </form>
- <a href="javascript:window.close()"><img src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" width=103 height=24 border=0></a>
+
+<input type="image" <?php echo createLDImgSrc('../','searchlamp.gif','0','absmiddle') ?> alt="<?php echo $LDSearchPatient ?>" > 
+</form>
 </ul>
 
 <?php
-if($mode=="search")
+/**
+* Function to fetch the actual occupancy list of the station in a given day
+* Used to check whether the patient is already checked-in in the station or not
+* globals:  $s = station, $py = year, $pm = month, $pd = day, $LDDbNoLink = no db link error message
+* $ergebnis = the resulting array from db table care_admission_patient search
+* $new_zeile = buffer for filtered arrays
+* db table used = nursing_station_patients
+*/
+function f_checkBedOccupancy(){
+
+  global $link, $s, $py, $pm, $pd, $LDDbNoLink, $ergebnis, $new_zeile, $linecount, $lang;
+  
+  $sql="SELECT bed_patient FROM care_nursing_station_patients WHERE station='".$s."' AND s_date='".$py."-".$pm."-".$pd."' AND lang='".$lang."'";
+  if($result=mysql_query($sql,$link))
+  {
+  	$rows=mysql_num_rows($result);
+    if($rows==1) 
+	{
+	   $bed_occ=mysql_fetch_array($result);
+	     $pat_count=0;
+		  while($zeile=mysql_fetch_array($ergebnis))
+		  {
+		    if(eregi($zeile['patnum'],$bed_occ['bed_patient'])) continue;
+			else
+			 {
+				 $new_zeile[]=$zeile;
+				 $pat_count++;
+			 }
+		   }
+	       return $pat_count;
+	 }
+	  elseif($rows>1) die ($LDErrorDuplicateBed);
+        else 
+		{
+		  while($new_zeile[]=mysql_fetch_array($ergebnis))
+				 $pat_count++;
+		  return $pat_count;
+		}
+  }
+  else 
+  {
+    echo $LDDbNoLink."<p>";
+	return 0;
+  }
+}
+	
+/**
+* Here begins the search routine
+*/
+if($mode=='search')
 {
 	$pnum=trim($pnum);
 	if(is_numeric($pnum)) $pnum=(int)$pnum;
 	$name=trim($name);
 	$vname=trim($vname);
 	$gdatum=trim($gdatum);
-	$sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE name LIKE "'.$name.'%" AND vorname LIKE "'.$vname.'%" AND patnum LIKE "'.$pnum.'%" AND gebdatum LIKE "'.$gdatum.'%" AND discharge_date=""';
-	//$sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE name LIKE "'.$name.'%" AND vorname LIKE "'.$vname.'%" AND patnum LIKE "'.$pnum.'%" AND gebdatum LIKE "'.$gdatum.'%"';
-//	if(($name==NULL)||($name==""))	$sql=str_replace('name LIKE "'.$name.'%" AND','',$sql);
-	include("../include/inc_db_makelink.php");
+
+	include('../include/inc_db_makelink.php');
 	if($link&&$DBLink_OK)
 		{
-        	$ergebnis=mysql_query($sql,$link);
+            include_once('../include/inc_date_format_functions.php');
+            
+			
+	        $sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE name LIKE "'.$name.'%" 
+	                                                                      AND vorname LIKE "'.$vname.'%" 
+																		  AND patnum LIKE "'.$pnum.'%" 
+																		  AND gebdatum LIKE "'.$gdatum.'%" 
+																		  AND (discharge_date="" 
+																		           OR discharge_date="0000-00-00")
+																		  AND ( 
+																		           discharge_art="chg_ward" 
+																				   OR discharge_art="chg_bed" 
+																				   OR discharge_art="")
+																		  AND ( 
+																		           at_station="0"
+																				   OR at_station="")';
+			
 			$linecount=0;
-			if($ergebnis)
+        	//$ergebnis=mysql_query($sql,$link);
+			if($ergebnis=mysql_query($sql,$link))
        		{
-				while ($zeile=mysql_fetch_array($ergebnis)) $linecount++;
-				print "<hr><ul>".str_replace("~nr~",$linecount,$LDSearchFound).$LDPlsClk."<br>\r\n";
+				$linecount=mysql_num_rows($ergebnis);
 				if ($linecount>0) 
 				{ 
-					mysql_data_seek($ergebnis,0);
-					print "<table border=0 cellpadding=3 cellspacing=1> <tr bgcolor=orange>\r\n";
-					for($i=0;$i<sizeof($fieldname);$i++) 
+				
+					 /*  "Same patient entry bug" patch:  If patient is already assigned do not show him. patched = 2002-08-10 */
+				  $pat_count=f_checkBedOccupancy();
+				  if($pat_count)
 					{
-						print"<td><font face=arial size=2><b>".$fieldname[$i]."</b></td>\r\n";
-		
-					}
-					print "</tr>\r\n";
-					while($zeile=mysql_fetch_array($ergebnis))
-					{
-						print "<tr bgcolor=";
-						if($toggle) { print "#cecece>"; $toggle=0;} else {print "#ffffaa>"; $toggle=1;};
-	
-						for($i=0;$i<mysql_num_fields($ergebnis);$i++) 
+			         echo "<hr><font face=arial size=2><ul>".str_replace("~nr~",$pat_count,$LDSearchFound).$LDPlsClk."<br>\r\n";
+					  //mysql_data_seek($ergebnis,0);
+					  echo "<table border=0 cellpadding=3 cellspacing=1> <tr bgcolor=orange>\r\n";
+					  for($i=0;$i<sizeof($fieldname);$i++) 
+					  {
+						echo"
+						<td><font face=arial size=2><b>".$fieldname[$i]."</b></td>\r\n";
+					  }
+					  echo "
+					  </tr>\r\n";
+					
+					  $elem_buf=array("patnum","name","vorname");
+					 
+					  for($z=0;$z<$pat_count;$z++)
+					  {
+						echo "
+						<tr bgcolor=";
+						if($toggle) { echo "#cecece>"; $toggle=0;} else {echo "#ffffaa>"; $toggle=1;};
+            			while(list($x,$v)=each($elem_buf))
 						{
-							print"<td><font face=arial size=2>";
-							if($zeile[$i]=="")print "&nbsp;"; else print $zeile[$i];
-							print "</td>\r\n";
-
-						}	
-						print "<td><a href=\"javascript:belegen('".$zeile['patnum']."')\"><button onClick=\"javascript:belegen('".$zeile['patnum']."')\"><img src=\"../img/post_discussion.gif\" width=20 height=20 border=0 alt=\"$LDAssign2Bed\"></button></a></td>\r\n";
-						print "</tr>\r\n";
-					}
-					print "</table></ul>";
-					print "
-								<script language='javascript'>window.resizeTo(700,600);</script>
+						   echo "
+							<td><font face=arial size=2>";
+							if($new_zeile[$z][$v]=="")echo "&nbsp;"; else echo $new_zeile[$z][$v];
+							echo "
+							</td>\r\n";
+						}
+    					   echo "
+							<td><font face=arial size=2>";
+							if($new_zeile[$z]['gebdatum']=="")echo "&nbsp;"; else echo formatDate2Local($new_zeile[$z]['gebdatum'],$date_format);
+							echo "
+							</td>\r\n";
+						reset($elem_buf);
+/*						echo "
+						<td><a href=\"javascript:belegen('".$new_zeile[$z]['patnum']."')\"><button onClick=\"javascript:belegen('".$new_zeile[$z]['patnum']."')\"><img ".createLDImgSrc('../','ok_small.gif','0')." alt=\"$LDAssign2Bed\"></button></a></td>\r\n";
+						echo "
+*/						echo "
+						<td><a href=\"javascript:belegen('".$new_zeile[$z]['patnum']."')\"><img ".createLDImgSrc('../','ok_small.gif','0')." alt=\"$LDAssign2Bed\"></a></td>\r\n";
+						echo "
+						</tr>\r\n";
+					   }
+					   echo "
+					   </table></ul>";
+					   echo "
+						<script language='javascript'>window.resizeTo(700,600);</script>
 							";
-								
-				}
+				    } // end of if ($pat_count)
+					else echo "<hr><ul><img ".createMascot('../','mascot1_r.gif','0','absmiddle')."><font face=arial size=2>".$LDNoFound."<br>\r\n";
+				} // end of if($linecount)
+				else  echo "<hr><ul><img ".createMascot('../','mascot1_r.gif','0','absmiddle')."><font face=arial size=2>".$LDNoFound."<br>\r\n";
+
 			}
-			 else {print "<p>$sql$LDDbNoRead";exit;}
+			 else {echo "<p>$sql$LDDbNoRead";exit;}
 	}
 	else 
-		{ print "$LDDbNoLink<br>$sql<br>"; }
+		{ echo "$LDDbNoLink<br>$sql<br>"; }
 
 }
 ?>
@@ -225,11 +323,12 @@ if($mode=="search")
 </td>
 </tr>
 </table>        
-<p>
 
+<hr>
 <?php
-require("../language/$lang/".$lang."_copyrite.php");
- ?>
+if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
+include('../language/'.$lang.'/'.$lang.'_copyrite.php');
+  else include('../language/en/en_copyrite.php');?>
 
 </BODY>
 </HTML>
