@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.07 - 2003-08-29
+* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
 * GNU General Public License
-* Copyright 2002 Elpidio Latorilla
+* Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -79,6 +79,7 @@ if(($mode=='')||($mode=='fresh')){
 				$patient[$buf['room_nr']][$buf['bed_nr']]=$buf;
 			}
 			$patients_ok=true;
+			$occup='ja';
 		}else{
 			$patients_ok=false;
 		}
@@ -411,7 +412,7 @@ for ($i=$ward_info['room_nr_start'];$i<=$ward_info['room_nr_end'];$i++){
 	     // else $occ_list.='unlock(\''.strtoupper($j).'\',\''.$i.'\')" title="'.$LDInfoUnlock.'">'.$LDLocked; //$j=bed   $i=room number
 	  $occ_list.='<a href="';
 	    if(!$bed_locked) $occ_list.=$root_path.'modules/registration_admission/aufnahme_pass.php'.URL_APPEND.'&target=search&fwd_nr='.$bed['encounter_nr'].'" title="'.$LDClk2Show.'">'; 
-	      else $occ_list.='unlock(\''.strtoupper($j).'\',\''.$i.'\')" title="'.$LDInfoUnlock.'">'.$LDLocked; //$j=bed   $i=room number
+	      else $occ_list.='javascript:unlock(\''.strtoupper($j).'\',\''.$i.'\')" title="'.$LDInfoUnlock.'">'.$LDLocked; //$j=bed   $i=room number
 	   
 	}
 	else 
@@ -461,7 +462,11 @@ for ($i=$ward_info['room_nr_start'];$i<=$ward_info['room_nr_end'];$i++){
 	{
 		$occ_list.='
 			<td><nobr>';
-		if(($is_patient)&&!empty($bed['encounter_nr'])){	$occ_list.='&nbsp;
+		if(($is_patient)&&!empty($bed['encounter_nr'])){	
+
+		$occ_list.='&nbsp;<a href="'.$root_path.'modules/registration_admission/aufnahme_pass.php'.URL_APPEND.'&target=search&fwd_nr='.$bed['encounter_nr'].'" title="'.$LDAdmissionData.' : '.$LDClk2Show.'">';
+		$occ_list.='<img '.createComIcon($root_path,'pdata.gif','0').' alt="'.$LDAdmissionData.' : '.$LDClk2Show.'"></a>';
+		$occ_list.='
 			<a href="javascript:getinfo(\''.$bed['encounter_nr'].'\')"><img '.createComIcon($root_path,'open.gif','0').' alt="'.$LDShowPatData.'"></a>
 	 		<a href="javascript:getrem(\''.$bed['encounter_nr'].'\')"><img ';
 			if($bed['ward_notes']) $occ_list.=createComIcon($root_path,'bubble3.gif','0'); 

@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /*
-CARE 2002 Integrated Information System beta 1.0.06 - 2003-08-06 for Hospitals and Health Care Organizations and Services
+CARE 2X Integrated Information System beta 1.0.08 - 2003-10-05 for Hospitals and Health Care Organizations and Services
 Copyright (C) 2002  Elpidio Latorilla & Intellin.org	
 
 GNU GPL. For details read file "copy_notice.txt".
@@ -39,28 +39,21 @@ $updatefile='personell_register.php';
 $default_photo_path=$root_path.'fotos/registration';
 $photo_filename='nopic';
 
-//$dbtable='care_encounter';
+#Check whether the origin is phone directory and if session personnel nr. is ok
+if($HTTP_SESSION_VARS['sess_user_origin']=='phonedir'&&$HTTP_SESSION_VARS['sess_personell_nr']){
+	$personell_nr=$HTTP_SESSION_VARS['sess_personell_nr'];
+}else{
+	$HTTP_SESSION_VARS['sess_personell_nr']=$personell_nr;
+}
 
-/* Establish db connection */
-if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
-if($dblink_ok) {
-
-/*		$sql='SELECT * FROM '.$dbtable.' AS enc LEFT JOIN care_person AS reg ON reg.pid = enc.pid
-		         WHERE enc.encounter_nr="'.$encounter_nr.'"';
-				 
-       	if($ergebnis=$db->Execute($sql)) {
-		    if($ergebnis->RecordCount()) {
-                 $encounter=$ergebnis->FetchRow();
-		 	     while(list($x,$v)=each($encounter)) $$x=$v;
-		    }
-		}*/
 	//if(!empty($GLOBAL_CONFIG['patient_financial_class_single_result'])) $encounter_obj->setSingleResult(true);	
 	$personell_obj->loadPersonellData($personell_nr);
 	if($personell_obj->is_loaded) {
 		$row=&$personell_obj->personell_data;
 		
 		//load data
-		while(list($x,$v)=each($row)) {$$x=$v;}
+		//while(list($x,$v)=each($row)) {$$x=$v;}
+		extract($row);
 	
 		//$insurance_class=&$encounter_obj->getInsuranceClassInfo($insurance_class_nr);
 		//$encounter_class=&$encounter_obj->getEncounterClassInfo($encounter_class_nr);
@@ -89,9 +82,7 @@ if($dblink_ok) {
 	//$current_ward_name=$ward_obj->WardName($current_ward_nr);
 	/* Check whether config path exists, else use default path */			
 	$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $default_photo_path;
-} else { 
-	echo "$LDDbNoLink<br>"; 
-} 
+
 
 /* Prepare text and resolve the numbers */
 require_once($root_path.'include/inc_patient_encounter_type.php');		 

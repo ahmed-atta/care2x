@@ -210,7 +210,7 @@ if($error)
 <td bgcolor="#eeeeee">
 <FONT SIZE=-1  FACE="Arial" ><?php echo $full_pnr;  ?>
 </td>
-<td rowspan=7 align="right"><img <?php echo $img_source ?> width=137>
+<td rowspan=7 align="center"><img <?php echo $img_source ?>>
 </td>
 </tr>
 
@@ -352,7 +352,7 @@ if($GLOBAL_CONFIG['patient_name_middle_show'])
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDContractClass ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input name="contract_start" type="text" size="30" value="<?php echo $contract_class; ?>" >
+<td colspan=2 bgcolor="#eeeeee"><input name="contract_class" type="text" size="30" value="<?php echo $contract_class; ?>" >
 </td>
 </tr>
 <tr>
@@ -464,11 +464,11 @@ if($GLOBAL_CONFIG['patient_name_middle_show'])
 <input type="hidden" name="insurance_show" value="<?php echo $insurance_show; ?>">
 
 <?php if($update) echo '<input type="hidden" name=update value=1>'; ?>
-<input  type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?> onClick=hidecat() alt="<?php echo $LDSaveData ?>" align="absmiddle"> 
-<a href="<?php echo $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDResetData ?>" onClick=hidecat()  align="absmiddle"></a>
+<input  type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?>  alt="<?php echo $LDSaveData ?>" align="absmiddle"> 
+<a href="<?php echo $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDResetData ?>"   align="absmiddle"></a>
 <!-- Note: uncomment the ff: line if you want to have a reset button  -->
 <!-- 
-<a href="javascript:document.aufnahmeform.reset()"><img <?php echo createLDImgSrc($root_path,'reset.gif','0') ?> alt="<?php echo $LDResetData ?>" onClick=hidecat()  align="absmiddle"></a> 
+<a href="javascript:document.aufnahmeform.reset()"><img <?php echo createLDImgSrc($root_path,'reset.gif','0') ?> alt="<?php echo $LDResetData ?>"   align="absmiddle"></a> 
 -->
 <?php if($error==1) 
 echo '<input type="hidden" name="forcesave" value="1">
@@ -491,7 +491,7 @@ echo '<input type="hidden" name="forcesave" value="1">
 <input type="hidden" name="sid" value=<?php echo $sid; ?>>
 <input type="hidden" name="personell_nr" value="<?php echo $personell_nr; ?>">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
-<input type=submit value="<?php echo $LDNewForm ?>" onClick=hidecat()>
+<input type=submit value="<?php echo $LDNewForm ?>" >
 </form>
 <?php endif; ?>
 <p>
@@ -522,9 +522,9 @@ if(defined('MASCOT_SHOW') && MASCOT_SHOW==1)
 }
 ?>
 
-<p>
+<!-- <p>
 <a href="<?php echo $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
-</ul>
+ --></ul>
 <p>
 
 <?php

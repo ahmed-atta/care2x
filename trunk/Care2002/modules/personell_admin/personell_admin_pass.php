@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
+* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
 * GNU General Public License
-* Copyright 2002 Elpidio Latorilla
+* Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -27,7 +27,7 @@ switch($target)
 	case 'personell_reg':$fileforward='personell_register.php'.$append.'&origin=pass&target=person_reg'; 
 						$lognote='personell data entry ok';
 						break;
-	case 'personell_search':$fileforward='personell_search.php'.$append.'&origin=pass&target=personell_search'; 
+	case 'personell_search':$fileforward='personell_search.php'.$append.'&fwd_nr='.$fwd_nr.'&origin=pass&target=personell_search'; 
 						$lognote='Personell search  ok';
 						 break;
 	case 'personell_listall':$fileforward='personell_listall.php'.$append.'&origin=pass&target=personell_listall'; 
@@ -35,7 +35,7 @@ switch($target)
 						 break;
 	default: $target='person_reg';
 				$lognote='Person register ok';
-				$fileforward='personell_register.php'.$append.'&origin=pass&target=personell_reg'; 
+				$fileforward='personell_register.php'.$append.'&fwd_nr='.$fwd_nr.'&origin=pass&target=personell_reg'; 
 }
 
 

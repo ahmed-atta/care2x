@@ -2,6 +2,22 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
+/**
+* CARE2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
+* GNU General Public License
+* Copyright 2002,2003,2004,2003,2004 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+
+# Default value for the maximum nr of rows per block displayed, define this to the value you wish
+# In normal cases this value is derived from the db table "care_config_global" using the "insurance_list_max_block_rows" element.
+define('MAX_BLOCK_ROWS',30); 
+# Define to 1 if the search the returns single result should be automatically redirect to user input page
+define('REDIRECT_SINGLERESULT',1);
+
+$lang_tables[]='search.php';
 define('LANG_FILE','or.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
@@ -9,18 +25,15 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 if (!$internok&&!$HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 
 # initializations
-$thisfile='oploginput.php';
+$thisfile=basename(__FILE__);
 $pdata=array();
 
 if(!isset($thisday)||empty($thisday)) $thisday=date('Y-m-d');
 list($pyear,$pmonth,$pday)=explode('-',$thisday);
 
-# Set to edit mode
-$edit=true;
-
-# Resolve the department and op room 
-
-$datafound=0;
+$edit=true; # Set to edit mode
+$datafound=FALSE; # The flag for op record
+$patientfound=FALSE; # The flag for the patient
 
 $md=$pday;
 if(strlen($md)==1) $md='0'.$md;
@@ -28,16 +41,79 @@ if(strlen($md)==1) $md='0'.$md;
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 $enc_obj=new Encounter;
 
-    # Load the date formatter 
-    require_once($root_path.'include/inc_date_format_functions.php');
+# Load the date formatter 
+require_once($root_path.'include/inc_date_format_functions.php');
 
-    # Load editor functions for time format converter 
-    //include_once('../include/inc_editor_fx.php');
+# Consider search and paginate modes separately
+if($mode=='search'||$mode=='paginate'){
 
-	# get orig data 
-	switch($mode)
-	{
-		case 'save':	
+		# Initialize page's control variables
+		if($mode=='paginate'){
+			$sk=$HTTP_SESSION_VARS['sess_searchkey'];
+			//$searchkey='USE_SESSION_SEARCHKEY';
+			//$mode='search';
+		}else{
+			# Reset paginator variables
+			$pgx=0;
+			$totalcount=0;
+			$odir='ASC';
+			$oitem='name_last';
+		}
+		# Paginator object
+		require_once($root_path.'include/care_api_classes/class_paginator.php');
+		$pagen=new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
+		
+		$GLOBAL_CONFIG=array();
+		require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+		$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
+
+		# Get the max nr of rows from global config
+		$glob_obj->getConfig('or_patient_search_max_block_rows');
+		if(empty($GLOBAL_CONFIG['or_patient_search_max_block_rows'])) $pagen->setMaxCount(MAX_BLOCK_ROWS); # Last resort, use the default defined at the start of this page
+			else $pagen->setMaxCount($GLOBAL_CONFIG['or_patient_search_max_block_rows']);
+		
+		# Save the search keyword for eventual pagination routines
+		if($mode=='search'){
+
+			if(empty($gebdatum))
+				if(empty($pname))
+					if(empty($enc_nr)) ;
+					else $sk=$enc_nr;
+				else $sk=$pname;
+			else $sk=$gebdatum;
+			# Save searchkey to sessin for subsequent paginations
+			$HTTP_SESSION_VARS['sess_searchkey']=$sk;
+		}
+		# Convert other wildcards
+		$sk=strtr($sk,'*?','%_');
+
+		$result=&$enc_obj->searchLimitEncounterBasicInfo($sk,$pagen->MaxCount(),$pgx,$oitem,$odir);
+		//echo $enc_obj->getLastQuery();
+		# Get the resulting record count
+		$linecount=$enc_obj->LastRecordCount();
+		if($linecount==1&&$mode=='search'&&REDIRECT_SINGLERESULT){
+			$pdata=$result->FetchRow();
+			header("location:oploginput.php".URL_REDIRECT_APPEND."&mode=get&enc_nr=".$pdata['encounter_nr']."&dept_nr=$dept_nr&saal=$saal&op_nr=$op_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear");
+			exit;
+		}
+		//$linecount=$address_obj->LastRecordCount();
+		$pagen->setTotalBlockCount($linecount);
+		# Count total available data
+		if(isset($totalcount)&&$totalcount){
+			$pagen->setTotalDataCount($totalcount);
+		}else{
+			@$enc_obj->searchEncounterBasicInfo($sk);
+			$totalcount=$enc_obj->LastRecordCount();
+			$pagen->setTotalDataCount($totalcount);
+		}
+		$pagen->setSortItem($oitem);
+		$pagen->setSortDirection($odir);
+
+	}else{
+		# Switch any futher modes
+		switch($mode){
+		
+			case 'save':	
 		
 				$dbtable='care_nursing_op_logbook';
 				
@@ -48,34 +124,30 @@ $enc_obj=new Encounter;
 							AND dept_nr='$dept_nr'
 							AND op_room='$saal'";
 							
-				if($ergebnis=$db->Execute($sql))
-       			{
+				if($ergebnis=$db->Execute($sql)){
 
 					$rows=$ergebnis->RecordCount();
 					
-					if($rows==1)
-						{
+					if($rows==1){
 						 	$item=$ergebnis->FetchRow();
 							// $dbuf=htmlspecialchars($dbuf);
 							$content=$ergebnis->FetchRow();
 							
 							$content[encoding].=' ~e='.$encoder.'&d='.date('Y-m-d').'&t='.date('H:i:s');
 							
-							if($entry_time||$content['entry_out'])
-							{
-									$dbuf=explode('~',$content['entry_out']);
-									sort($dbuf,SORT_REGULAR);
-									if(trim($entry_time)) $dbuf[0]='s='.$entry_time.'&e='.$exit_time; 
-										else array_splice($dbuf,0,1);
-									$content['entry_out']=implode('~',$dbuf); 
+							if($entry_time||$content['entry_out']){
+								$dbuf=explode('~',$content['entry_out']);
+								sort($dbuf,SORT_REGULAR);
+								if(trim($entry_time)) $dbuf[0]='s='.$entry_time.'&e='.$exit_time; 
+									else array_splice($dbuf,0,1);
+								$content['entry_out']=implode('~',$dbuf); 
 							}
-							if($cut_time||$content['cut_close'])
-							{
-									$dbuf=explode('~',$content['cut_close']);
-									sort($dbuf,SORT_REGULAR);
-									if(trim($cut_time)) $dbuf[0]='s='.$cut_time.'&e='.$close_time;
-										else array_splice($dbuf,0,1);
-									$content['cut_close']=implode('~',$dbuf);
+							if($cut_time||$content['cut_close']){
+								$dbuf=explode('~',$content['cut_close']);
+								sort($dbuf,SORT_REGULAR);
+								if(trim($cut_time)) $dbuf[0]='s='.$cut_time.'&e='.$close_time;
+									else array_splice($dbuf,0,1);
+								$content['cut_close']=implode('~',$dbuf);
 							}
 
 							$sql="UPDATE $dbtable 
@@ -92,43 +164,34 @@ $enc_obj=new Encounter;
 							if(!empty($result_info)){
 								$sql.=",result_info=CONCAT(result_info,'".htmlspecialchars($result_info)."\n')";
 							}
+							
 							$sql.="	WHERE nr=".$item['nr']; 
-
-/*							$sql.="	WHERE encounter_nr='$enc_nr' 
-											AND op_nr='$op_nr'
-											AND dept_nr='$dept_nr'
-											AND op_room='$saal'";
-*/											
-							if($ergebnis=$db->Execute($sql))
-       							{
-									//echo $sql." new update <br>";
-									header("location:$thisfile?sid=$sid&lang=$lang&mode=saveok&enc_nr=$enc_nr&dept_nr=$dept_nr&saal=$saal&thisday=$thisday&op_nr=$op_nr");
-								}
-								else { echo "$sql<br>$LDDbNoSave<br>"; }
-						} // else create new entry
-						else
-						{
-							// first get the last op number
+											
+							if($ergebnis=$db->Execute($sql)){
+								//echo $sql." new update <br>";
+								header("location:$thisfile?sid=$sid&lang=$lang&mode=saveok&enc_nr=$enc_nr&dept_nr=$dept_nr&saal=$saal&thisday=$thisday&op_nr=$op_nr");
+							}else{
+								echo "$sql<br>$LDDbNoSave<br>";
+							}
+						}else{	# else create new entry
+							# first get the last op number
 	  						$dbtable='care_nursing_op_logbook';
 							
 		 					$sql="SELECT op_nr FROM $dbtable WHERE dept_nr='$dept_nr'	AND op_room='$saal' ORDER BY op_nr DESC";
 							//echo $sql;
 							
-							if($ergebnis=$db->Execute($sql))
-       						{
+							if($ergebnis=$db->Execute($sql)){
 
-								if($rows=$ergebnis->RecordCount())
-								{
+								if($rows=$ergebnis->RecordCount()){
 									$pdata=$ergebnis->FetchRow();
 									$op_nr=$pdata[op_nr]+1;
 									//echo $sql."<br>";
-								}
-									else
-								{
+								}else{
 									$op_nr=1;
 								}
-							}
-							else { echo "$LDDbNoRead<br>";exit; } 
+							}else{
+								echo "$LDDbNoRead<br>";exit;
+							} 
 							
 							
 							if($entry_time) $eobuf="s=$entry_time&e=$exit_time";
@@ -173,29 +236,18 @@ $enc_obj=new Encounter;
 										'".date('H:i:s')."'
 										)";
 
-							if($ergebnis=$db->Execute($sql))
-       							{
-									//echo $sql." new insert <br>";
+							if($ergebnis=$db->Execute($sql)){
+								//echo $sql." new insert <br>";
 									
-									header("location:$thisfile?sid=$sid&lang=$lang&mode=saveok&enc_nr=$enc_nr&dept_nr=$dept_nr&saal=$saal&thisday=$thisday&op_nr=$op_nr");
-								}
-								else { echo "$sql<br>$LDDbNoSave<br>"; } 
+								header("location:$thisfile?sid=$sid&lang=$lang&mode=saveok&enc_nr=$enc_nr&dept_nr=$dept_nr&saal=$saal&thisday=$thisday&op_nr=$op_nr");
+							}else{
+								echo "$sql<br>$LDDbNoSave<br>";
+							} 
 						}//end of else
 					} // end of if ergebnis
 
 			 break;
 			 
-	  case 'search':
-			if(empty($gebdatum))
-				if(empty($pname))
-					if(empty($enc_nr)) ;
-					else $sk=$enc_nr;
-				else $sk=$pname;
-			else $sk=$gebdatum;
-			
-			$result=$enc_obj->searchEncounterBasicInfo($sk);
-			break;// end of case search
-
 	  case 'get':
 			if($enc_obj->loadEncounterData($enc_nr)){
 				$rows=$enc_obj->record_count;
@@ -203,7 +255,8 @@ $enc_obj=new Encounter;
 				$lname=$pdata['name_last'];
 				$fname=$pdata['name_first'];
 				$bdate=$pdata['date_birth'];
-				$datafound=1;
+				//$datafound=1;
+				$patientfound=TRUE;
 					//echo $sql."<br>";
 			}
 			break;// end of case search
@@ -225,22 +278,24 @@ $enc_obj=new Encounter;
 						AND encounter_nr='$enc_nr'
 						AND op_nr='$op_nr'";
 
-			if($ergebnis=$db->Execute($sql))
-       		{
+			if($ergebnis=$db->Execute($sql)){
 				$rows=$ergebnis->RecordCount();
-				if($rows==1)
-				{
+				if($rows==1){
 					$arr=$ergebnis->FetchRow();
 					$pdata=array_merge($pdata,$arr);
-					$datafound=1;
+					$datafound=TRUE;
+					$patientfound=TRUE;
 					//echo $sql."<br>";
-				}
-				else echo "<p>".$sql."<p>Multiple entries found pls notify the edv."; 
-			}
-				else { echo "$LDDbNoRead<br>"; } 
+				}else{
+					echo "<p>".$sql."<p>Multiple entries found pls notify the edv.";
+				} 
+			}else{
+				echo "$LDDbNoRead<br>";
+			} 
 		}
 	 		break;
 	  } // end of switch mode
+}
 
 if(!session_is_registered('sess_comdat')) session_register('sess_comdat');
 # Set the user origin
@@ -248,7 +303,6 @@ $HTTP_SESSION_VARS['sess_user_origin']='op_room';
 $HTTP_SESSION_VARS['sess_comdat']="&dept_nr=$dept_nr&saal=$saal&thisday=$pyear-$pmonth-$pday&op_nr=$op_nr&pyear=$pyear&pmonth=$pmonth&pday=$pday";
 
 ?>
-
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
@@ -515,14 +569,15 @@ switch($mode)
 	case 'edit': echo 'resettimebars();resettimeframe();'; break;
 	default: echo 'resetlogdisplays();';
 }
-if(!$datafound) echo 'document.oppflegepatinfo.enc_nr.focus();';
+if(!$patientfound) echo 'document.oppflegepatinfo.enc_nr.focus();';
 ?>
 "  marginheight="0" bgcolor="silver" alink="#0000ff" vlink="#0000ff" link="#0000ff" >
 
 <FORM METHOD="post" ACTION="oploginput.php?mode=save" name="oppflegepatinfo" onSubmit="return checksubmit()">
 
 <TABLE  CELLPADDING=0 CELLSPACING=0 border=0 width=100%>
-<TR><TD bgcolor=navy>
+<TR>
+<TD bgcolor=navy>
 
 <font face=verdana,arial size=1 color="#ffffff">
 <?php if($op_nr) : ?>
@@ -537,139 +592,147 @@ if(!$datafound) echo 'document.oppflegepatinfo.enc_nr.focus();';
 ?>
 
 &nbsp;
-<?php if($datafound) : ?>
+<?php
+if($datafound||$patientfound){
+?>
 <!--  <input type="submit" value="save" name="versand"> -->
 <a href="javascript:document.oppflegepatinfo.submit()"><img <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?> width=99 height=24 align=absmiddle alt="<?php echo $LDSaveLatest ?>"></a>
-<?php endif ?>
+<?php
+}
+?>
 </TD>
 
 <td align=right bgcolor="navy" >
-<?php if($datafound) { ?>
-<a href="oploginput.php?sid=<?php echo "$sid&lang=$lang&dept_nr=$dept_nr&saal=$saal" ?>&mode=fresh">
-<img <?php echo createLDImgSrc($root_path,'newpat2.gif','0','absmiddle') ?> alt="<?php echo $LDStartNewDocu ?>"></a>
-<?php } ?>
-<?php if($op_nr) { ?>
-<DIV id=dFunctions 
-style=" VISIBILITY: hidden; POSITION: absolute; top:20px">
-<TABLE cellSpacing=1 cellPadding=0 bgColor=#000000 border=0>
-  <TR>
-    <TD>
-      <TABLE cellSpacing=1 cellPadding=7 width="100%" bgColor=#ffccee 
-        border=0><TBODY>
-        <TR>
-          <TD bgColor=#ffccee><font face=arial size=2><nobr>
-		  <A onmouseover=clearTimeout(timer) 
-            onmouseout="timer=setTimeout('hsm()',500)"  onClick="document.oppflegepatinfo.xx2.value='drg'"
-            href="javascript:openDRGComposite()">
-			<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>> <?php echo $LDPerformance ?>
-            </A><BR>
-			<A onmouseover=clearTimeout(timer) 
-            onmouseout="timer=setTimeout('hsm()',500)"  onClick="document.oppflegepatinfo.xx2.value='material'"
-            href="op-logbuch-material-parentframe.php?sid=<?php echo "$sid&lang=$lang&op_nr=$op_nr&enc_nr=".$pdata['encounter_nr']."&dept_nr=$dept_nr&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>" target="OPLOGMAIN">
-			<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>> <?php echo $LDUsedMaterial ?>
-            </A><BR>
-		  <A onmouseover=clearTimeout(timer) 
-            onmouseout="timer=setTimeout('hsm()',500)"    onClick="document.oppflegepatinfo.xx2.value='container'"
-            href="op-logbuch-material-parentframe.php?sid=<?php echo "$sid&lang=$lang&mode=cont&op_nr=$op_nr&enc_nr=".$pdata['encounter_nr']."&dept_nr=$dept_nr&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>" target="OPLOGMAIN">
-			<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>> <?php echo $LDContainer ?>
-            </A><BR>
-			<A onmouseover=clearTimeout(timer) 
-            onmouseout="timer=setTimeout('hsm()',500)" 
-            href="oplogmain.php?sid=<?php echo "$sid&lang=$lang&op_nr=$op_nr&enc_nr=".$pdata['encounter_nr']."&dept_nr=$dept_nr&saal=$saal&thisday=$thisday"; ?>" target="OPLOGMAIN">
-			<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>> <?php echo $LDShowLogbook ?>
-            </A><BR></nobr></TD></TR></TABLE></TD></TR></TBODY></TABLE></DIV>
-<a href="javascript:ssm('dFunctions'); clearTimeout(timer)" 
-      onmouseout="timer=setTimeout('hsm()',1000)" ><FONT  COLOR="white"  SIZE=3 face=verdana,arial >
-	  <img <?php echo createLDImgSrc($root_path,'funktion.gif','0','absmiddle') ?> alt="<?php echo $LDClk2DropMenu ?>"></a>
+<?php 
+if($op_nr) { 
+?>
 
 <?php } ?>
-
-<DIV id=dLogoTable 
-style=" VISIBILITY: hidden; POSITION: absolute; top:20px">
-<TABLE cellSpacing=1 cellPadding=0 bgColor=#000000 border=0>
-  <TR>
-    <TD>
-      <TABLE cellSpacing=1 cellPadding=7 width="100%" bgColor=#ffccee 
-        border=0><TBODY>
-        <TR>
-          <TD bgColor=#ffccee><font face=arial size=2><nobr>
-		  <img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>> 
-			<A onmouseover=clearTimeout(timer) onmouseout="timer=setTimeout('hsm()',500)" 
-            href="op-pflege-logbuch-xtsuch-start.php?sid=<?php echo "$sid&lang=$lang&internok=$internok&dept_nr=$dept_nr&saal=$saal"; ?>&user=<?php echo str_replace(' ','+',$op_pflegelogbuch_user); ?>" target="_parent"><?php echo $LDSearchPatient ?>
-            </A><BR>
-			<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>>  
-			 <A onmouseover=clearTimeout(timer) onmouseout="timer=setTimeout('hsm()',500)" 
-            href="op-pflege-logbuch-arch-start.php?sid=<?php echo "$sid&lang=$lang&internok=$internok&dept_nr=$dept_nr&saal=$saal"; ?>&user=<?php echo str_replace(' ','+',$op_pflegelogbuch_user); ?>"  target="_parent"><?php echo $LDArchive ?>
-			</A>
-	</nobr><BR></TD></TR></TABLE></TD></TR></TBODY></TABLE></DIV>
-
-<a href="javascript:ssm('dLogoTable'); clearTimeout(timer)" 
-      onmouseout="timer=setTimeout('hsm()',1000)" ><FONT  COLOR="white"  SIZE=3 face=verdana,arial >
-	  <img <?php echo createLDImgSrc($root_path,'archive.gif','0','absmiddle') ?> alt="<?php echo $LDClk2DropMenu ?>"></a>
-
-<a href="javascript:gethelp('oplog.php','create','<?php echo $mode ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?> alt="<?php echo $LDHelp ?>"></a>
-<a href="javascript:if(!window.parent.opener.closed)window.parent.opener.focus();window.parent.close();">
-<img <?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?> alt="<?php echo $LDClose ?>"></a><br>
+<?php 
+if($datafound) { 
+?>
+<A onClick="document.oppflegepatinfo.xx2.value='drg'"
+    href="javascript:openDRGComposite()"><img <?php echo createLDImgSrc($root_path,'drg.gif','0','absmiddle') ?> 
+	alt="<?php echo $LDDRG ?>"></a><A onClick="document.oppflegepatinfo.xx2.value='material'"
+    href="op-logbuch-material-parentframe.php?sid=<?php echo "$sid&lang=$lang&op_nr=$op_nr&enc_nr=".$pdata['encounter_nr']."&dept_nr=$dept_nr&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>" target="OPLOGMAIN"><img <?php echo createLDImgSrc($root_path,'material.gif','0','absmiddle') ?> 
+	alt="<?php echo $LDUsedMaterial ?>"></a><A onClick="document.oppflegepatinfo.xx2.value='container'"
+    href="op-logbuch-material-parentframe.php?sid=<?php echo "$sid&lang=$lang&mode=cont&op_nr=$op_nr&enc_nr=".$pdata['encounter_nr']."&dept_nr=$dept_nr&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>" target="OPLOGMAIN"><img <?php echo createLDImgSrc($root_path,'instrument.gif','0','absmiddle') ?> 
+	alt="<?php echo $LDContainer ?>"></a><?php } ?><a href="javascript:gethelp('oplog.php','create','<?php echo $mode ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?> 
+	alt="<?php echo $LDHelp ?>"></a><a href="javascript:if(!window.parent.opener.closed)window.parent.opener.focus();window.parent.close();"><img <?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?> 
+	alt="<?php echo $LDClose ?>"></a><br>
 </td>
 </TR>
+
+<tr>
+<td colspan=2 align=right bgcolor=navy>
+<?php 
+if($datafound) { 
+?>
+<A href="oplogmain.php?sid=<?php echo "$sid&lang=$lang&op_nr=$op_nr&enc_nr=".$pdata['encounter_nr']."&dept_nr=$dept_nr&saal=$saal&thisday=$thisday"; ?>" 
+	target="OPLOGMAIN"><img <?php echo createLDImgSrc($root_path,'showlogbook.gif','0','absmiddle') ?>
+	alt="<?php echo $LDClk2DropMenu ?>"></a><?php 
+}
+?><a 
+	href="oploginput.php?sid=<?php echo "$sid&lang=$lang&dept_nr=$dept_nr&saal=$saal" ?>&mode=fresh"><img <?php echo createLDImgSrc($root_path,'newpat2.gif','0','absmiddle') ?> 
+	alt="<?php echo $LDStartNewDocu ?>"></a><A href="op-pflege-logbuch-xtsuch-start.php?sid=<?php echo "$sid&lang=$lang&internok=$internok&dept_nr=$dept_nr&saal=$saal"; ?>&user=<?php echo str_replace(' ','+',$op_pflegelogbuch_user); ?>" target="_parent"><img <?php echo createLDImgSrc($root_path,'searchlamp.gif','0','absmiddle') ?> 
+	alt="<?php echo $LDSearchPatient ?>"></a><A href="op-pflege-logbuch-arch-start.php?sid=<?php echo "$sid&lang=$lang&internok=$internok&dept_nr=$dept_nr&saal=$saal"; ?>&user=<?php echo str_replace(' ','+',$op_pflegelogbuch_user); ?>"  
+	target="_parent"><img <?php echo createLDImgSrc($root_path,'archive.gif','0','absmiddle') ?> 
+	alt="<?php echo $LDArchive ?>"></a><br>
+
+</td>
+</tr>
+
+
 </TABLE>
 
-<?php if(($mode=='search')&&!$datafound)
-{
+<FONT  SIZE=2  FACE="verdana,Arial">
+<?php
+if(($mode=='search'||$mode=='paginate')&&!$datafound){
+	
+	echo '<center>'; 
+
+	if($linecount){
+	
+	$append="&dept_nr=$dept_nr&saal=$saal&op_nr=$op_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear";
+
+	# Preload  common icon images
+	$img_male=createComIcon($root_path,'spm.gif','0');
+	$img_female=createComIcon($root_path,'spf.gif','0');
+	$bgimg='tableHeaderbg3.gif';
+	$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
+
+	if ($linecount) echo str_replace("~nr~",$totalcount,$LDSearchFound).' '.$LDShowing.' '.$pagen->BlockStartNr().' '.$LDTo.' '.$pagen->BlockEndNr().'.';
+		else echo str_replace('~nr~','0',$LDSearchFound); 
+	echo ' <font  face=verdana,arial><font color="#800000" size=3>'.$LDPlsClk1.'</font><font size=2 ><br>';
 
 ?>
-			<center>
+
 			
-				<table cellpadding=0 cellspacing=0 border=0 >
+				<table cellpadding=0 cellspacing=0 border=0>
 				<tr>
 				<td>	
 			<img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?>>
 			</td>
 				<td valign=top>
-				<table cellpadding=1 cellspacing=0 border=0 >
+				<table cellpadding=1 cellspacing=0 border=0>
+				
 				<tr>
 				<td bgcolor="#999999">
-				<table cellpadding=10 cellspacing=0 border=0 bgcolor="#eeeeee">
-				<tr ><td >
+				<table cellpadding=2 cellspacing=0 border=0 bgcolor="#eeeeee">
+
+				<tr bgcolor="#abcdef">				
+
+    			 <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+	  			<?php echo $pagen->makeSortLink($LDPatientNr,'encounter_nr',$oitem,$odir,$append);  ?></b></td>
+      			<td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+	  			<?php echo $pagen->makeSortLink($LDSex,'sex',$oitem,$odir,$append);  ?></b></td>
+      			<td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+	  			<?php echo $pagen->makeSortLink($LDLastName,'name_last',$oitem,$odir,$append);  ?></b></td>
+      			<td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+	  			<?php echo $pagen->makeSortLink($LDName,'name_first',$oitem,$odir,$append);  ?></b></td>
+      			<td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+	  			<?php echo $pagen->makeSortLink($LDBday,'date_birth',$oitem,$odir,$append);  ?></b></td>
+				</tr>
+				
+				
 				
 <?php	
-	if($enc_obj->record_count){
-		echo '<font  face=verdana,arial>
-			<font color="#800000" size=4>'.$LDPlsClk1.'</font>
-			<font size=2 ><br>';
 
    		while($pdata=$result->FetchRow()){
-				echo "
-						<a href=\"oploginput.php?sid=$sid&lang=$lang&mode=get&enc_nr=".$pdata['encounter_nr']."&dept_nr=$dept_nr&saal=$saal&op_nr=$op_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear\">";
-				echo '<img '.createComIcon($root_path,'arrow.gif','0','middle').'>';
+			$ahref="<a href=\"oploginput.php".URL_APPEND."&mode=get&enc_nr=".$pdata['encounter_nr']."&dept_nr=$dept_nr&saal=$saal&op_nr=$op_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear\">";
+			
+			echo '<tr ><td><FONT  SIZE=2  FACE="verdana,Arial">'.$ahref;
+			if($sk&&stristr($pdata['encounter_nr'],$sk)) echo '<u><b><span style="background:yellow"> '.$pdata['encounter_nr'].'</span></b></u>';
+ 					else echo $pdata['encounter_nr'];				
+			echo '</a></td><td>';
+			echo $ahref;
+			switch($pdata['sex']){
+					case 'f': echo '<img '.$img_female.'>'; break;
+					case 'm': echo '<img '.$img_male.'>'; break;
+					default: echo '&nbsp;'; break;
+			}	
+				
+			echo '</a></td><td><FONT  SIZE=2  FACE="verdana,Arial">'.$ahref;
 				if($sk&&stristr($pdata['name_last'],$sk)) echo '<u><b><span style="background:yellow"> '.$pdata['name_last'].'</span></b></u>';
  					else echo $pdata['name_last'];				
- 				echo ', ';
+			echo '</a></td><td><FONT  SIZE=2  FACE="verdana,Arial">'.$ahref;
 				if($sk&&stristr($pdata['name_first'],$sk)) echo '<u><b><span style="background:yellow"> '.$pdata['name_first'].'</span></b></u>';
  					else echo $pdata['name_first'];				
- 				echo ' (';
+			echo '</a></td><td><FONT  SIZE=2  FACE="verdana,Arial">';
 				if($sk&&stristr($pdata['date_birth'],$sk)) echo '<u><b><span style="background:yellow"> '.formatDate2Local($pdata['date_birth'],$date_format).'</span></b></u>';
  					else echo formatDate2Local($pdata['date_birth'],$date_format);				
- 				echo ')  ';
-/*				switch($pdata['encounter_class_nr'])
-				{
-					case 1: $full_en=$pdata['encounter_nr']+$GLOBAL_CONFIG['patient_inpatient_nr_adder'];
-								break;
-					case 2: $full_en=$pdata['encounter_nr']+$GLOBAL_CONFIG['patient_outpatient_nr_adder'];
-								break;
-				}
-*/				if($sk&&stristr($pdata['encounter_nr'],$sk)) echo '<u><b><span style="background:yellow"> '.$pdata['encounter_nr'].'</span></b></u>';
- 					else echo $pdata['encounter_nr'];				
- 				echo '<br> ';
+ 				echo '</td></tr> ';
 		}	
-		
+			echo '
+						<tr><td colspan=4><font face=arial size=2>'.$pagen->makePrevLink($LDPrevious,$append).'</td>
+						<td align=right><font face=arial size=2>'.$pagen->makeNextLink($LDNext,$append).'</td>
+						</tr>';
 	}else{
 		echo '<font  face=verdana,arial>
 			<font color="#800000" size=4>'.$LDPatientNotFound.'</font>
 			<font size=2 ><br>'.$LDPlsEnoughData;
 	}
-	echo '		</td>
-				</tr>
+	echo '	
 				</table>
 				</td>
 				</tr>
@@ -734,14 +797,15 @@ if($pdata['encounter_nr']=='')
 
 <TD valign="top" width=130><font face=verdana,arial size=1  color="<?php if($datafound) echo "#0000cc"; else echo "#3f3f3f"; ?>">
 
-<?php if($datafound)
-	{
+<?php 
+if($datafound){
 	 echo '<a href="'.$root_path.'modules/drg/drg-icd10.php?sid='.$sid.'&lang='.$lang;
 	 echo "&pn=".$pdata['encounter_nr']."&ln=$lname&fn=$fname&bd=$bdate&opnr=$op_nr&dept_nr=$dept_nr&oprm=$saal";
 	 echo '" target="OPLOGMAIN">'.$LDDiagnosis.':</a><br>
-<textarea name="diagnosis" cols=16 rows=8 wrap="physical" ></textarea>';
-	}
-	else echo $LDDiagnosis;
+	<textarea name="diagnosis" cols=16 rows=8 wrap="physical" ></textarea>';
+}else{
+	echo $LDDiagnosis;
+}
 ?>
 </TD>
 

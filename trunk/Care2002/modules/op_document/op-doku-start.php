@@ -3,13 +3,18 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
+* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
 * GNU General Public License
-* Copyright 2002 Elpidio Latorilla
+* Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+
+# Default value for the maximum nr of rows per block displayed, define this to the value you wish
+# In normal cases this value is derived from the db table "care_config_global" using the "insurance_list_max_block_rows" element.
+define('MAX_BLOCK_ROWS',30); 
+define('REDIRECT_SINGLERESULT',0); # Define to 1 if single result must be redirected to input page
 
 function createElement($item,$err, $f_size=7, $mx=5)
 {
@@ -37,16 +42,26 @@ function createElement($item,$err, $f_size=7, $mx=5)
 	return $ret_str;
 }
 
-$lang_tables=array('doctors.php');
+$lang_tables[]='doctors.php';
+$lang_tables[]='search.php';
+$lang_tables[]='prompt.php';
 define('LANG_FILE','or.php');
 $local_user='ck_opdoku_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-if(!isset($dept_nr)||empty($dept_nr)){
-	header('Location:op-doku-select-dept.php'.URL_REDIRECT_APPEND.'&target=entry');
-	exit;
+# Check if department nr and OR nr are available from user config
+if(!isset($dept_nr)||!$dept_nr){
+	if(isset($cfg['thispc_dept_nr'])&&!empty($cfg['thispc_dept_nr'])){
+		$dept_nr=$cfg['thispc_dept_nr'];
+	}else{
+		header('Location:op-doku-select-dept.php'.URL_REDIRECT_APPEND.'&target=entry');
+		exit;
+	}
 }
-/* Create encounter object */
+
+if(!isset($target)||empty($target)) $target='entry';
+
+# Create encounter object
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 $enc_obj= new Encounter;
 /* Save dept name to session */
@@ -65,7 +80,7 @@ $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('patient_%');	
 
 
-if ((substr($matchcode,0,1)=='%')||(substr($matchcode,0,1)=='&')) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+if ((substr($matchcode,0,1)=='%')||(substr($matchcode,0,1)=='&')) {header("Location:'.$root_path.'language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 
 require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
@@ -85,7 +100,8 @@ if(!isset($dept)||empty($dept))
 		else $dept='plop'; // default department is plop
 
 $linecount=0;
-// check date for completeness
+
+# check date for completeness
 
 if($mode=='save')
 {
@@ -118,17 +134,9 @@ if($dblink_ok)
 	if(isset($pn) && !empty($pn)){
 		$enc_obj->where=" encounter_nr=$pn";
 	    if( $enc_obj->loadEncounterData($pn)) {
-/*			switch ($enc_obj->EncounterClass())
-			{
-		    	case '1': $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-		                   break;
-				case '2': $full_en = ($pn + $GLOBAL_CONFIG['patient_outpatient_nr_adder']);
-							break;
-				default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-			}						
-*/			
-			$full_en=$pn;
 			
+			$full_en=$pn;
+
 			if( $enc_obj->is_loaded){
 				$result=&$enc_obj->encounter;		
 				$rows=$enc_obj->record_count;	
@@ -139,20 +147,68 @@ if($dblink_ok)
 		} 	
 	}
 		
-	switch($mode)
-	{
-			case 'search':
-			
-							$encounter=$enc_obj->searchEncounterBasicInfo($searchkey);
-							$rows=$enc_obj->record_count;
-							if($rows==1)
-							{
-								$row=$encounter->FetchRow();
-								header("location:op-doku-start.php?sid=$sid&lang=$lang&target=$target&pn=".$row['encounter_nr']."&dept_nr=$dept_nr");
-								exit;
-							}
-							break;
-											
+	# Filter the search and paginate modes
+	if($mode=='search'||$mode=='paginate'){
+
+		# Initialize page's control variables
+		if($mode=='paginate'){
+			$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
+			//$searchkey='USE_SESSION_SEARCHKEY';
+			//$mode='search';
+		}else{
+			# Reset paginator variables
+			$pgx=0;
+			$totalcount=0;
+			$odir='ASC';
+			$oitem='name_last';
+		}
+		# Paginator object
+		require_once($root_path.'include/care_api_classes/class_paginator.php');
+		$pagen=new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
+
+		//require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+		//$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
+
+		# Get the max nr of rows from global config
+		$glob_obj->getConfig('patient_search_max_block_rows');
+		if(empty($GLOBAL_CONFIG['patient_search_max_block_rows'])) $pagen->setMaxCount(MAX_BLOCK_ROWS); # Last resort, use the default defined at the start of this page
+			else $pagen->setMaxCount($GLOBAL_CONFIG['patient_search_max_block_rows']);
+
+		# Convert other wildcards
+		$searchkey=strtr($searchkey,'*?','%_');
+		# Save the search keyword for eventual pagination routines
+		if($mode=='search') $HTTP_SESSION_VARS['sess_searchkey']=$searchkey;
+
+		include_once($root_path.'include/inc_date_format_functions.php');
+		include_once($root_path.'include/care_api_classes/class_encounter.php');
+		$enc_obj=new Encounter;
+
+		$encounter=& $enc_obj->searchLimitEncounterBasicInfo($searchkey,$pagen->MaxCount(),$pgx,$oitem,$odir);
+		//echo $enc_obj->getLastQuery();
+		# Get the resulting record count
+		$rows=$enc_obj->LastRecordCount();
+		if($rows==1&&$mode=='search'){
+			$row=$encounter->FetchRow();
+			header("location:op-doku-start.php?sid=$sid&lang=$lang&target=$target&pn=".$row['encounter_nr']."&dept_nr=$dept_nr");
+			exit;
+		}
+		//$linecount=$address_obj->LastRecordCount();
+		$pagen->setTotalBlockCount($linecount);
+		# Count total available data
+		if(isset($totalcount)&&$totalcount){
+			$pagen->setTotalDataCount($totalcount);
+		}else{
+			@$enc_obj->searchEncounterBasicInfo($searchkey);
+			$totalcount=$enc_obj->LastRecordCount();
+			$pagen->setTotalDataCount($totalcount);
+		}
+		$pagen->setSortItem($oitem);
+		$pagen->setSortDirection($odir);
+	
+	}else{
+		# switch possible modes
+		switch($mode){
+									
 			case 'update':
 			
 							$dbtable='care_op_med_doc';
@@ -299,7 +355,8 @@ if($dblink_ok)
 			
 					if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) $mode="dummy";
 					
-	} // end of switch
+		} // end of switch
+	}
 }else { echo "$LDDbNoLink<br>"; }
 
 ?>
@@ -338,25 +395,68 @@ function lookmatch(d)
 	return false;
 }
 
-function setDay(d)
-{
-	var h="<?php echo date("d.m.Y"); ?>";
-	switch(d.value)
-	{
-		case "h": d.value=h; break;
-		case "H": d.value=h; break;
-		case "g": d.value=g; break;
-		case "G": d.value=g; break;
-		default: d.value="";
+<?php 
+if($mode!='saveok'){
+?>
+function chkForm(d){
+	if(d.op_date.value==""){
+		alert("<?php echo $LDPlsEnterDate; ?>");
+		d.op_date.focus();
+		return false;
+	}else if(d.operator.value==""){
+		alert("<?php echo $LDPlsEnterDoctor; ?>");
+		d.operator.focus();
+		return false;
+	}else if(d.diagnosis.value==""){
+		alert("<?php echo $LDPlsEnterDiagnosis; ?>");
+		d.diagnosis.focus();
+		return false;
+	}else if(d.localize.value==""){
+		alert("<?php echo $LDPlsEnterLocalization; ?>");
+		d.localize.focus();
+		return false;
+	}else if(d.therapy.value==""){
+		alert("<?php echo $LDPlsEnterTherapy; ?>");
+		d.therapy.focus();
+		return false;
+	}else if(d.special.value==""){
+		alert("<?php echo $LDPlsEnterNotes; ?>");
+		d.special.focus();
+		return false;
+	}else if(d.class_s.value==""&&d.class_m.value==""&&d.class_l.value==""){
+		alert("<?php echo $LDPlsEnterClassification; ?>");
+		d.class_s.focus();
+		return false;
+	}else if(d.op_start.value==""){
+		alert("<?php echo $LDPlsEnterStartTime; ?>");
+		d.op_start.focus();
+		return false;
+	}else if(d.op_end.value==""){
+		alert("<?php echo $LDPlsEnterEndTime; ?>");
+		d.op_end.focus();
+		return false;
+	}else if(d.scrub_nurse.value==""){
+		alert("<?php echo $LDPlsEnterScrubNurse; ?>");
+		d.scrub_nurse.focus();
+		return false;
+	}else if(d.op_room.value==""){
+		alert("<?php echo $LDPlsEnterORNr; ?>");
+		d.op_room.focus();
+		return false;
+	}else{
+		return true;
 	}
 }
-
+<?php
+}
+?>
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
 //-->
 </script>
 
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
 <script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
 
 <style type="text/css" name=cat>
@@ -374,7 +474,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 </HEAD>
 
 <BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 bgcolor=<?php echo $cfg['body_bgcolor']; ?> onLoad="if(window.focus) window.focus(); 
-<?php if(!isset($mode)||empty($mode)) {
+<?php if(!isset($mode)||empty($mode)||($mode=='search'&&!$rows)) {
 ?>
 document.searchform.searchkey.focus();
 <?php
@@ -395,24 +495,50 @@ document.searchform.searchkey.focus();
 <td colspan=2  bgcolor=<?php echo $cfg['body_bgcolor']; ?>><p>
 
 <ul>
-<?php if($rows>1) : ?>
+<?php 
+if(($mode=='search'||$mode=='paginate')&&$rows){
+
+	$append='&dept_nr='.$dept_nr.'&target='.$target;
+	# Preload  common icon images
+	$img_male=createComIcon($root_path,'spm.gif','0');
+	$img_female=createComIcon($root_path,'spf.gif','0');
+	$bgimg='tableHeaderbg3.gif';
+	$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
+?>
 
 <table border=0>
   <tr>
     <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"></td>
     <td><FONT  SIZE=3 FACE="verdana,Arial" color=#800000>
-<b><?php echo "$LDPatientsFound<br>$LDPlsClk1" ?></b></font></td>
+<b>
+<?php 
+
+	if ($rows) echo str_replace("~nr~",$totalcount,$LDSearchFound).' '.$LDShowing.' '.$pagen->BlockStartNr().' '.$LDTo.' '.$pagen->BlockEndNr().'.';
+		else echo str_replace('~nr~','0',$LDSearchFound); 
+ ?></b></font></td>
   </tr>
 </table>
 
 <table border=0 cellpadding=0 cellspacing=0>
   <tr bgcolor=#0000aa>
-    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; &nbsp;<?php echo $LDPatientNr ?>&nbsp; &nbsp;</b></td>
+     <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+	  <?php echo $pagen->makeSortLink($LDPatientNr,'encounter_nr',$oitem,$odir,$append);  ?></b></td>
+      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+	  <?php echo $pagen->makeSortLink($LDSex,'sex',$oitem,$odir,$append);  ?></b></td>
+      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+	  <?php echo $pagen->makeSortLink($LDLastName,'name_last',$oitem,$odir,$append);  ?></b></td>
+      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+	  <?php echo $pagen->makeSortLink($LDName,'name_first',$oitem,$odir,$append);  ?></b></td>
+      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+	  <?php echo $pagen->makeSortLink($LDBday,'date_birth',$oitem,$odir,$append);  ?></b></td>
+    <td background="<?php echo createBgSkin($root_path,'tableHeaderbg.gif'); ?>" align=center><font face=arial size=2 color="#ffffff"><b><?php echo $LDSelect; ?></td>
+
+<!--     <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; &nbsp;<?php echo $LDPatientNr ?>&nbsp; &nbsp;</b></td>
     <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; <?php echo $LDLastName ?></b></td>
     <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; &nbsp;<?php echo $LDName ?></b></td>
     <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; &nbsp;<?php echo $LDBday ?></b></td>
     <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp;</b></td>
-  </tr>
+ -->  </tr>
 <?php 
 $toggle=0;
 while($enc_row=$encounter->FetchRow()){
@@ -421,16 +547,16 @@ while($enc_row=$encounter->FetchRow()){
   if($toggle){ echo "bgcolor=#efefef"; $toggle=0;} else {echo "bgcolor=#ffffff"; $toggle=1;}
   echo '>
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp;';
-	switch($enc_row['encounter_class_nr'])
-	{
-		case 1:  $full_en=$enc_row['encounter_nr']+$GLOBAL_CONFIG['patient_inpatient_nr_adder']; 
-					echo $full_en;
-					break;
-		case 2: $full_en=$enc_row['encounter_nr']+$GLOBAL_CONFIG['patient_outpatient_nr_adder']; 
-					echo $full_en;
-					break;
+	echo $enc_row['encounter_nr'];
+   echo '&nbsp;</td><td>';
+  
+	switch($enc_row['sex']){
+		case 'f': echo '<img '.$img_female.'>'; break;
+		case 'm': echo '<img '.$img_male.'>'; break;
+		default: echo '&nbsp;'; break;
 	}	
-   echo '&nbsp;</td>
+   
+   echo '
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; <a href="'.$thisfile.URL_APPEND.'&mode=select&pn='.$enc_row['encounter_nr'].'&dept_nr='.$dept_nr.'&target='.$target.'">'.$enc_row['name_last'].'</a></td>
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;'.$enc_row['name_first'].'</td>
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;'.formatDate2Local($enc_row['date_birth'],$date_format).'</td>';
@@ -449,19 +575,31 @@ while($enc_row=$encounter->FetchRow()){
   <td colspan=5 height=1><img src="'.$root_path.'gui/img/common/default/pixel.gif" border=0 width=1 height=1 align="absmiddle"></td>
   </tr>';
 }
+
+echo '
+	<tr><td colspan=5><font face=arial size=2>'.$pagen->makePrevLink($LDPrevious,$append).'</td>
+	<td align=right><font face=arial size=2>'.$pagen->makeNextLink($LDNext,$append).'</td>
+	</tr>';
 ?>
 </table>
 <p>
-<?php else :?>	
+<?php 
+}else{
 
-    <?php 
-	   if(!$rows&&!$err_data) 
-       {
-    ?>
+   if(!$rows&&!$err_data) {
+?>
 	<table border="0">
           <tr>
-            <td ></td>
-            <td valign="top"><img <?php echo createComIcon($root_path,'angle_down_l.gif','0','absmiddle') ?>> <font color="#000099" SIZE=3  FACE="verdana,Arial"><b><?php echo $LDPlsSelectPatientFirst ?></b></font> <img <?php echo createMascot($root_path,'mascot1_l.gif','0','absmiddle') ?>></td>
+            <td><img <?php echo createComIcon($root_path,'angle_down_l.gif','0','absmiddle') ?>></td>
+            <td > <font color="#000099" SIZE=3  FACE="verdana,Arial"><b>
+			<?php 
+				if($mode=='search') echo '<font color=maroon>'.$LDSorryNotFound.'</font>';
+					else echo $LDPlsSelectPatientFirst; 
+			?></b></font> 
+			</td>
+            <td valign="top"> 
+			<img <?php echo createMascot($root_path,'mascot1_l.gif','0','absmiddle') ?>>
+			</td>
           </tr>
 	</table>
 
@@ -481,38 +619,46 @@ while($enc_row=$encounter->FetchRow()){
 
 	
 <?php 
-if($rows || $err_data) 
-{
+if($rows || $err_data){
 
 $bg_img=$root_path.'gui/img/common/default/tableHeaderbg3.gif';
-?>
 
+	if($err_data){
+?>
+	<table border="0">
+          <tr>
+            <td> <img <?php echo createMascot($root_path,'mascot2_r.gif','0','absmiddle') ?>></td>
+            <td><font color="#000099" SIZE=3  FACE="verdana,Arial"><b><?php echo $LDPlsFillInfo ?></b></font></td>
+          </tr>
+	</table>
+<?php
+	}
+?>
 <table border=0 cellpadding=3 >
-<form method="post" action="op-doku-start.php" name="opdoc">
+
+<form method="post" action="op-doku-start.php" name="opdoc" <?php if($mode!='saveok') echo 'onSubmit="return chkForm(this)"'; ?>>
 <tr <?php if($mode=='saveok') echo "bgcolor=#ffffff"; ?>>
-<td background="<?php echo $bg_img; ?>"><FONT SIZE=-1  FACE="Arial" <?php if($err_op_date) echo 'color=#cc0000'; ?>><?php echo $LDOpDate ?>:<br>
+<td background="<?php echo $bg_img; ?>"><FONT SIZE=-1  FACE="Arial" color=red><?php if($err_op_date) echo '*'; ?><?php echo $LDOpDate ?>:<br>
 </td>
 <td><FONT SIZE=-1  FACE="Arial">
 
 <?php 
 
-if($mode=='saveok')
-{
+if($mode=='saveok'){
    echo '<b>'.formatDate2Local($opdoc['op_date'],$date_format).'</b>'; 
- }
- else
- {
-    echo '<input name="op_date" type="text" size="12" maxlength=10 value="';
-	if($err_data)
-    {
+}else{
+    echo '<input name="op_date" type="text" size="10" maxlength=10 value="';
+	if($err_data){
        echo $op_date;
-	}
-     else
-	 {	  
+	}else{	  
 	     echo  formatDate2Local(date('Y-m-d'),$date_format);
      }
-	
-	echo '"  onBlur="IsValidDate(this,\''.$date_format.'\')"  onKeyUp="setDate(this,\''.$date_format.'\',\''. $lang.'\')"> ['; 
+
+	echo '"  onBlur="IsValidDate(this,\''.$date_format.'\')"  onKeyUp="setDate(this,\''.$date_format.'\',\''. $lang.'\')">';
+?>
+ 	 <a href="javascript:show_calendar('opdoc.op_date','<?php echo $date_format; ?>')"><img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
+<?php
+	echo ' ['; 
     $dfbuffer="LD_".strtr($date_format,".-/","phs");
     echo $$dfbuffer.']';  
 }
@@ -520,23 +666,20 @@ if($mode=='saveok')
 
 ?> 
 
-<font size=2 face="arial" <?php if($err_operator) echo 'color=#cc0000'; ?>>&nbsp; &nbsp;<?php echo $LDOperator ?>:
+<font size=2 face="arial" color=red>&nbsp; &nbsp;<?php if($err_operator) echo 'color=#cc0000'; ?> <?php echo $LDOperator ?>:
 <?php 
-if($mode=='saveok') echo '<font color="#800000">'.$opdoc['operator']; 
-	else
-	{
+if($mode=='saveok'){
+	echo '<font color="#800000">'.$opdoc['operator'];
+}else{
 	 echo '
 	<input name="operator" type="text" size="25" value="';
-	if($err_data)
-    {
-	  echo $operator; 
-	 }
-	 else
-	    {
-		     echo $HTTP_COOKIE_VARS[$local_user.$sid];
-	    }
+	if($err_data){
+	  	echo $operator; 
+	 }else{
+		    echo $HTTP_COOKIE_VARS[$local_user.$sid];
+	  }
 	echo '">';
-	}
+}
  ?>
 </td>
 </tr>
@@ -628,7 +771,7 @@ if ($result['kasse']=="kasse")
 </tr>
 
 <tr <?php if($mode=='saveok') echo "bgcolor=#ffffff"; ?>>
-<td background="<?php echo $bg_img; ?>"><FONT SIZE=-1  FACE="Arial"  <?php if($err_diagnosis) echo 'color=#cc0000'; ?>><?php echo $LDDiagnosis ?>:
+<td background="<?php echo $bg_img; ?>"><FONT SIZE=-1  FACE="Arial"  color=red><?php if($err_diagnosis) echo '*'; ?><?php echo $LDDiagnosis ?>:
 </td>
 <td><FONT SIZE=-1  FACE="Arial">
 <?php
@@ -639,7 +782,7 @@ if ($result['kasse']=="kasse")
 </td>
 </tr>
 <tr <?php if($mode=='saveok') echo "bgcolor=#ffffff"; ?>>
-<td background="<?php echo $bg_img; ?>"><FONT SIZE=-1  FACE="Arial" <?php if($err_localize) echo 'color=#cc0000'; ?>><?php echo $LDLocalization ?>:
+<td background="<?php echo $bg_img; ?>"><FONT SIZE=-1  FACE="Arial"  color=red> <?php if($err_localize) echo '*'; ?><?php echo $LDLocalization ?>:
 </td>
 <td><FONT SIZE=-1  FACE="Arial">
 
@@ -651,7 +794,7 @@ if ($result['kasse']=="kasse")
 </td>
 </tr>
 <tr <?php if($mode=='saveok') echo "bgcolor=#ffffff"; ?>>
-<td background="<?php echo $bg_img; ?>"><FONT SIZE=-1  FACE="Arial" <?php if($err_therapy) echo 'color=#cc0000'; ?>><?php echo $LDTherapy ?>:
+<td background="<?php echo $bg_img; ?>"><FONT SIZE=-1  FACE="Arial"  color=red><?php if($err_therapy) echo '*'; ?><?php echo $LDTherapy ?>:
 </td>
 <td>
 <FONT SIZE=-1  FACE="Arial">
@@ -664,7 +807,7 @@ if ($result['kasse']=="kasse")
 </td>
 </tr >
 <tr <?php if($mode=='saveok') echo "bgcolor=#ffffff"; ?>>
-<td background="<?php echo $bg_img; ?>"><FONT SIZE=-1  FACE="Arial" <?php if($err_special) echo 'color=#cc0000'; ?>><?php echo $LDSpecials ?>:
+<td background="<?php echo $bg_img; ?>"><FONT SIZE=-1  FACE="Arial" color=red><?php if($err_special) echo '*'; ?><?php echo $LDSpecials ?>:
 </td>
 <td><FONT SIZE=-1  FACE="Arial">
 
@@ -676,7 +819,7 @@ echo createElement('special',$special,60,100);
 </td>
 </tr>
 <tr <?php if($mode=='saveok') echo "bgcolor=#ffffff"; ?>>
-<td background="<?php echo $bg_img; ?>"><FONT SIZE=-1  FACE="Arial"  <?php if($err_klas) echo 'color=#cc0000'; ?>><?php echo $LDClassification ?>:
+<td background="<?php echo $bg_img; ?>"><FONT SIZE=-1  FACE="Arial"  color=red><?php if($err_klas) echo '*'; ?><?php echo $LDClassification ?>:
 </td>
 <td><FONT SIZE=-1  FACE="Arial"><font color="#800000">
 <?php if($mode=='saveok')
@@ -711,7 +854,7 @@ if($rows || $err_data)
 ?>
 
 <p>
- <FONT SIZE=-1  FACE="Arial" <?php if($err_op_start) echo 'color="#cc0000"'; ?>>
+ <FONT SIZE=-1  FACE="Arial" color=red><?php if($err_op_start) echo '*'; ?>
 <?php 
 
 /* Set the global $isTimeElement to 1 to cause the function to insert the setTime Code in the form input code */
@@ -721,18 +864,18 @@ echo $LDOpStart.':';
 
 echo createElement('op_start',$op_start);
 
- if($err_op_end) echo '<font color="#cc0000">';else echo '<font color="#0">'; ?> &nbsp; <?php echo $LDOpEnd.':';
+echo '<font color="red">';if($err_op_end) echo '<font color="*">'; ?> &nbsp; <?php echo $LDOpEnd.':';
  
 echo createElement('op_end',$op_end);
 
 /* Reset the global $isTimeElement to 1 to disable the setTime code insertion*/
 $isTimeElement=0;
 
-if($err_scrub_nurse) echo '<font color="#cc0000">';else echo '<font color="#0">'; ?> &nbsp; <?php echo $LDScrubNurse.':';
+echo '<font color="red">';if($err_scrub_nurse) echo '<font color="*">'; ?> &nbsp; <?php echo $LDScrubNurse.':';
 
 echo createElement('scrub_nurse',$scrub_nurse);	
 
-if($err_op_room) echo '<font color="#cc0000">';else echo '<font color="#0">'; ?>  &nbsp; <?php echo $LDOpRoom.':';
+echo '<font color="red">';if($err_op_room) echo '<font color="*">'; ?>  &nbsp; <?php echo $LDOpRoom.':';
 
 echo createElement('op_room',$op_room);
 
@@ -767,7 +910,9 @@ echo createElement('op_room',$op_room);
 ?>
 
 
-<?php endif ?>
+<?php
+} 
+?>
 
 
 <p>
@@ -790,7 +935,7 @@ echo createElement('op_room',$op_room);
 
 <a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  alt="<?php echo $LDClose ?>"></a>
 </ul><p>
-<hr>
+
 <?php
 require($root_path.'include/inc_load_copyrite.php');
 ?>

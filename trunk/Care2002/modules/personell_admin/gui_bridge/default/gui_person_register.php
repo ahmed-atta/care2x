@@ -85,8 +85,8 @@ function popSearchWin(target,obj_val,obj_name) {
 </script>
 
 <script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
 <?php 
 require($root_path.'include/inc_js_gethelp.php'); 
@@ -109,8 +109,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
 <a href="javascript:gethelp('')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
-if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo "startframe.php?sid=".$sid."&lang=".$lang; 
-	else echo $breakfile."?sid=$sid&target=entry&lang=$lang"; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
+echo $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </td>
 </tr>
 
@@ -162,7 +161,7 @@ align=right id=catcom border=0></a>
 <td ><FONT SIZE=-1  FACE="Arial" color="#800000"><?php if($pid) echo $pid+$person_id_nr_adder ?>&nbsp;
 </td>
 <td  rowspan=6 ><FONT SIZE=-1  FACE="Arial">
-<a href="#"  onClick="showpic(document.aufnahmeform.photo_filename)"><img <?php echo $img_source; ?> width=137  id="headpic" name="headpic"></a>
+<a href="#"  onClick="showpic(document.aufnahmeform.photo_filename)"><img <?php echo $img_source; ?>  id="headpic" name="headpic"></a>
 <br>
 <?php echo $LDPhoto ?><br><input name="photo_filename" type="file" size="15" onFocus="hidecat()"  onChange="showpic(this)" value="<?php if(isset($photo_filename)) echo $photo_filename ?>">
 
@@ -245,7 +244,9 @@ createTR($errornameothers, 'name_others', $LDNameOthers,$name_others);
        }*/
  ?>"
  onFocus="hidecat(); this.select();"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"> 
- [ <?php   
+  <a href="javascript:show_calendar('aufnahmeform.date_birth','<?php echo $date_format ?>')">
+ <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a> 
+[ <?php   
  $dfbuffer="LD_".strtr($date_format,".-/","phs");
   echo $$dfbuffer;
  ?> ]
@@ -264,6 +265,16 @@ if ($errorsex) echo "</font>";
  </td>
 </tr>
 
+<tr>
+<td><FONT SIZE=-1  FACE="Arial"><?php echo $LDBloodGroup ?>:
+</td>
+<td colspan=2><FONT SIZE=-1  FACE="Arial" color="red">
+<input name="blood_group" type="radio" value="A"  <?php if($blood_group=='A') echo 'checked'; ?>><?php echo $LDA ?>&nbsp;&nbsp;
+<input name="blood_group" type="radio" value="B"  <?php if($blood_group=='B') echo 'checked'; ?>><?php echo $LDB ?>&nbsp;&nbsp;
+<input name="blood_group" type="radio" value="AB"  <?php if($blood_group=='AB') echo 'checked'; ?>><?php echo $LDAB ?>&nbsp;&nbsp;
+<input name="blood_group" type="radio" value="O"  <?php if($blood_group=='O') echo 'checked'; ?>><?php echo $LDO ?>
+</td>
+</tr>
 
 
 <tr>
@@ -394,6 +405,7 @@ createTR($errorreligion, 'religion', $LDReligion,$religion,2);
 
 if (!$person_ethnic_orig_hide)
 {
+	if(!$ethnic_orig) $ethnic_orig='';
 createTR($errorethnicorig, 'ethnic_orig', $LDEthnicOrigin,$ethnic_orig,2);
 }
 
@@ -428,17 +440,18 @@ createTR($errorethnicorig, 'ethnic_orig', $LDEthnicOrigin,$ethnic_orig,2);
 }
 ?>
 
-<input  type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?> onClick=hidecat() alt="<?php echo $LDSaveData ?>" align="absmiddle"> 
-<a href="javascript:document.aufnahmeform.reset()"><img <?php echo createLDImgSrc($root_path,'reset.gif','0') ?> alt="<?php echo $LDResetData ?>" onClick=hidecat()  align="absmiddle"></a>
+<input  type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?>  alt="<?php echo $LDSaveData ?>" align="absmiddle"> 
+<a href="javascript:document.aufnahmeform.reset()"><img <?php echo createLDImgSrc($root_path,'reset.gif','0') ?> alt="<?php echo $LDResetData ?>"   align="absmiddle"></a>
 
 <?php if($error==1) echo '<input  type="button" value="'.$LDForceSave.'" onClick="forceSave()">'; ?>
 
 <?php if($update) 
 	{ 
-		echo '<input type="button" value="'.$LDCancel.'" onClick="location.replace(\'';
+/*		echo '<input type="button" value="'.$LDCancel.'" onClick="location.replace(\'';
 		if($from=="such") echo 'aufnahme_daten_such.php'.URL_APPEND.'&lang='.$lang;
 			else echo 'aufnahme_list.php'.URL_APPEND.'&newdata=1&lang='.$lang;
 		echo '\')"> '; 
+*/		echo '<a href="person_register_show.php'.URL_APPEND.'&pid='.$pid.'"><img '.createLDImgSrc($root_path,'cancel.gif','0').'></a>';
 	}
 ?>
 </form>

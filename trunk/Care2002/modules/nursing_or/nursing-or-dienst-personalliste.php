@@ -3,13 +3,19 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
+* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
 * GNU General Public License
-* Copyright 2002 Elpidio Latorilla
+* Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+
+# Default value for the maximum nr of rows per block displayed, define this to the value you wish
+# In normal cases this value is derived from the db table "care_config_global" using the "insurance_list_max_block_rows" element.
+define('MAX_BLOCK_ROWS',30); 
+
+$lang_tables[]='search.php';
 $lang_tables[]='or.php';
 $lang_tables[]='departments.php';
 $lang_tables[]='personell.php';
@@ -49,6 +55,7 @@ require_once($root_path.'include/care_api_classes/class_personell.php');
 $pers_obj=new Personell;
 $nurses=&$pers_obj->getNursesOfDept($dept_nr);
 # Load global values
+$GLOBAL_CONFIG=array();
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('personell_%');
@@ -71,12 +78,55 @@ switch($ipath)
 	default: $breakfile="javascript:window.history.back()";
 }
 
+$append='&retpath='.$retpath.'&ipath='.$ipath;		
+
+# Initialize page's control variables
+if($mode=='paginate'){
+	$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
+	//$searchkey='USE_SESSION_SEARCHKEY';
+	//$mode='search';
+}else{
+	# Reset paginator variables
+	$pgx=0;
+	$totalcount=0;
+	$odir='ASC';
+	$oitem='name_last';
+}
+# Paginator object
+require_once($root_path.'include/care_api_classes/class_paginator.php');
+$pagen=new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
+
+
+# Get the max nr of rows from global config
+$glob_obj->getConfig('personell_search_max_block_rows');
+if(empty($GLOBAL_CONFIG['personell_search_max_block_rows'])) $pagen->setMaxCount(MAX_BLOCK_ROWS); # Last resort, use the default defined at the start of this page
+	else $pagen->setMaxCount($GLOBAL_CONFIG['personell_search_max_block_rows']);
+
 # Load date formatter
 include_once($root_path.'include/inc_date_format_functions.php');
-switch($mode){
-	case 'search':
-		$search_result=&$pers_obj->searchPersonellBasicInfo($searchkey);
-		break;
+if($mode=='search'||$mode=='paginate'){
+	# Convert other wildcards
+	$searchkey=strtr($searchkey,'*?','%_');
+	# Save the search keyword for eventual pagination routines
+	if($mode=='search') $HTTP_SESSION_VARS['sess_searchkey']=$searchkey;
+
+	$search_result=&$pers_obj->searchLimitPersonellBasicInfo($searchkey,$pagen->MaxCount(),$pgx,$oitem,$odi);
+	//echo $pers_obj->getLastQuery();
+	# Get the resulting record count
+	$linecount=$pers_obj->LastRecordCount();
+	//$linecount=$address_obj->LastRecordCount();
+	$pagen->setTotalBlockCount($linecount);
+	# Count total available data
+	if(isset($totalcount)&&$totalcount){
+		$pagen->setTotalDataCount($totalcount);
+	}else{
+		@$pers_obj->searchPersonellBasicInfo($searchkey,''); # The second param is empty to prevent sorting
+		$totalcount=$pers_obj->LastRecordCount();
+		$pagen->setTotalDataCount($totalcount);
+	}
+	$pagen->setSortItem($oitem);
+	$pagen->setSortDirection($odir);
+
 }
 
 # Load the common icons
@@ -237,9 +287,10 @@ if(is_object($nurses)&&$nurses->RecordCount()){
     </tr>
    </table>
 <?php
-if($mode=='search'){
-	if(!$pers_obj->record_count) $pers_obj->record_count=0;
-	echo '<p>'.str_replace("~nr~",$pers_obj->record_count,$LDSearchFound).'<p>';
+if($mode=='search'||$mode=='paginate'){
+
+	if ($linecount) echo str_replace("~nr~",$totalcount,$LDSearchFound).' '.$LDShowing.' '.$pagen->BlockStartNr().' '.$LDTo.' '.$pagen->BlockEndNr().'.';
+		else echo str_replace('~nr~','0',$LDSearchFound); 
 		  
 	if ($pers_obj->record_count) { 
 
@@ -248,20 +299,29 @@ if($mode=='search'){
 	$img_options_add=createLDImgSrc($root_path,'add2list_sm.gif','0');
 	$img_male=createComIcon($root_path,'spm.gif','0');
 	$img_female=createComIcon($root_path,'spf.gif','0');
+	$bgimg='tableHeaderbg3.gif';
+	$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
 
 	echo '
 			<table border=0 cellpadding=2 cellspacing=1> <tr bgcolor="#0000aa" background="'.createBgSkin($root_path,'tableHeaderbg.gif').'">';
 			
 ?>
 
-    <td><font face=arial size=2 color="#ffffff"><b><?php echo $LDPersonellNr; ?></b></td>
-    <td><font face=arial size=2 color="#ffffff"><b>&nbsp;</td>
-    <td><font face=arial size=2 color="#ffffff"><b><?php echo $LDFamilyName; ?></td>
-    <td><font face=arial size=2 color="#ffffff"><b><?php echo $LDGivenName; ?></td>
-    <td><font face=arial size=2 color="#ffffff"><b><?php echo $LDDateOfBirth; ?></td>
-    <td><font face=arial size=2 color="#ffffff"><b><?php echo $LDFunction; ?></td>
-    <td align=center><font face=arial size=2 color="#ffffff"><b><?php echo $LDAdd; ?></td>
-    <td><font face=arial size=2 color="#ffffff"><b><?php echo $LDMoreInfo; ?></td>
+     <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial"><b>
+	  <?php echo $pagen->makeSortLink($LDPersonellNr,'nr',$oitem,$odir,$append);  ?></b></td>
+     <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" ><b>
+	  <?php echo $pagen->makeSortLink($LDSex,'sex',$oitem,$odir,$append);  ?></b></td>
+      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" ><b>
+	  <?php echo $pagen->makeSortLink($LDFamilyName,'name_last',$oitem,$odir,$append);  ?></b></td>
+      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial"><b>
+	  <?php echo $pagen->makeSortLink($LDGivenName,'name_first',$oitem,$odir,$append);  ?></b></td>
+      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial"><b>
+	  <?php echo $pagen->makeSortLink($LDDateOfBirth,'date_birth',$oitem,$odir,$append);  ?></b></td>
+      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial"><b>
+	  <?php echo $pagen->makeSortLink($LDFunction,'job_function_title',$oitem,$odir,$append);  ?></b></td>
+
+    <td  background="<?php echo createBgSkin($root_path,'tableHeaderbg.gif'); ?>"  align=center><font face=arial size=2 color="#ffffff"><b><?php echo $LDAdd; ?></td>
+    <td background="<?php echo createBgSkin($root_path,'tableHeaderbg.gif'); ?>" ><font face=arial size=2 color="#ffffff"><b><?php echo $LDMoreInfo; ?></td>
 
 <?php
 /*				for($i=0;$i<sizeof($fieldname);$i++) {
@@ -317,9 +377,12 @@ if($mode=='search'){
 						echo '</tr>';
 
 					}
-					echo "
-						</table>";
-					if($linecount>15)
+					echo '
+						<tr><td colspan=7><font face=arial size=2>'.$pagen->makePrevLink($LDPrevious,$append).'</td>
+						<td align=right><font face=arial size=2>'.$pagen->makeNextLink($LDNext,$append).'</td>
+						</tr>
+						</table>';
+					if($linecount>$pagen->MaxCount())
 					{
 					    /* Set the appending nr for the searchform */
 					    $searchform_count=2;

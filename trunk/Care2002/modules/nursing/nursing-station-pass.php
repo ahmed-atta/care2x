@@ -4,9 +4,9 @@ require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 //error_reporting(E_WARNING);
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
+* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
 * GNU General Public License
-* Copyright 2002 Elpidio Latorilla
+* Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -25,7 +25,7 @@ require_once($root_path.'global_conf/areas_allow.php');
 $allowedarea=&$allow_area['wards'];
 
 //$fileforward="nursing-station.php".URL_REDIRECT_APPEND."&edit=$edit&retpath=$retpath&station=".$HTTP_SESSION_VARS['sess_nursing_station'];
-$fileforward="nursing-station.php".URL_REDIRECT_APPEND."&edit=$edit&retpath=$retpath&station=$station&ward_nr=$ward_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear";
+$fileforward="nursing-station.php".URL_REDIRECT_APPEND."&fwd_nr=$fwd_nr&edit=$edit&retpath=$retpath&station=$station&ward_nr=$ward_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear";
 //$fileforward="nursing-station.php?sid=$sid&edit=$edit&retpath=$retpath&station=$station";
 $thisfile="nursing-station-pass.php";
 if($retpath=="quick") $breakfile="nursing-schnellsicht.php".URL_APPEND;

@@ -10,7 +10,7 @@ function Spacer()
 <?php
 */}
 ?>
-<img <?php echo createComIcon($root_path,'angle_left.gif',0); ?>>
+<img <?php echo createComIcon($root_path,'angle_left_s.gif',0); ?>>
 <br>
 <FONT face="Verdana,Helvetica,Arial" size=2 color="#cc0000">
 <?php echo $LDOptions4Employee; ?>
@@ -34,7 +34,7 @@ function Spacer()
 			   
            <?php Spacer(); ?>
 				  
-             <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'man-gr.gif','0') ?>></td>
+             <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'nurse.gif','0') ?>></td>
                 <TD vAlign=top width=150><FONT 
                   face="Verdana,Helvetica,Arial" size=2> 
 				<a href="<?php echo $root_path; ?>modules/nursing_or/nursing-or-select-dept.php<?php echo URL_APPEND."&target=plist&nr=$personell_nr&user_origin=personell_admin"; ?>"><?php echo $LDAssignNurseDept; ?></a>
@@ -51,7 +51,7 @@ function Spacer()
 				   </FONT></TD>
                 </TR>				 
 			   
- 			   
+<!--  			   
            <?php Spacer(); ?>
 				  
                <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'disc_repl.gif','0') ?>></td>
@@ -69,10 +69,10 @@ function Spacer()
 				 <a href="javascript:alert('Function not  available yet')"><?php echo $LDLegalDocuments ?></a>
 				  </nobr> </FONT></TD>
                 </TR>
-			   
+ -->			   
            <?php Spacer(); ?>
 				  
-				  <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'document.gif','0') ?>></td>
+				  <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'bn.gif','0') ?>></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2> <nobr>
 				 <a href="<?php echo "person_register_show.php".URL_REDIRECT_APPEND."&pid=$pid&from=$from"; ?>"><?php echo $LDShowPersonalData ?></a>

@@ -35,7 +35,7 @@ switch($target)
 	case 'archiv':$fileforward.="op-doku-archiv.php?sid=$sid&lang=$lang&target=archiv";
 						$lognote="archive";
 						break;
-	default:$fileforward.="op-doku-start.php?sid=$sid&lang=$lang&target=start";
+	default:$fileforward.="op-doku-start.php?sid=$sid&lang=$lang&target=entry";
 				$target="entry";
 }
 

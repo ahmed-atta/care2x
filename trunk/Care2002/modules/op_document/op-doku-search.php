@@ -3,30 +3,46 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
+* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
 * GNU General Public License
-* Copyright 2002 Elpidio Latorilla
+* Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-$lang_tables=array('doctors.php');
+# Default value for the maximum nr of rows per block displayed, define this to the value you wish
+# In normal cases this value is derived from the db table "care_config_global" using the "insurance_list_max_block_rows" element.
+define('MAX_BLOCK_ROWS',30); 
+
+$lang_tables[]='doctors.php';
+$lang_tables[]='search.php';
 define('LANG_FILE','or.php');
 $local_user='ck_opdoku_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-if(!isset($dept_nr)||empty($dept_nr)){
-	header('Location:op-doku-select-dept.php'.URL_REDIRECT_APPEND.'&target=search');
-	exit;
+# Check if department nr and OR nr are available from user config
+if(!isset($dept_nr)||!$dept_nr){
+	if(isset($cfg['thispc_dept_nr'])&&!empty($cfg['thispc_dept_nr'])){
+		$dept_nr=$cfg['thispc_dept_nr'];
+		$dept_ok=true;
+	}else{
+		header('Location:op-doku-select-dept.php'.URL_REDIRECT_APPEND.'&target=entry');
+		exit;
+	}
 }
 
-if ((substr($matchcode,0,1)=="%")||(substr($matchcode,0,1)=="&")) {
+# Init as no patient found
+$patientselected=FALSE;
+$linecount=0;
+
+/*if ((substr($matchcode,0,1)=="%")||(substr($matchcode,0,1)=="&")) {
 	$matchcode='';
 	$mode='';
-}; 
+}; */
 
 /* Save dept name to session */
 if(!session_is_registered('sess_dept_name')) session_register('sess_dept_name');
+
 /* Create dept object and preload dept info */
 require_once($root_path.'include/care_api_classes/class_department.php');
 $dept_obj=new Department;
@@ -50,25 +66,45 @@ $thisfile=basename(__FILE__);
 $breakfile=$root_path.'main/op-doku.php'.URL_APPEND;
 //foreach($arg as $v) echo "$v<br>"; //init db parameters
 
-if(!$dept)
-	if(isset($HTTP_COOKIE_VARS['ck_thispc_dept'])&&!empty($HTTP_COOKIE_VARS['ck_thispc_dept'])) $dept=$HTTP_COOKIE_VARS['ck_thispc_dept'];
-		else $dept='plop'; // default department is plop
+		
+# Load date formatter
+require_once($root_path.'include/inc_date_format_functions.php');
 
-$linecount=0;
+if($mode=='match'||$mode=='search'||$mode=='paginate'){
 
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok){	
-    /* Load date formatter */
-    include_once($root_path.'include/inc_date_format_functions.php');
-    
+	# Initialize page's control variables
+	if($mode=='paginate'){
+		$matchcode=$HTTP_SESSION_VARS['sess_searchkey'];
+		//$searchkey='USE_SESSION_SEARCHKEY';
+		//$mode='search';
+	}else{
+		# Reset paginator variables
+		$pgx=0;
+		$totalcount=0;
+		$odir='ASC';
+		$oitem='name_last';
+		$HTTP_SESSION_VARS['sess_searchkey']=$matchcode;
+	}
+	# Paginator object
+	require_once($root_path.'include/care_api_classes/class_paginator.php');
+	$pagen=new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
 
-    /* Load editor functions */
-    //include_once('../include/inc_editor_fx.php');
+	require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+	$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 
-		switch($mode)
-		{
-			case 'match':
+	# Get the max nr of rows from global config
+	$glob_obj->getConfig('patient_search_max_block_rows');
+	if(empty($GLOBAL_CONFIG['patient_search_max_block_rows'])) $pagen->setMaxCount(MAX_BLOCK_ROWS); # Last resort, use the default defined at the start of this page
+		else $pagen->setMaxCount($GLOBAL_CONFIG['patient_search_max_block_rows']);
+
+	# Resolve the table prefix acc: to order item passed via http
+	if($oitem=='encounter_nr') $prefx='e';
+		elseif($oitem=='LD_var')
+			$prefx='d';
+		elseif($oitem=='op_date'||$oitem=='nr')
+			 $prefx='o';
+		else
+			$prefx='p';
 							
 							$dbtable='care_op_med_doc';
 							
@@ -79,11 +115,12 @@ if($dblink_ok){
 								$matchcode=addslashes($matchcode);
 							}
 							
-							$select_sql='SELECT o.*, e.encounter_class_nr, p.name_last, p.name_first, p.date_birth,d.name_formal,d.LD_var
-									FROM '.$dbtable.' AS o,
+							$select_sql='SELECT o.*, e.encounter_class_nr, p.name_last, p.name_first, p.date_birth,p.sex,d.name_formal,d.LD_var';
+							
+							$from_sql=' FROM '.$dbtable.' AS o,
 												care_encounter AS e,
 												care_person AS p,
-												care_department AS d';
+												care_department AS d ';
 												
 							$and_sql=' AND o.encounter_nr=e.encounter_nr
 											AND e.pid=p.pid
@@ -91,16 +128,18 @@ if($dblink_ok){
 							
 							if(!isset($all_depts)||$all_depts=='false') $and_sql.=' AND o.dept_nr='.$dept_nr;
 
-							$sql=$select_sql.'	WHERE o.encounter_nr = "'.$matchcode.'%" '.$and_sql;
-
+							$sql2=$from_sql.' WHERE o.encounter_nr = "'.$matchcode.'%" '.$and_sql;
+							
+							$sql=$select_sql.$sql2."	ORDER BY $prefx.$oitem $odir";;
+							
 							//if(!isset($all_depts)||$all_depts=='false') $sql.=' AND o.dept_nr='.$dept_nr;
 
-							if($ergebnis=$db->Execute($sql)) 
+							if($ergebnis=$db->SelectLimit($sql,$pagen->MaxCount(),$pgx)) 
 							{			
 								if(!$rows=$ergebnis->RecordCount())
 								{ 
 								    // if not found find similar
-								    $sql=$select_sql.'	WHERE ( o.nr LIKE "'.trim($matchcode).'%" 
+								    $sql2=$from_sql.'	WHERE ( o.nr LIKE "'.trim($matchcode).'%" 
 											OR o.encounter_nr LIKE "'.trim($matchcode).'%" 
 											OR p.name_last LIKE "'.trim($matchcode).'%" 
 											OR p.name_first LIKE "'.trim($matchcode).'%" 
@@ -108,9 +147,10 @@ if($dblink_ok){
 											
 									//if(!isset($all_depts)||$all_depts=='false') $sql.=' AND o.dept_nr='.$dept_nr;
 									//echo $all_depts;
-									$sql.='	ORDER BY o.nr DESC';
+									$sql2.="	ORDER BY $prefx.$oitem $odir";
+									$sql=$select_sql.$sql2;
 									//echo $sql;
-									if($ergebnis=$db->Execute($sql)) 
+									if($ergebnis=$db->SelectLimit($sql,$pagen->MaxCount(),$pgx)) 
 									{			
 										$rows=$ergebnis->RecordCount();
 									}
@@ -118,38 +158,41 @@ if($dblink_ok){
 								}
 							}else echo "$LDDbNoRead<p> $sql <p>";
 							
-							//echo $sql;
-							if($rows==1){
-								$row=$ergebnis->FetchRow();
-								$enc_obj->loadEncounterData($row['encounter_nr']);
-							}
-							break;
-							
-			case 'select':
-			
-							$dbtable='care_op_med_doc';
-							
-							$sql='SELECT * FROM '.$dbtable.' WHERE nr="'.$nr.'"';
-							
-							if($ergebnis=$db->Execute($sql)) 
-							{			
-								if($rows=$ergebnis->RecordCount())
-								{
-									$row=$ergebnis->FetchRow();
-									$enc_obj->loadEncounterData($row['encounter_nr']);
-								}
-							}else echo "$LDDbNoRead<p> $sql <p>";
-							//echo $sql;
-							break;
-
-			default:
-			
-					if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $mode='dummy';
-					break;
-					
-		} // end of switch
+	//echo $sql;
+	//$linecount=$address_obj->LastRecordCount();
+	$pagen->setTotalBlockCount($rows);
+	# Count total available data
+	if(isset($totalcount)&&$totalcount){
+		$pagen->setTotalDataCount($totalcount);
+	}else{
+		$sql="SELECT o.nr ".$sql2;
+		if($cresult=$db->Execute($sql)) {			
+			$totalcount=$cresult->RecordCount();
+		}
+		$pagen->setTotalDataCount($totalcount);
 	}
-	else { echo "$LDDbNoLink<br>"; }
+	$pagen->setSortItem($oitem);
+	$pagen->setSortDirection($odir);
+							
+}elseif($mode=='select'){
+			
+	$dbtable='care_op_med_doc';
+							
+	$sql='SELECT * FROM '.$dbtable.' WHERE nr="'.$nr.'"';
+							
+	if($ergebnis=$db->Execute($sql)) {			
+		if($rows=$ergebnis->RecordCount()){
+			//echo $sql;
+			$row=$ergebnis->FetchRow();
+			$enc_obj->loadEncounterData($row['encounter_nr']);
+			$patientselected=TRUE;
+		}
+	}else{
+		echo "$LDDbNoRead<p> $sql <p>";
+	}
+}else{
+	if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $mode='dummy';
+} 
 
 ?>
 
@@ -193,13 +236,13 @@ function lookmatch(d)
 	m=d.matchcode.value;
 	a=d.all_depts.checked;
 	if(m=="") return false;
-	if((m.substr(0,1)=="%")||(m.substr(0,1)=="&"))
+/*	if((m.substr(0,1)=="%")||(m.substr(0,1)=="&"))
 	{
 		d.matchcode.value="";
 		d.matchcode.focus();
 		return false;
 	}
-	window.location.replace("op-doku-search.php?sid=<?php echo "$sid&lang=$lang&target=$target&dept_nr=$dept_nr" ?>&mode=match&matchcode="+m+"&all_depts="+a);
+*/	window.location.replace("op-doku-search.php?sid=<?php echo "$sid&lang=$lang&target=$target&dept_nr=$dept_nr" ?>&mode=match&matchcode="+m+"&all_depts="+a);
 	return false;
 }
 // -->
@@ -248,29 +291,56 @@ else echo '
 <ul>
 <form method="post"  name="matchform" onSubmit="return lookmatch(this)">
 <FONT  SIZE=-1  FACE="Arial"><?php echo $LDSearchKeyword ?>: <input name="matchcode" type="text" size="20">&nbsp;<br>
-<FONT  SIZE=-1  FACE="Arial"><input type="checkbox" name="all_depts" <?php if ($all_depts=='true') echo 'checked' ?>> <?php echo $LDSearchInAllDepts ?><br>
+<FONT  SIZE=-1  FACE="Arial">
+<input type="checkbox" name="all_depts" <?php if ($all_depts=='true') echo 'checked' ?>> <?php echo $LDSearchInAllDepts ?><br>
 <input type="image" <?php echo createLDImgSrc($root_path,'searchlamp.gif','0','absmiddle') ?> alt="<?php echo $LDSearch ?>">
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
 <input type="hidden" name="lang" value="<?php echo $lang ?>">
-<hr>
+<input type="hidden" name="dept_nr" value="<?php echo $dept_nr ?>">
 </form>
-<?php if($rows>1) : ?>
+<?php
+
+if($rows&&!$patientselected){
+
+?>
 <table border=0>
   <tr>
     <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"></td>
     <td><FONT  SIZE=3 FACE="verdana,Arial" color=#800000>
-<b><?php echo "$LDPatientsFound<br>$LDPlsClk1" ?></b></font></td>
+<b><?php 
+if (($mode=='match'||$mode=='paginate')){
+	if($rows) echo str_replace("~nr~",$totalcount,$LDSearchFound).' '.$LDShowing.' '.$pagen->BlockStartNr().' '.$LDTo.' '.$pagen->BlockEndNr().'.';
+		else echo str_replace('~nr~','0',$LDSearchFound); 
+
+$append="&dept_nr=$dept_nr&target=search&all_depts=$all_depts";		
+	# Preload  common icon images
+	$img_male=createComIcon($root_path,'spm.gif','0');
+	$img_female=createComIcon($root_path,'spf.gif','0');
+	$bgimg='tableHeaderbg3.gif';
+	$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
+		
+?></b></font></td>
   </tr>
 </table>
 
 <table border=0 cellpadding=0 cellspacing=0>
-  <tr bgcolor=#0000aa>
-   <?php 
-   		for($i=0;$i<sizeof($LDSrcListElements);$i++)
-		echo '
-		   <td><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>&nbsp; &nbsp;'.$LDSrcListElements[$i].'&nbsp;</b></td>';
-	?>
-
+  <tr bgcolor=#abcdef>
+      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+	  <?php echo $pagen->makeSortLink($LDSex,'sex',$oitem,$odir,$append);  ?></b></td>
+      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+	  <?php echo $pagen->makeSortLink($LDLastName,'name_last',$oitem,$odir,$append);  ?></b></td>
+      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+	  <?php echo $pagen->makeSortLink($LDName,'name_first',$oitem,$odir,$append);  ?></b></td>
+      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+	  <?php echo $pagen->makeSortLink($LDBday,'date_birth',$oitem,$odir,$append);  ?></b></td>
+       <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+	  <?php echo $pagen->makeSortLink($LDPatientNr,'encounter_nr',$oitem,$odir,$append);  ?></b></td>
+      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+	  <?php echo $pagen->makeSortLink($LDSrcListElements[5],'op_date',$oitem,$odir,$append);  ?></b></td>
+      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+	  <?php echo $pagen->makeSortLink($LDDepartment,'LD_var',$oitem,$odir,$append);  ?></b></td>
+       <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>
+	  <?php echo $pagen->makeSortLink($LDOpNr,'nr',$oitem,$odir,$append);  ?></b></td>
   </tr>
  <?php 
  $toggle=0;
@@ -279,21 +349,26 @@ else echo '
  	echo'
   <tr ';
   if($toggle){ echo "bgcolor=#efefef"; $toggle=0;} else {echo "bgcolor=#ffffff"; $toggle=1;}
-  $buf="op-doku-search.php".URL_APPEND."&dept_nr=".$row['dept_nr']."&target=search&mode=select&nr=".$row['nr'];
-  echo '>
-    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'"><img '.createComIcon($root_path,'r_arrowgrnsm.gif','0').'></a></td>
+  # Prepare the url get values
+  $buf="op-doku-search.php".URL_APPEND."&dept_nr=".$row['dept_nr']."&target=search&mode=select&nr=".$row['nr']."&all_depts=".$all_depts;
+  echo '><td>';
+ 
+ 
+						switch($row['sex']){
+							case 'f': echo '<img '.$img_female.'>'; break;
+							case 'm': echo '<img '.$img_male.'>'; break;
+							default: echo '&nbsp;'; break;
+						}	
+ 
+  
+  echo '
+	</td>
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; <a href="'.$buf.'" title="'.$LDClk2Show.'">'.$row['name_last'].'</a></td>
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;'.$row['name_first'].'</td>
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;'.formatDate2Local($row['date_birth'],$date_format).'</td>
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;';
-  switch($row['encounter_class_nr'])
-  {
-  	case 1: echo $row['encounter_nr']+$GLOBAL_CONFIG['patient_inpatient_nr_adder'];
-				break;
-  	case 2: echo $row['encounter_nr']+$GLOBAL_CONFIG['patient_outpatient_nr_adder'];
-				break;
-  }
-	echo '</td>
+
+	echo $row['encounter_nr'].'</td>
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.formatDate2Local($row['op_date'],$date_format).'</a></td>
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;';
 
@@ -308,11 +383,21 @@ else echo '
   <td colspan=8 height=1><img src="'.$root_path.'gui/img/common/default/pixel.gif" border=0 width=1 height=1 align="absmiddle"></td>
   </tr>';
   }
+	echo '
+						<tr><td colspan=7><font face=arial size=2>'.$pagen->makePrevLink($LDPrevious,$append).'</td>
+						<td align=right><font face=arial size=2>'.$pagen->makeNextLink($LDNext,$append).'</td>
+						</tr>';
+
+}						
  ?>
 </table>
 <p>
 
-<?php elseif($rows) :?>
+<?php
+
+}elseif($rows&&$patientselected){
+
+?>
 
 
 
@@ -352,23 +437,15 @@ else echo '
 
 <FONT SIZE=-1  FACE="Arial"><?php echo $LDPatientNr ?>:
 </td>
-<td><FONT SIZE=-1  FACE="Arial">
-<?php  echo '<font color="#000099">';
-  switch($enc_obj->EncounterClass())
-  {
-  	case 1: echo $row['encounter_nr']+$GLOBAL_CONFIG['patient_inpatient_nr_adder'];
-				break;
-  	case 2: echo $row['encounter_nr']+$GLOBAL_CONFIG['patient_outpatient_nr_adder'];
-				break;
-  } 
-?>
+<td><FONT SIZE=-1  FACE="Arial" color="#000099"><?php  echo $row['encounter_nr']; ?>
 </td>
 </tr>
+
 <tr>
 <td>
-
-&nbsp;
+&nbsp;<!-- Spacer row  -->
 </td>
+
 <td>
 &nbsp;
 </tr>
@@ -486,11 +563,29 @@ $buf="op-doku-start.php?sid=$sid&lang=$lang&mode=update&update=1&nr=".$row['nr']
 <input type="hidden" name="nr" value="<?php echo $row['nr'] ?>">
 <input type="hidden" name="pn" value="<?php echo $row['encounter_nr'] ?>">
 <input type="hidden" name="dept_nr" value="<?php echo $dept_nr ?>">
+<input type="hidden" name="all_depts" value="<?php echo $all_depts ?>">
 <input type="hidden" name="target" value="entry">
 <input type="hidden" name="mode" value="update">
 <input type="hidden" name="update" value="1">
 </form>
-<?php endif ?>
+<?php
+
+}elseif($mode=='match'){
+?>
+<table border=0>
+  <tr>
+    <td><img <?php echo createMascot($root_path,'mascot2_r.gif','0','bottom') ?> align="absmiddle"></td>
+    <td><FONT  SIZE=3 FACE="verdana,Arial" color=#800000>
+<b><?php echo '<FONT  SIZE=3 FACE="verdana,Arial" color=#800000>'.$LDSorryNotFound.'</font>'; ?></b></font>
+</td>
+  </tr>
+</table>
+
+<?php
+
+}
+
+?>
 <p>
 </ul>
 
@@ -511,7 +606,7 @@ $buf="op-doku-start.php?sid=$sid&lang=$lang&mode=update&update=1&nr=".$row['nr']
 
 <a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  alt="<?php echo $LDClose ?>"></a>
 </ul><p>
-<hr>
+
 <?php
 require($root_path.'include/inc_load_copyrite.php');
 ?>

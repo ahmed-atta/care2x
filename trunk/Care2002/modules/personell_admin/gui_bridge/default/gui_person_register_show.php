@@ -9,7 +9,7 @@ function createTR($ld_text, $input_val, $colspan = 1)
 ?>
 
 <tr>
-<td bgColor="#eeeeee" ><FONT SIZE=-1  FACE="Arial,verdana,sans serif"><?php echo $ld_text ?>:
+<td bgColor="#eeeeee" ><FONT SIZE=-1  FACE="Arial,verdana,sans serif"><nobr><?php echo $ld_text ?>:</nobr>
 </td>
 <td colspan=<?php echo $colspan; ?> bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial,verdana,sans serif"><?php echo $input_val; ?>
 </td>
@@ -64,8 +64,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
 <a href="javascript:gethelp('')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
-if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo "startframe.php?sid=".$sid."&lang=".$lang; 
-	else echo $breakfile."?sid=$sid&target=entry&lang=$lang"; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
+ echo $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </td>
 </tr>
 
@@ -80,7 +79,7 @@ require('./gui_bridge/default/gui_tabs_personell_reg.php');
 
 <FONT    SIZE=-1  FACE="Arial">
 
-<table border=0 cellspacing=1 cellpadding=0>
+<table border=0 cellspacing=1 cellpadding=0 width=450>
 
 <tr>
 <td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php echo $LDRegistryNr ?>:
@@ -88,7 +87,7 @@ require('./gui_bridge/default/gui_tabs_personell_reg.php');
 <td width="30%"  bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo $pid; ?>
 </td>
 
-<td valign="top" rowspan=7 align="center" bgcolor="#ffffee" ><FONT SIZE=-1  FACE="Arial"><img <?php echo $img_source; ?> width=137>
+<td valign="top" rowspan=7 align="center" bgcolor="#ffffee" ><FONT SIZE=-1  FACE="Arial"><img <?php echo $img_source; ?>>
 </td>
 <!-- Load the options table  -->
 <td rowspan=30  valign="top">
@@ -144,27 +143,27 @@ require('./gui_bridge/default/gui_tabs_personell_reg.php');
 
 <?php
 
-if (!$GLOBAL_CONFIG['person_name_2_hide'])
+if (!$GLOBAL_CONFIG['person_name_2_hide']&&$name_2)
 {
 createTR($LDName2,$name_2);
 }
 
-if (!$GLOBAL_CONFIG['person_name_3_hide'])
+if (!$GLOBAL_CONFIG['person_name_3_hide']&&$name_3)
 {
 createTR( $LDName3,$name_3);
 }
 
-if (!$GLOBAL_CONFIG['person_name_middle_hide'])
+if (!$GLOBAL_CONFIG['person_name_middle_hide']&&$name_middle)
 {
 createTR($LDNameMid,$name_middle);
 }
 
-if (!$GLOBAL_CONFIG['person_name_maiden_hide'])
+if (!$GLOBAL_CONFIG['person_name_maiden_hide']&&$name_maiden)
 {
 createTR($LDNameMaiden,$name_maiden);
 }
 
-if (!$GLOBAL_CONFIG['person_name_others_hide'])
+if (!$GLOBAL_CONFIG['person_name_others_hide']&&$name_others)
 {
 createTR($LDNameOthers,$name_others);
 }
@@ -179,7 +178,17 @@ createTR($LDNameOthers,$name_others);
 
 <td bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial"><?php  echo $LDSex ?>: <?php if($sex=="m") echo  $LDMale; elseif($sex=="f") echo $LDFemale ?>
 </td>
+</tr>
 
+<tr>
+<td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php echo $LDBloodGroup ?>:
+</td>
+<td colspan=2 bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial">  
+<?php 
+	$buf='LD'.$blood_group;
+	echo $$buf;
+?>
+</td>
 </tr>
 
 
@@ -234,32 +243,32 @@ createTR($LDInsuranceCo.' 1',$insurance_firm_name,2);
 }
 
 
-if (!$GLOBAL_CONFIG['person_phone_1_nr_hide'])
+if (!$GLOBAL_CONFIG['person_phone_1_nr_hide']&&$phone_1_nr)
 {
 createTR($LDPhone.' 1',$phone_1_nr,2);
 }
 
-if (!$GLOBAL_CONFIG['person_phone_2_nr_hide'])
+if (!$GLOBAL_CONFIG['person_phone_2_nr_hide']&&$phone_2_nr)
 {
 createTR($LDPhone.' 2',$phone_2_nr,2);
 }
 
-if (!$GLOBAL_CONFIG['person_cellphone_1_nr_hide'])
+if (!$GLOBAL_CONFIG['person_cellphone_1_nr_hide']&&$cellphone_1_nr)
 {
 createTR($LDCellPhone.' 1',$cellphone_1_nr,2);
 }
 
-if (!$GLOBAL_CONFIG['person_cellphone_2_nr_hide'])
+if (!$GLOBAL_CONFIG['person_cellphone_2_nr_hide']&&$cellphone_2_nr)
 {
 createTR($LDCellPhone.' 2',$cellphone_2_nr,2);
 }
 
-if (!$GLOBAL_CONFIG['person_fax_hide'])
+if (!$GLOBAL_CONFIG['person_fax_hide']&&$fax)
 {
 createTR($LDFax,$fax,2);
 }
 
-if (!$GLOBAL_CONFIG['person_email_hide'])
+if (!$GLOBAL_CONFIG['person_email_hide']&&$email)
 {
 ?>
 
@@ -273,27 +282,27 @@ if (!$GLOBAL_CONFIG['person_email_hide'])
 <?php
 }
 
-if (!$GLOBAL_CONFIG['person_citizenship_hide'])
+if (!$GLOBAL_CONFIG['person_citizenship_hide']&&$citizenship)
 {
 createTR($LDCitizenship,$citizenship,2);
 }
 
-if (!$GLOBAL_CONFIG['person_sss_nr_hide'])
+if (!$GLOBAL_CONFIG['person_sss_nr_hide']&&$sss_nr)
 {
 createTR($LDSSSNr,$sss_nr,2);
 }
 
-if (!$GLOBAL_CONFIG['person_nat_id_nr_hide'])
+if (!$GLOBAL_CONFIG['person_nat_id_nr_hide']&&$nat_id_nr)
 {
 createTR($LDNatIdNr,$nat_id_nr,2);
 }
 
-if (!$GLOBAL_CONFIG['person_religion_hide'])
+if (!$GLOBAL_CONFIG['person_religion_hide']&&$religion)
 {
 createTR($LDReligion,$religion,2);
 }
 
-if (!$GLOBAL_CONFIG['person_ethnic_orig_hide'])
+if (!$GLOBAL_CONFIG['person_ethnic_orig_hide']&&$ethnic_orig)
 {
 createTR($LDEthnicOrigin,$ethnic_orig,2);
 }
@@ -312,18 +321,28 @@ createTR($LDEthnicOrigin,$ethnic_orig,2);
 <p>
 
 
-<?php if (!$newdata) : ?>
+<?php if (!$newdata) { ?>
 
 <?php if($target=="search") $newsearchfile='personell_search.php'.URL_APPEND.'&target=personell_search';
     else $newsearchfile='personell_register_search.php'.URL_APPEND.'&target=person_reg';
 ?>
 <a href="<?php echo $newsearchfile ?>"><img 
 <?php echo createLDImgSrc($root_path,'new_search.gif','0','absmiddle') ?>></a>
-<?php endif; ?>
+<?php } ?>
 <a href="person_register.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&update=1"><img 
 <?php echo createLDImgSrc($root_path,'update_data.gif','0','absmiddle') ?>></a>
+<?php
+if(isset($current_employ)&&$current_employ){
+?>
+<a href="personell_register_show.php<?php echo URL_APPEND ?>&personell_nr=<?php echo $current_employ ?>&target=personell_reg"><img <?php echo createLDImgSrc($root_path,'employment_data.gif','0','absmiddle') ?>></a>
+<?php
+}else{
+?>
 <a href="personell_register.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&target=personell_reg"><img <?php echo createLDImgSrc($root_path,'add_employ.gif','0','absmiddle') ?>></a>
 
+<?php
+}
+?>
 <form action="person_register.php" method=post>
 <input type=submit value="<?php echo $LDNewForm ?>" >
 <input type=hidden name="sid" value=<?php echo $sid; ?>>

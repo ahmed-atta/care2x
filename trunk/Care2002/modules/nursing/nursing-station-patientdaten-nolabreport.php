@@ -35,7 +35,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <td bgcolor="navy" >
 <FONT  COLOR="white"  SIZE=+2  FACE="Arial"><STRONG><?php echo "$LDPatDataFolder $station"; ?></STRONG></FONT>
 </td>
-<td bgcolor="navy" height="10" align=right></a><a href="javascript:gethelp('patient_folder.php','<?php echo $nodoc ?>','','<?php echo $station ?>','Main folder')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?> alt="<?php echo $LDHelp ?>"></a><a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"></a></td></tr>
+<td bgcolor="navy" height="10" align=right></a><a href="javascript:gethelp('patient_folder.php','<?php echo $nodoc ?>','','<?php echo $station ?>','Main folder')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?> alt="<?php echo $LDHelp ?>"></a><a href="javascript:document.retform.submit()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"></a></td></tr>
 
 </tr>
 <tr>
@@ -46,7 +46,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 	<center><FONT  COLOR="maroon"  SIZE=4  FACE="Arial"><p><br>
 	<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'> &nbsp;
 	<b>'.$LDNoLabReport.'</b><p>
-		<form method="post" action="'.$root_path.'modules/nursing/nursing-station-patientdaten.php">
+		<form method="post" action="'.$root_path.'modules/nursing/nursing-station-patientdaten.php" name="retform">
 	<input type="hidden" name="sid" value="'.$sid.'">
  	<input type="hidden" name="lang" value="'.$lang.'">
 <input type="hidden" name="pn" value="'.$pn.'">

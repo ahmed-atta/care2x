@@ -16,10 +16,10 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 function sendnum(d)
 {
 	d.material_nr.select();
-	if(d.material_nr.value=="") return false;
-	else
-	{	window.parent.OPMLISTFRAME.location.replace('op-logbuch-material-list.php?sid=<?php echo "$sid&lang=$lang&op_nr=$op_nr&dept_nr=$dept_nr&saal=$saal&enc_nr=$enc_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>&mode=search&material_nr='+d.material_nr.value);
-	return false;
+	if(d.material_nr.value==""){
+		return false;
+	}else{	window.parent.OPMLISTFRAME.location.replace('op-logbuch-material-list.php?sid=<?php echo "$sid&lang=$lang&op_nr=$op_nr&dept_nr=$dept_nr&saal=$saal&enc_nr=$enc_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>&mode=search&material_nr='+d.material_nr.value);
+		return false;
 	}
 }
 // -->
@@ -28,6 +28,7 @@ function sendnum(d)
 
 </head>
 <body onLoad="document.mat_input.material_nr.focus();document.mat_input.material_nr.select()" onFocus="document.mat_input.material_nr.select()" >
+
 <form name="mat_input" onSubmit="return sendnum(this)">
 <font face="Verdana, Arial" size=2 color=#800000>
 <?php echo $LDArticleNr ?>:<br>

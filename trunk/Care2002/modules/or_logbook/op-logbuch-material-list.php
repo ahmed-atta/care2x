@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
+* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
 * GNU General Public License
-* Copyright 2002 Elpidio Latorilla
+* Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -270,14 +270,12 @@ var brwsVer=parseInt(navigator.appVersion);var timer;var curSubMenu='';
 
 
 <?php 
-if(empty($material_nr)||(($art_avail==1)&&(!$nonumeric)))
-{
-$matbuf=explode("~",trim($matlist[0]));
-$rows=sizeof($matbuf);
-if(($rows==1)&&(trim($matbuf[0])=="")) $rows=0;
-if($rows)
-{
-echo'
+if(empty($material_nr)||(($art_avail==1)&&(!$nonumeric))){
+	$matbuf=explode("~",trim($matlist[0]));
+	$rows=sizeof($matbuf);
+	if(($rows==1)&&(trim($matbuf[0])=="")) $rows=0;
+	if($rows){
+		echo'
 <form action="op-logbuch-material-list.php" method="post" name="plist" onReset="hsm()">
 <table border=0 cellpadding=0 cellspacing=0 width="100%">
   <tr>';
@@ -289,36 +287,33 @@ echo'
    <tr>
     <td colspan=7 bgcolor="#0000ff"></td>
   </tr>
-
 ';
-	for($i=0;$i<$rows;$i++)
-	{
-		reset($parsedstr);
-		parse_str(trim($matbuf[$i]),$parsedstr);
-		if(strstr($parsedstr[a],"?")) $f_class="v12g"; else $f_class="v12";
-		echo'
- 	<tr ';
- 		if (($chg)&&($i==$item_idx)) echo 'bgcolor="#00cccc"';
- 		echo '
- 		>
-    <td class="'.$f_class.'">&nbsp;'.$parsedstr[b].'&nbsp;</td>
-    <td class="'.$f_class.'">&nbsp;'.$parsedstr[n].'&nbsp;</td>
-    <td class="'.$f_class.'">&nbsp;';
-	if($f_class=="v12") echo '<a href="javascript:popinfo('.$parsedstr[b].')"><img '.createComIcon($root_path,'info3.gif','0').' alt="'.$LDDbInfo.'"></a>';
-		else echo '<a href="#"><img '.createComIcon($root_path,'info3-pale.gif','0').' alt="'.$LDArticleNoList.'"></a>';
-	echo '
-	&nbsp;</td>
-    <td class="'.$f_class.'">&nbsp;'.$parsedstr[g].'&nbsp;</td>
-    <td class="'.$f_class.'">&nbsp;'.$parsedstr[i].'&nbsp;</td>
-    <td class="'.$f_class.'">&nbsp;<input type="text" name="pcs'.$i.'" size=1 maxlength=2 value="'.$parsedstr[c].'" onKeyUp="ssm(\'savebut\')">&nbsp;</td>
-    <td class="'.$f_class.'">&nbsp;<a href="javascript:delete_item('.$i.')" title="'.$LDRemoveArticle.'"><img '.createComIcon($root_path,'delete2.gif','0').'></a>&nbsp;</td>
-  </tr>
-  <tr>
-    <td colspan=7 bgcolor="#0000ff"></td>
-  </tr>';
-  }
+		for($i=0;$i<$rows;$i++){
+			reset($parsedstr);
+			parse_str(trim($matbuf[$i]),$parsedstr);
+			if(strstr($parsedstr[a],"?")) $f_class="v12g"; else $f_class="v12";
+			echo'
+ 			<tr ';
+ 			if (($chg)&&($i==$item_idx)) echo 'bgcolor="#00cccc"';
+ 			echo '>
+   			<td class="'.$f_class.'">&nbsp;'.$parsedstr[b].'&nbsp;</td>
+    		<td class="'.$f_class.'">&nbsp;'.$parsedstr[n].'&nbsp;</td>
+    		<td class="'.$f_class.'">&nbsp;';
+			if($f_class=="v12") echo '<a href="javascript:popinfo('.$parsedstr[b].')"><img '.createComIcon($root_path,'info3.gif','0').' alt="'.$LDDbInfo.'"></a>';
+				else echo '<a href="#"><img '.createComIcon($root_path,'info3-pale.gif','0').' alt="'.$LDArticleNoList.'"></a>';
+			echo '
+			&nbsp;</td>
+    		<td class="'.$f_class.'">&nbsp;'.$parsedstr[g].'&nbsp;</td>
+    		<td class="'.$f_class.'">&nbsp;'.$parsedstr[i].'&nbsp;</td>
+    		<td class="'.$f_class.'">&nbsp;<input type="text" name="pcs'.$i.'" size=1 maxlength=2 value="'.$parsedstr[c].'" onKeyUp="ssm(\'savebut\')">&nbsp;</td>
+    		<td class="'.$f_class.'">&nbsp;<a href="javascript:delete_item('.$i.')" title="'.$LDRemoveArticle.'"><img '.createComIcon($root_path,'delete2.gif','0').'></a>&nbsp;</td>
+  			</tr>
+  			<tr>
+    		<td colspan=7 bgcolor="#0000ff"></td>
+			</tr>';
+	}
   
-  echo '
+  	echo '
 </table>
 <input type="hidden" name="sid" value="'.$sid.'">
 <input type="hidden" name="lang" value="'.$lang.'">
@@ -336,14 +331,10 @@ echo'
 style=" VISIBILITY: hidden; POSITION: relative;">
 <a href="javascript:document.plist.submit()" title="'.$LDSave.'"><img '.createLDImgSrc($root_path,'savedisc.gif','0').'></a>&nbsp;&nbsp;&nbsp;
 <a href="javascript:document.plist.reset()" title="'.$LDReset.'"><img '.createLDImgSrc($root_path,'reset.gif','0').'>
-</div>
-  ';
-}
-}
-else
-{
-	if($art_avail)
-	{
+</div>';
+	}
+}else{
+	if($art_avail){
 
 		echo '
 			<font size=2 face="verdana,arial">
@@ -360,9 +351,8 @@ else
    			<tr>
     		<td colspan=7 bgcolor="#0000ff"></td>
   			</tr>';
-	while($pdata=$ergebnis->FetchRow())
-	{
-		echo'
+		while($pdata=$ergebnis->FetchRow()){
+			echo'
  		<tr bgcolor="#ffffff">
     	<td class="v12" valign="top">&nbsp;<a href="op-logbuch-material-list.php?'.$globdata.'&mode=search&material_nr='.$pdata[bestellnum].'"><img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle').' alt="'.$LDSelectArticle.'"></a></td>
     	<td class="v12" valign="top">&nbsp;<a href="op-logbuch-material-list.php?'.$globdata.'&mode=search&material_nr='.$pdata[bestellnum].'" title="'.$LDSelectArticle.'">'.$pdata[artikelnum].'</a>&nbsp;</td>
@@ -375,13 +365,11 @@ else
   		<tr>
     		<td colspan=7 bgcolor="#0000ff"></td>
   		</tr>';
- 	 }
-	echo '
-	  </table>';
+ 	 	}
+		echo '
+	  	</table>';
 			
-	}
-	else
-	{
+	}else{
  		echo '<center>
  			<font size=2 face="verdana,arial">
  			<font size=4 color="#cc0000">

@@ -51,8 +51,8 @@ if(empty($is_discharged)){
   <tr>
     <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','absmiddle') ?>></td>
     <td><font color="#000099" SIZE=3  FACE="verdana,Arial"> <b><?php echo $LDPersonCurrentlyEmployed; ?></b></font></td>
-    <td valign="bottom"><img <?php echo createComIcon($root_path,'angle_down_r.gif','0') ?>></td>
-  </tr>
+<!--     <td valign="bottom"><img <?php echo createComIcon($root_path,'angle_down_r.gif','0') ?>></td>
+ -->  </tr>
 </table>
 <?php
 	}
@@ -94,8 +94,7 @@ if(file_exists($root_path.'cache/barcodes/en_'.$full_pnr.'.png')) echo '<img src
   }
 ?>
 </td>
-<td rowspan=7 align="center"><img <?php echo $img_source; ?> hspace=5 width=137>
-</td>
+<td rowspan=7 align="center"><img <?php echo $img_source; ?> hspace=5></td>
 </tr>
 
 <tr bgcolor="white">
