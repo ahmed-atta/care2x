@@ -12,7 +12,7 @@ $LDPlsEnterLastName='ÃÏÎá ÇááŞÈ';
 $LDPlsEnterFirstName='ÃÏÎá ÇáÇÓã';
 $LDPlsEnterDateBirth='ÃÏÎá ÊÇÑíÎ ÇáãíáÇÏ';
 $LDPlsSelectSex='ÍÏÏ ÇáÌäÓ';
-$LDPlsEnterStreetName='ÃÏÎá Ããã ÇáÔÇÑÚ';
+$LDPlsEnterStreetName='ÃÏÎá ÃÓã ÇáÔÇÑÚ';
 $LDPlsEnterBldgNr='ÃÏÎá ÑŞã ÇáãäÒá Çæ ÇáÈäÇÁ';
 #2003-10-03 EL
 $LDPlsEnterZip='ÃÏÎá ÔİÑÉ ÇáãäØŞÉ';

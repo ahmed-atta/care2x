@@ -5,9 +5,9 @@ require($root_path.'include/inc_environment_global.php');
 require_once($root_path.'include/inc_img_fx.php');
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<HTML>
+<HTML dir=rtl>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=28596">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1256">
 <TITLE>Invalid Access Warning</TITLE>
 </HEAD>
 
@@ -37,21 +37,21 @@ require_once($root_path.'include/inc_img_fx.php');
 
 <ul>
 <font size=3 face="Tahoma">
-:ΓΝΚγΗαΗΚ ΓΣΘΗΘ ΝΟζΛ εΠε ΗαγΤίαΙ
+ΓΝΚγΗαΗΚ ΓΣΘΗΘ ΝΟζΛ εΠε ΗαγΤίαΙ:
 </FONT>
 
 <p>
 <font size=2 face="Tahoma">
-.γδ Ηαγγίδ Γδί ΓΣΚΞΟγΚ ΗαΗÒΡΗΡ ΗαήνΗΣνΙ ΗαΞΗΥΙ ΘζΩέΚν ΗαΚήΟγ ζ ΗαΡΜζΪ έν γΣΚΪΡΦί ΗαΞΗΥ, ΓΘΨα ΓΣΚΞΟΗγ εΠε ΗαΗÒΡΗΡ
-<img <?php echo createComIcon('../../','achtung.gif') ?>><br>
-.γδ Ηαγγίδ Γδί ΡέΦΚ Ηαίζίν, εΠΗ ΗαΘΡδΗγΜ νΪΚγΟ Ϊαμ Ηαίζίν ανΪγα ΘΟήΙ, αΠμ ΓήΘα Ηαίζίν
-<img <?php echo createComIcon('../../','achtung.gif') ?>><br>
-.γδ Ηαγγίδ Γδ γΣΚΪΡΦί αγ νήΘα Ηαίζίν, αΠμ ήγ ΘΗΪΟΗΟ γΣΚΪΡΦί ανήΘα Ηαίζίν ΟΗΛνΗ
-<img <?php echo createComIcon('../../','achtung.gif') ?>><br>
-.γδ Ηαγγίδ Γδ νίζδ γΣΚΪΡΦί ΫνΡ ήΗΟΡ Ϊαμ ΚΤΫνα ΜΗέΗΣίΡΘΚ, Γζ Ηδ ΜΗέΗΣίΡΘΚ ήΟ Κγ ΓΘΨΗαεΗ, αΠμ ήγ ΘΚγίνδ ΜΗέΗΣίΡΘΚ
-<img <?php echo createComIcon('../../','achtung.gif') ?>><br>
-.έν ΝΗαΗΚ δΗΟΡΙ γδ Ηαγγίδ Γδ νίζδ εδΗί ΞΨΗΑ έν ΪγανΙ δήα ΗαΘνΗδΗΚ, αΚΥΝνΝ εΠΗ ΗαζΦΪ ήγ ΘΗαΦΫΨ Ϊαμ ÒΡ ΗαΗδΪΗΤ έν γΣΚΪΡΦί
 <img <?php echo createComIcon('../../','achtung.gif') ?>>
+γδ Ηαγγίδ Γδί ΓΣΚΞΟγΚ ΗαΗÒΡΗΡ ΗαήνΗΣνΙ ΗαΞΗΥΙ ΘζΩέΚν ΗαΚήΟγ ζ ΗαΡΜζΪ έν γΣΚΪΡΦί ΗαΞΗΥ, ΓΘΨα ΓΣΚΞΟΗγ εΠε ΗαΗÒΡΗΡ.<br>
+<img <?php echo createComIcon('../../','achtung.gif') ?>>
+γδ Ηαγγίδ Γδί ΡέΦΚ Ηαίζίν, εΠΗ ΗαΘΡδΗγΜ νΪΚγΟ Ϊαμ Ηαίζίν ανΪγα ΘΟήΙ, αΠμ ΓήΘα Ηαίζίν.<br>
+<img <?php echo createComIcon('../../','achtung.gif') ?>>
+γδ Ηαγγίδ Γδ γΣΚΪΡΦί αγ νήΘα Ηαίζίν, αΠμ ήγ ΘΗΪΟΗΟ γΣΚΪΡΦί ανήΘα Ηαίζίν ΟΗΛνΗ.<br>
+<img <?php echo createComIcon('../../','achtung.gif') ?>>
+γδ Ηαγγίδ Γδ νίζδ γΣΚΪΡΦί ΫνΡ ήΗΟΡ Ϊαμ ΚΤΫνα ΜΗέΗΣίΡΘΚ, Γζ Ηδ ΜΗέΗΣίΡΘΚ ήΟ Κγ ΓΘΨΗαεΗ, αΠμ ήγ ΘΚγίνδ ΜΗέΗΣίΡΘΚ.<br>
+<img <?php echo createComIcon('../../','achtung.gif') ?>>
+έν ΝΗαΗΚ δΗΟΡΙ γδ Ηαγγίδ Γδ νίζδ εδΗί ΞΨΗΑ έν ΪγανΙ δήα ΗαΘνΗδΗΚ, αΚΥΝνΝ εΠΗ ΗαζΦΪ ήγ ΘΗαΦΫΨ Ϊαμ ÒΡ ΗαΗδΪΗΤ έν γΣΚΪΡΦί.
 <p>
 </FONT>
 <p>

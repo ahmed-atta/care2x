@@ -64,7 +64,7 @@ $LDHelp='ãÓÇÚÏÉ';
 $LDSent='ÇÑÓá';
 $LDDrafts='ØáÈÇÊ';
 $LDDate='ÇáÊÇÑíÎ';
-$LDTime='ÇáæŞÊ';
+$LDTime='ÇáÓÜÇÚÉ';
 $LDSize='ÇáÍÌã';
 $LDFrom='ãä';
 $LDTo='Çáì';
@@ -81,37 +81,37 @@ $LDJustReset='ÚæÏÉ ááÃÕá';
 $LDMaximum='ÇáÇŞÕì';
 
 $LDSpexFunctions='æÙÇÆİ ÎÇÕÉ';
-$LDDutyPlanOrg='ãäÙã ÇáæÑÏíÇÊ';
-$LDDutyPlanOrgTxt='Duty planner and organizer, Bundy machine';
-$LDStandbyDuty='ÇáæÑÏíÇÊ ÇáÇÍÊíÇØíÉ';
-$LDStandbyDutyTxt='Documenting work performance in standby duty';
-$LDHandStat='Hand surgery statistics';
-$LDHandStatTxt='Documenting hand surgery operations';
-$LDCalendar='Calendar';
-$LDCalendarTxt='A multifunction calender';
-$LDBlackBoard='Blackboard';
+$LDDutyPlanOrg='ãäÙã ÇáãäÇæÈÉ';
+$LDDutyPlanOrgTxt='ãÎØØ æ ãäÙã ÇáãäÇæÈÉ, ÇáÉ ÈÇæäÏí';
+$LDStandbyDuty='ÇáãäÇæÈÉ ÇáÇÍÊíÇØíÉ';
+$LDStandbyDutyTxt='ËæÊíŞ ßİÇÆÉ ÇáÚãá İí ÇáãäÇæÈÉ ÇáÇÍÊíÇØíÉ';
+$LDHandStat='ÅÍÕÇÆíÇÊ ÇáÚãáíÇÊ ÇáÌÑÇÍíÉ';
+$LDHandStatTxt='ËæÊíŞ ÇáÚãáíÇÊ ÇáÌÑÇÍíÉ';
+$LDCalendar='ÇáÊŞæíã';
+$LDCalendarTxt='ÇáÊŞæíã';
+$LDBlackBoard='ÕÈæÑÉ';
 $LDBlackBoardTxt='Post or search any information';
-$LDForum='Forum';
+$LDForum='ãäÊĞì';
 $LDForumTxt='Post, search, read discussion, ideas, or comments, etc.';
-$LDCalc='Calculator';
-$LDCalcTxt='An online calculator';
-$LDClock='Clock';
-$LDDigitalClock='A digital online clock';
+$LDCalc='ÃáÉ ÍÇÓÈÉ';
+$LDCalcTxt='ÃáÉ ÍÇÓÈÉ';
+$LDClock='ÇáÓÇÚÉ';
+$LDDigitalClock='ÇáÓÇÚÉ';
 $LDColorOpt='ÎíÇÑÇÊ ÇáÇáæÇä';
-$LDColorOptTxt='Set the colors for background or text.';
-$LDColorOptExt='Extended color options';
-$LDColorOptExtTxt='Set the colors for hyperlinks, mouseovers, etc.';
-$LDMyIntranet='myIntranet';
+$LDColorOptTxt='ÍÏÏ áæä ÇáÎáİíÉ Ãæ ÇáäÕ';
+$LDColorOptExt='ÎíÇÑÇÊ ÃáæÇä ÃÖÇİíÉ';
+$LDColorOptExtTxt='ÊÍÏíÏ áæä ÇáäÕ ÇáäÔØ, ÇáãÛØì ÈÇáãÇæÓ, ÅáÎ.';
+$LDMyIntranet='ÇáÔíßÉ ÇáãÍáíÉ';
 $LDMyIntranetTxt='My personal planner, organizer, diary, memo, calendar, etc.';
 $LDAccessPw='ßáãÇÊ ÇáÓÑ ÇáÎÇÕÉ ÈÇáÏÎæá';
-$LDAccessPwTxt='Change or update access password';
-$LDWebCam='ÇáßãíÑÇÊ ÇáÇãäíÉ';
-$LDWebCamTxt='Intranet webcamera security surveillance';
+$LDAccessPwTxt='ÊÛííÑ Ãæ ÊÍÏíÊ ßáãÉ ÇáÓÑ ÇáÎÇÕÉ ÈÇáÏÎæá';
+$LDWebCam='ÇáßÇãíÑÇÊ ÇáÇãäíÉ';
+$LDWebCamTxt='ãÑÇŞÈÉ ÇáßÇãíÑÇÊ ÇáÇãäíÉ ááÔÈßÉ ÇáãÍáíÉ';
 $LDPhotoLab='ãÚãá ÇáÕæÑ';
-$LDPhotoLabTxt='Save, document, index photos of patients';
+$LDPhotoLabTxt='ÍİÙ, æËÇÆŞ, İåÑÓ ÕæÑ ÇáãÑíÖ';
 
-$LDBundyMachine='Bundy machine';
-$LDDutyPlanner='ãÎØØ ÇáæÑÏíÇÊ';
+$LDBundyMachine='ÇáÉ ÈÇæäÏí';
+$LDDutyPlanner='ãÎØØ ÇáãäÇæÈÉ';
 $LDPrevMonth='ÇáÔåÑ ÇáÓÇÈŞ';
 $LDNextMonth='ÇáÔåÑ ÇáŞÇÏã';
 $monat=array('',
@@ -132,21 +132,21 @@ $LDExit='ãÎÑÌ';
 $LDRemarks='ÚáÇãÉ';
 
 $tage=array('<font color=\'#ff0000\'>S</font>','M','T','W','T','F','S');
-$tagename=array('ÇáÇËäíä',
+$tagename=array('ÇáÓÈÊ',
+'ÇáÇÍÏ',
+'ÇáÇËäíä',
 'ÇáËáÇËÇÁ',
 'ÇáÇÑÈÚÇÁ',
 'ÇáÎãíÓ',
-'ÇáÌãÚÉ',
-'ÇáÓÈÊ',
-'ÇáÇÍÏ');
+'ÇáÌãÚÉ');
 
 $LDTotal='ÇáãÌãæÚ';
 $LDClk4Options='ÇÖÛØ ááÎíÇÑÇÊ';
 $LDMonth='ÇáÔåÑ';
 $LDYear='ÇáÓäÉ';
 $LDGO='ÃÏåÈ';
-$LDPlus1Year='ÇÖİ ÓäÉ æÇÍÏÉ';
-$LDMinus1Year='ÇØÑÍ ÓäÉ æÇÍÏÉ';
+$LDPlus1Year='ÅÖÇİÉ ÓäÉ';
+$LDMinus1Year='ÅäŞÇÕ ÓäÉ';
 $LDDirectDial='ÇÎÊíÇÑ ãÈÇÔÑ';
 $LDFor='áí';
 
@@ -156,99 +156,99 @@ $LDShowMyOvertime='ÇÚÑÖ ãÊì áÏí Úãá ÇÖÇİí';
 $LDShowMyWorkTime='ÇÚÑÖ ÈÇáÊİÕíá ÌÏæá ÇáÚãá ÇáÎÇÕ Èí';
 $LDPlanSched='ãÎØØ ÇáãæÇÚíÏ ÇåĞÇ Çáíæã';
 $LDPlanDuty='ãÎØØ ÇáæÑÏíÇÊ áåĞÇ Çáíæã';
-$LDORProgram='OR program';
-$LDDutyPerson='Nurse on duty';
-$LDDocsOnDuty='Doctors on duty';
-$LDORLogbook='OR logbook (Document new operation)';
-$LDORLogbookArch='OR logbook (Archive)';
-$LDORLogbookSearch='OR logbook (Search operated patient)';
-$LDPresent='Present';
+$LDORProgram='ÈÑäÇãÌ ÍÌÑÉ ÇáÚãáíÇÊ';
+$LDDutyPerson='ÇáããÑÖ ÇáãäÇæÈ';
+$LDDocsOnDuty='ÇáÇØÈÇÁ ÇáãäÇæÈíä';
+$LDORLogbook='ÓÌá ÍÌÑÉ ÇáÚãáíÇÊ (æËÇÆŞ ÚãáíÉ ÌÏíÏÉ)';
+$LDORLogbookArch='ÓÌá ÍÌÑÉ ÇáÚãáíÇÊ (ÃÑÔíİ)';
+$LDORLogbookSearch='ÓÌá ÍÌÑÉ ÇáÚãáíÇÊ (ÈÍË Úä ãÑíÖ)';
+$LDPresent='ÇáÃä';
 
-$LDBgColor='Background color';
-$LDTxtColor='Text color';
-$LDClk4BgColor='Click to select background color';
-$LDClk4TxtColor='Click to select text color';
-$LDApply='Apply';
+$LDBgColor='áæä ÇáÎáİíÉ';
+$LDTxtColor='áæä ÇáäÕ';
+$LDClk4BgColor='ÃÖÛØ áÃÎÊíÇÑ áæä ÇáÎáİíÉ';
+$LDClk4TxtColor='ÃÖÛØ áÃÎÊíÇÑ áæä ÇáäÕ';
+$LDApply='ÊØÈíŞ';
 
-$LDColorMap='Color map';
-$LDPlsClkColor='Click the color you want';
-$LDMainFrame='Main frame';
-$LDTopFrame='Top frame';
-$LDBottomFrame='Bottom frame';
+$LDColorMap='ÎÑíØÉ ÇáÇáæÇä';
+$LDPlsClkColor='ÃÖÛØ Çááæä ÇáĞí ÊÑíÏ';
+$LDMainFrame='ÇáŞØÇÚ ÇáÇÓÇÓí';
+$LDTopFrame='ÇáŞØÇÚ ÇáÚáæí';
+$LDBottomFrame='ÇáŞØÇÚ ÇáÓİáí';
 
-$LDPWChange='Password change';
-$LDUserIdPWPrompt='Enter your user login name and actual password:';
-$LDNewPwPrompt='Now, enter the new password of your choice:';
-$LDNewPw='New password';
-$LDNewPw2='Repeat new password';
-$LDChangePw='Change password';
-$LDOops='Ooops! No, do not change.';
+$LDPWChange='ÊÛííÑ ßáãÉ ÇáÓÑ';
+$LDUserIdPWPrompt='ÃÏÎá ÃÓã ÇáãÓÊÎÏã æ ßáãÉ ÇáÓÑ ÇáÎÇÕÉ Èß:';
+$LDNewPwPrompt='ÇáÃä, ÃÏÎá ßáãÉ ÇáÓÑ ÇáÌÏíÏÉ ÇáËí ÃÎÊÑÊåÇ:';
+$LDNewPw='ßáãÉ ÓÑ ÌÏíÏÉ';
+$LDNewPw2='ÃÚÏ ßáãÉ ÇáÓÑ ÇáÌÏíÏÉ';
+$LDChangePw='ÛíÑ ßáãÉ ÇáÓÑ';
+$LDOops='áÇ, áÇÊÛíÑ ßáãÉ ÇáÓÑ';
 
-/*$LDWrongEntry='Wrong entries!';
-$LDNoAuth='No access right';
-$LDAuthLocked='Access right frozen.';*/
+/*$LDWrongEntry='ÎØÇÁ İí ÇáÇÏÎÇá!';
+$LDNoAuth='áíÓ áĞíß ÇáÕáÇÍíÉ';
+$LDAuthLocked='ÕáÇÍíÇÊ ÇáÏÎæá ÇáÎÇÕÉ Èß ãÌãÏÉ';*/
 
-$LDAlertPwError='The new passwords are not the same. Please enter the new passwords again.';
-$LDPWChanged='The new password is saved.';
+$LDAlertPwError='ßáãÇÊ ÇáÓÑ ÇáÌÏíÏÉ ÛíÑ ãÊØÇÈŞÉ.ÃÏÎá ßáãÇÊ ÇáÓÑ ãä ÌÏíÏ';
+$LDPWChanged='Êã ÍİÙ ßáãÉ ÇáÓÑ';
 
-$LDBday='Birthdate';
-$LDShotDate='Shotdate';
+$LDBday='ÊÇÑíÎ ÇáãíáÇÏ';
+$LDShotDate='ÊÇÑíÎ ÇáÕæÑÉ';
 $LDPatientNr='Encounter Nr';
-$LDSetShotDate='Set this date for all pictures.';
-$LDFotoLab='Photolab';
-$LDHowManyPics='How many pictures do you wish to save in the databank?';
-$LDNr='Number';
-$LDNewPics='pictures from a new patient';
-$LDMorePics='pictures from the same patient';
-$LDAdditional='Additional';
-$LDLinkBroken='Link to the photo server is broken.';
-$LDPicsSaved='The following photo files were renamed and saved in the databank:';
-$LDEditTitle='Headline';
+$LDSetShotDate='ÍÏÏ åĞÇ ÇáÊÇÑíÎ áßá ÇáÕæÑ';
+$LDFotoLab='ãÚãá ÇáÕæÑ';
+$LDHowManyPics='ßã ÚÏÏ ÇáÕæÑ ÇáĞí ÊÑÛÈ ÈÍİÙå İí Èäß ÇáÈíÇäÇÊ¿';
+$LDNr='ÇáÑŞã';
+$LDNewPics='ÕæÑ ãä ãÑíÖ ÌÏíÏ';
+$LDMorePics='ÕæÑ ãä äİÓ ÇáãÑíÖ';
+$LDAdditional='ÅÖÇİí';
+$LDLinkBroken='ÇáÑÇÈØ ãÚ ÎÇÏã ÇáÕæÑ ãŞØæÚ.';
+$LDPicsSaved='ãáİÇÊ ÇáÕæÑ ÇáËÇáíÉ ÃÚíÏ ÊÓãíÊåÇ æ ÍİÙåÇ İí Èäß ÇáÈíÇäÇÊ:';
+$LDEditTitle='ÚäæÇä';
 
-$LDAlertPhotoInfo='The information in the entry field';
-$LDAlertNoPhotoInfo=' is not complete. Please enter the complete information.';
-$LDAlertNoPatientData='The patient\'s data is not complete.';
-$LDAlertNumberOnly='Please enter a number or the word "main".';
+$LDAlertPhotoInfo='ÇáãÚáæãÇÊ İí ÍŞá ÇáÇÏÎÇá';
+$LDAlertNoPhotoInfo=' ÛíÑ ßÇãáÉ. ÃÏÎá ãÚáæãÇÊ ßÇãáÉ.';
+$LDAlertNoPatientData='ÈíÇäÇÊ ÇáãÑíÖ ÛíÑ ßÇãáÉ.';
+$LDAlertNumberOnly='ÃÏÎá ÑŞã Ãæ ÇáßáãÉ"ÑÆíÓí".';
 
-$LDStatistics='Statistics';
-$LDDisplay1='Display 1';
-$LDDisplay1Txt='Switch over to the display with the menu always on the left frame';
-$LDDisplay2='Display 2';
-$LDDisplay2Txt='Switch over to the display with the menu in a floating frame. ';
+$LDStatistics='ÅÍÕÇÆíÇÊ';
+$LDDisplay1='ÚÑÖ ãİÑÏ';
+$LDDisplay1Txt='ÃÖÛØ áÚÑÖ ÇáŞÇÆãÉ ÇáÑÆíÓíÉ İí ÇáŞØÇÚ ÇáÇíãä';
+$LDDisplay2='ÚÑÖ ãÒÏæÌ';
+$LDDisplay2Txt='ÃÖÛØ áÚÑÖ ÇáŞÇÆãÉ ÇáÑÆíÓíÉ İí ŞØÇÚ ãÓÊŞá';
 
-$LDNewPwDiffer='The new passwords differ from each other.<br> Please enter the new password again.';
+$LDNewPwDiffer='ßáãÇÊ ÇáÓÑ ÇáÌÏíÏÉ ÊÎÊáİÇä Úä ÈÚÖåãÇ<br> ÃÏÎá ßáãÉ ÓÑ ÌÏíÏÉ ãÑÉ ÃÎÑì';
 /* 2003-03-22 EL*/
-$LDPersonellMngmnt='Personnel Management';
-$LDPersonellMngmntTxt='Tools and functions for managing personnel';
+$LDPersonellMngmnt='ÔæÄä ÇáãæÙİíä';
+$LDPersonellMngmntTxt='ÃÏæÇÊ æ æÙÇÆİ ÎÇÕÉ ÈÅÏÇÑÉ ÔæÄä ÇáãæÙİíä';
 /* 2003-04-25 EL */
-$LDBilling='eCombill';
-$LDBillingTxt='Bill patient, create billable items, generate bill reports, etc.';
-$LDInsuranceCoMngr='Insurance Co. Manager';
-$LDInsuranceCoMngrTxt='Enter new, edit insurance company data';
-$LDAddressMngr='Address Manager';
-$LDAddressMngrTxt='Enter, list, edit, & update address data';
+$LDBilling='ÇáÔæÄä ÇáãÇáíÉ æ ÇáÎÒíäÉ';
+$LDBillingTxt='İÇÊæÑÉ ÇáãÑíÖ, ÅäÔÇÁ ÈíÇäÇÊ İÇÊæÑÉ, Êßæíä ÊŞÑíÑ ÇáİæÇÊíÑ, ÅáÎ.';
+$LDInsuranceCoMngr='ÔÑßáÊ ÇáÊÃãíä';
+$LDInsuranceCoMngrTxt='ÅÏÎÇá ÌÏíÏ, ÊÍÑíÑ ÈíÇäÇÊ ÔÑßÇÊ ÇáÊÃãíä';
+$LDAddressMngr='ÏİÊÑ ÇáÚäÇæíä';
+$LDAddressMngrTxt='ÅÏÎÇá, ŞÇÆãÉ, ÊÍÑíÑ, æ ÊÍÏíË ÈíÇäÇÊ ÇáÚäÇæíä.';
 /* 2003-05-18 EL */
-$LDUserConfigOpt='Configuration options';
-$LDUserConfigOptTxt='User options for background & text colors, mascots, avatar, etc.';
-$LDMascotOpt='Mascot options';
-$LDMascotOptTxt='Hide, show, or select prompt mascots.';
-$LDMascot='Mascot';
-$LDSampleMascot='Sample mascots';
+$LDUserConfigOpt='ÎíÇÑÇÊ ÇáãÙåÑ ÇáÚÇã:';
+$LDUserConfigOptTxt='ÎíÇÑÇÊ ÇáãÓÊÎÏã áÃáæÇä ÇáÎáİíÉ æ ÇáäÕ, ÕæÑ, ŞæÇáÈ, ÅáÎ.';
+$LDMascotOpt='ÎíÇÑÇÊ ÇáÕæÑ';
+$LDMascotOptTxt='ÅÎİÇÁ, ÅÙåÇÑ, Ãæ ÃÎÊíÇÑ.';
+$LDMascot='ãÌãæÚÉ ÇáÕæÑ';
+$LDSampleMascot='ÚíäÉ ÕæÑ ãä ÇáãÌãæÚÉ';
 /* 2003-04-24 EL*/
-$LDGUITemplate='GUI Template option';
-$LDGUITemplateTxt='Select a GUI (graphic user interface) template';
-$LDGUITheme='GUI Theme';
-$LDTheme='Theme';
+$LDGUITemplate='ÎíÇÑÇÊ ŞæÇáÈ æÇÌåÉ ÇáãÓÊÎÏã';
+$LDGUITemplateTxt='ÃÎÊÇÑ ŞÇáÈ æÇÌåÉ ãÓÊÎÏã';
+$LDGUITheme='ŞæÇáÈ æÇÌåÉ ÇáãÓÊÎÏã';
+$LDTheme='ÇáŞÇáÈ';
 # 2002-08-10
-$LDLastName='Family name';
-$LDWantUpload='I want to upload';
-$LDImage='image(s)';
+$LDLastName='ÇááŞÈ';
+$LDWantUpload='ÃÑíÏ ÇáÊÍãíá';
+$LDImage='ÕæÑÉ';
 # 2002-01-18 EL
 $LDTicketedSupport='Ticketed Support';
 $LDTicketedSupportTxt='Send a ticketed request to the project\'s online support';
-$LDNewsgroup='Newsgroup';
+$LDNewsgroup='ãÌãæÚÉ ÇáÇÎÈÇÑ';
 $LDNewsgroupTxt='Newsgroup mirroring the developers\' mailing list.';
 # 2002-08-19 EL
-$LDPharmaIndex='Pharma Index';
+$LDPharmaIndex='İåÑÓ ÇáÕíÏáíÉ';
 $LDPharmaIndexTxt='Pharmaceutical indexes like Redlist, IFAP, NIMS, or PIMS';
 ?>

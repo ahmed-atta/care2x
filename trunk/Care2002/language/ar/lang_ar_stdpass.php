@@ -1,14 +1,14 @@
 <?php
 $LDUserPrompt='ÃÓã ÇáãÓÊÎÏã';
 $LDPwPrompt='ßáãÉ ÇáÓÑ';
-$LDSubmitBut='...ÃÓÊãÑ';
+$LDSubmitBut='ÃÓÊãÑ...';
 $LDPwNeeded='ßáãÉ ÇáÓÑ ãØáæÈÉ ááÏÎæá';
 $LDIntroTo='ãÞÏãÉ áÊÍÑíÑ ÝÞÑÇÊ ÇáÇÎÈÇÑ Ýí';
 $LDWhatTo='ßíÝ æ ãÇÏÇ ÃÓÊØíÚ ÊÍÑíÑ ÝÞÑÇÊ ÇáÇÎÈÇÑ Ýí';
 
-$LDWrongEntry='!ÎØÇÁ Ýí ÇáÇÏÎÇá';
-$LDNoAuth='!áíÓ áÐíß ÊÕÑíÍ ááÏÎæá';
-$LDAuthLocked='!Êã ÇÛáÇÞ ÊÕÑíÍ ÇáÏÎæá ÇáÎÇÕ Èß';
+$LDWrongEntry='ÎØÇÁ Ýí ÇáÇÏÎÇá!';
+$LDNoAuth='áíÓ áÐíß ÊÕÑíÍ ááÏÎæá!';
+$LDAuthLocked='Êã ÇÛáÇÞ ÊÕÑíÍ ÇáÏÎæá ÇáÎÇÕ Èß!';
 
 $LDNewData='ÈíÇäÇÊ ÌÏíÏÉ';
 $LDEdit='ÊÍÑíÑ';
@@ -29,8 +29,8 @@ $LDAdmHow2Archive='ßíÝ ÇÈÍË Ýí ÇáÇÑÔíÝ';
 
 $LDMedocs='ÇáæËÇÆÞ';
 $LDMedocsHow2Enter='ßíÝ ÇÈÏÇÁ Ýí æËÓÞÉ ÌÏíÏÉ';
-$LDMedocsHow2Edit='ßíÝ ÇÍÑÑ æËÓÞÉ';
-$LDMedocsHow2Search='ßíÝ ÇÌÏ æËÓÞÉ ãÚíäÉ';
+$LDMedocsHow2Edit='ßíÝ ÇÍÑÑ æËíÞÉ';
+$LDMedocsHow2Search='ßíÝ ÇÌÏ æËíÞÉ ãÚíäÉ';
 $LDMedocsHow2Archive='ßíÝ ÇÈÍË Ýí ÇÑÔíÝ ÇáæÊÇÆÞ';
 
 $LDIntro2='ãÞÏãÉ Çáì';
@@ -53,7 +53,7 @@ $LDRepabotActivate='Activate Repabot';
 $LDQBotActivate='Activate Q-Bot';
 
 $LDMedLab='ÇáãÚãá ÇáØÈí';
-$LDCancel='ÇåãÇá';
+$LDCancel='ÅáÛÇÁ ÇáÇãÑ';
 
 $LDPharmacy='ÇáÕíÏáíÉ';
 $LDOrderArchive='ÇáÇÑÔíÝ';
@@ -65,7 +65,7 @@ $LDPharmaOrderBot='Activate OrderBot';
 $LDMedDepot='Medical Depot';
 $LDMediBotActivate='Activate Medibot';
 $LDSqlDb='SQL Èäß ÇáÈíÇäÇÊ';
-$LDManageAccess='ÇÏÇÑÉ ÕáÍíÇÊ ÇáÏÎæá';
+$LDManageAccess='ÇÏÇÑÉ ÕáÇÍíÇÊ ÇáÏÎæá';
 $LDListAll='ÚÑÖ Çáßá';
 $LDSystemLogin='ÏÎæá ãÏíÑ ÇáäÙÇã';
 $LDSeeData='ÚÑÖ ÇáÈíÇäÇÊ';
@@ -78,11 +78,11 @@ $LDPcID='ÇáÊÚÑíÝ ÇáÍÇáí áåÐÇ ÇáßãÈíæÊÑ';
 $LDDept='ÇáÞÓã';
 $LDWard='ßáãÉ';
 $LDWardOR='ÑãÒ ÇáÍÌÑÉ Çæ ÑÞã ÍÌÑÉ ÇáÚãáíÇÊ';
-$LDPhoneNr='ÑÞã åÇÊÝ ÇáÍÌÑÉ/ÇáÍÌÑÇÊ';
-$LDIntercomNr='ÑÞã ÇáÇäÊÑßã ÇáÎÇÕ ÈÇáÍÌÑÉ/ÇáÍÌÑÇÊ';
+$LDPhoneNr='ÑÞã åÇÊÝ ÇáÍÌÑÉ';
+$LDIntercomNr='ÑÞã ÇáÇäÊÑßã ÇáÎÇÕ ÈÇáÍÌÑÉ';
 $LDPcIP='ÚäæÇä åÐÇ ÇáßãÈíæÊÑ';
 $LDSave='ÍÝÙ ÇáÊÛííÑÇÊ';
-$LDNoChange='áÇ ÊÛííÑ ÇáÇÚÏÇÏÇÊ ÇáÍÇáíÉ';
+$LDNoChange='áÇ ÊÛíÑ ÇáÇÚÏÇÏÇÊ ÇáÍÇáíÉ';
 $LDClose='ÇÛáÞ';
 $LDLogout='ÎÑæÌ';
 $LDNewLogin='ÏÎæá ÌÏíÏ';
@@ -99,7 +99,7 @@ $LDTestRequest='ØáÈ ÇÎÊÈÇÑ ááÊÔÎíÕ';
 $LDTestType=array('patho'=>'Pathology', 
 'chemlabor'=>'Medical Laboratory', 
 'baclabor'=>'Bacteriological Laboratory',
-'blood'=>'Èäß ÇáÏã',
+'blood'=>'Bank Blood',
 'radio'=>'Radiology',
 'sono'=>'Sonography',
 'allamb'=>'General Ambulatory',
@@ -132,6 +132,6 @@ $LDViewDicom='DICOM ÚÑÖ ÕæÑÉ';
 $LDYellowList='ÇáÞæÇÆã ÇáÕÝÑÇÁ';
 $LDRedList='ÇáÞæÇÆã ÇáÍãÑÇÁ';
 #2003-11-22 EL
-$LDAdvancedSearch='Advanced search';
-$LDNewPerson='Register new person';
+$LDAdvancedSearch='ÈÍË ãÊÞÏã';
+$LDNewPerson='ÓÌá ãÑíÖ ÌÏíÏ';
 ?>

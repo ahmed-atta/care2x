@@ -21,9 +21,9 @@ $LDLogin='ÏÎæá';
 $LDLogout='ÎÑæÌ';
 $LDAppointments='ÇáãæÇÚíÏ';
 
-$VersionChgTarget='ÇáÞãÉ_';#_top
+$VersionChgTarget='_top';#_top
 $LDLanguage='ÇááÛÉ';
-$LDPlsWaitInit='...ÃäÊÖÑ ãä ÝÖáß ÚãáíÉ ÇáÊÍãíá ÊÊã ÇáÇä';
+$LDPlsWaitInit='ÃäÊÖÑ ãä ÝÖáß ÚãáíÉ ÇáÊÍãíá ÊÊã ÇáÇä...';
 
 $LDChange='ÊÛíÑ ÇááÛÉ';
 /* 2003-04-27 EL */
