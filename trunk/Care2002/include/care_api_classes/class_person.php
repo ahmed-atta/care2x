@@ -1,5 +1,5 @@
 <?php
-/* API class for person's insurance. Extends class Insurance (class_insurance.php) 
+/* API class for person's basic personal data.
 *  Note this class should be instantiated only after a "$db" adodb  connector object
 * has been established by an adodb instance
 */
@@ -160,7 +160,9 @@ class Person {
 		 
 		if(!$this->internResolvePID($pid)) return false;
 		
-	    $this->sql="SELECT p.* , addr.name AS addr_citytown_name FROM $this->tb_person AS p , $this->tb_citytown AS addr WHERE p.pid='$this->pid' OR( p.pid='$this->pid'  AND p.addr_citytown_nr=addr.nr)";
+	    $this->sql="SELECT p.* , addr.name AS addr_citytown_name 
+					FROM $this->tb_person AS p LEFT JOIN  $this->tb_citytown AS addr ON p.addr_citytown_nr=addr.nr
+					WHERE p.pid='$this->pid' ";
         //echo $this->sql;
         if($this->result=$db->Execute($this->sql)) {
             if($this->result->RecordCount()) {
@@ -175,7 +177,9 @@ class Person {
 		 $v='';
 		if(!$this->internResolvePID($pid)) return false;
 		
-	    $this->sql="SELECT p.* , addr.name AS citytown FROM $this->tb_person AS p , $this->tb_citytown AS addr WHERE p.pid='$this->pid' AND p.addr_citytown_nr=addr.nr";
+	    $this->sql="SELECT p.* , addr.name AS citytown 
+					FROM $this->tb_person AS p , $this->tb_citytown AS addr ON p.addr_citytown_nr=addr.nr
+					WHERE p.pid='$this->pid'";
         
         if($this->result=$db->Execute($this->sql)) {
 	
@@ -361,7 +365,7 @@ class Person {
 		return $this->getValueByList($this->basic_list,$this->pid);
 	}
 	
-		function setHistorySeen($encoder='',$pid=''){
+	function setHistorySeen($encoder='',$pid=''){
 	    global $db;
 		if(empty($encoder)) return false;
 		if(!$this->internResolvePID($pid)) return false;
