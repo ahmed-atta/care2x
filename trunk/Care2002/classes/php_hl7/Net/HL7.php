@@ -24,9 +24,10 @@
  * The factory class provides the convenience of changing several
  * defaults for HL7 messaging globally, like separators, etc. Note
  * that some default settings use characters that have special meaning
- * in PHP, like the HL7 escape character.
+ * in PHP, like the HL7 escape character. To be able to set these
+ * values, escape the special characters.
  *
- * @version    0.10
+ * @version    0.1.0
  * @author     D.A.Dokter <dokter@w20e.com>
  * @access     public
  * @category   Networking
@@ -42,7 +43,8 @@ class Net_HL7 {
 
 
     /**
-     * Create a new instance of the HL7 factory.
+     * Create a new instance of the HL7 factory, and set global
+     * defaults.
      */
     function Net_HL7() {
 

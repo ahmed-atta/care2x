@@ -44,8 +44,6 @@
     <dir name="Net/HL7" role="php">
       <file>Segment.php</file>
       <file>Message.php</file>
-      <file>Request.php</file>
-      <file>Response.php</file>
       <file>Connection.php</file>
     </dir>
     <dir name="Net/HL7/Segments" role="php">

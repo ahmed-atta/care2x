@@ -26,8 +26,8 @@ require_once 'Net/HL7.php';
  * Class specifying the HL7 message, both request and response.
  *
  * In general one needn't create an instance of the Net_HL7_Message
- * class directly, but use the Net_HL7_Request class that extends the
- * Message. When adding segments, note that the segment index starts
+ * class directly, but use the Net_HL7 factory class to create one.
+ * When adding segments, note that the segment index starts
  * at 0, so to get the first segment, do
  * <code>$msg->getSegmentByIndex(0)</code>.
  *

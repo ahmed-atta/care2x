@@ -18,7 +18,7 @@
 //
 // $Id$
 
-require_once 'Net/HL7/Response.php';
+require_once 'Net/HL7/Message.php';
 
 
 /**
@@ -26,7 +26,7 @@ require_once 'Net/HL7/Response.php';
  * <code>
  * $conn =& new Net_HL7_Connection('localhost', 8089);
  *
- * $req =& new Net_HL7_Request();
+ * $req =& new Net_HL7_Message();
  * 
  * ... set some request attributes
  * 
@@ -36,11 +36,11 @@ require_once 'Net/HL7/Response.php';
  * </code>
  *
  * The Net_HL7_Connection object represents the tcp connection to the
- * HL7 message broker. The Connection has only two useful methods (apart
- * from the constructor), send and close. The 'send' method takes a
- * Net_HL7_Request as argument, and returns a
- * Net_HL7_Response. The send method can be used
- * more than once, before the connection is closed.
+ * HL7 message broker. The Connection has only two useful methods
+ * (apart from the constructor), send and close. The 'send' method
+ * takes a Net_HL7_Message object as argument, and also returns a
+ * Net_HL7_Message object. The send method can be used more than once,
+ * before the connection is closed.
  *
  * The Connection object holds the following fields:
  *
@@ -113,10 +113,10 @@ class Net_HL7_Connection {
 
 
     /**
-     * Sends a Net_HL7_Request object over this connection.
+     * Sends a Net_HL7_Message object over this connection.
      * 
      * @param object Instance of Net_HL7_Message
-     * @return object Instance of Net_HL7_Response
+     * @return object Instance of Net_HL7_Message
      * @access public
      * @see Net_HL7_Message
      */
@@ -140,7 +140,7 @@ class Net_HL7_Connection {
         $data = preg_replace("/^" . $this->_MESSAGE_PREFIX . "/", "", $data);
         $data = preg_replace("/" . $this->_MESSAGE_SUFFIX . "$/", "", $data);
 
-        $resp = new Net_HL7_Response($data);
+        $resp = new Net_HL7_Message($data);
 
         return $resp;
     }
