@@ -34,7 +34,7 @@ $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 
 /* Get the patient global configs */	
 $glob_obj->getConfig('patient_%');
-$glob_obj->getConfig('person_foto_path');
+$glob_obj->getConfig('person_%');
 
 $updatefile='aufnahme_start.php';
 

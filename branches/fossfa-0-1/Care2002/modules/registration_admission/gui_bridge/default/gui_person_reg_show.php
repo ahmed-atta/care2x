@@ -122,14 +122,16 @@ require('./gui_bridge/default/gui_patient_reg_options.php');
 </td>
 </tr>
 
+<?PHP if (!$GLOBAL_CONFIG['person_title_hide']){ ?>
 <tr>
 <td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php echo $LDTitle ?>:
 </td>
 <td  bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial">
 <?php echo $title ?>
 </td>
-
 </tr>
+<?PHP } ?>
+
 <tr>
 <td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php  echo $LDLastName ?>:
 </td>

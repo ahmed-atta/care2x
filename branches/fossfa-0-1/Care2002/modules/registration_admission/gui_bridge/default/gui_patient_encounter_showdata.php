@@ -136,12 +136,14 @@ if(file_exists($root_path.'cache/barcodes/en_'.$encounter_nr.'.png')) echo '<img
 </td>
 </tr>
 
+<?PHP if (!$GLOBAL_CONFIG['person_title_hide']){ ?>
 <tr bgcolor="white">
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $LDTitle ?>:
 </td>
 <td bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $title ?>
 </td>
 </tr>
+<?PHP } ?>
 
 <tr bgcolor="white">
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $LDLastName ?>:
@@ -176,6 +178,42 @@ if($death_date&&$death_date!='0000-00-00'&&$death_date!='0001-01-01'){
 </td>
 </tr>
 
+
+
+
+<?PHP 
+/**
+ * KB: if patient_age_show is set in global config, 
+ *     calculate patients age and display:
+ *     for younger than a month in days, up to a year in weeks,
+ *     up to 3 in month and older in years
+ */
+if ($GLOBAL_CONFIG['patient_age_show']){ 
+?>
+<tr bgcolor="white">
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial">&nbsp;Age:
+</td>
+<td bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">&nbsp;
+<?php 
+$age = strtotime($encounter_date) - strtotime($date_birth); 
+if( $age < 30*24*3600 ){
+  $age_str = round( $age/3600/24 ). " days";
+} elseif ($age < 365*24*3600){
+  $age_str = round( $age/3600/24/7 ). " weeks";
+} elseif ($age < 3*365*24*3600) {
+  $age_str = round( $age/3600/24/30 ). " months";
+} else {
+  $age_str = round( $age/3600/24/365 ). " years";
+}
+echo "$age_str"; 
+?>
+</td>
+</tr>
+<?PHP } ?>
+
+
+
+<?PHP if (!$GLOBAL_CONFIG['person_bloodgroup_hide']){ ?>
 <tr bgcolor="white">
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $LDBloodGroup ?>:
 </td>
@@ -188,6 +226,7 @@ if($blood_group){
 ?>
 </td>
 </tr>
+<?PHP } ?>
 
 <tr bgcolor="white">
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $LDAddress ?>:
