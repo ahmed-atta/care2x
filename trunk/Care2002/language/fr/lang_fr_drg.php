@@ -64,10 +64,8 @@ $LDSpecifyGroup='Spécifier un groupe';
 $LDCreateGroupName='Créer un nouveau nom de groupe';
 $LDSelect='Sélectionner';
 /*2003-06-01 EL*/
-$LDUseToGroupItems='Utilisez ceci afin de grouper les objets pas encore
-groupés';
-$LDItemsDegrouped='Effacer ce groupe va avoir pour conséquence l\'effacement des liens des objets
-liés à ce groupe.';
+$LDUseToGroupItems='Utilisez ceci afin de grouper les objets pas encore groupés';
+$LDItemsDegrouped='Effacer ce groupe va avoir pour conséquence l\'effacement des liens des objets liés à ce groupe.';
 $LDOptions='Options';
 /*2003-06-01 EL*/
 $LDCreateInternDRGGroup='Créer un nouveau groupe interne DRG';
