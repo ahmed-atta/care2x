@@ -20,10 +20,12 @@ $LDInterEmail='Internet E-mail';
 $LDSpecials='Spezielles';
 $LDLogin='Login';
 $LDLogout='Logout';
+$LDAppointments='Termine';
 				
 $LDLanguage='Sprache';
 $VersionChgTarget='_top';
 $LDPlsWaitInit='Einen Moment bitte. Initialization läuft gerade....';
 
 $LDChange='Wechseln';
+
 ?>

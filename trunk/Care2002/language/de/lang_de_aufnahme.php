@@ -2,7 +2,7 @@
 $LDAdmission='Patientenaufnahme';
 $LDAdmitDate='Aufnahmedatum';
 $LDAdmitTime='Aufnahmezeit';
-$LDCaseNr='PatientenNr.';
+$LDCaseNr='FallNr.';
 $LDTitle='Anrede';
 $LDLastName='Name';
 $LDFirstName='Vorname';
@@ -57,7 +57,7 @@ $LDAdmWantSearch='Ich suche einen Patient';
 $LDAdmWantArchive='Ich möchte zum Archiv';
 
 /**************** note the ' ~nr~ ' must not be erased it will be replaced by the script with the number of search results ******/
-$LDSearchFound='Die suche hat <font color=red><b>~nr~</b></font> Patientendaten gefunden.';
+$LDSearchFound='Es wurde(n) <font color=red><b>~nr~</b></font> Patientendaten gefunden.';
 
 $LDShowData='Zeige Daten';
 $LDPatientData='Aufnahmedaten';
@@ -72,7 +72,7 @@ $LDNewArchive='Neue suche im Archiv';
 $LDAdmArchive='Patientenaufnahme Archiv';
 
 /************** note: do not erase the ' ~nr~ ' it will be replaced by the script with a number **************/
-$LDFoundData='Es wurde ~nr~ relevante Daten gefunden!<br>Bitte klicken Sie den richtigen an.';
+$LDFoundData='Es wurde(n) ~nr~ relevante Daten gefunden!<br>Bitte klicken Sie den richtigen an.';
 
 $LDClk2Show='Klick zum zeigen';
 
@@ -146,7 +146,7 @@ $LD_MMsddsyyyy='MM/TT/JJJJ';
 /* 2002-10-13 EL */
 $LDPlsSelectPatientFirst='Bitte, suchen Sie zuerst den Patient.';
 /* 2002-11-30 EL */
-$LDPatientRegister='Patientenanmeldung';
+$LDPatientRegister='Personenanmeldung';
 $LDRegDate='Anmeldedatum';
 $LDRegTime='Anmeldezeit';
 $LDRegBy='Sachbearbeiter';
@@ -174,7 +174,7 @@ $LDEmail='E-mail';
 $LDZipCode='PLZ';
 $LDPhoto='Foto';
 /* 2002-12-02 EL*/
-$LDPatientRegisterTxt='Patient anmelden, Anmeldung suchen, Suche im Archiv';
+$LDPatientRegisterTxt='Person anmelden, Anmeldung suchen, Suche im Archiv';
 $LDAdmitNr='Aufnahmenummer';
 $LDPatient='Patient';
 $LDVisit='Besuch';
@@ -213,7 +213,7 @@ $LDClickImgToPrint='Bild bitte anklicken um es zu drucken.';
 $LDPrintPortraitFormat='Den Drucker bitte auf Querformat umstellen.';
 /* 2002-12-14 EL */
 $LDRegistryNr='PID Nr.';
-$LDRedirectToRegistry='Achtung: Ihre Suche wird in Personenameldung umgeleitet!';
+$LDRedirectToRegistry='Achtung: Ihre Suche wird in Personenanmeldung umgeleitet!';
 /* 2002-12-24 EL */
 $LDSSSNr='SV Nr.';
 $LDNatIdNr='Ausweis Nr.';
@@ -235,7 +235,7 @@ $LDAttDrServiceClass='Ärzteleistungsklasse';
 $LDAdmitClass='Aufnahmeart';
 /* 2003-02-15 EL*/
 $LDEnterSearchKeyword='Geben Sie ein Stichwort ein';
-$LDSearchFoundData='Die Suche hat <font color=red><b>~nr~</b></font> relevante Daten gefunden.';
+$LDSearchFoundData='Es wurde(n) <font color=red><b>~nr~</b></font> relevante Daten gefunden.';
 $LDQuickList='Schnellliste';
 $LDSeveralInsurances='Der Patient hat mehrere Versicherungen. Bitte hier anklicken';
 $LDTop='Top';
@@ -322,4 +322,7 @@ $LDGotMedAdvice='Aufklärung';
 /* 2003-03-15 EL */
 $LDShowDocList='Die Dokumentenliste auflisten';
 $LDScheduleNewAppointment='Neues Termin';
+/* 2003-04-04 EL */
+$LDNoPendingApptThisDay='Keine Termine an diesem Tag vorhanden.';
+$LDNoPendingApptToday='Keine Termine heute vorhanden.';
 ?>

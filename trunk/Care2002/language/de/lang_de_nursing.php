@@ -164,11 +164,12 @@ $LDConfirmUnlock='Die Sperre des Bettes \'+b+\' im Zimmer \'+r+\'  aufheben?';
 $LDConfirmDelete='Wollen Sie wirklich \'+t+\' \'+n+\' aus dem Zimmer \'+r+b+\' entfernen?';
 $LDConfirmLock='Wollen Sie wirklich dieses Bett sperren?';
 $LDClk2Occupy='Klick hier zum belegen';
-$LDInsurance=array(
+/*$LDInsurance=array(
 								'x'=>'Selbstzahler',
 								'privat'=>'Privat',
 								'kasse'=>'Allgemein'
 								);
+*/
 $LDSave='Speichern';
 $LDNurse='Schwester/Pfleger';
 $LDYesSure='Ja, Ich bin sicher. Ich möchte den Patient entlassen.';
@@ -339,4 +340,8 @@ $LDNoDiagReport='Kein Befund vorhanden.';
 /* 2003-03-23 EL */
 $LDNursesList='Pflegekräfte';
 $LDNursesListTxt='Anzeigen, sehen, und bearbeiten  von Pflegekräfte';
+/* 2003-04-18 */
+$LDInsurance='Allgemein';
+$LDPrivate='Privat';
+$LDSelfPay='Selbstzahlung';
 ?>

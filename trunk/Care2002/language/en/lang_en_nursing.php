@@ -145,7 +145,7 @@ $LDLegend='Legend';
 
 $LDOpenFile='Open file';
 $LDNotesEmpty='Empty notice';
-$LDNotes='Notice';
+$LDNotes='Notes';
 $LDRelease='Dismiss';
 $LDFreeOccupy='Free/Occupy';
 $LDMale='Male';
@@ -172,11 +172,13 @@ $LDConfirmUnlock='Do you really want to unlock the \'+b+\' bed in room \'+r+\' ?
 $LDConfirmDelete='Do you really want to delete \'+t+\' \'+n+\' from room \'+r+b+\'?';
 $LDConfirmLock='Do you really want to lock this bed?';
 $LDClk2Occupy='Click to occupy this bed';
-$LDInsurance=array(
+/*$LDInsurance=array(
 								'x'=>'Self pay',
 								'privat'=>'Private',
 								'kasse'=>'General'
 								);
+*/
+$LDInsurance='Health Fund';
 $LDSave='Save';
 $LDNurse='Nurse';
 $LDYesSure='Yes, I\'m sure. Dismiss the patient.';
@@ -251,7 +253,7 @@ $LDFullDayName=array(
 									);
 $LDCurrentEntry='Current entries';
 $LDEntryPrompt='Please enter the new information here';
-$LDConfirmSetDate='Do you want to set the \'+dayID+\' ?';
+$LDConfirmSetDate='Do you want to set the "+dayID+" ?';
 $LDStartDate='Start date';
 $LDEndDate='End date';
 $LDShowCurveDate='Show the curve with the following';
