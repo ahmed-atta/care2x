@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -53,13 +53,12 @@ if(($mode=='send') && isset($order_nr) && $order_nr){
 		  
 		if($user->hasValidPassword()&&$user->isNotLocked()){
 			 
-			$sql='UPDATE '.$dbtable.' SET 										
-							 		validator="'.$validator.'",
-									priority="'.$prior.'",
-									status="pending",
-									sent_datetime="'.date('Y-m-d H:i:s').'"
-							   		WHERE order_nr="'.$order_nr.'"
-									AND dept_nr="'.$dept_nr.'"';		// save aux data to the order list
+			$sql="UPDATE $dbtable SET validator='$validator',
+									priority='$prior',
+									status='pending',
+									sent_datetime='".date('Y-m-d H:i:s')."'
+							   		WHERE order_nr='$order_nr'
+									AND dept_nr='$dept_nr'";// save aux data to the order list
 		
 			if($ergebnis=$db->Execute($sql)){
 				//echo $sql;
