@@ -17,6 +17,9 @@ class Encounter extends Notes {
 	var $tb_citytown='care_address_citytown';
 	var $tb_location='care_encounter_location';
 	var $tb_dis_type='care_type_discharge';
+	var $tb_sickconfirm='care_encounter_sickconfirm';
+	var $tb_dept='care_department';
+	var $tb_insco='care_insurance_firm';
 	/* Aux vars */
 	var $enc_nr;
 	var $encoder;
@@ -68,7 +71,24 @@ class Encounter extends Notes {
 							   'modify_time',
 							   'create_id',
 							   'create_time');
-							   
+	var $fld_sickconfirm=array(
+								'nr',
+								'encounter_nr',
+	                           'date_confirm',
+							   'date_start',
+							   'date_end',
+							   'date_create',
+							   'diagnosis',
+							   'dept_nr',
+							   'insurance_co_nr',
+							   'insurance_co_sub',
+							   'status',
+							   'history',
+							   'modify_id',
+							   'modify_time',
+							   'create_id',
+							   'create_time');
+						
 	function Encounter($enc_nr='') {
 	    $this->enc_nr=$enc_nr;
 		$this->setTable($this->tb_enc);
@@ -360,7 +380,7 @@ class Encounter extends Notes {
 	    if(!$this->is_loaded) return false;
 		return $this->encounter['current_att_dr_nr'];
 	}
-	function inWard(){
+	function In_Ward(){
 	    if(!$this->is_loaded) return false;
 		return $this->encounter['in_ward'];
 	}
@@ -697,6 +717,12 @@ class Encounter extends Notes {
 			return true;
 		}else{return false;}
 	}
+	/**
+	* saveDischargeNotesFromArray() saves the discharge notes of an encounter
+	* the data must be contained first in an array and passed to the function by reference
+	* @param $data_array (array) = the data in the array
+	* return true/false
+	*/
 	function saveDischargeNotesFromArray(&$data_array){
 		$this->setTable($this->tb_notes);
 		$this->data_array=$data_array;
@@ -731,5 +757,91 @@ class Encounter extends Notes {
 		    } else { return false;}
 		} else { return false;}
 	}
+	/**
+	* useSicknessConfirm() points  the core to the care_encounter_sickconfirm table and fields
+	* public
+	* return void
+	*/
+	function useSicknessConfirm(){
+		$this->coretable=$this->tb_sickconfirm;
+		$this->ref_array=$this->fld_sickconfirm;
+	}	
+	/**
+	* getSicknessConfirm() gets a stored sickness confirmations of an encounter
+	* public
+	* @param $nr (int) = the item nr of the record , if $nr=0 return false
+	* return ADODB record object or false
+	*/
+	function getSicknessConfirm($nr=0){
+	    global $db;
+		if(!$nr) return false;
+		$this->sql="SELECT s.*,d.sig_stamp,d.logo_mime_type 
+							FROM $this->tb_sickconfirm AS s 
+							LEFT JOIN $this->tb_dept AS d ON s.dept_nr=d.nr
+							WHERE s.nr=$nr";
+		//echo $sql;
+		if($this->result=$db->Execute($this->sql)) {
+		    if($this->rec_count=$this->result->RecordCount()) {
+				return $this->result;
+		    } else { return false;}
+		} else { return false;}
+	}
+	/**
+	* allSicknessConfirm() gets all stored sickness confirmations of an encounter
+	* public
+	* @param $dept_nr (int) = the department id number , if $dept_nr==0 all records for the encounter nr will be fetched
+	* @param $enc_nr (int) = encounter number
+	* return ADODB record object or false
+	*/
+	function allSicknessConfirm($dept_nr=0,$enc_nr=0){
+	    global $db;
+		if(!$this->internResolveEncounterNr($enc_nr)) return false;
+		$this->sql="SELECT s.*,d.LD_var,d.name_formal,d.sig_stamp,d.logo_mime_type
+						FROM $this->tb_sickconfirm AS s
+							LEFT JOIN $this->tb_dept AS d ON s.dept_nr=d.nr
+						WHERE s.encounter_nr=$this->enc_nr AND s.status NOT IN ($this->dead_stat)";
+		if($dept_nr) $this->sql=$this->sql." AND s.dept_nr=$dept_nr";
+		$this->sql.=' ORDER BY s.date_confirm DESC';
+		
+		//echo $sql;
+		if($this->result=$db->Execute($this->sql)) {
+		    if($this->rec_count=$this->result->RecordCount()) {
+				return $this->result;
+		    } else { return false;}
+		} else { return false;}
+	}
+	/**
+	* saveSicknessConfirm() saves a sickness confirmation of an encounter
+	* public
+	* @param $data (array) = the data in arrray, passed by reference
+	* return true/false;
+	*/
+	function saveSicknessConfirm(&$data){
+		if(!is_array($data)) return false;
+		$this->useSicknessConfirm();
+		$data['date_create']=date('Y-m-d H:i:s');
+		$this->data_array=$data;
+		return $this->insertDataFromInternalArray();
+	}
+	/**
+	* EncounterInsuranceData() returns the insurance relevant data of an encounter
+	* public
+	* @param $enc_nr (int) = encounter number
+	* return adodb object or false
+	*/
+	function EncounterInsuranceData($enc_nr=0){
+	    global $db;
+		if(!$this->internResolveEncounterNr($enc_nr)) return false;
+		$this->sql="SELECT e.insurance_nr, i.name, i.sub_area FROM $this->tb_enc  AS e
+							LEFT JOIN $this->tb_insco AS i ON e.insurance_firm_id=i.firm_id
+						WHERE e.encounter_nr=$this->enc_nr AND e.status NOT IN ($this->dead_stat)";	
+		//echo $sql;
+		if($this->result=$db->Execute($this->sql)) {
+		    if($this->rec_count=$this->result->RecordCount()) {
+				return $this->result;
+		    } else { return false;}
+		} else { return false;}
+	}
+	 
 }
 ?>
