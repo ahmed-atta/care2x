@@ -79,4 +79,7 @@ $LDNagoyaTechInst='Nagoya Tech. Instituto';
 $LDRAIMJAVA='RAIMJAVA©';
 $LDNoImageSaved='Nenhuma imagem foi salva!';
 $LDImageNotes='Anotações da imagem';
+
+#2004-08-05 EL
+$LDMissingImageFile = 'Missing image file(s)!';
 ?>

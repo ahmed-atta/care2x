@@ -81,4 +81,8 @@ $LDPlsEnterStartTime='请输入开始时间';
 $LDPlsEnterEndTime='请输入结束时间';
 $LDPlsEnterScrubNurse='请输入临时护士的信息';
 $LDPlsEnterORNr='请输入手术ID或编号';
+
+#2004-08-06 EL
+$LDInvalidDate ='The entered date was invalid.';
+$LDNoPastDate = 'Dates in the past are not accepted.';
 ?>

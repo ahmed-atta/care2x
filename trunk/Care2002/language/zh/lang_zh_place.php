@@ -39,4 +39,9 @@ $LDPlsChangeName='请输入一个不同的名称';
 $LDAddressNameExists='此地址已存在。';
 $LDAddressInfoSaved='此地址数据已成功保存。';
 $LDSearchPrompt='请输入地址或位置编码';
+#2004-09-02
+$LDWrongUneceLocCode = 'UNECE location code type accepts only numbers between 0 and 99.';
+$LDEnterZero = 'If you do not know the value please enter 0';
+$LDEnterISOCountryCode = 'Please enter the ISO country code.';
+$LDEnterQMark ='If you do not know the code please enter a question mark (?)';
 ?>

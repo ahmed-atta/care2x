@@ -22,7 +22,6 @@ $LDDiagnosis="Diagnóstico";
 $LDRecBy="Recomendado por";
 $LDTherapy="Tratamento sugerido";
 $LDSpecials="Observações";
-
 $LDPatientSearch="Procurar dados do paciente";
 $LDAdmit="Admissão";
 $LDSearch="Procurar";
@@ -32,48 +31,38 @@ $LDGoodMorning="Bom dia";
 $LDGoodDay="É bom te ver";
 $LDGoodAfternoon="Boa tarde!";
 $LDGoodEvening="Boa noite";
-
 $LDNewForm="Eu preciso de um formulário vazio por favor.";
-
 $LDForceSave="Salvar de qualquer forma";
 $LDSaveData="Salvar dados";
 $LDResetData="Restaurar dados";
 $LDReset="Restaurar";
 $LDSave="Salvar";
 $LDCancel="Cancelar";
-
 $LDCancelClose="Cancelar e voltar para a página inicial";
 $LDCloseWin="Fechar a janela de Admissão";
 $LDError="Preencha os campos em <font color=red>vermelho</font> por favor.";
 $LDErrorS="Preencha os campos em <font color=red>vermelho</font> por favor.";
-
 $fieldname=array("Nº Paciente","Sobrenome","Nome","Data de Nasc.","Opções");
 $LDEntryPrompt="Entre com a palavra-chave. Por exemplo: sobrenome, ou nome, ou data de nascimento, etc.";
 $LDSEARCH="PROCURAR";
 $LDAdmWantEntry="Admitir um paciente";
 $LDAdmWantSearch="Procurar um paciente";
 $LDAdmWantArchive="Procurar no arquivo";
-
 /**************** note the " ~nr~ " must not be erased it will be replaced by the script with the number of search results ******/
-$LDSearchFound="Foi(ram) encontrado(s) <font color=red><b>~nr~</b></font> registro(s) de pacientes.";
-
+$LDSearchFound="Encontrado(s) <font color=red><b>~nr~</b></font> registro(s) de paciente(s).";
 $LDShowData="Exibir dados";
 $LDPatientData="Dados do paciente";
 $LDBack2Admit="Voltar para admissão";
 $LDBack2Search="Voltar para a procura";
 $LDBack2Archive="Voltar para o arquivo";
-
 $LDFrom="De";
 $LDTo="Para";
 $LDUpdateData="Atualizar dados";
 $LDNewArchive="Nova procura no arquivo";
 $LDAdmArchive="Admissão - Arquivo";
-
 /************** note: do not erase the " ~nr~ " it will be replaced by the script with a number **************/
 $LDFoundData="Foi(ram) encontrado(s) ~nr~ registro(s)!<br>Clique à direita.";
-
 $LDClk2Show="Exibir dados";
-
 $LDElements=array(
 								"",
 								"Sobrenome",
@@ -90,15 +79,12 @@ $LDNewDocu="Documentar o paciente";
 $LDExtraInfo="Informações extras";
 $LDMedAdvice="Recomendação médica";
 $LDMedocs="Prontuário";
-
 $LDYes="Sim";
 $LDNo="Não";
-
 $LDEditOn="Documentado de";
 $LDEditBy="Documentado por";
 $LDKeyNr="Nº da chave";
 $LDDocSearch="Procurar um prontuário";
-
 $LDMedDocOf="Prontuário de";
 $LDMedocsElements=array(
 								"",
@@ -114,7 +100,6 @@ $LDMedocsElements=array(
 $LDStartNewDoc="Iniciar um novo prontuário";
 $LDNoMedocsFound="Nenhum prontuário foi encontrado!";
 $LDAt="em";
-
 $LDDept="Departamento";
 $LDRoomNr="Nº da Sala";
 $LDAdmitType="Tipo admitido";
@@ -129,25 +114,21 @@ $LDReligion="Religião";
 $LDTherapyType="Tipo de Tratamento";
 $LDTherapyOpt="Opções de Tratamento";
 $LDServiceType="Tipos de Serviços";
-
 $LDClick2Print="Clique no código de barras para imprimir";
-
 $LDEnterDiagnosisNote="Unir anotações de diagnóstico e publicações:";
 $LDEnterTherapyNote="Unir anotações de tratamento e publicações:";
 $LDSeeDiagnosisNote="Anotações de diagnóstico e publicações:";
 $LDSeeTherapyNote="Anotações de tratamento e publicações:";
 $LDMakeBarcodeLabels="Gerar código de barras";
-
 $LDPlsEnterDept="<b>Entre em seu departamento, clínica ou sua área de trabalho.</b><br>";
 $LDOkSaveNow="OK! Salvar agora";
-
 $LD_ddpMMpyyyy="dd.mm.yyyy";
 $LD_yyyyhMMhdd="yyyy-mm-dd";
 $LD_MMsddsyyyy="mm/dd/yyyy";
 /* 2002-10-13 EL */
 $LDPlsSelectPatientFirst="Favor selecionar o paciente primeiro.";
 /* 2002-11-30 EL */
-$LDPatientRegister='Registro do paciente';
+$LDPatientRegister='Registro de pessoa';
 $LDRegDate='Data do registro';
 $LDRegTime='Hora do registro';
 $LDRegBy='Registrado por';
@@ -156,7 +137,7 @@ $LDName3='Terceiro nome';
 $LDNameMid='Nome do meio';
 $LDNameMaiden='Nome de solteiro';
 $LDNameOthers='Outros nomes';
-$LDStreet='Rua';
+$LDStreet='Rua/Av';
 $LDStreetNr='Nº.';
 $LDTownCity='Cidade';
 $LDProvState='Estado';
@@ -175,7 +156,7 @@ $LDEmail='Email';
 $LDZipCode='CEP';
 $LDPhoto='Foto';
 /* 2002-12-02 EL*/
-$LDPatientRegisterTxt='Registrar pacientes, procurar registros, procurar arquivos.';
+$LDPatientRegisterTxt='Registrar pessoas, procurar registros, procurar arquivos.';
 $LDAdmitNr='Nº. de admissão';
 $LDPatient='Paciente';
 $LDVisit='Visita';
@@ -236,20 +217,20 @@ $LDAttDrServiceClass='Classe de serviços médicos';
 $LDAdmitClass='Classe de admissão';
 /* 2003-02-15 EL*/
 $LDEnterSearchKeyword='Entre com a palavra-chave';
-$LDSearchFoundData='A procura encontrou <font color=red><b>~nr~</b></font> dado(s) relevantes.';
+$LDSearchFoundData='A procura encontrou <font color=red><b>~nr~</b></font> dado(s) relevante(s).';
 $LDQuickList='Lista instantânea';
 $LDSeveralInsurances='O paciente tem vários convênios. Clique aqui para editar.';
 $LDTop='Início';
 $LDInsuranceClass='Classe do convênio';
 $LDRecordsHistory='Histórico de registro';
 /* 2003-02-16 EL*/
-$LDNotYetAdmitted='Ainda não está admitido';
-$LDPatientCurrentlyAdmitted='Paciente está atualmente admitido!';
+$LDNotYetAdmitted='Ainda não admitido';
+$LDPatientCurrentlyAdmitted='Paciente atualmente admitido!';
 $LDOptions='Opções';
 /** note the ' ~nr~ ' must not be erased it will be replaced by the script with the number of search results ******/
 $LDSearchFoundAdmit='Eu encontrei <font color=red><b>~nr~</b></font> dado(s) de admissão relevante(s).';
 $LDPatientNr='Nº. do paciente';
-$LDNoRecordYet='~tag~ ainda inexistente para ~obj~.';
+$LDNoRecordYet='~tag~ inexistente ~obj~ ainda.';
 $LDNoRecordFor='~obj~ ainda inexistente para ~tag~.';
 $LDRegistrationNr='Nº. do registro';
 $LDDate='Data';
@@ -376,12 +357,11 @@ $LDPrevious='Anterior';
 $LDNext='Próximo';
 $LDAdvancedSearch='Procura avançada';
 #2003-10-28 EL
-$LDIncludeFirstName='Search for first names too.';
-$LDTipsTricks='Tips & tricks';
+$LDIncludeFirstName='Procure pelo primeiro nome também.';
+$LDTipsTricks='Dicas & truques';
 #2003-12-06 EL
-$LDPrintPDFDoc='Make PDF document';
-$LDDeathDate='Death date';
-
+$LDPrintPDFDoc='Criar documentos PDF';
+$LDDeathDate='Data do óbito';
 # 2003-10-14 NDHC
 $LDITA='Intratracheal anesthesia';
 $LDLA='Local anesthesia';
@@ -394,12 +374,18 @@ $LDAntibiotic='Antibiotic';
 $LDMask='Mask';
 $LDIntravenous='Intravenous';
 $LDSubcutaneous='Subcutaneous';
-$LDPreAdmission='Pre-admission';
+$LDPreAdmission='Pré-admissão';
 #2004-01-01 EL
 $LDPersonDuplicate='This person seems to be registered already.';
 $LDSimilarData='The following listed person has similar personal data.';
 $LDSimilarData2='The following listed persons have similar personal data.';
 $LDPlsCheckFirst='Please check it out first before you decide the next step.';
 $LDPlsCheckFirst2='Please check them out first before you decide the next step.';
-$LDShowDetails='Show details';
+$LDShowDetails='Exibir detalhes';
+
+# 2004-05-22 KB
+$LDNr='Nr.';
+$LDOtherHospitalNr='Other Hospital Nr.';
+$LDSelectOtherHospital = 'Select other hospital to change the number';
+$LDNoNrNoDelete = 'no number = delete';
 ?>

@@ -22,4 +22,12 @@ $LDListApptByDoc='Lista de agendamento por clínica';
 $LDdone='Feito';
 $LDOk='Ok';
 $LDSelect='Selecionar';
+$LDHelp="Help";
+
+$LDCloseHelpWin="Close help window";
+
+$LDRefreshWindow = 'Refresh display';
+
+$LDNext = 'Next';
+$LDPrevious = 'Previous';
 ?>
