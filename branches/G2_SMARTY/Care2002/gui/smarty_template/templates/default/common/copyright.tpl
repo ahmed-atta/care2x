@@ -3,12 +3,12 @@
 <td align="center">
   <table width="100%" bgcolor="#ffffff" cellspacing=0 cellpadding=5>
    <tr>
-	<td>
-	{$sCopyright}
-	<font size=1 face="verdana,arial">
-	{$sPageTime}
-	</font>
-     </td>
+   	<td>
+	    {{$sCopyright}}
+	    <font size=1 face="verdana,arial">
+	    {{$sPageTime}}
+	    </font>
+    </td>
    <tr>
   </table>
 </td>

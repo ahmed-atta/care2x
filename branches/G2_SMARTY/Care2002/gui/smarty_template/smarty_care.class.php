@@ -87,6 +87,12 @@ class smarty_care extends Smarty {
   //$this->assign("SmartyLogo","<a href='http://smarty.php.net/'><img src='$Logo' border='00' height='31' width='88' /></a>");
   $this->debug = true;
   // $this->caching = true;
+  
+  /**
+  * Smarty delimiters
+  */
+  $this->left_delimiter = '{{';
+		$this->right_delimiter = '}}';
 
  }
  
