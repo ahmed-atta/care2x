@@ -233,7 +233,12 @@ if($show_print_button) echo '<a href="javascript:window.print()"><img '.createLD
 /* Load the form for printing out */
 if($subtarget=='chemlabor' || $subtarget=='baclabor')
 {
-    echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'&batch_nr='.$batch_nr.'&child_img=1&subtarget='.$subtarget.'" >';
+    if($lang=='ar'||$lang=='fa'){// Modified on ( 22/01/2004) By Walid Fathalla
+	echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large_ar.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'&batch_nr='.$batch_nr.'&child_img=1&subtarget='.$subtarget.'" >';
+	}else{
+	echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'&batch_nr='.$batch_nr.'&child_img=1&subtarget='.$subtarget.'" >';
+	}    
+	//echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'&batch_nr='.$batch_nr.'&child_img=1&subtarget='.$subtarget.'" >';
 }
 else
 {

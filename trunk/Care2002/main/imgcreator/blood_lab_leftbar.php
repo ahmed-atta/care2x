@@ -19,26 +19,30 @@ require($root_path.'include/inc_front_chain_lang.php');
 $im =@ ImageCreateFromPNG($root_path.'gui/img/common/default/blood_wardfill.png');
 
 $black = ImageColorAllocate ($im, 0, 0, 0);
+
+if($form_bottom) $str_print=$LDFillByLab;
+else $str_print=$LDFillByWard;
 //ImageColorTransparent($im,$green);
 // *******************************************************************
 // * the following code is for ttf fonts use only for php machines with ttf support
 // *******************************************************************
-/*
-/* -------------- START ----------------------------------------------*/
+if($lang=='ar' || $lang=='fa'){// Modified on ( 22/01/2004) By Walid Fathalla
+	# path of ttf is ok
+	include_once($root_path.'include/inc_ttf_check_ar.php');
+    include_once($root_path.'include/inc_ttf_ar2uni.php');//To actvate function of show arabic
+	ImageTTFText($im,14,90,16,390,$black,$arial,ar2uni("$str_print"));
 
-/* -------------- END -------------------------------------------------*/
-
-
+}else{
 // ******************************************************************
 // * the following code is the default - uses system fonts
 // ******************************************************************
 
 /* -------------- START  ----------------------*/
 
-if($form_bottom) $str_print=$LDFillByLab;
- else $str_print=$LDFillByWard;
+//if($form_bottom) $str_print=$LDFillByLab;
+ //else $str_print=$LDFillByWard;
 ImageStringUp($im,5,2,390,$str_print,$black);
-
+}
 
 /* -------------- END --------------------------*/
 

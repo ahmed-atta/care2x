@@ -173,7 +173,12 @@ if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_baclabor.php
           /* The patient label */
  if($edit || $edit_findings || $read_form || $edit_form)
         {
+		   if($lang=='ar' || $lang=='fa'){// Modified on ( 22/01/2004) By Walid Fathalla
+		   echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large_ar.php'.URL_REDIRECT_APPEND.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
+           }else{
 		   echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php'.URL_REDIRECT_APPEND.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
+           }
+		   //echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php'.URL_REDIRECT_APPEND.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
 		}
 
 ?>
