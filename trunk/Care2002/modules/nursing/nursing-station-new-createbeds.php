@@ -10,6 +10,9 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+
+define('DEFAULT_NR_OF_BEDS',2); // Define here the default number of beds if the bed value is empty or 0
+
 define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
@@ -18,11 +21,12 @@ $thisfile=basename(__FILE__);
 $breakfile='nursing-station-info.php?sid='.$sid.'&lang='.$lang;
 /* Load the ward object */
 require_once($root_path.'include/care_api_classes/class_ward.php');
-$ward_obj=new Ward;
+$ward_obj=new Ward($ward_nr);
 
 if(isset($mode)&&$mode=='save_beds'){
 	$saved_ok=false;
 	
+	// Set the values common to all rooms 
 	$HTTP_POST_VARS['date_create']=date('Y-m-d');
 	$HTTP_POST_VARS['history']="Created: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
 	$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
@@ -30,19 +34,22 @@ if(isset($mode)&&$mode=='save_beds'){
 	$HTTP_POST_VARS['create_time']='NULL';
 	
 	for($i=$room_nr_start;$i<=$room_nr_end;$i++){
-		$beds='beds'.$i;
-		$info='info'.$i;
-		$HTTP_POST_VARS['room_nr']=$i;
-		$HTTP_POST_VARS['nr_of_beds']=$$beds;
-		$HTTP_POST_VARS['info']=$$info;
-		if($ward_obj->saveWardRoomInfoFromArray($HTTP_POST_VARS)) $saved_ok=true;
+	
+		if(!$ward_obj->RoomExists($i)){
+			$beds='beds'.$i;
+			$info='info'.$i;
+			$HTTP_POST_VARS['room_nr']=$i;
+			if(empty($$beds)) $$beds=DEFAULT_NR_OF_BEDS;
+			$HTTP_POST_VARS['nr_of_beds']=$$beds;
+			$HTTP_POST_VARS['info']=$$info;
+			if($ward_obj->saveWardRoomInfoFromArray($HTTP_POST_VARS)) $saved_ok=true;
+		}
 	}
 	
 	if($saved_ok){
-		header("location:nursing-station.php".URL_REDIRECT_APPEND."&edit=1&ward_nr=$ward_nr");
+		header("location:nursing-station.php".URL_REDIRECT_APPEND."&edit=1&ward_nr=$ward_nr&retpath=ward_mng");
 		exit;
 	}	
-	
 }else{
 	/* Get the ward's data */
 	$ward=&$ward_obj->getWardInfo($ward_nr);
@@ -79,7 +86,7 @@ div.pcont{ margin-left: 3; }
 <?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 
 
-<table width=100% border=0 cellpadding="0" cellspacing=0>
+<table width=100% border=0 cellpadding=0 cellspacing=0>
 <tr>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10">
 <FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp; <?php echo "$LDNursing $LDStation - $LDProfile" ?></STRONG></FONT></td>

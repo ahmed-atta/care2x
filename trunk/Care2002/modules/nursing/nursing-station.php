@@ -38,14 +38,14 @@ if($s_date==date('Y-m-d')) $is_today=true;
 
 if(!isset($mode)) $mode="";
 
+$breakfile='nursing.php'.URL_APPEND; // default breakfile
+
 if(isset($retpath)){
 	switch($retpath)
 	{
 		case 'quick': $breakfile='nursing-schnellsicht.php'.URL_APPEND;
 							break;
 		case 'ward_mng': $breakfile='nursing-station-info.php'.URL_APPEND.'&ward_nr='.$ward_nr.'&mode=show';
-							break;
- 		default:  $breakfile='nursing.php'.URL_APPEND;
 	}
 }
 
