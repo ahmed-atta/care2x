@@ -1,3 +1,3 @@
 <?php
-$LDAdmit='Admission History and Physical';
+$LDAdmit='Historique des admissions et entrées physiques';
 ?>

@@ -1,4 +1,4 @@
 <?php
-$LDTogglePreviewOrig='Cliquez pour afficher la taille originale de l\'image';
-$LDToggleOrigPreview='Cliquez pour afficher la taille réduite de l\'image';
+$LDTogglePreviewOrig='Cliquez pour afficher l\'image en taille réelle';
+$LDToggleOrigPreview='Cliquez pour afficher l\'image en taille réduite';
 ?>
