@@ -25,8 +25,8 @@ $HTTP_SESSION_VARS['sess_user_origin']='dept';
 
 $default_url_news='modules/news/newscolumns.php';
 
-$breakfile=$root_path.$HTTP_SESSION_VARS['sess_path_referer'].URL_APPEND;
-$returnfile=$breakfile;
+$returnfile=$root_path.$HTTP_SESSION_VARS['sess_path_referer'].URL_APPEND;
+$breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 
 $HTTP_SESSION_VARS['sess_path_referer']=$top_dir.basename(__FILE__);
 
@@ -89,7 +89,7 @@ function gethelp(x)
 <STRONG>&nbsp; &nbsp;<?php echo $LDPageTitle ?></STRONG></FONT></td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
 <?php if($cfg['dhtml'])echo'<a href="#" onClick=history.back()><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a>';?>
-<a href="javascript:gethelp()"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="startframe.php?sid=<?php echo "$sid&lang=$lang";?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td></tr>
+<a href="javascript:gethelp()"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td></tr>
 <tr valign=top >
 <td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2><p><br>
 <ul>
