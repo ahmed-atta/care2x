@@ -4,8 +4,8 @@ if(!isset($root_path)||$root_path=="") $root_path="../";
 ?>
 <FONT    SIZE=1  FACE="Arial" color=gray>
 This norwegian version is being developed by Are Kristensen of www.amenta.com.
- Denne applikasjonen er levert av<a href="http://www.care2x.com" target=_new>CARE 2002 beta versjon 1.0.08</a>. Programmet er fritt tilgjengelig, 'open source software', med GPL lisens kategori.
-  CARE 2002 er skrevet og dirstribuert gratis under forutsetning av at GNU General Public License er oppfylt. For detaljer om denne lisensen se 
+ Denne applikasjonen er levert av<a href="http://www.care2x.com" target=_new>CARE 2X beta versjon 1.0.09</a>. Programmet er fritt tilgjengelig, 'open source software', med GPL lisens kategori.
+  CARE 2X er skrevet og dirstribuert gratis under forutsetning av at GNU General Public License er oppfylt. For detaljer om denne lisensen se 
 
  <a href="<?php echo $root_path ?>legal_gnu_gpl.htm" target=_new>kopi av lisensen</a>. 
 

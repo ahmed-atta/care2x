@@ -2,7 +2,7 @@
 
 $LDDiagnosticTest='Bestilling av diagnosetest';
 
-$LDHospitalName='CARE 2002';
+$LDHospitalName='CARE 2X';
 
 $LDCentralLab='Hovedlabratorie';
 

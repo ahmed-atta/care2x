@@ -1,5 +1,5 @@
 <?php
-$LDMainTitle='Care 2002 Geintegreerd Ziekenhuis Informatie Systeem';
+$LDMainTitle='CARE 2X Geintegreerd Ziekenhuis Informatie Systeem';
 
 /*$LDMainTitle='Marienhospital is een virtueel geintegreerd Ziekenhuis Informatie Systeem op Internet';
 */

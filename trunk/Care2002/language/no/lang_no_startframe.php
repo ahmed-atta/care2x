@@ -1,6 +1,6 @@
 <?php
 
-$LDMainTitle='Care 2002 Integrated Hospital Information System';
+$LDMainTitle='CARE 2X Integrated Hospital Information System';
 
 
 

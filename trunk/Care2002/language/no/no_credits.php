@@ -1,7 +1,7 @@
 <?php
 require_once('../../include/inc_vars_resolve.php');
 ?>
-<html>
+<?php html_rtl($lang); ?>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <title>Vi takker</title>
@@ -21,7 +21,7 @@ require_once('../../include/inc_vars_resolve.php');
 
 			<P><img src="../../fotos/credits/are_kristensen.jpg"  border=0  width=135 align=right vspace=10>
 
-			<b>Are Kristensen  oversatte Care 2002 til Norge.</b>
+			<b>Are Kristensen  oversatte CARE 2X til Norge.</b>
 
 			<p>
 
@@ -39,7 +39,7 @@ require_once('../../include/inc_vars_resolve.php');
 
 			<P><img src="../../fotos/credits/elpidio_latorilla_3.jpg" border=0  align=right vspace=10>
 
-			<b>Den første beta versjon av CARE 2002 var lagd av Elpidio Latorilla:</b>
+			<b>Den første beta versjon av CARE 2X var lagd av Elpidio Latorilla:</b>
 
 			<p>
 
@@ -73,7 +73,7 @@ require_once('../../include/inc_vars_resolve.php');
 
 			<P><img src="../../fotos/credits/giuseppe_scarpi.jpg"  border=0  width=135 height=170 align=right vspace=10>
 
-			<b>Giuseppe Scarpi (IT) oversatte Care 2002 til italiensk.</b>
+			<b>Giuseppe Scarpi (IT) oversatte CARE 2X til italiensk.</b>
 
 			<p>
 
@@ -143,7 +143,7 @@ Grunnen til at han ble med på 'Åpen kildekode' er: <br><i>"En ideel verdan kan b
 
             <P><img src="../../fotos/credits/daniel_zilli.jpg"  border=0  align=right vspace=10>
 
-			<b>Daniel Zilli (BR) oversatte Care 2002 og www.care2x.com til  brasiliansk-portogisisk.</b>
+			<b>Daniel Zilli (BR) oversatte CARE 2X og www.care2x.com til  brasiliansk-portogisisk.</b>
 
 			
 
@@ -173,7 +173,7 @@ Grunnen til at han ble med på 'Åpen kildekode' er: <br><i>"En ideel verdan kan b
 
             <P><img src="../../fotos/credits/agus_mr.jpg"  border=0  align=right vspace=10>
 
-			<b>Agus Muhammad Ramdan (ID) oversatte Care 2002 og www.care2x.com til indonesisk.</b>
+			<b>Agus Muhammad Ramdan (ID) oversatte CARE 2X og www.care2x.com til indonesisk.</b>
 
 			
 
@@ -319,7 +319,7 @@ Grunnen til at han ble med på 'Åpen kildekode' er: <br><i>"En ideel verdan kan b
 
 			<P><img src="../../gui/img/common/default/pixel.gif"  border=0  width=135 align=right vspace=10>
 
-			<b>Daniele Frijia (DE) sjekket sikkerheten på Care 2002.</b>
+			<b>Daniele Frijia (DE) sjekket sikkerheten på CARE 2X.</b>
 
 			<br>
 
