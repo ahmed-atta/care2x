@@ -72,8 +72,10 @@ $LDNewsDummy=array(1=>'første',2=>'andre',3=>'tredje',4=>'fjerde');
 
 
 
-$LDNoFrame='Disse websidene bruker frames for optimal funksjon. Vennligst innstaller en  web-leser som støtter dette. Vi anbefaler Microsoft Internet Explorer version 5.0 eller større. Vennligst aktiver Javascript (JScript) og mulighetne for bruk av cookie\'s';
-
+/*$LDNoFrame='Disse websidene bruker frames for optimal funksjon. Vennligst innstaller en  web-leser som støtter dette. Vi anbefaler Microsoft Internet Explorer version 5.0 eller større. Vennligst aktiver Javascript (JScript) og mulighetne for bruk av cookie\'s';
+*/
+$LDNoFrame='Disse websidene bruker frames for optimal funksjon. Vennligst innstaller en  web-leser som støtter dette. 
+Vennligst aktiver Javascript (JScript) og mulighetne for bruk av cookie\'s'; // Removed the MSIE ref. 2003-04-25 Elpidio
 						
 
 $LDClk2Write='endre her..';

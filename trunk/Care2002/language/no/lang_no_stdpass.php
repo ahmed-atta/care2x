@@ -116,4 +116,7 @@ $LDLoggedOut='Logget ut';
 /* 2003-03-18 EL */
 $LDNursesList='Nurses\' List';
 $LDAppointments='Appointments';
+/* 2003-04-27 */
+$LDInsuranceCoManager='Insurance Company Manager';
+$LDAddressMngr='Address Manager';
 ?>

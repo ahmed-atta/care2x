@@ -34,5 +34,12 @@ $LDBacteriologicalLaboratory='Bakteriologisk labratorium';
 $LDTechnicalMaintenance='Technical Maintenance';
 $LDITDepartment='IT Department';
 $LDGeneralAmbulatory='General Ambulatory';
-$LDBloodBank='Blood Bank';
+$LDBloodBank='Blod Bank';
+$LDNursing='Sykepleie';
+/* 2003-04-27 EL */
+$LDMedical='Medical';
+$LDSupport='Non-medical';
+$LDNews='News';
+$LDDepartment='Department';
+$LDPressRelations='Presse';
 ?>

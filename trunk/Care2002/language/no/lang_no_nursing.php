@@ -337,7 +337,7 @@ $LDConfirmLock='Vil du reservere denne sengen?';
 
 $LDClk2Occupy='Klikk for å bruke denne sengen';
 
-$LDInsurance=array(
+/*$LDInsurance=array(
 
 								'x'=>'Betale selv',
 
@@ -346,7 +346,7 @@ $LDInsurance=array(
 								'kasse'=>'Generellt'
 
 								);
-
+*/
 $LDSave='Lagre';
 
 $LDNurse='Sykepleier';
@@ -686,5 +686,13 @@ $LDNoDiagReport='No diagnostic report available.';
 /* 2003-03-23 EL */
 $LDNursesList='Nurses\' List';
 $LDNursesListTxt='List, View, Create, & Edit Nurses\' List';
-
+/* 2003-04-18 */
+$LDInsurance='Generellt';
+$LDPrivate='Privat';
+$LDSelfPay='Betale selv';
+/* 2003-04-21 EL */
+$LDRoom='Room';
+$LDAdm_Nr='Adm.Nr.';
+$LDStatus='Status';
+$LDInWard='In Ward';
 ?>
