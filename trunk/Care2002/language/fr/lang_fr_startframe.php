@@ -5,8 +5,8 @@ $LDMainTitle="Care 2002 Syst&egrave;me hospitalier int&eacute;gr&eacute; d'infor
 */
 $LDInviteAskMe='Entrez votre demande, par exemple: "Quel est le num&eacute;ro de t&eacute;lephone de M9d?"';
 $LDTipsLink='Astuces:';
-$LDTipsAskMe='Essayez des synonymes, par exemple tapez "chambre" &agrave; la place de "salle".';
-$LDTipsImgAlt="Cliquez ici pour des astuces comment obtenir les meilleurs r&eacute;sultats.";
+$LDTipsAskMe='Essayez des synonymes, par exemple tapez "chambre" au lieu de "salle".';
+$LDTipsImgAlt="Cliquez ici pour des astuces comment obtenir meilleurs r&eacute;sultats.";
 $LDSubmitBut="Envoyer la demande";
 
 $LDQuickInfo="Les informations rapides";
