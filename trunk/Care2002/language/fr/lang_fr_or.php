@@ -1,39 +1,39 @@
 <?php
-$LDOr='OR';
-$LDLOGBOOK='LOGBOOK';
-$LDOrDocument='OR Documentation';
-$LDOrDocumentTxt='Documenting the operative services';
+$LDOr='OP Room';
+$LDLOGBOOK='JOURNAL';
+$LDOrDocument='OP Room Documentation';
+$LDOrDocumentTxt='Documenterles services opérationnels';
 
 /**
 *  A tiny dictionary:
 *  DOC = doctor on call duty
 *  ORNOC = Operating room nurse on call duty
-*  OR = operating room (surgery room)
+*  OP Room = operating room (surgery room)
 */
-$LDDOC='DOC';
-$LDORNOC='ORNOC';
-$LDScheduler='Scheduler';
+$LDDOC='Doctor-on-call';
+$LDORNOC='Nurse-on-call';
+$LDScheduler='Calendrier';
 
-$LDQuickView='Quickview';
-$LDQviewTxtDocs='Quick view of today\'s DOC (Doctor-On-Call)';
-$LDOrLogBook='OR nursing logbook';
-$LDOrLogBookTxt='Documenting the nursing services in OR, archive files';
-$LDOrProgram='OR program';
-$LDOrProgramTxt='Show, edit, create, etc. an OR program';
+$LDQuickView='Vue rapide';
+$LDQviewTxtDocs='Vue rapide du DOC d\'aujourd\'hui (Docteur-En-Attente)';
+$LDOrLogBook='OR Maternité logbook';
+$LDOrLogBookTxt='Documenting the nursing services in OP Room, archive files';
+$LDOrProgram='OP Room program';
+$LDOrProgramTxt='Show, edit, create, etc. an OP Room program';
 $LDQviewTxtNurse='Quick view of today\'s nurses\' on standby duty';
-$LDDutyPlanTxt='Show, edit, create ORNOC (OR Nurse-On-Call)';
+$LDDutyPlanTxt='Show, edit, create OP Room Nurse-on-call';
 $LDOnCallDuty='Standby duty';
 $LDOnCallDutyTxt='Documenting the work during an On-Call duty';
-$LDAnaLogBook='Anesthesia logbook';
+$LDAnaLogBook='Anesthesia journal';
 $LDAnaLogBookTxt='Documenting the anesthesia services, archive files';
-$LDQviewTxtAna='Quick view of today\'s ORNOC for anesthesia';
+$LDQviewTxtAna='Quick view of today\'s Nurse-on-call for anesthesia';
 $LDNewDocu='New document';
 $LDSearch='Search';
 $LDArchive='Archive';
 $LDSee='See';
 $LDUpdate='Update';
 $LDCreate='Create';
-$LDCreatePersonList='Create a OR Nurses list';
+$LDCreatePersonList='Create a OP Room Nurses list';
 $LDDoctor='Physician/Surgeon';
 $LDNursing='Nursing';
 $LDAna='Anaesthesia';
@@ -89,7 +89,7 @@ $LDScrubNurse='Scrub nurse';
 $LDOpRoom='OP room';
 $LDResetAll='Erase all entries';
 $LDUpdateData='Update data';
-$LDStartNewDocu='Start a new document';
+$LDStartNewDocu='Create a new document';
 $LDSearchKeyword='Search keyword: eg. given name or family name';
 
 $LDSrcListElements=array(
@@ -146,7 +146,7 @@ $LDOpIn='Entry';
 $LDOpOut='Exit';
 $LDOpInFull='Entry';
 $LDOpOutFull='Exit';
-$LDEditPatientData='Edit the logbook data of ~tagword~';
+$LDEditPatientData='Edit the journal data of ~tagword~';
 $LDOpenPatientFolder='Open the nursing folder of ~tagword~';
 
 $tbuf=array('O','A','S','R');
@@ -176,7 +176,7 @@ $LDSearchPatient='Search patient';
 $LDUsedMaterial='Used OP materials';
 $LDContainer='Used container/instruments';
 $LDDRG='DRG';
-$LDShowLogbook='Show logbook';
+$LDShowLogbook='Show journal';
 
 /**
 *  A tiny dictionary:
@@ -209,7 +209,7 @@ $LDFunction='Function';
 $LDCurrentEntries='Current entries';
 $LDDeleteEntry='Delete entry';
 $LDSearchNewPerson='Search a new ~tagword~';
-$LDSorryNotFound='Sorry. I have not found anything. Please try a different keyword.';
+$LDSorryNotFound='Sorry. I did not find anything. Please try a different keyword.';
 $LDSearchPerson='Search ~tagword~';
 $LDJobId='Profession';
 $LDSearchResult='Search results';
@@ -228,11 +228,11 @@ $LDReposition='Reposition';
 $LDWaitTime='Idle time';
 $LDStart='Start';
 $LDEnd='End';
-$LDPatNoExist='The patient is not yet entered in the logbook. Please close this window and start the logbook from the very	beginning. If this problem persists, please notify the EDP department.';
+$LDPatNoExist='The patient is not yet entered in the journal. Please close this window and start the journal from the very	beginning. If this problem persists, please notify the EDP department.';
 $opts=array('-',
-					'Patient arrived late in OR',
-       				'Anesthesiologists arrived late in OR',
-       				'OR nurses arrived late in OR', 
+					'Patient arrived late in OP Room',
+       				'Anesthesiologists arrived late in OP Room',
+       				'OP Room nurses arrived late in OP Room', 
 					'Cleaning team finished late',
        				'Special reason');
 $LDReason='Reason';
@@ -249,7 +249,7 @@ $LDSearchElements=array(
 									'&nbsp;',
 									'Art.nr.',
     								'Art.name',
-    								'Description;',
+    								'Description',
  									'&nbsp;',
    									'Generic',
     								'License.Nr.'
@@ -273,7 +273,7 @@ $LDSelectArticle='Click to select this article';
 $LDDbInfo='Info from the databank';
 $LDRemoveArticle='Remove article from this list';
 $LDArticleNoList='Article not listed in the databank';
-$LDPromptSearch='Please enter a search keyword.<br>Like for example a given name, family name, or a birthdate, etc.	(Read also the  <a href=\'ucons.php\'>Tips</a>.)';
+$LDPromptSearch='Please enter a search keyword.<br>Like for example a given name, family name, or a birthdate, etc.	(See also "Help")';
 $LDKeyword='Keyword';
 $LDOtherFunctions='Other functions';
 $LDInfoNotFound='The needed information is not found!';
@@ -281,12 +281,12 @@ $LDButFf='But the following';
 $LDSimilar=' entry is';
 $LDSimilarMany=' entries are';
 $LDNeededInfo=' similar to the search keyword.';
-$LDPatLogbook='The patient is documented in the following logbook.';
+$LDPatLogbook='The patient is documented in the following journal.';
 $LDPatLogbookMany='The patient is documented in the following logbooks.';
 $LDDepartment='Department';
 $LDRoom='Room';
-$LDLastEntry='The following is the last entry in the logbook';
-$LDLastEntryMany='The following are the last entries in the logbook';
+$LDLastEntry='The following is the last entry in the journal';
+$LDLastEntryMany='The following are the last entries in the journal';
 $LDFrom='from';
 $LDFromMany='from';
 $LDYesterday='yesterday';
@@ -312,7 +312,7 @@ $LDAlertNotSavedYet='The latest entry is not saved yet. Do you want to save firs
 $LDPhone='Phone';
 $LDBeeper='Beeper';
 $LDOn='on';
-$LDNoPersonList='The list of personell is not yet created. Please create the list first. Click on the following button.';
+$LDNoPersonList='The list of personnel is not yet created. Please create the list first.';
 $LDNoEntryFound='No entry in plan found!';
 $LDShow='Show';
 $LDShowPrevLog='Show the previous log entries';
@@ -329,5 +329,13 @@ $LD_MMsddsyyyy='mm/dd/yyyy';
 $LDStandbyInit='S'; /* S = Standby */
 $LDOncallInit='O'; /* O = Oncall */
 $LDDutyPlan='Duty plan';
-
+/* 2003-03-18 EL */
+$LDSearchInAllDepts='Search in all departments';
+$LDAddNurseToList='Add a nurse to list';
+$LDNursesList='Nurses\' List';
+/* 2003-03-19 EL */
+$LDPlsSelectDept='Please select a department.';
+$LDSelectORoomNr='...and an OP Room.';
+$LDAlertNoDeptSelected=$LDPlsSelectDept;
+$LDAlertNoORSelected='Please select an operating room!';
 ?>

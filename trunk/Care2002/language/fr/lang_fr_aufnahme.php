@@ -369,10 +369,13 @@ $LDPlsSelectAdmissionType='Veuillez choisir le type d\'admission';
 $LDForInpatient='Pour patient hospitalisé';
 $LDForOutpatient='Pour patient externe';
 #2003-09-18 EL
-$LDPersonSearch='Search a person';
+$LDPersonSearch='Chercher un patient';
 #2003-09-24 EL
-$LDShowing='Showing';
-$LDPrevious='Previous';
-$LDNext='Next';
-$LDAdvancedSearch='Advanced search';
+$LDShowing='Afficher';
+$LDPrevious='Précédent';
+$LDNext='Suivant';
+$LDAdvancedSearch='Recherche avancée';
+#2003-10-28 EL
+$LDIncludeFirstName='Search for first names too.';
+$LDTipsTricks='Tips & tricks';
 ?>

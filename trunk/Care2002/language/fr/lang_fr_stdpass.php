@@ -1,113 +1,135 @@
 <?php
-$LDUserPrompt='Username';
-$LDPwPrompt='Password';
-$LDSubmitBut='Continue...';
-$LDPwNeeded='Password needed';
-$LDIntroTo='Introduction to editing news articles in';
-$LDWhatTo='What and how can I edit news articles in';
+$LDUserPrompt='Nom d\'utilisateur';
+$LDPwPrompt='Mot de passe';
+$LDSubmitBut='Continuer...';
+$LDPwNeeded='Mot de passe nécessaire';
+$LDIntroTo='Introduction à l\'édition de nouveau article';
+$LDWhatTo='Edition de nouveaux articles : Ce que c\'est et comment faire';
 
-$LDWrongEntry='Wrong entries!';
-$LDNoAuth='No access right';
-$LDAuthLocked='Access right frozen.';
+$LDWrongEntry='Entrées incorrectes!';
+$LDNoAuth='Vous n\'avez pas les droits d\'accès!';
+$LDAuthLocked='Vos droits d\'accès sont bloqués!';
 
-$LDNewData='New Data';
-$LDEdit='Edit';
-$LDAdmit='Admit';
-$LDSearch='Search';
-$LDArchive='Archive';
+$LDNewData='Nouvelle donnée';
+$LDEdit='Editer';
+$LDAdmit='Admettre';
+$LDSearch='Rechercher';
+$LDArchive='Archiver';
 $LDAdmission='Patient Admission';
 $LDAdmTargetEntry='Admission';
-$LDAdmTargetSearch='Search Admitted Patients';
-$LDAdmTargetArchive='Research in Archive';
-$LDAdmWantEntry='I need to admit a patient';
-$LDAdmWantSearch='I am looking for a patient';
-$LDAdmWantArchive='I need to research in the archive';
-$LDAdmHow2Enter='How to admit a patient';
-$LDAdmHow2Edit='How to edit a patient\'s data';
-$LDAdmHow2Search='How to find a certain patient\'s data';
-$LDAdmHow2Archive='How to research in the archives';
+$LDAdmTargetSearch='Rechercher les patiens admis';
+$LDAdmTargetArchive='Rechercher dans l\'historique';
+$LDAdmWantEntry='J\'ai besoin d\'admettre un patient';
+$LDAdmWantSearch='Je suis à la recherhce d\'un patient';
+$LDAdmWantArchive='J\'ai besoin de rechercher dans l\'historique';
+$LDAdmHow2Enter='Comment admettre un patient';
+$LDAdmHow2Edit='Comment éditer les données d\'un  patient';
+$LDAdmHow2Search='Comment trouver certaines données d\'un patient';
+$LDAdmHow2Archive='Comment rechercher dans l\'historique';
 
 $LDMedocs='Medocs';
-$LDMedocsHow2Enter='How to start a new medocs document';
-$LDMedocsHow2Edit='How to edit a medocs document';
-$LDMedocsHow2Search='How to find a certain medocs document';
-$LDMedocsHow2Archive='How to research in the medocs archives';
+$LDMedocsHow2Enter='Comment démarrer un nouveau document medocs ';
+$LDMedocsHow2Edit='Comment éditer un nouveau document medocs';
+$LDMedocsHow2Search='Comment trouver certains documents medocs';
+$LDMedocsHow2Archive='Comment rechercher dans l\'historique des medocs';
 
-$LDIntro2='Introduction to';
-$LDWhat2Do='How to do what in';
-$LDHowManage='How to manage the directory';
-$LDHowEnter='How to enter new phone information';
+$LDIntro2='Introduction à';
+$LDWhat2Do='Comment faire ce qu\'il y a dans ';
+$LDHowManage='Comment gèrer le répertoire';
+$LDHowEnter='Comment entrer une information téléphonique';
 
-$LDPhoneDir='Phone directory';
-$LDMakeDutyPlan='Create dutyplan';
-$LDDocsList='Doctors\' list';
-$LDNursingManage='Ward management';
+$LDPhoneDir='Répertoire Téléphonique';
+$LDMakeDutyPlan='Créer un plan d\'étude';
+$LDDocsList='Listes des Médecins';
+$LDNursingManage='Gestion des salles';
 
-$LDNursingStation='Nursing ward';
+$LDNursingStation='Salle d\'accouchement';
 $LDOrDocu='OR Documentation';
-$LDOrLogBook='OR nursing logbook';
-$LDOrNursing='OR nursing';
-$LDCreate='Create';
-$LDPersonList='Personnel list';
-$LDRepabotActivate='Activate Repabot';
-$LDQBotActivate='Activate Q-Bot';
+$LDOrLogBook='OR Accouchement livre d\'inscription';
+$LDOrNursing='OR Accouchement';
+$LDCreate='Crèer';
+$LDPersonList='Liste du Personnel';
+$LDRepabotActivate='Activer Repabot';
+$LDQBotActivate='Activer Q-Bot';
 
-$LDMedLab='Medical laboratory';
-$LDCancel='Cancel';
+$LDMedLab='Laboratoire Medical';
+$LDCancel='Annuler';
 
-$LDPharmacy='Pharmacy';
-$LDOrderArchive='Archive';
-$LDPharmaOrder='Ordering';
-$LDOrderCat='My product catalog';
-$LDPharmaDb='Databank';
-$LDPharmaOrderBot='Activate OrderBot';
+$LDPharmacy='Pharmacies';
+$LDOrderArchive='Historique';
+$LDPharmaOrder='Inscrire';
+$LDOrderCat='Mon catalogue de produit';
+$LDPharmaDb='Banque de donnée';
+$LDPharmaOrderBot='Activer OrderBot';
 
-$LDMedDepot='Medical Depot';
-$LDMediBotActivate='Activate Medibot';
-$LDSqlDb='SQL Databank';
-$LDManageAccess='Manage Access Rights';
-$LDListAll='List all';
-$LDSystemLogin='System Administrator Login';
-$LDSeeData='Display data';
-$LDNewData='Enter new data';
+$LDMedDepot='Dépot Medical';
+$LDMediBotActivate='Activer Medibot';
+$LDSqlDb='SQL Base de donnée';
+$LDManageAccess='Gèrer les droits d\'accès';
+$LDListAll='Lister tous';
+$LDSystemLogin='Connexion en tant qu\'adminiatrateur système';
+$LDSeeData='Aficher les données';
+$LDNewData='Entrer une nouvelle donnée';
 
-$LDWelcome='Welcome';
-$LDLogin='Login';
-$LDChangeSaved='The changes were saved.';
-$LDPcID='Current identity of this computer';
-$LDDept='Department';
-$LDWard='Ward';
-$LDWardOR='Ward room or OR number';
-$LDPhoneNr='Room\'s telephone number';
-$LDIntercomNr='Room\'s intercom number';
-$LDPcIP='IP address of this computer';
-$LDSave='Save changes';
-$LDNoChange='Do not change current settings';
-$LDClose='Close';
-$LDLogout='Log out';
-$LDNewLogin='New login';
-$LDLogoutConfirm='Do you really want to log out?';
+$LDWelcome='Bienvenu';
+$LDLogin='Connexion';
+$LDChangeSaved='Les modifications ont été sauvegardées.';
+$LDPcID='L\'identité actuelle de la station est';
+$LDDept='Départment';
+$LDWard='Salle';
+$LDWardOR='Salle ou Numéro OR';
+$LDPhoneNr='Numéro de téléphone de la salle';
+$LDIntercomNr='Numéro intercom de la salle';
+$LDPcIP='Address IP de cette station';
+$LDSave='Sauvegarder les modifications';
+$LDNoChange='Ne pas changer les paramètres actuels';
+$LDClose='Fermer';
+$LDLogout='Deconnecter';
+$LDNewLogin='Nouvelle connexion';
+$LDLogoutConfirm='Voulez-vous vraiment vous déconnecter ?';
 $LDOK='OK';
-$LDYes='Yes';
-$LDNotReally='No, not really.';
-$LDDOCScheduler='DOC Scheduler';
-$LDORNOCScheduler='ORNOC Scheduler';
-$LDFotolab='Photolab';
+$LDYes='Oui';
+$LDNotReally='Non, pas vraiment.';
+$LDDOCScheduler='DOC Agenda';
+$LDORNOCScheduler='ORNOC Agenda';
+$LDFotolab='Laboratoire Photo';
 /* 2002-09-08 EL */
-$LDTestRequest='Diagnostic Test Request';
-$LDTestType=array('patho'=>'Pathology', 
-                             'chemlabor'=>'Medical Laboratory', 
-							 'baclabor'=>'Bacteriological Laboratory',
-							 'blood'=>'Blood Bank',
-							 'radio'=>'Radiology',
-							 'sono'=>'Sonography',
-							 'allamb'=>'General Ambulatory',
-							 'unfamb'=>'Emergency Ambulatory',
-							 'nuklear'=>'Nuclear Diagnostics',
-							 'inmed'=>'Internal Medicine');
-$LDBloodOrder='Request for blood products';
+$LDTestRequest='Requâte pour un test Diagnostic';
+$LDTestType=array('patho'=>'Pathologie',
+                             'chemlabor'=>'Laboratoire Medical',
+							'baclabor'=>'Laboratoire Bacteriologique',
+							 'blood'=>'Banque de sanguin',
+							'radio'=>'Radiologie',
+							'sono'=>'Sonographie',
+							 'allamb'=>'Ambulatoire Général',
+							 'unfamb'=>'Urgence Ambulatoire',
+							'nuklear'=>'Diagnostic Nucléaire',
+							 'inmed'=>'Médicine Interne');
+$LDBloodOrder='Requâte pour un produit sanguin';
 /* 2002-09-22 EL */
-$LDPendingRequest='Pending request';
+$LDPendingRequest='Requâte en attente';
 /* 2002-10-06 EL*/
-$LDLoggedOut='Logged out';
+$LDLoggedOut='Déconnecté';
+/* 2003-03-18 EL */
+$LDNursesList='Liste des sages-femmes';
+$LDAppointments='Encaissement';
+/* 2003-04-27 */
+$LDInsuranceCoManager='Gèrer les compagnies d\'assurance';
+$LDAddressMngr='Gestionnaire d\'adresse';
+/* 2003-04-30 EL*/
+$LDBilling='eComBill';
+/* 2003-05-18 EL */
+$LDPlsContactEDP='Svp, contactez le département EDP.';
+$LDPlsTryAgain='Svp, essayez de nouveau';
+/* 2003-07-11 EL */
+$LDAdministration='Administration';
+$LDOutpatientClinic='Patient externe';
+$LDUploadDicom='Charger les images DICOM';
+$LDViewDicom='Voir les images DICOM';
+# 2003-08-22 EL
+$LDYellowList='Liste Jaune';
+$LDRedList='Liste Rouge';
+#2003-11-22 EL
+$LDAdvancedSearch='Advanced search';
+$LDNewPerson='Register new person';
 ?>

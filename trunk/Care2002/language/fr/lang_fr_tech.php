@@ -2,125 +2,129 @@
 /**
 * IMPORTANT NOTICE: Do not replace the words or characters enclosed in ~ ~ .
 */
-$LDClose="Close";
-$LDTech="Technical";
-$LDTechRepair="Technical repair";
-$LDTechMaint="Technical maintenance";
-$LDTechSupport="Technical support";
-$LDTechInfo="Technical information";
+$LDClose='Fermer';
+$LDTech='Technique';
+$LDTechRepair='Réparation Technique';
+$LDTechMaint='Maintenance Technique';
+$LDTechSupport='Support Technique';
+$LDTechInfo='Information Technique';
 
-$LDReRepair="Request repair support";
-$LDReRepairTxt="Report damage, compose & send request for a repair service.";
-$LDRepabotActivate="Activate Repabot";
-$LDRepabotActivateTxt="A robot for automatic reception of repair job requests.";
-$LDRepairReport="Report repair";
-$LDRepairReportTxt="Report finished repair jobs.";
-$LDReportsArchive="Reports archive";
-$LDReportsArchiveTxt="Research in the technical reports archives";
-$LDQuestions="Inquiry, Questions";
-$LDQuestionsTxt="Compose, read, and send questions or inquiries";
-$LDQBotActivate="Activate Q-Bot";
-$LDQBotActivateTxt="A robot for automatic reception of question or inquiries.";
-$LDInfo="Information";
-$LDInfoTxt="Browse for information of technical nature.";
+$LDReRepair='Demande de support pour une réparation';
+$LDReRepairTxt='Rapporter un dommage, composer & envoyer une demande au service des réparations.';
+$LDRepabotActivate='Activer Repabot';
+$LDRepabotActivateTxt='Un Robot pour la reception automatique des demandes de réparations.';
+$LDRepairReport='Rapport de réparation';
+$LDRepairReportTxt='Rediger un rapport de réparation achevée.';
+$LDReportsArchive='Archive des rapports';
+$LDReportsArchiveTxt='Rechercher dans les archives des rapports de réparations';
+$LDQuestions='Plaintes, Questions';
+$LDQuestionsTxt='Composer, Lire, et envoyer des plaintes ou des questions';
+$LDQBotActivate='Activer Q-Bot';
+$LDQBotActivateTxt='Un robot pour la reception automatique des plaintes ou des questions.';
+$LDInfo='Information';
+$LDInfoTxt='Navigue dans les informations de nature technique.';
 
-$LDSendRequest="Send request";
-$LDSendReport="Send report";
-$LDSendInquiry="Send inquiry";
-$LDReset="Reset";
-$LDRepairArea="Localization of the damage";
-$LDReporter="Requested by";
-$LDPersonnelNr="Personnel nr.";
-$LDPhoneNr="Telephone nr.  <font size=1>(for eventual inquiries)</font>";
-$LDPlsDescribe="Please describe the nature of the damage";
+$LDSendRequest='Envoyer une requâte';
+$LDSendReport='Envoyer une requâte';
+$LDSendInquiry='Envoyer une plainte';
+$LDReset='Reinitialiser';
+$LDRepairArea='Localisation du dommage';
+$LDReporter='Requis par';
+$LDPersonnelNr='Nr. Personnel';
+$LDPhoneNr='Nr. Téléphone  <font size=1>(for eventual inquiries)</font>';
+$LDPlsDescribe='SVP, décrivez la nature du dommage';
 
-$LDAlertName="Please enter your name.";
-$LDAlertDept="Please enter your department or localisation of the damage.";
-$LDAlertDeptOnly="Please enter your department.";
-$LDAlertPNr="Please enter your personnel number.";
-$LDAck="Acknowledgement";
-$LDYour="Your";
-$LDReceived="was received on";
-$LDAt="at";
-$LDAtTech=". Thanks. <i>Your tech support.</i>";
-$LDRequest="request";
-$LDReport="report";
-$LDThanksSir="Thank you Sir/Madam";
-$LDPlsTypeReport="Please describe the repair job you have done.";
-$LDJobIdNr="Job ID nr.";
-$LDTechnician="Technician";
-$LDPlsDoneOnly="(Please report only finished repair jobs.)";
-$LDName="Name";
-$LDDept="Department";
-$LDEnterQuestion="Please type your question";
-$LDLogIn="Log in";
-$LDPlsNoRequest="(Do not type requests for repair here. If you want to report a damage and need a repair pls click this.";
-$LDLastQuestions="Last ~tagword~ question(s) or answer(s)";
-$LDFrom="from";
-$LDTo="to";
-$LDAlertQuestion="You did not type any question.";
-$LDOn="on";
-$LDOClock="o'Clock";
-$LDInquiry="Inquiry";
-$LDReply="Reply";
-$LDSearch="Search";
-$LDSearchReport="Search for reports";
-$LDDate="Date";
-$LDReportListMany="Following are the reports";
-$LDNotReadMany=" that have not been read or printed yet."; 
-$LDReportList="Following is the report";
-$LDNotRead=" that has not been read or printed yet.";
-$LDClk2Read="Click the arrow button to read the content.";
-$LDLikeSearch=" that corresponds to the search keywords.";
-$LDLikeSearchMany=" that correspond to the search keywords.";
+$LDAlertName='SVP, entrez votre nom.';
+$LDAlertDept='SVP, entrez votre département ou la localisation du dommage.';
+$LDAlertDeptOnly='SVP, entrer votre département.';
+$LDAlertPNr='SVP, entrer votre numéro personnel.';
+$LDAck='Connaissance';
+$LDYour='Votre';
+$LDReceived='a été reçu sur';
+$LDAt='à';
+$LDAtTech='. Merci. <i>Votre support technique.</i>';
+$LDRequest='requâte';
+$LDReport='rapport';
+$LDThanksSir='Madame, Monsieur Merci';
+$LDPlsTypeReport='SVP, décriver la mission de réparation que vous avez effectué.';
+$LDJobIdNr='Mission ID nr.';
+$LDTechnician='Technicien';
+$LDPlsDoneOnly='(SVP rapporter uniquement les missions achevées.)';
+$LDName='Nom';
+$LDDept='Départment';
+$LDEnterQuestion='SVP, définissez votre question';
+$LDLogIn='Se connecter';
+$LDPlsNoRequest='(Ne formulez pas votre requâte pour une réparation  ici. 
+Si vous souhaitez rapporter un dommage ou avez besoin d\' une réparation, cliquer ici.';
+$LDLastQuestions='Dernière(s) ~tagword~ question(s) or réponses(s)';
+$LDFrom='de';
+$LDTo='à';
+$LDAlertQuestion='Vous n\'rédigez aucune question.';
+$LDOn='sur';
+$LDOClock=' ';
+$LDInquiry='Plainte';
+$LDReply='Répondre';
+$LDSearch='Rechercher';
+$LDSearchReport='Rechercher des rapports';
+$LDDate='Date';
+$LDReportListMany='Il s\'agit de rapports';
+$LDNotReadMany=' Cela n\' a pas encore été lu ni imprimé.';
+$LDReportList='Ce qui suit est le rapport';
+$LDNotRead=' Cela n\'a pas encore été lu ni imprimé.';
+$LDClk2Read='Cliquer sur les flèches pour lire le contenu.';
+$LDLikeSearch=' cela correspond à la recherche des mots-clés.';
+$LDLikeSearchMany=' cela correspond à la recherche des mots-clés.';
 
-$LDTelephoneNr="Phone nr.";
+$LDTelephoneNr='Nr. Téléphone';
 
-$bcatindex=array("&nbsp;","&nbsp;",$LDTechnician,$LDDept,"Received on",$LDAt,"&nbsp;");
+$bcatindex=array('&nbsp;','&nbsp;',$LDTechnician,$LDDept,'Received on',$LDAt,'&nbsp;');
 $blistindex=array("Report $LDFrom",$LDOn,$LDAt,$LDDept,$LDJobIdNr);
-$reportindex=array("&nbsp;","&nbsp;","$LDRequest $LDFrom:","Received am:",$LDAt,"&nbsp;");
+$reportindex=array('&nbsp;','&nbsp;',"$LDRequest $LDFrom:",'Received am:',$LDAt,'&nbsp;');
 $requestindex=array("$LDRequest $LDFrom:",$LDAt,$LDOn,$LDDept,$LDTelephoneNr,$LDJobIdNr);
-$queryindex=array("&nbsp;","&nbsp;","$LDInquiry $LDFrom:",$LDDept,"Received $LDOn:",$LDAt,"&nbsp;");
+$queryindex=array('&nbsp;','&nbsp;',"$LDInquiry $LDFrom:",$LDDept,'Received $LDOn:',$LDAt,'&nbsp;');
 
-$LDMarkRead="Mark as 'Read'.";
-$LDPrint="Print";
-$LDGoBack="Go Back";
-$LDImRepabot="I am the repabot";
-$LDImQBot="I am the Q-Bot";
-$LDNewReport="The following is the newly arrived request for repair.";
-$LDNewReportMany="The following are the newly arrived requests for repair.";
-$LDReportArrived="A request for repair has arrived!";
-$LDShowRequest="Show request";
-$LDNoDataFound="No data found. An error occured somewhere. Please click the \"Close\" button and try to open the list of requests again.
-If this problem persists despite several attempts, please inform the EDP and the Tech support departments.";
-$LDAckPrint="Acknowledge and print request";
-$LDPrintRequest="Print request";
-$LDArchiveRequest="Move request to archive";
-$LDAckBy="Acknowledged by";
-$LDAlertEnterName="Please enter your name in the field \"Acknowledged by\".";
-$LDYourReply="Your reply";
-$LDNewInquiry="The following is the newly arrived inquiry.";
-$LDNewInquiryMany="The following are the newly arrived inquiries.";
-$LDClk2Reply="Click the arrow button to read and/or reply";
-$LDSendReply="Send reply";
-$LDMove2Archive="Move to archive";
-$LDShow="Show";
-$LDShowInquiry="Show inquiry";
-$LDInquiryArrived="A new inquiry has arrived!";
-$LDSearchWordPrompt="Enter a search keyword";
+$LDMarkRead='Marquer comme \'lu\'.';
+$LDPrint='Imprimer';
+$LDGoBack='Retour';
+$LDImRepabot='Je suis le repabot';
+$LDImQBot='Je suis Q-Bot';
+$LDNewReport='ce qui suit est la dernière requâte pour réparation reçue.';
+$LDNewReportMany='ce qui suit est la dernière requâte pour réparation reçue.';
+$LDReportArrived='Une requâte pour réparation est arrivée !';
+$LDShowRequest='Afficher la requâte';
+$LDNoDataFound='Aucune donnée trouvée. Une erreur est apparue. SVP sur cliquer
+le bouton [Ferner] et esayer d\'ouvrir à nouveau la liste des requâtes. SI le problème persite malgrè vos nombreux essais, Svp informer les
+département EDP et Support technique.';
+$LDAckPrint='Valider et imprimer la requâte';
+$LDPrintRequest='Imprimer la requâte';
+$LDArchiveRequest='Déplacer la requâte dans l\'archive';
+$LDAckBy='Valider par';
+$LDAlertEnterName='Svp, entrer votre nom dans le champ [Valider par].';
+$LDYourReply='Votre réponse';
+$LDNewInquiry='Ce qui suit est la nouvelle plainte.';
+$LDNewInquiryMany='Ce qui suit sont les noulles plaintes reçues.';
+$LDClk2Reply='Cliquer sur la flèche pour lire et/ou répondre';
+$LDSendReply='Envoyer une réponse';
+$LDMove2Archive='Déplacer dans l\'archive';
+$LDShow='Afficher';
+$LDShowInquiry='Afficher la plainte';
+$LDInquiryArrived='Une nouvelle plainte est arrivée!';
+$LDSearchWordPrompt='Entrez un mot-clé pour la recherche';
 $LDInfoCat=array(
-						"Requesting for a repair",
-						"Reporting a damage",
-						"Heating",
-						"Disposal",
-						"EDP",
-						"Computer IP addresses",
-						"Printing, Printer",
-						"Environment management, Maintenance",
-						"Cleaning",
-						"Electricity",
-						"Telephone system",
-						"Water, Supply"
+						'Demander une réparation',
+						'Rapporter un dommage',
+						'Heating',
+						'Disposé',
+						'EDP',
+						'Adresse IP des Stations',
+						'Imprimer, Imprimante',
+						'Gestion de l\'environment, Maintenance',
+						'Effacer',
+						'Electricité',
+						'Système Telephonique',
+						'Eau, Supply'
 						);
-$LDNoFound="I found nothing that corresponds to the search keyword. <br>Please try it again and enter some more information.";
+$LDNoFound='Je n\'ai rien trouvé qui correspnd à la recherche par mot-clé.<br>Svp essayer de nouveau et entrez un peu plus d\'information.';
+/* 2003-02-11*/
+$LDCancel='Annuler';
 ?>
