@@ -4,7 +4,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 CARE 2002 Integrated Information System for Hospitals and Health Care Organizations and Services
 Copyright (C) 2002  Elpidio Latorilla
 								
-Beta version 1.0    2002-05-10
+Beta version 1.0.03    2002-10-26
 								
 This script(s) is(are) free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public
@@ -57,7 +57,7 @@ function configNew(&$bn,&$bv,&$f,$i,&$uid)
 		$f="CFG".$uid.".cfg";
 }	
 
-require_once("include/inc_vars_resolve.php"); // globalize POST, GET, & COOKIE  vars
+require_once('include/inc_vars_resolve.php'); // globalize POST, GET, & COOKIE  vars
 
 /**
 * Create simple session id (sid), save a encrpyted  sid to a cookie with a dynamic name 
@@ -148,13 +148,17 @@ if((isset($mask)&&$mask)||!file_exists($path)||$savelang)
 }	
 
 ?>
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
+<?php 
+
+include_once('include/inc_charset_fx.php');
+echo setCharSet(); 
+
+?>
  <TITLE><?php echo $LDMainTitle ?></TITLE>
 
  <!-- <TITLE>CARE 2002 Integrated Hospital Information System</TITLE> -->
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <meta name="Description" content="Maryhospital Virtual Integrated Information System of a Hospital powered by CARE 2002">
 <meta name="Author" content="Elpidio Latorilla">
 <meta name="Generator" content="AceHTML 4 Freeware">
@@ -176,7 +180,7 @@ else
 {
 ?>
 <frameset cols="150,*" border=0>
-	<FRAME MARGINHEIGHT="5"	MARGINWIDTH  ="5" NAME = "STARTPAGE" SRC = "main/indexframe.php?boot=1&mask=<?php echo "$mask&lang=$lang&cookie=$cookie&sid=$sid" ?>" SCROLLING="auto"  NORESIZE >
+	<FRAME MARGINHEIGHT="5"	MARGINWIDTH  ="5" NAME = "STARTPAGE" SRC = "main/indexframe.php?boot=1&mask=<?php echo "$mask&lang=$lang&cookie=$cookie&sid=$sid" ?>" SCROLLING="auto"  >
 	<FRAME NAME = "CONTENTS" SRC = "blank.php?lang=<?php echo "$lang&sid=$sid" ?>">
 <?php
 }
