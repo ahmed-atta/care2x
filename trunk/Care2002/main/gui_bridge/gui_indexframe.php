@@ -1,4 +1,4 @@
-<HTML>
+<?php html_rtl($lang); ?>
 <HEAD>
 <?php echo $charset; ?>
 <TITLE><?php echo $wintitle; ?></TITLE>
