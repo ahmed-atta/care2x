@@ -1,7 +1,8 @@
 <?php
 $LDMainTitle="Care 2002 Système hospitalier intégré d'information";
 
-/*$LDMainTitle="Marienhospital a virtual Integrated Hospital Information System in Internet";
+/*$LDMainTitle="Marienhospital : un système virtuel intègré d'information
+hospitalière sur internet";
 */
 $LDInviteAskMe='Entrez votre demande, par exemple: "Quel est le numéro de télephone de M9d?"';
 $LDTipsLink='Astuces:';
@@ -9,21 +10,21 @@ $LDTipsAskMe='Essayez des synonymes, par exemple tapez "chambre" à la place de "
 $LDTipsImgAlt="Cliquez ici pour des astuces comment obtenir les meilleurs résultats.";
 $LDSubmitBut="Envoyer la demande";
 
-$LDQuickInfo="L`informeur rapide";
+$LDQuickInfo="Recherche rapide";
 $LDPhonePolice="Police";
 $LDPhoneFire="Pompiers";
-$LDAmbulance="Émergence";
-$LDPhone="Télephone (Hôpital)";
+$LDAmbulance="Urgence";
+$LDPhone="Téléphone (Hôpital)";
 $LDFax="Fax";
-$LDAddress="Addresse";
+$LDAddress="Adresse";
 $LDEmail="Email";
 
-$LDOpenTimes ="Horaire d'Admission";
-$LDManagement ="Management";
+$LDOpenTimes ="Horaire d'admission";
+$LDManagement ="Gestion";
 $LDDept ="Départements";
-$LDCafenews ="Les nouvelles de Caféteria";
+$LDCafenews ="Les nouvelles de la Caféteria";
 $LDAdmission ="Admission";
-$LDExhibition ="Exposions";
+$LDExhibition ="Démonstrations";
 $LDEducation ="Éducation";
 $LDAdvStudies ="Études";
 $LDPhyTherapy ="Thérapie Physique";
@@ -35,18 +36,22 @@ $LDMore="plus sur l`article";
 $LDEditTitle="Titre";
 $LDNewsDummy=array(1=>"premier",2=>"second",3=>"troisième",4=>"quatrième");
 
-/*$LDNoFrame="Ce site web utilise des cadres afin de fonctionner mieux. Veuillez installer un navigateur approprié. Nous conseillons
+/*$LDNoFrame="Ce site web utilise des cadres afin de mieux fonctionner. Veuillez installer un navigateur approprié. Nous
+vous conseillons
 						Microsoft Internet Explorer à partir de la version 5.0. Activez Javascript (JScript) s'il vous plaît et
 						activez la réception automatique des cookies";
 */
 						// Removed the MSIE ref. 2003-04-25 Elpidio
-$LDNoFrame="Ce site web utilise des cadres afin de fonctionner mieux. Veuillez installer un navigateur approprié.  Activez Javascript (JScript) s'il vous plaît et
+$LDNoFrame="Ce site web utilise des cadres afin de mieux fonctionner. Veuillez installer un navigateur approprié.  Activez Javascript (JScript) s'il vous plaît et
 						activez la réception automatique des cookies";  
 $LDClk2Write="Cliquez-moi pour éditer";
 
-$LDAlertOldBrowser="Votre navigateur est plus vieux que 5.0!<br> Nous conseillons la version 5.0 et supérieure. <br> L'utilisation des versions plus anciennes peut conduire à
-								une fiabilité de fonction moins élevée du programme.";
-$LDAlertNoCookie="Vous ou votre navigateur a peut-être rejeté la (les) cookie(s).<br>Ce programme en dépend. Autrement le programme ne va pas finctionner correctement
+$LDAlertOldBrowser="Votre navigateur est antérieur à la version 5.0!<br> Nous conseillons la version 5.0 et supérieure. <br> L'utilisation des versions plus anciennes peut
+altèrer 
+								la fiabilité
+du programme.";
+$LDAlertNoCookie="Vous ou votre navigateur avez peut-être rejeté le (les) cookie(s).<br>Ce programme en
+a besoin. Dans le cas contraire, le programme ne fonctionnera pas correctement
 							.<br> Veuillez configurer votre navigateur afin d'accepter les cookies automatiquement, s'il vous plaît.<br>";
 $LDClkAfter="Veuillez cliquer ici ensuite.";
 $LDGoAheadEgal="Cliquez ici pour lancer le programme.";
