@@ -8,6 +8,13 @@ Copyright (C) 2002  Elpidio Latorilla & Intellin.org
 
 GNU GPL. For details read file "copy_notice.txt".
 */
+# Version History:  
+#        modified on ( 22/01/2004) By Walid Fathalla 
+#                                        
+# Bug Report and Suggestion to:     
+#        Walid Fathalla                    
+#        fathalla_w@hotmail.com     
+
 if(!extension_loaded('gd')) dl('php_gd.dll');
 
 header ('Content-type: image/png');
@@ -21,31 +28,38 @@ $im =@ ImageCreateFromPNG($root_path.'gui/img/common/default/blood_wardfill.png'
 $black = ImageColorAllocate ($im, 0, 0, 0);
 
 if($form_bottom) $str_print=$LDFillByLab;
-else $str_print=$LDFillByWard;
+ else $str_print=$LDFillByWard;
+ 
+require_once($root_path.'include/inc_ttf_check.php');
+
+if($ttf_render){
 //ImageColorTransparent($im,$green);
 // *******************************************************************
 // * the following code is for ttf fonts use only for php machines with ttf support
 // *******************************************************************
-if($lang=='ar' || $lang=='fa'){// Modified on ( 22/01/2004) By Walid Fathalla
-	# path of ttf is ok
-	include_once($root_path.'include/inc_ttf_check_ar.php');
-    include_once($root_path.'include/inc_ttf_ar2uni.php');//To actvate function of show arabic
-	ImageTTFText($im,14,90,16,390,$black,$arial,ar2uni("$str_print"));
+/*
+/* -------------- START ----------------------------------------------*/
+	if($lang=='ar' || $lang=='fa'){// Modified on ( 22/01/2004) By Walid Fathalla
+    	include_once($root_path.'include/inc_ttf_ar2uni.php');//To actvate function of show arabic
+		ImageTTFText($im,14,90,16,390,$black,$arial,ar2uni($str_print));
+	}else{
+		ImageTTFText($im,14,90,16,390,$black,$arial,$str_print);
+	}
 
-}else{
+/* -------------- END -------------------------------------------------*/
+
+
 // ******************************************************************
 // * the following code is the default - uses system fonts
 // ******************************************************************
-
+}else{
 /* -------------- START  ----------------------*/
 
-//if($form_bottom) $str_print=$LDFillByLab;
- //else $str_print=$LDFillByWard;
 ImageStringUp($im,5,2,390,$str_print,$black);
-}
+
 
 /* -------------- END --------------------------*/
-
+}
 Imagepng ($im);
 ImageDestroy ($im);
  ?>
