@@ -1,7 +1,9 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
+* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -10,9 +12,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 */
 define('LANG_FILE','drg.php');
 $local_user='ck_op_pflegelogbuch_user';
-require_once('../include/inc_front_chain_lang.php');
+require_once($root_path.'include/inc_front_chain_lang.php');
 if (!$opnr||!$pn) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;}; 
-require_once('../include/inc_config_color.php');
+require_once($root_path.'include/inc_config_color.php');
 ?>
 <?php if($saveok) : ?>
 <?php
@@ -82,10 +84,10 @@ else
 		 {
 
 			$sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE dept="'.$dept.'" AND type="'.$target.'" AND lang="'.$lang.'" ORDER BY rank DESC';
-			if($ergebnis=mysql_query($sql,$link))
+			if($ergebnis=$db->Execute($sql))
        		{
 				$linecount=0;
-				if ($zeile=mysql_fetch_array($ergebnis)) $linecount++;
+				if ($zeile=$ergebnis->FetchRow()) $linecount++;
 			}
 			 else {echo "<p>".$sql."<p>$LDDbNoRead"; exit;};
 
@@ -134,7 +136,7 @@ function checkselect(d)
 </script>
  
   <?php 
-require('../include/inc_css_a_hilitebu.php');
+require($root_path.'include/inc_css_a_hilitebu.php');
 ?>
  
 </HEAD>
@@ -142,7 +144,7 @@ require('../include/inc_css_a_hilitebu.php');
 <BODY   onLoad="if(window.focus) window.focus();" bgcolor=<?php echo $cfg['body_bgcolor']; ?>
 <?php if (!$cfg['dhtml']){ echo ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 <FONT    SIZE=3  FACE="Arial" color="<?php echo $rowcolor ?>">
-<a href="javascript:window.close()"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="right"></a>
+<a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> align="right"></a>
 <b><?php echo "$LDQuickList $title" ?></b>
 <ul>
 
@@ -153,7 +155,7 @@ require('../include/inc_css_a_hilitebu.php');
 <table border=0 cellpadding=0 cellspacing=0 width='100%'> 
 <tr bgcolor="<?php echo $rowcolor ?>">
 <td width="20">
-<img <?php echo createComIcon('../','delete2.gif','0') ?> alt="<?php echo $LDReset ?>" onClick="javascript:document.quicklist.reset()">
+<img <?php echo createComIcon($root_path,'delete2.gif','0') ?> alt="<?php echo $LDReset ?>" onClick="javascript:document.quicklist.reset()">
 </td>
 <td><font face=arial size=2 color=#ffffff>&nbsp;<b><nobr><?php echo $title ?></nobr></b>&nbsp;</td>
 
@@ -193,7 +195,7 @@ function drawdata(&$data)
 				{ 
 					$idx=0;
 					mysql_data_seek($ergebnis,0);
-					while($zeile=mysql_fetch_array($ergebnis))
+					while($zeile=$ergebnis->FetchRow())
 					{
 							drawdata($zeile[code_description]);
 							//$idx++;
@@ -221,10 +223,10 @@ function drawdata(&$data)
 </form>
 <?php else : ?>
 <p>
-<img <?php echo createMascot('../','mascot1_r.gif','0','bottom') ?> align="bottom"><?php echo $LDNoQuickList ?> 
+<img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="bottom"><?php echo $LDNoQuickList ?> 
 <a href="<?php echo "$searchfile?sid=$sid&lang=$lang&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&dept=$dept&oprm=$oprm&display=$display&target=$target" ?>"><u><?php echo $LDClick2Search ?></u></a> 
 <p>
-<a href="javascript:window.close()"><img <?php echo createLDImgSrc('../','close2.gif','0') ?>></a>
+<a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>></a>
 <?php endif ?>
 
 </ul>

@@ -1,36 +1,36 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','or.php');
 $local_user='ck_op_pflegelogbuch_user';
-require_once('../include/inc_front_chain_lang.php');
+require_once($root_path.'include/inc_front_chain_lang.php');
 $parsedstr=array();
-$globdata="sid=$sid&lang=$lang&op_nr=$op_nr&dept=$dept&saal=$saal&patnum=$patnum&pday=$pday&pmonth=$pmonth&pyear=$pyear";
+$globdata="sid=$sid&lang=$lang&op_nr=$op_nr&dept_nr=$dept_nr&saal=$saal&enc_nr=$enc_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear";
 // clean the input data
 $material_nr=strtr($material_nr,"§%&?/\+*~#';:,!$","                ");// convert chars to (15) spaces
 $material_nr=trim($material_nr);
 //$material_nr=str_replace(" ","",$material_nr);
 
 /* Establish db connection */
-require('../include/inc_db_makelink.php');
-if($link&&$DBLink_OK) 
+if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
+if($dblink_ok)
 	{	
 	  	$dbtable='care_nursing_op_logbook';
 		$sql="SELECT container_codedlist FROM $dbtable 
-					WHERE dept='$dept'
+					WHERE dept_nr='$dept_nr'
 					AND op_room='$saal'
 					AND op_nr='$op_nr'
 					AND op_src_date='$pyear$pmonth$pday'
-					AND patnum='$patnum'";
-		if($mat_result=mysql_query($sql,$link))
+					AND encounter_nr='$enc_nr'";
+		if($mat_result=$db->Execute($sql))
        	{
-			$matrows=0;
-			while( $matlist=mysql_fetch_array($mat_result)) $matrows++;
+			$matrows=$mat_result->RecordCount();
 			if($matrows==1)
 			{
-				mysql_data_seek($mat_result,0); //reset the variable
-				$matlist=mysql_fetch_array($mat_result);
+				$matlist=$mat_result->FetchRow();
 						//$datafound=1;
-						//$pdata=mysql_fetch_array($ergebnis);
+						//$pdata=$ergebnis->FetchRow();
 						//echo $sql."<br>";
 						//echo $rows;
 			}
@@ -40,8 +40,9 @@ if($link&&$DBLink_OK)
 
 		switch($mode)	
 		{
+		
 		case 'search':
-	  		$dbtable="steri_products_main";
+	  		$dbtable='care_steri_products_main';
 			
 			
 			if(!empty($material_nr))
@@ -67,17 +68,14 @@ if($link&&$DBLink_OK)
 			}
 			else break;
 			//echo $sql."<br>";
-				if($ergebnis=mysql_query($sql,$link))
+				if($ergebnis=$db->Execute($sql))
        			{
-					$art_avail=0;
-					while( $pdata=mysql_fetch_array($ergebnis)) $art_avail++;
-					//echo $art_avail;
-					if($art_avail)	mysql_data_seek($ergebnis,0); //reset the variable
+					$art_avail=$ergebnis->RecordCount();
 						//$datafound=1;
 					if(($art_avail==1)&&(!$nonumeric))
 					//if(($art_avail==1))
 					{
-						$pdata=mysql_fetch_array($ergebnis);
+						$pdata=$ergebnis->FetchRow();
 						//if($nonumeric) $material_nr=$pdata[artikelnum];
 						if(($matrows==1)&&($matlist[0]!=""))
 						{
@@ -113,15 +111,14 @@ if($link&&$DBLink_OK)
 						
 						$dbtable='care_nursing_op_logbook';
 						$sql="UPDATE $dbtable SET container_codedlist='$matlist[0]'
-								WHERE dept='$dept'
+								WHERE dept_nr='$dept_nr'
 								AND op_room='$saal'
 								AND op_nr='$op_nr'
 								AND op_src_date='$pyear$pmonth$pday'
-								AND patnum='$patnum'";
+								AND encounter_nr='$enc_nr'";
 						//echo $sql;
-						if($mat_result=mysql_query($sql,$link))
+						if($mat_result=$db->Execute($sql))
 						{
-							mysql_close($link);
   							header("location:op-logbuch-container-list.php?$globdata&item_idx=$item_idx&chg=1");
 							exit;
 						}	else { echo "$LDDbNoSave<br>$sql"; } 
@@ -139,15 +136,14 @@ if($link&&$DBLink_OK)
 			array_splice($matbuf,$art_idx,1);
 			$matlist[0]=implode("~",$matbuf);
 			$sql="UPDATE $dbtable SET container_codedlist='$matlist[0]'
-								WHERE dept='$dept'
+								WHERE dept_nr='$dept_nr'
 								AND op_room='$saal'
 								AND op_nr='$op_nr'
 								AND op_src_date='$pyear$pmonth$pday'
-								AND patnum='$patnum'";
+								AND encounter_nr='$enc_nr'";
 			//echo $sql;
-			if($mat_result=mysql_query($sql,$link))
+			if($mat_result=$db->Execute($sql))
 			{
-				mysql_close($link);
   				header("location:op-logbuch-container-list.php?$globdata");
 				exit;
 			}	else { echo "$LDDbNoSave<br>$sql"; } 
@@ -164,15 +160,14 @@ if($link&&$DBLink_OK)
 				}
 			$matlist[0]=implode("~",$matbuf);
 			$sql="UPDATE $dbtable SET container_codedlist='$matlist[0]'
-								WHERE dept='$dept'
+								WHERE dept_nr='$dept_nr'
 								AND op_room='$saal'
 								AND op_nr='$op_nr'
 								AND op_src_date='$pyear$pmonth$pday'
-								AND patnum='$patnum'";
+								AND encounter_nr='$enc_nr'";
 			//echo "update ".$sql;
-			if($mat_result=mysql_query($sql,$link))
+			if($mat_result=$db->Execute($sql))
 			{
-				mysql_close($link);
   				header("location:op-logbuch-container-list.php?$globdata");
 				exit;
 			}	else { echo "$LDDbNosave<br>$sql"; }  
@@ -198,7 +193,7 @@ if($link&&$DBLink_OK)
 
 function popinfo(b)
 {
-	urlholder="products-bestellkatalog-popinfo.php?sid=<?php echo "$sid&lang=$lang"; ?>&keyword="+b+"&mode=search&cat=steri";
+	urlholder="products-bestellkatalog-popinfo.php<?php echo URL_REDIRECT_APPEND; ?>&keyword="+b+"&mode=search&cat=steri";
 	ordercatwin=window.open(urlholder,"ordercat","width=850,height=550,menubar=no,resizable=yes,scrollbars=yes");
 	}
 	
@@ -280,14 +275,14 @@ echo'
     <td class="'.$f_class.'">&nbsp;'.$parsedstr[a].'&nbsp;</td>
     <td class="'.$f_class.'">&nbsp;'.$parsedstr[n].'&nbsp;</td>
     <td class="'.$f_class.'">&nbsp;';
-	if($f_class=="v12") echo '<a href="javascript:popinfo(\''.$parsedstr[a].'\')"><img src="../img/info3.gif" alt="'.$LDDbInfo.'" width=16 height=16 border=0 ></a>';
-		else echo '<a href="#"><img src="../img/info3-pale.gif" alt="'.$LDArticleNoList.'" width=16 height=16 border=0 ></a>';
+	if($f_class=="v12") echo '<a href="javascript:popinfo(\''.$parsedstr[a].'\')"><img '.createComIcon($root_path,'info3.gif','0').' alt="'.$LDDbInfo.'"></a>';
+		else echo '<a href="#"><img  '.createComIcon($root_path,'info3-pale.gif','0').'  alt="'.$LDArticleNoList.'"></a>';
 	echo '
 	&nbsp;</td>
     <td class="'.$f_class.'">&nbsp;'.$parsedstr[i].'&nbsp;</td>
     <td class="'.$f_class.'">&nbsp;'.$parsedstr[b].'&nbsp;</td>
     <td class="'.$f_class.'">&nbsp;<input type="text" name="pcs'.$i.'" size=1 maxlength=2 value="'.$parsedstr[c].'" onKeyUp="ssm(\'savebut\')">&nbsp;</td>
-    <td class="'.$f_class.'">&nbsp;<a href="javascript:delete_item('.$i.')" title="'.$LDRemoveArticle.'"><img src="../img/delete2.gif" width=20 height=20 border=0></a>&nbsp;</td>
+    <td class="'.$f_class.'">&nbsp;<a href="javascript:delete_item('.$i.')" title="'.$LDRemoveArticle.'"><img '.createComIcon($root_path,'delete2.gif','0').'></a>&nbsp;</td>
   </tr>
   <tr>
     <td colspan=7 bgcolor="#0000ff"></td>
@@ -300,8 +295,8 @@ echo'
 <input type="hidden" name="lang" value="'.$lang.'">
 <input type="hidden" name="mode" value="update">
 <input type="hidden" name="op_nr" value="'.$op_nr.'">
-<input type="hidden" name="patnum" value="'.$patnum.'">
-<input type="hidden" name="dept" value="'.$dept.'">
+<input type="hidden" name="enc_nr" value="'.$enc_nr.'">
+<input type="hidden" name="dept_nr" value="'.$dept_nr.'">
 <input type="hidden" name="saal" value="'.$saal.'">
 <input type="hidden" name="pday" value="'.$pday.'">
 <input type="hidden" name="pmonth" value="'.$pmonth.'">
@@ -310,8 +305,8 @@ echo'
 
 <DIV id=savebut
 style=" VISIBILITY: hidden; POSITION: relative;">
-<a href="javascript:document.plist.submit()" title="'.$LDSave.'"><img src="../img/'.$lang.'/'.$lang.'_savedisc.gif" width=99 height=24 border=0></a>&nbsp;&nbsp;&nbsp;
-<a href="javascript:document.plist.reset()" title="'.$LDReset.'"><img src="../img/'.$lang.'/'.$lang.'_reset.gif" width=156 height=24 border=0>
+<a href="javascript:document.plist.submit()" title="'.$LDSave.'"><img  '.createLDImgSrc($root_path,'savedisc.gif','0').'></a>&nbsp;&nbsp;&nbsp;
+<a href="javascript:document.plist.reset()" title="'.$LDReset.'"><img '.createLDImgSrc($root_path,'reset.gif','0').'>
 </div>
   ';
 }
@@ -324,7 +319,7 @@ else
 		echo '
 			<font size=2 face="verdana,arial">
  			<font size=4 color="#009900">
- 			<img '.createMascot('../','mascot1_r.gif','0','absmiddle').'> <b>'.$LDPlsClkArticle.'</b></font> 
+ 			<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'> <b>'.$LDPlsClkArticle.'</b></font> 
 			<br>';
 		echo'
 			<table border=0 cellpadding=0 cellspacing=0 width="100%">
@@ -338,14 +333,14 @@ else
    			<tr>
     		<td colspan=6 bgcolor="#0000ff"></td>
   			</tr>';
-	while($pdata=mysql_fetch_array($ergebnis))
+	while($pdata=$ergebnis->FetchRow())
 	{
 		echo'
  		<tr bgcolor="#ffffff">
-    	<td class="v12" valign="top">&nbsp;<a href="op-logbuch-container-list.php?'.$globdata.'&mode=search&material_nr='.$pdata[bestellnum].'"><img '.createComIcon('../','bul_arrowgrnlrg.gif','0','absmiddle').' alt="'.$LDSelectArticle.'"></a></td>
+    	<td class="v12" valign="top">&nbsp;<a href="op-logbuch-container-list.php?'.$globdata.'&mode=search&material_nr='.$pdata[bestellnum].'"><img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle').' alt="'.$LDSelectArticle.'"></a></td>
     	<td class="v12" valign="top">&nbsp;<a href="op-logbuch-container-list.php?'.$globdata.'&mode=search&material_nr='.$pdata[bestellnum].'" title="'.$LDSelectArticle.'">'.$pdata[containernum].'</a>&nbsp;</td>
     	<td class="v12" valign="top"><a href="op-logbuch-container-list.php?'.$globdata.'&mode=search&material_nr='.$pdata[bestellnum].'" title="'.$LDSelectArticle.'">'.$pdata[containername].'</a>&nbsp;</td>
-   	 	<td class="v12" valign="top">&nbsp;<a href="javascript:popinfo(\''.$pdata[bestellnum].'\')"><img '.createComIcon('../','info3.gif','0').'></a>&nbsp;</td>
+   	 	<td class="v12" valign="top">&nbsp;<a href="javascript:popinfo(\''.$pdata[bestellnum].'\')"><img '.createComIcon($root_path,'info3.gif','0').'></a>&nbsp;</td>
     	<td class="v12" valign="top">&nbsp;'.$pdata[industrynum].'&nbsp;</td>
     	<td class="v12" valign="top">&nbsp;'.$pdata[bestellnum].'&nbsp;</td>
  		</tr>
@@ -362,13 +357,13 @@ else
  		echo '<center>
  			<font size=2 face="verdana,arial">
  			<font size=4 color="#cc0000">
- 			<img '.createMascot('../','mascot1_r.gif','0','absmiddle').'> <b>'.$LDArticleNotFound.'</b><p></font> '.$LDNoArticleTxt.'<p>';
-			$databuf="$sid&lang=$lang&op_nr=$op_nr&dept=$dept&saal=$saal&patnum=$patnum&pday=$pday&pmonth=$pmonth&pyear=$pyear&artikelnum=$material_nr";
+ 			<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'> <b>'.$LDArticleNotFound.'</b><p></font> '.$LDNoArticleTxt.'<p>';
+			$databuf="$sid&lang=$lang&op_nr=$op_nr&dept_nr=$dept_nr&saal=$saal&enc_nr=$enc_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear&artikelnum=$material_nr";
 		echo '
-			<a href="op-logbuch-container-entry-manual.php?sid='.$databuf.'"><img '.createComIcon('../','accessrights.gif','0','absmiddle').'> 
+			<a href="op-logbuch-container-entry-manual.php?sid='.$databuf.'"><img '.createComIcon($root_path,'accessrights.gif','0','absmiddle').'> 
 			<font size=3 > '.$LDClk2ManualEntry.'</font></a>
 			</font><p>
-			<a href="op-logbuch-container-list.php?sid='.$databuf.'"><img '.createLDImgSrc('../','cancel.gif','0').' alt="'.$LDCancel.'">
+			<a href="op-logbuch-container-list.php?sid='.$databuf.'"><img '.createLDImgSrc($root_path,'cancel.gif','0').' alt="'.$LDCancel.'">
 			</a>
 			</center>
 			';

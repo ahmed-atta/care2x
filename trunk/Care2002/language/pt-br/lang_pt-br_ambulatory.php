@@ -4,14 +4,12 @@ $LDDepartments='Ambulatório';
 $LDPendingRequest='Pedido pendente';
 $LDPendingRequestTxt='Recepção, Lista, Impressão, Relatório médico e Resultados';
 $LDGeneralSurgery='Ambulatório Geral';
-$LDInternalMed='Ambulatório Medicina Interna';
+$LDInternalMed='Medicina Interna';
 $LDEmergency='Ambulatório de Emergência';
 $LDSonography='Sonografia';
-$LDNuclearMed='Nuclear Diagnostics';
+$LDNuclearMed='Diagnósticos Nucleares';
 $LDAdmission='Admissão';
-$LDAdmissionTxt='Admission/discharge of ambulatory, search, archive';
+$LDAdmissionTxt='Admissão/Liberação do ambulatório, pesquisa, arquivo';
 $LDNews='Notícias';
-$LDNewsTxt='Notícias específicas da clínica, memorando, info, etc.';
-
+$LDNewsTxt='Notícias específicas da clínica, memorando, info, etc.'; 
 ?>
-

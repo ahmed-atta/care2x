@@ -1,7 +1,9 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
+* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -10,10 +12,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 */
 define('LANG_FILE','specials.php');
 $local_user='ck_fotolab_user';
-require_once('../include/inc_front_chain_lang.php');
+require_once($root_path.'include/inc_front_chain_lang.php');
 
 /* Load date formatter */
-require_once('../include/inc_date_format_functions.php');
+require_once($root_path.'include/inc_date_format_functions.php');
 				
 
 if($mode=='search')
@@ -30,15 +32,15 @@ if($link&&$DBLink_OK)
 		 	$sql="SELECT patnum,name,vorname,gebdatum FROM $dbtable 
 					WHERE patnum LIKE '".addslashes($patnum)."'";
 			//echo $sql;
-			if($ergebnis=mysql_query($sql,$link))
+			if($ergebnis=$db->Execute($sql))
        		{
 				$rows=0;
-				if( $pdata=mysql_fetch_array($ergebnis)) $rows++;
+				if( $pdata=$ergebnis->FetchRow()) $rows++;
 				if($rows==1)
 				{
 					//mysql_data_seek($ergebnis,0); //reset the variable
 					$datafound=1;
-					//$pdata=mysql_fetch_array($ergebnis);
+					//$pdata=$ergebnis->FetchRow();
 					//echo $sql."<br>";
 					//echo $rows;
 				}
@@ -87,18 +89,18 @@ function gethelp(x,s,x1,x2,x3)
 	window.helpwin.moveTo(0,0);
 }
 
-<?php require('../include/inc_checkdate_lang.php'); ?>
+<?php require($root_path.'include/inc_checkdate_lang.php'); ?>
 
 
 //  Script End -->
 </script>
 
-<script language="javascript" src="../js/checkdate.js" type="text/javascript"></script>
-<script language="javascript" src="../js/setdatetime.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
 </head>
 <body topmargin=3 marginheight=3 onLoad="document.maindata.patnum.select()" onFocus="document.maindata.patnum.select()">
 <form name="maindata">
-<a href="javascript:gethelp('fotolab.php','maindata','')"><img <?php echo createComIcon('../','frage.gif','0','right') ?>></a>
+<a href="javascript:gethelp('fotolab.php','maindata','')"><img <?php echo createComIcon($root_path,'frage.gif','0','right') ?>></a>
 <table border=0>
   <tr>
     <td><font size=2 color="#cc0000" face="verdana,arial">
@@ -131,7 +133,7 @@ function gethelp(x,s,x1,x2,x3)
  -->   
     <td><input type="text" name="shotdate" size=12 maxlength=12   onBlur="IsValidDate(this,'<?php echo $date_format ?>')"  onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
 	<a href="javascript:setalldate(window.document.maindata.shotdate.value)">
-<img <?php echo createComIcon('../','preset-add.gif','0') ?> alt="<?php echo $LDSetShotDate ?>"></a></td>
+<img <?php echo createComIcon($root_path,'preset-add.gif','0') ?> alt="<?php echo $LDSetShotDate ?>"></a></td>
   </tr>
 </table>
 <input type="hidden" name="maxpic" value="<?php echo $maxpic ?>">

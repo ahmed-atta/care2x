@@ -1,33 +1,33 @@
 <?php
-$LDWhereTo='Where do you want to post the article?';
-$LDPlsSelect='Please select the number based on the sample graphic, then press \'Continue...\'.';
+$LDWhereTo='A onde você quer publicar o artigo?';
+$LDPlsSelect='Por favor selecione o número baseado na amostra do gráfico, então precione \'Continue...\'.';
 $LDContinueBut='Continue...';
-$LDCancelBut='Cancel';
-$LDBackBut='Back';
-$LDSaveBut='Save';
-$LDFinishBut='Finish';
+$LDCancelBut='Cancela';
+$LDBackBut='Volta';
+$LDSaveBut='Salva';
+$LDFinishBut='Termina';
 $LDArticle1='Primeiro (1) artigo';
 $LDArticle2='Segundo (2) artigo';
 $LDArticle3='Terceiro (3) artigo';
 $LDArticle4='Quarto (4) artigo';
-$LDArticle5='Secondary (5) artigo';
+$LDArticle5='Segundo (5) artigo';
 
-$LDArticleTxt='Article';
+$LDArticleTxt='Artigo';
 
-$LDTitleTag='Title';
-$LDTitleMaxNote='Maximum 50';
-$LDHeader='Header';
-$LDHeaderMaxNote='Maximum 50';
+$LDTitleTag='Título';
+$LDTitleMaxNote='Maximo 50';
+$LDHeader='Cabeçalho';
+$LDHeaderMaxNote='Maximo 50';
 $LDNews='News article';
 /**
 * Do not translate the '<font size=1>' and '</font>'
 */
-$LDPicFile='Picture <font size=1>(maximum file size 1MB)</font>';
-$LDAuthor='Author';
+$LDPicFile='Figura <font size=1>(maximum file size 1MB)</font>';
+$LDAuthor='Autor';
 /**
 * Do not translate the '<font size=1>' and '</font>'
 */
-$LDPublishDate='Publish date <font size=1>(\'T\' for today)</font>';
+$LDPublishDate='Data de publicação <font size=1>(\'T\' for today)</font>';
 
 $LDAlertTitle='Please supply a title';
 $LDAlertNews='Please type the news article';

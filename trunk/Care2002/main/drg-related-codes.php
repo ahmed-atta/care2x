@@ -1,7 +1,9 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
+* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -10,18 +12,18 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 */
 define('LANG_FILE','drg.php');
 $local_user='ck_op_pflegelogbuch_user';
-require_once('../include/inc_front_chain_lang.php');
-if (!$opnr||!$pn) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;}; 
+require_once($root_path.'include/inc_front_chain_lang.php');
+if (!$opnr||!$pn) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;}; 
 ?>
 <?php if($saveok) : ?>
  <script language="javascript" >
- window.opener.parent.location.href='<?php echo "drg-composite-start.php?sid=$sid&lang=$lang&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&dept=$dept&oprm=$oprm&y=$y&m=$m&d=$d&display=composite&newsave=1" ?>';
+ window.opener.parent.location.href='<?php echo "drg-composite-start.php?sid=$sid&lang=$lang&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=composite&newsave=1" ?>';
  window.close();
 </script>
 	<?php exit; ?>
 <?php endif ?>
 <?php
-require_once('../include/inc_config_color.php');
+require_once($root_path.'include/inc_config_color.php');
 
 $toggle=0;
 
@@ -37,7 +39,7 @@ if($mode=='save')
 	$itemselector='icd';
 	$lastindex=$last_icd_index;
 	$noheader=1;
-	include('../include/inc_drg_entry_save.php');
+	include($root_path.'include/inc_drg_entry_save.php');
 	
 	unset($qlist);
 	$linebuf='';
@@ -47,48 +49,51 @@ if($mode=='save')
 	$element_related='related_ops';
 	$itemselector='ops';
 	$lastindex=$last_ops_index;
-	include('../include/inc_drg_entry_save.php');
+	include($root_path.'include/inc_drg_entry_save.php');
 	if($linebuf=='')
 	{
-		header("location:$thisfile?sid=$sid&lang=$lang&saveok=1&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&dept=$dept&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&target=$target");
+		header("location:$thisfile?sid=$sid&lang=$lang&saveok=1&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&target=$target");
 		exit;
 	}
 }
 else
 {
-		include('../include/inc_db_makelink.php');
-		if($link&&$DBLink_OK) 
-		 {
+	if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
+	if($dblink_ok)
+	{	
 		 
             /* Load the date formatter */
-            include_once('../include/inc_date_format_functions.php');
+            include_once($root_path.'include/inc_date_format_functions.php');
             
 
 			$dbtable='care_nursing_op_logbook';
 			
-			$sql="SELECT ops_intern_code  FROM $dbtable WHERE op_nr='$opnr' AND patnum='$pn' AND dept='$dept' AND op_room='$oprm'";
-			if($op_result=mysql_query($sql,$link))
+			$sql="SELECT ops_intern_code  FROM $dbtable WHERE op_nr='$opnr' AND encounter_nr='$pn' AND dept_nr='$dept_nr' AND op_room='$oprm'";
+			if($op_result=$db->Execute($sql))
        		{
-				$icdcount=0;
-				if ($zeile=mysql_fetch_array($op_result)) $opcount++;
+				//$icdcount=0;
+				//if ($zeile=mysql_fetch_array($op_result)) $opcount++;
+				$opcount=$op_result->RecordCount();
 			}
 			 else {echo "<p>".$sql."<p>$LDDbNoRead"; };
 			 
 			$dbtable="care_drg_related_codes";
 
 			$sql='SELECT related_icd,rank FROM '.$dbtable.' WHERE code="'.$maincode.'" AND related_icd<>"" AND lang="'.$lang.'" ORDER BY rank DESC';
-			if($icd_result=mysql_query($sql,$link))
+			if($icd_result=$db->Execute($sql))
        		{
-				$icdcount=0;
-				if ($zeile=mysql_fetch_array($icd_result)) $icdcount++;
+				//$icdcount=0;
+				//if ($zeile=mysql_fetch_array($icd_result)) $icdcount++;
+				$icdcount=$icd_result->RecordCount();
 			}
 			 else {echo "<p>".$sql."<p>$LDDbNoRead"; };
 			 
 			$sql='SELECT related_ops,rank FROM '.$dbtable.' WHERE code="'.$maincode.'" AND related_ops<>"" AND lang="'.$lang.'" ORDER BY rank DESC';
-			if($ops_result=mysql_query($sql,$link))
+			if($ops_result=$db->Execute($sql))
        		{
-				$opscount=0;
-				if ($zeile=mysql_fetch_array($ops_result)) $opscount++;
+				//$opscount=0;
+				//if ($zeile=mysql_fetch_array($ops_result)) $opscount++;
+				$opscount=$ops_result->RecordCount();
 			}
 			 else {echo "<p>".$sql."<p>$LDDbNoRead"; };
 		}
@@ -112,7 +117,7 @@ function gethelp(x,s,x1,x2,x3)
 }
 function subsearch(k)
 {
-	//window.location.href='drg-icd10-search.php?sid=<?php echo "sid=$sid&lang=$lang&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&dept=$dept&oprm=$oprm&display=$display" ?>&keyword='+k;
+	//window.location.href='drg-icd10-search.php?sid=<?php echo "sid=$sid&lang=$lang&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&dept_nr=$dept_nr&oprm=$oprm&display=$display" ?>&keyword='+k;
 	document.searchdata.keyword.value=k;
 	document.searchdata.submit();
 }
@@ -137,23 +142,23 @@ function checkselect(d)
 }
 function getRelatedCodes(mc)
 {
-	window.location.href="drg-related-codes.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm" ?>&maincode="+mc;
+	window.location.href="drg-related-codes.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept_nr=$dept_nr&oprm=$oprm" ?>&maincode="+mc;
 }
 // -->
 </script>
  
   <?php 
-require('../include/inc_css_a_hilitebu.php');
+require($root_path.'include/inc_css_a_hilitebu.php');
 ?>
  
 </HEAD>
 
 <BODY marginheight=2 marginwidth=2 leftmargin=2 topmargin=2  onLoad="if(window.focus) window.focus();" bgcolor=<?php echo $cfg['body_bgcolor']; ?>
 <?php if (!$cfg['dhtml']){ echo ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
-<a href="javascript:window.close()"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="right"></a>
+<a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> align="right"></a>
 <FONT    SIZE=2  FACE="verdana,Arial" >
 <?php echo "$ln, $fn ".formatDate2Local($bd,$date_format)." - $pn";
-	if($opnr) echo" - OP# $opnr - $dept OP $oprm"; 
+	if($opnr) echo" - OP# $opnr - $dept_nr OP $oprm"; 
 ?>
 </font><p>
 <ul>
@@ -201,7 +206,7 @@ function drawdata(&$data)
 						else
 						{
 							if($maincode==$parsed[code]) echo'
-							<img '.createComIcon('../','bul_arrowgrnlrg.gif','0','absmiddle').'>';
+							<img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle').'>';
 						}
 						echo '
 							</td>
@@ -224,8 +229,8 @@ function drawdata(&$data)
 }
 			if ($opcount>0) 
 				{ 
-					mysql_data_seek($op_result,0);
-					$zeile=mysql_fetch_array($op_result);
+					//mysql_data_seek($op_result,0);
+					$zeile=$op_result->FetchRow();
 					if($zeile[ops_intern_code]!="") 
 					{
 						$linebuf=explode("~",$zeile[ops_intern_code]);
@@ -244,7 +249,7 @@ if($icdcount)
 </tr>
 <tr bgcolor="#0000aa">
 <td width="20">
-<img <?php echo createComIcon('../','delete2.gif','0') ?> alt="<?php echo $LDReset ?>" onClick="javascript:document.quicklist.reset()">
+<img <?php echo createComIcon($root_path,'delete2.gif','0') ?> alt="<?php echo $LDReset ?>" onClick="javascript:document.quicklist.reset()">
 </td>
 <td><font face=arial size=2 color=#ffffff>&nbsp;<b><nobr><?php echo $LDIcd10 ?></nobr></b>&nbsp;</td>
 
@@ -258,8 +263,8 @@ if($icdcount)
 			if ($icdcount>0) 
 				{ 
 					$selector="icd";
-					mysql_data_seek($icd_result,0);
-					while($zeile=mysql_fetch_array($icd_result))
+					//mysql_data_seek($icd_result,0);
+					while($zeile=$icd_result->FetchRow())
 					{
 							drawdata($zeile[related_icd]);
 							//$idx++;
@@ -276,7 +281,7 @@ if($icdcount)
 </tr>
 <tr bgcolor="#009900">
 <td width="20">
-<img <?php echo createComIcon('../','delete2.gif','0') ?> alt="<?php echo $LDReset ?>" onClick="javascript:document.quicklist.reset()">
+<img <?php echo createComIcon($root_path,'delete2.gif','0') ?> alt="<?php echo $LDReset ?>" onClick="javascript:document.quicklist.reset()">
 </td>
 <td><font face=arial size=2 color=#ffffff>&nbsp;<b><nobr><?php echo $LDOps301 ?></nobr></b>&nbsp;</td>
 
@@ -290,8 +295,8 @@ if($icdcount)
 				{ 
 					$selector="ops";
 					$idx=0;
-					mysql_data_seek($ops_result,0);
-					while($zeile=mysql_fetch_array($ops_result))
+					//mysql_data_seek($ops_result,0);
+					while($zeile=$ops_result->FetchRow())
 					{
 							drawdata($zeile[related_ops]);
 							//$idx++;
@@ -316,7 +321,7 @@ if($icdcount)
 <input type="hidden" name="ln" value="<?php echo $ln; ?>">
 <input type="hidden" name="fn" value="<?php echo $fn; ?>">
 <input type="hidden" name="bd" value="<?php echo $bd; ?>">
-<input type="hidden" name="dept" value="<?php echo $dept; ?>">
+<input type="hidden" name="dept_nr" value="<?php echo $dept_nr; ?>">
 <input type="hidden" name="oprm" value="<?php echo $oprm; ?>">
 <input type="hidden" name="display" value="<?php echo $display; ?>">
 <input type="hidden" name="target" value="<?php echo $target; ?>">
@@ -326,9 +331,9 @@ if($icdcount)
 </form>
 <?php else : ?>
 <p>
-<img <?php echo createMascot('../','mascot1_r.gif','0','bottom') ?> align="bottom"><?php echo $LDNoQuickList ?> 
+<img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="bottom"><?php echo $LDNoQuickList ?> 
 <p>
-<a href="javascript:window.close()"><img <?php echo createLDImgSrc('../','close2.gif','0') ?>></a>
+<a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>></a>
 <?php endif ?>
 
 </ul>

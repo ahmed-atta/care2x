@@ -1,7 +1,9 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
+* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -10,8 +12,8 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 */
 define('LANG_FILE','or.php');
 define('NO_2LEVEL_CHK',1);
-require_once('../include/inc_front_chain_lang.php');
-require_once('../include/inc_config_color.php');
+require_once($root_path.'include/inc_front_chain_lang.php');
+require_once($root_path.'include/inc_config_color.php');
 
 $fixdate="&cday=$cday&cmonth=$cmonth&cyear=$cyear";
 switch($retpath)
@@ -25,7 +27,7 @@ switch($retpath)
 
 /********************************* Resolve the or department  only ***********************/
 $saal="exclude";
-require('../include/inc_resolve_opr_dept.php');
+require($root_path.'include/inc_resolve_opr_dept.php');
 
 setcookie(username,"");
 setcookie(ck_plan,"1");
@@ -33,13 +35,13 @@ if($pmonth=="") $pmonth=date('n');
 if($pyear=="") $pyear=date('Y');
 $thisfile="op-pflege-dienstplan.php";
 
-$abtname=get_meta_tags("../global_conf/$lang/op_tag_dept.pid");
+$abtname=get_meta_tags($root_path."global_conf/$lang/op_tag_dept.pid");
 
 $dbtable='care_nursing_dutyplan';
 
 /* Establish db connection */
-require('../include/inc_db_makelink.php');
-if($link&&$DBLink_OK) 
+if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
+if($dblink_ok)
 	{	
 		
 		 	$sql="SELECT a_dutyplan,r_dutyplan FROM $dbtable 
@@ -47,14 +49,11 @@ if($link&&$DBLink_OK)
 								AND year='$pyear'
 								AND month='$pmonth'";
 			
-			if($ergebnis=mysql_query($sql,$link))
+			if($ergebnis=$db->Execute($sql))
        		{
-				$rows=0;
-				if( $result=mysql_fetch_array($ergebnis)) $rows++;
-				if($rows)
+				if($rowst=$ergebnis->RecordCount())
 				{
-					mysql_data_seek($ergebnis,0);
-					$result=mysql_fetch_array($ergebnis);
+					$result=$ergebnis->FetchRow();
 					//echo $sql."<br>";
 				}
 			}
@@ -142,8 +141,8 @@ function killchild() {
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" ><FONT  size=+2 COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+1  FACE="Arial">
 <STRONG><?php echo "$LDOr - $LDDutyPlan $abtname[$dept]"; ?></STRONG></FONT></td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right"><a href="javascript:history.back();"><img 
-<?php echo createLDImgSrc('../','back2.gif','0','absmiddle') ?> alt="<?php echo $LDBack ?>"></a><a 
-href="javascript:gethelp('op_duty.php','show','<?php echo $rows ?>')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0','absmiddle') ?> alt="<?php echo $LDHelp ?>"></a><a href="<?php echo $rettarget ?>" onClick=killchild()><img <?php echo createLDImgSrc('../','close2.gif','0','absmiddle') ?> alt="<?php echo $LDClosePlan ?>"></a></td>
+<?php echo createLDImgSrc($root_path,'back2.gif','0','absmiddle') ?> alt="<?php echo $LDBack ?>"></a><a 
+href="javascript:gethelp('op_duty.php','show','<?php echo $rows ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?> alt="<?php echo $LDHelp ?>"></a><a href="<?php echo $rettarget ?>" onClick=killchild()><img <?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?> alt="<?php echo $LDClosePlan ?>"></a></td>
 </tr>
 <tr>
 <td bgcolor="<?php echo $cfg['body_bgcolor']; ?>" valign=top colspan=2><p>
@@ -226,19 +225,19 @@ for ($i=1,$n=0,$wd=$firstday;$i<=$maxdays;$i++,$n++,$wd++){
 
 
 <td valign="top">
-<!-- <a href="op-pflege-dienstplan-pass.php?dept=<?php echo $dept.'&sid='.$sid.'&lang='.$lang.'&pmonth='.$pmonth.'&pyear='.$pyear.'&retpath='.$retpath.'&lang='.$lang; ?>"><img <?php echo createLDImgSrc('../','newplan.gif','0') ?> alt="<?php echo $LDNewPlan ?>"></a>
- --><a href="javascript:newplan()"><img <?php echo createLDImgSrc('../','newplan.gif','0') ?> alt="<?php echo $LDNewPlan ?>"></a>
+<!-- <a href="op-pflege-dienstplan-pass.php?dept=<?php echo $dept.'&sid='.$sid.'&lang='.$lang.'&pmonth='.$pmonth.'&pyear='.$pyear.'&retpath='.$retpath.'&lang='.$lang; ?>"><img <?php echo createLDImgSrc($root_path,'newplan.gif','0') ?> alt="<?php echo $LDNewPlan ?>"></a>
+ --><a href="javascript:newplan()"><img <?php echo createLDImgSrc($root_path,'newplan.gif','0') ?> alt="<?php echo $LDNewPlan ?>"></a>
 <br>
-<a href="<?php echo $rettarget ?>"><img <?php echo createLDImgSrc('../','close2.gif','0') ?>  alt="<?php echo $LDClosePlan ?>"></a>
+<a href="<?php echo $rettarget ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  alt="<?php echo $LDClosePlan ?>"></a>
 </td>
 </tr>
 </table>
 
 <p>
-<!-- <a href="op-pflege-dienstplan-pass.php?dept=<?php echo $dept.'&sid='.$sid.'&lang='.$lang.'&pmonth='.$pmonth.'&pyear='.$pyear.'&retpath='.$retpath.'&lang='.$lang; ?>"><img <?php echo createLDImgSrc('../','newplan.gif','0') ?> alt="<?php echo $LDNewPlan ?>"></a>
- --><a href="javascript:newplan()"><img <?php echo createLDImgSrc('../','newplan.gif','0') ?> alt="<?php echo $LDNewPlan ?>"></a>
+<!-- <a href="op-pflege-dienstplan-pass.php?dept=<?php echo $dept.'&sid='.$sid.'&lang='.$lang.'&pmonth='.$pmonth.'&pyear='.$pyear.'&retpath='.$retpath.'&lang='.$lang; ?>"><img <?php echo createLDImgSrc($root_path,'newplan.gif','0') ?> alt="<?php echo $LDNewPlan ?>"></a>
+ --><a href="javascript:newplan()"><img <?php echo createLDImgSrc($root_path,'newplan.gif','0') ?> alt="<?php echo $LDNewPlan ?>"></a>
 &nbsp;&nbsp;&nbsp;&nbsp;
-<a href="<?php echo $rettarget ?>"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> alt="<?php echo $LDClosePlan ?>"></a>
+<a href="<?php echo $rettarget ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClosePlan ?>"></a>
 <p>
 </ul>
 
@@ -250,11 +249,9 @@ for ($i=1,$n=0,$wd=$firstday;$i<=$maxdays;$i++,$n++,$wd++){
 <tr>
 <td bgcolor="<?php echo $cfg[bot_bgcolor] ?>" height=70 colspan=2>
 <?php
-if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
-include('../language/'.$lang.'/'.$lang.'_copyrite.php');
-  else include('../language/en/en_copyrite.php');?>
-</td>
-</tr>
+require($root_path.'include/inc_load_copyrite.php');
+?>
+</td></tr>
 </table>        
 &nbsp;
 

@@ -296,4 +296,11 @@ $LD_MMsddsyyyy='mm/dd/aaaa';
 /* 2002-10-15 EL */
 $LDStandbyInit='R'; /* S = Standby */
 $LDOncallInit='S'; /* O = Oncall */
+$LDDutyPlan='Duty plan';
+/* 2003-03-18 EL */
+$LDSearchInAllDepts='Search in all departments';
+$LDAddNurseToList='Add a nurse to list';
+$LDNursesList='Nurses\' List';
+/* 2003-03-19 EL */
+$LDPlsSelectDept='Please select a department.';
 ?>

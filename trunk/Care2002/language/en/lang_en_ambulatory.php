@@ -12,6 +12,4 @@ $LDAdmission='Admission';
 $LDAdmissionTxt='Admission/discharge of ambulatory, search, archive';
 $LDNews='News';
 $LDNewsTxt='Clinic specific news, memo, info, etc.';
-
 ?>
-

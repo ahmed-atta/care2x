@@ -171,4 +171,61 @@ $LDEnterNewUser='Einen neuen Benutzer erstellen';
 $LDDeleteCurrency='Wollen Sie diese Währungsinformation wirklich löschen?';
 $LDNoMainDelete='Die Hauptwährung darf nicht gelöscht werden!. \nBitte stellen Sie zuerst eine andere Hauptwährung ein.';
 $LDCurrencyExisting='Diese Währungsinformation ist bereits vorhanden!';
+/* 2003-02-21 EL*/
+$LDMenuItem='Menueintrag';
+$LDOrderNr='Reihenfolge';
+$LDStatus='Status';
+$LDHideBy='Unsichtbar bei:';
+$LDPath='Pfad';
+$LDVisible='Sichtbar';
+$LDFrameResizable='Rahmengrösse veränderbar';
+$LDBorderColor='Randfarbe';
+$LDBorderWidth='Randbreite';
+$LDFrameWidth='Rahmenbreite';
+$LDNo='Nein';
+$LDYes='Ja';
+$LDAllowMultiLang='Sprachenauswahl erlauben';
+$LDDefaultLang='Standardsprache (falls Sprachenauswahl nicht erlaubt)';
+/* 2003-02-22 EL*/
+$LDMainMenuItems='Hauptmenueinträge';
+$LDMainMenuDisplay='Hauptmenuanzeigemodus';
+$LDDataEntryForms='Formulare';
+$LDControlButImg='Steuerelemente';
+$LDSampleButtons='Beispeile';
+$LDTheme='Theme';
+$LDItem='Eintrag';
+/* 2003-02-26- EL*/
+$LDDeptAdmin='Verwaltung von Abteilungen';
+$LDNewDept='Abteilung erstellen bzw. Einstellungen vornehmen';
+$LDShowDeptInfo ='Abteilungsinformation';
+$LDShowDeptInfoTxt='Anzeigen von aktiven Abteilungen';
+$LDConfigOptions='Einstellungsoptionen';
+$LDDeptConfigOptions='Einstellungen, Aktualisieren, inaktivieren, aktivieren, versctecken von Abteilungen';
+$LDDescription='Beschreibung';
+/* 2003-023-01 EL*/
+$LDFormalName='Offizieler Name';
+$LDInternalID='IdentifikationsCode';
+$LDPlsSelect=' Bitte wählen Sie einen';
+$LDTypeDept='Abteilungsart';
+$LDIsSubDept='Ist Abteiung ein untergeordneten Abteilung?';
+$LDParentDept='Hauptabteilung';
+$LDLangVariable='Sprachvariable';
+$LDShortName='Kurzer name';
+$LDAlternateName='AltenativeNamen';
+$LDAdmitsOutpatients='Nimmt Patienten auf?';
+$LDAdmitsInpatients='Nimmt nur Ambulante auf ?';
+$LDBelongsToInst='Intern angestellt ?';
+$LDWorkHrs='Arbeitszeiten';
+$LDConsultationHrs='Sprechstunde';
+$LDSigLine='Signaturzeile';
+$LDSigStampTxt='Signatur und Abteilungsstempel';
+$LDDeptLogo='Abteilungslogo';
+$LDHidden='Versteckt';
+$LDNormal='Normal';
+$LDInactive='Inaktiv';
+$LDActive='Aktiv';
+$LDDeptStatus='Abteilungsstatus';
+$LDRecordStatus='Status der Akte';
+/* 2003-03-30 EL*/
+$LDConfigOptions='Einstellungssoptionen';
 ?>

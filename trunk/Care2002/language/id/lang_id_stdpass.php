@@ -110,5 +110,6 @@ $LDBloodOrder='Request for blood conserve';
 $LDPendingRequest='Pending request';
 /* 2002-10-06 EL*/
 $LDLoggedOut='Logged out';
-
+/* 2003-03-18 EL */
+$LDNursesList='Nurses\' List';
 ?>

@@ -1,16 +1,26 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','or.php');
 define("NO_CHAIN",1);
-require_once('../include/inc_front_chain_lang.php');
+require_once($root_path.'include/inc_front_chain_lang.php');
 
+/*if(!session_is_registered('sess_opfclic_rt')) session_register('sess_opfclic_rt');
+if(!session_is_registered('sess_opfclic_filename')) session_register('sess_opfclic_filename');
+if(!session_is_registered('sess_comdat')) session_register('sess_comdat');
+*/
 $template=array();
 
-setcookie(opfclic_rt,"timebar");
-setcookie(opfclic_filename,$filename);
-$imgsrc="../imgcreator/log-timebar.php?sid=$sid&lang=$lang&winid=$winid&patnum=$patnum&op_nr=$op_nr&dept=$dept&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday";
-setcookie(ck_comdat,"patnum=$patnum&op_nr=$op_nr&dept=$dept&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday");
+//setcookie(opfclic_rt,"timebar");
+//setcookie(opfclic_filename,$filename);
+$imgsrc=$root_path."main/imgcreator/log-timebar.php?sid=$sid&lang=$lang&winid=$winid&enc_nr=$enc_nr&op_nr=$op_nr&dept_nr=$dept_nr&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday";
+setcookie(ck_comdat,"enc_nr=$enc_nr&op_nr=$op_nr&dept_nr=$dept_nr&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday");
 
+/*$HTTP_SESSION_VARS['sess_opfclic_rt']='timebar';
+$HTTP_SESSION_VARS['sess_opfclic_filename']=$filename;
+$HTTP_SESSION_VARS['sess_comdat']="enc_nr=$enc_nr&op_nr=$op_nr&dept_nr=$dept_nr&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday";
+*/
 $hi=90;
 $wid=3000;
 $min=($wid*100)/(24*12);
@@ -41,9 +51,9 @@ $minute="05";
 <script language="javascript">
 function refreshparent()
 {
-	<?php $comdat='&dept='.$dept.'&saal='.$saal.'&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday.'&op_nr='.$op_nr; ?>
-	window.top.LOGINPUT.location.replace("<?php echo "oploginput.php?sid=$sid&lang=$lang&patnum=$patnum&mode=notimereset$comdat"; ?>");
-	window.top.OPLOGMAIN.location.replace("<?php echo "oplogmain.php?sid=$sid&lang=$lang&gotoid=$patnum$comdat"; ?>");
+	<?php $comdat='&dept_nr='.$dept_nr.'&saal='.$saal.'&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday.'&op_nr='.$op_nr; ?>
+	window.top.LOGINPUT.location.replace("<?php echo "oploginput.php?sid=$sid&lang=$lang&enc_nr=$enc_nr&mode=notimereset$comdat"; ?>");
+	window.top.OPLOGMAIN.location.replace("<?php echo "oplogmain.php?sid=$sid&lang=$lang&gotoid=$enc_nr$comdat"; ?>");
 }
 function pruf(t)
 {
@@ -82,7 +92,7 @@ function s(h,m,x)
 		case "r": group="repos_time";
 						break;
 	}
-	window.location.href="opfclic.php?<?php echo "sid=$sid&lang=$lang" ?>&v="+h+"."+m+"&g="+group;
+	window.location.href="opfclic.php?<?php echo "sid=$sid&lang=$lang" ?>&time="+h+"."+m+"&group="+group;
 }
 </script>
  

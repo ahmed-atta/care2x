@@ -1,0 +1,37 @@
+<?php
+$LDPlsFindPersonFirst='Bitte suchen Sie zuerst ein Personal';
+$LDSearchPersonell='Personalsuche';
+$LDPersonRegister='Person Registration';
+$LDShortID='Kurzel';
+$LDJobNr='BerufsNr';
+$LDJobFunction='Funktion';
+$LDDateJoin='Eintrittsdatum';
+$LDDateExit='Date of Exit';
+$LDContractClass='Vertragsart';
+$LDContractStart='Vertragsanfang';
+$LDContractEnd='Vertragsende';
+$LDPayClass='Lohnkategorie';
+$LDPaySubClass='Lohnnebenkategorie';
+$LDLocalPremiumID='Orstzuschlagskategorie';
+$LDTaxAccountNr='Steuer Nr';
+$LDInternalRevenueCode='Finanzamt Nr';
+$LDNrWorkDay='Anzahl d. Arbeitstage';
+$LDNrWeekHour='Anzahl d. Wochenendetage';
+$LDNrVacationDay='Urlaubstage';
+$LDMultipleEmployer='Mehrfachbeschäftigung?';
+$LDPersonellNr='Personal Nr.';
+$LDPersonCurrentlyEmployed='Person ist bereits angestellt';
+$LDRecordedBy='Bearbeitet von';
+$LDNrDependent='Nr. of Dependents';
+$LDPersonellData='Personaldaten';
+$LDEnterNewEmployment='Neue Mitarbeiterdaten eingeben';
+$LDRegNewPerson='Neue Personendaten eingeben';
+$LDFindPersonell='Mitarbeiter suchen';
+$LDPersonalID='Personal ID';
+$LDAssignDoctorDept='Als Arzt einer Abteilung einteilen';
+$LDAssignNurseDept='Als Pflegekraft einer Abteilung einteilen';
+$LDAddPhoneInfo='Funk/TelefonNr eingeben';
+$LDOptions4Employee='Optionen für diesen Mitarbeiter';
+$LDPayrollOptions='Lohnzettelfunktionen';
+$LDLegalDocuments='Legal Dokumente';
+?>

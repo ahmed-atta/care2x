@@ -136,7 +136,7 @@ etwas nimmt, sollte man etwas in gleicher Proportion zurückgeben."</i>
 
 
 <hr>
-<font face="verdana,arial" size=3 color="#0000ff">Weitere Anerkennungen</font>
+<font face="verdana,arial" size=3 color="#0000ff">Weitere Credits</font>
 <font face="verdana,arial" size=1 > (alphabetisch sortiert)</font>
 
 <table border=0 cellspacing=1 cellpadding=1>

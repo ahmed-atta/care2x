@@ -1,8 +1,10 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','stdpass.php');
 define('NO_2LEVEL_CHK',1);
-require_once('../include/inc_front_chain_lang.php');
+require_once($root_path.'include/inc_front_chain_lang.php');
  ?>
 
 

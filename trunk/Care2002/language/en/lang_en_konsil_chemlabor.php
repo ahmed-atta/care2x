@@ -46,7 +46,7 @@ $LDShortDay=array('So','Mo','Tu','We','Th','Fr','Sa','So');
 $LDBatchNumber='Batch nr.';
 $LDMaterial='Material:';
 $LDEmergencyProgram='The violet shaded fields belong to emergency program';
-$LDPhoneOrder=' = only after acknowledgement by phone';
+$LDPhoneOrder=' = must be confirmed by phone';
 
 /* Note: the following array uses strict medical terminology.
 *  If you are not sure about their translation, please leave the 
@@ -453,8 +453,8 @@ $LD_Elements = array('tx_1'=>'Clinical Chem.',
 								 '_g10_'=>'G10',
 								
 								 'tx_24'=>'Doctor\'s sign',
-								 'tx_25'=>'High rish >>',
-								 'highrisk'=>'<< High risk',
+								 'tx_25'=>'High risk >>',
+								 '_highrisk_'=>'<< High risk',
 								 'tx_26'=>'Rarity:',
 								 'tx_27'=>'special Test',
 								 'tx_28'=>'',

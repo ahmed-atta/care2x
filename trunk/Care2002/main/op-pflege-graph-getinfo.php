@@ -1,5 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 /*if(!$lang)
 	if(!$ck_language) include("../chklang.php");
 		else $lang=$ck_language;
@@ -8,8 +10,8 @@ require("../language/".$lang."/lang_".$lang."_or.php");
 */
 define('LANG_FILE','or.php');
 $local_user='ck_op_pflegelogbuch_user';
-require_once('../include/inc_front_chain_lang.php');
-require_once('../include/inc_config_color.php'); // load color preferences
+require_once($root_path.'include/inc_front_chain_lang.php');
+require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
 $dbtable='care_nursing_op_logbook';
 $thisfile="op-pflege-graph-getinfo.php";
@@ -50,8 +52,8 @@ switch($winid)
 }
 
 /* Establish db connection */
-require('../include/inc_db_makelink.php');
-if($link&&$DBLink_OK) 
+if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
+if($dblink_ok)
 	{	
 	// get orig data
 
@@ -64,10 +66,10 @@ if($link&&$DBLink_OK)
 						AND dept='$dept' 
 						AND op_room='$saal' 
 						AND op_nr='$op_nr'";
-				if($ergebnis=mysql_query($sql,$link))
+				if($ergebnis=$db->Execute($sql))
        			{
 					$rows=0;
-					if( $content=mysql_fetch_array($ergebnis)) $rows++;
+					if( $content=$ergebnis->FetchRow()) $rows++;
 					
 					if($rows==1)
 					 {
@@ -90,10 +92,10 @@ if($link&&$DBLink_OK)
 											AND op_room='$saal'
 											AND op_nr='$op_nr'";
 											
-							if($ergebnis=mysql_query($sql,$link))
+							if($ergebnis=$db->Execute($sql))
        							{
 									//echo $sql." new update <br>";
-									mysql_close($link);
+									
 									header("location:$thisfile?sid=$sid&lang=$lang&saved=1&patnum=$patnum&winid=$winid&dept=$dept&saal=$saal&op_nr=$op_nr&year=$pyear&pmonth=$pmonth&pday=$pday");
 								}
 								else
@@ -113,14 +115,14 @@ if($link&&$DBLink_OK)
 						AND op_room='$saal' 
 						AND op_nr='$op_nr'";
 
-			if($ergebnis=mysql_query($sql,$link))
+			if($ergebnis=$db->Execute($sql))
        		{
 				$rows=0;
-				if( $result=mysql_fetch_array($ergebnis)) $rows++;
+				if( $result=$ergebnis->FetchRow()) $rows++;
 				if($rows)
 				{
 					mysql_data_seek($ergebnis,0);
-					$result=mysql_fetch_array($ergebnis);
+					$result=$ergebnis->FetchRow();
 					//echo $sql."<br>file found!";
 				}
 			}
@@ -339,7 +341,7 @@ onLoad="<?php if($saved)
 				}
 			?>if (window.focus) window.focus(); window.focus();" >
 
-<a href="javascript:gethelp('oplog.php','time','<?php echo $winid ?>')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0') ?> alt="<?php echo $LDHelp ?>" align="right"></a>
+<a href="javascript:gethelp('oplog.php','time','<?php echo $winid ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?> alt="<?php echo $LDHelp ?>" align="right"></a>
 
 <font face=verdana,arial size=5 color=maroon>
 <b>
@@ -434,15 +436,15 @@ onLoad="<?php if($saved)
 </form>
 <p>
 <div align=right> 
-<a href="javascript:window.close()"><img <?php echo createLDImgSrc('../','cancel.gif','0') ?>" border="0" alt="<?php echo $LDClose ?>">
+<a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>" border="0" alt="<?php echo $LDClose ?>">
 </a>
 &nbsp;&nbsp;
-<a href="javascript:resetinput()"><img <?php echo createLDImgSrc('../','reset.gif','0') ?> alt="<?php echo $LDReset ?>"></a>
+<a href="javascript:resetinput()"><img <?php echo createLDImgSrc($root_path,'reset.gif','0') ?> alt="<?php echo $LDReset ?>"></a>
 &nbsp;&nbsp;
 <?php if($saved)  : ?>
-<a href="javascript:window.close()"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> alt="<?php echo $LDClose ?>"></a>
+<a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"></a>
 <?php else : ?>
-<a href="javascript:document.infoform.submit();"><img <?php echo createLDImgSrc('../','savedisc.gif','0') ?> alt="<?php echo $LDSave ?>"></a>
+<a href="javascript:document.infoform.submit();"><img <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?> alt="<?php echo $LDSave ?>"></a>
 <?php endif ?>
 </div>
 </BODY>

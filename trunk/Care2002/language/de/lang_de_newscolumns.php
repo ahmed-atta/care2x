@@ -27,7 +27,8 @@ $LDTitleTag=array
 					sono=>'Sonographie',
 					nuklear=>'Nuklear Medizin Ambulanz',
 					inmed=>'Innere Medizin Ambulanz');
-
+				
+					
 $LDSubTitle=array
 					(headline=>"",
 					cafenews=>"",

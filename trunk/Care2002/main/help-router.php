@@ -1,7 +1,9 @@
 <?php 
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-require_once('../include/inc_vars_resolve.php'); // globalize POST, GET, & COOKIE  vars
-require_once('../include/inc_charset_fx.php') // load the charset functions
+ // globalize POST, GET, & COOKIE  vars
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
+require_once($root_path.'include/inc_charset_fx.php') // load the charset functions
 ?>
 <html>
 <head>

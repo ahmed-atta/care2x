@@ -63,5 +63,6 @@ $LDWrittenOn='on';
 $LDWrittenBy='Written by';
 
 $LDNewsDummy=array(1=>'first',2=>'second',3=>'third',4=>'fourth');
-$LDClk2Compose='Click here to compose...'
+$LDClk2Compose='Click here to post news';
+$LDClk2Write='Click here to start the editor';
 ?>

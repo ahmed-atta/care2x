@@ -123,4 +123,10 @@ $LDMenuSaved='Menu je ulo¾eno.';
 $LD_ddpMMpyyyy='dd.mm.yyyy';
 $LD_yyyyhMMhdd='yyyy-mm-dd';
 $LD_MMsddsyyyy='mm/dd/yyyy';
+/* 2003-02-11*/
+$LDSubmitNews='Publikovat zprávy';
+$LDDelete='Delete';
+$LDDeleteCurrency='Are you sure, you really want to delete this currency?';
+$LDNoMainDelete='You cannot delete a main currency. \nPlease set a different main currency first.';
+$LDCurrencyExisting='This currency exists already!';
 ?>

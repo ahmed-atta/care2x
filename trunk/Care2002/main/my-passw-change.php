@@ -1,7 +1,9 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
+* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -10,20 +12,22 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 */
 define('LANG_FILE','specials.php');
 define('NO_2LEVEL_CHK',1);
-require_once('../include/inc_front_chain_lang.php');
-require_once('../include/inc_config_color.php');
+require_once($root_path.'include/inc_front_chain_lang.php');
+require_once($root_path.'include/inc_config_color.php');
 
 $breakfile="spediens.php?sid=".$sid."&lang=".$lang;
-$thisfile='my-passw-change.php';
+$thisfile=basename(__FILE__);
 
 if($n==$n2)
 {
 	$screenall=1;
 	$fileforward="my-passw-change-update.php?sid=$sid&lang=$lang&userid=$userid&n=$n";
 	if ($pass=='check') 	
-		include('../include/inc_passcheck.php');
+		include($root_path.'include/inc_passcheck.php');
 }
 else $n_error=1;
+
+if(!isset($userid)) $userid=$HTTP_SESSION_VARS['sess_user_name'];
 ?>
 
 <HTML>
@@ -38,17 +42,13 @@ function pruf(d)
 	if(d.n.value!=d.n2.value){ alert("<?php echo $LDAlertPwError ?>"); return false;}
 	return true;
 }
-function gethelp(x,s,x1,x2,x3)
-{
-	if (!x) x="";
-	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
-	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
-	window.helpwin.moveTo(0,0);
-}
+
 </script>
  
 <?php
-require('../include/inc_css_a_hilitebu.php');
+require($root_path.'include/inc_js_gethelp.php');
+require($root_path.'include/inc_css_a_hilitebu.php');
+
 ?>
 </HEAD>
 
@@ -64,19 +64,19 @@ require('../include/inc_css_a_hilitebu.php');
 </STRONG></FONT>
 </td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc('../','back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
+<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
 <tr>
 <td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2><p><br>
 <?php if($n_error) : ?><font face="verdana,arial" size=3 color="#990000">
-<img <?php echo createMascot('../','mascot1_r.gif','0','bottom') ?> align="absmiddle"> <?php echo $LDNewPwDiffer ?>
+<img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"> <?php echo $LDNewPwDiffer ?>
 </font>
 <?php endif ?>
 <ul>
 
 <?php if($mode=='pwchg') : ?>
 <font face="verdana,arial" size=3 color="#009900">
-	<img <?php echo createMascot('../','mascot1_r.gif','0','bottom') ?> align="absmiddle"><b><?php echo $LDPWChanged ?></b></font>
+	<img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"><b><?php echo $LDPWChanged ?></b></font>
 <?php else : ?>
 
 <?php if (($pass=='check')&&$passtag) 
@@ -94,9 +94,9 @@ default:$errbuf=$errbuf.$LDAuthLocked; echo '<img src=../img/'.$lang.'/'.$lang.'
 }*/
 switch($passtag)
 {
-case 1:$errbuf="$errbuf $LDWrongEntry"; print '<img '.createLDImgSrc('../','cat-fe.gif','0').'>';break;
-case 2:$errbuf="$errbuf $LDNoAuth"; print '<img '.createLDImgSrc('../','cat-noacc.gif','0').'>';break;
-default:$errbuf="$errbuf $LDAuthLocked"; print '<img '.createLDImgSrc('../','cat-sperr.gif','0').'>'; 
+case 1:$errbuf="$errbuf $LDWrongEntry"; print '<img '.createLDImgSrc($root_path,'cat-fe.gif','0').'>';break;
+case 2:$errbuf="$errbuf $LDNoAuth"; print '<img '.createLDImgSrc($root_path,'cat-noacc.gif','0').'>';break;
+default:$errbuf="$errbuf $LDAuthLocked"; print '<img '.createLDImgSrc($root_path,'cat-sperr.gif','0').'>'; 
 }
 
 logentry($userid,$keyword,$errbuf,$thisfile,$fileforward);
@@ -151,12 +151,10 @@ echo '</STRONG></FONT><p>';
 </tr>
 </table>        
 <p>
-<a href="<?php echo $breakfile; ?>"><img <?php if($mode=='pwchg') echo createLDImgSrc('../','close2.gif','0'); else echo createLDImgSrc('../','cancel.gif','0'); ?>>
+<a href="<?php echo $breakfile; ?>"><img <?php if($mode=='pwchg') echo createLDImgSrc($root_path,'close2.gif','0'); else echo createLDImgSrc($root_path,'cancel.gif','0'); ?>>
 </a>
 <p>
 <?php
-if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
-include('../language/'.$lang.'/'.$lang.'_copyrite.php');
-  else include('../language/en/en_copyrite.php');?>
-</BODY>
+require($root_path.'include/inc_load_copyrite.php');
+?></BODY>
 </HTML>

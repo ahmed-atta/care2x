@@ -199,4 +199,7 @@ $LDDisplay2="Display 2";
 $LDDisplay2Txt="Switch over to the display with the menu on a floating frame. ";
 
 $LDNewPwDiffer="The new passwords differ from each other.<br> Please enter the new password again.";
+/* 2003-03-22 EL*/
+$LDPersonellMngmnt='Personell Management';
+$LDPersonellMngmntTxt='Tools and functions for managing personell';
 ?>

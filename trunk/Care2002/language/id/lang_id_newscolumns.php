@@ -64,4 +64,5 @@ $LDWrittenBy='Ditulis oleh';
 
 $LDNewsDummy=array(1=>'Pertama',2=>'Kedua',3=>'Ketiga',4=>'Keempat');
 $LDClk2Compose='Klik disini untuk menyusun...'
+$LDClk2Write='Click here to start the editor';
 ?>

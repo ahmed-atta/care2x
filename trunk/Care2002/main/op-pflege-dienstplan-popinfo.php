@@ -1,28 +1,30 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 
 define('LANG_FILE','or.php');
 define('NO_2LEVEL_CHK',1);
-require_once('../include/inc_front_chain_lang.php');
+require_once($root_path.'include/inc_front_chain_lang.php');
 $dbtable='care_personell_data';
 
 /* Establish db connection */
-require('../include/inc_db_makelink.php');
-if($link&&$DBLink_OK) 
+if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
+if($dblink_ok)
 	{	
 
 		 	$sql="SELECT info FROM $dbtable 
 							WHERE lastname LIKE '$ln'
 								AND firstname LIKE '$fn'
 								AND bday LIKE '$bd'";	
-			if($ergebnis=mysql_query($sql,$link))
+			if($ergebnis=$db->Execute($sql))
        		{
 				$rows=0;
-				if( $pinfo=mysql_fetch_array($ergebnis)) $rows++;
+				if( $pinfo=$ergebnis->FetchRow()) $rows++;
 				if($rows)
 				{
 					mysql_data_seek($ergebnis,0);
-					$pinfo=mysql_fetch_array($ergebnis);
+					$pinfo=$ergebnis->FetchRow();
 					//echo $result[$i][a_dutyplan];
 					//echo $sql."<br>";
 				}
@@ -32,14 +34,14 @@ if($link&&$DBLink_OK)
 		 	$sql="SELECT list FROM care_nursing_dept_personell_quicklist
 							WHERE dept LIKE '$dept'";	
 							
-			if($ergebnis=mysql_query($sql,$link))
+			if($ergebnis=$db->Execute($sql))
        		{
 				$rows=0;
-				if( $ftinfo=mysql_fetch_array($ergebnis)) $rows++;
+				if( $ftinfo=$ergebnis->FetchRow()) $rows++;
 				if($rows)
 				{
 					mysql_data_seek($ergebnis,0);
-					$ftinfo=mysql_fetch_array($ergebnis);
+					$ftinfo=$ergebnis->FetchRow();
 					//echo $result[$i][a_dutyplan];
 					//echo $sql."<br>";
 				}
@@ -94,7 +96,7 @@ echo $ln.', '.ucfirst($fn);
 
 <table border=0 >
 <tr>
-<td bgcolor=#ffffcc><img <?php echo createComIcon('../','authors.gif','0') ?>>&nbsp;<font face=verdana,arial size=2 ><b><?php echo $LDStandbyPerson ?></b><br></font>
+<td bgcolor=#ffffcc><img <?php echo createComIcon($root_path,'authors.gif','0') ?>>&nbsp;<font face=verdana,arial size=2 ><b><?php echo $LDStandbyPerson ?></b><br></font>
 </td>
 </tr>
 <tr>
@@ -103,7 +105,7 @@ echo $ln.', '.ucfirst($fn);
 </td>
 </tr>
 <tr>
-<td bgcolor=#ffffcc><img <?php echo createComIcon('../','listen-sm-legend.gif','0') ?>>&nbsp;<font face=verdana,arial size=2 ><b><?php echo $LDOnCallPerson ?></b><br></font>
+<td bgcolor=#ffffcc><img <?php echo createComIcon($root_path,'listen-sm-legend.gif','0') ?>>&nbsp;<font face=verdana,arial size=2 ><b><?php echo $LDOnCallPerson ?></b><br></font>
 </td>
 </tr>
 <tr>
@@ -114,7 +116,7 @@ echo $ln.', '.ucfirst($fn);
 </tr>
 
 <tr>
-<td bgcolor=#ffffcc><img <?php echo createComIcon('../','warn.gif','0') ?>>&nbsp;<font face=verdana,arial size=2 ><b><?php echo $LDExtraInfo ?></b><br></font>
+<td bgcolor=#ffffcc><img <?php echo createComIcon($root_path,'warn.gif','0') ?>>&nbsp;<font face=verdana,arial size=2 ><b><?php echo $LDExtraInfo ?></b><br></font>
 </td>
 </tr>
 <tr>
@@ -124,7 +126,7 @@ echo $ln.', '.ucfirst($fn);
 </table>
 <p>
 
-<a href="javascript:closethis()"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> alt="<?php echo $LDClose ?>"></a>
+<a href="javascript:closethis()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"></a>
 
 </BODY>
 

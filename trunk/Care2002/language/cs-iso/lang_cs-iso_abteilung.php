@@ -12,24 +12,24 @@ $LDDayTxt='Den';
 * OB-Gyne = Obstetrics-Gynecology
 */
 $dept=array('Obecná chirurgie',
-					'Urgentní operace',
-					'Plastická operace',
+					'Emergency Surgery',
+					'Plastic Surgery',
 					'ENT',
-					'Oèní',
-					'Patologie',
+					'Opthalmology',
+					'Pathology',
 					'OB-Gyne',
 					'Physical Therapy',
-					'Interna',
-					'Onkologie',
-					'Údr¾ba',
+					'Internal Medicine',
+					'Oncology',
+					'Maintenance',
 					'Intermediate Care Unit',
-					'Jednotka intenzívní péèe',
-					'Laboratoø',
+					'Intensive Care Unit',
+					'Medical Laboratory',
 					'Urgetní ambulance',
 					'General Ambulatory',
-					'Sonografie',
+					'Sonography',
 					'Nuclear Diagnostics',
-					'Ambulance interní medicíny');
+					'Internal Medicine Ambulatory');
 
 /**
 * Do not translate the $target variable

@@ -1,41 +1,28 @@
-<?
-$indextag=array("Home&nbsp;",
-				"Elenco&nbsp;",
-				"Accettazione&nbsp;",
-				"Doc. medici&nbsp;",
-				"Medici&nbsp;",
-				"Assistenti&nbsp;",
-				"Sala operatoria&nbsp;",
-				"Supporto tecnico&nbsp;",
-				"Laboratori&nbsp;",
-				"Radiologia&nbsp;",
-				"Farmacia&nbsp;",
-				"Deposito medicinali&nbsp;",
-				"CED&nbsp;",
-				"Posta intranet&nbsp;",
-				"Posta internet&nbsp;",
-				"Speciali &nbsp;",
-				"Login &nbsp;"
-				);
+<?php
 
-$divtag=array("Home",
-				"Elenco telefonico",
-				"Accettazione",
-				"Doc. medici",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				""
-				);
-$VersionChgLang="Versione tedesca";
-$VersionChgHref="../index.php?lang=de&mask=$cfg[mask]&egal=1";
-$VersionChgTarget="_top";
+$LDHome='Home';
+$LDPatient='Paziente';
+$LDAdmission='Accettazione';
+$LDAmbulatory='Day Clinic';
+$LDMedocs='Cartelle cliniche';
+$LDDoctors='Medici';
+$LDNursing='Infermieri';
+$LDOR='Sala operatoria';
+$LDLabs='Laboratori';
+$LDRadiology='Radiologia';
+$LDPharmacy='Farmacia';
+$LDMedDepot='Deposito medicinali';
+$LDDirectory='Elenco';
+$LDTechSupport='Supporto tecnico';
+$LDEDP='CED';
+$LDIntraEmail='Posta intranet';
+$LDInterEmail='Posta internet';
+$LDSpecials='Speciali';
+$LDLogin='Login';
+$LDLogout='Logout';
+
+$VersionChgTarget='_top';
+$LDLanguage='Lingua';
+$LDPlsWaitInit='Inizializzazione in corso: si prega di attendere...';
+$LDChange='Modifica';
 ?>

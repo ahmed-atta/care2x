@@ -181,4 +181,8 @@ $LDDisplay2="Anzeigemodus 2";
 $LDDisplay2Txt="Anzeige mit dem Menu im schwebenden Fenster.";
 
 $LDNewPwDiffer="Die neue Passwörter sind nicht gleich. <br>Bitte geben Sie die neue Passwörter noch mal ein.";
+/* 2003-03-22 EL*/
+$LDPersonellMngmnt='Personalverwaltung';
+$LDPersonellMngmntTxt='Werkzeuge und Funktionen für Personalverwaltung';
+
 ?>

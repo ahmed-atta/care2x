@@ -1,5 +1,5 @@
 <?php
-$LDMainTitle='Maryhospital.com sebuah administrasi rumah sakit virtual diintegrasikan  pada Internet';
+$LDMainTitle='Care 2002 sebuah administrasi rumah sakit virtual diintegrasikan  pada Internet';
 
 $LDInviteAskMe= 'Masukan query anda, sebagai contoh: \'what is the phone number of M9d?\'';
 

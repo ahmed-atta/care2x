@@ -336,4 +336,7 @@ $LDDaily='Täglich';
 $LDSaveChanges='Änderungen speichern';
 /* 2002-12-07*/
 $LDNoDiagReport='Kein Befund vorhanden.';
+/* 2003-03-23 EL */
+$LDNursesList='Pflegekräfte';
+$LDNursesListTxt='Anzeigen, sehen, und bearbeiten  von Pflegekräfte';
 ?>

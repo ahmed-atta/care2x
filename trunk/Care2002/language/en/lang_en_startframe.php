@@ -39,7 +39,7 @@ $LDNoFrame='This website uses frames for optimal functioning. Please install a p
 						Microsoft Internet Explorer starting from version 5.0. Please activate the Javascript (JScript) and 
 						turn on the automatic cookie reception';
 						
-$LDClk2Write='Click me to edit';
+$LDClk2Write='Click me to submit news';
 
 $LDAlertOldBrowser='Your browser version is older than 5.0!<br> We recommend the version 5.0 or later. <br> Using older versions might lead to
 								functional unreliability of the program.';

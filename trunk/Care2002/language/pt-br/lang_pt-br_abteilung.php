@@ -3,7 +3,7 @@ $LDPageTitle='Departamentos';
 $LDDeptTxt='Departamento';
 $LDOpenHrsTxt='Horas Trabalhadas';
 $LDChkHrsTxt='Medical Checkup Hours';
-$LDClk4Info='Click para maiores informações a respeito';
+$LDClk4Info='Clique para maiores informações a respeito';
 $LDDayTxt='Dia';
 
 /**
@@ -11,7 +11,7 @@ $LDDayTxt='Dia';
 * ENT = Eye, Nose, Throath
 * OB-Gyne = Obstetrics-Gynecology
 */
-$dept=array('Cirurgia Geral',
+$dept=array('Cirurgia Geral', 
 					'Cirurgia de Emergência',
 					'Cirurgia Plástica',
 					'Ouvido, Nariz e Garganta',
@@ -22,14 +22,14 @@ $dept=array('Cirurgia Geral',
 					'Medicina Interna',
 					'Oncologia',
 					'Manutenção',
-					'Unidade de cuidados medianos',
-					'Unidade de cuidados intensivos',
+					'Unidade de Cuidados Medianos',
+					'Unidade de Cuidados Intensivos',
 					'Laboratório Médico',
 					'Ambulatório de Emergência',
 					'Ambulatório Geral',
 					'Sonografia',
-					'Nuclear Diagnostics',
-					'Ambulatório Medicina Interna');
+					'Diagnósticos Nuclear',
+					'Medicina Interna');
 					
 
 					

@@ -93,5 +93,27 @@ $LDDOCSRTxt="Dientswünsche planen bzw. eintragen";
 
 /* 2002-09-15 EL */
 $LDTestRequest="Anforderung";
-
+/* 2003-03-16 EL */
+$LDContactInfo='Kontakt Info';
+$LDPersonalContactInfo='Personal Kontakt Info';
+$LDOnCallContactInfo='Bereitschaftdientst Kontakt Info';
+$LDPlsSelectDept='Bitte wählen Sie eine Abteilung aus';
+$LDCreateDoctorsList='Liste von Ärzten erstellen';
+$LDPlsCreateList='Bitte erstellen Sie zuerst eine Liste.';
+$LDPlsClickButton='Bitte den folgenden Knopf anklicken.';
+$LDFamilyName='Name';
+$LDGivenName='Vorname';
+$LDDateOfBirth='Geburstdatum';
+$LDEntryPrompt='Bitte geben Sie ein Stichwort ein:<br>(z.B. Name, Vorname, Personalnummer, u.s.w.)<br>';
+$LDPersonellNr='PersonalNr.';
+$LDFunction='Funktion';
+$LDOptions='Optionen';
+$LDSearchFound='Die Suche hat ~nr~ relevante daten gefunden.';
+$LDAddDoctorToList='Einen Arzt in die Liste eintfügen';
+$LDAdd='Addieren';
+$LDDelete='Löschen';
+$LDSureToDeleteEntry='Sind sie sicher dass den Eintrage löschen?';
+/* 2003-03-18 EL */
+$LDChangeOnlyDept='Einen Abteiung auwählen';
+$LDCreateNursesList='Anzeigen von Pflegekräften';
 ?>

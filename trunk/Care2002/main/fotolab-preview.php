@@ -1,11 +1,16 @@
 <html>
 <head>
 <?php 
-require_once('../include/inc_charset_fx.php');
-echo setCharSet(); 
+//error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+/*
+require($root_path.'include/inc_environment_global.php');
+require_once($root_path.'include/inc_charset_fx.php');
+echo setCharSet();
+*/
 ?>
 </head>
 <body>
-<img src="../gui/img/common/default/pixel.gif" border=0 name="previewpic">
+<img src="<?php echo $root_path; ?>gui/img/common/default/pixel.gif" border=0 name="previewpic">
 </body>
 </html>

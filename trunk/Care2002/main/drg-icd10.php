@@ -1,7 +1,9 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
+* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -10,52 +12,49 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 */
 define('LANG_FILE','drg.php');
 $local_user='ck_op_pflegelogbuch_user';
-require_once('../include/inc_front_chain_lang.php');
+require_once($root_path.'include/inc_front_chain_lang.php');
 
 /* Load additional language table */
-/*if(file_exists('../language/'.$lang.'/lang_'.$lang.'_drg.php')) include_once('../language/'.$lang.'/lang_'.$lang.'_drg.php');
+/*if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_drg.php')) include_once('../language/'.$lang.'/lang_'.$lang.'_drg.php');
  else include_once('../language/en/lang_en_drg.php');
 */
-require_once('../include/inc_config_color.php');
-
+require_once($root_path.'include/inc_config_color.php');
+echo $sql;
 $toggle=0;
 $thisfile='drg-icd10.php';
 if(isset($opnr) && $opnr)
 {
-	include('../include/inc_db_makelink.php');
-	if($link&&$DBLink_OK) 
+	if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
+	if($dblink_ok)
 	{	
-		$dbtable='care_nursing_op_logbook';
 		
-		$sql="SELECT icd_code  FROM $dbtable WHERE op_nr='$opnr' AND patnum='$pn' AND dept='$dept' AND op_room='$oprm'";
+		$dbtable='care_nursing_op_logbook';
+		$sql="SELECT icd_code  FROM $dbtable WHERE op_nr='$opnr' AND encounter_nr='$pn' AND dept_nr='$dept_nr' AND op_room='$oprm'";
 				
-        $ergebnis=mysql_query($sql,$link);
-		$linecount=0;
+        $ergebnis=$db->Execute($sql);
 		if($ergebnis)
        	{
-			if ($zeile=mysql_fetch_array($ergebnis)) $linecount++;
-			if($linecount)
+			if($linecount=$ergebnis->RecordCount())
 			{
-				mysql_data_seek($ergebnis,0);
 				switch($mode)
 				{
 					case "delete": 
-										$zeile=mysql_fetch_array($ergebnis);
+										$zeile=$ergebnis->FetchRow();
 										$linebuf=trim($zeile[icd_code]);
 										
 										if($linebuf=="") break;
-										
+										$linebuf=strtr($linebuf,'*','=');
 										$arrbuf=explode("~",$linebuf);
 										array_unique($arrbuf);
 										array_splice($arrbuf,$item,1);
 										
 										$linebuf=addslashes(implode("~",$arrbuf));
 										
-										$sql="UPDATE $dbtable SET icd_code='$linebuf' WHERE patnum='$pn' AND op_nr='$opnr' AND dept='$dept' AND op_room='$oprm'";
+										$sql="UPDATE $dbtable SET icd_code='$linebuf' WHERE encounter_nr='$pn' AND op_nr='$opnr' AND dept_nr='$dept_nr' AND op_room='$oprm'";
         								
-										if($ergebnis=mysql_query($sql,$link)) 
+										if($ergebnis=$db->Execute($sql)) 
 										{
-											header("location:$thisfile?sid=$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=1");
+											header("location:$thisfile?sid=$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=1");
 											exit;
 										}
 										else {echo "<p>".$sql."<p>$LDDbNoWrite";};
@@ -64,13 +63,17 @@ if(isset($opnr) && $opnr)
 										
 					case "update_stat":
 					
-										$sql="SELECT icd_code FROM $dbtable WHERE patnum='$pn' AND op_nr='$opnr' AND dept='$dept' AND op_room='$oprm'";
-        								
-										if($ergebnis=mysql_query($sql,$link)) 
+										$sql="SELECT icd_code FROM $dbtable WHERE encounter_nr='$pn' AND op_nr='$opnr' AND dept_nr='$dept_nr' AND op_room='$oprm'";
+        								// echo $sql;
+										if($ergebnis=$db->Execute($sql)) 
 										{
-											if($zeile=mysql_fetch_array($ergebnis))
+										//echo "hie";
+											if($zeile=$ergebnis->FetchRow())
 											{
 												$linebuf=str_replace("&stat=1","&stat=2",$zeile[icd_code]);
+												$linebuf=strtr($linebuf,'*','=');
+												//echo $linebuf;
+												
 												$arrbuf=explode("~",$linebuf);
 												//$arrbuf[$itemx]=str_replace("&stat=2","&stat=1",$arrbuf[$itemx]);
 												parse_str($arrbuf[$itemx],$parsed);
@@ -85,11 +88,12 @@ if(isset($opnr) && $opnr)
 												
 												$linebuf=implode("~",$arrbuf);
 														
-												$sql="UPDATE $dbtable SET icd_code='$linebuf' WHERE patnum='$pn' AND op_nr='$opnr' AND dept='$dept' AND op_room='$oprm'";
+												$sql="UPDATE $dbtable SET icd_code='$linebuf' WHERE encounter_nr='$pn' AND op_nr='$opnr' AND dept_nr='$dept_nr' AND op_room='$oprm'";
         										
-												if($ergebnis=mysql_query($sql,$link)) 
+												//echo $sql;
+												if($ergebnis=$db->Execute($sql)) 
 												{
-													header("location:$thisfile?sid=$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=1");
+													header("location:$thisfile?sid=$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=1");
 													exit;
 												}
 												else {echo "<p>".$sql."<p>$LDDbNoWrite";};
@@ -101,22 +105,24 @@ if(isset($opnr) && $opnr)
 										
 					case "update_loc":
 										
-										$sql="SELECT icd_code FROM $dbtable WHERE patnum='$pn' AND op_nr='$opnr' AND dept='$dept' AND op_room='$oprm'";
+										$sql="SELECT icd_code FROM $dbtable WHERE encounter_nr='$pn' AND op_nr='$opnr' AND dept_nr='$dept_nr' AND op_room='$oprm'";
         								
-										if($ergebnis=mysql_query($sql,$link)) 
+										if($ergebnis=$db->Execute($sql)) 
 										{
-											if($zeile=mysql_fetch_array($ergebnis))
+											if($zeile=$ergebnis->FetchRow())
 											{
+												$zeile[icd_code]=strtr($zeile[icd_code],'*','=');
+											
 												$arrbuf=explode("~",$zeile[icd_code]);
 												parse_str($arrbuf[$itemx],$parsed);
 												$arrbuf[$itemx]="code=$parsed[code]&cat=$parsed[cat]&des=$parsed[des]&stat=$parsed[stat]&loc=$val&byna=$parsed[byna]&bynr=$parsed[bynr]";
 												$linebuf=implode("~",$arrbuf);
 														
-												$sql="UPDATE $dbtable SET icd_code='$linebuf' WHERE patnum='$pn' AND op_nr='$opnr' AND dept='$dept' AND op_room='$oprm'";
+												$sql="UPDATE $dbtable SET icd_code='$linebuf' WHERE encounter_nr='$pn' AND op_nr='$opnr' AND dept_nr='$dept_nr' AND op_room='$oprm'";
         										
-												if($ergebnis=mysql_query($sql,$link)) 
+												if($ergebnis=$db->Execute($sql)) 
 												{
-													header("location:$thisfile?sid=$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=1");
+													header("location:$thisfile?sid=$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=1");
 													exit;
 												}
 												else {echo "<p>".$sql."<p>$LDDbNoWrite";};
@@ -131,10 +137,10 @@ if(isset($opnr) && $opnr)
 				}
 				 else {echo "<p>".$sql."<p>$LDDbNoRead";}; // end of if($ergebnis)
 		} // end of if($link)
-}	
+}else echo "heleo";
 $uid="$dept_$oprm_$pn_$opnr"; 
 /* Load the icon images */
-$img_delete=createComIcon('../','delete2.gif','0','right');
+$img_delete=createComIcon($root_path,'delete2.gif','0','right');
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -158,7 +164,7 @@ function gethelp(x,s,x1,x2,x3)
 }
 function openICDsearch(k,x)
 {
-	urlholder="drg-icd10-search.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm&display=$display" ?>&keyword="+k+"&showonly="+x;
+	urlholder="drg-icd10-search.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept_nr=$dept_nr&oprm=$oprm&display=$display" ?>&keyword="+k+"&showonly="+x;
 	drgwin_<?php echo $uid ?>=window.open(urlholder,"drgwin_<?php echo $uid ?>","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.drgwin_<?php echo $uid ?>.moveTo(100,100);
 }
@@ -166,12 +172,12 @@ function deleteItem(i)
 {
 	if(confirm("<?php echo $LDAlertSureDelete ?>"))
 	{
-		window.location.href='drg-icd10.php?sid=<?php echo "$sid&lang=$lang&mode=delete&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm&display=$display" ?>&item='+i;
+		window.location.href='drg-icd10.php?sid=<?php echo "$sid&lang=$lang&mode=delete&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept_nr=$dept_nr&oprm=$oprm&display=$display" ?>&item='+i;
 	}
 }
 function makeChange(v,i,m)
 {
-	//window.location.replace('<?php echo "$thisfile?sid=$sid&lang=$lang&mode=updatestat&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm&display=$display" ?>&item='+i+'&val='+v);
+	//window.location.replace('<?php echo "$thisfile?sid=$sid&lang=$lang&mode=updatestat&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept_nr=$dept_nr&oprm=$oprm&display=$display" ?>&item='+i+'&val='+v);
 	document.submitter.val.value=v;
 	document.submitter.itemx.value=i;
 	document.submitter.mode.value=m;
@@ -179,7 +185,7 @@ function makeChange(v,i,m)
 }
 function openQuicklist(t)
 {
-	urlholder="drg-quicklist.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm" ?>&target="+t;
+	urlholder="drg-quicklist.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept_nr=$dept_nr&oprm=$oprm" ?>&target="+t;
 	drgwin_<?php echo $uid ?>=window.open(urlholder,"drgwin_<?php echo $uid ?>","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.drgwin_<?php echo $uid ?>.moveTo(100,100);
 }
@@ -187,11 +193,11 @@ function openQuicklist(t)
 </script>
  
   <?php 
-require('../include/inc_css_a_hilitebu.php');
+require($root_path.'include/inc_css_a_hilitebu.php');
 ?>
 <?php if($newsave) : ?>
  <script language="javascript" >
-window.parent.opener.location.href='<?php echo "oploginput.php?sid=$sid&lang=$lang&mode=saveok&patnum=$pn&op_nr=$opnr&dept=$dept&saal=$oprm&pyear=$y&pmonth=$m&pday=$d" ?>';
+window.parent.opener.location.href='<?php echo "oploginput.php?sid=$sid&lang=$lang&mode=saveok&enc_nr=$pn&op_nr=$opnr&dept_nr=$dept_nr&saal=$oprm&pyear=$y&pmonth=$m&pday=$d" ?>';
 </script>
 <?php endif ?>
 </HEAD>
@@ -205,7 +211,7 @@ else  echo 'topmargin=2 marginheight=2';
 <?php if (!$cfg['dhtml']){ echo ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 <form>
 <?php if($display!="composite") : ?>
-<a href="javascript:window.history.back()" ><img <?php echo createLDImgSrc('../','back2.gif','0') ?> width=110 height=24 align="right"></a>
+<a href="javascript:window.history.back()" ><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?> width=110 height=24 align="right"></a>
 <FONT    SIZE=3  FACE="verdana,Arial" color="#0000aa">
 <b><?php echo $LDIcd10 ?></b></font>&nbsp;
 <!--  <input type="button" value="<?php echo $LDSearch4ICD10 ?>" onClick="javascript:openICDsearch('','0')">&nbsp;
@@ -231,11 +237,12 @@ else  echo 'topmargin=2 marginheight=2';
 <?php
 if ($linecount>0) 
 				{ 
-						mysql_data_seek($ergebnis,0);
-						$zeile=mysql_fetch_array($ergebnis);
+						//mysql_data_seek($ergebnis,0);
+						$zeile=$ergebnis->FetchRow();
 						$linebuf=trim($zeile[icd_code]);
 						if($linebuf)
 						{
+							$linebuf=strtr($linebuf,'*','=');
 							$arrbuf=explode("~",trim($linebuf));
 							array_unique($arrbuf);
 							for($i=0;$i<sizeof($arrbuf); $i++)
@@ -332,7 +339,7 @@ if ($linecount>0)
 <input type="hidden" name="ln" value="<?php echo $ln; ?>">
 <input type="hidden" name="fn" value="<?php echo $fn; ?>">
 <input type="hidden" name="bd" value="<?php echo $bd; ?>">
-<input type="hidden" name="dept" value="<?php echo $dept; ?>">
+<input type="hidden" name="dept_nr" value="<?php echo $dept_nr; ?>">
 <input type="hidden" name="oprm" value="<?php echo $oprm; ?>">
 <input type="hidden" name="display" value="<?php echo $display; ?>">
 <input type="hidden" name="y" value="<?php echo $y; ?>">

@@ -347,5 +347,7 @@ $LDDaily='Daily';
 $LDSaveChanges='Save changes';
 /* 2002-12-07*/
 $LDNoDiagReport='No diagnostic report available.';
-
+/* 2003-03-23 EL */
+$LDNursesList='Nurses\' List';
+$LDNursesListTxt='List, View, Create, & Edit Nurses\' List';
 ?>

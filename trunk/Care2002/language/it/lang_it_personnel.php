@@ -1,4 +1,4 @@
-<?
+<?php
 $LDDbNoLink="Impossibile connettersi al database!";
 $LDDbNoRead="Impossibile leggere dal database!";
 $LDDbNoSave="Impossibile scrivere nel database!";

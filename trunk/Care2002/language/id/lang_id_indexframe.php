@@ -1,24 +1,25 @@
 <?php
-$indextag=array('Home',
-				'Admin Pasien',
-				'Ambulatory',
-				'Medocs',
-				'Dokter',
-				'Perawat',
-				'RO Ruang Operasi',
-				'Laboratorium',
-				'Radiologi',
-				'Farmasi',
-				'Depot medis',
-				'Petunjuk',
-				'Dukungan Teknis',
-				'PDE ',
-				'Intranet Email',
-				'Internet Email',
-				'Fungsi Spesial ',
-				'Login '
-				);
 
+$LDHome='Home';
+$LDPatient='Admin Pasien';
+$LDAdmission='Admission';
+$LDAmbulatory='Ambulatory';
+$LDMedocs='Medocs';
+$LDDoctors='Dokter';
+$LDNursing='Perawat';
+$LDOR='RO Ruang Operasi';
+$LDLabs='Laboratorium';
+$LDRadiology='Radiologi';
+$LDPharmacy='Farmasi';
+$LDMedDepot='Depot medis';
+$LDDirectory='Petunjuk';
+$LDTechSupport='Dukungan Tekni';
+$LDEDP='PDE';
+$LDIntraEmail='Intranet Email';
+$LDInterEmail='Internet Email';
+$LDSpecials='Fungsi Spesial';
+$LDLogin='Login';
+$LDLogout='Logout';
 
 $VersionChgTarget='_top';
 $LDLanguage='Bahasa';

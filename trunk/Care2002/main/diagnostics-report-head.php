@@ -1,7 +1,9 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
+* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -10,12 +12,12 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 */
 define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
-require_once('../include/inc_front_chain_lang.php');
-if($edit&&!$HTTP_COOKIE_VARS[$local_user.$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require_once('../include/inc_config_color.php'); // load color preferences
+require_once($root_path.'include/inc_front_chain_lang.php');
+//if($edit&&!$HTTP_COOKIE_VARS[$local_user.$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
-$thisfile='pflege-station-patientdaten-diagnostics-report-head.php';
-$breakfile="pflege-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$pn&edit=$edit";
+$thisfile=basename(__FILE__);
+$breakfile=$root_path."modules/nursing/nursing-station-patientdaten.php".URL_APPEND."&station=$station&pn=$pn&edit=$edit";
 
 $bgc1='#fefefe'; 
 
@@ -27,7 +29,9 @@ $bgc1='#fefefe';
 <?php echo setCharSet(); ?>
  <TITLE><?php echo $LDReports ?></TITLE>
 <?php
-require('../include/inc_css_a_hilitebu.php');
+require($root_path.'include/inc_js_gethelp.php');
+require($root_path.'include/inc_css_a_hilitebu.php');
+
 ?>
 
 
@@ -55,7 +59,7 @@ function gethelp(x,s,x1,x2,x3)
 <FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php echo "$LDReports [ ".ucwords($header)." ]"; ?></STRONG></FONT>
 </td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr>
-<a href="javascript:gethelp('nursing.php','<?php echo $LDReports; ?>','','<?php echo $station ?>','<?php echo $LDReports; ?>')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" target="_top"><img <?php echo createLDImgSrc('../','close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
+<a href="javascript:gethelp('nursing.php','<?php echo $LDReports; ?>','','<?php echo $station ?>','<?php echo $LDReports; ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" target="_top"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
 </tr>
 <tr>
 <td bgcolor=<?php echo $cfg['top_bgcolor']; ?> colspan=2>

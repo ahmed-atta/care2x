@@ -143,7 +143,7 @@ $LDSignature='Signature';
 $LDSignatureTxt='Create signature<br>&nbsp;that automatically attaches<br>&nbsp;to every outgoing email.';
 
 $LDEmail2Drafts='Email was saved as draft.';
-$LDNoEmailAddress='Email address missing! Please enter an email address';
+$LDNoEmailAddress='Email address mission! Please enter an email address';
 $LDLogout='Logout';
 $LDNameIsUsed='The email address is already being used by somebody. Please choose another username.';
 

@@ -1,7 +1,9 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
+* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -10,42 +12,42 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 */
 define('LANG_FILE','drg.php');
 $local_user='ck_op_pflegelogbuch_user';
-require_once('../include/inc_front_chain_lang.php');
-require_once('../include/inc_config_color.php');
+require_once($root_path.'include/inc_front_chain_lang.php');
+require_once($root_path.'include/inc_config_color.php');
 
 $toggle=0;
 
 if($opnr)
 {
-	include('../include/inc_db_makelink.php');
-	if($link&&$DBLink_OK) 
+	if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
+	if($dblink_ok)
 	{	
 	       /* Load the date formatter */
-           include_once('../include/inc_date_format_functions.php');
+           include_once($root_path.'include/inc_date_format_functions.php');
            
 	   
 				$dbtable='care_nursing_op_logbook';
 				
-				$sql="SELECT ops_intern_code  FROM $dbtable WHERE op_nr='$opnr' AND patnum='$pn' AND dept='$dept' AND op_room='$oprm'";
+				$sql="SELECT ops_intern_code  FROM $dbtable WHERE op_nr='$opnr' AND encounter_nr='$pn' AND dept_nr='$dept_nr' AND op_room='$oprm'";
 				
-        		$ergebnis=mysql_query($sql,$link);
+        		$ergebnis=$db->Execute($sql);
 				$linecount=0;
 				if($ergebnis)
        			{
-					if($linecount=mysql_num_rows($ergebnis))
+					if($linecount=$ergebnis->RecordCount())
 					{
 						switch($mode)
 						{
 							case 'delete': 
-												$zeile=mysql_fetch_array($ergebnis);
-												$linebuf=trim($zeile[ops_intern_code]);
+												$zeile=$ergebnis->FetchRow();
+												$linebuf=trim($zeile['ops_intern_code']);
 												if($linebuf=='') break;
 												$arrbuf=explode('~',$linebuf);
 												array_unique($arrbuf);
 												array_splice($arrbuf,$item,1);
 												$linebuf=addslashes(implode('~',$arrbuf));
 												$sql="UPDATE $dbtable SET ops_intern_code='$linebuf' WHERE patnum='$pn' AND op_nr='$opnr' AND dept='$dept' AND op_room='$oprm'";
-        										if($ergebnis=mysql_query($sql,$link)) 
+        										if($ergebnis=$db->Execute($sql)) 
 												{
 													header("location:drg-ops-intern.php?sid=$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=1");
 													exit;
@@ -60,7 +62,7 @@ if($opnr)
 }
 $uid="$dept_$oprm_$pn_$opnr"; 
 /* Load the icon images */
-$img_delete=createComIcon('../','delete2.gif','0','right');
+$img_delete=createComIcon($root_path,'delete2.gif','0','right');
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
@@ -121,7 +123,7 @@ function openRelatedCodes()
 </script>
  
   <?php 
-require('../include/inc_css_a_hilitebu.php');
+require($root_path.'include/inc_css_a_hilitebu.php');
 ?>
  <?php if($newsave) : ?>
  <script language="javascript" >
@@ -143,7 +145,7 @@ onLoad="if(window.focus) window.focus();" bgcolor="<?php echo $cfg['body_bgcolor
 	if($opnr) echo" - OP# $opnr - $dept OP $oprm"; 
 ?>
 <?php if($display!="composite") : ?>
-<a href="javascript:window.history.back()" ><img <?php echo createLDImgSrc('../','back2.gif','0') ?> width=110 height=24 align="right"></a>
+<a href="javascript:window.history.back()" ><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?> width=110 height=24 align="right"></a>
 
 <b><?php echo $LDOps301 ?></b></font>&nbsp;
  <input type="button" value="<?php echo $LDSearch4OPS301 ?>" onClick="javascript:openOPSsearch()">&nbsp;
@@ -165,7 +167,7 @@ if ($linecount>0)
 				{ 
 						mysql_data_seek($ergebnis,0);
 						
-						$zeile=mysql_fetch_array($ergebnis);
+						$zeile=$ergebnis->FetchRow();
 						
 						$linebuf=trim($zeile[ops_intern_code]);
 						
@@ -208,7 +210,7 @@ if ($linecount>0)
 	</td>
 	 <td valign="top" bgcolor="#990000"><font face=arial size=2 color=#ffffff>
 	<?php if($display!="composite") : ?>   
-	<a href="javascript:window.history.back()" ><img <?php echo createLDImgSrc('../','back2.gif','0') ?> width=110 height=24></a>
+	<a href="javascript:window.history.back()" ><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?> width=110 height=24></a>
  	<p>
 	<?php else : ?>
 	<input type="button" value="<?php echo $LDSearch ?>" onClick="javascript:openOPSsearch()">&nbsp;

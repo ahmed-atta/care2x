@@ -71,8 +71,8 @@ Kennwort eingeben:<br>
 <p>
 <hr>
 <p>
-<img <?php echo createComIcon('../','varrow.gif','0') ?>> <a href="ucons.php<?php echo "?lang=$lang" ?>">Einführung in das OP Logbuch</a><br>
-<img <?php echo createComIcon('../','varrow.gif','0') ?>> <a href="ucons.php<?php echo "?lang=$lang" ?>">Wie mache ich was mit OP Logbuch?</a><br>
+<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>">Einführung in das OP Logbuch</a><br>
+<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>">Wie mache ich was mit OP Logbuch?</a><br>
 <HR>
 
 

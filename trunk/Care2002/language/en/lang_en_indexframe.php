@@ -1,23 +1,25 @@
 <?php
-$indextag=array('Home',
-				'Admission',
-				'Ambulatory',
-				'Medocs',
-				'Doctors',
-				'Nursing',
-				'OR',
-				'Laboratories',
-				'Radiology',
-				'Pharmacy',
-				'Medical Depot',
-				'Directory',
-				'Tech Support',
-				'EDP ',
-				'Intranet Email',
-				'Internet Email',
-				'Specials ',
-				'Login '
-				);
+
+$LDHome='Home';
+$LDPatient='Patient';
+$LDAdmission='Admission';
+$LDAmbulatory='Ambulatory';
+$LDMedocs='Medocs';
+$LDDoctors='Doctors';
+$LDNursing='Nursing';
+$LDOR='OR';
+$LDLabs='Laboratories';
+$LDRadiology='Radiology';
+$LDPharmacy='Pharmacy';
+$LDMedDepot='Medical Depot';
+$LDDirectory='Directory';
+$LDTechSupport='Tech Support';
+$LDEDP='EDP';
+$LDIntraEmail='Intranet Email';
+$LDInterEmail='Internet Email';
+$LDSpecials='Special Tools';
+$LDLogin='Login';
+$LDLogout='Logout';
 
 $VersionChgTarget='_top';
 $LDLanguage='Language';

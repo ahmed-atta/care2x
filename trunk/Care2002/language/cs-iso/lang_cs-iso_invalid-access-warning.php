@@ -1,7 +1,8 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-require_once('../../include/inc_vars_resolve.php');
-require_once('../../include/inc_img_fx.php');
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
+require_once($root_path.'include/inc_img_fx.php');
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
@@ -59,7 +60,7 @@ Obèas se mù¾e jednat o chybu pøenosu dat ze serveru. Jednodu¹e stisknìte tlaèítk
 <p>
 
 <?php
-$path_root='../../';
+$root_path='../../';
 require('cs-iso_copyrite.php');
 ?>
 </FONT>

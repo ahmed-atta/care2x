@@ -1,7 +1,9 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
+* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -10,7 +12,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 */
 define('LANG_FILE','specials.php');
 define('NO_2LEVEL_CHK',1);
-require_once('../include/inc_front_chain_lang.php');
+require_once($root_path.'include/inc_front_chain_lang.php');
 
 //create unique id
 $r=uniqid("");
@@ -55,7 +57,7 @@ function set(c)
 <FONT  COLOR="<?php echo $tt; ?>"  SIZE=+3  FACE="Arial"><STRONG> &nbsp;<?php echo $LDColorMap ?></STRONG></FONT>
 </td>
 <td bgcolor="<?php echo $tb; ?>" height="10" align=right>
-<a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
+<a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
 <tr>
 <td colspan=2  bgcolor=<?php echo $bb; ?>>
@@ -538,12 +540,12 @@ function set(c)
 </table>        
 
 <ul>
-<a href="#" <?php if ($d) echo 'onClick="opener.focus();window.close()"'; else echo 'onClick="window.close()"'; ?>><img <?php echo createLDImgSrc('../','cancel.gif','0') ?>  alt="<?php echo $LDCancel ?>"></a>
+<a href="#" <?php if ($d) echo 'onClick="opener.focus();window.close()"'; else echo 'onClick="window.close()"'; ?>><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>  alt="<?php echo $LDCancel ?>"></a>
 </ul>
 
 <hr>
 <?php
-if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
+if(file_exists($root_path.'language/'.$lang.'/'.$lang.'_copyrite.php'))
 include('../language/'.$lang.'/'.$lang.'_copyrite.php');
   else include('../language/en/en_copyrite.php');
   ?>

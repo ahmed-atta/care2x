@@ -1,7 +1,9 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
+* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -10,9 +12,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 */
 define('LANG_FILE','specials.php');
 define('NO_2LEVEL_CHK',1);
-require_once('../include/inc_front_chain_lang.php');
+require_once($root_path.'include/inc_front_chain_lang.php');
 require("../language/".$lang."/lang_".$lang."_indexframe.php");
-require_once('../include/inc_config_color.php');
+require_once($root_path.'include/inc_config_color.php');
 
 $breakfile="spediens.php?sid=".$sid."&lang=".$lang;
 
@@ -123,10 +125,10 @@ if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$bodyfrm_alink.
 <table width=100% border=0 cellspacing=0 height=100%>
 
 <tr valign=top height=10>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10"><FONT  COLOR="<?php echo  $cfg['top_txtcolor']; ?>"  SIZE=+3  FACE="Arial">
-<STRONG>&nbsp; &nbsp; <img <?php echo createComIcon('../','settings_tree.gif','0') ?>> <?php echo $LDColorOptExt ?></STRONG></FONT></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10"><FONT  COLOR="<?php echo  $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
+<STRONG>&nbsp; &nbsp; <img <?php echo createComIcon($root_path,'settings_tree.gif','0') ?>> <?php echo $LDColorOptExt ?></STRONG></FONT></td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc('../','back2.gif','0').' style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('color_opt.php','ext')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0') ?> <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
+<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').' style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('color_opt.php','ext')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?> <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
 <tr valign=top >
 <td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2><p><br>
@@ -135,7 +137,7 @@ if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$bodyfrm_alink.
 <table border=1>
   <tr >
     <td rowspan=3 bgcolor=<?php echo $cfg['idx_bgcolor']; ?> width=100 >
-	<center><img <?php echo createComIcon('../','care_logo.gif','0') ?>></center>
+	<center><img <?php echo createComIcon($root_path,'care_logo.gif','0') ?>></center>
 
 
 <FONT    SIZE=1  FACE="Arial" color=<?php echo $cfg['idx_txtcolor']; ?>>
@@ -146,8 +148,8 @@ echo "&nbsp;$v<br>";
 <FONT    SIZE=-1  FACE="verdana,Arial">
 <p align=center>
 Index frame<p align=left >
-&nbsp;<a href="#" onClick="chgcolor('idxfrm_hover','ex')"><img <?php echo createComIcon('../','settings_tree.gif','0','absmiddle') ?> alt="Index frame hover  link color"><font face="Verdana, Arial" size=2 color=<?php echo $idxfrm_hover; ?>> Hover link.</font></a><br>
-&nbsp;<a href="#" onClick="chgcolor('idxfrm_alink','ex')"><img <?php echo createComIcon('../','settings_tree.gif','0','absmiddle') ?> alt="Index frame active  link color"><font face="Verdana, Arial" color=<?php echo $idxfrm_alink; ?>> Active link.</font></a><br>
+&nbsp;<a href="#" onClick="chgcolor('idxfrm_hover','ex')"><img <?php echo createComIcon($root_path,'settings_tree.gif','0','absmiddle') ?> alt="Index frame hover  link color"><font face="Verdana, Arial" size=2 color=<?php echo $idxfrm_hover; ?>> Hover link.</font></a><br>
+&nbsp;<a href="#" onClick="chgcolor('idxfrm_alink','ex')"><img <?php echo createComIcon($root_path,'settings_tree.gif','0','absmiddle') ?> alt="Index frame active  link color"><font face="Verdana, Arial" color=<?php echo $idxfrm_alink; ?>> Active link.</font></a><br>
 
 
 </p>
@@ -161,8 +163,8 @@ Index frame<p align=left >
   
 <td bgcolor=<?php echo $cfg['body_bgcolor']; ?> width=400 ><FONT    SIZE=-1  FACE="verdana,Arial">
 <p><br>&nbsp; <?php echo $LDMainFrame ?><p><br>
-&nbsp;<a href="#" onClick=chgcolor('bodyfrm_hover','ex')><img <?php echo createComIcon('../','settings_tree.gif','0','absmiddle') ?>  alt="<?php echo $LDMainFrame ?> hover  link "><font face="Verdana, Arial" color=<?php echo $bodyfrm_hover; ?>> <?php echo $LDMainFrame ?> hover link.</font></a><br>
-&nbsp;<a href="#" onClick=chgcolor('bodyfrm_alink','ex')><img <?php echo createComIcon('../','settings_tree.gif','0','absmiddle') ?>  alt="<?php echo $LDMainFrame ?> active link "><font face="Verdana, Arial" color=<?php echo $bodyfrm_alink; ?>> <?php echo $LDMainFrame ?> active link.</font></a><br>
+&nbsp;<a href="#" onClick=chgcolor('bodyfrm_hover','ex')><img <?php echo createComIcon($root_path,'settings_tree.gif','0','absmiddle') ?>  alt="<?php echo $LDMainFrame ?> hover  link "><font face="Verdana, Arial" color=<?php echo $bodyfrm_hover; ?>> <?php echo $LDMainFrame ?> hover link.</font></a><br>
+&nbsp;<a href="#" onClick=chgcolor('bodyfrm_alink','ex')><img <?php echo createComIcon($root_path,'settings_tree.gif','0','absmiddle') ?>  alt="<?php echo $LDMainFrame ?> active link "><font face="Verdana, Arial" color=<?php echo $bodyfrm_alink; ?>> <?php echo $LDMainFrame ?> active link.</font></a><br>
 <p><br>
 </td>
   </tr>
@@ -184,7 +186,7 @@ Index frame<p align=left >
 
 <FORM >
 <input type="button" value="<?php echo $LDOK ?>" onClick="location.replace('excolorchg.php?mode=ok&sid=<?php echo "$sid&lang=$lang"; ?>&item=<?php echo $item; ?>')">
-<INPUT type="button"  value="<?php echo $LDCancel ?>" onClick="location.replace('spediens.php?sid=<?php echo "$sid&lang=$lang"; ?>')">
+<INPUT type="button"  value="<?php echo $LDCancel ?>" onClick="location.replace('spediens.php<?php echo URL_APPEND; ?>')">
 <input type="button" value="<?php echo $LDApply ?>" onClick="location.replace('excolorchg.php?mode=remain&sid=<?php echo "$sid&lang=$lang"; ?>&item=<?php echo $item; ?>')">
 </FORM>
 </font>
@@ -199,9 +201,8 @@ Index frame<p align=left >
 <tr valign=top >
 <td bgcolor=<?php echo $cfg['bot_bgcolor']; ?> colspan=2>
 <?php
-if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
-include('../language/'.$lang.'/'.$lang.'_copyrite.php');
-  else include('../language/en/en_copyrite.php');?>
+require($root_path.'include/inc_load_copyrite.php');
+?>
 </td>
 </tr>
 </table>        

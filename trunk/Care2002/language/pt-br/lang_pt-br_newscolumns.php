@@ -7,7 +7,7 @@ $LDTitleTag=array
 					adv_studies=>'Estudos',
 					prof_training=>'Educação',
 					physiotherapy=>'Terafia física',
-					events=>'Exhibitions',
+					events=>'Exibição',
 					dept_generalsurgery=>'Cirurgia Geral',
 					dept_emergency=>'Cirurgia de Emergência',
 					dept_plasticsurgery=>'Cirurgia Plástica',
@@ -21,20 +21,20 @@ $LDTitleTag=array
 					dept_IMCU=>'Unidade de cuidados medianos',
 					dept_ICU=>'Unidade de cuidados intensivos',
 					dept_lab=>'Laboratório Médico',
-					patient_admission=>'Admission',
+					patient_admission=>'Admissão',
 					allamb=>'Ambulatório Geral',
 					unfamb=>'Ambulatório de Emergência',
 					sono=>'Sonografia',
-					nuklear=>'Nuclear Diagnostics',
-					inmed=>'Ambulatório Medicina Interna');
-					
+					nuklear=>'Diagnósticos Nuclear',
+					inmed=>'Medicina Interna');			
+
 $LDSubTitle=array
 					(headline=>'',
 					cafenews=>'',
 					management=>'',
-					healthtips=>'More Health Tips',
-					adv_studies=>'Relevant Information about Advance Studies',
-					prof_training=>'Relevant Information about Education',
+					healthtips=>'Mais dicas de saúde',
+					adv_studies=>'Informações relevantes a respeitos de Estudos Avançados',
+					prof_training=>'Informações relevantes a respeitos de Educação',
 					physiotherapy=>'',
 					events=>'',
 					dept_generalsurgery=>'',
@@ -50,18 +50,18 @@ $LDSubTitle=array
 					dept_IMCU=>'',
 					dept_ICU=>'',
 					dept_lab=>'',
-					patient_admission=>'More Information about Admission',
-					SBDefault=>'More Information');
+					patient_admission=>'Mais informações a respeito da Admissão',
+					SBDefault=>'Maiores Informações');
 
 
 $LDMore='more to article';
 $LDBackTxt='Voltar';
-$LDClk2Read='Click to read';
+$LDClk2Read='Clique para ler';
 
-$LDArticle='Article';
-$LDWrittenOn='on';
-$LDWrittenBy='Written by';
+$LDArticle='Artigo';
+$LDWrittenOn='em';
+$LDWrittenBy='Escrito por';
 
 $LDNewsDummy=array(1=>'primeiro',2=>'segundo',3=>'terceiro',4=>'quarto');
-$LDClk2Compose='Me click para editar...'
+$LDClk2Compose='Clique-me para editar...'
 ?>

@@ -110,4 +110,6 @@ $LDBloodOrder='Po¾adavek na krevní deriváty';
 $LDPendingRequest='Nevyøízené objednávky';
 /* 2002-10-06 EL*/
 $LDLoggedOut='Odhlá¹en';
+/* 2003-03-18 EL */
+$LDNursesList='Nurses\' List';
 ?>

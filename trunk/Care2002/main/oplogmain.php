@@ -1,19 +1,22 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
+* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+$lang_tables=array('departments.php');
 define('LANG_FILE','or.php');
 define('NO_2LEVEL_CHK',1);
-require_once('../include/inc_front_chain_lang.php');
+require_once($root_path.'include/inc_front_chain_lang.php');
 
 if (!$internok&&!$HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require_once('../include/inc_config_color.php');
+require_once($root_path.'include/inc_config_color.php');
 
 $toggler=0;
 
@@ -29,16 +32,27 @@ if (strlen($md)<2) $md='0'.$md;
 if($dept==NULL) $dept='plop';
 if($saal==NULL) $saal="a";
 */
+if(!isset($saal)||empty($saal)) $saal=1; // default is op room #1
+
 $Or2Dept=get_meta_tags('../global_conf/resolve_or2ordept.pid');
 setcookie(firstentry,'1');
 
+require_once($root_path.'include/care_api_classes/class_department.php');
+$dept_obj=new Department;
+$dept_obj->preloadDept($dept_nr);
+/* Create the global object, load the patient configs*/
+require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
+$glob_obj->getConfig('patient_%');
+
+$surgery_arr=&$dept_obj->getAllActiveWithSurgery();
 
 /* Establish db connection */
-require('../include/inc_db_makelink.php');
-if($link&&$DBLink_OK) 
+if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
+if($dblink_ok)
 {
     /* Load the date formatter */
-    include_once('../include/inc_date_format_functions.php');
+    include_once($root_path.'include/inc_date_format_functions.php');
     
 	
     /* Load editor functions for time format converter */
@@ -48,20 +62,21 @@ if($link&&$DBLink_OK)
 
 	  		$dbtable='care_nursing_op_logbook';
 			
-		 	$sql="SELECT * FROM $dbtable 
-					WHERE dept='$dept'
-						AND op_room='$saal'
-						AND op_date='$pyear-$pmonth-$pday'
-						ORDER BY op_nr
+		 	$sql="SELECT o.*,e.encounter_class_nr, p.name_last, p.name_first, p.date_birth, p.addr_str, p.addr_str_nr, p.addr_zip, t.name AS citytown_name
+					FROM $dbtable AS o, care_encounter AS e, care_person AS p
+					LEFT JOIN care_address_citytown AS t ON p.addr_citytown_nr=t.nr
+					WHERE o.dept_nr='$dept_nr'
+						AND o.op_room='$saal'
+						AND o.op_date='$pyear-$pmonth-$pday'
+						AND o.encounter_nr=e.encounter_nr
+						AND e.pid=p.pid
+						ORDER BY o.nr
 						";
 
-			if($ergebnis=mysql_query($sql,$link))
+			if($ergebnis=$db->Execute($sql))
        		{
-				$rows=0;
-				while( $pdata=mysql_fetch_array($ergebnis)) $rows++;
-				if($rows)
+				if($rows=$ergebnis->RecordCount())
 				{
-					mysql_data_seek($ergebnis,0); //reset the variable
 					$datafound=1;
 					//echo $sql."<br>";
 					//echo $rows;
@@ -86,12 +101,12 @@ if($link&&$DBLink_OK)
  <!-- 
  function pruf(d)
 {
- 	if((d.dept.value=='<?php echo $dept; ?>')&&(d.saal.value=='<?php echo $saal;?>')) return false;
-	window.top.LOGINPUT.location.replace('oploginput.php?sid=<?php echo "$sid&lang=$lang" ?>&mode=chgdept&dept='+d.dept.value+'&saal='+d.saal.value);
+ 	if((d.dept_nr.value=='<?php echo $dept_nr; ?>')&&(d.saal.value=='<?php echo $saal;?>')) return false;
+	window.top.LOGINPUT.location.replace('oploginput.php?sid=<?php echo "$sid&lang=$lang" ?>&mode=chgdept&dept_nr='+d.dept_nr.value+'&saal='+d.saal.value);
 	return true;
 }
 function getinfo(pid,pdata){
-	urlholder="pflege-station-patientdaten.php?sid=<?php echo "$sid&lang=$lang"; ?>&pn="+pid+"&patient=" + pdata + "&station=<?php echo "$dept&pday=$pday&pmonth=$pmonth&pyear=$pyear&op_shortcut=".$HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]; ?>";
+	urlholder="<?php echo $root_path; ?>modules/nursing/nursing-station-patientdaten.php<?php echo URL_REDIRECT_APPEND; ?>&pn="+pid+"&patient=" + pdata + "&dept_nr=<?php echo "$dept_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear&op_shortcut=".$HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]; ?>";
 	patientwin=window.open(urlholder,pid,"width=700,height=450,menubar=no,resizable=yes,scrollbars=yes");
 	}
  function initall(){
@@ -156,9 +171,14 @@ echo '
 		
 echo '
 		<tr bgcolor=#999999><td colspan=2><nobr>
-		<a href="oplogmain.php?sid='.$sid.'&lang='.$lang.'&internok='.$internok.'&pyear='.$ty.'&pmonth='.$tm.'&pday='.$td.'&dept='.$dept.'&saal='.$saal.'" title="'.formatDate2Local("$ty-$tm-$td",$date_format).'"><FONT  COLOR="white"  SIZE=2  FACE="Arial">&lt;&lt; '.$LDPrevDay.'</a></td>
+		<a href="oplogmain.php?sid='.$sid.'&lang='.$lang.'&internok='.$internok.'&pyear='.$ty.'&pmonth='.$tm.'&pday='.$td.'&dept_nr='.$dept_nr.'&saal='.$saal.'" title="'.formatDate2Local("$ty-$tm-$td",$date_format).'">
+		<FONT  COLOR="white"  SIZE=2  FACE="Arial">&lt;&lt; '.$LDPrevDay.'</a></td>
 		<td colspan=3 align=center><FONT  COLOR="white"  SIZE=4  FACE="Arial"> 
-		<b>'.$opabt[$dept].' '.$LDRoom.'-'.strtoupper($saal).' ('.formatDate2Local("$pyear-$pmonth-$md",$date_format).')</b></td>';
+		<b>';
+		$buffer=$dept_obj->LDvar();
+		if(isset($$buffer)&&!empty($$buffer)) echo $$buffer;
+			else echo $dept_obj->FormalName();
+		echo ' '.$LDRoom.'-'.strtoupper($saal).' ('.formatDate2Local("$pyear-$pmonth-$md",$date_format).')</b></td>';
 ?>
 		<td colspan=2>
 		<nobr>
@@ -172,22 +192,28 @@ echo '
     			<input type="hidden" name="sid" value="<?php echo $sid; ?>">
     			<input type="hidden" name="lang" value="<?php echo $lang; ?>">
     
-				<select name="dept" size=1 onChange="syncDept(this,document.chgdept.saal)">
+				<!-- <select name="dept_nr" size=1 onChange="syncDept(this,document.chgdept.saal)"> -->
+				<select name="dept_nr" size=1>
 				<?php
-                   while(list($x,$v)=each($opabt))
+                   while(list($x,$v)=each($surgery_arr))
 					{
-						if($x=="anaesth") continue;
+						if($x==42) continue;
 						echo'
-					<option value="'.$x.'"';
-						if ($dept==$x) echo " selected";
-						echo '> '.$v.'</option>';
+					<option value="'.$v['nr'].'"';
+						if ($dept_nr==$v['nr']) echo " selected";
+						echo '>';
+						$buffer=$v['LD_var'];
+						if(isset($$buffer)&&!empty($$buffer)) echo $$buffer;
+							else echo $v['name_formal'];
+						echo '</option>';
 					}
 				?>
 					
 				</select>
 			</td>
 			<td>
-				<select name="saal" size=1 onChange="syncSaal(this,document.chgdept.dept)">
+				<!-- <select name="saal" size=1 onChange="syncSaal(this,document.chgdept.dept)"> -->
+				<select name="saal" size=1>
 				<?php
                     while(list($x,$v)=each($Or2Dept))
 					{
@@ -209,7 +235,7 @@ echo '
 	echo '
 			</td>
 			<td colspan=1 align=middle>
-			<a href="javascript:gethelp(\'oplog.php\',\'create\',\'logmain\')"><img '.createComIcon('../','frage.gif','0','absmiddle').' alt="'.$LDHelp.'"></a></td>
+			<a href="javascript:gethelp(\'oplog.php\',\'create\',\'logmain\')"><img '.createComIcon($root_path,'frage.gif','0','absmiddle').' alt="'.$LDHelp.'"></a></td>
 			<td colspan=1 align=right>';
 
 
@@ -236,7 +262,7 @@ if(($pyear!=date(Y))||($pmonth!=date(m))||($md!=date(d)))
   }
 
   echo '
-		<a href="oplogmain.php?sid='.$sid.'&lang='.$lang.'&internok='.$internok.'&pyear='.$ty.'&pmonth='.$tm.'&pday='.$td.'&dept='.$dept.'&saal='.$saal.'" title="'.formatDate2Local("$ty-$tm-$td",$date_format).'"><FONT  COLOR="white"  SIZE=2  FACE="Arial"><nobr>'.$LDNextDay.' &gt;&gt;</a>';
+		<a href="oplogmain.php?sid='.$sid.'&lang='.$lang.'&internok='.$internok.'&pyear='.$ty.'&pmonth='.$tm.'&pday='.$td.'&dept_nr='.$dept_nr.'&saal='.$saal.'" title="'.formatDate2Local("$ty-$tm-$td",$date_format).'"><FONT  COLOR="white"  SIZE=2  FACE="Arial"><nobr>'.$LDNextDay.' &gt;&gt;</a>';
 }
 
 echo '
@@ -254,7 +280,7 @@ echo '
 </tr>';
 }
 
-while($pdata=mysql_fetch_array($ergebnis))
+while($pdata=$ergebnis->FetchRow())
 	{
 	if ($toggler==0) 
 		{ echo '
@@ -265,15 +291,19 @@ while($pdata=mysql_fetch_array($ergebnis))
 	<td valign=top><font face="verdana,arial" size="1" ><font size=2 color=red><b>'.$pdata['op_nr'].'</b></font>
 	<hr>'.formatDate2Local($pdata['op_date'],$date_format).'<br>
 	'.$tage[date(w,mktime(0,0,0,$pmonth,$pday,$pyear))].'<br>
-	<a href="oploginput.php?sid='.$sid.'&lang='.$lang.'&internok='.$internok.'&mode=edit&patnum='.$pdata[patnum].'&dept='.$dept.'&saal='.$saal.'&op_nr='.$pdata[op_nr].'&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday.'" target="LOGINPUT" >
-	<img '.createComIcon('../','dwnarrowgrnlrg.gif','0').' alt="'.str_replace("~tagword~",$pdata['lastname'],$LDEditPatientData).'"></a>
+	<a href="oploginput.php?sid='.$sid.'&lang='.$lang.'&internok='.$internok.'&mode=edit&enc_nr='.$pdata['encounter_nr'].'&dept_nr='.$dept_nr.'&saal='.$saal.'&op_nr='.$pdata['op_nr'].'&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday.'" target="LOGINPUT" >
+	<img '.createComIcon($root_path,'dwnarrowgrnlrg.gif','0').' alt="'.str_replace("~tagword~",$pdata['lastname'],$LDEditPatientData).'"></a>
 	</td>';
 	echo '
 	<td valign=top><nobr><font face="verdana,arial" size="1" color=blue>
-	<a href="javascript:getinfo(\''.$pdata[patnum].'\')">
-	<img '.createComIcon('../','info2.gif','0').' alt="'.str_replace("~tagword~",$pdata['lastname'],$LDOpenPatientFolder).'"></a> '.$pdata['patnum'].'<br>';
-	echo '
-	<font color=black><b>'.$pdata['lastname'].', '.$pdata['firstname'].'</b><br>'.formatDate2Local($pdata['bday'],$date_format).'<br>'.nl2br(stripcslashes($pdata['address'])).'</td>';
+	<a href="javascript:getinfo(\''.$pdata['encounter_nr'].'\')">
+	<img '.createComIcon($root_path,'info2.gif','0').' alt="'.str_replace("~tagword~",$pdata['lastname'],$LDOpenPatientFolder).'"></a> ';
+	
+	echo ($pdata['encounter_class_nr']==1)?($pdata['encounter_nr']+$GLOBAL_CONFIG['patient_inpatient_nr_adder']) : ($pdata['encounter_nr']+$GLOBAL_CONFIG['patient_outpatient_nr_adder']);
+
+	echo '<br>
+	<font color=black><b>'.$pdata['name_last'].', '.$pdata['name_first'].'</b><br>'.formatDate2Local($pdata['date_birth'],$date_format).'<p>
+			<font color="#000000">'.$pdata['addr_str'].' '.$pdata['addr_str_nr'].'<br>'.$pdata['addr_zip'].' '.$pdata['citytown_name'].'</font><br></td>';
 	echo '
 	<td valign=top width=150><font face="verdana,arial" size="1" >';
 	echo '
@@ -334,7 +364,7 @@ while($pdata=mysql_fetch_array($ergebnis))
 	echo '<font face="verdana,arial" size="1" color="#cc0000">'.$LDOpCut.':</font><br>'.convertTimeToLocal($ccbuf[s]).'<p>
 	<font face="verdana,arial" size="1" color="#cc0000">'.$LDOpClose.':</font><br>'.convertTimeToLocal($ccbuf[e]).'</td>';
 	echo '
-	<td valign=top><font face="verdana,arial" size="1" color="#cc0000">'.$LDOpMainElements[therapy].':<font color=black><br>'.nl2br($pdata['op_therapy']).'</td>';
+	<td valign=top><font face="verdana,arial" size="1" color="#cc0000">'.$LDOpMainElements['therapy'].':<font color=black><br>'.nl2br($pdata['op_therapy']).'</td>';
 	echo '
 	<td valign=top><nobr><font face="verdana,arial" size="1" color="#cc0000">'.$LDOpMainElements[result].':<br>';
 	echo '<font color=black>'.nl2br($pdata['result_info']).'</td>';
@@ -358,8 +388,8 @@ if(!$datafound)
 	echo '
 			<MAP NAME="catcom">
 			<AREA SHAPE="RECT" COORDS="116,87,191,109" HREF="javascript:ssm(\'dLogoTable\'); clearTimeout(timer)"  onmouseout="timer=setTimeout(\'hsm()\',1000)">
-			<AREA SHAPE="RECT" COORDS="232,87,308,110" HREF="op-pflege-logbuch-xtsuch-start.php?sid='.$sid.'&lang='.$lang.'&mode=fresh&dept='.$dept.'&saal='.$saal.'&child=1"  target="_parent"  title="'.$LDSearchPatient.' ['.$LDOrLogBook.']" >
-			</MAP><img ismap usemap="#catcom" '.createLDImgSrc('../','cat-com2.gif','0').'>';
+			<AREA SHAPE="RECT" COORDS="232,87,308,110" HREF="op-pflege-logbuch-xtsuch-start.php?sid='.$sid.'&lang='.$lang.'&mode=fresh&dept_nr='.$dept_nr.'&saal='.$saal.'&child=1"  target="_parent"  title="'.$LDSearchPatient.' ['.$LDOrLogBook.']" >
+			</MAP><img ismap usemap="#catcom" '.createLDImgSrc($root_path,'cat-com2.gif','0').'>';
 ?>
 			<DIV id=dLogoTable style=" VISIBILITY: hidden; POSITION: relative">
 			<table border=0 bgcolor="#33333" cellspacing=0 cellpadding=1>
@@ -368,9 +398,9 @@ if(!$datafound)
 				<table border=0 bgcolor="#ffffee" >
      				<tr>
        				<td><font size=2 face="verdana,arial">
-						&nbsp;<a href="#" onmouseover=clearTimeout(timer) onmouseout="timer=setTimeout('hsm()',500)" ><img <?php echo createComIcon('../','redpfeil.gif','0','absmiddle') ?>> <?php echo $LDShowPrevLog ?></a>&nbsp;<br>
-						&nbsp;<a href="#" onmouseover=clearTimeout(timer) onmouseout="timer=setTimeout('hsm()',500)" ><img <?php echo createComIcon('../','redpfeil.gif','0','absmiddle') ?>> <?php echo $LDShowNextLog ?></a>&nbsp;<br>
-						&nbsp;<a href="#" onmouseover=clearTimeout(timer) onmouseout="timer=setTimeout('hsm()',500)" ><img <?php echo createComIcon('../','redpfeil.gif','0','absmiddle') ?>> <?php echo $LDShowGuideCal ?></a>&nbsp;<br></font>
+						&nbsp;<a href="#" onmouseover=clearTimeout(timer) onmouseout="timer=setTimeout('hsm()',500)" ><img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>> <?php echo $LDShowPrevLog ?></a>&nbsp;<br>
+						&nbsp;<a href="#" onmouseover=clearTimeout(timer) onmouseout="timer=setTimeout('hsm()',500)" ><img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>> <?php echo $LDShowNextLog ?></a>&nbsp;<br>
+						&nbsp;<a href="#" onmouseover=clearTimeout(timer) onmouseout="timer=setTimeout('hsm()',500)" ><img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>> <?php echo $LDShowGuideCal ?></a>&nbsp;<br></font>
 	   				</td>
      				</tr>
   		 </table>
@@ -386,10 +416,11 @@ if(!$datafound)
 	{
 		if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) $buffy=str_replace(" ","+",$HTTP_COOKIE_VARS["ck_login_username".$sid]); 
 			else $buffy=str_replace(" ","+",$HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]);
-		 echo '<img src="../imgcreator/catcom.php?lang='.$lang.'&person='.$buffy.'">';
+		 echo '<img src="'.$root_path.'main/imgcreator/catcom.php?lang='.$lang.'&person='.$buffy.'">';
 		 }
 }
 ?>
+
 <a name="bot"></a>
 </BODY>
 </HTML>

@@ -3,7 +3,7 @@
 		else $lang=$ck_language;
 //if (!$sid||($sid!=$$ck_sid_buffer)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 //require("../language/".$lang."/lang_".$lang."_drg.php");
-require_once('../include/inc_config_color.php');
+require_once($root_path.'include/inc_config_color.php');
 
 $toggle=0;
 
@@ -35,11 +35,11 @@ $dbtable="care_icd10";
 
 
 			$sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE diagnosis_code LIKE "%'.$keyword.'%" OR description LIKE "%'.$keyword.'%" LIMIT 0,50';
-        	$ergebnis=mysql_query($sql,$link);
+        	$ergebnis=$db->Execute($sql);
 			$linecount=0;
 			if($ergebnis)
        		{
-				while ($zeile=mysql_fetch_array($ergebnis)) $linecount++;
+				while ($zeile=$ergebnis->FetchRow()) $linecount++;
 				
 			}
 			 else {echo "<p>".$sql."<p>$LDDbNoRead";};
@@ -70,7 +70,7 @@ function gethelp(x,s,x1,x2,x3)
 </script>
  
   <?php 
-require('../include/inc_css_a_hilitebu.php');
+require($root_path.'include/inc_css_a_hilitebu.php');
 ?>
  
 </HEAD>
@@ -88,7 +88,7 @@ require('../include/inc_css_a_hilitebu.php');
 <INPUT type="submit" name="versand" value="<?php echo $LDSEARCH ?>"></FORM>
 
 <p>
-<a href="startframe.php?sid=<?php echo "$sid&lang=$lang"; ?>"><img <?php echo createLDImgSrc('../','cancel.gif','0') ?>></a>
+<a href="startframe.php<?php echo URL_APPEND; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a>
 <p>
 
 <?php
@@ -102,7 +102,7 @@ if ($linecount>0)
 						echo"<td><font face=arial size=2 color=#ffffff><b>Beschreibung</b></td>";
 		
 					echo "</tr>";
-					while($zeile=mysql_fetch_array($ergebnis))
+					while($zeile=$ergebnis->FetchRow())
 					{
 						echo "<tr bgcolor=";
 						if($toggle) { echo "#efefef>"; $toggle=0;} else {echo "#ffffff>"; $toggle=1;};

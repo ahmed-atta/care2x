@@ -1,5 +1,5 @@
 <?php
-$LDMainTitle='Care 2002 Integrovaný systém pro nemocnice';
+$LDMainTitle='Care 2002 Integrated Hospital Information System';
 
 /*$LDMainTitle='Marienhospital a virtual Integrated Hospital Information System in Internet';
 */
@@ -32,8 +32,8 @@ $LDCalendar ='Kalendáø';
 $LDHelp='Pomoc';
 $LDMore='více o èlánku';
 
-$LDEditTitle='Zprávy na domovské stránce';
-$LDNewsDummy=array(1=>'První',2=>'Druhý',3=>'Tøetí',4=>'Èvrtý');
+$LDEditTitle='Hlavní zprávy';
+$LDNewsDummy=array(1=>'první',2=>'druhý',3=>'tøetí',4=>'èvrtý');
 
 $LDNoFrame='Vá¹ prohlí¾eè nepodporuje\'frames\'.<br> Prosím nainstalujte si novìj¹í verzi prohlí¾eèe';
 
@@ -49,10 +49,10 @@ $LDGoAheadEgalCookie='Nechci akceptovat \'cookie\'. Chci pokraèovat v ka¾dém pøí
 $LDCookieRef='Chcete-li se dozvìdìt více detailù o \'cookie\' pøeètìte si prosím následující dokumenty:<br>
 						<a href=\'http://www.dtp-aus.com/cookies.htm\' target=\'pp\'>A few words about Cookies (Security and the lies)</a><br>
 						<a href=\'http://www.cookiecentral.com/content.phtml?area=4&id=10\' target=\'pp\'>Cookies and Privacy FAQ</a><br>';
-$LDPrivPolicy='Kliknutím  <a href=\'language/en/en_privacy.htm\' target=\'pp\'>zde</a> se mù¾ete dozvìt více o na¹ich pravidlech na ochranu soukromých údajù';
-$LDOurPrivPolicy='Na¹e pravidla na ochranu soukromí';
+$LDPrivPolicy='If you want to read our privacy policy please <a href=\'language/en/en_privacy.htm\' target=\'pp\'>click this:</a>';
+$LDOurPrivPolicy='Our Privacy Policy';
 $LDSubmitNews='Publikovat zprávy';
 $LDEditNews='Editace a publikace zpráv pomocí on-line editoru';
 /* 2002-10-17 EL */
-$LDCredits='Tvùrci programu';
+$LDCredits='Credits';
 ?>

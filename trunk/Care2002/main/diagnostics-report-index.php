@@ -1,7 +1,9 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
+* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -9,39 +11,46 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 * See the file "copy_notice.txt" for the licence notice
 */
 define('LANG_FILE','nursing.php');
-$local_user='ck_pflege_user';
-require_once('../include/inc_front_chain_lang.php');
-if($edit&&!$HTTP_COOKIE_VARS[$local_user.$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require_once('../include/inc_config_color.php'); // load color preferences
+if($user_origin=='lab')
+{
+  $local_user='ck_lab_user';
+  $breakfile='labor.php?sid='.$sid.'&lang='.$lang; 
+}
+else
+{
+  $local_user='ck_pflege_user';
+  $breakfile='pflege-station-patientdaten.php'.$rel_url;
+}
+require_once($root_path.'include/inc_front_chain_lang.php');
+if($edit&&!$HTTP_COOKIE_VARS[$local_user.$sid]) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
 $thisfile='diagnostics-report-index.php';
 $breakfile="pflege-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$pn&edit=$edit";
 
 $bgc1='#fefefe'; 
 
-$abtname=get_meta_tags("../global_conf/$lang/konsil_tag_dept.pid");
+$abtname=get_meta_tags($root_path."global_conf/$lang/konsil_tag_dept.pid");
 
 /* Establish db connection */
-require('../include/inc_db_makelink.php');
-if($link&&$DBLink_OK) 
+if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
+if($dblink_ok)
 {	
 	
-       include_once('../include/inc_date_format_functions.php');
+       include_once($root_path.'include/inc_date_format_functions.php');
 
 		$dbtable='care_nursing_station_patients_diagnostics_report';
 		
 		$sql="SELECT * FROM $dbtable WHERE patnum='$pn' ORDER BY  report_date   DESC";
 		//$sql="SELECT * FROM $dbtable WHERE patnum='$pn' ORDER BY  item_nr DESC";
 		
-		if($ergebnis=mysql_query($sql,$link))
+		if($ergebnis=$db->Execute($sql))
        		{
-				$rows=mysql_num_rows($ergebnis);
-				if($rows) $report=mysql_fetch_array($ergebnis);
+				$rows=$ergebnis->RecordCount();
+				if($rows) $report=$ergebnis->FetchRow();
 				  else $report['script_call']='diagnostics-report-none.php?pn='.$pn; // If no report is available, load the non-availability page
 			}
 			else{echo "<p>$sql$LDDbNoRead";}
-
-       
 	}
 	else 
 		{ echo "$LDDbNoLink<br>$sql<br>"; }
@@ -54,7 +63,9 @@ if($link&&$DBLink_OK)
 <?php echo setCharSet(); ?>
  <TITLE><?php echo $LDReports ?></TITLE>
 <?php
-require('../include/inc_css_a_hilitebu.php');
+require($root_path.'include/inc_js_gethelp.php');
+require($root_path.'include/inc_css_a_hilitebu.php');
+
 ?>
 
 
@@ -63,7 +74,7 @@ require('../include/inc_css_a_hilitebu.php');
 <!-- Script Begin
 function showInitPage() {
 
-   window.parent.DIAGNOSTICS_REPORT_MAIN_<?php echo $sid.'_'.$pn ?>.location.replace('<?php echo $report['script_call'] ?>&sid=<?php echo $sid ?>&lang=<?php echo $lang ?>&user_origin=<?php echo $user_origin ?>&show_print_button=1');
+   window.parent.DIAGNOSTICS_REPORT_MAIN_<?php echo $sid.'_'.$pn ?>.location.replace('<?php echo $root_path.'modules/laboratory/'.$report['script_call']; ?>&sid=<?php echo $sid ?>&lang=<?php echo $lang ?>&user_origin=<?php echo $user_origin ?>&show_print_button=1');
 
 }
 //  Script End -->
@@ -84,10 +95,9 @@ if($rows)
 
    $ChkUpOptions=get_meta_tags('../global_conf/'.$lang.'/konsil_tag_dept.pid');
 
-   mysql_data_seek($ergebnis,0);  //reset the array to the first element
+   //mysql_data_seek($ergebnis,0);  //reset the array to the first element
 
-  while($report=mysql_fetch_array($ergebnis))
-  {
+  do{
   //echo $tracker."<br>";
 
     if($report['report_date']!=$report_date)
@@ -98,23 +108,23 @@ if($rows)
 
     if($report['status']=='pending')
    {
-        echo "&nbsp;<img ".createComIcon('../','r_arrowgrnsm.gif','0','absmiddle')."> ";
+        echo "&nbsp;<img ".createComIcon($root_path,'r_arrowgrnsm.gif','0','absmiddle')."> ";
    }
    else
    {
         echo "&nbsp;<img src=\"../gui/img/common/default/pixel.gif\" border=0 width=4 height=7> ";
    }  
   
-   echo " <a href=\"".$report['script_call']."&sid=".$sid."&lang=".$lang."&user_origin=".$user_origin."&show_print_button=1\" target=\"DIAGNOSTICS_REPORT_MAIN_".$sid."_".$pn."\">".$ChkUpOptions[$report['reporting_dept']]."<br>".$report['report_nr']."</a><hr>";
+   echo " <a href=\"".$root_path."modules/laboratory/".$report['script_call']."&sid=".$sid."&lang=".$lang."&user_origin=".$user_origin."&show_print_button=1\" target=\"DIAGNOSTICS_REPORT_MAIN_".$sid."_".$pn."\">".$ChkUpOptions[$report['reporting_dept']]."<br>".$report['report_nr']."</a><hr>";
 
 		
    
     /* Check for the barcode png image, if nonexistent create it in the cache */
-    if(!file_exists('../cache/barcodes/pn_'.$report['patnum'].'.png'))
+    if(!file_exists($root_path.'cache/barcodes/pn_'.$report['patnum'].'.png'))
     {
-	   echo "<img src='../classes/barcode/image.php?code=".$report['patnum']."&style=68&type=I25&width=145&height=50&xres=2&font=5&label=2' border=0 width=0 height=0>";
+	   echo "<img src='".$root_path."classes/barcode/image.php?code=".$report['patnum']."&style=68&type=I25&width=145&height=50&xres=2&font=5&label=2' border=0 width=0 height=0>";
 	}
-  } 
+  } while($report=$ergebnis->FetchRow());
 }
 ?>       
 </font>

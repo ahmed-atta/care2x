@@ -110,4 +110,9 @@ $LDTestType=array('patho'=>'Pathologie',
 $LDBloodOrder='Anforderung von Blutkonserven';
 /* 2002-09-22 EL */
 $LDPendingRequest='Anstehende Anforderung';
+/* 2002-10-06 EL*/
+$LDLoggedOut='Logged out';
+/* 2003-03-18 EL */
+$LDNursesList='Pflegekräfte';
+
 ?>

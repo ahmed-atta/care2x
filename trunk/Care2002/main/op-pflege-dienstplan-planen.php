@@ -1,10 +1,12 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 
 define('LANG_FILE','or.php');
 $local_user='ck_op_dienstplan_user';
-require_once('../include/inc_front_chain_lang.php');
-require_once('../include/inc_config_color.php'); // load color preferences
+require_once($root_path.'include/inc_front_chain_lang.php');
+require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
 $thisfile='op-pflege-dienstplan-planen.php';
 
@@ -27,10 +29,10 @@ if($retpath=='calendar_opt')
 			else $rettarget="op-doku.php?sid=".$sid."&lang=".$lang;
 	}
 	
-$opabt=get_meta_tags('../global_conf/'.$lang.'/op_tag_dept.pid');
+$opabt=get_meta_tags($root_path.'global_conf/'.$lang.'/op_tag_dept.pid');
 /********************************* Resolve the department and op room ***********************/
 $saal='exclude';
-require('../include/inc_resolve_opr_dept.php');
+require($root_path.'include/inc_resolve_opr_dept.php');
 
 if ($pmonth=='') $pmonth=date('n');
 if ($pyear=='') $pyear=date(Y);
@@ -46,8 +48,8 @@ if(($pyear.$tm)<(date('Ym')))
 $dbtable='care_nursing_dutyplan';
 
 /* Establish db connection */
-require('../include/inc_db_makelink.php');
-if($link&&$DBLink_OK) 
+if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
+if($dblink_ok)
 {	
 		if($mode=='save')
 		{
@@ -56,7 +58,7 @@ if($link&&$DBLink_OK)
 						WHERE dept='$dept'
 							AND year='$pyear'
 							AND month='$pmonth'";
-				if($ergebnis=mysql_query($sql,$link))
+				if($ergebnis=$db->Execute($sql))
        			{
 					//echo $sql." checked <br>";
 					//$bbuf="";
@@ -72,13 +74,10 @@ if($link&&$DBLink_OK)
 						 else $rdbuf=$rdbuf." ~?";
 					}
 					//$dbuf=strtr($dbuf," ","+");
-					$rows=0;
-					if( $content=mysql_fetch_array($ergebnis)) $rows++;
-					if($rows)
+					if($rows=$ergebnis->RecordCount())
 						{
 							// $dbuf=htmlspecialchars($dbuf);
-							mysql_data_seek($ergebnis,0);
-							$content=mysql_fetch_array($ergebnis);
+							$content=$ergebnis->FetchRow();
 							$content[encoding].=" ~e=".$encoder."&d=".date("d.m.Y")."&t=".date("H.i")."&a=".$element;
 							
 							$sql="UPDATE $dbtable SET 
@@ -90,13 +89,13 @@ if($link&&$DBLink_OK)
 											AND year='$pyear'
 											AND month='$pmonth'";
 											
-							if($ergebnis=mysql_query($sql,$link))
+							if($ergebnis=$db->Execute($sql))
        							{
 									//echo $sql." new update <br>";
-									mysql_close($link);
+									
 									header("location:$savedtarget");
 								}
-								else echo "<p>".$sql."<p>$LDDbNoRead"; 
+								else echo "<p>".$sql."<p>$LDDbNoUpdate"; 
 						} // else create new entry
 						else
 						{
@@ -120,13 +119,13 @@ if($link&&$DBLink_OK)
 										'e=".$encoder."&d=".date("d.m.Y")."&t=".date("H.i")."&a=".$element."'
 										)";
 
-							if($ergebnis=mysql_query($sql,$link))
+							if($ergebnis=$db->Execute($sql))
        							{
 									//echo $sql." new insert <br>";
-									mysql_close($link);
+									
 									header("location:$savedtarget");
 								}
-								else echo "<p>".$sql."<p>Das Lesen  aus der Datenbank $dbtable ist gescheitert."; 
+								else echo "<p>".$sql."<p>$LDDbNoRead"; 
 						}//end of else
 					} // end of if ergebnis
 		 }// end of if(mode==save)
@@ -137,14 +136,11 @@ if($link&&$DBLink_OK)
 								AND year='$pyear'
 								AND month='$pmonth'";
 			
-			if($ergebnis=mysql_query($sql,$link))
+			if($ergebnis=$db->Execute($sql))
        		{
-				$rows=0;
-				if( $result=mysql_fetch_array($ergebnis)) $rows++;
-				if($rows)
+				if($rows=$ergebnis->RecordCount())
 				{
-					mysql_data_seek($ergebnis,0);
-					$result=mysql_fetch_array($ergebnis);
+					$result=$ergebnis->FetchRow();
 					//echo $sql."<br>";
 				}
 			}
@@ -274,8 +270,8 @@ function cal_update()
 <STRONG> &nbsp;<?php echo "$LDCreate $LDDutyPlan" ?> <font color="<?php echo $cfg['top_txtcolor']; ?>"><?php echo $opabt[$dept]; ?></font></STRONG></FONT></td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right><a 
 href="javascript:history.back();killchild();"><img 
-<?php echo createLDImgSrc('../','back2.gif','0','absmiddle') ?>></a><a 
-href="javascript:gethelp('op_duty.php','plan','<?php echo $rows ?>')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0','absmiddle') ?>></a><a href="<?php echo $rettarget ?>" onClick=killchild()><img <?php echo createLDImgSrc('../','close2.gif','0','absmiddle') ?>></a></td>
+<?php echo createLDImgSrc($root_path,'back2.gif','0','absmiddle') ?>></a><a 
+href="javascript:gethelp('op_duty.php','plan','<?php echo $rows ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?>></a><a href="<?php echo $rettarget ?>" onClick=killchild()><img <?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?>></a></td>
 </tr>
 <tr>
 <td bgcolor=#cde1ec valign=top colspan=2><p><br>
@@ -349,24 +345,24 @@ for ($i=1,$n=0;$i<=$maxdays;$i++,$n++){
 	echo $wd.'</div>
 	</td>
 	<td height=5 '.$backcolor.'><div class="a3"><font face="arial" size=2>
-	&nbsp;<a href="javascript:popselect(\''.$n.'\',\'a\')"><button onclick="javascript:popselect(\''.$n.'\',\'a\')"><img '.createComIcon('../','patdata.gif','0').'></button></a>
+	&nbsp;<a href="javascript:popselect(\''.$n.'\',\'a\')"><button onclick="javascript:popselect(\''.$n.'\',\'a\')"><img '.createComIcon($root_path,'patdata.gif','0').'></button></a>
 	';
 	echo '
 	<input type="hidden" name="ha'.$n.'" value="l='.$aelems[l].'&f='.$aelems[f].'&b='.$aelems[b].'">
 	<input type="text" name="a'.$n.'" size="20" onFocus=this.select() value="'.$aelems[s].'"> </div>
 	</td>
 	<td height=5 '.$backcolor.'>&nbsp;';
-		if ($aelems[s]=="") echo '<img src="../gui/img/common/default/pixel.gif" border=0 width=16 height=16'; else echo '<img <img '.createComIcon('../','mans-gr.gif','0');
+		if ($aelems[s]=="") echo '<img src="../../gui/img/common/default/pixel.gif" border=0 width=16 height=16'; else echo '<img <img '.createComIcon($root_path,'mans-gr.gif','0');
 	echo ' id="icona'.$n.'">&nbsp;
 	</td>
 	<td height=5 '.$backcolor.'><div class=a3><font face=arial size=2>
-	&nbsp;<a href="javascript:popselect(\''.$n.'\',\'r\')"><button onclick="javascript:popselect(\''.$n.'\',\'r\')"><img <img '.createComIcon('../','patdata.gif','0').'></button></a>';
+	&nbsp;<a href="javascript:popselect(\''.$n.'\',\'r\')"><button onclick="javascript:popselect(\''.$n.'\',\'r\')"><img <img '.createComIcon($root_path,'patdata.gif','0').'></button></a>';
 	echo '&nbsp;
 	<input type="hidden" name="hr'.$n.'" value="l='.$relems[l].'&f='.$relems[f].'&b='.$relems[b].'">
 	<input type="text" size="20" name="r'.$n.'" onFocus=this.select() value="'.$relems[s].'"></div>
 	</td>
 	<td height=5 '.$backcolor.'>&nbsp;';
-	if ($relems[s]=="") echo '<img src="../gui/img/common/default/pixel.gif" border=0 width=16 height=16'; else echo '<img <img '.createComIcon('../','mans-red.gif','0');
+	if ($relems[s]=="") echo '<img src="../../gui/img/common/default/pixel.gif" border=0 width=16 height=16'; else echo '<img <img '.createComIcon($root_path,'mans-red.gif','0');
 	echo ' id="iconr'.$n.'">&nbsp;
 	</td>
 	</tr>';
@@ -382,16 +378,16 @@ for ($i=1,$n=0;$i<=$maxdays;$i++,$n++){
 	
 </td>
 <td valign="top" align="left">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="image" <?php echo createLDImgSrc('../','savedisc.gif','0') ?>><p>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<?php echo $rettarget ?>"><img <?php if($saved)  echo  createLDImgSrc('../','close2.gif','0'); else echo createLDImgSrc('../','cancel.gif','0'); ?>></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?>><p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<?php echo $rettarget ?>"><img <?php if($saved)  echo  createLDImgSrc($root_path,'close2.gif','0'); else echo createLDImgSrc($root_path,'cancel.gif','0'); ?>></a>
 
 </td>
 </tr>
 </table>
 
 <p>
-<input type="image" <?php echo createLDImgSrc('../','savedisc.gif','0') ?>>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="<?php echo $rettarget ?>"><img <?php if($saved)  echo  createLDImgSrc('../','close2.gif','0'); else echo createLDImgSrc('../','cancel.gif','0'); ?>></a>
+<input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?>>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="<?php echo $rettarget ?>"><img <?php if($saved)  echo  createLDImgSrc($root_path,'close2.gif','0'); else echo createLDImgSrc($root_path,'cancel.gif','0'); ?>></a>
 <p>
 </ul>
 
@@ -403,11 +399,9 @@ for ($i=1,$n=0;$i<=$maxdays;$i++,$n++){
 <tr>
 <td bgcolor=silver height=70 colspan=2>
 <?php
-if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
-include('../language/'.$lang.'/'.$lang.'_copyrite.php');
-  else include('../language/en/en_copyrite.php');?>
-</td>
-</tr>
+require($root_path.'include/inc_load_copyrite.php');
+?>
+</td></tr>
 </table>        
 &nbsp;
 <input type="hidden" name="mode" value="save">

@@ -312,7 +312,7 @@ $LDAlertNotSavedYet='The latest entry is not saved yet. Do you want to save firs
 $LDPhone='Phone';
 $LDBeeper='Beeper';
 $LDOn='on';
-$LDNoPersonList='The list of personell is not yet created. Please create the list first. Click on the following button.';
+$LDNoPersonList='The list of personell is not yet created.';
 $LDNoEntryFound='No entry in plan found!';
 $LDShow='Show';
 $LDShowPrevLog='Show the previous log entries';
@@ -329,5 +329,10 @@ $LD_MMsddsyyyy='mm/dd/yyyy';
 $LDStandbyInit='S'; /* S = Standby */
 $LDOncallInit='O'; /* O = Oncall */
 $LDDutyPlan='Duty plan';
-
+/* 2003-03-18 EL */
+$LDSearchInAllDepts='Search in all departments';
+$LDAddNurseToList='Add a nurse to list';
+$LDNursesList='Nurses\' List';
+/* 2003-03-19 EL */
+$LDPlsSelectDept='Please select a department.';
 ?>

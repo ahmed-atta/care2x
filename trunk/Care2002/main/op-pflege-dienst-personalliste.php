@@ -1,10 +1,23 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','or.php');
-$local_user='ck_op_dienstplan_user';
-require_once('../include/inc_front_chain_lang.php');
+if($HTTP_SESSION_VARS['sess_user_origin']=='personell_admin'){
+	$local_user='aufnahme_user';
+	if(!isset($saved)||!$saved){
+		$mode='search';
+		$searchkey=$nr;
+	}
+	$breakfile=$root_path.'modules/personell_admin/personell_register_show.php'.URL_APPEND.'&target=personell_reg&personell_nr='.$nr;
+}else{
+	$local_user='ck_op_dienstplan_user';
+	$breakfile='javascript:history.back()';
+}
 
-require_once('../include/inc_config_color.php'); // load color preferences
+require_once($root_path.'include/inc_front_chain_lang.php');
+
+require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
 $filename="../global_conf/$lang/op_tag_dept.pid";
 $opabt=get_meta_tags($filename);
@@ -18,13 +31,13 @@ switch($ipath)
 }
 /********************************* Resolve the or department  only ***********************/
 $saal="exclude";
-require('../include/inc_resolve_opr_dept.php');
+require($root_path.'include/inc_resolve_opr_dept.php');
 
 $dbtable="care_nursing_dept_personell_quicklist";
 
 /* Establish db connection */
-require('../include/inc_db_makelink.php');
-if($link&&$DBLink_OK) 
+if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
+if($dblink_ok)
 	{	
 	// get orig data
 
@@ -35,7 +48,7 @@ if($link&&$DBLink_OK)
 				$sql="SELECT list FROM $dbtable 
 						WHERE  dept='$dept'";
 						
-				if($ergebnis=mysql_query($sql,$link))
+				if($ergebnis=$db->Execute($sql))
        			{
 					//echo $sql." checked <br>";
 					for($i=0;$i<$maxelement;$i++)
@@ -55,7 +68,7 @@ if($link&&$DBLink_OK)
 					}
 					
 					$rows=0;
-					if( $content=mysql_fetch_array($ergebnis)) $rows++;
+					if( $content=$ergebnis->FetchRow()) $rows++;
 					if($rows==1)
 						{
 
@@ -63,10 +76,10 @@ if($link&&$DBLink_OK)
 							$sql="UPDATE $dbtable SET list='$dbuf'
 										WHERE dept='$dept'";
 											
-							if($ergebnis=mysql_query($sql,$link))
+							if($ergebnis=$db->Execute($sql))
        							{
 									//echo $sql." new update <br>";
-									mysql_close($link);
+									
 									header("location:$thisfile?sid=$sid&lang=$lang&saved=1&dept=$dept&pmonth=$pmonth&pyear=$pyear&retpath=$retpath&ipath=$ipath");
 								}
 								else
@@ -94,10 +107,10 @@ if($link&&$DBLink_OK)
 										'".date(Ymd)."'
 									)";
 
-							if($ergebnis=mysql_query($sql,$link))
+							if($ergebnis=$db->Execute($sql))
        							{
 									//echo $sql." new insert <br>";
-									mysql_close($link);
+									
 									header("location:$thisfile?sid=$sid&lang=$lang&saved=1&dept=$dept&pmonth=$pmonth&pyear=$pyear&retpath=$retpath&ipath=$ipath");
 								}
 								else echo "<p>".$sql."<p>$LDDbNoSave"; 
@@ -110,14 +123,14 @@ if($link&&$DBLink_OK)
 		 	$sql="SELECT list FROM $dbtable
 						WHERE dept='$dept'";
 
-			if($ergebnis=mysql_query($sql,$link))
+			if($ergebnis=$db->Execute($sql))
        		{
 				$rows=0;
-				if( $result=mysql_fetch_array($ergebnis)) $rows++;
+				if( $result=$ergebnis->FetchRow()) $rows++;
 				if($rows)
 				{
 					mysql_data_seek($ergebnis,0);
-					$result=mysql_fetch_array($ergebnis);
+					$result=$ergebnis->FetchRow();
 				}
 			}
 				else echo "<p>".$sql."<p>$LDDbNoRead"; 
@@ -172,8 +185,8 @@ function gethelp(x,s,x1,x2,x3)
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" ><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+1  FACE="Arial"><STRONG>
 &nbsp;<?php echo "$LDCreatePersonList - $opabt[$dept]"; ?></STRONG></FONT></td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();"><img
- <?php echo createLDImgSrc('../','back2.gif','0','absmiddle') ?>></a><a 
- href="javascript:gethelp('op_duty.php','personlist','<?php echo $rows ?>')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0','absmiddle') ?>></a><a href="<?php echo $rettarget ?>"><img <?php echo createLDImgSrc('../','close2.gif','0','absmiddle') ?>></a></td>
+ <?php echo createLDImgSrc($root_path,'back2.gif','0','absmiddle') ?>></a><a 
+ href="javascript:gethelp('op_duty.php','personlist','<?php echo $rows ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?>></a><a href="<?php echo $rettarget ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?>></a></td>
 </tr>
 <tr>
 <td bgcolor=#cde1ec valign=top colspan=2><p>
@@ -243,9 +256,9 @@ echo '
 <input type="hidden" name="ipath" value="<?php echo $ipath ?>">
 <input type="hidden" name="maxelement" value="<?php echo $maxelement ?>">
 <input type="hidden" name="mode" value="save">
-<a href="<?php echo $rettarget ?>"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> alt="<?php echo $LDClose ?>"></a>
+<a href="<?php echo $rettarget ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"></a>
 &nbsp;&nbsp;&nbsp;&nbsp;
-<input type="image" <?php echo createLDImgSrc('../','savedisc.gif','0') ?> alt="<?php echo $LDSave ?>" border=0 width=99 height=24>
+<input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?> alt="<?php echo $LDSave ?>" border=0 width=99 height=24>
 </form>
 <hr>
 <form action=<?php echo $thisfile ?> name="deptform">
@@ -279,11 +292,9 @@ while(list($x,$v)=each($opabt))
 <tr>
 <td bgcolor=silver height=70 colspan=2>
 <?php
-if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
-include('../language/'.$lang.'/'.$lang.'_copyrite.php');
-  else include('../language/en/en_copyrite.php');?>
-</td>
-</tr>
+require($root_path.'include/inc_load_copyrite.php');
+?>
+</td></tr>
 </table>        
 &nbsp;
 </FONT>

@@ -1,16 +1,18 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','or.php');
 define('NO_2LEVEL_CHK',1);
-require_once('../include/inc_front_chain_lang.php');
+require_once($root_path.'include/inc_front_chain_lang.php');
 $opabt=get_meta_tags('../global_conf/'.$lang.'/op_tag_dept.pid');
 
 /* Establish db connection */
-require('../include/inc_db_makelink.php');
-if($link&&$DBLink_OK) 
+if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
+if($dblink_ok)
 {
         /* Load date formatter */
-        include_once('../include/inc_date_format_functions.php');
+        include_once($root_path.'include/inc_date_format_functions.php');
         
 		
 	// get orig data
@@ -22,12 +24,12 @@ if($link&&$DBLink_OK)
 					ORDER BY year DESC";
 					
 			//echo $sql;
-			if($ergebnis=mysql_query($sql,$link))
+			if($ergebnis=$db->Execute($sql))
        		{
-				if($rows=mysql_num_rows($ergebnis))
+				if($rows=$ergebnis->RecordCount())
 				{
 					$datafound=1;
-					$pdata=mysql_fetch_array($ergebnis);
+					$pdata=$ergebnis->FetchRow();
 					//echo $sql."<br>";
 					//echo $rows;
 				}
@@ -99,7 +101,7 @@ for ($i=0;$i<sizeof($pbuf);$i++)
 	echo '
 	<a href="#" onClick=addelem(\''.$mode.$elemid.'\',\'h'.$mode.$elemid.'\',\''.ucfirst($persons[l]).'\',\''.ucfirst($persons[f]).'\',\''.ucfirst($persons[b]).'\')>
 	<img ';
-	if ($mode=="a") echo createComIcon('../','mans-gr.gif','0'); else echo createComIcon('../','mans-red.gif','0');
+	if ($mode=="a") echo createComIcon($root_path,'mans-gr.gif','0'); else echo createComIcon($root_path,'mans-red.gif','0');
 	echo '> '.ucfirst($persons[l]).', '.ucfirst($persons[f]).'</a>
 	<br>';
 }
@@ -109,7 +111,7 @@ echo '
 else
 {
 echo '<form><font face="verdana,arial" size=2>
-<img '.createMascot('../','mascot1_r.gif','0','left').'  '.$LDNoPersonList.'
+<img '.createMascot($root_path,'mascot1_r.gif','0','left').'  '.$LDNoPersonList.'
 <p>
 <input type="button" value="'.$LDCreatePersonList.'" onClick="window.opener.location.href=\'op-pflege-dienst-personalliste.php?sid='.$sid.'&lang='.$lang.'&dept='.$dept.'&pmonth='.$month.'&pyear='.$year.'&retpath='.$retpath.'&ipath=plan\';window.opener.focus();window.close();">
 </form>
@@ -119,7 +121,7 @@ echo '<form><font face="verdana,arial" size=2>
 
 ?>
 <p><br>
-<a href="javascript:closethis()"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> alt="<?php echo $LDClose ?>"></a>
+<a href="javascript:closethis()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"></a>
 
 </BODY>
 

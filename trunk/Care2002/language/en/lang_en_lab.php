@@ -16,9 +16,8 @@ $LDOtherOptions='Other options';
 $LDOptions='Options';
 $LDMemo='Read or compose a memo';
 $LDTitleMemo='Memo';
-
 $LDfieldname=array('Patient nr.','Family name','Name','Birthdate');
-$LDSearchWordPrompt='Enter a search keyword, e.g. a family name, a name, a birthdate, etc.';
+$LDSearchWordPrompt='Enter a search keyword, for example: a family name, a name, a birthdate, etc.';
 $LDEnterData='Click to enter data';
 $LDClk2See='Click to see data';
 $LDFoundPatient='The search found <b>~nr~</b> patients';
@@ -106,8 +105,6 @@ $LDPrintForm='Print the request form';
 $LDInitFindings='Initial findings';
 $LDCurrentFindings='Current findings';
 $LDFinalFindings='Final findings';
-
 $LDFillLabOnly='For lab use only';
 $LDLEN='LEN';  /* Lab entry number */
-
 ?>

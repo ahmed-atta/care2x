@@ -45,8 +45,8 @@ $LDCancel="Zru¹it";
 
 $LDCancelClose="Zru¹it a vrátit se na úvodní stránku";
 $LDCloseWin="Uzavøít okno pro pøíjem pacienta";
-$LDError="Prosím doplòte chybìjící informaci v  <font color=red> èervenì </font> oznaèeném poli!";
-$LDErrorS="Prosím doplòte chybìjící informace v  <font color=red> èervenì </font> oznaèench polích!";
+$LDError="Prosím doplnte chybìjící informaci v  <font color=red> èervenì </font> oznaèeném poli!";
+$LDErrorS="Prosím doplnte chybìjící informace v  <font color=red> èervenì </font> oznaèench polích!";
 
 $fieldname=array("Pacient èíslo","Pøíjmení","Jméno","Datum narození","Zobrazit");
 $LDEntryPrompt="Zadejte klíèové slovo pro hledání napøíklad: pøíjmení nebo jméno nebo datum narození a pod.";
@@ -97,10 +97,10 @@ $LDNo="Ne";
 
 $LDEditOn="Datum zdokumentování";
 $LDEditBy="Zdokumentoval";
-$LDKeyNr="Klíè èíslo";
+$LDKeyNr="Kez number";
 $LDDocSearch="Hledat v systému MEDOCS";
 
-$LDMedDocOf="Medocs dokument pro pacienta";
+$LDMedDocOf="Medocs document of";
 $LDMedocsElements=array(
 								"",
 								"Pøíjmení",
@@ -147,4 +147,181 @@ $LD_yyyyhMMhdd="yyyy-mm-dd";
 $LD_MMsddsyyyy="mm/dd/yyyy";
 /* 2002-10-13 EL */
 $LDPlsSelectPatientFirst="Nejdøíve je nutné najít pacienta.";
+/* 2002-11-30 EL */
+$LDPatientRegister='Patient registration';
+$LDRegDate='Registration date';
+$LDRegTime='Registration time';
+$LDRegBy='Registered by';
+$LDName2='Second name';
+$LDName3='Third name';
+$LDNameMid='Middle name';
+$LDNameMaiden='Maiden name';
+$LDNameOthers='Other names';
+$LDStreet='Street';
+$LDStreetNr='Nr.';
+$LDTownCity='Town/City';
+$LDProvState='Province/State';
+$LDRegion='Region';
+$LDCountry='Country';
+$LDCitizenship='Citizenship';
+$LDCivilStatus='Civil status'; /* Civil status = married, single, divorced, widow */
+$LDSingle='Single';
+$LDMarried='Married';
+$LDDivorced='Divorced';
+$LDWidowed='Widowed';
+$LDSeparated='Separated';
+$LDCellPhone='Cellphone.';
+$LDFax='Fax';
+$LDEmail='Email';
+$LDZipCode='Zip';
+$LDPhoto='Photo';
+/* 2002-12-02 EL*/
+$LDPatientRegisterTxt='Register patient, search registrations, archive research';
+$LDAdmitNr='Admission Nr.';
+$LDPatient='Patient';
+$LDVisit='Visit';
+$LDVisitTxt='Ambulatory or outpatient admission';
+$LDAdmissionTxt='Inpatient admission, search, research';
+$LDImmunization='Immunization';
+$LDESE='Enter, search, edit';
+$LDImmunizationTxt=$LDESE.' immunization report';
+$LDDRG='Diagnoses (DRG)';
+$LDDRGTxt=$LDESE.' DRG (Diagnosis related groups)';
+$LDProcedures='Procedures';
+$LDProceduresTxt=$LDESE.' therapy procedures';
+$LDPrescriptions='Prescriptions';
+$LDPrescriptionsTxt=$LDESE.' Prescriptions';
+/* 2002-12-03 EL*/
+$LDDiagXResults='Diagnostic Results';
+$LDDiagXResultsTxt='Search, research, display diagnostic results or reports';
+$LDAppointments='Appointments';
+$LDAppointmentsTxt=$LDESE.', research appointments or schedules';
+$LDPatientDev='Development';
+$LDPatientDevTxt=$LDESE.', display reports on patient\'s development';
+$LDWtHt='Weights & Heights';
+$LDWtHtTxt=$LDESE.' weights & heights data';
+$LDPregnancies='Pregnancies';
+$LDPregnanciesTxt=$LDESE.' pregnancy information';
+$LDBirthDetails='Birth details';
+$LDBirthDetailsTxt=$LDESE.' birth details';
+/* 2002-12-07 EL*/
+$LDInsuranceCo='Insurance Co.';
+$LDInsuranceNr_2='Extra Insurance Nr.';
+$LDInsuranceCo_2='Extra Insurance Co.';
+$LDBillType='Billing Type';
+$LDWard='Ward/Clinic';
+$LDMakeWristBand='Make wristbands';
+$LDClickImgToPrint='Click the image to print out.';
+$LDPrintPortraitFormat='Set your printer to landscape format.';
+/* 2002-12-14 EL */
+$LDRegistryNr='PID Nr.';
+$LDRedirectToRegistry='Note: Your search will be redirected to the registration module!';
+/* 2002-12-24 EL */
+$LDSSSNr='SSS Nr.';
+$LDNatIdNr='National ID Nr.';
+$LDEthnicOrigin='Ethnic origin';
+$LDOtherNr='Other number(s)';
+/* 2002-12-25 EL */
+$LDSendBill='Send bill to';
+$LDContactPerson='Contact person';
+$LDOptsFor='Options for this';
+$LDSickReport='Sickness report';
+$LDAnamnesisForm='Anamnesis form';
+$LDConsentDec='Consent declaration';
+$LDUpdate='Update';
+/* 2002-12-29 EL */
+$LDGuarantor='Guarantor';
+$LDCareServiceClass='Care service class';
+$LDRoomServiceClass='Room service class';
+$LDAttDrServiceClass='Medical service class';
+$LDAdmitClass='Admission class';
+/* 2003-02-15 EL*/
+$LDEnterSearchKeyword='Please enter search keyword';
+$LDSearchFoundData='The search found <font color=red><b>~nr~</b></font> relevant data.';
+$LDQuickList='Quicklist';
+$LDSeveralInsurances='Patient has several insurances. Click here to edit.';
+$LDTop='Top';
+$LDInsuranceClass='Insurance class';
+$LDRecordsHistory='DB Record\'s History';
+/* 2003-02-16 EL*/
+$LDNotYetAdmitted='Not yet admitted';
+$LDPatientCurrentlyAdmitted='Patient is currently admitted!';
+$LDOptions='Options';
+/** note the ' ~nr~ ' must not be erased it will be replaced by the script with the number of search results ******/
+$LDSearchFoundAdmit='I found <font color=red><b>~nr~</b></font> relevant admission data.';
+$LDPatientNr='Patient Nr.';
+$LDNoRecordYet='~tag~ has no ~obj~ yet.';
+$LDNoRecordFor='No ~obj~ record for ~tag~ yet.';
+$LDRegistrationNr='Registration Nr.';
+$LDDate='Date';
+$LDType='Type';
+$LDMedicine='Medicine';
+$LDTiter='Titer';
+$LDRefreshDate='Refresh date';
+$LDReportingDept='Reporting Dept';
+$LDReportNr='Report Nr.';
+$LDDelivery='Delivery';
+$LDTime='Time';
+$LDClass='Class';
+$LDOutcome='Outcome';
+$LDNrOfFetus='Nr. of Fetuses';
+$LDDetails='Details';
+/* 2003-03-02 */
+$LDDosage='Dosage';
+$LDAppType='Application type';
+$LDAppBy='Application by';
+$LDNotes='Notes';
+$LDEnterNewRecord='Enter new record';
+$LDPrescription='Prescription';
+$LDDrugClass='Drug Class';
+$LDPrescribedBy='Prescribed by';
+$LDPharmOrderNr='Pharmacy Order Number';
+$LDEncounterNr='Encounter Nr.';
+$LDValue='Value';
+$LDUnit='Unit';
+$LDWeight='Weight';
+$LDHeight='Height';
+$LDMeasuredBy='Measured by';
+$LDSickUntil='Unable to work until (inclusive)';
+$LDStartingFrom='Starting from';
+$LDConfirmedOn='Confirmed on';
+$LDInsurersCopy='Insurer\'s copy';
+$LDDiagnosis2='Diagnosis';
+/* 2003-03-03*/
+$LDBy='By';
+$LDSendCopyTo='Send copy to';
+/* 2003-03-05 EL*/
+$LDAndSym='&';
+$LDReports='Reports';
+$LDRefererDiagnosis='Referer Diagnosis';
+$LDRefererRecomTherapy='Referer recommended therapy';
+$LDShortNotes='Short Notes';
+/* 2003-03-08 EL */
+$LDCreateNewAppointment='Create new appointment';
+$LDDepartment='Department';
+$LDRemindPatient='Remind patient';
+$LDRemindBy='Remind by';
+$LDMail='Mail';
+$LDPurpose='Purpose';
+$LDClinician='Clinician';
+$LDPhysician='Physician';
+$LDBackToOptions='Back to options';
+$LDStatus='Status';
+/* 2003-03-08 EL*/
+$LDUrgency='Urgency';
+$LDNormal='Normal';
+$LDPriority='Priority';
+$LDUrgent='Urgent';
+$LDEmergency='Emergency';
+/* 2003-03-09 EL*/
+$LDCancelReason='Reason for cancellation';
+$LDSureCancelAppt='Are you sure you want to cancel this appointment?';
+$LDEnterCancelReason='Enter the reason for cancellation';
+$LDpending='pending';
+$LDcancelled='cancelled';
+/* 2003-03-10 EL */
+$LDGotMedAdvice='Did patient receive medical advice?';
+/* 2003-03-15 EL */
+$LDShowDocList='Show document list';
+$LDScheduleNewAppointment='Schedule New Appointment';
 ?>

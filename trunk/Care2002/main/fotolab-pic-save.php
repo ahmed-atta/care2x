@@ -1,7 +1,9 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
+* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -10,16 +12,16 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 */
 define('LANG_FILE','specials.php');
 $local_user='ck_fotolab_user';
-require_once('../include/inc_front_chain_lang.php');
+require_once($root_path.'include/inc_front_chain_lang.php');
 
 /* Load date formatter */
-include_once('../include/inc_date_format_functions.php');
+include_once($root_path.'include/inc_date_format_functions.php');
 				
 
 
 if(!$patnum||!$firstname||!$lastname||!$bday||!$maxpic)
 	{header("Location:fotolab-dir-select.php?sid=$sid&lang=$lang&maxpic=$maxpic&nopatdata=1"); exit;}; 
-require_once('../include/inc_config_color.php');
+require_once($root_path.'include/inc_config_color.php');
 require('../global_conf/inc_remoteservers_conf.php');
 
 $dirselectfile='fotolab-dir-select.php';
@@ -53,7 +55,9 @@ function gethelp(x,s,x1,x2,x3)
 </script>
 
 <?php
-require('../include/inc_css_a_hilitebu.php');
+require($root_path.'include/inc_js_gethelp.php');
+require($root_path.'include/inc_css_a_hilitebu.php');
+
 ?>
 
 </HEAD>
@@ -67,9 +71,9 @@ require('../include/inc_css_a_hilitebu.php');
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" >
 <FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG>&nbsp;<?php echo $LDFotoLab ?></STRONG></FONT></td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();"><img 
-<?php echo createLDImgSrc('../','back2.gif','0','absmiddle') ?> 
+<?php echo createLDImgSrc($root_path,'back2.gif','0','absmiddle') ?> 
 style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a 
-href="javascript:gethelp('fotolab.php','save','')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc('../','close2.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a></td>
+href="javascript:gethelp('fotolab.php','save','')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a></td>
 </tr>
 <tr valign=top >
 <td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
@@ -104,7 +108,7 @@ if($maxpic)
 		       }
 			    else $picfilename[$i]=$picdir.'_'.formatDate2Std($$shotdate,$date_format).'_'.$$shotnr.'.'.$picext;
 		
-		       echo $HTTP_POST_FILES[$picfile]['name'].' <img '.createComIcon('../','fwd.gif','0','absmiddle').'> ';
+		       echo $HTTP_POST_FILES[$picfile]['name'].' <img '.createComIcon($root_path,'fwd.gif','0','absmiddle').'> ';
 		       if($disc_pix_mode)
 		       {
 			      if(!is_dir($d))	mkdir($d,0777); // if $d directory not exist create it with CHMOD 777
@@ -194,7 +198,7 @@ if(!$disc_pix_mode)
 ?>
 <font color="#cc0000"><b><?php echo "$LDSave $LDOptions:" ?></b></font>
 <form action="<?php echo $dirselectfile ?>" method="post">
-<img <?php echo createComIcon('../','video.gif','0') ?>><br><?php echo "$LDSave " ?><?php echo $LDAdditional ?> 
+<img <?php echo createComIcon($root_path,'video.gif','0') ?>><br><?php echo "$LDSave " ?><?php echo $LDAdditional ?> 
 <input type="text" name="maxpic" size=1 maxlength=2 value="<?php echo $maxpic ?>"> <?php echo $LDMorePics ?>:<input type="submit" value="<?php echo $LDGO ?>">
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
 <input type="hidden" name="lang" value="<?php echo $lang ?>">
@@ -204,7 +208,7 @@ if(!$disc_pix_mode)
 </form>
 <p>
 <form action="fotolab-dir-select.php" method="post">
-<img <?php echo createComIcon('../','video.gif','0') ?>><br><?php echo $LDSave ?><input type="text" name="maxpic" size=1 maxlength=2 value="<?php echo $maxpic ?>">
+<img <?php echo createComIcon($root_path,'video.gif','0') ?>><br><?php echo $LDSave ?><input type="text" name="maxpic" size=1 maxlength=2 value="<?php echo $maxpic ?>">
 <?php echo $LDNewPics ?>:<input type="submit" value="<?php echo $LDGO ?>">
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
 <input type="hidden" name="lang" value="<?php echo $lang ?>">

@@ -532,12 +532,7 @@ $LD900='9.00';
 
 $LD1500='15.00';
 
-
-
 /* 2002-10-14 EL */
-
 $LDDone='Det er gjort! Flytt skjema til arkivet';
-
-
 
 ?>

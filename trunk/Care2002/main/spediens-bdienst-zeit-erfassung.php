@@ -1,7 +1,9 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
+* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -10,8 +12,8 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 */
 define('LANG_FILE','or.php');
 define('NO_2LEVEL_CHK',1);
-require_once('../include/inc_front_chain_lang.php');
-require_once('../include/inc_config_color.php'); // load color preferences
+require_once($root_path.'include/inc_front_chain_lang.php');
+require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
 /* Check the date values */
 if(!isset($pyear)||empty($pyear)) $pyear=date('Y');
@@ -27,15 +29,15 @@ if($retpath=='spec') $breakfile="spediens.php?sid=".$sid."&lang=".$lang;
  else $breakfile="op-doku.php?sid=".$sid."&lang=".$lang;
 
 /********************************* Resolve the department and op room ***********************/
-require('../include/inc_resolve_opr_dept.php');
+require($root_path.'include/inc_resolve_opr_dept.php');
 
 
 /* Establish db connection */
-require('../include/inc_db_makelink.php');
-if($link&&$DBLink_OK) 
+if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
+if($dblink_ok)
 {	
 	    /* Load date formatter */
-        include_once('../include/inc_date_format_functions.php');
+        include_once($root_path.'include/inc_date_format_functions.php');
         
 		
 		//include_once('../include/inc_editor_fx.php');
@@ -81,10 +83,10 @@ if($link&&$DBLink_OK)
 											  history='".$$hist."Updated: ".$history_txt."'
 										WHERE report_nr='".$$td."'";
 											
-								if($ergebnis=mysql_query($sql,$link))
+								if($ergebnis=$db->Execute($sql))
        							{
 									//echo $sql." new update <br>";
-									//mysql_close($link);
+									//
 									//header("location:$thisfile?sid=$sid&saved=1&dept=$dept&pmonth=$pmonth&pyear=$pyear");
 								}
 								else
@@ -141,7 +143,7 @@ if($link&&$DBLink_OK)
 										NULL
 									)";
 
-									if(!$ergebnis=mysql_query($sql,$link))  echo "<p>".$sql."<p>$LDDbNoSave"; 
+									if(!$ergebnis=$db->Execute($sql))  echo "<p>".$sql."<p>$LDDbNoSave"; 
 								 } // end of if
 							}// end of else	
 					  } // end of if $$tg
@@ -175,10 +177,10 @@ if($link&&$DBLink_OK)
 				$sql.=" OR  date='$ty-$tm-$td'   ORDER BY date";
 			}
 			//echo $sql."<br>file found!";
-			if($ergebnis=mysql_query($sql,$link))
+			if($ergebnis=$db->Execute($sql))
        		{
 				$rows=0; 
-				while( $result=mysql_fetch_array($ergebnis))
+				while( $result=$ergebnis->FetchRow())
 				{
 					if($result) $content[]=$result;
 					 $rows++;
@@ -203,10 +205,9 @@ if($link&&$DBLink_OK)
 <?php echo setCharSet(); ?>
 
 <?php 
-require('../include/inc_css_a_hilitebu.php');
-?>
-
-<script language="javascript">
+require($root_path.'include/inc_js_gethelp.php');
+require($root_path.'include/inc_css_a_hilitebu.php');
+?><script language="javascript">
 <!--
 	var newdataflag=0;
 	var speichern=0;
@@ -390,14 +391,14 @@ function gethelp(x,s,x1,x2,x3)
 	window.helpwin.moveTo(0,0);
 }
 
-<?php require('../include/inc_checkdate_lang.php'); ?>
+<?php require($root_path.'include/inc_checkdate_lang.php'); ?>
 
 //-->
 </script>
 
-<script language="javascript" src="../js/checkdate.js" type="text/javascript"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
 
-<script language="javascript" src="../js/setdatetime.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
 
 </HEAD>
 
@@ -408,7 +409,7 @@ function gethelp(x,s,x1,x2,x3)
 <tr valign=top>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>"  height="35"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG>
  &nbsp;<?php echo "$LDOnCallDuty ".$opabt['$dept']; ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();"><img <?php echo createLDImgSrc('../','back2.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="javascript:gethelp('op_duty.php','dutydoc','<?php echo $rows ?>')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc('../','close2.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();"><img <?php echo createLDImgSrc($root_path,'back2.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="javascript:gethelp('op_duty.php','dutydoc','<?php echo $rows ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a></td>
 </tr>
 <tr>
 <td bgcolor=#cde1ec valign=top colspan=2><p>
@@ -558,15 +559,15 @@ echo '">
 <input type="hidden" name="mode" value="save">
 <!-- <input type=submit value="<?php echo $LDSave ?>">  
  -->
- <input type="image" <?php echo createLDImgSrc('../','savedisc.gif','0','absmiddle') ?>>  
+ <input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0','absmiddle') ?>>  
 <input type=reset value="<?php echo $LDReset ?>" onClick=winreset()>
 </td>
 <td align="right">
 
 <!-- <INPUT TYPE="BUTTON" VALUE="<?php echo $LDPrint ?>" ONCLICK="if (window.echo) {window.echo();} else {window.alert('<?php echo $LDAlertNoechoer ?>');}">
  -->
- <img <?php echo createLDImgSrc('../','printout.gif','0','absmiddle') ?> ONCLICK="if (window.print) {window.print();} else {window.alert('<?php echo $LDAlertNoechoer ?>');}">
-&nbsp;&nbsp;<a href="javascript:closeifok()"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> align=absmiddle></a>
+ <img <?php echo createLDImgSrc($root_path,'printout.gif','0','absmiddle') ?> ONCLICK="if (window.print) {window.print();} else {window.alert('<?php echo $LDAlertNoechoer ?>');}">
+&nbsp;&nbsp;<a href="javascript:closeifok()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> align=absmiddle></a>
 </td>
 </tr>
 </table>
@@ -582,11 +583,9 @@ echo '">
 <tr>
 <td bgcolor=silver height=70 colspan=2>
 <?php
-if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
-include('../language/'.$lang.'/'.$lang.'_copyrite.php');
-  else include('../language/en/en_copyrite.php');?>
-</td>
-</tr>
+require($root_path.'include/inc_load_copyrite.php');
+?>
+</td></tr>
 </table>        
 &nbsp;
 

@@ -8,7 +8,7 @@ $LDSaveBut='Save';
 $LDFinishBut='Finish';
 $LDArticle1='First (1) article';
 $LDArticle2='Second (2) article';
-$DArticle3='Third (3) article';
+$LDArticle3='Third (3) article';
 $LDArticle4='Fourth (4) article';
 $LDArticle5='Secondary (5) article';
 
@@ -17,7 +17,7 @@ $LDArticleTxt='Article';
 $LDTitleTag='Title';
 $LDTitleMaxNote='Maximum 50';
 $LDHeader='Header';
-$LDHeaderMaxNote='Maximum 50';
+$LDHeaderMaxNote='Maximum 250';
 $LDNews='News article';
 /**
 * Do not translate the '<font size=1>' and '</font>'
@@ -37,7 +37,7 @@ $LDAlertDate='Please supply a publish date';
 $LDWrittenOn='Written on:';
 $LDWrittenFrom='By:';
 
-$LDArticleSaved='The article is saved. You are seeing a preview.';
+$LDArticleSaved='The article was saved. You are seeing a preview.';
 $LDBackTxt='Back';
 
 $LDQuickInfo='Quick Informer';
@@ -62,7 +62,7 @@ $LDCalendar ='Calendar';
 $LDHelp='Help';
 $LDMore='more to article';
 
-$LDCafeNews='cafeteria news';
+$LDCafeNews='Cafeteria News';
 $LDConfirmEdit='Do you want to edit the data in the cafeteria news?';
 $LDNewsDummy=array(1=>'first',2=>'second',3=>'third',4=>'fourth');
 $LDMenuToday='Today\'s menu';
@@ -100,7 +100,7 @@ $LDMarkGroup='You must select a product group to edit.<br> Then click  \'<font c
 $LDEnterGroup='Enter the name of the new group.<br>Then click \'<font color=\'#000000\'>Continue...</font>\'';
 $LDProdGroup='Product group';
 $LDClk2End='To finish please click this >> ';
-$LDPriceSaved='The following product(s) and price(s) are saved.';
+$LDPriceSaved='The following product(s) and price(s) were saved.';
 
 $LDMarkWeek='Please select the week.';
 $LDClkContinue='Then click \'Continue...\'.';
@@ -118,9 +118,15 @@ $LDPlsSelectCurrency='Please select currency.';
 $LDmain='main';
 $LDClk2AddCurrency='To enter new currency type, please click here. (Note: You are going to leave cafenews!)';
 
-$LDMenuSaved='The menu is saved.';
+$LDMenuSaved='The menu was saved.';
 /* 2002-10-13 EL */
 $LD_ddpMMpyyyy='dd.mm.yyyy';
 $LD_yyyyhMMhdd='yyyy-mm-dd';
 $LD_MMsddsyyyy='mm/dd/yyyy';
+/* 2003-02-11*/
+$LDSubmitNews='Submit News';
+$LDDelete='Delete';
+$LDDeleteCurrency='Are you sure, you really want to delete this currency?';
+$LDNoMainDelete='You cannot delete a main currency. \nPlease set a different main currency first.';
+$LDCurrencyExisting='This currency exists already!';
 ?>

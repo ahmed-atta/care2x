@@ -60,7 +60,7 @@ require_once('../../include/inc_img_fx.php');
 </table>        
 <p>
 <?php
-$path_root='../../';
+$root_path='../../';
 require('id_copyrite.php'); 
 ?>
 </FONT>

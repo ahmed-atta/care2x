@@ -54,7 +54,7 @@ sufficiente premere il bottone "Ricarica" del browser.
 </table>        
 <p>
 <?php
-$path_root='../../';
+$root_path='../../';
 require('it_copyrite.php'); 
 ?>
 </FONT>

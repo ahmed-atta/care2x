@@ -25,6 +25,8 @@ $dept=array('Allgemeine Chirurgie',
 					'Sonographie',
 					'Nuklear Medizin Ambulanz',
 					'Innere Medizin Ambulanz');
+					
+
 /** 
 * Die variabel $target bitte NICHT übersetzen !!
 */

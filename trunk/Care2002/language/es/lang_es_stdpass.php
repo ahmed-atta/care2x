@@ -110,5 +110,7 @@ $LDBloodOrder='Pedido reserva de Sangre';
 $LDPendingRequest='Tareas pendientes';
 /* 2002-10-06 EL*/
 $LDLoggedOut='Logged out';
+/* 2003-03-18 EL */
+$LDNursesList='Nurses\' List';
 
 ?>

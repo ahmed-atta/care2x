@@ -1,7 +1,9 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
+* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -10,9 +12,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 */
 define("LANG_FILE","abteilung.php");
 define('NO_2LEVEL_CHK',1);
-require_once('../include/inc_front_chain_lang.php');
+require_once($root_path.'include/inc_front_chain_lang.php');
 
-require_once('../include/inc_config_color.php');
+require_once($root_path.'include/inc_config_color.php');
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
@@ -21,7 +23,9 @@ require_once('../include/inc_config_color.php');
  <TITLE><?php echo $LDOpenHrsTxt ?></TITLE>
 
 <?php
-require('../include/inc_css_a_hilitebu.php');
+require($root_path.'include/inc_js_gethelp.php');
+require($root_path.'include/inc_css_a_hilitebu.php');
+
 ?>
 <script language="">
 <!-- Script Begin
@@ -42,11 +46,11 @@ function gethelp(x)
 
 <tr valign=top height=45>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" >
-	<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+3  FACE="Arial">
+	<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
 	<STRONG>&nbsp; &nbsp; <?php echo $LDOpenHrsTxt ?></STRONG></FONT>
 </td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])echo'<a href="#" onClick=history.back()><img '.createLDImgSrc('../','back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a>';?><a href="javascript:gethelp()"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="startframe.php?sid=<?php echo "$sid&lang=$lang";?>"><img <?php echo createLDImgSrc('../','close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td></tr>
+<?php if($cfg['dhtml'])echo'<a href="#" onClick=history.back()><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a>';?><a href="javascript:gethelp()"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="startframe.php?sid=<?php echo "$sid&lang=$lang";?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td></tr>
 <tr valign=top >
 <td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2><p><br>
 <ul>
@@ -74,7 +78,7 @@ echo "\r\n";
  
 
 <p>
-<a href="javascript:window.history.back()"><img <?php echo createLDImgSrc('../','back2.gif','0') ?>  alt="<?php echo $LDBackTxt ?>"></a>
+<a href="javascript:window.history.back()"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>  alt="<?php echo $LDBackTxt ?>"></a>
 
 <p>
 </ul>
@@ -84,7 +88,7 @@ echo "\r\n";
 <tr valign=top>
 <td bgcolor="<?php echo $cfg['bot_bgcolor']; ?>" colspan=2> 
 <?php
-if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
+if(file_exists($root_path.'language/'.$lang.'/'.$lang.'_copyrite.php'))
 include('../language/'.$lang.'/'.$lang.'_copyrite.php');
   else include('../language/en/en_copyrite.php');
 ?>

@@ -268,5 +268,4 @@ $LD1500='15.00';
 
 /* 2002-10-14 EL */
 $LDDone='It\'s done! Move the form to the archive';
-
 ?>

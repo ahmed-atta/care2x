@@ -1,7 +1,7 @@
 <?php
 
- 	include('../include/inc_db_makelink.php');
-	if($link&&$DBLink_OK) 
+ 	if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
+	if($dblink_ok)
 	{
 	
 	$sql="CREATE TABLE test_icd10_de (
@@ -20,7 +20,7 @@
    KEY diagnosis_code (diagnosis_code)
 ) ";
 
-   if(!mysql_query($sql,$link)) echo "cannot create db";
+   if(!$db->Execute($sql)) echo "cannot create db";
 	
 	}
 	

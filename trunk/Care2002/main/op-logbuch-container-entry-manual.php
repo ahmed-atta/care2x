@@ -1,33 +1,30 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','or.php');
 $local_user='ck_op_pflegelogbuch_user';
-require_once('../include/inc_front_chain_lang.php');
+require_once($root_path.'include/inc_front_chain_lang.php');
 
-$globdata="sid=$sid&lang=$lang&op_nr=$op_nr&dept=$dept&saal=$saal&patnum=$patnum&pday=$pday&pmonth=$pmonth&pyear=$pyear";
+$globdata="sid=$sid&lang=$lang&op_nr=$op_nr&dept_nr=$dept_nr&saal=$saal&enc_nr=$enc_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear";
 
-if(($mode=="force_add")&&$containername&&$pcs)
-{
-include('../include/inc_db_makelink.php');
-if($link&&$DBLink_OK)  
-	{	
+if(($mode=='force_add')&&$containername&&$pcs){
+	if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
+	if($dblink_ok){	
 	  	$dbtable='care_nursing_op_logbook';
 		$sql="SELECT container_codedlist FROM $dbtable 
-					WHERE dept='$dept'
+					WHERE dept_nr='$dept_nr'
 					AND op_room='$saal'
 					AND op_nr='$op_nr'
 					AND op_src_date='$pyear$pmonth$pday'
-					AND patnum='$patnum'";
-		if($mat_result=mysql_query($sql,$link))
+					AND encounter_nr='$enc_nr'";
+		if($mat_result=$db->Execute($sql))
        	{
-			$matrows=0;
-			if( $matlist=mysql_fetch_array($mat_result)) $matrows++;
-			if($matrows)
+			if($matrows=$mat_result->RecordCount())
 			{
-				mysql_data_seek($mat_result,0); //reset the variable
-				$matlist=mysql_fetch_array($mat_result);
+				$matlist=$mat_result->FetchRow();
 						//$datafound=1;
-						//$pdata=mysql_fetch_array($ergebnis);
+						//$pdata=$ergebnis->FetchRow();
 						//echo $sql."<br>";
 						//echo $rows;
 			}
@@ -52,13 +49,13 @@ if($link&&$DBLink_OK)
 						
 						$dbtable='care_nursing_op_logbook';
 						$sql="UPDATE $dbtable SET container_codedlist='$matlist[0]'
-								WHERE dept='$dept'
+								WHERE dept_nr='$dept_nr'
 								AND op_room='$saal'
 								AND op_nr='$op_nr'
 								AND op_src_date='$pyear$pmonth$pday'
-								AND patnum='$patnum'";
+								AND encounter_nr='$enc_nr'";
 						//echo $sql;
-						if($mat_result=mysql_query($sql,$link))
+						if($mat_result=$db->Execute($sql))
 						{
   							header("location:op-logbuch-container-list.php?$globdata&item_idx=$item_idx&chg=1");
 							exit;
@@ -85,7 +82,7 @@ if($link&&$DBLink_OK)
 
 function popinfo(b)
 {
-	urlholder="products-bestellkatalog-popinfo.php?sid=<?php echo "$sid&lang=$lang"; ?>&keyword="+b+"&mode=search&cat=pharma";
+	urlholder="products-bestellkatalog-popinfo.php<?php echo URL_APPEND; ?>&keyword="+b+"&mode=search&cat=pharma";
 	ordercatwin=window.open(urlholder,"ordercat","width=850,height=550,menubar=no,resizable=yes,scrollbars=yes");
 	}
 
@@ -152,17 +149,17 @@ var brwsVer=parseInt(navigator.appVersion);var timer;var curSubMenu='';
 <input type="hidden" name="lang" value="<?php echo $lang ?>">
 <input type="hidden" name="mode" value="force_add">
 <input type="hidden" name="op_nr" value="<?php echo $op_nr ?>">
-<input type="hidden" name="patnum" value="<?php echo $patnum ?>">
-<input type="hidden" name="dept" value="<?php echo $dept ?>">
+<input type="hidden" name="enc_nr" value="<?php echo $enc_nr ?>">
+<input type="hidden" name="dept_nr" value="<?php echo $dept_nr ?>">
 <input type="hidden" name="saal" value="<?php echo $saal ?>">
 <input type="hidden" name="pday" value="<?php echo $pday ?>">
 <input type="hidden" name="pmonth" value="<?php echo $pmonth ?>">
 <input type="hidden" name="pyear" value="<?php echo $pyear ?>">
 <p>
-<input type="image" <?php echo createLDImgSrc('../','savedisc.gif','0') ?> width=99 height=24 align="absmiddle" alt="<?php echo $LDSave ?>">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:document.plist.reset()" title="<?php echo $LDReset ?>"><img <?php echo createLDImgSrc('../','reset.gif','0','absmiddle') ?>></a>
+<input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?> width=99 height=24 align="absmiddle" alt="<?php echo $LDSave ?>">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:document.plist.reset()" title="<?php echo $LDReset ?>"><img <?php echo createLDImgSrc($root_path,'reset.gif','0','absmiddle') ?>></a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="op-logbuch-material-list.php?<?php echo $globdata ?>"><img <?php echo createLDImgSrc('../','cancel.gif','0','absmiddle') ?> alt="<?php echo $LDCancel ?>"></a>
+<a href="op-logbuch-material-list.php?<?php echo $globdata ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0','absmiddle') ?> alt="<?php echo $LDCancel ?>"></a>
 </form>
 
 

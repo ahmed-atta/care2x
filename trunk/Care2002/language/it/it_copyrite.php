@@ -1,10 +1,16 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php
+
+require($root_path.'include/inc_credits_openwin.php');
+?>
 <FONT    SIZE=1  FACE="Arial" color=gray>
-Beta version 1.0  by Elpidio Latorilla & Intellin.org<p>
-CARE 2002 è scritto e distribuito gratuitamente in base alla licenza GNU General Public License.
-Per dettagli sulla licenza, leggere la <a href="../legal_gnu_gpl.htm" target=_new>copia della licenza</a>. 
- Per altre domande, contattare Elpidio Latorilla all'indirizzo <a href=mailto:elpidio@latorilla.com>elpidio@latorilla.com</a>.
+La versione italiana di Care 2002 è stata curata da Giuseppe Scarpi: si prega quindi di inviare a lui le eventuali domande
+riguardanti la traduzione. Grazie.
+Beta version 1.0.04 CARE 2002 è scritto e distribuito gratuitamente in base alla licenza GNU General Public License.
+Per dettagli sulla licenza, leggere la <a href="<?php echo $root_path ?>legal_gnu_gpl.htm" target=_new>copia della licenza</a>. 
+ Per altre domande, contattare <a href=mailto:info@care2x.com>info@care2x.com</a>.
 <p>
 <font size=1 face="arial">
-<a href="../language/it/it_privacy.htm" target="pp">Privacy: le nostre linee guida</a><br></font>
+[ <a href="<?php echo $root_path ?>language/it/it_privacy.htm" target="pp">Tutela della Privacy: Le nostre regole di privacy</a> ]
+[ <a href="javascript:openCreditsWindow()">Ringraziamenti</a> ]<br></font>
+<br></font>
 </FONT>

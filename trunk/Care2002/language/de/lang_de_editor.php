@@ -116,4 +116,10 @@ $LDMenuSaved="Der menu is gespeichert.";
 $LD_ddpMMpyyyy='TT.MM.JJJJ';
 $LD_yyyyhMMhdd='JJJJ-MM-TT';
 $LD_MMsddsyyyy='MM/TT/JJJJ';
+/* 2003-02-11 EL*/
+$LDSubmitNews='Nachricht Schreiben';
+$LDDelete='Löschen';
+$LDDeleteCurrency='Wollen Sie diese Währungsinformation wirklich löschen?';
+$LDNoMainDelete='Die Hauptwährung darf nicht gelöscht werden!. \nBitte stellen Sie zuerst eine andere Hauptwährung ein.';
+$LDCurrencyExisting='Diese Währungsinformation ist bereits vorhanden!';
 ?>

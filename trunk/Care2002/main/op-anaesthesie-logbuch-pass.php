@@ -39,9 +39,9 @@ if ($versand=="Abschicken")
 				if ($link)
  				{ if(mysql_select_db($dbname,$link)) 
 					{	$sql='SELECT * FROM mahopass WHERE mahopass_id="'.$username.'"';
-						$ergebnis=mysql_query($sql,$link);
+						$ergebnis=$db->Execute($sql);
 						if($ergebnis)
-							{$zeile=mysql_fetch_array($ergebnis);
+							{$zeile=$ergebnis->FetchRow();
 								if (($zeile[mahopass_password]==$keyword)&&($zeile[mahopass_id]==$username))
 								{	
 									if (!($zeile[mahopass_lockflag]))
@@ -59,7 +59,7 @@ if ($versand=="Abschicken")
 							else {$passtag=1;};
 	
 					};
-				mysql_close($link);
+				
 				}
 				 else 
 				{ echo "Verbindung zur Datenbank konnte nicht hergestellt werden.<br>"; }
@@ -182,8 +182,8 @@ Benutzername eingeben:<br></font>
 </table>        
 
 <p>
-<img src="../img/small_help.gif"> <a href="ucons.php<?php echo "?lang=$lang" ?>">Einführung in das OP Logbuch</a><br>
-<img src="../img/small_help.gif"> <a href="ucons.php<?php echo "?lang=$lang" ?>">Wie mache ich was mit OP Logbuch?</a><br>
+<img src="../img/small_help.gif"> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>">Einführung in das OP Logbuch</a><br>
+<img src="../img/small_help.gif"> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>">Wie mache ich was mit OP Logbuch?</a><br>
 <HR>
 <p>
 

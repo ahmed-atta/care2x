@@ -1,7 +1,9 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
+* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -10,8 +12,8 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 */
 define('LANG_FILE','drg.php');
 $local_user='ck_op_pflegelogbuch_user';
-require_once('../include/inc_front_chain_lang.php');
-require_once('../include/inc_config_color.php');
+require_once($root_path.'include/inc_front_chain_lang.php');
+require_once($root_path.'include/inc_config_color.php');
 if (!$opnr||!$pn) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;}; 
 
 if($saveok)
@@ -55,17 +57,17 @@ else
 			$sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE (code LIKE "%'.$keyword.'%" OR description LIKE "'.$keyword.'%") AND lang="'.$lang.'" LIMIT 0,100';
 			else
 				$sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE (code LIKE "%'.$keyword.'%" OR description LIKE "%'.$keyword.'%") AND lang="'.$lang.'"  LIMIT 0,100';
-			if($ergebnis=mysql_query($sql,$link))
+			if($ergebnis=$db->Execute($sql))
        		{
 				$linecount=0;
-				if ($zeile=mysql_fetch_array($ergebnis)) $linecount++;
+				if ($zeile=$ergebnis->FetchRow()) $linecount++;
 				else
 				{
 					$sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE synonyms LIKE "%'.$keyword.'%"  AND lang="'.$lang.'" LIMIT 0,100';
         		
-					if($ergebnis=mysql_query($sql,$link))
+					if($ergebnis=$db->Execute($sql))
        				{
-						if ($zeile=mysql_fetch_array($ergebnis)) $linecount++;
+						if ($zeile=$ergebnis->FetchRow()) $linecount++;
 					}
 				}
 				//echo $sql;
@@ -76,12 +78,12 @@ else
 }	
 
 /* Load the icon images */
-$img_delete=createComIcon('../','delete2.gif','0','right');
-$img_arrow=createComIcon('../','l_arrowgrnsm.gif','0','absmiddle');
-$img_info=createComIcon('../','button_info.gif','0','absmiddle');
-$img_bubble=createComIcon('../','bubble2.gif','0','absmiddle');
-$img_blue=createComIcon('../','l2-blue.gif','0');
-$img_t2=createComIcon('../','t2-blue.gif','0');
+$img_delete=createComIcon($root_path,'delete2.gif','0','right');
+$img_arrow=createComIcon($root_path,'l_arrowgrnsm.gif','0','absmiddle');
+$img_info=createComIcon($root_path,'button_info.gif','0','absmiddle');
+$img_bubble=createComIcon($root_path,'bubble2.gif','0','absmiddle');
+$img_blue=createComIcon($root_path,'l2-blue.gif','0');
+$img_t2=createComIcon($root_path,'t2-blue.gif','0');
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -126,7 +128,7 @@ function checkselect(d)
 </script>
  
   <?php 
-require('../include/inc_css_a_hilitebu.php');
+require($root_path.'include/inc_css_a_hilitebu.php');
 ?>
  
 </HEAD>
@@ -141,7 +143,7 @@ document.searchdata.keyword.select();document.searchdata.keyword.focus();
 <FONT    SIZE=-1  FACE="Arial">
 <ul>
 <FORM action="<?php echo $thisfile ?>" method="post" name="searchdata" onSubmit="return pruf(this)">
-<a href="javascript:window.close()"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="right"></a>
+<a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> align="right"></a>
 <?php if(!$showonly) : ?>
 <FONT    SIZE=3  FACE="verdana,Arial" color="#660000"><b><?php echo $LDOperation ?></b>&nbsp;
 </font>
@@ -300,7 +302,7 @@ function drawdata(&$data)
 				{ 
 					$idx=0;
 					mysql_data_seek($ergebnis,0);
-					while($zeile=mysql_fetch_array($ergebnis))
+					while($zeile=$ergebnis->FetchRow())
 					{
 							drawdata($zeile);
 							//$idx++;
@@ -327,13 +329,13 @@ function drawdata(&$data)
 </form>
 <?php else : ?>
 <p>
-<a href="javascript:window.close()"><img <?php echo createLDImgSrc('../','close2.gif','0') ?>></a>
+<a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>></a>
 <?php endif ?>
 <?php if(($linecount>15)&&!$showonly) : ?>
 
 						<p>
 						<FORM action="<?php echo $thisfile ?>" method="post" onSubmit="return pruf(this)" name="form2">
-						<a href="javascript:window.close()"><img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="right"></a>
+						<a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> align="right"></a>
 						<font face="Arial,Verdana"  color="#000000" size=-1>
 						<INPUT type="text" name="keyword" size="14" maxlength="25" value="<?php echo $keyword ?>"> 
 						<INPUT type="submit" name="versand" value="<?php echo $LDSearch ?>">

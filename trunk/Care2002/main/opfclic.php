@@ -1,7 +1,9 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
+* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -9,9 +11,11 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 * See the file "copy_notice.txt" for the licence notice
 */
 parse_str($ck_comdat,$varia);
-$fileforward="oplogtimebar.php?sid=$sid&lang=$lang&patnum=$varia[patnum]&op_nr=$varia[op_nr]&dept=$varia[dept]&saal=$varia[saal]&pyear=$varia[pyear]&pmonth=$varia[pmonth]&pday=$varia[pday]&scrolltab=$v";
+$fileforward="oplogtimebar.php?sid=$sid&lang=$lang&enc_nr=".$varia['enc_nr']."&op_nr=".$varia['op_nr']."&dept_nr=".$varia['dept_nr']."&saal=".$varia['saal']."&pyear=".$varia['pyear']."&pmonth=".$varia['pmonth']."&pday=".$varia['pday']."&scrolltab=$time";
 //echo $g;
 //echo $fileforward;
+$g=$group;
+$v=$time;
 switch($g)
 {
 	case "entry_out": $title="Einschleusse- Ausschleusezeiten";
@@ -47,41 +51,38 @@ switch($g)
 	default:{header("Location: invalid-access-warning.php?mode=close"); exit;}; 
 }
 //echo $g;
-
 $dbtable='care_nursing_op_logbook';
 
 /* Establish db connection */
-require('../include/inc_db_makelink.php');
-if($link&&$DBLink_OK) 
+if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
+if($dblink_ok)
 {	
-
 			// check if entry is already existing
-				$sql="SELECT tid,$element FROM $dbtable 
-						WHERE patnum='$varia[patnum]' 
-						AND dept='$varia[dept]' 
-						AND op_room='$varia[saal]' 
-						AND op_nr='$varia[op_nr]'";
-				if($ergebnis=mysql_query($sql,$link))
+				$sql="SELECT $element FROM $dbtable 
+						WHERE encounter_nr='".$varia['enc_nr']."' 
+						AND dept_nr='".$varia['dept_nr']."' 
+						AND op_room='".$varia['saal']."' 
+						AND op_nr='".$varia['op_nr']."'";
+				if($ergebnis=$db->Execute($sql))
        			{
 					//echo $sql." checked <br>";
 					
-					$rows=0;
-					if( $content=mysql_fetch_array($ergebnis)) $rows++;
+					$rows=$ergebnis->RecordCount();
 					if($rows==1)
 						{
-							mysql_data_seek($ergebnis,0);
-							$content=mysql_fetch_array($ergebnis);
+							$content=$ergebnis->FetchRow();
     						if((trim($content[$element])!="")&&($content[$element]!=NULL))
 							{							
 								//echo "im here";
+								//echo $content[$element];
 								$ebuf=explode("~",trim($content[$element]));
 
 								sort($ebuf,SORT_REGULAR);
 								$laste=(float) 0;
 								$append=0;
+								//echo $v."<br>";
 								$vf=(float) $v;
 								$esize=sizeof($ebuf);
-								//echo $v."<br>";
 								for($i=0;$i<$esize;$i++)
 								{
 									parse_str(trim($ebuf[$i]),$elem);
@@ -150,16 +151,16 @@ if($link&&$DBLink_OK)
 							}	
 					 		// $dbuf=htmlspecialchars($dbuf);
 							//echo $dbuf;
-							$sql="UPDATE $dbtable SET $element='$dbuf',tid='$content[tid]'
-										WHERE patnum='$varia[patnum]'
-											AND dept='$varia[dept]'
-											AND op_room='$varia[saal]'
-											AND op_nr='$varia[op_nr]'";
+							$sql="UPDATE $dbtable SET $element='$dbuf'
+										WHERE encounter_nr='".$varia['enc_nr']."'
+										AND dept_nr='".$varia['dept_nr']."' 
+										AND op_room='".$varia['saal']."' 
+										AND op_nr='".$varia['op_nr']."'";
 											
-							if($ergebnis=mysql_query($sql,$link))
+							if($ergebnis=$db->Execute($sql))
        							{
 									//echo $sql." new update <br> resetmain= $resetmainput";
-									mysql_close($link);
+									
 									//if((($g=="entry_out")||($g=="cut_close"))&&$resetmainput) header("Location: $fileforward&resetmainput=1");
  											//else header("Location: $fileforward");									
 									header("Location: $fileforward&resetmainput=$resetmainput");
@@ -183,9 +184,8 @@ if($link&&$DBLink_OK)
 									exit;
 							}
 				
-	 			}else echo "<p>".$sql."<p>Das Lesen  aus der Datenbank $dbtable ist gescheitert."; 
+	 			}else echo "<p>".$sql."<p>$LDDbNoRead"; 
 
-  } else { echo "$db_noconnect $sql<br>"; }
-
+  } else { echo "$LDDbNoLink $sql<br>"; }
 header("Location: $fileforward");
 ?>

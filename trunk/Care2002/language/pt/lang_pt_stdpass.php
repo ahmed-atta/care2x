@@ -110,4 +110,6 @@ $LDBloodOrder='Requisitar produtos de sangue';
 $LDPendingRequest='Requisições pendentes';
 /* 2002-10-06 EL*/
 $LDLoggedOut='Sessão Terminada';
+/* 2003-03-18 EL */
+$LDNursesList='Nurses\' List';
 ?>

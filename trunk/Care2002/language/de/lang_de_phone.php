@@ -96,5 +96,5 @@ $LDHowEnter="Wie gebe ich neue Telefondaten ein?";
 $LDHow2SearchPhone="Wie finde ich eine Telefonnummer?";
 $LDUpdate="Aktualisieren bzw. ändern";
 
-$LDDirData="Verzeichniseintrag nr. <font color=\"red\">~nr~</font> aktualisieren bzw. ändern";
+$LDDirData="Verzeichniseintrag nr. <font color=\"red\">~nr~</font> aktualisieren bzw. ändern.";
 ?>

@@ -1,11 +1,4 @@
-<?
-$LDDbNoLink="Impossibile connettersi al database!";
-$LDDbNoRead="Impossibile leggere dal database!";
-$LDDbNoSave="Impossibile scrivere nel database!";
-$LDDbNoUpdate="Impossibile aggiornare il database";
-$LDDbNoLastData="Gli ultimi dati non sono stati trovati!";
-$LDDbNoDelete="Cancellazione non riuscita!";
-
+<?php
 $LDNews="News";
 $LDNewsTxt="Scrivere il sommario delle news";
 $LDMemo="Memo";
@@ -204,4 +197,7 @@ $LDDisplay2="Modo 2";
 $LDDisplay2Txt="Posiziona il menu in una finestra flottante";
 
 $LDNewPwDiffer="La nuova password e quella di controllo non coincidono: inserirle di nuovo.";
+/* 2003-03-22 EL*/
+$LDPersonellMngmnt='Personell Management';
+$LDPersonellMngmntTxt='Tools and functions for managing personell';
 ?>

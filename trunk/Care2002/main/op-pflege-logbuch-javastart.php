@@ -1,7 +1,9 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
+* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -10,12 +12,16 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 */
 define('LANG_FILE','or.php');
 define('NO_2LEVEL_CHK',1);
-require_once('../include/inc_front_chain_lang.php');
+require_once($root_path.'include/inc_front_chain_lang.php');
 
 if (!$internok&&!$HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 
-require_once('../include/inc_config_color.php'); // load color preferences
+require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
+if(!isset($dept_nr)||!$dept_nr){
+	header('Location:op-nursing-select-dept.php'.URL_REDIRECT_APPEND.'&target=entry&retpath='.$retpath);
+	exit;
+}
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -36,7 +42,7 @@ function makelogbuch()
 			w=800;
 			h=650;';
 ?>
-	logbuchwin=window.open("op-pflege-logbuch-start.php?sid=<?php echo "$sid&lang=$lang&internok=$internok"; ?>","logbuchwin<?php echo uniqid("") ?>","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=" + (h-60));
+	logbuchwin=window.open("op-pflege-logbuch-start.php?sid=<?php echo "$sid&lang=$lang&internok=$internok&dept_nr=$dept_nr"; ?>","logbuchwin<?php echo $sid ?>","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=" + (h-60));
 	window.logbuchwin.moveTo(0,0);
 	window.location.replace('<?php if($retpath=="calendar_opt") echo "calendar-options.php?sid=$sid&lang=$lang&day=$pday&month=$pmonth&year=$pyear"; else echo "op-doku.php?sid=".$sid."&lang=".$lang;?>&forcestation=1&nofocus=1&nointern=1');
 }

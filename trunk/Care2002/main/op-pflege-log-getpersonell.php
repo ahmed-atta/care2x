@@ -1,8 +1,14 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','or.php');
 $local_user='ck_op_pflegelogbuch_user';
-require_once('../include/inc_front_chain_lang.php');
+require_once($root_path.'include/inc_front_chain_lang.php');
+/* Create the personell object */
+require_once($root_path.'include/care_api_classes/class_personell.php');
+$pers_obj=new Personell;
+
 $title=$LDOpPersonElements[$winid];
 switch($winid)
 {
@@ -22,18 +28,18 @@ switch($winid)
 							$element="an_doctor";
 							//$maxelement=10;
 							break;
-	default:{header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+	default:{header("Location:".$root_path."/language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 }
 
-require_once('../include/inc_config_color.php'); // load color preferences
+require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
 $dbtable='care_personell_data';
 $thisfile="op-pflege-log-getpersonell.php";
-$forwardfile="op-pflege-log-getinfo.php?sid=$sid&lang=$lang&winid=$winid&mode=save&patnum=$patnum&dept=$dept&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday&op_nr=$op_nr";
+$forwardfile="op-pflege-log-getinfo.php?sid=$sid&lang=$lang&winid=$winid&mode=save&enc_nr=$enc_nr&dept_nr=$dept_nr&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday&op_nr=$op_nr";
 
 /* Establish db connection */
-require('../include/inc_db_makelink.php');
-if($link&&$DBLink_OK) 
+/*if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
+if($dblink_ok)
 	{	
 	// get data if exists
 			$sql="SELECT * FROM $dbtable
@@ -42,10 +48,10 @@ if($link&&$DBLink_OK)
 					 OR bday LIKE '$inputdata%'
 					 OR personell_nr LIKE '$inputdata%'";
 
-			if($ergebnis=mysql_query($sql,$link))
+			if($ergebnis=$db->Execute($sql))
        		{
 				$rows=0;
-				if( $result=mysql_fetch_array($ergebnis)) $rows++;
+				if( $result=$ergebnis->FetchRow()) $rows++;
 				if($rows)
 				{
 					mysql_data_seek($ergebnis,0);
@@ -55,8 +61,9 @@ if($link&&$DBLink_OK)
 			}
 				else { echo "$LDDbNoRead<br>"; } 
 }
-  else { echo "$LDDbNoLink<br>"; } 
+  else { echo "$LDDbNoLink<br>"; } */
 
+$search=$pers_obj->searchPersonellBasicInfo($inputdata);
 
 ?>
 
@@ -112,10 +119,10 @@ div.box { border: double; border-width: thin; width: 100%; border-color: black; 
 </HEAD>
 <BODY   bgcolor="#cde1ec" TEXT="#000000" LINK="#0000FF" VLINK="#800080" topmargin=2 marginheight=2 
 onLoad="<?php if($saved) echo "parentrefresh();"; ?>if (window.focus) window.focus(); window.focus();document.infoform.inputdata.focus();" >
-<a href="javascript:gethelp()"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0') ?> alt="<?php echo $LDHelp ?>" align="right"></a>
+<a href="javascript:gethelp()"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?> alt="<?php echo $LDHelp ?>" align="right"></a>
 
 <form name="infoform" action="op-pflege-log-getpersonell.php" method="post" onSubmit="return pruf(this)">
-<img src="../img/magnify.gif" width=68 height=73 border=0 align=absmiddle><font face=verdana,arial size=5 color=maroon>
+<img <?php echo createComIcon($root_path,'magnify.gif','0','absmiddle'); ?>><font face=verdana,arial size=5 color=maroon>
 <b>
 <?php 
 	echo str_replace("~tagword~",$title,$LDSearchPerson)."...";
@@ -151,21 +158,21 @@ onLoad="<?php if($saved) echo "parentrefresh();"; ?>if (window.focus) window.foc
 	</td> 
   </tr>	
 
-<?php if($datafound) : ?>
+<?php if($pers_obj->record_count) : ?>
 
 <?php 	$counter=0;
-		while($result=mysql_fetch_array($ergebnis))
+		while($result=$search->FetchRow())
 		{
 			echo '
 	  		<tr bgcolor="#ffffff">
     			<td class="v13" >
-				&nbsp;<a href="javascript:savedata(\''.$result[lastname].'\',\''.$result[firstname].'\',document.infoform.f'.$counter.',\''.$result[profession].'\')" title="'.str_replace("~tagword~",$title,$LDUseData).'">'.$result[lastname].'</a>
+				&nbsp;<a href="javascript:savedata(\''.$result[name_last].'\',\''.$result[name_first].'\',document.infoform.f'.$counter.',\''.$result[job_function_title].'\')" title="'.str_replace("~tagword~",$title,$LDUseData).'">'.$result[name_last].'</a>
 				</td> 
     			<td   class="v13" >
-				&nbsp;<a href="javascript:savedata(\''.$result[lastname].'\',\''.$result[firstname].'\',document.infoform.f'.$counter.',\''.$result[profession].'\')" title="'.str_replace("~tagword~",$title,$LDUseData).'">'.$result[firstname].'</a>
+				&nbsp;<a href="javascript:savedata(\''.$result[name_last].'\',\''.$result[name_first].'\',document.infoform.f'.$counter.',\''.$result[job_function_title].'\')" title="'.str_replace("~tagword~",$title,$LDUseData).'">'.$result[name_first].'</a>
 				</td> 
     			<td class="v13" >
-				&nbsp;'.$LDJobIdTag[$result[profession]].'
+				&nbsp;'.$result[job_function_title].'
 				</td> 
     			<td   class="v13" >
 				<select name="f'.$counter.'">';
@@ -181,7 +188,7 @@ onLoad="<?php if($saved) echo "parentrefresh();"; ?>if (window.focus) window.foc
     
 				</td> 
     			<td   class="v13" >
-				&nbsp;<a href="javascript:savedata(\''.$result[lastname].'\',\''.$result[firstname].'\',document.infoform.f'.$counter.',\''.$result[profession].'\')"><img '.createComIcon('../','uparrowgrnlrg.gif','0').' align=absmiddle>
+				&nbsp;<a href="javascript:savedata(\''.$result[name_last].'\',\''.$result[name_first].'\',document.infoform.f'.$counter.',\''.$result[job_function_title].'\')"><img '.createComIcon($root_path,'uparrowgrnlrg.gif','0').' align=absmiddle>
 				'.str_replace("~tagword~",$title,$LDUseData).'..</a>
 				</td> 
     			
@@ -196,7 +203,7 @@ onLoad="<?php if($saved) echo "parentrefresh();"; ?>if (window.focus) window.foc
 	
 	<table border=0>
    <tr>
-     <td><img '.createMascot('../','mascot1_r.gif','0','bottom').'> </td>
+     <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom'); ?>> </td>
      <td><font size=3 color=maroon face=verdana,arial>
 	 <?php echo $LDSorryNotFound ?>
 	</td>
@@ -236,10 +243,10 @@ onLoad="<?php if($saved) echo "parentrefresh();"; ?>if (window.focus) window.foc
 <input type="hidden" name="pyear" value="<?php echo $pyear ?>">
 <input type="hidden" name="pmonth" value="<?php echo $pmonth ?>">
 <input type="hidden" name="pday" value="<?php echo $pday ?>">
-<input type="hidden" name="dept" value="<?php echo $dept ?>">
+<input type="hidden" name="dept_nr" value="<?php echo $dept_nr ?>">
 <input type="hidden" name="saal" value="<?php echo $saal ?>">
 <input type="hidden" name="op_nr" value="<?php echo $op_nr ?>">
-<input type="hidden" name="patnum" value="<?php echo $patnum ?>">
+<input type="hidden" name="enc_nr" value="<?php echo $enc_nr ?>">
 <input type="hidden" name="title" value="<?php echo $title ?>">
 <input type="hidden" name="entrycount" value="<?php echo $entrycount ?>">
 <input type="hidden" name="mode" value="save">
@@ -250,9 +257,9 @@ onLoad="<?php if($saved) echo "parentrefresh();"; ?>if (window.focus) window.foc
 
 </form>
 <p>
-<a href="<?php echo "op-pflege-log-getinfo.php?sid=$sid&lang=$lang&dept=$dept&saal=$saal&op_nr=$op_nr&patnum=$patnum&pday=$pday&pmonth=$pmonth&pyear=$pyear&winid=$winid";?>"><img src="../img/<?php echo "$lang/$lang" ?>_back2.gif" border="0"  align="left">
+<a href="<?php echo "op-pflege-log-getinfo.php?sid=$sid&lang=$lang&dept_nr=$dept_nr&saal=$saal&op_nr=$op_nr&enc_nr=$enc_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear&winid=$winid";?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0','left'); ?>>
 </a><a href="javascript:window.close()">
-<img <?php echo createLDImgSrc('../','cancel.gif','0') ?>" border="0" alt="<?php echo $LDClose ?>" align="right">
+<img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>" border="0" alt="<?php echo $LDClose ?>" align="right">
 </a>
 
 </BODY>

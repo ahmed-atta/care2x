@@ -1,7 +1,9 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
+* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -10,8 +12,8 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 */
 define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
-require_once('../include/inc_front_chain_lang.php');
-require_once('../include/inc_config_color.php'); // load color preferences
+require_once($root_path.'include/inc_front_chain_lang.php');
+require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
 $breakfile="pflege-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$pn&edit=$edit";
 ?>
@@ -23,12 +25,12 @@ $breakfile="pflege-station-patientdaten.php?sid=$sid&lang=$lang&station=$station
 
 <table border=0>
   <tr>
-    <td><img <?php  echo createMascot('../','mascot1_r.gif','0') ?></td>
+    <td><img <?php  echo createMascot($root_path,'mascot1_r.gif','0') ?></td>
     <td><b><font face="Verdana, Arial" color=#800000><?php echo $LDNoDiagReport ?></font></b></td>
   </tr>
 </table>
 <p><br>
-<a href="<?php echo $breakfile ?>" target="_top"><img <?php echo createLDImgSrc('../','back2.gif','0') ?>>
+<a href="<?php echo $breakfile ?>" target="_top"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>>
 </a>
 </body>
 </html>

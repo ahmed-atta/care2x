@@ -1,7 +1,9 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
+* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -10,12 +12,12 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 */
 define('LANG_FILE','or.php');
 define('NO_2LEVEL_CHK',1);
-require_once('../include/inc_front_chain_lang.php');
+require_once($root_path.'include/inc_front_chain_lang.php');
 setcookie(username,"");
 setcookie(ck_plan,"1");
 
 $saal="exclude";
-require('../include/inc_resolve_opr_dept.php');
+require($root_path.'include/inc_resolve_opr_dept.php');
 
 
 if($pmonth=="") $pmonth=date('n');
@@ -33,7 +35,7 @@ switch($retpath)
 $dbtable='care_nursing_dutyplan';
 
 /* Establish db connection */
-require('../include/inc_db_makelink.php');
+require($root_path.'include/inc_db_makelink.php');
 if($DBLink_OK)
 {	
 		 	$sql="SELECT a_dutyplan,r_dutyplan FROM $dbtable 
@@ -41,14 +43,14 @@ if($DBLink_OK)
 								AND year='$pyear'
 								AND month='".(int)$pmonth."'";
 			
-			if($ergebnis=mysql_query($sql,$link))
+			if($ergebnis=$db->Execute($sql))
        		{
 				$rows=0;
-				if( $result=mysql_fetch_array($ergebnis)) $rows++;
+				if( $result=$ergebnis->FetchRow()) $rows++;
 				if($rows)
 				{
 					mysql_data_seek($ergebnis,0);
-					$result=mysql_fetch_array($ergebnis);
+					$result=$ergebnis->FetchRow();
 					$dayduty=explode("~",$result[a_dutyplan]);
 					$a_duty=$dayduty[$pday-1];
 					if(trim($a_duty)!="?") 
@@ -80,14 +82,14 @@ if($DBLink_OK)
 			$sql="SELECT list FROM care_nursing_dept_personell_quicklist
 							WHERE dept LIKE '$dept'";	
 							
-			if($ergebnis=mysql_query($sql,$link))
+			if($ergebnis=$db->Execute($sql))
        		{
 				$rows=0;
-				if( $ftinfo=mysql_fetch_array($ergebnis)) $rows++;
+				if( $ftinfo=$ergebnis->FetchRow()) $rows++;
 				if($rows)
 				{
 					mysql_data_seek($ergebnis,0);
-					$ftinfo=mysql_fetch_array($ergebnis);
+					$ftinfo=$ergebnis->FetchRow();
 					//echo $result[$i][a_dutyplan];
 					//echo $sql."<br>";
 					
@@ -201,7 +203,7 @@ function popinfo(l,f,b)
 <?php else : ?>
 <table border=0>
   <tr>
-    <td><img <?php echo createMascot('../','mascot1_r.gif','0') ?>></td>
+    <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0') ?>></td>
     <td><font face="Verdana, Arial" size=3 color="#cc0000"><b><?php echo $LDNoEntryFound ?></b></font></td>
   </tr>
 </table>
@@ -209,7 +211,7 @@ function popinfo(l,f,b)
 <?php endif ?>
 
 <p>
-<a href="<?php echo $rettarget ?>"><img <?php echo createLDImgSrc('../','back2.gif','0') ?>></a>
+<a href="<?php echo $rettarget ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>
 </FONT>
 </BODY>
 </HTML>

@@ -5,7 +5,6 @@ $LDOpenHrsTxt='Arbeidtider';
 $LDChkHrsTxt='Medical Checkup Hours';
 $LDClk4Info='Trykk for mere informasjon om..';
 $LDDayTxt='Dag';
-
 /**
 * A small dictionary:
 * ENT = Eye, Nose, Throath
@@ -34,6 +33,7 @@ $dept=array('General Surgery',
 /**
 * Do not translate the $target variable
 */
+
 $target=array('dept_generalsurgery',
 					'dept_emergency',
 					'dept_plasticsurgery',
@@ -63,18 +63,33 @@ $LDOpenDays=array('Monday',
 					'Friday',
 					'Saturday',
 					'Sunday');
+
 $LDOpenTimes=array('8.30 - 21.00', //Mo
+
 					'8.30 - 21.00', //Di
+
 					'8.30 - 21.00', //Mi
+
 					'8.30 - 21.00', //Do
+
 					'8.30 - 21.00', //Fr
+
 					'8.30 - 21.00', //Sa
+
 					'8.30 - 21.00'); //So
+
 $LDVisitTimes=array('12.30 - 15.00 , 19.00 - 21.00', //Mo
+
 					'12.30 - 15.00 , 19.00 - 21.00', //Di
+
 					'12.30 - 15.00 , 19.00 - 21.00', //Mi
+
 					'12.30 - 15.00 , 19.00 - 21.00', //Do
+
 					'12.30 - 15.00 , 19.00 - 21.00', //Fr
+
 					'12.30 - 15.00 , 19.00 - 21.00', //Sa
+
 					'12.30 - 15.00 , 19.00 - 21.00'); //So
+
 ?>

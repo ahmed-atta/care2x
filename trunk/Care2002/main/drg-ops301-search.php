@@ -1,7 +1,9 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
+* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -10,15 +12,15 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 */
 define('LANG_FILE','drg.php');
 $local_user='ck_op_pflegelogbuch_user';
-require_once('../include/inc_front_chain_lang.php');
-if (!$opnr) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+require_once($root_path.'include/inc_front_chain_lang.php');
+if (!$opnr) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 
 if($saveok)
 {
 ?>
 
  <script language="javascript" >
- window.opener.location.replace('drg-ops301.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&dept=$dept&oprm=$oprm&y=$y&m=$m&d=$d&display=composite&newsave=1" ?>');
+ window.opener.location.replace('drg-ops301.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=composite&newsave=1" ?>');
  window.close();
 </script>
 
@@ -26,7 +28,7 @@ if($saveok)
   exit;
 }
 
-require_once('../include/inc_config_color.php');
+require_once($root_path.'include/inc_config_color.php');
 
 $toggle=0;
 $thisfile='drg-ops301-search.php';
@@ -39,7 +41,7 @@ if($mode=='save')
 	$save_related=1;
 	$element_related='related_ops';
 	$itemselector='sel';
-	include('../include/inc_drg_entry_save.php');
+	include($root_path.'include/inc_drg_entry_save.php');
 }
 else
 {
@@ -50,10 +52,8 @@ else
   if(($keyword)and($keyword!=" "))
   {
 	
-
-	 include('../include/inc_db_makelink.php');
-	 if($link&&$DBLink_OK) 
-	 {	
+	if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
+	if($dblink_ok){
 		    
         /* Check if table exists otherwise use default table */
 	 	$dbtable=checkTableExist('care_ops301_'.$lang, 'care_ops301_de');	
@@ -63,18 +63,19 @@ else
 			$sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE (code LIKE "%'.$keyword.'%" OR description LIKE "'.$keyword.'%")  LIMIT 0,100';
 			else
 				$sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE (code LIKE "%'.$keyword.'%" OR description LIKE "%'.$keyword.'%")  LIMIT 0,100';
-        	$ergebnis=mysql_query($sql,$link);
+        	$ergebnis=$db->Execute($sql);
 			if($ergebnis)
        		{
 				$linecount=0;
-				if ($zeile=mysql_fetch_array($ergebnis))
+				//if ($zeile=$ergebnis->FetchRow())
+				if ($linecount=$ergebnis->RecordCount())
 				{
-				 	$linecount++;
+				 	//$linecount++;
 					if(strlen($keyword)<3)
 						$advsql='SELECT sub_level FROM '.$dbtable.' WHERE (code LIKE "%'.$keyword.'%" OR description LIKE "'.$keyword.'%") LIMIT 0,100';
 						else
 							$advsql='SELECT sub_level FROM '.$dbtable.' WHERE (code LIKE "%'.$keyword.'%" OR description LIKE "%'.$keyword.'%") LIMIT 0,100';
-        			$adv=mysql_query($advsql,$link);
+        			$adv=$db->Execute($advsql);
 				}
 			}
 			 else {echo "<p>".$sql."<p>$LDDbNoRead";};
@@ -83,13 +84,13 @@ else
 }
 
 /* Load the icon images */
-$img_delete=createComIcon('../','delete2.gif','0','right');
-$img_arrow=createComIcon('../','l_arrowgrnsm.gif','0','absmiddle');
-$img_warn=createComIcon('../','warn.gif','0','absmiddle');
-$img_info=createComIcon('../','button_info.gif','0','absmiddle');
-$img_bubble=createComIcon('../','bubble2.gif','0','absmiddle');
-$img_blue=createComIcon('../','l2-blue.gif','0');
-$img_t2=createComIcon('../','t2-blue.gif','0');
+$img_delete=createComIcon($root_path,'delete2.gif','0','right');
+$img_arrow=createComIcon($root_path,'l_arrowgrnsm.gif','0','absmiddle');
+$img_warn=createComIcon($root_path,'warn.gif','0','absmiddle');
+$img_info=createComIcon($root_path,'button_info.gif','0','absmiddle');
+$img_bubble=createComIcon($root_path,'bubble2.gif','0','absmiddle');
+$img_blue=createComIcon($root_path,'l2-blue.gif','0');
+$img_t2=createComIcon($root_path,'t2-blue.gif','0');
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -114,7 +115,7 @@ function gethelp(x,s,x1,x2,x3)
 }
 function subsearch(k)
 {
-	//window.location.href='drg-icd10-search.php?sid=<?php echo "sid=$sid&lang=$lang&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&dept=$dept&oprm=$oprm&display=$display" ?>&keyword='+k;
+	//window.location.href='drg-icd10-search.php?sid=<?php echo "sid=$sid&lang=$lang&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&dept_nr=$dept_nr&oprm=$oprm&display=$display" ?>&keyword='+k;
 	document.searchdata.keyword.value=k;
 	document.searchdata.submit();
 }
@@ -134,7 +135,7 @@ function checkselect(d)
 </script>
  
   <?php 
-require('../include/inc_css_a_hilitebu.php');
+require($root_path.'include/inc_css_a_hilitebu.php');
 ?>
  
 </HEAD>
@@ -149,7 +150,7 @@ document.searchdata.keyword.select();document.searchdata.keyword.focus();
 <FONT    SIZE=-1  FACE="Arial">
 <ul>
 <FORM action="drg-ops301-search.php" method="post" name="searchdata" onSubmit="return pruf(this)">
-<a href="javascript:window.close()"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="right"></a>
+<a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> align="right"></a>
 <?php if(!$showonly) : ?>
 <FONT    SIZE=3  FACE="verdana,Arial" color="#006600"><b><?php echo $LDOps301 ?></b>&nbsp;
 </font>
@@ -166,7 +167,7 @@ document.searchdata.keyword.select();document.searchdata.keyword.focus();
 <input type="hidden" name="ln" value="<?php echo $ln; ?>">
 <input type="hidden" name="fn" value="<?php echo $fn; ?>">
 <input type="hidden" name="bd" value="<?php echo $bd; ?>">
-<input type="hidden" name="dept" value="<?php echo $dept; ?>">
+<input type="hidden" name="dept_nr" value="<?php echo $dept_nr; ?>">
 <input type="hidden" name="oprm" value="<?php echo $oprm; ?>">
 <input type="hidden" name="display" value="<?php echo $display; ?>">
 <input type="hidden" name="showonly" value="<?php echo $showonly; ?>">
@@ -227,9 +228,9 @@ function drawdata(&$data,&$advdata)
 						<td>';
 						if($priocolor) echo "&nbsp;"; elseif(!$showonly)
 							{
-								$valbuf="code=$data[code]";
-								if(!stristr($data[code],".")) $valbuf.="&des=$data[description]";
-									else $valbuf.="&des=$parentdata[description] <b>$data[description]</b>";
+								$valbuf='code*'.$data['code'];
+								if(!stristr($data[code],".")) $valbuf.='&des*'.$data['description'];
+									else $valbuf.='&des*'.$parentdata['description'].' <b>'.$data['description'].'</b>';
 						 		echo '<input type="checkbox" name="sel'.$idx.'" value="'.$valbuf.'">';
 								 $idx++;
 							}
@@ -315,11 +316,11 @@ function drawdata(&$data,&$advdata)
 					$idx=0;
 					$grandpa=array();
 					$parent=array();
-					mysql_data_seek($ergebnis,0);
-					$advzeile=mysql_fetch_array($adv);
-					while($zeile=mysql_fetch_array($ergebnis))
+					//mysql_data_seek($ergebnis,0);
+					$advzeile=$adv->FetchRow();
+					while($zeile=$ergebnis->FetchRow())
 					{
-							$advzeile=mysql_fetch_array($adv);
+							$advzeile=$adv->FetchRow();
 							// process code
 							$strbuf=trim($zeile[code]);
 							if(stristr($strbuf,"..."))
@@ -342,7 +343,6 @@ function drawdata(&$data,&$advdata)
 								}
 						   if($isparent)
 								{
-
 									//
 									$parentcode=strtr($strbuf,"-","_");
 									$parent[$parentcode]=1; 
@@ -362,14 +362,14 @@ function drawdata(&$data,&$advdata)
 							{
 								//echo "parent";
 								$sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE code LIKE "'.$parentcode.'%"  LIMIT 1';
-        						$lines=mysql_query($sql,$link);
+        						$lines=$db->Execute($sql);
 								if($lines)
 								{
-									if(mysql_fetch_array($lines))
+									if($lines->RecordCount())
 									{
-										mysql_data_seek($lines,0);
+										//mysql_data_seek($lines,0);
 										$priocolor=1;//echo "hello";
-										$parentdata=mysql_fetch_array($lines);
+										$parentdata=$lines->FetchRow();
 										drawdata($parentdata,$zeile);
 										$parent[$parentcode]=1;
 										$priocolor=0;//echo "hello";
@@ -397,7 +397,7 @@ function drawdata(&$data,&$advdata)
 <input type="hidden" name="ln" value="<?php echo $ln; ?>">
 <input type="hidden" name="fn" value="<?php echo $fn; ?>">
 <input type="hidden" name="bd" value="<?php echo $bd; ?>">
-<input type="hidden" name="dept" value="<?php echo $dept; ?>">
+<input type="hidden" name="dept_nr" value="<?php echo $dept_nr; ?>">
 <input type="hidden" name="oprm" value="<?php echo $oprm; ?>">
 <input type="hidden" name="display" value="<?php echo $display; ?>">
 <input type="hidden" name="target" value="<?php echo $target; ?>">
@@ -406,13 +406,13 @@ function drawdata(&$data,&$advdata)
 </form>
 <?php else : ?>
 <p>
-<a href="javascript:window.close()"><img <?php echo createLDImgSrc('../','close2.gif','0') ?>></a>
+<a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>></a>
 <?php endif ?>
 <?php if(($linecount>15)&&!$showonly) : ?>
 
 						<p>
 						<FORM action="drg-ops301-search.php" method="post" onSubmit="return pruf(this)" name="form2">
-						<a href="javascript:window.close()"><img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="right"></a>
+						<a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> align="right"></a>
 						<font face="Arial,Verdana"  color="#000000" size=-1>
 						<INPUT type="text" name="keyword" size="14" maxlength="25" value="<?php echo $keyword ?>"> 
 						<INPUT type="submit" name="versand" value="<?php echo $LDSearch ?>">
@@ -423,7 +423,7 @@ function drawdata(&$data,&$advdata)
 <input type="hidden" name="ln" value="<?php echo $ln; ?>">
 <input type="hidden" name="fn" value="<?php echo $fn; ?>">
 <input type="hidden" name="bd" value="<?php echo $bd; ?>">
-<input type="hidden" name="dept" value="<?php echo $dept; ?>">
+<input type="hidden" name="dept_nr" value="<?php echo $dept_nr; ?>">
 <input type="hidden" name="oprm" value="<?php echo $oprm; ?>">
 <input type="hidden" name="display" value="<?php echo $display; ?>">
 <input type="hidden" name="showonly" value="<?php echo $showonly; ?>">

@@ -1,4 +1,4 @@
-<?
+<?php
 $LDDbNoLink="Impossibile connettersi al database!";
 $LDDbNoRead="Impossibile leggere dal database!";
 $LDDbNoSave="Impossibile scrivere nel database!";
@@ -53,4 +53,12 @@ $LDEditXrayDiag="Modifica relazione diagnostica";
 $LDReadDiag="Leggi diagnosi";
 $LDWriteDiag="Scrivi diagnosi";
 $LDPreviewReport="Anteprima diagnosi";
+
+/* 2002-09-08 EL*/
+$LDTestRequestRadio="Richiesta test";
+$LDTestRequestRadioTxt="Richiesta test radiologico";
+/* 2002-09-10 EL */
+$LDTestReception="Richiesta in coda";
+$LDTestReceptionTxt="Ricevi ed elabora le richieste di test, scrivi risultati/diagnosi";
+
 ?>

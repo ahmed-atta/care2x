@@ -1,19 +1,10 @@
 <?php
-
 /*
-
 *	IMPORTANT!	All words or characters inclosed with ~ ~ must not be changed.
-
 */
-
 $LDNursing='Sykepleie';
-
 $LDStation='Post';
-
-
-
 $LDQuickView='Rask kikk';
-
 $LDSearchPatient='Søk etter pasient';
 
 $LDArchive='Arkiv';
@@ -689,7 +680,11 @@ $LDTestConsultRequested='Test/Consult requested';
 $LDNurseReport='Sykepleiers rapport (ny)';
 
 $LDDaily='Daglig';
-
 $LDSaveChanges='Lagre endringer';
+/* 2002-12-07*/
+$LDNoDiagReport='No diagnostic report available.';
+/* 2003-03-23 EL */
+$LDNursesList='Nurses\' List';
+$LDNursesListTxt='List, View, Create, & Edit Nurses\' List';
 
 ?>

@@ -1,7 +1,9 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
+* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -10,16 +12,19 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 */
 define('LANG_FILE','stdpass.php');
 define('NO_2LEVEL_CHK',1);
-require_once('../include/inc_front_chain_lang.php');
-require_once('../include/inc_config_color.php');
-
-$fileforward='login-pc-config.php?sid='.$sid.'&lang='.$lang;
-$thisfile='login.php';
-$breakfile="startframe.php?sid=$sid";
-
+require_once($root_path.'include/inc_front_chain_lang.php');
 // reset all 2nd level lock cookies
-require('../include/inc_2level_reset.php');
+require($root_path.'include/inc_2level_reset.php');
 
+$fileforward='login-pc-config.php'.URL_REDIRECT_APPEND;
+$thisfile='login.php';
+$breakfile='startframe.php'.URL_APPEND;
+
+
+
+if(!isset($pass)) $pass='';
+if(!isset($keyword)) $keyword='';
+if(!isset($userid)) $userid='';
 
 function logentry(&$userid,$key,$report)
 {
@@ -39,24 +44,20 @@ function logentry(&$userid,$key,$report)
 
 if ((($pass=='check')&&($keyword!=''))&&($userid!=''))
 {
-	include('../include/inc_db_makelink.php');
-	if($link&&$DBLink_OK) 
-	{	
+    if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
+    if($dblink_ok) {	
 	    $sql='SELECT * FROM care_users WHERE login_id="'.addslashes($userid).'"';
-		
-		$ergebnis=mysql_query($sql,$link);
-						
-		if($ergebnis)
+							
+		if($ergebnis=$db->Execute($sql))
 		{
-		    $zeile=mysql_fetch_array($ergebnis);
+		    $zeile=$ergebnis->FetchRow();
 			
 			if (($zeile['password']==$keyword)&&($zeile['login_id']==$userid))
 			{	
 				if (!($zeile['lockflag']))
 				{								
-					setcookie('ck_login_userid'.$sid,$zeile['login_id']);
-					
-					setcookie('ck_login_username'.$sid,$zeile['name']);
+					setcookie('ck_login_userid'.$sid,$zeile['login_id'],0,'/');
+					setcookie('ck_login_username'.$sid,$zeile['name'],0,'/');
 										
 					/** Init the crypt object, encrypt the password, and store in cookie
 					*/
@@ -64,16 +65,15 @@ if ((($pass=='check')&&($keyword!=''))&&($userid!=''))
 										
 					$cipherpw=$enc_login->encodeMimeSelfRand($zeile['password']);
 										
-                    setcookie('ck_login_pw'.$sid,$cipherpw);
+                    setcookie('ck_login_pw'.$sid,$cipherpw,0,'/');
 										
 					/**
 					* Set the login flag
 					*/
-					setcookie('ck_login_logged'.$sid,'true');
+					setcookie('ck_login_logged'.$sid,'true',0,'/');
 										
 					logentry($zeile['name'],$zeile['id'],$REMOTE_ADDR.' OK\'d','','');			
 										
-					mysql_close($link);
 					header("Location: $fileforward");		
 					exit;
 										
@@ -87,7 +87,8 @@ if ((($pass=='check')&&($keyword!=''))&&($userid!=''))
 
 $errbuf='Log in';
 $minimal=1;
-require('../include/inc_passcheck_head.php');
+require_once($root_path.'include/inc_config_color.php');
+require($root_path.'include/inc_passcheck_head.php');
 ?>
 
 <?php echo setCharSet(); ?>
@@ -99,22 +100,21 @@ require('../include/inc_passcheck_head.php');
 <p>
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
 <tr>
-<td colspan=3><img <?php echo createComIcon('../','login-b.gif') ?>></td>
+<td colspan=3><img <?php echo createComIcon($root_path,'login-b.gif') ?>></td>
 </tr>
 
-<?php require('../include/inc_passcheck_mask.php') ?>  
+<?php require($root_path.'include/inc_passcheck_mask.php') ?>  
 
 <p><!-- 
-<img src="../img/small_help.gif" > <a href="ucons.php<?php echo "?lang=$lang" ?>">Was ist login?</a><br>
-<img src="../img/small_help.gif" > <a href="ucons.php<?php echo "?lang=$lang" ?>">Wieso soll ich mich einloggen?</a><br>
-<img src="../img/small_help.gif" > <a href="ucons.php<?php echo "?lang=$lang" ?>">Was bewirkt das einloggen?</a><br>
+<img src="../img/small_help.gif" > <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>">Was ist login?</a><br>
+<img src="../img/small_help.gif" > <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>">Wieso soll ich mich einloggen?</a><br>
+<img src="../img/small_help.gif" > <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>">Was bewirkt das einloggen?</a><br>
  -->
 <HR>
 <p>
 <?php
-if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
-include('../language/'.$lang.'/'.$lang.'_copyrite.php');
-  else include('../language/en/en_copyrite.php');?>
+require($root_path.'include/inc_load_copyrite.php');
+?>
 </FONT>
 </BODY>
 </HTML>

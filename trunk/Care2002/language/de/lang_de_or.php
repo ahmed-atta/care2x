@@ -8,12 +8,12 @@ $LDORNOC='Dienst';
 $LDScheduler='Planer';
 $LDDutyPlan='Dienstplan';
 $LDQuickView='Schnellsicht';
-$LDQviewTxtDocs='Übersicht über die gegenwärtig diensthabenden Ärzte';
+$LDQviewTxtDocs='Übersicht über die gegenwärtige diensthabenden Ärzte';
 $LDOrLogBook='OP Pflege Logbuch';
-$LDOrLogBookTxt='Dokumentation der Pflegeleistung im OP, Archiv';
+$LDOrLogBookTxt='Dokumentation der Pflegeleistung in OP, Archiv';
 $LDOrProgram='OP Programm';
-$LDOrProgramTxt='OP Programm ansehen, erstellen, verarbeiten, usw.';
-$LDQviewTxtNurse='Übersicht über die gegenwärtig diensthabenden OP-Pfleger';
+$LDOrProgramTxt='OP Programm ansehen, erstellen, verarbeiten, u.s.w.';
+$LDQviewTxtNurse='Übersicht über die gegenwärtig diensthabenden OP Pfleger';
 $LDDutyPlanTxt='Dienstplan erstellen, ansehen, verarbeiten, usw.';
 $LDOnCallDuty='Bereitschaftsdienst';
 $LDOnCallDutyTxt='Zeiterfassung der Arbeitsleistung in Bereitschaft';
@@ -202,7 +202,9 @@ $LDReposition='Reposition';
 $LDWaitTime='Wartezeit';
 $LDStart='Anfang';
 $LDEnd='Ende';
-$LDPatNoExist='Patient ist noch nicht im Logbuch eingetragen. Bitte schließen Sie dieses Fenster und öffnen Sie das Logbuch nochmals. Falls das Problem weiterhin besteht, benachrichtigen Sie bitte die EDV-Abteilung.';
+$LDPatNoExist='Patient ist noch nicht im Log Buch eingetragen. Bitte schließen Sie dieses Fenster
+										und öffnen Sie das Logbuch nochmals. Falls dieses weiterhin besteht, benachrichtigen
+										Sie bitte die EDV-Abteilung.';
 $opts=array('-',
 					'Patient nicht rechzeitig im OP',
        				'Anästhesie nicht rechtzeitig im OP',
@@ -241,18 +243,20 @@ $LDContainerElements=array(
 $LDArticleNr='Artikelnummer';		
 $LDContainerNr='Sieb/Container Nr.';							
 $LDArticleNotFound='Artikel nicht gefunden!';
-$LDNoArticleTxt='Der Artikel ist entweder nicht in der Datenbank vorhanden <br>oder Sie haben eine falsche Artikelnummer eingetippt.';
-$LDClk2ManualEntry='<b>Klicken Sie hier</b>, um den Artikel manuell einzugeben.';
-$LDPlsClkArticle='Bitte klicken Sie den richtige Artikel an!';
+$LDNoArticleTxt='Der Artikel ist entweder nicht in der Datenbank vorhanden <br>oder Sie haben eine  falsche Artikelnummer eingetippt.';
+$LDClk2ManualEntry='<b>Klicken Sie hier </b>, um den Artikel manuell einzugeben.';
+$LDPlsClkArticle='Bitte klicken Sie den richtigen Artikel an!';
 $LDSelectArticle='Diesen Artikel eingeben';
 $LDDbInfo='Info aus der Datenbank';
 $LDRemoveArticle='Artikel aus der Liste entfernen';
 $LDArticleNoList='Artikel nicht in der datenbank verzeichnet';
-$LDPromptSearch='Bitte geben Sie das Stichwort zum Suchen ein, <br> z.B. die Aufnahmenummer, den Namen, den Vornamen oder das Geburtsdatum. (Beachten Sie auch die <a href=\'ucons.php\'>Tips</a>.)';
+$LDPromptSearch='Bitte geben Sie das Stichwort zum Suchen ein. <br>
+							z.B. die Aufnahmenummer, den Namen, den Vornamen oder das Geburtsdatum. 
+							(Beachten Sie auch die <a href=\'ucons.php\'>Tips</a>.)';
 $LDKeyword='Stichwort';
 $LDOtherFunctions='Weitere Funktionen';
 $LDInfoNotFound='Die gesuchte Information wurde nicht gefunden!';
-$LDButFf='Aber folgende';
+$LDButFf='Aber, folgende';
 $LDSimilar='Eintrag entspricht';
 $LDSimilarMany='Einträge entsprechen';
 $LDNeededInfo='dem gesuchten am nächsten';
@@ -282,7 +286,7 @@ $LDMonth='Monat';
 $LDYear='Jahr';
 $LDDutyElements = array('Datum','&nbsp;','Name, Vorname','Von','Bis','OP Saal','Diagnose & Therapie');
 $LDPrint='Drucken';
-$LDAlertNoPrinter='In Ihrem Browser müssen Sie den Ausdruck leider manuell starten. Gehen Sie dazu bitte mit der Maus auf das Dokument, drücken Sie die rechte Maustaste und wählen Drucken!';
+$LDAlertNoPrinter='In Ihrem Browser müssen Sie den Ausdruck leider manuell starten. Gehen Sie dazu bitte mit der Maus auf das Dokument, drücken Sie die rechte Maustaste und wählen wäheln Drucken!';
 $LDAlertNotSavedYet='Die Daten sind noch nicht gespeichert! Wollen Sie sie speichern?';
 $LDPhone='Telefon';
 $LDBeeper='Funk';

@@ -5,7 +5,6 @@ $LDResetEntry='Cancella voci';
 $LDSave='Salva';
 $LDReset='Reset';
 
-
 $LDEnterData='Selezionare per inserire i dati';
 $LDClk2See='Selezionare per visualizzare i dati';
 $LDFoundPatient='La ricerca ha trovato <b>~nr~</b> pazienti';
@@ -186,4 +185,65 @@ $LDUserInfoNoSave='The access creation failed. Please check the entered informat
 $LDNoAreas='You have not selected any area!';
 $LDUserDouble='The access creation failed. Please use a different user login name.';
 $LDEnterNewUser='Create a new user access';
+/* 2002-11-22 EL*/
+$LDDeleteCurrency='Are you sure, you really want to delete this currency?';
+$LDNoMainDelete='You cannot delete a main currency. \nPlease set a different main currency first.';
+$LDCurrencyExisting='This currency exists already!';
+/* 2003-02-21 EL*/
+$LDMenuItem='Menu item';
+$LDOrderNr='Sort nr.';
+$LDStatus='Status';
+$LDHideBy='Hide by:';
+$LDPath='Path';
+$LDVisible='Visible';
+$LDFrameResizable='Frame is resizable';
+$LDBorderColor='Border color';
+$LDBorderWidth='Border width';
+$LDFrameWidth='Frame width';
+$LDNo='No';
+$LDYes='Yes';
+$LDAllowMultiLang='Allow multiple language choice';
+$LDDefaultLang='Default language (if multi-language is not allowed)';
+/* 2003-02-22 EL*/
+$LDMainMenuItems='Main menu items';
+$LDMainMenuDisplay='Main menu display';
+$LDDataEntryForms='Data entry forms';
+$LDControlButImg='Control buttons & images\' theme';
+$LDSampleButtons='Sample buttons';
+$LDTheme='Theme';
+$LDItem='Item';
+/* 2003-02-26- EL*/
+$LDDeptAdmin='Department Administration';
+$LDNewDept='Create and configure new departments';
+$LDShowDeptInfo ='Department Profiles';
+$LDShowDeptInfoTxt='Display profile information of existing active departments';
+$LDConfigOptions='Configuration options';
+$LDDeptConfigOptions='Configuration, update info, deactivate, activate, hide and unhide departments';
+$LDDescription='Description';
+/* 2003-023-01 EL*/
+$LDFormalName='Formal Name';
+$LDInternalID='Internal ID Code';
+$LDPlsSelect='Please select one';
+$LDTypeDept='Type of Department';
+$LDIsSubDept='Is department a sub-department ?';
+$LDParentDept='Parent Department';
+$LDLangVariable='Language variable';
+$LDShortName='Short Name';
+$LDAlternateName='Altenate Name';
+$LDAdmitsOutpatients='Admits outpatients ?';
+$LDAdmitsInpatients='Admits inpatients ?';
+$LDBelongsToInst='Belongs to this institution ?';
+$LDWorkHrs='Working hours';
+$LDConsultationHrs='Consultation Hours';
+$LDSigLine='Signature Line';
+$LDSigStampTxt='Signature Stamp Text';
+$LDDeptLogo='Department\'s Logo';
+$LDHidden='Hidden';
+$LDNormal='Normal';
+$LDInactive='Inactive';
+$LDActive='Active';
+$LDDeptStatus='Department\'s status';
+$LDRecordStatus='Record\'s status';
+/* 2003-03-30 EL*/
+$LDConfigOptions='Configuration Options';
 ?>

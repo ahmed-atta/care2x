@@ -11,33 +11,22 @@ require_once('../../include/inc_vars_resolve.php');
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
         <TR>
-          <TD><IMG height=15
-            src="../../gui/img/common/default/pixel.gif"
-            width=5 border=0></TD></TR>
-        <TR>
-          <TD vAlign=top><font face="verdana,arial" size=2>
-			<P><img src="../../fotos/credits/elpidio_latorilla_3.jpg" border=0  align=right vspace=10>
-			<b>La première version bêta de CARE 2002 était créée par Elpidio Latorilla:</b>
-			<p>
-			Professions: <br>Programmeur, Infirmier de chirurgie, Technicien en électronique & télecommunications
-			<p>
-			Secteurs d'intérêt: <br>C, C++, PHP, Javascript, SQL, TCL/TK, HTML, Perl, ASP, Java
-			<P><a href="mailto:elpidio@latorilla.com"><u>Elpidio Latorilla peut être contacté ici...</u></a>
-</TD></TR></TBODY></TABLE>
-
-<hr>
-<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
-        <TBODY>
-        <TR>
           <TD><IMG height=15 
             src="../../gui/img/common/default/pixel.gif" 
             width=5 border=0></TD></TR>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../gui/img/control/default/fr/fr_x-blank.gif" width=135 border=0  align=right vspace=10>
-			<b>La traduction française de Care 2002 était réalisée par Mat&#277;j Hausenblas.</b>
-			
-			<P><a href="mailto:matejh@users.sourceforge.net"><u>Mat&#277;j Hausenblas peut être contacté ici..</u></a>
+			<b>La traduction française de Care 2002 était réalisée par Matej Hausenblas.</b>
+			<p>
+			Matej Hausenblas est né à Prague, République Tchéque, en 1981.<p>
+Il est étudiant à l'université de maths-informatique-physique. Après quelques 
+années d'utilisation de Windows il a décidé jeter un coup d'oeil sur Linux, 
+comme un challenge considérable et après quelques temps il a décidé 
+participer à des projets d'Open Source afin d'améliorer ses savoir-faire et 
+également pour retourner quelque chose et enfin pour voir comment les choses 
+marchent dans une telle société.
+			<P><a href="mailto:matejh@users.sourceforge.net"><u>Matej Hausenblas peut être contacté ici..</u></a>
 </TD></TR></TBODY></TABLE>
 
 <hr>
@@ -90,9 +79,9 @@ Il a décidé de joindre activement la source libre car:<br><i>"Un tel monde idéal
 			<b>La traduction brésilien-portugaise de Care 2002 et www.care2x.com était réalisée par Daniel Zilli (BR).</b>
 			<p>
 			Daniel est un type agréable qui adore vivre une vie heureuse. Il aime les ordinateurs, football, et bonne musique.
-Il a 10 ans de l'expérience avec les ordinateurs et il adore ce qu'il fait.
+Il a 10 ans de l`expérience avec les ordinateurs et il adore ce qu`il fait.
 Daniel est propriétaire d'une entreprise qui produit des produits
-pour l'éducation de la science d'ordinateurs, les logiciels libres et distribution locale de linux.
+pour l`éducation de la science d`ordinateurs, les logiciels libres et distribution locale de linux.
 			<P><a href="mailto:danielz@cco.matrix.com.br"><u>Daniel Zilli peut être contacté ici..</u></a>
 </TD></TR></TBODY></TABLE>
 
@@ -224,7 +213,7 @@ pour l'éducation de la science d'ordinateurs, les logiciels libres et distributi
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Extensions de sécurité</font></td>
   </tr>
   <tr>
-    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Mat&#277;j Hausenblas (FR)</font></nobr>&nbsp;</td>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Matej Hausenblas (FR)</font></nobr>&nbsp;</td>
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;La traduction fran&ccedil;aise</font></td>
   </tr>
   <tr>

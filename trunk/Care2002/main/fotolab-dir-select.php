@@ -1,7 +1,9 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
+* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -10,11 +12,11 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 */
 define('LANG_FILE','specials.php');
 $local_user='ck_fotolab_user';
-require_once('../include/inc_front_chain_lang.php');
-require_once('../include/inc_config_color.php');
+require_once($root_path.'include/inc_front_chain_lang.php');
+require_once($root_path.'include/inc_config_color.php');
 
 /* Load date formatter */
-require_once('../include/inc_date_format_functions.php');
+require_once($root_path.'include/inc_date_format_functions.php');
 				
 
 
@@ -104,21 +106,20 @@ function gethelp(x,s,x1,x2,x3)
 	window.helpwin.moveTo(0,0);
 }
 
-<?php require('../include/inc_checkdate_lang.php'); ?>
+<?php require($root_path.'include/inc_checkdate_lang.php'); ?>
 
 
 // -->
 </script>
 
-<script language="javascript" src="../js/checkdate.js" type="text/javascript"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
 
-<script language="javascript" src="../js/setdatetime.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
 
 <?php 
-require('../include/inc_css_a_hilitebu.php');
-?>
-
-</HEAD>
+require($root_path.'include/inc_js_gethelp.php');
+require($root_path.'include/inc_css_a_hilitebu.php');
+?></HEAD>
 
 <BODY  topmargin=0 leftmargin=0  marginwidth=0 marginheight=0 bgcolor=silver <?php if(!$same_pat) echo ' onLoad="window.parent.MAINDATAFRAME.location.replace(\'fotolab-maindata.php?sid='.$sid.'&lang='.$lang.'&maxpic='.$maxpic.'\');window.parent.PREVIEWFRAME.location.replace(\'fotolab-preview.php?sid='.$sid.'&lang='.$lang.'\');" ';
 else echo ' onLoad="window.parent.PREVIEWFRAME.location.replace(\'fotolab-preview.php?sid='.$sid.'&lang='.$lang.'\');window.parent.MAINDATAFRAME.document.maindata.maxpic.value='.$maxpic.'" '; ?> 
@@ -130,21 +131,21 @@ else echo ' onLoad="window.parent.PREVIEWFRAME.location.replace(\'fotolab-previe
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" >
 <FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG>&nbsp;<?php echo $LDFotoLab ?></STRONG></FONT></td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();"><img 
-<?php echo createLDImgSrc('../','back2.gif','0','absmiddle') ?> 
+<?php echo createLDImgSrc($root_path,'back2.gif','0','absmiddle') ?> 
 style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a 
-href="javascript:gethelp('fotolab.php','input','')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc('../','close2.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a></td>
+href="javascript:gethelp('fotolab.php','input','')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a></td>
 </tr>
 <tr valign=top >
 <td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
 <p><font face=verdana,arial size=1 color="#cc0000">
 <?php if($nopatdata) echo '
-	<img '.createMascot('../','mascot1_r.gif','0','bottom').'> <font size=2>'.$LDAlertNoPatientData.'<br></font>';
+	<img '.createMascot($root_path,'mascot1_r.gif','0','bottom').'> <font size=2>'.$LDAlertNoPatientData.'<br></font>';
 ?>
 <form ENCTYPE="multipart/form-data"  action="fotolab-pic-save.php" method="post"  name="srcform" onSubmit="return chkform(this)">
 <INPUT TYPE="hidden" name="MAX_FILE_SIZE" value="2000000">
 <?php 
 /* Load the common icons*/
-$img_cam=createComIcon('../','lilcamera.gif','0');
+$img_cam=createComIcon($root_path,'lilcamera.gif','0');
 
 for ($i=0;$i<$maxpic;$i++)
 {

@@ -1,7 +1,9 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
+* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -10,17 +12,22 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 */
 define('LANG_FILE','or.php');
 define('NO_2LEVEL_CHK',1);
-require_once('../include/inc_front_chain_lang.php');
+require_once($root_path.'include/inc_front_chain_lang.php');
 
 if (!$internok&&!$HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 
-require_once('../include/inc_config_color.php');
+require_once($root_path.'include/inc_config_color.php');
 
 /* Initialization */
 $thisfile='op-pflege-logbuch-xtsuch-start.php';
 $breakfile='javascript:window.close()';
-if(!$xdept) $xdept=$dept;
-if(!$xsaal) $xsaal=$saal;
+
+
+/* Create the global object, load the patient configs*/
+require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
+$glob_obj->getConfig('patient_%');
+
 
 if($srcword!='')
 {
@@ -28,12 +35,12 @@ if($srcword!='')
 
 	$dbtable='care_nursing_op_logbook';
 
-	include('../include/inc_db_makelink.php');
-	if($link&&$DBLink_OK) 
+	if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
+	if($dblink_ok)
 	{
 
        /* Load the date formatter */
-       include_once('../include/inc_date_format_functions.php');
+       include_once($root_path.'include/inc_date_format_functions.php');
        
 	
        /* Load editor functions for time format converter */
@@ -41,389 +48,94 @@ if($srcword!='')
 		
 	  if($mode=='get')
 	   {
-		 		$sql="SELECT  * FROM $dbtable 
-							WHERE lastname='$lastname'
-							AND firstname='$firstname'
-							AND bday='$bday'
-							AND dept='$dept'
-							AND op_nr='$op_nr'";
+			$sql="SELECT o.*, e.encounter_nr,
+								e.encounter_class_nr,
+								 p.name_last, 
+								 p.name_first, 
+								 p.date_birth, 
+								 p.addr_str,
+								 p.addr_str_nr,
+								 p.addr_zip,
+								 t.name AS citytown_name,
+								 d.name_formal,
+								 d.LD_var
+					FROM care_nursing_op_logbook AS o,
+								care_encounter AS e,
+								care_person AS p,
+								care_address_citytown AS t,
+								care_department AS d
+					WHERE o.op_nr='$op_nr'
+								AND o.dept_nr='$dept_nr'
+								AND o.dept_nr=d.nr
+								AND o.encounter_nr=e.encounter_nr
+								AND e.pid=p.pid
+								AND p.addr_citytown_nr=t.nr
+					ORDER BY o.create_time DESC";
 
-				if($ergebnis=mysql_query($sql,$link))
-       			{
-					$rows=0;
-					//echo "<p>$sql get";
-					while( $pdata=mysql_fetch_array($ergebnis)) $rows++;
-					if($rows)
-					{
-						mysql_data_seek($ergebnis,0); //reset the variable
+			if($ergebnis=$db->Execute($sql))
+       		{
+				if($rows=$ergebnis->RecordCount())
+				{
 						$datafound=1;
-					}
-	           }else { echo "$LDDbNoRead<br>$sql"; }
-       }
-	   elseif(!$rows||($mode!="get"))
-	   {
+				}else { 
+					echo "$LDDbNoRead<br>$sql"; 
+				}
+			}
+       	}
+	   	elseif(!$rows||($mode!="get"))
+	   	{
 			//********************************** start searching ***************************************
-		$filtered=strtolower(trim($srcword));
-		$dept_src="";
-		$tag=array("@","#");
-		$cond=array("=","<>");
-		$filter_src=array("plop","hnop","allg_op","unfall_op","gyn_op","augen_op");
-
-		for($n=0;$n<2;$n++)
-		{
-			for($i=0;$i<sizeof($filter_src);$i++)
-				if(stristr($filtered,$tag[$n].$filter_src[$i]))
-				 { 
-					if($dept_src=="") $dept_src="dept$cond[$n]'$filter_src[$i]'";
-			 			else $dept_src.=" AND dept$cond[$n]'$filter_src[$i]'";
-		 			$filtered=str_replace($tag[$n].$filter_src[$i],"",$filtered);
-				}
-		
-			$filter2_src=array("a","b","15","14","13","12","11","10","9","8","8","7","5","3","2","1");
-
-			for($i=0;$i<sizeof($filter2_src);$i++)
-				if(stristr($filtered,$tag[$n].$filter2_src[$i]))
-				 { 
-					if($dept_src=="") $dept_src="op_room$cond[$n]'$filter2_src[$i]'";
-					 else $dept_src.=" AND op_room$cond[$n]'$filter2_src[$i]'";
-		 			 $filtered=str_replace($tag[$n].$filter2_src[$i],"",$filtered);
-				}
-			$fbuf=explode(" ",$filtered);
-		}
-		
-		for($i=0;$i<sizeof($fbuf);$i++)
-		if(stristr($fbuf[$i],"@")) 
-		{
-			array_splice($fbuf,$i,1); 
-			break;
-		}
-
-		for($i=0;$i<sizeof($fbuf);$i++)
-		if(stristr($fbuf[$i],"#")) 
-		{
-			array_splice($fbuf,$i,1); 
-			break;
-		}
-		array_unique($fbuf);
-		//echo "$dept_src $filtered";
-		$filtered=implode(" ",$fbuf);
-		$srcword=trim($filtered);
-
-		$findname="0";
-		$findvname="0";
-		$findbday="0";
-		$validpnum=false;
-		$ndl_name="";
-		$ndl_vname="";
-		$ndl_bday="";
-		$ndl_pnum="";
-	
-	
-		//filter unwanted words
-		$filter=file("ai/filters/".$lang."/person2-filter.txt");
-		while(list($x,$v)=each($filter))
-		{
-			$v=trim($v);
-			$filtered=str_replace($v,"",$filtered);
-		}
-		$filter=NULL; // kill $filter
-		$filtered=trim($filtered);
-		$buff=explode(" ",$filtered);
-
-		while(list($x,$v)=each($buff))
-		{
-			//check if pat number available
-			$v=trim($v);
-			//echo "$v<br>";
-			$b=strtoupper($v);
-			$b2=strtolower($v);
-	
-			if($b==$b2) 
-			{
-				if(!strstr($b,".")&&($b/1)&&($ndl_pnum==NULL))
-				{
-					//		echo $b;
-					$ndl_pnum=$v;
-					if(strlen($v)==8) $validpnum=true; // a valid pat number is 8 digits long
-					//$buff=NULL;
-					continue;
-				}
-				else //check if it is a bday-date
-				{
-					if((substr_count($v,".")==2)&&(strlen($v)>5)&&(strlen($v)<11)) 
-					{
-						if(strlen($v)<10)
-							{
-								$bd=explode(".",$v);
-								for($i=0;$i<3;$i++)	{ if(($bd[$i]<10)&&(strlen($bd[$i])==1)) $bd[$i]="0".$bd[$i]; } 						
- 								if(strlen($bd[2])==2)
-									{
-										if ($bd[2]>(date(Y)-2000)) $bd[2]="19".$bd[2];
-										else  $bd[2]="20".$bd[2];
-									}
-								$v=implode(".",$bd);
-								$bd=NULL;
-							}
-						$ndl_bday=$v;
-						$findbday=1;
-						if(!$findname&&$findvname)
-						{
-							$findname=1;
-							$ndl_name=$ndl_vname;
-							$findvname=0;
-							$ndl_vname="";
-						}
-						continue;
-					}
-				}
-			}
-			//  if pat number not available check for family name detect (,)
-
-			$cpos=strpos($v,",");
-			if(($cpos!=0)&&(strlen($v)==($cpos+1)))
-			{
-				$ndl_name=strtolower(str_replace(",","",$v));
-				$findname=true;
-				//$buff=NULL;
-				continue;
-			}
-			else
-			{
-				if(sizeof($buff)==1) 
-				{
-					$findname=1;
-					$ndl_name=trim(strtolower($v));
-				}
-				elseif	($ndl_vname==NULL)
-					{
-						$findvname=true;
-						$ndl_vname=trim(strtolower($v));
-					}
-					else
-						{
-							$findname=1;
-							$ndl_name=trim(strtolower($v));
-						}
-			}
-		}// end of while
-		//echo $ndl_name."<br>";
-		$buff=NULL;
-		//start searching
-		$dix=0;
-		$six=0;
-		//$past=1;
-					
-		if($validpnum)
-			{
-			 	$id_src="  patnum='$ndl_pnum'";
-			}
-			else
-			{
-							$scode=$findname.$findvname.$findbday;
-							//echo $scode;
-							//echo "scode ".$scode."<br>".$ndl_name."<br>";
-							switch($scode)
-							{
-								case "100":
-													if($id_src=="") $id_src="lastname='$ndl_name'";
-								 						else $id_src.=" AND lastname='$ndl_name'";
-													break;
-								case "110":
-													if($id_src=="") $id_src="lastname='$ndl_name' AND firstname='$ndl_vname'";
-								 						else $id_src.=" AND lastname='$ndl_name' AND firstname='$ndl_vname'";
-													break;
-								case "111":
-													if($id_src=="") $id_src="lastname='$ndl_name' AND firstname='$ndl_vname' AND bday='$ndl_bday'";
-								 						else $dept_src.=" AND lastname='$ndl_name' AND firstname='$ndl_vname' AND bday='$ndl_bday'";
-													break;
-								case "010":
-													if($id_src=="") $id_src="firstname='$ndl_vname'";
-								 						else $id_src.=" AND firstname='$ndl_vname'";
-													break;
-								case "011":
-													if($id_src=="") $id_src="firstname='$ndl_vname' AND bday='$ndl_bday'";
-								 						else $id_src.=" AND firstname='$ndl_vname' AND bday='$ndl_bday'";
-													break;
-								case "001":
-													if($id_src=="") $id_src="bday='$ndl_bday'";
-								 						else $id_src.=" AND bday='$ndl_bday'";
-								case "101":
-													if($id_src=="") $id_src="lastname='$ndl_name' AND bday='$ndl_bday'";
-								 						else $id_src.=" AND lastname='$ndl_name' AND bday='$ndl_bday'";
-													break;
-								default: $id_src="lastname='$filtered'";
-							}
-			}
-				//******************************** 				
-			
-				$sql="SELECT * FROM $dbtable WHERE ";
-				if($dept_src) $sql.=$dept_src ."AND (".$id_src.")";
-				  else $sql.=$id_src;
-				 $sql.=" ORDER BY op_nr DESC";
-				//echo "<p>$sql AND rule";
-				if($ergebnis=mysql_query($sql,$link)) // ergebnis 1
+			$sql="SELECT o.*, e.encounter_nr,
+								e.encounter_class_nr,
+								 p.name_last, 
+								 p.name_first, 
+								 p.date_birth, 
+								 p.addr_str,
+								 p.addr_str_nr,
+								 p.addr_zip,
+								 t.name AS citytown_name,
+								 d.name_formal,
+								 d.LD_var
+					FROM care_nursing_op_logbook AS o,
+								care_encounter AS e,
+								care_person AS p,
+								care_address_citytown AS t,
+								care_department AS d
+					WHERE (o.op_nr = '$srcword'
+								OR e.encounter_nr = '$srcword'
+								OR p.name_last = '$srcword'
+								OR p.name_first = '$srcword'
+								OR p.date_birth = '$srcword')
+								AND o.encounter_nr=e.encounter_nr
+								AND e.pid=p.pid
+								AND o.dept_nr=d.nr
+								AND p.addr_citytown_nr=t.nr";
+				if($ergebnis=$db->Execute($sql))
        			{
-					$rows=0;
-					while( $pdata=mysql_fetch_array($ergebnis)) $rows++;
-					if($rows)
+					if($rows=$ergebnis->RecordCount())
 					{
-						mysql_data_seek($ergebnis,0); //reset the variable
 						$datafound=1;
-					}
-					else // else 1
-					{
-						$id_src=str_replace("AND","OR",$id_src);
-						$sql="SELECT * FROM $dbtable WHERE ";
-						if($dept_src) $sql.=$dept_src ."AND (".$id_src.")";
-				 			 else $sql.=$id_src;
-						//echo $rows;
-						//echo "<p>$sql OR Rule";
-						$sql.=" ORDER BY op_nr DESC";
-						if($ergebnis=mysql_query($sql,$link)) //ergebnis 2
-       						{
-								$rows=0;
-								while( $pdata=mysql_fetch_array($ergebnis)) $rows++;
-								if($rows)
-								{
-									//echo $rows;
-									mysql_data_seek($ergebnis,0); //reset the variable
-									//$datafound=1;
-									//echo $sql."<br>";
-									//echo $rows;
-								}
-								else // else 2
-								{
-									$sql="SELECT * FROM $dbtable WHERE ";
-									if($ndl_name) $id_src="lastname LIKE '$ndl_name%'";
-										else $id_src="";
-									if($ndl_vname) 
-										if($id_src) $id_src.=" OR firstname LIKE '$ndl_vname%'";
-											else $id_src="firstname LIKE '$ndl_vname%'";
-									if($ndl_bday) 
-										if($id_src) $id_src.=" OR bday LIKE '$ndl_bday%'";
-											else $id_src="bday LIKE '$ndl_bday%'";
-					/*				if($ndl_pnum) 
-										if($id_src) $id_src.=" OR patnum LIKE '$ndl_pnum%'";
-											else $id_src="patnum LIKE '$ndl_pnum%'";
-						*/
-									if(!$id_src) $id_src="lastname LIKE '$filtered%'";
-									if($dept_src) $sql.=$dept_src." AND (".$id_src.")";
-									 	else $sql.=$id_src;
-									//echo "<p>$sql  % Rule";
-					 			$sql.=" ORDER BY op_nr DESC";
-								if($ergebnis=mysql_query($sql,$link)) //ergebnis 3
-       								{
-										$rows=0;
-										while( $pdata=mysql_fetch_array($ergebnis)) $rows++;
-										if($rows)
-										{
-											//echo $rows;
-											mysql_data_seek($ergebnis,0); //reset the variable
-											//$datafound=1;
-										}
-										else // now find similar sounding words else 3
-										{
-											$sql="SELECT * FROM $dbtable WHERE ";
-											if($ndl_name!="") $id_src="lastname LIKE '_%'";
-												else $id_src="";
-											if($ndl_vname) 
-												if($id_src!="") $id_src.=" OR firstname LIKE '_%'";
-													else $id_src="firstname LIKE '_%'";
-											if($ndl_bday) 
-												if($id_src!="") $id_src.=" OR bday LIKE '_%'";
-													else $id_src="bday LIKE '_%'";
-											if(!$id_src) $id_src="lastname LIKE '_%' OR firstname LIKE '_%' OR bday LIKE '_%'";
-											$sql.=$id_src;
-					 					$sql.=" ORDER BY op_nr DESC";
-										if($ergebnis=mysql_query($sql,$link)) //ergebnis 4
-       										{
-												$rows=0;
-												while( $pdata=mysql_fetch_array($ergebnis)) $rows++;
-												if($rows)
-												{
-													$id_src=NULL;
-													mysql_data_seek($ergebnis,0); //reset the variable
-													while($bufdata=mysql_fetch_array($ergebnis))
-													{
-														if($ndl_name)
-														{
-															$sx1=soundex($ndl_name);
-															$sx2=soundex($bufdata['lastname']);
-															$sx3=soundex($bufdata['firstname']);
-															$st1=similar_text($sx1,$sx2,&$pc1);
-															$st2=similar_text($sx1,$sx3,&$pc2);
-															//	echo "p1: ".$pc1." p2: ".$pc2."<p>";
-
-															if(($pc1>=75)||($pc2>=75)) 
-																if($id_src!="")
-																{
-																	if(!substr_count($id_src,"lastname LIKE '$bufdata[lastname]'"))
-																		 $id_src.=" OR lastname LIKE '$bufdata[lastname]'";
-																 }
-																	else $id_src="lastname LIKE '$bufdata[lastname]'";
-														}
-														if($ndl_vname)
-														{
-															$sx1=soundex($ndl_vname);
-															$sx2=soundex($bufdata['lastname']);
-															$sx3=soundex($bufdata['firstname']);
-															$st1=similar_text($sx1,$sx2,&$pc1);
-															$st2=similar_text($sx1,$sx3,&$pc2);
-																//echo "p1: ".$pc1." p2: ".$pc2."<p>";
-
-															if(($pc1>=75)||($pc2>=75)) 
-																if($id_src!="")
-																{
-																	if(!substr_count($id_src,"firstname LIKE '$bufdata[firstname]'"))
-																		 $id_src.=" OR firstname LIKE '$bufdata[firstname]'";
-																 }
-																	else $id_src="firstname LIKE '$bufdata[firstname]'";
-														}
-														if($ndl_bday)
-														{
-															$sx1=soundex($ndl_bday);
-															$sx2=soundex($bufdata['bday']);
-															$st1=similar_text($sx1,$sx2,&$pc1);
-																//echo "p1: ".$pc1." p2: ".$pc2."<p>";
-
-															if($pc1>=75) 
-																if($id_src) 
-																{
-																	if(!substr_count($id_src,"bday LIKE '$bufdata[bday]'"))
-																		 $id_src.=" OR bday LIKE '$bufdata[bday]'";
-																 }
-																	else $id_src="bday LIKE '$bufdata[bday]'";
-														}
-													}// end of while
-													$rows=0;
-													$sql="SELECT * FROM $dbtable WHERE ";
-													if($dept_src) $sql.=$dept_src." AND (".$id_src.")";
-									 						else $sql.=$id_src;
-													//echo "<p>$sql wild guess";
-						 							$sql.=" ORDER BY op_nr DESC";
-											if($id_src)
-													if($ergebnis=mysql_query($sql,$link))
-       												{
-														while( $pdata=mysql_fetch_array($ergebnis)) $rows++;
-														if($rows)
-															{
-															mysql_data_seek($ergebnis,0); //reset the variable
-															}
-													}
-													else{ echo "$LDDbNoRead<br>$sql"; }
-												}// end of if rows
-											}// end of ergebnis 4
-											else { echo "$LDDbNoRead<br>$sql"; }
-										} // end of else 3
-									} // end of ergegnis 3
-									else { echo "$LDDbNoRead<br>$sql"; }
-								}//end of else 2
-							} // end of ergebnis 2
-							else { echo "$LDDbNoRead<br>$sql"; }
-						}// end of else 1
-							//else echo "<p>".$sql."<p>Multiple entries found pls notify the edv."; 	
-					} // end of ergebnis 1
-					else { echo "$LDDbNoRead<br>$sql"; }
+					}else{
+						$sql="SELECT o.op_nr,o.dept_nr,o.op_room,o.op_date, e.encounter_nr, p.name_last, p.name_first, p.date_birth
+						FROM care_nursing_op_logbook AS o,
+								care_encounter AS e,
+								care_person AS p
+						WHERE (o.op_nr LIKE '$srcword%'
+								OR e.encounter_nr LIKE '$srcword%'
+								OR p.name_last LIKE '$srcword%'
+								OR p.name_first LIKE '$srcword%'
+								OR p.date_birth LIKE '$srcword%')
+								AND o.encounter_nr=e.encounter_nr
+								AND e.pid=p.pid";
+						if($ergebnis=$db->Execute($sql))
+       					{
+							if($rows=$ergebnis->RecordCount())
+							{
+								if($rows==1) $datafound=1;
+							}
+	           			}else { echo "$LDDbNoRead<br>$sql"; }
+	           		}
+			   }else { echo "$LDDbNoRead<br>$sql"; }
 			
 		} // end of else if mode== get
 
@@ -447,13 +159,13 @@ var nodept=false;
 function pruf(f)
 {
  d=f.srcword.value;
- if((d=="")||(d.length<2)) return false;
+ if(d=="") return false;
  else return true;
 }
 
 function open_such_editwin(filename,y,m,d,dp,sl)
 {
-	url="op-pflege-logbuch-arch-edit.php?mode=edit&fileid="+filename+"&sid=<?php echo "$sid&lang=$lang"; ?>&user=<?php echo str_replace(" ","+",$user); ?>&pyear="+y+"&pmonth="+m+"&pday="+d+"&dept="+dp+"&saal="+sl;
+	url="op-pflege-logbuch-arch-edit.php?mode=edit&fileid="+filename+"&sid=<?php echo "$sid&lang=$lang"; ?>&user=<?php echo str_replace(" ","+",$user); ?>&pyear="+y+"&pmonth="+m+"&pday="+d+"&dept_nr="+dp+"&saal="+sl;
 <?php if($cfg['dhtml'])
 	echo '
 			w=window.parent.screen.width;
@@ -471,36 +183,15 @@ function waitwin()
 	wwin=window.open("waitwin.htm","wait","menubar=no,resizable=no,scrollbars=no,width=400,height=200");
 }
 function getinfo(pid,dept,pdata){
-	urlholder="pflege-station-patientdaten.php?sid=<?php echo "$sid&lang=$lang"; ?>&pn="+pid+"&patient=" + pdata + "&station="+dept+"&op_shortcut=<?php echo strtr($ck_op_pflegelogbuch_user," ","+") ?>";
+	urlholder="<?php echo $root_path; ?>modules/nursing/nursing-station-patientdaten.php<?php echo URL_APPEND; ?>&pn="+pid+"&patient=" + pdata + "&station="+dept+"&op_shortcut=<?php echo strtr($ck_op_pflegelogbuch_user," ","+") ?>";
 	patientwin=window.open(urlholder,pid,"width=700,height=450,menubar=no,resizable=yes,scrollbars=yes");
-	}
-function gethelp(x,s,x1,x2,x3)
-{
-	if (!x) x="";
-	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
-	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
-	window.helpwin.moveTo(0,0);
 }
-
 // -->
 </script>
 
-
- <?php if($cfg['dhtml'])
-{ echo' 
-	<script language="javascript" src="../js/hilitebu.js">
-	</script>
-	
-	<STYLE TYPE="text/css">
-	A:link  {text-decoration: none; color: '.$cfg['body_txtcolor'].';}
-	A:hover {text-decoration: underline; color: '.$cfg['body_hover'].';}
-	A:active {text-decoration: none; color: '.$cfg['body_alink'].';}
-	A:visited {text-decoration: none; color: '.$cfg['body_txtcolor'].';}
-	A:visited:active {text-decoration: none; color: '.$cfg['body_alink'].';}
-	A:visited:hover {text-decoration: underline; color: '.$cfg['body_hover'].';}
-	</style>';
-}
-
+<?php 
+require($root_path.'include/inc_js_gethelp.php');
+require($root_path.'include/inc_css_a_hilitebu.php');
 ?>
 
 
@@ -512,17 +203,14 @@ function gethelp(x,s,x1,x2,x3)
  if (!$cfg['dhtml']){ echo ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } 
   ?> onUnload="if (wwin) wwin.close();">
  
- 
-
 <table width=100% border=0 cellspacing="0">
-
 <tr>
 <td bgcolor=<?php echo $cfg['top_bgcolor']; ?>>
 <FONT  COLOR="<?php echo $cfg['top_txtcolor'];?>"  SIZE=+2  FACE="Arial">
 <STRONG> &nbsp;<?php echo "$LDOrLogBook - $LDSearch" ?></STRONG></FONT>
 </td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr>
-<!-- <a href="javascript:window.history.back()"><img <?php echo createLDImgSrc('../','back2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a> --><a href="javascript:gethelp('oplog.php','search','<?php echo $mode ?>','<?php echo $rows ?>','<?php echo $datafound ?>')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc('../','close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
+<!-- <a href="javascript:window.history.back()"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a> --><a href="javascript:gethelp('oplog.php','search','<?php echo $mode ?>','<?php echo $rows ?>','<?php echo $datafound ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </nobr>
 </td>
 </tr>
@@ -533,55 +221,63 @@ function gethelp(x,s,x1,x2,x3)
 <FONT    SIZE=-1  FACE="Arial">
 <?php if((($mode=="get")||($datafound))&&$rows)
 {
-
 	if($rows>1) echo $LDPatLogbookMany;
 		else echo $LDPatLogbook;
-
 echo '
 		<table cellpadding="0" cellspacing="0" border="0" bgcolor="#999999" width="100%">
 		<tr><td>
 		<table  cellpadding="3" cellspacing="1" border="0" width="100%">
 		';	
 echo '
-		<tr bgcolor="#bbbbbb" >';
+		<tr bgcolor="#0000cc">';
 	while(list($x,$v)=each($LDOpMainElements))
 	{
 		echo '		
-		<td><font face="verdana,arial" size="1" ><b>'.$v.'</b></td>';	
+		<td background="'.$root_path.'gui/img/common/default/tableHeaderbg.gif"><font face="verdana,arial" size="1" color="#fefefe"><b>'.$v.'</b></td>';	
 	}
 echo '
 		</tr>';
 		
-$img_arrow=createComIcon('../','bul_arrowgrnlrg.gif','0','middle'); // Loads the arrow icon image
-$img_info=createComIcon('../','info2.gif','0','middle'); // Loads the arrow icon image
+$img_arrow=createComIcon($root_path,'bul_arrowgrnlrg.gif','0','middle'); // Loads the arrow icon image
+$img_info=createComIcon($root_path,'info2.gif','0','middle'); // Loads the arrow icon image
 		
 		
-while($pdata=mysql_fetch_array($ergebnis))
+while($pdata=$ergebnis->FetchRow())
 	{
 		echo '
 				<tr>
-				<td colspan=9><font size=2>'.$LDDepartment.'<font color="#eeeeee">'.strtoupper($pdata[dept]).'</font> '.$LDOrRoom.' <font color="#eeeeee">'.strtoupper($pdata[op_room]).'</font></font>
+				<td colspan=9  background="'.$root_path.'gui/img/common/default/tableHeaderbg3.gif"><font size=2>&nbsp;
+				<font color="#000033">';
+				$buffer=$pdata['LD_var'];
+				if(isset($$buffer)&&!empty($$buffer)) echo $$buffer;
+					else echo $pdata['name_formal'];
+				echo ' :: '.strtoupper($pdata[op_room]).'</font></font>
 				</td></tr>';
 
 	if ($toggler==0) 
 		{ echo '<tr bgcolor="#fdfdfd">'; $toggler=1;} 
 		else { echo '<tr bgcolor="#eeeeee">'; $toggler=0;}
 	echo '
-			<a name="'.$pdata['patnum'].'"></a>';
+			<a name="'.$pdata['encounter_nr'].'"></a>';
 	list($iyear,$imonth,$iday)=explode('-',$pdata['op_date']);
 	echo '
 			<td valign=top><font face="verdana,arial" size="1" ><font size=2 color=red><b>'.$pdata['op_nr'].'</b></font><hr>'.formatDate2Local($pdata['op_date'],$date_format).'<br>
 			'.$tage[date("w",mktime(0,0,0,$imonth,$iday,$iyear))].'<br>
-			<a href="op-pflege-logbuch-start.php?sid='.$sid.'&lang='.$lang.'&mode=saveok&patnum='.$pdata[patnum].'&op_nr='.$pdata[op_nr].'&dept='.$pdata[dept].'&saal='.$pdata[op_room].'&pyear='.$iyear.'&pmonth='.$imonth.'&pday='.$iday.'">
-			<img '.$img_arrow.' alt="'.str_replace("~tagword~",$pdata['lastname'],$LDEditPatientData).'"></a>
+			<a href="op-pflege-logbuch-start.php?sid='.$sid.'&lang='.$lang.'&mode=saveok&enc_nr='.$pdata['encounter_nr'].'&op_nr='.$pdata[op_nr].'&dept_nr='.$pdata[dept_nr].'&saal='.$pdata[op_room].'&pyear='.$iyear.'&pmonth='.$imonth.'&pday='.$iday.'">
+			<img '.$img_arrow.' alt="'.str_replace("~tagword~",$pdata['name_last'],$LDEditPatientData).'"></a>
 			</td>';
 	
 	echo '
-			<td valign=top><nobr>&nbsp;<font face="verdana,arial" size="1" color=blue>
-			<a href="javascript:getinfo(\''.$pdata[patnum].'\',\''.$pdata[dept].'\')">
-			<img '.$img_info.' alt="'.str_replace("~tagword~",$pdata['lastname'],$LDOpenPatientFolder).'"></a> '.$pdata['patnum'].'<br>';
-	echo '
-			<font color=black><b>'.$pdata['lastname'].', '.$pdata['firstname'].'</b><br>'.formatDate2Local($pdata['bday'],$date_format).'<br>'.nl2br(stripcslashes($pdata['address'])).'</td>';
+			<td valign=top><nobr><font face="verdana,arial" size="1" color=blue>
+			<a href="javascript:getinfo(\''.$pdata[encounter_nr].'\',\''.$pdata[dept_nr].'\')">
+			<img '.$img_info.' alt="'.str_replace("~tagword~",$pdata['name_last'],$LDOpenPatientFolder).'"></a>&nbsp; ';
+
+	echo ($pdata['encounter_class_nr']==1)?($pdata['encounter_nr']+$GLOBAL_CONFIG['patient_inpatient_nr_adder']) : ($pdata['encounter_nr']+$GLOBAL_CONFIG['patient_outpatient_nr_adder']);
+			
+	echo '<br>
+			<font color=black><b>'.$pdata['name_last'].', '.$pdata['name_first'].'</b><br>'.formatDate2Local($pdata['date_birth'],$date_format).'<p>
+			<font color="#000000">'.$pdata['addr_str'].' '.$pdata['addr_str_nr'].'<br>'.$pdata['addr_zip'].' '.$pdata['citytown_name'].'</font><br></td>';
+			
 	echo '
 			<td valign=top><font face="verdana,arial" size="1" >';
 	echo '
@@ -686,27 +382,27 @@ if($mode=='search')
 		else echo " $LDSimilarMany ";
 		echo $LDNeededInfo.'<p>';
 		
-		$img_src='<img '.createComIcon('../','arrow.gif','0','middle').'>'; // Loads the arrow icon image
+		$img_src='<img '.createComIcon($root_path,'arrow.gif','0','middle').'>'; // Loads the arrow icon image
 		
-		while($pdata=mysql_fetch_array($ergebnis))
+		while($pdata=$ergebnis->FetchRow())
 		{
 				echo "
-						<a href=\"op-pflege-logbuch-xtsuch-start.php?sid=$sid&lang=$lang&mode=get&xdept=$xdept&xsaal=$xsaal&lastname=$pdata[lastname]&firstname=$pdata[firstname]&bday=$pdata[bday]&dept=$pdata[dept]&op_nr=$pdata[op_nr]&srcword=".strtr($srcword," ","+")."\">";
+						<a href=\"op-pflege-logbuch-xtsuch-start.php?sid=$sid&lang=$lang&mode=get&dept_nr=$pdata[dept_nr]&op_nr=$pdata[op_nr]&srcword=".strtr($srcword," ","+")."\">";
 				
 				echo $img_src;
 				
-				if($ndl_name&&stristr($pdata[lastname],$ndl_name)) echo '<u><b><span style="background:yellow"> '.$pdata['lastname'].'</span></b></u>';
- 					else echo $pdata['lastname'];			
+				if($srcword&&stristr($pdata['name_last'],$srcword)) echo '<u><b><span style="background:yellow"> '.$pdata['name_last'].'</span></b></u>';
+ 					else echo $pdata['name_last'];			
 						
  				echo ', ';
 				
-				if($ndl_vname&&stristr($pdata[firstname],$ndl_vname)) echo '<u><b><span style="background:yellow"> '.$pdata['firstname'].'</span></b></u>';
- 					else echo $pdata['firstname'];		
+				if($srcword&&stristr($pdata['name_first'],$srcword)) echo '<u><b><span style="background:yellow"> '.$pdata['name_first'].'</span></b></u>';
+ 					else echo $pdata['name_first'];		
 							
  				echo ' (';
 				
-				if($ndl_bday&&stristr($pdata[bday],$ndl_bday)) echo '<u><b><span style="background:yellow"> '.formatDate2Local($pdata['bday'],$date_format).'</span></b></u>';
- 					else echo formatDate2Local($pdata['bday'],$date_format);				
+				if($srcword&&stristr($pdata['date_birth'],$srcword)) echo '<u><b><span style="background:yellow"> '.formatDate2Local($pdata['date_birth'],$date_format).'</span></b></u>';
+ 					else echo formatDate2Local($pdata['date_birth'],$date_format);				
  				echo ') ';
 				
 				echo strtoupper($altdept[$i]).'  '.$LDOpRoom.': <b>'.$pdata[op_room].'</b>, '.$LDSrcListElements[5].': <b>'.formatDate2Local($pdata['op_date'],$date_format).'</b> '.$LDOpNr.': <b>'.$pdata['op_nr'].'</b><br>';
@@ -721,7 +417,7 @@ if($mode=='search')
 				</table>
 			</td>
 			<td>	
-			<img '.createMascot('../','mascot1_l.gif','0','middle').'>
+			<img '.createMascot($root_path,'mascot1_l.gif','0','middle').'>
 				
 			</td>
 			</tr>
@@ -744,8 +440,8 @@ if($mode=='search')
           		<input type="text" name="srcword" size=40 maxlength=100 value="<?php echo $srcword; ?>">
 				<input type="hidden" name="sid" value="<?php echo $sid; ?>"> 
 				<input type="hidden" name="lang" value="<?php echo $lang; ?>"> 
-				<input type="hidden" name="xdept" value="<?php echo $xdept; ?>"> 
-				<input type="hidden" name="xsaal" value="<?php echo $xsaal; ?>"> 
+				<input type="hidden" name="dept_nr" value="<?php echo $dept_nr; ?>"> 
+				<input type="hidden" name="saal" value="<?php echo $saal; ?>"> 
 				<input type="hidden" name="child" value="<?php echo $child; ?>"> 
 				<input type="hidden" name="user" value="<?php echo str_replace(" ","+",$HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]); ?>">
     			<input type="hidden" name="mode" value="search">
@@ -777,18 +473,18 @@ if($mode=='search')
 <ul>
 <FONT    SIZE=2  FACE="Arial">
 <b><?php echo $LDOtherFunctions ?>:</b><br>
-<img <?php echo createComIcon('../','varrow.gif','0') ?>> <a href="op-pflege-logbuch-arch-start.php?sid=<?php echo "$sid&lang=$lang&dept=$xdept&saal=$xsaal&child=$child" ?>"><?php echo "$LDResearchArchive [$LDOrLogBook]" ?></a><br>
-<img <?php echo createComIcon('../','varrow.gif','0') ?>> <a href="op-pflege-logbuch-start.php?sid=<?php echo "$sid&lang=$lang&mode=fresh&dept=$xdept&saal=$xsaal" ?>" <?php if ($child) echo "target=\"_parent\""; ?>><?php echo "$LDStartNewDocu [$LDOrLogBook]" ?></a><br>
-<img <?php echo createComIcon('../','varrow.gif','0') ?>> <a href="javascript:gethelp('oplog.php','search','<?php echo $mode ?>','<?php echo $rows ?>','<?php echo $datafound ?>')"><?php echo "$LDHelp" ?></a><br>
+<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-pflege-logbuch-arch-start.php?sid=<?php echo "$sid&lang=$lang&dept_nr=$dept_nr&saal=$saal&child=$child" ?>"><?php echo "$LDResearchArchive [$LDOrLogBook]" ?></a><br>
+<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-pflege-logbuch-start.php?sid=<?php echo "$sid&lang=$lang&mode=fresh&dept_nr=$dept_nr&saal=$saal" ?>" <?php if ($child) echo "target=\"_parent\""; ?>><?php echo "$LDStartNewDocu [$LDOrLogBook]" ?></a><br>
+<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="javascript:gethelp('oplog.php','search','<?php echo $mode ?>','<?php echo $rows ?>','<?php echo $datafound ?>')"><?php echo "$LDHelp" ?></a><br>
 
 <p>
-<a href="javascript:window.opener.focus();window.close();"><img border=0 align="right" <?php echo createLDImgSrc('../','cancel.gif','0') ?>"  alt="<?php echo $LDCancel ?>"></a>
+<a href="javascript:window.opener.focus();window.close();"><img border=0 align="right" <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>"  alt="<?php echo $LDCancel ?>"></a>
 </ul>
 <p>
 <hr>
 <?php
-require("../language/".$lang."/".$lang."_copyrite.php");
- ?>
+require($root_path.'include/inc_load_copyrite.php');
+?>
 </FONT>
 
 

@@ -1,12 +1,14 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','stdpass.php');
 define('NO_2LEVEL_CHK',1);
-require_once('../include/inc_front_chain_lang.php');
+require_once($root_path.'include/inc_front_chain_lang.php');
 
-require_once('../include/inc_config_color.php');
+require_once($root_path.'include/inc_config_color.php');
 
-require_once('../global_conf/areas_allow.php');
+require_once($root_path.'global_conf/areas_allow.php');
 
 $allowedarea=&$allow_area['news'];
 
@@ -29,7 +31,7 @@ switch($target)
 {
 	case "headline": $allowedarea[]='headline';
 							$fileforward='headline-edit-select-art.php'.$append;
-							$breakfile="startframe.php?sid=".$sid."&lang=".$lang;
+							$breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 							break;
 	case "cafenews": $allowedarea[]='cafenews';
 							$fileforward='cafenews-edit-select.php'.$append;
@@ -60,16 +62,16 @@ $passtag=0;
 
 //reset cookie;
 // reset all 2nd level lock cookies
-require('../include/inc_2level_reset.php'); 
+require($root_path.'include/inc_2level_reset.php'); 
 setcookie(ck_2level_sid.$sid,"");
 
-require('../include/inc_passcheck_internchk.php');
+require($root_path.'include/inc_passcheck_internchk.php');
 if ($pass=='check') 	
-	include('../include/inc_passcheck.php');
+	include($root_path.'include/inc_passcheck.php');
 
 $errbuf=strtr($lognote,"+"," ");
 
-require('../include/inc_passcheck_head.php');
+require($root_path.'include/inc_passcheck_head.php');
 ?>
 <?php echo setCharSet(); ?>
 <BODY  onLoad="document.passwindow.userid.focus();" bgcolor=<?php echo $cfg['body_bgcolor']; ?>
@@ -80,7 +82,7 @@ require('../include/inc_passcheck_head.php');
 
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
 
-<?php require('../include/inc_passcheck_mask.php') ?>  
+<?php require($root_path.'include/inc_passcheck_mask.php') ?>  
 
 <p><br>
 
@@ -99,8 +101,8 @@ require('../include/inc_passcheck_head.php');
 <FONT    SIZE=2  FACE="Arial">
 
 <p>
-<img <?php echo createComIcon('../','varrow.gif','0') ?>> <a href="ucons.php<?php echo "?lang=$lang" ?>"><?php echo $LDIntroTo." ".$title ?></a><br>
-<img <?php echo createComIcon('../','varrow.gif','0') ?>> <a href="ucons.php<?php echo "?lang=$lang" ?>"><?php echo $LDWhatTo." ".$title ?>?</a><br>
+<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo $LDIntroTo." ".$title ?></a><br>
+<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo $LDWhatTo." ".$title ?>?</a><br>
 <HR>
 <?php
  // get a  page into an array and echo it out

@@ -95,5 +95,27 @@ $LDDOCSR="DOCSR";
 $LDDOCSRTxt="Requête du horaire des docteurs en permanence";
 /* 2002-09-15 EL */
 $LDTestRequest="Test de requête";
-
+/* 2003-03-16 EL */
+$LDContactInfo='Contact Info';
+$LDPersonalContactInfo='Personal Contact Info';
+$LDOnCallContactInfo='On-Call Contact Info';
+$LDPlsSelectDept='Please select a department';
+$LDCreateDoctorsList='Create doctors\' list';
+$LDPlsCreateList='Please create the list first.';
+$LDPlsClickButton='Click on the following button.';
+$LDFamilyName='Family name';
+$LDGivenName='Given name';
+$LDDateOfBirth='Date of birth';
+$LDEntryPrompt='Please enter a search keyword:<br>(e.g. family name, given name, personell number, etc.)<br>';
+$LDPersonellNr='Personell Nr.';
+$LDFunction='Function';
+$LDOptions='Options';
+$LDSearchFound='Search found ~nr~ relevant data.';
+$LDAddDoctorToList='Add a doctor to list';
+$LDAdd='Add';
+$LDDelete='Delete';
+$LDSureToDeleteEntry='Are you sure you want to delete this entry?';
+/* 2003-03-18 EL */
+$LDChangeOnlyDept='Change the department';
+$LDCreateNursesList='Create Nurses\' List';
 ?>

@@ -1,7 +1,9 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.03 - 2002-10-26
+* CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -10,12 +12,12 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 */
 define('LANG_FILE','or.php');
 define('NO_2LEVEL_CHK',1);
-require_once('../include/inc_front_chain_lang.php');
-require_once('../include/inc_config_color.php');
+require_once($root_path.'include/inc_front_chain_lang.php');
+require_once($root_path.'include/inc_config_color.php');
 
 switch($retpath)
 {
-	case "docs": $breakfile="aerzte.php?sid=".$sid."&lang=".$lang; break;
+	case "docs": $breakfile="doctors.php?sid=".$sid."&lang=".$lang; break;
 	case "op": $breakfile="op-doku.php?sid=".$sid."&lang=".$lang; break;
 	default: $breakfile="op-doku.php?sid=".$sid."&lang=".$lang; 
 }
@@ -33,7 +35,7 @@ if(!$hilitedept)
 	else
 	{
 	$saal="exclude";
-	 include("../include/inc_resolve_opr_dept.php");
+	 include("inc_resolve_opr_dept.php");
 	 if($deptOK) $hilitedept=$dept;
 	 }
 }
@@ -41,13 +43,13 @@ if(!$hilitedept)
 
 
 
-$filename="../global_conf/$lang/op_tag_dept.pid";
+$filename=$root_path."global_conf/$lang/op_tag_dept.pid";
 
 $dbtable='care_nursing_dutyplan';
 
 /* Establish db connection */
-require('../include/inc_db_makelink.php');
-if($link&&$DBLink_OK) 
+if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
+if($dblink_ok)
 {	
  if (file_exists($filename))
  {
@@ -61,14 +63,11 @@ if($link&&$DBLink_OK)
 							WHERE dept='$dept'
 								AND year='$pyear'
 								AND month='$pmonth'";
-			if($ergebnis=mysql_query($sql,$link))
+			if($ergebnis=$db->Execute($sql))
        		{
-				$rows=0;
-				if( $result=mysql_fetch_array($ergebnis)) $rows++;
-				if($rows)
+				if($rows=$ergebnis->RecordCount())
 				{
-					mysql_data_seek($ergebnis,0);
-					$content[$i]=mysql_fetch_array($ergebnis);
+					$content[$i]=$ergebnis->FetchRow();
 					//echo $content[$i][a_dutyplan];
 					//echo $sql."<br>";
 				}
@@ -117,7 +116,7 @@ function gethelp(x,s,x1,x2,x3)
 </script>
 
 <?php 
-require('../include/inc_css_a_hilitebu.php');
+require($root_path.'include/inc_css_a_hilitebu.php');
 ?>
 </HEAD>
 
@@ -130,7 +129,7 @@ require('../include/inc_css_a_hilitebu.php');
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10">
 <FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp; <?php echo "$LDOr $LDDutyPlan $LDQuickView" ?></STRONG></FONT></td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc('../','back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('op_duty.php','quick')"><img <?php echo createLDImgSrc('../','hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
+<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('op_duty.php','quick')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
 <tr>
 <td bgcolor="<?php echo $cfg['body_bgcolor']; ?>" colspan=2>
@@ -162,14 +161,14 @@ for ($i=0;$i<sizeof($abtarr);$i++)
 		$sql="SELECT list FROM care_nursing_dept_personell_quicklist WHERE
 				dept='".$abtarr[$i]."'";
 		//echo $sql;
-		if($ergebnis=mysql_query($sql,$link))
+		if($ergebnis=$db->Execute($sql))
        		{
 				$rows=0;
-				if( $result=mysql_fetch_array($ergebnis)) $rows++;
+				if( $result=$ergebnis->FetchRow()) $rows++;
 				if($rows)
 				{
 					mysql_data_seek($ergebnis,0);
-					$pinfo=mysql_fetch_array($ergebnis);
+					$pinfo=$ergebnis->FetchRow();
 					//echo $result[$i][a_dutyplan];
 					//echo $sql."<br>";
 				}
@@ -182,7 +181,7 @@ for ($i=0;$i<sizeof($abtarr);$i++)
 			{ echo '<tr bgcolor="#cfcfcf">'; $toggler=1;} 
 				else { echo '<tr bgcolor="#f6f6f6">'; $toggler=0;}
 	echo '<td ><font face="verdana,arial" size="1">&nbsp;'.$bold.$abtname[$abtarr[$i]].$boldx.'&nbsp;</td><td >&nbsp;<font face="verdana,arial" size="2" >
-	<img '.createComIcon('../','mans-gr.gif','0').'>&nbsp;<a href="javascript:popinfo(\''.$aelems[l].'\',\''.$aelems[f].'\',\''.$aelems[b].'\',\''.$abtarr[$i].'\')" title="'.$LDClk2Show.' '.$LDExtraInfo.'"><b>';
+	<img '.createComIcon($root_path,'mans-gr.gif','0').'>&nbsp;<a href="javascript:popinfo(\''.$aelems[l].'\',\''.$aelems[f].'\',\''.$aelems[b].'\',\''.$abtarr[$i].'\')" title="'.$LDClk2Show.' '.$LDExtraInfo.'"><b>';
 	//if ($aelems[l]!="") echo $aelems[l].', ';
 	//echo $aelems[f].'</b></a></td>';
 	echo $aelems[s].'</b></a></td>';
@@ -203,7 +202,7 @@ for ($i=0;$i<sizeof($abtarr);$i++)
 	}
 	echo '&nbsp;';
 	echo '</td><td ><font face="verdana,arial" size="2" >
-	<img '.createComIcon('../','mans-red.gif','0').'>&nbsp;<a href="javascript:popinfo(\''.$relems[l].'\',\''.$relems[f].'\',\''.$relems[b].'\',\''.$abtarr[$i].'\')" title="'.$LDClk2Show.' '.$LDExtraInfo.'"><b>';
+	<img '.createComIcon($root_path,'mans-red.gif','0').'>&nbsp;<a href="javascript:popinfo(\''.$relems[l].'\',\''.$relems[f].'\',\''.$relems[b].'\',\''.$abtarr[$i].'\')" title="'.$LDClk2Show.' '.$LDExtraInfo.'"><b>';
 	//if ($relems[l]!="") echo $relems[l].', '.$relems[f];
 	echo $relems[s].'</b></a></td>';
 	echo '<td><font face="verdana,arial" size="2" >';
@@ -224,7 +223,7 @@ for ($i=0;$i<sizeof($abtarr);$i++)
 	}
 	echo '&nbsp;';
 	echo '</td><td >&nbsp; <a href="op-pflege-dienstplan.php?sid='.$sid.'&dept='.$abtarr[$i].'&retpath=qview&lang='.$lang.'">
-	<button onClick="javascript:window.location.href=\'op-pflege-dienstplan.php?sid='.$sid.'&dept='.$abtarr[$i].'&retpath=qview&lang='.$lang.'\'"><img '.createComIcon('../','new_address.gif','0','absmiddle').' alt="'.$LDClk2Show.' '.$LDDutyPlan.'">  <font size=1>'.$LDShow.'</font></button></a> </td></tr>';
+	<button onClick="javascript:window.location.href=\'op-pflege-dienstplan.php?sid='.$sid.'&dept='.$abtarr[$i].'&retpath=qview&lang='.$lang.'\'"><img '.createComIcon($root_path,'new_address.gif','0','absmiddle').' alt="'.$LDClk2Show.' '.$LDDutyPlan.'">  <font size=1>'.$LDShow.'</font></button></a> </td></tr>';
 	echo "\n";
 
 	}
@@ -236,19 +235,15 @@ echo '</table>';
 
 <p>
 
-<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc('../','close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>">
+<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>">
 </a></FONT>
 <p>
 </td>
 </tr>
 </table>        
 <p>
-
 <?php
-if(file_exists('../language/'.$lang.'/'.$lang.'_copyrite.php'))
-include('../language/'.$lang.'/'.$lang.'_copyrite.php');
-  else include('../language/en/en_copyrite.php');?>
-
-
+require($root_path.'include/inc_load_copyrite.php');
+?>
 </BODY>
 </HTML>
