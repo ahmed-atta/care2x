@@ -6,13 +6,15 @@
 /**
  * Get some core libraries
  */
-require_once('./libraries/grab_globals.lib.php');
+require('./libraries/grab_globals.lib.php');
 $js_to_run = 'functions.js';
-require_once('./header.inc.php');
+require('./header.inc.php');
 
 // Check parameters
 
-require_once('./libraries/common.lib.php');
+if (!defined('PMA_COMMON_LIB_INCLUDED')) {
+    include('./libraries/common.lib.php');
+}
 
 PMA_checkParameters(array('db', 'table'));
 
@@ -55,6 +57,9 @@ if (isset($submit)) {
         if (empty($field_name[$i])) {
             continue;
         }
+        if (PMA_MYSQL_INT_VERSION < 32306) {
+            PMA_checkReservedWords($field_name[$i], $err_url);
+        }
         $query = PMA_backquote($field_name[$i]) . ' ' . $field_type[$i];
         if ($field_length[$i] != '') {
             $query .= '(' . $field_length[$i] . ')';
@@ -83,8 +88,8 @@ if (isset($submit)) {
     } // end for
     unset($field_cnt);
     unset($query);
-    $sql_query = preg_replace('@, $@', '', $sql_query);
-    $query_cpy = preg_replace('@, $@', '', $query_cpy);
+    $sql_query = ereg_replace(', $', '', $sql_query);
+    $query_cpy = ereg_replace(', $', '', $query_cpy);
 
     // Builds the primary keys statements
     $primary     = '';
@@ -96,7 +101,7 @@ if (isset($submit)) {
         }
     } // end for
     unset($primary_cnt);
-    $primary = preg_replace('@, $@', '', $primary);
+    $primary = ereg_replace(', $', '', $primary);
     if (!empty($primary)) {
         $sql_query .= ', PRIMARY KEY (' . $primary . ')';
         $query_cpy .= ',' . "\n" . '  PRIMARY KEY (' . $primary . ')';
@@ -113,7 +118,7 @@ if (isset($submit)) {
         }
     } // end for
     unset($index_cnt);
-    $index = preg_replace('@, $@', '', $index);
+    $index = ereg_replace(', $', '', $index);
     if (!empty($index)) {
         $sql_query .= ', INDEX (' . $index . ')';
         $query_cpy .= ',' . "\n" . '  INDEX (' . $index . ')';
@@ -130,7 +135,7 @@ if (isset($submit)) {
         }
     } // end for
     unset($unique_cnt);
-    $unique = preg_replace('@, $@', '', $unique);
+    $unique = ereg_replace(', $', '', $unique);
     if (!empty($unique)) {
         $sql_query .= ', UNIQUE (' . $unique . ')';
         $query_cpy .= ',' . "\n" . '  UNIQUE (' . $unique . ')';
@@ -147,7 +152,7 @@ if (isset($submit)) {
         }
     } // end for
 
-    $fulltext = preg_replace('@, $@', '', $fulltext);
+    $fulltext = ereg_replace(', $', '', $fulltext);
     if (!empty($fulltext)) {
         $sql_query .= ', FULLTEXT (' . $fulltext . ')';
         $query_cpy .= ',' . "\n" . '  FULLTEXT (' . $fulltext . ')';
@@ -167,8 +172,7 @@ if (isset($submit)) {
         $sql_query .= ' CHARACTER SET = ' . $tbl_charset;
         $query_cpy .= "\n" . 'CHARACTER SET = ' . $tbl_charset;
     }
-
-    if (!empty($comment)) {
+    if (PMA_MYSQL_INT_VERSION >= 32300 && !empty($comment)) {
         $sql_query .= ' COMMENT = \'' . PMA_sqlAddslashes($comment) . '\'';
         $query_cpy .= "\n" . 'COMMENT = \'' . PMA_sqlAddslashes($comment) . '\'';
     }
@@ -183,26 +187,28 @@ if (isset($submit)) {
         $message   = $strTable . ' ' . htmlspecialchars($table) . ' ' . $strHasBeenCreated;
 
         // garvin: If comments were sent, enable relation stuff
-        require_once('./libraries/relation.lib.php');
-        require_once('./libraries/transformations.lib.php');
+        require('./libraries/relation.lib.php');
+        require('./libraries/transformations.lib.php');
 
         $cfgRelation = PMA_getRelationsParam();
 
         // garvin: Update comment table, if a comment was set.
         if (isset($field_comments) && is_array($field_comments) && $cfgRelation['commwork']) {
-            foreach($field_comments AS $fieldindex => $fieldcomment) {
+            @reset($field_comments);
+            while(list($fieldindex, $fieldcomment) = each($field_comments)) {
                 PMA_setComment($db, $table, $field_name[$fieldindex], $fieldcomment);
             }
         }
 
         // garvin: Update comment table for mime types [MIME]
         if (isset($field_mimetype) && is_array($field_mimetype) && $cfgRelation['commwork'] && $cfgRelation['mimework'] && $cfg['BrowseMIME']) {
-            foreach($field_mimetype AS $fieldindex => $mimetype) {
+            @reset($field_mimetype);
+            while(list($fieldindex, $mimetype) = each($field_mimetype)) {
                 PMA_setMIME($db, $table, $field_name[$fieldindex], $mimetype, $field_transformation[$fieldindex], $field_transformation_options[$fieldindex]);
             }
         }
 
-        require('./' . $cfg['DefaultTabTable']);
+        include('./' . $cfg['DefaultTabTable']);
         $abort = TRUE;
         exit();
     } else {
@@ -232,11 +238,15 @@ if ($abort == FALSE) {
     }
     // Table name and number of fields are valid -> show the form
     else {
+        if (PMA_MYSQL_INT_VERSION < 32306) {
+            PMA_checkReservedWords($table, $err_url);
+        }
+
         $action = 'tbl_create.php';
-        require('./tbl_properties.inc.php');
+        include('./tbl_properties.inc.php');
         // Diplays the footer
         echo "\n";
-        require_once('./footer.inc.php');
+        include('./footer.inc.php');
    }
 }
 

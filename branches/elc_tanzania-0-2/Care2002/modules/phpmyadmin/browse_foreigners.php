@@ -5,23 +5,25 @@
 /**
  * Get the variables sent or posted to this script and displays the header
  */
-require_once('./libraries/grab_globals.lib.php');
+require('./libraries/grab_globals.lib.php');
 
 /**
  * Gets a core script and starts output buffering work
  */
-require_once('./libraries/common.lib.php');
+if (!defined('PMA_COMMON_LIB_INCLUDED')) {
+    include('./libraries/common.lib.php');
+}
 
 PMA_checkParameters(array('db', 'table', 'field'));
 
-require_once('./libraries/ob.lib.php');
+require('./libraries/ob.lib.php');
 if ($cfg['OBGzip']) {
     $ob_mode = PMA_outBufferModeGet();
     if ($ob_mode) {
         PMA_outBufferPre($ob_mode);
     }
 }
-require_once('./libraries/header_http.inc.php');
+include('./libraries/header_http.inc.php');
 $field = urldecode($field);
 
 /**
@@ -43,11 +45,11 @@ PMA_setFontSizes();
     <script type="text/javascript" language="javascript">
     self.focus();
     function formupdate(field, key) {
-        if (opener && opener.document && opener.document.insertForm && opener.document.insertForm.elements['field_' + field + '<?php echo (isset($pk) ? '[multi_edit][' . $pk . ']' : ''); ?>[]']) {
-            opener.document.insertForm.elements['field_' + field + '<?php echo (isset($pk) ? '[multi_edit][' . $pk . ']' : ''); ?>[]'].value = key;
+        if (opener && opener.document && opener.document.insertForm && opener.document.insertForm.elements['field_' + field + '[]']) {
+            opener.document.insertForm.elements['field_' + field + '[]'].value = key;
             self.close();
         } else {
-            alert('<?php echo PMA_jsFormat($strWindowNotFound); ?>');
+            alert('<?php echo $strWindowNotFound; ?>');
         }
     }
     </script>
@@ -56,8 +58,8 @@ PMA_setFontSizes();
 <body bgcolor="<?php echo $cfg['LeftBgColor']; ?>" style="margin-left: 5px; margin-top: 5px; margin-right: 5px; margin-bottom: 0px">
 <?php
 $per_page = 200;
-require_once('./libraries/relation.lib.php'); // foreign keys
-require_once('./libraries/transformations.lib.php'); // Transformations
+require('./libraries/relation.lib.php'); // foreign keys
+require('./libraries/transformations.lib.php'); // Transformations
 $cfgRelation = PMA_getRelationsParam();
 $foreigners  = ($cfgRelation['relwork'] ? PMA_getForeigners($db, $table) : FALSE);
 
@@ -72,22 +74,12 @@ if (isset($foreign_navig) && $foreign_navig == $strShowAll) {
     unset($foreign_limit);
 }
 
-require('./libraries/get_foreign.lib.php');
+include('./libraries/get_foreign.lib.php');
 ?>
 
 <form action="browse_foreigners.php" method="post">
 <?php echo PMA_generate_common_hidden_inputs($db, $table); ?>
 <input type="hidden" name="field" value="<?php echo urlencode($field); ?>" />
-<?php
-if (isset($pk)) {
-    $pk_uri = '&amp;pk=' . $pk;
-?>
-<input type="hidden" name="pk" value="<?php echo $pk; ?>" />
-<?php
-} else {
-    $pk_uri = '';
-}
-?>
 
 <table width="100%">
 <?php
@@ -103,7 +95,7 @@ $nbTotalPage = @ceil($the_total / $session_max_rows);
 
 if ($the_total > $per_page) {
     $gotopage = '<br />' . $GLOBALS['strPageNumber']
-              . '<select name="goToPage" onChange="goToUrl(this, \'browse_foreigners.php?field=' . urlencode($field) . '&amp;' . PMA_generate_common_url($db, $table) . $pk_uri . '\');">';
+              . '<select name="goToPage" onChange="goToUrl(this, \'browse_foreigners.php?field=' . urlencode($field) . '&amp;' . PMA_generate_common_url($db, $table) . '&amp;\');">';
     if ($nbTotalPage < 200) {
         $firstPage = 1;
         $lastPage  = $nbTotalPage;
@@ -117,7 +109,7 @@ if ($the_total > $per_page) {
         if ($i == $pageNow) {
             $selected = 'selected="selected"';
         } else {
-            $selected = '';
+            $selected = "";
         }
         $gotopage .= '                <option ' . $selected . ' value="' . (($i - 1) * $session_max_rows) . '">' . $i . '</option>' . "\n";
     }

@@ -6,8 +6,8 @@
 /**
  * Gets core libraries and defines some variables
  */
-require_once('./libraries/grab_globals.lib.php');
-require_once('./libraries/common.lib.php');
+require('./libraries/grab_globals.lib.php');
+require('./libraries/common.lib.php');
 
 // Gets the default font sizes
 PMA_setFontSizes();
@@ -17,6 +17,9 @@ PMA_setFontSizes();
 if (empty($HTTP_HOST)) {
     if (!empty($_ENV) && isset($_ENV['HTTP_HOST'])) {
         $HTTP_HOST = $_ENV['HTTP_HOST'];
+    }
+    else if (!empty($HTTP_ENV_VARS) && isset($HTTP_ENV_VARS['HTTP_HOST'])) {
+        $HTTP_HOST = $HTTP_ENV_VARS['HTTP_HOST'];
     }
     else if (@getenv('HTTP_HOST')) {
         $HTTP_HOST = getenv('HTTP_HOST');
@@ -41,7 +44,7 @@ $url_query = PMA_generate_common_url(isset($db) ? $db : '');
 
 header('Content-Type: text/html; charset=' . $GLOBALS['charset']);
 
-require_once('./libraries/relation.lib.php');
+require('./libraries/relation.lib.php');
 $cfgRelation = PMA_getRelationsParam();
 
 if ($cfg['QueryHistoryDB'] && $cfgRelation['historywork']) {

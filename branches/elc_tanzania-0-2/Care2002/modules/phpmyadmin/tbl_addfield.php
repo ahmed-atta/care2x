@@ -6,9 +6,9 @@
 /**
  * Get some core libraries
  */
-require_once('./libraries/grab_globals.lib.php');
+require('./libraries/grab_globals.lib.php');
 $js_to_run = 'functions.js';
-require_once('./header.inc.php');
+require('./header.inc.php');
 
 // Check parameters
 PMA_checkParameters(array('db', 'table'));
@@ -47,10 +47,13 @@ if (isset($submit)) {
         if (empty($field_name[$i])) {
             continue;
         }
+        if (PMA_MYSQL_INT_VERSION < 32306) {
+            PMA_checkReservedWords($field_name[$i], $err_url);
+        }
 
         $query .= PMA_backquote($field_name[$i]) . ' ' . $field_type[$i];
         if ($field_length[$i] != ''
-            && !preg_match('@^(DATE|DATETIME|TIME|TINYBLOB|TINYTEXT|BLOB|TEXT|MEDIUMBLOB|MEDIUMTEXT|LONGBLOB|LONGTEXT)$@i', $field_type[$i])) {
+            && !eregi('^(DATE|DATETIME|TIME|TINYBLOB|TINYTEXT|BLOB|TEXT|MEDIUMBLOB|MEDIUMTEXT|LONGBLOB|LONGTEXT)$', $field_type[$i])) {
             $query .= '(' . $field_length[$i] . ')';
         }
         if ($field_attribute[$i] != '') {
@@ -97,7 +100,7 @@ if (isset($submit)) {
         }
         $query .= ', ADD ';
     } // end for
-    $query = preg_replace('@, ADD $@', '', $query);
+    $query = ereg_replace(', ADD $', '', $query);
 
     // To allow replication, we first select the db to use and then run queries
     // on this db.
@@ -121,7 +124,7 @@ if (isset($submit)) {
                     $primary .= PMA_backquote($field_name[$j]) . ', ';
                 }
             } // end for
-            $primary     = preg_replace('@, $@', '', $primary);
+            $primary     = ereg_replace(', $', '', $primary);
             if (!empty($primary)) {
                 $sql_query      = 'ALTER TABLE ' . PMA_backquote($table) . ' ADD PRIMARY KEY (' . $primary . ')';
                 $result         = PMA_mysql_query($sql_query) or PMA_mysqlDie('', '', '', $err_url);
@@ -139,7 +142,7 @@ if (isset($submit)) {
                     $index .= PMA_backquote($field_name[$j]) . ', ';
                 }
             } // end for
-            $index     = preg_replace('@, $@', '', $index);
+            $index     = ereg_replace(', $', '', $index);
             if (!empty($index)) {
                 $sql_query      = 'ALTER TABLE ' . PMA_backquote($table) . ' ADD INDEX (' . $index . ')';
                 $result         = PMA_mysql_query($sql_query) or PMA_mysqlDie('', '', '', $err_url);
@@ -157,7 +160,7 @@ if (isset($submit)) {
                     $unique .= PMA_backquote($field_name[$j]) . ', ';
                 }
             } // end for
-            $unique = preg_replace('@, $@', '', $unique);
+            $unique = ereg_replace(', $', '', $unique);
             if (!empty($unique)) {
                 $sql_query      = 'ALTER TABLE ' . PMA_backquote($table) . ' ADD UNIQUE (' . $unique . ')';
                 $result         = PMA_mysql_query($sql_query) or PMA_mysqlDie('', '', '', $err_url);
@@ -168,13 +171,13 @@ if (isset($submit)) {
 
         // Builds the fulltext statements and updates the table
         $fulltext = '';
-        if (isset($field_fulltext)) {
+        if (PMA_MYSQL_INT_VERSION >= 32323 && isset($field_fulltext)) {
             $fulltext_cnt = count($field_fulltext);
             for ($i = 0; $i < $fulltext_cnt; $i++) {
                 $j        = $field_fulltext[$i];
                 $fulltext .= PMA_backquote($field_name[$j]) . ', ';
             } // end for
-            $fulltext = preg_replace('@, $@', '', $fulltext);
+            $fulltext = ereg_replace(', $', '', $fulltext);
             if (!empty($fulltext)) {
                 $sql_query      = 'ALTER TABLE ' . PMA_backquote($table) . ' ADD FULLTEXT (' . $fulltext . ')';
                 $result         = PMA_mysql_query($sql_query) or PMA_mysqlDie('', '', '', $err_url);
@@ -183,21 +186,23 @@ if (isset($submit)) {
         } // end if
 
         // garvin: If comments were sent, enable relation stuff
-        require_once('./libraries/relation.lib.php');
-        require_once('./libraries/transformations.lib.php');
+        require('./libraries/relation.lib.php');
+        require('./libraries/transformations.lib.php');
 
         $cfgRelation = PMA_getRelationsParam();
 
         // garvin: Update comment table, if a comment was set.
         if (isset($field_comments) && is_array($field_comments) && $cfgRelation['commwork']) {
-            foreach($field_comments AS $fieldindex => $fieldcomment) {
+            @reset($field_comments);
+            while(list($fieldindex, $fieldcomment) = each($field_comments)) {
                 PMA_setComment($db, $table, $field_name[$fieldindex], $fieldcomment);
             }
         }
 
         // garvin: Update comment table for mime types [MIME]
         if (isset($field_mimetype) && is_array($field_mimetype) && $cfgRelation['commwork'] && $cfgRelation['mimework'] && $cfg['BrowseMIME']) {
-            foreach($field_mimetype AS $fieldindex => $mimetype) {
+            @reset($field_mimetype);
+            while(list($fieldindex, $mimetype) = each($field_mimetype)) {
                 PMA_setMIME($db, $table, $field_name[$fieldindex], $mimetype, $field_transformation[$fieldindex], $field_transformation_options[$fieldindex]);
             }
         }
@@ -207,7 +212,8 @@ if (isset($submit)) {
         unset($sql_query_cpy);
         $message   = $strTable . ' ' . htmlspecialchars($table) . ' ' . $strHasBeenAltered;
         $active_page = 'tbl_properties_structure.php';
-        require('./tbl_properties_structure.php');
+        include('./tbl_properties_structure.php');
+        exit();
     } else {
         PMA_mysqlDie('', '', '', $err_url, FALSE);
         // garvin: An error happened while inserting/updating a table definition.
@@ -226,11 +232,11 @@ if (isset($submit)) {
  */
 if ($abort == FALSE) {
     $action = 'tbl_addfield.php';
-    require('./tbl_properties.inc.php');
+    include('./tbl_properties.inc.php');
 
     // Diplays the footer
     echo "\n";
-    require_once('./footer.inc.php');
+    include('./footer.inc.php');
 }
 
 ?>

@@ -2,9 +2,15 @@
 /* $Id$ */
 // vim: expandtab sw=4 ts=4 sts=4:
 
-require_once('./libraries/grab_globals.lib.php');
-require_once('./libraries/common.lib.php');
-require_once('./libraries/mysql_charsets.lib.php');
+if (!defined('PMA_GRAB_GLOBALS_INCLUDED')) {
+    include('./libraries/grab_globals.lib.php');
+}
+if (!defined('PMA_COMMON_LIB_INCLUDED')) {
+    include('./libraries/common.lib.php');
+}
+if (PMA_MYSQL_INT_VERSION >= 40100 && !defined('PMA_MYSQL_CHARSETS_LIB_INCLUDED')) {
+    include('./libraries/mysql_charsets.lib.php');
+}
 
 /**
  * Drop multiple fields if required
@@ -22,7 +28,7 @@ if ((!empty($submit_mult) && isset($selected_fld))
     || isset($mult_btn)) {
     $action = 'tbl_properties_structure.php';
     $err_url = 'tbl_properties_structure.php?' . PMA_generate_common_url($db, $table);
-    require('./mult_submits.inc.php');
+    include('./mult_submits.inc.php');
 }
 
 /**
@@ -88,7 +94,7 @@ $fields_cnt  = mysql_num_rows($fields_rs);
     <th><?php echo $strNull; ?></th>
     <th><?php echo $strDefault; ?></th>
     <th><?php echo $strExtra; ?></th>
-    <th colspan="6"><?php echo $strAction; ?></th>
+    <th colspan="<?php echo((PMA_MYSQL_INT_VERSION >= 32323) ? '6' : '5'); ?>"><?php echo $strAction; ?></th>
 </tr>
 
 <?php
@@ -96,8 +102,8 @@ $comments_map = array();
 $mime_map = array();
 
 if ($GLOBALS['cfg']['ShowPropertyComments']) {
-    require_once('./libraries/relation.lib.php');
-    require_once('./libraries/transformations.lib.php');
+    require('./libraries/relation.lib.php');
+    require('./libraries/transformations.lib.php');
 
     $cfgRelation = PMA_getRelationsParam();
 
@@ -123,8 +129,8 @@ while ($row = PMA_mysql_fetch_array($fields_rs)) {
     $type             = $row['Type'];
     // reformat mysql query output - staybyte - 9. June 2001
     // loic1: set or enum types: slashes single quotes inside options
-    if (preg_match('@^(set|enum)\((.+)\)$@i', $type, $tmp)) {
-        $tmp[2]       = substr(preg_replace('@([^,])\'\'@', '\\1\\\'', ',' . $tmp[2]), 1);
+    if (eregi('^(set|enum)\((.+)\)$', $type, $tmp)) {
+        $tmp[2]       = substr(ereg_replace('([^,])\'\'', '\\1\\\'', ',' . $tmp[2]), 1);
         $type         = $tmp[1] . '(' . str_replace(',', ', ', $tmp[2]) . ')';
         $type_nowrap  = '';
 
@@ -133,16 +139,16 @@ while ($row = PMA_mysql_fetch_array($fields_rs)) {
         $zerofill     = 0;
     } else {
         $type_nowrap  = ' nowrap="nowrap"';
-        $type         = preg_replace('@BINARY@i', '', $type);
-        $type         = preg_replace('@ZEROFILL@i', '', $type);
-        $type         = preg_replace('@UNSIGNED@i', '', $type);
+        $type         = eregi_replace('BINARY', '', $type);
+        $type         = eregi_replace('ZEROFILL', '', $type);
+        $type         = eregi_replace('UNSIGNED', '', $type);
         if (empty($type)) {
             $type     = '&nbsp;';
         }
 
-        $binary       = stristr($row['Type'], 'blob') || stristr($row['Type'], 'binary');
-        $unsigned     = stristr($row['Type'], 'unsigned');
-        $zerofill     = stristr($row['Type'], 'zerofill');
+        $binary       = eregi('BLOB', $row['Type'], $test) || eregi('BINARY', $row['Type'], $test);
+        $unsigned     = eregi('UNSIGNED', $row['Type'], $test);
+        $zerofill     = eregi('ZEROFILL', $row['Type'], $test);
     }
 
     // rabus: Devide charset from the rest of the type definition (MySQL >= 4.1)
@@ -336,8 +342,9 @@ while ($row = PMA_mysql_fetch_array($fields_rs)) {
         ?>
     </td>
     <?php
+    if (PMA_MYSQL_INT_VERSION >= 32323) {
         if ((!empty($tbl_type) && $tbl_type == 'MYISAM')
-            && (strpos(' ' . $type, 'text') || strpos(' ' . $type, 'varchar'))) {
+            && ($type == 'text' || strpos(' ' . $type, 'varchar'))) {
             echo "\n";
             ?>
     <td align="center" bgcolor="<?php echo $bgcolor; ?>" nowrap="nowrap">
@@ -347,12 +354,13 @@ while ($row = PMA_mysql_fetch_array($fields_rs)) {
             <?php
         } else {
             echo "\n";
-        ?>
+            ?>
     <td align="center" bgcolor="<?php echo $bgcolor; ?>" nowrap="nowrap">
         <?php echo $titles['NoIdxFulltext'] . "\n"; ?>
     </td>
-        <?php
+            <?php
         } // end if... else...
+    } // end if
     echo "\n"
     ?>
 </tr>
@@ -366,7 +374,7 @@ $checkall_url = 'tbl_properties_structure.php?' . PMA_generate_common_url($db,$t
 ?>
 
 <tr>
-    <td colspan="<?php echo PMA_MYSQL_INT_VERSION >= 40100 ? '14' : '13'; ?>">
+    <td colspan="<?php echo PMA_MYSQL_INT_VERSION >= 40100 ? '14' : (PMA_MYSQL_INT_VERSION >= 32323 ? '13' : '12'); ?>">
         <table>
             <tr>
                 <td>
@@ -390,7 +398,7 @@ if ($cfg['PropertiesIconic']) {
            . '<img src="./images/button_edit.png" title="' . $strChange . '" alt="' . $strChange . '" width="12" height="13" />' . (($propicon == 'both') ? '&nbsp;' . $strChange : '') . "\n"
            . '</button>' . "\n";
     } else {
-        echo '                    <input type="image" name="submit_mult_change" value="' .$strChange . '" title="' . $strChange . '" src="./images/button_edit.png" />'  . (($propicon == 'both') ? '&nbsp;' . $strChange : '') . "\n";
+        echo '                    <input type="image" name="submit_mult_change" value="' .$strChange . '" title="' . $strChange . '" src="./images/button_edit.png" />'  . (($propicon == 'both') ? '&nbsp;' . $strChange : '') . "\n"; 
     }
     // Drop button if there is at least two fields
     if ($fields_cnt > 1) {
@@ -399,7 +407,7 @@ if ($cfg['PropertiesIconic']) {
                . '<img src="./images/button_drop.png" title="' . $strDrop . '" alt="' . $strDrop . '" width="11" height="13" />' . (($propicon == 'both') ? '&nbsp;' . $strDrop : '') . "\n"
                . '</button>' . "\n";
         } else {
-            echo '                    <input type="image" name="submit_mult_drop" value="' .$strDrop . '" title="' . $strDrop . '" src="./images/button_drop.png" />' . (($propicon == 'both') ? '&nbsp;' . $strDrop : '') . "\n";
+            echo '                    <input type="image" name="submit_mult_drop" value="' .$strDrop . '" title="' . $strDrop . '" src="./images/button_drop.png" />' . (($propicon == 'both') ? '&nbsp;' . $strDrop : '') . "\n"; 
         }
     }
 } else {
@@ -432,7 +440,7 @@ if ($fields_cnt > 20) {
 <!-- Browse links -->
     <?php
     echo "\n";
-    require('./tbl_properties_links.php');
+    include('./tbl_properties_links.php');
 } // end if ($fields_cnt > 20)
 echo "\n\n";
 
@@ -463,10 +471,10 @@ require ('./tbl_indexes.php');
 if ($cfg['ShowStats']) {
     $nonisam     = FALSE;
     $is_innodb = (isset($showtable['Type']) && $showtable['Type'] == 'InnoDB');
-    if (isset($showtable['Type']) && !preg_match('@ISAM|HEAP@i', $showtable['Type'])) {
+    if (isset($showtable['Type']) && !eregi('ISAM|HEAP', $showtable['Type'])) {
         $nonisam = TRUE;
     }
-    if ($nonisam == FALSE || $is_innodb) {
+    if (PMA_MYSQL_INT_VERSION >= 32303 && ($nonisam == FALSE || $is_innodb)) {
         // Gets some sizes
         $mergetable     = FALSE;
         if (isset($showtable['Type']) && $showtable['Type'] == 'MRG_MyISAM') {
@@ -734,7 +742,8 @@ echo "\n";
                 <option value="--end--"><?php echo $strAtEndOfTable; ?></option>
                 <option value="--first--"><?php echo $strAtBeginningOfTable; ?></option>
 <?php
-foreach($aryFields AS $junk => $fieldname) {
+reset($aryFields);
+while (list($junk, $fieldname) = each($aryFields)) {
     echo '                <option value="' . htmlspecialchars($fieldname) . '">' . sprintf($strAfter, htmlspecialchars($fieldname)) . '</option>' . "\n";
 }
 unset($aryFields);
@@ -782,5 +791,6 @@ require('./tbl_query_box.php');
 /**
  * Displays the footer
  */
-require_once('./footer.inc.php');
+echo "\n";
+require('./footer.inc.php');
 ?>

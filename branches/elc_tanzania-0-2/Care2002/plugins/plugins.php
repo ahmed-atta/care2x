@@ -13,7 +13,7 @@ require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','specials.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
-$breakfile=$root_path.'main/startframe.php'.URL_APPEND;
+$breakfile=$root_path.'main/spediens.php'.URL_APPEND;
 $returnfile=$root_path.'main/spediens.php'.URL_APPEND;
 $thisfile=basename(__FILE__);
 
@@ -57,11 +57,12 @@ require($root_path.'include/inc_2level_reset.php');
      	if ($file != "." && $file != ".." && is_dir($file)){
 			
 			include("$file/tags.php");
-
-			if(empty($sPluginIconSmall)) $sImgSrc=createComIcon($root_path,'templates.gif','0');
-				elseif(file_exists($sPluginIconSmall)) $sImgSrc="src=\"$sPluginIconSmall\"";
-					elseif(file_exists("$file/$sPluginIconSmall")) $sImgSrc="src=\"$file/$sPluginIconSmall\"";
-						else $sImgSrc=createComIcon($root_path,'templates.gif','0');
+			if($cfg['icons'] != 'no_icon'){
+				if(empty($sPluginIconSmall)) $sImgSrc=createComIcon($root_path,'templates.gif','0');
+					elseif(file_exists($sPluginIconSmall)) $sImgSrc="src=\"$sPluginIconSmall\"";
+						elseif(file_exists("$file/$sPluginIconSmall")) $sImgSrc="src=\"$file/$sPluginIconSmall\"";
+							else $sImgSrc=createComIcon($root_path,'templates.gif','0');
+			}
 
 			if($count){
 				$smarty->display('common/submenu_row_spacer.tpl');
@@ -69,7 +70,7 @@ require($root_path.'include/inc_2level_reset.php');
 				$count++;
 			}
 			
-			$smarty->assign('sIconImg','<img '.$sImgSrc.'>');
+			if($cfg['icons'] != 'no_icon') $smarty->assign('sIconImg','<img '.$sImgSrc.'>');
 			$smarty->assign('sSubMenuItem','<a href="'.$sPluginStartLocator.'">'.$sPluginName.'</a>');
 			$smarty->assign('sSubMenuText',$sPluginDescription);
 			$smarty->display('common/submenu_row.tpl');

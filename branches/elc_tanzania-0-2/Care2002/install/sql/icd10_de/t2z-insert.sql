@@ -1324,4 +1324,4 @@ INSERT INTO care_icd10_de VALUES ( 'Z99.1', 'Abhängigkeit vom Respirator', 'N4T'
 INSERT INTO care_icd10_de VALUES ( 'Z99.2', 'Abhängigkeit von Dialyse bei Niereninsuffizienz', 'N4T', 'c', 'Langzeitdialyse bei Niereninsuffizienz<br>Vorhandensein eines arteriovenösen Shunts für die Dialyse', 'Exkl.: Vorbereitung und Durchführung einer Dialyse (Z49.-)', '', 'N', '4', '', '', '');
 INSERT INTO care_icd10_de VALUES ( 'Z99.3', 'Abhängigkeit vom Rollstuhl', 'N4T', 'c', '', '', '', 'N', '4', '', '', '');
 INSERT INTO care_icd10_de VALUES ( 'Z99.8', 'Abhängigkeit von sonstigen unterstützenden Apparaten,<br>medizinischen Geräten oder Hilfsmitteln', 'N4T', 'c', '', '', '', 'N', '4', '', '', '');
-INSERT INTO care_icd10_de VALUES ( 'Z99.9', 'Abhängigkeit von einem nicht näher bezeichneten unterstützenden<br>Apparat, medizinischen Gerät oder Hilfsmittel<br>', 'N4T', 'c', '', '', '', 'N', '4', '', '', '');
+INSERT INTO care_icd10_de VALUES ( 'Z99.9', 'Abhängigkeit von einem nicht näher bezeichneten unterstützenden<br>Apparat, medizinischen Gerät oder Hilfsmittel<br>', 'N4T', 'c', '', '', '', 'N', '4', '', '', '')

@@ -4,7 +4,7 @@ require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /*
 CARE2X Integrated Information System for Hospitals and Health Care Organizations and Services
-Copyright (C) 2002  Elpidio Latorilla & Intellin.org        
+Copyright (C) 2002,2003,2004,2005  Elpidio Latorilla & Intellin.org        
 
 GNU GPL. For details read file "copy_notice.txt".
 */

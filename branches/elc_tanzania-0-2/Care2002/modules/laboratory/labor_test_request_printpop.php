@@ -240,7 +240,7 @@ else
 
 </HEAD> 
 
-<BODY bgcolor="white"<?php if(!$no_autoprint) echo ' OnLoad="window.print();"'; ?>>
+<BODY bgcolor="white" OnLoad="window.print();">
 
 
 <?php
