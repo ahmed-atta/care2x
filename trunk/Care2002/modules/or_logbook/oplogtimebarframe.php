@@ -1,4 +1,4 @@
-<HTML>
+<?php html_rtl($lang); ?>
 <HEAD>
 <TITLE></TITLE>
 <META name="description" content="">

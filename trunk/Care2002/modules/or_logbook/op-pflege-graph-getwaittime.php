@@ -114,7 +114,7 @@ if($dblink_ok)
 
 ?>
 
-<HTML>
+<?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
 <TITLE><?php echo $title ?></TITLE>

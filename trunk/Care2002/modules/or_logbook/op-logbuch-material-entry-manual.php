@@ -71,7 +71,7 @@ if($dblink_ok)
 }
 
 ?>
-<html>
+<?php html_rtl($lang); ?>
 <head>
 <?php echo setCharSet(); ?>
 

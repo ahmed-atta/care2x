@@ -68,7 +68,7 @@ if(($mode=='force_add')&&$containername&&$pcs){
 }
 
 ?>
-<html>
+<?php html_rtl($lang); ?>
 <head>
 <?php echo setCharSet(); ?>
 
