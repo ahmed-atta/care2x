@@ -76,11 +76,12 @@ require($root_path.'include/inc_passcheck_head.php');
 </tr>
 </table>        
 <FONT    SIZE=2  FACE="Arial">
-
+<!-- 
 <p>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo $LDIntroTo." ".$title ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo $LDWhatTo." ".$title ?>?</a><br>
-<HR>
+ -->
+ <HR>
 <?php
 if(file_exists($root_path.'language/'.$lang.'/'.$lang.'_copyrite.php'))
 include($root_path.'language/'.$lang.'/'.$lang.'_copyrite.php');

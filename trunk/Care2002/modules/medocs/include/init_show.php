@@ -1,4 +1,5 @@
 <?php
+$lang_tables[]='prompt.php';
 define('LANG_FILE','aufnahme.php');
 # Resolve the local user based on the origin of the script
 if($HTTP_SESSION_VARS['sess_user_origin']=='admission') {

@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
+* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
 * GNU General Public License
-* Copyright 2002 Elpidio Latorilla
+* Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -21,12 +21,24 @@ $this_type=$obj->getType($type_nr);
 
 if(!isset($mode)){
 	$mode='show';
-} elseif($mode=='create'||$mode=='update') {
+} elseif(($mode=='create'||$mode=='update')
+				&&!empty($HTTP_POST_VARS['text_diagnosis'])
+				&&!empty($HTTP_POST_VARS['text_therapy'])
+				&&!empty($HTTP_POST_VARS['short_notes'])) {
+	# Prepare the posted data for saving in databank
 	include_once($root_path.'include/inc_date_format_functions.php');
-	$HTTP_POST_VARS['date']=@formatDate2STD($HTTP_POST_VARS['date'],$date_format);
+	# If date is empty,default to today
+	if(empty($HTTP_POST_VARS['date'])){
+		$HTTP_POST_VARS['date']=date('Y-m-d');
+	}else{
+		$HTTP_POST_VARS['date']=@formatDate2STD($HTTP_POST_VARS['date'],$date_format);
+	}
+	# Prepare history
+	$HTTP_POST_VARS['history']='Entry: '.date('Y-m-d H:i:s').' '.$HTTP_SESSION_VARS['sess_user_name'];
 	$HTTP_POST_VARS['time']=date('H:i:s');
 	$HTTP_POST_VARS['type_nr']=12; // 12 = text_diagnosis
 	$HTTP_POST_VARS['notes']=$HTTP_POST_VARS['text_diagnosis'];
+	# Prevent redirection
 	$redirect=false;
 	include('./include/save_admission_data.inc.php');
 	$HTTP_POST_VARS['ref_notes_nr']=$db->Insert_ID();

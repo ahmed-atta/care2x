@@ -47,13 +47,10 @@ function popRecordHistory(table,pid) {
 require($root_path.'include/inc_js_gethelp.php'); 
 require($root_path.'include/inc_css_a_hilitebu.php');
 ?>
-
 </HEAD>
-
 
 <BODY bgcolor="<?php echo $cfg['bot_bgcolor'];?>" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="if (window.focus) window.focus();" 
 <?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
-
 
 <table width=100% border=0 cellspacing="0"  cellpadding=0 >
 
@@ -66,7 +63,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
 <a href="<?php echo $returnfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=show&type_nr='.$type_nr; ?>" ><img 
 <?php echo createLDImgSrc($root_path,'back2.gif','0'); ?> <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';?>><a 
-href="javascript:gethelp('admission_how2new.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
+href="javascript:gethelp('medocs_entry.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
  echo $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </td>
 </tr>
@@ -265,7 +262,41 @@ eval("echo $TP_form;");
 # Create a new form
 }else {
 ?>
-<form method="post" name="entryform">
+
+
+<script language="javascript">
+<!-- Script Begin
+function chkForm(d) {
+	
+	if(!d.short_notes[0].checked&&!d.short_notes[1].checked){
+		alert("<?php echo $LDPlsMedicalAdvice ?>");
+		d.short_notes[0].focus();
+		return false;
+	}else if(d.text_diagnosis.value==""||d.text_diagnosis.value==" "){
+		alert("<?php echo $LDPlsEnterDiagnosis ?>");
+		d.text_diagnosis.focus();
+		return false;
+	}else if(d.text_therapy.value==""||d.text_therapy.value==" "){
+		alert("<?php echo $LDPlsEnterTherapy ?>");
+		d.text_therapy.focus();
+		return false;
+	}else if(d.date.value==""){
+		alert("<?php echo $LDPlsEnterDate ?>");
+		d.date.focus();
+		return false;
+	}else if(d.personell_name.value==""){
+		alert("<?php echo $LDPlsEnterFullName ?>");
+		d.personell_name.focus();
+		return false;
+	}else{
+		return true;
+	}
+
+}
+//  Script End -->
+</script>
+
+<form method="post" name="entryform" onSubmit="return chkForm(this)">
 <?php 
 
 	$TP_date_validate='value="'.formatDate2Local(date('Y-m-d'),$date_format).'" onBlur="IsValidDate(this,\''.$date_format.'\')" onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\')"';
@@ -289,7 +320,6 @@ eval("echo $TP_form;");
 <input type="hidden" name="target" value="<?php echo $target; ?>">
 <input type="hidden" name="edit" value="<?php echo $edit; ?>">
 <input type="hidden" name="is_discharged" value="<?php echo $is_discharged; ?>">
-<input type="hidden" name="history" value="Created: <?php echo date('Y-m-d H:i:s'); ?> : <?php echo $HTTP_SESSION_VARS['sess_user_name']."\n"; ?>">
 <input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0'); ?>>
 
 </form>

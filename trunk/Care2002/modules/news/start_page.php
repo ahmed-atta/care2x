@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
+* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
 * GNU General Public License
-* Copyright 2002 Elpidio Latorilla
+* Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -22,7 +22,6 @@ if(!session_is_registered('sess_news_nr')) session_register('sess_news_nr');
 $readerpath='headline-read.php?sid='.$sid.'&lang='.$lang;
 // reset all 2nd level lock cookies
 require($root_path.'include/inc_2level_reset.php');
-require_once($root_path.'include/inc_config_color.php');
 		
 $dept_nr=1;  /* 1 = press relations */
 
@@ -38,6 +37,7 @@ $thisfile=basename(__FILE__);
 require_once($root_path.'include/care_api_classes/class_news.php');
 $newsobj=new News;
 $news=&$newsobj->getHeadlinesPreview($dept_nr,$news_num_stop);
+
 /* Set initial session environment for this module */
 
 if(!session_is_registered('sess_file_editor')) session_register('sess_file_editor');
