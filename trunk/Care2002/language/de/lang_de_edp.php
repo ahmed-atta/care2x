@@ -7,7 +7,7 @@ $LDReset='Löschen';
 
 $LDEnterData='Klick um Daten einzugeben';
 $LDClk2See='Klick zum zeigen';
-$LDWildCards='Was sind \'Wildcards\' and wie benutze ich sie beim Suchen?';
+$LDWildCards='Was sind \'Wildcards\' and wie benutze ich sie beim suchen?';
 $LDNewSearch='Neue Suche';
 $LDSearch='Suchen';
 
@@ -27,7 +27,7 @@ $LDValue='Wert';
 $LDNews='Nachrichten';
 $LDNewsTxt='Nachrichten versenden bzw. lesen';
 $LDMemo='Rundbrief';
-$LDMemoTxt='Lesen oder schreiben eines Rundbriefes';
+$LDMemoTxt='Lesen oder schreiben von Rundbrief';
 $LDSearchPat='Patient suchen';
 $LDCategory='Kategorie';
 $LDPast3Days='Letzte 3 Tage';
@@ -68,11 +68,11 @@ $LDPageTop='Zurück nach ganz oben.';
 $LDPreview='Vorschau';
 $LDUpdateData='Ändern bzw. Aktualisieren';
 $LDRemoveFromDb='Aus der Datenbank entfernen bzw. löschen';
-$LDDataRemoved='Die Daten wurden aus der Datenbank erfolgreich entfernt bzw. gelöscht.';
+$LDDataRemoved='Die Daten wurde aus der Datenbank erfolgreich entfernt bzw. gelöscht.';
 
 $LDConfirmDelete='Wollen Sie diese Daten wirklich aus der Datenbank <b>entfernen</b> bzw. <b>löschen</b> ?';
 $LDAlertDelete='<b>ACHTUNG!</b> Löschen kann <b>NICHT</b> rückgängig gemacht werden!';
-$LDNoDelete='Die Daten konnten nicht aus Datenbank entfernt bzw. gelöscht werden.<br>Bitte benachrichtigen Sie die EDV.';
+$LDNoDelete='Die Daten konnte nicht aus Datenbank entfernt bzw. gelöscht werden.<br>Bitte benachrichtigen Sie die EDV.';
 $LDYesDelete='Ja, ich bin sicher. Berechtigung löschen.';
 $LDNoBack='Nein, Zurück';
 
@@ -262,7 +262,7 @@ $LDFindEmployee='Mitarbeiter suchen';
 $LDMainMenu='Hauptmenu';
 $LDHideShow='Zeigen/verstecken';
 $LDSortOrder='Reihenfolge';
-$LDAdminIndex='Admin Index';
+$LDAdminIndex='Admin index';
 $LDUsers='Benutzer';
 $LDCreateEditLock='Erstellen, Verarbeiten, Sperren';
 $LDDatabase='Datenbank';
@@ -308,7 +308,7 @@ $LDTitleFont='Titel - Schrift';
 $LDPrefaceFontSize='Vorspann - Grosse';
 $LDPrefaceFontColor='Vorspann - Farbe';
 $LDPrefaceFont='Vorspann - Schrift';
-$LDBodyFontSize='Nachricht - Grösse';
+$LDBodyFontSize='Nachricht - Grosse';
 $LDBodyFontColor='Nachricht - Farbe';
 $LDBodyFont='Nachricht - Schrift';
 $LDPreviewMaxlen='Vorschau - Maximale Buchstaben';
@@ -334,6 +334,6 @@ $LDORName='Saalname';
 $LDORNrExists='Saalnummer ist bereits vorhanden!';
 $LDToggle='Wechseln';
 $LDChange='Ändern';
-$LDClkNextNr='Anklicken zur nächsten zulässigen Zahl.';
+$LDClkNextNr='Anclicken zur nächsten zulässigen Zahl.';
 $LDOPTable='OP Tisch';
 ?>

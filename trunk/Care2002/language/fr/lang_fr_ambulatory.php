@@ -20,5 +20,4 @@ $LDPWListTxt='Patients admis à la clinique aujourd\'hui';
 $LDOutpatientClinic='Externat';
 $LDGeneralAmbulatory='Ambulatoire Générale';
 $LDAmbulatory='Ambulatoire';
-
 ?>

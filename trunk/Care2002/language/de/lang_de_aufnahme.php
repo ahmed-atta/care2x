@@ -111,15 +111,15 @@ $LDMedocsElements=array(
 								'Datum',
 								'Zeit'
 								);
-$LDStartNewDoc='Starte ein neues Medocs Dokument';
+$LDStartNewDoc='Start ein neues Medocs Dokument';
 $LDNoMedocsFound='Kein Medocs Dokument von dem Patient gefunden!';
 $LDAt='um';
 
 $LDDept='Abteilung';
-$LDRoomNr='Zimmernr.';
+$LDRoomNr='Zimmer nr';
 $LDAdmitType='Aufnahmeart';		
 $LDCivilStat='Familienstand';
-$LDInsuranceNr='Versicherungsnr.';
+$LDInsuranceNr='Versicherungsnr';
 $LDNameAddr='Name & Adresse';
 $LDBillInfo='Rechnung an';
 $LDAdmitDiagnosis='Aufnahmediagnose';
@@ -168,7 +168,7 @@ $LDMarried='Verheiratet';
 $LDDivorced='Geschieden';
 $LDWidowed='Verwitwet';
 $LDSeparated='Getrennt';
-$LDCellPhone='Handynr.';
+$LDCellPhone='Handy nr.';
 $LDFax='Fax';
 $LDEmail='E-mail';
 $LDZipCode='PLZ';
@@ -226,7 +226,7 @@ $LDOptsForPerson='Optionen für diese Person';
 $LDSickReport='Arbeitsunfähigkeitsbescheinigung';
 $LDAnamnesisForm='Anamneseformular';
 $LDConsentDec='Einwilligungserklärung';
-$LDUpdate='Update';
+$LDUpdate='Aktualisieren';
 /* 2002-12-29 EL */
 $LDGuarantor='Guarantor';
 $LDCareServiceClass='Pflegeleistungsklasse';
@@ -321,7 +321,7 @@ $LDcancelled='storniert';
 $LDGotMedAdvice='Aufklärung';
 /* 2003-03-15 EL */
 $LDShowDocList='Die Dokumente auflisten';
-$LDScheduleNewAppointment='Neuer Termin';
+$LDScheduleNewAppointment='Neues Termin';
 /* 2003-04-04 EL */
 $LDNoPendingApptThisDay='Keine Termine an diesem Tag vorhanden.';
 $LDNoPendingApptToday='Keine Termine heute vorhanden.';
@@ -382,11 +382,11 @@ $LDPrintPDFDoc='PDF Dokument erstellen';
 $LDDeathDate='Death date';
 
 # 2003-10-14 NDHC
-$LDITA='Intratracheale Anesthesie';
-$LDLA='Lokale Anesthesie';
+$LDITA='Intratracheal anesthesie';
+$LDLA='Lokale anesthesie';
 $LDAS='Analgosedierung';
 $LDOral='Oral';
-$LDAnticoagulant='Antikoagulantien';
+$LDAnticoagulant='Antikoagulant';
 $LDHemolytic='Hämolytika';
 $LDDiuretic='Diuretika';
 $LDAntibiotic='Antibiotika';
@@ -394,4 +394,11 @@ $LDMask='Maske';
 $LDIntravenous='Intravenös';
 $LDSubcutaneous='Subcutan';
 $LDPreAdmission='Voraufnahme';
+#2004-01-01 EL
+$LDPersonDuplicate='Diese Person scheint bereits registriert zu sein.';
+$LDSimilarData='Die folgende Person in der Liste hat die gleiche Stammdaten.';
+$LDSimilarData2='Die folgende Personen in der Liste haben die gleiche Stammdaten.';
+$LDPlsCheckFirst='Bitte prüfen Sie sie nach bevor Sie den nächsten Schritt machen.';
+$LDPlsCheckFirst2='Bitte prüfen Sie sie nach bevor Sie den nächsten Schritt machen.';
+$LDShowDetails='Details zeigen';
 ?>

@@ -360,8 +360,8 @@ $LDDischargeDate='ÊÇÑíÎ ÇáÎÑæÌ';
 # 2003-08-04 EL
 $LDCancelThisAdmission='ÇáÛÇÁ åÐÇ ÇáÞÈæá';
 $LDInsShortID[1]='ÊÇãíä ÎÇÕ';  // privately paid insurance
-$LDInsShortID[2]='Úáì ÍÓÇÈ ÇáãÌÊãÚ'; // Common state sponsored insurance
-$LDInsShortID[3]='ÔÎÕí';    // self pay, direct pay
+$LDInsShortID[2]='Úáì ÍÓÇÈ ÇáÕÍÉ'; // Common state sponsored insurance
+$LDInsShortID[3]='Úáì ÍÓÇÈÉ ÇáÔÎÕí';    // self pay, direct pay
 # 2003-08-26 EL
 $LDMeasurements='ÇáÞíÇÓÇÊ';
 #2003-08-28 eL
@@ -383,20 +383,27 @@ $LDAdvancedSearch='ÈÍË ãÑßÒ';
 $LDIncludeFirstName='ÈÍË ÈæÇÓØÉ ÇáÇÓã ÃíÖÇ.';
 $LDTipsTricks='ÊáãíÍÇÊ æ ØÑÞ';
 #2003-12-06 EL
-$LDPrintPDFDoc='Make PDF document';
-$LDDeathDate='Death date';
+$LDPrintPDFDoc='ßæä æËíÞÉ PDF';
+$LDDeathDate='ÊÇÑíÎ ÇáæÝÇÉ';
 
 # 2003-10-14 NDHC
-$LDITA='Intratracheal anesthesia';
-$LDLA='Local anesthesia';
-$LDAS='Analgesic sedation';
-$LDOral='Oral';
-$LDAnticoagulant='Anticoagulant';
-$LDHemolytic='Hemolytic';
-$LDDiuretic='Diuretic';
-$LDAntibiotic='Antibiotic';
-$LDMask='Mask';
-$LDIntravenous='Intravenous';
-$LDSubcutaneous='Subcutaneous';
-$LDPreAdmission='Pre-admission';
+$LDITA='ÊÎÏíÑ ßáí';
+$LDLA='ÊÎÏíÑ ãæÖÚí';
+$LDAS='ÊÎÏíÑ ãÓßä';
+$LDOral='Ýãí';
+$LDAnticoagulant='ãÇäÚÉ ÇáÊÎËÑ';
+$LDHemolytic='ÇäÍáÇáí';
+$LDDiuretic='ãÏÑ ááÈæá';
+$LDAntibiotic='ãÖÇÏ Ííæí';
+$LDMask='ÞäÇÚ';
+$LDIntravenous='æÑíÏí';
+$LDSubcutaneous='ÊÍÊ ÌáÏí';
+$LDPreAdmission='ÞÈá ÇáÞÈæá';
+#2004-01-01 EL
+$LDPersonDuplicate='íÈÏæ Ãä åÐÇ ÇáÔÎÕ ÞÏ Êã ÊÓÌíáå ãÓÈÞÇ.';
+$LDSimilarData='ÇáÔÎÕ Ýí ÇáÞÇÆãÉ ÇáÊÇáíÉ áå äÝÓ ÇáÈíÇäÇÊ ÇáÔÎÕíÉ.';
+$LDSimilarData2='ÇáÇÔÎÇÕ Ýí ÇáÞÇÆãÉ ÇáÊÇáíÉ áÐíåã äÝÓ ÇáÈíÇäÇÊ ÇáÔÎÕíÉ.';
+$LDPlsCheckFirst='ÊÃßÏ ãäå ÇæáÇ ÞÈá Çä ÊÞÑÑ ÇáÎØæÉ ÇáÊÇáíÉ';
+$LDPlsCheckFirst2='ÊÃßÏ ãäåã ÇæáÇ ÞÈá Çä ÊßÑÑ ÇáÎØæÉ ÇáÊÇáíÉ.';
+$LDShowDetails='ÇÖåÇÑ ÇáÊÝÇÕíá';
 ?>

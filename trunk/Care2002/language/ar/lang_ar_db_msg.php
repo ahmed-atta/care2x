@@ -7,9 +7,9 @@ $LDDbNoLastData="ÃÎÑ ÈíÇäÇÊ ÛíÑ ãæÌæÏÉ!";
 $LDDbNoDelete="İÔáÊ ÚãáíÉ ÇáÍĞİ!";
 
 #2003-11-01 EL
-$LDSessionTimeout='Session time out';
-$LDSessionTimeoutTxt='There has been a long time of inactivity. The module has timed out and locked itself for security reasons. 
-To activate this module again, you can try doing one of the following:<p>
-- Start the module again by selecting it on the main menu<br>
-- Refresh your browser by clicking the refresh button<p> Any unsaved previous data will be  lost unfortunately.'; 
+$LDSessionTimeout='æÙíİÉ ÇäåÇÁ ÇáæŞÊ';
+$LDSessionTimeoutTxt='ãÑ æŞÊ Øæíá ÈÏæä Çí äÔÇØ. ŞÇãÊ ÇáæÍÏÉ ÈÇáÎÑæÌ æ ÇÛáÇŞ äİÓåÇ áÏæÇÚí ÇãäíÉ. 
+áÊäÔíØ ÇáæÍÏÉ ãÌÏÏÇ, ÍÇæá Çä ÊŞæã ÈæÇÍÉ ãä ÇáÊÇáí:<p>
+- äÔØ ÇáæÍÏÉ ãÑÉ ÇÎÑì ÈÇÎÊíÇÑåÇ ãä ÇáŞÇÆãÉ ÇáÑÆíÓíÉ<br>
+- ÇäÚÔ ÇáãÊÕİÍ ãä ÌÏíÏ ÈÇáÖÛØ Úáì ÇáÒÑ ÇäÚÇÔ<p> Çí ÈíÇäÇÊ áã íÊã ÍİÙåÇ ÓÇÈŞÇ ÖÇÚÊ Èßá ÊÇßíÏ.'; 
 ?>

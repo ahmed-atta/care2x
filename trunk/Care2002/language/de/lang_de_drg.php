@@ -66,7 +66,7 @@ $LDCreateGroupName='Neue Gruppenname anlegen';
 $LDSelect='Auswahl';
 /*2003-06-01 EL*/
 $LDUseToGroupItems='Nehme diese Gruppe';
-$LDItemsDegrouped='Das Löschen dieser Gruppe führt zur Trennung der dazugehörigen Schlüsseln.';
+$LDItemsDegrouped='Das löschen dieser Gruppe führt zur Trennung der dazugehörigen Schlüsseln.';
 $LDOptions='Optionen';
 /*2003-06-01 EL*/
 $LDCreateInternDRGGroup='Neue DRG Gruppe anlegen';

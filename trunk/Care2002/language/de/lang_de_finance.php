@@ -22,7 +22,7 @@ $LDAlertBillingAddress='Die Abrechnungsadresse fehlt!';
 $LDAlertMailingAddress='Die Postadresse fehlt!';
 $LDEnterAllFields='Bitte füllen Sie alle mit <font color="red"><b>*</b></font> gekenzeichneten Feldern aus';
 $LDFirmID='Firmenkennung';
-$LDNeedEmptyFormPls='Ich benötige bitte ein neues Formular.';
+$LDNeedEmptyFormPls='Ich brauche bitte ein neues Formular.';
 $LDData='Daten';
 $LDNewData='Neue Daten';
 $LDUpdateData='Daten aktualisieren';

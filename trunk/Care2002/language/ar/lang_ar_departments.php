@@ -1,6 +1,6 @@
 <?php
 $LDHeadlines='ÇáÚäÇæíä';			
-$LDCafeNews='ÃÎÈÇÑ ÇáßÇÝíÊíÑíÇ';		
+$LDCafeNews='ÇáßÇÝíÊíÑíÇ';		
 $LDManagement='ÇáÇÏÇÑÉ';
 $LDHealthTips='ÊáãíÍÇÊ ÕÍíÉ';
 $LDEducation='ÇáÊÚáíã';
@@ -10,13 +10,13 @@ $LDHeadline='ÇáÚäæÇä';
 $LDAdmission='ÇáÞÈæá';
 /* 2003-08-20 DH */
 $LDAnesthesiology='Anesthesiology';
-$LDCafeteria='ÃÎÈÇÑ ÇáßÇÝíÊíÑíÇ';
+$LDCafeteria='ÇáßÇÝíÊíÑíÇ';
 $LDGeneralSurgery='ÌÑÇÍÉ ÚÇãÉ';
 $LDEmergencySurgery='ÇáãÓÊÚÌá';
-$LDPlasticSurgery='ÌÑÇÍÉ ÊÚæíÖíÉ';
+$LDPlasticSurgery='ÌÑÇÍÉÊÌãíáíÉ';
 $LDEarNoseThroath='ÃÏä-ÃäÝ-ÍäÌÑÉ';
 $LDOpthalmology='ÇáÚíæä';
-$LDPathology='Pathology';
+$LDPathology='Úáã ÇáÇãÑÇÖ';
 $LDObGynecology='ÇáäÓÇÁ æ ÇáæáÇÏÉ';
 $LDPhysicalTherapy='ÇáÚáÇÌ ÇáØÈíÚí';
 $LDInternalMedicine='ÇáÈÇØäÉ';
@@ -29,10 +29,10 @@ $LDNuclearDiagnostics='ÇáÊÔÎíÕ Çáäææí';
 $LDRadiology='ÇáÇÔÚÉ';
 $LDOncology='Oncology';
 $LDNeonatal='Neonatal';
-$LDCentralLaboratory='Central Laboratory';
-$LDSerologicalLaboratory='Serological Laboratory';
-$LDChemicalLaboratory='Chemical Laboratory';
-$LDBacteriologicalLaboratory='Bacteriological Laboratory';
+$LDCentralLaboratory='ÇáãÚãá ÇáãÑßÒí';
+$LDSerologicalLaboratory='ãÚãá ÇáÇãÕÇá';
+$LDChemicalLaboratory='ÇáãÚãá ÇáßãíÇÆí';
+$LDBacteriologicalLaboratory='ãÚãá ÇáÈßÊÑíÇÁ';
 $LDTechnicalMaintenance='ÇáÕíÇäÉ';
 $LDITDepartment='ÞÓã ÊÞäíÉ ÇáãÚáæãÇÊ';
 $LDGeneralAmbulatory='General Ambulatory';
@@ -41,9 +41,9 @@ $LDNursing='ÇáÊãÑíÖ';
 /* 2003-04-27 EL */
 $LDMedical='ØÈí';
 $LDSupport='ÛíÑ ØÈí';
-$LDNews='News';
+$LDNews='ÃÎÈÇÑ';
 $LDDepartment='ÞÓã';
-$LDPressRelations='Presse';
+$LDPressRelations='ÕÍÇÝÉ';
 /* 2003-05-19 EL */
 $LDSelectDept='ÃÎÊÇÑ ÇáÞÓã';
 /*2003-06-15 EL*/
@@ -51,7 +51,7 @@ $LDPlsSelectDept='ÇÎÊÇÑ ÞÓã';
 $LD_AllMedicalDept='____ßá ÇáÇÞÓÇã ÇáØÈíÉ_____';
 $LDClinic='ÚíÇÏÉ';
 #2003-10-23 EL
-$LDPlsNameFormal='Please enter the formal name';
-$LDPlsDeptID='Please enter the department\'s ID';
-$LDPlsSelectType='Please select the type';
+$LDPlsNameFormal='ÇÏÎá ÇÓã ãÊÌÇäÓ';
+$LDPlsDeptID='ÇÏÎá ÊÚÑíÝ ÇáÞÓã';
+$LDPlsSelectType='ÇÎÊÇÑ ÇáäæÚ';
 ?>

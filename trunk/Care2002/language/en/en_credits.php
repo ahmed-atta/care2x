@@ -1,9 +1,10 @@
 <?php
-error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-require_once('./roots.php');
-require_once($root_path.'include/inc_environment_global.php');
+//error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+//require_once('./roots.php');
+//require_once($root_path.'include/inc_environment_global.php');
 ?>
-<?php html_rtl($lang); ?>
+<?php //html_rtl($lang); ?>
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <title>Credits</title>
@@ -11,6 +12,18 @@ require_once($root_path.'include/inc_environment_global.php');
 <body onLoad="if(window.focus) window.focus()">
 <font face="verdana,arial" size=6 color="#0000ff">Credits</fonts><br>
 <font face="verdana,arial" size=1 color="#000000">Alphabetical order by first name</fonts><br>
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+            <P><img src="../../fotos/credits/a_djem.jpg"  border=0  align=right vspace=10>
+			<b>A. Djem (ID)</b><P>
+			Desktop wallpaper designs for Care2x<br>
+			Website design
+			
+			<P><a href="mailto:adjem@adams-media.com"><u>A. Djem dapat di hubungi disini.</u></a>
+</TD></TR></TBODY></TABLE>
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
@@ -68,7 +81,7 @@ Website: www.cerebroperiferico.com
 			<b>Daniel Zilli (BR) translated CARE 2X and www.care2x.com website to  brazilian-portuguese.</b>
 			<p>
 			Daniel is a nice guy who loves to live a happy life. He likes computers, football, and good music.
-He  loves computers and has 10 years of computer experience it.
+He  loves computers and has 10 years of experience in IT field.
 Daniel owns a company that produces computer
 science education products, open source software and local  linux distro.
 			<P><a href="mailto:danielz@cco.matrix.com.br"><u>Daniel Zilli can be contacted here.</u></a>
@@ -174,20 +187,6 @@ He decided to actively join open source because: <br><i>"Such an ideal world can
 			He is also involved in many other GNU/GPL projects; some of them are in use at Care2x's site.<br>
 			<p><a href="http://www.humaneasy.com" target="_blank"><u>Lopo L. de Almeida can be contacted here.</u></a>
 </td></tr></tbody></table>
-<hr><TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
-        <TBODY>
-        <TR>
-          <TD vAlign=top><font face="verdana,arial" size=2>
-			<b>Matej Hausenblas (FR) did the french translations of CARE 2X</b>
-			<p>
-Matej Hausenblas was born in Prague, Czech Republic, in 1981.
-He is a student on a math-informatics-physics university. After several years 
-of using Windows he decided to have a look at Linux, as a worthy challenge 
-and after some time, he decided to participate on the Open Source projects to 
-improve some skills and also to return something back and to see how things 
-work in this kind of community.
-			<P><a href="mailto:matejh@users.sourceforge.net"><u>Matej Hausenblas can be contacted here.</u></a>
-</TD></TR></TBODY></TABLE>
 
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
@@ -203,6 +202,21 @@ work in this kind of community.
 			Luca is an experienced business consultant specializing in web applications. His target is to make the first productive installation of Care2x
 			in Brazilian hospitals.
 			<P><a href="mailto:luca@camocim.com"><u>Muhammad Panji can be contacted here.</u></a>
+</TD></TR></TBODY></TABLE>
+
+<hr><TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+			<b>Matej Hausenblas (FR) did the french translations of CARE 2X</b>
+			<p>
+Matej Hausenblas was born in Prague, Czech Republic, in 1981.
+He is a student on a math-informatics-physics university. After several years 
+of using Windows he decided to have a look at Linux, as a worthy challenge 
+and after some time, he decided to participate on the Open Source projects to 
+improve some skills and also to return something back and to see how things 
+work in this kind of community.
+			<P><a href="mailto:matejh@users.sourceforge.net"><u>Matej Hausenblas can be contacted here.</u></a>
 </TD></TR></TBODY></TABLE>
 
 <hr>
@@ -333,7 +347,7 @@ Despite the fact that he is neither working in medical nor in health sector, he 
 		     Hosting and admin of:<br>
 			 www.care2x.de<br>News Server, OTRS Support System<br>
 			 Promotion, Press relation<br>
-			 Jabber Communication Server, Consultation
+			 Consultation
 			<p>
 			</font>
 			Profession: Physician, with additional Medical Informatics degree
@@ -354,6 +368,10 @@ Despite the fact that he is neither working in medical nor in health sector, he 
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> A. Djem (ID)</font></nobr>&nbsp;</td>
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Grahic designs, website design</font></td>
+  </tr>
+  <tr>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Ali Kanarya (TU)</font></nobr>&nbsp;</td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;PostgreSQL initial script and workout</font></td>
   </tr>
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Akhmad Daniel Sembiring (ID)</font></nobr>&nbsp;</td>
@@ -426,10 +444,6 @@ Despite the fact that he is neither working in medical nor in health sector, he 
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Victor Christianto</font></nobr>&nbsp;</td>
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Ataraxia (WAP) module</font></td>
-  </tr>
-  <tr>
-    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Wei Ning Chen (CN)</font></nobr>&nbsp;</td>
-    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Simplified-Chinese translations</font></td>
   </tr>
 </table>
 

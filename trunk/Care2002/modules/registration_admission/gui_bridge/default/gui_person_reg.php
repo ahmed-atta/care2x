@@ -107,7 +107,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 </td>
 
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
-<a href="javascript:gethelp('admission_how2new.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
+<a href="javascript:gethelp('admission_how2new.php','<?php echo $error; ?>','<?php echo $error_person_exists; ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
 echo $breakfile;  ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </td>
 </tr>
@@ -129,7 +129,7 @@ require('./gui_bridge/default/gui_tabs_patreg.php');
 
 <table border=0 cellspacing=0 cellpadding=0>
 
-<?php if($error) : ?>
+<?php if($error) { ?>
 <tr bgcolor=#ffffee>
 <td colspan=3><center>
 <font face=arial color=#7700ff size=4>
@@ -138,7 +138,84 @@ require('./gui_bridge/default/gui_tabs_patreg.php');
 </center>
 </td>
 </tr>
-<?php endif; ?>
+<?php 
+}elseif($error_person_exists){
+ ?>
+<tr bgcolor=#ffffee>
+<td colspan=3><center>
+<table border=0>
+  <tr>
+    <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"></td>
+    <td><font face=arial color=#7700ff size=4>
+	<?php 
+		echo $LDPersonDuplicate;
+		if($duperson->RecordCount()>1) echo " $LDSimilarData2 $LDPlsCheckFirst2";
+			else echo " $LDSimilarData $LDPlsCheckFirst";
+	?></td>
+  </tr>
+</table>
+</center>
+</td>
+</tr>
+<tr>
+<td colspan=3>
+<table border=0 cellspacing=0 cellpadding=1 bgcolor="#000000" width=100%>
+  <tr>
+    <td>
+	<table border=0 cellspacing=0 width=100% bgcolor="#ffffff">
+		<?php
+		$img_male=createComIcon($root_path,'spm.gif','0');
+		$img_female=createComIcon($root_path,'spf.gif','0');
+		$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/tableHeader_gr.gif"';
+		echo'		
+		 <tr bgcolor="#66ee66" background="'.$root_path.'gui/img/common/default/tableHeaderbg.gif">';
+		echo "
+      	<td $tbg><FONT  SIZE=-1  FACE=\"Arial\" color=\"#000066\"><b>
+    	$LDRegistryNr</b></td>
+      <td $tbg><FONT  SIZE=-1  FACE=\"Arial\" color=\"#000066\"><b>
+	  $LDLastName</b></td>
+      <td $tbg><FONT  SIZE=-1  FACE=\"Arial\" color=\"#000066\"><b>
+	  $LDFirstName</b></td>
+      <td $tbg><FONT  SIZE=-1  FACE=\"Arial\" color=\"#000066\"><b>
+	  $LDBday</b></td>
+      <td $tbg><FONT  SIZE=-1  FACE=\"Arial\" color=\"#000066\"><b>
+	  $LDSex</b></td>
+      <td $tbg><FONT  SIZE=-1  FACE=\"Arial\" color=\"#000066\"><b>
+	  $LDOptions</b></td>
+		</tr>";
+		
+		while($dup=$duperson->FetchRow()){
+			echo '<tr>
+     		<td><font face=arial color=#000000 size=2>'.$dup['pid'].'</td>
+			<td><font face=arial color=#000000 size=2>'.$dup['name_last'].'</td>
+			<td><font face=arial color=#000000 size=2>'.$dup['name_first'].'</td>
+			<td><font face=arial color=#000000 size=2>'.formatDate2Local($dup['date_birth'],$date_format).'</td>
+			<td>';
+			switch($dup['sex']){
+				case 'f': echo '<img '.$img_female.'>'; break;
+				case 'm': echo '<img '.$img_male.'>'; break;
+				default: echo '&nbsp;'; break;
+			}
+        	echo '</td>	
+			<td><font face=arial color=#000000 size=2>:: <a href="person_reg_showdetail.php'.URL_APPEND.'&pid='.$dup['pid'].'&from=$from&newdata=1&target=entry" target="_blank">'.$LDShowDetails.'</a> :: 
+			<a href="patient_register.php'.URL_APPEND.'&pid='.$dup['pid'].'&update=1">'.$LDUpdate.'</a>
+			</td>
+   			</tr>
+			';
+		}
+		?>
+ </table>
+ 
+	</td>
+  </tr>
+</table>
+
+<?php 
+}
+ ?>
+ <br>
+ </td>
+</tr>
 
 <tr>
 <td><FONT SIZE=-1  FACE="Arial"><?php if($pid) echo $LDRegistryNr ?> 
@@ -215,7 +292,7 @@ createTR($errornameothers, 'name_others', $LDNameOthers,$name_others);
 <input name="date_birth" type="text" size="15" maxlength=10 value="<?php 
      if($date_birth)
      {
-        if($error) echo $date_birth; 
+        if($mode=='save'||$error||$error_person_exists) echo $date_birth; 
 	      else echo formatDate2Local($date_birth,$date_format);
      }
 	
@@ -428,7 +505,7 @@ createTR($errorethnicorig, 'ethnic_orig', $LDEthnicOrigin,$ethnic_orig,2);
 <input  type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?>  alt="<?php echo $LDSaveData ?>" align="absmiddle"> 
 <a href="javascript:document.aufnahmeform.reset()"><img <?php echo createLDImgSrc($root_path,'reset.gif','0') ?> alt="<?php echo $LDResetData ?>"   align="absmiddle"></a>
 
-<?php if($error==1) echo '<input  type="button" value="'.$LDForceSave.'" onClick="forceSave()">'; ?>
+<?php if($error||$error_person_exists) echo '<input  type="button" value="'.$LDForceSave.'" onClick="forceSave()">'; ?>
 
 <?php
 /* if($update) 

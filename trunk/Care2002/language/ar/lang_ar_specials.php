@@ -5,23 +5,23 @@ $LDMemo='Memo';
 $LDMemoTxt='Read or write a memo';
 
 $LDClose='ÇÛáÇŞ';
-$LDCancel='ÇåãÇá';
+$LDCancel='ÇáÛÇÁ ÇáÇãÑ';
 $LDResetEntry='ÍĞİ ÇáãÏÎáÇÊ';
 $LDSave='ÍİÙ';
-$LDReset='ÚæÏÉ ááÃÕá';
+$LDReset='ÊÕİíÑ';
 
 $LDNewSearch='ÈÍË ÌÏíÏ';
 $LDSearch='ÈÍË';
 
 $LDContinue='ÃÓÊãÑ';
-$LDBack='ÚæÏÉ ááÎáİ';
+$LDBack='ÊÑÇÌÚ';
 
-$LDOn='Úáì';
+$LDOn='İí';
 $LDAt='ÚäÏ';
 
 $LDNew='ÌÏíÏ';
 $LDEdit='ÊÍÑíÑ';
-$LDCreate='Êßæíä';
+$LDCreate='ÇäÔÇÁ';
 
 $LDPastAll='Çáßá';
 $LDSelect='ÇÎÊÇÑ';
@@ -77,7 +77,7 @@ $LDReply2='ÌæÇÈ Çáì';
 $LDPrint='ÇØÈÚ';
 $LDMoreInfo='ÇáãÒíÏ ãä ÇáãÚáæãÇÊ';
 $LDTakeOver='ÃÎÏ';
-$LDJustReset='ÚæÏÉ ááÃÕá';
+$LDJustReset='ÊÕİíÑ';
 $LDMaximum='ÇáÇŞÕì';
 
 $LDSpexFunctions='æÙÇÆİ ÎÇÕÉ';
@@ -90,9 +90,9 @@ $LDHandStatTxt='ËæÊíŞ ÇáÚãáíÇÊ ÇáÌÑÇÍíÉ';
 $LDCalendar='ÇáÊŞæíã';
 $LDCalendarTxt='ÇáÊŞæíã';
 $LDBlackBoard='ÕÈæÑÉ';
-$LDBlackBoardTxt='Post or search any information';
+$LDBlackBoardTxt='ÇÑÓÇá Çæ ÈÍË Úä Çí ãÚáæãÇÊ';
 $LDForum='ãäÊĞì';
-$LDForumTxt='Post, search, read discussion, ideas, or comments, etc.';
+$LDForumTxt='ÇÑÓÇá, ÈÍË, ŞÑÇÁÉ ãäÇŞÔÉ, ÇİßÇÑ, Çæ ÊÚáíŞÇÊ, ÇáÎ.';
 $LDCalc='ÃáÉ ÍÇÓÈÉ';
 $LDCalcTxt='ÃáÉ ÍÇÓÈÉ';
 $LDClock='ÇáÓÇÚÉ';
@@ -107,7 +107,7 @@ $LDAccessPw='ßáãÇÊ ÇáÓÑ ÇáÎÇÕÉ ÈÇáÏÎæá';
 $LDAccessPwTxt='ÊÛííÑ Ãæ ÊÍÏíÊ ßáãÉ ÇáÓÑ ÇáÎÇÕÉ ÈÇáÏÎæá';
 $LDWebCam='ÇáßÇãíÑÇÊ ÇáÇãäíÉ';
 $LDWebCamTxt='ãÑÇŞÈÉ ÇáßÇãíÑÇÊ ÇáÇãäíÉ ááÔÈßÉ ÇáãÍáíÉ';
-$LDPhotoLab='ãÚãá ÇáÕæÑ';
+$LDPhotoLab='ÇáÈæã ÇáÕæÑ';
 $LDPhotoLabTxt='ÍİÙ, æËÇÆŞ, İåÑÓ ÕæÑ ÇáãÑíÖ';
 
 $LDBundyMachine='ÇáÉ ÈÇæäÏí';
@@ -131,14 +131,19 @@ $LDEntry='ãÏÎá';
 $LDExit='ãÎÑÌ';
 $LDRemarks='ÚáÇãÉ';
 
-$tage=array('<font color=\'#ff0000\'>S</font>','M','T','W','T','F','S');
-$tagename=array('ÇáÓÈÊ',
-'ÇáÇÍÏ',
-'ÇáÇËäíä',
+$tage=array('<font color=\'#ff0000\'>Ã</font>','Å',
+'Ë',
+'Ã',
+'Î',
+'Ì',
+'Ó');
+$tagename=array('ÇáÇËäíä',
 'ÇáËáÇËÇÁ',
 'ÇáÇÑÈÚÇÁ',
 'ÇáÎãíÓ',
-'ÇáÌãÚÉ');
+'ÇáÌãÚÉ',
+'ÇáÓÈÊ',
+'ÇáÇÍÏ');
 
 $LDTotal='ÇáãÌãæÚ';
 $LDClk4Options='ÇÖÛØ ááÎíÇÑÇÊ';
@@ -148,13 +153,13 @@ $LDGO='ÃÏåÈ';
 $LDPlus1Year='ÅÖÇİÉ ÓäÉ';
 $LDMinus1Year='ÅäŞÇÕ ÓäÉ';
 $LDDirectDial='ÇÎÊíÇÑ ãÈÇÔÑ';
-$LDFor='áí';
+$LDFor='áÇÌá';
 
 $LDShowMyCalendar='ÇÚÑÖ æÑÏíÊí Úáì ÇáÊŞæíã';
 $LDShowMySched='ÇÚÑÖ ãæÚÏí';
 $LDShowMyOvertime='ÇÚÑÖ ãÊì áÏí Úãá ÇÖÇİí';
 $LDShowMyWorkTime='ÇÚÑÖ ÈÇáÊİÕíá ÌÏæá ÇáÚãá ÇáÎÇÕ Èí';
-$LDPlanSched='ãÎØØ ÇáãæÇÚíÏ ÇåĞÇ Çáíæã';
+$LDPlanSched='ãÎØØ ÇáãæÇÚíÏ áåĞÇ Çáíæã';
 $LDPlanDuty='ãÎØØ ÇáæÑÏíÇÊ áåĞÇ Çáíæã';
 $LDORProgram='ÈÑäÇãÌ ÍÌÑÉ ÇáÚãáíÇÊ';
 $LDDutyPerson='ÇáããÑÖ ÇáãäÇæÈ';
@@ -193,10 +198,10 @@ $LDPWChanged='Êã ÍİÙ ßáãÉ ÇáÓÑ';
 
 $LDBday='ÊÇÑíÎ ÇáãíáÇÏ';
 $LDShotDate='ÊÇÑíÎ ÇáÕæÑÉ';
-$LDPatientNr='Encounter Nr';
+$LDPatientNr='ÑŞã ÇáÒíÇÑÉ';
 $LDSetShotDate='ÍÏÏ åĞÇ ÇáÊÇÑíÎ áßá ÇáÕæÑ';
-$LDFotoLab='ãÚãá ÇáÕæÑ';
-$LDHowManyPics='ßã ÚÏÏ ÇáÕæÑ ÇáĞí ÊÑÛÈ ÈÍİÙå İí Èäß ÇáÈíÇäÇÊ¿';
+$LDFotoLab='ÇáÈæã ÇáÕæÑ';
+$LDHowManyPics='ßã ÚÏÏ ÇáÕæÑ ÇáĞí ÊÑÛÈ ÈÍİÙåÇ İí Èäß ÇáÈíÇäÇÊ¿';
 $LDNr='ÇáÑŞã';
 $LDNewPics='ÕæÑ ãä ãÑíÖ ÌÏíÏ';
 $LDMorePics='ÕæÑ ãä äİÓ ÇáãÑíÖ';
@@ -221,14 +226,14 @@ $LDNewPwDiffer='ßáãÇÊ ÇáÓÑ ÇáÌÏíÏÉ ÊÎÊáİÇä Úä ÈÚÖåãÇ<br> ÃÏÎá ßáãÉ ÓÑ ÌÏíÏÉ ãÑÉ 
 $LDPersonellMngmnt='ÔæÄä ÇáãæÙİíä';
 $LDPersonellMngmntTxt='ÃÏæÇÊ æ æÙÇÆİ ÎÇÕÉ ÈÅÏÇÑÉ ÔæÄä ÇáãæÙİíä';
 /* 2003-04-25 EL */
-$LDBilling='ÇáÔæÄä ÇáãÇáíÉ æ ÇáÎÒíäÉ';
+$LDBilling='ÇáÎÒíäÉ';
 $LDBillingTxt='İÇÊæÑÉ ÇáãÑíÖ, ÅäÔÇÁ ÈíÇäÇÊ İÇÊæÑÉ, Êßæíä ÊŞÑíÑ ÇáİæÇÊíÑ, ÅáÎ.';
-$LDInsuranceCoMngr='ÔÑßáÊ ÇáÊÃãíä';
+$LDInsuranceCoMngr='ÔÑßÇÊ ÇáÊÃãíä';
 $LDInsuranceCoMngrTxt='ÅÏÎÇá ÌÏíÏ, ÊÍÑíÑ ÈíÇäÇÊ ÔÑßÇÊ ÇáÊÃãíä';
 $LDAddressMngr='ÏİÊÑ ÇáÚäÇæíä';
 $LDAddressMngrTxt='ÅÏÎÇá, ŞÇÆãÉ, ÊÍÑíÑ, æ ÊÍÏíË ÈíÇäÇÊ ÇáÚäÇæíä.';
 /* 2003-05-18 EL */
-$LDUserConfigOpt='ÎíÇÑÇÊ ÇáãÙåÑ ÇáÚÇã:';
+$LDUserConfigOpt='ÎíÇÑÇÊ ÇáãÙåÑ ÇáÚÇã';
 $LDUserConfigOptTxt='ÎíÇÑÇÊ ÇáãÓÊÎÏã áÃáæÇä ÇáÎáİíÉ æ ÇáäÕ, ÕæÑ, ŞæÇáÈ, ÅáÎ.';
 $LDMascotOpt='ÎíÇÑÇÊ ÇáÕæÑ';
 $LDMascotOptTxt='ÅÎİÇÁ, ÅÙåÇÑ, Ãæ ÃÎÊíÇÑ.';
@@ -244,10 +249,10 @@ $LDLastName='ÇááŞÈ';
 $LDWantUpload='ÃÑíÏ ÇáÊÍãíá';
 $LDImage='ÕæÑÉ';
 # 2002-01-18 EL
-$LDTicketedSupport='Ticketed Support';
+$LDTicketedSupport='ÏÚã ÇáÊĞÇßÑ';
 $LDTicketedSupportTxt='Send a ticketed request to the project\'s online support';
 $LDNewsgroup='ãÌãæÚÉ ÇáÇÎÈÇÑ';
-$LDNewsgroupTxt='Newsgroup mirroring the developers\' mailing list.';
+$LDNewsgroupTxt='ãÑÇÁÉ ãÌãæÚÉ ÇáÇÎÈÇÑ ŞÇÆãÉ ÈÑíÏ ÇáãØæÑíä.';
 # 2002-08-19 EL
 $LDPharmaIndex='İåÑÓ ÇáÕíÏáíÉ';
 $LDPharmaIndexTxt='Pharmaceutical indexes like Redlist, IFAP, NIMS, or PIMS';

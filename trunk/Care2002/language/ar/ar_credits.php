@@ -1,9 +1,4 @@
-<?php
-error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-require_once('./roots.php');
-require_once($root_path.'include/inc_environment_global.php');
-?>
-<?php html_rtl($lang); ?>
+<html dir=rtl>
 <head>
 <!-- <meta http-equiv="Content-Type" content="text/html; charset=28596">
  --><meta http-equiv="Content-Type" content="text/html; charset=windows-1256">

@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
+* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@latorilla.com
+* elpidio@care2x.net, elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -22,9 +22,9 @@ require_once($root_path.'include/care_api_classes/class_insurance.php');
 require_once($root_path.'include/care_api_classes/class_person.php');
 
 /* Create the new person object */
-$person_obj=new Person($pid);
+$person_obj=& new Person($pid);
 /* Create a new person insurance object */
-$pinsure_obj=new PersonInsurance($pid);
+$pinsure_obj=& new PersonInsurance($pid);
 
 $thisfile=basename(__FILE__);
 $default_filebreak=$root_path.'main/startframe.php'.URL_APPEND;
@@ -110,36 +110,36 @@ if($dblink_ok) {
             if(($update)) {
 				
                 //echo formatDate2STD($geburtsdatum,$date_format);
-                $sql='UPDATE '.$dbtable.' SET
-						 title="'.$title.'",
-						 name_last="'.$name_last.'",
-						 name_first="'.$name_first.'",
-						 name_2="'.$name_2.'",
-						 name_3="'.$name_3.'",
-						 name_middle="'.$name_middle.'",
-						 name_maiden="'.$name_maiden.'",
-						 name_others="'.$name_others.'",
-						 date_birth="'.formatDate2STD($date_birth,$date_format).'",
-						 blood_group="'.$blood_group.'",
-						 sex="'.$sex.'",
-						 addr_str="'.$addr_str.'",
-						 addr_str_nr="'.$addr_str_nr.'",
-						 addr_zip="'.$addr_zip.'",
-						 addr_citytown_nr='.$addr_citytown_nr.',
-						 phone_1_nr="'.$phone_1_nr.'",
-						 phone_2_nr="'.$phone_2_nr.'",
-						 cellphone_1_nr="'.$cellphone_1_nr.'",
-						 cellphone_2_nr="'.$cellphone_2_nr.'",
-						 fax="'.$fax.'",
-						 email="'.$email.'",
-						 citizenship="'.$citizenship.'",
-						 civil_status="'.$civil_status.'",
-						 sss_nr="'.$sss_nr.'",
-						 nat_id_nr="'.$nat_id_nr.'",
-						 religion="'.$religion.'",
-						 ethnic_orig="'.$ethnic_orig.'",
-						 date_update="'.date('Y-m-d H:i:s').'",';
-						 
+                $sql="UPDATE $dbtable SET
+						 title='$title',
+						 name_last='$name_last',
+						 name_first='$name_first',
+						 name_2='$name_2',
+						 name_3='$name_3',
+						 name_middle='$name_middle',
+						 name_maiden='$name_maiden',
+						 name_others='$name_others',
+						 date_birth='".formatDate2STD($date_birth,$date_format)."',
+						 blood_group='$blood_group',
+						 sex='$sex',
+						 addr_str='$addr_str',
+						 addr_str_nr='$addr_str_nr',
+						 addr_zip='$addr_zip',
+						 addr_citytown_nr='$addr_citytown_nr',
+						 phone_1_nr='$phone_1_nr',
+						 phone_2_nr='$phone_2_nr',
+						 cellphone_1_nr='$cellphone_1_nr',
+						 cellphone_2_nr='$cellphone_2_nr',
+						 fax='$fax',
+						 email='$email',
+						 citizenship='$citizenship',
+						 civil_status='$civil_status',
+						 sss_nr='$sss_nr',
+						 nat_id_nr='$nat_id_nr',
+						 religion='$religion',
+						 ethnic_orig='$ethnic_orig',
+						 date_update='".date('Y-m-d H:i:s')."',";
+
 			   //if ($old_fn!=$photo_filename){
 			   if ($valid_image){
 					# Compose the new filename
@@ -147,11 +147,16 @@ if($dblink_ok) {
 					# Save the file
 					$img_obj->saveUploadedImage($HTTP_POST_FILES['photo_filename'],$root_path.$photo_path.'/',$photo_filename);
 			   		# add to the sql query
-					$sql.=' photo_filename="'.$photo_filename.'",';
+					$sql.=" photo_filename='$photo_filename',";
 				}
 			  # complete the sql query
-			   $sql.=' history=CONCAT(history," Update '.date('Y-m-d H:i:s').' '.$user_id."\n".'"), modify_id="'.$user_id.'" WHERE pid='.$pid;
-			
+			  if($dbtype=='mysql'){
+				$sql.=" history=CONCAT(history,' Update ".date('Y-m-d H:i:s')." $user_id \n'), modify_id='$user_id' WHERE pid=$pid";
+			}else{
+				# Defaults to postgresql string concat
+				$sql.=" history= history || ' Update ".date('Y-m-d H:i:s')." $user_id \n',  modify_id='$user_id' WHERE pid=$pid";
+			}
+			//$db->debug=true;
 			  $db->BeginTrans();
 			  $ok=$db->Execute($sql);
 			  if($ok) {
@@ -160,8 +165,8 @@ if($dblink_ok) {
 				  /* Lets detect if the data is already existing */
 				  if($insurance_show) {
 				      if($insurance_item_nr) {
-				          if(!empty($insurance_nr) && !empty($insurance_firm_name) && $insurance_firm_id) {  
-						  
+				          if(!empty($insurance_nr) && !empty($insurance_firm_name) && $insurance_firm_id) {
+
 						      $insure_data=array('insurance_nr'=>$insurance_nr,
 						                                'firm_id'=>$insurance_firm_id,
 														'class_nr'=>$insurance_class_nr);
@@ -190,62 +195,86 @@ if($dblink_ok) {
 			  }
             } else {
                  $from='entry';
-				 # Prepare internal data to be stored together with the user input data
-				 if(!$person_obj->InitPIDExists($GLOBAL_CONFIG['person_id_nr_init'])) $HTTP_POST_VARS['pid']=$GLOBAL_CONFIG['person_id_nr_init'];
+				 //echo $GLOBAL_CONFIG['person_id_nr_init']." goog";
+				 //echo $HTTP_POST_VARS['pid'];
 				 $HTTP_POST_VARS['date_birth']=@formatDate2Std($date_birth,$date_format);
 				 $HTTP_POST_VARS['date_reg']=date('Y-m-d H:i:s');
 				 $HTTP_POST_VARS['status']='normal';
 				 $HTTP_POST_VARS['history']="Init.reg. ".date('Y-m-d H:i:s')." ".$user_id."\n";
-				 $HTTP_POST_VARS['modify_id']=$user_id;
+				 //$HTTP_POST_VARS['modify_id']=$user_id;
 				 $HTTP_POST_VARS['create_id']=$user_id;
-				 $HTTP_POST_VARS['create_time']='NULL';
-					
-				//$person_obj->insertDataFromArray($data_array);
+				 $HTTP_POST_VARS['create_time']=date('YmdHis');
+				 				 # Prepare internal data to be stored together with the user input data
+				if(!$person_obj->InitPIDExists($GLOBAL_CONFIG['person_id_nr_init'])){
+					# If db is mysql, insert the initial pid value  from global config
+					# else let the dbms make an initial value via the sequence generator e.g. postgres
+					# However, the sequence generator must be configured during db creation to start at 
+					# the initial value set in the global config
+					if($dbtype=='mysql'){
+						$HTTP_POST_VARS['pid']=$GLOBAL_CONFIG['person_id_nr_init'];
+					}
+				}else{
+					# Persons are existing. Check if duplicate might exist
+					if(is_object($duperson=$person_obj->PIDbyData($HTTP_POST_VARS))){
+						$error_person_exists=true;
+					}
+				}
+				//echo $person_obj->getLastQuery();
+				
+				if(!$error_person_exists||$mode=='forcesave'){
+						//$person_obj->insertDataFromArray($data_array);
 	            
-				 if($person_obj->insertDataFromInternalArray())
-	             { 
-		              # If data was newly inserted, get the insert id = PID
-		               if(!$update) $pid=$db->Insert_ID();
-					   
-					   # Save the a valid uploaded photo
-					   if($valid_image){
-							# Compose the new filename
-							$photo_filename=$pid.'.'.$picext;
-							# Save the file
-							$img_obj->saveUploadedImage($HTTP_POST_FILES['photo_filename'],$root_path.$photo_path.'/',$photo_filename);
-					   }
-					   
-				  # Update the insurance data
-				  # Lets detect if the data is already existing
-				  if($insurance_show) {
-				      if($insurance_item_nr) {
-				          if(!empty($insurance_nr) && !empty($insurance_firm_name) && $insurance_firm_id) {  
+				 		if($person_obj->insertDataFromInternalArray()){ 
+				 			 
+				      		# If data was newly inserted, get the insert id if mysq, else get the pid number)
+							if(!$update){
+								if($dbtype=='mysql'){
+									$pid=$db->Insert_ID();
+								}else{
+									$pid=$person_obj->postgre_PIDbyOID($db->Insert_ID());
+								}
+							}
+							//if(!$update) $pid=$db->Insert_ID();
+					   		# Save the valid uploaded photo
+					   		if($valid_image){
+								# Compose the new filename
+								$photo_filename=$pid.'.'.$picext;
+								# Save the file
+								$img_obj->saveUploadedImage($HTTP_POST_FILES['photo_filename'],$root_path.$photo_path.'/',$photo_filename);
+					   		}
+							//echo $pid;
+				  			# Update the insurance data
+				  			# Lets detect if the data is already existing
+				  			if($insurance_show) {
+				      			if($insurance_item_nr) {
+				          			if(!empty($insurance_nr) && !empty($insurance_firm_name) && $insurance_firm_id) {  
 						  
-						      $insure_data=array('insurance_nr'=>$insurance_nr,
+						 	    		$insure_data=array('insurance_nr'=>$insurance_nr,
 						                                'firm_id'=>$insurance_firm_id,
 														'class_nr'=>$insurance_class_nr);
 														
-						      $pinsure_obj->updateDataFromArray($insure_data,$insurance_item_nr);
+						    			$pinsure_obj->updateDataFromArray($insure_data,$insurance_item_nr);
 						  
-						  }
-				      } elseif ($insurance_nr && $insurance_firm_name  && $insurance_class_nr) {
+						  			}
+				      			} elseif ($insurance_nr && $insurance_firm_name  && $insurance_class_nr) {
 	
-						      $insure_data=array('insurance_nr'=>$insurance_nr,
+									$insure_data=array('insurance_nr'=>$insurance_nr,
 						                                'firm_id'=>$insurance_firm_id,
 														'pid'=>$pid,
 														'class_nr'=>$insurance_class_nr);
 														
-						      $pinsure_obj->insertDataFromArray($insure_data);
-					  }
-                 }				
+						    		$pinsure_obj->insertDataFromArray($insure_data);
+					  			}
+                 			}				
 			
-			          $newdata=1;
+			        		$newdata=1;
 						
-			          header("Location: patient_register_show.php".URL_REDIRECT_APPEND."&pid=$pid&from=$from&newdata=1&target=entry");
-			          exit;     
-		         }
-	              else {echo "<p>$sql<p>$LDDbNoSave";};				
-             }
+			          		header("Location: patient_register_show.php".URL_REDIRECT_APPEND."&pid=$pid&from=$from&newdata=1&target=entry");
+			          		exit;     
+		         		}else {echo "<p>$db->ErrorMsg()<p>$LDDbNoSave";}
+					
+				}				
+            }
         } // end of if(!$error)
 
      }elseif(isset($pid) && ($pid!='')){
@@ -277,7 +306,7 @@ if($dblink_ok) {
 	     $date_reg=date('Y-m-d H:i:s');
      }			
 	 /* Get the insurance classes */
-	 $insurance_classes=&$pinsure_obj->getInsuranceClassInfoObject('class_nr,name,LD_var');
+	 $insurance_classes=&$pinsure_obj->getInsuranceClassInfoObject('class_nr,name,LD_var AS "LD_var"');
 } else { 
     echo "$LDDbNoLink<br>"; 
 }

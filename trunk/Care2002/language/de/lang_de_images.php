@@ -1,4 +1,4 @@
 <?php
-$LDTogglePreviewOrig='In originaler Grosse zeigen';
+$LDTogglePreviewOrig='In origineller Grosse zeigen';
 $LDToggleOrigPreview='In verkleinerter Form zeigen';
 ?>

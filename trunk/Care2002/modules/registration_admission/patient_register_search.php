@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
+* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@latorilla.com
+* elpidio@care2x.net, elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -55,7 +55,7 @@ $thisfile=basename(__FILE__);
 
 $GLOBAL_CONFIG=array();
 
-# Initialize page's control variables
+# Initialize pages control variables
 if($mode=='paginate'){
 	$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
 	//$searchkey='USE_SESSION_SEARCHKEY';
@@ -80,6 +80,8 @@ $glob_obj->getConfig('pagin_person_search_max_block_rows');
 if(empty($GLOBAL_CONFIG['pagin_person_search_max_block_rows'])) $pagen->setMaxCount(MAX_BLOCK_ROWS); # Last resort, use the default defined at the start of this page
 	else $pagen->setMaxCount($GLOBAL_CONFIG['pagin_person_search_max_block_rows']);
 
+	
+	//$db->debug=true;
 
 if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($searchkey)){
 	
@@ -105,7 +107,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 			if(empty($oitem)) $oitem='pid';			
 			if(empty($odir)) $odir='DESC'; # default, latest pid at top
 			
-			$sql2='	WHERE pid="'.$suchwort.'" OR pid = "'.$suchbuffer.'" ';
+			$sql2="	WHERE pid='$suchwort' OR pid = '$suchbuffer' ";
 			
 	    } else {
 			# Try to detect if searchkey is composite of first name + last name
@@ -136,14 +138,14 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 			}
 			# Check the size of the comp
 			if(sizeof($comp)>1){
-				$sql2='	WHERE (name_last LIKE "'.strtr($ln,'+',' ').'%" AND name_first LIKE "'.strtr($fn,'+',' ').'%") ';
+				$sql2=" WHERE (name_last $sql_LIKE '".strtr($ln,'+',' ')."%' AND name_first $sql_LIKE '".strtr($fn,'+',' ')."%')";
 				if(!empty($bd)){ 
 					$DOB=formatDate2STD($bd,$date_format);
 				echo $DOB;
 					if($DOB=='') {
-						$sql2.=' AND date_birth LIKE "'.$bd.'%" ';
+						$sql2.=" AND date_birth $sql_LIKE '$bd%' ";
 					}else{
-						$sql2.=' AND date_birth = "'.$DOB.'" ';
+						$sql2.=" AND date_birth = '$DOB' ";
 					}
 				}
 					
@@ -153,7 +155,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 			}else{
 				# Check if * or %
 				if($suchwort=='%'||$suchwort=='%%'){
-					$sql2=' WHERE 1';
+					$sql2='';
 				}else{
 					# Check if it is a complete DOB
 					$DOB=formatDate2STD($suchwort,$date_format);
@@ -161,18 +163,18 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 					if($DOB=='') {
 						if(defined('SHOW_FIRSTNAME_CONTROLLER')&&SHOW_FIRSTNAME_CONTROLLER){
 							if(isset($HTTP_POST_VARS['firstname_too'])&&$HTTP_POST_VARS['firstname_too']){
-								$sql2='	WHERE name_last LIKE "'.strtr($suchwort,'+',' ').'%" OR name_first LIKE "'.strtr($suchwort,'+',' ').'%"';
+								$sql2=" WHERE name_last $sql_LIKE '".strtr($suchwort,'+',' ')."%' OR name_first $sql_LIKE '".strtr($suchwort,'+',' ')."%'";
 								$firstname_too=1;
 							}else{
-								$sql2='	WHERE name_last LIKE "'.strtr($suchwort,'+',' ').'%" ';
+								$sql2=" WHERE name_last $sql_LIKE '".strtr($suchwort,'+',' ')."%' ";
 								$firstname_too=0;
 							}
 						}else{
-							$sql2='	WHERE name_last LIKE "'.strtr($suchwort,'+',' ').'%" OR name_first LIKE "'.strtr($suchwort,'+',' ').'%"';
+							$sql2=" WHERE name_last $sql_LIKE '".strtr($suchwort,'+',' ')."%' OR name_first $sql_LIKE '".strtr($suchwort,'+',' ')."%'";
 							$firstname_too=1;
 						}
 					}else{
-						$sql2='	WHERE date_birth = "'.$DOB.'"';
+						$sql2=" WHERE date_birth = '$DOB'";
 					}
 				}
 									
@@ -388,14 +390,14 @@ if ($linecount){
                         echo '</td>
 						';	
 
-						
+
 						echo"<td><font face=arial size=2>";
 						echo "&nbsp;".ucfirst($zeile['name_last']);
                         echo "</td>";	
 						echo"<td><font face=arial size=2>";
 						echo "&nbsp;".ucfirst($zeile['name_first']);
 						# If person is dead show a black cross
-						if($zeile['death_date']&&$zeile['death_date']!='0000-00-00') echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0','absmiddle').'>';
+						if($zeile['death_date']&&$zeile['death_date']!=$dbf_nodate) echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0','absmiddle').'>';
                         echo "</td>";	
 						echo"<td><font face=arial size=2>";
 						echo "&nbsp;".formatDate2Local($zeile['date_birth'],$date_format);

@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
+* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@latorilla.com
+* elpidio@care2x.net, elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -26,12 +26,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 		<form action="<?php echo $root_path; ?>modules/phpmyadmin/index.php" method="post">
 			<input type="hidden" name="lang" value="<?php echo $lang ?>">
 			<input type="hidden" name="sid" value="<?php echo $sid; ?>">
-			<input type="submit" value="<?php echo 'phpMyAdmin' ?>">
-		</form><p> 
-		<form action="<?php echo $root_path; ?>development/G2_PG/phpPgAdmin-3.2.1/index.php" method="post">
-			<input type="hidden" name="lang" value="<?php echo $lang ?>">
-			<input type="hidden" name="sid" value="<?php echo $sid; ?>">
-			<input type="submit" value="<?php echo 'phpPgAdmin' ?>">
+			<input type="submit" value="<?php echo $LDContinue ?>">
 		</form><p> 
 		<form action="edv.php" method="post">
 			<input type="hidden" name="lang" value="<?php echo $lang ?>">

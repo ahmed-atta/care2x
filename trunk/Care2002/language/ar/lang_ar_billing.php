@@ -1,9 +1,9 @@
 <?php
 /* 2003-06-21 El */
-$TXT['CreateHospitalServiceItem']='ÅäÔÇÁ ÈíÇä ÎÐãÉ ãÓÊÔÝì';
-$TXT['CreateLabTestItem']='ÅäÔÇÁ ÈíÇä ÊÍáíá ãÚãá';
-$TXT['EditHospitalServiceItems']='ÊÍÑíÑ ÈíÇäÇÊ ÎÏãÉ ÇáãÓÊÔÝì';
-$TXT['EditLabTestItems']='ÊÍÑíÑ ÈíÇäÇÊ ÊÍáíá ÇáãÚãá';
+$TXT['CreateHospitalServiceItem']='ÅäÔÇÁ ÈíÇä ÎÐãÉ';
+$TXT['CreateLabTestItem']='ÅäÔÇÁ ÈíÇä ÊÍáíá';
+$TXT['EditHospitalServiceItems']='ÊÍÑíÑ ÈíÇäÇÊ ÎÏãÉ';
+$TXT['EditLabTestItems']='ÊÍÑíÑ ÈíÇäÇÊ ÊÍáíá';
 $TXT['SearchPatient']='ÈÍË Úä ãÑíÖ';
 $TXT['Billing']='ÇáÔæÄä ÇáãÇáíÉ æ ÇáÎÒíäÉ';
 
@@ -13,9 +13,9 @@ $TXT['EnterPriceUnit']='ÃÏÎá ÓÚÑ ÇáæÍÏÉ';
 $TXT['EnterDiscount']='ÃÏÎá ÇáÎÕã Úáì åÐå ÇáæÍÏÉ';
 $TXT['EnterValuePrice']='ÃÏÎá ÇáÓÚÑ ÈÇáÇÑÞÇã.';
 $TXT['EnterValueDiscount']='ÃÏÎá ÇáÎÕã ÈÇáÇÑÞÇã.';
-$TXT['HospitalServiceItem']='ÈíÇä ÎÏãÉ ãÓÊÔÝì';
+$TXT['HospitalServiceItem']='ÈíÇä ÎÏãÉ ';
 $TXT['PlsEnterFF']='ÃÏÎá ÇáÊÇáí';
-$TXT['NameHS']='ÃÓã ÎÏãÉ ÇáãÓÊÔÝì';
+$TXT['NameHS']='ÃÓã ÎÏãÉ';
 $TXT['TestCode']='ÇáÎÏãÉ/ÇáÊÍáíá ÇáÔÝÑÉ/ÇáÑÞã.';
 $TXT['PriceUnit']='ÓÚÑ ÇáæÍÏÉ';
 $TXT['EnterValueDiscount']='ÇáÎÕã(%)';
@@ -26,139 +26,139 @@ $TXT['Discount']='ÇáÎÕã';
 $TXT['Code']='ÇáÔÝÑÉ';
 $TXT['Name']='ÇáÇÓã';
 $TXT['CostPerUnit']='ÓÚÑ ÇáæÍÏÉ';
-$TXT['HospitalServiceItems']='ÎÏãÇÊ ÇáãÓÊÔÝì';
+$TXT['HospitalServiceItems']='ÎÏãÇÊ';
 $TXT['LabTestItems']='ÈíÇäÇÊ ÇáÊÍáíá';
 
 /* 2003-10-19 DHC Alerts from enter_hospital_services.php  */
-$TXT['alertNameHospitalService']='Enter the name of the hospital service';
-$TXT['alertEnterServiceCodeNo']='Enter the service or code number';
-$TXT['alertEnterPriceperUnit']='Enter the price per unit';
-$TXT['alertEnterDiscountallowed']='Enter the discount allowed for this service (%)';
-$TXT['alertEnterNumericValueforPrice']='Enter the numeric value for the price';
-$TXT['alertEnterNumericValueforDiscount']='Enter the numeric value for discount';
+$TXT['alertNameHospitalService']='ÃÏÎá ÇÓã ÇáÎÏãÉ';
+$TXT['alertEnterServiceCodeNo']='ÇÏÎá ÇáÎÏãÉ Çæ ÑÞã ÇáÔÝÑÉ';
+$TXT['alertEnterPriceperUnit']='ÇÏÎá ÓÚÑ ÇáæÍÏÉ';
+$TXT['alertEnterDiscountallowed']='ÇÏÎá ÇáÎÕã ÇáãÊÇÍ áåÐÉ ÇáÎÏãÉ (%)';
+$TXT['alertEnterNumericValueforPrice']='ÇÏÎá ÞíãÉ ÑÞãíÉ ááÓÚÑ';
+$TXT['alertEnterNumericValueforDiscount']='ÇÏÎá ÞíãÉ ÑÞãíÉ ááÎÕã';
 
 /* 2003-10-19 DHC Echoes from patientbill.php  */
-$TXT['PatientName']='Patient name';
-$TXT['eComBill']='eComBill';
-$TXT['PatientNumber']='Patient number';
-$TXT['SelectHospitalServices']='Select Hospital Services';
-$TXT['SelectLaboratoryTests']='Select Laboratory Tests';
-$TXT['ViewBill']='View Bill';
-$TXT['ViewPayment']='View Payment';
-$TXT['MakeNewPayment']='Make new payment';
-$TXT['GenerateFinalBill']='Generate final bill';
-$TXT['Patienthasclearedallthebills']='Patient has cleared all the bills';
+$TXT['PatientName']='ÇÓã ÇáãÑíÖ';
+$TXT['eComBill']='ÇáÎÒíäÉ';
+$TXT['PatientNumber']='ÑÞã ÇáãÑíÖ';
+$TXT['SelectHospitalServices']='ÇÎÊÇÑ ÇáÎÏãÇÊ';
+$TXT['SelectLaboratoryTests']='ÇÎÊÇÑ ÇáÊÍÇáíá';
+$TXT['ViewBill']='ÚÑÖ ÇáÝÇÊæÑÉ';
+$TXT['ViewPayment']='ÚÑÖ ÇíÕÇá ÇáÞÈÖ';
+$TXT['MakeNewPayment']='ÇíÕÇá ÞÈÖ ÌÏíÏ';
+$TXT['GenerateFinalBill']='Êßæíä ÇáÝÇÊæÑÉ ÇáäåÇÆíÉ';
+$TXT['Patienthasclearedallthebills']='ßá ÇáÝæÇÊíÑ æÖÍÊ ááãÑíÖ';
 
 /* 2003-10-19 DHC Echoes from select_services.php  */
-$TXT['SelectLaboratoryTests']='Select Laboratory Tests';
-$TXT['SelectHospitalServices']='Select Hospital Services';
-$TXT['PleaseSelectLaboratoryTestsforthePatient']='Please select Laboratory Tests for the patient';
-$TXT['PleaseSelectHospitalServicesforthePatient']='Please select Hospital Services for the patient:';
-$TXT['TestName']='Test Name';
-$TXT['TestCode']='Test Code';
-$TXT['Costperunit']='Cost per unit';
-$TXT['NumberofUnits']='Number of units';
-$TXT['AddtoPatientBill']='Add to patient bill';
+$TXT['SelectLaboratoryTests']='ÇÎÊÇÑ ÇáÊÍÇáíá';
+$TXT['SelectHospitalServices']='ÇÎÊÇÑ ÇáÎÏãÇÊ';
+$TXT['PleaseSelectLaboratoryTestsforthePatient']='ÇÎÊÇÑ ÊÍÇáíá åÐÇ ÇáãÑíÖ';
+$TXT['PleaseSelectHospitalServicesforthePatient']='ÇÎÊÇÑ ÇáÎÐãÇÊ ÇáãÞÏãÉ áåÐÇ ÇáãÑíÖ:';
+$TXT['TestName']='ÇÓã ÇáÊÍáíá';
+$TXT['TestCode']='ÔÝÑÉ ÇáÊÍáíá';
+$TXT['Costperunit']='ÓÚÑ ÇáæÍÏÉ';
+$TXT['NumberofUnits']='ÚÏÏ ÇáæÍÏÇÊ';
+$TXT['AddtoPatientBill']='ÇÖÝ áÝÇÊæÑÉ ÇáãÑíÖ';
 
 /* 2003-10-19 DHC Echoes from confirmLabtests.php  */
-$TXT['ConfirmLaboratoryTests']='Confirm Laboratory Tests';
-$TXT['ConfirmHospitalServices']='Confirm Hospital Services';
-$TXT['LaboratoryTests']='Laboratory Tests';
+$TXT['ConfirmLaboratoryTests']='ÃßÏ ÇáÊÍÇáíá';
+$TXT['ConfirmHospitalServices']='ÃßÏ ÇáÎÏãÇÊ';
+$TXT['LaboratoryTests']='ÇáÊÍÇáíá';
 
 /* 2003-10-19 DHC Echoes from patient_bill_links.php  */
-$TXT['BillNo']='Bill No.';
-$TXT['BillDate']='Bill Date';
-$TXT['FinalBill']='Final Bill';
-$TXT['CurrentBill']='Current Bill';
-$TXT['Bill']='Bill';
-$TXT['GeneralInfo']='General information';
-$TXT['PatientAddress']='Patient address';
-$TXT['PatientType']='Patient type';
-$TXT['DateofBirth']='Date of birth';
-$TXT['Sex']='Sex';
-$TXT['DateofAdmission']='Date of admission';
-$TXT['BillingInformation']='Billing Information';
-$TXT['Description']='Description';
-$TXT['CostperUnit']='Cost per unit';
-$TXT['Units']='Units';
-$TXT['TotalCost']='Total cost';
-$TXT['ItemType']='Item type';
-$TXT['MedicalServices']='Medical Services';
-$TXT['LaboratoryTests']='Laboratory tests';
-$TXT['Total']='Total';
-$TXT['TotalBillAmount']='Total bill amount';
-$TXT['OutstandingAmount']='Outstanding amount';
-$TXT['AmountDue']='Amount due';
+$TXT['BillNo']='ÑÞã ÇáÝÇÊæÑÉ';
+$TXT['BillDate']='ÊÇÑíÎ ÇáÝÇÊæÑÉ';
+$TXT['FinalBill']='ÇáÝÇÊæÑÉ ÇáäåÇÆíÉ';
+$TXT['CurrentBill']='ÇáÝÇÊæÑÉ ÇáÍÇáíÉ';
+$TXT['Bill']='ÝÇÊæÑÉ';
+$TXT['GeneralInfo']='ãÚáæãÇÊ ÚÇãÉ';
+$TXT['PatientAddress']='ÚäæÇä ÇáãÑíÖ';
+$TXT['PatientType']='äæÚ ÇáãÑíÖ';
+$TXT['DateofBirth']='ÊÇÑíÎ ÇáãíáÇÏ';
+$TXT['Sex']='ÇáÌäÓ';
+$TXT['DateofAdmission']='ÊÇÑíÎ ÇáÞÈæá';
+$TXT['BillingInformation']='ãÚáæãÇÊ ÇáÝæÊÑÉ';
+$TXT['Description']='ÇáæÕÝ';
+$TXT['CostperUnit']='ÓÚÑ ÇáæÍÏÉ';
+$TXT['Units']='ÇáæÍÏÇÊ';
+$TXT['TotalCost']='ÇáÊßáÝÉ ÇáßáíÉ';
+$TXT['ItemType']='äæÚ ÇáÈíÇä';
+$TXT['MedicalServices']='ÎÐãÇÊ ØÈíÉ';
+$TXT['LaboratoryTests']='ÊÍÇáíá ãÚãáíÉ';
+$TXT['Total']='ÇáãÌãæÚ';
+$TXT['TotalBillAmount']='ãÌãæÚ ÞíãÉ ÇáÝÇÊæÑÉ';
+$TXT['OutstandingAmount']='ÇáßãíÉ ÇáãÊÈÞíÉ';
+$TXT['AmountDue']='ÞíãÉ Úä';
 
 /* 2003-10-19 DHC Echoes from show_final_bill.php */
-$TXT['DiscountonTotalAmount']='Discount on total amount (%)';
-$TXT['AmountAfterDiscount']='Amount after discount';
-$TXT['AmountPreviouslyReceived']='Amount previously received';
-$TXT['AmountDue']='Amount due';
-$TXT['CurrentPaidAmount']='Current paid amount';
+$TXT['DiscountonTotalAmount']='ÇáÎÕã Úáì ÇáßãíÉ ÇáßáíÉ (%)';
+$TXT['AmountAfterDiscount']='ÇáßãíÉ ÈÚÏ ÇáÎÕã';
+$TXT['AmountPreviouslyReceived']='ÇáßãíÉ ÇáãÓÊáãÉ ÓÇÈÞÇ';
+$TXT['AmountDue']='ÞíãÉ Úä';
+$TXT['CurrentPaidAmount']='ÇáßãíÉ ÇáãÏÝæÚÉ ÍÇáíÇ';
 
 /* 2003-10-19 DHC Echoes from show_final_bill.php */
-$TXT['Payments']='Payments';
-$TXT['ReceiptNumber']='Receipt number';
-$TXT['ReceiptDateTime']='Receipt date and time';
-$TXT['MakeaNewPayment']='Make a new payment';
+$TXT['Payments']='ÇíÕÇáÇÊ ÇáÞÈÖ';
+$TXT['ReceiptNumber']='ÑÞã ÇáÇíÕÇá';
+$TXT['ReceiptDateTime']='ÊÇÑíÎ æ æÞÊ ÇáÇíÕÇá';
+$TXT['MakeaNewPayment']='ÇíÕÇá ÞÈÖ ÌÏíÏ';
 
 /* 2003-10-25 DHC Echoes from patient_payment.php */
-$TXT['BillPayment']='Bill payment';
-$TXT['alertEnterNumericValueforCashAmount']='Enter numeric value for cash amount';
-$TXT['alertEnterNumericValueforCreditCardNo']='Enter numeric value for credit card number';
-$TXT['alertEnterNumericValueforCreditCardAmount']='Enter numeric value for credit card amount';
-$TXT['alertEnterNumericValueforChequeNo']='Enter numeric value for check number';
-$TXT['alertEnterNumericValueforChequeAmount']='Enter numeric value for check amount';
-$TXT['alertPleaseSelectatleastOneModeofPayment']='Please select at least one mode of payment';
-$TXT['PaymentReceipt']='Payment receipt';
-$TXT['PaymentInformation']='Payment information';
-$TXT['SelecttheModeofCurrentPayment']='Select the mode of current payment';
-$TXT['Cash']='Cash';
-$TXT['Amount']='Amount';
-$TXT['Check']='Check';
-$TXT['CreditCard']='Credit card';
-$TXT['CardNumber']='Card number';
-$TXT['CCType']='Type of credit card';
-$TXT['CheckNumber']='Check number';
+$TXT['BillPayment']='ÏÝÚ ÇáÝæÇÊíÑ';
+$TXT['alertEnterNumericValueforCashAmount']='ÇÏÎá ÞíãÉ ÑÞãíÉ áßá ßãíÉ';
+$TXT['alertEnterNumericValueforCreditCardNo']='ÇÎá ÞíãÉ ÑÞãíÉ áÑÞã ÈØÇÞÉ ÇáÅÆÊãÇä';
+$TXT['alertEnterNumericValueforCreditCardAmount']='Îá ÞíãÉ ÑÞãíÉ áßãíÉ ÈØÇÞÉ ÇáÅÆÊãÇä';
+$TXT['alertEnterNumericValueforChequeNo']='ÇÏÎá ÞíãÉ ÑÞãíÉ áÑÞã ÇáÔíß';
+$TXT['alertEnterNumericValueforChequeAmount']='ÇÏÎá ÞíãÉ ÑÞãíÉ áßãíÉ ÇáÔíß';
+$TXT['alertPleaseSelectatleastOneModeofPayment']='ÇÎÊÇÑ Úáì ÇáÇÞá äãØ æÇÍÏ áÏÝÚ';
+$TXT['PaymentReceipt']='ÇíÕÇá ÞÈÖ';
+$TXT['PaymentInformation']='ãÚáæãÇÊ ÇáÞÈÖ';
+$TXT['SelecttheModeofCurrentPayment']='ÇÎÊÇÑ äãØ ÇíÕÇá ÇáÞÈÖ ÇáÍÇáí';
+$TXT['Cash']='äÞÏí';
+$TXT['Amount']='ÇáßãíÉ';
+$TXT['Check']='Ôíß';
+$TXT['CreditCard']='ÈØÇÞÉ ÅÆÊãÇä';
+$TXT['CardNumber']='ÑÞã ÇáÈØÇÞÉ';
+$TXT['CCType']='äæÚ ÈØÇÞÉ ÇáÅÆÊãÇä';
+$TXT['CheckNumber']='ÑÞã ÇáÔíß';
 
 /* 2003-10-25 DHC Echoes from showpayment.php */
-$TXT['ModeofPayment']='Mode of payment';
-$TXT['PaymentDate']='Payment date';
+$TXT['ModeofPayment']='äãØ ÇáÇíÕÇá';
+$TXT['PaymentDate']='ÊÇÑÎ ÇáÇíÕÇá';
 
 /* 2003-11-30 DHC Echoes from edit_hospital_services.php */
-$TXT['EditLaboratoryTests']='Edit laboratory tests';
-$TXT['EditHospitalServices']='Edit hospital services';
-$TXT['EditLaboratoryTestItems']='Edit laboratory test items';
-$TXT['EditHospitalServiceItems']='Edit hospital service items';
+$TXT['EditLaboratoryTests']='ÍÑÑ ÇáÊÍÇáíá';
+$TXT['EditHospitalServices']='ÍÑÑ ÇáÎÏãÇÊ';
+$TXT['EditLaboratoryTestItems']='ÍÑÑ ÈíÇäÇÊ ÇáÊÍáíá';
+$TXT['EditHospitalServiceItems']='ÍÑÑ ÈíÇäÇÊ ÇáÎÏãÉ';
 
 # 2003-10-14 NDHC eComBill Search.php
-$LDPatientName='Patient name';
-$LDeComBill='eComBill';
-$LDSearch='Search';
+$LDPatientName='ÇÓã ÇáãÑíÖ';
+$LDeComBill='ÇáÎÒíäÉ';
+$LDSearch='ÈÍË';
 
 # 2003-10-20 NDHC this line doesn't work because it's inside an "alt=".  eComBill Search.php
-$LDBillthisPatient='Bill this patient';
+$LDBillthisPatient='ÝÇÊæÑÉ áåÐÇ ÇáãÑíÖ';
 
 # 2003-10-25 NDHC eComBill confirmpayment.php
-$LDBillPayment='Payment';
-$LDPaymentPreview='Payment preview';
-$LDGeneralInfo='General information';
-$LDPatientName='Patient\'s name';
-$LDReceiptNumber='Receipt number';
-$LDPatientAddress='Patient\'s address';
-$LDBillDate='Bill date';
-$LDPatientType='Type of patient';
-$LDDateofBirth='Date of birth';
-$LDSex='Sex';
-$LDPatientNumber='Encounter number';
-$LDDateofAdmission='Admission date';
-$LDPaymentInformation='Payment information';
-$LDModeofPayment='Mode of payment';
-$LDCash='Cash';
-$LDAmount='Amount';
-$LDCreditCard='Credit card';
-$LDCheck='Cheque';
-$LDCheckNumber='Cheque number';
-$LDCardNumber='Card number';
+$LDBillPayment='ÞÈÖ';
+$LDPaymentPreview='ÚÑÖ ÇáÞÈÖ';
+$LDGeneralInfo='ãÚáæãÇÊ ÚÇãÉ';
+$LDPatientName='ÇÓã ÇáãÑíÖ';
+$LDReceiptNumber='ÑÞã ÇáÇíÕÇá';
+$LDPatientAddress='ÚäæÇä ÇáãÑíÖ';
+$LDBillDate='ÊÇÑíÎ ÇáÝÇÊæÑÉ';
+$LDPatientType='äæÚ ÇáãÑíÖ';
+$LDDateofBirth='ÊÇÑíÎ ÇáãíáÇÏ';
+$LDSex='ÇáÌäÓ';
+$LDPatientNumber='ÑÞã ÇáãÞÇÈáÉ';
+$LDDateofAdmission='ÊÇÑíÎ ÇáÞÈæá';
+$LDPaymentInformation='ãÚáæãÇÊ ÇáÞÈÖ';
+$LDModeofPayment='äãØ ÇáÞÈÖ';
+$LDCash='äÞÏí';
+$LDAmount='ÇáßãíÉ';
+$LDCreditCard='ÈØÇÞÉ ÅÆÊãÇä';
+$LDCheck='Ôíß';
+$LDCheckNumber='ÑÞã ÇáÔíß';
+$LDCardNumber='ÑÞã ÇáÈØÇÞÉ';
 ?>

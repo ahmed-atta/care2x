@@ -41,16 +41,16 @@ $LDHowEnter='ßíÝ ÇÏÎá ãÚáæãÇÊ åÇÊÝ ÌÏíÏ';
 $LDPhoneDir='Ïáíá ÇáåÇÊÝ';
 $LDMakeDutyPlan='ÅäÔÇÁ ãÎØØ æÑÏíÇÊ';
 $LDDocsList='ÞÇÆãÉ ÇáÇØÈÇÁ';
-$LDNursingManage='ÇÏÇÑÉ ÇááÛÉ';
+$LDNursingManage='ÇÏÇÑÉ ÇáÇÌäÍÉ';
 
-$LDNursingStation='áÛÉ ÇáÊãÑíÖ';
+$LDNursingStation='ÇÌäÍÉ ÇáÊãÑíÖ';
 $LDOrDocu='ÍÌÑÉ ÇáÚãáíÇÊ - ÇáÊæËíÞ';
 $LDOrLogBook='ÍÌÑÉ ÇáÚãáíÇÊ - ÓÌá ÇáÊãÑíÖ';
 $LDOrNursing='ÍÌÑÉ ÇáÚãáíÇÊ - ÇáÊãÑíÖ';
-$LDCreate='Êßæíä';
+$LDCreate='ÇäÔÇÁ';
 $LDPersonList='ÇáÞÇÆãÉ ÇáÔÎÕíÉ';
-$LDRepabotActivate='Activate Repabot';
-$LDQBotActivate='Activate Q-Bot';
+$LDRepabotActivate='ÊäÔíØ ÑÈæÊ ÇáÕíÇäÉ';
+$LDQBotActivate='ÊäÔíØ ÑÈæÊ ÇáÇÓÊÚáÇã';
 
 $LDMedLab='ÇáãÚãá ÇáØÈí';
 $LDCancel='ÅáÛÇÁ ÇáÇãÑ';
@@ -60,9 +60,9 @@ $LDOrderArchive='ÇáÇÑÔíÝ';
 $LDPharmaOrder='ÇáØáÈíÇÊ';
 $LDOrderCat='Ïáíá ÇáãäÊÌÇÊ';
 $LDPharmaDb='Èäß ÇáÈíÇäÇÊ';
-$LDPharmaOrderBot='Activate OrderBot';
+$LDPharmaOrderBot='ÊäÔíØ ÑÈæÊ ÇáØáÈíÇÊ';
 
-$LDMedDepot='Medical Depot';
+$LDMedDepot='ÇáãÎÒä ÇáØÈí';
 $LDMediBotActivate='Activate Medibot';
 $LDSqlDb='SQL Èäß ÇáÈíÇäÇÊ';
 $LDManageAccess='ÇÏÇÑÉ ÕáÇÍíÇÊ ÇáÏÎæá';
@@ -76,14 +76,14 @@ $LDLogin='ÏÎæá';
 $LDChangeSaved='Êã ÍÝÙ ÇáÊÛííÑ';
 $LDPcID='ÇáÊÚÑíÝ ÇáÍÇáí áåÐÇ ÇáßãÈíæÊÑ';
 $LDDept='ÇáÞÓã';
-$LDWard='ßáãÉ';
-$LDWardOR='ÑãÒ ÇáÍÌÑÉ Çæ ÑÞã ÍÌÑÉ ÇáÚãáíÇÊ';
+$LDWard='ÇáÌäÇÍ';
+$LDWardOR='ÌäÇÍ ÛÑÝÉ ÇáÚãáíÇÊ';
 $LDPhoneNr='ÑÞã åÇÊÝ ÇáÍÌÑÉ';
 $LDIntercomNr='ÑÞã ÇáÇäÊÑßã ÇáÎÇÕ ÈÇáÍÌÑÉ';
-$LDPcIP='ÚäæÇä åÐÇ ÇáßãÈíæÊÑ';
+$LDPcIP='ÚäæÇä IP ÇáßãÈíæÊÑ';
 $LDSave='ÍÝÙ ÇáÊÛííÑÇÊ';
 $LDNoChange='áÇ ÊÛíÑ ÇáÇÚÏÇÏÇÊ ÇáÍÇáíÉ';
-$LDClose='ÇÛáÞ';
+$LDClose='ÇÛáÇÞ';
 $LDLogout='ÎÑæÌ';
 $LDNewLogin='ÏÎæá ÌÏíÏ';
 $LDLogoutConfirm='åá ÊÑÛÈ ÝÚáÇ Ýí ÇáÎÑæÌ¿';
@@ -91,27 +91,27 @@ $LDOK='ãæÇÝÞ';
 $LDYes='äÚã';
 $LDNotReally='áÇ , áÓÊ ÃÑÛÈ';
 $LDDOCScheduler='ÌÏæá ÇáÇØÈÇÁ';
-$LDORNOCScheduler='ORNOC Scheduler';
-$LDFotolab='ãÚãá ÇáÕæÑ';
+$LDORNOCScheduler='ÌÏæá ããÑÖ ÛÑÝÉ ÚãáíÇÊ Úáì ÇáåÇÊÝ';
+$LDFotolab='ÇáÈæã ÇáÕæÑ';
 /* 2002-09-08 EL */
-$LDTestRequest='ØáÈ ÇÎÊÈÇÑ ááÊÔÎíÕ';
+$LDTestRequest='ØáÈ ÊÍáíá ááÊÔÎíÕ';
 
-$LDTestType=array('patho'=>'Pathology', 
-'chemlabor'=>'Medical Laboratory', 
-'baclabor'=>'Bacteriological Laboratory',
-'blood'=>'Bank Blood',
-'radio'=>'Radiology',
+$LDTestType=array('patho'=>'Úáã ÇáÇãÑÇÖ', 
+'chemlabor'=>'ÇáãÚãá ÇáØÈí', 
+'baclabor'=>'ãÚáã ÇáÈßÊíÑíÇ',
+'blood'=>'Èäß ÇáÏã',
+'radio'=>'ÇáÇÔÚÉ',
 'sono'=>'Sonography',
 'allamb'=>'General Ambulatory',
 'unfamb'=>'Emergency Ambulatory',
-'nuklear'=>'Nuclear Diagnostics',
-'inmed'=>'Internal Medicine');
+'nuklear'=>'ÇáÊÔÎíÕ Çáäææí',
+'inmed'=>'ÈÇØäÉ');
 
 $LDBloodOrder='ØáÈ Ïã';
 /* 2002-09-22 EL */
-$LDPendingRequest='ÊÚáíÞ ÇáØáÈ';
+$LDPendingRequest='ØáÈ Ýí ÇáÇäÊÙÇÑ';
 /* 2002-10-06 EL*/
-$LDLoggedOut='Êã ÇáÎÑæÌ';
+$LDLoggedOut='Ëã ÇáÎÑæÌ';
 /* 2003-03-18 EL */
 $LDNursesList='ÞÇÆãÉ ØÇÞã ÇáÊãÑíÖ';
 $LDAppointments='ÇáãæÇÚíÏ';
@@ -132,6 +132,6 @@ $LDViewDicom='DICOM ÚÑÖ ÕæÑÉ';
 $LDYellowList='ÇáÞæÇÆã ÇáÕÝÑÇÁ';
 $LDRedList='ÇáÞæÇÆã ÇáÍãÑÇÁ';
 #2003-11-22 EL
-$LDAdvancedSearch='ÈÍË ãÊÞÏã';
+$LDAdvancedSearch='ÈÍË ãÑßÒ';
 $LDNewPerson='ÓÌá ãÑíÖ ÌÏíÏ';
 ?>

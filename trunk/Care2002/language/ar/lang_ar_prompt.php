@@ -6,8 +6,7 @@ $LDPlsEnterDiagnosis='ÃÏÎá ÇáÊÔÎíÕ';
 $LDPlsSelectStyle='ÃÎÊÇÑ ÇáäãØ';
 $LDCheckParamFirst='ÃÔÑ ÃæáÇ Úáì ÇáĞí ÊÑÛÈ İí ÚÑÖå';
 # Do not edit ~ward_id~
-$LDChkWardConflict='This patient was initially assigned to a different ward (<b>~ward_id~</b>). Please clarify this first with the 
-admission desk before proceeding to admit this patient in your ward. Thank you.';
+$LDChkWardConflict='åĞÇ ÇáãÑíÖ ãÎÕÕ áÌäÇÍ ÇÎÑ (<b>~ward_id~</b>). æÖÍ åĞå ÇáãÓÇáÉ ãÚ ŞÓã ÇáŞÈæá ŞÈá ÇáÈÏÁ İí ÇÌÑÇÁÇÊ ŞÈæá åĞÇ ÇáãÑíÖ İí ÌäÇÍß ÔßÑÇ.';
 $LDSelectRoomBed='ÍÏÏ ÇáÍÌÑÉ æ ÇáÓÑíÑ ÇáÏí ÊÑíÏ ÊÎÕíÕåÇ ááãÑíÖ, ÔßÑÇ áß';
 $LDSureAssignRoomBed='åá ÃäÊ ãÊÃßÏ ãä ÑÛÈÊß İí ÊÎÕíÕ åĞå ÇáÍÌÑÉ æ ÇáÓÑíÑ ááãÑíÖ¿';
 $LDWhereToTransfer='Çáì Ãíä Óæİ íäŞá ÇáãÑíÖ¿';
@@ -21,15 +20,15 @@ $LDAppointNotToday='åĞÇ ÇáãæÚÏ áã íÍÏÏ áåĞÇ Çáíæã!';
 $LDSureAdmitAppoint='åá ÃäÊ ãÊÃßÏ ãä ÑÛÈÊß İí ŞÈæá åĞÇ ÇáãæÚÏ Çáíæã¿';
 $LDPatientIsDischarged='áŞÏ ÎÑÌ åĞÇ ÇáãÑíÖ ÈÇáİÚá';
 $LDPersonIsAdmitted='åĞÇ ÇáÔÎÕ ŞÈá ';
-$LDEncounterClosed='This encounter is now closed';
+$LDEncounterClosed='Êã ÇÛáÇŞ åĞå ÇáãŞÇÈáÉ';
 # 2003-08-02 EL
 $LDNoOutpatients='áÇ íæÌÏ ãÑíÖ ÚíÇÏÉ ÎÇÑÌíÉ ÈÚÏ';
 $LDGoToAppointments='ÃÖÛØ åäÇ áãÑÇÌÚÉ ÇáãæÇÚíÏ ÇáãÚáŞÉ';
 $LDSureTransferPatient='åá ÃäÊ ãÊÃßÏ ãä ÑÛÈÊß İí äŞá åĞÇ ÇáãÑíÖ¿';
 $LDClkTransfer='ÃÖÛØ áäŞá ÇáãÑíÖ';
-$LDSureTakeOverPatient='Are you sure? You want to take over this patient?';
-$LDChkClinicConflict='This patient was preassigned to another clinic/department (<b>~dept_id~</b>). 
-Please clarify this first with the admission desk or other clinic before proceeding to take over  this patient in your clinic. Thank you.';
+$LDSureTakeOverPatient='åá ÇäÊ ãÊÃßÏ? åá ÊÑÛÈ İí ÇÎÏ åĞÇ ÇáãÑíÖ?';
+$LDChkClinicConflict='Êã ÊÓÌíá åĞÇ ÇáãÑíÖ İí ÚíÇÏÉ/ŞÓã (<b>~dept_id~</b>). 
+æÖÍ åĞå ÇáãÓÇáÉ ãÚ ŞÓã ÇáŞÈæá Çæ ÇáÚíÇÏÉ ÇáÇÎÑì ŞÈá ÇáÈÏÁ İí ÇÌÑÇÁÇÊ äŞá åĞÇ ÇáãÑíÖ Çáì ÚíÇÏÊß ÔßÑÇ';
 $LDSureToCancel='åá ÃäÊ ãÊÃßÏ¿ åá ÊÑíÏ ÅáÛÇÁ åĞÇ¿';
 $LDPlsEnterFullName='ÃÏÎá ÃÓãß ßÇãáÇ';
 $LDOk='ãæÇİŞ';
@@ -38,8 +37,8 @@ $LDCancelError='ÍĞË ÎØÇÁ! ÃÎİŞÊ ÚãáíÉ ÇáÅáÛÇÁ';
 $LDTellEdpIfPersist='ÃÚáã ŞÓã ÅÏÇÑÉ ÇáäÙÇã ÅĞÇ ÃÓÊãÑÊ ÇáãÔßáÉ';
 $LDPlsFindPersonFirst='ÃæÌÏ ÇáÔÎÕ ÃæáÇ';
 $LDEnterRelatedInfo='ÅĞÇ ããßä, ÃÏÎá ÇáãÚáæãÇÊ ÇáãÊÚáŞÉ åäÇ';
-$LDRelatedEncNr='Related encounter\'s nr.';
-$LDRelatedDocsIds='Related documents\' ID\'s';
+$LDRelatedEncNr='ÑŞã ÇáãŞÇÈáÉ ÇáãÊÚáŞÉ';
+$LDRelatedDocsIds='ÊÚÑíİ ÇáæËÇÆŞ ÇáãÊÚáŞÉ';
 $LDSeparateComma='ÃİÕá ÈİÇÕáÉ';
 $LDPlsReadThis='ÃŞÑÇÁ åĞÇ';
 # 2003-08-11 EL
@@ -76,13 +75,13 @@ $LDPlsMedicalAdvice='æÖÍ ãÇ ÇĞÇ ÍÕá ÇáãÑíÖ Úáì ÇáÇÑÔÇÏÇÊ ÇáØÈíÉ Ãã áÇ';
 $LDPlsEnterJobFunction='ÃÏÎá ãåÇã ÇáÚãá';
 #2003-04-10 EL
 $LDPlsFillInfo='ÃßÊÈ İí ÇáÍŞæá ÇáãÚáãÉ ÈÇááæä ÇáÇÍãÑ';
-$LDPlsEnterLocalization='Please enter the localization';
+$LDPlsEnterLocalization='ÇÏÎá ÇáãæÖÚ';
 $LDPlsEnterNotes='ÇÏÎá ãáÇÍÙÇÊ';
 $LDPlsEnterClassification='ÃÏÎá ÇáÊÕäíİÇÊ';
 $LDPlsEnterStartTime='ÃÏÎá Òãä ÇáÈÏÇíÉ';
 $LDPlsEnterEndTime='ÃÏÎá Òãä ÇáÇäÊåÇÁ';
 $LDPlsEnterScrubNurse='ÃÏÎá ãÚáæãÇÊ ÚäÕÑ ÇáÊãÑíÖ';
 $LDPlsEnterORNr='ÃÏÎá ÊÚÑíİ Ã, ÑŞã ÍÌÑÉ ÇáÚãáíÇÊ';
-$LDWrongLoginPW='Your login or password is wrong';
-$LDPlsORNr='Please enter the OR number';
+$LDWrongLoginPW='ÇÓã ÇáãÓÊÎÏã Çæ ßáãÉ ÇáÓÑ ÛíÑ ÕÍíÍÉ';
+$LDPlsORNr='ÇÏÎá ÑŞã ÛÑİÉ ÇáÚãáíÇÊ';
 ?>
