@@ -1,5 +1,5 @@
 <?php
-/*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
+/*------begin------ This protection code was suggested by Luki R. luki@karet.org --- */
 if (eregi('inc_passcheck_internchk.php',$PHP_SELF)) 
 	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/

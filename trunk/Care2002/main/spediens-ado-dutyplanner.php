@@ -15,14 +15,14 @@ define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_config_color.php');
 
-$thisfile="spediens-ado-dutyplanner.php";
-$breakfile="spediens-ado.php?sid=".$sid."&lang=".$lang;
+$thisfile='spediens-ado-dutyplanner.php';
+$breakfile='spediens-ado.php'.URL_APPEND;
 /*
 if ($dept=="")
 	if($ck_thispc_dept) $dept=$ck_thispc_dept;
 		else $dept='plop';*/
-
-$saal="exclude";
+if(!isset($dept_nr)||!$dept_nr) $dept_nr=5;
+$saal='exclude';
 require($root_path.'include/inc_resolve_opr_dept.php');
 
 		
@@ -56,28 +56,15 @@ if(!$month) $month=date(m);
 
 /* Establish db connection */
 if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok) 
-	{	
-	// get orig data
-
-	  		$dbtable="care_nursing_dept_personell_quicklist";
-		 	$sql="SELECT list FROM $dbtable 
-					WHERE dept='$dept'";
-			//echo $sql;
-			if($ergebnis=$db->Execute($sql))
-       		{
-				if($ergebnis->RecordCount())
-				{
-					$datafound=1;
-					$pdata=$ergebnis->FetchRow();
-					//echo $sql."<br>";
-					//echo $rows;
-				}
-				//else echo "<p>".$sql."<p>Multiple entries found pls notify the edv."; 
-			}
-				else  { echo "$LDDbNoRead<br>$sql"; } 
+if($dblink_ok){	
+	include_once($root_path.'include/care_api_classes/class_personell.php');
+	$pers_obj=new Personell();
+	if($pers_row=$pers_obj->getNursesOfDept($dept_nr)){
+		$datafound=1;
+		//echo $sql."<br>";
+		//echo $rows;
 	}
-  		else { echo "$LDDbNoLink<br>$sql"; } 
+}else{ echo "$LDDbNoLink<br>$sql"; } 
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -120,8 +107,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <table border=0 cellspacing=1 >
 
 <?php 
-if($datafound)
-{
+
 	
 	$daytag=date("w",mktime(0,0,0,$month,1,$year));
 
@@ -159,14 +145,13 @@ if($datafound)
 	}
   echo '</tr>';
   
-  
-  $pbuf=explode("~",$pdata['list']);
-for ($i=0;$i<sizeof($pbuf);$i++)
+if($datafound)
+{  
+while($persons=$pers_row->FetchRow())
 {
-	parse_str(trim($pbuf[$i]),$persons);
 	echo '<td bgcolor="#f6f6f6"><FONT face="Verdana,Helvetica,Arial" size=2>
 	';
-	echo ucfirst($persons[l]).', '.ucfirst($persons[f]).'
+	echo ucfirst($persons['name_last']).', '.ucfirst($persons['name_first']).'
 	<br></td>';
 	for ($p=1,$tn=$daytag;$p<$n;$p++,$tn++)
 	{
@@ -194,7 +179,7 @@ for ($i=0;$i<sizeof($pbuf);$i++)
 	}
   echo '
   </tr>';
-
+}
 	echo '
 	  <tr>
     <td bgcolor="#f6f6f6" align=right><FONT face="Verdana,Helvetica,Arial" size=2>'.$LDTotal.'</td>';
@@ -204,12 +189,12 @@ for ($i=0;$i<sizeof($pbuf);$i++)
 		echo '
 		<td bgcolor=';
 		if(!$tn) echo '"#ffffcc"'; else echo '"#f6f6f6"';
-		echo '><FONT face="Verdana,Helvetica,Arial" size=2>'.$i.'</td>';
+		echo '><FONT face="Verdana,Helvetica,Arial" size=2>&nbsp;'.$i.'</td>';
 	}
   echo '
   </tr>';
 
-}
+
 
   
 ?>

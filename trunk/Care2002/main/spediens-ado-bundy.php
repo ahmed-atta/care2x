@@ -15,10 +15,11 @@ define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_config_color.php');
 
-$thisfile="spediens-ado-bundy.php";
-$breakfile="spediens-ado.php?sid=".$sid."&lang=".$lang;
+$thisfile=basename(__FILE__);
+$breakfile='spediens-ado.php'.URL_APPEND;
 
-$saal="exclude";
+$saal='exclude';
+if(!isset($dept_nr)||!$dept_nr) $dept_nr=5;
 require($root_path.'include/inc_resolve_opr_dept.php');
 
 if(($mondir)&&($month))
@@ -50,28 +51,15 @@ if(!$month) $month=date(m);
 }
 /* Establish db connection */
 if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok) 
-	{	
-	// get orig data
-
-	  		$dbtable="care_nursing_dept_personell_quicklist";
-		 	$sql="SELECT list FROM $dbtable 
-					WHERE dept='$dept'";
-			//echo $sql;
-			if($ergebnis=$db->Execute($sql))
-       		{
-				if($ergebnis->RecordCount())
-				{
-					$datafound=1;
-					$pdata=$ergebnis->FetchRow();
-					//echo $sql."<br>";
-					//echo $rows;
-				}
-				//else echo "<p>".$sql."<p>Multiple entries found pls notify the edv."; 
-			}
-				else  { echo "$LDDbNoRead<br>$sql"; } 
+if($dblink_ok){	
+	include_once($root_path.'include/care_api_classes/class_personell.php');
+	$pers_obj=new Personell();
+	if($pers_row=$pers_obj->getNursesOfDept($dept_nr)){
+		$datafound=1;
+		//echo $sql."<br>";
+		//echo $rows;
 	}
-  		else { echo "$LDDbNoLink<br>$sql"; } 
+}else{ echo "$LDDbNoLink<br>$sql"; } 
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -118,22 +106,20 @@ width=103 height=24 align="absmiddle" style=filter:alpha(opacity=70) onMouseover
 <FONT face="Verdana,Helvetica,Arial" size=2>
 <table border=1>
 <?php
-if($datafound)
-{
 	echo '<tr><td>&nbsp;</td>
 	<td> '.$LDEntry.' </td>
 	<td> '.$LDExit.' </td>
 	<td> '.$LDRemarks.' </td>
 	</tr>';  
-   $pbuf=explode("~",$pdata['list']);
-   for ($i=0;$i<sizeof($pbuf);$i++)
+if($datafound)
+{
+   while($persons=$pers_row->FetchRow())
    {
-	   parse_str(trim($pbuf[$i]),$persons);
 	   echo '
 	    <tr>
         <td><FONT face="Verdana,Helvetica,Arial" size=2>
 	   ';
-	   echo ucfirst($persons[l]).', '.ucfirst($persons[f]).'
+	   echo ucfirst($persons['name_last']).', '.ucfirst($persons['name_first']).'
 	   <br></td>
 	   <td>&nbsp;</td>
 	   <td>&nbsp;</td>
