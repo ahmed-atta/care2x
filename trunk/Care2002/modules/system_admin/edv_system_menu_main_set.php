@@ -38,7 +38,7 @@ if(isset($mode)&&($mode=='save')){
 	exit;
 }
 
-if($result=$db->Execute("SELECT nr,sort_nr,LD_var,status,url,hide_by,is_visible FROM care_menu_main WHERE 1 ORDER BY sort_nr")){
+if($result=$db->Execute("SELECT nr,sort_nr,name,LD_var,status,url,hide_by,is_visible FROM care_menu_main WHERE 1 ORDER BY sort_nr")){
 	$row=$result->RecordCount();
 }	
 
@@ -92,7 +92,10 @@ while($menu_item=$result->FetchRow())
 
   echo '<tr>
 	<td bgcolor="#e9e9e9"><img '.createComIcon($root_path,'arrow_blueW.gif','0').'></td>
-	<td bgcolor="#e9e9e9"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b>'.$$menu_item['LD_var'].'</b> </FONT></td>
+	<td bgcolor="#e9e9e9"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b>';
+	if(isset($$menu_item['LD_var'])&&!empty($$menu_item['LD_var'])) echo $$menu_item['LD_var'];
+		else echo $menu_item['name'];
+	echo '</b> </FONT></td>
 	<td bgcolor="#e9e9e9"><FONT  color="#0000cc" FACE="verdana,arial" size=2><input type="text" name="sort_nr_'.$menu_item['nr'].'" size=2 maxlength=2 value="'.$menu_item['sort_nr'].'"></FONT></td>
 	<td bgcolor="#e9e9e9" align="center"><FONT  color="#0000cc" FACE="verdana,arial" size=2>	<input type="checkbox" name="hide_it_'.$menu_item['nr'].'" value="1" ';
 	if($menu_item['is_visible']) echo 'checked';
