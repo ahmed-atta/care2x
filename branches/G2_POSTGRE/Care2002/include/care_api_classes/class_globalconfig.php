@@ -96,7 +96,8 @@ class GlobalConfig  extends Core{
 		//$db->debug=1;
 		if(empty($type)) return false;
 		$buf=$this->getConfigValue($type);
-		if(!empty($buf)){
+
+		if($buf!=''){
 			$this->sql="UPDATE $this->tb SET type='$type',value='$value' WHERE type='$type'";
 			$db->BeginTrans();
 			$this->ok=$db->Execute($this->sql);
@@ -108,7 +109,8 @@ class GlobalConfig  extends Core{
 				return false;
 			}
 		}else{
-			$this->sql="INSERT INTO $this->tb (type,value) VALUES ('$type','$value')";
+			$this->sql="INSERT INTO $this->tb (type,value,status,history,modify_id,modify_time,create_id,create_time)
+							VALUES ('$type','$value','','Created ".date('Y-m-d H:i:s')."','','0','System','".date('YmdHis')."')";
 			return $this->Transact();
 		}
 	}
@@ -127,7 +129,7 @@ class GlobalConfig  extends Core{
 	* @return boolean
 	*/
 	function saveConfigArray(&$data_array,$filter='',$numeric=FALSE,$def_value='',$addslash=FALSE) {
-		
+
 		if(!is_array($data_array)||empty($filter)) return FALSE;
 		
 		while(list($x,$v)=each($data_array)){
