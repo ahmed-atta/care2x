@@ -31,13 +31,9 @@ if(!isset($pmonth)||empty($pmonth)) $pmonth=date('m');
 if(!isset($pyear)||empty($pyear)) $pyear=date('Y');
 $s_date=$pyear.'-'.$pmonth.'-'.$pday;
 
-if(isset($s_date)){
-	if($s_date==date('Y-m-d')) $is_today=true;
-		else $is_today=false;
-}else{
-	$s_date=date('Y-m-d');
-	$is_today=true;
-}
+if($s_date==date('Y-m-d')) $is_today=true;
+	else $is_today=false;
+
 
 $tnow=date('H:i:s');
 	
@@ -69,9 +65,9 @@ if(($mode=='')||($mode=='fresh')){
 	$opat_obj=&$enc_obj->OutPatientsBasic($dept_nr);
 	//echo $enc_obj->getLastQuery();
 	$rows=$enc_obj->LastRecordCount();
-	# If location name is empty, fetch by location nr
+	# If dept name is empty, fetch by location nr
 	if(!isset($dept)||empty($dept)){
-		# Create nursing notes object 
+		# Create department object 
 		include_once($root_path.'include/care_api_classes/class_department.php');
 		$dept_obj= new Department;
 		$deptLDvar=$dept_obj->LDvar($dept_nr);
@@ -81,7 +77,7 @@ if(($mode=='')||($mode=='fresh')){
 	# set to edit mode
 	$edit=true;
 	
-		# Create the waiting inpatients' list
+		# Create the waiting outpatients' list
 		$dnr=(isset($w_waitlist)&&$w_waitlist) ? 0 : $dept_nr;
 		$waitlist=&$enc_obj->createWaitingOutpatientList($dnr);
 		$waitlist_count=$enc_obj->LastRecordCount();
@@ -101,7 +97,7 @@ if(($mode=='')||($mode=='fresh')){
 			if(SHOW_DOC_2) $duty2=&unserialize($result['duty_2_pnr']);
 					//echo $sql."<br>";
 		}
-		echo $pers_obj->getLastQuery();
+		//echo $pers_obj->getLastQuery();
 		# Adjust the day index. This is necessary since change of duty usually happens early morning  not midnight
 		$offset_day=$pday-1;
 		# Consider the early morning hours to belong to the past day
