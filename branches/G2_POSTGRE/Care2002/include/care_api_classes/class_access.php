@@ -167,13 +167,22 @@ class Access extends Core {
 		return !$this->lock_status;
 	}
 	/**
-	* Returns the user's name. 
+	* Returns the user's registered name.
 	* Use only after the access data was loaded by the constructor or loadAccess() method.
 	* @access public
-	* @return string 
+	* @return string
 	*/
 	function Name(){
 		return $this->user['name'];
+	}
+	/**
+	* Returns the user's login name ( login username ).
+	* Use only after the access data was loaded by the constructor or loadAccess() method.
+	* @access public
+	* @return string
+	*/
+	function LoginName(){
+		return $this->user['login_id'];
 	}
 	/**
 	* Returns the permission areas of the user. No interpretation is returned.

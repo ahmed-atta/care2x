@@ -116,7 +116,7 @@ class Notes extends Core {
 	
 		if(empty($sort)) $sort=" ORDER BY nr";
 			else $sort=" ORDER BY $sort";
-	    if ($this->result=$db->Execute("SELECT nr,type,name,LD_var FROM $this->tb_types  $sort")) {
+	    if ($this->result=$db->Execute("SELECT nr,type,name,LD_var AS \"LD_var\" FROM $this->tb_types  $sort")) {
 		    if ($this->result->RecordCount()) {
 		        return $this->result->GetArray();
 			} else {
@@ -151,7 +151,7 @@ class Notes extends Core {
 	function getType($nr=1){
 	    global $db;
 
-	    if ($this->res['gt']=$db->Execute("SELECT nr,type,name,LD_var FROM $this->tb_types WHERE nr=$nr")) {
+	    if ($this->res['gt']=$db->Execute("SELECT nr,type,name,LD_var AS \"LD_var\" FROM $this->tb_types WHERE nr=$nr")) {
 		    if ($this->res['gt']->RecordCount()) {
 		        return $this->res['gt']->FetchRow();
 			} else {
@@ -187,20 +187,22 @@ class Notes extends Core {
 	* @access private
 	* @param string Type number of the notes data to be saved.
 	* @return boolean
-	*/			
+	*/
 	function _insertNotesFromInternalArray($type_nr=''){
 		global $HTTP_SESSION_VARS;
 		if(empty($type_nr)) return false;
 		if(empty($this->data_array['date'])) $this->data_array['date']=date('Y-m-d');
 		if(empty($this->data_array['time'])) $this->data_array['time']=date('H:i:s');
 		$this->data_array['type_nr']=$type_nr;
-		$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		//$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
 		$this->data_array['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
-		$this->data_array['create_time']='NULL';	
+		$this->data_array['create_time']=date('YmdHis');
 		$this->data_array['history']="Create: ".date('Y-m-d H-i-s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n\r";	
-		if($this->insertDataFromInternalArray()){
+        return $this->insertDataFromInternalArray();
+        /*if($this->insertDataFromInternalArray()){
 			return true;
 		}else{ return false;}
+        */
 	}
 	/**
 	* Updates a notes data record based on the primary record key "nr".

@@ -259,8 +259,9 @@ class Person extends Core {
 	*/
 	function insertDataFromInternalArray() {
 	    //$this->data_array=NULL;
+		$this->prepInsertArray();
 		# Check if  "create_time" key has a value, if no, create a new value
-		$this->prepInsertArray();		
+		if(!isset($this->buffer_array['create_time'])||empty($this->buffer_array['create_time'])) $this->buffer_array['create_time']=date('YmdHis');
 		return $this->insertDataFromArray($this->data_array);
 	}
 
@@ -754,31 +755,176 @@ class Person extends Core {
 	*
 	* @access public
 	* @param string Search keyword
+	* @param string Sort by the item name, default = name_last (last/family name)
+	* @param string Sort direction, default = ASC (ascending)
 	* @return mixed integer or boolean
 	*/
-	function Persons($searchkey=''){
+	function Persons($searchkey='',$order_item='name_last',$order_dir='ASC'){
 	    global $db, $sql_LIKE;
 		$searchkey=trim($searchkey);
+		$searchkey=strtr($searchkey,'*?','%_');
 		if(is_numeric($searchkey)) {
-            $searchkey=(int) $searchkey;
+			$searchkey=(int) $searchkey;
 			$this->is_nr=true;
-			$order_item='pid';			
-	    } else {
-            $order_item='name_last';
+			$order_item='pid';
+			if(empty($order_dir)) $order_dir='DESC';
+		} else {
+			if(empty($order_item)) $order_item='name_last';
+			if(empty($order_dir)) $order_dir='ASC';
 			$this->is_nr=false;
 		}
+		
+		return $this->SearchSelect($searchkey,'','',$order_item,$order_dir);
+/*
 		$this->sql="SELECT pid, name_last, name_first, date_birth, sex FROM $this->tb_person WHERE status NOT IN ($this->dead_stat) ";
 		if(!empty($searchkey)){
 			$this->sql.=" AND (name_last $sql_LIKE '$searchkey%'
 			                		OR name_first $sql_LIKE '$searchkey%'
 			                		OR pid $sql_LIKE '$searchkey' )";
 		}
-		$this->sql.="  ORDER BY $order_item";
+		$this->sql.="  ORDER BY $order_item $oder_dir";
 		if($this->res['pers']=$db->Execute($this->sql)){
 		    if($this->rec_count=$this->res['pers']->RecordCount()) {
 				return $this->res['pers'];
 			}else{return false;}
 		}else{return false;}
+*/
+	}
+	/**
+	* Searches and returns a block list of persons based on search key. 
+	*
+	* The following can be set:
+	* - maximum number of rows in the returned list
+	* - beginning row offset
+	* - Field name for sorting
+	* - Sort direction
+	* - A boolean flag to include the first name in searching
+	*
+	* The returned adodb record object contains rows of arrays.
+	* Each array contains the encounter data with the following index keys:
+	* - pid = the PID number
+	* - name_last = person's last or family name
+	* - name_first = person's first or given name
+	* - date_birth = date of birth in YYYY-mm-dd format
+	* - sex = sex
+	* - death_date = The date the person died (if applicable)
+	* - addr_zip = Address zip code
+	* - status = Record status
+	*
+	* @access public
+	* @param string Search keyword
+	* @param string Sort by the item name, default = name_last (last/family name)
+	* @param string Sort direction, default = ASC (ascending)
+	* @return mixed integer or boolean
+	*/
+	function SearchSelect($searchkey='',$maxcount=100,$offset=0,$oitem='name_last',$odir='ASC',$fname=FALSE){
+		global $db, $sql_LIKE, $root_path;
+		//$db->debug=true;
+		if(empty($maxcount)) $maxcount=100;
+		if(empty($offset)) $offset=0;
+
+		include_once($root_path.'include/inc_date_format_functions.php');
+
+		# convert * and ? to % and &
+		$searchkey=strtr($searchkey,'*?','%_');
+		$searchkey=trim($searchkey);
+		$suchwort=$searchkey;
+
+		if(is_numeric($suchwort)) {
+			$suchwort=(int) $suchwort;
+			//$numeric=1;
+			$this->is_nr=TRUE;
+
+			//if($suchwort<$GLOBAL_CONFIG['person_id_nr_adder']){
+			//	   $suchbuffer=(int) ($suchwort + $GLOBAL_CONFIG['person_id_nr_adder']) ;
+			//}
+
+			if(empty($oitem)) $oitem='pid';
+			if(empty($odir)) $odir='DESC'; # default, latest pid at top
+
+			$sql2="	WHERE pid=$suchwort ";
+
+		} else {
+			# Try to detect if searchkey is composite of first name + last name
+			if(stristr($searchkey,',')){
+				$lastnamefirst=TRUE;
+			}else{
+				$lastnamefirst=FALSE;
+			}
+
+			$searchkey=strtr($searchkey,',',' ');
+			$cbuffer=explode(' ',$searchkey);
+
+			# Remove empty variables
+			for($x=0;$x<sizeof($cbuffer);$x++){
+				$cbuffer[$x]=trim($cbuffer[$x]);
+				if($cbuffer[$x]!='') $comp[]=$cbuffer[$x];
+			}
+
+			# Arrange the values, ln= lastname, fn=first name, bd = birthday
+			if($lastnamefirst){
+				$fn=$comp[1];
+				$ln=$comp[0];
+				$bd=$comp[2];
+			}else{
+				$fn=$comp[0];
+				$ln=$comp[1];
+				$bd=$comp[2];
+			}
+			# Check the size of the comp
+			if(sizeof($comp)>1){
+				$sql2=" WHERE (name_last $sql_LIKE '".strtr($ln,'+',' ')."%' AND name_first $sql_LIKE '".strtr($fn,'+',' ')."%')";
+				if(!empty($bd)){
+					$DOB=@formatDate2STD($bd,$date_format);
+					if($DOB=='') {
+						$sql2.=" AND date_birth $sql_LIKE '$bd%' ";
+					}else{
+						$sql2.=" AND date_birth = '$DOB' ";
+					}
+				}
+			}else{
+				# Check if * or %
+				if($suchwort=='%'||$suchwort=='%%'){
+					$sql2=" WHERE status NOT IN ($this->dead_stat)";
+				}else{
+					# Check if it is a complete DOB
+					$DOB=@formatDate2STD($suchwort,$date_format);
+					if($DOB=='') {
+						if(defined('SHOW_FIRSTNAME_CONTROLLER')&&SHOW_FIRSTNAME_CONTROLLER){
+							if($fname){
+								$sql2=" WHERE name_last $sql_LIKE '".strtr($suchwort,'+',' ')."%' OR name_first $sql_LIKE '".strtr($suchwort,'+',' ')."%'";
+							}else{
+								$sql2=" WHERE name_last $sql_LIKE '".strtr($suchwort,'+',' ')."%' ";
+							}
+						}else{
+							$sql2=" WHERE name_last $sql_LIKE '".strtr($suchwort,'+',' ')."%' ";
+						}
+					}else{
+						$sql2=" WHERE date_birth = '$DOB'";
+					}
+
+					$sql2.=" AND status NOT IN ($this->dead_stat) ";
+				}
+			}
+		 }
+
+
+		$this->buffer=$this->tb_person.$sql2;
+		
+		# Save the query in buffer for pagination
+		//$this->buffer=$fromwhere;
+		//$sql2.=' AND status NOT IN ("void","hidden","deleted","inactive")  ORDER BY '.$oitem.' '.$odir;
+		# Set the sorting directive
+		if(isset($oitem)&&!empty($oitem)) $sql3 =" ORDER BY $oitem $odir";
+
+		$this->sql='SELECT pid, name_last, name_first, date_birth, addr_zip, sex, death_date, status FROM '.$this->buffer.$sql3;
+
+		if($this->res['ssl']=$db->SelectLimit($this->sql,$maxcount,$offset)){
+			if($this->rec_count=$this->res['ssl']->RecordCount()) {
+				return $this->res['ssl'];
+			}else{return false;}
+		}else{return false;}
+
 	}
 	/**
 	* Checks if the person is currently employed in this hospital.
@@ -791,12 +937,11 @@ class Person extends Core {
 	function CurrentEmployment($pid){
 	    global $db;
 		if(!$pid) return false;
-		$this->sql="SELECT nr FROM $this->tb_employ 
+		$this->sql="SELECT nr FROM $this->tb_employ
 							WHERE pid='$pid' AND is_discharged IN ('',0) AND status NOT IN ($this->dead_stat)";
 		if($buf=$db->Execute($this->sql)){
-		    if($buf->RecordCount()) {
+			if($buf->RecordCount()){
 				$buf2=$buf->FetchRow();
-				//echo $this->sql;
 				return $buf2['nr'];
 			}else{return false;}
 		}else{return false;}
