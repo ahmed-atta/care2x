@@ -10,6 +10,10 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+define('USE_PIE_CHART',1); // define to 1 if pie chart is preferred as display
+define('PIE_CHART_USED_COLOR','red'); // define the color of the used bed portion of the graph
+
+$lang_tables=array('date_time.php');
 define('LANG_FILE','nursing.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
@@ -18,35 +22,69 @@ require_once($root_path.'include/inc_config_color.php'); // load color preferenc
 
 $breakfile='nursing.php?sid='.$sid.'&lang='.$lang;
 
-if($pday=='') $pday=date('d');
-if($pmonth=='') $pmonth=date('m');
-if($pyear=='') $pyear=date('Y');
+
+// Let us make some interface for calendar class
+if($from=='arch'){
+	if($pday=='') $pday=date('d');
+	if($pmonth=='') $pmonth=date('m');
+	if($pyear=='') $pyear=date('Y');
+	$currDay=$pday;
+	$currMonth=$pmonth;
+	$currYear=$pyear;
+}else{
+	if($currDay=='') $currDay=date('d');
+	if($currMonth=='') $currMonth=date('m');
+	if($currYear=='') $currYear=date('Y');
+	$pday=$currDay;
+	$pmonth=$currMonth;
+	$pyear=$currYear;
+}
+
 $s_date=$pyear.'-'.$pmonth.'-'.$pday;
 
-$dbtable='care_nursing_station_patients';
+if($s_date==date('Y-m-d')) $is_today=true;
+	else $is_today=false;
+	
+$dbtable='care_ward';
 
 /* Establish db connection */
 if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok) 
-{/* Load date formatter */
+if($dblink_ok){/* Load date formatter */
     include_once($root_path.'include/inc_date_format_functions.php');
-    
-
-	// check if already exists
-	$sql='SELECT station, maxbed, freebed, usebed_percent FROM '.$dbtable.'
-				WHERE s_date=\''.$s_date.'\' ORDER BY station';
-	if($ergebnis=$db->Execute($sql))
+	
+	
+	// Get the wards' info
+	$sql="SELECT nr,name,room_nr_start,room_nr_end	FROM $dbtable 
+				WHERE NOT is_temp_closed AND status NOT IN ('hide','delete','void','inactive') AND date_create<='$s_date' ORDER BY nr";
+		//echo $sql.'<p>';
+	if($wards=$db->Execute($sql))
      {
-		$rows=0;
-		while( $dbdata=$ergebnis->FetchRow()) $rows++;
-		if($rows)
-		{
-			mysql_data_seek($ergebnis,0);
-		}
-	}
-	else echo "$sql<br>$LDDbNoRead"; 
-}
-else { echo "$LDDbNoLink<br>"; } 
+		$rows=$wards->RecordCount();
+	}else{echo "$sql<br>$LDDbNoRead";} 
+	
+	
+	// Get the rooms' info
+	$sql="SELECT  SUM(r.nr_of_beds) AS maxbed	FROM $dbtable AS w LEFT JOIN care_room AS r ON r.ward_nr=w.nr
+			WHERE NOT w.is_temp_closed  AND w.status NOT IN ('hide','delete','void','inactive')   AND w.date_create<='$s_date' GROUP BY w.nr ORDER BY w.nr";
+		//echo $sql.'<p>';
+	if($rooms=$db->Execute($sql))
+     {
+		$roomcount=$rooms->RecordCount();
+	}else{echo "$sql<br>$LDDbNoRead";} 
+	
+	// Get the today's occupancy
+	$sql="SELECT  location_nr, COUNT(*) AS maxoccbed	FROM $dbtable AS w, care_encounter_location AS l  ";
+	$sql.=" WHERE NOT w.is_temp_closed  AND w.status NOT IN ('hide','delete','void','inactive')   AND w.date_create<='$s_date'  AND l.group_nr=w.nr AND l.type_nr=5 ";
+	if($is_today) $sql.=" AND l.date_from<='$s_date' AND l.date_to IN ('0000-00-00','$s_date')";
+		else $sql.=" AND l.date_from<='$s_date' AND (l.date_to<='$s_date' OR l.date_to='0000-00-00')";
+	$sql.="	GROUP BY w.nr ORDER BY w.nr";
+	if($occbed=$db->Execute($sql))
+     {
+	 	//echo $sql;
+		$bedcount=$occbed->RecordCount();
+	}else{echo "$sql<br>$LDDbNoRead";} 
+	
+}else{ echo "$LDDbNoLink<br>";} 
 		 
 ?>
 
@@ -71,7 +109,7 @@ var urlholder;
 	stationwin=window.open(urlholder,station,winspecs);
 	}
 
-  function statbel(station,e){
+  function statbel(e,ward_nr){
 <?php
 	if($cfg['dhtml'])
 	{
@@ -82,8 +120,8 @@ var urlholder;
 ?>
 	winspecs="menubar=no,resizable=yes,scrollbars=yes,width=" + (w-15) + ", height=" + (h-60);
 	
-	if (e==1) urlholder="nursing-station-pass.php?rt=pflege&sid=<?php echo "$sid&lang=$lang&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>&edit=1&retpath=quick&station="+station;
-		else urlholder="nursing-station.php?rt=pflege&sid=<?php echo "$sid&lang=$lang&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>&edit=0&retpath=quick&station="+station;
+	if (e==1) urlholder="nursing-station-pass.php?rt=pflege&sid=<?php echo "$sid&lang=$lang&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>&edit=1&retpath=quick&ward_nr="+ward_nr;
+		else urlholder="nursing-station.php?rt=pflege&sid=<?php echo "$sid&lang=$lang&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>&edit=0&retpath=quick&ward_nr="+ward_nr;
 	//stationwin=window.open(urlholder,station,winspecs);	
 	window.location.href=urlholder;
 <?php // if($cfg['dhtml']) echo 'window.stationwin.moveTo(0,0);'; ?>
@@ -110,14 +148,24 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('nursing_how2search.php','','<?php echo $rows ?>','quick','')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
 <td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
- <ul>
+ 
+<?php
+/*generate the calendar */
+include($root_path.'classes/calendar_jl/class.calendar.php'); 
+/** CREATE CALENDAR OBJECT **/
+$Calendar = new Calendar;
+$Calendar->deactivateFutureDay();
+/** WRITE CALENDAR **/
+$Calendar -> mkCalendar ($currYear, $currMonth, $currDay);
+?>
+
 <FONT    SIZE=4  FACE="Arial" color=red>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>>
 <b>
-<?php if($pyear.$pmonth.$pday<date(Ymd)) echo $LDOld; else echo $LDTodays; ?> <?php echo $LDOccupancy ?></b>
+<?php if($pyear.$pmonth.$pday!=date(Ymd)) echo $LDOld; else echo $LDTodays; ?> <?php echo $LDOccupancy ?></b>
 </FONT> &nbsp;&nbsp;<font size="2" face="arial">(
 <?php echo formatDate2Local($pyear.'-'.$pmonth.'-'.$pday,$date_format) ?> )
-</font><p>
+</font><br>
 
 <?php
 
@@ -132,16 +180,18 @@ $img_statbel=createComIcon($root_path,'statbel2.gif','0','absmiddle');
 
 
 echo '
-		<table  cellpadding="0" cellspacing=0 border="0" >';
+		<table  cellpadding="0" cellspacing=0 border="0"  width="100%">';
 
 echo '
 		<tr bgcolor="aqua" align=center><td><font face="verdana,arial" size="2" ><b>&nbsp; '.$LDStation.' &nbsp;</b></td>';
 echo '
 		<td><img '.$img_mangr.' alt="'.$LDNrUnocc.'"> <font face="verdana,arial" size="2" ><b>'.$LDFreeBed.'</b></td>';
 echo '
-		<td ><font face="verdana,arial" size="2" ><b>'.$LDOccupancy.' (%)</b></td>';
+		<td ><font face="verdana,arial" size="2"  color="'.PIE_CHART_USED_COLOR.'">&nbsp;<b>'.$LDOccupied.'</b></td>';
 echo '
-		<td><font face="verdana,arial" size="2" > <b>'.$LDBedNr.'</b></td>';
+		<td ><font face="verdana,arial" size="2" >&nbsp;<b>'.$LDOccupancy.' (%)</b></td>';
+echo '
+		<td><font face="verdana,arial" size="2" >&nbsp;<b>'.$LDBedNr.'</b></td>';
 echo '
 		<td><font face="verdana,arial" size="2" > <b>&nbsp; '.$LDOptions.' &nbsp;</b></td>';
 echo '
@@ -153,33 +203,52 @@ $frei=0;
 
 srand(time());
 
-while ($result=$ergebnis->FetchRow())
+while ($result=$wards->FetchRow())
 	{
-	$frei=floor(($result[freebed]/$result[maxbed])*10);
+		$maxbed=$result['room_nr_end']-$result['room_nr_start'];
+		
+		$roomrow=$rooms->FetchRow();
+		$bedrow=$occbed->FetchRow();
+		$freebeds=$roomrow['maxbed']-$bedrow['maxoccbed'];
+		
+	$frei=floor(($freebeds/$roomrow['maxbed'])*10);
 	if ($toggler==0) 
-		{ echo '
-						<tr bgcolor="#ffffcc">'; $toggler=1;} 
-		else { echo '
-						<tr bgcolor="#dfdfdf">'; $toggler=0;}
+		{ $bgc='ffffcc'; $toggler=1;} 
+		else {$bgc='dfdfdf'; $toggler=0;}
+						
+	echo '
+			<tr bgcolor="#'.$bgc.'">';
 	echo "\r\n";
 	echo '
-						<td align=center><font face="verdana,arial" size="2" ><a href="javascript:statbel(\''.$result[station].'\',\'0\')"  title="'.$LDClk2Show.'">';
-	echo strtoupper($result[station]).'
-						</a></td><td align=center><font face="verdana,arial" size="2" >
-						'.$result[freebed].'&nbsp;&nbsp;&nbsp;</td>';
+						<td align=center><font face="verdana,arial" size="2" ><a href="javascript:statbel(\'0\',\''.$result['nr'].'\')"  title="'.$LDClk2Show.'">';
+	echo strtoupper($result['name']).'
+						</a></td>
+						<td align=center><font face="verdana,arial" size="2" >
+						'.$freebeds.'&nbsp;&nbsp;&nbsp;</td>
+						<td align=center><font face="verdana,arial" size="2" color="'.PIE_CHART_USED_COLOR.'">
+						'.$bedrow['maxoccbed'].'&nbsp;&nbsp;&nbsp;</td>
+						';
 	echo '
-						<td>';
+						<td align="center">';
 	echo "\r\n";
-	for ($n=0;$n<(10-$frei);$n++) echo '<img '.$img_mans_red.'>';
-	for ($n=0;$n<$frei;$n++) echo '<img '.$img_mans_gr.'>';
+	if(defined('USE_PIE_CHART')&&USE_PIE_CHART){
+		echo '<img src="occupancy_pie_chart.php?qouta='.($roomrow['maxbed']-$bedrow['maxoccbed']).'&used='.$bedrow['maxoccbed'].'&bgc='.$bgc.'&uc='.PIE_CHART_USED_COLOR.'">';
+	}else{
+		for ($n=0;$n<(10-$frei);$n++) echo '<img '.$img_mans_red.'>';
+		for ($n=0;$n<$frei;$n++) echo '<img '.$img_mans_gr.'>';
+	}
 	echo '
 			</td><td align=center>
-			<font face="verdana,arial" size="2" >'.$result[maxbed].'
+			<font face="verdana,arial" size="2" >'.$roomrow['maxbed'].'
 			</td>';
 	echo "\r\n";
 	echo '
-			</td><td align=center> <a href="javascript:statbel(\''.$result[station].'\',\'1\')">
-			<img '.$img_statbel.' alt="'.str_replace("~station~",$result[station],$LDEditStation).'" border="0"></a>
+			</td><td align=center> <a href="javascript:statbel(\'1\',\''.$result['nr'].'\')">';
+	if($is_today){
+		echo '
+			<img '.$img_statbel.' alt="'.str_replace("~station~",$result['name'],$LDEditStation).'" border="0"></a>';
+	}
+	echo '
 			</td></tr>
 			</tr>
 	 <tr><td bgcolor="#0000ee" colspan="7"><img src="../../gui/img/common/default/pixel.gif" border=0 width=1 height=1></td></tr>
@@ -190,7 +259,7 @@ while ($result=$ergebnis->FetchRow())
 echo '
 			</table>';
 			
-if($pyear.$pmonth.$pday<>date(Ymd))
+if(!$is_today)
 			echo '<p>
 			<font face="Verdana, Arial" size=2 >
 			<a href="nursing-station-archiv.php'.URL_APPEND.'&pyear='.$pyear.'&pmonth='.$pmonth.'">'.$LDClk2Archive.' <img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle').'></a>
@@ -217,9 +286,6 @@ else
 <?php else : ?>
 <a href="nursing.php?sid=<?php echo "$sid&lang=$lang" ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>></a>
 <?php endif ?>
-</ul>
-
-
 
 </FONT>
 <p>

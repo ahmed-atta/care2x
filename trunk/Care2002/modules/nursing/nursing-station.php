@@ -33,11 +33,21 @@ if(!isset($pday)||empty($pday)) $pday=date('d');
 if(!isset($pmonth)||empty($pmonth)) $pmonth=date('m');
 if(!isset($pyear)||empty($pyear)) $pyear=date('Y');
 $s_date=$pyear."-".$pmonth."-".$pday;
+if($s_date==date('Y-m-d')) $is_today=true;
+	else $is_today=false;
 
 if(!isset($mode)) $mode="";
 
-if(isset($retpath)&&$retpath=="quick") $breakfile="nursing-schnellsicht.php?sid=".$sid."&lang=".$lang;
- else $breakfile="nursing.php?sid=".$sid."&lang=".$lang;
+if(isset($retpath)){
+	switch($retpath)
+	{
+		case 'quick': $breakfile='nursing-schnellsicht.php'.URL_APPEND;
+							break;
+		case 'ward_mng': $breakfile='nursing-station-info.php'.URL_APPEND.'&ward_nr='.$ward_nr.'&mode=show';
+							break;
+ 		default:  $breakfile='nursing.php'.URL_APPEND;
+	}
+}
 
 /* Create ward object */
 require_once($root_path.'include/care_api_classes/class_ward.php');
@@ -59,13 +69,19 @@ if($dblink_ok){
 			}else{
 				$room_ok=false;
 			}
-			$patients_obj=&$ward_obj->getWardOccupants($ward_nr);
+			// Get ward patients
+			if($is_today) $patients_obj=&$ward_obj->getDayWardOccupants($ward_nr);
+				else $patients_obj=&$ward_obj->getDayWardOccupants($ward_nr,$s_date);
+			
 			if(is_object($patients_obj)) $patients_ok=true;
 				else $patients_ok=false;
+				
+			// Get some global config values
 			include_once($root_path.'include/care_api_classes/class_globalconfig.php');
 			$GLOBAL_CONFIG=array();
 			$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
-			$glob_obj->getConfig('patient_%');				
+			$glob_obj->getConfig('patient_%');
+						
 			$ward_ok=true;
 		}else{
 			$ward_ok=false;
@@ -467,8 +483,7 @@ for ($i=$ward_info['room_nr_start'];$i<=$ward_info['room_nr_end'];$i++){
 	}
 	else 
 	{
-	    if(!$bed_locked) echo $bed['name_first']; // ln=last name fn=first name
-	      else echo $LDLocked; //$j=bed   $i=room number
+	    if($bed_locked)  echo $LDLocked; //$j=bed   $i=room number
 	}
 	
 	if($is_patient&&($bed['encounter_nr']!=""))
