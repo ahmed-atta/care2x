@@ -1,94 +1,97 @@
-<?php
-error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-?>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b><?php echo "Patientenmappe" ?></b></font>
+<b><?php echo "Patientendaten - $x3" ?></b></font>
 <form action="#" >
 <p><font size=2 face="verdana,arial" >
 
 <?php if($src=="") : ?>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> 
-<font color="#990000"><b>Was soll diese Farbbalken  <img <?php echo createComIcon('../','colorcodebar3.gif','0') ?> > bedeuten? </b></font>
-<ul> <b>Achtung! </b>Sie sind "Signalfarben". <p>Jede Farbe in diesem Balken (wenn gesetzt) bedeutet  Änderung, Anordnung, Fragen, Befund, Beobachtung,
-		usw.<br>
-			Die Bedeutung einer Farbe lässt sich für jede Station einstellen. <p>
-			Die Reihe von sieben grünen Farbbalken signalisieren die sieben Tage in der Woche. (Sonntag bis Samstag)<p>
-			Die Reihe von 24 rosa Farbbalken signalisieren die 24 Stunden des Tages.<br>
-			Zum Beispiel: Der sechste rosa Farbbalke bedeutet "6 Uhr", der zehnte bedeutet "10 Uhr", usw.
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Was bedeuten diese Farbbalken?
+     </b> <img <?php echo createComIcon('../','colorcodebar3.gif','0') ?> ></font>
+<ul> <b>Anmerkung: </b>Jeder dieser Farbbalken signalisiert (sofern auf "sichtbar" gesetzt) die Verfügbarkeit einer
+bestimmten Information, einer Anweisung, einer Änderung oder einer Anfrage etc.<br>
+	Die Zuordnung der Farben kann für jede Station getrennt festgelegt werden.<br>
+	Die rosa Balken rechts sollen den ungefähren Zeitpunk der Fälligkeit anzeigen.<br>
+	So bedeutet der sechste rosa Balken "6. Stunde" oder "6 Uhr morgens" und der 22. Balken bedeutet entsprechend
+         "22 Uhr".
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Was bewirken diese Knöpfe?</b></font>
-<ul> <input type="button" value="Patientenkurve">
+Wozu dienen die folgenden Knöpfe?</b></font>
+<ul> <input type="button" value="Fieberkurve">
 	<ul>
-		Dieser Knopf öffnet die Patientenkurve. Sie könne die Temperatur und Blutdruck Daten eingeben, bearbeiten, oder löschen.
-<br>
-		Weitere Daten zum eingeben:
+	Damit wird die Temperaturkurve des Patienten geöffnet. Sie können Temperatur- oder Blutdruckwerte eintragen,
+         ändern oder löschen.<br>
+	Weitere editierbare Felder sind:
 	<ul type="disc">
-	<li>Allergi<br>
-	<li>Kostplan<br>
-	<li>Hauptdiagnose & Therapie<br>
-	<li>Tägliche Diagnose & Therapieplan<br>
-	<li>Besonderheiten & Nebendiagnosen<br>
-	<li>PT, ATG, usw.<br>
+	<li>Allergie<br>
+	<li>Täglicher Diätplan<br>
+	<li>Hauptdiagnose / Therapie<br>
+	<li>Tägliche Diagnose / Therapie<br>
+	<li>Anmerkungen, extra Diagnosenbr>
+	<li>PT (Physikalische Therapie), ATG (Anti-Thrombose-Gymnastik), etc.<br>
 	<li>Antikoagulantien<br>
-	<li>Tägliche Dokumentation von Antikoagulantien<br>
-	<li>i.v. Medikation und Verbandswechsel<br>
-	<li>Tägliche Dokumentation von i.v. Medikation<br>
-	<li>Zusatzangaben<br>
-	<li>Medikationsplan, Dosierung & Verabreichung<br>
-	<li>Tägliche Dokumentation des Medikationsplans<br>
-	</ul>		
+	<li>Tägliche Dokumentation zu den Antikoagulantien<br>
+	<li>Intravenöse Medikation & Druckverbände<br>
+	<li>Tägliche Dokumentation zur intravenösen Medikation<br>
+	<li>Anmerkungen<br>
+	<li>Medikation (Liste)<br>
+	<li>Tägliche Dokumentation zur Medikation und Dosierung<br>
+	</ul>
 	</ul>
 <input type="button" value="Pflegebericht">
 	<ul>
-		Dieser Knopf öffnet den Pflegebericht. Sie können hier Ihre Pflege berichten, dokumentieren, usw.
+	Hiermit wird der Pflegebericht geöffnet Sie können Ihre Pflegeaktivitäten dokumentieren, deren Effektivität,
+         Beobachtungen, Anfragen, Empfehlungen usw.
 	</ul>
-	<input type="button" value="Ärztliche Anordnung">
+	<input type="button" value="Ärztliche Anweisungen">
 	<ul>
-	Der Stationsarzt trägt hier seine Anordnung, Anweisung, Antworten auf Anfragen, uvm. ein.
-	</ul>	
-	<input type="button" value="Befund">
+	Der verantwortliche Arzt gibt hier seine Anweisungen, die Medikation, Dosierung, Antworten auf Fragen der
+         Pflegepersonals, oder Änderungen ein.
+	</ul>
+	<input type="button" value="Diagnostische Berichte">
 	<ul>
-	Dieser Knopf öffnet die Befunde aus verschiedenen Abteilungen und Kliniken.
-	</ul>	
-	<input type="button" value="Stammblatt">
+	Hier wird die Diagnostik bzw. die Befunde aus anderen Klinken und Abteilungen aufbewahrt.
+	</ul>
+<!-- 	<input type="button" value="Root data">
 	<ul>
-	Dieser Knopf öffnet das Stammblatt des Patients.
-	</ul>	
-	<input type="button" value="Pflegeplanung">
+	This stores the patients root data and personal information like name, given name, etc. This is also the initial documentation of the
+	patient's anamnesis or medical history that serves as foundation for the individual nursing plan.
+	</ul>
+	<input type="button" value="Nursing Plan">
 	<ul>
-	Dies ist die Pflegeplanung für den Patient.
-	</ul>	
-	<input type="button" value="Laborwerte">
+	This is the individual nursing plan. You can create, edit, or delete the plan.
+	</ul>
+ -->
+ <input type="button" value="DRG">
 	<ul>
-	Dieser Knopf öffnet die Laborwerte und Laborbefunde vom Patient.
-	</ul>	
-	<input type="button" value="Fotos">
+	Hiermit wird das DRG-Fenster geöffnet.
+	</ul>
+ <input type="button" value="Labor">
 	<ul>
-	Dieser Knopf öffnet den Fotokatalog vom Patient.
-	</ul>	
+	Hier sind Labor- und Pathologie-Befunde gespeichert.
+	</ul>
+ <input type="button" value="Photos">
+	<ul>
+	Damit wird das Bild-Archiv des Patienten geöffnet.
+	</ul>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Was ist die Funktion von diesem Auswahlfeld </b>	<select name="d"><option value="">bitte auswählen</option></select>?
+Wozu dient diese Auswahlbox: </b>	<select name="d"><option value="">Anforderung für diagnostischen Test auswählen</option></select>?
 </font>
-<ul>       	<b>Achtung! </b>Hier können Sie einen neuen Konsilschein auswählen.<br>
- 	<b>Schritt 1: </b>Klickt das Auswahlfeld <select name="d"><option value="">bitte auswählen</option></select> an.
-                                                                     <br>
-		<b>Schritt 2: </b>Klickt die Abteilung an.<br>
-		<b>Schritt 3: </b>Ein neuer Konsilschein wird eingeblendet.<br>
+<ul><b>Anmerkung: </b>Hiermit wird das entsprechende Anforderungsformular für einen diagnostischen Test
+	ausgewählt.<br>
+<b>Schritt 1: </b>Klicken Sie auf <select name="d"><option value="">Anforderung für diagnostischen Test auswählen</option></select><br>
+<b>Schritt 2: </b>Klicken Sie auf die Klinik/Abteilung oder den Test.<br>
+<b>Schritt 3: </b>Das Anforderungsformular wird automatisch geöffnet.<br>
 </ul>
 <?php endif ?>
 
 <?php if($src=="labor") : ?>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> 
-<font color="#990000"><b>Kein Laborbefund vorhanden. </b></font>
-<ul> Klickt den <input type="button" value="OK"> Knopf an um in die Patientenmappe zurück zu gehen.</ul>
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>Derzeit sind keine Laborbefunde verfügbar. </b></font>
+<ul> Klicken Sie auf den Knopf <input type="button" value="OK"> um zu den Stammdaten des Patienten zurückzukeheren.</ul>
 <?php else  : ?>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Wie schliesse ich die Patientenmappe? </b></font>
-<ul> <b>Achtung! </b>Wenn Sie die Patientenmappe schliessen möchten klicken Sie den 
-<img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle"> Knopf an.</ul>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Wie schließe ich die Ansicht mit den Patientendaten? </b></font>
+<ul> <b>Anmerkung: </b>Wenn Sie diese Ansicht schließen möchten, klicken Sie auf <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle">.</ul>
 
 <?php endif ?>
 
 </form>
-
