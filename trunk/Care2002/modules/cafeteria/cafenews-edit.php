@@ -69,8 +69,9 @@ function showpic(d)
 </script>
 
 <script language="javascript" src="<?php echo $root_path ?>js/checkdate.js" type="text/javascript"></script>
-
 <script language="javascript" src="<?php echo $root_path ?>js/setdatetime.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
+
 </head>
 <body onLoad="document.selectform.newstitle.focus()">
 <form ENCTYPE="multipart/form-data" name="selectform" method="post" action="cafenews-edit-save.php" onSubmit="return chkForm(this)">
@@ -99,10 +100,11 @@ function showpic(d)
   	<FONT FACE="verdana,Arial" color="#0000cc" size=2><b><?php echo $LDPublishDate ?>:</b><br>
 	<!-- <input type="text" name="publishdate" size=10 maxlength=10 onKeyUp="setDate(this)"> -->
  	<input type="text" name="publishdate" size=10 maxlength=10 onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-  [ <?php   
+  	<a href="javascript:show_calendar('selectform.publishdate','<?php echo $date_format ?>')">
+	<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
+  [<?php   
  $dfbuffer="LD_".strtr($date_format,".-/","phs");
-  echo $$dfbuffer;
- ?> ]
+  echo $$dfbuffer; ?>]
 </td>
 <?php if($artopt==2) : ?>
     <td valign=top><img <?php echo createLDImgSrc($root_path,'x-blank.gif','0') ?> id="headpic" ><br>
