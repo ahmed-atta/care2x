@@ -62,10 +62,6 @@ $available_languages = array(
   'zh'         => array('zh|chinese simplified', 'chinese_gb')
 );
 
-
-if (!defined('__PMA_LANG_DETECT__')) {
-    define('__PMA_LANG_DETECT__', 1);
-
     /**
      * Analyzes some PHP environment variables to find the most probable language
      * that should be used
@@ -94,7 +90,9 @@ if (!defined('__PMA_LANG_DETECT__')) {
             }
         }
     } // end of the 'pmcLangDetect()' function
-
+	
+if (!defined('__PMA_LANG_DETECT__')) {
+    define('__PMA_LANG_DETECT__', 1);
 } // end if
 
 
@@ -151,10 +149,11 @@ if (empty($lang)) {
 
 /**
 * The following lines are inserted by Elpidio latorilla for CARE 2X - 19.07.2002/08:55
+* to ensure that the language files are available. If not, english will be used.
 */
-$lang_file = $lang_path.$lang.'lang_'.$lang.'_nursing.php';
-if((!file_exists($lang_file))&&(!file_exists('../'.$lang_file))) 
-{
+$lang_file = $lang_path.$lang.'/lang_'.$lang.'_nursing.php';
+//echo $lang_file;
+if((!file_exists($lang_file))&&(!file_exists('../'.$lang_file))){
 	$lang='en';
 }
 	
