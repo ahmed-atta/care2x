@@ -30,6 +30,7 @@ function IsValidDate(objDate,sFormat)
    var bOk = true;
    var bDebug = false;
    var sErrorMsg= errDate + ":\n";  /* EL140802 */
+   var sLangTemp=""; /* indonesian time format dd/MM/yyyy. Added 2003-11-20.  */
 
    /* check format */
    if ( sFormat == "dd.MM.yyyy" )  /* german */
@@ -88,11 +89,14 @@ function IsValidDate(objDate,sFormat)
 
    /*
    If the sLang == ID, we save it temporarily and simulate to be sLang ==  DE
+   Addition to accomodate the indonesian time format. Added 2003-11-20.
    */
    if (sLang=="ID") {
-      sLangTemp="ID";
-	  sLang="DE";
-	}
+     sLangTemp="ID";
+	    sLang="DE";
+   }else{
+     sLangTemp="";
+   }
    
    /* =============== */
    /* II. check sDate */
@@ -417,31 +421,36 @@ function IsValidDate(objDate,sFormat)
 
      sYear = nYear.toString(10);
 	 
-	 /* Check if the real sLang format was ID */
-	 if(sLangTemp == "ID") sLang="ID";
-
-     /* Date result */
-     if (sLang == "DE")
-     { objDate.value=sDay + "." + sMonth + "." + sYear ;
+     /* Check if the real sLang format was ID 
+        Addition to accomodate the indonesian time format. Added 2003-11-20.
+       */
+     if(sLangTemp == "ID") sLang="ID";
+   
+        /* Date result */
+      if (sLang == "DE") { 
+         objDate.value=sDay + "." + sMonth + "." + sYear ;
+      } else if (sLang == "DE8601") {
+         objDate.value=sYear + "-" + sMonth + "-" + sDay ;
+      } else if (sLang == "EN") { 
+         objDate.value=sMonth + "/" + sDay + "/" + sYear ;
+      } else if (sLang == "ID") { 
+         objDate.value=sDay + "/" + sMonth + "/" + sYear ;
+      } else {
+         objDate.value = "";
+      }
+   } else {
+     /* found some error */
+     
+     try {
+      objDate.select();  /* EL140802 */
+      objDate.focus();   /* EL140802 */
      }
-     else if (sLang == "DE8601")
-     { objDate.value=sYear + "-" + sMonth + "-" + sDay ;
+     catch (e) {
+      ;
      }
-     else if (sLang == "EN")
-     { objDate.value=sMonth + "/" + sDay + "/" + sYear ;
+     finally {
+      alert(sErrorMsg);  /* EL140802 */
      }
-     else if (sLang == "ID")
-     { objDate.value=sDay + "/" + sMonth + "/" + sYear ;
-     }
-     else
-     { objDate.value = "";
-     }
-    }
-   else
-   {
-     objDate.select();  /* EL140802 */
-     objDate.focus();   /* EL140802 */
-     alert(sErrorMsg);  /* EL140802 */
      /**
      * Die focus() & select() funktionen tun offensichtlich nicht richtig bei Mozilla.
      * Wir brauchen hier cross-programming.
