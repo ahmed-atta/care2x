@@ -144,21 +144,21 @@ science education products, open source software and local  linux distro.
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../gui/img/control/default/<?php echo $lang ?>/<?php echo $lang ?>_x-blank.gif"  border=0  width=135 align=right vspace=10>
-			<b>Matej Hausenblas (FR) did the french translations of Care 2002</b>
+			<b>Mat&#277;j Hausenblas (FR) did the french translations of Care 2002</b>
 			<p>
-Matej Hausenblas was born in Prague, Czech Republic, in 1981.
-He is a student on a math-informatics-physics university. After several years 
-of using Windows he decided to have a look at Linux, as a worthy challenge 
-and after some time, he decided to participate on the Open Source projects to 
-improve some skills and also to return something back and to see how things 
+Mat&#277;j Hausenblas was born in Prague, Czech Republic, in 1981.
+He is a student on a math-informatics-physics university. After several years
+of using Windows he decided to have a look at Linux, as a worthy challenge
+and after some time, he decided to participate on the Open Source projects to
+improve some skills and also to return something back and to see how things
 work in this kind of society.
-			<P><a href="mailto:matejh@users.sourceforge.net"><u>Matej Hausenblas can be contacted here.</u></a>
+			<P><a href="mailto:matejh@users.sourceforge.net"><u>Mat&#277;j Hausenblas can be contacted here.</u></a>
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
         <TR>
-          <TD><IMG height=15 
-            src="../../gui/img/common/default/pixel.gif" 
+          <TD><IMG height=15
+            src="../../gui/img/common/default/pixel.gif"
             width=5 border=0></TD></TR>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
@@ -240,7 +240,7 @@ work in this kind of society.
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Security enhancements</font></td>
   </tr>
   <tr>
-    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Matêj Hausenblas (FR)</font></nobr>&nbsp;</td>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Mat&#277;j Hausenblas (FR)</font></nobr>&nbsp;</td>
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;French translation</font></td>
   </tr>
   <tr>
