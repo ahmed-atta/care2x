@@ -30,7 +30,7 @@ if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_indexframe.php')){
 	$lang='en'; // last desperate effort to settle the language 
 }
 
-echo $HTTP_COOKIE_VARS['ck_config'];
+// echo $HTTP_COOKIE_VARS['ck_config']; // for debugging only
 
 if(($mask==2)&&!$nonewmask)
 {
