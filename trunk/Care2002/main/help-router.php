@@ -5,7 +5,7 @@ require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 require_once($root_path.'include/inc_charset_fx.php') // load the charset functions
 ?>
-<html>
+<?php html_rtl($lang); ?>
 <head>
 <?php echo setCharSet(); ?>
 <title>?</title>

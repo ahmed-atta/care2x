@@ -22,7 +22,7 @@ $HTTP_SESSION_VARS['sess_login_pw']='';
 
 ?>
 
-<HTML>
+<?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
 <TITLE></TITLE>

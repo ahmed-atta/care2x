@@ -31,7 +31,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 //require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
 ?>
-<html>
+<?php html_rtl($lang); ?>
 <head>
 <title></title>
 </head>
