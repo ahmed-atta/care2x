@@ -17,7 +17,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 <font face="Verdana, Arial" size=2>
 
 <ul>
-<li><b> Punkt 1</b> : Der Modulgenerator ist weitgehend selbsterklärend. Für Fragen oder Anregungen schicken Sie dem  <a href=mailto:xanef@web.de>Autor</a> eine Mail.</p>
+<li><b> Punkt 1</b> : Der Modulgenerator ist weitgehend selbsterklärend. Für Fragen oder Anregungen schicken Sie dem  <a href=mailto:schenk@mail.fh-ulm.de>Autor</a> eine Mail.</p>
 
 
 
