@@ -626,6 +626,56 @@ class Person extends Core {
 	function DeathCause() {
         return  $this->getValue('death_cause');
 	}
+
+
+
+	/**
+	 * KB:
+	 * returns a list of other hospital numbers
+	 */
+	function OtherHospNrList(){
+	  global $db;
+	  $sql = "SELECT * FROM care_person_other_number WHERE pid=".$this->pid;
+	  $result = $db->Execute($sql);
+	  if( !$result )
+	    return false;
+
+	  unset($other_hosp_no);
+	  while( $row = $result->FetchRow() ){
+	    $other_hosp_no[$row['org']] = $row['other_nr'];
+	  }
+	  return $other_hosp_no;
+	}
+
+	function OtherHospNrSet($org,$other_nr){
+	  global $db;
+
+	  if( strlen($other_nr)<1 )
+	    {
+	      // if number field is empty, delete other number
+	      $sql = "DELETE FROM care_person_other_number ".
+		" WHERE org='$org' AND pid=".$this->pid;
+	    } 
+	  else
+	    {
+	      $sql = "SELECT * FROM care_person_other_number ".
+		" WHERE org='$org' AND pid=".$this->pid;
+	      
+	      $result = $db->Execute( $sql );
+	      if( $row = $result->FetchRow() ){
+		$sql = "UPDATE care_person_other_number SET ".
+		  "other_nr='$other_nr' ".
+		  " WHERE org='$org' AND pid=".$this->pid;
+	      } else {
+		$sql = "INSERT INTO care_person_other_number (pid,other_nr,org) ".
+		  " VALUES( ".$this->pid.", '$other_nr', '$org')";		
+	      }
+	    }
+	  // print "<P>$sql</p>";
+	  $db->Execute($sql);
+	}
+	
+
 	/**
 	* Returns table record's technical status.
 	*/

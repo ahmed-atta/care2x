@@ -247,6 +247,11 @@ require('./gui_bridge/default/gui_tabs_patreg.php');
 </td>
 </tr>
 
+<?PHP
+if (!$person_title_hide){
+  createTR( $errortitle, 'title', $LDTitle, $title, '', 12 );
+}
+/* KB: make title hidable
 <tr>
 <td><FONT SIZE=-1  FACE="Arial"><?php echo $LDTitle ?>:
 </td>
@@ -254,6 +259,8 @@ require('./gui_bridge/default/gui_tabs_patreg.php');
 <input type="text" name="title" size=14 maxlength=25 value="<?php echo $title ?>" onFocus="this.select();">
 </td>
 </tr>
+*/
+?>
 
 <?php
 createTR($errornamelast, 'name_last', $LDLastName,$name_last,'','',TRUE);
@@ -327,6 +334,11 @@ if ($errorsex) echo "</font>";
  </td>
 </tr>
 
+<?PHP 
+// KB: make blood group hideable
+if (!$person_bloodgroup_hide )
+{
+?>
 <tr>
 <td><FONT SIZE=-1  FACE="Arial"><?php echo $LDBloodGroup ?>:
 </td>
@@ -337,8 +349,14 @@ if ($errorsex) echo "</font>";
 <input name="blood_group" type="radio" value="O"  <?php if($blood_group=='O') echo 'checked'; ?>><?php echo $LDO ?>
 </td>
 </tr>
+<?PHP 
+}
+?>
 
-
+<?PHP
+// KB: make civil status hideable
+if (!person_civilstatis_hide){
+?>
 <tr>
 <td><FONT SIZE=-1  FACE="Arial"><?php if ($errorcivil) echo "<font color=red>"; ?> <?php echo $LDCivilStatus ?></font>:
 </td>
@@ -349,7 +367,9 @@ if ($errorsex) echo "</font>";
 <FONT SIZE=-1  FACE="Arial"> <input name="civil_status" type="radio" value="separated"  <?php if($civil_status=="separated") echo "checked"; ?>><?php echo $LDSeparated ?>&nbsp;&nbsp;
 </td>
 </tr>
-
+<?PHP
+    }
+?>
  
 <tr>
 <td colspan=2><FONT SIZE=-1  FACE="Arial"><?php if ($erroraddress) echo "<font color=red>"; ?><?php echo $LDAddress ?></font>:
@@ -376,44 +396,48 @@ if ($errorsex) echo "</font>";
 </tr>
 
 <?php
-if($insurance_show) {
+// KB: make insurance completely hideable
+if (!$person_insurance_hide)
+{
+  if ($insurance_show) {  
     if (!$person_insurance_1_nr_hide) {
-        createTR($errorinsurancenr, 'insurance_nr', $LDInsuranceNr.' 1',$insurance_nr,2);
-?>
-<tr>
-<td>&nbsp;
-</td>
-<td colspan=2><FONT SIZE=-1  FACE="Arial"><?php if ($errorinsuranceclass) echo '<font color="'.$error_fontcolor.'">'; ?>
-<?php
-if($insurance_classes!=false){
-    while($result=$insurance_classes->FetchRow()) {
-?>
-<input name="insurance_class_nr" type="radio"  value="<?php echo $result['class_nr']; ?>"  <?php if($insurance_class_nr==$result['class_nr']) echo 'checked'; ?>>
-<?php 
+      createTR($errorinsurancenr, 'insurance_nr', $LDInsuranceNr.' 1',$insurance_nr,2);
+      ?>
+      <tr>
+      <td>&nbsp;
+      </td>
+      <td colspan=2><FONT SIZE=-1  FACE="Arial"><?php if ($errorinsuranceclass) echo '<font color="'.$error_fontcolor.'">'; ?>
+      <?php
+      if($insurance_classes!=false){
+	while($result=$insurance_classes->FetchRow()) {
+  ?>
+ <input name="insurance_class_nr" type="radio"  value="<?php echo $result['class_nr']; ?>"  <?php if($insurance_class_nr==$result['class_nr']) echo 'checked'; ?>>
+    <?php 
         $LD=$result['LD_var'];
-        if(isset($$LD)&&!empty($$LD)) echo $$LD; else echo $result['name'];
-        echo '&nbsp;';
+ if(isset($$LD)&&!empty($$LD)) echo $$LD; else echo $result['name'];
+ echo '&nbsp;';
 	}
-} else echo "no insurance class";
-?>
-</td>
-</tr>
-<tr>
-<td><FONT SIZE=-1  FACE="Arial"><?php if ($errorinsurancecoid) echo '<font color="'.$error_fontcolor.'">'; ?><?php echo $LDInsuranceCo ?>:
-</td>
-<td colspan=2><input name="insurance_firm_name" type="text" size="35" value="<?php echo $insurance_firm_name; ?>" ><a href="javascript:popSearchWin('insurance','aufnahmeform.insurance_firm_id','aufnahmeform.insurance_firm_name')"><img <?php echo createComIcon($root_path,'b-write_addr.gif','0') ?>></a>
-</td>
-</tr>
-<?php
+      } else echo "no insurance class";
+      ?>
+      </td>
+      </tr>
+      <tr>
+      <td><FONT SIZE=-1  FACE="Arial"><?php if ($errorinsurancecoid) echo '<font color="'.$error_fontcolor.'">'; ?><?php echo $LDInsuranceCo ?>:
+      </td>
+      <td colspan=2><input name="insurance_firm_name" type="text" size="35" value="<?php echo $insurance_firm_name; ?>" ><a href="javascript:popSearchWin('insurance','aufnahmeform.insurance_firm_id','aufnahmeform.insurance_firm_name')"><img <?php echo createComIcon($root_path,'b-write_addr.gif','0') ?>></a>
+      </td>
+      </tr>
+      <?php
     }
-} else {
-?>
-
-  <tr>
+  } else {
+    ?>
+    
+    <tr>
     <td colspan=2><a><?php echo $LDSeveralInsurances; ?><img <?php echo createComIcon($root_path,'frage.gif','0') ?>></a></td>
-  </tr>
-   
-<?php
+    </tr>
+    
+    <?php
+  }
 }
 
 if (!$person_phone_1_nr_hide)
@@ -469,6 +493,32 @@ createTR($errorreligion, 'religion', $LDReligion,$religion,2);
 if (!$person_ethnic_orig_hide)
 {
 createTR($errorethnicorig, 'ethnic_orig', $LDEthnicOrigin,$ethnic_orig,2);
+}
+
+
+// KB: add a field for other HIS nr
+if (!$person_other_his_nr_hide){
+  print "<TR valign=top><TD>Other HIS no</TD>".
+    "<TD colspan=2>";
+
+  $other_hosp_list = $person_obj->OtherHospNrList();
+  foreach( $other_hosp_list as $k=>$v ){
+    print "<b>".$kb_other_his_array[$k].":</b> ".
+      $v."<br />\n";
+  }
+  
+  print "<SELECT name=\"other_his_org\">".
+    "<OPTION value=\"\">--</OPTION>";
+  foreach( $kb_other_his_array as $k=>$v ){
+    print "<OPTION value=\"$k\" $check>$v</OPTION>";
+  }
+  print "</SELECT>\n".
+    "&nbsp;&nbsp;".
+    "Pat no:<INPUT name=\"other_his_no\" size=20><br />\n";
+
+  print "(Select other hospital to change number - no number=delete)<br />\n".
+    "<br />\n";
+  print "</TD></TR>\n\n";
 }
 
 

@@ -195,6 +195,11 @@ if($death_date&&$death_date!='0000-00-00'){
 </tr>
 
 
+
+<?PHP
+if (!person_bloodgroup_hide) {
+  // KB: make blood group hideable
+?>
 <tr>
 <td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php echo $LDBloodGroup ?>:
 </td>
@@ -205,7 +210,15 @@ if($death_date&&$death_date!='0000-00-00'){
 ?>
 </td>
 </tr>
+<?PHP
+  }
+?>
 
+
+<?PHP
+if (!person_civilstatus_hide) {
+  // KB: make civil status hideable
+?>
 <tr>
 <td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php echo $LDCivilStatus ?>:
 </td>
@@ -218,6 +231,9 @@ if($civil_status=="single") echo $LDSingle;
     elseif($civil_status=="separated") echo  $LDSeparated ?>
 </td>
 </tr>
+<?PHP
+      }
+?>
 
 
 <tr>
@@ -323,6 +339,22 @@ createTR($LDEthnicOrigin,$ethnic_orig,2);
 
 ?>
  
+
+<?PHP
+$other_hosp_list = $person_obj->OtherHospNrList();
+if (!$GLOBAL_CONFIG['person_other_his_nr_hide']) 
+{
+  print "<TR><TD><font SIZE=2 FACE=Arial>Other Hosp Nr</font></TD>".
+    "<TD colspan=2><font SIZE=2 FACE=Arial>";
+  foreach( $other_hosp_list as $k=>$v ){
+    print "<b>".$kb_other_his_array[$k].":</b> ".
+      $v."<br />\n";
+  }
+  print "</font></TD></TR>\n";
+}
+?>
+
+
  <tr>
 <td bgcolor="#eeeeee"><nobr><FONT  SIZE=2  FACE="Arial"><?php echo $LDRegBy ?>:
 </nobr>
