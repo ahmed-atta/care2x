@@ -86,7 +86,7 @@ $i=1;
 while(list($x,$v)=each($GCONFIG))
 {
   echo '<tr>
-	<td bgcolor="#e9e9e9"><img '.createComIcon($root_path,'post_discussion.gif','0').'></td>
+    	<td bgcolor="#e9e9e9"><img '.createComIcon($root_path,'post_discussion.gif','0').'></td>
 	<td bgcolor="#e9e9e9"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b>'.strtr($x,'_',' ').'</b> </FONT></td>
 	<td bgcolor="#e9e9e9" align="center"><FONT   FACE="verdana,arial" size=2>	<input type="checkbox" name="value'.$i.'" value="1" ';
 	if($v) echo 'checked';

@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
+* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@latorilla.com
+* elpidio@care2x.net, elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -32,8 +32,10 @@ $error=0;
 if(!isset($mode)) $mode='';
 
 
-if($mode!= ''){
-    if($mode!='edit' && $mode!='update' && $mode!='data_saved'){
+if($mode!= '') 
+{
+    if($mode!='edit' && $mode!='update' && $mode!='data_saved')
+	{
              /* Trim white spaces off */
          $username=trim($username);
          $userid=trim($userid);
@@ -68,12 +70,11 @@ if($mode!= ''){
 	     /* If permission area is available, save it */
 	      if($p_areas != '')
 	      {   
-	      	//$db->debug=true;
 		       
 	           if($mode=='save')
 	           {
-                   $sql="INSERT INTO care_users
-						(
+                   $sql='INSERT INTO care_users 
+			            (
 						   name,
 						   login_id,
 						   password,
@@ -88,24 +89,27 @@ if($mode!= ''){
 						 )
 						 VALUES
 						 (
-						   '".addslashes($username)."',
-						   '".addslashes($userid)."',
-						   '".md5($pass)."',
-						   '".$p_areas."',
-						   '".$personell_nr."',
-						   '".date('Y-m-d')."',
-						   '".date('H:i:s')."',
-						   'normal',
-						   '',
-						   '".$HTTP_COOKIE_VARS[$local_user.$sid]."',
-						   '".date('YmdHis')."'
-						 )";
-
-		      } else {
-
-		           $sql="UPDATE care_users SET permission='$p_areas', modify_id='".$HTTP_COOKIE_VARS[$local_user.$sid]."'  WHERE login_id='$userid'";
+						   "'.addslashes($username).'",
+						   "'.addslashes($userid).'",
+						   "'.md5($pass).'",
+						   "'.$p_areas.'",
+						   "'.$personell_nr.'",
+						   "'.date('Y-m-d').'",
+						   "'.date('H:i:s').'",
+						   "normal",
+						   "'.$HTTP_COOKIE_VARS[$local_user.$sid].'",
+						   "'.$HTTP_COOKIE_VARS[$local_user.$sid].'",
+						   NULL
+						 )';
+				
+		      }
+		      else
+		      {
+				   
+		           $sql='UPDATE care_users SET permission="'.$p_areas.'", modify_id="'.$HTTP_COOKIE_VARS[$local_user.$sid].'"
+														   WHERE login_id="'.$userid.'"';
 		       }
-
+			   
 			   /* Do the query */
 			    $db->BeginTrans();
 				$ok=$db->Execute($sql);
@@ -132,7 +136,7 @@ if($mode!= ''){
 
 	    if($mode=='edit' || $mode=='data_saved' || $edit) {
         
-		    $sql="SELECT name, login_id, permission FROM care_users WHERE login_id='$userid'";
+		    $sql='SELECT name, login_id, permission FROM care_users WHERE login_id="'.$userid.'"';
 		    //$sql='SELECT * FROM care_users WHERE name="'.$username.'"';
 		    if($ergebnis=$db->Execute($sql)) {
             

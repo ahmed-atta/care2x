@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
+* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@latorilla.com
+* elpidio@care2x.net, elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -23,33 +23,35 @@ $returnfile=$HTTP_SESSION_VARS['sess_file_return'].URL_APPEND;
 //$HTTP_SESSION_VARS['sess_file_return']='edv.php';
 
 
-    $sql="SELECT name, login_id, lockflag FROM care_users WHERE login_id='".addslashes($itemname)."'";
-
-	if($ergebnis=$db->Execute($sql)) {
+    $sql='SELECT name, login_id, lockflag FROM care_users WHERE login_id="'.addslashes($itemname).'"';
+	
+	if($ergebnis=$db->Execute($sql,$link)) {	
 
         $zeile=$ergebnis->FetchRow();
-
-		if ($finalcommand=='changelock') {
-
-			if ($zeile['lockflag']) $newlockflag=0;
+		
+		if ($finalcommand=='changelock') {	
+		    
+			if ($zeile['lockflag']) $newlockflag=0; 
 			    else $newlockflag=1;
-
-			$sql="UPDATE care_users SET lockflag='$newlockflag' WHERE login_id='$itemname'";
-
+			
+			$sql='UPDATE care_users SET lockflag='.$newlockflag.' WHERE login_id="'.$itemname.'"';	
+			
 			if ($db->Execute($sql)) {
-				header("Location: ".$updatereturn.URL_REDIRECT_APPEND."&itemname=$itemname&remark=lockchanged");
+				header("Location: ".$updatereturn.URL_REDIRECT_APPEND."&itemname=$itemname&remark=lockchanged"); 
                 exit;
-			}else {
-				echo "$LDDbNoSave<p>$sql";
-			}
+			}else { 
+				echo "$LDDbNoSave<p>$sql"; 
+			} 
 		}
 	}
+
+  
 ?>
 
 <?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
-<?php
+<?php 
 require($root_path.'include/inc_js_gethelp.php');
 require($root_path.'include/inc_css_a_hilitebu.php');
 ?>

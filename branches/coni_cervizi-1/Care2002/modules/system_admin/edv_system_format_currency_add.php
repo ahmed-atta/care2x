@@ -22,14 +22,17 @@ if($from=='set') $returnfile='edv_system_format_currency_set.php'.URL_APPEND.'&f
 $dbtable='care_currency';
 
 if(($mode=='save')&&$short_name&&$long_name&&$info){
-
+  include('../include/inc_db_makelink.php');
+  if ($link&&$DBLink_OK){
     if($item_no){
 	   $sql="UPDATE ".$dbtable." SET short_name='".$short_name."',
 	                                               long_name='".$long_name."',
 												   info='".$info."'
 												   WHERE item_no=".$item_no;
-	   if($ergebnis=$db->Execute($sql)){
-		 if($db->Affected_Rows()){
+	   if($ergebnis=$db->Execute($sql))
+       {
+		 if(mysql_affected_rows($link))
+		 {
 	  	    $sql="UPDATE ".$dbtable." SET 
 												   modify_id='".$HTTP_COOKIE_VARS['ck_cafenews_user'.$sid]."',
 												   create_time=NULL
@@ -37,21 +40,26 @@ if(($mode=='save')&&$short_name&&$long_name&&$info){
 		   $db->Execute($sql);
 		   $new_currency_ok=1;
 		   $saved_msg=$LDCurrencyUpdated;
-		 }else{
+		 }
+		   else
+		   {
 		     $new_currency_ok=0;
 		   }
-		}else{
-			echo "<p> $sql <p>$LDDbNoRead";
-		} 
-	}else{
+		}
+		else echo "<p> $sql <p>$LDDbNoRead"; 
+	}
+	else
+	{
 		$info_exist=0;
 		
 	   // Check first if the info already exists
 	   
 	   $sql="SELECT item_no FROM $dbtable WHERE short_name='$short_name' AND long_name='$long_name'";
 	   
-	   if($ergebnis=$db->Execute($sql)){
-		  if(!$ergebnis->RecordCount()){   
+	   if($ergebnis=$db->Execute($sql))
+       {
+		  if(!$ergebnis->RecordCount())
+		  {   
 	
 		 	$sql="INSERT INTO $dbtable 
 			                          (short_name,
@@ -67,32 +75,39 @@ if(($mode=='save')&&$short_name&&$long_name&&$info){
 									  '".$HTTP_COOKIE_VARS['ck_cafenews_user'.$sid]."',
 									  NULL,
 									  NULL)";
-			if($ergebnis=$db->Execute($sql)){
-				if($db->Affected_Rows()){
+			if($ergebnis=$db->Execute($sql))
+       		{
+				if(mysql_affected_rows($link))
+				{
 				   $new_currency_ok=1;
 				   $saved_msg=$LDAddedNewCurrency;
-				   $item_no=$db->Insert_ID();
-				}else{
-					$new_currency_ok=0;
+				   $item_no=mysql_insert_id($link);
 				}
-			}else{
-				echo "<p>".$sql."<p>$LDDbNoRead";
-			} 
-		  }else{
+				else $new_currency_ok=0;
+			}
+			  else echo "<p>".$sql."<p>$LDDbNoRead"; 
+		  }
+		  else
+		  {
 		      $info_exist=1;
 		  }
-		}else{
-			echo "<p>".$sql."<p>$LDDbNoRead";
-		} 
-	}
+		}
+		 else echo "<p>".$sql."<p>$LDDbNoRead"; 
+	  }
+
+   } else { echo "$LDDbNoLink<br> $sql<br>"; }
 }
 
-if(($mode=='edit')&&$item_no){
-
+if(($mode=='edit')&&$item_no)
+{
+  include('../include/inc_db_makelink.php');
+  if ($link&&$DBLink_OK)
+  {
     $sql="SELECT short_name,long_name,info FROM care_currency WHERE item_no=".$item_no;
-	
-	if($ergebnis=$db->Execute($sql)){
-	  if($ergebnis->RecordCount()){
+	if($ergebnis=$db->Execute($sql))
+	{
+	  if($ergebnis->RecordCount())
+	  {
 	     $c_result=$ergebnis->FetchRow();
 		 $short_name=$c_result['short_name'];
 		 $long_name=$c_result['long_name'];
@@ -104,6 +119,8 @@ if(($mode=='edit')&&$item_no){
 	   $item_no='';
 	   echo "<p>$sql<p>$LDDbNoRead";
 	} 
+  }
+  else { echo "$LDDbNoLink<br> $sql<br>"; }
 }
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">

@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
+* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@latorilla.com
+* elpidio@care2x.net, elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -20,19 +20,23 @@ $breakfile='edv-system-admi-welcome.php'.URL_APPEND;
 $returnfile='edv_user_access_list.php'.URL_APPEND;
 //$HTTP_SESSION_VARS['sess_file_return']='edv.php';
 
+/* Establish db connection */
+if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
 
-    $sql="SELECT name, login_id FROM care_users WHERE login_id='$itemname'";
+if($dblink_ok) {
+	
+    $sql='SELECT name, login_id FROM care_users WHERE login_id="'.$itemname.'"';
 
     if($ergebnis=$db->Execute($sql)) {
 
 	    if ($finalcommand=='delete') {
-
-		    $sql="DELETE FROM care_users WHERE login_id='$itemname'";
-
+			
+		    $sql='DELETE FROM care_users WHERE login_id="'.$itemname.'"';	
+			
 			$db->BeginTrans();
 			$ok=$db->Execute($sql);
 			if($ok&&$db->CommitTrans()) {
-                header("Location: edv_user_access_list.php?sid=$sid&lang=$lang&remark=itemdelete");
+                header("Location: edv_user_access_list.php?sid=$sid&lang=$lang&remark=itemdelete"); 
 				exit;
             } else {
 			    $db->RollbackTrans();
@@ -41,13 +45,17 @@ $returnfile='edv_user_access_list.php'.URL_APPEND;
         }
         elseif ($ergebnis->RecordCount()) {
             $zeile=$ergebnis->FetchRow();
-        }
+        };
     }
+}
+else { 
+    echo "$LDDbNoLink<br>$sql"; 
+}
 ?>
 <?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
-<?php
+<?php 
 require($root_path.'include/inc_css_a_hilitebu.php');
 ?>
 <script language="javascript">
