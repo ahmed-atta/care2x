@@ -47,6 +47,15 @@ enter your username and password.
 <?php if($x2=="quick") : ?>
 	<?php if($x1) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
+How to show occupancy status of other days?</b>
+</font>
+<ul>       	
+ 	<b>Step: </b>Click the date on the mini-calendar.<p>
+	<img src="../help/en/img/en_mini_calendar_php.png" border=0 width=223 height=133><p>
+	<b>Note: </b>Old occupancy list that will be displayed is "read only". You cannot edit or change any patients' data.<br>
+	</ul>
+	
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to show the ward's occupancy list?</b>
 </font>
 <ul>       	
@@ -61,7 +70,7 @@ How to show  the ward's occupancy list for editing or updating data?</b>
  	<b>Step 2: </b>If you have logged in before and you have access right for the function, the occupancy list will be displayed immediately.<br>
 		Otherwise,  you will be asked to enter your username and password.<br>
  	<b>Step 3: </b>If asked, enter your username and password.<br>
- 	<b>Step 4: </b>Click the button <input type="button" value="Continue...">.<br>
+ 	<b>Step 4: </b>Click the  <img <?php echo createLDImgSrc('../','continue.gif','0') ?>> button .<br>
  	<b>Step 5: </b>If you have an access right for the function, the occupancy list will be displayed.<br>
 	<b>Note: </b>The occupancy list that will be displayed can be "edited". Options for editing or updataing patients' data will be displayed.
 		You can also open the patients' data folder for further editing.<br>

@@ -11,7 +11,7 @@ How to display the graphical chart for test parameters?</b>
 <ul>      
  	<b>Step 1: </b>Click on the checkbox <input type="checkbox" name="s" value="s" checked> corresponding to the chosen parameter to select it.<br>
 		<b>Step 2: </b>If you want to display several parameters at once, click on their corresponding checkboxes.<br>
-		<b>Step 3: </b>Click on the icon <img src="../img/chart.gif" width=16 height=17 border=0> to display the graphical chart.<br>
+		<b>Step 3: </b>Click on the <img <?php echo createComIcon('../','chart.gif','0') ?>>  icon to display the graphical chart.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 I want to select all parameters. Is there a fast way to select them all at once?</b>

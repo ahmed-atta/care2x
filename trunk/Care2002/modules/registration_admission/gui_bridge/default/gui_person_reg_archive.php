@@ -60,7 +60,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 </td>
 
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
-<a href="javascript:gethelp('admission_how2new.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
+<a href="javascript:gethelp('person_archive.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
 echo $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </td>
 </tr>
@@ -80,16 +80,16 @@ require('./gui_bridge/default/gui_tabs_patreg.php');
 
 <?php
 
- if(isset($mode)&&$mode=='search')
- {
-   echo '<FONT  SIZE=2 FACE="verdana,Arial">'.$LDSearchKeyword.': '.$s2; 
+if(isset($mode)&&($mode=='search'||$mode=='paginate')){
+
+    if(defined('SHOW_SEARCH_QUERY')&&SHOW_SEARCH_QUERY) echo '<FONT  SIZE=2 FACE="verdana,Arial">'.$LDSearchKeyword.': '.$s2; 
 ?>
 
 <table border=0>
   <tr>
     <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"></td>
     <td><FONT  SIZE=3 FACE="verdana,Arial" color=#800000>
-<b><?php if($rows) echo str_replace("~nr~",$rows,$LDFoundData); else echo str_replace("~nr~",$rows,$LDSearchFound); ?></b></font></td>
+<b><?php if($rows) echo str_replace("~nr~",$totalcount,$LDFoundData).' '.$LDShowing.' '.$pagen->BlockStartNr().' '.$LDTo.' '.$pagen->BlockEndNr().'.'; else echo str_replace('~nr~','0',$LDSearchFound); ?></b></font></td>
   </tr>
 </table>
 
@@ -97,18 +97,57 @@ require('./gui_bridge/default/gui_tabs_patreg.php');
 }
 ?>
 
-<?php if(isset($rows)&&$rows>1) 
-{
+<?php
+if(isset($rows)&&$rows) {
+	$bgimg='tableHeader_gr.gif';
+	$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
  ?>
 
 <table border=0 cellpadding=0 cellspacing=0>
   <tr bgcolor="#00cc00">
-      <td background="<?php echo $root_path; ?>gui/img/common/default/tableheader_gr.gif">&nbsp;</td>
-      <td background="<?php echo $root_path; ?>gui/img/common/default/tableheader_gr.gif"><FONT  SIZE=-1  FACE="Arial" color="#006600"><b>&nbsp;&nbsp;<?php echo $LDLastName; ?></b></td>
-      <td background="<?php echo $root_path; ?>gui/img/common/default/tableheader_gr.gif"><FONT  SIZE=-1  FACE="Arial" color="#006600"><b>&nbsp;&nbsp;<?php echo $LDFirstName; ?></b></td>
-      <td background="<?php echo $root_path; ?>gui/img/common/default/tableheader_gr.gif"><FONT  SIZE=-1  FACE="Arial" color="#006600"><b>&nbsp;&nbsp;<?php echo $LDBday; ?></b></td>
-      <td background="<?php echo $root_path; ?>gui/img/common/default/tableheader_gr.gif"><FONT  SIZE=-1  FACE="Arial" color="#006600"><b>&nbsp;&nbsp;<?php echo $LDRegistrationNr; ?></b></td>
-      <td background="<?php echo $root_path; ?>gui/img/common/default/tableheader_gr.gif"><FONT  SIZE=-1  FACE="Arial" color="#006600"><b>&nbsp;&nbsp;<?php echo $LDRegDate; ?></b></td>
+      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
+	  <?php 
+	  	if($oitem=='sex') $flag=TRUE;
+			else $flag=FALSE; 
+		echo $pagen->SortLink($LDSex,'sex',$odir,$flag); 
+			 ?></b></td>
+      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
+	  <?php 
+	  	if($oitem=='name_last') $flag=TRUE;
+			else $flag=FALSE; 
+		echo $pagen->SortLink($LDLastName,'name_last',$odir,$flag); 
+			 ?></b></td>
+      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
+	  <?php 
+	  	if($oitem=='name_first') $flag=TRUE;
+			else $flag=FALSE; 
+		echo $pagen->SortLink($LDFirstName,'name_first',$odir,$flag); 
+			 ?></b></td>
+      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
+	  <?php 
+	  	if($oitem=='date_birth') $flag=TRUE;
+			else $flag=FALSE; 
+		echo $pagen->SortLink($LDBday,'date_birth',$odir,$flag); 
+			 ?></b></td>
+      <td <?php echo $tbg; ?> align='center'><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
+	  <?php 
+	  	if($oitem=='addr_zip') $flag=TRUE;
+			else $flag=FALSE;
+		 echo $pagen->SortLink($LDZipCode,'addr_zip',$odir,$flag); 
+		 	
+		?></b></td>
+      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
+	  <?php 
+	  	if($oitem=='pid') $flag=TRUE;
+			else $flag=FALSE; 
+		echo $pagen->SortLink($LDRegistryNr,'pid',$odir,$flag); 
+			 ?></b></td>
+      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
+	  <?php 
+	  	if($oitem=='date_reg') $flag=TRUE;
+			else $flag=FALSE; 
+		echo $pagen->SortLink($LDRegDate,'date_reg',$odir,$flag); 
+			 ?></b></td>
   </tr>
 <?php 
 # Load common icons
@@ -141,13 +180,19 @@ $img_female=createComIcon($root_path,'spf.gif','0');
 	
 	echo '</td>
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;'.@formatDate2Local($result['date_birth'],$date_format).'</td>
+    <td align=right><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;'.$result['addr_zip'].'</td>
     <td align=right><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;'.$result['pid'].'</td>
     <td align=right><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.@formatDate2Local($result['date_reg'],$date_format).'</a></td>
   </tr>
   <tr bgcolor=#0000ff>
   <td colspan=8 height=1><img src="../../gui/img/common/default/pixel.gif" border=0 width=1 height=1></td>
   </tr>';
+  
   }
+		echo '
+			<tr><td colspan=6><font face=arial size=2>'.$pagen->makePrevLink($LDPrevious).'</td>
+			<td align=right><font face=arial size=2>'.$pagen->makeNextLink($LDNext).'</td>
+			</tr>';
  ?>
 </table>
 <p>
@@ -156,7 +201,7 @@ $img_female=createComIcon($root_path,'spf.gif','0');
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
 <input type="hidden" name="lang" value="<?php echo $lang ?>">
 <input type="hidden" name="mode" value="?">
-<input type="submit" value="<?php echo $LDNewArchive ?>" >
+<input type="submit" value="<?php echo $LDAdvancedSearch ?>" >
                              </form>
 
 <?php 

@@ -6,7 +6,7 @@
 
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I want to create a new duty plan for the displayed month</b></font>
-<ul> <b>Step 1: </b>Click the button <img src="../img/en/en_newplan.gif" border=0 >.<br>
+<ul> <b>Step 1: </b>Click the <img <?php echo createLDImgSrc('../','newplan.gif','0') ?> > button.<br>
 </ul>
 <ul><b>Step 2:</b>
  If you have logged in before and you have an access right for this function, the 

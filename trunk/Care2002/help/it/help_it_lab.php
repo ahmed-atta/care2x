@@ -582,10 +582,9 @@ Come aprire la cartella di un paziente</b>
 Come inserire i risultati di un test</b>
 </font>
 <ul>       	
-		<?php if($x2=="") 
-			print '
+		<?php if($x2=="") print '
  			<b>1: </b>Inserire il codice del batch nel campo "<span style="background-color:yellow" > Codice batch </span>".<br>	
- 			<b>2: </b>Inserire la data dell'esame nel campo "<span style="background-color:yellow" > Data esame </span>" se necessario.<br>	';
+ 			<b>2: </b>Inserire la data dell\'esame nel campo "<span style="background-color:yellow" > Data esame </span>" se necessario.<br>';
 		?>
  	<b>Step	<?php if($x2=="") 
 			print "3"; else print "1";

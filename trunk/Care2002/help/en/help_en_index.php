@@ -9,13 +9,13 @@
 <font face="Arial" color="#cc0000" size=3><b>Help</b></font><p>
 <font face="Verdana, Arial" size=2><b>
 <a href="../main/help-info.php" target="HELPINFOFRAME">Initial steps</a><br>
-<a href="#">Contents</a><br>
-<a href="#">Index</a><br>
-<a href="#">Search</a><br>
-<a href="#">Tips & Tricks</a><br>
-<a href="#">Introductions</a></b>
-<p>
-<a href="http://care2x.net/docswiki/index.php?UM - English" target="HELPINFOFRAME">Online User's Manual</a></b>
+<!--<a href="../help/en/help_en_contents.php" target="HELPINFOFRAME">Contents</a><br>
+ <a href="#" target="HELPINFOFRAME">Index</a><br>
+<a href="#" target="HELPINFOFRAME">Search</a><br>
+<a href="#" target="HELPINFOFRAME">Tips & Tricks</a><br>
+<a href="#" target="HELPINFOFRAME">Introductions</a></b>
+ --><p>
+<a href="http://care2x.net/docswiki/index.php?UM - English" target="HELPINFOFRAME">Online Manual</a></b>
 
 </font>
 

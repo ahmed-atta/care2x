@@ -27,7 +27,7 @@ switch($x1)
 		
 </ul>
 <b>Step <?php if($src=="newphone") print "3"; else print "2"; ?></b>
-<ul> Click the button <input type="button" value="SEARCH"> to start the search.<p>
+<ul> Click the <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> button  to start the search.<p>
 </ul>
 <b>Step <?php if($src=="newphone") print "4"; else print "3"; ?></b>
 <ul> If the search finds result(s), a list will be displayed.<p>
@@ -57,9 +57,11 @@ switch($x1)
 <?php
 switch($x1)
 {
- 	case "search": print 'search click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.'; break;
+
+	case "search": print 'search click the button <img '.createLDImgSrc('../','cancel.gif','0').'>.'; break;
 	case "dir": print ' the directory click the button <input type="button" value="Cancel">.';break;
-	case "newphone": print ' click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.';break;
+	case "newphone": print ' click the button <img '.createLDImgSrc('../','cancel.gif','0').'>.';break;
+
  }
  ?>
 </ul>

@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
+* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
 * GNU General Public License
-* Copyright 2002 Elpidio Latorilla
+* Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -14,7 +14,6 @@ define('LANG_FILE','edp.php');
 $local_user='ck_edv_user';
 
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
 /**
 * The following require loads the access areas that can be assigned for
 * user permissions.
@@ -46,20 +45,10 @@ if($dblink_ok)
 <HEAD>
 <?php echo setCharSet(); ?>
 <?php 
+require($root_path.'include/inc_js_gethelp.php');
 require($root_path.'include/inc_css_a_hilitebu.php');
 ?>
-<script language="javascript">
-<!-- 
 
-function gethelp(x,s,x1,x2,x3)
-{
-	if (!x) x="";
-	urlholder="<?php echo $root_path; ?>help-router.php<?php echo URL_REDIRECT_APPEND ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
-	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
-	window.helpwin.moveTo(0,0);
-}
-// -->
-</script>
 </HEAD>
 <BODY BGCOLOR="<?php echo $cfg['bot_bgcolor']; ?>" TEXT="#000000" LINK="#0000FF" VLINK="#800080" topmargin=0 leftmargin=0 marginheight=0 marginwidth=0>
 

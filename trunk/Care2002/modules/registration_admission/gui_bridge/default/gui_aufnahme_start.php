@@ -314,7 +314,7 @@ echo $addr_zip.' '.$addr_citytown_name.'<br>';
 </tr>
 
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php echo $LDAdmitClass ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial" color=red><?php echo $LDAdmitClass ?>:
 </td>
 <td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">
 <?php
@@ -347,7 +347,7 @@ if(!$encounter_nr||$encounter_class_nr==1){
 ?>
 
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if ($errorward) echo "<font color=red>"; ?><?php echo $LDWard ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if ($errorward||$encounter_class_nr==1) echo "<font color=red>"; ?><?php echo $LDWard ?>:
 </td>
 <td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">
 <?php
@@ -389,7 +389,7 @@ if(!$encounter_nr||$encounter_class_nr==2){
 ?>
 
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if ($errorward) echo "<font color=red>"; ?><?php echo "$LDClinic/$LDDepartment"; ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if ($errorward||$encounter_class_nr==2) echo "<font color=red>"; ?><?php echo "$LDClinic/$LDDepartment"; ?>:
 </td>
 <td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">
 <?php
@@ -432,25 +432,25 @@ echo '<img '.createComIcon($root_path,'redpfeil_l.gif','0').'> '.$LDForOutpatien
 
 
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if ($errordiagnose) echo "<font color=red>"; ?><?php echo $LDDiagnosis ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php //if ($errordiagnose) echo "<font color=red>"; ?><font color=red><?php echo $LDDiagnosis ?>:
 </td>
 <td colspan=2 bgcolor="#eeeeee"><input name="referrer_diagnosis" type="text" size="60" value="<?php echo $referrer_diagnosis; ?>">
 </td>
 </tr>
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if ($errorreferrer) echo "<font color=red>"; ?><?php echo $LDRecBy ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php //if ($errorreferrer) echo "<font color=red>"; ?><font color=red><?php echo $LDRecBy ?>:
 </td>
 <td colspan=2 bgcolor="#eeeeee"><input name="referrer_dr" type="text" size="60" value="<?php echo $referrer_dr; ?>"><!-- <a href="#"><img <?php echo createComIcon($root_path,'l-arrowgrnlrg.gif','0') ?>></a> -->
 </td>
 </tr>
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if ($errortherapie) echo "<font color=red>"; ?><?php echo $LDTherapy ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php //if ($errortherapie) echo "<font color=red>"; ?><font color=red><?php echo $LDTherapy ?>:
 </td>
 <td colspan=2 bgcolor="#eeeeee"><input name="referrer_recom_therapy" type="text" size="60" value="<?php echo $referrer_recom_therapy; ?>">
 </td>
 </tr>
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if ($errorbesonder) echo "<font color=red>"; ?><?php echo $LDSpecials ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php //if ($errorbesonder) echo "<font color=red>"; ?><font color=red><?php echo $LDSpecials ?>:
 </td>
 <td colspan=2 bgcolor="#eeeeee"><input name="referrer_notes" type="text" size="60" value="<?php echo $referrer_notes; ?>">
 </td>
@@ -585,7 +585,7 @@ while($buffer=$att_dr_service->FetchRow())
 
 ?>
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php echo $LDAdmitBy ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial" color=red><?php echo $LDAdmitBy ?>:
 </td>
 <td colspan=2 bgcolor="#eeeeee"><input  name="encoder" type="text" value=<?php if ($encoder!='') echo '"'.$encoder.'"' ; else echo '"'.$HTTP_COOKIE_VARS[$local_user.$sid].'"' ?> size="28">
 </nobr>

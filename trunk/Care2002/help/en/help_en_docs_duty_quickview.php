@@ -19,7 +19,7 @@ person on the list. A small pop-up window will appear showing relevant informati
 <ul>To display the duty plan for the whole month, click on the corresponding icon &nbsp;<button><img <?php echo createComIcon('../','new_address.gif','0','absmiddle') ?>> <font size=1>Show</font></button>.<br>
 			The duty plan will be displayed.</ul><p>
 <font face="Verdana, Arial" size=3 color="#990000">
-<p><b>What does the quickview display want me to show?</b></font></b><p>
+<p><b>What does the quickview display want to show?</b></font></b><p>
 <font face="Verdana, Arial" size=2>
 </b><li><b>Department</b> :<ul>The list of existing departments which have physicians/surgeons on standby and/or oncall duty.</ul><p>
 <li><b>Physician/Surgeon 1</b> :<ul>The physician/surgeon on standby duty.</ul><p>

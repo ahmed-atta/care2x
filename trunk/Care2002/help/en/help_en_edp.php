@@ -35,22 +35,29 @@ EDP -
 <?php if($src=="access") : ?>
 	<?php if($x1=="") : ?>
 		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
+How to create access permissions for a hospital's employee ?</b>
+</font>
+<ul>       	
+ 	<b>Step 1: </b>Find the employee first. Click the <input type="button" value="Find an employee"> button.<p>
+ 	<b>Step 2: </b>A search page will appear. Follow futher help instructions on how to search for the employee.<p>
+</ul>
+
+		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to create a new access right?</b>
 </font>
 <ul>       	
  	<b>Step 1: </b>Enter the complete name of the person, or the department, or clinic, etc in the "<span style="background-color:yellow" > Name </span>" field.<br>
  	<b>Step 2: </b>Enter the username  in the "<span style="background-color:yellow" > User login name </span>" field.<p>
 	<b>Note:</b> Space is not allowed for the username.<p>
- 	<b>Step 3: </b>Enter the password for the username "<span style="background-color:yellow" > Password </span>" field.<br>
- 	<b>Step 4: </b>Select the areas where the user is allowed to enter in the  "<span style="background-color:yellow" > Area # </span>" field.<p>
-	<b>Note:</b> A user can have a maximum of ten accessible areas (Area 1 up to Area 10).<p>
+ 	<b>Step 3: </b>Enter the password for the username "<span style="background-color:yellow" > Password </span>" field.<p>
+ 	<b>Step 4: </b>Check the areas where the user is allowed to enter in the  permission "tree".<p>
 </ul>
 
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 I am finished entering all relevant information. How to save it?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the button <input type="button" value="Save">.<br>
+ 	<b>Step 1: </b>Click the <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> button.<br>
 </ul>
 	<?php endif ?>	
 	<?php if($x1=="save") : ?>
@@ -121,13 +128,13 @@ How to edit an access right?</b>
 </font>
 <ul>       	
  	<b>Step 1: </b>Edit the information.<br>
- 	<b>Step 2: </b>Click the button <input type="button" value="Save">.<br>
+ 	<b>Step 2: </b>Click the <img <?php echo createLDImgSrc('../','savedisc.gif','0','absmiddle') ?>> button .<br>
 </ul>
 	<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
 Note:</b>
 </font>
 <ul>       	
- 	If you decide not to edit click the button <input type="button" value="Cancel">.<br>
+ 	If you decide not to edit click the <img <?php echo createLDImgSrc('../','cancel.gif','0','absmiddle') ?>>  button.<br>
 </ul>
 	
 	<?php endif ?>		

@@ -11,14 +11,14 @@ switch($HTTP_SESSION_VARS['sess_dicom_viewer']){
 	default:
 			# Default viewer
 }
-/*** CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
+/*** CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
 * GNU General Public License
-* Copyright 2002 Elpidio Latorilla
+* Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file 'copy_notice.txt' for the licence notice
 */
-define('TMPSIZE_IN_MEM',5); # The number of files loaded in memory at once
+define('TMPSIZE_IN_MEM',9); # The number of files loaded in memory at once
 define('NUM_EQUALS_TMPSIZE',0); # 1 = actual nr. of files equals tmpsize in mem, 0 = the value of TMPSIZE_IN_MEM is used
 define('FILE_DISCRIM','.dcm'); # define here the file discrimator string 
 define('LANG_FILE','actions.php');
@@ -95,7 +95,7 @@ if(isset($pop_only)&&$pop_only){
 <PARAM NAME = "tmpSize" VALUE = "<?php if(defined('NUM_EQUALS_TMPSIZE')&&NUM_EQUALS_TMPSIZE) echo $NUM;  else echo TMPSIZE_IN_MEM;  ?>">
 <PARAM NAME = "NUM" VALUE = "<?php  echo $NUM; ?>">
 <PARAM NAME = "currentNo" VALUE = "0">
-<PARAM NAME = "dicURL" VALUE = "http://<?php echo $main_domain ?>/<?php echo $top_dir ?>dicomviewer/Dicom.dic">
+<PARAM NAME = "dicURL" VALUE = "<?php echo $main_url ?>/<?php echo $top_dir ?>dicomviewer/Dicom.dic">
 <?php
 if($NUM){
 	$z=0;

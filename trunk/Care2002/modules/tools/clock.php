@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
+* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
 * GNU General Public License
-* Copyright 2002 Elpidio Latorilla
+* Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -13,7 +13,6 @@ require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','specials.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
 
 $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
 
@@ -39,7 +38,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10">
 <FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"   SIZE=+3  FACE="Arial"><STRONG> &nbsp;<?php echo $LDClock ?></STRONG></FONT></td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
+<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('clock.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
 <tr>
 <td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2><p><br>

@@ -1,10 +1,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Physician/Surgeon - Create or edit personal list</b></font>
+<b>Create or edit doctors' list</b></font>
 <form action="#" >
 <p><font size=2 face="verdana,arial" >
 
-
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
+How to add a doctor to the list?</b></font>
+<ul> 
+<b>Step 1: </b>Find the doctor first using the displayed search function.<p>
+<b>Step 2: </b>If the doctor is in the resulting list, click its  <img <?php echo createLDImgSrc('../','add2list_sm.gif','0') ?>> button.<p>
+</ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 The displayed department is wrong. I want to change to the right department.</b></font>
 <ul> <b>Step 1: </b>Select the department on the <nobr>"<span style="background-color:yellow" >Change department: </span><select name="s">
@@ -17,15 +22,10 @@ The displayed department is wrong. I want to change to the right department.</b>
 		<b>Step 2: </b>Click the button <input type="button" value="Change"> to change to the selected department.
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-I want to delete a name on the list</b></font>
-<ul> <b>Step 1: </b>Click on the text input field "<input type="text" name="t" size=11 maxlength=4 value="Name">" of the name to be deleted.<br>
-		<b>Step 2: </b>Delete the name manually using keyboard's backspace or delete keys.<br>
-</ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I want to save the personal list</b></font>
-<ul> <b>Step 1: </b>click the <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> button.<br>
-</ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I have saved the list and wish to close it, what should I do? </b></font>
-<ul> <b>Step 1: </b>If you are finished, click the <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> button. <br>
+I want to delete a doctor from the list</b></font>
+<ul> 
+<b>Step 1: </b> Click the corresponding <img <?php echo createComIcon('../','delete2.gif','0') ?>> icon.<p>
+<b>Step 2: </b> Click "OK" if you are sure to delete, otherwise click "Cancel" to cancel deletion.
 </ul>
 
 </form>

@@ -13,7 +13,7 @@ function Spacer()
 <img <?php echo createComIcon($root_path,'angle_left_s.gif',0); ?>>
 <br>
 <FONT face="Verdana,Helvetica,Arial" size=2 color="#cc0000">
-<?php echo $LDOptsForPerson ?>
+<?php echo $LDOptsForPerson ?>  <a href="javascript:gethelp('preg_options.php')"><img <?php echo createComIcon($root_path,'frage.gif','0','absmiddle') ?>></a>
 </font>
 
 <TABLE cellSpacing=0 cellPadding=0 bgColor=#999999 border=0>

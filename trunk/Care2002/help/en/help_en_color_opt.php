@@ -17,7 +17,7 @@ Color options
 How to select the background color?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the link "<span style="background-color:yellow" > Background color <img src="../img/settings_tree.gif" border=0> </span>" in the frame you want.<br>
+ 	<b>Step 1: </b>Click the link "<span style="background-color:yellow" > Background color <img <?php echo createComIcon('../','settings_tree.gif','0') ?>> </span>" in the frame you want.<br>
  	<b>Step 2: </b>A window showing a color palette will pop up.<br>
  	<b>Step 3: </b>Click the color you want for the background.<br>
  	<b>Step 4: </b>Click the <input type="button" value="Apply"> button to apply the color.<br>

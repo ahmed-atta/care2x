@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
+* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
 * GNU General Public License
-* Copyright 2002 Elpidio Latorilla
+* Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -13,7 +13,6 @@ require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','edp.php');
 $local_user='ck_edv_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
 
 $breakfile='edv-system-admi-menu.php'.URL_APPEND;
 $thisfile=basename(__FILE__);
@@ -27,22 +26,16 @@ $GLOBAL_CONFIG=array();
 
 $new_date_ok=0;
 
-if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
-if($dblink_ok)
-{
-    include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+# Create global config object
+require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 	
-	$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
-	
-   if(($mode=='save')&&($date_format!='')&&(eregi($date_format,$validator)))
-   {  
+if(($mode=='save')&&($date_format!='')&&(eregi($date_format,$validator))){  
 	  $new_date_ok=$glob_obj->saveConfigItem('date_format',$date_format);
-   } else {
-        if($glob_obj->getConfig('date_format')) $date_format=$GLOBAL_CONFIG['date_format'];
-     }
-} else { 
-    echo "$LDDbNoLink<br> $sql<br>"; 
+}else{
+	if($glob_obj->getConfig('date_format')) $date_format=$GLOBAL_CONFIG['date_format'];
 }
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>

@@ -27,7 +27,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php echo $LDPatientData.' ('.$full_en.')'; ?></STRONG></FONT>
 </td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
-<a href="javascript:gethelp('admission_how2update.php','<?php echo $from ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
+<a href="javascript:gethelp('admission_show.php','<?php echo $from ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
 if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) echo 'startframe.php?sid='.$sid.'&lang='.$lang; 
 	else echo "aufnahme_pass.php?sid=$sid&target=entry&lang=$lang"; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </td>
@@ -211,10 +211,18 @@ if ($addr_country) echo $addr_country.'<br>';
 <tr bgcolor="white">
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $LDAdmitClass ?>:
 </td>
-<td colspan=2   bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php 
-if (isset($$encounter_class['LD_var'])&&!empty($$encounter_class['LD_var'])) echo $$encounter_class['LD_var']; 
-    else echo  $encounter_class['name']; 
+<?php 
+# Suggested by Dr. Sarat Nayak to emphasize the OUTPATIENT encounter type
+if (isset($$encounter_class['LD_var'])&&!empty($$encounter_class['LD_var'])){
+	$eclass='<b>'.strtoupper($$encounter_class['LD_var']).'</b>';
+	$fcolor='red';
+}else{
+	$eclass= $encounter_class['name'];
+	$fcolor='#000000';
+} 
 ?>
+<td colspan=2   bgcolor="#eeeeee">
+<FONT SIZE=-1  FACE="Arial" color="<?php echo $fcolor ?>">&nbsp;<?php echo $eclass ?>
 </td>
 </tr>
 
@@ -226,11 +234,14 @@ if($encounter_class_nr==1){
 </td>
 <td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">&nbsp;
 <?php	
-	if($in_ward){
+/*	if($in_ward){
 		echo '<a href="'.$root_path.'modules/nursing/'.strtr('nursing-station-pass.php'.URL_APPEND.'&rt=pflege&edit=1&station='.$current_ward_name.'&location_id='.$current_ward_name.'&ward_nr='.$current_ward_nr,' ',' ').'">'.$current_ward_name.'</a>';
 	}else{
 		echo $current_ward_name;
-	} ?>
+	}	
+*/	
+	echo '<a href="'.$root_path.'modules/nursing/'.strtr('nursing-station-pass.php'.URL_APPEND.'&rt=pflege&edit=1&station='.$current_ward_name.'&location_id='.$current_ward_name.'&ward_nr='.$current_ward_nr,' ',' ').'">'.$current_ward_name.'</a>';
+ ?>
 </td>
 </tr>
 <?php
@@ -240,11 +251,13 @@ if($encounter_class_nr==1){
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo "$LDClinic/$LDDepartment" ?>:
 </td>
 <td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php	
-	if($in_dept){
+/*	if($in_dept){
 		echo '<a href="'.$root_path.'modules/ambulatory/'.strtr('amb_clinic_patients_pass.php'.URL_APPEND.'&rt=pflege&edit=1&dept='.$$current_dept_LDvar.'&location_id='.$$current_dept_LDvar.'&dept_nr='.$current_dept_nr,' ',' ').'">'.$$current_dept_LDvar.'</a>';
 	}else{
 		echo $$current_dept_LDvar;
-	} ?>
+	}
+*/echo '<a href="'.$root_path.'modules/ambulatory/'.strtr('amb_clinic_patients_pass.php'.URL_APPEND.'&rt=pflege&edit=1&dept='.$$current_dept_LDvar.'&location_id='.$$current_dept_LDvar.'&dept_nr='.$current_dept_nr,' ',' ').'">'.$$current_dept_LDvar.'</a>';
+?>
 </td>
 </tr>
 <?php

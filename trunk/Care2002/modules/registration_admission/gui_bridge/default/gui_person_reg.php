@@ -4,14 +4,14 @@ require('./gui_bridge/default/gui_std_tags.php');
 
 $error_fontcolor='red';
 
-function createTR($error_handler, $input_name, $ld_text, $input_val, $colspan = 1, $input_size = 35)
+function createTR($error_handler, $input_name, $ld_text, $input_val, $colspan = 1, $input_size = 35,$red=FALSE)
 {
    global $error_fontcolor, $toggle;
 
 ?>
 
 <tr>
-<td><FONT SIZE=-1  FACE="Arial,verdana,sans serif"><?php if ($error_handler) echo '<font color="'.$error_fontcolor.'">'; ?><?php echo $ld_text ?>:
+<td><FONT SIZE=-1  FACE="Arial,verdana,sans serif"><?php if ($error_handler||$red) echo '<font color="'.$error_fontcolor.'">'; ?><?php echo $ld_text ?>:
 </td>
 <td colspan=<?php echo $colspan; ?>><input name="<?php echo $input_name; ?>" type="text" size="<?php echo $input_size; ?>" value="<?php echo $input_val; ?>" >
 </td>
@@ -65,6 +65,10 @@ function chkform(d) {
 	}else if(d.addr_str_nr.value==""){
 		alert("<?php echo $LDPlsEnterBldgNr; ?>");
 		d.addr_str_nr.focus();
+		return false;
+	}else if(d.addr_zip.value==""){
+		alert("<?php echo $LDPlsEnterZip; ?>");
+		d.addr_zip.focus();
 		return false;
 	}else if(d.user_id.value==""){
 		alert("<?php echo $LDPlsEnterFullName; ?>");
@@ -150,7 +154,7 @@ require('./gui_bridge/default/gui_tabs_patreg.php');
 </tr>
 
 <tr>
-<td><FONT SIZE=-1  FACE="Arial"><?php echo $LDRegDate ?>:
+<td><FONT SIZE=-1  FACE="Arial"><font color=#ff0000><?php echo $LDRegDate ?></font>:
 </td>
 <td><FONT SIZE=-1  FACE="Arial" color="#800000">
 <?php     echo formatDate2Local($date_reg,$date_format); ?>
@@ -175,8 +179,8 @@ require('./gui_bridge/default/gui_tabs_patreg.php');
 </tr>
 
 <?php
-createTR($errornamelast, 'name_last', $LDLastName,$name_last);
-createTR($errornamefirst, 'name_first', $LDFirstName,$name_first);
+createTR($errornamelast, 'name_last', $LDLastName,$name_last,'','',TRUE);
+createTR($errornamefirst, 'name_first', $LDFirstName,$name_first,'','',TRUE);
 
 if (!$person_name_2_hide)
 {
@@ -205,7 +209,7 @@ createTR($errornameothers, 'name_others', $LDNameOthers,$name_others);
 ?>
 
 <tr>
-<td><FONT SIZE=-1  FACE="Arial"><?php if ($errordatebirth) echo "<font color=red>"; ?><?php echo $LDBday ?>:
+<td><FONT SIZE=-1  FACE="Arial"><?php if ($errordatebirth) echo "<font color=red>"; ?><font color=#ff0000>* <?php echo $LDBday ?></font>:
 </td>
 <td><FONT SIZE=-1  FACE="Arial">
 <input name="date_birth" type="text" size="15" maxlength=10 value="<?php 
@@ -235,8 +239,8 @@ createTR($errornameothers, 'name_others', $LDNameOthers,$name_others);
 <td>
 <FONT SIZE=-1  FACE="Arial">
 <?php 
-if ($errorsex) echo "<font color=red>";  
-echo $LDSex;
+if ($errorsex) echo "<font color=#ff0000>";  
+echo '<font color=#ff0000>* '.$LDSex.'</font>';
  ?>: <input name="sex" type="radio" value="m"  <?php if($sex=="m") echo "checked"; ?>><?php echo $LDMale ?>&nbsp;&nbsp;
 <input name="sex" type="radio" value="f"  <?php if($sex=="f") echo "checked"; ?>>
 <?php 
@@ -249,7 +253,7 @@ if ($errorsex) echo "</font>";
 <tr>
 <td><FONT SIZE=-1  FACE="Arial"><?php echo $LDBloodGroup ?>:
 </td>
-<td colspan=2><FONT SIZE=-1  FACE="Arial" color="red">
+<td colspan=2><FONT SIZE=-1  FACE="Arial">
 <input name="blood_group" type="radio" value="A"  <?php if($blood_group=='A') echo 'checked'; ?>><?php echo $LDA ?>&nbsp;&nbsp;
 <input name="blood_group" type="radio" value="B"  <?php if($blood_group=='B') echo 'checked'; ?>><?php echo $LDB ?>&nbsp;&nbsp;
 <input name="blood_group" type="radio" value="AB"  <?php if($blood_group=='AB') echo 'checked'; ?>><?php echo $LDAB ?>&nbsp;&nbsp;
@@ -259,7 +263,7 @@ if ($errorsex) echo "</font>";
 
 
 <tr>
-<td><FONT SIZE=-1  FACE="Arial"><?php if ($errorcivil) echo "<font color=red>"; ?><?php echo $LDCivilStatus ?>:
+<td><FONT SIZE=-1  FACE="Arial"><?php if ($errorcivil) echo "<font color=red>"; ?> <?php echo $LDCivilStatus ?></font>:
 </td>
 <td colspan=2><FONT SIZE=-1  FACE="Arial"> <input name="civil_status" type="radio" value="single"  <?php if($civil_status=="single") echo "checked"; ?>><?php echo $LDSingle ?>&nbsp;&nbsp;
 <input name="civil_status" type="radio" value="married"  <?php if($civil_status=="married") echo "checked"; ?>><?php echo $LDMarried ?>
@@ -271,16 +275,16 @@ if ($errorsex) echo "</font>";
 
  
 <tr>
-<td colspan=2><FONT SIZE=-1  FACE="Arial"><?php if ($erroraddress) echo "<font color=red>"; ?><?php echo $LDAddress ?>:
+<td colspan=2><FONT SIZE=-1  FACE="Arial"><?php if ($erroraddress) echo "<font color=red>"; ?><?php echo $LDAddress ?></font>:
 </td>
 </tr>
 
 <tr>
-<td><FONT SIZE=-1  FACE="Arial"><?php if ($errorstreet) echo "<font color=red>"; ?><?php echo $LDStreet ?>:
+<td><FONT SIZE=-1  FACE="Arial"><?php if ($errorstreet) echo "<font color=red>"; ?><font color=#ff0000>* <?php echo $LDStreet ?></font>:
 </td>
 <td><input name="addr_str" type="text" size="35" value="<?php echo $addr_str; ?>" >
 </td>
-<td>&nbsp;&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if ($errorstreetnr) echo "<font color=red>"; ?><?php echo $LDStreetNr ?>:<input name="addr_str_nr" type="text" size="10" value="<?php echo $addr_str_nr; ?>" >
+<td>&nbsp;&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if ($errorstreetnr) echo "<font color=red>"; ?><font color=#ff0000>* <?php echo $LDStreetNr ?></font>:<input name="addr_str_nr" type="text" size="10" value="<?php echo $addr_str_nr; ?>" >
 </td>
 </tr>
 
@@ -289,7 +293,7 @@ if ($errorsex) echo "</font>";
 </td>
 <td><input name="addr_citytown_name" type="text" size="35" value="<?php echo $addr_citytown_name; ?>" ><a href="javascript:popSearchWin('citytown','aufnahmeform.addr_citytown_nr','aufnahmeform.addr_citytown_name')"><img <?php echo createComIcon($root_path,'b-write_addr.gif','0') ?>></a>
 </td>
-<td>&nbsp;&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if ($errorzip) echo "<font color=red>"; ?><?php echo $LDZipCode ?>:<input name="addr_zip" type="text" size="10" value="<?php echo $addr_zip; ?>" >
+<td>&nbsp;&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if ($errorzip) echo "<font color=red>"; ?><font color=#ff0000>* <?php echo $LDZipCode ?>:<input name="addr_zip" type="text" size="10" value="<?php echo $addr_zip; ?>" >
 
 </td>
 </tr>
@@ -393,7 +397,7 @@ createTR($errorethnicorig, 'ethnic_orig', $LDEthnicOrigin,$ethnic_orig,2);
 
 ?>
 <tr>
-<td ><FONT SIZE=-1  FACE="Arial" ><FONT  SIZE=2  FACE="Arial"><?php echo $LDRegBy ?>
+<td ><FONT SIZE=-1  FACE="Arial" ><FONT  SIZE=2  FACE="Arial"><font color=#ff0000><?php echo $LDRegBy ?></font>
 </td>
 <td colspan=2><FONT SIZE=-1  FACE="Arial"><nobr>
 <input  name="user_id" type="text" value=<?php if ($user_id!='') echo '"'.$user_id.'"' ; else echo '"'.$HTTP_COOKIE_VARS[$local_user.$sid].'"' ?> size="35" >

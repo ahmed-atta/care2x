@@ -83,7 +83,7 @@ if($src=="arch")
  ?></b></font>
 <p><font size=2 face="verdana,arial" >
 <form action="#" >
-<?php if($src=="person") : ?>
+<?php if($src=="person") { ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a inserire <?php $person ?> tramite la lista di selezione rapida?</b>
 </font>
@@ -99,7 +99,7 @@ Come fare a inserire <?php $person ?> tramite la lista di selezione rapida?</b>
 <?php ucfirst($person) ?> non è nella lista di selezione rapida: come faccio a inserirla?</b>
 </font>
 <ul>       	
- 	<b>1: </b>Inserire il nome o il cognome di <?php $person > (bastano poche lettere) nel campo "<span style="background-color:yellow" > Ricerca nuovo <?php substr($person,3) ?>... </span>".<br>
+ 	<b>1: </b>Inserire il nome o il cognome di <?php $person ?>> (bastano poche lettere) nel campo "<span style="background-color:yellow" > Ricerca nuovo <?php substr($person,3) ?>... </span>".<br>
  	<b>2: </b>Premere il bottone <input type="button" value="OK"> per cercare <?php $person ?>.<br>
  	<b>3: </b>Alla fine della ricerca appariranno i risultati. Selezionare il nome o il cognome, oppure il link <nobr>"<span style="background-color:yellow" > <img <?php echo createComIcon('../','uparrowgrnlrg.gif','0') ?>> Assegna questa persona come <?php $person ?>... </span>"</nobr> corrispondente alla funzione da registrare.
 </ul>
@@ -121,9 +121,9 @@ Come fare a inserire <?php $person ?> tramite la lista di selezione rapida?</b>
 <ul>       	
  Per annullare, selezionare il bottone <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
-<?php endif ?>
-me") : ?>
-	<?php if($x1=="entry_out") : ?>
+<?php } ?>
+<?php if($src=="time") : ?>
+	<?php if($x1=="entry_out") { ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a registrare i tempi di ingresso ed uscita?</b>
 </font>
@@ -135,8 +135,8 @@ Come fare a registrare i tempi di ingresso ed uscita?</b>
 </ul><br>
  	<b>Nota: </b>E' possibile inserire più di un tempo di ingresso ed uscita prima di salvare.<p>
 </ul>
-	<?php endif ?>
-	<?php if($x1=="cut_close") : ?>
+	<?php } ?>
+	<?php if($x1=="cut_close") { ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a registrare tempi di taglio e sutura?</b>
 </font>
@@ -149,8 +149,8 @@ Come fare a registrare tempi di taglio e sutura?</b>
  	<b>Nota: </b>E' possibile inserire più tempi di taglio e sutura prima di salvare.<p>
 </ul>
 
-	<?php endif ?>
-	<?php if($x1=="wait_time") : ?>
+	<?php } ?>
+	<?php if($x1=="wait_time") { ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a registrare tempi di inattività (attesa)?</b>
 </font>
@@ -163,8 +163,8 @@ Come fare a registrare tempi di inattività (attesa)?</b>
  	<b>3: </b>Scegliere la motivazione dal riquadro di selezione nella terza colonna (Motivo).<p>
  	<b>Nota: </b>E' possibile inserire più tempi iniziali/finali e motivazioni prima di salvare.<p>
 </ul>
-	<?php endif ?>
-	<?php if($x1=="bandage_time") : ?>
+	<?php } ?>
+	<?php if($x1=="bandage_time") { ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a registrare tempi di fasciatura?</b>
 </font>
@@ -176,8 +176,8 @@ Come fare a registrare tempi di fasciatura?</b>
 </ul><br>
  	<b>Nota: </b>E' possibile inserire più tempi iniziali e finali prima di salvare.<p>
 </ul>
-	<?php endif ?>
-	<?php if($x1=="repos_time") : ?>
+	<?php } ?>
+	<?php if($x1=="repos_time") { ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a registrare tempi di riposizionamento?</b>
 </font>
@@ -189,7 +189,7 @@ Come fare a registrare tempi di riposizionamento?</b>
 </ul><br>
  	<b>Nota: </b>E' possibile inserire più tempi iniziali e finali prima di salvare.<p>
 </ul>
-	<?php endif ?>
+	<?php } ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a salvare le informazioni?</b>
 </font>

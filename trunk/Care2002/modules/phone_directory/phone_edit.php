@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.07 - 2003-08-29
+* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
 * GNU General Public License
-* Copyright 2002 Elpidio Latorilla
+* Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -88,6 +88,7 @@ if ($mode=='save'){
     }else{
 		$error=1;
 	}
+
 }elseif($user_origin=='pers'&&$nr){
 	if(!$employee->loadPersonellData($nr)) $mode='';
 }
@@ -226,17 +227,17 @@ if($user_origin=='pers'&&$employee->isPreLoaded()){
 <?php echo $LDEditFields[5] ?>
 <br>
 
-<input type=text name=bereich1 size="20" value="" maxlength=25><br>
+<input type=text name=bereich1 size="20" maxlength=25  value=""><br>
 </td>
 <td><FONT    SIZE=-1  FACE="Arial">
 <?php echo $LDEditFields[6] ?>
 <br>
-<input type=text name=bereich2 size="20" value="" maxlength=25><br>
+<input type=text name=bereich2 size="20" maxlength=25 value=""><br>
 </td>
 <td >
 <FONT    SIZE=-1  FACE="Arial">
 <?php echo $LDEditFields[14] ?><br>
-<input type=text name=zimmerno size="20" value="" maxlength=10><br>
+<input type=text name=zimmerno size="20" maxlength=10 value=""><br>
 </td>
 </tr>
 
@@ -245,15 +246,15 @@ if($user_origin=='pers'&&$employee->isPreLoaded()){
 <?php echo $LDEditFields[7] ?>
 <br>
 
-<input type=text name=inphone1 size="20" value="" maxlength=15><br>
+<input type=text name=inphone1 size="20" maxlength=15  value="<?php echo $employee->InPhone1() ?>"><br>
 </td>
 <td><FONT    SIZE=-1  FACE="Arial">
 <?php echo $LDEditFields[10] ?><br>
-<input type=text name=exphone1 size="20" value="" maxlength=25><br>
+<input type=text name=exphone1 size="20"  maxlength=25 value=""><br>
 </td>
 <td><FONT    SIZE=-1  FACE="Arial">
 <?php echo $LDEditFields[12] ?><br>
-<input type=text name=funk1 size="20" value="" maxlength=15><br>
+<input type=text name=funk1 size="20" maxlength=15 value="<?php echo $employee->Beeper1() ?>"><br>
 </td>
 </tr>
 
@@ -262,7 +263,7 @@ if($user_origin=='pers'&&$employee->isPreLoaded()){
 <FONT    SIZE=-1  FACE="Arial">
 <?php echo $LDEditFields[8] ?>
 <br>
-<input type=text name=inphone2 size="20" value="" maxlength=15><br>
+<input type=text name=inphone2 size="20" value="<?php echo $employee->InPhone2() ?>" maxlength=15><br>
 </td>
 <td><FONT    SIZE=-1  FACE="Arial">
 <?php echo $LDEditFields[11] ?><br>
@@ -271,7 +272,7 @@ if($user_origin=='pers'&&$employee->isPreLoaded()){
 <td >
 <FONT    SIZE=-1  FACE="Arial">
 <?php echo $LDEditFields[13] ?><br>
-<input type=text name=funk2 size="20" value="" maxlength=15><br>
+<input type=text name=funk2 size="20" value="<?php echo $employee->Beeper2() ?>" maxlength=15><br>
 </td>
 </tr>
 
@@ -280,7 +281,7 @@ if($user_origin=='pers'&&$employee->isPreLoaded()){
 <FONT    SIZE=-1  FACE="Arial">
 <?php echo $LDEditFields[9] ?>
 <br>
-<input type=text name=inphone3 size="20" value="" maxlength=15><br>
+<input type=text name=inphone3 size="20" maxlength=15<?php echo $employee->InPhone3() ?>><br>
 </td>
 <td>&nbsp;
 </td>

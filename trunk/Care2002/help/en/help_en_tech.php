@@ -41,7 +41,7 @@ How to send a request for repair service?</b></font>
  <b>Step 3: </b>Enter your personnel number in the <nobr>"<span style="background-color:yellow" > Personnel nr.: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> field.<br>
  <b>Step 4: </b>Enter your telephone number in the <nobr>"<span style="background-color:yellow" > Telephone nr. <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> field in case the technical support department has inquiries regarding your request.<p>
  <b>Step 5: </b>Type the description of the damage in the <nobr>"<span style="background-color:yellow" > Please describe the nature of the damage: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> field.<br>
- <b>Step 6: </b>Click the <input type="button" value="Send"> button to send your request. <br>
+ <b>Step 6: </b>Click the <img <?php echo createLDImgSrc('../','abschic.gif','0') ?>> button to send your request. <br>
 </ul>
 <b>Note</b>
 <ul> If you decide to close the request form click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.

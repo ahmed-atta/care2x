@@ -13,9 +13,9 @@ switch($HTTP_SESSION_VARS['sess_dicom_viewer']){
 				# Default viewer
 }
 
-/*** CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
+/*** CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
 * GNU General Public License
-* Copyright 2002 Elpidio Latorilla
+* Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file 'copy_notice.txt' for the licence notice

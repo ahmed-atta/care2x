@@ -5,7 +5,8 @@
 
 </head>
 <body onLoad="if (window.focus) window.focus()" marginheight=0 marginwidht=0 leftmargin=0 topmargin=0>
-<img <?php echo createLDImgSrc('../','help_main.gif','0') ?>><p>
+ <img src="../help/id/img/id_carelogo_help.png"><p>
+<p>
 <font face="Verdana, Arial" size=2>
 <blockquote>
 <img <?php echo createComIcon('../','butft2_d.gif') ?>><p>

@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.07 - 2003-08-29
+* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
 * GNU General Public License
-* Copyright 2002 Elpidio Latorilla
+* Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -64,8 +64,7 @@ require($root_path.'include/inc_passcheck_head.php');
 
 <P>
 <?php
- switch($target)
-{
+switch($target){
 	case 'entry':$buf=$LDAdmission; break;
 	case 'search':$buf=$LDAdmTargetSearch; break;
 	case 'archiv':$buf=$LDAdmTargetArchive; break;

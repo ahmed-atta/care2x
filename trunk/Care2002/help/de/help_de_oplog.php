@@ -1,8 +1,10 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+?>
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
 OP Logbuch - 
-<?
+<?php
 if($src=="create")
 {
 	switch($x1)
@@ -71,52 +73,52 @@ if($src=="arch")
  ?></b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
-<? if($src=="person") : ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
-Wie wähle ich den <?=$person ?> aus der "Schnellauswahlliste" aus?</b>
+<?php if($src=="person") : ?>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
+Wie wähle ich den <?php echo $person ?> aus der "Schnellauswahlliste" aus?</b>
 </font>
 <ul>       	
- 	<b>Achtung! </b>Wenn der <?=$person ?> bei einer vergangenen OP ausgewählt wurde, wird sein Name in der Liste auftauchen.<p>
+ 	<b>Achtung! </b>Wenn der <?php echo $person ?> bei einer vergangenen OP ausgewählt wurde, wird sein Name in der Liste auftauchen.<p>
  	<b>Schritt 1: </b>Kontrolliere ob die Funktion dieser Person mit der Angabe im Auswahlfeld "<span style="background-color:yellow" >OP Funktion</span>" 
 	übereinstimmt. Falls es nicht der Fall ist, wähle seine richtige Funktion aus.<br>
  	<b>Schritt 2: </b>Klickt den Namen, oder den Vornamen, oder die Option
-	<nobr>"<span style="background-color:yellow" > <img src="../img/upArrowGrnLrg.gif" width=16 height=16 border=0>
-	 Diese Person als <?=$person ?> eintragen... </span>"</nobr> an.
+	<nobr>"<span style="background-color:yellow" > <img <?php echo createComIcon('../','uparrowgrnlrg.gif','0') ?>>
+	 Diese Person als <?php echo $person ?> eintragen... </span>"</nobr> an.
 	Diese Person wird in die Liste "Aktuelle Angaben" sofort eingetragen.<p>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
-Der <?=ucfirst($person) ?> ist nicht in der "Schnellauswahlliste". Wie trage ich den <?=$person ?> ein?</b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
+Der <?php echo ucfirst($person) ?> ist nicht in der "Schnellauswahlliste". Wie trage ich den <?php echo $person ?> ein?</b>
 </font>
 <ul>       	
- 	<b>Schritt 1: </b>Gibt entweder den vollständigen Name des <?=$person ?> oder die erste Zeichen in das Feld "<span style="background-color:yellow" > Einen neuen <?=$person ?> suchen </span>" ein.<br>
+ 	<b>Schritt 1: </b>Gibt entweder den vollständigen Name des <?php echo $person ?> oder die erste Zeichen in das Feld "<span style="background-color:yellow" > Einen neuen <?php echo $person ?> suchen </span>" ein.<br>
  	<b>Schritt 2: </b>Klickt den <input type="button" value="OK"> Knopf an um die Suche zu starten.<br>
  	<b>Schritt 3: </b>Das Ergebnis wird aufgelistet. Clikt den Namen, oder Vornamen, oder die Option 
-	<nobr>"<span style="background-color:yellow" > <img src="../img/upArrowGrnLrg.gif" width=16 height=16 border=0>
-	 Diese Person als <?=$person ?> eintragen..</span>"</nobr> der Person an.
+	<nobr>"<span style="background-color:yellow" > <img <?php echo createComIcon('../','uparrowgrnlrg.gif','0') ?>>
+	 Diese Person als <?php echo $person ?> eintragen..</span>"</nobr> der Person an.
 </ul>
 
 
-<img src="../img/frage.gif" border=0 align="absmiddle"> 
-<font color="#990000"><b> Wie entferne ich den <?=$person ?> aus der Liste "Aktuelle Angaben"?</b></font> 
+<img <?php echo createComIcon('../','frage.gif','0') ?>> 
+<font color="#990000"><b> Wie entferne ich den <?php echo $person ?> aus der Liste "Aktuelle Angaben"?</b></font> 
 <ul>       	
- 	<b>Schritt 1: </b>Klickt das Symbol <img src="../img/delete2.gif" border=0 align="absmiddle"> vor dem Namen.<br>
+ 	<b>Schritt 1: </b>Klickt das Symbol <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> vor dem Namen.<br>
  
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> 
+<img <?php echo createComIcon('../','frage.gif','0') ?>> 
 <font color="#990000"><b>Ich bin fertig. Wie komme ich zum OP Logbuch zurück?</b></font> 
 <ul>       	
- 	<b>Schritt 1: </b>Klickt den <img src="../img/de/de_close2.gif" border=0 align="absmiddle"> Knopf an.<br>
+ 	<b>Schritt 1: </b>Klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle"> Knopf an.<br>
  
 </ul>
-<img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b> Achtung!</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Achtung!</b></font> 
 <ul>       	
-Wenn Sie abbrechen möchten klickt den <img src="../img/de/de_cancel.gif" border=0> Knopf an.
+Wenn Sie abbrechen möchten klickt den <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> Knopf an.
 </ul>
-<? endif ?>
+<?php endif ?>
 
-<? if($src=="time") : ?>
-	<? if($x1=="entry_out") : ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<?php if($src=="time") : ?>
+	<?php if($x1=="entry_out") : ?>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie trage ich die Ein- bzw. Ausschleussezeiten ein?</b>
 </font>
 <ul>       	
@@ -128,9 +130,9 @@ Wie trage ich die Ein- bzw. Ausschleussezeiten ein?</b>
  	<b>Achtung! </b>Sie können mehrere Zeitangaben eintragen bevor Sie die Daten speichern.<p>
 </ul>
 
-	<? endif ?>
-	<? if($x1=="cut_close") : ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<?php endif ?>
+	<?php if($x1=="cut_close") : ?>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie trage ich die Schnitt- bzw. Nahtzeiten ein?</b>
 </font>
 <ul>       	
@@ -142,9 +144,9 @@ Wie trage ich die Schnitt- bzw. Nahtzeiten ein?</b>
  	<b>Achtung! </b>Sie können mehrere Zeitangaben eintragen bevor Sie die Daten speichern.<p>
 </ul>
 
-	<? endif ?>
-	<? if($x1=="wait_time") : ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<?php endif ?>
+	<?php if($x1=="wait_time") : ?>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie trage ich die Wartezeiten (Leerlauf) ein?</b>
 </font>
 <ul>       	
@@ -157,9 +159,9 @@ Wie trage ich die Wartezeiten (Leerlauf) ein?</b>
  	<b>Achtung! </b>Sie können mehrere Zeitangaben eintragen und Gründen auswählen bevor Sie die Daten speichern.<p>
 </ul>
 
-	<? endif ?>
-	<? if($x1=="bandage_time") : ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<?php endif ?>
+	<?php if($x1=="bandage_time") : ?>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie trage ich die Gipszeiten ein?</b>
 </font>
 <ul>       	
@@ -171,9 +173,9 @@ Wie trage ich die Gipszeiten ein?</b>
  	<b>Achtung! </b>Sie können mehrere Zeitangaben eintragen bevor Sie die Daten speichern.<p>
 </ul>
 
-	<? endif ?>
-	<? if($x1=="repos_time") : ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<?php endif ?>
+	<?php if($x1=="repos_time") : ?>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie trage ich die Repositionszeiten ein?</b>
 </font>
 <ul>       	
@@ -185,15 +187,15 @@ Wie trage ich die Repositionszeiten ein?</b>
  	<b>Achtung! </b>Sie können mehrere Zeitangaben eintragen bevor Sie die Daten speichern.<p>
 </ul>
 
-	<? endif ?>
-	<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<?php endif ?>
+	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie speichere ich die Zeitangaben?</b>
 </font>
 <ul>       	
- 	<b>Schritt 1: </b>Klickt den <img src="../img/de/de_savedisc.gif" border=0> Knopf an.<br>
- 	<b>Schritt 2: </b>Wenn Sie fertig sind klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an um das Fenster zu schliessen und in das OP Logbuch zurück zu gehen.<br>
+ 	<b>Schritt 1: </b>Klickt den <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> Knopf an.<br>
+ 	<b>Schritt 2: </b>Wenn Sie fertig sind klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an um das Fenster zu schliessen und in das OP Logbuch zurück zu gehen.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> 
+<img <?php echo createComIcon('../','frage.gif','0') ?>> 
 <font color="#990000">
 <b> Ich möchte die Angaben entfernen aber der Knopf "Eingabe verwerfen" scheint nicht zu funktionieren. Was soll ich tun?</b></font> 
 <ul>       	
@@ -201,41 +203,41 @@ Wie speichere ich die Zeitangaben?</b>
 	Angaben löschen möchten folgen Sie diese Anweisung:<p>
  	<b>Schritt 1: </b>Klicken Sie das Feld der Zeitangabe an die Sie löschen möchten.<br>
  	<b>Schritt 2: </b>Entfernen Sie manuell die Zeitangabe. Benutzen Sie dafür die "Entf" und "Rücktaste" der Tastatur.<br>
- 	<b>Schritt 3: </b>Anschliessend klicken Sie den <img src="../img/de/de_savedisc.gif" border=0> Knopf an um die Änderung zu speichern.<br>
+ 	<b>Schritt 3: </b>Anschliessend klicken Sie den <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> Knopf an um die Änderung zu speichern.<br>
  
 </ul>
-<img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b> Achtung!</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Achtung!</b></font> 
 <ul>       	
-Wenn Sie abbrechen möchten klicken Sie den <img src="../img/de/de_cancel.gif" border=0> Knopf an.
+Wenn Sie abbrechen möchten klicken Sie den <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> Knopf an.
 </ul>
-<? endif ?>
+<?php endif ?>
 
 
-<? if($src=="create") : ?>
-	<? if($x1=="logmain") : ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<?php if($src=="create") : ?>
+	<?php if($x1=="logmain") : ?>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie bearbeiten ich ein OP Dokument?</b>
 </font>
 <ul>       	
- 	<b>Schritt 1: </b>Klicken Sie den <img src="../img/dwnArrowGrnLrg.gif" width=16 height=16 border=0> Knopf der OP Eintragung an.<br>
+ 	<b>Schritt 1: </b>Klicken Sie den <img <?php echo createComIcon('../','dwnarrowgrnlrg.gif','0') ?>> Knopf der OP Eintragung an.<br>
  	<b>Schritt 2: </b>Die Patientendaten und OP Einträge werden in den Bearbeitungsrahmen übertragen. Sie können jetzt das OP Dokument bearbeiten. Folgen Sie die
 	Anweisungen wie man ein OP dokumentiert.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie öffne ich die Patientenmappe?</b>
 </font>
 <ul>       	
- 	<b>Schritt 1: </b>Klicken Sie den <img src="../img/info3.gif" border=0> Knopf vor der Fallnummer an.<br>
+ 	<b>Schritt 1: </b>Klicken Sie den <img <?php echo createComIcon('../','info3.gif','0') ?>> Knopf vor der Fallnummer an.<br>
  	<b>Schritt 2: </b>Die Patientenmappe öffnet sich<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie kann ich in anderen OP Saal bzw. andere OP Abteilung wechseln?</b>
 </font>
 <ul>       	
  	<b>Schritt 1: </b>Wähle die OP Abteilung aus dem Auswahlfeld 
 				<select name="dept" size=1>
-				<?
-					$Or2Dept=get_meta_tags("../global_conf/resolve_or2ordept.pid");
+				<?php
+$Or2Dept=get_meta_tags("../global_conf/resolve_or2ordept.pid");
 					$opabt=get_meta_tags("../global_conf/$lang/op_tag_dept.pid");
 
 					while(list($x,$v)=each($opabt))
@@ -252,9 +254,8 @@ Wie kann ich in anderen OP Saal bzw. andere OP Abteilung wechseln?</b>
 <br>
  	<b>Schritt 2: </b>Wähle den OP Saal aus dem Auswahlfeld 
 			<select name="saal" size=1 >
-				<?
-
-					while(list($x,$v)=each($Or2Dept))
+				<?php
+while(list($x,$v)=each($Or2Dept))
 					{
 						print'
 					<option value="'.$x.'"';
@@ -266,7 +267,7 @@ Wie kann ich in anderen OP Saal bzw. andere OP Abteilung wechseln?</b>
 <br>
  	<b>Schritt 3: </b>Klickt den <input type="button" value="Wechseln"> Knopf an.<br>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie kann ich die OP Dokumente von anderen Tagen zeigen lassen?</b>
 </font>
 <ul>       	
@@ -278,10 +279,10 @@ Wie kann ich die OP Dokumente von anderen Tagen zeigen lassen?</b>
 
 <hr>
 
-	<? endif ?>
+	<?php endif ?>
 	
-	<? if($x2=="material") : ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<?php if($x2=="material") : ?>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie kann ich ein OP Material dokumentieren?</b>
 </font>
 <ul>       	
@@ -295,44 +296,44 @@ Wie kann ich ein OP Material dokumentieren?</b>
  	<b>Schritt 2: </b>Klickt den <input type="button" value="OK"> Knopf an oder drucken Sie die "Enter" Taste der Tastatur um das Material zu suchen.<p> 
 <ul>       	
  	<b>Achtung! </b>Wenn die Suche das Material findet wird es sofort in das Dokument übernommen. Eine Materialliste wird gezeigt.<p> 
- 	<b>Achtung! </b>Wenn die Suche mehrere Produkte findet wird eine Liste gezeigt. Klickt den <img src="../img/bul_arrowGrnLrg.gif" width=16 height=16 border=0> 
+ 	<b>Achtung! </b>Wenn die Suche mehrere Produkte findet wird eine Liste gezeigt. Klickt den <img <?php echo createComIcon('../','bul_arrowgrnlrg.gif','0') ?>> 
 	Knopf oder die Artikelnummer oder den Namen des Artikels an um ihn auszuwählen.<p> 
 	</ul>
  	<b>Schritt 3: </b>Wenn der Produktartikel in der Materialliste eingetragen ist können Sie die Stückzahl im Feld "<span style="background-color:yellow" > Anzahl</span>" ändern (falls erforderlich).<p> 
 <ul>       	
  	<b>Achtung! </b>Wenn Sie die Angabe im Feld "Anzahl" geändert haben zeigen sich die beiden Knöpfe "Speichern" und "Eingabe verwerfen"  an.<p> 
 	</ul>
- 	<b>Schritt 4: </b>Clickt den <img src="../img/de/de_savedisc.gif" border=0> Knopf an wenn Sie die Änderung speichern möchten.<p> 
+ 	<b>Schritt 4: </b>Clickt den <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> Knopf an wenn Sie die Änderung speichern möchten.<p> 
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie entferne ich ein Artikel aus der Materialliste?</b>
 </font>
 <ul> 
- 	<b>Schritt 1: </b>Klicken Sie das Symbol <img src="../img/delete2.gif" border=0 align="absmiddle"> nach dem Artikel an.<br> 
+ 	<b>Schritt 1: </b>Klicken Sie das Symbol <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> nach dem Artikel an.<br> 
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Das Material wurde nicht gefunden. Kann ich ein Material manuell eintragen?</b>
 </font>
 <ul> Ja<br>
- 	<b>Schritt 1: </b>Clickt die Option "<span style="background-color:yellow" > <img src="../img/accessrights.gif" width=35 height=35 border=0> Artikel manuell eingeben. Click hier. </span>" an.<br> 
+ 	<b>Schritt 1: </b>Clickt die Option "<span style="background-color:yellow" > <img <?php echo createComIcon('../','accessrights.gif','0') ?>> Artikel manuell eingeben. Click hier. </span>" an.<br> 
  	<b>Schritt 2: </b>Tragen Sie manuell die Information über das Material in die entsprechende Eingabefelder ein.<p> 
- 	<b>Schritt 3: </b>Anschliessend klicken Sie den <img src="../img/de/de_savedisc.gif"  border=0> Knopf an um das Material zu speichern.<p> 
+ 	<b>Schritt 3: </b>Anschliessend klicken Sie den <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> Knopf an um das Material zu speichern.<p> 
 </ul>
-<img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b> Achtung!</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Achtung!</b></font> 
 <ul>       	
-Wenn Sie abbrechen möchten klicken Sie den <img src="../img/de/de_cancel.gif" border=0> Knopf an.
+Wenn Sie abbrechen möchten klicken Sie den <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> Knopf an.
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie lasse ich das OP Logbuch zeigen?</b>
 </font>
 <ul> 
- 	<b>Schritt 1: </b>Klickt die Option "<span style="background-color:yellow" > <img src="../img/manfldr.gif" border=0> Logbuch einblenden. </span>" an.<br> 
+ 	<b>Schritt 1: </b>Klickt die Option "<span style="background-color:yellow" > <img <?php echo createComIcon('../','manfldr.gif','0') ?>> Logbuch einblenden. </span>" an.<br> 
 </ul>
 <hr>
-	<? endif ?>
+	<?php endif ?>
 
-	<? if(($x1=="")||($x1=="fresh")) : ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<?php if(($x1=="")||($x1=="fresh")) : ?>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie erstelle ich eine neue OP Dokumentation?</b>
 </font>
 <ul>       	
@@ -347,19 +348,19 @@ Wie erstelle ich eine neue OP Dokumentation?</b>
  	<b>Achtung! </b>Wenn die Suche den Patient findet werden seine Grunddaten sofort in den Eingabemodus übernommen.<p> 
  	<b>Achtung! </b>Wenn die Suche mehrere Patienten findet wird eine Liste gezeigt. Klickt den Namen des Patienten um ihn auszuwählen.<p> 
 	</ul>
- 	<b>Schritt 3: </b>Klickt den <img src="../img/de/de_hilfe-r.gif" border=0> Knopf nochmal an um weitere Hilfsanweisung zu lesen.<p> 
+ 	<b>Schritt 3: </b>Klickt den <img <?php echo createLDImgSrc('../','hilfe-r.gif','0') ?>> Knopf nochmal an um weitere Hilfsanweisung zu lesen.<p> 
 
 </ul>
 
-	<? else : ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+	<?php else : ?>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie trage ich eine Diagnose ein?</b>
 </font>
 <ul>       	
  	<b>Schritt 1: </b>Schreibe die Diagnose in das Feld "<span style="background-color:yellow" > Diagnose: </span>" direkt ein.<br>
- 	<b>Schritt 2: </b>Klickt den <img src="../img/de/de_savedisc.gif" border=0> Knopf an.<br>
+ 	<b>Schritt 2: </b>Klickt den <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> Knopf an.<br>
 	</ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie trage ich einen Operateur ein?</b>
 </font>
 <ul>       	
@@ -367,7 +368,7 @@ Wie trage ich einen Operateur ein?</b>
  	<b>Schritt 2: </b>Ein Fenster mit Eingabefelder öffnet sich.<br>
  	<b>Schritt 3: </b>Folgen Sie die Anweisungen in diesem Fenster oder clicken Sie den "Hilfe" Knopf an.<br>
 	</ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie trage ich einen Assistent ein?</b>
 </font>
 <ul>       	
@@ -375,7 +376,7 @@ Wie trage ich einen Assistent ein?</b>
  	<b>Schritt 2: </b>Ein Fenster mit Eingabefelder öffnet sich.<br>
  	<b>Schritt 3: </b>Folgen Sie die Anweisungen in diesem Fenster oder clicken Sie den "Hilfe" Knopf an.<br>
 	</ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie trage ich einen Instrumentierenden ein?</b>
 </font>
 <ul>       	
@@ -383,7 +384,7 @@ Wie trage ich einen Instrumentierenden ein?</b>
  	<b>Schritt 2: </b>Ein Fenster mit Eingabefelder öffnet sich.<br>
  	<b>Schritt 3: </b>Folgen Sie die Anweisungen in diesem Fenster oder clicken Sie den "Hilfe" Knopf an.<br>
 	</ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie trage ich einen Springer ein?</b>
 </font>
 <ul>       	
@@ -391,7 +392,7 @@ Wie trage ich einen Springer ein?</b>
  	<b>Schritt 2: </b>Ein Fenster mit Eingabefelder öffnet sich.<br>
  	<b>Schritt 3: </b>Folgen Sie die Anweisungen in diesem Fenster oder clicken Sie den "Hilfe" Knopf an.<br>
 	</ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie trage ich die Narkoseart ein?</b>
 </font>
 <ul>       	
@@ -411,10 +412,10 @@ Wie trage ich die Narkoseart ein?</b>
  	<li><b>DS: </b>Gleicht dem AS<br>
  	<li><b>Plexus: </b>Lokale Anästhesie des Nervus Plexus<br>
 	</ul>
- 	<b>Schritt 2: </b>Klickt den <img src="../img/de/de_savedisc.gif" border=0> Knopf an.<br>
+ 	<b>Schritt 2: </b>Klickt den <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> Knopf an.<br>
 
 	</ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie trage ich einen Narkosearzt ein?</b>
 </font>
 <ul>       	
@@ -422,7 +423,7 @@ Wie trage ich einen Narkosearzt ein?</b>
  	<b>Schritt 2: </b>Ein Fenster mit Eingabefelder öffnet sich.<br>
  	<b>Schritt 3: </b>Folgen Sie die Anweisungen in diesem Fenster oder clicken Sie den "Hilfe" Knopf an.<br>
 	</ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie trage ich Ein- bzw. Ausschleussezeiten, oder Schnitt- bzw. Nahtzeiten direkt ein?</b>
 </font>
 <ul>       	
@@ -431,26 +432,26 @@ Wie trage ich Ein- bzw. Ausschleussezeiten, oder Schnitt- bzw. Nahtzeiten direkt
  	<b>Schnittzeit: </b>Trage die Zeit in das Feld "<span style="background-color:yellow" > Schnitt: <input type="text" name="t" size=5 maxlength=5> </span>" ein.<br>
  	<b>Nahtzeit: </b>Trage die Zeit in das Feld "<span style="background-color:yellow" > Naht: <input type="text" name="t" size=5 maxlength=5> </span>" ein.<br>
 	</ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie trage ich gleichzeitig mehrere Zeitangaben ein?</b>
 </font>
 <ul> <b>Schritt 1: </b><p>    	
  	<b>Ein-/Ausschleußezeiten: </b>
- 	Klickt die Option "<span style="background-color:yellow" > Ein/Aus <img src="../img/bul_arrowGrnSm.gif" width=12 height=12 border=0 align="absmiddle"> </span>" auf der unteren linken Ecke.<p>
+ 	Klickt die Option "<span style="background-color:yellow" > Ein/Aus <img <?php echo createComIcon('../','bul_arrowgrnsm.gif','0','absmiddle') ?>> </span>" auf der unteren linken Ecke.<p>
  	<b>Schnitt-/Nahtzeiten: </b>
- 	Klickt die Option "<span style="background-color:yellow" > Schnitt/Nahtt <img src="../img/bul_arrowGrnSm.gif" width=12 height=12 border=0 align="absmiddle"> </span>" auf der unteren linken Ecke.<p>
+ 	Klickt die Option "<span style="background-color:yellow" > Schnitt/Nahtt <img <?php echo createComIcon('../','bul_arrowgrnsm.gif','0','absmiddle') ?>> </span>" auf der unteren linken Ecke.<p>
  	<b>Wartezeiten: </b>
- 	Klickt die Option "<span style="background-color:yellow" > Wartezeit <img src="../img/bul_arrowGrnSm.gif" width=12 height=12 border=0 align="absmiddle"> </span>" auf der unteren linken Ecke.<p>
+ 	Klickt die Option "<span style="background-color:yellow" > Wartezeit <img <?php echo createComIcon('../','bul_arrowgrnsm.gif','0','absmiddle') ?>> </span>" auf der unteren linken Ecke.<p>
  	<b>Gipszeiten </b>
- 	Klickt die Option "<span style="background-color:yellow" > Gipsen <img src="../img/bul_arrowGrnSm.gif" width=12 height=12 border=0 align="absmiddle"> </span>" auf der unteren linken Ecke.<p>
+ 	Klickt die Option "<span style="background-color:yellow" > Gipsen <img <?php echo createComIcon('../','bul_arrowgrnsm.gif','0','absmiddle') ?>> </span>" auf der unteren linken Ecke.<p>
  	<b>Repositionszeiten: </b>
- 	Klickt die Option "<span style="background-color:yellow" > Reposition <img src="../img/bul_arrowGrnSm.gif" width=12 height=12 border=0 align="absmiddle"> </span>" auf der unteren linken Ecke.<p>
+ 	Klickt die Option "<span style="background-color:yellow" > Reposition <img <?php echo createComIcon('../','bul_arrowgrnsm.gif','0','absmiddle') ?>> </span>" auf der unteren linken Ecke.<p>
  	<b>Schritt 2: </b>Ein Fenster mit Eingebefeldern öffnet sich. <br>
  	<b>Schritt 3: </b>Folgen Sie die Anweisungen in diesem Fenster oder clicken Sie den "Hilfe" Knopf an.<br>
 	</ul>
 
 	</ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie trage ich die Zeit in den graphischen Zeitskala?</b>
 </font>
 <ul> <b>Schritt 1: </b>Bringe die Maus auf die Uhrzeit  auf dem Zeitskala.<br>
@@ -458,48 +459,48 @@ Wie trage ich die Zeit in den graphischen Zeitskala?</b>
 <b>Achtung!</b> Der erste Klick wird die Anfangszeit sein, der zweite Klick die Endzeit, der dritte Klick die zweite Anfangszeit, und so weiter und so forth.
 	</ul>
 
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie gebe ich die Therapie bzw. Eingriff ein?</b>
 </font>
 <ul>       	
  	<b>Schritt 1: </b>Schreibe die Therapie bzw. Eingriff direkt in das Feld "<span style="background-color:yellow" > Therapie/Eingriff: </span>" ein.<br>
- 	<b>Schritt 2: </b>Klickt den <img src="../img/de/de_savedisc.gif" border=0> Knopf an.<br>
+ 	<b>Schritt 2: </b>Klickt den <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> Knopf an.<br>
 	</ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie gebe ich die Ergebnisse, Beobachtungen, zusätzliche Angaben ein?</b>
 </font>
 <ul>       	
  	<b>Schritt 1: </b>Schreibe sie direkt in das Feld "<span style="background-color:yellow" > Ausgang: </span>" ein.<br>
- 	<b>Schritt 2: </b>Klickt den <img src="../img/de/de_savedisc.gif" border=0> Knopf an.<br>
+ 	<b>Schritt 2: </b>Klickt den <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> Knopf an.<br>
 	</ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie speichere ich das Dokument?</b>
 </font>
 <ul>       	
- 	<b>Schritt 1: </b>Klickt den <img src="../img/de/de_savedisc.gif" border=0> Knopf an.<br>
+ 	<b>Schritt 1: </b>Klickt den <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> Knopf an.<br>
 	</ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie starte ich ein neues Dokument für eine neue OP?</b>
 </font>
 <ul>       	
- 	<b>Schritt 1: </b>Klickt den <img src="../img/de/de_newpat2.gif" border=0> Knopf an.<br>
- 	<b>Schritt 2: </b>Klick nochmal den <img src="../img/de/de_hilfe-r.gif" border=0> Knopf an um weitere Hilfsanweisungen zu lesen.<br>
+ 	<b>Schritt 1: </b>Klickt den <img <?php echo createLDImgSrc('../','newpat2.gif','0') ?>> Knopf an.<br>
+ 	<b>Schritt 2: </b>Klick nochmal den <img <?php echo createLDImgSrc('../','hilfe-r.gif','0') ?>> Knopf an um weitere Hilfsanweisungen zu lesen.<br>
 	</ul>
 	
 <b>Achtung!</b>
-<ul> Wenn Sie schliessen möchten klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an.
+<ul> Wenn Sie schliessen möchten klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.
 </ul>
-	<? endif ?>
+	<?php endif ?>
 
-<? endif ?>
-
-
-
-<? if($src=="search") : ?>
-	<? if(($x1=="fresh")||($x1=="")) : ?>
+<?php endif ?>
 
 
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+
+<?php if($src=="search") : ?>
+	<?php if(($x1=="fresh")||($x1=="")) : ?>
+
+
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie finde ich ein OP Dokument von einem Patient?</b>
 </font>
 <ul>       	
@@ -513,35 +514,35 @@ Wie finde ich ein OP Dokument von einem Patient?</b>
 	OP Dokument zu sehen.<p> 
 	</ul>
 </ul>
-	<? endif ?>
-<? if(($x1=="search")&&($x3!="1")) : ?>
+	<?php endif ?>
+<?php if(($x1=="search")&&($x3!="1")) : ?>
 	
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie wähle ich ein Dokument zum sehen aus?</b>
 </font>
 <ul>       	
  	<b>Achtung! </b> Klickt den Namen von dem Patient an.<p> 
 </ul>
 
-	<? endif ?>
-<? if(($x1=="get")||($x3=="1")) : ?>
+	<?php endif ?>
+<?php if(($x1=="get")||($x3=="1")) : ?>
 
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie bearbeite ich ein Dokument das gerade angezeigt wird?</b>
 </font>
 <ul>       	
- 	<b>Schritt 1: </b>Klickt den  <img src="../img/bul_arrowGrnLrg.gif" width=16 height=16 border=0> Knopf der OP Eintragung an.<br>
+ 	<b>Schritt 1: </b>Klickt den  <img <?php echo createComIcon('../','bul_arrowgrnlrg.gif','0') ?>> Knopf der OP Eintragung an.<br>
  	<b>Schritt 2: </b>Wenn der Bearbeitungsmodus aktiv ist können Sie die OP Angaben bearbeiten.<p> 
 	</ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie öffne ich die Patientenmappe?</b>
 </font>
 <ul>       	
- 	<b>Schritt 1: </b>Klicken Sie den <img src="../img/info3.gif" border=0> Knopf vor der Fallnummer an.<br>
+ 	<b>Schritt 1: </b>Klicken Sie den <img <?php echo createComIcon('../','info3.gif','0') ?>> Knopf vor der Fallnummer an.<br>
  	<b>Schritt 2: </b>Die Patientenmappe öffnet sich<br>
 </ul>
-<? endif ?>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<?php endif ?>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie suche ich weiter?</b>
 </font>
 <ul>       	
@@ -549,30 +550,30 @@ Wie suche ich weiter?</b>
 	"<span style="background-color:yellow" > Stichwort: <input type="text" name="m" size=20 maxlength=20> </span>" ein. <br>
  	<b>Schritt 2: </b>Klickt den <input type="button" value="Suchen"> Knopf an.<p> 
 </ul>
-<img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b> Achtung!</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Achtung!</b></font> 
 <ul>       	
-<ul> Wenn Sie schliessen möchten klickt den <img src="../img/de/de_close2.gif" border=0> Knopf an.
+<ul> Wenn Sie schliessen möchten klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.
 </ul>
-<? endif ?>
+<?php endif ?>
 
-<? if($src=="arch") : ?>
-	<? if($x2=="1") : ?>
-<img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b> Achtung! Die letzte Eintragung im OP Logbuch.</b></font> 
+<?php if($src=="arch") : ?>
+	<?php if($x2=="1") : ?>
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Achtung! Die letzte Eintragung im OP Logbuch.</b></font> 
 <ul>  Jedes mal wenn Sie ins Archiv gehen, werden die letzte Eintragungen sofort angezeigt.
 </ul>
-	<? endif ?>
-	<? if(($x3=="")&&($x1!="0")) : ?>
-<img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b> Keine OP an diesem Tag.</b></font> 
+	<?php endif ?>
+	<?php if(($x3=="")&&($x1!="0")) : ?>
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Keine OP an diesem Tag.</b></font> 
 <ul>       	
 Klicken Sie die "Optionen" an um das Optionfenster zu öffnen.<br>
 Klicken Sie die "Suchen" an um in den Suchmodus zu gehen.</ul>
 	
-	<? endif ?>
+	<?php endif ?>
 	
 
 
 
-<img src="../img/frage.gif" border=0 align="absmiddle"> 
+<img <?php echo createComIcon('../','frage.gif','0') ?>> 
 <font color="#990000"><b>Wie finde ich die OP Dokumente von einem anderen Datum im Archiv?.</b></font>
 <ul>
  <b>Um den Vortag zu zeigen: </b>Klickt die Option "<span style="background-color:yellow" > << Vortag </span>" auf der oberen linken Spalte an. 
@@ -580,7 +581,7 @@ Klicken Sie die "Suchen" an um in den Suchmodus zu gehen.</ul>
  <b>Um den nächsten Tag zu zeigen: </b>Klickt die Option "<span style="background-color:yellow" > Folgenden Tag >> </span>" auf der oberen rechten Spalte an. 
 				Klick diese Option so oft wie nötig an bis der gewünschte Tag angezeigt ist.<p>
 </ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> 
+<img <?php echo createComIcon('../','frage.gif','0') ?>> 
 <font color="#990000"><b>Wie finde ich die OP Dokumente von einem anderen OP Saal bzw. Abteilung im Archiv?</b></font>
 <ul> <b>Schritt 1: </b>Wähle die OP Abteilung aus dem Auswahlfeld <nobr>"<span style="background-color:yellow" > OP Abteilung bzw. Saal wechseln <select name="o">
                                                                                                                                          	<option > Beispiel Abteilung 1</option>
@@ -596,31 +597,31 @@ Klicken Sie die "Suchen" an um in den Suchmodus zu gehen.</ul>
 	<br> Die OP Abteilung zu der der Saal gehört stellt sich automatisch ein.<br>																																		  																																		  
 		<b>Schritt 3: </b>Klickt den <input type="button" value="Wechseln">  Knopf an um in die andere Abteilung bzw. OP Saal zu wechseln.<br>
 </ul>
-<? if(($x3!="")) : ?>
+<?php if(($x3!="")) : ?>
 
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie bearbeite ich ein Dokument das gerade angezeigt wird?</b>
 </font>
 <ul>       	
- 	<b>Schritt 1: </b>Klickt den  <img src="../img/bul_arrowGrnLrg.gif" width=16 height=16 border=0> Knopf der OP Eintragung an.<br>
+ 	<b>Schritt 1: </b>Klickt den  <img <?php echo createComIcon('../','bul_arrowgrnlrg.gif','0') ?>> Knopf der OP Eintragung an.<br>
  	<b>Schritt 2: </b>Wenn der Bearbeitungsmodus aktiv ist können Sie die OP Angaben bearbeiten.<p> 
 	</ul>
-<img src="../img/frage.gif" border=0 align="absmiddle"> <font color="#990000"><b>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie öffne ich die Patientenmappe?</b>
 </font>
 <ul>       	
- 	<b>Schritt 1: </b>Klicken Sie den <img src="../img/info3.gif" border=0> Knopf vor der Fallnummer an.<br>
+ 	<b>Schritt 1: </b>Klicken Sie den <img <?php echo createComIcon('../','info3.gif','0') ?>> Knopf vor der Fallnummer an.<br>
  	<b>Schritt 2: </b>Die Patientenmappe öffnet sich<br>
 	</ul>
-	<? endif ?>
+	<?php endif ?>
 	
-<img src="../img/warn.gif" border=0 align="absmiddle"> <font color="#990000"><b> Achtung!</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Achtung!</b></font> 
 <ul>       	
-Wenn Sie abbrechen möchten klickt den <img src="../img/de/de_cancel.gif" border=0> Knopf an.
+Wenn Sie abbrechen möchten klickt den <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> Knopf an.
 </ul>
 
 
-	<? endif ?>
+	<?php endif ?>
 
 
 </form>

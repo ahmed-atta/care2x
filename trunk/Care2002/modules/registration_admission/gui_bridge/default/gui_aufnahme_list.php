@@ -61,7 +61,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 </td>
 
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
-<a href="javascript:gethelp('admission_how2new.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
+<a href="javascript:gethelp('admission_archive.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
 if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo "startframe.php?sid=".$sid."&lang=".$lang; 
 	else echo $breakfile."?sid=$sid&target=entry&lang=$lang"; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </td>
@@ -82,7 +82,7 @@ require('./gui_bridge/default/gui_tabs_patadmit.php');
 
 <?php
 
- if(isset($mode)&&$mode=='search')
+ if(isset($mode)&&($mode=='search'||$mode=='paginate'))
  {
    //echo '<FONT  SIZE=2 FACE="verdana,Arial">'.$LDSearchKeyword.': '.$where; 
 ?>
@@ -91,7 +91,12 @@ require('./gui_bridge/default/gui_tabs_patadmit.php');
   <tr>
     <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"></td>
     <td><FONT  SIZE=3 FACE="verdana,Arial" color=#800000>
-<b><?php if($rows) echo str_replace("~nr~",$rows,$LDFoundData); else echo str_replace("~nr~",$rows,$LDSearchFoundAdmit); ?></b></font></td>
+<b><?php 
+
+	if ($rows) echo str_replace("~nr~",$totalcount,$LDFoundData).' '.$LDShowing.' '.$pagen->BlockStartNr().' '.$LDTo.' '.$pagen->BlockEndNr().'.';
+		else echo str_replace('~nr~','0',$LDSearchFoundAdmit); 
+
+?></b></font></td>
   </tr>
 </table>
 
@@ -105,18 +110,60 @@ require('./gui_bridge/default/gui_tabs_patadmit.php');
  
  	$img_male=createComIcon($root_path,'spm.gif','0');
 	$img_female=createComIcon($root_path,'spf.gif','0');
+	
+	$bgimg='tableHeaderbg3.gif';
+	$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
 
  ?>
 
 <table border=0 cellpadding=0 cellspacing=0>
-  <tr bgcolor=#0000aa background="<?php echo $root_path; ?>gui/img/common/default/tableHeaderbg.gif">
-
-      <td background="<?php echo createBgSkin($root_path,'tableHeaderbg.gif'); ?>">&nbsp;</td>
-      <td background="<?php echo createBgSkin($root_path,'tableHeaderbg.gif'); ?>"><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>&nbsp;&nbsp;<?php echo $LDLastName; ?></b></td>
-      <td background="<?php echo createBgSkin($root_path,'tableHeaderbg.gif'); ?>"><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>&nbsp;&nbsp;<?php echo $LDFirstName; ?></b></td>
-      <td background="<?php echo createBgSkin($root_path,'tableHeaderbg.gif'); ?>"><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>&nbsp;&nbsp;<?php echo $LDBday; ?></b></td>
-      <td background="<?php echo createBgSkin($root_path,'tableHeaderbg.gif'); ?>"><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>&nbsp;&nbsp;<?php echo $LDAdmitNr; ?></b></td>
-      <td background="<?php echo createBgSkin($root_path,'tableHeaderbg.gif'); ?>"><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>&nbsp;&nbsp;<?php echo $LDAdmitDate; ?></b></td>
+  <tr bgcolor=#abcdef background="<?php echo $root_path; ?>gui/img/common/default/tableHeaderbg.gif">
+      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
+	  <?php 
+	  	if($oitem=='sex') $flag=TRUE;
+			else $flag=FALSE; 
+		echo $pagen->SortLink($LDSex,'sex',$odir,$flag); 
+			 ?></b></td>
+      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
+	  <?php 
+	  	if($oitem=='name_last') $flag=TRUE;
+			else $flag=FALSE; 
+		echo $pagen->SortLink($LDLastName,'name_last',$odir,$flag); 
+			 ?></b></td>
+      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
+	  <?php 
+	  	if($oitem=='name_first') $flag=TRUE;
+			else $flag=FALSE; 
+		echo $pagen->SortLink($LDFirstName,'name_first',$odir,$flag); 
+			 ?></b></td>
+      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
+	  <?php 
+	  	if($oitem=='date_birth') $flag=TRUE;
+			else $flag=FALSE; 
+		echo $pagen->SortLink($LDBday,'date_birth',$odir,$flag); 
+			 ?></b></td>
+      <td <?php echo $tbg; ?> align="center"><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
+	  <?php 
+	  	if($oitem=='addr_zip') $flag=TRUE;
+			else $flag=FALSE;
+		 echo $pagen->SortLink($LDZipCode,'addr_zip',$odir,$flag); 
+		 	
+		?></b></td>
+      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
+	  <?php 
+	  	if($oitem=='encounter_nr') $flag=TRUE;
+			else $flag=FALSE; 
+		echo $pagen->SortLink($LDAdmitNr,'encounter_nr',$odir,$flag); 
+			 ?></b></td>
+    
+      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>
+	  <?php 
+	  	if($oitem=='encounter_date') $flag=TRUE;
+			else $flag=FALSE; 
+		echo $pagen->SortLink($LDAdmitDate,'encounter_date',$odir,$flag); 
+			 ?></b></td>
+    
+      
 
   <?php
 /*for($j=0;$j<sizeof($LDElements);$j++)
@@ -154,6 +201,7 @@ echo '
     <td align=right><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;'.($result['encounter_nr']+$adder).'</td>
 */
 echo '
+    <td align=right><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;'.$result['addr_zip'].'</td>
     <td align=right><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;'.$result['encounter_nr'].'</td>
     <td align=right><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.@formatDate2Local($result['encounter_date'],$date_format).'</a></td>
   </tr>
@@ -161,6 +209,12 @@ echo '
   <td colspan=8 height=1><img src="'.$root_path.'gui/img/common/default/pixel.gif" border=0 width=1 height=1></td>
   </tr>';
   }
+	
+	echo '
+		<tr><td colspan=6><font face=arial size=2>'.$pagen->makePrevLink($LDPrevious).'</td>
+		<td align=right><font face=arial size=2>'.$pagen->makeNextLink($LDNext).'</td>
+		</tr>';
+
  ?>
 </table>
 <p>

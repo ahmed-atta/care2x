@@ -1,15 +1,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <a name="howto">
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b><?php if($x1=="docs") print "Doctor's directives"; else print "Nursing report"; ?></b></font>
+<b><?php if($x1=="docs") print "Physician orders"; else print "Nursing report"; ?></b></font>
 <form action="#" >
 <p><font size=2 face="verdana,arial" >
 
 <?php if($src=="") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to enter a <?php if($x1=="docs") print "doctor's directive"; else print "nursing report"; ?>?</b></font>
+How to enter a <?php if($x1=="docs") print "physician orders"; else print "nursing report"; ?>?</b></font>
 <ul> 
-	<b>Step 1: </b>Enter the date in the "<span style="background-color:yellow" > Date: <input type="text" name="d" size=10 maxlength=10 value="10.10.2002"> </span>" field in the "<?php if($x1=="docs") print "Doctor's directives"; else print "Nursing report"; ?>" column.<br>
+	<b>Step 1: </b>Enter the date in the "<span style="background-color:yellow" > Date: <input type="text" name="d" size=10 maxlength=10 value="10.10.2002"> </span>" field in the "<?php if($x1=="docs") print "physician orders"; else print "Nursing report"; ?>" column.<br>
 		<font color="#000099" size=1><b>Tips:</b>
 		<ul type=disc>
 		<li>To enter the current date, type "t" or "T" (meaning TODAY) in the date field. The current date will appear automatically in the date field.
@@ -17,17 +17,17 @@ How to enter a <?php if($x1=="docs") print "doctor's directive"; else print "nur
 		<li>To enter yesterday's date, type "y" or "Y" (meaning YESTERDAY) in the date field. Yesterday's date will appear automatically in the date field.
 		</font>
 		</ul>
-	<b>Step 2: </b>Enter the time in the "<span style="background-color:yellow" > Time: <input type="text" name="d" size=5 maxlength=5 value="10.35"> </span>" field in the "<?php if($x1=="docs") print "Doctor's directives"; else print "Nursing report"; ?>" column.<br>
+	<b>Step 2: </b>Enter the time in the "<span style="background-color:yellow" > Time: <input type="text" name="d" size=5 maxlength=5 value="10.35"> </span>" field in the "<?php if($x1=="docs") print "physician orders"; else print "Nursing report"; ?>" column.<br>
 		<font color="#000099" size=1><b>Tip:</b>
 		<ul type=disc>
 		<li>To enter the current time, type "n" or "N" (meaning NOW) in the time field. The current time will appear automatically in the time field.
 		<li>Or click on the button <img <?php echo createComIcon('../','arrow-t.gif','0') ?>> below the time field. The current time will appear automatically in the time field.
 		</font>
 		</ul>
-	<b>Step 3: </b>Type the <?php if($x1=="docs") print "doctor's directive"; else print "nursing report"; ?> in the "<span style="background-color:yellow" > <?php if($x1=="docs") print "Doctor's directives"; else print "Nursing report"; ?>: <input type="text" name="d" size=10 maxlength=10 value="test report"> </span>" field.<br>
+	<b>Step 3: </b>Type the <?php if($x1=="docs") print "physician orders"; else print "nursing report"; ?> in the "<span style="background-color:yellow" > <?php if($x1=="docs") print "physician orders"; else print "Nursing report"; ?>: <input type="text" name="d" size=10 maxlength=10 value="test report"> </span>" field.<br>
 		<font color="#000099" size=1><b>Tips:</b>
 		<ul type=disc>
-		<li>Click the checkbox "<span style="background-color:yellow" > <input type="checkbox" name="c" value="c"> <img <?php echo createComIcon('../','warn.gif','0') ?>>Place this symbol at the start. </span>", if you want that the symbol <img <?php echo createComIcon('../','warn.gif','0') ?>> appears at the start of the <?php if($x1=="docs") print "doctor's directive"; else print "nursing report"; ?>.
+		<li>Click the checkbox "<span style="background-color:yellow" > <input type="checkbox" name="c" value="c"> <img <?php echo createComIcon('../','warn.gif','0') ?>>Place this symbol at the start. </span>", if you want that the symbol <img <?php echo createComIcon('../','warn.gif','0') ?>> appears at the start of the <?php if($x1=="docs") print "physician orders"; else print "nursing report"; ?>.
 		<li>If you want to highlight part of the <?php if($x1=="docs") print "directive or"; ?> report, click the icon <img <?php echo createComIcon('../','hilite-s.gif','0') ?>> before typing the word or sentence. To end the
 		highlight, click the icon <img <?php echo createComIcon('../','hilite-e.gif','0') ?>> after typing the last letter of the highlighted part.
 		</font>
@@ -64,7 +64,7 @@ How to enter <?php if($x1=="docs") print "an inquiry to the physician"; else pri
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 NOTE:</b></font>
 <ul> 
-	You can also enter both the <?php if($x1=="docs") print "doctor's directive and inquiries to the physician"; else print "nursing and effectivity report"; ?> at the same time.</ul>
+	You can also enter both the <?php if($x1=="docs") print "physician orders and inquiries to the physician"; else print "nursing and effectivity report"; ?> at the same time.</ul>
 
 <?php endif ?>
 <?php if($src=="diagnosis") : ?>

@@ -20,7 +20,7 @@ Come fare a: assegnare un letto a un paziente?</b></font>
 		<b>6: </b>Per scegliere il paziente desiderato, selezionare il il bottone ;<button><img <?php echo createComIcon('../','post_discussion.gif','0') ?>></button> corrispondente.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Come fare a: rimuovere un paziente da quelli in carico ad una guardia?</b></font>
+Come fare a: rimuovere un paziente da quelli in carico ad una corsia?</b></font>
 <ul> <b>1: </b>Selezionare <img <?php echo createComIcon('../','bestell.gif','0') ?>> corrispondente al paziente.<br>
 		<b>2: </b>Apparirà il modulo di scarico del paziente.<br>
 		<b>3: </b>Se si vuole effettuare lo scarico, <br>selezionare  
@@ -38,11 +38,11 @@ Come fare a: bloccare un letto?</b></font>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Desidero cancellare un paziente dalla lista</b></font>
 <ul> <b>Nota: </b>NON si può semplicemente cancellare un paziente dalla lista. Prima di tutto, bisogna effettuare
-lo scarico seguendo le istruzioni in 'rimuovere un paziente da quelli in carico ad una guardia'.<br>
+lo scarico seguendo le istruzioni in 'rimuovere un paziente da quelli in carico ad una corsia'.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Che cosa significano le <img <?php echo createComIcon('../','s_colorbar.gif','0') ?>> barre colorate? </b></font>
 <ul> <b>Nota: </b>Ciascuna barra colorata quando "visibile" indica la disponibilità di informazioni specifiche, istruzioni, cambiamenti, domande, etc.<br>
-			Il significato di un colore è modificabile per ciascuna guardia. 
+			Il significato di un colore è modificabile per ciascuna corsia. 
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Che cosa significa l'icona <img <?php echo createComIcon('../','patdata.gif','0') ?>>? </b></font>
 <ul> <b>Nota: </b>E' il bottone dell'archivio dati paziente. Per aprire la cartella dati, selezionare questa icona. Apparirà una finestrella
@@ -134,7 +134,8 @@ Come fare a: dimettere un paziente?</b></font>
 		<b>3: </b>Inserire il proprio nome nel campo "<span style="background-color:yellow" > Infermiere/a: <input type="text" name="a" size=20 maxlength=20></span>" se è vuoto. <br>
 		<b>4: </b>Selezionare " <span style="background-color:yellow" ><input type="checkbox" name="d" value="d"> Sì, dimetti il paziente. </span>". <br>
 		<b>5: </b>Premere il bottone <input type="button" value="discharge"> per effettuare la dimissione.<p>
-		<b>6: </b>Premere il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle"> per tornare alla lista di occupazione della guardia.<p>
+		<b>6: </b>Premere il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle"> per tornare 
+alla lista di occupazione della corsia.<p>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Ho provato a selezionare il bottone <input type="button" value="discharge">, ma senza effetto. Perché?</b></font>

@@ -4,7 +4,8 @@
 <form action="#" >
 <b>Step 1</b>
 
-<ul> <font color=#ff0000>Verify first if the patient's basic data already exists</font>.<p>
+<ul> 
+<font color=#ff0000>Verify first if the patient's basic data already exists</font>.<p>
 		 Enter  either a full information or a few letters from a patient's information, like for example first name, or family name, 
 		or the PID (person identifier).
 		<p>Example 1: enter "21000012" or "12".

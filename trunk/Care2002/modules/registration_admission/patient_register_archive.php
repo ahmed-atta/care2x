@@ -3,25 +3,23 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
+* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
 * GNU General Public License
-* Copyright 2002 Elpidio Latorilla
+* Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
 
+# Default value for the maximum nr of rows per block displayed, define this to the value you wish
+# In normal cases this value is derived from the db table "care_config_global" using the "insurance_list_max_block_rows" element.
+define('MAX_BLOCK_ROWS',30); 
+define('SHOW_SEARCH_QUERY',1); # Set to 1 if you want to display the query conditions, 0 to hide
+
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_date_format_functions.php');
-
-/*if(empty($date_format))
-{
-   $date_format=getDateFormat($link,$DBLink_OK);
-}
-*/
-
 
 $thisfile=basename(__FILE__);
 $breakfile='patient.php';
@@ -34,22 +32,51 @@ $target='archiv';
 
 $error=0;
 
+# Initialize page's control variables
+if($mode=='paginate'){
+	$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
+	//$searchkey='USE_SESSION_SEARCHKEY';
+	//$mode='search';
+}else{
+	# Reset paginator variables
+	$pgx=0;
+	$totalcount=0;
+	$odir='';
+	$oitem='';
+}
+require_once($root_path.'include/care_api_classes/class_paginator.php');
+
+$pagen=new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
+
+
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('person%');
+
+# Get the max nr of rows from global config
+$glob_obj->getConfig('person_search_max_block_rows');
+if(empty($GLOBAL_CONFIG['person_search_max_block_rows'])) $pagen->setMaxCount(MAX_BLOCK_ROWS); # Last resort, use the default defined at the start of this page
+	else $pagen->setMaxCount($GLOBAL_CONFIG['person_search_max_block_rows']);
+
 	
-if (isset($mode) && ($mode=='search'))
-{
-    if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
-    if($dblink_ok) {
+if (isset($mode) && ($mode=='search'||$mode=='paginate')){
 
-	  //* Get the global config for patient's registration form*/
-       //include_once($root_path.'include/inc_get_global_config.php');
+	if(empty($oitem)) $oitem='name_last';			
+	if(empty($odir)) $odir='ASC'; # default, ascending alphabetic
+	# Set the sort parameters
+	$pagen->setSortItem($oitem);
+	$pagen->setSortDirection($odir);
 
+	if($mode=='paginate'){
+		$sql=$HTTP_SESSION_VARS['sess_searchkey']." ORDER BY $oitem $odir";;
+		$s2=$sql; # Dummy  to force the sql query to be executed
+	}else{
+	
+		# convert * and ? to % and &
+		$searchkey=strtr($searchkey,'*?','%_');
 
-
-							$sql="SELECT * FROM $dbtable WHERE ";
-							$s2='';
+		$sql="SELECT pid, date_reg, name_last, name_first, date_birth, addr_zip, sex, death_date FROM $dbtable WHERE ";
+		$s2='';
 							
 							if(isset($pid)&&$pid)
 							{
@@ -59,7 +86,7 @@ if (isset($mode) && ($mode=='search'))
 								 }
 								 else
 								 {
-								       $s2.=" pid = ".($GLOBAL_CONFIG['person_id_nr_adder']);
+								       $s2.=" pid = ".$pid;
 								}
 							}
 						
@@ -84,17 +111,17 @@ if (isset($mode) && ($mode=='search'))
 							$buffer='';
 							if(($date_start)&&($date_end))
 								{
-									$buffer=" ((date_reg > \"$date_start\" OR date_reg LIKE \"$date_start %\") AND (date_reg <  \"$date_end\" OR date_reg LIKE \"$date_end %\"))";
+									$buffer=" ((date_reg > \"$date_start\" OR date_reg = \"$date_start\") AND (date_reg <  \"$date_end\" OR date_reg = \"$date_end\"))";
 									//if($s2) $s2.=" AND ((date_reg > \"$date_start\" OR date_reg LIKE \"$date_start %\") AND (date_reg <  \"$date_end\" OR date_reg LIKE \"$date_end %\"))"; else $s2.=" ((date_reg > \"$date_start\" OR date_reg LIKE \"$date_start %\") AND (date_reg <  \"$date_end\" OR date_reg LIKE \"$date_end %\"))";
 								}
 								elseif($date_start)
 								{
-									$buffer=" date_reg LIKE \"$date_start %\"";
+									$buffer=" date_reg = \"$date_start\"";
 									//if($s2) $s2.=" AND date_reg LIKE \"$date_start %\""; else $s2.=" date_reg LIKE \"$date_start %\"";
 								}
 								elseif($date_end)
 								{
-									$buffer=" (date_reg < \"$date_end\" OR date_reg LIKE \"$date_end %\")";
+									$buffer=" (date_reg < \"$date_end\" OR date_reg = \"$date_end\")";
 									//if($s2) $s2.=" AND (date_reg LIKE \"$date_end %\" OR date_reg LIKE \"$date_end %\")"; else $s2.=" date_reg LIKE \"$date_end %\"";
 								}
 								if($buffer){
@@ -138,9 +165,9 @@ if (isset($mode) && ($mode=='search'))
 								if($s2) $s2.=" AND addr_zip LIKE \"%$addr_zip%\""; else $s2.=" addr_zip LIKE \"%$addr_zip%\"";
 								
 							if(isset($sex)&&$sex)
-								if($s2) $s2.=" AND sex LIKE \"$sex\""; else $s2.=" sex LIKE \"$sex\"";
+								if($s2) $s2.=" AND sex = \"$sex\""; else $s2.=" sex = \"$sex\"";
 							if(isset($civil_status)&&$civil_status)
-								if($s2) $s2.=" AND civil_status LIKE \"$civil_status%\""; else $s2.=" civil_status LIKE \"$civil_status%\"";
+								if($s2) $s2.=" AND civil_status = \"$civil_status\""; else $s2.=" civil_status = \"$civil_status\"";
 							if(isset($phone_1)&&$phone_1)
 								if($s2) $s2.=" AND phone_1_nr LIKE \"$phone_1%\""; else $s2.=" phone_1_nr LIKE \"$phone_1%\"";
 							if(isset($phone_2)&&$phone_2)
@@ -163,33 +190,48 @@ if (isset($mode) && ($mode=='search'))
 							if(isset($ethnic_orig)&&$ethnic_orig)
 								if($s2) $s2.=" AND ethnic_orig LIKE \"$ethnic_orig%\""; else $s2.=" ethnic_orig LIKE \"$ethnic_orig%\"";
 								
-							$sql=$sql.$s2." ORDER BY name_last";
-							//echo $sql;
+		
+		$HTTP_SESSION_VARS['sess_searchkey']=$sql.$s2;
+		
+		$sql=$sql.$s2." ORDER BY $oitem $odir";
+		//echo $sql;
+	}
 							
-							if($s2!="")
-							{
-								if($ergebnis=$db->Execute($sql)) 
-								{			
-						  			$rows=$ergebnis->RecordCount();
+	if($s2!=''){
+		//echo $sql;
+			//if($ergebnis=$db->Execute($sql)) 
+		if($ergebnis=$db->SelectLimit($sql,$pagen->MaxCount(),$pagen->BlockStartIndex())){			
+		
+			$rows=$ergebnis->RecordCount();
 									
-							        if($rows==1)
-							       {
-								       //* If result is single item, display the data immediately */
-									   $result=$ergebnis->FetchRow();
-									   header("Location:patient_register_show.php".URL_REDIRECT_APPEND."&target=archiv&origin=archiv&pid=".$result['pid']);
-									   exit;
-							        }
-								}else echo "$LDDbNoRead<p> $sql <p>";
-								
-                            }
-					
-  }
-  else 
-  { echo "$LDDbNoLink<br>"; }
+			if($rows==1&&$searchkey!='USE_SESSION_SEARCHKEY'){
+				//* If result is single item, display the data immediately */
+				$result=$ergebnis->FetchRow();
+				header("Location:patient_register_show.php".URL_REDIRECT_APPEND."&target=archiv&origin=archiv&pid=".$result['pid']);
+				exit;
+			}else{
 
+				$pagen->setTotalBlockCount($rows);
+					
+				# If more than one count all available
+				if(isset($totalcount)&&$totalcount){
+					$pagen->setTotalDataCount($totalcount);
+				}else{
+					$sql="SELECT COUNT(pid) AS maxnr FROM $dbtable WHERE ".$s2;
+			 		if($result=$db->Execute($sql)){
+						@$maxres=$result->FetchRow();
+						$totalcount=$maxres['maxnr'];
+						$pagen->setTotalDataCount($totalcount);
+					}
+				}
+			}
+		}else{
+			echo "$LDDbNoRead<p> $sql <p>";
+		}
+	}
 }
 
-/* Load GUI page */
+# Load GUI page
 require('./gui_bridge/default/gui_person_reg_archive.php');
 
 ?>

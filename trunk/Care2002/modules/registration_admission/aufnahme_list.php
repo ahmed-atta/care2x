@@ -3,15 +3,18 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
+* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
 * GNU General Public License
-* Copyright 2002 Elpidio Latorilla
+* Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
 
-define('AUTOSHOW_ONERESULT',1); # Defining to 1 will automatically show the admission data if the search result is one, otherwise the result will be listed
+# Default value for the maximum nr of rows per block displayed, define this to the value you wish
+# In normal cases this value is derived from the db table "care_config_global" using the "insurance_list_max_block_rows" element.
+define('MAX_BLOCK_ROWS',30); 
+define('AUTOSHOW_ONERESULT',1); # Defining to 1 will automatically show the admission data if the search result is one, otherwise the single result will be listed
 
 function Cond($item,$k){
 	global $where,$tab,$HTTP_POST_VARS;
@@ -39,84 +42,127 @@ $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_date_format_functions.php');
 
-if (isset($mode) && ($mode=='search')){
+# Initialize page's control variables
+if($mode=='paginate'){
+	$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
+}else{
+	# Reset paginator variables
+	$pgx=0;
+	$totalcount=0;
+	$odir='';
+	$oitem='';
+}
+#Load and create paginator object
+require_once($root_path.'include/care_api_classes/class_paginator.php');
+$pagen=& new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
 
-	$select="SELECT p.name_last,p.name_first,p.date_birth,p.sex,e.encounter_nr,e.encounter_class_nr,e.is_discharged,e.encounter_date FROM ";
+$GLOBAL_CONFIG=array();
+require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+$glob_obj=new GlobalConfig($GLOBAL_CONFIG);	
+# Get the max nr of rows from global config
+$glob_obj->getConfig('person_search_max_block_rows');
+if(empty($GLOBAL_CONFIG['person_search_max_block_rows'])) $pagen->setMaxCount(MAX_BLOCK_ROWS); # Last resort, use the default defined at the start of this page
+	else $pagen->setMaxCount($GLOBAL_CONFIG['person_search_max_block_rows']);
 
-	$where=''; 		# ANDed where condition
-	$orwhere='';	# ORed where condition
-	$datecond='';	# date condition
+if (isset($mode) && ($mode=='search'||$mode=='paginate')){
+
+
+	if(empty($oitem)) $oitem='name_last';			
+	if(empty($odir)) $odir='ASC'; # default, ascending alphabetic
+	# Set the sort parameters
+	$pagen->setSortItem($oitem);
+	$pagen->setSortDirection($odir);
+
+	if($mode=='paginate'){
+		$sql=$HTTP_SESSION_VARS['sess_searchkey'];
+		$where='?'; # Dummy char to force the sql query to be executed
+	}else{
+
+
+		$select="SELECT p.name_last,p.name_first,p.date_birth,p.addr_zip, p.sex,e.encounter_nr,e.encounter_class_nr,e.is_discharged,e.encounter_date FROM ";
+
+		$where=''; 		# ANDed where condition
+		$orwhere='';	# ORed where condition
+		$datecond='';	# date condition
 	 
-	# Walk the arrays in the function to preprocess the search condition data
-	$parray=array('name_last','name_first','date_birth','sex');
-	$tab='p';
-	array_walk($parray,'Cond');
-	$earray=array('encounter_nr','encounter_class_nr','current_ward_nr','referrer_diagnosis','referrer_dr','referrer_recom_therapy','referrer_notes','insurance_class_nr');
-	$tab='e';
-	array_walk($earray,'Cond');
-	$farray=array('sc_care_class_nr','sc_room_class_nr','sc_att_dr_class_nr');
-	array_walk($farray,'fCond');
+		# Walk the arrays in the function to preprocess the search condition data
+		$parray=array('name_last','name_first','date_birth','sex');
+		$tab='p';
+		array_walk($parray,'Cond');
+		$earray=array('encounter_nr','encounter_class_nr','current_ward_nr','referrer_diagnosis','referrer_dr','referrer_recom_therapy','referrer_notes','insurance_class_nr');
+		$tab='e';
+		array_walk($earray,'Cond');
+		$farray=array('sc_care_class_nr','sc_room_class_nr','sc_att_dr_class_nr');
+		array_walk($farray,'fCond');
 	
-	# Process the dates
-	 if(isset($date_start)&&!empty($date_start)) $date_start=@formatDate2STD($date_start,$date_format);
-	 if(isset($date_end)&&!empty($date_end)) $date_end=@formatDate2STD($date_end,$date_format);
-	 if(isset($date_birth)&&!empty($date_birth)) $date_birth=@formatDate2STD($date_birth,$date_format);
+		# Process the dates
+		 if(isset($date_start)&&!empty($date_start)) $date_start=@formatDate2STD($date_start,$date_format);
+		 if(isset($date_end)&&!empty($date_end)) $date_end=@formatDate2STD($date_end,$date_format);
+	 	if(isset($date_birth)&&!empty($date_birth)) $date_birth=@formatDate2STD($date_birth,$date_format);
 	
-	if($date_start){
-		if($date_end){
-			$datecond="(e.encounter_date LIKE '$date_start%' OR e.encounter_date>'$date_start') AND (e.encounter_date<'$date_end' OR e.encounter_date LIKE '$date_end%')";
-		}else{
-			$datecond="e.encounter_date LIKE '$date_start%'";
-		}
-	}elseif($date_end){
+		if($date_start){
+			if($date_end){
+				$datecond="(e.encounter_date LIKE '$date_start%' OR e.encounter_date>'$date_start') AND (e.encounter_date<'$date_end' OR e.encounter_date LIKE '$date_end%')";
+			}else{
+				$datecond="e.encounter_date LIKE '$date_start%'";
+			}
+		}elseif($date_end){
 			$datecond="(e.encounter_date< '$date_end' OR e.encounter_date LIKE '$date_end%')";
-	}
+		}
+
 	
-	if(!empty($datecond)){
-		if(empty($where)) $where=$datecond;
-		    else $where.=' AND '.$datecond;
-	}
+		if(!empty($datecond)){
+			if(empty($where)) $where=$datecond;
+			    else $where.=' AND '.$datecond;
+		}
 			
-	if(!empty($orwhere)) {
-		if(empty($where)) $where='('.$orwhere.')';
-		    else $where.=' AND ('.$orwhere.') ';
-	}
+		if(!empty($orwhere)) {
+			if(empty($where)) $where='('.$orwhere.')';
+			    else $where.=' AND ('.$orwhere.') ';
+		}
 	
-	if($name_last||$name_first||$date_birth||$sex){
-		if($encounter_nr||$encounter_class_nr||$current_ward_nr||$referrer_diagnosis||$referrer_dr||$referrer_recom_therapy||$referrer_notes||$insurance_class_nr){
-			if($sc_care_class_nr||$sc_room_class_nr||$sc_att_dr_class_nr){
-	        	$from=" care_person AS p, care_encounter AS e, care_encounter_financial_class AS f ";
-				$where.=" AND e.encounter_nr=f.encounter_nr AND e.pid=p.pid ";
+		if($name_last||$name_first||$date_birth||$sex){
+			if($encounter_nr||$encounter_class_nr||$current_ward_nr||$referrer_diagnosis||$referrer_dr||$referrer_recom_therapy||$referrer_notes||$insurance_class_nr){
+				if($sc_care_class_nr||$sc_room_class_nr||$sc_att_dr_class_nr){
+	 	 	      	$from=" care_person AS p, care_encounter AS e, care_encounter_financial_class AS f ";
+					$where.=" AND e.encounter_nr=f.encounter_nr AND e.pid=p.pid ";
+				}else{
+					$from=" care_person AS p, care_encounter AS e";
+					$where.=" AND p.pid=e.pid";
+				}
 			}else{
 				$from=" care_person AS p, care_encounter AS e";
 				$where.=" AND p.pid=e.pid";
 			}
-		}else{
-			$from=" care_person AS p, care_encounter AS e";
-			$where.=" AND p.pid=e.pid";
-		}
 				
-	}else{
-		if($date_start||$date_end||$encounter_nr||$encounter_class_nr||$current_ward_nr||$referrer_diagnosis||$referrer_dr||$referrer_recom_therapy||$referrer_notes||$insurance_class_nr){
-			if($sc_care_class_nr||$sc_room_class_nr||$sc_att_dr_class_nr){
-				$from=" care_person AS p, care_encounter AS e, care_encounter_financial_class AS f";
-				$where.=" AND p.pid=e.pid AND e.encounter_nr=f.encounter_nr";
-			}else{
-				$from="  care_person AS p, care_encounter AS e";
-				$where.=" AND p.pid=e.pid";
-			}
 		}else{
-			if($sc_care_class_nr||$sc_room_class_nr||$sc_att_dr_class_nr){
-				$from="  care_person AS p, care_encounter AS e, care_encounter_financial_class as f";
-				$where.=" AND p.pid=e.pid AND f.encounter_nr=e.encounter_nr";
+			if($date_start||$date_end||$encounter_nr||$encounter_class_nr||$current_ward_nr||$referrer_diagnosis||$referrer_dr||$referrer_recom_therapy||$referrer_notes||$insurance_class_nr){
+				if($sc_care_class_nr||$sc_room_class_nr||$sc_att_dr_class_nr){
+					$from=" care_person AS p, care_encounter AS e, care_encounter_financial_class AS f";
+					$where.=" AND p.pid=e.pid AND e.encounter_nr=f.encounter_nr";
+				}else{
+					$from="  care_person AS p, care_encounter AS e";
+					$where.=" AND p.pid=e.pid";
+				}
+			}else{
+				if($sc_care_class_nr||$sc_room_class_nr||$sc_att_dr_class_nr){
+					$from="  care_person AS p, care_encounter AS e, care_encounter_financial_class as f";
+					$where.=" AND p.pid=e.pid AND f.encounter_nr=e.encounter_nr";
+				}
 			}
 		}
-	}
 	
-	if(!empty($where)) {
+		$sql="$select$from WHERE $where AND NOT (e.encounter_status LIKE 'cancelled') AND e.status NOT IN ('void','inactive','hidden','deleted') ORDER by ";
+		$HTTP_SESSION_VARS['sess_searchkey']=$sql;
+	
+	}
 
-		$sql="$select$from WHERE $where AND NOT (e.encounter_status LIKE 'cancelled') AND e.status NOT IN ('void','inactive','hidden','deleted') ORDER by e.create_time DESC";
-		if($ergebnis=$db->Execute($sql)) {			
+	if(!empty($where)) {
+		# Filter the encounter nr:
+		if($oitem=='encounter_nr'||$oitem=='encounter_date') $tab='e';
+			else $tab='p';
+		//echo "$sql $tab.$oitem $odir";
+		if($ergebnis=$db->SelectLimit("$sql $tab.$oitem $odir",$pagen->MaxCount(),$pagen->BlockStartIndex())){
   			$rows=$ergebnis->RecordCount();			
 			
 			if(AUTOSHOW_ONERESULT){					
@@ -127,8 +173,28 @@ if (isset($mode) && ($mode=='search')){
 				   	exit;
 	        	}
 			}
+			
+			$pagen->setTotalBlockCount($rows);
+					
+					# If more than one count all available
+					if(isset($totalcount)&&$totalcount){
+						$pagen->setTotalDataCount($totalcount);
+					}else{
+						# Count total available data
+						$sql="$sql $tab.$oitem $odir";
+						
+						if($result=$db->Execute($sql)){
+							$totalcount=$result->RecordCount();
+						}
+						$pagen->setTotalDataCount($totalcount);
+					}
+					# Set the sort parameters
+					$pagen->setSortItem($oitem);
+					$pagen->setSortDirection($odir);
+
+			
 		}else{
-			echo "$LDDbNoRead<p>$sql";
+			echo "$LDDbNoRead<p>$sql $tab.$oitem $odir";
 			$rows=0;
 		}
 	}

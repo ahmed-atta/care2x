@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'/include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.07 - 2003-08-29
+* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
 * GNU General Public License
-* Copyright 2002 Elpidio Latorilla
+* Copyright 2002,2003,2004 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -18,8 +18,16 @@ require($root_path.'include/inc_2level_reset.php');
 
 require_once($root_path.'include/inc_config_color.php');
 
-if(file_exists($root_path.$HTTP_SESSION_VARS['sess_path_referer']))	$breakfile=$root_path.$HTTP_SESSION_VARS['sess_path_referer'].URL_APPEND;
-		else $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
+if(isset($HTTP_SESSION_VARS['sess_personell_nr'])&&$HTTP_SESSION_VARS['sess_user_origin']=='personell_admin'){
+	$breakfile=$root_path.'modules/personell_admin/personell_admin_pass.php'.URL_APPEND.'&fwd_nr='.$HTTP_SESSION_VARS['sess_personell_nr'].'&target=personell_search';
+}elseif(file_exists($root_path.$HTTP_SESSION_VARS['sess_path_referer'])){
+	$breakfile=$root_path.$HTTP_SESSION_VARS['sess_path_referer'].URL_APPEND;
+}else{
+	$breakfile=$root_path.'main/startframe.php'.URL_APPEND;
+}
+
+# Change the user origin
+$HTTP_SESSION_VARS['sess_user_origin']='phonedir';
 
 $dbtable='care_phone';
 
@@ -59,17 +67,11 @@ function pruf(d)
 {
 	if((d.keyword.value=="")||(d.keyword.value==" ")) return false;
 }
-function gethelp(x,s,x1,x2,x3)
-{
-	if (!x) x="";
-	urlholder="<?php echo $root_path; ?>main/help-router.php<?php echo URL_REDIRECT_APPEND ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
-	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
-	window.helpwin.moveTo(0,0);
-}
 // -->
 </script>
  
-  <?php 
+<?php 
+require($root_path.'include/inc_js_gethelp.php');
 require($root_path.'include/inc_css_a_hilitebu.php');
 ?>
  

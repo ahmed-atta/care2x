@@ -378,7 +378,7 @@ I want to see more information about an article in the order list. What should I
 I want to see the list of archived orders again. What should I do?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the <input type="button" value="<< Go back"> button.<br>
+ 	<b>Step 1: </b>Click the <img <?php echo createLDImgSrc('../','back2.gif','0') ?>> button.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> 
 <font color="#990000"><b>I want to do a new search for archived order lists. What should I do?</b></font>

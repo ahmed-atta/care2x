@@ -82,7 +82,8 @@ Come fare a: ordinare <?php if($x2=="pharma") echo "prodotti farmaceutici"; else
  	<b>2: </b>Se si è già effettuato il login, appariranno il catalogo ordini e la lista ordini. In caso contrario, il sistema chiederà username
  	e  password.<br>
  	<b>3: </b>Se necessario, inserire username e password, poi selezionare il bottone <img <?php echo createLDImgSrc('../','continue.gif') ?>>.<br>
- 	<b>4: </b>Creare una nuova lista: il riquadro di destra contiene il catalogo ordini del dipartimento, o guardia, or sala operatoria.<p>
+ 	<b>4: </b>Creare una nuova lista: il riquadro di destra contiene 
+il catalogo ordini del dipartimento, o corsia, o sala operatoria.<p>
  	<b>5: </b>Se l'articolo richiesto è nella lista, selezionare il corrispondente bottone <img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>> per mettere <b>un pezzo</b> dell'articolo nell'ordine presente nel riquadro a sinistra.<p>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -167,7 +168,9 @@ Come fare a: ordinare <?php if($x2=="pharma") echo "prodotti farmaceutici";
 </b>
 </font>
 <ul>       	
- 	<b>1: </b>Prima di tutto creare una lista. A destra apparirà il catalogo ordini del dipartimento, della guardia, o della sala operatoria.<p>
+ 	<b>1: </b>Prima di tutto creare una lista. A destra apparirà il 
+catalogo ordini del dipartimento, della corsia, o della sala 
+operatoria.<p>
  	<b>2: </b>Se l'articolo richiesto è nel catalogo, premere il suo bottone <img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>> per mettere <b>un pezzo</b> dell'articolo nell'ordine presente nel riquadro a sinistra.<p>
 </ul>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota:</b></font> 

@@ -21,7 +21,7 @@
 							break;
 		case "personlist": print "Create personnel list";
 							break;
-		case "dutydoc": print "Nurses on duty - Documenting work done on duty hours";
+		case "dutydoc": print "Nurses on duty - Documenting work done on on-call-duty hours";
 							break;
 	}
 ?>
@@ -39,7 +39,7 @@ person on the list. A small pop-up window will appear showing relevant informati
 <ul>To display the duty plan for the whole month, click on the corresponding icon &nbsp;<button><img <?php echo createComIcon('../','new_address.gif','0','absmiddle') ?>> <font size=1>Show</font></button>.<br>
 			The duty plan will be displayed.</ul><p>
 <font face="Verdana, Arial" size=3 color="#990000">
-<p><b>What does the quickview display want me to show?</b></font></b><p>
+<p><b>What does the quickview display want to show?</b></font></b><p>
 <font face="Verdana, Arial" size=2>
 </b><li><b>OR Department</b> :<ul>The list of existing departments which have physicians/surgeons on standby and/or oncall duty.</ul><p>
 <li><b>Standby </b> :<ul>The nurse on standby duty.</ul><p>
@@ -53,7 +53,7 @@ person on the list. A small pop-up window will appear showing relevant informati
 <?php if($src=="show") : ?>
 <p>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I want to create a new duty plan for the displayed month</b></font>
-<ul> <b>Step 1: </b>Click the button <img src="../img/en/en_newplan.gif" border=0 >.<br>
+<ul> <b>Step 1: </b>Click the  <img <?php echo createLDImgSrc('../','newplan.gif','0') ?>> button.<br>
 </ul>
 <ul><b>Step 2:</b>
  If you have logged in before and you have an access right for this function, the 
@@ -153,10 +153,10 @@ How to document a work done during duty hours?</b></font>
  <b>Step 6: </b>Enter the diagnosis, therapy, or operation in the <nobr>"<span style="background-color:yellow" > Diagnosis/Therapy <input type="text" name="d" size=5 maxlength=5> </span>"</nobr> field.<br>
  <b>Step 7: </b>Enter the standby nurse's name in the <nobr>"<span style="background-color:yellow" > Standby: <input type="text" name="d" size=5 maxlength=5> </span>"</nobr> field.<br>
  <b>Step 8: </b>Enter the on-call nurse's name in the <nobr>"<span style="background-color:yellow" > On call: <input type="text" name="d" size=5 maxlength=5> </span>"</nobr> field if necessary.<br>
- <b>Step 1: </b>Click the <input type="button" value="Save"> button to save the document. <br>
+ <b>Step 1: </b>Click the <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> button to save the document. <br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>How to print out the document list?</b></font>
-<ul> <b>Step 1: </b>Click the <input type="button" value="Print"> button and the print window will pop up.<br>
+<ul> <b>Step 1: </b>Click the <img <?php echo createLDImgSrc('../','printout.gif','0') ?>>  button and the print window will pop up.<br>
 	<b>Step 2: </b>Follow the instructions in the print window.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I have saved the document and wish to close it, what should I do? </b></font>

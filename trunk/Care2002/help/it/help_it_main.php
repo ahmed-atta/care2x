@@ -5,7 +5,8 @@
 <title>CARE 2002</title>
 </head>
 <body onLoad="if (window.focus) window.focus()" marginheight=0 marginwidht=0 leftmargin=0 topmargin=0>
-<img <?php echo createLDImgSrc('../','help_main.gif','0') ?>><p>
+ <img src="../help/it/img/it_carelogo_help.png"><p>
+<p>
 <blockquote><font face="Verdana, Arial" size=2>
 <img <?php echo createComIcon('../','butft2_d.gif') ?>><p>
 <b>Primi passi nell'uso di <br>CARE 2002</b><p>

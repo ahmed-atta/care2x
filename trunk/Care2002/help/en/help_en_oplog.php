@@ -1,4 +1,3 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
 OR Logbook - 
@@ -224,7 +223,7 @@ How to save the information?</b>
 How to edit an operation's log entry?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the button <img src="../img/update3.gif" width=15 height=14 border=0> corresponding to the patient's log entry.<br>
+ 	<b>Step 1: </b>Click the button <img <?php echo createComIcon('../','dwnarrowgrnlrg.gif','0') ?>> corresponding to the patient's log entry.<br>
  	<b>Step 2: </b>The patient's log entries will be copied to the editor frame. You can now edit the entries following the instructions for documenting
 		an operation.<br>
 </ul>
@@ -582,14 +581,12 @@ Click the "Search" to switch over to search mode.</ul>
                                                                                                                                          	<option > Sample department 1</option>
                                                                                                                                          	<option > Sample department 2</option>
                                                                                                                                          </select>
-                                                                                                                                          </span>".</nobr> <br>The default operating room will
-		automatically adjust.<br>																																		  
+                                                                                                                                          </span>".</nobr> <br>																  
 	<b>Step 2: </b>Or select the operating room in the selection box <nobr>"<span style="background-color:yellow" > <select name="o">
                                                                                                                                          	<option > Sample OR 1</option>
                                                                                                                                          	<option > Sample OR 2</option>
                                                                                                                                          </select>
-                                                                                                                                          </span>".</nobr> <br> The corresponding
-		department will automatically adjust.<br>																																		  																																		  
+                                                                                                                                          </span>".</nobr> <br> 						  																																		  
 		<b>Step 3: </b>Click the button <input type="button" value="Change">  to switch to the new department or operating room.<br>
 </ul>
 <?php if(($x3!="")) : ?>

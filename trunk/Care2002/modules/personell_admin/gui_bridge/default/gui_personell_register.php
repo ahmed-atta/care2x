@@ -6,52 +6,27 @@
 
 <script  language="javascript">
 <!-- 
-function setsex(d)
-{
-	s=d.selectedIndex;
-	t=d.options[s].text;
-	if(t.indexOf("Frau")!=-1) document.aufnahmeform.sex[1].checked=true;
-	if(t.indexOf("Herr")!=-1) document.aufnahmeform.sex[0].checked=true;
-	if(t.indexOf("-")!=-1){ document.aufnahmeform.sex[0].checked=false;document.aufnahmeform.sex[1].checked=false;}
+function chkForm(d){
+	if(d.job_function_title.value==""){
+		alert("<?php echo $LDPlsEnterJobFunction ?>");
+		d.job_function_title.focus();
+		return false;
+	}else if(d.date_join.value==""){
+		alert("<?php echo "$LDDateJoin\\n$LDPlsEnterDate" ?>");
+		d.date_join.focus();
+		return false;
+	}else if(d.contract_start.value==""){
+		alert("<?php echo "$LDContractStart\\n$LDPlsEnterDate" ?>");
+		d.contract_start.focus();
+		return false;
+	}else if(d.encoder.value==""){
+		alert("<?php echo $LDPlsEnterFullName ?>");
+		d.encoder.focus();
+		return false;
+	}else{
+		return true;
+	}
 }
-
-function settitle(d)
-{
-	if(d.value=="m") document.aufnahmeform.anrede.selectedIndex=2;
-	else document.aufnahmeform.anrede.selectedIndex=1;
-}
-
-
-function hidecat()
-{
-<?php if(defined('MASCOT_SHOW') && MASCOT_SHOW==1)
-{
-?>
-	if(document.images) document.images.catcom.src="../../gui/img/common/default/pixel.gif";
-<?php
-}
-?>
-}
-
-function loadcat()
-{
-
-  	cat=new Image();
-  	cat.src="<?php echo $root_path; ?>main/imgcreator/catcom.php?person=<?php echo strtr($HTTP_COOKIE_VARS[$local_user.$sid]," ","+")."&lang=$lang";?>";
-  	
-}
-
-function showcat()
-{
-<?php if(defined('MASCOT_SHOW') && MASCOT_SHOW==1)
-{
-?>
-	document.images.catcom.src=cat.src;
-<?php
-}
-?>
-}
-
 
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
 
@@ -63,7 +38,7 @@ function showcat()
 <script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
 <?php 
-require('./include/js_popsearchwindow.inc.php');
+//require('./include/js_popsearchwindow.inc.php');
 require($root_path.'include/inc_js_gethelp.php'); 
 require($root_path.'include/inc_css_a_hilitebu.php');
 ?>
@@ -80,12 +55,6 @@ onLoad="if(document.searchform.searchkey.focus) document.searchform.searchkey.fo
 <?php
 }
 
- if(defined('MASCOT_SHOW') && MASCOT_SHOW==1)
-{
-?>
-if(onLoad="if (window.focus) window.focus();loadcat();" 
-<?php
-}
 ?>
 <?php if (!$cfg['dhtml']){ echo ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
 
@@ -98,7 +67,7 @@ if(onLoad="if (window.focus) window.focus();loadcat();"
 </td>
 
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
-<a href="javascript:gethelp('')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
+<a href="javascript:gethelp('employee_how2new.php','<?php echo $personell_nr ?>','<?php echo $pid ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
  echo $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </td>
 </tr>
@@ -114,30 +83,7 @@ include('./gui_bridge/default/gui_tabs_personell_reg.php')
 <tr>
 <td colspan=3  bgcolor=<?php echo $cfg['body_bgcolor']; ?>>
 
-<?php  /* If defined, create the mascot */
-
-if(defined('MASCOT_SHOW') && MASCOT_SHOW==1)
-{
-?>
-<div class="cats">
-<a href="javascript:hidecat()"><img
-<?php if($from=="pass")
-{ 
-    echo 'src="'.$root_path.'main/imgcreator/catcom.php?lang='.$lang.'&person='.strtr($HTTP_COOKIE_VARS[$local_user.$sid]," ","+").'" ';
- }
-else 
-{
-	echo ' src="'.$root_path.'gui/img/common/default/pixel.gif" ';
-}
-?>
-align=right id=catcom border=0></a>
-</div>
-<?php
-}
-?>
-
 <ul>
-
 
 <?php 
 /* If the origin is admission link, show the search prompt */
@@ -182,7 +128,7 @@ else
 
 <FONT    SIZE=-1  FACE="Arial">
 
-<form method="post" action="<?php echo $thisfile; ?>" name="aufnahmeform">
+<form method="post" action="<?php echo $thisfile; ?>" name="aufnahmeform" onSubmit="return chkForm(this)">
 
 <table border="0" cellspacing=1 cellpadding=0 width=450>
 
@@ -474,15 +420,6 @@ if($GLOBAL_CONFIG['patient_name_middle_show'])
 echo '<input type="hidden" name="forcesave" value="1">
 								<input  type="submit" value="'.$LDForceSave.'">';
  ?>
-<?php if($update) 
-/*	{ 
-		echo '<input type="button" value="'.$LDCancel.'" onClick="location.replace(\'';
-		if($from=="such") echo 'aufnahme_daten_such.php?sid='.$sid.'&lang='.$lang;
-			else echo 'aufnahme_list.php?sid='.$sid.'&newdata=1&lang='.$lang;
-		echo '\')"> ';  
-
-	}*/
-?>
 </form>
 
 <?php if (!($newdata)) : ?>
@@ -512,15 +449,6 @@ echo '<input type="hidden" name="forcesave" value="1">
 <!--<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="aufnahme_daten_such.php<?php echo URL_APPEND; ?>"><?php echo $LDSearchPersonell ?></a><br>
  <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="aufnahme_list.php<?php echo URL_APPEND; ?>&newdata=1&from=entry"><?php echo $LDArchive ?></a><br>
  -->
-<?php  /* If defined, create the mascot */
-
-if(defined('MASCOT_SHOW') && MASCOT_SHOW==1)
-{
-?>
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="#" onClick="showcat()"><?php echo $LDCatPls ?><br>
-<?php
-}
-?>
 
 <!-- <p>
 <a href="<?php echo $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>

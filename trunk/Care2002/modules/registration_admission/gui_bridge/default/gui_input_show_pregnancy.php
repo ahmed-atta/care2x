@@ -110,6 +110,7 @@ $dm=&$obj->DeliveryModes();
 		}
 	}
 # Is booked
+
 if(!isset($pregnancy['is_booked'])) $pregnancy['is_booked']=1;
 $TP_ISBOOKED=$LD['is_booked'];
 $TP_ISBOOKED_YES='<input type="radio" name="is_booked" value="1" ';
@@ -158,6 +159,7 @@ if($obj->LastRecordCount()){
 		$TP_INDUCT_RADIOS.='&nbsp;';
 	}
 }
+
 # Induction indication
 $TP_INDUCT_INDIC.=$LD['induction_indication'];
 $TP_INDUCT_VAL=$pregnancy['induction_indication'];
@@ -167,6 +169,7 @@ $TP_ANAESTH=$LD['anaesth_type_nr'];
 # Anaesthesia radio buttons 
 $TP_ANAESTH_RADIOS='';
 $ana=&$obj->AnaesthesiaTypes();
+
 if($obj->LastRecordCount()){
 	while($row=$ana->FetchRow()){
 		$TP_ANAESTH_RADIOS.='<input type="radio" name="anaesth_type_nr" value="'.$row['nr'].'" ';
@@ -177,6 +180,7 @@ if($obj->LastRecordCount()){
 		$TP_ANAESTH_RADIOS.='&nbsp;';
 	}
 }
+
 # Complications	
 $TP_COMPLICATION=$LD['complications'];
 $TP_COMPLIC=$pregnancy['complications'];
@@ -238,7 +242,6 @@ if($obj->LastRecordCount()){
 }
 $TP_DOCBY=$LD['docu_by'];
 $TP_DBY=$HTTP_SESSION_VARS['sess_user_name'];
-
 # Load the template
 $tp_preg=&$TP_obj->load('registration_admission/tp_input_show_pregnancy.htm');
 eval("echo $tp_preg;");
