@@ -16,82 +16,80 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
-$breakfile="nursing.php".URL_APPEND;
-
-if($pday=="") $pday=date(d);
-if($pmonth=="") $pmonth=date(m);
-if($pyear=="") $pyear=date(Y);
-$s_date=$pyear."-".$pmonth."-".$pday;
+$breakfile='nursing.php'.URL_APPEND;
 
 /* Load the date formatter */
 require_once($root_path.'include/inc_date_format_functions.php');
-
-
+include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+$GLOBAL_CONFIG;
+$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
+$glob_obj->getConfig('patient_%');
 
 if($mode=='such')
 {
+	$tb_person='care_person';
+	$tb_encounter='care_encounter';
+	$tb_location='care_encounter_location';
+	$tb_ward='care_ward';
+	
 	$srcword=trim($srcword);
 	//prepare the seach word detect several types
-	if(is_numeric($srcword)) $srcword=(int) $srcword;
-	if(substr_count($srcword,","))  // detect comma
-	{
-		$buf=str_replace(",","",$srcword);//echo $buf;
-		$wx=explode(" ",trim($buf));
-		$sln=$wx[0];$sfn=$wx[1];$sg=$wx[2];
-		switch(sizeof($wx))
-		{
-			case 2: $sw="ln=$sln&fn=$sfn";break;
-			case 3: $sw="ln=$sln&fn=$sfn&g=$sg"; break;
-			default: $sw=$srcword;$sln=$sw;$sfn=$sw;$sg=$sw;
+	if(is_numeric($srcword)){
+		$usenum=true;
+		
+		if($srcword>$GLOBAL_CONFIG['patient_inpatient_nr_adder']){
+			$cond.="e.encounter_nr LIKE '%".(int)substr($srcword,2)."'"; // set the offset here
+		}else{
+			$cond.="e.encounter_nr LIKE '%".(int)$srcword."'";
 		}
-	}
-	else
-	{
-		$wx=explode(" ",$srcword); // explode to array
-		$sln=$wx[1];$sfn=$wx[0];$sg=$wx[2];
-		switch(sizeof($wx))
-		{
-			case 2: $sw="ln=$sln&fn=$sfn";break;
-			case 3: $sw="ln=$sln&fn=$sfn&g=$sg"; break;
-			default: $sw=$srcword; $sln=$sw;$sfn=$sw;$sg=$sw;
+	}else{
+		$usenum=false;
+		$buf=strtr($srcword,","," ");//echo $buf;
+		$wx=explode(' ',$buf); // explode to array
+		$cond='';
+		for($i=0;$i<sizeof($wx);$i++){
+			if(!empty($cond)){
+				$cond.=' OR ';
+			}
+			$cond.="p.name_last LIKE '".$wx[$i]."%' OR p.name_first LIKE '".$wx[$i]."%' OR p.date_birth LIKE '".$wx[$i]."%'";
 		}
+		$cond="($cond)";
+		
 	}
-	//echo $sw;
-	//echo $srcword;
+	$cond.=" AND l.encounter_nr=e.encounter_nr";
+	if(!$arch) $cond.=' AND NOT e.is_discharged';
 	
-	$dbtable='care_nursing_station_patients';
+	if($usenum) $cond.=' ORDER BY e.encounter_nr DESC';
+		else $cond.=' AND p.pid=e.pid ORDER BY p.name_last';
+	
 	if(!isset($db)||!$db)include($root_path.'include/inc_db_makelink.php');
-		if($dblink_ok)
-		{				if(!$arch)	$sql="SELECT station, s_date, info FROM $dbtable
-									WHERE s_date='".date('Y-m-d')."' 
-												AND bed_patient LIKE '%$sw%' 
-												AND info<>'template' ORDER BY s_date DESC";
-						else 	$sql="SELECT station, s_date, info FROM $dbtable
-									WHERE bed_patient LIKE '%$sw%' 
-												AND info<>'template' ORDER BY s_date DESC";
-					if($ergebnis=$db->Execute($sql))
-       					{
-							$rows=$ergebnis->RecordCount();
-							if($rows>1)
-							{
-								//echo $srcword;
-							}
-							elseif($rows==1)
-							{
-								$result=$ergebnis->FetchRow();
-							  	$dbuf=explode(".",$result['t_date']);
-  								$buf="nursing-station.php?sid=$sid&lang=$lang&sln=$sln&sfn=$sfn&sg=$sg&station=".$result['station']."&pday=".$dbuf[0]."&pmonth=".$dbuf[1]."&pyear=".$dbuf[2];
-
-								header("location:".$buf);
-								exit;
-							}
-						}
-						else echo "$sql<br>$LDDbNoRead"; 
+	if($dblink_ok){			
+		$sql="SELECT p.name_last, p.name_first,p.date_birth,
+					e.encounter_nr, e.encounter_class_nr,e.in_ward,
+					w.name AS ward_name,w.roomprefix,
+					l.location_nr AS  ward_nr,l.date_from AS ward_date,
+					r.location_nr AS room_nr ";
+					
+		if($usenum){
+			$sql.=" FROM $tb_encounter as e LEFT JOIN $tb_person AS p ON p.pid=e.pid";
+		}else{
+			$sql.=" FROM $tb_person as p LEFT JOIN $tb_encounter AS e ON p.pid=e.pid";
 		}
-  		 else { echo "$LDDbNoLink<br>"; } 
-
+		$sql.=" LEFT JOIN $tb_location AS l ON l.encounter_nr=e.encounter_nr AND l.type_nr=2
+					LEFT JOIN $tb_location AS r ON r.encounter_nr=l.encounter_nr AND r.type_nr=4 AND r.group_nr=l.location_nr 
+					LEFT JOIN $tb_ward AS w ON w.nr=l.location_nr
+					WHERE $cond ";
+					//echo $sql."<p>";
+		if($ergebnis=$db->Execute($sql)){
+			$rows=$ergebnis->RecordCount();
+/*			if($rows==1){
+				$result=$ergebnis->FetchRow();
+				header("location:nursing-station.php?sid=$sid&lang=$lang&ward_nr=".$result['ward_nr']."&station=".$result['ward_name']);
+				exit;
+			}
+*/		}else{echo "$sql<br>$LDDbNoRead";} 
+	}else { echo "$LDDbNoLink<br>"; } 
 }
-
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
@@ -129,7 +127,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 
 <ul>
 <FONT    SIZE=-1  FACE="Arial">
-<?php if($rows>1) : ?>
+<?php if($rows){ ?>
 <table border=0>
   <tr>
     <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"></td>
@@ -142,26 +140,75 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <table border=0 cellpadding=0 cellspacing=0>
   <tr bgcolor=#0000aa>
     <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp;</b></td>
-    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; <?php echo $LDDate ?></b></td>
+<?php
+if($usenum){
+?>
+    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; <?php echo $LDAdm_Nr; ?></b></td>
+<?php
+}
+?>
+    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; <?php echo $LDLastName ?></b></td>
+    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; <?php echo $LDName ?></b></td>
+    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; <?php echo $LDBirthDate ?></b></td>
+<?php
+if(!$usenum){
+?>
+    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; <?php echo $LDAdm_Nr; ?></b></td>
+<?php
+}
+?>
     <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; &nbsp;<?php echo $LDStation ?>&nbsp;</b></td>
+    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; &nbsp;<?php echo $LDRoom ?>&nbsp;</b></td>
+    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; <?php echo $LDDate ?></b></td>
+    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; <?php echo $LDStatus ?></b></td>
   </tr>
  <?php 
  $toggle=0;
  while($result=$ergebnis->FetchRow())
  {
+	if($result['encounter_class_nr']==2) $full_enr=$result['encounter_nr']+$GLOBAL_CONFIG['patient_outpatient_nr_adder'];
+		else  $full_enr=$result['encounter_nr']+$GLOBAL_CONFIG['patient_inpatient_nr_adder'];
+		
  	echo'
   <tr ';
-  if($toggle){ echo "bgcolor=#efefef"; $toggle=0;} else {echo "bgcolor=#ffffff"; $toggle=1;}
-  $dbuf=explode('-',$result['s_date']);
-	$buf="nursing-station.php?sid=$sid&lang=$lang&sln=".$sln."&sfn=".$sfn."&sg=".$sg."&station=".$result[station]."&pday=".$dbuf[2]."&pmonth=".$dbuf[1]."&pyear=".$dbuf[0];
+  	if($toggle){ 
+  		echo "bgcolor=#efefef";
+		$toggle=0;
+	}else{
+		echo "bgcolor=#ffffff"; 
+		$toggle=1;
+	}
+  
+	$buf="nursing-station.php?sid=$sid&lang=$lang&station=".$result['ward_name']."&ward_nr=".$result['ward_nr'];
+  
   echo '>
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">';
 	if($result['s_date'] <> (date('Y-m-d'))) echo '<img '.createComIcon($root_path,'bul_arrowblusm.gif','0').'>';
 		else echo '<img '.createComIcon($root_path,'r_arrowgrnsm.gif','0').'>';
 	echo'
-	</a></td>
-    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; <a href="'.$buf.'" title="'.$LDClk2Show.'">'.formatDate2Local($result['s_date'],$date_format).'</a></td>
-    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.$result['station'].'</a>&nbsp;</td>
+	</a></td>';
+	if($usenum){
+	echo '
+    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.$full_enr.'</a>&nbsp;</td>';
+	}
+	echo '
+    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.$result['name_last'].'</a>&nbsp;</td>
+    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.$result['name_first'].'</a>&nbsp;</td>
+    <td><FONT  SIZE=-1  FACE="Arial">&nbsp;'.formatDate2Local($result['date_birth'],$date_format).'</td>';
+	if(!$usenum){
+	echo '
+    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;'.$full_enr.'&nbsp;</td>';
+	}
+	
+	echo '
+    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.$result['ward_name'].'</a>&nbsp;</td>
+    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;';
+	if($result['room_nr']) echo $result['roomprefix'].' '.$result['room_nr'];
+	echo '&nbsp;</td>
+    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; '.formatDate2Local($result['ward_date'],$date_format).'</td>
+    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; ';
+	if($result['in_ward']) echo $LDInWard;
+	echo '</td>
   </tr>
   <tr bgcolor=#0000ff>
   <td colspan=9 height=1><img '.createComIcon($root_path,'pixel.gif','0','absmiddle').'></td>
@@ -171,7 +218,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 </table>
 <p>
 <hr>
-<?php endif ?>
+<?php } ?>
 
 	<?php echo $LDSearchPrompt ?>
 	
