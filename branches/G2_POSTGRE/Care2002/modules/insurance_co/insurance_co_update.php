@@ -3,23 +3,23 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
 define('LANG_FILE','finance.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
-/* Load the insurance object */
+
+
+// Load the insurance object
 require_once($root_path.'include/care_api_classes/class_insurance.php');
 $ins_obj=& new Insurance;
 
-switch($retpath)
-{
+switch($retpath){
 	case 'list': $breakfile='insurance_co_list.php'.URL_APPEND; break;
 	case 'search': $breakfile='insurance_co_search.php'.URL_APPEND; break;
 	default: $breakfile='insurance_co_manage.php'.URL_APPEND; 
@@ -27,6 +27,7 @@ switch($retpath)
 
 if(isset($firm_id)&&$firm_id){
 	if(isset($mode)&&$mode=='update'){
+		//$db->debug=true;
 		if($ins_obj->updateFirmInfoFromArray($firm_id,$HTTP_POST_VARS)){
     		header("location:insurance_co_info.php?sid=$sid&lang=$lang&firm_id=$firm_id&mode=show&save_ok=1&retpath=$retpath");
 			exit;

@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -41,7 +41,11 @@ if(!isset($mode)){
 					$mode='citytown_exists';
 				}else{
 					if($address_obj->saveCityTownInfoFromArray($HTTP_POST_VARS)){
-						$nr=$db->Insert_ID();
+						# Get the last insert ID
+						$insid=$db->Insert_ID();
+						# Resolve the ID to the primary key
+						$nr=$address_obj->LastInsertPK('nr',$insid);
+
     					header("location:citytown_info.php?sid=$sid&lang=$lang&nr=$nr&mode=show&save_ok=1&retpath=$retpath");
 						exit;
 					}else{echo "$sql<br>$LDDbNoSave";}

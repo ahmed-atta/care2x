@@ -10,8 +10,8 @@ require_once($root_path.'include/care_api_classes/class_encounter.php');
 *  Ward methods.
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance.
 * @author Elpidio Latorilla
-* @version deployment 1.1 (mysql) 2004-01-11
-* @copyright 2002,2003,2004,2004 Elpidio Latorilla
+* @version beta 1.0.09
+* @copyright 2002,2003,2004 Elpidio Latorilla
 * @package care_api
 */
 class Ward extends Encounter {
@@ -252,7 +252,7 @@ class Ward extends Encounter {
 	*/
 	function getRoomInfo($ward_nr,$s_nr,$e_nr){
 		global $db;
-		$this->sql="SELECT * FROM $this->tb_room WHERE type_nr=1 AND ward_nr=$ward_nr AND room_nr  BETWEEN '$s_nr' AND '$e_nr' AND  status NOT IN ('closed','deleted','hidden','inactive','void') ORDER BY room_nr";
+		$this->sql="SELECT * FROM $this->tb_room WHERE type_nr=1 AND ward_nr=$ward_nr AND room_nr  >= '$s_nr' AND room_nr <= '$e_nr' AND  status NOT IN ($this->dead_stat) ORDER BY room_nr";
 		if($this->result=$db->Execute($this->sql)) {
             if($this->rec_count=$this->result->RecordCount()) {
 				 return $this->result;	 
@@ -288,7 +288,7 @@ class Ward extends Encounter {
 	* @return boolean
 	*/
 	function _getWardOccupants($ward_nr,$date){
-		global $db;
+		global $db, $dbf_nodate;
 		
 		if($date==date('Y-m-d')) $pstat='discharged';
 			else $pstat='dummy';
@@ -298,6 +298,7 @@ class Ward extends Encounter {
 									b.location_nr AS bed_nr, 
 									b.encounter_nr,
 									b.nr AS bed_loc_nr,
+									p.pid,
 									p.name_last,
 									p.name_first,
 									p.date_birth,
@@ -306,7 +307,7 @@ class Ward extends Encounter {
 									p.photo_filename,
 									e.insurance_class_nr,
 									i.name AS insurance_name,
-									i.LD_var AS insurance_LDvar,
+									i.LD_var AS \"insurance_LDvar\",
 									n.nr AS ward_notes
 							FROM $this->tb_location AS r 
 									LEFT JOIN $this->tb_location AS b  ON 	(r.encounter_nr=b.encounter_nr
@@ -314,7 +315,7 @@ class Ward extends Encounter {
 																								AND	b.type_nr=5 
 																								AND b.status NOT IN ('$pstat','closed',$this->dead_stat)
 																								AND b.date_from<='$date'
-										 														AND ('$date'<=b.date_to OR b.date_to IN ('0000-00-00',''))
+										 														AND ('$date'<=b.date_to OR b.date_to ='$dbf_nodate')
 																								)	
 									LEFT JOIN $this->tb_enc AS e ON b.encounter_nr=e.encounter_nr
 									LEFT JOIN $this->tb_person AS p ON e.pid=p.pid
@@ -323,7 +324,7 @@ class Ward extends Encounter {
 							WHERE  r.group_nr=$ward_nr 
 											AND	r.type_nr=4 
 											AND r.status NOT IN ('$pstat','closed',$this->dead_stat)
-										 	AND ('$date'<=r.date_to OR r.date_to IN ('0000-00-00',''))
+										 	AND ('$date'<=r.date_to OR r.date_to ='$dbf_nodate')
 							/*GROUP BY r.location_nr*/
 							ORDER BY r.location_nr,b.location_nr";
 		if($this->result=$db->Execute($this->sql)){
@@ -377,7 +378,7 @@ class Ward extends Encounter {
 	* @return boolean
 	*/
 	function closeBed($ward_nr,$room_nr,$bed_nr){
-		$this->sql="UPDATE $this->tb_room SET closed_beds=CONCAT(closed_beds,'$bed_nr/') WHERE type_nr=1 AND room_nr=$room_nr AND ward_nr=$ward_nr";
+		$this->sql="UPDATE $this->tb_room SET closed_beds=".$this->ConcatFieldString("closed_beds","$bed_nr/")." WHERE type_nr=1 AND room_nr=$room_nr AND ward_nr=$ward_nr";
 		//if( $this->Transact($this->sql)) return true; else echo $this->sql;
 		return $this->Transact($this->sql);
 	}
@@ -391,7 +392,18 @@ class Ward extends Encounter {
 	* @return boolean
 	*/
 	function openBed($ward_nr,$room_nr,$bed_nr){
-		$this->sql="UPDATE $this->tb_room SET closed_beds=REPLACE(closed_beds,'$bed_nr/','') WHERE type_nr=1 AND room_nr=$room_nr AND ward_nr=$ward_nr";
+		global $dbtype;
+		switch ($dbtype){
+			case 'mysql': $this->sql="UPDATE $this->tb_room SET closed_beds=".$this->ReplaceFieldString("closed_beds","$bed_nr/","")." WHERE type_nr=1 AND room_nr=$room_nr AND ward_nr=$ward_nr";
+				break;
+			case 'postgres':
+			case 'postgres7':
+				$room_obj=$this->getRoomInfo($ward_nr,$room_nr,$room_nr);
+				$room_info=$room_obj->FetchRow();
+				$closedbeds=str_replace("$bed_nr/","",$room_info['closed_beds']);
+				$this->sql="UPDATE $this->tb_room SET closed_beds='$closedbeds' WHERE type_nr=1 AND room_nr=$room_nr AND ward_nr=$ward_nr";
+				break;
+		}
 		//if( $this->Transact($this->sql)) return true; else echo $this->sql;
 		return $this->Transact($this->sql);
 	}
@@ -409,9 +421,9 @@ class Ward extends Encounter {
 		$this->data_array=$data;
 		$this->data_array['date_create']=date('Y-m-d');
 		$this->data_array['history']="Create: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
-		$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		//$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
 		$this->data_array['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
-		$this->data_array['create_time']=NULL;
+		$this->data_array['create_time']=date('YmdHis');
 		return $this->insertDataFromInternalArray();
 	}
 	/**
@@ -573,15 +585,37 @@ class Ward extends Encounter {
 	* @return boolean
 	*/
 	function countCreatedRooms(){
+	    global $db, $dbf_nodate;
+		$this->sql="SELECT COUNT(r.room_nr) AS nr_rooms,w.nr  FROM $this->tb_room AS r, $this->tb_ward AS w
+							WHERE w.nr=r.ward_nr AND r.date_close='$dbf_nodate' AND r.status NOT IN ('closed','inactive','void','hidden','deleted')
+							 GROUP BY w.nr";
+        if($result=$db->Execute($this->sql)) {
+            if($result->RecordCount()) {
+	    			 return $result;
+			} else { return false; }
+		} else { return false; }
+	}
+	/**
+	* Returns rooms data of a ward
+	*
+	* The returned adodb record object contains rows of arrays.
+	* Each array contains the  data with the following index keys:
+	* - room_nr = room number
+	* - nr_rooms  = total number of rooms
+	* - nr = the primary record key
+	*
+	* @access public
+	* @param int Primary record key number
+	* @return boolean
+	*/
+	function getRoomsData($ward_nr=0){
 	    global $db;
-		$this->sql="SELECT r.room_nr,COUNT(*) AS nr_rooms,w.nr 
-							FROM $this->tb_room AS r 
-								LEFT JOIN $this->tb_ward AS w ON w.nr=r.ward_nr
-							WHERE r.status NOT IN ('closed','inactive','void','hidden','deleted') 
-							GROUP BY w.nr ORDER by w.nr";
+	    if(!$ward_nr) return FALSE;
+		$this->sql="SELECT *  FROM $this->tb_room WHERE ward_nr='$ward_nr' AND status NOT IN ('closed','inactive','void','hidden','deleted')
+							 ORDER BY room_nr";
         if($this->result=$db->Execute($this->sql)) {
             if($this->result->RecordCount()) {
-				 return $this->result;	 
+				 return $this->result;
 			} else { return false; }
 		} else { return false; }
 	}
@@ -609,15 +643,15 @@ class Ward extends Encounter {
 	* @return boolean
 	*/
 	function RoomExists($room_nr=0,$ward_nr=0){
-	    global $db;
+	    global $db, $dbf_nodate;
 		if(!$room_nr) return false;
 		if($ward_nr) $this->ward_nr=$ward_nr;
 			elseif(!$this->ward_nr) return false;
 		$this->sql="SELECT room_nr FROM $this->tb_room 
 							WHERE ward_nr=$this->ward_nr 
 								AND room_nr=$room_nr 
-								AND date_close IN ('0000-00-00','') 
-								AND status NOT IN ('inactive','closed','void','hidden','deleted')";
+								AND date_close = '$dbf_nodate'
+								AND status NOT IN ($this->dead_stat)";
         if($this->result=$db->Execute($this->sql)) {
             if($this->result->RecordCount()) {
 				 return true;
@@ -644,16 +678,16 @@ class Ward extends Encounter {
 	* @return boolean
 	*/
 	function _getActiveRoomInfo($room_nr=0,$ward_nr=0){
-	    global $db;
+	    global $db,$dbf_nodate;
+	    //$db->debug=1;
 		if($ward_nr) $this->ward_nr=$ward_nr;
 			elseif(!$this->ward_nr) return false;
 		$this->sql="SELECT * FROM $this->tb_room 
 							WHERE ward_nr=$this->ward_nr";
 							
 		if($room_nr) $this->sql.=" AND room_nr=$room_nr";
-		
-		$this->sql.="  AND date_close IN ('0000-00-00','') 
-							AND status NOT IN ('inactive','closed','void','hidden','deleted')";
+
+		$this->sql.="  AND date_close = '$dbf_nodate' AND status NOT IN ($this->dead_stat)";
 							
         if($this->result=$db->Execute($this->sql)) {
             if($this->result->RecordCount()) {
@@ -701,7 +735,8 @@ class Ward extends Encounter {
 	*/
 	function countBeds($ward_nr){
 	    global $db;
-		$this->sql="SELECT SUM(nr_of_beds) AS nr FROM $this->tb_room WHERE ward_nr=$ward_nr AND NOT is_temp_closed AND status NOT IN ($this->dead_stat)";
+		$this->sql="SELECT SUM(nr_of_beds) AS nr FROM $this->tb_room WHERE ward_nr=$ward_nr AND 
+		is_temp_closed IN ('',0) AND status NOT IN ($this->dead_stat)";
         if($buf=$db->Execute($this->sql)) {
             if($buf->RecordCount()) {
 				$row=$buf->FetchRow();
@@ -737,7 +772,7 @@ class Ward extends Encounter {
 				FROM $this->tb_enc AS e 
 					LEFT JOIN $this->tb_person AS p ON e.pid=p.pid
 					LEFT JOIN $this->tb_ward AS w ON e.current_ward_nr=w.nr
-				WHERE e.encounter_class_nr='1' AND NOT e.is_discharged $cond AND NOT in_ward";
+				WHERE e.encounter_class_nr='1' AND  e.is_discharged IN ('',0) $cond AND  in_ward IN ('',0)";
 		//echo $sql;
 	    if ($this->res['_cwil']=$db->Execute($this->sql)){
 		   	if ($this->rec_count=$this->res['_cwil']->RecordCount()){
