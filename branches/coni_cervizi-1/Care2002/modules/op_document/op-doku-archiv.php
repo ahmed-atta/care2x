@@ -570,7 +570,7 @@ if($mode=="select") {
 <?php else : ?>
 <input name="status" type="radio" value="2" <?php if (($row[status]==2)||($status==2))echo "checked" ?> ><?php echo $LDAmbulant ?>  <input name="status" type="radio" value="1"  <?php if(($row[status]==1)||($status==1)) echo "checked" ?> ><?php echo $LDStationary ?><br>
 </font>
-<FONT SIZE=-1  FACE="Arial" <?php if($err_kasse) echo 'color=#cc0000'; ?>><input name="kasse" type="radio" value="kasse" <?php if (($row[kasse]=="kasse")||($row[kasse]=="kasse")||($kasse=="kasse")) echo "checked" ?> ><?php echo $LDInsurance ?>  <input name="kasse" type="radio" value="privat"  <?php if (($row[kasse]=="privat")||($row[kasse]=="privat")||($kasse=="privat")) echo "checked" ?> ><?php echo $LDPrivate ?> <input name="kasse" type="radio" value="x"  <?php if (($row[kasse]=="x")||($row[kasse]=="x")||($kasse=="x")) echo "checked" ?> ><?php echo $LDSelfPay ?>
+																											     <FONT SIZE=-1  FACE="Arial" <?php if($err_kasse) echo 'color=#cc0000'; ?>><input name="kasse" type="radio" value="kasse" <?php if (($row[kasse]=="kasse")||($row[kasse]=="kasse")||($kasse=="kasse")) echo "checked" ?> ><?php echo $LDInsurance ?>  <input name="kasse" type="radio" value="privat"  <?php if (($row[kasse]=="privat")||($row[kasse]=="privat")||($kasse=="privat")) echo "checked" ?> ><?php echo $LDPrivate ?> <input name="kasse" type="radio" value="x"  <?php if (($row[kasse]=="x")||($row[kasse]=="x")||($kasse=="x")) echo "checked" ?> ><?php echo $LDSelfPay ?>
 <?php endif ?>
 </td>
 </tr>

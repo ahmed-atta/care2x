@@ -758,7 +758,7 @@ if ($result['kasse']=="kasse")
 }
  elseif($result['kasse']=="privat")
  {
-	 echo $LDPrivate;
+   echo 'ciccio' /*$LDPrivate*/;
   }
    elseif($result['kasse']=="x")
    {
