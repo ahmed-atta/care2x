@@ -11,6 +11,23 @@ require_once('../../include/inc_vars_resolve.php');
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
         <TR>
+          <TD><IMG height=15
+            src="../../gui/img/common/default/pixel.gif"
+            width=5 border=0></TD></TR>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+			<P><img src="../../fotos/credits/elpidio_latorilla_3.jpg" border=0  align=right vspace=10>
+			<b>La première version bêta de CARE 2002 était créée par Elpidio Latorilla:</b>
+			<p>
+			Professions: <br>Programmeur, Infirmier de chirurgie, technicien en électronique & télecommunications
+			<p>
+			Secteurs d`intérêt: <br>C, C++, PHP, Javascript, SQL, TCL/TK, HTML, Perl, ASP, Java
+			<P><a href="mailto:elpidio@latorilla.com"><u>Elpidio Latorilla peut être contacté ici...</u></a>
+</TD></TR></TBODY></TABLE>
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
           <TD><IMG height=15 
             src="../../gui/img/common/default/pixel.gif" 
             width=5 border=0></TD></TR>
@@ -87,6 +104,35 @@ Il a décidé de joindre activement la source libre car:<br><i>"Un tel monde idéal
 			
 			<P><a href="mailto:agusmr@mweb.co.id"><u>Agus M. Ramdan  peut être  contacté ici..</u></a>
 </TD></TR></TBODY></TABLE>
+
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD><IMG height=15
+            src="../../gui/img/common/default/pixel.gif"
+            width=5 border=0></TD></TR>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+			<P><img src="../../gui/img/control/default/<?php echo $lang ?>/<?php echo $lang ?>_x-blank.gif"  border=0  width=135 align=right vspace=10>
+			<b>Thomas Wiedmann (DE) a contribué aux fonctions suivantes:</b>
+			<p><font size=1>
+			Les tests complets <br>
+			Déboggage <br>
+			DB 'le concept de serrure optimistique' concept<br>
+			DB optimalisations <br>
+			Scripts de validation pour les dates et numéros<p>
+			</font>
+			Thomas Wiedmann est un dévelopeur de logiciels depuis longtemps et travaille à  Stuttgart, Allemagne. Il a
+			travaillé avec Gupta Team Developer et IBM DB2 depuis 7 ans et est aussi un
+			administrateur certifié IBM de UDB DB2. Lisez plus sur DB2 dans son livre
+			"DB2" ISBN 3-932311-80-9. Il est un auteur de TOOLBOX (www.toolbox-mag.de),
+			un magazine allemand de dévelopeurs.
+
+
+			<P><a href="mailto:tho123@users.sourceforge.net"><u>Thomas Wiedmann peut être contacté ici...</u></a>
+</TD></TR></TBODY></TABLE>
+
 
 <hr>
 <font face="verdana,arial" size=3 color="#0000ff">Autres crédits</font>
