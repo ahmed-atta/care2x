@@ -27,26 +27,26 @@ $LDSonography='Sonografia';
 $LDNuclearDiagnostics='Diagnósticos Nuclear';
 $LDRadiology='Radiologia';
 $LDOncology='Oncologia';
-$LDNeonatal='Neonato';
+$LDNeonatal='Neonatal';
 $LDCentralLaboratory='Laboratório Médico';
-$LDSerologicalLaboratory='Serological Laboratory';
-$LDChemicalLaboratory='Chemical Laboratory';
-$LDBacteriologicalLaboratory='Bacteriological Laboratory';
+$LDSerologicalLaboratory='Laboratório Serológico';
+$LDChemicalLaboratory='Laboratório Químico';
+$LDBacteriologicalLaboratory='Laboratório Bacteriológico';
 $LDTechnicalMaintenance='Manutenção';
-$LDITDepartment='IT Department';		
+$LDITDepartment='Departamento de TI';
 $LDGeneralAmbulatory='Ambulatório Geral';
-$LDBloodBank='Blood Bank';
+$LDBloodBank='Banco de sangue';
 $LDNursing='Enfermagem';
 /* 2003-04-27 EL */
 $LDMedical='Medical';
 $LDSupport='Non-medical';
-$LDNews='News';
-$LDDepartment='Department';
-$LDPressRelations='Presse';
+$LDNews='Notícias';
+$LDDepartment='Departamento';
+$LDPressRelations='Imprensa';
 /* 2003-05-19 EL */
-$LDSelectDept='Select department';
+$LDSelectDept='Selecione departamento';
 /*2003-06-15 EL*/
-$LDPlsSelectDept='Please select a department';
-$LD_AllMedicalDept='____All medical departments_____';
-$LDClinic='Clinica';
+$LDPlsSelectDept='Favor selecionar um departamento';
+$LD_AllMedicalDept='_Todos os departamentos médicos_';
+$LDClinic='Clínica';
 ?>

@@ -110,13 +110,13 @@ $LDEntryPrompt='Please enter a search keyword:<br>(e.g. family name, given name,
 $LDPersonellNr='Personell Nr.';
 $LDFunction='Funções';
 $LDOptions='Opções';
-$LDSearchFound='Search found ~nr~ relevant data.';
-$LDAddDoctorToList='Add a doctor to list';
-$LDAdd='Add';
-$LDDelete='Delete';
-$LDSureToDeleteEntry='Are you sure you want to delete this entry?';
+$LDSearchFound='Procura encontrou ~nr~ dados relevantes.';
+$LDAddDoctorToList='Adicionar um médico para a lista';
+$LDAdd='Adicionar';
+$LDDelete='Apagar';
+$LDSureToDeleteEntry='Você tem certeza que deseja apagar essa entrada?';
 /* 2003-03-18 EL */
-$LDChangeOnlyDept='Change the department';
-$LDCreateNursesList='Create Nurses\' List';
+$LDChangeOnlyDept='Mudar o departamento';
+$LDCreateNursesList='Criar lista de enfermagem';
 
 ?>

@@ -83,13 +83,13 @@ $LDElements=array(
 								"Data de admissão"
 								);
 $LDSearchKeyword="Procurar palavra-chave ou condição";
-$LDMEDOCS="Sistema de Documentação Médica (SDM)";
-$LDMedocsSearchTitle="SDM - Procura de documento";
+$LDMEDOCS="Prontuário";
+$LDMedocsSearchTitle="Prontuário - Procura de documento";
 $LDHideCat="Ocultar o mascote";
 $LDNewDocu="Documentar o paciente";
 $LDExtraInfo="Informações extras";
 $LDMedAdvice="Opinião médica";
-$LDMedocs="SDM";
+$LDMedocs="Prontuário";
 
 $LDYes="Sim";
 $LDNo="Não";
@@ -97,9 +97,9 @@ $LDNo="Não";
 $LDEditOn="Documentado de";
 $LDEditBy="Documentado por";
 $LDKeyNr="Nº da chave";
-$LDDocSearch="Procurar um SDM";
+$LDDocSearch="Procurar um prontuário";
 
-$LDMedDocOf="SDM de";
+$LDMedDocOf="Prontuário de";
 $LDMedocsElements=array(
 								"",
 								"Sobrenome",
@@ -111,8 +111,8 @@ $LDMedocsElements=array(
 								"Data",
 								"Hora"
 								);
-$LDStartNewDoc="Iniciar um novo SDM";
-$LDNoMedocsFound="Nenhum SDM foi encontrado!";
+$LDStartNewDoc="Iniciar um novo prontuário";
+$LDNoMedocsFound="Nenhum prontuário foi encontrado!";
 $LDAt="em";
 
 $LDDept="Departamento";
@@ -147,49 +147,49 @@ $LD_MMsddsyyyy="mm/dd/yyyy";
 /* 2002-10-13 EL */
 $LDPlsSelectPatientFirst="Por favor encontre o paciente primeiro.";
 /* 2002-11-30 EL */
-$LDPatientRegister='Patient registration';
-$LDRegDate='Registration date';
-$LDRegTime='Registration time';
-$LDRegBy='Registered by';
-$LDName2='Second name';
-$LDName3='Third name';
-$LDNameMid='Middle name';
-$LDNameMaiden='Maiden name';
-$LDNameOthers='Other names';
-$LDStreet='Street';
+$LDPatientRegister='Registro do paciente';
+$LDRegDate='Registro da data';
+$LDRegTime='Registro da hora';
+$LDRegBy='Registrado por';
+$LDName2='Segundo nome';
+$LDName3='Terceiro nome';
+$LDNameMid='Nome do meio';
+$LDNameMaiden='Nome de solteira';
+$LDNameOthers='Outros nomes';
+$LDStreet='Rua';
 $LDStreetNr='Nr.';
-$LDTownCity='Town/City';
-$LDProvState='Province/State';
-$LDRegion='Region';
-$LDCountry='Country';
-$LDCitizenship='Citizenship';
-$LDCivilStatus='Civil status'; /* Civil status = married, single, divorced, widow */
-$LDSingle='Single';
-$LDMarried='Married';
-$LDDivorced='Divorced';
-$LDWidowed='Widowed';
-$LDSeparated='Separated';
-$LDCellPhone='Cellphone.';
+$LDTownCity='Cidade';
+$LDProvState='Estado';
+$LDRegion='Região';
+$LDCountry='Países';
+$LDCitizenship='Cidadania';
+$LDCivilStatus='Estado civíl'; /* Civil status = married, single, divorced, widow */
+$LDSingle='Solteiro';
+$LDMarried='Casado';
+$LDDivorced='Divorciado';
+$LDWidowed='Viúvo';
+$LDSeparated='Separado';
+$LDCellPhone='Telefone celucar.';
 $LDFax='Fax';
 $LDEmail='Email';
-$LDZipCode='Zip';
-$LDPhoto='Photo';
+$LDZipCode='CEP';
+$LDPhoto='Foto';
 /* 2002-12-02 EL*/
-$LDPatientRegisterTxt='Register patient, search registrations, archive research';
-$LDAdmitNr='Admission Nr.';
-$LDPatient='Patient';
-$LDVisit='Visit';
-$LDVisitTxt='Ambulatory or outpatient admission';
+$LDPatientRegisterTxt='Registrar pacientes, procura de registros, arquivo de pesquisas';
+$LDAdmitNr='Nr. de admissão';
+$LDPatient='Paciente';
+$LDVisit='Visita';
+$LDVisitTxt='Ambulatório ou saída do paciente';
 $LDAdmissionTxt='Inpatient admission, search, research';
-$LDImmunization='Immunization';
-$LDESE='Enter, search, edit';
-$LDImmunizationTxt=$LDESE.' immunization report';
+$LDImmunization='Imunização';
+$LDESE='Entre, procure, edite';
+$LDImmunizationTxt=$LDESE.' relatório de imunização';
 $LDDRG='DRG (composite)';
 $LDDRGTxt=$LDESE.' DRG (Diagnosis related groups)';
-$LDProcedures='Procedures';
+$LDProcedures='Procedimentos';
 $LDProceduresTxt=$LDESE.' therapy procedures';
-$LDPrescriptions='Prescriptions';
-$LDPrescriptionsTxt=$LDESE.' Prescriptions';
+$LDPrescriptions='Prescrições';
+$LDPrescriptionsTxt=$LDESE.' Prescrições';
 /* 2002-12-03 EL*/
 $LDDiagXResults='Diagnostic Results';
 $LDDiagXResultsTxt='Search, research, display diagnostic results or reports';

@@ -29,24 +29,24 @@ $LDAuthor='Autor';
 */
 $LDPublishDate='Data de publicação <font size=1>(\'T\' for today)</font>';
 
-$LDAlertTitle='Please supply a title';
-$LDAlertNews='Please type the news article';
-$LDAlertAuthor='Please supply an author';
-$LDAlertDate='Please supply a publish date';
+$LDAlertTitle='Favor digitar um título';
+$LDAlertNews='Favor digitar o artigo';
+$LDAlertAuthor='Favor digitar o autor';
+$LDAlertDate='Favor entrar com a data de publicação';
 
-$LDWrittenOn='Written on:';
-$LDWrittenFrom='By:';
+$LDWrittenOn='Escrito em:';
+$LDWrittenFrom='Por:';
 
-$LDArticleSaved='The article is saved. You are seeing a preview.';
-$LDBackTxt='Back';
+$LDArticleSaved='O artigo foi salvo. Você está vendo um preview.';
+$LDBackTxt='Voltar';
 
 $LDQuickInfo='Quick Informer';
-$LDPhonePolice='Police';
-$LDPhoneFire='Fire Dept.';
-$LDAmbulance='Emergency';
-$LDPhone='Phone (Hospital)';
+$LDPhonePolice='Polícia';
+$LDPhoneFire='Bombeiros.';
+$LDAmbulance='Emergência';
+$LDPhone='Fone (Hospital)';
 $LDFax='Fax';
-$LDAddress='Address';
+$LDAddress='Endereço';
 $LDEmail='Email';
 
 $LDOpenTimes ='Admission Hours';
@@ -85,7 +85,7 @@ $LDBack2CafeNews='Back to cafeteria news';
 
 $LDProdName='Productname';
 $LDPriceDM='Price DM';
-$LDPriceEuro='Price €';
+$LDPriceEuro='Price ';
 $LDNoPrice='The price list is not available at the moment.';
 $LDSorry='We are sorry. Please try again later.';
 $LDCafePrices='cafeteria price list';
