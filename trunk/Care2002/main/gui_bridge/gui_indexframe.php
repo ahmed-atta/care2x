@@ -109,9 +109,11 @@ echo $langselect;
 
 <tr >
 <td colspan=3>
-<font FACE="Arial" SIZE=1 color="#6f6f6f"><nobr><b>Log Info</b></nobr><br>
-<?php echo  $login_name ?><br>
-<?php echo $login_dept ?><br></FONT>
+<font FACE="Arial" SIZE=1 color="#6f6f6f"><nobr><b><?php echo $LDUser ?>:</b></nobr><br>
+<?php echo  $HTTP_SESSION_VARS['sess_login_username']; ?><br>
+<?php echo $dept->FormalName($cfg['thispc_dept_nr']); ?><br>
+<?php echo $ward->WardName($cfg['thispc_ward_nr']); ?><br>
+</FONT>
 </td>
 </tr>
 </form>

@@ -10,9 +10,11 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-// // globalize POST, GET, & COOKIE  vars
 define('LANG_FILE','indexframe.php');
 define(NO_CHAIN,1);
+
+# Set here the window title
+$wintitle='Menu - Care2x';
 
 require_once($root_path.'include/inc_front_chain_lang.php');
 
@@ -38,23 +40,25 @@ if(($mask==2)&&!$nonewmask)
 	exit;
 }
 
- 
+# Get the menu items
 $sql='SELECT nr,sort_nr,name,LD_var,url,is_visible FROM care_menu_main WHERE is_visible=1 OR LD_var="LDEDP" OR LD_var="LDLogin" ORDER by sort_nr ';
 
 $result=$db->Execute($sql);
-//$rows=$db->NumberOfRows($result);
 
-//* Get the global config for language usage*/
+# Get the global config for language usage
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 $GLOBALCONFIG=array();
 $gc=new GlobalConfig($GLOBALCONFIG);
 $gc->getConfig('language_%');
 
-/* Prepare additional data for the gui template */
+# Prepare additional data for the gui template
 $charset=setCharSet();
-$wintitle='Menu - Care 2002';
-$login_name=$HTTP_COOKIE_VARS['ck_login_username'.$sid];
-$login_dept=$HTTP_COOKIE_VARS['ck_thispc_dept'];
+
+# Load dept & ward classes
+require_once($root_path.'include/care_api_classes/class_department.php');
+require_once($root_path.'include/care_api_classes/class_ward.php');
+$dept=new Department();
+$ward=new Ward();
 
 require('./gui_bridge/gui_indexframe.php');
 ?>
