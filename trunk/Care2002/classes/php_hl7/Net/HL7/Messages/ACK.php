@@ -1,37 +1,39 @@
+<?php
+
 class Net_HL7_Messages_ACK extends Net_HL7_Message {
 
   var $_ACK_TYPE;
   
   /**
-   * $ack = new Net::HL7::Messages::ACK($request);
+   * $ack = new Net_HL7_Messages_ACK($request);
    *
    * Convenience module implementing an acknowledgement (ACK) message. This
    * can be used in HL7 servers to create an acknowledgement for an
    * incoming message.
    */
-  function _init($req) {
+  function Net_HL7_Messages_ACK($req = "") {
+
+    parent::Net_HL7_Message();
     
-    $this->SUPER::_init();
-    
-    var ($reqMsh, $msh);
+    if ($req) {
+      $msh =& $req->getSegmentByIndex(0);
 
-    $req && ($reqMsh = $req->getSegmentByIndex(0));
-
-    if ($reqMsh) {
-
-      var $flds = $req->getSegmentByIndex(0)->getFields(1);
-	
-      $msh = new Net_HL7_Segments_MSH($flds);
+      if ($msh) {
+	$msh =& new Net_HL7_Segments_MSH($msh->getFields(1));
+      }
+      else {
+	$msh =& new Net_HL7_Segments_MSH();
+      }
     }
     else {
-	$msh = new Net_HL7_Segments_MSH();
+      $msh =& new Net_HL7_Segments_MSH();
     }
 
-    var $msa = new Net_HL7_Segment("MSA");
-
+    $msa =& new Net_HL7_Segment("MSA");
+    
     // Determine acknowledge mode: normal or enhanced
     //
-    if ($reqMsh && ($reqMsh->getField(15) || $reqMsh->getField(16))) {
+    if ($req && ($msh->getField(15) || $msh->getField(16))) {
       $this->_ACK_TYPE = "E";
       $msa->setField(1, "CA");
     }
@@ -42,19 +44,19 @@ class Net_HL7_Messages_ACK extends Net_HL7_Message {
 
     $this->addSegment($msh);
     $this->addSegment($msa);
-
+    
     $msh->setField(9, "ACK");
 
-    # Construct an ACK based on the request
+    // Construct an ACK based on the request
     if ($req && $reqMsh) {
-
+      
       $msh->setField(3, $reqMsh->getField(5));
       $msh->setField(4, $reqMsh->getField(6));
       $msh->setField(5, $reqMsh->getField(3));
       $msh->setField(6, $reqMsh->getField(4));
       $msa->setField(2, $reqMsh->getField(10));
     }
-    
+
     return 1;
   }
 
@@ -67,9 +69,9 @@ class Net_HL7_Messages_ACK extends Net_HL7_Message {
    *  mode (normal or enhanced) based upon the request, if not provided.
    * The message provided in $msg will be set in MSA 3.
    */
-  function setAckCode($code, $msg) {
+  function setAckCode($code, $msg = "") {
 
-    var $mode = "A";
+    $mode = "A";
 
     // Determine acknowledge mode: normal or enhanced
     //
@@ -77,12 +79,13 @@ class Net_HL7_Messages_ACK extends Net_HL7_Message {
       $mode = "C";
     }
     
-    if (length($code) == 1) {
+    if (strlen($code) == 1) {
       $code = "$mode$code";
     }
 
-    $this->getSegmentByIndex(1)->setField(1, $code);
-    $msg && $this->getSegmentByIndex(1)->setField(3, $msg);
+    $seg1 =& $this->getSegmentByIndex(1);
+    $seg1->setField(1, $code);
+    if ($msg) $seg1->setField(3, $msg);
   }
 
 
@@ -96,3 +99,5 @@ class Net_HL7_Messages_ACK extends Net_HL7_Message {
     $this->setAckCode("E", $msg);
   }
 }
+
+?>
