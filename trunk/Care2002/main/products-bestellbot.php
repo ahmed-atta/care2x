@@ -1,17 +1,24 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) $cat=""; 
-require("../language/".$lang."/lang_".$lang."_products.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","products.php");
+$local_user=$userck;
+require("../include/inc_front_chain_lang.php");
 
 switch($cat)
 {
-	case "pharma":	if ($ck_apo_user==NULL) $cat="";  
+	case "pharma":	if ($HTTP_COOKIE_VARS[$local_user.$sid]==NULL) $cat="";  
 							$title="$LDPharmacy - $LDOrderBotActivate";
 							$dbtable="pharma_orderlist_todo";
 							break;
-	case "medlager":if ($ck_medlager_user==NULL) $cat="";  
+	case "medlager":if ($HTTP_COOKIE_VARS[$local_user.$sid]==NULL) $cat="";  
 							$title="$LDMedDepot - $LDOrderBotActivate";
 							$dbtable="med_orderlist_todo";
 							break;
@@ -19,7 +26,7 @@ switch($cat)
 }
 
 $rows=0;
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK) 
 		{
 				$sql='SELECT * FROM '.$dbtable.' WHERE status LIKE "o_%" ORDER BY t_stamp DESC';;
@@ -40,12 +47,12 @@ if($link&&$DBLink_OK)
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <meta http-equiv="refresh" content="30, url: products-bestellbot.php">
-<title><?=$title ?></title>
+<title><?php echo $title ?></title>
 <script language=javascript>
 function goactive()
 	{
-<?
- if (!$nofocus) print "	
+<?php
+if (!$nofocus) print "	
  	self.focus();
  	";
 	if($nofocus) $nofocus=0; // toggle it to reset 	
@@ -55,19 +62,19 @@ function goactive()
 	
 function show_order(d,o,s,t)
 {
-	url="products-bestellbot-print.php?sid=<? print "$ck_sid&lang=$lang"; ?>&cat=<?=$cat ?>&dept="+d+"&order_id="+o+"&status="+s+"&t_stamp="+t;
+	url="products-bestellbot-print.php?sid=<?php print "$sid&lang=$lang&userck=$userck"; ?>&cat=<?php echo $cat ?>&dept="+d+"&order_id="+o+"&status="+s+"&t_stamp="+t;
 	powin=window.open(url,"powin","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
 }
 </script>
 
 </head>
-<body <? 	if($rows) print ' bgcolor="#ffffee"  onLoad="goactive()" '; ?>
+<body <?php 	if($rows) print ' bgcolor="#ffffee"  onLoad="goactive()" '; ?>
 	>
 <font face="Verdana, Arial" size=2 color=#800000>
 <MARQUEE dir=ltr scrollAmount=3 scrollDelay=120 width=150
-      height=10 align="middle"><b><?="$LDIm $title" ?>...</b></MARQUEE></font>
+      height=10 align="middle"><b><?php echo "$LDIm $title" ?>...</b></MARQUEE></font>
 <p>
-<?
+<?php
 //print "$rows <br>";
 if($rows)
 {
@@ -129,9 +136,10 @@ if($rows)
 			&nbsp;<b>'.$LDOrderArrived.'</b><p>
 			<form name=ack>
 			<input type="hidden" name="showlist" value="1">
-			<input type="hidden" name="sid" value="'.$ck_sid.'">
+			<input type="hidden" name="sid" value="'.$sid.'">
 			<input type="hidden" name="lang" value="'.$lang.'">
 			<input type="hidden" name="cat" value="'.$cat.'">
+			<input type="hidden" name="userck" value="'.$userck.'">
 			<input type="submit" value="'.$LDShowOrder.'">
     		</form>
 			</center>'; 
@@ -145,7 +153,7 @@ else if($showlist)
 		print '
 				<script language=javascript>
 				self.resizeTo(300,150);
-				window.location.replace("products-bestellbot.php?='.$ck_sid.'&lang='.$lang.'&cat='.$cat.'");
+				window.location.replace("products-bestellbot.php?='.$sid.'&lang='.$lang.'&cat='.$cat.'&userck='.$userck.'");
 				</script>';
 	}
 ?>

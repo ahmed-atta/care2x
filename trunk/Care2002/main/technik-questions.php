@@ -1,22 +1,47 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_tech.php");
-require("../req/config-color.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","tech.php");
+define("NO_2LEVEL_CHK",1);
+require("../include/inc_front_chain_lang.php");
+require("../include/inc_config_color.php");
 
 $thisfile="technik-questions.php";
-$breakfile="technik.php?sid=$ck_sid&lang=$lang";
+$breakfile="technik.php?sid=$sid&lang=$lang";
 
 $deptnames=get_meta_tags("../global_conf/$lang/doctors_abt_list.pid");
-$checkdept=1;
-require("../req/resolve_dept_dept.php");
 
-if(!$inquirer) $inquirer=$ck_login_username;
+/**
+* Resolve the department's acronym to it proper name
+*/
+$checkdept=1;
+require("../include/inc_resolve_dept_dept.php");
+
+if(!isset($inquirer)||empty($inquirer))
+{
+	if(isset($HTTP_GET_VARS['inquirer'])&&!empty($HTTP_GET_VARS['inquirer'])) 
+	{
+	    $inquirer=$HTTP_GET_VARS['inquirer'];
+    }
+	elseif(isset($HTTP_POST_VARS['inquirer'])&&!empty($HTTP_POST_VARS['inquirer'])) 
+	{
+	    $inquirer=$HTTP_POST_VARS['inquirer'];
+    }
+	else
+	{
+	     $inquirer=$HTTP_COOKIE_VARS['ck_login_username'.$sid];
+	}
+}
 $dbtable="tech_questions";
 
-	include("../req/db-makelink.php");
+	include("../include/inc_db_makelink.php");
 	if($link&&$DBLink_OK) 
 		{
 			if($mode=="save")
@@ -32,16 +57,17 @@ $dbtable="tech_questions";
 						VALUES 
 						(
 							'$dept',
-							'$query',
+							'".$HTTP_POST_VARS['query']."',
 							'$inquirer',
-							'$tphone', 
-							'$tdate', 
-							'$ttime', 
+							'".$HTTP_POST_VARS['tphone']."', 
+							'".$HTTP_POST_VARS['tdate']."', 
+							'".$HTTP_POST_VARS['ttime']."', 
 							'0'	)";
 						if(mysql_query($sql,$link))
 						{ 
 							mysql_close($link);
-							header("Location: ".strtr("technik-questions.php?sid=$ck_sid&lang=$lang&dept=$dept&inquirer=$inquirer"," ","+")); exit;
+							header("Location: ".strtr("technik-questions.php?sid=$sid&lang=$lang&dept=$dept&inquirer=$inquirer"," ","+")); 
+							exit;
 						}
 			 			else {print "<p>".$sql."$LDDbNoSave<br>"; };
 			}
@@ -50,10 +76,10 @@ $dbtable="tech_questions";
 			{
 				$sql="SELECT tdate,ttime,inquirer,query,answered,reply,ansby,astamp FROM $dbtable
 							 WHERE inquirer='$inquirer'
-							 		AND dept='$dept'
-									AND tdate='$tdate'
-									AND ttime='$ttime'
-									AND tid='$tid'
+							 		AND dept='".$HTTP_GET_VARS['dept']."'
+									AND tdate='".$HTTP_GET_VARS['tdate']."'
+									AND ttime='".$HTTP_GET_VARS['ttime']."'
+									AND tid='".$HTTP_GET_VARS['tid']."'
 									LIMIT 0,10"; 
         		if($result=mysql_query($sql,$link))
 				{
@@ -86,15 +112,15 @@ $dbtable="tech_questions";
 function checkform(d)
 {
 	if(d.query.value=="") 
-		{	alert("<?=$LDAlertQuestion ?>");
+		{	alert("<?php echo $LDAlertQuestion ?>");
 			return false;
 		}
 	if(d.inquirer.value=="") 
-		{	alert("<?=$LDAlertName ?>");
+		{	alert("<?php echo $LDAlertName ?>");
 			return false;
 		}
 	if(d.dept.value=="") 
-		{	alert("<?=$LDAlertDeptOnly ?>");
+		{	alert("<?php echo $LDAlertDeptOnly ?>");
 			return false;
 		}
 	return true;
@@ -102,15 +128,15 @@ function checkform(d)
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
 // -->
 </script> 
 
-<? 
-require("../req/css-a-hilitebu.php");
+<?php 
+require("../include/inc_css_a_hilitebu.php");
 ?>
 <style type="text/css" name="s2">
 td.vn { font-family:verdana,arial; color:#000088; font-size:10;background-color:#dedede}
@@ -118,47 +144,46 @@ td.vn { font-family:verdana,arial; color:#000088; font-size:10;background-color:
 </HEAD>
 
 <BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<? if (!$cfg['dhtml']){ print 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+<?php if (!$cfg['dhtml']){ print 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="45"><FONT  COLOR="<? print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG> &nbsp; <?=$LDTechSupport ?></STRONG></FONT></td>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?if($cfg['dhtml'])print'<a href="javascript:window.history.back()"><img src="../img/'.$lang.'/'.$lang.'_back2.gif" width=110 height=24 border=0  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
-<a href="javascript:gethelp('tech.php','queries')"><img src="../img/<?="$lang/$lang"; ?>_hilfe-r.gif" border=0 width=75 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?print $breakfile;?>"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 alt="<?=$LDClose ?>"  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="45"><FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
+<STRONG> &nbsp; <?php echo $LDTechSupport ?></STRONG></FONT></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right>
+<?php if($cfg['dhtml'])print'<a href="javascript:window.history.back()"><img src="../img/'.$lang.'/'.$lang.'_back2.gif" width=110 height=24 border=0  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
+<a href="javascript:gethelp('tech.php','queries')"><img src="../img/<?php echo "$lang/$lang"; ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
 <tr valign=top >
-<td bgcolor=<? print $cfg['body_bgcolor']; ?> valign=top colspan=2><p><br>
+<td bgcolor=<?php print $cfg['body_bgcolor']; ?> valign=top colspan=2><p><br>
 <ul>
 
-<? if (($mode=="read"))
+<?php if (($mode=="read"))
 	{
 		print '<table cellspacing=0 cellpadding=1 border=0 bgcolor="#999999" >
 				<tr>
 				<td>
 				<table  cellspacing=0 cellpadding=2 >
 				<tr><td bgcolor=#999999 >	<FONT  SIZE=2 FACE="verdana,Arial" color=white>';
-		print "<b>$LDInquiry $LDFrom $inhalt[inquirer] $LDOn $inhalt[tdate] $LDAt $inhalt[ttime] $LDOClock:</b>";
+		print "<b>$LDInquiry $LDFrom ".$inhalt['inquirer']." $LDOn ".$inhalt['tdate']." $LDAt ".$inhalt['ttime']." $LDOClock:</b>";
 		print '	</td>
 				</tr>
 				<tr><td class="vn">';
-		print "	\" ".nl2br($inhalt[query])." \"</td></tr> ";
+		print "	\" ".nl2br($inhalt['query'])." \"</td></tr> ";
 		
-		if($inhalt[answered])
+		if(isset($inhalt['answered'])&&$inhalt['answered'])
 		{
 			print '	<tr><td bgcolor="#999999" >	<FONT  SIZE=2 FACE="verdana,Arial" color=white>';
 
-			print "	<b>$LDReply $LDFrom $inhalt[ansby] $LDAt $inhalt[astamp] :</b>";
+			print "	<b>$LDReply $LDFrom ".$inhalt['ansby']." $LDAt ".$inhalt['astamp']." :</b>";
 			print '	</td>
 					</tr>
 					<tr><td  bgcolor="#ffffcc" ><FONT  SIZE=1 FACE="verdana,Arial" >';
-			print "	\" ".nl2br($inhalt[reply])." \" ";
+			print "	\" ".nl2br($inhalt['reply'])." \" ";
 			print '</td> 
 				</tr>';
 		}
 		print '
 				</table>
-
 				</td>
 				</tr>
 				</table>';
@@ -172,26 +197,25 @@ td.vn { font-family:verdana,arial; color:#000088; font-size:10;background-color:
 
 <table  cellspacing=0 cellpadding=2 >
 <tr><td bgcolor=#999999 align=center colspan=2>	<FONT  SIZE=2 FACE="verdana,Arial" color=white>
-<b><?=str_replace("~tagword~",$rows,$LDLastQuestions) ?></b>
+<b><?php echo str_replace("~tagword~",$rows,$LDLastQuestions) ?></b>
 </td>
 </tr>
 <tr><td class="vn">
-<?
-if($rows)
+<?php if($rows)
 while ($content=mysql_fetch_array($ergebnis)) 
 {
-	print "&nbsp;<b>$content[tdate]:</b> <a href=\"$thisfile?sid=$ck_sid&mode=read&dept=$content[dept]&tdate=$content[tdate]&ttime=$content[ttime]&inquirer=$content[inquirer]&tid=$content[tid]\">".substr($content[query],0,40)."...";
-	if($content[answered]) print '<img src="../img/warn.gif" width=16 height=16 border=0>';
+	print "&nbsp;<b>$content[tdate]:</b> <a href=\"$thisfile?sid=$sid&lang=$lang&mode=read&dept=$content[dept]&tdate=$content[tdate]&ttime=$content[ttime]&inquirer=$content[inquirer]&tid=$content[tid]\">".substr($content[query],0,40)."...";
+	if(isset($content['answered'])&&!empty($content['answered'])) print '<img src="../img/warn.gif" width=16 height=16 border=0>';
 	print '</a><p>';
 }
 
 ?>
 <center>
-<?=$LDFrom ?>:
-<input type="hidden" name="sid" value="<?=$ck_sid ?>">
-<input type="text" name="inquirer" size=19 maxlength=40 value="<?=$inquirer ?>">
-<input type="hidden" name="lang" value= "<?=$lang ?>">
-<input type="submit" value="<?=$LDLogIn ?>">
+<?php echo $LDFrom ?>:
+<input type="hidden" name="sid" value="<?php echo $sid ?>">
+<input type="text" name="inquirer" size=19 maxlength=40 value="<?php echo $inquirer ?>">
+<input type="hidden" name="lang" value= "<?php echo $lang ?>">
+<input type="submit" value="<?php echo $LDLogIn ?>">
 </center>
 </td> 
 </td>
@@ -204,15 +228,15 @@ while ($content=mysql_fetch_array($ergebnis))
 </form>
 <FONT    SIZE=4  FACE="Arial" color=#00cc00>
 <img src="../img/varrow.gif" width="20" height="15">
-<b><?=$LDQuestions ?></b></FONT> <font size="2" face="arial"><br>
-<u><a href="technik-reparatur-anfordern.php?sid=<?="$ck_sid&lang=$lang" ?>"><?=$LDPlsNoRequest ?></u></a></font><p>
+<b><?php echo $LDQuestions ?></b></FONT> <font size="2" face="arial"><br>
+<u><a href="technik-reparatur-anfordern.php?sid=<?php echo "$sid&lang=$lang" ?>"><?php echo $LDPlsNoRequest ?></u></a></font><p>
 
 
 <form ENCTYPE="multipart/form-data" action="technik-questions.php" method="post" onSubmit="return checkform(this)"> 
 <table cellpadding="5" border="0" cellspacing=1>
 <tr>
 <td bgcolor=#dddddd ><FONT    SIZE=-1  FACE="Arial">
-<p><?=$LDEnterQuestion ?>:<br>
+<p><?php echo $LDEnterQuestion ?>:<br>
 <TEXTAREA NAME="query" Content-Type="text/html"
 	COLS="50" ROWS="10"></TEXTAREA>
 <p>
@@ -222,68 +246,50 @@ while ($content=mysql_fetch_array($ergebnis))
 
 <td bgcolor=#dddddd ><FONT    SIZE=-1  FACE="Arial">
 
-
-<input type="hidden" name="tdate" value="<? print strftime("%d.%m.%Y") ?>" >
-<input type="hidden" name="ttime" value= "<? print strftime("%H.%M") ?>">
-<input type="hidden" name="sid" value= "<?=$ck_sid ?>">
-<input type="hidden" name="lang" value= "<?=$lang ?>">
-<!-- <input type="hidden" name="dept" value= "<?=$dept ?>">
- --><input type="hidden" name="mode" value="save">
-<?=$LDName ?>:<br><input type="text" name="inquirer" size="30"  value="<?=$inquirer ?>"> <br>
-<?=$LDDept ?>:<br><input type="text" name="dept" size="30" value="<?=$deptnames[$dept] ?>">
+<input type="hidden" name="tdate" value="<?php print strftime("%d.%m.%Y") ?>" >
+<input type="hidden" name="ttime" value= "<?php print strftime("%H.%M") ?>">
+<input type="hidden" name="sid" value= "<?php echo $sid ?>">
+<input type="hidden" name="lang" value= "<?php echo $lang ?>">
+<input type="hidden" name="mode" value="save">
+<?php echo $LDName ?>:<br><input type="text" name="inquirer" size="30"  value="<?php echo $inquirer ?>"> <br>
+<?php echo $LDDept ?>:<br><input type="text" name="dept" size="30" value="<?php echo $deptnames[$dept] ?>">
 </td>
 </tr>
 
 </table>
 <p>
 
-<input type="submit" name="versand" value="<?=$LDSendInquiry ?>"  >  
-<input type="reset" value="<?=$LDReset ?>" >
+<input type="submit" name="versand" value="<?php echo $LDSendInquiry ?>"  >  
+<input type="reset" value="<?php echo $LDReset ?>" >
 </form>
 
 </FONT>
 <p>
 
-
-<p>
-
-
-
-<p>
-<a href="technik.php?sid=<?="$ck_sid&lang=$lang" ?>" ><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0  width=103 height=24  alt="<?=$LDClose ?>" align="middle"></a>
+<a href="technik.php?sid=<?php echo "$sid&lang=$lang" ?>" ><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0  width=103 height=24  alt="<?php echo $LDClose ?>" align="middle"></a>
 <p>
 <FONT    SIZE=-1  FACE="Arial">
 <img src="../img/varrow.gif" width="20" height="15">
-<a href="technik-reparatur-anfordern.php?sid=<?=$ck_sid ?>"><?=$LDReRepairTxt ?></a><br>
+<a href="technik-reparatur-anfordern.php?sid=<?php echo "$sid&lang=$lang" ?>"><?php echo $LDReRepairTxt ?></a><br>
 <img src="../img/varrow.gif" width="20" height="15">
-<a href="technik-reparatur-melden.php?sid=<?=$ck_sid ?>"><?=$LDRepairReportTxt ?></a><br>
+<a href="technik-reparatur-melden.php?sid=<?php echo "$sid&lang=$lang" ?>"><?php echo $LDRepairReportTxt ?></a><br>
 <img src="../img/varrow.gif" width="20" height="15">
-<a href="technik-info.php?sid=<?=$ck_sid ?>"><?=$LDInfoTxt ?></a><br>
+<a href="technik-info.php?sid=<?php echo "$sid&lang=$lang" ?>"><?php echo $LDInfoTxt ?></a><br>
 </FONT>
 </ul>
-
 </FONT>
 <p>
 </td>
 </tr>
-
 <tr>
-<td bgcolor=<? print $cfg['bot_bgcolor']; ?> height=70 colspan=2>
-
+<td bgcolor=<?php print $cfg['bot_bgcolor']; ?> height=70 colspan=2>
 <?php
-require("../language/$lang/".$lang."_copyrite.htm");
+require("../language/$lang/".$lang."_copyrite.php");
  ?>
-
 </td>
 </tr>
 </table>        
 &nbsp;
-
-
-
-
 </FONT>
-
-
 </BODY>
 </HTML>

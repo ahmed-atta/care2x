@@ -1,10 +1,16 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if(!$sid||($sid!=$ck_sid)) { header("location:../language/$lang/lang_".$lang."_invalid-access-warning.php"); exit;}
-
-require("../language/".$lang."/lang_".$lang."_editor.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","editor.php");
+$local_user="ck_cafenews_user";
+require("../include/inc_front_chain_lang.php");
 
 if(($artnum)&&($mode=="save"))
 {
@@ -19,24 +25,28 @@ $newstitle=stripslashes($newstitle);
 $preface=stripslashes($preface);
 $newsbody=stripslashes($newsbody);
 
-$titlebuf=str_replace(" ","",$newstitle);
-$titlebuf=strtr($titlebuf,"/%&!?.*'#[]{}§ÄÖÜäöü","~~~~~~~~~~~~~~AOUaou");
-$titlebuf=str_replace("~","",$titlebuf);
-$titlebuf=str_replace("\"","",$titlebuf);
+require("../include/inc_newstitle_clean.php");
 // now save the newsbody to file in html format
 
 // if a pic file is uploaded move it to the right dir
 if($HTTP_POST_FILES['pic']['tmp_name']&&$HTTP_POST_FILES['pic']['size'])
 {
 	$picext=substr($HTTP_POST_FILES['pic']['name'],strrpos($HTTP_POST_FILES['pic']['name'],".")+1);
-	$picfilename=$titlebuf.'.'.$picext;
-	//$movefile='rename("'.$HTTP_POST_FILES['pic']['tmp_name'].'","../news_service/'.$lang.'/fotos/'.$picfilename.'");';
-	//eval($movefile);
-	copy($HTTP_POST_FILES['pic']['tmp_name'],"../news_service/$lang/fotos/cafe_".$picfilename);
+	if(stristr($picext,"jpg")||stristr($picext,"gif"))
+	{
+		$picfilename=$titlebuf.'.'.strtolower($picext);
+	   //$movefile='rename("'.$HTTP_POST_FILES['pic']['tmp_name'].'","../news_service/'.$lang.'/fotos/'.$picfilename.'");';
+	   //eval($movefile);
+	   copy($HTTP_POST_FILES['pic']['tmp_name'],"../news_service/$lang/fotos/cafenews_".$picfilename);
+	}
+	else
+	{
+	   $picfilename="nopic";
+	}
 }
 
 	
-$fname="../news_service/".$lang."/news/head_cafe_".$titlebuf.".htm";
+$fname="../news_service/".$lang."/news/head_cafenews_".$titlebuf.".htm";
 // now write the header file in html format
 if($fp=fopen($fname,"w+"))
 {
@@ -47,7 +57,7 @@ if($fp=fopen($fname,"w+"))
 	fclose($fp);
 }
 // now write the main file in html format
-$fname="../news_service/".$lang."/news/cafe_".$titlebuf.".htm";
+$fname="../news_service/".$lang."/news/cafenews_".$titlebuf.".htm";
 if($fp=fopen($fname,"w+"))
 {
 	$line='<font face="arial" size="+2" color="#cc0000">'.ucfirst($newstitle).'</font><br><font size=-1 color="#000000" face="arial"><b>'.$preface.'</b></font><p>';
@@ -58,7 +68,7 @@ if($fp=fopen($fname,"w+"))
 }
 // now save in the databank the app. info
 $dbtable="news_article_".$lang;
-include("../req/db-makelink.php");
+include("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK)
 	{	
 
@@ -75,23 +85,22 @@ if($link&&$DBLink_OK)
 							logged_encoder
 							) VALUES 
 						(	'cafenews',
-							'$title',
+							'".addslashes($newstitle)."',
 							'$artnum',
-							'head_cafe_".$titlebuf.".htm',
-							'cafe_".$titlebuf.".htm',
-							'cafe_".$picfilename."',
+							'head_cafenews_".$titlebuf.".htm',
+							'cafenews_".$titlebuf.".htm',
+							'cafenews_".$picfilename."',
 							'$author',
 							'".date("d.m.Y")."',
 							'$publishdate',
-							'$ck_cafenews_user'
+							'".$HTTP_COOKIE_VARS[$local_user.$sid]."'
 							)";
 
 			if($ergebnis=mysql_query($sql,$link))
        		{
-				header("Location: cafenews-read.php?sid=$ck_sid&lang=$lang&title=$title&mode=preview4saved&file=cafe_".$titlebuf.".htm&picfile=cafe_".$picfilename."&palign=$palign"); exit;
+				header("Location: cafenews-read.php?sid=$sid&lang=$lang&title=$title&mode=preview4saved&file=cafenews_".$titlebuf.".htm&picfile=cafenews_".$picfilename."&palign=$palign"); exit;
 			}
 				else print "<p>$sql<p>$LDDbNoSave"; 
   } else { print "$LDDbNoLink<br> $sql<br>"; }
-
 }
 ?>

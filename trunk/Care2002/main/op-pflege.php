@@ -1,4 +1,4 @@
-<?
+<?php
 //reset cookie;
 setcookie(currentuser,"");
 ?>

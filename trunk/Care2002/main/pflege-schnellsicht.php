@@ -1,13 +1,20 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_nursing.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","nursing.php");
+define("NO_2LEVEL_CHK",1);
+require("../include/inc_front_chain_lang.php");
 
-require("../req/config-color.php"); // load color preferences
+require("../include/inc_config_color.php"); // load color preferences
 
-$breakfile="pflege.php?sid=$ck_sid&lang=$lang";
+$breakfile="pflege.php?sid=$sid&lang=$lang";
 
 if($pday=="") $pday=date(d);
 if($pmonth=="") $pmonth=date(m);
@@ -16,7 +23,7 @@ $t_date=$pday.".".$pmonth.".".$pyear;
 
 $dbtable="nursing_station_patients";
 
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 	if($link&&$DBLink_OK) 
 		{
 					// check if already exists
@@ -54,7 +61,7 @@ var urlholder;
 	winh=(winh / 2) - 300;
 	winspecs="width=800,height=600,screenX=" + winw + ",screenY=" + winh + ",menubar=no,resizable=yes,scrollbars=yes";
 
-	urlholder="pflege-station.php?route=validroute&station=" + station + "&user=<? print $aufnahme_user.'"' ?>;
+	urlholder="pflege-station.php?route=validroute&station=" + station + "&user=<?php print $aufnahme_user.'"' ?>;
 	stationwin=window.open(urlholder,station,winspecs);
 	}
 
@@ -69,50 +76,48 @@ var urlholder;
 ?>
 	winspecs="menubar=no,resizable=yes,scrollbars=yes,width=" + (w-15) + ", height=" + (h-60);
 	
-	if (e==1) urlholder="pflege-station-pass.php?rt=pflege&station="+station+"&sid=<? print "$ck_sid&lang=$lang&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>&edit=1&retpath=quick";
-		else urlholder="pflege-station.php?rt=pflege&station="+station+"&sid=<? print "$ck_sid&lang=$lang&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>&edit=0&retpath=quick"
+	if (e==1) urlholder="pflege-station-pass.php?rt=pflege&station="+station+"&sid=<?php print "$sid&lang=$lang&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>&edit=1&retpath=quick";
+		else urlholder="pflege-station.php?rt=pflege&station="+station+"&sid=<?php print "$sid&lang=$lang&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>&edit=0&retpath=quick"
 	//stationwin=window.open(urlholder,station,winspecs);	
 	window.location.href=urlholder;
-<?// if($cfg['dhtml']) print 'window.stationwin.moveTo(0,0);'; ?>
+<?php // if($cfg['dhtml']) print 'window.stationwin.moveTo(0,0);'; ?>
 	}
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
 // -->
 </script>
 
-<?
-require("../req/css-a-hilitebu.php");
+<?php
+require("../include/inc_css_a_hilitebu.php");
 ?>
 </HEAD>
 
-<BODY bgcolor=<? print $cfg['bot_bgcolor']; ?> marginwidth=0 marginheight=0 topmargin=0 leftmargin=0 
-<? if (!$cfg['dhtml']){ print 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?> >
+<BODY bgcolor=<?php print $cfg['bot_bgcolor']; ?> marginwidth=0 marginheight=0 topmargin=0 leftmargin=0 
+<?php if (!$cfg['dhtml']){ print 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?> >
 
 <table width=100% border=0  height=100% cellspacing="0">
 <tr>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="10">
-<FONT  COLOR="<? print $cfg['top_txtcolor']; ?>"  SIZE=+3  FACE="Arial"><STRONG> &nbsp; <?="$LDNursing - $LDQuickView" ?></STRONG></FONT></td>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?if($cfg['dhtml'])print'<a href="javascript:window.history.back()"><img src="../img/'.$lang.'/'.$lang.'_back2.gif" width=110 height=24 border=0  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
-<a href="javascript:gethelp('nursing_how2search.php','','<?=$rows ?>','quick')"><img src="../img/<?="$lang/$lang"; ?>_hilfe-r.gif" border=0 width=75 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?print $breakfile;?>"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 alt="<?=$LDCloseAlt ?>"  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10">
+<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+3  FACE="Arial"><STRONG> &nbsp; <?php echo "$LDNursing - $LDQuickView" ?></STRONG></FONT></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right>
+<?php if($cfg['dhtml'])print'<a href="javascript:window.history.back()"><img src="../img/'.$lang.'/'.$lang.'_back2.gif" width=110 height=24 border=0  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('nursing_how2search.php','','<?php echo $rows ?>','quick','')"><img src="../img/<?php echo "$lang/$lang"; ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 alt="<?php echo $LDCloseAlt ?>"  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
-<td bgcolor=<? print $cfg['body_bgcolor']; ?> valign=top colspan=2>
+<td bgcolor=<?php print $cfg['body_bgcolor']; ?> valign=top colspan=2>
  <ul>
 <FONT    SIZE=4  FACE="Arial" color=red>
 <img src="../img/varrow.gif" width="20" height="15">
 <b>
-<? if($pyear.$pmonth.$pday<date(Ymd)) print $LDOld; else print $LDTodays; ?> <?=$LDOccupancy ?></b>
+<?php if($pyear.$pmonth.$pday<date(Ymd)) print $LDOld; else print $LDTodays; ?> <?php echo $LDOccupancy ?></b>
 </FONT> &nbsp;&nbsp;<font size="2" face="arial">(
-<?=$pday.".".$pmonth.".".$pyear ?>)
+<?php echo $pday.".".$pmonth.".".$pyear ?>)
 </font><p>
 
-<?
-if($rows)
+<?php if($rows)
 {
 print '
 		<table  cellpadding="0" cellspacing=0 border="0" >';
@@ -176,7 +181,7 @@ print '
 if($pyear.$pmonth.$pday<>date(Ymd))
 			print '<p>
 			<font face="Verdana, Arial" size=2 >
-			<a href="pflege-station-archiv.php?sid='.$ck_sid.'&lang='.$lang.'&pyear='.$pyear.'&pmonth='.$pmonth.'">'.$LDClk2Archive.' <img src="../img/bul_arrowGrnLrg.gif" width=16 height=16 border=0 align="absmiddle"></a>
+			<a href="pflege-station-archiv.php?sid='.$sid.'&lang='.$lang.'&pyear='.$pyear.'&pmonth='.$pmonth.'">'.$LDClk2Archive.' <img src="../img/bul_arrowgrnlrg.gif" width=16 height=16 border=0 align="absmiddle"></a>
 			</font><p>';
 }
 else
@@ -185,7 +190,7 @@ else
 			<img src="../img/catr.gif" border=0 width=88 height=80 align="absmiddle"><font face="Verdana, Arial" size=3 color="#880000">
 			<b>'.$LDNoOcc.'</b><p>
 			<font size=2 color="#0">
-			<a href="pflege-station-archiv.php?sid='.$ck_sid.'&lang='.$lang.'&pyear='.$pyear.'&pmonth='.$pmonth.'">'.$LDClk2Archive.' <img src="../img/bul_arrowGrnLrg.gif" width=16 height=16 border=0 align="absmiddle"></a>
+			<a href="pflege-station-archiv.php?sid='.$sid.'&lang='.$lang.'&pyear='.$pyear.'&pmonth='.$pmonth.'">'.$LDClk2Archive.' <img src="../img/bul_arrowgrnlrg.gif" width=16 height=16 border=0 align="absmiddle"></a>
 			</font></font><p>
 			<br>&nbsp;';
 }
@@ -195,11 +200,11 @@ else
 
 
 <p><br>
-<? if($from=="arch") : ?>
-<a href="pflege-station-archiv.php?sid=<?="$ck_sid&lang=$lang&pyear=$pyear&pmonth=$pmonth" ?>"><img src="../img/<?="$lang/$lang" ?>_back2.gif" border=0 width=110 height=24></a>
-<? else : ?>
-<a href="pflege.php?sid=<?="$ck_sid&lang=$lang" ?>"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24></a>
-<? endif ?>
+<?php if($from=="arch") : ?>
+<a href="pflege-station-archiv.php?sid=<?php echo "$sid&lang=$lang&pyear=$pyear&pmonth=$pmonth" ?>"><img src="../img/<?php echo "$lang/$lang" ?>_back2.gif" border=0 width=110 height=24></a>
+<?php else : ?>
+<a href="pflege.php?sid=<?php echo "$sid&lang=$lang" ?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24></a>
+<?php endif ?>
 </ul>
 
 
@@ -212,7 +217,7 @@ else
 <p>
 
 <?php
-require("../language/$lang/".$lang."_copyrite.htm");
+require("../language/$lang/".$lang."_copyrite.php");
  ?>
 
 </BODY>

@@ -1,9 +1,17 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_editor.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","editor.php");
+$local_user="ck_cafenews_user";
+require("../include/inc_front_chain_lang.php");
+$breakfile="cafenews.php?sid=$sid&lang=$lang";
 
  $daytag=date("w");
  $day=date("d");
@@ -49,7 +57,7 @@ if(!$mday)
 
 
 $dbtable="cafe_menu_".$lang;
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
  if ($link&&$DBLink_OK)
  {
 	 switch($mode)
@@ -78,7 +86,7 @@ require("../req/db-makelink.php");
 				
 				if($ergebnis=mysql_query($sql,$link))
        				{
-						header("Location: cafenews-edit-menu.php?sid=$ck_sid&lang=$lang&mode=saveok&week=$week&mday=$mday&mmonth=$mmonth&myear=$myear"); exit;
+						header("Location: cafenews-edit-menu.php?sid=$sid&lang=$lang&mode=saveok&week=$week&mday=$mday&mmonth=$mmonth&myear=$myear"); exit;
 					}
 					else print "<p>".$sql."<p>$LDDbNoSave"; 				
 				break;
@@ -139,7 +147,7 @@ function aligndate(&$ad,&$am,&$ay)
 <body onLoad="document.menuform.menuplan.focus()">
 
 <FONT  SIZE=8 COLOR="#cc6600" FACE="verdana,Arial">
-<img src="../img/basket.gif" width=74 height=70 border=0><b><?=$LDCafeMenu ?></b></FONT>
+<img src="../img/basket.gif" width=74 height=70 border=0><b><?php echo $LDCafeMenu ?></b></FONT>
 <form action="cafenews-edit-menu.php" method="post" name="menuform"><hr>
 <table border=0 bgcolor="#000000" cellspacing=0 cellpadding=0>
   <tr>
@@ -149,7 +157,7 @@ function aligndate(&$ad,&$am,&$ay)
   <tr>
     <td colspan=7 bgcolor="#ccffff">
 	<FONT  SIZE=4 COLOR="#0000cc" FACE="verdana,Arial">
-<? switch($week)
+<?php switch($week)
 	{
 		case 1: print $LDThisWeek; break;
 		case 2: print $LDNextWeek; break;
@@ -161,7 +169,7 @@ function aligndate(&$ad,&$am,&$ay)
   </tr>
   <tr bgcolor="#ccffff">
   
-<? for ($i=0,$acttag=$day,$dyidx=$daytag-1;$i<7;$i++,$acttag++,$dyidx++)
+<?php for ($i=0,$acttag=$day,$dyidx=$daytag-1;$i<7;$i++,$acttag++,$dyidx++)
 	{
 	$spot=0;
 	if ($mday==$acttag) 	$spot=1;
@@ -171,7 +179,7 @@ function aligndate(&$ad,&$am,&$ay)
 	if ($spot)  print ' bgcolor="yellow">';
 		else print ' bgcolor="#ccffff">';
 	print '<a href="';
-	if($spot) print "#\""; else print 'cafenews-edit-menu.php?sid='.$ck_sid.'&week='.$week.'&myear='.$year.'&mmonth='.$month.'&mday='.$acttag.'" ';
+	if($spot) print "#\""; else print 'cafenews-edit-menu.php?sid='.$sid.'&lang='.$lang.'&week='.$week.'&myear='.$year.'&mmonth='.$month.'&mday='.$acttag.'" ';
 	print ' title="'.$acttag.'.'.$month.'.'.$year.'">';
 	if($spot) print '<font color="#0000cc">';else print '<font color="#d6d6d6">';
 	print '<b>'.$dayname[$dyidx].'</b>';
@@ -192,28 +200,36 @@ function aligndate(&$ad,&$am,&$ay)
 <p>
 <table border=0 cellspacing=0>
   <tr bgcolor="#ccffff" >
-    <td colspan=3><FONT  SIZE=2  FACE="verdana,Arial"><b><?=$LDMenu ?>:</b><br><font size=1><?=$LDPlsEnter ?>.<br>
-	<textarea name="menuplan" cols=35 rows=10 wrap="physical"><?=$content[menu] ?></textarea>
+    <td colspan=3><FONT  SIZE=2  FACE="verdana,Arial"><b><?php echo $LDMenu ?>:</b><br><font size=1><?php echo $LDPlsEnter ?>.<br>
+	<textarea name="menuplan" cols=35 rows=10 wrap="physical"><?php echo $content[menu] ?></textarea>
  </td>
   </tr>
 
- <tr>    
- <td><p><br>
-		<input type="button" value="<?=$LDBackBut ?>" onClick="window.location.replace('cafenews-edit-menu-select-week.php?sid=<?=$ck_sid ?>')">&nbsp;&nbsp;&nbsp;
-        <input type="button" value="<? if($mode=="saveok") print $LDFinishBut; else print $LDCancelBut; ?>" onClick="window.location.replace('cafenews.php?sid=<?=$ck_sid ?>')">
+ <tr>
+    <td ><p><br><FONT FACE="verdana,Arial">
+	<a href="javascript:window.history.back()"><img src="../img/<?php echo $lang ?>/<?php echo $lang ?>_back2.gif" border=0></a>
+	<a href="<?php echo $breakfile ?>"><img src="../img/<?php echo $lang ?>/<?php echo $lang ?>_cancel.gif" border=0></a>
+  </td>
+    <td align=right ><p><br><FONT FACE="verdana,Arial">
+<input type="image" src="../img/<?php echo $lang ?>/<?php echo $lang ?>_continue.gif" border=0>
+  </td>
+     
+<!--  <td>
+		<input type="button" value="<?php echo $LDBackBut ?>" onClick="window.location.replace('cafenews-edit-menu-select-week.php?sid=<?php echo "$sid&lang=$lang" ?>')">&nbsp;&nbsp;&nbsp;
+        <input type="button" value="<?php if($mode=="saveok") print $LDFinishBut; else print $LDCancelBut; ?>" onClick="window.location.replace('cafenews.php?sid=<?php echo "$sid&lang=$lang" ?>')">
 		</td>
 
-	<td align=right colspan=2><br><p><input type="submit" value="<?=$LDSaveBut ?>...">
+	<td align=right colspan=2><br><p><input type="submit" value="<?php echo $LDSaveBut ?>...">
 	</td>
-  </tr>
+ -->  </tr>
  </table>
-<input type="hidden" name="sid" value="<?=$ck_sid ?>">
-<input type="hidden" name="week" value="<?=$week ?>">
+<input type="hidden" name="sid" value="<?php echo $sid ?>">
+<input type="hidden" name="week" value="<?php echo $week ?>">
 <input type="hidden" name="mode" value="save">
-<input type="hidden" name="myear" value="<?=$myear ?>">
-<input type="hidden" name="mmonth" value="<?=$mmonth ?>">
-<input type="hidden" name="mday" value="<?=$mday ?>">
-<input type="hidden" name="update" value="<?=$rows ?>">
-<input type="hidden" name="lang" value="<?=$lang ?>">
+<input type="hidden" name="myear" value="<?php echo $myear ?>">
+<input type="hidden" name="mmonth" value="<?php echo $mmonth ?>">
+<input type="hidden" name="mday" value="<?php echo $mday ?>">
+<input type="hidden" name="update" value="<?php echo $rows ?>">
+<input type="hidden" name="lang" value="<?php echo $lang ?>">
 </form></body>
 </html>

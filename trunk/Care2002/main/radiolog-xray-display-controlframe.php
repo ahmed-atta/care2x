@@ -1,10 +1,16 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_radio.php");
-
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","radio.php");
+define("NO_2LEVEL_CHK",1);
+require("../include/inc_front_chain_lang.php");
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -24,24 +30,24 @@ Mustermann, Silvia<br>
 12.05.1988
 
 <p>
-<?=$LDShootDate ?>:<br>
+<?php echo $LDShootDate ?>:<br>
 22.10.2001<p>
 </FONT>
 <p>
 <form>
-<input type="button" value="<?=$LDNewSearch ?>" onClick="window.top.location.replace('radiolog-xray-javastart.php?sid=<?="$ck_sid&lang=$lang" ?>')">
+<input type="button" value="<?php echo $LDNewSearch ?>" onClick="window.top.location.replace('radiolog-xray-javastart.php?sid=<?php echo "$sid&lang=$lang" ?>')">
 <p>
 
 
-<? if($mode!="display1") : ?>
+<?php if($mode!="display1") : ?>
 
-<input type="button" value="<?=$LDFullScreen ?>" onClick="window.top.location.replace('radiolog-xray-javastart.php?sid=<?="$ck_sid&lang=$lang" ?>&mode=display1')">
+<input type="button" value="<?php echo $LDFullScreen ?>" onClick="window.top.location.replace('radiolog-xray-javastart.php?sid=<?php echo "$sid&lang=$lang" ?>&mode=display1')">
 
-<? else : ?>
-<input type="button" value="<?=$LDReadDiag ?>" onClick="window.top.location.replace('radiolog-xray-javastart.php?sid=<?="$ck_sid&lang=$lang" ?>&mode=display_diagnosis_read')">
+<?php else : ?>
+<input type="button" value="<?php echo $LDReadDiag ?>" onClick="window.top.location.replace('radiolog-xray-javastart.php?sid=<?php echo "$sid&lang=$lang" ?>&mode=display_diagnosis_read')">
 <p>
-<input type="button" value="<?=$LDWriteDiag ?>" onClick="window.top.location.replace('radiolog-xray-javastart.php?sid=<?="$ck_sid&lang=$lang" ?>&mode=display_diagnosis_write')">
-<? endif ?>
+<input type="button" value="<?php echo $LDWriteDiag ?>" onClick="window.top.location.replace('radiolog-xray-javastart.php?sid=<?php echo "$sid&lang=$lang" ?>&mode=display_diagnosis_write')">
+<?php endif ?>
 
 </form>
 

@@ -18,7 +18,7 @@ parent.PREVIEWFRAME.document.previewpic.src=fn;
 </script>
 </head>
 <body topmargin=3 marginheight=3>
-<? if($mode=="browse")
+<?php if($mode=="browse")
 {
 print "<font face=verdana size=2>Pfad:";
  $basedir=dirname(stripcslashes($directory));

@@ -1,10 +1,15 @@
-<?
-if(!$lang)
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/*if(!$lang)
 	if(!$ck_language) include("../chklang.php");
 		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)||!$ck_op_pflegelogbuch_user||!$winid||!$patnum) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+if (!$sid||($sid!=$$ck_sid_buffer)||!$ck_op_pflegelogbuch_user||!$winid||!$patnum) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 require("../language/".$lang."/lang_".$lang."_or.php");
-require("../req/config-color.php"); // load color preferences
+*/
+define("LANG_FILE","or.php");
+$local_user="ck_op_pflegelogbuch_user";
+require("../include/inc_front_chain_lang.php");
+require("../include/inc_config_color.php"); // load color preferences
 
 $dbtable="nursing_op_logbook";
 $thisfile="op-pflege-graph-getinfo.php";
@@ -44,7 +49,7 @@ switch($winid)
 	default:{header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 }
 
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK) 
 	{	
 	// get orig data
@@ -88,7 +93,7 @@ if($link&&$DBLink_OK)
        							{
 									//print $sql." new update <br>";
 									mysql_close($link);
-									header("location:$thisfile?sid=$ck_sid&lang=$lang&saved=1&patnum=$patnum&winid=$winid&dept=$dept&saal=$saal&op_nr=$op_nr&year=$pyear&pmonth=$pmonth&pday=$pday");
+									header("location:$thisfile?sid=$sid&lang=$lang&saved=1&patnum=$patnum&winid=$winid&dept=$dept&saal=$saal&op_nr=$op_nr&year=$pyear&pmonth=$pmonth&pday=$pday");
 								}
 								else
 								{
@@ -129,7 +134,7 @@ if($link&&$DBLink_OK)
 <HTML>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<TITLE><?=$title ?></TITLE>
+<TITLE><?php echo $title ?></TITLE>
 
 <script language="javascript">
 <!-- 
@@ -142,7 +147,7 @@ function pruf(d)
 	 return true
 }
  function parentrefresh(){
-	//window.opener.location.href="pflege-station-patientdaten-kurve.php?sid=<?=$ck_sid ?>&station=<?=$station ?>&pn=<?=$pn."&tag=$dystart&monat=$mo&jahr=$yr&tagname=$dyname" ?>&nofocus=1";
+	//window.opener.location.href="pflege-station-patientdaten-kurve.php?sid=<?php echo $sid ?>&station=<?php echo $station ?>&pn=<?php echo $pn."&tag=$dystart&monat=$mo&jahr=$yr&tagname=$dyname" ?>&nofocus=1";
 	}
 	
 function isnum(val,idx)
@@ -299,15 +304,15 @@ function isgdatum(val,idx)
 function updatebar(x)
 {
 	if(x=="main")
-	window.opener.parent.LOGINPUT.location.replace('<? print "oploginput.php?sid=$ck_sid&lang=$lang&mode=edit&patnum=$patnum&op_nr=$op_nr&dept=$dept&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday";?>');
+	window.opener.parent.LOGINPUT.location.replace('<?php print "oploginput.php?sid=$sid&lang=$lang&mode=edit&patnum=$patnum&op_nr=$op_nr&dept=$dept&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday";?>');
 	else
-	window.opener.parent.OPLOGIMGBAR.location.replace('<? print "oplogtimebar.php?sid=$ck_sid&lang=$lang&winid=$winid&patnum=$patnum&op_nr=$op_nr&dept=$dept&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday";?>');
+	window.opener.parent.OPLOGIMGBAR.location.replace('<?php print "oplogtimebar.php?sid=$sid&lang=$lang&winid=$winid&patnum=$patnum&op_nr=$op_nr&dept=$dept&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday";?>');
 }
-//$imgsrc="../imgcreator/log-timebar.php?sid=$ck_sid&winid=$winid&patnum=$patnum&op_nr=$op_nr&dept=$dept&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday";
+//$imgsrc="../imgcreator/log-timebar.php?sid=$sid&winid=$winid&patnum=$patnum&op_nr=$op_nr&dept=$dept&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday";
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
@@ -326,18 +331,18 @@ div.box { border: double; border-width: thin; width: 100%; border-color: black; 
 
 </HEAD>
 <BODY  bgcolor="#dfdfdf" TEXT="#000000" LINK="#0000FF" VLINK="#800080"  topmargin=2 marginheight=2 
-onLoad="<? if($saved) 
+onLoad="<?php if($saved) 
 				{
 					if(($winid=="entry_out")||($winid=="cut_close")) $buf="main";
 					print "updatebar('$buf');"; 
 				}
 			?>if (window.focus) window.focus(); window.focus();" >
 
-<a href="javascript:gethelp('oplog.php','time','<?=$winid ?>')"><img src="../img/<?="$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 alt="<?=$LDHelp ?>" align="right"></a>
+<a href="javascript:gethelp('oplog.php','time','<?php echo $winid ?>')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 alt="<?php echo $LDHelp ?>" align="right"></a>
 
 <font face=verdana,arial size=5 color=maroon>
 <b>
-<? 
+<?php 
 	//print "$title $patnum $dept $saal $op_nr $pday $pmonth $pyear $winid";
 	print $title;
 ?>
@@ -347,7 +352,7 @@ onLoad="<? if($saved)
 
 
 <font face=verdana,arial size=3 >
-<form name="infoform" action="<?=$thisfile ?>" method="post" onSubmit="return pruf(this)">
+<form name="infoform" action="<?php echo $thisfile ?>" method="post" onSubmit="return pruf(this)">
 <font face=verdana,arial size=2 >
 
 
@@ -363,10 +368,10 @@ onLoad="<? if($saved)
 	
 		<table border=0 border=0 cellspacing=0 cellpadding=0>
 			<tr>
-   			 <td  align=center class="v12"><?=$startid ?>:</td>
-   			 <td  align=center class="v12"><?=$endid ?>:</td>
+   			 <td  align=center class="v12"><?php echo $startid ?>:</td>
+   			 <td  align=center class="v12"><?php echo $endid ?>:</td>
 		  </tr>
-			<? 
+			<?php 
 			$b=explode("~",trim($result[$element]));
 			sort($b,SORT_REGULAR);
 			if(!$b[0]) array_splice($b,0,1);
@@ -398,7 +403,7 @@ onLoad="<? if($saved)
 
 
 
-<? 	
+<?php 	
 	$cbuf="sd=$yr$mo$dy&rd=$dy.$mo.$yr";
 	$arr=explode("_",$result[$element]);
 		while(list($x,$v)=each($arr))
@@ -413,31 +418,31 @@ onLoad="<? if($saved)
 
 
 
-<input type="hidden" name="sid" value="<?=$ck_sid ?>">
-<input type="hidden" name="lang" value="<?=$lang ?>">
-<input type="hidden" name="winid" value="<?=$winid ?>">
-<input type="hidden" name="pyear" value="<?=$pyear ?>">
-<input type="hidden" name="pmonth" value="<?=$pmonth ?>">
-<input type="hidden" name="pday" value="<?=$pday ?>">
-<input type="hidden" name="patnum" value="<?=$patnum ?>">
-<input type="hidden" name="dept" value="<?=$dept ?>">
-<input type="hidden" name="saal" value="<?=$saal ?>">
-<input type="hidden" name="op_nr" value="<?=$op_nr ?>">
+<input type="hidden" name="sid" value="<?php echo $sid ?>">
+<input type="hidden" name="lang" value="<?php echo $lang ?>">
+<input type="hidden" name="winid" value="<?php echo $winid ?>">
+<input type="hidden" name="pyear" value="<?php echo $pyear ?>">
+<input type="hidden" name="pmonth" value="<?php echo $pmonth ?>">
+<input type="hidden" name="pday" value="<?php echo $pday ?>">
+<input type="hidden" name="patnum" value="<?php echo $patnum ?>">
+<input type="hidden" name="dept" value="<?php echo $dept ?>">
+<input type="hidden" name="saal" value="<?php echo $saal ?>">
+<input type="hidden" name="op_nr" value="<?php echo $op_nr ?>">
 <input type="hidden" name="mode" value="save">
 
 </form>
 <p>
 <div align=right> 
-<a href="javascript:window.close()"><img src="../img/<?="$lang/$lang" ?>_cancel.gif" border="0" alt="<?=$LDClose ?>">
+<a href="javascript:window.close()"><img src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" border="0" alt="<?php echo $LDClose ?>">
 </a>
 &nbsp;&nbsp;
-<a href="javascript:resetinput()"><img src="../img/<?="$lang/$lang" ?>_reset.gif" border="0" alt="<?=$LDReset ?>"></a>
+<a href="javascript:resetinput()"><img src="../img/<?php echo "$lang/$lang" ?>_reset.gif" border="0" alt="<?php echo $LDReset ?>"></a>
 &nbsp;&nbsp;
-<? if($saved)  : ?>
-<a href="javascript:window.close()"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border="0" alt="<?=$LDClose ?>"></a>
-<? else : ?>
-<a href="javascript:document.infoform.submit();"><img src="../img/<?="$lang/$lang" ?>_savedisc.gif" border="0" alt="<?=$LDSave ?>"></a>
-<? endif ?>
+<?php if($saved)  : ?>
+<a href="javascript:window.close()"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border="0" alt="<?php echo $LDClose ?>"></a>
+<?php else : ?>
+<a href="javascript:document.infoform.submit();"><img src="../img/<?php echo "$lang/$lang" ?>_savedisc.gif" border="0" alt="<?php echo $LDSave ?>"></a>
+<?php endif ?>
 </div>
 </BODY>
 

@@ -1,9 +1,8 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)||!$ck_op_pflegelogbuch_user) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_or.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+define("LANG_FILE","or.php");
+$local_user="ck_op_pflegelogbuch_user";
+require("../include/inc_front_chain_lang.php");
 
 $title=$LDOpPersonElements[$winid];
 switch($winid)
@@ -36,11 +35,11 @@ switch($winid)
 	default:{header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 }
 
-require("../req/config-color.php"); // load color preferences
+require("../include/inc_config_color.php"); // load color preferences
 
 $thisfile="op-pflege-log-getinfo.php";
 
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK) 
 	{	
 	// get data if exists
@@ -219,7 +218,7 @@ if($link&&$DBLink_OK)
 								else { print "$LDDbNoRead<br>"; } 
 							}
 							mysql_close($link);
-							header("location:$thisfile?sid=$ck_sid&lang=$lang&mode=saveok&winid=$winid&patnum=$patnum&dept=$dept&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday&op_nr=$op_nr");
+							header("location:$thisfile?sid=$sid&lang=$lang&mode=saveok&winid=$winid&patnum=$patnum&dept=$dept&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday&op_nr=$op_nr");
 						}
 				}// end of if(mode==save)
 			else $saved=0;
@@ -232,7 +231,7 @@ if($link&&$DBLink_OK)
 <HTML>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<TITLE><?=$title ?></TITLE>
+<TITLE><?php echo $title ?></TITLE>
 
 <script language="javascript">
 <!-- 
@@ -247,16 +246,16 @@ if($link&&$DBLink_OK)
 
 function refreshparent()
 {
-	<? $comdat='&dept='.$dept.'&saal='.$saal.'&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday.'&op_nr='.$op_nr; ?>
+	<?php $comdat='&dept='.$dept.'&saal='.$saal.'&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday.'&op_nr='.$op_nr; ?>
 	//resetlogdisplays();resettimebars();resettimeframe();
-	window.opener.parent.LOGINPUT.location.replace('<? print "oploginput.php?sid=$ck_sid&lang=$lang&patnum=$patnum&mode=notimereset$comdat"; ?>');
-	window.opener.parent.OPLOGMAIN.location.replace('<? print "oplogmain.php?sid=$ck_sid&lang=$lang&gotoid=$patnum$comdat"; ?>');
+	window.opener.parent.LOGINPUT.location.replace('<?php print "oploginput.php?sid=$sid&lang=$lang&patnum=$patnum&mode=notimereset$comdat"; ?>');
+	window.opener.parent.OPLOGMAIN.location.replace('<?php print "oplogmain.php?sid=$sid&lang=$lang&gotoid=$patnum$comdat"; ?>');
 }
 
 function delete_item(i)
 {
 	d=document.infoform;
-	d.action="<?=$thisfile ?>";
+	d.action="<?php echo $thisfile ?>";
 	d.delitem.value=i;
 	d.inputdata.value="?";
 	d.submit();
@@ -264,7 +263,7 @@ function delete_item(i)
 function savedata(iln,ifn,inx,ipr)
 {
 	x=inx.selectedIndex;
-	//urlholder="<?=$forwardfile ?>&ln="+ln+"&fn="+fn+"&nx="+d[x].value;
+	//urlholder="<?php echo $forwardfile ?>&ln="+ln+"&fn="+fn+"&nx="+d[x].value;
 	//window.location.replace(urlholder);
 	d=document.quickselect;
 	d.ln.value=iln;
@@ -277,7 +276,7 @@ function savedata(iln,ifn,inx,ipr)
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
@@ -294,14 +293,14 @@ div.box { border: double; border-width: thin; width: 100%; border-color: black; 
 
 </HEAD>
 <BODY   bgcolor="#cde1ec" TEXT="#000000" LINK="#0000FF" VLINK="#800080"  topmargin=2 marginheight=2 
-onLoad="<? if($mode=="saveok") print "refreshparent();window.focus();"; ?>if (window.focus) window.focus();
+onLoad="<?php if($mode=="saveok") print "refreshparent();window.focus();"; ?>if (window.focus) window.focus();
 				window.focus();document.infoform.inputdata.focus();" >
-<a href="javascript:gethelp('oplog.php','person','<?=$winid ?>')"><img src="../img/<?="$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 alt="<?=$LDHelp ?>" align="right"></a>
+<a href="javascript:gethelp('oplog.php','person','<?php echo $winid ?>')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 alt="<?php echo $LDHelp ?>" align="right"></a>
 <form name="infoform" action="op-pflege-log-getpersonell.php" method="post" onSubmit="return pruf(this)">
 				
 <font face=verdana,arial size=5 color=maroon>
 <b>
-<? 
+<?php 
 	print $title.'<br><font size=4>';	
 	//print $tage[$dyidx]." ($dy".".".$mo.".".$yr.")</font>";
 ?>
@@ -313,30 +312,30 @@ onLoad="<? if($mode=="saveok") print "refreshparent();window.focus();"; ?>if (wi
     <td>
 <table border=0 width=100% cellspacing=1 cellpadding=0>
   <tr>
-    <td  bgcolor="#cfcfcf" class="v13" colspan=6>&nbsp;<b><?=$LDCurrentEntries ?>:</b></td>
+    <td  bgcolor="#cfcfcf" class="v13" colspan=6>&nbsp;<b><?php echo $LDCurrentEntries ?>:</b></td>
   </tr>
   <tr  class="v13_n">
     <td align=center bgcolor="#ffffff">
 	</td>     <td align=center bgcolor="#ffffff" width="20%">
-<!-- <?="$LDLastName, $LDName" ?>
+<!-- <?php echo "$LDLastName, $LDName" ?>
  -->	</td> 
     <td align=center bgcolor="#ffffff">
-<?=$LDFunction ?>
+<?php echo $LDFunction ?>
 	</td> 
 
     <td align=center bgcolor="#ffffff">
-<?=$LDFrom ?>:
+<?php echo $LDFrom ?>:
 	</td> 
 
     <td align=center bgcolor="#ffffff" >
-<?=$LDTo ?>:
+<?php echo $LDTo ?>:
 	</td> 
     <td bgcolor="#ffffff">
-&nbsp;<?=$LDExtraInfo ?>:
+&nbsp;<?php echo $LDExtraInfo ?>:
 	</td> 
   </tr>	
 
-<? if($result[$element]!="") 
+<?php if($result[$element]!="") 
 {
 	//print $result[$element];
 	$dbuf=explode("~",trim($result[$element]));
@@ -392,7 +391,7 @@ print'
 		  </tr>
   		<tr>
    			 <td  class="v12"  bgcolor="#ffffff" colspan=6 align=center>
-			<font size=3><b><?=str_replace("~tagword~",$title,$LDSearchNewPerson) ?>:</b>	<br>
+			<font size=3><b><?php echo str_replace("~tagword~",$title,$LDSearchNewPerson) ?>:</b>	<br>
 			 <input type="text" name="inputdata" size=25 maxlength=30><br> <input type="submit" value="OK">
 			 </td>
 
@@ -403,45 +402,45 @@ print'
   </tr>
 </table>
 
-<input type="hidden" name="encoder" value="<? print $ck_op_pflegelogbuch_user; ?>">
-<input type="hidden" name="sid" value="<?=$ck_sid ?>">
-<input type="hidden" name="lang" value="<?=$lang ?>">
-<input type="hidden" name="winid" value="<?=$winid ?>">
-<input type="hidden" name="pyear" value="<?=$pyear ?>">
-<input type="hidden" name="pmonth" value="<?=$pmonth ?>">
-<input type="hidden" name="pday" value="<?=$pday ?>">
-<input type="hidden" name="dept" value="<?=$dept ?>">
-<input type="hidden" name="saal" value="<?=$saal ?>">
-<input type="hidden" name="op_nr" value="<?=$op_nr ?>">
-<input type="hidden" name="patnum" value="<?=$patnum ?>">
-<input type="hidden" name="entrycount" value="<? if(!$entrycount) print "1"; else print $entrycount; ?>">
+<input type="hidden" name="encoder" value="<?php print $HTTP_COOKIE_VARS[$local_user.$sid]; ?>">
+<input type="hidden" name="sid" value="<?php echo $sid ?>">
+<input type="hidden" name="lang" value="<?php echo $lang ?>">
+<input type="hidden" name="winid" value="<?php echo $winid ?>">
+<input type="hidden" name="pyear" value="<?php echo $pyear ?>">
+<input type="hidden" name="pmonth" value="<?php echo $pmonth ?>">
+<input type="hidden" name="pday" value="<?php echo $pday ?>">
+<input type="hidden" name="dept" value="<?php echo $dept ?>">
+<input type="hidden" name="saal" value="<?php echo $saal ?>">
+<input type="hidden" name="op_nr" value="<?php echo $op_nr ?>">
+<input type="hidden" name="patnum" value="<?php echo $patnum ?>">
+<input type="hidden" name="entrycount" value="<?php if(!$entrycount) print "1"; else print $entrycount; ?>">
 <input type="hidden" name="mode" value="save">
 <input type="hidden" name="delitem" value="">
 </form>
 <p>
-<? if($quickexist) : ?>
-<form name="quickselect" action="<?=$thisfile ?>" method="post">
+<?php if($quickexist) : ?>
+<form name="quickselect" action="<?php echo $thisfile ?>" method="post">
 <table border=0 width=100% bgcolor="#6f6f6f" cellspacing=0 cellpadding=0 >
   <tr>
     <td>
 <table border=0 width=100% cellspacing=1>
   <tr>
-	<td bgcolor="#cfcfcf" class="v13_n" colspan=4>&nbsp;<font color="#ff0000"><b><?=$LDQuickSelectList ?>:</b></td>
+	<td bgcolor="#cfcfcf" class="v13_n" colspan=4>&nbsp;<font color="#ff0000"><b><?php echo $LDQuickSelectList ?>:</b></td>
   </tr>
  <tr>
     <td align=center bgcolor="#ffffff" class="v13_n" >
-<!-- <?=$LDLastName ?>
+<!-- <?php echo $LDLastName ?>
 	</td> 
     <td align=center bgcolor="#ffffff" class="v13_n" >
-<?=$LDName ?> -->
+<?php echo $LDName ?> -->
 
 	</td> 
     <td align=center bgcolor="#ffffff"  class="v13_n" >
-<?=$LDJobId ?>
+<?php echo $LDJobId ?>
 
 	</td> 
     <td align=center bgcolor="#ffffff"   class="v13_n" >
-<?="$LDOr $LDFunction" ?>
+<?php echo "$LDOr $LDFunction" ?>
 	</td> 
     <td align=center bgcolor="#ffffff"   class="v13_n" >
 
@@ -449,7 +448,7 @@ print'
   </tr>	
 
 
-<? 	$counter=0;
+<?php 	$counter=0;
 		while($quicklist=mysql_fetch_array($quickresult))
 		{
 			print '
@@ -491,17 +490,17 @@ print'
 </td>
   </tr>
 </table>
-<input type="hidden" name="encoder" value="<? print $ck_op_pflegelogbuch_user; ?>">
-<input type="hidden" name="sid" value="<?=$ck_sid ?>">
-<input type="hidden" name="lang" value="<?=$lang ?>">
-<input type="hidden" name="winid" value="<?=$winid ?>">
-<input type="hidden" name="pyear" value="<?=$pyear ?>">
-<input type="hidden" name="pmonth" value="<?=$pmonth ?>">
-<input type="hidden" name="pday" value="<?=$pday ?>">
-<input type="hidden" name="dept" value="<?=$dept ?>">
-<input type="hidden" name="saal" value="<?=$saal ?>">
-<input type="hidden" name="op_nr" value="<?=$op_nr ?>">
-<input type="hidden" name="patnum" value="<?=$patnum ?>">
+<input type="hidden" name="encoder" value="<?php print $HTTP_COOKIE_VARS[$local_user.$sid]; ?>">
+<input type="hidden" name="sid" value="<?php echo $sid ?>">
+<input type="hidden" name="lang" value="<?php echo $lang ?>">
+<input type="hidden" name="winid" value="<?php echo $winid ?>">
+<input type="hidden" name="pyear" value="<?php echo $pyear ?>">
+<input type="hidden" name="pmonth" value="<?php echo $pmonth ?>">
+<input type="hidden" name="pday" value="<?php echo $pday ?>">
+<input type="hidden" name="dept" value="<?php echo $dept ?>">
+<input type="hidden" name="saal" value="<?php echo $saal ?>">
+<input type="hidden" name="op_nr" value="<?php echo $op_nr ?>">
+<input type="hidden" name="patnum" value="<?php echo $patnum ?>">
 <input type="hidden" name="mode" value="save">
 <input type="hidden" name="ln" value="">
 <input type="hidden" name="fn" value="">
@@ -509,16 +508,16 @@ print'
 <input type="hidden" name="nx" value="">
 
 </form>
-<? endif ?>
+<?php endif ?>
 
 <div align=right>
 &nbsp;&nbsp;
 <a href="javascript:window.close()">
-<? if($mode=="saveok")  : ?>
-<img src="../img/<?="$lang/$lang" ?>_close2.gif" border="0" alt="<?=$LDClose ?>">
-<? else : ?>
-<img src="../img/<?="$lang/$lang" ?>_cancel.gif" border="0" alt="<?=$LDClose ?>">
-<? endif ?>
+<?php if($mode=="saveok")  : ?>
+<img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border="0" alt="<?php echo $LDClose ?>">
+<?php else : ?>
+<img src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" border="0" alt="<?php echo $LDClose ?>">
+<?php endif ?>
 </a></div>
 </BODY>
 

@@ -1,11 +1,22 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-//print $lang;
-if($srcpath!="reader") if(!$sid||($sid!=$ck_sid)) { header("location:../language/$lang/lang_".$lang."_invalid-access-warning.php"); exit;}
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","newscolumns.php");
+define("NO_2LEVEL_CHK",1);
+require("../include/inc_front_chain_lang.php");
 
-require("../language/".$lang."/lang_".$lang."_newscolumns.php");
+require("../include/inc_config_color.php");
+$breakfile="startframe.php?sid=$sid&lang=$lang"; // default return path if cancel button pressed
+
+// reset all 2nd level lock cookies
+require("../include/inc_2level_reset.php"); 
 
 switch($target)
 {
@@ -65,22 +76,24 @@ switch($target)
 							$title=$LDTitleTag[$target];
 							$subtitle=$LDSubTitle[$target];
 							break;
-	//default: $title=$LDTitleTag[$target];
-	//default: header("location:startframe.php?sid=$ck_sid"); exit;
+	case "radiology" : $breakfile="radiolog.php?sid=$sid&lang=$lang"; break;
+	case "pharmacy" : $breakfile="apotheke.php?sid=$sid&lang=$lang";break;
+	case "edp" : $breakfile="edv.php?sid=$sid&lang=$lang";break;
+	case "doctors" : $breakfile="aerzte.php?sid=$sid&lang=$lang";break;
+	case "nursing" : $breakfile="pflege.php?sid=$sid&lang=$lang";break;
 }
 
 if(!$subtitle) $subtitle=$subtitle=$LDSubTitle[SBDefault];
 
-if(strpos($target,"ept_")) $breakfile="abteilung.php?sid=$ck_sid";
-	else $breakfile="startframe.php?sid=$ck_sid";
+if(strpos($target,"ept_")) $breakfile="abteilung.php?sid=$sid";
+	elseif($target=="") $breakfile="startframe.php?sid=$sid";
 $newspath="../news_service/$lang/news/";
-$readerpath="editor-4plus1-read.php?target=$target&lang=$lang&title=".strtr($title," ","+")."&file=";
+$readerpath="editor-4plus1-read.php?sid=$sid&target=$target&lang=$lang&title=".strtr($title," ","+")."&file=";
 
-require("../req/config-color.php");
 $today=date("Ymd");
 
 
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK) 
 	{	
 		$dbtable="news_article_".$lang;
@@ -151,49 +164,47 @@ if($link&&$DBLink_OK)
 <HTML>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
- <TITLE><?=$title ?> Information</TITLE>
+ <TITLE><?php echo $title ?> Information</TITLE>
  
 <script language="">
 <!-- Script Begin
 function gethelp(x)
 {
-	urlholder="help-router.php?helpidx="+x+"&lang=<?=$lang ?>";
+	urlholder="help-router.php?helpidx="+x+"&lang=<?php echo $lang ?>";
 	helpwin=window.open(urlholder,"helpwin","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
 }
 //  Script End -->
 </script>
 
-<?
-require("../req/css-a-hilitebu.php");
+<?php
+require("../include/inc_css_a_hilitebu.php");
 ?>
 
 </HEAD>
 
 <BODY  topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<? if (!$cfg['dhtml']){ print 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } 
+<?php if (!$cfg['dhtml']){ print 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } 
 ?> >
 
 <table width=100% border=0 cellspacing=0 cellpadding="0" height=100%>
 
 <tr valign=top height=45>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="10" >
-<FONT  COLOR="<? print $cfg['top_txtcolor']; ?>"  SIZE=+3  FACE="Arial">
-<STRONG>&nbsp;<?=$title ?></STRONG></FONT></td>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?if($cfg['dhtml'])print'<a href="javascript:window.history.back()"><img src="../img/'.$lang.'/'.$lang.'_back2.gif" width=110 height=24 border=0  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
-<a href="javascript:gethelp('<?=$target ?>')"><img src="../img/<?="$lang/$lang"; ?>_hilfe-r.gif" border=0 width=75 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?print $breakfile;?>"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td></tr>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" >
+<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+3  FACE="Arial">
+<STRONG>&nbsp;<?php echo $title ?></STRONG></FONT></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right>
+<?php if($cfg['dhtml'])print'<a href="javascript:window.history.back()"><img src="../img/'.$lang.'/'.$lang.'_back2.gif" width=110 height=24 border=0  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('<?php echo $target ?>')"><img src="../img/<?php echo "$lang/$lang"; ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td></tr>
 <tr valign=top >
-<td bgcolor=<? print $cfg['body_bgcolor']; ?> valign=top colspan=2>
+<td bgcolor=<?php print $cfg['body_bgcolor']; ?> valign=top colspan=2>
 
 <table border=0 cellpadding=10>
   <tr>
-  
-<? 
+<?php 
 for($i=1;$i<5;$i++)
 {
 	$nofile=0;
 	print '
-    <td valign="top">';
+    <td valign="top" width="50%">';
 	if($art[$i])
 	{
 		$picpath='../news_service/'.$lang.'/fotos/'.$art[$i][pic_file];
@@ -221,7 +232,7 @@ for($i=1;$i<5;$i++)
 		print '
  		<img src="../img/pplanu-s.jpg" border=0 width=130 height=98 align="left">';
 	 include("../language/".$lang."/lang_".$lang."_newsdummy.php");
-	 print '<a href="editor-pass.php?sid='.$ck_sid.'&target='.$target.'&title='.strtr($title," ","+").'&lang='.$lang.'">
+	 print '<a href="editor-pass.php?sid='.$sid.'&target='.$target.'&title='.strtr($title," ","+").'&lang='.$lang.'">
 	<font size=1 color="#ff0000" face="arial">'.$LDClk2Compose.'</font></a>';
 	}
 	print '
@@ -239,19 +250,19 @@ for($i=1;$i<5;$i++)
 	
 	<FONT    SIZE=4  FACE="Arial">
 	
-<? if($rows) : ?>
-	<?=$subtitle ?>
+<?php if($rows) : ?>
+	<?php echo $subtitle ?>
 	<table border=0 cellspacing=0 cellpadding=0>
    <tr>
      <td bgcolor=#0>
 	 <table border=0 cellspacing=1 cellpadding=5>
     <tr bgcolor=#ffffff>
-      <td><font face="Verdana,arial" size=2 color="#0000cc"><b><?=$LDArticle ?></b></font></td>
+      <td><font face="Verdana,arial" size=2 color="#0000cc"><b><?php echo $LDArticle ?></b></font></td>
       <td>&nbsp;</td>
-	  <td><font face="Verdana,arial" size=2 color="#0000cc"><b><?=$LDWrittenBy ?>:</b></font></td>
-      <td><font face="Verdana,arial" size=2 color="#0000cc"><b><?=$LDWrittenOn ?>:</b></font></td>
+	  <td><font face="Verdana,arial" size=2 color="#0000cc"><b><?php echo $LDWrittenBy ?>:</b></font></td>
+      <td><font face="Verdana,arial" size=2 color="#0000cc"><b><?php echo $LDWrittenOn ?>:</b></font></td>
     </tr>
-<? while($artikel=mysql_fetch_array($ergebnis))
+<?php while($artikel=mysql_fetch_array($ergebnis))
 {
 print '<tr bgcolor="#ffffff"><td><a href="#"><a href="'.$readerpath.$artikel[main_file].'&picfile='.$artikel[pic_file].'"><font face=verdana,arial size=2> '.$artikel[title].'</a></td>
 		<td><font face=verdana,arial size=2><a href="'.$readerpath.$artikel[main_file].'&picfile='.$artikel[pic_file].'"><img src="../img/info.gif" border=0 alt="'.$LDClk2Read.'"></a></td>		
@@ -274,9 +285,9 @@ print "\r\n";
 
 
  
-<? endif ?>
+<?php endif ?>
 <p>
-<a href="<?=$breakfile ?>"><img src="../img/<?="$lang/$lang" ?>_back2.gif" border=0  alt="<?=$LDBackTxt ?>" align="middle"></a>
+<a href="<?php echo $breakfile ?>"><img src="../img/<?php echo "$lang/$lang" ?>_back2.gif" border=0  alt="<?php echo $LDBackTxt ?>" align="middle"></a>
 
 <p>
 
@@ -287,10 +298,10 @@ print "\r\n";
 </tr>
 
 <tr valign=top>
-<td bgcolor="<? print $cfg['bot_bgcolor']; ?>" colspan=2> 
-<a href="editor-pass.php?sid=<?=$ck_sid ?>&target=<?=$target ?>&title=<?=strtr($title," ","+") ?>&lang=<?=$lang ?>"><img src="../img/news.gif" width=16 height=14 border=0></a>
+<td bgcolor="<?php print $cfg['bot_bgcolor']; ?>" colspan=2> 
+<a href="editor-pass.php?sid=<?php echo $sid ?>&target=<?php echo $target ?>&title=<?php echo strtr($title," ","+") ?>&lang=<?php echo $lang ?>"><img src="../img/news.gif" width=16 height=14 border=0></a>
 <?php
-require("../language/".$lang."/".$lang."_copyrite.htm");
+require("../language/".$lang."/".$lang."_copyrite.php");
  ?>
 </td>
 </tr>

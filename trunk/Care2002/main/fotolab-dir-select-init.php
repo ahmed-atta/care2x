@@ -1,13 +1,18 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-
-require("../language/".$lang."/lang_".$lang."_specials.php");
-require("../req/config-color.php");
-
-$breakfile="javascript:window.parent.location.replace('spediens.php?sid=$ck_sid&lang=$lang')";
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","specials.php");
+$local_user="ck_fotolab_user";
+require("../include/inc_front_chain_lang.php");
+require("../include/inc_config_color.php");
+$breakfile="javascript:window.parent.location.replace('spediens.php?sid=$sid&lang=$lang')";
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -32,57 +37,50 @@ function chkform(d)
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
 // -->
 </script>
 
-<? 
-require("../req/css-a-hilitebu.php");
+<?php 
+require("../include/inc_css_a_hilitebu.php");
 ?>
 
 </HEAD>
 
 <BODY  topmargin=0 leftmargin=0  marginwidth=0 marginheight=0 bgcolor=silver onFocus="document.srcform.maxpic.select()" onFocus="document.srcform.maxpic.select()" 
-<? if (!$cfg['dhtml']){ print 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+<?php if (!$cfg['dhtml']){ print 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
 
 <table width=100% border=0 cellspacing=0 height=100%>
 
 <tr valign=top height=10>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="10" >
-<FONT  COLOR="<? print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG>&nbsp;<?=$LDFotoLab ?></STRONG></FONT></td>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();"><img 
-src="../img/<?="$lang/$lang" ?>_back2.gif" border=0 width=110 height=24 align="absmiddle" 
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" >
+<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG>&nbsp;<?php echo $LDFotoLab ?></STRONG></FONT></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();"><img 
+src="../img/<?php echo "$lang/$lang" ?>_back2.gif" border=0 width=110 height=24 align="absmiddle" 
 style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a 
-href="javascript:gethelp('fotolab.php','init','')"><img src="../img/<?="$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 align="absmiddle" style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="<?=$breakfile ?>"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 align="absmiddle" style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a></td>
+href="javascript:gethelp('fotolab.php','init','')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 align="absmiddle" style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="<?php echo $breakfile ?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 align="absmiddle" style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a></td>
 </tr>
 <tr valign=top >
-<td bgcolor=<? print $cfg['body_bgcolor']; ?> valign=top colspan=2>
+<td bgcolor=<?php print $cfg['body_bgcolor']; ?> valign=top colspan=2>
 <center>
 <p><font face=verdana,arial size=3 color="#cc0000">
 <form action="fotolab-dir-select.php" method="get" onSubmit="return chkform(this)" name="srcform">
 <br>
-<?=$LDHowManyPics ?><p>
+<?php echo $LDHowManyPics ?><p>
 <input type="text" name="maxpic" size=2 maxlength=2><p>
-<input type="hidden" name="sid" value="<?=$ck_sid ?>">
-<input type="hidden" name="lang" value="<?=$lang ?>">
-<input type="submit" value="<?="$LDOK $LDContinue" ?>...">
+<input type="hidden" name="sid" value="<?php echo $sid ?>">
+<input type="hidden" name="lang" value="<?php echo $lang ?>">
+<input type="submit" value="<?php echo "$LDOK $LDContinue" ?>...">
 
 </form>
-
 </center>
-
-
 </FONT>
-
 </td>
 </tr>
-
-
 </table>        
 &nbsp;
-
 </BODY>
 </HTML>

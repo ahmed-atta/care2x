@@ -18,7 +18,7 @@ kollabiert.
 </FONT>
 <p>
 <form>
-<input type="button" value="Schliessen" onClick="window.top.location.replace('radiolog-xray-javastart.php?sid=<?=$ck_sid ?>')">
+<input type="button" value="Schliessen" onClick="window.top.location.replace('radiolog-xray-javastart.php?sid=<?php echo $sid ?>')">
 
 </form>
 </center>

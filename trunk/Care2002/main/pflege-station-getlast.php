@@ -11,7 +11,7 @@
 </head>
 <body>
 <a href="<?php
-print "pflege-station.php?mode=getlast&rt=pflege&sid=".$ck_sid."&station=".$station."&pyear=".$pyear."&pmonth=".$pmonth."&pday=".$pday."&c=".$c;
+print "pflege-station.php?mode=getlast&rt=pflege&sid=$sid&station=".$station."&pyear=".$pyear."&pmonth=".$pmonth."&pday=".$pday."&c=".$c;
 ?>">Bitte clicken Sie hier an.....
 </a>
 </body>

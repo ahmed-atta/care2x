@@ -1,22 +1,29 @@
-<? 
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_stdpass.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","stdpass.php");
+define("NO_2LEVEL_CHK",1);
+require("../include/inc_front_chain_lang.php");
 
-if($mode=="save")
+if(isset($mode)&&($mode=="save"))
 {
 	$OneYear=time()+(3600*24*365);
-	setcookie(ck_thispc_dept,$pcdept,$OneYear); //expires in 1 year
-	setcookie(ck_thispc_station,$pcstation,$OneYear);
-	setcookie(ck_thispc_room,$pcroom,$OneYear);
-	setcookie(ck_thispc_phone,$pcphone,$OneYear);
-	setcookie(ck_thispc_intercom,$pcintercom,$OneYear);
-	header("location: login-pc-config.php?sid=$ck_sid&lang=$lang&saved=1");
+	setcookie(ck_thispc_dept,$HTTP_POST_VARS['pcdept'],$OneYear); //expires in 1 year
+	setcookie(ck_thispc_station,$HTTP_POST_VARS['pcstation'],$OneYear);
+	setcookie(ck_thispc_room,$HTTP_POST_VARS['pcroom'],$OneYear);
+	setcookie(ck_thispc_phone,$HTTP_POST_VARS['pcphone'],$OneYear);
+	setcookie(ck_thispc_intercom,$HTTP_POST_VARS['pcintercom'],$OneYear);
+	header("location: login-pc-config.php?sid=$sid&lang=$lang&saved=1");
 }
 
-require("../req/config-color.php");
+require("../include/inc_config_color.php");
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -28,45 +35,53 @@ require("../req/config-color.php");
 <!-- 
 function closewin()
 {
-	location.href='startframe.php?sid=<?print $ck_sid.'&uid='.$r;?>';
+	location.href='startframe.php?sid=<?php echo $$ck_sid_buffer.'&uid='.$r;?>';
+}
+
+function gethelp(x,s,x1,x2,x3)
+{
+	if (!x) x="";
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
+	window.helpwin.moveTo(0,0);
 }
 // -->
 </script> 
-<? 
-require("../req/css-a-hilitebu.php");
+<?php 
+require("../include/inc_css_a_hilitebu.php");
 ?>
 
 </HEAD>
 
-<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0  onLoad="window.parent.STARTPAGE.location.href='indexframe.php?sid=<?="$ck_sid&lang=$lang" ?>'" 
-<? if (!$cfg['dhtml']){ print 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0  onLoad="window.parent.STARTPAGE.location.href='indexframe.php?sid=<?php echo "$sid&lang=$lang" ?>'" 
+<?php if (!$cfg['dhtml']){ print 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
 <tr valign=top>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="10"><FONT  COLOR="<? print $cfg['top_txtcolor']; ?>"  
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10"><FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  
 SIZE=+3  FACE="Arial">
-<STRONG> &nbsp;<?=$LDLogin ?></STRONG></FONT></td>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="10" align=right><a href="#"><img src="../img/<?="$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 align="absmiddle"  
- <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="js_allrestart.htm?sid=<?print $ck_sid;?>"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 align="absmiddle"   <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
+<STRONG> &nbsp;<?php echo $LDLogin ?></STRONG></FONT></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right><a href="javascript:gethelp('');"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 align="absmiddle"  
+ <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="js_allrestart.htm?sid=<?php echo $sid;?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 align="absmiddle"   <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </td></tr>
 <tr>
-<td bgcolor=<? print $cfg['body_bgcolor']; ?> valign=top colspan=2>
+<td bgcolor=<?php print $cfg['body_bgcolor']; ?> valign=top colspan=2>
 <ul>
 
 <table>
-<tr bgcolor=<? print $cfg['body_bgcolor']; ?>>
+<tr bgcolor=<?php print $cfg['body_bgcolor']; ?>>
 <td align=right><img src="../img/catr.gif" border=0 width=88 height=80 align="absmiddle"></td>
 <td >
-<? if ($saved) : ?>
-<FONT  face="Verdana,Helvetica,Arial" size=3 color="#990000"><?=$LDChangeSaved ?><br>
-<? else : ?>
-<FONT  face="Verdana,Helvetica,Arial" size=5><font color="#cc0000" ><?=$LDWelcome ?>!</font><br>
-<?=$ck_login_username ?>
-<? endif ?>
+<?php if ($saved) : ?>
+<FONT  face="Verdana,Helvetica,Arial" size=3 color="#990000"><?php echo $LDChangeSaved ?><br>
+<?php else : ?>
+<FONT  face="Verdana,Helvetica,Arial" size=5><font color="#cc0000" ><?php echo $LDWelcome ?>!</font><br>
+<?php echo $HTTP_COOKIE_VARS['ck_login_username'.$sid] ?>
+<?php endif ?>
 </td></tr>
 </table>
 
-<form name="pcids"  method="post">
+<form name="pcids"  method="post" action="login-pc-config.php">
 <TABLE cellSpacing=0 cellPadding=0  bgColor=#999999 border=0>
         <TBODY>
         <TR>
@@ -76,14 +91,14 @@ SIZE=+3  FACE="Arial">
               <TBODY>
               <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><FONT 
-                  face="Verdana,Helvetica,Arial" size=2> <?=$LDPcID ?></TD></TR>
+                  face="Verdana,Helvetica,Arial" size=2> <?php echo $LDPcID ?></TD></TR>
               <TR bgColor=#eeeeee><td align=center><img src="../img/home.gif" width=21 height=10 border=0></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B><nobr>
-				 <input type="text" name="pcdept" size=20 maxlength=25 value="<?=$ck_thispc_dept ?>">
+				 <input type="text" name="pcdept" size=20 maxlength=25 value="<?php echo $HTTP_COOKIE_VARS['ck_thispc_dept'] ?>">
 				  </nobr></B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><nobr><?=$LDDept ?></nobr></FONT></TD>
+                  size=2><nobr><?php echo $LDDept ?></nobr></FONT></TD>
               <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
                   src="../img/pixel.gif" 
@@ -91,10 +106,10 @@ SIZE=+3  FACE="Arial">
               <TR bgColor=#eeeeee><td align=center><img src="../img/statbel2.gif" width=20 height=20 border=0></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B><nobr>
-				 <input type="text" name="pcstation" size=20 maxlength=25 value="<?=$ck_thispc_station ?>">
+				 <input type="text" name="pcstation" size=20 maxlength=25 value="<?php echo $HTTP_COOKIE_VARS['ck_thispc_station'] ?>">
      			  </nobr></B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><nobr><?=$LDWard ?></nobr></FONT></TD>
+                  size=2><nobr><?php echo $LDWard ?></nobr></FONT></TD>
               <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
                   src="../img/pixel.gif" 
@@ -102,10 +117,10 @@ SIZE=+3  FACE="Arial">
                 <TR bgColor=#eeeeee><td align=center><img src="../img//button_info.gif" width=15 height=15 border=0></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B>
-				 <input type="text" name="pcroom" size=20 maxlength=25 value="<?=$ck_thispc_room ?>">
+				 <input type="text" name="pcroom" size=20 maxlength=25 value="<?php echo $HTTP_COOKIE_VARS['ck_thispc_room'] ?>">
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?=$LDWardOR ?></FONT></TD></TR>
+                  size=2><?php echo $LDWardOR ?></FONT></TD></TR>
               <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
                   src="../img/pixel.gif" 
@@ -113,10 +128,10 @@ SIZE=+3  FACE="Arial">
               <TR bgColor=#eeeeee>  <td align=center><img src="../img/profile.gif" width=14 height=14 border=0></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B>
-				 <input type="text" name="pcphone" size=20 maxlength=25 value="<?=$ck_thispc_phone ?>">
+				 <input type="text" name="pcphone" size=20 maxlength=25 value="<?php echo $HTTP_COOKIE_VARS['ck_thispc_phone'] ?>">
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?=$LDPhoneNr ?></FONT></TD></TR>
+                  size=2><?php echo $LDPhoneNr ?></FONT></TD></TR>
               <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
                   src="../img/pixel.gif" 
@@ -124,10 +139,10 @@ SIZE=+3  FACE="Arial">
               <TR bgColor=#eeeeee>  <td align=center><img src="../img/listen-sm-legend.gif" width=15 height=15 border=0></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B>
-				 <input type="text" name="pcintercom" size=20 maxlength=25 value="<?=$ck_thispc_intercom ?>">
+				 <input type="text" name="pcintercom" size=20 maxlength=25 value="<?php echo $HTTP_COOKIE_VARS['ck_thispc_intercom'] ?>">
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?=$LDIntercomNr ?></FONT></TD></TR>
+                  size=2><?php echo $LDIntercomNr ?></FONT></TD></TR>
               <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
                   src="../img/pixel.gif" 
@@ -135,10 +150,10 @@ SIZE=+3  FACE="Arial">
               <TR bgColor=#eeeeee>  <td align=center><img src="../img/lightning.gif" width=17 height=17 border=0></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B>
-			 <?=$REMOTE_ADDR ?>
+			 <?php echo $REMOTE_ADDR ?>
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?=$LDPcIP ?></FONT></TD></TR>
+                  size=2><?php echo $LDPcIP ?></FONT></TD></TR>
              
 			 
 		</TBODY>
@@ -147,12 +162,12 @@ SIZE=+3  FACE="Arial">
 		</TBODY>
 		</TABLE>
 		<p>
-<input type="hidden" name="sid" value="<?=$ck_sid ?>">
-<input type="hidden" name="lang" value="<?=$lang ?>">
+<input type="hidden" name="sid" value="<?php echo $sid ?>">
+<input type="hidden" name="lang" value="<?php echo $lang ?>">
 <input type="hidden" name="mode" value="save">
-<input type="submit" value="<?=$LDSave ?>">
-<input type="button" value="<?=$LDNoChange ?>" onClick="window.location.href='startframe.php?sid=<?="$ck_sid&lang=$lang" ?>'">&nbsp;
-<a href="startframe.php?sid=<?="$ck_sid&lang=$lang" ?>"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0  alt="<?=$LDClose ?>" align="absmiddle"></a>
+<input type="submit" value="<?php echo $LDSave ?>">
+<input type="button" value="<?php echo $LDNoChange ?>" onClick="window.location.href='startframe.php?sid=<?php echo "$sid&lang=$lang" ?>'">&nbsp;
+<a href="startframe.php?sid=<?php echo "$sid&lang=$lang" ?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0  alt="<?php echo $LDClose ?>" align="absmiddle"></a>
 </form>
 <p>
 </ul>
@@ -163,20 +178,14 @@ SIZE=+3  FACE="Arial">
 </tr>
 
 <tr>
-<td bgcolor=<? print $cfg['bot_bgcolor']; ?> height=70 colspan=2>
+<td bgcolor=<?php print $cfg['bot_bgcolor']; ?> height=70 colspan=2>
 <?php
-require("../language/$lang/".$lang."_copyrite.htm");
+require("../language/$lang/".$lang."_copyrite.php");
  ?>
 </td>
 </tr>
 </table>        
 &nbsp;
-
-
-
-
 </FONT>
-
-
 </BODY>
 </HTML>

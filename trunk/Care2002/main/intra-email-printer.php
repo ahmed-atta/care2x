@@ -1,15 +1,22 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)||!$ck_intra_email_user) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_intramail.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","intramail.php");
+$local_user="ck_intra_email_user";
+require("../include/inc_front_chain_lang.php");
 
 $thisfile="intra-email-printer.php";
 
 $dbtable="mail_private";
 
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK) 
 	{	
 		switch($folder)
@@ -52,22 +59,22 @@ if($link&&$DBLink_OK)
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
 // -->
 </script> 
 
-<? 
-require("../req/css-a-hilitebu.php");
+<?php 
+require("../include/inc_css_a_hilitebu.php");
 ?>
 
 
 </HEAD>
 
 <BODY bgcolor="#ffffff" onLoad="if (window.focus) window.focus()">
-<pre><?
+<pre><?php
 print '
 '.$LDFrom.': <b>'.$content[sender].'</b>
 '.$LDReply2.': <b>'.$content[reply2].'</b>
@@ -80,14 +87,14 @@ BCC: <b>'.$content[bcc].'</b>
 
 ?>
 <hr>
-<?
+<?php
 //$content[body]=chunk_split($content[body],100);
 print nl2br($content[body]);
 ?>
 <hr>
 </pre><p><FONT face="verdana,Arial" size=2 >
-<b>< <a href="javascript:window.print()"><?=$LDPrint ?></a> ></b><p>
-<b>< <a href="javascript:window.close()"><?=$LDClose ?></a> ></b>
+<b>< <a href="javascript:window.print()"><?php echo $LDPrint ?></a> ></b><p>
+<b>< <a href="javascript:window.close()"><?php echo $LDClose ?></a> ></b>
 </FONT>
 
 

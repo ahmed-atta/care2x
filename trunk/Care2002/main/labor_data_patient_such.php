@@ -1,16 +1,22 @@
-<?
-//setcookie(currentuser,"");
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","lab.php");
+$local_user="ck_lab_user";
+require("../include/inc_front_chain_lang.php");
 
-require("../language/".$lang."/lang_".$lang."_lab.php");
-require("../req/config-color.php");
+require("../include/inc_config_color.php");
 
 $dbtable="mahopatient";
 $thisfile="labor_data_patient_such.php";
-$breakfile="labor.php?sid=$ck_sid&lang=$lang";
+$breakfile="labor.php?sid=$sid&lang=$lang";
 
 $toggle=0;
 
@@ -20,7 +26,7 @@ $keyword=trim($keyword);
 
 if(($search)and($keyword)and($keyword!=" "))
   {
-		include("../req/db-makelink.php");
+		include("../include/inc_db_makelink.php");
 		if($link&&$DBLink_OK) 
 		{
 			if($keyword<20000000) $suchbuffer=$keyword+20000000; else $suchbuffer=$keyword;
@@ -61,7 +67,7 @@ if(($search)and($keyword)and($keyword!=" "))
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
@@ -71,10 +77,10 @@ function gethelp(x,s,x1,x2,x3)
 
 <BODY onLoad="document.sform.keyword.select()">
 
-<img src=../img/micros.gif align="absmiddle"><FONT  COLOR="<?=$cfg[top_txtcolor] ?>"  SIZE=5  FACE="verdana"> <b><? print "$LDMedLab - "; if($mode=="edit") print "$LDNewData"; else print "$LDSeeData"; ?></b></font>
+<img src=../img/micros.gif align="absmiddle"><FONT  COLOR="<?php echo $cfg[top_txtcolor] ?>"  SIZE=5  FACE="verdana"> <b><?php print "$LDMedLab - "; if($mode=="edit") print "$LDNewData"; else print "$LDSeeData"; ?></b></font>
 <table width=100% border=0 cellpadding="0" cellspacing="0">
 <tr>
-<td colspan=3><img src=../img/<?="$lang/$lang" ?>_such-b.gif></td>
+<td colspan=3><img src=../img/<?php echo "$lang/$lang" ?>_such-b.gif></td>
 </tr>
 <tr >
 <td bgcolor=#333399 colspan=3>
@@ -87,19 +93,18 @@ function gethelp(x,s,x1,x2,x3)
 <ul>
 <FONT    SIZE=-1  FACE="Arial">
 
-<FORM action="<? print $thisfile; ?>" method="post" name="sform">
+<FORM action="<?php print $thisfile; ?>" method="post" name="sform">
 <font face="Arial,Verdana"  color="#000000" size=-1>
-<B><?=$LDSearchWordPrompt ?></B></font><p>
-<font size=3><INPUT type="text" name="keyword" size="20" maxlength="40" value="<? print $keyword ?>"></font> 
+<B><?php echo $LDSearchWordPrompt ?></B></font><p>
+<font size=3><INPUT type="text" name="keyword" size="20" maxlength="40" value="<?php print $keyword ?>"></font> 
 <input type=hidden name="search" value=1>
-<input type=hidden name="sid" value=<?=$ck_sid ?>>
-<input type=hidden name="lang" value=<?=$lang ?>>
-<input type=hidden name="mode" value=<?=$mode ?>>
-<INPUT type="image" src=../img/<?="$lang/$lang" ?>_searchlamp.gif border=0 align="absmiddle">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="javascript:gethelp('lab.php','search','<?=$mode ?>','<?=$linecount ?>','<?=$datafound ?>')"><img src="../img/<?="$lang/$lang" ?>_hilfe-r.gif" align="absmiddle" border=0 width=75 height=24></a>
+<input type=hidden name="sid" value=<?php echo $sid ?>>
+<input type=hidden name="lang" value=<?php echo $lang ?>>
+<input type=hidden name="mode" value=<?php echo $mode ?>>
+<INPUT type="image" src=../img/<?php echo "$lang/$lang" ?>_searchlamp.gif border=0 align="absmiddle">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="javascript:gethelp('lab.php','search','<?php echo $mode ?>','<?php echo $linecount ?>','<?php echo $datafound ?>')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" align="absmiddle" border=0 width=75 height=24></a>
 </FORM><p>
-<?
-if($linecount)
+<?php if($linecount)
   {
 			print str_replace("~nr~",$linecount,$LDFoundPatient)."<p>";
 			print "<table border=0 cellpadding=3 cellspacing=1> <tr bgcolor=#9f9f9f>";
@@ -117,17 +122,23 @@ if($linecount)
 	
 						for($i=0;$i<mysql_num_fields($ergebnis)-1;$i++) 
 						{
-							print"<td><font face=arial size=2>";
+							print"
+							<td><font face=arial size=2>";
 							if($zeile[$i]=="")print "&nbsp;"; else print $zeile[$i];
 							print "</td>";
 						}
-						print'<td><font face=arial size=2>&nbsp';
-					    if($mode=="edit") print'<a href="labor_data_check_arch.php?sid='.$ck_sid.'&lang='.$lang.'&mode='.$mode.'&patnum='.$zeile[patnum].'&update=1"  title="'.$LDEnterData.'">
-						<button onClick="javascript:window.location.href=\'labor_data_check_arch.php?sid='.$ck_sid.'&lang='.$lang.'&mode='.$mode.'&patnum='.$zeile[patnum].'&update=1\'"><img 	src=../img/update2.gif border=0 alt="'.$LDEnterData.'" align="absmiddle">';
-							else print'<a href="labor_datalist_noedit.php?sid='.$ck_sid.'&lang='.$lang.'&patnum='.$zeile[patnum].'&noexpand=1&nostat=1"  title="'.$LDClk2See.'">
-							<button onClick="javascript:window.location.href=\'labor_datalist_noedit.php?sid='.$ck_sid.'&lang='.$lang.'&patnum='.$zeile[patnum].'&noexpand=1&nostat=1\'"><img src=../img/update2.gif border=0 alt="'.$LDClk2See.'" align="absmiddle">';
+						print'
+						<td><font face=arial size=2>&nbsp';
+					    if($mode=="edit") print'<a href="labor_data_check_arch.php?sid='.$sid.'&lang='.$lang.'&mode='.$mode.'&patnum='.$zeile[patnum].'&update=1"  title="'.$LDEnterData.'">
+						<button onClick="javascript:window.location.href=\'labor_data_check_arch.php?sid='.$sid.'&lang='.$lang.'&mode='.$mode.'&patnum='.$zeile[patnum].'&update=1\'">
+						<img 	src=../img/update2.gif border=0 alt="'.$LDEnterData.'" align="absmiddle">';
+							else print'
+							<a href="labor_datalist_noedit.php?sid='.$sid.'&lang='.$lang.'&patnum='.$zeile[patnum].'&noexpand=1&nostat=1"  title="'.$LDClk2See.'">
+							<button onClick="javascript:window.location.href=\'labor_datalist_noedit.php?sid='.$sid.'&lang='.$lang.'&patnum='.$zeile[patnum].'&noexpand=1&nostat=1\'">
+							<img src=../img/update2.gif border=0 alt="'.$LDClk2See.'" align="absmiddle">';
 						print ' 
-							<font size=1>'.$LDLabReport.'</font></button></a>&nbsp;</td></tr>';
+						<font size=1>'.$LDLabReport.'</font></button></a>&nbsp;
+						</td></tr>';
 
 					}
 					print "</table>";
@@ -140,7 +151,7 @@ if($linecount)
 						'.$LDSearchWordPrompt.'</B><p>
 						<INPUT type="text" name="keyword" size="20" maxlength="40" value="'.$keyword.'"> 
 						<input type=hidden name="search" value=1>
-						<input type=hidden name="sid" value="'.$ck_sid.'">
+						<input type=hidden name="sid" value="'.$sid.'">
 						<input type=hidden name="lang" value="'.$lang.'">
 						<input type=hidden name="mode" value="'.$mode.'">
 						<INPUT type="image"  src=../img/'.$lang.'/'.$lang.'_searchlamp.gif border=0></font></FORM>
@@ -150,14 +161,14 @@ if($linecount)
 
 ?>
 <p>
-
-<a href="<?="$breakfile" ?>"><img src="../img/<?="$lang/$lang" ?>_cancel.gif" border=0 width=103 height=24 align=right></a>
-
+<br>&nbsp;
+<p>
+<a href="<?php echo "$breakfile" ?>"><img src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" border=0 width=103 height=24 ></a>
 
 <p>
 <!--<hr width=80% align=left>
 <p>
- <a href="ucons.php"><img src="../img/small_help.gif" border=0> <?=$LDWildCards ?></a>
+ <a href="ucons.php<?php echo "?lang=$lang" ?>"><img src="../img/small_help.gif" border=0> <?php echo $LDWildCards ?></a>
  -->
 
 </ul>
@@ -177,7 +188,7 @@ if($linecount)
 <p>
 
 <?php
-require("../language/".$lang."/".$lang."_copyrite.htm");
+require("../language/".$lang."/".$lang."_copyrite.php");
  ?>
 </FONT>
 </BODY>

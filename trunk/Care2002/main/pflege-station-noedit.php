@@ -1,5 +1,4 @@
-<?
-if (($station=="")||($rt==NULL)||($rt!="pflege")||($sid==NULL)||($sid!=$ck_sid)) 
+<?php if (($station=="")||($rt==NULL)||($rt!="pflege")||($sid==NULL)||($sid!=$$ck_sid_buffer)) 
 { header("location: invalid-access-warning.php?mode=close"); exit;}
 
 /*
@@ -88,13 +87,13 @@ header ("Pragma: no-cache");                          // HTTP/1.0
   var urlholder;
 
 function getinfo(pid,pdata){
-	urlholder="pflege-station-patientdaten.php?sid=<? print $ck_sid; ?>&patient=" + pdata + "&station=<? print $station; ?>";
+	urlholder="pflege-station-patientdaten.php?sid=<?php print $sid; ?>&patient=" + pdata + "&station=<?php print $station; ?>";
 	patientwin=window.open(urlholder,pid,"width=700,height=450,menubar=no,resizable=yes,scrollbars=yes");
 	}
 	
 function indata(room,bed)
 {
-	urlholder="pflege-station-bettbelegen.php?sid=<? print $ck_sid; ?>&s=<? print $station; ?>&rm="+room+"&bd="+bed+"<? print "&py=".$pyear."&pm=".$pmonth."&pd=".$pday."&tb=".str_replace("#","",$cfg['top_bgcolor'])."&tt=".str_replace("#","",$cfg['top_txtcolor'])."&bb=".str_replace("#","",$cfg['body_bgcolor'])."&d=".$cfg['dhtml']; ?>";
+	urlholder="pflege-station-bettbelegen.php?sid=<?php print $sid; ?>&s=<?php print $station; ?>&rm="+room+"&bd="+bed+"<?php print "&py=".$pyear."&pm=".$pmonth."&pd=".$pday."&tb=".str_replace("#","",$cfg['top_bgcolor'])."&tt=".str_replace("#","",$cfg['top_txtcolor'])."&bb=".str_replace("#","",$cfg['body_bgcolor'])."&d=".$cfg['dhtml']; ?>";
 	indatawin=window.open(urlholder,"bedroom","width=700,height=450,menubar=no,resizable=yes,scrollbars=yes");
 }
 
@@ -102,7 +101,7 @@ function unlock(b,r)
 {
 <?php
 	print '
-	urlholder="pflege-station.php?mode=newdata&patnum=unlock&rt=pflege&sid='.$ck_sid.'&station='.$station.'&rm="+r+"&bd="+b+"&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday.'";
+	urlholder="pflege-station.php?mode=newdata&patnum=unlock&rt=pflege&sid='.$sid.'&station='.$station.'&rm="+r+"&bd="+b+"&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday.'";
 	';
 ?>
 	if(confirm("Die Sperre des Bett "+b+" im Zimmer "+r+"  aufheben:"))
@@ -114,29 +113,29 @@ function unlock(b,r)
 // -->
 </script>
 
-<?
-require("../req/css-a-hilitebu.php");
+<?php
+require("../include/inc_css_a_hilitebu.php");
 ?>
 
 </HEAD>
 
-<BODY bgcolor=<? print $cfg['body_bgcolor']; ?> onLoad="if (window.focus) window.focus()" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<? if (!$cfg['dhtml']){ print 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+<BODY bgcolor=<?php print $cfg['body_bgcolor']; ?> onLoad="if (window.focus) window.focus()" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
+<?php if (!$cfg['dhtml']){ print 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 
 
 <table width=100% border=0 cellpadding="0" cellspacing=0>
 <tr>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<? print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;&nbsp; Pflegestation-Belegung <? print strtoupper($station).' ('.$pday.'.'.$pmonth.'.'.$pyear.')'; ?> </STRONG></FONT>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" >
+<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;&nbsp; Pflegestation-Belegung <?php print strtoupper($station).' ('.$pday.'.'.$pmonth.'.'.$pyear.')'; ?> </STRONG></FONT>
 </td>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="10" align=right>
-<a href="#"><img src="../img/hilfe.gif" border=0  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
-<a href="#" onClick=window.close()><img src="../img/fenszu.gif" border=0  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td></tr>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right>
+<a href="#"><img src="../img/hilfe.gif" border=0  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
+<a href="#" onClick=window.close()><img src="../img/fenszu.gif" border=0  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td></tr>
 <tr valign=top >
-<td bgcolor=<? print $cfg['body_bgcolor']; ?> valign=top colspan=2>
+<td bgcolor=<?php print $cfg['body_bgcolor']; ?> valign=top colspan=2>
  <ul>
-<?
-	 if($deffile)
+<?php
+if($deffile)
 		 	{
 			 print'<font face="verdana,arial" size="2"  color=red>Die Belegung für heute ist noch nicht erstellt!</font><br>';
 			 }
@@ -227,7 +226,7 @@ for ($i=$statdata['startnumber'];$i<=$statdata['endnumber'];$i++)
 <p>
 
 <?php
-require("../language/$lang/".$lang."_copyrite.htm");
+require("../language/$lang/".$lang."_copyrite.php");
  ?>
 
 </BODY>

@@ -1,15 +1,14 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)||!$ck_op_pflegelogbuch_user) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_or.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+define("LANG_FILE","or.php");
+$local_user="ck_op_pflegelogbuch_user";
+require("../include/inc_front_chain_lang.php");
 
-$globdata="sid=$ck_sid&lang=$lang&op_nr=$op_nr&dept=$dept&saal=$saal&patnum=$patnum&pday=$pday&pmonth=$pmonth&pyear=$pyear";
+$globdata="sid=$sid&lang=$lang&op_nr=$op_nr&dept=$dept&saal=$saal&patnum=$patnum&pday=$pday&pmonth=$pmonth&pyear=$pyear";
 
 if(($mode=="force_add")&&$artikelname&&$pcs)
 {
-include("../req/db-makelink.php");
+include("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK) 
 	{	
 	  	$dbtable="nursing_op_logbook";
@@ -86,7 +85,7 @@ if($link&&$DBLink_OK)
 
 function popinfo(b)
 {
-	urlholder="products-bestellkatalog-popinfo.php?sid=<? print $ck_sid; ?>&keyword="+b+"&mode=search&cat=pharma";
+	urlholder="products-bestellkatalog-popinfo.php?sid=<?php print $sid; ?>&keyword="+b+"&mode=search&cat=pharma";
 	ordercatwin=window.open(urlholder,"ordercat","width=850,height=550,menubar=no,resizable=yes,scrollbars=yes");
 	}
 
@@ -126,7 +125,7 @@ var brwsVer=parseInt(navigator.appVersion);var timer;var curSubMenu='';
 <form name="plist" action="op-logbuch-material-entry-manual.php" method="post">
 <table border=0>
 <tr>
-<?
+<?php
   for($i=0;$i<sizeof($LDMaterialElements);$i++)
   print '
     <td class="v12b"><b>&nbsp;'.$LDMaterialElements[$i].'</b></td>';
@@ -141,7 +140,7 @@ var brwsVer=parseInt(navigator.appVersion);var timer;var curSubMenu='';
     <td colspan=6 bgcolor="#0000ff"></td>
   </tr>
   <tr>
-    <td><input type="text" name="artikelnum" size=15 maxlength=20 value="<?=$artikelnum ?>"></td>
+    <td><input type="text" name="artikelnum" size=15 maxlength=20 value="<?php echo $artikelnum ?>"></td>
     <td><input type="text" name="artikelname" size=15 maxlength=20></td>
     <td>&nbsp;</td>
     <td><input type="text" name="generic" size=15 maxlength=20></td>
@@ -149,21 +148,21 @@ var brwsVer=parseInt(navigator.appVersion);var timer;var curSubMenu='';
     <td><input type="text" name="pcs" size=1 maxlength=3></td>
   </tr>
 </table>
-<input type="hidden" name="sid" value="<?=$ck_sid ?>">
-<input type="hidden" name="lang" value="<?=$lang ?>">
+<input type="hidden" name="sid" value="<?php echo $sid ?>">
+<input type="hidden" name="lang" value="<?php echo $lang ?>">
 <input type="hidden" name="mode" value="force_add">
-<input type="hidden" name="op_nr" value="<?=$op_nr ?>">
-<input type="hidden" name="patnum" value="<?=$patnum ?>">
-<input type="hidden" name="dept" value="<?=$dept ?>">
-<input type="hidden" name="saal" value="<?=$saal ?>">
-<input type="hidden" name="pday" value="<?=$pday ?>">
-<input type="hidden" name="pmonth" value="<?=$pmonth ?>">
-<input type="hidden" name="pyear" value="<?=$pyear ?>">
+<input type="hidden" name="op_nr" value="<?php echo $op_nr ?>">
+<input type="hidden" name="patnum" value="<?php echo $patnum ?>">
+<input type="hidden" name="dept" value="<?php echo $dept ?>">
+<input type="hidden" name="saal" value="<?php echo $saal ?>">
+<input type="hidden" name="pday" value="<?php echo $pday ?>">
+<input type="hidden" name="pmonth" value="<?php echo $pmonth ?>">
+<input type="hidden" name="pyear" value="<?php echo $pyear ?>">
 <p>
-<input type="image" src="../img/<?="$lang/$lang" ?>_savedisc.gif" border=0 width=99 height=24 align="absmiddle" alt="<?=$LDSave ?>">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:document.plist.reset()" title="<?=$LDReset ?>"><img src="../img/<?="$lang/$lang" ?>_reset.gif" width=156 height=24 border=0 align=absmiddle></a>
+<input type="image" src="../img/<?php echo "$lang/$lang" ?>_savedisc.gif" border=0 width=99 height=24 align="absmiddle" alt="<?php echo $LDSave ?>">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:document.plist.reset()" title="<?php echo $LDReset ?>"><img src="../img/<?php echo "$lang/$lang" ?>_reset.gif" width=156 height=24 border=0 align=absmiddle></a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="op-logbuch-material-list.php?<?=$globdata ?>"><img src="../img/<?="$lang/$lang" ?>_cancel.gif" width=103 height=24 border=0 align=absmiddle alt="<?=$LDCancel ?>"></a>
+<a href="op-logbuch-material-list.php?<?php echo $globdata ?>"><img src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" width=103 height=24 border=0 align=absmiddle alt="<?php echo $LDCancel ?>"></a>
 </form>
 
 

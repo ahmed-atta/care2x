@@ -1,25 +1,28 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+define("LANG_FILE","nursing.php");
+define("NO_2LEVEL_CHK",1);
+require("../include/inc_front_chain_lang.php");
 
+/**
+* If the script call comes from the op module replace the user cookie with the user info from op module
+*/
 if($op_shortcut)
 {
-	$ck_pflege_user=$op_shortcut;
-	 setcookie(ck_pflege_user,$op_shortcut);
+	$HTTP_COOKIE_VARS["ck_pflege_user".$sid]=$op_shortcut;
+	 setcookie("ck_pflege_user".$sid,$op_shortcut);
+	 $edit=1;
 }
-	elseif(!$ck_pflege_user)
+	elseif(!$HTTP_COOKIE_VARS["ck_pflege_user".$sid])
 	 {
 		if($edit) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 	}
 
-require("../language/".$lang."/lang_".$lang."_nursing.php");
-require("../req/config-color.php"); // load color preferences
+require("../include/inc_config_color.php"); // load color preferences
 
-require("../global_conf/remoteservers_conf.php");
+require("../global_conf/inc_remoteservers_conf.php");
 
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK)
 	{	
 	// get orig data
@@ -51,7 +54,7 @@ $fr=strtolower(str_replace(".","-",($result[patnum]."_".$result[name]."_".$resul
 <META http-equiv='Pragma: no-cache'>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
- <TITLE><?=$LDPatDataFolder ?></TITLE>
+ <TITLE><?php echo ucfirst($result[name]).",".ucfirst($result[vorname])." ".$result[gebdatum]." ".$LDPatDataFolder ?></TITLE>
 
 <style type="text/css">
 	A:link  {text-decoration: none; }
@@ -66,12 +69,12 @@ $fr=strtolower(str_replace(".","-",($result[patnum]."_".$result[name]."_".$resul
 	var colorbar=new Array();
 	function initwindow(){
 	 	if (window.focus) window.focus();
-		window.resizeTo(700,450);
+		window.resizeTo(700,600);
 		}
 
   function getinfo(patientID){
-	urlholder="pflege-station.php?route=validroute&patient=" + patientID + "&user=<? print $aufnahme_user.'"' ?>;
-	patientwin=window.open(urlholder,patientID,"width=600,height=400,menubar=no,resizable=yes,scrollbars=yes");
+	urlholder="pflege-station.php?route=validroute&patient=" + patientID + "&user=<?php print $aufnahme_user.'"' ?>;
+	patientwin=window.open(urlholder,patientID,"width=700,height=600,menubar=no,resizable=yes,scrollbars=yes");
 	}
 
 	function enlargewin(){
@@ -83,18 +86,18 @@ function makekonsil(v)
 { 
 	if((v=="patho")||(v=="inmed")||(v=="radio"))
 	{
-	location.href="pflege-station-patientdaten-doconsil-"+v+".php?sid=<? print "$ck_sid&lang=$lang&edit=$edit&station=$station&pn=$pn&konsil="; ?>"+v;
+	location.href="pflege-station-patientdaten-doconsil-"+v+".php?sid=<?php print "$sid&lang=$lang&edit=$edit&station=$station&pn=$pn&konsil="; ?>"+v;
 	}
 	else 
 	{v="radio";
-	location.href="ucons.php?sid=<? print "$ck_sid&lang=$lang&station=$station&pn=$pn&konsil="; ?>"+v;
+	location.href="ucons.php?sid=<?php print "$sid&lang=$lang&station=$station&pn=$pn&konsil="; ?>"+v;
 	}
 	//enlargewin();
 }
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
@@ -134,16 +137,15 @@ function pullbar(cb,c)
 <table width=100% border=0 cellpadding="5" cellspacing=0>
 <tr>
 <td bgcolor="navy" >
-<FONT  COLOR="white"  SIZE=+2  FACE="Arial"><STRONG><? print "$LDPatDataFolder $station"; ?></STRONG></FONT>
+<FONT  COLOR="white"  SIZE=+2  FACE="Arial"><STRONG><?php print "$LDPatDataFolder $station"; ?></STRONG></FONT>
 </td>
-<td bgcolor="navy" height="10" align=right></a><a href="javascript:gethelp('patient_folder.php','<?=$nodoc ?>','','<?=$station ?>','Main folder')"><img src="../img/<?="$lang/$lang" ?>_hilfe-r.gif" border=0 alt="<?=$LDHelp ?>"></a><a href="javascript:window.close()"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 alt="<?=$LDClose ?>"></a></td></tr>
+<td bgcolor="navy" height="10" align=right></a><a href="javascript:gethelp('patient_folder.php','<?php echo $nodoc ?>','','<?php echo $station ?>','Main folder')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 alt="<?php echo $LDHelp ?>"></a><a href="javascript:window.close()"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 alt="<?php echo $LDClose ?>"></a></td></tr>
 
 </tr>
 <tr>
 <td colspan=2>
  <ul><p><br>
-<?
-
+<?php
 switch($nodoc)
 {
 case "labor":
@@ -152,7 +154,7 @@ case "labor":
 	<img src="../img/catr.gif" border=0 width=88 height=80 align=absmiddle> &nbsp;
 	<b>'.$LDNoLabReport.'</b><p>
 		<form action="'.$thisfile.'" method="get">
-	<input type="hidden" name="sid" value="'.$ck_sid.'">
+	<input type="hidden" name="sid" value="'.$sid.'">
  	<input type="hidden" name="lang" value="'.$lang.'">
 <input type="hidden" name="pn" value="'.$pn.'">
 <input type="hidden" name="edit" value="'.$edit.'">
@@ -190,14 +192,14 @@ print '<form name="konsil"><table   cellpadding="0" cellspacing=0 border="0" >
 		print '</td></nobr>
 		</tr>
 		<tr bgcolor="#696969" ><td colspan="3" ><nobr>
-		<input type="button" onClick="javascript:enlargewin();window.location.href=\'pflege-station-patientdaten-kurve.php?sid='.$ck_sid.'&lang='.$lang.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDFeverCurve.'"><input 
-		type="button" onClick="javascript:enlargewin();window.location.href=\'pflege-station-patientdaten-pbericht.php?sid='.$ck_sid.'&lang='.$lang.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDNursingReport.'"><input 
-		type="button" onClick="javascript:enlargewin();window.location.href=\'pflege-station-patientdaten-todo.php?sid='.$ck_sid.'&lang='.$lang.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDDocsPrescription.'"><input 
-		type="button" onClick="javascript:enlargewin();window.location.href=\'pflege-station-patientdaten-diagnosis.php?sid='.$ck_sid.'&lang='.$lang.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDReports.'"><br>
+		<input type="button" onClick="javascript:enlargewin();window.location.href=\'pflege-station-patientdaten-kurve.php?sid='.$sid.'&lang='.$lang.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDFeverCurve.'"><input 
+		type="button" onClick="javascript:enlargewin();window.location.href=\'pflege-station-patientdaten-pbericht.php?sid='.$sid.'&lang='.$lang.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDNursingReport.'"><input 
+		type="button" onClick="javascript:enlargewin();window.location.href=\'pflege-station-patientdaten-todo.php?sid='.$sid.'&lang='.$lang.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDDocsPrescription.'"><input 
+		type="button" onClick="javascript:enlargewin();window.location.href=\'pflege-station-patientdaten-diagnosis.php?sid='.$sid.'&lang='.$lang.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDReports.'"><br>
 		<input type="button" value="'.$LDRootData.'"><input 
 		type="button" value="'.$LDNursingPlan.'"><input 
-		type="button" onClick="javascript:window.location.href=\'labor_datalist_noedit.php?sid='.$ck_sid.'&lang='.$lang.'&station='.$station.'&patnum='.$pn.'&from=station&edit='.$edit.'\'" value="'.$LDLabReports.'"><input 
-		type="button" onClick="javascript:enlargewin();window.location.href=\'fotos-start.php?sid='.$ck_sid.'&lang='.$lang.'&pn='.$pn.'&station='.$station.'&fileroot='.$fr.'&edit='.$edit.'\'" value="'.$LDPhotos.'">';
+		type="button" onClick="javascript:window.location.href=\'labor_datalist_noedit.php?sid='.$sid.'&lang='.$lang.'&station='.$station.'&patnum='.$pn.'&from=station&edit='.$edit.'\'" value="'.$LDLabReports.'"><input 
+		type="button" onClick="javascript:enlargewin();window.location.href=\'fotos-start.php?sid='.$sid.'&lang='.$lang.'&pn='.$pn.'&station='.$station.'&fileroot='.$fr.'&edit='.$edit.'\'" value="'.$LDPhotos.'">';
 		
 		if($edit)
 		{
@@ -278,7 +280,7 @@ else
 		//**************** ftp check of main pix ************************
 
 		// set up basic connection
-		//$ftp_server="192.168.0.2";   // configured in the file ..req/remoteservers_conf.php
+		//$ftp_server="192.168.0.2";   // configured in the file ..include/inc_remoteservers_conf.php
 		//$ftp_user="maryhospital_fotodepot";
 		//$ftp_pw="seeonly";
 		$conn_id = ftp_connect("$ftp_server"); 
@@ -313,7 +315,6 @@ else
 	}
  }
  
- 
 print '
 		</td>
 		<td bgcolor="#cde1ec"><font face="verdana,arial" size="2" >
@@ -332,25 +333,16 @@ print '
 }	//end of switch (nodoc
 		
 ?>
-
-
 <p>
-
-
-
-
 </FONT>
-
 </ul>
-
 <p>
 </td>
 </tr>
 </table>        
 <p>
 <?php
-require("../language/$lang/".$lang."_copyrite.htm");
+require("../language/$lang/".$lang."_copyrite.php");
  ?>
-
 </BODY>
 </HTML>

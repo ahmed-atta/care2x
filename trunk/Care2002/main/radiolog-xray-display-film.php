@@ -1,41 +1,53 @@
-<? 
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_radio.php");
-require("../global_conf/remoteservers_conf.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","radio.php");
+define("NO_2LEVEL_CHK",1);
+require("../include/inc_front_chain_lang.php");
+require("../global_conf/inc_remoteservers_conf.php");
 ?>
-
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-
-
 </HEAD>
-
 <BODY bgcolor=black onLoad="if (window.focus) window.focus()" marginwidth=0 leftmargin=0 topmargin=0 marginheight=0>
-
 <center >
-<? if($mode=="preview") : ?>
-<img src="<? if($disc_pix_mode) print $xray_film_localpath; else print $xray_film_server_http; ?>thorax.jpg" width=150">
-<? else : ?>
-
+<?php if(isset($mode)&&($mode=="preview")) 
+{
+ ?>
+<img src="<?php if($disc_pix_mode) print $xray_film_localpath; else print $xray_film_server_http; ?>thorax.jpg" width=150>
+<?php
+}
+else
+{
+ ?>
 <script language="javascript">
 <!-- Script Begin
-document.write('<img src="<? if($disc_pix_mode) print $xray_film_localpath; else print $xray_film_server_http; ?>thorax.jpg" width="'+(screen.availWidth*0.83)+'">');
+document.write('<img src="<?php if($disc_pix_mode) print $xray_film_localpath; else print $xray_film_server_http; ?>thorax.jpg" width="'+(screen.availWidth*0.83)+'">');
 //  Script End -->
 </script>
-
-<?endif ?>
+<?php 
+}
+ ?>
 <br>
 
 <p>
 <form>
-<? if($mode!="preview") : ?>
-<input type="button" value="<?=$LDClose ?>" onClick="window.top.location.replace('radiolog-xray-javastart.php?sid=<?="$ck_sid&lang=$lang" ?>')">
-<? endif ?>
+<?php if(!isset($mode)||($mode!="preview")) 
+{
+ ?>
+<input type="button" value="<?php echo $LDClose ?>" onClick="window.top.location.replace('radiolog-xray-javastart.php?sid=<?php echo "$sid&lang=$lang" ?>')">
+<?php 
+}
+ ?>
 </form>
 </center>
 <p>

@@ -1,10 +1,9 @@
-<?
-if(!$lang)
+<?php if(!$lang)
 	if(!$ck_language) include("../chklang.php");
 		else $lang=$ck_language;
-//if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+//if (!$sid||($sid!=$$ck_sid_buffer)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 //require("../language/".$lang."/lang_".$lang."_drg.php");
-require("../req/config-color.php");
+require("../include/inc_config_color.php");
 
 $toggle=0;
 
@@ -63,37 +62,37 @@ function pruf(d)
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
 // -->
 </script>
  
-  <? 
-require("../req/css-a-hilitebu.php");
+  <?php 
+require("../include/inc_css_a_hilitebu.php");
 ?>
  
 </HEAD>
 
-<BODY  onLoad="document.searchdata.keyword.select();document.searchdata.keyword.focus();" bgcolor=<? print $cfg['body_bgcolor']; ?>
-<? if (!$cfg['dhtml']){ print ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+<BODY  onLoad="document.searchdata.keyword.select();document.searchdata.keyword.focus();" bgcolor=<?php print $cfg['body_bgcolor']; ?>
+<?php if (!$cfg['dhtml']){ print ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 
 <FONT    SIZE=-1  FACE="Arial">
 <ul>
 <FORM action="drg-search-icd10.php" method="post" name="searchdata" onSubmit="return pruf(this)">
 <font face="Arial,Verdana"  color="#000000" size=-1>
-<input type="hidden" name="sid" value="<? print $ck_sid; ?>">
-<B><?=$LDKeywordPrompt ?></B></font><p>
-<font size=3><INPUT type="text" name="keyword" size="14" maxlength="40" onfocus=this.select() value="<? print $keyword ?>"></font> 
-<INPUT type="submit" name="versand" value="<?=$LDSEARCH ?>"></FORM>
+<input type="hidden" name="sid" value="<?php print $sid; ?>">
+<B><?php echo $LDKeywordPrompt ?></B></font><p>
+<font size=3><INPUT type="text" name="keyword" size="14" maxlength="40" onfocus=this.select() value="<?php print $keyword ?>"></font> 
+<INPUT type="submit" name="versand" value="<?php echo $LDSEARCH ?>"></FORM>
 
 <p>
-<a href="startframe.php?sid=<? print "$ck_sid&lang=$lang"; ?>"><img src="../img/<?="$lang/$lang" ?>_cancel.gif" width=103 height=24 border=0></a>
+<a href="startframe.php?sid=<?php print "$sid&lang=$lang"; ?>"><img src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" width=103 height=24 border=0></a>
 <p>
 
-<?
-			if ($linecount>0) 
+<?php
+if ($linecount>0) 
 				{ 
 					print "".str_replace("~nr~",$linecount,$LDPhoneFound)."<p>";
 					mysql_data_seek($ergebnis,0);
@@ -128,7 +127,7 @@ require("../req/css-a-hilitebu.php");
 						<INPUT type="submit" name="versand" value="'.$LDSEARCH.'"></font></FORM>
 						<p>
 						<FORM action="startframe.php" >
-						<input type="hidden" name="sid" value="'.$ck_sid.'">
+						<input type="hidden" name="sid" value="'.$sid.'">
 						<input type="hidden" name="lang" value="'.$lang.'">
       
 						<INPUT type="submit"  value="'.$LDCancel.'"></FORM>

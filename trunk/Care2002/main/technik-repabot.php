@@ -1,14 +1,21 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_tech.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","tech.php");
+define("NO_2LEVEL_CHK",1);
+require("../include/inc_front_chain_lang.php");
 
 $dbtable="tech_repair_job";
 
 $rows=0;
-	require("../req/db-makelink.php");
+	require("../include/inc_db_makelink.php");
 		if($link&&$DBLink_OK) 
 		{
 				$sql='SELECT * FROM '.$dbtable.' WHERE archive=0  ORDER BY tid DESC';
@@ -28,12 +35,12 @@ $rows=0;
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <meta http-equiv="refresh" content="30, url: technik-repabot.php">
-<title><?=$LDRepabotActivate ?></title>
+<title><?php echo $LDRepabotActivate ?></title>
 <script language=javascript>
 function goactive()
 	{
-<?
- if (!$nofocus) print "	
+<?php
+if (!$nofocus) print "	
  	self.focus();
  	";
 	if($nofocus) $nofocus=0; // toggle it to reset 	
@@ -43,19 +50,19 @@ function goactive()
 	
 function show_order(d,o,s,t)
 {
-	url="technik-repabot-print.php?sid=<? print "$ck_sid&lang=$lang"; ?>&dept="+d+"&tdate="+o+"&ttime="+s+"&tid="+t;
+	url="technik-repabot-print.php?sid=<?php print "$sid&lang=$lang"; ?>&dept="+d+"&tdate="+o+"&ttime="+s+"&tid="+t;
 	repaprintwin=window.open(url,"repaprintwin","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
 }
 </script>
 
 </head>
-<body <? 	if($rows) print " bgcolor=#ffffee  onLoad=goactive() "; ?>
+<body <?php 	if($rows) print " bgcolor=#ffffee  onLoad=goactive() "; ?>
 	>
 <font face="Verdana, Arial" size=2 color=#800000>
 <MARQUEE dir=ltr scrollAmount=3 scrollDelay=120 width=150
-      height=10 align="middle"><b><?=$LDImRepabot ?>...</b></MARQUEE></font>
+      height=10 align="middle"><b><?php echo $LDImRepabot ?>...</b></MARQUEE></font>
 <p>
-<?
+<?php
 //print "$rows <br>";
 if($rows)
 {
@@ -117,7 +124,7 @@ if($rows)
 			&nbsp;<b>'.$LDReportArrived.'</b><p>
 			<form name=ack>
 			<input type="hidden" name="showlist" value="1">
-			<input type="hidden" name="sid" value="'.$ck_sid.'">
+			<input type="hidden" name="sid" value="'.$sid.'">
 			<input type="hidden" name="lang" value="'.$lang.'">
 			<input type="submit" value="'.$LDShowRequest.'">
     		</form>
@@ -132,7 +139,7 @@ else if($showlist)
 		print '
 				<script language=javascript>
 				self.resizeTo(300,150);
-				window.location.replace("technik-repabot.php?sid='.$ck_sid.'&lang='.$lang.'&dept='.$dept.'");
+				window.location.replace("technik-repabot.php?sid='.$sid.'&lang='.$lang.'&dept='.$dept.'");
 				</script>';
 	}
 ?>

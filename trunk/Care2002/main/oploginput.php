@@ -1,11 +1,11 @@
 <?php
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-if (!$internok&&!$ck_op_pflegelogbuch_user) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_or.php");
-require("../req/config-color.php"); // load color preferences
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+define("LANG_FILE","or.php");
+define("NO_2LEVEL_CHK",1);
+require("../include/inc_front_chain_lang.php");
+
+if (!$internok&&!$HTTP_COOKIE_VARS["ck_op_pflegelogbuch_user".$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+require("../include/inc_config_color.php"); // load color preferences
 
 // initializations
 $thisfile="oploginput.php";
@@ -17,7 +17,7 @@ if($pmonth=="") $pmonth=date(m);
 if($pday=="") $pday=date(d);
 
 /********************************* Resolve the department and op room ***********************/
-require("../req/resolve_opr_dept.php");
+require("../include/inc_resolve_opr_dept.php");
 
 $datafound=0;
 
@@ -25,7 +25,7 @@ $md=$pday;
 if(strlen($md)==1) $md="0".$md;
 
 
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK) 
 	{	
 	// get orig data
@@ -103,7 +103,7 @@ if($link&&$DBLink_OK)
        							{
 									//print $sql." new update <br>";
 									mysql_close($link);
-									header("location:$thisfile?sid=$ck_sid&lang=$lang&mode=saveok&patnum=$patnum&dept=$dept&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday&op_nr=$op_nr");
+									header("location:$thisfile?sid=$sid&lang=$lang&mode=saveok&patnum=$patnum&dept=$dept&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday&op_nr=$op_nr");
 								}
 								else { print "$LDDbNoRead<br>"; }
 						} // else create new entry
@@ -186,7 +186,7 @@ if($link&&$DBLink_OK)
        							{
 									//print $sql." new insert <br>";
 									mysql_close($link);
-									header("location:$thisfile?sid=$ck_sid&lang=$lang&mode=saveok&patnum=$patnum&dept=$dept&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday&op_nr=$op_nr");
+									header("location:$thisfile?sid=$sid&lang=$lang&mode=saveok&patnum=$patnum&dept=$dept&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday&op_nr=$op_nr");
 								}
 								else { print "$LDDbNoSave<br>"; } 
 						}//end of else
@@ -622,19 +622,19 @@ if($link&&$DBLink_OK)
 <!-- 
 function resettimebars()
 {
-	//window.parent.OPLOGIMGBAR.location.replace('oplogtimebar.php?filename=<? print $filename; ?>&rnd=<? print $r; ?>');
-	window.parent.OPLOGIMGBAR.location.replace('<? print "oplogtimebar.php?sid=$ck_sid&lang=$lang&internok=$internok&patnum=".$pdata[patnum]."&op_nr=".$pdata[op_nr]."&dept=$dept&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday";?>');
+	//window.parent.OPLOGIMGBAR.location.replace('oplogtimebar.php?filename=<?php print $filename; ?>&rnd=<?php print $r; ?>');
+	window.parent.OPLOGIMGBAR.location.replace('<?php print "oplogtimebar.php?sid=$sid&lang=$lang&internok=$internok&patnum=".$pdata[patnum]."&op_nr=".$pdata[op_nr]."&dept=$dept&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday";?>');
 }
 
 function resettimeframe()
 {
-	//window.parent.OPLOGINPUT.location.replace('oplogtime.php?filename=<? print $filename; ?>&rnd=<? print $r; ?>');
-	window.parent.OPLOGINPUT.location.replace('<? print "oplogtime.php?sid=$ck_sid&lang=$lang&internok=$internok&patnum=".$pdata[patnum]."&op_nr=".$pdata[op_nr]."&dept=$dept&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday";?>');
+	//window.parent.OPLOGINPUT.location.replace('oplogtime.php?filename=<?php print $filename; ?>&rnd=<?php print $r; ?>');
+	window.parent.OPLOGINPUT.location.replace('<?php print "oplogtime.php?sid=$sid&lang=$lang&internok=$internok&patnum=".$pdata[patnum]."&op_nr=".$pdata[op_nr]."&dept=$dept&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday";?>');
 }
 
 function resetlogdisplays()
 {
-	window.parent.OPLOGMAIN.location.replace('<? print "oplogmain.php?sid=$ck_sid&lang=$lang&internok=$internok&gotoid=".$pdata[op_nr]."&dept=$dept&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday"; ?>');
+	window.parent.OPLOGMAIN.location.replace('<?php print "oplogmain.php?sid=$sid&lang=$lang&internok=$internok&gotoid=".$pdata[op_nr]."&dept=$dept&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday"; ?>');
 }
 
 function cleartimeframes()
@@ -818,31 +818,31 @@ function checksubmit()
 function searchpat()
 {
 	d=document.oppflegepatinfo;
-	window.location.href="<?="$thisfile?sid=$ck_sid&mode=search&patnum=" ?>"+d.patnum.value+"&pname="+d.pname.value+"&gebdatum="+d.gebdatum.value;
+	window.location.href="<?php echo "$thisfile?sid=$sid&mode=search&patnum=" ?>"+d.patnum.value+"&pname="+d.pname.value+"&gebdatum="+d.gebdatum.value;
 
 }
 
 function getinfo(m)
 {
-	urlholder="<?="op-pflege-log-getinfo.php?sid=$ck_sid&lang=$lang&dept=$dept&saal=$saal&op_nr=$op_nr&patnum=$patnum&pday=$pday&pmonth=$pmonth&pyear=$pyear&winid=";?>"+m;
+	urlholder="<?php echo "op-pflege-log-getinfo.php?sid=$sid&lang=$lang&dept=$dept&saal=$saal&op_nr=$op_nr&patnum=$patnum&pday=$pday&pmonth=$pmonth&pyear=$pyear&winid=";?>"+m;
 	getinfowin=window.open(urlholder,"getinfo","width=800,height=500,menubar=no,resizable=yes,scrollbars=yes");
 }
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
 	x2=document.oppflegepatinfo.xx2.value;
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
 function openfolder(pid,pdata){
-	urlholder="pflege-station-patientdaten.php?sid=<? print "$ck_sid&lang=$lang"; ?>&pn="+pid+"&patient=" + pdata + "&station=<? print "$dept&pday=$pday&pmonth=$pmonth&pyear=$pyear&op_shortcut=$ck_op_pflegelogbuch_user"; ?>";
+	urlholder="pflege-station-patientdaten.php?sid=<?php print "$sid&lang=$lang"; ?>&pn="+pid+"&patient=" + pdata + "&station=<?php print "$dept&pday=$pday&pmonth=$pmonth&pyear=$pyear&op_shortcut=".$HTTP_COOKIE_VARS["ck_op_pflegelogbuch_user".$sid]; ?>";
 	patientwin=window.open(urlholder,pid,"width=700,height=450,menubar=no,resizable=yes,scrollbars=yes");
 	}
 
 function openDRGComposite()
 {
-<? if($cfg['dhtml'])
+<?php if($cfg['dhtml'])
 	print '
 			w=window.parent.screen.width;
 			h=window.parent.screen.height;';
@@ -852,8 +852,8 @@ function openDRGComposite()
 			h=650;';
 ?>
 	
-	drgcomp_<?=$pdata[patnum]."_".$op_nr."_".$dept."_".$saal ?>=window.open("drg-composite-start.php?sid=<? print "$ck_sid&lang=$lang&display=composite&pn=$pdata[patnum]&ln=$lname&fn=$fname&bd=$bdate&opnr=$op_nr&dept=$dept&oprm=$saal"; ?>","drgcomp_<?=$pdata[patnum]."_".$op_nr."_".$dept."_".$saal ?>","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=" + (h-60));
-	window.drgcomp_<?=$pdata[patnum]."_".$op_nr."_".$dept."_".$saal ?>.moveTo(0,0);
+	drgcomp_<?php echo $pdata[patnum]."_".$op_nr."_".$dept."_".$saal ?>=window.open("drg-composite-start.php?sid=<?php print "$sid&lang=$lang&display=composite&pn=$pdata[patnum]&ln=$lname&fn=$fname&bd=$bdate&opnr=$op_nr&dept=$dept&oprm=$saal"; ?>","drgcomp_<?php echo $pdata[patnum]."_".$op_nr."_".$dept."_".$saal ?>","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=" + (h-60));
+	window.drgcomp_<?php echo $pdata[patnum]."_".$op_nr."_".$dept."_".$saal ?>.moveTo(0,0);
 }
 //-->
 </script>
@@ -871,7 +871,7 @@ function openDRGComposite()
 </HEAD>
 
 <BODY bgcolor="#cde1ec" topmargin=0 leftmargin=0 marginwidth=0 onLoad="
-<? 
+<?php 
 switch($mode)
 {
 	case "saveok": print 'resetall();';
@@ -895,30 +895,30 @@ if(!$datafound) print 'document.oppflegepatinfo.patnum.focus();';
 <TR><TD bgcolor=navy>
 
 <font face=verdana,arial size=1 color="#ffffff">
-<? if($op_nr) : ?>
-	<?=$LDOpNr ?> <FONT face=arial COLOR="yellow"  SIZE="3" ><b> <? print $op_nr; ?> </b></FONT>
-<? endif ?>
+<?php if($op_nr) : ?>
+	<?php echo $LDOpNr ?> <FONT face=arial COLOR="yellow"  SIZE="3" ><b> <?php print $op_nr; ?> </b></FONT>
+<?php endif ?>
 
-<?=$LDDate ?>: 
+<?php echo $LDDate ?>: 
 
-<?
+<?php
 	print '
 			<font size="2" face="arial">'.$pday.'.'.$pmonth.'.'.$pyear.'</font>'; 
 ?>
 
 &nbsp;
-<? if($datafound) : ?>
+<?php if($datafound) : ?>
 <!--  <input type="submit" value="save" name="versand"> -->
-<a href="javascript:document.oppflegepatinfo.submit()"><img src="../img/<?="$lang/$lang" ?>_savedisc.gif" border=0 width=99 height=24 align=absmiddle alt="<?=$LDSaveLatest ?>"></a>
-<? endif ?>
+<a href="javascript:document.oppflegepatinfo.submit()"><img src="../img/<?php echo "$lang/$lang" ?>_savedisc.gif" border=0 width=99 height=24 align=absmiddle alt="<?php echo $LDSaveLatest ?>"></a>
+<?php endif ?>
 </TD>
 
 <td align=right bgcolor="navy" >
-<? if($datafound) : ?>
-<a href="oploginput.php?sid=<?="$ck_sid&lang=$lang&dept=$dept&saal=$saal" ?>&mode=fresh">
-<img src="../img/<?="$lang/$lang" ?>_newpat2.gif" width=130 height=24 border=0 align=absmiddle alt="<?=$LDStartNewDocu ?>"></a>
-<? endif ?>
-<? if($op_nr) : ?>
+<?php if($datafound) : ?>
+<a href="oploginput.php?sid=<?php echo "$sid&lang=$lang&dept=$dept&saal=$saal" ?>&mode=fresh">
+<img src="../img/<?php echo "$lang/$lang" ?>_newpat2.gif" width=130 height=24 border=0 align=absmiddle alt="<?php echo $LDStartNewDocu ?>"></a>
+<?php endif ?>
+<?php if($op_nr) : ?>
 <DIV id=dFunctions 
 style=" VISIBILITY: hidden; POSITION: absolute; top:20px">
 <TABLE cellSpacing=1 cellPadding=0 bgColor=#000000 border=0>
@@ -931,28 +931,28 @@ style=" VISIBILITY: hidden; POSITION: absolute; top:20px">
 		  <A onmouseover=clearTimeout(timer) 
             onmouseout="timer=setTimeout('hsm()',500)"  onClick="document.oppflegepatinfo.xx2.value='drg'"
             href="javascript:openDRGComposite()">
-			<img src="../img/redpfeil.gif" width=4 height=7 border=0 align=absmiddle> <?=$LDPerformance ?>
+			<img src="../img/redpfeil.gif" width=4 height=7 border=0 align=absmiddle> <?php echo $LDPerformance ?>
             </A><BR>
 			<A onmouseover=clearTimeout(timer) 
             onmouseout="timer=setTimeout('hsm()',500)"  onClick="document.oppflegepatinfo.xx2.value='material'"
-            href="op-logbuch-material-parentframe.php?sid=<?print "$ck_sid&op_nr=$op_nr&patnum=$pdata[patnum]&dept=$dept&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>" target="OPLOGMAIN">
-			<img src="../img/redpfeil.gif" width=4 height=7 border=0 align=absmiddle> <?=$LDUsedMaterial ?>
+            href="op-logbuch-material-parentframe.php?sid=<?php echo "$sid&lang=$lang&op_nr=$op_nr&patnum=$pdata[patnum]&dept=$dept&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>" target="OPLOGMAIN">
+			<img src="../img/redpfeil.gif" width=4 height=7 border=0 align=absmiddle> <?php echo $LDUsedMaterial ?>
             </A><BR>
 		  <A onmouseover=clearTimeout(timer) 
             onmouseout="timer=setTimeout('hsm()',500)"    onClick="document.oppflegepatinfo.xx2.value='container'"
-            href="op-logbuch-material-parentframe.php?sid=<?print "$ck_sid&mode=cont&op_nr=$op_nr&patnum=$pdata[patnum]&dept=$dept&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>" target="OPLOGMAIN">
-			<img src="../img/redpfeil.gif" width=4 height=7 border=0 align=absmiddle> <?=$LDContainer ?>
+            href="op-logbuch-material-parentframe.php?sid=<?php echo "$sid&lang=$lang&mode=cont&op_nr=$op_nr&patnum=$pdata[patnum]&dept=$dept&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>" target="OPLOGMAIN">
+			<img src="../img/redpfeil.gif" width=4 height=7 border=0 align=absmiddle> <?php echo $LDContainer ?>
             </A><BR>
 			<A onmouseover=clearTimeout(timer) 
             onmouseout="timer=setTimeout('hsm()',500)" 
-            href="oplogmain.php?sid=<? print "$ck_sid&op_nr=$op_nr&patnum=$pdata[patnum]&dept=$dept&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>" target="OPLOGMAIN">
-			<img src="../img/redpfeil.gif" width=4 height=7 border=0 align=absmiddle> <?=$LDShowLogbook ?>
+            href="oplogmain.php?sid=<?php print "$sid&lang=$lang&op_nr=$op_nr&patnum=$pdata[patnum]&dept=$dept&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>" target="OPLOGMAIN">
+			<img src="../img/redpfeil.gif" width=4 height=7 border=0 align=absmiddle> <?php echo $LDShowLogbook ?>
             </A><BR></nobr></TD></TR></TABLE></TD></TR></TBODY></TABLE></DIV>
 <a href="javascript:ssm('dFunctions'); clearTimeout(timer)" 
       onmouseout="timer=setTimeout('hsm()',1000)" ><FONT  COLOR="white"  SIZE=3 face=verdana,arial >
-	  <img src="../img/<?="$lang/$lang" ?>_funktion.gif" border=0 width=103 height=24  align="absmiddle" alt="<?=$LDClk2DropMenu ?>"></a>
+	  <img src="../img/<?php echo "$lang/$lang" ?>_funktion.gif" border=0 width=103 height=24  align="absmiddle" alt="<?php echo $LDClk2DropMenu ?>"></a>
 
-<? endif ?>
+<?php endif ?>
 
 <DIV id=dLogoTable 
 style=" VISIBILITY: hidden; POSITION: absolute; top:20px">
@@ -965,29 +965,29 @@ style=" VISIBILITY: hidden; POSITION: absolute; top:20px">
           <TD bgColor=#ffccee><font face=arial size=2><nobr>
 		  <img src="../img/redpfeil.gif" width=4 height=7 border=0 align=absmiddle> 
 			<A onmouseover=clearTimeout(timer) onmouseout="timer=setTimeout('hsm()',500)" 
-            href="op-pflege-logbuch-xtsuch-start.php?sid=<?print "$ck_sid&lang=$lang&internok=$internok&dept=$dept&saal=$saal"; ?>&user=<?print str_replace(' ','+',$op_pflegelogbuch_user); ?>" target="_parent"><?=$LDSearchPatient ?>
+            href="op-pflege-logbuch-xtsuch-start.php?sid=<?php echo "$sid&lang=$lang&internok=$internok&dept=$dept&saal=$saal"; ?>&user=<?php echo str_replace(' ','+',$op_pflegelogbuch_user); ?>" target="_parent"><?php echo $LDSearchPatient ?>
             </A><BR>
 			<img src="../img/redpfeil.gif" width=4 height=7 border=0 align=absmiddle>  
 			 <A onmouseover=clearTimeout(timer) onmouseout="timer=setTimeout('hsm()',500)" 
-            href="op-pflege-logbuch-arch-start.php?sid=<?print "$ck_sid&lang=$lang&internok=$internok&dept=$dept&saal=$saal"; ?>&user=<?print str_replace(' ','+',$op_pflegelogbuch_user); ?>"  target="_parent"><?=$LDArchive ?>
+            href="op-pflege-logbuch-arch-start.php?sid=<?php echo "$sid&lang=$lang&internok=$internok&dept=$dept&saal=$saal"; ?>&user=<?php echo str_replace(' ','+',$op_pflegelogbuch_user); ?>"  target="_parent"><?php echo $LDArchive ?>
 			</A>
 	</nobr><BR></TD></TR></TABLE></TD></TR></TBODY></TABLE></DIV>
 
 <a href="javascript:ssm('dLogoTable'); clearTimeout(timer)" 
       onmouseout="timer=setTimeout('hsm()',1000)" ><FONT  COLOR="white"  SIZE=3 face=verdana,arial >
-	  <img src="../img/<?="$lang/$lang" ?>_archive.gif" width=103 height=24 border=0 align=absmiddle alt="<?=$LDClk2DropMenu ?>"></a>
+	  <img src="../img/<?php echo "$lang/$lang" ?>_archive.gif" width=103 height=24 border=0 align=absmiddle alt="<?php echo $LDClk2DropMenu ?>"></a>
 
-<a href="javascript:gethelp('oplog.php','create','<?=$mode ?>')"><img src="../img/<?="$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 align="absmiddle" alt="<?=$LDHelp ?>"></a>
+<a href="javascript:gethelp('oplog.php','create','<?php echo $mode ?>')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 align="absmiddle" alt="<?php echo $LDHelp ?>"></a>
 <a href="javascript:if(!window.parent.opener.closed)window.parent.opener.focus();window.parent.close();">
-<img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 align="absmiddle" alt="<?=$LDClose ?>"></a><br>
+<img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 align="absmiddle" alt="<?php echo $LDClose ?>"></a><br>
 </td>
 </TR>
 </TABLE>
 
-<?
-if(($mode=="search")&&!$datafound)
+<?php if(($mode=="search")&&!$datafound)
 {
-	print '
+
+?>
 			<center>
 			
 				<table cellpadding=0 cellspacing=0 border=0 >
@@ -1000,23 +1000,19 @@ if(($mode=="search")&&!$datafound)
 				<tr>
 				<td bgcolor="#999999">
 				<table cellpadding=10 cellspacing=0 border=0 bgcolor="#eeeeee">
-				<tr ><td >';
+				<tr ><td >
 				
-	if($rows)
+<?php	
+   if($rows)
 	{
 	print '<font  face=verdana,arial>
 			<font color="#800000" size=4>'.$LDPlsClk1.'</font>
 			<font size=2 ><br>';
-		/*
-		print '<br>Aber, folgende ';
-		if($rows==1) print 'Eintragung entspricht';
-		else print 'Eintragungen entsprechen';
-		print ' dem gesuchten am nähesten.<p>';
-		*/
-		while($pdata=mysql_fetch_array($ergebnis))
+
+    while($pdata=mysql_fetch_array($ergebnis))
 		{
 				print "
-						<a href=\"oploginput.php?sid=$ck_sid&lang=$lang&mode=get&patnum=$pdata[patnum]&name=$pdata[name]&vorname=$pdata[vorname]&gebdatum=$pdata[gebdatum]&dept=$dept&saal=$saal&op_nr=$op_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear\">";
+						<a href=\"oploginput.php?sid=$sid&lang=$lang&mode=get&patnum=$pdata[patnum]&name=$pdata[name]&vorname=$pdata[vorname]&gebdatum=$pdata[gebdatum]&dept=$dept&saal=$saal&op_nr=$op_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear\">";
 				print '<img src="../img/arrow.gif" border=0 width=15 height=15 align=middle>';
 				if($ndl_name&&stristr($pdata[name],$ndl_name)) print '<u><b><span style="background:yellow"> '.$pdata['name'].'</span></b></u>';
  					else print $pdata['name'];				
@@ -1051,17 +1047,17 @@ if(($mode=="search")&&!$datafound)
 }
 ?>
 
-<input type="hidden" name="sid" value="<? print $ck_sid; ?>">
-<input type="hidden" name="lang" value="<? print $lang; ?>">
-<input type="hidden" name="internok" value="<? print $internok; ?>">
-<input type="hidden" name="encoder" value="<? print $ck_op_pflegelogbuch_user; ?>">
-<input type="hidden" name="op_nr" value="<? print $op_nr; ?>">
-<input type="hidden" name="pmonth" value="<? print $pmonth; ?>">
-<input type="hidden" name="pyear"  value="<? print $pyear; ?>">
-<input type="hidden" name="op_date"  value="<? print $pday.".".$pmonth.".".$pyear; ?>">
-<input type="hidden" name="pday" value="<? print $pday; ?>">
-<input type="hidden" name="dept" value="<? print $dept; ?>">
-<input type="hidden" name="saal" value="<? print $saal; ?>">
+<input type="hidden" name="sid" value="<?php print $sid; ?>">
+<input type="hidden" name="lang" value="<?php print $lang; ?>">
+<input type="hidden" name="internok" value="<?php print $internok; ?>">
+<input type="hidden" name="encoder" value="<?php print $HTTP_COOKIE_VARS["ck_op_pflegelogbuch_user".$sid]; ?>">
+<input type="hidden" name="op_nr" value="<?php print $op_nr; ?>">
+<input type="hidden" name="pmonth" value="<?php print $pmonth; ?>">
+<input type="hidden" name="pyear"  value="<?php print $pyear; ?>">
+<input type="hidden" name="op_date"  value="<?php print $pday.".".$pmonth.".".$pyear; ?>">
+<input type="hidden" name="pday" value="<?php print $pday; ?>">
+<input type="hidden" name="dept" value="<?php print $dept; ?>">
+<input type="hidden" name="saal" value="<?php print $saal; ?>">
 <input type="hidden" name="xx2" value="">
 
 <table border=0 bgcolor="#9c9c9c" cellpadding=0 cellspacing=0>
@@ -1072,8 +1068,8 @@ if(($mode=="search")&&!$datafound)
 <tr bgcolor="#fefefe" height=180>
 	<TD valign="top" width=150><font face=verdana,arial size=1>
 
-<?
- if($pdata[patnum]=="")
+<?php
+if($pdata[patnum]=="")
  	{
 	 print $LDPatientNr.': <br>
 		<INPUT NAME="patnum" TYPE="text" VALUE="" onKeyUp="isvalnum(this.value,this.name)" SIZE="9" ><br>
@@ -1103,11 +1099,11 @@ if(($mode=="search")&&!$datafound)
 ?> 
 	</TD>
 
-<TD valign="top" width=130><font face=verdana,arial size=1  color="<? if($datafound) print "#0000cc"; else print "#3f3f3f"; ?>">
+<TD valign="top" width=130><font face=verdana,arial size=1  color="<?php if($datafound) print "#0000cc"; else print "#3f3f3f"; ?>">
 
-<? if($datafound)
+<?php if($datafound)
 	{
-	 print '<a href="drg-icd10.php?sid='.$ck_sid.'&lang='.$lang;
+	 print '<a href="drg-icd10.php?sid='.$sid.'&lang='.$lang;
 	 print "&pn=$pdata[patnum]&ln=$lname&fn=$fname&bd=$bdate&opnr=$op_nr&dept=$dept&oprm=$saal";
 	 print '" target="OPLOGMAIN">'.$LDDiagnosis.':</a><br>
 <textarea name="diagnosis" cols=16 rows=10 wrap="physical" >'.stripcslashes($pdata[diagnosis]).'</textarea>';
@@ -1117,7 +1113,7 @@ if(($mode=="search")&&!$datafound)
 </TD>
 
 <TD valign=top width=140 >
-<? 
+<?php 
 if($datafound) 
 {
 	print'
@@ -1152,11 +1148,11 @@ if($datafound)
 </TD>
 
 <TD valign=top width=150>
-<font face=verdana,arial size=1  color="<? if($datafound) print "#0000cc"; else print "#3f3f3f"; ?>">
-<? if($datafound) : ?>
-<?=$LDAna ?><br>
+<font face=verdana,arial size=1  color="<?php if($datafound) print "#0000cc"; else print "#3f3f3f"; ?>">
+<?php if($datafound) : ?>
+<?php echo $LDAna ?><br>
 	<select NAME="anesthesia"   SIZE="1">
-	<?
+	<?php
 		while(list($x,$v)=each($LDAnaTypes))
 		{
 		 print '
@@ -1169,8 +1165,8 @@ if($datafound)
 	
 
 <BR>
-	<a href="javascript:getinfo('ana')"><?=$LDAnaDoc ?></a><br>
-	<?
+	<a href="javascript:getinfo('ana')"><?php echo $LDAnaDoc ?></a><br>
+	<?php
 		if($pdata[an_doctor])
 		{ 
 			print '<font color="#000000">';
@@ -1184,16 +1180,16 @@ if($datafound)
 			print '</font>';
 		}
 	?>
-<? else : ?>
-	<?="$LDAna<p>$LDAnaDoc" ?>
-<? endif ?>
+<?php else : ?>
+	<?php echo "$LDAna<p>$LDAnaDoc" ?>
+<?php endif ?>
 
 	<p>
 
 <table cellpadding="0" cellspacing="0" border=0 width=100% class="v10_n"> 
 <tr>
 <td>
-<? $eo=explode("~",$pdata[entry_out]);
+<?php $eo=explode("~",$pdata[entry_out]);
 	for($i=0;$i<sizeof($eo);$i++)
 	{
 	parse_str($eo[$i],$eobuf);
@@ -1207,31 +1203,31 @@ if($datafound)
 	}
 ?>
 
-<font face=verdana,arial size=1 color="<? if($datafound) print "#0000cc"; else print "#3f3f3f"; ?>">
-	<?=$LDOpCut ?>:
-	<? if($datafound) : ?>
-	<br><INPUT NAME="cut_time" TYPE="text" VALUE="<? print $ccbuf[s]; ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)"> 
-	<? else : ?>
+<font face=verdana,arial size=1 color="<?php if($datafound) print "#0000cc"; else print "#3f3f3f"; ?>">
+	<?php echo $LDOpCut ?>:
+	<?php if($datafound) : ?>
+	<br><INPUT NAME="cut_time" TYPE="text" VALUE="<?php print $ccbuf[s]; ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)"> 
+	<?php else : ?>
 	<p>
-	<? endif ?>
+	<?php endif ?>
 	<BR>
-	<?=$LDOpClose ?>:
-	<? if($datafound) : ?>
-	<br><INPUT NAME="close_time" TYPE="text" VALUE="<? print $ccbuf[e]; ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)">
-	<? endif ?>
+	<?php echo $LDOpClose ?>:
+	<?php if($datafound) : ?>
+	<br><INPUT NAME="close_time" TYPE="text" VALUE="<?php print $ccbuf[e]; ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)">
+	<?php endif ?>
 </td>
-<td><font face=verdana,arial size=1 color="<? if($datafound) print "#0000cc"; else print "#3f3f3f"; ?>">
-	<?=$LDOpInFull ?>:
-	<? if($datafound) : ?>
-	<br><INPUT NAME="entry_time" TYPE="text" VALUE="<? print $eobuf[s]; ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)"> 
-	<? else : ?>
+<td><font face=verdana,arial size=1 color="<?php if($datafound) print "#0000cc"; else print "#3f3f3f"; ?>">
+	<?php echo $LDOpInFull ?>:
+	<?php if($datafound) : ?>
+	<br><INPUT NAME="entry_time" TYPE="text" VALUE="<?php print $eobuf[s]; ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)"> 
+	<?php else : ?>
 	<p>
-	<? endif ?>
+	<?php endif ?>
 	<BR>
-	<?=$LDOpOutFull ?>:
-	<? if($datafound) : ?>
-	<br><INPUT NAME="exit_time" TYPE="text" VALUE="<? print $eobuf[e]; ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)">
-	<? endif ?>
+	<?php echo $LDOpOutFull ?>:
+	<?php if($datafound) : ?>
+	<br><INPUT NAME="exit_time" TYPE="text" VALUE="<?php print $eobuf[e]; ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)">
+	<?php endif ?>
 </td>
 </tr>
 </table>
@@ -1242,10 +1238,10 @@ if($datafound)
 
 
 <TD valign="top" width=160><font face=verdana,arial size=1 
-color="<? if($datafound) print "#0000cc"; else print "#3f3f3f"; ?>">
-<? if($datafound) 
+color="<?php if($datafound) print "#0000cc"; else print "#3f3f3f"; ?>">
+<?php if($datafound) 
 	{
-	 print '<a href="drg-ops301.php?sid='.$ck_sid.'&lang='.$lang;
+	 print '<a href="drg-ops301.php?sid='.$sid.'&lang='.$lang;
 	 print "&pn=$pdata[patnum]&ln=$lname&fn=$fname&bd=$bdate&opnr=$op_nr&dept=$dept&oprm=$saal";
 	print '" target="OPLOGMAIN">'.$LDTherapy.'/'.$LDOperation.'</a><br>
 	<TEXTAREA NAME="op_therapy" COLS="18" ROWS="10">'.stripcslashes($pdata['op_therapy']).'</TEXTAREA>';
@@ -1254,30 +1250,18 @@ color="<? if($datafound) print "#0000cc"; else print "#3f3f3f"; ?>">
 ?>
 </TD>
 
-
-<TD valign="top" width=140><font face=verdana,arial size=1 color="<? if($datafound) print "#0000cc"; else print "#3f3f3f"; ?>"><?=$LDOpMainElements[result] ?><br>
-<? if($datafound) print '
+<TD valign="top" width=140><font face=verdana,arial size=1 color="<?php if($datafound) print "#0000cc"; else print "#3f3f3f"; ?>"><?php echo $LDOpMainElements[result] ?><br>
+<?php if($datafound) print '
 <TEXTAREA NAME="result_info" Content-Type="text/html"
 	COLS="18" ROWS="10">'.stripcslashes($pdata['result_info']).'</TEXTAREA>';
 ?>
 </TD>
 
-
-
-
 </TR>
-	
-
-
 </TABLE>
 </td>
   </tr>
 </table>
-
-
-
 </FORM>
-
-
 </BODY>
 </HTML>

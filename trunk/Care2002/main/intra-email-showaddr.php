@@ -1,13 +1,20 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)||!$ck_intra_email_user) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_intramail.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","intramail.php");
+$local_user="ck_intra_email_user";
+require("../include/inc_front_chain_lang.php");
 // check the info params for completeness
 $addr=trim($addr);
-if(($mode=="saveadd")&&($addr=="")) { header("location:intra-email-addrbook.php?sid=$ck_sid&lang=$lang"); exit;}
-require("../req/config-color.php"); // load color preferences
+if(($mode=="saveadd")&&($addr=="")) { header("location:intra-email-addrbook.php?sid=$sid&lang=$lang"); exit;}
+require("../include/inc_config_color.php"); // load color preferences
 
 $thisfile="intra-email-showaddr.php";
 
@@ -16,11 +23,11 @@ $dbtable="mail_private_users";
 $linecount=0;
 $modetypes=array("sendmail","listmail");
 
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK) 
 	{	
 	
-				$sql='SELECT addr_book, lastcheck FROM '.$dbtable.' WHERE  email="'.$ck_intra_email_user.'"';
+				$sql='SELECT addr_book, lastcheck FROM '.$dbtable.' WHERE  email="'.$HTTP_COOKIE_VARS[$local_user.$sid].'"';
 				if($ergebnis=mysql_query($sql,$link))
 				{ 
 					$rows=0;
@@ -42,7 +49,7 @@ if($link&&$DBLink_OK)
 <HTML>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
- <TITLE><?="$LDIntraEmail - $LDAddrBook" ?></TITLE>
+ <TITLE><?php echo "$LDIntraEmail - $LDAddrBook" ?></TITLE>
 
  <script language="javascript" >
 <!-- 
@@ -85,31 +92,31 @@ function resit(d)
 // -->
 </script> 
 
-<? 
-require("../req/css-a-hilitebu.php");
+<?php 
+require("../include/inc_css_a_hilitebu.php");
 ?>
 
 </HEAD>
 
-<BODY bgcolor=<? print $cfg['body_bgcolor']; ?> topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="if (window.focus) window.focus()" 
-<? 
+<BODY bgcolor=<?php print $cfg['body_bgcolor']; ?> topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="if (window.focus) window.focus()" 
+<?php 
  if (!$cfg['dhtml']){ print ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
-<?=$test ?>
-<? //foreach($argv as $v) print "$v "; ?>
+<?php echo $test ?>
+<?php //foreach($argv as $v) print "$v "; ?>
 <table width=100% border=0  cellpadding="0" cellspacing="0">
 <tr valign=top>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<? print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG>&nbsp;<?="$LDIntraEmail - $LDAddrBook" ?></STRONG></FONT></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" >
+<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG>&nbsp;<?php echo "$LDIntraEmail - $LDAddrBook" ?></STRONG></FONT></td>
 </tr>
 
 </table>   
 
 <FONT face="Verdana,Helvetica,Arial" size=2>
 
- <?
+ <?php
  
 print '
-	<font color="#800000">&nbsp;'.$ck_intra_email_user.'</font>';
+	<font color="#800000">&nbsp;'.$HTTP_COOKIE_VARS[$local_user.$sid].'</font>';
 // ******************************** show address book***************************************
 
  	$arrlist=explode("_",strtolower($content[addr_book]));
@@ -135,7 +142,7 @@ print '
        <td><FONT face="Arial" size=1 color="#ffffff"><b>BCC:</b><br>
            </td>
        <td><FONT face="Verdana,Helvetica,Arial" size=2 >';
-	   if($l2h) print '<a href="'.$thisfile.'?sid='.$ck_sid.'&lang='.$lang.'&l2h=0&mode='.$mode.'&folder='.$folder.'" title="'.$LDSortName.'"><img src="../img/arw_down.gif" '; else print '<a href="'.$thisfile.'?sid='.$ck_sid.'&lang='.$lang.'&l2h=1&mode='.$mode.'&folder='.$folder.'" title="'.$LDSortName.'"><img src="../img/arw_up.gif" ';
+	   if($l2h) print '<a href="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&l2h=0&mode='.$mode.'&folder='.$folder.'" title="'.$LDSortName.'"><img src="../img/arw_down.gif" '; else print '<a href="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&l2h=1&mode='.$mode.'&folder='.$folder.'" title="'.$LDSortName.'"><img src="../img/arw_up.gif" ';
 	   print '
 	   width=12 height=20 border=0 align=absmiddle alt="'.$LDSortName.'"><font color="#ffffff"> &nbsp;<b>'.$LDName.','.$LDFirstName.':</b></td>
        <td><FONT face="Verdana,Helvetica,Arial" size=2 color="#ffffff">&nbsp;&nbsp;<b>'.$LDAlias.'/'.$LDShortName.':
@@ -145,7 +152,7 @@ print '
 	for($i=0;$i<sizeof($arrlist);$i++)
 	   {
 	    parse_str(trim($arrlist[$i]),$minfo);
-		//$buf="intra-email-read.php?sid=$ck_sid&ua=$ck_intra_email_user&s_stamp=$minfo[t]&read=$minfo[r]&from=$minfo[f]&subj=".strtr($minfo[s]," ","+")."&date=".strtr($minfo[d]," ","+")."&size=$minfo[z]&l2h=$l2h&folder=$folder";
+		//$buf="intra-email-read.php?sid=$sid&ua=$ck_intra_email_user&s_stamp=$minfo[t]&read=$minfo[r]&from=$minfo[f]&subj=".strtr($minfo[s]," ","+")."&date=".strtr($minfo[d]," ","+")."&size=$minfo[z]&l2h=$l2h&folder=$folder";
  		//$delbuf="n=$minfo[n]&a=$minfo[a]&e=$minfo[e]";
      	print ' <tr bgcolor="#ffffff">
        		<td>&nbsp;</td>
@@ -171,7 +178,7 @@ print '
 	print '
 		<br><input type="hidden" name="task" value="delete">
 	<input type="hidden" name="maxrow" value="'.$maxrow.'">
-	<input type="hidden" name="sid" value="'.$ck_sid.'">
+	<input type="hidden" name="sid" value="'.$sid.'">
  	<input type="hidden" name="lang" value="'.$lang.'">
  	<input type="hidden" name="l2h" value="'.$l2h.'">
  	<input type="hidden" name="folder" value="'.$folder.'">
@@ -182,14 +189,8 @@ print '
 ?>
   &nbsp; &nbsp;
    <font size=1><a href="javascript:window.close()" >
-   <img src="../img/l_arrowGrnSm.gif" width=12 height=12 border=0 align=middle> <?=$LDClose ?>
+   <img src="../img/l_arrowGrnSm.gif" width=12 height=12 border=0 align=middle> <?php echo $LDClose ?>
 </a></font>
-  
-  
-     
-
 </FONT>
-
-
 </BODY>
 </HTML>

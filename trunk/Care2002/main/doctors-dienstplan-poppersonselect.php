@@ -1,11 +1,18 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_doctors.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","doctors.php");
+define("NO_2LEVEL_CHK",1);
+require("../include/inc_front_chain_lang.php");
 
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK) 
 	{	
 	// get orig data
@@ -39,7 +46,7 @@ $wkday=date("w",mktime(0,0,0,$month,$elemid+1,$year));
 <HTML>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<TITLE><?=$LDInfo4Duty ?></TITLE>
+<TITLE><?php echo $LDInfo4Duty ?></TITLE>
 
 <script language="javascript">
 
@@ -60,7 +67,7 @@ function addelem(elem,hid,last,first,b)
 
 
 
-<?  // PHP
+<?php
 
 function weekday($daynum,$mon,$yr){
 		$jd=gregoriantojd($mon,$daynum,$yr);
@@ -78,7 +85,6 @@ function weekday($daynum,$mon,$yr){
 
 ?>
 
-
 </script>
 
 <STYLE type=text/css>
@@ -90,9 +96,8 @@ div.box { border: double; border-width: thin; width: 100%; border-color: black; 
 
 <font face=verdana,arial size=4 color=maroon>
 <b>
-<?=$LDDutyPlan ?><br>
-<?
-if ($mode=="a") print '<font color="#006666">'.$LDStayIn.'</font>'; else print $LDOnCall;
+<?php echo $LDDutyPlan ?><br>
+<?php if ($mode=="a") print '<font color="#006666">'.$LDDoc1.'</font>'; else print $LDDoc2;
 print ' '.$LDOn.'<br>';
 
  print '<font color=navy>'.($elemid+1).'.';
@@ -103,40 +108,38 @@ print ' '.$LDOn.'<br>';
 </font>
 <p>
 
-<?	if($datafound)
+<?php
+if($datafound)
 {
-print '<ul>
-	<font face="verdana,arial" size=2>';
+    print '<ul>
+	    <font face="verdana,arial" size=2>';
 
-//print $pdata['list'];
-$pbuf=explode("~",$pdata['list']);
-for ($i=0;$i<sizeof($pbuf);$i++)
-{
-	parse_str(trim($pbuf[$i]),$persons);
-	print '
-	<a href="#" onClick=addelem(\''.$mode.$elemid.'\',\'h'.$mode.$elemid.'\',\''.ucfirst($persons[l]).'\',\''.ucfirst($persons[f]).'\',\''.ucfirst($persons[b]).'\')>
-	<img src="../img/mans-';
-	if ($mode=="a") print 'gr.gif'; else print 'red.gif';
-	print '" border="0"> '.ucfirst($persons[l]).', '.ucfirst($persons[f]).'</a>
-	<br>';
-}
-print '
+    //print $pdata['list'];
+    $pbuf=explode("~",$pdata['list']);
+    for ($i=0;$i<sizeof($pbuf);$i++)
+    {
+	    parse_str(trim($pbuf[$i]),$persons);
+	    print '
+	    <a href="#" onClick=addelem(\''.$mode.$elemid.'\',\'h'.$mode.$elemid.'\',\''.ucfirst($persons[l]).'\',\''.ucfirst($persons[f]).'\',\''.ucfirst($persons[b]).'\')>
+	    <img src="../img/mans-';
+	    if ($mode=="a") print 'gr.gif'; else print 'red.gif';
+	    print '" border="0"> '.ucfirst($persons[l]).', '.ucfirst($persons[f]).'</a>
+	    <br>';
+    }
+    print '
 	</font></ul>';
 }
 else
 {
-print '<form><font face="verdana,arial" size=2>
-<img src="../img/catr.gif" border=0 width=88 height=80 align=left> '.$LDNoPersonList.'
-<p>
-<input type="button" value="'.$LDCreatePersonList.'" onClick="window.opener.location.href=\'doctors-dienst-personalliste.php?sid='.$ck_sid.'&dept='.$dept.'&pmonth='.$month.'&pyear='.$year.'&retpath='.$retpath.'&ipath=plan\';window.opener.focus();window.close();">
-</form>
-
-';
+    print '<form><font face="verdana,arial" size=2>
+    <img src="../img/catr.gif" border=0 width=88 height=80 align=left> '.$LDNoPersonList.'
+    <p>
+    <input type="button" value="'.$LDCreatePersonList.'" onClick="window.opener.location.href=\'doctors-dienst-personalliste.php?sid='.$sid.'&lang='.$lang.'&dept='.$dept.'&pmonth='.$month.'&pyear='.$year.'&retpath='.$retpath.'&ipath=plan\';window.opener.focus();window.close();">
+    </form>';
 }
-
 ?>
 <p><br>
-<a href="javascript:closethis()"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border="0" alt="<?=$LDCloseWindow ?>"></a>
+<a href="javascript:closethis()"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border="0" alt="<?php echo $LDCloseWindow ?>"></a>
 
 </BODY>
 

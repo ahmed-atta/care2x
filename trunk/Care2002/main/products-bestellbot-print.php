@@ -1,19 +1,28 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) $cat=""; 
-require("../language/".$lang."/lang_".$lang."_products.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","products.php");
+$local_user=$userck;
+require("../include/inc_front_chain_lang.php");
+
+if ($HTTP_COOKIE_VARS[$local_user.$sid]==NULL) $cat="";  
 
 switch($cat)
 {
-	case "pharma":	if ($ck_apo_user==NULL)$cat="";  
+	case "pharma":	
 							$title="$LDPharmacy - $LDOrderBotActivate $LDAck";
 							$dbtable="pharma_orderlist_todo";
 							$dbtable2="pharma_orderlist_archive";
 							$dbtable3="pharma_orderlist";
 							break;
-	case "medlager":if ($ck_medlager_user==NULL)$cat="";  
+	case "medlager":
 							$title="$LDMedDepot - $LDOrderBotActivate $LDAck";
 							$dbtable="med_orderlist_todo";
 							$dbtable2="med_orderlist_archive";
@@ -29,7 +38,7 @@ $rows=0;
 $stat2seen=false;
 $mov2arc=false;
 $deltodo=false;
-include("../req/db-makelink.php");
+include("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK) 
 		{
 		 switch($mode)
@@ -133,41 +142,41 @@ if($link&&$DBLink_OK)
 <!-- Creation date: 14.07.01 -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title><?=$title ?></title>
+<title><?php echo $title ?></title>
 
 <script language=javascript>
 function ack_print()
 {
 	window.print()
-	window.location.replace("products-bestellbot-print.php?<? print "sid=$ck_sid&lang=$lang&mode=ack_print&cat=$cat&dept=$dept&order_id=$order_id&t_stamp=$t_stamp&status=$status"; ?>")
+	window.location.replace("products-bestellbot-print.php?<?php print "sid=$sid&lang=$lang&userck=$userck&mode=ack_print&cat=$cat&dept=$dept&order_id=$order_id&t_stamp=$t_stamp&status=$status"; ?>")
 }
 function move2arch()
 {
 	if(document.opt.clerk.value=="")
 	{
-		alert('<?=$LDAlertEnterName ?>');
+		alert('<?php echo $LDAlertEnterName ?>');
 		return;
 	}
 	c=document.opt.clerk.value;
-	window.location.replace("products-bestellbot-print.php?<? print "sid=$ck_sid&lang=$lang&mode=archive&cat=$cat&dept=$dept&order_id=$order_id&t_stamp=$t_stamp&status=$status&clerk="; ?>"+c)
+	window.location.replace("products-bestellbot-print.php?<?php print "sid=$sid&lang=$lang&userck=$userck&mode=archive&cat=$cat&dept=$dept&order_id=$order_id&t_stamp=$t_stamp&status=$status&clerk="; ?>"+c)
 }
 function parentref(n)
 {
-window.opener.location.replace('products-bestellbot.php?sid=<?="$ck_sid&lang=$lang"?>&cat=<?=$cat ?>&nofocus='+n+'&showlist=1');
+window.opener.location.replace('products-bestellbot.php?sid=<?php echo "$sid&lang=$lang&userck=$userck"?>&cat=<?php echo $cat ?>&nofocus='+n+'&showlist=1');
 setTimeout("parentref(0)",10000);
 }
 </script>
 
 </head>
 <body bgcolor=#fefefe onLoad="if (window.focus) window.focus(); 
-<? 
+<?php 
 	if($stat2seen) print "parentref(1);"; 
 	if($deltodo) print "parentref(1);"; 
 ?>" 
 >
 <p>
 <form name="opt">
-<?
+<?php
 //foreach($argv as $v) print "$v ";
 
 if($rows>0)
@@ -239,7 +248,7 @@ else print'
 <img src="../img/nedr.gif" width=100 height=138 border=0 align=middle>'.$LDDataNoFoundTxt;
 
 ?>
-<p align=right><input type="button" value="<?=$LDClose ?>" onClick="parentref(0);window.close();"></p>
+<p align=right><input type="button" value="<?php echo $LDClose ?>" onClick="parentref(0);window.close();"></p>
 </form>
 </font></body>
 </html>

@@ -1,15 +1,22 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-if($edit&&!$ck_pflege_user) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_nursing.php");
-require("../req/config-color.php"); // load color preferences
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","nursing.php");
+$local_user="ck_pflege_user";
+require("../include/inc_front_chain_lang.php");
+if($edit&&!$HTTP_COOKIE_VARS[$local_user.$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+require("../include/inc_config_color.php"); // load color preferences
 
 $thisfile="pflege-station-patientdaten-pbericht.php";
-$breakfile="pflege-station-patientdaten.php?sid=$ck_sid&lang=$lang&station=$station&pn=$pn&edit=$edit";
-require("../req/db-makelink.php");
+$breakfile="pflege-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$pn&edit=$edit";
+require("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK) 
 	{	
 		// get orig data
@@ -58,7 +65,7 @@ if($link&&$DBLink_OK)
        							{
 									//print $sql;
 									mysql_close($link);
-									header("location:$thisfile?sid=$ck_sid&lang=$lang&saved=1&pn=$pn&station=$station&edit=$edit");
+									header("location:$thisfile?sid=$sid&lang=$lang&saved=1&pn=$pn&station=$station&edit=$edit");
 								}
 								else {print "<p>$sql$LDDbNoUpdate";}
 						} // else create new entry
@@ -91,7 +98,7 @@ if($link&&$DBLink_OK)
        							{
 									//print $sql;
 									mysql_close($link);
-									header("location:$thisfile?sid=$ck_sid&lang=$lang&saved=1&pn=$pn&station=$station&edit=$edit");
+									header("location:$thisfile?sid=$sid&lang=$lang&saved=1&pn=$pn&station=$station&edit=$edit");
 								}
 								else {print "<p>$sql$LDDbNoSave";}
 						}
@@ -125,8 +132,8 @@ if($link&&$DBLink_OK)
 <HTML>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<?
-require("../req/css-a-hilitebu.php");
+<?php
+require("../include/inc_css_a_hilitebu.php");
 ?>
 <style type="text/css">
 div.fva2_ml10 {font-family: verdana,arial; font-size: 12; margin-left: 10;}
@@ -145,7 +152,7 @@ function pruf(d){
 	if(((d.dateput.value)&&(d.timeput.value)&&(d.berichtput.value)&&(d.author.value))||((d.dateput2.value)&&(d.berichtput2.value)&&(d.author2.value))) return true;
 	else 
 	{
-		alert("<?=$LDAlertIncomplete ?>");
+		alert("<?php echo $LDAlertIncomplete ?>");
 		return false;
 	}
 }
@@ -161,11 +168,6 @@ function closewindow(){
 
 function resetinput(){
 	document.berichtform.reset();
-/*
-	var elemlen=document.berichtform.elements.length;
-	for (var i=0;i<elemlen;i++){ document.berichtform.elements[i].value="";}
-	document.berichtform.elements[focusflag].focus();
-	*/
 	}
 
 function select_this(formtag){
@@ -173,7 +175,7 @@ function select_this(formtag){
 	}
 	
 function getinfo(patientID){
-	urlholder="pflege-station.php?sid=<?="$ck_sid&lang=$lang" ?>&route=validroute&patient=" + patientID + "&user=<? print $aufnahme_user.'"' ?>;
+	urlholder="pflege-station.php?sid=<?php echo "$sid&lang=$lang" ?>&route=validroute&patient=" + patientID + "&user=<?php echo $HTTP_COOKIE_VARS[$local_user.$sid].'"' ?>;
 	patientwin=window.open(urlholder,patientID,"width=600,height=400,menubar=no,resizable=yes,scrollbars=yes");
 	}
 function sethilite(d){
@@ -190,7 +192,7 @@ function endhilite(d){
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
@@ -201,27 +203,26 @@ function gethelp(x,s,x1,x2,x3)
 </script>
 </HEAD>
 
-<BODY bgcolor=<? print $cfg['body_bgcolor']; ?> 
+<BODY bgcolor=<?php print $cfg['body_bgcolor']; ?> 
 onLoad="if (window.focus) window.focus(); 
-<? if((($mode=="save")||($saved))&&$edit) print ";window.location.href='#bottom';document.berichtform.berichtput.focus()"; ?>"  
+<?php if((($mode=="save")||($saved))&&$edit) print ";window.location.href='#bottom';document.berichtform.berichtput.focus()"; ?>"  
 topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<? if (!$cfg['dhtml']){ print 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+<?php if (!$cfg['dhtml']){ print 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 
 
 <table width=100% border=0 cellpadding="2" cellspacing=0>
 <tr>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<? print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><? print "$LDNursingReport $station"; ?></STRONG></FONT>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" >
+<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php print "$LDNursingReport $station"; ?></STRONG></FONT>
 </td>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp('nursing_report.php','','','<?=$station ?>','<?=$LDNursingReport ?>')"><img src="../img/<?="$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?=$breakfile ?>" ><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp('nursing_report.php','','','<?php echo $station ?>','<?php echo $LDNursingReport ?>')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
 </tr>
 <tr>
-<td bgcolor=<? print $cfg['body_bgcolor']; ?> colspan=2>
+<td bgcolor=<?php print $cfg['body_bgcolor']; ?> colspan=2>
  <ul>
 
-<form name="berichtform" method="get" action="<?=$thisfile ?>" onSubmit="return pruf(this)">
-<?
-
+<form name="berichtform" method="get" action="<?php echo $thisfile ?>" onSubmit="return pruf(this)">
+<?php
 print '<table   cellpadding="0" cellspacing=1 border="0"  width="650">';
 
 print '<tr  valign="top">
@@ -277,42 +278,42 @@ for ($i=0;$i<$cnt;$i++){
 		</tr>';	
 		}
 ?>
-<? if($edit) : ?>
+<?php if($edit) : ?>
 		<tr>
 		<td colspan=7 bgcolor="#ffffff">&nbsp;
 		</td>
 		</tr>
 		<tr bgcolor="#99ccff">
-		<td valign="top"><font face="verdana,arial" size="2" ><?=$LDDate ?>:<br>
-		<input type=text size="8" name="dateput" onKeyUp=setDate(this) onFocus=this.select() value="<? if(!$saved) print $dateput; ?>"><br>
-		<a href="javascript:document.berichtform.dateput.value='h';setDate(document.berichtform.dateput);"><img src=../img/arrow-t.gif border="0" width=12 height=12 alt="<?=$LDInsertDate ?>"></a>
+		<td valign="top"><font face="verdana,arial" size="2" ><?php echo $LDDate ?>:<br>
+		<input type=text size="8" name="dateput" onKeyUp=setDate(this) onFocus=this.select() value="<?php if(!$saved) print $dateput; ?>"><br>
+		<a href="javascript:document.berichtform.dateput.value='h';setDate(document.berichtform.dateput);"><img src=../img/arrow-t.gif border="0" width=12 height=12 alt="<?php echo $LDInsertDate ?>"></a>
 		</td>
-		<td valign="top"><font face="verdana,arial" size="2" ><?=$LDClockTime ?>:<br>
-		<input type=text size="4" name="timeput" value="<? if(!$saved) print $timeput; ?>" onKeyUp=setTime(this) onFocus=this.select()><br>
-		<a href="javascript:document.berichtform.timeput.value='j';setTime(document.berichtform.timeput);"><img src=../img/arrow-t.gif border="0" width=12 height=12 alt="<?=$LDInsertTimeNow ?>"></a>
+		<td valign="top"><font face="verdana,arial" size="2" ><?php echo $LDClockTime ?>:<br>
+		<input type=text size="4" name="timeput" value="<?php if(!$saved) print $timeput; ?>" onKeyUp=setTime(this) onFocus=this.select()><br>
+		<a href="javascript:document.berichtform.timeput.value='j';setTime(document.berichtform.timeput);"><img src=../img/arrow-t.gif border="0" width=12 height=12 alt="<?php echo $LDInsertTimeNow ?>"></a>
 		</td>
-		<td><font face="verdana,arial" size="2" ><?=$LDNursingReport ?>:<br>&nbsp;<textarea rows="4" cols="25" name="berichtput"><? if(!$saved) print $berichtput; ?></textarea><br>
-		<input type="checkbox" name="warn" <? if((!$saved)&&($warn)) print "checked"; ?> value="1"> <img src="../img/warn.gif" width=16 height=16 align=top>
-		 <font size=1 face=arial><?=$LDInsertSymbol ?><br>
+		<td><font face="verdana,arial" size="2" ><?php echo $LDNursingReport ?>:<br>&nbsp;<textarea rows="4" cols="25" name="berichtput"><?php if(!$saved) print $berichtput; ?></textarea><br>
+		<input type="checkbox" name="warn" <?php if((!$saved)&&($warn)) print "checked"; ?> value="1"> <img src="../img/warn.gif" width=16 height=16 align=top>
+		 <font size=1 face=arial><?php echo $LDInsertSymbol ?><br>
 		 &nbsp;<a href="javascript:sethilite(document.berichtform.berichtput)"><img src="../img/hilite-s.gif" border=0 width=48 height=14 ></a>
 		<a href="javascript:endhilite(document.berichtform.berichtput)"><img src="../img/hilite-e.gif" border=0 width=48 height=14 ></a>
 		</td>
-		<td valign="top"><font face="verdana,arial" size="2" ><?=$LDSignature ?>:<br><input type=text size="3" name="author" onFocus=this.select() value="<? if(!$saved) print $author; ?>">
+		<td valign="top"><font face="verdana,arial" size="2" ><?php echo $LDSignature ?>:<br><input type=text size="3" name="author" onFocus=this.select() value="<?php if(!$saved) print $author; ?>">
 		</td>
-		<td valign="top"><font face="verdana,arial" size="2" ><?=$LDDate ?>:<br><input type=text size="8" name="dateput2" value="<? if(!$saved) print $dateput2; ?>" onKeyUp="setDate(this)" onFocus="this.select()"><br>
-		<a href="javascript:document.berichtform.dateput2.value='h';setDate(document.berichtform.dateput2);"><img src=../img/arrow-t.gif border="0" width=12 height=12 alt="<?=$LDInsertDate ?>"></a>
+		<td valign="top"><font face="verdana,arial" size="2" ><?php echo $LDDate ?>:<br><input type=text size="8" name="dateput2" value="<?php if(!$saved) print $dateput2; ?>" onKeyUp="setDate(this)" onFocus="this.select()"><br>
+		<a href="javascript:document.berichtform.dateput2.value='h';setDate(document.berichtform.dateput2);"><img src=../img/arrow-t.gif border="0" width=12 height=12 alt="<?php echo $LDInsertDate ?>"></a>
 		</td>
-		<td><font face="verdana,arial" size="2" ><?=$LDEffectReport ?>:<br>&nbsp;<textarea rows="4" cols="25"  name="berichtput2"><? if(!$saved) print $berichtput2; ?></textarea><br>
-		<input type="checkbox" name="warn2" <? if((!$saved)&&($warn2)) print "checked"; ?> value="1"> <img src="../img/warn.gif" width=16 height=16 align=top> 
-		<font size=1 face=arial><?=$LDInsertSymbol ?><br>
+		<td><font face="verdana,arial" size="2" ><?php echo $LDEffectReport ?>:<br>&nbsp;<textarea rows="4" cols="25"  name="berichtput2"><?php if(!$saved) print $berichtput2; ?></textarea><br>
+		<input type="checkbox" name="warn2" <?php if((!$saved)&&($warn2)) print "checked"; ?> value="1"> <img src="../img/warn.gif" width=16 height=16 align=top> 
+		<font size=1 face=arial><?php echo $LDInsertSymbol ?><br>
 		 &nbsp;<a href="javascript:sethilite(document.berichtform.berichtput2)"><img src="../img/hilite-s.gif" border=0 width=48 height=14 ></a>
 		<a href="javascript:endhilite(document.berichtform.berichtput2)"><img src="../img/hilite-e.gif" border=0 width=48 height=14 ></a>
 		</td>
-		<td valign="top"><font face="verdana,arial" size="2" ><?=$LDSignature ?>:<br><input type=text size="3" name="author2" onFocus=this.select() value="<? if(!$saved) print $author2; ?>">
+		<td valign="top"><font face="verdana,arial" size="2" ><?php echo $LDSignature ?>:<br><input type=text size="3" name="author2" onFocus=this.select() value="<?php if(!$saved) print $author2; ?>">
 		</td>
 		</tr>
 		
-<? endif ?>
+<?php endif ?>
 		</table>
 
 
@@ -320,26 +321,27 @@ for ($i=0;$i<$cnt;$i++){
 
 <table width="650"  cellpadding="0" cellspacing="0">
 <tr>
-<? if($edit) : ?>
 <td>
-<input type="image" src="../img/<?="$lang/$lang" ?>_savedisc.gif" border=0 width=99 height=24 alt="<?=$LDSave ?>">
-</td>
-<? endif ?>
-
-<td align=right>
-<? if($edit) : ?>
-<a href="javascript:resetinput()"><img src="../img/<?="$lang/$lang" ?>_reset.gif" border="0"  width=156 height=24 alt="<?=$LDReset ?>"></a>
+<a href="<?php echo $breakfile ?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border="0" width=103 height=24 alt="<?php echo $LDClose ?>"></a>
+<?php if($edit) : ?>
+<a href="javascript:resetinput()"><img src="../img/<?php echo "$lang/$lang" ?>_reset.gif" border="0"  width=156 height=24 alt="<?php echo $LDReset ?>"></a>
 &nbsp;&nbsp;
-<? endif ?>
-<a href="<?=$breakfile ?>"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border="0" width=103 height=24 alt="<?=$LDClose ?>"></a>
+<?php endif ?>
 </td>
+<?php if($edit) : ?>
+<td align="right">
+<input type="image" src="../img/<?php echo "$lang/$lang" ?>_savedisc.gif" border=0 width=99 height=24 alt="<?php echo $LDSave ?>">
+</td>
+<?php endif ?>
+
+
 </tr>
 </table>
-<input type="hidden" name="sid" value="<?=$ck_sid ?>">
-<input type="hidden" name="lang" value="<?=$lang ?>">
-<input type="hidden" name="station" value="<?=$station ?>">
-<input type="hidden" name="pn" value="<?=$pn ?>">
-<input type="hidden" name="edit" value="<?=$edit ?>">
+<input type="hidden" name="sid" value="<?php echo $sid ?>">
+<input type="hidden" name="lang" value="<?php echo $lang ?>">
+<input type="hidden" name="station" value="<?php echo $station ?>">
+<input type="hidden" name="pn" value="<?php echo $pn ?>">
+<input type="hidden" name="edit" value="<?php echo $edit ?>">
 <input type="hidden" name="mode" value="save">
 
 </form>
@@ -358,7 +360,7 @@ for ($i=0;$i<$cnt;$i++){
 <p>
 
 <?php
-require("../language/$lang/".$lang."_copyrite.htm");
+require("../language/$lang/".$lang."_copyrite.php");
  ?>
 <a name="bottom"></a>
 </BODY>

@@ -1,14 +1,18 @@
-<? 
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)||!$ck_edvzugang_user) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_edp.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+define("LANG_FILE","edp.php");
+$local_user="ck_edv_user";
+require("../include/inc_front_chain_lang.php");
 
-require("../req/config-color.php");
-require("../global_conf/$lang/accessplan-areas_".$lang.".php");
+require("../include/inc_config_color.php");
 
-$breakfile="edv.php?sid=$ck_sid&lang=$lang";
+/**
+* The following require loads the access areas that can be assigned for
+* user permissions.
+*/
+require("../include/inc_accessplan_areas_functions.php");
+
+$breakfile="edv.php?sid=$sid&lang=$lang";
 
 ?>
 
@@ -17,8 +21,8 @@ $breakfile="edv.php?sid=$ck_sid&lang=$lang";
 <HTML>
 	<HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<? 
-require("../req/css-a-hilitebu.php");
+<?php 
+require("../include/inc_css_a_hilitebu.php");
 ?>
 <script language="javascript">
 <!-- 
@@ -26,7 +30,7 @@ require("../req/css-a-hilitebu.php");
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
@@ -34,22 +38,20 @@ function gethelp(x,s,x1,x2,x3)
 </script>
 	</HEAD>
 
-	<BODY topmargin=0 leftmargin=0 marginheight=0 marginwidth=0 bgcolor=<?print $cfg['bot_bgcolor']?>>
+	<BODY topmargin=0 leftmargin=0 marginheight=0 marginwidth=0 bgcolor=<?php echo $cfg['bot_bgcolor']?>>
 
 
 	<table width=100% border=0 cellspacing=0 >
 	<tr>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="45"><FONT  COLOR="<? print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG> &nbsp; <?="$LDEDP $LDUpdateRight" ?></STRONG></FONT></td>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?if($cfg['dhtml'])print'<a href="javascript:window.history.back()"><img src="../img/'.$lang.'/'.$lang.'_back2.gif" width=110 height=24 border=0  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
-<a href="javascript:gethelp('edp.php','access','update')"><img src="../img/<?="$lang/$lang"; ?>_hilfe-r.gif" border=0 width=75 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?print $breakfile;?>"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 alt="<?=$LDClose ?>"  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="45"><FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
+<STRONG> &nbsp; <?php echo "$LDEDP $LDUpdateRight" ?></STRONG></FONT></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right>
+<?php if($cfg['dhtml'])print'<a href="javascript:window.history.back()"><img src="../img/'.$lang.'/'.$lang.'_back2.gif" width=110 height=24 border=0  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('edp.php','access','update')"><img src="../img/<?php echo "$lang/$lang"; ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
-	<tr bgcolor="<?print $cfg['body_bgcolor']?>">
+	<tr bgcolor="<?php echo $cfg['body_bgcolor']?>">
 	<td colspan=2><p><br>
 	<ul>
-<?
-
+<?php
 // initialize error flags
 $error=0;
 $errorname=0;
@@ -61,7 +63,7 @@ $errorbereich=0;
 
 $curdate=date("Y.m.d");
 $curtime=date("H.i");
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK) 
 {	
 
@@ -86,7 +88,7 @@ if($link&&$DBLink_OK)
 				<tr>
 				<td colspan=3><FONT    SIZE=-1  FACE=Arial>";
 				
-				//include("../req/db-makelink.php");
+				//include("../include/inc_db_makelink.php");
 	
 						$sql='UPDATE mahopass SET  
 								mahopass_id="'.$userid.'", 
@@ -103,7 +105,7 @@ if($link&&$DBLink_OK)
 								mahopass_area10="'.$bereich10.'", 
 								mahopass_date="'.$curdate.'", 
 								mahopass_time="'.$curtime.'",
-								mahopass_encoder="'.$ck_edvzugang_user.'"  
+								mahopass_encoder="'.$HTTP_COOKIE_VARS[$local_user.$sid].'"  
 							WHERE mahopass_name="'.$username.'"';
 
 						if(mysql_query($sql,$link))
@@ -133,12 +135,12 @@ if($link&&$DBLink_OK)
 				<FONT    SIZE=-1  FACE=Arial>
 				<p>
 				<FORM method="get" action="edv-accessplan-edit.php">
-				<input type="hidden" name="sid" value="'.$ck_sid.'">
+				<input type="hidden" name="sid" value="'.$sid.'">
 				<input type="hidden" name="lang" value="'.$lang.'">
 				<INPUT type="submit"  value="'.$LDOK.'"></font></FORM>
 				<p>
 				<FORM method="get" action="edv-accessplan-list.php">
-				<input type="hidden" name="sid" value="'.$ck_sid.'">
+				<input type="hidden" name="sid" value="'.$sid.'">
 				<input type="hidden" name=lang value="'.$lang.'">
 				<INPUT type="submit"  value="'.$LDListActual.'"></font></FORM>
 				<p>
@@ -178,8 +180,7 @@ if($link&&$DBLink_OK)
 ?>
 
 
-<?
-if ($error==1)
+<?php if ($error==1)
 {
 print "<FONT  COLOR=red  SIZE=+1  FACE=Arial>$LDInputError<p>";
 }
@@ -187,7 +188,7 @@ print "<FONT  COLOR=red  SIZE=+1  FACE=Arial>$LDInputError<p>";
 ?>
 
 
-<? if ((($error==1)and($mode=="save"))or(($error==0)and($mode==""))) :; ?>
+<?php if ((($error==1)and($mode=="save"))or(($error==0)and($mode==""))) :; ?>
 
 <form method="post" action="edv-accessplan-itemupdate.php">
 <table border=0 cellpadding=0 cellspacing=0 bgcolor=#666666>
@@ -198,10 +199,10 @@ print "<FONT  COLOR=red  SIZE=+1  FACE=Arial>$LDInputError<p>";
 <td>
 
 <FONT    SIZE=-1  FACE="Arial" color=#000080>
-<?=$LDName ?>: 
+<?php echo $LDName ?>: 
 <font color=#800000>
 <br>
-<?
+<?php
  print " ".$username;
  print "<input type=hidden name=username value=".strtr($username," ","+").">";
 ?>
@@ -209,115 +210,106 @@ print "<FONT  COLOR=red  SIZE=+1  FACE=Arial>$LDInputError<p>";
 <br>
 </td>
 <td><FONT    SIZE=-1  FACE="Arial" color=#000080>
-<? if ($erroruser) {print "<font color=red > <b>$LDUserId</b>";} 
+<?php if ($erroruser) {print "<font color=red > <b>$LDUserId</b>";} 
 else { print $LDUserId;} ?>
 <br>
 <input type=text name=userid
-<? if ($userid!="") print "value=".$userid ; ?>
+<?php if ($userid!="") print "value=".$userid ; ?>
 ><br>
 </td>
 <td><FONT    SIZE=-1  FACE="Arial" color=#000080>
-<? if ($errorpass) {print "<font color=red > <b>$LDPassword</b>";} 
+<?php if ($errorpass) {print "<font color=red > <b>$LDPassword</b>";} 
 else { print $LDPassword;} ?>
 <br>
 <input type=text name=pass
-<? if ($pass!="") print "value=".$pass ; ?>
+<?php if ($pass!="") print "value=".$pass ; ?>
 ><br>
 </td>
 </tr>
 <tr bgcolor="#dddddd">
 <td  colspan=3><FONT    SIZE=-1  FACE="Arial"  color=#000080>
-<? if ($errorbereich) {print "<font color=red > <b>$LDAllowedArea</b> </font>";} 
+<?php if ($errorbereich) {print "<font color=red > <b>$LDAllowedArea</b> </font>";} 
 else { print $LDAllowedArea;} ?>
 </td>
 </tr>
 <tr bgcolor="#dddddd">
 <td valign=top><FONT    SIZE=-1  FACE="Arial" color=#000080>
 <p>
-<?=$LDArea ?> 1:
+<?php echo $LDArea ?> 1:
 <select name=bereich1 size=1>
-<? createselecttable($bereich1) ?>
+<?php createselecttable($bereich1) ?>
 </select>
 <p>
-<?=$LDArea ?> 2:
+<?php echo $LDArea ?> 2:
 <select name=bereich2 size=1>
-<? createselecttable($bereich2) ?>
+<?php createselecttable($bereich2) ?>
 </select>
 <p>
-<?=$LDArea ?> 3:
+<?php echo $LDArea ?> 3:
 <select name=bereich3 size=1>
-<? createselecttable($bereich3) ?>
+<?php createselecttable($bereich3) ?>
 </select>
 <p>
-<?=$LDArea ?> 4:
+<?php echo $LDArea ?> 4:
 <select name=bereich4 size=1>
-<? createselecttable($bereich4) ?>
+<?php createselecttable($bereich4) ?>
 </select>
 <p>
-<?=$LDArea ?> 5:
+<?php echo $LDArea ?> 5:
 <select name=bereich5 size=1>
-<? createselecttable($bereich5) ?>
+<?php createselecttable($bereich5) ?>
 </select>
 <br>
 </td>
 <td valign=top><FONT    SIZE=-1  FACE="Arial" color=#000080>
 <p>
-<?=$LDArea ?> 6:
+<?php echo $LDArea ?> 6:
 <select name=bereich6 size=1>
-<? createselecttable($bereich6) ?>
+<?php createselecttable($bereich6) ?>
 </select>
 <p>
-<?=$LDArea ?> 7:
+<?php echo $LDArea ?> 7:
 <select name=bereich7 size=1>
-<? createselecttable($bereich7) ?>
+<?php createselecttable($bereich7) ?>
 </select>
 <p>
-<?=$LDArea ?> 8:
+<?php echo $LDArea ?> 8:
 <select name=bereich8 size=1>
-<? createselecttable($bereich8) ?>
+<?php createselecttable($bereich8) ?>
 </select>
 <p>
-<?=$LDArea ?> 9:
+<?php echo $LDArea ?> 9:
 <select name=bereich9 size=1>
-<? createselecttable($bereich9) ?>
+<?php createselecttable($bereich9) ?>
 </select>
 <p>
-<?=$LDArea ?> 10:
+<?php echo $LDArea ?> 10:
 <select name=bereich10 size=1>
-<? createselecttable($bereich10) ?>
+<?php createselecttable($bereich10) ?>
 </select>
 <br>
 </td>
 <td  valign="top"><FONT    SIZE=1  FACE="verdana,Arial">
-<font color=#000080 size=2><?=$LDAllowedArea ?>:</font><p>
+<font color=#000080 size=2><?php echo $LDAllowedArea ?>:</font><p>
 <font size=2>
-<? 
-
-while(list($k,$v)=each($areaopt)) print "$v, ";
+<?php 
+/** 
+* The following line calls the function contained in inc_accessplan_areas_functions.php
+*/
+printAccessAreas();
 ?>
-<!-- 
-Cafe<br>
-Labor_Eingabe<br>
-Labor_Abfrage<br>
-M1, M2, M3, M4, M5, M6, M7, M8, M9<br>
-Alle_M_Stationen<br>
-P1, P2, P3, P4, P5, P6<br>
-Alle_P_Stationen<br>
-PLOP_Pflege<br>
-PLOP_Aerzte<br>
-System_Admin<br>
-Technik<br> -->
+
 </td>
 </tr>
 <tr bgcolor="#dddddd">
 <td colspan=3><FONT    SIZE=-1  FACE="Arial">
 <p>
-<input type="hidden" name="itemname" value="<? print $itemname ?>">
-<input type="hidden" name="sid" value="<? print $ck_sid; ?>">
-<input type="hidden" name="lang" value="<? print $lang; ?>">
+<input type="hidden" name="itemname" value="<?php print $itemname ?>">
+<input type="hidden" name="sid" value="<?php print $sid; ?>">
+<input type="hidden" name="lang" value="<?php print $lang; ?>">
 <input type="hidden" name="mode" value="save">
-<input type="submit" value="<?=$LDSave ?>"> &nbsp;
-<input type="reset"  value="<?=$LDReset ?>">
+<input type="submit" value="<?php echo $LDSave ?>"> &nbsp;
+<input type="reset"  value="<?php echo $LDReset ?>">
 </td>
 </tr>
 
@@ -328,13 +320,13 @@ Technik<br> -->
 
 <p>
 <FORM method=get action="edv-accessplan-list.php" >
-<input type="hidden" name="sid" value="<? print $ck_sid; ?>">
-<input type="hidden" name="lang" value="<? print $lang; ?>">
-<INPUT type="submit"  value="<?=$LDCancel ?>"></font></FORM>
+<input type="hidden" name="sid" value="<?php print $sid; ?>">
+<input type="hidden" name="lang" value="<?php print $lang; ?>">
+<INPUT type="submit"  value="<?php echo $LDCancel ?>"></font></FORM>
 <p>
 </FONT>
 
-<? endif; ?>
+<?php endif; ?>
 
 
 </ul>
@@ -345,7 +337,7 @@ Technik<br> -->
 <p>
 
 <?php
-require("../language/$lang/".$lang."_copyrite.htm");
+require("../language/$lang/".$lang."_copyrite.php");
  ?>
 
 </FONT>

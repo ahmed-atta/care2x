@@ -1,9 +1,15 @@
-<?
-//print $g;
-//if (($opfclic_rt!="timebar")||($op_pflegelogbuch_user=="")||($ck_comdat=="")) {header("Location: invalid-access-warning.php"); exit;}; 
-
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
 parse_str($ck_comdat,$varia);
-$fileforward="oplogtimebar.php?patnum=$varia[patnum]&op_nr=$varia[op_nr]&dept=$varia[dept]&saal=$varia[saal]&pyear=$varia[pyear]&pmonth=$varia[pmonth]&pday=$varia[pday]&scrolltab=$v";
+$fileforward="oplogtimebar.php?sid=$sid&lang=$lang&patnum=$varia[patnum]&op_nr=$varia[op_nr]&dept=$varia[dept]&saal=$varia[saal]&pyear=$varia[pyear]&pmonth=$varia[pmonth]&pday=$varia[pday]&scrolltab=$v";
 //print $g;
 //print $fileforward;
 switch($g)
@@ -41,11 +47,10 @@ switch($g)
 	default:{header("Location: invalid-access-warning.php?mode=close"); exit;}; 
 }
 //print $g;
-require("../req/db_dbp.php");
 
 $dbtable="nursing_op_logbook";
 
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK) 
 {	
 
@@ -152,11 +157,12 @@ if($link&&$DBLink_OK)
 											
 							if($ergebnis=mysql_query($sql,$link))
        							{
-									//print $sql." new update <br>";
+									//print $sql." new update <br> resetmain= $resetmainput";
 									mysql_close($link);
-									if((($g=="entry_out")||($g=="cut_close"))&&$resetmainput) header("Location: $fileforward&resetmainput=1");
- 											else header("Location: $fileforward");									
-									//header("location:$thisfile?sid=$ck_sid&saved=1&patnum=$patnum&winid=$winid&dept=$dept&saal=$saal&op_nr=$op_nr&year=$pyear&pmonth=$pmonth&pday=$pday");
+									//if((($g=="entry_out")||($g=="cut_close"))&&$resetmainput) header("Location: $fileforward&resetmainput=1");
+ 											//else header("Location: $fileforward");									
+									header("Location: $fileforward&resetmainput=$resetmainput");
+									exit;
 								}
 								else
 								{

@@ -1,13 +1,24 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","or.php");
+define("NO_2LEVEL_CHK",1);
+require("../include/inc_front_chain_lang.php");
+require("../include/inc_config_color.php");
 
-require("../language/".$lang."/lang_".$lang."_or.php");
-require("../req/config-color.php");
-
-$breakfile="startframe.php?sid=$ck_sid&lang=$lang";
+switch($retpath)
+{
+	case "docs": $breakfile="aerzte.php?sid=$sid&lang=$lang"; break;
+	case "op": $breakfile="op-doku.php?sid=$sid&lang=$lang"; break;
+	default: $breakfile="op-doku.php?sid=$sid&lang=$lang"; 
+}
 
 $pday=date(j);
 $pmonth=date(n);
@@ -22,7 +33,7 @@ if(!$hilitedept)
 	else
 	{
 	$saal="exclude";
-	 include("../req/resolve_opr_dept.php");
+	 include("../include/inc_resolve_opr_dept.php");
 	 if($deptOK) $hilitedept=$dept;
 	 }
 }
@@ -34,7 +45,7 @@ $filename="../global_conf/$lang/op_tag_dept.pid";
 
 $dbtable="nursing_dutyplan";
 
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK) 
 {	
  if (file_exists($filename))
@@ -89,7 +100,7 @@ if($link&&$DBLink_OK)
   var urlholder;
 function popinfo(l,f,b,d)
 {
-	urlholder="op-pflege-dienstplan-popinfo.php?<?="sid=$ck_sid&lang=$lang" ?>&ln="+l+"&fn="+f+"&bd="+b+"&dept="+d+"&user=<? print $aufnahme_user.'"' ?>;
+	urlholder="op-pflege-dienstplan-popinfo.php?<?php echo "sid=$sid&lang=$lang" ?>&ln="+l+"&fn="+f+"&bd="+b+"&dept="+d+"&user=<?php print $aufnahme_user.'"' ?>;
 	
 	infowin=window.open(urlholder,"dienstinfo","width=400,height=450,menubar=no,resizable=yes,scrollbars=yes");
 
@@ -97,15 +108,15 @@ function popinfo(l,f,b,d)
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
 -->
 </script>
 
-<? 
-require("../req/css-a-hilitebu.php");
+<?php 
+require("../include/inc_css_a_hilitebu.php");
 ?>
 </HEAD>
 
@@ -115,16 +126,15 @@ require("../req/css-a-hilitebu.php");
 
 <table width=100% border=0 cellpadding="0" cellspacing=0>
 <tr>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="10">
-<FONT  COLOR="<? print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp; <?="$LDOr $LDDutyPlan $LDQuickView" ?></STRONG></FONT></td>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?if($cfg['dhtml'])print'<a href="javascript:window.history.back()"><img src="../img/'.$lang.'/'.$lang.'_back2.gif" width=110 height=24 border=0  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
-<a href="javascript:gethelp('op_duty.php','quick')"><img src="../img/<?="$lang/$lang"; ?>_hilfe-r.gif" border=0 width=75 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?print $breakfile;?>"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 alt="<?=$LDCloseAlt ?>"  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10">
+<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp; <?php echo "$LDOr $LDDutyPlan $LDQuickView" ?></STRONG></FONT></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right>
+<?php if($cfg['dhtml'])print'<a href="javascript:window.history.back()"><img src="../img/'.$lang.'/'.$lang.'_back2.gif" width=110 height=24 border=0  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('op_duty.php','quick')"><img src="../img/<?php echo "$lang/$lang"; ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 alt="<?php echo $LDCloseAlt ?>"  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
 <tr>
-<td bgcolor="<? print $cfg['body_bgcolor']; ?>" colspan=2>
+<td bgcolor="<?php print $cfg['body_bgcolor']; ?>" colspan=2>
  
-<?
+<?php
 print '
 	<table  cellpadding="2" cellspacing=0 border="0" >
 	<tr bgcolor="aqua" align=center>';
@@ -212,8 +222,8 @@ for ($i=0;$i<sizeof($abtarr);$i++)
 			
 	}
 	print '&nbsp;';
-	print '</td><td >&nbsp; <a href="op-pflege-dienstplan.php?sid='.$ck_sid.'&dept='.$abtarr[$i].'&retpath=qview&lang='.$lang.'">
-	<button onClick="javascript:window.location.href=\'op-pflege-dienstplan.php?sid='.$ck_sid.'&dept='.$abtarr[$i].'&retpath=qview&lang='.$lang.'\'"><img src="../img/new_address.gif"  border=0  width=20 height=20 align="absmiddle" alt="'.$LDClk2Show.' '.$LDDutyPlan.'">  <font size=1>'.$LDShow.'</font></button></a> </td></tr>';
+	print '</td><td >&nbsp; <a href="op-pflege-dienstplan.php?sid='.$sid.'&dept='.$abtarr[$i].'&retpath=qview&lang='.$lang.'">
+	<button onClick="javascript:window.location.href=\'op-pflege-dienstplan.php?sid='.$sid.'&dept='.$abtarr[$i].'&retpath=qview&lang='.$lang.'\'"><img src="../img/new_address.gif"  border=0  width=20 height=20 align="absmiddle" alt="'.$LDClk2Show.' '.$LDDutyPlan.'">  <font size=1>'.$LDShow.'</font></button></a> </td></tr>';
 	print "\n";
 
 	}
@@ -225,15 +235,7 @@ print '</table>';
 
 <p>
 
-<?
-switch($retpath)
-{
-	case "docs": $rettarget="aerzte.php?sid=$ck_sid&lang=$lang"; break;
-	case "op": $rettarget="op-doku.php?sid=$ck_sid&lang=$lang"; break;
-	default: $rettarget="op-doku.php?sid=$ck_sid&lang=$lang"; 
-}
-?>
-<a href="<?=$rettarget ?>"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border="0" alt="<?=$LDCloseAlt ?>">
+<a href="<?php echo $breakfile ?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border="0" alt="<?php echo $LDCloseAlt ?>">
 </a></FONT>
 <p>
 </td>
@@ -242,7 +244,7 @@ switch($retpath)
 <p>
 
 <?php
-require("../language/$lang/".$lang."_copyrite.htm");
+require("../language/$lang/".$lang."_copyrite.php");
  ?>
 
 

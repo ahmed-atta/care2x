@@ -1,4 +1,4 @@
-<? 
+<?php 
 $dbname="maho";
 $allowedarea="OP";
 $fileforward="op-anaesthesie-logbuch-pass.php";
@@ -104,7 +104,7 @@ if ($versand=="Abschicken")
 <center>
 
 
-<? if (($username!="")or($keyword!="")&&($passtag)) 
+<?php if (($username!="")or($keyword!="")&&($passtag)) 
 {
 print '<FONT  COLOR="red"  SIZE=+2  FACE="Arial"><STRONG>';
 
@@ -130,7 +130,7 @@ print '</STRONG></FONT><P>';
 <tr>
 <td bgcolor="#ffffaa">
 <p><br>
-<FORM action="<? print $thisfile ?>" method="post" name="passwindow">
+<FORM action="<?php print $thisfile ?>" method="post" name="passwindow">
 <INPUT type="hidden" name="usernum" value="861661832">
 <INPUT type="hidden" name="cpv" value="1">
 <font face="Arial,Verdana"  color="#000000" size=-1>
@@ -138,7 +138,7 @@ Benutzername eingeben:<br></font>
 <INPUT type="text" name=username size="14" maxlength="25"> <p>
 <font face="Arial,Verdana"  color="#000000" size=-1>Passwort eingeben:</font><br>
 <INPUT type="password" name="keyword" size="14" maxlength="25"> 
-<input type=hidden name=direction value="<? print $direction; ?>">
+<input type=hidden name=direction value="<?php print $direction; ?>">
 <input type=hidden name="versand" value="Abschicken">
 <INPUT type="image"  src="../img/abschic.gif" border=0></font>
 
@@ -155,7 +155,7 @@ Benutzername eingeben:<br></font>
 
 </script>
 
-<FORM action="<? print $breakfile ?>"  name=cancelbut>
+<FORM action="<?php print $breakfile ?>"  name=cancelbut>
 <INPUT type="image"  src="../img/abbrech.gif" border=0></font></FORM>
 
 
@@ -182,8 +182,8 @@ Benutzername eingeben:<br></font>
 </table>        
 
 <p>
-<img src="../img/small_help.gif"> <a href="ucons.php">Einführung in das OP Logbuch</a><br>
-<img src="../img/small_help.gif"> <a href="ucons.php">Wie mache ich was mit OP Logbuch?</a><br>
+<img src="../img/small_help.gif"> <a href="ucons.php<?php echo "?lang=$lang" ?>">Einführung in das OP Logbuch</a><br>
+<img src="../img/small_help.gif"> <a href="ucons.php<?php echo "?lang=$lang" ?>">Wie mache ich was mit OP Logbuch?</a><br>
 <HR>
 <p>
 

@@ -1,15 +1,14 @@
-<?
-if(!$lang)
+<?php if(!$lang)
 	if(!$ck_language) include("../chklang.php");
 		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)||!$ck_pflege_user) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+if (!$sid||($sid!=$$ck_sid_buffer)||!$ck_pflege_user) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 require("../language/".$lang."/lang_".$lang."_nursing.php");
-require("../req/config-color.php"); // load color preferences
+require("../include/inc_config_color.php"); // load color preferences
 
 $thisfile="pflege-station-patientdaten-rootinfo.php";
-$breakfile="pflege-station-patientdaten.php?sid=$ck_sid&lang=$lang&station=$station&pn=$pn";
+$breakfile="pflege-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$pn";
 
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK) 
 	{	
 		// get orig data
@@ -58,7 +57,7 @@ if($link&&$DBLink_OK)
        							{
 									//print $sql;
 									mysql_close($link);
-									header("location:$thisfile?sid=$ck_sid&lang=$lang&saved=1&pn=$pn&station=$station");
+									header("location:$thisfile?sid=$sid&lang=$lang&saved=1&pn=$pn&station=$station");
 								}
 								else {print "<p>$sql$LDDbNoUpdate";exit;}
 						} // else create new entry
@@ -91,7 +90,7 @@ if($link&&$DBLink_OK)
        							{
 									//print $sql;
 									mysql_close($link);
-									header("location:$thisfile?sid=$ck_sid&lang=$lang&saved=1&pn=$pn&station=$station");
+									header("location:$thisfile?sid=$sid&lang=$lang&saved=1&pn=$pn&station=$station");
 								}
 								else {print "<p>$sql$LDDbNoSave";exit;}
 						}
@@ -125,8 +124,8 @@ if($link&&$DBLink_OK)
 <HTML>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<?
-require("../req/css-a-hilitebu.php");
+<?php
+require("../include/inc_css_a_hilitebu.php");
 ?>
 <style type="text/css">
 div.fva2_ml10 {font-family: verdana,arial; font-size: 12; margin-left: 10;}
@@ -175,7 +174,7 @@ function select_this(formtag){
 	}
 	
 function getinfo(patientID){
-	urlholder="pflege-station.php?route=validroute&patient=" + patientID + "&user=<? print $aufnahme_user.'"' ?>;
+	urlholder="pflege-station.php?route=validroute&patient=" + patientID + "&user=<?php print $aufnahme_user.'"' ?>;
 	patientwin=window.open(urlholder,patientID,"width=600,height=400,menubar=no,resizable=yes,scrollbars=yes");
 	}
 function sethilite(d){
@@ -191,7 +190,7 @@ function endhilite(d){
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
@@ -201,27 +200,26 @@ function gethelp(x,s,x1,x2,x3)
 </script>
 </HEAD>
 
-<BODY bgcolor=<? print $cfg['body_bgcolor']; ?> 
+<BODY bgcolor=<?php print $cfg['body_bgcolor']; ?> 
 onLoad="if (window.focus) window.focus(); 
-<? if(($mode=="save")||($saved)) print ";window.location.href='#bottom';document.berichtform.berichtput.focus()"; ?>"  
+<?php if(($mode=="save")||($saved)) print ";window.location.href='#bottom';document.berichtform.berichtput.focus()"; ?>"  
 topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<? if (!$cfg['dhtml']){ print 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+<?php if (!$cfg['dhtml']){ print 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 
 
 <table width=100% border=0 cellpadding="5" cellspacing=0>
 <tr>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<? print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><? print "$LDRootData $station"; ?></STRONG></FONT>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" >
+<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php print "$LDRootData $station"; ?></STRONG></FONT>
 </td>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp()"><img src="../img/<?="$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?=$breakfile ?>" ><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp()"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
 </tr>
 <tr>
-<td bgcolor=<? print $cfg['body_bgcolor']; ?> colspan=2>
+<td bgcolor=<?php print $cfg['body_bgcolor']; ?> colspan=2>
  <ul>
 
-<form name="berichtform" method="get" action="<?=$thisfile ?>" onSubmit="return pruf(this)">
-<?
-
+<form name="berichtform" method="get" action="<?php echo $thisfile ?>" onSubmit="return pruf(this)">
+<?php
 print '
 		<table   cellpadding="0" cellspacing=1 border="0" width=700>';
 print '
@@ -327,19 +325,19 @@ print '
 
 <table width="650"  cellpadding="0" cellspacing="0">
 <tr><td>
-<input type="image" src="../img/<?="$lang/$lang" ?>_savedisc.gif" border=0 width=99 height=24 alt="<?=$LDSave ?>">
+<input type="image" src="../img/<?php echo "$lang/$lang" ?>_savedisc.gif" border=0 width=99 height=24 alt="<?php echo $LDSave ?>">
 </td>
 <td align=right>
-<a href="javascript:resetinput()"><img src="../img/<?="$lang/$lang" ?>_reset.gif" border="0"  width=156 height=24 alt="<?=$LDReset ?>"></a>
+<a href="javascript:resetinput()"><img src="../img/<?php echo "$lang/$lang" ?>_reset.gif" border="0"  width=156 height=24 alt="<?php echo $LDReset ?>"></a>
 &nbsp;&nbsp;
-<a href="<?=$breakfile ?>"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border="0" width=103 height=24 alt="<?=$LDClose ?>"></a>
+<a href="<?php echo $breakfile ?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border="0" width=103 height=24 alt="<?php echo $LDClose ?>"></a>
 </td>
 </tr>
 </table>
-<input type="hidden" name="sid" value="<?=$ck_sid ?>">
-<input type="hidden" name="lang" value="<?=$lang ?>">
-<input type="hidden" name="station" value="<?=$station ?>">
-<input type="hidden" name="pn" value="<?=$pn ?>">
+<input type="hidden" name="sid" value="<?php echo $sid ?>">
+<input type="hidden" name="lang" value="<?php echo $lang ?>">
+<input type="hidden" name="station" value="<?php echo $station ?>">
+<input type="hidden" name="pn" value="<?php echo $pn ?>">
 <input type="hidden" name="mode" value="save">
 
 </form>
@@ -358,7 +356,7 @@ print '
 <p>
 
 <?php
-require("../language/$lang/".$lang."_copyrite.htm");
+require("../language/$lang/".$lang."_copyrite.php");
  ?>
 <a name="bottom"></a>
 </BODY>

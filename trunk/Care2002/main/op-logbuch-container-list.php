@@ -1,18 +1,16 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)||!$ck_op_pflegelogbuch_user) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_or.php");
-
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+define("LANG_FILE","or.php");
+$local_user="ck_op_pflegelogbuch_user";
+require("../include/inc_front_chain_lang.php");
 $parsedstr=array();
-$globdata="sid=$ck_sid&lang=$lang&op_nr=$op_nr&dept=$dept&saal=$saal&patnum=$patnum&pday=$pday&pmonth=$pmonth&pyear=$pyear";
+$globdata="sid=$sid&lang=$lang&op_nr=$op_nr&dept=$dept&saal=$saal&patnum=$patnum&pday=$pday&pmonth=$pmonth&pyear=$pyear";
 // clean the input data
 $material_nr=strtr($material_nr,"§%&?/\+*~#';:,!$","                ");// convert chars to (15) spaces
 $material_nr=trim($material_nr);
 //$material_nr=str_replace(" ","",$material_nr);
 
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK) 
 	{	
 	  	$dbtable="nursing_op_logbook";
@@ -199,14 +197,14 @@ if($link&&$DBLink_OK)
 
 function popinfo(b)
 {
-	urlholder="products-bestellkatalog-popinfo.php?sid=<? print "$ck_sid&lang=$lang"; ?>&keyword="+b+"&mode=search&cat=steri";
+	urlholder="products-bestellkatalog-popinfo.php?sid=<?php print "$sid&lang=$lang"; ?>&keyword="+b+"&mode=search&cat=steri";
 	ordercatwin=window.open(urlholder,"ordercat","width=850,height=550,menubar=no,resizable=yes,scrollbars=yes");
 	}
 	
-<? if(empty($material_nr)||($art_avail==1)) : ?>	
+<?php if(empty($material_nr)||($art_avail==1)) : ?>	
 function delete_item(x)
 {
-	window.location.replace('op-logbuch-container-list.php?<? print $globdata; ?>&mode=delete&art_idx='+x);
+	window.location.replace('op-logbuch-container-list.php?<?php print $globdata; ?>&mode=delete&art_idx='+x);
 }
 
 // -->
@@ -238,7 +236,7 @@ function hsm(){
 	}
 }
 var brwsVer=parseInt(navigator.appVersion);var timer;var curSubMenu='';
-<? endif ?>
+<?php endif ?>
 // -->
 </SCRIPT>
 
@@ -246,7 +244,7 @@ var brwsVer=parseInt(navigator.appVersion);var timer;var curSubMenu='';
 <body leftmargin=0 marginwidth=0 topmargin=1 marginheight=1>
 
 
-<? 
+<?php 
 if(empty($material_nr)||(($art_avail==1)&&(!$nonumeric)))
 {
 $matbuf=explode("~",trim($matlist[0]));
@@ -297,7 +295,7 @@ print'
   
   print '
 </table>
-<input type="hidden" name="sid" value="'.$ck_sid.'">
+<input type="hidden" name="sid" value="'.$sid.'">
 <input type="hidden" name="lang" value="'.$lang.'">
 <input type="hidden" name="mode" value="update">
 <input type="hidden" name="op_nr" value="'.$op_nr.'">
@@ -343,7 +341,7 @@ else
 	{
 		print'
  		<tr bgcolor="#ffffff">
-    	<td class="v12" valign="top">&nbsp;<a href="op-logbuch-container-list.php?'.$globdata.'&mode=search&material_nr='.$pdata[bestellnum].'"><img src="../img/bul_arrowGrnLrg.gif" width=16 height=16 border=0 alt="'.$LDSelectArticle.'"></a></td>
+    	<td class="v12" valign="top">&nbsp;<a href="op-logbuch-container-list.php?'.$globdata.'&mode=search&material_nr='.$pdata[bestellnum].'"><img src="../img/bul_arrowgrnlrg.gif" width=16 height=16 border=0 alt="'.$LDSelectArticle.'"></a></td>
     	<td class="v12" valign="top">&nbsp;<a href="op-logbuch-container-list.php?'.$globdata.'&mode=search&material_nr='.$pdata[bestellnum].'" title="'.$LDSelectArticle.'">'.$pdata[containernum].'</a>&nbsp;</td>
     	<td class="v12" valign="top"><a href="op-logbuch-container-list.php?'.$globdata.'&mode=search&material_nr='.$pdata[bestellnum].'" title="'.$LDSelectArticle.'">'.$pdata[containername].'</a>&nbsp;</td>
    	 	<td class="v12" valign="top">&nbsp;<a href="javascript:popinfo(\''.$pdata[bestellnum].'\')"><img src="../img/info3.gif" alt="'.$LDDbInfo.'" width=16 height=16 border=0 ></a>&nbsp;</td>
@@ -364,7 +362,7 @@ else
  			<font size=2 face="verdana,arial">
  			<font size=4 color="#cc0000">
  			<img src="../img/catr.gif" width=88 height=80 border=0 align=absmiddle> <b>'.$LDArticleNotFound.'</b><p></font> '.$LDNoArticleTxt.'<p>';
-			$databuf="$ck_sid&lang=$lang&op_nr=$op_nr&dept=$dept&saal=$saal&patnum=$patnum&pday=$pday&pmonth=$pmonth&pyear=$pyear&artikelnum=$material_nr";
+			$databuf="$sid&lang=$lang&op_nr=$op_nr&dept=$dept&saal=$saal&patnum=$patnum&pday=$pday&pmonth=$pmonth&pyear=$pyear&artikelnum=$material_nr";
 		print '
 			<a href="op-logbuch-container-entry-manual.php?sid='.$databuf.'"><img src="../img/accessrights.gif" width=35 height=35 border=0 align=absmiddle> 
 			<font size=3 > '.$LDClk2ManualEntry.'</font></a>

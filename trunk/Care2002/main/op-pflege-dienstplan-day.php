@@ -1,17 +1,21 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_or.php");
-
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","or.php");
+define("NO_2LEVEL_CHK",1);
+require("../include/inc_front_chain_lang.php");
 setcookie(username,"");
 setcookie(ck_plan,"1");
-/*if($dept=="") $dept="plop";
-*/
 
 $saal="exclude";
-require("../req/resolve_opr_dept.php");
+require("../include/inc_resolve_opr_dept.php");
 
 
 if($pmonth=="") $pmonth=date('n');
@@ -20,19 +24,15 @@ $thisfile="op-pflege-dienstplan.php";
 
 switch($retpath)
 {
-	case "menu": $rettarget="op-doku.php?sid=".$ck_sid; break;
+	case "menu": $rettarget="op-doku.php?sid=$sid"; break;
 	case "qview": $rettarget="op-pflege-dienst-schnellsicht.php"; break;
-	case "calendar_opt": $rettarget="calendar-options.php?sid=$ck_sid&lang=$lang&forcestation=1&day=$pday&month=$pmonth&year=$pyear";break;
+	case "calendar_opt": $rettarget="calendar-options.php?sid=$sid&lang=$lang&forcestation=1&day=$pday&month=$pmonth&year=$pyear";break;
 	default: $rettarget="javascript:window.history.back()";
 }
 
-//$monat=array("","Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember");
-
-
-
 $dbtable="nursing_dutyplan";
 
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 if($DBLink_OK)
 {	
 		 	$sql="SELECT a_dutyplan,r_dutyplan FROM $dbtable 
@@ -74,7 +74,7 @@ if($DBLink_OK)
 					//print $sql."<br>";
 				}
 			}
-				else print "<p>".$sql."<p>Das Lesen  aus der Datenbank $dbtable ist gescheitert."; 
+				else print "<p>".$sql."<p>$LDDbNoRead."; 
 				
 			$sql="SELECT list FROM nursing_dept_personell_quicklist
 							WHERE dept LIKE '$dept'";	
@@ -113,10 +113,8 @@ if($DBLink_OK)
 					
 				}
 			}
-				else print "<p>".$sql."<p>Das Lesen  aus der Datenbank $dbtable ist gescheitert."; 
+				else print "<p>".$sql."<p>$LDDbNoRead"; 
 }
-
-
 
 ?>
 
@@ -124,7 +122,7 @@ if($DBLink_OK)
 <HTML>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
- <TITLE><?="$LDOR $LDNursing $LDOnCallDuty" ?></TITLE>
+ <TITLE><?php echo "$LDOR $LDNursing $LDOnCallDuty" ?></TITLE>
 
 <style type="text/css">
 	A:link  {text-decoration: none; }
@@ -155,7 +153,7 @@ function popinfo(l,f,b)
 	h=window.screen.height;
 	ww=400;
 	wh=400;
-	urlholder="op-pflege-dienstplan-popinfo.php?ln="+l+"&fn="+f+"&bd="+b+"&dept=<?="$dept&sid=$ck_sid&lang=$lang" ?>&route=validroute&user=<? print $aufnahme_user.'"' ?>;
+	urlholder="op-pflege-dienstplan-popinfo.php?ln="+l+"&fn="+f+"&bd="+b+"&dept=<?php echo "$dept&sid=$sid&lang=$lang" ?>&route=validroute&user=<?php print $aufnahme_user.'"' ?>;
 	
 	infowin=window.open(urlholder,"infowin","width=" + ww + ",height=" + wh +",menubar=no,resizable=yes,scrollbars=yes");
 	window.infowin.moveTo((w/2)+20,(h/2)-(wh/2));
@@ -169,54 +167,48 @@ function popinfo(l,f,b)
 <BODY  bgcolor="#ffffff" alink="navy" vlink="navy"  onLoad="window.resizeTo(600,450)">
 <font face="Verdana, Arial" size=2>
 
-<b> <? print "$LDOnCallDuty ($dept) $LDOn $pday.$pmonth.$pyear" ?></b>
+<b> <?php print "$LDOnCallDuty ($dept) $LDOn $pday.$pmonth.$pyear" ?></b>
 <p>
-<? if($rows&&($a_duty||$r_duty)) : ?>
+<?php if($rows&&($a_duty||$r_duty)) : ?>
 <table border=0 >
 <tr>
 <td bgcolor=#ffffcc><img src="../img/authors.gif" width=16 height=15 border=0>&nbsp;
-<font face=verdana,arial size=2 ><b><?=$LDStandbyPerson ?></b><br></font>
+<font face=verdana,arial size=2 ><b><?php echo $LDStandbyPerson ?></b><br></font>
 </td>
 </tr>
 <tr>
-<td><font face=verdana,arial size=2 ><ul><font size=3 color="#990000"><b><? if($a_duty) print $a_parsed[l].", ".$a_parsed[f]; ?></b></font>
-<br><ul><b><?=$LDBeeper ?>:</b><font color=red> <? print $a_f[df]; ?><br> 
-<font color=navy><b><?=$LDPhone ?>:</b> <? print $a_f[dp]; ?><br></font></ul></ul>
+<td><font face=verdana,arial size=2 ><ul><font size=3 color="#990000"><b><?php if($a_duty) print $a_parsed[l].", ".$a_parsed[f]; ?></b></font>
+<br><ul><b><?php echo $LDBeeper ?>:</b><font color=red> <?php print $a_f[df]; ?><br> 
+<font color=navy><b><?php echo $LDPhone ?>:</b> <?php print $a_f[dp]; ?><br></font></ul></ul>
 </td>
 </tr>
 <tr>
 <td bgcolor=#ffffcc><img src="../img/listen-sm-legend.gif" width=15 height=15 border=0>&nbsp;
-<font face=verdana,arial size=2 ><b><?=$LDOnCallPerson ?></b><br></font>
+<font face=verdana,arial size=2 ><b><?php echo $LDOnCallPerson ?></b><br></font>
 </td>
 </tr>
 <tr>
-<td><font face=verdana,arial size=2 ><ul><font size=3 color="#990000"><b><? if($r_duty) print $r_parsed[l].", ".$r_parsed[f]; ?></b></font>
-<br><ul><b><?=$LDBeeper ?>:</b><font color=red> <? print $r_f[of]; ?>
+<td><font face=verdana,arial size=2 ><ul><font size=3 color="#990000"><b><?php if($r_duty) print $r_parsed[l].", ".$r_parsed[f]; ?></b></font>
+<br><ul><b><?php echo $LDBeeper ?>:</b><font color=red> <?php print $r_f[of]; ?>
 <br>
-<font color=navy><b><?=$LDPhone ?>:</b> <? print $r_f[op]; ?><br></font></ul></ul>
+<font color=navy><b><?php echo $LDPhone ?>:</b> <?php print $r_f[op]; ?><br></font></ul></ul>
 </td>
 </tr>
 
-
 </table>
 
-<? else : ?>
+<?php else : ?>
 <table border=0>
   <tr>
     <td><img src="../img/catr.gif" width=88 height=80 border=0></td>
-    <td><font face="Verdana, Arial" size=3 color="#cc0000"><b><?=$LDNoEntryFound ?></b></font></td>
+    <td><font face="Verdana, Arial" size=3 color="#cc0000"><b><?php echo $LDNoEntryFound ?></b></font></td>
   </tr>
 </table>
 
-
-<? endif ?>
+<?php endif ?>
 
 <p>
-<a href="<?=$rettarget ?>"><img src="../img/<?="$lang/$lang" ?>_back2.gif" width=110 height=24 border=0></a>
-
-
-
+<a href="<?php echo $rettarget ?>"><img src="../img/<?php echo "$lang/$lang" ?>_back2.gif" width=110 height=24 border=0></a>
 </FONT>
-
 </BODY>
 </HTML>

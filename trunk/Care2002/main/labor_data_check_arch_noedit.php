@@ -1,4 +1,4 @@
-<?
+<?php
 //setcookie(currentuser,"");
 $thisfile="labor_data_patient_such.php";
 $breakfile="labor.php";
@@ -11,7 +11,7 @@ $fielddata="patnum, name, vorname, gebdatum, item";
 
 $keyword=trim($keyword);
 
-require("../req/db_dbp.php");
+require("../include/db_dbp.php");
 $dbtable="lab_test_data";
 
 	$link=mysql_connect($dbhost,$dbusername,$dbpassword);
@@ -36,7 +36,7 @@ $dbtable="lab_test_data";
 				else
 				{
 					mysql_close($link);
-					header("location:pflege-station-patientdaten.php?sid=$ck_sid&station=$station&pn=$patnum&nodoc=labor");break;
+					header("location:pflege-station-patientdaten.php?sid=$sid&station=$station&pn=$patnum&nodoc=labor");break;
 
 				}
 			}
@@ -84,8 +84,7 @@ $dbtable="lab_test_data";
 <ul>
 <FONT    SIZE=-1  FACE="Arial">
 
-<?
-
+<?php
 print "<p>Fur die Fallnummer $patnum wurde <font color=red><b> $linecount</b></font> Laborbefund";
 if($linecount>1) print "e";
 print" gefunden.<br>Falls Sie ";
@@ -124,7 +123,7 @@ print " Befund bearbeiten möchten klicken Sie bitte den weiss-grünen Pfeil an.<p
 							</td>';
 						print'<td><font face=arial size=2>&nbsp';
 					   print'<a href=labor_data_list_noedit.php?&patnum='.$patnum.'&job_id='.$zeile[job_id].'><img 
-										src="../img/bul_arrowGrnLrg.gif" width=16 height=16 border=0 alt="Laborwerte aktualisieren"></a>&nbsp;</td></tr>';
+										src="../img/bul_arrowgrnlrg.gif" width=16 height=16 border=0 alt="Laborwerte aktualisieren"></a>&nbsp;</td></tr>';
 
 					}
 					print "</table>";
@@ -132,7 +131,7 @@ print " Befund bearbeiten möchten klicken Sie bitte den weiss-grünen Pfeil an.<p
 ?>
 <p>
 <hr width=80% align=left>
-<FORM action="<? print $breakfile; ?>" >
+<FORM action="<?php print $breakfile; ?>" >
 <INPUT type="image" src=../img/abbrech.gif border=0>
 </FORM>
 

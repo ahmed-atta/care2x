@@ -1,33 +1,40 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_tech.php");
-require("../req/config-color.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","tech.php");
+define("NO_2LEVEL_CHK",1);
+require("../include/inc_front_chain_lang.php");
+require("../include/inc_config_color.php");
 
 $thisfile="technik-report-arch.php";
-$breakfile="technik.php?sid=$ck_sid&lang=$lang";
+$breakfile="technik.php?sid=$sid&lang=$lang";
 
-if($mode=="search")
+if(isset($mode)&&($mode=="search"))
 {
-	if((!$dept)&&(!$tech)&&(!$sdate)&&(!$edate))  $mode="";
-	if($edate)
+	if(isset($dept)&&empty($dept)&&isset($tech)&&empty($tech)&&isset($sdate)&&empty($sdate)&&isset($edate)&&empty($edate))  $mode="";
+	if(isset($edate)&&$edate)
 	{
 		$dbuf=explode(".",$edate);
 		$dbuf=array_reverse($dbuf);
 		$edate=implode("",$dbuf);
-		if($sdate)
+		if(isset($sdate)&&$sdate)
 		{
-		$dbuf=explode(".",$sdate);
-		$dbuf=array_reverse($dbuf);
-		$sdate=implode("",$dbuf);
+		     $dbuf=explode(".",$sdate);
+		     $dbuf=array_reverse($dbuf);
+		     $sdate=implode("",$dbuf);
 		}
 	}
 		
 		
-	if(!$ofset) $ofset=0;
-	if(!$nrows) $nrows=20;
+	if(!isset($ofset)||!$ofset) $ofset=0;
+	if(!isset($nrows)||!$nrows) $nrows=20;
 }
 
 //init db parameters
@@ -35,7 +42,7 @@ $linecount=0;
 $dbtable="tech_repair_done";
 
 //this is the search module
-	include("../req/db-makelink.php");
+include("../include/inc_db_makelink.php");
 	if($link&&$DBLink_OK) 
 		{
 			if($mode=="search")
@@ -89,44 +96,42 @@ $abt=array("PLOP","GYN","Anästhesie","Unfall");
 <!-- 
 function show_order(d,D,t,r,i)
 {
-	urlholder="technik-report-showcontent.php?sid=<? print $ck_sid; ?>&dept="+d+"&tdate="+D+"&ttime="+t+"&reporter="+r+"&tid="+i;
+	urlholder="technik-report-showcontent.php?sid=<?php print "$sid&lang=$lang"; ?>&dept="+d+"&tdate="+D+"&ttime="+t+"&reporter="+r+"&tid="+i;
 	//orderlistwin=window.open(urlholder,"orderlistwin","width=700,height=550,menubar=no,resizable=yes,scrollbars=yes");
 	window.location.href=urlholder;
 	}
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
 // -->
 </script> 
 
-<? 
-require("../req/css-a-hilitebu.php");
+<?php 
+require("../include/inc_css_a_hilitebu.php");
 ?>
 
 </HEAD>
 
 <BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="document.suchform.tech.focus()"
-<? if (!$cfg['dhtml']){ print 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
-<?=$test ?>
-<? //foreach($argv as $v) print "$v "; ?>
+<?php if (!$cfg['dhtml']){ print 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+<?php echo $test ?>
+<?php //foreach($argv as $v) print "$v "; ?>
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
 <tr valign=top>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="45"><FONT  COLOR="<? print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG> &nbsp; <?=$LDTechSupport ?></STRONG></FONT></td>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?if($cfg['dhtml'])print'<a href="javascript:window.history.back()"><img src="../img/'.$lang.'/'.$lang.'_back2.gif" width=110 height=24 border=0  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
-<a href="javascript:gethelp('tech.php','arch')"><img src="../img/<?="$lang/$lang"; ?>_hilfe-r.gif" border=0 width=75 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?print $breakfile;?>"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 alt="<?=$LDClose ?>"  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="45"><FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
+<STRONG> &nbsp; <?php echo $LDTechSupport ?></STRONG></FONT></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right>
+<?php if($cfg['dhtml'])print'<a href="javascript:window.history.back()"><img src="../img/'.$lang.'/'.$lang.'_back2.gif" width=110 height=24 border=0  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('tech.php','arch')"><img src="../img/<?php echo "$lang/$lang"; ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
 <tr valign=top >
-<td bgcolor=<? print $cfg['body_bgcolor']; ?> valign=top colspan=2>
+<td bgcolor=<?php print $cfg['body_bgcolor']; ?> valign=top colspan=2>
 <ul>
 <FONT face="Verdana,Helvetica,Arial" size=2>
-<?
-if($from=="pass")
+<?php if($from=="pass")
 {
 $curtime=date("H.i");
 if ($curtime<"9.00") print "Guten Morgen ";
@@ -135,43 +140,42 @@ if ($curtime>"18.00") print "Guten Abend ";
 print "$ck_apo_arch_user!";
 }else print "<br>";
 ?><p>
-  <form action="<?=$thisfile?>" method="get" name="suchform">
+  <form action="<?php echo $thisfile?>" method="get" name="suchform">
   <table border=0 cellspacing=2 cellpadding=3>
     <tr bgcolor=#ffffdd>
-      <td  colspan=2><FONT face="Verdana,Helvetica,Arial" size=2 color="#800000"><?=$LDSearchReport ?>:</td>
+      <td  colspan=2><FONT face="Verdana,Helvetica,Arial" size=2 color="#800000"><?php echo $LDSearchReport ?>:</td>
     </tr>
     <tr bgcolor=#ffffdd>
-      <td align=right><FONT face="Verdana,Helvetica,Arial" size=2><?=$LDTechnician ?>:</td>
+      <td align=right><FONT face="Verdana,Helvetica,Arial" size=2><?php echo $LDTechnician ?>:</td>
       <td><input type="text" name="tech" size=25 maxlength=40>
           </td>
     </tr>
     <tr bgcolor=#ffffdd>
-      <td align=right><FONT face="Verdana,Helvetica,Arial" size=2><?=$LDDept ?>:</td>
+      <td align=right><FONT face="Verdana,Helvetica,Arial" size=2><?php echo $LDDept ?>:</td>
       <td><input type="text" name="dept" size=25 maxlength=40>
           </td>
     </tr>
     <tr bgcolor=#ffffdd>
-      <td align=right><FONT face="Verdana,Helvetica,Arial" size=2 ><?="$LDDate $LDFrom" ?>:</td>
-      <td><FONT face="Verdana,Helvetica,Arial" size=2><input type="text" name="sdate" size=10 maxlength=10 onKeyUp="setDate(this)"><?=$LDTo ?><input type="text" name="edate" size=10 maxlength=10 onKeyUp="setDate(this)">
+      <td align=right><FONT face="Verdana,Helvetica,Arial" size=2 ><?php echo "$LDDate $LDFrom" ?>:</td>
+      <td><FONT face="Verdana,Helvetica,Arial" size=2><input type="text" name="sdate" size=10 maxlength=10 onKeyUp="setDate(this)"><?php echo $LDTo ?><input type="text" name="edate" size=10 maxlength=10 onKeyUp="setDate(this)">
           </td>
     </tr>
 
     <tr >
-      <td ><input type="submit" value="<?=$LDSearch ?>">
+      <td ><input type="submit" value="<?php echo $LDSearch ?>">
            </td>
-      <td align=right><input type="reset" value="<?=$LDReset ?>" onClick="document.suchform.tech.focus()">
+      <td align=right><input type="reset" value="<?php echo $LDReset ?>" onClick="document.suchform.tech.focus()">
                       </td>
     </tr>
   </table>
-  <input type="hidden" name="sid" value="<?=$ck_sid ?>">
-  <input type="hidden" name="lang" value="<?=$lang ?>">
+  <input type="hidden" name="sid" value="<?php echo $sid ?>">
+  <input type="hidden" name="lang" value="<?php echo $lang ?>">
     <input type="hidden" name="mode" value="search">
     </form>
   
   
 <hr width=80% align=left>
-<?
-if($linecount>0)
+<?php if($linecount>0)
 {
 	print '
 			<font face=Verdana,Arial size=2>
@@ -230,7 +234,8 @@ if($linecount>0)
               					<input type="hidden" name="such_dept" value="'.$such_dept.'">
               					<input type="hidden" name="ofset" value="'.($ofset-$nrows).'">
                    				<input type="hidden" name="nrows" value="'.$nrows.'">
-                       			<input type="hidden" name="sid" value="'.$ck_sid.'">           
+                       			<input type="hidden" name="sid" value="'.$sid.'">           
+                       			<input type="hidden" name="lang" value="'.$lang.'">           
 								<input type="submit" value="&lt;&lt; Zurück">
 								</form>';
 		print "</td><td align=right>";
@@ -243,7 +248,8 @@ if($linecount>0)
                    				<input type="hidden" name="such_prio" value="'.$such_prio.'">
         						<input type="hidden" name="ofset" value="'.($ofset+$nrows).'">
               					<input type="hidden" name="nrows" value="'.$nrows.'">
-                   				<input type="hidden" name="sid" value="'.$ck_sid.'">     
+                       			<input type="hidden" name="lang" value="'.$lang.'">           
+                   				<input type="hidden" name="sid" value="'.$sid.'">     
 								<input type="submit" value="Weiter &gt;&gt;">
 								</form>';
 		print '
@@ -261,7 +267,8 @@ if($ofset) print '	<form name=back action='.$thisfile.' method=post>
               					<input type="hidden" name="such_dept" value="'.$such_dept.'">
               					<input type="hidden" name="ofset" value="'.($ofset-$nrows).'">
                    				<input type="hidden" name="nrows" value="'.$nrows.'">
-                       			<input type="hidden" name="sid" value="'.$ck_sid.'">           
+                       			<input type="hidden" name="sid" value="'.$sid.'">           
+                       			<input type="hidden" name="lang" value="'.$lang.'">           
 								<input type="submit" value="&lt;&lt; Zurück">
 								</form>';
 							
@@ -288,36 +295,22 @@ if($invalid) print'
  </table>';
  */
 	 ?>
-  
-</table>
-
-		
-	
-
+<p><br>
+ <a> <?php print'<a href="technik.php?sid='.$sid.'&lang='.$lang.'"><img src="../img/'.$lang.'/'.$lang.'_back2.gif" width=110 height=24 border=0>';?></a>
 </ul>
-
 </FONT>
 <p>
 </td>
 </tr>
-
 <tr>
-<td bgcolor=<? print $cfg['bot_bgcolor']; ?> height=70 colspan=2>
-
+<td bgcolor=<?php print $cfg['bot_bgcolor']; ?> height=70 colspan=2>
 <?php
-require("../language/$lang/".$lang."_copyrite.htm");
+require("../language/$lang/".$lang."_copyrite.php");
  ?>
-
 </td>
 </tr>
 </table>        
 &nbsp;
-
-
-
-
 </FONT>
-
-
 </BODY>
 </HTML>

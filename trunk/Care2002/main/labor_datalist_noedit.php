@@ -1,23 +1,30 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","lab.php");
+define("NO_2LEVEL_CHK",1);
+require("../include/inc_front_chain_lang.php");
 if($from!="station")
-	if(!$ck_lab_user) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_lab.php");
+	if(!$HTTP_COOKIE_VARS["ck_lab_user".$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 
-if(!$patnum) header("location:labor_data_patient_such.php?sid=$ck_sid&lang=$lang");
-require("../req/config-color.php");
+if(!$patnum) header("location:labor_data_patient_such.php?sid=$sid&lang=$lang");
+require("../include/inc_config_color.php");
 
 $thisfile="labor_datainput.php";
 
-if($from=="station") $breakfile="pflege-station-patientdaten.php?sid=$ck_sid&lang=$lang&edit=$edit&station=$station&pn=$patnum";
-	else $breakfile="labor_data_patient_such.php?sid=$ck_sid&lang=$lang";
+if($from=="station") $breakfile="pflege-station-patientdaten.php?sid=$sid&lang=$lang&edit=$edit&station=$station&pn=$patnum";
+	else $breakfile="labor_data_patient_such.php?sid=$sid&lang=$lang";
 
 $fielddata="patnum,name,vorname,gebdatum";
 
-require("../req/labor-param-group.php");
+require("../include/inc_labor_param_group.php");
 
 						
 if($parameterselect=="") $parameterselect=0;
@@ -26,10 +33,10 @@ $parameters=$paralistarray[$parameterselect];
 //$paramname=$parametergruppe[$parameterselect];
 
 
-if($nostat) $ret="labor_data_patient_such.php?sid=$ck_sid&lang=$lang&versand=1&keyword=$patnum";
-	else $ret="pflege-station-patientdaten.php?sid=$ck_sid&lang=$lang&station=$station&pn=$patnum";
+if($nostat) $ret="labor_data_patient_such.php?sid=$sid&lang=$lang&versand=1&keyword=$patnum";
+	else $ret="pflege-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$patnum";
 	
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK) 
 	{
 			// get orig data
@@ -54,8 +61,8 @@ if($link&&$DBLink_OK)
 					if ($rows) mysql_data_seek($ergebnis,0);
 					else
 					 {
-					 	if($nostat)header("location:labor-nodatafound.php?sid=$ck_sid&lang=$lang&patnum=$patnum&ln=$result[name]&fn=$result[vorname]&nodoc=labor");
-					 	else header("location:pflege-station-patientdaten.php?sid=$ck_sid&lang=$lang&edit=$edit&station=$station&pn=$patnum&nodoc=labor");
+					 	if($nostat)header("location:labor-nodatafound.php?sid=$sid&lang=$lang&patnum=$patnum&ln=$result[name]&fn=$result[vorname]&nodoc=labor");
+					 	else header("location:pflege-station-patientdaten.php?sid=$sid&lang=$lang&edit=$edit&station=$station&pn=$patnum&nodoc=labor");
 					 	exit;
 					 }
 				}	
@@ -70,7 +77,7 @@ if($link&&$DBLink_OK)
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
-<title><? print "$LDLabReport $station"; ?></title>
+<title><?php print "$LDLabReport $station"; ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 
 <style type="text/css" name="1">
@@ -81,8 +88,8 @@ if($link&&$DBLink_OK)
 .j{font-family:verdana; font-size:12; color:#000000}
 </style>
 
-<? 
-require("../req/css-a-hilitebu.php");
+<?php 
+require("../include/inc_css_a_hilitebu.php");
 ?>
 
 <script language="javascript">
@@ -120,7 +127,7 @@ function prep2submit()
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
@@ -129,22 +136,22 @@ function gethelp(x,s,x1,x2,x3)
 </HEAD>
 
 <BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<? if (!$cfg['dhtml']){ print 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
-<? if(!$noexpand) : ?>
+<?php if (!$cfg['dhtml']){ print 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+<?php if(!$noexpand) : ?>
 <script language="">
 <!-- Script Begin
 	window.moveTo(0,0);
 	 window.resizeTo(1000,740);
 //  Script End -->
 </script>
-<? endif ?>
+<?php endif ?>
 
 <table  border=0 cellspacing=0 cellpadding=0 width=100%>
 <tr>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<? print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><? print "$LDLabReport $station"; ?></STRONG></FONT>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" >
+<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php print "$LDLabReport $station"; ?></STRONG></FONT>
 </td>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp('lab_list.php','','','','<?=$LDLabReport ?>')"><img src="../img/<?="$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?=$breakfile ?>" ><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp('lab_list.php','','','','<?php echo $LDLabReport ?>')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
 </tr>
 
 <tr>
@@ -156,21 +163,21 @@ function gethelp(x,s,x1,x2,x3)
 
 <table border=0>
 <tr>
-<td bgcolor=#ffffff><FONT SIZE=-1  FACE="Arial"><?=$LDCaseNr ?>:
+<td bgcolor=#ffffff><FONT SIZE=-1  FACE="Arial"><?php echo $LDCaseNr ?>:
 </td>
-<td bgcolor=#ffffee><FONT SIZE=-1  FACE="Arial">&nbsp;<? print $result[patnum]; ?>&nbsp;
+<td bgcolor=#ffffee><FONT SIZE=-1  FACE="Arial">&nbsp;<?php print $result[patnum]; ?>&nbsp;
 </td>
 </tr>
 
 <tr>
-<td bgcolor=#ffffff><FONT SIZE=-1  FACE="Arial"><?="$LDLastName, $LDName, $LDBday" ?>:
+<td bgcolor=#ffffff><FONT SIZE=-1  FACE="Arial"><?php echo "$LDLastName, $LDName, $LDBday" ?>:
 </td>
-<td bgcolor=#ffffee><FONT SIZE=-1  FACE="Arial">&nbsp;<b><? print  $result[name]; ?>, <? print  $result[vorname]; ?>&nbsp;&nbsp;<? print  $result[gebdatum]; ?></b>
+<td bgcolor=#ffffee><FONT SIZE=-1  FACE="Arial">&nbsp;<b><?php print  $result[name]; ?>, <?php print  $result[vorname]; ?>&nbsp;&nbsp;<?php print  $result[gebdatum]; ?></b>
 </td>
 </tr>
 </table>
 <p>
-<?
+<?php
 print '
 <button onClick="javascript:prep2submit()"><img src="../img/chart.gif" width=16 height=17 border=0 align="absmiddle"> '.$LDClk2Graph.'</button>';
 ?>
@@ -180,7 +187,7 @@ print '
 <td>
 <form action="labor-data-makegraph.php" method="post" name="labdata">
 <table border=0 cellpadding=0 cellspacing=1>
-<? 
+<?php 
 
 while($zeile=mysql_fetch_array($ergebnis)) $data[]=$zeile;
 
@@ -270,7 +277,7 @@ print '
 
 print '
 <input type="hidden" name="colsize" value="'.$cols.'">
-<input type="hidden" name="sid" value="'.$ck_sid.'">
+<input type="hidden" name="sid" value="'.$sid.'">
 <input type="hidden" name="lang" value="'.$lang.'">
 <input type="hidden" name="from" value="'.$from.'">
 <input type="hidden" name="edit" value="'.$edit.'">
@@ -285,14 +292,14 @@ print '
 </form>
 
 <p>
-<a href="<?=$breakfile ?>"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border="0" width=103 height=24 alt="<?=$LDClose ?>"></a>
+<a href="<?php echo $breakfile ?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border="0" width=103 height=24 alt="<?php echo $LDClose ?>"></a>
 </UL>
 
 </FONT>
 
 
 <?php
-require("../language/$lang/".$lang."_copyrite.htm");
+require("../language/$lang/".$lang."_copyrite.php");
  ?>
 
 </td>

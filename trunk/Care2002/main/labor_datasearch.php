@@ -1,4 +1,4 @@
-<?
+<?php
 //setcookie(currentuser,"");
 
 $dbname="maho";
@@ -51,16 +51,15 @@ $fielddata="mahophone_name, mahophone_vorname, mahophone_inphone1, mahophone_inp
 <FORM action="telesuch.php" method="post">
 <font face="Arial,Verdana"  color="#000000" size=-1>
 <B>Stichwort eingeben. z.B. Name, Vorname, Geburstdatum, Fallnummer, Abteilung, oder Abkürzung u.s.w.</B><p>
-<INPUT type="text" name="keyword" size="14" maxlength="25" value=<? print $keyword ?>> 
+<INPUT type="text" name="keyword" size="14" maxlength="25" value=<?php print $keyword ?>> 
 <INPUT type="submit" name="versand" value="SUCHEN"></font></FORM>
 
 <p>
-<FORM action="<? print $breakfile ?>" >
+<FORM action="<?php print $breakfile ?>" >
 <INPUT type="submit"  value="Abbrechen"></FORM>
 <p>
 
-<?
-
+<?php 
 if($versand!="")
   {
 	$suchwort=trim($keyword);

@@ -1,12 +1,10 @@
-<? 
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-
-require("../language/".$lang."/lang_".$lang."_specials.php");
-$breakfile="spediens.php?sid=$ck_sid&lang=$lang";
-require("../global_conf/remoteservers_conf.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+define("LANG_FILE","specials.php");
+define("NO_2LEVEL_CHK",1);
+require("../include/inc_front_chain_lang.php");
+$breakfile="spediens.php?sid=$sid&lang=$lang";
+require("../global_conf/inc_remoteservers_conf.php");
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -18,13 +16,13 @@ require("../global_conf/remoteservers_conf.php");
 var cam=new Image();
 function show()
 {
-	cam.src="<?=$cam_http_1 ?>cam1.jpg";
+	cam.src="<?php echo $cam_http_1 ?>cam_001.jpg";
 	document.images.pic.src=cam.src;
-	cam.src="<?=$cam_http_2 ?>cam.jpg";
+	cam.src="<?php echo $cam_http_2 ?>cam_002.jpg";
 	document.images.pic2.src=cam.src;
-	cam.src="<?=$cam_http_3 ?>cam128.jpg";
+	cam.src="<?php echo $cam_http_3 ?>cam_003.jpg";
 	document.images.pic3.src=cam.src;
-	cam.src="<?=$cam_http_4 ?>webcam.jpg";
+	cam.src="<?php echo $cam_http_4 ?>cam_004.jpg";
 	document.images.pic4.src=cam.src;	
 	//setTimeout("show()",5000);
 }
@@ -35,7 +33,7 @@ function show()
 <form>
 <table border=0>
   <tr>
-    <td><img src="<?=$cam_http_1 ?>cam1.jpg" border=0 width=320 height=240 name="pic"><br>
+    <td><img src="<?php echo $cam_http_1 ?>cam_001.jpg" border=0 width=320 height=240 name="pic"><br>
 
 <select name="Cam1">
  	<option value="Camera 1"> Camera 1</option>
@@ -46,7 +44,7 @@ function show()
  
 
 </td>
-    <td><img src="<?=$cam_http_2 ?>cam.jpg" border=0 width=320 height=240 name="pic2"><br>
+    <td><img src="<?php echo $cam_http_2 ?>cam_002.jpg" border=0 width=320 height=240 name="pic2"><br>
 <select name="Cam2">
  	<option value="Camera 1"> Camera 1</option>
  	<option value="Camera 2"> Camera 2</option>
@@ -56,7 +54,7 @@ function show()
 </td>
   </tr>
   <tr>
-    <td><img src="<?=$cam_http_3 ?>cam128.jpg" border=0 width=320 height=240 name="pic3"><br>
+    <td><img src="<?php echo $cam_http_3 ?>cam_003.jpg" border=0 width=320 height=240 name="pic3"><br>
 <select name="Cam3">
  	<option value="Camera 1"> Camera 1</option>
  	<option value="Camera 2"> Camera 2</option>
@@ -64,7 +62,7 @@ function show()
  	<option value="Camera 4"> Camera 4</option>
  </select>
 </td>
-    <td><img src="<?=$cam_http_4 ?>webcam.jpg" border=0 width=320 height=240 name="pic4"><br>
+    <td><img src="<?php echo $cam_http_4 ?>cam_004.jpg" border=0 width=320 height=240 name="pic4"><br>
 <select name="Cam4">
  	<option value="Camera 1"> Camera 1</option>
  	<option value="Camera 2"> Camera 2</option>
@@ -77,7 +75,7 @@ function show()
 </form>
 
 <p>
-<a href="<?=$breakfile ?>"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0  alt="<?=$LDClose ?>" align="middle"></a>
+<a href="<?php echo $breakfile ?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0  alt="<?php echo $LDClose ?>" align="middle"></a>
 
 
 </BODY>

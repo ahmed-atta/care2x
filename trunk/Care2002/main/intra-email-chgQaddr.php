@@ -1,11 +1,18 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)||!$ck_intra_email_user) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_intramail.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","intramail.php");
+$local_user="ck_intra_email_user";
+require("../include/inc_front_chain_lang.php");
 
-require("../req/config-color.php"); // load color preferences
+require("../include/inc_config_color.php"); // load color preferences
 
 $thisfile="intra-email-chgQaddr.php";
 
@@ -14,10 +21,10 @@ $dbtable="mail_private_users";
 
 $linecount=0;
 
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK) 
 	{	
-				$sql='SELECT addr_book, lastcheck FROM '.$dbtable.' WHERE  email="'.$eadd.'"';
+				$sql='SELECT addr_book, lastcheck FROM '.$dbtable.' WHERE  email="'.addslashes($eadd).'"';
 				if($ergebnis=mysql_query($sql,$link))
 				{ 
 					$rows=0;
@@ -42,7 +49,7 @@ if($link&&$DBLink_OK)
 				if($buf=="") $buf=$$abuf;
 				else $buf.="; ".$$abuf; //print "$buf<br>".$$abuf."<br>";
 			}
-				$sql='UPDATE '.$dbtable.' SET addr_quick="'.$buf.'", lastcheck="'.$content[lastcheck].'" WHERE  email="'.$eadd.'"';
+				$sql='UPDATE '.$dbtable.' SET addr_quick="'.$buf.'", lastcheck="'.$content[lastcheck].'" WHERE  email="'.addslashes($eadd).'"';
 				if($ergebnis=mysql_query($sql,$link))
 				{
 					$saveok=1;
@@ -50,7 +57,7 @@ if($link&&$DBLink_OK)
 				 else { print "$LDDbNoUpdate<br>$sql"; } 
 		}
 		
-				$sql='SELECT addr_quick FROM '.$dbtable.' WHERE  email="'.$eadd.'"';
+				$sql='SELECT addr_quick FROM '.$dbtable.' WHERE  email="'.addslashes($eadd).'"';
 				if($ergebnis=mysql_query($sql,$link))
 				{ 
 					$rows=0;
@@ -71,15 +78,13 @@ if($link&&$DBLink_OK)
 <HTML>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
- <TITLE><?="$LDIntraEmail $LDQuickAddr" ?></TITLE>
+ <TITLE><?php echo "$LDIntraEmail $LDQuickAddr"; ?></TITLE>
 
  <script language="javascript" >
 <!-- 
 var chgTag=false;
-<? if($saveok) print "var saveTag=true;
-"; 
-else print "var saveTag=false;
-" 
+<?php if($saveok) print "var saveTag=true;"; 
+else print "var saveTag=false;"; 
 ?>
 
 function chkform(d)
@@ -126,47 +131,47 @@ window.close();
 // -->
 </script> 
 
-<? 
-require("../req/css-a-hilitebu.php");
+<?php 
+require("../include/inc_css_a_hilitebu.php");
 ?>
 
 </HEAD>
 
 <BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="if (window.focus) window.focus()" 
-<? 
+<?php 
  if (!$cfg['dhtml']){ print ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
  
-<?if($mode=="saveQadd"):?>
+<?php if($mode=="saveQadd") : ?>
 <script language=javascript>
 
 </script>
-<?endif?>
+<?php endif?>
 
-<? //foreach($argv as $v) print "$v "; ?>
+<?php //foreach($argv as $v) print "$v "; ?>
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
 <tr valign=top>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>"  height="30">
-<FONT  COLOR="<? print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG>&nbsp;<?="$LDIntraEmail $LDQuickAddr" ?></STRONG></FONT></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>"  height="30">
+<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG>&nbsp;<?php echo "$LDIntraEmail $LDQuickAddr"; ?></STRONG></FONT></td>
 </tr>
 <tr valign=top >
-<td bgcolor=<? print $cfg['body_bgcolor']; ?> valign=top >
+<td bgcolor=<?php print $cfg['body_bgcolor']; ?> valign=top >
 
 <FONT face="Verdana,Helvetica,Arial" size=2>
 
-<FONT face="Verdana,Helvetica,Arial" size=2 color=#800000><b><?=$eadd ?></b>
+<FONT face="Verdana,Helvetica,Arial" size=2 color=#800000><b><?php echo $eadd; ?></b>
 <p><br>
 
 <form name=qaselect onSubmit="return chkform(this)">
 <table border=0>
   <tr>
   <td align=center valign=top><FONT face="Verdana,Helvetica,Arial" size=2 color=#800000>
-  		<b><?=$LDAddrBook ?></b></td><td></td>
+  		<b><?php echo $LDAddrBook ?></b></td><td></td>
   <td align=center valign=top><FONT face="Verdana,Helvetica,Arial" size=2 color=#800000>
-  		<b><?=$LDQuickAddr ?>:<br><font size=1>< <?=$LDMaximum ?> 5 ></b></td><td></td>
+  		<b><?php echo $LDQuickAddr ?>:<br><font size=1>< <?php echo $LDMaximum; ?> 5 ></b></td><td></td>
     </tr>
 	<tr><td><select name="adrs" size=5>
-<?
-	$a_info=explode("_",$content[addr_book]);
+<?php
+$a_info=explode("_",$content[addr_book]);
 	for ($i=0;$i<sizeof($a_info);$i++)
 	{
 		parse_str($a_info[$i],$c);
@@ -176,11 +181,11 @@ require("../req/css-a-hilitebu.php");
         </select>
         
         </td>
-    <td><input type="button" value="<?=$LDInsertAddr ?> >>" onClick="enterQadd()">
+    <td><input type="button" value="<?php echo $LDInsertAddr; ?> >>" onClick="enterQadd()">
         </td>
     <td>
-<?
-	print '
+<?php
+print '
 	<select name="quick" size=5>';
 	$c=explode("; ",trim($result[addr_quick]));
 	$maxrow=sizeof($c);
@@ -201,18 +206,18 @@ require("../req/css-a-hilitebu.php");
 
           
         </td>
-    <td><input type="button" value="<?=$LDDelete ?> >>" onClick="delQadd()">
+    <td><input type="button" value="<?php echo $LDDelete ?> >>" onClick="delQadd()">
         </td>
   </tr>
    <tr>
   <td ></td>
   <td></td>
   <td ><input type="hidden" name="mode" value="saveQadd">
-  			<input type="hidden" name="sid" value="<?=$ck_sid ?>">
-     		<input type="hidden" name="lang" value="<?=$lang ?>">
-     		<input type="hidden" name="eadd" value="<?=$eadd ?>">
+  			<input type="hidden" name="sid" value="<?php echo $sid; ?>">
+     		<input type="hidden" name="lang" value="<?php echo $lang; ?>">
+     		<input type="hidden" name="eadd" value="<?php echo $eadd; ?>">
        <p>
-		&nbsp;<input type="submit" value="<?=$LDSave ?>"></td>
+		&nbsp;<input type="submit" value="<?php echo $LDSave; ?>"></td>
 	<td></td>
     </tr>
 
@@ -223,7 +228,7 @@ require("../req/css-a-hilitebu.php");
 
   &nbsp; &nbsp;
    <font size=1><a href="javascript:closeit()">
-   <img src="../img/l_arrowGrnSm.gif" width=12 height=12 border=0 align=middle> <?=$LDClose ?>
+   <img src="../img/l_arrowGrnSm.gif" width=12 height=12 border=0 align=middle> <?php echo $LDClose; ?>
 </a></font>
   
   

@@ -1,23 +1,31 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-
-require("../language/".$lang."/lang_".$lang."_editor.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","editor.php");
+$local_user="ck_cafenews_user";
+require("../include/inc_front_chain_lang.php");
+require("../include/inc_config_color.php");
 
 if($groupopt)
 switch($groupopt)
 {
-	case "newgroup":	header("Location: cafenews-edit-price-newgroup.php?sid=$ck_sid&lang=$lang");
+	case "newgroup":	header("Location: cafenews-edit-price-newgroup.php?sid=$sid&lang=$lang");
 						break;
-	default: header("Location: cafenews-edit-price.php?sid=$ck_sid&groupname=$groupopt&lang=$lang");break; 
+	default: header("Location: cafenews-edit-price.php?sid=$sid&groupname=$groupopt&lang=$lang");break; 
 }
 
+$breakfile="cafenews.php?sid=$sid&lang=$lang";
 
 $dbtable="cafe_prices_".$lang;
 
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
  if ($link&&$DBLink_OK)
  {
 		 	$sql="SELECT article FROM $dbtable 
@@ -44,11 +52,11 @@ require("../req/db-makelink.php");
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <title></title>
 
-<? if($rows) : ?>
+<?php if($rows) : ?>
 <script language="javascript">
 function chkForm(d)
 {
-	var opt=<?=$rows+1 ?>;
+	var opt=<?php echo $rows+1 ?>;
 	if(opt==2)
 	{
 		if((d.groupopt[0].checked)||(d.groupopt[1].checked)) return true;
@@ -64,26 +72,28 @@ function chkForm(d)
 	}
 }
 </script>
-<? endif ?>
+<?php endif ?>
+
+<?php if($cfg['dhtml']) include("../include/inc_css_a_hilitebu.php"); ?>
 
 </head>
 <body>
 <FONT  SIZE=8 COLOR="#cc6600" FACE="verdana,Arial">
-<a href="javascript:editcafe()"><img src="../img/basket.gif" width=74 height=70 border=0></a> <b><?=$LDCafePrices ?></b></FONT>
+<a href="javascript:editcafe()"><img src="../img/basket.gif" width=74 height=70 border=0></a> <b><?php echo $LDCafePrices ?></b></FONT>
 <hr>
-<form name="selectform" action="cafenews-edit-price-select.php" <? if($rows) print 'onSubmit="return chkForm(this)"'; ?>>
+<form name="selectform" action="cafenews-edit-price-select.php" <?php if($rows) print 'onSubmit="return chkForm(this)"'; ?>>
 <table border=0>
   <tr>
     <td><img src="../img/catr.gif" width=88 height=80 border=0></td>
     <td colspan=2><FONT  SIZE=4 COLOR="#000066" FACE="verdana,Arial">
-<? if ($rows) : ?>
-			<?=$LDMarkGroup ?>
-<? else : ?>
-			<?=$LDCreateGroupPrompt ?>
-<? endif ?>
+<?php if ($rows) : ?>
+			<?php echo $LDMarkGroup ?>
+<?php else : ?>
+			<?php echo $LDCreateGroupPrompt ?>
+<?php endif ?>
 	</td>
   </tr>
-<? if($rows)
+<?php if($rows)
 {
 	print '
   <tr>
@@ -109,21 +119,22 @@ function chkForm(d)
 
     <td>&nbsp;</td>
     <td bgcolor="ccffff" colspan=2><FONT FACE="verdana,Arial"><p><br>
-		<input type="radio" name="groupopt" value="newgroup" <? if (!$rows) print "checked"; ?>> 
-		<a href="#" <? if($rows) print 'onClick="document.selectform.groupopt['.$i.'].checked=true"';?>><?=$LDCreateGroup ?></a><br><p>
+		<input type="radio" name="groupopt" value="newgroup" <?php if (!$rows) print "checked"; ?>> 
+		<a href="#" <?php if($rows) print 'onClick="document.selectform.groupopt['.$i.'].checked=true"';?>><?php echo $LDCreateGroup ?></a><br><p>
   </td>
   </tr>
   <tr>
     <td>&nbsp;</td>
-    <td><p><br>
-		<input type="button" value="<?=$LDBackBut ?>" onClick="window.history.back()">&nbsp;&nbsp;&nbsp;
-        <input type="button" value="<?=$LDCancelBut ?>" onClick="window.location.replace('cafenews.php?sid=<?="$ck_sid&lang=$lang" ?>')"></td>
-    <td align=right><p><br><FONT FACE="verdana,Arial">
-		<input type="submit" value="<?=$LDContinueBut ?>">
+    <td ><FONT FACE="verdana,Arial">
+	<a href="javascript:window.history.back()"><img src="../img/<?php echo $lang ?>/<?php echo $lang ?>_back2.gif" border=0></a>
+	<a href="<?php echo $breakfile ?>"><img src="../img/<?php echo $lang ?>/<?php echo $lang ?>_cancel.gif" border=0></a>
+  </td>
+    <td align=right ><FONT FACE="verdana,Arial">
+<input type="image" src="../img/<?php echo $lang ?>/<?php echo $lang ?>_continue.gif" border=0>
   </td>
   </tr>
 </table>
-<input type="hidden" name="sid" value="<?=$ck_sid ?>">
-<input type="hidden" name="lang" value="<?=$lang ?>">
+<input type="hidden" name="sid" value="<?php echo $sid ?>">
+<input type="hidden" name="lang" value="<?php echo $lang ?>">
 </form></body>
 </html>

@@ -1,19 +1,26 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)||!$ck_lab_user) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_lab.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","lab.php");
+$local_user="ck_lab_user";
+require("../include/inc_front_chain_lang.php");
 
 if(!$patnum) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../req/config-color.php");
+require("../include/inc_config_color.php");
 
 $thisfile="labor_datainput.php";
-$breakfile="labor_data_patient_such.php?sid=$ck_sid&lang=$lang&mode=edit&versand=1&keyword=$patnum";
+$breakfile="labor_data_patient_such.php?sid=$sid&lang=$lang&mode=edit&versand=1&keyword=$patnum";
 
 $fielddata="patnum,name,vorname,gebdatum";
 
-require("../req/labor-param-group.php");
+require("../include/inc_labor_param_group.php");
 
 						
 if($parameterselect=="") $parameterselect=0;
@@ -27,7 +34,7 @@ $dbtargettable="lab_test_data";
 $curdate=date("d.m.Y");
 $curtime=date("H.i");
 
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK) 
 	{
 		if($mode=="save")
@@ -77,7 +84,7 @@ if($link&&$DBLink_OK)
        							{
 									//print $sql." new update <br>";
 								mysql_close($link);
-								header("location:$thisfile?sid=$ck_sid&lang=$lang&saved=1&patnum=$patnum&job_id=$job_id&parameterselect=$parameterselect");
+								header("location:$thisfile?sid=$sid&lang=$lang&saved=1&patnum=$patnum&job_id=$job_id&parameterselect=$parameterselect");
 								}
 								else {print "<p>$sql$LDDbNoUpdate";}
 						} // else create new entry
@@ -115,7 +122,7 @@ if($link&&$DBLink_OK)
        							{
 									//print $sql." new insert <br>";
 									mysql_close($link);
-									header("location:$thisfile?sid=$ck_sid&lang=$lang&saved=1&patnum=$patnum&job_id=$job_id&parameterselect=$parameterselect");
+									header("location:$thisfile?sid=$sid&lang=$lang&saved=1&patnum=$patnum&job_id=$job_id&parameterselect=$parameterselect");
 								}
 								else {print "<p>$sql$LDDbNoSave";}
 						}//end of else
@@ -189,22 +196,22 @@ if($link&&$DBLink_OK)
 function pruf(d)
 {
 	if(!d.job_id.value)
-		{ alert("<?=$LDAlertJobId ?>"); return false;}
+		{ alert("<?php echo $LDAlertJobId ?>"); return false;}
 		else
 		{
 			if(!d.test_date.value)
-			{ alert("<?=$LDAlertTestDate ?>"); return false;}
+			{ alert("<?php echo $LDAlertTestDate ?>"); return false;}
 				else return true;
 		} 
 }
 function chkselect(d)
 {
- 	if(d.parameterselect.selectedIndex==<?=$parameterselect ?>) return false;
+ 	if(d.parameterselect.selectedIndex==<?php echo $parameterselect ?>) return false;
 }
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
@@ -214,8 +221,8 @@ function gethelp(x,s,x1,x2,x3)
 <script language="javascript" src="../js/setdatetime.js">
 </script>
 
-<? 
-require("../req/css-a-hilitebu.php");
+<?php 
+require("../include/inc_css_a_hilitebu.php");
 ?>
 <style type="text/css" name="1">
 .va12_n{font-family:verdana,arial; font-size:12; color:#000099}
@@ -225,18 +232,18 @@ require("../req/css-a-hilitebu.php");
 </HEAD>
 
 <BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?
- if($newid) print ' onLoad="document.datain.test_date.value=\'h\';setDate(document.datain.test_date);" ';
+<?php
+if($newid) print ' onLoad="document.datain.test_date.value=\'h\';setDate(document.datain.test_date);" ';
  if (!$cfg['dhtml']){ print 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
 
 
 <table width=100% border=0 cellspacing=0 cellpadding=0>
 
 <tr>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<? print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<? if($update) print "$LDLabReport - $LDEdit"; else print "$LDNew $LDLabReport"; ?></STRONG></FONT>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" >
+<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php if($update) print "$LDLabReport - $LDEdit"; else print "$LDNew $LDLabReport"; ?></STRONG></FONT>
 </td>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp('lab.php','input','main','<?=$job_id ?>')"><img src="../img/<?="$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?=$breakfile ?>" ><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp('lab.php','input','main','<?php echo $job_id ?>')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
 </tr>
 <tr>
 <td  bgcolor=#dde1ec><p><br>
@@ -244,27 +251,27 @@ require("../req/css-a-hilitebu.php");
 <FONT    SIZE=-1  FACE="Arial">
 
 
-<form method="post" action="<? print $thisfile; ?>" onSubmit="return pruf(this)" name="datain">
+<form method="post" action="<?php print $thisfile; ?>" onSubmit="return pruf(this)" name="datain">
 
 <table border=0>
 <tr>
-<td bgcolor=#ffffff><FONT SIZE=-1  FACE="Arial"><?=$LDCaseNr ?>:
+<td bgcolor=#ffffff><FONT SIZE=-1  FACE="Arial"><?php echo $LDCaseNr ?>:
 </td>
-<td bgcolor=#ffffee><FONT SIZE=-1  FACE="Arial">&nbsp;<? print $patnum; ?>&nbsp;
+<td bgcolor=#ffffee><FONT SIZE=-1  FACE="Arial">&nbsp;<?php print $patnum; ?>&nbsp;
 </td>
 </tr>
 
 <tr>
-<td bgcolor=#ffffff><FONT SIZE=-1  FACE="Arial"><?="$LDLastName, $LDName, $LDBday" ?>:
+<td bgcolor=#ffffff><FONT SIZE=-1  FACE="Arial"><?php echo "$LDLastName, $LDName, $LDBday" ?>:
 </td>
-<td bgcolor=#ffffee><FONT SIZE=-1  FACE="Arial">&nbsp;<b><? print  $lname; ?>, <? print  $fname; ?>&nbsp;&nbsp;<? print  $bday; ?></b>
+<td bgcolor=#ffffee><FONT SIZE=-1  FACE="Arial">&nbsp;<b><?php print  $lname; ?>, <?php print  $fname; ?>&nbsp;&nbsp;<?php print  $bday; ?></b>
 </td>
 </tr>
 <tr>
-<td bgcolor=#ffffff><FONT SIZE=-1  FACE="Arial"><?=$LDJobIdNr ?>:
+<td bgcolor=#ffffff><FONT SIZE=-1  FACE="Arial"><?php echo $LDJobIdNr ?>:
 </td>
 <td  bgcolor=#ffffee ><FONT SIZE=-1  FACE="Arial">&nbsp;
-<? if($saved||$job_id)
+<?php if($saved||$job_id)
 print $job_id.'
 <input type=hidden name=job_id value="'.$job_id.'">';
 else print ' 
@@ -273,17 +280,17 @@ else print '
 </td>
 </tr>
 <tr>
-<td bgcolor=#ffffff><FONT SIZE=-1  FACE="Arial"><?=$LDExamDate ?>
+<td bgcolor=#ffffff><FONT SIZE=-1  FACE="Arial"><?php echo $LDExamDate ?>
 </td>
 <td  bgcolor=#ffffee ><FONT SIZE=-1  FACE="Arial">&nbsp;
-<? if($saved||$zeile[test_date])
+<?php if($saved||$zeile[test_date])
 print $zeile[test_date].'
 <input type=hidden name=test_date value="'.$zeile[test_date].'">'; 
 else print ' 
 <input name="test_date" type="text" size="14" onKeyUp="setDate(this)")>';
 ?>
 </td>
-</tr><? if($newid) 
+</tr><?php if($newid) 
 /*
 print '
 <tr>
@@ -298,7 +305,7 @@ print '
 <table border=0 bgcolor=#ffdddd cellspacing=1 cellpadding=1>
 <tr>
 <td  bgcolor=#ff0000 colspan=2><FONT SIZE=2  FACE="Verdana,Arial" color="#ffffff">
-<b><? print strtr($parametergruppe[$parameterselect],"_","-"); ?></b>
+<b><?php print strtr($parametergruppe[$parameterselect],"_","-"); ?></b>
 </td>
 </tr>
 <tr>
@@ -309,21 +316,21 @@ print '
 
 
 
-<? if($error) : ?>
+<?php if($error) : ?>
 <tr bgcolor=#ffffee>
 <td colspan=4><center>
 <font face=arial color=#7700ff size=4>
-In <font color=red>rot</font> gekennzeichnet<? if ($errornum>1) print "en"; else print "em"; ?>&nbsp;
-Feld<? if ($errornum>1) print "ern"; ?>&nbsp;
-fehl<? if ($errornum>1) print "en"; else print "t eine"; ?>&nbsp;
-Information<? if ($errornum>1) print "en"; ?>!
+In <font color=red>rot</font> gekennzeichnet<?php if ($errornum>1) print "en"; else print "em"; ?>&nbsp;
+Feld<?php if ($errornum>1) print "ern"; ?>&nbsp;
+fehl<?php if ($errornum>1) print "en"; else print "t eine"; ?>&nbsp;
+Information<?php if ($errornum>1) print "en"; ?>!
 </center>
 </td>
 </tr>
-<? endif; ?>
+<?php endif; ?>
 
 
-<? 
+<?php 
 $paramnum=sizeof($parameters);
 
 $pcols=ceil($paramnum/15);
@@ -386,42 +393,42 @@ for ($n=0;$n<$paramnum;$n++)
 </tr>
 <tr>
 <td>
-<input  type="image" src="../img/<?="$lang/$lang" ?>_savedisc.gif" border=0> 
+<input  type="image" src="../img/<?php echo "$lang/$lang" ?>_savedisc.gif" border=0> 
 </td>
 
-<td align=right><a href="<?=$breakfile ?>">
-<? if($saved) print '<img src="../img/'.$lang.'/'.$lang.'_close2.gif" border="0">';
+<td align=right><a href="<?php echo $breakfile ?>">
+<?php if($saved) print '<img src="../img/'.$lang.'/'.$lang.'_close2.gif" border="0">';
 else print '<img src="../img/'.$lang.'/'.$lang.'_cancel.gif" border="0">'; ?>
 </a>
 </td>
 </tr>
 </table>
-<input type=hidden name=parameterselect value=<? print $parameterselect; ?>>
-<input type=hidden name=patnum value="<? print $zeile[patnum]; ?>">
-<input type=hidden name=lastname value="<? print $zeile[name]; ?>">
-<input type=hidden name=firstname value="<? print $zeile[vorname]; ?>">
-<input type=hidden name=bday value="<? print $zeile[gebdatum]; ?>">
-<input type=hidden name=sid value="<? print $ck_sid; ?>">
-<input type=hidden name=lang value="<? print $lang; ?>">
-<input type=hidden name=update value="<? print $update; ?>">
-<input type=hidden name=newid value="<? print $newid; ?>">
+<input type=hidden name=parameterselect value=<?php print $parameterselect; ?>>
+<input type=hidden name=patnum value="<?php print $zeile[patnum]; ?>">
+<input type=hidden name=lastname value="<?php print $zeile[name]; ?>">
+<input type=hidden name=firstname value="<?php print $zeile[vorname]; ?>">
+<input type=hidden name=bday value="<?php print $zeile[gebdatum]; ?>">
+<input type=hidden name=sid value="<?php print $sid; ?>">
+<input type=hidden name=lang value="<?php print $lang; ?>">
+<input type=hidden name=update value="<?php print $update; ?>">
+<input type=hidden name=newid value="<?php print $newid; ?>">
 <input type=hidden name=mode value="save">
 </form>
 
-<form action=<? print $thisfile; ?> method=post onSubmit="return chkselect(this)" name="paramselect">
+<form action=<?php print $thisfile; ?> method=post onSubmit="return chkselect(this)" name="paramselect">
 <table border=0>
 <tr>
-<td colspan=3><FONT SIZE=-1  FACE="Arial"><b><?=$LDSelectParamGroup ?></b>
+<td colspan=3><FONT SIZE=-1  FACE="Arial"><b><?php echo $LDSelectParamGroup ?></b>
 </td>
 </tr>
 
 <tr>
-<td><FONT SIZE=-1  FACE="Arial"><?=$LDParamGroup ?>:
+<td><FONT SIZE=-1  FACE="Arial"><?php echo $LDParamGroup ?>:
 </td>
 
 <td >
 <select name=parameterselect size=1>
-<? for ($i=0;$i<sizeof($parametergruppe);$i++)
+<?php for ($i=0;$i<sizeof($parametergruppe);$i++)
       {
 		print '<option value="'.$i.'"';
 		if($parameterselect==$i) print ' selected';
@@ -433,14 +440,14 @@ else print '<img src="../img/'.$lang.'/'.$lang.'_cancel.gif" border="0">'; ?>
 </td>
 
 <td>
-<input type=hidden name=patnum value="<? print $zeile[patnum]; ?>">
-<input type=hidden name=job_id value="<? print $job_id; ?>">
-<input type=hidden name=sid value="<? print $ck_sid; ?>">
-<input type=hidden name=lang value="<? print $lang; ?>">
-<input type=hidden name=update value="<? print $update; ?>">
-<input type=hidden name=newid value="<? print $newid; ?>">
+<input type=hidden name=patnum value="<?php print $zeile[patnum]; ?>">
+<input type=hidden name=job_id value="<?php print $job_id; ?>">
+<input type=hidden name=sid value="<?php print $sid; ?>">
+<input type=hidden name=lang value="<?php print $lang; ?>">
+<input type=hidden name=update value="<?php print $update; ?>">
+<input type=hidden name=newid value="<?php print $newid; ?>">
 
-<FONT SIZE=-1  FACE="Arial">&nbsp;<input  type="image" src="../img/<?="$lang/$lang" ?>_auswahl2.gif" border=0>
+<FONT SIZE=-1  FACE="Arial">&nbsp;<input  type="image" src="../img/<?php echo "$lang/$lang" ?>_auswahl2.gif" border=0>
 </td>
 </tr>
 </tr>
@@ -459,27 +466,27 @@ else print '<img src="../img/'.$lang.'/'.$lang.'_cancel.gif" border="0">'; ?>
 <table border=0 cellpadding=5 cellspacing=2>
 <tr>
 <td valign=top><a href="Javascript:gethelp('lab.php','input','param')"><img src="../img/small_help.gif" border="0"></a></td>
-<td><FONT SIZE=1  FACE="Arial"><?=$LDParamNoSee ?></td>
+<td><FONT SIZE=1  FACE="Arial"><?php echo $LDParamNoSee ?></td>
 </tr>
 <tr>
 <td valign=top><a href="Javascript:gethelp('lab.php','input','few')"><img src="../img/small_help.gif" border="0"></a></td>
-<td><FONT SIZE=1  FACE="Arial"><?=$LDOnlyPair ?></td>
+<td><FONT SIZE=1  FACE="Arial"><?php echo $LDOnlyPair ?></td>
 </tr>
 <tr>
 <td valign=top><a href="Javascript:gethelp('lab.php','input','save')"><img src="../img/small_help.gif" border="0"></a></td>
-<td><FONT SIZE=1  FACE="Arial"><?=$LDHow2Save ?></td>
+<td><FONT SIZE=1  FACE="Arial"><?php echo $LDHow2Save ?></td>
 </tr>
 <tr>
 <td valign=top><a href="Javascript:gethelp('lab.php','input','correct')"><img src="../img/small_help.gif" border="0"></a></td>
-<td><FONT SIZE=1  FACE="Arial"><?=$LDWrongValueHow ?></td>
+<td><FONT SIZE=1  FACE="Arial"><?php echo $LDWrongValueHow ?></td>
 </tr>
 <tr>
 <td valign=top><a href="Javascript:gethelp('lab.php','input','note')"><img src="../img/small_help.gif" border="0"></a></td>
-<td><FONT SIZE=1  FACE="Arial"><?=$LDVal2Note ?></td>
+<td><FONT SIZE=1  FACE="Arial"><?php echo $LDVal2Note ?></td>
 </tr>
 <tr>
 <td valign=top><a href="Javascript:gethelp('lab.php','input','done')"><img src="../img/small_help.gif" border="0"></a></td>
-<td><FONT SIZE=1  FACE="Arial"><?=$LDImDone ?></td>
+<td><FONT SIZE=1  FACE="Arial"><?php echo $LDImDone ?></td>
 </tr>
 </table>
 
@@ -490,7 +497,7 @@ else print '<img src="../img/'.$lang.'/'.$lang.'_cancel.gif" border="0">'; ?>
 
 <hr>
 <?php
-require("../language/$lang/".$lang."_copyrite.htm");
+require("../language/$lang/".$lang."_copyrite.php");
  ?>
 
 </BODY>

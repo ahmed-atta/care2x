@@ -1,7 +1,7 @@
-<? 
-if(($sid==NULL)||($sid!=$ck_sid)) { header("location:invalid-access-warning.php"); exit;}
+<?php 
+if(($sid==NULL)||($sid!=$$ck_sid_buffer)) { header("location:invalid-access-warning.php"); exit;}
 
-require("../req/config-color.php");
+require("../include/inc_config_color.php");
 
 
 
@@ -15,9 +15,9 @@ $fileforward="edv-datenbank.php";
 $thisfile="edv-datenbank-pass.php";
 $breakfile="edv.php";
 
-if($ck_login_logged&&$ck_login_userid)
+if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]&&$HTTP_COOKIE_VARS['ck_login_userid'.$sid])
 {
- header("location: passcheck-intern.php?sid=$ck_sid&lang=$lang&allowedarea=$allowedarea&fileforward=$fileforward&retfilepath=$thisfile");
+ header("location: passcheck-intern.php?sid=$sid&lang=$lang&allowedarea=$allowedarea&fileforward=$fileforward&retfilepath=$thisfile");
  exit;
 }
 //setcookie(ck_edv_db_user,"");
@@ -64,7 +64,7 @@ if ($versand=="Abschicken")
 										{				
 										setcookie(ck_edv_db_user,$zeile[mahopass_name]);	
 										logentry($zeile[mahopass_name],"*","IP:".$REMOTE_ADDR."EDV DB verwalten Access OK'd",$thisfile,$fileforward);
-										header("Location: $fileforward?sid=$ck_sid");
+										header("Location: $fileforward?sid=$$ck_sid_buffer");
 										exit;
 										}else {$passtag=2;};
 									}else $passtag=3;
@@ -88,7 +88,7 @@ if ($versand=="Abschicken")
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
  <TITLE>EDV - Datenbank Verwalten</TITLE>
  
- <? if($cfg['dhtml'])
+ <?php if($cfg['dhtml'])
 { print'
 	<script language="javascript" src="../js/hilitebu.js">
 	</script>
@@ -106,7 +106,7 @@ if ($versand=="Abschicken")
  
 </HEAD>
 
-<BODY  <? if (!$nofocus) print 'onLoad="document.passwindow.userid.focus()"'; print  ' bgcolor='.$cfg['body_bgcolor']; 
+<BODY  <?php if (!$nofocus) print 'onLoad="document.passwindow.userid.focus()"'; print  ' bgcolor='.$cfg['body_bgcolor']; 
  if (!$cfg['dhtml']){ print ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } 
 ?>>
 
@@ -118,7 +118,7 @@ if ($versand=="Abschicken")
 <p>
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
 <tr>
-<td colspan=3><img src=../img/einga-b.gif border=0  width=130 height=25><!-- <a href="op-pflege-logbuch-such-pass.php?sid=<?print $ck_sid;?>"><img src="../img/such-gray.gif" border=0 width=130 height=25 <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="op-pflege-logbuch-arch-pass.php?sid=<?print $ck_sid;?>"><img src="../img/arch-gray.gif" border=0 width=130 height=25 <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a> --></td>
+<td colspan=3><img src=../img/einga-b.gif border=0  width=130 height=25><!-- <a href="op-pflege-logbuch-such-pass.php?sid=<?php echo $$ck_sid_buffer;?>"><img src="../img/such-gray.gif" border=0 width=130 height=25 <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="op-pflege-logbuch-arch-pass.php?sid=<?php echo $$ck_sid_buffer;?>"><img src="../img/arch-gray.gif" border=0 width=130 height=25 <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a> --></td>
 </tr>
 
 <tr>
@@ -136,7 +136,7 @@ if ($versand=="Abschicken")
 <center>
 
 
-<? if ((($userid!=NULL)||($keyword!=NULL))&&($passtag!=NULL)) 
+<?php if ((($userid!=NULL)||($keyword!=NULL))&&($passtag!=NULL)) 
 {
 print '<FONT  COLOR="red"  SIZE=+2  FACE="Arial"><STRONG>';
 
@@ -160,7 +160,7 @@ print '</STRONG></FONT><P>';
 
 <table  border=0 cellpadding=0 cellspacing=0>
 <tr>
-<? if(!$passtag) print'
+<?php if(!$passtag) print'
 <td>
 
 <img src="../img/ned2r.gif" border=0 width=100 height=138 >
@@ -177,7 +177,7 @@ print '</STRONG></FONT><P>';
 <td>
 
 <p>
-<FORM action="<? print $thisfile; ?>" method="post" name="passwindow">
+<FORM action="<?php print $thisfile; ?>" method="post" name="passwindow">
 
 <font color=maroon size=3>
 <b>Passwort ist erforderlich!</b></font><p>
@@ -187,13 +187,13 @@ Benutzername eingeben:<br></font>
 <font face="Arial,Verdana"  color="#000000" size=-1>Passwort eingeben:</font><br>
 <INPUT type="password" name="keyword" size="14" maxlength="25"> 
 <input type="hidden" name="versand" value="Abschicken">
-<input type="hidden" name="sid" value="<? print $ck_sid; ?>">
+<input type="hidden" name="sid" value="<?php print $sid; ?>">
 <input type="image" src="../img/abschic.gif" border=0 width=110 height=24>
 </font>
 </FORM>
 
-<FORM action="<? print $breakfile;?>"  name=cancelbut>
-<input type="hidden" name="sid" value="<? print $ck_sid; ?>">
+<FORM action="<?php print $breakfile;?>"  name=cancelbut>
+<input type="hidden" name="sid" value="<?php print $sid; ?>">
 <input type="image" src="../img/abbrech.gif" border=0 width=103 height=24>
                                                        </font></FORM>
 
@@ -225,13 +225,13 @@ Benutzername eingeben:<br></font>
 </table>        
 
 <p>
-<img src="../img/small_help.gif"> <a href="ucons.php">Einführung in die SQL Datenbank.</a><br>
-<img src="../img/small_help.gif"> <a href="ucons.php">Wie mache ich was hier?</a><br>
+<img src="../img/small_help.gif"> <a href="ucons.php<?php echo "?lang=$lang" ?>">Einführung in die SQL Datenbank.</a><br>
+<img src="../img/small_help.gif"> <a href="ucons.php<?php echo "?lang=$lang" ?>">Wie mache ich was hier?</a><br>
 <HR>
 <p>
 
 <?php
-require("../language/$lang/".$lang."_copyrite.htm");
+require("../language/$lang/".$lang."_copyrite.php");
  ?>
 
 

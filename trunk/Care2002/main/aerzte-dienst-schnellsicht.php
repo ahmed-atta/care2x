@@ -1,5 +1,4 @@
-<?
-
+<?php
 $datum=strftime("%d.%m.%Y");
 $zeit=strftime("%H.%M");
 $toggler=0;
@@ -29,7 +28,7 @@ $stationen=array("M4A","M4B","M4C","M4D","M5A","M5B","M5C","M5D","M6A",
   var urlholder;
 
   function getinfo(patientID){
-	urlholder="pflege-station.php?route=validroute&patient=" + patientID + "&user=<? print $aufnahme_user.'"' ?>;
+	urlholder="pflege-station.php?route=validroute&patient=" + patientID + "&user=<?php print $aufnahme_user.'"' ?>;
 	patientwin=window.open(urlholder,patientID,"width=600,height=400,menubar=no,resizable=yes,scrollbars=yes");
 	}
 -->
@@ -43,14 +42,13 @@ $stationen=array("M4A","M4B","M4C","M4D","M5A","M5B","M5C","M5D","M6A",
 <table width=100% border=1 cellpadding="5">
 <tr>
 <td bgcolor="navy">
-<FONT  COLOR="white"  SIZE=+3  FACE="Arial"><STRONG>Dientshabende Ärzte - <? print $datum; ?></STRONG></FONT>
+<FONT  COLOR="white"  SIZE=+3  FACE="Arial"><STRONG>Dientshabende Ärzte - <?php print $datum; ?></STRONG></FONT>
 </td>
 </tr>
 <tr>
 <td >
  
-<?
-
+<?php
 print '<table  cellpadding="2" cellspacing=0 border="0" >';
 
 print '<tr bgcolor="aqua" align=center><td><font face="verdana,arial" size="2" ><b>Zimmer &nbsp;&nbsp;</b></td>';

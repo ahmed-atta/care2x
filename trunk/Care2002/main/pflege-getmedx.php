@@ -1,14 +1,21 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)||!$ck_pflege_user) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_nursing.php");
-require("../req/config-color.php"); // load color preferences
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","nursing.php");
+$local_user="ck_pflege_user";
+require("../include/inc_front_chain_lang.php");
+require("../include/inc_config_color.php"); // load color preferences
 
 $thisfile="pflege-getmedx.php";
 
-if(!$encoder) $encoder=$ck_pflege_user;
+if(!isset($encoder)||empty($encoder)) $encoder=$HTTP_COOKIE_VARS[$local_user.$sid];
 
 switch($winid)
 {
@@ -20,7 +27,7 @@ switch($winid)
 
 $dbtable="nursing_station_patients_curve";
 
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK) 
 	{	
 	// get orig data
@@ -68,7 +75,7 @@ if($link&&$DBLink_OK)
        							{
 									//print $sql." new update <br>";
 									mysql_close($link);
-									header("location:$thisfile?sid=$ck_sid&lang=$lang&edit=$edit&saved=1&pn=$pn&station=$station&winid=$winid&yr=$yr&mo=$mo&dy=$dy&dyidx=$dyidx&dystart=$dystart&dyname=$dyname");
+									header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=1&pn=$pn&station=$station&winid=$winid&yr=$yr&mo=$mo&dy=$dy&dyidx=$dyidx&dystart=$dystart&dyname=$dyname");
 								}
 								else {print "<p>$sql$LDDbNoRead";}
 						} // else create new entry
@@ -100,7 +107,7 @@ if($link&&$DBLink_OK)
        							{
 									//print $sql." new insert <br>";
 									mysql_close($link);
-									header("location:$thisfile?sid=$ck_sid&lang=$lang&edit=$edit&saved=1&pn=$pn&station=$station&winid=$winid&yr=$yr&mo=$mo&dy=$dy&dyidx=$dyidx&dystart=$dystart&dyname=$dyname");
+									header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=1&pn=$pn&station=$station&winid=$winid&yr=$yr&mo=$mo&dy=$dy&dyidx=$dyidx&dystart=$dystart&dyname=$dyname");
 								}
 								else {print "<p>$sql$LDDbNoSave";}
 						}//end of else
@@ -137,9 +144,9 @@ if($link&&$DBLink_OK)
 <HTML>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<TITLE><?="$title &LDInputWin" ?></TITLE>
-<?
-require("../req/css-a-hilitebu.php");
+<TITLE><?php echo "$title &LDInputWin" ?></TITLE>
+<?php
+require("../include/inc_css_a_hilitebu.php");
 ?>
 
 <script language="javascript">
@@ -153,12 +160,12 @@ require("../req/css-a-hilitebu.php");
 	else return true
 	}
  function parentrefresh(){
-	window.opener.location.href="pflege-station-patientdaten-kurve.php?sid=<?="$ck_sid&lang=$lang&edit=$edit&station=$station&pn=$pn&tag=$dystart&monat=$mo&jahr=$yr&tagname=$dyname" ?>&nofocus=1";
+	window.opener.location.href="pflege-station-patientdaten-kurve.php?sid=<?php echo "$sid&lang=$lang&edit=$edit&station=$station&pn=$pn&tag=$dystart&monat=$mo&jahr=$yr&tagname=$dyname" ?>&nofocus=1";
 	}
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
@@ -175,26 +182,25 @@ div.box { border: double; border-width: thin; width: 100%; border-color: black; 
 
 </HEAD>
 <BODY  bgcolor="#dfdfdf" TEXT="#000000" LINK="#0000FF" VLINK="#800080"    topmargin="0" marginheight="0" 
-onLoad="<? if($saved) print "parentrefresh();"; ?>if (window.focus) window.focus(); window.focus();" >
+onLoad="<?php if($saved) print "parentrefresh();"; ?>if (window.focus) window.focus(); window.focus();" >
 <table border=0 width="100%">
   <tr>
     <td><b><font face=verdana,arial size=5 color=maroon>
-<? 
+<?php 
 	print $title.'<br><font size=4>';	
 ?>
 	</font></b>
 	</td>
-    <td align="right" valign="top"><a href="javascript:gethelp('nursing_feverchart_xp.php','<?=$element ?>','','','<?=$title ?>')"><img src="../img/<?="$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:window.close()" ><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr>
+    <td align="right" valign="top"><a href="javascript:gethelp('nursing_feverchart_xp.php','<?php echo $element ?>','','','<?php echo $title ?>')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:window.close()" ><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr>
 </td>
   </tr>
 </table>
 
 
 <font face=verdana,arial size=3 >
-<form name="infoform" action="<?=$thisfile ?>" method="post" onSubmit="return pruf(this)">
+<form name="infoform" action="<?php echo $thisfile ?>" method="post" onSubmit="return pruf(this)">
 <font face=verdana,arial size=2 >
-<?
-
+<?php
 $mdc=explode("~",$result[$element]);
 array_unique($mdc);
 
@@ -223,7 +229,7 @@ if(!strchr($mdc[(sizeof($mdc)-1)],"|"))
     <td>
 <table border=0 width=100% cellspacing=1>
   <tr>
-    <td  align=center bgcolor="#cfcfcf" class="v13"><?="$LDMedication - $LDDosage" ?></td>
+    <td  align=center bgcolor="#cfcfcf" class="v13"><?php echo "$LDMedication - $LDDosage" ?></td>
   </tr>
   <tr>
     <td align=center bgcolor="#ffffff">
@@ -231,10 +237,10 @@ if(!strchr($mdc[(sizeof($mdc)-1)],"|"))
 		<table border=0 border=0 cellspacing=0 cellpadding=0>
 			<tr>
    			 <td  align=center class="v12"></td>
-   			 <td  align=center class="v12"><?=$LDDosage ?></td>
-   			 <td  align=center class="v12"><?=$LDColorMark ?>:</td>
+   			 <td  align=center class="v12"><?php echo $LDDosage ?></td>
+   			 <td  align=center class="v12"><?php echo $LDColorMark ?>:</td>
 		  </tr>
-			<? 
+			<?php 
 			
 			for($i=0;$i<$maxelement;$i++)
 			{
@@ -268,15 +274,15 @@ if(!strchr($mdc[(sizeof($mdc)-1)],"|"))
  			?>
 			<tr>
    			 <td  class="v12" colspan=2>
-			 <?=$LDNurse ?>:<br>
-			 <input type="text" name="encoder" size=25 maxlength=30 value="<?=$encoder ?>">
+			 <?php echo $LDNurse ?>:<br>
+			 <input type="text" name="encoder" size=25 maxlength=30 value="<?php echo $encoder ?>">
 			 </td>
-   			 <td   class="v12"><?=$LDLegend ?>:<br>
-			 <span style="background:#ffffff"><font color="#003300"> <?=$LDNormal ?> </span><br>
-			 <span style="background:#00ff00"><font color="#003300"> <?=$LDAntibiotic ?> </span><br>
-			 <span style="background:#ffff00"><font color="#666600"> <?=$LDDialytic ?> </span><br>
-			 <span style="background:#00ccff"><font color="#000033"> <?=$LDHemolytic ?> </span><br>
-			 <span style="background:#ff0000"><font color="#330000"> <?=$LDIntravenous ?> </span><br></td>
+   			 <td   class="v12"><?php echo $LDLegend ?>:<br>
+			 <span style="background:#ffffff"><font color="#003300"> <?php echo $LDNormal ?> </span><br>
+			 <span style="background:#00ff00"><font color="#003300"> <?php echo $LDAntibiotic ?> </span><br>
+			 <span style="background:#ffff00"><font color="#666600"> <?php echo $LDDialytic ?> </span><br>
+			 <span style="background:#00ccff"><font color="#000033"> <?php echo $LDHemolytic ?> </span><br>
+			 <span style="background:#ff0000"><font color="#330000"> <?php echo $LDIntravenous ?> </span><br></td>
 		  </tr>
 
 		</table>
@@ -290,34 +296,34 @@ if(!strchr($mdc[(sizeof($mdc)-1)],"|"))
 </table>
 
 
-<input type="hidden" name="sid" value="<?=$ck_sid ?>">
-<input type="hidden" name="lang" value="<?=$lang ?>">
-<input type="hidden" name="winid" value="<?=$winid ?>">
-<input type="hidden" name="station" value="<?=$station ?>">
-<input type="hidden" name="yr" value="<?=$yr ?>">
-<input type="hidden" name="mo" value="<?=$mo ?>">
-<input type="hidden" name="dy" value="<?=$dy ?>">
-<input type="hidden" name="dyidx" value="<?=$dyidx ?>">
-<input type="hidden" name="dystart" value="<?=$dystart ?>">
-<input type="hidden" name="dyname" value="<?=$dyname ?>">
-<input type="hidden" name="pn" value="<?=$pn ?>">
-<input type="hidden" name="edit" value="<?=$edit ?>">
-<input type="hidden" name="maxelement" value="<?=$maxelement ?>">
-<input type="hidden" name="enc" value="<?=strtr($enc," ","+") ?>">
+<input type="hidden" name="sid" value="<?php echo $sid ?>">
+<input type="hidden" name="lang" value="<?php echo $lang ?>">
+<input type="hidden" name="winid" value="<?php echo $winid ?>">
+<input type="hidden" name="station" value="<?php echo $station ?>">
+<input type="hidden" name="yr" value="<?php echo $yr ?>">
+<input type="hidden" name="mo" value="<?php echo $mo ?>">
+<input type="hidden" name="dy" value="<?php echo $dy ?>">
+<input type="hidden" name="dyidx" value="<?php echo $dyidx ?>">
+<input type="hidden" name="dystart" value="<?php echo $dystart ?>">
+<input type="hidden" name="dyname" value="<?php echo $dyname ?>">
+<input type="hidden" name="pn" value="<?php echo $pn ?>">
+<input type="hidden" name="edit" value="<?php echo $edit ?>">
+<input type="hidden" name="maxelement" value="<?php echo $maxelement ?>">
+<input type="hidden" name="enc" value="<?php echo strtr($enc," ","+") ?>">
 <input type="hidden" name="mode" value="save">
 
 </form>
 <p>
-<a href="javascript:document.infoform.submit();"><img src="../img/<?="$lang/$lang" ?>_savedisc.gif" border="0" alt="<?=$LDSave ?>"></a>
+<a href="javascript:document.infoform.submit();"><img src="../img/<?php echo "$lang/$lang" ?>_savedisc.gif" border="0" alt="<?php echo $LDSave ?>"></a>
 &nbsp;&nbsp;
-<a href="javascript:resetinput()"><img src="../img/<?="$lang/$lang" ?>_reset.gif" border="0" alt="<?=$LDReset ?>"></a>
+<a href="javascript:resetinput()"><img src="../img/<?php echo "$lang/$lang" ?>_reset.gif" border="0" alt="<?php echo $LDReset ?>"></a>
 &nbsp;&nbsp;
-<? if($saved)  : ?>
-<a href="javascript:window.close()"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border="0" alt="<?=$LDClose ?>"></a>
-<? else : ?>
-<a href="javascript:window.close()"><img src="../img/<?="$lang/$lang" ?>_cancel.gif" border="0" alt="<?=$LDClose ?>">
+<?php if($saved)  : ?>
+<a href="javascript:window.close()"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border="0" alt="<?php echo $LDClose ?>"></a>
+<?php else : ?>
+<a href="javascript:window.close()"><img src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" border="0" alt="<?php echo $LDClose ?>">
 </a>
-<? endif ?>
+<?php endif ?>
 
 </BODY>
 

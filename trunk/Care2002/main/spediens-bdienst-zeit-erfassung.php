@@ -1,26 +1,33 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_or.php");
-require("../req/config-color.php"); // load color preferences
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","or.php");
+define("NO_2LEVEL_CHK",1);
+require("../include/inc_front_chain_lang.php");
+require("../include/inc_config_color.php"); // load color preferences
 
-if($pyear=="") $pyear=date(Y);
-if($pmonth=="") $pmonth=date(m);
-if($pday=="") $pday=date(d);
+if(!isset($pyear)||empty($pyear)) $pyear=date(Y);
+if(!isset($pmonth)||empty($pmonth)) $pmonth=date(m);
+if(!isset($pday)||empty($pday)) $pday=date(d);
 
 $opabt=get_meta_tags("../global_conf/$lang/op_tag_dept.pid");
 
 $dbtable="duty_performance_report";
 $thisfile="spediens-bdienst-zeit-erfassung.php";
-if($retpath=="spec") $breakfile="spediens.php?sid=$ck_sid&lang=$lang";
- else $breakfile="op-doku.php?sid=$ck_sid&lang=$lang";
+if($retpath=="spec") $breakfile="spediens.php?sid=$sid&lang=$lang";
+ else $breakfile="op-doku.php?sid=$sid&lang=$lang";
 
 /********************************* Resolve the department and op room ***********************/
-require("../req/resolve_opr_dept.php");
+require("../include/inc_resolve_opr_dept.php");
 
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK) 
 	{	
 	// get orig data
@@ -68,7 +75,7 @@ if($link&&$DBLink_OK)
        							{
 									//print $sql." new update <br>";
 									//mysql_close($link);
-									//header("location:$thisfile?sid=$ck_sid&saved=1&dept=$dept&pmonth=$pmonth&pyear=$pyear");
+									//header("location:$thisfile?sid=$sid&saved=1&dept=$dept&pmonth=$pmonth&pyear=$pyear");
 								}
 								else
 								{
@@ -119,14 +126,14 @@ if($link&&$DBLink_OK)
        								{
 										//print $sql." new insert <br>";
 										//mysql_close($link);
-										//header("location:$thisfile?sid=$ck_sid&saved=1&dept=$dept&pmonth=$pmonth&pyear=$pyear&retpath=$retpath&ipath=$ipath");
+										//header("location:$thisfile?sid=$sid&saved=1&dept=$dept&pmonth=$pmonth&pyear=$pyear&retpath=$retpath&ipath=$ipath");
 									}
 									else print "<p>".$sql."<p>$LDDbNoSave"; 
 								 } // end of if
 							}// end of else	
 					  } // end of if $$tg
 				}// end of for
-			header("location:$thisfile?sid=$ck_sid&lang=$lang&saved=1&dept=$dept&pmonth=$pmonth&pyear=$pyear&pday=$pday&retpath=$retpath");
+			header("location:$thisfile?sid=$sid&lang=$lang&saved=1&dept=$dept&pmonth=$pmonth&pyear=$pyear&pday=$pday&retpath=$retpath");
 		 }// end of if(mode==save)
 		 else
 		 {
@@ -182,8 +189,8 @@ if($link&&$DBLink_OK)
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 
-<? 
-require("../req/css-a-hilitebu.php");
+<?php 
+require("../include/inc_css_a_hilitebu.php");
 ?>
 
 <script language="javascript">
@@ -199,22 +206,22 @@ newdataflag=1;
 eval("document.reportform.tag"+d+".value=1");
 }
 
-<?
+<?php
 switch($retpath)
 {
-	case "op": $rettarget="op-doku.php?sid=$ck_sid"; break;
-	case "spec": $rettarget="spediens.php?sid=$ck_sid"; break;
-	default: $rettarget="op-doku.php?sid=$ck_sid"; break;
+	case "op": $rettarget="op-doku.php?sid=$sid"; break;
+	case "spec": $rettarget="spediens.php?sid=$sid"; break;
+	default: $rettarget="op-doku.php?sid=$sid"; break;
 }
 ?>
 
 function closeifok()
 { 
 	if (newdataflag==0)
-	{ window.location.href="<?=$breakfile ?>";} 
+	{ window.location.href="<?php echo $breakfile ?>";} 
 	else
 	{
-		 if(confirm("<?=$LDAlertNotSavedYet ?>"))	{ window.document.reportform.submit();}
+		 if(confirm("<?php echo $LDAlertNotSavedYet ?>"))	{ window.document.reportform.submit();}
 	}
 }
 
@@ -363,7 +370,7 @@ function isgdatum(val,idx)
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
@@ -380,21 +387,21 @@ function gethelp(x,s,x1,x2,x3)
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0" >
 <tr valign=top>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>"  height="35"><FONT  COLOR="<? print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG>
- &nbsp;<?="$LDOnCallDuty $opabt[$dept]"; ?></STRONG></FONT></td>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();"><img src="../img/<?="$lang/$lang" ?>_back2.gif" border=0 width=110 height=24 align="absmiddle" style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="javascript:gethelp('op_duty.php','dutydoc','<?=$rows ?>')"><img src="../img/<?="$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 align="absmiddle" style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="<?=$breakfile ?>"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 align="absmiddle" style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>"  height="35"><FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG>
+ &nbsp;<?php echo "$LDOnCallDuty ".$opabt['$dept']; ?></STRONG></FONT></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();"><img src="../img/<?php echo "$lang/$lang" ?>_back2.gif" border=0 width=110 height=24 align="absmiddle" style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="javascript:gethelp('op_duty.php','dutydoc','<?php echo $rows ?>')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 align="absmiddle" style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="<?php echo $breakfile ?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 align="absmiddle" style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a></td>
 </tr>
 <tr>
 <td bgcolor=#cde1ec valign=top colspan=2><p>
 
 
-<form name="reportform" method="post" action="<?=$thisfile ?>">
+<form name="reportform" method="post" action="<?php echo $thisfile ?>">
 
 <table width=100% border=0 cellspacing="0" cellpadding=3>
 
 <tr  bgcolor="#ffffdd">
 
-<? 
+<?php 
 
 for ($i=0;$i<sizeof($LDDutyElements);$i++)
 	{
@@ -406,7 +413,7 @@ for ($i=0;$i<sizeof($LDDutyElements);$i++)
 
 
 
-<?
+<?php
 $entries=sizeof($content)+2; $toggle=0;
 
 for ($i=0;$i<$entries;$i++)
@@ -431,31 +438,31 @@ print '</FONT>
 </td>
 <td valign=top>
 	<FONT    SIZE=-1  FACE="Arial">
-	<input type=text name="aname'.$i.'" value="'.$content[$i][a_name].'" size=20 width=20 onKeyUp=newdata(\''.$i.'\') >
+	<input type=text name="aname'.$i.'" value="'.$content[$i]['a_name'].'" size=20 width=20 onKeyUp=newdata(\''.$i.'\') >
 	</FONT>
 </td>
 <td valign=top>
 	<FONT    SIZE=-1  FACE="Arial">
-	<input type=text name="avon'.$i.'" value="'.$content[$i][a_stime].'" size=5 maxlength=5 onKeyUp="isnum(this.value,this.name);newdata(\''.$i.'\');">
+	<input type=text name="avon'.$i.'" value="'.$content[$i]['a_stime'].'" size=5 maxlength=5 onKeyUp="isnum(this.value,this.name);newdata(\''.$i.'\');">
 	</FONT>
 </td>
 <td valign=top>
 	<FONT    SIZE=-1  FACE="Arial">
-	<input type=text name="abis'.$i.'" value="'.$content[$i][a_etime].'" size=5 maxlength=5  onKeyUp="isnum(this.value,this.name);newdata(\''.$i.'\');">
+	<input type=text name="abis'.$i.'" value="'.$content[$i]['a_etime'].'" size=5 maxlength=5  onKeyUp="isnum(this.value,this.name);newdata(\''.$i.'\');">
 	</FONT>
 </td>
 <td rowspan=2 valign=top>
 	<FONT    SIZE=-1  FACE="Arial">
 	<input type=text name="opsaal'.$i.'" size=3 value="';
 	
-if($content[$i][op_room]) print $content[$i][op_room]; else print $saal;
+if($content[$i]['op_room']) print $content[$i]['op_room']; else print $saal;
 
 print '" onKeyUp=newdata(\''.$i.'\')>
 </FONT>
 </td>
 <td  rowspan="2">
 	<FONT    SIZE=-1  FACE="Arial">
-	<textarea  name="diagnosis'.$i.'" cols="30" rows="2" onKeyUp=newdata(\''.$i.'\')>'.$content[$i][diag_therapy].'</textarea>
+	<textarea  name="diagnosis'.$i.'" cols="30" rows="2" onKeyUp=newdata(\''.$i.'\')>'.$content[$i]['diag_therapy'].'</textarea>
 	</FONT>
 </td>
 </tr>
@@ -471,20 +478,20 @@ print '>
 </td>
 <td valign=top>
 	<FONT    SIZE=-1  FACE="Arial">
-	<input type=text name="rname'.$i.'" value="'.$content[$i][r_name].'" size=20 width=20 onKeyUp=newdata(\''.$i.'\')>
+	<input type=text name="rname'.$i.'" value="'.$content[$i]['r_name'].'" size=20 width=20 onKeyUp=newdata(\''.$i.'\')>
 	</FONT>
 </td>
 <td valign=top>
 	<FONT    SIZE=-1  FACE="Arial">
-	<input type=text name="rvon'.$i.'" value="'.$content[$i][r_stime].'" size=5  maxlength=5 onKeyUp="isnum(this.value,this.name);newdata(\''.$i.'\');">
+	<input type=text name="rvon'.$i.'" value="'.$content[$i]['r_stime'].'" size=5  maxlength=5 onKeyUp="isnum(this.value,this.name);newdata(\''.$i.'\');">
 	</FONT>
 </td>
 <td valign=top>
 	<FONT    SIZE=-1  FACE="Arial">
-	<input type=text name="rbis'.$i.'" value="'.$content[$i][r_etime].'" size=5  maxlength=5 onKeyUp="isnum(this.value,this.name);newdata(\''.$i.'\');"> 
+	<input type=text name="rbis'.$i.'" value="'.$content[$i]['r_etime'].'" size=5  maxlength=5 onKeyUp="isnum(this.value,this.name);newdata(\''.$i.'\');"> 
 	</FONT>
-	<input type="hidden" name="tid'.$i.'" value="'.$content[$i][tid].'">
-	<input type="hidden" name="enc'.$i.'" value="'.$content[$i][encoding].'">
+	<input type="hidden" name="tid'.$i.'" value="'.$content[$i]['tid'].'">
+	<input type="hidden" name="enc'.$i.'" value="'.$content[$i]['encoding'].'">
 	<input type="hidden" name="tag'.$i.'" value="';
 if($content[$i][tid]) print '1';
 print '">
@@ -505,11 +512,11 @@ print '">
 <tr>
 <td>
 <FONT    SIZE=-1  FACE="Arial">
-<?=$LDStandbyPerson ?>:  <input type=text name="a_enc" size=20>
+<?php echo $LDStandbyPerson ?>:  <input type=text name="a_enc" size=30 value="<?php if(isset($a_enc)) echo $a_enc; else echo $HTTP_COOKIE_VARS['ck_login_username']; ?>">
 </td>
 <td>
 <FONT    SIZE=-1  FACE="Arial">
-&nbsp; <?=$LDOnCallPerson ?>:  <input type=text name="r_enc" size=20>
+&nbsp; <?php echo $LDOnCallPerson ?>:  <input type=text name="r_enc" size=30 value="<?php if(isset($r_enc)) echo $r_enc; ?>">
 </td>
 <tr>
 <td colspan="2">&nbsp;
@@ -517,23 +524,23 @@ print '">
 </tr>
 <tr>
 <td valign="top">
-<input type="hidden" name="maxelement" value="<?=$entries ?>">
-<input type="hidden" name="dept" value="<?=$dept ?>">
-<input type="hidden" name="sid" value="<?=$ck_sid ?>">
-<input type="hidden" name="lang" value="<?=$lang ?>">
-<input type="hidden" name="pyear" value="<?=$pyear ?>">
-<input type="hidden" name="pmonth" value="<?=$pmonth ?>">
-<input type="hidden" name="pday" value="<?=$pday ?>">
-<input type="hidden" name="encoder" value="<?=$encoder ?>">
-<input type="hidden" name="retpath" value="<?=$retpath ?>">
+<input type="hidden" name="maxelement" value="<?php echo $entries ?>">
+<input type="hidden" name="dept" value="<?php echo $dept ?>">
+<input type="hidden" name="sid" value="<?php echo $sid ?>">
+<input type="hidden" name="lang" value="<?php echo $lang ?>">
+<input type="hidden" name="pyear" value="<?php echo $pyear ?>">
+<input type="hidden" name="pmonth" value="<?php echo $pmonth ?>">
+<input type="hidden" name="pday" value="<?php echo $pday ?>">
+<input type="hidden" name="encoder" value="<?php echo $encoder ?>">
+<input type="hidden" name="retpath" value="<?php echo $retpath ?>">
 <input type="hidden" name="mode" value="save">
-<input type=submit value="<?=$LDSave ?>">  
-<input type=reset value="<?=$LDReset ?>" onClick=winreset()>
+<input type=submit value="<?php echo $LDSave ?>">  
+<input type=reset value="<?php echo $LDReset ?>" onClick=winreset()>
 </td>
 <td align="right">
 
-<INPUT TYPE="BUTTON" VALUE="<?=$LDPrint ?>" ONCLICK="if (window.print) {window.print();} else {window.alert('<?=$LDAlertNoPrinter ?>');}">
-&nbsp;&nbsp;<a href="javascript:closeifok()"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 align=absmiddle></a>
+<INPUT TYPE="BUTTON" VALUE="<?php echo $LDPrint ?>" ONCLICK="if (window.print) {window.print();} else {window.alert('<?php echo $LDAlertNoPrinter ?>');}">
+&nbsp;&nbsp;<a href="javascript:closeifok()"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 align=absmiddle></a>
 </td>
 </tr>
 </table>
@@ -549,7 +556,7 @@ print '">
 <tr>
 <td bgcolor=silver height=70 colspan=2>
 <?php
-require("../language/$lang/".$lang."_copyrite.htm");
+require("../language/$lang/".$lang."_copyrite.php");
  ?>
 </td>
 </tr>

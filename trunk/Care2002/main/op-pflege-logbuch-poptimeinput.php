@@ -52,7 +52,7 @@ switch ($mode)
 
 function resettimebars()
 {
-	window.opener.parent.OPLOGIMGBAR.location.replace('oplogtimebar.php?filename=<? print $filename; ?>');
+	window.opener.parent.OPLOGIMGBAR.location.replace('oplogtimebar.php?filename=<?php print $filename; ?>');
 	window.opener.top.focus();
 	window.focus();
 }
@@ -121,14 +121,13 @@ div.box { border: double; border-width: thin; width: 100%; border-color: black; 
 
 </HEAD>
 <BODY  background=img/gray2.jpg TEXT="#000000" LINK="#0000FF" VLINK="#800080" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0
-onLoad="if (window.focus) window.focus();<? if ($mode=="save") print 'resettimebars();'; if($scope==3) print 'window.resizeTo(600,500)'; else print 'window.resizeTo(450,500)';?>" >
+onLoad="if (window.focus) window.focus();<?php if ($mode=="save") print 'resettimebars();'; if($scope==3) print 'window.resizeTo(600,500)'; else print 'window.resizeTo(450,500)';?>" >
 
 <table width=100% cellspacing="0" cellpadding="3" border=0>
 <tr>
 <td bgcolor="navy" align=right>
 <font face=arial size=2 >
-<?
-
+<?php
 $thisurl="op-pflege-logbuch-poptimeinput.php?rt=optimeinput&filename=";
 
 if($scope==1) print '<font color=silver>Ein/Aus &nbsp;</font>';
@@ -157,11 +156,10 @@ Zeiteingabe
 <p>
 <ul>
 
-<form method="post" name="timeform" action="op-pflege-logbuch-poptimeinput.php?mode=save&rt=optimeinput&scope=<? print $scope; ?>&filename=<?print $filename; ?>" onSubmit=checkform()>
+<form method="post" name="timeform" action="op-pflege-logbuch-poptimeinput.php?mode=save&rt=optimeinput&scope=<?php print $scope; ?>&filename=<?php echo $filename; ?>" onSubmit=checkform()>
 
 <font face=verdana,arial size=2>
-<?
-if (($scope==1)||($scope==0))
+<?php if (($scope==1)||($scope==0))
 {
 	print '<font face=verdana,arial size=5 color=navy ><b>Ein-/Ausschleusen:</b></font><br>';
 	for ($n=1;$n<10;$n++)
@@ -225,8 +223,7 @@ print '<p><font face=verdana,arial size=5 color=navy ><b>Reposition:</b></font><
 <a href="#" onClick="document.timeform.reset()"><img src="../img/verwerf.gif" border="0" alt="Eingaben verwerfen (Zuvor gespeicherte Eingaben bleiben)" align="right"></a>
 </ul>
 
-<?
-if((($scope==1)||($scope==2))&&($mode=="save")) 
+<?php if((($scope==1)||($scope==2))&&($mode=="save")) 
 								print '<script language=javascript>
 										window.opener.parent.OPLOGMAIN.location.reload();
 										window.opener.parent.LOGINPUT.location.reload();

@@ -1,19 +1,30 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)||!$opnr||!$pn) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","drg.php");
+$local_user="ck_op_pflegelogbuch_user";
+require("../include/inc_front_chain_lang.php");
+require("../include/inc_config_color.php");
+if (!$opnr||!$pn) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;}; 
+
+if($saveok)
+{
 ?>
-<? if($saveok) : ?>
- <script language="javascript" >
- window.opener.location.href='drg-ops-intern.php?sid=<?="$ck_sid&lang=$lang&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&dept=$dept&oprm=$oprm&y=$y&m=$m&d=$d&display=composite&newsave=1" ?>';
- window.close();
-</script>
-	<? exit; ?>
-<? endif ?>
-<?
-require("../language/".$lang."/lang_".$lang."_drg.php");
-require("../req/config-color.php");
+    <script language="javascript" >
+    window.opener.location.href="drg-ops-intern.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&dept=$dept&oprm=$oprm&y=$y&m=$m&d=$d&display=composite&newsave=1"; ?>";
+    window.close();
+   </script>
+<?php   
+
+   exit; 
+ }
 
 $toggle=0;
 
@@ -24,7 +35,7 @@ if($mode=="save")
 	$target="ops-intern";
 	$element="ops_intern_code";
 	$itemselector="sel";
-	include("../req/drg-entry-save.php");
+	include("../include/inc_drg_entry_save.php");
 }
 else
 {
@@ -36,12 +47,7 @@ else
   	{
 		$dbtable="ops_intern_".$lang;
 
-		/***************** the ff: is to establish connection DO NOT EDIT ..................
-  							the variable $DBLink_OK will be tested in the script to determine
-							wether the link is established or not
-			***************************************************************************** */
-
-		include("../req/db-makelink.php");
+		include("../include/inc_db_makelink.php");
 		if($link&&$DBLink_OK) 
 		{	
 
@@ -73,7 +79,7 @@ else
 <HTML>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
- <TITLE><?=$LDOps301 ?></TITLE>
+ <TITLE><?php echo $LDOps301 ?></TITLE>
   <script language="javascript" src="../js/showhide-div.js">
 </script>
   <script language="javascript">
@@ -85,13 +91,13 @@ function pruf(d)
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
 function subsearch(k)
 {
-	//window.location.href='drg-icd10-search.php?sid=<?="sid=$ck_sid&lang=$lang&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&dept=$dept&oprm=$oprm&display=$display" ?>&keyword='+k;
+	//window.location.href='drg-icd10-search.php?sid=<?php echo "sid=$sid&lang=$lang&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&dept=$dept&oprm=$oprm&display=$display" ?>&keyword='+k;
 	document.searchdata.keyword.value=k;
 	document.searchdata.submit();
 }
@@ -110,42 +116,42 @@ function checkselect(d)
 // -->
 </script>
  
-  <? 
-require("../req/css-a-hilitebu.php");
+  <?php 
+require("../include/inc_css_a_hilitebu.php");
 ?>
  
 </HEAD>
 
 <BODY   onLoad="if(window.focus) window.focus();
-<? if(!$showonly) : ?>
+<?php if(!$showonly) : ?>
 document.searchdata.keyword.select();document.searchdata.keyword.focus();
-<? endif ?>
-" bgcolor=<? print $cfg['body_bgcolor']; ?>
-<? if (!$cfg['dhtml']){ print ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+<?php endif ?>
+" bgcolor=<?php print $cfg['body_bgcolor']; ?>
+<?php if (!$cfg['dhtml']){ print ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 
 <FONT    SIZE=-1  FACE="Arial">
 <ul>
-<FORM action="<?=$thisfile ?>" method="post" name="searchdata" onSubmit="return pruf(this)">
-<a href="javascript:window.close()"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 align="right"></a>
-<? if(!$showonly) : ?>
-<FONT    SIZE=3  FACE="verdana,Arial" color="#660000"><b><?=$LDOperation ?></b>&nbsp;
+<FORM action="<?php echo $thisfile ?>" method="post" name="searchdata" onSubmit="return pruf(this)">
+<a href="javascript:window.close()"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 align="right"></a>
+<?php if(!$showonly) : ?>
+<FONT    SIZE=3  FACE="verdana,Arial" color="#660000"><b><?php echo $LDOperation ?></b>&nbsp;
 </font>
 <font size=3>
-<INPUT type="text" name="keyword" size="50" maxlength="60" onfocus=this.select() value="<? print $keyword ?>"></font> 
-<INPUT type="submit" name="versand" value="<?=$LDSearch ?>">
-<? else : ?>
+<INPUT type="text" name="keyword" size="50" maxlength="60" onfocus=this.select() value="<?php print $keyword ?>"></font> 
+<INPUT type="submit" name="versand" value="<?php echo $LDSearch ?>">
+<?php else : ?>
 <input type="hidden" name="keyword" value="">
-<? endif ?>
-<input type="hidden" name="sid" value="<? print $ck_sid; ?>">
-<input type="hidden" name="lang" value="<? print $lang; ?>">
-<input type="hidden" name="pn" value="<? print $pn; ?>">
-<input type="hidden" name="opnr" value="<? print $opnr; ?>">
-<input type="hidden" name="ln" value="<? print $ln; ?>">
-<input type="hidden" name="fn" value="<? print $fn; ?>">
-<input type="hidden" name="bd" value="<? print $bd; ?>">
-<input type="hidden" name="dept" value="<? print $dept; ?>">
-<input type="hidden" name="oprm" value="<? print $oprm; ?>">
-<input type="hidden" name="display" value="<? print $display; ?>">
+<?php endif ?>
+<input type="hidden" name="sid" value="<?php print $sid; ?>">
+<input type="hidden" name="lang" value="<?php print $lang; ?>">
+<input type="hidden" name="pn" value="<?php print $pn; ?>">
+<input type="hidden" name="opnr" value="<?php print $opnr; ?>">
+<input type="hidden" name="ln" value="<?php print $ln; ?>">
+<input type="hidden" name="fn" value="<?php print $fn; ?>">
+<input type="hidden" name="bd" value="<?php print $bd; ?>">
+<input type="hidden" name="dept" value="<?php print $dept; ?>">
+<input type="hidden" name="oprm" value="<?php print $oprm; ?>">
+<input type="hidden" name="display" value="<?php print $display; ?>">
 </FORM>
 <p>
 
@@ -154,18 +160,18 @@ document.searchdata.keyword.select();document.searchdata.keyword.focus();
 <table border=0 cellpadding=0 cellspacing=0 width='100%'> 
 <tr bgcolor="#660000">
 <td width="20">
-<? if(!$showonly) : ?>
-<img src="../img/delete2.gif" border=0 width=20 height=20 alt="<?=$LDReset ?>" onClick="javascript:document.ops301.reset()">
-<? endif ?>
+<?php if(!$showonly) : ?>
+<img src="../img/delete2.gif" border=0 width=20 height=20 alt="<?php echo $LDReset ?>" onClick="javascript:document.ops301.reset()">
+<?php endif ?>
 </td>
-<td><font face=arial size=2 color=#ffffff>&nbsp;<b><nobr><?=$LDOpsIntern ?></nobr></b>&nbsp;</td>
+<td><font face=arial size=2 color=#ffffff>&nbsp;<b><nobr><?php echo $LDOpsIntern ?></nobr></b>&nbsp;</td>
 
-<td colspan=7><font face=arial size=2 color=#ffffff>&nbsp;&nbsp;&nbsp;<b><?=$LDDescription ?></b>
+<td colspan=7><font face=arial size=2 color=#ffffff>&nbsp;&nbsp;&nbsp;<b><?php echo $LDDescription ?></b>
 </td>
 		
 </tr>
 
-<?
+<?php
 function cleandata(&$buf)
 {
 	return strtr($buf,",.()*+-","_______");
@@ -295,47 +301,47 @@ function drawdata(&$data)
 ?>
 
 </table>
-<? if(!$showonly&&($linecount>0)) : ?>
-<input type="hidden" name="lastindex" value="<?=$idx ?>">
-<input type="submit" value="<?=$LDApplySelection ?>">
-<input type="hidden" name="sid" value="<? print $ck_sid; ?>">
-<input type="hidden" name="lang" value="<? print $lang; ?>">
-<input type="hidden" name="pn" value="<? print $pn; ?>">
-<input type="hidden" name="opnr" value="<? print $opnr; ?>">
-<input type="hidden" name="ln" value="<? print $ln; ?>">
-<input type="hidden" name="fn" value="<? print $fn; ?>">
-<input type="hidden" name="bd" value="<? print $bd; ?>">
-<input type="hidden" name="dept" value="<? print $dept; ?>">
-<input type="hidden" name="oprm" value="<? print $oprm; ?>">
-<input type="hidden" name="display" value="<? print $display; ?>">
+<?php if(!$showonly&&($linecount>0)) : ?>
+<input type="hidden" name="lastindex" value="<?php echo $idx ?>">
+<input type="submit" value="<?php echo $LDApplySelection ?>">
+<input type="hidden" name="sid" value="<?php print $sid; ?>">
+<input type="hidden" name="lang" value="<?php print $lang; ?>">
+<input type="hidden" name="pn" value="<?php print $pn; ?>">
+<input type="hidden" name="opnr" value="<?php print $opnr; ?>">
+<input type="hidden" name="ln" value="<?php print $ln; ?>">
+<input type="hidden" name="fn" value="<?php print $fn; ?>">
+<input type="hidden" name="bd" value="<?php print $bd; ?>">
+<input type="hidden" name="dept" value="<?php print $dept; ?>">
+<input type="hidden" name="oprm" value="<?php print $oprm; ?>">
+<input type="hidden" name="display" value="<?php print $display; ?>">
 <input type="hidden" name="mode" value="save">
 
 </form>
-<? else : ?>
+<?php else : ?>
 <p>
-<a href="javascript:window.close()"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24></a>
-<? endif ?>
-<? if(($linecount>15)&&!$showonly) : ?>
+<a href="javascript:window.close()"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24></a>
+<?php endif ?>
+<?php if(($linecount>15)&&!$showonly) : ?>
 
 						<p>
-						<FORM action="<?=$thisfile ?>" method="post" onSubmit="return pruf(this)" name="form2">
-						<a href="javascript:window.close()"><img src="../img/<?="$lang/$lang" ?>_cancel.gif" width=103 height=24 border=0 align="right"></a>
+						<FORM action="<?php echo $thisfile ?>" method="post" onSubmit="return pruf(this)" name="form2">
+						<a href="javascript:window.close()"><img src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" width=103 height=24 border=0 align="right"></a>
 						<font face="Arial,Verdana"  color="#000000" size=-1>
-						<INPUT type="text" name="keyword" size="14" maxlength="25" value="<?=$keyword ?>"> 
-						<INPUT type="submit" name="versand" value="<?=$LDSearch ?>">
-						<input type="hidden" name="sid" value="<? print $ck_sid; ?>">
-<input type="hidden" name="lang" value="<? print $lang; ?>">
-<input type="hidden" name="pn" value="<? print $pn; ?>">
-<input type="hidden" name="opnr" value="<? print $opnr; ?>">
-<input type="hidden" name="ln" value="<? print $ln; ?>">
-<input type="hidden" name="fn" value="<? print $fn; ?>">
-<input type="hidden" name="bd" value="<? print $bd; ?>">
-<input type="hidden" name="dept" value="<? print $dept; ?>">
-<input type="hidden" name="oprm" value="<? print $oprm; ?>">
-<input type="hidden" name="display" value="<? print $display; ?>">
+						<INPUT type="text" name="keyword" size="14" maxlength="25" value="<?php echo $keyword ?>"> 
+						<INPUT type="submit" name="versand" value="<?php echo $LDSearch ?>">
+						<input type="hidden" name="sid" value="<?php print $sid; ?>">
+<input type="hidden" name="lang" value="<?php print $lang; ?>">
+<input type="hidden" name="pn" value="<?php print $pn; ?>">
+<input type="hidden" name="opnr" value="<?php print $opnr; ?>">
+<input type="hidden" name="ln" value="<?php print $ln; ?>">
+<input type="hidden" name="fn" value="<?php print $fn; ?>">
+<input type="hidden" name="bd" value="<?php print $bd; ?>">
+<input type="hidden" name="dept" value="<?php print $dept; ?>">
+<input type="hidden" name="oprm" value="<?php print $oprm; ?>">
+<input type="hidden" name="display" value="<?php print $display; ?>">
 </font></FORM>			
 						<p>
-<? endif ?>
+<?php endif ?>
 </ul>
 &nbsp;
 </FONT>

@@ -1,11 +1,27 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-if(!$ck_pflege_user) $edit=0;
-require("../language/".$lang."/lang_".$lang."_nursing.php");
-require("../req/config-color.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","nursing.php");
+define("NO_2LEVEL_CHK",1);
+$local_user="ck_pflege_user";
+require("../include/inc_front_chain_lang.php");
+if(!$HTTP_COOKIE_VARS[$local_user.$sid]) 
+{
+    $edit=0;
+	include("../language/".$lang."/lang_".$lang."_".LANG_FILE);
+}
+require("../include/inc_config_color.php");
+
+/**
+* Set default values if not available from url
+*/
 
 if ($station=="") { $station="p3a";  }
 if($pday=="") $pday=date(d);
@@ -13,18 +29,18 @@ if($pmonth=="") $pmonth=date(m);
 if($pyear=="") $pyear=date(Y);
 $t_date=$pday.".".$pmonth.".".$pyear;
 
-if($retpath=="quick") $breakfile="pflege-schnellsicht.php?sid=$ck_sid&lang=$lang";
- else $breakfile="pflege.php?sid=$ck_sid&lang=$lang";
+if($retpath=="quick") $breakfile="pflege-schnellsicht.php?sid=$sid&lang=$lang";
+ else $breakfile="pflege.php?sid=$sid&lang=$lang";
 			
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK)
 		{
 		
 			if(($mode=="")||($mode=="fresh"))
 			{
 						$dbtable="nursing_station_patients";
-						$sql="SELECT *	FROM $dbtable WHERE  t_date=\"$t_date\"
-																		AND	station=\"$station\"";
+						$sql="SELECT *	FROM $dbtable WHERE  t_date=\"".addslashes($t_date)."\"
+																		AND	station=\"".addslashes($station)."\"";
 							$ergebnis=mysql_query($sql,$link);
 							if($ergebnis)
        						{
@@ -40,8 +56,8 @@ if($link&&$DBLink_OK)
 								else
 								{
 									$dbtable="nursing_station_".$lang;
-									$sql="SELECT start_no, end_no, maxbed, bed_id1, bed_id2
-											 FROM $dbtable WHERE station=\"$station\"";
+									$sql="SELECT start_no, end_no, maxbed, bed_id1, bed_id2, roomprefix
+											 FROM $dbtable WHERE station=\"".addslashes($station)."\"";
 									$ergebnis=mysql_query($sql,$link);
 									if($ergebnis)
        								{
@@ -108,7 +124,7 @@ if($link&&$DBLink_OK)
 								else
 								{  
 									mysql_close($link);
-									header ("location:pflege-station-nobelegungsliste.php?sid=$ck_sid&lang=$lang&station=$station&c=32&edit=$edit"); exit; 
+									header ("location:pflege-station-nobelegungsliste.php?sid=$sid&lang=$lang&station=$station&c=32&edit=$edit"); exit; 
 								}
 							}
 				 			else {print "<p>$sql<p>$LDDbNoRead"; exit;}
@@ -170,7 +186,7 @@ if($link&&$DBLink_OK)
 												'$result[usedbed]',
 												'$result[usebed_percent]',
 												'".addslashes($result[bed_patient])."',
-												'$nursing_station_user',
+												'".$HTTP_COOKIE_VARS[$local_user.$sid]."',
 												'$result[edit_date]',
 												'$result[editor]'
 											)";
@@ -180,7 +196,7 @@ if($link&&$DBLink_OK)
 											$pday=date(d);
 											$pmonth=date(m);
 											$pyear=date(Y);
-											header("location:pflege-station.php?sid=$ck_sid&lang=$lang&station=$station&mode=&edit=1&pday=$pday&pmonth=$pmonth&pyear=$pyear");
+											header("location:pflege-station.php?sid=$sid&lang=$lang&station=$station&mode=&edit=1&pday=$pday&pmonth=$pmonth&pyear=$pyear");
 											exit;
 										}
 										else print "$LDDbNoSave<br>$sql";
@@ -211,7 +227,7 @@ if($link&&$DBLink_OK)
 																									 closedbeds='".($result[closedbeds]+1)."',
 																									 usebed_percent='".ceil((($result[usedbed]+$result[closedbeds]+1)/$result[maxbed])*100)."',
 																									 edit_date='".$result[edit_date]." ".date("d.m.Y")."',
-																									 editor='$result[editor] $ck_pflege_user' 
+																									 editor='$result[editor] ".$HTTP_COOKIE_VARS[$local_user.$sid]."' 
 																									  WHERE t_date='$t_date' AND station='$station'";
 																}
 																else
@@ -222,13 +238,13 @@ if($link&&$DBLink_OK)
 																									 closedbeds='".($result[closedbeds]-1)."',
 																									 usebed_percent='".ceil((($result[usedbed]+$result[closedbeds]-1)/$result[maxbed])*100)."',
 																									 edit_date='".$result[edit_date]." ".date("d.m.Y")."',
-																									 editor='$result[editor] $ck_pflege_user' 
+																									 editor='$result[editor] ".$HTTP_COOKIE_VARS[$local_user.$sid]."' 
 																									  WHERE t_date='$t_date' AND station='$station'";
 																}
 																if($ergebnis=mysql_query($sql,$link)) 
 																		{
 																			mysql_close($link);
-																			header("location:pflege-station.php?sid=$ck_sid&lang=$lang&station=$station&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear");
+																			header("location:pflege-station.php?sid=$sid&lang=$lang&station=$station&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear");
 																			exit;
 																		}
 																		else print "$LDDbNoUpdate $sql";
@@ -290,13 +306,13 @@ if($link&&$DBLink_OK)
 																						'0',
 																						'".ceil((1/$template[maxbed])*100)."',
 																						'$b_p',
-																						'$ck_pflege_user',
+																						'".$HTTP_COOKIE_VARS[$local_user.$sid]."',
 																						'".$template[edit_date]." ".date("d.m.Y")."'
 																					)";
 																		if($ergebnis=mysql_query($sql,$link)) 
 																		{
 																			mysql_close($link);
-																			header("location:pflege-station.php?sid=$ck_sid&lang=$lang&station=$station&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear");
+																			header("location:pflege-station.php?sid=$sid&lang=$lang&station=$station&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear");
 																			exit;
 																		}
 																		else print "$LDDbNoSave<br>$sql";
@@ -330,7 +346,7 @@ if($link&&$DBLink_OK)
 														//foreach($dbdata as $v) print $v;
 														$dbtable="nursing_station_patients";
 														// check if station occupancy exists
-                                                    	$sql="SELECT bed_patient, maxbed, freebed, usedbed, closedbeds FROM $dbtable WHERE t_date='$t_date' AND station='$station'";																	
+                                                    	$sql="SELECT bed_patient, maxbed, freebed, usedbed, closedbeds,roomprefix FROM $dbtable WHERE t_date='$t_date' AND station='$station'";																	
 														if($ergebnis=mysql_query($sql,$link))
        													{
 															$rows=0;
@@ -350,12 +366,12 @@ if($link&&$DBLink_OK)
 																									 usedbed='$used',
 																									 usebed_percent='".ceil((($used+$result[closedbeds])/$result[maxbed])*100)."',
 																									 edit_date='".$result[edit_date]." ".date("d.m.Y")."',
-																									 editor='$result[editor] $ck_pflege_user' 
+																									 editor='$result[editor] ".$HTTP_COOKIE_VARS[$local_user.$sid]."' 
 																									  WHERE t_date='$t_date' AND station='$station'";
 																if($ergebnis=mysql_query($sql,$link)) 
 																		{
 																			mysql_close($link);
-																			header("location:pflege-station.php?sid=$ck_sid&lang=$lang&station=$station&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear");
+																			header("location:pflege-station.php?sid=$sid&lang=$lang&station=$station&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear");
 																			exit;
 																		}
 																		else print "$LDDbNoUpdate<br>$sql";
@@ -377,7 +393,7 @@ if($link&&$DBLink_OK)
 																		//print $b_p;
 																		// create new occupancy table
 																		$dbtable="nursing_station_patients";
-																		if(!$template[maxbed]) $template[maxbed]=($template[end_no]-$template[start_no])*$template[bedtype];
+																		if(!$template[maxbed]) $template[maxbed]=($template[end_no]-($template[start_no]-1))*$template[bedtype];
 																		$sql="INSERT INTO $dbtable 
 																					(
 																						station,
@@ -417,13 +433,13 @@ if($link&&$DBLink_OK)
 																						'1',
 																						'".ceil((1/$template[maxbed])*100)."',
 																						'$b_p',
-																						'$ck_pflege_user',
+																						'".$HTTP_COOKIE_VARS[$local_user.$sid]."',
 																						'".$template[edit_date]." ".date("d.m.Y")."'
 																					)";
 																		if($ergebnis=mysql_query($sql,$link)) 
 																		{
 																			mysql_close($link);
-																			header("location:pflege-station.php?sid=$ck_sid&lang=$lang&station=$station&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear");
+																			header("location:pflege-station.php?sid=$sid&lang=$lang&station=$station&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear");
 																			exit;
 																		}
 																		else print "$LDDbNoSave<br>$sql";
@@ -477,7 +493,7 @@ if($link&&$DBLink_OK)
 										if($ergebnis=mysql_query($sql,$link)) 
 											{
 												mysql_close($link);
-												header("location:pflege-station.php?sid=$ck_sid&lang=$lang&station=$station&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear");
+												header("location:pflege-station.php?sid=$sid&lang=$lang&station=$station&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear");
 												exit;
 											}
 											else print "$LDDbNoDelete<br>$sql";
@@ -517,34 +533,34 @@ if($link&&$DBLink_OK)
   var urlholder;
 
 function getinfo(pid,pdata){
-<?/* if($edit)*/
+<?php /* if($edit)*/
 	{ print '
 	urlholder="pflege-station-patientdaten.php?sid=';
-	print "$ck_sid&lang=$lang";
+	print "$sid&lang=$lang";
 	print '&pn="+pid+"&patient=" + pdata + "&station=';
 	print "$station&pday=$pday&pmonth=$pmonth&pyear=$pyear&edit=$edit"; 
 	print '";';
 	print '
-	patientwin=window.open(urlholder,pid,"width=700,height=450,menubar=no,resizable=yes,scrollbars=yes");
+	patientwin=window.open(urlholder,pid,"width=700,height=600,menubar=no,resizable=yes,scrollbars=yes");
 	';
 	}
 	/*else print '
-	window.location.href=\'pflege-station-pass.php?sid='.$ck_sid.'&lang='.$lang.'&rt=pflege&edit=1&station='.$station.'\'';*/
+	window.location.href=\'pflege-station-pass.php?sid='.$sid.'&lang='.$lang.'&rt=pflege&edit=1&station='.$station.'\'';*/
 ?>
 	}
 function getrem(pid,pdata){
-	urlholder="pflege-station-remarks.php?sid=<? print "$ck_sid&lang=$lang"; ?>&pn="+pid+"&patient=" + pdata + "&station=<? print "$station&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>";
+	urlholder="pflege-station-remarks.php?sid=<?php print "$sid&lang=$lang"; ?>&pn="+pid+"&patient=" + pdata + "&station=<?php print "$station&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>";
 	patientwin=window.open(urlholder,pid,"width=700,height=500,menubar=no,resizable=yes,scrollbars=yes");
 	}
 	
 function indata(room,bed)
 {
-	urlholder="pflege-station-bettbelegen.php?sid=<? print "$ck_sid&lang=$lang"; ?>&s=<? print $station; ?>&rm="+room+"&bd="+bed+"<? print "&py=".$pyear."&pm=".$pmonth."&pd=".$pday."&tb=".str_replace("#","",$cfg['top_bgcolor'])."&tt=".str_replace("#","",$cfg['top_txtcolor'])."&bb=".str_replace("#","",$cfg['body_bgcolor'])."&d=".$cfg['dhtml']; ?>";
+	urlholder="pflege-station-bettbelegen.php?sid=<?php print "$sid&lang=$lang"; ?>&s=<?php print $station; ?>&rm="+room+"&bd="+bed+"<?php print "&py=".$pyear."&pm=".$pmonth."&pd=".$pday."&tb=".str_replace("#","",$cfg['top_bgcolor'])."&tt=".str_replace("#","",$cfg['top_txtcolor'])."&bb=".str_replace("#","",$cfg['body_bgcolor'])."&d=".$cfg['dhtml']; ?>";
 	indatawin=window.open(urlholder,"bedroom","width=700,height=450,menubar=no,resizable=yes,scrollbars=yes");
 }
 function release(room,bed,pid)
 {
-	urlholder="pflege-station-patient-release.php?sid=<? print "$ck_sid&lang=$lang"; ?>&station=<? print $station; ?>&rm="+room+"&bd="+bed+"&pn="+pid+"<? print "&pyear=".$pyear."&pmonth=".$pmonth."&pday=".$pday."&tb=".str_replace("#","",$cfg['top_bgcolor'])."&tt=".str_replace("#","",$cfg['top_txtcolor'])."&bb=".str_replace("#","",$cfg['body_bgcolor'])."&d=".$cfg['dhtml']; ?>";
+	urlholder="pflege-station-patient-release.php?sid=<?php print "$sid&lang=$lang"; ?>&station=<?php print $station; ?>&rm="+room+"&bd="+bed+"&pn="+pid+"<?php print "&pyear=".$pyear."&pmonth=".$pmonth."&pday=".$pday."&tb=".str_replace("#","",$cfg['top_bgcolor'])."&tt=".str_replace("#","",$cfg['top_txtcolor'])."&bb=".str_replace("#","",$cfg['body_bgcolor'])."&d=".$cfg['dhtml']; ?>";
 	//indatawin=window.open(urlholder,"bedroom","width=700,height=450,menubar=no,resizable=yes,scrollbars=yes"
 	window.location.href=urlholder;
 }
@@ -553,19 +569,19 @@ function unlock(b,r)
 {
 <?php
 	print '
-	urlholder="pflege-station.php?mode=newdata&patnum=unlock&sid='.$ck_sid.'&lang='.$lang.'&station='.$station.'&rm="+r+"&bd="+b+"&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday.'";
+	urlholder="pflege-station.php?mode=newdata&patnum=unlock&sid='.$sid.'&lang='.$lang.'&station='.$station.'&rm="+r+"&bd="+b+"&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday.'";
 	';
 ?>
-	if(confirm("<?=$LDConfirmUnlock ?>"))
+	if(confirm("<?php echo $LDConfirmUnlock ?>"))
 	{
 		window.location.replace(urlholder);
 	}
 }
 function deletePatient(r,b,t,n)
 {
-	if(confirm("<?=$LDConfirmDelete ?>"))
+	if(confirm("<?php echo $LDConfirmDelete ?>"))
 	{
-		url="pflege-station.php?sid=<? print "$ck_sid&lang=$lang&station=$station&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>&mode=delete&rm="+r+"&bd="+b;
+		url="pflege-station.php?sid=<?php print "$sid&lang=$lang&station=$station&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>&mode=delete&rm="+r+"&bd="+b;
 		window.location.replace(url);
 	}
 }
@@ -576,7 +592,7 @@ function popinfo(l,f,b)
 	h=window.screen.height;
 	ww=400;
 	wh=400;
-	urlholder="doctors-dienstplan-popinfo.php?<?="sid=$ck_sid&dept=$dept&lang=$lang" ?>&ln="+l+"&fn="+f+"&bd="+b;
+	urlholder="doctors-dienstplan-popinfo.php?<?php echo "sid=$sid&dept=$dept&lang=$lang" ?>&ln="+l+"&fn="+f+"&bd="+b;
 	
 	infowin=window.open(urlholder,"infowin","width=" + ww + ",height=" + wh +",menubar=no,resizable=yes,scrollbars=yes");
 	window.infowin.moveTo((w/2)-(ww/2),(h/2)-(wh/2));
@@ -585,7 +601,7 @@ function popinfo(l,f,b)
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
@@ -593,8 +609,8 @@ function gethelp(x,s,x1,x2,x3)
 // -->
 </script>
 
-<?
-require("../req/css-a-hilitebu.php");
+<?php
+require("../include/inc_css_a_hilitebu.php");
 ?>
 
 <style type="text/css" name="s2">
@@ -603,27 +619,27 @@ td.vn { font-family:verdana,arial; color:#000088; font-size:10}
 </style>
 </HEAD>
 
-<BODY bgcolor=<? print $cfg['body_bgcolor']; ?> topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<? if (!$cfg['dhtml']){ print 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+<BODY bgcolor=<?php print $cfg['body_bgcolor']; ?> topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
+<?php if (!$cfg['dhtml']){ print 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 
 
 <table width=100% border=0 cellpadding="0" cellspacing=0>
 <tr>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<? print $cfg['top_txtcolor']; ?>"  SIZE=3  FACE="Arial"><STRONG> &nbsp;&nbsp; <?="$LDStation  ".strtoupper($station)." $LDOccupancy ($t_date)" ?> </STRONG></FONT>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" >
+<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=3  FACE="Arial"><STRONG> &nbsp;&nbsp; <?php echo "$LDStation  ".strtoupper($station)." $LDOccupancy ($t_date)" ?> </STRONG></FONT>
 </td>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr>
-<a href="javascript:gethelp('nursing_station.php','<?=$mode ?>','<?=$occup ?>','<?=$station ?>','<?="$LDStation" ?>')"><img src="../img/<?="$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?=$breakfile ?>" ><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr>
+<a href="javascript:gethelp('nursing_station.php','<?php echo $mode ?>','<?php echo $occup ?>','<?php echo $station ?>','<?php echo "$LDStation" ?>')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </nobr>
 </td></tr>
 <tr valign=top >
-<td bgcolor=<? print $cfg['body_bgcolor']; ?> valign=top colspan=2>
-<?
-	 if(($occup=="template")&&(!$mode)&&(!$list))
+<td bgcolor=<?php print $cfg['body_bgcolor']; ?> valign=top colspan=2>
+<?php
+if(($occup=="template")&&(!$mode)&&(!$list))
 		 	{
 			 print'<font face="verdana,arial" size="2" >'.$LDNoListYet.'<br>
 			 <form action="pflege-station.php" method=post>
-			<input type="hidden" name="sid" value="'.$ck_sid.'">
+			<input type="hidden" name="sid" value="'.$sid.'">
    			<input type="hidden" name="lang" value="'.$lang.'">
    			<input type="hidden" name="pyear" value="'.$pyear.'">
  			<input type="hidden" name="pmonth" value="'.$pmonth.'">
@@ -645,7 +661,7 @@ td.vn { font-family:verdana,arial; color:#000088; font-size:10}
 			print '
 			</font>
 			<form action="pflege-station.php" method=post>
-			<input type="hidden" name="sid" value="'.$ck_sid.'">
+			<input type="hidden" name="sid" value="'.$sid.'">
     		<input type="hidden" name="lang" value="'.$lang.'">
   			<input type="hidden" name="pyear" value="'.$pyear.'">
  			<input type="hidden" name="pmonth" value="'.$pmonth.'">
@@ -657,7 +673,7 @@ td.vn { font-family:verdana,arial; color:#000088; font-size:10}
    			<input type="submit" value="'.$LDTakeoverList.'" >
 				';
 			print '
-			&nbsp;&nbsp;&nbsp;<input type="button" value="'.$LDDoNotCopy.'" onClick="javascript:window.location.href=\'pflege-station.php?sid='.$ck_sid.'&edit=1&list=1&station='.$station.'&mode=fresh\'">
+			&nbsp;&nbsp;&nbsp;<input type="button" value="'.$LDDoNotCopy.'" onClick="javascript:window.location.href=\'pflege-station.php?sid='.$sid.'&edit=1&list=1&station='.$station.'&mode=fresh\'">
  			</form>
 				';		
 			}
@@ -691,37 +707,31 @@ print '
 &nbsp;<b>'.$LDOccupied.':</b>
 </td>
 <td bgcolor="#ffffcc" class="vn">'.$result[usedbed].'</td> 
-</td>
 </tr>
 <tr><td bgcolor="#ffffcc" class="vn" align=right>
 &nbsp;
 </td>
 <td bgcolor="#ffffcc" class="vn">'.$result[usebed_percent].'%</td> 
-</td>
 </tr>
 <tr><td bgcolor="#ffffcc" class="vn" align=right>
 &nbsp;<b>'.$LDFree.':</b>
 </td>
 <td bgcolor="#ffffcc" class="vn">'.$result[freebed].'</td> 
-</td>
 </tr>
 <tr><td bgcolor="#ffffcc" class="vn" align=right>
 &nbsp;<b>'.$LDLocked.':</b>
 </td>
 <td bgcolor="#ffffcc" class="vn">'.$result[closedbeds].'</td>
-</td>
 </tr>
 <tr><td bgcolor="#ffffcc" class="vn" align=right>
 &nbsp;<b>'.$LDShortMale.':</b>
 </td>
 <td bgcolor="#ffffcc" class="vn">'.$m.'</td> 
-</td>
 </tr>
 <tr><td bgcolor="#ffffcc" class="vn" align=right>
 &nbsp;<b>'.$LDShortFemale.':</b>
 </td>
 <td bgcolor="#ffffcc" class="vn">'.$f.'</td> 
-</td>
 </tr>
 <tr><td bgcolor="#ffffcc" class="vn" align="right" valign="top">
 &nbsp;<nobr>'.$LDDutyDoctor.':</nobr>
@@ -742,7 +752,6 @@ if($doctors)
 
 print '
 </td> 
-</td>
 </tr>
 <tr><td bgcolor=maroon align=center colspan=2>	<FONT  SIZE=2 FACE="verdana,Arial" color=white>
 <b>'.$LDLegend.'</b>
@@ -750,7 +759,7 @@ print '
 </tr>
 <tr><td bgcolor="#ffffcc" class="vn" colspan=2>';
 if($edit) print '
-&nbsp;<img src="../img/patdata.gif" width=20 height=20 align="absmiddle"> <b>'.$LDOpenFile.'</b><br>
+&nbsp;<img src="../img/open.gif" width=20 height=20 align="absmiddle"> <b>'.$LDOpenFile.'</b><br>
 &nbsp;<img src="../img/bubble2.gif" width=15 height=14 align="absmiddle"> <b>'.$LDNotesEmpty.'</b><br>
 &nbsp;<img src="../img/bubble3.gif" width=15 height=14 align="absmiddle"> <b>'.$LDNotes.'</b><br>
 &nbsp;<img src="../img/bestell.gif" width=16 height=16 align="absmiddle"> <b>'.$LDRelease.'</b><br>
@@ -801,15 +810,18 @@ for ($i=$result['start_no'];$i<=$result['end_no'];$i++)
 	
 	print '
 			<td>';
-	if($helper&&($helper[s]!="l")&&$edit) print '<img src="../img/s_colorbar.gif" border=0 width=56 height=18 alt="'.$LDSetColorRider.'">';
+	if($helper&&($helper[s]!="l")&&$edit)
+	{
+		 print '<img src="../img/s_colorbar.gif" border=0 width=56 height=18 alt="'.$LDSetColorRider.'">';
+    }
 	print '
 			</td>
 			<td align=center><font face="verdana,arial" size="2" >';
-	if($j=="a") print $result[roomprefix]." ".$i; else print "&nbsp;";
+			
+	if(stristr($j,"a")) print strtoupper($result[roomprefix]).$i; else print "&nbsp;";
 	print '
 			</td><td align=left><font face="verdana,arial" size="2" > '.strtoupper($j).' ';
 	
-
 	if($helper)
 		switch(strtolower($helper[s]))
 		{
@@ -822,9 +834,20 @@ for ($i=$result['start_no'];$i<=$result['end_no'];$i++)
 	print "
 	</td>";
 	print '
-			<td><font face="verdana,arial" size="2" ><a href="javascript:';
-	if($helper[n]!="!") print 'getinfo(\''.$helper[n].'\',\''.strtr($helper[fn]," ","+").'\')" title="'.$LDShowPatData.'">'; // ln=last name fn=first name
-	else print 'unlock(\''.strtoupper($j).'\',\''.$i.'\')" title="'.$LDInfoUnlock.'">'.$LDLocked; //$j=bed   $i=room number
+			<td><font face="verdana,arial" size="2" >';
+	if($edit)
+	{
+	  print '<a href="javascript:';
+	    if($helper[n]!="!") print 'getinfo(\''.$helper[n].'\',\''.strtr($helper[fn]," ","+").'\')" title="'.$LDShowPatData.'">'; // ln=last name fn=first name
+	      else print 'unlock(\''.strtoupper($j).'\',\''.$i.'\')" title="'.$LDInfoUnlock.'">'.$LDLocked; //$j=bed   $i=room number
+	   
+	}
+	else 
+	{
+	    if($helper[n]!="!") print $helfer[fn]; // ln=last name fn=first name
+	      else print $LDLocked; //$j=bed   $i=room number
+	}
+	
 	if($helper)
 	{
 		print "$helper[t] ";
@@ -834,9 +857,15 @@ for ($i=$result['start_no'];$i<=$result['end_no'];$i++)
 		if($sfn) print eregi_replace($sfn,'<span style="background:yellow">'.$sln.'</span>',$helper[fn]);
 			else print $helper[fn];
 	}
-	else print "&nbsp;";
+	else
+	{
+	   print "&nbsp;";
+	}
+	
+	if($edit) print '</a>';
+	
 	print '
-			</a></td><td align=right><font face="verdana,arial" size="2" >&nbsp;';
+			</td><td align=right><font face="verdana,arial" size="2" >&nbsp;';
 	if($sg) print eregi_replace($sg,"<font color=#ff0000><b>".ucfirst($sg)."</b></font>",$helper[g]);
 		else print $helper[g];
 	print '
@@ -875,18 +904,18 @@ else
 	print '
 			<img src="../img/catr.gif" border=0 width=88 height=80 align="absmiddle"><font face="Verdana, Arial" size=3>
 			<font color="#880000"><b>'.str_replace("~station~",strtoupper($station),$LDNoInit).'</b></font><br>
-			<a href="pflege-station-new.php?sid='.$ck_sid.'&station='.$station.'&edit='.$edit.'">'.$LDIfInit.' <img src="../img/bul_arrowGrnLrg.gif" width=16 height=16 border=0 align=absmiddle></a><p></font>';
+			<a href="pflege-station-new.php?sid='.$sid.'&lang='.$lang.'&station='.$station.'&edit='.$edit.'">'.$LDIfInit.' <img src="../img/bul_arrowgrnlrg.gif" width=16 height=16 border=0 align=absmiddle></a><p></font>';
 }
 
 if($pday.$pmonth.$pyear<>date(dmY))
 			print '<p>
 			<font face="Verdana, Arial" size=2 >
-			<a href="pflege-station-archiv.php?sid='.$ck_sid.'">'.$LDClk2Archive.' <img src="../img/bul_arrowGrnLrg.gif" width=16 height=16 border=0 align="absmiddle"></a>
+			<a href="pflege-station-archiv.php?sid='.$sid.'&lang='.$lang.'">'.$LDClk2Archive.' <img src="../img/bul_arrowgrnlrg.gif" width=16 height=16 border=0 align="absmiddle"></a>
 			</font><p>';
 
 ?>
 <p>
-<a href="<?=$breakfile ?>"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border="0"></a>
+<a href="<?php echo $breakfile ?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border="0"></a>
 </FONT>
 
 
@@ -897,7 +926,7 @@ if($pday.$pmonth.$pyear<>date(dmY))
 <p>
 
 <?php
-require("../language/$lang/".$lang."_copyrite.htm");
+require("../language/$lang/".$lang."_copyrite.php");
  ?>
 
 </BODY>

@@ -1,14 +1,22 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-if($edit&&!$ck_pflege_user) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_nursing.php");
-require("../req/config-color.php"); // load color preferences
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","nursing.php");
+$local_user="ck_pflege_user";
+require("../include/inc_front_chain_lang.php");
+
+if($edit&&!$HTTP_COOKIE_VARS[$local_user.$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+require("../include/inc_config_color.php"); // load color preferences
 
 $thisfile="pflege-station-patientdaten-kurve.php";
-$breakfile="pflege-station-patientdaten.php?sid=$ck_sid&station=$station&pn=$pn&edit=$edit";
+$breakfile="pflege-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$pn&edit=$edit";
 if(!$kmonat) $kmonat=date("n");
 //if(($kmonat<10)&&(strlen($kmonat)<2)) $kmonat="0".$kmonat;
 if(!$tag) $tag=date("j");
@@ -61,7 +69,7 @@ if($dayback)
 $tagname=date("w",mktime(0,0,0,$kmonat,$tag,$jahr));
 $tagnamebuf=$tagname;
 
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK)
 	{	
 	// get orig data
@@ -148,7 +156,7 @@ function aligndate(&$ad,&$am,&$ay)
 <HTML>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
- <TITLE><?=$LDFeverCurve ?></TITLE>
+ <TITLE><?php echo $LDFeverCurve ?></TITLE>
 
 <style type="text/css" name="2">
 	A:link  {text-decoration: none; }
@@ -177,20 +185,20 @@ div.pcont{ margin-left: 3; }
   var h600=600;
 function popgetinfowin(winID,patientID,jahrID,monatID,tagID,tagS,tagN)
 	{
-	urlholder="pflege-popgetinfo.php?sid=<?="$ck_sid&lang=$lang&edit=$edit" ?>&winid=" + winID + "&station=<?=$station ?>&pn=" + patientID + "&yr=" + jahrID + "&mo=" + monatID + "&dy="+ tagID+ "&dystart="+ tagS + "&dyname="+ tagN;
+	urlholder="pflege-popgetinfo.php?sid=<?php echo "$sid&lang=$lang&edit=$edit" ?>&winid=" + winID + "&station=<?php echo $station ?>&pn=" + patientID + "&yr=" + jahrID + "&mo=" + monatID + "&dy="+ tagID+ "&dystart="+ tagS + "&dyname="+ tagN;
 	infowin=window.open(urlholder,"kurvendaten","width="+w600+",height="+h400+",menubar=no,resizable=yes,scrollbars=yes");
    	window.infowin.moveTo(sw-(w600/2),sh-(h400/2));
    	infowinflag=1;
 	}
 function popgetdailyinfo(winID,patientID,jahrID,monatID,tagID,tagIDX,jahrS,monatS,tagS,tagN)
 	{
-	urlholder="pflege-getdailyinfo.php?sid=<?="$ck_sid&lang=$lang&edit=$edit" ?>&winid=" + winID + "&station=<?=$station ?>&pn=" + patientID + "&yr=" + jahrID + "&mo=" + monatID + "&dy="+ tagID + "&dyidx="+ tagIDX+"&yrstart="+jahrS+"&monstart="+monatS+"&dystart="+ tagS + "&dyname="+ tagN ;
+	urlholder="pflege-getdailyinfo.php?sid=<?php echo "$sid&lang=$lang&edit=$edit" ?>&winid=" + winID + "&station=<?php echo $station ?>&pn=" + patientID + "&yr=" + jahrID + "&mo=" + monatID + "&dy="+ tagID + "&dyidx="+ tagIDX+"&yrstart="+jahrS+"&monstart="+monatS+"&dystart="+ tagS + "&dyname="+ tagN ;
 	dailywin=window.open(urlholder,"dailydaten","width=600,height=400,menubar=no,resizable=yes,scrollbars=yes");
    	infowinflag=1;
 	}
 function popgetdailybpt(winID,patientID,jahrID,monatID,tagID,tagIDX,jahrS,monatS,tagS,tagN)
 	{
-	urlholder="pflege-getdailybp_t.php?sid=<?="$ck_sid&lang=$lang&edit=$edit" ?>&winid=" + winID + "&station=<?=$station ?>&pn=" + patientID + "&yr=" + jahrID + "&mo=" + monatID + "&dy="+ tagID + "&dyidx="+ tagIDX +"&yrstart="+jahrS+"&monstart="+monatS+"&dystart="+ tagS + "&dyname="+ tagN ;
+	urlholder="pflege-getdailybp_t.php?sid=<?php echo "$sid&lang=$lang&edit=$edit" ?>&winid=" + winID + "&station=<?php echo $station ?>&pn=" + patientID + "&yr=" + jahrID + "&mo=" + monatID + "&dy="+ tagID + "&dyidx="+ tagIDX +"&yrstart="+jahrS+"&monstart="+monatS+"&dystart="+ tagS + "&dyname="+ tagN ;
 	dailybpt=window.open(urlholder,"dailybpt","width="+w600+",height="+h600+",menubar=no,resizable=yes,scrollbars=yes");
    	window.dailybpt.moveTo(sw-(w600/2),sh-(h600/2));
    	infowinflag=1;
@@ -198,14 +206,14 @@ function popgetdailybpt(winID,patientID,jahrID,monatID,tagID,tagIDX,jahrS,monatS
 function popgetmedx(winID,patientID,tagID)
 	{
 	w=700;
-	urlholder="pflege-getmedx.php?sid=<?="$ck_sid&lang=$lang&edit=$edit" ?>&winid=" + winID + "&station=<?=$station ?>&pn=" + patientID + "<? print "&yr=$jahr&mo=$kmonat&dystart=$tag&dyname=$tagname&dy="; ?>" + tagID ;
+	urlholder="pflege-getmedx.php?sid=<?php echo "$sid&lang=$lang&edit=$edit" ?>&winid=" + winID + "&station=<?php echo $station ?>&pn=" + patientID + "<?php print "&yr=$jahr&mo=$kmonat&dystart=$tag&dyname=$tagname&dy="; ?>" + tagID ;
 	dailymedx=window.open(urlholder,"medx","width="+w+",height="+h600+",menubar=no,resizable=yes,scrollbars=yes");
    	window.dailymedx.moveTo(sw-(w/2),sh-(h600/2));
    	infowinflag=1;
 	}
 function popgetdailymedx(winID,patientID,jahrID,monatID,tagID,tagIDX,jahrS,monatS,tagS,tagN)
 	{
-	urlholder="pflege-getdailymedx.php?sid=<?="$ck_sid&lang=$lang&edit=$edit" ?>&winid=" + winID + "&station=<?=$station ?>&pn=" + patientID + "&yr=" + jahrID + "&mo=" + monatID + "&dy="+ tagID + "&dyidx="+ tagIDX+"&yrstart="+jahrS+"&monstart="+monatS+"&dystart="+ tagS + "&dyname="+ tagN ;
+	urlholder="pflege-getdailymedx.php?sid=<?php echo "$sid&lang=$lang&edit=$edit" ?>&winid=" + winID + "&station=<?php echo $station ?>&pn=" + patientID + "&yr=" + jahrID + "&mo=" + monatID + "&dy="+ tagID + "&dyidx="+ tagIDX+"&yrstart="+jahrS+"&monstart="+monatS+"&dystart="+ tagS + "&dyname="+ tagN ;
 	dailymedx=window.open(urlholder,"dailymedx","width="+w600+",height="+h600+",menubar=no,resizable=yes,scrollbars=yes");
    	window.dailymedx.moveTo(sw-(w600/2),sh-(h600/2));
    	infowinflag=1;
@@ -216,11 +224,11 @@ function setStartDate(winID,patientID,jahrID,monatID,tagID,station,tagN)
 	if(event.button==2)
 		{
 		//alert("right click");
-		if(winID=="dayback") dayID="<?=$LDStartDate ?>";
-		if(winID=="dayfwd") dayID="<?=$LDEndDate ?>";
-		if(confirm("<?=$LDConfirmSetDate ?>"))
+		if(winID=="dayback") dayID="<?php echo $LDStartDate ?>";
+		if(winID=="dayfwd") dayID="<?php echo $LDEndDate ?>";
+		if(confirm("<?php echo $LDConfirmSetDate ?>"))
 			{
-			urlholder="pflege-station-patientdaten-setstartdate.php?sid=<?="$ck_sid&lang=$lang&edit=$edit" ?>&winid="+winID+"&pn=" + patientID + "&jahr=" + jahrID + "&kmonat=" + monatID + "&tag="+ tagID + "&station="+station+"&tagname="+ tagN ;
+			urlholder="pflege-station-patientdaten-setstartdate.php?sid=<?php echo "$sid&lang=$lang&edit=$edit" ?>&winid="+winID+"&pn=" + patientID + "&jahr=" + jahrID + "&kmonat=" + monatID + "&tag="+ tagID + "&station="+station+"&tagname="+ tagN ;
 			setdatewin=window.open(urlholder,"setdatewin","width=400,height=250,menubar=no,resizable=yes,scrollbars=yes");
    			infowinflag=1;
 			}
@@ -228,7 +236,7 @@ function setStartDate(winID,patientID,jahrID,monatID,tagID,station,tagN)
 		else 
 		{
 		// alert("left click");	
-		urlholder="pflege-station-patientdaten-kurve.php?sid=<?="$ck_sid&lang=$lang&edit=$edit" ?>&"+winID+"=1&pn=" + patientID + "&jahr=" + jahrID + "&kmonat=" + monatID + "&tag="+ tagID + "&station="+station+"&tagname="+ tagN ;
+		urlholder="pflege-station-patientdaten-kurve.php?sid=<?php echo "$sid&lang=$lang&edit=$edit" ?>&"+winID+"=1&pn=" + patientID + "&jahr=" + jahrID + "&kmonat=" + monatID + "&tag="+ tagID + "&station="+station+"&tagname="+ tagN ;
  		window.location.replace(urlholder);
    		}
 	}
@@ -266,19 +274,19 @@ function returnifok(){
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
 //-->
 </script>
-<?
-require("../req/css-a-hilitebu.php");
+<?php
+require("../include/inc_css_a_hilitebu.php");
 ?>
 
 
 
-<BODY bgcolor=#cde1ec <? if(!$nofocus) print 'onLoad="if (window.focus) window.focus()"'; ?> topmargin=0 leftmargin=0 marginwidth=0 marginheight=0>
+<BODY bgcolor=#cde1ec <?php if(!$nofocus) print 'onLoad="if (window.focus) window.focus()"'; ?> topmargin=0 leftmargin=0 marginwidth=0 marginheight=0>
 
 <script language="">
 <!-- Script Begin
@@ -289,20 +297,17 @@ var dblclk=0;
 
 <table width=100% border=0 cellpadding="0" cellspacing=0>
 <tr>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<? print $cfg['top_txtcolor']; ?>"  SIZE=+2 FACE="Arial"><STRONG> <? print "$LDFeverCurve $station ($jahr"; if($kmonat==12) if($tag>25) print " - ".($jahr +1);?>)</STRONG></FONT>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" >
+<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2 FACE="Arial"><STRONG> <?php print "$LDFeverCurve $station ($jahr"; if($kmonat==12) if($tag>25) print " - ".($jahr +1);?>)</STRONG></FONT>
 </td>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><!-- <a href="javascript:window.history.back()"><img src="../img/<?="$lang/$lang" ?>_back2.gif" width=110 height=24 border=0  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a> --><a href="javascript:gethelp('nursing_feverchart.php','main','','<?=$station ?>','Fever chart')"><img src="../img/<?="$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?=$breakfile ?>" ><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><!-- <a href="javascript:window.history.back()"><img src="../img/<?php echo "$lang/$lang" ?>_back2.gif" width=110 height=24 border=0  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a> --><a href="javascript:gethelp('nursing_feverchart.php','main','','<?php echo $station ?>','Fever chart')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
 </tr>
 <tr>
 <td colspan=2 bgcolor="#9f9f9f">
 
 
 <form name="berichtform">
-<?
-//alert("Ein Eingabefenster ist noch nicht abgeschlossen");
-
-
+<?php
 //****************************** Allergy ********************************
 
 print '
@@ -414,7 +419,7 @@ if($edit)
 print '
 		<img';
 if($edit) print ' ismap usemap="#FrontPageMap"';
-print ' src="../imgcreator/datacurve.php?pn='.$pn.'&max=15&yr='.$jahr.'&mo='.$kmonat.'&dy='.$tag.'" height=135 width=700 border=0 >
+print ' src="../imgcreator/datacurve.php?sid='.$sid.'&lang='.$lang.'&pn='.$pn.'&max=15&yr='.$jahr.'&mo='.$kmonat.'&dy='.$tag.'" height=135 width=700 border=0 >
 		</td>
 		</tr>
 		<tr   valign="top" >
@@ -660,7 +665,7 @@ print
 <p>
 
 <ul>
-<a href="<?="$breakfile" ?>"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border="0"></a>
+<a href="<?php echo "$breakfile" ?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border="0"></a>
 </FONT>
 </ul>
 </td>
@@ -670,7 +675,7 @@ print
 </table>        
 <hr>
 <?php
-require("../language/$lang/".$lang."_copyrite.htm");
+require("../language/$lang/".$lang."_copyrite.php");
  ?>
 </BODY>
 </HTML>

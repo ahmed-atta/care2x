@@ -1,16 +1,15 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-//if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_drg.php");
-require("../req/config-color.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+define("LANG_FILE","drg.php");
+$local_user="ck_op_pflegelogbuch_user";
+require("../include/inc_front_chain_lang.php");
+require("../include/inc_config_color.php");
 
 $toggle=0;
 
 if($opnr)
 {
-	include("../req/db-makelink.php");
+	include("../include/inc_db_makelink.php");
 	if($link&&$DBLink_OK) 
 	{	
 				$dbtable="nursing_op_logbook";
@@ -36,7 +35,7 @@ if($opnr)
 												$sql="UPDATE $dbtable SET ops_intern_code='$linebuf' WHERE patnum='$pn' AND op_nr='$opnr' AND dept='$dept' AND op_room='$oprm'";
         										if($ergebnis=mysql_query($sql,$link)) 
 												{
-													header("location:drg-ops-intern.php?sid=$ck_sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=1");
+													header("location:drg-ops-intern.php?sid=$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=1");
 													exit;
 												}
 												else {print "<p>".$sql."<p>$LDDbNoWrite";};
@@ -64,32 +63,32 @@ function pruf(d)
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
 function openOPSsearch()
 {
-	urlholder="drg-ops-intern-search.php?sid=<?="$ck_sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm" ?>";
-	drgwin_<?=$uid ?>=window.open(urlholder,"drgwin_<?=$uid ?>","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
-	window.drgwin_<?=$uid ?>.moveTo(100,100);
+	urlholder="drg-ops-intern-search.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm" ?>";
+	drgwin_<?php echo $uid ?>=window.open(urlholder,"drgwin_<?php echo $uid ?>","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
+	window.drgwin_<?php echo $uid ?>.moveTo(100,100);
 }
 function deleteItem(i)
 {
-	if(confirm("<?=$LDAlertSureDelete ?>"))
+	if(confirm("<?php echo $LDAlertSureDelete ?>"))
 	{
-		window.location.href='drg-ops-intern.php?sid=<?="$ck_sid&lang=$lang&mode=delete&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm&display=$display" ?>&item='+i;
+		window.location.href='drg-ops-intern.php?sid=<?php echo "$sid&lang=$lang&mode=delete&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm&display=$display" ?>&item='+i;
 	}
 }
 function openQuicklist(t)
 {
-	urlholder="drg-quicklist.php?sid=<?="$ck_sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm" ?>&target="+t;
-	drgwin_<?=$uid ?>=window.open(urlholder,"drgwin_<?=$uid ?>","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
-	window.drgwin_<?=$uid ?>.moveTo(100,100);
+	urlholder="drg-quicklist.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm" ?>&target="+t;
+	drgwin_<?php echo $uid ?>=window.open(urlholder,"drgwin_<?php echo $uid ?>","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
+	window.drgwin_<?php echo $uid ?>.moveTo(100,100);
 }
 function openRelatedCodes()
 {
-<? if($cfg['dhtml'])
+<?php if($cfg['dhtml'])
 	print '
 			w=window.parent.screen.width-75;
 			h=window.parent.screen.height-50;';
@@ -100,56 +99,55 @@ function openRelatedCodes()
 ?>
 
 	mc=document.ops_intern.maincode.value;
-	relcodewin_<?=$uid ?>=window.open("drg-related-codes.php?sid=<?="$ck_sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm" ?>&maincode="+mc,"relcodewin_<?=$uid ?>","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=" + (h-60));
-	window.relcodewin_<?=$uid ?>.moveTo(0,0);
+	relcodewin_<?php echo $uid ?>=window.open("drg-related-codes.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm" ?>&maincode="+mc,"relcodewin_<?php echo $uid ?>","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=" + (h-60));
+	window.relcodewin_<?php echo $uid ?>.moveTo(0,0);
 }
 
 // -->
 </script>
  
-  <? 
-require("../req/css-a-hilitebu.php");
+  <?php 
+require("../include/inc_css_a_hilitebu.php");
 ?>
- <? if($newsave) : ?>
+ <?php if($newsave) : ?>
  <script language="javascript" >
- //window.opener.location.href='drg-composite-start.php?sid=<?="$ck_sid&lang=$lang&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&dept=$dept&oprm=$oprm&y=$y&m=$m&d=$d&display=composite&newsave=1" ?>';
-window.parent.opener.location.href='<?="oploginput.php?sid=$ck_sid&lang=$lang&mode=saveok&patnum=$pn&op_nr=$opnr&dept=$dept&saal=$oprm&pyear=$y&pmonth=$m&pday=$d" ?>';
+ //window.opener.location.href='drg-composite-start.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&dept=$dept&oprm=$oprm&y=$y&m=$m&d=$d&display=composite&newsave=1" ?>';
+window.parent.opener.location.href='<?php echo "oploginput.php?sid=$sid&lang=$lang&mode=saveok&patnum=$pn&op_nr=$opnr&dept=$dept&saal=$oprm&pyear=$y&pmonth=$m&pday=$d" ?>';
 </script>
-<? endif ?>
+<?php endif ?>
 </HEAD>
 
 <BODY 
-<?
-if($display=="composite") print 'topmargin=0 marginheight=0 leftmargin=0 marginwidth=0';
+<?php if($display=="composite") print 'topmargin=0 marginheight=0 leftmargin=0 marginwidth=0';
 else  print 'topmargin=2 marginheight=2';
 ?> 
-onLoad="if(window.focus) window.focus();" bgcolor="<? print $cfg['body_bgcolor']; ?>" 
-<? if (!$cfg['dhtml']){ print ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+onLoad="if(window.focus) window.focus();" bgcolor="<?php print $cfg['body_bgcolor']; ?>" 
+<?php if (!$cfg['dhtml']){ print ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 <form name="ops_intern" action="drg-ops-intern.php" method="post">
 <FONT    SIZE=2  FACE="verdana,Arial" >
-<? print "$ln, $fn $bd - $pn";
+<?php print "$ln, $fn $bd - $pn";
 	if($opnr) print" - OP# $opnr - $dept OP $oprm"; 
 ?>
-<? if($display!="composite") : ?>
-<a href="javascript:window.history.back()" ><img src="../img/<?="$lang/$lang" ?>_back2.gif" border=0 width=110 height=24 align="right"></a>
+<?php if($display!="composite") : ?>
+<a href="javascript:window.history.back()" ><img src="../img/<?php echo "$lang/$lang" ?>_back2.gif" border=0 width=110 height=24 align="right"></a>
 
-<b><?=$LDOps301 ?></b></font>&nbsp;
- <input type="button" value="<?=$LDSearch4OPS301 ?>" onClick="javascript:openOPSsearch()">&nbsp;
- <input type="button" value="<?=$LDQuickList ?>" onClick="javascript:openICDsearch()">
+<b><?php echo $LDOps301 ?></b></font>&nbsp;
+ <input type="button" value="<?php echo $LDSearch4OPS301 ?>" onClick="javascript:openOPSsearch()">&nbsp;
+ <input type="button" value="<?php echo $LDQuickList ?>" onClick="javascript:openICDsearch()">
 <p>
-<? endif ?>
+<?php endif ?>
 
 <table border=0 width=100%>
   <tr>
     <td width=100% valign="top">
 	<table border=0 cellpadding=1 cellspacing=1 width=100%> 
 		<tr bgcolor="#990000">
- 		<td width="15%"><font face=arial size=2 color=#ffffff><b><?=$LDOpsIntern ?></b></td>
- 		<td colspan=2><font face=arial size=2 color=#ffffff><b><?=$LDOperation ?></b></td>
+ 		<td width="15%"><font face=arial size=2 color=#ffffff><b><?php echo $LDOpsIntern ?></b></td>
+ 		<td colspan=2><font face=arial size=2 color=#ffffff><b><?php echo $LDOperation ?></b></td>
     	</tr>
 
-<?
-			if ($linecount>0) 
+<?php
+if ($linecount>0) 
 				{ 
 						mysql_data_seek($ergebnis,0);
 						$zeile=mysql_fetch_array($ergebnis);
@@ -183,26 +181,26 @@ onLoad="if(window.focus) window.focus();" bgcolor="<? print $cfg['body_bgcolor']
 	
 	</td>
 	 <td valign="top" bgcolor="#990000"><font face=arial size=2 color=#ffffff>
-	<? if($display!="composite") : ?>   
-	<a href="javascript:window.history.back()" ><img src="../img/<?="$lang/$lang" ?>_back2.gif" border=0 width=110 height=24></a>
+	<?php if($display!="composite") : ?>   
+	<a href="javascript:window.history.back()" ><img src="../img/<?php echo "$lang/$lang" ?>_back2.gif" border=0 width=110 height=24></a>
  	<p>
-	<? else : ?>
-	<input type="button" value="<?=$LDSearch ?>" onClick="javascript:openOPSsearch()">&nbsp;
- 	<p><input type="button" value="<?=$LDQuickList ?>" onClick="javascript:openQuicklist('ops-intern')">
-	<? endif ?>
- 	<p><input type="button" value="<?=$LDConvert2IcdOps ?>" onClick="javascript:openRelatedCodes()"><p>
+	<?php else : ?>
+	<input type="button" value="<?php echo $LDSearch ?>" onClick="javascript:openOPSsearch()">&nbsp;
+ 	<p><input type="button" value="<?php echo $LDQuickList ?>" onClick="javascript:openQuicklist('ops-intern')">
+	<?php endif ?>
+ 	<p><input type="button" value="<?php echo $LDConvert2IcdOps ?>" onClick="javascript:openRelatedCodes()"><p>
 	</td>
   </tr>
 </table>
-<input type="hidden" name="sid" value="<?=$ck_sid ?>">
-<input type="hidden" name="lang" value="<?=$lang ?>">
-<input type="hidden" name="opnr" value="<?=$opnr ?>">
-<input type="hidden" name="pn" value="<?=$pn ?>">
-<input type="hidden" name="ln" value="<?=$ln ?>">
-<input type="hidden" name="fn" value="<?=$fn ?>">
-<input type="hidden" name="bd" value="<?=$bd ?>">
-<input type="hidden" name="display" value="<?=$display ?>">
-<input type="hidden" name="maincode" value="<?=$main_code ?>">
+<input type="hidden" name="sid" value="<?php echo $sid ?>">
+<input type="hidden" name="lang" value="<?php echo $lang ?>">
+<input type="hidden" name="opnr" value="<?php echo $opnr ?>">
+<input type="hidden" name="pn" value="<?php echo $pn ?>">
+<input type="hidden" name="ln" value="<?php echo $ln ?>">
+<input type="hidden" name="fn" value="<?php echo $fn ?>">
+<input type="hidden" name="bd" value="<?php echo $bd ?>">
+<input type="hidden" name="display" value="<?php echo $display ?>">
+<input type="hidden" name="maincode" value="<?php echo $main_code ?>">
 
 </form>
 

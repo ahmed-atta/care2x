@@ -1,11 +1,16 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-		
-if (($sid==NULL)||($sid!=$ck_sid)||!$ck_editor_user) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-
-require("../language/".$lang."/lang_".$lang."_editor.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","editor.php");
+$local_user="ck_editor_user";
+require("../include/inc_front_chain_lang.php");
 
 if(($artnum)&&($mode=="save"))
 {
@@ -17,22 +22,27 @@ $publishdate=implode("",$pd);
 $newstitle=stripslashes($newstitle);
 $preface=stripslashes($preface);
 $newsbody=stripslashes($newsbody);
-
-$titlebuf=str_replace(" ","",$newstitle);
-$titlebuf=strtr($titlebuf,"/%&!?.*'#[]{}§;:ÄÖÜäöü","~~~~~~~~~~~~~~~~AOUaou");
-$titlebuf=str_replace("~","",$titlebuf);
-$titlebuf=str_replace('\"','',$titlebuf);
-$titlebuf=str_replace('\,','',$titlebuf);
+/**
+* We clean the $newstitle value
+*/
+require("../include/inc_newstitle_clean.php");
 // now save the newsbody to file in html format
 
 // if a pic file is uploaded move it to the right dir
 if($HTTP_POST_FILES['pic']['tmp_name']&&$HTTP_POST_FILES['pic']['size'])
 {
 	$picext=substr($HTTP_POST_FILES['pic']['name'],strrpos($HTTP_POST_FILES['pic']['name'],".")+1);
-	$picfilename=$titlebuf.'.'.$picext;
-	//$movefile='rename("'.$HTTP_POST_FILES['pic']['tmp_name'].'","../news_service/'.$lang.'/fotos/'.$picfilename.'");';
-	//eval($movefile);
-	copy($HTTP_POST_FILES['pic']['tmp_name'],"../news_service/$lang/fotos/".$target."_".$picfilename);
+    if(stristr($picext,"gif")||stristr($picext,"jpg"))
+	{
+        $picfilename=$titlebuf.'.'.$picext;
+        //$movefile='rename("'.$HTTP_POST_FILES['pic']['tmp_name'].'","../news_service/'.$lang.'/fotos/'.$picfilename.'");';
+        //eval($movefile);
+        copy($HTTP_POST_FILES['pic']['tmp_name'],"../news_service/$lang/fotos/".$target."_".$picfilename);
+	}
+	else
+	{
+		$picfilename="nopic";
+	}
 }
 
 	
@@ -58,7 +68,7 @@ if($fp=fopen($fname,"w+"))
 }
 // now save in the databank the app. info
 $dbtable="news_article_".$lang;
-include("../req/db-makelink.php");
+include("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK)
 	{	
 
@@ -75,7 +85,7 @@ if($link&&$DBLink_OK)
 							logged_encoder
 							) VALUES 
 						(	'$target',
-							'$newstitle',
+							'".addslashes($newstitle)."',
 							'$artnum',
 							'head_".$target."_".$titlebuf.".htm',
 							'".$target."_".$titlebuf.".htm',
@@ -83,19 +93,15 @@ if($link&&$DBLink_OK)
 							'$author',
 							'".date("d.m.Y")."',
 							'$publishdate',
-							'$ck_editor_user'
+							'".$HTTP_COOKIE_VARS[$local_user.$sid]."'
 							)";
 
 			if($ergebnis=mysql_query($sql,$link))
        		{
-				header("Location: editor-4plus1-read.php?sid=$ck_sid&lang=$lang&target=$target&title=".strtr($title," ","+")."&mode=preview4saved&file=".$target."_".$titlebuf.".htm&picfile=".$target."_".$picfilename); exit;
+				header("Location: editor-4plus1-read.php?sid=$sid&lang=$lang&target=$target&title=".strtr($title," ","+")."&mode=preview4saved&file=".$target."_".$titlebuf.".htm&picfile=".$target."_".$picfilename); exit;
 			}
 				else print "<p>".$sql."<p>$LDDbNoSave."; 
 
   } else { print "$LDDbNoLink $sql<br>"; }
-
 }
-
-
-
 ?>

@@ -1,15 +1,14 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-require("../language/".$lang."/lang_".$lang."_or.php");
-
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+define("LANG_FILE","or.php");
+define("NO_CHAIN",1);
+require("../include/inc_front_chain_lang.php");
 
 $template=array();
 
 setcookie(opfclic_rt,"timebar");
 setcookie(opfclic_filename,$filename);
-$imgsrc="../imgcreator/log-timebar.php?sid=$ck_sid&lang=$lang&winid=$winid&patnum=$patnum&op_nr=$op_nr&dept=$dept&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday";
+$imgsrc="../imgcreator/log-timebar.php?sid=$sid&lang=$lang&winid=$winid&patnum=$patnum&op_nr=$op_nr&dept=$dept&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday";
 setcookie(ck_comdat,"patnum=$patnum&op_nr=$op_nr&dept=$dept&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday");
 
 $hi=90;
@@ -42,9 +41,9 @@ $minute="05";
 <script language="javascript">
 function refreshparent()
 {
-	<? $comdat='&dept='.$dept.'&saal='.$saal.'&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday.'&op_nr='.$op_nr; ?>
-	window.top.LOGINPUT.location.replace('<? print "oploginput.php?sid=$ck_sid&lang=$lang&patnum=$patnum&mode=notimereset$comdat"; ?>');
-	window.top.OPLOGMAIN.location.replace('<? print "oplogmain.php?sid=$ck_sid&lang=$lang&gotoid=$patnum$comdat"; ?>');
+	<?php $comdat='&dept='.$dept.'&saal='.$saal.'&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday.'&op_nr='.$op_nr; ?>
+	window.top.LOGINPUT.location.replace("<?php print "oploginput.php?sid=$sid&lang=$lang&patnum=$patnum&mode=notimereset$comdat"; ?>");
+	window.top.OPLOGMAIN.location.replace("<?php print "oplogmain.php?sid=$sid&lang=$lang&gotoid=$patnum$comdat"; ?>");
 }
 function pruf(t)
 {
@@ -83,7 +82,7 @@ function s(h,m,x)
 		case "r": group="repos_time";
 						break;
 	}
-	window.location.href="opfclic.php?lang=<?=$lang ?>&v="+h+"."+m+"&g="+group;
+	window.location.href="opfclic.php?<?php echo "sid=$sid&lang=$lang" ?>&v="+h+"."+m+"&g="+group;
 }
 </script>
  
@@ -91,8 +90,8 @@ function s(h,m,x)
 
 <BODY  topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 bgcolor=#cde1ec alink="navy" vlink="navy" 
 onLoad="
-<?
-	if($resetmainput) print 'refreshparent();'; 
+<?php
+if($resetmainput) print 'refreshparent();'; 
 	if($scrolltab) print 'scroll2input(\''.$scrolltab.'\');setTimeout(\'scroll2time()\',30000);';
 	 else print 'scroll2time();';
 ?>setInterval('scroll2time()',900000);">
@@ -101,8 +100,7 @@ onLoad="
 <tr>
 <td >
 <map name="timebar">
-<?
-
+<?php
 $clas=array("$LDOpIn/$LDOpOut","$LDOpCut/$LDOpClose",$LDWaitTime,$LDPlasterCast,$LDReposition);
 
 /*
@@ -151,7 +149,7 @@ for($n=$tabrows,$m=0;$n<$hi;$n+=$tabrows,$m++)
 
 
 ?>
-</map><img ismap usemap="#timebar" src="<? print $imgsrc; ?>" border=0>
+</map><img ismap usemap="#timebar" src="<?php print $imgsrc; ?>" border=0>
 </td>
 </tr>
 

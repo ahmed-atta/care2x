@@ -1,16 +1,23 @@
-<? 
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_stdpass.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","stdpass.php");
+define("NO_2LEVEL_CHK",1);
+require("../include/inc_front_chain_lang.php");
 
-require("../req/config-color.php");
+require("../include/inc_config_color.php");
 require("../global_conf/areas_allow.php");
 
 $allowedarea=&$allow_area['depot'];
 
-$append="?sid=$ck_sid&lang=$lang&cat=medlager&from=$src&fwck=";
+$append="?sid=$sid&lang=$lang&cat=medlager&from=$src&userck=";
 
 switch($mode)
 {
@@ -37,29 +44,25 @@ switch($mode)
 }
 
 $thisfile="medlager-pass.php";
-$breakfile="medlager.php?sid=$ck_sid&lang=$lang";
+$breakfile="medlager.php?sid=$sid&lang=$lang";
 
 $lognote="$LDMedDepot $title ok";
 
-setcookie($userck,"");
+// reset all 2nd level lock cookies
+setcookie($userck.$sid,"");
+require("../include/inc_2level_reset.php"); setcookie(ck_2level_sid.$sid,"");
 
-if($ck_login_logged&&$ck_login_userid&&!$nointern)
-{
-$userid=$ck_login_userid;
-$checkintern=1;
-$lognote="Direct access ".$lognote;
-$pass="check";
-}
-
+require("../include/inc_passcheck_internchk.php");
 if ($pass=="check") 	
-	include("../req/passcheck.php");
+	include("../include/inc_passcheck.php");
 
 $errbuf="$LDMedDepot $title";
 $minimal=1;
-require("../req/passcheck_head.php");
+require("../include/inc_passcheck_head.php");
 ?>
 
-<BODY  <? if (!$nofocus) print 'onLoad="document.passwindow.userid.select()"'; print  ' bgcolor='.$cfg['body_bgcolor']; 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<BODY  <?php if (!$nofocus) print 'onLoad="document.passwindow.userid.select()"'; print  ' bgcolor='.$cfg['body_bgcolor']; 
  if (!$cfg['dhtml']){ print ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } 
 ?>>
 
@@ -67,20 +70,20 @@ require("../req/passcheck_head.php");
 <FONT    SIZE=-1  FACE="Arial">
 
 <P>
-<FONT  COLOR="<?=$cfg[top_txtcolor] ?>"  SIZE=5  FACE="verdana"> <b><?="$LDMedDepot $title" ?></b></font>
+<FONT  COLOR="<?php echo $cfg[top_txtcolor] ?>"  SIZE=5  FACE="verdana"> <b><?php echo "$LDMedDepot $title" ?></b></font>
 <p>
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
 
-<? require("../req/passcheck_mask.php") ?>  
+<?php require("../include/inc_passcheck_mask.php") ?>  
 
 <p>
-<!-- <img src="../img/varrow.gif" width="20" height="15"> <a href="ucons.php"><?="$LDIntro2 $LDMedDepot $title " ?></a><br>
-<img src="../img/varrow.gif" width="20" height="15"> <a href="ucons.php"><?="$LDWhat2Do $LDMedDepot $title " ?>?</a><br>
+<!-- <img src="../img/varrow.gif" width="20" height="15"> <a href="ucons.php<?php echo "?lang=$lang" ?>"><?php echo "$LDIntro2 $LDMedDepot $title " ?></a><br>
+<img src="../img/varrow.gif" width="20" height="15"> <a href="ucons.php<?php echo "?lang=$lang" ?>"><?php echo "$LDWhat2Do $LDMedDepot $title " ?>?</a><br>
  --><HR>
 <p>
 
 <?php
-require("../language/".$lang."/".$lang."_copyrite.htm");
+require("../language/".$lang."/".$lang."_copyrite.php");
  ?>
 
 

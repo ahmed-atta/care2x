@@ -1,20 +1,27 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_nursing.php");
-require("../req/config-color.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","nursing.php");
+define("NO_2LEVEL_CHK",1);
+require("../include/inc_front_chain_lang.php");
+require("../include/inc_config_color.php");
 
-$breakfile="pflege-station-patientdaten.php?sid=$ck_sid&lang=$lang&edit=$edit&station=$station&pn=$pn";
+$breakfile="pflege-station-patientdaten.php?sid=$sid&lang=$lang&edit=$edit&station=$station&pn=$pn";
 
-require("../global_conf/remoteservers_conf.php");
+require("../global_conf/inc_remoteservers_conf.php");
 
 $conn_id=NULL;
 $fileroot=strtolower($fileroot);
 $filename=array();
 //$path="../fotos/".$fileroot."/"; // for local file storage
-$path=$fotoserver_http.$fileroot."/"; // for remote file storage if source is remote server 
+$path=$fotoserver_http.$fileroot."/"; // for  file storage if source is  server 
 $localpath="$fotoserver_localpath$fileroot/"; // for file storage if in disc mode only
 ?>
 
@@ -22,8 +29,8 @@ $localpath="$fotoserver_localpath$fileroot/"; // for file storage if in disc mod
 <HTML>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<?
-require("../req/css-a-hilitebu.php");
+<?php
+require("../include/inc_css_a_hilitebu.php");
 ?>
 <style type="text/css">
 	.a12_w {font-family: arial; color: navy; font-size:12; background-color:#ffffff}
@@ -42,7 +49,7 @@ function showfoto(srcimg)
 
 function preview(s,d,p)
 {
-	imgsrc="<? if($disc_pix_mode) print $localpath; else print $path; ?>"+s;
+	imgsrc="<?php if($disc_pix_mode) print $localpath; else print $path; ?>"+s;
 	window.parent.FOTOS_PREVIEW.document.images.preview.src=imgsrc;
 	window.parent.FOTOS_PREVIEW.document.picnotes.sdate.value=d;
 	window.parent.FOTOS_PREVIEW.document.picnotes.nr.value=p;
@@ -50,7 +57,7 @@ function preview(s,d,p)
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
@@ -63,16 +70,16 @@ function gethelp(x,s,x1,x2,x3)
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0" >
 <tr valign=top>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<? print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><? print "$LDPhotos"; ?></STRONG></FONT>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" >
+<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php print "$LDPhotos"; ?></STRONG></FONT>
 </td>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp('nursing_report.php','fotos','','<?=$station ?>','<? print "$LDPhotos"; ?>')"><img src="../img/<?="$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:window.parent.location.replace('<?=$breakfile ?>');" ><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp('nursing_report.php','fotos','','<?php echo $station ?>','<?php print "$LDPhotos"; ?>')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:window.parent.location.replace('<?php echo $breakfile ?>');" ><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
 </tr>
 
 <tr>
 <td bgcolor=#cde1ec valign=top colspan=2><p><br>
 <ul>
-<?
+<?php
 print "<font face=arial font size=3 color=maroon><font size=5 >";
 
 $buf=explode("_",$fileroot);
@@ -103,12 +110,12 @@ if($disc_pix_mode)
      	} 
 	}
  closedir($handle); 
- print $localpath;
+ //print $localpath;
 
 }
 else
 {
-// *************** the ff: routine is for the remote file storage accessed by ftp ***************************
+// *************** the ff: routine is for the  file storage accessed by ftp ***************************
 // set up basic connection
 
 //$ftp_server="192.168.0.2";
@@ -183,7 +190,7 @@ for($i=0;$i<$fs;$i++)
  ?>
 
 <p>
-<a href="javascript:window.parent.location.replace('<?=$breakfile ?>');"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24></a>
+<a href="javascript:window.parent.location.replace('<?php echo $breakfile ?>');"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24></a>
 
 </nobr>
 </td>
@@ -211,7 +218,7 @@ for($i=0;$i<$fs;$i++)
 <tr>
 <td bgcolor=silver height=70 colspan=2>
 <?php
-require("../language/$lang/".$lang."_copyrite.htm");
+require("../language/$lang/".$lang."_copyrite.php");
  ?>
 </td>
 </tr>

@@ -1,11 +1,17 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_doctors.php");
-require("../req/config-color.php");
-
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","doctors.php");
+define("NO_2LEVEL_CHK",1);
+require("../include/inc_front_chain_lang.php");
+require("../include/inc_config_color.php");
 
 setcookie(username,"");
 setcookie(ck_plan,"1");
@@ -19,7 +25,7 @@ $abtname=get_meta_tags($filename);
 
 $dbtable="doctors_dutyplan";
 
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK) 
 	{	
 		
@@ -84,7 +90,7 @@ function popinfo(l,f,b)
 	h=window.screen.height;
 	ww=400;
 	wh=400;
-	urlholder="doctors-dienstplan-popinfo.php?<?="sid=$ck_sid&lang=$lang" ?>&ln="+l+"&fn="+f+"&bd="+b+"&dept=<?=$dept ?>&route=validroute&user=<? print $aufnahme_user.'"' ?>;
+	urlholder="doctors-dienstplan-popinfo.php?<?php echo "sid=$sid&lang=$lang" ?>&ln="+l+"&fn="+f+"&bd="+b+"&dept=<?php echo $dept ?>&route=validroute&user=<?php print $aufnahme_user.'"' ?>;
 	
 	infowin=window.open(urlholder,"infowin","width=" + ww + ",height=" + wh +",menubar=no,resizable=yes,scrollbars=yes");
 	window.infowin.moveTo((w/2)+20,(h/2)-(wh/2));
@@ -93,7 +99,7 @@ function popinfo(l,f,b)
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
@@ -106,31 +112,31 @@ function gethelp(x,s,x1,x2,x3)
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0" >
 <tr valign=top>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" ><FONT  COLOR="<? print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><font color="<? print $cfg['top_txtcolor']; ?>"> &nbsp; <?="$LDDoctors - $LDDutyPlan" ?></font> <?print strtoupper($abtname[$dept]); ?></STRONG></FONT></td>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" align="right"><a href="javascript:history.back();"><img src="../img/<?="$lang/$lang" ?>_back2.gif" border=0 width=110 height=24 align="absmiddle"
- alt="<?=$LDBack ?>"></a><a href="javascript:gethelp('docs_dutyplan.php','<?=$mode ?>','<?=$rows ?>')"><img src="../img/<?="$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 align="absmiddle"
-  alt="<?=$LDHelp ?>"></a><a href="op-pflege-dienst-schnellsicht.php?sid=<?=$ck_sid ?>" onClick=killchild()><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 align="absmiddle" alt="<?=$LDClosePlan ?>"></a></td></tr>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" ><FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><font color="<?php print $cfg['top_txtcolor']; ?>"> &nbsp; <?php echo "$LDDoctors - $LDDutyPlan" ?></font> <?php echo strtoupper($abtname[$dept]); ?></STRONG></FONT></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" align="right"><a href="javascript:history.back();"><img src="../img/<?php echo "$lang/$lang" ?>_back2.gif" border=0 width=110 height=24 align="absmiddle"
+ alt="<?php echo $LDBack ?>"></a><a href="javascript:gethelp('docs_dutyplan.php','<?php echo $mode ?>','<?php echo $rows ?>')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 align="absmiddle"
+  alt="<?php echo $LDHelp ?>"></a><a href="op-pflege-dienst-schnellsicht.php?sid=<?php echo $sid ?>" onClick=killchild()><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 align="absmiddle" alt="<?php echo $LDClosePlan ?>"></a></td></tr>
 
 <tr>
-<td bgcolor="<? print $cfg['body_bgcolor']; ?>" valign=top colspan=2><p>
+<td bgcolor="<?php print $cfg['body_bgcolor']; ?>" valign=top colspan=2><p>
 <ul>
 
 
 <FONT    SIZE=-1  FACE="Arial">
 
 <table border=0>
-<tr><td align=left><a href="<? print $thisfile.'?sid='.$ck_sid.'&retpath='.$retpath.'&dept='.$dept.'&pmonth=';
+<tr><td align=left><a href="<?php print $thisfile.'?sid='.$sid.'&lang='.$lang.'&retpath='.$retpath.'&dept='.$dept.'&pmonth=';
 if ($pmonth==1) print '12'.'&pyear='.($pyear-1); 
 else print ($pmonth-1).'&pyear='.$pyear; ?>">
-<font size=2 face=arial color=gray><b><? if ($pmonth==1) print $monat[12]; else print $monat[$pmonth-1]; ?></b></a></td>
+<font size=2 face=arial color=gray><b><?php if ($pmonth==1) print $monat[12]; else print $monat[$pmonth-1]; ?></b></a></td>
 <td align=center><font size=4 face=arial color=navy>
-<? print ucfirst($monat[$pmonth]).'&nbsp;&nbsp;'.$pyear; ?>
+<?php print ucfirst($monat[$pmonth]).'&nbsp;&nbsp;'.$pyear; ?>
 </font></td>
 
-<td align=right><a href="<? print $thisfile.'?sid='.$ck_sid.'&retpath='.$retpath.'&dept='.$dept.'&pmonth=';
+<td align=right><a href="<?php print $thisfile.'?sid='.$sid.'&lang='.$lang.'&retpath='.$retpath.'&dept='.$dept.'&pmonth=';
 if ($pmonth==12) print '1'.'&pyear='.($pyear+1); 
 else print ($pmonth+1).'&pyear='.$pyear; ?>">
-<font size=2 face=arial color=gray><b><? if ($pmonth==12) print $monat[1];else print $monat[$pmonth+1]; ?></b></td>
+<font size=2 face=arial color=gray><b><?php if ($pmonth==12) print $monat[1];else print $monat[$pmonth+1]; ?></b></td>
 <td>&nbsp;</td></tr>
 
 
@@ -143,11 +149,10 @@ else print ($pmonth+1).'&pyear='.$pyear; ?>">
 
 <table border=0 cellpadding=0 cellspacing=1>
 <tr><td></td><td></td>
-<td><div class=a3><font face=arial size=3 color=white><b><?=$LDDoc1 ?></b></div></td>
-<td><div class=a3><font face=arial size=3 color=white><b><?=$LDDoc2 ?></b></div></td>
+<td><div class=a3><font face=arial size=3 color=white><b><?php echo $LDDoc1 ?></b></div></td>
+<td><div class=a3><font face=arial size=3 color=white><b><?php echo $LDDoc2 ?></b></div></td>
 </tr>
-<?
-
+<?php
 $aduty=explode("~",$result[a_dutyplan]);
 $rduty=explode("~",$result[r_dutyplan]);
 
@@ -188,27 +193,27 @@ for ($i=1,$n=0,$wd=$firstday;$i<=$maxdays;$i++,$n++,$wd++){
 
 	
 </td>
-<?
+<?php
 switch($retpath)
 {
-	case "menu": $rettarget="aerzte.php?sid=$ck_sid&lang=$lang"; break;
-	case "qview": $rettarget="doctors-dienst-schnellsicht.php?sid=$ck_sid&lang=$lang&hilitedept=$dept"; break;
+	case "menu": $rettarget="aerzte.php?sid=$sid&lang=$lang"; break;
+	case "qview": $rettarget="doctors-dienst-schnellsicht.php?sid=$sid&lang=$lang&hilitedept=$dept"; break;
 	default: $rettarget="javascript:window.history.back()";
 }
 ?>
 
 <td valign="top">
-<a href="doctors-main-pass.php?target=dutyplan&dept=<? print $dept.'&sid='.$ck_sid.'&pmonth='.$pmonth.'&pyear='.$pyear.'&retpath='.$retpath.'&lang='.$lang; ?>"><img src="../img/<?="$lang/$lang" ?>_newplan.gif" border="0" alt="<?=$LDNewPlan ?>"></a>
+<a href="doctors-main-pass.php?target=dutyplan&dept=<?php print $dept.'&sid='.$sid.'&pmonth='.$pmonth.'&pyear='.$pyear.'&retpath='.$retpath.'&lang='.$lang; ?>"><img src="../img/<?php echo "$lang/$lang" ?>_newplan.gif" border="0" alt="<?php echo $LDNewPlan ?>"></a>
 <br>
-<a href="<?=$rettarget ?>"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border="0"  alt="<?=$LDClosePlan ?>"></a>
+<a href="<?php echo $rettarget ?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border="0"  alt="<?php echo $LDClosePlan ?>"></a>
 </td>
 </tr>
 </table>
 
 <p>
-<a href="doctors-main-pass.php?target=dutyplan&dept=<? print $dept.'&sid='.$ck_sid.'&pmonth='.$pmonth.'&pyear='.$pyear.'&retpath='.$retpath.'&lang='.$lang; ?>"><img src="../img/<?="$lang/$lang" ?>_newplan.gif" border="0" alt="<?=$LDNewPlan ?>"></a>
+<a href="doctors-main-pass.php?target=dutyplan&dept=<?php print $dept.'&sid='.$sid.'&pmonth='.$pmonth.'&pyear='.$pyear.'&retpath='.$retpath.'&lang='.$lang; ?>"><img src="../img/<?php echo "$lang/$lang" ?>_newplan.gif" border="0" alt="<?php echo $LDNewPlan ?>"></a>
 &nbsp;&nbsp;&nbsp;&nbsp;
-<a href="<?=$rettarget ?>"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border="0" alt="<?=$LDClosePlan ?>"></a>
+<a href="<?php echo $rettarget ?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border="0" alt="<?php echo $LDClosePlan ?>"></a>
 <p>
 </ul>
 
@@ -218,9 +223,9 @@ switch($retpath)
 </tr>
 
 <tr>
-<td bgcolor="<?=$cfg[bot_bgcolor] ?>" height=70 colspan=2>
+<td bgcolor="<?php echo $cfg[bot_bgcolor] ?>" height=70 colspan=2>
 <?php
-require("../language/$lang/".$lang."_copyrite.htm");
+require("../language/$lang/".$lang."_copyrite.php");
  ?>
 </td>
 </tr>

@@ -1,31 +1,32 @@
-<?
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","aufnahme.php");
+$local_user="medocs_user";
+require("../include/inc_front_chain_lang.php");
+
 $thisfile="medostart.php";
-if ((substr($searchkey,0,1)=="%")||(substr($searchkey,0,1)=="&")) {header("Location: $thisfile?sid=$ck_sid&lang=$lang"); exit;}; 
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)||!$medocs_user) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_aufnahme.php");
-require("../req/config-color.php"); // load color preferences
+if ((substr($searchkey,0,1)=="%")||(substr($searchkey,0,1)=="&")) {header("Location: $thisfile?sid=$sid&lang=$lang"); exit;}; 
 
-setcookie(username,"");
-$breakfile="medopass.php?sid=$ck_sid&lang=$lang";
+require("../include/inc_config_color.php"); // load color preferences
 
-function restart()
+$breakfile="medopass.php?sid=$sid&lang=$lang";
+
+if(isset($mode)&&$mode)
 {
-	header("location:medostart.php?sid=$ck_sid&lang=$ck_lang");
-	exit;
-}
-
-if($mode)
-{
-
   if(($mode=="save")&&($dept==""))
 	if($patient_no)
 	{
-		 if($ck_thispc_dept) $dept=$ck_thispc_dept;
- 			elseif($ck_thispc_station) $dept=$ck_thispc_station;
-				elseif($ck_thispc_room) $dept=$ck_thispc_room;
+		 if($HTTP_COOKIE_VARS['ck_thispc_dept']) $dept=$HTTP_COOKIE_VARS['ck_thispc_dept'];
+ 			elseif($HTTP_COOKIE_VARS['ck_thispc_station']) $dept=$HTTP_COOKIE_VARS['ck_thispc_station'];
+				elseif($HTTP_COOKIE_VARS['ck_thispc_room']) $dept=$HTTP_COOKIE_VARS['ck_thispc_room'];
 				 	else 
 					{
 						$mode="search";
@@ -36,12 +37,22 @@ if($mode)
 	else
 	{
 		$mode="search";
-		if($lastname) $searchkey=$lastname;
-			elseif($firstname) $searchkey=$firstname;
-				else restart();
-	}
+		if($lastname)
+		{
+		  $searchkey=$lastname;
+		}
+		elseif($firstname)
+			{
+			  $searchkey=$firstname;
+			 }
+			else
+                 {
+				 	header("location:medostart.php?sid=$sid&lang=$lang");
+                  	exit;
+				  }
+     }
 
-	include("../req/db-makelink.php");
+	include("../include/inc_db_makelink.php");
 	if($link&&$DBLink_OK) 
 	{	
 		switch($mode)
@@ -165,7 +176,7 @@ if($mode)
 																therapy_3='$therapy_3', 
 																edit_date='".date("d.m.Y")."',
 																edit_time='".date("H.i")."', 
-																editor='$medocs_user' 
+																editor='".$HTTP_COOKIE_VARS[$local_user.$sid]."' 
 															 WHERE dept='$dept'
 															 	AND doc_no='$doc_no' 
 																AND patient_no='$patient_no'
@@ -175,7 +186,7 @@ if($mode)
 						if($ergebnis=mysql_query($sql,$link)) 
 						{			
 						  	mysql_close($link);
-							header("location:medostart.php?sid=$ck_sid&lang=$lang&mode=saveok&dept=$dept&docn=$doc_no");
+							header("location:medostart.php?sid=$sid&lang=$lang&mode=saveok&dept=$dept&docn=$doc_no");
 							exit;
 						}else print "$LDDbNoSave<p> $sql <p>";
 				}
@@ -236,7 +247,7 @@ if($mode)
 								'$diagnosis_3',
 								'$keynumber',
 								'".date("H.i")."',
-								'$medocs_user'
+								'".$HTTP_COOKIE_VARS[$local_user.$sid]."'
 							)";
 							//print $sql;
 							if($ergebnis=mysql_query($sql,$link)) 
@@ -246,7 +257,7 @@ if($mode)
 								if($ergebnis=mysql_query($sql,$link)) 
 								{			
 						  			mysql_close($link);
-									header("location:medostart.php?sid=$ck_sid&lang=$lang&mode=saveok&dept=$dept&docn=$dn");
+									header("location:medostart.php?sid=$sid&lang=$lang&mode=saveok&dept=$dept&docn=$dn");
 									exit;
 								}else print "$$LDDbNoSave<p> $sql <p>";
 							}else print "$$LDDbNoRead<p> $sql <p>";
@@ -285,7 +296,7 @@ if($mode)
  
  <script language="JavaScript">
 <!-- Script Begin
-var iscat=<? if($mode) print 'false'; else print 'true'; ?>;
+var iscat=<?php if($mode) print 'false'; else print 'true'; ?>;
 
 function hidecat()
 {
@@ -297,7 +308,7 @@ function hidecat()
 function loadcat()
 {
   cat=new Image();
-  cat.src="../imgcreator/catcom.php?person=<?print strtr($medocs_user," ","+");?>";
+  cat.src="../imgcreator/catcom.php?sid=<?php echo $sid; ?>&lang=<?php echo $lang; ?>&person=<?php echo strtr($HTTP_COOKIE_VARS[$local_user.$sid]," ","+");?>";
   pix=new Image();
   pix.src="../img/pixel.gif";
 }
@@ -324,7 +335,7 @@ else idx.filters.alpha.opacity=70;
 }
 function setDay(d)
 {
-	var h="<? print date("d.m.Y"); ?>";
+	var h="<?php print date("d.m.Y"); ?>";
 	switch(d.value)
 	{
 		case "h": d.value=h; break;
@@ -337,7 +348,7 @@ function setDay(d)
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
@@ -351,57 +362,57 @@ div.cats{
 	top: 80;
 }
 </style>
-<? 
-require("../req/css-a-hilitebu.php");
+<?php 
+require("../include/inc_css_a_hilitebu.php");
 ?> 
 </HEAD>
 
 <BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 bgcolor="silver" onLoad="if(window.focus) window.focus();loadcat();
-<? if(!$fetchdept) print 'document.medocsform.searchkey.select()'; ?>">
+<?php if(!$fetchdept) print 'document.medocsform.searchkey.select()'; ?>">
 
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
 <tr valign=top>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="10" >
-<FONT  COLOR="<? print $cfg['top_txtcolor']; ?>"  SIZE=5  FACE="Arial">
-<STRONG>&nbsp;<?=$LDMEDOCS ?></STRONG></FONT></td>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?if($cfg['dhtml'])print'<a href="javascript:window.history.back()"><img src="../img/'.$lang.'/'.$lang.'_back2.gif" width=110 height=24 border=0  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
-<a href="javascript:gethelp('medocs_how2new.php','<?=$mode ?>','<?=$rows ?>')"><img src="../img/<?="$lang/$lang"; ?>_hilfe-r.gif" border=0 width=75 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?print $breakfile;?>"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" >
+<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=5  FACE="Arial">
+<STRONG>&nbsp;<?php echo $LDMEDOCS ?></STRONG></FONT></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right>
+<?php if($cfg['dhtml'])print'<a href="javascript:window.history.back()"><img src="../img/'.$lang.'/'.$lang.'_back2.gif" width=110 height=24 border=0  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('medocs_how2new.php','<?php echo $mode ?>','<?php echo $rows ?>')"><img src="../img/<?php echo "$lang/$lang"; ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
 
 <tr>
 <td bgcolor=#cde1ec valign=top colspan=2><p><br>
 
-<div class="cats"><a href="javascript:hidecat();document.medocsform.searchkey.select()" >
-<?
-if($mode!="") print'
-<img src="../img/pixel.gif" align=right name=catcom border=0 alt="Die Katze verstecken">';
+<div class="cats">
+<a href="javascript:hidecat();<?php if(!$fetchdept) echo "document.medocsform.searchkey.select()"; ?>">
+<?php if($mode!="") print'
+<img src="../img/pixel.gif" align=right name=catcom border=0 alt="'.$LDHideCat.'">';
 else print '
-<img src="../imgcreator/catcom.php?person='.strtr($medocs_user," ","+").'" align=right name=catcom border=0 alt="'.$LDHideCat.'">';
-?></a>
+<img src="../imgcreator/catcom.php?sid=<?php echo $sid; ?>&lang=<?php echo $lang; ?>&person='.strtr($HTTP_COOKIE_VARS[$local_user.$sid]," ","+").'" align=right name=catcom border=0 alt="'.$LDHideCat.'">';
+?>
+</a>
 </div>
 
 <ul>
 
-<? if($rows>1) : ?>
+<?php if($rows>1) : ?>
 <table border=0>
   <tr>
     <td><img src="../img/catr.gif" border=0 width=88 height=80 align="absmiddle"></td>
     <td><FONT  SIZE=3 FACE="verdana,Arial" color=#800000>
-<b><? print str_replace("~nr~",$rows,$LDFoundData); ?></b></font></td>
+<b><?php print str_replace("~nr~",$rows,$LDFoundData); ?></b></font></td>
   </tr>
 </table>
 
 <table border=0 cellpadding=0 cellspacing=0>
   <tr bgcolor=#0000aa>
-     <?
-  	for($j=0;$j<sizeof($LDElements);$j++)
+     <?php
+for($j=0;$j<sizeof($LDElements);$j++)
 		print '
 			<td><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>&nbsp;&nbsp;'.$LDElements[$j].'</b></td>';
 	?>
  </tr>
- <? 
+ <?php 
  $toggle=0;
  while($result=mysql_fetch_array($ergebnis))
  {
@@ -409,7 +420,7 @@ else print '
  	print'
   <tr ';
   if($toggle){ print "bgcolor=#efefef"; $toggle=0;} else {print "bgcolor=#ffffff"; $toggle=1;}
-  $buf="medostart.php?sid=$ck_sid&lang=$lang&mode=select&n=".$result[patnum]."&ln=".strtr($result[name]," ","+")."&fn=".strtr($result[vorname]," ","+")."&bd=".$result[gebdatum ];
+  $buf="medostart.php?sid=$sid&lang=$lang&mode=select&n=".$result[patnum]."&ln=".strtr($result[name]," ","+")."&fn=".strtr($result[vorname]," ","+")."&bd=".$result[gebdatum ];
   print '>
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'"><img src="../img/R_arrowGrnSm.gif" width=12 height=12 border=0></a></td>
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; <a href="'.$buf.'" title="'.$LDClk2Show.'">'.$result[name].'</a></td>
@@ -426,28 +437,28 @@ else print '
 </table>
 <p>
 
-<? endif ?>
+<?php endif ?>
 
-<? if(!$fetchdept) : ?>
-	<form action="<? print $thisfile; ?>" method="post" name="medocsform">
-	<FONT    SIZE=2  FACE="Arial"><?=$LDNewDocu ?>:<br>
+<?php if(!$fetchdept) : ?>
+	<form action="<?php print $thisfile; ?>" method="post" name="medocsform">
+	<FONT    SIZE=2  FACE="Arial"><?php echo $LDNewDocu ?>:<br>
 	<input type="text" name="searchkey" size=25 maxlength=40>
-	<input type="submit" value="<?=$LDSearch ?>">
-	<input type="hidden" name="sid" value="<? print $ck_sid; ?>">
-	<input type="hidden" name="lang" value="<? print $lang; ?>">
+	<input type="submit" value="<?php echo $LDSearch ?>">
+	<input type="hidden" name="sid" value="<?php print $sid; ?>">
+	<input type="hidden" name="lang" value="<?php print $lang; ?>">
 	<input type="hidden" name="mode" value="search">
 	</form>
-<? endif ?>
+<?php endif ?>
 
-<? if(($rows==1)||($mode=="?")||($mode=="")) :?>
+<?php if(($rows==1)||($mode=="?")||($mode=="")) :?>
 
-<FORM METHOD="post" ACTION="medostart.php">
-<TABLE  <? if($mode=="saveok") print "bgcolor=#fcfcfc"; else print "bgcolor=#000000"; ?> CELLPADDING=1 CELLSPACING=0>
+<FORM method="post" action="medostart.php" name="medocsdataform">
+<TABLE  <?php if($mode=="saveok") print "bgcolor=#fcfcfc"; else print "bgcolor=#000000"; ?> CELLPADDING=1 CELLSPACING=0>
 <TR><TD > 
 <TABLE  CELLPADDING=2 CELLSPACING=0 border=0>
-	<? if($fetchdept)
+	<?php if($fetchdept)
  		print '
-    	<tr>
+    	<tr  bgcolor=#dfdfdf>
 		<td><img src="../img/catr.gif" width=88 height=80 border=0>
 		</td>
      	 <td colspan=3>
@@ -463,9 +474,9 @@ else print '
     	</tr>';
 	?>  
 <TR VALIGN="baseline"  bgcolor=#dfdfdf>
-	<TD><FONT    SIZE=2  FACE="Arial"><?=$LDLastName ?>:</TD>
+	<TD><FONT    SIZE=2  FACE="Arial"><?php echo $LDLastName ?>:</TD>
 	<TD> 
-	<? 
+	<?php 
 	 if($mode=="saveok") print '
 	 	<FONT    SIZE=2  FACE="Arial" color="#80000"><b>'.ucfirst($result[lastname]).'</b>'; 
 	 elseif($newpatfound) print '
@@ -475,9 +486,9 @@ else print '
 	 	<INPUT NAME="lastname" TYPE="text" VALUE="'.$result[name].$result[lastname].'" SIZE="30">';
 	 ?><BR>
 				</TD>
-	<TD><FONT    SIZE=2  FACE="Arial"><?=$LDCaseNr ?>:</TD>
+	<TD><FONT    SIZE=2  FACE="Arial"><?php echo $LDCaseNr ?>:</TD>
 	<TD>
-	<? if($mode!="")
+	<?php if($mode!="")
 	{ print '<FONT    SIZE=2  FACE="Arial" color="#80000">'.$result[patient_no].$result[patnum];
 		 print '<input type="hidden" name="patient_no" value="'.$result[patnum].'">';
 	}   
@@ -487,9 +498,9 @@ else print '
 	</TR>
 
 <TR VALIGN="baseline" bgcolor=#dfdfdf>
-	<TD><FONT    SIZE=2  FACE="Arial"><?=$LDFirstName ?>:</TD>
+	<TD><FONT    SIZE=2  FACE="Arial"><?php echo $LDFirstName ?>:</TD>
 	<TD colspan=3> 
-	<? 
+	<?php 
 		if($mode=="saveok") print '
 			<FONT    SIZE=2  FACE="Arial" color="#80000">'.ucfirst($result[firstname]); 
 		elseif($newpatfound) print '
@@ -502,8 +513,8 @@ else print '
 	</TR>
 	
 <TR VALIGN="baseline"  bgcolor=#dfdfdf>
-	<TD><FONT    SIZE=2  FACE="Arial"><?=$LDBday ?></TD>
-	<TD> <? 
+	<TD><FONT    SIZE=2  FACE="Arial"><?php echo $LDBday ?></TD>
+	<TD> <?php 
 				if($mode=="saveok") print '<FONT    SIZE=2  FACE="Arial" color="#80000">'.ucfirst($result[birthdate]); 
 				elseif($newpatfound) print '<FONT    SIZE=2  FACE="Arial" color="#80000">'.$result[gebdatum].$result[birthdate].'
 													<INPUT NAME="birthdate" TYPE="hidden" VALUE="'.$result[gebdatum].$result[birthdate].'">';
@@ -511,8 +522,8 @@ else print '
 			?>
 				<BR>
 				</TD>
-	<TD><FONT    SIZE=2  FACE="Arial"><?=$LDInsurance ?>:</TD>
-	<TD> <? 
+	<TD><FONT    SIZE=2  FACE="Arial"><?php echo $LDInsurance ?>:</TD>
+	<TD> <?php 
 				if($mode=="saveok") print '<FONT    SIZE=2  FACE="Arial" color="#80000">'.ucfirst($result[insurance]); 
 				elseif($newpatfound) print '<FONT    SIZE=2  FACE="Arial" color="#80000">'.$result[kassename].$result[insurance].'
 													<INPUT NAME="insurance" TYPE="hidden" VALUE="'.$result[kassename].$result[insurance].'">';
@@ -521,8 +532,8 @@ else print '
 				<BR>
 				</TD>
 <TR VALIGN="top" bgcolor=#dfdfdf>
-	<TD><FONT    SIZE=2  FACE="Arial"><?=$LDAddress ?>:</TD>
-	<TD> <? 
+	<TD><FONT    SIZE=2  FACE="Arial"><?php echo $LDAddress ?>:</TD>
+	<TD> <?php 
 				if($mode=="saveok") print '<FONT    SIZE=2  FACE="Arial" color="#80000">'.nl2br($result[address]); 
 				elseif($newpatfound) print '<FONT    SIZE=2  FACE="Arial" color="#80000">'.nl2br($result[address]).'
 													<INPUT NAME="address" TYPE="hidden" VALUE="'.$result[address].'">';
@@ -530,14 +541,14 @@ else print '
 			?>
 				<BR>
 				</TD>
-	<TD><FONT    SIZE=2  FACE="Arial"><?=$LDExtraInfo ?>:</TD>
-	<TD ><? if($mode=="saveok") print '<FONT    SIZE=2  FACE="Arial" color="#80000">'.nl2br($result[insurance_xtra]); else print '<TEXTAREA NAME="insurance_xtra" Content-Type="text/html"
+	<TD><FONT    SIZE=2  FACE="Arial"><?php echo $LDExtraInfo ?>:</TD>
+	<TD ><?php if($mode=="saveok") print '<FONT    SIZE=2  FACE="Arial" color="#80000">'.nl2br($result[insurance_xtra]); else print '<TEXTAREA NAME="insurance_xtra" Content-Type="text/html"
 	COLS="28" ROWS="3">'.$result[insurance_xtra].'</TEXTAREA>';?></TD></TR>
 <TR>
 <TR VALIGN="baseline" bgcolor=#dfdfdf>
-	<TD><FONT    SIZE=2  FACE="Arial"><?=$LDSex ?></TD>
+	<TD><FONT    SIZE=2  FACE="Arial"><?php echo $LDSex ?></TD>
 	<TD colspan=3>
-	<? if($mode=="saveok")
+	<?php if($mode=="saveok")
 	{  print '<FONT    SIZE=2  FACE="Arial" color="#800000">';
 		if($result[sex]=="m") print $LDMale; else print $LDFemale;
 	}
@@ -559,9 +570,9 @@ else print '
 	?>
 
 <TR VALIGN="top" bgcolor=#dfdfdf>
-	<TD><FONT    SIZE=2  FACE="Arial"><?=$LDMedAdvice ?>:</TD>
+	<TD><FONT    SIZE=2  FACE="Arial"><?php echo $LDMedAdvice ?>:</TD>
 	<TD colspan=3>
-	<? if($mode=="saveok")
+	<?php if($mode=="saveok")
 	{  print '<FONT    SIZE=2  FACE="Arial" color="#800000">';
 		if($result[informed]) print $LDYes; else print $LDNo;
 	}
@@ -580,25 +591,25 @@ else print '
 		<td colspan=4></td>
     	</tr>
 <TR VALIGN="top"  bgcolor=#dfdfdf>
-	<TD><FONT    SIZE=2  FACE="Arial"><?=$LDDiagnosis ?>:</TD>
-	<TD colspan=3><FONT    SIZE=2  FACE="Arial"><? if($mode=="saveok") print '<FONT    SIZE=2  FACE="Arial" color="#80000">'.nl2br($result[diagnosis_1]); else print '<TEXTAREA NAME="diagnosis_1" Content-Type="text/html"
+	<TD><FONT    SIZE=2  FACE="Arial"><?php echo $LDDiagnosis ?>:</TD>
+	<TD colspan=3><FONT    SIZE=2  FACE="Arial"><?php if($mode=="saveok") print '<FONT    SIZE=2  FACE="Arial" color="#80000">'.nl2br($result[diagnosis_1]).'<p>'; else print '<TEXTAREA NAME="diagnosis_1" Content-Type="text/html"
 	COLS="75" ROWS="10">'.$result[diagnosis_1].'</TEXTAREA>';?><br>
-	<img src="../img/arrow.gif" border=0 width=15 height=15 align=absmiddle><a href="#?mode=<?=$mode ?>"><? if ($mode!="saveok") print $LDEnterDiagnosisNote; else print $LDSeeDiagnosisNote; ?></a></TD></TR>
+	<img src="../img/arrow.gif" border=0 width=15 height=15 align=absmiddle><a href="#?mode=<?php echo $mode ?>"><?php if ($mode!="saveok") print $LDEnterDiagnosisNote; else print $LDSeeDiagnosisNote; ?></a></TD></TR>
 <tr bgcolor="#000000">
 		<td colspan=4></td>
     	</tr>
 <TR  bgcolor=#dfdfdf>
-	<TD valign=top><FONT    SIZE=2  FACE="Arial"><?=$LDTherapy ?>:</TD>
-	<TD colspan=3><FONT    SIZE=2  FACE="Arial"><? if($mode=="saveok") print '<FONT    SIZE=2  FACE="Arial" color="#80000">'.nl2br($result[therapy_1]); else print '<TEXTAREA NAME="therapy_1" Content-Type="text/html"
+	<TD valign=top><FONT    SIZE=2  FACE="Arial"><?php echo $LDTherapy ?>:</TD>
+	<TD colspan=3><FONT    SIZE=2  FACE="Arial"><?php if($mode=="saveok") print '<FONT    SIZE=2  FACE="Arial" color="#80000">'.nl2br($result[therapy_1]).'<p>'; else print '<TEXTAREA NAME="therapy_1" Content-Type="text/html"
 	COLS="75" ROWS="10">'.$result[therapy_1].'</TEXTAREA>';?><br>
-	<img src="../img/arrow.gif" border=0 width=15 height=15 align=absmiddle><a href="#?mode=<?=$mode ?>"><? if ($mode!="saveok") print $LDEnterTherapyNote; else print $LDSeeTherapyNote; ?></a></TD></TR>
+	<img src="../img/arrow.gif" border=0 width=15 height=15 align=absmiddle><a href="#?mode=<?php echo $mode ?>"><?php if ($mode!="saveok") print $LDEnterTherapyNote; else print $LDSeeTherapyNote; ?></a></TD></TR>
 <tr bgcolor="#000000">
 		<td colspan=4></td>
     	</tr>
 <TR VALIGN="baseline"  bgcolor=#dfdfdf>
-	<TD><FONT    SIZE=2  FACE="Arial"><?=$LDEditOn ?>:</TD>
+	<TD><FONT    SIZE=2  FACE="Arial"><?php echo $LDEditOn ?>:</TD>
 	<TD colspan=3><FONT    SIZE=2  FACE="Arial" color="#80000">
-	<? if(($mode=="saveok")||($mode=="update")) print $result[enc_date].'&nbsp;&nbsp;<font color="#0">'.$LDAt.': <font color="#800000">'.$result[enc_time]; 
+	<?php if(($mode=="saveok")||($mode=="update")) print $result[enc_date].'&nbsp;&nbsp;<font color="#0">'.$LDAt.': <font color="#800000">'.$result[enc_time]; 
 	else 
 	{
 	print '<INPUT NAME="enc_date" TYPE="text" VALUE="'.strftime("%d.%m.%Y").'" SIZE="20"  onKeyUp=setDay(this)> (tt.mm.jjjj)';
@@ -607,45 +618,46 @@ else print '
 	<BR></TD>
 	</TR>
 <TR VALIGN="baseline"  bgcolor=#dfdfdf>
-	<TD><FONT    SIZE=2  FACE="Arial"><?=$LDEditBy ?>:</TD>
+	<TD><FONT    SIZE=2  FACE="Arial"><?php echo $LDEditBy ?>:</TD>
 	<TD><FONT    SIZE=2  FACE="Arial" color="#80000">
-	<? if(($mode=="saveok")||($mode=="update")) print $result[encoder]; 
+	<?php
+	 if(($mode=="saveok")||($mode=="update")) print $result[encoder]; 
 	else
-	 print '<INPUT NAME="encoder" TYPE="text" VALUE="'.$medocs_user.'" SIZE="30">';
+	 print '<INPUT NAME="encoder" TYPE="text" VALUE="'.$HTTP_COOKIE_VARS[$local_user.$sid].'" SIZE="30">';
 
 	?>
 	<BR></TD>
-	<TD><FONT    SIZE=2  FACE="Arial"><?=$LDKeyNr ?>:</TD>
+	<TD><FONT    SIZE=2  FACE="Arial"><?php echo $LDKeyNr ?>:</TD>
 	<TD><FONT    SIZE=2  FACE="Arial" color="#80000">
-	<? if(($mode=="saveok")||($mode=="update")) print $result[keynumber]; 
+	<?php if(($mode=="saveok")||($mode=="update")) print $result[keynumber]; 
 	else print '<INPUT NAME="keynumber" TYPE="text" VALUE="'.$result[keynumber].'" SIZE="30">';?><BR></TD>
 	</TR>
-<? if ($mode=="saveok") : ?>
+<?php if ($mode=="saveok") : ?>
 </TABLE>
 </TD></TR>
 </TABLE><p>
-<input type="submit" value="<?=$LDUpdateData ?>">
+<input type="submit" value="<?php echo $LDUpdateData ?>">
 <input type="hidden" name="mode" value="update">
-<input type="hidden" name="dept" value="<?=$result[dept] ?>">
-<input type="hidden" name="doc_no" value="<?=$result[doc_no] ?>">
-<input type="hidden" name="enc_date" value="<?=$result[enc_date] ?>">
-<input type="hidden" name="lastname" value="<?=$result[lastname] ?>">
-<input type="hidden" name="firstname" value="<?=$result[firstname] ?>">
-<input type="hidden" name="birthdate" value="<?=$result[birthdate] ?>">
-<input type="hidden" name="keynumber" value="<?=$result[keynumber] ?>">
-<? else : ?>
+<input type="hidden" name="dept" value="<?php echo $result[dept] ?>">
+<input type="hidden" name="doc_no" value="<?php echo $result[doc_no] ?>">
+<input type="hidden" name="enc_date" value="<?php echo $result[enc_date] ?>">
+<input type="hidden" name="lastname" value="<?php echo $result[lastname] ?>">
+<input type="hidden" name="firstname" value="<?php echo $result[firstname] ?>">
+<input type="hidden" name="birthdate" value="<?php echo $result[birthdate] ?>">
+<input type="hidden" name="keynumber" value="<?php echo $result[keynumber] ?>">
+<?php else : ?>
 <tr bgcolor="#000000">
 		<td colspan=4></td>
     	</tr>
 <TR  bgcolor=#dfdfdf>
-	<TD ALIGN="right"><INPUT TYPE="submit" VALUE="<?=$LDSave ?>"></TD>
-	<TD ALIGN="center" colspan=3><INPUT TYPE="reset" VALUE="<?=$LDReset ?>"></TD>
+	<TD ALIGN="right"><INPUT TYPE="submit" VALUE="<?php echo $LDSave ?>"></TD>
+	<TD ALIGN="center" colspan=3><INPUT TYPE="reset" VALUE="<?php echo $LDReset ?>"></TD>
 	</TR>
 </TABLE>
 </TD></TR>
 </TABLE>
 <input type="hidden" name="mode" value="save">
-	<? if($mode=="update") 
+	<?php if($mode=="update") 
 		print '
 		<input type="hidden" name="update" value="1">
 		<input type="hidden" name="dept" value="'.$result[dept].'">
@@ -656,24 +668,23 @@ else print '
   		<input type="hidden" name="keynumber" value="'.$result[keynumber].'">
   		'; 
   ?>
-<? endif ?>
+<?php endif ?>
 
-<? endif ?>
-<input type="hidden" name="sid" value="<?=$ck_sid ?>">
-<input type="hidden" name="lang" value="<?=$lang ?>">
+<?php endif ?>
+<input type="hidden" name="sid" value="<?php echo $sid ?>">
+<input type="hidden" name="lang" value="<?php echo $lang ?>">
 </FORM>
 
 <p>
-<a href="<?
-				if($ck_login_logged) print 'startframe.php?sid='.$ck_sid.'&lang='.$lang;
-				else print 'medopass.php?sid='.$ck_sid.'&target=entry&lang='.$lang;
-			?>"><img border=0 src="../img/<?="$lang/$lang" ?>_cancel.gif" alt="<?=$LDCancel ?>"></a>
+<a href="<?php
+if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) print 'startframe.php?sid='.$sid.'&lang='.$lang;
+				else print 'medopass.php?sid='.$sid.'&target=entry&lang='.$lang;
+			?>"><img border=0 src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" alt="<?php echo $LDCancel ?>"></a>
 <p>
 <FONT    SIZE=2  FACE="Arial">
-<img src="../img/varrow.gif" width="20" height="15"> <a href="medocs-search.php?sid=<?="$ck_sid&lang=$lang" ?>&mode=?"><?=$LDDocSearch ?></a><br>
-<img src="../img/varrow.gif" width="20" height="15"> <a href="medocs-archiv.php?sid=<?="$ck_sid&lang=$lang" ?>&mode=?"><?=$LDArchive ?></a><br>
-<img src="../img/varrow.gif" width="20" height="15"> <a href="javascript:showcat()"><?=$LDCatPls ?></a><br>
-
+<img src="../img/varrow.gif" width="20" height="15"> <a href="medocs-search.php?sid=<?php echo "$sid&lang=$lang" ?>&mode=?"><?php echo $LDDocSearch ?></a><br>
+<img src="../img/varrow.gif" width="20" height="15"> <a href="medocs-archiv.php?sid=<?php echo "$sid&lang=$lang" ?>&mode=?"><?php echo $LDArchive ?></a><br>
+<img src="../img/varrow.gif" width="20" height="15"> <a href="javascript:showcat()"><?php echo $LDCatPls ?></a><br>
 
 </ul>
 
@@ -681,21 +692,15 @@ else print '
 <p>
 </td>
 </tr>
-
 <tr>
 <td bgcolor=silver height=70 colspan=2>
-
 <?php
-require("../language/$lang/".$lang."_copyrite.htm");
+require("../language/$lang/".$lang."_copyrite.php");
  ?>
-
 </td>
 </tr>
 </table>        
 &nbsp;
-
 </FONT>
-
-
 </BODY>
 </HTML>

@@ -1,35 +1,29 @@
-<? 
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_stdpass.php");
-require("../req/config-color.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+define("LANG_FILE","stdpass.php");
+define("NO_2LEVEL_CHK",1);
+require("../include/inc_front_chain_lang.php");
+require("../include/inc_config_color.php");
 require("../global_conf/areas_allow.php");
 
 $allowedarea=&$allow_area['radio'];
 
-$fileforward="radiolog-xray-diagnosis-write.php?sid=$ck_sid&lang=$lang";
+$fileforward="radiolog-xray-diagnosis-write.php?sid=$sid&lang=$lang";
 
-if($retpath=="read_diagnosis") $breakfile="radiolog-xray-diagnosis.php?sid=$ck_sid&lang=$lang";
- 	else $breakfile="javascript:window.top.location.replace('radiolog-xray-javastart.php?sid=$ck_sid&lang=$lang&mode=display1')";
+if($retpath=="read_diagnosis") $breakfile="radiolog-xray-diagnosis.php?sid=$sid&lang=$lang";
+ 	else $breakfile="javascript:window.top.location.replace('radiolog-xray-javastart.php?sid=$sid&lang=$lang&mode=display1')";
 	
 $thisfile="radiolog-xray-diagnosis-write-pass.php";
 
 $userck="ck_radio_user";
 //reset cookie;
-setcookie($userck,"");
+// reset all 2nd level lock cookies
+setcookie($userck.$sid,"");
+require("../include/inc_2level_reset.php"); setcookie(ck_2level_sid.$sid,"");
 
-if($ck_login_logged&&$ck_login_userid&&!$nointern)
-{
-$userid=$ck_login_userid;
-$checkintern=1;
-$lognote="Direct access ".$lognote;
-$pass="check";
-}
-
+require("../include/inc_passcheck_internchk.php");
 if ($pass=="check") 	
-	include("../req/passcheck.php");
+	include("../include/inc_passcheck.php");
 
 ?>
 
@@ -40,7 +34,7 @@ if ($pass=="check")
 
 </HEAD>
 
-<BODY  <? if (!$nofocus) print 'onLoad="document.passwindow.userid.focus()"'; print  ' bgcolor='.$cfg['body_bgcolor']; 
+<BODY  <?php if (!$nofocus) print 'onLoad="document.passwindow.userid.focus()"'; print  ' bgcolor='.$cfg['body_bgcolor']; 
  if (!$cfg['dhtml']){ print ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } 
 ?>>
 
@@ -48,8 +42,8 @@ if ($pass=="check")
 
 <center>
 
-<FORM action="<? print $thisfile; ?>" method="post" name="passwindow">
-<? if ((($userid!=NULL)||($keyword!=NULL))&&($passtag!=NULL)) 
+<FORM action="<?php print $thisfile; ?>" method="post" name="passwindow">
+<?php if ((($userid!=NULL)||($keyword!=NULL))&&($passtag!=NULL)) 
 {
 print '<FONT  COLOR="red"  SIZE=+2  FACE="Arial"><STRONG>';
 
@@ -72,7 +66,7 @@ print '</STRONG></FONT>';
 
 <table  border=0 cellpadding=0 cellspacing=0>
 <tr>
-<? if(!$passtag) print'
+<?php if(!$passtag) print'
 <td>
 
 <img src="../img/ned2r.gif" border=0 width=100 height=138 >
@@ -92,21 +86,21 @@ print '</STRONG></FONT>';
 
 
 <font color=maroon size=3>
-<b><?=$LDPwNeeded ?>!</b></font><p>
+<b><?php echo $LDPwNeeded ?>!</b></font><p>
 <font face="Arial,Verdana"  color="#000000" size=-1>
-<nobr><?=$LDUserPrompt ?>:</nobr><br></font>
+<nobr><?php echo $LDUserPrompt ?>:</nobr><br></font>
 <INPUT type="text" name="userid" size="14" maxlength="25"> <p>
-<font face="Arial,Verdana"  color="#000000" size=-1><nobr><?=$LDPwPrompt ?>:</font><br>
+<font face="Arial,Verdana"  color="#000000" size=-1><nobr><?php echo $LDPwPrompt ?>:</font><br>
 <INPUT type="password" name="keyword" size="14" maxlength="25"> 
 <input type="hidden" name="pass" value="check">
-<input type="hidden" name="sid" value="<? print $ck_sid; ?>">
-<input type="hidden" name="lang" value="<? print $lang; ?>">
-<input type="hidden" name="mode" value="<?=$mode ?>">
+<input type="hidden" name="sid" value="<?php print $sid; ?>">
+<input type="hidden" name="lang" value="<?php print $lang; ?>">
+<input type="hidden" name="mode" value="<?php echo $mode ?>">
 <input type="hidden" name="nointern" value="1">
-<input type="image" src="../img/<?="$lang/$lang" ?>_continue.gif" border=0 width=110 height=24>
+<input type="image" src="../img/<?php echo "$lang/$lang" ?>_continue.gif" border=0 width=110 height=24>
 </font>
 <p>
-<a href="<?=$breakfile; ?>"><img src="../img/<?="$lang/$lang" ?>_cancel.gif" border=0 width=103 height=24 alt="<?=$LDCancel ?>" align="absmiddle"></a>
+<a href="<?php echo $breakfile; ?>"><img src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" border=0 width=103 height=24 alt="<?php echo $LDCancel ?>" align="absmiddle"></a>
 </td>
 </tr>
 </table>

@@ -1,15 +1,27 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","editor.php");
+define("NO_2LEVEL_CHK",1);
+require("../include/inc_front_chain_lang.php");
+require("../include/inc_config_color.php");
 
-require("../language/".$lang."/lang_".$lang."_editor.php");
+// reset all 2nd level lock cookies
+require("../include/inc_2level_reset.php");
 
 $newspath="../news_service/".$lang."/news/";
-$readerpath="cafenews-read.php?file=";
-
+$readerpath="cafenews-read.php?sid=$sid&file=";
+$news_num_stop=3; // maximum number of news displayed
+$LDEditTitle="Cafenews";
 $today=date("Ymd");
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK)
 	{	
 		$dbtable="news_article_".$lang;
@@ -80,14 +92,15 @@ if($link&&$DBLink_OK)
 function editcafe()
 {
 
-		if(confirm("<?=$LDConfirmEdit ?>"))
+		if(confirm("<?php echo $LDConfirmEdit ?>"))
 		{
-			window.location.href="cafenews-edit-pass.php?sid=<?="$ck_sid&lang=$lang&title=$LDCafeNews" ?>";
+			window.location.href="cafenews-edit-pass.php?sid=<?php echo "$sid&lang=$lang&title=$LDCafeNews" ?>";
 			return false;
 		}
-
 }
 </script>
+
+<?php if($cfg['dhtml']) include("../include/inc_css_a_hilitebu.php"); ?>
 
 <style type="text/css" name="s2">
 .vn { font-family:verdana,arial; color:#000088; font-size:10}
@@ -95,68 +108,45 @@ function editcafe()
 
 </HEAD>
 <BODY bgcolor=#ffffff VLINK="#003366" link="#003366">
-<TABLE CELLSPACING=10 cellpadding=0 border="0" width="590">
+
+ <TABLE CELLSPACING=5 cellpadding=0 border="0" width="601">
+
 <tr>
 <td colspan=3>
 <FONT  SIZE=8 COLOR="#cc6600" FACE="verdana,Arial">
-<a href="javascript:editcafe()"><img src="../img/basket.gif" width=74 height=70 border=0></a> <b><?=$LDCafeNews ?></b></FONT>
+<a href="javascript:editcafe()"><img src="../img/basket.gif" width=74 height=70 border=0></a> <b><?php echo $LDCafeNews ?></b></FONT>
 <hr>
 </td>
 </tr>
-
-<TR >
-<TD WIDTH=80% VALIGN="top" >
-
-<? 
-$nofile=0;
- if($art[1])
-	{
-		$picpath="../news_service/".$lang."/fotos/".$art[1][pic_file];
-		if(file_exists($picpath)&&file_exists($newspath.$art[1][head_file]))
-		{
-			$picpath="../news_service/".$lang."/fotos/".$art[1][pic_file];
-			$picsize=GetImageSize($picpath);
-		 	print '
-				<img src="'.$picpath.'" border=0 align="left" ';
-			if($picsize[0]>150) print 'width="150">';
-				else print $picsize[3].'>';
-		}
-		if (file_exists($newspath.$art[1][head_file]))
-		{
-			 include($newspath.$art[1][head_file]);
-		 	print'
-		 	<a href="'.$readerpath.$art[1][main_file].'&lang='.$lang.'&picfile='.$art[1][pic_file].'&palign=left&title='.$LDEditTitle.'"><font size=1 color="#ff0000" face="arial">'.$LDMore.'...</font></a>';
-		}
-		else $nofile=1;
-	} 
-
-	if(!$art[1]||$nofile)
-	{ 
-		$i=1;
-		print '
- 		<img src="../img/pplanu-s.jpg" border=0 width=130 height=98 align="left">';
-		include("../language/".$lang."/lang_".$lang."_newsdummy.php");
-		print '<a href="cafenews-edit-pass.php?sid='.$ck_sid.'&title='.strtr($LDCafeNews," ","+").'&lang='.$lang.'">
-		<font size=1 color="#ff0000" face="arial">'.$LDClk2Edit.'</font></a>';
-	}?>
-</TD>
+ 
+  <tr>
+    <td WIDTH=480 VALIGN="top">
+	<FONT  SIZE=1 COLOR="<?php print $cfg['body_txtcolor']; ?>" FACE="verdana,Arial">
 	
-<td valign=top width="1" bgcolor="maroon" rowspan=2 ><img src="../img/pixel.gif" width="1" height="1">
-</td>
-
-
-<TD WIDTH=20% VALIGN="top"  rowspan=2>
+	<table>
+ <?php
+ $editor_path="cafenews-edit-pass.php?sid=".$sid."&lang=".$lang."&title=".$LDCafeNews;
+ require("../include/inc_news_display.php");
+?>
+	</table>
 	
-<table cellspacing=0 cellpadding=1 border=0align=right>
+	</td>
+<TD  VALIGN="top"   bgcolor="<?php print $cfg['idx_txtcolor']; ?>" width=1>
+<img src="../img/pixel.gif" border=0 width=1 height=1>
+    </TD>
+<TD WIDTH=120 VALIGN="top" >
+	<FONT  SIZE=2  FACE="arial,verdana">
+
+<table cellspacing=0 cellpadding=1 border=0 align=right width=100%>
 <tr bgcolor="#999999" >
 <td>
-<table  cellspacing=0 cellpadding=2 align=right>
+<table  cellspacing=0 cellpadding=2 align=right width=100%>
 <tr><td bgcolor=maroon align=center colspan=2>	<FONT  SIZE=2 FACE="verdana,Arial" color=white>
-<b><?=$LDMenuToday ?></b>
+<b><?php echo $LDMenuToday ?></b>
 </td>
 </tr>
 <tr>
-<td bgcolor="#ffffcc" class="vn"><nobr><? print nl2br($menu[menu]); ?></nobr>
+<td bgcolor="#ffffcc" class="vn"><nobr><?php print nl2br($menu[menu]); ?></nobr>
 </td> 
 </tr>
 
@@ -169,108 +159,24 @@ $nofile=0;
 <img src="../img/frage.gif" width=15 height=15 border=0>
 <br>
 <FONT  SIZE=-1 FACE="Arial" >
-		&nbsp;<A HREF="cafenews-menu.php?lang=<?=$lang ?>"><?=$LDMenuAll ?></A><br>
+		&nbsp;<A HREF="cafenews-menu.php?<?php echo "sid=$sid&lang=$lang" ?>"><?php echo $LDMenuAll ?></A><br>
 <img src="../img/frage.gif" width=15 height=15 border=0>
 <br>
-	&nbsp;<A HREF="cafenews-prices.php?lang=<?=$lang ?>"><?=$LDPrices ?></A>
+	&nbsp;<A HREF="cafenews-prices.php?<?php echo "sid=$sid&lang=$lang" ?>"><?php echo $LDPrices ?></A>
+	<hr>
+	<a href="cafenews-edit-pass.php?sid=<?php echo "$sid&lang=$lang&title=$LDCafeNews" ?>"><?php echo $LDCafeEditorial ?></a>
+
 </td>
 </tr></table>
-
-
-
-
-
-
     </TD>
-</TR>
-<tr>
-<td width="80%">
-<hr>
-
-<?
-$nofile=0;
-  if($art[2])
-	{
-		$picpath="../news_service/".$lang."/fotos/".$art[2][pic_file];
-		if(file_exists($picpath)&&file_exists($newspath.$art[2][head_file]))
-		{
-			$picsize=GetImageSize($picpath);
-		 	print '
-				<img src="'.$picpath.'" border=0 align="right" ';
-			if($picsize[0]>150) print 'width="150">';
-				else print $picsize[3].'>';
-		}
-		if (file_exists($newspath.$art[2][head_file]))
-		{
-		 include($newspath.$art[2][head_file]);
-		 print'
-		 	<a href="'.$readerpath.$art[2][main_file].'&lang='.$lang.'&picfile='.$art[2][pic_file].'&palign=right&title='.$LDEditTitle.'"><font size=1 color="#ff0000" face="arial">'.$LDMore.'...</font></a>';
-		}
-		else $nofile=1;
-	} 
-	
-	if(!$art[2]||$nofile)
-	{ 
-		$i=2;
-		print '
- 		<img src="../img/pplanu-s.jpg" border=0 width=130 height=98 align="right">';
-		include("../language/".$lang."/lang_".$lang."_newsdummy.php");
-		print '<a href="cafenews-edit-pass.php?sid='.$ck_sid.'&title='.strtr($LDCafeNews," ","+").'&lang='.$lang.'">
-		<font size=1 color="#ff0000" face="arial">'.$LDClk2Edit.'</font></a>';
-
-	}
-?>
-	
-<hr>
-<?
-$nofile=0;
-  if($art[3])
-	{
-		$picpath="../news_service/".$lang."/fotos/".$art[3][pic_file];
-		if(file_exists($picpath)&&file_exists($newspath.$art[3][head_file]))
-		{
-			$picsize=GetImageSize($picpath);
-		 	print '
-				<img src="'.$picpath.'" border=0 align="left" ';
-			if($picsize[0]>150) print 'width="150">';
-				else print $picsize[3].'>';
-		}
-		if (file_exists($newspath.$art[3][head_file]))
-		{
-		 include($newspath.$art[3][head_file]);
-		 print'
-		 	<a href="'.$readerpath.$art[3][main_file].'&lang='.$lang.'&picfile='.$art[3][pic_file].'&palign=left&title='.$LDEditTitle.'"><font size=1 color="#ff0000" face="arial">'.$LDMore.'...</font></a>';
-		}
-		else $nofile=1;
-	} 
-	
-	if(!$art[3]||$nofile)
-	{ 
-		$i=3;
-		print '
- 		<img src="../img/pplanu-s.jpg" border=0 width=130 height=98 align="left">';
-		include("../language/".$lang."/lang_".$lang."_newsdummy.php");
-		print '<a href="cafenews-edit-pass.php?sid='.$ck_sid.'&title='.strtr($LDCafeNews," ","+").'&lang='.$lang.'">
-		<font size=1 color="#ff0000" face="arial">'.$LDClk2Edit.'</font></a>';
-
-	}
- ?>
-
-</td>
-</tr>
-
-<tr>
-<td colspan=3>
-<hr>
+  </tr>
+  <tr>
+    <td colspan=3>
+	<a href="cafenews-edit-pass.php?sid=<?php echo "$sid&lang=$lang&title=$LDCafeNews" ?>"><img src="../img/news.gif" width=16 height=14 border=0></a>
 <?php
-require("../language/".$lang."/".$lang."_copyrite.htm");
- ?>
-</td>
-</tr>
-
-</TABLE>
-
-
-
+require("../language/$lang/".$lang."_copyrite.php");
+ ?></td>
+  </tr>
+</table>
 </BODY>
 </HTML>

@@ -1,29 +1,28 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)||!$ck_op_dienstplan_user) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_or.php");
-require("../req/config-color.php"); // load color preferences
-require("../req/db_dbp.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+define("LANG_FILE","or.php");
+$local_user="ck_op_dienstplan_user";
+require("../include/inc_front_chain_lang.php");
+
+require("../include/inc_config_color.php"); // load color preferences
 
 $filename="../global_conf/$lang/op_tag_dept.pid";
 $opabt=get_meta_tags($filename);
 $thisfile="op-pflege-dienst-personalliste.php";
 switch($ipath)
 {
-	case "menu": $rettarget="op-doku.php?sid=$ck_sid&lang=$lang"; break;
-	case "qview": $rettarget="op-pflege-dienst-schnellsicht.php?sid=$ck_sid&lang=$lang&hilitedept=$dept"; break;
-	case "plan": $rettarget="op-pflege-dienstplan-planen.php?sid=$ck_sid&lang=$lang&dept=$dept&pmonth=$pmonth&pyear=$pyear&retpath=$retpath"; break;
+	case "menu": $rettarget="op-doku.php?sid=$sid&lang=$lang"; break;
+	case "qview": $rettarget="op-pflege-dienst-schnellsicht.php?sid=$sid&lang=$lang&hilitedept=$dept"; break;
+	case "plan": $rettarget="op-pflege-dienstplan-planen.php?sid=$sid&lang=$lang&dept=$dept&pmonth=$pmonth&pyear=$pyear&retpath=$retpath"; break;
 	default: $rettarget="javascript:window.history.back()";
 }
 /********************************* Resolve the or department  only ***********************/
 $saal="exclude";
-require("../req/resolve_opr_dept.php");
+require("../include/inc_resolve_opr_dept.php");
 
 $dbtable="nursing_dept_personell_quicklist";
 
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK) 
 	{	
 	// get orig data
@@ -67,7 +66,7 @@ if($link&&$DBLink_OK)
        							{
 									//print $sql." new update <br>";
 									mysql_close($link);
-									header("location:$thisfile?sid=$ck_sid&lang=$lang&saved=1&dept=$dept&pmonth=$pmonth&pyear=$pyear&retpath=$retpath&ipath=$ipath");
+									header("location:$thisfile?sid=$sid&lang=$lang&saved=1&dept=$dept&pmonth=$pmonth&pyear=$pyear&retpath=$retpath&ipath=$ipath");
 								}
 								else
 								{
@@ -98,7 +97,7 @@ if($link&&$DBLink_OK)
        							{
 									//print $sql." new insert <br>";
 									mysql_close($link);
-									header("location:$thisfile?sid=$ck_sid&lang=$lang&saved=1&dept=$dept&pmonth=$pmonth&pyear=$pyear&retpath=$retpath&ipath=$ipath");
+									header("location:$thisfile?sid=$sid&lang=$lang&saved=1&dept=$dept&pmonth=$pmonth&pyear=$pyear&retpath=$retpath&ipath=$ipath");
 								}
 								else print "<p>".$sql."<p>$LDDbNoSave"; 
 						}// end of else	
@@ -118,7 +117,6 @@ if($link&&$DBLink_OK)
 				{
 					mysql_data_seek($ergebnis,0);
 					$result=mysql_fetch_array($ergebnis);
-					//print $sql."<br>file found!";
 				}
 			}
 				else print "<p>".$sql."<p>$LDDbNoRead"; 
@@ -158,7 +156,7 @@ div.a3 {font-family: arial; font-size: 14; margin-left: 3; margin-right:3; }
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
@@ -170,18 +168,18 @@ function gethelp(x,s,x1,x2,x3)
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0" >
 <tr valign=top>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" ><FONT  COLOR="<? print $cfg['top_txtcolor']; ?>"  SIZE=+1  FACE="Arial"><STRONG>
-&nbsp;<?="$LDCreatePersonList - $opabt[$dept]"; ?></STRONG></FONT></td>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();"><img
- src="../img/<?="$lang/$lang" ?>_back2.gif" border=0 width=110 height=24 align="absmiddle"></a><a 
- href="javascript:gethelp('op_duty.php','personlist','<?=$rows ?>')"><img src="../img/<?="$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 align="absmiddle"></a><a href="<?=$rettarget ?>"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 align="absmiddle"></a></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" ><FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+1  FACE="Arial"><STRONG>
+&nbsp;<?php echo "$LDCreatePersonList - $opabt[$dept]"; ?></STRONG></FONT></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();"><img
+ src="../img/<?php echo "$lang/$lang" ?>_back2.gif" border=0 width=110 height=24 align="absmiddle"></a><a 
+ href="javascript:gethelp('op_duty.php','personlist','<?php echo $rows ?>')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 align="absmiddle"></a><a href="<?php echo $rettarget ?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 align="absmiddle"></a></td>
 </tr>
 <tr>
 <td bgcolor=#cde1ec valign=top colspan=2><p>
 <ul>
 <p><br>
 <font face=verdana,arial size=3 >
-<form name="infoform" action="<?=$thisfile ?>" method="post" >
+<form name="infoform" action="<?php echo $thisfile ?>" method="post" >
 <font face=verdana,arial size=2 >
 
 
@@ -191,20 +189,20 @@ function gethelp(x,s,x1,x2,x3)
 <table border=0  cellspacing=1>
   <tr>
     <td  align=center bgcolor="#cfcfcf" class="v13" colspan=3><font color="#ff0000">&nbsp;</td>
-    <td  align=center bgcolor="#cfcfcf" class="v13" colspan=2><font color="#006600">&nbsp;<b><?=$LDStandbyPerson ?></b></td>
-    <td  align=center bgcolor="#cfcfcf" class="v13" colspan=2><font color="#ff0000">&nbsp;<b><?=$LDOnCallPerson ?></b></td>
+    <td  align=center bgcolor="#cfcfcf" class="v13" colspan=2><font color="#006600">&nbsp;<b><?php echo $LDStandbyPerson ?></b></td>
+    <td  align=center bgcolor="#cfcfcf" class="v13" colspan=2><font color="#ff0000">&nbsp;<b><?php echo $LDOnCallPerson ?></b></td>
   </tr>
 
 			<tr bgcolor="#cfcfcf">
-   			 <td  align=center class="v12_n"><?=$LDLastName ?></td>
-   			 <td  align=center class="v12_n"><?=$LDName ?></td>
-   			 <td  align=center class="v12_n"><?=$LDBday ?></td>
-   			 <td  align=center class="v12_n"><?=$LDBeeper ?></td>
-   			 <td  align=center class="v12_n"><?=$LDPhone ?></td>
-   			 <td  align=center class="v12_n"><?=$LDBeeper ?></td>
-   			 <td  align=center class="v12_n"><?=$LDPhone ?></td>
+   			 <td  align=center class="v12_n"><?php echo $LDLastName ?></td>
+   			 <td  align=center class="v12_n"><?php echo $LDName ?></td>
+   			 <td  align=center class="v12_n"><?php echo $LDBday ?></td>
+   			 <td  align=center class="v12_n"><?php echo $LDBeeper ?></td>
+   			 <td  align=center class="v12_n"><?php echo $LDPhone ?></td>
+   			 <td  align=center class="v12_n"><?php echo $LDBeeper ?></td>
+   			 <td  align=center class="v12_n"><?php echo $LDPhone ?></td>
 		  </tr>
-<? 
+<?php 
 $pbuf=explode("~",trim($result['list']));
 $maxelement=sizeof($pbuf)+2;
 if($maxelement<10) $maxelement=10;
@@ -235,25 +233,24 @@ print '
   </tr>
 </table>
 <p>
-<input type="hidden" name="sid" value="<?=$ck_sid ?>">
-<input type="hidden" name="dept" value="<?=$dept ?>">
-<input type="hidden" name="lang" value="<?=$lang ?>">
-<input type="hidden" name="pmonth" value="<?=$pmonth ?>">
-<input type="hidden" name="pyear" value="<?=$pyear ?>">
-<input type="hidden" name="retpath" value="<?=$retpath ?>">
-<input type="hidden" name="ipath" value="<?=$ipath ?>">
-<input type="hidden" name="maxelement" value="<?=$maxelement ?>">
+<input type="hidden" name="sid" value="<?php echo $sid ?>">
+<input type="hidden" name="dept" value="<?php echo $dept ?>">
+<input type="hidden" name="lang" value="<?php echo $lang ?>">
+<input type="hidden" name="pmonth" value="<?php echo $pmonth ?>">
+<input type="hidden" name="pyear" value="<?php echo $pyear ?>">
+<input type="hidden" name="retpath" value="<?php echo $retpath ?>">
+<input type="hidden" name="ipath" value="<?php echo $ipath ?>">
+<input type="hidden" name="maxelement" value="<?php echo $maxelement ?>">
 <input type="hidden" name="mode" value="save">
-<input type="image" src="../img/<?="$lang/$lang" ?>_savedisc.gif" border="0" alt="<?=$LDSave ?>" border=0 width=99 height=24>
+<a href="<?php echo $rettarget ?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border="0" alt="<?php echo $LDClose ?>"></a>
 &nbsp;&nbsp;&nbsp;&nbsp;
-<a href="<?=$rettarget ?>"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border="0" alt="<?=$LDClose ?>"></a>
+<input type="image" src="../img/<?php echo "$lang/$lang" ?>_savedisc.gif" border="0" alt="<?php echo $LDSave ?>" border=0 width=99 height=24>
 </form>
 <hr>
-<form action=<?=$thisfile ?> name="deptform">
-<?=$LDChangeDept ?>: 
+<form action=<?php echo $thisfile ?> name="deptform">
+<?php echo $LDChangeDept ?>: 
 <select name="dept"  onChange="document.deptform.submit()">
-<?
-
+<?php
 while(list($x,$v)=each($opabt))
 {
 	print '
@@ -263,13 +260,13 @@ while(list($x,$v)=each($opabt))
 }
 ?>
 </select>
-<input type="hidden" name="sid" value="<?=$ck_sid ?>">
-<input type="hidden" name="lang" value="<?=$lang ?>">
-<input type="hidden" name="retpath" value="<?=$retpath ?>">
-<input type="hidden" name="ipath" value="<?=$ipath ?>">
-<input type="hidden" name="pmonth" value="<?=$pmonth ?>">
-<input type="hidden" name="pyear" value="<?=$pyear ?>">
-<input type="submit" value="<?=$LDChange ?>">
+<input type="hidden" name="sid" value="<?php echo $sid ?>">
+<input type="hidden" name="lang" value="<?php echo $lang ?>">
+<input type="hidden" name="retpath" value="<?php echo $retpath ?>">
+<input type="hidden" name="ipath" value="<?php echo $ipath ?>">
+<input type="hidden" name="pmonth" value="<?php echo $pmonth ?>">
+<input type="hidden" name="pyear" value="<?php echo $pyear ?>">
+<input type="submit" value="<?php echo $LDChange ?>">
 </form>
 </ul>
 
@@ -281,17 +278,12 @@ while(list($x,$v)=each($opabt))
 <tr>
 <td bgcolor=silver height=70 colspan=2>
 <?php
-require("../language/$lang/".$lang."_copyrite.htm");
+require("../language/$lang/".$lang."_copyrite.php");
  ?>
 </td>
 </tr>
 </table>        
 &nbsp;
-
-
-
-
 </FONT>
-
 </BODY>
 </HTML>

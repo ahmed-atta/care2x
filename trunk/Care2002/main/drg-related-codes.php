@@ -1,19 +1,19 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)||!$opnr||!$pn) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;}; 
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+define("LANG_FILE","drg.php");
+$local_user="ck_op_pflegelogbuch_user";
+require("../include/inc_front_chain_lang.php");
+if (!$opnr||!$pn) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;}; 
 ?>
-<? if($saveok) : ?>
+<?php if($saveok) : ?>
  <script language="javascript" >
- window.opener.parent.location.href='<?="drg-composite-start.php?sid=$ck_sid&lang=$lang&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&dept=$dept&oprm=$oprm&y=$y&m=$m&d=$d&display=composite&newsave=1" ?>';
+ window.opener.parent.location.href='<?php echo "drg-composite-start.php?sid=$sid&lang=$lang&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&dept=$dept&oprm=$oprm&y=$y&m=$m&d=$d&display=composite&newsave=1" ?>';
  window.close();
 </script>
-	<? exit; ?>
-<? endif ?>
-<?
-require("../language/".$lang."/lang_".$lang."_drg.php");
-require("../req/config-color.php");
+	<?php exit; ?>
+<?php endif ?>
+<?php
+require("../include/inc_config_color.php");
 
 $toggle=0;
 
@@ -29,7 +29,7 @@ if($mode=="save")
 	$itemselector="icd";
 	$lastindex=$last_icd_index;
 	$noheader=1;
-	include("../req/drg-entry-save.php");
+	include("../include/inc_drg_entry_save.php");
 	
 	unset($qlist);
 	$linebuf="";
@@ -39,16 +39,16 @@ if($mode=="save")
 	$element_related="related_ops";
 	$itemselector="ops";
 	$lastindex=$last_ops_index;
-	include("../req/drg-entry-save.php");
+	include("../include/inc_drg_entry_save.php");
 	if($linebuf=="")
 	{
-		header("location:$thisfile?sid=$ck_sid&lang=$lang&saveok=1&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&dept=$dept&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&target=$target");
+		header("location:$thisfile?sid=$sid&lang=$lang&saveok=1&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&dept=$dept&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&target=$target");
 		exit;
 	}
 }
 else
 {
-		include("../req/db-makelink.php");
+		include("../include/inc_db_makelink.php");
 		if($link&&$DBLink_OK) 
 		 {
 			$dbtable="nursing_op_logbook";
@@ -85,7 +85,7 @@ else
 <HTML>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
- <TITLE><?="$LDQuickList $title" ?></TITLE>
+ <TITLE><?php echo "$LDQuickList $title" ?></TITLE>
   <script language="javascript" src="../js/showhide-div.js">
 </script>
   <script language="javascript">
@@ -93,13 +93,13 @@ else
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
 function subsearch(k)
 {
-	//window.location.href='drg-icd10-search.php?sid=<?="sid=$ck_sid&lang=$lang&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&dept=$dept&oprm=$oprm&display=$display" ?>&keyword='+k;
+	//window.location.href='drg-icd10-search.php?sid=<?php echo "sid=$sid&lang=$lang&pn=$pn&opnr=$opnr&ln=$ln&fn=$fn&bd=$bd&dept=$dept&oprm=$oprm&display=$display" ?>&keyword='+k;
 	document.searchdata.keyword.value=k;
 	document.searchdata.submit();
 }
@@ -124,28 +124,28 @@ function checkselect(d)
 }
 function getRelatedCodes(mc)
 {
-	window.location.href="drg-related-codes.php?sid=<?="$ck_sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm" ?>&maincode="+mc;
+	window.location.href="drg-related-codes.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm" ?>&maincode="+mc;
 }
 // -->
 </script>
  
-  <? 
-require("../req/css-a-hilitebu.php");
+  <?php 
+require("../include/inc_css_a_hilitebu.php");
 ?>
  
 </HEAD>
 
-<BODY marginheight=2 marginwidth=2 leftmargin=2 topmargin=2  onLoad="if(window.focus) window.focus();" bgcolor=<? print $cfg['body_bgcolor']; ?>
-<? if (!$cfg['dhtml']){ print ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
-<a href="javascript:window.close()"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 align="right"></a>
+<BODY marginheight=2 marginwidth=2 leftmargin=2 topmargin=2  onLoad="if(window.focus) window.focus();" bgcolor=<?php print $cfg['body_bgcolor']; ?>
+<?php if (!$cfg['dhtml']){ print ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+<a href="javascript:window.close()"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 align="right"></a>
 <FONT    SIZE=2  FACE="verdana,Arial" >
-<? print "$ln, $fn $bd - $pn";
+<?php print "$ln, $fn $bd - $pn";
 	if($opnr) print" - OP# $opnr - $dept OP $oprm"; 
 ?>
 </font><p>
 <ul>
-<FONT    SIZE=3  FACE="Arial" color="<?=$rowcolor ?>">
-<b><?="$LDPossibleCodes" ?></b>
+<FONT    SIZE=3  FACE="Arial" color="<?php echo $rowcolor ?>">
+<b><?php echo "$LDPossibleCodes" ?></b>
 
 
 <p>
@@ -153,22 +153,21 @@ require("../req/css-a-hilitebu.php");
 <form name="quicklist" onSubmit="return checkselect(this)" method="post">
 
 <table border=0 cellpadding=0 cellspacing=0 width='100%'> 
-<?
-if($opcount)
+<?php if($opcount)
 {
 ?>
 <tr bgcolor="#990000">
 <td width="20">
 &nbsp;
 </td>
-<td><font face=arial size=2 color=#ffffff>&nbsp;<b><nobr><?=$LDOperation ?></nobr></b>&nbsp;</td>
+<td><font face=arial size=2 color=#ffffff>&nbsp;<b><nobr><?php echo $LDOperation ?></nobr></b>&nbsp;</td>
 
-<td colspan=7><font face=arial size=2 color=#ffffff>&nbsp;&nbsp;&nbsp;<b><?=$LDDescription ?></b>
+<td colspan=7><font face=arial size=2 color=#ffffff>&nbsp;&nbsp;&nbsp;<b><?php echo $LDDescription ?></b>
 </td>
 		
 </tr>
 
-<?
+<?php
 }
 
 function drawdata(&$data)
@@ -189,7 +188,7 @@ function drawdata(&$data)
 						else
 						{
 							if($maincode==$parsed[code]) print'
-							<img src="../img/bul_arrowGrnLrg.gif" border=0 width=16 height=16 align="absmiddle">';
+							<img src="../img/bul_arrowgrnlrg.gif" border=0 width=16 height=16 align="absmiddle">';
 						}
 						print '
 							</td>
@@ -232,15 +231,15 @@ if($icdcount)
 </tr>
 <tr bgcolor="#0000aa">
 <td width="20">
-<img src="../img/delete2.gif" border=0 width=20 height=20 alt="<?=$LDReset ?>" onClick="javascript:document.quicklist.reset()">
+<img src="../img/delete2.gif" border=0 width=20 height=20 alt="<?php echo $LDReset ?>" onClick="javascript:document.quicklist.reset()">
 </td>
-<td><font face=arial size=2 color=#ffffff>&nbsp;<b><nobr><?=$LDIcd10 ?></nobr></b>&nbsp;</td>
+<td><font face=arial size=2 color=#ffffff>&nbsp;<b><nobr><?php echo $LDIcd10 ?></nobr></b>&nbsp;</td>
 
-<td colspan=7><font face=arial size=2 color=#ffffff>&nbsp;&nbsp;&nbsp;<b><?=$LDDescription ?></b>
+<td colspan=7><font face=arial size=2 color=#ffffff>&nbsp;&nbsp;&nbsp;<b><?php echo $LDDescription ?></b>
 </td>
 		
 </tr>
-<?
+<?php
 }
 	$idx=0;
 			if ($icdcount>0) 
@@ -254,9 +253,8 @@ if($icdcount)
 					}
 				}
 ?>
-<input type="hidden" name="last_icd_index" value="<?=$idx ?>">
-<?
-if($opscount)
+<input type="hidden" name="last_icd_index" value="<?php echo $idx ?>">
+<?php if($opscount)
 {
 ?>
 <tr >
@@ -265,15 +263,15 @@ if($opscount)
 </tr>
 <tr bgcolor="#009900">
 <td width="20">
-<img src="../img/delete2.gif" border=0 width=20 height=20 alt="<?=$LDReset ?>" onClick="javascript:document.quicklist.reset()">
+<img src="../img/delete2.gif" border=0 width=20 height=20 alt="<?php echo $LDReset ?>" onClick="javascript:document.quicklist.reset()">
 </td>
-<td><font face=arial size=2 color=#ffffff>&nbsp;<b><nobr><?=$LDOps301 ?></nobr></b>&nbsp;</td>
+<td><font face=arial size=2 color=#ffffff>&nbsp;<b><nobr><?php echo $LDOps301 ?></nobr></b>&nbsp;</td>
 
-<td colspan=7><font face=arial size=2 color=#ffffff>&nbsp;&nbsp;&nbsp;<b><?=$LDDescription ?></b>
+<td colspan=7><font face=arial size=2 color=#ffffff>&nbsp;&nbsp;&nbsp;<b><?php echo $LDDescription ?></b>
 </td>
 		
 </tr>
-<?
+<?php
 }
 			if ($opscount>0) 
 				{ 
@@ -290,35 +288,35 @@ if($opscount)
 				{
 ?>
 <input type="hidden" name="ops0" value="">
-<?
-				}
+<?php
+			}
 ?>
 </table>
-<input type="hidden" name="last_ops_index" value="<?=$idx ?>">
-<? if($icdcount||$opscount) : ?>
+<input type="hidden" name="last_ops_index" value="<?php echo $idx ?>">
+<?php if($icdcount||$opscount) : ?>
 <p>
-<input type="submit" value="<?=$LDApplySelection ?>">
-<input type="hidden" name="sid" value="<? print $ck_sid; ?>">
-<input type="hidden" name="lang" value="<? print $lang; ?>">
-<input type="hidden" name="pn" value="<? print $pn; ?>">
-<input type="hidden" name="opnr" value="<? print $opnr; ?>">
-<input type="hidden" name="ln" value="<? print $ln; ?>">
-<input type="hidden" name="fn" value="<? print $fn; ?>">
-<input type="hidden" name="bd" value="<? print $bd; ?>">
-<input type="hidden" name="dept" value="<? print $dept; ?>">
-<input type="hidden" name="oprm" value="<? print $oprm; ?>">
-<input type="hidden" name="display" value="<? print $display; ?>">
-<input type="hidden" name="target" value="<? print $target; ?>">
-<input type="hidden" name="maincode" value="<? print $maincode; ?>">
+<input type="submit" value="<?php echo $LDApplySelection ?>">
+<input type="hidden" name="sid" value="<?php print $sid; ?>">
+<input type="hidden" name="lang" value="<?php print $lang; ?>">
+<input type="hidden" name="pn" value="<?php print $pn; ?>">
+<input type="hidden" name="opnr" value="<?php print $opnr; ?>">
+<input type="hidden" name="ln" value="<?php print $ln; ?>">
+<input type="hidden" name="fn" value="<?php print $fn; ?>">
+<input type="hidden" name="bd" value="<?php print $bd; ?>">
+<input type="hidden" name="dept" value="<?php print $dept; ?>">
+<input type="hidden" name="oprm" value="<?php print $oprm; ?>">
+<input type="hidden" name="display" value="<?php print $display; ?>">
+<input type="hidden" name="target" value="<?php print $target; ?>">
+<input type="hidden" name="maincode" value="<?php print $maincode; ?>">
 <input type="hidden" name="mode" value="save">
 
 </form>
-<? else : ?>
+<?php else : ?>
 <p>
-<img src="../img/catr.gif" border=0 width=88 height=80 align="bottom"><?=$LDNoQuickList ?> 
+<img src="../img/catr.gif" border=0 width=88 height=80 align="bottom"><?php echo $LDNoQuickList ?> 
 <p>
-<a href="javascript:window.close()"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24></a>
-<? endif ?>
+<a href="javascript:window.close()"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24></a>
+<?php endif ?>
 
 </ul>
 &nbsp;

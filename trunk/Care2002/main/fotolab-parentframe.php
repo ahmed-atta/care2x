@@ -1,3 +1,17 @@
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","specials.php");
+$local_user="ck_fotolab_user";
+require("../include/inc_front_chain_lang.php");
+?>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
@@ -5,10 +19,10 @@
 
 </head>
 <frameset cols="49%,*">
-  <frame name="SELECTFRAME" src="fotolab-dir-select-init.php?sid=<?="$ck_sid&lang=$lang" ?>">
+  <frame name="SELECTFRAME" src="fotolab-dir-select-init.php?sid=<?php echo "$sid&lang=$lang" ?>">
   <frameset rows="70%,*">
-    <frame name="PREVIEWFRAME" src="fotolab-preview.php?sid=<?="$ck_sid&lang=$lang" ?>">
-    <frame name="MAINDATAFRAME" src="fotolab-maindata.php?sid=<?="$ck_sid&lang=$lang" ?>">
+    <frame name="PREVIEWFRAME" src="fotolab-preview.php?sid=<?php echo "$sid&lang=$lang" ?>">
+    <frame name="MAINDATAFRAME" src="fotolab-maindata.php?sid=<?php echo "$sid&lang=$lang" ?>">
   </frameset>
 <noframes>
 <body>

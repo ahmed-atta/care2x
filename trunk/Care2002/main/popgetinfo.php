@@ -21,7 +21,7 @@ do so, click on Tools\Online Services\Add statistics...-->
 
 <font face=verdana,arial size=5 color=maroon>
 
-<? 
+<?php 
 	print $window;
 ?>
 

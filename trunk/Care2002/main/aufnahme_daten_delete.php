@@ -1,4 +1,4 @@
-<? 
+<?php 
 
 if (($route!=validroute)or($aufnahme_user==""))
 {header("Location: invalid-access-warning.php"); exit;}
@@ -111,8 +111,8 @@ Wollen Sie die folgende Patientendaten wirklich löschen?<p>
 
 <table border="0" cellpadding="2" cellspacing="1">
 <tr bgcolor=orange nowrap>
-<?
-	for($i=0;$i<(sizeof($fieldnames));$i++) 
+<?php
+for($i=0;$i<(sizeof($fieldnames));$i++) 
  	{	
 		if($zeile[$i]!="") 	
 		print "<td nowrap><FONT color=#0000cc SIZE=2  FACE=Arial><b>".$fieldnames[$i]."</b></td>\n";
@@ -121,8 +121,8 @@ Wollen Sie die folgende Patientendaten wirklich löschen?<p>
 ?>
 </tr>
 <tr bgcolor=#cecece nowrap>
-<?
-	for($i=0;$i<(sizeof($fieldnames));$i++) 
+<?php
+for($i=0;$i<(sizeof($fieldnames));$i++) 
  	{	
 		if($zeile[$i]!="") 	
 		print "<td nowrap><FONT color=#000000 SIZE=2  FACE=Arial><nobr>".$zeile[$i]."</td>\n";
@@ -135,22 +135,22 @@ Wollen Sie die folgende Patientendaten wirklich löschen?<p>
 </table>
 
 <br>
-<FORM action="<? print $thisfile ?>" method="post">
-<INPUT type="hidden" name="itemname" value="<? print $itemname ?>">
+<FORM action="<?php print $thisfile ?>" method="post">
+<INPUT type="hidden" name="itemname" value="<?php print $itemname ?>">
 <input type=hidden name=finalcommand value="delete">
 <input type=hidden name=route value="validroute">
-<input type=hidden name=batchnum value="<? print $batchnum ?>">
-<input type=hidden name=displaysize value="<? print $displaysize ?>">
-<input type=hidden name=linecount value="<? print $linecount ?>">
-<input type=hidden name=pagecount value="<? print $pagecount ?>">
+<input type=hidden name=batchnum value="<?php print $batchnum ?>">
+<input type=hidden name=displaysize value="<?php print $displaysize ?>">
+<input type=hidden name=linecount value="<?php print $linecount ?>">
+<input type=hidden name=pagecount value="<?php print $pagecount ?>">
 <img src="../img/delete.gif"> <INPUT type="submit" name="versand" value="Ja, löschen"></font></FORM>
 
-<FORM  method=post action="<?print $breakfile ?>" >
+<FORM  method=post action="<?php echo $breakfile ?>" >
 <input type=hidden name=route value="validroute">
-<input type=hidden name=batchnum value="<? print $batchnum ?>">
-<input type=hidden name=displaysize value="<? print $displaysize ?>">
-<input type=hidden name=linecount value="<? print $linecount ?>">
-<input type=hidden name=pagecount value="<? print $pagecount ?>">
+<input type=hidden name=batchnum value="<?php print $batchnum ?>">
+<input type=hidden name=displaysize value="<?php print $displaysize ?>">
+<input type=hidden name=linecount value="<?php print $linecount ?>">
+<input type=hidden name=pagecount value="<?php print $pagecount ?>">
 <img src="../img/suspend.gif"> <INPUT type="submit"  value="Nein, Abbrechen"></font></FORM>
 
 </center>

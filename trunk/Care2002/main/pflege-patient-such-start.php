@@ -1,13 +1,20 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_nursing.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","nursing.php");
+define("NO_2LEVEL_CHK",1);
+require("../include/inc_front_chain_lang.php");
 
-require("../req/config-color.php"); // load color preferences
+require("../include/inc_config_color.php"); // load color preferences
 
-$breakfile="pflege.php?sid=$ck_sid&lang=$lang";
+$breakfile="pflege.php?sid=$sid&lang=$lang";
 
 if($pday=="") $pday=date(d);
 if($pmonth=="") $pmonth=date(m);
@@ -47,7 +54,7 @@ if($mode=="such")
 	//print $srcword;
 	
 	$dbtable="nursing_station_patients";
-	include("../req/db-makelink.php");
+	include("../include/inc_db_makelink.php");
 		if($link&&$DBLink_OK)
 		{
 					if(!$arch)	$sql="SELECT station, t_date, info FROM $dbtable
@@ -71,7 +78,7 @@ if($mode=="such")
 								mysql_data_seek($ergebnis,0);
 								$result=mysql_fetch_array($ergebnis);
 							  	$dbuf=explode(".",$result[t_date]);
-  								$buf="pflege-station.php?sid=$ck_sid&lang=$lang&sln=$sln&sfn=$sfn&sg=$sg&station=".$result[station]."&pday=".$dbuf[0]."&pmonth=".$dbuf[1]."&pyear=".$dbuf[2];
+  								$buf="pflege-station.php?sid=$sid&lang=$lang&sln=$sln&sfn=$sfn&sg=$sg&station=".$result[station]."&pday=".$dbuf[0]."&pmonth=".$dbuf[1]."&pyear=".$dbuf[2];
 
 								header("location:".$buf);
 								exit;
@@ -94,7 +101,7 @@ if($mode=="such")
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
@@ -103,7 +110,7 @@ function gethelp(x,s,x1,x2,x3)
 </script>
 
 
- <? if($cfg['dhtml'])
+ <?php if($cfg['dhtml'])
 { print' 
 	<script language="javascript" src="../js/hilitebu.js">
 	</script>
@@ -125,7 +132,7 @@ function gethelp(x,s,x1,x2,x3)
 </HEAD>
 
 <BODY  topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="if (window.focus) window.focus();document.suchlogbuch.srcword.select();"
-<? 
+<?php 
  print  ' bgcolor='.$cfg['body_bgcolor']; 
  if (!$cfg['dhtml']){ print ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } 
   ?>>
@@ -135,34 +142,33 @@ function gethelp(x,s,x1,x2,x3)
 <table width=100% border=0 cellspacing="0">
 
 <tr>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="10">
-<FONT  COLOR="<? print $cfg['top_txtcolor']; ?>"  SIZE=+3  FACE="Arial"><STRONG> &nbsp; <?="$LDNursing - $LDSearchPatient" ?></STRONG></FONT></td>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?if($cfg['dhtml'])print'<a href="javascript:window.history.back()"><img src="../img/'.$lang.'/'.$lang.'_back2.gif" width=110 height=24 border=0  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
-<a href="javascript:gethelp('nursing_how2search.php','<?=$mode ?>','<?=$rows ?>','search')"><img src="../img/<?="$lang/$lang"; ?>_hilfe-r.gif" border=0 width=75 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?print $breakfile;?>"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 alt="<?=$LDCloseAlt ?>"  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10">
+<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+3  FACE="Arial"><STRONG> &nbsp; <?php echo "$LDNursing - $LDSearchPatient" ?></STRONG></FONT></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right>
+<?php if($cfg['dhtml'])print'<a href="javascript:window.history.back()"><img src="../img/'.$lang.'/'.$lang.'_back2.gif" width=110 height=24 border=0  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('nursing_how2search.php','<?php echo $mode ?>','<?php echo $rows ?>','search')"><img src="../img/<?php echo "$lang/$lang"; ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 alt="<?php echo $LDCloseAlt ?>"  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
 <tr>
-<td colspan=3  bgcolor="<? print $cfg['body_bgcolor']; ?>"><p><br>
+<td colspan=3  bgcolor="<?php print $cfg['body_bgcolor']; ?>"><p><br>
 
 <ul>
 <FONT    SIZE=-1  FACE="Arial">
-<? if($rows>1) : ?>
+<?php if($rows>1) : ?>
 <table border=0>
   <tr>
     <td><img src="../img/catr.gif" border=0 width=88 height=80 align="absmiddle"></td>
     <td><FONT  SIZE=3 FACE="verdana,Arial" color=#800000>
-<b><? print "$LDSearchKeyword <font color=#0000ff>\"$srcword\"</font> ".str_replace("~rows~",$rows,$LDWasFound) ?> <br>
-<?=$LDPlsClk ?></b></font></td>
+<b><?php print "$LDSearchKeyword <font color=#0000ff>\"$srcword\"</font> ".str_replace("~rows~",$rows,$LDWasFound) ?> <br>
+<?php echo $LDPlsClk ?></b></font></td>
   </tr>
 </table>
 
 <table border=0 cellpadding=0 cellspacing=0>
   <tr bgcolor=#0000aa>
     <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp;</b></td>
-    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; <?=$LDDate ?></b></td>
-    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; &nbsp;<?=$LDStation ?>&nbsp;</b></td>
+    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; <?php echo $LDDate ?></b></td>
+    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; &nbsp;<?php echo $LDStation ?>&nbsp;</b></td>
   </tr>
- <? 
+ <?php 
  $toggle=0;
  while($result=mysql_fetch_array($ergebnis))
  {
@@ -170,10 +176,10 @@ function gethelp(x,s,x1,x2,x3)
   <tr ';
   if($toggle){ print "bgcolor=#efefef"; $toggle=0;} else {print "bgcolor=#ffffff"; $toggle=1;}
   $dbuf=explode(".",$result[t_date]);
-	$buf="pflege-station.php?sid=$ck_sid&sln=".$sln."&sfn=".$sfn."&sg=".$sg."&station=".$result[station]."&pday=".$dbuf[0]."&pmonth=".$dbuf[1]."&pyear=".$dbuf[2];
+	$buf="pflege-station.php?sid=$sid&lang=$lang&sln=".$sln."&sfn=".$sfn."&sg=".$sg."&station=".$result[station]."&pday=".$dbuf[0]."&pmonth=".$dbuf[1]."&pyear=".$dbuf[2];
   print '>
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">';
-	if($result[t_date]<>date("d.m.Y")) print '<img src="../img/bul_arrowBluSm.gif" width=12 height=12 border=0>';
+	if($result[t_date]<>date("d.m.Y")) print '<img src="../img/bul_arrowblusm.gif" width=12 height=12 border=0>';
 		else print '<img src="../img/R_arrowGrnSm.gif" width=12 height=12 border=0>';
 	print'
 	</a></td>
@@ -188,9 +194,9 @@ function gethelp(x,s,x1,x2,x3)
 </table>
 <p>
 <hr>
-<? endif ?>
+<?php endif ?>
 
-	<?=$LDSearchPrompt ?>
+	<?php echo $LDSearchPrompt ?>
 	
 <form action="pflege-patient-such-start.php" method="get" name="suchlogbuch" >
 <table border=0 cellspacing=0 cellpadding=1 bgcolor="#999999">
@@ -198,18 +204,19 @@ function gethelp(x,s,x1,x2,x3)
     <td>
 		<table border=0 cellspacing=0 cellpadding=5 bgcolor="#eeeeee">
     <tr>
-      <td>	<font color=maroon size=2><b><?=$LDSrcKeyword ?>:</b></font><br>
-          		<input type="text" name="srcword" size=40 maxlength=100 value="<? if ($srcword!=NULL) print $srcword; ?>">
-				<input type="hidden" name="sid" value="<? print $ck_sid; ?>">
-    			<input type="hidden" name="mode" value="such"><br>
-				<font size=2><input type="checkbox" name="arch" value="1" <? if($arch) print "checked"; ?>> <?=$LDSearchArchive ?></font><br>
+      <td>	<font color=maroon size=2><b><?php echo $LDSrcKeyword ?>:</b></font><br>
+          		<input type="text" name="srcword" size=40 maxlength=100 value="<?php if ($srcword!=NULL) print $srcword; ?>">
+				<input type="hidden" name="sid" value="<?php print $sid; ?>">
+  				<input type="hidden" name="lang" value="<?php print $lang; ?>">
+  			<input type="hidden" name="mode" value="such"><br>
+				<font size=2><input type="checkbox" name="arch" value="1" <?php if($arch) print "checked"; ?>> <?php echo $LDSearchArchive ?></font><br>
     			 
     
            	</td>
 	   </tr>
     <tr>
       <td align=right>	
-				<input type="submit" value="<?=$LDSearch ?>" align="right">
+				<input type="submit" value="<?php echo $LDSearch ?>" align="right">
               	</td>
 	   </tr>
   </table>
@@ -218,8 +225,6 @@ function gethelp(x,s,x1,x2,x3)
   </tr>
 </table>
   	</form>
-
-
 
 </ul>
 
@@ -231,17 +236,17 @@ function gethelp(x,s,x1,x2,x3)
 <p>
 <ul>
 <FONT    SIZE=2  FACE="Arial">
-<b><?=$LDMoreFunctions ?>:</b><br>
-<img src="../img/varrow.gif" width="20" height="15"> <a href="pflege-station-archiv.php?sid=<?print "$ck_sid&lang=$lang";?>&user=<? print str_replace(" ","+",$user);?>"><?=$LDArchive ?></a><br>
-<img src="../img/varrow.gif" width="20" height="15"> <a href="javascript:gethelp('nursing_how2search.php','search','<?=$target ?>')"><?=$LDHow2Search ?></a><br>
+<b><?php echo $LDMoreFunctions ?>:</b><br>
+<img src="../img/varrow.gif" width="20" height="15"> <a href="pflege-station-archiv.php?sid=<?php echo "$sid&lang=$lang";?>&user=<?php print str_replace(" ","+",$user);?>"><?php echo $LDArchive ?></a><br>
+<img src="../img/varrow.gif" width="20" height="15"> <a href="javascript:gethelp('nursing_how2search.php','<?php echo $mode ?>','<?php echo $rows ?>','search')"><?php echo $LDHow2Search ?></a><br>
 
 <p>
-<a href="pflege.php?sid=<? print $ck_sid; ?>"><img border=0 src="../img/<?="$lang/$lang" ?>_cancel.gif"  alt="<?=$LDCancel ?>"></a>
+<a href="pflege.php?sid=<?php print "$sid&lang=$lang"; ?>"><img border=0 src="../img/<?php echo "$lang/$lang" ?>_cancel.gif"  alt="<?php echo $LDCancel ?>"></a>
 </ul>
 <p>
 <hr>
 <?php
-require("../language/$lang/".$lang."_copyrite.htm");
+require("../language/$lang/".$lang."_copyrite.php");
  ?>
 </FONT>
 

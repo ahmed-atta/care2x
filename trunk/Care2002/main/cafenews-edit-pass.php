@@ -1,41 +1,35 @@
-<? 
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+define("LANG_FILE","stdpass.php");
+define("NO_2LEVEL_CHK",1);
+require("../include/inc_front_chain_lang.php");
 
-require("../language/".$lang."/lang_".$lang."_stdpass.php");
-require("../req/config-color.php");
-
+require("../include/inc_config_color.php");
 require("../global_conf/areas_allow.php");
-
 $allowedarea=&$allow_area['cafenews'];
 
-$fileforward="cafenews-edit-select.php?sid=$ck_sid&lang";
+$fileforward="cafenews-edit-select.php?sid=$sid&lang=$lang";
 						
 $thisfile="cafenews-edit-pass.php";
-$breakfile="cafenews.php?sid=$ck_sid&lang=$lang";
+$breakfile="cafenews.php?sid=$sid&lang=$lang";
 $lognote="$title $LDEdit ok";
 
 $userck="ck_cafenews_user";
 
 //reset cookie;
-setcookie($userck,"");
+// reset all 2nd level lock cookies
+setcookie($userck.$sid,"");
+require("../include/inc_2level_reset.php"); setcookie(ck_2level_sid.$sid,"");
 
-if($ck_login_logged&&$ck_login_userid&&!$nointern)
-{
-$userid=$ck_login_userid;
-$checkintern=1;
-$lognote="Direct access ".$lognote;
-$pass="check";
-}
-
+require("../include/inc_passcheck_internchk.php");
 if ($pass=="check") 	
-	include("../req/passcheck.php");
+	include("../include/inc_passcheck.php");
 
 $errbuf="$title $LDEdit";
 
-require("../req/passcheck_head.php");
+require("../include/inc_passcheck_head.php");
 ?>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <BODY bgcolor="#ffffff" onLoad="document.passwindow.userid.focus()">
 
 
@@ -44,18 +38,18 @@ require("../req/passcheck_head.php");
 <P>
 
 <img src="../img/basket.gif" width=74 height=70 border=0>
-<FONT  COLOR=#cc6600  SIZE=6  FACE="verdana"> <b><?="$title $LDEdit" ?></b></font>
+<FONT  COLOR=#cc6600  SIZE=6  FACE="verdana"> <b><?php echo "$title $LDEdit" ?></b></font>
 
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
 
-<? require("../req/passcheck_mask.php") ?>  
+<?php require("../include/inc_passcheck_mask.php") ?>  
 
 <p>
-<img src="../img/varrow.gif" width="20" height="15"> <a href="ucons.php"><?="$LDIntroTo $title $LDEdit" ?></a><br>
-<img src="../img/varrow.gif" width="20" height="15"> <a href="ucons.php"><?="$LDWhatTo $title $LDEdit" ?>?</a><br>
+<img src="../img/varrow.gif" width="20" height="15"> <a href="ucons.php<?php echo "?lang=$lang" ?>"><?php echo "$LDIntroTo $title $LDEdit" ?></a><br>
+<img src="../img/varrow.gif" width="20" height="15"> <a href="ucons.php<?php echo "?lang=$lang" ?>"><?php echo "$LDWhatTo $title $LDEdit" ?>?</a><br>
 <HR>
 <?php
-require("../language/".$lang."/".$lang."_copyrite.htm");
+require("../language/".$lang."/".$lang."_copyrite.php");
  ?>
 
 </FONT>

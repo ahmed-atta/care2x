@@ -1,14 +1,21 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_products.php");
-require("../req/config-color.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","products.php");
+$local_user=$userck;
+require("../include/inc_front_chain_lang.php");
+require("../include/inc_config_color.php");
 
-if(!$dept)
+if(!isset($dept)||!$dept)
 {
-	if($ck_thispc_dept) $dept=$ck_thispc_dept;
+	if(isset($HTTP_COOKIE_VARS['ck_thispc_dept'])&&!empty($HTTP_COOKIE_VARS['ck_thispc_dept'])) $dept=$HTTP_COOKIE_VARS['ck_thispc_dept'];
 	 else $dept="plop";//default is plop dept
 }
 
@@ -18,21 +25,21 @@ if($cat=="pharma")
  {
  	$dbtable="pharma_orderlist";
 	$title=$LDPharmacy;
-	$encbuf="ck_pharma_order_user";
  }
  else
  {
  	$dbtable="med_orderlist";
 	$title=$LDMedDepot;
-	$encbuf="ck_medlager_order_user";
  }
+ 
+$encbuf=$HTTP_COOKIE_VARS[$local_user.$sid];
 // define the content array
 $rows=0;
 $count=0;
 
 if($mode!="")
 {
-	include("../req/db-makelink.php");
+	include("../include/inc_db_makelink.php");
 		if($link&&$DBLink_OK)
 		{
 				$sql='SELECT * FROM '.$dbtable.' 
@@ -125,7 +132,7 @@ if($mode!="")
 								"articles"=>$tart,
 								"extra1"=>"",
 								"extra2"=>"",
-								"encoder"=>$$encbuf,
+								"encoder"=>$encbuf,
 								"validator"=>"",
 								"order_time"=>str_replace("00","24",strftime("%H.%M")), // set 00.00 to 24.00 for easier sorting
 								"ip_addr"=>$REMOTE_ADDR,
@@ -198,7 +205,7 @@ if($mode!="")
 $rows=0;
 $wassent=false;
 
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK)
 		{
 				$sql='SELECT * FROM '.$dbtable.' 
@@ -225,47 +232,42 @@ if($link&&$DBLink_OK)
 			//print $sql;
 	}
   	 else { print "$LDDbNoLink<br>"; } 
-
 ?>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<? 
-require("../req/css-a-hilitebu.php");
+<?php 
+require("../include/inc_css_a_hilitebu.php");
 ?>
 <script language=javascript>
 function popinfo(b)
 {
-	urlholder="products-bestellkatalog-popinfo.php?sid=<? print "$ck_sid&lang=$lang&userck=$userck"; ?>&keyword="+b+"&mode=search&cat=<?=$cat ?>";
+	urlholder="products-bestellkatalog-popinfo.php?sid=<?php print "$sid&lang=$lang&userck=$userck"; ?>&keyword="+b+"&mode=search&cat=<?php echo $cat ?>";
 	ordercatwin=window.open(urlholder,"ordercat","width=850,height=550,menubar=no,resizable=yes,scrollbars=yes");
 	}
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
 </script>
 </head>
 <BODY  topmargin=5 leftmargin=10  marginwidth=10 marginheight=5 
-<? 
+<?php 
 switch($mode)
 {
 	case "add":print ' onLoad="location.replace(\'#bottom\')"   '; break;
 	case "delete":print ' onLoad="location.replace(\'#'.($idx-1).'\')"   '; break;
 }
 print "bgcolor=".$cfg['body_bgcolor']; if (!$cfg['dhtml']){ print ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
-<?// foreach($argv as $v) print "$v<br>"; ?>
+<?php // foreach($argv as $v) print "$v<br>"; ?>
 
-<a href="javascript:gethelp('products.php','orderlist','<?=$rows ?>','<?=$cat ?>')"><img src="../img/frage.gif" border=0 width=15 height=15 align="right" alt="<?=$LDOpenHelp ?>"></a>
+<a href="javascript:gethelp('products.php','orderlist','<?php echo $rows ?>','<?php echo $cat ?>')"><img src="../img/frage.gif" border=0 width=15 height=15 align="right" alt="<?php echo $LDOpenHelp ?>"></a>
 
 
-<?
-
-/*if($cat=="pharma") $dbtable="pharma_orderlist";
-	else $dbtable="med_orderlist";
-*/
+<?php
 	
 if($rows>0)
 {
@@ -304,7 +306,7 @@ for($n=0;$n<sizeof($artikeln);$n++)
 				<td ><font face=Verdana,Arial size=1><nobr>X '.$r[proorder].'</nobr></td>
 				<td><font face=Verdana,Arial size=1>'.$r[bestellnum].'</td>
 				<td><a href="#" onClick="popinfo(\''.$r[bestellnum].'\')" ><img src="../img/info3.gif" width=16 height=16 border=0 alt="'.$complete_info.$r[artikelname].'"></a></td>
-				<td><a href="'.$thisfile.'?sid='.$ck_sid.'&lang='.$lang.'&order_id='.$order_id.'&mode=delete&cat='.$cat.'&idx='.$i.'&userck='.$userck.'" ><img src="../img/delete2.gif" width=16 height=16 border=0 alt="'.$LDRemoveArticle.'"></a></td>
+				<td><a href="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&order_id='.$order_id.'&mode=delete&cat='.$cat.'&idx='.$i.'&userck='.$userck.'" ><img src="../img/delete2.gif" width=16 height=16 border=0 alt="'.$LDRemoveArticle.'"></a></td>
 				</tr>';
 	$i++;
 
@@ -312,7 +314,7 @@ for($n=0;$n<sizeof($artikeln);$n++)
 	print '</table>
 			</form>
 			<form action="products-orderlist-final.php" method="get">
-			<input type="hidden" name="sid" value="'.$ck_sid.'">
+			<input type="hidden" name="sid" value="'.$sid.'">
    			<input type="hidden" name="lang" value="'.$lang.'">
    			<input type="hidden" name="order_id" value="'.$order_id.'">
    			<input type="hidden" name="cat" value="'.$cat.'">
@@ -326,7 +328,7 @@ else
 if($wassent)
 {
 	print '
-			<script language="javascript">window.parent.location.replace(\'apotheke-bestellung.php?sid='.$ck_sid.'&lang='.$lang.'&itwassent=1&userck='.$userck.'\')</script>';
+			<script language="javascript">window.parent.location.replace(\'apotheke-bestellung.php?sid='.$sid.'&lang='.$lang.'&itwassent=1&userck='.$userck.'\')</script>';
 }	
 else
 {
@@ -338,12 +340,8 @@ else
 
 // get all lists that are not sent
 
-/*		
-if($cat=="pharma") $dbtable="pharma_orderlist";
-			else $dbtable="med_orderlist";
-*/
 $rows=0;
-include("../req/db-makelink.php");
+include("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK)
 		{
 				$sql='SELECT * FROM '.$dbtable.' 
@@ -389,7 +387,7 @@ if($link&&$DBLink_OK)
 			{ print '<tr bgcolor="#dddddd">'; $tog=0; }else{ print '<tr bgcolor="#efefff">'; $tog=1; }
 			print'
 				<td><font face=Verdana,Arial size=1>'.$i.'</td>
-				<td><a href="products-bestellung.php?sid='.$ck_sid.'&lang='.$lang.'&cat='.$cat.'&oid='.$content[order_id].'&userck='.$userck.'"  target="_parent" ><img src="../img/upArrowGrnLrg.gif" width=16 height=16 border=0 alt="'.$LDEditList.'"></a></td>
+				<td><a href="products-bestellung.php?sid='.$sid.'&lang='.$lang.'&cat='.$cat.'&oid='.$content[order_id].'&userck='.$userck.'"  target="_parent" ><img src="../img/upArrowGrnLrg.gif" width=16 height=16 border=0 alt="'.$LDEditList.'"></a></td>
 				<td><font face=Verdana,Arial size=1>';
 			$buf=explode(".",$content[order_date]);
 			print $buf[2].'.'.$buf[1].'.'.$buf[0].'</td>

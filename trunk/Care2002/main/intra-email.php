@@ -1,23 +1,65 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)||!$ck_intra_email_user) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_intramail.php");
-require("../req/config-color.php"); // load color preferences
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","intramail.php");
+$local_user="ck_intra_email_user";
+require("../include/inc_front_chain_lang.php");
+require("../include/inc_config_color.php"); // load color preferences
 
+/**
+* The getMailNum() function counts the number of mails in different boxes (inbox,sent,drafts,trash)
+*
+* param $element = element name (the box being checked)
+* param $username = email address to be searched
+*
+* global $link = the database link handle created by the inc_db_makelink.php include
+* global $dbtable = the table for the mailboxes
+*
+* return = number of mails in the box
+*/
+function getMailNum($element_name,$username)
+{
+	global $link;
+	global $dbtable;
+	
+    $sql="SELECT $element_name FROM $dbtable WHERE  email=\"".addslashes($username)."\"";
+	    if($ergebnis=mysql_query($sql,$link)) 
+		{
+		    $folnum=0;
+		    while ($cont=mysql_fetch_array($ergebnis)) $folnum++;
+			if($folnum)
+			{
+			    mysql_data_seek($ergebnis,0);
+			    $cont=mysql_fetch_array($ergebnis);
+		        $bufa=explode("_",$cont[$element_name]);
+			    if((sizeof($bufa)==1)&&($bufa[0]=="")) return 0; else return sizeof($bufa);
+			 }
+		 }
+		 else return 0;
+}
+
+/**
+* Set some initial values
+*/
 $thisfile="intra-email.php";
 if(!$folder) $folder="inbox";
 //init db parameters
 $dbtable="mail_private";
-$breakfile="intra-email-pass.php?sid=$ck_sid&lang=$lang";
+$breakfile="intra-email-pass.php?sid=$sid&lang=$lang";
 
 $linecount=0;
 $modetypes=array("sendmail","listmail","compose");
 
 if(in_array($mode,$modetypes)) 
 {
-	include("../req/db-makelink.php");
+	include("../include/inc_db_makelink.php");
 	if($link&&$DBLink_OK)  
 	{	
 					// sendmail (save to db) module
@@ -51,7 +93,7 @@ if(in_array($mode,$modetypes))
 							 ) 
 						VALUES (
 							'$recipient',
-							'$ck_intra_email_user',
+							'".$HTTP_COOKIE_VARS[$local_user.$sid]."',
 							'$REMOTE_ADDR',
 							'$cc', 
 							'$bcc', 
@@ -59,7 +101,7 @@ if(in_array($mode,$modetypes))
 							'$body_txt',
 							'',
 							'$ack', 
-							'$ck_intra_email_user', 
+							'".$HTTP_COOKIE_VARS[$local_user.$sid]."', 
 							'', 
 							'', 
 							'0', 
@@ -79,7 +121,7 @@ if(in_array($mode,$modetypes))
 						//	if($folder=="inbox") $folder="sent";
 							//print "q ok ".$sql;
 							$dbtable="mail_private_users";
-							$sql="SELECT $folder, lastcheck FROM $dbtable WHERE email=\"$ck_intra_email_user\"";
+							$sql="SELECT $folder, lastcheck FROM $dbtable WHERE email=\"".$HTTP_COOKIE_VARS[$local_user.$sid]. "\"";
 							if($ergebnis=mysql_query($sql,$link))
 							{
 								$content=mysql_fetch_array($ergebnis);
@@ -90,7 +132,7 @@ if(in_array($mode,$modetypes))
 									else  $content[$folder].="_".$buf;
 									
 								$sql="UPDATE $dbtable SET $folder=\"$content[$folder]\" , lastcheck=\"$content[lastcheck]\" 
-																WHERE email=\"$ck_intra_email_user\"";	
+																WHERE email=\"".$HTTP_COOKIE_VARS[$local_user.$sid]. "\"";	
 								if(!mysql_query($sql,$link)) { print "$LDDbNoUpdate<br>$sql"; } 
 
 							}else { print "$LDDbNoRead<br>$sql"; } 
@@ -102,7 +144,7 @@ if(in_array($mode,$modetypes))
 				// set dbtable to users
 				$dbtable="mail_private_users";
 				// get the last check timestamp
-				$sql='SELECT '.$folder.', lastcheck FROM '.$dbtable.' WHERE email="'.$ck_intra_email_user.'"';
+				$sql='SELECT '.$folder.', lastcheck FROM '.$dbtable.' WHERE email="'.$HTTP_COOKIE_VARS[$local_user.$sid].'"';
 				if($ergebnis=mysql_query($sql,$link))
 				{ 
 					$rows=0;
@@ -115,10 +157,10 @@ if(in_array($mode,$modetypes))
 					  {	
 						// if last check time stamp found check for  new mails
 						$dbtable="mail_private";
-						$sql="SELECT * FROM $dbtable WHERE ( recipient LIKE \"%$ck_intra_email_user%\" 
-																	OR cc LIKE \"%$ck_intra_email_user%\" 
-																	OR bcc LIKE \"%$ck_intra_email_user%\")
-																	AND send_stamp>$content[lastcheck]";
+						$sql="SELECT * FROM $dbtable WHERE ( recipient LIKE \"%".$HTTP_COOKIE_VARS[$local_user.$sid]."%\" 
+																	OR cc LIKE \"%".$HTTP_COOKIE_VARS[$local_user.$sid]."%\" 
+																	OR bcc LIKE \"%".$HTTP_COOKIE_VARS[$local_user.$sid]."%\")
+																	AND send_stamp>".$content['lastcheck'];
 						//print $sql;
 						if($ergebnis=mysql_query($sql,$link))
 							{ 
@@ -138,7 +180,7 @@ if(in_array($mode,$modetypes))
 									}
 									$dbtable="mail_private_users";
 									$sql="UPDATE $dbtable SET inbox=\"$content[inbox]\" 
-																		WHERE email=\"$ck_intra_email_user\"";	
+																		WHERE email=\"".$HTTP_COOKIE_VARS[$local_user.$sid]. "\"";	
 									if(!mysql_query($sql,$link)) { print "$LDDbNoUpdate<br>$sql"; } 
 									//print $sql;
 								}
@@ -155,67 +197,25 @@ if(in_array($mode,$modetypes))
 				// get the number of filed mails in every folder
 				$dbtable="mail_private_users";
 				if($folder!="inbox") 
-				 {$sql="SELECT inbox FROM $dbtable WHERE  email=\"$ck_intra_email_user\"";
-					if($ergebnis=mysql_query($sql,$link)) 
-					{
-						$folnum=0;
-						while ($cont=mysql_fetch_array($ergebnis)) $folnum++;
-						if($folnum)
-						{
-							mysql_data_seek($ergebnis,0);
-							$cont=mysql_fetch_array($ergebnis);
-							$bufa=explode("_",$cont[inbox]);
-							if((sizeof($bufa)==1)&&($bufa[0]=="")) $inbnum=0; else $inbnum=sizeof($bufa);
-						}
-					}
-				}
+				 {
+                   $inbnum=getMailNum("inbox",$HTTP_COOKIE_VARS[$local_user.$sid]);
+                }
 				else 
-				{ $newmails=0; $newmails=substr_count($content[inbox],"r=0");}
+				{ 
+				   $newmails=0; $newmails=substr_count($content[inbox],"r=0");
+				 }
 				
 				if($folder!="sent") 
-				 {$sql="SELECT sent FROM $dbtable WHERE  email=\"$ck_intra_email_user\"";
-					if($ergebnis=mysql_query($sql,$link)) 
-					{
-						$folnum=0;
-						while ($cont=mysql_fetch_array($ergebnis)) $folnum++;
-						if($folnum)
-						{
-							mysql_data_seek($ergebnis,0);
-							$cont=mysql_fetch_array($ergebnis);
-							$bufa=explode("_",$cont[sent]);
-							if((sizeof($bufa)==1)&&($bufa[0]=="")) $sentnum=0; else $sentnum=sizeof($bufa);
-						}
-					}
-				}
+				 {
+	                   $sentnum=getMailNum("sent",$HTTP_COOKIE_VARS[$local_user.$sid]);
+			     }
 				if($folder!="drafts") 
-				 {$sql="SELECT drafts FROM $dbtable WHERE  email=\"$ck_intra_email_user\"";
-					if($ergebnis=mysql_query($sql,$link)) 
-					{
-						$folnum=0;
-						while ($cont=mysql_fetch_array($ergebnis)) $folnum++;
-						if($folnum)
-						{
-							mysql_data_seek($ergebnis,0);
-							$cont=mysql_fetch_array($ergebnis);
-							$bufa=explode("_",$cont[drafts]);
-							if((sizeof($bufa)==1)&&($bufa[0]=="")) $drafnum=0; else $drafnum=sizeof($bufa);
-						}
-					}
+				 {
+	                   $drafnum=getMailNum("drafts",$HTTP_COOKIE_VARS[$local_user.$sid]);
 				}
 				if($folder!="trash") 
-				 {$sql="SELECT trash FROM $dbtable WHERE  email=\"$ck_intra_email_user\"";
-					if($ergebnis=mysql_query($sql,$link)) 
-					{
-						$folnum=0;
-						while ($cont=mysql_fetch_array($ergebnis)) $folnum++;
-						if($folnum)
-						{
-							mysql_data_seek($ergebnis,0);
-							$cont=mysql_fetch_array($ergebnis);
-							$bufa=explode("_",$cont[trash]);
-							if((sizeof($bufa)==1)&&($bufa[0]=="")) $trasnum=0; else $trasnum=sizeof($bufa);
-						}
-					}
+				 {
+	                   $trasnum=getMailNum("trash",$HTTP_COOKIE_VARS[$local_user.$sid]);
 				}
 				break;
 			}// end of case listmail
@@ -226,7 +226,7 @@ if(in_array($mode,$modetypes))
 			{
 				// set dbtable to users
 				$dbtable="mail_private_users";
-				$sql="SELECT addr_quick FROM $dbtable WHERE  email=\"$ck_intra_email_user\"";
+				$sql="SELECT addr_quick FROM $dbtable WHERE  email=\"".$HTTP_COOKIE_VARS[$local_user.$sid]. "\"";
 					if($ergebnis=mysql_query($sql,$link)) 
 					{
 						$rows=0;
@@ -235,7 +235,7 @@ if(in_array($mode,$modetypes))
 						{
 							mysql_data_seek($ergebnis,0);
 							$content=mysql_fetch_array($ergebnis);
-							$qa=explode("; ",trim($content[addr_quick]));
+							$qa=explode("; ",trim($content['addr_quick']));
 							//foreach($qa as $v) print $v;
 						}
 					}else { print "$LDDbNoRead<br>$sql"; } 
@@ -284,7 +284,6 @@ $body_txt.="
 
 $content[body]";
 										break;
-														
 						}
 					}
 				}else { print "$LDDbNoRead<br>$sql"; } 
@@ -294,7 +293,6 @@ $content[body]";
   		else { print "$LDDbNoLink<br>$sql"; } 
 } // end of if mode!=""
 
-
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
@@ -303,7 +301,7 @@ $content[body]";
  <script language="javascript" >
 <!-- 
 var feld="recipient";
-<?
+<?php
 if($mode=="listmail")
 print '
 function chkDelete(d,m)
@@ -328,13 +326,13 @@ function selectAll(s,m)
 }
 ';
 ?>
-<? if(($mode=="compose")||($mode=="sendmail")) : ?>
+<?php if(($mode=="compose")||($mode=="sendmail")) : ?>
 
 function save2draft()
 {
 	d=document.mailform;
 	d.folder.value="drafts";
-	if(d.subject.value=="") d.subject.value="<?=$LDSubject ?>:";
+	if(d.subject.value=="") d.subject.value="<?php echo $LDSubject ?>:";
 	d.submit();
 }
 
@@ -342,19 +340,19 @@ function chkCompose(d)
 {
 	if((d.recipient.value=="")&&(d.folder.value!="drafts"))
 	{
-		alert("<?=$LDAlertNoRecipient ?>");
+		alert("<?php echo $LDAlertNoRecipient ?>");
 		d.recipient.focus();
 		return false;
 	}
 	if((d.subject.value=="")||(d.subject.value=="Betreff:"))
 	{
-		if(confirm("<?=$LDAlertNoSubject ?>")) return true;
+		if(confirm("<?php echo $LDAlertNoSubject ?>")) return true;
 		d.subject.focus();
 		return false;
 	}
 	if((d.body_txt.value==""))
 	{
-		alert("<?=$LDAlertNoText ?>");
+		alert("<?php echo $LDAlertNoText ?>");
 		d.body_txt.focus();
 		return false;
 	}
@@ -373,44 +371,44 @@ function chkCompose(d)
 	
 function showAll()
 {
-	url="intra-email-showaddr.php?sid=<? print "$ck_sid&lang=$lang&mode=$mode&folder=$folder&l2h=$l2h" ?>";
+	url="intra-email-showaddr.php?sid=<?php print "$sid&lang=$lang&mode=$mode&folder=$folder&l2h=$l2h" ?>";
 	//window.location.href=url;
 	addrwin=window.open(url,"addrwin","width=600,height=500,menubar=no,resizable=yes,scrollbars=yes");
 }
 function chgQuickAddr()
 {
-	url="intra-email-chgQaddr.php?sid=<?="$ck_sid&lang=$lang&eadd=$ck_intra_email_user" ?>";
+	url="intra-email-chgQaddr.php?sid=<?php echo "$sid&lang=$lang&eadd=".$HTTP_COOKIE_VARS[$local_user.$sid] ?>";
 	addrwin=window.open(url,"addrwin","width=600,height=500,menubar=no,resizable=yes,scrollbars=yes");
 }
-<? endif ?>
+<?php endif ?>
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
 // -->
 </script> 
 
-<? 
-require("../req/css-a-hilitebu.php");
+<?php 
+require("../include/inc_css_a_hilitebu.php");
 ?>
 
 </HEAD>
 
 <BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?
+<?php
 if($mode=="compose") print ' onLoad="document.mailform.recipient.focus()"';
  if (!$cfg['dhtml']){ print ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
-<?=$test ?>
-<? //foreach($argv as $v) print "$v "; ?>
+<?php echo $test ?>
+<?php //foreach($argv as $v) print "$v "; ?>
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
 <tr valign=top>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="30">
-<FONT  COLOR="<? print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG> <?=$LDIntraEmail ?> - 
-<?
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="30">
+<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
+<STRONG> <?php echo $LDIntraEmail ?> - 
+<?php
 if($mode=="compose") print $LDComposeMail;	
  else switch($folder)
 	{
@@ -422,29 +420,36 @@ if($mode=="compose") print $LDComposeMail;
 	}				
 ?>
 </STRONG></FONT></td>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();"><img 
-src="../img/<?="$lang/$lang" ?>_back2.gif" border=0 width=110 height=24 align="absmiddle" 
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();"><img 
+src="../img/<?php echo "$lang/$lang" ?>_back2.gif" border=0 width=110 height=24 align="absmiddle" 
 style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a 
-href="javascript:gethelp('intramail.php','mail','<?=$mode ?>','<?=$folder ?>','<?=$sendok ?>')"><img src="../img/<?="$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 align="absmiddle" style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="<?=$breakfile ?>"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 align="absmiddle" style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a></td>
+href="javascript:gethelp('intramail.php','mail','<?php echo $mode ?>','<?php echo $folder ?>','<?php echo $sendok ?>')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 align="absmiddle" style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="<?php echo $breakfile ?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 align="absmiddle" style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a></td>
 </tr>
 <tr valign=top >
-<td bgcolor=<? print $cfg['body_bgcolor']; ?> valign=top colspan=2>
+<td bgcolor=<?php print $cfg['body_bgcolor']; ?> valign=top colspan=2>
 
 <FONT face="Verdana,Helvetica,Arial" size=2>
-<?
-//********************************************** login ***************************************
+<?php
+/**
+* Top horizontal nav bar
+*/
  print '
 <FONT face="Verdana,Helvetica,Arial" size=2>
   &nbsp; <b>';
-  if($mode!="listmail") print '<a href="intra-email.php?sid='.$ck_sid.'&lang='.$lang.'&mode=listmail">'.$LDInbox.'</a> | ';
+  if($mode!="listmail") print '<a href="intra-email.php?sid='.$sid.'&lang='.$lang.'&mode=listmail">'.$LDInbox.'</a> | ';
   	else print $LDInbox.' | ';
-  if($mode!="compose") print '<a href="intra-email.php?sid='.$ck_sid.'&lang='.$lang.'&mode=compose">'.$LDNewEmail.'</a> | ';
+  if($mode!="compose") print '<a href="intra-email.php?sid='.$sid.'&lang='.$lang.'&mode=compose">'.$LDNewEmail.'</a> | ';
   	else print $LDNewEmail.' | ';
-	print '<a href="intra-email-addrbook.php?sid='.$ck_sid.'&lang='.$lang.'&mode='.$mode.'&folder='.$folder.'">'.$LDAddrBook.'</a> | <a href="intra-email-options.php?sid='.$ck_sid.'&lang='.$lang.'">'.$LDOptions.'</a> | <a href="javascript:gethelp(\'intramail.php\',\'mail\',\''.$mode.'\',\''.$folder.'\',\''.$sendok.'\')">'.$LDHelp.'</a></b>
+	print '<a href="intra-email-addrbook.php?sid='.$sid.'&lang='.$lang.'&mode='.$mode.'&folder='.$folder.'">'.$LDAddrBook.'</a> | 
+	<a href="intra-email-options.php?sid='.$sid.'&lang='.$lang.'">'.$LDOptions.'</a> | 
+	<a href="javascript:gethelp(\'intramail.php\',\'mail\',\''.$mode.'\',\''.$folder.'\',\''.$sendok.'\')">'.$LDHelp.'</a>| 
+	<a href="intra-email-pass.php?sid='.$sid.'&lang='.$lang.'">'.$LDLogout.'</a></b>
   <hr color=#000080>
-   &nbsp; <FONT  color="#800000">'.$ck_intra_email_user.'</font><br>
+   &nbsp; <FONT  color="#800000">'.$HTTP_COOKIE_VARS[$local_user.$sid].'</font><br>
 ';
-// ******************************** Compose*****************************************
+/**
+* Compose routine
+*/
 if(($mode=="compose")||($mode=="sendmail"))
 {
 print '<ul><form name="mailform" action="'.$thisfile.'" method="post" onSubmit="return chkCompose(this)">';
@@ -555,7 +560,7 @@ print '
                                     </td>
     </tr>
   </table>
- 	 <input type="hidden" name="sid" value="'.$ck_sid.'">
+ 	 <input type="hidden" name="sid" value="'.$sid.'">
  	 <input type="hidden" name="lang" value="'.$lang.'">
     <input type="hidden" name="mode" value="sendmail">
 	<input type="hidden" name="folder" value="sent">
@@ -577,9 +582,12 @@ print '
     <tr>
       <td valign=top><FONT face="Verdana,Helvetica,Arial" size=2 color="#0000f0"><nobr>
 	  		';
+/**
+*  Left nav bar for mailboxes
+*/
 	if($folder=="inbox") 
 	print '<img src="../img/of.gif" border=0 width=17 height=14> <b>'.$LDInbox.' </b>';
-		else print '<a href="'.$thisfile.'?sid='.$ck_sid.'&lang='.$lang.'&mode=listmail&l2h='.$l2h.'"><img src="../img/cf.gif" border=0 width=17 height=14> '.$LDInbox.'</a>';
+		else print '<a href="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&mode=listmail&l2h='.$l2h.'"><img src="../img/cf.gif" border=0 width=17 height=14> '.$LDInbox.'</a>';
 	print '<font size=1 face=verdana,arial color="#0"> (';
 	if($folder=="inbox") print $maxrow; else print $inbnum; 
 		print ')</font>';
@@ -587,25 +595,27 @@ print '
 	print '<br>';
 	if($folder=="sent") 
 	print '<img src="../img/of.gif" border=0 width=17 height=14> <b>'.$LDSent.'</b>';
-		else print '<a href="'.$thisfile.'?sid='.$ck_sid.'&lang='.$lang.'&mode=listmail&l2h='.$l2h.'&folder=sent"><img src="../img/cf.gif" border=0 width=17 height=14> '.$LDSent.'</a>';
+		else print '<a href="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&mode=listmail&l2h='.$l2h.'&folder=sent"><img src="../img/cf.gif" border=0 width=17 height=14> '.$LDSent.'</a>';
 	print '<font size=1 face=verdana,arial color="#0"> (';
 	if($folder=="sent") print $maxrow; else print $sentnum; 
 		print ')</font>';
 		
 	print '<br>';
 	if($folder=="drafts") print '<img src="../img/of.gif" border=0 width=17 height=14> <b>'.$LDDrafts.'</b>';
-		else print '<a href="'.$thisfile.'?sid='.$ck_sid.'&lang='.$lang.'&mode=listmail&l2h='.$l2h.'&folder=drafts"><img src="../img/cf.gif" border=0 width=17 height=14> '.$LDDrafts.'</a>';
+		else print '<a href="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&mode=listmail&l2h='.$l2h.'&folder=drafts"><img src="../img/cf.gif" border=0 width=17 height=14> '.$LDDrafts.'</a>';
 	print '<font size=1 face=verdana,arial color="#0"> (';
 	if($folder=="drafts") print $maxrow; else print $drafnum; 
 		print ')</font>';
 		
 	print '<br>';
 	if($folder=="trash") print '<img src="../img/of.gif" border=0 width=17 height=14> <b>'.$LDRecycle.'</b>';
-		else print '<a href="'.$thisfile.'?sid='.$ck_sid.'&lang='.$lang.'&mode=listmail&l2h='.$l2h.'&folder=trash"><img src="../img/cf.gif" border=0 width=17 height=14> '.$LDRecycle.'</a>';
+		else print '<a href="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&mode=listmail&l2h='.$l2h.'&folder=trash"><img src="../img/cf.gif" border=0 width=17 height=14> '.$LDRecycle.'</a>';
 	print '<font size=1 face=verdana,arial color="#0"> (';
 	if($folder=="trash") print $maxrow; else print $trasnum; 
 		print ')</font>';
-		
+/**
+* End of left nav bar for mailboxes
+*/
 	print '<br>
 	</td>
       <td valign=top><img src="../img/pixel.gif" border=0 width=10 height=1>			
@@ -636,7 +646,7 @@ if($maxrow)
 		</b></td>
        <td><FONT face="Verdana,Helvetica,Arial" size=2 color="#ffffff">&nbsp;&nbsp;<b>'.$LDSubject.':</b></td>
        <td><FONT face="Verdana,Helvetica,Arial" size=2 color="#ffffff">&nbsp;';
-	   if($l2h) print '<a href="'.$thisfile.'?sid='.$ck_sid.'&lang='.$lang.'&l2h=0&mode=listmail&folder='.$folder.'" title="'.$LDSortDate.'"><img src="../img/arw_up.gif" '; else print '<a href="'.$thisfile.'?sid='.$ck_sid.'&lang='.$lang.'&l2h=1&mode=listmail&folder='.$folder.'" title="'.$LDSortDate.'"><img src="../img/arw_down.gif" ';
+	   if($l2h) print '<a href="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&l2h=0&mode=listmail&folder='.$folder.'" title="'.$LDSortDate.'"><img src="../img/arw_up.gif" '; else print '<a href="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&l2h=1&mode=listmail&folder='.$folder.'" title="'.$LDSortDate.'"><img src="../img/arw_down.gif" ';
 	   print '
 	   width=12 height=20 border=0 align=absmiddle alt="'.$LDSortDate.'"> <font color="#ffffff"><b>'.$LDDate.' '.$LDTime.':</b></font></a></td>
        <td><FONT face="Verdana,Helvetica,Arial" size=2 color="#ffffff">&nbsp;&nbsp;<b>'.$LDSize.':</b>&nbsp;</td>
@@ -644,7 +654,7 @@ if($maxrow)
 	for($i=0;$i<sizeof($arrlist);$i++)
 	   {
 	    parse_str(trim($arrlist[$i]),$minfo);
-		$buf="intra-email-read.php?sid=$ck_sid&lang=$lang&ua=$ck_intra_email_user&s_stamp=$minfo[t]&read=$minfo[r]&from=$minfo[f]&subj=".strtr($minfo[s]," ","+")."&date=".strtr($minfo[d]," ","+")."&size=$minfo[z]&l2h=$l2h&folder=$folder";
+		$buf="intra-email-read.php?sid=$sid&lang=$lang&ua=$ck_intra_email_user&s_stamp=$minfo[t]&read=$minfo[r]&from=$minfo[f]&subj=".strtr($minfo[s]," ","+")."&date=".strtr($minfo[d]," ","+")."&size=$minfo[z]&l2h=$l2h&folder=$folder";
      	if($minfo[r]) {print '<tr bgcolor="#ffffff">';} else {print ' <tr bgcolor="#ffeeee">';}
 		print '<td>&nbsp;';
 		if($minfo[r]) print '<a href="'.$buf.'"><img src="../img/o-mail.gif" border=0 width=13 height=12 alt="'.$LDReadEmail.'"><br></a>';
@@ -666,7 +676,7 @@ if($maxrow)
 	</table>
 	<input type="hidden" name="mode" value="listmail">
 	<input type="hidden" name="maxrow" value="'.$maxrow.'">
-	<input type="hidden" name="sid" value="'.$ck_sid.'">
+	<input type="hidden" name="sid" value="'.$sid.'">
  	<input type="hidden" name="lang" value="'.$lang.'">
  	<input type="hidden" name="l2h" value="'.$l2h.'">
  	<input type="hidden" name="folder" value="'.$folder.'">
@@ -700,39 +710,25 @@ else if($mode=="")
 	<FONT face="Verdana,Helvetica,Arial" size=3 color="#800000">
 	'.$LDWelcome.' '.$usr.'</font><p>
 	<FONT face="Verdana,Helvetica,Arial" size=2 > 
-	<a href="'.$thisfile.'?sid='.$ck_sid.'&lang='.$lang.'&mode=listmail">'.$LDNoteIntra.'</a>
+	<a href="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&mode=listmail">'.$LDNoteIntra.'</a>
 	</center>';
 }
 ?>
-  
-  
-	
-
-
-
 </FONT>
 <p>
 </td>
 </tr>
 
 <tr>
-<td bgcolor=<? print $cfg['bot_bgcolor']; ?> height=70 colspan=2>
-
+<td bgcolor=<?php print $cfg['bot_bgcolor']; ?> height=70 colspan=2>
 <?php
-require("../language/$lang/".$lang."_copyrite.htm");
-
+require("../language/$lang/".$lang."_copyrite.php");
  ?>
-
 </td>
 </tr>
 </table>        
 &nbsp;
-
-
-
-
 </FONT>
-
 
 </BODY>
 </HTML>

@@ -1,23 +1,39 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)||!$ck_prod_arch_user) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_products.php");
-require("../req/config-color.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","products.php");
+$local_user=$userck;
+require("../include/inc_front_chain_lang.php");
+require("../include/inc_config_color.php");
+
+if(!isset($dept)||!$dept)
+{
+	if(isset($HTTP_COOKIE_VARS['ck_thispc_dept'])&&!empty($HTTP_COOKIE_VARS['ck_thispc_dept'])) $dept=$HTTP_COOKIE_VARS['ck_thispc_dept'];
+	 else $dept="plop";//default is plop dept
+}
+if(!isset($mode)) $mode="";
+if(!isset($keyword)) $keyword="";
 
 $thisfile="products-archive.php";
+$searchfile=$thisfile;
 switch($cat)
 {
 	case "pharma":	
 							$title="$LDPharmacy $LDOrderArchive";
 							$dbtable="pharma_orderlist_archive";
-							$breakfile="apotheke.php?sid=$ck_sid&lang=$lang";
+							$breakfile="apotheke.php?sid=$sid&lang=$lang";
 							break;
 	case "medlager":
 							$title="$LDMedDepot $LDOrderArchive";
 							$dbtable="med_orderlist_archive";
-							$breakfile="medlager.php?sid=$ck_sid&lang=$lang";
+							$breakfile="medlager.php?sid=$sid&lang=$lang";
 							break;
 	default:  {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 }
@@ -25,8 +41,11 @@ switch($cat)
 if($mode=="search")
 {
 	$keyword=trim($keyword);
-	if(($keyword=="")||($keyword=="%")||($keyword=="_")||(strlen($keyword)<2)) { header("location:$thisfile?sid=$ck_sid&lang=$lang&invalid=1&cat=$cat"); exit;}
-	
+	if(($keyword=="")||($keyword=="%")||($keyword=="_")||(strlen($keyword)<2)) { header("location:$thisfile?sid=$sid&lang=$lang&invalid=1&cat=$cat&userck=$userck"); exit;}
+	if($lang=="de")
+	{
+		if(eregi($keyword,"eilig")) $keyword="urgent";
+	}
 	if(!$ofset) $ofset=0;
 	if(!$nrows) $nrows=20;
 }
@@ -36,7 +55,7 @@ $linecount=0;
 //this is the search module
 if((($mode=="search")||$update)&&($keyword!="")) 
 {
-	include("../req/db-makelink.php");
+	include("../include/inc_db_makelink.php");
 	if($link&&$DBLink_OK)
 		{
 	
@@ -112,91 +131,56 @@ function pruf(d)
 }
 function show_order(d,o,t,s,h)
 {
-	urlholder="products-archive-orderlist-showcontent.php?sid=<? print "$ck_sid&lang=$lang"; ?>&cat=<?=$cat ?>&dept="+d+"&order_id="+o+"&sent_stamp="+t+"&sent_date="+s+"&sent_time="+h;
+	urlholder="products-archive-orderlist-showcontent.php?sid=<?php print "$sid&lang=$lang&userck=$userck"; ?>&cat=<?php echo $cat ?>&dept="+d+"&order_id="+o+"&sent_stamp="+t+"&sent_date="+s+"&sent_time="+h;
 	window.location.href=urlholder;
 	}
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
 // -->
 </script> 
 
-<? 
-require("../req/css-a-hilitebu.php");
+<?php 
+require("../include/inc_css_a_hilitebu.php");
 ?>
 
 </HEAD>
 
 <BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="document.suchform.keyword.select()"
-<? if (!$cfg['dhtml']){ print 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
-<?=$test ?>
-<? //foreach($argv as $v) print "$v "; ?>
+<?php if (!$cfg['dhtml']){ print 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+<?php echo $test ?>
+<?php //foreach($argv as $v) print "$v "; ?>
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
 <tr valign=top>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="45">
-<FONT  COLOR="<? print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG> &nbsp; <?=$title ?></STRONG></FONT></td>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?if($cfg['dhtml'])print'<a href="javascript:window.history.back()"><img src="../img/'.$lang.'/'.$lang.'_back2.gif" width=110 height=24 border=0  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
-<a href="javascript:gethelp('products.php','arch','','<?=$cat ?>')"><img src="../img/<?="$lang/$lang"; ?>_hilfe-r.gif" border=0 width=75 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?print $breakfile;?>"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 alt="<?=$LDClose ?>"  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="45">
+<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
+<STRONG> &nbsp; <?php echo $title ?></STRONG></FONT></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right>
+<?php if($cfg['dhtml'])print'<a href="javascript:window.history.back()"><img src="../img/'.$lang.'/'.$lang.'_back2.gif" width=110 height=24 border=0  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('products.php','arch','','<?php echo $cat ?>')"><img src="../img/<?php echo "$lang/$lang"; ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
 <tr valign=top >
-<td bgcolor=<? print $cfg['body_bgcolor']; ?> valign=top colspan=2>
+<td bgcolor=<?php print $cfg['body_bgcolor']; ?> valign=top colspan=2>
 <ul>
 <FONT face="Verdana,Helvetica,Arial" size=3 color="#990000">
-<?
-if($from=="archivepass")
+<?php if($from=="archivepass")
 {
 print '<img src="../img/catr.gif" border=0 width=88 height=80 align="absmiddle">';
 $curtime=date("H.i");
 if ($curtime<"9.00") print $LDGoodMorning;
 if (($curtime>"9.00")and($curtime<"18.00")) print $LDGoodDay;
 if ($curtime>"18.00") print $LDGoodEvening;
-print " $ck_prod_arch_user!";
+print " ".$HTTP_COOKIE_VARS[$local_user.$sid];
 }else print "<br>";
 ?>
 </font>
 <p>
-  <form action="<?=$thisfile?>" method="get" name="suchform" onSubmit="return pruf(this)">
-  <table border=0 cellspacing=2 cellpadding=3>
-    <tr bgcolor=#ffffdd>
-      <td align=center colspan=2><FONT face="Verdana,Helvetica,Arial" size=2 color="#800000"><?=$LDSearch4OrderList ?>:</td>
-    </tr>
-    <tr bgcolor=#ffffdd>
-      <td align=right><FONT face="Verdana,Helvetica,Arial" size=2><?=$LDOrderListKey ?></td>
-      <td><input type="text" name="keyword" size=40 maxlength=40 value="<? if(!$keyword) print $ck_thispc_dept; else print $keyword; ?>">
-          </td>
-    </tr>
-    <tr bgcolor=#ffffdd>
-      <td align=right valign=top><FONT face="Verdana,Helvetica,Arial" size=2><?=$LDSearchIn ?></td>
-      <td><FONT face="Verdana,Helvetica,Arial" size=2>	
-	  		<input type="checkbox" name="such_date" value="1" <? if(($such_date)||(!$mode)) print " checked"; ?>> <?=$LDDate ?><br>
-          	<input type="checkbox" name="such_dept" value="1" <? if(($such_dept)||(!$mode)) print " checked"; ?>> <?=$LDDept ?><br>
-          	<input type="checkbox" name="such_prio" value="1" <? if(($such_prio)||(!$mode)) print " checked"; ?>> <?=$LDPrio ?><br>
-          </td>
-    </tr>
-
-    <tr >
-      <td ><input type="submit" value="<?=$LDSearch ?>">
-           </td>
-      <td align=right><input type="reset" value="<?=$LDReset ?>" onClick="document.suchform.keyword.focus()">
-                      </td>
-    </tr>
-  </table>
-  <input type="hidden" name="sid" value="<?=$ck_sid?>">
-  <input type="hidden" name="lang" value="<?=$lang?>">
-  <input type="hidden" name="cat" value="<?=$cat?>">
-    <input type="hidden" name="mode" value="search">
-    </form>
-  
-  
+<?php require("../include/inc_products_archive_search_form.php"); ?>
 <hr width=80% align=left>
-<?
-if($linecount>0)
+<?php if($linecount>0)
 {
 	print '
 			<font face=Verdana,Arial size=2>
@@ -258,7 +242,7 @@ if($linecount>0)
               					<input type="hidden" name="such_dept" value="'.$such_dept.'">
               					<input type="hidden" name="ofset" value="'.($ofset-$nrows).'">
                    				<input type="hidden" name="nrows" value="'.$nrows.'">
-                       			<input type="hidden" name="sid" value="'.$ck_sid.'">           
+                       			<input type="hidden" name="sid" value="'.$sid.'">           
 								<input type="hidden" name="lang" value="'.$lang.'">
                        			<input type="hidden" name="cat" value="'.$cat.'">           
 								<input type="submit" value="&lt;&lt; '.$LDBack.'">
@@ -273,7 +257,7 @@ if($linecount>0)
                    				<input type="hidden" name="such_prio" value="'.$such_prio.'">
         						<input type="hidden" name="ofset" value="'.($ofset+$nrows).'">
               					<input type="hidden" name="nrows" value="'.$nrows.'">
-                   				<input type="hidden" name="sid" value="'.$ck_sid.'">     
+                   				<input type="hidden" name="sid" value="'.$sid.'">     
 								<input type="hidden" name="lang" value="'.$lang.'">
                        			<input type="hidden" name="cat" value="'.$cat.'">           
 								<input type="submit" value="'.$LDContinue.' &gt;&gt;">
@@ -293,7 +277,7 @@ if($ofset) print '	<form name=back action='.$thisfile.' method=post>
               					<input type="hidden" name="such_dept" value="'.$such_dept.'">
               					<input type="hidden" name="ofset" value="'.($ofset-$nrows).'">
                    				<input type="hidden" name="nrows" value="'.$nrows.'">
-                       			<input type="hidden" name="sid" value="'.$ck_sid.'">           
+                       			<input type="hidden" name="sid" value="'.$sid.'">           
                        			<input type="hidden" name="cat" value="'.$cat.'">           
 								<input type="hidden" name="lang" value="'.$lang.'">
 								<input type="submit" value="&lt;&lt; '.$LDBack.'">
@@ -322,7 +306,7 @@ if($invalid) print'
 	 ?>
 <p><br>
 
-<a href="<?="$breakfile" ?>"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0  alt="<?=$LDClose ?>" align="middle"></a>
+<a href="<?php echo "$breakfile" ?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0  alt="<?php echo $LDClose ?>" align="middle"></a>
 
 	
 
@@ -334,9 +318,9 @@ if($invalid) print'
 </tr>
 
 <tr>
-<td bgcolor=<? print $cfg['bot_bgcolor']; ?> height=70 colspan=2>
+<td bgcolor=<?php print $cfg['bot_bgcolor']; ?> height=70 colspan=2>
 <?php
-require("../language/$lang/".$lang."_copyrite.htm");
+require("../language/$lang/".$lang."_copyrite.php");
  ?>
 
 </td>

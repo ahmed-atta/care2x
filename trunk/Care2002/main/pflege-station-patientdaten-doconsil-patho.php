@@ -1,20 +1,27 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)||!$ck_pflege_user) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_nursing.php");
-require("../req/config-color.php"); // load color preferences
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","nursing.php");
+$local_user="ck_pflege_user";
+require("../include/inc_front_chain_lang.php");
+require("../include/inc_config_color.php"); // load color preferences
 
 $thisfile="pflege-station-patientdaten-doconsil-patho.php";
-$breakfile="pflege-station-patientdaten.php?sid=$ck_sid&lang=$lang&edit=$edit&station=$station&pn=$pn";
+$breakfile="pflege-station-patientdaten.php?sid=$sid&lang=$lang&edit=$edit&station=$station&pn=$pn";
 
 $bgc1="#cde1ec"; 
 $abtname=get_meta_tags("../global_conf/$lang/konsil_tag_dept.pid");
 
 $formtitle=$abtname[$konsil];
 						
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK)
 	{	
 		// get orig data
@@ -63,7 +70,7 @@ if($link&&$DBLink_OK)
        							{
 									//print $sql;
 									mysql_close($link);
-									header("location:$thisfile?sid=$ck_sid&lang=$lang&edit=$edit&saved=1&pn=$pn&station=$station");
+									header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=1&pn=$pn&station=$station");
 								}
 								else {print "<p>$sql<p>$LDDbNoUpdate"; exit;}
 						} // else create new entry
@@ -96,7 +103,7 @@ if($link&&$DBLink_OK)
        							{
 									//print $sql;
 									mysql_close($link);
-									header("location:$thisfile?sid=$ck_sid&lang=$lang&edit=$edit&saved=1&pn=$pn&station=$station");
+									header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=1&pn=$pn&station=$station");
 								}
 								else {print "<p>$sql<p>$LDDbNoSave"; exit;}
 						}
@@ -130,9 +137,9 @@ if($link&&$DBLink_OK)
 <HTML>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
- <TITLE><?="$LDDiagnosticTest $station" ?></TITLE>
-<?
-require("../req/css-a-hilitebu.php");
+ <TITLE><?php echo "$LDDiagnosticTest $station" ?></TITLE>
+<?php
+require("../include/inc_css_a_hilitebu.php");
 ?>
 <style type="text/css">
 div.fva2_ml10 {font-family: verdana,arial; font-size: 12; margin-left: 10;}
@@ -182,7 +189,7 @@ function select_this(formtag){
 	}
 	
 function getinfo(patientID){
-	urlholder="pflege-station.php?route=validroute&patient=" + patientID + "&user=<? print $aufnahme_user.'"' ?>;
+	urlholder="pflege-station.php?route=validroute&patient=" + patientID + "&user=<?php print $aufnahme_user.'"' ?>;
 	patientwin=window.open(urlholder,patientID,"width=600,height=400,menubar=no,resizable=yes,scrollbars=yes");
 	}
 function sethilite(d){
@@ -198,7 +205,7 @@ function endhilite(d){
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
@@ -208,11 +215,11 @@ function gethelp(x,s,x1,x2,x3)
 </script>
 </HEAD>
 
-<BODY bgcolor=<? print $cfg['body_bgcolor']; ?> 
+<BODY bgcolor=<?php print $cfg['body_bgcolor']; ?> 
 onLoad="if (window.focus) window.focus(); 
-<? if(($mode=="save")||($saved)) print ";window.location.href='#bottom';document.berichtform.berichtput.focus()"; ?>"  
+<?php if(($mode=="save")||($saved)) print ";window.location.href='#bottom';document.berichtform.berichtput.focus()"; ?>"  
 topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<? if (!$cfg['dhtml']){ print 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+<?php if (!$cfg['dhtml']){ print 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 
 <script>	
 window.moveTo(0,0);
@@ -221,18 +228,17 @@ window.moveTo(0,0);
 
 <table width=100% border=0 cellpadding="5" cellspacing=0>
 <tr>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<? print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><? print "$LDDiagnosticTest ($station)"; ?></STRONG></FONT>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" >
+<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php print "$LDDiagnosticTest ($station)"; ?></STRONG></FONT>
 </td>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp()"><img src="../img/<?="$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:window.parent.location.replace('<?=$breakfile ?>');" ><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp()"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:window.parent.location.replace('<?php echo $breakfile ?>');" ><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
 </tr>
 <tr>
-<td bgcolor=<? print $cfg['body_bgcolor']; ?> colspan=2>
+<td bgcolor=<?php print $cfg['body_bgcolor']; ?> colspan=2>
  <ul>
 
-<form name="berichtform" method="get" action="<?=$thisfile ?>" onSubmit="return pruf(this)">
-<?
-
+<form name="berichtform" method="get" action="<?php echo $thisfile ?>" onSubmit="return pruf(this)">
+<?php
 print '
 		<table   cellpadding="0" cellspacing=1 border="0" width=700>';
 print '
@@ -249,18 +255,18 @@ print '
 
 
 ?>
-	<tr bgcolor="<?=$bgc1 ?>">
+	<tr bgcolor="<?php echo $bgc1 ?>">
 		<td  valign=top><div class=fva0_ml10><font color="#000099">	                                                            
-		<input type="checkbox" name="speedcut" value="1"> <?="$LDSpeedCut<br>$LDRelayResult" ?><br><input type="text" name="ss_info" size=20 maxlength=25><br>
-		<input type="checkbox" name="speedtest" value="1"> <?="$LDSpeedTest<br>$LDRelayResult" ?><br><input type="text" name="sb_info" size=20 maxlength=25>
+		<input type="checkbox" name="speedcut" value="1"> <?php echo "$LDSpeedCut<br>$LDRelayResult" ?><br><input type="text" name="ss_info" size=20 maxlength=25><br>
+		<input type="checkbox" name="speedtest" value="1"> <?php echo "$LDSpeedTest<br>$LDRelayResult" ?><br><input type="text" name="sb_info" size=20 maxlength=25>
   </div></td>
 			<td  valign=top><div class=fva0_ml10><font color="#000099">
-		 <?=$LDSpecialNotice ?>:<br>
+		 <?php echo $LDSpecialNotice ?>:<br>
 		<input type="text" name="specials" size=55 maxlength=60>
 		
   </div></td>
 </tr>
-	<tr bgcolor="<?=$bgc1 ?>">
+	<tr bgcolor="<?php echo $bgc1 ?>">
 		<td valign=top><div class=fva2_ml10>
 			<input type="radio" name="ktype" value="PE"> PE<br>
   	<input type="radio" name="ktype" value="OP Präparat"> OP Präparat<br>
@@ -270,22 +276,22 @@ print '
 		<textarea name="prep_info" cols=50 rows=15 wrap="physical"></textarea>
 				</td>
 		</tr>	
-	<tr bgcolor="<?=$bgc1 ?>">
+	<tr bgcolor="<?php echo $bgc1 ?>">
 		<td ><div class=fva2_ml10><font color="#000099">
-<?=$LDReqTest ?>:
+<?php echo $LDReqTest ?>:
   </div></td>
 			<td ><div class=fva2_ml10><font color="#000099">
 		<input type="text" name="hws_info" size=40 maxlength=60>
 		
   </div></td>
 </tr>
-	<tr bgcolor="<?=$bgc1 ?>">
+	<tr bgcolor="<?php echo $bgc1 ?>">
 		<td ><div class=fva2_ml10><font color="#000099">
-		 <?=$LDDate ?>:
-		<input type="text" name="edate"  value="<?=date("d.m.Y") ?>" size=15 maxlength=60>
+		 <?php echo $LDDate ?>:
+		<input type="text" name="edate"  value="<?php echo date("d.m.Y") ?>" size=15 maxlength=60>
   </div></td>
 			<td ><div class=fva2_ml10><font color="#000099">
-		<?="$LDDoctor/$LDDept" ?>:
+		<?php echo "$LDDoctor/$LDDept" ?>:
 		<input type="text" name="encoder" size=40 maxlength=60>
 		
   </div></td>
@@ -297,22 +303,22 @@ print '
 <p>
 <table width="650"  cellpadding="0" cellspacing="0">
 <tr><td>
-<a href="<?=$breakfile ?>"><img src="../img/<?="$lang/$lang" ?>_cancel.gif" border="0" width=103 height=24 alt="<?=$LDClose ?>"></a>
+<a href="<?php echo $breakfile ?>"><img src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" border="0" width=103 height=24 alt="<?php echo $LDClose ?>"></a>
 </td>
 <td align=right>
-<a href="<?=$breakfile ?>"><img src="../img/<?="$lang/$lang" ?>_sendlater.gif" border="0" width=156 height=24alt="<?=$LDSendLater ?>"></a>
+<a href="<?php echo $breakfile ?>"><img src="../img/<?php echo "$lang/$lang" ?>_sendlater.gif" border="0" width=156 height=24alt="<?php echo $LDSendLater ?>"></a>
 &nbsp;&nbsp;
-<a href="javascript:resetinput()"><img src="../img/<?="$lang/$lang" ?>_reset.gif" border="0"  width=156 height=24 alt="<?=$LDReset ?>"></a>
+<a href="javascript:resetinput()"><img src="../img/<?php echo "$lang/$lang" ?>_reset.gif" border="0"  width=156 height=24 alt="<?php echo $LDReset ?>"></a>
 &nbsp;&nbsp;
-<input type="image" src="../img/<?="$lang/$lang" ?>_abschic.gif" border=0 width=110 height=24 alt="<?=$LDSend ?>">
+<input type="image" src="../img/<?php echo "$lang/$lang" ?>_abschic.gif" border=0 width=110 height=24 alt="<?php echo $LDSend ?>">
 </td>
 </tr>
 </table>
-<input type="hidden" name="sid" value="<?=$ck_sid ?>">
-<input type="hidden" name="lang" value="<?=$lang ?>">
-<input type="hidden" name="station" value="<?=$station ?>">
-<input type="hidden" name="pn" value="<?=$pn ?>">
-<input type="hidden" name="edit" value="<?=$edit ?>">
+<input type="hidden" name="sid" value="<?php echo $sid ?>">
+<input type="hidden" name="lang" value="<?php echo $lang ?>">
+<input type="hidden" name="station" value="<?php echo $station ?>">
+<input type="hidden" name="pn" value="<?php echo $pn ?>">
+<input type="hidden" name="edit" value="<?php echo $edit ?>">
 <input type="hidden" name="mode" value="save">
 
 </form>
@@ -331,7 +337,7 @@ print '
 <p>
 
 <?php
-require("../language/$lang/".$lang."_copyrite.htm");
+require("../language/$lang/".$lang."_copyrite.php");
  ?>
 <a name="bottom"></a>
 </BODY>

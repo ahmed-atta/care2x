@@ -1,18 +1,25 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)||!$ck_opdoku_user) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","or.php");
+$local_user="ck_opdoku_user";
+require("../include/inc_front_chain_lang.php");
 
 if ((substr($matchcode,0,1)=="%")||(substr($matchcode,0,1)=="&")) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_or.php");
-require("../req/config-color.php"); // load color preferences
+require("../include/inc_config_color.php"); // load color preferences
 
 $thisfile="op-doku-start.php";
 //foreach($arg as $v) print "$v<br>"; //init db parameters
 
-if(!$dept)
-	if($ck_thispc_dept) $dept=$ck_thispc_dept;
+if(!isset($dept)||empty($dept))
+	if($HTTP_COOKIE_VARS['ck_thispc_dept']) $dept=$HTTP_COOKIE_VARS['ck_thispc_dept'];
 		else $dept="plop"; // default department is plop
 
 $modtypes=array("match","select","update","save","saveok");
@@ -48,7 +55,7 @@ if($mode=="save")
 
 if(in_array($mode,$modtypes))
 {
-	include("../req/db-makelink.php");
+	include("../include/inc_db_makelink.php");
 	if($link&&$DBLink_OK) 
 	{	
 		switch($mode)
@@ -61,7 +68,7 @@ if(in_array($mode,$modtypes))
 								$sql='SELECT patnum, name, vorname, gebdatum, status, kasse FROM '.$dbtable.' WHERE  patnum='.$matchcode;
 							}
 							else 
-								$sql='SELECT patnum, name, vorname, gebdatum, status, kasse FROM '.$dbtable.' WHERE  name="'.$matchcode.'"';
+								$sql='SELECT patnum, name, vorname, gebdatum, status, kasse FROM '.$dbtable.' WHERE  name="'.addslashes($matchcode).'"';
 							if($ergebnis=mysql_query($sql,$link)) 
 							{			
 						  		$rows=0;
@@ -153,7 +160,7 @@ if(in_array($mode,$modtypes))
 									op_end=\"$opende\",
 									scrub_nurse=\"$inst\",
 									op_room=\"$opsaal\",
-									editor=\"$opdoku_user\",
+									editor=\"".$HTTP_COOKIE_VARS[$local_user.$sid]."\",
 									edit_dt=\"".date("Y.m.d H.i.s")."\",
 									tstamp=\"$ts\"
 									WHERE dept=\"$de\"
@@ -168,7 +175,7 @@ if(in_array($mode,$modtypes))
 						if($ergebnis=mysql_query($sql,$link))
 						{
 							  	mysql_close($link);
-								header("location:op-doku-start.php?sid=$ck_sid&mode=saveok&dept=$de&docn=$dn&tstamp=$ts");
+								header("location:op-doku-start.php?sid=$sid&lang=$lang&mode=saveok&dept=$de&docn=$dn&tstamp=$ts");
 								exit;
 						}else print "$sql<br>$LDDbNoUpdate"; 
 					}
@@ -238,7 +245,7 @@ if(in_array($mode,$modtypes))
 									'$opende',
 									'$inst',
 									'$opsaal',
-									'$opdoku_user',
+									'".$HTTP_COOKIE_VARS[$local_user.$sid]."',
 									'".date("Y.m.d H.i.s")."',
 									'',
 									'',
@@ -252,7 +259,7 @@ if(in_array($mode,$modtypes))
 									if($ergebnis=mysql_query($sql,$link)) 
 									{			
 							  			mysql_close($link);
-										header("location:op-doku-start.php?sid=$ck_sid&mode=saveok&dept=$dept&docn=$dn&tstamp=$ts");
+										header("location:op-doku-start.php?sid=$sid&lang=$lang&mode=saveok&dept=$dept&docn=$dn&tstamp=$ts");
 										exit;
 									}else print "$sql<br>$LDDbNoUpdate"; 
 								}else print "$sql<br>$LDDbNoSave"; 
@@ -276,7 +283,7 @@ if(in_array($mode,$modtypes))
 						}else print "$sql<br>$LDDbNoRead"; 
 					break;
 			default:
-					if($ck_login_logged) $mode="dummy";
+					if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) $mode="dummy";
 					break;
 		} // end of switch
 	}
@@ -289,7 +296,7 @@ if(in_array($mode,$modtypes))
 <HTML>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
- <TITLE><?=$LDOrDocument ?></TITLE>
+ <TITLE><?php echo $LDOrDocument ?></TITLE>
 
 
 <script  language="javascript">
@@ -308,7 +315,7 @@ function hidecat()
 
 function loadcat()
 {
-  cat.src="../imgcreator/catcom.php?lang=<?=$lang ?>&person=<?print strtr($ck_opdoku_user," ","+");?>";
+  cat.src="../imgcreator/catcom.php?lang=<?php echo $lang ?>&person=<?php echo strtr($HTTP_COOKIE_VARS[$local_user.$sid]," ","+");?>";
   pix.src="../img/pixel.gif";
 }
 
@@ -335,13 +342,13 @@ function lookmatch(d)
 		d.matchcode.focus();
 		return false;
 	}
-	window.location.replace("op-doku-start.php?sid=<?="$ck_sid&lang=$lang" ?>&mode=match&matchcode="+m);
+	window.location.replace("op-doku-start.php?sid=<?php echo "$sid&lang=$lang" ?>&mode=match&matchcode="+m);
 	return false;
 }
 
 function setDay(d)
 {
-	var h="<? print date("d.m.Y"); ?>";
+	var h="<?php print date("d.m.Y"); ?>";
 	switch(d.value)
 	{
 		case "h": d.value=h; break;
@@ -354,7 +361,7 @@ function setDay(d)
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
@@ -369,8 +376,8 @@ div.cats{
 	top: 80;
 }
 </style>
-<? 
-require("../req/css-a-hilitebu.php");
+<?php 
+require("../include/inc_css_a_hilitebu.php");
 ?>
 </HEAD>
 
@@ -380,46 +387,44 @@ require("../req/css-a-hilitebu.php");
 <table width=100% border=0 cellspacing="0">
 <tr>
 <td bgcolor="navy">
-<FONT  COLOR="white"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?="$LDOrDocument - ($dept)" ?></STRONG></FONT>
+<FONT  COLOR="white"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php echo "$LDOrDocument - ($dept)" ?></STRONG></FONT>
 </td>
 <td bgcolor="navy" align="right">
-<a href="javascript:gethelp('opdoc.php','create','<?=$mode ?>')"><img src="../img/<?="$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a>
-<a href="javascript:window.opener.focus();window.close();"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  alt="<?=$LDClose ?>" style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a>
+<a href="javascript:gethelp('opdoc.php','create','<?php echo $mode ?>')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="javascript:window.opener.focus();window.close();"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  alt="<?php echo $LDClose ?>" style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a>
 </td>
 </tr>
 <tr>
-<td colspan=2 bgcolor=#dde1ec><p><br>
+<td colspan=2 bgcolor=#dde1ec><p>
 
 <div class="cats"><a href="javascript:hidecat()">
-<?
-if($mode!="")
+<?php if($mode!="")
 { if($err_data) print '<img src="../img/'.$lang.'/'.$lang.'_inc-data.gif" align=right name="catcom" border=0 alt="'.$LDHideCat.'">';
 	else print'<img src="../img/pixel.gif" align=right name="catcom" border=0 alt="'.$LDHideCat.'">';
- }else print '<img src="../imgcreator/catcom.php?lang='.$lang.'&person='.strtr($ck_opdoku_user," ","+").'" align=right name="catcom" border=0 alt="'.$LDHideCat.'">';
+ }else print '<img src="../imgcreator/catcom.php?lang='.$lang.'&person='.strtr($HTTP_COOKIE_VARS[$local_user.$sid]," ","+").'" align=right name="catcom" border=0 alt="'.$LDHideCat.'">';
 ?></a>
 
 </div>
 
 <ul>
-<? if($rows>1) : ?>
+<?php if($rows>1) : ?>
 
 <table border=0>
   <tr>
     <td><img src="../img/catr.gif" border=0 width=88 height=80 align="absmiddle"></td>
     <td><FONT  SIZE=3 FACE="verdana,Arial" color=#800000>
-<b><?="$LDPatientsFound<br>$LDPlsClk1" ?></b></font></td>
+<b><?php echo "$LDPatientsFound<br>$LDPlsClk1" ?></b></font></td>
   </tr>
 </table>
 
 <table border=0 cellpadding=0 cellspacing=0>
   <tr bgcolor=#0000aa>
     <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp;</b></td>
-    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; <?=$LDLastName ?></b></td>
-    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; &nbsp;<?=$LDName ?></b></td>
-    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; &nbsp;<?=$LDBday ?></b></td>
-    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; &nbsp;<?=$LDPatientNr ?>&nbsp; &nbsp;</b></td>
+    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; <?php echo $LDLastName ?></b></td>
+    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; &nbsp;<?php echo $LDName ?></b></td>
+    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; &nbsp;<?php echo $LDBday ?></b></td>
+    <td><FONT  SIZE=-1  FACE="Arial" color=#ffffff><b>&nbsp; &nbsp;<?php echo $LDPatientNr ?>&nbsp; &nbsp;</b></td>
   </tr>
- <? 
+ <?php 
  $toggle=0;
  while($result=mysql_fetch_array($ergebnis))
  {
@@ -427,8 +432,8 @@ if($mode!="")
   <tr ';
   if($toggle){ print "bgcolor=#efefef"; $toggle=0;} else {print "bgcolor=#ffffff"; $toggle=1;}
   print '>
-    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="op-doku-start.php?sid='.$ck_sid.'&lang='.$lang.'&mode=select&n='.$result[patnum].'&ln='.$result[name].'&fn='.$result[vorname].'&bd='.$result[gebdatum ].'"><img src="../img/R_arrowGrnSm.gif" width=12 height=12 border=0></a></td>
-    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; <a href="op-doku-start.php?sid='.$ck_sid.'&lang='.$lang.'&mode=select&n='.$result[patnum].'&ln='.$result[name].'&fn='.$result[vorname].'&bd='.$result[gebdatum ].'">'.$result[name].'</a></td>
+    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="op-doku-start.php?sid='.$sid.'&lang='.$lang.'&mode=select&n='.$result[patnum].'&ln='.$result[name].'&fn='.$result[vorname].'&bd='.$result[gebdatum ].'"><img src="../img/R_arrowGrnSm.gif" width=12 height=12 border=0></a></td>
+    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; <a href="op-doku-start.php?sid='.$sid.'&lang='.$lang.'&mode=select&n='.$result[patnum].'&ln='.$result[name].'&fn='.$result[vorname].'&bd='.$result[gebdatum ].'">'.$result[name].'</a></td>
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;'.$result[vorname].'</td>
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;'.$result[gebdatum].'</td>
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;'.$result[patnum].'&nbsp; &nbsp;</td>
@@ -441,28 +446,28 @@ if($mode!="")
 </table>
 <p>
 <form method="post"  name="match" onSubmit="return lookmatch(this)">
-<FONT  SIZE=-1  FACE="Arial"><?=$LDMatchCode ?>: <input name="matchcode" type="text" size="14" onClick=hidecat()>&nbsp;<input type="image" src="../img/<?="$lang/$lang" ?>_searchlamp.gif" border=0 width=108 height=24 align="absmiddle" alt="<?=$LDSearch ?>">
+<FONT  SIZE=-1  FACE="Arial"><?php echo $LDMatchCode ?>: <input name="matchcode" type="text" size="14" onClick=hidecat()>&nbsp;<input type="image" src="../img/<?php echo "$lang/$lang" ?>_searchlamp.gif" border=0 width=108 height=24 align="absmiddle" alt="<?php echo $LDSearch ?>">
 </form>
-<? else :?>
+<?php else :?>
 
 <FONT  SIZE=-1  FACE="Arial">
 <form method="post"  name="match" onSubmit="return lookmatch(this)">
 <table border="0">
 <tr>
-<td><FONT SIZE=-1  FACE="Arial"><?=$LDMatchCode ?>:<p>
+<td><FONT SIZE=-1  FACE="Arial"><?php echo $LDMatchCode ?>:<p>
 </td>
-<td> <input name="matchcode" type="text" size="14" onClick=hidecat()>&nbsp;<input type="image" src="../img/<?="$lang/$lang" ?>_searchlamp.gif" border=0 width=108 height=24 align="absmiddle" alt="<?=$LDSearch ?>"><p>
+<td> <input name="matchcode" type="text" size="14" onClick=hidecat()>&nbsp;<input type="image" src="../img/<?php echo "$lang/$lang" ?>_searchlamp.gif" border=0 width=108 height=24 align="absmiddle" alt="<?php echo $LDSearch ?>"><p>
                                                                            
 </td>
 </tr>
 </form>
 
 <form method="post" action="op-doku-start.php" name="opdoc">
-<tr <?if($mode=="saveok") print "bgcolor=#ffffff"; ?>>
-<td><FONT SIZE=-1  FACE="Arial" <? if($err_opdate) print 'color=#cc0000'; ?>><?=$LDOpDate ?>:<br>
+<tr <?php if($mode=="saveok") print "bgcolor=#ffffff"; ?>>
+<td><FONT SIZE=-1  FACE="Arial" <?php if($err_opdate) print 'color=#cc0000'; ?>><?php echo $LDOpDate ?>:<br>
 </td>
 <td><FONT SIZE=-1  FACE="Arial">
-<? if($mode=="saveok") print '<font color="#800000">'.$result[op_date].'</font>'; 
+<?php if($mode=="saveok") print '<font color="#800000">'.$result[op_date].'</font>'; 
 	else
 	{ print '
  		<input name="opdate" type="text" size="14" value="';
@@ -470,24 +475,33 @@ if($mode!="")
 	print '" onClick=hidecat() onKeyUp=setDay(this)>';
  }
 ?>
-<font size=2 face="arial"<? if($err_operator) print 'color=#cc0000'; ?>>&nbsp; &nbsp;<?=$LDOperator ?>:
-<? if($mode=="saveok") print '<font color="#800000">'.$result[operator]; 
+<font size=2 face="arial"<?php if($err_operator) print 'color=#cc0000'; ?>>&nbsp; &nbsp;<?php echo $LDOperator ?>:
+<?php if($mode=="saveok") print '<font color="#800000">'.$result[operator]; 
 	else
-	{ print '
-	<input name="operator" type="text" size="14" ';
-	if($mode=="update") print 'value="'.$result[operator].'"'; else print 'value="'.$operator.'"';
+	{
+	 print '
+	<input name="operator" type="text" size="25" ';
+	if($mode=="update")
+    {
+	  print 'value="'.$result['operator'].'"'; 
+	 }
+	 else
+	    {
+			if(!isset($operator)||empty($operator)) $operator=$HTTP_COOKIE_VARS[$local_user.$sid];
+		     print 'value="'.$operator.'"';
+	    }
 	print ' onClick=hidecat()>';
 	}
  ?>
 </td>
 </tr>
-<tr <?if($mode=="saveok") print "bgcolor=#ffffff"; ?>>
+<tr <?php if($mode=="saveok") print "bgcolor=#ffffff"; ?>>
 <td>
 <p>
-<FONT SIZE=-1  FACE="Arial" <? if($err_patnr) print 'color=#cc0000'; ?>><?=$LDPatientNr ?>:
+<FONT SIZE=-1  FACE="Arial" <?php if($err_patnr) print 'color=#cc0000'; ?>><?php echo $LDPatientNr ?>:
 </td>
 <td><FONT SIZE=-1  FACE="Arial">
-<? if($mode=="saveok") print '<font color="#800000">'.$result[patient_no]; 
+<?php if($mode=="saveok") print '<font color="#800000">'.$result[patient_no]; 
 	else
 	{
 	 print '
@@ -498,11 +512,11 @@ if($mode!="")
 ?>
 </td>
 </tr>
-<tr <?if($mode=="saveok") print "bgcolor=#ffffff"; ?>>
-<td><FONT SIZE=-1  FACE="Arial" <? if($err_lname) print 'color=#cc0000'; ?>><?=$LDLastName ?>:
+<tr <?php if($mode=="saveok") print "bgcolor=#ffffff"; ?>>
+<td><FONT SIZE=-1  FACE="Arial" <?php if($err_lname) print 'color=#cc0000'; ?>><?php echo $LDLastName ?>:
 </td>
 <td><FONT SIZE=-1  FACE="Arial">
-<? if($mode=="saveok") print '<font color="#800000"><b>'.$result[lastname].'</b>'; 
+<?php if($mode=="saveok") print '<font color="#800000"><b>'.$result[lastname].'</b>'; 
 	else
 	{ print '
 	<input name="lname" type="text" size="14" value="';
@@ -512,11 +526,11 @@ if($mode!="")
 ?>
 </td>
 </tr>
-<tr <?if($mode=="saveok") print "bgcolor=#ffffff"; ?>>
-<td><FONT SIZE=-1  FACE="Arial" <? if($err_fname) print 'color=#cc0000'; ?>><?=$LDName ?>:
+<tr <?php if($mode=="saveok") print "bgcolor=#ffffff"; ?>>
+<td><FONT SIZE=-1  FACE="Arial" <?php if($err_fname) print 'color=#cc0000'; ?>><?php echo $LDName ?>:
 </td>
 <td><FONT SIZE=-1  FACE="Arial">
-<? if($mode=="saveok") print '<font color="#800000"><b>'.$result[firstname].'</b>'; 
+<?php if($mode=="saveok") print '<font color="#800000"><b>'.$result[firstname].'</b>'; 
 	else
 	{ print '
 	<input name="fname" type="text" size="14" value="';
@@ -526,11 +540,11 @@ if($mode!="")
 ?>
 </td>
 </tr>
-<tr <?if($mode=="saveok") print "bgcolor=#ffffff"; ?>>
-<td><FONT SIZE=-1  FACE="Arial" <? if($err_bdate) print 'color=#cc0000'; ?>><?=$LDBday ?>:
+<tr <?php if($mode=="saveok") print "bgcolor=#ffffff"; ?>>
+<td><FONT SIZE=-1  FACE="Arial" <?php if($err_bdate) print 'color=#cc0000'; ?>><?php echo $LDBday ?>:
 </td>
 <td><FONT SIZE=-1  FACE="Arial">
-<? if($mode=="saveok") print '<font color="#800000">'.$result[birthdate]; 
+<?php if($mode=="saveok") print '<font color="#800000">'.$result[birthdate]; 
 	else
 	{
 	 print '
@@ -541,13 +555,13 @@ if($mode!="")
 ?>
 </td>
 </tr>
-<tr <?if($mode=="saveok") print "bgcolor=#ffffff"; ?>>
+<tr <?php if($mode=="saveok") print "bgcolor=#ffffff"; ?>>
 <td>
 </td>
-<td><FONT SIZE=-1  FACE="Arial" <? if($err_sb) print 'color=#cc0000'; ?>>
-<? if($mode=="saveok") : ?>
+<td><FONT SIZE=-1  FACE="Arial" <?php if($err_sb) print 'color=#cc0000'; ?>>
+<?php if($mode=="saveok") : ?>
 <font color=#800000>
-<? switch($result[status])
+<?php switch($result[status])
 	{
 		case "stat": print $LDStationary;break;
 		case "amb": print $LDAmbulant; break;
@@ -555,109 +569,110 @@ if($mode!="")
 	print "<br>";
 	print ucfirst($result[finanz]);
 ?>
-<? else : ?>
-<input name="stat_amb" type="radio" value="amb" <? if (($result[status]=="amb")||($stat_amb=="amb"))print "checked" ?> onClick=hidecat()><?=$LDAmbulant ?>  <input name="stat_amb" type="radio" value="stat"  <? if(($result[status]=="stat")||($stat_amb=="stat")) print "checked" ?> onClick=hidecat()><?=$LDStationary ?><br>
+<?php else : ?>
+<input name="stat_amb" type="radio" value="amb" <?php if (($result[status]=="amb")||($stat_amb=="amb"))print "checked" ?> onClick=hidecat()><?php echo $LDAmbulant ?>  <input name="stat_amb" type="radio" value="stat"  <?php if(($result[status]=="stat")||($stat_amb=="stat")) print "checked" ?> onClick=hidecat()><?php echo $LDStationary ?><br>
 </font>
-<FONT SIZE=-1  FACE="Arial" <? if($err_finanz) print 'color=#cc0000'; ?>><input name="finanz" type="radio" value="kasse" <? if (($result[kasse]=="kasse")||($result[finanz]=="kasse")||($finanz=="kasse")) print "checked" ?> onClick=hidecat()><?=$LDInsurance ?>  <input name="finanz" type="radio" value="privat"  <? if (($result[kasse]=="privat")||($result[finanz]=="privat")||($finanz=="privat")) print "checked" ?> onClick=hidecat()><?=$LDPrivate ?> <input name="finanz" type="radio" value="x"  <? if (($result[kasse]=="x")||($result[finanz]=="x")||($finanz=="x")) print "checked" ?> onClick=hidecat()><?=$LDSelfPay ?>
-<? endif ?>
+<FONT SIZE=-1  FACE="Arial" <?php if($err_finanz) print 'color=#cc0000'; ?>><input name="finanz" type="radio" value="kasse" <?php if (($result[kasse]=="kasse")||($result[finanz]=="kasse")||($finanz=="kasse")) print "checked" ?> onClick=hidecat()><?php echo $LDInsurance ?>  <input name="finanz" type="radio" value="privat"  <?php if (($result[kasse]=="privat")||($result[finanz]=="privat")||($finanz=="privat")) print "checked" ?> onClick=hidecat()><?php echo $LDPrivate ?> <input name="finanz" type="radio" value="x"  <?php if (($result[kasse]=="x")||($result[finanz]=="x")||($finanz=="x")) print "checked" ?> onClick=hidecat()><?php echo $LDSelfPay ?>
+<?php endif ?>
 </td>
 </tr>
-<tr <?if($mode=="saveok") print "bgcolor=#ffffff"; ?>>
-<td><FONT SIZE=-1  FACE="Arial"  <? if($err_diagnosis) print 'color=#cc0000'; ?>><?=$LDDiagnosis ?>:
+<tr <?php if($mode=="saveok") print "bgcolor=#ffffff"; ?>>
+<td><FONT SIZE=-1  FACE="Arial"  <?php if($err_diagnosis) print 'color=#cc0000'; ?>><?php echo $LDDiagnosis ?>:
 </td>
 <td><FONT SIZE=-1  FACE="Arial">
-<? if($mode=="saveok") print '<font color="#800000">'.$result[diagnosis]; 
+<?php if($mode=="saveok") print '<font color="#800000">'.$result[diagnosis]; 
 	else print '
 	<input name="diagnosis" type="text" size="60" value="'.$result[diagnosis].$diagnosis.'" onClick=hidecat()>';
 ?>
 </td>
 </tr>
-<tr <?if($mode=="saveok") print "bgcolor=#ffffff"; ?>>
-<td><FONT SIZE=-1  FACE="Arial" <? if($err_localize) print 'color=#cc0000'; ?>><?=$LDLocalization ?>:
+<tr <?php if($mode=="saveok") print "bgcolor=#ffffff"; ?>>
+<td><FONT SIZE=-1  FACE="Arial" <?php if($err_localize) print 'color=#cc0000'; ?>><?php echo $LDLocalization ?>:
 </td>
 <td><FONT SIZE=-1  FACE="Arial">
-<? if($mode=="saveok") print '<font color="#800000">'.$result[localize]; 
+<?php if($mode=="saveok") print '<font color="#800000">'.$result[localize]; 
 	else print '
 	<input name="localize" type="text" size="60" value="'.$result[localize].$localize.'" onClick=hidecat()>';
 ?>
 </td>
 </tr>
-<tr <?if($mode=="saveok") print "bgcolor=#ffffff"; ?>>
-<td><FONT SIZE=-1  FACE="Arial" <? if($err_therapy) print 'color=#cc0000'; ?>><?=$LDTherapy ?>:
+<tr <?php if($mode=="saveok") print "bgcolor=#ffffff"; ?>>
+<td><FONT SIZE=-1  FACE="Arial" <?php if($err_therapy) print 'color=#cc0000'; ?>><?php echo $LDTherapy ?>:
 </td>
 <td>
 <FONT SIZE=-1  FACE="Arial">
-<? if($mode=="saveok") print '<font color="#800000">'.$result[therapy]; 
+<?php if($mode=="saveok") print '<font color="#800000">'.$result[therapy]; 
 	else print '
 	<input name="therapy" type="text" size="60" value="'.$result[therapy].$therapy.'" onClick=hidecat()>';
 ?>
 </td>
 </tr >
-<tr <?if($mode=="saveok") print "bgcolor=#ffffff"; ?>>
-<td><FONT SIZE=-1  FACE="Arial" <? if($err_special) print 'color=#cc0000'; ?>><?=$LDSpecials ?>:
+<tr <?php if($mode=="saveok") print "bgcolor=#ffffff"; ?>>
+<td><FONT SIZE=-1  FACE="Arial" <?php if($err_special) print 'color=#cc0000'; ?>><?php echo $LDSpecials ?>:
 </td>
 <td><FONT SIZE=-1  FACE="Arial">
-<? if($mode=="saveok") print '<font color="#800000">'.$result[special]; 
+<?php if($mode=="saveok") print '<font color="#800000">'.$result[special]; 
 	else print '
 	<input name="special" type="text" size="60" value="'.$result[special].$special.'" onClick=hidecat()>';
 ?>
 </td>
 </tr>
-<tr <?if($mode=="saveok") print "bgcolor=#ffffff"; ?>>
-<td><FONT SIZE=-1  FACE="Arial"  <? if($err_klas) print 'color=#cc0000'; ?>><?=$LDClassification ?>:
+<tr <?php if($mode=="saveok") print "bgcolor=#ffffff"; ?>>
+<td><FONT SIZE=-1  FACE="Arial"  <?php if($err_klas) print 'color=#cc0000'; ?>><?php echo $LDClassification ?>:
 </td>
 <td><FONT SIZE=-1  FACE="Arial">
-<? if($mode=="saveok") : ?>
+<?php if($mode=="saveok") : ?>
 <font color="#800000">
-<?
-   	if($result[class_s]) print "$result[class_s] $LDMinor  &nbsp; ";
+<?php
+if($result[class_s]) print "$result[class_s] $LDMinor  &nbsp; ";
    	if($result[class_m]) print "$result[class_m] $LDMiddle &nbsp; ";
    	if($result[class_l]) print "$result[class_l] $LDMajor";
 	print " $LDOperation";
 ?>
-<? else : ?>
- <input name="klas_s" type="text" size="2" value="<?=$result[class_s].$klas_s ?>" onClick="hidecat()"><?=$LDMinor ?>&nbsp;
-<input name="klas_m" type="text" size="2" value="<?=$result[class_m].$klas_m ?>" onClick="hidecat()"><?=$LDMiddle ?>&nbsp;
-<input name="klas_l" type="text" size="2" value="<?=$result[class_l].$klas_l ?>" onClick="hidecat()"><?="$LDMajor $LDOperation" ?>
-<? endif ?>
+<?php else : ?>
+ <input name="klas_s" type="text" size="2" value="<?php echo $result[class_s].$klas_s ?>" onClick="hidecat()"><?php echo $LDMinor ?>&nbsp;
+<input name="klas_m" type="text" size="2" value="<?php echo $result[class_m].$klas_m ?>" onClick="hidecat()"><?php echo $LDMiddle ?>&nbsp;
+<input name="klas_l" type="text" size="2" value="<?php echo $result[class_l].$klas_l ?>" onClick="hidecat()"><?php echo "$LDMajor $LDOperation" ?>
+<?php endif ?>
 </td>
 </tr>
 </table>
 <p>
- <FONT SIZE=-1  FACE="Arial" <? if($err_opbeginn) print 'color="#cc0000"'; ?>>
-<?=$LDOpStart ?>:
-<? if($mode=="saveok") print '<font color="#800000">'.$result[op_start].' &nbsp;</font>'; 
+ <FONT SIZE=-1  FACE="Arial" <?php if($err_opbeginn) print 'color="#cc0000"'; ?>>
+<?php echo $LDOpStart ?>:
+<?php if($mode=="saveok") print '<font color="#800000">'.$result[op_start].' &nbsp;</font>'; 
 	else print '
 	<input name="opbeginn" type="text" size="7" value="'.$result[op_start].$opbeginn.'" onClick=hidecat()>';
 ?>
-  <? if($err_opende) print '<font color="#cc0000">';else print '<font color="#0">'; ?> &nbsp; <?=$LDOpEnd ?>:
-<? if($mode=="saveok") print '<font color="#800000">'.$result[op_end].' &nbsp;</font>'; 
+  <?php if($err_opende) print '<font color="#cc0000">';else print '<font color="#0">'; ?> &nbsp; <?php echo $LDOpEnd ?>:
+<?php if($mode=="saveok") print '<font color="#800000">'.$result[op_end].' &nbsp;</font>'; 
 	else print '
 	<input name="opende" type="text" size="7" value="'.$result[op_end].$opende.'" onClick=hidecat()>';
 ?>
-  <? if($err_inst) print '<font color="#cc0000">';else print '<font color="#0">'; ?> &nbsp; <?=$LDScrubNurse ?>: 
-<? if($mode=="saveok") print '<font color="#800000">'.$result[scrub_nurse].' &nbsp;</font>'; 
+  <?php if($err_inst) print '<font color="#cc0000">';else print '<font color="#0">'; ?> &nbsp; <?php echo $LDScrubNurse ?>: 
+<?php if($mode=="saveok") print '<font color="#800000">'.$result[scrub_nurse].' &nbsp;</font>'; 
 	else print '
 	<input name="inst" type="text" size="14" value="'.$result[scrub_nurse].$inst.'" onClick=hidecat()>';
 ?>
-<? if($err_opsaal) print '<font color="#cc0000">';else print '<font color="#0">'; ?>  &nbsp; <?=$LDOpRoom ?>: 
-<? if($mode=="saveok") print '<font color="#800000">'.$result[op_room]; 
+<?php if($err_opsaal) print '<font color="#cc0000">';else print '<font color="#0">'; ?>  &nbsp; <?php echo $LDOpRoom ?>: 
+<?php if($mode=="saveok") print '<font color="#800000">'.$result[op_room]; 
 	else print '
 	<input name="opsaal" type="text" size="3" value="'.$result[op_room].$opsaal.'" onClick=hidecat()><p>';
 ?>
 
 
-<? if($mode=="saveok") : ?>
-<p><input type="button" value="<?=$LDUpdateData ?>" onClick="window.location.replace('op-doku-start.php?sid=<?="$ck_sid&lang=$lang" ?>&mode=update<?="&de=".$result[dept]."&dn=".$result[doc_no]."&dt=".$result[op_date]."&n=".$result[patient_no]."&ln=".$result[lastname]."&fn=".$result[firstname]."&bd=".$result[birthdate]."&ts=".$result[tstamp] ?>')"> &nbsp;
-<input type="button" value="<?=$LDStartNewDocu ?>" onclick="window.location.replace('op-doku-start.php?sid=<?="$ck_sid&lang=$lang" ?>&mode=dummy')">
-<? else : ?>
-<input  type="image" src="../img/<?="$lang/$lang" ?>_savedisc.gif" border="0" onClick="hidecat()" alt="<?=$LDSave ?>">
-<a href="javascript:document.opdoc.reset()"><img src="../img/<?="$lang/$lang" ?>_reset.gif" border="0" alt="<?=$LDResetAll ?>" onClick=hidecat()></a>
-<? endif ?>
+<?php if($mode=="saveok") : ?>
+<p><input type="button" value="<?php echo $LDUpdateData ?>" onClick="window.location.replace('op-doku-start.php?sid=<?php echo "$sid&lang=$lang" ?>&mode=update<?php echo "&de=".$result[dept]."&dn=".$result[doc_no]."&dt=".$result[op_date]."&n=".$result[patient_no]."&ln=".$result[lastname]."&fn=".$result[firstname]."&bd=".$result[birthdate]."&ts=".$result[tstamp] ?>')"> &nbsp;
+<input type="button" value="<?php echo $LDStartNewDocu ?>" onclick="window.location.replace('op-doku-start.php?sid=<?php echo "$sid&lang=$lang" ?>&mode=dummy')">
+<?php else : ?>
+<input  type="image" src="../img/<?php echo "$lang/$lang" ?>_savedisc.gif" border="0" onClick="hidecat()" alt="<?php echo $LDSave ?>">
+<a href="javascript:document.opdoc.reset()"><img src="../img/<?php echo "$lang/$lang" ?>_reset.gif" border="0" alt="<?php echo $LDResetAll ?>" onClick=hidecat()></a>
+<?php endif ?>
 <input type="hidden" name="mode" value="save">
-<input type="hidden" name="sid" value="<?=$ck_sid ?>">
-<input type="hidden" name="update" value="<?=$update ?>">
-<? if($mode=="update")
+<input type="hidden" name="sid" value="<?php echo $sid ?>">
+<input type="hidden" name="lang" value="<?php echo $lang ?>">
+<input type="hidden" name="update" value="<?php echo $update ?>">
+<?php if($mode=="update")
  	print '
 	<input type="hidden" name="de" value="'.$result[dept].'">
  	<input type="hidden" name="dt" value="'.$result[op_date].'">
@@ -670,7 +685,7 @@ if($mode!="")
   	';
 ?>
 </form>
-<? endif ?>
+<?php endif ?>
 <p>
 </ul>
 
@@ -682,17 +697,17 @@ if($mode!="")
 <hr>
 <ul>
 <FONT    SIZE=2  FACE="Arial">
-<img src="../img/varrow.gif" width="20" height="15"> <a href="op-doku-search.php?sid=<?="$ck_sid&lang=$lang" ?>&mode=dummy"><?=$LDSearchDocu ?></a><br>
-<img src="../img/varrow.gif" width="20" height="15"> <a href="op-doku-archiv.php?sid=<?="$ck_sid&lang=$lang" ?>&mode=dummy"><?=$LDResearchArchive ?></a><br>
-<img src="../img/varrow.gif" width="20" height="15"> <a href="javascript:showcat()"><?=$LDShowCat ?></a><br>
+<img src="../img/varrow.gif" width="20" height="15"> <a href="op-doku-search.php?sid=<?php echo "$sid&lang=$lang" ?>&mode=dummy"><?php echo $LDSearchDocu ?></a><br>
+<img src="../img/varrow.gif" width="20" height="15"> <a href="op-doku-archiv.php?sid=<?php echo "$sid&lang=$lang" ?>&mode=dummy"><?php echo $LDResearchArchive ?></a><br>
+<img src="../img/varrow.gif" width="20" height="15"> <a href="javascript:showcat()"><?php echo $LDShowCat ?></a><br>
 
 <p>
 
-<a href="javascript:window.opener.focus();window.close();"><img border=0 src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  alt="<?=$LDClose ?>"></a>
+<a href="javascript:window.opener.focus();window.close();"><img border=0 src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  alt="<?php echo $LDClose ?>"></a>
 </ul><p>
 <hr>
 <?php
-require("../language/$lang/".$lang."_copyrite.htm");
+require("../language/$lang/".$lang."_copyrite.php");
  ?>
 </FONT>
 

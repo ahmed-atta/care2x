@@ -1,4 +1,4 @@
-<?
+<?php
 //setcookie(currentuser,"");
 
 $dbname="maho";
@@ -54,8 +54,7 @@ $fielddata="mahopatient_patnum, mahopatient_name, mahopatient_vorname, mahopatie
 
 <p>
 
-<?
-
+<?php 
 if(($versand!="")and($keyword))
   {
 	$suchwort=trim($keyword);

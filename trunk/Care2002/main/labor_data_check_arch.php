@@ -1,13 +1,20 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)||!$ck_lab_user) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_lab.php");
-require("../req/config-color.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","lab.php");
+$local_user="ck_lab_user";
+require("../include/inc_front_chain_lang.php");
+require("../include/inc_config_color.php");
 
 $thisfile="labor_data_check_arch.php";
-$breakfile="labor_data_patient_such.php?sid=$ck_sid&lang=$lang&mode=edit";
+$breakfile="labor_data_patient_such.php?sid=$sid&lang=$lang&mode=edit";
 
 $toggle=0;
 
@@ -17,7 +24,7 @@ $keyword=trim($keyword);
 
 $dbtable="lab_test_data";
 
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK) 
 		{
 			$sql="SELECT job_id,test_date,test_time,encoding FROM $dbtable WHERE patnum='$patnum' ORDER BY tid DESC";
@@ -38,8 +45,8 @@ if($link&&$DBLink_OK)
 					mysql_close($link);
 					switch($mode)
 					{
-						case "list": header("location:pflege-station-patientdaten.php?sid=$ck_sid&lang=$lang&station=$station&pn=$patnum&nodoc=labor");break;
-						default: header("location:labor_datainput.php?sid=$ck_sid&lang=$lang&patnum=$patnum&newid=1&mode=$mode");
+						case "list": header("location:pflege-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$patnum&nodoc=labor");break;
+						default: header("location:labor_datainput.php?sid=$sid&lang=$lang&patnum=$patnum&newid=1&mode=$mode");
 					}
 				}
 			}
@@ -69,10 +76,10 @@ if($link&&$DBLink_OK)
 
 <BODY BACKGROUND="leinwand.gif">
 
-<img src=../img/micros.gif align="absmiddle"><FONT  COLOR="<?=$cfg[top_txtcolor] ?>"  SIZE=5  FACE="verdana"> <b><?="$LDLabReport - $LDNewData" ?></b></font>
+<img src=../img/micros.gif align="absmiddle"><FONT  COLOR="<?php echo $cfg[top_txtcolor] ?>"  SIZE=5  FACE="verdana"> <b><?php echo "$LDLabReport - $LDNewData" ?></b></font>
 <table width=100% border=0 cellpadding="0" cellspacing="0">
 <tr>
-<td colspan=3><img src="../img/<?="$lang/$lang" ?>_newdata-b.gif" border=0 width=130 height=25><a href="labor_data_patient_such.php?sid=<?="$ck_sid&mode=$mode" ?>"><img src="../img/<?="$lang/$lang" ?>_such-gray.gif" border=0 width=130 height=25></a></td>
+<td colspan=3><img src="../img/<?php echo "$lang/$lang" ?>_newdata-b.gif" border=0 width=130 height=25><a href="labor_data_patient_such.php?sid=<?php echo "$sid&mode=$mode" ?>"><img src="../img/<?php echo "$lang/$lang" ?>_such-gray.gif" border=0 width=130 height=25></a></td>
 </tr>
 <tr >
 <td bgcolor=#333399 colspan=3>
@@ -85,8 +92,7 @@ if($link&&$DBLink_OK)
 <ul>
 <FONT    SIZE=-1  FACE="Arial">
 
-<?
-
+<?php 
 if($linecount>1) print "<p>$LDReportFoundMany";
 	else print "<p>$LDReportFound";
 print " <font color=red><b>$patnum</b></font>.";
@@ -123,28 +129,28 @@ if($linecount>1) print "<br> $LDIfWantEditMany<p>";
 							&nbsp;'.$last[e].'
 							</td>';
 						print'<td><font face=arial size=2>&nbsp';
-					   print'<a href=labor_datainput.php?sid='.$ck_sid.'&lang='.$lang.'&patnum='.$patnum.'&job_id='.$zeile[job_id].'&mode='.$mode.'&update=1><img 
-										src="../img/bul_arrowGrnLrg.gif" width=16 height=16 border=0 alt="'.$LDClk2Edit.'"></a>&nbsp;</td></tr>';
+					   print'<a href=labor_datainput.php?sid='.$sid.'&lang='.$lang.'&patnum='.$patnum.'&job_id='.$zeile[job_id].'&mode='.$mode.'&update=1><img 
+										src="../img/bul_arrowgrnlrg.gif" width=16 height=16 border=0 alt="'.$LDClk2Edit.'"></a>&nbsp;</td></tr>';
 
 					}
 					print "</table>";
 
 ?><p>
 <form action="labor_datainput.php" method="get"><font face=verdana,arial size=4>
-<b><?=$LDNewJob ?></b></font><br>
-<?="$LDNew $LDJobIdNr" ?>:<br>
+<b><?php echo $LDNewJob ?></b></font><br>
+<?php echo "$LDNew $LDJobIdNr" ?>:<br>
 <input type="text" name="job_id" size=15 maxlength=15>
-<input type="hidden" name="patnum" value="<?=$patnum ?>">
+<input type="hidden" name="patnum" value="<?php echo $patnum ?>">
 <input type="hidden" name="newid" value="1">
-<input type="hidden" name="sid" value="<?=$ck_sid ?>">
-<input type="hidden" name="lang" value="<?=$lang ?>">
-<input type="submit" value="<?=$LDCreate ?>">
+<input type="hidden" name="sid" value="<?php echo $sid ?>">
+<input type="hidden" name="lang" value="<?php echo $lang ?>">
+<input type="submit" value="<?php echo $LDCreate ?>">
 </form>
 
 <p>
 <p>
 <hr width=80% align=left>
-<a href="<?=$breakfile ?>"><img src="../img/<?="$lang/$lang" ?>_cancel.gif" border=0>
+<a href="<?php echo $breakfile ?>"><img src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" border=0>
 </a><p>
 
 </ul>
@@ -163,7 +169,7 @@ if($linecount>1) print "<br> $LDIfWantEditMany<p>";
 </table>        
 <p>
 <?php
-require("../language/$lang/".$lang."_copyrite.htm");
+require("../language/$lang/".$lang."_copyrite.php");
  ?>
 
 </FONT>

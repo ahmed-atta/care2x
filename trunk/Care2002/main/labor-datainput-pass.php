@@ -1,4 +1,4 @@
-<?  if (($username=="bong")&&($keyword=="bobong")) {header("Location: m4a-main.php"); exit;}
+<?php  if (($username=="bong")&&($keyword=="bobong")) {header("Location: m4a-main.php"); exit;}
 			else {$passtag="wrong";};
 ?>
 
@@ -33,11 +33,11 @@
 <center>
 
 
-<? if (($username!="")or($keyword!="")&&($passtag=="wrong")) : ?>
+<?php if (($username!="")or($keyword!="")&&($passtag=="wrong")) : ?>
 
 <FONT  COLOR="red"  SIZE=+2  FACE="Arial"><STRONG>Sorry, aber Ihre Eingaben sind falsch.
 Versuchen Sie es noch ein mal.</STRONG></FONT><P>
-<? endif; ?>
+<?php endif; ?>
 
 <table width=50% border=1 cellpadding="20">
 <tr>
@@ -71,9 +71,9 @@ Kennwort eingeben:<br>
 <p>
 <hr>
 <p>
-<img src="../img/varrow.gif" width="20" height="15"><a href="ucons.php">Laborstandards</a><br>
-<img src="../img/varrow.gif" width="20" height="15"><a href="ucons.php">Nachrichten</a><br>
-<img src="../img/varrow.gif" width="20" height="15"><a href="ucons.php">Rundbrief</a><br>
+<img src="../img/varrow.gif" width="20" height="15"><a href="ucons.php<?php echo "?lang=$lang" ?>">Laborstandards</a><br>
+<img src="../img/varrow.gif" width="20" height="15"><a href="ucons.php<?php echo "?lang=$lang" ?>">Nachrichten</a><br>
+<img src="../img/varrow.gif" width="20" height="15"><a href="ucons.php<?php echo "?lang=$lang" ?>">Rundbrief</a><br>
 <HR>
 
 

@@ -1,10 +1,9 @@
-<?
-if(!$lang)
+<?php if(!$lang)
 	if(!$ck_language) include("../chklang.php");
 		else $lang=$ck_language;
 require("../language/".$lang."/lang_".$lang."_help.php");
 		
-//if(($sid==NULL)||($sid!=$ck_sid)) { header("location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=closeparent"); exit;}
+//if(($sid==NULL)||($sid!=$$ck_sid_buffer)) { header("location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=closeparent"); exit;}
 
 //require("../language/".$lang."/lang_".$lang."_helppages.php");
 ?>
@@ -17,16 +16,16 @@ require("../language/".$lang."/lang_".$lang."_help.php");
 </head>
 <body onLoad="if (window.focus) window.focus()">
 
-<?  if($helpidx=="") : ?>
+<?php  if($helpidx=="") : ?>
 
-	<?  include("../help/".$lang."/help_".$lang."_main.htm"); ?>
+	<?php  include("../help/".$lang."/help_".$lang."_main.htm"); ?>
 
-<? else : ?>
-	<? 
+<?php else : ?>
+	<?php 
 		if(file_exists("../help/".$lang."/help_".$lang."_".$helpidx)) include("../help/".$lang."/help_".$lang."_".$helpidx);else include("../help/".$lang."/help_".$lang."_main.htm");
 	?>
-<? endif ?>
+<?php endif ?>
 <hr>
-<a href="javascript:window.parent.close()"><img src="../img/<?="$lang/$lang"; ?>_closehelp.gif" height=24 border=0 alt="<?=$LDCloseHelpWin ?>"></a>
+<a href="javascript:window.parent.close()"><img src="../img/<?php echo "$lang/$lang"; ?>_closehelp.gif" height=24 border=0 alt="<?php echo $LDCloseHelpWin ?>"></a>
 </body>
 </html>

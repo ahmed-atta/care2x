@@ -1,9 +1,16 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_tech.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","tech.php");
+define("NO_2LEVEL_CHK",1);
+require("../include/inc_front_chain_lang.php");
 
 if($tid&&$dept)
 {
@@ -12,7 +19,7 @@ $rows=0;
 $stat2seen=false;
 $mov2arc=false;
 $deltodo=false;
-	include("../req/db-makelink.php");
+	include("../include/inc_db_makelink.php");
 		if($link&&$DBLink_OK) 
 		{
 		 switch($mode)
@@ -74,41 +81,41 @@ $deltodo=false;
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title><?="$LDRepabotActivate $LDAck" ?></title>
+<title><?php echo "$LDRepabotActivate $LDAck" ?></title>
 
 <script language=javascript>
 function ack_print()
 {
 	window.print()
-	window.location.replace("technik-repabot-print.php?<? print "sid=$ck_sid&lang=$lang&mode=ack_print&dept=$dept&tdate=$tdate&ttime=$ttime&tid=$tid"; ?>")
+	window.location.replace("technik-repabot-print.php?<?php print "sid=$sid&lang=$lang&mode=ack_print&dept=$dept&tdate=$tdate&ttime=$ttime&tid=$tid"; ?>")
 }
 function move2arch()
 {
 	if(document.opt.clerk.value=="")
 	{
-		alert('<?=$LDAlertEnterName ?>');
+		alert('<?php echo $LDAlertEnterName ?>');
 		return;
 	}
 	c=document.opt.clerk.value;
-	window.location.replace("technik-repabot-print.php?<? print "sid=$ck_sid&lang=$lang&mode=archive&dept=$dept&tdate=$tdate&ttime=$ttime&tid=$tid"; ?>&clerk="+c)
+	window.location.replace("technik-repabot-print.php?<?php print "sid=$sid&lang=$lang&mode=archive&dept=$dept&tdate=$tdate&ttime=$ttime&tid=$tid"; ?>&clerk="+c)
 }
 function parentref(n)
 {
-window.opener.location.replace('technik-repabot.php?sid=<?="$ck_sid&lang=$lang" ?>&nofocus='+n+'&showlist=1');
+window.opener.location.replace('technik-repabot.php?sid=<?php echo "$sid&lang=$lang" ?>&nofocus='+n+'&showlist=1');
 setTimeout("parentref(0)",10000);
 }
 </script>
 
 </head>
 <body bgcolor=#fefefe onLoad="if (window.focus) window.focus(); 
-<? 
+<?php 
 	if($stat2seen) print "parentref(1);"; 
 	if($deltodo) print "parentref(1);"; 
 ?>" 
 >
 <p>
 <form name="opt">
-<?
+<?php
 //foreach($argv as $v) print "$v ";
 
 if($rows>0)
@@ -153,7 +160,7 @@ if (!$content[seen]){ print '
 else print'
 <img src="../img/nedr.gif" width=100 height=138 border=0 align=middle>'.$LDNoDataFound;
 ?>
-<p align=right><input type="button" value="<?=$LDClose ?>" onClick="parentref(0);window.close();"></p>
+<p align=right><input type="button" value="<?php echo $LDClose ?>" onClick="parentref(0);window.close();"></p>
 </form>
 </font></body>
 </html>

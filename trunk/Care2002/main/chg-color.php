@@ -1,9 +1,16 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_specials.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","specials.php");
+define("NO_2LEVEL_CHK",1);
+require("../include/inc_front_chain_lang.php");
 
 //create unique id
 $r=uniqid("");
@@ -14,22 +21,22 @@ $breakfile="javascript:window.close()";
 <HTML>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
- <TITLE><?=$LDColorMap ?></TITLE>
+ <TITLE><?php echo $LDColorMap ?></TITLE>
 
 <script  language="javascript">
 
 
 function set(c)
 {
-<?php if($mode=="ex") print "url='excolorchg.php?sid=$ck_sid&lang=$lang&item=$item&mode=change&uid=$r&sid=$sid&color='+c;"; 
-			else print "url='colorchg.php??sid=$ck_sid&lang=$lang&item=$item&mode=change&uid=$r&sid=$sid&color='+c;"; 
+<?php if($mode=="ex") print "url='excolorchg.php?sid=$sid&lang=$lang&item=$item&mode=change&uid=$r&sid=$sid&color='+c;"; 
+			else print "url='colorchg.php??sid=$sid&lang=$lang&item=$item&mode=change&uid=$r&sid=$sid&color='+c;"; 
 ?>
 	window.opener.location.replace(url);
 	window.close();
 }
 </script>
 
-<? if($d)
+<?php if($d)
 { print' 
 	<script language="javascript" src="../js/hilitebu.js">
 	</script>';
@@ -38,23 +45,23 @@ function set(c)
 
 </HEAD>
 
-<BODY bgcolor=<? print $btb; ?> onLoad="if (window.focus) window.focus();" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0>
+<BODY bgcolor=<?php print $btb; ?> onLoad="if (window.focus) window.focus();" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0>
 
 
 <table width=100% border=0 cellspacing="0">
 
 <tr>
-<td bgcolor="<? print $tb; ?>">
-<FONT  COLOR="<? print $tt; ?>"  SIZE=+3  FACE="Arial"><STRONG> &nbsp;<?=$LDColorMap ?></STRONG></FONT>
+<td bgcolor="<?php print $tb; ?>">
+<FONT  COLOR="<?php print $tt; ?>"  SIZE=+3  FACE="Arial"><STRONG> &nbsp;<?php echo $LDColorMap ?></STRONG></FONT>
 </td>
-<td bgcolor="<? print $tb; ?>" height="10" align=right>
-<a href="<?print $breakfile;?>"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 alt="<?=$LDClose ?>"  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
+<td bgcolor="<?php print $tb; ?>" height="10" align=right>
+<a href="<?php echo $breakfile;?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
 <tr>
-<td colspan=2  bgcolor=<? print $bb; ?>>
+<td colspan=2  bgcolor=<?php print $bb; ?>>
 <br>
 <ul><font face="verdana,arial" size=2>
-<?=$LDPlsClkColor ?><br></font>
+<?php echo $LDPlsClkColor ?><br></font>
 <TABLE border=1 cellPadding=2 cellSpacing=0 ><!-- Arrangement by Bob Stein, www.visibone.com -->
   <TBODY>
   <TR>
@@ -531,12 +538,12 @@ function set(c)
 </table>        
 
 <ul>
-<a href="#" <?php if ($d) print 'onClick="opener.focus();window.close()"'; else print 'onClick="window.close()"'; ?>><img border=0 src="../img/<?="$lang/$lang" ?>_cancel.gif"  alt="<?=$LDCancel ?>"></a>
+<a href="#" <?php if ($d) print 'onClick="opener.focus();window.close()"'; else print 'onClick="window.close()"'; ?>><img border=0 src="../img/<?php echo "$lang/$lang" ?>_cancel.gif"  alt="<?php echo $LDCancel ?>"></a>
 </ul>
 
 <hr>
 <?php
-require("../language/$lang/".$lang."_copyrite.htm");
+require("../language/$lang/".$lang."_copyrite.php");
  ?>
 </FONT>
 

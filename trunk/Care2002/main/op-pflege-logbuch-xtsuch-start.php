@@ -1,17 +1,25 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-if (!$internok&&!$ck_op_pflegelogbuch_user) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_or.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","or.php");
+define("NO_2LEVEL_CHK",1);
+require("../include/inc_front_chain_lang.php");
+
+if (!$internok&&!$HTTP_COOKIE_VARS["ck_op_pflegelogbuch_user".$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 
 //setcookie(op_pflegelogbuch_user,$user);
 $thisfile="op-pflege-logbuch-xtsuch-start.php";
 $breakfile="javascript:window.close()";
 if(!$xdept) $xdept=$dept;
 if(!$xsaal) $xsaal=$saal;
-require("../req/config-color.php");
+require("../include/inc_config_color.php");
 
 if($srcword!="")
 {
@@ -19,7 +27,7 @@ if($srcword!="")
 
 	$dbtable="nursing_op_logbook";
 
-	include("../req/db-makelink.php");
+	include("../include/inc_db_makelink.php");
 	if($link&&$DBLink_OK) 
 	{	
 	  if($mode=="get")
@@ -103,7 +111,7 @@ if($srcword!="")
 	
 	
 		//filter unwanted words
-		$filter=file("ai/filters/person2-filter.txt");
+		$filter=file("ai/filters/".$lang."/person2-filter.txt");
 		while(list($x,$v)=each($filter))
 		{
 			$v=trim($v);
@@ -418,7 +426,7 @@ if($srcword!="")
 <HTML>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
- <TITLE><?="$LDSearch - $LDOrLogBook" ?></TITLE>
+ <TITLE><?php echo "$LDSearch - $LDOrLogBook" ?></TITLE>
 
 <script  language="javascript">
 <!-- 
@@ -436,8 +444,8 @@ function pruf(f)
 
 function open_such_editwin(filename,y,m,d,dp,sl)
 {
-	url="op-pflege-logbuch-arch-edit.php?mode=edit&fileid="+filename+"&sid=<? print $ck_sid; ?>&user=<?print str_replace(" ","+",$user); ?>&pyear="+y+"&pmonth="+m+"&pday="+d+"&dept="+dp+"&saal="+sl;
-<? if($cfg['dhtml'])
+	url="op-pflege-logbuch-arch-edit.php?mode=edit&fileid="+filename+"&sid=<?php print "$sid&lang=$lang"; ?>&user=<?php echo str_replace(" ","+",$user); ?>&pyear="+y+"&pmonth="+m+"&pday="+d+"&dept="+dp+"&saal="+sl;
+<?php if($cfg['dhtml'])
 	print '
 			w=window.parent.screen.width;
 			h=window.parent.screen.height;';
@@ -454,13 +462,13 @@ function waitwin()
 	wwin=window.open("waitwin.htm","wait","menubar=no,resizable=no,scrollbars=no,width=400,height=200");
 }
 function getinfo(pid,dept,pdata){
-	urlholder="pflege-station-patientdaten.php?sid=<? print "$ck_sid&lang=$lang"; ?>&pn="+pid+"&patient=" + pdata + "&station="+dept+"&op_shortcut=<?=strtr($ck_op_pflegelogbuch_user," ","+") ?>";
+	urlholder="pflege-station-patientdaten.php?sid=<?php print "$sid&lang=$lang"; ?>&pn="+pid+"&patient=" + pdata + "&station="+dept+"&op_shortcut=<?php echo strtr($ck_op_pflegelogbuch_user," ","+") ?>";
 	patientwin=window.open(urlholder,pid,"width=700,height=450,menubar=no,resizable=yes,scrollbars=yes");
 	}
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
@@ -469,7 +477,7 @@ function gethelp(x,s,x1,x2,x3)
 </script>
 
 
- <? if($cfg['dhtml'])
+ <?php if($cfg['dhtml'])
 { print' 
 	<script language="javascript" src="../js/hilitebu.js">
 	</script>
@@ -490,7 +498,7 @@ function gethelp(x,s,x1,x2,x3)
 </HEAD>
 
 <BODY  topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="if (window.focus) window.focus();document.suchform.srcword.select();"
-<? 
+<?php 
  print  ' bgcolor='.$cfg['body_bgcolor']; 
  if (!$cfg['dhtml']){ print ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } 
   ?> onUnload="if (wwin) wwin.close();">
@@ -500,22 +508,21 @@ function gethelp(x,s,x1,x2,x3)
 <table width=100% border=0 cellspacing="0">
 
 <tr>
-<td bgcolor=<? print $cfg['top_bgcolor']; ?>>
-<FONT  COLOR="<?print $cfg['top_txtcolor'];?>"  SIZE=+2  FACE="Arial">
-<STRONG> &nbsp;<?="$LDOrLogBook - $LDSearch" ?></STRONG></FONT>
+<td bgcolor=<?php print $cfg['top_bgcolor']; ?>>
+<FONT  COLOR="<?php echo $cfg['top_txtcolor'];?>"  SIZE=+2  FACE="Arial">
+<STRONG> &nbsp;<?php echo "$LDOrLogBook - $LDSearch" ?></STRONG></FONT>
 </td>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr>
-<!-- <a href="javascript:window.history.back()"><img src="../img/<?="$lang/$lang" ?>_back2.gif" width=110 height=24 border=0  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a> --><a href="javascript:gethelp('oplog.php','search','<?=$mode ?>','<?=$rows ?>','<?=$datafound ?>')"><img src="../img/<?="$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?=$breakfile ?>" ><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr>
+<!-- <a href="javascript:window.history.back()"><img src="../img/<?php echo "$lang/$lang" ?>_back2.gif" width=110 height=24 border=0  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a> --><a href="javascript:gethelp('oplog.php','search','<?php echo $mode ?>','<?php echo $rows ?>','<?php echo $datafound ?>')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </nobr>
 </td>
 </tr>
 <tr>
-<td colspan=3  bgcolor=<? print $cfg['body_bgcolor']; ?>><p><br>
+<td colspan=3  bgcolor=<?php print $cfg['body_bgcolor']; ?>><p><br>
 
 
 <FONT    SIZE=-1  FACE="Arial">
-<?
-if((($mode=="get")||($datafound))&&$rows)
+<?php if((($mode=="get")||($datafound))&&$rows)
 {
 
 	if($rows>1) print $LDPatLogbookMany;
@@ -552,8 +559,8 @@ while($pdata=mysql_fetch_array($ergebnis))
 	print '
 			<td valign=top><font face="verdana,arial" size="1" ><font size=2 color=red><b>'.$pdata['op_nr'].'</b></font><hr>'.$pdata['op_date'].'<br>
 			'.$tage[date("w",mktime(0,0,0,$imonth,$iday,$iyear))].'<br>
-			<a href="op-pflege-logbuch-start.php?sid='.$ck_sid.'&lang='.$lang.'&mode=saveok&patnum='.$pdata[patnum].'&op_nr='.$pdata[op_nr].'&dept='.$pdata[dept].'&saal='.$pdata[op_room].'&pyear='.$iyear.'&pmonth='.$imonth.'&pday='.$iday.'">
-			<img src="../img/bul_arrowGrnLrg.gif" width=16 height=16 border=0 alt="'.str_replace("~tagword~",$pdata['lastname'],$LDEditPatientData).'"></a>
+			<a href="op-pflege-logbuch-start.php?sid='.$sid.'&lang='.$lang.'&mode=saveok&patnum='.$pdata[patnum].'&op_nr='.$pdata[op_nr].'&dept='.$pdata[dept].'&saal='.$pdata[op_room].'&pyear='.$iyear.'&pmonth='.$imonth.'&pday='.$iday.'">
+			<img src="../img/bul_arrowgrnlrg.gif" width=16 height=16 border=0 alt="'.str_replace("~tagword~",$pdata['lastname'],$LDEditPatientData).'"></a>
 			</td>';
 	
 	print '
@@ -669,7 +676,7 @@ if($mode=="search")
 		while($pdata=mysql_fetch_array($ergebnis))
 		{
 				print "
-						<a href=\"op-pflege-logbuch-xtsuch-start.php?sid=$ck_sid&lang=$lang&mode=get&xdept=$xdept&xsaal=$xsaal&lastname=$pdata[lastname]&firstname=$pdata[firstname]&bday=$pdata[bday]&dept=$pdata[dept]&op_nr=$pdata[op_nr]&srcword=".strtr($srcword," ","+")."\">";
+						<a href=\"op-pflege-logbuch-xtsuch-start.php?sid=$sid&lang=$lang&mode=get&xdept=$xdept&xsaal=$xsaal&lastname=$pdata[lastname]&firstname=$pdata[firstname]&bday=$pdata[bday]&dept=$pdata[dept]&op_nr=$pdata[op_nr]&srcword=".strtr($srcword," ","+")."\">";
 				print '<img src="../img/arrow.gif" border=0 width=15 height=15 align=middle>';
 				if($ndl_name&&stristr($pdata[lastname],$ndl_name)) print '<u><b><span style="background:yellow"> '.$pdata['lastname'].'</span></b></u>';
  					else print $pdata['lastname'];				
@@ -699,35 +706,33 @@ if($mode=="search")
 			</table>
 			</center>
 			';
-			
-			
 }
 ?>
 
 <ul>
-<?=$LDPromptSearch ?>
+<?php echo $LDPromptSearch ?>
 
-<form action="<? print $thisfile; ?>" method=post name=suchform onSubmit="return pruf(this)">
+<form action="<?php print $thisfile; ?>" method=post name=suchform onSubmit="return pruf(this)">
 <table border=0 cellspacing=0 cellpadding=1 bgcolor=#999999>
   <tr>
     <td>
 		<table border=0 cellspacing=0 cellpadding=5 bgcolor=#eeeeee>
     <tr>
-      <td >	<font color=maroon size=2><b><?=$LDKeyword ?>:</b></font><br>
-          		<input type="text" name="srcword" size=40 maxlength=100 value="<? print $srcword; ?>">
-				<input type="hidden" name="sid" value="<? print $ck_sid; ?>"> 
-				<input type="hidden" name="lang" value="<? print $lang; ?>"> 
-				<input type="hidden" name="xdept" value="<? print $xdept; ?>"> 
-				<input type="hidden" name="xsaal" value="<? print $xsaal; ?>"> 
-				<input type="hidden" name="child" value="<? print $child; ?>"> 
-				<input type="hidden" name="user" value="<? print str_replace(" ","+",$ck_op_pflegelogbuch_user); ?>">
+      <td >	<font color=maroon size=2><b><?php echo $LDKeyword ?>:</b></font><br>
+          		<input type="text" name="srcword" size=40 maxlength=100 value="<?php print $srcword; ?>">
+				<input type="hidden" name="sid" value="<?php print $sid; ?>"> 
+				<input type="hidden" name="lang" value="<?php print $lang; ?>"> 
+				<input type="hidden" name="xdept" value="<?php print $xdept; ?>"> 
+				<input type="hidden" name="xsaal" value="<?php print $xsaal; ?>"> 
+				<input type="hidden" name="child" value="<?php print $child; ?>"> 
+				<input type="hidden" name="user" value="<?php print str_replace(" ","+",$HTTP_COOKIE_VARS["ck_op_pflegelogbuch_user".$sid]); ?>">
     			<input type="hidden" name="mode" value="search">
        
            	</td>
 	   </tr>
   			   <tr>
       <td>	
-		<input type="submit" value="<?=$LDSearch ?>" align="right">
+		<input type="submit" value="<?php echo $LDSearch ?>" align="right">
               	</td>
 	   </tr>
 
@@ -749,18 +754,18 @@ if($mode=="search")
 <p>
 <ul>
 <FONT    SIZE=2  FACE="Arial">
-<b><?=$LDOtherFunctions ?>:</b><br>
-<img src="../img/varrow.gif" width="20" height="15"> <a href="op-pflege-logbuch-arch-start.php?sid=<?="$ck_sid&lang=$lang&dept=$xdept&saal=$xsaal&child=$child" ?>"><?="$LDResearchArchive [$LDOrLogBook]" ?></a><br>
-<img src="../img/varrow.gif" width="20" height="15"> <a href="op-pflege-logbuch-start.php?sid=<?="$ck_sid&lang=$lang&mode=fresh&dept=$xdept&saal=$xsaal" ?>" <? if ($child) print "target=\"_parent\""; ?>><?="$LDStartNewDocu [$LDOrLogBook]" ?></a><br>
-<img src="../img/varrow.gif" width="20" height="15"> <a href="javascript:gethelp('oplog.php','search','<?=$mode ?>','<?=$rows ?>','<?=$datafound ?>')"><?="$LDHelp" ?></a><br>
+<b><?php echo $LDOtherFunctions ?>:</b><br>
+<img src="../img/varrow.gif" width="20" height="15"> <a href="op-pflege-logbuch-arch-start.php?sid=<?php echo "$sid&lang=$lang&dept=$xdept&saal=$xsaal&child=$child" ?>"><?php echo "$LDResearchArchive [$LDOrLogBook]" ?></a><br>
+<img src="../img/varrow.gif" width="20" height="15"> <a href="op-pflege-logbuch-start.php?sid=<?php echo "$sid&lang=$lang&mode=fresh&dept=$xdept&saal=$xsaal" ?>" <?php if ($child) print "target=\"_parent\""; ?>><?php echo "$LDStartNewDocu [$LDOrLogBook]" ?></a><br>
+<img src="../img/varrow.gif" width="20" height="15"> <a href="javascript:gethelp('oplog.php','search','<?php echo $mode ?>','<?php echo $rows ?>','<?php echo $datafound ?>')"><?php echo "$LDHelp" ?></a><br>
 
 <p>
-<a href="javascript:window.opener.focus();window.close();"><img border=0 align="right" src="../img/<?="$lang/$lang" ?>_cancel.gif"  alt="<?=$LDCancel ?>"></a>
+<a href="javascript:window.opener.focus();window.close();"><img border=0 align="right" src="../img/<?php echo "$lang/$lang" ?>_cancel.gif"  alt="<?php echo $LDCancel ?>"></a>
 </ul>
 <p>
 <hr>
 <?php
-require("../language/".$lang."/".$lang."_copyrite.htm");
+require("../language/".$lang."/".$lang."_copyrite.php");
  ?>
 </FONT>
 

@@ -1,22 +1,28 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-
-require("../language/".$lang."/lang_".$lang."_specials.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","specials.php");
+$local_user="ck_fotolab_user";
+require("../include/inc_front_chain_lang.php");
 
 if($mode=="search")
 {
  $patnum=(int)$patnum;
- include("../req/db-makelink.php");
+ include("../include/inc_db_makelink.php");
  if($link&&$DBLink_OK) 
 	{	
 	// get orig data
 
 	  		$dbtable="mahopatient";
 		 	$sql="SELECT patnum,name,vorname,gebdatum FROM $dbtable 
-					WHERE patnum LIKE '$patnum'";
+					WHERE patnum LIKE '".addslashes($patnum)."'";
 			//print $sql;
 			if($ergebnis=mysql_query($sql,$link))
        		{
@@ -69,7 +75,7 @@ function resetall()
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
@@ -82,41 +88,41 @@ function gethelp(x,s,x1,x2,x3)
 <table border=0>
   <tr>
     <td><font size=2 color="#cc0000" face="verdana,arial">
-<?=$LDPatientNr ?>:</td>
-    <td><input type="text" name="patnum" size=12 maxlength=18 value="<?=$pdata[patnum] ?>"> <input type="submit" value="<?=$LDSearch ?>"></td>
+<?php echo $LDPatientNr ?>:</td>
+    <td><input type="text" name="patnum" size=12 maxlength=18 value="<?php echo $pdata[patnum] ?>"> <input type="submit" value="<?php echo $LDSearch ?>"></td>
   </tr>
   <tr>
     <td><font size=2 color="#cc0000" face="verdana,arial">
-	<?=$LDName ?>:
-<input type="hidden" name="lastname" value="<?=$pdata[name] ?>"></td>
-    <td><font color="#000000" size=2 face="verdana,arial"><?=$pdata[name] ?></font></td>
+	<?php echo $LDName ?>:
+<input type="hidden" name="lastname" value="<?php echo $pdata[name] ?>"></td>
+    <td><font color="#000000" size=2 face="verdana,arial"><?php echo $pdata[name] ?></font></td>
   </tr>
   <tr>
     <td><font size=2 color="#cc0000" face="verdana,arial">
-	<?=$LDFirstName ?>:
-<input type="hidden" name="firstname" value="<?=$pdata[vorname] ?>"></td>
-    <td><font color="#000000" size=2 face="verdana,arial"><?=$pdata[vorname] ?></font></td>
+	<?php echo $LDFirstName ?>:
+<input type="hidden" name="firstname" value="<?php echo $pdata[vorname] ?>"></td>
+    <td><font color="#000000" size=2 face="verdana,arial"><?php echo $pdata[vorname] ?></font></td>
   </tr>
   <tr>
     <td><font size=2 color="#cc0000" face="verdana,arial">
-	<?=$LDBday ?>:
-<input type="hidden" name="bday" value="<?=$pdata[gebdatum] ?>"></td>
-    <td><font color="#000000" size=2 face="verdana,arial"><?=$pdata[gebdatum] ?></font></td>
+	<?php echo $LDBday ?>:
+<input type="hidden" name="bday" value="<?php echo $pdata[gebdatum] ?>"></td>
+    <td><font color="#000000" size=2 face="verdana,arial"><?php echo $pdata[gebdatum] ?></font></td>
   </tr>
   <tr>
     <td><font size=2 color="#cc0000" face="verdana,arial">
-	<?=$LDShotDate ?>:
+	<?php echo $LDShotDate ?>:
 </td>
     <td><input type="text" name="shotdate" size=12 maxlength=12   onKeyUp="setDate(this);setalldate(window.document.maindata.shotdate.value);" onFocus=this.select()>
 	<a href="javascript:setalldate(window.document.maindata.shotdate.value)">
-<img src="../img/preset-add.gif" width=14 height=14 border=0 alt="<?=$LDSetShotDate ?>"></a></td>
+<img src="../img/preset-add.gif" width=14 height=14 border=0 alt="<?php echo $LDSetShotDate ?>"></a></td>
   </tr>
 </table>
-<input type="hidden" name="maxpic" value="<?=$maxpic ?>">
+<input type="hidden" name="maxpic" value="<?php echo $maxpic ?>">
 <input type="hidden" name="mode" value="search">
-<input type="hidden" name="sid" value="<?=$ck_sid ?>">
-<input type="hidden" name="lang" value="<?=$lang ?>">
-<!-- <input type="button" value="<?=$LDReset ?>" onClick="resetall()">
+<input type="hidden" name="sid" value="<?php echo $sid ?>">
+<input type="hidden" name="lang" value="<?php echo $lang ?>">
+<!-- <input type="button" value="<?php echo $LDReset ?>" onClick="resetall()">
  --></form>
 
 <br>

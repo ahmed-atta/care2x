@@ -1,13 +1,18 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-		
-if (!file) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","editor.php");
+define("NO_2LEVEL_CHK",1);
+require("../include/inc_front_chain_lang.php");
 
-require("../language/".$lang."/lang_".$lang."_editor.php");
-
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
  if ($link&&$DBLink_OK)
  {
 		// now fetch today's menu
@@ -33,13 +38,11 @@ require("../req/db-makelink.php");
 <script language="javascript" >
 function editcafe()
 {
-
-		if(confirm("<?=$LDConfirmEdit ?>"))
+		if(confirm("<?php echo $LDConfirmEdit ?>"))
 		{
-			window.location.href="cafenews-edit-pass.php?sid=<?="$ck_sid&lang=$lang&title=$LDCafeNews" ?>";
+			window.location.href="cafenews-edit-pass.php?sid=<?php echo "$sid&lang=$lang&title=$LDCafeNews" ?>";
 			return false;
 		}
-
 }
 		
 </script>
@@ -51,20 +54,20 @@ function editcafe()
 </HEAD>
 <BODY bgcolor=#ffffff VLINK="#003366" link="#003366">
 
-<? if($mode=="preview4saved") : ?>
+<?php if($mode=="preview4saved") : ?>
 <table border=0>
   <tr>
     <td><img src="../img/catr.gif" width=88 height=80 border=0></td>
     <td colspan=2>
-	<FONT FACE="verdana,Arial"><FONT  SIZE=3 COLOR="#000066" FACE="verdana,Arial"><?=$LDArticleSaved ?></font>
+	<FONT FACE="verdana,Arial"><FONT  SIZE=3 COLOR="#000066" FACE="verdana,Arial"><?php echo $LDArticleSaved ?></font>
 <hr>
 </td>
   </tr>
 </table>
-<? endif ?>
+<?php endif ?>
 
 <FONT  SIZE=8 COLOR="#cc6600" FACE="verdana,Arial">
-<a href="javascript:editcafe()"><img src="../img/basket.gif" width=74 height=70 border=0></a> <b><?=$LDCafeNews ?></b></FONT>
+<a href="javascript:editcafe()"><img src="../img/basket.gif" width=74 height=70 border=0></a> <b><?php echo $LDCafeNews ?></b></FONT>
 
 <TABLE CELLSPACING=10 cellpadding=0 border="0" width="590">
 <tr>
@@ -78,9 +81,8 @@ function editcafe()
 <TR >
 <TD WIDTH=80% VALIGN="top" >
 
-<?
-	 
-	$picpath="../news_service/".$lang."/fotos/".$picfile;
+<?php
+$picpath="../news_service/".$lang."/fotos/".$picfile;
 	if(file_exists($picpath)&&file_exists("../news_service/$lang/news/$file"))
 		{
 			$picsize=GetImageSize($picpath);
@@ -94,7 +96,7 @@ function editcafe()
 ?>
 
 <p>
-<a href="<? if($mode=="preview4saved") print "cafenews.php?sid=$ck_sid&lang=$lang"; else print "javascript:window.history.back()"; ?>"><img src="../img/L-arrowGrnLrg.gif" width=16 height=16 border=0> <font face="arial" color="#006600"><?=$LDBackTxt ?></a>
+<a href="<?php if($mode=="preview4saved") print "cafenews.php?sid=$sid&lang=$lang"; else print "javascript:window.history.back()"; ?>"><img src="../img/L-arrowGrnLrg.gif" width=16 height=16 border=0> <font face="arial" color="#006600"><?php echo $LDBackTxt ?></a>
 
 </TD>
 	
@@ -104,16 +106,16 @@ function editcafe()
 
 <TD WIDTH=20% VALIGN="top"  rowspan=2>
 
-	<table cellspacing=0 cellpadding=1 border=0align=right>
+	<table cellspacing=0 cellpadding=1 border=0 align=right>
 <tr bgcolor="#999999" >
 <td>
 <table  cellspacing=0 cellpadding=2 align=right>
 <tr><td bgcolor=maroon align=center colspan=2>	<FONT  SIZE=2 FACE="verdana,Arial" color=white>
-<b><?=$LDMenuToday ?></b>
+<b><?php echo $LDMenuToday ?></b>
 </td>
 </tr>
 <tr>
-<td bgcolor="#ffffcc" class="vn"><nobr><? print nl2br($menu[menu]); ?></nobr>
+<td bgcolor="#ffffcc" class="vn"><nobr><?php print nl2br($menu[menu]); ?></nobr>
 </td> 
 </tr>
 
@@ -126,10 +128,10 @@ function editcafe()
 <img src="../img/frage.gif" width=15 height=15 border=0>
 <br>
 <FONT  SIZE=-1 FACE="Arial" >
-		&nbsp;<A HREF="cafenews-menu.php?lang=<?=$lang ?>"><?=$LDMenuAll ?></A><br>
+		&nbsp;<A HREF="cafenews-menu.php?<?php echo "sid=$sid&lang=$lang" ?>"><?php echo $LDMenuAll ?></A><br>
 <img src="../img/frage.gif" width=15 height=15 border=0>
 <br>
-	&nbsp;<A HREF="cafenews-prices.php?lang=<?=$lang ?>"><?=$LDPrices ?></A>
+	&nbsp;<A HREF="cafenews-prices.php?<?php echo "sid=$sid&lang=$lang" ?>"><?php echo $LDPrices ?></A>
 </td>
 </tr></table>
 
@@ -140,7 +142,7 @@ function editcafe()
 <td colspan=3>
 <hr>
 <?php
-require("../language/".$lang."/".$lang."_copyrite.htm");
+require("../language/".$lang."/".$lang."_copyrite.php");
  ?>
 </td>
 </tr>

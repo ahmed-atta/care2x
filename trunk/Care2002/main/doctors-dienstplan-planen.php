@@ -1,25 +1,31 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid||!$ck_doctors_dienstplan_user)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-
-require("../language/".$lang."/lang_".$lang."_doctors.php");
-require("../req/config-color.php"); // load color preferences
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","doctors.php");
+$local_user="ck_doctors_dienstplan_user";
+require("../include/inc_front_chain_lang.php");
+require("../include/inc_config_color.php"); // load color preferences
 
 $thisfile="doctors-dienstplan-planen.php";
 
 $abtname=get_meta_tags("../global_conf/$lang/doctors_abt_list.pid");
 
 /************** resolve dept only *********************************/
-require("../req/resolve_dept_dept.php");
+require("../include/inc_resolve_dept_dept.php");
 
 if ($pmonth=="") $pmonth=date('n');
 if ($pyear=="") $pyear=date('Y');
 
 $dbtable="doctors_dutyplan";
 
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK) 
 	{	
 		if($mode=="save")
@@ -67,7 +73,7 @@ if($link&&$DBLink_OK)
        							{
 									//print $sql." new update <br>";
 									mysql_close($link);
-									header("location:$thisfile?sid=$ck_sid&lang=$lang&saved=1&dept=$dept&pyear=$pyear&pmonth=$pmonth&retpath=$retpath");
+									header("location:$thisfile?sid=$sid&lang=$lang&saved=1&dept=$dept&pyear=$pyear&pmonth=$pmonth&retpath=$retpath");
 								}
 								else print "<p>".$sql."<p>$LDDbNoSave"; 
 						} // else create new entry
@@ -97,7 +103,7 @@ if($link&&$DBLink_OK)
        							{
 									//print $sql." new insert <br>";
 									mysql_close($link);
-									header("location:$thisfile?sid=$ck_sid&lang=$lang&saved=1&dept=$dept&pyear=$pyear&pmonth=$pmonth&retpath=$retpath");
+									header("location:$thisfile?sid=$sid&lang=$lang&saved=1&dept=$dept&pyear=$pyear&pmonth=$pmonth&retpath=$retpath");
 								}
 								else print "<p>".$sql."<p>$LDDbNoSave"; 
 						}//end of else
@@ -194,7 +200,7 @@ function popselect(elem,mode)
 	wh=500;
 	var tmonth=document.dienstplan.month.value;
 	var tyear=document.dienstplan.jahr.value;
-	urlholder="doctors-dienstplan-poppersonselect.php?elemid="+elem + "&dept=<?=$dept ?>&month="+tmonth+"&year="+tyear+ "&mode=" + mode + "&retpath=<?=$retpath ?>&user=<? print "$aufnahme_user&lang=$lang&sid=$ck_sid"; ?>";
+	urlholder="doctors-dienstplan-poppersonselect.php?elemid="+elem + "&dept=<?php echo $dept ?>&month="+tmonth+"&year="+tyear+ "&mode=" + mode + "&retpath=<?php echo $retpath ?>&user=<?php print $ck_doctors_dienstplan_user."&lang=$lang&sid=$sid"; ?>";
 	
 	popselectwin=window.open(urlholder,"pop","width=" + ww + ",height=" + wh + ",menubar=no,resizable=yes,scrollbars=yes,dependent=yes");
 	window.popselectwin.moveTo((w/2)+80,(h/2)-(wh/2));
@@ -207,13 +213,13 @@ function killchild()
 
 function cal_update()
 {
-	var filename="doctors-dienstplan-planen.php?<?="sid=$ck_sid&lang=$lang" ?>&retpath=<?=$retpath ?>&dept=<? print $dept; ?>&pmonth="+document.dienstplan.month.value+"&pyear="+document.dienstplan.jahr.value;
+	var filename="doctors-dienstplan-planen.php?<?php echo "sid=$sid&lang=$lang" ?>&retpath=<?php echo $retpath ?>&dept=<?php print $dept; ?>&pmonth="+document.dienstplan.month.value+"&pyear="+document.dienstplan.jahr.value;
 	window.location.replace(filename);
 }
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
@@ -225,32 +231,31 @@ function gethelp(x,s,x1,x2,x3)
 
 <form name="dienstplan" action="doctors-dienstplan-planen.php" method="post">
 <input type="hidden" name="mode" value="save">
-<input type="hidden" name="dept" value="<? print $dept; ?>">
-<input type="hidden" name="pmonth" value="<? print $pmonth; ?>">
-<input type="hidden" name="pyear" value="<? print $pyear; ?>">
-<input type="hidden" name="planid" value="<? print $ck_plan; ?>">
-<input type="hidden" name="maxelement" value="<? print $maxdays; ?>">
-<input type="hidden" name="encoder" value="<? print $ck_doctors_dienstplan_user; ?>">
-<input type="hidden" name="retpath" value="<? print $retpath; ?>">
-<input type="hidden" name="lang" value="<? print $lang; ?>">
-<input type="hidden" name="sid" value="<? print $ck_sid; ?>">
+<input type="hidden" name="dept" value="<?php print $dept; ?>">
+<input type="hidden" name="pmonth" value="<?php print $pmonth; ?>">
+<input type="hidden" name="pyear" value="<?php print $pyear; ?>">
+<input type="hidden" name="planid" value="<?php print $ck_plan; ?>">
+<input type="hidden" name="maxelement" value="<?php print $maxdays; ?>">
+<input type="hidden" name="encoder" value="<?php print $ck_doctors_dienstplan_user; ?>">
+<input type="hidden" name="retpath" value="<?php print $retpath; ?>">
+<input type="hidden" name="lang" value="<?php print $lang; ?>">
+<input type="hidden" name="sid" value="<?php print $sid; ?>">
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0" >
 <tr valign=top>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" ><FONT  COLOR="<? print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG> &nbsp; <?=$LDMakeDutyPlan ?> <font color="<? print $cfg['top_txtcolor']; ?>"><?print $abtname[$dept]; ?></font></STRONG></FONT></td>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();killchild();"><img src="../img/<?="$lang/$lang" ?>_back2.gif" 
-border=0 width=110 height=24 align="absmiddle"></a><a href="javascript:gethelp('docs_dutyplan_edit.php','<?=$mode ?>','<?=$rows ?>')"><img src="../img/<?="$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 align="absmiddle"></a><a href="doctors-dienst-schnellsicht.php?sid=<?=$ck_sid ?>" onClick=killchild()><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 align="absmiddle"></a></td></tr>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" ><FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
+<STRONG> &nbsp; <?php echo $LDMakeDutyPlan ?> <font color="<?php print $cfg['top_txtcolor']; ?>"><?php echo $abtname[$dept]; ?></font></STRONG></FONT></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();killchild();"><img src="../img/<?php echo "$lang/$lang" ?>_back2.gif" 
+border=0 width=110 height=24 align="absmiddle"></a><a href="javascript:gethelp('docs_dutyplan_edit.php','<?php echo $mode ?>','<?php echo $rows ?>')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 align="absmiddle"></a><a href="doctors-dienst-schnellsicht.php?sid=<?php echo $sid ?>" onClick=killchild()><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 align="absmiddle"></a></td></tr>
 
 <tr>
-<td bgcolor="<? print $cfg['body_bgcolor']; ?>" valign=top colspan=2><p><br>
+<td bgcolor="<?php print $cfg['body_bgcolor']; ?>" valign=top colspan=2><p><br>
 <ul>
 <font size=5>
 
-<?=$LDMonth ?>: <select name="month" size="1" onChange="cal_update()">
-<?
-
-	for ($i=1;$i<13;$i++)
+<?php echo $LDMonth ?>: <select name="month" size="1" onChange="cal_update()">
+<?php
+for ($i=1;$i<13;$i++)
 	{
 	 print '<option  value="'.$i.'" ';
 	 if (($pmonth)==$i) print 'selected';
@@ -260,9 +265,9 @@ border=0 width=110 height=24 align="absmiddle"></a><a href="javascript:gethelp('
 ?>
 </select>
 
-&nbsp;<?=$LDYear ?>: <select name="jahr" size="1" onChange="cal_update()">
-<?	
-	for ($i=2000;$i<2016;$i++)
+&nbsp;<?php echo $LDYear ?>: <select name="jahr" size="1" onChange="cal_update()">
+<?php
+for ($i=2000;$i<2016;$i++)
 	{
 	 print '<option  value="'.$i.'" ';
 	 if ($pyear==$i) print 'selected';
@@ -285,11 +290,10 @@ border=0 width=110 height=24 align="absmiddle"></a><a href="javascript:gethelp('
 <td bgcolor="#6f6f6f">
 
 <table border=0 cellpadding=0 cellspacing=1>
-<tr><td colspan="2"></td><td><div class=a3><font face=arial size=2 color=white><b><?=$LDDoc1 ?></b></div>
-</td><td></td><td><div class=a3><font face=arial size=2 color=white><b><?=$LDDoc2 ?></b></div></td>
+<tr><td colspan="2"></td><td><div class=a3><font face=arial size=2 color=white><b><?php echo $LDDoc1 ?></b></div>
+</td><td></td><td><div class=a3><font face=arial size=2 color=white><b><?php echo $LDDoc2 ?></b></div></td>
 <td></td></tr>
-<?
-
+<?php
 $aduty=explode("~",$result[a_dutyplan]);
 $rduty=explode("~",$result[r_dutyplan]);
 
@@ -342,16 +346,16 @@ for ($i=1,$n=0,$wd=$firstday;$i<=$maxdays;$i++,$n++,$wd++)
 	
 </td>
 <td valign="top" align="left">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="image" src="../img/<?="$lang/$lang" ?>_savedisc.gif" border=0><p>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="doctors-dienstplan.php?<? print "sid=$ck_sid&lang=$lang&dept=$dept&pmonth=$pmonth&pyear=$pyear&retpath=$retpath"; ?>" onUnload=killchild()><img src="../img/<?="$lang/$lang" ?>_<? if($saved) print "close2.gif"; else print "cancel.gif"; ?>" border="0"></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="image" src="../img/<?php echo "$lang/$lang" ?>_savedisc.gif" border=0><p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="doctors-dienstplan.php?<?php print "sid=$sid&lang=$lang&dept=$dept&pmonth=$pmonth&pyear=$pyear&retpath=$retpath"; ?>" onUnload=killchild()><img src="../img/<?php echo "$lang/$lang" ?>_<?php if($saved) print "close2.gif"; else print "cancel.gif"; ?>" border="0"></a>
 
 </td>
 </tr>
 </table>
 
 <p>
-<input type="image" src="../img/<?="$lang/$lang" ?>_savedisc.gif" border=0>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="doctors-dienstplan.php?<? print "sid=$ck_sid&lang=$lang&dept=$dept&pmonth=$pmonth&pyear=$pyear&retpath=$retpath"; ?>" onUnload=killchild()><img src="../img/<?="$lang/$lang" ?>_<? if($saved) print "close2.gif"; else print "cancel.gif"; ?>" border="0"></a>
+<input type="image" src="../img/<?php echo "$lang/$lang" ?>_savedisc.gif" border=0>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="doctors-dienstplan.php?<?php print "sid=$sid&lang=$lang&dept=$dept&pmonth=$pmonth&pyear=$pyear&retpath=$retpath"; ?>" onUnload=killchild()><img src="../img/<?php echo "$lang/$lang" ?>_<?php if($saved) print "close2.gif"; else print "cancel.gif"; ?>" border="0"></a>
 <p>
 </ul>
 
@@ -363,7 +367,7 @@ for ($i=1,$n=0,$wd=$firstday;$i<=$maxdays;$i++,$n++,$wd++)
 <tr>
 <td bgcolor=silver height=70 colspan=2>
 <?php
-require("../language/$lang/".$lang."_copyrite.htm");
+require("../language/$lang/".$lang."_copyrite.php");
  ?>
 </td>
 </tr>

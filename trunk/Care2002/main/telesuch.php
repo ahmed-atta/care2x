@@ -1,12 +1,20 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/define("LANG_FILE","phone.php");
+define("NO_2LEVEL_CHK",1);
+require("../include/inc_front_chain_lang.php");
 
-require("../language/".$lang."/lang_".$lang."_phone.php");
+require("../include/inc_config_color.php");
 
-require("../req/config-color.php");
+// reset all 2nd level lock cookies
+require("../include/inc_2level_reset.php");
 
 $dbtable="mahophone";
 
@@ -22,10 +30,10 @@ $keyword=trim($keyword);
 if(($keyword)and($keyword!=" "))
   {
 
- 	include("../req/db-makelink.php");
+ 	include("../include/inc_db_makelink.php");
 	if($link&&$DBLink_OK) 
 		{
-			$sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE mahophone_name LIKE "'.$keyword.'%" OR mahophone_vorname LIKE "'.$keyword.'%"';
+			$sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE mahophone_name LIKE "'.$keyword.'%" OR mahophone_vorname LIKE "'.$keyword.'%" ORDER BY mahophone_name';
         	$ergebnis=mysql_query($sql,$link);
 			$linecount=0;
 			if($ergebnis)
@@ -54,27 +62,27 @@ function pruf(d)
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
 // -->
 </script>
  
-  <? 
-require("../req/css-a-hilitebu.php");
+  <?php 
+require("../include/inc_css_a_hilitebu.php");
 ?>
  
 </HEAD>
 
-<BODY  onLoad="document.searchdata.keyword.select();document.searchdata.keyword.focus();" bgcolor=<? print $cfg['body_bgcolor']; ?>
-<? if (!$cfg['dhtml']){ print ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+<BODY  onLoad="document.searchdata.keyword.select();document.searchdata.keyword.focus();" bgcolor=<?php print $cfg['body_bgcolor']; ?>
+<?php if (!$cfg['dhtml']){ print ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 
 <img src="../img/phone.gif" border=0 width=74 height=73 align="absmiddle">
-<FONT  COLOR="<?=$cfg[top_txtcolor] ?>"  SIZE=6  FACE="verdana"> <b><?="$LDPhoneDir $LDSearch" ?></b></font>
+<FONT  COLOR="<?php echo $cfg[top_txtcolor] ?>"  SIZE=6  FACE="verdana"> <b><?php echo "$LDPhoneDir $LDSearch" ?></b></font>
 <table width=100% border=0 cellpadding="0" cellspacing="0">
 <tr>
-<td colspan=3><img src="../img/<?="$lang/$lang" ?>_such-b.gif" border=0 width=130 height=25><a href="telesuch_phonelist.php?sid=<? print "$ck_sid&lang=$lang"; ?>"><img src="../img/<?="$lang/$lang"?>_phonedir-gray.gif" border=0 width=130 height=25 <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="telesuch_edit_pass.php?sid=<? print "$ck_sid&lang=$lang"; ?>"><img src="../img/<?="$lang/$lang"?>_newdata-gray.gif" border=0 width=130 height=25 <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
+<td colspan=3><img src="../img/<?php echo "$lang/$lang" ?>_such-b.gif" border=0 width=130 height=25><a href="telesuch_phonelist.php?sid=<?php print "$sid&lang=$lang"; ?>"><img src="../img/<?php echo "$lang/$lang"?>_phonedir-gray.gif" border=0 width=130 height=25 <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="telesuch_edit_pass.php?sid=<?php print "$sid&lang=$lang"; ?>"><img src="../img/<?php echo "$lang/$lang"?>_newdata-gray.gif" border=0 width=130 height=25 <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
 <tr >
 <td bgcolor=#333399 colspan=3>
@@ -89,17 +97,19 @@ require("../req/css-a-hilitebu.php");
 
 <FORM action="telesuch.php" method="post" name="searchdata" onSubmit="return pruf(this)">
 <font face="Arial,Verdana"  color="#000000" size=-1>
-<input type="hidden" name="sid" value="<? print $ck_sid; ?>">
-<B><?=$LDKeywordPrompt ?></B></font><p>
-<font size=3><INPUT type="text" name="keyword" size="14" maxlength="40" onfocus=this.select() value="<? print $keyword ?>"></font> 
-<INPUT type="submit" name="versand" value="<?=$LDSEARCH ?>"></FORM>
+<B><?php echo $LDKeywordPrompt ?></B></font><p>
+<font size=3><INPUT type="text" name="keyword" size="14" maxlength="40" onfocus=this.select() value="<?php print $keyword ?>"></font> 
+<INPUT type="submit" name="versand" value="<?php echo $LDSEARCH ?>">
+<input type="hidden" name="sid" value="<?php print $sid; ?>">
+<input type="hidden" name="lang" value="<?php print $lang; ?>">
+</FORM>
 
 <p>
-<a href="startframe.php?sid=<? print "$ck_sid&lang=$lang"; ?>"><img src="../img/<?="$lang/$lang" ?>_cancel.gif" width=103 height=24 border=0></a>
+<a href="startframe.php?sid=<?php print "$sid&lang=$lang"; ?>"><img src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" width=103 height=24 border=0></a>
 <p>
 
-<?
-			if ($linecount>0) 
+<?php
+if ($linecount>0) 
 				{ 
 					print "<hr width=80% align=left><p>".str_replace("~nr~",$linecount,$LDPhoneFound)."<p>";
 					mysql_data_seek($ergebnis,0);
@@ -127,15 +137,18 @@ require("../req/css-a-hilitebu.php");
 					if($linecount>15)
 					{
 						print '
-						<p><font color=red><B>Neue Suche:</font>
+						<p><font color=red><B>New Search:</font>
 						<FORM action="telesuch.php" method="post" onSubmit="return pruf(this)" name="form2">
 						<font face="Arial,Verdana"  color="#000000" size=-1>
-						Suchbegriff eingeben. z.B. Name oder Abteilung, u.s.w.</B><p>
+						'.$LDKeywordPrompt.'</B><p>
 						<INPUT type="text" name="keyword" size="14" maxlength="25" value="'.$keyword.'"> 
-						<INPUT type="submit" name="versand" value="'.$LDSEARCH.'"></font></FORM>
+						<INPUT type="submit" name="versand" value="'.$LDSEARCH.'"></font>
+						<input type="hidden" name="sid" value="'.$sid.'">
+						<input type="hidden" name="lang" value="'.$lang.'">
+						</FORM>
 						<p>
 						<FORM action="startframe.php" >
-						<input type="hidden" name="sid" value="'.$ck_sid.'">
+						<input type="hidden" name="sid" value="'.$sid.'">
 						<input type="hidden" name="lang" value="'.$lang.'">
       
 						<INPUT type="submit"  value="'.$LDCancel.'"></FORM>
@@ -147,11 +160,11 @@ require("../req/css-a-hilitebu.php");
 ?>
 <p>
 <hr width=80% align=left><p>
-<img src="../img/varrow.gif" border=0 width=20 height=15> <a href="telesuch_phonelist.php?sid=<?print "$ck_sid&lang=$lang";?>"><?=$LDShowDir ?></a><br>
-<img src="../img/varrow.gif" border=0 width=20 height=15> <a href="telesuch_edit_pass.php?sid=<?print "$ck_sid&lang=$lang";?>"><?=$LDNewEntry ?></a><br>
-<img src="../img/frage.gif" width=15 height=15> <a href="javascript:gethelp('phone_how2start.php','search','search')"><?=$LDHow2SearchPhone ?></a><br>
-<img src="../img/frage.gif" width=15 height=15> <a href="javascript:gethelp('phone_how2start.php','search','dir')"><?=$LDHow2OpenDir ?></a><br>
-<img src="../img/frage.gif" width=15 height=15> <a href="javascript:gethelp('phone_how2start.php','search','newphone')"><?=$LDHowEnter ?></a><br>
+<img src="../img/varrow.gif" border=0 width=20 height=15> <a href="telesuch_phonelist.php?sid=<?php echo "$sid&lang=$lang";?>"><?php echo $LDShowDir ?></a><br>
+<img src="../img/varrow.gif" border=0 width=20 height=15> <a href="telesuch_edit_pass.php?sid=<?php echo "$sid&lang=$lang";?>"><?php echo $LDNewEntry ?></a><br>
+<img src="../img/frage.gif" width=15 height=15> <a href="javascript:gethelp('phone_how2start.php','search','search')"><?php echo $LDHow2SearchPhone ?></a><br>
+<img src="../img/frage.gif" width=15 height=15> <a href="javascript:gethelp('phone_how2start.php','search','dir')"><?php echo $LDHow2OpenDir ?></a><br>
+<img src="../img/frage.gif" width=15 height=15> <a href="javascript:gethelp('phone_how2start.php','search','newphone')"><?php echo $LDHowEnter ?></a><br>
 </ul>
 &nbsp;
 </FONT>
@@ -168,7 +181,7 @@ require("../req/css-a-hilitebu.php");
 </table>        
 <p>
 <?php
-require("../language/".$lang."/".$lang."_copyrite.htm");
+require("../language/".$lang."/".$lang."_copyrite.php");
  ?>
 
 </FONT>

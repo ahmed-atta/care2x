@@ -1,13 +1,17 @@
-<?
-if(!$lang)
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/*if(!$lang)
 	if(!$ck_language) include("../chklang.php");
 		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+if (!$sid||($sid!=$$ck_sid_buffer)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 require("../language/".$lang."/lang_".$lang."_or.php");
-
+*/
+define("LANG_FILE","or.php");
+define("NO_2LEVEL_CHK",1);
+require("../include/inc_front_chain_lang.php");
 $opabt=get_meta_tags("../global_conf/$lang/op_tag_dept.pid");
 
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK) 
 {
 	// get orig data
@@ -41,7 +45,7 @@ if($link&&$DBLink_OK)
 <HTML>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<TITLE><?="$opabt[$dept]" ?></TITLE>
+<TITLE><?php echo "$opabt[$dept]" ?></TITLE>
 
 <script language="javascript">
 
@@ -72,7 +76,7 @@ div.box { border: double; border-width: thin; width: 100%; border-color: black; 
 
 <font face=verdana,arial size=4 color=maroon>
 <b>
-<? print "$opabt[$dept] "; 
+<?php print "$opabt[$dept] "; 
 if ($mode=="a") print ' <font color="#006666">'.$LDTabElements[1].'</font>'; else print $LDTabElements[3];
 print " $LDOn <br>";
 
@@ -86,7 +90,7 @@ $iday=$elemid+1;
 </font>
 <p>
 
-<?	if($datafound)
+<?php if($datafound)
 {
 print '<ul>
 	<font face="verdana,arial" size=2>';
@@ -111,7 +115,7 @@ else
 print '<form><font face="verdana,arial" size=2>
 <img src="../img/catr.gif" border=0 width=88 height=80 align=left> '.$LDNoPersonList.'
 <p>
-<input type="button" value="'.$LDCreatePersonList.'" onClick="window.opener.location.href=\'op-pflege-dienst-personalliste.php?sid='.$ck_sid.'&lang='.$lang.'&dept='.$dept.'&pmonth='.$month.'&pyear='.$year.'&retpath='.$retpath.'&ipath=plan\';window.opener.focus();window.close();">
+<input type="button" value="'.$LDCreatePersonList.'" onClick="window.opener.location.href=\'op-pflege-dienst-personalliste.php?sid='.$sid.'&lang='.$lang.'&dept='.$dept.'&pmonth='.$month.'&pyear='.$year.'&retpath='.$retpath.'&ipath=plan\';window.opener.focus();window.close();">
 </form>
 
 ';
@@ -119,7 +123,7 @@ print '<form><font face="verdana,arial" size=2>
 
 ?>
 <p><br>
-<a href="javascript:closethis()"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border="0" alt="<?=$LDClose ?>"></a>
+<a href="javascript:closethis()"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border="0" alt="<?php echo $LDClose ?>"></a>
 
 </BODY>
 

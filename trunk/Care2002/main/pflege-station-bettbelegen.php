@@ -1,10 +1,17 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)||!$ck_pflege_user) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_nursing.php");
-require("../req/config-color.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","nursing.php");
+$local_user="ck_pflege_user";
+require("../include/inc_front_chain_lang.php");
+require("../include/inc_config_color.php");
 
 $datum=strftime("%d.%m.%Y");
 $zeit=strftime("%H.%M");
@@ -29,7 +36,7 @@ if(is_numeric($pnum)) $pnum=(int)$pnum;
 <HTML>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
- <TITLE><?=$LDAssignOcc ?></TITLE>
+ <TITLE><?php echo $LDAssignOcc ?></TITLE>
 
 
 <script language="javascript">
@@ -48,14 +55,15 @@ function enlargewin(){
 
 function belegen(anum)
 	{
-		if(anum=="lock") if (!confirm("<?=$LDConfirmLock ?>")) return false;
-<?php
-print '
-	urlholder="pflege-station.php?mode=newdata&sid='.$ck_sid.'&station='.$s.'&rm='.$rm.'&bd='.$bd.'&pyear='.$py.'&pmonth='.$pm.'&pday='.$pd.'&patnum="+anum;
-	';
-?>
-	window.opener.location.replace(urlholder);
-	window.close();
+		if((anum=="lock")&&(!confirm("<?php echo $LDConfirmLock ?>")))  return;
+
+             <?php
+            print '
+	          urlholder="pflege-station.php?mode=newdata&sid='.$sid.'&lang='.$lang.'&station='.$s.'&rm='.$rm.'&bd='.$bd.'&pyear='.$py.'&pmonth='.$pm.'&pday='.$pd.'&patnum="+anum;
+	               ';
+             ?>
+	          window.opener.location.replace(urlholder);
+	          window.close();
 	}
 	
 function pruf(d)
@@ -65,13 +73,13 @@ function pruf(d)
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
 // -->
 </script>
-<? if($d)
+<?php if($d)
 { print' 
 	<script language="javascript" src="../js/hilitebu.js">
 	</script>';
@@ -82,15 +90,15 @@ function gethelp(x,s,x1,x2,x3)
 <BODY bgcolor=white  topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 link="#800080" vlink="#800080" onLoad="if (window.focus) window.focus();document.psearch.pnum.select();">
 <table width=100% border=0 cellpadding="5" cellspacing=0 >
 <tr>
-<td bgcolor="<? print "#".$tb; ?>" >
-<FONT  COLOR="<? print "#".$tt; ?>"  SIZE=+2  FACE="Arial"><STRONG><? print "$LDAssignOcc $s"; ?></STRONG></FONT>
+<td bgcolor="<?php print "#".$tb; ?>" >
+<FONT  COLOR="<?php print "#".$tt; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php print "$LDAssignOcc $s"; ?></STRONG></FONT>
 </td>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp('nursing_station.php','assign','','<?=$s ?>','<?=$LDAssignOcc ?>')"><img src="../img/<?="$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:window.close();" ><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp('nursing_station.php','assign','','<?php echo $s ?>','<?php echo $LDAssignOcc ?>')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:window.close();" ><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
 </tr>
 <tr>
 <td colspan=2>
-<font face=verdana,arial ><?=$LDPatListElements[0] ?>: <b><? print $rm; ?></b> &nbsp;<?=$LDPatListElements[1] ?>: <b><? print $bd; ?></b>&nbsp;
-<a href="javascript:belegen('lock')" title="<?=$LDClk2LockBed ?>"><img src="../img/delete2.gif" border=0 width=20 height=20 alt="<?=$LDClk2LockBed ?>" align="absmiddle"><?=$LDLockThisBed ?></a>
+<font face=verdana,arial ><?php echo $LDPatListElements[0] ?>: <b><?php print $rm; ?></b> &nbsp;<?php echo $LDPatListElements[1] ?>: <b><?php print $bd; ?></b>&nbsp;
+<a href="javascript:belegen('lock')" title="<?php echo $LDClk2LockBed ?>"><img src="../img/delete2.gif" border=0 width=20 height=20 alt="<?php echo $LDClk2LockBed ?>" align="absmiddle"><?php echo $LDLockThisBed ?></a>
 <p>
  <ul>
  
@@ -101,31 +109,31 @@ function gethelp(x,s,x1,x2,x3)
 	 
 	 <table border=0 bgcolor=#ffffcc cellspacing=0>
  		 <tr>
-	    <td align=right><font face=verdana,arial size=2><?=$LDPatListElements[4] ?>:</td>
-	    <td><input type="text" name="pnum" size=20 maxlength=20 value=<?print $pnum; ?>>
+	    <td align=right><font face=verdana,arial size=2><?php echo $LDPatListElements[4] ?>:</td>
+	    <td><input type="text" name="pnum" size=20 maxlength=20 value=<?php echo $pnum; ?>>
    	     </td>		  
 			 <td>&nbsp;
 	       </td>
 		  </tr>
 		  <tr>
-		    <td align=right><font face=verdana,arial size=2><?=$LDLastName ?>:</td>
- 		   <td><input type="text" name="name" size=40 maxlength=40 value=<?print $name; ?>>
+		    <td align=right><font face=verdana,arial size=2><?php echo $LDLastName ?>:</td>
+ 		   <td><input type="text" name="name" size=40 maxlength=40 value=<?php echo $name; ?>>
   	      </td>		  
 			 <td>&nbsp;
 	       </td>
  	 </tr>
 	  <tr>
- 	   <td align=right><font face=verdana,arial size=2><?=$LDName ?>:</td>
-	    <td><input type="text" name="vname" size=40 maxlength=40 value=<?print $vname; ?>>
+ 	   <td align=right><font face=verdana,arial size=2><?php echo $LDName ?>:</td>
+	    <td><input type="text" name="vname" size=40 maxlength=40 value=<?php echo $vname; ?>>
 	        </td>		  
 			 <td>&nbsp;
 	       </td>
 	  </tr>
 	  <tr>
-	    <td align=right><font face=verdana,arial size=2><?=$LDBirthDate ?>:</td>
- 	   <td><input type="text" name="gdatum" size=20 maxlength=20 value=<?print $gdatum; ?>>
+	    <td align=right><font face=verdana,arial size=2><?php echo $LDBirthDate ?>:</td>
+ 	   <td><input type="text" name="gdatum" size=20 maxlength=20 value=<?php echo $gdatum; ?>>
  	       </td>
-		   <td><input type="reset" value="<?=$LDReset ?>">
+		   <td><input type="reset" value="<?php echo $LDReset ?>">
 	       </td>
 	  </tr>
 	</table>
@@ -133,25 +141,24 @@ function gethelp(x,s,x1,x2,x3)
    </tr>
  </table>
   
- 
- 
- <input type="hidden" name="tb" value="<? print $tb; ?>">
- <input type="hidden" name="tt" value="<? print $tt; ?>">
- <input type="hidden" name="bb" value="<? print $bb; ?>">
- <input type="hidden" name="sid" value="<? print $ck_sid; ?>">
- <input type="hidden" name="s" value="<? print $s; ?>">
- <input type="hidden" name="rm" value="<? print $rm; ?>">
- <input type="hidden" name="bd" value="<? print $bd; ?>">
- <input type="hidden" name="py" value="<? print $py; ?>">
- <input type="hidden" name="pm" value="<? print $pm; ?>">
- <input type="hidden" name="pd" value="<? print $pd; ?>">
- <input type="hidden" name="d" value="<? print $d; ?>">                                                      
+ <input type="hidden" name="sid" value="<?php print $sid; ?>">
+ <input type="hidden" name="lang" value="<?php print $lang; ?>">
+ <input type="hidden" name="tb" value="<?php print $tb; ?>">
+ <input type="hidden" name="tt" value="<?php print $tt; ?>">
+ <input type="hidden" name="bb" value="<?php print $bb; ?>">
+ <input type="hidden" name="s" value="<?php print $s; ?>">
+ <input type="hidden" name="rm" value="<?php print $rm; ?>">
+ <input type="hidden" name="bd" value="<?php print $bd; ?>">
+ <input type="hidden" name="py" value="<?php print $py; ?>">
+ <input type="hidden" name="pm" value="<?php print $pm; ?>">
+ <input type="hidden" name="pd" value="<?php print $pd; ?>">
+ <input type="hidden" name="d" value="<?php print $d; ?>">                                                      
  <input type="hidden" name="mode" value="search">
   <p>
-<input type="image" src="../img/<?="$lang/$lang" ?>_searchlamp.gif" border=0 width=108 height=24 alt="<?=$LDSearchPatient ?>" align="absmiddle">
+<input type="image" src="../img/<?php echo "$lang/$lang" ?>_searchlamp.gif" border=0 width=108 height=24 alt="<?php echo $LDSearchPatient ?>" align="absmiddle">
 </FONT>
  </form>
- <a href="javascript:window.close()"><img src="../img/<?="$lang/$lang" ?>_cancel.gif" width=103 height=24 border=0></a>
+ <a href="javascript:window.close()"><img src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" width=103 height=24 border=0></a>
 </ul>
 
 <?php
@@ -165,7 +172,7 @@ if($mode=="search")
 	$sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE name LIKE "'.$name.'%" AND vorname LIKE "'.$vname.'%" AND patnum LIKE "'.$pnum.'%" AND gebdatum LIKE "'.$gdatum.'%" AND discharge_date=""';
 	//$sql='SELECT '.$fielddata.' FROM '.$dbtable.' WHERE name LIKE "'.$name.'%" AND vorname LIKE "'.$vname.'%" AND patnum LIKE "'.$pnum.'%" AND gebdatum LIKE "'.$gdatum.'%"';
 //	if(($name==NULL)||($name==""))	$sql=str_replace('name LIKE "'.$name.'%" AND','',$sql);
-	include("../req/db-makelink.php");
+	include("../include/inc_db_makelink.php");
 	if($link&&$DBLink_OK)
 		{
         	$ergebnis=mysql_query($sql,$link);
@@ -221,7 +228,7 @@ if($mode=="search")
 <p>
 
 <?php
-require("../language/$lang/".$lang."_copyrite.htm");
+require("../language/$lang/".$lang."_copyrite.php");
  ?>
 
 </BODY>

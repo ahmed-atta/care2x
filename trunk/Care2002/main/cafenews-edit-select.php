@@ -1,18 +1,27 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if(!$sid||($sid!=$ck_sid)) { header("location:../language/$lang/lang_".$lang."_invalid-access-warning.php"); exit;}
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","editor.php");
+$local_user="ck_cafenews_user";
+require("../include/inc_front_chain_lang.php");
+require("../include/inc_config_color.php");
 
-require("../language/".$lang."/lang_".$lang."_editor.php");
+$breakfile="startframe.php?sid=$sid&lang=$lang";
 
 switch($cafeopt)
 {
-	case "price":	header("Location: cafenews-edit-price-select.php?sid=$ck_sid&cafeopt=price&lang=$lang&title=$title");
+	case "price":	header("Location: cafenews-edit-price-select.php?sid=$sid&cafeopt=price&lang=$lang&title=$title");
 						break;
-	case "menu":	header("Location: cafenews-edit-menu-select-week.php?sid=$ck_sid&lang=$lang&title=$title");
+	case "menu":	header("Location: cafenews-edit-menu-select-week.php?sid=$sid&lang=$lang&title=$title");
 						break;
-	case "news":	header("Location: cafenews-edit-select-art.php?sid=$ck_sid&lang=$lang&title=$title");
+	case "news":	header("Location: cafenews-edit-select-art.php?sid=$sid&lang=$lang&title=$title");
 						break;
 }
 ?>
@@ -31,37 +40,41 @@ function chkForm(d)
 }
 </script>
 
+<?php if($cfg['dhtml']) include("../include/inc_css_a_hilitebu.php"); ?>
+
 </head>
 <body>
 <FONT  SIZE=8 COLOR="#cc6600" FACE="verdana,Arial">
-<img src="../img/basket.gif" width=74 height=70 border=0><b><?=$LDCafeNews ?></b></FONT>
+<img src="../img/basket.gif" width=74 height=70 border=0><b><?php echo $LDCafeNews ?></b></FONT>
 <hr>
 <form name="selectform" action="cafenews-edit-select.php" onSubmit="return chkForm(this)" method="post">
 <table border=0>
   <tr>
     <td><img src="../img/catr.gif" width=88 height=80 border=0></td>
-    <td colspan=2><FONT FACE="verdana,Arial"><FONT  SIZE=5 COLOR="#000066" FACE="verdana,Arial"><?=$LDWhatToDo ?></font><p>
-			<font size=2><?=$LDPlsMarkSelection ?></td>
+    <td colspan=2><FONT FACE="verdana,Arial"><FONT  SIZE=5 COLOR="#000066" FACE="verdana,Arial"><?php echo $LDWhatToDo ?></font><p>
+			<font size=2><?php echo $LDPlsMarkSelection ?></td>
   </tr>
   <tr>
     <td>&nbsp;</td>
     <td bgcolor="ccffff" colspan=2><FONT FACE="verdana,Arial"><p><br>
-		<input type="radio" name="cafeopt" value="menu"> <a href="#" onClick="document.selectform.cafeopt[0].checked=true"><?=$LDMenuEdit ?></a><br>
-    	<input type="radio" name="cafeopt" value="price"> <a href="#" onClick="document.selectform.cafeopt[1].checked=true"><?=$LDPriceEdit ?></a><br>
-    	<input type="radio" name="cafeopt" value="news"> <a href="#" onClick="document.selectform.cafeopt[2].checked=true"><?=$LDNewsEdit ?></a><br><p>
+		<input type="radio" name="cafeopt" value="menu"> <a href="#" onClick="document.selectform.cafeopt[0].checked=true"><?php echo $LDMenuEdit ?></a><br>
+    	<input type="radio" name="cafeopt" value="price"> <a href="#" onClick="document.selectform.cafeopt[1].checked=true"><?php echo $LDPriceEdit ?></a><br>
+    	<input type="radio" name="cafeopt" value="news"> <a href="#" onClick="document.selectform.cafeopt[2].checked=true"><?php echo $LDNewsEdit ?></a><br><p>
   </td>
   </tr>
+
   <tr>
     <td>&nbsp;</td>
-    <td><p><br><input type="button" value="<?=$LDCancelBut ?>" onClick="window.location.replace('cafenews.php?sid=<?=$ck_sid ?>')">
+    <td><p><br>
+	<a href="cafenews.php?sid=<?php echo "$sid&lang=$lang" ?>"><img src="../img/<?php echo $lang ?>/<?php echo $lang ?>_back2.gif" border=0></a>
         </td>
     <td align=right><p><br><FONT FACE="verdana,Arial">
-		<input type="submit" value="<?=$LDContinueBut ?>">
+<input type="image" src="../img/<?php echo $lang ?>/<?php echo $lang ?>_continue.gif" border=0>
   </td>
   </tr>
 </table>
-<input type="hidden" name="sid" value="<?=$ck_sid ?>">
-<input type="hidden" name="title" value="<?=strtr($LDCafeNews," ","+") ?>">
-<input type="hidden" name="lang" value="<?=$lang ?>">
+<input type="hidden" name="sid" value="<?php echo $sid ?>">
+<input type="hidden" name="title" value="<?php echo strtr($LDCafeNews," ","+") ?>">
+<input type="hidden" name="lang" value="<?php echo $lang ?>">
 </form></body>
 </html>

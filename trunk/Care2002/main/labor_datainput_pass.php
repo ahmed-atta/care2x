@@ -1,11 +1,17 @@
-<? 
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-
-require("../language/".$lang."/lang_".$lang."_stdpass.php");
-require("../req/config-color.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","stdpass.php");
+define("NO_2LEVEL_CHK",1);
+require("../include/inc_front_chain_lang.php");
+require("../include/inc_config_color.php");
 
 if ($pdaten=="ja") setcookie(pdatencookie,"ja");
 
@@ -13,13 +19,13 @@ require("../global_conf/areas_allow.php");
 
 $allowedarea=&$allow_area['lab_r'];
 
-$fileforward="labor_data_patient_such.php?sid=$ck_sid&lang=$lang&mode=edit";
+$fileforward="labor_data_patient_such.php?sid=$sid&lang=$lang&mode=edit";
 $thisfile="labor_datainput_pass.php";
 
  if ($pdatencookie=="ja") 
  	$breakfile="javascript:window.history.go(-(window.history.length))";
 	else
-	  $breakfile="labor.php?sid=$ck_sid&lang=$lang";
+	  $breakfile="labor.php?sid=$sid&lang=$lang";
 
 $title="$LDMedLab -  $LDNewData";
 $lognote="$title ok";
@@ -27,23 +33,19 @@ $lognote="$title ok";
 $userck="ck_lab_user";
 
 //reset cookie;
-setcookie($userck,"");
-if($ck_login_logged&&$ck_login_userid&&!$nointern)
-{
-$userid=$ck_login_userid;
-$checkintern=1;
-$lognote="Direct access ".$lognote;
-$pass="check";
-}
-
+// reset all 2nd level lock cookies
+setcookie($userck.$sid,"");
+require("../include/inc_2level_reset.php"); setcookie(ck_2level_sid.$sid,"");
+require("../include/inc_passcheck_internchk.php");
 if ($pass=="check") 	
-	include("../req/passcheck.php");
+	include("../include/inc_passcheck.php");
 
 $errbuf=$title;
 $minimal=1;
-require("../req/passcheck_head.php");
+require("../include/inc_passcheck_head.php");
 ?>
 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <BODY onLoad="if (window.focus) window.focus(); document.passwindow.userid.focus();">
 
 
@@ -51,19 +53,19 @@ require("../req/passcheck_head.php");
 
 <P>
 
-<img src=../img/micros.gif align="absmiddle"><FONT  COLOR="<?=$cfg[top_txtcolor] ?>"  size=5 FACE="verdana"> <b><? print $title;  ?></b></font>
+<img src=../img/micros.gif align="absmiddle"><FONT  COLOR="<?php echo $cfg[top_txtcolor] ?>"  size=5 FACE="verdana"> <b><?php print $title;  ?></b></font>
 
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
 <tr>
-<td colspan=3><a href="labor_datasearch_pass.php?sid=<?="$ck_sid&lang=$lang" ?>"><img src=../img/<?="$lang/$lang" ?>_such-gray.gif border="0"></a><img src=../img/<?="$lang/$lang" ?>_newdata-b.gif border=0></td>
+<td colspan=3><a href="labor_datasearch_pass.php?sid=<?php echo "$sid&lang=$lang" ?>"><img src=../img/<?php echo "$lang/$lang" ?>_such-gray.gif border="0"></a><img src=../img/<?php echo "$lang/$lang" ?>_newdata-b.gif border=0></td>
 </tr>
 
-<? require("../req/passcheck_mask.php") ?>  
+<?php require("../include/inc_passcheck_mask.php") ?>  
 
 <p>
 
 <?php
-require("../language/".$lang."/".$lang."_copyrite.htm");
+require("../language/".$lang."/".$lang."_copyrite.php");
  ?>
 </FONT>
 

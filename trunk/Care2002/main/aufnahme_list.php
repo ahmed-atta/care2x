@@ -1,12 +1,18 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$aufnahme_user||!$sid||($sid!=$ck_sid))  {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","aufnahme.php");
+$local_user="aufnahme_user";
+require("../include/inc_front_chain_lang.php");
 
-require("../language/".$lang."/lang_".$lang."_aufnahme.php");
-
-require("../req/config-color.php");
+require("../include/inc_config_color.php");
 $thisfile="aufnahme_list.php";
 
 $dbtable="mahopatient";
@@ -16,7 +22,7 @@ if($dept=="") $dept="plop";
 $linecount=0;
 if(($mode=="search")||($mode=="select"))
 {
-	include("../req/db-makelink.php");
+	include("../include/inc_db_makelink.php");
 	if($link&&$DBLink_OK) 
 	{	
 		switch($mode)
@@ -121,8 +127,6 @@ if(($mode=="search")||($mode=="select"))
   }   	
    else { print "$LDDbNoLink<br>"; }
 }
-
-
 ?>
 
 <HTML>
@@ -136,19 +140,19 @@ if(($mode=="search")||($mode=="select"))
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
 // -->
 </script>
-<? 
-require("../req/css-a-hilitebu.php");
+<?php 
+require("../include/inc_css_a_hilitebu.php");
 ?>
 
 </HEAD>
 <BODY  topmargin=0 leftmargin=0 marginwidth=0 marginheight=0
- bgcolor=<? print $cfg['body_bgcolor']; 
+ bgcolor=<?php print $cfg['body_bgcolor']; 
  if (!$cfg['dhtml']){ print ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; }
  if(($mode!="select")&&(!$rows)) print ' onLoad="document.archivform.patnum.select()" '; ?>>
 
@@ -157,13 +161,13 @@ require("../req/css-a-hilitebu.php");
 <table width=100% border=0 cellspacing="0">
 
 <tr>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>">
-<FONT  COLOR="<? print $cfg['top_txtcolor']; ?>"  SIZE=+3  FACE="Arial"><STRONG> &nbsp;<?=$LDAdmArchive ?></STRONG></FONT>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>">
+<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+3  FACE="Arial"><STRONG> &nbsp;<?php echo $LDAdmArchive ?></STRONG></FONT>
 </td>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" align="right">
-<a href="javascript:gethelp('admission_how2arch.php','<?=$mode ?>')"><img src="../img/<?="$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<? 
-if($ck_login_logged) print "startframe.php?sid=$ck_sid"; 
-	else print "aufnahme_pass.php?sid=$ck_sid&target=archiv&lang=$lang"; ?>"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 alt="<?=$LDCloseWin ?>" width=93 height=41  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" align="right">
+<a href="javascript:gethelp('admission_how2arch.php','<?php echo $mode ?>')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
+if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) print "startframe.php?sid=$sid&lang=$lang"; 
+	else print "aufnahme_pass.php?sid=$sid&target=archiv&lang=$lang"; ?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 alt="<?php echo $LDCloseWin ?>" width=93 height=41  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </td>
 </tr>
 </table>
@@ -171,7 +175,7 @@ if($ck_login_logged) print "startframe.php?sid=$ck_sid";
 
 <table  border=0 cellpadding=0 cellspacing=0 width="90%">
 <tr>
-<td colspan=3><a href="<? if($aufnahme_user) print "aufnahme_start.php?sid=$ck_sid&mode=?&lang=$lang"; else print "aufnahme_pass.php?sid=$ck_sid&lang=$lang"; ?>"><img src="../img/<?="$lang/$lang" ?>_ein-gray.gif" alt="<?=$LDAdmit ?>" border=0 width=130 height=25 <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<? if($aufnahme_user) print "aufnahme_daten_such.php?sid=$ck_sid&mode=?&lang=$lang"; else print "aufnahme_such_pass.php?sid=$ck_sid&lang=$lang"; ?>" ><img src="../img/<?="$lang/$lang" ?>_such-gray.gif" alt="<?=$LDSearch ?>" border=0 width=130 height=25  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><img src="../img/<?="$lang/$lang" ?>_arch-blu.gif" alt="<?=$LDArchive ?>" border=0 width=130 height=25 ></td>
+<td colspan=3><a href="<?php if($HTTP_COOKIE_VARS[$local_user.$sid]) print "aufnahme_start.php?sid=$sid&mode=?&lang=$lang"; else print "aufnahme_pass.php?sid=$sid&lang=$lang"; ?>"><img src="../img/<?php echo "$lang/$lang" ?>_ein-gray.gif" alt="<?php echo $LDAdmit ?>" border=0 width=130 height=25 <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php if($HTTP_COOKIE_VARS[$local_user.$sid]) print "aufnahme_daten_such.php?sid=$sid&mode=?&lang=$lang"; else print "aufnahme_such_pass.php?sid=$sid&lang=$lang"; ?>" ><img src="../img/<?php echo "$lang/$lang" ?>_such-gray.gif" alt="<?php echo $LDSearch ?>" border=0 width=130 height=25  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><img src="../img/<?php echo "$lang/$lang" ?>_arch-blu.gif" alt="<?php echo $LDArchive ?>" border=0 width=130 height=25 ></td>
 </tr>
 
 <tr>
@@ -185,34 +189,34 @@ if($ck_login_logged) print "startframe.php?sid=$ck_sid";
 
 
 <ul>
-<? if($mode=="search") print '<FONT  SIZE=2 FACE="verdana,Arial">'.$LDSearchKeyword.': '.$s2; ?>
-<? if($rows>1) : ?>
+<?php if($mode=="search") print '<FONT  SIZE=2 FACE="verdana,Arial">'.$LDSearchKeyword.': '.$s2; ?>
+<?php if($rows>1) : ?>
 <table border=0>
   <tr>
     <td><img src="../img/catr.gif" border=0 width=88 height=80 align="absmiddle"></td>
     <td><FONT  SIZE=3 FACE="verdana,Arial" color=#800000>
-<b><? print str_replace("~nr~",$rows,$LDFoundData); ?></b></font></td>
+<b><?php print str_replace("~nr~",$rows,$LDFoundData); ?></b></font></td>
   </tr>
 </table>
 
 <table border=0 cellpadding=0 cellspacing=0>
   <tr bgcolor=#0000aa>
-  <?
-  	for($j=0;$j<sizeof($LDElements);$j++)
+  <?php
+for($j=0;$j<sizeof($LDElements);$j++)
 		print '
 			<td><FONT  SIZE=-1  FACE="Arial" color="#ffffff"><b>&nbsp;&nbsp;'.$LDElements[$j].'</b></td>';
 	?>
   </tr>
- <? 
+ <?php 
  $toggle=0;
  while($result=mysql_fetch_array($ergebnis))
  {
  	print'
   <tr ';
   if($toggle){ print "bgcolor=#efefef"; $toggle=0;} else {print "bgcolor=#ffffff"; $toggle=1;}
-  $buf='aufnahme_list.php?sid='.$ck_sid.'&lang='.$lang.'&mode=select&i='.$result[item].'&dt='.$result[pdate].'&n='.$result[patnum].'&ln='.strtr($result[name]," ","+").'&fn='.strtr($result[vorname]," ","+").'&bd='.$result[gebdatum];
+  $buf='aufnahme_list.php?sid='.$sid.'&lang='.$lang.'&mode=select&i='.$result[item].'&dt='.$result[pdate].'&n='.$result[patnum].'&ln='.strtr($result[name]," ","+").'&fn='.strtr($result[vorname]," ","+").'&bd='.$result[gebdatum];
   print '>
-    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'"><img src="../img/R_arrowGrnSm.gif" width=12 height=12 border=0></a></td>
+    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'"><img src="../img/r_arrowgrnsm.gif" width=12 height=12 border=0></a></td>
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; <a href="'.$buf.'" title="'.$LDClk2Show.'">'.$result[name].'</a></td>
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.$result[vorname].'</a></td>
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;'.$result[gebdatum].'</td>
@@ -228,35 +232,35 @@ if($ck_login_logged) print "startframe.php?sid=$ck_sid";
 <p>
 <form method="post"  action="aufnahme_list.php">
 <FONT  SIZE=-1  FACE="Arial">
-<input type="hidden" name="sid" value="<?=$ck_sid ?>">
-<input type="hidden" name="lang" value="<?=$lang ?>">
+<input type="hidden" name="sid" value="<?php echo $sid ?>">
+<input type="hidden" name="lang" value="<?php echo $lang ?>">
 <input type="hidden" name="mode" value="?">
-<input type="submit" value="<?=$LDNewArchive ?>" >
+<input type="submit" value="<?php echo $LDNewArchive ?>" >
                              </form>
-<? else :?>
+<?php else :?>
 
-<form method="post" action="<? if($mode=="select") print "aufnahme_start.php"; else print $thisfile; ?>" name=archivform>
+<form method="post" action="<?php if($mode=="select") print "aufnahme_start.php"; else print $thisfile; ?>" name=archivform>
 
 <table border="0" cellspacing=0>
 
 <tr>
-<td><FONT SIZE=-1  FACE="Arial"><?=$LDAdmitDate ?>: <? if ($mode!="select") print $LDFrom; ?>:
+<td><FONT SIZE=-1  FACE="Arial"><?php echo $LDAdmitDate ?>: <?php if ($mode!="select") print $LDFrom; ?>:
 </td>
-<td ><? if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?=$result[pdate] ?> <? else : ?>
-<input name="date_start" type="text" value="" size="14"  onKeyUp=setDate(this)> <? endif ?>
+<td ><?php if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo $result[pdate] ?> <?php else : ?>
+<input name="date_start" type="text" value="" size="14"  onKeyUp=setDate(this)> <?php endif ?>
 </td>
-<? if ($mode!="select") : ?>
-<td align=right><FONT SIZE=-1  FACE="Arial"><?=$LDTo ?>:
+<?php if ($mode!="select") : ?>
+<td align=right><FONT SIZE=-1  FACE="Arial"><?php echo $LDTo ?>:
 </td>
 <td ><input name="date_end" type="text" value="" size="14"  onKeyUp=setDate(this)>
 </td>
-<? endif ?>
+<?php endif ?>
 </tr>
 <tr>
-<td ><FONT  SIZE=2  FACE="Arial"> <?=$LDAdmitBy ?>:
+<td ><FONT  SIZE=2  FACE="Arial"> <?php echo $LDAdmitBy ?>:
 </td>
-<td><? if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?=$result[encoder] ?> <? else : ?>
-<input  name="encoder" type="text" value="" size="14" ><? endif ?>
+<td><?php if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo $result[encoder] ?> <?php else : ?>
+<input  name="encoder" type="text" value="" size="14" ><?php endif ?>
 </td>
 </tr>
 <tr>
@@ -264,16 +268,16 @@ if($ck_login_logged) print "startframe.php?sid=$ck_sid";
 </td>
 </tr>
 <tr>
-<td><FONT SIZE=-1  FACE="Arial"><?=$LDCaseNr ?>:
+<td><FONT SIZE=-1  FACE="Arial"><?php echo $LDCaseNr ?>:
 </td>
-<td colspan=3><? if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?=$result[patnum] ?> <? else : ?>
-<input name="patnum" type="text" size="14" value="" ><? endif ?>
+<td colspan=3><?php if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo $result[patnum] ?> <?php else : ?>
+<input name="patnum" type="text" size="14" value="" ><?php endif ?>
 </td>
 </tr>
 <tr>
-<td><FONT SIZE=-1  FACE="Arial"><?=$LDTitle ?>:
+<td><FONT SIZE=-1  FACE="Arial"><?php echo $LDTitle ?>:
 </td>
-<td ><? if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?=$result[title] ?> <? else : ?>
+<td ><?php if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo $result[title] ?> <?php else : ?>
 <select name="title"  size="1" >
 <option value="" ></option>
 <option value="Frau" >Frau</option>
@@ -283,118 +287,119 @@ if($ck_login_logged) print "startframe.php?sid=$ck_sid";
 <option value="Frau Prof.">Frau Prof.</option>
 <option value="Herr Prof.">Herr Prof.</option>
 </select>
-<? endif ?>
+<?php endif ?>
 </td>
-<td align=right><FONT SIZE=-1  FACE="Arial"><?=$LDSex ?>:
+<td align=right><FONT SIZE=-1  FACE="Arial"><?php echo $LDSex ?>:
 </td>
-<td colspan=3><? if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?=strtr($result[sex],"fm","WM") ?> <? else : ?>
-<FONT SIZE=-1  FACE="Arial"><input name="sex" type="radio" value="m"  <? if($sex=="m") print "checked"; ?>><?=$LDMale ?>&nbsp;&nbsp;
-<input name="sex" type="radio" value="f"  <? if($sex=="f") print "checked"; ?>><?=$LDFemale ?>
-<? endif ?>
+<td colspan=3><?php if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo strtr($result[sex],"fm","WM") ?> <?php else : ?>
+<FONT SIZE=-1  FACE="Arial"><input name="sex" type="radio" value="m"  <?php if($sex=="m") print "checked"; ?>><?php echo $LDMale ?>&nbsp;&nbsp;
+<input name="sex" type="radio" value="f"  <?php if($sex=="f") print "checked"; ?>><?php echo $LDFemale ?>
+<?php endif ?>
 </td>
 
 </tr>
 <tr>
-<td><FONT SIZE=-1  FACE="Arial"><?=$LDLastName ?>:
+<td><FONT SIZE=-1  FACE="Arial"><?php echo $LDLastName ?>:
 </td>
-<td><? if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?=$result[name] ?> <? else : ?>
-<input name="name" type="text" size="14" value="" > <? endif ?>
+<td><?php if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo $result[name] ?> <?php else : ?>
+<input name="name" type="text" size="14" value="" > <?php endif ?>
 </td>
-<td align=right><FONT SIZE=-1  FACE="Arial"> &nbsp;<?=$LDAddress ?>:
+<td align=right><FONT SIZE=-1  FACE="Arial"> &nbsp;<?php echo $LDAddress ?>:
 </td>
-<td rowspan=4><? if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?=nl2br($result[address]) ?> <? else : ?>
-<textarea rows="5"  cols="26" name="address" ></textarea><? endif ?>
-</td>
-</tr>
-<tr>
-<td><FONT SIZE=-1  FACE="Arial"><?=$LDFirstName ?>:
-</td>
-<td colspan=2><? if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?=$result[vorname] ?> <? else : ?>
-<input name="vorname" type="text" size="14" value="<? print $vorname; ?>" ><? endif ?>
+<td rowspan=4><?php if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo nl2br($result[address]) ?> <?php else : ?>
+<textarea rows="5"  cols="26" name="address" ></textarea><?php endif ?>
 </td>
 </tr>
 <tr>
-<td><FONT SIZE=-1  FACE="Arial"><?=$LDBday ?>:
+<td><FONT SIZE=-1  FACE="Arial"><?php echo $LDFirstName ?>:
 </td>
-<td  colspan=2><? if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?=$result[gebdatum] ?> <? else : ?>
-<input name="gebdatum" type="text" size="14" value="" ><? endif ?>
+<td colspan=2><?php if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo $result[vorname] ?> <?php else : ?>
+<input name="vorname" type="text" size="14" value="<?php print $vorname; ?>" ><?php endif ?>
 </td>
 </tr>
 <tr>
-<td>
+<td><FONT SIZE=-1  FACE="Arial"><?php echo $LDBday ?>:
 </td>
-<td  colspan=3><? if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?=$result[status] ?> <? else : ?>
-<input name="status" type="radio"  value="amb" ><FONT SIZE=-1  FACE="Arial"><?=$LDAmbulant ?>  
-<input name="status" type="radio" value="stat"  ><?=$LDStationary ?>
-<? endif ?>
+<td  colspan=2><?php if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo $result[gebdatum] ?> <?php else : ?>
+<input name="gebdatum" type="text" size="14" value="" ><?php endif ?>
 </td>
 </tr>
 <tr>
 <td>
 </td>
-<td colspan=2><? if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?=$result[kasse] ?> <? else : ?>
+<td  colspan=3><?php if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo $result[status] ?> <?php else : ?>
+<input name="status" type="radio"  value="amb" ><FONT SIZE=-1  FACE="Arial"><?php echo $LDAmbulant ?>  
+<input name="status" type="radio" value="stat"  ><?php echo $LDStationary ?>
+<?php endif ?>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td colspan=2><?php if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo $result[kasse] ?> <?php else : ?>
 <FONT SIZE=-1  FACE="Arial">
-<input name="kasse" type="radio" value="x" ><?=$LDSelfPay ?>
-  &nbsp;<input name="kasse" type="radio" value="privat" ><?=$LDPrivate ?>
+<input name="kasse" type="radio" value="x" ><?php echo $LDSelfPay ?>
+  &nbsp;<input name="kasse" type="radio" value="privat" ><?php echo $LDPrivate ?>
   &nbsp;
-<input name="kasse" type="radio" value="kasse" ><?=$LDInsurance ?>:<? endif ?>
+<input name="kasse" type="radio" value="kasse" ><?php echo $LDInsurance ?>:<?php endif ?>
 </td>
-<td><? if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?=$result[kassename] ?> <? else : ?>
-<input name="kassename" type="text" size="28" value="" ><? endif ?>
-</td>
-</tr>
-<tr>
-<td><FONT SIZE=-1  FACE="Arial"><?=$LDDiagnosis ?>:
-</td>
-<td colspan=3><? if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?=$result[diagnose] ?> <? else : ?>
-<input name="diagnose" type="text" size="60" value="" > <? endif ?>
+<td><?php if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo $result[kassename] ?> <?php else : ?>
+<input name="kassename" type="text" size="28" value="" ><?php endif ?>
 </td>
 </tr>
 <tr>
-<td><FONT SIZE=-1  FACE="Arial"><?=$LDRecBy ?>:
+<td><FONT SIZE=-1  FACE="Arial"><?php echo $LDDiagnosis ?>:
 </td>
-<td colspan=3><? if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?=$result[referrer] ?> <? else : ?>
-<input name="referrer" type="text" size="60" value="" ><? endif ?>
-</td>
-</tr>
-<tr>
-<td><FONT SIZE=-1  FACE="Arial"><?=$LDTherapy ?>:
-</td>
-<td colspan=3><? if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?=$result[therapie] ?> <? else : ?>
-<input name="therapie" type="text" size="60" value="" ><? endif ?>
+<td colspan=3><?php if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo $result[diagnose] ?> <?php else : ?>
+<input name="diagnose" type="text" size="60" value="" > <?php endif ?>
 </td>
 </tr>
 <tr>
-<td><FONT SIZE=-1  FACE="Arial"><?=$LDSpecials ?>:
+<td><FONT SIZE=-1  FACE="Arial"><?php echo $LDRecBy ?>:
 </td>
-<td colspan=3><? if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?=$result[besonder] ?> <? else : ?>
-<input name="besonder" type="text" size="60" value="" ><? endif ?>
+<td colspan=3><?php if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo $result[referrer] ?> <?php else : ?>
+<input name="referrer" type="text" size="60" value="" ><?php endif ?>
+</td>
+</tr>
+<tr>
+<td><FONT SIZE=-1  FACE="Arial"><?php echo $LDTherapy ?>:
+</td>
+<td colspan=3><?php if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo $result[therapie] ?> <?php else : ?>
+<input name="therapie" type="text" size="60" value="" ><?php endif ?>
+</td>
+</tr>
+<tr>
+<td><FONT SIZE=-1  FACE="Arial"><?php echo $LDSpecials ?>:
+</td>
+<td colspan=3><?php if($mode=="select") : ?><FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo $result[besonder] ?> <?php else : ?>
+<input name="besonder" type="text" size="60" value="" ><?php endif ?>
 </td>
 </tr>
 
 </table>
 <p>
-<input type=hidden name=sid value=<? print $ck_sid; ?>>
-<input type=hidden name="lang" value=<? print $lang; ?>>
-<? if($mode=="select") : ?>
-<input type="hidden" name="itemname" value="<?=$result[item] ?>">
+<input type=hidden name="sid" value="<?php print $sid; ?>">
+<input type=hidden name="lang" value="<?php print $lang; ?>">
+<?php if($mode=="select") : ?>
+<input type="hidden" name="itemname" value="<?php echo $result[item] ?>">
 <input type="hidden" name="mode" value="?">
 <input type="hidden" name="update" value="1">
-<input  type="submit"   value="<?=$LDUpdateData ?>"> &nbsp;&nbsp;
+<input  type="submit"   value="<?php echo $LDUpdateData ?>"> &nbsp;&nbsp;
 </form>
-<form action="<?=$thisfile ?>" method="post">
-<input type=hidden name=sid value=<? print $ck_sid; ?>>
-<input type="submit" value="<?=$LDNewArchive ?>">
+<form action="<?php echo $thisfile ?>" method="post">
+<input type=hidden name="sid" value="<?php print $sid; ?>">
+<input type=hidden name="lang" value="<?php print $lang; ?>">
+<input type="submit" value="<?php echo $LDNewArchive ?>">
 <input type="hidden" name="mode" value="?">
 </form>
-<? else : ?>
+<?php else : ?>
 <input type="hidden" name="mode" value="search">
-<input  type="submit" value="<?=$LDSearch ?>"> 
+<input  type="submit" value="<?php echo $LDSearch ?>"> 
 </form>
-<? endif ?>
+<?php endif ?>
 
 
-<? endif ?>
+<?php endif ?>
 </ul>
 
 <p>
@@ -408,28 +413,28 @@ if($ck_login_logged) print "startframe.php?sid=$ck_sid";
 </tr>
 </table>        
 <form 
-<? 
+<?php 
 if($mode=="select") print 'action="'.$thisfile.'">'; 
 	else
 	{
 		if($from=="entry") print 'action="aufnahme_start.php">';
 		else
 		{ 
-			if($ck_login_logged) print 'action="startframe.php">';
+			if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) print 'action="startframe.php">';
 				else print 'action="aufnahme_pass.php">
 						<input type="hidden" name="target" value="'.$LDArchive.'"> 
 						';
 		}
 	}
 ?>
-<input type="hidden" name="sid" value="<?=$ck_sid ?>">
-<input type="hidden" name="lang" value="<?=$lang ?>">
-<input type="submit" value="<?=$LDCancel ?>"> 
+<input type="hidden" name="sid" value="<?php echo $sid ?>">
+<input type="hidden" name="lang" value="<?php echo $lang ?>">
+<input type="submit" value="<?php echo $LDCancel ?>"> 
 </form>
 <p>
 
 <?php
-require("../language/$lang/".$lang."_copyrite.htm");
+require("../language/$lang/".$lang."_copyrite.php");
  ?>
 
     

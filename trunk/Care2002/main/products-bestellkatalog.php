@@ -1,15 +1,22 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_products.php");
-require("../req/config-color.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","products.php");
+$local_user=$userck;
+require("../include/inc_front_chain_lang.php");
+require("../include/inc_config_color.php");
 
-if(!$dept)
+if(!isset($dept)||!$dept)
 {
-	if($ck_thispc_dept) $dept=$ck_thispc_dept;
-	 else $dept="plop";// default is dept to plop
+	if(isset($HTTP_COOKIE_VARS['ck_thispc_dept'])&&!empty($HTTP_COOKIE_VARS['ck_thispc_dept'])) $dept=$HTTP_COOKIE_VARS['ck_thispc_dept'];
+	 else $dept="plop";//default is plop dept
 }
 
 $thisfile="products-bestellkatalog.php";
@@ -28,29 +35,29 @@ if($cat=="pharma")
 if(($mode=="search")&&($keyword!="")&&($keyword!="%"))
  {
  	if($keyword=="*%*") $keyword="%";
- 	 include("../req/products-search-mod.php");
+ 	 include("../include/inc_products_search_mod.php");
  }
 	else if(($mode=="save")&&($bestellnum!="")&&($artname!=""))
 	{
-		include("../req/products-ordercatalog-save.php");
+		include("../include/inc_products_ordercatalog_save.php");
 	}
 
 if(($mode=="delete")&&($keyword!="")) 
 {
-	include("../req/products-ordercatalog-delete.php");
+	include("../include/inc_products_ordercatalog_delete.php");
 }
 
 ?>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<? 
-require("../req/css-a-hilitebu.php");
+<?php 
+require("../include/inc_css_a_hilitebu.php");
 ?>
 <script language=javascript>
 function popinfo(b)
 {
-	urlholder="products-bestellkatalog-popinfo.php?sid=<? print "$ck_sid&lang=$lang"; ?>&keyword="+b+"&mode=search&cat=<?=$cat ?>";
+	urlholder="products-bestellkatalog-popinfo.php?sid=<?php print "$sid&lang=$lang"; ?>&keyword="+b+"&mode=search&cat=<?php echo $cat; ?>";
 	ordercatwin=window.open(urlholder,"ordercat","width=850,height=550,menubar=no,resizable=yes,scrollbars=yes");
 	}
 
@@ -65,11 +72,11 @@ function add2basket(b,i)
 	var n;
 	if(eval("document.curcatform.p"+i+".value")=="") n=1;
 	 else n=eval("document.curcatform.p"+i+".value")
-	window.parent.BESTELLKORB.location.href="products-bestellkorb.php?sid=<?="$ck_sid&lang=$lang&userck=$userck" ?>&order_id=<?=$order_id?>&mode=add&cat=<?=$cat ?>&maxcount=1&order1=1&bestellnum1="+b+"&p1="+n;
+	window.parent.BESTELLKORB.location.href="products-bestellkorb.php?sid=<?php echo "$sid&lang=$lang&userck=$userck" ?>&order_id=<?php echo $order_id; ?>&mode=add&cat=<?php echo $cat; ?>&maxcount=1&order1=1&bestellnum1="+b+"&p1="+n;
 }
 function add_update(b)
 {
-	window.parent.BESTELLKORB.location.href="products-bestellkorb.php?sid=<?="$ck_sid&lang=$lang&userck=$userck" ?>&order_id=<?=$order_id?>&mode=add&cat=<?=$cat ?>&maxcount=1&order1=1&bestellnum1="+b+"&p1=1";
+	window.parent.BESTELLKORB.location.href="products-bestellkorb.php?sid=<?php echo "$sid&lang=$lang&userck=$userck" ?>&order_id=<?php echo $order_id; ?>&mode=add&cat=<?php echo $cat; ?>&maxcount=1&order1=1&bestellnum1="+b+"&p1=1";
 }
 
 function checkform(d)
@@ -82,7 +89,7 @@ function checkform(d)
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
@@ -90,32 +97,33 @@ function gethelp(x,s,x1,x2,x3)
 
 </head>
 <BODY  topmargin=5 leftmargin=10  marginwidth=10 marginheight=5 onLoad="document.smed.keyword.focus()"
-<?print "bgcolor=".$cfg['body_bgcolor'];  if (!$cfg['dhtml']){ print ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
-<? //foreach($argv as $v) print "$v<br>"; ?>
+<?php print "bgcolor=".$cfg['body_bgcolor'];  if (!$cfg['dhtml']){ print ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+<?php //foreach($argv as $v) print "$v<br>"; ?>
 
-<a href="javascript:gethelp('products.php','catalog','','<?=$cat ?>')"><img src="../img/frage.gif" border=0 width=15 height=15 align="right" alt="<?=$LDOpenHelp ?>"></a>
-<form action="<? print $thisfile; ?>" method="get" name="smed">
-<font face="Verdana, Arial" size=1 color=#800000><?=$LDSearchKey ?>:
+<a href="javascript:gethelp('products.php','catalog','','<?php echo $cat ?>')"><img src="../img/frage.gif" border=0 width=15 height=15 align="right" alt="<?php echo $LDOpenHelp ?>"></a>
+<form action="<?php print $thisfile; ?>" method="get" name="smed">
+<font face="Verdana, Arial" size=1 color=#800000><?php echo $LDSearchKey ?>:
 <br>
-<input type="hidden" name="sid" value="<?=$ck_sid ?>">
-<input type="hidden" name="lang" value="<?=$lang?>">
+<input type="hidden" name="sid" value="<?php echo $sid ?>">
+<input type="hidden" name="lang" value="<?php echo $lang?>">
 <input type="hidden" name="mode" value="search">
 <input type="text" name="keyword" size=20 maxlength=40>
-<input type="hidden" name="order_id" value="<?=$order_id?>">
-<input type="hidden" name="cat" value="<?=$cat?>">
-<input type="hidden" name="userck" value="<?=$userck?>">
-<input type="submit" value="<?=$LDSearchArticle ?>">
+<input type="hidden" name="order_id" value="<?php echo $order_id?>">
+<input type="hidden" name="cat" value="<?php echo $cat?>">
+<input type="hidden" name="userck" value="<?php echo $userck?>">
+<input type="submit" value="<?php echo $LDSearchArticle ?>">
 </font>
 </form>
 
-<? 
-
-if (($mode=="search")&&($keyword!="")) 
+<?php 
+if (isset($mode)&&($mode=="search")&&($keyword!="")) 
 {
 	if($linecount>0)
 	{
 	//set order catalog flag
-	
+	/**
+	* The following routine displays the search results
+	*/	
 				print "<p><font face=verdana,arial size=1>".str_replace("~nr~",$linecount,$LDFoundNrData)."<br>
 						$LDClk2SeeInfo</font><br>";
 
@@ -132,8 +140,8 @@ if (($mode=="search")&&($keyword!=""))
 						print "<tr bgcolor=";
 						if($toggle) { print "#dfdfdf>"; $toggle=0;} else {print "#fefefe>"; $toggle=1;};
 						print '
-									<td valign="top"><a href="'.$thisfile.'?sid='.$ck_sid.'&order_id='.$order_id.'&mode=save&cat='.$cat.'&artname='.str_replace("&","%26",strtr($zeile[artikelname]," ","+")).'&bestellnum='.$zeile[bestellnum].'&proorder='.str_replace(" ","+",$zeile[proorder]).'&hit=0&userck='.$userck.'" onClick="add_update(\''.$zeile[bestellnum].'\')"><img src="../img/L-arrowGrnLrg.gif" width=16 height=16 border=0 alt="'.$LDPut2BasketAway.'"></a></td>		
-									<td valign="top"><a href="'.$thisfile.'?sid='.$ck_sid.'&order_id='.$order_id.'&mode=save&cat='.$cat.'&artname='.str_replace("&","%26",strtr($zeile[artikelname]," ","+")).'&bestellnum='.$zeile[bestellnum].'&proorder='.str_replace(" ","+",$zeile[proorder]).'&hit=0&userck='.$userck.'"><img src="../img/dwnArrowGrnLrg.gif" width=16 height=16 border=0 alt="'.$LDPut2Catalog.'"></a></td>		
+									<td valign="top"><a href="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&order_id='.$order_id.'&mode=save&cat='.$cat.'&artname='.str_replace("&","%26",strtr($zeile[artikelname]," ","+")).'&bestellnum='.$zeile[bestellnum].'&proorder='.str_replace(" ","+",$zeile[proorder]).'&hit=0&userck='.$userck.'" onClick="add_update(\''.$zeile[bestellnum].'\')"><img src="../img/L-arrowGrnLrg.gif" width=16 height=16 border=0 alt="'.$LDPut2BasketAway.'"></a></td>		
+									<td valign="top"><a href="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&order_id='.$order_id.'&mode=save&cat='.$cat.'&artname='.str_replace("&","%26",strtr($zeile[artikelname]," ","+")).'&bestellnum='.$zeile[bestellnum].'&proorder='.str_replace(" ","+",$zeile[proorder]).'&hit=0&userck='.$userck.'"><img src="../img/dwnArrowGrnLrg.gif" width=16 height=16 border=0 alt="'.$LDPut2Catalog.'"></a></td>		
 									<td valign="top"><a href="#" onClick="popinfo(\''.$zeile[bestellnum].'\')" ><img src="../img/info3.gif" width=16 height=16 border=0 alt="'.$complete_info.$zeile[artikelname].' - '.$LDClk2See.'"></a></td>
 									<td valign="top"><a href="#" onClick="popinfo(\''.$zeile[bestellnum].'\')" ><font face=verdana,arial size=1 color="#800000">'.$zeile[artikelname].'</font></a></td>
 									<td valign="top"><font face=verdana,arial size=1>'.$zeile[generic].'</td>
@@ -147,17 +155,15 @@ if (($mode=="search")&&($keyword!=""))
 									</tr>';
 					}
 					print "</table>";
-
 	}
 	else
 		print "
 			<p>$LDNoDataFound";
-
 print '<p>';
 }
 
 // get the actual order catalog
-require("../req/products-ordercatalog-getactual.php");
+require("../include/inc_products_ordercatalog_getactual.php");
 // show catalog
 
 if($rows>0)
@@ -175,13 +181,16 @@ print '
 
 $i=1;
 
-// $content come from products-ordercatalog-getactual.php
+// $content come from inc_products_ordercatalog_getactual.php
+/**
+* The following routine displays the contents of the current catalog
+*/
 while($content=mysql_fetch_array($ergebnis))
 {
 	if($tog)
 	{ print '<tr bgcolor="#dddddd">'; $tog=0; }else{ print '<tr bgcolor="#efefff">'; $tog=1; }
 	print'
-    			<td><a href="#" onClick="add2basket(\''.$content[bestellnum].'\',\''.$i.'\')"><img src="../img/L-arrowGrnLrg.gif" border=0 width=16 height=16 alt="'.$LDPut2BasketAway.'"></a></td>
+    			<td><a href="#" onClick="add2basket(\''.$content[bestellnum].'\',\''.$i.'\')"><img src="../img/l-arrowgrnlrg.gif" border=0 width=16 height=16 alt="'.$LDPut2BasketAway.'"></a></td>
   				 <td><input type="checkbox" name="order'.$i.'" value="1" >
 				 		<input type="hidden" name="bestellnum'.$i.'" value="'.$content[bestellnum].'"></td>		
 				<td><font face=Verdana,Arial size=1>'.$content[artikelname].'</td>
@@ -189,28 +198,26 @@ while($content=mysql_fetch_array($ergebnis))
 	$o="order".$i;
 	$pc="p".$i;
 	if(($$o) &&($$pc=="")) $$pc=1;			 
-	if($$pc!="")
-		print ' value="'.$$pc.'">';
-		 	else print ' >';
+	if($$pc!="") print ' value="'.$$pc.'">'; else print '>';
 	print '
 				</td>
 				<td ><font face=Verdana,Arial size=1><nobr>&nbsp;X '.$content[proorder].'</nobr></td>
 				<td><font face=Verdana,Arial size=1>'.$content[bestellnum].'</td>
-				<td><a href="#" onClick="popinfo(\''.$content[bestellnum].'\')" ><img src="../img/info3.gif" width=16 height=16 border=0 alt="'.$complete_info.$content[artikelname].'"></a></td>
-				<td><a href="'.$thisfile.'?sid='.$ck_sid.'&lang='.$lang.'&order_id='.$order_id.'&mode=delete&cat='.$cat.'&keyword='.$content[bestellnum].'&userck='.$userck.'" ><img src="../img/delete2.gif" width=16 height=16 border=0 alt="'.$LDRemoveArticle.'"></a></td>
+				<td><a href="javascript:popinfo(\''.$content[bestellnum].'\')" ><img src="../img/info3.gif" width=16 height=16 border=0 alt="'.$complete_info.$content[artikelname].'"></a></td>
+				<td><a href="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&order_id='.$order_id.'&mode=delete&cat='.$cat.'&keyword='.$content[bestellnum].'&userck='.$userck.'" ><img src="../img/delete2.gif" width=16 height=16 border=0 alt="'.$LDRemoveArticle.'"></a></td>
 				</tr>';
 	$i++;
 }
 	print '
 			</table>';
 			
-// $rows come from products-ordercatalog-getactual.php
+// $rows come from inc_products_ordercatalog_getactual.php
        
-if($rows>0)
+if(isset($rows)&&($rows>0))
 	print '
 			<p>
 			<input type="hidden" name="maxcount" value="'.$rows.'">
-			<input type="hidden" name="sid" value="'.$ck_sid.'">
+			<input type="hidden" name="sid" value="'.$sid.'">
 			<input type="hidden" name="lang" value="'.$lang.'">
 			<input type="hidden" name="cat" value="'.$cat.'">
 			<input type="hidden" name="order_id" value="'.$order_id.'">
@@ -219,11 +226,11 @@ if($rows>0)
 			<input type="submit" value="'.$LDPutNBasket.'">
 			</form>';
 
-if($mode=="multiadd")
+if(isset($mode)&&($mode=="multiadd"))
 {
  	print '
 			<script language="javascript">
-			window.parent.BESTELLKORB.location.href="products-bestellkorb.php?sid='.$ck_sid.'&lang='.$lang.'&order_id='.$order_id.'&mode=add&cat='.$cat.'&maxcount='.$maxcount.'&userck='.$userck;
+			window.parent.BESTELLKORB.location.href="products-bestellkorb.php?sid='.$sid.'&lang='.$lang.'&order_id='.$order_id.'&mode=add&cat='.$cat.'&maxcount='.$maxcount.'&userck='.$userck;
 	for($i=1;$i<=$maxcount;$i++)
 	{
 		$o="order".$i;

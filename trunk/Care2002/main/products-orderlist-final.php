@@ -1,16 +1,23 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_products.php");
-require("../req/config-color.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","products.php");
+$local_user=$userck;
+require("../include/inc_front_chain_lang.php");
+require("../include/inc_config_color.php");
 
 if(!$dept)
 {
-	if($ck_thispc_dept) $dept=$ck_thispc_dept;
-	elseif($ck_thispc_station) $dept=$ck_thispc_station;
-	 elseif($ck_thispc_room) $dept=$ck_thispc_room;
+	if($HTTP_COOKIE_VARS[ck_thispc_dept]) $dept=$HTTP_COOKIE_VARS[ck_thispc_dept];
+	elseif($HTTP_COOKIE_VARS[ck_thispc_station]) $dept=$HTTP_COOKIE_VARS[ck_thispc_station];
+	 elseif($HTTP_COOKIE_VARS[ck_thispc_room]) $dept=$HTTP_COOKIE_VARS[ck_thispc_room];
 	 	 else $dept="plop"; //simulate plop dept
 }
 
@@ -40,7 +47,7 @@ $count=0;
 
 if(($mode=="send")&&($order_id))
 {
-	include("../req/db-makelink.php");
+	include("../include/inc_db_makelink.php");
 	if($link&&$DBLink_OK)
 		{
 			
@@ -89,67 +96,65 @@ if(($mode=="send")&&($order_id))
 	}
   	 else { print "$LDDbNoLink<br>"; } 
 }
-
 ?>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<? 
-require("../req/css-a-hilitebu.php");
+<?php 
+require("../include/inc_css_a_hilitebu.php");
 ?>
 <script language=javascript>
 function popinfo(b)
 {
-	urlholder="products-bestellkatalog-popinfo.php?sid=<? print "$ck_sid&lang=$lang"; ?>&cat=<? print $cat; ?>&keyword="+b+"&mode=search";
+	urlholder="products-bestellkatalog-popinfo.php?sid=<?php print "$sid&lang=$lang"; ?>&cat=<?php print $cat; ?>&keyword="+b+"&mode=search";
 	ordercatwin=window.open(urlholder,"ordercat","width=850,height=550,menubar=no,resizable=yes,scrollbars=yes");
 	}
 function checkform(d)
 {
 	if (d.validator.value=="") 
 	{
-		alert("<?=$LDAlertNoValidator ?>");
+		alert("<?php echo $LDAlertNoValidator ?>");
 		return false;
 	}
 	if (d.vpw.value=="") 
 	{
-		alert("<?=$LDAlertNoPassword ?>");
+		alert("<?php echo $LDAlertNoPassword ?>");
 		return false;
 	}
  	return true;
 }
-<? if (($mode=="send")&&($sendok))
+<?php if (($mode=="send")&&($sendok))
 {
 $idbuf=uniqid("");
 print "
 		function hide_bcat()
 		{
-			window.parent.BESTELLKATALOG.location.replace('products-bestellkatalog.php?sid=$ck_sid&lang=$lang&userck=$userck&cat=$cat&order_id=$idbuf')
+			window.parent.BESTELLKATALOG.location.replace('products-bestellkatalog.php?sid=$sid&lang=$lang&userck=$userck&cat=$cat&order_id=$idbuf')
 		}";
 }
 ?>
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
 </script>
 </head>
 <BODY  topmargin=5 leftmargin=10  marginwidth=10 marginheight=5 
-<? 			
+<?php 			
 switch($mode)
 {
 	case "add":print ' onLoad="location.replace(\'#bottom\')"   '; break;
 	case "delete":print ' onLoad="location.replace(\'#'.($idx-1).'\')"   '; break;
 	case "send": if($sendok) print ' onLoad="hide_bcat()" ';
 }
-print "bgcolor=".$cfg['body_bgcolor']; if (!$cfg['dhtml']){ print 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+print "bgcolor=".$cfg['body_bgcolor']; if (!$cfg['dhtml']){ print ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
 
-<a href="javascript:gethelp('products.php','final','<?=$sendok ?>','<?=$cat ?>')"><img src="../img/frage.gif" border=0 width=15 height=15 align="right" alt="<?=$LDOpenHelp ?>"></a>
+<a href="javascript:gethelp('products.php','final','<?php echo $sendok ?>','<?php echo $cat ?>')"><img src="../img/frage.gif" border=0 width=15 height=15 align="right" alt="<?php echo $LDOpenHelp ?>"></a>
 
-<?
-if($sendok)
+<?php if($sendok)
 	print '
 			<font face="Verdana, Arial" size=2 color="#800000">'.$LDOrderSent.'<p></font>';
 
@@ -159,7 +164,7 @@ if($cat=="pharma") $dbtable="pharma_orderlist";
 	else $dbtable=$dbtable="med_orderlist";
 
 $rows=0;
-include("../req/db-makelink.php");
+include("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK)
 		{
 				$sql='SELECT * FROM '.$dbtable.' 
@@ -179,7 +184,6 @@ if($link&&$DBLink_OK)
 if($rows>0)
 {
 //++++++++++++++++++++++++ show the actual list +++++++++++++++++++++++++++
-//$bcatindex=array("&nbsp;","Artikelname","Stück","&nbsp;","Bestell-Nr.");
 
 $tog=1;
 $content=mysql_fetch_array($ergebnis);
@@ -222,15 +226,16 @@ for($n=0;$n<sizeof($artikeln);$n++)
 	{
 		print '
 			<form action="'.$thisfile.'" method="get" onSubmit="return checkform(this)">'.$LDListindex[4].'<br>
-			<input type="text" name="sender" size=20 maxlength=40 value="';
-		print $ck_products_order_user; 
+			<input type="text" name="sender" size=30 maxlength=40 value="';
+		print $HTTP_COOKIE_VARS[$local_user.$sid]; 
 		print '"> 
 			 &nbsp;'.$LDNormal.'<input type="radio" name="prior" value="normal" checked> 
 			'.$LDUrgent.'<input type="radio" name="prior" value="urgent" > <br>
    			<p>
 			'.$LDValidatedBy.':<br>
-			<input type="text" name="validator" size=20 maxlength=40 value="'.$validator.'"><br><font size=1>'.$LDPassword.':</font><input type="password" name="vpw" size=10 maxlength=20>
-       		<input type="hidden" name="sid" value="'.$ck_sid.'">
+			<input type="text" name="validator" size=30 maxlength=40 value="'.$validator.'"><br>
+			<font size=1>'.$LDPassword.':</font><input type="password" name="vpw" size=15 maxlength=20>
+       		<input type="hidden" name="sid" value="'.$sid.'">
        		<input type="hidden" name="lang" value="'.$lang.'">
    			<input type="hidden" name="order_id" value="'.$order_id.'">
    			<input type="hidden" name="cat" value="'.$cat.'">
@@ -238,17 +243,17 @@ for($n=0;$n<sizeof($artikeln);$n++)
 			<input type="hidden" name="mode" value="send">
    			<p>
 			<input type="submit" value="'.$LDSendOrder.'">   
-   			</form></font>
+   			</form></font><p>
 			<font face=Verdana,Arial size=2>
-			<a href="products-bestellkorb.php?sid='.$ck_sid.'&lang='.$lang.'&cat='.$cat.'&order_id='.$order_id.'&userck='.$userck.'" ><< '.$LDBack2Edit.'</a></font>
+			<a href="products-bestellkorb.php?sid='.$sid.'&lang='.$lang.'&cat='.$cat.'&order_id='.$order_id.'&userck='.$userck.'" ><< '.$LDBack2Edit.'</a></font>
 			';
 		}
 		else 
 		print '
-				<p><font face=Verdana,Arial size=1 color="#000080"><a href="'.$breakfile.'?sid='.$ck_sid.'&lang='.$lang.'" target="_parent">
+				<p><font face=Verdana,Arial size=1 color="#000080"><a href="'.$breakfile.'?sid='.$sid.'&lang='.$lang.'" target="_parent">
 				<img src="../img/arrow-blu.gif" width=12 height=12 border=0> '.$LDEndOrder.'</a>
 				<p>
-				<a href="products-bestellung.php?sid='.$ck_sid.'&lang='.$lang.'&cat='.$cat.'&userck='.$userck.'" target="_parent"><img src="../img/arrow-blu.gif" width=12 height=12 border=0> '.$LDCreateBasket.'</a>
+				<a href="products-bestellung.php?sid='.$sid.'&lang='.$lang.'&cat='.$cat.'&userck='.$userck.'" target="_parent"><img src="../img/arrow-blu.gif" width=12 height=12 border=0> '.$LDCreateBasket.'</a>
 				</font>';
 }
 ?>

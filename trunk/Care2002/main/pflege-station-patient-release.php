@@ -1,19 +1,26 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)||!$ck_pflege_user) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_nursing.php");
-require("../req/config-color.php"); // load color preferences
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","nursing.php");
+$local_user="ck_pflege_user";
+require("../include/inc_front_chain_lang.php");
+require("../include/inc_config_color.php"); // load color preferences
 
-require("../global_conf/remoteservers_conf.php");
+require("../global_conf/inc_remoteservers_conf.php");
 
-if(!$encoder) $encoder=$ck_pflege_user;
+if(!$encoder) $encoder=$HTTP_COOKIE_VARS["ck_pflege_user".$sid];
 
 $breakfile="javascript:window.history.back()";
 $thisfile="pflege-station-patient-release.php";
 
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK)
 	{	
 		// get orig data
@@ -125,7 +132,7 @@ if($link&&$DBLink_OK)
 													else $released=1;
 													if($released) 
 													{
-														header("location:$thisfile?sid=$ck_sid&lang=$lang&pn=$pn&station=$station&bd=$bd&rm=$rm&pyear=$pyear&pmonth=$pmonth&pday=$pday&mode=$mode&released=1&lock=1&x_date=$x_date&x_time=$x_time&relart=$relart&encoder=".strtr($encoder," ","+")."&info=".strtr($info," ","+"));
+														header("location:$thisfile?sid=$sid&lang=$lang&pn=$pn&station=$station&bd=$bd&rm=$rm&pyear=$pyear&pmonth=$pmonth&pday=$pday&mode=$mode&released=1&lock=1&x_date=$x_date&x_time=$x_time&relart=$relart&encoder=".strtr($encoder," ","+")."&info=".strtr($info," ","+"));
 														exit;
 													}
 												}
@@ -172,8 +179,8 @@ if($link&&$DBLink_OK)
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 
-<?
-require("../req/css-a-hilitebu.php");
+<?php
+require("../include/inc_css_a_hilitebu.php");
 ?>
 <style type="text/css" name="s2">
 td.vn { font-family:verdana,arial; color:#000088; font-size:12}
@@ -191,12 +198,12 @@ function pruf(d)
 		{
 		if(!d.encoder.value)
 		{ 
-			alert("<?=$LDAlertNoName ?>"); 
+			alert("<?php echo $LDAlertNoName ?>"); 
 			d.encoder.focus();
 			return false;
 		}
-		if (!d.x_date.value){ alert("<?=$LDAlertNoDate ?>"); d.x_date.focus();return false;}
-		if (!d.x_time.value){ alert("<?=$LDAlertNoTime ?>"); d.x_time.focus();return false;}
+		if (!d.x_date.value){ alert("<?php echo $LDAlertNoDate ?>"); d.x_date.focus();return false;}
+		if (!d.x_time.value){ alert("<?php echo $LDAlertNoTime ?>"); d.x_time.focus();return false;}
 		return true;
 	}
 	
@@ -205,7 +212,7 @@ function pruf(d)
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
@@ -216,23 +223,21 @@ function gethelp(x,s,x1,x2,x3)
 
 </HEAD>
 
-<BODY bgcolor=<? print $cfg['body_bgcolor']; ?> onLoad="if (window.focus) window.focus()" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<? if (!$cfg['dhtml']){ print 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+<BODY bgcolor=<?php print $cfg['body_bgcolor']; ?> onLoad="if (window.focus) window.focus()" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
+<?php if (!$cfg['dhtml']){ print 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 
 <table width=100% border=0 cellpadding="5" cellspacing=0>
 <tr>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<? print $cfg['top_txtcolor']; ?>"  SIZE=+2 FACE="Arial"><STRONG><?=$LDReleasePatient ?> </STRONG></FONT>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" >
+<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2 FACE="Arial"><STRONG><?php echo $LDReleasePatient ?> </STRONG></FONT>
 </td>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>"  align=right ><nobr>
-<!-- <a href="javascript:window.history.back()"><img src="../img/<?="$lang/$lang" ?>_back2.gif" width=110 height=24 border=0  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a> --><a href="javascript:gethelp('nursing_station.php','discharge','','<?=$station ?>','<?=$LDReleasePatient ?>')"><img src="../img/<?="$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?=$breakfile ?>" ><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>"  align=right ><nobr>
+<!-- <a href="javascript:window.history.back()"><img src="../img/<?php echo "$lang/$lang" ?>_back2.gif" width=110 height=24 border=0  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a> --><a href="javascript:gethelp('nursing_station.php','discharge','','<?php echo $station ?>','<?php echo $LDReleasePatient ?>')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
 </tr>
 <tr>
-<td bgcolor="<? print $cfg['body_bgcolor']; ?>" colspan=2>
+<td bgcolor="<?php print $cfg['body_bgcolor']; ?>" colspan=2>
  <ul>
-<?
-
-
+<?php
 print '<table   cellpadding="2" cellspacing=0 border="0" >
 		<tr bgcolor="aqua" ><td><font face="verdana,arial" size="2" ><b>&nbsp;&nbsp;</b></td>
 		<td bgcolor="aqua"><font face="verdana,arial" size="2" ><b>'.$result[patnum].'</b></td>
@@ -283,7 +288,7 @@ else
 		//**************** ftp check of main pix ************************
 
 		// set up basic connection
-		//$ftp_server="192.168.0.2";   // configured in the file ..req/remoteservers_conf.php
+		//$ftp_server="192.168.0.2";   // configured in the file ..include/inc_remoteservers_conf.php
 		//$ftp_user="maryhospital_fotodepot";
 		//$ftp_pw="seeonly";
 		$conn_id = ftp_connect("$ftp_server"); 
@@ -324,37 +329,37 @@ print '
 
 ?>
 
-<? if(($mode=="release")&&($released)) : ?>
-<font face="verdana,arial" size="3" ><b><?=$LDJustReleased ?></b></font>
-<? endif ?>
+<?php if(($mode=="release")&&($released)) : ?>
+<font face="verdana,arial" size="3" ><b><?php echo $LDJustReleased ?></b></font>
+<?php endif ?>
 
 
-<form action="<?=$thisfile ?>" method="post" onSubmit="return pruf(this)">
+<form action="<?php echo $thisfile ?>" method="post" onSubmit="return pruf(this)">
 <table border=0>
   <tr>
-    <td class=vn><?=$LDPatListElements[0] ?>:</td>
-    <td class=vl>&nbsp;<?=$rm.$bd ?></td>
+    <td class=vn><?php echo $LDPatListElements[0] ?>:</td>
+    <td class=vl>&nbsp;<?php echo $rm.$bd ?></td>
   </tr>
   <tr>
-    <td class=vn><?=$LDDate ?>:</td>
+    <td class=vn><?php echo $LDDate ?>:</td>
     <td class=vl>&nbsp;
-	<? if($released) print nl2br($x_date); 
+	<?php if($released) print nl2br($x_date); 
 			else print '<input type="text" name="x_date" size=12 maxlength=12 value="'.date("d.m.Y").'" onKeyUp=setDate(this)>';
 	?>
                  </td>
   </tr>
   <tr>
-    <td class=vn><?=$LDClockTime ?>:</td>
+    <td class=vn><?php echo $LDClockTime ?>:</td>
     <td class=vl>&nbsp;
-	<? if($released) print nl2br($x_time); 
+	<?php if($released) print nl2br($x_time); 
 			else print '<input type="text" name="x_time" size=12 maxlength=12 value="'.date("H.i").'" onKeyUp=setTime(this)>';
 	?>
 	</td>
   </tr>
   <tr>
-    <td class=vn><?=$LDReleaseType ?>:</td>
-    <td class=vl>&nbsp;
-	<? if($released) 
+    <td class=vn><?php echo $LDReleaseType ?>:</td>
+    <td class=vl>
+	<?php if($released) 
 	{
 		switch($relart)
 		{
@@ -363,64 +368,66 @@ print '
 			case "emgcy": print $LDEmRelease;
 			case "chg_ward": print $LDChangeWard;
 			case "chg_bed": print $LDChangeBed;
+			case "pat_death": print $LDPatientDied;
 		} 
 	}else print '	
 					<input type="radio" name="relart" value="reg" checked> '.$LDRegularRelease.'<br>
                  	<input type="radio" name="relart" value="self"> '.$LDSelfRelease.'<br>
                  	<input type="radio" name="relart" value="emgcy"> '.$LDEmRelease.'<br>
                  	<input type="radio" name="relart" value="chg_ward"> '.$LDChangeWard.'<br>
-                 	<input type="radio" name="relart" value="chg_bed"> '.$LDChangeBed.'<br>';
+                 	<input type="radio" name="relart" value="chg_bed"> '.$LDChangeBed.'<br>
+                 	<input type="radio" name="relart" value="pat_death"> '.$LDPatientDied.'<br>';
 	?>
                  </td>
   </tr>
   <tr>
-    <td class=vn><?=$LDNotes ?>:</td>
+    <td class=vn><?php echo $LDNotes ?>:</td>
     <td class=vl>&nbsp;
-	<? if($released) print nl2br($info); else print '<textarea name="info" cols=40 rows=3></textarea>';
+	<?php if($released) print nl2br($info); else print '<textarea name="info" cols=40 rows=3></textarea>';
 	?></td>
   </tr>
   <tr>
-    <td class=vn><?=$LDNurse ?>:</td>
+    <td class=vn><?php echo $LDNurse ?>:</td>
     <td class=vl>&nbsp;
-	<? if($released) print $encoder; else print '<input type="text" name="encoder" size=25 maxlength=30 value="'.$encoder.'">';
+	<?php if($released) print $encoder; else print '<input type="text" name="encoder" size=25 maxlength=30 value="'.$encoder.'">';
 	?>
                    </td>
   </tr>
-<? if(!(($mode=="release")&&($released))) : ?>
+<?php if(!(($mode=="release")&&($released))) : ?>
   <tr>
-    <td class=vn><input type="submit" value="<?=$LDRelease ?>"></td>
-    <td class=vn>	<input type="checkbox" name="sure" value="1"> <?=$LDYesSure ?><br>
+    <td class=vn><input type="submit" value="<?php echo $LDRelease ?>"></td>
+    <td class=vn>	<input type="checkbox" name="sure" value="1"> <?php echo $LDYesSure ?><br>
                  </td>
   </tr>
-<? endif ?>
+<?php endif ?>
 </table>
 
 <input type="hidden" name="mode" value="release">
-<? if(($released)||($lock)) : ?>
+<?php if(($released)||($lock)) : ?>
 <input type="hidden" name="lock" value="1">
-<? endif ?>
-<input type="hidden" name="sid" value="<?=$ck_sid ?>">
-<input type="hidden" name="lang" value="<?=$lang ?>">
-<input type="hidden" name="station" value="<?=$station ?>">
-<input type="hidden" name="dept" value="<?=$dept ?>">
-<input type="hidden" name="pday" value="<?=$pday ?>">
-<input type="hidden" name="pmonth" value="<?=$pmonth ?>">
-<input type="hidden" name="pyear" value="<?=$pyear ?>">
-<input type="hidden" name="rm" value="<?=$rm ?>">
-<input type="hidden" name="bd" value="<?=$bd ?>">
-<input type="hidden" name="pn" value="<?=$pn ?>">
-<input type="hidden" name="t_date" value="<?=$pday.".".$pmonth.".".$pyear ?>">
+<?php endif ?>
+<input type="hidden" name="sid" value="<?php echo $sid ?>">
+<input type="hidden" name="lang" value="<?php echo $lang ?>">
+<input type="hidden" name="station" value="<?php echo $station ?>">
+<input type="hidden" name="dept" value="<?php echo $dept ?>">
+<input type="hidden" name="pday" value="<?php echo $pday ?>">
+<input type="hidden" name="pmonth" value="<?php echo $pmonth ?>">
+<input type="hidden" name="pyear" value="<?php echo $pyear ?>">
+<input type="hidden" name="rm" value="<?php echo $rm ?>">
+<input type="hidden" name="bd" value="<?php echo $bd ?>">
+<input type="hidden" name="pn" value="<?php echo $pn ?>">
+<input type="hidden" name="t_date" value="<?php echo $pday.".".$pmonth.".".$pyear ?>">
 
 </form>
 <p>
 
 
-<br><a href="pflege-station.php?sid=<?="$ck_sid&lang=$lang" ?>&edit=1&station=<?=$station ?>">
-<? if(($mode=="release")&&($released)) : ?>
-<img src="../img/<?="$lang/$lang" ?>_close2.gif" border="0">
-<? else : ?>
-<img src="../img/<?="$lang/$lang" ?>_cancel.gif" border="0">
-<? endif ?></a>
+<br><a href="pflege-station.php?sid=<?php echo "$sid&lang=$lang" ?>&edit=1&station=<?php echo $station ?>">
+<?php if(($mode=="release")&&($released)) : ?>
+<img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border="0">
+<?php else : ?>
+<img src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" border="0">
+<?php endif ?></a>
 
 </FONT>
 
@@ -432,7 +439,7 @@ print '
 </table>        
 <p>
 <?php
-require("../language/$lang/".$lang."_copyrite.htm");
+require("../language/$lang/".$lang."_copyrite.php");
  ?>
 
 </BODY>

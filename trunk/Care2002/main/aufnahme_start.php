@@ -1,44 +1,32 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)||!$aufnahme_user)  {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","aufnahme.php");
+$local_user="aufnahme_user";
+require("../include/inc_front_chain_lang.php");
 
-require("../language/".$lang."/lang_".$lang."_aufnahme.php");
-
-require("../req/config-color.php");
+require("../include/inc_config_color.php");
 
 $thisfile="aufnahme_start.php";
 $breakfile="startframe.php";
 
-$error=0;
-$errornum=0;
-$errorname=0;
-$errorvorname=0;
-$errorgebdatum=0;
-$errorphone=0;
-$erroraddress=0;
-$errorstatus=0;
-$errorkassetype=0;
-$errorkassename=0;
-$errordiagnose=0;
-$errorreferrer=0;
-$errortherapie=0;
-$errorbesonder=0;
-$errorencoder=0;
-$errorpatnum=0;
-
 $newdata=1;
 
 $dbtable="mahopatient";
-
 
 $curdate=date("d.m.Y");
 $curtime=date("H.i");
 
 if($patnum=="") 
 {
- 	include("../req/db-makelink.php");
+ 	include("../include/inc_db_makelink.php");
 	if($link&&$DBLink_OK) 
 	{	
 		if($update)
@@ -151,7 +139,7 @@ if (($eingaben=="speichern")or($speichern!=""))
 
 	if($error==0) 
 	{	
-				include("../req/db-makelink.php");
+				include("../include/inc_db_makelink.php");
 				if($link&&$DBLink_OK) 
 					{
 						 if(($update))
@@ -231,7 +219,7 @@ if (($eingaben=="speichern")or($speichern!=""))
 						if(mysql_query($sql,$link))
 						{ 
 							mysql_close($link);
-							header("Location: aufnahme_daten_zeigen.php?sid=$ck_sid&lang=$lang&itemname=$itemno&newdata=&from=$from&newdata=$newdata"); exit;
+							header("Location: aufnahme_daten_zeigen.php?sid=$sid&lang=$lang&itemname=$itemno&newdata=&from=$from&newdata=$newdata"); exit;
 						}
 			 			else {print "<p>".$sql."<p>$LDDbNoSave";};
 				}
@@ -273,7 +261,7 @@ function loadcat()
 {
 
   	cat=new Image();
-  	cat.src="../imgcreator/catcom.php?person=<?print strtr($aufnahme_user," ","+")."&lang=$lang";?>";
+  	cat.src="../imgcreator/catcom.php?person=<?php echo strtr($HTTP_COOKIE_VARS[$local_user.$sid]," ","+")."&lang=$lang";?>";
   	
 }
 
@@ -286,7 +274,7 @@ function showcat()
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
@@ -297,7 +285,7 @@ function gethelp(x,s,x1,x2,x3)
 
 
 
-<? if($cfg['dhtml'])
+<?php if($cfg['dhtml'])
 { print' 
 	<script language="javascript" src="../js/hilitebu.js">
 	</script>
@@ -324,34 +312,31 @@ function gethelp(x,s,x1,x2,x3)
 </HEAD>
 
 
-<BODY bgcolor="<?print $cfg['bot_bgcolor'];?>" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="if (window.focus) window.focus();loadcat();" 
-<? if (!$cfg['dhtml']){ print 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+<BODY bgcolor="<?php echo $cfg['bot_bgcolor'];?>" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="if (window.focus) window.focus();loadcat();" 
+<?php if (!$cfg['dhtml']){ print 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
 
 
 <table width=100% border=0 cellspacing="0">
 
 <tr>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>">
-<FONT  COLOR="<? print $cfg['top_txtcolor']; ?>"  SIZE=+3  FACE="Arial"><STRONG> &nbsp;<?=$LDAdmission ?></STRONG></FONT>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>">
+<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+3  FACE="Arial"><STRONG> &nbsp;<?php echo $LDAdmission ?></STRONG></FONT>
 </td>
 
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" align="right">
-<a href="javascript:gethelp('admission_how2new.php')"><img src="../img/<?="$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<? 
-if($ck_login_logged) print "startframe.php?sid=$ck_sid&lang=$lang"; 
-	else print "aufnahme_pass.php?sid=$ck_sid&target=entry&lang=$lang"; ?>"><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 alt="<?=$LDCloseWin ?>" width=93 height=41  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" align="right">
+<a href="javascript:gethelp('admission_how2new.php')"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
+if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) print "startframe.php?sid=$sid&lang=$lang"; 
+	else print "aufnahme_pass.php?sid=$sid&target=entry&lang=$lang"; ?>"><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24 alt="<?php echo $LDCloseWin ?>" width=93 height=41  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </td>
 </tr>
 <tr>
-<td colspan=3  bgcolor=<? print $cfg['body_bgcolor']; ?>><p><br>
+<td colspan=3  bgcolor=<?php print $cfg['body_bgcolor']; ?>><p><br>
 
 <div class="cats">
 <a href="javascript:hidecat()"><img
-<? if($from=="pass")
+<?php if($from=="pass")
 { 
-print '
-src="../imgcreator/catcom.php?lang='.$lang.'&person='.$aufnahme_user.'" ';
-//print '
-// src="http://www.maryhospital.com/img/cat-com5.png" ';
+    print 'src="../imgcreator/catcom.php?lang='.$lang.'&person='.strtr($HTTP_COOKIE_VARS[$local_user.$sid]," ","+").'" ';
  }
 else 
 {
@@ -364,36 +349,36 @@ align=right id=catcom border=0></a>
 
 <FONT    SIZE=-1  FACE="Arial">
 
-<form method="post" action="<? print $thisfile; ?>" name="aufnahmeform">
+<form method="post" action="<?php print $thisfile; ?>" name="aufnahmeform">
 
 <table border="0" cellspacing=0>
 
 
-<? if($error) : ?>
+<?php if($error) : ?>
 <tr bgcolor=#ffffee>
 <td colspan=4><center>
 <font face=arial color=#7700ff size=4>
 <img src="../img/catr.gif" border=0 width=88 height=80 align="absmiddle">
-	<? if ($errornum>1) print $LDErrorS; else print $LDError; ?>
+	<?php if ($errornum>1) print $LDErrorS; else print $LDError; ?>
 </center>
 </td>
 </tr>
-<? endif; ?>
+<?php endif; ?>
 
 <tr>
-<td><FONT SIZE=-1  FACE="Arial"><?=$LDAdmitDate ?>: 
+<td><FONT SIZE=-1  FACE="Arial"><?php echo $LDAdmitDate ?>: 
 </td>
-<td ><FONT SIZE=-1  FACE="Arial" color="#800000"><? print $aufdatum; ?><input name="aufdatum" type="hidden" value="<? print $aufdatum; ?>">
+<td ><FONT SIZE=-1  FACE="Arial" color="#800000"><?php print $aufdatum; ?><input name="aufdatum" type="hidden" value="<?php print $aufdatum; ?>">
 </td>
-<td ><FONT  SIZE=2  FACE="Arial"><?=$LDAdmitBy ?>:
+<td ><FONT  SIZE=2  FACE="Arial"><?php echo $LDAdmitBy ?>:
 </td>
-<td><input  name="encoder" type="text" value=<? if ($encoder!="") print '"'.$encoder.'"' ; else print '"'.$aufnahme_user.'"' ?> size="28" onFocus=hidecat()>
+<td><input  name="encoder" type="text" value=<?php if ($encoder!="") print '"'.$encoder.'"' ; else print '"'.$HTTP_COOKIE_VARS[$local_user.$sid].'"' ?> size="28" onFocus=hidecat()>
 </td>
 </tr>
 <tr>
-<td><FONT SIZE=-1  FACE="Arial"><?=$LDAdmitTime ?>:
+<td><FONT SIZE=-1  FACE="Arial"><?php echo $LDAdmitTime ?>:
 </td>
-<td ><FONT SIZE=-1  FACE="Arial" color="#800000"><? print $aufzeit; ?><input name="aufzeit" type="hidden" value="<? print $aufzeit; ?>">
+<td ><FONT SIZE=-1  FACE="Arial" color="#800000"><?php print $aufzeit; ?><input name="aufzeit" type="hidden" value="<?php print $aufzeit; ?>">
 </td>
 </tr>
 <tr>
@@ -401,71 +386,71 @@ align=right id=catcom border=0></a>
 </td>
 </tr>
 <tr>
-<td><FONT SIZE=-1  FACE="Arial"><?=$LDCaseNr ?>:
+<td><FONT SIZE=-1  FACE="Arial"><?php echo $LDCaseNr ?>:
 </td>
 <td colspan=3>
-<input name="patnum" type="hidden"  value="<? print $patnum; ?>" >
-<FONT SIZE=-1  FACE="Arial" color="#800000"><? print $patnum; ?>
+<input name="patnum" type="hidden"  value="<?php print $patnum; ?>" >
+<FONT SIZE=-1  FACE="Arial" color="#800000"><?php print $patnum; ?>
 </td>
 </tr>
 <tr>
-<td><FONT SIZE=-1  FACE="Arial"><?=$LDTitle ?>:
+<td><FONT SIZE=-1  FACE="Arial"><?php echo $LDTitle ?>:
 </td>
 <td >
-<input type="text" name="anrede" size=14 maxlength=25 value="<?=$anrede ?>">
+<input type="text" name="anrede" size=14 maxlength=25 value="<?php echo $anrede ?>">
 <!-- 
 <select name="anrede"  size="1" onFocus=hidecat() onChange=setsex(this)>
-<option value="-" <? if ($anrede=="-") print "selected"; ?>>-</option>
-<option value="Frau" <? if ($anrede=="Frau") print "selected"; ?>>Frau</option>
-<option value="Herr" <? if ($anrede=="Herr") print "selected"; ?>>Herr</option>
-<option value="Frau Dr." <? if ($anrede=="Frau Dr.") print "selected"; ?>>Frau Dr.</option>
-<option value="Herr Dr." <? if ($anrede=="Herr Dr.") print "selected"; ?>>Herr Dr.</option>
-<option value="Frau Prof." <? if ($anrede=="Frau Prof.") print "selected"; ?>>Frau Prof.</option>
-<option value="Herr Prof." <? if ($anrede=="Herr Prof.") print "selected"; ?>>Herr Prof.</option>
+<option value="-" <?php if ($anrede=="-") print "selected"; ?>>-</option>
+<option value="Frau" <?php if ($anrede=="Frau") print "selected"; ?>>Frau</option>
+<option value="Herr" <?php if ($anrede=="Herr") print "selected"; ?>>Herr</option>
+<option value="Frau Dr." <?php if ($anrede=="Frau Dr.") print "selected"; ?>>Frau Dr.</option>
+<option value="Herr Dr." <?php if ($anrede=="Herr Dr.") print "selected"; ?>>Herr Dr.</option>
+<option value="Frau Prof." <?php if ($anrede=="Frau Prof.") print "selected"; ?>>Frau Prof.</option>
+<option value="Herr Prof." <?php if ($anrede=="Herr Prof.") print "selected"; ?>>Herr Prof.</option>
 </select> -->
 
 </td>
 <td align=right><FONT SIZE=-1  FACE="Arial">
 </td>
-<!-- <td colspan=3><FONT SIZE=-1  FACE="Arial"><input name="sex" type="radio" value="m" onClick="settitle(this);hidecat()" <? if($sex=="m") print "checked"; ?>><?=$LDMale ?>&nbsp;&nbsp;
-<input name="sex" type="radio" value="f" onClick="settitle(this);hidecat()" <? if($sex=="f") print "checked"; ?>><?=$LDFemale ?>
+<!-- <td colspan=3><FONT SIZE=-1  FACE="Arial"><input name="sex" type="radio" value="m" onClick="settitle(this);hidecat()" <?php if($sex=="m") print "checked"; ?>><?php echo $LDMale ?>&nbsp;&nbsp;
+<input name="sex" type="radio" value="f" onClick="settitle(this);hidecat()" <?php if($sex=="f") print "checked"; ?>><?php echo $LDFemale ?>
 </td>
- --><td colspan=3><FONT SIZE=-1  FACE="Arial"><?=$LDSex ?>: <input name="sex" type="radio" value="m" onClick="hidecat()" <? if($sex=="m") print "checked"; ?>><?=$LDMale ?>&nbsp;&nbsp;
-<input name="sex" type="radio" value="f" onClick="hidecat()" <? if($sex=="f") print "checked"; ?>><?=$LDFemale ?>
-</td>
-
-</tr>
-<tr>
-<td><FONT SIZE=-1  FACE="Arial"><? if ($errorname) print "<font color=red>"; ?><?=$LDLastName ?>:
-</td>
-<td colspan=2><input name="name" type="text" size="25" value="<? print $name; ?>" onFocus=hidecat()> 
+ --><td colspan=3><FONT SIZE=-1  FACE="Arial"><?php echo $LDSex ?>: <input name="sex" type="radio" value="m" onClick="hidecat()" <?php if($sex=="m") print "checked"; ?>><?php echo $LDMale ?>&nbsp;&nbsp;
+<input name="sex" type="radio" value="f" onClick="hidecat()" <?php if($sex=="f") print "checked"; ?>><?php echo $LDFemale ?>
 </td>
 
-<td rowspan=4><FONT SIZE=-1  FACE="Arial"><? if ($erroraddress) print "<font color=red>"; ?><?=$LDAddress ?>:<br><textarea rows="5"  cols="23" name="address" onFocus=hidecat()><? print $address; ?></textarea>
+</tr>
+<tr>
+<td><FONT SIZE=-1  FACE="Arial"><?php if ($errorname) print "<font color=red>"; ?><?php echo $LDLastName ?>:
+</td>
+<td colspan=2><input name="name" type="text" size="25" value="<?php print $name; ?>" onFocus=hidecat()> 
+</td>
+
+<td rowspan=4><FONT SIZE=-1  FACE="Arial"><?php if ($erroraddress) print "<font color=red>"; ?><?php echo $LDAddress ?>:<br><textarea rows="5"  cols="23" name="address" onFocus=hidecat()><?php print $address; ?></textarea>
 </td>
 </tr>
 <tr>
-<td><FONT SIZE=-1  FACE="Arial"><? if ($errorvorname) print "<font color=red>"; ?><?=$LDFirstName ?>:
+<td><FONT SIZE=-1  FACE="Arial"><?php if ($errorvorname) print "<font color=red>"; ?><?php echo $LDFirstName ?>:
 </td>
-<td colspan=2><input name="vorname" type="text" size="25" value="<? print $vorname; ?>" onFocus=hidecat()>
-</td>
-</tr>
-<tr>
-<td><FONT SIZE=-1  FACE="Arial"><? if ($errorgebdatum) print "<font color=red>"; ?><?=$LDBday ?>:
-</td>
-<td  colspan=2><input name="geburtsdatum" type="text" size="25" value="<? print $geburtsdatum; ?>" onFocus=hidecat()>
+<td colspan=2><input name="vorname" type="text" size="25" value="<?php print $vorname; ?>" onFocus=hidecat()>
 </td>
 </tr>
 <tr>
-<td><FONT SIZE=-1  FACE="Arial"><? if ($errorphone) print "<font color=red>"; ?><?=$LDPhone ?>:
+<td><FONT SIZE=-1  FACE="Arial"><?php if ($errorgebdatum) print "<font color=red>"; ?><?php echo $LDBday ?>:
 </td>
-<td colspan=2><input name="phone" type="text" size="25" value="<? print $phone; ?>" onFocus=hidecat()>
+<td  colspan=2><input name="geburtsdatum" type="text" size="25" value="<?php print $geburtsdatum; ?>" onFocus=hidecat()>
+</td>
+</tr>
+<tr>
+<td><FONT SIZE=-1  FACE="Arial"><?php if ($errorphone) print "<font color=red>"; ?><?php echo $LDPhone ?>:
+</td>
+<td colspan=2><input name="phone" type="text" size="25" value="<?php print $phone; ?>" onFocus=hidecat()>
 </td>
 </tr>
 <tr>
 <td>
 </td>
-<td  colspan=3><input name="ambu_stat" type="radio"  value="amb" <? if ($ambu_stat=="amb") print "checked"; ?> onFocus=hidecat()><FONT SIZE=-1  FACE="Arial"><? if ($errorstatus) print "<font color=red>"; ?><?=$LDAmbulant ?>  <input name="ambu_stat" type="radio" value="stat" <? if ($ambu_stat=="stat") print "checked"; ?> onFocus=hidecat()><?=$LDStationary ?>
+<td  colspan=3><input name="ambu_stat" type="radio"  value="amb" <?php if ($ambu_stat=="amb") print "checked"; ?> onFocus=hidecat()><FONT SIZE=-1  FACE="Arial"><?php if ($errorstatus) print "<font color=red>"; ?><?php echo $LDAmbulant ?>  <input name="ambu_stat" type="radio" value="stat" <?php if ($ambu_stat=="stat") print "checked"; ?> onFocus=hidecat()><?php echo $LDStationary ?>
 
 </td>
 </tr>
@@ -473,74 +458,74 @@ align=right id=catcom border=0></a>
 <td>
 </td>
 <td colspan=2><FONT SIZE=-1  FACE="Arial">
-<input name="kassetype" type="radio" value="x" <? if ($kassetype=="x") print "checked"; ?> onFocus=hidecat()><? if ($errorkassetype) print "<font color=red>"; ?><?=$LDSelfPay ?>  
+<input name="kassetype" type="radio" value="x" <?php if ($kassetype=="x") print "checked"; ?> onFocus=hidecat()><?php if ($errorkassetype) print "<font color=red>"; ?><?php echo $LDSelfPay ?>  
 &nbsp;<input name="kassetype" type="radio" value="privat" onFocus=hidecat()
-<? if ($kassetype=="privat") print "checked"; ?>><?=$LDPrivate ?> 
+<?php if ($kassetype=="privat") print "checked"; ?>><?php echo $LDPrivate ?> 
 &nbsp;<input name="kassetype" type="radio" value="kasse" onFocus=hidecat()
-<? if ($kassetype=="kasse") print "checked"; ?>><?=$LDInsurance ?>:
-<? if (($errorkassename)and($kassetype=="kasse")) print "<font color=red> >>>>"; ?>
+<?php if ($kassetype=="kasse") print "checked"; ?>><?php echo $LDInsurance ?>:
+<?php if (($errorkassename)and($kassetype=="kasse")) print "<font color=red> >>>>"; ?>
 </td>
-<td><input name="kassename" type="text" size="28" value="<? print $kassename; ?>" onFocus=hidecat()>
-</td>
-</tr>
-<tr>
-<td><FONT SIZE=-1  FACE="Arial"><? if ($errordiagnose) print "<font color=red>"; ?><?=$LDDiagnosis ?>:
-</td>
-<td colspan=3><input name="diagnose" type="text" size="60" value="<? print $diagnose; ?>" onFocus=hidecat()> 
+<td><input name="kassename" type="text" size="28" value="<?php print $kassename; ?>" onFocus=hidecat()>
 </td>
 </tr>
 <tr>
-<td><FONT SIZE=-1  FACE="Arial"><? if ($errorreferrer) print "<font color=red>"; ?><?=$LDRecBy ?>:
+<td><FONT SIZE=-1  FACE="Arial"><?php if ($errordiagnose) print "<font color=red>"; ?><?php echo $LDDiagnosis ?>:
 </td>
-<td colspan=3><input name="referrer" type="text" size="60" value="<? print $referrer; ?>" onFocus=hidecat()>
-</td>
-</tr>
-<tr>
-<td><FONT SIZE=-1  FACE="Arial"><? if ($errortherapie) print "<font color=red>"; ?><?=$LDTherapy ?>:
-</td>
-<td colspan=3><input name="therapie" type="text" size="60" value="<? print $therapie; ?>" onFocus=hidecat()>
+<td colspan=3><input name="diagnose" type="text" size="60" value="<?php print $diagnose; ?>" onFocus=hidecat()> 
 </td>
 </tr>
 <tr>
-<td><FONT SIZE=-1  FACE="Arial"><? if ($errorbesonder) print "<font color=red>"; ?><?=$LDSpecials ?>:
+<td><FONT SIZE=-1  FACE="Arial"><?php if ($errorreferrer) print "<font color=red>"; ?><?php echo $LDRecBy ?>:
 </td>
-<td colspan=3><input name="besonder" type="text" size="60" value="<? print $besonder; ?>" onFocus=hidecat()>
+<td colspan=3><input name="referrer" type="text" size="60" value="<?php print $referrer; ?>" onFocus=hidecat()>
+</td>
+</tr>
+<tr>
+<td><FONT SIZE=-1  FACE="Arial"><?php if ($errortherapie) print "<font color=red>"; ?><?php echo $LDTherapy ?>:
+</td>
+<td colspan=3><input name="therapie" type="text" size="60" value="<?php print $therapie; ?>" onFocus=hidecat()>
+</td>
+</tr>
+<tr>
+<td><FONT SIZE=-1  FACE="Arial"><?php if ($errorbesonder) print "<font color=red>"; ?><?php echo $LDSpecials ?>:
+</td>
+<td colspan=3><input name="besonder" type="text" size="60" value="<?php print $besonder; ?>" onFocus=hidecat()>
 </td>
 </tr>
 
 </table>
 <p>
-<input type=hidden name=itemname value=<? print $itemname; ?>>
-<input type=hidden name=sid value=<? print $ck_sid; ?>>
-<input type=hidden name=linecount value=<? print $linecount; ?>>
-<input type="hidden" name="sdate" value="<?=date("Y.m.d") ?>">
+<input type=hidden name=itemname value=<?php print $itemname; ?>>
+<input type=hidden name=sid value=<?php print $sid; ?>>
+<input type=hidden name=linecount value=<?php print $linecount; ?>>
+<input type="hidden" name="sdate" value="<?php echo date("Y.m.d") ?>">
 <input type="hidden" name="eingaben" value="speichern">
-<input type=hidden name="lang" value="<?print $lang; ?>">
+<input type=hidden name="lang" value="<?php echo $lang; ?>">
 
-<? if($update) print '<input type=hidden name=update value=1>'; ?>
-<input  type="image" src=../img/<?="$lang/$lang" ?>_savedisc.gif border=0 onClick=hidecat() alt="<?=$LDSaveData ?>" align="absmiddle"> 
-<a href="javascript:document.aufnahmeform.reset()"><img src="../img/<?="$lang/$lang" ?>_reset.gif" border="0" alt="<?=$LDResetData ?>" onClick=hidecat()  align="absmiddle"></a>
-<? if($error==1) print '<input type="hidden" name="speichern" value="forcesave">
+<?php if($update) print '<input type=hidden name=update value=1>'; ?>
+<input  type="image" src=../img/<?php echo "$lang/$lang" ?>_savedisc.gif border=0 onClick=hidecat() alt="<?php echo $LDSaveData ?>" align="absmiddle"> 
+<a href="javascript:document.aufnahmeform.reset()"><img src="../img/<?php echo "$lang/$lang" ?>_reset.gif" border="0" alt="<?php echo $LDResetData ?>" onClick=hidecat()  align="absmiddle"></a>
+<?php if($error==1) print '<input type="hidden" name="speichern" value="forcesave">
 								<input  type="submit" value="'.$LDForceSave.'">'; ?>
-<? if($update) 
+<?php if($update) 
 	{ 
 		print '<input type="button" value="'.$LDCancel.'" onClick="location.replace(\'';
-		if($from=="such") print 'aufnahme_daten_such.php?sid='.$ck_sid.'&lang='.$lang;
-			else print 'aufnahme_list.php?sid='.$ck_sid.'&newdata=1&lang='.$lang;
+		if($from=="such") print 'aufnahme_daten_such.php?sid='.$sid.'&lang='.$lang;
+			else print 'aufnahme_list.php?sid='.$sid.'&newdata=1&lang='.$lang;
 		print '\')"> '; 
 	}
 ?>
 </form>
 
-<? if (!($newdata)) : ?>
+<?php if (!($newdata)) : ?>
 
-<form action=<?print $thisfile; ?> method=post>
-<input type=hidden name=sid value=<? print $ck_sid; ?>>
+<form action=<?php echo $thisfile; ?> method=post>
+<input type=hidden name=sid value=<?php print $sid; ?>>
 <input type=hidden name=patnum value="">
-<input type=hidden name="lang" value="<?print $lang; ?>">
-<input type=submit value="<?=$LDNewForm ?>" onClick=hidecat()>
+<input type=hidden name="lang" value="<?php echo $lang; ?>">
+<input type=submit value="<?php echo $LDNewForm ?>" onClick=hidecat()>
 </form>
-<? endif; ?>
+<?php endif; ?>
 
 <p>
 </ul>
@@ -553,26 +538,23 @@ align=right id=catcom border=0></a>
 <p>
 <ul>
 <FONT    SIZE=2  FACE="Arial">
-<img src="../img/varrow.gif" width="20" height="15"> <a href="aufnahme_daten_such.php?sid=<? print "$ck_sid&lang=$lang"; ?>"><?=$LDPatientSearch ?></a><br>
-<img src="../img/varrow.gif" width="20" height="15"> <a href="aufnahme_list.php?sid=<? print "$ck_sid&lang=$lang"; ?>&newdata=1&from=entry"><?=$LDArchive ?></a><br>
-<img src="../img/varrow.gif" width="20" height="15"> <a href="#" onClick="showcat()"><?=$LDCatPls ?><br>
+<img src="../img/varrow.gif" width="20" height="15"> <a href="aufnahme_daten_such.php?sid=<?php print "$sid&lang=$lang"; ?>"><?php echo $LDPatientSearch ?></a><br>
+<img src="../img/varrow.gif" width="20" height="15"> <a href="aufnahme_list.php?sid=<?php print "$sid&lang=$lang"; ?>&newdata=1&from=entry"><?php echo $LDArchive ?></a><br>
+<img src="../img/varrow.gif" width="20" height="15"> <a href="#" onClick="showcat()"><?php echo $LDCatPls ?><br>
 
 <p>
 <a href="
-<? if($ck_login_logged) print 'startframe.php';
+<?php if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) print 'startframe.php';
 	else print 'aufnahme_pass.php';
-	print "?sid=$ck_sid&lang=$lang";
+	print "?sid=$sid&lang=$lang";
 ?>
-"><img border=0 src="../img/<?="$lang/$lang" ?>_cancel.gif" alt="<?=$LDCancelClose ?>"></a>
+"><img border=0 src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" alt="<?php echo $LDCancelClose ?>"></a>
 </ul>
 <p>
 <hr>
 <?php
-require("../language/$lang/".$lang."_copyrite.htm");
+require("../language/$lang/".$lang."_copyrite.php");
  ?>
-
 </FONT>
-
-
 </BODY>
 </HTML>

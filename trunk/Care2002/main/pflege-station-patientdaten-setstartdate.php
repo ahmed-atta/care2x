@@ -1,9 +1,16 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)||!$ck_pflege_user) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_nursing.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+/**
+* CARE 2002 Integrated Hospital Information System beta 1.0.02 - 30.07.2002
+* GNU General Public License
+* Copyright 2002 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+define("LANG_FILE","nursing.php");
+$local_user="ck_pflege_user";
+require("../include/inc_front_chain_lang.php");
 
 switch($winid)
 {
@@ -24,7 +31,7 @@ $yr=date(Y);
 <HTML>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<TITLE><?=$title ?></TITLE>
+<TITLE><?php echo $title ?></TITLE>
 
 <script language="javascript">
 <!-- 
@@ -32,7 +39,7 @@ $yr=date(Y);
 
  function parentrefresh(d)
 {
-	window.opener.location.replace("pflege-station-patientdaten-kurve.php?sid=<?=$ck_sid ?>&station=<?=$station ?>&pn=<?=$pn."&tag=\"+d.day.value+\"&kmonat=\"+d.month.value+\"&jahr=\"+d.year.value+\"&tagname=$tagname&dayback=$dayback\")"; ?>;
+	window.opener.location.replace("pflege-station-patientdaten-kurve.php?sid=<?php echo $sid ?>&station=<?php echo $station ?>&pn=<?php echo $pn."&tag=\"+d.day.value+\"&kmonat=\"+d.month.value+\"&jahr=\"+d.year.value+\"&tagname=$tagname&dayback=$dayback\")"; ?>;
 	window.close();
 	return false;
 }
@@ -47,11 +54,11 @@ div.box { border: double; border-width: thin; width: 100%; border-color: black; 
 
 </HEAD>
 <BODY  bgcolor="#dfdfdf" TEXT="#000000" LINK="#0000FF" VLINK="#800080" 
-onLoad="<? if($saved) print "parentrefresh();"; ?>if (window.focus) window.focus(); window.focus();" >
+onLoad="<?php if($saved) print "parentrefresh();"; ?>if (window.focus) window.focus(); window.focus();" >
 
 <font face=verdana,arial size=3 color=maroon>
 
-<? 
+<?php 
 	print "$LDShowCurveDate <br><b>$title</b>";	
 ?>
 
@@ -60,17 +67,17 @@ onLoad="<? if($saved) print "parentrefresh();"; ?>if (window.focus) window.focus
 
 
 <font face=verdana,arial size=3 >
-<form name="setdateform" action="<?=$thisfile ?>" method="post" onSubmit="return parentrefresh(this);">
+<form name="setdateform" action="<?php echo $thisfile ?>" method="post" onSubmit="return parentrefresh(this);">
 <font face=verdana,arial size=2 >
 <table border=0>
   <tr>
-    <td class="va12_b"><?=$LDDay ?></td>
-    <td class="va12_b"><?=$LDMonth ?></td>
-    <td class="va12_b"><?=$LDYear ?></td>
+    <td class="va12_b"><?php echo $LDDay ?></td>
+    <td class="va12_b"><?php echo $LDMonth ?></td>
+    <td class="va12_b"><?php echo $LDYear ?></td>
   </tr>
   <tr>
     <td><select name="day">
-	<? for($i=1;$i<32;$i++)
+	<?php for($i=1;$i<32;$i++)
 		{
 			print '
         		<option value="'.$i.'" ';
@@ -81,7 +88,7 @@ onLoad="<? if($saved) print "parentrefresh();"; ?>if (window.focus) window.focus
         </select>
         </td>
     <td><select name="month">
- 	<? for($i=1;$i<13;$i++)
+ 	<?php for($i=1;$i<13;$i++)
 		{
 			print '
         		<option value="'.$i.'" ';
@@ -93,7 +100,7 @@ onLoad="<? if($saved) print "parentrefresh();"; ?>if (window.focus) window.focus
         </select>
         </td>
     <td><select name="year">
- 	<? for($i=1999;$i<2011;$i++)
+ 	<?php for($i=1999;$i<2011;$i++)
 		{
 			print '
         		<option value="'.$i.'" ';
@@ -102,7 +109,7 @@ onLoad="<? if($saved) print "parentrefresh();"; ?>if (window.focus) window.focus
 		 }
 	?>
         </select>&nbsp;
-<input type="submit" value="<?="$LDGo" ?>">
+<input type="submit" value="<?php echo "$LDGo" ?>">
         </td>
   </tr>
 </table>
@@ -111,7 +118,7 @@ onLoad="<? if($saved) print "parentrefresh();"; ?>if (window.focus) window.focus
 <p>
 <br>
 &nbsp;<p>
-<a href="javascript:window.close()"><img src="../img/<?="$lang/$lang" ?>_cancel.gif" border="0" alt="<?=$LDClose ?>">
+<a href="javascript:window.close()"><img src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" border="0" alt="<?php echo $LDClose ?>">
 </a>
 
 

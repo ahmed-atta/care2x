@@ -1,10 +1,8 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-if (!$sid||($sid!=$ck_sid)||!$ck_op_pflegelogbuch_user) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_or.php");
-
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+define("LANG_FILE","or.php");
+$local_user="ck_op_pflegelogbuch_user";
+require("../include/inc_front_chain_lang.php");
 $title=$LDOpPersonElements[$winid];
 switch($winid)
 {
@@ -27,13 +25,13 @@ switch($winid)
 	default:{header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 }
 
-require("../req/config-color.php"); // load color preferences
+require("../include/inc_config_color.php"); // load color preferences
 
 $dbtable="personell_data";
 $thisfile="op-pflege-log-getpersonell.php";
-$forwardfile="op-pflege-log-getinfo.php?sid=$ck_sid&lang=$lang&winid=$winid&mode=save&patnum=$patnum&dept=$dept&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday&op_nr=$op_nr";
+$forwardfile="op-pflege-log-getinfo.php?sid=$sid&lang=$lang&winid=$winid&mode=save&patnum=$patnum&dept=$dept&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday&op_nr=$op_nr";
 
-require("../req/db-makelink.php");
+require("../include/inc_db_makelink.php");
 if($link&&$DBLink_OK) 
 	{	
 	// get data if exists
@@ -64,7 +62,7 @@ if($link&&$DBLink_OK)
 <HTML>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<TITLE><?=$title ?></TITLE>
+<TITLE><?php echo $title ?></TITLE>
 
 <script language="javascript">
 <!-- 
@@ -79,7 +77,7 @@ if($link&&$DBLink_OK)
 function savedata(iln,ifn,inx,ipr)
 {
 	x=inx.selectedIndex;
-	//urlholder="<?=$forwardfile ?>&ln="+ln+"&fn="+fn+"&nx="+d[x].value;
+	//urlholder="<?php echo $forwardfile ?>&ln="+ln+"&fn="+fn+"&nx="+d[x].value;
 	//window.location.replace(urlholder);
 	d=document.infoform;
 	d.action="op-pflege-log-getinfo.php";
@@ -93,7 +91,7 @@ function savedata(iln,ifn,inx,ipr)
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
@@ -112,13 +110,13 @@ div.box { border: double; border-width: thin; width: 100%; border-color: black; 
 
 </HEAD>
 <BODY   bgcolor="#cde1ec" TEXT="#000000" LINK="#0000FF" VLINK="#800080" topmargin=2 marginheight=2 
-onLoad="<? if($saved) print "parentrefresh();"; ?>if (window.focus) window.focus(); window.focus();document.infoform.inputdata.focus();" >
-<a href="javascript:gethelp()"><img src="../img/<?="$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 alt="<?=$LDHelp ?>" align="right"></a>
+onLoad="<?php if($saved) print "parentrefresh();"; ?>if (window.focus) window.focus(); window.focus();document.infoform.inputdata.focus();" >
+<a href="javascript:gethelp()"><img src="../img/<?php echo "$lang/$lang" ?>_hilfe-r.gif" border=0 width=75 height=24 alt="<?php echo $LDHelp ?>" align="right"></a>
 
 <form name="infoform" action="op-pflege-log-getpersonell.php" method="post" onSubmit="return pruf(this)">
 <img src="../img/magnify.gif" width=68 height=73 border=0 align=absmiddle><font face=verdana,arial size=5 color=maroon>
 <b>
-<? 
+<?php 
 	print str_replace("~tagword~",$title,$LDSearchPerson)."...";
 	//print $tage[$dyidx]." ($dy".".".$mo.".".$yr.")</font>";
 ?>
@@ -130,31 +128,31 @@ onLoad="<? if($saved) print "parentrefresh();"; ?>if (window.focus) window.focus
     <td>
 <table border=0 width=100% cellspacing=1>
   <tr>
-	<td  align=center bgcolor="#cfcfcf" class="v13_n" colspan=5><?=$LDSearchResult ?>:</td>
+	<td  align=center bgcolor="#cfcfcf" class="v13_n" colspan=5><?php echo $LDSearchResult ?>:</td>
   </tr>
  <tr>
     <td align=center bgcolor="#ffffff" class="v13_n" >
-<?=$LDLastName ?>
+<?php echo $LDLastName ?>
 	</td> 
     <td align=center bgcolor="#ffffff" class="v13_n" >
-<?=$LDName ?>
+<?php echo $LDName ?>
 
 	</td> 
     <td align=center bgcolor="#ffffff"  class="v13_n" >
-<?=$LDJobId ?>
+<?php echo $LDJobId ?>
 
 	</td> 
     <td align=center bgcolor="#ffffff"   class="v13_n" >
-<?="$LDOr $LDFunction" ?>
+<?php echo "$LDOr $LDFunction" ?>
 	</td> 
     <td align=center bgcolor="#ffffff"   class="v13_n" >
 
 	</td> 
   </tr>	
 
-<? if($datafound) : ?>
+<?php if($datafound) : ?>
 
-<? 	$counter=0;
+<?php 	$counter=0;
 		while($result=mysql_fetch_array($ergebnis))
 		{
 			print '
@@ -191,7 +189,7 @@ onLoad="<? if($saved) print "parentrefresh();"; ?>if (window.focus) window.focus
 		}
 ?>
 
-<? else : ?>
+<?php else : ?>
   <tr>
     <td bgcolor="#ffffff"  colspan=5 align=center>
 	
@@ -199,7 +197,7 @@ onLoad="<? if($saved) print "parentrefresh();"; ?>if (window.focus) window.focus
    <tr>
      <td><img src="../img/catr.gif" border=0 width=88 height=80 align=middle> </td>
      <td><font size=3 color=maroon face=verdana,arial>
-	 <?=$LDSorryNotFound ?>
+	 <?php echo $LDSorryNotFound ?>
 	</td>
    </tr>
  </table>
@@ -209,7 +207,7 @@ onLoad="<? if($saved) print "parentrefresh();"; ?>if (window.focus) window.focus
 	</td> 
 
   </tr>	
-<? endif ?>
+<?php endif ?>
 
 
   		<tr>
@@ -219,8 +217,8 @@ onLoad="<? if($saved) print "parentrefresh();"; ?>if (window.focus) window.focus
 		  </tr>
   		<tr>
    			 <td  class="v12"  bgcolor="#ffffff" colspan=5 align=center><br><p>
-			<font size=3><b><?=str_replace("~tagword~",$title,$LDSearchNewPerson) ?>:</b>	<br>
-			 <input type="text" name="inputdata" size=25 maxlength=30><br> <input type="submit" value="<?=$LDSearch ?>"><p><br>
+			<font size=3><b><?php echo str_replace("~tagword~",$title,$LDSearchNewPerson) ?>:</b>	<br>
+			 <input type="text" name="inputdata" size=25 maxlength=30><br> <input type="submit" value="<?php echo $LDSearch ?>"><p><br>
 			 </td>
 
 		  </tr>
@@ -230,19 +228,19 @@ onLoad="<? if($saved) print "parentrefresh();"; ?>if (window.focus) window.focus
   </tr>
 </table>
 
-<input type="hidden" name="encoder" value="<? print $ck_op_pflegelogbuch_user; ?>">
-<input type="hidden" name="sid" value="<?=$ck_sid ?>">
-<input type="hidden" name="lang" value="<?=$lang ?>">
-<input type="hidden" name="winid" value="<?=$winid ?>">
-<input type="hidden" name="pyear" value="<?=$pyear ?>">
-<input type="hidden" name="pmonth" value="<?=$pmonth ?>">
-<input type="hidden" name="pday" value="<?=$pday ?>">
-<input type="hidden" name="dept" value="<?=$dept ?>">
-<input type="hidden" name="saal" value="<?=$saal ?>">
-<input type="hidden" name="op_nr" value="<?=$op_nr ?>">
-<input type="hidden" name="patnum" value="<?=$patnum ?>">
-<input type="hidden" name="title" value="<?=$title ?>">
-<input type="hidden" name="entrycount" value="<?=$entrycount ?>">
+<input type="hidden" name="encoder" value="<?php print $ck_op_pflegelogbuch_user; ?>">
+<input type="hidden" name="sid" value="<?php echo $sid ?>">
+<input type="hidden" name="lang" value="<?php echo $lang ?>">
+<input type="hidden" name="winid" value="<?php echo $winid ?>">
+<input type="hidden" name="pyear" value="<?php echo $pyear ?>">
+<input type="hidden" name="pmonth" value="<?php echo $pmonth ?>">
+<input type="hidden" name="pday" value="<?php echo $pday ?>">
+<input type="hidden" name="dept" value="<?php echo $dept ?>">
+<input type="hidden" name="saal" value="<?php echo $saal ?>">
+<input type="hidden" name="op_nr" value="<?php echo $op_nr ?>">
+<input type="hidden" name="patnum" value="<?php echo $patnum ?>">
+<input type="hidden" name="title" value="<?php echo $title ?>">
+<input type="hidden" name="entrycount" value="<?php echo $entrycount ?>">
 <input type="hidden" name="mode" value="save">
 <input type="hidden" name="ln" value="">
 <input type="hidden" name="fn" value="">
@@ -251,9 +249,9 @@ onLoad="<? if($saved) print "parentrefresh();"; ?>if (window.focus) window.focus
 
 </form>
 <p>
-<a href="<?="op-pflege-log-getinfo.php?sid=$ck_sid&lang=$lang&dept=$dept&saal=$saal&op_nr=$op_nr&patnum=$patnum&pday=$pday&pmonth=$pmonth&pyear=$pyear&winid=$winid";?>"><img src="../img/<?="$lang/$lang" ?>_back2.gif" border="0"  align="left">
+<a href="<?php echo "op-pflege-log-getinfo.php?sid=$sid&lang=$lang&dept=$dept&saal=$saal&op_nr=$op_nr&patnum=$patnum&pday=$pday&pmonth=$pmonth&pyear=$pyear&winid=$winid";?>"><img src="../img/<?php echo "$lang/$lang" ?>_back2.gif" border="0"  align="left">
 </a><a href="javascript:window.close()">
-<img src="../img/<?="$lang/$lang" ?>_cancel.gif" border="0" alt="<?=$LDClose ?>" align="right">
+<img src="../img/<?php echo "$lang/$lang" ?>_cancel.gif" border="0" alt="<?php echo $LDClose ?>" align="right">
 </a>
 
 </BODY>

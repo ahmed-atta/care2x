@@ -1,16 +1,15 @@
-<?
-if(!$lang)
-	if(!$ck_language) include("../chklang.php");
-		else $lang=$ck_language;
-//if (!$sid||($sid!=$ck_sid)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require("../language/".$lang."/lang_".$lang."_drg.php");
-require("../req/config-color.php");
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+define("LANG_FILE","drg.php");
+$local_user="ck_op_pflegelogbuch_user";
+require("../include/inc_front_chain_lang.php");
+require("../include/inc_config_color.php");
 
 $toggle=0;
 
 if($opnr)
 {
-	include("../req/db-makelink.php");
+	include("../include/inc_db_makelink.php");
 	if($link&&$DBLink_OK) 
 	{	
 		$dbtable="nursing_op_logbook";
@@ -36,7 +35,7 @@ if($opnr)
 												$sql="UPDATE $dbtable SET ops_code='$linebuf' WHERE patnum='$pn' AND op_nr='$opnr' AND dept='$dept' AND op_room='$oprm'";
         										if($ergebnis=mysql_query($sql,$link)) 
 												{
-													header("location:drg-ops301.php?sid=$ck_sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=1");
+													header("location:drg-ops301.php?sid=$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=1");
 													exit;
 												}
 												else {print "<p>".$sql."<p>$LDDbNoWrite";};
@@ -63,7 +62,7 @@ if($opnr)
 														$sql="UPDATE $dbtable SET ops_code='$linebuf' WHERE patnum='$pn' AND op_nr='$opnr' AND dept='$dept' AND op_room='$oprm'";
         												if($ergebnis=mysql_query($sql,$link)) 
 														{
-															header("location:$thisfile?sid=$ck_sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=1");
+															header("location:$thisfile?sid=$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=1");
 															exit;
 														}
 														else {print "<p>".$sql."<p>$LDDbNoWrite";};
@@ -86,7 +85,7 @@ if($opnr)
 														$sql="UPDATE $dbtable SET ops_code='$linebuf' WHERE patnum='$pn' AND op_nr='$opnr' AND dept='$dept' AND op_room='$oprm'";
         												if($ergebnis=mysql_query($sql,$link)) 
 														{
-															header("location:$thisfile?sid=$ck_sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=1");
+															header("location:$thisfile?sid=$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=1");
 															exit;
 														}
 														else {print "<p>".$sql."<p>$LDDbNoWrite";};
@@ -119,32 +118,32 @@ function pruf(d)
 function gethelp(x,s,x1,x2,x3)
 {
 	if (!x) x="";
-	urlholder="help-router.php?lang=<?=$lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
+	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
 function openOPSsearch(k,x)
 {
-	urlholder="drg-ops301-search.php?sid=<?="$ck_sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm" ?>&keyword="+k+"&showonly="+x;
-	drgwin_<?=$uid ?>=window.open(urlholder,"drgwin_<?=$uid ?>","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
-	window.drgwin_<?=$uid ?>.moveTo(100,100);
+	urlholder="drg-ops301-search.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm" ?>&keyword="+k+"&showonly="+x;
+	drgwin_<?php echo $uid ?>=window.open(urlholder,"drgwin_<?php echo $uid ?>","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
+	window.drgwin_<?php echo $uid ?>.moveTo(100,100);
 }
 function openQuicklist(t)
 {
-	urlholder="drg-quicklist.php?sid=<?="$ck_sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm" ?>&target="+t;
-	drgwin_<?=$uid ?>=window.open(urlholder,"drgwin_<?=$uid ?>","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
-	window.drgwin_<?=$uid ?>.moveTo(100,100);
+	urlholder="drg-quicklist.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm" ?>&target="+t;
+	drgwin_<?php echo $uid ?>=window.open(urlholder,"drgwin_<?php echo $uid ?>","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
+	window.drgwin_<?php echo $uid ?>.moveTo(100,100);
 }
 function deleteItem(i)
 {
-	if(confirm("<?=$LDAlertSureDelete ?>"))
+	if(confirm("<?php echo $LDAlertSureDelete ?>"))
 	{
-		window.location.href='drg-ops301.php?sid=<?="$ck_sid&lang=$lang&mode=delete&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm&display=$display" ?>&item='+i;
+		window.location.href='drg-ops301.php?sid=<?php echo "$sid&lang=$lang&mode=delete&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm&display=$display" ?>&item='+i;
 	}
 }
 function makeChange(v,i,m)
 {
-	//window.location.replace('<?="$thisfile?sid=$ck_sid&lang=$lang&mode=updatestat&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm&display=$display" ?>&item='+i+'&val='+v);
+	//window.location.replace('<?php echo "$thisfile?sid=$sid&lang=$lang&mode=updatestat&pn=$pn&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept=$dept&oprm=$oprm&display=$display" ?>&item='+i+'&val='+v);
 	document.submitter.val.value=v;
 	document.submitter.itemx.value=i;
 	document.submitter.mode.value=m;
@@ -154,50 +153,49 @@ function makeChange(v,i,m)
 // -->
 </script>
  
-  <? 
-require("../req/css-a-hilitebu.php");
+  <?php 
+require("../include/inc_css_a_hilitebu.php");
 ?>
- <? if($newsave) : ?>
+ <?php if($newsave) : ?>
  <script language="javascript" >
-window.parent.opener.location.href='<?="oploginput.php?sid=$ck_sid&lang=$lang&mode=saveok&patnum=$pn&op_nr=$opnr&dept=$dept&saal=$oprm&pyear=$y&pmonth=$m&pday=$d" ?>';
+window.parent.opener.location.href='<?php echo "oploginput.php?sid=$sid&lang=$lang&mode=saveok&patnum=$pn&op_nr=$opnr&dept=$dept&saal=$oprm&pyear=$y&pmonth=$m&pday=$d" ?>';
 </script>
-<? endif ?>
+<?php endif ?>
 </HEAD>
 
 <BODY 
-<?
-if($display=="composite") print 'topmargin=0 marginheight=0 leftmargin=0 marginwidth=0';
+<?php if($display=="composite") print 'topmargin=0 marginheight=0 leftmargin=0 marginwidth=0';
 else  print 'topmargin=2 marginheight=2';
 ?>
- onLoad="if(window.focus) window.focus()" bgcolor=<? print $cfg['body_bgcolor']; ?>
- bgcolor=<? print $cfg['body_bgcolor']; ?>
-<? if (!$cfg['dhtml']){ print ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+ onLoad="if(window.focus) window.focus()" bgcolor=<?php print $cfg['body_bgcolor']; ?>
+ bgcolor=<?php print $cfg['body_bgcolor']; ?>
+<?php if (!$cfg['dhtml']){ print ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 <form>
-<? if($display!="composite") : ?>
-<a href="javascript:window.history.back()" ><img src="../img/<?="$lang/$lang" ?>_back2.gif" border=0 width=110 height=24 align="right"></a>
+<?php if($display!="composite") : ?>
+<a href="javascript:window.history.back()" ><img src="../img/<?php echo "$lang/$lang" ?>_back2.gif" border=0 width=110 height=24 align="right"></a>
 <FONT    SIZE=3  FACE="verdana,Arial" color="#006600">
-<b><?=$LDOps301 ?></b></font>&nbsp;
-<!--  <input type="button" value="<?=$LDSearch4OPS301 ?>" onClick="javascript:openOPSsearch('','0')">&nbsp;
- <input type="button" value="<?=$LDQuickList ?>" onClick="javascript:openOPSsearch('','0')">
- --><? endif ?>
+<b><?php echo $LDOps301 ?></b></font>&nbsp;
+<!--  <input type="button" value="<?php echo $LDSearch4OPS301 ?>" onClick="javascript:openOPSsearch('','0')">&nbsp;
+ <input type="button" value="<?php echo $LDQuickList ?>" onClick="javascript:openOPSsearch('','0')">
+ --><?php endif ?>
 
 <table border=0 width=100%>
   <tr>
     <td width=100% valign="top">
 	<table border=0 cellpadding=1 cellspacing=1 width=100%> 
 		<tr bgcolor="#009900">
- 		<td><font face=arial size=2 color=#ffffff><b><nobr><?=$LDOps301 ?></nobr></b></td>
- 		<td ><font face=arial size=2 color=#ffffff><b><?=$LDDescription ?></b></td>
- 		<td ><font face=arial size=2 color=#ffffff><b><?=$LDMainAuxOp ?></b></td>
- 		<td ><font face=arial size=2 color=#ffffff><b><?=$LDLocalization ?></b></td>
- 		<td><font face=arial size=2 color=#ffffff><b><?=$LDDoneBy ?></b></td>
-<? if($display=="composite") : ?>
+ 		<td><font face=arial size=2 color=#ffffff><b><nobr><?php echo $LDOps301 ?></nobr></b></td>
+ 		<td ><font face=arial size=2 color=#ffffff><b><?php echo $LDDescription ?></b></td>
+ 		<td ><font face=arial size=2 color=#ffffff><b><?php echo $LDMainAuxOp ?></b></td>
+ 		<td ><font face=arial size=2 color=#ffffff><b><?php echo $LDLocalization ?></b></td>
+ 		<td><font face=arial size=2 color=#ffffff><b><?php echo $LDDoneBy ?></b></td>
+<?php if($display=="composite") : ?>
  		<td><font face=arial size=2 color=#ffffff>&nbsp;</td>
-<? endif ?>
+<?php endif ?>
     	</tr>
 
-<?
-			if ($linecount>0) 
+<?php
+if ($linecount>0) 
 				{ 
 						mysql_data_seek($ergebnis,0);
 						$zeile=mysql_fetch_array($ergebnis);
@@ -222,11 +220,11 @@ else  print 'topmargin=2 marginheight=2';
 								elseif($display=="composite")
 								{
 ?>
-								<select name="opstat_<?=$i ?>"  onChange="makeChange(this.value,'<?=$i ?>','update_stat')">
- 						       	<option value="1" <? if($parsedline[stat]=="1") print "selected"; ?>><?=$LDMain ?></option>
-        						<option value="2" <? if(($parsedline[stat]=="2")||!$parsedline[stat]) print "selected"; ?>><?=$LDAux ?></option>
+								<select name="opstat_<?php echo $i ?>"  onChange="makeChange(this.value,'<?php echo $i ?>','update_stat')">
+ 						       	<option value="1" <?php if($parsedline[stat]=="1") print "selected"; ?>><?php echo $LDMain ?></option>
+        						<option value="2" <?php if(($parsedline[stat]=="2")||!$parsedline[stat]) print "selected"; ?>><?php echo $LDAux ?></option>
         						</select>
-<?								
+<?php
 /*								<font face=arial size=2>'.stripslashes($parsedline[stat]).'
 */								
 								}
@@ -246,14 +244,14 @@ else  print 'topmargin=2 marginheight=2';
 								else
 								{
 ?>
-								<select name="local_<?=$i ?>"  onChange="makeChange(this.value,'<?=$i ?>','update_loc')">
+								<select name="local_<?php echo $i ?>"  onChange="makeChange(this.value,'<?php echo $i ?>','update_loc')">
         						<option value="">  </option>
- 						       	<option value="r" <? if($parsedline[loc]=="r") print "selected"; ?>><?=$LDRight ?></option>
-        						<option value="l" <? if($parsedline[loc]=="l") print "selected"; ?>><?=$LDLeft ?></option>
-        						<option value="b" <? if($parsedline[loc]=="b") print "selected"; ?>><?=$LDBoth ?></option>
+ 						       	<option value="r" <?php if($parsedline[loc]=="r") print "selected"; ?>><?php echo $LDRight ?></option>
+        						<option value="l" <?php if($parsedline[loc]=="l") print "selected"; ?>><?php echo $LDLeft ?></option>
+        						<option value="b" <?php if($parsedline[loc]=="b") print "selected"; ?>><?php echo $LDBoth ?></option>
         						</select>
 								
-<?       
+<?php       
 /*								<font face=arial size=2>'.stripslashes($parsedline[loc]).'
 								*/
 								}
@@ -276,15 +274,15 @@ else  print 'topmargin=2 marginheight=2';
 	</table>
 	
 	</td>
-	<? if($display=="composite") : ?> 	 
+	<?php if($display=="composite") : ?> 	 
 	<td valign="top" bgcolor="#009900"><font face=arial size=2 color=#ffffff>
   
-	<input type="button" value="<?=$LDSearch ?>" onClick="javascript:openOPSsearch('','0')">&nbsp;
- 	<p><input type="button" value="<?=$LDQuickList ?>" onClick="javascript:openQuicklist('ops301')"><p><br><p>
-	<a href="javascript:window.parent.close()" ><img src="../img/<?="$lang/$lang" ?>_close2.gif" border=0 width=103 height=24></a><p>
+	<input type="button" value="<?php echo $LDSearch ?>" onClick="javascript:openOPSsearch('','0')">&nbsp;
+ 	<p><input type="button" value="<?php echo $LDQuickList ?>" onClick="javascript:openQuicklist('ops301')"><p><br><p>
+	<a href="javascript:window.parent.close()" ><img src="../img/<?php echo "$lang/$lang" ?>_close2.gif" border=0 width=103 height=24></a><p>
 
 	</td>
-	<? endif ?>  
+	<?php endif ?>  
 	</tr>
 </table>
 
@@ -294,19 +292,19 @@ else  print 'topmargin=2 marginheight=2';
 <input type="hidden" name="val" value="">
 <input type="hidden" name="itemx" value="">
 <input type="hidden" name="mode" value="">
-<input type="hidden" name="sid" value="<? print $ck_sid; ?>">
-<input type="hidden" name="lang" value="<? print $lang; ?>">
-<input type="hidden" name="pn" value="<? print $pn; ?>">
-<input type="hidden" name="opnr" value="<? print $opnr; ?>">
-<input type="hidden" name="ln" value="<? print $ln; ?>">
-<input type="hidden" name="fn" value="<? print $fn; ?>">
-<input type="hidden" name="bd" value="<? print $bd; ?>">
-<input type="hidden" name="dept" value="<? print $dept; ?>">
-<input type="hidden" name="oprm" value="<? print $oprm; ?>">
-<input type="hidden" name="display" value="<? print $display; ?>">
-<input type="hidden" name="y" value="<? print $y; ?>">
-<input type="hidden" name="m" value="<? print $m; ?>">
-<input type="hidden" name="d" value="<? print $d; ?>">
+<input type="hidden" name="sid" value="<?php print $sid; ?>">
+<input type="hidden" name="lang" value="<?php print $lang; ?>">
+<input type="hidden" name="pn" value="<?php print $pn; ?>">
+<input type="hidden" name="opnr" value="<?php print $opnr; ?>">
+<input type="hidden" name="ln" value="<?php print $ln; ?>">
+<input type="hidden" name="fn" value="<?php print $fn; ?>">
+<input type="hidden" name="bd" value="<?php print $bd; ?>">
+<input type="hidden" name="dept" value="<?php print $dept; ?>">
+<input type="hidden" name="oprm" value="<?php print $oprm; ?>">
+<input type="hidden" name="display" value="<?php print $display; ?>">
+<input type="hidden" name="y" value="<?php print $y; ?>">
+<input type="hidden" name="m" value="<?php print $m; ?>">
+<input type="hidden" name="d" value="<?php print $d; ?>">
 </form>
 
 </FONT>

@@ -18,10 +18,10 @@
 
 
 <FONT    SIZE=1 >
-<a href="ucons.php">Was ist MEDOCS</a> |
-<a href="ucons.php">Was kann MEDOCS</a> |
-<a href="ucons.php">Wie benutze ich MEDOCS</a> |
-<a href="ucons.php">Was mache ich, wenn...</a> 
+<a href="ucons.php<?php echo "?lang=$lang" ?>">Was ist MEDOCS</a> |
+<a href="ucons.php<?php echo "?lang=$lang" ?>">Was kann MEDOCS</a> |
+<a href="ucons.php<?php echo "?lang=$lang" ?>">Wie benutze ich MEDOCS</a> |
+<a href="ucons.php<?php echo "?lang=$lang" ?>">Was mache ich, wenn...</a> 
 
 </FONT>
 

@@ -1,6 +1,5 @@
-<?
-if(($sid==NULL)||($sid!=$ck_sid)) { header("location:invalid-access-warning.php"); exit;}
-require("../req/config-color.php");
+<?php if(($sid==NULL)||($sid!=$$ck_sid_buffer)) { header("location:invalid-access-warning.php"); exit;}
+require("../include/inc_config_color.php");
 
 
 //create unique id
@@ -41,39 +40,39 @@ $visits=array("12.30 - 15.00 , 19.00 - 21.00", //Mo
 <!-- 
 var urlholder;
 function gotostat(station){
-	urlholder="pflege-station.php?station=" + station + "&sid=<? print $ck_sid.'"' ?>;
+	urlholder="pflege-station.php?station=" + station + "&sid=<?php print $$ck_sid_buffer.'"' ?>;
 	stationwin=window.open(urlholder,station,"width=800,menubar=no,resizable=yes,scrollbars=yes");
 	}
 
 function closewin()
 {
-	location.href='startframe.php?sid=<?print $ck_sid.'&uid='.$r;?>';
+	location.href='startframe.php?sid=<?php echo $$ck_sid_buffer.'&uid='.$r;?>';
 }
 // -->
 </script>
 
-<?
-require("../req/css-a-hilitebu.php");
+<?php
+require("../include/inc_css_a_hilitebu.php");
 ?>
 
 </HEAD>
 
 <BODY  topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<? if (!$cfg['dhtml']){ print 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } 
+<?php if (!$cfg['dhtml']){ print 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } 
  if($idxreload=="j") print " onLoad=window.parent.STARTPAGE.location.replace('indexframe.php?uid=".$r."');";?> >
 
 <table width=100% border=0 cellspacing=0 cellpadding="0" height=100%>
 
 <tr valign=top height=45>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="10" >
-<FONT  COLOR="<? print $cfg['top_txtcolor']; ?>"  SIZE=+3  FACE="Arial">
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" >
+<FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+3  FACE="Arial">
 <STRONG>&nbsp; &nbsp; Ausbildung</STRONG></FONT></td>
-<td bgcolor="<? print $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?if($cfg['dhtml'])print'<a href="#" onClick=history.back(1)><img src="../img/zuruck.gif" border=0 style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
-<a href="#"><img src="../img/hilfe.gif" border=0  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
-<a href="startframe.php?sid=<?print $ck_sid;?>"><img src="../img/fenszu.gif" border=0  <?if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td></tr>
+<td bgcolor="<?php print $cfg['top_bgcolor']; ?>" height="10" align=right>
+<?php if($cfg['dhtml'])print'<a href="#" onClick=history.back(1)><img src="../img/zuruck.gif" border=0 style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
+<a href="#"><img src="../img/hilfe.gif" border=0  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
+<a href="startframe.php?sid=<?php echo $$ck_sid_buffer;?>"><img src="../img/fenszu.gif" border=0  <?php if($cfg['dhtml'])print'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td></tr>
 <tr valign=top >
-<td bgcolor=<? print $cfg['body_bgcolor']; ?> valign=top colspan=2><p><br>
+<td bgcolor=<?php print $cfg['body_bgcolor']; ?> valign=top colspan=2><p><br>
 <ul>
 <FONT    SIZE=-1  FACE="Arial">
 
@@ -87,7 +86,7 @@ require("../req/css-a-hilitebu.php");
 	  <td><font face="Verdana,arial" size=2><b>Kurzinfo</b></font></td>
       <td><font face="Verdana,arial" size=2><b>Termin(e)</b></font></td>
     </tr>
-<? for ($i=0;$i<sizeof($dept);$i++){
+<?php for ($i=0;$i<sizeof($dept);$i++){
 print '<tr bgcolor=#ffffff><td><font face=verdana,arial size=2> '.$dept[$i].'</td>
 		<td><font face=verdana,arial size=2><a href="#"><img src="../img/info.gif" border=0 alt="Click für mehr Info über die Ausbildung."></a></td>		
 		<td><font face=verdana,arial size=2> Info über die Veranstaltung</td>
@@ -115,9 +114,9 @@ print "\r\n";
 </tr>
 
 <tr valign=top>
-<td bgcolor="<? print $cfg['bot_bgcolor']; ?>" colspan=2> 
+<td bgcolor="<?php print $cfg['bot_bgcolor']; ?>" colspan=2> 
 <?php
-require("../language/$lang/".$lang."_copyrite.htm");
+require("../language/$lang/".$lang."_copyrite.php");
  ?>
 </td>
 </tr>
