@@ -78,8 +78,8 @@ echo '
   
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
 <tr>
-<td colspan=3><?php if($target=="personell_reg") echo '<img '.createLDImgSrc($root_path,'employment_blue.gif','0').' alt="'.$LDAdmit.'">';
-								else{ echo'<a href="'.$thisfile.URL_APPEND.'&target=personell_reg"><img '.createLDImgSrc($root_path,'employment_gray.gif','0').' alt="'.$LDAdmit.'"'; if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';}
+<td colspan=3><?php if($target=="personell_reg") echo '<img '.createLDImgSrc($root_path,'add_employee_blue.gif','0').' alt="'.$LDAdmit.'">';
+								else{ echo'<a href="'.$thisfile.URL_APPEND.'&target=personell_reg"><img '.createLDImgSrc($root_path,'add_employee_gray.gif','0').' alt="'.$LDAdmit.'"'; if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';}
 							if($target=="personell_search") echo '<img '.createLDImgSrc($root_path,'src_emp_blu.gif','0').' alt="'.$LDSearch.'">';
 								else{ echo '<a href="'.$thisfile.URL_APPEND.'&target=personell_search"><img '.createLDImgSrc($root_path,'src_emp_gray.gif','0').' alt="'.$LDSearch.'" ';if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';}
 							if($target=="personell_listall") echo '<img '.createLDImgSrc($root_path,'lista-blu.gif','0').' alt="'.$LDSearch.'">';
