@@ -177,7 +177,7 @@ for($i=0;$i<(sizeof($fieldnames));$i++)
 Copyright &copy; 2000 by Elpidio Latorilla<p>
 All programs and scripts are not to be copied nor modified without permission from Elpidio Latorilla.<br>
 If you want to use the scripts or some of the scripts used here for your own purposes
-please contact Elpidio Latorilla at <a href=mailto:elpidio@latorilla.com>elpidio@latorilla.com</a>.
+please contact Elpidio Latorilla at <a href=mailto:elpidio@care2x.net, elpidio@care2x.org>elpidio@care2x.net, elpidio@care2x.org</a>.
 </FONT>
 
 

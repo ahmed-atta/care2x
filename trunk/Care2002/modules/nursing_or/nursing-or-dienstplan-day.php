@@ -6,7 +6,7 @@ require($root_path.'include/inc_environment_global.php');
 * CARE 2X Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@latorilla.com
+* elpidio@care2x.net, elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
 */
