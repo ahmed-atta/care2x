@@ -199,4 +199,38 @@ $LDDisplay2='Display 2';
 $LDDisplay2Txt='Switch over to the display with the menu on a floating frame. ';
 
 $LDNewPwDiffer='The new passwords differ from each other.<br> Please enter the new password again.';
+/* 2003-03-22 EL*/
+$LDPersonellMngmnt='Personnel Manager';
+$LDPersonellMngmntTxt='Tools and functions for managing personnel';
+/* 2003-04-25 EL */
+$LDBilling='eCombill';
+$LDBillingTxt='Bill patient, create billable items, generate bill reports, etc.';
+$LDInsuranceCoMngr='Insurance Co. Manager';
+$LDInsuranceCoMngrTxt='Enter new, edit insurance company data';
+$LDAddressMngr='Address Manager';
+$LDAddressMngrTxt='Enter, list, edit, & update address data';
+/* 2003-05-18 EL */
+$LDUserConfigOpt='Configuration options';
+$LDUserConfigOptTxt='User options for background & text colors, mascots, avatar, etc.';
+$LDMascotOpt='Mascot options';
+$LDMascotOptTxt='Hide, show, or select prompt mascots.';
+$LDMascot='Mascot';
+$LDSampleMascot='Sample mascots';
+/* 2003-04-24 EL*/
+$LDGUITemplate='GUI Template option';
+$LDGUITemplateTxt='Select a GUI (graphic user interface) template';
+$LDGUITheme='GUI Theme';
+$LDTheme='Theme';
+# 2002-08-10
+$LDLastName='Family name';
+$LDWantUpload='I want to upload';
+$LDImage='image(s)';
+# 2002-01-18 EL
+$LDTicketedSupport='Ticketed Support';
+$LDTicketedSupportTxt='Send a ticketed request to the project\'s online support';
+$LDNewsgroup='Newsgroup';
+$LDNewsgroupTxt='Newsgroup mirroring the developers\' mailing list.';
+# 2002-08-19 EL
+$LDPharmaIndex='Pharma Index';
+$LDPharmaIndexTxt='Pharmaceutical indexes like Redlist, IFAP, NIMS, or PIMS';
 ?>
