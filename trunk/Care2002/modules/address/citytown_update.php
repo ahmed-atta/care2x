@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
 * Copyright 2002,2003,2004,2005 Elpidio Latorilla
-* elpidio@care2x.org, elpidio@care2x.net
+* elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -101,7 +101,21 @@ if(!empty($mode)){
 <?php 
 } 
 ?>
-<form action="<?php echo $thisfile; ?>" method="post" name="citytown" >
+<script language="javascript">
+<!--
+function check(d)
+{
+	if(isNaN(d.unece_locode_type.value)){
+		alert("UNECE location code type accepts only numbers between 0 and 99.\nIf you do not know the value please enter 0.");
+		return false;
+	}else{
+		return true;
+	}
+}
+// -->
+</script>
+
+<form action="<?php echo $thisfile; ?>" method="post" name="citytown"  onSubmit="return check(this)">
 <table border=0>
   <tr>
     <td align=right class="adm_item"><?php echo $LDCityTownName ?>: </td>

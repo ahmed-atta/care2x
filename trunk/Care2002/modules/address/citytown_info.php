@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
 * Copyright 2002,2003,2004,2005 Elpidio Latorilla
-* elpidio@care2x.org, elpidio@care2x.net
+* elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -21,7 +21,7 @@ switch($retpath)
 {
 	case 'list': $breakfile='citytown_list.php'.URL_APPEND; break;
 	case 'search': $breakfile='citytown_search.php'.URL_APPEND; break;
-	default: $breakfile='citytown_manage.php'.URL_APPEND; 
+	default: $breakfile='address_manage.php'.URL_APPEND; 
 }
 
 if(isset($nr)&&$nr&&($row=&$address_obj->getCityTownInfo($nr))){

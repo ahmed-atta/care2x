@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
 * Copyright 2002,2003,2004,2005 Elpidio Latorilla
-* elpidio@care2x.org, elpidio@care2x.net
+* elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -16,6 +16,8 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 # Load the insurance object
 require_once($root_path.'include/care_api_classes/class_address.php');
 $address_obj=new Address;
+
+//$db->debug=1;
 
 switch($retpath)
 {
@@ -32,18 +34,28 @@ if(!isset($mode)){
 	{
 		case 'save':
 		{
+			#
 			# Validate important data
+			#
 			$HTTP_POST_VARS['name']=trim($HTTP_POST_VARS['name']);
 			if(!empty($HTTP_POST_VARS['name'])){
+				#
 				# Check if address exists
+				#
 				if($address_obj->CityTownExists($HTTP_POST_VARS['name'],$HTTP_POST_VARS['iso_country_id'])){
-					# Do notification 
+					#
+					# Do notification
+					#
 					$mode='citytown_exists';
 				}else{
 					if($address_obj->saveCityTownInfoFromArray($HTTP_POST_VARS)){
+						#
 						# Get the last insert ID
+						#
 						$insid=$db->Insert_ID();
+						#
 						# Resolve the ID to the primary key
+						#
 						$nr=$address_obj->LastInsertPK('nr',$insid);
 
     					header("location:citytown_info.php?sid=$sid&lang=$lang&nr=$nr&mode=show&save_ok=1&retpath=$retpath");
@@ -92,6 +104,14 @@ function check(d)
 	if((d.name.value=="")){
 		alert("<?php echo "$LDAlertNoCityTownName \\n $LDPlsEnterInfo"; ?>");
 		d.name.focus();
+		return false;
+	}else if(d.iso_country_id.value==""){
+		alert("<?php echo $LDEnterISOCountryCode.'\n'.$LDEnterQMark; ?>");
+		d.iso_country_id.focus();
+		return false;
+	}else if(isNaN(d.unece_locode_type.value)){
+		alert("<?php echo $LDWrongUneceLocCode.'\n'.$LDEnterZero; ?>");
+		d.unece_locode_type.focus();
 		return false;
 	}else{
 		return true;
