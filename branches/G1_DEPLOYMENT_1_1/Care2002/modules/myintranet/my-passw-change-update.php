@@ -28,7 +28,7 @@ if($dblink_ok)
 								if($m<10) $m='0'.$m;
 								$xd="$y-$m-".date('d');
 						
-								$sql="UPDATE care_users SET	password='$n', expire_date='$xd'  WHERE login_id='$userid'";
+								$sql="UPDATE care_users SET	password='".md5($n)."', expire_date='$xd'  WHERE login_id='$userid'";
 							
 								if($db->Execute($sql))
 								{ 
