@@ -1,21 +1,21 @@
 <?php
-$indextag=array('Página Inicial',
+$indextag=array('Pág. Inicial',
 				'Admissão',
 				'Ambulatório',
-				'Documentação Médica',
+				'Doc. Médicos',
 				'Médicos',
 				'Enfermagem',
-				'Bloco Operatório',
+				'Bl. Operatório',
 				'Laboratórios',
 				'Radiologia',
 				'Farmácia',
 				'Medicamentos',
 				'Directório',
 				'Suporte Técnico',
-				'Admininistração do Sistema',
+				'Admin. Sistema',
 				'Intranet Email',
 				'Internet Email',
-				'Funcionalidades Especiais',
+				'Func. Especiais',
 				'Iniciar Sessão'
 				);
 
