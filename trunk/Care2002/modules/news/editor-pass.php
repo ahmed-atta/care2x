@@ -2,6 +2,14 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
+/**
+* CARE 2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
+* GNU General Public License
+* Copyright 2002,2003,2004 Elpidio Latorilla
+* elpidio@latorilla.com
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
 
 define('LANG_FILE','stdpass.php');
 define('NO_2LEVEL_CHK',1);
@@ -17,15 +25,18 @@ $default_forward=$root_path.'modules/news/editor-4plus1-select-art.php';
 
 $default_breakfile='newscolumns.php'.URL_APPEND;
 
-/* Filter probable errors in navigation */
+# Filter probable errors in navigation
 if(!isset($HTTP_SESSION_VARS['sess_file_editor']) || empty($HTTP_SESSION_VARS['sess_file_editor'])) $fileforward=$default_forward.URL_REDIRECT_APPEND;
    else $fileforward=$HTTP_SESSION_VARS['sess_file_editor'].URL_REDIRECT_APPEND;
 
 if(!isset($HTTP_SESSION_VARS['sess_file_break']) || empty($HTTP_SESSION_VARS['sess_file_break'])) $breakfile=$default_breakfile.URL_APPEND;
    else $breakfile=$root_path.$HTTP_SESSION_VARS['sess_file_break'].URL_APPEND;
 
-   
-$title= (!empty($title)) ? $title : $HTTP_SESSION_VARS['sess_title']; 
+# Filter dept_nr if available save to session, else use default department = 1, public relations headline news
+if(isset($dept_nr)&&$dept_nr) $HTTP_SESSION_VARS['sess_dept_nr']=$dept_nr;
+	else $HTTP_SESSION_VARS['sess_dept_nr']=1; # Headline news
+# Filter title, if no supplied, use session stored title
+$title= (empty($title)) ? $HTTP_SESSION_VARS['sess_title'] : $title ; 
    
 $lognote="$title+editor";
 $userck="ck_editor_user";					
@@ -38,13 +49,14 @@ $thisfile=basename(__FILE__);
 $passtag=0;
 
 //reset cookie;
-// reset all 2nd level lock cookies
+# reset all 2nd level lock cookies
 require($root_path.'include/inc_2level_reset.php'); 
 setcookie('ck_2level_sid'.$sid,"");
 
+# Check if the user is logged in globally
 require($root_path.'include/inc_passcheck_internchk.php');
-if (isset($pass) &&  ($pass=='check')) 	
-	include($root_path.'include/inc_passcheck.php');
+# If not logged in globally, check authentication
+if (isset($pass) &&  ($pass=='check')) 	include($root_path.'include/inc_passcheck.php');
 
 $errbuf=strtr($lognote,"+"," ");
 
@@ -81,14 +93,10 @@ require($root_path.'include/inc_passcheck_head.php');
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo $LDIntroTo." ".$title ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo $LDWhatTo." ".$title ?>?</a><br>
  -->
- <HR>
 <?php
-if(file_exists($root_path.'language/'.$lang.'/'.$lang.'_copyrite.php'))
-include($root_path.'language/'.$lang.'/'.$lang.'_copyrite.php');
-  else include($root_path.'language/en/en_copyrite.php');?>
-
+require($root_path.'include/inc_load_copyrite.php');
+?>
 </FONT>
-
 
 </BODY>
 </HTML>
