@@ -90,7 +90,8 @@ require_once($root_path.'include/inc_environment_global.php');
 		  <P>
 			<b>Timon Royer (DE) </b>
 			<p>
-			Timon hat den "Care2x-Knoppix" Desktop-Hintergrund erstellt und dem Projekt zur freien Verfügung gestellt.
+			Timon hat einen Original "Knoppix" Desktop-Hintergrund von Michael Kleinhenz <a href="mailto:info@kleinhenz.net"><u>info@kleinhenz.net</u></a>verwendet und<br>
+			für Care2x angepasst. Der Hintergrund ist zur freien Verfügung freigegeben.
 			<P><a href="mailto:timon@plasmata.com"><u>Timon Royer kann hier kontaktiert werden.</u></a>
 </TD></TR></TBODY></TABLE>
 
@@ -133,9 +134,9 @@ require_once($root_path.'include/inc_environment_global.php');
 			Trägt u.a. folgendes zu dem Projekt bei:
 			<p><font size=1>
 		     Verwaltung und Hosting von:<br>
-			 www.care2x.de<br>News Server, OTRS Support System<br>
-			 Promotion, Pressearbeit<br>
-			 Beratung
+			 www.care2x.de<br>News Server, OTRS Support System,<br>
+			 Promotion, Pressearbeit, Aufbau eines Wissenschaftsbereiches<br>
+			 Jabber-Kommunikationsserver Integrierung, Beratung
 			<p>
 			</font>
 			Beruf: Arzt, Zusatzausbildung Medizininformatik

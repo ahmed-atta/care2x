@@ -333,7 +333,7 @@ Despite the fact that he is neither working in medical nor in health sector, he 
 		     Hosting and admin of:<br>
 			 www.care2x.de<br>News Server, OTRS Support System<br>
 			 Promotion, Press relation<br>
-			 Consultation
+			 Jabber Communication Server, Consultation
 			<p>
 			</font>
 			Profession: Physician, with additional Medical Informatics degree
