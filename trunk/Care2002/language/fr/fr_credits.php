@@ -36,7 +36,7 @@ require_once('../../include/inc_vars_resolve.php');
 			<P><img src="../../gui/img/control/default/fr/fr_x-blank.gif" width=135 border=0  align=right vspace=10>
 			<b>La traduction française de Care 2002 était réalisée par Matej Hausenblas.</b>
 			
-			<P><a href="mailto:pgomariz@ono.com"><u>Matej Hausenblas  peut être  contacté ici..</u></a>
+			<P><a href="mailto:matejh@users.sourceforge.net"><u>Matej Hausenblas  peut être  contacté ici..</u></a>
 </TD></TR></TBODY></TABLE>
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
