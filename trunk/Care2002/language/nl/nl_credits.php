@@ -15,6 +15,30 @@ require_once($root_path.'include/inc_environment_global.php');
         <TBODY>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
+			<b>Erik de Wild (NL)</b>
+			<p>
+			Erik made the initial  translations to Dutch language.
+
+			<P><a href="mailto:kalbun@inwind.it"><u>Erik de Wild can be contacted here.</u></a>
+</TD></TR></TBODY></TABLE>
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+			<b>Peter Bartels (NL)</b>
+			<p>
+			Peter, with the help of his company Inconel, made a large portion of the language translations to Dutch. 
+			His company is also actively marketing Care2x in the Netherlands.
+
+			<P><a href="mailto:kalbun@inwind.it"><u>Peter Bartels can be contacted here.</u></a>
+</TD></TR></TBODY></TABLE>
+
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/elpidio_latorilla_3.jpg" border=0  align=right vspace=10>
 			<b>De eerste beta versie van Care2x is ontwikkeld door Elpidio Latorilla:</b>
 			<p>
