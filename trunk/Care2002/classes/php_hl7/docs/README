@@ -11,8 +11,6 @@ Contents
 2.0 Usage
 2.1 Creating messages
 2.2 Sending/receiving
-2.3 Other modules and this API
-3.0 History
 
 
 1.0 Introduction
@@ -36,13 +34,58 @@ versions untill 3.x. This API does not do XML!
 2.1 Creating messages
 ---------------------
 
+To create an HL7 message, simply do this:
+
+$msg =& new Net_HL7_Message();
+
+this gives you an empty message, that doesn't containt ANY segments
+(not even the header segment). You might also have a string
+representation of your message at hand, in which case you can do this:
+
+$msg =& new Net_HL7_Message(<your string>);
+
+Make sure to escape any characters that have special meaning in PHP!
+
 
 2.2 Sending/receiving
 ---------------------
 
+A full example of sending and receiving a message is listed here,
+assuming you have an HL7 server on your localhost, listening to port
+12002 (you might want to use the hl7d from the Perl HL7 Toolkit
+package as a simple test server; http://hl7toolkit.sourceforge.net/):
 
-3.0 History
------------
+<?php
+require_once "Net/HL7/Segments/MSH.php";
+require_once "Net/HL7/Request.php";
+require_once "Net/HL7/Connection.php";
 
-version 0.10:
-* Initial version
+$msg  =& new Net_HL7_Request();
+$msg->addSegment(new Net_HL7_Segments_MSH());
+
+$seg1 = new Net_HL7_Segment("PID");
+
+$seg1->setField(3, "XXX");
+
+$msg->addSegment($seg1);
+
+echo "Trying to connect";
+
+$conn = new Net_HL7_Connection("localhost", 12002);
+
+if (! $conn) {
+	echo "Couldn't connect!";
+	exit -1;
+}
+
+echo "Sending message\n" . $msg->toString(1);
+
+$resp = $conn->send($msg);
+
+$resp || exit -1;
+
+echo "Received answer\n" . $resp->toString(1);
+
+$conn->close();
+?>
+

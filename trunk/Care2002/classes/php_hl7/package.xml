@@ -1,28 +1,39 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE package SYSTEM "http://pear.php.net/dtd/package-1.0">
+
 <package version="1.0">
  <name>Net_HL7</name>
  <summary>HL7 messaging API.</summary>
  <description>
-	This package provides an HL7 API for PHP. The focus of this API is 
-	on providing the HL7 wrapping and composing of messages, not providing 
-	hundreds of prefabHL7 messages.
-	The package is a word to word translation of the Perl HL7 toolkit,
-	and will be kept in sync with this initiative.
- </description>
- <license>LGPL</license>
- <maintainers>
+
+   This package provides an HL7 API for creating, sending and
+   manipulating HL7 messages. HL7 is a protocol on the 7th OSI layer
+   (hence the '7' in HL7) for messaging in Health Care
+   environments. HL7 means 'Health Level 7'. HL7 is a protocol with a
+   wealth of semantics that defines hundreds of different messages and
+   their meaning, but also defines the syntactics of composing and
+   sending messages.  The API is focused on the syntactic level of
+   HL7, so as to remain as flexible as possible. The package is a
+   translation of the Perl HL7 Toolkit and will be kept in sync with
+   this initiative.
+
+</description>
+
+<license>PHP License</license> 
+
+<maintainers> 
   <maintainer>
-   <user>ddokter</user>
-   <name>D.A.Dokter</name>
-   <email>dokter@w20e.com</email>
-   <role>lead</role>
+    <user>ddokter</user> 
+    <name>D.A.Dokter</name>
+    <email>dokter@w20e.com</email> 
+    <role>lead</role> 
   </maintainer>
- </maintainers>
+</maintainers>
 
  <release>
   <version>0.10</version>
   <date>2004-06-01</date>
-  <state>unstable</state>
+  <state>beta</state>
   <notes>
    This is the first release.
   </notes>
@@ -38,22 +49,24 @@
       <file>Connection.php</file>
     </dir>
     <dir name="Net/HL7/Segments" role="php">
-     <file>MSH.php</file>
+      <file>MSH.php</file>
+    </dir>
+    <dir name="Net/HL7/Messages" role="php">
+      <file>ACK.php</file>
     </dir>
     <dir name="docs" role="doc">
-     <file>README</file>
-     <dir name="examples" role="doc">
-     </dir>
+      <file>README</file>
     </dir>
-   </dir>
-   <dir name="tests" role="test">
-     <file name="test_base.phpt"/>
-     <file name="segment.phpt"/>
-     <file name="message.phpt"/>
-     <file name="msh.phpt"/>
-     <file name="ack.phpt"/>
-     <file name="connection.phpt"/>
-   </dir>
+    <dir name="examples" role="doc">
+    </dir>
+    <dir name="tests" role="test">
+      <file name="test_base.php"/>
+      <file name="segment.phpt"/>
+      <file name="message.phpt"/>
+      <file name="msh.phpt"/>
+      <file name="ack.phpt"/>
+      <file name="connection.phpt"/>
+    </dir>
   </filelist>
  </release>
 </package>
