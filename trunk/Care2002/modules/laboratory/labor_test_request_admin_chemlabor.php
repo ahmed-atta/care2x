@@ -15,9 +15,6 @@ require($root_path.'include/inc_environment_global.php');
 $lang_tables=array('departments.php','konsil.php');
 define('LANG_FILE','konsil_chemlabor.php');
 
-/* Globalize the variables */
-
-
 /* We need to differentiate from where the user is coming: 
 *  $user_origin != lab ;  from patient charts folder
 *  $user_origin == lab ;  from the laboratory
@@ -25,14 +22,16 @@ define('LANG_FILE','konsil_chemlabor.php');
 */
 
 if($user_origin=='lab'){
-  $local_user='ck_lab_user';
-  $breakfile=$root_path."modules/laboratory/labor.php".URL_APPEND;
+	$local_user='ck_lab_user';
+	$breakfile=$root_path."modules/laboratory/labor.php".URL_APPEND;
+}elseif($user_origin=='amb'){
+	$local_user='ck_lab_user';
+	$breakfile=$root_path.'modules/ambulatory/ambulatory.php'.URL_APPEND;
 }else{
-  $local_user='ck_pflege_user';
-  $breakfile=$root_path."modules/nursing/nursing-station-patientdaten.php".URL_APPEND."&edit=$edit&station=$station&pn=$pn";
+	$local_user='ck_pflege_user';
+	$breakfile=$root_path."modules/nursing/nursing-station-patientdaten.php".URL_APPEND."&edit=$edit&station=$station&pn=$pn";
 }
 require_once($root_path.'include/inc_front_chain_lang.php'); ///* invoke the script lock*/
-require_once($root_path.'include/inc_config_color.php'); ///* load color preferences*/
 
 $thisfile='labor_test_request_admin_chemlabor.php';
 

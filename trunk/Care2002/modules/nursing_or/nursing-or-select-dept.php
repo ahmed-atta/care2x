@@ -28,7 +28,7 @@ switch($HTTP_SESSION_VARS['sess_user_origin'])
 	default:
 		$local_user='ck_op_dienstplan_user';
 		if (!empty($HTTP_SESSION_VARS['sess_path_referer'])){
-			$breakfile=$root_path.$HTTP_SESSION_VARS['sess_path_referer'];
+			$breakfile=$root_path.$HTTP_SESSION_VARS['sess_path_referer'].URL_APPEND;
 		} else {
 			/* default startpage */
 			$breakfile = $root_path.'op-doku.php'.URL_APPEND;
@@ -36,7 +36,6 @@ switch($HTTP_SESSION_VARS['sess_user_origin'])
 }
 
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
 /*
 switch($retpath)

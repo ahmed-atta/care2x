@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -16,15 +16,14 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 // Erase all cookies used for 2nd level script locking, all following scripst will be locked
 // reset all 2nd level lock cookies
 require($root_path.'include/inc_2level_reset.php');
-//if(isset($HTTP_COOKIE_VARS['ck_doctors_dienstplan_user'.$sid])) setcookie('ck_doctors_dienstplan_user'.$sid,'',0,'/');
-require_once($root_path.'include/inc_config_color.php');
 
 if(!session_is_registered('sess_path_referer')) session_register('sess_path_referer');
+if(!session_is_registered('sess_user_origin')) session_register('sess_user_origin');
 
 $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 
 $HTTP_SESSION_VARS['sess_path_referer']=$top_dir.basename(__FILE__);
-
+$HTTP_SESSION_VARS['sess_user_origin']='pharma';
 
 ?>
 
@@ -105,7 +104,8 @@ require($root_path.'include/inc_css_a_hilitebu.php');
  			 <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'templates.gif','0') ?>></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B> 
-   				<a href="<?php echo $root_path; ?>modules/products/products-bestellkatalog-edit.php<?php echo URL_APPEND; ?>&cat=pharma"><?php echo $LDOrderCat ?></a></B></FONT></TD>
+   				<a href="apotheke-pass.php<?php echo URL_APPEND; ?>&mode=catalog"><?php echo $LDOrderCat ?></a>
+				</B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><nobr><?php echo $LDOrderCatTxt ?></nobr></FONT></TD></TR>
                <TR bgColor=#dddddd height=1>
@@ -131,15 +131,38 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php echo $LDPharmaDbTxt ?></FONT></TD></TR>
+				  
+				<TR bgColor=#dddddd height=1>
+                <TD colSpan=3><IMG height=1 
+                  src="../../gui/img/common/default/pixel.gif" 
+                  width=5></TD></TR>
+              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'templates.gif','0') ?> align="absmiddle"></td>
+                <TD vAlign=top ><FONT 
+                  face="Verdana,Helvetica,Arial" size=2><B>
+				 <a href="http://www.bnf.org/bnf/index.html">BNF 45</a> 
+				  </B></FONT></TD>
+                <TD><FONT face="Verdana,Helvetica,Arial" size=2>British National Formulary</FONT></TD></TR> 
    
-			   <TR bgColor=#dddddd height=1>
+ 			   <TR bgColor=#dddddd height=1>
+                <TD colSpan=3><IMG height=1 
+                  src="../../gui/img/common/default/pixel.gif" 
+                  width=5></TD></TR>
+               <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'yellowlist.gif','0') ?>></td>
+                <TD vAlign=top ><FONT 
+                  face="Verdana,Helvetica,Arial" size=2><B>
+				  <a href="yellowlist_pass.php<?php echo URL_APPEND ?>"><?php echo $LDYellowList ?></a>
+				  </B></FONT></TD>
+                <TD><FONT face="Verdana,Helvetica,Arial" 
+                  size=2><?php echo $LDYellowListTxt ?></FONT></TD></TR>
+				  
+ 			   <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
                   width=5></TD></TR>
                <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'redlist.gif','0') ?>></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B>
-				  <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo $LDRedList ?></a>
+				  <a href="<?php echo $root_path."main/pharmaindex.php".URL_APPEND ?>"><?php echo $LDRedList ?></a>
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php echo $LDRedListTxt ?></FONT></TD></TR>
@@ -167,7 +190,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php echo $LDNewsTxt ?></FONT></TD></TR>
-              <TR bgColor=#dddddd height=1>
+<!--               <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
                   width=5></TD></TR>
@@ -179,7 +202,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php echo $LDMemoTxt ?></FONT></TD></TR>
              
-			 
+ -->			 
 		</TBODY>
 		</TABLE>
 		</TD></TR>
@@ -204,7 +227,5 @@ require($root_path.'include/inc_load_copyrite.php');
 </td>
 </tr>
 </table>        
-&nbsp;
-
 </BODY>
 </HTML>

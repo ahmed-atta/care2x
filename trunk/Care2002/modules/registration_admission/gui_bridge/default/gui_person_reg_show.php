@@ -141,6 +141,10 @@ require('./gui_bridge/default/gui_patient_reg_options.php');
 <td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php echo $LDFirstName ?>:
 </td>
 <td bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial" color="#990000"><b><?php echo $name_first; ?></b>
+<?php
+# If person is dead show a black cross
+if($death_date&&$death_date!='0000-00-00') echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0').'>';
+?>
 </td>
 </tr>
 
@@ -177,6 +181,12 @@ createTR($LDNameOthers,$name_others);
 </td>
 <td  bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial"  color="#990000">
 <b><?php       echo formatDate2Local($date_birth,$date_format);  ?></b>
+<?php
+# If person is dead show a black cross
+if($death_date&&$death_date!='0000-00-00'){
+	echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0').'>&nbsp;<font color="#000000">'.formatDate2Local($death_date,$date_format).'</font>';
+}
+?>
 </td>
 
 <td bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial"><?php  echo $LDSex ?>: <?php if($sex=="m") echo  $LDMale; elseif($sex=="f") echo $LDFemale ?>
@@ -184,6 +194,17 @@ createTR($LDNameOthers,$name_others);
 
 </tr>
 
+
+<tr>
+<td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php echo $LDBloodGroup ?>:
+</td>
+<td colspan=2 bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial">  
+<?php 
+	$buf='LD'.$blood_group;
+	echo $$buf;
+?>
+</td>
+</tr>
 
 <tr>
 <td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php echo $LDCivilStatus ?>:
@@ -325,11 +346,13 @@ createTR($LDEthnicOrigin,$ethnic_orig,2);
 <a href="patient_register.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&update=1"><img 
 <?php echo createLDImgSrc($root_path,'update_data.gif','0','absmiddle') ?>></a>
 <?php
+# If currently admitted show button link to admission data display
 if($current_encounter){
 ?>
 <a href="aufnahme_daten_zeigen.php<?php echo URL_APPEND ?>&encounter_nr=<?php echo $current_encounter ?>&origin=patreg_reg"><img <?php echo createLDImgSrc($root_path,'admission_data.gif','0','absmiddle') ?>></a>
 <?php
-}else{
+# Else if person still living, show button links to admission
+}elseif(!$death_date||$death_date=='0000-00-00'){
 ?>
 <a href="<?php echo $admissionfile ?>&pid=<?php echo $pid ?>&origin=patreg_reg&encounter_class_nr=1"><img <?php echo createLDImgSrc($root_path,'admit_inpatient.gif','0','absmiddle') ?>></a>
 <a href="<?php echo $admissionfile ?>&pid=<?php echo $pid ?>&origin=patreg_reg&encounter_class_nr=2"><img <?php echo createLDImgSrc($root_path,'admit_outpatient.gif','0','absmiddle') ?>></a>

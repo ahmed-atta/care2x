@@ -31,8 +31,6 @@ echo setCharSet();
 <script  language="javascript">
 <!-- 
 
-<?php require($root_path.'include/inc_checkdate_lang.php'); ?>
-
 function popRecordHistory(table,pid) {
 	urlholder="./record_history.php<?php echo URL_REDIRECT_APPEND; ?>&table="+table+"&pid="+pid;
 	HISTWIN<?php echo $sid ?>=window.open(urlholder,"histwin<?php echo $sid ?>","menubar=no,width=400,height=550,resizable=yes,scrollbars=yes");
@@ -163,6 +161,10 @@ if($parent_admit) echo ($HTTP_SESSION_VARS['sess_full_en']) ;
 <td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php echo $LDFirstName ?>:
 </td>
 <td bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial" color="#990000"><b><?php echo $name_first; ?></b>
+<?php
+# If person is dead show a black cross
+if($death_date&&$death_date!='0000-00-00') echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0').'>';
+?>
 </td>
 </tr>
 
@@ -198,8 +200,13 @@ createTR($LDNameOthers,$name_others);
 </td>
 <td  bgcolor="#ffffee" ><FONT SIZE=-1  FACE="Arial"  color="#990000">
 <b><?php       echo @formatDate2Local($date_birth,$date_format);  ?></b>
+<?php
+# If person is dead show a black cross
+if($death_date&&$death_date!='0000-00-00'){
+	echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0').'>&nbsp;<font color="#000000">'.formatDate2Local($death_date,$date_format).'</font>';
+}
+?>
 </td>
-
 </tr>
 
 <tr>
@@ -208,6 +215,20 @@ createTR($LDNameOthers,$name_others);
 <td bgcolor="#ffffee" ><FONT SIZE=-1  FACE="Arial"><?php if($sex=="m") echo  $LDMale; elseif($sex=="f") echo $LDFemale ?>
 </td>
 </tr>
+
+<tr>
+<td bgColor="#eeeeee" ><FONT SIZE=-1  FACE="Arial"><?php  echo $LDBloodGroup ?>: 
+</td>
+<td bgcolor="#ffffee" ><FONT SIZE=-1  FACE="Arial">
+<?php
+if($blood_group){
+	$buf='LD'.$blood_group;
+	echo $$buf;
+} 
+?>
+</td>
+</tr>
+
 </table>
 
 <?php
@@ -284,7 +305,30 @@ while($row=$result->FetchRow()){
 	}
 }else {
 ?>
-<form method="post" name="notes_form">
+
+<script language="JavaScript">
+<!-- Script Begin
+function chkform(d) {
+	if(d.date.value==""){
+		alert("<?php echo $LDPlsEnterDate; ?>");
+		d.date.focus();
+		return false;
+	}else if(d.notes.value==""){
+		alert("<?php echo $LDPlsEnterReport; ?>");
+		d.notes.focus();
+		return false;
+	}else if(d.personell_name.value==""){
+		alert("<?php echo $LDPlsEnterFullName; ?>");
+		d.personell_name.focus();
+		return false;
+	}else{
+		return true;
+	}
+}
+//  Script End -->
+</script>
+
+<form method="post" name="notes_form" onSubmit="return chkform(this)">
  <table border=0 cellpadding=2 width=100%>
    <tr bgcolor="#f6f6f6">
      <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDate; ?></td>
@@ -332,19 +376,7 @@ while($row=$result->FetchRow()){
 <?php
 } 
 ?>
-<?php
-# Type nr 3 = discharge summary/notes
-# Type nr 99 = auxilliary notes
-if($parent_admit&&(!$is_discharged||$type_nr==3||$type_nr==99)) {
-?>
-<p>
-<img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle'); ?>>
-<a href="<?php echo $thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new&type_nr='.$type_nr; ?>"> 
-<?php echo $LDEnterNewRecord; ?>
-</a><br>
-<?php
-}
-?>
+
 <img <?php echo createComIcon($root_path,'l-arrowgrnlrg.gif','0','absmiddle'); ?>>
 <a href="<?php 
 if($parent_admit) $buf='&encounter_nr='.$HTTP_SESSION_VARS['sess_full_en'];
@@ -353,7 +385,19 @@ echo $returnfile.URL_APPEND.$buf.'&target='.$target.'&mode=show&type_nr='.$type_
 ?>"> 
 <?php echo $LDBackToOptions;  ?>
 </a>
-
+<?php
+# Type nr 3 = discharge summary/notes
+# Type nr 99 = auxilliary notes
+if($parent_admit&&(!$is_discharged||$type_nr==3||$type_nr==99)) {
+?>
+&nbsp;&nbsp;
+<img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle'); ?>>
+<a href="<?php echo $thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new&type_nr='.$type_nr; ?>"> 
+<?php echo $LDEnterNewRecord; ?>
+</a><br>
+<?php
+}
+?>
 </td>
 <!-- Load the options table  -->
 <td rowspan=2  valign="top">

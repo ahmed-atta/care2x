@@ -3,13 +3,14 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+$lang_tables[]='departments.php';
 define('LANG_FILE','doctors.php');
 if($HTTP_SESSION_VARS['sess_user_origin']=='personell_admin'){
 	$local_user='aufnahme_user';
@@ -17,14 +18,13 @@ if($HTTP_SESSION_VARS['sess_user_origin']=='personell_admin'){
 }else{
 	$local_user='ck_doctors_dienstplan_user';
 	if (!empty($HTTP_SESSION_VARS['sess_path_referer'])){
-		$breakfile=$root_path.$HTTP_SESSION_VARS['sess_path_referer'];
+		$breakfile=$root_path.$HTTP_SESSION_VARS['sess_path_referer'].URL_APPEND;
 	} else {
 		/* default startpage */
 		$breakfile = $root_path.'doctors.php'.URL_APPEND;
 	}
 }
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
 /*
 switch($retpath)
@@ -41,16 +41,9 @@ $abtarr=array();
 $abtname=array();
 $datum=date("d.m.Y");
 
-if(!$hilitedept)
-{
-	if($dept_nr) $hilitedept=$dept_nr;
-	else
-	{
-		include($root_path.'include/inc_resolve_dept_dept.php');
-		if($deptOK) $hilitedept=$dept_nr;
-	}
-}
-/* Load the department list with oncall doctors */
+if(!$hilitedept&&$dept_nr) $hilitedept=$dept_nr;
+
+# Load the department list with oncall doctors
 require_once($root_path.'include/care_api_classes/class_department.php');
 $dept_obj=new Department;
 $dept_DOC=$dept_obj->getAllActiveWithDOC();
@@ -136,7 +129,11 @@ while(list($x,$v)=each($dept_DOC)){
 		if ($toggler==0) 
 			{ echo '<tr bgcolor="#cfcfcf">'; $toggler=1;} 
 				else { echo '<tr bgcolor="#f6f6f6">'; $toggler=0;}
-	echo '<td ><font face="verdana,arial" size="2" >&nbsp;'.$bold.$v['name_formal'].$boldx.'&nbsp;</td>';
+	echo '<td ><font face="verdana,arial" size="2" >&nbsp;'.$bold;
+	$buff=$v['LD_var'];
+	if(isset($$buff)&&!empty($$buff)) echo $$buff;
+		else echo $v['name_formal'];
+	echo $boldx.'&nbsp;</td>';
 	echo '<td >&nbsp; <a href="'.$fileforward.'&dept_nr='.$v['nr'].'&nr='.$nr.'">
 	<img '.createLDImgSrc($root_path,'ok_small.gif','0','absmiddle').' alt="'.$LDShowActualPlan.'" ></a> </td></tr>';
 	echo "\n";

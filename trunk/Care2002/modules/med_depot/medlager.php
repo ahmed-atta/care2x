@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -91,7 +91,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
  			 <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'templates.gif','0') ?>></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B> 
-   				<a href="<?php echo $root_path;?>modules/products/products-bestellkatalog-edit.php<?php echo URL_APPEND;?>&cat=medlager"><?php echo $LDOrderCat ?></a></B></FONT></TD>
+   				<a href="medlager-pass.php<?php echo URL_APPEND; ?>&mode=catalog"><?php echo $LDOrderCat ?></a></B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><nobr><?php echo $LDOrderCatTxt ?></nobr></FONT></TD></TR>
                <TR bgColor=#dddddd height=1>
@@ -153,7 +153,5 @@ require($root_path.'include/inc_load_copyrite.php');
 ?>
 </td></tr>
 </table>        
-&nbsp;
-
 </BODY>
 </HTML>

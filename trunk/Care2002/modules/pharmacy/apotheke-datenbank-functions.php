@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -13,7 +13,6 @@ require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','products.php');
 $local_user='ck_prod_db_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
 
 $breakfile='apotheke.php'.URL_APPEND;
 ?>
@@ -43,7 +42,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <tr valign=top>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="45">
 <FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG> &nbsp; <?php echo "$LDPharmacy $LDPharmaDb" ?></STRONG></FONT></td>
+<STRONG> &nbsp; <?php echo "$LDPharmacy::$LDPharmaDb" ?></STRONG></FONT></td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
 <?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('submenu1.php','<?php echo "$LDPharmacy $LDPharmaDb" ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
@@ -99,7 +98,7 @@ echo " ".$HTTP_COOKIE_VARS[$local_user.$sid]." !";
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php echo $LDPharmaDbTxt ?></FONT></TD></TR>
-              <TR bgColor=#dddddd height=1>
+<!--               <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
                   width=5></TD></TR>
@@ -114,15 +113,15 @@ echo " ".$HTTP_COOKIE_VARS[$local_user.$sid]." !";
                 <TD colSpan=3><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
                   width=5></TD></TR>
-             
-              <TR bgColor=#eeeeee> <td align=center><img <?php echo createComIcon($root_path,'icn_rad.gif','0') ?>></td>
+ -->             
+<!--               <TR bgColor=#eeeeee> <td align=center><img <?php echo createComIcon($root_path,'icn_rad.gif','0') ?>></td>
                 <TD vAlign=top width=150><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B><nobr>
 				<a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo $LDReports ?></a></nobr>
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><nobr><?php echo $LDReportsTxt ?></nobr></FONT></TD></TR>
-	</TBODY>
+ -->	</TBODY>
 		</TABLE>
 		</TD></TR>
 		</TBODY>

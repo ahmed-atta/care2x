@@ -11,7 +11,7 @@ require($root_path.'include/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 
-define('AUTOSHOW_ONERESULT',0); # Defining to 1 will automatically show the admission data if the search result is one, otherwise the result will be listed
+define('AUTOSHOW_ONERESULT',1); # Defining to 1 will automatically show the admission data if the search result is one, otherwise the result will be listed
 
 function Cond($item,$k){
 	global $where,$tab,$HTTP_POST_VARS;
@@ -37,18 +37,11 @@ function fCond($item,$k){
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
 require_once($root_path.'include/inc_date_format_functions.php');
 
+if (isset($mode) && ($mode=='search')){
 
-
-
-if (isset($mode) && ($mode=='search'))
-{
-    if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
-    if($dblink_ok) {
-	
-	$select="SELECT p.name_last,p.name_first,p.date_birth,e.encounter_nr,e.encounter_class_nr,e.is_discharged,e.encounter_date FROM ";
+	$select="SELECT p.name_last,p.name_first,p.date_birth,p.sex,e.encounter_nr,e.encounter_class_nr,e.is_discharged,e.encounter_date FROM ";
 
 	$where=''; 		# ANDed where condition
 	$orwhere='';	# ORed where condition
@@ -134,13 +127,11 @@ if (isset($mode) && ($mode=='search'))
 				   	exit;
 	        	}
 			}
-		}else { echo "$LDDbNoRead<p>$sql"; $rows=0;}
+		}else{
+			echo "$LDDbNoRead<p>$sql";
+			$rows=0;
+		}
 	}
-					
-  }
-  else 
-  { echo "$LDDbNoLink<br>"; }
-
 }
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 
@@ -153,38 +144,39 @@ $breakfile='patient.php';
 $newdata=1;
 $target='archiv';
 
-if(!AUTOSHOW_ONERESULT) {
+
+if(!isset($rows)||!$rows) {
 
 	include($root_path.'include/care_api_classes/class_encounter.php');
 	include($root_path.'include/care_api_classes/class_ward.php');
-	include($root_path.'include/care_api_classes/class_insurance.php');
+	include_once($root_path.'include/care_api_classes/class_insurance.php');
 
-	/* Create encounter object */
+	# Create encounter object
 	$encounter_obj=new Encounter();
-	/* Load the wards info */
+	# Load the wards info 
 	$ward_obj=new Ward;
 	$items='nr,name';
 	$ward_info=&$ward_obj->getAllWardsItemsObject($items);
-	/* Create new person's insurance object */
-	$insurance_obj=new Insurance;	 
-	/* Get the insurance classes */
-	$insurance_classes=&$insurance_obj->getInsuranceClassInfoObject($root_path.'include/care_api_classes/class_nr,name,LD_var');
-		/* Get all encounter classes */
+	# Get all encounter classes
 	$encounter_classes=$encounter_obj->AllEncounterClassesObject();
+	# Get the insurance classes */
+	# Create new person's insurance object */
+	$insurance_obj=new Insurance;	 
+	$insurance_classes=&$insurance_obj->getInsuranceClassInfoObject('class_nr,LD_var,name');
 
 	if(!$GLOBAL_CONFIG['patient_service_care_hide']){
-		/* Get the care service classes*/
+		# Get the care service classes
 		$care_service=$encounter_obj->AllCareServiceClassesObject();
 	}
 	if(!$GLOBAL_CONFIG['patient_service_room_hide']){
-		/* Get the room service classes */
+		# Get the room service classes 
 		$room_service=$encounter_obj->AllRoomServiceClassesObject();
 	}
 	if(!$GLOBAL_CONFIG['patient_service_att_dr_hide']){
-		/* Get the attending doctor service classes */
+		# Get the attending doctor service classes 
 		$att_dr_service=$encounter_obj->AllAttDrServiceClassesObject();
 	}			
 }
-/* Load GUI page */
+# Load GUI page
 require('./gui_bridge/default/gui_aufnahme_list.php');
 ?>

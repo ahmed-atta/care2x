@@ -84,14 +84,17 @@ echo ucfirst($person['name_last']).', '.ucfirst($person['name_first']);
 </td>
 </tr>
 
+<!-- Temporarily deactivated 
 <tr>
 <td bgcolor=#ffffcc><img <?php echo createComIcon($root_path,'warn.gif') ?>>&nbsp;<font face=verdana,arial size=2 ><b><?php echo $LDMoreInfo ?></b><br></font>
 </td>
 </tr>
+
 <tr>
 <td><font face=verdana,arial size=2 ><?php echo $pinfo["info"]; ?></font>
 </td>
 </tr>
+ -->
 </table>
 <p>
 

@@ -40,6 +40,7 @@ $tnow=date('H:i:s');
 if(!isset($mode)) $mode='';
 
 $breakfile='ambulatory.php'.URL_APPEND; # Set default breakfile
+$thisfile=basename(__FILE__);
 
 if(isset($retpath)){
 	switch($retpath)
@@ -265,12 +266,15 @@ while ($patient=$opat_obj->FetchRow()){
 			</td>
 			<td align=center><font face="verdana,arial" size="2" >';
 	# If patient, show images by sex
+	$occ_list.='<a href="javascript:popPic(\''.$patient['name_last'].', '.$patient['name_first'].' '.formatDate2Local($patient['date_birth'],$date_format).'\',\''.$patient['photo_filename'].'\')">';
 		switch(strtolower($patient['sex']))
 		{
 			case 'f': $occ_list.='<img '.createComIcon($root_path,'spf.gif','0').'>'; $females++; break;
 			case 'm': $occ_list.='<img '.createComIcon($root_path,'spm.gif','0').'>'; $males++; break;
 			default: $occ_list.='<img '.createComIcon($root_path,'bn.gif','0').'>';break;
 		}
+
+	 $occ_list.='</a>';
 
 	$occ_list.='&nbsp;
 	</td>';

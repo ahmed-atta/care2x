@@ -9,6 +9,7 @@ GNU GPL.
 For details read file "copy_notice.txt".
 */
 $lang_tables[]='prompt.php';
+$lang_tables[]='person.php';
 $lang_tables[]='departments.php';
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
@@ -43,9 +44,6 @@ $photo_filename='nopic';
 
 $dbtable='care_encounter';
 
-/* Establish db connection */
-if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
-if($dblink_ok) {
 
 /*		$sql='SELECT * FROM '.$dbtable.' AS enc LEFT JOIN care_person AS reg ON reg.pid = enc.pid
 		         WHERE enc.encounter_nr="'.$encounter_nr.'"';
@@ -121,6 +119,7 @@ if($dblink_ok) {
 		# Get current encounter to check if current encounter is this encounter nr
 		$current_encounter=$person_obj->CurrentEncounter($pid);
 		
+		# Get the overall status
 		if($stat=&$encounter_obj->AllStatus($encounter_nr)){
 			$enc_status=$stat->FetchRow();
 		}
@@ -149,9 +148,7 @@ if($dblink_ok) {
 	$insurance_firm_name=$insurance_obj->getFirmName($insurance_firm_id);
 	/* Check whether config path exists, else use default path */			
 	$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $default_photo_path;
-} else { 
-	echo "$LDDbNoLink<br>"; 
-} 
+
 
 /* Prepare text and resolve the numbers */
 require_once($root_path.'include/inc_patient_encounter_type.php');		 

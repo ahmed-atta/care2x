@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -13,13 +13,14 @@ require($root_path.'include/inc_environment_global.php');
 
 /* Check if register globals is "on" */
 
-$reg_glob_ini=ini_get('register_globals');
+/*$reg_glob_ini=ini_get('register_globals');
 
 if(empty($reg_glob_ini)||(!$reg_glob_ini))
 {
    include_once($root_path.'include/inc_vars_resolve.php');
-}
+}*/
 
+$lang_tables[]='departments.php';
 define('LANG_FILE','products.php');
 
 if(!isset($userck)) 
@@ -45,27 +46,13 @@ switch($cat)
 }
 
 $rows=0;
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok)
-{
-    /* Load the date formatter */
-    include_once($root_path.'include/inc_date_format_functions.php');
-    
-	
-    /* Load editor functions for time format converter */
-    //include_once('../include/inc_editor_fx.php');
 
-				//$sql='SELECT * FROM '.$dbtable.' WHERE status LIKE "o_%" ORDER BY t_stamp DESC';;
-				$sql='SELECT * FROM '.$dbtable.' WHERE status="pending" OR status="ack_print" ORDER BY sent_datetime DESC';;
-        		if($ergebnis=$db->Execute($sql))
-				{
-					$rows=$ergebnis->RecordCount();
-				}else{ echo "$LDDbNoRead<br>"; } 
-			//echo $sql;
-}
-else 
-{ echo "$LDDbNoLink<br>"; } 
+# Create the product object
+include_once($root_path.'include/care_api_classes/class_product.php');
+$product=new Product;
+
+$ergebnis=&$product->PendingOrders($cat);
+$rows=$product->LastRecordCount();
 
 ?>
 
@@ -87,7 +74,7 @@ if ($nofocus=='') echo "
 	
 function show_order(d,o,s,t)
 {
-	url="products-bestellbot-print.php<?php echo URL_REDIRECT_APPEND."&userck=$userck"; ?>&cat=<?php echo $cat ?>&dept="+d+"&order_nr="+o+"&status="+s+"&sent_datetime="+t;
+	url="products-bestellbot-print.php<?php echo URL_REDIRECT_APPEND."&userck=$userck"; ?>&cat=<?php echo $cat ?>&dept_nr="+d+"&order_nr="+o+"&status="+s+"&sent_datetime="+t;
 	<?php echo $cat.'powin'.$sid; ?>=window.open(url,"<?php echo $cat.'powin'.$sid; ?>","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
 }
 </script>
@@ -96,10 +83,21 @@ function show_order(d,o,s,t)
 <body <?php 	if($rows && !$nofocus) echo ' bgcolor="#ffffee"  onLoad="goactive()" '; ?>>
 <?php
 //echo "$rows <br>";
-if($rows)
-{
-	if($showlist)
-	{
+if($rows){
+	if($showlist){
+	
+	# Load the date formatter 
+	include_once($root_path.'include/inc_date_format_functions.php');
+
+	# Create the department object
+	include_once($root_path.'include/care_api_classes/class_department.php');
+	$dept_obj=new Department;
+	if($depts=&$dept_obj->getAllActiveObject()){
+		while($buf=$depts->FetchRow()){
+			$dept[$buf['nr']]=$buf;
+		}
+	}
+	
 	echo '<center>
 			<font face=Verdana,Arial size=2>
 			<p>';
@@ -111,9 +109,15 @@ if($rows)
 				<table border=0 cellspacing=0 cellpadding=0 bgcolor="#666666"><tr><td>
 				<table border=0 cellspacing=1 cellpadding=3>
   				<tr bgcolor="#ffffff">';
-		for ($i=0;$i<sizeof($LDOrderIndex);$i++)
+		//for ($i=0;$i<sizeof($LDOrderIndex);$i++)
 		echo '
-				<td><font face=Verdana,Arial size=2 color="#000080">'.$LDOrderIndex[$i].'</td>';
+				<td><font face=Verdana,Arial size=2 color="#000080">'.$LDOrderNr.'</td>
+				<td><font face=Verdana,Arial size=2 color="#000080">'.$LDOrderIndex[1].'</td>
+				<td><font face=Verdana,Arial size=2 color="#000080">'.$LDOrderIndex[2].'</td>
+				<td><font face=Verdana,Arial size=2 color="#000080">'.$LDOrderIndex[3].'</td>
+				<td><font face=Verdana,Arial size=2 color="#000080">'.$LDOrderIndex[4].'</td>
+				<td><font face=Verdana,Arial size=2 color="#000080">'.$LDOrderIndex[5].'</td>
+				';
 		echo '
 				</tr>';	
 
@@ -127,9 +131,15 @@ if($rows)
 			}
 			
 			echo'
-				<td><font face=Verdana,Arial size=2>'.$i.'</td>
-				<td><a href="javascript:show_order(\''.$content['dept'].'\',\''.$content['order_nr'].'\',\''.$content['status'].'\',\''.$content['sent_datetime'].'\')"><img '.createComIcon($root_path,'uparrowgrnlrg.gif','0').' alt="'.$LDClk2Ack.'"></a></td>
-				<td ><font face=Verdana,Arial size=2>'.strtoupper($content[dept]).'</td>
+				<td><font face=Verdana,Arial size=2>'.$content['order_nr'].'</td>
+				<td><a href="javascript:show_order(\''.$content['dept_nr'].'\',\''.$content['order_nr'].'\',\''.$content['status'].'\',\''.$content['sent_datetime'].'\')"><img '.createComIcon($root_path,'uparrowgrnlrg.gif','0').' alt="'.$LDClk2Ack.'"></a></td>
+				<td ><font face=Verdana,Arial size=2>';
+				
+				$buffer=$dept[$content['dept_nr']]['LD_var'];
+				if(isset($$buffer)&&!empty($$buffer)) echo $$buffer;
+					else echo $dept[$content['dept_nr']]['name_formal'];
+
+				echo '</td>
 				<td><font face=Verdana,Arial size=2>';
 				
 			$buf=explode(' ',$content['sent_datetime']);

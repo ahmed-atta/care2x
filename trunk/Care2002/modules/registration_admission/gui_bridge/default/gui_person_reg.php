@@ -28,59 +28,54 @@ echo setCharSet();
 
 <script  language="javascript">
 <!-- 
-function setsex(d)
-{
-	s=d.selectedIndex;
-	t=d.options[s].text;
-	if(t.indexOf("Frau")!=-1) document.aufnahmeform.sex[1].checked=true;
-	if(t.indexOf("Herr")!=-1) document.aufnahmeform.sex[0].checked=true;
-	if(t.indexOf("-")!=-1){ document.aufnahmeform.sex[0].checked=false;document.aufnahmeform.sex[1].checked=false;}
-}
-
-function settitle(d)
-{
-	if(d.value=="m") document.aufnahmeform.anrede.selectedIndex=2;
-	else document.aufnahmeform.anrede.selectedIndex=1;
-}
-
-function hidecat()
-{
-	if(document.images) document.images.catcom.src="../../gui/img/common/default/pixel.gif";
-}
-
-function loadcat()
-{
-
-  	cat=new Image();
-  	cat.src="../imgcreator/catcom.php?person=<?php echo strtr($HTTP_COOKIE_VARS[$local_user.$sid]," ","+")."&lang=$lang";?>";
-  	
-}
-
-function showcat()
-{
-
-	document.images.catcom.src=cat.src;
-}
-
-function forceSave()
-{
+function forceSave(){
    document.aufnahmeform.mode.value="forcesave";
    document.aufnahmeform.submit();
 }
 
-function showpic(d)
-{
+function showpic(d){
 	if(d.value) document.images.headpic.src=d.value;
 }
 
-function popSearchWin(target,obj_val,obj_name) {
+function popSearchWin(target,obj_val,obj_name){
 	urlholder="./data_search.php<?php echo URL_REDIRECT_APPEND; ?>&target="+target+"&obj_val="+obj_val+"&obj_name="+obj_name;
 	DSWIN<?php echo $sid ?>=window.open(urlholder,"wblabel<?php echo $sid ?>","menubar=no,width=400,height=550,resizable=yes,scrollbars=yes");
 }
 
+function chkform(d) {
+	 if(d.name_last.value==""){
+		alert("<?php echo $LDPlsEnterLastName; ?>");
+		d.name_last.focus();
+		return false;
+	}else if(d.name_first.value==""){
+		alert("<?php echo $LDPlsEnterFirstName; ?>");
+		d.name_first.focus();
+		return false;
+	}else if(d.date_birth.value==""){
+		alert("<?php echo $LDPlsEnterDateBirth; ?>");
+		d.date_birth.focus();
+		return false;
+	}else if(d.sex[0]&&d.sex[1]&&!d.sex[0].checked&&!d.sex[1].checked){
+		alert("<?php echo $LDPlsSelectSex; ?>");
+		return false;
+	}else if(d.addr_str.value==""){
+		alert("<?php echo $LDPlsEnterStreetName; ?>");
+		d.addr_str.focus();
+		return false;
+	}else if(d.addr_str_nr.value==""){
+		alert("<?php echo $LDPlsEnterBldgNr; ?>");
+		d.addr_str_nr.focus();
+		return false;
+	}else if(d.user_id.value==""){
+		alert("<?php echo $LDPlsEnterFullName; ?>");
+		d.user_id.focus();
+		return false;
+	}else{
+		return true;
+	}
+}
 
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
-
 -->
 </script>
 
@@ -122,25 +117,11 @@ require('./gui_bridge/default/gui_tabs_patreg.php');
 <tr>
 <td colspan=3   bgcolor="<?php echo $cfg['body_bgcolor']; ?>">
 
-<!--  <div class="cats">
-<a href="javascript:hidecat()"><img
-<?php if($from=='pass')
-{ 
-    echo 'src="'.$root_path.'main/imgcreator/catcom.php?lang='.$lang.'&person='.strtr($HTTP_COOKIE_VARS[$local_user.$sid]," ","+").'" ';
- }
-else 
-{
-	echo ' src="'.$root_path.'gui/img/common/default/pixel.gif" ';
-}
-?>
-align=right id=catcom border=0></a>
-</div>  -->
-
 <ul>
 
 <FONT    SIZE=-1  FACE="Arial">
 
-<form method="post" action="<?php echo $thisfile; ?>" name="aufnahmeform" ENCTYPE="multipart/form-data">
+<form method="post" action="<?php echo $thisfile; ?>" name="aufnahmeform" ENCTYPE="multipart/form-data" onSubmit="return chkform(this)">
 
 <table border=0 cellspacing=0 cellpadding=0>
 
@@ -265,6 +246,16 @@ if ($errorsex) echo "</font>";
  </td>
 </tr>
 
+<tr>
+<td><FONT SIZE=-1  FACE="Arial"><?php echo $LDBloodGroup ?>:
+</td>
+<td colspan=2><FONT SIZE=-1  FACE="Arial" color="red">
+<input name="blood_group" type="radio" value="A"  <?php if($blood_group=='A') echo 'checked'; ?>><?php echo $LDA ?>&nbsp;&nbsp;
+<input name="blood_group" type="radio" value="B"  <?php if($blood_group=='B') echo 'checked'; ?>><?php echo $LDB ?>&nbsp;&nbsp;
+<input name="blood_group" type="radio" value="AB"  <?php if($blood_group=='AB') echo 'checked'; ?>><?php echo $LDAB ?>&nbsp;&nbsp;
+<input name="blood_group" type="radio" value="O"  <?php if($blood_group=='O') echo 'checked'; ?>><?php echo $LDO ?>
+</td>
+</tr>
 
 
 <tr>

@@ -9,7 +9,7 @@ function createTR($input_name, $ld_text, $input_val, $colspan = 2, $input_size =
 ?>
 
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial,verdana,sans serif"><?php echo $ld_text ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial,verdana,sans serif"><?php echo $ld_text ?>:
 </td>
 <td colspan=<?php echo $colspan; ?> bgcolor="#eeeeee"><input name="<?php echo $input_name; ?>" type="text" size="<?php echo $input_size; ?>" value="<?php if(isset($input_val)) echo $input_val; ?>">
 </td>
@@ -101,8 +101,11 @@ require('./gui_bridge/default/gui_tabs_patadmit.php');
 
 <?php
 // if(isset($rows)&&$rows>1) 
- if(!empty($rows)) 
-{
+ if(!empty($rows)){
+ 
+ 	$img_male=createComIcon($root_path,'spm.gif','0');
+	$img_female=createComIcon($root_path,'spf.gif','0');
+
  ?>
 
 <table border=0 cellpadding=0 cellspacing=0>
@@ -133,7 +136,15 @@ require('./gui_bridge/default/gui_tabs_patadmit.php');
   if($toggle){ echo "bgcolor=#efefef"; $toggle=0;} else {echo "bgcolor=#ffffff"; $toggle=1;}
   $buf='aufnahme_daten_zeigen.php'.URL_APPEND.'&origin=archive&encounter_nr='.$result['encounter_nr'].'&target=archiv';
   echo '>
-    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'"><img '.$img_arrow.'></a></td>
+    <td><FONT  SIZE=-1  FACE="Arial">&nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">';
+
+	switch($result['sex']){
+		case 'f': echo '<img '.$img_female.'>'; break;
+		case 'm': echo '<img '.$img_male.'>'; break;
+		default: echo '&nbsp;'; break;
+	}	
+	
+	echo '</a></td>
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; <a href="'.$buf.'" title="'.$LDClk2Show.'">'.$result['name_last'].'</a></td>
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.$result['name_first'].'</a></td>
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;'.@formatDate2Local($result['date_birth'],$date_format).'</td>';
@@ -177,25 +188,23 @@ createTR('encounter_nr', $LDAdmitNr,$encounter_nr);
 ?>
 
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDAdmitDate ?>: 
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php echo $LDAdmitDate ?>: 
 </td>
 <td bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">
 <input name="date_start" type="text" size=10 maxlength=10  value="<?php if(!empty($date_start)) echo @formatDate2Local($date_start,$date_format);  ?>"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
  <a href="javascript:show_calendar('aufnahmeform.date_start','<?php echo $date_format ?>')">
- <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a> 
- <font size=1>[ <?php   
+ <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a><font size=1>[<?php   
  $dfbuffer="LD_".strtr($date_format,".-/","phs");
   echo $$dfbuffer;
- ?> ] </font>
+ ?>] </font>
 </td>
-<td bgcolor="#eeeeee"><nobr><FONT SIZE=-1  FACE="Arial"><?php echo $LDTo ?>: 
+<td bgcolor="#eeeeee"><nobr><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $LDTo ?>: 
 <input name="date_end" type="text" size=10 maxlength=10 value="<?php if(!empty($date_end)) echo @formatDate2Local($date_end,$date_format);  ?>"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
  <a href="javascript:show_calendar('aufnahmeform.date_end','<?php echo $date_format ?>')">
- <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a> 
- <font size=1>[ <?php   
+ <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a><font size=1>[<?php   
  $dfbuffer="LD_".strtr($date_format,".-/","phs");
   echo $$dfbuffer;
- ?> ] </font>
+ ?>] </font>
 </nobr></td>
 </tr>
 
@@ -234,7 +243,7 @@ if(!isset($addr_city_town)) $addr_city_town='';
 ?>
 
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDBday ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php echo $LDBday ?>:
 </td>
 <td bgcolor="#eeeeee" colspan=2><FONT SIZE=-1  FACE="Arial">
 <input name="date_birth" type="text" size="15" maxlength=10 value="<?php if(!empty($date_birth)) echo @formatDate2Local($date_birth,$date_format);  ?>"
@@ -249,10 +258,10 @@ if(!isset($addr_city_town)) $addr_city_town='';
 </tr>
 
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDSex ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php echo $LDSex ?>:
 </td>
 
-<td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php echo $LDSex ?>: <input name="sex" type="radio" value="m" <?php if ($sex=='m') echo 'checked' ?>><?php echo $LDMale ?>&nbsp;&nbsp;
+<td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><input name="sex" type="radio" value="m" <?php if ($sex=='m') echo 'checked' ?>><?php echo $LDMale ?>&nbsp;&nbsp;
 <input name="sex" type="radio" value="f" <?php if ($sex=='f') echo 'checked' ?>><?php echo $LDFemale ?>
 </td>
 </tr>
@@ -305,7 +314,7 @@ createTR( 'referrer_notes', $LDSpecials,$referrer_notes);
 
 
 <tr bgcolor="white">
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php if ($errorkassetype) echo "<font color=red>"; ?><?php echo $LDBillType ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $LDBillType ?>:
 </td>
 <td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">
 <?php

@@ -48,7 +48,8 @@ if(($mode=='search')and($searchkey))
 				$suchbuffer=$suchwort;
 			}
 			
-			$sql='SELECT enc.encounter_nr, reg.name_last, reg.name_first, reg.date_birth, enc.encounter_class_nr, enc.is_discharged
+			$sql='SELECT enc.encounter_nr, enc.encounter_class_nr, enc.is_discharged,
+								reg.name_last, reg.name_first, reg.date_birth, reg.sex
 			          FROM care_encounter as enc,care_person as reg 
 			          WHERE
 					  (
@@ -150,6 +151,8 @@ if($mode=='search'){
 
 	/* Load the common icons */
 	$img_options=createComIcon($root_path,'pdata.gif','0');
+	$img_male=createComIcon($root_path,'spm.gif','0');
+	$img_female=createComIcon($root_path,'spf.gif','0');
 
 	echo '
 			<table border=0 cellpadding=2 cellspacing=1> <tr bgcolor="#0000aa" background="'.createBgSkin($root_path,'tableHeaderbg.gif').'">';
@@ -157,6 +160,7 @@ if($mode=='search'){
 ?>
 
     <td background="<?php echo createBgSkin($root_path,'tableHeaderbg.gif'); ?>"><font face=arial size=2 color="#ffffff"><b><?php echo $LDCaseNr; ?></b></td>
+    <td background="<?php echo createBgSkin($root_path,'tableHeaderbg.gif'); ?>">&nbsp;</td>
     <td background="<?php echo createBgSkin($root_path,'tableHeaderbg.gif'); ?>"><font face=arial size=2 color="#ffffff"><b><?php echo $LDLastName; ?></td>
     <td background="<?php echo createBgSkin($root_path,'tableHeaderbg.gif'); ?>"><font face=arial size=2 color="#ffffff"><b><?php echo $LDFirstName; ?></td>
     <td background="<?php echo createBgSkin($root_path,'tableHeaderbg.gif'); ?>"><font face=arial size=2 color="#ffffff"><b><?php echo $LDBday; ?></td>
@@ -185,19 +189,29 @@ if($mode=='search'){
 						echo "
 							<tr bgcolor=";
 						if($toggle) { echo "#efefef>"; $toggle=0;} else {echo "#ffffff>"; $toggle=1;};
-						echo"<td><font face=arial size=2>";
+						echo '<td><font face=arial size=2>';
                         echo '&nbsp;'.$full_en;
 						if($zeile['encounter_class_nr']==2) echo ' <img '.createComIcon($root_path,'redflag.gif').'> <font size=1 color="red">'.$LDAmbulant.'</font>';
-                        echo "</td>";	
-						echo"<td><font face=arial size=2>";
-						echo "&nbsp;".ucfirst($zeile['name_last']);
-                        echo "</td>";	
-						echo"<td><font face=arial size=2>";
-						echo "&nbsp;".ucfirst($zeile['name_first']);
-                        echo "</td>";	
-						echo"<td><font face=arial size=2>";
-						echo "&nbsp;".formatDate2Local($zeile['date_birth'],$date_format);
-                        echo "</td>";	
+                        echo '&nbsp;</td>';	
+
+						echo '<td>';
+						switch($zeile['sex']){
+							case 'f': echo '<img '.$img_female.'>'; break;
+							case 'm': echo '<img '.$img_male.'>'; break;
+							default: echo '&nbsp;'; break;
+						}				
+                        echo '</td>
+						';	
+
+						echo '<td><font face=arial size=2>';
+						echo '&nbsp;'.ucfirst($zeile['name_last']);
+                        echo '</td>';	
+						echo '<td><font face=arial size=2>';
+						echo '&nbsp;'.ucfirst($zeile['name_first']);
+                        echo '</td>';	
+						echo '<td><font face=arial size=2>';
+						echo '&nbsp;'.formatDate2Local($zeile['date_birth'],$date_format);
+                        echo '</td>';	
 
 					    if($HTTP_COOKIE_VARS[$local_user.$sid]) echo '
 						<td><font face=arial size=2>&nbsp;

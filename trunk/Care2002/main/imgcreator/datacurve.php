@@ -19,7 +19,7 @@ GNU GPL. For details read file "copy_notice.txt".
 */
 function aligndate(&$ad,&$am,&$ay)
 {
-	if(!checkdate($am,$ad,$ay)) // checks if the day is valid for example Feb.29 or Sept. 31, last day of month, or last day of year, etc.
+	if(!checkdate($am,$ad,$ay)) # checks if the day is valid for example Feb.29 or Sept. 31, last day of month, or last day of year, etc.
 	{
 		if($am==12)
 		{
@@ -72,11 +72,11 @@ if($dblink_ok){
 	}
 }
   
-/* Initialize general  dimensions */ 
-$tabhi=135; // Height of graph chart in pixels
-$tablen=700; // Total width of graph chart in pixels
-$tabcols=$tablen/28; // Total number of vertical lines
-$tabrows=$tabhi/20; // Total number of horizontal lines
+# Initialize general  dimensions  
+$tabhi=135; # Height of graph chart in pixels
+$tablen=700; # Total width of graph chart in pixels
+$tabcols=$tablen/28; # Total number of vertical lines
+$tabrows=$tabhi/20; # Total number of horizontal lines
 
 header ('Content-type: image/PNG');
 
@@ -86,25 +86,22 @@ $im=@ImageCreateFromPNG($root_path.'main/imgcreator/datacurve.png'); // Loads th
 * The next set of codes create the graph chart on-the-fly 
 * if the ready made image is not loaded successfully
 */
-if(!$im)
-{
- $im = @ImageCreate ($tablen, $tabhi)
-     or die ("Cannot Initialize new GD image stream");
-// $background_color = ImageColorAllocate ($im, 205,225,236);
-$background_color = ImageColorAllocate ($im, 255,255,255);
-$text_color = ImageColorAllocate ($im, 0, 170, 255);
-/**
-* The vertical and horizontal lines are drawn
-*/
-for($i=$tabcols;$i<$tablen;$i+=$tabcols) ImageLine($im,$i,0,$i,$tabhi-1,$text_color);
-for($i=$tabrows;$i<$tabhi;$i+=$tabrows) ImageLine($im,0,$i,$tablen-1,$i,$text_color);
-ImageLine($im,0,$tabhi-1,$tablen-1,$tabhi-1,$text_color);
+if(!$im){
+	$im = @ImageCreate ($tablen, $tabhi);
+	// $background_color = ImageColorAllocate ($im, 205,225,236);
+	$background_color = ImageColorAllocate ($im, 255,255,255);
+	$text_color = ImageColorAllocate ($im, 0, 170, 255);
+	# The vertical and horizontal lines are drawn
+
+	for($i=$tabcols;$i<$tablen;$i+=$tabcols) ImageLine($im,$i,0,$i,$tabhi-1,$text_color);
+	for($i=$tabrows;$i<$tabhi;$i+=$tabrows) ImageLine($im,0,$i,$tablen-1,$i,$text_color);
+	ImageLine($im,0,$tabhi-1,$tablen-1,$tabhi-1,$text_color);
 }
 
 $text_red = ImageColorAllocate ($im, 255, 0, 0);
 $text_blue = ImageColorAllocate ($im, 0, 0, 255);
 
-//**************** start drawing the graph values ***********************
+#**************** start drawing the graph values ***********************
 /**
 * These variables are used in the following lines of code
 *
@@ -128,7 +125,7 @@ $tx1=0; $ty1=0;
 for($n=0,$xof=0;$n<7;$n++,$xof+=$xoffs)
 {
 	$date=$dateshifter->shift_dates($start,-($n),'d');	
-//**************** begin of curve tracing  Blood Pressure***************
+#**************** begin of curve tracing  Blood Pressure***************
 	if($bprows){
     	for($i=0;$i<$bprows;$i++)
     	{
@@ -144,7 +141,7 @@ for($n=0,$xof=0;$n<7;$n++,$xof+=$xoffs)
     	}
 		$bp_obj->MoveFirst();
 	}
-//**************** begin of curve tracing  Temperature***************
+#**************** begin of curve tracing  Temperature***************
 	if($trows){
 		for($i=0;$i<$trows;$i++){
         	$bc=$temp_obj->FetchRow();

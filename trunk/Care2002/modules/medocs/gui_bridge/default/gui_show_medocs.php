@@ -89,7 +89,7 @@ require('./gui_bridge/default/gui_tabs_medocs.php');
 
 <table border=0 width=100% cellspacing=1 cellpadding=3>
 <?php
-if($is_discharged){
+if($enc_obj->Is_Discharged()){
 ?>
   <tr>
     <td bgcolor="red" colspan=3>&nbsp;<FONT    SIZE=2  FACE="verdana,Arial" color="#ffffff"><img <?php echo createComIcon($root_path,'warn.gif','0','absmiddle'); ?>> <b><?php echo $LDPatientIsDischarged; ?></b></font></td>
@@ -133,6 +133,10 @@ echo $LDAdmitNr;
 <td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php echo $LDFirstName ?>:
 </td>
 <td bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial" color="#990000"><b><?php echo $name_first; ?></b>
+<?php
+# If person is dead show a black cross
+if($death_date&&$death_date!='0000-00-00') echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0').'>';
+?>
 </td>
 </tr>
 
@@ -168,6 +172,12 @@ createTR($LDNameOthers,$name_others);
 </td>
 <td  bgcolor="#ffffee" ><FONT SIZE=-1  FACE="Arial"  color="#990000">
 <b><?php       echo @formatDate2Local($date_birth,$date_format);  ?></b>
+<?php
+# If person is dead show a black cross
+if($death_date&&$death_date!='0000-00-00'){
+	echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0').'>&nbsp;<font color="#000000">'.formatDate2Local($death_date,$date_format).'</font>';
+}
+?>
 </td>
 
 </tr>
@@ -286,7 +296,7 @@ eval("echo $TP_form;");
 <?php
 } 
 
-if(($mode=='show'||$mode=='details')&&!$is_discharged){
+if(($mode=='show'||$mode=='details')&&!$enc_obj->Is_Discharged()){
 ?>
 
 <p>

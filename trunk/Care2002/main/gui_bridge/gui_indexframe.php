@@ -117,6 +117,8 @@ echo $langselect;
 </form>
 </FONT>
 </TABLE>
-
+<center>
+<a href="http://www.opensource.org/" target="_blank"><img src="<?php echo $root_path ?>gui/img/common/default/osilogo.gif" border=0></a>
+</center>
 </BODY>
 </HTML>

@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -38,6 +38,11 @@ switch($mode)
 						$userck="ck_prod_bot_user";
 						$fileforward=$root_path."modules/products/products-bestellbot.php".$append.$userck;
 						break;
+	case "catalog":  $title=$LDOrderCat;
+						$src="catalogpass";
+						$userck="ck_prod_order_user";
+						$fileforward=$root_path."modules/products/products-bestellkatalog-edit.php".$append.$userck."&target=catalog&from=".$src;
+						break;
 	default: 	$title=$LDPharmaOrder;
 						$src="orderpass";
 					   $mode="order";
@@ -70,9 +75,8 @@ require($root_path.'include/inc_passcheck_head.php');
 
 <p>
 <FONT    SIZE=-1  FACE="Arial">
-
-<P>
-<FONT  COLOR="<?php echo $cfg[top_txtcolor] ?>"  SIZE=5  FACE="verdana"> <b><?php echo "$LDMedDepot $title" ?></b></font>
+<img src="../../gui/img/common/default/soft.png" border=0 width=64 height=64>
+<FONT  COLOR="<?php echo $cfg[top_txtcolor] ?>"  SIZE=5  FACE="verdana"> <b><?php echo "$LDMedDepot :: $title" ?></b></font>
 <p>
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
 
@@ -81,7 +85,7 @@ require($root_path.'include/inc_passcheck_head.php');
 <p>
 <!-- <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo "$LDIntro2 $LDMedDepot $title " ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo "$LDWhat2Do $LDMedDepot $title " ?>?</a><br>
- --><HR>
+ -->
 <p>
 
 <?php

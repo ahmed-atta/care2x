@@ -2,7 +2,7 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
-/*** CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+/*** CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -99,13 +99,25 @@ if($mode=='search'&&$enc_obj->record_count)
     <td class="v12">&nbsp;'.formatDate2Local($pdata['date_birth'],$date_format).'&nbsp;</td>
     <td class="v12">&nbsp;<a href="javascript:demopreview('.$i.')">'.$LDPreviewReport.' <img '.$img_arrow.'></a><input type="radio" name="xray_pic" value="1" onFocus="demopreview('.$i.')" >&nbsp;</td>
     <td class="v12">&nbsp; demo &nbsp;</td>
+    <td class="v12"><a href="javascript:window.top.location.replace(\'sampledicom.htm\')" title="'.$LDFullScreen.'"><img '.$img_torso.'></a></td>
+  </tr>
+  <tr>
+    <td colspan=7 bgcolor="#0000ff"></td>
+  </tr>';
+  	$i++;
+/*	echo '&nbsp;</td>
+    <td class="v12">&nbsp;'.$pdata['name_last'].'&nbsp;</td>
+    <td class="v12">&nbsp;'.$pdata['name_first'].'&nbsp;</td>
+    <td class="v12">&nbsp;'.formatDate2Local($pdata['date_birth'],$date_format).'&nbsp;</td>
+    <td class="v12">&nbsp;<a href="javascript:demopreview('.$i.')">'.$LDPreviewReport.' <img '.$img_arrow.'></a><input type="radio" name="xray_pic" value="1" onFocus="demopreview('.$i.')" >&nbsp;</td>
+    <td class="v12">&nbsp; demo &nbsp;</td>
     <td class="v12"><a href="javascript:window.top.location.replace(\'radiolog-xray-javastart.php'.URL_REDIRECT_APPEND.'&mode=display1\')" title="'.$LDFullScreen.'"><img '.$img_torso.'></a></td>
   </tr>
   <tr>
     <td colspan=7 bgcolor="#0000ff"></td>
   </tr>';
   	$i++;
-  }
+*/  }
 	echo '<input type="hidden" name="xray_pic" value="">';
 }
 ?>

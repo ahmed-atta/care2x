@@ -34,7 +34,7 @@ function Spacer()
                 </TR>
 			   
 			<?php
-			}else{
+			}elseif(!$death_date||$death_date=='0000-00-00'){
 			?>
                <TR bgColor=#eeeeee> <td align=center><img <?php echo createComIcon($root_path,'post_discussion.gif','0') ?>></td>
                 <TD vAlign=top ><FONT 
@@ -161,7 +161,7 @@ function Spacer()
 				  <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'people_search_online.gif','0') ?>></td>
                 <TD vAlign=top width=150><FONT 
                   face="Verdana,Helvetica,Arial" size=2> 
-				<a href="show_weight_height.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&target=<?php echo $target ?>"><?php echo $LDWtHt ?></a>
+				<a href="show_weight_height.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&target=<?php echo $target ?>"><?php echo $LDMeasurements ?></a>
 				   </FONT></TD>
                 </TR>
 				

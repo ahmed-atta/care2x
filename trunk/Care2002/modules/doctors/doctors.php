@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -15,15 +15,13 @@ define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 require($root_path.'include/inc_2level_reset.php');
 
-require_once($root_path.'include/inc_config_color.php');
-
 if(!session_is_registered('sess_path_referer')) session_register('sess_path_referer');
 $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 
-$HTTP_SESSION_VARS['sess_path_referer']=substr($top_dir,1).'/'.basename(__FILE__);
-/* Erase the cookie */
+$HTTP_SESSION_VARS['sess_path_referer']=$top_dir.basename(__FILE__);
+# Erase the cookie 
 if(isset($HTTP_COOKIE_VARS['ck_doctors_dienstplan_user'.$sid])) setcookie('ck_doctors_dienstplan_user'.$sid,'',0,'/');
-/* erase the user_origin */
+# erase the user_origin 
 if(isset($HTTP_SESSION_VARS['sess_user_origin'])) $HTTP_SESSION_VARS['sess_user_origin']='';
 
 ?>
@@ -64,6 +62,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 				  </nobr></B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><nobr><?php echo $LDQViewTxt ?></nobr></FONT></TD>
+				</tr>
               <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
@@ -86,7 +85,9 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 				  </nobr></B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><nobr><?php echo $LDDOCSTxt ?></nobr></FONT></TD>
-              <TR bgColor=#dddddd height=1>
+				 </tr>
+				 
+<!--               <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
                   width=5></TD></TR>
@@ -97,17 +98,21 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 				  </nobr></B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><nobr><?php echo $LDDOCSRTxt ?></nobr></FONT></TD>
+			</tr>
+ -->			
               <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
                   width=5></TD></TR>
-              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'people_search_online.gif','0') ?>></td>
+              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'forums.gif','0') ?>></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B><nobr>
 				 <a href="doctors-main-pass.php<?php echo URL_APPEND ?>&target=setpersonal&retpath=menu"><?php echo $LDDocsList ?></a>
 				  </nobr></B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><nobr><?php echo $LDDocsListTxt ?></nobr></FONT></TD>
+				</tr> 
+				  
 <!--               <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
@@ -120,18 +125,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><nobr><?php echo $LDDocsForumTxt ?></nobr></FONT></TD></TR>
  -->              
-               <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>
-               <TR bgColor=#eeeeee> <td align=center><img <?php echo createComIcon($root_path,'discussions.gif','0') ?>></td>
-                <TD vAlign=top width=150><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B>
-				<a href="<?php echo $root_path ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo $LDDocsForum ?></a>
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><nobr><?php echo $LDDocsForumTxt ?></nobr></FONT></TD></TR>
-            
+          
  			  <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
@@ -143,7 +137,8 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php echo $LDNewsTxt ?></FONT></TD></TR>
-              <TR bgColor=#dddddd height=1>
+				  
+<!--               <TR bgColor=#dddddd height=1>
                 <TD colSpan=3><IMG height=1 
                   src="../../gui/img/common/default/pixel.gif" 
                   width=5></TD></TR>
@@ -155,7 +150,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php echo $LDMemoTxt ?></FONT></TD></TR>
 				  
-		</TBODY>
+ -->		</TBODY>
 		</TABLE>
 		</TD></TR>
 		</TBODY>

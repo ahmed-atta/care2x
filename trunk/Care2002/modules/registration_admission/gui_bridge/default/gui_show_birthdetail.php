@@ -48,6 +48,11 @@ if($rows){
 					if($birth[$x]) echo $LDYes;
 						else echo $LDNo;
 					break;
+			case 'face_presentation':
+					if($birth[$x]) echo $LDYes;
+						else echo $LDNo;
+					break;
+			case 'classification': 	echo nl2br($birth[$x]); break;
 			default: echo $birth[$x];
 		}
 	?></td>

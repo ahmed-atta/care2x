@@ -1,3 +1,7 @@
+<?php
+if(!$is_discharged){
+?>
+
 <script language="javascript">
 <!-- Script Begin
 function chkSickForm(f) {
@@ -136,3 +140,19 @@ eval("echo $TP_sickform;");
  -->
 <input type="submit"  value="go"> 
 </form>
+<?php
+}else{
+?>
+<table border=0>
+  <tr>
+    <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','absmiddle') ?>></td>
+    <td><font color="#000099" SIZE=3  FACE="verdana,Arial"> <b>
+	<?php 
+		echo $norecordyet;
+	?></b></font>
+	</td>
+  </tr>
+</table>
+<?php
+}
+?>

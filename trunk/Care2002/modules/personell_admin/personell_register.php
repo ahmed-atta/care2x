@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -22,7 +22,6 @@ require($root_path.'include/inc_front_chain_lang.php');
 	exit;
 }
 */
-require_once($root_path.'include/inc_config_color.php');
 require_once($root_path.'include/inc_date_format_functions.php');
 require_once($root_path.'include/care_api_classes/class_person.php');
 require_once($root_path.'include/care_api_classes/class_insurance.php');
@@ -31,8 +30,6 @@ require_once($root_path.'include/care_api_classes/class_ward.php');
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 require_once($root_path.'include/care_api_classes/class_personell.php');
 
-if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
-	else $breakfile='personell_admin_pass.php'.URL_APPEND.'&target='.$target;
 
 $thisfile=basename(__FILE__);
 $returnfile=$breakfile;
@@ -181,6 +178,11 @@ if($pid||$personell_nr){
 $ward_obj=new Ward;
 $items='nr,name';
 $ward_info=&$ward_obj->getAllWardsItemsObject($items);
+
+if($update) $breakfile='personell_register_show.php'.URL_APPEND.'&personell_nr='.$personell_nr;
+	elseif($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
+		else $breakfile='personell_admin_pass.php'.URL_APPEND.'&target='.$target;
+
 
 /* Prepare the photo filename */
 require_once($root_path.'include/inc_photo_filename_resolve.php');

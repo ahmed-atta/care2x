@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -13,7 +13,9 @@ require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','products.php');
 $local_user='ck_prod_db_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
+# Create products object
+require_once($root_path.'include/care_api_classes/class_product.php');
+$product_obj=new Product;
 
 switch($cat)
 {
@@ -52,43 +54,23 @@ function getfilepath(d)
 	//document.inputform.picfilename.value=d.value;
 	document.prevpic.src=d.value;
 }
-
-function pruf(d)
-{
-	if(d.bestellnum.value=="")
-	{
-		alert("<?php echo $LDAlertNoOrderNr ?>");
-		return false;
-	}
-	if(d.artname.value=="")
-	{
-		alert("<?php echo $LDAlertNoArticleName ?>");
-		return false;
-	}
-	if(d.besc.value=="")
-	{
-		alert("<?php echo $LDAlertNoDescription ?>");
-		 return false;
-	}
-	return true;
-}
 	
 // -->
 </script> 
-
 <?php 
 require($root_path.'include/inc_js_gethelp.php');
+require($root_path.'include/inc_js_products.php');
 require($root_path.'include/inc_css_a_hilitebu.php');
 ?></HEAD>
 
-<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 <?php if($mode!="save") echo ' onLoad="document.inputform.bestellnum.focus()"'; ?>  
+<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 <?php if($mode!='save'&&$mode!='update') echo ' onLoad="document.inputform.bestellnum.focus()"'; ?>  
 <?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
 <tr valign=top>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="45">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG> &nbsp; <?php echo "$title $LDPharmaDb $LDNewProduct" ?></STRONG></FONT></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+1  FACE="Arial">
+<STRONG> &nbsp; <?php echo "$title::$LDPharmaDb::$LDNewProduct" ?></STRONG></FONT></td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
 <?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('products_db.php','input','<?php echo $mode ?>','<?php echo $cat ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
@@ -111,14 +93,14 @@ if($saveok)
 <?php endif ?>
 
 <?php if($update&&(!$updateok)&&($mode=='save'))
- echo $LDDataNoSaved.'<br>	<a href="apotheke-datenbank-functions-eingabe.php?sid='.$sid.'"><u>'.$LDClk2EnterNew.'</u></a>'; 
+ echo $LDDataNoSaved.'<br>	<a href="products-datenbank-functions-eingabe.php'.URL_APPEND.'&cat='.$cat.'"><u>'.$LDClk2EnterNew.'</u></a>'; 
 ?>
 </font>
-  <form ENCTYPE="multipart/form-data" action="<?php echo $thisfile?>" method="post" name="inputform" onSubmit="return pruf(this)">
-  <table border=0 cellspacing=2 cellpadding=3 width=100%>
+  <form ENCTYPE="multipart/form-data" action="<?php echo $thisfile?>" method="post" name="inputform" onSubmit="return prufform(this)">
+  <table border=0 cellspacing=2 cellpadding=3 >
     <tr >
       <td align=right width=140 bgcolor=#ffffdd><FONT face="Verdana,Helvetica,Arial" size=2 color=#000080><?php echo $LDOrderNr ?></td>
-      <td width=320  bgcolor=#ffffdd><?php if ($saveok) echo '<FONT face="Verdana,Helvetica,Arial" size=2>'.$bestellnum.'<input type="hidden" name="bestellnum" value="'.$bestellnum.'">'
+       <td width=320  bgcolor=#ffffdd><?php if ($saveok||$update) echo '<FONT face="Verdana,Helvetica,Arial" size=3><b>'.$bestellnum.'</b><input type="hidden" name="bestellnum" value="'.$bestellnum.'">'
                                                                                                       ; else echo '<input type="text" name="bestellnum" value="'.$bestellnum.'" size=20 maxlength=20>'; ?>
           </td>
 		  <td rowspan=13 valign=top  >

@@ -11,7 +11,6 @@ require("../language/".$lang."/lang_".$lang."_or.php");
 define('LANG_FILE','or.php');
 $local_user='ck_op_pflegelogbuch_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
 $dbtable='care_nursing_op_logbook';
 $thisfile="op-pflege-graph-getinfo.php";
@@ -98,8 +97,9 @@ if($dblink_ok)
 							if($ergebnis=$db->Execute($sql))
        							{
 									//echo $sql." new update <br>";
-									
+									//echo "location:$thisfile?sid=$sid&lang=$lang&saved=1&enc_nr=$enc_nr&winid=$winid&dept_nr=$dept_nr&saal=$saal&op_nr=$op_nr&year=$pyear&pmonth=$pmonth&pday=$pday";
 									header("location:$thisfile?sid=$sid&lang=$lang&saved=1&enc_nr=$enc_nr&winid=$winid&dept_nr=$dept_nr&saal=$saal&op_nr=$op_nr&year=$pyear&pmonth=$pmonth&pday=$pday");
+									exit;
 								}
 								else
 								{
@@ -306,10 +306,12 @@ function isgdatum(val,idx)
 
 function updatebar(x)
 {
-	if(x=="main")
-	window.opener.parent.LOGINPUT.location.replace('<?php echo "oploginput.php?sid=$sid&lang=$lang&mode=edit&enc_nr=$enc_nr&op_nr=$op_nr&dept_nr=$dept_nr&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday";?>');
-	else
-	window.opener.parent.OPLOGIMGBAR.location.replace('<?php echo "oplogtimebar.php?sid=$sid&lang=$lang&winid=$winid&enc_nr=$enc_nr&op_nr=$op_nr&dept_nr=$dept_nr&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday";?>');
+	if(x=="main"){
+		window.opener.parent.LOGINPUT.location.replace('<?php echo "oploginput.php?sid=$sid&lang=$lang&mode=edit&enc_nr=$enc_nr".$HTTP_SESSION_VARS['sess_comdat']; ?>');
+		window.opener.parent.OPLOGMAIN.location.replace("<?php echo "oplogmain.php?sid=$sid&lang=$lang&gotoid=$enc_nr".$HTTP_SESSION_VARS['sess_comdat']; ?>");
+	}else{
+		window.opener.parent.OPLOGIMGBAR.location.replace('<?php echo "oplogtimebar.php?sid=$sid&lang=$lang&winid=$winid&enc_nr=$enc_nr".$HTTP_SESSION_VARS['sess_comdat']; ?>');
+	}
 }
 //$imgsrc="../imgcreator/log-timebar.php?sid=$sid&winid=$winid&patnum=$patnum&op_nr=$op_nr&dept=$dept&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday";
 //-->

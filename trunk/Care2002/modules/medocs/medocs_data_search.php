@@ -58,12 +58,14 @@ if(($mode=='search')and($searchkey))
 			}
 			
 			$sql='SELECT enc.encounter_nr, 
+								enc.encounter_class_nr, 
+								enc.is_discharged,
 								reg.pid,
 								reg.name_last, 
 								reg.name_first, 
 								reg.date_birth, 
-								enc.encounter_class_nr, 
-								enc.is_discharged
+								reg.sex,
+								reg.death_date
 			          FROM 	care_encounter as enc,
 					  			care_person as reg 
 			          WHERE
@@ -75,6 +77,8 @@ if(($mode=='search')and($searchkey))
 					  )
 					  AND enc.pid=reg.pid  
 					  AND enc.encounter_status<>"cancelled"
+					  AND NOT enc.is_discharged
+					  AND (enc.in_ward OR enc.in_dept)
 					  AND enc.status NOT IN ("void","hidden","deleted","inactive")
 			          ORDER BY enc.encounter_nr ';
 					  
@@ -174,38 +178,29 @@ if($mode=='search'){
 		  
 	if ($linecount) { 
 
-	/* Load the common icons */
-	$img_options=createComIcon($root_path,'statbel2.gif','0');
 
-	echo '
+		# Load the common icons
+		$img_options=createComIcon($root_path,'statbel2.gif','0');
+	 	$img_male=createComIcon($root_path,'spm.gif','0');
+		$img_female=createComIcon($root_path,'spf.gif','0');
+
+		echo '
 			<table border=0 cellpadding=2 cellspacing=1> <tr bgcolor="#0000aa" background="'.createBgSkin($root_path,'tableHeaderbg.gif').'">';
 			
 ?>
 
-    <td><font face=arial size=2 color="#ffffff"><b><?php echo $LDCaseNr; ?></b></td>
-    <td><font face=arial size=2 color="#ffffff"><b><?php echo $LDLastName; ?></td>
-    <td><font face=arial size=2 color="#ffffff"><b><?php echo $LDFirstName; ?></td>
-    <td><font face=arial size=2 color="#ffffff"><b><?php echo $LDBday; ?></td>
-    <td><font face=arial size=2 color="#ffffff"><b><?php echo $LDOptions; ?></td>
+    	<td><font face=arial size=2 color="#ffffff"><b><?php echo $LDCaseNr; ?></b></td>
+    	<td><font face=arial size=2 color="#ffffff"><b>&nbsp;</td>
+   		<td><font face=arial size=2 color="#ffffff"><b><?php echo $LDLastName; ?></td>
+    	<td><font face=arial size=2 color="#ffffff"><b><?php echo $LDFirstName; ?></td>
+    	<td><font face=arial size=2 color="#ffffff"><b><?php echo $LDBday; ?></td>
+    	<td><font face=arial size=2 color="#ffffff"><b><?php echo $LDOptions; ?></td>
 
 <?php
-/*				for($i=0;$i<sizeof($fieldname);$i++) {
-						echo'
-						<td><font face=arial size=2 color="#ffffff"><b>'.$fieldname[$i].'</b></td>';
-		
-					}*/					
 					echo"</tr>";
 
 					while($zeile=$ergebnis->FetchRow())
 					{
-/*						switch ($zeile['encounter_class_nr'])
-						{
-						    case '1': $full_en = ($zeile['encounter_nr'] + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-							                   break;
-							case '2': $full_en = ($zeile['encounter_nr'] + $GLOBAL_CONFIG['patient_outpatient_nr_adder']);
-						    default: $full_en = ($zeile['encounter_nr'] + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-						}						
-*/						
 						$full_en=$zeile['encounter_nr'];
 						echo "
 							<tr bgcolor=";
@@ -213,12 +208,24 @@ if($mode=='search'){
 						echo"<td><font face=arial size=2>";
                         echo '&nbsp;'.$full_en;
 						if($zeile['encounter_class_nr']==2) echo ' <img '.createComIcon($root_path,'redflag.gif').'> <font size=1 color="red">'.$LDAmbulant.'</font>';
-                        echo "</td>";	
-						echo"<td><font face=arial size=2>";
+                        echo "</td><td>";	
+
+						switch($zeile['sex']){
+							case 'f': echo '<img '.$img_female.'>'; break;
+							case 'm': echo '<img '.$img_male.'>'; break;
+							default: echo '&nbsp;'; break;
+						}	
+						
+						echo"</td><td><font face=arial size=2>";
 						echo "&nbsp;".ucfirst($zeile['name_last']);
                         echo "</td>";	
 						echo"<td><font face=arial size=2>";
 						echo "&nbsp;".ucfirst($zeile['name_first']);
+						
+						# If person is dead show a black cross
+						if($zeile['death_date']&&$zeile['death_date']!='0000-00-00') echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0','absmiddle').'>';
+						
+						
                         echo "</td>";	
 						echo"<td><font face=arial size=2>";
 						echo "&nbsp;".formatDate2Local($zeile['date_birth'],$date_format);

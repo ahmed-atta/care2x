@@ -53,6 +53,20 @@ else
 		include_once($root_path.'include/care_api_classes/class_globalconfig.php');
         $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
         $glob_obj->getConfig('patient_%');
+		
+		# Create insurance object
+		include_once($root_path.'include/care_api_classes/class_insurance.php');
+		$ins_obj=new Insurance;
+		
+		include_once($root_path.'include/care_api_classes/class_ward.php');
+		$obj=new Ward;
+		# Get location data
+		$location=&$obj->EncounterLocationsInfo($en);
+		# Location info, admission class, blood group
+		$locstr=strtoupper($location['dept_id']).' '.strtoupper($location['ward_id']).' '.$location['roomprefix'];
+		if($location['room_nr'])  $locstr.='-'.$location['room_nr'];
+		if($location['bed_nr']) $locstr.=' '.strtoupper(chr($location['bed_nr']+96));
+		$locstr.=' '.$admit_type.' '.$LDInsShortID[$result['insurance_class_nr']];
 	   
 	//   $result['date_birth']=formatDate2Local($result['date_birth'],$date_format);
 	}
@@ -96,6 +110,8 @@ else
     ImageLine($im,285,50,569,50,$black);
     ImageLine($im,285,75,569,75,$black);
     for($n=0,$j=380;$n<2;$n++,$j+=95) ImageLine($im,$j,0,$j,50,$black);
+	
+	# Draw the main information - the largest label
     // write item labels
     ImageString($im,1,5,1,"$LDCaseNr:",$black);
     ImageString($im,4,5,9,$full_en,$black);
@@ -179,36 +195,75 @@ else
     ImageString($im,4,352,343,$result[therapy_option],$black);
     ImageString($im,1,466,336,"$LDServiceType:",$black);
     ImageString($im,4,466,343,$result['service_type'],$black);
-
+	
+	# Create the medium large labels
+	
     // -- create label 
     $label=ImageCreate(282,178);
     $ewhite = ImageColorAllocate ($label, 255,255,255); //white bkgrnd
     $elightgreen= ImageColorAllocate ($im, 205, 225, 236);
     $eblue=ImageColorAllocate($im, 0, 127, 255);
-    $eblack = ImageColorAllocate ($im, 0, 0, 0);
+    $eblack = ImageColorAllocate ($label, 0, 0, 0);
 	// place the barcode
     ImageCopy($label,$bc,101,4,9,9,170,37);
-    
-	// encounter number
-    ImageString($label,4,2,2,$full_en,$black);
-	// encounter date
-    ImageString($label,2,2,18,formatDate2Local($result['encounter_date'],$date_format),$black); 
-    ImageString($label,5,10,40,$result['name_last'].', '.$result['name_first'],$black);
-    ImageString($label,3,10,55,formatDate2Local($result['date_birth'],$date_format),$black);
-    //for($a=0,$l=75;$a<sizeof($addr);$a++,$l+=15) ImageString($label,4,10,$l,$addr[$a],$black);
-     ImageString($label,4,10,75,$result['addr_str'].' '.$result['addr_str_nr'],$black);
-     ImageString($label,4,10,90,$result['addr_zip'].' '.$result['addr_city_town'],$black);
+ 
+	if(function_exists(ImageTTFText)){
+		$arial='ARIAL.TTF';
+		$verdana='VERDANA.TTF';
+		
+		$tmargin=2;
+		$lmargin=6;
+		
+  		#  Full encounter nr
+    	ImageTTFText($label,12,0,$lmargin,$tmargin+14,$eblack,$arial,$full_en);
+		# Encounter admission date
+    	ImageTTFText($label,11,0,$lmargin,$tmargin+30,$eblack,$arial,formatDate2Local($result['encounter_date'],$date_format));
+		# Family name, first name
+    	ImageTTFText($label,16,0,$lmargin,$tmargin+56,$eblack,$arial,$result['name_last'].', '.$result['name_first']);
+		# Date of birth
+    	ImageTTFText($label,11,0,$lmargin,$tmargin+74,$eblack,$arial,$result['date_birth']);
+		# Address street nr, street name
+    	ImageTTFText($label,11,0,$lmargin,$tmargin+93,$eblack,$arial,ucfirst($result['addr_str']).' '.$result['addr_str_nr']);
+		# Address, zip, city/town name
+    	ImageTTFText($label,11,0,$lmargin,$tmargin+108,$eblack,$arial,ucfirst($result['addr_zip']).' '.$result['citytown_name']);
+		# Sex
+    	ImageTTFText($label,14,0,$lmargin,$tmargin+130,$eblack,$arial,strtoupper($result['sex']));
+		# Family name, repeat print
+    	ImageTTFText($label,14,0,$lmargin+30,$tmargin+130,$eblack,$arial,$result['name_last']);
+		# Insurance co name
+    	ImageTTFText($label,14,0,$lmargin,$tmargin+150,$eblack,$arial,$ins_obj->getFirmName($result['insurance_firm_id']));
+		# Location
+    	ImageTTFText($label,9,0,$lmargin,$tmargin+170,$eblack,$arial,$locstr);
+		#Blood group
+		if(stristr('AB',$result['blood_group'])){
+    		ImageTTFText($label,24,0,$lmargin+240,$tmargin+127,$eblack,$arial,$result['blood_group']);
+		}else{
+    		ImageTTFText($label,24,0,$lmargin+245,$tmargin+127,$eblack,$arial,$result['blood_group']);
+		}
+	}else{ # Use system fonts
+	   
+		// encounter number
+    	ImageString($label,4,2,2,$full_en,$black);
+		// encounter date
+   	 	ImageString($label,2,2,18,formatDate2Local($result['encounter_date'],$date_format),$black); 
+    	ImageString($label,5,10,40,$result['name_last'].', '.$result['name_first'],$black);
+    	ImageString($label,3,10,55,formatDate2Local($result['date_birth'],$date_format),$black);
+    	//for($a=0,$l=75;$a<sizeof($addr);$a++,$l+=15) ImageString($label,4,10,$l,$addr[$a],$black);
+     	ImageString($label,4,10,75,$result['addr_str'].' '.$result['addr_str_nr'],$black);
+     	ImageString($label,4,10,90,$result['addr_zip'].' '.$result['addr_city_town'],$black);
 	
+    	ImageString($label,5,10,125,strtoupper($result['sex']),$black);
+    	ImageString($label,5,30,125,$result['name_last'],$black);
+    	ImageString($label,4,10,140,$result['insurance_co_id'],$black);
+    	ImageString($label,3,10,160,$locstr,$black);
 	
-    ImageString($label,5,10,125,strtoupper($result['sex']),$black);
-    ImageString($label,5,30,125,$result['name_last'],$black);
-    ImageString($label,4,10,140,$result['insurance_co_id'],$black);
-    //ImageString($label,4,5,150,"$result[dept]   $result[ward]   $result[doc_art]   $result[s_code]",$black);
-    ImageString($label,3,10,160,$result['current_dept'].'      '.$result['current_room'].'      '.$result['extra_service'],$black);
+	}
 
+	
     // -- create smaller label
     $label2=ImageCreate(173,133);
     $e2white = ImageColorAllocate ($label2, 255,255,255); //white bkgrnd
+    $black = ImageColorAllocate ($label2, 0, 0, 0);
 	// -- place barcode
     ImageCopy($label2,$bc,2,0,9,7,170,37);
 
@@ -222,12 +277,15 @@ else
     ImageString($label2,3,50,85,formatDate2Local($result['date_birth'],$date_format),$black);
     //ImageString($label2,4,30,90,$result[name],$black);
     ImageString($label2,3,10,100,$result['insurance_co_id'],$black);
-    //ImageString($label,4,5,150,"$result[dept]   $result[ward]   $result[doc_art]   $result[s_code]",$black);
-    ImageString($label2,2,10,115,$result['current_dept'].'      '.$result['current_room'].'      '.$result['extra_service'],$black);
+    ImageString($label2,2,10,115,$locstr,$black);
     
+	
+	
     // ------------------------------------ create smaller label without barcode
     $label3=ImageCreate(173,133);
     $e3white = ImageColorAllocate ($label3, 255,255,255); //white bkgrnd
+    $black = ImageColorAllocate ($label3, 0, 0, 0);
+	
     ImageString($label3,4,10,2,$full_en,$black);
     ImageString($label3,2,110,2,formatDate2Local($result['encounter_date'],$date_format),$black);
     ImageString($label3,4,10,25,$result['name_last'].',',$black);

@@ -27,6 +27,8 @@ if(!isset($mode)){
 	# Prepare additional info for saving
 	$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
 	$HTTP_POST_VARS['modify_time']=date('YmdHis'); # Create own timestamp for cross db compatibility
+	if($HTTP_POST_VARS['docu_by']) $HTTP_POST_VARS['modify_id']=$HTTP_POST_VARS['docu_by'];
+		else $HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
 	if(empty($HTTP_POST_VARS['delivery_date'])) $HTTP_POST_VARS['delivery_date']=date('Y-m-d');
 		//else $HTTP_POST_VARS['delivery_date']=@formatDate2STD($HTTP_POST_VARS['delivery_date'],$date_format);
 
@@ -48,7 +50,8 @@ if(!isset($mode)){
 		$obj->deactivateBirthDetails($HTTP_SESSION_VARS['sess_pid']);
 		
 		$HTTP_POST_VARS['history']="Create ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
-		$HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		if($HTTP_POST_VARS['docu_by']) $HTTP_POST_VARS['create_id']=$HTTP_POST_VARS['docu_by'];
+			else $HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
 		$HTTP_POST_VARS['create_time']=date('YmdHis'); # Create own timestamp for cross db compatibility
 		$obj->setDataArray($HTTP_POST_VARS);
 

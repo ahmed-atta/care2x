@@ -25,7 +25,10 @@ switch($target)
 							
 $thisfile=basename(__FILE__);
 
-$breakfile='doctors.php'.URL_APPEND;
+switch($retpath){
+	case 'op': $breakfile=$root_path.'main/op-doku.php'.URL_APPEND;
+	default: $breakfile='doctors.php'.URL_APPEND;
+}
 
 $lognote="Doctors $title ok";
 
@@ -53,7 +56,7 @@ require($root_path.'include/inc_passcheck_head.php');
 
 <P>
 
-<img <?php echo createComIcon($root_path,'monitor2.gif','0','absmiddle') ?>>
+<img <?php echo createComIcon($root_path,'employee.gif','0','top') ?>>
 <FONT  COLOR="<?php echo$cfg['top_txtcolor'] ?>"  SIZE=6  FACE="verdana"> <b><?php echo $title ?></b></font>
 
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
@@ -63,7 +66,7 @@ require($root_path.'include/inc_passcheck_head.php');
 <p>
 <!-- <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo "$LDIntro2 $title" ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo "$LDWhat2Do $title" ?></a><br>
- --><HR>
+ -->
 <?php
 require($root_path.'include/inc_load_copyrite.php');
 ?>

@@ -52,8 +52,8 @@ require($root_path.'include/inc_passcheck_head.php');
 
 <P>
 
-<img <?php echo createComIcon($root_path,'monitor2.gif','0','absmiddle') ?>>
-<FONT  COLOR=#cc6600  SIZE=6  FACE="verdana"> <b><?php echo $title ?></b></font>
+<img <?php echo createComIcon($root_path,'smiley.gif','0','top') ?>>
+<FONT  COLOR="<?php echo$cfg['top_txtcolor'] ?>"  SIZE=6  FACE="verdana"> <b><?php echo $title ?></b></font>
 
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
 
@@ -62,7 +62,8 @@ require($root_path.'include/inc_passcheck_head.php');
 <p>
 <!-- <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo "$LDIntro2 $title" ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo "$LDWhat2Do $title" ?></a><br>
- --><hr>
+ -->
+
 <?php
 require($root_path.'include/inc_load_copyrite.php');
 ?>

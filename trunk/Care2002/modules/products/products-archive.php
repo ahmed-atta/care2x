@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -15,11 +15,13 @@ $local_user='ck_prod_arch_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_config_color.php');
 
-if(!isset($dept)||!$dept)
+/*if(!isset($dept)||!$dept)
 {
 	if(isset($HTTP_COOKIE_VARS['ck_thispc_dept'])&&!empty($HTTP_COOKIE_VARS['ck_thispc_dept'])) $dept=$HTTP_COOKIE_VARS['ck_thispc_dept'];
 	 else $dept='plop';//default is plop dept
 }
+*/
+
 if(!isset($mode)) $mode='';
 if(!isset($keyword)) $keyword='';
 
@@ -104,9 +106,13 @@ if((($mode=='search')||$update)&&($keyword!=''))
 				
 				($such_prio)?  $spr=$keyword : $spr='';
 				
-				$sql='SELECT * FROM '.$dbtable.' WHERE order_date="'.$sdt.'" 
-																OR dept="'.$sdp.'" 
-																OR priority="'.$spr.'" ORDER BY order_date DESC,  order_time DESC
+						$sql='SELECT o.* FROM '.$dbtable.' AS o  LEFT JOIN care_department AS d  ON o.dept_nr=d.nr
+													WHERE (o.order_date = "'.$sdt.'" 
+																OR o.dept_nr = "'.$sdp.'" 
+																OR ((d.name_formal = "'.$sdp.'" OR d.id = "'.$sdp.'") AND d.nr=o.dept_nr)
+																OR o.priority = "'.$spr.'" )
+																AND o.status="archive"
+																ORDER BY o.order_date DESC,  o.order_time DESC
 																LIMIT '.$ofset.', '.$nrows;
 				//echo $sql;
 						
@@ -118,9 +124,13 @@ if((($mode=='search')||$update)&&($keyword!=''))
 						($such_dept)? $sdp.='%' : $sdp='';
 						($such_prio)?  $spr.='%' : $spr='';
 						
-						$sql='SELECT * FROM '.$dbtable.' WHERE order_date LIKE "'.$sdt.'" 
-																OR dept LIKE "'.$sdp.'" 
-																OR priority LIKE "'.$spr.'" ORDER BY order_date DESC,  order_time DESC
+						$sql='SELECT o.* FROM '.$dbtable.' AS o  LEFT JOIN care_department AS d ON o.dept_nr=d.nr
+													WHERE (o.order_date LIKE "'.$sdt.'" 
+																OR o.dept_nr LIKE "'.$sdp.'" 
+																OR ((d.name_formal LIKE "'.$sdp.'%" OR d.id LIKE "'.$sdp.'%") AND d.nr=o.dept_nr)
+																OR o.priority LIKE "'.$spr.'" )
+																AND o.status="archive"
+																ORDER BY o.order_date DESC,  o.order_time DESC
 																LIMIT '.$ofset.', '.$nrows;
 						$linecount=0;
         				if($ergebnis=$db->Execute($sql)) {
@@ -202,8 +212,18 @@ echo ' '.$HTTP_COOKIE_VARS[$local_user.$sid];
 <?php require($root_path.'include/inc_products_archive_search_form.php'); ?>
 
 <hr width=80% align=left>
-<?php if($linecount>0)
-{
+<?php 
+if($linecount>0){
+
+	# Create the department object
+	include_once($root_path.'include/care_api_classes/class_department.php');
+	$dept_obj=new Department;
+	if($depts=&$dept_obj->getAllActiveObject()){
+		while($buf=$depts->FetchRow()){
+			$dept[$buf['nr']]=$buf;
+		}
+	}
+
 	echo '
 			<font face=Verdana,Arial size=2>
 			<p> ';
@@ -237,8 +257,15 @@ echo ' '.$HTTP_COOKIE_VARS[$local_user.$sid];
 */			
             echo'
 				<td><font face=Verdana,Arial size=2>'.$i.'</td>
-				<td><a href="products-archive-orderlist-showcontent.php'.URL_APPEND.'&userck='.$userck.'&cat='.$cat.'&dept='.$content['dept'].'&order_nr='.$content['order_nr'].'"><img '.createComIcon($root_path,'uparrowgrnlrg.gif','0').' alt="'.$LDClk2SeeEdit.'"></a></td>
-				<td ><font face=Verdana,Arial size=2>'.strtoupper($content['dept']).'</td>
+				<td><a href="products-archive-orderlist-showcontent.php'.URL_APPEND.'&userck='.$userck.'&cat='.$cat.'&dept_nr='.$content['dept_nr'].'&order_nr='.$content['order_nr'].'"><img '.createComIcon($root_path,'uparrowgrnlrg.gif','0').' alt="'.$LDClk2SeeEdit.'"></a></td>
+				<td ><font face=Verdana,Arial size=2>';
+				
+				$buffer=$dept[$content['dept_nr']]['LD_var'];
+				if(isset($$buffer)&&!empty($$buffer)) 	echo $$buffer;
+					else echo $dept[$content['dept_nr']]['name_formal'];
+				
+				echo '
+				</td>
 				<td><font face=Verdana,Arial size=2>';
 				
 			echo formatDate2Local($content['order_date'],$date_format).'</td>

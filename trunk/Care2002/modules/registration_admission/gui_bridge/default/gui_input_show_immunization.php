@@ -3,8 +3,41 @@ include_once($root_path.'include/care_api_classes/class_immunization.php');
 if(!isset($imm_obj)) $imm_obj=new Immunization;
 $imm_types=$imm_obj->getAppTypes();
 ?>
+<script language="JavaScript">
+<!-- Script Begin
+function chkform(d) {
+	if(d.date.value==""){
+		alert("<?php echo $LDPlsEnterDate; ?>");
+		d.date.focus();
+		return false;
+	}else if(d.type.value==""){
+		alert("<?php echo $LDPlsEnterMedType; ?>");
+		d.type.focus();
+		return false;
+	}else if(d.medicine.value==""){
+		alert("<?php echo $LDPlsEnterMedicine; ?>");
+		d.medicine.focus();
+		return false;
+	}else if(d.dosage.value==""){
+		alert("<?php echo $LDPlsEnterDosage; ?>");
+		d.dosage.focus();
+		return false;
+	}else if(d.application_type_nr.value==""){
+		alert("<?php echo $LDPlsSelectAppType; ?>");
+		d.application_type_nr.focus();
+		return false;
+	}else if(d.application_by.value==""){
+		alert("<?php echo $LDPlsEnterFullName; ?>");
+		d.application_by.focus();
+		return false;
+	}else{
+		return true;
+	}
+}
+//  Script End -->
+</script>
 
-<form method="post" name="reportform">
+<form method="post" name="reportform" onSubmit="return chkform(this)">
  <table border=0 cellpadding=2 width=100%>
    <tr bgcolor="#f6f6f6">
      <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDate; ?></td>

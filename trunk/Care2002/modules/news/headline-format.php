@@ -9,8 +9,25 @@ require_once($root_path.'include/inc_news_display_config.php');
 <tr>
 <td>
 
-	 <img <?php echo createComIcon($root_path,'headline4.png','0') ?>><br>
-</td>
+<table border=0 bgcolor=#cfcfcf cellpadding=1 cellspacing=0 width=100%>
+  <tr>
+    <td>
+	<table border=0 bgcolor=#ffffff cellpadding=1 cellspacing=0 width=100%>
+   <tr>
+     <td><font face="Verdana, Arial" size=6 color=#800000>
+	 <b><?php echo $LDHeadline ?></b>
+	 </font>
+	 </td>
+   </tr>
+ </table>
+ 
+	</td>
+  </tr>
+</table>
+
+<!-- <img <?php //echo createLDImgSrc($root_path,'headline4.png','0') ?>><br>
+ -->
+ </td>
 </tr>
 <tr>
 <?php

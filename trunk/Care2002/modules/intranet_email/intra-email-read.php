@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -213,10 +213,10 @@ echo '
   {
   	case 'inbox': if($HTTP_COOKIE_VARS[$local_user.$sid]!=$content['sender']) 
 							{ $inp=0; echo '<input type="button" value="'.$LDReply.'" onClick="submitForm(1)"> '; break; }
-								else echo '<input type="button" value="'.$LDBack.'" onClick="window.location.href=\'intra-email.php'.URL_APPEND.'&mode=listmail&folder=inbox&l2h='.$l2h.'\'"> '; break;
+								else echo '<input type="button" value="'.$LDBack.'" onClick="window.location.href=\'intra-email.php'.URL_REDIRECT_APPEND.'&mode=listmail&folder=inbox&l2h='.$l2h.'\'"> '; break;
   	case 'sent': if($HTTP_COOKIE_VARS[$local_user.$sid]!=$content['recipient'])
 							{ $inp=1; echo '<input type="button" value="'.$LDResend.'" onClick="submitForm(2)"> ';break; }
-								else  echo '<input type="button" value="'.$LDBack.'" onClick="window.location.href=\'intra-email.php'.URL_APPEND.'&mode=listmail&folder=sent&l2h='.$l2h.'\'"> '; break;
+								else  echo '<input type="button" value="'.$LDBack.'" onClick="window.location.href=\'intra-email.php'.URL_REDIRECT_APPEND.'&mode=listmail&folder=sent&l2h='.$l2h.'\'"> '; break;
   	case 'drafts':$inp=1; echo '
  								 <input type="button" value="'.$LDNewEmail.'" onClick="submitForm(2)"> '; break;
   	case 'trash':if($HTTP_COOKIE_VARS[$local_user.$sid]!=$content['recipient'])
@@ -228,7 +228,7 @@ echo '
     <input type="button" value="'.$LDForward.'" onClick="submitForm(3)"> ';
 		$buf="&t=$s_stamp&r=$read&f=$from&s=".strtr($subj," ","+")."&d=".strtr($date," ","+")."&z=$size";
  echo '
-	<input type="button" value="'.$LDDelete.'" onClick="if(confirm(\''.$LDAskDeleteMail.'\')) window.location.href=\'intra-email-delete.php'.URL_APPEND.'&maxrow=1&create=1&folder='.$folder.'&l2h='.$l2h.$buf.'\';">';
+	<input type="button" value="'.$LDDelete.'" onClick="if(confirm(\''.$LDAskDeleteMail.'\')) window.location.href=\'intra-email-delete.php'.URL_REDIRECT_APPEND.'&maxrow=1&create=1&folder='.$folder.'&l2h='.$l2h.$buf.'\';">';
  echo '
 	 &nbsp; &nbsp; &nbsp; <a href="javascript:printer_v()" title="'.$LDClk4printer.'">'.$LDPrinterVersion.' <img '.createComIcon($root_path,'bul_arrowgrnsm.gif','0','bottom').'></a>	
 	

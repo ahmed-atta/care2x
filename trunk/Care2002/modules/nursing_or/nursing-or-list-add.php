@@ -10,14 +10,13 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define('LANG_FILE','doctors.php');
+//define('LANG_FILE','doctors.php');
 if($HTTP_SESSION_VARS['sess_user_origin']=='personell_admin'){
 	$local_user='aufnahme_user';
 }else{
 	$local_user='ck_op_dienstplan_user';
 }
 require_once($root_path.'include/inc_front_chain_lang.php');
-//require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
 require_once($root_path.'include/care_api_classes/class_personell.php');
 $pers_obj=new Personell;
@@ -49,10 +48,11 @@ switch($mode){
 					break;
 	case 'delete':
 					$data['status']='deleted';
+					$data['date_end']=date('Y-m-d');
 					$data['history']="CONCAT(history,'Deleted: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n')";
 					$pers_obj->setDataArray($data);
 					if(!$pers_obj->updateDataFromInternalArray($item_nr))  echo "$obj->sql<br>$LDDbNoUpdate";
 }
-header("location:nursing-or-dienst-personalliste.php".URL_REDIRECT_APPEND."&saved=1&retpath=$retpath&dept_nr=$dept_nr&nr=$nr");
+header("location:nursing-or-dienst-personalliste.php".URL_REDIRECT_APPEND."&saved=1&retpath=$retpath&ipath=$ipath&dept_nr=$dept_nr&nr=$nr");
 exit;
 ?>

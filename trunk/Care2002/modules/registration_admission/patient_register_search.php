@@ -70,7 +70,7 @@ if(isset($mode)&&($mode=='search')&&isset($searchkey)&&($searchkey)){
 			$suchbuffer=$suchwort;
 		}
 			 
-			$sql='SELECT pid, name_last, name_first, date_birth FROM '.$dbtable.' 
+			$sql='SELECT pid, name_last, name_first, date_birth, sex, death_date FROM '.$dbtable.' 
 						WHERE ( pid="'.$suchwort.'"
 									OR  name_last LIKE "'.$suchwort.'%" 
 			                		OR name_first LIKE "'.$suchwort.'%"
@@ -183,8 +183,11 @@ if($parent_admit) $bgimg='tableHeaderbg3.gif';
 	else $bgimg='tableHeader_gr.gif';
 $tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
 
-if ($linecount) 
-	{ 
+if ($linecount){
+
+	$img_male=createComIcon($root_path,'spm.gif','0');
+	$img_female=createComIcon($root_path,'spf.gif','0');
+ 
          echo '<hr width=80% align=left><p>'.str_replace("~nr~",$linecount,$LDSearchFound).'<p>';
 					mysql_data_seek($ergebnis,0);
 
@@ -192,6 +195,7 @@ if ($linecount)
 						<table border=0 cellpadding=2 cellspacing=1> <tr bgcolor="#66ee66" background="'.$root_path.'gui/img/common/default/tableHeaderbg.gif">';
 ?>
       <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>&nbsp;&nbsp;<?php echo $LDRegistryNr; ?></b></td>
+      <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066">&nbsp;</b></td>
       <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>&nbsp;&nbsp;<?php echo $LDLastName; ?></b></td>
       <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>&nbsp;&nbsp;<?php echo $LDFirstName; ?></b></td>
       <td <?php echo $tbg; ?>><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>&nbsp;&nbsp;<?php echo $LDBday; ?></b></td>
@@ -213,12 +217,26 @@ if ($linecount)
 						if($toggle) { echo "#efefef>"; $toggle=0;} else {echo "#ffffff>"; $toggle=1;};
 						echo '<td align="right"><font face=arial size=2>';
 						echo "&nbsp;".$zeile['pid'];
-                        echo "</td>";	
+                        echo "&nbsp;</td>";	
+						
+						echo '<td>';
+						switch($zeile['sex']){
+							case 'f': echo '<img '.$img_female.'>'; break;
+							case 'm': echo '<img '.$img_male.'>'; break;
+							default: echo '&nbsp;'; break;
+						}
+						
+                        echo '</td>
+						';	
+
+						
 						echo"<td><font face=arial size=2>";
 						echo "&nbsp;".ucfirst($zeile['name_last']);
                         echo "</td>";	
 						echo"<td><font face=arial size=2>";
 						echo "&nbsp;".ucfirst($zeile['name_first']);
+						# If person is dead show a black cross
+						if($zeile['death_date']&&$zeile['death_date']!='0000-00-00') echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0','absmiddle').'>';
                         echo "</td>";	
 						echo"<td><font face=arial size=2>";
 						echo "&nbsp;".formatDate2Local($zeile['date_birth'],$date_format);
@@ -267,7 +285,7 @@ if(isset($origin) && $origin=='pass')
 {
 ?>
 <form action="patient_register.php" method=post>
-<input type=submit value="<?php echo $LDNewForm ?>" onClick=hidecat()>
+<input type=submit value="<?php echo $LDNewForm ?>">
 <input type=hidden name="sid" value=<?php echo $sid; ?>>
 <input type=hidden name="lang" value="<?php echo $lang; ?>">
 </form>

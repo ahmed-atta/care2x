@@ -29,7 +29,7 @@ $img=new Image;
 
 
 $dirselectfile='fotolab-dir-select.php';
-$breakfile="javascript:window.parent.location.replace('spediens.php?sid=$sid&lang=$lang')";
+$breakfile="javascript:window.parent.location.replace('".$root_path."main/spediens.php?sid=$sid&lang=$lang')";
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -81,13 +81,21 @@ href="javascript:gethelp('fotolab.php','save','')"><img <?php echo createLDImgSr
 </tr>
 <tr valign=top >
 <td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
-<p><font face=verdana,arial size=2 color="#cc0000">
-<?php echo $LDPicsSaved ?><p>
-<font color="#000000">
+<p>
+<font face=verdana,arial size=2  color="#000000">
+<?php	
+echo "[$patnum] $lastname, $firstname ($bday)<p>";
+echo "<font face=verdana,arial size=2 color=\"#cc0000\">$LDPicsSaved</font>";
+ ?><p>
+
+
 <?php
 $picfilename=array();
-if($maxpic)
-{
+if($maxpic){
+?>
+<table border=0>
+<?php
+
 	# Set the encounter as the directory name		
 		$picdir=$patnum;
 		
@@ -107,7 +115,7 @@ if($maxpic)
 		   $picfile='picfile'.$i;
 		   $shotdate='sdate'.$i;
 		   $shotnr='nr'.$i;//echo $shotnr."<br>";
-		   echo $picfile.' '.$shotdate.' '.$shotnr;
+		   //echo $picfile.' '.$shotdate.' '.$shotnr;
 		   # Check the image
 		   if(!$img->isValidUploadedImage($HTTP_POST_FILES[$picfile])) continue;
 		   # Get the file extension
@@ -123,7 +131,7 @@ if($maxpic)
 				if($picnr=$img->saveImageData($data)){
 			   		$picfilename[$i]=$picnr.'.'.$picext;
 		
-		      		echo $HTTP_POST_FILES[$picfile]['name'].' <img '.createComIcon($root_path,'fwd.gif','0','absmiddle').'> ';
+		      		echo '<tr><td>'.$HTTP_POST_FILES[$picfile]['name'].'</td><td> <img '.createComIcon($root_path,'fwd.gif','0','absmiddle').'> ';
 		       		if($disc_pix_mode)
 		       		{
 			      		if(!is_dir($d)){
@@ -147,7 +155,8 @@ if($maxpic)
 		       		echo '<font color="#cc0000"><a href="javascript:previewpic(\'';
 		       		if($disc_pix_mode) echo $root_path.$fotoserver_localpath; else echo $fotoserver_http;
 		       		echo $picdir.'/'.$picfilename[$i].'\')">'.$picfilename[$i].'</a></font>';
- 		       		echo '<hr>';	
+ 		       		echo '</td></tr>';	
+ 		       		//echo '<hr>';	
 			   }else{
 			   		echo $img->getLastQuery();
 				}
@@ -224,25 +233,37 @@ if(!$disc_pix_mode)
 		}
 	}
  }
+?>
+</table>
+<?php
 }
 ?>
+&nbsp;
+<p>
 <font color="#cc0000"><b><?php echo "$LDSave $LDOptions:" ?></b></font>
 <form action="<?php echo $dirselectfile ?>" method="post">
 <img <?php echo createComIcon($root_path,'video.gif','0') ?>><br><?php echo "$LDSave " ?><?php echo $LDAdditional ?> 
 <input type="text" name="maxpic" size=1 maxlength=2 value="<?php echo $maxpic ?>"> <?php echo $LDMorePics ?>:<input type="submit" value="<?php echo $LDGO ?>">
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
 <input type="hidden" name="lang" value="<?php echo $lang ?>">
+<input type="hidden" name="patnum" value="<?php echo $patnum ?>">
+<input type="hidden" name="lastname" value="<?php echo $lastname ?>">
+<input type="hidden" name="firstname" value="<?php echo $firstname ?>">
+<input type="hidden" name="bday" value="<?php echo $bday ?>">
 <input type="hidden" name="lastnr" value="<?php $lastnr='nr'.($maxpic-1); echo $$lastnr; ?>">
 <input type="hidden" name="same_pat" value="1">
 
 </form>
 <p>
-<form action="fotolab-dir-select.php" method="post">
-<img <?php echo createComIcon($root_path,'video.gif','0') ?>><br><?php echo $LDSave ?><input type="text" name="maxpic" size=1 maxlength=2 value="<?php echo $maxpic ?>">
+
+<form action="upload_search_patient.php" method="post">
+<img <?php echo createComIcon($root_path,'video.gif','0') ?>><br><?php echo $LDSave ?><input type="text" name="aux1" size=1 maxlength=2 value="<?php echo $maxpic ?>">
 <?php echo $LDNewPics ?>:<input type="submit" value="<?php echo $LDGO ?>">
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
 <input type="hidden" name="lang" value="<?php echo $lang ?>">
-</form></FONT>
+</form>
+
+</FONT>
 
 </td>
 </tr>

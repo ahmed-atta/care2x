@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -30,6 +30,9 @@ switch($target)
 	case 'personell_search':$fileforward='personell_search.php'.$append.'&origin=pass&target=personell_search'; 
 						$lognote='Personell search  ok';
 						 break;
+	case 'personell_listall':$fileforward='personell_listall.php'.$append.'&origin=pass&target=personell_listall'; 
+						$lognote='Personell list all  ok';
+						 break;
 	default: $target='person_reg';
 				$lognote='Person register ok';
 				$fileforward='personell_register.php'.$append.'&origin=pass&target=personell_reg'; 
@@ -43,7 +46,8 @@ $userck='aufnahme_user';
 //reset cookie;
 // reset all 2nd level lock cookies
 setcookie($userck.$sid,'',0,'/');
-require($root_path.'include/inc_2level_reset.php'); setcookie(ck_2level_sid.$sid,'',0,'/');
+require($root_path.'include/inc_2level_reset.php');
+setcookie(ck_2level_sid.$sid,'',0,'/');
 
 require($root_path.'include/inc_passcheck_internchk.php');
 if ($pass=='check') 	
@@ -51,7 +55,6 @@ if ($pass=='check')
 
 $errbuf=$LDAdmission;
 
-require_once($root_path.'include/inc_config_color.php');
 require($root_path.'include/inc_passcheck_head.php');
 
 /* erase the user_origin */
@@ -66,17 +69,11 @@ if(isset($HTTP_SESSION_VARS['sess_user_origin'])) $HTTP_SESSION_VARS['sess_user_
 
 <P>
 <?php
-if($cfg['dhtml'])
-{
+
 $buf=$LDPersonellMngmnt;
 echo '
-<script language=javascript>
-<!--
- if (window.screen.width) 
- { if((window.screen.width)>1000) document.write(\'<img '.createComIcon($root_path,'monitor2.gif','0','absmiddle').'><FONT  COLOR="'.$cfg['top_txtcolor'].'"  SIZE=6  FACE="verdana"> <b>'.$buf.'</b></font>\');}
- //-->
- </script>';
- }
+<img '.createComIcon($root_path,'persons.gif','0','top').'><FONT  COLOR="'.$cfg['top_txtcolor'].'"  SIZE=6  FACE="verdana"> <b>'.$buf.'</b></font>';
+
  ?>
 
   
@@ -84,8 +81,11 @@ echo '
 <tr>
 <td colspan=3><?php if($target=="personell_reg") echo '<img '.createLDImgSrc($root_path,'employment_blue.gif','0').' alt="'.$LDAdmit.'">';
 								else{ echo'<a href="'.$thisfile.URL_APPEND.'&target=personell_reg"><img '.createLDImgSrc($root_path,'employment_gray.gif','0').' alt="'.$LDAdmit.'"'; if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';}
-							if($target=="personell_search") echo '<img '.createLDImgSrc($root_path,'such-b.gif','0').' alt="'.$LDSearch.'">';
-								else{ echo '<a href="'.$thisfile.URL_APPEND.'&target=personell_search"><img '.createLDImgSrc($root_path,'such-gray.gif','0').' alt="'.$LDSearch.'" ';if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';}
+							if($target=="personell_search") echo '<img '.createLDImgSrc($root_path,'src_emp_blu.gif','0').' alt="'.$LDSearch.'">';
+								else{ echo '<a href="'.$thisfile.URL_APPEND.'&target=personell_search"><img '.createLDImgSrc($root_path,'src_emp_gray.gif','0').' alt="'.$LDSearch.'" ';if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';}
+							if($target=="personell_listall") echo '<img '.createLDImgSrc($root_path,'lista-blu.gif','0').' alt="'.$LDSearch.'">';
+								else{ echo '<a href="'.$thisfile.URL_APPEND.'&target=personell_listall"><img '.createLDImgSrc($root_path,'lista-gray.gif','0').' alt="'.$LDSearch.'" ';if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';}
+							echo '<img src="'.$root_path.'gui/img/common/default/pixel.gif" width=20>';
 							if($target=="person_reg") echo '<img '.createLDImgSrc($root_path,'register_blue.gif','0').' alt="'.$LDSearch.'">';
 								else{ echo '<a href="'.$thisfile.URL_APPEND.'&target=person_reg"><img '.createLDImgSrc($root_path,'register_gray.gif','0').' alt="'.$LDSearch.'" ';if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)'; echo '></a>';}
 						?></td>

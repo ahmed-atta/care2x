@@ -24,9 +24,8 @@ if(empty($HTTP_COOKIE_VARS[$local_user.$sid])){
     $edit=0;
 	include($root_path."language/".$lang."/lang_".$lang."_".LANG_FILE);
 }
-/**
-* Set default values if not available from url
-*/
+
+# Set default values if not available from url
 if (!isset($station)||empty($station)) { $station=$HTTP_SESSION_VARS['sess_nursing_station'];} # Default station must be set here !!
 if(!isset($pday)||empty($pday)) $pday=date('d');
 if(!isset($pmonth)||empty($pmonth)) $pmonth=date('m');
@@ -38,6 +37,7 @@ if($s_date==date('Y-m-d')) $is_today=true;
 if(!isset($mode)) $mode='';
 
 $breakfile='nursing.php'.URL_APPEND; # Set default breakfile
+$thisfile=basename(__FILE__);
 
 if(isset($retpath)){
 	switch($retpath)
@@ -48,12 +48,13 @@ if(isset($retpath)){
 	}
 }
 
-/* Create ward object */
+# Create ward object
 require_once($root_path.'include/care_api_classes/class_ward.php');
 $ward_obj= new Ward;
 
 # Load date formatter 
 require_once($root_path.'include/inc_date_format_functions.php');
+require_once($root_path.'global_conf/inc_remoteservers_conf.php');
   
 if(($mode=='')||($mode=='fresh')){
 	if($ward_info=&$ward_obj->getWardInfo($ward_nr)){
@@ -68,6 +69,10 @@ if(($mode=='')||($mode=='fresh')){
 		# Get ward patients
 		if($is_today) $patients_obj=&$ward_obj->getDayWardOccupants($ward_nr);
 			else $patients_obj=&$ward_obj->getDayWardOccupants($ward_nr,$s_date);
+		
+		//echo $ward_obj->getLastQuery();
+		//echo $ward_obj->LastRecordCount();
+		
 		if(is_object($patients_obj)){
 			# Prepare patients data into array matrix
 			while($buf=$patients_obj->FetchRow()){
@@ -149,7 +154,7 @@ function getinfo(pn){
 	{ echo '
 	urlholder="nursing-station-patientdaten.php'.URL_REDIRECT_APPEND;
 	echo '&pn=" + pn + "';
-	echo "&pday=$pday&pmonth=$pmonth&pyear=$pyear&edit=$edit&station=$station"; 
+	echo "&pday=$pday&pmonth=$pmonth&pyear=$pyear&edit=$edit&station=".$ward_info['name']; 
 	echo '";';
 	echo '
 	patientwin=window.open(urlholder,pn,"width=700,height=600,menubar=no,resizable=yes,scrollbars=yes");
@@ -237,7 +242,7 @@ td.vn { font-family:verdana,arial; color:#000088; font-size:10}
 <table width=100% border=0 cellpadding="0" cellspacing=0>
 <tr>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=3  FACE="Arial"><STRONG> &nbsp;&nbsp; <?php echo "$LDStation  ".strtoupper($station)." $LDOccupancy (".formatDate2Local($s_date,$date_format,'','',$null='').")" ?> </STRONG></FONT>
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=3  FACE="Arial"><STRONG> &nbsp;&nbsp; <?php echo "$LDStation  ".$ward_info['name']." $LDOccupancy (".formatDate2Local($s_date,$date_format,'','',$null='').")" ?> </STRONG></FONT>
 </td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr>
 <a href="javascript:gethelp('nursing_station.php','<?php echo $mode ?>','<?php echo $occup ?>','<?php echo $station ?>','<?php echo "$LDStation" ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
@@ -379,12 +384,14 @@ for ($i=$ward_info['room_nr_start'];$i<=$ward_info['room_nr_end'];$i++){
 	# If patient, show images by sex
 	if($is_patient)
 	{
+		 $occ_list.='<a href="javascript:popPic(\''.$bed['name_last'].', '.$bed['name_first'].' '.formatDate2Local($bed['date_birth'],$date_format).'\',\''.$bed['photo_filename'].'\')">';
 		switch(strtolower($bed['sex']))
 		{
 			case 'f': $occ_list.='<img '.createComIcon($root_path,'spf.gif','0').'>'; $females++; break;
 			case 'm': $occ_list.='<img '.createComIcon($root_path,'spm.gif','0').'>'; $males++; break;
 			default: $occ_list.='<img '.createComIcon($root_path,'bn.gif','0').'>';break;
 		}
+		 $occ_list.='</a>';
 	}elseif($bed_locked){
 		$occ_list.='<img '.createComIcon($root_path,'delete2.gif','0').'>';
 	}
@@ -452,22 +459,26 @@ for ($i=$ward_info['room_nr_start'];$i<=$ward_info['room_nr_end'];$i++){
 		$occ_list.='
 			<td><nobr>';
 		if(($is_patient)&&!empty($bed['encounter_nr'])){	$occ_list.='&nbsp;
-		<a href="javascript:getinfo(\''.$bed['encounter_nr'].'\')"><img '.createComIcon($root_path,'open.gif','0').' alt="'.$LDShowPatData.'"></a>
-	 	<a href="javascript:getrem(\''.$bed['encounter_nr'].'\')"><img ';
-		if($bed['ward_notes']) $occ_list.=createComIcon($root_path,'bubble3.gif','0'); else $occ_list.=createComIcon($root_path,'bubble2.gif','0');
-		$occ_list.=' alt="'.$LDNoticeRW.'"></a>';
-		$occ_list.='&nbsp;<a href="javascript:Transfer(\''.$bed['encounter_nr'].'\')"><img '.createComIcon($root_path,'xchange.gif','0').' alt="'.$LDTransferPatient.'"></a>
-		 <a href="javascript:release(\''.$bed['room_nr'].'\',\''.$bed['bed_nr'].'\',\''.$bed['encounter_nr'].'\')"><img '.createComIcon($root_path,'bestell.gif','0').' alt="'.$LDReleasePatient.'"></a>';
-		 //<a href="javascript:deletePatient(\''.$helper[r].'\',\''.$helper[b].'\',\''.$helper[t].'\',\''.$helper[ln].'\')"><img src="../img/delete.gif" border=0 width=19 height=19 alt="Löschen (Passwort erforderlich)"></a>';
+			<a href="javascript:getinfo(\''.$bed['encounter_nr'].'\')"><img '.createComIcon($root_path,'open.gif','0').' alt="'.$LDShowPatData.'"></a>
+	 		<a href="javascript:getrem(\''.$bed['encounter_nr'].'\')"><img ';
+			if($bed['ward_notes']) $occ_list.=createComIcon($root_path,'bubble3.gif','0'); 
+				else $occ_list.=createComIcon($root_path,'bubble2.gif','0');
+			$occ_list.=' alt="'.$LDNoticeRW.'"></a>';
+			$occ_list.='&nbsp;<a href="javascript:Transfer(\''.$bed['encounter_nr'].'\')"><img '.createComIcon($root_path,'xchange.gif','0').' alt="'.$LDTransferPatient.'"></a>
+		 	<a href="javascript:release(\''.$bed['room_nr'].'\',\''.$bed['bed_nr'].'\',\''.$bed['encounter_nr'].'\')"><img '.createComIcon($root_path,'bestell.gif','0').' alt="'.$LDReleasePatient.'"></a>';
+		 	//<a href="javascript:deletePatient(\''.$helper[r].'\',\''.$helper[b].'\',\''.$helper[t].'\',\''.$helper[ln].'\')"><img src="../img/delete.gif" border=0 width=19 height=19 alt="Löschen (Passwort erforderlich)"></a>';
 		 }else{
 		 	$occ_list.='&nbsp;';
 		}
 		 $occ_list.='</nobr>
-	 	</td></tr>
-		 <tr><td bgcolor="#0000ee" colspan="8"><img '.createComIcon($root_path,'pixel.gif').'></td></tr> 
+	 	</td></tr>	 
 	 	';
-		}
+	}else{
+		$occ_list.='<td>
+	 	</td></tr>';
 	}
+	$occ_list.='<tr><td bgcolor="#0000ee" colspan="8"><img '.createComIcon($root_path,'pixel.gif').'></td></tr>';
+}
 }	
 # Final occupancy list line
 $occ_list.='</table>';
@@ -487,22 +498,26 @@ $TP_Legend1_BLOCK='';
 
 //$buf1='<img '.createComIcon($root_path,'powdot.gif','0','absmiddle').'>';
 # Create waiting list block
-if($waitlist_count){
+if($waitlist_count&&$edit){
 	while($waitpatient=$waitlist->FetchRow()){
 		$buf2='';
 		//if($waitpatient['current_ward_nr']!=$ward_nr) $buf2='<nobr>'.$waitpatient['ward_id'].'::';
 		if($waitpatient['current_ward_nr']!=$ward_nr) $buf2=createComIcon($root_path,'red_dot.gif','0');
 			else  $buf2=createComIcon($root_path,'green_dot.gif','0');
-		$TP_WLIST_BLOCK.='<nobr><img '.$buf2.'> <a href="javascript:assignWaiting(\''.$waitpatient['encounter_nr'].'\',\''.$waitpatient['ward_id'].'\')">'.$waitpatient['name_last'].', '.$waitpatient['name_first'].' '.formatDate2Local($waitpatient['date_birth'],$date_format).'</nobr></a><br>';
+		$TP_WLIST_BLOCK.='<nobr><img '.$buf2.'><a href="javascript:assignWaiting(\''.$waitpatient['encounter_nr'].'\',\''.$waitpatient['ward_id'].'\')">';
+		$TP_WLIST_BLOCK.='&nbsp;'.$waitpatient['name_last'].', '.$waitpatient['name_first'].' '.formatDate2Local($waitpatient['date_birth'],$date_format).'</nobr></a><br>';
+	}
+}else{
+	$TP_WLIST_BLOCK='&nbsp;';
+}
+if($edit){
+	$wlist_url=$thisfile.URL_APPEND.'&ward_nr='.$ward_nr.'&edit='.$edit.'&station='.$station;
+	if($w_waitlist){
+		$TP_WLIST_OPT =	'[<a href="'.$wlist_url.'&w_waitlist=0">'.$LDShowWardOnly.'</a>]';
+	}else{
+		$TP_WLIST_OPT=	'[<a href="'.$wlist_url.'&w_waitlist=1">'.$LDShowAll.'</a>]';
 	}
 }
-$wlist_url=$thisfile.URL_APPEND.'&ward_nr='.$ward_nr.'&edit='.$edit.'&station='.$station;
-if($w_waitlist){
-	$TP_WLIST_OPT =	'[<a href="'.$wlist_url.'&w_waitlist=0">'.$LDShowWardOnly.'</a>]';
-}else{
-	$TP_WLIST_OPT=	'[<a href="'.$wlist_url.'&w_waitlist=1">'.$LDShowAll.'</a>]';
-}
-
 # Create doctors-on-duty block
 if(isset($person1)){
 	$TP_DOC1_BLOCK='<a href="javascript:popinfo(\''.$pnr1.'\',\''.$dept_nr.'\')" title="'.$LDClk4Phone.'">'.$person1['name_last'].', '.$person1['name_first'].'</a>';
@@ -557,7 +572,14 @@ if($pday.$pmonth.$pyear<>date('dmY'))
 
 ?>
 <p>
-<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>></a>
+
+<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?>></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<font face="verdana,arial" size=2>
+<?php
+if(!$edit){
+	echo '<a href="nursing-station-pass.php'.URL_APPEND.'&edit=1&rt=pflege&ward_nr='.$ward_nr.'&station='.$ward_info['name'].'"><img '.createComIcon($root_path,'uparrowgrnlrg.gif','0','absmiddle').'> Open ward for management</a>';
+}
+?>
 </FONT>
 
 

@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -59,7 +59,7 @@ div.box { border: double; border-width: thin; width: 100%; border-color: black; 
 echo ucfirst($person['name_last']).', '.ucfirst($person['name_first']);
 ?>
 </b>
-<img <?php echo $img_source; ?> width=137 align="right">
+<img <?php echo $img_source; ?> align="right">
 </font>
 <p>
 
@@ -84,14 +84,19 @@ echo ucfirst($person['name_last']).', '.ucfirst($person['name_first']);
 </td>
 </tr>
 
-<tr>
+<!-- Temporary deactivated
+
+ <tr>
 <td bgcolor=#ffffcc><img <?php echo createComIcon($root_path,'warn.gif') ?>>&nbsp;<font face=verdana,arial size=2 ><b><?php echo $LDMoreInfo ?></b><br></font>
 </td>
 </tr>
+
+
 <tr>
 <td><font face=verdana,arial size=2 ><?php echo $pinfo["info"]; ?></font>
 </td>
 </tr>
+ -->
 </table>
 <p>
 

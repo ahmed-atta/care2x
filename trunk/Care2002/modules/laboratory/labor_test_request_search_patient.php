@@ -14,13 +14,10 @@ define('LANG_FILE','lab.php');
 $local_user='ck_lab_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-require_once($root_path.'include/inc_config_color.php');
-$keyword=strtr($keyword,"%"," ");
-$keyword=trim($keyword);
-
 $dbtable='care_admission_patient';
 
 $toggle=0;
+
 $append=URL_APPEND."&target=$target&noresize=1&user_origin=$user_origin";
 
 switch($target)
@@ -59,6 +56,8 @@ switch($target)
 $breakfile=$root_path.'modules/nursing/'.$breakfile;
 
 if(($mode=='search')&&!empty($searchkey)){
+	# Convert other wildcards
+	$searchkey=strtr($searchkey,'*?','%_');
 
 	include_once($root_path.'include/inc_date_format_functions.php');
 	include_once($root_path.'include/care_api_classes/class_encounter.php');
@@ -133,8 +132,10 @@ if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo "startframe.php?sid=".$sid."&
 <?php
 //echo $mode;
 echo '<hr width=80% align=left><p>'.str_replace("~nr~",$linecount,$LDSearchFound).'<p>';
-if ($enc_obj->record_count) 
-	{ 
+if ($enc_obj->record_count) { 
+	# Preload  common icon images
+	$img_male=createComIcon($root_path,'spm.gif','0');
+	$img_female=createComIcon($root_path,'spf.gif','0');
 
 					echo '
 						<table border=0 cellpadding=2 cellspacing=1> <tr bgcolor="#0000aa">';
@@ -148,23 +149,21 @@ if ($enc_obj->record_count)
 
 					while($row=$encounter->FetchRow())
 					{
-/*						switch ($row['encounter_class_nr'])
-						{
-						    case '1': $full_en = ($row['encounter_nr'] + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-							                   break;
-							case '2': $full_en = ($row['encounter_nr'] + $GLOBAL_CONFIG['patient_outpatient_nr_adder']);
-											break;
-						    default: $full_en = ($row['encounter_nr'] + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-						}						
-*/
 						$full_en=$row['encounter_nr'];
 						echo "
 							<tr bgcolor=";
 						if($toggle) { echo "#efefef>"; $toggle=0;} else {echo "#ffffff>"; $toggle=1;};
 						echo"<td><font face=arial size=2>";
 						echo "&nbsp;".$full_en;
-                        echo "</td>";	
-						echo"<td><font face=arial size=2>";
+                        echo '&nbsp;</td><td>';	
+
+						switch($row['sex']){
+							case 'f': echo '<img '.$img_female.'>'; break;
+							case 'm': echo '<img '.$img_male.'>'; break;
+							default: echo '&nbsp;'; break;
+						}	
+						
+						echo'</td><td><font face=arial size=2>';
 						echo "&nbsp;".ucfirst($row['name_last']);
                         echo "</td>";	
 						echo"<td><font face=arial size=2>";

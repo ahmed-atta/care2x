@@ -4,8 +4,37 @@ if(!isset($pres_obj)) $pres_obj=new Prescription;
 $app_types=$pres_obj->getAppTypes();
 $pres_types=$pres_obj->getPrescriptionTypes();
 ?>
+<script language="JavaScript">
+<!-- Script Begin
+function chkform(d) {
+	if(d.prescribe_date.value==""){
+		alert("<?php echo $LDPlsEnterDate; ?>");
+		d.prescribe_date.focus();
+		return false;
+	}else if(d.article.value==""){
+		alert("<?php echo $LDPlsEnterMedicine; ?>");
+		d.article.focus();
+		return false;
+	}else if(d.dosage.value==""){
+		alert("<?php echo $LDPlsEnterDosage; ?>");
+		d.dosage.focus();
+		return false;
+	}else if(d.application_type_nr.value==""){
+		alert("<?php echo $LDPlsSelectAppType; ?>");
+		d.application_type_nr.focus();
+		return false;
+	}else if(d.prescriber.value==""){
+		alert("<?php echo $LDPlsEnterFullName; ?>");
+		d.prescriber.focus();
+		return false;
+	}else{
+		return true;
+	}
+}
+//  Script End -->
+</script>
 
-<form method="post" name="reportform">
+<form method="post" name="reportform" onSubmit="return chkform(this)">
  <table border=0 cellpadding=2 width=100%>
    <tr bgcolor="#f6f6f6">
      <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDate; ?></td>

@@ -3,20 +3,22 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-$lang_tables=array('departments.php');
+
+# If cache must be deactivated, set $force_no_cache to true
+$force_no_cache=true;
+
+$lang_tables[]='departments.php';
+$lang_tables[]='prompt.php';
 define('LANG_FILE','doctors.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
-
-
 
 switch($retpath)
 {
@@ -24,6 +26,8 @@ switch($retpath)
 	case "op": $breakfile=$root_path.'main/op-doku.php'.URL_APPEND; break;
 	default: $breakfile='doctors.php'.URL_APPEND; 
 }
+
+$thisfile=basename(__FILE__);
 
 $pday=date(j);
 $pmonth=date(n);
@@ -35,21 +39,39 @@ $datum=date("d.m.Y");
 if(!$hilitedept)
 {
 	if($dept_nr) $hilitedept=$dept_nr;
-	else
-	{
-		include($root_path.'include/inc_resolve_dept_dept.php');
-		if($deptOK) $hilitedept=$dept_nr;
-	}
 }
-/* Load the department list with oncall doctors */
-require_once($root_path.'include/care_api_classes/class_department.php');
-$dept_obj=new Department;
-$dept_DOC=$dept_obj->getAllActiveWithDOC();
 
-require_once($root_path.'include/care_api_classes/class_personell.php');
-$pers_obj=new Personell;
-$quicklist=&$pers_obj->getDOCQuicklist($dept_DOC,$pyear,$pmonth);
+# Prepare the date. We need to consider the early morning hours or until the DOC_CHANGE_TIME value has passed
+if(date('H.i')<DOC_CHANGE_TIME){
+	$plan_date=date('Y-m-d',mktime(0,0,0,date('m'),date('d')-1,date('Y')));
+	$plan_day=date('d',mktime(0,0,0,date('m'),date('d')-1,date('Y')));
+}else{
+	$plan_date=date('Y-m-d');
+	$plan_day=date('d');
+}
 
+//echo "$plan_date $plan_day";
+ 
+# Get the cached plan
+if(!$force_no_cache){
+	include_once($root_path.'include/care_api_classes/class_core.php');
+	$core=new Core;
+	$cached_plan='';
+	if(!$is_cached=$core->getDBCache('DOCS_'.$plan_date,$cached_plan)) $force_no_cache=true;
+}	
+
+if($force_no_cache){
+	if(!$hilitedept){
+		if($dept_nr) $hilitedept=$dept_nr;
+	}
+	# Load the department list with oncall doctors 
+	include_once($root_path.'include/care_api_classes/class_department.php');
+	$dept_obj=new Department;
+	$dept_DOC=$dept_obj->getAllActiveWithDOC();
+	include_once($root_path.'include/care_api_classes/class_personell.php');
+	$pers_obj=new Personell;
+	$quicklist=&$pers_obj->getDOCQuicklist($dept_DOC,$pyear,$pmonth);
+}
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -102,10 +124,28 @@ for($j=0;$j<sizeof($LDTabElements);$j++)
 echo '
 	</tr>';
 
-$toggler=0;
+if(!$force_no_cache&&$is_cached){
+	
+/*	echo '<tr>
+	<td colspan=6><font face="verdana,arial" size=2> <img '.createComIcon($root_path,'warn.gif','0').'> <font color=red>'.$LDCachedInfo.'</font> <a href="'.$thisfile.URL_APPEND.'&force_no_cache=1&retpath='.$retpath.'">'.$LDClkNoCache.'</a>
+	</td>
+	</tr>';
+*/	
+	$cached_plan=str_replace('URLAPPEND',URL_APPEND,$cached_plan);
+	$cached_plan=str_replace('IMGALT',$LDShowActualPlan,$cached_plan);
+	$cached_plan=str_replace('SHOWBUTTON',$LDShow,$cached_plan);
+	echo str_replace('URLREDIRECTAPPEND',URL_REDIRECT_APPEND,$cached_plan);
 
+}else{
+	
+	
+	$toggler=0;
 
-while(list($x,$v)=each($dept_DOC)){
+	# Start generating the DOC list
+
+	$temp_out='';
+
+	while(list($x,$v)=each($dept_DOC)){
 	
 	if(in_array($v['nr'],$quicklist)){
 		if($dutyplan=$pers_obj->getDOCDutyplan($v['nr'],$pyear,$pmonth)){
@@ -114,8 +154,8 @@ while(list($x,$v)=each($dept_DOC)){
 			$r=unserialize($dutyplan['duty_2_txt']);	
 			$ha=unserialize($dutyplan['duty_1_pnr']);	
 			$hr=unserialize($dutyplan['duty_2_pnr']);	
-			$DOC_1=$pers_obj->getPersonellInfo($ha['ha'.(date('d')-1)]);
-			$DOC_2=$pers_obj->getPersonellInfo($hr['hr'.(date('d')-1)]);
+			$DOC_1=$pers_obj->getPersonellInfo($ha['ha'.($plan_day-1)]);
+			$DOC_2=$pers_obj->getPersonellInfo($hr['hr'.($plan_day-1)]);
 		}
 	
 	}else{
@@ -130,43 +170,56 @@ while(list($x,$v)=each($dept_DOC)){
 	
 	$bold='';
 	$boldx='';
-	if($hilitedept==$v['nr']) 	{ echo '<tr bgcolor="yellow">'; $bold="<font color=\"red\" size=2><b>";$boldx="</b></font>"; } 
-	else
-		if ($toggler==0) 
-			{ echo '<tr bgcolor="#cfcfcf">'; $toggler=1;} 
-				else { echo '<tr bgcolor="#f6f6f6">'; $toggler=0;}
-	echo '<td ><font face="verdana,arial" size="1" >&nbsp;'.$bold;
-	if(isset($$v['LD_var'])&&!empty($$v['LD_var'])) echo $$v['LD_var'];
-	 	else echo $v['name_formal'];
-	echo $boldx.'&nbsp;</td><td >&nbsp;<font face="verdana,arial" size="2" >
-	<img '.createComIcon($root_path,'mans-gr.gif','0').'>&nbsp;<a href="javascript:popinfo(\''.$ha['ha'.(date('d')-1)].'\',\''.$v['nr'].'\')" title="Click für mehr Info."><b>';
+	if($hilitedept==$v['nr']){ 
+		$temp_out.='<tr bgcolor="yellow">'; $bold="<font color=\"red\" size=2><b>";$boldx="</b></font>"; 
+	} 
+	elseif ($toggler==0) { 
+		$temp_out.='<tr bgcolor="#cfcfcf">'; $toggler=1;
+	}else{
+		$temp_out.='<tr bgcolor="#f6f6f6">'; $toggler=0;
+	}
+	$temp_out.='<td ><font face="verdana,arial" size="1" >&nbsp;'.$bold;
+	$buff= $v['LD_var'];
+	if(isset($$buff)&&!empty($$buff)) $temp_out.=$$buff;
+	 	else $temp_out.=$v['name_formal'];
+	$temp_out.=$boldx.'&nbsp;</td><td >&nbsp;<font face="verdana,arial" size="2" >
+	<img '.createComIcon($root_path,'mans-gr.gif','0').'>&nbsp;';
+	
 	//if ($aelems[l]!="") echo $aelems[l].', ';
 	//echo $aelems[f].'</b></a></td>';
-	if(in_array($v['nr'],$quicklist)){echo $DOC_1['name_last'].', '.$DOC_1['name_first']; }
-	echo '</b></a></td>';
-	echo '<td><font face="verdana,arial" size="2" >';
+	if(in_array($v['nr'],$quicklist)&&$DOC_1['name_last']){$temp_out.='<a href="javascript:popinfo(\''.$ha['ha'.(date('d')-1)].'\',\''.$v['nr'].'\')" title="Click für mehr Info."><b>'.$DOC_1['name_last'].', '.$DOC_1['name_first'].'</b></a>'; }
+	$temp_out.='</td>
+	<td><font face="verdana,arial" size="2" >';
 	if ($a['a'.(date('d')-1)]!='') 
 	{
-		echo ' <font color=red> '.$DOC_1['funk1'].'</font> / '.$DOC_1['inphone1'];
+		$temp_out.=' <font color=red> '.$DOC_1['funk1'].'</font> / '.$DOC_1['inphone1'];
 	}
-	echo '&nbsp;';
-	echo '</td><td ><font face="verdana,arial" size="2" >
-	<img '.createComIcon($root_path,'mans-red.gif','0').'>&nbsp;<a href="javascript:popinfo(\''.$hr['hr'.(date('d')-1)].'\',\''.$v['nr'].'\')" title="Click für mehr Info."><b>';
-	if(in_array($v['nr'],$quicklist)){echo $DOC_2['name_last'].', '.$DOC_2['name_first'];}
-	echo '</b></a></td>';
-	echo '<td><font face="verdana,arial" size="2" >';
+	$temp_out.='&nbsp;</td><td ><font face="verdana,arial" size="2" >
+	<img '.createComIcon($root_path,'mans-red.gif','0').'>&nbsp;';
+
+	if(in_array($v['nr'],$quicklist)&&$DOC_2['name_last']){$temp_out.='<a href="javascript:popinfo(\''.$hr['hr'.(date('d')-1)].'\',\''.$v['nr'].'\')" title="Click für mehr Info."><b>'.$DOC_2['name_last'].', '.$DOC_2['name_first'].'</b></a>';}
+	$temp_out.='</td>
+	<td><font face="verdana,arial" size="2" >';
 	if ($r['r'.(date('d')-1)]!='') 
 	{
-		echo ' <font color=red> '.$DOC_2['funk1'].'</font> / '.$DOC_2['inphone1'];
+		$temp_out.=' <font color=red> '.$DOC_2['funk1'].'</font> / '.$DOC_2['inphone1'];
 	}
-	echo '&nbsp;';
-	echo '</td><td >&nbsp; <a href="doctors-dienstplan.php'.URL_APPEND.'&dept_nr='.$v['nr'].'&retpath=qview">
-	<button onClick="javascript:window.location.href=\'doctors-dienstplan.php'.URL_REDIRECT_APPEND.'&dept_nr='.$v['nr'].'&retpath=qview\'"><img '.createComIcon($root_path,'new_address.gif','0','absmiddle').' alt="'.$LDShowActualPlan.'" ><font size=1> '.$LDShow.'</font></button></a> </td></tr>';
-	echo "\n";
-
-	}
-echo '</table>';
+	
+	$temp_out.='&nbsp;
+	</td><td >&nbsp; <a href="doctors-dienstplan.phpURLAPPEND&dept_nr='.$v['nr'].'&retpath=qview">
+	<button onClick="javascript:window.location.href=\'doctors-dienstplan.phpURLREDIRECTAPPEND&dept_nr='.$v['nr'].'&retpath=qview\'"><img '.createComIcon($root_path,'new_address.gif','0','absmiddle').' alt="IMGALT" ><font size=1> SHOWBUTTON </font></button></a> </td></tr>';
+	
+}
+# Save in cache 
+$dept_obj->saveDBCache('DOCS_'.date('Y-m-d'),addslashes($temp_out));
+# Display list
+$temp_out=str_replace('URLAPPEND',URL_APPEND,$temp_out);
+$temp_out=str_replace('IMGALT',$LDShowActualPlan,$temp_out);
+$temp_out=str_replace('SHOWBUTTON',$LDShow,$temp_out);
+echo str_replace('URLREDIRECTAPPEND',URL_REDIRECT_APPEND,$temp_out);
+}
 ?>
+</table>
 <p>
 <a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>">
 </a></FONT>

@@ -3,17 +3,17 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+$lang_tables[]='departments.php';
 define('LANG_FILE','doctors.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
 
 setcookie(username,"");
 setcookie(ck_plan,"1");
@@ -35,8 +35,13 @@ $firstday=date("w",mktime(0,0,0,$pmonth,1,$pyear));
 
 $maxdays=date("t",mktime(0,0,0,$pmonth,1,$pyear));
 
+switch($retpath)
+{
+	case "menu": $rettarget='doctors.php'.URL_APPEND; break;
+	case "qview": $rettarget='doctors-dienst-schnellsicht.php'.URL_APPEND.'&hilitedept='.$dept_nr; break;
+	default: $rettarget="javascript:window.history.back()";
+}
 ?>
-
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
@@ -92,8 +97,8 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0" >
 <tr valign=top>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" ><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG><font color="<?php echo $cfg['top_txtcolor']; ?>"> &nbsp; <?php echo "$LDDoctors - $LDDutyPlan" ?></font> 
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" ><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+1  FACE="Arial">
+<STRONG><font color="<?php echo $cfg['top_txtcolor']; ?>"> &nbsp; <?php echo "$LDDoctors::$LDDutyPlan::" ?></font> 
 <?php 
 $LDvar=$dept_obj->LDvar();
 if(isset($$LDvar)&&$$LDvar) echo $$LDvar;
@@ -101,7 +106,7 @@ else echo $dept_obj->FormalName();
 ?></STRONG></FONT></td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right"><a href="javascript:history.back();"><img <?php echo createLDImgSrc($root_path,'back2.gif','0','absmiddle') ?>
  alt="<?php echo $LDBack ?>"></a><a href="javascript:gethelp('docs_dutyplan.php','<?php echo $mode ?>','<?php echo $rows ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?>
-  alt="<?php echo $LDHelp ?>"></a><a href="op-pflege-dienst-schnellsicht.php?sid=<?php echo $sid ?>" onClick=killchild()><img <?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?> alt="<?php echo $LDClosePlan ?>"></a></td></tr>
+  alt="<?php echo $LDHelp ?>"></a><a href="<?php echo $rettarget ?>")><img <?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?> alt="<?php echo $LDClosePlan ?>"></a></td></tr>
 
 <tr>
 <td bgcolor="<?php echo $cfg['body_bgcolor']; ?>" valign=top colspan=2><p>
@@ -180,14 +185,7 @@ for ($i=1,$n=0,$wd=$firstday;$i<=$maxdays;$i++,$n++,$wd++){
 
 	
 </td>
-<?php
-switch($retpath)
-{
-	case "menu": $rettarget='doctors.php'.URL_APPEND; break;
-	case "qview": $rettarget='doctors-dienst-schnellsicht.php'.URL_APPEND.'&hilitedept='.$dept_nr; break;
-	default: $rettarget="javascript:window.history.back()";
-}
-?>
+
 
 <td valign="top">
 <a href="doctors-main-pass.php<?php echo URL_APPEND ?>&target=dutyplan&dept_nr=<?php echo $dept_nr.'&pmonth='.$pmonth.'&pyear='.$pyear.'&retpath='.$retpath; ?>"><img <?php echo createLDImgSrc($root_path,'newplan.gif','0') ?> alt="<?php echo $LDNewPlan ?>"></a>

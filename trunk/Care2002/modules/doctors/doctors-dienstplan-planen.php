@@ -3,17 +3,17 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+$lang_tables[]='departments.php';
 define('LANG_FILE','doctors.php');
 $local_user='ck_doctors_dienstplan_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
 if(!isset($dept_nr)||!$dept_nr){
 	header('Location:doctors-select-dept.php'.URL_REDIRECT_APPEND.'&retpath='.$retpath);
@@ -21,6 +21,7 @@ if(!isset($dept_nr)||!$dept_nr){
 }
 
 $thisfile=basename(__FILE__);
+$breakfile="doctors-dienstplan.php".URL_APPEND."&dept_nr=$dept_nr&pmonth=$pmonth&pyear=$pyear&retpath=$retpath";
 
 require_once($root_path.'include/care_api_classes/class_department.php');
 $dept_obj=new Department;
@@ -29,9 +30,6 @@ $dept_obj->preloadDept($dept_nr);
 require_once($root_path.'include/care_api_classes/class_personell.php');
 $pers_obj=new Personell;
 $pers_obj->useDutyplanTable();
-
-/************** resolve dept only *********************************/
-require($root_path.'include/inc_resolve_dept_dept.php');
 
 if ($pmonth=='') $pmonth=date('n');
 if ($pyear=='') $pyear=date('Y');
@@ -76,14 +74,19 @@ if($dblink_ok)
 					$ref_buffer['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
 					
 					if($dpoc_nr=$pers_obj->DOCDutyplanExists($dept_nr,$pyear,$pmonth)){
-						
 						$ref_buffer['history']="CONCAT(history,'Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n')";
 						// Point to the internal data array
 						$pers_obj->setDataArray($ref_buffer);
 															
 						if($pers_obj->updateDataFromInternalArray($dpoc_nr)){
+						
+							# Remove the cache plan
+							if(date('Yn')=="$pyear$pmonth"){
+								$pers_obj->deleteDBCache('DOCS_'.date('Y-m-d'));
+							}
 							header("location:$thisfile?sid=$sid&lang=$lang&saved=1&dept_nr=$dept_nr&pyear=$pyear&pmonth=$pmonth&retpath=$retpath");
-						}else echo "<p>".$pers_obj->sql."<p>$LDDbNoSave"; 
+							exit;
+						}else echo "<p>".$pers_obj->getLastQuery."<p>$LDDbNoSave"; 
 					} // else create new entry
 					else
 					{
@@ -93,15 +96,20 @@ if($dblink_ok)
 						// Point to the internal data array
 						$pers_obj->setDataArray($ref_buffer);
 
+						//echo "create";
 
-							if($pers_obj->insertDataFromInternalArray())
-       							{
-									//echo $sql." new insert <br>";
-									
-									header("location:$thisfile?sid=$sid&lang=$lang&saved=1&dept_nr=$dept_nr&pyear=$pyear&pmonth=$pmonth&retpath=$retpath");
+							if($pers_obj->insertDataFromInternalArray()){
+								# Remove the cache plan
+								if(date('Yn')=="$pyear$pmonth"){
+									$pers_obj->deleteDBCache('DOCS_'.date('Y-m-d'));
 								}
-								else echo "<p>".$pers_obj->sql."<p>$LDDbNoSave"; 
-						}//end of else
+								header("location:$thisfile?sid=$sid&lang=$lang&saved=1&dept_nr=$dept_nr&pyear=$pyear&pmonth=$pmonth&retpath=$retpath");
+								exit;
+							}else{
+								echo "<p>".$pers_obj->getLastQuery."<p>$LDDbNoSave";
+							} 
+					}//end of else
+						
 		 }// end of if(mode==save)
 		 else
 		 {
@@ -207,15 +215,15 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0" >
 <tr valign=top>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" ><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG> &nbsp; <?php echo $LDMakeDutyPlan ?> :: <font color="<?php echo $cfg['top_txtcolor']; ?>">
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" ><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+1  FACE="Arial">
+<STRONG> &nbsp; <?php echo $LDMakeDutyPlan ?>::<font color="<?php echo $cfg['top_txtcolor']; ?>">
 <?php 
 $LDvar=$dept_obj->LDvar();
 if(isset($$LDvar)&&$$LDvar) echo $$LDvar;
-else echo $dept_obj->FormalName();
+	else echo $dept_obj->FormalName();
 ?>
 </font></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();killchild();"><img <?php echo createLDImgSrc($root_path,'back2.gif','0','absmiddle') ?>></a><a href="javascript:gethelp('docs_dutyplan_edit.php','<?php echo $mode ?>','<?php echo $rows ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?>></a><a href="doctors-dienst-schnellsicht.php?sid=<?php echo $sid ?>" onClick=killchild()><img <?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?>></a></td></tr>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();killchild();"><img <?php echo createLDImgSrc($root_path,'back2.gif','0','absmiddle') ?>></a><a href="javascript:gethelp('docs_dutyplan_edit.php','<?php echo $mode ?>','<?php echo $rows ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?>></a><a href="<?php echo $breakfile ?>" onClick=killchild()><img <?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?>></a></td></tr>
 
 <tr>
 <td bgcolor="<?php echo $cfg['body_bgcolor']; ?>" valign=top colspan=2><p><br>
@@ -316,7 +324,7 @@ for ($i=1,$n=0,$wd=$firstday;$i<=$maxdays;$i++,$n++,$wd++)
 </td>
 <td valign="top" align="left">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?>><p>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="doctors-dienstplan.php<?php echo URL_APPEND."&dept_nr=$dept_nr&pmonth=$pmonth&pyear=$pyear&retpath=$retpath"; ?>" onUnload=killchild()><img <?php if($saved) echo createLDImgSrc($root_path,'close2.gif','0'); else echo createLDImgSrc($root_path,'cancel.gif','0'); ?>></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<?php echo $breakfile; ?>" onUnload=killchild()><img <?php if($saved) echo createLDImgSrc($root_path,'close2.gif','0'); else echo createLDImgSrc($root_path,'cancel.gif','0'); ?>></a>
 
 </td>
 </tr>
@@ -324,7 +332,7 @@ for ($i=1,$n=0,$wd=$firstday;$i<=$maxdays;$i++,$n++,$wd++)
 
 <p>
 <input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?>>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="doctors-dienstplan.php<?php echo URL_APPEND."&dept_nr=$dept_nr&pmonth=$pmonth&pyear=$pyear&retpath=$retpath"; ?>" onUnload=killchild()><img <?php if($saved) echo createLDImgSrc($root_path,'close2.gif','0'); else echo createLDImgSrc($root_path,'cancel.gif','0'); ?>></a>
+<a href="<?php echo $breakfile; ?>" onUnload=killchild()><img <?php if($saved) echo createLDImgSrc($root_path,'close2.gif','0'); else echo createLDImgSrc($root_path,'cancel.gif','0'); ?>></a>
 <p>
 </ul>
 

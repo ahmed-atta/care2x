@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -15,16 +15,14 @@ define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-require_once($root_path.'include/inc_config_color.php');
-$keyword=strtr($keyword,"%"," ");
-$keyword=trim($keyword);
-
 $dbtable='care_person';
 $toggle=0;
 $searchmask_bgcolor="#f3f3f3";
 $searchprompt=$LDEnterEmployeeSearchKey;
 
 if(empty($target)) $target='search';
+# Translate *? wildcards
+$searchkey=strtr($searchkey,'*?','%_');
 
 /* Set color values for the search mask */
 $entry_block_bgcolor='#fff3f3';
@@ -65,13 +63,16 @@ if(isset($mode)&&($mode=='search')&&isset($searchkey)&&($searchkey))
 			$suchbuffer=$suchwort;
 		}
 			 
-			$sql='SELECT pid, name_last, name_first, date_birth FROM '.$dbtable.' WHERE pid="'.$suchwort.'"
-						                          OR  name_last LIKE "'.$suchwort.'%" 
-			                                      OR name_first LIKE "'.$suchwort.'%"
-			                                      OR date_birth LIKE "'.formatDate2STD($suchwort,$date_format).'"
-			                                      OR date_birth LIKE "%'.$suchwort.'%"
-			                                      OR pid LIKE "'.$suchbuffer.'" 
-			                                    ORDER BY '.$order_item;
+			$sql='SELECT pid, name_last, name_first, date_birth, sex FROM '.$dbtable.' 
+						WHERE ( pid="'.$suchwort.'"
+						              OR  name_last LIKE "'.$suchwort.'%" 
+			                          OR name_first LIKE "'.$suchwort.'%"
+			                          OR date_birth LIKE "'.formatDate2STD($suchwort,$date_format).'"
+			                          OR date_birth LIKE "%'.$suchwort.'%"
+			                          OR pid LIKE "'.$suchbuffer.'"
+									)
+									  AND death_date IN ("","0000-00-00",NULL)
+			             ORDER BY '.$order_item;
 
 			if($ergebnis=$db->Execute($sql))
        		{
@@ -172,8 +173,11 @@ if(isset($origin) && $origin=='pass')
 
 <?php
 //echo $mode;
-if ($linecount) 
-	{ 
+if ($linecount) { 
+	# Preload  common icon images
+	$img_male=createComIcon($root_path,'spm.gif','0');
+	$img_female=createComIcon($root_path,'spf.gif','0');
+
          echo '<hr width=80% align=left><p>'.str_replace("~nr~",$linecount,$LDSearchFound).'<p>';
 					//mysql_data_seek($ergebnis,0);
 
@@ -181,42 +185,45 @@ if ($linecount)
 						<table border=0 cellpadding=2 cellspacing=1> <tr bgcolor="#66ee66" background="'.$root_path.'gui/img/common/default/tableHeaderbg.gif">';
 ?>
       <td><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>&nbsp;&nbsp;<?php echo $LDPersonalID; ?></b></td>
+      <td>&nbsp;</td>
       <td><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>&nbsp;&nbsp;<?php echo $LDLastName; ?></b></td>
       <td><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>&nbsp;&nbsp;<?php echo $LDFirstName; ?></b></td>
       <td><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>&nbsp;&nbsp;<?php echo $LDBday; ?></b></td>
       <td><FONT  SIZE=-1  FACE="Arial" color="#000066"><b>&nbsp;&nbsp;<?php echo $LDOptions; ?></b></td>
-
+		</tr>
 <?php						
-/*					for($i=0;$i<sizeof($fieldname);$i++) 
-					{
-						echo'
-						<td><font face=arial size=2 color="#336633"><b>'.$fieldname[$i].'</b></td>';
-		
-					}*/
-					echo"</tr>";
 
 					while($zeile=$ergebnis->FetchRow())
 					{
-						echo "
-							<tr bgcolor=";
-						if($toggle) { echo "#efefef>"; $toggle=0;} else {echo "#ffffff>"; $toggle=1;};
-						echo'<td align="right"><font face=arial size=2>';
-						echo "&nbsp;".$zeile['pid'];
-                        echo "</td>";	
-						echo"<td><font face=arial size=2>";
-						echo "&nbsp;".ucfirst($zeile['name_last']);
-                        echo "</td>";	
-						echo"<td><font face=arial size=2>";
-						echo "&nbsp;".ucfirst($zeile['name_first']);
-                        echo "</td>";	
-						echo"<td><font face=arial size=2>";
-						echo "&nbsp;".formatDate2Local($zeile['date_birth'],$date_format);
-                        echo "</td>";	
+						echo '
+							<tr bgcolor=';
+						if($toggle) { echo '#efefef>';} else {echo '#ffffff>'; };
+						$toggle=!$toggle;
+						echo'
+								<td align="right"><font face=arial size=2>';
+						echo '&nbsp;'.$zeile['pid'];
+                        echo '&nbsp;</td><td>';	
+
+						switch($zeile['sex']){
+							case 'f': echo '<img '.$img_female.'>'; break;
+							case 'm': echo '<img '.$img_male.'>'; break;
+							default: echo '&nbsp;'; break;
+						}	
+						
+						echo'</td><td><font face=arial size=2>';
+						echo '&nbsp;'.ucfirst($zeile['name_last']);
+                        echo '</td>';	
+						echo'<td><font face=arial size=2>';
+						echo '&nbsp;'.ucfirst($zeile['name_first']);
+                        echo '</td>';	
+						echo'<td><font face=arial size=2>';
+						echo '&nbsp;'.formatDate2Local($zeile['date_birth'],$date_format);
+                        echo '</td>';	
 
 					    if($HTTP_COOKIE_VARS[$local_user.$sid]) echo '
 						<td><font face=arial size=2>&nbsp;';
 						echo "
-							<a href=\"person_register_show.php".URL_APPEND."&pid=".$zeile['pid']."&edit=1&status=".$status."&target=".$target."&user_origin=".$user_origin."&noresize=1&mode=\">";
+							<a href=\"person_register_show.php".URL_APPEND."&pid=".$zeile['pid']."&edit=1&status=$status&target=$target&user_origin=$user_origin&noresize=1&mode=\">";
 						echo '	
 							<img '.createLDImgSrc($root_path,'ok_small.gif','0').' alt="'.$LDTestThisPatient.'"></a>&nbsp;';
 							
@@ -227,8 +234,8 @@ if ($linecount)
 						echo '</td></tr>';
 
 					}
-					echo "
-						</table>";
+					echo '
+						</table>';
 					if($linecount>15)
 					{
 ?>

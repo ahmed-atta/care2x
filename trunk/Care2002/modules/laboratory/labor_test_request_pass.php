@@ -24,14 +24,21 @@ if($target=='admin') $allowedarea=&$allow_area['test_receive'];
  else $allowedarea=&$allow_area['test_order'];
 
 if(!isset($target)||!$target) $target='chemlabor';
+
 # Set the origin
-$user_origin='lab';
+if(!isset($user_origin)||empty($user_origin)) $user_origin='lab';
 
 /* Set the default file forward */
 $fileforward=$root_path."modules/nursing/nursing-station-patientdaten-doconsil-".$target.".php".URL_REDIRECT_APPEND."&noresize=1&user_origin=".$user_origin."&target=".$target;
 
 $thisfile='labor_test_request_pass.php';
-$breakfile="labor.php".URL_APPEND;
+
+# Set the breakfile
+switch($user_origin){
+	case 'lab':$breakfile="labor.php".URL_APPEND; break;
+	case 'amb': $breakfile=$root_path."modules/ambulatory/ambulatory.php".URL_APPEND; break;
+}
+
 $test_pass_logo='micros.gif';
 
 $userck='ck_lab_user';
@@ -40,15 +47,17 @@ $userck='ck_lab_user';
 # If target is generic, Filter the cheblab, patho, bactlab,bloodbank and radiology tests
 if($target=='generic'){
 	switch($subtarget){
-		case 8 : $target='admin'; $subtarget='patho'; break; # 8 = pathology
-		case 19: $target='radio'; break; # 19 = radiology
+		case 8 : $target='admin'; $subtarget='patho';break; # 8 = pathology
+		case 19: $target='admin'; $subtarget='radio'; break; # 19 = radiology
 		case 22: $target='admin'; $subtarget='chemlabor'; break; # 22 = central lab
 		case 23: $target='admin'; $subtarget='chemlabor'; break; # 23 = serological lab
 		case 24: $target='admin'; $subtarget='chemlabor'; break; # 24 = chemical lab
 		case 25: $target='admin'; $subtarget='baclabor'; break; # 25 = bacteriological lab
-		case 41: $target='blood'; break; # 41 = blood bank
+		case 41: $target='admin'; $subtarget='blood';  break; # 41 = blood bank
 	}
 }
+
+//echo "$target $subtarget";
 
 # Refilter
 switch($target)
@@ -63,8 +72,7 @@ switch($target)
                       break;
 					  
   case 'admin':  $title=$LDPendingRequest." - ".$LDTestType[$subtarget];
-                       if($subtarget=='radio') 
-					   {  $breakfile=$root_path."modules/radiology/radiolog.php".URL_APPEND;
+                       if($subtarget=='radio'){  $breakfile=$root_path."modules/radiology/radiolog.php".URL_APPEND;
 					       $test_pass_logo="thorax_sm.jpg";
 					   }
                        $fileforward="labor_test_request_admin_".$subtarget.".php".URL_REDIRECT_APPEND."&target=".$target."&subtarget=".$subtarget."&noresize=1&&user_origin=".$user_origin;                      
@@ -86,6 +94,7 @@ switch($target)
 						}
 						else
 						{                 
+						   $userck='ck_lab_user';
 					       $breakfile=$root_path."modules/doctors/doctors.php".URL_APPEND;
 					     }
 					    break;
@@ -94,7 +103,6 @@ switch($target)
 }
 					  
 $lognote="$title ok";
-
 
 //reset cookie;
 // reset all 2nd level lock cookies

@@ -1,24 +1,23 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
-* eComBill 1.0.04 for Care2002 beta 1.0.04 
-* (2003-04-30)
-* adapted from eComBill beta 0.2 
-* developed by ecomscience.com http://www.ecomscience.com 
+* 
+* 
+* 
+* 
 */
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
-
 define('NO_CHAIN',1);
 define('LANG_FILE','aufnahme.php');
-
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_date_format_functions.php');
 
-	include('includes/condb.php');
+	/*include('includes/condb.php');
 	error_reporting(0);
 	connect_db();
+	*/
 		
 	$patqry="SELECT e.*,p.* FROM care_encounter AS e, care_person AS p WHERE e.encounter_nr=$patientno AND e.pid=p.pid";
 	//$resultpatqry=mysql_query($patqry);

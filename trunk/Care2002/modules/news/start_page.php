@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -83,19 +83,22 @@ function gethelp(x,s,x1,x2,x3)
  if (!$cfg['dhtml']){ echo ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } 
 ?>>
 
-<TABLE CELLSPACING=3 cellpadding=0 border="0" width="601">
-<!-- This are the header images. Comment it to hide -->
+<!-- <TABLE CELLSPACING=3 cellpadding=0 border="0" width="601"> -->
+<TABLE CELLSPACING=3 cellpadding=0 border="0" width="100%">
+<!-- These are the header images. Comment it to hide -->
 <!--   
 	<tr>
-    <td colspan=3><nobr>  <img <?php echo createComIcon($root_path,'banner_middle3.gif','0') ?>><img <?php echo createComIcon($root_path,'mo_dau.gif','0') ?>>
+    <td colspan=3><nobr>  <img <?php //echo createComIcon($root_path,'banner_middle3.gif','0') ?>><img <?php //echo createComIcon($root_path,'mo_dau.gif','0') ?>>
 	</nobr></td>
   </tr>
  -->
 
   <tr>
-    <td WIDTH=450 VALIGN="top">
+<!--     <td WIDTH=450 VALIGN="top">
+ -->    
+ 	<td VALIGN="top">
 	<FONT  SIZE=1 COLOR="<?php echo $cfg['body_txtcolor']; ?>" FACE="verdana,Arial">
-	<table>
+	<table width=100%>
  <?php
  //require($root_path.'include/inc_news_display.php');
  require('./headline-format.php');
@@ -117,11 +120,14 @@ function gethelp(x,s,x1,x2,x3)
 	</table>
 	
 	</td>
-<!-- <TD  VALIGN="top"   bgcolor="<?php echo $cfg['body_txtcolor']; ?>" width=1>
- --><TD   width=1  background="<?php echo $root_path ?>gui/img/common/biju/vert_reuna_20b.gif">
+<!-- <TD  VALIGN="top"   bgcolor="<?php echo //$cfg['body_txtcolor']; ?>" width=1>
+ -->
+ <TD   width=1  background="<?php //echo $root_path ?>gui/img/common/biju/vert_reuna_20b.gif">
  	&nbsp;
     </TD>
-<TD WIDTH=150 VALIGN="top" >
+<!-- <TD WIDTH=150 VALIGN="top" >
+ -->
+ <TD VALIGN="top" >
 	<FONT  SIZE=2  FACE="arial,verdana">
 <?php
 require($root_path.'include/inc_rightcolumn_menu.php');

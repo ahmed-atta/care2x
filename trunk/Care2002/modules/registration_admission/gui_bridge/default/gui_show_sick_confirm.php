@@ -112,6 +112,8 @@ if($rows>1){
 	}
 	echo '</table>';
 }
+
+if(!$is_discharged){
 ?>
 
 <p>
@@ -142,3 +144,6 @@ if($rows>1){
  -->
 	<input type="submit"  value="go"> 
 </form>
+<?php
+}
+?>

@@ -11,6 +11,7 @@ require($root_path.'include/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 /* Start initializations */
+$lang_tables[]='departments.php';
 define('LANG_FILE','konsil.php');
 
 /* We need to differentiate from where the user is coming: 

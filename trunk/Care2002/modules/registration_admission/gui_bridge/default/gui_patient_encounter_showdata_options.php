@@ -42,16 +42,22 @@ function cancelEnc(){
 </script>
 <?php
 # Let us detect if data entry is allowed
-if($edit){
 	//echo $enc_status['is_disharged'].'<p>'. $enc_status['encounter_status'].'<p>d= '. $enc_status['in_dept'].'<p>w= '. $enc_status['in_ward'];
-	if($enc_status['is_disharged']||stristr('cancelled',$enc_status['encounter_status'])||!($enc_status['in_dept']||$enc_status['in_ward'])){
-		$data_entry=false;
-	}else{
-		$data_entry=true;
+/*	if($enc_status['is_disharged']){
+		if(stristr('cancelled',$enc_status['encounter_status'])){
+			$data_entry=false;
+		}
+	}elseif(!$enc_status['encounter_status']||stristr('cancelled',$enc_status['encounter_status'])){
+		if(!$enc_status['in_ward']&&!$enc_status['in_dept']) $data_entry=false;
 	}
-}else{
+*/
+if(!$is_discharged&&!$enc_status['in_ward']&&!$enc_status['in_dept']&&(!$enc_status['encounter_status']||stristr('cancelled',$enc_status['encounter_status']))){
+//if(!$enc_status['is_discharged']&&!$enc_status['in_ward']&&!$enc_status['in_dept']&&(!$enc_status['encounter_status']||stristr('cancelled',$enc_status['encounter_status']))){
 	$data_entry=false;
+}else{
+	$data_entry=true;
 }
+
 
 # Create the template object
 if(!is_object($TP_obj)){
@@ -109,9 +115,9 @@ if($data_entry){
 }
 
 if($data_entry){
-	$TP_MSRMNTS="<a href=\"show_weight_height.php".URL_APPEND."&pid=$pid&target=$target\">$LDWtHt</a>";
+	$TP_MSRMNTS="<a href=\"show_weight_height.php".URL_APPEND."&pid=$pid&target=$target\">$LDMeasurements</a>";
 }else{
-	$TP_MSRMNTS="<font color='#333333'>$LDWtHt</font>";
+	$TP_MSRMNTS="<font color='#333333'>$LDMeasurements</font>";
 }
 
 # If the sex is female, show the pregnancies option link
@@ -147,7 +153,7 @@ if($data_entry){
 
 # If encounter_status empty or 'allow_cancel', show the cancel option link
 //if(!$enc_status['is_discharged']&&!$enc_status['in_ward']&&!$enc_status['in_dept']&&(empty($enc_status['encounter_status'])||$enc_status['encounter_status']=='allow_cancel')){
-if(!$data_entry&&($enc_status['encounter_status']!='cancelled')){
+if(!$data_entry&&($enc_status['encounter_status']!='cancelled')&&!$enc_status['is_discharged']){
 	$TP_xenc_BLK="<a href=\"javascript:cancelEnc('".$HTTP_SESSION_VARS['sess_en']."')\">$LDCancelThisAdmission</a>";
 }else{
 	$TP_xenc_BLK="<font color='#333333'>$LDCancelThisAdmission</font>";

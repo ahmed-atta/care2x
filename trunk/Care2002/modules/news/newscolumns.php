@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -19,14 +19,12 @@ define('NO_2LEVEL_CHK',1);
 
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-require_once($root_path.'include/inc_config_color.php');
-
-// reset all 2nd level lock cookies
+# reset all 2nd level lock cookies
 require($root_path.'include/inc_2level_reset.php'); 
 
 $subtitle=$LDSubTitle[$target];
 
-/* Set default values*/
+# Set default values
 $default_editor_script='modules/news/editor-4plus1-select-art.php';
 $default_start_page='main/startframe.php';
 $thisfile=basename(__FILE__);
@@ -38,24 +36,34 @@ if(isset($dept_nr) && $dept_nr) $HTTP_SESSION_VARS['sess_dept_nr']=$dept_nr;
 	
 //if(!isset($user_origin)||empty($user_origin)) $user_origin=$HTTP_SESSION_VARS['sess_user_origin'];
 if(empty($user_origin)) $user_origin=$HTTP_SESSION_VARS['sess_user_origin'];
-/* Set the return paths */
+# Set the return paths 
+
 if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
 
+
 if($dblink_ok) {
+
+	$sql_2= 'SELECT dept.name_formal, dept.LD_var, reg.module_start_script, reg.news_editor_script FROM care_department as dept LEFT JOIN care_registry AS reg  ON dept.id=reg.registry_id WHERE dept.nr='.$dept_nr;
     
 	if(isset($user_origin) && !empty($user_origin)) {
 	    
 		$sql= 'SELECT dept.name_formal, dept.LD_var, reg.module_start_script, reg.news_editor_script FROM care_registry AS reg, care_department AS dept  WHERE reg.registry_id="'.$user_origin.'" AND dept.nr='.$dept_nr;
 		
-	}
-	else {
+	}else{
 	
-		$sql= 'SELECT dept.name_formal, dept.LD_var, reg.module_start_script, reg.news_editor_script FROM care_department as dept LEFT JOIN care_registry AS reg  ON dept.id=reg.registry_id WHERE dept.nr='.$dept_nr;
+		$sql=$sql_2;
 	}
 	
     if($result=$db->Execute($sql)) {
-	
-	    $row=$result->FetchRow();
+		if($result->RecordCount()){
+		    $row=$result->FetchRow();
+		}else{
+    		if($result=$db->Execute($sql_2)) {
+				if($result->RecordCount()){
+		    		$row=$result->FetchRow();
+				}
+			} else echo "<p>$sql<p>$LDDbNoRead<p>";
+		}	
 	} else echo "<p>$sql<p>$LDDbNoRead<p>";
 
 	/* Check the start script as break destination*/
@@ -74,24 +82,28 @@ if($dblink_ok) {
 	}else {
 		$title=$$row['LD_var'];
 	}	
-	 /* Save to session */
+	 # Save to session
 	$HTTP_SESSION_VARS['sess_title']=$title;
-	/* Check the editor script as forward file*/
+	
+/*	# Check the editor script as forward file
 	if(isset($row['news_editor_script']) && (trim($row['news_editor_script'])!='')) {
 		$HTTP_SESSION_VARS['sess_file_forward'] =$root_path.$row['news_editor_script'];
 		$HTTP_SESSION_VARS['sess_file_editor'] =$root_path.$row['news_editor_script'];
 	} else {
-		 /* default file forward */
+		 # default file forward
 		$HTTP_SESSION_VARS['sess_file_forward'] = $root_path.$default_editor_script;
 		$HTTP_SESSION_VARS['sess_file_editor'] = $root_path.$default_editor_script;
 	}
-
-	/* Now get the news articles*/
+*/
+	$HTTP_SESSION_VARS['sess_file_forward'] = $root_path.$default_editor_script;
+	$HTTP_SESSION_VARS['sess_file_editor'] = $root_path.$default_editor_script;
+	
+	# Now get the news articles
     include_once($root_path.'include/inc_date_format_functions.php');
 	
     $dbtable='care_news_article';
 
-	/* Get the maximum number of headlines to be displayed */
+	# Get the maximum number of headlines to be displayed 
     $config_type='news_dept_max_display';
     include($root_path.'include/inc_get_global_config.php');
 
@@ -100,14 +112,16 @@ if($dblink_ok) {
 	
 	//include($root_path.'include/inc_news_get.php'); // now get the current news	
 	
-	/* Now set the sql query for article # 5 or the achived news */
+	# Now set the sql query for article # 5 or the achived news 
 	
 	require_once($root_path.'include/care_api_classes/class_news.php');
     $newsobj=new News;
     $news=&$newsobj->getHeadlinesPreview($dept_nr,$news_num_stop);
 	
 	/* Now get the archived news articles */
+	//echo $dept_nr;
 	$news_archive=&$newsobj->getArchiveList($dept_nr,$news);
+	$rows=$newsobj->LastRecordCount();
 }
 $returnfile=$breakfile;
 $readerpath='editor-4plus1-read.php'.URL_REDIRECT_APPEND;
@@ -115,6 +129,9 @@ $editorpath='editor-pass.php'.URL_APPEND;
 $today=date('Y-m-d');
 //$HTTP_SESSION_VARS['sess_dept_nr']=$dept_nr;
 $HTTP_SESSION_VARS['sess_file_return']=$top_dir.basename(__FILE__);
+
+
+//echo $HTTP_SESSION_VARS['sess_file_editor'];
 /* Set this file as the referer */
 //$HTTP_SESSION_VARS['sess_path_referer']=$top_dir.basename(__FILE__);
 ?>
@@ -181,9 +198,9 @@ for($j=1;$j<=$news_num_stop;$j++)
   <tr>
     <td colspan=2 valign="top">
 	
-	<FONT    SIZE=4  FACE="Arial">
+
 	
-<?php if($rows) : ?>
+<?php if($rows) { ?>
 	<?php echo $subtitle ?>
 	<table border=0 cellspacing=0 cellpadding=0>
    <tr>
@@ -195,12 +212,12 @@ for($j=1;$j<=$news_num_stop;$j++)
 	  <td><font face="Verdana,arial" size=2 color="#0000cc"><b><?php echo $LDWrittenBy ?>:</b></font></td>
       <td><font face="Verdana,arial" size=2 color="#0000cc"><b><?php echo $LDWrittenOn ?>:</b></font></td>
     </tr>
-<?php while($artikel=$ergebnis->FetchRow())
+<?php while($artikel=$news_archive->FetchRow())
 {
-echo '<tr bgcolor="#ffffff"><td><a href="#"><a href="'.$readerpath.$artikel['main_file'].'&picfile='.$artikel['pic_file'].'"><font face=verdana,arial size=2> '.$artikel['title'].'</a></td>
-		<td><font face=verdana,arial size=2><a href="'.$readerpath.$artikel['main_file'].'&picfile='.$artikel['pic_file'].'"><img '.createComIcon($root_path,'info.gif','0').' alt="'.$LDClk2Read.'"></a></td>		
+echo '<tr bgcolor="#ffffff"><td><a href="#"><a href="'.$readerpath.'&nr='.$artikel['nr'].'&news_type=headline"><font face=verdana,arial size=2> '.$artikel['title'].'</a></td>
+		<td><font face=verdana,arial size=2><a href="'.$readerpath.'&nr='.$artikel['nr'].'&news_type=headline"><img '.createComIcon($root_path,'info.gif','0').' alt="'.$LDClk2Read.'"></a></td>		
 		<td><font face=verdana,arial size=2> '.$artikel['author'].'</td>
-		<td><font face=verdana,arial size=2><nobr> '.formatDate2Local($artikel['encode_date'],$date_format,1).' </td></tr>';
+		<td><font face=verdana,arial size=2><nobr> '.formatDate2Local($artikel['publish_date'],$date_format,1).' </td></tr>';
 echo "\r\n";
 }
 ?>
@@ -214,9 +231,10 @@ echo "\r\n";
   </tr>
 </table>
 
-<?php endif ?>
+<?php } ?>
 <hr>
-<a href="<?php echo $editorpath ?>"> <?php echo $LDClk2Compose; ?> </a>
+	<FONT    SIZE=4  FACE="Arial">
+	<a href="<?php echo $editorpath ?>"> <?php echo $LDClk2Compose; ?> </a>
 <p>
 <a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0','middle').' alt="'.$LDBackTxt.'"'; ?>></a>
 <p>

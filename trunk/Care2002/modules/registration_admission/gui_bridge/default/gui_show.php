@@ -155,6 +155,10 @@ if($parent_admit) echo ($HTTP_SESSION_VARS['sess_full_en']) ;
 <td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php echo $LDFirstName ?>:
 </td>
 <td bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial" color="#990000"><b><?php echo $name_first; ?></b>
+<?php
+# If person is dead show a black cross
+if($death_date&&$death_date!='0000-00-00') echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0').'>';
+?>
 </td>
 </tr>
 
@@ -191,6 +195,12 @@ createTR($LDNameOthers,$name_others);
 </td>
 <td  bgcolor="#ffffee" ><FONT SIZE=-1  FACE="Arial"  color="#990000">
 <b><?php       echo @formatDate2Local($date_birth,$date_format);  ?></b>
+<?php
+# If person is dead show a black cross
+if($death_date&&$death_date!='0000-00-00'){
+	echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0').'>&nbsp;<font color="#000000">'.formatDate2Local($death_date,$date_format).'</font>';
+}
+?>
 </td>
 
 </tr>
@@ -201,6 +211,20 @@ createTR($LDNameOthers,$name_others);
 <td bgcolor="#ffffee" ><FONT SIZE=-1  FACE="Arial"><?php if($sex=="m") echo  $LDMale; elseif($sex=="f") echo $LDFemale ?>
 </td>
 </tr>
+
+<tr>
+<td bgColor="#eeeeee" ><FONT SIZE=-1  FACE="Arial"><?php  echo $LDBloodGroup ?>: 
+</td>
+<td bgcolor="#ffffee" ><FONT SIZE=-1  FACE="Arial">
+<?php
+if($blood_group){
+	$buf='LD'.$blood_group;
+	echo $$buf;
+} 
+?>
+</td>
+</tr>
+
 </table>
 
 
@@ -245,12 +269,16 @@ if($mode=='show'){
     <td>&nbsp;</td>
     <td>  
   <?php
-	if($parent_admit&&!$is_discharged){
+
+	if($parent_admit&&!$is_discharged&&$thisfile!='show_diagnostics_result.php'){
+
   ?>
+
   <img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle'); ?>>
 <a href="<?php echo $thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new'; ?>"> 
 <?php echo $LDEnterNewRecord; ?>
 </a>
+
   <?php
 	}else{
   		if(file_exists('./gui_bridge/default/gui_person_createnew_'.$thisfile)) include('./gui_bridge/default/gui_person_createnew_'.$thisfile);

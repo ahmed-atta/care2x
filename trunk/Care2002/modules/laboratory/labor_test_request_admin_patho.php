@@ -14,26 +14,23 @@ require($root_path.'include/inc_environment_global.php');
 /* Start initializations */
 define('LANG_FILE','konsil.php');
 
-/* Globalize the variables */
-
-
 /* We need to differentiate from where the user is coming: 
 *  $user_origin != lab ;  from patient charts folder
 *  $user_origin == lab ;  from the laboratory
 *  and set the user cookie name and break or return filename
 */
-if($user_origin=='lab')
-{
-  $local_user='ck_lab_user';
-  $breakfile="labor.php?sid=".$sid."&lang=".$lang; 
-}
-else
-{
-  $local_user='ck_pflege_user';
-  $breakfile="pflege-station-patientdaten.php?sid=$sid&lang=$lang&edit=$edit&station=$station&pn=$pn";
+if($user_origin=='lab'){
+	$local_user='ck_lab_user';
+	$breakfile="labor.php?sid=".$sid."&lang=".$lang; 
+}elseif($user_origin=='amb'){
+	$local_user='ck_lab_user';
+	$breakfile=$root_path.'modules/ambulatory/ambulatory.php'.URL_APPEND;
+}else{
+	$local_user='ck_pflege_user';
+	$breakfile="pflege-station-patientdaten.php?sid=$sid&lang=$lang&edit=$edit&station=$station&pn=$pn";
 }
 
-require_once($root_path.'include/inc_front_chain_lang.php'); ///* invoke the script lock*/
+require_once($root_path.'include/inc_front_chain_lang.php'); # call the script lock
 
 $thisfile=basename(__FILE__);
 

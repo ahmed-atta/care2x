@@ -1,4 +1,26 @@
-<form method="post" name="notes_form">
+<script language="JavaScript">
+<!-- Script Begin
+function chkform(d) {
+	if(d.date.value==""){
+		alert("<?php echo $LDPlsEnterDate; ?>");
+		d.date.focus();
+		return false;
+	}else if(d.notes.value==""){
+		alert("");
+		d.notes.focus();
+		return false;
+	}else if(d.personell_name.value==""){
+		alert("<?php echo $LDPlsEnterFullName; ?>");
+		d.personell_name.focus();
+		return false;
+	}else{
+		return true;
+	}
+}
+//  Script End -->
+</script>
+
+<form method="post" name="notes_form" onSubmit="chkform(this)">
  <table border=0 cellpadding=2 width=100%>
    <tr bgcolor="#f6f6f6">
      <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDate; ?></td>

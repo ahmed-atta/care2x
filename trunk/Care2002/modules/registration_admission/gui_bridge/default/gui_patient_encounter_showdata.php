@@ -45,6 +45,7 @@ include('./gui_bridge/default/gui_tabs_patadmit.php')
 <td colspan=3  bgcolor=<?php echo $cfg['body_bgcolor']; ?>>
 
 <?php
+/*
 if(!$is_discharged){
 	if(!empty($sem)){
 ?>
@@ -63,6 +64,7 @@ if(!$is_discharged){
 <?php
 	}
 }
+*/
 ?>
 
 <table border=0>
@@ -152,6 +154,10 @@ if(file_exists($root_path.'cache/barcodes/en_'.$full_en.'.png')) echo '<img src=
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $LDFirstName ?>:
 </td>
 <td bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial" color="#800000">&nbsp;<b><?php echo $name_first; ?></b>
+<?php
+# If person is dead show a black cross
+if($death_date&&$death_date!='0000-00-00') echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0').'>';
+?>
 </td>
 </tr>
 
@@ -159,11 +165,29 @@ if(file_exists($root_path.'cache/barcodes/en_'.$full_en.'.png')) echo '<img src=
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $LDBday ?>:
 </td>
 <td bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial" color="#800000"><FONT SIZE=-1  FACE="Arial">&nbsp;<b><?php echo formatDate2Local($date_birth,$date_format);?></b>
+<?php
+# If person is dead show a black cross
+if($death_date&&$death_date!='0000-00-00'){
+	echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0').'>&nbsp;<font color="#000000">'.formatDate2Local($death_date,$date_format).'</font>';
+}
+?>
 </td>
 <td bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $LDSex ?>: <?php if($sex=='m') echo $LDMale; elseif($sex=='f') echo $LDFemale; ?>
 </td>
 </tr>
 
+<tr bgcolor="white">
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $LDBloodGroup ?>:
+</td>
+<td bgcolor="#ffffee" colspan=2><FONT SIZE=-1  FACE="Arial">&nbsp;
+<?php 
+if($blood_group){
+	$buf='LD'.$blood_group;
+	echo $$buf;
+} 
+?>
+</td>
+</tr>
 
 <tr bgcolor="white">
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $LDAddress ?>:
@@ -187,8 +211,8 @@ if ($addr_country) echo $addr_country.'<br>';
 <tr bgcolor="white">
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $LDAdmitClass ?>:
 </td>
-<td colspan=2   bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">
-<?php if (isset($$encounter_class['LD_var'])&&!empty($$encounter_class['LD_var'])) echo $$encounter_class['LD_var']; 
+<td colspan=2   bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php 
+if (isset($$encounter_class['LD_var'])&&!empty($$encounter_class['LD_var'])) echo $$encounter_class['LD_var']; 
     else echo  $encounter_class['name']; 
 ?>
 </td>
@@ -215,8 +239,7 @@ if($encounter_class_nr==1){
 <tr bgcolor="white">
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo "$LDClinic/$LDDepartment" ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">&nbsp;
-<?php	
+<td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php	
 	if($in_dept){
 		echo '<a href="'.$root_path.'modules/ambulatory/'.strtr('amb_clinic_patients_pass.php'.URL_APPEND.'&rt=pflege&edit=1&dept='.$$current_dept_LDvar.'&location_id='.$$current_dept_LDvar.'&dept_nr='.$current_dept_nr,' ',' ').'">'.$$current_dept_LDvar.'</a>';
 	}else{
@@ -257,10 +280,10 @@ if($encounter_class_nr==1){
 </tr>
 
 <tr bgcolor="white">
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php if ($errorkassetype) echo "<font color=red>"; ?><?php echo $LDBillType ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $LDBillType ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">
-<?php if (isset($$insurance_class['LD_var'])&&!empty($$insurance_class['LD_var'])) echo $$insurance_class['LD_var']; 
+<td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php 
+if (isset($$insurance_class['LD_var'])&&!empty($$insurance_class['LD_var'])) echo $$insurance_class['LD_var']; 
     else echo  $insurance_class['name']; 
 ?></td>
 </tr>

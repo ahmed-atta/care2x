@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -15,11 +15,12 @@ $local_user='ck_prod_arch_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_config_color.php');
 
-if(!isset($dept)||!$dept)
+/*if(!isset($dept)||!$dept)
 {
 	if(isset($HTTP_COOKIE_VARS['ck_thispc_dept'])&&!empty($HTTP_COOKIE_VARS['ck_thispc_dept'])) $dept=$HTTP_COOKIE_VARS['ck_thispc_dept'];
 	 else $dept='plop';//default is plop dept
 }
+*/
 $thisfile='products-archive-orderlist-showcontent.php';
 $searchfile='products-archive.php';
 $returnfile="products-archive.php?sid=$sid&lang=$lang&cat=$cat&userck=$userck";
@@ -132,8 +133,18 @@ else
 { echo "$LDDbNoLink<br>"; } 
 	
 	
-if($rows>0)
-{
+if($rows>0){
+
+	# Create the department object
+	include_once($root_path.'include/care_api_classes/class_department.php');
+	$dept_obj=new Department;
+	if($depts=&$dept_obj->getAllActiveObject()){
+		while($buf=$depts->FetchRow()){
+			$dept[$buf['nr']]=$buf;
+		}
+	}
+
+
 //++++++++++++++++++++++++ show general info about the list +++++++++++++++++++++++++++
 $tog=1;
 $content=$ergebnis->FetchRow();
@@ -145,7 +156,13 @@ echo '</font>
 		<td><font face=Verdana,Arial size=2 color="#0000ff">'.$LDArchValindex[$i].'</td>';
 	echo '</tr>
 			<tr bgcolor=#f6f6f6>
-				<td><font face=Verdana,Arial size=2>'.strtoupper($dept).'</td>
+				<td><font face=Verdana,Arial size=2>';
+				
+				$buffer=$dept[$content['dept_nr']]['LD_var'];
+				if(isset($$buffer)&&!empty($$buffer)) 	echo $$buffer;
+					else echo $dept[$content['dept_nr']]['name_formal'];
+					
+			echo '</td>
 				 <td><font face=Verdana,Arial size=2>'.formatDate2Local($content['order_date'],$date_format).'</td>
 				<td ><font face=Verdana,Arial size=2>'.convertTimeToLocal($content['order_time']).'</td>
 				<td><font face=Verdana,Arial size=2>'.$content['modify_id'].'</td>

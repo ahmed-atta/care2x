@@ -1,48 +1,60 @@
-
 <script  language="javascript">
-<!-- 
-function popImmNotes(nr) {
-	urlholder="./immunization_notes.php<?php echo URL_REDIRECT_APPEND; ?>&nr="+nr;
-	IMMWIN<?php echo $sid ?>=window.open(urlholder,"histwin<?php echo $sid ?>","menubar=no,width=400,height=300,resizable=yes,scrollbars=yes");
+function popNotes(d){
+	alert(d);
 }
 -->
 </script>
 <table border=0 cellpadding=4 cellspacing=1 width=100%>
   <tr bgcolor="#f6f6f6">
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDType; ?></td>
     <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDate; ?></td>
-<!--     <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDTime; ?></td>
- -->    <td  <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDValue; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDUnit; ?></td>
-    <td  <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDEncounterNr; ?></td>
-    <td width=25% <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDNotes; ?></td>
+    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDTime; ?></td>
+     <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDWeight; ?></td>
+    <td <?php echo $tbg; ?>>&nbsp;</td>
+    <td  <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDHeight; ?></td>
+    <td <?php echo $tbg; ?>>&nbsp;</td>
+     <td  <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LD['head_circumference']; ?></td>
+    <td <?php echo $tbg; ?>>&nbsp;</td>
+   <td  <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDEncounterNr; ?></td>
   </tr>
+
 <?php
 $toggle=0;
-while($row=$result->FetchRow()){
+while(list($x,$row)=each($msr_comp)){
 	if($toggle) $bgc='#f3f3f3';
 		else $bgc='#fefefe';
 	$toggle=!$toggle;
 ?>
-
-
   <tr bgcolor="<?php echo $bgc; ?>">
-    <td valign="top"><FONT SIZE=-1  FACE="Arial"><?php echo $row['type_name']; ?></td>
-    <td valign="top"><FONT SIZE=-1  FACE="Arial"><?php echo @formatDate2Local($row['msr_date'],$date_format); ?></td>
-<!--     <td valign="top"><FONT SIZE=-1  FACE="Arial" color="#006600"><b><?php echo $row['msr_time']; ?></b></td>
- -->    <td valign="top"><FONT SIZE=-1  FACE="Arial" color="#006600"><b><?php echo $row['value']; ?></b></td>
-    <td valign="top"><FONT SIZE=-1  FACE="Arial"><?php echo $row['unit_id']; ?></td>
-    <td valign="top"><FONT SIZE=-1  FACE="Arial"><?php echo $HTTP_SESSION_VARS['sess_full_en']; ?></td>
-    <td valign="top"><FONT SIZE=-1  FACE="Arial"><?php echo nl2br($row['notes']); ?></td>
+    <td><FONT SIZE=-1  FACE="Arial"><?php echo @formatDate2Local($row['msr_date'],$date_format); ?></td>
+    <td><FONT SIZE=-1  FACE="Arial"><?php echo strtr($row['msr_time'],'.',':'); ?></td>
+    <td><FONT SIZE=-1  FACE="Arial">
+	<?php 
+		if($row[6]['notes']) echo '<a href="javascript:popNotes(\''.$row[6]['notes'].'\')" title="'.$row[6]['notes'].'">'.$row[6]['value'].'</a>';
+			else echo $row[6]['value']; 
+	?></td>
+     <td><FONT SIZE=1  FACE="Arial"><?php echo $unit_ids[$row[6]['unit_nr']]; ?></td>
+    <td><FONT SIZE=-1  FACE="Arial">
+	<?php 
+		if($row[7]['notes']) echo '<a href="javascript:popNotes(\''.$row[7]['notes'].'\')" title="'.$row[7]['notes'].'">'.$row[7]['value'].'</a>';
+			else echo $row[7]['value']; 
+	?></td>
+     <td><FONT SIZE=1  FACE="Arial"><?php echo $unit_ids[$row[7]['unit_nr']]; ?></td>
+    <td><FONT SIZE=-1  FACE="Arial">
+	<?php 
+		if($row[9]['notes']) echo '<a href="javascript:popNotes(\''.$row[9]['notes'].'\')" title="'.$row[9]['notes'].'">'.$row[9]['value'].'</a>';
+			else echo $row[9]['value']; 
+	?></td>
+     <td><FONT SIZE=1  FACE="Arial"><?php echo $unit_ids[$row[9]['unit_nr']]; ?></td>
+   <td><FONT SIZE=-1  FACE="Arial"><?php echo $row['encounter_nr']; ?></td>
   </tr>
-
 
 <?php
 }
 ?>
+
 </table>
 <?php
-if($parent_admit) {
+if($parent_admit&&!$is_discharged) {
 ?>
 <p>
 <img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle'); ?>>

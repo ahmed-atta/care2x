@@ -88,9 +88,13 @@ while($row=$result->FetchRow()){
     <td rowspan=4>
 		<?php
 		if($row['appt_status']=='pending'){
+			if(!$death_date||$death_date=='0000-00-00'){
 	?>
 	<a href="<?php echo $thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=select&nr='.$row['nr']; ?>"><img <?php echo createLDImgSrc($root_path,'edit_sm.gif','0'); ?>></a> <br> 
 	<a href="javascript:checkApptDate('<?php echo $row['date'] ?>','<?php echo $row['encounter_class_nr'] ?>','<?php echo $row['nr'] ?>' )"><img <?php echo createLDImgSrc($root_path,'admit_sm.gif','0'); ?>></a> <br>
+	<?php
+			}
+	?>
 	<a href="javascript:cancelAppointment(<?php echo $row['nr']; ?>)"><img <?php echo createLDImgSrc($root_path,'cancel_sm.gif','0'); ?>></a>
 	<?php
 		}else{
@@ -141,7 +145,14 @@ while($row=$result->FetchRow()){
 }
 ?>
 </table>
+<?php
+
+if(!$death_date||$death_date=='0000-00-00'){
+?>
 <img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle'); ?>>
 <a href="<?php echo $thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new'; ?>"> 
 <?php echo $LDScheduleNewAppointment; ?>
 </a>
+<?php
+}
+?>

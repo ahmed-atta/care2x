@@ -10,11 +10,11 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-$lang_tables=array('emr.php');
+$lang_tables[]='emr.php';
+$lang_tables[]='person.php';
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
 require_once($root_path.'include/inc_date_format_functions.php');
 require_once($root_path.'include/care_api_classes/class_insurance.php');
 require_once($root_path.'include/care_api_classes/class_person.php');
@@ -120,6 +120,7 @@ if($dblink_ok) {
 						 name_maiden="'.$name_maiden.'",
 						 name_others="'.$name_others.'",
 						 date_birth="'.formatDate2STD($date_birth,$date_format).'",
+						 blood_group="'.$blood_group.'",
 						 sex="'.$sex.'",
 						 addr_str="'.$addr_str.'",
 						 addr_str_nr="'.$addr_str_nr.'",

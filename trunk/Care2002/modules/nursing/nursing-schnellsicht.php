@@ -18,10 +18,8 @@ define('LANG_FILE','nursing.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
-
-$breakfile='nursing.php?sid='.$sid.'&lang='.$lang;
-
+$breakfile='nursing.php'.URL_APPEND;
+$thisfile=basename(__FILE__);
 
 // Let us make some interface for calendar class
 if($from=='arch'){
@@ -47,13 +45,13 @@ if($s_date==date('Y-m-d')) $is_today=true;
 	
 $dbtable='care_ward';
 
-/* Establish db connection */
+# Establish db connection
 if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
 if($dblink_ok){/* Load date formatter */
     include_once($root_path.'include/inc_date_format_functions.php');
 	
 	
-	// Get the wards' info
+	# Get the wards' info
 	$sql="SELECT nr,ward_id,name,room_nr_start,room_nr_end	FROM $dbtable 
 				WHERE NOT is_temp_closed AND status NOT IN ('hide','delete','void','inactive') AND date_create<='$s_date' ORDER BY nr";
 		//echo $sql.'<p>';
@@ -63,7 +61,7 @@ if($dblink_ok){/* Load date formatter */
 	}else{echo "$sql<br>$LDDbNoRead";} 
 	
 	
-	// Get the rooms' info
+	# Get the rooms' info
 	$sql="SELECT  SUM(r.nr_of_beds) AS maxbed	FROM $dbtable AS w LEFT JOIN care_room AS r ON r.ward_nr=w.nr
 			WHERE NOT w.is_temp_closed  AND w.status NOT IN ('hide','delete','void','inactive')   AND w.date_create<='$s_date' GROUP BY w.nr ORDER BY w.nr";
 		//echo $sql.'<p>';
@@ -72,10 +70,10 @@ if($dblink_ok){/* Load date formatter */
 		$roomcount=$rooms->RecordCount();
 	}else{echo "$sql<br>$LDDbNoRead";} 
 	
-	// Get the today's occupancy
+	# Get the today's occupancy
 	$sql="SELECT  COUNT(l.location_nr) AS maxoccbed, w.nr AS ward_nr	FROM $dbtable AS w LEFT JOIN care_encounter_location AS l ON   l.group_nr=w.nr AND l.type_nr=5 ";
-	if($is_today) $sql.=" AND l.date_from<='$s_date' AND l.date_to IN ('0000-00-00','')";
-		else $sql.=" AND l.date_from<='$s_date' AND (l.date_to<='$s_date' OR l.date_to='0000-00-00')";
+	if($is_today) $sql.=" AND '$s_date'>=l.date_from AND l.date_to IN ('0000-00-00','')";
+		else $sql.=" AND '$s_date'>= l.date_from AND ('$s_date'<=l.date_to OR l.date_to IN ('0000-00-00',''))";
 	$sql.=" WHERE NOT w.is_temp_closed  AND w.status NOT IN ('hide','delete','void','inactive')   AND w.date_create<='$s_date' ";
 	$sql.="	GROUP BY w.nr ORDER BY w.nr";
 	if($occbed=$db->Execute($sql))
@@ -221,7 +219,8 @@ while ($result=$wards->FetchRow()){
 	echo '
 						<td align=center><font face="verdana,arial" size="2" ><a href="javascript:statbel(\'0\',\''.$result['nr'].'\')"  title="'.$LDClk2Show.'">';
 	echo strtoupper($result['name']).'
-						</a></td>
+						</a>';
+	echo '</td>
 						<td align=center><font face="verdana,arial" size="2" >
 						'.$freebeds.'&nbsp;&nbsp;&nbsp;</td>
 						<td align=center><font face="verdana,arial" size="2" color="'.PIE_CHART_USED_COLOR.'">
@@ -283,9 +282,9 @@ else
 
 <p><br>
 <?php if($from=="arch") : ?>
-<a href="nursing-station-archiv.php?sid=<?php echo "$sid&lang=$lang&pyear=$pyear&pmonth=$pmonth" ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?> width=110 height=24></a>
+<a href="nursing-station-archiv.php<?php echo URL_APPEND."&pyear=$pyear&pmonth=$pmonth" ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?> width=110 height=24></a>
 <?php else : ?>
-<a href="nursing.php?sid=<?php echo "$sid&lang=$lang" ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>></a>
+<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>></a>
 <?php endif ?>
 
 </FONT>

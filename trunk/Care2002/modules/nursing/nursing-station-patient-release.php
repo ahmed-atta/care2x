@@ -10,6 +10,7 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+$lang_tables[]='prompt.php';
 define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
@@ -25,31 +26,8 @@ $thisfile=basename(__FILE__);
 	include_once($root_path.'include/care_api_classes/class_encounter.php');
 	$enc_obj=new Encounter;
 	
-	if( $enc_obj->loadEncounterData($pn)) {
-		
-		include_once($root_path.'include/care_api_classes/class_globalconfig.php');
-		$GLOBAL_CONFIG=array();
-		$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
-		$glob_obj->getConfig('patient_%');	
-		$glob_obj->getConfig('person_%');	
-		switch ($enc_obj->EncounterClass())
-		{
-	    	case '1': $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-	                   break;
-			case '2': $full_en = ($pn + $GLOBAL_CONFIG['patient_outpatient_nr_adder']);
-						break;
-			default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-		}						
-		$result=&$enc_obj->encounter;
-		/* Check whether config foto path exists, else use default path */			
-		$default_photo_path='fotos/registration';
-		$photo_filename=$result['photo_filename'];
-		$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $default_photo_path;
-		require_once($root_path.'include/inc_photo_filename_resolve.php');
-		/* Load the discharge types */
-		$discharge_types=&$enc_obj->getDischargeTypesData();
-	}
-		
+if( $enc_obj->loadEncounterData($pn)) {
+
 	if(($mode=='release')&&!(isset($lock)||$lock)){
 		$date=(empty($x_date))?date('Y-m-d'):formatDate2STD($x_date,$date_format);
 		$time=(empty($x_time))?date('H:i:s'):convertTimeToStandard($x_time);
@@ -78,28 +56,42 @@ $thisfile=basename(__FILE__);
 				$data_array['personell_name']=$encoder;
 				$enc_obj->saveDischargeNotesFromArray($data_array);
 			}
+			# If patient died
+			if($relart==7){
+				include_once($root_path.'include/care_api_classes/class_person.php');
+				$person=new Person;
+				$death['death_date']=$date;
+				$death['death_encounter_nr']=$pn;
+				$death['history']="CONCAT(history,'Discharged ".date('Y-m-d H:i:s')." $encoder\n')";
+				$death['modify_id']=$encoder;
+				$death['modify_time']=date('YmdHis');
+				@$person->setDeathInfo($enc_obj->PID(),$death);
+				//echo $person->getLastQuery();
+			}
+			//echo ("location:$thisfile?sid=$sid&lang=$lang&pn=$pn&bd=$bd&rm=$rm&pyear=$pyear&pmonth=$pmonth&pday=$pday&mode=$mode&released=1&lock=1&x_date=$x_date&x_time=$x_time&relart=$relart&encoder=".strtr($encoder," ","+")."&info=".strtr($info," ","+")."&station=$station&ward_nr=$ward_nr");
 			header("location:$thisfile?sid=$sid&lang=$lang&pn=$pn&bd=$bd&rm=$rm&pyear=$pyear&pmonth=$pmonth&pday=$pday&mode=$mode&released=1&lock=1&x_date=$x_date&x_time=$x_time&relart=$relart&encoder=".strtr($encoder," ","+")."&info=".strtr($info," ","+")."&station=$station&ward_nr=$ward_nr");
 			exit;
 		}
 
 	}	// end of if (mode=release)		
-/*			
-		if(!$dept)
-			{
-				// translate station to dept
-				$dbtable='care_station2dept';
-				
-				$sql='SELECT dept FROM '.$dbtable.' WHERE station LIKE \'%'.$station.'%\' AND op=0';
-				
-				//echo $sql."<br>";
-				$s2dresult=$db->Execute($sql);
-				$stat2dept=$s2dresult->FetchRow();
-				$dept=$stat2dept['dept'];
-			}
-			
-	
-			
-*/
+
+		
+		include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+		$GLOBAL_CONFIG=array();
+		$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
+		$glob_obj->getConfig('patient_%');	
+		$glob_obj->getConfig('person_%');	
+
+		$result=&$enc_obj->encounter;
+		/* Check whether config foto path exists, else use default path */			
+		$default_photo_path='fotos/registration';
+		$photo_filename=$result['photo_filename'];
+		$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $default_photo_path;
+		require_once($root_path.'include/inc_photo_filename_resolve.php');
+		/* Load the discharge types */
+		$discharge_types=&$enc_obj->getDischargeTypesData();
+}
+		
 
 ?>
 
@@ -124,21 +116,22 @@ td.vl { font-family:verdana,arial; background-color:#ffffff;color:#0; font-size:
 
 function pruf(d)
 { 
-		if(!d.sure.checked){ return false;}
-		else
-		{
-		if(!d.encoder.value)
-		{ 
+	if(!d.sure.checked){
+		return false;
+	}else{
+		if(!d.encoder.value){ 
 			alert("<?php echo $LDAlertNoName ?>"); 
 			d.encoder.focus();
 			return false;
 		}
 		if (!d.x_date.value){ alert("<?php echo $LDAlertNoDate ?>"); d.x_date.focus();return false;}
 		if (!d.x_time.value){ alert("<?php echo $LDAlertNoTime ?>"); d.x_time.focus();return false;}
+		// Check if death
+		if(d.relart[6].checked==true&&d.x_date.value!=""){
+			if(!confirm("<?php echo $LDDeathDateIs ?> "+d.x_date.value+". <?php echo "$LDIsCorrect $LDProceedSave" ?>")) return false;
+		}
 		return true;
 	}
-	
-
 }
 
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
@@ -147,6 +140,7 @@ function pruf(d)
 
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
 <script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
 </HEAD>
 
@@ -263,7 +257,7 @@ echo '
 <?php endif ?>
 
 
-<form action="<?php echo $thisfile ?>" method="post" onSubmit="return pruf(this)">
+<form action="<?php echo $thisfile ?>" name="discform" method="post" onSubmit="return pruf(this)">
 <table border=0 bgcolor="#efefef">
   <tr>
     <td colspan=2>
@@ -280,8 +274,16 @@ echo '
   </tr>
     <td class=vn><?php echo $LDDate ?>:</td>
     <td class=vl>&nbsp;
-	<?php if($released) echo nl2br($x_date); 
-			else echo '<input type="text" name="x_date" size=12 maxlength=10 value="'.formatdate2Local(date('Y-m-d'),$date_format).'"  onBlur="IsValidDate(this,\''.$date_format.'\')"  onKeyUp="setDate(this,\''.$date_format.'\',\''. $lang.'\')">';
+	<?php 
+	if($released){
+		 echo nl2br($x_date);
+	}else{
+		echo '<input type="text" name="x_date" size=12 maxlength=10 value="'.formatdate2Local(date('Y-m-d'),$date_format).'"  onBlur="IsValidDate(this,\''.$date_format.'\')"  onKeyUp="setDate(this,\''.$date_format.'\',\''. $lang.'\')">';
+	?>
+	<a href="javascript:show_calendar('discform.x_date','<?php echo $date_format ?>')">
+ 	<img <?php echo createComIcon($root_path,'show-calendar.gif','0','top'); ?>></a>
+	<?php
+	}
 	?>
                  </td>
   </tr>
@@ -289,7 +291,7 @@ echo '
     <td class=vn><?php echo $LDClockTime ?>:</td>
     <td class=vl>&nbsp;
 	<?php if($released) echo nl2br($x_time); 
-			else echo '<input type="text" name="x_time" size=12 maxlength=12 value="'.convertTimeToLocal(date('H:i')).'" onKeyUp=setTime(this,\''.$lang.'\')>';
+			else echo '<input type="text" name="x_time" size=12 maxlength=12 value="'.convertTimeToLocal(date('H:i:s')).'" onKeyUp=setTime(this,\''.$lang.'\')>';
 	?>
 	</td>
   </tr>

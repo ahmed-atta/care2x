@@ -257,8 +257,11 @@ function popgetdailymedx(winID,patientID,jahrID,monatID,tagID,tagIDX,jahrS,monat
    	infowinflag=1;
 	}
 	
-function setStartDate(winID,patientID,jahrID,monatID,tagID,station,tagN)
-{
+function setStartDate(winID,patientID,jahrID,monatID,tagID,station,tagN){
+
+<?php
+if($cfg['bname']=='msie'){
+?>
 	if(event.button==2)
 		{
 		//alert("right click");
@@ -272,6 +275,9 @@ function setStartDate(winID,patientID,jahrID,monatID,tagID,station,tagN)
 			}
 		}
 		else 
+<?php
+}
+?>
 		{
 		// alert("left click");	
 		urlholder="nursing-station-patientdaten-kurve.php?sid=<?php echo "$sid&lang=$lang&edit=$edit" ?>&"+winID+"=1&pn=" + patientID + "&jahr=" + jahrID + "&kmonat=" + monatID + "&tag="+ tagID + "&station="+station+"&tagname="+ tagN ;
@@ -309,13 +315,6 @@ function returnifok(){
 	}
 	else history.back()
 	}
-function gethelp(x,s,x1,x2,x3)
-{
-	if (!x) x="";
-	urlholder="<?php echo $root_path; ?>help-router.php<?php echo URL_REDIRECT_APPEND ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
-	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
-	window.helpwin.moveTo(0,0);
-}
 //-->
 </script>
 <?php

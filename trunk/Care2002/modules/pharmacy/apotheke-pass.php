@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -14,7 +14,6 @@ define('LANG_FILE','stdpass.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-require_once($root_path.'include/inc_config_color.php');
 require_once($root_path.'global_conf/areas_allow.php');
 
 $allowedarea=&$allow_area['pharma'];
@@ -26,6 +25,7 @@ switch($mode)
 						$mode="order";
 						$userck="ck_prod_order_user";
 						$fileforward=$root_path."modules/products/products-bestellung.php".$append.$userck."&from=".$src;
+						//$fileforward="select_dept.php".$append.$userck."&from=".$src;
 						break;
 	case "archive":$title=$LDOrderArchive;
 						$src="archivepass";
@@ -36,6 +36,11 @@ switch($mode)
 						$src="dbankpass";
 						$userck="ck_prod_db_user";
 						$fileforward="apotheke-datenbank-functions.php".$append.$userck."&from=".$src;
+						break;
+	case "catalog":  $title=$LDOrderCat;
+						$src="catalogpass";
+						$userck="ck_prod_order_user";
+						$fileforward=$root_path."modules/products/products-bestellkatalog-edit.php".$append.$userck."&target=catalog&from=".$src;
 						break;
 	default: 	{header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 }
@@ -64,7 +69,7 @@ require($root_path.'include/inc_passcheck_head.php');
 <FONT    SIZE=-1  FACE="Arial">
 
 <P>
-<FONT  COLOR="<?php echo $cfg[top_txtcolor] ?>"  SIZE=5  FACE="verdana"> <b><?php echo "$LDPharmacy $title" ?></b></font>
+<FONT  COLOR="<?php echo $cfg[top_txtcolor] ?>"  SIZE=5  FACE="verdana"> <b><?php echo "$LDPharmacy :: $title" ?></b></font>
 <p>
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
 
@@ -73,7 +78,7 @@ require($root_path.'include/inc_passcheck_head.php');
 <p>
 <!-- <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo "$LDIntro2 $LDPharmacy $title " ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo "$LDWhat2Do $LDPharmacy $title " ?>?</a><br>
- --><HR>
+ -->
 <p>
 
 <?php

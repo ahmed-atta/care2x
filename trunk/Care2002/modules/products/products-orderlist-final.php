@@ -3,42 +3,34 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+$lang_tables[]='departments.php';
 define('LANG_FILE','products.php');
 $local_user='ck_prod_order_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
 
-if(!$dept)
-{
-	if($HTTP_COOKIE_VARS['ck_thispc_dept']) $dept=$HTTP_COOKIE_VARS['ck_thispc_dept'];
-	elseif($HTTP_COOKIE_VARS['ck_thispc_station']) $dept=$HTTP_COOKIE_VARS['ck_thispc_station'];
-	 elseif($HTTP_COOKIE_VARS['ck_thispc_room']) $dept=$HTTP_COOKIE_VARS['ck_thispc_room'];
-	 	 else $dept='plop'; //simulate plop dept
-}
+require_once($root_path.'include/care_api_classes/class_department.php');
+$dept_obj=new Department;
 
 $sendok=false;
 $ofinal=false;
 
 
-if($cat=='pharma') 
- {
+if($cat=='pharma') {
  	$dbtable='care_pharma_orderlist';
 	$title=$LDPharmacy;
-	$breakfile='modules/pharmacy/apotheke.php';
- }
- else
- {
+	$breakfile=$root_path.'modules/pharmacy/apotheke.php';
+}else{
  	$dbtable='care_med_orderlist';
 	$title=$LDMedDepot;
-	$breakfile='modules/med_depot/medlager.php';
- }
+	$breakfile=$root_path.'modules/med_depot/medlager.php';
+}
 
 $thisfile=basename(__FILE__);
 $breakfile=$root_path.$breakfile.URL_APPEND;
@@ -50,17 +42,14 @@ $count=0;
 /* Load the date formatter */
 require_once($root_path.'include/inc_date_format_functions.php');
 
-if(($mode=='send') && isset($order_nr) && $order_nr)
-{
-	if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-	if($dblink_ok)	{
+if(($mode=='send') && isset($order_nr) && $order_nr){
+
 	   
 	   /* Check password of the validator */
 	   
 	   $sql='SELECT password FROM care_users WHERE login_id="'.$validator.'"';
 	   
-	   if($ergebnis=$db->Execute($sql))
-	   {
+	   if($ergebnis=$db->Execute($sql)){
 			
 		  if($ergebnis->RecordCount())
 		  {
@@ -75,7 +64,7 @@ if(($mode=='send') && isset($order_nr) && $order_nr)
 									status="pending",
 									sent_datetime="'.date('Y-m-d H:i:s').'"
 							   		WHERE order_nr="'.$order_nr.'"
-									AND dept="'.$dept.'"';		// save aux data to the order list
+									AND dept_nr="'.$dept_nr.'"';		// save aux data to the order list
 		
 		         if($ergebnis=$db->Execute($sql))
 		         {
@@ -99,9 +88,7 @@ if(($mode=='send') && isset($order_nr) && $order_nr)
 	  }
 	  else
 	  { echo "$sql<br>$LDDbNoRead<br>"; } 
-		
-	}
-  	 else { echo "$sql<br>$LDDbNoLink<br>"; } 
+
 }
 ?>
 <html>
@@ -119,11 +106,13 @@ function checkform(d)
 	if (d.validator.value=="") 
 	{
 		alert("<?php echo $LDAlertNoValidator ?>");
+		d.validator.focus();
 		return false;
 	}
 	if (d.vpw.value=="") 
 	{
 		alert("<?php echo $LDAlertNoPassword ?>");
+		d.vpw.focus();
 		return false;
 	}
  	return true;
@@ -134,7 +123,7 @@ $idbuf=$order_nr + 1;
 echo "
 		function hide_bcat()
 		{
-			window.parent.BESTELLKATALOG.location.replace('products-bestellkatalog.php?sid=$sid&lang=$lang&userck=$userck&cat=$cat&order_nr=$idbuf')
+			window.parent.BESTELLKATALOG.location.replace('products-bestellkatalog.php?sid=$sid&lang=$lang&dept_nr=$dept_nr&userck=$userck&cat=$cat&order_nr=$idbuf')
 		}";
 }
 ?>
@@ -182,23 +171,17 @@ if($cat=='pharma') $dbtable='care_pharma_orderlist';
 	else $dbtable=$dbtable='care_med_orderlist';
 
 
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-
-if($dblink_ok)
-		{
-				$sql='SELECT * FROM '.$dbtable.' WHERE order_nr="'.$order_nr.'"	AND dept="'.$dept.'"';
+$sql='SELECT * FROM '.$dbtable.' WHERE order_nr="'.$order_nr.'"	AND dept_nr="'.$dept_nr.'"';
 						
-        		if($ergebnis=$db->Execute($sql))
-				{
-                    $rows=$ergebnis->RecordCount();
-				}
-				else  
-				{ echo "$LDDbNoRead<br>"; } 
+if($ergebnis=$db->Execute($sql)){
+	$rows=$ergebnis->RecordCount();
+}else{
+	echo "$LDDbNoRead<br>";
+} 
 			//echo $sql;
-	}
-  	 else { echo "$LDDbNoLink<br>"; } 
+
 	 
-//++++++++++++++++++++++++ show the actual list +++++++++++++++++++++++++++
+# ++++++++++++++++++++++++ show the actual list +++++++++++++++++++++++++++
 	
 if ($rows>0)
 {
@@ -206,14 +189,20 @@ if ($rows>0)
 $tog=1;
 $content=$ergebnis->FetchRow();
 echo '
-		<font face="Verdana, Arial" size=2 color="#800000">'.$final_orderlist.strtoupper($dept).':</font><br>
+		<font face="Verdana, Arial" size=2 color="#800000">'.$final_orderlist;
+		
+		$buff=$dept_obj->LDvar($dept_nr);
+		if(isset($$buff)&&!empty($$buff)) echo $$buff;
+			else echo $dept_obj->FormalName($dept_nr);
+			
+		echo ':</font><br>
 		<font face="Arial" size=1> ('.$LDCreatedOn.': ';
 
 		echo formatDate2Local($content['order_date'],$date_format);
 
 		echo ' '.$LDTime.': '.convertTimeToLocal(str_replace('24','00',$content[order_time])).')</font>
-		<table border=0 cellspacing=0 cellpadding=0 bgcolor="#666666"><tr><td>
-		<table border=0 cellspacing=1 cellpadding=3>
+		<table border=0 cellspacing=0 cellpadding=0 bgcolor="#666666" width="100%"><tr><td>
+		<table border=0 cellspacing=1 cellpadding=3 width="100%">
   		<tr bgcolor="#ffffff">';
 	for ($i=0;$i<sizeof($LDFinindex);$i++)
 	echo '
@@ -262,10 +251,12 @@ for($n=0;$n<sizeof($artikeln);$n++)
    			<p>
 			'.$LDValidatedBy.':<br>
 			<input type="text" name="validator" size=30 maxlength=40 value="'.$validator.'"><br>
-			<font size=1>'.$LDPassword.':</font><input type="password" name="vpw" size=15 maxlength=20>
+			<font size=1>'.$LDPassword.':</font><br>
+			<input type="password" name="vpw" size=30 maxlength=20>
        		<input type="hidden" name="sid" value="'.$sid.'">
        		<input type="hidden" name="lang" value="'.$lang.'">
    			<input type="hidden" name="order_nr" value="'.$order_nr.'">
+   			<input type="hidden" name="dept_nr" value="'.$dept_nr.'">
    			<input type="hidden" name="cat" value="'.$cat.'">
 			<input type="hidden" name="userck" value="'.$userck.'">
 			<input type="hidden" name="mode" value="send">
@@ -273,16 +264,16 @@ for($n=0;$n<sizeof($artikeln);$n++)
 			<input type="submit" value="'.$LDSendOrder.'">   
    			</form></font><p>
 			<font face=Verdana,Arial size=2>
-			<a href="products-bestellkorb.php'.URL_APPEND.'&cat='.$cat.'&order_nr='.$order_nr.'&userck='.$userck.'" ><< '.$LDBack2Edit.'</a></font>
+			<a href="products-bestellkorb.php'.URL_APPEND.'&cat='.$cat.'&dept_nr='.$dept_nr.'&order_nr='.$order_nr.'&userck='.$userck.'" ><< '.$LDBack2Edit.'</a></font>
 			';
-		}
-		else 
-		echo '
+		}else{
+			echo '
 				<p><font face=Verdana,Arial size=1 color="#000080"><a href="'.$breakfile.URL_APPEND.'" target="_parent">
 				<img '.createComIcon($root_path,'arrow-blu.gif','0').'> '.$LDEndOrder.'</a>
 				<p>
-				<a href="products-bestellung.php'.URL_APPEND.'&cat='.$cat.'&userck='.$userck.'" target="_parent"><img '.createComIcon($root_path,'arrow-blu.gif','0').'> '.$LDCreateBasket.'</a>
+				<a href="products-bestellung.php'.URL_APPEND.'&dept_nr='.$dept_nr.'&cat='.$cat.'&userck='.$userck.'" target="_parent"><img '.createComIcon($root_path,'arrow-blu.gif','0').'> '.$LDCreateBasket.'</a>
 				</font>';
+		}
 }
 ?>
 <a name="bottom"></a>

@@ -3,19 +3,20 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-$lang_tables=array('departments.php');
+$lang_tables[]='departments.php';
+$lang_tables[]='phone.php';
+$lang_tables[]='doctors.php';
 define('LANG_FILE','edp.php');
 $local_user='ck_edv_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_department.php');
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
 $breakfile='dept_manage.php'.URL_APPEND;
 
@@ -24,6 +25,7 @@ if($pmonth=='') $pmonth=date('m');
 if($pyear=='') $pyear=date('Y');
 $t_date=$pday.'.'.$pmonth.'.'.$pyear;
 
+# Get department infos
 $dept_obj=new Department;
 
 $deptarray=$dept_obj->getAll();
@@ -32,6 +34,8 @@ $depttypes=$dept_obj->getTypes();
 $dept=$dept_obj->getDeptAllInfo($dept_nr);
 
 $dept_info=$dept_obj->getTypeInfo($dept['type']);
+# Get department phone infos
+$phone=$dept_obj->getPhoneInfo($dept_nr);
 ?>
 
 
@@ -111,7 +115,7 @@ div.pcont{ margin-left: 3; }
   
   <tr>
     <td class=pblock align=right bgColor="#eeeeee"><?php echo $LDDescription ?>: </td>
-    <td class=pblock><?php echo $dept['description'] ?>
+    <td class=pblock><?php echo htmlspecialchars(nl2br($dept['description'])) ?>
 </td>
   </tr>
   
@@ -196,6 +200,36 @@ div.pcont{ margin-left: 3; }
   <tr>
     <td class=pblock align=right bgColor="#eeeeee"><?php echo $LDConsultationHrs ?>: </td>
     <td class=pblock><?php echo $dept['consult_hours'] ?>
+</td>
+  </tr> 
+  
+  <tr>
+    <td class=pblock align=right bgColor="#eeeeee"><?php echo $LDTelephone ?> 1: </td>
+    <td class=pblock><?php echo $phone['inphone1'] ?>
+</td>
+  </tr> 
+  
+  <tr>
+    <td class=pblock align=right bgColor="#eeeeee"><?php echo $LDTelephone ?> 2: </td>
+    <td class=pblock><?php echo $phone['inphone2'] ?>
+</td>
+  </tr> 
+  
+  <tr>
+    <td class=pblock align=right bgColor="#eeeeee"><?php echo $LDTelephone ?> 3: </td>
+    <td class=pblock><?php echo $phone['inphone3'] ?>
+</td>
+  </tr> 
+  
+  <tr>
+    <td class=pblock align=right bgColor="#eeeeee"><?php echo "$LDBeeper ($LDOnCall)" ?> 1: </td>
+    <td class=pblock><?php echo $phone['funk1'] ?>
+</td>
+  </tr> 
+  
+  <tr>
+    <td class=pblock align=right bgColor="#eeeeee"><?php echo "$LDBeeper ($LDOnCall)" ?> 2: </td>
+    <td class=pblock><?php echo $phone['funk2'] ?>
 </td>
   </tr> 
   

@@ -96,6 +96,10 @@ while(list($x,$v)=each($med_arr)){
 	$options.='>'.$buf2.'</option>';
 }
 
+# Load the common icons 
+$img_male=createComIcon($root_path,'spm.gif','0');
+$img_female=createComIcon($root_path,'spf.gif','0');
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>

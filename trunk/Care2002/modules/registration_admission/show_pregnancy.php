@@ -67,7 +67,7 @@ if(!isset($mode)){
 		exit;
 	}
 }
-$lang_tables=array('obstetrics.php');
+$lang_tables[]='obstetrics.php';
 require('./include/init_show.php');
 
 if($parent_admit){

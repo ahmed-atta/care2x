@@ -43,7 +43,19 @@ while($row=$result->FetchRow()){
 	<a href="<?php echo $root_path.'modules/registration_admission/patient_register_show.php'.URL_APPEND.'&pid='.$row['pid']; ?>">
 	<?php 
 		echo ucfirst($row['name_last']).'</b></font>, '.ucfirst($row['name_first']).'<br>';
-		echo @formatDate2Local($row['date_birth'],$date_format).'</font>';
+		echo @formatDate2Local($row['date_birth'],$date_format);
+		
+		if($row['death_date']&&$row['death_date']!='0000-00-00'){
+			echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0').'>&nbsp;'.@formatDate2Local($row['death_date'],$date_format).'</font>';
+		}
+		
+		echo '<br>';
+		# Show sex icons
+		switch($row['sex']){
+			case 'f': echo '<img '.$img_female.'>'; break;
+			case 'm': echo '<img '.$img_male.'>'; break;
+			default: echo '&nbsp;'; break;
+		}	
 	?>
 	</a>
 	</td>
@@ -78,9 +90,13 @@ while($row=$result->FetchRow()){
     <td rowspan=4 valign="top"> 
 	<?php
 		if($row['appt_status']=='pending'){
+			if(!$row['death_date']||$row['death_date']=='0000-00-00'){
 	?>
 	<a href="<?php echo $editorfile.URL_APPEND.'&pid='.$row['pid'].'&target=&mode=select&nr='.$row['nr']; ?>"><img <?php echo createLDImgSrc($root_path,'edit_sm.gif','0'); ?>></a> <br>
 	<a href="<?php echo $root_path.'modules/registration_admission/aufnahme_start.php'.URL_APPEND; ?>&pid=<?php echo $row['pid'] ?>&origin=patreg_reg&encounter_class_nr=<?php echo $row['encounter_class_nr']; ?>&appt_nr=<?php echo $row['nr']; ?>"><img <?php echo createLDImgSrc($root_path,'admit_sm.gif','0'); ?>></a> <br>
+	<?php
+			}
+	?>
 	<a href="javascript:cancelAppointment(<?php echo $row['nr']; ?>)"><img <?php echo createLDImgSrc($root_path,'cancel_sm.gif','0'); ?>></a>
 	<?php
 		}else{

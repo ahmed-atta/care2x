@@ -17,11 +17,14 @@ if(!isset($mode)){
 	include_once($root_path.'include/care_api_classes/class_prescription.php');
 	if(!isset($obj)) $obj=new Prescription;
 	include_once($root_path.'include/inc_date_format_functions.php');
-	$HTTP_POST_VARS['prescribe_date']=@formatDate2STD($HTTP_POST_VARS['prescribe_date'],$date_format);
-	//echo 	$HTTP_POST_VARS['prescribe_date'];
+	if($HTTP_POST_VARS['prescribe_date']) $HTTP_POST_VARS['prescribe_date']=@formatDate2STD($HTTP_POST_VARS['prescribe_date'],$date_format);
+	else $HTTP_POST_VARS['prescribe_date']=date('Y-m-d');
 
-	//include('./include/save_prescription.inc.php');
-	include('./include/save_admission_data.inc.php');
+	# Check the important items
+	if($article&&$dosage&&$application_type_nr&&$prescriber){
+		//include('./include/save_prescription.inc.php');
+		include('./include/save_admission_data.inc.php');
+	}
 }
 
 require('./include/init_show.php');

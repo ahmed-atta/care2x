@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -13,7 +13,9 @@ require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','products.php');
 $local_user='ck_prod_db_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
+# Create products object
+require_once($root_path.'include/care_api_classes/class_product.php');
+$product_obj=new Product;
 
 $thisfile=basename(__FILE__);
 
@@ -38,12 +40,12 @@ switch($cat)
 
 if($mode=='save')
 {
-include("include/inc_products_db_save_mod.php");
+	include($root_path.'include/inc_products_db_save_mod.php');
 }
 
-if($mode!="") include($root_path.'include/inc_products_search_mod.php');
+if(!empty($mode)) include($root_path.'include/inc_products_search_mod.php');
 
-if($linecount==1) {  $from="multiple"; }
+if($linecount==1) {  $from='multiple'; }
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
@@ -62,37 +64,14 @@ function pruf(d)
 	return true;
 }
 
-function prufform(d)
-{
-	if(d.bestellnum.value=="")
-	{
-		alert("<?php echo $LDAlertNoOrderNr ?>");
-		return false;
-	}
-	if(d.artname.value=="")
-	{
-		alert("<?php echo $LDAlertNoArticleName ?>");
-		return false;
-	}
-	if(d.besc.value=="")
-	{
-		alert("<?php echo $LDAlertNoDescription ?>");
-		 return false;
-	}
-	return true;
-}
-
-function getfilepath(d)
-{
-	//document.inputform.picfilename.value=d.value;
-	document.prevpic.src=d.value;
-}
-
 // -->
 </script> 
 
 <?php 
+# javascript help starter
 require($root_path.'include/inc_js_gethelp.php');
+# Javascript validator
+require($root_path.'include/inc_js_products.php');
 require($root_path.'include/inc_css_a_hilitebu.php');
 ?></HEAD>
 
@@ -101,12 +80,12 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 
 <a name="pagetop"></a>
 
-<table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
+<table width=100% border=0 cellpadding="0" cellspacing="0">
 <tr valign=top>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="45">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG> &nbsp; <?php echo "$title $LDPharmaDb $LDManage" ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+1  FACE="Arial">
+<STRONG> &nbsp; <?php echo "$title::$LDPharmaDb::$LDManage" ?></STRONG></FONT></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right>
 <?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:gethelp('products_db.php','mng','<?php echo $from ?>','<?php echo $cat ?>','<?php echo $update ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
 </tr>
 <tr valign=top >
@@ -130,8 +109,6 @@ require($root_path.'include/inc_css_a_hilitebu.php');
       <td><input type="text" name="keyword" size=40 maxlength=40 value="<?php echo $keyword ?>">
           </td>
     </tr>
-   
-
     <tr >
       <td>&nbsp;
            </td>      
@@ -147,51 +124,54 @@ require($root_path.'include/inc_css_a_hilitebu.php');
   <input type="hidden" name="userck" value="<?php echo $userck?>">
   <input type="hidden" name="mode" value="search">
   </form>
+<?php 
 
-<hr>
-<?php if($linecount==1) echo '
-				<form ENCTYPE="multipart/form-data" action="'.$thisfile.'" method="post" name="inputform" >';
+if($linecount==1) echo '
+				<form ENCTYPE="multipart/form-data" action="'.$thisfile.'" method="post" name="inputform" onSubmit="return prufform(this)">';
 
-if($mode=='save')
-	if($saveok)echo' 
+if($mode=='save'){
+	if($saveok) {
+		echo' 
 		<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'><FONT face="Verdana,Helvetica,Arial" size=2 color="#800000">
 		'.$LDDataSaved.'</font>';
-	else echo '		
+	}else{
+	echo $sql.'<p>';
+	 echo '		
 		<FONT face="Verdana,Helvetica,Arial" size=2 color="#800000">'.$LDDataNoSaved.'<br>
-		<font color="#000000">	<a href="apotheke-datenbank-functions-eingabe.php?sid='.$sid.'&lang='.$lang.'">
+		<font color="#000000">	<a href="products-datenbank-functions-eingabe.php'.URL_APPEND.'">
 			<u>'.$LDClk2EnterNew.'</u></a></font></font>';
+	}
+}
 
-
+# Load the form GUI
 require($root_path."include/inc_products_search_result_mod.php");
 
-if($linecount==1)
-{
-/*<input type="hidden" name="picfilename" value="'.$zeile[picfile].'"> 
-*/
-echo '
-<input type="hidden" name="encoder" value="'.strtr($HTTP_COOKIE_VARS[$local_user.$sid]," ","+").'">
-<input type="hidden" name="dstamp" value="'.str_replace("_",".",date(Y_m_d)).'">
-<input type="hidden" name="tstamp" value="'.str_replace("_",".",date(H_i)).'">
-<input type="hidden" name="lock_flag" value="">
-<input type="hidden" name="sid" value="'.$sid.'">
-<input type="hidden" name="lang" value="'.$lang.'">
-<input type="hidden" name="cat" value="'.$cat.'">
-<input type="hidden" name="userck" value="'.$userck.'">
-<input type="hidden" name="keyword" value="'.$zeile[bestellnum].'">
-<input type="hidden" name="update" value="1">
-<INPUT TYPE="hidden" name="MAX_FILE_SIZE" value="2000000">
-';
+if($linecount==1){
+	//<input type="hidden" name="picfilename" value="'.$zeile[picfile].'"> 
 
-if($mode=='search')
-	{ echo'
+	echo '
+	<input type="hidden" name="encoder" value="'.strtr($HTTP_COOKIE_VARS[$local_user.$sid]," ","+").'">
+	<input type="hidden" name="dstamp" value="'.str_replace("_",".",date(Y_m_d)).'">
+	<input type="hidden" name="tstamp" value="'.str_replace("_",".",date(H_i)).'">
+	<input type="hidden" name="lock_flag" value="">
+	<input type="hidden" name="sid" value="'.$sid.'">
+	<input type="hidden" name="lang" value="'.$lang.'">
+	<input type="hidden" name="cat" value="'.$cat.'">
+	<input type="hidden" name="userck" value="'.$userck.'">
+	<input type="hidden" name="keyword" value="'.$zeile[bestellnum].'">
+	<input type="hidden" name="update" value="1">
+	<INPUT TYPE="hidden" name="MAX_FILE_SIZE" value="2000000">
+	';
+
+	if($mode=='search'){
+		echo'
 	  <input type="hidden" name="ref_bnum" value="'.$zeile[bestellnum].'">
 	  <input type="hidden" name="ref_artnum" value="'.$zeile[artikelnum].'">
  	 <input type="hidden" name="ref_indusnum" value="'.$zeile[industrynum].'">
  	 <input type="hidden" name="ref_artname" value="'.$zeile[artikelname].'">
  	 ';
-	}
-	else
-	{ echo'
+	}else{ 
+		echo'
  	 <input type="hidden" name="ref_bnum" value="'.$ref_bnum.'">
 	  <input type="hidden" name="ref_artnum" value="'.$ref_artnum.'">
  	 <input type="hidden" name="ref_indusnum" value="'.$ref_indusnum.'">
@@ -199,16 +179,13 @@ if($mode=='search')
 	  ';
 	}
 	
-	if($update&&(!$saveok))
-	{
+	if($update&&(!$saveok)){
 		echo'
  		<input type="hidden" name="mode" value="save">
 		<input type="hidden" name="picref" value="'.$zeile[picfile].'">
   		<input type="submit" value="'.$LDSave.'"
 		</form>';
-	}
-	else
-	{
+	}else{
 		echo'
 		<input type="hidden" name="mode" value="search">
 		<input type="submit" value="'.$LDUpdateData.'">
@@ -249,11 +226,11 @@ if($mode=='search')
 <a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0','left') ?>></a>
 <?php if ($from=="multiple")
 echo '
-<a href="javascript:history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0','absmiddle').' alt="'.$LDBack.'"></a>
+<a href="products-datenbank-functions-manage.php'.URL_APPEND.'&cat='.$cat.'"><img '.createLDImgSrc($root_path,'back2.gif','0','absmiddle').' alt="'.$LDBack.'"></a>
 ';
 ?>
 </ul>
-
+&nbsp;
 </FONT>
 <p>
 </td>
@@ -266,7 +243,6 @@ require($root_path.'include/inc_load_copyrite.php');
 ?>
 </td></tr>
 </table>        
-&nbsp;
 </FONT>
 </BODY>
 </HTML>

@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -13,18 +13,22 @@ require($root_path.'include/inc_environment_global.php');
 
 $dept_logos_path='gui/img/logos_dept/'; # Define the path to the department logos
 
-$lang_tables=array('departments.php');
+$lang_tables[]='departments.php';
+$lang_tables[]='phone.php';
+$lang_tables[]='doctors.php';
 define('LANG_FILE','edp.php');
 $local_user='ck_edv_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_department.php');
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
+require_once($root_path.'include/care_api_classes/class_comm.php');
 
 $breakfile='dept_list.php'.URL_APPEND;
 
 if(!isset($mode)) $mode='';
-
+# Create department object
 $dept_obj=new Department;
+#create com object
+$comm=new Comm;
 
 
 if(!empty($mode)){
@@ -47,10 +51,25 @@ if(!empty($mode)){
 			$HTTP_POST_VARS['history']='Create: '.date('Y-m-d H:i:s').' '.$HTTP_SESSION_VARS['sess_user_name'];
 			$HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
 			$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-			$HTTP_POST_VARS['create_time']='NULL';
+			$HTTP_POST_VARS['create_time']=date('YmdHis');
+			$HTTP_POST_VARS['modify_time']=date('YmdHis');
 			$dept_obj->setDataArray($HTTP_POST_VARS);
 			if($dept_obj->insertDataFromInternalArray()){
 				$dept_nr=$db->Insert_ID();
+				# If telephone/beeper info available, save into the phone table
+				if($HTTP_POST_VARS['inphone1']
+					||$HTTP_POST_VARS['inphone2']
+					||$HTTP_POST_VARS['inphone3']
+					||$HTTP_POST_VARS['funk1']
+					||$HTTP_POST_VARS['funk2']){
+						$HTTP_POST_VARS['dept_nr']=$dept_nr;
+						$HTTP_POST_VARS['name']=$HTTP_POST_VARS['name_formal'];
+						$HTTP_POST_VARS['vorname']=$HTTP_POST_VARS['id'];
+						$comm->setDataArray($HTTP_POST_VARS);
+						if(!@$comm->insertDataFromInternalArray()) echo $comm->getLastQuery()."<br>$LDDbNosave";
+				}
+							
+				# Save the uploaded image
 				if($is_img){
 				    $picfilename='dept_'.$dept_nr.'.'.$picext;
 			       copy($HTTP_POST_FILES['img']['tmp_name'],$root_path.$dept_logos_path.$picfilename);
@@ -66,10 +85,36 @@ if(!empty($mode)){
 		{ 
 			$HTTP_POST_VARS['history']=" CONCAT(history,'Update: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n"."')";
 			$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+			$HTTP_POST_VARS['modify_time']=date('YmdHis');
 			$dept_obj->setTable('care_department');
 			$dept_obj->setDataArray($HTTP_POST_VARS);
 			$dept_obj->where=' nr='.$dept_nr;
 			if($dept_obj->updateDataFromInternalArray($dept_nr)){
+
+				# Update phone data
+				if($comm->DeptInfoExists($dept_nr)){
+					$HTTP_POST_VARS['name']=$HTTP_POST_VARS['name_formal'];
+					$HTTP_POST_VARS['vorname']=$HTTP_POST_VARS['id'];
+					$comm->setDataArray($HTTP_POST_VARS);
+					$comm->setWhereCondition("dept_nr=$dept_nr");
+					@$comm->updateDataFromInternalArray($dept_nr);
+				}else{
+					if($HTTP_POST_VARS['inphone1']
+						||$HTTP_POST_VARS['inphone2']
+						||$HTTP_POST_VARS['inphone3']
+						||$HTTP_POST_VARS['funk1']
+						||$HTTP_POST_VARS['funk2']){
+							$HTTP_POST_VARS['dept_nr']=$dept_nr;
+							$HTTP_POST_VARS['name']=$HTTP_POST_VARS['name_formal'];
+							$HTTP_POST_VARS['vorname']=$HTTP_POST_VARS['id'];
+							$HTTP_POST_VARS['history']="Create: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
+							$HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+							$HTTP_POST_VARS['create_time']=date('YmdHis');
+							$comm->setDataArray($HTTP_POST_VARS);
+						if(!@$comm->insertDataFromInternalArray()) echo $comm->getLastQuery()."<br>$LDDbNoSave";
+					}
+				}
+				# Save uploaded image
 				if($is_img){
 				    $picfilename='dept_'.$dept_nr.'.'.$picext;
 			        copy($HTTP_POST_FILES['img']['tmp_name'],$root_path.$dept_logos_path.$picfilename);
@@ -83,9 +128,15 @@ if(!empty($mode)){
 		}
 		case 'select':
 		{
+			# Get department's information
 			$dept=$dept_obj->getDeptAllInfo($dept_nr);
 			//while(list($x,$v)=each($dept)) $$x=$v;
 			extract($dept);
+			
+			# Get departments phone info
+			if($dept_phone=$comm->DeptInfo($dept_nr)){
+				extract($dept_phone);
+			}
 		}	
 	}// end of switch
 }
@@ -287,6 +338,37 @@ div.pcont{ margin-left: 3; }
   <tr>
     <td class=pblock align=right bgColor="#eeeeee"><?php echo $LDConsultationHrs ?>: </td>
     <td class=pblock><input type="text" name="consult_hours" size=40 maxlength=40 value="<?php echo $consult_hours ?>"><br>
+</td>
+  </tr> 
+  
+  <tr>
+    <td class=pblock align=right bgColor="#eeeeee"><?php echo $LDTelephone ?> 1: </td>
+    <td class=pblock><input type="text" name="inphone1" size=40 maxlength=15 value="<?php echo $inphone1 ?>"><br>
+</td>
+  </tr> 
+  
+  <tr>
+    <td class=pblock align=right bgColor="#eeeeee"><?php echo $LDTelephone ?> 2: </td>
+    <td class=pblock><input type="text" name="inphone2" size=40 maxlength=15 value="<?php echo $inphone2 ?>"><br>
+</td>
+  </tr> 
+  
+  
+  <tr>
+    <td class=pblock align=right bgColor="#eeeeee"><?php echo $LDTelephone ?> 3: </td>
+    <td class=pblock><input type="text" name="inphone3" size=40 maxlength=15 value="<?php echo $inphone3 ?>"><br>
+</td>
+  </tr> 
+  
+  <tr>
+    <td class=pblock align=right bgColor="#eeeeee"><?php echo "$LDBeeper ($LDOnCall)" ?> 1: </td>
+    <td class=pblock><input type="text" name="funk1" size=40 maxlength=15 value="<?php echo $funk1 ?>"><br>
+</td>
+  </tr> 
+  
+  <tr>
+    <td class=pblock align=right bgColor="#eeeeee"><?php echo "$LDBeeper ($LDOnCall)" ?> 2: </td>
+    <td class=pblock><input type="text" name="funk2" size=40 maxlength=15 value="<?php echo $funk2 ?>"><br>
 </td>
   </tr> 
   

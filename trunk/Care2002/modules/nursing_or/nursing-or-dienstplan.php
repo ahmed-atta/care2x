@@ -10,7 +10,8 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-$lang_tables=array('or.php');
+$lang_tables[]='or.php';
+$lang_tables[]='departments.php';
 define('LANG_FILE','doctors.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
@@ -36,8 +37,14 @@ $firstday=date("w",mktime(0,0,0,$pmonth,1,$pyear));
 
 $maxdays=date("t",mktime(0,0,0,$pmonth,1,$pyear));
 
-?>
 
+switch($retpath)
+{
+	case "menu": $rettarget=$root_path.'main/op-doku.php'.URL_APPEND; break;
+	case "qview": $rettarget='nursing-or-dienst-schnellsicht.php'.URL_APPEND.'&hilitedept='.$dept_nr; break;
+	default: $rettarget="javascript:window.history.back()";
+}
+?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
@@ -93,8 +100,8 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0" >
 <tr valign=top>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" ><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
-<STRONG><font color="<?php echo $cfg['top_txtcolor']; ?>"> &nbsp; <?php echo "$LDORNOC :: $LDDutyPlan" ?></font> 
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" ><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+1  FACE="Arial">
+<STRONG><font color="<?php echo $cfg['top_txtcolor']; ?>"> &nbsp; <?php echo "$LDORNOC::$LDDutyPlan::" ?></font> 
 <?php 
 $LDvar=$dept_obj->LDvar();
 if(isset($$LDvar)&&$$LDvar) echo $$LDvar;
@@ -102,7 +109,7 @@ else echo $dept_obj->FormalName();
 ?></STRONG></FONT></td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right"><a href="javascript:history.back();"><img <?php echo createLDImgSrc($root_path,'back2.gif','0','absmiddle') ?>
  alt="<?php echo $LDBack ?>"></a><a href="javascript:gethelp('op_duty.php','show','<?php echo $rows ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?>
-  alt="<?php echo $LDHelp ?>"></a><a href="op-pflege-dienst-schnellsicht.php?sid=<?php echo $sid ?>" onClick=killchild()><img <?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?> alt="<?php echo $LDClosePlan ?>"></a></td></tr>
+  alt="<?php echo $LDHelp ?>"></a><a href="<?php echo $rettarget ?>" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?> alt="<?php echo $LDClosePlan ?>"></a></td></tr>
 
 <tr>
 <td bgcolor="<?php echo $cfg['body_bgcolor']; ?>" valign=top colspan=2><p>
@@ -181,14 +188,7 @@ for ($i=1,$n=0,$wd=$firstday;$i<=$maxdays;$i++,$n++,$wd++){
 
 	
 </td>
-<?php
-switch($retpath)
-{
-	case "menu": $rettarget=$root_path.'main/op-doku.php'.URL_APPEND; break;
-	case "qview": $rettarget='nursing-or-dienst-schnellsicht.php'.URL_APPEND.'&hilitedept='.$dept_nr; break;
-	default: $rettarget="javascript:window.history.back()";
-}
-?>
+
 
 <td valign="top">
 <a href="nursing-or-main-pass.php<?php echo URL_APPEND ?>&target=dutyplan&dept_nr=<?php echo $dept_nr.'&pmonth='.$pmonth.'&pyear='.$pyear.'&retpath='.$retpath; ?>"><img <?php echo createLDImgSrc($root_path,'newplan.gif','0') ?> alt="<?php echo $LDNewPlan ?>"></a>

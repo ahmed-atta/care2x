@@ -554,8 +554,8 @@ $breakfile='patient_bill_links.php'.URL_APPEND.'&patientno='.$patientno.'&full_e
 
   <p>&nbsp;</p>
 
-  	<input type="hidden" name="pno" value="<?php echo $patientno; ?>">
-  	<input type="hidden" name="bno" value="<?php echo $billno; ?>">
+  	<input type="hidden" name="patientno" value="<?php echo $patientno; ?>">
+  	<input type="hidden" name="billno" value="<?php echo $billno; ?>">
   	<input type="hidden" name="total" value="<?php echo $total; ?>">
   	<input type="hidden" name="outstanding" value="<?php echo $outstanding; ?>">
 	<input type="hidden" name="lang" value="<?php echo $lang ?>">

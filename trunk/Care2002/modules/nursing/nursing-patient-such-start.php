@@ -14,8 +14,6 @@ define('LANG_FILE','nursing.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
-
 $breakfile='nursing.php'.URL_APPEND;
 
 /* Load the date formatter */
@@ -59,8 +57,8 @@ if($mode=='such')
 	$cond.=" AND l.encounter_nr=e.encounter_nr";
 	if(!$arch) $cond.=' AND NOT e.is_discharged';
 	
-	if($usenum) $cond.=' ORDER BY e.encounter_nr DESC';
-		else $cond.=' AND p.pid=e.pid ORDER BY p.name_last';
+	if($usenum) $cond.=' GROUP BY r.location_nr ORDER BY e.encounter_nr DESC';
+		else $cond.=' AND p.pid=e.pid GROUP BY r.location_nr ORDER BY p.name_last';
 	
 	if(!isset($db)||!$db)include($root_path.'include/inc_db_makelink.php');
 	if($dblink_ok){			
@@ -78,7 +76,7 @@ if($mode=='such')
 		$sql.=" LEFT JOIN $tb_location AS l ON l.encounter_nr=e.encounter_nr AND l.type_nr=2
 					LEFT JOIN $tb_location AS r ON r.encounter_nr=l.encounter_nr AND r.type_nr=4 AND r.group_nr=l.location_nr 
 					LEFT JOIN $tb_ward AS w ON w.nr=l.location_nr
-					WHERE $cond ";
+					WHERE $cond";
 					//echo $sql."<p>";
 		if($ergebnis=$db->Execute($sql)){
 			$rows=$ergebnis->RecordCount();
@@ -179,8 +177,13 @@ if(!$usenum){
 		echo "bgcolor=#ffffff"; 
 		$toggle=1;
 	}
+	
+	if($result['in_ward']) $result['ward_date']=date('Y-m-d');
+	
+	list($pyear,$pmonth,$pday)=explode('-',$result['ward_date']);
   
-	$buf="nursing-station.php?sid=$sid&lang=$lang&station=".$result['ward_name']."&ward_nr=".$result['ward_nr'];
+	//$buf="nursing-station.php".URL_APPEND."&station=".$result['ward_name']."&ward_nr=".$result['ward_nr'];
+	$buf="nursing-station.php".URL_APPEND."&ward_nr=".$result['ward_nr']."&pyear=$pyear&pmonth=$pmonth&pday=$pday";
   
   echo '>
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">';

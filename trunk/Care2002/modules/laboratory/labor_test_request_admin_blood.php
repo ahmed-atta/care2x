@@ -24,9 +24,10 @@ if($user_origin=='lab')
 {
   $local_user='ck_lab_user';
   $breakfile=$root_path."modules/laboratory/labor.php".URL_APPEND;
-}
-else
-{
+}elseif($user_origin=='amb'){
+	$local_user='ck_lab_user';
+	$breakfile=$root_path.'modules/ambulatory/ambulatory.php'.URL_APPEND;
+}else{
   $local_user='ck_pflege_user';
   $breakfile=$root_path."modules/nursing/nursing-station-patientdaten.php".URL_APPEND."&edit=$edit&station=$station&pn=$pn";
 }
@@ -44,7 +45,7 @@ $edit=0; /* Set script mode to no edit*/
 $formtitle=$LDBloodBank;
 $dept_nr=43; // 43 = department nr. of blood bank
 
-$db_request_table=$subtarget;
+$db_request_table='blood';
 						
 /* Here begins the real work */
 /* Establish db connection */
@@ -63,7 +64,7 @@ if($dblink_ok)
 		  switch($mode)
 		  {
 		     case 'update':
-							      $sql="UPDATE care_test_request_".$db_request_table." SET 
+							      $sql="UPDATE care_test_request_blood SET 
                                    status = 'received', blood_pb = '".htmlspecialchars($blood_pb)."', blood_rb = '".htmlspecialchars($blood_rb)."', blood_llrb = '".htmlspecialchars($blood_llrb)."', 
 								   blood_wrb = '".htmlspecialchars($blood_wrb)."',blood_prp = '".htmlspecialchars($blood_prp)."', blood_tc = '".htmlspecialchars($blood_tc)."', 
 								   blood_ffp = '".htmlspecialchars($blood_ffp)."', b_group_count = '".$b_group_count."', 
@@ -95,7 +96,7 @@ if($dblink_ok)
 								break; // end of case 'save'
 								
 		     case 'done':
-							      $sql="UPDATE care_test_request_".$db_request_table." SET 
+							      $sql="UPDATE care_test_request_blood SET 
 								  status = 'done',
 								  history = CONCAT(history,'Done: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n')
 								  WHERE batch_nr = '".$batch_nr."'";
@@ -117,7 +118,7 @@ if($dblink_ok)
   
           if(!$mode) /* Get the pending test requests */
 		  {
-		                $sql="SELECT batch_nr,encounter_nr,send_date,dept_nr FROM care_test_request_".$subtarget." 
+		                $sql="SELECT batch_nr,encounter_nr,send_date,dept_nr FROM care_test_request_blood 
 						         WHERE status='pending' OR status='received' ORDER BY  send_date DESC";
 		                if($requests=$db->Execute($sql))
        		            {
@@ -159,7 +160,7 @@ if($dblink_ok)
 
 			if( $enc_obj->is_loaded){
 
-	            $sql="SELECT * FROM care_test_request_".$subtarget." WHERE batch_nr='".$batch_nr."'";
+	            $sql="SELECT * FROM care_test_request_blood WHERE batch_nr='".$batch_nr."'";
 					
 	            if($ergebnis=$db->Execute($sql)){
 					if($editable_rows=$ergebnis->RecordCount()){

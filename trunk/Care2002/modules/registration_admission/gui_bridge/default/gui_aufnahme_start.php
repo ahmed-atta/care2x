@@ -4,65 +4,73 @@
 <?php echo setCharSet(); ?>
  <TITLE><?php echo $headframe_title ?></TITLE>
 
+<?php 
+
+# If  pid exists, output the form checker javascript
+if(isset($pid) && $pid){
+
+?>
+ 
 <script  language="javascript">
 <!-- 
-function setsex(d)
-{
-	s=d.selectedIndex;
-	t=d.options[s].text;
-	if(t.indexOf("Frau")!=-1) document.aufnahmeform.sex[1].checked=true;
-	if(t.indexOf("Herr")!=-1) document.aufnahmeform.sex[0].checked=true;
-	if(t.indexOf("-")!=-1){ document.aufnahmeform.sex[0].checked=false;document.aufnahmeform.sex[1].checked=false;}
+
+function chkform(d) {
+	encr=<?php if ($encounter_class_nr) {echo $encounter_class_nr; } else {echo '0';} ?>;
+	if(d.encounter_class_nr[0]&&d.encounter_class_nr[1]&&!d.encounter_class_nr[0].checked&&!d.encounter_class_nr[1].checked){
+		alert("<?php echo $LDPlsSelectAdmissionType; ?>");
+		return false;
+	}else if(d.encounter_class_nr[0]&&d.encounter_class_nr[0].checked&&!d.current_ward_nr.value){
+		alert("<?php echo $LDPlsSelectWard; ?>");
+		d.current_ward_nr.focus();
+		return false;
+	}else if(d.encounter_class_nr[1]&&d.encounter_class_nr[1].checked&&!d.current_dept_nr.value){
+		alert("<?php echo $LDPlsSelectDept; ?>");
+		d.current_dept_nr.focus();
+		return false;
+	}else if(!d.encounter_class_nr[0]&&encr==1&&!d.current_ward_nr.value){
+		alert("<?php echo $LDPlsSelectWard; ?>");
+		d.current_ward_nr.focus();
+		return false;
+	}else if(!d.encounter_class_nr[1]&&encr==2&&!d.current_dept_nr.value){
+		alert("<?php echo $LDPlsSelectDept; ?>");
+		d.current_dept_nr.focus();
+		return false;
+	}else if(d.referrer_diagnosis.value==""){
+		alert("<?php echo $LDPlsEnterRefererDiagnosis; ?>");
+		d.referrer_diagnosis.focus();
+		return false;
+	}else if(d.referrer_dr.value==""){
+		alert("<?php echo $LDPlsEnterReferer; ?>");
+		d.referrer_dr.focus();
+		return false;
+	}else if(d.referrer_recom_therapy.value==""){
+		alert("<?php echo $LDPlsEnterRefererTherapy; ?>");
+		d.referrer_recom_therapy.focus();
+		return false;
+	}else if(d.referrer_notes.value==""){
+		alert("<?php echo $LDPlsEnterRefererNotes; ?>");
+		d.referrer_notes.focus();
+		return false;
+	}else if(d.encoder.value==""){
+		alert("<?php echo $LDPlsEnterFullName; ?>");
+		d.encoder.focus();
+		return false;
+	}else{
+		return true;
+	}
 }
-
-function settitle(d)
-{
-	if(d.value=="m") document.aufnahmeform.anrede.selectedIndex=2;
-	else document.aufnahmeform.anrede.selectedIndex=1;
+function resolveLoc(){
+	d=document.aufnahmeform;
+	if(d.encounter_class_nr[0].checked==true) d.current_dept_nr.selectedIndex=0;
+		else d.current_ward_nr.selectedIndex=0;
 }
-
-
-function hidecat()
-{
-<?php if(defined('MASCOT_SHOW') && MASCOT_SHOW==1)
-{
-?>
-	if(document.images) document.images.catcom.src="../../gui/img/common/default/pixel.gif";
-<?php
-}
-?>
-}
-
-function loadcat()
-{
-
-  	cat=new Image();
-  	cat.src="../imgcreator/catcom.php?person=<?php echo strtr($HTTP_COOKIE_VARS[$local_user.$sid]," ","+")."&lang=$lang";?>";
-  	
-}
-
-function showcat()
-{
-<?php if(defined('MASCOT_SHOW') && MASCOT_SHOW==1)
-{
-?>
-	document.images.catcom.src=cat.src;
-<?php
-}
-?>
-}
-
-
-<?php require($root_path.'include/inc_checkdate_lang.php'); ?>
-
 -->
 </script>
 
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
+<?php
+# End of if(isset(pid))
+}
 
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-
-<?php 
 require('./include/js_popsearchwindow.inc.php');
 require($root_path.'include/inc_js_gethelp.php'); 
 require($root_path.'include/inc_css_a_hilitebu.php');
@@ -79,15 +87,8 @@ if(!$encounter_nr && !$pid)
 onLoad="if(document.searchform.searchkey.focus) document.searchform.searchkey.focus();" 
 <?php
 }
-
- if(defined('MASCOT_SHOW') && MASCOT_SHOW==1)
-{
-?>
-if(onLoad="if (window.focus) window.focus();loadcat();" 
-<?php
-}
-?>
-<?php if (!$cfg['dhtml']){ echo ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+if (!$cfg['dhtml']){ echo ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } 
+?>>
 
 
 <table width=100% border=0 cellspacing="0" cellpadding=0>
@@ -104,54 +105,26 @@ if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo 'startframe.php'.URL_APPEND;
 </td>
 </tr>
 
-<!-- Load tabs -->
 <?php
-
+# Load tabs 
 $target='entry';
 include('./gui_bridge/default/gui_tabs_patadmit.php') 
-
 ?>
 
 <tr>
 <td colspan=3  bgcolor=<?php echo $cfg['body_bgcolor']; ?>>
-
-<?php  /* If defined, create the mascot */
-
-if(defined('MASCOT_SHOW') && MASCOT_SHOW==1)
-{
-?>
-<div class="cats">
-<a href="javascript:hidecat()"><img
-<?php if($from=="pass")
-{ 
-    echo 'src="../imgcreator/catcom.php?lang='.$lang.'&person='.strtr($HTTP_COOKIE_VARS[$local_user.$sid]," ","+").'" ';
- }
-else 
-{
-	echo ' src="../../gui/img/common/default/pixel.gif" ';
-}
-?>
-align=right id=catcom border=0></a>
-</div>
-<?php
-}
-?>
-
 <ul>
 
-
 <?php 
-/* If the origin is admission link, show the search prompt */
-if(!isset($pid) || !$pid)
-{
-/* Set color values for the search mask */
+# If the origin is admission link, show the search prompt
+if(!isset($pid) || !$pid){
 
-$searchmask_bgcolor="#f3f3f3";
-$searchprompt=$LDEntryPrompt;
-$entry_block_bgcolor='#fff3f3';
-$entry_border_bgcolor='#6666ee';
-$entry_body_bgcolor='#ffffff';
-
+	# Set color values for the search mask
+	$searchmask_bgcolor="#f3f3f3";
+	$searchprompt=$LDEntryPrompt;
+	$entry_block_bgcolor='#fff3f3';
+	$entry_border_bgcolor='#6666ee';
+	$entry_body_bgcolor='#ffffff';
 ?>
 <table border=0>
   <tr>
@@ -188,7 +161,7 @@ else
 
 <FONT    SIZE=-1  FACE="Arial">
 
-<form method="post" action="<?php echo $thisfile; ?>" name="aufnahmeform">
+<form method="post" action="<?php echo $thisfile; ?>" name="aufnahmeform" onSubmit="return chkform(this)">
 
 <table border="0" cellspacing=1 cellpadding=0>
 
@@ -211,7 +184,7 @@ if($error)
 
 
 <tr>
-<td  background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDCaseNr ?>:
+<td  background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php echo $LDCaseNr ?>:
 </td>
 <td bgcolor="#eeeeee">
 <FONT SIZE=-1  FACE="Arial" ><?php if(isset($encounter_nr)&&$encounter_nr) echo $full_en; else echo '<font color="red">'.$LDNotYetAdmitted.'</font>'; ?>
@@ -221,7 +194,7 @@ if($error)
 </tr>
 
 <tr>
-<td  background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDAdmitDate ?>: 
+<td  background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php echo $LDAdmitDate ?>: 
 </td>
 <td bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial" color="#800000">
 <?php 
@@ -231,7 +204,7 @@ if($error)
 </tr>
 
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDAdmitTime ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php echo $LDAdmitTime ?>:
 </td>
 <td bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial" color="#800000">
 <?php if(isset($encounter_nr)&&$encounter_nr) echo @convertTimeToLocal(date('H:i:s')); ?>
@@ -242,21 +215,21 @@ if($error)
 </td>
 </tr>
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDTitle ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php echo $LDTitle ?>:
 </td>
 <td bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php echo $title ?>
 </td>
 
 </tr>
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDLastName ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php echo $LDLastName ?>:
 </td>
 <td bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial" color="#800000"><b><?php echo $name_last; ?></b>
 </td>
 </tr>
 
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDFirstName ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php echo $LDFirstName ?>:
 </td>
 <td bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial" color="#800000"><b><?php echo $name_first; ?></b>
 </td>
@@ -266,7 +239,7 @@ if($error)
 {
 ?>
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDName2 ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php echo $LDName2 ?>:
 </td>
 <td bgcolor="#ffffee" colspan=2><FONT SIZE=-1  FACE="Arial" color="#800000"><b><?php echo $name_2; ?></b>
 </td>
@@ -278,7 +251,7 @@ if($GLOBAL_CONFIG['patient_name_3_show']&&$name_3)
 {
 ?>
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDName3 ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php echo $LDName3 ?>:
 </td>
 <td bgcolor="#ffffee" colspan=2><FONT SIZE=-1  FACE="Arial" color="#800000"><b><?php echo $name_3; ?></b>
 </td>
@@ -290,7 +263,7 @@ if($GLOBAL_CONFIG['patient_name_middle_show']&&$name_middle)
 {
 ?>
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDNameMid ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php echo $LDNameMid ?>:
 </td>
 <td bgcolor="#ffffee" colspan=2><FONT SIZE=-1  FACE="Arial" color="#800000"><b><?php echo $name_middle; ?></b>
 </td>
@@ -300,7 +273,7 @@ if($GLOBAL_CONFIG['patient_name_middle_show']&&$name_middle)
 ?>
 
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDBday ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php echo $LDBday ?>:
 </td>
 <td bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial" color="#800000"><FONT SIZE=-1  FACE="Arial"><b><?php echo @formatDate2Local($date_birth,$date_format);?></b>
 </td>
@@ -308,9 +281,22 @@ if($GLOBAL_CONFIG['patient_name_middle_show']&&$name_middle)
 </td>
 </tr>
 
+<tr bgcolor="white">
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $LDBloodGroup ?>:
+</td>
+<td bgcolor="#ffffee" colspan=2><FONT SIZE=-1  FACE="Arial">&nbsp;
+<?php 
+if($blood_group){
+	$buf='LD'.$blood_group;
+	echo $$buf;
+} 
+?>
+</td>
+</tr>
+
 
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDAddress ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php echo $LDAddress ?>:
 </td>
 <td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">
 <?php 
@@ -328,7 +314,7 @@ echo $addr_zip.' '.$addr_citytown_name.'<br>';
 </tr>
 
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDAdmitClass ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php echo $LDAdmitClass ?>:
 </td>
 <td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">
 <?php
@@ -344,7 +330,7 @@ if(is_object($encounter_classes)){
 			}
 		}else{
 ?>
-	<input name="encounter_class_nr" type="radio"  value="<?php echo $result['class_nr']; ?>" <?php if($encounter_class_nr==$result['class_nr']) echo 'checked'; ?>>
+	<input name="encounter_class_nr" onClick="resolveLoc()" type="radio"  value="<?php echo $result['class_nr']; ?>" <?php if($encounter_class_nr==$result['class_nr']) echo 'checked'; ?>>
 <?php 
             if(isset($$LD)&&!empty($$LD)) echo $$LD; else echo $result['name'];
         	echo '&nbsp;';
@@ -356,12 +342,12 @@ if(is_object($encounter_classes)){
 </tr>
 
 <?php
-# If no encounter nr or inpatient, show ward/station info
+# If no encounter nr or inpatient, show ward/station info, 1 = inpatient
 if(!$encounter_nr||$encounter_class_nr==1){
 ?>
 
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php if ($errorward) echo "<font color=red>"; ?><?php echo $LDWard ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if ($errorward) echo "<font color=red>"; ?><?php echo $LDWard ?>:
 </td>
 <td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">
 <?php
@@ -388,25 +374,26 @@ if(!empty($ward_info)&&$ward_info->RecordCount()){
 }
 ?>
 </select>
-<?php
+<font size=1><?php
+echo '<img '.createComIcon($root_path,'redpfeil_l.gif','0').'> '.$LDForInpatient;
 }
-?>
+?></font>
 </td>
 </tr>
 <?php
 # End of if no encounter nr
 }
 
-# If no encounter nr or outpatient, show clinic/department info
+# If no encounter nr or outpatient, show clinic/department info, 2 = outpatient
 if(!$encounter_nr||$encounter_class_nr==2){
 ?>
 
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php if ($errorward) echo "<font color=red>"; ?><?php echo "$LDClinic/$LDDepartment"; ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if ($errorward) echo "<font color=red>"; ?><?php echo "$LDClinic/$LDDepartment"; ?>:
 </td>
 <td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">
 <?php
-if($in_ward){
+if($in_dept){
     while($deptrow=$all_meds->FetchRow()){
 	    if(isset($current_dept_nr)&&($current_dept_nr==$deptrow['nr'])){
 			echo $deptrow['name_formal'];
@@ -424,14 +411,18 @@ if(is_object($all_meds)){
 	    echo '
 	    <option value="'.$deptrow['nr'].'" ';
 	    if(isset($current_dept_nr)&&($current_dept_nr==$deptrow['nr'])) echo 'selected';
-		echo '>'.$deptrow['name_formal'].'</option>';
+		echo '>';
+		if($$deptrow['LD_var']!='') echo $$deptrow['LD_var'];
+			else echo $deptrow['name_formal'];
+		echo '</option>';
     }
 }
 ?>
 </select>
-<?php
+<font size=1><?php
+echo '<img '.createComIcon($root_path,'redpfeil_l.gif','0').'> '.$LDForOutpatient;
 }
-?>
+?></font>
 </td>
 </tr>
 <?php
@@ -441,25 +432,25 @@ if(is_object($all_meds)){
 
 
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php if ($errordiagnose) echo "<font color=red>"; ?><?php echo $LDDiagnosis ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if ($errordiagnose) echo "<font color=red>"; ?><?php echo $LDDiagnosis ?>:
 </td>
 <td colspan=2 bgcolor="#eeeeee"><input name="referrer_diagnosis" type="text" size="60" value="<?php echo $referrer_diagnosis; ?>">
 </td>
 </tr>
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php if ($errorreferrer) echo "<font color=red>"; ?><?php echo $LDRecBy ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if ($errorreferrer) echo "<font color=red>"; ?><?php echo $LDRecBy ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input name="referrer_dr" type="text" size="60" value="<?php echo $referrer_dr; ?>"><a href="#"><img <?php echo createComIcon($root_path,'l-arrowgrnlrg.gif','0') ?>></a>
+<td colspan=2 bgcolor="#eeeeee"><input name="referrer_dr" type="text" size="60" value="<?php echo $referrer_dr; ?>"><!-- <a href="#"><img <?php echo createComIcon($root_path,'l-arrowgrnlrg.gif','0') ?>></a> -->
 </td>
 </tr>
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php if ($errortherapie) echo "<font color=red>"; ?><?php echo $LDTherapy ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if ($errortherapie) echo "<font color=red>"; ?><?php echo $LDTherapy ?>:
 </td>
 <td colspan=2 bgcolor="#eeeeee"><input name="referrer_recom_therapy" type="text" size="60" value="<?php echo $referrer_recom_therapy; ?>">
 </td>
 </tr>
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php if ($errorbesonder) echo "<font color=red>"; ?><?php echo $LDSpecials ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if ($errorbesonder) echo "<font color=red>"; ?><?php echo $LDSpecials ?>:
 </td>
 <td colspan=2 bgcolor="#eeeeee"><input name="referrer_notes" type="text" size="60" value="<?php echo $referrer_notes; ?>">
 </td>
@@ -467,7 +458,7 @@ if(is_object($all_meds)){
 
 <!-- The insurance class  -->
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php if ($errorinsclass) echo "<font color=red>"; ?><?php echo $LDBillType ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if ($errorinsclass) echo "<font color=red>"; ?><?php echo $LDBillType ?>:
 </td>
 <td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">
 
@@ -488,13 +479,13 @@ if(is_object($insurance_classes)){
 </tr>
 
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php if ($error_ins_nr) echo "<font color=red>"; ?><?php echo $LDInsuranceNr ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if ($error_ins_nr) echo "<font color=red>"; ?><?php echo $LDInsuranceNr ?>:
 </td>
 <td colspan=2 bgcolor="#eeeeee"><input name="insurance_nr" type="text" size="60" value="<?php if(isset($insurance_nr)) echo $insurance_nr; ?>"> 
 </td>
 </tr>
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php if ($error_ins_co) echo "<font color=red>"; ?><?php echo $LDInsuranceCo ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if ($error_ins_co) echo "<font color=red>"; ?><?php echo $LDInsuranceCo ?>:
 </td>
 <td colspan=2 bgcolor="#eeeeee"><input name="insurance_firm_name" type="text" size="60" value="<?php  if(isset($insurance_firm_name))echo $insurance_firm_name; ?>"><a href="javascript:popSearchWin('insurance','aufnahmeform.insurance_firm_id','aufnahmeform.insurance_firm_name')"><img <?php echo createComIcon($root_path,'l-arrowgrnlrg.gif','0') ?>></a>
 </td>
@@ -507,10 +498,10 @@ if (!$GLOBAL_CONFIG['patient_service_care_hide']&& is_object($care_service))
 {
 ?>
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDCareServiceClass ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php echo $LDCareServiceClass ?>:
 </td>
 <td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><nobr>
-<select name="sc_care_class_nr" onFocus="hidecat()">
+<select name="sc_care_class_nr" >
 <?php
 while($buffer=$care_service->FetchRow())
 {
@@ -524,8 +515,8 @@ while($buffer=$care_service->FetchRow())
 ?>
 </select>
 
-<?php echo $LDFrom ?> <input type="text" name="sc_care_start"  value="<?php if(!empty($sc_care_start))  echo @formatDate2Local($sc_care_start,$date_format); ?>" size=9 maxlength=10 onFocus="hidecat()"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-<?php echo $LDTo ?> <input type="text" name="sc_care_end"  value="<?php if(!empty($sc_care_end))  echo @formatDate2Local($sc_care_end,$date_format); ?>" size=9 maxlength=10 onFocus="hidecat()"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">                 
+<?php echo $LDFrom ?> <input type="text" name="sc_care_start"  value="<?php if(!empty($sc_care_start))  echo @formatDate2Local($sc_care_start,$date_format); ?>" size=9 maxlength=10   onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+<?php echo $LDTo ?> <input type="text" name="sc_care_end"  value="<?php if(!empty($sc_care_end))  echo @formatDate2Local($sc_care_end,$date_format); ?>" size=9 maxlength=10   onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">                 
 <input type="hidden" name="sc_care_nr" value="<?php echo $sc_care_nr; ?>">
 </td>
 </tr>
@@ -537,10 +528,10 @@ if (!$GLOBAL_CONFIG['patient_service_room_hide']&&is_object($room_service))
 {
 ?>
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDRoomServiceClass ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php echo $LDRoomServiceClass ?>:
 </td>
 <td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">
-<select name="sc_room_class_nr" onFocus="hidecat()">
+<select name="sc_room_class_nr" >
 <?php
 while($buffer=$room_service->FetchRow())
 {
@@ -554,8 +545,8 @@ while($buffer=$room_service->FetchRow())
 ?>
 </select>
 
-<?php echo $LDFrom ?> <input type="text" name="sc_room_start"  value="<?php if(!empty($sc_room_start))  echo @formatDate2Local($sc_room_start,$date_format); ?>" size=9 maxlength=10 onFocus="hidecat()"   onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"> 
-<?php echo $LDTo ?> <input type="text" name="sc_room_end"  value="<?php if(!empty($sc_room_end))  echo @formatDate2Local($sc_room_end,$date_format); ?>" size=9 maxlength=10 onFocus="hidecat()"   onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">                 
+<?php echo $LDFrom ?> <input type="text" name="sc_room_start"  value="<?php if(!empty($sc_room_start))  echo @formatDate2Local($sc_room_start,$date_format); ?>" size=9 maxlength=10    onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"> 
+<?php echo $LDTo ?> <input type="text" name="sc_room_end"  value="<?php if(!empty($sc_room_end))  echo @formatDate2Local($sc_room_end,$date_format); ?>" size=9 maxlength=10    onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">                 
 <input type="hidden" name="sc_room_nr" value="<?php echo $sc_room_nr; ?>">
 </td>
 </tr>
@@ -567,10 +558,10 @@ if (!$GLOBAL_CONFIG['patient_service_att_dr_hide']&&is_object($att_dr_service))
 {
 ?>
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDAttDrServiceClass ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php echo $LDAttDrServiceClass ?>:
 </td>
 <td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">
-<select name="sc_att_dr_class_nr" onFocus="hidecat()">
+<select name="sc_att_dr_class_nr" >
 <?php
 while($buffer=$att_dr_service->FetchRow())
 {
@@ -584,8 +575,8 @@ while($buffer=$att_dr_service->FetchRow())
 ?>
 </select>
 
-<?php echo $LDFrom ?> <input type="text" name="sc_att_dr_start" size=9 maxlength=10  value="<?php if(!empty($sc_att_dr_start)) echo  @formatDate2Local($sc_att_dr_start,$date_format); ?>" onFocus="hidecat()"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-<?php echo $LDTo ?> <input type="text" name="sc_att_dr_end" size=9 maxlength=10 value="<?php if(!empty($sc_att_dr_end)) echo  @formatDate2Local($sc_att_dr_end,$date_format); ?>" onFocus="hidecat()"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">                 
+<?php echo $LDFrom ?> <input type="text" name="sc_att_dr_start" size=9 maxlength=10  value="<?php if(!empty($sc_att_dr_start)) echo  @formatDate2Local($sc_att_dr_start,$date_format); ?>"   onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+<?php echo $LDTo ?> <input type="text" name="sc_att_dr_end" size=9 maxlength=10 value="<?php if(!empty($sc_att_dr_end)) echo  @formatDate2Local($sc_att_dr_end,$date_format); ?>"   onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">                 
 <input type="hidden" name="sc_att_dr_nr" value="<?php echo $sc_att_dr_nr; ?>">
 </td>
 </tr>
@@ -594,7 +585,7 @@ while($buffer=$att_dr_service->FetchRow())
 
 ?>
 <tr>
-<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDAdmitBy ?>:
+<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php echo $LDAdmitBy ?>:
 </td>
 <td colspan=2 bgcolor="#eeeeee"><input  name="encoder" type="text" value=<?php if ($encoder!='') echo '"'.$encoder.'"' ; else echo '"'.$HTTP_COOKIE_VARS[$local_user.$sid].'"' ?> size="28">
 </nobr>
@@ -615,7 +606,7 @@ while($buffer=$att_dr_service->FetchRow())
 
 <?php if($update) echo '<input type="hidden" name=update value=1>'; ?>
 <input  type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?> alt="<?php echo $LDSaveData ?>" align="absmiddle"> 
-<a href="<?php echo 'aufnahme_start.php'.URL_APPEND; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDResetData ?>"  align="absmiddle"></a>
+<a href="<?php echo 'aufnahme_start.php'.URL_APPEND.'&pid='.$pid.'&encounter_class_nr='.$encounter_class_nr; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDResetData ?>"  align="absmiddle"></a>
 <!-- Note: uncomment the ff: line if you want to have a reset button  -->
 <!-- 
 <a href="javascript:document.aufnahmeform.reset()"><img <?php echo createLDImgSrc($root_path,'reset.gif','0') ?> alt="<?php echo $LDResetData ?>"  align="absmiddle"></a> 
@@ -667,7 +658,7 @@ echo '<input type="hidden" name="forcesave" value="1">
 if(defined('MASCOT_SHOW') && MASCOT_SHOW==1)
 {
 ?>
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="#" onClick="showcat()"><?php echo $LDCatPls ?><br>
+<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="#" ><?php echo $LDCatPls ?><br>
 <?php
 }
 ?>

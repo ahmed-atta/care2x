@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -39,11 +39,9 @@ if($dblink_ok) {
 		}
 				if($ergebnis=$db->Execute($sql))
 				{ 
-					$rows=0;
-					while($content=$ergebnis->FetchRow()) $rows++;	
-					if($rows)
+					
+					if($rows=$ergebnis->RecordCount())
 					{
-						mysql_data_seek($ergebnis,0);
 						$content=$ergebnis->FetchRow();
 						// update user to tag the file as read
 					} //end of if rows
@@ -60,17 +58,6 @@ if($dblink_ok) {
 <HTML>
 <HEAD>
 <?php echo setCharSet(); ?>
- <script language="javascript" >
-<!-- 
-function gethelp(x,s,x1,x2,x3)
-{
-	if (!x) x="";
-	urlholder="help-router.php?lang=<?php echo $lang ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3;
-	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
-	window.helpwin.moveTo(0,0);
-}
-// -->
-</script> 
 
 <?php 
 require($root_path.'include/inc_js_gethelp.php');
@@ -79,18 +66,42 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 </HEAD>
 
 <BODY bgcolor="#ffffff" onLoad="if (window.focus) window.focus()">
-<pre><?php
-echo '
-'.$LDFrom.': <b>'.$content['sender'].'</b>
-'.$LDReply2.': <b>'.$content['reply2'].'</b>
-'.$LDTo.': <b>'.$content['recipient'].'</b>
-CC: <b>'.$content['cc'].'</b>
-BCC: <b>'.$content['bcc'].'</b>
-'.$LDSubject.': <b>'.$content['subject'].'</b>
-'.$LDAttach.':
-'.$LDDate.':'.$LDTime.': <b>'.formatDate2Local($content['send_dt'],$date_format).' '.convertTimeToLocal(formatDate2Local($content['send_dt'],$date_format,0,1)).'</b>';
+<table border=0 cellpadding=1 cellspacing=1>
+  <tr>
+    <td><pre><?php echo $LDFrom; ?></td>
+    <td><pre><b><?php echo $content['sender']; ?></b></td>
+  </tr>
+  <tr>
+    <td><pre><?php echo $LDReply2; ?></td>
+    <td><pre><b><?php echo $content['reply2']; ?></b></td>
+  </tr>
+  <tr>
+    <td><pre><?php echo $LDTo; ?></td>
+    <td><pre><b><?php echo $content['recipient']; ?></b></td>
+  </tr>
+  <tr>
+    <td><pre>CC</td>
+    <td><pre><b><?php echo $content['cc']; ?></b></td>
+  </tr>
+  <tr>
+    <td><pre>BCC</td>
+    <td><pre><b><?php echo $content['bcc']; ?></b></td>
+  </tr>
+  <tr>
+    <td><pre><?php echo $LDSubject; ?></td>
+    <td><pre><b><?php echo $content['subject']; ?></b></td>
+  </tr>
+<!--   <tr>
+    <td><pre><?php echo $LDAttach; ?></td>
+    <td><pre></td>
+  </tr>
+ -->  <tr>
+    <td><pre><?php echo $LDDate.':'.$LDTime; ?></td>
+    <td><pre><?php echo '<b>'.formatDate2Local($content['send_dt'],$date_format).' '.convertTimeToLocal(formatDate2Local($content['send_dt'],$date_format,0,1)).'</b>'; ?></td>
+  </tr>
+</table>
 
-?>
+<pre>
 <hr>
 <?php
 //$content[body]=chunk_split($content[body],100);

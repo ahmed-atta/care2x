@@ -21,18 +21,17 @@ define('LANG_FILE','konsil.php');
 *  and set the user cookie name and break or return filename
 */
 
-if($user_origin=='lab')
-{
-  $local_user='ck_lab_user';
-  $breakfile=$root_path."modules/laboratory/labor.php".URL_APPEND;
-}
-else
-{
-  $local_user='ck_pflege_user';
-  $breakfile=$root_path."modules/nursing/nursing-station-patientdaten.php".URL_APPEND."&edit=$edit&station=$station&pn=$pn";
+if($user_origin=='lab'){
+	$local_user='ck_lab_user';
+	$breakfile=$root_path."modules/laboratory/labor.php".URL_APPEND;
+}elseif($user_origin=='amb'){
+	$local_user='ck_lab_user';
+	$breakfile=$root_path.'modules/ambulatory/ambulatory.php'.URL_APPEND;
+}else{
+	$local_user='ck_pflege_user';
+	$breakfile=$root_path."modules/nursing/nursing-station-patientdaten.php".URL_APPEND."&edit=$edit&station=$station&pn=$pn";
 }
 require_once($root_path.'include/inc_front_chain_lang.php'); ///* invoke the script lock*/
-require_once($root_path.'include/inc_config_color.php'); ///* load color preferences*/
 require_once($root_path.'include/inc_test_request_vars_baclabor.php'); ///* load variable elements */
 
 /* Load additional languge table */

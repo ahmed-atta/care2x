@@ -10,12 +10,11 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+$lang_tables[]='departments.php';
 define('LANG_FILE','konsil.php');
 
-/* Globalize the variables */
-
-
-/* We need to differentiate from where the user is coming: 
+/**
+*  We need to differentiate from where the user is coming: 
 *  $user_origin != lab ;  from patient charts folder
 *  $user_origin == lab ;  from the laboratory
 *  and set the user cookie name and break or return filename
@@ -45,7 +44,11 @@ $db_request_table=$target;
 $formtitle=$abtname[$konsil];
 /*
 *  The following are  batch nr inits for each type of test request
-*   chemlabor = 10000000; patho = 20000000; baclabor = 30000000; blood = 40000000; generic = 50000000; 
+*   chemlabor = 10000000; 
+*   patho = 20000000; 
+*   baclabor = 30000000; 
+*   blood = 40000000; 
+*   generic = 50000000; 
 */
 define('_BATCH_NR_INIT_',50000000);  // define the initial batch nr for generic forms
 

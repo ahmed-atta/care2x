@@ -61,8 +61,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
 <a href="javascript:gethelp('admission_how2new.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
-if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo "startframe.php?sid=".$sid."&lang=".$lang; 
-	else echo $breakfile."?sid=$sid&target=entry&lang=$lang"; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
+echo $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </td>
 </tr>
 
@@ -111,9 +110,11 @@ require('./gui_bridge/default/gui_tabs_patreg.php');
       <td background="<?php echo $root_path; ?>gui/img/common/default/tableheader_gr.gif"><FONT  SIZE=-1  FACE="Arial" color="#006600"><b>&nbsp;&nbsp;<?php echo $LDRegistrationNr; ?></b></td>
       <td background="<?php echo $root_path; ?>gui/img/common/default/tableheader_gr.gif"><FONT  SIZE=-1  FACE="Arial" color="#006600"><b>&nbsp;&nbsp;<?php echo $LDRegDate; ?></b></td>
   </tr>
- <?php 
- /* Load common icons*/
- $img_arrow=createComIcon($root_path,'r_arrowgrnsm.gif','0');
+<?php 
+# Load common icons
+$img_arrow=createComIcon($root_path,'r_arrowgrnsm.gif','0');
+$img_male=createComIcon($root_path,'spm.gif','0');
+$img_female=createComIcon($root_path,'spf.gif','0');
  
  $toggle=0;
  while($result=$ergebnis->FetchRow())
@@ -123,9 +124,22 @@ require('./gui_bridge/default/gui_tabs_patreg.php');
   if($toggle){ echo "bgcolor=#efefef"; $toggle=0;} else {echo "bgcolor=#ffffff"; $toggle=1;}
   $buf='patient_register_show.php'.URL_APPEND.'&origin=archive&pid='.$result['pid'].'&target=archiv';
   echo '>
-    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'"><img '.$img_arrow.'></a></td>
+    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">';
+
+	switch($result['sex']){
+		case 'f': echo '<img '.$img_female.'>'; break;
+		case 'm': echo '<img '.$img_male.'>'; break;
+		default: echo '&nbsp;'; break;
+	}
+
+	echo '</a></td>
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; <a href="'.$buf.'" title="'.$LDClk2Show.'">'.$result['name_last'].'</a></td>
-    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.$result['name_first'].'</a></td>
+    <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.$result['name_first'].'</a>';
+	
+	# If person is dead show a black cross
+	if($result['death_date']&&$result['death_date']!='0000-00-00') echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0','absmiddle').'>';
+	
+	echo '</td>
     <td><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;'.@formatDate2Local($result['date_birth'],$date_format).'</td>
     <td align=right><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;'.$result['pid'].'</td>
     <td align=right><FONT  SIZE=-1  FACE="Arial">&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.@formatDate2Local($result['date_reg'],$date_format).'</a></td>

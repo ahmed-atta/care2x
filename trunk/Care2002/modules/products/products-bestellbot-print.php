@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -11,15 +11,16 @@ require($root_path.'include/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 
-/* Check if register globals is "on" */
-$reg_glob_ini=ini_get('register_globals');
+# Check if register globals is "on" 
+/*$reg_glob_ini=ini_get('register_globals');
 
 if(empty($reg_glob_ini)||(!$reg_glob_ini))
 {
    include_once($root_path.'include/inc_vars_resolve.php');
-}
+}*/
 
-/* Initializations */
+# Initializations 
+$lang_tables[]='departments.php';
 define('LANG_FILE','products.php');
 
 if(!isset($userck)) 
@@ -28,7 +29,7 @@ if(!isset($userck))
 $local_user=$userck;
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-$thisfile='products-bestellbot-print.php';
+$thisfile=basename(__FILE__);
 
 if ($HTTP_COOKIE_VARS[$local_user.$sid]=='') $cat='';  
 
@@ -46,27 +47,19 @@ switch($cat)
 }
 
 /* Start the main work */
-if($order_nr&&$dept)
-{
+if($order_nr&&$dept_nr){
 
-  $rows=0;
-  $stat2seen=false;
-  $mov2arc=false;
-  $deltodo=false;
-  
-  
- 	if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-	if($dblink_ok) 
-	{
+	$rows=0;
+	$stat2seen=false;
+	$mov2arc=false;
+	$deltodo=false;
   
     // //include_once('../include/inc_editor_fx.php');
 
-     /* Load the date formatter */
+     # Load the date formatter
      include_once($root_path.'include/inc_date_format_functions.php');
-     
-
   
-     /* Get the data first*/
+     # Get the data first
 	$sql='SELECT * FROM '.$dbtable.' WHERE order_nr="'.$order_nr.'"';
 							
     if($ergebnis=$db->Execute($sql))
@@ -123,8 +116,6 @@ if($order_nr&&$dept)
 
 
 			//echo $sql;
-		}
-  		 else { echo "$LDDbNoLink<br>"; } 
 }
 ?>
 
@@ -139,7 +130,7 @@ if($order_nr&&$dept)
 function ack_print()
 {
 	this.print()
-	this.location.replace("products-bestellbot-print.php<?php echo URL_REDIRECT_APPEND."&userck=$userck&mode=ack_print&cat=$cat&dept=$dept&order_nr=$order_nr&status=$status"; ?>");
+	this.location.replace("products-bestellbot-print.php<?php echo URL_REDIRECT_APPEND."&userck=$userck&mode=ack_print&cat=$cat&dept_nr=$dept_nr&order_nr=$order_nr&status=$status"; ?>");
 }
 function move2arch()
 {
@@ -149,7 +140,7 @@ function move2arch()
 		return;
 	}
 	c=document.opt3.clerk.value;
-	this.location.replace("products-bestellbot-print.php<?php echo URL_REDIRECT_APPEND."&userck=$userck&mode=archive&cat=$cat&dept=$dept&order_nr=$order_nr&status=$status&clerk="; ?>"+c);
+	this.location.replace("products-bestellbot-print.php<?php echo URL_REDIRECT_APPEND."&userck=$userck&mode=archive&cat=$cat&dept_nr=$dept_nr&order_nr=$order_nr&status=$status&clerk="; ?>"+c);
 }
 function parentref(n)
 {
@@ -170,29 +161,35 @@ function parentref(n)
 </script>
 
 </head>
-<body bgcolor=#fefefe onLoad="if (window.focus) window.focus();  if(parentref('1')) 1;" 
+<body  topmargin=20 leftmargin=30  marginwidth=30 marginheight=20  bgcolor=#fefefe onLoad="if (window.focus) window.focus();  if(parentref('1')) 1;" 
 >
 <p>
 
 <?php
 //foreach($argv as $v) echo "$v ";
 
-if($rows>0)
-{
+if($rows){
+     
+	 # Create department object
+     include_once($root_path.'include/care_api_classes/class_department.php');
+	 $dept=new Department;
+
 //++++++++++++++++++++++++ show the actual list +++++++++++++++++++++++++++
 
 $tog=1;
 
 echo '<p>
-		<font face="Verdana, Arial" size=2 >'.$final_orderlist.strtoupper($dept).'</font><br>
+		<font face="Verdana, Arial" size=2 >
+		'.$LDOrderNr.' '.$order_nr.'<p>'.$dept->FormalName($dept_nr).'</font><br>
 		<font face="Arial" size=2> '.$LDListindex[2].': ';
 		echo formatDate2Local($content['order_date'],$date_format);
 
 		echo ' '.$LDAt.': '.convertTimeToLocal(str_replace('24','00',$content['order_time'])).'<p>';
 		if($content['priority']=='urgent') echo "::::::::::::::::::::  $LDUrgent $LDUrgent $LDUrgent ::::::::::::::::::::::::";
 		echo'
-		<table border=0 cellspacing=0 cellpadding=0 bgcolor="#666666"><tr><td>
-		<table border=0 cellspacing=1 cellpadding=3>
+		<table border=0 cellspacing=0 cellpadding=0 bgcolor="#666666" width="100%">
+		<tr><td>
+		<table border=0 cellspacing=1 cellpadding=3 width="100%">
   		<tr bgcolor="#ffffff">';
 	for ($i=0;$i<sizeof($LDFinindex);$i++)
 	echo '
@@ -233,7 +230,7 @@ for($n=0;$n<sizeof($artikeln);$n++)
                                          <input type="hidden" name="mode" value="ack_print">
 										<input type="hidden" name="cat" value="'.$cat.'">
                                          <input type="hidden" name="userck" value="'.$userck.'">
-                                         <input type="hidden" name="dept" value="'.$dept.'">
+                                         <input type="hidden" name="dept_nr" value="'.$dept_nr.'">
                                          <input type="hidden" name="order_nr" value="'.$order_nr.'">
                                          <input type="hidden" name="sid" value="'.$sid.'">
                                          <input type="hidden" name="lang" value="'.$lang.'">

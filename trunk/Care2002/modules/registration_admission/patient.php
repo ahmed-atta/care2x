@@ -157,7 +157,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
               <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'new_group.gif','0') ?>></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B><nobr>
-				 <a href="patient_register_pass.php<?php echo URL_APPEND; ?>&target=search&retpath=docs"><?php echo $LDPatientDev ?></a>
+				 <a href="patient_register_pass.php<?php echo URL_APPEND; ?>&target=search&retpath=docs"><?php echo $LDReports ?></a>
 				  </nobr></B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><nobr><?php echo $LDPatientDevTxt ?></nobr></FONT></TD></TR>
@@ -181,7 +181,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 				  <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'people_search_online.gif','0') ?>></td>
                 <TD vAlign=top width=150><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B>
-				<a href="patient_register_pass.php<?php echo URL_APPEND; ?>&target=search&retpath=docs"><?php echo $LDWtHt ?></a>
+				<a href="patient_register_pass.php<?php echo URL_APPEND; ?>&target=search&retpath=docs"><?php echo $LDMeasurements ?></a>
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><nobr><?php echo $LDWtHtTxt ?></nobr></FONT></TD></TR>

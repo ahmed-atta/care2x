@@ -42,9 +42,11 @@ require('./include/init_show.php');
 
 $page_title=$LDMedocs;
 
+# Load the entire encounter data
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 $enc_obj=new Encounter($encounter_nr);
 $enc_obj->loadEncounterData();
+# Get encounter class
 $enc_class=$enc_obj->EncounterClass();
 /*if($enc_class==2)  $HTTP_SESSION_VARS['sess_full_en']=$GLOBAL_CONFIG['patient_outpatient_nr_adder']+$encounter_nr;
 	else $HTTP_SESSION_VARS['sess_full_en']=$GLOBAL_CONFIG['patient_inpatient_nr_adder']+$encounter_nr;

@@ -75,6 +75,11 @@ if($rows){
 					if(isset($$buf['LD_var'])&&$$buf['LD_var']) echo $$buf['LD_var'];
 						else echo $buf['name'];
 					break;
+				case 'anaesth_type_nr':
+					$buf=&$obj->getAnaesthesia($pregbuf[$show_preg_enc][$x]);
+					if(isset($$buf['LD_var'])&&$$buf['LD_var']) echo $$buf['LD_var'];
+						else echo $buf['name'];
+					break;
 				case 'child_encounter_nr':
 					if($pregbuf[$show_preg_enc][$x]){
 						$buf=explode(' ',$pregbuf[$show_preg_enc][$x]);

@@ -146,7 +146,7 @@ $breakfile='patient_payment_links.php'.URL_APPEND.'&patientno='.$patientno.'&ful
 <table border="0" width="101%" bgcolor=#99ccff>
       <tr>
         <td width="101%"><font color="#330066" size="+2" face="Arial"><strong>eComBill-
-          Payment Receipt</strong></font></td>
+          Payment Receipt </strong></font></td>
       </tr>
     </table>
 <blockquote>

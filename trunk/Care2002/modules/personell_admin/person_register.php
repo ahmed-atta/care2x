@@ -3,18 +3,18 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-$lang_tables=array('personell.php');
+$lang_tables[]='personell.php';
+$lang_tables[]='person.php';
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
 require_once($root_path.'include/inc_date_format_functions.php');
 require_once($root_path.'include/care_api_classes/class_insurance.php');
 require_once($root_path.'include/care_api_classes/class_person.php');
@@ -25,8 +25,9 @@ $person_obj=new Person($pid);
 $pinsure_obj=new PersonInsurance($pid);
 
 $thisfile=basename(__FILE__);
-if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
-	else $breakfile='personell_admin_pass.php'.URL_APPEND.'&target='.$target;
+if($update) $breakfile='person_register_show.php'.URL_APPEND.'&pid='.$pid;
+	elseif($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
+		else $breakfile='personell_admin_pass.php'.URL_APPEND.'&target='.$target;
 
 if(!session_is_registered('sess_pid')) session_register('sess_pid');
 if(!isset($insurance_show)) $insurance_show=true;
@@ -115,6 +116,7 @@ if($dblink_ok) {
 						 name_maiden="'.$name_maiden.'",
 						 name_others="'.$name_others.'",
 						 date_birth="'.formatDate2STD($date_birth,$date_format).'",
+						 blood_group="'.$blood_group.'",
 						 sex="'.$sex.'",
 						 addr_str="'.$addr_str.'",
 						 addr_str_nr="'.$addr_str_nr.'",

@@ -51,19 +51,10 @@ require($root_path.'include/inc_passcheck_head.php');
 
 <P>
 <?php
-if($cfg['dhtml'])
-{
-
 $buf=$LDAppointments; 
 if($dept) $buf.=' <nobr>:: '.$dept.'</nobr>';
 echo '
-<script language=javascript>
-<!--
- if (window.screen.width) 
- { if((window.screen.width)>1000) document.write(\'<img '.createComIcon($root_path,'monitor2.gif','0','absmiddle').'><FONT  COLOR="'.$cfg['top_txtcolor'].'"  SIZE=6  FACE="verdana"> <b>'.$buf.'</b></font>\');}
- //-->
- </script>';
- }
+<img '.createComIcon($root_path,'clockpaper.gif','0','top').'><FONT  COLOR="'.$cfg['top_txtcolor'].'"  SIZE=6  FACE="verdana"> <b>'.$buf.'</b></font>';
  ?>
   
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 

@@ -3,36 +3,33 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.05 - 2003-06-22
+* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+$lang_tables[]='departments.php';
 define('LANG_FILE','products.php');
 $local_user='ck_prod_order_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php');
 
-if(!isset($dept)||!$dept)
+/*if(!isset($dept)||!$dept)
 {
 	if(isset($HTTP_COOKIE_VARS['ck_thispc_dept'])&&!empty($HTTP_COOKIE_VARS['ck_thispc_dept'])) $dept=$HTTP_COOKIE_VARS['ck_thispc_dept'];
 	 else $dept='plop';//default is plop dept
-}
+}*/
 
 $thisfile='products-bestellkorb.php';
 
-if($cat=='pharma') 
- {
+if($cat=='pharma'){
  	$dbtable='care_pharma_orderlist';
 	$title=$LDPharmacy;
- }
- else
- {
+}elseif($cat=='medlager'){
  	$dbtable='care_med_orderlist';
 	$title=$LDMedDepot;
- }
+}
  
 $encbuf=$HTTP_COOKIE_VARS[$local_user.$sid];
 
@@ -40,18 +37,21 @@ $encbuf=$HTTP_COOKIE_VARS[$local_user.$sid];
 $rows=0;
 $count=0;
 
-/* Load the date formatter */
+# Load the date formatter
 require_once($root_path.'include/inc_date_format_functions.php');
+# Create department object
+require_once($root_path.'include/care_api_classes/class_department.php');
+$dept_obj=new Department;
+# Create products object
+require_once($root_path.'include/care_api_classes/class_product.php');
+$product_obj=new Product;
 
-
-
-if($mode!='')
-{
+if($mode!=''){
 	if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
 		if($dblink_ok)
 		{		$sql='SELECT * FROM '.$dbtable.' 
 							WHERE order_nr="'.$order_nr.'"
-							AND dept="'.$dept.'"';
+							AND dept_nr="'.$dept_nr.'"';
 							
         	if($ergebnis=$db->Execute($sql))
 			{
@@ -68,9 +68,9 @@ if($mode!='')
 		{
 			if($ocount==1)
 		 	{
-				$sql='DELETE LOW_PRIORITY FROM '.$dbtable.' WHERE order_nr="'.$order_nr.'" AND dept="'.$dept.'"';
-							
-        		$ergebnis=$db->Execute($sql);
+				//$sql='DELETE LOW_PRIORITY FROM '.$dbtable.' WHERE order_nr="'.$order_nr.'"';		
+        		//$ergebnis=$db->Execute($sql);
+				$product_obj->DeleteOrder($order_nr,$cat);
 		 	}
 		 	else
 		 	{
@@ -90,7 +90,7 @@ if($mode!='')
 									priority="'.$content['priority'].'",
 									modify_id="'.$HTTP_COOKIE_VARS[$local_user.$sid].'"
 							   		WHERE order_nr="'.$content['order_nr'].'"
-									AND dept="'.$dept.'"';
+									AND dept_nr="'.$dept_nr.'"';
 									
 			     if(!$ergebnis=$db->Execute($sql)) { echo "$sql<br>$LDDbNoSave<br>"; } 
 		  	}	
@@ -116,7 +116,7 @@ if($mode!='')
         			if($ergeb=$db->Execute($sql))
 					{
 						$result=$ergeb->FetchRow();
-							$a='artname'.$i;
+							$a='artikelname'.$i;
 							$$a=str_replace('&','%26',strtr($result['artikelname'],' ','+')); 
 							$mi='minorder'.$i;
 							$$mi=$result['minorder'];
@@ -134,7 +134,7 @@ if($mode!='')
 				$o='order'.$i; 
 				if(!$$o) continue;
 				$b='bestellnum'.$i; 
-				$a='artname'.$i;
+				$a='artikelname'.$i;
 				$po='porder'.$i;
 				$pc='p'.$i;
 				$tart.=' bestellnum='.$$b.'&artikelname='.$$a.'&pcs='.$$pc.'&minorder='.$$mi.'&maxorder='.$$mx.'&proorder='.$$po; // append new bestellnum to articles
@@ -153,13 +153,13 @@ if($mode!='')
 
 			    $sql='UPDATE '.$dbtable.' SET articles="'.$tart.'", 	
 				                                            modify_id="'.$encbuf.'"
-							   		                        WHERE order_nr="'.$content['order_nr'].'" AND dept="'.$dept.'"';            
+							   		                        WHERE order_nr="'.$content['order_nr'].'" AND dept_nr="'.$dept_nr.'"';            
 			}
 			else 
 			{
 				$sql="INSERT INTO ".$dbtable." 
 						(	
-							dept,
+							dept_nr,
 							order_date,
 							articles,
 							order_time,
@@ -170,7 +170,7 @@ if($mode!='')
 							create_time
 							) 
 						VALUES (
-							'$dept',
+							'$dept_nr',
 							'".date('Y-m-d')."',
 							'".$tart."',
 							'".date('H:i:s')."',
@@ -195,11 +195,11 @@ if($mode!='')
 			       {
 					 $b='bestellnum'.$i; 
 				    	// get the needed info from the main pharma db
-					 $sql='SELECT hit FROM '.$cat_table.' WHERE bestellnum="'.$$b.'" AND dept=\''.$dept.'\'';
+					 $sql='SELECT hit FROM '.$cat_table.' WHERE bestellnum="'.$$b.'" AND dept_nr=\''.$dept_nr.'\'';
         			 if($ergeb=$db->Execute($sql))
 					 {
 					 	$resulthit=$ergeb->FetchRow();
-					    $sql='UPDATE '.$cat_table.' SET hit='.($resulthit['hit']+1).' WHERE bestellnum="'.$$b.'" AND dept=\''.$dept.'\'';
+					    $sql='UPDATE '.$cat_table.' SET hit='.($resulthit['hit']+1).' WHERE bestellnum="'.$$b.'" AND dept_nr=\''.$dept_nr.'\'';
         			    $db->Execute($sql);
 					 }
 					 /* end of routine */
@@ -218,34 +218,24 @@ if($mode!='')
 $rows=0;
 $wassent=false;
 
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok)
-		{
-				$sql='SELECT * FROM '.$dbtable.' 
-						WHERE order_nr="'.$order_nr.'"
-						AND dept="'.$dept.'"';
-						
-        		if($ergebnis=$db->Execute($sql))
-				{
-					//reset result
-					if ($rows=$ergebnis->RecordCount())	
-					{
-						// check status again to be sure that the list is not sent by somebody else
-					   $content=$ergebnis->FetchRow();
-						if(($content['sent_datetime']>0)||($content['validator']!=''))
-						{
-							$wassent=true;
-							 $rows=0;
-						} // if sent_stamp or validator filled then reject this data
-					}
-				}else { echo "$LDDbNoRead<br>"; } 
-		
-			//echo $sql;
+
+$sql='SELECT * FROM '.$dbtable.' WHERE order_nr="'.$order_nr.'"	AND dept_nr="'.$dept_nr.'"';
+
+if($ergebnis=$db->Execute($sql)){
+	//reset result
+	if ($rows=$ergebnis->RecordCount())	{
+		// check status again to be sure that the list is not sent by somebody else
+	   $content=$ergebnis->FetchRow();
+		if(($content['sent_datetime']>0)||($content['validator']!='')){
+			$wassent=true;
+			 $rows=0;
+		} // if sent_stamp or validator filled then reject this data
 	}
-  	 else { echo "$LDDbNoLink<br>"; } 
+}else{ echo "$LDDbNoRead<br>$sql"; } 
+//echo $sql;
+
 	 
-/* Load common icon images */	 
+# Load common icon images
 $img_warn=createComIcon($root_path,'warn.gif','0');	
 $img_uparrow=createComIcon($root_path,'uparrowgrnlrg.gif','0');
 $img_info=createComIcon($root_path,'info3.gif','0');
@@ -282,13 +272,16 @@ echo "bgcolor=".$cfg['body_bgcolor']; if (!$cfg['dhtml']){ echo ' link='.$cfg['b
 <?php // foreach($argv as $v) echo "$v<br>"; ?>
 
 <a href="javascript:gethelp('products.php','orderlist','<?php echo $rows ?>','<?php echo $cat ?>')"><img <?php echo createComIcon($root_path,'frage.gif','0','right') ?> alt="<?php echo $LDOpenHelp ?>"></a>
-
-
+<font size=2 face="verdana,arial">
+<?php 
+$buff=$dept_obj->LDvar($dept_nr);
+if(isset($$buff)&&!empty($$buff)) echo $$buff;
+	else echo $dept_obj->FormalName($dept_nr);
+?></font><br>
 <?php
-	
-if($rows>0)
-{
-//++++++++++++++++++++++++ show the actual list +++++++++++++++++++++++++++
+
+if($rows>0){
+#++++++++++++++++++++++++ show the actual list +++++++++++++++++++++++++++
 
 $tog=1;
 //$content=$ergebnis->FetchRow();
@@ -299,7 +292,7 @@ echo '<form name=actlist>
 		echo formatDate2Local($content['order_date'],$date_format);
 
 		echo ' '.$LDTime.': '.str_replace('24','00',convertTimeToLocal($content['order_time'])).')</font>
-		<table border=0 cellspacing=1 cellpadding=3>
+		<table border=0 cellspacing=1 cellpadding=3 width="100%">
   		<tr bgcolor="#ffffee">';
 	for ($i=0;$i<sizeof($LDcatindex);$i++)
 	echo '
@@ -328,7 +321,7 @@ for($n=0;$n<sizeof($artikeln);$n++)
 				<td ><font face=Verdana,Arial size=1><nobr>X '.$r['proorder'].'</nobr></td>
 				<td><font face=Verdana,Arial size=1>'.$r['bestellnum'].'</td>
 				<td><a href="javascript:popinfo(\''.$r['bestellnum'].'\')" ><img '.$img_info.' alt="'.$complete_info.$r['artikelname'].'"></a></td>
-				<td><a href="'.$thisfile.URL_APPEND.'&order_nr='.$order_nr.'&mode=delete&cat='.$cat.'&idx='.$i.'&userck='.$userck.'" ><img '.$img_delete.' alt="'.$LDRemoveArticle.'"></a></td>
+				<td><a href="'.$thisfile.URL_APPEND.'&dept_nr='.$dept_nr.'&order_nr='.$order_nr.'&mode=delete&cat='.$cat.'&idx='.$i.'&userck='.$userck.'" ><img '.$img_delete.' alt="'.$LDRemoveArticle.'"></a></td>
 				</tr>';
 	$i++;
 
@@ -339,21 +332,17 @@ for($n=0;$n<sizeof($artikeln);$n++)
 			<input type="hidden" name="sid" value="'.$sid.'">
    			<input type="hidden" name="lang" value="'.$lang.'">
    			<input type="hidden" name="order_nr" value="'.$order_nr.'">
+   			<input type="hidden" name="dept_nr" value="'.$dept_nr.'">
    			<input type="hidden" name="cat" value="'.$cat.'">
    			<input type="hidden" name="userck" value="'.$userck.'">
 			<input type="submit" value="'.$LDFinalizeList.'">   
    			</form>	';
 
 
-}
-else
-if($wassent)
-{
+}elseif($wassent){
 	echo '
 			<script language="javascript">window.parent.location.replace(\'apotheke-bestellung.php?sid='.$sid.'&lang='.$lang.'&itwassent=1&userck='.$userck.'\')</script>';
-}	
-else
-{
+}else{
 	if($itwassent)
 	echo '
 		<font face="Verdana,Arial" size=2>'.$LDWasSent.'<p></font>';
@@ -364,26 +353,23 @@ else
 
     $rows=0;
     
-	if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-	if($dblink_ok)
-	{
-				$sql='SELECT * FROM '.$dbtable.' 
+/*	$sql='SELECT * FROM '.$dbtable.' 
 						WHERE (sent_datetime="" OR sent_datetime="0000-00-00 00:00:00")
 						AND validator="" 
 						AND (status="draft" OR status="")
-						AND dept="'.$dept.'"
+						AND dept_nr="'.$dept_nr.'"
 						ORDER BY order_date ';
-						
-        		if($ergebnis=$db->Execute($sql))
-				{
-					$rows=$ergebnis->RecordCount();
-				}
-				else { echo "$LDDbNoRead<br>"; } 
-					//echo $sql;
-	}
-  	 else { echo "$LDDbNoLink<br>"; } 
-		
-//++++++++++ show the last lists+++++++++++++++++++++++++++++++++++++++++
+
+					
+	if($ergebnis=$db->Execute($sql)){
+		$rows=$ergebnis->RecordCount();
+	}else{ echo "$LDDbNoRead<br>"; } 
+*/			
+	
+	$ergebnis=&$product_obj->OrderDrafts($dept_nr,$cat);
+	$rows=$product_obj->LastRecordCount();
+
+# +++++++++ show the last lists+++++++++++++++++++++++++++++++++++++++++
 
 	if($rows>0)
 	{	
@@ -394,12 +380,18 @@ else
 
 		$tog=1;
 		echo '
-		<font face="Verdana, Arial" size=2 color="#800000">'.$last_orderlist.strtoupper($dept).':</font>
-		<table border=0 cellspacing=1 cellpadding=3>
+		<font face="Verdana, Arial" size=2 color="#800000">'.$last_orderlist.$dept_obj->FormalName($dept_nr).':</font>
+		<table border=0 cellspacing=1 cellpadding=3 width="100%">
   		<tr bgcolor="#ffffee">';
-		for ($i=0;$i<sizeof($LDListindex);$i++)
+		//for ($i=0;$i<sizeof($LDListindex);$i++)
 		echo '
-			<td><font face=Verdana,Arial size=1 color="#000080">'.$LDListindex[$i].'</td>';
+			<td><font face=Verdana,Arial size=1 color="#000080">'.$LDOrderNr.'</td>
+			<td><font face=Verdana,Arial size=1 color="#000080">'.$LDEditList.'</td>
+			<td><font face=Verdana,Arial size=1 color="#000080">'.$LDListindex[2].'</td>
+			<td><font face=Verdana,Arial size=1 color="#000080">'.$LDListindex[3].'</td>
+			<td><font face=Verdana,Arial size=1 color="#000080">'.$LDListindex[4].'</td>
+			<td><font face=Verdana,Arial size=1 color="#000080">'.$LDListindex[5].'</td>
+			';
 		echo '</tr>';	
 
 		$i=1;
@@ -409,8 +401,8 @@ else
 			if($tog)
 			{ echo '<tr bgcolor="#dddddd">'; $tog=0; }else{ echo '<tr bgcolor="#efefff">'; $tog=1; }
 			echo'
-				<td><font face=Verdana,Arial size=1>'.$i.'</td>
-				<td><a href="products-bestellung.php?sid='.$sid.'&lang='.$lang.'&cat='.$cat.'&order_nr='.$content['order_nr'].'&userck='.$userck.'"  target="_parent" ><img '.$img_uparrow.' alt="'.$LDEditList.'"></a></td>
+				<td><font face=Verdana,Arial size=1>'.$content['order_nr'].'</td>
+				<td align="center"><a href="products-bestellung.php'.URL_APPEND.'&dept_nr='.$dept_nr.'&cat='.$cat.'&order_nr='.$content['order_nr'].'&userck='.$userck.'"  target="_parent" ><img '.$img_uparrow.' alt="'.$LDEditList.'"></a></td>
 				<td><font face=Verdana,Arial size=1>'.formatDate2Local($content['order_date'],$date_format);
 				
 			echo '</td>
