@@ -119,7 +119,7 @@ $LDEntry='Entry';
 $LDExit='Exit';
 $LDRemarks='Remarks';
 
-$tage=array('<font color='#ff0000'>S</font>','M','T','W','T','F','S');
+$tage=array('<font color="#ff0000">S</font>','M','T','W','T','F','S');
 $tagename=array('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday');
 
 $LDTotal='Total';
@@ -189,7 +189,7 @@ $LDEditTitle='Headline';
 
 $LDAlertPhotoInfo='The information in the entry field number ';
 $LDAlertNoPhotoInfo=' is not complete. Please enter the complete information.';
-$LDAlertNoPatientData='The patient's data is not complete. Please enter the complete patient's data on the lower left frame.';
+$LDAlertNoPatientData='The patient\'s data is not complete. Please enter the complete patient\'s data on the lower left frame.';
 $LDAlertNumberOnly='Please enter a number or the word \'main\'.';
 
 $LDStatistics='Statistics';
@@ -199,24 +199,24 @@ $LDDisplay2='Display 2';
 $LDDisplay2Txt='Switch over to the display with the menu on a floating frame. ';
 
 $LDNewPwDiffer='The new passwords differ from each other.<br> Please enter the new password again.';
-/* 2003-03-22 EL*/
+# 2003-03-22 El
 $LDPersonellMngmnt='Personnel Manager';
 $LDPersonellMngmntTxt='Tools and functions for managing personnel';
-/* 2003-04-25 EL */
+# 2003-04-25 EL
 $LDBilling='eCombill';
 $LDBillingTxt='Bill patient, create billable items, generate bill reports, etc.';
 $LDInsuranceCoMngr='Insurance Co. Manager';
 $LDInsuranceCoMngrTxt='Enter new, edit insurance company data';
 $LDAddressMngr='Address Manager';
 $LDAddressMngrTxt='Enter, list, edit, & update address data';
-/* 2003-05-18 EL */
+# 2003-05-18 EL
 $LDUserConfigOpt='Configuration options';
 $LDUserConfigOptTxt='User options for background & text colors, mascots, avatar, etc.';
 $LDMascotOpt='Mascot options';
 $LDMascotOptTxt='Hide, show, or select prompt mascots.';
 $LDMascot='Mascot';
 $LDSampleMascot='Sample mascots';
-/* 2003-04-24 EL*/
+# 2003-04-24 EL
 $LDGUITemplate='GUI Template option';
 $LDGUITemplateTxt='Select a GUI (graphic user interface) template';
 $LDGUITheme='GUI Theme';
