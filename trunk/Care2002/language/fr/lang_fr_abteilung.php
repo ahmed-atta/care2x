@@ -1,9 +1,9 @@
 <?php
-$LDPageTitle='Départements';
-$LDDeptTxt='Département';
+$LDPageTitle='D&eacute;partements';
+$LDDeptTxt='D&eacute;partement';
 $LDOpenHrsTxt='Horaires de travail';
-$LDChkHrsTxt="Les horaires d'examens médicaux";
-$LDClk4Info="Cliquez pour plus d'informations";
+$LDChkHrsTxt='Les horaires d\'examens m&eacute;dicaux';
+$LDClk4Info='Cliquez pour plus d\'informations';
 $LDDayTxt='Jour';
 
 /**
@@ -11,25 +11,25 @@ $LDDayTxt='Jour';
 * ENT = Eye, Nose, Throath
 * OB-Gyne = Obstetrics-Gynecology
 */
-$dept=array('Chirurgie générale',
+$dept=array('Chirurgie g&eacute;n&eacute;rale',
 					'Urgence chirurgique',
 					'Chirurgie plastique',
 					'ENT',
 					'Opthalmologie',
 					'Pathologie',
-					'OB-Gyné',
-					'Thérapie physique',
-					'Médecine interne',
+					'OB-Gyn&eacute;',
+					'Th&eacute;rapie physique',
+					'M&eacute;decine interne',
 					'Oncologie',
 					'Maintenance',
-					'Unité de soins intermédiaires',
-					'Unité des soins intensifs',
-					'Laboratoire médical',
+					'Unit&eacute; de soins interm&eacute;diaires',
+					'Unit&eacute; des soins intensifs',
+					'Laboratoire m&eacute;dical',
 					'Urgence ambulatoire',
-					'Ambulatoire générale',
+					'Ambulatoire g&eacute;n&eacute;rale',
 					'Sonographie',
-					'Diagnostiques nucléaires',
-					'Ambulatoire de médecine interne');
+					'Diagnostiques nucl&eacute;aires',
+					'Ambulatoire de m&eacute;decine interne');
 
 /**
 * Do not translate the $target variable

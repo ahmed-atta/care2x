@@ -2,10 +2,10 @@
 $LDSend='Envoyer';
 $LDCancel='Annuler';
 $LDPrint='Imprimer';
-$LDStop='Arrêter';
+$LDStop='Arr&ecirc;ter';
 $LDContinue='Continuer';
 $LDSearch='Chercher';
-$LDBack='Rétour';
+$LDBack='Retour';
 $LDOpen='Ouvrir';
 $LDClose='Fermer';
 
@@ -14,12 +14,12 @@ $LDRegistration='Registration';
 $LDAdmission='Admission';
 $LDAdmit='Admettre';
 $LDArchive='Archive';
-$LDStart='Début';
+$LDStart='D&eacute;but';
 $LDEnd='Fin';
 # 2003-07-29 EL
-$LDListApptByDept='List appointments by department';
-$LDListApptByDoc='List appointments by clinician';
-$LDdone='Done';
+$LDListApptByDept='Afficher les rendez-vous par d&eacute;partement';
+$LDListApptByDoc='Afficher les rendez-vous par m&eacute;decin';
+$LDdone='Fini';
 $LDOk='Ok';
-$LDSelect='Select';
+$LDSelect='Choisir';
 ?>
