@@ -103,6 +103,7 @@
 
 				<tr>
 				<td colspan=3>
+				  <br>
 					{{$LDAddress}}
 				</td>
 				</tr>
@@ -169,7 +170,6 @@
 			{{/if}}
 
 				{{* The following tags contain rows patterned after the  "registration_admission/reg_row.tpl" template *}}
-
 				{{$sPhone1}}
 				{{$sPhone2}}
 				{{$sCellPhone1}}
