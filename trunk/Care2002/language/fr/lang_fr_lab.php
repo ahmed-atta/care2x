@@ -1,20 +1,20 @@
 <?php
-$LDLab='Laboratories';
-$LDMedLab='Medical laboratory';
-$LDPathLab='Pathological laboratory';
-$LDBacLab='Bacteriological laboratory';
-$LDClose='Close';
-$LDSeeLabData='Search and display patient\'s laboratory data.';
-$LDSeeData='Display data';
-$LDEnterLabData='Enter patient\'s laboratory data';
-$LDNewData='Enter new data';
-$LDEnterPrioParams='Set priority parameters';
-$LDPrioParams='Priority parameters';
-$LDEnterNorms='Set normal range';
-$LDNorms='Normal range';
-$LDOtherOptions='Other options';
+$LDLab='Laboratoires';
+$LDMedLab='Laboratoire médical';
+$LDPathLab='Laboratoire de pathologie';
+$LDBacLab='Laboratoire bactériologique';
+$LDClose='Fermer';
+$LDSeeLabData='Rechercher et afficher les informations Laboratoire du Patient.';
+$LDSeeData='Afficher les données';
+$LDEnterLabData='Entrez les informations laboratoires du patient';
+$LDNewData='Entrez de nouvelles données';
+$LDEnterPrioParams='Afficher les paramètres prioritaires';
+$LDPrioParams='Paramètres prioritaires';
+$LDEnterNorms='Définir un nivean normal';
+$LDNorms='Niveau normal';
+$LDOtherOptions='Autres options';
 $LDOptions='Options';
-$LDMemo='Read or compose a memo';
+$LDMemo='Lire et composer un memo';
 $LDTitleMemo='Memo';
 
 $LDfieldname=array('Patient nr.','Family name','Name','Birthdate');

@@ -1,15 +1,13 @@
 <?php
-$LDCreateAdmin='Create system admin access';
-$LDLoginExists='The login/username already exists. Please use a different login/username';
-$LDAdminOk='The system admin is now created. Please delete the create_admin.php script from the root path 
-of this application, otherwise Care2x refuses to run.';
-$LDDeleteWarning='Very important!  You must delete this create_admin.php script after successfully creating an admin access!';
-$LDCreateAdminWarning='You have not yet deleted the create_admin.php script!  
-You must delete the create_admin.php script  otherwise Care2x will refuse to run!';
-$LDWarning='Warning!';
-$LDInstallWarning='You have not yet deleted the "install/initialize.php" script!  
-You must delete the "install/initialize.php" script  NOW otherwise another person can change your database access information!';
-$LDMD5Warning='You have not yet deleted the "install/encode_pw_md5.php" script!  
-You must delete the "install/encode_pw_md5.php" script  NOW otherwise another person could make your users\'  access data useless by running this 
-script anew!';
+$LDCreateAdmin='Crèer les droits d\'accès administrateur';
+$LDLoginExists='Le nom d\'utilisateur/mot de passe existe déjà. Svp, utiliser un nom d\'utilisateur/mot de passe différent';
+$LDAdminOk='L\'administrateur système a maintenant été crèé. Svp, effacez le script create_admin.php du répertoire racine de l\'application, sinon Care2x refusera de démarrer.';
+$LDDeleteWarning='Très important!  Vous devez effacer le script create_admin.php après avoir crèer avec succès un accès administrateur!';
+$LDCreateAdminWarning='Vous n\'avez pas effacéle script create_admin.php!  
+Vous devez effacer le script create_admin.php  sinon Care2x refusera de démarrer!';
+$LDWarning='Attention!';
+$LDInstallWarning='Vous n\'avez pas effacé le script "install/initialize.php"!  
+Vous devez effacer le script "install/initialize.php" maintenant sinonune autre personne pourrais changer vos informations d\'accès à la base de données!';
+$LDMD5Warning='Vous n\'avez pas encore effacé le script "install/encode_pw_md5.php"!  
+Vous devez effacer le script "install/encode_pw_md5.php"maintenant sinon une autre personne rendre vos droits d\'utilisateur inutilisable en executant à nouveau ce script!';
 ?>

@@ -40,10 +40,10 @@ $LDOrderArchive='Archive';
 
 
 
-$LDNoDataFound="The search found <font color=red><b>no</b></font> data.";
-$LDClk2SeeInfo="Please click the right one to see the complete information";
+$LDNoDataFound="La recherche a trouvé <font color=red><b>no</b></font> donnée(s).";
+$LDClk2SeeInfo="Svp, cliquer sur une donnée pour voir toutes les informations";
 /********************** Do not erase or replace the ~nr~ *****************************/
-$LDFoundNrData="The search found <font color=red><b>~nr~</b></font> data that corresponded to the search keyword.";
+$LDFoundNrData="La recherche a trouvé <font color=red><b>~nr~</b></font> données qui correspond au mot clé recherché.";
 $LDOpenInfo="Afficher toutes les informations au sujet de ";
 
 $LDGoodMorning="Bonjour";
@@ -57,7 +57,7 @@ $LDSearchIn="Rechercher après";
 
 
 $LDPlsEnterMore="Svp, entrez plus d\'information et essayez de nouveau.";
-$LDNoSingleChar="A single character will be ignored.";
+$LDNoSingleChar="Un caractère unique sera ignoré.";
 
 $LDPlsInformDept="Please notify the ~tagword~ department and eventually the EDP department. Thank you.";
 

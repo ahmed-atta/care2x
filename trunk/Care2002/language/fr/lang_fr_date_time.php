@@ -18,7 +18,7 @@ $LDmicrosecond='microseconde';
 $LDmicroseconds='microsecondes';
 $LDDay='Jour';
 $LDWeek='Semaine';
-$LDNoon='Noon';
+$LDNoon='Midi';
 $LDEvening='Soir';
 $LDNight='Nuit';
 #2003-11-11 EL
