@@ -1,99 +1,99 @@
 <?php
-$Jan="January";
-$Feb="February";
-$Mae="March";
-$Apr="April";
-$Mai="May";
-$Jun="June";
-$Jul="July";
-$Aug="August";
-$Sep="September";
-$Okt="October";
-$Nov="November";
-$Dez="December";
+$Jan="Janvier";
+$Feb="Février";
+$Mae="Mars";
+$Apr="Avril";
+$Mai="Mai";
+$Jun="Juin";
+$Jul="Juillet";
+$Aug="Août";
+$Sep="Septembre";
+$Okt="Octobre";
+$Nov="Novembre";
+$Dez="Décembre";
 
 /**
 * Note: the first element of $monat is set to empty string
 */
 $monat=array("",$Jan,$Feb,$Mae,$Apr,$Mai,$Jun,$Jul,$Aug,$Sep,$Okt,$Nov,$Dez);
 
-$LDDoctors="Doctors";
-$LDQView="DOC Quickview";  // DOC = doctor on call
-$LDQViewTxt="Quickview of today's DOC (doctor-on-call) schedule";
-$LDDutyPlan="Duty plan";
-$LDDutyPlanTxt="Duty plan, view, update, delete, manage, etc.";
-$LDDocsList="Doctors' list";
-$LDDocsListTxt="Create or update doctors' list, enter data, etc..";
+$LDDoctors="Docteurs";
+$LDQView="L'apperçu rapide de DOC";  // DOC = doctor on call
+$LDQViewTxt="L'apperçu rapide du planning d'aujourd'hui de DOC (docteur en permanence)";
+$LDDutyPlan="Planning des devoirs";
+$LDDutyPlanTxt="Planning des devoirs, apperçu, mise à jour, effacement, gestion, etc.";
+$LDDocsList="La liste des docteurs";
+$LDDocsListTxt="Créer ou mettre à jour la liste des docteurs, entrer des données, etc..";
 $LDDocsForum="Forum";
-$LDDocsForumTxt="Discussions forum for doctors";
-$LDNews="News";
-$LDNewsTxt="Compose, read, edit news";
-$LDMemo="Memo";
-$LDMemoTxt="Compose, read, edit memo";
-$LDCloseAlt="Close physicians/surgeons' window";
-$LDDocsOnDuty="Doctors on Call";
+$LDDocsForumTxt="Discussions forum pour les docteurs";
+$LDNews="Nouvelles";
+$LDNewsTxt="Composer, lire, éditer les nouvelles";
+$LDMemo="Mémo";
+$LDMemoTxt="Composer, lire, éditer les mémo";
+$LDCloseAlt="La fenêtre des médecins/chirurgiens à proximité";
+$LDDocsOnDuty="Docteurs en permanence";
 
-$LDTabElements=array("Department",
+$LDTabElements=array("Département",
 								 "DOC 1",
-								 "Beeper/Phone",
+								 "Beeper/Télephone",
 								 "DOC 2",
-								 "Beeper/Phone",
-								 "Duty plan"
+								 "Beeper/Télephone",
+								 "Planning des devoirs"
 								 );
-$LDShowActualPlan="Show actual duty plan";
-$LDShortDay=array("Su",
-								"Mo",
-								"Tu",
-								"We",
-								"Th",
-								"Fr",
+$LDShowActualPlan="Afficher le planning actuel de devoirs";
+$LDShortDay=array("Di",
+								"Lu",
+								"Ma",
+								"Me",
+								"Je",
+								"Ve",
 								"Sa"
 								);
-$LDFullDay=array("Sunday",
-								"Monday",
-								"Tuesday",
-								"Wednesday",
-								"Thursday",
-								"Friday",
-								"Saturday"
+$LDFullDay=array("Dimanche",
+								"Lundi",
+								"Mardi",
+								"Mercredi",
+								"Jeudi",
+								"Vendredi",
+								"Samedi"
 								);
-$LDDoc1="Doctor-On-Call 1";
-$LDDoc2="Doctor-On-Call 2";
-$LDClosePlan="Close this plan";
-$LDNewPlan="Create a new plan";
-$LDBack="Back";
-$LDHelp="Help";
-$LDMakeDutyPlan="Create dutyplan";
-$LDClk2Plan="Click to open personell list";
+$LDDoc1="Docteur en permanence 1";
+$LDDoc2="Docteur en permanence 2";
+$LDClosePlan="Fermer ce planning";
+$LDNewPlan="Créer nouveau planning";
+$LDBack="Rétour";
+$LDHelp="Aide";
+$LDMakeDutyPlan="Créer un planning de devoirs";
+$LDClk2Plan="Cliquez pour ouvrir la liste du personnel";
 $LDInfo4Duty="Information";
-$LDStayIn="Stay-in duty";
-$LDOnCall="On call duty";
-$LDPhone="Phone";
+$LDStayIn="Rester en permanence";
+$LDOnCall="En permanence";
+$LDPhone="Télephone";
 $LDBeeper="Beeper";
-$LDMoreInfo="More Info";
-$LDOn="on";
-$LDCloseWindow="Close window";
-$LDMonth="Month";
-$LDYear="Year";
-$LDPerElements=array("Family name",
-									"Given name",
-									"Date of birth",
+$LDMoreInfo="Plus d'info";
+$LDOn="le";
+$LDCloseWindow="Fermer la fenêtre";
+$LDMonth="Mois";
+$LDYear="Année";
+$LDPerElements=array("Nom de famille",
+									"Prénom",
+									"Date de naissance",
 									"Beeper",
-									"Phone",
+									"Télephone",
 									"Beeper",
-									"Phone"
+									"Télephone"
 									);
-$LDChgDept="Change department: ";
-$LDChange="Change";
-$LDCreatePersonList="Create a list for personell";
-$LDNoPersonList="The list of personell is not yet created. Please create the list first. Click on the following button.";
-$LDShow="Show";
+$LDChgDept="Changer le département: ";
+$LDChange="Changer";
+$LDCreatePersonList="Créer une liste du personnel";
+$LDNoPersonList="La liste du personnel n'est pas encore créée. Veuillez créer d'abord la liste. Cliquez sur le bouton suivant.";
+$LDShow="Montrer";
 
-$LDDOCS="DOC Scheduler";
-$LDDOCSTxt="Doctor On Call Scheduler, plan, view, update, edit, etc.";
+$LDDOCS="Horaire des DOC";
+$LDDOCSTxt="Horaire des docteurs en permanence, planning, apperçu, mise à jour, éditer, etc.";
 $LDDOCSR="DOCSR";
-$LDDOCSRTxt="Doctor On Call Schedule Requester";
+$LDDOCSRTxt="Requête du horaire des docteurs en permanence";
 /* 2002-09-15 EL */
-$LDTestRequest="Test request";
+$LDTestRequest="Test de requête";
 
 ?>

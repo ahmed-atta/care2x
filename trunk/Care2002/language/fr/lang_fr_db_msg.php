@@ -1,8 +1,8 @@
 <?php
-$LDDbNoSave="Save attempt to DB failed!";
-$LDDbNoRead="Read attempt to DB failed!";
-$LDDbNoLink="Link attempt to DB failed!";
-$LDDbNoUpdate="Attempt to update to DB failed";
-$LDDbNoLastData="Last data not found!";
-$LDDbNoDelete="Delete failed!";
+$LDDbNoSave="L'essai d'enregistrement dans DB a failli!";
+$LDDbNoRead="L'essai de lecture dans DS a failli!";
+$LDDbNoLink="L'essai de lien dans DB a failli!";
+$LDDbNoUpdate="L'essai de mise à jour de DB a failli";
+$LDDbNoLastData="Dernieres données non trouvées!";
+$LDDbNoDelete="L'effacement a failli!";
 ?>
