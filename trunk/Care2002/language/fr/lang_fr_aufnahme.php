@@ -382,27 +382,27 @@ $LDAdvancedSearch='Recherche avancée';
 $LDIncludeFirstName='Rechercher les noms propres également.';
 $LDTipsTricks='Trucs et astuces';
 #2003-12-06 EL
-$LDPrintPDFDoc='Make PDF document';
-$LDDeathDate='Death date';
+$LDPrintPDFDoc='Créer un document PDF';
+$LDDeathDate='Date du décès';
 
 # 2003-10-14 NDHC
-$LDITA='Intratracheal anesthesia';
-$LDLA='Local anesthesia';
-$LDAS='Analgesic sedation';
+$LDITA='Anesthesie Intratrachéal';
+$LDLA='Anesthesie locale';
+$LDAS='Sédation Analgesique';
 $LDOral='Oral';
 $LDAnticoagulant='Anticoagulant';
-$LDHemolytic='Hemolytic';
-$LDDiuretic='Diuretic';
-$LDAntibiotic='Antibiotic';
+$LDHemolytic='Hémolytique';
+$LDDiuretic='Diuretique';
+$LDAntibiotic='Antibiotique';
 $LDMask='Mask';
-$LDIntravenous='Intravenous';
-$LDSubcutaneous='Subcutaneous';
+$LDIntravenous='Intraveineuse';
+$LDSubcutaneous='Sous-cutanée';
 $LDPreAdmission='Pre-admission';
 #2004-01-01 EL
-$LDPersonDuplicate='This person seems to be registered already.';
-$LDSimilarData='The following listed person has similar personal data.';
-$LDSimilarData2='The following listed persons have similar personal data.';
-$LDPlsCheckFirst='Please check it out first before you decide the next step.';
+$LDPersonDuplicate='Cette personne semble déjà enregistrée.';
+$LDSimilarData='Les personnes suivantes semblent avoir des données indentiques.';
+$LDSimilarData2='Les personnes suivantes semblent avoir des données indentiques.';
+$LDPlsCheckFirst='SVP, valider d\'abord ceci avant de décider d\'aller plus loin.';
 $LDPlsCheckFirst2='Please check them out first before you decide the next step.';
-$LDShowDetails='Show details';
+$LDShowDetails='Afficher les détails';
 ?>

@@ -61,16 +61,16 @@ $LDNoSingleChar="Un caractère unique sera ignoré.";
 
 $LDPlsInformDept="Please notify the ~tagword~ department and eventually the EDP department. Thank you.";
 
-$LDReports="Reports";
+$LDReports="Rapports";
 $LDReportsTxt="Create, search, read reports, etc.";
 $LDInfo="Information";
 $LDInfoTxt="Search and read information pertaining to edp";
-$LDManage="Management";
-$LDUpdateOk="Update was <b>successful</b>:";
-$LDDataSaved="The following data was successully saved:";
-$LDDataNoUpdate="Update  <b>failed</b>. Please check the entries.";
-$LDDataNoSaved="Save <b>failed</b>. Please check the entries.";
-$LDBack2Menu="Go back to databank menu";
+$LDManage="Gestion";
+$LDUpdateOk="Mise à jour<b>réussie</b>:";
+$LDDataSaved="Les données suivantes ont été sauvegardées avec succès:";
+$LDDataNoUpdate="La mise à jour a <b>échoué</b>. SVP, vérifier votre saisie.";
+$LDDataNoSaved="<b>Echec de la sauvegardefailed</b>. SVP, vérifier votre saisie.";
+$LDBack2Menu="Retourner au menu de la banque de donnée";
 $LDPageTop="Back to top.";
 $LDPreview="Preview";
 $LDUpdateData="Update or edit";
