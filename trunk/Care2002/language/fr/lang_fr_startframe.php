@@ -1,5 +1,5 @@
 <?php
-$LDMainTitle="Care 2002 Système Hospitalier d'Information Intégré";
+$LDMainTitle="Care 2002 Integrated Hospital Information System";
 
 /*$LDMainTitle="Marienhospital a virtual Integrated Hospital Information System in Internet";
 */
@@ -55,4 +55,7 @@ $LDPrivPolicy="If you want to read our privacy policy please <a href=\"language/
 $LDOurPrivPolicy="Our Privacy Policy";
 $LDSubmitNews="Submit News";
 $LDEditNews="Edit & submit news via online editor";
+/* 2002-10-17 EL */
+$LDCredits='Crédits';
+
 ?>
