@@ -1,4 +1,4 @@
-<form>
+<form name="sickform">
 <table border=0 cellpadding=0 cellspacing=0 bgcolor="#ff9966" width=450>
   <tr>
     <td>
@@ -87,11 +87,14 @@
 </form>
 <p>
 
-<form method="post" name="newform"><img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle'); ?>> Create a form for <select name="deptnr">
+<form method="post" name="newform" action="<?php echo $thisfile; ?>"><img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle'); ?>> Create a form for <select name="deptnr">
 	<option value=""></option>
 	<?php
 		while(list($x,$v)=each($dept_med)){
-			echo '<option value="'.$v['nr'].'">'.$v['name_formal'].'</option>
+			echo '<option value="'.$v['nr'].'">';
+			if(isset($$v['LD_var'])&&$$v['LD_var']) echo $$v['LD_var'];
+				else echo $v['name_formal'];
+			echo '</option>
 			';
 		}
 	?></select>

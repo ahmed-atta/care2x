@@ -47,8 +47,7 @@
 		</center>
 		<p>
 		<FONT    SIZE=1  FACE="Arial" color="#ff9966">
-		A copy of this confirmation of inability to work with the diagnoses and the estimated number of days of inability will be transmitted immediately to the 
-		insurer given on the left.
+		<?php echo $LDSickConfirm; ?>
 		</font>
 		</td>
   		</tr>
@@ -100,7 +99,10 @@
 	<option value=""></option>
 	<?php
 		while(list($x,$v)=each($dept_med)){
-			echo '<option value="'.$v['nr'].'">'.$v['name_formal'].'</option>
+			echo '<option value="'.$v['nr'].'">';
+			if(isset($$v['LD_var'])&&$$v['LD_var']) echo $$v['LD_var'];
+				else echo $v['name_formal'];
+			echo '</option>
 			';
 		}
 	?></select>

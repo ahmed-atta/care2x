@@ -246,7 +246,7 @@ if (!$GLOBAL_CONFIG['person_phone_2_nr_hide'])
 createTR($LDPhone.' 2',$phone_2_nr,2);
 }
 
-if (!$GLOBAL_CONFIG['person_cellphone_1__nr_hide'])
+if (!$GLOBAL_CONFIG['person_cellphone_1_nr_hide'])
 {
 createTR($LDCellPhone.' 1',$cellphone_1_nr,2);
 }
@@ -354,11 +354,10 @@ createTR($LDEthnicOrigin,$ethnic_orig,2);
 	echo ;
 ?>
 "><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
-
+</ul>
 <p>
-<hr>
 <?php
-StdCopyright();
+require($root_path.'include/inc_load_copyrite.php');
 ?>
 </FONT>
 <?php

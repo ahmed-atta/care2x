@@ -13,7 +13,7 @@ function Spacer()
 <img <?php echo createComIcon($root_path,'angle_left.gif',0); ?>>
 <br>
 <FONT face="Verdana,Helvetica,Arial" size=2 color="#cc0000">
-<?php echo $LDOptsFor.' '.$LDPatient ?>
+<?php echo $LDOptsForPerson ?>
 </font>
 
 <TABLE cellSpacing=0 cellPadding=0 bgColor=#999999 border=0>
@@ -27,7 +27,7 @@ function Spacer()
                <TR bgColor=#eeeeee> <td align=center><img <?php echo createComIcon($root_path,'post_discussion.gif','0') ?>></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2> <nobr>
-				 <a href="aufnahme_start.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&origin=patreg_reg&encounter_class_nr=1"><?php echo $LDStationary.' '.$LDAdmission; ?></a>
+				 <a href="aufnahme_start.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&origin=patreg_reg&encounter_class_nr=1"><?php echo $LDAdmission.' - '.$LDStationary; ?></a>
 				  </nobr> </FONT></TD>
                 </TR>
 			   
@@ -36,7 +36,7 @@ function Spacer()
              <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'discussions.gif','0') ?>></td>
                 <TD vAlign=top width=150><FONT 
                   face="Verdana,Helvetica,Arial" size=2> 
-				<a href="aufnahme_start.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&origin=patreg_reg&encounter_class_nr=2"><?php echo $LDAmbulant.' '.$LDVisit; ?></a>
+				<a href="aufnahme_start.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&origin=patreg_reg&encounter_class_nr=2"><?php echo $LDVisit.' - '.$LDAmbulant; ?></a>
 				   </FONT></TD>
                 </TR>
 			   
@@ -91,7 +91,7 @@ function Spacer()
               <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'new_group.gif','0') ?>></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2> <nobr>
-				 <a href="show_notes.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&target=<?php echo $target ?>&type_nr=21"><?php echo "$LDPatientDev $LDNotes" ?></a>
+				 <a href="show_notes.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&target=<?php echo $target ?>&type_nr=21"><?php echo "$LDNotes - $LDPatientDev" ?></a>
 				  </nobr> </FONT></TD>
                 </TR>
 				

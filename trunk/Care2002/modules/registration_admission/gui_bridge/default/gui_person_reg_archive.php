@@ -382,9 +382,8 @@ createTR('ethnic_orig', $LDEthnicOrigin,$ethnic_orig,2);
 <a href="<?php	echo 'patient.php'.URL_APPEND; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
 </ul>
 <p>
-<hr>
 <?php
-StdCopyright();
+require($root_path.'include/inc_load_copyrite.php');
 ?>
 </FONT>
 <?php
