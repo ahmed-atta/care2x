@@ -7,160 +7,160 @@
 
 <?php if($src=="bp_temp") : ?>
 <a name="cbp"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to enter a temperature or blood pressure?</b></font>
-<ul> <b>Step 1: </b>Enter the time and data.<br>
+Como entrar com a temperatura ou pressão sanguinea?</b></font>
+<ul> <b>Passo 1: </b>Entre com os dados e horário.<br>
 		<ul type="disc">
-		<li>Enter the time and blood pressure on the left "<font color="#cc0000">Blood pressure</font>" column.<br>
-		Example: <input type="text" name="v" size=5 maxlength=5 value="10.05">&nbsp;&nbsp;<input type="text" name="w" size=8 maxlength=8 value="128/85">
-		<li>Enter the time and temperature on the right "<font color="#0000ff">Temperature</font>" column.<br>
-		Example: <input type="text" name="t" size=5 maxlength=5 value="12.35">&nbsp;&nbsp;<input type="text" name="u" size=8 maxlength=8 value="37.3">
+		<li>Entre com o horário e pressão sanguinea na coluna da esquerda "<font color="#cc0000">Pressão sanguinea</font>" .<br>
+		Exemplo: <input type="text" name="v" size=5 maxlength=5 value="10.05">&nbsp;&nbsp;<input type="text" name="w" size=8 maxlength=8 value="128/85">
+		<li>Entre o horário e a temperatura na coluna da direita "<font color="#0000ff">Temperatura</font>" .<br>
+		Exemplo: <input type="text" name="t" size=5 maxlength=5 value="12.35">&nbsp;&nbsp;<input type="text" name="u" size=8 maxlength=8 value="37.3">
 		</ul>		
 		<ul >
-		<font color="#000099" size=1><b>Tip:</b> To enter the current time, type "n" or "N" (meaning NOW) in the time field. The exact current
-		time will appear automatically in that field.</font>
+		<font color="#000099" size=1><b>Dica:</b> Para entrar com o horário atual, digite "n" ou "N" (significando AGORA) no campo de horário. O horário atual exato
+		aparecerá automaticamente naquele campo.</font>
 		</ul>
-		<b>Step 2: </b>If you have several data, enter all of them before you save.<br>
-		<b>Step 3: </b>Click the button <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> to save the newly entered data.<br>
-		<b>Step 4: </b>If you want to correct any errors, click on the erroneous data, replace it with the correct one and save again.<br>
-		<b>Step 5: </b>If you are finished, click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> to close the window and go back to the chart.<br>
+		<b>Passo 2: </b>Se você tiver vários dados, entre com todos eles antes de salvar.<br>
+		<b>Passo 3: </b>Clique no botão <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> para salvar os dados recem entrados.<br>
+		<b>Passo 4: </b>Se você quiser corrigir quaisquer erros, clique nos dados errados e substitua com os corretos e salve novamente.<br>
+		<b>Passo 5: </b>Se voce terminou, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> para fechar a janela e voltar ao gráfico.<br>
 		
 </ul>
 <?php endif ?>
 <?php if($src=="diet") : ?>
 
 <a name="diet"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to enter a diet plan?</b></font>
-<ul> <b>Step 1: </b>Enter the diet plan in the<br> "<span style="background-color:yellow" > Enter the new information here or edit the current entries </span>" field.<br>
-		<b>Step 2: </b>Click the button <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> to save the new diet plan.<br>
-  		<b>Note: </b>If you want to cancel, click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.<br>
-		<b>Step 3: </b>If you want to correct any errors, click on the erroneous data, replace it with the correct one and save again.<br>
-		<b>Step 4: </b>If you are finished, click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> to close the window and go back to the chart.<br>
+Como entrar com um plano de dieta?</b></font>
+<ul> <b>Passo 1: </b>Entre com o plano de dieta no campo <br> "<span style="background-color:yellow" > Entre a nova informação aqui ou edite as entradas atuais </span>" .<br>
+		<b>Passo 2: </b>Clique no botão <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> para salvar o novo plano de dieta que foi entrado.<br>
+  		<b>Nota: </b>Se você quiser cancelar, clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.<br>
+		<b>Passo 3: </b>Se você quiser corrigir quaisquer erros, clique nos dados errados e substitua com os corretos e salve novamente.<br>
+		<b>Passo 4: </b>Se voce terminou, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> para fechar a janela e voltar ao gráfico.<br>
 		
 </ul>
 <?php endif ?>
 <?php if($src=="allergy") : ?>
 <a name="allergy"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to enter allergy information?</b></font>
+Como entrar com informação de alergia?</b></font>
 <ul> 
-	<b>Step 1: </b>Type the allergy or CAVE information in the<br> "<span style="background-color:yellow" > Please enter new information here: </span>" field.<br>
-  		<b>Note: </b>You can also edit the current entries in the "<span style="background-color:yellow" > Current entries: </span>" field if necessary.<br>
-  		<b>Note: </b>If you want to cancel, click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.<br>
-		<b>Step 2: </b>Click the button <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> to save the information.<br>
-		<b>Step 3: </b>If you want to correct any errors, click on the erroneous data and replace it with the correct one and save again.<br>
-		<b>Step 4: </b>If you are finished, click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> to close the window and go back to the chart.<br>
+	<b>Passo 1: </b>Digite a informação de alergia ou CAVE no campo<br> "<span style="background-color:yellow" > Por favor entre nova informação aqui: </span>" .<br>
+  		<b>Nota: </b>Você tambem pode editar as entradas atuais "<span style="background-color:yellow" > Entradas atuais: </span>" se necessário.<br>
+  		<b>Nota: </b>Se você quiser cancelar, clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.<br>
+		<b>Passo 2: </b>Clique no botão <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> para salvar a informação.<br>
+		<b>Passo 3: </b>Se você quiser corrigir quaisquer erros, clique nos dados errados e substitua com os corretos e salve novamente.<br>
+		<b>Passo 4: </b>Se voce terminou, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> para fechar a janela e voltar ao gráfico.<br>
 		
 </ul>
 <?php endif ?>
 <?php if($src=="diag_ther") : ?>
 <a name="diag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to enter main diagnosis and/or therapy?</b></font>
+Como entrar com o diagnóstico principal e/ou terapia?</b></font>
 <ul> 
-	<b>Step 1: </b>Type the diagnosis or therapy information in the<br> "<span style="background-color:yellow" > Please enter new information here: </span>" field.<br>
-  		<b>Note: </b>You can also edit the current entries in the "<span style="background-color:yellow" > Current entries: </span>" field if necessary.<br>
-  		<b>Note: </b>If you want to cancel, click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.<br>
-		<b>Step 2: </b>Click the button <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> to save the information.<br>
-		<b>Step 3: </b>If you want to correct any errors, click on the erroneous data and replace it with the correct one and save again.<br>
-		<b>Step 4: </b>If you are finished, click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> to close the window and go back to the chart.<br>
+	<b>Passo 1: </b>Digite a informação de diagnóstico ou terapia no campo <br> "<span style="background-color:yellow" > Por favor entre nova informação aqui: </span>" .<br>
+  		<b>Nota: </b>Você tambem pode editar as entradas atuais no campo "<span style="background-color:yellow" > Entradas atuais: </span>" se necessário.<br>
+  		<b>Nota: </b>Se você quiser cancelar, clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.<br>
+		<b>Passo 2: </b>Clique no botão <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> para salvar a informação.<br>
+		<b>Passo 3: </b>Se você quiser corrigir quaisquer erros, clique nos dados errados e substitua com os corretos e salve novamente.<br>
+		<b>Passo 4: </b>Se voce terminou, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> para fechar a janela e voltar ao gráfico.<br>
 		
 </ul>
 <?php endif ?>
 <?php if($src=="diag_ther_dailyreport") : ?>
 <a name="daydiag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to enter information on daily diagnosis or therapy plan?</b></font>
+Como entrar com informação diária de diagnóstico ou plano de terapia?</b></font>
 <ul> 
-	<b>Step 1: </b>Type the diagnosis or therapy information in the<br> "<span style="background-color:yellow" > Please enter new information here: </span>" field.<br>
-  		<b>Note: </b>You can also edit the current entries in the "<span style="background-color:yellow" > Current entries: </span>" field if necessary.<br>
-  		<b>Note: </b>If you want to cancel, click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.<br>
-		<b>Step 2: </b>Click the button <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> to save the information.<br>
-		<b>Step 3: </b>If you want to correct any errors, click on the erroneous data and replace it with the correct one and save again.<br>
-		<b>Step 4: </b>If you are finished, click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> to close the window and go back to the chart.<br>
+	<b>Passo 1: </b>Digite a informação de diagnóstico ou terapia no campo<br> "<span style="background-color:yellow" > Por favor entre nova informação aqui: </span>" .<br>
+  		<b>Nota: </b>Você tambem pode editar as entradas atuais no campo "<span style="background-color:yellow" > Entradas atuais: </span>" se necessário.<br>
+  		<b>Nota: </b>Se você quiser cancelar, clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.<br>
+		<b>Passo 2: </b>Clique no botão <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> para salvar a informação.<br>
+		<b>Passo 3: </b>Se você quiser corrigir quaisquer erros, clique nos dados errados e substitua com os corretos e salve novamente.<br>
+		<b>Passo 4: </b>Se voce terminou, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> para fechar a janela e voltar ao gráfico.<br>
 		
 </ul>
 <?php endif ?>
 <?php if($src=="xdiag_specials") : ?>
 <a name="extra"><a name="diag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a></a>
-How to enter notes, extra diagnoses?</b></font>
+Como entrar com notas, diagnósticos extra?</b></font>
 <ul> 
-	<b>Step 1: </b>Type the notes or extra diagnoses in the<br> "<span style="background-color:yellow" > Please enter new information here: </span>" field.<br>
-  		<b>Note: </b>You can also edit the current entries in the "<span style="background-color:yellow" > Current entries: </span>" field if necessary.<br>
-  		<b>Note: </b>If you want to cancel, click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.<br>
-		<b>Step 2: </b>Click the button <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> to save the information.<br>
-		<b>Step 3: </b>If you want to correct any errors, click on the erroneous data and replace it with the correct one and save again.<br>
-		<b>Step 4: </b>If you are finished, click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> to close the window and go back to the chart.<br>
+	<b>Passo 1: </b>Type the notas or extra diagnoses in the<br> "<span style="background-color:yellow" > Por favor entre nova informação aqui: </span>" .<br>
+  		<b>Nota: </b>Você tambem pode editar as entradas atuais no campo "<span style="background-color:yellow" > Entradas atuais: </span>" se necessário.<br>
+  		<b>Nota: </b>Se você quiser cancelar, clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.<br>
+		<b>Passo 2: </b>Clique no botão <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> para salvar a informação.<br>
+		<b>Passo 3: </b>Se você quiser corrigir quaisquer erros, clique nos dados errados e substitua com os corretos e salve novamente.<br>
+		<b>Passo 4: </b>Se voce terminou, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> para fechar a janela e voltar ao gráfico.<br>
 		
 </ul>
 <?php endif ?>
 <?php if($src=="kg_atg_etc") : ?>
 <a name="pt"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to enter  information on daily physical therapy (PT), anti-thrombosis gymnastic (Atg), etc.?</b></font>
+Como entrar com a informação de terapia física diária (PT), ginástica anti-trombosis (Atg), etc.?</b></font>
 <ul> 
-	<b>Step 1: </b>Type the information in the<br> "<span style="background-color:yellow" > Please enter new information here: </span>" field.<br>
-  		<b>Note: </b>You can also edit the current entries in the "<span style="background-color:yellow" > Current entries: </span>" field if necessary.<br>
-  		<b>Note: </b>If you want to cancel, click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.<br>
-		<b>Step 2: </b>Click the button <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> to save the information.<br>
-		<b>Step 3: </b>If you want to correct any errors, click on the erroneous data and replace it with the correct one and save again.<br>
-		<b>Step 4: </b>If you are finished, click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> to close the window and go back to the chart.<br>
+	<b>Passo 1: </b>Digite a informação no campo <br> "<span style="background-color:yellow" > Por favor entre nova informação aqui: </span>" .<br>
+  		<b>Nota: </b>Você tambem pode editar as entradas atuais no campo "<span style="background-color:yellow" > Entradas atuais: </span>" se necessário.<br>
+  		<b>Nota: </b>Se você quiser cancelar, clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.<br>
+		<b>Passo 2: </b>Clique no botão <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> para salvar a informação.<br>
+		<b>Passo 3: </b>Se você quiser corrigir quaisquer erros, clique nos dados errados e substitua com os corretos e salve novamente.<br>
+		<b>Passo 4: </b>Se voce terminou, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> para fechar a janela e voltar ao gráfico.<br>
 		
 </ul>
 <?php endif ?>
 <?php if($src=="anticoag") : ?>
 <a name="coag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to enter anticoagulants?</b></font>
+Como entrar anticoagulantes?</b></font>
 <ul> 
-	<b>Step 1: </b>Type the information on the anticoagulants and or dosage in the<br> "<span style="background-color:yellow" > Please enter new information here: </span>" field.<br>
-  		<b>Note: </b>You can also edit the current entries in the "<span style="background-color:yellow" > Current entries: </span>" field if necessary.<br>
-  		<b>Note: </b>If you want to cancel, click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.<br>
-		<b>Step 2: </b>Click the button <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> to save the information.<br>
-		<b>Step 3: </b>If you want to correct any errors, click on the erroneous data and replace it with the correct one and save again.<br>
-		<b>Step 4: </b>If you are finished, click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> to close the window and go back to the chart.<br>
+	<b>Passo 1: </b>Digite a informação de anticoagulantes e/ou dosagem no campo<br> "<span style="background-color:yellow" > Por favor entre nova informação aqui: </span>" .<br>
+  		<b>Nota: </b>Você tambem pode editar as entradas atuais no campo "<span style="background-color:yellow" > Entradas atuais: </span>" se necessário.<br>
+  		<b>Nota: </b>Se você quiser cancelar, clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.<br>
+		<b>Passo 2: </b>Clique no botão <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> para salvar a informação.<br>
+		<b>Passo 3: </b>Se você quiser corrigir quaisquer erros, clique nos dados errados e substitua com os corretos e salve novamente.<br>
+		<b>Passo 4: </b>Se voce terminou, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> para fechar a janela e voltar ao gráfico.<br>
 		
 </ul>
 <?php endif ?>
 <?php if($src=="anticoag_dailydose") : ?>
 <a name="daycoag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to enter information on daily anticoagulant application?</b></font>
+Como entrar com informação sobre aplicação diária de anticoagulante?</b></font>
 <ul> 
-	<b>Step 1: </b>Type either the dosage, or applicator information in the<br> "<span style="background-color:yellow" > Enter the new information here or edit the current entries: </span>" field.<br>
-  		<b>Note: </b>If you want to cancel, click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.<br>
-		<b>Step 2: </b>Click the button <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> to save the information.<br>
-		<b>Step 3: </b>If you want to correct any errors, click on the erroneous data and replace it with the correct one and save again.<br>
-		<b>Step 4: </b>If you are finished, click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> to close the window and go back to the chart.<br>
+	<b>Passo 1: </b>Digite ou a dosagem, ou a  informação do aplicador no campo<br> "<span style="background-color:yellow" > Entre a nova informação aqui ou edite as Entradas atuais: </span>" .<br>
+  		<b>Nota: </b>Se você quiser cancelar, clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.<br>
+		<b>Passo 2: </b>Clique no botão <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> para salvar a informação.<br>
+		<b>Passo 3: </b>Se você quiser corrigir quaisquer erros, clique nos dados errados e substitua com os corretos e salve novamente.<br>
+		<b>Passo 4: </b>Se voce terminou, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> para fechar a janela e voltar ao gráfico.<br>
 		
 </ul>
 <?php endif ?>
 <?php if($src=="lot_mat_etc") : ?>
 <a name="lot"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to enter notes on implants, LOT nr, charge nr, etc?</b></font>
+Como entrar com notas sobre implantes, no. LOT , no. débito, etc?</b></font>
 <ul> 
-	<b>Step 1: </b>Type the information on the LOT, charge nr, implants in the<br> "<span style="background-color:yellow" > Please enter new information here: </span>" field.<br>
-  		<b>Note: </b>You can also edit the current entries in the "<span style="background-color:yellow" > Current entries: </span>" field if necessary.<br>
-  		<b>Note: </b>If you want to cancel, click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.<br>
-		<b>Step 2: </b>Click the button <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> to save the information.<br>
-		<b>Step 3: </b>If you want to correct any errors, click on the erroneous data and replace it with the correct one and save again.<br>
-		<b>Step 4: </b>If you are finished, click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> to close the window and go back to the chart.<br>
+	<b>Passo 1: </b>Digite a informação do LOT, no. débito, implantes no campo<br> "<span style="background-color:yellow" > Por favor entre nova informação aqui: </span>" .<br>
+  		<b>Nota: </b>Você tambem pode editar as entradas atuais in the "<span style="background-color:yellow" > Entradas atuais: </span>" se necessário.<br>
+  		<b>Nota: </b>Se você quiser cancelar, clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.<br>
+		<b>Passo 2: </b>Clique no botão <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> para salvar a informação.<br>
+		<b>Passo 3: </b>Se você quiser corrigir quaisquer erros, clique nos dados errados e substitua com os corretos e salve novamente.<br>
+		<b>Passo 4: </b>Se voce terminou, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> para fechar a janela e voltar ao gráfico.<br>
 		
 </ul>
 <?php endif ?>
 <?php if($src=="medication") : ?>
 <a name="med"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to enter  medication and dosage plan?</b></font>
+Como entrar com a medicação e plano de dosagem?</b></font>
 <ul> 
-	<b>Step 1: </b>Type the medication on the left column.<br> 
-	<b>Step 2: </b>Type the dosage plan on the middle column.<br> 
-	<b>Step 3: </b>Click the radiobutton of the color coding for the medication if necessary.<br> 
+	<b>Passo 1: </b>Digite a medicação na coluna da esquerda.<br> 
+	<b>Passo 2: </b>Digite o plano de dosagem na coluna do meio.<br> 
+	<b>Passo 3: </b>Clique no botão de radio do código de cores para a medicação se necessário.<br> 
 	<ul type=disc>
-		<li>White for normal or default.
-		<li><span style="background-color:#00ff00" >Green</span> for antibiotics and their derivatives.
-		<li><span style="background-color:yellow" >Yellow</span> for dialytic medicines.
-		<li><span style="background-color:#0099ff" >Blue</span> for hemolytic (coagulant or anticoagulant) medicines.
-		<li><span style="background-color:#ff0000" >Red</span> for intravenous applied medicines.
+		<li>Branco para normal ou padrão.
+		<li><span style="background-color:#00ff00" >Verde</span> para antibióticos e seus derivados.
+		<li><span style="background-color:yellow" >Amarelo</span> para remédios dialíticos.
+		<li><span style="background-color:#0099ff" >Azul</span> para remédios hemolíticos (coagulante ou anticoagulante).
+		<li><span style="background-color:#ff0000" >Vermelho</span> para remédios aplicados intravenosos.
 	</ul>
-  	<b>Note: </b>You can also edit the current entries if necessary.<br>
-	<b>Step 4: </b>Enter your name in the "<span style="background-color:yellow" > Nurse: </span>" field.<br> 
-  		<b>Note: </b>If you want to cancel, click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.<br>
-		<b>Step 5: </b>Click the button <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> to save the medication plan.<br>
-		<b>Step 6: </b>If you want to correct any errors, click on the erroneous data and replace it with the correct one and save again.<br>
-		<b>Step 7: </b>If you are finished, click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> to close the window and go back to the chart.<br>
+  	<b>Nota: </b>Você tambem pode editar as entradas atuais se necessário.<br>
+	<b>Passo 4: </b>Entre seu nome no campo "<span style="background-color:yellow" > Enfermeiro: </span>" .<br> 
+  		<b>Nota: </b>Se você quiser cancelar, clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.<br>
+		<b>Passo 5: </b>Clique no botão <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> para salvar o plano de medicação.<br>
+		<b>Passo 6: </b>Se você quiser corrigir quaisquer erros, clique nos dados errados e substitua com os corretos e salve novamente.<br>
+		<b>Passo 7: </b>Se voce terminou, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> para fechar a janela e voltar ao gráfico.<br>
 		
 </ul>
 <?php endif ?>
@@ -168,52 +168,52 @@ How to enter  medication and dosage plan?</b></font>
 	<?php if($x2) : ?>
 
 <a name="daymed"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to enter information on daily medication application and dosage?</b></font>
+Como entrar com a informação de applicação de medicação diária e dosagem?</b></font>
 <ul> 
-	<b>Step 1: </b>Click the entry field corresponding to the chosen medication.<br>
-	<b>Step 2: </b>Type either the dosage, applicator information, or start/end symbols in the field.<br>
-  		<b>Note: </b>If you want to cancel, click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.<br>
-		<b>Step 3: </b>If you have several entries, enter all of them before saving.<br>
-		<b>Step 4: </b>Click the button <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> to save the information.<br>
-		<b>Step 5: </b>If you want to correct any errors, click on the erroneous data and replace it with the correct one and save again.<br>
-		<b>Step 6: </b>If you are finished, click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> to close the window and go back to the chart.<br>
+	<b>Passo 1: </b>Clique no campo de entrada correspondente medicação escolhida.<br>
+	<b>Passo 2: </b>Digite ou na dosagem, informação do aplicador,ou símbolos de início/fim no campo.<br>
+  		<b>Nota: </b>Se você quiser cancelar, clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.<br>
+		<b>Passo 3: </b>Se você tiver várias entradas, entre com todas elas antes de salvar.<br>
+		<b>Passo 4: </b>Clique no botão <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> para salvar a informação.<br>
+		<b>Passo 5: </b>Se você quiser corrigir quaisquer erros, clique nos dados errados e substitua com os corretos e salve novamente.<br>
+		<b>Passo 6: </b>Se voce terminou, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> para fechar a janela e voltar ao gráfico.<br>
 		
 </ul>
 	<?php else : ?>
 <a name="daymed"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-It says "There is no medication yet". What should I do?</b></font>
+Aparece "Não há medicação ainda". O que devo fazer?</b></font>
 <ul> 
-		<b>Step 1: </b>Click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> to close the pop-up window and go back to the chart.<br>
-	<b>Step 2: </b>Click the "<span style="background-color:yellow" > Medication </span>".<br>
-	<b>Step 3: </b>A pop-up window will appear showing the entry fields for medication and dosage plan.<br>
-	<b>Step 4: </b>Type the medication on the left column.<br> 
-	<b>Step 5: </b>Type the dosage plan on the middle column.<br> 
-	<b>Step 6: </b>Click the radiobutton of the color coding for the medication if necessary.<br> 
+		<b>Passo 1: </b>Clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> para fechar a janela e voltar ao gráfico.<br>
+	<b>Passo 2: </b>Clique em "<span style="background-color:yellow" > Medicação </span>".<br>
+	<b>Passo 3: </b>Uma janela aparecerá mostrando os campos de entrada para a medicação e plano de dosagem.<br>
+	<b>Passo 4: </b>Digite a medicação na coluna da esquerda.<br> 
+	<b>Passo 5: </b>Digite o plano de dosagem na coluna do meio.<br> 
+	<b>Passo 6: </b>Clique no botão de radio do código de cores para a medicação se necessário.<br> 
 	<ul type=disc>
-		<li>White for normal or default.
-		<li><span style="background-color:#00ff00" >Green</span> for antibiotics and their derivatives.
-		<li><span style="background-color:yellow" >Yellow</span> for dialytic medicines.
-		<li><span style="background-color:#0099ff" >Blue</span> for hemolytic (coagulant or anticoagulant) medicines.
-		<li><span style="background-color:#ff0000" >Red</span> for intravenous applied medicines.
+		<li>Branco para normal ou padrão.
+		<li><span style="background-color:#00ff00" >Verde</span> para antibióticos e seus derivados.
+		<li><span style="background-color:yellow" >Amarelo</span> para remédios dialíticos.
+		<li><span style="background-color:#0099ff" >Azul</span> para remédios hemolíticos (coagulante ou anticoagulante).
+		<li><span style="background-color:#ff0000" >Vermelho</span> para remédios aplicados intravenosos.
 	</ul>
-  	<b>Note: </b>You can also edit the current entries <br>if necessary.<br>
-	<b>Step 7: </b>Enter your name in the "<span style="background-color:yellow" > Nurse: </span>" field.<br> 
-  		<b>Note: </b>If you want to cancel, click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.<br>
-		<b>Step 8: </b>Click the button <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> to save the medication plan.<br>
-		<b>Step 9: </b>If you want to correct any errors, click on the erroneous data and replace it with the correct one and save again.<br>
-		<b>Step 10: </b>If you are finished, click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> to close the window and go back to the chart.<br>
+  	<b>Nota: </b>Você tambem pode editar as entradas atuais <br>se necessário.<br>
+	<b>Passo 7: </b>Entre seu nome no campo "<span style="background-color:yellow" > Enfermeiro: </span>" .<br> 
+  		<b>Nota: </b>Se você quiser cancelar, clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.<br>
+		<b>Passo 8: </b>Clique no botão <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> para salvar o plano de medicação.<br>
+		<b>Passo 9: </b>Se você quiser corrigir quaisquer erros, clique nos dados errados e substitua com os corretos e salve novamente.<br>
+		<b>Passo 10: </b>Se voce terminou, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> para fechar a janela e voltar ao gráfico.<br>
 </ul>
 	<?php endif ?>
 <?php endif ?>
 <?php if($src=="iv_needle") : ?>
 <a name="iv"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to enter information on daily intravenous medication application and dosage?</b></font>
+Como entrar com a informação diária de aplicação e dosagem de medicação intravenosa?</b></font>
 <ul> 
-	<b>Step 1: </b>Type either the dosage, applicator information, or start/end symbols in the "<span style="background-color:yellow" > Enter the new information here or edit the current entries: </span>" field.<br>
-  		<b>Note: </b>If you want to cancel, click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.<br>
-		<b>Step 2: </b>Click the button <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> to save the information.<br>
-		<b>Step 3: </b>If you want to correct any errors, click on the erroneous data and replace it with the correct one and save again.<br>
-		<b>Step 4: </b>If you are finished, click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> to close the window and go back to the chart.<br>
+	<b>Passo 1: </b>Digite ou a dosagem, a informação do aplicador, ou símbolos de início/fim no campo "<span style="background-color:yellow" > Entre com a nova informação aqui ou edite o campo das Entradas atuais: </span>" .<br>
+  		<b>Nota: </b>Se você quiser cancelar, clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.<br>
+		<b>Passo 2: </b>Clique no botão <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> para salvar a informação.<br>
+		<b>Passo 3: </b>Se você quiser corrigir quaisquer erros, clique nos dados errados e substitua com os corretos e salve novamente.<br>
+		<b>Passo 4: </b>Se voce terminou, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> para fechar a janela e voltar ao gráfico.<br>
 		
 </ul>
 

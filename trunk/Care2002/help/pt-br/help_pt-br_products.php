@@ -1,32 +1,32 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
 <?php
-if($x2=="pharma") print "Pharmacy - "; else print "Medical depot - ";
+if($x2=="pharma") print "Farmacia - "; else print "Suprimento médico - ";
 	switch($src)
 	{
-	case "head": if($x2=="pharma") print "Ordering pharmaceutical products"; 
-						else print "Ordering products";
+	case "head": if($x2=="pharma") print "Requisitando produtos farmaceuticos"; 
+						else print "Requisitando produtos";
 						break;
-	case "catalog": print "Order catalog";
+	case "catalog": print "Requisitar catalogo";
 						break;
-	case "orderlist": print "Order basket ( order list )";
+	case "orderlist": print "Requisitar cesta ( lista de requisição )";
 						break;
-	case "final": print "Final order list";
+	case "final": print "Lista final de requisições";
 						break;
-	case "maincat": print "Order catalog";
+	case "maincat": print "Requisitar catalogo";
 						break;
-	case "arch": print "Order archive";
+	case "arch": print "Requisitar arquivo";
 						break;
-	case "archshow": print "Order archive";
+	case "archshow": print "Requisitar arquivo";
 						break;
 	case "db": switch($x3)
 					{
-						case "input": print "Entering new product into the databank";
+						case "input": print "Inserindo um novo produto no banco de dados";
 						break;
 					}
 					break;
-	case "how2":print "How to order ";
-						  if($x2=="pharma") print "pharmaceutical products"; else print "products";
+	case "how2":print "Como requisitar ";
+						  if($x2=="pharma") print "produtos farmaceuticos products"; else print "produtos";
 	}
 
 
@@ -36,46 +36,46 @@ if($x2=="pharma") print "Pharmacy - "; else print "Medical depot - ";
 <?php if($src=="maincat") : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to add an article into the order catalog?</b>
+Como adicionar um artigo no catálogo de requisições?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>You must find the article first.  Enter either a complete information or the first few letters of the articles brand name, or generic name, or order number, etc. in the 
-				<nobr><span style="background-color:yellow" >" Search a search keyword: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> field.<br>
- 	<b>Step 2: </b>Click the button <input type="button" value="Find article"> to find the article.<br>
- 	<b>Step 3: </b>If the search finds the article that exactly matches the search keyword, a detailed information on the article will be displayed.<br>
- 	<b>Step 4: </b>Click the button <input type="button" value="Put this article in the catalog"> to add the article in the catalog.<p>
- 	<b>Note: </b>If you do not want to put this article in the catalog just continue searching for another article.<br>
+ 	<b>Passo 1: </b>Primero você deve encontrar o artigo.  Insira uma informação completa ou as primeiras letras da marca, ou o nome genérico, ou o número do pedido, etc. No 
+ campo		<nobr><span style="background-color:yellow" >" Procura por palavra-chave: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> .<br>
+ 	<b>Passo 2: </b>Clique no botão <input type="button" value="Encontrar artigo"> para encontrar o artigo.<br>
+ 	<b>Passo 3: </b>Se a pesquisa encontrou o artigo que exatamente coincide com a palavra-chave, serão exibidas informações detalhadas do artigo.<br>
+ 	<b>Passo 4: </b>Clique no botão <input type="button" value="Coloque este artigo no catalogo"> para adicionar o artigo no catalogo.<p>
+ 	<b>Nota: </b>Se você não quer colocar este artigo no catalogo apenas continue procurando por outro artigo.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to continue searching?</b>
+Como continuar pesquisando?</b>
 </font>
 <ul>       	
- 	Just follow the instructions above for finding the article.<br>
+ 	Apenas siga as instruções acima para encontrar um artigo.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-The search finds several articles that approximate my search keyword. What should I do?</b>
+A pesquisa encontrou diversos artigos parecidos com minha palavra-chave. O que devo fazer?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>If the search finds the article or article information that approximates the search keyword, a list will be displayed.<br>
- 	<b>Step 2: </b>Click the button <img <?php echo createComIcon('../','dwnarrowgrnlrg.gif','0') ?>>. The article will be added  in the catalog listing.<br>
- 	<b>Step 3: </b>If you want to see first the complete information on the article, click either its name or its button <img <?php echo createComIcon('../','info3.gif','0') ?>>.<br>
- 	<b>Step 4: </b>The complete information on the article will be displayed.<br>
- 	<b>Step 5: </b>Click the button <input type="button" value="Put this article in the catalog">.<p>
+ 	<b>Passo 1: </b>Se a pesquisa encotrar o artigo ou informações do artigo que aproximam-se das palavras-chave, uma lista será exibida.<br>
+ 	<b>Passo 2: </b>Clique no botão <img <?php echo createComIcon('../','dwnarrowgrnlrg.gif','0') ?>>. O artigo será adicionado na listagem do catálogo.<br>
+ 	<b>Passo 3: </b>Se você desejar ver primeiro uma lista uma informação completa no artigo, clique no seu nome ou no seu botão <img <?php echo createComIcon('../','info3.gif','0') ?>>.<br>
+ 	<b>Passo 4: </b>A informação completa do artigo será exibida.<br>
+ 	<b>Passo 5: </b>Clique no botão <input type="button" value="Insira este artigo no catálogo">.<p>
 </ul>
 	
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-I want to see more information about the article. What should I do?</b>
+Eu quero saber mais informações sobre o artigo. O que eu deveria fazer?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click either the button <img <?php echo createComIcon('../','info3.gif','0') ?>> or the article's name.<br>
- 	<b>Step 2: </b>The complete information about the product will be displayed.<br>
+ 	<b>Passo 1: </b>Clique no botão <img <?php echo createComIcon('../','info3.gif','0') ?>> ou no nome do artigo.<br>
+ 	<b>Passo 2: </b>A informação completa sobre o produto será exibida.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to remove an article from the catalog list?</b>
+Como remover um artigo da lista do catálogo?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the button <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> of the article.<br>
+ 	<b>Passo 1: </b>Clique no botão <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> do artigo.<br>
 </ul>
 
 <?php endif ?>
@@ -83,91 +83,90 @@ How to remove an article from the catalog list?</b>
 <?php if($src=="how2") : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to order <?php if($x2=="pharma") print "pharmaceutical products"; else print "products from medical depot"; ?>?
+Como solicitar <?php if($x2=="pharma") print "produtos farmaceuticos"; else print "produtos do suprimento médico"; ?>?
 </b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the menu option "<span style="background-color:yellow" > <img <?php echo createComIcon('../','bestell.gif','0') ?>> Ordering </span>" to switch over to ordering.<br>
- 	<b>Step 2: </b>If you have logged in before, the order basket and order catalog will appear. However, if you have not logged in before, you will be asked for your username and
-	password.<br>
+ 	<b>Passo 1: </b>Clique no menu de opções "<span style="background-color:yellow" > <img <?php echo createComIcon('../','bestell.gif','0') ?>> Ordering </span>" para trocar para solicitação.<br>
+ 	<b>Passo 2: </b>Se você estiver logado anteriormente, a cesta de solicitações e o catálogo de solicitações serão exibidos. Entretanto, se você não estiver logado anteriormente, você será solicitado a inserir seu nome de usuário e sua senha.<br>
 
- 	<b>Step 3: </b>If asked, enter your username and password. Click the button <img <?php echo createLDImgSrc('../','continue.gif','0') ?>>.<br>
- 	<b>Step 4: </b>Start creating an order list. On the right frame you will see the order catalog for your department, or ward, or operating room.<p>
- 	<b>Step 5: </b>If the article you need is in the catalog list, click its button <img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>> to put <b>one piece</b> of the article to the basket (order list) on the left frame.<p>
+ 	<b>Passo 3: </b>Caso solicitado, insira seu nome de usuário e sua senha. Clique no botão <img <?php echo createLDImgSrc('../','continue.gif','0') ?>>.<br>
+ 	<b>Passo 4: </b>Inicie criando uma lista de pedidos. No quadro direito você verá o catálogo de pedido do seu departamento, ou hospital, ou sala de operações.<p>
+ 	<b>Passo 5: </b>Se o artigo que você precisa está na lista do catálogo, clique no seu botão <img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>> para colocar <b>uma peça</b> do artigo na cesta (lista de pedido) no quadro da esquerda.<p>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-I want to put more than one piece of the article in the order basket. How to do it?</b>
+Eu quero colocar mais de uma peça de um artigo no cesto de pedidos. Como fazer isso?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the select button 	<input type="checkbox" name="a" value="a" checked> corresponding to the article to select it.<br>
- 	<b>Step 2: </b>Enter the number of pieces in the " Pcs. <input type="text" name="d" size=2 maxlength=2> " field corresponding to the article.<br>
- 	<b>Step 3: </b>Click the button <input type="button" value="Put in the basket"> to put the article into the basket (order list).<br>
+ 	<b>Passo 1: </b>Clique o botão de selecionar 	<input type="checkbox" name="a" value="a" checked> correspondente ao artigo para selecioná-lo.<br>
+ 	<b>Passo 2: </b>Insira o número de peças no " Pcs. <input type="text" name="d" size=2 maxlength=2> " campo correspondente ao artigo.<br>
+ 	<b>Passo 3: </b>Clique no botão <input type="button" value="Colocar no cesto"> para colocar o artigo no cesto (lista de pedidos).<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-The article I need is not in the catalog list. What should I do?</b>
+O artigo que preciso não está na lista do catálogo. O que devo fazer?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>You must find the article. Enter either a complete information or the first few letters of the articles brand name, or generic name, or order number, etc. in the 
-				<nobr><span style="background-color:yellow" >" Search keyword: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> field.<br>
- 	<b>Step 2: </b>Click the button <input type="button" value="Find article"> to find the article.<br>
- 	<b>Step 3: </b>If the search finds the article or article information that approximates the search keyword, a list will be displayed.<br>
- 	<b>Step 4: </b>If you want to put one piece of the article in the order basket, click the button <img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>>. The article will be put in the basket and at the same it will be included in the catalog listing.<br>
- 	<b>Step 5: </b>If you want to only add the article in the catalog listing, click the button <img <?php echo createComIcon('../','dwnarrowgrnlrg.gif','0') ?>>.<br>
+ 	<b>Passo 1: </b>Você deve encontrar o artigo.  Insira uma informação completa ou as primeiras letras da marca, ou o nome genérico, ou o número do pedido, etc. No
+campo		<nobr><span style="background-color:yellow" >" Pesquisa palavra-chave: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> .<br>
+ 	<b>Passo 2: </b>Clique no botão <input type="button" value="Encontrar artigo"> para encontrar o artigo.<br>
+ 	<b>Passo 3: </b>Se a pesquisa encontrar o artigo ou a informação do artigo que approxima-se da palavra-chave, uma lista será exibida.<br>
+ 	<b>Passo 4: </b>Se você deseja colocar uma peça do artigo no cesto de pedidos, clique no botão <img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>>. O artigo será colocado no cesto ao mesmo tempo que será incluído na listagem do catálogo.<br>
+ 	<b>Passo 5: </b>Se você deseja apenas adicionar o artigo na listagem do catálogo, clique no botão <img <?php echo createComIcon('../','dwnarrowgrnlrg.gif','0') ?>>.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-I want to see more information about the article. What should I do?</b>
+Desejo ver mais informações sobre o artigo. O que devo fazer?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click either the button <img <?php echo createComIcon('../','info3.gif','0') ?>> or the article's name.<br>
- 	<b>Step 2: </b>A window showing the complete information about the product will pop up.<br>
+ 	<b>Passo 1: </b>Clique no botão <img <?php echo createComIcon('../','info3.gif','0') ?>> ou no nome do artigo.<br>
+ 	<b>Passo 2: </b>Uma janela exibindo a informação completa sobre o produto irá aparecer.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to remove an article from the catalog list?</b>
+Como remover um artigo da lista do catálogo?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the button <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> of the article.<br>
+ 	<b>Passo 1: </b>Clique no botão <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> do artigo.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Can I change the number of pieces in the order basket?
+Posso mudar o número de peças do cesto de pedidos?
 </b>
 </font>
 <ul>       	
- 	<b>Yes.</b> Just replace the entry with the new number of pieces before you finalize the order list.
+ 	<b>Sim.</b> Apenas substitua o dado com o número de peças antes de finalizar a lista de pedidos.
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-All the articles I need are in the basket now. What should I do next?</b>
+Todos os artigos que necessito estão no cesto agora. O que devo fazer a seguir?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>You can proceed to sending the order list to the  <?php if($x2=="pharma") print "pharmacy"; else print "medical depot"; ?>. <br>Click the button <input type="button" value="Finalize order list"> to start the procedure.<br>
- 	<b>Step 2: </b>The order list will be displayed again. Enter your name in the <nobr>"<span style="background-color:yellow" > Created by <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> field.<br>
- 	<b>Step 3: </b>Select the priority status of the order between "<span style="background-color:yellow" > Normal<input type="radio" name="x" value="s" checked> Urgent<input type="radio" name="x" > </span>". Check the appropriate radio button.<br>
- 	<b>Step 4: </b>The validator (physician or surgeon) must enter his name in the <nobr>"<span style="background-color:yellow" > Validated by <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> field.<br>
- 	<b>Step 5: </b>The validator (physician or surgeon) must enter his password in the <nobr>"<span style="background-color:yellow" > Password: <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> field.<br>
- 	<b>Step 6: </b>Click the button <input type="button" value="Send this order list to the <?php if($x2=="pharma") print "pharmacy"; else print "medical depot"; ?>"> to send the order list.<br>
+ 	<b>Passo 1: </b>Você pode continuar enviando a lista de pedidos para a  <?php if($x2=="pharma") print "farmácia"; else print "Repositório médico"; ?>. <br>Clique no botão <input type="button" value="Encerrar a lista de pedidos"> para iniciar o procedimento.<br>
+ 	<b>Passo 2: </b>A lista de pedidos será exibida novamente. Insira seu nome no campo <nobr>"<span style="background-color:yellow" > Created by <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> .<br>
+ 	<b>Passo 3: </b>Selecione a prioridade do pedido entre "<span style="background-color:yellow" > Normal<input type="radio" name="x" value="s" checked> Urgente<input type="radio" name="x" > </span>". Marque o botão apropriado.<br>
+ 	<b>Passo 4: </b>O validador (médico ou cirurgião) deve inserir seu nome no campo <nobr>"<span style="background-color:yellow" > Validado por <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> .<br>
+ 	<b>Passo 5: </b>O validador (médico ou cirurgião) deve inserir sua senha no campo <nobr>"<span style="background-color:yellow" > Senha: <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> .<br>
+ 	<b>Passo 6: </b>Clique no botão <input type="button" value="Envia esta lista de pedidos para a <?php if($x2=="pharma") print "farmácia"; else print "repositório médico"; ?>"> para enviar a lista de pedidos.<br>
 </ul>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> 
 <ul>       	
- If you decide to cancel sending of the order list, click the link "<span style="background-color:yellow" > << Go back and edit list </span>" to go back to the order list.
+ Se você decidir cancelar o envio da lista de pedidos, clique no link "<span style="background-color:yellow" > << Voltar e editar a lista </span>" para voltar à lista de pedidos.
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-I want to end the ordering now. What should I do?</b>
+Desejo encerrar os pedidos agora. O que devo fazer?</b>
 </font>
 <ul>     
- 	<b>Step 1: </b>Click the link "<span style="background-color:yellow" > <img <?php echo createComIcon('../','arrow-blu.gif','0') ?>> End ordering </span>" to go back to the <?php if($x2=="pharma") print "pharmacy"; else print "medical depot"; ?>'s submenu.<br>
+ 	<b>Passo 1: </b>Clique no link "<span style="background-color:yellow" > <img <?php echo createComIcon('../','arrow-blu.gif','0') ?>> Finalizar pedidos </span>" para voltar o submenu do<?php if($x2=="pharma") print "farmácia"; else print "repositório medico"; ?> submenu.<br>
 </ul>	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-I want to create a new order list. What should I do?</b>
+Desejo criar uma nova lista de pedidos. O que devo fazer?</b>
 </font>
 <ul>     
- 	<b>Step 1: </b>Click the link "<span style="background-color:yellow" > <img <?php echo createComIcon('../','arrow-blu.gif','0') ?>> Start a new order list </span>" to create an empty order basket.<br>
+ 	<b>Passo 1: </b>Clique no link "<span style="background-color:yellow" > <img <?php echo createComIcon('../','arrow-blu.gif','0') ?>> Iniciar uma nova lista de pedidos </span>" para criar um cesto vazio de pedidos.<br>
 </ul>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota:</b></font> 
 <ul>       	
- You can get detailed instructions on either the order basket or the catalog listing by clicking the button <img <?php echo createComIcon('../','frage.gif','0') ?>> within the window.
+ Você pode obter instruções detalhadas do cesto de pedidos ou do catálogo listando ao clicar no botão <img <?php echo createComIcon('../','frage.gif','0') ?>> dentro da janela.
 </ul>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota:</b></font> 
 <ul>       	
- If you decide to close click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
+ Se você decidir fechar clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
 <?php endif ?>
 
@@ -175,126 +174,127 @@ I want to create a new order list. What should I do?</b>
 <?php if($src=="head") : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to order <?php if($x2=="pharma") print "pharmaceutical products"; 
-						else print "products from the medical depot"; ?>?
+Como solicitar <?php if($x2=="pharma") print "produtos farmaceuticos"; 
+						else print "produtos do repositório medico"; ?>?
 </b>
 </font>
 <ul>       	
 
- 	<b>Step 1: </b>Create first an order list. On the right frame you will see the order catalog for your department, or ward, or operating room.<p>
- 	<b>Step 2: </b>If the article you need is in the catalog list, click its button <img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>> to put <b>one piece</b> of the article to the basket (order list) on the left frame.<p>
+ 	<b>Passo 1: </b>Primeiro crie uma lista de pedidos. No quadro direito você vai ver o catálogo de pedidos para o seu departamento, ou hospital, ou sala de operações.<p>
+ 	<b>Passo 2: </b>Se o artigo que você precisa está na listagem do catálogo, clique no seu botão <img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>> para colocar <b>uma peça</b> do artigo no cesto (lista de pedidos) no quadro do lado esquerdo.<p>
+</ul>
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota:</b></font> 
+<ul>       	
+ Você pode obter instruções detalhadas no cesto de pedidos ou na listagem do catalogo clicando no botão <img <?php echo createComIcon('../','frage.gif','0') ?>> dentro da janela.
 </ul>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> 
 <ul>       	
- You can get detailed instructions on either the order basket or the catalog listing by clicking the button <img <?php echo createComIcon('../','frage.gif','0') ?>> within the window.
-</ul>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> 
-<ul>       	
- If you decide to close click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
+ Se você decidir fechar, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
 <?php endif ?>
 
 <?php if($src=="catalog") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to put an article in the basket (order list)?
+Como colocar um artigo no cesto (lista de pedidos)?
 </b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>If the article you need is in the catalog list, click its button <img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>> to put <b>one piece</b> of the article to the order list (basket) on the left frame.<p>
+ 	<b>Passo 1: </b>Se o artigo que você precisa está la lista do catálogo, clique no seu botão <img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>> para colocar <b>uma peça</b> do artigo na lista de pedidos (cesto) no quadro esquerdo.<p>
 </ul>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-I want to put more than one piece of the article in the order basket. How to do it?</b>
+Desejo colocar mais de uma peça do artigo no cesto de pedidos. Como fazer isso?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the select button 	<input type="checkbox" name="a" value="a" checked> corresponding to the article to select it.<br>
- 	<b>Step 2: </b>Enter the number of pieces in the " Pcs. <input type="text" name="d" size=2 maxlength=2> " field corresponding to the article.<br>
- 	<b>Step 3: </b>Click the button <input type="button" value="Put in the basket"> to put the article into the basket (order list).<br>
+ 	<b>Passo 1: </b>Clique no botão selecionar <input type="checkbox" name="a" value="a" checked> correspondente ao artigo para selecioná-lo.<br>
+ 	<b>Passo 2: </b>Insira o número de peças no campo " Pcs. <input type="text" name="d" size=2 maxlength=2> "  correspondente ao artigo.<br>
+ 	<b>Passo 3: </b>Clique no botão <input type="button" value="Colocar no cesto"> para colocar o artigo dentro do cesto (lista de pedidos).<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-The article I need is not in the catalog list. What should I do?</b>
+The artigo que necessito não está na lista do catálogo. O que devo fazer?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>You must find the article. Enter either a complete information or the first few letters of the articles brand name, or generic name, or order number, etc. in the 
-				<nobr><span style="background-color:yellow" >" Search keyword: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> field.<br>
- 	<b>Step 2: </b>Click the button <input type="button" value="Find article"> to find the article.<br>
- 	<b>Step 3: </b>If the search finds the article or article information that approximates the search keyword, a list will be displayed.<br>
- 	<b>Step 4: </b>If you want to put one piece of the article in the order basket, click the button <img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>>. The article will be put in the basket and at the same it will be included in the catalog listing.<br>
- 	<b>Step 5: </b>If you want to only add the article in the catalog listing, click the button <img <?php echo createComIcon('../','dwnarrowgrnlrg.gif','0') ?>>.<br>
+ 	<b>Passo 1: </b>Você deve encontrar o artigo. Insira uma informação completa ou as primeiras letras da marca, ou o nome genérico, ou o número do pedido, etc. No campo 
+<nobr><span style="background-color:yellow" >" Search palavra-chave: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> .<br>
+ 	<b>Passo 2: </b>Clique no botão <input type="button" value="Encontrar artigo"> para encontrar o artigo.<br>
+ 	<b>Passo 3: </b>Se a pesquisa encontrou o artigo que exatamente coincide com a palavra-chave, serão exibidas informações detalhadas do artigo.<br>
+ 	<b>Passo 4: </b>Se você deseja inserir uma peça do artigo no cesto de pedidos, clique no botão <img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>>. O artigo será colcoado no cesto e ao mesmo tempo será incluído na listagem do catálogo.<br>
+ 	<b>Passo 5: </b>Se você deseja apenas adicionar o artigo na listagem do catalogo, clique no botão <img <?php echo createComIcon('../','dwnarrowgrnlrg.gif','0') ?>>.<br>
+
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-I want to see more information about the article. What should I do?</b>
+Desejo ver mais informações sobre artigo. O que devo fazer?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click either the button <img <?php echo createComIcon('../','info3.gif','0') ?>> or the article's name.<br>
- 	<b>Step 2: </b>A window showing the complete information about the product will pop up.<br>
+ 	<b>Passo 1: </b>Clique no botão <img <?php echo createComIcon('../','info3.gif','0') ?>> ou no nome do artigo.<br>
+ 	<b>Passo 2: </b>Uma janela mostrando a informação completa sobre o produto irá aparecer.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to remove an article from the catalog list?</b>
+Como remover um artigo da lista do catálogo?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the button <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> of the article.<br>
+ 	<b>Passo 1: </b>Clique no botão <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> do artigo.<br>
 </ul>
 
 <?php endif ?>
 
 <?php if($src=="orderlist") : ?>
 	<?php if($x1=="0") : ?>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota:</b></font> 
 <ul>       	
- The basket is empty at the moment.<p>
- To create an order list, select the article you need from the catalog list on the right frame and put it in the basket.
+ O cesto está vazio neste momento.<p>
+ Para criar uma lista de pedidos, selecione o artigo que você precisa da lista do catálogo no quadro direito e coloque no cesto.
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to put an article in the basket (order list)?
+Como colocar um artigo no cesto (lista de pedidos)?
 </b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>If the article you need is in the catalog list, click its button <img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>> to put <b>one piece</b> of the article to the order list (basket).<br> The order list will
-	be displayed automatically on the basket frame on the left.<p>
+ 	<b>Passo 1: </b>Se o artigo que você precisa está na lista do catálogo, clique no seu botão <img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>> para colocar <b>uma peça</b> do artigo na lista de pedidos (cesto).<br> A lista de pedidos irá
+	ser exibida automaticamente no cesto do quadro da esquerda.<p>
 </ul>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> 
 <ul>       	
- For detailed instructions on how to search, select, and put articles from catalog list into the basket, click the <img <?php echo createComIcon('../','frage.gif','0') ?>> button within the order catalog frame on the right.<p>
+ Para instruções detalhadas sobre como pesquisar, selecionar e colocar artigos artigos da lista do catalogo no cesto, clique no botão <img <?php echo createComIcon('../','frage.gif','0') ?>> dentro do quadro do catalogo de pedidos à direita.<p>
 </ul>
 
 	<?php else : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Can I change the number of pieces in the order basket?
+Posso mudar o número de peças no cesto de pedidos?
 </b>
 </font>
 <ul>       	
- 	<b>Yes.</b> Just replace the entry with the new number of pieces before you finalize the order list.
+ 	<b>Sim.</b> Apenas substitua a entrada com o númenro de peças antes de finalizar a lista de pedidos.
 </ul>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-I want to see more information about the article. What should I do?</b>
+Desejo ver mais informações sobre o artigo. O que devo fazer?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the button <img <?php echo createComIcon('../','info3.gif','0') ?>> of the article.<br>
- 	<b>Step 2: </b>A window showing the complete information about the product will pop up.<br>
+ 	<b>Passo 1: </b>Clique no botão <img <?php echo createComIcon('../','info3.gif','0') ?>> do artigo.<br>
+ 	<b>Passo 2: </b>Uma janela mostrando informações completas sobre o produto irá aparecer.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to remove an article from the basket?</b>
+Como remover um artigo do cesto?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the button <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> of the article.<br>
+ 	<b>Passo 1: </b>Clique no botão <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> do artigo.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-All the articles I need are in the basket now. What should I do next?</b>
+Todos os artigos que necessito estão no cesto agora. O que devo fazer a seguir?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>You can proceed to sending the order list to the pharmacy. <br>Click the button <input type="button" value="Finalize order list"> to start the procedure.<br>
- 	<b>Step 2: </b>The order list will be displayed again. Enter your name in the <nobr>"<span style="background-color:yellow" > Created by <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> field.<br>
- 	<b>Step 3: </b>Select the priority status of the order between "<span style="background-color:yellow" > Normal<input type="radio" name="x" value="s" checked> Urgent<input type="radio" name="x" > </span>". Check the appropriate radio button.<br>
- 	<b>Step 4: </b>The validator (physician or surgeon) must enter his name in the <nobr>"<span style="background-color:yellow" > Validated by <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> field.<br>
- 	<b>Step 5: </b>The validator (physician or surgeon) must enter his password in the <nobr>"<span style="background-color:yellow" > Password: <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> field.<br>
- 	<b>Step 6: </b>Click the button <input type="button" value="Send this order list to the pharmacy"> to send the order list.<br>
+ 	<b>Passo 1: </b>Você pode proceder enviando a lista de pedidos para a farmácia. <br>Clique no botão <input type="button" value="Finalizar a lista de pedidos"> para iniciar o procedimento.<br>
+ 	<b>Passo 2: </b>A lista de pedidos será exibida novamente. Insira seu nome no campo <nobr>"<span style="background-color:yellow" > Criado por <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> .<br>
+ 	<b>Passo 3: </b>Selecione o status de prioridade do pedido entre "<span style="background-color:yellow" > Normal<input type="radio" name="x" value="s" checked> Urgente<input type="radio" name="x" > </span>". Clique no botão apropriado.<br>
+ 	<b>Passo 4: </b>O validador (médico ou cirurgião) deve inserir seu nome no campo <nobr>"<span style="background-color:yellow" > Validado por <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> .<br>
+ 	<b>Passo 5: </b>O validador (médico ou cirurgião) deve inserir sua senha no campo <nobr>"<span style="background-color:yellow" > Senha: <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> .<br>
+ 	<b>Passo 6: </b>Clique no botão <input type="button" value="Envia sua lista de pedidos para a farmácia"> para enviar a lista de pedidos.<br>
 </ul>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> 
 <ul>       	
- If you decide to cancel sending of the order list, click the link "<span style="background-color:yellow" > << Go back and edit list </span>" to go back to the order list.
+ Se você decidir cancelar o envio da lista de pedidos, clique no link "<span style="background-color:yellow" > << Voltar e editar a lista </span>" para voltar para a lista de pedidos.
 </ul>
 	<?php endif ?>
 
@@ -304,31 +304,31 @@ All the articles I need are in the basket now. What should I do next?</b>
 <?php if($src=="final") : ?>
 	<?php if($x1=="1") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-I want to end the ordering now. What should I do?</b>
+Desejo enviar os pedidos agora. O que devo fazer?</b>
 </font>
 <ul>     
- 	<b>Step 1: </b>Click the link "<span style="background-color:yellow" > <img <?php echo createComIcon('../','arrow-blu.gif','0') ?>> End ordering </span>" to go back to the pharmacy's submenu.<br>
+ 	<b>Passo 1: </b>Clique the link "<span style="background-color:yellow" > <img <?php echo createComIcon('../','arrow-blu.gif','0') ?>> Finalizar os pedidos </span>" para voltar para o submenu da farmácia.<br>
 </ul>	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-I want to create a new order list. What should I do?</b>
+Desejo criar uma nova lista de pedidos. O que devo fazer?</b>
 </font>
 <ul>     
- 	<b>Step 1: </b>Click the link "<span style="background-color:yellow" > <img <?php echo createComIcon('../','arrow-blu.gif','0') ?>> Start a new order list </span>" to create an empty order basket.<br>
+ 	<b>Passo 1: </b>Clique no link "<span style="background-color:yellow" > <img <?php echo createComIcon('../','arrow-blu.gif','0') ?>> Iniciar a nova lista de pedidos </span>" para criar um cesto de pedidos vazio.<br>
 </ul>		<?php else : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to send the final order list?</b>
+Como enviar a lista de pedidos final?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Enter your name in the <nobr>"<span style="background-color:yellow" > Created by <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> field.<br>
- 	<b>Step 2: </b>Select the priority status of the order between "<span style="background-color:yellow" > Normal<input type="radio" name="x" value="s" checked> Urgent<input type="radio" name="x" > </span>". Check the appropriate radio button.<br>
- 	<b>Step 3: </b>The validator (physician or surgeon) must enter his name in the <nobr>"<span style="background-color:yellow" > Validated by <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> field.<br>
- 	<b>Step 4: </b>The validator (physician or surgeon) must enter his password in the <nobr>"<span style="background-color:yellow" > Password: <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> field.<br>
- 	<b>Step 5: </b>Click the button <input type="button" value="Send this order list to the pharmacy"> to send the order list.<br>
+ 	<b>Passo 1: </b>Insira seu nome no campo <nobr>"<span style="background-color:yellow" > Criado por <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> .<br>
+ 	<b>Passo 2: </b>Selecione a prioridade do pedido entre "<span style="background-color:yellow" > Normal<input type="radio" name="x" value="s" checked> Urgente<input type="radio" name="x" > </span>". Clique no botão apropriado.<br>
+ 	<b>Passo 3: </b>O validador (médico ou cirurgião) deve inserir seu nome no campo <nobr>"<span style="background-color:yellow" > Validado por <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> .<br>
+ 	<b>Passo 4: </b>O validador (médico ou cirurgião) deve inserir sua senha no campo <nobr>"<span style="background-color:yellow" > Senha: <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> .<br>
+ 	<b>Passo 5: </b>Clique no botão <input type="button" value="Envia sua lista de pedidos para a farmácia"> para enviar a lista de pedidos.<br>
 </ul>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota:</b></font> 
 <ul>       	
- If you decide to cancel sending of the order list, click the link "<span style="background-color:yellow" > << Go back and edit list </span>" to go back to the order list.
+ Se você decidir cancelar a lista de pedidos, clique no link "<span style="background-color:yellow" > << Voltar e editar a lista </span>" para voltar à lista de pedidos.
 </ul>
 	<?php endif ?>
 
@@ -338,29 +338,29 @@ How to send the final order list?</b>
 
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> 
-<font color="#990000"><b>I want to see the archived order lists.</b></font>
-<ul>  	<b>Step 1: </b> Enter either a complete information or the first few letters of the department's name, or id, or order date, or priority ("urgent") in the 
-				<nobr><span style="background-color:yellow" >" Search keyword: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> field.<br>
- 	<b>Step 2: </b>Check or uncheck the  following checkboxes for search categories:
+<font color="#990000"><b>Desejo ver as listas de pedidos arquivadas.</b></font>
+<ul>  	<b>Passo 1: </b> Insira a informação completa ou algumas primeiras letras do nome do departmento, ou id, ou data do pedido, ou prioridade ("urgente") no 
+			campo	<nobr><span style="background-color:yellow" >" Procura palavra-chave: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> .<br>
+ 	<b>Passo 2: </b>Marque ou desmarque as seguintes caixas de seleção para pesquisar as categorias:
 <ul> 	
-  	<input type="checkbox" name="d" checked> Date<br>
-	<input type="checkbox" name="d" checked> Department<br>
-  	<input type="checkbox" name="d" checked> Priority<br>
-	By default, all three checkboxes will be checked and the search will do searching in all three categories. If you want to exclude a category click its checkbox to deselect it.
+  	<input type="checkbox" name="d" checked> Data<br>
+	<input type="checkbox" name="d" checked> Departmento<br>
+  	<input type="checkbox" name="d" checked> Prioridade<br>
+	Por padrão, todas as três caixas de seleção serão marcadas e a pesquisa irá pesquisar em todas as três categorias. Se você desejar excluir uma categoria clique na sua caixa de seleção para desmarca-la.
 </ul> 	
-<b>Step 3: </b>Click the button <input type="button" value="Search"> to find the article.<br>
- 	<b>Step 4: </b>If the search finds the order  or orders that approximate the search keyword, a list will be displayed.<br>
- 	<b>Step 5: </b>Click the order list's button <img <?php echo createComIcon('../','uparrowgrnlrg.gif','0') ?>>. The details of the order will be displayed<br>
+<b>Passo 3: </b>Clique no botão <input type="button" value="Pesquisa"> para encontrar o artigo.<br>
+ 	<b>Passo 4: </b>Se a pesquisa encontrar o pedido ou os pedidos que approximam-se às palavras-chave, uma lista será exibida.<br>
+ 	<b>Passo 5: </b>Clique no botão da lista de pedidos <img <?php echo createComIcon('../','uparrowgrnlrg.gif','0') ?>>. Os detalhes do pedido serão exibidos<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> 
-<font color="#990000"><b>Several orders are listed. How to see a particular order?</b></font>
+<font color="#990000"><b>Diversos pedidos serão listados. Como ver um pedido em particular?</b></font>
 <ul>  	
- 	<b>Step 1: </b>Click the order's button <img <?php echo createComIcon('../','uparrowgrnlrg.gif','0') ?>>. The details of the order will be displayed<br>
+ 	<b>Passo 1: </b>Clique no botão de pedidos <img <?php echo createComIcon('../','uparrowgrnlrg.gif','0') ?>>. Os detalhes dos pedidos serão exibidos<br>
 </ul>
 
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> 
 <ul>       	
- If you decide to end searching and close, click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
+ Se você decidir terminar sua pesquisa e fechar, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
 
 
@@ -368,31 +368,31 @@ How to send the final order list?</b>
 	
 <?php if($src=="archshow") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-I want to see more information about an article in the order list. What should I do?</b>
+Desejo ver mais informações sobre um artigo na lista de pedidos. O que devo fazer?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the article's <img <?php echo createComIcon('../','info3.gif','0') ?>> button.<br>
- 	<b>Step 2: </b>A window showing the complete information about the product will pop up.<br>
+ 	<b>Passo 1: </b>Clique no botão do artigo <img <?php echo createComIcon('../','info3.gif','0') ?>> .<br>
+ 	<b>Passo 2: </b>Uma janela mostrando a informação completa sobre o produto irá aparecer.<br>
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-I want to see the list of archived orders again. What should I do?</b>
+Desejo ver a lista dos pedidos arquivados novamente. O que devo fazer?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the <input type="button" value="<< Go back"> button.<br>
+ 	<b>Passo 1: </b>Clique no botão <img <?php echo createLDImgSrc('../','back2.gif','0') ?>> .<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> 
-<font color="#990000"><b>I want to do a new search for archived order lists. What should I do?</b></font>
-<ul>  	<b>Step 1: </b> Enter either a complete information or the first few letters of the department's name, or id, or order date, or priority ("urgent") in the 
-				<nobr><span style="background-color:yellow" >" Search keyword: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> field.<br>
- 	<b>Step 2: </b>Check or uncheck the  following checkboxes for search categories:
+<font color="#990000"><b>Desejo fazer uma nova pesquisa na lista de pedidos arquivados. O que devo fazer?</b></font>
+<ul>  	<b>Passo 1: </b> Insira uma informação completa ou as primeiras letras do nome do departamento, ou id, ou data do pedido, ou prioridade ("urgente") no campo 
+				<nobr><span style="background-color:yellow" >" Procura palavra-chave: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> .<br>
+ 	<b>Passo 2: </b>Marque ou desmarque as seguintes caixas de seleção para a pesquisa por categorias:
 <ul> 	
-  	<input type="checkbox" name="d" checked> Date<br>
-	<input type="checkbox" name="d" checked> Department<br>
-  	<input type="checkbox" name="d" checked> Priority<br>
-	By default, all three checkboxes will be checked and the search will do searching in all three categories. If you want to exclude a category click its checkbox to deselect it.
+  	<input type="checkbox" name="d" checked> Data<br>
+	<input type="checkbox" name="d" checked> Departmento<br>
+  	<input type="checkbox" name="d" checked> Prioridade<br>
+	Por padrão, todas as três caixas de seleção serão marcadas e a pesquisa irá pesquisar em todas categorias. Se você desejar excluir uma categoria clique na sua caixa de seleção para desmarcar.
 </ul> 	
-<b>Step 3: </b>Click the button <input type="button" value="Search"> to find the article.<br>
- 	<b>Step 4: </b>If the search finds the order  or orders that approximate the search keyword, a list will be displayed.<br>
+<b>Passo 3: </b>Clique no botão <input type="button" value="Pesquisar"> para encontrar o artigo.<br>
+ 	<b>Passo 4: </b>Se a pesquisa encontrar o pedido ou pedidos que aproximam-se a palavra-chave, uma lista será exibida.<br>
 </ul>
 	<?php endif ?>	
 	
@@ -400,43 +400,43 @@ I want to see the list of archived orders again. What should I do?</b>
 <?php if($src=="db") : ?>
 	<?php if($x1=="") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to enter a new product into the databank?</b>
+Como inserir um novo produto na base de dados?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Enter first all available information about the product into their corresponding entry fields.<br>
+ 	<b>Passo 1: </b>Primeiro insira todas as informações disponíveis sobre o produto nos seus campos correspondentes.<br>
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-I want to select a picture of the product. How to do it?</b>
+Desejo selecionar uma figura do produto. Como fazer isso?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the button <input type="button" value="Browse..."> on the "<span style="background-color:yellow" > Picture file </span>" field.<br>
- 	<b>Step 2: </b>A small window for selecting a file will appear. Select the picture file of your choice and click "OK".<br>
+ 	<b>Passo 1: </b>Clique no botão <input type="button" value="Selecionar..."> no campo "<span style="background-color:yellow" > Picture file </span>" .<br>
+ 	<b>Passo 2: </b>Uma pequena janelapara selecionar um arquivo irá aparecer. Selecione o arquivo da figura da sua escolha e clique "OK".<br>
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-I am finished entering all available product information. How to save it?</b>
+Finalizei a entrada de todas as informações disponíveis. Como salvar?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the button <input type="button" value="Save">.<br>
+ 	<b>Passo 1: </b>Clique no botão <input type="button" value="Salvar">.<br>
 </ul>
 	<?php endif ?>	
 	<?php if($x1=="save") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to enter a new product into the databank?</b>
+Como inserir um novo produto no banco de dados?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the <input type="button" value="New product"> button.<br>
- 	<b>Step 2: </b>The entry form will appear.<br>
- 	<b>Step 3: </b>Enter the available information about the new product.<br>
- 	<b>Step 4: </b>Click the button <input type="button" value="Save"> to save the information.<br>
+ 	<b>Passo 1: </b>Clique no botão <input type="button" value="Novo produto"> .<br>
+ 	<b>Passo 2: </b>O formulário de entrada irá aparecer.<br>
+ 	<b>Passo 3: </b>Insira as informações disponíveis sobre o novo produto.<br>
+ 	<b>Passo 4: </b>Clique no botão <input type="button" value="Salvar"> para salvar a informação.<br>
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-I want to edit the product that is currently displayed How to do it?</b>
+Desejo editar o produto que está atualmente sendo exibido. Como fazer isso?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the button <input type="button" value="Updte or edit">.<br>
- 	<b>Step 2: </b>The product information will be automatically entered into the editing form.<br>
- 	<b>Step 3: </b>Edit the information.<br>
- 	<b>Step 4: </b>Click the button <input type="button" value="Save"> to save the new information.<br>
+ 	<b>Passo 1: </b>Clique no botão <input type="button" value="Atualizar ou editar">.<br>
+ 	<b>Passo 2: </b>A informação do produto será automaticamente inserida no formulário de edição.<br>
+ 	<b>Passo 3: </b>Edite a informação.<br>
+ 	<b>Passo 4: </b>Clique no botão <input type="button" value="Save"> para salvar a nova informação.<br>
 </ul>
 	
 	<?php endif ?>	

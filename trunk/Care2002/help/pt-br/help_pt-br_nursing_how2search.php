@@ -3,103 +3,111 @@
 <?php
 switch($x2)
 {
-	case "search": print "How to "; 
- 						if($x1) print 'display the ward\'s occupancy where the search keyword was found';
-						else  print 'search for a patient';
+	case "search": print "Como... "; 
+ 						if($x1) print 'mostre a ocupação da ala onde a palavra chave de pesquisa foi encontrada';
+						else  print 'pesquise por um paciente';
 						break;
-	case "quick": print  "Nursing - Quickview of today's ward occupancy";
+	case "quick": print  "Enfermagem - Visão rápida da ocupação de hoje da ala";
 						break;
-	case "arch": print "Nursing wards - Archive";
+	case "arch": print "Ala de enfermagem - Arquivo";
 }
  ?></b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
 <?php if($x2=="search") : ?>
 <?php if(!$x1) : ?>
-<b>Step 1</b>
+<b>Passo 1</b>
 
-<ul> Enter  in the "<span style="background-color:yellow" >Please enter a search keyword.</span>" 
-	field either a full information or the first few letters, like for example a name, or Given name, or both.
-		<ul type=disc><li>Example 1: enter "Guerero" or "gue".
-		<li>Example 2: enter "Alfredo" or "Alf".
-		<li>Example 3: enter "Guerero, Alf".
+<ul> Entre no campo "<span style="background-color:yellow" >Por favor, entre com uma palavra chave de pesquisa.</span>" 
+	ou com uma informação completa ou umas poucas letras de informação de um paciente,como exemplo, o nome, ou sobrenome ou ambos.
+		<ul type=disc><li>Exemplo 1: entre "Guerero" ou "gue".
+		<li>Exemplo 2: entre "Alfredo" ou "Alf".
+		<li>Exemplo 3: entre "Guerero, Alf".
 	</ul>	
 </ul>
-<b>Step 2</b>
-<ul> Click the button <input type="button" value="Search"> to start the search.<p>
+<b>Passo 2</b>
+<ul> Clique no botão <input type="button" value="Pesquisa"> para iniciar a pesquisa.<p>
 </ul>
-<b>Step 3</b>
-<ul> If the search finds one result, the ward's occupancy list where the search keyword is found will be displayed.<p>
+<b>Passo 3</b>
+<ul> Se a pesquisa encontrar um resultado, a lista de ocupação da ala será exibida, mostrando onde a palavra chave de pesquisa foi encontrada.<p>
 </ul>
-<b>Step 4</b>
-<ul> If the search finds several results, a list of the results will be displayed.<p>
+<b>Passo 4</b>
+<ul> Se a pesquisa encontrar vários resultados, uma lista de resultados será mostrada.<p>
 </ul>
-<b>Note</b>
-<ul> If you decide to cancel search click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
+<b>Nota</b>
+<ul> Se você decidir cancelar a pesquisa clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul><?php endif ?>
-<b>Step <?php if($x1) print "1"; else print "5"; ?></b><ul>Click the button <img <?php echo createComIcon('../','bul_arrowblusm.gif','0') ?>>,
- or the date, or the ward to display the ward's occupancy list.
-<p><b>Note:</b> The search keyword will be highlighted in the list.
-<br><b>Note:</b> The list is not editable "read only mode". If you attempt to open the patient's data folder by clicking on its name, you will be prompted to
-enter your username and password.
+<b>Passo <?php if($x1) print "1"; else print "5"; ?></b><ul>clique no botão <img <?php echo createComIcon('../','bul_arrowblusm.gif','0') ?>>,
+ ou na data, ou na ala para exibir a lista de ocupação da ala.
+<p><b>Nota:</b> A palavra chave de pesquisa estará grifada na lista.
+<br><b>Nota:</b> A lista não pode ser editada; está em modo de "somente leitura". Se você tentar abrir o arquivo de dados do paciente clicando em seu nome, você será avisado para
+entrar com seu nome de usuário e senha.
 </ul>
 <?php endif ?>
 <?php if($x2=="quick") : ?>
 	<?php if($x1) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to show the ward's occupancy list?</b>
+Como mostrar o status de ocupação de outros dias?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the ward's id or name on the left column.<br>
-	<b>Note: </b>The occupancy list that will be displayed is "read only". You cannot edit or change any patients' data.<br>
+ 	<b>Passo: </b>Clique na data do mini-calendário.<p>
+	<img src="../help/en/img/en_mini_calendar_php.png" border=0 width=223 height=133><p>
+	<b>Nota: </b>A lista antiga de ocupação será mostrada em modo de "somente leitura". Você não pode editar ou alterar quaisquer dados de paciente.<br>
+	</ul>
+	
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
+Como mostrar a lista de ocupação da ala?</b>
+</font>
+<ul>       	
+ 	<b>Passo 1: </b>Clique na identificação da ala ou seu nomena coluna à esquerda.<br>
+	<b>Nota: </b>A lista de ocupação que será exibida será mostrada em modo de "somente leitura". Você não pode editar ou alterar quaisquer dados de paciente.<br>
 	</ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to show  the ward's occupancy list for editing or updating data?</b>
-</font>
-<ul>       	
- 	<b>Step 1: </b>Click the icon <img <?php echo createComIcon('../','statbel2.gif','0') ?>> corresponding to the chosen ward.<br>
- 	<b>Step 2: </b>If you have logged in before and you have access right for the function, the occupancy list will be displayed immediately.<br>
-		Otherwise,  you will be asked to enter your username and password.<br>
- 	<b>Step 3: </b>If asked, enter your username and password.<br>
- 	<b>Step 4: </b>Click the button <input type="button" value="Continue...">.<br>
- 	<b>Step 5: </b>If you have an access right for the function, the occupancy list will be displayed.<br>
-	<b>Note: </b>The occupancy list that will be displayed can be "edited". Options for editing or updataing patients' data will be displayed.
-		You can also open the patients' data folder for further editing.<br>
+Como mostrar a lista de ocupação da ala para a edição ou atualização de dados?</b>
+</Você não pode>       	
+ 	<b>Passo 1: </b>Clique no ícone <img <?php echo createComIcon('../','statbel2.gif','0') ?>> correspondente a ala escolhida.<br>
+ 	<b>Passo 2: </b>Se você estiver logado e tiver direito de acesso para a função, a lista de ocupação será exibida imediatamente.<br>
+		caso contrário,  você será solicitado a entrar com seu nome de usuário e senha.<br>
+ 	<b>Passo 3: </b>Se solicitado  entre com seu nome de usuário e senha.<br>
+ 	<b>Passo 4: </b>Clique no botão  <img <?php echo createLDImgSrc('../','continue.gif','0') ?>> .<br>
+ 	<b>Passo 5: </b>Se você tiver direito de acesso para a função, a lista de ocupação será exibida.<br>
+	<b>Nota: </b>A lista de ocupação que será exibida pode ser "editada". Opções para edição ou atualização dos dados do paciente serão apresentadas.
+		Você tambem pode abrir o arquivo de dados do paciente para continuar editando.<br>
 	</ul>
 	<?php else : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
-There is no available occupancy list at the moment!</b>
+Não há lista de ocupação disponível neste momento!</b>
 </font><p>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to display previous occupancy quickviews using the archive?</b>
+Como mostrar visões rápidas de uma ocupação anterior usando o arquivo?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click "<span style="background-color:yellow" > Click this to go to archive <img <?php echo createComIcon('../','bul_arrowgrnlrg.gif','0') ?>> </span>".<br>
- 	<b>Step 2: </b>A guide calendar will appear.<br>
- 	<b>Step 3: </b>Click on a date in the calendar to display the occupancy quickview for that day.<br>
+ 	<b>Passo 1: </b>Clique "<span style="background-color:yellow" > Clique aqui para ir ao arquivo <img <?php echo createComIcon('../','bul_arrowgrnlrg.gif','0') ?>> </span>".<br>
+ 	<b>Passo 2: </b>Um calendário guia aparecerá.<br>
+ 	<b>Passo 3: </b>Clique em uma data do calendário para que uma visão rápida da ocupação daquele dia seja mostrada.<br>
 	</ul>
 	
 	<?php endif ?>
-<b>Note</b>
-<ul> If you decide to close the quickview click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
+<b>Nota</b>
+<ul> Se você decidir fecha a Visão rápida clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul><?php endif ?>
 
 <?php if($x2=="arch") : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to display previous occupancy quickviews using the archive?</b>
+Como mostrar visões rápidas de uma ocupação anterior usando o arquivo?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click on a date in the calendar to display the occupancy quickview for that day.<br>
+ 	<b>Passo 1: </b>Clique em uma data do calendário para exibir a visão rápida de ocupação daquele dia.<br>
 	</ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to change the guide calendar's month?</b>
+Como mudar o mes do calendário guia?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>To display next month, click on the month's name on the upper RIGHT corner of the guide calendar.
-								Click as many times as needed until the desired month is displayed.<p>
- 	<b>Step 2: </b>To display previous month, click on the month's name on the upper LEFT corner of the guide calendar.
-								Click as many times as needed until the desired month is displayed.<br>
+ 	<b>Passo 1: </b>Para mostrar o próximo mes clique no nome do mes no canto superior DIREITO do calendário guia.
+								Clique quantas vezes for necessário até que o mes desejado seja mostrado.<p>
+ 	<b>Passo 2: </b>Para mostrar o mes anterior, clique no nome do mes no canto superior ESQUERDO do calendário guia.
+								Clique quantas vezes for necessário até que o mes desejado seja mostrado.<br>
 	</ul>
 	
 	<?php endif ?>

@@ -1,16 +1,20 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
-OR Documentation - 
+Documentação de OR - 
 <?php
 if($src=="create")
 {
 	switch($x1)
 	{
-	case "dummy": print "Create a new document";
+	case "dummy": print "Criar um novo documento";
 						break;
-	case "saveok": print  " - The document is saved";
+	case "saveok": print  " - O documento foi salvo";
 						break;
-	case "update": print "Update current document";
+	case "update": print "Atualiza o documento atual";
+						break;
+	case "search": print "Pesquise um paciente";
+						break;
+	case "paginate": print  "Lista de resultados da pesquisa";
 						break;
 	}
 }
@@ -18,88 +22,123 @@ if($src=="search")
 {
 	switch($x1)
 	{
-	case "dummy": print "Search for a document";
+	case "dummy": print "Pesquisa por um documento";
 						break;
-	case "": print "Search for a document";
+	case "": print "Pesquisa por um documento";
 						break;
-	case "match": print  "List of search results";
+	case "paginate": print  "Lista de resultados da pesquisa";
 						break;
-	case "select": print "Patient's document";
+	case "match": print  "Lista de resultados da pesquisa";
+						break;
+	case "select": print "Documento atual";
 	}
 }
 if($src=="arch")
 {
 	switch($x1)
 	{
-	case "dummy": print "Archive";
+	case "dummy": print "Arquivo";
 						break;
-	case "": print "Archive";
+	case "": print "Arquivo";
 						break;
-	case "?": print "Archive";
+	case "?": print "Arquivo";
 						break;
-	case "search": print  "List of archive search results";
+	case "search": print  "Lista dos resultados da pesquisa de arquivo";
 						break;
-	case "select": print "Patient's document";
+	case "select": print "Documento atual";
 	}
 }
  ?></b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
-<?php if($src=="create") : ?>
+<?php
 
-
-<?php if($x1=="saveok") : ?>
-
+if($src=="create") { 
+	
+	if($x1=='search'||$x1=='paginate'){
+?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to update or edit the current document?</b>
+Como selecionar um paciente a um documento?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the <input type="button" value="Update data"> button to switch to editing mode.<br>
-	</ul>
+ 	<b>Nota: </b> Clique no sobrenome do paciente ou no botão <img <?php echo createLDImgSrc('../','ok_small.gif','0') ?>>.<p> 
+</ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to start a new document?</b>
+Como iniciar uma nova pesquisa de paciente?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the <input type="button" value="Start a new document"> button.<br>
+ 	<b>Nota: </b> Clique no tab <img <?php echo createLDImgSrc('../','document-blue.gif','0') ?>> .<p> 
+</ul>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
+Como mudar o departamento?</b>
+</font>
+<ul>       	
+ 	<b>Nota: </b> Clique no link "Mude o departamento" na parte inferior esquerda da página.<p> 
+</ul>
+<?php
+	}
+
+	 if($x1=="saveok") { 
+?>
+
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
+Como atualizar ou editar o documento atual?</b>
+</font>
+<ul>       	
+ 	<b>Passo 1: </b>Clique no botão <input type="button" value="Atualizar dados"> para ir ao modo de edição.<br>
 	</ul>
-<b>Note</b>
-<ul> If you decide to close click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
+Como iniciar um novo documento?</b>
+</font>
+<ul>       	
+ 	<b>Passo 1: </b>Clique no botão <input type="button" value="Iniciar um novo documento">.<br>
+	</ul>
+<b>Nota</b>
+<ul> Se você decidir fechar clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
 
-<?php endif ?>
+<?php } ?>
 
-<?php if($x1=="update") : ?>
+<?php if($x1=="update") { ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to update or edit the current document?</b>
+Como atualizar ou editar o documento atual?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>When the current document has switched to the editing mode, you can edit the data.<br> 
- 	<b>Step 2: </b>To save the document, click the button <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> .<br> 
+ 	<b>Passo 1: </b>Quando o documento atual estiver em modo de edição, você pode editar os dados.<br> 
+ 	<b>Passo 2: </b>Para salvar o documento, clique no botão <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> .<br> 
 	</ul>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> 
+	
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
+Que dados são obrigatórios para o preenchimento?</b>
+</font>
 <ul>       	
- If you decide to close click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
+ 	<b>Nota: </b>Todos os campos vermelhos são obrigatórios.<br> 
+	</ul>
+	
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota:</b></font> 
+<ul>       	
+ Se você decidir fechar clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-<?php endif ?>
-<?php if($x1=="dummy") : ?>
+<?php } ?>
+<?php if($x1=="dummy") { ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to create a new document?</b>
+Como criar um novo documento?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Find  the patient first. Enter in the "<span style="background-color:yellow" > Matchcode Name <input type="text" name="m" size=20 maxlength=20> </span>" field either a
-		complete information or the first few letters of the patient's family name or given name.<br>
- 	<b>Step 2: </b>Click the button <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> to start searching for the patient.<p> 
+ 	<b>Passo 1: </b>Encontre o paciente primeiro. Entre no campo de pesquisa de entrada
+		ou com a informação completa ou algumas letras da informação do paciente como sobrenome ou nome.<br>
+ 	<b>Passo 2: </b>Clique no botão <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> para iniciar a pesquisa por paciente.<p> 
 <ul>       	
- 	<b>Note: </b>If the search finds one result, the patient's basic information will be  entered immediately in the corresponding fields.<p> 
- 	<b>Note: </b>If the search finds several  results,  a list will be displayed. Click on the patient's family name to select it for documentation.<p> 
+ 	<b>Nota: </b>Se a pesquisa encontrar um resultado, a informação básica do paciente será imediatamente colocada nos campos correspondentes.<p> 
+ 	<b>Nota: </b>Se a pesquisa encontrar vários resultados, uma lista será exibida. Clique no sobrenome do paciente para selecioná-la para documentação.<p> 
 	</ul>
- 	<b>Step 3: </b>When the patient's basic information is displayed, you can enter the additional information relevant to the 
-	operation in their correspondings fields.<br> 
- 	<b>Step 4: </b>To save the document, click the button <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> .<br> 
+ 	<b>Passo 3: </b>Quando a informação básica do paciente é exibida, você pode entrar com informação adicional relevante a 
+	operação nos seus campos correspondentes.<br> 
+ 	<b>Passo 4: </b>Para salvar o documento, clique no botão <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> .<br> 
 	</ul>
-	<?php endif ?>
-<?php endif ?>
+	<?php } ?>
+<?php } ?>
 
 
 
@@ -108,62 +147,74 @@ How to create a new document?</b>
 
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to search for a document of a particular patient?</b>
+Como pesquisar por um documento de um paciente em particular?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Enter in the "<span style="background-color:yellow" > Search keyword: eg. name or family name <input type="text" name="m" size=20 maxlength=20> </span>" field either a
-		complete information or the first few letters of the patient's family name or given name. <br>
- 	<b>Step 2: </b>Click the button <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> to start searching for the patient's document.<p> 
+ 	<b>Passo 1: </b>Entre no campo "<span style="background-color:yellow" > Palavra chave de pesquisa: por exemplo, nome ou sobrenome <input type="text" name="m" size=20 maxlength=20> </span>" ou
+		uma informação completa ou as primeiras poucas letras do sobrenome ou nome. <br>
+ 	<b>Passo 2: </b>Clique no botão <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> para iniciar a pesquisa para o documento do paciente.<p> 
 <ul>       	
- 	<b>Note: </b>If the search finds one result, the patient's document will be displayed immediately.<p> 
- 	<b>Note: </b>If the search finds several  results,  a list will be displayed. Click on the patient's family name, or the op date, or the op number to select it for documentation.<p> 
+<!--  	<b>Nota: </b>Se a pesquisa encontrar um resultado, o documento do paciente será imediatamente exibido.<p> 
+ --> 	<b>Nota: </b>Se a pesquisa encontrar vários resultados,  uma lista será exibida. Clique no sobrenome do paciente, ou na data da OP, ou no número da OP para selecioná-lo para documentação.<p> 
 	</ul>
 </ul>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota:</b></font> 
 <ul>       	
- If you decide to close click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
+ Se você decidir fechar clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
 	<?php endif ?>
-<?php if(($x1=="match")&&($x2>0)) : ?>
+<?php if(($x1=="match"||$x1=='paginate')&&($x2>0)) : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to select a particular document for display?</b>
+Como selecionar um documento em particular para exibição?</b>
 </font>
 <ul>       	
- 	<b>Note: </b> Click on the patient's family name, or the op date, or the op number to display its document.<p> 
+ 	<b>Nota: </b> Clique no sobrenome do paciente, ou data da OP, ou o número da OP para exibir seu documento.<p> 
 </ul>
+
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to continue searching?</b>
+Como ordenar a lista?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Enter in the "<span style="background-color:yellow" > Search keyword: eg. name or family name <input type="text" name="m" size=20 maxlength=20> </span>" field either a
-		complete information or the first few letters of the patient's family name or given name. <br>
- 	<b>Step 2: </b>Click the button <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> to start searching for the patient's document.<p> 
+ 	<b>Nota: </b> Clique no título da coluna por onde você quer ordenar a lista.<p> 
+	Por exemplo: Você quer ordenar a lista por sua data de operação:<p>
+	<blockquote>
+	<img src='../help/en/img/en_or_search_sort.png'>
+	</blockquote>
 </ul>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> 
+
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
+Como continuar pesquisando?</b>
+</font>
 <ul>       	
- If you decide to close click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
+ 	<b>Passo 1: </b>Entre no campo "<span style="background-color:yellow" > Palavra chave de pesquisa: por exemplo, nome ou sobrenome <input type="text" name="m" size=20 maxlength=20> </span>" ou com
+		uma informação completa ou as primeiras poucas letras do sobrenome ou nome. <br>
+ 	<b>Passo 2: </b>Clique no botão <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> para iniciar a pesquisa para o documento do paciente.<p> 
+</ul>
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota:</b></font> 
+<ul>       	
+ Se você decidir fechar clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
 	<?php endif ?>
 <?php if(($x1=="select")&&($x2==1)) : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to update or edit the current document?</b>
+Como atualizar ou editar o documento atual?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the <input type="button" value="Update data"> button to switch to editing mode.<br>
+ 	<b>Passo 1: </b>Clique no botão <img <?php echo createLDImgSrc('../','update_data.gif','0') ?>> para ir ao modo de edição.<br>
 	</ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to continue searching?</b>
+Como continuar pesquisando?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Enter in the "<span style="background-color:yellow" > Search keyword: eg. name or family name <input type="text" name="m" size=20 maxlength=20> </span>" field either a
-		complete information or the first few letters of the patient's family name or given name. <br>
- 	<b>Step 2: </b>Click the button <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> to start searching for the patient's document.<p> 
+ 	<b>Passo 1: </b>Entre no campo "<span style="background-color:yellow" > Palavra chave de pesquisa: por exemplo, nome ou sobrenome <input type="text" name="m" size=20 maxlength=20> </span>" ou com
+		uma informação completa ou as primeiras poucas letras do sobrenome ou nome. <br>
+ 	<b>Passo 2: </b>Clique no botão <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> para iniciar a pesquisa para o documento do paciente.<p> 
 </ul>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota:</b></font> 
 <ul>       	
- If you decide to close click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
+ Se você decidir fechar clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
 
 <?php endif ?>
@@ -171,135 +222,136 @@ How to continue searching?</b>
 
 <?php if($src=="arch") : ?>
 	<?php if(($x1=="dummy")||($x1=="?")||($x1=="")) : ?>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I want to list all  documents  of operations done on a certain date</b></font>
-<ul> <b>Step 1: </b>Enter the operation's date in the field "<span style="background-color:yellow" > Operation date: </span>". <br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Eu quero listar todos os documentos de operações efetuadas numa determinada data</b></font>
+<ul> <b>Passo 1: </b>Entre com a data de operação no campo "<span style="background-color:yellow" > Data da operação: </span>". <br>
 		<ul><font size=1 color="#000099">
-		<!-- <b>Tip:</b> Enter "T" or "t" to automatically produce today's date.<br>
-		<b>Tip:</b> Enter "Y" or "y" to automatically produce yesterday's date.<br> -->
+		<!-- <b>Dica:</b> Entre "T" ou "t" para gerar automaticamente a data de hoje.<br>
+		<b>Dica:</b> Entre "Y" ou "y" para gerar automaticamente a data de ontem.<br> -->
 		</font>
-		</ul><b>Step 2: </b>Leave all other fields blank or empty.<br>
-		<b>Step 3: </b>Click the button <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  to start the search.<br>
+		</ul><b>Passo 2: </b>Deixe todos os outros campos em branco ou vazios.<br>
+		<b>Passo 3: </b>Clique no botão <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  para iniciar a pesquisa.<br>
 </ul>
 
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I want to list all OR documents of a certain patient</b></font>
-<ul> <b>Step 1: </b>Enter the keyword in the corresponding field. It can be a full word or phrase or a few letters of a word from the patient's personal data. <br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Eu quero listar todos os documentos OR de um certo paciente</b></font>
+<ul> <b>Passo 1: </b>Entre a palavra chave no campo correspondente. Pode ser uma palavra completa ou frase ou umas poucas letras de uma palavra de dados pessoais de um paciente. <br>
 		<ul><font size=1 color="#000099" >
-		<b>Following fields can be filled with a keyword:</b>
-		<br> Patient nr.
-		<br> Family name
-		<br> Given name
-		<br> Birthdate
+		<b>Os seguintes campos podem ser preenchidos com uma palavra chave:</b>
+		<br> Número do paciente
+		<br> Sobrenome
+		<br> Nome
+		<br> Data de nascimento
 		</font>
-		</ul><b>Step 2: </b>Leave all other fields blank or empty.<br>
-		<b>Step 3: </b>Click the button <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  to start the search.<br>
+		</ul><b>Passo 2: </b>Deixe todos os outros campos em branco ou vazios.<br>
+		<b>Passo 3: </b>Clique no botão <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  para iniciar a pesquisa.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I want to list all OR documents done by a certain surgeon.</b></font>
-<ul> <b>Step 1: </b>Enter the surgeon's name in the field "<span style="background-color:yellow" > Surgeon: </span>". <br>
-		<b>Step 2: </b>Leave all other fields blank or empty.<br>
-		<b>Step 3: </b>Click the button <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  to start the search.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Eu quero listar todos os documentos OR feitos por um certo cirurgião.</b></font>
+<ul> <b>Passo 1: </b>Entre com o nome do cirurgião no campo "<span style="background-color:yellow" > Cirurgião: </span>". <br>
+		<b>Passo 2: </b>Deixe todos os outros campos em branco ou vazios.<br>
+		<b>Passo 3: </b>Clique no botão <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  para iniciar a pesquisa.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I want to list all OR documents of outpatients </b></font>
-<ul> <b>Step 1: </b>Click the radio button "<span style="background-color:yellow" >Outpatient <input type="radio" name="r" value="1"></span>". <br>
-		<b>Step 2: </b>Leave all other fields blank or empty.<br>
-		<b>Step 3: </b>Click the button <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  to start the search.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Eu quero listar todos os documentos OR dos pacientes externos </b></font>
+<ul> <b>Passo 1: </b>Clique no botão de radio "<span style="background-color:yellow" >Pacientes externos <input type="radio" name="r" value="1"></span>". <br>
+		<b>Passo 2: </b>Deixe todos os outros campos em branco ou vazios.<br>
+		<b>Passo 3: </b>Clique no botão <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  para iniciar a pesquisa.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I want to list all OR documents of inpatients </b></font>
-<ul> <b>Step 1: </b>Click the radio button "<span style="background-color:yellow" ><input type="radio" name="r" value="1">Inpatient</span>". <br>
-		<b>Step 2: </b>Leave all other fields blank or empty.<br>
-		<b>Step 3: </b>Click the button <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  to start the search.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Eu quero listar todos os documentos OR de pacientes internos. </b></font>
+<ul> <b>Passo 1: </b>Clique no botão de radio "<span style="background-color:yellow" ><input type="radio" name="r" value="1">Paciente interno</span>". <br>
+		<b>Passo 2: </b>Deixe todos os outros campos em branco ou vazios.<br>
+		<b>Passo 3: </b>Clique no botão <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  para iniciar a pesquisa.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I want to list all OR documents of generally insured patients </b></font>
-<ul> <b>Step 1: </b>Click the radio button "<span style="background-color:yellow" ><input type="radio" name="r" value="1">Insurance</span>". <br>
-		<b>Step 2: </b>Leave all other fields blank or empty.<br>
-		<b>Step 3: </b>Click the button <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  to start the search.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Eu quero listar todos os documentos OR de pacientes com seguro geral. </b></font>
+<ul> <b>Passo 1: </b>Clique no botão de radio "<span style="background-color:yellow" ><input type="radio" name="r" value="1">Seguro</span>". <br>
+		<b>Passo 2: </b>Deixe todos os outros campos em branco ou vazios.<br>
+		<b>Passo 3: </b>Clique no botão <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  para iniciar a pesquisa.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I want to list all OR documents of privately insured patients </b></font>
-<ul> <b>Step 1: </b>Click the radio button "<span style="background-color:yellow" ><input type="radio" name="r" value="1">Private</span>". <br>
-		<b>Step 2: </b>Leave all other fields blank or empty.<br>
-		<b>Step 3: </b>Click the button <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  to start the search.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Eu quero listar todos os documentos OR de pacientes com seguro privado </b></font>
+<ul> <b>Passo 1: </b>Clique no botão de radio "<span style="background-color:yellow" ><input type="radio" name="r" value="1">Privado</span>". <br>
+		<b>Passo 2: </b>Deixe todos os outros campos em branco ou vazios.<br>
+		<b>Passo 3: </b>Clique no botão <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  para iniciar a pesquisa.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I want to list all OR documents of self-paying patients </b></font>
-<ul> <b>Step 1: </b>Click the radio button "<span style="background-color:yellow" ><input type="radio" name="r" value="1">Self pay</span>". <br>
-		<b>Step 2: </b>Leave all other fields blank or empty.<br>
-		<b>Step 3: </b>Click the button <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  to start the search.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Eu quero listar todos os documentos OR de pacientes particulares </b></font>
+<ul> <b>Passo 1: </b>Clique no botão de radio "<span style="background-color:yellow" ><input type="radio" name="r" value="1">Particular</span>". <br>
+		<b>Passo 2: </b>Deixe todos os outros campos em branco ou vazios.<br>
+		<b>Passo 3: </b>Clique no botão <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  para iniciar a pesquisa.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I want to list all OR documents with a certain keyword</b></font>
-<ul> <b>Step 1: </b>Enter the keyword in the corresponding field. It can be a full word or phrase or  the first few letters of a word. <br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Eu quero listar todos os documentos OR com uma certa palavra chave</b></font>
+<ul> <b>Passo 1: </b>Entre a palavra chave no campo correspondente. Pode ser uma palavra completa ou frase ou umas poucas letras de uma palavra. <br>
 		<ul><font size=2 color="#000099" >
-		<b>Example:</b> For diagnostic keyword enter it in the "Diagnosis" field.<br>
-		<b>Example:</b> For localization keyword enter it in the "Localization" field.<br>
-		<b>Example:</b> For therapeutic keyword enter it in the "Therapy" field.<br>
-		<b>Example:</b> For special notice keyword enter it in the "Special notice" field.<br>
+		<b>Exemplo:</b> Para uma palavra chave de diagnóstico entre com ela no campo "Diagnóstico" .<br>
+		<b>Exemplo:</b> Para uma palavra chave de localização entre com ela no campo "Localização" .<br>
+		<b>Exemplo:</b> Para uma palavra chave de terapêutica entre com ela no campo "Terapia" .<br>
+		<b>Exemplo:</b> Para uma palavra chave de Observação especial entre com ela no campo "Observação especial" .<br>
 		</font>
-		</ul><b>Step 2: </b>Leave all other fields blank or empty.<br>
-		<b>Step 3: </b>Click the button <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  to start the search.<br>
+		</ul><b>Passo 2: </b>Deixe todos os outros campos em branco ou vazios.<br>
+		<b>Passo 3: </b>Clique no botão <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  para iniciar a pesquisa.<br>
 </ul>
 
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I want to list all documents with a certain classification of operation</b></font>
-<ul> <b>Step 1: </b>Enter the keyword in the corresponding field. It can be a full word or phrase or  the first few letters of a word. <br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Eu quero listar todos os documentos com uma certa classificação de operação</b></font>
+<ul> <b>Passo 1: </b>Entre a palavra chave no campo correspondente. Pode ser uma palavra completa ou frase ou umas poucas letras de uma palavra. <br>
 		<ul><font size=2 color="#000099" >
-		<b>Example:</b> For minor operation enter the number in the "<span style="background-color:yellow" > <input type="text" name="m" size=4 maxlength=2> minor </span>" field.<br>
-		<b>Example:</b> For middle operation enter the number in the "<span style="background-color:yellow" > <input type="text" name="m" size=4 maxlength=2> middle </span>" field.<br>
-		<b>Example:</b> For mafor operation enter the number in the "<span style="background-color:yellow" > <input type="text" name="m" size=4 maxlength=2> major </span>" field.<br>
+		<b>Exemplo:</b> Para operações pequenas entre o número no campo "<span style="background-color:yellow" > <input type="text" name="m" size=4 maxlength=2> pequenas </span>" .<br>
+		<b>Exemplo:</b> FPara operações médias entre o número no campo "<span style="background-color:yellow" > <input type="text" name="m" size=4 maxlength=2> médias </span>" .<br>
+		<b>Exemplo:</b> Para operações grandes entre o número no campo "<span style="background-color:yellow" > <input type="text" name="m" size=4 maxlength=2> grandes </span>" .<br>
 		</font>
-		</ul><b>Step 2: </b>Leave all other fields blank or empty.<br>
-		<b>Step 3: </b>Click the button <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  to start the search.<br>
+		</ul><b>Passo 2: </b>Deixe todos os outros campos em branco ou vazios.<br>
+		<b>Passo 3: </b>Clique no botão <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  para iniciar a pesquisa.<br>
 </ul>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>><b><font color="#990000"> Note:</font></b>
-<ul> You can combine several search conditions. For example: If you want to list all inpatients who were operated by the surgeon "Smith" 
-		and who have the therapy containing a word which starts with "lipo":<p>
-		<b>Step 1: </b>Enter "Smitn" in the field "<span style="background-color:yellow" > Surgeon: <input type="text" name="s" size=15 maxlength=4 value="Smith"> </span>".<br>
-		<b>Step 2: </b>Click the radio button "<span style="background-color:yellow" > <input type="radio" name="r" value="1" checked>Inpatient </span>".<br>
-		<b>Step 3: </b>Enter "lipo" in the field "<span style="background-color:yellow" > Therapy: <input type="text" name="s" size=20 maxlength=4 value="lipo"> </span>". <br>
-		<b>Step 4: </b>Click the button <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  to start the search.<p>
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>><b><font color="#990000"> Nota:</font></b>
+<ul> Você pode combinar várias condições de pesquisa. Por exemplo: Se você quiser listar todos os pacientes internos que foram operados pelo cirurgião "Smith" 
+		e que tem na terapia uma palavra começando com "lipo":<p>
+		<b>Passo 1: </b>Entre "Smith" no campo "<span style="background-color:yellow" > Cirurgião: <input type="text" name="s" size=15 maxlength=4 value="Smith"> </span>".<br>
+		<b>Passo 2: </b>Clique no botão de radio "<span style="background-color:yellow" > <input type="radio" name="r" value="1" verificado>Pcientes internos </span>".<br>
+		<b>Passo 3: </b>Entre "lipo" no campo "<span style="background-color:yellow" > Terapia: <input type="text" name="s" size=20 maxlength=4 value="lipo"> </span>". <br>
+		<b>Passo 4: </b>Clique no botão <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  para iniciar a pesquisa.<p>
 
-<b>Note</b><br>
-If the search finds a single result, the complete document will be displayed immediately.<br>
-		However, if the search finds several results, a list will be displayed.<p>
-		To open the document for the patient you are looking for, click either the button <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> corresponding to it, or
-		the given name, or the family name, or the or date, or the op number <nobr>(op nr)</nobr>.
+<b>Nota</b><br>
+Se a pesquisa encontrar um resultado único, o documento completo será exibido imediatamente.<br>
+		Entretanto, se a pesquisa retornar vários resultados, uma lista será mostrada.<p>
+		Para abrir o documento do paciente que você está procurando, clique ou no botão <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> correspondente a ele, ou
+		no nome, sobrenome ou a data ou número da operação <nobr>(no.op)</nobr>.
 </ul>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota:</b></font> 
 <ul>       	
- If you decide to close click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
+ Se você decidir fechar clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
 	<?php endif ?>
-<?php if(($x1=="search")&&($x2>0)) : ?>
+<?php if(($x1=="search")&&($x2>1)) : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to select a particular archived document for display?</b>
+Como selecionar um documento particular arquivado para exibição?</b>
 </font>
 <ul>       	
- 	<b>Note: </b> Click on the patient's family name,  or given name, or the op date, or the op number to display the archived document.<p> 
+ 	<b>Nota: </b> Clique no sobrenome do paciente, ou data da op, ou o número da OP para exibir seu documento arquivado.<p> 
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to continue searching in the archives?</b>
+Como continuar pesquisando arquivos?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the button <input type="button" value="New archive research"> to go back to archive's search entry fields.<p> 
+ 	<b>Passo 1: </b>Clique no botão <input type="button" value="Nova pesquisa em arquivo"> para voltar aos campos de entrada de pesquisa de arquivo.<p> 
 </ul>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota:</b></font> 
 <ul>       	
- If you decide to close click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
+ Se você decidir fechar clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
 	<?php endif ?>
 <?php if(($x1=="select")&&($x2==1)) : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to update or edit the displayed archived document?</b>
+Como atualizar ou editar o documento arquivado em exibição?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the <input type="button" value="Update data"> button to switch to editing mode.<br>
+ 	<b>Passo 1: </b>Clique no botão <input type="button" value="Atualizar dados"> para ir ao modo de edição.<br>
 	</ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to continue searching in the archives?</b>
+Como continuar pesquisando nos arquivos?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the button <input type="button" value="New archive research"> to go back to archive's search entry fields.<p> 
+ 	<b>Método 1: </b>Clique no botão <input type="button" value="Nova pesquisa em arquivo"> para voltar aos campos de entrada de pesquisa de arquivo.<p> 
+ 	<b>Método 2: </b>Clique no botão <img <?php echo createLDImgSrc('../','arch-blu.gif','0','absmiddle') ?>> para voltar aos campos de entrada de pesquisa de arquivo.<p> 
 </ul>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota:</b></font> 
 <ul>       	
- If you decide to close click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
+ Se você decidir fechar clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
 
 <?php endif ?>

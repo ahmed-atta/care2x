@@ -88,15 +88,15 @@ How to register?</b>
 How to open a mail?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click either the mail's recipient or sender, or subject, or date, or the icons <img src="../img/c-mail.gif" border=0 align="absmiddle"> or <img src="../img/o-mail.gif" border=0 align="absmiddle">.<br>
+ 	<b>Step 1: </b>Click either the mail's recipient or sender, or subject, or date, or the icons <img <?php echo createComIcon('../','c-mail.gif','0') ?>> or <img <?php echo createComIcon('../','o-mail.gif','0') ?>>.<br>
 </ul>
 
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-What do the icons <img src="../img/c-mail.gif" border=0 align="absmiddle"> and <img src="../img/o-mail.gif" border=0 align="absmiddle"> mean?</b>
+What do the icons <img <?php echo createComIcon('../','c-mail.gif','0') ?>> and <img <?php echo createComIcon('../','o-mail.gif','0') ?>> mean?</b>
 </font>
 <ul>       	
- 	<img src="../img/c-mail.gif" border=0 align="absmiddle"> = Mail is not yet read or opened. <br>
- 	<img src="../img/o-mail.gif" border=0 align="absmiddle"> = Mail was already  read or opened. <br>
+ 	<img <?php echo createComIcon('../','c-mail.gif','0') ?>> = Mail is not yet read or opened. <br>
+ 	<img <?php echo createComIcon('../','o-mail.gif','0') ?>> = Mail was already  read or opened. <br>
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to delete a mail?</b>
@@ -150,11 +150,11 @@ How to use email addresses from my address book directly?</b>
 		Click "BCC<input type="radio" name="t" value="a">" to copy the address to the "BCC" field.<p>
 </ul>
         <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <b>Note:</b>  If you want to
-		reset a radiobutton, click the corresponding <img src="../img/redpfeil.gif" border=0> icon.<br> 	
+		reset a radiobutton, click the corresponding <img <?php echo createComIcon('../','redpfeil.gif','0') ?>> icon.<br> 	
         <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <b>Note:</b> You can select several addresses
 		at the same time. 	<p>
  	<b>Step 4: </b>Click the <input type="button" value="Take over"> button to copy the selected addresses to the mail being composed.<br>
- 	<b>Step 5: </b>Click the "<span style="background-color:yellow" > <img src="../img/l_arrowGrnSm.gif" border=0> Close </span>"
+ 	<b>Step 5: </b>Click the "<span style="background-color:yellow" > <img <?php echo createComIcon('../','l_arrowgrnsm.gif','0') ?>> Close </span>"
 	 link to close the pop-up window.<br>
 </ul>
 		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -183,7 +183,7 @@ How to compose or write a new mail?</b>
 How to print the mail?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the link "<span style="background-color:yellow" > Printer version <img src="../img/bul_arrowGrnSm.gif" border=0></span>".<br>
+ 	<b>Step 1: </b>Click the link "<span style="background-color:yellow" > Printer version <img <?php echo createComIcon('../','bul_arrowgrnsm.gif','0') ?>></span>".<br>
  	<b>Step 2: </b>A window will pop up displaying a printer friendly version of the mail.<br>
  	<b>Step 3: </b>Click the option "<span style="background-color:yellow" > < Print > </span>" to print.<br>
  	<b>Step 4: </b>The Windows© printer menu will pop up. Click the button "OK".<br>

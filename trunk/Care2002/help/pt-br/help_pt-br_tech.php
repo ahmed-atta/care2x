@@ -12,18 +12,18 @@
 <b>
 
 <?php
-print "Technical support - ";	
+print "Suporte técnico - ";	
 switch($src)
 	{
-		case "request": print "Request for repair service";
+		case "request": print "Requisição para serviço de reparo";
 							break;
-		case "report": print "Report done repair service";
+		case "report": print "Relatar serviços de reparo concluídos";
 							break;
-		case "queries": print "Send inquiry or question";
+		case "queries": print "Enviar uma pergunta ou dúvida";
 							break;
-		case "arch": print "Research in the archives";
+		case "arch": print "Pesquisar nos arquivos";
 							break;
-		case "showarch": print "Report";
+		case "showarch": print "Relatório";
 							break;
 	}
 ?>
@@ -34,122 +34,122 @@ switch($src)
 <?php if($src=="request") : ?>
 <p>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to send a request for repair service?</b></font>
-<ul> <b>Step 1: </b>Enter the localization of the damage in the 
-<nobr>"<span style="background-color:yellow" > Localization of the damage <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> field.<p>
-<b>Step 2: </b>Enter your name in the <nobr>"<span style="background-color:yellow" > Requested by: <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> field.<br>
- <b>Step 3: </b>Enter your personnel number in the <nobr>"<span style="background-color:yellow" > Personnel nr.: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> field.<br>
- <b>Step 4: </b>Enter your telephone number in the <nobr>"<span style="background-color:yellow" > Telephone nr. <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> field in case the technical support department has inquiries regarding your request.<p>
- <b>Step 5: </b>Type the description of the damage in the <nobr>"<span style="background-color:yellow" > Please describe the nature of the damage: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> field.<br>
- <b>Step 6: </b>Click the <input type="button" value="Send"> button to send your request. <br>
+Como enviar uma requisição para um serviço de reparo ?</b></font>
+<ul> <b>Passo 1: </b>Informe a localização do dano na  
+<nobr>"<span style="background-color:yellow" > Campo de localização do dano <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> .<p>
+<b>Passo 2: </b>Informe o seu nome no campo <nobr>"<span style="background-color:yellow" > Solicitado por: <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> .<br>
+ <b>Passo 3: </b>Informe seu número pessoal no campo <nobr>"<span style="background-color:yellow" > Num. Pessoal: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> .<br>
+ <b>Passo 4: </b>Informe o seu número de telefone no campo <nobr>"<span style="background-color:yellow" > Num. Telefone: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> caso o departamento de suporte técnico ter alguma dúvida sobre sua requisição.<p>
+ <b>Passo 5: </b>Digite a descrição do dano no campo <nobr>"<span style="background-color:yellow" > Descreva a natureza do dano: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> .<br>
+ <b>Passo 6: </b>Clique no botão <img <?php echo createLDImgSrc('../','abschic.gif','0') ?>> para enviar sua requisição. <br>
 </ul>
-<b>Note</b>
-<ul> If you decide to close the request form click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
+<b>Nota</b>
+<ul> Se você decidir fechar o formulário de requisição, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
 <?php endif ?>
 <?php if($src=="report") : ?>
 <p>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to report a done repair service?</b></font>
-<ul> <b>Step 1: </b>Enter the localization of the damage in the 
-<nobr>"<span style="background-color:yellow" > Localization of the damage <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> field.<p>
-<b>Step 2: </b>Enter the job id number in the <nobr>"<span style="background-color:yellow" > Job ID nr.: <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> field.<br>
-<b>Step 3: </b>Enter your name in the <nobr>"<span style="background-color:yellow" > Technician: <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> field.<br>
- <b>Step 4: </b>Enter your personnel number in the <nobr>"<span style="background-color:yellow" > Personnel nr.: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> field.<br>
- <b>Step 5: </b>Type the description of the repair job you have done in the <nobr>"<span style="background-color:yellow" > Please describe the repair job you have done: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> field.<br>
- <b>Step 6: </b>Click the <input type="button" value="Send report"> button to send your report. <br>
+Como relatar um serviço de reparo concluído?</b></font>
+<ul> <b>Passo 1: </b>Insira a localização do dano no  campo
+<nobr>"<span style="background-color:yellow" > Localização do dano <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> .<p>
+<b>Passo 2: </b>Insira o número do serviço no campo <nobr>"<span style="background-color:yellow" > Num. do Serviço: <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> .<br>
+<b>Passo 3: </b>Insira seu nome no campo <nobr>"<span style="background-color:yellow" > Técnico: <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> .<br>
+ <b>Passo 4: </b>Insira seu número pessoal no campo <nobr>"<span style="background-color:yellow" > Núm. pessoal: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> .<br>
+ <b>Passo 5: </b>Digite a descrição do serviço de reparo realizado no campo <nobr>"<span style="background-color:yellow" > Por favor descreva o serviço de reparo realizado por você: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> .<br>
+ <b>Passo 6: </b>Clique no botão <input type="button" value="Enviar Relatório"> para enviar seu relatório. <br>
 </ul>
-<b>Note</b>
-<ul> If you decide to close the request form click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
+<b>Nota</b>
+<ul> Se você decidir fechar o formulário de requisição, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
 <?php endif ?>
 <?php if($src=="queries") : ?>
 <p>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to send an inquiry or question to the technical support department?</b></font>
-<ul> <b>Step 1: </b>Type your inquiry or question in the <nobr>"<span style="background-color:yellow" > Please type your question: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> field.<br>
-<b>Step 2: </b>Enter your name in the <nobr>"<span style="background-color:yellow" > Name: <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> field.<br>
- <b>Step 3: </b>Enter your department in the <nobr>"<span style="background-color:yellow" > Department: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> field.<br>
- <b>Step 4: </b>Click the <input type="button" value="Send inquiry"> button to send your inquiry. <br>
+Como enviar uma dúvida ou questão para o departamento de suporte técnico? </b></font>
+<ul> <b>Passo 1: </b>Digite sua dúvida ou questão no campo <nobr>"<span style="background-color:yellow" > Digite sua questão: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> .<br>
+<b>Passo 2: </b>Insira seu nome no campo <nobr>"<span style="background-color:yellow" > Nome: <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> .<br>
+ <b>Passo 3: </b>Insira seu departamento no campo <nobr>"<span style="background-color:yellow" > Departmento: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> .<br>
+ <b>Passo 4: </b>Clique no botão <input type="botão" value="Send inquiry"> para enviar sua dúvida. <br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to see my previous inquries and the technical department's replies to them?</b></font>
-<ul> <b>Step 1: </b>You have to log in first. Type your name in the <nobr>"<span style="background-color:yellow" > from: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> field on the upper right corner.<br>
- <b>Step 2: </b>Click the <input type="button" value="Log in">. <br>
- <b>Step 3: </b>If you have sent inquiries previously, they will be listed in short form.  <br>
- <b>Step 4: </b>If your inquiry is answered by the technical department, the symbol <img src="../img/warn.gif" border=0 width=16 height=16 align="absmiddle"> will
- appear at the end. <br>
- <b>Step 5: </b>To read your inquiry and the technical department's reply to it, click on it. <br>
+Como ver minhas dúvidas anteriores e as respostas do departamento técnico ? </b></font>
+<ul> <b>Passo 1: </b>Primeiro você deve logar-se. Digite seu nome no campo <nobr>"<span style="background-color:yellow" > from: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> no canto direito superior.<br>
+ <b>Passo 2: </b>Clique no <input type="button" value="Login">. <br>
+ <b>Passo 3: </b>Se você possui dúvidas anteriores, elas estarão listadas de forma resumida.  <br>
+ <b>Passo 4: </b>Se sua dúvida for respondida pelo departamento técnico, o símbolo <img src="../img/warn.gif" border=0 width=16 height=16 align="absmiddle"> irá
+ ser exibido no final. <br>
+ <b>Passo 5: </b>Para ler sua dúvida e a resposta do departamento técnico, clique sobre ela. <br>
 </ul>
-<b>Note</b>
-<ul> If you decide to close the inquriy form click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
+<b>Nota</b>
+<ul> Se você decidir fechar o formulário de dúvida clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
 <?php endif ?>
 <?php if($src=="arch") : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to read technical reports?</b></font>
+Como ler relatórios técnicos?</b></font>
 <ul> 
-		<b>Note: </b>Technical reports which have not been read or printed yet are listed immediately.<p>
-<b>Step 1: </b>Click on the button <img src="../img/upArrowGrnLrg.gif" border=0 width=16 height=16 align="absmiddle">  of the report that you wish to open. <br>
+		<b>Nota: </b>Os relatórios técnicos que ainda não foram lidos ou impressos são listados imediatamente.<p>
+<b>Passo 1: </b>Clique no botão <img src="../img/upArrowGrnLrg.gif" border=0 width=16 height=16 align="absmiddle">  do relatório que você deseja abrir. <br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to search for particular technical reports?</b></font>
-<ul> <b>Step 1: </b>Enter either a complete information or the first few letters in the corresponding fields as explained in the following.<br>
+Como pesquisar um relatório técnico específico?</b></font>
+<ul> <b>Passo 1: </b>Insira uma informação completa ou as primeiras letras dos campos correspondentes como explicado a seguir.<br>
 	<ul type=disc> 
-	<li>If you want to find reports written by a particular technician, enter the technician's name in the "<span style="background-color:yellow" > Technician: <input type="text" name="t" size=11 maxlength=4 value="Name"> </span>" field.<br>
-	<li>If you want to find reports of jobs done in a particular department, enter the department's name in the "<span style="background-color:yellow" > Department: <input type="text" name="t" size=11 maxlength=4 value="Name"> </span>" field.<br>
-	<li>If you want to find reports written on a particular date, enter the date in the "<span style="background-color:yellow" > Date from: <input type="text" name="t" size=11 maxlength=4 value="Name"> </span>" field.<br>
-	<li>If you want to find all reports within a time period, enter the start date in the "<span style="background-color:yellow" > Date from: <input type="text" name="t" size=11 maxlength=4 value="Name"> </span>" field and
-	enter the end date in the "<span style="background-color:yellow" > to: <input type="text" name="t" size=11 maxlength=4 value="Name"> </span>" field.<br>
+	<li>Se você deseja encontrar relatórios escritos por um técnico em particular, insira o nome do técnico no campo "<span style="background-color:yellow" > Técnico: <input type="text" name="t" size=11 maxlength=4 value="Name"> </span>" .<br>
+	<li>Se você deseja encontrar relatórios de trabalhos feitos em um departamento específico, insira o nome do departamento no campo "<span style="background-color:yellow" > Department: <input type="text" name="t" size=11 maxlength=4 value="Name"> </span>" .<br>
+	<li>Se você deseja encontrar relatórios escritos em uma data particular, insira a data no campo "<span style="background-color:yellow" > Date from: <input type="text" name="t" size=11 maxlength=4 value="Name"> </span>" .<br>
+	<li>Se você deseja encontrar todos os relatórios de um período de tempo, insira a data de início no campo "<span style="background-color:yellow" > De: <input type="text" name="t" size=11 maxlength=4 value="Name"> </span>" e
+	entre com a data de fim no campo "<span style="background-color:yellow" > to: <input type="text" name="t" size=11 maxlength=4 value="Name"> </span>" .<br>
 	</ul>
- <b>Step 2: </b>Click the <input type="button" value="Search"> button to start searching. <br>
-<b>Step 3: </b>The results will be listed. Click on the icon <img src="../img/upArrowGrnLrg.gif" border=0 width=16 height=16 align="absmiddle">  of the report that you wish to open. <br>
-	<b>Note: </b>Technical reports which are marked with <img src="../img/check-r.gif" border=0  align="absmiddle"> have been read or printed already.<p>
+ <b>Passo 2: </b>Clique no botão <input type="button" value="Search"> para iniciar a pesquisa. <br>
+<b>Passo 3: </b>Os resultados serão listados. Clique no ícone <img src="../img/upArrowGrnLrg.gif" border=0 width=16 height=16 align="absmiddle">  do relatório que você desejar abrir. <br>
+	<b>Nota: </b>Relatórios tecnicos que são marcados com <img src="../img/check-r.gif" border=0  align="absmiddle"> já foram lidos ou impressos.<p>
 
 </ul>
 </font>
 <?php endif ?>
 <?php if($src=="showarch") : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
-Marking the report as read.</b></font>
-<ul> <b>Step 1: </b>Click the button <input type="button" value="Mark as 'Read'">.<p>
-	<b>Note: </b>When the report has been marked as read, it will not be listed immediately at every start of archive search. They can only be found again
-	through the usual archive search methods.<p>
+Marcando o relatório como lido.</b></font>
+<ul> <b>Passo 1: </b>Clique no botão <input type="button" value="Marcar como 'Lido'">.<p>
+	<b>Nota: </b>Quando o relatório for marcado como lido, ele não será listado imediatamente a cada início de pesquisa de arquivo. Eles podem somente ser encotrados novamente 
+	através dos métodos usuais de pesquisa em arquivos.<p>
 </ul>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
-Printing the report.</b></font>
-<ul> <b>Step 1: </b>Click the button <input type="button" value="Print">.<p>
+Imprimindo o relatório.</b></font>
+<ul> <b>Passo 1: </b>Clique no botão <input type="button" value="Imprimir">.<p>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to go back to the start of archive search?</b></font>
-<ul> <b>Step 1: </b>Click the button <input type="button" value="<< Go back">.<p>
+Como voltar ao início da pesquisa de arquivos?</b></font>
+<ul> <b>Passo 1: </b>Clique no botão <input type="button" value="<< Voltar">.<p>
 </ul>
 <?php endif ?>
 <?php if($src=="dutydoc") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to document a work done during duty hours?</b></font>
-<ul> <b>Step 1: </b>Enter the date in the " Date <input type="text" name="d" size=10 maxlength=10> " field.<p>
-	<ul> <b>Tip: </b>Enter either "t" or "T" (meaning TODAY) to automatically enter today's date.<br>
-		<b>Tip: </b>Enter either "y" or "Y" (meaning YESTERDAY) to automatically enter yesterday's date.<p>
+Como documentar um trabalho feito durante horas de serviço ?</b></font>
+<ul> <b>Passo 1: </b>Insira a data no campo " Date <input type="text" name="d" size=10 maxlength=10> " .<p>
+	<ul> <b>Dica: </b>Digite "t" ou "T" (significando HOJE) para inserir a data de hoje automaticamente.<br>
+		<b>Tip: </b>Digite "y" ou "Y" (significando ONTEM) para inserir a data de ontem automaticamente.<p>
 		</ul>
-		<b>Step 2: </b>Enter the name of the nurse on duty in the <nobr>"<span style="background-color:yellow" > Family name, given name <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> field.<br>
- <b>Step 3: </b>Enter the work's start time in the "<span style="background-color:yellow" > from <input type="text" name="d" size=5 maxlength=5> </span>" field.<br>
- <b>Step 4: </b>Enter the work's end time in the "<span style="background-color:yellow" > to <input type="text" name="d" size=5 maxlength=5> </span>" field.<p>
-	<ul> <b>Tip: </b>Enter either "n" or "N" (meaning NOW) to automatically enter the current time.<p>
+		<b>Passo 2: </b>Insira o nome da enfermeira em serviço no campo  <nobr>"<span style="background-color:yellow" > Sobrenome, Nome <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> .<br>
+ <b>Passo 3: </b>Insira a hora de início do serviço no campo "<span style="background-color:yellow" > de <input type="text" name="d" size=5 maxlength=5> </span>" .<br>
+ <b>Passo 4: </b>Insira a hora de fim do serviço no campo "<span style="background-color:yellow" > até <input type="text" name="d" size=5 maxlength=5> </span>" .<p>
+	<ul> <b>Dica: </b>Insira "n" or "N" (significando AGORA) para inserir a hora atual imediatamente.<p>
 		</ul>
- <b>Step 5: </b>Enter the OR number in the "<span style="background-color:yellow" > OP Room <input type="text" name="d" size=5 maxlength=5> </span>" field.<br>
- <b>Step 6: </b>Enter the diagnosis, therapy, or operation in the <nobr>"<span style="background-color:yellow" > Diagnosis/Therapy <input type="text" name="d" size=5 maxlength=5> </span>"</nobr> field.<br>
- <b>Step 7: </b>Enter the standby nurse's name in the <nobr>"<span style="background-color:yellow" > Standby: <input type="text" name="d" size=5 maxlength=5> </span>"</nobr> field.<br>
- <b>Step 8: </b>Enter the on-call nurse's name in the <nobr>"<span style="background-color:yellow" > On call: <input type="text" name="d" size=5 maxlength=5> </span>"</nobr> field if necessary.<br>
- <b>Step 1: </b>Click the <input type="button" value="Save"> button to save the document. <br>
+ <b>Passo 5: </b>Insira o número de OR no campo "<span style="background-color:yellow" > Sala OP <input type="text" name="d" size=5 maxlength=5> </span>" .<br>
+ <b>Passo 6: </b>Insira o diagnóstico, terapia, ou operação no campo <nobr>"<span style="background-color:yellow" > Diagnóstico/Terapia <input type="text" name="d" size=5 maxlength=5> </span>"</nobr> .<br>
+ <b>Passo 7: </b>Insira o nome do enfermeiro de plantão no campo<nobr>"<span style="background-color:yellow" > Plantão: <input type="text" name="d" size=5 maxlength=5> </span>"</nobr> .<br>
+ <b>Passo 8: </b>Insira o nome do enfermeiro de chamada no campo <nobr>"<span style="background-color:yellow" > De chamada: <input type="text" name="d" size=5 maxlength=5> </span>"</nobr> se necessário.<br>
+ <b>Passo 9: </b>Clique no botão <input type="button" value="Salvar"> para salvar o documento. <br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>How to print out the document list?</b></font>
-<ul> <b>Step 1: </b>Click the <input type="button" value="Print"> button and the print window will pop up.<br>
-	<b>Step 2: </b>Follow the instructions in the print window.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Como imprimir a lista de documentos?</b></font>
+<ul> <b>Passo 1: </b>Clique no botão <input type="button" value="Imprimir"> e a janela de impressão irá aparecer.<br>
+	<b>Passo 2: </b>Siga as instruções da janela de impressão.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I have saved the document and wish to close it, what should I do? </b></font>
-<ul> <b>Step 1: </b>If you are finished, click the <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> button. <br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>EU salvei o documento e gostaria de fechá-lo, o que devo fazer? </b></font>
+<ul> <b>Passo 1: </b>Se você terminou, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> . <br>
 </ul>
 <?php endif ?>
 
