@@ -1,4 +1,5 @@
-<?
+<?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /*
 CARE 2002 Integrated Information System for Hospitals and Health Care Organizations and Services
 Copyright (C) 2002  Elpidio Latorilla
@@ -28,8 +29,6 @@ This notice also applies to other scripts which are integral to the functioning 
 A copy of this notice is also available as file named copy_notice.txt under the top level directory.
 */
 
-//if(!$lang&&$mode!="viish") { header ("location:start.php"); exit; }
-
 function configNew(&$bn,&$bv,&$f,$i,&$uid)
 {
 		global $HTTP_USER_AGENT;
@@ -41,12 +40,12 @@ function configNew(&$bn,&$bv,&$f,$i,&$uid)
 	
 		for($j=(sizeof($bbuff)-1);$j>=0;$j--)
 		{
-			if(($bbuff[$j]=="opera")||($bbuff[$j]=="msie"))
+			//if(($bbuff[$j]=="opera")||($bbuff[$j]=="msie")||($bbuff[$j]=="mozilla"))
+			if(stristr($bbuff[$j],"opera")||stristr($bbuff[$j],"msie")||stristr($bbuff[$j],"mozilla"))
 				{
 					$bn=$bbuff[$j]; $bv=$bbuff[$j+1];break;
 				}
 		}
-
 		if ($bn=="")
 		{
 			$bn="netscape";
@@ -58,17 +57,26 @@ function configNew(&$bn,&$bv,&$f,$i,&$uid)
 		$f="CFG".$uid.".cfg";
 }	
 
-if(!$egal)
-{
-	$usid=uniqid("");
-	setcookie(ck_sid,$usid);
-	$ck_sid=$usid;
-	mt_srand(time()*10);
-	include("counter/count.php");	
-}
+/**
+* Create simple session id (sid), save a encrpyted  sid to a cookie with a dynamic name 
+* consisting of concatenating "ck_sid" and the sid itself.
+* For more information about the encryption class, see the proper docs of the pear's "hcemd5.php" class.
+*/
+$sid=uniqid("");
+$ck_sid_buffer="ck_sid".$sid;
+define("FROM_ROOT",1);
+include("include/inc_init_crypt.php"); // initialize crypt
+$ciphersid=$enc_hcemd5->encodeMimeSelfRand($sid);
+setcookie($ck_sid_buffer,$ciphersid);
+$HTTP_COOKIE_VARS[$ck_sid_buffer]=$ciphersid;
+/**
+* simple counter, counts all hits including revisits
+*/
+include("counter/count.php");	
 
-if($boot||(!$ck_config)) configNew($bname,$bversion,$filename,$ip,$cfgid);
-else $filename=$ck_config;
+
+if((isset($boot)&&$boot)||!isset($HTTP_COOKIE_VARS['ck_config'])||empty($HTTP_COOKIE_VARS['ck_config'])) configNew($bname,$bversion,$filename,$ip,$cfgid);
+else $filename=$HTTP_COOKIE_VARS['ck_config'];
 
 // ********************
 // Get init color values
@@ -76,35 +84,52 @@ else $filename=$ck_config;
 $path="userconfig/".$filename;
 if(file_exists($path))	$cfg=get_meta_tags($path);
 	else $cfg=get_meta_tags("userconfig/default/default.cfg");
-	
-if($lang) $savelang=1;
+
+/**
+* We get the language code
+*/
+$savelang=0;
+if(isset($lang)&&$lang) $savelang=1;
 	 else
 		{
 		 	if($cfg[lang]) $lang=$cfg[lang];
 			else  include("chklang.php");
 		}
-		 
-setcookie(ck_language,$lang);
-$ck_language=$lang;
-require("language/".$lang."/lang_".$lang."_startframe.php");
-	
-if($mask||!file_exists($path)||$savelang)
+$lang_file="language/".$lang."/lang_".$lang."_startframe.php";
+/**
+* We check if language table exists, if not english is used
+*/
+if(file_exists($lang_file))
+   {
+   	    include($lang_file);
+    }
+	 else  
+	 {
+	    include("language/en/lang_en_startframe.php");  // en = english is the default language table
+	    $lang="en";
+    }
+$ck_lang_buffer="ck_lang".$sid;
+setcookie($ck_lang_buffer,$lang);
+
+$HTTP_COOKIE_VARS[$ck_lang_buffer]=$lang;
+	 
+if((isset($mask)&&$mask)||!file_exists($path)||$savelang)
 {
 		if(!file_exists($path))
 		{
 			configNew($bname,$bversion,$filename,$ip,$cfgid);
 			$cfg['bname']=$bname;
 			$cfg['bversion']=$bversion;
-			$cfg[cid]=$cfgid;
+			$cfg['cid']=$cfgid;
 		}
 		$path="userconfig/".$filename;
 		// *****************************
 		//save browser info to array
 		// *****************************
 		$cfg[ip]=$REMOTE_ADDR;
-		if($mask) $cfg[mask]=$mask; 
-		 $cfg[lang]=$lang;		
-		if(((($bname=="msie")||($bname=="opera"))&&($bversion>4))||(($bname=="netscape")&&($bversion>3.5))) $cfg['dhtml']=1; 
+		if($mask) $cfg['mask']=$mask; 
+		 $cfg['lang']=$lang;		
+		if(((($bname=="msie")||($bname=="opera"))&&($bversion>4))||(($bname=="netscape")&&($bversion>3.5))||($bname=="mozilla")) $cfg['dhtml']=1; 
 		// *****************************
 		// Save to config file
 		// *****************************
@@ -120,26 +145,11 @@ if($mask||!file_exists($path)||$savelang)
 		setcookie(ck_config,$filename,time()+(3600*24*365)); // expires after 1 year
 }	
 
-/*if(!$egal)
-{
-	if(($cfg[bname]!="msie")||($cfg[bversion]<5)) 
-	{
-		header("location:browser.php?lang=$lang&b=$cfg[bname]&v=$cfg[bversion]");
-		exit;
-	}
-
-}
-else*/
-if(!$ck_sid) 
-{
-		header("location:cookies.php?lang=$lang");
-		exit;
-}
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
- <TITLE><?=$LDMainTitle ?></TITLE>
+ <TITLE><?php echo $LDMainTitle ?></TITLE>
 
  <!-- <TITLE>CARE 2002 Integrated Hospital Information System</TITLE> -->
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
@@ -147,32 +157,32 @@ if(!$ck_sid)
 <meta name="Author" content="Elpidio Latorilla">
 <meta name="Generator" content="AceHTML 4 Freeware">
 </HEAD>
-<?
+<?php
 if($cfg[mask]==2)
 {
 ?>
 <frameset rows="25,*" border=0>
   <frameset cols="9%,*" border=0>
-    <frame name="STARTPAGE" src="main/indexframe.php?boot=1&lang=<?="$lang&egal=$egal&cookie=$cookie" ?>&mask=2">
+    <frame name="STARTPAGE" src="main/indexframe.php?boot=1&lang=<?php echo "$lang&egal=$egal&cookie=$cookie&sid=$sid" ?>&mask=2">
     <frame name="MENUBAR" src="main/menubar2.php" scrolling=no>
   </frameset>
   <frame name="CONTENTS" src="">
   
-<?
+<?php
 }
 else
 {
 ?>
 <frameset cols="150,*" border=0>
-	<FRAME MARGINHEIGHT="5"	MARGINWIDTH  ="5" NAME = "STARTPAGE" SRC = "main/indexframe.php?boot=1&mask=<?="$mask&lang=$lang&cookie=$cookie" ?>" SCROLLING="auto"  NORESIZE >
-	<FRAME NAME = "CONTENTS" SRC = "blank.htm">
-<?
+	<FRAME MARGINHEIGHT="5"	MARGINWIDTH  ="5" NAME = "STARTPAGE" SRC = "main/indexframe.php?boot=1&mask=<?php echo "$mask&lang=$lang&cookie=$cookie&sid=$sid" ?>" SCROLLING="auto"  NORESIZE >
+	<FRAME NAME = "CONTENTS" SRC = "blank.php?lang=<?php echo "$lang&sid=$sid" ?>">
+<?php
 }
 ?>
 </frameset>
 <noframes>
 <BODY bgcolor=white>
-<?=$LDNoFrame ?><BR>
+<?php echo $LDNoFrame ?><BR>
 <A HREF="contents.htm"> OK</A></BODY>
 </noframes>
 
