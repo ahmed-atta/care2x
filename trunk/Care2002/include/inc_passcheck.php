@@ -52,10 +52,10 @@ function logentry(&$userid,$key,$report,&$remark1,&$remark2)
 	}
 }
 
-if(!isset($db) || !$db || !$dblink_ok) include_once($root_path.'include/inc_db_makelink.php');
+/*if(!isset($db) || !$db || !$dblink_ok) include_once($root_path.'include/inc_db_makelink.php');
 
 if($dblink_ok) 
-{	
+{*/	
     $sql='SELECT name, login_id, password, permission, lockflag FROM care_users WHERE login_id="'.addslashes($userid).'"';
 
 	if($ergebnis=$db->Execute($sql))
@@ -65,7 +65,8 @@ if($dblink_ok)
 		if(isset($checkintern)&&$checkintern)
 		{
 			$dec_login = new Crypt_HCEMD5($key_login,'');
-			$keyword = $dec_login->DecodeMimeSelfRand($HTTP_COOKIE_VARS['ck_login_pw'.$sid]);
+			//$keyword = $dec_login->DecodeMimeSelfRand($HTTP_COOKIE_VARS['ck_login_pw'.$sid]);
+			$keyword = $dec_login->DecodeMimeSelfRand($HTTP_SESSION_VARS['sess_login_pw']);
     	}else{
 			$checkintern=false;
 		}
@@ -105,6 +106,6 @@ if($dblink_ok)
 		}else {$passtag=1;};
 	}
 	else {$passtag=1;};
-}
-else  print "$LDDbNoLink<br>";
+/*}
+else  print "$LDDbNoLink<br>";*/
 ?>
