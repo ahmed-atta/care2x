@@ -12,19 +12,19 @@ $dbpassword='';
 $dbhost='localhost';
 
 # First key used for simple chaining protection of scripts
-$key='1.8448723808056E+28';
+$key='2.8396452278849E+27';
 
 # Second key used for accessing modules
-$key_2level='1.1066464454036E+28';
+$key_2level='1.0809301947453E+28';
 
 # 3rd key for encrypting cookie information
-$key_login='1.004997259468E+27';
+$key_login='2.2619601523972E+28';
 
 # Main host address or domain
-$main_domain='localhost';
+$main_domain='telemed.utr.ac.za/foundry/care2x';
 
 # Host address for images
-$fotoserver_ip='localhost';
+$fotoserver_ip='telemed.utr.ac.za/foundry/care2x';
 
 # Transfer protocol. Use https if this runs on SSL server
 $httprotocol='http';
@@ -33,7 +33,5 @@ $httprotocol='http';
 $dbtype='mysql';
 
 
-
-// KB: list of other hospitals
 $kb_other_his_array = Array( 'CMS'=>'Cecilia Makiwane Hospital', 'Frere'=>'Frere Hospital' );
 ?>
