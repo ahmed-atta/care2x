@@ -15,8 +15,8 @@ $LDExclusive="Exclusions";
 $LDNotes="Notes";
 $LDRemarks="Remarques";
 $LDExtraCodes="Codes ou codages extra";
-$LDAddCodes="Notes ou codes supplémentaires";
-$LDApplySelection="Appliquer sélections";
+$LDAddCodes="Notes ou codes suppl&eacute;mentaires";
+$LDApplySelection="Appliquer s&eacute;lections";
 $LDSGBV="SGB-V";  // !! Do not translate !!
 $LDLocalization="Loc.";
 $LDOpsIntern="Code";
@@ -25,8 +25,8 @@ $LDQuickList="Liste rapide";
 $LDConvert2IcdOps="-> ICD/OPS";  // !! Do not translate !!
 
 $LDSearch="Rechercher";
-$LDOperation="Opération";
-$LDAlertSureDelete="Êtes-vous sur de vouloir effacer cette entrée?";
+$LDOperation="Op&eacute;ration";
+$LDAlertSureDelete="Etes-vous sur de vouloir effacer cette entr&eacute;e?";
 
 $LDAux="A";   // A = Auxiliary
 $LDMain="M"; // M = Main
@@ -34,61 +34,61 @@ $LDRight="D"; // R = Right
 $LDLeft="G";   // L = Left
 $LDBoth="B";  // B = Both or (both sides)
 
-$LDDeleteEntry="Effacer l'entrée";
+$LDDeleteEntry="Effacer l'entr&eacute;e";
 $LDNoQuickList="La liste rapide est vide pour le moment.";
-$LDClick2Search="Veuillez cliquer ici afin d'aller à la recherche.";
+$LDClick2Search="Veuillez cliquer ici afin d'aller &agrave; la recherche.";
 $LDPossibleCodes="Codes ICD & OPS possibles";
 /*2003-05-25 EL */
-$LDCategory='Category';
+$LDCategory='Cat&eacute;gorie';
 $LDLoc='Loc.';
 $LDBy='par';
-$LDMostResponsible='Most responsible';
-$LDAssociated='Associated';
-$LDNosocomial='Nosocomial';
-$LDIatrogenic='Iatrogenic';
-$LDOther='Other';
+$LDMostResponsible='Le plus responsable';
+$LDAssociated='Associ&eacute;';
+$LDNosocomial='Originaire de l\'h&ocirc;pital';
+$LDIatrogenic='Provoqu&eacute;';
+$LDOther='Autre';
 $LDMostResp_s='M';
 $LDAssociated_s='A';
 $LDNosocomial_s='N';
 $LDIatrogenic_s='I';
 $LDOther_s='O';
 
-$LDBothSides='Both sides';
+$LDBothSides='Les deux c&ocirc;t&eacute;s';
 $LDLeft_s='S';
 $LDRight_s='R';
 $LDBothSides_s='B';
 /* 2003-05-29 EL*/
 $LDQMarks='??????';
-$LDNonSpecifiedGroup='Non-specified group';
-$LDSpecifyGroup='Specify group';
-$LDCreateGroupName='Create new group name';
-$LDSelect='Select';
+$LDNonSpecifiedGroup='Groupe non-sp&eacute;cifi&eacute;';
+$LDSpecifyGroup='Sp&eacute;cifier un groupe';
+$LDCreateGroupName='Cr&eacute;er un nouveau nom de groupe';
+$LDSelect='S&eacute;lectionner';
 /*2003-06-01 EL*/
-$LDUseToGroupItems='Use this to group the not-yet-grouped items';
-$LDItemsDegrouped='Deleting this group will unlink the items linked to it.';
+$LDUseToGroupItems='Utilisez ceci afin de grouper les objets pas encore group&eacute;s';
+$LDItemsDegrouped='Effacer ce groupe va avoir pour cons&eacute;quence l\'effacement des liens des objets li&eacute;s &agrave; ce groupe.';
 $LDOptions='Options';
 /*2003-06-01 EL*/
-$LDCreateInternDRGGroup='Create new internal DRG group';
-$LDInternalCodeNr='Internal code Nr.';
-$LDSynonyms='Synonyms or keywords';
-$LDSeparateCommas='Separate words with commas';
-$LDIsSubGroup='Is sub-group?';
-$LDParentCodeNr='Parent Code Nr.';
-$LDIfSubGroup='If group is sub-group';
-$LDAuxillaryNotes='Auxillary notes';
-$LDStdCodeNr='Standard code Nr.';
-$LDIfAvailable='If available';
-$LDYes='Yes';
-$LDNo='No';
-$LDExtraNotes='Extra notes';
-$LDAlertNoCode='Please enter the group\'s code.';
-$LDAlertNoDescription='Please enter the code\'s description.';
+$LDCreateInternDRGGroup='Cr&eacute;er un nouveau groupe interne DRG';
+$LDInternalCodeNr='Num&eacute;ro du code interne';
+$LDSynonyms='Synonymes ou mots clefs';
+$LDSeparateCommas='S&eacute;parer les mots avec des virgules';
+$LDIsSubGroup='Est sous-groupe?';
+$LDParentCodeNr='Num&eacute;ro du code parental';
+$LDIfSubGroup='Si le groupe est un sous-groupe';
+$LDAuxillaryNotes='Autres notes';
+$LDStdCodeNr='Num&eacute;ro du code standard';
+$LDIfAvailable='Si disponible';
+$LDYes='Oui';
+$LDNo='Non';
+$LDExtraNotes='Notes suppl&eacute;mentaires';
+$LDAlertNoCode='Veuillez entrer le code du groupe.';
+$LDAlertNoDescription='Veuillez entrer la description du code.';
 /*2003-06-07 EL*/
 $LDCode='Code';
 /*2003-06-13 EL*/
-$LDAddGroupEncounter='Add group to encounter';
+$LDAddGroupEncounter='Ajouter groupe &agrave; rencontrer';
 $LDMain_s='M';
-$LDSupplemental='Supplemental';
+$LDSupplemental='Compl&eacute;mentaire';
 $LDSupp_s='S';
-$LDCreateNew='Create new';
+$LDCreateNew='Cr&eacute;er nouveau';
 ?>
