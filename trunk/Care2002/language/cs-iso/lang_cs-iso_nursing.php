@@ -14,11 +14,11 @@ $LDMemo='Poznámky';
 $LDNursingForum='Sesterské fórum';
 $LDNursingStations='Pokoje sestry';
 
-$LDQuickViewTxt='Rychlý pøehled dne¹ní obsazenosti oddìlení.';
+$LDQuickViewTxt='Rychlý pøehled  obsazenosti oddìlení.';
 $LDSearchPatientTxt='Hledat oddìlení na kterém pacien le¾í.';
 $LDArchiveTxt='Hledat v archívu.';
 $LDStationManTxt='Vytvoøit nové oddìlení / skupinu pokojù a nastavení parametrù jako èísla pokojù .....';
-$LDNewsTxt='Èíst, editovat èlánky a noviky.';
+$LDNewsTxt='Èíst, editovat èlánky a novinky.';
 $LDMemoTxt='Èíst, editovat, vytváøet poznámky.';
 $LDNursingForumTxt='Sesterské fórum.';
 $LDNursingStationsTxt='Obsazenost, pacientova data, fotografie ......';
@@ -31,7 +31,7 @@ $LDBedNr='Poèet lù¾ek';
 $LDOptions='Volby';
 $LDFreeBed='Neobsazené';
 
-$LDNoOcc='Pøehled obsazenosti pokojù na dne¹ní den neexistuje!';
+$LDNoOcc='Pøehled obsazenosti pokojù na vybrané datum neexistuje!';
 $LDClk2Archive='Kliknutím zde je mo¾né prohlí¾et archív.';
 $LDNrUnocc='Poèet neobsazených lù¾ek';
 $LDEditStation='Editovat data pro oddìlení ~station~';
@@ -119,233 +119,233 @@ $LDCreatedOn='Datum vytvoøení:';
 $LDCreatedBy='Vytvoøil:';
 
 /**********do not change the ~station~ **************************/
-$LDTemplateMissing='Template for ward ~station~ missing!';
-$LDNoOrigData='Original data not found!';
+$LDTemplateMissing='Pøedloha pro oddìlení  ~station~ neexistuje!';
+$LDNoOrigData='Pùvodní údaje nenalezeny!';
 
-$LDShowLastList='Show last occupancy list.';
-$LDNoListYet='Today\'s list is not yet created!';
-$LDLastList='Last occupancy list.';
-$LDNotToday='(Not today!!)';
-$LDFromYesterday='(Yesterday\'s list!!)';
+$LDShowLastList='Zobrazit poslední pøehled obsazenosti pokojù.';
+$LDNoListYet='Dne¹ní list nebyl je¹tì vytvoøen!';
+$LDLastList='Poslední pøehled obsazenosti pokojù.';
+$LDNotToday='(Ne dnes!!)';
+$LDFromYesterday='(Vèerej¹í pøehled!!)';
 /**********do not change the ~nr~ **************************/
-$LDListFrom='This list is already ~nr~ day(s) old.';
-$LDCopyAnyway='Copy this list for today anyway.';
-$LDTakeoverList='Copy this list for today.';
-$LDDoNotCopy='Do not copy this! Create a new list.';
-$LDOldList='This is an old list!';
-$LDQuickInformer='Quick Informer';
-$LDAttention='Attention!';
-$LDOccupied='Occupied';
-$LDFree='Free';
-$LDLocked='Locked';
-$LDDutyDoctor='<b>Doctor</b><br>(on Duty)';
+$LDListFrom='Tento výpis je ji¾ ~nr~ den(dny/dnù) starý.';
+$LDCopyAnyway='Ale pøesto zkopírovat tento pøehled pro dne¹ní den.';
+$LDTakeoverList='Zkopírovat tento pøehled pro dne¹ní den.';
+$LDDoNotCopy='Nekopírovat ... Vytvoøit nový pøehled.';
+$LDOldList='Toto je starý výpis!';
+$LDQuickInformer='Rychlý informátor';
+$LDAttention='Pozor!';
+$LDOccupied='Obsazeno';
+$LDFree='Volné';
+$LDLocked='Zablokováno';
+$LDDutyDoctor='<b>Lékaø</b><br>(ve slu¾bì)';
 $LDShortMale='M';
-$LDShortFemale='F';
-$LDLegend='Legend';
+$LDShortFemale='®';
+$LDLegend='vysvìtlivky';
 
-$LDOpenFile='Open file';
-$LDNotesEmpty='Empty notice';
-$LDNotes='Notice';
-$LDRelease='Dismiss';
-$LDFreeOccupy='Free/Occupy';
-$LDMale='Male';
-$LDFemale='Female';
+$LDOpenFile='Otevøít soubor';
+$LDNotesEmpty='Prázdná poznámka';
+$LDNotes='Poznámka';
+$LDRelease='Propustit';
+$LDFreeOccupy='Volný/Obsazený';
+$LDMale='Mu¾';
+$LDFemale='®ena';
 /**********do not change the ~station~ **************************/
-$LDNoInit='The ward ~station~ is not yet initialized!';
-$LDIfInit='To initialize the ward, please click here.';
-$LDShowPatData='Open patient\'s data file';
-$LDReleasePatient='Dismiss patient';
-$LDNoticeRW='Read or write notice';
-$LDInfoUnlock='Read info or unlock';
+$LDNoInit='Oddìlení ~station~ nebylo je¹tì aktivováno!';
+$LDIfInit='Pro aktivaci oodìlení pokraèujte zde.';
+$LDShowPatData='Otevøít pacientovu zdravotní dokumentaci';
+$LDReleasePatient='Propustit pacienta';
+$LDNoticeRW='Èíst nebo napsát poznámku';
+$LDInfoUnlock='Èíst nebo odemèít informaci';
 $LDPatListElements=array(
-										'Room',
-										'Bed',
-										'Family name, Name',
-										'Birthdate',
-										'Patient nr.',
-										'Insurance',
-										'Options'
+										'Pokoj',
+										'Lù¾ko',
+										'Pøíjmení, Jméno',
+										'Datum narození',
+										'Èíslo pacienta',
+										'Poji¹tìní',
+										'Volby'
 										);
 /********** NOTE: !! do not change the \'+b+\' and \'+r+\'  !! **************************/
-$LDConfirmUnlock='Do you really want to unlock the \'+b+\' bed in room \'+r+\' ?';							
+$LDConfirmUnlock='Skuteènì si pøejete odblokovat lù¾ko \'+b+\' v místnosti \'+r+\' ?';
 /********** NOTE: !! do not change the \'+t+\' \'+n+\' and \'+r+b+\'  **************************/
-$LDConfirmDelete='Do you really want to delete \'+t+\' \'+n+\' from room \'+r+b+\'?';
-$LDConfirmLock='Do you really want to lock this bed?';
-$LDClk2Occupy='Click to occupy this bed';
+$LDConfirmDelete='Skuteènì si pøejete smazat \'+t+\' \'+n+\' z místnosti \'+r+b+\'?';
+$LDConfirmLock='Skuteènì si pøejete zablokovat lù¾ko?';
+$LDClk2Occupy='Kliknìte zde pro zablokování lù¾ka';
 $LDInsurance=array(
-								'x'=>'Self pay',
-								'privat'=>'Private',
-								'kasse'=>'General'
+								'x'=>'Platí sám',
+								'privat'=>'Soukromý',
+								'kasse'=>'Poji¹»ovna'
 								);
-$LDSave='Save';
-$LDNurse='Nurse';
-$LDYesSure='Yes, I\'m sure. Dismiss the patient.';
-$LDFtpAttempted='Attempted to connect to the FTP server.<br>The FTP server may be down or busy. If this problem persists for a long time, contact the EDP dept.';
-$LDFtpNoLink='FTP login failed';
-$LDJustReleased='The patient was dismissed. Click \'Close\' to go back to ward\'s occupancy list.';
-$LDReleaseType='Dismissal type';
-$LDRegularRelease='Regular dismissal';
-$LDSelfRelease='Patient left the hospital on his own will';
-$LDEmRelease='Emergency dismissal';
-$LDAlertNoName='Please enter your name.';
-$LDAlertNoDate='Enter the date in the ff: format: dd.mm.YYYY.';
-$LDAlertNoTime='Enter the time in the ff: format: HH.mm.';
-$LDPatDataFolder='Patient\'s data folder';
+$LDSave='Ulo¾it';
+$LDNurse='Sestra';
+$LDYesSure='Ano, jsem si jist(á). Propustit pacienta.';
+$LDFtpAttempted='Pokus o pøipojení k FTP serveru.<br>FTP server je mimo provoz nebo pøetí¾en. Pokud tento problém bude pøetrvávat i nadále kontaktujte administrátora.';
+$LDFtpNoLink='Pøipojení k FTP serveru selhalo.';
+$LDJustReleased='Pacient byl propu¹tìn.Vrátit se na pøehled obsazenosti. Kliknìte na  \'Zavøít\'. pro pokraèování';
+$LDReleaseType='Dùvod propu¹tìní';
+$LDRegularRelease='Normální propu¹tìní';
+$LDSelfRelease='Pacient si po¾ádal o propu¹tìní';
+$LDEmRelease='Nouzové propu¹tìní';
+$LDAlertNoName='Prosím zadejte va¹e jméno.';
+$LDAlertNoDate='Prosím zadejte datum ve formátu: dd.mm.RRRR.';
+$LDAlertNoTime='Prosím zadejte èas ve formátu: HH.mm.';
+$LDPatDataFolder='Zdravotní karta pacienta';
 
-$LDClose='Close';
-$LDHelp='Help';
-$LDReset='Reset';
+$LDClose='Zavøít ';
+$LDHelp='Nápovìda';
+$LDReset='Vyèistit';
 
-$LDNoLabReport='No lab reports available!';
-$LDFeverCurve='Fever chart';
-$LDNursingReport='Nursing report';
-$LDDocsPrescription='Doctor\'s directives';
-$LDNursingPlan='Nursing plan';
-$LDRootData='Root data';
-$LDReports='Diagnostic reports';
-$LDLabReports='Lab reports';
-$LDPhotos='Photos';
-$LDChkUpRequests='Test request';
-$LDPleaseSelect='Select diagnostic test request';
-$LDSetColorRider='Click to set or reset color rider';
-$LDDiet='Diet plan';
-$LDBackDay='Move back 1 day. (right click to enter any date)';
-$LDFwdDay='Move forward 1 day. (right click to enter any date)';
-$LDClk2PlanDiet='Click to plan the diet for this day';
+$LDNoLabReport='®ádný report z laboratoøe není dostupný!';
+$LDFeverCurve='Graf teploty';
+$LDNursingReport='Zpráva od sestry';
+$LDDocsPrescription='Naøízení lékaøe';
+$LDNursingPlan='Plán sester';
+$LDRootData='Rodinná data';
+$LDReports='Diagnostické reporty';
+$LDLabReports='Reporty z laboratoøe';
+$LDPhotos='Fotografie';
+$LDChkUpRequests='®ádanka na test';
+$LDPleaseSelect='Vybrát typ testu';
+$LDSetColorRider='Klinìte zde pro nastavení nebo vynulování grafického navigátoru';
+$LDDiet='Dieta';
+$LDBackDay='Jeden den zpìt. (Stiskem pravého tlaèítka lze zadát jakékoliv datum)';
+$LDFwdDay='Jeden den dopøedu. (Stiskem pravého tlaèítka lze zadát jakékoliv datum))';
+$LDClk2PlanDiet='Zde lze zadát plán diety';
 
-$LDAllergy='Allergy';
-$LDDiagnosisTherapy='Diagnosis / Therapy';
-$LDBpTemp='Temperature/Blood pressure';
-$LDPtAtgEtc='PT,Atg,etc';
+$LDAllergy='Alergie';
+$LDDiagnosisTherapy='Dignóza / Terapie';
+$LDBpTemp='Teplota / Krevní tlak';
+$LDPtAtgEtc='PT,Atg,atd.';
 $LDAntiCoag='Anticoagulant(s)';
-$LDExtraNotes='Notes';
-$LDMedication='Medication';
-$LDIvPort='Intravenous';
-$LDPtAtgEtcTxt='Physical therapy, Anti thrombosis, etc.';
-$LDExtraNotesTxt='Notes, LOT, Charge nr., etc.';
+$LDExtraNotes='Poznámky';
+$LDMedication='Léky';
+$LDIvPort='®ilní';
+$LDPtAtgEtcTxt='Fyzická terapie, Anti thrombosis, atd.';
+$LDExtraNotesTxt='Poznámky, ©ar¾e, Èíslo plnìní, atd.';
 
-$LDBp='Blood pressure';
-$LDTemp='Temperature';
+$LDBp='Krevní tlak';
+$LDTemp='Teplota';
 
-$LDClk2Enter='Click to enter ~tagword~';
-$LDClk2EnterDaily='Click to enter ~tagword~ for this day';
-$LDSpecialsExtra='Notes, extra diagnoses';
-$LDClk2PlanDaily='Click to plan ~tagword~ for this day';
-$LDInputWin='Input window';
+$LDClk2Enter='Kliknìte pro zadání ~tagword~';
+$LDClk2EnterDaily='Kliknìte pro zadání ~tagword~ na dne¹ní den';
+$LDSpecialsExtra='Poznámky, extra diagnózy';
+$LDClk2PlanDaily='Kliknìte pro vytvoøení plánu  ~tagword~  na dne¹ní den';
+$LDInputWin='Okno pro zadávání údajù';
 $LDFullDayName=array(
-									'Sunday',
-									'Monday',
-									'Tuesday',
-									'Wednesday',
-									'Thursday',
-									'Friday',
-									'Saturday',
-									'Sunday',
-									'Monday',
-									'Tuesday',
-									'Wednesday',
-									'Thursday',
-									'Friday',
-									'Saturday',
-									'Sunday'
+									'Nedìle',
+									'Pondìlí',
+									'Úterý',
+									'Støeda',
+									'Ètvrtek',
+									'Pátek',
+									'Sobota',
+									'Nedìle',
+									'Pondìlí',
+									'Úterý',
+									'Støeda',
+									'Ètvrtek',
+									'Pátek',
+									'Sobota',
+									'Nedìle'
 									);
-$LDCurrentEntry='Current entries';
-$LDEntryPrompt='Please enter the new information here';
-$LDConfirmSetDate='Do you want to set the \'+dayID+\' ?';
-$LDStartDate='Start date';
-$LDEndDate='End date';
-$LDShowCurveDate='Show the curve with the following';
-$LDDailyDiagTher='Therapy, report, nursingplan, etc.';
-$LDAntiCoagTxt='Anticoagulants - daily report';
-$LDSFormatPrompt='Enter the new information here or edit the current entries:<br><font size=1 > Maximum 16 characters.</font>';
-$LDDosage='Dosage';
-$LDColorMark='Color mark with';
-$LDNormal='Normal';
-$LDAntibiotic='Antibiotic';
-$LDDialytic='Dialytic';
+$LDCurrentEntry='Aktuální polo¾ky';
+$LDEntryPrompt='Prosím zadejte nové informace zde';
+$LDConfirmSetDate='Pøejete si nastavit \'+dayID+\' ?';
+$LDStartDate='Poèáteèní den';
+$LDEndDate='Poslední den';
+$LDShowCurveDate='Zobraz køivku s následujícími údaji';
+$LDDailyDiagTher='Terapie, zpráva, plán sester, atd...';
+$LDAntiCoagTxt='Anticoagulants - denní report';
+$LDSFormatPrompt='Zadát nové informace nebo editovat aktuální polo¾ky:<br><font size=1 > Maximálnì 16 znakù.</font>';
+$LDDosage='Balení';
+$LDColorMark='Barevná znaèka s';
+$LDNormal='Normální';
+$LDAntibiotic='Antibiotika';
+$LDDialytic='Dialytické';
 $LDHemolytic='Hemolytic';
-$LDIntravenous='Intravenous';
-$LDTodaysReport='Today\'s report';
-$LDNoMedicineYet='There is no medication yet!';
-$LDEffectReport='Effectivity report';
-$LDFrom='From';
-$LDTo='to';
-$LDPage='Page';
-$LDSignature='Sign';
-$LDInsertSymbol='Place this symbol at the start.';
-$LDInsertDate='Insert today\'s date';
-$LDInsertTimeNow='Insert the time now';
-$LDSpecialNotice='Special notice';
-$LDAddendum='Additional information';
-$LDDiagnosticReport='Diagnostic report';
-$LDDoctor='Doctor';
-$LDPassword='Password';
-$LDCallBackPhone='For inquiries call';
+$LDIntravenous='®ilní';
+$LDTodaysReport='Dne¹ní výpis';
+$LDNoMedicineYet='Nejsou zde je¹tì ¾ádné léky!';
+$LDEffectReport='Výpis úèinnosti';
+$LDFrom='Od';
+$LDTo='do';
+$LDPage='Stránka';
+$LDSignature='Podpis';
+$LDInsertSymbol='Umístit tento symbol na zaèátek.';
+$LDInsertDate='Vlo¾it dne¹ní datum';
+$LDInsertTimeNow='Vlo¾it aktuální èas';
+$LDSpecialNotice='Zvlá¹tní poznámka';
+$LDAddendum='Doplòující informace';
+$LDDiagnosticReport='Diagnostická zpráva';
+$LDDoctor='Lékaø';
+$LDPassword='Heslo';
+$LDCallBackPhone='Pro volání s po¾adavky';
 
-$LDPicShots='Shots';
-$LDClk2Preview='Click to preview';
-$LDPreview='Preview';
-$LDShotDate='Shot date';
-$LDShotNr='Shot nr.';
+$LDPicShots='Fotografování';
+$LDClk2Preview='Kliknout pro zobrazení náhledu';
+$LDPreview='Náhled';
+$LDShotDate='Datum fotografování';
+$LDShotNr='Fotografie èíslo';
 
-$LDLastName='Family name';
-$LDName='Name';
-$LDBirthDate='Birthdate';
-$LDLockThisBed='Lock this bed';
-$LDClk2LockBed='Click to lock this bed';
-$LDAssignOcc='Assign occupant';
-$LDSearchFound='Search found <font color=red><b>~nr~</b></font> patients.';
-$LDAssign2Bed='Assign this patient as occupant';
-$LDSend='Send';
-$LDSendLater='Send later';
-$LDReqTest='Requested diagnostic test';
-$LDSpeedTest='Urgent test.';
-$LDDiagnosticTest='Request diagnostic test';
-$LDRelayResult='Relay diagnosis at Phone/Beeper';
-$LDSpeedCut='Express cut.';
-$LDClk4Phone='Click to show Phone/Beeper info';
-$LDHour='Hour';
+$LDLastName='Pøíjmení';
+$LDName='Jméno';
+$LDBirthDate='Datum narození';
+$LDLockThisBed='Zamluvit toto lù¾ko';
+$LDClk2LockBed='Kliknout zde pro zamluvení lù¾ka';
+$LDAssignOcc='Pøiøadit pacienta';
+$LDSearchFound='Bylo nalezeno  <font color=red><b>~nr~</b></font> pacient(ù).';
+$LDAssign2Bed='Pøiøadit tohoto pacienta na pokoj';
+$LDSend='Odeslát';
+$LDSendLater='Odeslát pozdìji';
+$LDReqTest='®ádanka na diagnostický test';
+$LDSpeedTest='Naléhavý test.';
+$LDDiagnosticTest='®ádanka na diagnostický test';
+$LDRelayResult='Poslát výsledky na telefon';
+$LDSpeedCut='Rychlý cut.';
+$LDClk4Phone='Kliknout pro zobrazení èísla telefonu';
+$LDHour='Hodina';
 
-$LDClkHere='Please click here.';
+$LDClkHere='Prosím kliknìte zde.';
 
-$LDNoOccList='There is no available past';
-$LDFromWard='list from ward ';
-$LDWithinLast='within the last ';
-$LDDays=' days.';
+$LDNoOccList='Historické údaje jsou nedostupné';
+$LDFromWard='výpis z oddìlení ';
+$LDWithinLast='v rámci posledních ';
+$LDDays=' dní.';
 $LDAvailable='';
 
-$LDQueries='Inquiries to the Physician';
-$LDChangeWard='Change of ward';
-$LDChangeBed='Change of bed';
-$LDPatientDied='Death of patient';
+$LDQueries='®ádanka pro lékaøe';
+$LDChangeWard='Zmìna oddìlení';
+$LDChangeBed='Zmìna lù¾ka';
+$LDPatientDied='Pacient zemøel';
 
-$LDFollowing='following';
-$LDErrorDuplicateBed='Error: Duplicate bed occupancy record in table nursing_station_patients';
-$LDNoFound='Search found no patient.';
+$LDFollowing='následující';
+$LDErrorDuplicateBed='Chyba: Dvojité obsazení lù¾ka -- Duplikovaný záznam v tabulce nursing_station_patients';
+$LDNoFound='Nebyl nalezen ¾ádný pacient.';
 
-$LDNoWardsYet='There are no nursing wards yet.';
-$LDClk2CreateWard='To create a ward, please click here.';
+$LDNoWardsYet='Nebylo dosud vytvoøeno ¾ádné oddìlení.';
+$LDClk2CreateWard='Kliknout zde pro vytvoøení nového oddìlení.';
 /* 2002-10-12 EL */
-$LDToCreateNewList='To create a new list';
-$LD_ddpMMpyyyy='dd.mm.yyyy';
-$LD_yyyyhMMhdd='yyyy-mm-dd';
-$LD_MMsddsyyyy='mm/dd/yyyy';
+$LDToCreateNewList='Vytvoøit nový výpis';
+$LD_ddpMMpyyyy='dd.mm.rrrr';
+$LD_yyyyhMMhdd='rrrr-mm-dd';
+$LD_MMsddsyyyy='mm/dd/rrrr';
 /* 2002-10-23 EL*/
-$LDQueryDoctor='Query to doctor';
-$LDDoctorInfo='Doctor\'s info, instructions';
-$LDDiagnosticsReport='Diagnostics report arrived';
-$LDInfusionTherapy='Infusion therapy/program';
-$LDMonitorFluidDischarge='Fluids discharge/Diuretic';
-$LDBloodProgram='Blood sample/transfusion';
-$LDVitalStatistics='Vital statistics';
-$LDAntibioticsProgram='Antibiotics therapy/program';
+$LDQueryDoctor='Dotay k lékaøi';
+$LDDoctorInfo='Informace, pøíkazy lékaøe';
+$LDDiagnosticsReport='Nová dignostická zpráva dorazila.';
+$LDInfusionTherapy='Infúze ';
+$LDMonitorFluidDischarge='Mno¾tví vyprádnìných tekutin === lep¹í pøeklad ZDE === Fluids discharge/Diuretic';
+$LDBloodProgram='Krevní vzorek / trnsfúze';
+$LDVitalStatistics='Vitální statistika';
+$LDAntibioticsProgram='Léèba antibiotiky';
 $LDAnticoagProgram='Anticoagulants';
-$LDSpecialCare='Special care, vital statistics';
-$LDTestConsultRequested='Test/Consult requested';
-$LDNurseReport='New nurse report';
-$LDDaily='Daily';
-$LDSaveChanges='Save changes';
+$LDSpecialCare='Zvlá¹tní péèe';
+$LDTestConsultRequested='Konzultovat po¾adavek';
+$LDNurseReport='Nová zpráva od sestry';
+$LDDaily='Dennì';
+$LDSaveChanges='Ulo¾it zmìny';
 /* 2002-12-07*/
-$LDNoDiagReport='No diagnostic report available.';
+$LDNoDiagReport='Není dostupná ¾ádná diagnostická zpráva.';
 
 ?>
