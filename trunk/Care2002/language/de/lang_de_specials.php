@@ -80,7 +80,7 @@ $LDCalcTxt="Ein Taschenrecher";
 $LDClock="Uhr";
 $LDDigitalClock="Eine digitale Uhr";
 $LDColorOpt="Farbenoptionen";
-$LDColorOptTxt="Farben von Hitergrund bzw. Text einstellen";
+$LDColorOptTxt="Farben von Hintergrund bzw. Text einstellen";
 $LDColorOptExt="Erweiterte Farbenoptionen";
 $LDColorOptExtTxt="Farben von Texten und Hyperlinks einstellen";
 $LDMyIntranet="myIntranet";
@@ -183,6 +183,13 @@ $LDDisplay2Txt="Anzeige mit dem Menu im schwebenden Fenster.";
 $LDNewPwDiffer="Die neue Passwörter sind nicht gleich. <br>Bitte geben Sie die neue Passwörter noch mal ein.";
 /* 2003-03-22 EL*/
 $LDPersonellMngmnt='Personalverwaltung';
-$LDPersonellMngmntTxt='Werkzeuge und Funktionen für Personalverwaltung';
+$LDPersonellMngmntTxt='Werkzeuge und Funktionen zur Personalverwaltung';
+/* 2003-04-25 EL */
+$LDBilling='eCombill';
+$LDBillingTxt='Abrechnen, Bearbeiten, Berichte und Belege drucken';
+$LDInsuranceCoMngr='Versicherer-Verwaltung';
+$LDInsuranceCoMngrTxt='Versicherer-Stammdaten eingeben, bearbeiten, aktualisieren';
+$LDAddressMngr='Addressenverwaltung';
+$LDAddressMngrTxt='Neue Adressendaten eingeben, bearbeiten, aktualisieren';
 
 ?>

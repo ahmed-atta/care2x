@@ -307,4 +307,14 @@ $LD_MMsddsyyyy='MM/TT/YYYY';
 /* 2002-10-15 EL */
 $LDStandbyInit='A';
 $LDOncallInit='R';
+$LDDutyPlan='Dienstplan';
+/* 2003-03-18 EL */
+$LDSearchInAllDepts='Suchen in allen Abteilungen';
+$LDAddNurseToList='Pflegepersonal in die Liste eintragen';
+$LDNursesList='Pflegepersonal-Liste';
+/* 2003-03-19 EL */
+$LDPlsSelectDept='Bitte wählen Sie die  Abteilung aus.';
+$LDSelectORoomNr='...und den OP Saal.';
+$LDAlertNoDeptSelected='Bitte wählen Sie eine Abteilung aus!';
+$LDAlertNoORSelected='Bitte wählen Sie einen OP Saal aus!';
 ?>

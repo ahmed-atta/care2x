@@ -115,4 +115,9 @@ $LDLoggedOut='Logged out';
 /* 2003-03-18 EL */
 $LDNursesList='Pflegekräfte';
 $LDAppointments='Termine';
+/* 2003-04-27 */
+$LDInsuranceCoManager='Versicherer-Verwaltung';
+$LDAddressMngr='Addressenverwaltung';
+/* 2003-04-30 EL*/
+$LDBilling='eComBill';
 ?>

@@ -34,7 +34,7 @@ $LDGoodDay='Guten Tag!';
 $LDGoodAfternoon=&$LDGoodDay;
 $LDGoodEvening='Guten Abend!';
 
-$LDNewForm='Ein frisches Formular erstellen.';
+$LDNewForm='Bitte ein neues Anmeldeformular öffnen.';
 $LDForceSave='Trotzdem, speichern';
 $LDSaveData='Eingabe speichern';
 $LDResetData='Eingabe verwerfen';
@@ -222,7 +222,7 @@ $LDOtherNr='Andere Nummer(n)';
 /* 2002-12-25 EL */
 $LDSendBill='Rechnung schicken an:';
 $LDContactPerson='Kontaktperson';
-$LDOptsFor='Optionen für diese';
+$LDOptsForPerson='Optionen für diese Person';
 $LDSickReport='Arbeitsunfähigkeitsbescheinigung';
 $LDAnamnesisForm='Anamneseformular';
 $LDConsentDec='Einwilligungserklärung';
@@ -325,4 +325,8 @@ $LDScheduleNewAppointment='Neues Termin';
 /* 2003-04-04 EL */
 $LDNoPendingApptThisDay='Keine Termine an diesem Tag vorhanden.';
 $LDNoPendingApptToday='Keine Termine heute vorhanden.';
+/* 2003-04-27 EL */
+$LDOptsForPatient='Optionen für diesen Patient';
+/* 2003-05-06 EL */
+$LDRegisterNewPerson='Eine neue person aufnehmen';
 ?>
