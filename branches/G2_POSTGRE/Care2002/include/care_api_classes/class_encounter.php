@@ -1410,7 +1410,7 @@ class Encounter extends Notes {
 	*/
 	function _setLocation($enr=0,$type_nr=0,$loc_nr=0,$group_nr,$date='',$time=''){
 		global $HTTP_SESSION_VARS, $db;
-		$db->debug=1;
+		//$db->debug=1;
 		//if(!($enr&&$type_nr&&$loc_nr)) return FALSE;
 		if(empty($date)) $date=date('Y-m-d');
 		if(empty($time)) $time=date('H:i:s');
@@ -1731,7 +1731,7 @@ class Encounter extends Notes {
 	*/
 	function setIsDischarged($enr,$date,$time){
 		//$this->sql="UPDATE $this->tb_enc SET is_discharged=1, discharge_date='$date',discharge_time='$time', current_ward_nr=0,current_room_nr=0,current_dept_nr=0,current_firm_nr=0,in_ward=0 WHERE encounter_nr=$enr AND NOT is_discharged";
-		$this->sql="UPDATE $this->tb_enc SET is_discharged=1, discharge_date='$date',discharge_time='$time', in_ward=0,in_dept=0 WHERE encounter_nr=$enr AND NOT is_discharged";
+		$this->sql="UPDATE $this->tb_enc SET is_discharged=1, discharge_date='$date',discharge_time='$time', in_ward=0,in_dept=0 WHERE encounter_nr=$enr AND is_discharged IN ('',0)";
 		//if($this->Transact($this->sql)) return true; else echo $this->sql;
 		return $this->Transact($this->sql);
 	}
@@ -1747,7 +1747,8 @@ class Encounter extends Notes {
 	*/
 	function getDischargeTypesData(){
 		global $db;
-		$this->sql="SELECT nr,name,LD_var FROM $this->tb_dis_type WHERE 1 ORDER BY nr";
+		//$db->debug=1;
+		$this->sql="SELECT nr,name,LD_var AS \"LD_var\" FROM $this->tb_dis_type ORDER BY nr";
 		if($this->result=$db->Execute($this->sql)){
 			if($this->result->RecordCount()){
 				return $this->result;
@@ -1755,7 +1756,7 @@ class Encounter extends Notes {
 		}else{return FALSE;}
 	}		
 	/**
-	* Complete discharge or encounter.
+	* Complete  or encounter.
 	* Avoid using this function directly. Use the appropriate methods
 	* @access private
 	* @param int Encounter number
@@ -1766,17 +1767,21 @@ class Encounter extends Notes {
 	* @return boolean
 	*/
 	function _discharge($enr,$loc_types,$d_type_nr,$date='',$time=''){
-		global $HTTP_SESSION_VARS;
+		global $HTTP_SESSION_VARS, $dbf_nodate, $dbtype;
 		if(empty($date)) $date=date('Y-m-d');
 		if(empty($time)) $time=date('H:i:s');
 		$this->sql="UPDATE $this->tb_location
 							SET	discharge_type_nr=$d_type_nr,
 									date_to='$date',
 									time_to='$time',
-									status='discharged',
-									history=CONCAT(history,'\nUpdate (discharged): ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."'),
-									modify_id='".$HTTP_SESSION_VARS['sess_user_name']."'
-							WHERE encounter_nr=$enr AND type_nr IN ($loc_types) AND date_to IN ('','0000-00-00')";
+									status='discharged',";
+		if($dbtype=='mysql'){
+			$this->sql.=" history=CONCAT(history,'\nUpdate (discharged): ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."'),";
+		}else{
+			$this->sql.=" history= history || '\nUpdate (discharged): ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."' ,";
+		}
+			$this->sql.=" modify_id='".$HTTP_SESSION_VARS['sess_user_name']."'
+							WHERE encounter_nr=$enr AND type_nr IN ($loc_types) AND date_to ='$dbf_nodate'";
 		if($this->Transact($this->sql)){ return true;}
 		 else{echo $this->sql; return FALSE;}
 		//return $this->Transact($this->sql);
