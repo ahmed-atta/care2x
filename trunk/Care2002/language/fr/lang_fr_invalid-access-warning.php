@@ -15,7 +15,7 @@ require_once('../../include/inc_img_fx.php');
 <table width=100% border=1>
 <tr>
 <td bgcolor="navy">
-<FONT  COLOR="white"  SIZE=+3  FACE="Arial"><STRONG>&nbsp;Unauthorized Page Access</STRONG></FONT>
+<FONT  COLOR="white"  SIZE=+3  FACE="Arial"><STRONG>&nbsp;Acc&egrave;s non authoris&eacute; de la page</STRONG></FONT>
 </td>
 </tr>
 <tr>
@@ -24,33 +24,31 @@ require_once('../../include/inc_img_fx.php');
 
 <center>
 <FONT    SIZE=3 color=red  FACE="Arial">
-<b>You have no access rights to open this document!</b></font><p>
+<b>Vous n'avez pas les droits d'acc&egrave;s pour ouvrir ce document!</b></font><p>
 <FORM >
-<INPUT type="button"  value=" OK "  onClick="<?php if ($mode=="close") print 'window.close()'; else print 'history.back()'; ?>"></FORM>
+<INPUT type="button"  value=" OK "  onClick="<?php if ($mode=="close") print 'window.close()'; else print 'history.back()'; ?></FORM>
 <p>
 </font>
 </center>
 <p>
 <ul>
 <font size=3 face="verdana,arial">
-Probable causes of this problem:
+Les causes possibles de ce problème:
 </FONT><p>
 <font size=2 face="verdana,arial">
 <img <?php echo createComIcon('../../','achtung.gif') ?>>
-You might have used the standard "Back" or "Forward" function of your browser. Avoid using these buttons.<br>
+Vous avez peut-être utilisé les touches standard "Rétour" ou "Avancer" de votre navigateur. Veuillez évitez de les utiliser.<br>
 <img <?php echo createComIcon('../../','achtung.gif') ?>>
-You might have rejected a cookie. The program is dependent on cookies to operate properly. So please accept the
-cookies.
+Vous avez peut-être rejeté une cookie. Le programme dépend des cookies pour fonctionner correctement. Veuillez accepter les cookies.
 <br>
 <img <?php echo createComIcon('../../','achtung.gif') ?>>
-Your browser might not be accepting cookies. Please set up your browser to accept cookies automatically.
+Votre navigateur n'accepte peut-être pas les cookies. Veuillez configurer votre navigateur afin d'accepter les cookies automatiquement.
 <br>
 <img <?php echo createComIcon('../../','achtung.gif') ?>>
-Your browser might not be able to run javascript or the javascript might be disabled. Please enable the javascript in your browser.
+Votre navigateur n'est peut-être pas capable d'exécuter javascript ou la fonction javasscript a été interdite. Veuillez activer javascript dans votre navigateur.
 <br>
 <img <?php echo createComIcon('../../','achtung.gif') ?>>
-In rare cases there might have been an error in the data transfer. To correct the situation just click the
-"reload" button of your browser.
+Dans de rares cas il a pu y avoir une erreur dans le transfert des données. Afin de résoudre cette situation, veuillez cliquer sur le bouton "Recharger".
 <p>
 </FONT>
 <p>
@@ -62,7 +60,7 @@ In rare cases there might have been an error in the data transfer. To correct th
 
 <?php
 $path_root='../../';
-require('en_copyrite.php'); 
+require('fr_copyrite.php'); 
 ?>
 </FONT>
 

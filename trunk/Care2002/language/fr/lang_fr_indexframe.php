@@ -1,5 +1,5 @@
 <?php
-$LDHome='Home';
+$LDHome='Accueil';
 $LDPatient='Patient';
 $LDAdmission='Admission';
 $LDAmbulatory='Ambulatoire';
@@ -17,13 +17,13 @@ $LDEDP='EDP';
 $LDIntraEmail='Intranet Email';
 $LDInterEmail='Internet Email';
 $LDSpecials='Spéciaux';
-$LDLogin='Login';
-$LDLogout='Logout';
+$LDLogin='Connexion';
+$LDLogout='Déconnexion';
 $LDAppointments='Rendez-vous';
 
 $VersionChgTarget='_haut';
 $LDLanguage='Langage';
-$LDPlsWaitInit='Veuillez patienter. Le procès d`initialisation est en route....';
+$LDPlsWaitInit='Veuillez patienter. Le procès d\'initialisation est en route....';
 
 $LDChange='Modifier';
 /* 2003-04-27 EL */
@@ -41,7 +41,7 @@ $LDSpanish='Espagnol';
 /* 2003-04-28 El */
 $LDDutch='Néerlandais';
 # 2003-08-04 EL
-$LDPerson='Person';
+$LDPerson='Personne';
 # 2003-09-05 EL
-$LDUser='User';
+$LDUser='Utilisateur';
 ?>
