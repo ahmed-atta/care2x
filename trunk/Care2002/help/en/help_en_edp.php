@@ -3,9 +3,11 @@
 <b>
 EDP - 
 <?php
+	if($x1=='edit') $x1='update';
 	switch($src)
 	{
-	case "access": switch($x1)
+	case "access": 
+		switch($x1)
 						{
 							case "": print "Creating access right";
 												break;

@@ -13,7 +13,11 @@
 <a href="#">Index</a><br>
 <a href="#">Search</a><br>
 <a href="#">Tips & Tricks</a><br>
-<a href="#">Introductions</a></b></font>
+<a href="#">Introductions</a></b>
+<p>
+<a href="http://care2x.net/docswiki/index.php?UM - English" target="HELPINFOFRAME">Online User's Manual</a></b>
+
+</font>
 
 </body>
 </html>

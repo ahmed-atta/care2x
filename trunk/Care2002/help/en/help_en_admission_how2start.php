@@ -23,13 +23,13 @@ switch($x1)
 
 <?php if($src!=$x1) : ?>
 <b>Step 1</b>
-<ul> Click the button <img src="../img/en/en<?php switch($x1)
+<ul> Click the <img src="../gui/img/control/default/en/en<?php switch($x1)
 																			{
-																				case "entry": print '_ein-gray.gif'; break;
+																				case "entry": print '_admit-gray.gif'; break;
 																				case "search": print '_such-gray.gif'; break;
 																				case "archiv": print '_arch-gray.gif'; break;
 																			}
-?>" border="0">.
+?>" border="0"> button.
 		
 </ul>
 <b>Step 2</b>

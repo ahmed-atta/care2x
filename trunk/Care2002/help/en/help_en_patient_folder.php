@@ -5,7 +5,7 @@
 <p><font size=2 face="verdana,arial" >
 
 <?php if($src=="") : ?>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>What do these  <img <?php echo createComIcon('../','colorcodebar3.gif','0') ?> > color bars mean? </b></font>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>What do these  color bars mean? </b> <img <?php echo createComIcon('../','colorcodebar3.gif','0') ?> ></font>
 <ul> <b>Note: </b>Each of these color bars when "set visible" signalize the availability of a particular information, an instruction, a change, or a query, etc.<br>
 			The meaning of a color can be set for every ward. <br>
 			The series of pink color bars on the right represents the approximate time when an instruction is to be carried out.<br>
@@ -37,7 +37,7 @@ What are these following buttons?</b></font>
 	<ul>
 		This will open the nursing report form. You can document your nursing activity, its effectivity, observations, queries, or recommendations, etc.
 	</ul>
-	<input type="button" value="Doctor's directives">
+	<input type="button" value="Physician orders">
 	<ul>
 	The doctor in charge will enter here his instructions, medication, dosage, answers to nurses' queries, or instructions for changes, etc.
 	</ul>	
@@ -45,7 +45,7 @@ What are these following buttons?</b></font>
 	<ul>
 	This stores the diagnostic reports coming from different diagnostic clinics or departments.
 	</ul>	
-	<input type="button" value="Root data">
+<!-- 	<input type="button" value="Root data">
 	<ul>
 	This stores the patients root data and personal information like name, given name, etc. This is also the initial documentation of the
 	patient's anamnesis or medical history that serves as foundation for the individual nursing plan.
@@ -54,7 +54,12 @@ What are these following buttons?</b></font>
 	<ul>
 	This is the individual nursing plan. You can create, edit, or delete the plan.
 	</ul>	
-	<input type="button" value="Lab Reports">
+ -->	
+ <input type="button" value="DRG">
+	<ul>
+	This opens the DRG composite window.
+	</ul>	
+ <input type="button" value="Lab Reports">
 	<ul>
 	This stores both the medical and pathological laboratory reports.
 	</ul>	
