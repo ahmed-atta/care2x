@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+* CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
 * GNU General Public License
 * Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.net, elpidio@care2x.org
+* elpidio@latorilla.com
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -25,22 +25,16 @@ $breakfile='edv-system-admi-welcome.php'.URL_APPEND;
 $returnfile='edv_user_access_edit.php'.URL_APPEND;
 $HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
 
-/* Establish db connection */
-if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
+/* Load the date formatter */
+include_once($root_path.'include/inc_date_format_functions.php');
 
-if($dblink_ok)
-{
-    /* Load the date formatter */
-    include_once($root_path.'include/inc_date_format_functions.php');
-    
-	$sql='SELECT * FROM care_users';
-	 
-	if($ergebnis=$db->Execute($sql)) {
-	    
-		$rows=$ergebnis->RecordCount();
-	}
+$sql='SELECT * FROM care_users';
+
+if($ergebnis=$db->Execute($sql)) {
+
+	$rows=$ergebnis->RecordCount();
 }
-   else { echo "$LDDbNoLink<br>"; }
+
 ?>
 <?php html_rtl($lang); ?>
 <HEAD>
