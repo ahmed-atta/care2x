@@ -369,4 +369,11 @@ $LDPlsEnterRefererNotes='Please enter referer\'s notes';
 $LDPlsSelectAdmissionType='Please select admission type';
 $LDForInpatient='For inpatient';
 $LDForOutpatient='For outpatient';
+#2003-09-18 EL
+$LDPersonSearch='Search a person';
+#2003-09-24 EL
+$LDShowing='Showing';
+$LDPrevious='Previous';
+$LDNext='Next';
+$LDAdvancedSearch='Advanced search';
 ?>
