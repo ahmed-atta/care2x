@@ -4,4 +4,26 @@ $LDMonthFullName=array('','Janvier','Février','Mars','Avril','Mai','Juin','Juill
 $LDMonthShortName=array('','Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc');
 $LDDayFullName=array('Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi');
 $LDDayShortName=array('Lu','Ma','Me','Je','Ve','Sa','Di');
+$LDDate='Date';
+$LDTime='Time';
+$LDHour='Hour';
+$LDHours='Hours';
+$LDMinute='Minute';
+$LDMinutes='Minutes';
+$LDSecond='Second';
+$LDSeconds='Seconds';
+$LDmillisecond='millisecond';
+$LDmilliseconds='milliseconds';
+$LDmicrosecond='microsecond';
+$LDmicroseconds='microseconds';
+$LDDay='Day';
+$LDWeek='Week';
+$LDNoon='Noon';
+$LDEvening='Evening';
+$LDNight='Night';
+#2003-11-11 EL
+$LD_ddpMMpyyyy='jj.mm.aaaa';
+$LD_yyyyhMMhdd='aaaa-mm-jj';
+$LD_MMsddsyyyy='mm/jj/aaaa';
+$LD_ddsMMsyyyy='jj/mm/aaaa';
 ?>
