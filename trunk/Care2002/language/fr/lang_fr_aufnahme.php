@@ -1,149 +1,149 @@
 <?php
 $LDAdmission="Admission";
-$LDAdmitDate="Admission date";
-$LDAdmitTime="Admission time";
-$LDCaseNr="Patient's number";
-$LDTitle="Title";
-$LDLastName="Family name";
-$LDFirstName="Given name";
-$LDBday="Date of birth";
-$LDPhone="Phone number";
-$LDAdmitBy="Admitted by";
-$LDSex="Sex";
-$LDMale="male";
-$LDFemale="female";
-$LDAddress="Address";
-$LDAmbulant="Outpatient";
-$LDStationary="Inpatient";
-$LDSelfPay="Self pay";
-$LDPrivate="Private";
-$LDInsurance="Insurance";
-$LDDiagnosis="Diagnosis";
-$LDRecBy="Recommended by";
-$LDTherapy="Suggested therapy";
-$LDSpecials="Special notes";
+$LDAdmitDate="Date d'admission";
+$LDAdmitTime="Heure d'admission";
+$LDCaseNr="Numéro du patient";
+$LDTitle="Titre";
+$LDLastName="Nom de famille";
+$LDFirstName="Prénom";
+$LDBday="Date de naissance";
+$LDPhone="Numéro de télephone";
+$LDAdmitBy="Admis par";
+$LDSex="Sexe";
+$LDMale="masculin";
+$LDFemale="féminin";
+$LDAddress="Addresse";
+$LDAmbulant="Patient ambulatoire";
+$LDStationary="Patient hospitalisé";
+$LDSelfPay="Patient payant seul";
+$LDPrivate="Privé";
+$LDInsurance="Assurance";
+$LDDiagnosis="Diagnose";
+$LDRecBy="Recommendé par";
+$LDTherapy="Thérapie proposée";
+$LDSpecials="Remarques spéciales";
 
-$LDPatientSearch="Search patient's data";
+$LDPatientSearch="Rechercher des données du patient";
 $LDAdmit="Admission";
-$LDSearch="Search";
-$LDArchive="Archive research";
-$LDCatPls="I like to see the cat please!";
-$LDGoodMorning="Good Morning!";
-$LDGoodDay="Hi! Nice to see you!";
-$LDGoodAfternoon="Good afternoon!";
-$LDGoodEvening="Good Evening";
+$LDSearch="Chercher";
+$LDArchive="Chercher l'archive";
+$LDCatPls="Je voudrais bien voir le CAT!";
+$LDGoodMorning="Bon matin!";
+$LDGoodDay="Bonjour! Ravi de vous voir!";
+$LDGoodAfternoon="Bonjour!";
+$LDGoodEvening="Bonsoir";
 
-$LDNewForm="I need an empty form please.";
+$LDNewForm="j'ai besoind d'un formulaire vide, s'il vous plaît.";
 
-$LDForceSave="Save anyway";
-$LDSaveData="Save data";
-$LDResetData="Reset data";
+$LDForceSave="Enregistrer quand même";
+$LDSaveData="Enregistrer les données";
+$LDResetData="Reseter les données";
 $LDReset="Reset";
-$LDSave="Save";
-$LDCancel="Cancel";
+$LDSave="Enregistrer";
+$LDCancel="Annuler";
 
-$LDCancelClose="Cancel and back to start page";
-$LDCloseWin="Close admission window";
-$LDError="An information is missing in an input field marked <font color=red>red</font>!";
-$LDErrorS="Some information are missing in the input fields marked with <font color=red>red</font>!";
+$LDCancelClose="Annuler et remonter au début de la page";
+$LDCloseWin="Fermer la fenêtre d'admission";
+$LDError="Il manque des informations dans un champs marqué en <font color=red>rouge</font>!";
+$LDErrorS="Il manque quelques données dans les champs marqués en <font color=red>rouge</font>!";
 
-$fieldname=array("Patient nr.","Lastname","Firstname","Date of birth","Options");
-$LDEntryPrompt="Enter the search keyword. For example: lastname, or firstname, or date of birth, etc.";
-$LDSEARCH="SEARCH";
-$LDAdmWantEntry="I need to admit a patient";
-$LDAdmWantSearch="I am looking for a patient";
-$LDAdmWantArchive="I need to research in the archive";
+$fieldname=array("Patient no.","Nom de famille","Prénom","Date de naissance","Options");
+$LDEntryPrompt="Entrez le mot pour la recherche.Par exemple: nom de famille ou prénom, ou date de naissance, etc.";
+$LDSEARCH="CHERCHER";
+$LDAdmWantEntry="J'ai besoin d'admettre un patient";
+$LDAdmWantSearch="Je cherche un patient";
+$LDAdmWantArchive="J'ai besoin de chercher dans l'archive";
 
 /**************** note the " ~nr~ " must not be erased it will be replaced by the script with the number of search results ******/
-$LDSearchFound="The search found <font color=red><b>~nr~</b></font> relevant patient's data.";
+$LDSearchFound="La recherche a trouvée <font color=red><b>~nr~</b></font> de données pertinentes sur le patient.";
 
-$LDShowData="Show data";
-$LDPatientData="Patient's Data";
-$LDBack2Admit="Back to admission";
-$LDBack2Search="Back to search";
-$LDBack2Archive="Back to archive";
+$LDShowData="Afficher les données";
+$LDPatientData="Données du patient";
+$LDBack2Admit="Retour à l'admission";
+$LDBack2Search="Retour à la recherche";
+$LDBack2Archive="Retour à l'archive";
 
-$LDFrom="from";
-$LDTo="to";
-$LDUpdateData="Update data";
-$LDNewArchive="New research in archive";
+$LDFrom="de";
+$LDTo="à";
+$LDUpdateData="Mettre à jour";
+$LDNewArchive="Nouvelle recherche dans l'archive";
 $LDAdmArchive="Admission - Archive";
 
 /************** note: do not erase the " ~nr~ " it will be replaced by the script with a number **************/
-$LDFoundData="I found ~nr~ relevant data!<br>Please click the right one.";
+$LDFoundData="J'ai trouvé ~nr~ de données pertinentes!<br>Veuillez cliquer sur le correct.";
 
-$LDClk2Show="Click to show the data";
+$LDClk2Show="Cliquer pour afficher les données";
 
 $LDElements=array(
 								"",
-								"Lastname",
-								"Firstname",
-								"Date of birth",
-								"Patient nr.",
-								"Admission date"
+								"Nom de famille",
+								"Prénom",
+								"Date de naissance",
+								"Patient no.",
+								"Date d'admission"
 								);
-$LDSearchKeyword="Search keyword or condition";
-$LDMEDOCS="Medical Documentation System (Medocs)";
-$LDMedocsSearchTitle="Medocs - Document search";
-$LDHideCat="Click to hide the cat";
-$LDNewDocu="Document the following patient";
-$LDExtraInfo="Extra information";
-$LDMedAdvice="Medical Advice";
+$LDSearchKeyword="Chercher un mot clé ou condition";
+$LDMEDOCS="Système de documentation médicale (Medocs)";
+$LDMedocsSearchTitle="Medocs - Recherche de documents";
+$LDHideCat="Cliquez pour cacher le CAT";
+$LDNewDocu="Documenter le patient suivant";
+$LDExtraInfo="Extra informations";
+$LDMedAdvice="Avis médical";
 $LDMedocs="Medocs";
 
-$LDYes="Yes";
-$LDNo="No";
+$LDYes="Oui";
+$LDNo="Non";
 
-$LDEditOn="Documented on";
-$LDEditBy="Documented by";
-$LDKeyNr="Key number";
-$LDDocSearch="Search a medocs document";
+$LDEditOn="Documenté le";
+$LDEditBy="Documente par";
+$LDKeyNr="Numéro de clé";
+$LDDocSearch="Chercher un document medocs";
 
-$LDMedDocOf="Medocs document of";
+$LDMedDocOf="Document Medocs de";
 $LDMedocsElements=array(
 								"",
-								"Lastname",
-								"Firstname",
-								"Date of birth",
-								"Patient Nr.",
-								"Document Nr.",
-								"Department",
+								"Nom de famille",
+								"Prénom",
+								"Date de naissance",
+								"Patient No.",
+								"Document No.",
+								"Département",
 								"Date",
-								"Time"
+								"Heure"
 								);
-$LDStartNewDoc="Start a new medocs document";
-$LDNoMedocsFound="No medocs document of the patient found!";
-$LDAt="at";		
-		
-$LDDept="Dept";
-$LDRoomNr="Room nr";
-$LDAdmitType="Admit type";		
-$LDCivilStat="Civil status";
-$LDInsuranceNr="Insurance nr";
-$LDNameAddr="Name & Address";
-$LDBillInfo="Billing info";
-$LDAdmitDiagnosis="Admission diagnosis";
-$LDInfo2="Info to";
-$LDPrintDate="Print date";
-$LDReligion="Religion";
-$LDTherapyType="Therapy type";
-$LDTherapyOpt="Therapy option";
-$LDServiceType="Service type";
+$LDStartNewDoc="Lancer un nouveau document medocs";
+$LDNoMedocsFound="Pas de document medocs du patient trouvé!";
+$LDAt="à";
 
-$LDClick2Print="Click the barcode labels to print";
+$LDDept="dép.";
+$LDRoomNr="Chambre no.";
+$LDAdmitType="Type d'admission";
+$LDCivilStat="État civile";
+$LDInsuranceNr="No d'assurance";
+$LDNameAddr="Nom & Adresse";
+$LDBillInfo="Info de factration";
+$LDAdmitDiagnosis="Diagnostique d'admission";
+$LDInfo2="Info à";
+$LDPrintDate="Date d'impression";
+$LDReligion="Réligion";
+$LDTherapyType="Type de thérapie";
+$LDTherapyOpt="Options de thérapie";
+$LDServiceType="Type de service";
 
-$LDEnterDiagnosisNote="Attach links to diagnosis related notes & publications:";
-$LDEnterTherapyNote="Attach links to therapy related notes & publications:";
-$LDSeeDiagnosisNote="Diagnosis related notes & publications:";
-$LDSeeTherapyNote="Therapy related notes & publications:";
-$LDMakeBarcodeLabels="Make barcode labels";
+$LDClick2Print="Cliquez le étiquettes en code-barre pour imprimer";
 
-$LDPlsEnterDept="<b>Please enter your department, clinic, or work area.</b><br>(e.g. PLOP, Internal Med2, or M4A, etc.)";
-$LDOkSaveNow="OK save now";
+$LDEnterDiagnosisNote="Attacher des liens aux remarques en rapport au diagnostique et publications:";
+$LDEnterTherapyNote="Attacher des liens aux remarques en rapport à la thérapie et publications:";
+$LDSeeDiagnosisNote="Remarques en rapport au diagnostique et publications:";
+$LDSeeTherapyNote="Remarques en rapport à la thérapie et publications:";
+$LDMakeBarcodeLabels="Créer des étiquettes en code-barre";
 
-$LD_ddpMMpyyyy="dd.mm.yyyy";
-$LD_yyyyhMMhdd="yyyy-mm-dd";
-$LD_MMsddsyyyy="mm/dd/yyyy";
+$LDPlsEnterDept="<b>Veuillez entrer votre département, clinique ou le secteur de travail.</b><br>(par exple. PLOP, Med2 interne, ou M4A, etc.)";
+$LDOkSaveNow="OK enregistrer maintenant";
+
+$LD_ddpMMpyyyy="jj.mm.aaaa";
+$LD_yyyyhMMhdd="aaaa-mm-jj";
+$LD_MMsddsyyyy="mm/jj/aaaa";
 /* 2002-10-13 EL */
-$LDPlsSelectPatientFirst="Please find the patient first.";
+$LDPlsSelectPatientFirst="Trouvez le patient en premier, s'il vous plaît.";
 ?>

@@ -1,36 +1,36 @@
 <?php
-$LDPageTitle='Departments';
-$LDDeptTxt='Department';
-$LDOpenHrsTxt='Working Hours';
-$LDChkHrsTxt='Medical Checkup Hours';
-$LDClk4Info='Click for more Information about';
-$LDDayTxt='Day';
+$LDPageTitle='Départements';
+$LDDeptTxt='Département';
+$LDOpenHrsTxt='Horaires de travail';
+$LDChkHrsTxt="Les horaires d'examens médicaux";
+$LDClk4Info="Cliquez pour plus d'informations";
+$LDDayTxt='Jour';
 
 /**
 * A small dictionary:
 * ENT = Eye, Nose, Throath
 * OB-Gyne = Obstetrics-Gynecology
 */
-$dept=array('General Surgery',
-					'Emergency Surgery',
-					'Plastic Surgery',
+$dept=array('Chirurgie générale',
+					'Urgence chirurgique',
+					'Chirurgie plastique',
 					'ENT',
-					'Opthalmology',
-					'Pathology',
-					'OB-Gyne',
-					'Physical Therapy',
-					'Internal Medicine',
-					'Oncology',
+					'Opthalmologie',
+					'Pathologie',
+					'OB-Gyné',
+					'Thérapie physique',
+					'Médecine interne',
+					'Oncologie',
 					'Maintenance',
-					'Intermediate Care Unit',
-					'Intensive Care Unit',
-					'Medical Laboratory',
-					'Emergency Ambulatory',
-					'General Ambulatory',
-					'Sonography',
-					'Nuclear Diagnostics',
-					'Internal Medicine Ambulatory');
-					
+					'Unité de soins intermédiaires',
+					'Unité des soins intensifs',
+					'Laboratoire médical',
+					'Urgence ambulatoire',
+					'Ambulatoire générale',
+					'Sonographie',
+					'Diagnostiques nucléaires',
+					'Ambulatoire de médecine interne');
+
 /**
 * Do not translate the $target variable
 */
@@ -54,15 +54,15 @@ $target=array('dept_generalsurgery',
 					'nuklear',
 					'inmed');
 
-$LDBackTxt='Back';
+$LDBackTxt='Retour';
 
-$LDOpenDays=array('Monday',
-					'Tuesday',
-					'Wednesday',
-					'Thursday',
-					'Friday',
-					'Saturday',
-					'Sunday');
+$LDOpenDays=array('Lundi',
+					'Mardi',
+					'Mercredi',
+					'Jeudi',
+					'Vendredi',
+					'Samedi',
+					'Dimanche');
 $LDOpenTimes=array('8.30 - 21.00', //Mo
 					'8.30 - 21.00', //Di
 					'8.30 - 21.00', //Mi
