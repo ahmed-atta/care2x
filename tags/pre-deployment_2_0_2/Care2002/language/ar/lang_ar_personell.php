@@ -1,0 +1,42 @@
+<?php
+$LDPlsFindPersonFirst='ÇæÌÏ ÇáÔÎÕ ÃæáÇ';
+$LDSearchPersonell='ÈÍË Úä ãæÙÝ';
+$LDPersonRegister='ÊÓÌíá ÔÎÕ';
+$LDShortID='áãÍÉ ÊÚÑíÝíÉ';
+$LDJobNr='ÑÞã ÇáÚãá';
+$LDJobFunction='ÇáæÙíÝÉ';
+$LDDateJoin='ÊÇÑíÎ ÇáÇáÊÍÇÞ';
+$LDDateExit='ÊÇÑíÎ ÇáÎÑæÌ';
+$LDContractClass='äæÚ ÇáÚÞÏ';
+$LDContractStart='ÈÏÇíÉ ÇáÚÞÏ';
+$LDContractEnd='äåÇíÉ ÇáÚÞÏ';
+$LDPayClass='ÝÆÉ ÇáÏÝÚ';
+$LDPaySubClass='ÝÆÉ ÇáÏÝÚ ÇáÝÑÚíÉ';
+$LDLocalPremiumID='ÝÆÉ ÇáÚáÇæÉ';
+$LDTaxAccountNr='ÑÞã ÇáÍÓÇÈ ÇáÖÑíÈí';
+$LDInternalRevenueCode='ÇáÏÎá ÇáÇÌãÇáí';
+$LDNrWorkDay='ÚÏÏ ÃíÇã ÇáÚãá';
+$LDNrWeekHour='ÓÇÚÇÊ ÇáÚãá ÇáÇÓÈæÚíÉ';
+$LDNrVacationDay='ÚÏÏ ÃíÇã ÇáÚØáÉ';
+$LDMultipleEmployer='ãÊÚÏÏ ÇáæÙÇÆÝ¿';
+$LDPersonellNr='ÑÞã ÇáãæÙÝ';
+$LDPersonCurrentlyEmployed='åÐÇ ÇáÔÎÕ ãæÙÝ ÍÇáíÇ';
+$LDRecordedBy='ÓÌá ãä ØÑÝ';
+$LDNrDependent='ÑÞã ÇáÊÈÚíÉ';
+$LDPersonellData='ÈíÇäÇÊ ÇáãæÙÝíä';
+$LDEnterNewEmployment='ÃÏÎá ÈíÇäÇÊ ãæÙÝ ÌÏíÏ';
+$LDRegNewPerson='ÓÌá ÇáÈíÇäÇÊ ÇáÇÓÇÓíÉ áÔÎÕ ÌÏíÏ';
+$LDFindPersonell='ÃæÌÏ ãæÙÝ';
+$LDPersonalID='ÇáÑÞã ÇáÔÎÕí';
+$LDAssignDoctorDept='ÊÎÕíÕ ØÈíÈ Ýí ÞÓã';
+$LDAssignNurseDept='ÊÎÕíÕ ããÑÖ Ýí ÞÓã';
+$LDAddPhoneInfo='ÃÖÝ ãÚáæãÇÊ ÇáåÇÊÝ/ÌåÇÒ ÇáäÏÇÁ';
+$LDOptions4Employee='ÎíÇÑÇÊ áåÐÇ ÇáãæÙÝ';
+$LDPayrollOptions='ÎíÇÑÇÊ ÌÏæá ÇáÑæÇÊÈ';
+$LDLegalDocuments='æËÇÆÞ ÞÇäæäíÉ';
+$LDShowPersonalData='ÇÙåÇÑ ÇáÈíÇäÇÊ ÇáÔÎÕíÉ';
+/* 2003-05-17 EL */
+$LDEnterEmployeeSearchKey='ÃÏÎá ãÝÊÇÍ ßÇãÉ ááÈÍË: ãËá. ÑÞã ÇáãæÙÝ., ÇáÃÓã, Ãæ ÇááÞÈ.';
+$LDPersonnelManagement='ÔæÄä ÇáãæÙÝíä';
+$LDNewEmployee='ãæÙÝ ÌÏíÏ';
+?>
