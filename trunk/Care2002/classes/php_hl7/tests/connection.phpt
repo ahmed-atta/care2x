@@ -15,6 +15,8 @@ $seg1->setField(3, "XXX");
 $msg->addSegment($seg1);
 
 /**
+// If you have fork support, try this...
+
 $pid = pcntl_fork();
 
 if (! $pid) {
@@ -48,7 +50,6 @@ if (! $pid) {
       echo "socket_read() failed: reason: " . socket_strerror($ret) . "\n";
       break 2;
     }
-
 
     echo "Incoming: $buf\n";
 

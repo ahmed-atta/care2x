@@ -39,8 +39,8 @@ class Net_HL7_Messages_ACK extends Net_HL7_Message {
    * @package    Net_HL7
    * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
    */
-  function Net_HL7_Messages_ACK($req = "") {
-
+  function Net_HL7_Messages_ACK($req = "") 
+  {
     parent::Net_HL7_Message();
     
     if ($req) {
@@ -84,8 +84,6 @@ class Net_HL7_Messages_ACK extends Net_HL7_Message {
       $msh->setField(6, $reqMsh->getField(4));
       $msa->setField(2, $reqMsh->getField(10));
     }
-
-    return 1;
   }
 
 
@@ -102,8 +100,8 @@ class Net_HL7_Messages_ACK extends Net_HL7_Message {
    * @return boolean
    * @access public
    */
-  function setAckCode($code, $msg = "") {
-
+  function setAckCode($code, $msg = "") 
+  {
     $mode = "A";
 
     // Determine acknowledge mode: normal or enhanced
@@ -133,8 +131,8 @@ class Net_HL7_Messages_ACK extends Net_HL7_Message {
    * @return boolean
    * @access public
    */
-  function setErrorMessage($msg) {
-
+  function setErrorMessage($msg) 
+  {
     $this->setAckCode("E", $msg);
     return True;
   }

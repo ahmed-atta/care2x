@@ -75,8 +75,8 @@ class Net_HL7_Connection {
    * @param int Port to connect to
    * @return boolean
    */
-  function Net_HL7_Connection($host, $port) {
-    
+  function Net_HL7_Connection($host, $port) 
+  {  
     $this->_HANDLE = $this->_connect($host, $port);
     $this->_MESSAGE_PREFIX = "\013";
     $this->_MESSAGE_SUFFIX = "\034\015";
@@ -94,8 +94,8 @@ class Net_HL7_Connection {
    * @return socket
    * @access private
    */
-  function _connect($host, $port) {
-    
+  function _connect($host, $port) 
+  {  
     $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
     if ($socket < 0) {
       trigger_error("create failed: " . socket_strerror($socket), E_USER_ERROR);
@@ -119,8 +119,8 @@ class Net_HL7_Connection {
    * @access public
    * @see Net_HL7_Message
    */
-  function send($req) {
-
+  function send($req) 
+  {
     $handle = $this->_HANDLE;
     $hl7Msg = $req->toString();
     
@@ -149,8 +149,8 @@ class Net_HL7_Connection {
    * @access public
    * @return boolean
    */
-  function close() {
-
+  function close() 
+  {
     socket_close($this->_HANDLE);
     return True;
   }

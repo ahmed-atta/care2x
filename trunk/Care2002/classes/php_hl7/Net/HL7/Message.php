@@ -208,7 +208,6 @@ class Net_HL7_Message {
    */
   function insertSegment(&$segment, $idx = "") 
   {
-
     if ((! $idx) || ($idx > count($this->_segments))) {
       trigger_error("Index out of range", E_USER_WARNING);
       return False;
