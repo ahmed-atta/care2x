@@ -2,7 +2,7 @@
 $LDClose='Fermer';
 $LDCancel='Annuler';
 $LDResetEntry='Effacer les entrées';
-$LDSave='Sauver';
+$LDSave='Sauvegarder';
 $LDReset='Reinitialiser';
 
 $LDEnterData='Cliquez pour entrer les données';
@@ -26,7 +26,7 @@ $LDCreate='Crèer';
 $LDValue='Valeur';
 
 $LDNews='Nouvelles';
-$LDNewsTxt='Lire ou Ecrire de nouveaux articles concernanrt le department EDP';
+$LDNewsTxt='Lire ou Ecrire de nouveaux articles concernant le départment EDP';
 $LDMemo='Memo';
 $LDMemoTxt='Lire ou Ecrire un memo';
 $LDSearchPat='Rechercher un  patient';
@@ -44,16 +44,16 @@ $LDNoDataFound="The search found <font color=red><b>no</b></font> data.";
 $LDClk2SeeInfo="Please click the right one to see the complete information";
 /********************** Do not erase or replace the ~nr~ *****************************/
 $LDFoundNrData="The search found <font color=red><b>~nr~</b></font> data that corresponded to the search keyword.";
-$LDOpenInfo="Show complete information about ";
+$LDOpenInfo="Afficher toutes les informations au sujet de ";
 
 $LDGoodMorning="Bonjour";
-$LDGoodDay="Hello, nice to see you";
-$LDGoodEvening="Good evening";
+$LDGoodDay="Bonjour, ravi de vous voir";
+$LDGoodEvening="Bonsoir";
 
 $LDDate="Date";
-$LDDept="Department";
-$LDPrio="Priority";
-$LDSearchIn="Search after";
+$LDDept="Départment";
+$LDPrio="Priorité";
+$LDSearchIn="Rechercher après";
 
 
 $LDPlsEnterMore="Please enter some more information and try it again.";
