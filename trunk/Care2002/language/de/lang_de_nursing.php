@@ -87,7 +87,7 @@ $LDShowStationData='Stationsprofil';
 $LDLockBed='Bett sperren';
 $LDAccessRights='Zugangsberechtigungen';
 $LDProfile='Profil';
-$LDCreate='Neue Station';
+$LDCreate='Erstellen';
 $LDNewStation='Neue station erstellen';
 $LDDescription='Beschreibung';
 $LDDept='Abteilung';
@@ -344,4 +344,28 @@ $LDNursesListTxt='Anzeigen, sehen, und bearbeiten  von Pflegekräfte';
 $LDInsurance='Allgemein';
 $LDPrivate='Privat';
 $LDSelfPay='Selbstzahlung';
+/* 2003-04-21 EL */
+$LDRoom='Zimmer';
+$LDAdm_Nr='Aufn.Nr.';
+$LDStatus='Status';
+$LDInWard='In Ward';
+/* 2003-04-23 EL */
+$LDWard_ID='Stationskennung';
+$LDNoSpecChars='Sonderzeichen nicht erlaubt';
+/* 2003-04-24 EL*/
+$LDTemporaryCloseWard='Station vorübergehend schliessen';
+$LDIrreversiblyCloseWard='Station unwiderruflich schliessen';
+$LDSureTemporaryClose='Sind Sie sicher, Sie möchten diese Station vorübergehend schliessen?';
+$LDSureIrreversibleClose='Sind Sie sicher, Sie möchten diese Station UNWIDERRUFLICH	schliessen ?';
+/* Do not translate the ~str~ , it will be replaced with the ward's name by the program */
+$LDWardNoClose='Die Station ~str~ kann nicht geschlossen werden da es sich noch Patienten darin befindent.<br>
+Bitte entlassen Sie vor der Schliessung alle Patienten aus der Station.';
+$LDBackToWardProfile='Um das Stationsprofil wieder anzuzeigen.';
+$LDShowWardOccupancy='Um die Stationsbelegungsliste anzuzeigen.';
+$LDTemporaryClosed='Vorübergehend geschlossen';
+$LDReopenWard='Station wieder öffnen';
+$LDSureReopenWard='Sind Sie sicher, Sie möchten diese Station wieder öffnen?';
+$LDShortDescription='Kurzbeschreibung';
+$LDRoomShortDescription='Kurzbeschreibung von der Station';
+$LDRoomNotCreated='Zimmer noch nicht vorhanden';
 ?>

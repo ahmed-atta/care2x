@@ -162,7 +162,7 @@ $LDProvState='Land';
 $LDRegion='Region';
 $LDCountry='Bundesland';
 $LDCitizenship='Staatsangehörigkeit';
-$LDCivilStatus='Civil status'; /* Civil status = married, single, divorced, widow */
+$LDCivilStatus='Familienstand'; /* Civil status = married, single, divorced, widow */
 $LDSingle='Ledig';
 $LDMarried='Verheiratet';
 $LDDivorced='Geschieden';

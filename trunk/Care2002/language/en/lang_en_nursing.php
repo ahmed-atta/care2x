@@ -26,12 +26,12 @@ $LDNursingStationsTxt='Occupancy, patient\' charts, photos, etc.';
 $LDCloseBack2Main='Close and go back to start page';
 $LDOld='Old';
 $LDTodays='Today\'s';
-$LDOccupancy='occupancy';
+$LDOccupancy='Occupancy';
 $LDBedNr='No. of beds';
 $LDOptions='Options';
 $LDFreeBed='Unoccupied';
 
-$LDNoOcc='Today\'s occupancy list is not available!';
+$LDNoOcc='The occupancy list is not available!';
 $LDClk2Archive='Click this to go to archive.';
 $LDNrUnocc='Number of unoccupied beds';
 $LDEditStation='Edit data in ward ~station~';
@@ -178,7 +178,6 @@ $LDClk2Occupy='Click to occupy this bed';
 								'kasse'=>'General'
 								);
 */
-$LDInsurance='Health Fund';
 $LDSave='Save';
 $LDNurse='Nurse';
 $LDYesSure='Yes, I\'m sure. Dismiss the patient.';
@@ -352,4 +351,31 @@ $LDNoDiagReport='No diagnostic report available.';
 /* 2003-03-23 EL */
 $LDNursesList='Nurses\' List';
 $LDNursesListTxt='List, View, Create, & Edit Nurses\' List';
+/* 2003-04-18 */
+$LDInsurance='Health Fund';
+$LDPrivate='Private';
+$LDSelfPay='Self pay';
+/* 2003-04-21 EL */
+$LDRoom='Room';
+$LDAdm_Nr='Adm.Nr.';
+$LDStatus='Status';
+$LDInWard='In Ward';
+/* 2003-04-23 EL */
+$LDWard_ID='Ward ID';
+$LDNoSpecChars='No special characters allowed';
+/* 2003-04-24 EL*/
+$LDTemporaryCloseWard='Temporarily close this ward';
+$LDIrreversiblyCloseWard='Irreversibly close this ward';
+$LDSureTemporaryClose='Are you sure you want to close this ward temporarily?';
+$LDSureIrreversibleClose='Are you sure you want to close this ward IRREVERSIBLY ?';
+/* Do not translate the ~str~ , it will be replaced with the ward's name by the program */
+$LDWardNoClose='The ~str~ ward  cannot be closed because patients are still admitted.<br>You need to discharge all patients from the ward before closing it.';
+$LDBackToWardProfile='To go back to ward\'s profile';
+$LDShowWardOccupancy='To display the ward\'s occupancy list';
+$LDTemporaryClosed='Temporary closed';
+$LDReopenWard='Reopen this ward';
+$LDSureReopenWard='Are you sure you want to reopen this ward?';
+$LDShortDescription='Short description';
+$LDRoomShortDescription='Room\'s short description';
+$LDRoomNotCreated='Rooms not yet created';
 ?>

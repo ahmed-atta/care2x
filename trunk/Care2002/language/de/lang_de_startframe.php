@@ -37,8 +37,7 @@ $LDEditTitle='Schlagzeile';
 $LDNewsDummy=array(1=>'erster',2=>'zweiter',3=>'dritter',4=>'vierter');
 
 $LDNoFrame='Diese Seite verwendet Frames für optimales funktionieren. Bitte installieren Sie ein geeignetes Browser Programm.
-						Wir empfehlen den Microsoft Internet Explorer ab version 5.0. Bitte aktivieren Sie die Javascript (Jscript) und
-						stellen Sie die Akzeptanz auf Cookies auf "automatisch" ein'; 
+						Bitte aktivieren Sie die Javascript (Jscript) und	stellen Sie die Akzeptanz auf Cookies auf "automatisch" ein'; 
 $LDClk2Write='Klick hier zum schreiben';
 
 $LDAlertOldBrowser='Ihr Browser ist älter als version 5.0<br> Wir empfehlen die version ab 5.0. <br> Sie können zwar eine ältere version benutzen, aber das
