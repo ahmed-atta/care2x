@@ -14,6 +14,7 @@ $TIME_OUT_INACTIVE=FALSE;
 $TIME_OUT_TIME=1500;
 
 # Establish db connection
+
 require_once($root_path.'include/inc_db_makelink.php');
 
 # The function getLang gets the language code and stores it to the lang variable
@@ -41,6 +42,7 @@ function getLang($chk_file)
 
 # Load charset function
 require_once($root_path.'include/inc_charset_fx.php'); // charset functions
+
 
 # The following lines of code is the script chaining detector. It compares the sid values propagated via
 # the relative url with the ck_sid+sid (decrypted) cookie values. If the two don't match, a warning message will apear and

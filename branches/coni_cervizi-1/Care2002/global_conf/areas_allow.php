@@ -51,11 +51,21 @@ $allow_area=array(
 
 'fotolab'=>array('_a_1_photowrite'),
 
+'ecombill'=>array('_a_1_billallwrite','_a_2_billallread',
+						  '_a_2_billpharmawrite',
+						  '_a_3_billpharmaread' ,
+						  '_a_2_billserviceswrite',
+						  '_a_3_billservicesread',
+						  '_a_2_billlabwrite' ,
+						  '_a_3_billlabread'),
+
 'test_diagnose'=>array('_a_1_diagnosticsresultwrite', '_a_1_labresultswrite'),
 
 'test_receive'=>array('_a_1_diagnosticsresultwrite', '_a_1_labresultswrite', '_a_2_diagnosticsreceptionwrite'),
 
-'test_order'=>array('_a_1_diagnosticsresultwrite', '_a_1_labresultswrite', '_a_2_diagnosticsreceptionwrite',   '_a_3_diagnosticsrequest')
+'test_order'=>array('_a_1_diagnosticsresultwrite', '_a_1_labresultswrite', '_a_2_diagnosticsreceptionwrite',   '_a_3_diagnosticsrequest'),
+
+'Amministrazione'=>array('_a_1_Amministrazioneallwrite','_a_2_AmministrazioneStatistichewrite', '_a_2_AmministrazioneFogliolavorowrite')
 )
 
 ?>

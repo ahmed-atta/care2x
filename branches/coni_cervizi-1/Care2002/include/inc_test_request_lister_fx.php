@@ -64,7 +64,7 @@ if($tracker>1)
    $requests->MoveFirst();
 
 ?>
-<a href="<?php echo $thisfile.URL_APPEND."&target=".$target."&subtarget=".$subtarget."&pn=".$pn."&batch_nr=".$test_request['batch_nr']."&user_origin=".$user_origin."&tracker=".($tracker-1); ?>"><img <?php echo createComIcon($root_path,'uparrowgrnlrg.gif','0','left') ?> alt="<?php echo $LDPrevRequest ?>"></a>
+<a href="<?php echo $thisfile.URL_APPEND."&target=".$target."&subtarget=".$subtarget."&pn=".$test_request[1]."&batch_nr=".$test_request['batch_nr']."&user_origin=".$user_origin."&tracker=".($tracker-1); ?>"><img <?php echo createComIcon($root_path,'uparrowgrnlrg.gif','0','left') ?> alt="<?php echo $LDPrevRequest ?>"></a>
 <?php
 }
 if($tracker<$batchrows)
@@ -72,7 +72,7 @@ if($tracker<$batchrows)
    $requests->Move($tracker);
    $test_request=$requests->FetchRow();
 ?>
-<a href="<?php echo $thisfile.URL_APPEND."&target=".$target."&subtarget=".$subtarget."&pn=".$pn."&batch_nr=".$test_request['batch_nr']."&user_origin=".$user_origin."&tracker=".($tracker+1); ?>"><img <?php echo createComIcon($root_path,'dwnarrowgrnlrg.gif','0','right') ?>  alt="<?php echo $LDNextRequest ?>"></a>
+<a href="<?php echo $thisfile.URL_APPEND."&target=".$target."&subtarget=".$subtarget."&pn=".$test_request[1]."&batch_nr=".$test_request['batch_nr']."&user_origin=".$user_origin."&tracker=".($tracker+1); ?>"><img <?php echo createComIcon($root_path,'dwnarrowgrnlrg.gif','0','right') ?>  alt="<?php echo $LDNextRequest ?>"></a>
 <?php
 }
 

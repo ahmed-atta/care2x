@@ -9,8 +9,8 @@
 *  Note this class should be instantiated only after a "$db" adodb  connector object
 * has been established by an adodb instance
 * @author Elpidio Latorilla
-* @version beta 1.0.09
-* @copyright 2002,2003 Elpidio Latorilla
+* @version deployment 1.1 (mysql) 2004-01-11
+* @copyright 2002,2003,2004 Elpidio Latorilla
 * @package care_api
 */
 class Core {
@@ -231,17 +231,17 @@ class Core {
 	*
 	*/
 	function getAllItemsObject(&$items) {
-		global $db;
-		$this->sql="SELECT $items  FROM $this->coretable";
-        	//echo $this->sql;
-        	if($this->res['gaio']=$db->Execute($this->sql)) {
-			if($this->rec_count=$this->res['gaio']->RecordCount()) {
-				 return $this->res['gaio'];
+	    global $db;
+	    $this->sql="SELECT $items  FROM $this->coretable WHERE 1";
+        //echo $this->sql;
+        if($this->res['gaio']=$db->Execute($this->sql)) {
+            if($this->rec_count=$this->res['gaio']->RecordCount()) {
+				 return $this->res['gaio'];	 
 			} else { return FALSE; }
-		} else { return FALSE; }
+		} else { return FALSE; }	
 	}
 	/**
-	* Returns all records with all items from the table.
+	* Returns all records with all items from the table. 
 	*
 	* The table name must be set in the coretable first by setTable() method.
 	* @return mixed ADODB record object or boolean
@@ -258,7 +258,7 @@ class Core {
 	*/
 	function getAllDataObject() {
 	    global $db;
-	    $this->sql="SELECT *  FROM $this->coretable";
+	    $this->sql="SELECT *  FROM $this->coretable WHERE 1";
         //echo $this->sql;
         if($this->res['gado']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['gado']->RecordCount()) {
@@ -287,15 +287,14 @@ class Core {
 	*/
 	function getAllItemsArray(&$items) {
 	    global $db;
-	    $this->sql="SELECT $items  FROM $this->coretable";
+	    $this->sql="SELECT $items  FROM $this->coretable WHERE 1";
         //echo $this->sql;
         if($this->result=$db->Execute($this->sql)) {
             if($this->result->RecordCount()) {
-				 //while($this->ref_array=$this->result->FetchRow());
-				 //return $this->ref_array;
-				 return $this->result->GetArray();
+				 while($this->ref_array=$this->result->FetchRow());
+				 return $this->ref_array; 
 			} else { return FALSE; }
-		} else { return FALSE; }
+		} else { return FALSE; }	
 	}
 	/**
 	* Returns all records with the all items from the table. 
@@ -315,7 +314,7 @@ class Core {
 	*/
 	function getAllDataArray() {
 	    global $db;
-	    $this->sql="SELECT *  FROM $this->coretable";
+	    $this->sql="SELECT *  FROM $this->coretable WHERE 1";
         //echo $this->sql;
         if($this->result=$db->Execute($this->sql)) {
             if($this->result->RecordCount()) {
@@ -340,15 +339,19 @@ class Core {
 		$values='';
 		if(!is_array($array)){ return FALSE;}
 		while(list($x,$v)=each($array)) {
+		
+		
 		    $index.="$x,";
 			if(stristr($v,'null')) $values.='NULL,';
 				else $values.="'$v',";
+		
 		}
 		reset($array);
 		$index=substr_replace($index,'',(strlen($index))-1);
 		$values=substr_replace($values,'',(strlen($values))-1);
         $this->sql="INSERT INTO $this->coretable ($index) VALUES ($values)";		
-		//echo $this->sql;//exit;
+		//echo $this->sql;
+		//exit;
 		reset($array);
 		return $this->Transact();
 	}
@@ -557,101 +560,13 @@ class Core {
 	* @param int OID value
 	* @return int Non-zero if value ok, else zero if not found
 	*/
-	function postgre_Insert_ID($table,$pk,$oid=0){
+	function postgre_Insert_ID($table,$pk,$oid){
 		global $db;
-		if(empty($oid)){
-			 return 0;
-		}else{
-			$this->sql="SELECT $pk FROM $table WHERE oid=$oid";
-			if($result=$db->Execute($this->sql)) {
-				if($result->RecordCount()) {
-					$buf=$result->FetchRow();
-					 return $buf[$pk];
-				} else { return 0; }
+		$this->sql="SELECT $pk FROM $table WHERE oid=$oid";
+		if($result=$db->Execute($this->sql)) {
+			if($result->RecordCount()) {
+				$buf=$result->FetchRow();
+				 return $buf[$pk];
 			} else { return 0; }
-		}
-	}
-	/**
-	* Returns the  value of the last inserted primary key of a row based on the column field name
-	*
-	* This function uses the  core table set by the child class
-	* @param str Field name of the primary key
-	* @param int OID value
-	* @return int Non-zero if value ok, else zero if not found
-	*/
-	function LastInsertPK($pk='',$oid=0){
-		global $dbtype;
-		if(empty($pk)||empty($oid)){
-			return $oid;
-		}else{
-			switch($dbtype){
-				case 'mysql': return $oid;
-					break;
-				case 'postgres': return $this->postgre_Insert_ID($this->coretable,$pk,$oid);
-					break;
-				case 'postgres7': return $this->postgre_Insert_ID($this->coretable,$pk,$oid);
-					break;
-				default: return $oid;
-			}
-		}
-	}
-	/**
-	* Returns  a field concat string for sql query.
-	*
-	* This function resolves the problems of concatenating a field value with a string in different db types
-	* @param str Field name
-	* @param str String to concate
-	* @return string
-	*/
-	function ConcatFieldString($fieldname,$str=''){
-		global $dbtype;
-
-		switch($dbtype){
-			case 'mysql': return "CONCAT($fieldname,'".str."')";
-				break;
-			case 'postgres': return "($fieldname || '".$str."')";
-				break;
-			case 'postgres7':return "($fieldname || '".$str."')";
-				break;
-			default: return "($fieldname || '".$str."')";
-		}
-	}
-	/**
-	* Returns  a "history" field concat string for sql query.
-	*
-	* This function resolves the problems of concatenating the "history" field value with a string in different db types
-	* @param str String
-	* @return string
-	*/
-	function ConcatHistory($str=''){
-		return $this->ConcatFieldString('history',$str);
-	}
-	/**
-	* Returns  a "notes" field concat string for sql query.
-	*
-	* This function resolves the problems of concatenating the "note"  field value with a string in different db types
-	* @param str String
-	* @return string
-	*/
-	function ConcatNotes($str=''){
-		return $this->ConcatFieldString('notes',$str);
-	}
-	/**
-	* Returns  a field's string for sql query. Portions of the string is replaced by a string.
-	*
-	* This function resolves the problems of replacing a field value with a string in different db types
-	* @param str Field name
-	* @param str String to be replaced
-	* @param str Replacement string
-	* @return string
-	*/
-	function ReplaceFieldString($fieldname,$str1='',$str2=''){
-		global $dbtype;
-
-		switch($dbtype){
-			case 'mysql': return "REPLACE($fieldname,'$str1','$str2')";
-				break;
-				default: return "REPLACE($fieldname,'$str1','$str2')";
-		}
-	}
+		} else { return 0; }	}
 }

@@ -26,6 +26,11 @@ class Appointment extends Core {
 	* @var string
 	*/
 	var $tb_person='care_person';
+		/** INSERITO DA NOI
+	* Database table for the encounter data.
+	* @var string
+	*/
+	var $tb_encounter='care_encounter';
 	/**
 	* Person ID
 	* @var int
@@ -99,7 +104,7 @@ class Appointment extends Core {
 	function getPersonsAppointmentsObj($pid=''){
 		global $db;
 		if(empty($pid)) return false;
-		if($this->result=$db->Execute("SELECT * FROM $this->tb_appt WHERE pid=$pid ORDER BY date DESC")){
+		if($this->result=$db->Execute("SELECT * FROM $this->tb_appt WHERE pid=$pid ORDER BY date DESC, time ASC")){
 			if($this->result->RecordCount()) return $this->result;
 				else return false;
 		}
@@ -128,7 +133,7 @@ class Appointment extends Core {
 	function getAppointment($nr){
 		global $db;
 		if(empty($nr)) return false;
-		if($this->result=$db->Execute("SELECT * FROM $this->tb_appt WHERE nr=$nr")){
+		if($this->result=$db->Execute("SELECT * FROM $this->tb_appt WHERE nr=$nr ORDER BY time ASC")){
 			if($this->result->RecordCount()) return $this->result->FetchRow();
 				else return false;
 		}
@@ -148,20 +153,43 @@ class Appointment extends Core {
 	* @param string Value of constraint.
 	* @return mixed adodb record object or boolean
 	*/
-	function _getAll($y=0,$m=0,$d=0,$by='',$val=''){
+	function _getAll($y=0,$m=0,$d=0,$by='',$val='', $val2='',$sort=''){
 		global $db;
 		# Set to defaults if empty
 		if(!$y) $y=date('Y');
 		if(!$m) $b=date('m');
 		if(!$d) $d=date('d');
-		$this->sql="SELECT a.*,p.name_last,p.name_first,p.date_birth,p.sex,p.death_date
-				FROM $this->tb_appt AS a LEFT JOIN $this->tb_person AS p ON a.pid=p.pid
+		$this->sql="SELECT DISTINCT a.*,p.name_last,p.name_first,p.date_birth,p.sex,p.death_date
+				FROM ($this->tb_appt AS a LEFT JOIN $this->tb_person AS p ON a.pid=p.pid) LEFT JOIN care_encounter AS e ON e.pid=a.pid
 				WHERE a.date='$y-$m-$d'";
 		switch($by){
-			case '_DEPT': $this->sql.=" AND a.to_dept_nr=$val"; break;
-			case '_DOC': $this->sql.=" AND a.to_personell_name  LIKE '%$val%'"; break;
+			case '_DEPT': $this->sql.=" AND a.to_dept_nr=$val "; break;
+			case '_DOC': $this->sql.=" AND a.to_personell_name  LIKE '%$val%' "; break;
+			###MODIFICATO DA NOI PER SEMPLIFICARCI LA VITA NEL FILTRAGGIO PRIVATI ATLETI
+			case '_QUA': $this->sql.=" AND e.insurance_firm_id=$val"; break;
+			//case '_DUE': $this->sql.=" AND a.to_dept_id LIKE '%$val%' AND a.to_dept_nr=$val2 "; break;
+			case '_DEPT_AND_QUA': $this->sql.=" AND e.insurance_firm_id=$val2 AND a.to_dept_nr=$val"; break;
+			case '_DEPT_AND_NOT_QUA': $this->sql.=" AND a.to_dept_nr=$val AND  (e.insurance_firm_id=1 OR e.insurance_firm_id=10 OR e.insurance_firm_id=11 OR e.insurance_firm_id=12)"; break;
+			###SERVE A CARICARE CHI NON E' UN ATLETA I.N. o P.O.
+			case '_QUA2': $this->sql.=" AND  (e.insurance_firm_id=1 OR e.insurance_firm_id=10 OR e.insurance_firm_id=11 OR e.insurance_firm_id=12)"; break;
 		}
-		$this->sql.=" AND a.status NOT IN ($this->dead_stat) ORDER BY a.date DESC";
+		#MODIFICATO PER IMPOSTARE L'ORDINAMENTO
+		#$this->sql.=" AND a.status NOT IN ($this->dead_stat) ORDER BY  p.name_last ASC, a.date DESC, a.time ASC";
+				
+		switch(trim($sort)){
+			case 'ora': #ORDINA PER DATA
+				$this->sql.=" AND a.status NOT IN ($this->dead_stat) ORDER BY  a.time ASC";
+				break;
+			case 'cognome': #ORDINA PER COGNOME E POI DATA
+				$this->sql.=" AND a.status NOT IN ($this->dead_stat) ORDER BY  p.name_last ASC, a.date DESC, a.time ASC";
+				break;
+			case '':#CASO GENERALE X ORA IDENTICO AL CASO cognome 
+				$this->sql.=" AND a.status NOT IN ($this->dead_stat) ORDER BY  p.name_last ASC, a.date DESC, a.time ASC";
+				break;
+			
+		}
+		
+		
 		if($this->res['_ga']=$db->Execute($this->sql)){
 			if($this->count=$this->res['_ga']->RecordCount()){
 				return $this->res['_ga'];
@@ -186,8 +214,8 @@ class Appointment extends Core {
 	* @param int Day of appointment
 	* @return mixed
 	*/
-	function getAllByDateObj($y=0,$m=0,$d=0){
-		return $this->_getAll($y,$m,$d);
+	function getAllByDateObj($y=0,$m=0,$d=0,$sort=''){
+		return $this->_getAll($y,$m,$d,'','','',$sort);
 	}
 	/**
 	* Gets all appointments by a given date and department number.
@@ -209,8 +237,8 @@ class Appointment extends Core {
 	* @param int Department number
 	* @return mixed
 	*/
-	function getAllByDeptObj($y=0,$m=0,$d=0,$nr){
-		return $this->_getAll($y,$m,$d,'_DEPT',$nr);
+	function getAllByDeptObj($y=0,$m=0,$d=0,$nr,$sort=''){
+		return $this->_getAll($y,$m,$d,'_DEPT',$nr,'',$sort);
 	}
 	/**
 	* Gets all appointments by a given date and doctor's name.
@@ -232,8 +260,8 @@ class Appointment extends Core {
 	* @param string Doctor's name
 	* @return mixed
 	*/
-	function getAllByDocObj($y=0,$m=0,$d=0,$doc){
-		return $this->_getAll($y,$m,$d,'_DOC',$doc);
+	function getAllByDocObj($y=0,$m=0,$d=0,$doc,$sort=''){
+		return $this->_getAll($y,$m,$d,'_DOC',$doc,'',$sort);
 	}
 	/**
 	* Cancels an appointment based on the primary record key "nr".
@@ -254,4 +282,16 @@ class Appointment extends Core {
 			return true;
 		}else return false;
 	}
-}
+	function getAllByQuaObj($y=0,$m=0,$d=0,$qua,$sort=''){
+		return $this->_getAll($y,$m,$d,'_QUA',$qua,'' ,$sort);
+	}
+	function getAllByNonQuaObj($y=0,$m=0,$d=0,$sort=''){
+		return $this->_getAll($y,$m,$d,'_QUA2','','',$sort);
+	}
+	function getAllByDeptandQuaObj($y=0,$m=0,$d=0,$dept,$val,$sort=''){
+		return $this->_getAll($y,$m,$d,'_DEPT_AND_QUA',$dept, $val,$sort);
+	}
+function getAllByDeptandNotQuaObj($y=0,$m=0,$d=0,$dept,$sort=''){
+		return $this->_getAll($y,$m,$d,'_DEPT_AND_NOT_QUA',$dept,'',$sort);
+	}
+	}

@@ -1,6 +1,6 @@
 <?php
 # This is the database name
-$dbname='maho';
+$dbname='caredb';
 
 # Database user name, default is root or httpd
 $dbusername='root';
@@ -12,22 +12,22 @@ $dbpassword='';
 $dbhost='localhost';
 
 # First key used for simple chaining protection of scripts
-$key='746739594850';
+$key='120376';
 
 # Second key used for accessing modules
-$key_2level='4316638115366';
+$key_2level='120376';
 
 # 3rd key for encrypting cookie information
-$key_login='515962935880';
+$key_login='120376';
 
 # Main host address or domain
 $main_domain='localhost';
 
 # Host address for images
-$fotoserver_ip='localhost';
+$fotoserver_ip='127.0.0.1';
 
 # Transfer protocol. Use https if this runs on SSL server
-$httprotocol='http';
+$httprotocol='10.20.250.246';
 
 # Set this to your database type. For details refer to ADODB manual or goto http://php.weblogs.com/ADODB/
 $dbtype='mysql';

@@ -29,13 +29,13 @@ if(defined('ENCRYPT_PAGE_BASE64')&&ENCRYPT_PAGE_BASE64){
 }
 
 # globalize the POST, GET, & COOKIE variables
-require_once($root_path.'include/inc_vars_resolve.php'); 
+require_once('inc_vars_resolve.php'); 
 
 # Set global defines 
 if(!defined('LANG_DEFAULT')) define ('LANG_DEFAULT','en');
 
 # Establish db connection 
-require_once($root_path.'include/inc_db_makelink.php');
+require_once('inc_db_makelink.php');
 
 if(!defined('NOSTART_SESSION')||(defined('NOSTART_SESSION')&&!NOSTART_SESSION)){
 	# Set sessions handler to "user"

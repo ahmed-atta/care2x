@@ -146,7 +146,10 @@ class Person extends Core {
 				 'modify_id',
 				 'modify_time',
 				 'create_id',
-				 'create_time');
+				 'create_time'
+				 ,'citizenship' //AGGIUNTA DA GIORGIO PER LA PROVINCIA
+				 );
+				 
 	/**
 	* Constructor
 	* @param int PID number

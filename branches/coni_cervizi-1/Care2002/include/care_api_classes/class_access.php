@@ -24,23 +24,12 @@ class Access extends Core {
 	*/
 	var $user=array();
 	/**
-	* Allowed areas in hieararchical order
-	* @var array
-	*/
-	var $allowedareas=array();
-	/**
 	* User's registration status.
 	* FALSE = unknown.
 	* TRUE = known.
 	* @var boolean
 	*/
 	var $usr_status=FALSE;
-	/**
-	* Flags if the "all" permission type is permitted.
-	* Default is TRUE.
-	* @var boolean
-	*/
-	var $permit_type_all=TRUE;
 	/**
 	* Password status.
 	* FALSE = wrong password.
@@ -176,67 +165,12 @@ class Access extends Core {
 		return $this->user['name'];
 	}
 	/**
-	* Returns the permission areas of the user. No interpretation is returned.
+	* Returns the permission areas of the user. No interpretation is returned. 
 	* Use only after the access data was loaded by the constructor or loadAccess() method.
 	* @access public
-	* @return string
+	* @return string 
 	*/
 	function PermissionAreas(){
 		return $this->user['permission'];
-	}
-	/**
-	* Checks if the user is permitted in a given protected area.
-	*
-	* Use only after the access data was loaded by the constructor or loadAccess() method.
-	* @access public
-	* @param string The area to be checked.
-	* @return string
-	*/
-	function isPermitted($area=''){
-		if(empty($area)) return false;
-		return (stristr($this->user['permission'],$area));
-	}
-	/**
-	* Sets the allowed hierarchical areas.
-	*
-	* @param array The allowed areas in hierarchy.
-	* @access public
-	* @return string
-	*/
-	function setAllowedAreas($areas=''){
-		if($areas){
-			$this->allowedareas=$areas;
-			return TRUE;
-		}else{
-			return FALSE;
-		}
-	}
-	/**
-	* Checks if the user is permitted in the group of protected areas.
-	*
-	* This checks also whether the user is permitted in the area due to its role or position in the privilege hierarchy.
-	* The group of areas must be set first with the "setAllowedAreas()" method.
-	* Use only after the access data was loaded by the constructor or loadAccess() method.
-	* @access public
-	* @param string The area to be checked.
-	* @return string
-	*/
-	function isPermittedInGroup($user_area=''){
-		if(empty($user_area)){
-			return FALSE;
-		}else{
-			if(ereg('System_Admin', $user_area)){  // if System_admin return true
-	   			return TRUE;
-			}elseif(in_array('no_allow_type_all', $this->allowedareas)){ // check if the type "all" is blocked, if so return false
-	     			return FALSE;
-			}elseif($this->permit_type_all && ereg('_a_0_all', $user_area)){ // if type "all" , return true
-				return TRUE;
-			}else{                                                                  // else scan the permission
-				for($j=0;$j<sizeof($this->allowedareas);$j++){
-					if(ereg($this->allowedareas[$j],$user_area)) return TRUE;
-				}
-			}
-			return FALSE;           // otherwise the user has no access permission in the area, return false
-		}
 	}
 }

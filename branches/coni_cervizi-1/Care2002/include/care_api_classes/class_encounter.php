@@ -5,7 +5,7 @@
 
 /**
 */
-require_once($root_path.'include/care_api_classes/class_notes.php');
+require_once('class_notes.php');
 /**
 *  Patient encounter.
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance.
@@ -2001,7 +2001,7 @@ class Encounter extends Notes {
 	function markAppointmentDone($appt_nr=0,$class_nr=0,$enc_nr=0){
 	    global $HTTP_SESSION_VARS;
 		if(!$appt_nr||!$this->internResolveEncounterNr($enc_nr)) return FALSE;
-		$this->sql="UPDATE $this->tb_appt SET  appt_status='done',encounter_nr=$this->enc_nr,encounter_class_nr=$class_nr,
+		$this->$sql="UPDATE $this->tb_appt SET  appt_status='done',encounter_nr=$this->enc_nr,encounter_class_nr=$class_nr,
 							history=CONCAT(history,'\nDone ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."'),
 							modify_id='".$HTTP_SESSION_VARS['sess_user_name']."',
 							modify_time='".date('YmdHis')."'

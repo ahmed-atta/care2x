@@ -13,15 +13,4 @@ if(isset($HTTP_COOKIE_VARS['ck_login_logged'.$sid])&&isset($HTTP_SESSION_VARS['s
         $pass='check';
     }
 }
-/*if(isset($HTTP_COOKIE_VARS['ck_login_logged'.$sid])&&isset($HTTP_COOKIE_VARS['ck_login_userid'.$sid]))
-{
-    if(!empty($HTTP_COOKIE_VARS['ck_login_logged'.$sid])&&!empty($HTTP_COOKIE_VARS['ck_login_userid'.$sid])&&(!isset($nointern)||!$nointern))
-    {
-        $userid=$HTTP_COOKIE_VARS['ck_login_userid'.$sid];
-        $checkintern=1;
-        $lognote='Direct access '.$lognote;
-        $pass='check';
-    }
-}
-*/
 ?>
