@@ -5,7 +5,41 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 
 require_once("../../include/inc_vars_resolve.php"); // globalize POST, GET, & COOKIE  vars
-/* END */
+
+/*
+#
+# If you want to use a different barcode format , activate the appropriate line of variable "$type" by removing the "#" at the start
+# The default format is i2or5 when all lines here are deactivated.
+#
+# Take note that when you use a format other than i2of5, the barcode becomes longer (about twice the length of i2of5)
+# so that you might need to either tweak the actual scripts to accomodate the new barcode length
+# or use a finer  bar line resolution (1 pixel wide) by activating the line for the resolution variable "$xres". 
+# The latter is recommended for its simplicity but you need to use at least a laser printer to print out your barcodes.
+#
+# Take note: When you have used different a format before, delete all the cached barcodes from the
+#  /cache/barcodes/
+# directory to enable the generation of the new barcode images
+#
+*/
+
+# Code Interleaved 2 of 5 (default, you do not need to activate the line below if you use this format)
+# $type = 'I25';
+
+# Code 39 (activate the following line)
+#  $type = 'C39';
+
+# Code 128-A (activate the following line)
+# $type = 'C128A';
+
+# Code 128-B (activate the following line)
+# $type = 'C128B';
+
+# Code 128-C (activate the following line)
+# $type = 'C128C';
+
+# If you have chosen a format other that I25, you might need to activate this line too! To use a finer barcode line and a narrower barcode image.
+# Do not forget to delete all cached barcode images from /cache/barcodes/ before you start using the new resolution!
+#  $xres = 1;
 
 /*
 Barcode Render Class for PHP using the GD graphics library 
@@ -48,7 +82,8 @@ Contact author at: barcode@mribti.com
   if (!isset($height)) $height  = BCD_DEFAULT_HEIGHT;
   if (!isset($xres))   $xres    = BCD_DEFAULT_XRES;
   if (!isset($font))   $font    = BCD_DEFAULT_FONT;
-  			    
+
+
   switch ($type)
   {
     case "I25":
@@ -67,7 +102,11 @@ Contact author at: barcode@mribti.com
               $obj = new C128CObject($width, $height, $style, $code);
 			  break;
 	default:
-			echo "Need bar code type ex. C39";
+			//echo "Need bar code type ex. C39";
+			
+			# Default format is I25
+
+			$obj = new I25Object($width, $height, $style, $code);
 			$obj = false;
   }
    
