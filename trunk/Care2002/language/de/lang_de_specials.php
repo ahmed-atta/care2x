@@ -2,7 +2,7 @@
 $LDNews="Nachrichten";
 $LDNewsTxt="Nachrichten schreiben";
 $LDMemo="Rundbrief";
-$LDMemoTxt="Lesen oder schreiben von Rundbrief";
+$LDMemoTxt="Lesen oder Schreiben eines Rundbriefes";
 
 $LDClose="Schliessen";
 $LDCancel="Abbrechen";
@@ -130,8 +130,8 @@ $LDPresent="Gegenwärtige";
 
 $LDBgColor="Hintergrundfarbe";
 $LDTxtColor="Textfarbe";
-$LDClk4BgColor="Click hier um die Hintergrundfarbe zu wählen";
-$LDClk4TxtColor="Click hier um die Textfarbe zu wählen";
+$LDClk4BgColor="Klick hier um die Hintergrundfarbe zu wählen";
+$LDClk4TxtColor="Klick hier um die Textfarbe zu wählen";
 $LDApply="Übernehmen";
 
 $LDColorMap="Farbe wählen";
@@ -189,7 +189,7 @@ $LDBilling='eCombill';
 $LDBillingTxt='Abrechnen, Bearbeiten, Berichte und Belege drucken';
 $LDInsuranceCoMngr='Versicherer-Verwaltung';
 $LDInsuranceCoMngrTxt='Versicherer-Stammdaten eingeben, bearbeiten, aktualisieren';
-$LDAddressMngr='Addressenverwaltung';
+$LDAddressMngr='Adressenverwaltung';
 $LDAddressMngrTxt='Neue Adressendaten eingeben, bearbeiten, aktualisieren';
 /* 2003-05-18 EL */
 $LDUserConfigOpt='Einstellungen';
@@ -206,7 +206,7 @@ $LDTheme='Theme';
 $LDTicketedSupport='Ticketed Support';
 $LDTicketedSupportTxt='Den Online Support von CARE2X kontaktieren.';
 $LDNewsgroup='Newsgroup';
-$LDNewsgroupTxt='Spiegel der Mailingliste von den Projektentwicklern.';
+$LDNewsgroupTxt='Spiegel der Mailingliste von der Projektentwickler.';
 # 2002-08-19 EL
 $LDPharmaIndex='Rote Liste';
 $LDPharmaIndexTxt='Pharmaindizes wie z.B Rote Liste, Gelbe Liste, oder IFAP';
