@@ -83,4 +83,3 @@ $LDRAIMJAVA='RAIMJAVA©';
 $LDNoImageSaved='Aucune image sauvegardée!';
 $LDImageNotes='Image notes';
 ?>
-	
