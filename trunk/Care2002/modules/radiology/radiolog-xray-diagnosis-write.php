@@ -30,7 +30,7 @@ $thisfile="radiolog-xray-diagnosis-write.php";
 <?php 
 //$diagnosis=file("http://192.168.0.2/radiology/diagnosis/Thorax.txt"); 
 //while(list($x,$v)=each($diagnosis)) echo $v;
-require('../global_conf/inc_remoteservers_conf.php');
+require($root_path.'global_conf/inc_remoteservers_conf.php');
 
 if($disc_pix_mode) readfile($xray_diagnosis_localpath."thorax.txt");
  else readfile($xray_diagnosis_server_http."thorax.txt");
