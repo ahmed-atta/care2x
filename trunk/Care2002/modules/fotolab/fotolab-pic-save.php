@@ -87,8 +87,7 @@ href="javascript:gethelp('fotolab.php','save','')"><img <?php echo createLDImgSr
 $picfilename=array();
 if($maxpic)
 {
-		//$picdir=strtolower($patnum.'_'.$lastname.'_'.$firstname.'_'.$bday);
-		
+	# Set the encounter as the directory name		
 		$picdir=$patnum;
 		
 		if($disc_pix_mode){
@@ -109,20 +108,16 @@ if($maxpic)
 		   $shotnr='nr'.$i;//echo $shotnr."<br>";
 		   echo $picfile.' '.$shotdate.' '.$shotnr;
 		   
-		   if(!$HTTP_POST_FILES[$picfile]['size'] || !is_uploaded_file($HTTP_POST_FILES[$picfile]['tmp_name'])) continue;
+		   //if(!$HTTP_POST_FILES[$picfile]['size'] || !is_uploaded_file($HTTP_POST_FILES[$picfile]['tmp_name'])) continue;
+		   if(!$img->isValidUploadedImage($HTTP_POST_FILES[$picfile])) continue;
 		   
-	      $picext=substr($HTTP_POST_FILES[$picfile]['name'],strrpos($HTTP_POST_FILES[$picfile]['name'],".")+1);
+	      //$picext=substr($HTTP_POST_FILES[$picfile]['name'],strrpos($HTTP_POST_FILES[$picfile]['name'],".")+1);
+		  
+		  $picext=$img->UploadedImageMimeType();
 
 		   $picext=strtolower($picext);
 		   if(stristr($picext,'gif')||stristr($picext,'jpg')||stristr($picext,'png'))
 		   {
-/*		       if(stristr($$shotnr,'main')){	
-			   		$picfilename[$i]=$picdir.'_main.'.$picext;
-			        $mainidx=$i;
-		       }else{
-			   		$picfilename[$i]=$picdir.'_'.formatDate2Std($$shotdate,$date_format).'_'.$$shotnr.'.'.$picext;
-				}
-*/				
 				$data['shot_date']=formatDate2Std($$shotdate,$date_format);
 				$data['shot_nr']=$$shotnr;
 				$data['mime_type']=$picext;
@@ -135,13 +130,20 @@ if($maxpic)
 		       		if($disc_pix_mode)
 		       		{
 			      		if(!is_dir($d))	mkdir($d,0777); // if $d directory not exist create it with CHMOD 777
-			      		$makenewname='copy("'.$HTTP_POST_FILES[$picfile]['tmp_name'].'","'.$d.'/'.$picfilename[$i].'");';
+			      		//$makenewname='copy("'.$HTTP_POST_FILES[$picfile]['tmp_name'].'","'.$d.'/'.$picfilename[$i].'");';
+						# Store to the newly created directory
+						$dir_path=$d.'/';
 		       		}
 		       		else
 		       		{
-			      		$makenewname='copy("'.$HTTP_POST_FILES[$picfile]['tmp_name'].'","../cache/'.$picfilename[$i].'");';
+			      		//$makenewname='copy("'.$HTTP_POST_FILES[$picfile]['tmp_name'].'","../cache/'.$picfilename[$i].'");';
+						# Store to cache directory
+						$dir_path=$root_path.'cache/';
 			   		}
-		       		eval($makenewname);
+		       		//eval($makenewname);
+					# Save the uploaded image
+					$img->saveUploadedImage($HTTP_POST_FILES[$picfile],$dir_path,$picfilename[$i]);
+					
 		       		echo '<font color="#cc0000"><a href="javascript:previewpic(\'';
 		       		if($disc_pix_mode) echo $root_path.$fotoserver_localpath; else echo $fotoserver_http;
 		       		echo $picdir.'/'.$picfilename[$i].'\')">'.$picfilename[$i].'</a></font>';
@@ -161,8 +163,10 @@ $filelist=array();
 */
 if(!$disc_pix_mode)
  {
+ 	# The ftp username and password should be set here
 	$user='maryhospital_fotolabor';
 	$pw='bong';
+	
 	$conn_id = ftp_connect($ftp_server); 
 	if($conn_id)
 	{
@@ -208,6 +212,7 @@ if(!$disc_pix_mode)
 						 {
 			 				if(empty($mainidx)||($i<>$mainidx))
 							{
+								# If the ftp save was successful, remove the image file from the cache
 								$removefile='unlink("'.$root_path.'cache/'.$picfilename[$i].'");';
 								eval($removefile);
 							}
