@@ -2,6 +2,13 @@
 <input type="hidden" name="lang" value="<?php echo $lang ?>">
 <input type="hidden" name="station" value="<?php echo $station ?>">
 <input type="hidden" name="dept" value="<?php echo $dept ?>">
+<?php
+if($target!='generic'){
+?>
+<input type="hidden" name="dept_nr" value="<?php echo $dept_nr; ?>">
+<?php
+}
+?>
 <input type="hidden" name="pn" value="<?php echo $pn ?>">
 <input type="hidden" name="batch_nr" value="<?php echo $batch_nr ?>">
 <input type="hidden" name="edit" value="<?php echo $edit ?>">

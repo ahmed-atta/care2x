@@ -289,7 +289,7 @@
 
  if($read_form)
 {
-    echo '<img src="../imgcreator/barcode_label_single_large.php?sid=$sid&lang=$lang&pn='.$result['patnum'].'" width=282 height=178>';
+    echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid=$sid&lang=$lang&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
 }
 
 ?>
@@ -326,7 +326,7 @@ for($n=0;$n<8;$n++)
 	for($i=0;$i<10;$i++)
 	{
 	   echo 	'<td>';
-	   if(substr($result['patnum'],$n,1)==$i) echo '<img src="f.gif"';
+	   if(substr($full_en,$n,1)==$i) echo '<img src="f.gif"';
 	     else echo  '<img src="b.gif"';
 	   echo ' width=18 height=6></td>';
 	}
@@ -349,22 +349,22 @@ for($n=0;$n<8;$n++)
 	*/
 	$in_cache=1;
 	
-	if(!file_exists('../cache/barcodes/form_'.$batch_nr.'.png'))
+	if(!file_exists($root_path.'cache/barcodes/form_'.$batch_nr.'.png'))
 	{
-          echo "<img src='../classes/barcode/image.php?code=".$batch_nr."&style=68&type=I25&width=145&height=40&xres=2&font=5&label=1&form_file=1' border=0 width=0 height=0>";
-	      if(!file_exists('../cache/barcodes/form_'.$batch_nr.'.png'))
+          echo "<img src='".$root_path."classes/barcode/image.php?code=".$batch_nr."&style=68&type=I25&width=145&height=40&xres=2&font=5&label=1&form_file=1' border=0 width=0 height=0>";
+	      if(!file_exists($root_path.'cache/barcodes/form_'.$batch_nr.'.png'))
 	     {
-             echo "<img src='../classes/barcode/image.php?code=".$batch_nr."&style=68&type=I25&width=145&height=40&xres=2&font=5' border=0>";
+             echo "<img src='".$root_path."classes/barcode/image.php?code=".$batch_nr."&style=68&type=I25&width=145&height=40&xres=2&font=5' border=0>";
 			 $in_cache=0;
 		 }
 	}
 
-    if($in_cache)   echo '<img src="../cache/barcodes/form_'.$batch_nr.'.png"  border=0>';
+    if($in_cache)   echo '<img src="'.$root_path.'cache/barcodes/form_'.$batch_nr.'.png"  border=0>';
 	
 	/* Prepare the narrow batch nr barcode for specimen labels */
-	if(!file_exists('../cache/barcodes/lab_'.$batch_nr.'.png'))
+	if(!file_exists($root_path.'cache/barcodes/lab_'.$batch_nr.'.png'))
 	{
-          echo "<img src='../classes/barcode/image.php?code=".$batch_nr."&style=68&type=I25&width=145&height=60&xres=1&font=5&label=1&form_file=lab' border=0 width=0 height=0>";
+          echo "<img src='".$root_path."classes/barcode/image.php?code=".$batch_nr."&style=68&type=I25&width=145&height=60&xres=1&font=5&label=1&form_file=lab' border=0 width=0 height=0>";
 	}
 	
 ?>	
@@ -498,7 +498,7 @@ for($n=0;$n<8;$n++)
 		   if(eregi("_telx_",$x))
 		   {
 		      echo '
-			          <td align="right" '.$tdbgcolor.'><img '.createComIcon('../','violet_phone.gif').'></td>';
+			          <td align="right" '.$tdbgcolor.'><img '.createComIcon($root_path,'violet_phone.gif').'></td>';
 	        }
 			else
 			{ 
@@ -532,7 +532,7 @@ for($n=0;$n<8;$n++)
     <td colspan=11&nbsp;><font size=2 face="verdana,arial" color="black"><?php if($stored_request['notes']) echo stripslashes($stored_request['notes']); ?></td>
   </tr>
   <tr>
-    <td colspan=20><font size=2 face="verdana,arial" color="purple">&nbsp;<?php echo $LDEmergencyProgram.' &nbsp;&nbsp;&nbsp;<img '.createComIcon('../','violet_phone.gif','0','absmiddle').'> '.$LDPhoneOrder ?></td>
+    <td colspan=20><font size=2 face="verdana,arial" color="purple">&nbsp;<?php echo $LDEmergencyProgram.' &nbsp;&nbsp;&nbsp;<img '.createComIcon($root_path,'violet_phone.gif','0','absmiddle').'> '.$LDPhoneOrder ?></td>
   </tr>
 
 </table><!-- End of the main table holding the form -->

@@ -57,7 +57,7 @@ function createInputBlock($param, $value)
 		 <font size=1 color="#000099" face="verdana,arial">
 	    <?php 
 	      echo $batch_nr.'&nbsp;&nbsp;<br>';
-          echo "<img src='../classes/barcode/image.php?code=$batch_nr&style=68&type=I25&width=145&height=40&xres=2&font=5' border=0>";
+          echo "<img src='".$root_path."classes/barcode/image.php?code=$batch_nr&style=68&type=I25&width=145&height=40&xres=2&font=5' border=0>";
          ?>&nbsp;&nbsp;<br>
 		 <?php echo $LDXrayDate.'&nbsp;&nbsp;<br>'.formatDate2Local($entry_date,$date_format) ?>&nbsp;&nbsp;</font>
 		</td></tr>
@@ -71,7 +71,7 @@ function createInputBlock($param, $value)
 		<td  valign="top">
 		<div class="fva0_ml10"><font color="#000000" size=2 face="verdana,arial">	
 		<?php
-		   echo $result['patnum'].'<br>'.$result['name'].'<br>'.$result['vorname'].'<br>'.formatDate2Local($result['gebdatum'],$date_format);
+		   echo $full_en.'<br>'.$result['name_last'].'<br>'.$result['name_first'].'<br>'.formatDate2Local($result['date_birth'],$date_format);
 		 ?>
 		 </div>
   </td>

@@ -4,17 +4,17 @@ if (eregi("inc_news_get.php",$PHP_SELF))
 	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 
-if(defined('LANG_DEPENDENT') && (LANG_DEPENDENT==1))
+$dbtable='care_news_article';
+$today=date('Y-m-d');
+
+/* Establish db connection */
+if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
+
+if($dblink_ok)
 {
-		$str_sql="SELECT head_file,main_file,pic_file FROM ".$dbtable." 
-					WHERE category='".$news_category."' 
-					    AND lang = '".$lang."'";
-}
-else
-{
-		$str_sql="SELECT head_file,main_file,pic_file FROM ".$dbtable." 
-					WHERE category='".$news_category."'";
-}
+    
+		$str_sql="SELECT nr,title,preface,body,pic_mime FROM ".$dbtable." 
+					WHERE dept_nr=".$dept_nr;
 						
 		$stat_pending=" AND status<>'pending'";
 		$order_by_desc=" ORDER BY create_time DESC";
@@ -33,12 +33,12 @@ else
 		  }
 		  
 		  $sql.=$order_by_desc;
-			
-			if($ergebnis=mysql_query($sql,$link))
+					
+			if($ergebnis=$db->Execute($sql))
        		{
-				if($rows=mysql_num_rows($ergebnis))
+				if($rows=$ergebnis->RecordCount())
 				{
-					$art[$i]=mysql_fetch_array($ergebnis);
+					$art[$i]=$ergebnis->FetchRow();
 				}
 				else // if no file found get the last entry
 				{
@@ -57,14 +57,16 @@ else
 				
 				  $sql.=$order_by_desc;
 				  			
-				   if($ergebnis=mysql_query($sql,$link))
+				   if($ergebnis=$db->Execute($sql))
        			   {
-					  if($rows=mysql_num_rows($ergebnis))
+					  if($rows=$ergebnis->RecordCount())
 					  {
-						$art[$i]=mysql_fetch_array($ergebnis);
+						$art[$i]=$ergebnis->FetchRow();
 					  }
 				   }
 				}
 			}
 		}
+  } else { echo "$LDDbNoLink $sql<br>"; }
+
 ?>

@@ -17,20 +17,20 @@ function makeRand()
 
 /**
 * NOTE!!!  The variable declarations for the chaining keys were moved 
-* to the inc_init_main.php   script since beta 1.0.03. 
+* to the inc_init_main.php   script since beta 1.0.04. 
 * If you want to manually change the
 * keys please open the inc_init_main.php script.
 */
 
-if(defined('FROM_ROOT')&&FROM_ROOT==1)
+/*if(defined('FROM_ROOT')&&FROM_ROOT==1)
 {
-   include_once('classes/pear/crypt/hcemd5.php');
-   include_once('include/inc_init_main.php');   // This loads the chaining keys
+   include_once($root_path.'classes/pear/crypt/hcemd5.php');
+   include_once($root_path.'include/inc_init_main.php');   // This loads the chaining keys
 }
- else
+ else*/
 {
-   include_once('../classes/pear/crypt/hcemd5.php');
-   include_once('../include/inc_init_main.php');   // This loads the chaining keys
+   include_once($root_path.'classes/pear/crypt/hcemd5.php');
+   include_once($root_path.'include/inc_init_main.php');   // This loads the chaining keys
 }
 
 

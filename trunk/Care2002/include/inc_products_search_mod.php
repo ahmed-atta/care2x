@@ -21,18 +21,14 @@ $keyword=addslashes(trim($keyword));
 if((($mode=='search')||$update)&&($keyword!='')) 
 {
 //init db parameters
-	include('../include/inc_db_makelink.php');
- 	if($link&&$DBLink_OK)
-		{
+	if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
+ 	if($dblink_ok)
+			{
 			if($update)
 			{
 				$sql='SELECT SQL_SMALL_RESULT * FROM '.$dbtable.' WHERE  bestellnum="'.$keyword.'"';
-        		$ergebnis=mysql_query($sql,$link);
-				//count rows=linecount
-				$linecount=0;
-				while ($zeile=mysql_fetch_array($ergebnis)) $linecount++;					
-				//reset result
-				if($linecount>0) mysql_data_seek($ergebnis,0); 
+        		$ergebnis=$db->Execute($sql);
+				$linecount=$ergebnis->RecordCount();
 			}
 			else
 			{
@@ -43,13 +39,8 @@ if((($mode=='search')||$update)&&($keyword!=''))
 						OR generic LIKE "'.$keyword.'"
 						OR description LIKE "'.$keyword.'"';
 				//print $sql;
-        		$ergebnis=mysql_query($sql,$link);
-				//count rows=linecount
-				$linecount=0;
-				while ($zeile=mysql_fetch_array($ergebnis)) $linecount++;					
-				//reset result
-				if($linecount>0) mysql_data_seek($ergebnis,0);
-				else
+        		$ergebnis=$db->Execute($sql);
+				if(!$linecount=$ergebnis->RecordCount()) 
 				{
 						$sql='SELECT * FROM '.$dbtable.' WHERE  bestellnum LIKE "'.$keyword.'%" 
 						OR artikelnum LIKE "'.$keyword.'%" 
@@ -58,19 +49,16 @@ if((($mode=='search')||$update)&&($keyword!=''))
 						OR generic LIKE "'.$keyword.'%"
 						OR description LIKE "'.$keyword.'%"';
 				
-        				$ergebnis=mysql_query($sql,$link);
-						//count rows=linecount
-						$linecount=0;
-						while ($zeile=mysql_fetch_array($ergebnis)) $linecount++;
-						if($linecount>0) mysql_data_seek($ergebnis,0);
+        				$ergebnis=$db->Execute($sql);
+						$linecount=$ergebnis->RecordCount();
 				}
 			} //end of if $update else				
 	//if parent is order catalog
 		if(($linecount==1)&&($bcat))
 		{
-			$ttl=mysql_fetch_array($ergebnis);
-			mysql_data_seek($ergebnis,0);
-			$title_art=$ttl[artikelname];
+			$ttl=$ergebnis->FetchRow();
+			$ergebnis->MoveFirst();
+			$title_art=$ttl['artikelname'];
 		}
 	}
 // print "from table ".$linecount;

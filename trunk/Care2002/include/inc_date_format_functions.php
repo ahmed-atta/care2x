@@ -12,56 +12,41 @@ if (eregi('inc_date_format_functions.php',$PHP_SELF))
 * param $DBLink_OK = receives the tag created by the db connection routine
 * return = the date format
 */
-function getDateFormat($link,$DBLink_OK)
+function getDateFormat()
 {
 
-    global $root_path;
+    global $root_path, $db, $dblink_ok;
 
 	$errFormat=0;
 
     /* If no link to db, make own link*/
-    if(!isset($link) || !$link)
-	{
-	    
-		if(!isset($root_path) || !$root_path) $local_path='../';
-		  else $local_path=$root_path;
-		
-	     include($local_path.'include/inc_init_main.php');
-		   // include('../include/inc_init_main.php');
-  
-	     if ($link=mysql_connect($dbhost,$dbusername,$dbpassword))
-        {
-	       if(mysql_select_db($dbname,$link)) 
-	      {	
-		      $DBLink_OK=1;
-	       }
-	       else $DBLink_OK=0;  
-       }
-    }
-	
-	
-	if($link&&$DBLink_OK) 
-	{
-	  $sql='SELECT value AS date_format FROM care_global_config WHERE type="date_format"';
-	  if($result=mysql_query($sql,$link))
-	  {
-	    if(mysql_num_rows($result))
-		{
-		  $df=mysql_fetch_array($result);
-		  return $df['date_format'];
-		}
-		else $errFormat=1;
-	  }
-	  else $errFormat=1;
+    if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
+
+    if($dblink_ok)
+    {
+	 
+	    $sql='SELECT value AS date_format FROM care_config_global WHERE type="date_format"';
+	  
+        if($result=$db->Execute($sql)) {
+
+            if($result->RecordCount()) {
+            
+			    $df=$result->FetchRow();
+                
+				return $df['date_format'];
+		    }
+		    else $errFormat=1;
+	    }
+	    else $errFormat=1;
 	}
 	else $errFormat=1;
 	
-	if($errFormat)
-	{
-	  $df=get_meta_tags('../global_conf/date_format_default.pid');
+	if($errFormat)	{
+	
+	    $df=get_meta_tags($root_path.'global_conf/format_date_default.pid');
 
-      if($df['date_format']!='') return $df['date_format'];
-	    else return 'dd.MM.yyyy'; // this is the last alternative format (german traditional)
+        if($df['date_format']!='') return $df['date_format'];
+	        else return 'dd.MM.yyyy'; // this is the last alternative format (german traditional)
     }
 }
 
@@ -233,7 +218,6 @@ function convertTimeToLocal($time_val)
 }
 
 /* Now load the date format*/
-if(isset($link) && !empty($link) && isset($DBLink_OK) && !empty($DBLink_OK)) $date_format=getDateFormat($link,$DBLink_OK);
-  else $date_format=getDateFormat();
+$date_format=getDateFormat();
 
 ?>

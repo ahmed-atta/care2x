@@ -11,21 +11,21 @@ if($update||($mode=="search"))
 	switch($cat)
 	{
 		case "pharma":
-							$imgpath="../pharma/img/";
+							$imgpath=$root_path."pharma/img/";
 							break;
 		case "medlager":
-							$imgpath="../med_depot/img/";
+							$imgpath=$root_path."med_depot/img/";
 							break;
 	}
 
 	
  	if($saveok||(!$update)) $statik=true;
-	if($linecount>0)
+	if($linecount)
 	{
-				$zeile=mysql_fetch_array($ergebnis);
 				//print $linecount;
 				if($linecount==1)
 				{
+					$zeile=$ergebnis->FetchRow();
 					print '
 						  <table border=0 cellspacing=2 cellpadding=3 >
     						<tr >
@@ -56,7 +56,7 @@ if($update||($mode=="search"))
 						 }
 						print ' >'; 
 					}
-					else print '<img src="../gui/img/common/default/pixel.gif" border=0 name="prevpic"  >';
+					else print '<img src="'.$root_path.'gui/img/common/default/pixel.gif" border=0 name="prevpic"  >';
 					print '</td>';
 					print '
     						</tr>
@@ -214,7 +214,6 @@ if($update||($mode=="search"))
 			{
 				print "<p>".str_replace("~nr~",$linecount,$LDFoundNrData)."<br>$LDClk2SeeInfo<p>";
 
-					mysql_data_seek($ergebnis,0);
 					print "<table border=0 cellpadding=3 cellspacing=1> ";
 		
 					print "<tr bgcolor=#ffffdd>";
@@ -227,25 +226,25 @@ if($update||($mode=="search"))
 					print "</tr>";
 
 					/* Load common icons */
-					$img_info=createComIcon('../','info3.gif','0');
-					$img_arrow=createComIcon('../','dwnarrowgrnlrg.gif','0');
+					$img_info=createComIcon($root_path,'info3.gif','0');
+					$img_arrow=createComIcon($root_path,'dwnarrowgrnlrg.gif','0');
 					
-					while($zeile=mysql_fetch_array($ergebnis))
+					while($zeile=$ergebnis->FetchRow())
 					{
 						print "<tr bgcolor=";
 						if($toggle) { print "#dfdfdf>"; $toggle=0;} else {print "#fefefe>"; $toggle=1;};
 						print '
-									<td valign="top"><a href="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&keyword='.$zeile[bestellnum].'&mode=search&from=multiple&cat='.$cat.'&userck='.$userck.'"><img '.$img_info.' alt="'.$LDOpenInfo.$zeile[artikelname].'"></a></td>
+									<td valign="top"><a href="'.$thisfile.URL_APPEND.'&keyword='.$zeile[bestellnum].'&mode=search&from=multiple&cat='.$cat.'&userck='.$userck.'"><img '.$img_info.' alt="'.$LDOpenInfo.$zeile[artikelname].'"></a></td>
 									<td valign="top"><font face=verdana,arial size=1>'.$zeile[bestellnum].'</td>
 									<td valign="top"><font face=verdana,arial size=1>'.$zeile[artikelnum].'</td>
 									<td valign="top"><font face=verdana,arial size=1>'.$zeile[industrynum].'</td>
-									<td valign="top"><a href="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&keyword='.$zeile[bestellnum].'&mode=search&from=multiple&cat='.$cat.'&userck='.$userck.'"><font face=verdana,arial size=2 color="#800000"><b>'.$zeile[artikelname].'</b></font></a></td>
+									<td valign="top"><a href="'.$thisfile.URL_APPEND.'&keyword='.$zeile[bestellnum].'&mode=search&from=multiple&cat='.$cat.'&userck='.$userck.'"><font face=verdana,arial size=2 color="#800000"><b>'.$zeile[artikelname].'</b></font></a></td>
 									<td valign="top"><font face=verdana,arial size=1>'.$zeile[generic].'</td>
 									<td valign="top"><font face=verdana,arial size=1>'.$zeile[description].'</td>
 									';
 						// if parent is order catalog add this option column at the end
 						if($bcat) print'
-									<td valign="top"><a href="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&mode=save&artname='.str_replace("&","%26",strtr($zeile[artikelname]," ","+")).'&bestellnum='.$zeile[bestellnum].'&proorder='.str_replace(" ","+",$zeile[proorder]).'&hit=0&cat='.$cat.'&userck='.$userck.'"><img '.$img_arrow.' alt="'.$LDPut2Catalog.'"></a></td>';				
+									<td valign="top"><a href="'.$thisfile.URL_APPEND.'&mode=save&artname='.str_replace("&","%26",strtr($zeile[artikelname]," ","+")).'&bestellnum='.$zeile['bestellnum'].'&proorder='.str_replace(" ","+",$zeile['proorder']).'&hit=0&cat='.$cat.'&userck='.$userck.'"><img '.$img_arrow.' alt="'.$LDPut2Catalog.'"></a></td>';				
 						print    '
 									</tr>';
 					}
@@ -260,7 +259,7 @@ if($update||($mode=="search"))
 	}
 	else
 		print '<font face=verdana,arial size=2>
-			<p><img '.createMascot('../','mascot1_r.gif','0','middle').'>
+			<p><img '.createMascot($root_path,'mascot1_r.gif','0','middle').'>
 			'.$LDNoDataFound;
 
 }

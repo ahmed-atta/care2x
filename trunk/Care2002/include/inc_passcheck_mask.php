@@ -19,16 +19,16 @@ if (eregi('inc_passcheck_mask.php',$PHP_SELF))
 <center>
 
 
-<?php if (($pass=='check')&&($passtag)) 
+<?php if (isset($pass)&&($pass=='check')&&($passtag)) 
 {
 
 print '<FONT  COLOR="red"  SIZE=+2  FACE="Arial"><STRONG>';
 
 switch($passtag)
 {
-case 1:$errbuf="$errbuf $LDWrongEntry"; print '<img '.createLDImgSrc('../','cat-fe.gif','0','left').'>';break;
-case 2:$errbuf="$errbuf $LDNoAuth"; print '<img '.createLDImgSrc('../','cat-noacc.gif','0','left').'>';break;
-default:$errbuf="$errbuf $LDAuthLocked"; print '<img '.createLDImgSrc('../','cat-sperr.gif','0','left').'>'; 
+case 1:$errbuf="$errbuf $LDWrongEntry"; print '<img '.createLDImgSrc($root_path,'cat-fe.gif','0','left').'>';break;
+case 2:$errbuf="$errbuf $LDNoAuth"; print '<img '.createLDImgSrc($root_path,'cat-noacc.gif','0','left').'>';break;
+default:$errbuf="$errbuf $LDAuthLocked"; print '<img '.createLDImgSrc($root_path,'cat-sperr.gif','0','left').'>'; 
 }
 
 print '</STRONG></FONT><P>';
@@ -43,7 +43,7 @@ logentry($userid,"PW ($keyword)","$REMOTE_ADDR $errbuf",$thisfile,$fileforward);
 <?php if(!$passtag) print'
 <td>
 
-<img '.createMascot('../','mascot3_r.gif','0').'>
+<img '.createMascot($root_path,'mascot3_r.gif','0').'>
 </td>
 ';
 ?>
@@ -67,15 +67,19 @@ logentry($userid,"PW ($keyword)","$REMOTE_ADDR $errbuf",$thisfile,$fileforward);
 <input type=hidden name=direction value="<?php print $direction; ?>">
 <input type=hidden name="pass" value="check">
 <input type="hidden" name="nointern" value="1">
-<input type="hidden" name="sid" value="<?php print $sid; ?>">
+<?php 
+if($not_trans_id) { 
+	echo '<input type="hidden" name="sid" value="'.$sid.'">';
+} ?>
 <input type="hidden" name="lang" value="<?php echo $lang ?>">
 <input type="hidden" name="mode" value="<?php print $mode; ?>">
 <input type="hidden" name="target" value="<?php echo $target ?>">
 <input type="hidden" name="subtarget" value="<?php echo $subtarget ?>">
 <input type="hidden" name="user_origin" value="<?php echo $user_origin ?>">
 <input type="hidden" name="title" value="<?php print $title; ?>">
-<?php if(!$minimal) : ?>
+<?php if(!isset($minimal) || !$minimal) : ?>
 <input type="hidden" name="dept" value="<?php echo $dept ?>">
+<input type="hidden" name="dept_nr" value="<?php echo $dept_nr ?>">
 <input type="hidden" name="retpath" value="<?php echo $retpath ?>">
 <input type="hidden" name="edit" value="<?php echo $edit ?>">
 <input type="hidden" name="pmonth" value="<?php echo $pmonth ?>">
@@ -84,14 +88,14 @@ logentry($userid,"PW ($keyword)","$REMOTE_ADDR $errbuf",$thisfile,$fileforward);
 <input type="hidden" name="station" value="<?php echo $station ?>">
 <input type="hidden" name="ipath" value="<?php echo $ipath ?>">
 <?php endif ?>
-<?php if($c_flag) : ?>
+<?php if(isset($c_flag)&&$c_flag) : ?>
 <input type="hidden" name="cmonth" value="<?php echo $cmonth ?>">
 <input type="hidden" name="cyear" value="<?php echo $cyear ?>">
 <input type="hidden" name="cday" value="<?php print $cday; ?>">
 <?php endif ?>
 </font></nobr><p>
-<INPUT type="image"  <?php echo createLDImgSrc('../','continue.gif','0') ?>>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="<?php print $breakfile; ?>"><img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>
+<INPUT type="image"  <?php echo createLDImgSrc($root_path,'continue.gif','0') ?>>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="<?php print $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>>
 </a>
 </form>
 

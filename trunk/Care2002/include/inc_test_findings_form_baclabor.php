@@ -3,9 +3,8 @@
 if (eregi('inc_test_findings_form_baclabor.php',$PHP_SELF)) 
 	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
-
-if(file_exists('../language/'.$lang.'/lang_'.$lang.'_konsil_baclabor.php')) include_once('../language/'.$lang.'/lang_'.$lang.'_konsil_baclabor.php');
-  else include_once('../language/'.LANG_DEFAULT.'/lang_'.LANG_DEFAULT.'_konsil_baclabor.php');
+if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_baclabor.php')) include_once($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_baclabor.php');
+  else include_once($root_path.'language/'.LANG_DEFAULT.'/lang_'.LANG_DEFAULT.'_konsil_baclabor.php');
 ?>
 
 		<table   cellpadding=0 cellspacing=0 border=0 width=745 class="lab">
@@ -25,7 +24,6 @@ if(file_exists('../language/'.$lang.'/lang_'.$lang.'_konsil_baclabor.php')) incl
 
       <td bgcolor="<?php echo $bgc1 ?>"><font size=1 color="#990000" face="arial">
 	  <table border=0 cellpadding=0 cellspacing=0 class="lab">
-    
   
 <?php
   while(list($x,$v)=each($LDBacLabMaterialType))
@@ -175,7 +173,7 @@ if(file_exists('../language/'.$lang.'/lang_'.$lang.'_konsil_baclabor.php')) incl
           /* The patient label */
  if($edit || $edit_findings || $read_form || $edit_form)
         {
-		   echo '<img src="../imgcreator/barcode_label_single_large.php?sid=$sid&lang=$lang&pn='.$result['patnum'].'" width=282 height=178>';
+		   echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php'.URL_REDIRECT_APPEND.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
 		}
 
 ?>
@@ -204,7 +202,7 @@ for($n=0;$n<8;$n++)
 	for($i=0;$i<10;$i++)
 	{
 	   echo 	'<td>';
-	   if(substr($result['patnum'],$n,1)==$i) echo '<img src="f.gif"';
+	   if(substr($full_en,$n,1)==$i) echo '<img src="f.gif"';
 	     else echo  '<img src="b.gif"';
 	   echo ' border=0 width=18 height=6 align="absmiddle"></td>';
 	}
@@ -226,10 +224,10 @@ for($n=0;$n<8;$n++)
 	
 	if(!file_exists('../cache/barcodes/form_'.$batch_nr.'.png'))
 	{
-          echo "<img src='../classes/barcode/image.php?code=".$batch_nr."&style=68&type=I25&width=145&height=40&xres=2&font=5&label=1&form_file=1' border=0 width=0 height=0>";
+          echo "<img src='".$root_path."classes/barcode/image.php?code=".$batch_nr."&style=68&type=I25&width=145&height=40&xres=2&font=5&label=1&form_file=1' border=0 width=0 height=0>";
 	      if(!file_exists('../cache/barcodes/form_'.$batch_nr.'.png'))
 	     {
-             echo "<img src='../classes/barcode/image.php?code=".$batch_nr."&style=68&type=I25&width=145&height=40&xres=2&font=5' border=0>";
+             echo "<img src='".$root_path."classes/barcode/image.php?code=".$batch_nr."&style=68&type=I25&width=145&height=40&xres=2&font=5' border=0>";
 			 $in_cache=0;
 		 }
 	}
@@ -1339,4 +1337,3 @@ for($n=0;$n<8;$n++)
  </td>
   </tr>
 </table>
-

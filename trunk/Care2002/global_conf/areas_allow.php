@@ -1,55 +1,61 @@
 <?php
+//error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR),
+$all='_a_0_all';
+$sysadmin='System_Admin';
 
-$allow_area['admit']=array('_a_1_admissionwrite');
+$allow_area=array(
 
-$allow_area['cafe']=array('_a_1_newsallwrite', '_a_1_newscafewrite');
+'admit'=>array('_a_1_admissionwrite'),
 
-$allow_area['medocs']=array('_a_1_medocswrite');
+'cafe'=>array('_a_1_newsallwrite', '_a_1_newscafewrite'),
 
-$allow_area['phonedir']=array($all, $sysadmin);
+'medocs'=>array('_a_1_medocswrite'),
 
-$allow_area['doctors']=array('_a_1_opdoctorallwrite', '_a_1_doctorsdutyplanwrite');
+'phonedir'=>array('$all, $sysadmin'),
 
-$allow_area['wards']=array('_a_1_doctorsdutyplanwrite', '_a_1_opdoctorallwrite', '_a_1_nursingstationallwrite',  $all, $sysadmin);
+'doctors'=>array('_a_1_opdoctorallwrite', '_a_1_doctorsdutyplanwrite'),
 
-$allow_area['op_room']=array('_a_1_opdoctorallwrite', '_a_1_opnursedutyplanwrite', '_a_2_opnurseallwrite');
+'wards'=>array('_a_1_doctorsdutyplanwrite', '_a_1_opdoctorallwrite', '_a_1_nursingstationallwrite',  $all, $sysadmin),
 
-$allow_area['tech']=array('_a_1_techreception');
+'op_room'=>array('_a_1_opdoctorallwrite', '_a_1_opnursedutyplanwrite', '_a_2_opnurseallwrite'),
 
-$allow_area['lab_r']=array('_a_1_labresultswrite', '_a_2_labresultsread');
+'tech'=>array('_a_1_techreception'),
 
-$allow_area['lab_w']=array('_a_1_labresultswrite');
+'lab_r'=>array('_a_1_labresultswrite', '_a_2_labresultsread'),
 
-$allow_area['radio']=array('_a_1_radiowrite', '_a_1_opdoctorallwrite', '_a_2_opnurseallwrite');
+'lab_w'=>array('_a_1_labresultswrite'),
 
-$allow_area['pharma_db']=array('_a_1_pharmadbadmin');
+'radio'=>array('_a_1_radiowrite', '_a_1_opdoctorallwrite', '_a_2_opnurseallwrite'),
 
-$allow_area['pharma_receive']=array('_a_1_pharmadbadmin', '_a_2_pharmareception');
+'pharma_db'=>array('_a_1_pharmadbadmin'),
 
-$allow_area['pharma']=array('_a_1_pharmadbadmin', '_a_2_pharmareception',  '_a_3_pharmaorder');
+'pharma_receive'=>array('_a_1_pharmadbadmin', '_a_2_pharmareception'),
 
-$allow_area['depot_db']=array('_a_1_meddepotdbadmin');
+'pharma'=>array('_a_1_pharmadbadmin', '_a_2_pharmareception',  '_a_3_pharmaorder'),
 
-$allow_area['depot_receive']=array('_a_1_meddepotdbadmin', '_a_2_meddepotreception');
+'depot_db'=>array('_a_1_meddepotdbadmin'),
 
-$allow_area['depot']=array('_a_1_meddepotdbadmin', '_a_2_meddepotreception', '_a_3_meddepotorder');
+'depot_receive'=>array('_a_1_meddepotdbadmin', '_a_2_meddepotreception'),
 
-$allow_area['edp']=array('no_allow_type_all',);
+'depot'=>array('_a_1_meddepotdbadmin', '_a_2_meddepotreception', '_a_3_meddepotorder'),
 
-$allow_area['news']=array('_a_1_newsallwrite');
+'edp'=>array('no_allow_type_all',),
 
-$allow_area['cafenews']=array('_a_1_newsallwrite', '_a_2_newscafewrite');
+'news'=>array('_a_1_newsallwrite'),
 
-$allow_area['op_docs']=array('_a_1_opdoctorallwrite');
+'cafenews'=>array('_a_1_newsallwrite', '_a_2_newscafewrite'),
 
-$allow_area['duty_op']=array('_a_1_opnursedutyplanwrite');
+'op_docs'=>array('_a_1_opdoctorallwrite'),
 
-$allow_area['fotolab']=array('_a_1_photowrite');
+'duty_op'=>array('_a_1_opnursedutyplanwrite'),
 
-$allow_area['test_diagnose']=array('_a_1_diagnosticsresultwrite', '_a_1_labresultswrite');
+'fotolab'=>array('_a_1_photowrite'),
 
-$allow_area['test_receive']=array('_a_1_diagnosticsresultwrite', '_a_1_labresultswrite', '_a_2_diagnosticsreceptionwrite');
+'test_diagnose'=>array('_a_1_diagnosticsresultwrite', '_a_1_labresultswrite'),
 
-$allow_area['test_order']=array('_a_1_diagnosticsresultwrite', '_a_1_labresultswrite', '_a_2_diagnosticsreceptionwrite',   '_a_3_diagnosticsrequest');
+'test_receive'=>array('_a_1_diagnosticsresultwrite', '_a_1_labresultswrite', '_a_2_diagnosticsreceptionwrite'),
+
+'test_order'=>array('_a_1_diagnosticsresultwrite', '_a_1_labresultswrite', '_a_2_diagnosticsreceptionwrite',   '_a_3_diagnosticsrequest')
+)
 
 ?>

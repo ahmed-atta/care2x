@@ -8,8 +8,8 @@ $saveok=false;
 if($cat=='pharma') $dbtable='care_pharma_ordercatalog';
 	else $dbtable='care_med_ordercatalog';
 
-include('../include/inc_db_makelink.php');
-	if($link&&$DBLink_OK) 
+if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
+	if($dblink_ok) 
 		{
 				$sql="INSERT INTO ".$dbtable." 
 						(	
@@ -28,7 +28,7 @@ include('../include/inc_db_makelink.php');
 							'$maxorder',
 							'$proorder',
 							'$bestellnum')";
-        		if($ergebnis=mysql_query($sql,$link))
+        		if($ergebnis=$db->Execute($sql))
 				{
 				//print $sql;
 					$saveok=true;

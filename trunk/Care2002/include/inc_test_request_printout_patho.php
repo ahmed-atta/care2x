@@ -4,7 +4,7 @@
 		<?php
         if($edit || $read_form)
         {
-		   echo '<img src="../imgcreator/barcode_label_single_large.php?sid=$sid&lang=$lang&pn='.$result['patnum'].'" width=282 height=178>';
+		   echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid=$sid&lang=$lang&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
 		}
         ?>
      </td> 
@@ -83,8 +83,8 @@
 		<table border=0 cellspacing=0 cellpadding=0 width=100%>
     <tr>
       <td><div class=fva0_ml10><?php 
-	    if($stored_request['quick_cut']) echo '<img '.createComIcon('../','chkbox_chk.gif','0','absmiddle'); 
-	      else echo '<img '.createComIcon('../','chkbox_blk.gif','0','absmiddle');  
+	    if($stored_request['quick_cut']) echo '<img '.createComIcon($root_path,'chkbox_chk.gif','0','absmiddle'); 
+	      else echo '<img '.createComIcon($root_path,'chkbox_blk.gif','0','absmiddle');  
 		echo '>&nbsp;<b>'.$LDSpeedCut.'</b>'; 
 		?></td>
       <td><div class=fva0_ml10><?php 
@@ -92,13 +92,13 @@
       <td rowspan=2 align="right" >
 	  <?php 
 	  echo '<font size=1 color="#000099" face="verdana,arial">'.$batch_nr.'</font>&nbsp;&nbsp;<br>';
-          echo "<img src='../classes/barcode/image.php?code=$batch_nr&style=68&type=I25&width=145&height=40&xres=2&font=5' border=0>";
+          echo "<img src='".$root_path."classes/barcode/image.php?code=$batch_nr&style=68&type=I25&width=145&height=40&xres=2&font=5' border=0>";
      ?>&nbsp;&nbsp;</td>
     </tr>
     <tr>
       <td><div class=fva0_ml10> <?php
-	    if($stored_request['quick_diagnosis']) echo '<img '.createComIcon('../','chkbox_chk.gif','0','absmiddle'); 
-	      else echo '<img '.createComIcon('../','chkbox_blk.gif','0','absmiddle');  
+	    if($stored_request['quick_diagnosis']) echo '<img '.createComIcon($root_path,'chkbox_chk.gif','0','absmiddle'); 
+	      else echo '<img '.createComIcon($root_path,'chkbox_blk.gif','0','absmiddle');  
 		echo '>&nbsp;<b>'.$LDSpeedTest.'</b>'; 	  
 	  ?> </td>
       <td><div class=fva0_ml10><?php echo $LDRelayResult ?>&nbsp;<font face="courier" size=2 color="#000000"><?php echo $stored_request['qd_phone'] ?></font></td>
@@ -116,23 +116,23 @@
 		<div class=fva2_ml10><p><br>
 		<b><?php echo $LDMatType ?>:</b><br>
 			<?php
-	    if($stored_request['material_type']=="pe") echo '<img '.createComIcon('../','radio_chk.gif','0','absmiddle'); 
-	      else echo '<img '.createComIcon('../','radio_blk.gif','0','absmiddle');  
+	    if($stored_request['material_type']=="pe") echo '<img '.createComIcon($root_path,'radio_chk.gif','0','absmiddle'); 
+	      else echo '<img '.createComIcon($root_path,'radio_blk.gif','0','absmiddle');  
 		echo '>&nbsp;'.$LDPE.'</b>'; 	  
 	?><br>
   	<?php 
-	    if($stored_request['material_type']=="op_specimen") echo '<img '.createComIcon('../','radio_chk.gif','0','absmiddle'); 
-	      else echo '<img '.createComIcon('../','radio_blk.gif','0','absmiddle');  
+	    if($stored_request['material_type']=="op_specimen") echo '<img '.createComIcon($root_path,'radio_chk.gif','0','absmiddle'); 
+	      else echo '<img '.createComIcon($root_path,'radio_blk.gif','0','absmiddle');  
 		echo '>&nbsp;'.$LDSpecimen.'</b>'; 	  
 	?><br>
 	<?php 
-	    if($stored_request['material_type']=="shave") echo '<img '.createComIcon('../','radio_chk.gif','0','absmiddle'); 
-	      else echo '<img '.createComIcon('../','radio_blk.gif','0','absmiddle');  
+	    if($stored_request['material_type']=="shave") echo '<img '.createComIcon($root_path,'radio_chk.gif','0','absmiddle'); 
+	      else echo '<img '.createComIcon($root_path,'radio_blk.gif','0','absmiddle');  
 		echo '>&nbsp;'.$LDShave.'</b>'; 	  
 	?><br>
   	 <?php
-	    if($stored_request['material_type']=="cytology") echo '<img '.createComIcon('../','radio_chk.gif','0','absmiddle'); 
-	      else echo '<img '.createComIcon('../','radio_blk.gif','0','absmiddle');  
+	    if($stored_request['material_type']=="cytology") echo '<img '.createComIcon($root_path,'radio_chk.gif','0','absmiddle'); 
+	      else echo '<img '.createComIcon($root_path,'radio_blk.gif','0','absmiddle');  
 		echo '>&nbsp;'.$LDCytology.'</b>'; 	  
 	 ?><br>
 		</td>
@@ -143,28 +143,28 @@
 
 	<tr bgcolor="<?php echo $bgc1 ?>">
 		<td  colspan=2><div class="fva0_ml10">&nbsp;<br><font color="#000099">	 
-		<b><?php echo $LDLocalization ?></b><p><img src="../gui/img/common/default/pixel.gif" border=0 width=20 height=45 align="left">
+		<b><?php echo $LDLocalization ?></b><p><img src="<?php echo $root_path ?>gui/img/common/default/pixel.gif" border=0 width=20 height=45 align="left">
 		<font face="courier" size=2 color="#000000"><?php echo nl2br(stripslashes($stored_request['localization'])); ?></font>
   </div></td>
 </tr>
 	
 	<tr bgcolor="<?php echo $bgc1 ?>">
 		<td  valign="top" colspan=2 ><div class=fva0_ml10>&nbsp;<br><font color="#000099">	 
-		<b><?php echo $LDClinicalQuestions ?></b><p><img src="../gui/img/common/default/pixel.gif" border=0 width=20 height=45 align="left">
+		<b><?php echo $LDClinicalQuestions ?></b><p><img src="<?php echo $root_path ?>gui/img/common/default/pixel.gif" border=0 width=20 height=45 align="left">
 		<font face="courier" size=2 color="#000000"><?php echo  nl2br(stripslashes($stored_request['clinical_note'])); ?></font>
   </div></td>
 </tr>
 
 	<tr bgcolor="<?php echo $bgc1 ?>">
 		<td  valign="top" colspan=2 ><div class=fva0_ml10>&nbsp;<br><font color="#000099">	 
-		<b><?php echo $LDExtraInfo ?></b><font size=1 face="arial"> <?php echo $LDExtraInfoSample ?><p><img src="../gui/img/common/default/pixel.gif" border=0 width=20 height=45 align="left">
+		<b><?php echo $LDExtraInfo ?></b><font size=1 face="arial"> <?php echo $LDExtraInfoSample ?><p><img src="<?php echo $root_path ?>gui/img/common/default/pixel.gif" border=0 width=20 height=45 align="left">
 		<font face="courier" size=2 color="#000000"><?php echo  nl2br(stripslashes($stored_request['extra_note'])); ?></font>
   </div></td>
 </tr>
 
 	<tr bgcolor="<?php echo $bgc1 ?>">
 		<td  valign="top" colspan=2 ><div class=fva0_ml10><font color="#000099">&nbsp;<br> 
-		<b><?php echo $LDRepeatedTest ?></b><font size=1 face="arial"> <?php echo $LDRepeatedTestPls ?><p><img src="../gui/img/common/default/pixel.gif" border=0 width=20 height=30 align="left">
+		<b><?php echo $LDRepeatedTest ?></b><font size=1 face="arial"> <?php echo $LDRepeatedTestPls ?><p><img src="<?php echo $root_path ?>gui/img/common/default/pixel.gif" border=0 width=20 height=30 align="left">
 		<font face="courier" size=2 color="#000000"><?php echo  nl2br(stripslashes($stored_request['repeat_note'])); ?></font>
   </div></td>
 </tr>

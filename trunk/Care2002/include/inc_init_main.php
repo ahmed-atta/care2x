@@ -1,14 +1,6 @@
 <?php 
-/**************************************
-*   These are the data necessary for 
-*   establishing a connection to the mysql
-*   database
-*  (formerly declared within the
-*   inc_db_makelink.php script of previous 
-*  versions.)
-**************************************/
 
-$dbname='m';  
+$dbname='maho'; 
 
 $dbusername='httpd'; 
 
@@ -16,18 +8,10 @@ $dbhost='localhost';
 
 $dbpassword=''; 
 
+$key='care3dbb39930912b'; 
 
-/**************************************
-*   These are the data necessary for chaining
-*   the scripts  (formerly declared within the
-*   inc_init_crypt.php script of previous 
-*  versions.)
-**************************************/
+$key_2level='care3dbb399309172care3dbb39930912b'; 
 
-$key='care3db9a25928330'; 
-
-$key_2level='care3db9a25928373care3db9a25928330'; 
-
-$key_login='care3db9a259283b41.23652345'; 
+$key_login='care3dbb3993091f65.69385478'; 
 
  ?>

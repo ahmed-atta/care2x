@@ -15,15 +15,13 @@ function setCharSet($param_lang='')
    
    switch ($param_lang)
    {
-       case 'pl'     : $iso='iso-8859-2'; break;
-       case 'cs-iso' : $iso='iso-8859-2'; break;
-       case 'fr'     : $iso='iso-8859-1'; break;
+       case 'cs-iso': $iso='iso-8859-2'; break;
+       case 'fr': $iso='iso-8859-1'; break;
+       case 'pl': $iso='iso-8859-2'; break;
 	   
 	   default : $iso='iso-8859-1';
    }
    
    return '<meta http-equiv="Content-Type" content="text/html; charset='.$iso.'">';
 }
-
-	
 ?>

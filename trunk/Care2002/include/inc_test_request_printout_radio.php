@@ -1,5 +1,5 @@
 <?php
-require_once('../global_conf/inc_global_address.php');
+require_once($root_path.'global_conf/inc_global_address.php');
 if (!isset($subtarget) || !$subtarget) $subtarget=$target;
 ?>
 	   <!--  outermost table creating form border -->
@@ -17,7 +17,7 @@ if (!isset($subtarget) || !$subtarget) $subtarget=$target;
  <?php
         if($edit || $read_form)
         {
-		   echo '<img src="../imgcreator/barcode_label_single_large.php?sid=$sid&lang=$lang&pn='.$result['patnum'].'" width=282 height=178>';
+		   echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid=$sid&lang=$lang&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
 		}
 		?></td>
       <td bgcolor="<?php echo $bgc1 ?>"  class=fva2_ml10><div   class=fva2_ml10><font size=5 color="#0000ff"><b><?php echo $formtitle ?></b></font>
@@ -28,7 +28,7 @@ if (!isset($subtarget) || !$subtarget) $subtarget=$target;
       <td bgcolor="<?php echo $bgc1 ?>" align="right" valign="bottom">	 
 	  <?php
 		    echo '<font size=1 color="#990000" face="verdana,arial">'.$batch_nr.'</font>&nbsp;&nbsp;<br>';
-			  echo '<img src=\'../classes/barcode/image.php?code='.$batch_nr.'&style=68&type=I25&width=145&height=40&xres=2&font=5\' border=0>';
+			  echo '<img src=\''.$root_path.'classes/barcode/image.php?code='.$batch_nr.'&style=68&type=I25&width=145&height=40&xres=2&font=5\' border=0>';
      ?>
 	     </td>
 		 </tr>
@@ -84,12 +84,12 @@ if (!isset($subtarget) || !$subtarget) $subtarget=$target;
 </tr>
 		 
 	<tr bgcolor="<?php echo $bgc1 ?>">
-		<td colspan=2><div class=fva2_ml10><?php echo $LDClinicalInfo ?>:<p><blockquote><img src="../img/pixel.gif" border=0 width=1 height=45 align="left">
+		<td colspan=2><div class=fva2_ml10><?php echo $LDClinicalInfo ?>:<p><blockquote><img src="<?php echo $root_path ?>gui/img/common/default/pixel.gif" border=0 width=1 height=45 align="left">
 		<font face="courier" size=2 color="#000000"><?php echo nl2br(stripslashes($stored_request['clinical_info'])) ?></font></blockquote>
 				</td>
 		</tr>	
 	<tr bgcolor="<?php echo $bgc1 ?>">
-		<td colspan=2><div class=fva2_ml10><?php echo $LDReqTest ?>:<p><blockquote><img src="../img/pixel.gif" border=0 width=1 height=45 align="left">
+		<td colspan=2><div class=fva2_ml10><?php echo $LDReqTest ?>:<p><blockquote><img src="<?php echo $root_path ?>gui/img/common/default/pixel.gif" border=0 width=1 height=45 align="left">
 		<font face="courier" size=2 color="#000000"><?php echo  nl2br(stripslashes($stored_request['test_request'])) ?></font></blockquote>
 				</td>
 		</tr>	

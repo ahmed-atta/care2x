@@ -12,11 +12,11 @@ function importGlobalVariable($variable)
           else
                  { return $GLOBALS['HTTP_SERVER_VARS']; }
            break;
-      case 'session' :
+/*      case 'session' :
            if (isset($_SESSION)) { return $_SESSION; }
            else
                 { return $GLOBALS['HTTP_SESSION_VARS']; }
-           break;
+           break;*/
       case 'post' :
            if (isset($_POST))    { return $_POST; }
            else
@@ -87,6 +87,9 @@ if(empty($reg_glob_ini)||(!$reg_glob_ini))
     //reset($HTTP_COOKIE_VARS);
     reset($global_vars);
   }
+
+/* Get cookie vars equivalent */
+$HTTP_COOKIE_VARS=&importGlobalVariable('cookie');
  
 /* Process SERVER vars */
 
@@ -101,6 +104,9 @@ if(empty($reg_glob_ini)||(!$reg_glob_ini))
     //reset($HTTP_SERVER_VARS);
     reset($global_vars);
   }
+
+/* Get server vars equivalent */
+$CARE_SERVER_VARS=&importGlobalVariable('server');
   
 /* Process SESSION vars */  
 /*  if(sizeof($global_vars=&importGlobalVariable('session')))
@@ -116,6 +122,7 @@ if(empty($reg_glob_ini)||(!$reg_glob_ini))
   
 */
 
+$HTTP_SESSION_VARS=&importGlobalVariable('session');
 
 }
 

@@ -3,11 +3,11 @@
 	<!-- First row -->	 
         <tr bgcolor="<?php echo $bgc1 ?>" valign="top">
 		<!-- <td rowspan=3><img src="../img/de/de_blood_wardfill.gif" border=0 width=27 height=492 align="absmiddle"></td> -->
-        <td rowspan=3><img src="../imgcreator/blood_lab_leftbar.php?sid=<?php echo $sid ?>&lang=<?php echo $lang ?>" border=0 width=27 height=492 align="absmiddle"></td>
+        <td rowspan=3><img src="<?php echo $root_path; ?>main/imgcreator/blood_lab_leftbar.php?sid=<?php echo $sid ?>&lang=<?php echo $lang ?>" border=0 width=27 height=492 align="absmiddle"></td>
 		<td width=50% bgcolor="<?php echo $bgc1 ?>"  class=fva2_ml10><div   class=fva2_ml10><?php echo $LDToBloodBank."</b></font><br>".$LDTelephone ?><br>
 <?php
 	  echo '<font size=1 color="#000099" face="verdana,arial">'.$batch_nr.'</font>&nbsp;<br>';
-          echo "<img src='../classes/barcode/image.php?code=$batch_nr&style=68&type=I25&width=145&height=40&xres=2&font=5' border=0>";
+          echo "<img src='".$root_path."classes/barcode/image.php?code=$batch_nr&style=68&type=I25&width=145&height=40&xres=2&font=5' border=0>";
 ?>
       </td>
 		<td class=fva2_ml10><div   class=fva2_ml10><font size=3 color="#0000ff"><b><?php echo $LDRequestOf.$formtitle ?></b></font>
@@ -60,7 +60,7 @@
 
 if($edit  || $read_form)
         {
-		   echo '<img src="../imgcreator/barcode_label_single_large.php?sid=$sid&lang=$lang&pn='.$result['patnum'].'" width=282 height=178>';
+		   echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid=$sid&lang=$lang&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
 		}
 
 		?>
@@ -126,18 +126,18 @@ if($edit  || $read_form)
 		 <!--  Block for diagnosis, doctors, -->
 		 <table border=0 cellspacing cellpadding=0>
      <tr>
-       <td colspan=2 bgcolor="#000000"><img src="../gui/img/common/default/pixel.gif" border=0 width=1 height=2 align="absmiddle"></td>
+       <td colspan=2 bgcolor="#000000"><img src="<?php echo $root_path ?>gui/img/common/default/pixel.gif" border=0 width=1 height=2 align="absmiddle"></td>
      </tr>
      <tr>
        <td><div class=fva2b_ml10><font size=1><?php echo $LDTransfusionDate ?></font></div></td>
        <td><font face="arial" size=2 color="#0000ff"><?php  if($stored_request['transfusion_date'] && $stored_request['transfusion_date']!="0000-00-00") echo formatDate2Local($stored_request['transfusion_date'],$date_format); ?></font></td>
      </tr>
      <tr>
-       <td colspan=2><div class=fva2b_ml10><b><?php echo $LDDiagnosis ?></b><br><img src="../gui/img/common/default/pixel.gif" border=0 width=10 height=30 align="left">
+       <td colspan=2><div class=fva2b_ml10><b><?php echo $LDDiagnosis ?></b><br><img src="<?php echo $root_path ?>gui/img/common/default/pixel.gif" border=0 width=10 height=30 align="left">
 	   <font face="arial" size=2 color="#0000ff"><?php  if($stored_request['diagnosis']) echo stripslashes($stored_request['diagnosis']); ?></font></div></td>
      </tr>
      <tr>
-       <td colspan=2> <div class=fva2b_ml10><font size=1><?php echo $LDNotesRequests ?></font><br><img src="../gui/img/common/default/pixel.gif" border=0 width=10 height=30 align="left">
+       <td colspan=2> <div class=fva2b_ml10><font size=1><?php echo $LDNotesRequests ?></font><br><img src="<?php echo $root_path ?>gui/img/common/default/pixel.gif" border=0 width=10 height=30 align="left">
 	   <font face="arial" size=2 color="#0000ff"><?php  if($stored_request['notes']) echo stripslashes($stored_request['notes']); ?></font></div></td>
        <td></td>
      </tr>
@@ -161,7 +161,7 @@ if($edit  || $read_form)
 	</tr>
 	
 	<tr>
-        <td bgcolor="#000000" colspan=3><img src="../gui/img/common/default/pixel_blk.gif" border=0 width=745 height=3 align="absmiddle"><br>
+        <td bgcolor="#000000" colspan=3><img src="<?php echo $root_path ?>gui/img/common/default/pixel_blk.gif" border=0 width=745 height=3 align="absmiddle"><br>
     </td>
 	</tr>
 
@@ -173,7 +173,7 @@ if($edit  || $read_form)
 	      <table border=0 cellspacing=1 width=100% height=100% align="left" cellpadding=0>
          <tr bgcolor="<?php echo $bgc1 ?>">
         <td  bgcolor="<?php echo $bgc1 ?>" rowspan=20 width=27>
-		<img src="../imgcreator/blood_lab_leftbar.php?sid=<?php echo $sid ?>&lang=<?php echo $lang ?>&form_bottom=1" border=0 width=27 height=492><br></td>
+		<img src="<?php echo $root_path; ?>main/imgcreator/blood_lab_leftbar.php?sid=<?php echo $sid ?>&lang=<?php echo $lang ?>&form_bottom=1" border=0 width=27 height=492><br></td>
            <td width=100 align="center"><font size=2 face="arial"><?php echo $LDPB ?><br><?php echo $LD350 ?></font></td>
            <td  colspan=7>&nbsp;<font face="arial" size=2 color="#000000"><?php  if($stored_request['blood_pb']) echo $stored_request['blood_pb']; ?></td>
          </tr>

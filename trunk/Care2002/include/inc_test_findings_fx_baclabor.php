@@ -38,5 +38,3 @@ function processFindings(&$indx,$offset=0)
    
    return $ret_str;
 }
-	
-		   

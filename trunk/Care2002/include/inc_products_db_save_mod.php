@@ -7,7 +7,7 @@ if (eregi('inc_products_db_save_mod.php',$PHP_SELF))
 if(isset($cat)&&($cat=='pharma')) $dbtable='care_pharma_products_main';
 	else $dbtable='care_med_products_main';
 
-include('../include/inc_db_makelink.php');
+if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
 
 // if mode is save then save the data
 if(isset($mode)&&($mode=='save'))
@@ -26,11 +26,9 @@ if(isset($mode)&&($mode=='save'))
 	{	
 					  	// check if order number exists
 						$sql="SELECT bestellnum FROM $dbtable WHERE bestellnum='$bestellnum'";
-						if($ergebnis=mysql_query($sql,$link))
+						if($ergebnis=$db->Execute($sql))
 						{ 
-							$rows=0;
-							if( $result=mysql_fetch_array($ergebnis)) $rows++;
-							if($rows)
+							if($ergebnis->RecordCount())
 							{
 								$error='order_nr_exists';
 								$bestellnum='';
@@ -78,7 +76,7 @@ if(!$error)
 			}
 		}
 
-		if($link&&$DBLink_OK) 
+		if($dblink_ok) 
 					{			
 					$oktosql=true;
 					 if(!($update))
@@ -159,7 +157,7 @@ if(!$error)
 					}	
 					if($oktosql)
 					{
-						if(mysql_query($sql,$link))
+						if($db->Execute($sql))
 						{ 
 							$saveok=true;
 						}

@@ -28,6 +28,7 @@ $cookie_2level=array('ck_cafenews_user',
 								 
 for($i=0;$i<sizeof($cookie_2level); $i++)
 {
-	if(isset($HTTP_COOKIE_VARS[$cookie_2level[$i].$sid])) setcookie($cookie_2level[$i].$sid);
+	if(!empty($HTTP_COOKIE_VARS[$cookie_2level[$i].$sid])) setcookie($cookie_2level[$i].$sid,'',0,'/');
+	//if(isset($HTTP_COOKIE_VARS[$cookie_2level[$i].$sid])) setcookie($cookie_2level[$i].$sid);
 } 
 ?>

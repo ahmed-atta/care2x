@@ -27,14 +27,14 @@ if(!$searchform_count)
             <tr bgcolor="<?php if($searchmask_bgcolor)  echo $searchmask_bgcolor; else echo "#ffffff"; ?>">
             <td>
 			
-			 <form action="labor_test_request_search_patient.php" method="post" 
+			 <form action="<?php echo $root_path; ?>modules/laboratory/labor_test_request_search_patient.php" method="post" 
 			           name="searchform<?php if($searchform_count) echo "_".$searchform_count; ?>" 
 					   onSubmit="return chkSearch(this)">&nbsp;<br>
 					   
 	         <FONT    SIZE=2  FACE="Arial"><?php echo $LDSearchPatient ?>:<br>
 			 
 	         <input type="text" name="searchkey" size=40 maxlength=40><p>
-             <input type="image" <?php echo createLDImgSrc('../','searchlamp.gif','0','absmiddle') ?>>
+             <input type="image" <?php echo createLDImgSrc($root_path,'searchlamp.gif','0','absmiddle') ?>>
              <input type="hidden" name="sid" value="<?php echo $sid; ?>">
 	         <input type="hidden" name="lang" value="<?php echo $lang; ?>">
 	         <input type="hidden" name="noresize" value="<?php echo $noresize; ?>">

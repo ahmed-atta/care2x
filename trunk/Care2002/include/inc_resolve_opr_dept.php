@@ -6,8 +6,8 @@ if (eregi("inc_resolve_opr_dept.php",$PHP_SELF))
 
 if(!$dept)
 {
-	$Or2Or=get_meta_tags("../global_conf/$lang/resolve_or2or.pid");
-	$Dept2Dept=get_meta_tags("../global_conf/$lang/resolve_dept2ordept.pid");
+	$Or2Or=get_meta_tags($root_path."global_conf/$lang/resolve_or2or.pid");
+	$Dept2Dept=get_meta_tags($root_path."global_conf/$lang/resolve_dept2ordept.pid");
 
 	if($ck_thispc_dept)
 	{
@@ -70,7 +70,7 @@ if(!$dept)
 }
 elseif(!$saal) $getSaal=1;
 
-$Or2Dept=get_meta_tags("../global_conf/resolve_or2ordept.pid");
+$Or2Dept=get_meta_tags($root_path."global_conf/resolve_or2ordept.pid");
 
 if($getSaal)
 		{

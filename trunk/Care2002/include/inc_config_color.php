@@ -2,21 +2,22 @@
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
 if (eregi("inc_config_color.php",$PHP_SELF)) 
 	die('<meta http-equiv="refresh" content="0; url=../">');
+
 /*------end------*/
 
-$usedefault=0;
+/* Load user config API. Get the user config data from db */
 
-if(isset($HTTP_COOKIE_VARS["ck_config"])&&(!empty($HTTP_COOKIE_VARS["ck_config"])))
-{
-$path="../userconfig/".$HTTP_COOKIE_VARS["ck_config"];
-if(file_exists($path)) $cfg=get_meta_tags($path);
-else $usedefault=1;
+if(!empty($HTTP_COOKIE_VARS["ck_config"])){
+	$ck_userid=$HTTP_COOKIE_VARS['ck_config'];
+}else {
+	$ck_userid='';
 }
-else $usedefault=1;
+$cfg=array();
+include_once($root_path.'include/care_api_classes/class_userconfig.php');
+$cfg_obj=new UserConfig;
 
-if($usedefault)
-{
-	$path="../userconfig/default/default.cfg";
-	$cfg=get_meta_tags($path);
+if(is_object($cfg_obj)) {
+	$cfg_obj->getConfig($ck_userid);
+	$cfg=&$cfg_obj->buffer;
 }
 ?>

@@ -13,19 +13,6 @@ if (eregi('inc_passcheck.php',$PHP_SELF))
 * See the file "copy_notice.txt" for the licence notice
 */
 
-/*function validarea(&$zeile2)
-{
-    global $allowedarea;
-    for($j=0;$j<sizeof($allowedarea);$j++)
-    {
-      for ($i=3;$i<sizeof($zeile2);$i++)
-       {
-         if(!$zeile2[$i]) continue;
-         if($zeile2[$i]==$allowedarea[$j]) return 1; 
-    	}
-    }
-    return 0;
-}*/
 
 function validarea(&$zeile2, $permit_type_all = 1)
 {
@@ -78,15 +65,15 @@ function logentry(&$userid,$key,$report,&$remark1,&$remark2)
 	}
 }
 
-include('../include/inc_db_makelink.php');
+if(!isset($db) || !$db || !$dblink_ok) include_once($root_path.'include/inc_db_makelink.php');
 
-if($link&&$DBLink_OK) 
+if($dblink_ok) 
 {	
     $sql='SELECT name, login_id, password, permission, lockflag FROM care_users WHERE login_id="'.addslashes($userid).'"';
 
-	if($ergebnis=mysql_query($sql,$link))
+	if($ergebnis=$db->Execute($sql))
 	{
-	    $zeile=mysql_fetch_array($ergebnis);
+	    $zeile=$ergebnis->FetchRow();
 	
 		if(isset($checkintern)&&$checkintern)
 		{
@@ -98,7 +85,7 @@ if($link&&$DBLink_OK)
 		{	
 			if (!($zeile['lockflag']))
 			{
-				if ($screenall || validarea($zeile['permission']))
+				if ((isset($screenall)&&$screenall) || validarea($zeile['permission']))
 				{	
 				    if(empty($zeile['name'])) $zeile['name']=' ';
 					
@@ -113,10 +100,15 @@ if($link&&$DBLink_OK)
 					*/
     				$enc_2level = new Crypt_HCEMD5($key_2level, makeRand());
 					$ciphersid=$enc_2level->encodeMimeSelfRand($sid);
-					setcookie(ck_2level_sid.$sid,$ciphersid);
-					setcookie($userck.$sid,$zeile['name']);	
-					
-					header("Location:$fileforward");
+					//setcookie('ck_2level_sid'.$sid,$ciphersid,time()+3600,'/');
+					//setcookie($userck.$sid,$zeile['name'],time()+3600,'/');	
+					setcookie('ck_2level_sid'.$sid,$ciphersid,0,'/');
+					setcookie($userck.$sid,$zeile['name'],0,'/');	
+					//setcookie('ck_2level_sid'.$sid,$ciphersid);
+					//setcookie($userck.$sid,$zeile['name']);	
+					//echo $fileforward;
+					$HTTP_SESSION_VARS['sess_user_name']=$zeile['name'];
+					header('Location:'.strtr($fileforward,' ','+'));
 					exit;
 					
 				}else {$passtag=2;};
@@ -127,4 +119,3 @@ if($link&&$DBLink_OK)
 }
 else  print "$LDDbNoLink<br>";
 ?>
-

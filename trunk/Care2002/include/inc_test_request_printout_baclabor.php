@@ -169,7 +169,7 @@
 
  if($edit || $edit_findings || $read_form || $edit_form)
         {
-		   echo '<img src="../imgcreator/barcode_label_single_large.php?sid=$sid&lang=$lang&pn='.$result['patnum'].'" width=282 height=178>';
+		   echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid=$sid&lang=$lang&pn='.$result['patnum'].'" width=282 height=178>';
 		}
 
 ?>
@@ -340,7 +340,7 @@ for($n=0;$n<8;$n++)
 	
 	  <tr bgcolor="#fff3f3"  valign="top">
     <td colspan=3><?php
-          echo "<img src='../classes/barcode/image.php?code=".$batch_nr."&style=68&type=I25&width=145&height=40&xres=2&font=5' border=0>";
+          echo "<img src='".$root_path."classes/barcode/image.php?code=".$batch_nr."&style=68&type=I25&width=145&height=40&xres=2&font=5' border=0>";
 ?>	</td>
     <td>&nbsp;</td>
     <td align="right" rowspan=7>

@@ -15,10 +15,11 @@ if (eregi('inc_left_menu_url.php',$PHP_SELF))
 * following array.
 */
 $targetfile=array('startframe.php',
+                  'patient.php',
 					'aufnahme_pass.php',
 					'ambulatory.php',
 					'medopass.php',
-					'aerzte.php',
+					'doctors.php',
 					'pflege.php',
 					'op-doku.php',
 					'labor.php',

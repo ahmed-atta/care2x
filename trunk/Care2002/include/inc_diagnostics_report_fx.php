@@ -1,7 +1,7 @@
 <?php
 
 /* Load the visual signalling defined constants */
-require_once('../include/inc_visual_signalling_fx.php');
+require_once($root_path.'include/inc_visual_signalling_fx.php');
 
 
 /* signalNewDiagnosticsReportEvent will set an event instance in the 
@@ -14,11 +14,12 @@ require_once('../include/inc_visual_signalling_fx.php');
 function signalNewDiagnosticsReportEvent($report_date, $script_name='labor_test_findings_printpop.php')
 {
 
-   global $link, $local_user, $sid, $batch_nr, $pn, $HTTP_COOKIE_VARS, $target, $subtarget, $LDDbNoRead, $LDDbNoSave, $date_format, $entry_date;
+
+   global $db, $local_user, $sid, $batch_nr, $pn, $HTTP_COOKIE_VARS, $target, $subtarget, $LDDbNoRead, $LDDbNoSave, $date_format, $entry_date;
    
 /* Check if the formatDate2Local function is loaded */
 
-if(!function_exists('formatDate2Local'))   include_once('../include/inc_date_format_functions.php');
+if(!function_exists('formatDate2Local'))   include_once($root_path.'include/inc_date_format_functions.php');
    
     /* If the findings are succesfully saved, make an entry into the care_nursing_station_patients_diagnostics_report table
     *  for signalling purposes
@@ -32,14 +33,14 @@ if(!function_exists('formatDate2Local'))   include_once('../include/inc_date_for
 									
     $sql="SELECT item_nr, history FROM $entry_table WHERE report_nr='$batch_nr'";
 									
-    if($ergebnis=mysql_query($sql,$link))
+    if($ergebnis=$db->Execute($sql))
     {
-        $rows=mysql_num_rows($ergebnis);
+        $rows=$ergebnis->RecordCount();
 										
         if($rows)  
 		{
 										
-			 $report=mysql_fetch_array($ergebnis);
+			 $report=$ergebnis->FetchRow();
 											 
 			$sql="UPDATE $entry_table SET
 						report_date='".formatDate2Std($report_date,$date_format)."',
@@ -82,7 +83,7 @@ if(!function_exists('formatDate2Local'))   include_once('../include/inc_date_for
 																						
 		}
 									    
-		if($ergebnis=mysql_query($sql,$link))
+		if($ergebnis=$db->Execute($sql))
 		{
 		
 		   setEventSignalColor($pn, SIGNAL_COLOR_DIAGNOSTICS_REPORT, SIGNAL_COLOR_LEVEL_FULL);

@@ -5,8 +5,8 @@ if (eregi("inc_products_ordercatalog_show.php",$PHP_SELF))
 /*------end------*/
 
 /* Load the common icon images */
-$img_info=createComIcon('../','info3.gif','0');
-$img_delete=createComIcon('../','delete2.gif','0');
+$img_info=createComIcon($root_path,'info3.gif','0');
+$img_delete=createComIcon($root_path,'delete2.gif','0');
 
 $tog=1;
 print '
@@ -18,19 +18,19 @@ print '
 		<td>&nbsp;<font face=Verdana,Arial size=2 color="#000080">'.$LDMCindex[$i].'&nbsp;</td>';
 	print '<td></td></tr>';	
 
-while($content=mysql_fetch_array($ergebnis))
+while($content=$ergebnis->FetchRow())
 {
 	if($tog)
 	{ print '<tr bgcolor="#dddddd">'; $tog=0; }else{ print '<tr bgcolor="#efefff">'; $tog=1; }
 	print'
-				<td>&nbsp;<a href="#" onClick="popinfo(\''.$content[bestellnum].'\')" ><img '.$img_info.' alt="'.$LDOpenInfo.$content[artikelname].'"></a>&nbsp;</td>
-				<td><font face=Verdana,Arial size=2>&nbsp;'.$content[artikelname].'&nbsp;</td>
-				<td><font face=Verdana,Arial size=2>&nbsp;&nbsp;'.$content[proorder].'&nbsp;</td>
-				<td><font face=Verdana,Arial size=2>&nbsp;'.$content[bestellnum].'&nbsp;</td>
-				<td>&nbsp;<a href="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&mode=delete&keyword='.$content[bestellnum].'&cat='.$cat.'" ><img '.$img_delete.' alt="'.$LDRemoveArticle.'"></a>&nbsp;</td>
+				<td>&nbsp;<a href="javascript:popinfo(\''.$content['bestellnum'].'\')" ><img '.$img_info.' alt="'.$LDOpenInfo.$content['artikelname'].'"></a>&nbsp;</td>
+				<td><font face=Verdana,Arial size=2>&nbsp;'.$content['artikelname'].'&nbsp;</td>
+				<td><font face=Verdana,Arial size=2>&nbsp;&nbsp;'.$content['proorder'].'&nbsp;</td>
+				<td><font face=Verdana,Arial size=2>&nbsp;'.$content['bestellnum'].'&nbsp;</td>
+				<td>&nbsp;<a href="'.$thisfile.URL_APPEND.'&mode=delete&keyword='.$content['item_no'].'&cat='.$cat.'" ><img '.$img_delete.' alt="'.$LDRemoveArticle.'"></a>&nbsp;</td>
 				</tr>
 				  <tr>
-    			<td colspan=5 bgcolor="#0000ff"><img src="../gui/img/common/default/pixel.gif" border=0 width=1 height=1 align="absmiddle"></td>
+    			<td colspan=5 bgcolor="#0000ff"><img src="'.$root_path.'gui/img/common/default/pixel.gif" border=0 width=1 height=1 align="absmiddle"></td>
   				</tr>';
 }
 print '

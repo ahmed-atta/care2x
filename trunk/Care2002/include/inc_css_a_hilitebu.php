@@ -2,7 +2,7 @@
 
 if($cfg['dhtml'])
 { print' 
-	<script language="javascript" src="../js/hilitebu.js">
+	<script language="javascript" src="'.$root_path.'js/hilitebu.js">
 	</script>
 
 	<STYLE TYPE="text/css">
