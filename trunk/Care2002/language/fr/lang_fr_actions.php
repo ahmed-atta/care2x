@@ -22,4 +22,12 @@ $LDListApptByDoc='Afficher les rendez-vous par m&eacute;decin';
 $LDdone='Fini';
 $LDOk='Ok';
 $LDSelect='Choisir';
+
+$LDHelp="Help";
+$LDCloseHelpWin="Close help window";
+
+$LDRefreshWindow = 'Refresh display';
+
+$LDNext = 'Next';
+$LDPrevious = 'Previous';
 ?>

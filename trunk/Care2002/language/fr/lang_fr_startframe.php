@@ -27,7 +27,7 @@ $LDAdmission ="Admission";
 $LDExhibition ="Démonstrations";
 $LDEducation ="Éducation";
 $LDAdvStudies ="Études";
-$LDPhyTherapy ="Kinésithérapie";
+$LDPhyTherapy ="Thérapie Physique";
 $LDHealthTips ="Astuces de santé";
 $LDCalendar ="Calendrier";
 $LDHelp="Aide";
@@ -64,9 +64,9 @@ $LDOurPrivPolicy="Notre politique de discrétion";
 $LDSubmitNews="Poster des nouvelles";
 $LDEditNews="Éditer et poster les nouvelles via l'éditeur en-ligne";
 /* 2002-10-17 EL */
-$LDCredits='Remerciement';
+$LDCredits='Crédits';
 /* 2003-05-24 EL */
-$LDPublicItems='Articles publics';
+$LDPublicItems='Articles publiques';
 # 2003-08-28 EL
 $LDHeadline='Titre';
 

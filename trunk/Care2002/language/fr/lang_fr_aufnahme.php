@@ -405,4 +405,10 @@ $LDSimilarData2='Les personnes suivantes semblent avoir des données indentiques.
 $LDPlsCheckFirst='SVP, valider d\'abord ceci avant de décider d\'aller plus loin.';
 $LDPlsCheckFirst2='Please check them out first before you decide the next step.';
 $LDShowDetails='Afficher les détails';
+
+# 2004-05-22 KB
+$LDNr='Nr.';
+$LDOtherHospitalNr='Other Hospital Nr.';
+$LDSelectOtherHospital = 'Select other hospital to change the number';
+$LDNoNrNoDelete = 'no number = delete';
 ?>

@@ -233,4 +233,34 @@ $LDNewsgroupTxt='Newsgroup mirroring the developers\' mailing list.';
 # 2002-08-19 EL
 $LDPharmaIndex='Pharma Index';
 $LDPharmaIndexTxt='Pharmaceutical indexes like Redlist, IFAP, NIMS, or PIMS';
+
+#2004-05-23 EL
+$LDPlugins='Plugins';
+$LDNoPluginsPrompt='There are no plugins installed yet. If you want to get a Care2x plugin module please go to http://www.care2x-plugins.org.';
+$LDPluginsTxt='Collection of plugin tools and modules';
+
+#2004-06-13 EL
+$LDCssThemes = 'CSS Themes - Design';
+$LDCssThemesTxt= 'Design for border color, sizes, decoration, font types & sizes, backgrounds, etc.';
+$LDDescription = 'Description';
+$LDScreenshot = 'Screenshot';
+
+#2004-06-30
+$LDSmartyTemplate = 'Smarty Template - Design';
+$LDSmartyTemplateTxt = 'Select smarty based GUI template theme';
+
+#2004-07-08
+$LDControlButtons = 'Control Buttons Styles';
+$LDControlButtonsTxt = 'Select control buttons style';
+$LDComIcons = 'Common Icons Styles';
+$LDComIconsTxt = 'Select decorative icons style <br>(note: in combination with some CSS themes, the icons are overridden by the CSS design)';
+$LDDevDesigner = 'Developer/Designer';
+$LDNoIcon = 'No icons';
+$LDNoIconTxt = 'Shows no icons in submenus. Display of icons is suppressed';
+
+#2004-07-29
+$LDMainMenuTree = 'Main Menu Styles';
+$LDMainMenuTreeTxt = 'Select the main menu style';
+$LDStyle = 'Style';
+$LDRefreshBrowser = 'Refresh your browser to see the change(s)';
 ?>

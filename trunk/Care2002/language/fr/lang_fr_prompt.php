@@ -86,4 +86,8 @@ $LDPlsEnterScrubNurse='Please enter scrub nurse info';
 $LDPlsEnterORNr='Please enter the OR ID or number';
 $LDWrongLoginPW='Your login or password is wrong';
 $LDPlsORNr='Please enter the OR number';
+
+#2004-08-06 EL
+$LDInvalidDate ='The entered date was invalid.';
+$LDNoPastDate = 'Dates in the past are not accepted.';
 ?>
