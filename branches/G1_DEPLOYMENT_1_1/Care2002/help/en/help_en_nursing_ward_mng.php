@@ -78,17 +78,15 @@ How to display previous occupancy quickviews using the archive?</b>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to create a new ward?</b>
 </font>
-<ul>       	
- 	<b>Step 1: </b>Enter the ward ID or name in the "<span style="background-color:yellow" > Ward: </span>" field.<br>
+<ul>
+ 	<b>Step 1: </b>Enter the ward's formal name in the "<span style="background-color:yellow" > Ward: </span>" field.<br>
+ 	<b>Step 1: </b>Enter the ward ID (keep it shor with no special characters) in the "<span style="background-color:yellow" > Ward ID: </span>" field.<br>
  	<b>Step 2: </b>Select the department or clinic to where the ward belongs in the "<span style="background-color:yellow" > Department: </span>" selection field.<br>
  	<b>Step 3: </b>Write the ward's description and other information in the  "<span style="background-color:yellow" > Description: </span>" field.<br>
  	<b>Step 4: </b>Enter the first room's number in the ward in the "<span style="background-color:yellow" > Room number of the first room: </span>" field.<br>
  	<b>Step 5: </b>Enter the last room's number in the ward in the "<span style="background-color:yellow" > Room number of the last room: </span>" field.<br>
  	<b>Step 6: </b>Enter the prefix for the room in the "<span style="background-color:yellow" > Room prefix: </span>" field.<br>
- 	<b>Step 7: </b>Enter the head nurse's name in the "<span style="background-color:yellow" > Head nurse: </span>" field.<br>
- 	<b>Step 8: </b>Enter the assistant head nurse's name in the "<span style="background-color:yellow" > Assistant head nurse: </span>" field.<br>
- 	<b>Step 9: </b>Type the names of the ward's nurses in the "<span style="background-color:yellow" > Nurses: </span>" text entry field.<br>
- 	<b>Step 10: </b>Click the <input type="button" value="Create the ward"> button to create the ward.<br>
+ 	<b>Step 7: </b>Click the <input type="button" value="Create the ward"> button to create the ward.<br>
 	</ul>
 <b>Note</b>
 <ul> If you decide to cancel click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
@@ -96,8 +94,9 @@ How to create a new ward?</b>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Can I set the numbers of beds in a room?</b>
 </font>
-<ul>       	
- 	<b>No. </b>In this current program version the number or beds in a room is fixed to 2. You cannot change it.<br>
+<ul>
+ 	<b>Yes. </b>But you will have the chance to enter the number of beds ONLY AFTER you have created the ward by clicking
+	<input type="button" value="Create the ward"> button.<br>
 	</ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Can I set the prefix (or id) for a bed?</b>
@@ -124,22 +123,29 @@ How to save the ward's profile?</b>
 </ul>
 
 	<?php else : ?>
+
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to edit the ward's profile?</b>
+I want to edit a station's profile other that is currently displayed. What should I do?</b>
+<p>
 </font>
-<ul>       	
- 	<b>Step 1: </b>Click the <input type="button" value="Edit ward's profile"> button.<br>
+	<b>Note:</b> You cannot simply edit a station's profile. This is by design to avoid detroying data integrity. To have a new station profile please follow the steps below:
+<ul>
+
+ 	<b>Step 1:</b>Make sure that the ward is empty of patients, either discharged or transferred to other wards or departments.<p>
+ 	<b>Step 2:</b> Click on the <input type="button" value="Irreversibly close this ward"> button to close the ward.<p>
+	<b>Step 3:</b> Create a new ward using the "Create" option of the ward management module.<p>
 	</ul>
-<b>Note</b>
-<ul> If you decide to cancel click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
-</ul>
+	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-I want to edit a station's profile other than the one currently displayed. What should I do?</b>
+What's the purpose of "closing the ward temporarily" ?</b>
+<p>
 </font>
-<ul>       	
- 	<b>Step 1:</b> Click the "<span style="background-color:yellow" > <img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>> Other wards </span>" link to list the available wards.<br>
- 	<b>Step 2:</b> Once the wards are listed, click the ward you wish to edit.
+	<ul>
+
+ 	<b>Answer:</b> Closing the ward temporarily is done when the ward will not accept patients for a certain period of time. For example when the ward
+	is due to renovation works, repair, desinfection, decontamination, etc.
 	</ul>
+
 <b>Note</b>
 <ul> If you decide to cancel click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
@@ -151,10 +157,10 @@ I want to edit a station's profile other than the one currently displayed. What 
 <?php if($src=="") : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to select a ward for editing its profile?</b>
+How to select a ward for viewing its profile?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Click the ward on the list that you wish to edit.<br>
+ 	<b>Step 1: </b>Click the ward on the list that you wish to view.<br>
 	</ul>
 <b>Note</b>
 <ul> If you decide to cancel click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
