@@ -10,7 +10,6 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-
 $lang_tables=array('emr.php');
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
@@ -240,7 +239,7 @@ if($dblink_ok) {
 	 
 	 /* Get the insurance classes */
 
-	 $insurance_classes=&$pinsure_obj->getInsuranceClassInfoObject($root_path.'include/care_api_classes/class_nr,name,LD_var');
+	 $insurance_classes=&$pinsure_obj->getInsuranceClassInfoObject('class_nr,name,LD_var');
 	 
 } else { 
     echo "$LDDbNoLink<br>"; 
