@@ -23,7 +23,7 @@ if(isset($target)) {
    switch ($target)
 	{
 	    case 'insurance' :   
-		                            $sql='SELECT name AS insurance_firm_name,firm_id AS insurance_firm_id,use_frequency FROM care_insurance_firm WHERE ';
+		                            $sql='SELECT name AS `aufnahmeform.insurance_firm_name.value`,firm_id AS `aufnahmeform.insurance_firm_id.value`,use_frequency FROM care_insurance_firm WHERE ';
 									if($mode=='search') {
 									    $sql.='name LIKE "'.$searchkey.'%" OR firm_id LIKE "'.$searchkey.'%"';
 									} else {
@@ -33,7 +33,7 @@ if(isset($target)) {
 									$itemname=$LDInsuranceCo;
 							        break;
 									
-		case 'citytown' :    $sql='SELECT name AS `aufnahmeform.addr_citytown_name`,nr AS `aufnahmeform.addr_citytown_nr`,use_frequency FROM care_address_citytown WHERE ';
+		case 'citytown' :    $sql='SELECT name AS `aufnahmeform.addr_citytown_name.value`,nr AS `aufnahmeform.addr_citytown_nr.value`,use_frequency FROM care_address_citytown WHERE ';
 		                            if($mode=='search') {
 									    $sql.='name LIKE "'.$searchkey.'%" OR unece_locode LIKE "'.$searchkey.'%"';
 									} else {
@@ -43,7 +43,7 @@ if(isset($target)) {
 		                            $title=$LDSearch.' :: '.$LDAddress.' ('.$LDTownCity.')';
 									$itemname=$LDTownCity;
 							        break;
-		case 'immunization' :    $sql='SELECT name AS `reportform.type`, medecin AS `reportform.medicine`, dosage AS `reportform.dosage`, titer AS `reportform.titer`, application AS `reportform.application_type_nr`, (CURDATE() + INTERVAL period DAY) as `reportform.refresh_date`, 0 AS use_frequency FROM care_type_immunization WHERE ';
+		case 'immunization' :    $sql='SELECT name AS `reportform.type.value`, medecin AS `reportform.medicine.value`, dosage AS `reportform.dosage.value`, titer AS `reportform.titer.value`, application AS `reportform.application_type_nr.selectedIndex`, DATE_FORMAT((CURDATE() + INTERVAL period DAY),\'%d/%m/%Y\') as `reportform.refresh_date.value`, 0 AS use_frequency FROM care_type_immunization WHERE ';
 		                            if($mode=='search') {
 									    $sql.='name LIKE "'.$searchkey.'%" OR unece_locode LIKE "'.$searchkey.'%"';
 									} else {
@@ -83,7 +83,7 @@ function setValue(val) {
 	$indice=0;
 	for($i3=1;$i3<sizeof($var_parent_document)-1;$i3=$i3+2) 
 		{ 
-		echo 'mywin.document.'.$var_parent_document[$i3].'.value=array_val['.$indice.']; '; 
+		echo 'mywin.document.'.$var_parent_document[$i3].'=array_val['.$indice.']; '; 
 		$indice++;
 		};
 	?>
