@@ -3,8 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /*
-CARE2X Integrated Information System beta 1.0.10 - 2004-05-16 for Hospitals and Health Care Organizations and Services
-Copyright (C) 2002,2003,2004  Elpidio Latorilla
+CARE2X Integrated Information System  for Hospitals and Health Care Organizations and Services
+Deployment 2.1 - 2004-10-02
+Copyright (C) 2002,2003,2004,2005  Elpidio Latorilla
 
 GNU GPL. For details read file "copy_notice.txt".
 */

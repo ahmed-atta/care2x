@@ -1,12 +1,12 @@
 <?php
-error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+//error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.org, elpidio@care2x.net
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
+* elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -78,18 +78,23 @@ require($root_path.'include/inc_passcheck_head.php');
 ?>
 
 <?php echo setCharSet(); ?>
-<BODY onLoad="document.passwindow.userid.focus();" bgcolor=<?php echo $cfg['body_bgcolor']; ?>
+
+<BODY onLoad="<?php if(isset($is_logged_out) && $is_logged_out) echo "window.parent.STARTPAGE.location.href='indexframe.php?sid=$sid&lang=$lang';"; ?>document.passwindow.userid.focus();" bgcolor=<?php echo $cfg['body_bgcolor']; ?>
 <?php if (!$cfg['dhtml']){ echo ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
-
-<FONT    SIZE=-1  FACE="Arial">
-
+&nbsp;
 <p>
-<table width=100% border=0 cellpadding="0" cellspacing="0"> 
+<?php
+if(isset($is_logged_out) && $is_logged_out) {
+	echo '<div align="center"><FONT  FACE="Arial" SIZE=+4 ><b>'.$LDLoggedOut.'</b></FONT><p><font size=4>'.$LDNewLogin.':</font></p></div>';
+}
+?>
+<p>
+<table width=100% border=0 cellpadding="0" cellspacing="0">
 <tr>
 <td colspan=3><img <?php echo createLDImgSrc($root_path,'login-b.gif') ?>></td>
 </tr>
 
-<?php require($root_path.'include/inc_passcheck_mask.php') ?>  
+<?php require($root_path.'include/inc_passcheck_mask.php') ?>
 
 <p><!-- 
 <img src="../img/small_help.gif" > <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>">Was ist login?</a><br>

@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
 * Copyright 2002,2003,2004,2005 Elpidio Latorilla
-* elpidio@care2x.org, elpidio@care2x.net
+* elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -51,6 +51,7 @@ $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
  $smarty->assign('LDColorOpt','<a href="colorchg.php'.URL_APPEND.'">'.$LDColorOpt.'</a>');
  $smarty->assign('LDColorOptExt','<a href="excolorchg.php'.URL_APPEND.'">'.$LDColorOptExt.'</a>');
  $smarty->assign('LDMascotOpt','<a href="config_options_mascot.php'.URL_APPEND.'">'.$LDMascotOpt.'</a>');
+ $smarty->assign('LDMainMenuTree','<a href="config_options_mainmenu_tree.php'.URL_APPEND.'">'.$LDMainMenuTree.'</a>');
  $smarty->assign('LDGUITemplate','<a href="config_options_gui_template.php'.URL_APPEND.'">'.$LDGUITemplate.'</a>');
  $smarty->assign('LDControlButtons','<a href="config_options_control_buttons.php'.URL_APPEND.'">'.$LDControlButtons.'</a>');
  $smarty->assign('LDComIcons','<a href="config_options_icons.php'.URL_APPEND.'">'.$LDComIcons.'</a>');
@@ -65,6 +66,7 @@ $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
  $smarty->assign('LDColorOptTxt',$LDColorOptTxt);
  $smarty->assign('LDColorOptExtTxt',$LDColorOptExtTxt);
  $smarty->assign('LDMascotOptTxt',$LDMascotOptTxt);
+ $smarty->assign('LDMainMenuTreeTxt',$LDMainMenuTreeTxt);
  $smarty->assign('LDGUITemplateTxt',$LDGUITemplateTxt);
  $smarty->assign('LDControlButtonsTxt',$LDControlButtonsTxt);
  $smarty->assign('LDComIconsTxt',$LDComIconsTxt);
@@ -74,11 +76,12 @@ $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
   if(($cfg['mask']==1)||($cfg['mask']==''))  $smarty->assign('LDDisplayTxt',$LDDisplay2Txt);
  	else $smarty->assign('LDDisplayTxt',$LDDisplay1Txt);
 
-# Assign the description text
+# Assign the image icons
 
  $smarty->assign('LDColorOptImg','<a href="colorchg.php'.URL_APPEND.'"><img '.createComIcon($root_path,'fileman.gif','0','',FALSE).'></a>');
  $smarty->assign('LDColorOptExtImg','<a href="excolorchg.php'.URL_APPEND.'"><img '.createComIcon($root_path,'password.gif','0','',FALSE).'></a>');
  $smarty->assign('LDMascotOptImg','<a href="config_options_mascot.php'.URL_APPEND.'"><img '.createComIcon($root_path,'smiley2.gif','0','',FALSE).'></a>');
+ $smarty->assign('LDMainMenuTreeImg','<a href="config_options_mainmenu_tree.php'.URL_APPEND.'"><img '.createComIcon($root_path,'ftpmanager.gif','0','',FALSE).'></a>');
  $smarty->assign('LDGUITemplateImg','<a href="config_options_gui_template.php'.URL_APPEND.'"><img '.createComIcon($root_path,'ftpmanager.gif','0','',FALSE).'></a>');
  $smarty->assign('LDControlButtonsImg','<a href="config_options_control_buttons.php'.URL_APPEND.'"><img '.createComIcon($root_path,'ftpmanager.gif','0','',FALSE).'></a>');
  $smarty->assign('LDComIconsImg','<a href="config_options_icons.php'.URL_APPEND.'"><img '.createComIcon($root_path,'forum.gif','0','',FALSE).'></a>');

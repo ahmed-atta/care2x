@@ -4,10 +4,10 @@ require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.org, elpidio@care2x.net
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
+* elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -35,16 +35,10 @@ if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_indexframe.php')){
 
 // echo $HTTP_COOKIE_VARS['ck_config']; // for debugging only
 
-if(($mask==2)&&!$nonewmask)
-{
+if(($mask==2)&&!$nonewmask){
 	header ("location: indexframe2.php?sid=$sid&lang=$lang&boot=$boot&cookie=$cookie");
 	exit;
 }
-
-# Get the menu items
-$sql="SELECT nr,sort_nr,name,LD_var AS \"LD_var\",url,is_visible FROM care_menu_main WHERE is_visible=1 OR LD_var='LDEDP' OR LD_var='LDLogin' ORDER by sort_nr";
-
-$result=$db->Execute($sql);
 
 # Get the global config for language usage
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');

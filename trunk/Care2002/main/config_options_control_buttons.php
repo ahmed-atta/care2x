@@ -23,8 +23,8 @@ $thisfile=basename(__FILE__);
 if(isset($mode)&&$mode=='save'){
 	// Save to user config table
 
-	$config_new['mascot']=$mascot;
-	
+	$config_new['control_buttons']=$control_buttons;
+
 	include_once($root_path.'include/care_api_classes/class_userconfig.php');
 	
 	$user=new UserConfig;
@@ -41,105 +41,104 @@ if(isset($mode)&&$mode=='save'){
 		}
 	}
 
-}elseif(!isset($cfg['mascot'])||empty($cfg['mascot'])){
+}elseif(!isset($cfg['control_buttons'])||empty($cfg['control_buttons'])){
 	if(!isset($GLOBAL_CONFIG)) $GLOBAL_CONFIG=array();
 	include_once($root_path.'include/care_api_classes/class_globalconfig.php');
 	$gc=new GlobalConfig($GLOBAL_CONFIG);
-	$gc->getConfig('theme_mascot');
-	$cfg['mascot']=$GLOBAL_CONFIG['theme_mascot'];
+	$gc->getConfig('theme_common_icons');
+	if(!empty($GLOBAL_CONFIG['theme_common_icons'])) $cfg['icons']=$GLOBAL_CONFIG['theme_common_icons'];
+		else $cfg['control_buttons']='default';
 }
 
 # Start Smarty templating here
  /**
  * LOAD Smarty
  */
+
  # Note: it is advisable to load this after the inc_front_chain_lang.php so
  # that the smarty script can use the user configured template theme
 
  require_once($root_path.'gui/smarty_template/smarty_care.class.php');
- $smarty = new smarty_care('system_admin');
+ $smarty = new smarty_care('common');
 
-# Title in toolbar
+# Toolbar title
+
  $smarty->assign('sToolbarTitle',$LDUserConfigOpt);
 
- # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('config_mascot.php')");
+# href for the  button
+ $smarty->assign('pbHelp',"javascript:gethelp('config_user.php')");
 
- # href for close button
  $smarty->assign('breakfile',$breakfile);
 
  # Window bar title
- $smarty->assign('sWindowTitle',$LDUserConfigOpt);
+ $smarty->assign('title',$LDUserConfigOpt);
 
- if($rows) {
-	$smarty->append('JavaScript','<script language="javascript" src="'.$root_path.'js/check_menu_item_same_item.js"></script>');
-}
+ # Buffer page output
 
-# Buffer page output
-
-ob_start();
-
+ ob_start();
 ?>
 
-<FONT  color="#000066" size=4><?php echo $LDMascotOpt; ?></font>
+<FONT  color="#000066" size=4><?php echo $LDControlButtons; ?></font>
 <br>
 
 <form method="post">
 <?php if (isset($saved)&&$saved) { 
 	echo '<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'>';	
 ?>
-<FONT  class="prompt"><?php echo $LDChangeSaved ?></font><br>
+<div class="prompt"><?php echo $LDChangeSaved ?></div><br>
 <?php } ?>
 
-<table border=0 cellspacing=1 cellpadding=2>  
-
+<table border=0 cellspacing=1 cellpadding=2>
+  <tbody>
   <tr >
-    <td colspan=3>&nbsp;</td>
+    <td colspan=4>&nbsp;</td>
   </tr>
   
-  <tr class="wardlisttitlerow">
-    <td><b></b></td>
-    <td><b><?php echo $LDMascot; ?></b></td>
-   <td><b><?php echo $LDSampleMascot; ?></b></td>
-  </tr>
+  <tr class="adm_list_titlebar">
+    <td></td>
+    <td><?php echo $LDTheme; ?></td>
+  	<td>&nbsp;</td>
+   <td><?php echo $LDDescription; ?></td>
+   <td><?php echo $LDDevDesigner; ?></td>
+   </tr>
   
 <?php
 
-$handle=opendir($root_path.'gui/img/mascot/.');  // Modify this path if you have placed the mascot directories somewhere else
+$filepath=$root_path.'gui/img/control/';
+
+$handle=opendir($filepath.'.');  // Modify this path if you have placed the icons directories somewhere else
 $dirs=array();
 while (false!==($theme = readdir($handle))) { 
-    if ($theme != '.' && $theme != '..') {
-		if(is_dir($root_path.'gui/img/mascot/'.$theme)&&file_exists($root_path.'gui/img/mascot/'.$theme.'/tags.php')){
-			@include($root_path.'gui/img/mascot/'.$theme.'/tags.php');			
-/*			
-			if($theme==$mascot_theme) $dirs[$mascot_theme]=$mascot_name;
-*/		
-			$dirs[$theme]=$mascot_name;
+    if ($theme != '.' 
+		&& $theme != '..') {
+		if(is_dir($filepath.$theme)&&file_exists($filepath.$theme.'/tags.php')){
+			@include($filepath.$theme.'/tags.php');
+?>
+  
+	<tr class="submenu">
+		<td>&nbsp;<input type="radio" name="control_buttons" value="<?php echo $theme; ?>" <?php if($cfg['control_buttons'] == $theme) echo 'checked'; ?>></td>
+		<td>&nbsp;<b><?php echo $sControlButtonsThemeName; ?></b></td>
+		<td>&nbsp;
+		<img src="<?php echo $root_path."gui/img/control/$theme/$lang/$lang"."_back2.gif"; ?>">
+		<img src="<?php echo $root_path."gui/img/control/$theme/$lang/$lang"."_hilfe-r.gif"; ?>">
+		<img src="<?php echo $root_path."gui/img/control/$theme/$lang/$lang"."_close2.gif"; ?>">
+			</td>
+		<td>&nbsp;<?php echo $sControlButtonsDescription; ?></td>
+		<td>&nbsp;<?php echo $sControlButtonsDesigner; ?></td>
+	</tr>
+
+ <?php
+
 		}
 	} 
 }
 
-
-@asort($dirs,SORT_STRING); // sort the array 
-while(list($x,$v)=each($dirs)){
 ?>
-  <tr class="submenu">
-    <td> <input type="radio" name="mascot" value="<?php echo $x; ?>" <?php	if($cfg['mascot']==$x) echo 'checked';	?>>
-		</td>
-    <td><b><?php echo $v; ?></b></td>
-   <td><img src="<?php echo $root_path; ?>gui/img/mascot/<?php echo $x; ?>/mascot1_l.gif" border=0>
-   			<img src="<?php echo $root_path; ?>gui/img/mascot/<?php echo $x; ?>/mascot1_r.gif" border=0>
-   			<img src="<?php echo $root_path; ?>gui/img/mascot/<?php echo $x; ?>/mascot2_l.gif" border=0>
-   			<img src="<?php echo $root_path; ?>gui/img/mascot/<?php echo $x; ?>/mascot2_r.gif" border=0></td>
-  </tr>
 
-  
-  <?php
-}
-?>
   <tr >
-    <td colspan=3><br><input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0'); ?> border=0></td>
+    <td colspan=4><br><input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0'); ?> border=0></td>
   </tr>
+  </tbody>
   </table>
 <?php
 if($not_trans_id){
@@ -156,14 +155,15 @@ if($not_trans_id){
 <?php
 
 $sTemp = ob_get_contents();
+
 ob_end_clean();
 
-# Assign page output to the mainframe template
-
 $smarty->assign('sMainFrameBlockData',$sTemp);
+
  /**
  * show Template
  */
- $smarty->display('common/mainframe.tpl');
 
-?>
+$smarty->display('common/mainframe.tpl');
+
+ ?>

@@ -23,8 +23,8 @@ $thisfile=basename(__FILE__);
 if(isset($mode)&&$mode=='save'){
 	// Save to user config table
 
-	$config_new['template_theme']=$gui_theme;
-	
+	$config_new['css']=$css;
+
 	include_once($root_path.'include/care_api_classes/class_userconfig.php');
 	
 	$user=new UserConfig;
@@ -40,105 +40,98 @@ if(isset($mode)&&$mode=='save'){
 			exit;
 		}
 	}
+
+}elseif(!isset($cfg['css'])||empty($cfg['css'])){
+	if(!isset($GLOBAL_CONFIG)) $GLOBAL_CONFIG=array();
+	include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+	$gc=new GlobalConfig($GLOBAL_CONFIG);
+	$gc->getConfig('theme_css');
+	if(!empty($GLOBAL_CONFIG['theme_css'])) $cfg['css']=$GLOBAL_CONFIG['theme_css'];
+		else $cfg['css']='default/default.tpl';
 }
 
 # Start Smarty templating here
  /**
  * LOAD Smarty
  */
+
  # Note: it is advisable to load this after the inc_front_chain_lang.php so
  # that the smarty script can use the user configured template theme
 
  require_once($root_path.'gui/smarty_template/smarty_care.class.php');
- $smarty = new smarty_care('system_admin');
+ $smarty = new smarty_care('common');
 
-# Title in toolbar
+# Toolbar title
+
  $smarty->assign('sToolbarTitle',$LDUserConfigOpt);
 
- # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('config_guitheme.php')");
+# href for the  button
+ $smarty->assign('pbHelp',"javascript:gethelp('config_user.php')");
 
- # href for close button
  $smarty->assign('breakfile',$breakfile);
 
  # Window bar title
- $smarty->assign('sWindowTitle',$LDUserConfigOpt);
+ $smarty->assign('title',$LDUserConfigOpt);
 
- # Body Onload js
- if(isset($saved)&&$saved) $smarty->assign('sOnLoadJs','onLoad="reloadParent();"');
+ # Buffer page output
 
-# Collect js code
-
-ob_start();
+ ob_start();
 ?>
 
- <?php if($rows) : ?>
-<script language="javascript" src="<?php echo $root_path; ?>js/check_menu_item_same_item.js"></script>
-<?php endif ?>
-
-<script language="javascript">
-<!-- Script Begin
-function reloadParent() {
-	if(confirm("The browser needs to be refreshed to see the changes.\n Do you like to refresh it now?")) window.parent.location.reload();
-
-}
-//  Script End -->
-</script>
-
-<?php
-
-$sTemp = ob_get_contents();
-ob_end_clean();
-$smarty->append('JavaScript',$sTemp);
-
-# Buffer page output
-
-ob_start();
-
-?>
-
-<ul>
-
-<FONT  color="#000066"  size=4><?php echo $LDGUITheme; ?></font>
+<FONT  color="#000066" size=4><?php echo $LDCssThemes; ?></font>
 <br>
 
 <form method="post">
 <?php if (isset($saved)&&$saved) { 
 	echo '<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'>';	
 ?>
-<FONT class="prompt"><?php echo $LDChangeSaved ?></font><br>
+<div class="prompt"><?php echo $LDChangeSaved ?></div><br>
 <?php } ?>
 
-<table border=0 cellspacing=1 cellpadding=2>  
-
+<table border=0 cellspacing=1 cellpadding=2>
+  <tbody>
   <tr >
-    <td colspan=3>&nbsp;</td>
+    <td colspan=4>&nbsp;</td>
   </tr>
   
-  <tr class="wardlisttitlerow">
-    <td><b></b></td>
-    <td><b><?php echo $LDTheme; ?></b></td>
+  <tr class="adm_list_titlebar">
+    <td></td>
+    <td><?php echo $LDTheme; ?></td>
+   <td><?php echo $LDDescription; ?></td>
+  	<td><?php echo $LDScreenshot; ?></td>
   </tr>
   
 <?php
 
-$dirs=&$TP_obj->getTemplateList();
+$filepath=$root_path.'css/themes/';
 
-while(list($x,$v)=each($dirs)){
+$handle=opendir($filepath.'.');  // Modify this path if you have placed the mascot directories somewhere else
+$dirs=array();
+while (false!==($theme = readdir($handle))) { 
+    if ($theme != '.' && $theme != '..') {
+		if(is_dir($filepath.$theme)&&file_exists($filepath.$theme.'/tags.php')){
+			@include($filepath.$theme.'/tags.php');
 ?>
-  <tr class="submenu">
-    <td> <input type="radio" name="gui_theme" value="<?php echo $x; ?>" <?php	if($template_theme==$x) echo 'checked';	?>>
-		</td>
-    <td><b><?php echo $v; ?></b></td>
-  </tr>
-
   
-  <?php
+	<tr class="submenu">
+		<td>&nbsp;<input type="radio" name="css" value="<?php echo $sCssFileLocation; ?>" <?php if($cfg['css'] == $sCssFileLocation) echo 'checked'; ?>></td>
+		<td>&nbsp;<b><?php echo $sCssThemeName; ?></b></td>
+		<td>&nbsp;<?php echo $sCssDescription; ?></td>
+		<td>&nbsp;<?php if(!empty($sCssScreenShot)) echo '<a href="'.$root_path.'css/themes/'.$sCssScreenShot.'" target="_blank">'.$sCssScreenShot.'</a>'; ?></td>
+	</tr>
+
+ <?php
+
+		}
+	} 
 }
+
 ?>
+
   <tr >
-    <td colspan=3><br><input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0'); ?> border=0></td>
+    <td colspan=4><br><input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0'); ?> border=0></td>
   </tr>
+  </tbody>
   </table>
 <?php
 if($not_trans_id){
@@ -152,19 +145,18 @@ if($not_trans_id){
 <input type="hidden" name="mode" value="save">
 </form>
 
-</ul>
-
 <?php
 
 $sTemp = ob_get_contents();
+
 ob_end_clean();
 
-# Assign page output to the mainframe template
-
 $smarty->assign('sMainFrameBlockData',$sTemp);
+
  /**
  * show Template
  */
- $smarty->display('common/mainframe.tpl');
 
-?>
+$smarty->display('common/mainframe.tpl');
+
+ ?>

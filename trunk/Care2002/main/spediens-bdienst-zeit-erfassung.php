@@ -3,17 +3,16 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
-* Copyright 2002,2003,2004 Elpidio Latorilla
-* elpidio@care2x.org, elpidio@care2x.net
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
+* elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
 */
 define('LANG_FILE','or.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
-require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
 /* Check the date values */
 if(!isset($pyear)||empty($pyear)) $pyear=date('Y');
@@ -25,17 +24,12 @@ $opabt=get_meta_tags('../global_conf/'.$lang.'/op_tag_dept.pid');
 $dbtable='care_standby_duty_report';
 
 $thisfile='spediens-bdienst-zeit-erfassung.php';
-if($retpath=='spec') $breakfile="spediens.php?sid=".$sid."&lang=".$lang;
- else $breakfile="op-doku.php?sid=".$sid."&lang=".$lang;
+if($retpath=='spec') $breakfile="spediens.php".URL_APPEND;
+ else $breakfile="op-doku.php".URL_APPEND;
 
 /********************************* Resolve the department and op room ***********************/
 require($root_path.'include/inc_resolve_opr_dept.php');
 
-
-/* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok)
-{	
 	    /* Load date formatter */
         include_once($root_path.'include/inc_date_format_functions.php');
         
@@ -193,21 +187,35 @@ if($dblink_ok)
 			}
 				else echo "<p>".$sql."<p>$LDDbNoRead"; 
 	 	}// end of else
-}
-  else { echo "$LDDbNoLink<br>"; } 
 
+# Start the smarty templating
+ /**
+ * LOAD Smarty
+ */
+ # Note: it is advisable to load this after the inc_front_chain_lang.php so
+ # that the smarty script can use the user configured template theme
 
+ require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ $smarty = new smarty_care('nursing');
+
+# Added for the common header top block
+
+ $smarty->assign('sToolbarTitle',"$LDOnCallDuty ".$opabt['$dept']);
+
+ $smarty->assign('pbHelp',"javascript:gethelp('op_duty.php','dutydoc','$rows')");
+
+ # href for close button
+ $smarty->assign('breakfile',$breakfile);
+
+ # Window bar title
+ $smarty->assign('sWindowTitle',"$LDOnCallDuty ".$opabt['$dept']);
+
+# Buffer page output
+
+ob_start();
 ?>
 
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
-
-<?php 
-require($root_path.'include/inc_js_gethelp.php');
-require($root_path.'include/inc_css_a_hilitebu.php');
-?><script language="javascript">
+<script language="javascript">
 <!--
 	var newdataflag=0;
 	var speichern=0;
@@ -394,41 +402,30 @@ function isgdatum(val,idx)
 <script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
 <?php
-require($root_path.'include/inc_js_gethelp.php');
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+$smarty->append('JavaScript',$sTemp);
+
+# Buffer page output
+ob_start();
+
 ?>
-
-</HEAD>
-
-<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 bgcolor="silver" alink="navy" vlink="navy"  >
-
-
-<table width=100% border=0 height=100% cellpadding="0" cellspacing="0" >
-<tr valign=top>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>"  height="35"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG>
- &nbsp;<?php echo "$LDOnCallDuty ".$opabt['$dept']; ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();"><img <?php echo createLDImgSrc($root_path,'back2.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="javascript:gethelp('op_duty.php','dutydoc','<?php echo $rows ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a><a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?> style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)></a></td>
-</tr>
-<tr>
-<td bgcolor=#cde1ec valign=top colspan=2><p>
-
 
 <form name="reportform" method="post" action="<?php echo $thisfile ?>">
 
 <table width=100% border=0 cellspacing="0" cellpadding=3>
 
-<tr  bgcolor="#ffffdd">
+<tr class="wardlisttitlerow">
 
 <?php 
 
-for ($i=0;$i<sizeof($LDDutyElements);$i++)
-	{
-		echo '<td ><FONT    SIZE=-1  FACE="Arial">&nbsp;'.$LDDutyElements[$i].'</FONT></td>';
-
-	};
+for ($i=0;$i<sizeof($LDDutyElements);$i++){
+	echo '<td>&nbsp;'.$LDDutyElements[$i].'</td>';
+};
 ?>
 </tr>
-
-
 
 <?php
 $entries=sizeof($content)+2; $toggle=0;
@@ -437,11 +434,10 @@ for ($i=0;$i<$entries;$i++)
 {
 echo '
 <tr ';
-if($toggle){ echo 'bgcolor="#f9f9f9"';}else { echo 'bgcolor="#cfcfcf"'; }
+if($toggle){ echo 'class="wardlistrow2"';}else { echo 'class="wardlistrow1"'; }
 $toggle=!$toggle;
 echo '>
-<td rowspan=2 valign=top>
-	<FONT    SIZE=-1  FACE="Arial">';
+<td rowspan=2 valign=top>';
 	
 if($content[$i]['date'])
 echo formatDate2Local($content[$i]['date'],$date_format).'<input type="hidden" name="date'.$i.'" value="'.$content[$i]['date'].'">';
@@ -452,67 +448,52 @@ echo formatDate2Local($content[$i]['date'],$date_format).'<input type="hidden" n
 	<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
 <?php
 	
-echo '</FONT>
+echo '
 </td>
-<td >
-	<FONT    SIZE=-1  FACE="Arial" color=#ff0000>
+<td>
+	<FONT color=#ff0000>
 	<b>'.$LDStandbyInit.'</b>
 	</FONT>
 </td>
 <td valign=top>
-	<FONT    SIZE=-1  FACE="Arial">
 	<input type=text name="standby_name'.$i.'" value="'.$content[$i]['standby_name'].'" size=20 width=20 onKeyUp=newdata(\''.$i.'\') >
-	</FONT>
 </td>
 <td valign=top>
-	<FONT    SIZE=-1  FACE="Arial">
 	<input type=text name="standby_start'.$i.'" value="'.convertTimeToLocal($content[$i]['standby_start']).'" size=5 maxlength=5 onKeyUp="isnum(this.value,this.name);newdata(\''.$i.'\');">
-	</FONT>
 </td>
 <td valign=top>
-	<FONT    SIZE=-1  FACE="Arial">
 	<input type=text name="standby_end'.$i.'" value="'.convertTimeToLocal($content[$i]['standby_end']).'" size=5 maxlength=5  onKeyUp="isnum(this.value,this.name);newdata(\''.$i.'\');">
-	</FONT>
 </td>
 <td rowspan=2 valign=top>
-	<FONT    SIZE=-1  FACE="Arial">
 	<input type=text name="op_room'.$i.'" size=3 value="';
 	
 if($content[$i]['op_room']) echo $content[$i]['op_room']; else echo $saal;
 
 echo '" onKeyUp=newdata(\''.$i.'\')>
-</FONT>
+
 </td>
 <td  rowspan="2">
-	<FONT    SIZE=-1  FACE="Arial">
 	<textarea  name="diagnosis'.$i.'" cols="30" rows="2" onKeyUp=newdata(\''.$i.'\')>'.$content[$i]['diagnosis_therapy'].'</textarea>
-	</FONT>
 </td>
 </tr>
 
 <tr ';
-if(!$toggle){ echo 'bgcolor="#f9f9f9"';}else { echo 'bgcolor="#cfcfcf"'; }
+if($toggle){ echo 'class="wardlistrow1"';}else { echo 'class="wardlistrow2"'; }
 
 echo '>
 <td >
-	<FONT    SIZE=-1  FACE="Arial" color=green>
+	<FONT color=green>
 	<b>'.$LDOncallInit.'</b>
 	</FONT>
 </td>
 <td valign=top>
-	<FONT    SIZE=-1  FACE="Arial">
 	<input type=text name="oncall_name'.$i.'" value="'.$content[$i]['oncall_name'].'" size=20 width=20 onKeyUp=newdata(\''.$i.'\')>
-	</FONT>
 </td>
 <td valign=top>
-	<FONT    SIZE=-1  FACE="Arial">
 	<input type=text name="oncall_start'.$i.'" value="'.convertTimeToLocal($content[$i]['oncall_start']).'" size=5  maxlength=5 onKeyUp="isnum(this.value,this.name);newdata(\''.$i.'\');">
-	</FONT>
 </td>
 <td valign=top>
-	<FONT    SIZE=-1  FACE="Arial">
-	<input type=text name="oncall_end'.$i.'" value="'.convertTimeToLocal($content[$i]['oncall_end']).'" size=5  maxlength=5 onKeyUp="isnum(this.value,this.name);newdata(\''.$i.'\');"> 
-	</FONT>
+	<input type=text name="oncall_end'.$i.'" value="'.convertTimeToLocal($content[$i]['oncall_end']).'" size=5  maxlength=5 onKeyUp="isnum(this.value,this.name);newdata(\''.$i.'\');">
 	<input type="hidden" name="report_nr'.$i.'" value="'.$content[$i]['report_nr'].'">
 	<input type="hidden" name="encoding'.$i.'" value="'.$content[$i]['encoding'].'">
 	<input type="hidden" name="history'.$i.'" value="'.$content[$i]['history'].'">
@@ -526,74 +507,58 @@ echo '">
 
 ?>
 
-
-
-
-</table>        
+</table>
 <p>
 
 <table cellpadding="0" cellspacing=5 >
-<tr>
-<td>
-<FONT    SIZE=-1  FACE="Arial">
-<?php echo $LDStandbyPerson ?>:  <input type=text name="a_enc" size=30 value="<?php if(isset($a_enc)) echo $a_enc; else echo $HTTP_COOKIE_VARS['ck_login_username']; ?>">
-</td>
-<td>
-<FONT    SIZE=-1  FACE="Arial">
-&nbsp; <?php echo $LDOnCallPerson ?>:  <input type=text name="r_enc" size=30 value="<?php if(isset($r_enc)) echo $r_enc; ?>">
-</td>
-<tr>
-<td colspan="2">&nbsp;
-</td>
-</tr>
-<tr>
-<td valign="top">
-<input type="hidden" name="maxelement" value="<?php echo $entries ?>">
-<input type="hidden" name="dept" value="<?php echo $dept ?>">
-<input type="hidden" name="sid" value="<?php echo $sid ?>">
-<input type="hidden" name="lang" value="<?php echo $lang ?>">
-<input type="hidden" name="pyear" value="<?php echo $pyear ?>">
-<input type="hidden" name="pmonth" value="<?php echo $pmonth ?>">
-<input type="hidden" name="pday" value="<?php echo $pday ?>">
-<input type="hidden" name="encoder" value="<?php echo $encoder ?>">
-<input type="hidden" name="retpath" value="<?php echo $retpath ?>">
-<input type="hidden" name="mode" value="save">
-<!-- <input type=submit value="<?php echo $LDSave ?>">  
- -->
- <input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0','absmiddle') ?>>  
-<input type=reset value="<?php echo $LDReset ?>" onClick=winreset()>
-</td>
-<td align="right">
-
-<!-- <INPUT TYPE="BUTTON" VALUE="<?php echo $LDPrint ?>" ONCLICK="if (window.echo) {window.echo();} else {window.alert('<?php echo $LDAlertNoechoer ?>');}">
- -->
- <img <?php echo createLDImgSrc($root_path,'printout.gif','0','absmiddle') ?> ONCLICK="if (window.print) {window.print();} else {window.alert('<?php echo $LDAlertNoechoer ?>');}">
-&nbsp;&nbsp;<a href="javascript:closeifok()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> align=absmiddle></a>
-</td>
-</tr>
+	<tr>
+		<td>
+			<?php echo $LDStandbyPerson ?>:  <input type=text name="a_enc" size=30 value="<?php if(isset($a_enc)) echo $a_enc; else echo $HTTP_COOKIE_VARS['ck_login_username']; ?>">
+		</td>
+		<td>
+			&nbsp; <?php echo $LDOnCallPerson ?>:  <input type=text name="r_enc" size=30 value="<?php if(isset($r_enc)) echo $r_enc; ?>">
+		</td>
+	<tr>
+		<td colspan="2">&nbsp;
+		</td>
+	</tr>
+	<tr>
+		<td valign="top">
+			<input type="hidden" name="maxelement" value="<?php echo $entries ?>">
+			<input type="hidden" name="dept" value="<?php echo $dept ?>">
+			<input type="hidden" name="sid" value="<?php echo $sid ?>">
+			<input type="hidden" name="lang" value="<?php echo $lang ?>">
+			<input type="hidden" name="pyear" value="<?php echo $pyear ?>">
+			<input type="hidden" name="pmonth" value="<?php echo $pmonth ?>">
+			<input type="hidden" name="pday" value="<?php echo $pday ?>">
+			<input type="hidden" name="encoder" value="<?php echo $encoder ?>">
+			<input type="hidden" name="retpath" value="<?php echo $retpath ?>">
+			<input type="hidden" name="mode" value="save">
+			<!-- <input type=submit value="<?php echo $LDSave ?>">
+			-->
+			<input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0','absmiddle') ?>>
+			<input type=reset value="<?php echo $LDReset ?>" onClick=winreset()>
+		</td>
+		<td align="right">
+			<!-- <INPUT TYPE="BUTTON" VALUE="<?php echo $LDPrint ?>" ONCLICK="if (window.echo) {window.echo();} else {window.alert('<?php echo $LDAlertNoechoer ?>');}">
+			-->
+			<img <?php echo createLDImgSrc($root_path,'printout.gif','0','absmiddle') ?> ONCLICK="if (window.print) {window.print();} else {window.alert('<?php echo $LDAlertNoechoer ?>');}">
+			&nbsp;&nbsp;<a href="javascript:closeifok()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> align=absmiddle></a>
+		</td>
+	</tr>
 </table>
 </form>
 
-<p>
-
-</FONT>
-<p>
-</td>
-</tr>
-
-<tr>
-<td bgcolor=silver height=70 colspan=2>
 <?php
-require($root_path.'include/inc_load_copyrite.php');
+
+$sTemp = ob_get_contents();
+ob_end_clean();
+
+$smarty->assign('sMainFrameBlockData',$sTemp);
+
+ /**
+ * show Template
+ */
+ $smarty->display('common/mainframe.tpl');
+
 ?>
-</td></tr>
-</table>        
-&nbsp;
-
-
-
-
-</FONT>
-
-</BODY>
-</HTML>
