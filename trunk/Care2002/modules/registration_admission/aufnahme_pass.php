@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
+* CARE 2002 Integrated Hospital Information System beta 1.0.07 - 2003-08-29
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -17,7 +17,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'global_conf/areas_allow.php');
 
 $allowedarea=&$allow_area['admit'];
-$append=URL_REDIRECT_APPEND.'&from=pass'; 
+$append=URL_REDIRECT_APPEND.'&from=pass&fwd_nr='.$fwd_nr; 
 switch($target)
 {
 	case 'entry':$fileforward='aufnahme_start.php'.$append; 

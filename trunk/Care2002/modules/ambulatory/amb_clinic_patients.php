@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
+* CARE 2002 Integrated Hospital Information System beta 1.0.07 - 2003-08-29
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -198,7 +198,7 @@ td.vn { font-family:verdana,arial; color:#000088; font-size:10}
 <FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=3  FACE="Arial"><STRONG> &nbsp;&nbsp; <?php echo $dept." :: $LDOutpatientClinic (".formatDate2Local($s_date,$date_format,'','',$null='').")" ?> </STRONG></FONT>
 </td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr>
-<a href="javascript:gethelp('nursing_station.php','<?php echo $mode ?>','<?php echo $occup ?>','<?php echo $station ?>','<?php echo "$LDStation" ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
+<a href="javascript:gethelp('ambulatory_clinic.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </nobr>
 </td></tr>
 <tr valign=top >
@@ -258,7 +258,7 @@ while ($patient=$opat_obj->FetchRow()){
 	# If edit show small color bars
 	if($edit)
 	{  
-		 $occ_list.='<a href="javascript:getinfo(\''.$patient['encounter_nr'].'\')">
+		 $occ_list.='<a href="javascript:getinfo(\''.$patient['encounter_nr'].'\')" title="'.$LDSetColorRider.'">
 		 <img src="'.$root_path.'main/imgcreator/imgcreate_colorbar_small.php'.URL_APPEND.'&pn='.$patient['encounter_nr'].'" alt="'.$LDSetColorRider.'" align="absmiddle" border=0 width=80 height=18>
 		 </a>';
     }
@@ -266,15 +266,15 @@ while ($patient=$opat_obj->FetchRow()){
 			</td>
 			<td align=center><font face="verdana,arial" size="2" >';
 	# If patient, show images by sex
-	$occ_list.='<a href="javascript:popPic(\''.$patient['name_last'].', '.$patient['name_first'].' '.formatDate2Local($patient['date_birth'],$date_format).'\',\''.$patient['photo_filename'].'\')">';
+	$occ_list.='<a href="javascript:popPic(\''.$patient['name_last'].', '.$patient['name_first'].' '.formatDate2Local($patient['date_birth'],$date_format).'\',\''.$patient['photo_filename'].'\')" title="'.$LDShowPhoto.'">';
 		switch(strtolower($patient['sex']))
 		{
-			case 'f': $occ_list.='<img '.createComIcon($root_path,'spf.gif','0').'>'; $females++; break;
-			case 'm': $occ_list.='<img '.createComIcon($root_path,'spm.gif','0').'>'; $males++; break;
-			default: $occ_list.='<img '.createComIcon($root_path,'bn.gif','0').'>';break;
+			case 'f': $occ_list.='<img '.createComIcon($root_path,'spf.gif','0'); $females++; break;
+			case 'm': $occ_list.='<img '.createComIcon($root_path,'spm.gif','0'); $males++; break;
+			default: $occ_list.='<img '.createComIcon($root_path,'bn.gif','0');break;
 		}
 
-	 $occ_list.='</a>';
+	 $occ_list.=' alt="'.$LDShowPhoto.'"></a>';
 
 	$occ_list.='&nbsp;
 	</td>';
@@ -283,8 +283,9 @@ while ($patient=$opat_obj->FetchRow()){
 	# Show the patients name with link to open charts
 	if($edit)
 	{
-	  $occ_list.='<a href="javascript:';
-	   $occ_list.='getinfo(\''.$patient['encounter_nr'].'\')" title="'.$LDShowPatData.'">'; // ln=last name fn=first name
+	  //$occ_list.='<a href="javascript:';
+	   //$occ_list.='getinfo(\''.$patient['encounter_nr'].'\')" title="'.$LDShowPatData.'">'; 
+	  $occ_list.='<a href="'.$root_path.'modules/registration_admission/aufnahme_pass.php'.URL_APPEND.'&target=search&fwd_nr='.$patient['encounter_nr'].'" title="'.$LDAdmissionData.' : '.$LDClk2Show.'">';
 	}
 
 	$occ_list.=ucfirst($patient['title']).' ';
@@ -318,14 +319,17 @@ while ($patient=$opat_obj->FetchRow()){
 	if($edit)
 	{
 		$occ_list.='
-			<td><nobr>';
-		$occ_list.='&nbsp;
-		<a href="javascript:getinfo(\''.$patient['encounter_nr'].'\')"><img '.createComIcon($root_path,'open.gif','0').' alt="'.$LDShowPatData.'"></a>
-	 	<a href="javascript:getrem(\''.$patient['encounter_nr'].'\')"><img ';
+			<td><nobr>&nbsp;';
+			
+		$occ_list.='<a href="'.$root_path.'modules/registration_admission/aufnahme_pass.php'.URL_APPEND.'&target=search&fwd_nr='.$patient['encounter_nr'].'" title="'.$LDAdmissionData.' : '.$LDClk2Show.'">';
+		$occ_list.='<img '.createComIcon($root_path,'pdata.gif','0').' alt="'.$LDAdmissionData.' : '.$LDClk2Show.'"></a>';
+		$occ_list.='
+		<a href="javascript:getinfo(\''.$patient['encounter_nr'].'\')" title="'.$LDShowPatData.'"><img '.createComIcon($root_path,'open.gif','0').' alt="'.$LDShowPatData.'"></a>
+	 	<a href="javascript:getrem(\''.$patient['encounter_nr'].'\')" title="'.$LDNoticeRW.'"><img ';
 		if($patient['notes']) $occ_list.=createComIcon($root_path,'bubble3.gif','0'); else $occ_list.=createComIcon($root_path,'bubble2.gif','0');
 		$occ_list.=' alt="'.$LDNoticeRW.'"></a>';
-		$occ_list.='&nbsp;<a href="javascript:Transfer(\''.$patient['encounter_nr'].'\')"><img '.createComIcon($root_path,'xchange.gif','0').' alt="'.$LDTransferPatient.'"></a>
-		 <a href="javascript:release(\''.$patient['encounter_nr'].'\')"><img '.createComIcon($root_path,'bestell.gif','0').' alt="'.$LDReleasePatient.'"></a>';
+		$occ_list.='&nbsp;<a href="javascript:Transfer(\''.$patient['encounter_nr'].'\')" title="'.$LDTransferPatient.'"><img '.createComIcon($root_path,'xchange.gif','0').' alt="'.$LDTransferPatient.'"></a>
+		 <a href="javascript:release(\''.$patient['encounter_nr'].'\')" title="'.$LDReleasePatient.'"><img '.createComIcon($root_path,'bestell.gif','0').' alt="'.$LDReleasePatient.'"></a>';
 		 //<a href="javascript:deletePatient(\''.$helper[r].'\',\''.$helper[b].'\',\''.$helper[t].'\',\''.$helper[ln].'\')"><img src="../img/delete.gif" border=0 width=19 height=19 alt="Löschen (Passwort erforderlich)"></a>';
 
 		 $occ_list.='</nobr>

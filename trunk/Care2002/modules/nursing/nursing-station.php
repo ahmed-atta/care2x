@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE 2002 Integrated Hospital Information System beta 1.0.06 - 2003-08-06
+* CARE 2002 Integrated Hospital Information System beta 1.0.07 - 2003-08-29
 * GNU General Public License
 * Copyright 2002 Elpidio Latorilla
 * elpidio@latorilla.com
@@ -406,8 +406,11 @@ for ($i=$ward_info['room_nr_start'];$i<=$ward_info['room_nr_end'];$i++){
 	# Show the patients name with link to open charts
 	if($edit)
 	{
-	  $occ_list.='<a href="javascript:';
-	    if(!$bed_locked) $occ_list.='getinfo(\''.$bed['encounter_nr'].'\')" title="'.$LDShowPatData.'">'; // ln=last name fn=first name
+	  //$occ_list.='<a href="javascript:';
+	    //if(!$bed_locked) $occ_list.='getinfo(\''.$bed['encounter_nr'].'\')" title="'.$LDShowPatData.'">'; // ln=last name fn=first name
+	     // else $occ_list.='unlock(\''.strtoupper($j).'\',\''.$i.'\')" title="'.$LDInfoUnlock.'">'.$LDLocked; //$j=bed   $i=room number
+	  $occ_list.='<a href="';
+	    if(!$bed_locked) $occ_list.=$root_path.'modules/registration_admission/aufnahme_pass.php'.URL_APPEND.'&target=search&fwd_nr='.$bed['encounter_nr'].'" title="'.$LDClk2Show.'">'; 
 	      else $occ_list.='unlock(\''.strtoupper($j).'\',\''.$i.'\')" title="'.$LDInfoUnlock.'">'.$LDLocked; //$j=bed   $i=room number
 	   
 	}
