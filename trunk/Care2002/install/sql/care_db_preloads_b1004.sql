@@ -3,10 +3,10 @@
 # http://www.phpmyadmin.net/ (download page)
 #
 # Host: localhost
-# Generation Time: Apr 21, 2003 at 12:17 AM
+# Generation Time: May 01, 2003 at 08:36 AM
 # Server version: 3.22.34
-# PHP Version: 4.0.4pl1/**/
-# Database : xxxxx
+# PHP Version: 4.0.4pl1
+# Database : care2002b1004
 
 #
 # Dumping data for table care_category_diagnosis
@@ -80,31 +80,10 @@ INSERT INTO care_class_therapy VALUES (7, '2', 'tpn', 'TPN', 'LDTPN', '', '', ''
 INSERT INTO care_class_therapy VALUES (8, '2', 'hie', 'HIE', 'LDHIE', '', '', '', 00000000000000, '', 00000000000000);
 
 #
-# Dumping data for table care_complication
-#
-
-INSERT INTO care_complication VALUES (1, 1, 'Previous C/S', 'LDPreviousCS', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (2, 1, 'Pre-eclampsia', 'LDPreEclampsia', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (3, 1, 'Eclampsia', 'LDEclampsia', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (4, 1, 'Other hypertension', 'LDOtherHypertension', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (5, 1, 'Other proteinuria', 'LDProteinuria', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (6, 1, 'Cardiac', 'LDCardiac', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (7, 1, 'Anaemia < 8.5g', 'LDAnaemia', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (8, 1, 'Asthma', 'LDAsthma', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (9, 1, 'Epilepsy', 'LDEpilepsy', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (10, 1, 'Placenta praevia', 'LDPlacentaPraevia', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (11, 1, 'Abruptio placentae', 'LDAbruptioPlacentae', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (12, 1, 'Other APH', 'LDOtherAPH', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (13, 1, 'Diabetes', 'LDDiabetes', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (14, 1, 'Cord prolapse', 'LDCordProlapse', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (15, 1, 'Ruptured uterus', 'LDRupturedUterus', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (16, 1, 'Extrauterine pregnancy', 'LDExtraUterinePregnancy', '', '', '', '', 00000000000000, '', 00000000000000);
-
-#
 # Dumping data for table care_config_global
 #
 
-INSERT INTO care_config_global VALUES ('date_format', 'MM/dd/yyyy',  NULL,  NULL, '', '', 20030222213446, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('date_format', 'dd.MM.yyyy',  NULL,  NULL, '', '', 20030425232322, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('time_format', 'HH.MM', '', '', '', '', 20030105033839, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('patient_reg_nr_adder', '10000000', '', '', '', '', 20030105033839, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('main_info_police_nr', '11?', '', '', '', '', 20030105033839, '', 00000000000000);
@@ -117,18 +96,18 @@ INSERT INTO care_config_global VALUES ('main_info_email', 'contact@care2x.com', 
 INSERT INTO care_config_global VALUES ('person_id_nr_adder', '10000000', '', '', '', '', 20030105033839, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('patient_outpatient_nr_adder', '20800000', '', '', '', '', 20030105033839, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('patient_inpatient_nr_adder', '22000000', '', '', '', '', 20030105033839, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_name_2_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_name_3_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_name_middle_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_name_maiden_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_ethnic_orig_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_name_others_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_nat_id_nr_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_religion_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_cellphone_2_nr_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_phone_2_nr_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_citizenship_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_sss_nr_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_name_2_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_name_3_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_name_middle_hide', '0',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_name_maiden_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_ethnic_orig_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_name_others_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_nat_id_nr_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_religion_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_cellphone_2_nr_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_phone_2_nr_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_citizenship_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_sss_nr_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('language_default', 'id',  NULL,  NULL, '', '', 20030329212253, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('language_single', '0',  NULL,  NULL, '', '', 20030329212253, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('mascot_hide', '', '', '', '', '', 00000000000000, '', 00000000000000);
@@ -149,18 +128,18 @@ INSERT INTO care_config_global VALUES ('news_normal_preview_maxlen', '600', '', 
 INSERT INTO care_config_global VALUES ('news_headline_title_font_bold', '1', '', '', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('news_headline_preface_font_bold', '1', '', '', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('news_normal_display_width', '500', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_fax_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_email_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_phone_1_nr_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_cellphone_1_nr_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_fax_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_email_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_phone_1_nr_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_cellphone_1_nr_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('person_foto_path', 'fotos/registration/', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_service_care_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_service_room_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_service_att_dr_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('patient_service_care_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('patient_service_room_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('patient_service_att_dr_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('patient_financial_class_single_result', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_name_2_show', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_name_3_show', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_name_middle_show', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('patient_name_2_show', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('patient_name_3_show', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('patient_name_middle_show', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('theme_control_buttons', 'blue_aqua',  NULL,  NULL, '', '', 20030329210153, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('gui_frame_left_nav_bdcolor', '#990000',  NULL,  NULL, '', '', 20030329212253, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('theme_control_theme_list', 'default,blue_aqua', '', '', '', '', 00000000000000, '', 00000000000000);
@@ -189,50 +168,15 @@ INSERT INTO care_currency VALUES (19, '&#836', 'Euro', 'bbbbbb', '', '', 2003021
 INSERT INTO care_currency VALUES (23, '&#836', 'asfas', 'fsadf', '', '', 20030213174612, '', 20030213174612);
 
 #
-# Dumping data for table care_department
+# Dumping data for table care_group
 #
 
-INSERT INTO care_department VALUES (1, 'pr', '2', 'Public Relations', 'PR', 'Press Relations', 'LDPressRelations', '', '0', '0', '1', '1', '1', '1', '0', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (2, 'cafe', '2', 'Cafeteria', 'Cafe', 'Canteen', 'LDCafeteria', '', '0', '0', '1', '1', '1', '1', '0', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (3, 'general_surgery', '1', 'General Surgery', 'General', 'General', 'LDGeneralSurgery', '', '1', '1', '1', '1', '1', '1', '0', '0', '8.30 - 21.00', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', 'General Surgery\r\nProf. Dr.Dr. Gopendo\r\nSuite 23, 4th Floor\r\nTel: 9099-34567', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (4, 'emergency_surgery', '1', 'Emergency Surgery', 'Emergency', '', 'LDEmergencySurgery', '', '1', '1', '1', '1', '1', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (5, 'plastic_surgery', '1', 'Plastic Surgery', 'Plastic', 'Aesthetic Surgery', 'LDPlasticSurgery', '', '1', '1', '1', '1', '1', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (6, 'ent', '1', 'Ear-Nose-Throath', 'ENT', '', 'LDEarNoseThroath', '', '1', '1', '1', '1', '1', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0',  NULL, '', '', '', '', 'Update: 2003-03-02 11:24:19 = Elpidio Latorilla\nUpdate: 2003-03-16 11:29:38 = Elpidio Latorilla\n', 'Elpidio Latorilla', 20030316112938, '', 00000000000000);
-INSERT INTO care_department VALUES (7, 'opthalmology', '1', 'Opthalmology', 'Opthalmology', 'Eye Department', 'LDOpthalmology', '', '1', '1', '1', '1', '1', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (8, 'pathology', '1', 'Pathology', 'Pathology', 'Patho', 'LDPathology', '', '0', '0', '1', '1', '0', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (9, 'ob_gyn', '1', 'Ob-Gynecology', 'Ob-Gyne', 'Gyn', 'LDObGynecology', '', '1', '1', '1', '1', '1', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (10, 'physical_therapy', '1', 'Physical Therapy', 'Physical', 'PT', 'LDPhysicalTherapy', 'Physical therapy department with on-call therapists. Day care clinics, training, rehab.', '1', '0', '1', '1', '0', '1', '1', '16', '8:00 - 15:00', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', 'PT-tel:1090-39393', 'Physical Therapy Clinic\r\nInternal Medicine\r\nDr. Holmer Apacio', '', '', 'Update: 2003-03-01 13:50:53 = Elpidio Latorilla\r\nUpdate: 2003-03-01 13:51:39 = Elpidio Latorilla\r\n', 'Elpidio Latorilla', 20030301135139, '', 00000000000000);
-INSERT INTO care_department VALUES (11, 'internal_med', '1', 'Internal Medicine', 'Internal Med', 'InMed', 'LDInternalMedicine', '', '1', '1', '1', '1', '0', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (12, 'imc', '1', 'Intermediate Care Unit', 'IMC', 'Intermediate', 'LDIntermediateCareUnit', '', '1', '1', '1', '1', '0', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (13, 'icu', '1', 'Intensive Care Unit', 'ICU', 'Intensive', 'LDIntensiveCareUnit', '', '1', '1', '1', '1', '0', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (14, 'emergency_ambulatory', '1', 'Emergency Ambulatory', 'Emergency', 'Emergency Amb', 'LDEmergencyAmbulatory', '', '0', '1', '1', '1', '0', '1', '1', '4', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (15, 'general_ambulatory', '1', 'General Ambulatory', 'Ambulatory', 'General Amb', 'LDGeneralAmbulatory', '', '0', '1', '1', '1', '0', '1', '1', '3', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (16, 'inmed_ambulatory', '1', 'Internal Medicine Ambulatory', 'InMed Ambulatory', 'InMed Amb', 'LDInternalMedicineAmbulatory', '', '0', '1', '1', '1', '0', '1', '1', '11', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', 'Update: 2003-03-01 18:18:40 = Elpidio Latorilla\r\nUpdate: 2003-03-16 11:29:52 = Elpidio Latorilla\r\n', 'Elpidio Latorilla', 20030316112952, '', 00000000000000);
-INSERT INTO care_department VALUES (17, 'sonography', '1', 'Sonography', 'Sono', 'Ultrasound diagnostics', 'LDSonography', '', '0', '1', '1', '1', '0', '1', '1', '11', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (18, 'nuclear_diagnostics', '1', 'Nuclear Diagnostics', 'Nuclear', 'Nuclear Testing', 'LDNuclearDiagnostics', '', '0', '1', '1', '1', '0', '1', '1', '19', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (19, 'radiology', '1', 'Radiology', 'Radiology', 'Xray', 'LDRadiology', '', '0', '1', '1', '1', '0', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', 'Update: 2003-03-01 23:49:35 = Elpidio Latorilla\r\nUpdate: 2003-03-16 11:30:12 = Elpidio Latorilla\r\n', 'Elpidio Latorilla', 20030316113012, '', 00000000000000);
-INSERT INTO care_department VALUES (20, 'oncology', '1', 'Oncology', 'Oncology', 'Cancer Department', 'LDOncology', 'This is the testg da asjfalsjfsaf', '1', '0', '1', '1', '1', '1', '0', '11', 'test oke working hours', '12.30 - 15.00 , 19.00 - 21.00', '0', '0',  NULL, 'test', 'test lang ito day bakit ba ako masaydo sa sakit sa bato', '', '', 'Update: 2003-02-26 23:23:57 = Elpidio LatorillaUpdate: 2003-02-26 23:24:37 = Elpidio LatorillaUpdate: 2003-02-26 23:25:13 = Elpidio LatorillaUpdate: 2003-02-26 23:25:26 = Elpidio LatorillaUpdate: 2003-02-26 23:28:35 = Elpidio LatorillaUpdate: 2003-02-26 23:32:36 = Elpidio LatorillaUpdate: 2003-02-26 23:32:47 = Elpidio LatorillaUpdate: 2003-02-26 23:33:04 = Elpidio Latorilla', 'Elpidio Latorilla', 20030226233304, '', 00000000000000);
-INSERT INTO care_department VALUES (21, 'neonatal', '1', 'Neonatal', 'Neonatal', 'Newborn Department', 'LDNeonatal', '', '1', '1', '1', '1', '1', '1', '1', '9', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (22, 'central_lab', '1', 'Central Laboratory', 'Central Lab', 'General Lab', 'LDCentralLaboratory', '', '0', '0', '1', '1', '0', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (23, 'serological_lab', '1', 'Serological Laboratory', 'Serological Lab', 'Serum Lab', 'LDSerologicalLaboratory', '', '0', '1', '1', '1', '0', '1', '1', '22', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (24, 'chemical_lab', '1', 'Chemical Laboratory', 'Chemical Lab', 'Chem Lab', 'LDChemicalLaboratory', '', '0', '1', '1', '1', '0', '1', '1', '22', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', 'Update: 2003-03-01 17:53:52 = Elpidio Latorilla\r\nUpdate: 2003-03-01 17:54:29 = Elpidio Latorilla\r\nUpdate: 2003-03-01 17:55:28 = Elpidio Latorilla\r\nUpdate: 2003-03-01 17:55:33 = Elpidio Latorilla\r\nUpdate: 2003-03-01 17:58:23 = Elpidio Latorilla\r\nUpdate: 2003-03-01 17:58:31 = Elpidio Latorilla\r\nUpdate: 2003-03-01 18:00:51 = Elpidio Latorilla\r\nUpdate: 2003-03-01 18:01:57 = Elpidio Latorilla\r\n', 'Elpidio Latorilla', 20030301180157, '', 00000000000000);
-INSERT INTO care_department VALUES (25, 'bacteriological_lab', '1', 'Bacteriological Laboratory', 'Bacteriological Lab', 'Bacteria Lab', 'LDBacteriologicalLaboratory', '', '0', '1', '1', '1', '0', '1', '1', '22', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', 'Update: 2003-03-01 18:04:47 = Elpidio Latorilla\r\nUpdate: 2003-03-16 11:29:27 = Elpidio Latorilla\r\n', 'Elpidio Latorilla', 20030316112927, '', 00000000000000);
-INSERT INTO care_department VALUES (26, 'tech', '2', 'Technical Maintenance', 'Tech', 'Technical Support', 'LDTechnicalMaintenance', '', '0', '0', '1', '1', '0', '1', '0', '0', '', '', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (27, 'it', '2', 'IT Department', 'IT', 'EDP', 'LDITDepartment', '', '0', '0', '1', '1', '0', '1', '0', '0', '', '', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (28, 'management', '2', 'Management', 'Management', 'Busines Administration', 'LDManagement', '', '0', '0', '1', '1', '0', '1', '0', '0', '', '', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (29, 'exhibition', '3', 'Exhibitions', 'Exhibit', 'Showcases', 'LDExhibitions', '', '0', '0', '1', '1', '1', '1', '0', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (30, 'edu', '3', 'Education', 'Edu', 'Training', 'LDEducation', '', '0', '0', '1', '1', '0', '1', '0', '0', '', '', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (31, 'study', '3', 'Studies', 'Studies', 'Advance studies or on-the-job training', 'LDStudies', '', '0', '0', '1', '1', '1', '1', '0', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (32, 'health_tip', '3', 'Health Tips', 'Tips', 'Health Information', 'LDHealthTips', '', '0', '0', '1', '1', '1', '1', '0', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (33, 'admission', '2', 'Admission', 'Admit', 'Admission information', 'LDAdmission', '', '0', '0', '1', '1', '1', '0', '1', '0', '', '', '0', '0',  NULL, '', '', '', '', 'Update: 2003-03-01 18:04:37 = Elpidio Latorilla\nUpdate: 2003-03-16 11:36:51 = Elpidio Latorilla\n', 'Elpidio Latorilla', 20030316113651, '', 00000000000000);
-INSERT INTO care_department VALUES (34, 'news_headline', '3', 'Headline', 'News head', 'Major news', 'LDHeadline', '', '0', '0', '1', '1', '1', '1', '0', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (35, 'cafenews', '3', 'Cafe News', 'Cafe news', 'Cafeteria news', 'LDCafeNews', '', '0', '0', '1', '1', '1', '0', '0', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (36, 'nursing', '3', 'Nursing', 'Nursing', 'Nursing care', 'LDNursing', '', '1', '1', '1', '1', '1', '1', '1', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (37, 'doctors', '3', 'Doctors', 'Doctors', 'Medical personell', 'LDDoctors', '', '0', '0', '1', '1', '1', '1', '0', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (38, 'pharmacy', '2', 'Pharmacy', 'Pharma', 'Drugstore', 'LDPharmacy', '', '0', '0', '1', '1', '1', '1', '0', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (42, 'anaesthesiology', '1', 'Anesthesiology', 'ana', 'Anesthesia Department', 'LDAnesthesiology', 'Anesthesiology', '0', '0', '1', '1', '1', '1', '0', '0', '', '', '0', '0', '', '', '', '', '', 'Create: 2003-03-19 18:38:19 = Elpidio LatorillaUpdate: 2003-03-19 18:51:59 = Elpidio Latorilla\n', 'Elpidio Latorilla', 20030319185159, 'Elpidio Latorilla', 20030319183819);
-INSERT INTO care_department VALUES (41, 'general_ambulant', '1', 'General Outpatient Clinic', 'General Clinic', 'General Ambulatory Clinic', 'LDGeneralOutpatientClinic', 'Outpatient/Ambulant Clinic for general/internal medicine', '0', '1', '1', '1', '0', '0', '1', '16', 'round the clock', '8:30 AM - 11:30 AM , 2:00 PM - 5:30 PM', '0', '0', '', 'GOC - Tel. 9089-9393', 'General Outpatient Clinic\r\nInternal Medicine\r\nProf. Dr.Dr. Makaryo Masangkay\r\nTobe Str. 300-1 St.20 Johannesburg\r\nTel: 56903 Fax: 3345666', '', '', 'Create: 2003-02-26 22:41:50 = Elpidio LatorillaUpdate: 2003-03-01 14:10:16 = Elpidio Latorilla\r\nUpdate: 2003-03-01 14:30:50 = Elpidio Latorilla\r\nUpdate: 2003-03-01 14:31:29 = Elpidio Latorilla\r\n', 'Elpidio Latorilla', 20030301143129, 'Elpidio Latorilla', 00000000000000);
-INSERT INTO care_department VALUES (43, 'blood_bank', '1', 'Blood Bank', 'Blood Blank', 'Blood Lab', 'LDBloodBank', '', '0', '0', '1', '1', '0', '1', '0', '0', '', '', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_group VALUES (1, 'pregnancy', 'Pregnancy', 'LDPregnancy', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_group VALUES (2, 'neonatal', 'Neonatal', 'LDNeonatal', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_group VALUES (3, 'encounter', 'Encounter', 'LDEncounter', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_group VALUES (4, 'op', 'OP', 'LDOP', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_group VALUES (5, 'anesthesia', 'Anesthesia', 'LDAnesthesia', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_group VALUES (6, 'prescription', 'Prescription', 'LDPrescription', '', '', '', 00000000000000, '', 00000000000000);
 
 #
 # Dumping data for table care_menu_main
@@ -276,23 +220,6 @@ INSERT INTO care_mode_delivery VALUES (2, '2', 'breech', 'Breech', 'LDBreech', '
 INSERT INTO care_mode_delivery VALUES (3, '2', 'caesarian', 'Caesarian', 'LDCaesarian', '', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_mode_delivery VALUES (4, '2', 'forceps', 'Forceps', 'LDForceps', '', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_mode_delivery VALUES (5, '2', 'vacuum', 'Vacuum', 'LDVacuum', '', '', '', 00000000000000, '', 00000000000000);
-
-#
-# Dumping data for table care_registry
-#
-
-INSERT INTO care_registry VALUES ('amb', 'modules/ambulatory/ambulatory.php', 'modules/news/newscolumns.php', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_registry VALUES ('dept', 'modules/news/departments.php', 'modules/news/newscolumns.php', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_registry VALUES ('radiology', 'modules/radiology/radiolog.php', 'modules/news/newscolumns.php', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_registry VALUES ('doctors', 'modules/doctors/doctors.php', 'modules/news/newscolumns.php', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_registry VALUES ('nursing', 'modules/nursing/pflege.php', 'modules/news/newscolumns.php', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_registry VALUES ('edp', 'modules/admin/edv.php', 'modules/news/newscolumns.php', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_registry VALUES ('pharmacy', 'modules/pharmacy/apotheke.php', 'modules/news/newscolumns.php', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_registry VALUES ('pr', 'modules/news/start_page.php', 'modules/news/start_page.php', 'modules/news/headline-edit.php', 'modules/news/headline-read.php', 'modules/news/editor-pass.php', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_registry VALUES ('cafe', 'modules/cafeteria/cafenews.php', 'modules/cafeteria/cafenews.php', 'modules/cafenews/cafenews-edit.php', 'modules/cafenews/cafenews-read.php', 'modules/cafenews/cafenews-edit-pass.php', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_registry VALUES ('main_start', 'modules/news/start_page.php', 'modules/news/start_page.php', 'modules/news/headline-edit-select-art.php', 'modules/news/headline-read.php', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_registry VALUES ('it', 'modules/system_admin/edv.php', 'modules/news/newscolumns.php', 'modules/news/editor-4plus1-select-art.php', 'modules/news/editor-4plus1-read.php', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_registry VALUES ('admission_module', 'modules/admission/aufnahme_start.php', '', '', '', 'modules/admission/aufnahme_pass.php', '', '', '', 00000000000000, '', 00000000000000);
 
 #
 # Dumping data for table care_role_person
@@ -350,7 +277,7 @@ INSERT INTO care_type_cause_opdelay VALUES (2, 'nurse', 'Nurses were delayed', '
 INSERT INTO care_type_cause_opdelay VALUES (3, 'surgeon', 'Surgeons were delayed', 'LDSurgeonsDelayed', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_type_cause_opdelay VALUES (4, 'cleaning', 'Cleaning delayed', 'LDCleaningDelayed', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_type_cause_opdelay VALUES (5, 'anesthesia', 'Anesthesiologist was delayed', 'LDAnesthesiologistDelayed', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_cause_opdelay VALUES (99, 'other', 'Other causes', 'LDOtherCauses', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_type_cause_opdelay VALUES (0, 'other', 'Other causes', 'LDOtherCauses', '', '', 00000000000000, '', 00000000000000);
 
 #
 # Dumping data for table care_type_color
@@ -519,6 +446,7 @@ INSERT INTO care_type_notes VALUES (3, 'discharge', 'Discharge summary', 'LDDisc
 INSERT INTO care_type_notes VALUES (4, 'consult', 'Consultation notes', 'LDConsultNotes', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_type_notes VALUES (5, 'op', 'Operation notes', 'LDOpNotes', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_type_notes VALUES (6, 'daily_ward', 'Daily ward\'s notes', 'LDDailyNurseNotes', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_type_notes VALUES (99, 'other', 'Other', 'LDOther', '', '', 20030420000747, '', 00000000000000);
 INSERT INTO care_type_notes VALUES (7, 'daily_chart_notes', 'Chart notes', 'LDChartNotes', '', '', 20030419114423, '', 00000000000000);
 INSERT INTO care_type_notes VALUES (8, 'chart_notes_etc', 'PT,ATG,etc. daily notes', 'LDPTATGetc', '', '', 20030419114204, '', 00000000000000);
 INSERT INTO care_type_notes VALUES (9, 'daily_iv_notes', 'IV daily notes', 'LDIVDailyNotes', '', '', 20030419114619, '', 00000000000000);
@@ -536,7 +464,6 @@ INSERT INTO care_type_notes VALUES (20, 'problem', 'Problem', 'LDProblem', '', '
 INSERT INTO care_type_notes VALUES (21, 'development', 'Development', 'LDDevelopment', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_type_notes VALUES (22, 'allergy', 'Allergy', 'LDAllergy',  NULL, '', 00000000000000, '', 00000000000000);
 INSERT INTO care_type_notes VALUES (23, 'daily_diet', 'Diet plan', 'LDDietPlan', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_notes VALUES (99, 'other', 'Other', 'LDOther', '', '', 20030420000747, '', 00000000000000);
 
 #
 # Dumping data for table care_type_outcome
@@ -629,10 +556,6 @@ INSERT INTO care_unit_measurement VALUES (15, 5, 'celsius', 'Celsius', 'LDCelsiu
 # Dumping data for table care_users
 #
 
-INSERT INTO care_users VALUES ('admin','admin', 'admin', '0', 'System_Admin', '1', '0000-00-00', '00:00:00', '0000-00-00', '00:00:00', '', '', '', 20021016154505, '', 00000000000000);
+INSERT INTO care_users VALUES ('admin', 'admin', 'admin', '0', 'System_Admin', '1', '0000-00-00', '00:00:00', '2003-07-27', '00:00:00', '', '', '', 20030427205316, '', 00000000000000);
 
-#
-# Dumping data for table care_version
-#
-
-INSERT INTO care_version VALUES ('care 2002', 'beta (pre-release)', '1.01.04', '1.0', '2003-03-31', '00:00:00', 'Elpidio Latorilla');
+    

@@ -3,27 +3,29 @@
 # http://www.phpmyadmin.net/ (download page)
 #
 # Host: localhost
-# Generation Time: Apr 21, 2003 at 12:11 AM
+# Generation Time: May 01, 2003 at 08:31 AM
 # Server version: 3.22.34
 # PHP Version: 4.0.4pl1
-# Database : xxxxx
+# Database : care2002b1004
 # --------------------------------------------------------
 
 #
 # Table structure for table care_address_citytown
 #
 
+DROP TABLE IF EXISTS care_address_citytown;
 CREATE TABLE care_address_citytown (
    nr mediumint(8) unsigned DEFAULT '0' NOT NULL auto_increment,
-   unece_modifier char(1),
-   unece_locode varchar(5),
+   unece_modifier char(2),
+   unece_locode varchar(15),
    name varchar(100) NOT NULL,
-   iso_country char(3) NOT NULL,
+   iso_country_id char(3) NOT NULL,
    unece_locode_type tinyint(3) unsigned,
    unece_coordinates varchar(25),
    info_url varchar(255),
    use_frequency bigint(20) unsigned DEFAULT '0' NOT NULL,
    status varchar(25),
+   history text NOT NULL,
    modify_id varchar(35) NOT NULL,
    modify_time timestamp(14),
    create_id varchar(35) NOT NULL,
@@ -37,6 +39,7 @@ CREATE TABLE care_address_citytown (
 # Table structure for table care_address_country
 #
 
+DROP TABLE IF EXISTS care_address_country;
 CREATE TABLE care_address_country (
    nr int(10) unsigned DEFAULT '0' NOT NULL auto_increment,
    iso_code char(3) DEFAULT '0' NOT NULL,
@@ -55,6 +58,7 @@ CREATE TABLE care_address_country (
 # Table structure for table care_address_region
 #
 
+DROP TABLE IF EXISTS care_address_region;
 CREATE TABLE care_address_region (
    nr int(10) unsigned DEFAULT '0' NOT NULL auto_increment,
    region_code varchar(10) DEFAULT '0' NOT NULL,
@@ -72,6 +76,7 @@ CREATE TABLE care_address_region (
 # Table structure for table care_appointment
 #
 
+DROP TABLE IF EXISTS care_appointment;
 CREATE TABLE care_appointment (
    nr bigint(20) unsigned DEFAULT '0' NOT NULL auto_increment,
    pid int(11) DEFAULT '0' NOT NULL,
@@ -105,9 +110,125 @@ CREATE TABLE care_appointment (
 # --------------------------------------------------------
 
 #
+# Table structure for table care_billing_archive
+#
+
+DROP TABLE IF EXISTS care_billing_archive;
+CREATE TABLE care_billing_archive (
+   bill_no bigint(20) DEFAULT '0' NOT NULL,
+   encounter_nr int(10) DEFAULT '0' NOT NULL,
+   patient_name tinytext NOT NULL,
+   vorname varchar(35) DEFAULT '0' NOT NULL,
+   bill_date_time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+   bill_amt double(16,4) DEFAULT '0.0000' NOT NULL,
+   payment_date_time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+   payment_mode text NOT NULL,
+   cheque_no varchar(10) DEFAULT '0' NOT NULL,
+   creditcard_no varchar(10) DEFAULT '0' NOT NULL,
+   paid_by varchar(15) DEFAULT '0' NOT NULL,
+   PRIMARY KEY (bill_no)
+);
+# --------------------------------------------------------
+
+#
+# Table structure for table care_billing_bill
+#
+
+DROP TABLE IF EXISTS care_billing_bill;
+CREATE TABLE care_billing_bill (
+   bill_bill_no bigint(20) DEFAULT '0' NOT NULL,
+   bill_encounter_nr int(10) unsigned DEFAULT '0' NOT NULL,
+   bill_date_time date,
+   bill_amount float(10,2),
+   bill_outstanding float(10,2),
+   PRIMARY KEY (bill_bill_no),
+   KEY index_bill_patnum (bill_encounter_nr)
+);
+# --------------------------------------------------------
+
+#
+# Table structure for table care_billing_bill_item
+#
+
+DROP TABLE IF EXISTS care_billing_bill_item;
+CREATE TABLE care_billing_bill_item (
+   bill_item_id int(11) DEFAULT '0' NOT NULL auto_increment,
+   bill_item_encounter_nr int(10) unsigned DEFAULT '0' NOT NULL,
+   bill_item_code varchar(5),
+   bill_item_unit_cost float(10,2) DEFAULT '0.00',
+   bill_item_units tinyint(4),
+   bill_item_amount float(10,2),
+   bill_item_date datetime,
+   bill_item_status enum('0','1') DEFAULT '0',
+   bill_item_bill_no int(11) DEFAULT '0' NOT NULL,
+   PRIMARY KEY (bill_item_id),
+   KEY index_bill_item_patnum (bill_item_encounter_nr),
+   KEY index_bill_item_bill_no (bill_item_bill_no)
+);
+# --------------------------------------------------------
+
+#
+# Table structure for table care_billing_final
+#
+
+DROP TABLE IF EXISTS care_billing_final;
+CREATE TABLE care_billing_final (
+   final_id tinyint(3) DEFAULT '0' NOT NULL auto_increment,
+   final_encounter_nr int(10) unsigned DEFAULT '0' NOT NULL,
+   final_bill_no int(11),
+   final_date date,
+   final_total_bill_amount float(10,2),
+   final_discount tinyint(4),
+   final_total_receipt_amount float(10,2),
+   final_amount_due float(10,2),
+   final_amount_recieved float(10,2),
+   PRIMARY KEY (final_id),
+   KEY index_final_patnum (final_encounter_nr)
+);
+# --------------------------------------------------------
+
+#
+# Table structure for table care_billing_item
+#
+
+DROP TABLE IF EXISTS care_billing_item;
+CREATE TABLE care_billing_item (
+   item_code varchar(5) NOT NULL,
+   item_description varchar(100),
+   item_unit_cost float(10,2) DEFAULT '0.00',
+   item_type tinytext,
+   item_discount_max_allowed tinyint(4) unsigned DEFAULT '0',
+   PRIMARY KEY (item_code)
+);
+# --------------------------------------------------------
+
+#
+# Table structure for table care_billing_payment
+#
+
+DROP TABLE IF EXISTS care_billing_payment;
+CREATE TABLE care_billing_payment (
+   payment_id tinyint(5) DEFAULT '0' NOT NULL auto_increment,
+   payment_encounter_nr int(10) unsigned DEFAULT '0' NOT NULL,
+   payment_receipt_no int(11) DEFAULT '0' NOT NULL,
+   payment_date datetime DEFAULT '0000-00-00 00:00:00',
+   payment_cash_amount float(10,2) DEFAULT '0.00',
+   payment_cheque_no int(11) DEFAULT '0',
+   payment_cheque_amount float(10,2) DEFAULT '0.00',
+   payment_creditcard_no int(25) DEFAULT '0',
+   payment_creditcard_amount float(10,2) DEFAULT '0.00',
+   payment_amount_total float(10,2) DEFAULT '0.00',
+   PRIMARY KEY (payment_id),
+   KEY index_payment_patnum (payment_encounter_nr),
+   KEY index_payment_receipt_no (payment_receipt_no)
+);
+# --------------------------------------------------------
+
+#
 # Table structure for table care_cafe_menu
 #
 
+DROP TABLE IF EXISTS care_cafe_menu;
 CREATE TABLE care_cafe_menu (
    item int(11) DEFAULT '0' NOT NULL auto_increment,
    lang varchar(10) DEFAULT 'en' NOT NULL,
@@ -127,6 +248,7 @@ CREATE TABLE care_cafe_menu (
 # Table structure for table care_cafe_prices
 #
 
+DROP TABLE IF EXISTS care_cafe_prices;
 CREATE TABLE care_cafe_prices (
    item int(11) DEFAULT '0' NOT NULL auto_increment,
    lang varchar(10) DEFAULT 'en' NOT NULL,
@@ -149,6 +271,7 @@ CREATE TABLE care_cafe_prices (
 # Table structure for table care_category_diagnosis
 #
 
+DROP TABLE IF EXISTS care_category_diagnosis;
 CREATE TABLE care_category_diagnosis (
    category varchar(35) NOT NULL,
    name varchar(35) NOT NULL,
@@ -171,6 +294,7 @@ CREATE TABLE care_category_diagnosis (
 # Table structure for table care_category_disease
 #
 
+DROP TABLE IF EXISTS care_category_disease;
 CREATE TABLE care_category_disease (
    nr tinyint(3) unsigned DEFAULT '0' NOT NULL auto_increment,
    group_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
@@ -190,6 +314,7 @@ CREATE TABLE care_category_disease (
 # Table structure for table care_class_encounter
 #
 
+DROP TABLE IF EXISTS care_class_encounter;
 CREATE TABLE care_class_encounter (
    class_nr smallint(6) unsigned DEFAULT '0' NOT NULL,
    class_id varchar(35) NOT NULL,
@@ -211,6 +336,7 @@ CREATE TABLE care_class_encounter (
 # Table structure for table care_class_ethnic_orig
 #
 
+DROP TABLE IF EXISTS care_class_ethnic_orig;
 CREATE TABLE care_class_ethnic_orig (
    nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
    name varchar(35) NOT NULL,
@@ -228,6 +354,7 @@ CREATE TABLE care_class_ethnic_orig (
 # Table structure for table care_class_financial
 #
 
+DROP TABLE IF EXISTS care_class_financial;
 CREATE TABLE care_class_financial (
    class_nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
    class_id varchar(15) DEFAULT '0' NOT NULL,
@@ -252,6 +379,7 @@ CREATE TABLE care_class_financial (
 # Table structure for table care_class_insurance
 #
 
+DROP TABLE IF EXISTS care_class_insurance;
 CREATE TABLE care_class_insurance (
    class_nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
    class_id varchar(35) NOT NULL,
@@ -272,6 +400,7 @@ CREATE TABLE care_class_insurance (
 # Table structure for table care_class_therapy
 #
 
+DROP TABLE IF EXISTS care_class_therapy;
 CREATE TABLE care_class_therapy (
    nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
    group_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
@@ -292,6 +421,7 @@ CREATE TABLE care_class_therapy (
 # Table structure for table care_complication
 #
 
+DROP TABLE IF EXISTS care_complication;
 CREATE TABLE care_complication (
    nr int(10) unsigned DEFAULT '0' NOT NULL auto_increment,
    group_nr int(11) unsigned DEFAULT '0' NOT NULL,
@@ -312,6 +442,7 @@ CREATE TABLE care_complication (
 # Table structure for table care_config_global
 #
 
+DROP TABLE IF EXISTS care_config_global;
 CREATE TABLE care_config_global (
    type varchar(60) NOT NULL,
    value varchar(255),
@@ -330,6 +461,7 @@ CREATE TABLE care_config_global (
 # Table structure for table care_config_user
 #
 
+DROP TABLE IF EXISTS care_config_user;
 CREATE TABLE care_config_user (
    user_id varchar(100) NOT NULL,
    serial_config_data text NOT NULL,
@@ -348,6 +480,7 @@ CREATE TABLE care_config_user (
 # Table structure for table care_currency
 #
 
+DROP TABLE IF EXISTS care_currency;
 CREATE TABLE care_currency (
    item_no smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
    short_name varchar(5) NOT NULL,
@@ -367,6 +500,7 @@ CREATE TABLE care_currency (
 # Table structure for table care_department
 #
 
+DROP TABLE IF EXISTS care_department;
 CREATE TABLE care_department (
    nr mediumint(8) unsigned DEFAULT '0' NOT NULL auto_increment,
    id varchar(60) NOT NULL,
@@ -380,7 +514,7 @@ CREATE TABLE care_department (
    admit_outpatient tinyint(1) DEFAULT '0' NOT NULL,
    has_oncall_doc tinyint(1) DEFAULT '1' NOT NULL,
    has_oncall_nurse tinyint(1) DEFAULT '1' NOT NULL,
-   does_surgery tinyint(1) DEFAULT '1' NOT NULL,
+   does_surgery tinyint(1) DEFAULT '0' NOT NULL,
    this_institution tinyint(1) DEFAULT '1' NOT NULL,
    is_sub_dept tinyint(1) DEFAULT '0' NOT NULL,
    parent_dept_nr tinyint(3) unsigned,
@@ -407,6 +541,7 @@ CREATE TABLE care_department (
 # Table structure for table care_department_firm
 #
 
+DROP TABLE IF EXISTS care_department_firm;
 CREATE TABLE care_department_firm (
    nr mediumint(8) unsigned DEFAULT '0' NOT NULL auto_increment,
    firm_id varchar(35) NOT NULL,
@@ -427,6 +562,7 @@ CREATE TABLE care_department_firm (
 # Table structure for table care_department_time
 #
 
+DROP TABLE IF EXISTS care_department_time;
 CREATE TABLE care_department_time (
    nr int(10) unsigned DEFAULT '0' NOT NULL auto_increment,
    dept_nr mediumint(8) unsigned DEFAULT '0' NOT NULL,
@@ -444,6 +580,7 @@ CREATE TABLE care_department_time (
 # Table structure for table care_diagnosis_localcode
 #
 
+DROP TABLE IF EXISTS care_diagnosis_localcode;
 CREATE TABLE care_diagnosis_localcode (
    localcode varchar(12) NOT NULL,
    description text NOT NULL,
@@ -473,6 +610,7 @@ CREATE TABLE care_diagnosis_localcode (
 # Table structure for table care_doctor_referrer
 #
 
+DROP TABLE IF EXISTS care_doctor_referrer;
 CREATE TABLE care_doctor_referrer (
    referrer_dr int(11) DEFAULT '0' NOT NULL,
    pid int(11) DEFAULT '0' NOT NULL,
@@ -499,6 +637,7 @@ CREATE TABLE care_doctor_referrer (
 # Table structure for table care_drg_ops_intern
 #
 
+DROP TABLE IF EXISTS care_drg_ops_intern;
 CREATE TABLE care_drg_ops_intern (
    item int(11) DEFAULT '0' NOT NULL auto_increment,
    lang varchar(15) DEFAULT 'en' NOT NULL,
@@ -523,6 +662,7 @@ CREATE TABLE care_drg_ops_intern (
 # Table structure for table care_drg_quicklist
 #
 
+DROP TABLE IF EXISTS care_drg_quicklist;
 CREATE TABLE care_drg_quicklist (
    item int(11) DEFAULT '0' NOT NULL auto_increment,
    lang varchar(15) NOT NULL,
@@ -543,6 +683,7 @@ CREATE TABLE care_drg_quicklist (
 # Table structure for table care_drg_related_codes
 #
 
+DROP TABLE IF EXISTS care_drg_related_codes;
 CREATE TABLE care_drg_related_codes (
    item int(11) DEFAULT '0' NOT NULL,
    lang varchar(15) DEFAULT 'en' NOT NULL,
@@ -563,6 +704,7 @@ CREATE TABLE care_drg_related_codes (
 # Table structure for table care_dutyplan_oncall
 #
 
+DROP TABLE IF EXISTS care_dutyplan_oncall;
 CREATE TABLE care_dutyplan_oncall (
    nr bigint(20) unsigned DEFAULT '0' NOT NULL auto_increment,
    dept_nr int(10) unsigned DEFAULT '0' NOT NULL,
@@ -585,27 +727,10 @@ CREATE TABLE care_dutyplan_oncall (
 # --------------------------------------------------------
 
 #
-# Table structure for table care_effective_day
-#
-
-CREATE TABLE care_effective_day (
-   eff_day_nr tinyint(4) DEFAULT '0' NOT NULL auto_increment,
-   name varchar(25) NOT NULL,
-   description varchar(255) NOT NULL,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (eff_day_nr)
-);
-# --------------------------------------------------------
-
-#
 # Table structure for table care_encounter
 #
 
+DROP TABLE IF EXISTS care_encounter;
 CREATE TABLE care_encounter (
    encounter_nr int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
    pid int(11) DEFAULT '0' NOT NULL,
@@ -658,6 +783,7 @@ CREATE TABLE care_encounter (
 # Table structure for table care_encounter_anamnesis
 #
 
+DROP TABLE IF EXISTS care_encounter_anamnesis;
 CREATE TABLE care_encounter_anamnesis (
    encounter_nr int(11) DEFAULT '0' NOT NULL,
    eyeglass tinyint(1) DEFAULT '0',
@@ -681,6 +807,7 @@ CREATE TABLE care_encounter_anamnesis (
 # Table structure for table care_encounter_bowel_movmt
 #
 
+DROP TABLE IF EXISTS care_encounter_bowel_movmt;
 CREATE TABLE care_encounter_bowel_movmt (
    date date DEFAULT '0000-00-00' NOT NULL,
    encounter_nr int(11) DEFAULT '0' NOT NULL,
@@ -700,6 +827,7 @@ CREATE TABLE care_encounter_bowel_movmt (
 # Table structure for table care_encounter_diagnosis
 #
 
+DROP TABLE IF EXISTS care_encounter_diagnosis;
 CREATE TABLE care_encounter_diagnosis (
    diagnosis_nr int(11) DEFAULT '0' NOT NULL auto_increment,
    encounter_nr int(11) DEFAULT '0' NOT NULL,
@@ -726,6 +854,7 @@ CREATE TABLE care_encounter_diagnosis (
 # Table structure for table care_encounter_diagnostics_report
 #
 
+DROP TABLE IF EXISTS care_encounter_diagnostics_report;
 CREATE TABLE care_encounter_diagnostics_report (
    item_nr int(11) DEFAULT '0' NOT NULL auto_increment,
    report_nr int(11) DEFAULT '0' NOT NULL,
@@ -747,9 +876,36 @@ CREATE TABLE care_encounter_diagnostics_report (
 # --------------------------------------------------------
 
 #
+# Table structure for table care_encounter_doctor_directive
+#
+
+DROP TABLE IF EXISTS care_encounter_doctor_directive;
+CREATE TABLE care_encounter_doctor_directive (
+   nr int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
+   encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
+   date date DEFAULT '0000-00-00' NOT NULL,
+   directive text NOT NULL,
+   dr_initials varchar(6) NOT NULL,
+   dr_personell_nr int(11) unsigned DEFAULT '0' NOT NULL,
+   ack_personell_nr int(10) unsigned DEFAULT '0',
+   ack_initials varchar(6),
+   ack_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+   location_type varchar(35),
+   location_id varchar(35),
+   status varchar(25),
+   modify_id varchar(35) NOT NULL,
+   modify_time timestamp(14),
+   create_id varchar(35) NOT NULL,
+   create_time timestamp(14),
+   PRIMARY KEY (nr)
+);
+# --------------------------------------------------------
+
+#
 # Table structure for table care_encounter_event_signaller
 #
 
+DROP TABLE IF EXISTS care_encounter_event_signaller;
 CREATE TABLE care_encounter_event_signaller (
    encounter_nr int(10) unsigned DEFAULT '0' NOT NULL,
    yellow tinyint(1) DEFAULT '0' NOT NULL,
@@ -803,6 +959,7 @@ CREATE TABLE care_encounter_event_signaller (
 # Table structure for table care_encounter_financial_class
 #
 
+DROP TABLE IF EXISTS care_encounter_financial_class;
 CREATE TABLE care_encounter_financial_class (
    nr bigint(20) unsigned DEFAULT '0' NOT NULL auto_increment,
    encounter_nr int(11) DEFAULT '0' NOT NULL,
@@ -824,6 +981,7 @@ CREATE TABLE care_encounter_financial_class (
 # Table structure for table care_encounter_immunization
 #
 
+DROP TABLE IF EXISTS care_encounter_immunization;
 CREATE TABLE care_encounter_immunization (
    nr int(10) unsigned DEFAULT '0' NOT NULL auto_increment,
    encounter_nr int(11) DEFAULT '0' NOT NULL,
@@ -850,6 +1008,7 @@ CREATE TABLE care_encounter_immunization (
 # Table structure for table care_encounter_inpatient
 #
 
+DROP TABLE IF EXISTS care_encounter_inpatient;
 CREATE TABLE care_encounter_inpatient (
    encounter_nr int(11) DEFAULT '0' NOT NULL,
    pathway_id varchar(25) NOT NULL,
@@ -881,17 +1040,18 @@ CREATE TABLE care_encounter_inpatient (
 # Table structure for table care_encounter_location
 #
 
+DROP TABLE IF EXISTS care_encounter_location;
 CREATE TABLE care_encounter_location (
    nr int(11) DEFAULT '0' NOT NULL auto_increment,
    encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
    type_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
    location_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
    group_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   date_from date NOT NULL,
-   date_to date NOT NULL,
-   time_from time NOT NULL,
-   time_to time  NOT NULL,
-   discharge_type_nr tinyint(3) unsigned,
+   date_from date DEFAULT '0000-00-00' NOT NULL,
+   date_to date DEFAULT '0000-00-00' NOT NULL,
+   time_from time DEFAULT '00:00:00',
+   time_to time,
+   discharge_type_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
    status varchar(25) NOT NULL,
    history text NOT NULL,
    modify_id varchar(35) NOT NULL,
@@ -908,6 +1068,7 @@ CREATE TABLE care_encounter_location (
 # Table structure for table care_encounter_measurement
 #
 
+DROP TABLE IF EXISTS care_encounter_measurement;
 CREATE TABLE care_encounter_measurement (
    nr int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
    msr_date date DEFAULT '0000-00-00' NOT NULL,
@@ -935,6 +1096,7 @@ CREATE TABLE care_encounter_measurement (
 # Table structure for table care_encounter_notes
 #
 
+DROP TABLE IF EXISTS care_encounter_notes;
 CREATE TABLE care_encounter_notes (
    nr int(10) unsigned DEFAULT '0' NOT NULL auto_increment,
    encounter_nr int(10) unsigned DEFAULT '0' NOT NULL,
@@ -975,6 +1137,7 @@ CREATE TABLE care_encounter_notes (
 # Table structure for table care_encounter_obstetric
 #
 
+DROP TABLE IF EXISTS care_encounter_obstetric;
 CREATE TABLE care_encounter_obstetric (
    encounter_nr int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
    pregnancy_nr int(11) unsigned DEFAULT '0' NOT NULL,
@@ -999,6 +1162,7 @@ CREATE TABLE care_encounter_obstetric (
 # Table structure for table care_encounter_op
 #
 
+DROP TABLE IF EXISTS care_encounter_op;
 CREATE TABLE care_encounter_op (
    nr int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
    dept_nr smallint(6) unsigned DEFAULT '0' NOT NULL,
@@ -1026,6 +1190,7 @@ CREATE TABLE care_encounter_op (
 # Table structure for table care_encounter_op_instrument_box
 #
 
+DROP TABLE IF EXISTS care_encounter_op_instrument_box;
 CREATE TABLE care_encounter_op_instrument_box (
    nr int(10) unsigned DEFAULT '0' NOT NULL auto_increment,
    op_nr int(10) unsigned DEFAULT '0' NOT NULL,
@@ -1047,6 +1212,7 @@ CREATE TABLE care_encounter_op_instrument_box (
 # Table structure for table care_encounter_op_material
 #
 
+DROP TABLE IF EXISTS care_encounter_op_material;
 CREATE TABLE care_encounter_op_material (
    nr int(10) unsigned DEFAULT '0' NOT NULL auto_increment,
    op_nr int(10) unsigned DEFAULT '0' NOT NULL,
@@ -1068,6 +1234,7 @@ CREATE TABLE care_encounter_op_material (
 # Table structure for table care_encounter_op_roleperson
 #
 
+DROP TABLE IF EXISTS care_encounter_op_roleperson;
 CREATE TABLE care_encounter_op_roleperson (
    nr int(10) unsigned DEFAULT '0' NOT NULL auto_increment,
    op_nr int(10) unsigned DEFAULT '0' NOT NULL,
@@ -1090,6 +1257,7 @@ CREATE TABLE care_encounter_op_roleperson (
 # Table structure for table care_encounter_op_time
 #
 
+DROP TABLE IF EXISTS care_encounter_op_time;
 CREATE TABLE care_encounter_op_time (
    nr int(10) unsigned DEFAULT '0' NOT NULL auto_increment,
    op_nr int(10) unsigned DEFAULT '0' NOT NULL,
@@ -1113,6 +1281,7 @@ CREATE TABLE care_encounter_op_time (
 # Table structure for table care_encounter_other_number
 #
 
+DROP TABLE IF EXISTS care_encounter_other_number;
 CREATE TABLE care_encounter_other_number (
    encounter_nr int(11) DEFAULT '0' NOT NULL,
    other_nr varchar(30) NOT NULL,
@@ -1130,6 +1299,7 @@ CREATE TABLE care_encounter_other_number (
 # Table structure for table care_encounter_outpatient
 #
 
+DROP TABLE IF EXISTS care_encounter_outpatient;
 CREATE TABLE care_encounter_outpatient (
    encounter_nr int(11) DEFAULT '0' NOT NULL,
    care_class tinyint(4) DEFAULT '0' NOT NULL,
@@ -1149,6 +1319,7 @@ CREATE TABLE care_encounter_outpatient (
 # Table structure for table care_encounter_prescription
 #
 
+DROP TABLE IF EXISTS care_encounter_prescription;
 CREATE TABLE care_encounter_prescription (
    nr int(11) DEFAULT '0' NOT NULL auto_increment,
    encounter_nr int(10) unsigned DEFAULT '0' NOT NULL,
@@ -1179,6 +1350,7 @@ CREATE TABLE care_encounter_prescription (
 # Table structure for table care_encounter_prescription_notes
 #
 
+DROP TABLE IF EXISTS care_encounter_prescription_notes;
 CREATE TABLE care_encounter_prescription_notes (
    nr bigint(20) unsigned DEFAULT '0' NOT NULL auto_increment,
    date date DEFAULT '0000-00-00' NOT NULL,
@@ -1199,6 +1371,7 @@ CREATE TABLE care_encounter_prescription_notes (
 # Table structure for table care_encounter_procedure
 #
 
+DROP TABLE IF EXISTS care_encounter_procedure;
 CREATE TABLE care_encounter_procedure (
    procedure_nr int(11) DEFAULT '0' NOT NULL auto_increment,
    encounter_nr int(11) DEFAULT '0' NOT NULL,
@@ -1224,6 +1397,7 @@ CREATE TABLE care_encounter_procedure (
 # Table structure for table care_encounter_roleperson
 #
 
+DROP TABLE IF EXISTS care_encounter_roleperson;
 CREATE TABLE care_encounter_roleperson (
    nr int(10) unsigned DEFAULT '0' NOT NULL auto_increment,
    encounter_nr int(10) unsigned DEFAULT '0' NOT NULL,
@@ -1245,9 +1419,33 @@ CREATE TABLE care_encounter_roleperson (
 # --------------------------------------------------------
 
 #
+# Table structure for table care_encounter_test
+#
+
+DROP TABLE IF EXISTS care_encounter_test;
+CREATE TABLE care_encounter_test (
+   test_nr int(11) unsigned DEFAULT '0' NOT NULL,
+   type varchar(35) NOT NULL,
+   encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
+   diagnosis_nr int(11) unsigned DEFAULT '0' NOT NULL,
+   procedure_nr int(10) unsigned DEFAULT '0' NOT NULL,
+   result_script_call varchar(255) NOT NULL,
+   status varchar(25) NOT NULL,
+   history text NOT NULL,
+   modify_id varchar(35) NOT NULL,
+   modify_time timestamp(14),
+   create_id varchar(35) NOT NULL,
+   create_time timestamp(14),
+   PRIMARY KEY (test_nr),
+   KEY encounter_nr (encounter_nr)
+);
+# --------------------------------------------------------
+
+#
 # Table structure for table care_encounter_transplant_donor
 #
 
+DROP TABLE IF EXISTS care_encounter_transplant_donor;
 CREATE TABLE care_encounter_transplant_donor (
    nr int(10) unsigned DEFAULT '0' NOT NULL,
    encounter_nr int(10) unsigned DEFAULT '0' NOT NULL,
@@ -1270,6 +1468,7 @@ CREATE TABLE care_encounter_transplant_donor (
 # Table structure for table care_group
 #
 
+DROP TABLE IF EXISTS care_group;
 CREATE TABLE care_group (
    nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
    id varchar(35) NOT NULL,
@@ -1289,24 +1488,25 @@ CREATE TABLE care_group (
 # Table structure for table care_insurance_firm
 #
 
+DROP TABLE IF EXISTS care_insurance_firm;
 CREATE TABLE care_insurance_firm (
-   country_id varchar(5) NOT NULL,
-   firm_id int(11) DEFAULT '0' NOT NULL,
+   firm_id varchar(40) NOT NULL,
    name varchar(60) NOT NULL,
+   iso_country_id char(3) NOT NULL,
    sub_area varchar(60) NOT NULL,
-   type varchar(35) NOT NULL,
-   addr varchar(255) NOT NULL,
-   addr_mail varchar(200) NOT NULL,
-   addr_billing varchar(200) NOT NULL,
-   addr_email varchar(60) NOT NULL,
-   phone_main varchar(35) NOT NULL,
-   phone_aux varchar(35) NOT NULL,
-   fax_main varchar(35) NOT NULL,
-   fax_aux varchar(35) NOT NULL,
-   contact_person varchar(60) NOT NULL,
-   contact_phone varchar(35) NOT NULL,
-   contact_fax varchar(35) NOT NULL,
-   contact_email varchar(60) NOT NULL,
+   type_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
+   addr varchar(255),
+   addr_mail varchar(200),
+   addr_billing varchar(200),
+   addr_email varchar(60),
+   phone_main varchar(35),
+   phone_aux varchar(35),
+   fax_main varchar(35),
+   fax_aux varchar(35),
+   contact_person varchar(60),
+   contact_phone varchar(35),
+   contact_fax varchar(35),
+   contact_email varchar(60),
    use_frequency bigint(20) unsigned DEFAULT '0' NOT NULL,
    status varchar(25) NOT NULL,
    history text NOT NULL,
@@ -1315,8 +1515,7 @@ CREATE TABLE care_insurance_firm (
    create_id varchar(35) NOT NULL,
    create_time timestamp(14),
    KEY name (name),
-   KEY country_id (country_id),
-   KEY firm_id (firm_id)
+   PRIMARY KEY (firm_id)
 );
 # --------------------------------------------------------
 
@@ -1324,6 +1523,7 @@ CREATE TABLE care_insurance_firm (
 # Table structure for table care_lab_test_data
 #
 
+DROP TABLE IF EXISTS care_lab_test_data;
 CREATE TABLE care_lab_test_data (
    batch_nr int(11) DEFAULT '0' NOT NULL auto_increment,
    patnum varchar(10) NOT NULL,
@@ -1383,6 +1583,7 @@ CREATE TABLE care_lab_test_data (
 # Table structure for table care_lookup_citytown_region
 #
 
+DROP TABLE IF EXISTS care_lookup_citytown_region;
 CREATE TABLE care_lookup_citytown_region (
    nr int(10) unsigned DEFAULT '0' NOT NULL auto_increment,
    citytown_nr int(10) unsigned DEFAULT '0' NOT NULL,
@@ -1401,6 +1602,7 @@ CREATE TABLE care_lookup_citytown_region (
 # Table structure for table care_lookup_color_event
 #
 
+DROP TABLE IF EXISTS care_lookup_color_event;
 CREATE TABLE care_lookup_color_event (
    event_type_nr mediumint(8) unsigned DEFAULT '0' NOT NULL,
    color_id varchar(25) NOT NULL,
@@ -1415,6 +1617,7 @@ CREATE TABLE care_lookup_color_event (
 # Table structure for table care_lookup_ward_dept
 #
 
+DROP TABLE IF EXISTS care_lookup_ward_dept;
 CREATE TABLE care_lookup_ward_dept (
    ward_nr int(10) unsigned DEFAULT '0' NOT NULL,
    dept_nr int(10) unsigned DEFAULT '0' NOT NULL,
@@ -1434,6 +1637,7 @@ CREATE TABLE care_lookup_ward_dept (
 # Table structure for table care_lookup_zip_locode
 #
 
+DROP TABLE IF EXISTS care_lookup_zip_locode;
 CREATE TABLE care_lookup_zip_locode (
    nr int(10) unsigned DEFAULT '0' NOT NULL auto_increment,
    zip varchar(35) NOT NULL,
@@ -1452,6 +1656,7 @@ CREATE TABLE care_lookup_zip_locode (
 # Table structure for table care_mail_list
 #
 
+DROP TABLE IF EXISTS care_mail_list;
 CREATE TABLE care_mail_list (
    address tinytext NOT NULL,
    s_date varchar(10) NOT NULL,
@@ -1466,6 +1671,7 @@ CREATE TABLE care_mail_list (
 # Table structure for table care_mail_private
 #
 
+DROP TABLE IF EXISTS care_mail_private;
 CREATE TABLE care_mail_private (
    recipient tinytext NOT NULL,
    sender tinytext NOT NULL,
@@ -1494,6 +1700,7 @@ CREATE TABLE care_mail_private (
 # Table structure for table care_mail_private_users
 #
 
+DROP TABLE IF EXISTS care_mail_private_users;
 CREATE TABLE care_mail_private_users (
    user_name tinytext NOT NULL,
    email tinytext NOT NULL,
@@ -1519,6 +1726,7 @@ CREATE TABLE care_mail_private_users (
 # Table structure for table care_med_ordercatalog
 #
 
+DROP TABLE IF EXISTS care_med_ordercatalog;
 CREATE TABLE care_med_ordercatalog (
    item_no int(11) DEFAULT '0' NOT NULL auto_increment,
    dept varchar(20) NOT NULL,
@@ -1537,6 +1745,7 @@ CREATE TABLE care_med_ordercatalog (
 # Table structure for table care_med_orderlist
 #
 
+DROP TABLE IF EXISTS care_med_orderlist;
 CREATE TABLE care_med_orderlist (
    order_nr int(11) DEFAULT '0' NOT NULL auto_increment,
    dept varchar(20) NOT NULL,
@@ -1566,6 +1775,7 @@ CREATE TABLE care_med_orderlist (
 # Table structure for table care_med_products_main
 #
 
+DROP TABLE IF EXISTS care_med_products_main;
 CREATE TABLE care_med_products_main (
    bestellnum varchar(25) NOT NULL,
    artikelnum tinytext NOT NULL,
@@ -1599,6 +1809,7 @@ CREATE TABLE care_med_products_main (
 # Table structure for table care_med_report
 #
 
+DROP TABLE IF EXISTS care_med_report;
 CREATE TABLE care_med_report (
    report_nr int(11) DEFAULT '0' NOT NULL auto_increment,
    dept varchar(15) NOT NULL,
@@ -1622,6 +1833,7 @@ CREATE TABLE care_med_report (
 # Table structure for table care_medocs
 #
 
+DROP TABLE IF EXISTS care_medocs;
 CREATE TABLE care_medocs (
    doc_no int(10) unsigned DEFAULT '0' NOT NULL auto_increment,
    dept varchar(15) DEFAULT '0' NOT NULL,
@@ -1657,6 +1869,7 @@ CREATE TABLE care_medocs (
 # Table structure for table care_menu_main
 #
 
+DROP TABLE IF EXISTS care_menu_main;
 CREATE TABLE care_menu_main (
    nr tinyint(3) unsigned DEFAULT '0' NOT NULL auto_increment,
    sort_nr tinyint(2) DEFAULT '0' NOT NULL,
@@ -1676,6 +1889,7 @@ CREATE TABLE care_menu_main (
 # Table structure for table care_method_induction
 #
 
+DROP TABLE IF EXISTS care_method_induction;
 CREATE TABLE care_method_induction (
    method_nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
    group_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
@@ -1696,6 +1910,7 @@ CREATE TABLE care_method_induction (
 # Table structure for table care_mode_delivery
 #
 
+DROP TABLE IF EXISTS care_mode_delivery;
 CREATE TABLE care_mode_delivery (
    nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
    group_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
@@ -1716,6 +1931,7 @@ CREATE TABLE care_mode_delivery (
 # Table structure for table care_neonatal
 #
 
+DROP TABLE IF EXISTS care_neonatal;
 CREATE TABLE care_neonatal (
    nr int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
    pid int(11) unsigned DEFAULT '0' NOT NULL,
@@ -1758,6 +1974,7 @@ CREATE TABLE care_neonatal (
 # Table structure for table care_news_article
 #
 
+DROP TABLE IF EXISTS care_news_article;
 CREATE TABLE care_news_article (
    nr int(11) DEFAULT '0' NOT NULL auto_increment,
    lang varchar(10) DEFAULT 'en' NOT NULL,
@@ -1790,6 +2007,7 @@ CREATE TABLE care_news_article (
 # Table structure for table care_nursing_op_logbook
 #
 
+DROP TABLE IF EXISTS care_nursing_op_logbook;
 CREATE TABLE care_nursing_op_logbook (
    nr int(11) DEFAULT '0' NOT NULL auto_increment,
    year varchar(4) DEFAULT '0' NOT NULL,
@@ -1843,6 +2061,7 @@ CREATE TABLE care_nursing_op_logbook (
 # Table structure for table care_op_med_doc
 #
 
+DROP TABLE IF EXISTS care_op_med_doc;
 CREATE TABLE care_op_med_doc (
    nr bigint(20) unsigned DEFAULT '0' NOT NULL auto_increment,
    op_date varchar(12) NOT NULL,
@@ -1872,26 +2091,10 @@ CREATE TABLE care_op_med_doc (
 # --------------------------------------------------------
 
 #
-# Table structure for table care_ops301_de
-#
-
-CREATE TABLE care_ops301_de (
-   code varchar(12) NOT NULL,
-   description text NOT NULL,
-   inclusive text NOT NULL,
-   exclusive text NOT NULL,
-   notes text NOT NULL,
-   std_code char(1) NOT NULL,
-   sub_level tinyint(4) DEFAULT '0' NOT NULL,
-   remarks text NOT NULL,
-   KEY code (code)
-);
-# --------------------------------------------------------
-
-#
 # Table structure for table care_person
 #
 
+DROP TABLE IF EXISTS care_person;
 CREATE TABLE care_person (
    pid int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
    date_reg datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
@@ -1938,7 +2141,7 @@ CREATE TABLE care_person (
    death_cause_code varchar(15),
    date_update datetime,
    status varchar(20),
-   history text,
+   history text NOT NULL,
    modify_id varchar(35) NOT NULL,
    modify_time timestamp(14),
    create_id varchar(35) NOT NULL,
@@ -1955,6 +2158,7 @@ CREATE TABLE care_person (
 # Table structure for table care_person_death
 #
 
+DROP TABLE IF EXISTS care_person_death;
 CREATE TABLE care_person_death (
    nr int(10) unsigned DEFAULT '0' NOT NULL auto_increment,
    pid int(10) unsigned DEFAULT '0',
@@ -1977,6 +2181,7 @@ CREATE TABLE care_person_death (
 # Table structure for table care_person_insurance
 #
 
+DROP TABLE IF EXISTS care_person_insurance;
 CREATE TABLE care_person_insurance (
    item_nr int(10) unsigned DEFAULT '0' NOT NULL auto_increment,
    pid int(10) unsigned DEFAULT '0' NOT NULL,
@@ -1999,6 +2204,7 @@ CREATE TABLE care_person_insurance (
 # Table structure for table care_person_other_number
 #
 
+DROP TABLE IF EXISTS care_person_other_number;
 CREATE TABLE care_person_other_number (
    nr int(10) unsigned DEFAULT '0' NOT NULL auto_increment,
    pid int(11) unsigned DEFAULT '0' NOT NULL,
@@ -2020,6 +2226,7 @@ CREATE TABLE care_person_other_number (
 # Table structure for table care_personell
 #
 
+DROP TABLE IF EXISTS care_personell;
 CREATE TABLE care_personell (
    nr int(11) DEFAULT '0' NOT NULL auto_increment,
    short_id varchar(10),
@@ -2057,6 +2264,7 @@ CREATE TABLE care_personell (
 # Table structure for table care_personell_assignment
 #
 
+DROP TABLE IF EXISTS care_personell_assignment;
 CREATE TABLE care_personell_assignment (
    nr int(10) unsigned DEFAULT '0' NOT NULL auto_increment,
    personell_nr int(11) unsigned DEFAULT '0' NOT NULL,
@@ -2079,9 +2287,50 @@ CREATE TABLE care_personell_assignment (
 # --------------------------------------------------------
 
 #
+# Table structure for table care_personell_doctor
+#
+
+DROP TABLE IF EXISTS care_personell_doctor;
+CREATE TABLE care_personell_doctor (
+   doctor_nr tinyint(4) DEFAULT '0' NOT NULL,
+   pid int(11) DEFAULT '0' NOT NULL,
+   qualification varchar(225) NOT NULL,
+   rank varchar(35) NOT NULL,
+   check_summaries tinyint(1) DEFAULT '0' NOT NULL,
+   person_status varchar(25) NOT NULL,
+   status varchar(25) NOT NULL,
+   history text NOT NULL,
+   modify_id varchar(35) NOT NULL,
+   modify_time timestamp(14),
+   create_id varchar(35) NOT NULL,
+   PRIMARY KEY (doctor_nr)
+);
+# --------------------------------------------------------
+
+#
+# Table structure for table care_personell_doctor_dept
+#
+
+DROP TABLE IF EXISTS care_personell_doctor_dept;
+CREATE TABLE care_personell_doctor_dept (
+   personell_nr int(11) DEFAULT '0' NOT NULL,
+   dept_nr varchar(35) NOT NULL,
+   status varchar(25) NOT NULL,
+   history text NOT NULL,
+   modify_id varchar(35) NOT NULL,
+   modify_time timestamp(14),
+   create_id varchar(35) NOT NULL,
+   create_time timestamp(14),
+   PRIMARY KEY (personell_nr),
+   KEY dept_id (dept_nr)
+);
+# --------------------------------------------------------
+
+#
 # Table structure for table care_pharma_ordercatalog
 #
 
+DROP TABLE IF EXISTS care_pharma_ordercatalog;
 CREATE TABLE care_pharma_ordercatalog (
    item_no int(11) DEFAULT '0' NOT NULL auto_increment,
    dept varchar(20) NOT NULL,
@@ -2100,6 +2349,7 @@ CREATE TABLE care_pharma_ordercatalog (
 # Table structure for table care_pharma_orderlist
 #
 
+DROP TABLE IF EXISTS care_pharma_orderlist;
 CREATE TABLE care_pharma_orderlist (
    order_nr int(11) DEFAULT '0' NOT NULL auto_increment,
    dept varchar(20) NOT NULL,
@@ -2129,6 +2379,7 @@ CREATE TABLE care_pharma_orderlist (
 # Table structure for table care_pharma_products_main
 #
 
+DROP TABLE IF EXISTS care_pharma_products_main;
 CREATE TABLE care_pharma_products_main (
    bestellnum varchar(25) NOT NULL,
    artikelnum tinytext NOT NULL,
@@ -2162,6 +2413,7 @@ CREATE TABLE care_pharma_products_main (
 # Table structure for table care_phone
 #
 
+DROP TABLE IF EXISTS care_phone;
 CREATE TABLE care_phone (
    item_nr int(10) unsigned DEFAULT '0' NOT NULL auto_increment,
    title varchar(35),
@@ -2199,6 +2451,7 @@ CREATE TABLE care_phone (
 # Table structure for table care_pregnancy
 #
 
+DROP TABLE IF EXISTS care_pregnancy;
 CREATE TABLE care_pregnancy (
    nr int(10) unsigned DEFAULT '0' NOT NULL,
    pid int(11) unsigned DEFAULT '0' NOT NULL,
@@ -2244,6 +2497,7 @@ CREATE TABLE care_pregnancy (
 # Table structure for table care_pregnancy_complication
 #
 
+DROP TABLE IF EXISTS care_pregnancy_complication;
 CREATE TABLE care_pregnancy_complication (
    nr int(10) unsigned DEFAULT '0' NOT NULL auto_increment,
    pregnancy_nr int(11) unsigned DEFAULT '0' NOT NULL,
@@ -2264,6 +2518,7 @@ CREATE TABLE care_pregnancy_complication (
 # Table structure for table care_registry
 #
 
+DROP TABLE IF EXISTS care_registry;
 CREATE TABLE care_registry (
    registry_id varchar(35) NOT NULL,
    module_start_script varchar(60) NOT NULL,
@@ -2285,6 +2540,7 @@ CREATE TABLE care_registry (
 # Table structure for table care_role_person
 #
 
+DROP TABLE IF EXISTS care_role_person;
 CREATE TABLE care_role_person (
    nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
    group_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
@@ -2304,9 +2560,12 @@ CREATE TABLE care_role_person (
 # Table structure for table care_room
 #
 
+DROP TABLE IF EXISTS care_room;
 CREATE TABLE care_room (
    nr tinyint(3) unsigned DEFAULT '0' NOT NULL auto_increment,
    type_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
+   date_create date DEFAULT '0000-00-00' NOT NULL,
+   date_close date DEFAULT '0000-00-00' NOT NULL,
    is_temp_closed tinyint(1) DEFAULT '0',
    room_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
    ward_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
@@ -2315,9 +2574,9 @@ CREATE TABLE care_room (
    closed_beds varchar(255) NOT NULL,
    info varchar(60),
    status varchar(25) NOT NULL,
-   history text,
+   history text NOT NULL,
    modify_id varchar(35) NOT NULL,
-   modify_time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+   modify_time timestamp(14),
    create_id varchar(35) NOT NULL,
    create_time timestamp(14),
    PRIMARY KEY (nr),
@@ -2325,13 +2584,13 @@ CREATE TABLE care_room (
    KEY ward_nr (ward_nr),
    KEY dept_nr (dept_nr)
 );
-
 # --------------------------------------------------------
 
 #
 # Table structure for table care_sessions
 #
 
+DROP TABLE IF EXISTS care_sessions;
 CREATE TABLE care_sessions (
    SESSKEY varchar(32) NOT NULL,
    EXPIRY int(11) unsigned DEFAULT '0' NOT NULL,
@@ -2345,6 +2604,7 @@ CREATE TABLE care_sessions (
 # Table structure for table care_standby_duty_report
 #
 
+DROP TABLE IF EXISTS care_standby_duty_report;
 CREATE TABLE care_standby_duty_report (
    report_nr int(11) DEFAULT '0' NOT NULL auto_increment,
    dept varchar(15) NOT NULL,
@@ -2373,6 +2633,7 @@ CREATE TABLE care_standby_duty_report (
 # Table structure for table care_station2dept
 #
 
+DROP TABLE IF EXISTS care_station2dept;
 CREATE TABLE care_station2dept (
    dept tinytext NOT NULL,
    station text NOT NULL,
@@ -2384,6 +2645,7 @@ CREATE TABLE care_station2dept (
 # Table structure for table care_steri_products_main
 #
 
+DROP TABLE IF EXISTS care_steri_products_main;
 CREATE TABLE care_steri_products_main (
    bestellnum int(15) unsigned DEFAULT '0' NOT NULL,
    containernum varchar(15) NOT NULL,
@@ -2408,6 +2670,7 @@ CREATE TABLE care_steri_products_main (
 # Table structure for table care_tech_questions
 #
 
+DROP TABLE IF EXISTS care_tech_questions;
 CREATE TABLE care_tech_questions (
    batch_nr int(11) DEFAULT '0' NOT NULL auto_increment,
    dept varchar(15) NOT NULL,
@@ -2437,6 +2700,7 @@ CREATE TABLE care_tech_questions (
 # Table structure for table care_tech_repair_done
 #
 
+DROP TABLE IF EXISTS care_tech_repair_done;
 CREATE TABLE care_tech_repair_done (
    batch_nr int(11) DEFAULT '0' NOT NULL auto_increment,
    dept varchar(15),
@@ -2464,6 +2728,7 @@ CREATE TABLE care_tech_repair_done (
 # Table structure for table care_tech_repair_job
 #
 
+DROP TABLE IF EXISTS care_tech_repair_job;
 CREATE TABLE care_tech_repair_job (
    batch_nr tinyint(4) DEFAULT '0' NOT NULL auto_increment,
    dept varchar(15) NOT NULL,
@@ -2497,6 +2762,7 @@ CREATE TABLE care_tech_repair_job (
 # Table structure for table care_test_findings_baclabor
 #
 
+DROP TABLE IF EXISTS care_test_findings_baclabor;
 CREATE TABLE care_test_findings_baclabor (
    batch_nr int(11) DEFAULT '0' NOT NULL,
    encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
@@ -2531,6 +2797,7 @@ CREATE TABLE care_test_findings_baclabor (
 # Table structure for table care_test_findings_patho
 #
 
+DROP TABLE IF EXISTS care_test_findings_patho;
 CREATE TABLE care_test_findings_patho (
    batch_nr int(11) DEFAULT '0' NOT NULL,
    encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
@@ -2560,6 +2827,7 @@ CREATE TABLE care_test_findings_patho (
 # Table structure for table care_test_findings_radio
 #
 
+DROP TABLE IF EXISTS care_test_findings_radio;
 CREATE TABLE care_test_findings_radio (
    batch_nr int(11) unsigned DEFAULT '0' NOT NULL,
    encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
@@ -2586,6 +2854,7 @@ CREATE TABLE care_test_findings_radio (
 # Table structure for table care_test_request_baclabor
 #
 
+DROP TABLE IF EXISTS care_test_request_baclabor;
 CREATE TABLE care_test_request_baclabor (
    batch_nr int(11) DEFAULT '0' NOT NULL auto_increment,
    encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
@@ -2612,6 +2881,7 @@ CREATE TABLE care_test_request_baclabor (
 # Table structure for table care_test_request_blood
 #
 
+DROP TABLE IF EXISTS care_test_request_blood;
 CREATE TABLE care_test_request_blood (
    batch_nr int(11) DEFAULT '0' NOT NULL auto_increment,
    encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
@@ -2692,6 +2962,7 @@ CREATE TABLE care_test_request_blood (
 # Table structure for table care_test_request_chemlabor
 #
 
+DROP TABLE IF EXISTS care_test_request_chemlabor;
 CREATE TABLE care_test_request_chemlabor (
    batch_nr int(11) DEFAULT '0' NOT NULL auto_increment,
    encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
@@ -2719,6 +2990,7 @@ CREATE TABLE care_test_request_chemlabor (
 # Table structure for table care_test_request_generic
 #
 
+DROP TABLE IF EXISTS care_test_request_generic;
 CREATE TABLE care_test_request_generic (
    batch_nr int(11) DEFAULT '0' NOT NULL,
    encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
@@ -2747,6 +3019,7 @@ CREATE TABLE care_test_request_generic (
 # Table structure for table care_test_request_patho
 #
 
+DROP TABLE IF EXISTS care_test_request_patho;
 CREATE TABLE care_test_request_patho (
    batch_nr int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
    encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
@@ -2798,6 +3071,7 @@ CREATE TABLE care_test_request_patho (
 # Table structure for table care_test_request_radio
 #
 
+DROP TABLE IF EXISTS care_test_request_radio;
 CREATE TABLE care_test_request_radio (
    batch_nr int(11) DEFAULT '0' NOT NULL,
    encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
@@ -2843,6 +3117,7 @@ CREATE TABLE care_test_request_radio (
 # Table structure for table care_time
 #
 
+DROP TABLE IF EXISTS care_time;
 CREATE TABLE care_time (
    nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
    dept_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
@@ -2860,6 +3135,7 @@ CREATE TABLE care_time (
 # Table structure for table care_type_application
 #
 
+DROP TABLE IF EXISTS care_type_application;
 CREATE TABLE care_type_application (
    nr int(11) DEFAULT '0' NOT NULL auto_increment,
    group_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
@@ -2880,6 +3156,7 @@ CREATE TABLE care_type_application (
 # Table structure for table care_type_assignment
 #
 
+DROP TABLE IF EXISTS care_type_assignment;
 CREATE TABLE care_type_assignment (
    type_nr int(10) unsigned DEFAULT '0' NOT NULL,
    type varchar(35) NOT NULL,
@@ -2899,6 +3176,7 @@ CREATE TABLE care_type_assignment (
 # Table structure for table care_type_cause_opdelay
 #
 
+DROP TABLE IF EXISTS care_type_cause_opdelay;
 CREATE TABLE care_type_cause_opdelay (
    type_nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
    type varchar(35) NOT NULL,
@@ -2918,6 +3196,7 @@ CREATE TABLE care_type_cause_opdelay (
 # Table structure for table care_type_color
 #
 
+DROP TABLE IF EXISTS care_type_color;
 CREATE TABLE care_type_color (
    color_id varchar(25) NOT NULL,
    name varchar(35) NOT NULL,
@@ -2933,6 +3212,7 @@ CREATE TABLE care_type_color (
 # Table structure for table care_type_department
 #
 
+DROP TABLE IF EXISTS care_type_department;
 CREATE TABLE care_type_department (
    nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
    type varchar(35) NOT NULL,
@@ -2953,6 +3233,7 @@ CREATE TABLE care_type_department (
 # Table structure for table care_type_discharge
 #
 
+DROP TABLE IF EXISTS care_type_discharge;
 CREATE TABLE care_type_discharge (
    nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
    type varchar(35) NOT NULL,
@@ -2971,6 +3252,7 @@ CREATE TABLE care_type_discharge (
 # Table structure for table care_type_duty
 #
 
+DROP TABLE IF EXISTS care_type_duty;
 CREATE TABLE care_type_duty (
    type_nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
    type varchar(35) NOT NULL,
@@ -2991,6 +3273,7 @@ CREATE TABLE care_type_duty (
 # Table structure for table care_type_encounter
 #
 
+DROP TABLE IF EXISTS care_type_encounter;
 CREATE TABLE care_type_encounter (
    type_nr int(10) unsigned DEFAULT '0' NOT NULL auto_increment,
    type varchar(35) NOT NULL,
@@ -3012,6 +3295,7 @@ CREATE TABLE care_type_encounter (
 # Table structure for table care_type_ethnic_orig
 #
 
+DROP TABLE IF EXISTS care_type_ethnic_orig;
 CREATE TABLE care_type_ethnic_orig (
    nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
    class_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
@@ -3031,6 +3315,7 @@ CREATE TABLE care_type_ethnic_orig (
 # Table structure for table care_type_event
 #
 
+DROP TABLE IF EXISTS care_type_event;
 CREATE TABLE care_type_event (
    type_nr mediumint(8) unsigned DEFAULT '0' NOT NULL auto_increment,
    type varchar(35) NOT NULL,
@@ -3049,6 +3334,7 @@ CREATE TABLE care_type_event (
 # Table structure for table care_type_feeding
 #
 
+DROP TABLE IF EXISTS care_type_feeding;
 CREATE TABLE care_type_feeding (
    type_nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
    group_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
@@ -3069,6 +3355,7 @@ CREATE TABLE care_type_feeding (
 # Table structure for table care_type_insurance
 #
 
+DROP TABLE IF EXISTS care_type_insurance;
 CREATE TABLE care_type_insurance (
    type_nr int(11) DEFAULT '0' NOT NULL auto_increment,
    type varchar(35) NOT NULL,
@@ -3090,6 +3377,7 @@ CREATE TABLE care_type_insurance (
 # Table structure for table care_type_location
 #
 
+DROP TABLE IF EXISTS care_type_location;
 CREATE TABLE care_type_location (
    nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
    type varchar(35) NOT NULL,
@@ -3109,6 +3397,7 @@ CREATE TABLE care_type_location (
 # Table structure for table care_type_measurement
 #
 
+DROP TABLE IF EXISTS care_type_measurement;
 CREATE TABLE care_type_measurement (
    nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
    type varchar(35) NOT NULL,
@@ -3127,6 +3416,7 @@ CREATE TABLE care_type_measurement (
 # Table structure for table care_type_notes
 #
 
+DROP TABLE IF EXISTS care_type_notes;
 CREATE TABLE care_type_notes (
    nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
    type varchar(35) NOT NULL,
@@ -3145,6 +3435,7 @@ CREATE TABLE care_type_notes (
 # Table structure for table care_type_outcome
 #
 
+DROP TABLE IF EXISTS care_type_outcome;
 CREATE TABLE care_type_outcome (
    type_nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
    group_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
@@ -3165,6 +3456,7 @@ CREATE TABLE care_type_outcome (
 # Table structure for table care_type_perineum
 #
 
+DROP TABLE IF EXISTS care_type_perineum;
 CREATE TABLE care_type_perineum (
    type_nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
    type_id varchar(35) NOT NULL,
@@ -3184,6 +3476,7 @@ CREATE TABLE care_type_perineum (
 # Table structure for table care_type_prescription
 #
 
+DROP TABLE IF EXISTS care_type_prescription;
 CREATE TABLE care_type_prescription (
    nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
    type varchar(35) NOT NULL,
@@ -3202,6 +3495,7 @@ CREATE TABLE care_type_prescription (
 # Table structure for table care_type_room
 #
 
+DROP TABLE IF EXISTS care_type_room;
 CREATE TABLE care_type_room (
    nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
    type varchar(35) NOT NULL,
@@ -3221,6 +3515,7 @@ CREATE TABLE care_type_room (
 # Table structure for table care_type_test
 #
 
+DROP TABLE IF EXISTS care_type_test;
 CREATE TABLE care_type_test (
    type_nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
    type varchar(35) NOT NULL,
@@ -3241,6 +3536,7 @@ CREATE TABLE care_type_test (
 # Table structure for table care_type_time
 #
 
+DROP TABLE IF EXISTS care_type_time;
 CREATE TABLE care_type_time (
    nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
    type varchar(35) NOT NULL,
@@ -3261,6 +3557,7 @@ CREATE TABLE care_type_time (
 # Table structure for table care_type_unit_measurement
 #
 
+DROP TABLE IF EXISTS care_type_unit_measurement;
 CREATE TABLE care_type_unit_measurement (
    nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
    type varchar(35) NOT NULL,
@@ -3281,6 +3578,7 @@ CREATE TABLE care_type_unit_measurement (
 # Table structure for table care_unit_measurement
 #
 
+DROP TABLE IF EXISTS care_unit_measurement;
 CREATE TABLE care_unit_measurement (
    nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
    unit_type_nr smallint(2) unsigned DEFAULT '0' NOT NULL,
@@ -3302,6 +3600,7 @@ CREATE TABLE care_unit_measurement (
 # Table structure for table care_users
 #
 
+DROP TABLE IF EXISTS care_users;
 CREATE TABLE care_users (
    name varchar(60) NOT NULL,
    login_id varchar(35) NOT NULL,
@@ -3328,6 +3627,7 @@ CREATE TABLE care_users (
 # Table structure for table care_version
 #
 
+DROP TABLE IF EXISTS care_version;
 CREATE TABLE care_version (
    name varchar(20) NOT NULL,
    type varchar(20) NOT NULL,
@@ -3343,18 +3643,20 @@ CREATE TABLE care_version (
 # Table structure for table care_ward
 #
 
+DROP TABLE IF EXISTS care_ward;
 CREATE TABLE care_ward (
    nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
    ward_id varchar(35) NOT NULL,
    name varchar(35) NOT NULL,
    is_temp_closed tinyint(1) DEFAULT '0' NOT NULL,
    date_create date DEFAULT '0000-00-00' NOT NULL,
-   description text NOT NULL,
-   info tinytext NOT NULL,
+   date_close date DEFAULT '0000-00-00' NOT NULL,
+   description text,
+   info tinytext,
+   dept_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
    room_nr_start smallint(6) DEFAULT '0' NOT NULL,
    room_nr_end smallint(6) DEFAULT '0' NOT NULL,
-   maxbed tinyint(2) DEFAULT '0' NOT NULL,
-   roomprefix varchar(4) NOT NULL,
+   roomprefix varchar(4),
    status varchar(25) NOT NULL,
    history text NOT NULL,
    modify_id varchar(25) DEFAULT '0' NOT NULL,
@@ -3365,6 +3667,7 @@ CREATE TABLE care_ward (
    PRIMARY KEY (nr)
 );
 
+    
 #
 # Dumping data for table care_category_diagnosis
 #
@@ -3437,31 +3740,10 @@ INSERT INTO care_class_therapy VALUES (7, '2', 'tpn', 'TPN', 'LDTPN', '', '', ''
 INSERT INTO care_class_therapy VALUES (8, '2', 'hie', 'HIE', 'LDHIE', '', '', '', 00000000000000, '', 00000000000000);
 
 #
-# Dumping data for table care_complication
-#
-
-INSERT INTO care_complication VALUES (1, 1, 'Previous C/S', 'LDPreviousCS', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (2, 1, 'Pre-eclampsia', 'LDPreEclampsia', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (3, 1, 'Eclampsia', 'LDEclampsia', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (4, 1, 'Other hypertension', 'LDOtherHypertension', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (5, 1, 'Other proteinuria', 'LDProteinuria', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (6, 1, 'Cardiac', 'LDCardiac', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (7, 1, 'Anaemia < 8.5g', 'LDAnaemia', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (8, 1, 'Asthma', 'LDAsthma', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (9, 1, 'Epilepsy', 'LDEpilepsy', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (10, 1, 'Placenta praevia', 'LDPlacentaPraevia', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (11, 1, 'Abruptio placentae', 'LDAbruptioPlacentae', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (12, 1, 'Other APH', 'LDOtherAPH', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (13, 1, 'Diabetes', 'LDDiabetes', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (14, 1, 'Cord prolapse', 'LDCordProlapse', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (15, 1, 'Ruptured uterus', 'LDRupturedUterus', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (16, 1, 'Extrauterine pregnancy', 'LDExtraUterinePregnancy', '', '', '', '', 00000000000000, '', 00000000000000);
-
-#
 # Dumping data for table care_config_global
 #
 
-INSERT INTO care_config_global VALUES ('date_format', 'MM/dd/yyyy',  NULL,  NULL, '', '', 20030222213446, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('date_format', 'dd.MM.yyyy',  NULL,  NULL, '', '', 20030425232322, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('time_format', 'HH.MM', '', '', '', '', 20030105033839, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('patient_reg_nr_adder', '10000000', '', '', '', '', 20030105033839, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('main_info_police_nr', '11?', '', '', '', '', 20030105033839, '', 00000000000000);
@@ -3474,18 +3756,18 @@ INSERT INTO care_config_global VALUES ('main_info_email', 'contact@care2x.com', 
 INSERT INTO care_config_global VALUES ('person_id_nr_adder', '10000000', '', '', '', '', 20030105033839, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('patient_outpatient_nr_adder', '20800000', '', '', '', '', 20030105033839, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('patient_inpatient_nr_adder', '22000000', '', '', '', '', 20030105033839, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_name_2_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_name_3_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_name_middle_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_name_maiden_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_ethnic_orig_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_name_others_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_nat_id_nr_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_religion_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_cellphone_2_nr_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_phone_2_nr_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_citizenship_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_sss_nr_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_name_2_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_name_3_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_name_middle_hide', '0',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_name_maiden_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_ethnic_orig_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_name_others_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_nat_id_nr_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_religion_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_cellphone_2_nr_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_phone_2_nr_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_citizenship_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_sss_nr_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('language_default', 'id',  NULL,  NULL, '', '', 20030329212253, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('language_single', '0',  NULL,  NULL, '', '', 20030329212253, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('mascot_hide', '', '', '', '', '', 00000000000000, '', 00000000000000);
@@ -3506,18 +3788,18 @@ INSERT INTO care_config_global VALUES ('news_normal_preview_maxlen', '600', '', 
 INSERT INTO care_config_global VALUES ('news_headline_title_font_bold', '1', '', '', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('news_headline_preface_font_bold', '1', '', '', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('news_normal_display_width', '500', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_fax_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_email_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_phone_1_nr_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_cellphone_1_nr_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_fax_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_email_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_phone_1_nr_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_cellphone_1_nr_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('person_foto_path', 'fotos/registration/', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_service_care_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_service_room_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_service_att_dr_hide', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('patient_service_care_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('patient_service_room_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('patient_service_att_dr_hide', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('patient_financial_class_single_result', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_name_2_show', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_name_3_show', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_name_middle_show', '1',  NULL,  NULL, '', '', 20030402205136, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('patient_name_2_show', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('patient_name_3_show', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('patient_name_middle_show', '1',  NULL,  NULL, '', '', 20030422191027, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('theme_control_buttons', 'blue_aqua',  NULL,  NULL, '', '', 20030329210153, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('gui_frame_left_nav_bdcolor', '#990000',  NULL,  NULL, '', '', 20030329212253, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('theme_control_theme_list', 'default,blue_aqua', '', '', '', '', 00000000000000, '', 00000000000000);
@@ -3546,50 +3828,15 @@ INSERT INTO care_currency VALUES (19, '&#836', 'Euro', 'bbbbbb', '', '', 2003021
 INSERT INTO care_currency VALUES (23, '&#836', 'asfas', 'fsadf', '', '', 20030213174612, '', 20030213174612);
 
 #
-# Dumping data for table care_department
+# Dumping data for table care_group
 #
 
-INSERT INTO care_department VALUES (1, 'pr', '2', 'Public Relations', 'PR', 'Press Relations', 'LDPressRelations', '', '0', '0', '1', '1', '1', '1', '0', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (2, 'cafe', '2', 'Cafeteria', 'Cafe', 'Canteen', 'LDCafeteria', '', '0', '0', '1', '1', '1', '1', '0', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (3, 'general_surgery', '1', 'General Surgery', 'General', 'General', 'LDGeneralSurgery', '', '1', '1', '1', '1', '1', '1', '0', '0', '8.30 - 21.00', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', 'General Surgery\r\nProf. Dr.Dr. Gopendo\r\nSuite 23, 4th Floor\r\nTel: 9099-34567', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (4, 'emergency_surgery', '1', 'Emergency Surgery', 'Emergency', '', 'LDEmergencySurgery', '', '1', '1', '1', '1', '1', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (5, 'plastic_surgery', '1', 'Plastic Surgery', 'Plastic', 'Aesthetic Surgery', 'LDPlasticSurgery', '', '1', '1', '1', '1', '1', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (6, 'ent', '1', 'Ear-Nose-Throath', 'ENT', '', 'LDEarNoseThroath', '', '1', '1', '1', '1', '1', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0',  NULL, '', '', '', '', 'Update: 2003-03-02 11:24:19 = Elpidio Latorilla\nUpdate: 2003-03-16 11:29:38 = Elpidio Latorilla\n', 'Elpidio Latorilla', 20030316112938, '', 00000000000000);
-INSERT INTO care_department VALUES (7, 'opthalmology', '1', 'Opthalmology', 'Opthalmology', 'Eye Department', 'LDOpthalmology', '', '1', '1', '1', '1', '1', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (8, 'pathology', '1', 'Pathology', 'Pathology', 'Patho', 'LDPathology', '', '0', '0', '1', '1', '0', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (9, 'ob_gyn', '1', 'Ob-Gynecology', 'Ob-Gyne', 'Gyn', 'LDObGynecology', '', '1', '1', '1', '1', '1', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (10, 'physical_therapy', '1', 'Physical Therapy', 'Physical', 'PT', 'LDPhysicalTherapy', 'Physical therapy department with on-call therapists. Day care clinics, training, rehab.', '1', '0', '1', '1', '0', '1', '1', '16', '8:00 - 15:00', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', 'PT-tel:1090-39393', 'Physical Therapy Clinic\r\nInternal Medicine\r\nDr. Holmer Apacio', '', '', 'Update: 2003-03-01 13:50:53 = Elpidio Latorilla\r\nUpdate: 2003-03-01 13:51:39 = Elpidio Latorilla\r\n', 'Elpidio Latorilla', 20030301135139, '', 00000000000000);
-INSERT INTO care_department VALUES (11, 'internal_med', '1', 'Internal Medicine', 'Internal Med', 'InMed', 'LDInternalMedicine', '', '1', '1', '1', '1', '0', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (12, 'imc', '1', 'Intermediate Care Unit', 'IMC', 'Intermediate', 'LDIntermediateCareUnit', '', '1', '1', '1', '1', '0', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (13, 'icu', '1', 'Intensive Care Unit', 'ICU', 'Intensive', 'LDIntensiveCareUnit', '', '1', '1', '1', '1', '0', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (14, 'emergency_ambulatory', '1', 'Emergency Ambulatory', 'Emergency', 'Emergency Amb', 'LDEmergencyAmbulatory', '', '0', '1', '1', '1', '0', '1', '1', '4', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (15, 'general_ambulatory', '1', 'General Ambulatory', 'Ambulatory', 'General Amb', 'LDGeneralAmbulatory', '', '0', '1', '1', '1', '0', '1', '1', '3', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (16, 'inmed_ambulatory', '1', 'Internal Medicine Ambulatory', 'InMed Ambulatory', 'InMed Amb', 'LDInternalMedicineAmbulatory', '', '0', '1', '1', '1', '0', '1', '1', '11', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', 'Update: 2003-03-01 18:18:40 = Elpidio Latorilla\r\nUpdate: 2003-03-16 11:29:52 = Elpidio Latorilla\r\n', 'Elpidio Latorilla', 20030316112952, '', 00000000000000);
-INSERT INTO care_department VALUES (17, 'sonography', '1', 'Sonography', 'Sono', 'Ultrasound diagnostics', 'LDSonography', '', '0', '1', '1', '1', '0', '1', '1', '11', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (18, 'nuclear_diagnostics', '1', 'Nuclear Diagnostics', 'Nuclear', 'Nuclear Testing', 'LDNuclearDiagnostics', '', '0', '1', '1', '1', '0', '1', '1', '19', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (19, 'radiology', '1', 'Radiology', 'Radiology', 'Xray', 'LDRadiology', '', '0', '1', '1', '1', '0', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', 'Update: 2003-03-01 23:49:35 = Elpidio Latorilla\r\nUpdate: 2003-03-16 11:30:12 = Elpidio Latorilla\r\n', 'Elpidio Latorilla', 20030316113012, '', 00000000000000);
-INSERT INTO care_department VALUES (20, 'oncology', '1', 'Oncology', 'Oncology', 'Cancer Department', 'LDOncology', 'This is the testg da asjfalsjfsaf', '1', '0', '1', '1', '1', '1', '0', '11', 'test oke working hours', '12.30 - 15.00 , 19.00 - 21.00', '0', '0',  NULL, 'test', 'test lang ito day bakit ba ako masaydo sa sakit sa bato', '', '', 'Update: 2003-02-26 23:23:57 = Elpidio LatorillaUpdate: 2003-02-26 23:24:37 = Elpidio LatorillaUpdate: 2003-02-26 23:25:13 = Elpidio LatorillaUpdate: 2003-02-26 23:25:26 = Elpidio LatorillaUpdate: 2003-02-26 23:28:35 = Elpidio LatorillaUpdate: 2003-02-26 23:32:36 = Elpidio LatorillaUpdate: 2003-02-26 23:32:47 = Elpidio LatorillaUpdate: 2003-02-26 23:33:04 = Elpidio Latorilla', 'Elpidio Latorilla', 20030226233304, '', 00000000000000);
-INSERT INTO care_department VALUES (21, 'neonatal', '1', 'Neonatal', 'Neonatal', 'Newborn Department', 'LDNeonatal', '', '1', '1', '1', '1', '1', '1', '1', '9', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (22, 'central_lab', '1', 'Central Laboratory', 'Central Lab', 'General Lab', 'LDCentralLaboratory', '', '0', '0', '1', '1', '0', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (23, 'serological_lab', '1', 'Serological Laboratory', 'Serological Lab', 'Serum Lab', 'LDSerologicalLaboratory', '', '0', '1', '1', '1', '0', '1', '1', '22', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (24, 'chemical_lab', '1', 'Chemical Laboratory', 'Chemical Lab', 'Chem Lab', 'LDChemicalLaboratory', '', '0', '1', '1', '1', '0', '1', '1', '22', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', 'Update: 2003-03-01 17:53:52 = Elpidio Latorilla\r\nUpdate: 2003-03-01 17:54:29 = Elpidio Latorilla\r\nUpdate: 2003-03-01 17:55:28 = Elpidio Latorilla\r\nUpdate: 2003-03-01 17:55:33 = Elpidio Latorilla\r\nUpdate: 2003-03-01 17:58:23 = Elpidio Latorilla\r\nUpdate: 2003-03-01 17:58:31 = Elpidio Latorilla\r\nUpdate: 2003-03-01 18:00:51 = Elpidio Latorilla\r\nUpdate: 2003-03-01 18:01:57 = Elpidio Latorilla\r\n', 'Elpidio Latorilla', 20030301180157, '', 00000000000000);
-INSERT INTO care_department VALUES (25, 'bacteriological_lab', '1', 'Bacteriological Laboratory', 'Bacteriological Lab', 'Bacteria Lab', 'LDBacteriologicalLaboratory', '', '0', '1', '1', '1', '0', '1', '1', '22', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', 'Update: 2003-03-01 18:04:47 = Elpidio Latorilla\r\nUpdate: 2003-03-16 11:29:27 = Elpidio Latorilla\r\n', 'Elpidio Latorilla', 20030316112927, '', 00000000000000);
-INSERT INTO care_department VALUES (26, 'tech', '2', 'Technical Maintenance', 'Tech', 'Technical Support', 'LDTechnicalMaintenance', '', '0', '0', '1', '1', '0', '1', '0', '0', '', '', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (27, 'it', '2', 'IT Department', 'IT', 'EDP', 'LDITDepartment', '', '0', '0', '1', '1', '0', '1', '0', '0', '', '', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (28, 'management', '2', 'Management', 'Management', 'Busines Administration', 'LDManagement', '', '0', '0', '1', '1', '0', '1', '0', '0', '', '', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (29, 'exhibition', '3', 'Exhibitions', 'Exhibit', 'Showcases', 'LDExhibitions', '', '0', '0', '1', '1', '1', '1', '0', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (30, 'edu', '3', 'Education', 'Edu', 'Training', 'LDEducation', '', '0', '0', '1', '1', '0', '1', '0', '0', '', '', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (31, 'study', '3', 'Studies', 'Studies', 'Advance studies or on-the-job training', 'LDStudies', '', '0', '0', '1', '1', '1', '1', '0', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (32, 'health_tip', '3', 'Health Tips', 'Tips', 'Health Information', 'LDHealthTips', '', '0', '0', '1', '1', '1', '1', '0', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (33, 'admission', '2', 'Admission', 'Admit', 'Admission information', 'LDAdmission', '', '0', '0', '1', '1', '1', '0', '1', '0', '', '', '0', '0',  NULL, '', '', '', '', 'Update: 2003-03-01 18:04:37 = Elpidio Latorilla\nUpdate: 2003-03-16 11:36:51 = Elpidio Latorilla\n', 'Elpidio Latorilla', 20030316113651, '', 00000000000000);
-INSERT INTO care_department VALUES (34, 'news_headline', '3', 'Headline', 'News head', 'Major news', 'LDHeadline', '', '0', '0', '1', '1', '1', '1', '0', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (35, 'cafenews', '3', 'Cafe News', 'Cafe news', 'Cafeteria news', 'LDCafeNews', '', '0', '0', '1', '1', '1', '0', '0', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (36, 'nursing', '3', 'Nursing', 'Nursing', 'Nursing care', 'LDNursing', '', '1', '1', '1', '1', '1', '1', '1', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (37, 'doctors', '3', 'Doctors', 'Doctors', 'Medical personell', 'LDDoctors', '', '0', '0', '1', '1', '1', '1', '0', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (38, 'pharmacy', '2', 'Pharmacy', 'Pharma', 'Drugstore', 'LDPharmacy', '', '0', '0', '1', '1', '1', '1', '0', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (42, 'anaesthesiology', '1', 'Anesthesiology', 'ana', 'Anesthesia Department', 'LDAnesthesiology', 'Anesthesiology', '0', '0', '1', '1', '1', '1', '0', '0', '', '', '0', '0', '', '', '', '', '', 'Create: 2003-03-19 18:38:19 = Elpidio LatorillaUpdate: 2003-03-19 18:51:59 = Elpidio Latorilla\n', 'Elpidio Latorilla', 20030319185159, 'Elpidio Latorilla', 20030319183819);
-INSERT INTO care_department VALUES (41, 'general_ambulant', '1', 'General Outpatient Clinic', 'General Clinic', 'General Ambulatory Clinic', 'LDGeneralOutpatientClinic', 'Outpatient/Ambulant Clinic for general/internal medicine', '0', '1', '1', '1', '0', '0', '1', '16', 'round the clock', '8:30 AM - 11:30 AM , 2:00 PM - 5:30 PM', '0', '0', '', 'GOC - Tel. 9089-9393', 'General Outpatient Clinic\r\nInternal Medicine\r\nProf. Dr.Dr. Makaryo Masangkay\r\nTobe Str. 300-1 St.20 Johannesburg\r\nTel: 56903 Fax: 3345666', '', '', 'Create: 2003-02-26 22:41:50 = Elpidio LatorillaUpdate: 2003-03-01 14:10:16 = Elpidio Latorilla\r\nUpdate: 2003-03-01 14:30:50 = Elpidio Latorilla\r\nUpdate: 2003-03-01 14:31:29 = Elpidio Latorilla\r\n', 'Elpidio Latorilla', 20030301143129, 'Elpidio Latorilla', 00000000000000);
-INSERT INTO care_department VALUES (43, 'blood_bank', '1', 'Blood Bank', 'Blood Blank', 'Blood Lab', 'LDBloodBank', '', '0', '0', '1', '1', '0', '1', '0', '0', '', '', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_group VALUES (1, 'pregnancy', 'Pregnancy', 'LDPregnancy', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_group VALUES (2, 'neonatal', 'Neonatal', 'LDNeonatal', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_group VALUES (3, 'encounter', 'Encounter', 'LDEncounter', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_group VALUES (4, 'op', 'OP', 'LDOP', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_group VALUES (5, 'anesthesia', 'Anesthesia', 'LDAnesthesia', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_group VALUES (6, 'prescription', 'Prescription', 'LDPrescription', '', '', '', 00000000000000, '', 00000000000000);
 
 #
 # Dumping data for table care_menu_main
@@ -3633,23 +3880,6 @@ INSERT INTO care_mode_delivery VALUES (2, '2', 'breech', 'Breech', 'LDBreech', '
 INSERT INTO care_mode_delivery VALUES (3, '2', 'caesarian', 'Caesarian', 'LDCaesarian', '', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_mode_delivery VALUES (4, '2', 'forceps', 'Forceps', 'LDForceps', '', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_mode_delivery VALUES (5, '2', 'vacuum', 'Vacuum', 'LDVacuum', '', '', '', 00000000000000, '', 00000000000000);
-
-#
-# Dumping data for table care_registry
-#
-
-INSERT INTO care_registry VALUES ('amb', 'modules/ambulatory/ambulatory.php', 'modules/news/newscolumns.php', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_registry VALUES ('dept', 'modules/news/departments.php', 'modules/news/newscolumns.php', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_registry VALUES ('radiology', 'modules/radiology/radiolog.php', 'modules/news/newscolumns.php', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_registry VALUES ('doctors', 'modules/doctors/doctors.php', 'modules/news/newscolumns.php', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_registry VALUES ('nursing', 'modules/nursing/pflege.php', 'modules/news/newscolumns.php', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_registry VALUES ('edp', 'modules/admin/edv.php', 'modules/news/newscolumns.php', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_registry VALUES ('pharmacy', 'modules/pharmacy/apotheke.php', 'modules/news/newscolumns.php', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_registry VALUES ('pr', 'modules/news/start_page.php', 'modules/news/start_page.php', 'modules/news/headline-edit.php', 'modules/news/headline-read.php', 'modules/news/editor-pass.php', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_registry VALUES ('cafe', 'modules/cafeteria/cafenews.php', 'modules/cafeteria/cafenews.php', 'modules/cafenews/cafenews-edit.php', 'modules/cafenews/cafenews-read.php', 'modules/cafenews/cafenews-edit-pass.php', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_registry VALUES ('main_start', 'modules/news/start_page.php', 'modules/news/start_page.php', 'modules/news/headline-edit-select-art.php', 'modules/news/headline-read.php', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_registry VALUES ('it', 'modules/system_admin/edv.php', 'modules/news/newscolumns.php', 'modules/news/editor-4plus1-select-art.php', 'modules/news/editor-4plus1-read.php', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_registry VALUES ('admission_module', 'modules/admission/aufnahme_start.php', '', '', '', 'modules/admission/aufnahme_pass.php', '', '', '', 00000000000000, '', 00000000000000);
 
 #
 # Dumping data for table care_role_person
@@ -3707,7 +3937,7 @@ INSERT INTO care_type_cause_opdelay VALUES (2, 'nurse', 'Nurses were delayed', '
 INSERT INTO care_type_cause_opdelay VALUES (3, 'surgeon', 'Surgeons were delayed', 'LDSurgeonsDelayed', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_type_cause_opdelay VALUES (4, 'cleaning', 'Cleaning delayed', 'LDCleaningDelayed', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_type_cause_opdelay VALUES (5, 'anesthesia', 'Anesthesiologist was delayed', 'LDAnesthesiologistDelayed', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_cause_opdelay VALUES (99, 'other', 'Other causes', 'LDOtherCauses', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_type_cause_opdelay VALUES (0, 'other', 'Other causes', 'LDOtherCauses', '', '', 00000000000000, '', 00000000000000);
 
 #
 # Dumping data for table care_type_color
@@ -3876,6 +4106,7 @@ INSERT INTO care_type_notes VALUES (3, 'discharge', 'Discharge summary', 'LDDisc
 INSERT INTO care_type_notes VALUES (4, 'consult', 'Consultation notes', 'LDConsultNotes', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_type_notes VALUES (5, 'op', 'Operation notes', 'LDOpNotes', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_type_notes VALUES (6, 'daily_ward', 'Daily ward\'s notes', 'LDDailyNurseNotes', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_type_notes VALUES (99, 'other', 'Other', 'LDOther', '', '', 20030420000747, '', 00000000000000);
 INSERT INTO care_type_notes VALUES (7, 'daily_chart_notes', 'Chart notes', 'LDChartNotes', '', '', 20030419114423, '', 00000000000000);
 INSERT INTO care_type_notes VALUES (8, 'chart_notes_etc', 'PT,ATG,etc. daily notes', 'LDPTATGetc', '', '', 20030419114204, '', 00000000000000);
 INSERT INTO care_type_notes VALUES (9, 'daily_iv_notes', 'IV daily notes', 'LDIVDailyNotes', '', '', 20030419114619, '', 00000000000000);
@@ -3893,7 +4124,6 @@ INSERT INTO care_type_notes VALUES (20, 'problem', 'Problem', 'LDProblem', '', '
 INSERT INTO care_type_notes VALUES (21, 'development', 'Development', 'LDDevelopment', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_type_notes VALUES (22, 'allergy', 'Allergy', 'LDAllergy',  NULL, '', 00000000000000, '', 00000000000000);
 INSERT INTO care_type_notes VALUES (23, 'daily_diet', 'Diet plan', 'LDDietPlan', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_notes VALUES (99, 'other', 'Other', 'LDOther', '', '', 20030420000747, '', 00000000000000);
 
 #
 # Dumping data for table care_type_outcome
@@ -3986,10 +4216,5 @@ INSERT INTO care_unit_measurement VALUES (15, 5, 'celsius', 'Celsius', 'LDCelsiu
 # Dumping data for table care_users
 #
 
-INSERT INTO care_users VALUES ('admin','admin', 'admin', '0', 'System_Admin', '1', '0000-00-00', '00:00:00', '0000-00-00', '00:00:00', '', '', '', 20021016154505, '', 00000000000000);
+INSERT INTO care_users VALUES ('admin', 'admin', 'admin', '0', 'System_Admin', '1', '0000-00-00', '00:00:00', '2003-07-27', '00:00:00', '', '', '', 20030427205316, '', 00000000000000);
 
-#
-# Dumping data for table care_version
-#
-
-INSERT INTO care_version VALUES ('care 2002', 'beta (pre-release)', '1.01.04', '1.0', '2003-03-31', '00:00:00', 'Elpidio Latorilla');
