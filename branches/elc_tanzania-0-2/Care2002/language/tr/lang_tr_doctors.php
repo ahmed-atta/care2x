@@ -15,7 +15,7 @@ $Dez='Aralýk';
 /**
 * Note: the first element of $monat is set to empty string
 */
-$monat=array('',$Oca,$Þub,$Mar,$Nis,$May,$Haz,$Tem,$Aðu,$Eyl,$Eki,$Kas,$Ara);
+$monat=array('',$Jan,$Feb,$Mae,$Apr,$Mai,$Jun,$Jul,$Aug,$Sep,$Okt,$Nov,$Dez);
 
 $LDDoctors='Doktorlar';
 $LDQView='Nöbetçiler Hýzlý bakýþ';  // DOC = doctor on call
