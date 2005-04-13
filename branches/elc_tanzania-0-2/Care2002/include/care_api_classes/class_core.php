@@ -80,6 +80,22 @@ class Core {
 	* @access private  
 	*/
 	var $normal_stat="'','normal'";
+	
+	function showPID($pid)
+	{
+		if(strlen($pid)<8)
+		{
+			for($i=0;$i<(8-strlen($pid));$i++)
+			{
+				$pid_zero.='0';
+			}
+									
+		}
+		$altered_pid = chunk_split($pid_zero.$pid, 2, '/');
+		return substr($altered_pid,0,strlen($altered_pid)-1);
+					
+	}
+	
 	/**
 	* Sets the coretable variable to the name of the database table.
 	*

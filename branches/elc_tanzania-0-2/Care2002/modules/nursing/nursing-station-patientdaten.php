@@ -498,10 +498,10 @@ function rx(){
 		echo '<input 
 		type="button" onClick="javascript:openDRGComposite()" value="'.$LDDRG.'">';
 		
-		echo '<input 
-		type="button" onClick="javascript:window.location.href=\''.$root_path.'modules/laboratory/labor_datalist_noedit.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&user_origin='.$user_origin.'&edit='.$edit.'\'" value="'.$LDLabReports.'"><input 
-		type="button" onClick="javascript:enlargewin();window.location.href=\''.$root_path.'modules/fotolab/fotos-start.php'.URL_REDIRECT_APPEND.'&pn='.$pn.'&station='.$station.'&fileroot='.$fr.'&edit='.$edit.'\'" value="'.$LDPhotos.'">';
-		
+		echo '
+		<input type="button" onClick="javascript:window.location.href=\''.$root_path.'modules/laboratory/labor_datalist_noedit.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&user_origin='.$user_origin.'&edit='.$edit.'\'" value="'.$LDLabReports.'">
+		<input type="button" onClick="javascript:enlargewin();window.location.href=\''.$root_path.'modules/fotolab/fotos-start.php'.URL_REDIRECT_APPEND.'&pn='.$pn.'&station='.$station.'&fileroot='.$fr.'&edit='.$edit.'\'" value="'.$LDPhotos.'">
+		<input type="button" onClick="window.location.href=\''.$root_path.'modules/registration_admission/show_prescription.php'.URL_REDIRECT_APPEND.'$sid='.$SID.'&lang=en&ntid=false&externalcall=true&target=search&1=1\'" value="Prescriptions">';
 		
 		/* Create the select  menu in edit mode */
 /*		if($edit){

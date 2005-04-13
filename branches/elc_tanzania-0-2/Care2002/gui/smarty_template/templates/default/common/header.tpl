@@ -10,4 +10,4 @@
  {{/foreach}}
 
 </HEAD>
-<BODY  {{$bgcolor}} {{$sLinkColors}} {{$sOnLoadJs}} {{$sOnUnloadJs}}>
+<BODY {{$bgcolor}} {{$sLinkColors}} {{$sOnLoadJs}} {{$sOnUnloadJs}}>

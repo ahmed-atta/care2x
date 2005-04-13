@@ -83,8 +83,13 @@ $enc_obj=new Encounter;
   
 	if(!$mode) /* Get the pending test requests */
 	{
-		$sql="SELECT batch_nr,encounter_nr,send_date,dept_nr,room_nr FROM care_test_request_".$subtarget." 
-						         WHERE (status='pending' OR status='') ORDER BY  send_date DESC";
+		$sql="SELECT name_first, name_last, batch_nr, tr.encounter_nr,tr.send_date,dept_nr,room_nr FROM care_test_request_".$subtarget." tr,
+					care_encounter, care_person 
+						         WHERE (tr.status='pending' OR tr.status='') AND
+						         tr.encounter_nr = care_encounter.encounter_nr AND
+						         care_encounter.pid = care_person.pid
+						         ORDER BY  tr.send_date DESC";
+						       
 		if($requests=$db->Execute($sql)){
 			/* If request is available, load the date format functions */
 			require_once($root_path.'include/inc_date_format_functions.php');
@@ -169,6 +174,7 @@ if($batchrows) $sTitle = $sTitle." (".$batch_nr.")";
  # Window bar title
  $smarty->assign('sWindowTitle',$sTitle);
 
+ $smarty->assign('sOnLoadJs','onload="setBallon(\'BallonTip\');"');
  # collect extra javascript code
  ob_start();
 ?>
@@ -258,6 +264,10 @@ function printOut()
 </script>
 <script language="javascript" src="../js/setdatetime.js"></script>
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
+
+<script language="JavaScript" src="<?php echo $root_path; ?>js/cross.js"></script>
+<script language="JavaScript" src="<?php echo $root_path; ?>js/tooltips.js"></script>
+<div id="BallonTip" style="POSITION:absolute; VISIBILITY:hidden; LEFT:-200px; Z-INDEX: 100"></div>
 
 <?php
 

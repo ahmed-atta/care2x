@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.0, created on 2004-07-04 13:41:49
+<?php /* Smarty version 2.6.0, created on 2005-03-16 21:17:08
          compiled from products/form.tpl */ ?>
 
 <font class="prompt"><?php echo $this->_tpl_vars['sSaveFeedBack']; ?>
@@ -41,60 +41,77 @@
 		<td><?php echo $this->_tpl_vars['sDescriptionInput']; ?>
 </td>
 		</tr>
+		<!-- Comment by RM
+
 		<tr>
 		<td align=right width=140><?php echo $this->_tpl_vars['LDPacking']; ?>
 </td>
 		<td><?php echo $this->_tpl_vars['sPackingInput']; ?>
 </td>
 		</tr>
+		-->
+		<!-- Comment by RM
 		<tr>
 		<td align=right width=140><?php echo $this->_tpl_vars['LDCAVE']; ?>
 </td>
 		<td><?php echo $this->_tpl_vars['sCAVEInput']; ?>
 </td>
 		</tr>
+		-->
 		<tr>
 		<td align=right width=140><?php echo $this->_tpl_vars['LDCategory']; ?>
 </td>
 		<td><?php echo $this->_tpl_vars['sCategoryInput']; ?>
 </td>
 		</tr>
+		<!-- Comment by RM
 		<tr>
 		<td align=right width=140><?php echo $this->_tpl_vars['LDMinOrder']; ?>
 </td>
 		<td><?php echo $this->_tpl_vars['sMinOrderInput']; ?>
 </td>
 		</tr>
+		-->
+		<!-- Comment by RM
 		<tr>
 		<td align=right width=140><?php echo $this->_tpl_vars['LDMaxOrder']; ?>
 </td>
 		<td><?php echo $this->_tpl_vars['sMaxOrderInput']; ?>
 </td>
 		</tr>
+		-->
+		<!-- Comment by RM
 		<tr>
 		<td align=right width=140><?php echo $this->_tpl_vars['LDPcsProOrder']; ?>
 </td>
 		<td><?php echo $this->_tpl_vars['sPcsProOrderInput']; ?>
 </td>
 		</tr>
+		-->
+		<!-- Comment by RM
 		<tr>
 		<td align=right width=140><?php echo $this->_tpl_vars['LDIndustrialNr']; ?>
 </td>
 		<td><?php echo $this->_tpl_vars['sIndustrialNrInput']; ?>
 </td>
 		</tr>
+		-->
+		<!-- Comment by RM
 		<tr>
 		<td align=right width=140><?php echo $this->_tpl_vars['LDLicenseNr']; ?>
 </td>
 		<td><?php echo $this->_tpl_vars['sLicenseNrInput']; ?>
 </td>
 		</tr>
+		-->
+		<!-- Comment by RM
 		<tr>
 		<td align=right width=140><?php echo $this->_tpl_vars['LDPicFile']; ?>
 </td>
 		<td><?php echo $this->_tpl_vars['sPicFileInput']; ?>
 </td>
 		</tr>
+		-->
 		<tr>
 		<td align=right width=140><?php echo $this->_tpl_vars['LDReset']; ?>
 </td>

@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.0, created on 2004-07-03 16:05:20
+<?php /* Smarty version 2.6.0, created on 2005-03-01 11:16:55
          compiled from common/header.tpl */ ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php echo $this->_tpl_vars['HTMLtag']; ?>
@@ -23,7 +23,7 @@ unset($_smarty_tpl_vars);
  <?php endforeach; unset($_from); endif; ?>
 
 </HEAD>
-<BODY  <?php echo $this->_tpl_vars['bgcolor']; ?>
+<BODY <?php echo $this->_tpl_vars['bgcolor']; ?>
  <?php echo $this->_tpl_vars['sLinkColors']; ?>
  <?php echo $this->_tpl_vars['sOnLoadJs']; ?>
  <?php echo $this->_tpl_vars['sOnUnloadJs']; ?>

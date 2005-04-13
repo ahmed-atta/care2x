@@ -154,7 +154,8 @@ class Person extends Core {
 				 'modify_id',
 				 'modify_time',
 				 'create_id',
-				 'create_time');
+				 'create_time',
+				 'insurance_category');
 	/**
 	* Constructor
 	* @param int PID number
@@ -172,6 +173,7 @@ class Person extends Core {
 	function setPID($pid) {
 	    $this->pid=$pid;
 	}
+	
 	/**
 	* Resolves the PID number to used in the methods.
 	* @access public
@@ -248,19 +250,66 @@ class Person extends Core {
 	* @return boolean
 	*/
     function insertDataFromArray(&$array) {
+    	global $db;
 		$x='';
 		$v='';
 		$index='';
 		$values='';
 		if(!is_array($array)) return false;
 		while(list($x,$v)=each($array)) {
-		    $index.="$x,";
-		    $values.="'$v',";
+				if($x!='insurance_category')
+				{
+			    $index.="$x,";
+			    $values.="'$v',";
+		  	}
+		  	else
+		  	{
+		  		$ins_cat = $v;	
+		  	}
+		}
+		if($ins_cat) $ins_value=', 1';
+		if($ins_cat=="silver")
+		{
+			$ins_index=", insurance_silver";
+		}
+		elseif($ins_cat=="gold")
+		{
+			$ins_index=", insurance_gold";
+		}
+		elseif($ins_cat=="friedkin")
+		{
+			$ins_index=", insurance_friedkin";
+		}		
+		elseif($ins_cat=="selian")
+		{
+			$ins_index=", insurance_selian_stuff";
 		}
 		$index=substr_replace($index,'',(strlen($index))-1);
 		$values=substr_replace($values,'',(strlen($values))-1);
-
-		$this->sql="INSERT INTO $this->tb_person ($index) VALUES ($values)";
+		
+		$pid_counter_min = PID_PREFIX*1000000+1;
+		$pid_counter_max = $pid_counter_min+999999;
+		
+		$SQLStatement = "SELECT max(pid) AS pid FROM care_person WHERE pid >=".$pid_counter_min." AND pid <=".$pid_counter_max;
+		
+		$rs = $db->Execute($SQLStatement);
+		if ($db_pid = $rs->FetchRow())
+		{
+				if($db_pid['pid'])
+				{
+					$insert_pid = ($db_pid['pid']+1);
+				}
+				else
+				{
+					$insert_pid = $pid_counter_min;
+				}
+		}
+		else
+		{
+				$insert_pid = $pid_counter_min;
+		}
+		
+		$this->sql="INSERT INTO $this->tb_person (pid,".$index.$ins_index.") VALUES (".$insert_pid.','.$values.$ins_value.")";
 		return $this->Transact();
 	}
 	/**

@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.0, created on 2004-07-04 10:57:53
+<?php /* Smarty version 2.6.0, created on 2005-04-12 11:24:10
          compiled from pharmacy/submenu_pharmacy.tpl */ ?>
 		 <blockquote>
 			<TABLE cellSpacing=0  width=600 class="submenu_frame" cellpadding="0">
@@ -18,7 +18,7 @@ unset($_smarty_tpl_vars);
  ?>
 
 					<?php echo $this->_tpl_vars['LDHow2Order']; ?>
-
+**
 
 					<?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "common/submenu_row_spacer.tpl", 'smarty_include_vars' => array()));

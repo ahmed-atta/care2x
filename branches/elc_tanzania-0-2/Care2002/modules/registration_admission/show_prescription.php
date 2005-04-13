@@ -11,6 +11,11 @@ require($root_path.'include/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 
+
+// If this side is called by an external cross link, this will be stored into a session variable:
+//echo $externalcall."....".$target;exit();
+  
+//$externalcall=true;
 //$db->debug=1;
 
 $thisfile=basename(__FILE__);
@@ -27,17 +32,20 @@ if(!isset($mode)){
 	$HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
 
 	//$db->debug=true;
-	# Check the important items
-	if($article&&$dosage&&$application_type_nr&&$prescriber){
-		//include('./include/save_prescription.inc.php');
-		include('./include/save_admission_data.inc.php');
-	}
+	// Insert the prescription without other checks into the database. This should be dony be the doctor and
+	// there was the requirement that there should be no restrictions given...
+	//include('./include/save_admission_data.inc.php');
+	include('./include/save_prescription_data.inc.php');
+	
 }
 
 require('./include/init_show.php');
 
+
+
+
 if($parent_admit){
-	$sql="SELECT pr.*, e.encounter_class_nr FROM care_encounter AS e, care_person AS p, care_encounter_prescription AS pr
+    $sql="SELECT pr.*, e.encounter_class_nr FROM care_encounter AS e, care_person AS p, care_encounter_prescription AS pr
 		WHERE p.pid=".$HTTP_SESSION_VARS['sess_pid']." 
 			AND p.pid=e.pid 
 			AND e.encounter_nr=".$HTTP_SESSION_VARS['sess_en']." 
@@ -49,7 +57,7 @@ if($parent_admit){
 		ORDER BY pr.modify_time DESC";
 }
 
-		
+
 if($result=$db->Execute($sql)){
 	$rows=$result->RecordCount();
 }else{
@@ -63,6 +71,7 @@ $HTTP_SESSION_VARS['sess_file_return']=$thisfile;
 
 $buffer=str_replace('~tag~',$title.' '.$name_last,$LDNoRecordFor);
 $norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer); 
+
 
 
 /* Load GUI page */

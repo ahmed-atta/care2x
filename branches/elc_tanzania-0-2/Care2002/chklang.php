@@ -1,4 +1,5 @@
 <?php
+/* $Id$ */
 
 /**
  * phpMyAdmin Language Loading File - lolo@phpheaven.net 01may2001

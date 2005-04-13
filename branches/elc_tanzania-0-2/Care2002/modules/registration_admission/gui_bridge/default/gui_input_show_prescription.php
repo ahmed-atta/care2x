@@ -1,115 +1,46 @@
 <?php
+require_once($root_path.'include/inc_environment_global.php');
 include_once($root_path.'include/care_api_classes/class_prescription.php');
 if(!isset($pres_obj)) $pres_obj=new Prescription;
 $app_types=$pres_obj->getAppTypes();
 $pres_types=$pres_obj->getPrescriptionTypes();
-?>
-<script language="JavaScript">
-<!-- Script Begin
-function chkform(d) {
-	if(d.prescribe_date.value==""){
-		alert("<?php echo $LDPlsEnterDate; ?>");
-		d.prescribe_date.focus();
-		return false;
-	}else if(d.article.value==""){
-		alert("<?php echo $LDPlsEnterMedicine; ?>");
-		d.article.focus();
-		return false;
-	}else if(d.dosage.value==""){
-		alert("<?php echo $LDPlsEnterDosage; ?>");
-		d.dosage.focus();
-		return false;
-	}else if(d.application_type_nr.value==""){
-		alert("<?php echo $LDPlsSelectAppType; ?>");
-		d.application_type_nr.focus();
-		return false;
-	}else if(d.prescriber.value==""){
-		alert("<?php echo $LDPlsEnterFullName; ?>");
-		d.prescriber.focus();
-		return false;
-	}else{
-		return true;
-	}
-}
-//  Script End -->
-</script>
 
-<form method="post" name="reportform" onSubmit="return chkform(this)">
- <table border=0 cellpadding=2 width=100%>
-   <tr bgcolor="#f6f6f6">
-     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDate; ?></td>
-     <td><input type="text" name="prescribe_date" size=10 maxlength=10  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-	 	 <a href="javascript:show_calendar('reportform.prescribe_date','<?php echo $date_format; ?>')"><img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle',TRUE); ?>></a>
-	</td>
-   </tr>
-   
-   <tr bgcolor="#f6f6f6">
-     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDPrescription.' '.$LDType; ?></td>
-     <td><select name="prescription_type_nr">
-         	<option value=""></option>
-		<?php
-			while(list($x,$v)=each($pres_types)){
-				echo '<option value="'.$v['nr'].'">';
-				if(isset($$v['LD_var'])&&!empty($$v['LD_var'])) echo $$v['LD_var'];
-					else echo $v['name'];
-				echo '</option>
-				';
-			}
-		?>
-         </select>
-         </td>
-   </tr>
+$debug = false;
 
-   <tr bgcolor="#f6f6f6">
-     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDMedicine; ?></td>
-     <td><input type="text" name="article" size=50 maxlength=60></td>
-   </tr>
-   <tr bgcolor="#f6f6f6">
-     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDosage; ?></td>
-     <td><input type="text" name="dosage" size=50 maxlength=60></td>
-   </tr>
-   <tr bgcolor="#f6f6f6">
-     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDrugClass; ?></td>
-     <td><input type="text" name="drug_class" size=50 maxlength=60></td>
-   </tr>
-   <tr bgcolor="#f6f6f6">
-     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDAppType; ?></td>
-     <td><select name="application_type_nr">
-         	<option value=""></option>
-		<?php
-			while(list($x,$v)=each($app_types)){
-				echo '<option value="'.$v['nr'].'">';
-				if(isset($$v['LD_var'])&&!empty($$v['LD_var'])) echo $$v['LD_var'];
-					else echo $v['name'];
-				echo '</option>
-				';
-			}
-		?>
-         </select>
-         </td>
-   </tr>
-   <tr bgcolor="#f6f6f6">
-     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDApplication.' '.$LDNotes; ?></td>
-     <td><textarea name="notes" cols=40 rows=3 wrap="physical"></textarea>
-         </td>
-   </tr>
-   <tr bgcolor="#f6f6f6">
-     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDPharmOrderNr; ?></td>
-     <td><input type="text" name="order_nr" size=50 maxlength=60 ></td>
-   </tr>
-   <tr bgcolor="#f6f6f6">
-     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDPrescribedBy; ?></td>
-     <td><input type="text" name="prescriber" size=50 maxlength=60 value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>" readonly></td>
-   </tr>
- </table>
-<input type="hidden" name="encounter_nr" value="<?php echo $HTTP_SESSION_VARS['sess_en']; ?>">
-<input type="hidden" name="pid" value="<?php echo $HTTP_SESSION_VARS['sess_pid']; ?>">
-<!--<input type="hidden" name="modify_id" value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>">-->
-<!--<input type="hidden" name="create_id" value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>">-->
-<!--<input type="hidden" name="create_time" value="null">-->
-<input type="hidden" name="mode" value="create">
-<input type="hidden" name="target" value="<?php echo $target; ?>">
-<input type="hidden" name="history" value="Created: <?php echo date('Y-m-d H:i:s'); ?> : <?php echo $HTTP_SESSION_VARS['sess_user_name']."\n"; ?>">
-<input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0'); ?>>
+if (!empty($show)) {
+  // The $show-Value comes from the input-type button and will be send by javascript (check_prescriptions.js)
+  if ($show=='Drug List') {
+      $activated_tab='druglist';
+      $db_drug_filter='mems_drug_list';
+    }
+  if ($show=='Supplies') {
+      $activated_tab='Supplies';
+      $db_drug_filter='mems_supplies'; 
+    }
+  if ($show=='Supplies-Lab') {
+      $activated_tab='supplies-lab';
+      $db_drug_filter='mems_supplies_laboratory';
+    }
+  if ($show=='Special Others') {
+      $activated_tab='special-others';
+      $db_drug_filter='mems_special_others_list';
+    }
+  
 
-</form>
+  if ($show=='insert') {
+    if (empty($_SESSION['item_array'])) {
+      //echo "Taking items from get values...<br>";
+      $_SESSION[item_array]=$item_no; // this is comming from gui_inpuit_prescription_preselection.php as GET variables!    
+    }
+    
+    // The prescription list is complete, so we can go to ask about the details
+    // of each item
+    include('./gui_bridge/default/gui_input_prescription_details.php');
+  } else {
+
+    include('./gui_bridge/default/gui_input_prescription_preselection.php');
+  }
+} else {
+  // first call of descriptions. The value $show is not set in this case. 
+  include('./gui_bridge/default/gui_input_prescription_preselection.php');
+} 

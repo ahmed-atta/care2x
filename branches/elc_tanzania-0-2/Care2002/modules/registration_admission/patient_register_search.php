@@ -93,7 +93,7 @@ if(isset($origin) && $origin=='pass')
 # Assign the preceding text
 $psearch->pretext=$sTemp;
 
-$psearch->setTargetFile('patient_register_show.php');
+$psearch->setTargetFile('tz_patient_register_show.php');
 
 $psearch->setCancelFile($breakfile);
 

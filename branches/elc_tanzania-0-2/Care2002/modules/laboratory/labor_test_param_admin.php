@@ -28,7 +28,7 @@ $lab_obj=new Lab();
 
 require($root_path.'include/inc_labor_param_group.php');
 						
-if(!isset($parameterselect)||$parameterselect=='') $parameterselect='priority';
+if(!isset($parameterselect)||$parameterselect=='') $parameterselect='1';
 
 $parameters=$paralistarray[$parameterselect];					
 $paramname=$parametergruppe[$parameterselect];
@@ -90,7 +90,7 @@ function chkselect(d)
 
 function editParam(nr)
 {
-	urlholder="<?php echo $root_path ?>modules/laboratory/labor_test_param_edit.php?sid=<?php echo "$sid&lang=$lang" ?>&nr="+nr;
+	urlholder="<?php echo $root_path ?>modules/laboratory/labor_test_param_edit.php?sid=<?php echo "$sid&lang=$lang&parameterselect=$parameterselect" ?>&nr="+nr;
 	editparam_<?php echo $sid ?>=window.open(urlholder,"editparam_<?php echo $sid ?>","width=500,height=400,menubar=no,resizable=yes,scrollbars=yes");
 }
 // -->
@@ -136,7 +136,10 @@ if(is_object($tparams)){
 	echo '
 	<tr class="'.$bgc.'">
 	<td ><nobr>&nbsp;';
-	
+	if($tp['is_enabled']!="1")
+	{
+		echo '<font color="#ABABAB">';
+	}
 	if(isset($parameters[$tp['id']])&&!empty($parameters[$tp['id']])) echo $parameters[$tp['id']];
 		else echo $tp['name'];
 	
@@ -162,6 +165,15 @@ if(is_object($tparams)){
 	echo '
 		</tr>';
  }
+	echo '
+	<tr class="'.$bgc.'">
+	<td colspan="9"><nobr>Insert new Parameter (click edit)</nobr></td>
+			<td>
+			<a href="javascript:editParam(0)"><img '.createLDImgSrc($root_path,'edit_sm.gif','0').'></a>
+			</td>';
+	echo '
+		</tr>';
+
 }
 
 $sTemp = ob_get_contents();
@@ -175,13 +187,13 @@ $smarty->assign('sTestParamsRows',$sTemp);
 $sTemp = '<select name="parameterselect" size=1>';
 
 while($tg=$tgroups->FetchRow()){
-	$sTemp = $sTemp.'<option value="'.$tg['group_id'].'"';
-	if($parameterselect==$tg['group_id']) $sTemp = $sTemp.' selected';
-	$sTemp = $sTemp.'>';
-	if(isset($parametergruppe[$tg['group_id']])&&!empty($parametergruppe[$tg['group_id']])) $sTemp = $sTemp.$parametergruppe[$tg['group_id']];
-		else $sTemp = $sTemp.$tg['name'];
-	$sTemp = $sTemp.'</option>';
-	$sTemp = $sTemp."\n";
+		$sTemp = $sTemp.'<option value="'.$tg['id'].'"';
+		if($parameterselect==$tg['id']) $sTemp = $sTemp.' selected';
+		$sTemp = $sTemp.'>';
+		if(isset($parametergruppe[$tg['id']])&&!empty($parametergruppe[$tg['id']])) $sTemp = $sTemp.$parametergruppe[$tg['id']];
+			else $sTemp = $sTemp.$tg['name'];
+		$sTemp = $sTemp.'</option>';
+		$sTemp = $sTemp."\n";
 }
 $sTemp = $sTemp.'</select>';
 

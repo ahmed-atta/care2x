@@ -67,8 +67,8 @@ require('./gui_bridge/default/gui_tabs_personell_reg.php');
 <ul>
 
 <?php
-
-require_once($root_path.'include/care_api_classes/class_gui_input_person_personell.php');
+$no_tribe=true;
+require_once($root_path.'include/care_api_classes/class_gui_input_person.php');
 
 $inperson = & new GuiInputPerson;
 

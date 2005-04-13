@@ -14,6 +14,8 @@ require_once($root_path.'include/care_api_classes/class_encounter.php');
 * @package care_api
 */
 class Lab extends Encounter {
+	
+	var $tb_req_chemlab='care_test_request_chemlabor';
 	/**
 	* Table name for test findings for chemical lab
 	* @var string
@@ -23,12 +25,12 @@ class Lab extends Encounter {
 	* Table name for test paramaters
 	* @var string
 	*/
-	var $tb_test_param='care_test_param';
+	var $tb_test_param='care_tz_laboratory_param';
 	/**
 	* Table name for test groups
 	* @var string
 	*/
-	var $tb_test_group='care_test_group';
+	var $tb_test_group='care_tz_laboratory_tests';
 	/**
 	* Prepend characters for english
 	* @var string
@@ -57,6 +59,7 @@ class Lab extends Encounter {
 				'job_id',
 				'group_id',
 				'serial_value',
+				'add_value',
 				'validator',
 				'validate_dt',
 				'status',
@@ -87,7 +90,9 @@ class Lab extends Encounter {
 				'modify_id',
 				'modify_time',
 				'create_id',
-				'create_time');
+				'create_time',
+				'add_type',
+				'add_label');
 	/**
 	* Constructor
 	* @param int Encounter number
@@ -98,6 +103,35 @@ class Lab extends Encounter {
 		$this->setRefArray($this->fld_find_chemlab);
 		//$this->en_prepend=date('Y')*1000000;
 	}
+	
+	function UpdateParams($paramarray){
+		global $db;
+		$this->sql="UPDATE $this->tb_test_group SET 
+		name= '".$paramarray['name']."',
+		is_enabled= ".$paramarray['is_enabled']."
+		WHERE id=".$paramarray['id'];
+		
+		$db->Execute($this->sql);
+		$this->sql="UPDATE $this->tb_test_param SET 
+		name= '".$paramarray['name']."',
+		msr_unit= '".$paramarray['msr_unit']."',
+		median= '".$paramarray['median']."',
+		lo_bound= '".$paramarray['lo_bound']."',
+		hi_bound= '".$paramarray['hi_bound']."',
+		lo_critical= '".$paramarray['lo_critical']."',
+		hi_critical= '".$paramarray['hi_critical']."',
+		lo_toxic= '".$paramarray['lo_toxic']."',
+		hi_toxic= '".$paramarray['hi_toxic']."',
+		modify_id= '".$paramarray['modify_id']."',
+		history= '".addslashes($paramarray['history'])."',
+		add_label= '".$paramarray['add_label']."',
+		add_type= '".$paramarray['add_type']."'
+		WHERE nr=".$paramarray['nr'];
+		
+		
+		return $this->Transact();
+	}
+	
 	/**
 	* Sets the core table name and field names to the care_test_param table.
 	* @access public
@@ -115,7 +149,7 @@ class Lab extends Encounter {
 	function createResultsList($enc_nr){
 	    global $db;
 	
-		$this->sql="SELECT job_id,test_date,test_time,group_id FROM $this->tb_find_chemlab WHERE encounter_nr='$enc_nr' AND status<>'hidden' ORDER BY batch_nr DESC";
+		$this->sql="SELECT job_id,serial_value, test_date,test_time,group_id FROM $this->tb_find_chemlab WHERE encounter_nr='$enc_nr' AND status<>'hidden' ORDER BY batch_nr DESC";
 		
 		if($this->result=$db->Execute($this->sql)){
 		    if($this->rec_count=$this->result->RecordCount()) {
@@ -123,6 +157,31 @@ class Lab extends Encounter {
 			} else {return FALSE;}
 		}else {return FALSE;}
 	}
+	function GetJobsByEncounter($enc_nr){
+	    global $db;
+	
+		$this->sql="SELECT job_id,serial_value, test_date,test_time,group_id FROM $this->tb_find_chemlab WHERE encounter_nr='$enc_nr' AND status<>'hidden' ORDER BY batch_nr ASC";
+		
+		if($this->result=$db->Execute($this->sql)){
+		    if($this->rec_count=$this->result->RecordCount()) {
+				return $this->result;
+			} else {return FALSE;}
+		}else {return FALSE;}
+	}
+	function GetUserDataByEncounter($enc_nr){
+		global $db;
+		if(!$enc_nr) return false;
+		$this->sql="SELECT * FROM care_person cp, care_encounter ce WHERE 
+		ce.pid = cp.pid AND
+		ce.encounter_nr = ".$enc_nr;
+		if($this->result=$db->Execute($this->sql)){
+		    if($this->rec_count=$this->result->RecordCount()) {
+				$row=$this->result->FetchRow();
+				return $row;
+			} else {return FALSE;}
+		}else {return FALSE;}
+	}
+	
 	/** 
 	* Gets the batch number of a given encounter number and  job id.
 	* @access public
@@ -198,6 +257,7 @@ class Lab extends Encounter {
 	function getResult($job_id,$grp_id,$enc_nr=''){
 		global $db;
 		if(!$this->internResolveEncounterNr($enc_nr)) return FALSE;
+
 		$this->sql="SELECT * FROM $this->tb_find_chemlab WHERE encounter_nr='$this->enc_nr' AND job_id='$job_id' AND group_id='$grp_id' AND status<>'hidden'";
 		if($this->result=$db->Execute($this->sql)){
 		    if($this->rec_count=$this->result->RecordCount()) {
@@ -233,17 +293,58 @@ class Lab extends Encounter {
 	* @param int Test group id
 	* @return mixed adodb record object or boolean
 	*/
-	function TestParams($group_id=''){
+	function TestParams($id=''){
 		global $db;
-		if(empty($group_id)) $cond='';
-			else $cond="group_id='$group_id' AND";
-		$this->sql="SELECT * FROM $this->tb_test_param WHERE $cond status NOT IN ($this->dead_stat) ORDER BY name";
+		if(empty($id)) $cond='';
+			else $cond="AND p.group_id='$id'";
+		$this->sql="SELECT p.*, g.is_enabled FROM $this->tb_test_param p, $this->tb_test_group g WHERE
+		p.id = g.id	$cond ORDER BY name";
 		if($this->tparams=$db->Execute($this->sql)){
 		    if($this->rec_count=$this->tparams->RecordCount()) {
 				return $this->tparams;
 			} else {return FALSE;}
 		}else {return FALSE;}
 	}
+	
+	function GetTestsToDo($id=''){
+		global $db;
+		if(empty($id)) $cond='';
+			else $cond="batch_nr='$id'";
+		$this->sql="SELECT parameters FROM $this->tb_req_chemlab WHERE $cond";
+		if($this->tparams=$db->Execute($this->sql)){
+		    if($this->rec_count=$this->tparams->RecordCount()) {
+				return $this->tparams;
+			} else {return FALSE;}
+		}else {return FALSE;}
+	}
+	
+	function TestParamsDetails($id=''){
+		global $db;
+		if(empty($id)) $cond='';
+			else $cond="WHERE id='$id'";
+		$this->sql="SELECT * FROM $this->tb_test_param $cond";
+		if($this->tparamsdetails=$db->Execute($this->sql)){
+		    if($this->rec_count=$this->tparamsdetails->RecordCount()) {
+				return $this->tparamsdetails->FetchRow();
+			} else {return FALSE;}
+		}else {return FALSE;}
+	}
+	
+	function TestParamsDetailsByNr($nr=''){
+		global $db;
+		if(empty($nr)) $cond='';
+			else $cond="WHERE nr='$nr'";
+			echo "SELECT * FROM $this->tb_test_param $cond";
+		$this->sql="SELECT * FROM $this->tb_test_param $cond";
+		if($this->tparamsdetails=$db->Execute($this->sql)){
+		    if($this->rec_count=$this->tparamsdetails->RecordCount()) {
+				return $this->tparamsdetails->FetchRow();
+			} else {return FALSE;}
+		}else {return FALSE;}
+	}
+	
+	
+	
 	/**
 	* Returns all test groups. 
 	* @access public
@@ -251,13 +352,40 @@ class Lab extends Encounter {
 	*/
 	function TestGroups(){
 		global $db;
-		$this->sql="SELECT * FROM $this->tb_test_group WHERE status NOT IN ($this->dead_stat) ORDER BY sort_nr";
+		$this->sql="SELECT * FROM $this->tb_test_group WHERE parent=-1 AND is_enabled=1 ORDER BY name";
 		if($this->tgroups=$db->Execute($this->sql)){
 		    if($this->rec_count=$this->tgroups->RecordCount()) {
 				return $this->tgroups;
 			} else {return FALSE;}
 		}else {return FALSE;}
 	}
+	
+	function TestGroupByID($id){
+		global $db;
+		if(!id) return false;
+		$this->sql="SELECT * FROM $this->tb_test_group WHERE id=".$id." ORDER BY name";
+		if($this->tparamsdetails=$db->Execute($this->sql)){
+		    if($this->rec_count=$this->tparamsdetails->RecordCount()) {
+				return $this->tparamsdetails->FetchRow();
+			} else {return FALSE;}
+		}else {return FALSE;}
+	}
+	
+	function InsertParams(){
+		global $db, $HTTP_POST_VARS;
+		$this->sql="INSERT INTO $this->tb_test_group (parent, name, is_enabled) VALUES
+		(".$HTTP_POST_VARS['parameterselect'].", '".$HTTP_POST_VARS['name']."',1)";
+		$db->Execute($this->sql);
+		$this->sql="INSERT INTO $this->tb_test_param
+		(`group_id`, `name`, `id`, `msr_unit`, `median`, `hi_bound`, `lo_bound`, `hi_critical`, `lo_critical`, `hi_toxic`, `lo_toxic`, `status`, `history`, `modify_id`, `create_id`) VALUES
+		('".$HTTP_POST_VARS['parameterselect']."','".$HTTP_POST_VARS['name']."','".$db->Insert_ID()."','".$HTTP_POST_VARS['msr_unit']."','".$HTTP_POST_VARS['median']."','".$HTTP_POST_VARS['hi_bound']."','".$HTTP_POST_VARS['lo_bound']."',
+		'".$HTTP_POST_VARS['hi_critical']."','".$HTTP_POST_VARS['lo_critical']."','".$HTTP_POST_VARS['hi_toxic']."','".$HTTP_POST_VARS['lo_toxic']."','".$HTTP_POST_VARS['status']."','".addslashes($HTTP_POST_VARS['history'])."','".$HTTP_POST_VARS['modify_id']."',
+		'".$HTTP_POST_VARS['create_id']."')";
+		if($this->tgroups=$db->Execute($this->sql)){
+				return true;
+		}else {return FALSE;}
+	}
+	
 	/**
 	* Check if at least one laboratory result exists for the encounter.
 	* @access public

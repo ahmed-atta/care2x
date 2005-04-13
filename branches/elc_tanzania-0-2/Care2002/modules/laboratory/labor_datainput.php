@@ -35,31 +35,38 @@ $lab_obj=new Lab($encounter_nr);
 
 require($root_path.'include/inc_labor_param_group.php');
 						
-if(!isset($parameterselect)||$parameterselect=='') $parameterselect='priority';
+if(!isset($parameterselect)||$parameterselect=='') $parameterselect='1';
+$groups = $lab_obj->TestParams($parameterselect);
+if($groups)
+{
+	while($g=$groups->FetchRow()){
+			$parameters[$g['id']] = $g['name'];
 
-$parameters=&$paralistarray[$parameterselect];
+	}
+}
 $paramname=&$parametergruppe[$parameterselect];
+
 
 # Load the date formatter
 include_once($root_path.'include/inc_date_format_functions.php');
     
 if($mode=='save'){
-	
 	$nbuf=array();
 	# Prepare parameter values and serialize
 	while(list($x,$v)=each($parameters))
 	{
-		if(isset($HTTP_POST_VARS[$x])&&!empty($HTTP_POST_VARS[$x])){
-		 $nbuf[$x]=$HTTP_POST_VARS[$x];
+		if(isset($HTTP_POST_VARS['_task'.$x.'_'])&&!empty($HTTP_POST_VARS['_task'.$x.'_'])){
+		 $nbuf[$x]=$HTTP_POST_VARS['_task'.$x.'_'];
+		 $addbuf[$x]=$HTTP_POST_VARS['_add'.$x.'_'];
 		}
 	}
 	$dbuf['group_id']=$parameterselect;
 	$dbuf['serial_value']=serialize($nbuf);
 	$dbuf['job_id']=$job_id;
 	$dbuf['encounter_nr']=$encounter_nr;
+	$dbuf['add_value']=serialize($addbuf);
 	//$dbuf['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
 	if($allow_update){
-		
 		$dbuf['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
 		$dbuf['modify_time']=date('YmdHis');
 
@@ -74,7 +81,6 @@ if($mode=='save'){
 		}else{echo "<p>".$lab_obj->getLastQuery()."$LDDbNoSave";}
 	
 	}else{
-		
 		# Hide old job record if it exists
 		$lab_obj->hideResultIfExists($encounter_nr,$job_id,$parameterselect);
 		# Convert date to standard format
@@ -92,13 +98,11 @@ if($mode=='save'){
 		# Insert new job record
 		$lab_obj->setDataArray($dbuf);
 		if($lab_obj->insertDataFromInternalArray()){
-			//echo $sql." new insert <br>";
-
+			//$dbuf.$sql." new insert <br>";
 			$pk_nr=$db->Insert_ID();
             $batch_nr=$lab_obj->LastInsertPK('batch_nr',$pk_nr);
 			$saved=true;
-		}else{echo "<p>".$lab_obj->getLastQuery()."$LDDbNoSave";}
-		
+		}else{echo "<p>".$lab_obj->getLastQuery()."$LDDbNoSave";}	
 	}
 	# If save successful, jump to display values
 	if($saved){
@@ -123,15 +127,24 @@ if($mode=='save'){
 	}
 	# If previously saved, get the values
 	$pdata=array();
+	$adddata=array();
+	$update=0;
 	if($saved){
 		if($result=&$lab_obj->getBatchResult($batch_nr)){
 			$row=$result->FetchRow();
 			$pdata=unserialize($row['serial_value']);
+			$adddata=unserialize($row['add_value']);
+			$update=1;
+			$allow_update=true;
 		}
 	}else{
 		if($result=&$lab_obj->getResult($job_id,$parameterselect)){
 			$row=$result->FetchRow();
 			$pdata=unserialize($row['serial_value']);
+			$adddata=unserialize($row['add_value']);
+			$update=1;
+			$allow_update=true;
+
 		}else{
 			# disallow update if group does not exist yet
 			$allow_update=false;
@@ -143,7 +156,7 @@ if($mode=='save'){
 	# Get the test test groups
 	$tgroups=&$lab_obj->TestGroups();
 	# Get the test parameter values
-	$tparams=&$lab_obj->TestParams($parameterselect);
+	$tparams=$lab_obj->TestParams($parameterselect);
 
 	# Set the return file
 	if(isset($job_id)&&$job_id){
@@ -306,7 +319,6 @@ Information<?php if ($errornum>1) echo "en"; ?>!
 
 <?php 
 $paramnum=sizeof($parameters);
-
 $pcols=ceil($paramnum/ROW_MAX);
 
 echo '<tr>';
@@ -321,38 +333,93 @@ echo '
 	</tr>';
 	
 echo '
-<tr>';
+';
 $rowlimit=0;
 //$count=$paramnum;
-while($tp=$tparams->FetchRow()){
 
-	echo '<td';
+if($tparams)
+{
+$teststodo=&$lab_obj->GetTestsToDo($job_id);
+if($t=$teststodo->FetchRow()){
+		
+		parse_str($t['parameters'],$tests);
+		while(list($x,$v)=each($tests))
+		{
+			$tests_arr[strtok(substr($x,5),"_")] = $v;
+		}
+}
+while($tp=$tparams->FetchRow()){
+if($tp['is_enabled']==1)
+{
+	echo '<tr><td';
 
 	echo ' bgcolor="#ffffee" class="a10_b"><nobr>&nbsp;<b>';
+	if($tests_arr[$tp['id']])
+	{
+		echo '<font color="red">';
+	};
 	if(isset($parameters[$tp['id']])&&!empty($parameters[$tp['id']])) echo $parameters[$tp['id']];
 		else echo $tp['name'];
-	
+	if($tests_arr[$tp['id']])
+	{
+		echo '</font>';
+	};
 	echo '</b>&nbsp;</nobr>';
 
 	echo '</td>
 			<td class="a10_b">';
 
-	echo '<input name="'.$tp['id'].'" type="text" size="8" ';
+	echo '<input name="_task'.$tp['id'].'_" type="text" size="30" ';
 
 	echo 'value="';
-	if(isset($pdata[$tp['id']])&&!empty($pdata[$tp['id']])) echo trim($pdata[$tp['id']]);
+	if(isset($pdata[$tp['id']])&&!empty($pdata[$tp['id']]))
+	{
+		echo trim($pdata[$tp['id']]);
+	}
 
-	echo '">'.$tp['msr_unit'].'&nbsp;
-			</td>';
-
+	echo '">'.$tp['msr_unit'];
+	if($tp['lo_bound'] && $tp['hi_bound'])
+	{
+		echo ' (Normal: '.$tp['lo_bound'].' - '.$tp['hi_bound'].')';
+	}
+	elseif($tp['median'])
+	{
+		echo ' (Normal: '.$tp['median'].')';
+	}
+	echo '</td>';
+	echo '<td class="a10_b">&nbsp;';
+	if(trim($tp['add_type']) && $tp['add_type'] != "hide")
+	{
+		if($tp['add_label']) echo $tp['add_label'].':';
+		echo '<input type="'.$tp['add_type'].'" name="_add'.$tp['id'].'_" ';
+		if($tp['add_type']=="checkbox")
+		{
+			echo 'value="check"';			
+			if($adddata[$tp['id']])
+			{
+				echo ' checked ';
+			}
+		}
+		else
+		{
+			echo 'value="'.$adddata[$tp['id']].'"';
+		}
+		echo '>'; 
+	}
+	echo '</td>';
 	$rowlimit++;
 	if($rowlimit==$pcols){
 		echo '
-		</tr><tr>';
+		</tr>';
 		$rowlimit=0;
 	}
  }
- 
+}
+}
+else
+{
+echo '<tr><td colspan="2">'.$LDNoParams.'</td></tr>';
+}
  # Assign parameter output
  
  $sTemp = ob_get_contents();
@@ -385,10 +452,10 @@ $smarty->assign('sSaveParamHiddenInputs',$sTemp);
 $sTemp = '<select name="parameterselect" size=1>';
 
 while($tg=$tgroups->FetchRow()){
-		$sTemp = $sTemp.'<option value="'.$tg['group_id'].'"';
-		if($parameterselect==$tg['group_id']) $sTemp = $sTemp.' selected';
+		$sTemp = $sTemp.'<option value="'.$tg['id'].'"';
+		if($parameterselect==$tg['id']) $sTemp = $sTemp.' selected';
 		$sTemp = $sTemp.'>';
-		if(isset($parametergruppe[$tg['group_id']])&&!empty($parametergruppe[$tg['group_id']])) $sTemp = $sTemp.$parametergruppe[$tg['group_id']];
+		if(isset($parametergruppe[$tg['id']])&&!empty($parametergruppe[$tg['id']])) $sTemp = $sTemp.$parametergruppe[$tg['id']];
 			else $sTemp = $sTemp.$tg['name'];
 		$sTemp = $sTemp.'</option>';
 		$sTemp = $sTemp."\n";

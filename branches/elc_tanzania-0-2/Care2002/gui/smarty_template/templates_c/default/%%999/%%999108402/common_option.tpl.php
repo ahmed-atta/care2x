@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.0, created on 2004-07-06 22:59:57
+<?php /* Smarty version 2.6.0, created on 2005-04-11 13:40:14
          compiled from registration_admission/common_option.tpl */ ?>
 
 <table width="100%" cellspacing="0" cellpadding="0">

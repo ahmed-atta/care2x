@@ -4,9 +4,26 @@ $returnfile=$HTTP_SESSION_VARS['sess_file_return'];
 
 $HTTP_SESSION_VARS['sess_file_return']=$thisfile;
 
-if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) $breakfile = $root_path."main/startframe.php".URL_APPEND;
-	else $breakfile = $breakfile.URL_APPEND."&target=entry";
+if (!isset($externalcall))
+  $breakfile='javascript:window.close()';
+else
+  if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) 
+    $breakfile = $root_path."main/startframe.php".URL_APPEND;
+  else 
+    $breakfile = $breakfile.URL_APPEND."&target=entry";
 
+$debug=false;
+
+if ($debug) {
+    if (!isset($externalcall))
+      echo "internal call<br>";
+    else
+      echo "external call<br>";
+    
+    echo "mode=".$mode."<br>";
+    
+    echo "breakfile: ".$breakfile;
+}
 # Start Smarty templating here
  /**
  * LOAD Smarty
@@ -26,7 +43,8 @@ if($parent_admit) $sTitleNr= ($HTTP_SESSION_VARS['sess_full_en']);
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('submenu1.php','$LDPatientRegister')");
 
- $smarty->assign('breakfile',$breakfile);
+ //$smarty->assign('breakfile',$breakfile);
+ $smarty->assign('breakfile','javascript:window.close()');
 
  # Window bar title
  $smarty->assign('title',"$page_title ( $sTitleNr)");
@@ -38,7 +56,8 @@ if($parent_admit) $sTitleNr= ($HTTP_SESSION_VARS['sess_full_en']);
  $smarty->assign('pbHelp',"javascript:gethelp('notes_router.php','echo $notestype','".strtr($subtitle,' ','+')."','$mode','$rows')");
 
   # href for return button
- $smarty->assign('pbBack',$returnfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=show&type_nr='.$type_nr);
+ //$smarty->assign('pbBack',$returnfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=show&type_nr='.$type_nr);
+
 
 # Start buffering extra javascript output
 ob_start();
@@ -69,15 +88,16 @@ ob_end_clean();
 $smarty->append('JavaScript',$sTemp);
 
 /* Load the tabs */
+
 if($parent_admit) {
 	$tab_bot_line='#66ee66';
-	include('./gui_bridge/default/gui_tabs_patadmit.php');
+	if (!isset($externalcall)) include('./gui_bridge/default/gui_tabs_patadmit.php');
 	$smarty->assign('sTabsFile','registration_admission/admit_tabs.tpl');
 	$smarty->assign('sClassItem','class="adm_item"');
 	$smarty->assign('sClassInput','class="adm_input"');
 }else{
 	$tab_bot_line='#66ee66';
-	include('./gui_bridge/default/gui_tabs_patreg.php');
+	if (!isset($externalcall)) include('./gui_bridge/default/gui_tabs_patreg.php');
 	$smarty->assign('sTabsFile','registration_admission/reg_tabs.tpl');
 	$smarty->assign('sClassItem','class="reg_item"');
 	$smarty->assign('sClassInput','class="reg_input"');
@@ -154,7 +174,7 @@ if($blood_group){
 /* Buffer and load the options table  */
 
 ob_start();
-
+if (!isset($externalcall))
 	if($parent_admit)  include('./gui_bridge/default/gui_patient_encounter_showdata_options.php');
 		else include('./gui_bridge/default/gui_patient_reg_options.php');
 
@@ -164,8 +184,7 @@ ob_end_clean();
 $smarty->assign('sOptionsMenu',$sTemp);
 
 # If mode = show then display data
-
-if($mode=='show'){
+if($mode=='show' && !isset($externalcall) ){
 
 	if($parent_admit) $bgimg='tableHeaderbg3.gif';
 		else $bgimg='tableHeader_gr.gif';
@@ -173,16 +192,16 @@ if($mode=='show'){
 	$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
 
 	if($rows){
-		
 		# Buffer the option block
 		ob_start();
+		
 			include('./gui_bridge/default/gui_'.$thisfile);
 			$sTemp = ob_get_contents();
 		ob_end_clean();
-		$smarty->assign('sOptionBlock',$sTemp);
+	  $smarty->assign('sOptionBlock',$sTemp);
 
 	}else{
-
+	
 		$smarty->assign('bShowNoRecord',TRUE);
 		
 		$smarty->assign('sMascotImg','<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'>');
@@ -199,7 +218,13 @@ if($mode=='show'){
 
 	# Buffer the option input block
 	ob_start();
-		 include('./gui_bridge/default/gui_input_'.$thisfile);
+	   // witch tab sould be activated at first:
+	   //set here "druglist", "Supplies", "supplies-lab", "special-others" if you want.
+	   $activated_tab = "druglist"; 
+	   // (by Merotech(RM): Here the main prescription-table-content will be loaded: 
+	   
+	  include('./gui_bridge/default/gui_input_'.$thisfile);
+
 		$sTemp = ob_get_contents();
 	ob_end_clean();
 	$smarty->assign('sOptionBlock',$sTemp);
@@ -209,6 +234,7 @@ if($mode=='show'){
 
 ob_start();
 
+if (!isset($externalcall))
 	if($parent_admit) {
 		include('./include/bottom_controls_admission_options.inc.php');
 	}else{
@@ -222,8 +248,8 @@ ob_end_clean();
 
 $smarty->assign('sBottomControls',$sTemp);
 
-
-$smarty->assign('pbBottomClose','<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'close2.gif','0').'  title="'.$LDCancel.'"  align="absmiddle"></a>');
+if (!isset($externalcall))
+  $smarty->assign('pbBottomClose','<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'close2.gif','0').'  title="'.$LDCancel.'"  align="absmiddle"></a>');
 
 
 $smarty->assign('sMainBlockIncludeFile','registration_admission/common_option.tpl');

@@ -26,42 +26,59 @@
 		<td align=right width=140>{{$LDDescription}}</td>
 		<td>{{$sDescriptionInput}}</td>
 		</tr>
+		<!-- Comment by RM
+
 		<tr>
 		<td align=right width=140>{{$LDPacking}}</td>
 		<td>{{$sPackingInput}}</td>
 		</tr>
+		-->
+		<!-- Comment by RM
 		<tr>
 		<td align=right width=140>{{$LDCAVE}}</td>
 		<td>{{$sCAVEInput}}</td>
 		</tr>
+		-->
 		<tr>
 		<td align=right width=140>{{$LDCategory}}</td>
 		<td>{{$sCategoryInput}}</td>
 		</tr>
+		<!-- Comment by RM
 		<tr>
 		<td align=right width=140>{{$LDMinOrder}}</td>
 		<td>{{$sMinOrderInput}}</td>
 		</tr>
+		-->
+		<!-- Comment by RM
 		<tr>
 		<td align=right width=140>{{$LDMaxOrder}}</td>
 		<td>{{$sMaxOrderInput}}</td>
 		</tr>
+		-->
+		<!-- Comment by RM
 		<tr>
 		<td align=right width=140>{{$LDPcsProOrder}}</td>
 		<td>{{$sPcsProOrderInput}}</td>
 		</tr>
+		-->
+		<!-- Comment by RM
 		<tr>
 		<td align=right width=140>{{$LDIndustrialNr}}</td>
 		<td>{{$sIndustrialNrInput}}</td>
 		</tr>
+		-->
+		<!-- Comment by RM
 		<tr>
 		<td align=right width=140>{{$LDLicenseNr}}</td>
 		<td>{{$sLicenseNrInput}}</td>
 		</tr>
+		-->
+		<!-- Comment by RM
 		<tr>
 		<td align=right width=140>{{$LDPicFile}}</td>
 		<td>{{$sPicFileInput}}</td>
 		</tr>
+		-->
 		<tr>
 		<td align=right width=140>{{$LDReset}}</td>
 		<td align=right>{{$LDSave}} {{$sUpdateButton}}</td>

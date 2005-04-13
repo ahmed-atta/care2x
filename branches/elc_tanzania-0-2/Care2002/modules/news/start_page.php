@@ -76,6 +76,9 @@ require_once($root_path.'include/inc_news_display_config.php');
 
  # Headline title
  $smarty->assign('LDHeadline',$LDHeadline);
+ 
+ $smarty->assign('sOnLoadJs', 'onLoad="window.parent.STARTPAGE.location.href=\''.$root_path.'main/indexframe.php?sid=$sid&lang=$lang\';"');
+ 
 
  #Collect html code
 

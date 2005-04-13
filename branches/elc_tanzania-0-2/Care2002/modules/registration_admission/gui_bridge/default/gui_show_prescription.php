@@ -19,7 +19,7 @@ while($row=$result->FetchRow()){
   </tr>
   <tr bgcolor="<?php echo $bgc; ?>" valign="top">
     <td><FONT SIZE=-1  FACE="Arial"><?php echo $full_en; ?></td>
-    <td rowspan=2><FONT SIZE=-1  FACE="Arial"><?php echo $row['add_notes']; ?></td>
+    <td rowspan=2><FONT SIZE=-1  FACE="Arial"><?php echo $row['notes']; ?></td>
     <td><FONT SIZE=-1  FACE="Arial"><?php echo $row['drug_class']; ?></td>
     <td><FONT SIZE=-1  FACE="Arial"><?php echo $row['order_nr']; ?></td>
   </tr>

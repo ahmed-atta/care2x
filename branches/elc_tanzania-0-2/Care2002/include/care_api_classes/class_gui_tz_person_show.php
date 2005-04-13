@@ -16,10 +16,11 @@
 * @copyright 2002,2003,2004,2005 Elpidio Latorilla
 * @package care_api
 */
+require_once($root_path.'include/care_api_classes/class_person.php');
 
 $thisfile = basename($HTTP_SERVER_VARS['PHP_SELF']);
 
-class GuiPersonShow {
+class GuiPersonShow extends Person{
 	# Language files to be loaded
 	var $langfile=array('prompt.php','person.php','aufnahme.php');
 
@@ -223,7 +224,19 @@ class GuiPersonShow {
 			<FONT SIZE=-1  FACE="Arial"><?php echo $LDRegistryNr ?>:
 		</td>
 		<td width="30%"  bgcolor="#ffffee">
-			<FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo $pid; ?><br>
+			<FONT SIZE=-1  FACE="Arial" color="#800000">
+			<?php 
+			if($pid) 
+			{
+				if(IS_TANZANIAN) 
+				{
+					echo $this->showPID($pid); 
+				}
+				else 
+				{
+					echo $pid;
+				}
+			} ?><br>
 <?php
 if(file_exists($root_path.'cache/barcodes/pn_'.$pid.'.png')){
 	echo '<img src="'.$root_path.'cache/barcodes/pn_'.$pid.'.png" border=0 width=180 height=35>';

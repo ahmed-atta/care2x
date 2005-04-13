@@ -21,4 +21,8 @@ $LDPlsEnterBldgNr='Please enter the house or building number';
 #2003-10-03 EL
 $LDPlsEnterZip='Please enter the zip code';
 $LDPlsEnterFullName='Please enter your full name';
+$LDInsuranceSilver='Silver';
+$LDInsuranceGold='Gold';
+$LDInsuranceFriedkin='Friedkin';
+$LDInsuranceSelianstuff='Selian Staff';
 ?>

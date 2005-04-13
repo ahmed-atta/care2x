@@ -89,6 +89,7 @@ require_once($root_path.'include/care_api_classes/class_gui_input_person.php');
 $inperson = & new GuiInputPerson;
 
 $inperson->setPID($pid);
+
 $inperson->pretext = $sTemp;
 $inperson->setDisplayFile('tz_patient_register_show.php');
 

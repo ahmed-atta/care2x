@@ -5,7 +5,7 @@
 /** */
 require_once($root_path.'include/care_api_classes/class_core.php');
 /**
-*  Prescription methods. 
+*  Prescription methods.
 *
 * Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
@@ -30,8 +30,12 @@ class Prescription extends Core {
 	* Table name for prescription types
 	*/
 	var $tb_pres_types='care_type_prescription';
+	/**
+	* Table for drugs and supplies
+	*/
+	var $tb_drug_list='care_tz_druglist';
 	/**#@-*/
-	
+
 	/**#@+
 	* @access private
 	*/
@@ -40,6 +44,7 @@ class Prescription extends Core {
 	* @var adodb record object
 	*/
 	var $result;
+	var $sql;
 	/**
 	* Preloaded department data
 	* @var adodb record object
@@ -77,7 +82,7 @@ class Prescription extends Core {
 									'create_id',
 									'create_time');
 	/**#@-*/
-						
+
 	/**
 	* Constructor
 	*/
@@ -99,7 +104,8 @@ class Prescription extends Core {
 	*/
 	function getPrescriptionTypes(){
 	    global $db;
-	
+	    $debug = false;
+	    ($debug)?$db->debug=TRUE:$db->debug=FALSE;
 	    if ($this->result=$db->Execute("SELECT nr,type,name,LD_var AS \"LD_var\" FROM $this->tb_pres_types")) {
 		    if ($this->result->RecordCount()) {
 		        return $this->result->GetArray();
@@ -127,7 +133,8 @@ class Prescription extends Core {
 	*/
 	function getAppTypes(){
 	    global $db;
-	
+	    $debug = false;
+	    ($debug)?$db->debug=TRUE:$db->debug=FALSE;
 	    if ($this->result=$db->Execute("SELECT nr,group_nr,type,name,LD_var AS \"LD_var\" ,description FROM $this->tb_app_types")) {
 		    if ($this->result->RecordCount()) {
 		        return $this->result->GetArray();
@@ -155,7 +162,8 @@ class Prescription extends Core {
 	*/
 	function getAppTypeInfo($type_nr){
 	    global $db;
-	
+	    $debug = false;
+	    ($debug)?$db->debug=TRUE:$db->debug=FALSE;
 	    if ($this->result=$db->Execute("SELECT type,group_nr,name,LD_var AS \"LD_var\" ,description FROM $this->tb_app_types WHERE nr=$type_nr")) {
 		    if ($this->result->RecordCount()) {
 		        return $this->result->FetchRow();
@@ -182,7 +190,8 @@ class Prescription extends Core {
 	*/
 	function getPrescriptionTypeInfo($type_nr){
 	    global $db;
-	
+	    $debug = false;
+	    ($debug)?$db->debug=TRUE:$db->debug=FALSE;
 	    if ($this->result=$db->Execute("SELECT type,name,LD_var  AS \"LD_var\",description FROM $this->tb_pres_types WHERE nr=$type_nr")) {
 		    if ($this->result->RecordCount()) {
 		        return $this->result->FetchRow();
@@ -194,6 +203,118 @@ class Prescription extends Core {
 		    return false;
 		}
 	}
+
+	/**
+	* Merotech customation methods
+	*/
+
+	function getDrugList($class, $is_pediatric, $is_adult, $is_other, $is_consumable ) {
+  	  global $db;
+  	  
+	    $debug = false;
+	    ($debug)?$db->debug=TRUE:$db->debug=FALSE;
+	    if ($is_pediatric || $is_adult || $is_other || $is_consumable ) {
+  	    $this->sql="SELECT item_id as drug_id, item_description as description FROM $this->tb_drug_list WHERE
+  	                  	 purchasing_class = '$class' AND
+  	                  	 is_pediatric = $is_pediatric AND
+  	                  	 is_adult  = $is_adult AND
+  	                  	 is_other  = $is_other AND
+  	                  	 is_consumable = $is_consumable";
+  	  } else {
+  	    $this->sql="SELECT item_id as drug_id, item_description as description FROM $this->tb_drug_list WHERE
+  	                  	 purchasing_class = '$class'";
+  	  }
+  	  
+	    if ($this->result=$db->Execute($this->sql)) {
+		    if ($this->result->RecordCount()) {
+		        return $this->result->GetArray();
+			} else {
+				return false;
+			}
+		}
+		else {
+		    return false;
+		}
+
+	} // end of function getDrugList($class, $is_pediatric, $is_adult, $is_other, $is_consumable )
 	
+	function insert_prescription() {
+	  global $db;
+    $debug = false;
+    ($debug)?$db->debug=TRUE:$db->debug=FALSE;
+    
+	  $db->debug=FALSE;
+	}
+
+	function DisplayBGColor($actual, $target) {
+	  //echo ($actual==$target) ?  'bgcolor="green"' : 'bgcolor="gray"';
+	  echo ($actual==$target) ?  'bgcolor="#330066"' : 'class="adm_input"';
+	  return TRUE;
+	}
+
+	function insertDrugItem() {
+	  global $db;
+	  $debug=FALSE;
+	  ($debug)?$db->debug=TRUE:$db->debug=FALSE;
+	  
+	  $db->debug=FALSE;
+	  return $ret;
+	}
+
+	function DisplaySelectedItems($items) {
+	  global $db;
+    if ($items) {
+      $debug=FALSE;
+     ($debug)?$db->debug=TRUE:$db->debug=FALSE;
+     $js_command = '<script language="javascript">';
+      foreach($items as $item_no) {
+  	    $this->sql="SELECT item_id as drug_id, item_description as description FROM $this->tb_drug_list WHERE item_id = '$item_no' ";
+  	    if ($this->result=$db->Execute($this->sql)) {
+    		    if ($this->result->RecordCount()) {
+    		        $this->item_array = $this->result->GetArray();
+    		          while (list($x,$v)=each($this->item_array)) {
+    		            $js_command .= "add_to_list('".$v['description']."', ".$v['drug_id'].");";
+    		          }
+    			} else {
+    				return false;
+    			}
+        }
+      }
+      $js_command .= '</script>';
+      echo $js_command;
+    }
+  return TRUE;
+	}
+	
+
+	function DisplayDrugs($drug_list) {
+			while(list($x,$v)=each($drug_list)){
+				echo '<option value="'.$v['drug_id'].'">';
+				echo $v['description'];
+				echo '</option>
+				';
+			}
+	  return TRUE;
+	}
+
+  function GetNameOfItem($item_number) {
+    global $db;
+    $debug=FALSE;
+    ($debug)?$db->debug=TRUE:$db->debug=FALSE;
+    $this->sql="SELECT item_description as description FROM $this->tb_drug_list WHERE item_id = '$item_number' ";
+    if ($this->result=$db->Execute($this->sql)) {
+		    if ($this->result->RecordCount()) {
+		        $this->item_array = $this->result->GetArray();
+		          while (list($x,$v)=each($this->item_array)) {
+                $db->debug=FALSE;
+		            return $v['description'];
+		          }
+			} else {
+			  $db->debug=FALSE;
+				return false;
+			}
+		}
+  } // end of function GetNameOfDrug($item_number) 
+
 }
 ?>

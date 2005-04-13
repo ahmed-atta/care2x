@@ -62,7 +62,10 @@ class GuiInputPerson {
 	* Sets the PID number
 	*/
 	function setPID($pid=0){
-		if(!empty($pid)) $this->pid = $pid;
+		if(!empty($pid)) 
+		{
+			$this->pid = $pid;
+		}
 	}
 	/**
 	* Sets the PID number
@@ -85,11 +88,26 @@ class GuiInputPerson {
 		$this->toggle=!$this->toggle;
 	}
 
+	function showPID($pid)
+	{
+		if(strlen($pid)<8)
+		{
+			for($i=0;$i<(8-strlen($pid));$i++)
+			{
+				$pid_zero.='0';
+			}
+									
+		}
+		$altered_pid = chunk_split($pid_zero.$pid, 2, '/');
+		return substr($altered_pid,0,strlen($altered_pid)-1);
+					
+	}
+
 	/**
 	* Displays the GUI input form
 	*/
 	function display(){
-		global $db, $sid, $lang, $root_path, $pid, $insurance_show, $user_id, $mode, $dbtype,
+		global $db, $sid, $lang, $root_path, $pid, $insurance_show, $user_id, $mode, $dbtype, $no_tribe,
 				$update, $photo_filename, $HTTP_POST_VARS,  $HTTP_POST_FILES, $HTTP_SESSION_VARS;
 
 		extract($HTTP_POST_VARS);
@@ -133,7 +151,7 @@ class GuiInputPerson {
 
 		if (($mode=='save') || ($mode=='forcesave')) {
 		$search_obj = & new advanced_search();
-		if (is_array($result_array=$search_obj->get_equal_words("tribe_name", "care_tz_tribes", $name_maiden, 65)) && $name_maiden) 
+		if (is_array($result_array=$search_obj->get_equal_words("tribe_name", "care_tz_tribes", $name_maiden, 65)) && $name_maiden && !$no_tribe) 
 		{
 			$tribe_array=$result_array;
 		}
@@ -157,7 +175,7 @@ class GuiInputPerson {
 				if (trim($name_last)=='') { $errornamelast=1; $error++;}
 				if(trim($name_first)=='') { $errornamefirst=1; $error++; }
 				if (trim($date_birth)=='') { $errordatebirth=1; $error++;}
-				if (is_array($tribe_array)) {$errormaiden=1; $error++;}
+				if (is_array($tribe_array) && !$no_tribe) {$errormaiden=1; $error++;}
 				if (is_array($town_array)) {$errortown=1; $error++;}
 				//if ($addr_citytown_nr&&(trim($addr_citytown_name)=='')) { $errortown=1; $error++;}
 				if ($sex=='') { $errorsex=1; $error++;}
@@ -179,7 +197,7 @@ class GuiInputPerson {
 				}
 
 				if(($update)) {
-
+					
 					//echo formatDate2STD($geburtsdatum,$date_format);
 					$sql="UPDATE $dbtable SET
 							 title='$title',
@@ -391,7 +409,7 @@ class GuiInputPerson {
 			$tribe=$name_maiden;
 			$town=$addr_citytown_name;
 		}
-		if (is_array($result_array=$search_obj->get_equal_words("tribe_name", "care_tz_tribes", $tribe, 65)) && $name_maiden) 
+		if (is_array($result_array=$search_obj->get_equal_words("tribe_name", "care_tz_tribes", $tribe, 65)) && $name_maiden &&!$no_tribe) 
 		{
 			$tribe_array=$result_array;        
 		}
@@ -581,7 +599,19 @@ class GuiInputPerson {
 				<FONT SIZE=-1  FACE="Arial"><?php if($pid) echo $LDRegistryNr ?>
 			</td>
 			<td >
-				<FONT SIZE=-1  FACE="Arial" color="#800000"><?php if($pid) echo $pid+$person_id_nr_adder ?>&nbsp;
+				<FONT SIZE=-1  FACE="Arial" color="#800000">
+				<?php 
+			if($pid) 
+			{
+				if(IS_TANZANIAN) 
+				{
+					echo $this->showPID($pid); 
+				}
+				else 
+				{
+					echo $pid;
+				}
+			} ?>&nbsp;
 			</td>
 			<td  rowspan=6 class="photo_id" >
 				<FONT SIZE=-1  FACE="Arial">
@@ -637,7 +667,8 @@ class GuiInputPerson {
 			$this->createTR($errornamemid, 'name_middle', $LDNameMid,$name_middle);
 		}
 
-
+if(!$no_tribe)
+				{
 ?>
 
 			<tr>
@@ -646,39 +677,41 @@ class GuiInputPerson {
 				<td  class="reg_input" colspan=1>
 				
 				<?php 
-				if(is_array($tribe_array) && $name_maiden)
-				{
-					echo '<SELECT name="name_maiden">';
-					foreach($tribe_array as $unit)
+				
+					if(is_array($tribe_array) && $name_maiden)
 					{
-						if($update && (strtoupper($name_maiden) == strtoupper($unit)))
+						echo '<SELECT name="name_maiden">';
+						foreach($tribe_array as $unit)
 						{
-							$check = 'selected';
+							if($update && (strtoupper($name_maiden) == strtoupper($unit)))
+							{
+								$check = 'selected';
+							}
+							else
+							{
+								$check = '';	
+							}
+							echo '<OPTION value="'.$unit.'" '.$check.'>'.$unit.'</OPTION>';
 						}
-						else
-						{
-							$check = '';	
-						}
-						echo '<OPTION value="'.$unit.'" '.$check.'>'.$unit.'</OPTION>';
+					 echo '</SELECT>';
 					}
-				 echo '</SELECT>';
-				}
-				else
-				if(strlen($name_maiden)>1)
-				{
-					echo '<SELECT name="name_maiden"><OPTION value="'.$tribe_array.'" '.$check.'>'.$tribe_array.'</OPTION></SELECT>';
-				}
-				else
-				{
-					echo '<input name="name_maiden" type="text">';
-				}
+					else
+					if(strlen($name_maiden)>1)
+					{
+						echo '<SELECT name="name_maiden"><OPTION value="'.$tribe_array.'" '.$check.'>'.$tribe_array.'</OPTION></SELECT>';
+					}
+					else
+					{
+						echo '<input name="name_maiden" type="text">';
+					}
+				
 				?>	
 				
 				</td>
 			</tr>
 
 <?
-
+}
 		if (!$person_name_others_hide){
 			$this->createTR($errornameothers, 'name_others', $LDNameOthers,$name_others);
 		}
@@ -824,36 +857,19 @@ class GuiInputPerson {
 <?php
 		if($insurance_show) {
 			if (!$person_insurance_1_nr_hide) {
-				$this->createTR($errorinsurancenr, 'insurance_nr', $LDInsuranceNr.' 1',$insurance_nr,2);
+				
 ?>
-			<tr>
-			<td class="reg_item">
-				&nbsp;
-			</td>
-			<td colspan=2 class="reg_input"><FONT SIZE=-1  FACE="Arial"><?php if ($errorinsuranceclass) echo '<font color="'.$error_fontcolor.'">'; ?>
-<?php
-				if($insurance_classes!=false){
-					while($result=$insurance_classes->FetchRow()) {
-?>
-						<input name="insurance_class_nr" type="radio"  value="<?php echo $result['class_nr']; ?>"  <?php if($insurance_class_nr==$result['class_nr']) echo 'checked'; ?>>
-<?php
-						$LD=$result['LD_var'];
-        					if(isset($$LD)&&!empty($$LD)) echo $$LD; else echo $result['name'];
-						echo '&nbsp;';
-					}
-				} else {
-					echo "no insurance class";
-				}
-?>
-			</td>
-			</tr>
-
 			<tr>
 			<td class="reg_item">
 				<FONT SIZE=-1  FACE="Arial"><?php if ($errorinsurancecoid) echo '<font color="'.$error_fontcolor.'">'; ?><?php echo $LDInsuranceCo ?>:
 			</td>
-				<td colspan=2 class="reg_input">
-				<input name="insurance_firm_name" type="text" size="35" value="<?php echo $insurance_firm_name; ?>" ><a href="javascript:popSearchWin('insurance','aufnahmeform.insurance_firm_id','aufnahmeform.insurance_firm_name')"><img <?php echo createComIcon($root_path,'b-write_addr.gif','0') ?>></a>
+			<td colspan=2 class="reg_input"><FONT SIZE=-1  FACE="Arial"><?php if ($errorinsuranceclass) echo '<font color="'.$error_fontcolor.'">'; ?>
+
+					<input name="insurance_category" type="radio"  value="silver"  <?php if($insurance_category=="silver") echo 'checked'; ?>> <?php echo $LDInsuranceSilver;?>
+					<input name="insurance_category" type="radio"  value="gold"  <?php if($insurance_category=="gold") echo 'checked'; ?>> <?php echo $LDInsuranceGold;?>
+					<input name="insurance_category" type="radio"  value="friedkin"  <?php if($insurance_category=="friedkin") echo 'checked'; ?>> <?php echo $LDInsuranceFriedkin;?>
+					<input name="insurance_category" type="radio"  value="selian"  <?php if($insurance_category=="selian") echo 'checked'; ?>> <?php echo $LDInsuranceSelianstuff;?>
+					
 			</td>
 			</tr>
 <?php

@@ -1,4 +1,5 @@
 <?php
+$LDNoParams='There are no parameters in this group.';
 $LDLab='Laboratories';
 $LDMedLab='Medical laboratory';
 $LDPathLab='Pathological laboratory';
@@ -121,4 +122,8 @@ $LDUpperCritical='Upper critical';
 $LDLowerCritical='Lower critical';
 $LDUpperToxic='Upper toxic';
 $LDLowerToxic='Lower toxic';
+$LDAdd_type='auxiliary field type ';
+$LDAdd_label='auxiliary label';
+$LDNewParam='New parameter';
+$LDis_enabled='Show/Hide Parameter';
 ?>

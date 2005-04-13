@@ -37,23 +37,24 @@ include_once($root_path.'include/inc_date_format_functions.php');
 if($mode=='save'){
 	# Save the nr
 	
-/*	if(!$HTTP_POST_VARS['msr_unit']) $HTTP_POST_VARS['msr_unit']='NULL';
-	if(!$HTTP_POST_VARS['median']) $HTTP_POST_VARS['median']='NULL';
-	if(!$HTTP_POST_VARS['lo_bound']) $HTTP_POST_VARS['lo_bound']='NULL';
-	if(!$HTTP_POST_VARS['hi_bound']) $HTTP_POST_VARS['hi_bound']='NULL';
-	if(!$HTTP_POST_VARS['lo_critical']) $HTTP_POST_VARS['lo_critical']='NULL';
-	if(!$HTTP_POST_VARS['hi_critical']) $HTTP_POST_VARS['hi_critical']='NULL';
-	if(!$HTTP_POST_VARS['lo_toxic']) $HTTP_POST_VARS['lo_toxic']='NULL';
-	if(!$HTTP_POST_VARS['hi_toxic']) $HTTP_POST_VARS['hi_toxic']='NULL';
-*/	
 	$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
 	$HTTP_POST_VARS['history']=$lab_obj->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
 	# Set to use the test params
 	$lab_obj->useTestParams();
 	# Point to the data array
-	$lab_obj->setDataArray($HTTP_POST_VARS);
+	$saveparam = $HTTP_POST_VARS;
 	
-	if($lab_obj->updateDataFromInternalArray($HTTP_POST_VARS['nr'])){
+	
+	if($saveparam['nr']!=0 && $saveparam['nr'])
+	{
+		$action = $lab_obj->UpdateParams($saveparam);
+	}
+	else
+	{
+		$action = $lab_obj->InsertParams();
+	}
+	echo $action;
+	if($action){
 ?>
 	
 <script language="JavaScript">
@@ -70,15 +71,19 @@ window.close();
 # end of if(mode==save)
 } 	
 
-$pnames=array($LDParameter,$LDMsrUnit,$LDMedian,$LDUpperBound,$LDLowerBound,$LDUpperCritical,$LDLowerCritical,$LDUpperToxic,$LDLowerToxic);
-$pitems=array('name','msr_unit','median','hi_bound','lo_bound','hi_critical','lo_critical','hi_toxic','lo_toxic');
-
+$pnames=array($LDParameter,$LDMsrUnit,$LDMedian,$LDUpperBound,$LDLowerBound,$LDUpperCritical,$LDLowerCritical,$LDUpperToxic,$LDLowerToxic,$LDAdd_type,$LDAdd_label,$LDis_enabled);
+$pitems=array('name','msr_unit','median','hi_bound','lo_bound','hi_critical','lo_critical','hi_toxic','lo_toxic','add_type','add_label','is_enabled');
 # Get the test parameter values
 if($tparam=&$lab_obj->getTestParam($nr)){
 	$tp=$tparam->FetchRow();
-	$parameters=$paralistarray[$tp['group_id']];
+	$ttest=&$lab_obj->TestGroupByID($tp['id']);
 }else{
 	$tp=false;
+}
+if($nr==0)
+{
+	$tp['name'] = $LDNewParam;
+	$tp['group_id'] = $parameterselect;
 }
 	
 ?>
@@ -124,8 +129,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
 <FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;
 <?php 	
-	if(isset($parameters[$tp['id']])&&!empty($parameters[$tp['id']])) echo $parameters[$tp['id']];
-		else echo $tp['name'];
+	echo $tp['name'];
  ?>
  </STRONG></FONT>
 </td>
@@ -163,16 +167,36 @@ if($tp){
 	
 	for($i=0;$i<sizeof($pitems);$i++){
 		echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$pnames[$i].'</td>
-			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="'.$pitems[$i].'" size=30 maxlength=30 value="';
-		if($i>1){
-			if($tp[$pitems[$i]]>0) echo $tp[$pitems[$i]];
-		}else{ 
-			echo $tp[$pitems[$i]];
-		}
-		echo '">&nbsp;
+			<td bgcolor="'.$bgc.'"  class="a12_b">
+			';
+			if($pitems[$i]=="add_type")
+			{
+				echo '<input type="radio" name="add_type" value="text"';
+				if($tp[$pitems[$i]]=="text") echo ' checked ';
+				echo '>Text <input type="radio" name="add_type" value="checkbox"';
+				if($tp[$pitems[$i]]=="checkbox") echo ' checked ';
+				echo '>Checkbox';
+				echo '<input type="radio" name="add_type" value=""';
+				if(!trim($tp[$pitems[$i]]) || !$tp[$pitems[$i]]=="text" || !$tp[$pitems[$i]]=="checkbox") echo ' checked ';
+				echo '>Hide';
+			}
+			elseif($pitems[$i]=="is_enabled")
+			{
+				echo '<input type="radio" name="is_enabled" value="1"';
+				if($ttest['is_enabled']=="1") echo ' checked ';
+				echo '>Show <input type="radio" name="is_enabled" value="0"';
+				if($ttest['is_enabled']!="1") echo ' checked ';
+				echo '>Hide';
+			}
+			else
+			{
+				echo'	<input type="text" name="'.$pitems[$i].'" size=30 maxlength=30 value="'.$tp[$pitems[$i]].'">';
+			}
+			echo '&nbsp;
 			</td></tr>
 			';
 	}
+	
 	
 /*	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDParameter.'</td>
 			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="name" size=15 maxlength=15 value="'.$tp['name'].'">&nbsp;
@@ -212,8 +236,9 @@ if($tp){
 */ }
 ?>
 </table>
-
+<input type=hidden name="parameterselect" value="<?php echo $parameterselect; ?>">
 <input type=hidden name="nr" value="<?php echo $nr; ?>">
+<input type=hidden name="id" value="<?php echo $tp['id']; ?>">
 <input type=hidden name="sid" value="<?php echo $sid; ?>">
 <input type=hidden name="lang" value="<?php echo $lang; ?>">
 <input type=hidden name="mode" value="save">

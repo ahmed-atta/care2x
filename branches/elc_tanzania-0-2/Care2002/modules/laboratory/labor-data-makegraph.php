@@ -17,7 +17,6 @@ $lang_tables=array('chemlab_groups.php','chemlab_params.php');
 define('LANG_FILE','lab.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
-
 if($user_origin=='lab'||$user_origin=='lab_mgmt'){
 	$local_user='ck_lab_user';
 	//$breakfile=$root_path.'modules/laboratory/labor.php'.URL_APPEND;
@@ -50,7 +49,7 @@ $lab_obj=new Lab($encounter_nr);
 require($root_path.'include/inc_labor_param_group.php');
 
 						
-if(!isset($parameterselect)||empty($parameterselect)) $parameterselect='priority';
+if(!isset($parameterselect)||empty($parameterselect)) $parameterselect='1';
 
 $parameters=$paralistarray[$parameterselect];					
 //$paramname=$parametergruppe[$parameterselect];
@@ -74,11 +73,14 @@ if($encounter=$enc_obj->getBasic4Data($encounter_nr)) {
 		# Merge the records to common date key
 		$records=array();
 		$dt=array();
+		$counter=0;
 		while($buffer=$recs->FetchRow()){
 			//$records[$buffer['job_id']]=&$buffer;
 			$records[$buffer['job_id']][$buffer['group_id']]=unserialize($buffer['serial_value']);
 			$tdate[$buffer['job_id']]=&$buffer['test_date'];
 			$ttime[$buffer['job_id']]=&$buffer['test_time'];
+			$ergebnis[$counter] = unserialize($buffer['serial_value']);
+			$counter++;
 		}
 	}else{
 		if($nostat) header("location:".$root_path."modules/laboratory/labor-nodatafound.php?sid=$sid&lang=$lang&patnum=$pn&ln=$result[name]&fn=$result[vorname]&nodoc=labor");
@@ -90,7 +92,6 @@ if($encounter=$enc_obj->getBasic4Data($encounter_nr)) {
 	echo "<p>".$lab_obj->getLastQuery()."sql$LDDbNoRead";
 	exit;
 }
-
 # Start Smarty templating here
  /**
  * LOAD Smarty
@@ -225,14 +226,13 @@ while(list($group_id,$param_group)=each($paralistarray)){
 			}
 			reset($tparam);
 		}
-		
 		if($flag){
 			
 			# If parameters info not yet loaded, load now
 			if($grpflag){
-				$tparams=&$lab_obj->TestParams($group_id);
+				$tparams=&$lab_obj->TestParamsDetails($tk);
 				$grpflag=false;
-				while($tpbuf=&$tparams->FetchRow())	$tp[$tpbuf['id']]=&$tpbuf;
+				
 			}
 			# Create the first colums boxes of a row
 			//$txt='<tr bgcolor=';
@@ -240,19 +240,19 @@ while(list($group_id,$param_group)=each($paralistarray)){
 			$txt='<tr class=';
 	 		if($toggle) { $txt.= '"wardlistrow1"';}else { $txt.= '"wardlistrow2"';}
 			$txt.= '>
-     		<td class="va12_n"> &nbsp;<nobr><a href="#">'.$pname.'</a></nobr> 
+     		<td class="va12_n"> &nbsp;<nobr><a href="#">'.$tparams['name'].'</a></nobr> 
 			</td>
 			<td class="a10_b" >&nbsp;';
 			# The normal range limits
-			if($tp[$param]['lo_bound']&&$tp[$param]['hi_bound']) $txt.=$tp[$param]['hi_bound'].'<p><br>&nbsp;'.$tp[$param]['lo_bound'];
+			if($tparams['lo_bound']&&$tparams['hi_bound']) $txt.=$tparams['hi_bound'].'<p><br>&nbsp;'.$tparams['lo_bound'];
 			# The unit of measurement
 			$txt.='</td>
-  			<td class="a10_b" >&nbsp;'.$tp[$param]['msr_unit'].'</td>';
+  			<td class="a10_b" >&nbsp;'.$tparams['msr_unit'].'</td>';
 
 			//$txt.=$records[$job_id][$group_id][$param];
 				
 			# Print the row
-			 echo $txt.'<td colspan="'.$cols.'"><img  src="'.$root_path.'main/imgcreator/labor-datacurve.php?sid='.$sid.'&lang='.$lang.'&cols='.$cols.'&lo='.$tp[$param]['lo_bound'].'&hi='.$tp[$param]['hi_bound'].'&d='.$sessbuf.'" border=0>
+			 echo $txt.'<td colspan="'.$cols.'"><img  src="'.$root_path.'main/imgcreator/labor-datacurve.php?sid='.$sid.'&lang='.$lang.'&cols='.$cols.'&lo='.$tparams['lo_bound'].'&hi='.$tparams['hi_bound'].'&d='.$HTTP_POST_VARS['imgprep_'.$tk].'" border=0>
 			</td></tr>';
 		}
 		$tracker++;
