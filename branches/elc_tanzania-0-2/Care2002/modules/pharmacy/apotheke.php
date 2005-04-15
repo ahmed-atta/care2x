@@ -91,7 +91,9 @@ ob_end_clean();
 
  # Prepare the submenu icons
 
- $aSubMenuIcon=array(createComIcon($root_path,'bestell.gif','0'),
+ $aSubMenuIcon=array(
+                    createComIcon($root_path,'prescription.gif','0'),
+                    createComIcon($root_path,'bestell.gif','0'),
 										createComIcon($root_path,'help_tree.gif','0'),
 										createComIcon($root_path,'templates.gif','0'),
 										createComIcon($root_path,'documents.gif','0'),
@@ -103,7 +105,8 @@ ob_end_clean();
 
 # Prepare the submenu item descriptions
 
-$aSubMenuText=array($LDPharmaOrderTxt,
+$aSubMenuText=array($LDPrescriptionsText,
+                    $LDPharmaOrderTxt,
 										$LDHow2OrderTxt,
 										$LDOrderCatTxt,
 										$LDOrderArchiveTxt,
@@ -115,7 +118,8 @@ $aSubMenuText=array($LDPharmaOrderTxt,
 
 # Prepare the submenu item links indexed by their template tags
 
-$aSubMenuItem=array('LDPharmaOrder' => "<a href=\"apotheke-pass.php".URL_APPEND."&mode=order\">$LDPharmaOrder</a>",
+$aSubMenuItem=array('LDPrescriptionsText' => "<a href=\"prescription-pass.php".URL_APPEND."&mode=order\">$LDPrescriptions</a>",
+                    'LDPharmaOrder' => "<a href=\"apotheke-pass.php".URL_APPEND."&mode=order\">$LDPharmaOrder</a>",
 										'LDHow2Order' => "<a href=\"javascript:gethelp('products.php','how2','','pharma')\">$LDHow2Order</a>",
 										'LDOrderCat' => "<a href=\"apotheke-pass.php".URL_APPEND."&mode=catalog\">$LDOrderCat</a>",
 										'LDOrderArchive' => "<a href=\"apotheke-pass.php".URL_APPEND."&mode=archive\">$LDOrderArchive</a>",

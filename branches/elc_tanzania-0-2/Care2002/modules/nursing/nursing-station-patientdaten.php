@@ -488,11 +488,11 @@ function rx(){
 		echo '</td></nobr>
 		</tr>
 		<tr bgcolor="#696969" ><td colspan="3" ><nobr>
-		<input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-kurve.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDFeverCurve.'"><input 
-		type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-pbericht.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDNursingReport.'"><input 
-		type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-todo.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDDocsPrescription.'"><input 
-		type="button" onClick="javascript:enlargewin();window.location.href=\''.$root_path.'main/diagnostics-report-start.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'&header='.$result['name_last'].',+'.$result['name_first'].'+'.formatDate2Local($result['date_birth'],$date_format).'\'" value="'.$LDReports.'"><br>
+		<input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-kurve.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDFeverCurve.'">
+		<input type="button" onClick="javascript:enlargewin();window.location.href=\''.$root_path.'main/diagnostics-report-start.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'&header='.$result['name_last'].',+'.$result['name_first'].'+'.formatDate2Local($result['date_birth'],$date_format).'\'" value="'.$LDReports.'"><br>
 		';
+
+
 		//<input type="button" value="'.$LDRootData.'"><input 
 		//type="button" value="'.$LDNursingPlan.'">
 		echo '<input 
@@ -500,8 +500,8 @@ function rx(){
 		
 		echo '
 		<input type="button" onClick="javascript:window.location.href=\''.$root_path.'modules/laboratory/labor_datalist_noedit.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&user_origin='.$user_origin.'&edit='.$edit.'\'" value="'.$LDLabReports.'">
-		<input type="button" onClick="javascript:enlargewin();window.location.href=\''.$root_path.'modules/fotolab/fotos-start.php'.URL_REDIRECT_APPEND.'&pn='.$pn.'&station='.$station.'&fileroot='.$fr.'&edit='.$edit.'\'" value="'.$LDPhotos.'">
-		<input type="button" onClick="window.location.href=\''.$root_path.'modules/registration_admission/show_prescription.php'.URL_REDIRECT_APPEND.'$sid='.$SID.'&lang=en&ntid=false&externalcall=true&target=search&1=1\'" value="Prescriptions">';
+		<input type="button" onClick="window.location.href=\''.$root_path.'modules/registration_admission/show_prescription.php'.URL_REDIRECT_APPEND.'$sid='.$SID.'&pn='.$pn.'&lang=en&ntid=false&externalcall=true&target=search&1=1\'" value="Prescriptions">';
+		
 		
 		/* Create the select  menu in edit mode */
 /*		if($edit){

@@ -75,6 +75,7 @@ for ($i=0 ; $i<count($item_array) ; $i++) {
 <input type="hidden" name="history" value="Created: <?php echo date('Y-m-d H:i:s'); ?> : <?php echo $HTTP_SESSION_VARS['sess_user_name']."\n"; ?>">
 <input type="hidden" name="article" value="<?php echo $pres_obj->GetNameOfItem($item_no[$i]); ?>">
 <input type="hidden" name="externalcall" value="<?php echo $externalcall;?>">
+<input type="hidden" name="is_outpatient_prescription" value="1">
 <input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0'); ?>>
 
 </form>

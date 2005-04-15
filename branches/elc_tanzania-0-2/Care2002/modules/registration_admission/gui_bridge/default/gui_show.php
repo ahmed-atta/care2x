@@ -23,6 +23,8 @@ if ($debug) {
     echo "mode=".$mode."<br>";
     
     echo "breakfile: ".$breakfile;
+    
+    echo "pid:".$pid;
 }
 # Start Smarty templating here
  /**
@@ -97,7 +99,7 @@ if($parent_admit) {
 	$smarty->assign('sClassInput','class="adm_input"');
 }else{
 	$tab_bot_line='#66ee66';
-	if (!isset($externalcall)) include('./gui_bridge/default/gui_tabs_patreg.php');
+  if (!isset($externalcall)) include('./gui_bridge/default/gui_tabs_patreg.php');
 	$smarty->assign('sTabsFile','registration_admission/reg_tabs.tpl');
 	$smarty->assign('sClassItem','class="reg_item"');
 	$smarty->assign('sClassInput','class="reg_input"');
@@ -174,6 +176,7 @@ if($blood_group){
 /* Buffer and load the options table  */
 
 ob_start();
+
 if (!isset($externalcall))
 	if($parent_admit)  include('./gui_bridge/default/gui_patient_encounter_showdata_options.php');
 		else include('./gui_bridge/default/gui_patient_reg_options.php');
@@ -184,7 +187,8 @@ ob_end_clean();
 $smarty->assign('sOptionsMenu',$sTemp);
 
 # If mode = show then display data
-if($mode=='show' && !isset($externalcall) ){
+
+if($mode=='show' /*&& !isset($externalcall) */){
 
 	if($parent_admit) $bgimg='tableHeaderbg3.gif';
 		else $bgimg='tableHeader_gr.gif';
@@ -197,6 +201,11 @@ if($mode=='show' && !isset($externalcall) ){
 		
 			include('./gui_bridge/default/gui_'.$thisfile);
 			$sTemp = ob_get_contents();
+
+      $smarty->assign('bShowNoRecord',TRUE);
+      $smarty->assign('sPromptIcon','<img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle',TRUE).'>');
+      $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&externalcall=TRUE&target='.$target.'&mode=new">'.$LDEnterNewRecord.'</a>');
+			
 		ob_end_clean();
 	  $smarty->assign('sOptionBlock',$sTemp);
 
@@ -215,9 +224,11 @@ if($mode=='show' && !isset($externalcall) ){
 		}
 	}
 }else {
-
 	# Buffer the option input block
 	ob_start();
+
+
+	   
 	   // witch tab sould be activated at first:
 	   //set here "druglist", "Supplies", "supplies-lab", "special-others" if you want.
 	   $activated_tab = "druglist"; 
@@ -244,13 +255,14 @@ if (!isset($externalcall))
 	# Get buffer contents and stop buffering
 
 	$sTemp= ob_get_contents();
+	
 ob_end_clean();
 
 $smarty->assign('sBottomControls',$sTemp);
 
-if (!isset($externalcall))
+if (!isset($externalcall)) {
   $smarty->assign('pbBottomClose','<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'close2.gif','0').'  title="'.$LDCancel.'"  align="absmiddle"></a>');
-
+}
 
 $smarty->assign('sMainBlockIncludeFile','registration_admission/common_option.tpl');
 

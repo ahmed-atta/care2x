@@ -41,6 +41,7 @@ $LDPast3Days='Past 3 days';
 $LDPast3Months='Past 3 months';
 $LDPastAll='All';
 $LDSelect='Select';
+$LDPrescriptions="Drug prescription";
 
 $LDOrderArchive='Archive';
 $LDOrderArchiveTxt='View, edit, archive processed orders';
@@ -56,6 +57,10 @@ $LDRedList='Index of Medical Specialties';
 $LDRedListTxt='Pharmaceutical index (needs internet line)';
 $LDOrderBotActivate='OrderBot';
 $LDOrderBotActivateTxt='Activate automatic reception of order lists.';
+$LDPrescriptionsText="To prescribe items and manage it";
+$LDPrescribeText="Prescribe items";
+$LDPendingPrescriptionText="Pending prescriptions";
+$LDOldPrescriptionText="OldPrescriptions";
 
 $LDNotSent='Not yet sent!';
 $LDcatindex=array('','Article','Pcs.','','Order nr.','','');

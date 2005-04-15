@@ -321,7 +321,7 @@ class Charts extends NursingNotes {
 	*/
 	function getAllCurrentPrescription($enr){
 		global $db;
-		$this->sql="SELECT * FROM $this->tb_prescription WHERE encounter_nr=$enr AND is_stopped IN ('',0) ORDER BY nr";
+		$this->sql="SELECT * FROM $this->tb_prescription WHERE encounter_nr=$enr AND is_stopped IN ('',0) AND is_outpatient_prescription IN ('',0) ORDER BY nr";
 		if($this->result=$db->Execute($this->sql)){
 			return $this->result;
 		}else{

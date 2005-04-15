@@ -46,23 +46,24 @@ $lab_obj=new Lab($encounter_nr);
 $jobs = $lab_obj->GetJobsByEncounter($encounter_nr);
 $count_job = 0;
 $count_subjob=1;
-while($j=$jobs->FetchRow()){
-		if($last_job != $j['job_id'])
-			{
-				$count_job++;
-			}
-		$arr_tasks = unserialize($j['serial_value']);
-		while(list($x,$v) = each($arr_tasks))
-		{
-			
-			$parameters[$count_job]['tasks'][$x] = $v; 
-			$taskstodo[$x] = $v;
-			if($x>$old_x) $old_x=$x;
-			
-		}
-		$parameters[$count_job]['jobs'] = $j;
-		$last_job = $j['job_id'];
-}	
+if ($jobs)
+  while($j=$jobs->FetchRow()){
+  		if($last_job != $j['job_id'])
+  			{
+  				$count_job++;
+  			}
+  		$arr_tasks = unserialize($j['serial_value']);
+  		while(list($x,$v) = each($arr_tasks))
+  		{
+  			
+  			$parameters[$count_job]['tasks'][$x] = $v; 
+  			$taskstodo[$x] = $v;
+  			if($x>$old_x) $old_x=$x;
+  			
+  		}
+  		$parameters[$count_job]['jobs'] = $j;
+  		$last_job = $j['job_id'];
+  }	
 $patient = $lab_obj->GetUserDataByEncounter($encounter_nr);
 if($debug)
 {

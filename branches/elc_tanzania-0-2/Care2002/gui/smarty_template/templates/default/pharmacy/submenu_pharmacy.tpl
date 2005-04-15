@@ -6,6 +6,9 @@
 					<TABLE cellSpacing=1 cellPadding=3 width=600>
 					<TBODY class="submenu">
 
+					{{$LDPrescriptionsText}}
+					{{include file="common/submenu_row_spacer.tpl"}}
+					
 					{{$LDPharmaOrder}}
 
 					{{include file="common/submenu_row_spacer.tpl"}}

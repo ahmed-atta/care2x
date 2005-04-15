@@ -198,12 +198,12 @@ $LDHelp='Help';
 $LDReset='Reset';
 
 $LDNoLabReport='No lab reports available!';
-$LDFeverCurve='Fever chart';
+$LDFeverCurve='Service';
 $LDNursingReport='Nursing report';
 $LDDocsPrescription='Physician\'s orders';
 $LDNursingPlan='Nursing plan';
 $LDRootData='Root data';
-$LDReports='Diagnostic reports';
+$LDReports='Consultation reports';
 $LDLabReports='Lab reports';
 $LDPhotos='Photos';
 $LDChkUpRequests='Test request';

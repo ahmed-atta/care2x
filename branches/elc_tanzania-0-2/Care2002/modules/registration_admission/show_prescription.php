@@ -39,6 +39,17 @@ if(!isset($mode)){
 	
 }
 
+/* For external call, there is no encounter number given. This can be determined if we have the encounter no in the $pn variable */
+
+if (isset($pn)) {
+  require_once($root_path.'include/care_api_classes/class_encounter.php');
+  $encounter_obj=new Encounter($pn);
+  $pid=$encounter_obj->EncounterExists($pn);
+  $HTTP_SESSION_VARS['sess_pid']=$pid;
+  $HTTP_SESSION_VARS['sess_en']=$pn;
+}
+
+
 require('./include/init_show.php');
 
 

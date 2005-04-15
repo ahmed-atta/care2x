@@ -75,6 +75,7 @@ class Prescription extends Core {
 									'notes',
 									'prescribe_date',
 									'prescriber',
+									'is_outpatient_prescription',
 									'status',
 									'history',
 									'modify_id',
