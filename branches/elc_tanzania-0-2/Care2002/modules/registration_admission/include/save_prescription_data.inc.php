@@ -23,7 +23,10 @@ switch($mode){
 								    $no_redirect =0;
 								    
 									if(!$no_redirect){
-										header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&externalcall=".$externalcall."&pid=".$HTTP_SESSION_VARS['sess_pid']);
+									  if (isset($externalcall))
+										  header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&externalcall=".$externalcall."&pid=".$HTTP_SESSION_VARS['sess_pid']);
+										else
+										  header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&pid=".$HTTP_SESSION_VARS['sess_pid']);
 										//echo "$obj->getLastQuery<br>$LDDbNoSave";
 										exit;
 									}

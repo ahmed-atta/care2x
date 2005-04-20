@@ -1,6 +1,6 @@
 <?php
 //require_once('./roots.php');
-$debug=false;
+$debug=true;
   
 $_SESSION['item_array']=NULL;
 
@@ -12,6 +12,7 @@ if (!empty($show)) { // In case something goes wrong, then make nothing!
   if ($debug) echo "Show tab: ".$show."<br>";
   if ($debug) echo "DB-Filter: ".$db_drug_filter."<br>";
   if ($debug) echo "DB-Filter2: ".$filter."<br>";
+  if ($debug) echo "This is external call?: ".$externalcall."<br>";
   
   
   if (empty($db_drug_filter))
@@ -136,7 +137,17 @@ if (!empty($show)) { // In case something goes wrong, then make nothing!
             <td height="10"> <div align="center">&nbsp; </div></td>
           </tr>
         </table>
+        <?
+        if (isset($externalcall)) {      
+        ?>
         <div align="right"><input type="button" name="show" value="PRESCRIBE THIS" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=insert&externalcall=<?php echo $externalcall;?>')">&nbsp;&nbsp;&nbsp;</div>
+        <?
+        } else {
+        ?>
+        <div align="right"><input type="button" name="show" value="PRESCRIBE THIS" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=insert')">&nbsp;&nbsp;&nbsp;</div>
+        <?
+        }
+        ?>
     </tr>
   </form> <!-- end of form "prescription" -->
 </table>

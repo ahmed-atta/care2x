@@ -12,7 +12,7 @@ else
   else 
     $breakfile = $breakfile.URL_APPEND."&target=entry";
 
-$debug=false;
+$debug=true;
 
 if ($debug) {
     if (!isset($externalcall))
@@ -202,9 +202,14 @@ if($mode=='show' /*&& !isset($externalcall) */){
 			include('./gui_bridge/default/gui_'.$thisfile);
 			$sTemp = ob_get_contents();
 
+      
       $smarty->assign('bShowNoRecord',TRUE);
       $smarty->assign('sPromptIcon','<img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle',TRUE).'>');
-      $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&externalcall=TRUE&target='.$target.'&mode=new">'.$LDEnterNewRecord.'</a>');
+      if (isset($externalcall))      
+        $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new&externalcall='.$externalcall.'">'.$LDEnterNewRecord.'</a>');
+      else
+        $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new">'.$LDEnterNewRecord.'</a>');
+      
 			
 		ob_end_clean();
 	  $smarty->assign('sOptionBlock',$sTemp);
@@ -218,7 +223,10 @@ if($mode=='show' /*&& !isset($externalcall) */){
 
 		if($parent_admit && !$is_discharged && $thisfile!='show_diagnostics_result.php'){
 			$smarty->assign('sPromptIcon','<img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle',TRUE).'>');
-			$smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new">'.$LDEnterNewRecord.'</a>');
+      if (isset($externalcall))      
+        $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new&externalcall='.$externalcall.'">'.$LDEnterNewRecord.'</a>');
+      else
+        $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new">'.$LDEnterNewRecord.'</a>');
  		}else{
 			if(file_exists('./gui_bridge/default/gui_person_createnew_'.$thisfile)) include('./gui_bridge/default/gui_person_createnew_'.$thisfile);
 		}
