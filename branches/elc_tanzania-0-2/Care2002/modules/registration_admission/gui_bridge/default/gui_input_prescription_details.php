@@ -41,7 +41,7 @@ return true;
 
 <?PHP
 $item_array=$_SESSION['item_array'];
-echo "-->items in array: ".count($item_array)."<br>";
+//echo "-->items in array: ".count($item_array)."<br>";
 for ($i=0 ; $i<count($item_array) ; $i++) {
 ?>
 <form method="POST" name="reportform" onSubmit="return chkform(this)">

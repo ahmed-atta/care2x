@@ -1,6 +1,6 @@
 <?php
 //require_once('./roots.php');
-$debug=true;
+$debug=false;
   
 $_SESSION['item_array']=NULL;
 

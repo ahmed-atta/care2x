@@ -12,7 +12,7 @@ else
   else 
     $breakfile = $breakfile.URL_APPEND."&target=entry";
 
-$debug=true;
+$debug=false;
 
 if ($debug) {
     if (!isset($externalcall))
