@@ -38,23 +38,22 @@ return true;
 }
 //  Script End -->
 </script>
-
+<form method="POST" name="reportform<?PHP echo $i;?>" onSubmit="return chkform(this)">
 <?PHP
 $item_array=$_SESSION['item_array'];
-//echo "-->items in array: ".count($item_array)."<br>";
+//echo "-->items in array: ".count($item_array)."<br>";#
 for ($i=0 ; $i<count($item_array) ; $i++) {
 ?>
-<form method="POST" name="reportform" onSubmit="return chkform(this)">
 <font class="adm_div"><?php echo $pres_obj->GetNameOfItem($item_array[$i]); ?></font>
  <table border=0 cellpadding=2 width=100%>
   
    <tr bgcolor="#f6f6f6">
      <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDosage; ?></td>
-     <td><input type="text" name="dosage" size=50 maxlength=60></td>
+     <td><input type="text" name="arr_dosage[<?PHP echo $i; ?>]" size=50 maxlength=60></td>
    </tr>
    <tr bgcolor="#f6f6f6">
      <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDApplication.' '.$LDNotes; ?></td>
-     <td><textarea name="notes" cols=40 rows=3 wrap="physical"></textarea>
+     <td><textarea name="arr_notes[<?PHP echo $i; ?>]" cols=40 rows=3 wrap="physical"></textarea>
          </td>
    </tr>
 
@@ -64,16 +63,19 @@ for ($i=0 ; $i<count($item_array) ; $i++) {
      <td><input type="text" name="prescriber" size=50 maxlength=60 value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>" readonly></td>
    </tr>
  </table>
+<input type="hidden" name="arr_item_number[<?PHP echo $i; ?>]" value="<?PHP echo $i; ?>">
+<input type="hidden" name="arr_article_item_number[<?PHP echo $i; ?>]" value="<?php echo $item_array[$i];?>">
+<input type="hidden" name="arr_price[<?PHP echo $i; ?>]" value="<?php echo $pres_obj->GetPriceOfItem($item_no[$i]);?>">
+<input type="hidden" name="arr_article[<?PHP echo $i; ?>]" value="<?php echo $pres_obj->GetNameOfItem($item_array[$i]);?>">
+<?php
+} // end of loop
+?>
 <input type="hidden" name="encounter_nr" value="<?php echo $HTTP_SESSION_VARS['sess_en']; ?>">
 <input type="hidden" name="pid" value="<?php echo $HTTP_SESSION_VARS['sess_pid']; ?>">
-<!--<input type="hidden" name="modify_id" value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>">-->
-<!--<input type="hidden" name="create_id" value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>">-->
-<!--<input type="hidden" name="create_time" value="null">-->
 <input type="hidden" name="mode" value="create">
-<input type="hidden" name="target" value="<?php echo $target; ?>">
-<input type="hidden" name="item_number" value="<?PHP echo $i; ?>">
 <input type="hidden" name="history" value="Created: <?php echo date('Y-m-d H:i:s'); ?> : <?php echo $HTTP_SESSION_VARS['sess_user_name']."\n"; ?>">
-<input type="hidden" name="article" value="<?php echo $pres_obj->GetNameOfItem($item_no[$i]); ?>">
+<input type="hidden" name="target" value="<?php echo $target; ?>">
+
 
         <?
         if (isset($externalcall)) {      
@@ -88,10 +90,6 @@ for ($i=0 ; $i<count($item_array) ; $i++) {
 
 
 <?php
-
-}
-
-
 /**
 * Second part: Show all prescriptions for this encounter no. since now. 
 */

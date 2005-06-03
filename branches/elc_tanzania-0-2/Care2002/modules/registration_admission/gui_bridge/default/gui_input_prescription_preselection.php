@@ -43,10 +43,14 @@ if (!empty($show)) { // In case something goes wrong, then make nothing!
 
 
   <tr>
-    <td <? $pres_obj->DisplayBGColor($activated_tab, 'druglist') ?>><div align="center"><input type="button" name="show" value="Drug List" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=Drug List&externalcall=<?php echo $externalcall;?>')"></div></td>
-    <td <? $pres_obj->DisplayBGColor($activated_tab, 'Supplies') ?>><div align="center"><input type="button" name="show" value="Supplies" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=Supplies&externalcall=<?php echo $externalcall;?>')"></div></td>
-    <td <? $pres_obj->DisplayBGColor($activated_tab, 'supplies-lab') ?>><div align="center"><input type="button" name="show" value="Supplies-Lab" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=Supplies-Lab&externalcall=<?php echo $externalcall;?>')"></div></td>
-    <td <? $pres_obj->DisplayBGColor($activated_tab, 'special-others') ?><div align="center"><input type="button" name="show" value="Special Others" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=Special Others&externalcall=<?php echo $externalcall;?>')"></div></td>
+    <?php
+      if (isset($externalcall))
+        $EXTERNAL_CALL_PARAMETER="&externalcall=".$externalcall;
+    ?>
+    <td <? $pres_obj->DisplayBGColor($activated_tab, 'druglist') ?>><div align="center"><input type="button" name="show" value="Drug List" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=Drug List<?php echo $EXTERNAL_CALL_PARAMETER;?>')"></div></td>
+    <td <? $pres_obj->DisplayBGColor($activated_tab, 'Supplies') ?>><div align="center"><input type="button" name="show" value="Supplies" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=Supplies<?php echo $EXTERNAL_CALL_PARAMETER;?>')"></div></td>
+    <td <? $pres_obj->DisplayBGColor($activated_tab, 'supplies-lab') ?>><div align="center"><input type="button" name="show" value="Supplies-Lab" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=Supplies-Lab<?php echo $EXTERNAL_CALL_PARAMETER;?>')"></div></td>
+    <td <? $pres_obj->DisplayBGColor($activated_tab, 'special-others') ?><div align="center"><input type="button" name="show" value="Special Others" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=Special Others<?php echo $EXTERNAL_CALL_PARAMETER;?>')"></div></td>
   </tr>
   <tr>
     <br>

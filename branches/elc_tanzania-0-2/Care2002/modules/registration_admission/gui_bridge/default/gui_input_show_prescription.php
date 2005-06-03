@@ -5,7 +5,9 @@ if(!isset($pres_obj)) $pres_obj=new Prescription;
 $app_types=$pres_obj->getAppTypes();
 $pres_types=$pres_obj->getPrescriptionTypes();
 
-$debug = false;
+$debug = FALSE;
+
+if ($debug) echo "External_call:".$externalcall;
 
 if (!empty($show)) {
   // The $show-Value comes from the input-type button and will be send by javascript (check_prescriptions.js)

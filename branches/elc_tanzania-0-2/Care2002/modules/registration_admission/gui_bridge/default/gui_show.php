@@ -12,7 +12,7 @@ else
   else 
     $breakfile = $breakfile.URL_APPEND."&target=entry";
 
-$debug=false;
+$debug=FALSE;
 
 if ($debug) {
     if (!isset($externalcall))
@@ -39,11 +39,17 @@ if ($debug) {
 if($parent_admit) $sTitleNr= ($HTTP_SESSION_VARS['sess_full_en']);
 	else $sTitleNr = ($HTTP_SESSION_VARS['sess_full_pid']);
 
+
 # Title in the toolbar
- $smarty->assign('sToolbarTitle',"$page_title ($sTitleNr)");
+ if (!empty($externalcall))
+    $smarty->assign('sToolbarTitle',$sTitleNr);
+ else 
+  $smarty->assign('sToolbarTitle',"$page_title ($sTitleNr)");
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('submenu1.php','$LDPatientRegister')");
+ 
+ if (!isset($printout))
+  $smarty->assign('pbHelp',"javascript:gethelp('submenu1.php','$LDPatientRegister')");
 
  //$smarty->assign('breakfile',$breakfile);
  $smarty->assign('breakfile','javascript:window.close()');
@@ -53,9 +59,6 @@ if($parent_admit) $sTitleNr= ($HTTP_SESSION_VARS['sess_full_en']);
 
  # Onload Javascript code
  $smarty->assign('sOnLoadJs',"if (window.focus) window.focus();");
-
- # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('notes_router.php','echo $notestype','".strtr($subtitle,' ','+')."','$mode','$rows')");
 
   # href for return button
  //$smarty->assign('pbBack',$returnfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=show&type_nr='.$type_nr);
@@ -75,6 +78,7 @@ function popRecordHistory(table,pid) {
 	urlholder="./record_history.php<?php echo URL_REDIRECT_APPEND; ?>&table="+table+"&pid="+pid;
 	HISTWIN<?php echo $sid ?>=window.open(urlholder,"histwin<?php echo $sid ?>","menubar=no,width=400,height=550,resizable=yes,scrollbars=yes");
 }
+
 -->
 </script>
 
@@ -82,7 +86,12 @@ function popRecordHistory(table,pid) {
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
 <script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
+
 <?php 
+
+if (isset($printout))
+  echo '<script language="javascript"> this.window.print(); </script>';
+
 if($parent_admit) include($root_path.'include/inc_js_barcode_wristband_popwin.php');
 
 $sTemp = ob_get_contents();
@@ -115,8 +124,10 @@ if($parent_admit&&$is_discharged){
 		else $smarty->assign('sDischarged',$LDPatientIsDischarged);
 }
 
-if($parent_admit) $smarty->assign('LDCaseNr',$LDAdmitNr);
-	else $smarty->assign('LDCaseNr',$LDRegistrationNr);
+if($parent_admit) 
+  $smarty->assign('LDCaseNr',$LDAdmitNr);
+else 
+  $smarty->assign('LDCaseNr',$LDRegistrationNr);
 
 if($parent_admit) $smarty->assign('sEncNrPID',$HTTP_SESSION_VARS['sess_full_en']);
 	else $smarty->assign('sEncNrPID',$HTTP_SESSION_VARS['sess_full_pid']);
@@ -198,16 +209,19 @@ if($mode=='show' /*&& !isset($externalcall) */){
 	if($rows){
 		# Buffer the option block
 		ob_start();
-		
 			include('./gui_bridge/default/gui_'.$thisfile);
 			$sTemp = ob_get_contents();
 
       
       $smarty->assign('bShowNoRecord',TRUE);
-      $smarty->assign('sPromptIcon','<img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle',TRUE).'>');
-      if (isset($externalcall))      
-        $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new&externalcall='.$externalcall.'">'.$LDEnterNewRecord.'</a>');
-      else
+      if (!isset($printout)) 
+        $smarty->assign('sPromptIcon','<img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle',TRUE).'>');
+      
+      if (isset($externalcall)) {     
+        if (!isset($printout)) {
+          $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new&externalcall='.$externalcall.'">'.$LDEnterNewRecord.'</a>');
+        }
+      } else
         $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new">'.$LDEnterNewRecord.'</a>');
       
 			
@@ -215,6 +229,11 @@ if($mode=='show' /*&& !isset($externalcall) */){
 	  $smarty->assign('sOptionBlock',$sTemp);
 
 	}else{
+      if (isset($externalcall))
+        if (!isset($printout))      
+          $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new&externalcall='.$externalcall.'">'.$LDEnterNewRecord.'</a>');
+      else
+        $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new">'.$LDEnterNewRecord.'</a>');
 	
 		$smarty->assign('bShowNoRecord',TRUE);
 		
@@ -241,7 +260,8 @@ if($mode=='show' /*&& !isset($externalcall) */){
 	   //set here "druglist", "Supplies", "supplies-lab", "special-others" if you want.
 	   $activated_tab = "druglist"; 
 	   // (by Merotech(RM): Here the main prescription-table-content will be loaded: 
-	   
+	  
+	  if ($debug) echo  './gui_bridge/default/gui_input_'.$thisfile;
 	  include('./gui_bridge/default/gui_input_'.$thisfile);
 
 		$sTemp = ob_get_contents();

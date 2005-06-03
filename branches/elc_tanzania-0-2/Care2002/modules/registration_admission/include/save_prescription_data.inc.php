@@ -2,52 +2,83 @@
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
 if (eregi('save_admission_data.inc.php',$PHP_SELF)) 
 	die('<meta http-equiv="refresh" content="0; url=../">');	
-	
-$obj->setDataArray($HTTP_POST_VARS);
 
-switch($mode){	
-		case 'create': 
-								if($obj->insertDataFromInternalArray()) {
-								  //echo "inserted item number:".$item_number."<br>";
-								  //echo "Elements in array:".count($item_array)."<br>";
-								  unset ($item_array[$item_number]);
-								  $item_array=array_values($item_array);
-								  //echo "Elemets now in array:".count($item_array)."<br>";
-								  //echo "Index im Array:".$item_number."<br>";
-								  $_SESSION['item_array']=$item_array;
-								  if (count($item_array)==0) unset($item_array);
-								  
-								  if (count($item_array)>0)
-								    $no_redirect =1;
-								  else
-								    $no_redirect =0;
-								    
-									if(!$no_redirect){
-									  if (isset($externalcall))
-										  header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&externalcall=".$externalcall."&pid=".$HTTP_SESSION_VARS['sess_pid']);
-										else
-										  header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&pid=".$HTTP_SESSION_VARS['sess_pid']);
-										//echo "$obj->getLastQuery<br>$LDDbNoSave";
-										exit;
-									}
-								} else{
-                                   echo "$obj->getLastQuery<br>$LDDbNoSave";
-                                   $error=TRUE;
-                                }
-								break;
-		case 'update': 
-								$obj->where=' nr='.$nr;
-								if($obj->updateDataFromInternalArray($nr)) {
-									if(!$no_redirect){
-										header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&pid=".$HTTP_SESSION_VARS['sess_pid']);
-										//echo "$obj->sql<br>$LDDbNoUpdate";
-										exit;
-									}
-								} else{
-                                  echo "$obj->getLastQuery<br>$LDDbNoUpdate";
-                                  $error=TRUE;
-                                }
-								break;
-}// end of switch
 
+$debug=FALSE;
+($debug)?$db->debug=TRUE:$db->debug=FALSE;
+$i=0;
+foreach ($arr_item_number AS $item_number) {	
+  
+  $dosage               = $arr_dosage[$i];
+  $notes                = $arr_notes[$i];
+  $article_item_number  = $arr_article_item_number[$i];
+  $price                = $arr_price[$i];
+  $article              = $arr_article[$i];
+  
+  $i++;
+  
+  //$obj->setDataArray($HTTP_POST_VARS);
+  
+  switch($mode){	
+  		case 'create': 
+  		            $sql="INSERT INTO care_encounter_prescription (
+  		                          `encounter_nr`,
+  		                          `prescription_type_nr`,
+  		                          `article`,
+  		                          `article_item_number`,
+  		                          `price`,
+  		                          `drug_class`,
+  		                          `dosage`,
+  		                          `application_type_nr`,
+  		                          `notes`,
+  		                          `prescribe_date`,
+  		                          `prescriber`,
+  		                          `is_outpatient_prescription`,
+  		                          `history`,
+  		                          `modify_id`)
+  		                          VALUES (
+  		                          '".$encounter_nr."',
+  		                          0,
+  		                          '".$article."',
+  		                          '".$article_item_number."',
+  		                          '".$price."',
+  		                          '',
+  		                          '".$dosage."',
+  		                          0,
+  		                          '".$notes."',
+  		                          '".date('Y-m-d',time())."',
+  		                          '".$prescriber."',
+  		                          1,
+  		                          '".$history."',
+  		                          ''
+  		                          )";
+                  $db->Execute($sql);
+  		                          
+								  //if (isset($externalcall))
+									//  header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&externalcall=".$externalcall."&pid=".$HTTP_SESSION_VARS['sess_pid']);
+ 								  //exit;
+  								break;
+  		case 'update': 
+  								$obj->where=' nr='.$nr;
+  								if($obj->updateDataFromInternalArray($nr)) {
+  									if(!$no_redirect){
+  										header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&pid=".$HTTP_SESSION_VARS['sess_pid']);
+  										//echo "$obj->sql<br>$LDDbNoUpdate";
+  										exit;
+  									}
+  								} else{
+                                    echo "$obj->getLastQuery<br>$LDDbNoUpdate";
+                                    $error=TRUE;
+                                  }
+  								break;
+  }// end of switch
+} // end of foreach  
+
+
+if (isset($externalcall))
+  header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&externalcall=".$externalcall."&pid=".$HTTP_SESSION_VARS['sess_pid']);
+else
+  header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&pid=".$HTTP_SESSION_VARS['sess_pid']);
+
+exit();
 ?>

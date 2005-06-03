@@ -71,7 +71,8 @@ require('./gui_bridge/default/gui_tz_tabs_patreg.php');
 		<?php
 
 		# Load and display the options table
-		require('./gui_bridge/default/gui_patient_reg_options.php');
+		if($current_encounter)
+		  require('./gui_bridge/default/gui_patient_reg_options.php');
 
 		?>
 		</td>
