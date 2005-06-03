@@ -661,7 +661,7 @@ class Encounter extends Notes {
 	    global $db;
 		if(!$this->internResolveEncounterNr($enc_nr)) return FALSE;
 		$this->sql="SELECT e.*, p.pid, p.title,p.name_last, p.name_first, p.date_birth, p.sex,
-									p.addr_str,p.addr_str_nr,p.addr_zip, p.blood_group,
+									p.addr_str,p.addr_str_nr,p.addr_zip, p.blood_group,p.name_maiden,
 									p.photo_filename, t.name AS citytown_name,p.death_date
 							FROM $this->tb_enc AS e, 
 									 $this->tb_person AS p
@@ -718,6 +718,37 @@ class Encounter extends Notes {
 				else return FALSE;
 		}
 	}
+	/**
+	* Returns sex.
+	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
+	* @return mixed string or boolean
+	*/			
+	function Sex($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['sex'];
+		}else{
+			if($enr) {
+			  return $this->getValue('sex',$enr,TRUE);
+			}
+				else return FALSE;
+		}
+	}	
+	/**
+	* Returns trade.
+	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
+	* @return mixed string or boolean
+	*/			
+	function Trade($enr=0){
+		if($this->is_loaded) {
+			return $this->encounter['name_maiden']; // RM: Sorry for that confusing columname.... if you want, you can fix it!
+		}else{
+			if($enr) {
+			  return $this->getValue('name_maiden',$enr,TRUE);
+			}
+				else return FALSE;
+		}
+	}		
+	
 	/**
 	* Returns PID number.
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.

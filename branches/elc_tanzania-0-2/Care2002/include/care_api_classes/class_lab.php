@@ -125,7 +125,8 @@ class Lab extends Encounter {
 		modify_id= '".$paramarray['modify_id']."',
 		history= '".addslashes($paramarray['history'])."',
 		add_label= '".$paramarray['add_label']."',
-		add_type= '".$paramarray['add_type']."'
+		add_type= '".$paramarray['add_type']."',
+		price= '".$paramarray['price']."'
 		WHERE nr=".$paramarray['nr'];
 		
 		
@@ -377,10 +378,10 @@ class Lab extends Encounter {
 		(".$HTTP_POST_VARS['parameterselect'].", '".$HTTP_POST_VARS['name']."',1)";
 		$db->Execute($this->sql);
 		$this->sql="INSERT INTO $this->tb_test_param
-		(`group_id`, `name`, `id`, `msr_unit`, `median`, `hi_bound`, `lo_bound`, `hi_critical`, `lo_critical`, `hi_toxic`, `lo_toxic`, `status`, `history`, `modify_id`, `create_id`) VALUES
+		(`group_id`, `name`, `id`, `msr_unit`, `median`, `hi_bound`, `lo_bound`, `hi_critical`, `lo_critical`, `hi_toxic`, `lo_toxic`, `status`, `history`, `modify_id`, `create_id`, `price`) VALUES
 		('".$HTTP_POST_VARS['parameterselect']."','".$HTTP_POST_VARS['name']."','".$db->Insert_ID()."','".$HTTP_POST_VARS['msr_unit']."','".$HTTP_POST_VARS['median']."','".$HTTP_POST_VARS['hi_bound']."','".$HTTP_POST_VARS['lo_bound']."',
 		'".$HTTP_POST_VARS['hi_critical']."','".$HTTP_POST_VARS['lo_critical']."','".$HTTP_POST_VARS['hi_toxic']."','".$HTTP_POST_VARS['lo_toxic']."','".$HTTP_POST_VARS['status']."','".addslashes($HTTP_POST_VARS['history'])."','".$HTTP_POST_VARS['modify_id']."',
-		'".$HTTP_POST_VARS['create_id']."')";
+		'".$HTTP_POST_VARS['create_id']."','".$HTTP_POST_VARS['price']."')";
 		if($this->tgroups=$db->Execute($this->sql)){
 				return true;
 		}else {return FALSE;}

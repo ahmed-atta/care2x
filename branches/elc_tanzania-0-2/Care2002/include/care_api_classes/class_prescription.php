@@ -68,6 +68,8 @@ class Prescription extends Core {
 									'encounter_nr',
 									'prescription_type_nr',
 									'article',
+									'article_item_number',
+									'price',
 									'drug_class',
 									'order_nr',
 									'dosage',
@@ -134,9 +136,9 @@ class Prescription extends Core {
 	*/
 	function getAppTypes(){
 	    global $db;
-	    $debug = false;
+	    $debug = FALSE;
 	    ($debug)?$db->debug=TRUE:$db->debug=FALSE;
-	    if ($this->result=$db->Execute("SELECT nr,group_nr,type,name,LD_var AS \"LD_var\" ,description FROM $this->tb_app_types")) {
+	    if ($this->result=$db->Execute("SELECT nr,group_nr,type,name,LD_var AS \"LD_var\" ,description FROM $this->tb_app_types ORDER BY name ASC")) {
 		    if ($this->result->RecordCount()) {
 		        return $this->result->GetArray();
 			} else {
@@ -212,7 +214,7 @@ class Prescription extends Core {
 	function getDrugList($class, $is_pediatric, $is_adult, $is_other, $is_consumable ) {
   	  global $db;
   	  
-	    $debug = false;
+	    $debug = FALSE;
 	    ($debug)?$db->debug=TRUE:$db->debug=FALSE;
 	    if ($is_pediatric || $is_adult || $is_other || $is_consumable ) {
   	    $this->sql="SELECT item_id as drug_id, item_description as description FROM $this->tb_drug_list WHERE
@@ -220,10 +222,11 @@ class Prescription extends Core {
   	                  	 is_pediatric = $is_pediatric AND
   	                  	 is_adult  = $is_adult AND
   	                  	 is_other  = $is_other AND
-  	                  	 is_consumable = $is_consumable";
+  	                  	 is_consumable = $is_consumable
+  	                  	 ORDER BY item_description";
   	  } else {
   	    $this->sql="SELECT item_id as drug_id, item_description as description FROM $this->tb_drug_list WHERE
-  	                  	 purchasing_class = '$class'";
+  	                  	 purchasing_class = '$class' ORDER BY item_description";
   	  }
   	  
 	    if ($this->result=$db->Execute($this->sql)) {
@@ -316,6 +319,25 @@ class Prescription extends Core {
 			}
 		}
   } // end of function GetNameOfDrug($item_number) 
+
+  function GetPriceOfItem($item_number) {
+    global $db;
+    $debug=FALSE;
+    ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
+    $this->sql="SELECT unit_price as price FROM $this->tb_drug_list WHERE item_id = '$item_number' ";
+    if ($this->result=$db->Execute($this->sql)) {
+		    if ($this->result->RecordCount()) {
+		        $this->item_array = $this->result->GetArray();
+		          while (list($x,$v)=each($this->item_array)) {
+                $db->debug=FALSE;
+		            return $v['price'];
+		          }
+			} else {
+			  $db->debug=FALSE;
+				return false;
+			}
+		}
+  } // end of function GetPriceOfItem($item_number) 
 
 }
 ?>

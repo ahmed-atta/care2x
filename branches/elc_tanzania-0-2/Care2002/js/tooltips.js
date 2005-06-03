@@ -1,6 +1,5 @@
 // integriert: Crossbrowser-Funktionen von "cross.js"
 
-
 /* bitte vergesst nicht, ein Link auf meine Site zu setzen */
 
 // Config:

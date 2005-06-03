@@ -81,6 +81,11 @@ class Core {
 	*/
 	var $normal_stat="'','normal'";
 	
+	/**
+	* Definition of table encounter
+	*/
+	var $tbl_encounter='care_encounter';
+	
 	function showPID($pid)
 	{
 		if(strlen($pid)<8)
@@ -355,6 +360,7 @@ class Core {
 		$v='';
 		$index='';
 		$values='';
+		$debug=FALSE;
 		if(!is_array($array)){ return FALSE;}
 		while(list($x,$v)=each($array)) {
 		    $index.="$x,";
@@ -365,7 +371,8 @@ class Core {
 		$index=substr_replace($index,'',(strlen($index))-1);
 		$values=substr_replace($values,'',(strlen($values))-1);
         $this->sql="INSERT INTO $this->coretable ($index) VALUES ($values)";		
-		//echo $this->sql;//exit;
+		if($debug) echo $this->sql;
+		if($debug) exit();
 		reset($array);
 		return $this->Transact();
 	}
@@ -671,6 +678,61 @@ class Core {
 				break;
 				default: return "REPLACE($fieldname,'$str1','$str2')";
 		}
+	}
+	
+	function _str_split($str) {
+	  $ret_arr = array();
+	  for ($i=0; $i<=strlen($str); $i++) 
+	    $ret_arr[$i] = substr($str,$i,1);
+	  return $ret_arr;
+	}
+	
+	function CheckNumber($string)
+	{
+		/*Checks for a correct currency string and converts it to the standardformat if possible.
+		* Return value is the converted string or false if there was an error.
+		*/
+		//if(!$string) return 0;
+		$forbidden_chars="abcdefghijklmnopqrstuvwxyz!\"§$%&/()=?ß\\- ";
+		
+		$forbidden_chars_array = $this->_str_split($forbidden_chars,1);
+		$string_array = $this->_str_split(strtolower(trim($string)));
+		
+		while(list($string_x,$string_v)=each($string_array))
+		{
+			while(list($x,$v)=each($forbidden_chars_array))
+			{
+				if($v==$string_v)
+				{
+					$error++;
+					break;
+				}
+			}		
+		}
+		if(!$error)
+		{
+			$string= str_replace(',','.',$string);
+			return number_format($string,2,',','');
+		}
+		return false;
+	}
+	
+	function GetBatchFromEncounterNumber($batch_nr) {
+	  /**
+	  * Returns the Encounter-number from a given batch-number
+	  **/
+	  global $db;
+	  $debug=FALSE;
+	  ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
+	  if (!empty($batch_nr)) {
+	    $this->sql = "SELECT encounter_nr FROM ".$this->tbl_encounter." WHERE pid=".$batch_nr;
+	    $this->db_res=$db->Execute($this->sql);
+	    $this->res=$this->db_res->FetchRow();
+	    if ($this->res) {
+	      return $this->res[0];
+	    }
+	  }
+	  return FALSE;
 	}
 }
 ?>

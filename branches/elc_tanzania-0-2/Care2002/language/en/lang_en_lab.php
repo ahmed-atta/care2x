@@ -122,8 +122,10 @@ $LDUpperCritical='Upper critical';
 $LDLowerCritical='Lower critical';
 $LDUpperToxic='Upper toxic';
 $LDLowerToxic='Lower toxic';
+$LDPrice='Price';
 $LDAdd_type='auxiliary field type ';
 $LDAdd_label='auxiliary label';
 $LDNewParam='New parameter';
 $LDis_enabled='Show/Hide Parameter';
+$LDTSH='TSH (Ex: 1234,56)';
 ?>
