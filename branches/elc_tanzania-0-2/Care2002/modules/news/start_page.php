@@ -91,6 +91,8 @@ for($j=1;$j<=$news_num_stop;$j++){
 
 	 ob_start();
 		include($root_path.'include/inc_news_preview.php');
+		$image = 'src="'.$root_path.'gui/img/common/default/selian.gif"';
+		$smarty->assign('sHeadlineImg',$image);
 		($j==2)? $smarty->display('news/headline_newslist_item2.tpl') : $smarty->display('news/headline_newslist_item.tpl');
 		$sTemp = ob_get_contents();
 	ob_end_clean();

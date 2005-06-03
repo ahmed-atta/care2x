@@ -13,7 +13,7 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-$lang_tables=array('chemlab_groups.php','chemlab_params.php');
+//$lang_tables=array('chemlab_groups.php','chemlab_params.php');
 define('LANG_FILE','lab.php');
 $local_user='ck_lab_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
@@ -33,7 +33,7 @@ if(!isset($parameterselect)||$parameterselect=='') $parameterselect='1';
 $parameters=$paralistarray[$parameterselect];					
 $paramname=$parametergruppe[$parameterselect];
 
-$pitems=array('msr_unit','median','lo_bound','hi_bound','lo_critical','hi_critical','lo_toxic','hi_toxic');
+$pitems=array('msr_unit','median','lo_bound','hi_bound','lo_critical','hi_critical','lo_toxic','hi_toxic', 'price');
 
 # Load the date formatter */
 include_once($root_path.'include/inc_date_format_functions.php');
@@ -91,7 +91,7 @@ function chkselect(d)
 function editParam(nr)
 {
 	urlholder="<?php echo $root_path ?>modules/laboratory/labor_test_param_edit.php?sid=<?php echo "$sid&lang=$lang&parameterselect=$parameterselect" ?>&nr="+nr;
-	editparam_<?php echo $sid ?>=window.open(urlholder,"editparam_<?php echo $sid ?>","width=500,height=400,menubar=no,resizable=yes,scrollbars=yes");
+	editparam_<?php echo $sid ?>=window.open(urlholder,"editparam_<?php echo $sid ?>","width=500,height=450,menubar=no,resizable=yes,scrollbars=yes");
 }
 // -->
 </script>
@@ -115,6 +115,7 @@ $smarty->assign('LDLowerCritical',$LDLowerCritical);
 $smarty->assign('LDUpperCritical',$LDUpperCritical);
 $smarty->assign('LDLowerToxic',$LDLowerToxic);
 $smarty->assign('LDUpperToxic',$LDUpperToxic);
+$smarty->assign('LDPrice',$LDPrice);
 
 $smarty->assign('sFormAction',$thisfile);
 $smarty->assign('LDSelectParamGroup',$LDSelectParamGroup);
@@ -167,7 +168,7 @@ if(is_object($tparams)){
  }
 	echo '
 	<tr class="'.$bgc.'">
-	<td colspan="9"><nobr>Insert new Parameter (click edit)</nobr></td>
+	<td colspan="10"><nobr>Insert new Parameter (click edit)</nobr></td>
 			<td>
 			<a href="javascript:editParam(0)"><img '.createLDImgSrc($root_path,'edit_sm.gif','0').'></a>
 			</td>';

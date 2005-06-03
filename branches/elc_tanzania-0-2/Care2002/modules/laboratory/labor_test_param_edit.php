@@ -43,15 +43,17 @@ if($mode=='save'){
 	$lab_obj->useTestParams();
 	# Point to the data array
 	$saveparam = $HTTP_POST_VARS;
-	
-	
-	if($saveparam['nr']!=0 && $saveparam['nr'])
+	$saveparam['price'] = $lab_obj->CheckNumber($saveparam['price']);
+	if($saveparam['price'])
 	{
-		$action = $lab_obj->UpdateParams($saveparam);
-	}
-	else
-	{
-		$action = $lab_obj->InsertParams();
+		if($saveparam['nr']!=0 && $saveparam['nr'])
+		{
+			$action = $lab_obj->UpdateParams($saveparam);
+		}
+		else
+		{
+			$action = $lab_obj->InsertParams();
+		}
 	}
 	echo $action;
 	if($action){
@@ -71,8 +73,8 @@ window.close();
 # end of if(mode==save)
 } 	
 
-$pnames=array($LDParameter,$LDMsrUnit,$LDMedian,$LDUpperBound,$LDLowerBound,$LDUpperCritical,$LDLowerCritical,$LDUpperToxic,$LDLowerToxic,$LDAdd_type,$LDAdd_label,$LDis_enabled);
-$pitems=array('name','msr_unit','median','hi_bound','lo_bound','hi_critical','lo_critical','hi_toxic','lo_toxic','add_type','add_label','is_enabled');
+$pnames=array($LDParameter,$LDMsrUnit,$LDMedian,$LDUpperBound,$LDLowerBound,$LDUpperCritical,$LDLowerCritical,$LDUpperToxic,$LDLowerToxic,$LDPrice,$LDAdd_type,$LDAdd_label,$LDis_enabled);
+$pitems=array('name','msr_unit','median','hi_bound','lo_bound','hi_critical','lo_critical','hi_toxic','lo_toxic','price','add_type','add_label','is_enabled');
 # Get the test parameter values
 if($tparam=&$lab_obj->getTestParam($nr)){
 	$tp=$tparam->FetchRow();
@@ -187,6 +189,10 @@ if($tp){
 				echo '>Show <input type="radio" name="is_enabled" value="0"';
 				if($ttest['is_enabled']!="1") echo ' checked ';
 				echo '>Hide';
+			}
+			elseif($pitems[$i]=="price")
+			{
+				echo'	<input type="text" name="'.$pitems[$i].'" size=30 maxlength=30 value="'.$tp[$pitems[$i]].'"> '.$LDTSH;
 			}
 			else
 			{
