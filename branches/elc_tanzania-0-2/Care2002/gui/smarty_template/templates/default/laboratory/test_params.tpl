@@ -23,6 +23,7 @@
 					<td>{{$LDUpperCritical}}</td>
 					<td>{{$LDLowerToxic}}</td>
 					<td>{{$LDUpperToxic}}</td>
+					<td>{{$LDPrice}}</td>
 					<td>&nbsp;</td>
 				</tr>
 				

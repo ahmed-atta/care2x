@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.0, created on 2004-07-06 23:17:51
+<?php /* Smarty version 2.6.0, created on 2005-05-16 13:00:42
          compiled from laboratory/test_params.tpl */ ?>
 
 <ul>
@@ -33,6 +33,8 @@
 					<td><?php echo $this->_tpl_vars['LDLowerToxic']; ?>
 </td>
 					<td><?php echo $this->_tpl_vars['LDUpperToxic']; ?>
+</td>
+					<td><?php echo $this->_tpl_vars['LDPrice']; ?>
 </td>
 					<td>&nbsp;</td>
 				</tr>

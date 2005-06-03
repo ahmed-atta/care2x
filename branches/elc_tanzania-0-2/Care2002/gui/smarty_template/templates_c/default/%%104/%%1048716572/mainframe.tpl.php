@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.0, created on 2004-11-23 10:41:45
+<?php /* Smarty version 2.6.0, created on 2005-04-14 11:33:02
          compiled from common/mainframe.tpl */ ?>
 <?php require_once(SMARTY_DIR . 'core' . DIRECTORY_SEPARATOR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'config_load', 'common/mainframe.tpl', 4, false),)), $this); ?>
