@@ -16,13 +16,8 @@ $enc_obj=new Encounter;
 $bill_obj = new Bill;
 
 $debug = FALSE;
-
-if ($debug) {
-  echo $batch_nr."<br>";
-  echo $bill_number."<br>";
-  echo "printout=$printout<br>";
-}
-
-require ("gui/gui_show_bill.php");
+($debug) ? $db->debug=TRUE : $db->debug=FALSE;
+  		
+  require ("gui/gui_billing_tz_archive.php");
 
 ?>

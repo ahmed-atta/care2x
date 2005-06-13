@@ -5,7 +5,7 @@
 <HEAD>
  <TITLE> - </TITLE>
  <meta name="Description" content="Hospital and Healthcare Integrated Information System - CARE2x">
-<meta name="Author" content="Elpidio Latorilla">
+<meta name="Author" content="Robert Meggle">
 <meta name="Generator" content="various: Quanta, AceHTML 4 Freeware, NuSphere, PHP Coder">
  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 
@@ -61,7 +61,7 @@ function closewin()
 			 <table cellspacing="0"  class="titlebar" border=0>
  <tr valign=top  class="titlebar" >
   <td bgcolor="#99ccff" >
-    &nbsp;&nbsp;<font color="#330066">Pharmacy</font>
+    &nbsp;&nbsp;<font color="#330066">Billing</font>
 
        </td>
   <td bgcolor="#99ccff" align=right><a
@@ -93,7 +93,7 @@ function closewin()
                       </TR>
                       <TR> 
                         <td height="26" align=center><img src="../../gui/img/common/default/bestell.gif" border=0 width="16" height="16"></td>
-                        <TD class="submenu_item"><nobr><a href="#">Billing archive</a></nobr></TD>
+                        <TD class="submenu_item"><nobr><a href="billing_tz_archive.php">Billing archive</a></nobr></TD>
                         <TD>Shows an archive containing all bills (comming soon)</TD>
                       </tr>
                       <TR  height=1> 

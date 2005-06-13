@@ -717,7 +717,27 @@ class Core {
 		return false;
 	}
 	
-	function GetBatchFromEncounterNumber($batch_nr) {
+	function GetBatchFromEncounterNumber($encounter_nr) {
+	  /**
+	  * Returns the pid (batch-)number from a given encounter number
+	  **/
+	  global $db;
+	  $debug=FALSE;
+	  ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
+	  
+	  if (!empty($encounter_nr)) {
+	    $this->sql = "SELECT pid FROM ".$this->tbl_encounter." WHERE encounter_nr=".$encounter_nr;
+	    $this->db_res=$db->Execute($this->sql);
+	    $this->res=$this->db_res->FetchRow();
+	    if ($this->res) {
+	      return $this->res[0];
+	    }
+	  }
+	  return FALSE;
+	}
+	
+	
+	function GetEncounterFromBatchNumber($batch_nr) {
 	  /**
 	  * Returns the Encounter-number from a given batch-number
 	  **/

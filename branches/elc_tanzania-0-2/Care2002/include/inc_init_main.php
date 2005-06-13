@@ -3,10 +3,10 @@
 $dbname='caredb';
 
 # Database user name, default is root or httpd for mysql, or postgres for postgresql
-$dbusername='root';
+$dbusername='niemi';
 
 # Database user password, default is empty char
-$dbpassword='';
+$dbpassword='datooga';
 
 # Database host name, default = localhost
 $dbhost='localhost';

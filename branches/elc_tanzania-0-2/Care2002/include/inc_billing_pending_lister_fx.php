@@ -79,11 +79,10 @@ $send_date="";
 		              bi.first_date,
 		              care_person.pid as batch_nr
 		      FROM care_encounter, care_person, care_tz_billing bi, care_tz_billing_elem biel 
-		      WHERE   (biel.is_paid=0) 
-		            AND  care_encounter.pid = care_person.pid 
+		      WHERE care_encounter.pid = care_person.pid 
 		            AND bi.encounter_nr = care_encounter.encounter_nr
 		            AND biel.nr = bi.nr
-		            AND biel.is_paid = 0
+		            
 		      group by batch_nr
 		      ORDER BY batch_nr ASC";						         
 /*

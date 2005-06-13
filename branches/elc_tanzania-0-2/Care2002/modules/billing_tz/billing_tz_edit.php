@@ -14,13 +14,41 @@ require_once($root_path.'include/care_api_classes/class_encounter.php');
 require_once($root_path.'include/care_api_classes/class_tz_billing.php');
 $enc_obj=new Encounter;
 $bill_obj = new Bill;
-$debug = false;
+$debug = FALSE;
 
 if ($debug) {
   echo $pn."<br>";
   echo $prescription_date."<br>";
   
 }
+
+if ($mode=="edit_elem") {
+  //Maybe specific definitions...who knows...
+}
+
+if ($mode=="modfication") {
+  if ($debug) {
+    echo "modfication";
+    echo "description:$description<br>";
+    echo "price$price<br>";
+    echo "amount:$amount<br>";
+    echo "payment_status:$payment_status<br>";
+    echo "bill_elem_number: $bill_elem_number<br>";
+    echo "batch_nr:$batch_nr<br>";
+    echo "specific_mode:$specific_mode<br>";
+  }
+  if ($payment_status=="paid")
+    $is_paid=1;
+  else
+    $is_paid=0;
+  
+  if ($specific_mode=="update")
+    $bill_obj->update_bill_element($bill_elem_number, $is_paid, $amount, $price, $description);
+  if ($specific_mode=="delete")
+    $bill_obj->delete_bill_element($bill_elem_number);  
+}
+
+
 require ("gui/gui_billing_tz_edit.php");
 
 ?>

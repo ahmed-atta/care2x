@@ -5,11 +5,11 @@
 <HEAD>
  <TITLE>Pending Test Request (<?php echo $enc_obj->ShowPID($batch_nr); ?>) - </TITLE>
  <meta name="Description" content="Hospital and Healthcare Integrated Information System - CARE2x">
- <meta name="Author" content="Elpidio Latorilla">
+ <meta name="Author" content="Robert Meggle">
  <meta name="Generator" content="various: Quanta, AceHTML 4 Freeware, NuSphere, PHP Coder">
  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 
-  	<script language="javascript" >
+<script language="javascript" >
 <!-- 
 function gethelp(x,s,x1,x2,x3,x4)
 {
@@ -18,14 +18,9 @@ function gethelp(x,s,x1,x2,x3,x4)
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
-
-function printOut()
-{
-	urlholder="<?php echo $root_path;?>modules/billing_tz/show_bill.php?externalcall=TRUE&printout=TRUE&pn=2005500002&sid=a766fb71265eb3f17f755010606c4ace";
-	testprintout=window.open(urlholder,"printout","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
-  
-}
 // -->
+</script> 
+
 
 </script> 
 <link rel="stylesheet" href="../../css/themes/default/default.css" type="text/css">
@@ -103,7 +98,8 @@ A:visited:hover {color: #cc0033;}
                   	//Content-Frame. Here we go!
                   	
                   	$bill_obj->DisplayBills($pid,0,0);
-                  	
+                  	if ($DISPLAY_MSG)
+                  	  echo $DISPLAY_MSG;
                   }
                ?>
         </td>

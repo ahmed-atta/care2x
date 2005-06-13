@@ -5,7 +5,7 @@
 <HEAD>
  <TITLE>Pending Test Request (<?php echo $enc_obj->ShowPID($batch_nr); ?>) - </TITLE>
  <meta name="Description" content="Hospital and Healthcare Integrated Information System - CARE2x">
- <meta name="Author" content="Elpidio Latorilla">
+ <meta name="Author" content="Robert Meggle">
  <meta name="Generator" content="various: Quanta, AceHTML 4 Freeware, NuSphere, PHP Coder">
  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 
@@ -90,19 +90,12 @@ A:visited:hover {color: #cc0033;}
 		    
 		    
 		          <?php
-                 
-                  if ($NO_PENDING_PRESCRIPTIONS) {
-                    echo '<br><br><br><br>&nbsp;&nbsp;&nbsp;&nbsp;no pending prescriptions...<br>';
-                  } else {
-                                    	
-                  	//Content-Frame. Here we go!
+                if ($mode=="edit_elem") {
+                  $bill_obj->EditBillElement($billing_item);
+                } else {
+                	$bill_obj->DisplayBills($batch_nr,$billnr,1);
+                }
                   	
-                  	
-                  	$bill_obj->DisplayBills($batch_nr,$billnr,1);
-                  	
-                  	//EO Content-Frame
-                  	
-                  }
                ?>
         </td>
 	</tr>
