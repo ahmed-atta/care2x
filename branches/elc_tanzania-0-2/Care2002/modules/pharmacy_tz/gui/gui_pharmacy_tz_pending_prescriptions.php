@@ -65,7 +65,7 @@ A:visited:hover {color: #cc0033;}
               Prescriptions (<?php echo $enc_obj->ShowPID($batch_nr); ?>)</font> </td>
   <td bgcolor="#99ccff" align=right><a
    href="javascript:gethelp('pending_prescriptions_pharmacy.php')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a><a
-   href="../../modules/pharmacy_tz/pharmacy_tz.php?ntid=false&lang=$lang" ><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>  </td>
+   href="<?php echo $RETURN_PATH;?>" ><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>  </td>
  </tr>
 
  </table>		</td>

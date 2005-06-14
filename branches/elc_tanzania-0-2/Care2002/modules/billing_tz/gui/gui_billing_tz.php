@@ -84,17 +84,29 @@ function closewin()
 					<TABLE cellSpacing=1 cellPadding=3 width=600>
                     <TBODY class="submenu">
                       <TR> 
-                        <td align=center><img src="../../gui/img/common/default/prescription.gif" border=0 width="27" height="17"></td>
+                        <td align=center><img src="../../gui/img/common/default/comments.gif" border=0 width="27" height="17"></td>
                         <TD class="submenu_item"><nobr><a href="billing_tz_pending.php">Pending bills</a></nobr></TD>
                         <TD>Shows all pending a new bills</TD>
                       </tr>
-                      <TR  height=1> 
-                        <TD colSpan=3 class="vspace"><IMG height=1 src="../../gui/img/common/default/pixel.gif" width=5></TD>
-                      </TR>
                       <TR> 
                         <td height="26" align=center><img src="../../gui/img/common/default/bestell.gif" border=0 width="16" height="16"></td>
                         <TD class="submenu_item"><nobr><a href="billing_tz_archive.php">Billing archive</a></nobr></TD>
-                        <TD>Shows an archive containing all bills (comming soon)</TD>
+                        <TD>Shows an archive containing all bills</TD>
+                      </tr>
+
+                      <TR  height=1> 
+                        <TD colSpan=3 class="vspace"><IMG height=1 src="../../gui/img/common/default/pixel.gif" width=5></TD>
+                      </TR>
+
+                      <TR> 
+                        <td height="26" align=center><img src="../../gui/img/common/default/prescription.gif" border=0 width="16" height="16"></td>
+                        <TD class="submenu_item"><nobr><a href="<?php echo $root_path;?>/modules/pharmacy_tz/pharmacy_tz_pending_prescriptions.php?back_path=billing">Drug prescription</a></nobr></TD>
+                        <TD>Show prescriptions of patients</TD>
+                      </tr>
+                      <TR> 
+                        <td height="26" align=center><img src="../../gui/img/common/default/manfldr.gif" border=0 width="16" height="16"></td>
+                        <TD class="submenu_item"><nobr><a href="<?php echo $root_path;?>/modules/laboratory/labor_test_request_admin_chemlabor.php?sid=<?php echo session_id()?>&lang=en&target=admin&subtarget=chemlabor&noresize=1&&user_origin=lab&checkintern=1&user_origin=billing">Pending Request</a></nobr></TD>
+                        <TD>Receive & process requests, write results/findings/diagnoses</TD>
                       </tr>
                       <TR  height=1> 
                         <TD colSpan=3 class="vspace"><IMG height=1 src="../../gui/img/common/default/pixel.gif" width=5></TD>

@@ -1764,7 +1764,7 @@ function delete_bill_element($bill_elem_number) {
 	
 	function ArchiveBill($bill_number) {
 	  global $db;
-	  $debug=TRUE;
+	  $debug=FALSE;
 	  if ($debug) echo "<b>class_tz_billing::ArchiveBill($bill_number)</b><br>";
 	  ($debug) ? $db->debug=TRUE : $db->debug=FALSE;	  
     
@@ -1797,7 +1797,7 @@ function delete_bill_element($bill_elem_number) {
 	
 	function DeleteBillFromPendingList($bill_number) {
 	  global $db;
-	  $debug=TRUE;
+	  $debug=FALSE;
 	  if ($debug) echo "<b>class_tz_billing::DeleteBillFromPendingList($bill_number)</b><br>";
 	  ($debug) ? $db->debug=TRUE : $db->debug=FALSE;	  
     $this->sql = "DELETE FROM care_tz_billing WHERE `nr`=".$bill_number;

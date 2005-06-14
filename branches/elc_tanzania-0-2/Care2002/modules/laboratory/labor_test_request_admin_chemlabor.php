@@ -29,10 +29,14 @@ if($user_origin=='lab'){
 }elseif($user_origin=='amb'){
 	$local_user='ck_lab_user';
 	$breakfile=$root_path.'modules/ambulatory/ambulatory.php'.URL_APPEND;
+}elseif($user_origin=='billing'){
+	$local_user='ck_lab_user';
+	$breakfile=$root_path."modules/billing_tz/billing_tz.php";
 }else{
 	$local_user='ck_pflege_user';
 	$breakfile=$root_path."modules/nursing/nursing-station-patientdaten.php".URL_APPEND."&edit=$edit&station=$station&pn=$pn";
 }
+
 require_once($root_path.'include/inc_front_chain_lang.php'); ///* invoke the script lock*/
 
 $thisfile='labor_test_request_admin_chemlabor.php';
