@@ -8,7 +8,7 @@
 							<tr>
 								<td>&nbsp;</td>
 								<td>
-									{{$sPromptIcon}} &nbsp; {{$sPromptLink}}
+									{{$sPromptIcon}} &nbsp; {{$sPromptLink}} &nbsp;&nbsp;&nbsp;&nbsp;{{$sPromptIcon}} &nbsp; {{$sPromptLinkEdit}} 
 								</td>
 							</tr>
 						</table>

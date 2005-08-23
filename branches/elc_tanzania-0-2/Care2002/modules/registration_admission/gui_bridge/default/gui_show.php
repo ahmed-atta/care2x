@@ -199,7 +199,7 @@ $smarty->assign('sOptionsMenu',$sTemp);
 
 # If mode = show then display data
 
-if($mode=='show' /*&& !isset($externalcall) */){
+if($mode=='show' ){
 
 	if($parent_admit) $bgimg='tableHeaderbg3.gif';
 		else $bgimg='tableHeader_gr.gif';
@@ -208,11 +208,10 @@ if($mode=='show' /*&& !isset($externalcall) */){
 
 	if($rows){
 		# Buffer the option block
-		ob_start();
+		ob_start(); 
+		  if ($debug) echo './gui_bridge/default/gui_'.$thisfile."<br>";
 			include('./gui_bridge/default/gui_'.$thisfile);
 			$sTemp = ob_get_contents();
-
-      
       $smarty->assign('bShowNoRecord',TRUE);
       if (!isset($printout)) 
         $smarty->assign('sPromptIcon','<img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle',TRUE).'>');
@@ -220,15 +219,16 @@ if($mode=='show' /*&& !isset($externalcall) */){
       if (isset($externalcall)) {     
         if (!isset($printout)) {
           $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new&externalcall='.$externalcall.'">'.$LDEnterNewRecord.'</a>');
+          $smarty->assign('sPromptLinkEdit','<a href="'.$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=edit&externalcall='.$externalcall.'">'.$LDEditRecord.'</a>');
         }
-      } else
+      } else {
         $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new">'.$LDEnterNewRecord.'</a>');
-      
+        $smarty->assign('sPromptLinkEdit','<a href="'.$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=edit">'.$LDEditRecord.'</a>');
+      }
 			
 		ob_end_clean();
 	  $smarty->assign('sOptionBlock',$sTemp);
-
-	}else{
+	}else{ // no prescriptions for this patient 
       if (isset($externalcall))
         if (!isset($printout))      
           $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new&externalcall='.$externalcall.'">'.$LDEnterNewRecord.'</a>');
@@ -247,26 +247,40 @@ if($mode=='show' /*&& !isset($externalcall) */){
       else
         $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new">'.$LDEnterNewRecord.'</a>');
  		}else{
-			if(file_exists('./gui_bridge/default/gui_person_createnew_'.$thisfile)) include('./gui_bridge/default/gui_person_createnew_'.$thisfile);
+			if(file_exists('./gui_bridge/default/gui_person_createnew_'.$thisfile)) {
+			  if ($debug) echo './gui_bridge/default/gui_person_createnew_'.$thisfile."<br>";
+			  include('./gui_bridge/default/gui_person_createnew_'.$thisfile);
+			}
 		}
 	}
-}else {
+
+}else { // do not show the prescriptions, either to set a new one or to edit one...
 	# Buffer the option input block
+
 	ob_start();
 
-
-	   
-	   // witch tab sould be activated at first:
-	   //set here "druglist", "Supplies", "supplies-lab", "special-others" if you want.
-	   $activated_tab = "druglist"; 
-	   // (by Merotech(RM): Here the main prescription-table-content will be loaded: 
-	  
-	  if ($debug) echo  './gui_bridge/default/gui_input_'.$thisfile;
-	  include('./gui_bridge/default/gui_input_'.$thisfile);
-
+      if ($mode=='edit') {
+        /**
+        * If there is an edit-mode, jump out of this file and load the edit page
+        */
+        
+        if ($debug) echo $HTTP_SESSION_VARS['sess_full_pid'];
+        include('./gui_bridge/default/gui_input_edit_prescription.php');
+        
+      } else { // We have to prescript a new item
+      
+    	   // witch tab sould be activated at first:
+    	   //set here "druglist", "Supplies", "supplies-lab", "special-others" if you want.
+    	   $activated_tab = "druglist"; 
+    	   // (by Merotech(RM): Here the main prescription-table-content will be loaded: 
+    	  
+    	  if ($debug) echo  './gui_bridge/default/gui_input_'.$thisfile;
+    	  include('./gui_bridge/default/gui_input_'.$thisfile);
+    
+     }
 		$sTemp = ob_get_contents();
-	ob_end_clean();
-	$smarty->assign('sOptionBlock',$sTemp);
+  	ob_end_clean();
+  	$smarty->assign('sOptionBlock',$sTemp);     
 }
 
 # Buffer the bottom controls

@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.0, created on 2005-04-14 11:33:26
+<?php /* Smarty version 2.6.0, created on 2005-08-04 14:37:13
          compiled from registration_admission/common_option.tpl */ ?>
 
 <table width="100%" cellspacing="0" cellpadding="0">
@@ -31,7 +31,7 @@ $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>
 						<?php endif; ?>
-
+            
 						<?php echo $this->_tpl_vars['sOptionBlock']; ?>
 
 					

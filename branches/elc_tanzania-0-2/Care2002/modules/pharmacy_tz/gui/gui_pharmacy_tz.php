@@ -107,8 +107,10 @@ function closewin()
                       <TR  height=1> 
                         <TD colSpan=3 class="vspace"><IMG height=1 src="../../gui/img/common/default/pixel.gif" width=5></TD>
                       </TR>
-                      <TR> 
+                      
                       <!--
+                      <TR> 
+                      
                         <td align=center><img src="../../gui/img/common/default/documents.gif" border=0 width="16" height="17"></td>
                         <TD class="submenu_item"><nobr><a href="apotheke-pass.php?ntid=false&lang=$lang&mode=archive">Archive</a></nobr></TD>
                         <TD>View, edit, archive processed orders</TD>

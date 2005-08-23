@@ -69,7 +69,7 @@ A:visited:hover {color: #cc0033;}
 	      <table border=0 cellspacing=1 cellpadding=3>
             <tbody class="submenu">
               <tr> 
-                <td align=right width=103> Peadric</td>
+                <td align=right width=103> Pediatric</td>
                 <td align=right width=27 class="prompt">
                 <input type="checkbox" name="is_peadric" <?php if (!empty($is_peadric)) echo "checked";?> <?php echo $html_disabler;?>></td>
                 <td align=right width=206 >
@@ -124,10 +124,10 @@ A:visited:hover {color: #cc0033;}
                           echo $item_classification; 
                       } else { ?>
                 <select name="item_classification">
-                    <option value="mems_drug_list" <?PHP if ($item_classification=="mems_drug_list") echo "selected";?>>drug</option>
-                    <option value="mems_supplies" <?PHP if ($item_classification=="mems_supplies") echo "selected";?>>supplies</option>
-                    <option value="mems_supplies_laboratory" <?PHP if ($item_classification=="mems_supplies_laboratory") echo "selected";?>>supplies Laboratory</option>
-                    <option value="mems_special_others_list" <?PHP if ($item_classification=="mems_special_others_list") echo "selected";?>>special others</option>
+                    <option value="mems_drug_list" <?PHP if ($item_classification=="drug") echo "selected";?>>drug</option>
+                    <option value="mems_supplies" <?PHP if ($item_classification=="supplies") echo "selected";?>>supplies</option>
+                    <option value="mems_supplies_laboratory" <?PHP if ($item_classification=="supplies lab.") echo "selected";?>>supplies Laboratory</option>
+                    <option value="mems_special_others_list" <?PHP if ($item_classification=="special others") echo "selected";?>>special others</option>
                 </select>
                 <?php } ?>
                 </td>

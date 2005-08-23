@@ -811,16 +811,16 @@ class Bill extends Encounter {
   					<td rowspan="7">&nbsp;<td>
   				</tr>
   				<tr>
+  					<td class="adm_item">Encounter/Reg.Nr.:</td>
+  					<td bgcolor="#ffffee" class="vi_data"><b>'.$enc_number.'</b></td>
+  				</tr>
+  				<tr>
   					<td class="adm_item">Surname/Ukoo:</td>
   					<td bgcolor="#ffffee" class="vi_data"><b>'.$enc_obj->LastName($enc_number).'</b></td>
   				</tr>
   				<tr>
   					<td class="adm_item">First name:</td>
   					<td bgcolor="#ffffee" class="vi_data">'.$enc_obj->FirstName($enc_number).'</td>
-  				</tr>
-  				<tr>
-  					<td class="adm_item">Trade:</td>
-  					<td bgcolor="#ffffee" class="vi_data">'.$enc_obj->Trade($enc_number).'</td>
   				</tr>
   				<tr>
   					<td class="adm_item">Date of birth:</td>

@@ -132,6 +132,11 @@
 							<TD class="submenu_item" width=35% ><nobr>{{$LDTestParameters}}</nobr></TD>
 							<TD>{{$LDTestParametersTxt}}</TD>
 						</tr>
+						{{include file="common/submenu_row_spacer.tpl"}}
+						<TR>
+							<TD class="submenu_item" width=35% ><nobr>{{$LDPrescriptionLink}}</nobr></TD>
+							<TD>{{$LDPrescriptionLinkTxt}}</TD>
+						</tr>
 
 					</TBODY>
 					</TABLE>

@@ -27,7 +27,7 @@ require($root_path.'include/care_api_classes/class_tz_pharmacy.php');
 define('NO_2LEVEL_CHK',1);
 require($root_path.'include/inc_front_chain_lang.php');
 
-$debug=FALSE;
+$debug=false;
 
 if ($debug) {
   echo "debugging mode is ON<br>";
@@ -39,7 +39,7 @@ if ($debug) {
 
   print_debug_info ("mode",$mode);
   
-  print_debug_info("Peadric check box", $is_peadric);
+  print_debug_info("Pediatric check box", $is_peadric);
   print_debug_info("Adult check box", $is_adult);
   print_debug_info("Other check box", $is_other);
   print_debug_info("Consumable check box", $is_consumable);
@@ -93,7 +93,7 @@ if (!empty($mode)) {
   }
   
   // if show or edit then preload the missing informations for editing
-  if ($mode=="show" || $mode=="edit" || $mode=="erase") {
+  if ($mode=="show" || $mode=="edit" || $mode=="erase" || $mode=="update") {
     if (!empty($item_number)) {
       $is_peadric                 = $product_obj->get_item_peadric($item_number);
       $is_adult                   = $product_obj->get_item_adult($item_number);  
@@ -137,6 +137,11 @@ else
 if ( !empty($mode) && !$ERROR ) {
    
   //------------------------------------------------------------------------------  
+
+  (empty($is_peadric))    ? $is_peadric = "0"    : $is_peadric = "1";
+  (empty($is_adult))      ? $is_adult = "0"      : $is_adult = "1";
+  (empty($is_other))      ? $is_other = "0"      : $is_other = "1";
+  (empty($is_consumable)) ? $is_consumable = "0" : $is_consumable = "1";
 
   $db_buffer = array();
   $db_buffer['is_pediatric']            = $is_peadric;

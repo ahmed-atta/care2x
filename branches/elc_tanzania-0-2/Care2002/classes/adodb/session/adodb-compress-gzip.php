@@ -1,6 +1,6 @@
 <?php
 
-// $CVSHeader$
+// $CVSHeader: care2002_tz_mero/classes/adodb/session/adodb-compress-gzip.php,v 1.1 2004/05/20 12:21:37 robert Exp $
 
 /*
 V4.01 23 Oct 2003  (c) 2000-2004 John Lim (jlim@natsoft.com.my). All rights reserved.

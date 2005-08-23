@@ -22,7 +22,7 @@ define('NO_2LEVEL_CHK',1);
 $thisfile=basename(__FILE__);
 if(!isset($mode)){
 	$mode='show';
-} elseif($mode=='create'||$mode=='update') {
+} elseif($mode=='create'||$mode=='update') { 
 	include_once($root_path.'include/care_api_classes/class_prescription.php');
 	if(!isset($obj)) $obj=new Prescription;
 	include_once($root_path.'include/inc_date_format_functions.php');
@@ -87,6 +87,6 @@ $norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer);
 
 
 
-/* Load GUI page */
+/* Load GUI page */ 
 require('./gui_bridge/default/gui_show.php');
 ?>
