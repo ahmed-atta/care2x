@@ -125,7 +125,9 @@ if(isset($HTTP_POST_VARS['mode'])&&($HTTP_POST_VARS['mode']=='save')){
 					$DBName_OK=TRUE;
 				}else{
 					$DBName_OK=FALSE;
-					if(mysql_create_db($HTTP_POST_VARS['dbname'],$link)){
+					echo 'Creating the database '.$HTTP_POST_VARS['dbname'].'...<br>';
+					$sql="CREATE DATABASE `".$HTTP_POST_VARS['dbname']."`";
+					if(mysql_query($sql,$link)){
 						echo 'Selecting the database '.$HTTP_POST_VARS['dbname'].'...<br>';
 						if(mysql_select_db($HTTP_POST_VARS['dbname'],$link)) {
 							$DBName_OK=TRUE;
@@ -196,19 +198,19 @@ if(isset($HTTP_POST_VARS['mode'])&&($HTTP_POST_VARS['mode']=='save')){
 				}
 				# Start SQL  loading of data
 				if($HTTP_POST_VARS['icd10_en']){
-					echo 'Loading ICD10 english codes...<br>';
+					echo 'Loading ICD10 English codes...<br>';
 					@runSqlQuery('./sql/icd10_en/insert-data-a2l.sql');
 					@runSqlQuery('./sql/icd10_en/insert-data-m2y.sql');
 				}
 				if($HTTP_POST_VARS['icd10_de']){
-					echo 'Loading ICD10 german codes...<br>';
+					echo 'Loading ICD10 German codes...<br>';
 					@runSqlQuery('./sql/icd10_de/a2g-insert.sql');
 					@runSqlQuery('./sql/icd10_de/h2n-insert.sql');
 					@runSqlQuery('./sql/icd10_de/o2s-insert.sql');
 					@runSqlQuery('./sql/icd10_de/t2z-insert.sql');
 				}
 				if($HTTP_POST_VARS['icd10_br']){
-					echo 'Loading ICD10 brazilian codes...<br>';
+					echo 'Loading ICD10 Brazilian codes...<br>';
 					@runSqlQuery('./sql/icd10_br/insert-data-a2l.sql');
 					@runSqlQuery('./sql/icd10_br/insert-data-m2z.sql');
 				}
@@ -217,14 +219,19 @@ if(isset($HTTP_POST_VARS['mode'])&&($HTTP_POST_VARS['mode']=='save')){
 					@runSqlQuery('./sql/icd10_es/insert-data-a2o.sql');
 					@runSqlQuery('./sql/icd10_es/insert-data-p2z.sql');
 				}
+				if($HTTP_POST_VARS['icd10_bg']){
+					echo 'Loading ICD10 Bulgarian codes...<br>';
+					@runSqlQuery('./sql/icd10_bg/insert-data-a2m.sql');
+					@runSqlQuery('./sql/icd10_bg/insert-data-n2z.sql');
+				}
 				if($HTTP_POST_VARS['ops_de']){
-					echo 'Loading OPS301 german codes...<br>';
+					echo 'Loading OPS301 German codes...<br>';
 					@runSqlQuery('./sql/ops301_de/insert-data-1-5-499.sql');
 					@runSqlQuery('./sql/ops301_de/insert-data-55-57.sql');
 					@runSqlQuery('./sql/ops301_de/insert-data-58-94.sql');
 				}
 				if($HTTP_POST_VARS['ops_es']){
-					echo 'Loading OPS301 spanish codes...<br>';
+					echo 'Loading OPS301 Spanish codes...<br>';
 					@runSqlQuery('./sql/ops301_es/insert-data-1.sql');
 				}
 			}else{
@@ -530,9 +537,10 @@ Note: If Care2x is stored in a subdirectory e.g http://www.care2x.net/hospital/ 
 	<input type="checkbox" name="icd10_en" value="1" <?php if($HTTP_POST_VARS['icd10_en']=='1') echo 'checked';  ?>> ICD10 (English language)<br>
 	<input type="checkbox" name="icd10_de" value="1" <?php if($HTTP_POST_VARS['icd10_de']=='1') echo 'checked';  ?>> ICD10 (German language)<br>
 	<input type="checkbox" name="icd10_br" value="1" <?php if($HTTP_POST_VARS['icd10_br']=='1') echo 'checked';  ?>> ICD10 (Brazilian language)<br>
-	<input type="checkbox" name="icd10_es" value="1" <?php if($HTTP_POST_VARS['icd10_br']=='1') echo 'checked';  ?>> ICD10 (Spanish language)<br>
+	<input type="checkbox" name="icd10_es" value="1" <?php if($HTTP_POST_VARS['icd10_es']=='1') echo 'checked';  ?>> ICD10 (Spanish language)<br>
+	<input type="checkbox" name="icd10_bg" value="1" <?php if($HTTP_POST_VARS['icd10_bg']=='1') echo 'checked';  ?>> ICD10 (Bulgarian language)<br>
 	<input type="checkbox" name="ops_de" value="1" <?php if($HTTP_POST_VARS['ops_de']=='1') echo 'checked';  ?>> OPS301 (German language)<br>
-	<input type="checkbox" name="ops_es" value="1" <?php if($HTTP_POST_VARS['ops_de']=='1') echo 'checked';  ?>> OPS301 (Spanish language)<br></font>
+	<input type="checkbox" name="ops_es" value="1" <?php if($HTTP_POST_VARS['ops_es']=='1') echo 'checked';  ?>> OPS301 (Spanish language)<br></font>
 	<p>
 <input type="submit" value="Install Care2x">
 <input type="hidden" name="mode" value="save">
