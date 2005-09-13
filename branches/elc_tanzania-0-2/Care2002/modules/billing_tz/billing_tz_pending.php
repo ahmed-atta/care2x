@@ -15,7 +15,7 @@ require_once($root_path.'include/care_api_classes/class_tz_billing.php');
 $enc_obj=new Encounter;
 $bill_obj = new Bill;
 
-$debug = FALSE;
+$debug = TRUE;
 ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
 
 if ($debug) {
@@ -57,60 +57,60 @@ if ($mode=="done" && !empty($bill_number)) {
   // Now we have all encounters, but we are not sure that this person ($pid) made
   // some tasks with interesting points for us as billing module.
    
-  	while(list($index,$encounter_nr)=each($array_encounters)) {
-  
-      
-      if ($debug) echo "---------------------------------------------------------------------------------<br>";
-      if ($debug) echo "<b>Encounter Number: $encounter_nr</b><br>";
-      
-      //----------------------------------------------------------------------------------------------  						
-  
-      /**
-      * Going through the tables and looking for pending items that should be stored into
-      * the billing tables
-      */
+	while(list($index,$encounter_nr)=each($array_encounters)) {
 
-      if ($bill_obj->PendingBillObjects($encounter_nr)) {
-        
-        if ($debug) echo "There are might pending bills for encounter nr. ".$encounter_nr."<br>";
-        
-        // There are pending objects => There are entries in the module-tables
-        // that are not listened in the billing list
-        
+    
+    if ($debug) echo "---------------------------------------------------------------------------------<br>";
+    if ($debug) echo "<b>Encounter Number: $encounter_nr</b><br>";
+    
+    //----------------------------------------------------------------------------------------------  						
 
+    /**
+    * Going through the tables and looking for pending items that should be stored into
+    * the billing tables
+    */
+
+    if ($bill_obj->PendingBillObjects($encounter_nr)) {
+      
+      if ($debug) echo "There are might pending bills for encounter nr. ".$encounter_nr."<br>";
+      
+      // There are pending objects => There are entries in the module-tables
+      // that are not listened in the billing list
+      
+
+      
+      // Do we have a bill for this encounter, that we can append it?
+      
+      if ($bill_obj->CheckForPendingBill($encounter_nr)) {
+      
+        // There is a pending bill for this encounter and we can append all items to it
+        if ($debug) echo "there is a pending bill there, if we have to add, we can append to it<br>";
+
+        $bill_number = $bill_obj->GetBill($encounter_nr);
+
+        if ($debug) echo "our bill number is:".$bill_number."<br>";
         
-        // Do we have a bill for this encounter, that we can append it?
-        
-        if ($bill_obj->CheckForPendingBill($encounter_nr)) {
-        
-          // There is a pending bill for this encounter and we can append all items to it
-          if ($debug) echo "there is a pending bill there, if we have to add, we can append to it<br>";
-  
-          $bill_number = $bill_obj->GetBill($encounter_nr);
-  
-          if ($debug) echo "our bill number is:".$bill_number."<br>";
-          
-        } else {
-        
-          // There is no pending bill availabe for this encounter, we have to create it
-          if ($debug) echo "no pending bill for this encounter->we create one<br>";
-  
-          $bill_number = $bill_obj->CreateNewBill($encounter_nr);
-        }
-        
-        // Store to the pending bill table whatever we've found:
-        $bill_obj->StoreToBill($encounter_nr, $bill_number); 
-        
-      }        
-  		
-  		/* Okay everything is looking fine. All bills have been created and updated now lets
-  		   find out which ones have to be paid
-  		*/
-  		
-      //----------------------------------------------------------------------------------------------
-  
-  		
-  	}	
+      } else {
+      
+        // There is no pending bill availabe for this encounter, we have to create it
+        if ($debug) echo "no pending bill for this encounter->we create one<br>";
+
+        $bill_number = $bill_obj->CreateNewBill($encounter_nr);
+      }
+      
+      // Store to the pending bill table whatever we've found:
+      $bill_obj->StoreToBill($encounter_nr, $bill_number); 
+      
+    }        
+		
+		/* Okay everything is looking fine. All bills have been created and updated now lets
+		   find out which ones have to be paid
+		*/
+		
+    //----------------------------------------------------------------------------------------------
+
+		
+	}	
   
   require ("gui/gui_billing_tz_pending.php");
 }
