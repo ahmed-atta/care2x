@@ -272,7 +272,6 @@ $LDAppType='Application type';
 $LDAppBy='Application by';
 $LDNotes='Notes';
 $LDEnterNewRecord='Enter new record';
-$LDEditRecord='Edit a specific record';
 $LDPrescription='Prescription';
 $LDDrugClass='Drug Class';
 $LDPrescribedBy='Prescribed by';

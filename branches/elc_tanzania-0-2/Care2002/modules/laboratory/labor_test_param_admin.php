@@ -129,7 +129,6 @@ $toggle=0;
 
 if(is_object($tparams)){
  while($tp=$tparams->FetchRow()){
-
 	//if($toggle) $bgc='#ffffee'; else $bgc='#efefef';
 	if($toggle) $bgc='wardlistrow1'; else $bgc='wardlistrow2';
 	$toggle=!$toggle;
@@ -150,7 +149,10 @@ if(is_object($tparams)){
 		echo '
 			<td>';
 		if($x){
-			if($tp[$v]>0) echo $tp[$v];
+			if(gettype($tp[$v])=="string")
+				if(strlen($tp[$v])>=1) echo $tp[$v];
+			else
+				if($tp[$v]>0) echo $tp[$v];
 		}else{
 			echo $tp[$v];
 		}

@@ -7,7 +7,8 @@ require_once($root_path.'include/care_api_classes/class_core.php');
 *
 * Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Robert Meggle
-* @version beta 1.0.0
+* @author Alexander Irro (Version 2.0.0) - alexander.irro@merotech.de
+* @version beta 2.0.0
 * @copyright 2005 Robert Meggle (MEROTECH info@merotech.de)
 * @package care_api from Elpidio Latirilla
 */
@@ -123,10 +124,10 @@ class Product extends Core {
     
     $this->sql="CREATE TEMPORARY TABLE tmp_search_results TYPE=HEAP
                 SELECT  
-                      `item_number`,100 AS plausibility
+                      `item_id`,100 AS plausibility
                FROM ".$this->tbl_product_items." 
                WHERE 
-                      `item_number` = '".$keyword."'
+                      `item_id` = '".$keyword."'
                      OR
                       `item_description` = '".$keyword."'
                      OR 
@@ -143,15 +144,38 @@ class Product extends Core {
     // store the datasets with fuzzy idea also in this temp-table:
     // Get at first a list of all item_numbers
     
-    $this->sql="SELECT `item_number`, `item_description` FROM ".$this->tbl_product_items." WHERE `item_number`<>''";
+    $this->sql="SELECT `item_id`, `item_description` FROM ".$this->tbl_product_items;
     $this->rs_fuzziness = $db->Execute($this->sql);
 
     while ($this->elem = $this->rs_fuzziness->FetchRow()) {
-      $this->blur = similar_text($this->elem['item_description'],$keyword,$this->percent); 
-      // echo  $this->percent."<br>";
-      if ($this->percent>0) {
+    	
+      
+      $this->array_item_description = explode(",",$this->elem['item_description']);
+      $best_levenshtein=100;
+      $best_percent_similar=0;
+      while(list($x,$v) = each($this->array_item_description))
+      {
+      	if(strlen($v)>strlen($keyword)-3)
+      	{
+	  			$this->blur = similar_text(trim(strtolower($v)),strtolower($keyword),$percent_similar);
+	  			if($percent_similar > $best_percent_similar) $best_percent_similar = $percent_similar;
+	      	if(strlen($v)+1 >= strlen($keyword))
+	      	{
+	      		$levenshteinvalue = levenshtein(trim(strtolower($v)),strtolower($keyword)); 
+	      		if($levenshteinvalue < $best_levenshtein) 
+	      			$best_levenshtein = $levenshteinvalue;
+	      	}
+      	}
+      }
+      if($best_levenshtein>6) 
+      	$percent_levenshtein=0;
+      else
+      	$percent_levenshtein=100-(($best_levenshtein)*($best_levenshtein) + 10*$best_levenshtein);
+      if($percent_levenshtein<0) $percent_levenshtein=0;
+      $this->percent = ((($percent_levenshtein)*2 + $best_percent_similar)/3);
+      if ($this->percent>=40) {
         $this->percent = round($this->percent,0);
-        $this->sql="INSERT INTO tmp_search_results (item_number, plausibility) VALUES ('".$this->elem['item_number']."','".$this->percent."')";
+        $this->sql="INSERT INTO tmp_search_results (item_id, plausibility) VALUES ('".$this->elem['item_id']."',".$this->percent.")";
         $db->Execute($this->sql);
       }
     }
@@ -162,17 +186,20 @@ class Product extends Core {
     }
     
     
-    $this->sql="SELECT `item_number` FROM ".$this->tbl_product_items." WHERE 
-                    `item_full_description` LIKE '%".$keyword."'
+    $this->sql="SELECT origin.item_id FROM ".$this->tbl_product_items." as origin, tmp_search_results as tmp WHERE 
+                  (  origin.item_full_description LIKE '%".$keyword."'
                   OR
-                    `item_full_description` LIKE '%".$keyword."%'
+                    origin.item_full_description LIKE '%".$keyword."%'
                   OR
-                    `item_full_description` LIKE '".$keyword."%'";
+                    origin.item_full_description LIKE '".$keyword."%')
+                  AND origin.item_id != tmp.item_id
+                  GROUP by origin.item_id  	
+                    ";
     $this->rs_fuzziness = $db->Execute($this->sql);
     while ($this->elem = $this->rs_fuzziness->FetchRow()) {
-      $this->percent = "90";
+      $this->percent = "100";
       if ($this->percent>0) {
-        $this->sql="INSERT INTO tmp_search_results (item_number, plausibility) VALUES ('".$this->elem['item_number']."','".$this->percent."')";
+        $this->sql="INSERT INTO tmp_search_results (item_id, plausibility) VALUES ('".$this->elem['item_id']."',".$this->percent.")";
         $db->Execute($this->sql);
       }
     }                    
@@ -185,7 +212,7 @@ class Product extends Core {
     
     
     // perpareing return values:
-    $this->sql="SELECT `item_number`, `plausibility`  FROM tmp_search_results WHERE `plausibility` >=40 GROUP BY `item_number`, `plausibility` ORDER BY `plausibility` DESC LIMIT 0,10";
+    $this->sql="SELECT `item_id`, `plausibility`  FROM tmp_search_results WHERE `plausibility` >=40 GROUP BY `item_id`, `plausibility` ORDER BY plausibility DESC LIMIT 0,10";
     
     return $db->Execute($this->sql);
   }
@@ -196,7 +223,7 @@ class Product extends Core {
     global $db;
     $debug=FALSE;
     ($debug) ? $db->debug=TRUE : $db->debug=FALSE;    
-    $this->sql="SELECT `item_number`, \"n/a\" AS `plausibility` FROM care_tz_druglist ORDER BY purchasing_class, item_description ";
+    $this->sql="SELECT `item_id`, \"n/a\" AS `plausibility` FROM care_tz_druglist ORDER BY purchasing_class, item_description ";
     return $db->Execute($this->sql);
   }
   
@@ -205,9 +232,20 @@ class Product extends Core {
   // Notice by Robert Meggle: See to the following functions: If somebody has time and force, he could
   // think about a more intelligent solution. But this still works with a big lack of elegance...
 
-  function get_description($item_number) {
+  function get_description($item_id) {
     global $db;
-    $this->sql="SELECT item_description FROM care_tz_druglist WHERE item_number='".$item_number."'";
+    $this->sql="SELECT item_description FROM care_tz_druglist WHERE item_id='".$item_id."'";
+    $this->rs = $db->Execute($this->sql);
+    if ($this->rs->RecordCount()) {
+      $this->elem = $this->rs->FetchRow();
+      return $this->elem[0];
+    }
+    return "N/A";
+  }
+
+  function get_itemnumber($item_id) {
+    global $db;
+    $this->sql="SELECT item_number FROM care_tz_druglist WHERE item_id='".$item_id."'";
     $this->rs = $db->Execute($this->sql);
     if ($this->rs->RecordCount()) {
       $this->elem = $this->rs->FetchRow();
@@ -280,9 +318,9 @@ class Product extends Core {
     }
     return "N/A";
   }
-  function get_item_classification($item_number){
+  function get_item_classification($item_id){
     global $db;
-    $this->sql="SELECT purchasing_class FROM care_tz_druglist WHERE item_number='".$item_number."'";
+    $this->sql="SELECT purchasing_class FROM care_tz_druglist WHERE item_id='".$item_id."'";
     $this->rs = $db->Execute($this->sql);
     if ($this->rs->RecordCount()) {
       $this->elem = $this->rs->FetchRow();

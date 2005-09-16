@@ -10,9 +10,6 @@
  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 
   	<script language="javascript" >
-<?php
-  if ($back_path!="billing") {
-?>
 <!-- 
 function gethelp(x,s,x1,x2,x3,x4)
 {
@@ -29,9 +26,6 @@ function printOut()
   
 }
 // -->
-<?php
-}
-?>
 
 </script> 
 <link rel="stylesheet" href="../../css/themes/default/default.css" type="text/css">
@@ -81,7 +75,7 @@ A:visited:hover {color: #cc0033;}
 		<td bgcolor=#ffffff valign=top>
 		
 													
-<table border="0" height = "100%">
+<table border="0">
 	<tr valign="top">
 		<!-- Left block for the request list  -->
 		    <td> <br>
@@ -93,8 +87,7 @@ A:visited:hover {color: #cc0033;}
 ?>
 		    <td> 
 		          <?php
-		          if (!$NO_PENDING_PRESCRIPTIONS && $back_path!="billing") {
-		            
+		          if (!$NO_PENDING_PRESCRIPTIONS) {
 		            echo '
                       <a href="javascript:printOut()"><img src="../../gui/img/control/default/en/en_printout.gif" border=0 align="absmiddle" width="99" height="24" alt="Print this form"></a> 
                       <a href="pharmacy_tz_pending_prescriptions.php?&mode=done&pn='.$pn.'&prescription_date='.$prescription_date.'>"><img src="../../gui/img/control/default/en/en_done.gif" border=0 align="absmiddle" width="75" height="24" alt="It´s done! Move the form to the archive"></a> 
@@ -104,7 +97,7 @@ A:visited:hover {color: #cc0033;}
                   if ($NO_PENDING_PRESCRIPTIONS) {
                     echo '<br><br><br><br>&nbsp;&nbsp;&nbsp;&nbsp;no pending prescriptions...<br>';
                   } else {
-                    echo '<iframe name="prescription" src="'.$root_path.'/modules/registration_admission/show_prescription.php?externalcall=TRUE&pn='.$pn.'&sid='.$sid.'" width="900" height="100%" align="left" marginheight="0" marginwidth="0" hspace="0" vspace="0" scrolling="auto" frameborder="0" noresize></iframe> ';
+                    echo '<iframe name="prescription" src="'.$root_path.'/modules/registration_admission/show_prescription.php?externalcall=TRUE&pn='.$pn.'&sid='.$sid.'" width="900" height="400" align="left" marginheight="0" marginwidth="0" hspace="0" vspace="0" scrolling="auto" frameborder="0" noresize></iframe> ';
                   }
                ?>
         </td>
@@ -113,11 +106,31 @@ A:visited:hover {color: #cc0033;}
 
 
 						
-		
-      </td>
+		</td>
 	</tr>
+	
+		<tr valign=top >
+		<td bgcolor=#cccccc>
+							<table width="100%" border="1" cellspacing="0" cellpadding="1" bgcolor="#cfcfcf">
+<tr>
+<td align="center">
 
+  <table width="100%" bgcolor="#ffffff" cellspacing=0 cellpadding=5>
+   <tr>
+   	<td>
+	    <div class="copyright"> </div>
+	    </td>
+   <tr>
+  </table>
+</td>
+</tr>
+</table>
+					</td>
 
+	</tr>
+	
+	</tbody>
+ </table>
 
 
 </BODY>

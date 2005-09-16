@@ -141,6 +141,8 @@ $LDSearch='Search';
 $LDBillthisPatient='Bill this patient';
 
 # 2003-10-25 NDHC eComBill confirmpayment.php
+$LDBilling='Billing';
+$LDLogin='Login';
 $LDBillPayment='Payment';
 $LDPaymentPreview='Payment preview';
 $LDGeneralInfo='General information';

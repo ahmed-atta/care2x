@@ -218,28 +218,12 @@ class Prescription extends Core {
 	    ($debug)?$db->debug=TRUE:$db->debug=FALSE;
 	    if ($is_pediatric || $is_adult || $is_other || $is_consumable ) {
   	    $this->sql="SELECT item_id as drug_id, item_description as description FROM $this->tb_drug_list WHERE
-  	                  	 purchasing_class = '$class' ";
-  	    // cases: 
-  	    if (!empty($is_pediatric)) {
-  	      $this->sql .= " AND is_pediatric = $is_pediatric ";
-  	      $CASE_USED=TRUE;
-  	    }
-  	       
-  	    if (!empty($is_adult)) {
-  	      $this->sql .= " AND is_adult  = $is_adult ";
-  	      $CASE_USED=FALSE;
-  	    }
-  	    if (!empty($is_other)) {
-  	      $this->sql .= " AND is_other  = $is_other ";
-  	      $CASE_USED=FALSE;
-  	    }
-  	    if (!empty($is_consumable)) {
-  	      $this->sql .= " AND is_consumable = $is_consumable ";
-  	      $CASE_USED=FALSE;
-  	    }
-  	                  	 
-        $this->sql .= " ORDER BY item_description";
-        
+  	                  	 purchasing_class = '$class' AND
+  	                  	 is_pediatric = $is_pediatric AND
+  	                  	 is_adult  = $is_adult AND
+  	                  	 is_other  = $is_other AND
+  	                  	 is_consumable = $is_consumable
+  	                  	 ORDER BY item_description";
   	  } else {
   	    $this->sql="SELECT item_id as drug_id, item_description as description FROM $this->tb_drug_list WHERE
   	                  	 purchasing_class = '$class' ORDER BY item_description";
@@ -268,7 +252,7 @@ class Prescription extends Core {
 
 	function DisplayBGColor($actual, $target) {
 	  //echo ($actual==$target) ?  'bgcolor="green"' : 'bgcolor="gray"';
-	  echo ($actual==$target) ?  'bgcolor="#CCCC00"' : 'class="adm_input"';
+	  echo ($actual==$target) ?  'bgcolor="#330066"' : 'class="adm_input"';
 	  return TRUE;
 	}
 
@@ -335,132 +319,6 @@ class Prescription extends Core {
 			}
 		}
   } // end of function GetNameOfDrug($item_number) 
-  
-  function GetNameOfPrescriptedItem($encounter_nr,$item_number) {
-    /**
-    * NOTE: The descripted item is maybe deletet now, so we have to take a look into the 
-    * Table for prescriptions and not for the table of available drugs or med. items!
-    */
-    global $db;
-    $debug=FALSE;
-    ($debug)?$db->debug=TRUE:$db->debug=FALSE;
-    $this->sql="SELECT article as description FROM $this->tb WHERE encounter_nr='$encounter_nr' AND article_item_number = '$item_number' ";
-    if ($this->result=$db->Execute($this->sql)) {
-		    if ($this->result->RecordCount()) {
-		        $this->item_array = $this->result->GetArray();
-		          while (list($x,$v)=each($this->item_array)) {
-                $db->debug=FALSE;
-		            return $v['description'];
-		          }
-			} else {
-			  $db->debug=FALSE;
-				return false;
-			}
-		}
-  } // end of function GetNameOfPrescriptedItem($item_number)   
-  
-  function GetDosageOfPrescriptedItem($encounter_nr, $item_number) {
-    /**
-    * NOTE: The descripted item is maybe deletet now, so we have to take a look into the 
-    * Table for prescriptions and not for the table of available drugs or med. items!
-    */
-    global $db;
-    $debug=FALSE;
-    ($debug)?$db->debug=TRUE:$db->debug=FALSE;
-    $this->sql="SELECT dosage FROM $this->tb WHERE encounter_nr='$encounter_nr' AND article_item_number = '$item_number' ";
-    if ($this->result=$db->Execute($this->sql)) {
-		    if ($this->result->RecordCount()) {
-		        $this->item_array = $this->result->GetArray();
-		          while (list($x,$v)=each($this->item_array)) {
-                $db->debug=FALSE;
-		            return $v['dosage'];
-		          }
-			} else {
-			  $db->debug=FALSE;
-				return false;
-			}
-		}
-  } // end of function GetDosageOfPrescriptedItem($item_number)   
-
-  function GetNotesOfPrescriptedItem($encounter_nr, $item_number) {
-    /**
-    * NOTE: The descripted item is maybe deletet now, so we have to take a look into the 
-    * Table for prescriptions and not for the table of available drugs or med. items!
-    */
-    global $db;
-    $debug=FALSE;
-    ($debug)?$db->debug=TRUE:$db->debug=FALSE;
-    $this->sql="SELECT notes FROM $this->tb WHERE encounter_nr='$encounter_nr' AND article_item_number = '$item_number' ";
-    if ($this->result=$db->Execute($this->sql)) {
-		    if ($this->result->RecordCount()) {
-		        $this->item_array = $this->result->GetArray();
-		          while (list($x,$v)=each($this->item_array)) {
-                $db->debug=FALSE;
-		            return $v['notes'];
-		          }
-			} else {
-			  $db->debug=FALSE;
-				return false;
-			}
-		}
-  } // end of function GetNotesOfPrescriptedItem($item_number)   
-
-  function GetHistoryOfPrescriptedItem($encounter_nr, $item_number) {
-    /**
-    * NOTE: The descripted item is maybe deletet now, so we have to take a look into the 
-    * Table for prescriptions and not for the table of available drugs or med. items!
-    */
-    global $db;
-    $debug=FALSE;
-    ($debug)?$db->debug=TRUE:$db->debug=FALSE;
-    $this->sql="SELECT history FROM $this->tb WHERE encounter_nr='$encounter_nr' AND article_item_number = '$item_number' ";
-    if ($this->result=$db->Execute($this->sql)) {
-		    if ($this->result->RecordCount()) {
-		        $this->item_array = $this->result->GetArray();
-		          while (list($x,$v)=each($this->item_array)) {
-                $db->debug=FALSE;
-		            return $v['history'];
-		          }
-			} else {
-			  $db->debug=FALSE;
-				return false;
-			}
-		}
-  } // end of function GetNotesOfPrescriptedItem($item_number)   
-
-  
-  function ChangeEntryOfPrescriptedItem($encounter_nr, $itemcode,$dosage,$notes) {
-    
-    global $db;
-    $debug=FALSE;
-    ($debug)?$db->debug=TRUE:$db->debug=FALSE;
-
-    // read out the history for this prescriotion
-    $this->sql="SELECT history, dosage, notes FROM $this->tb WHERE encounter_nr='$encounter_nr' AND article_item_number = '$itemcode' ";
-    if ($this->result=$db->Execute($this->sql)) {
-		    if ($this->result->RecordCount()) {
-		        $this->item_array = $this->result->GetArray();
-		          while (list($x,$v)=each($this->item_array)) {
-                $history = $v['history'];
-                $old_dosage = $v['dosage'];
-                $old_notes = $v['notes'];
-                
-                $history .= "<br>changed: ".date("Y-m-d G:i:s",time())." previous dosage: >".$old_dosage."< ;previous notes: >".$old_notes;
-                // Update now the data stream:
-                $this->sql="UPDATE $this->tb 
-                            SET dosage = '".$dosage."' ,
-                                notes = '".$notes."' , 
-                                history = '".$history."'
-                            WHERE encounter_nr='$encounter_nr' AND article_item_number = '$itemcode'";
-                $db->Execute($this->sql);
-		            return TRUE;
-		          }
-			} else {
-			  $db->debug=FALSE;
-				return false;
-			}    
-	 }
-  } // end of ChangeEntryOfPrescriptedItem()
 
   function GetPriceOfItem($item_number) {
     global $db;
@@ -480,43 +338,6 @@ class Prescription extends Core {
 			}
 		}
   } // end of function GetPriceOfItem($item_number) 
-  
-  
-
-  function DisplayPrescriptionList($en) {
-    global $db, $root_path, $externalcall;
-    $debug=FALSE;
-    if ($debug) echo $en;
-    ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
-    /**
-    * Show all prescripted items for this patient(active encounter)
-    */
-    $this->sql="SELECT * FROM $this->tb WHERE encounter_nr='".$en."'";
-    $bg_color_1 = "#ffffaa";
-    $bg_color_2 = "#ffffdd";
-    if ($this->result=$db->Execute($this->sql)) {
-		    if ($this->result->RecordCount()) {
-		        $this->item_array = $this->result->GetArray();
-		          while (list($x,$v)=each($this->item_array)) {
-                // Print out the content in the correct design
-                // (=> A table with changing bg-color)
-                ($bg_color==$bg_color_1) ? $bg_color=$bg_color_2 : $bg_color=$bg_color_1;
-              echo "
-                    <tr bgcolor=\"".$bg_color."\"> 
-                      <td>".$v['prescribe_date']."</td>
-                      <td>".$v['article']."</td>
-                      <td>".$v['dosage']."</td>
-                      <td></td>
-                      <td><a href=\"./show_prescription.php?externalcall=".$externalcall."&change=TRUE&mode=edit&encounter_nr=".$en."&itemcode=".$v['article_item_number']."\"><img src=\"".$root_path."gui/img/common/default/hammer.gif\" border=\"0\"></a></td>
-                    </tr>";
-		            
-		          }
-			} else {
-			  $db->debug=FALSE;
-				return false;
-			}
-		}
-  } // end of DisplayPrescriptionList($en)
 
 }
 ?>

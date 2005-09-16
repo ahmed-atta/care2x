@@ -85,7 +85,24 @@ $send_date="";
 		            
 		      group by batch_nr
 		      ORDER BY batch_nr ASC";						         
+/*
 
+    // include here the always repeading sql-statements to find out the pending bills:
+    require($root_path."modules/billing_tz/inc_basic_statements/inc_temp_pending_bills_sql_noclass.php");
+
+    $sql = "SELECT 
+		              name_first, 
+		              name_last, 
+		              care_person.pid as batch_nr
+    
+            FROM tmp_care_tz_billing
+              INNER JOIN care_encounter ON
+                    care_encounter.encounter_nr=tmp_care_tz_billing.encounter_nr
+              INNER JOIN care_person ON
+                    care_encounter.pid=care_person.pid
+            GROUP BY tmp_care_tz_billing.encounter_nr
+            ";						       
+*/    
 		$pdng_req=$db->Execute($sql);
 	
 /* Display the list of pending requests */
@@ -106,7 +123,7 @@ while($test_request=$pdng_req->FetchRow())
   if($batch_nr!=$test_request['batch_nr'] || $prescription_date != $test_request['prescribe_date'] )
   {     
         echo "<img src=\"".$root_path."gui/img/common/default/pixel.gif\" border=0 width=4 height=7> 
-        <a onmouseover=\"showBallon('".$test_request['name_first']." ".$test_request['name_last']." encounter:".$test_request['encounter_nr']."',0,150,'#99ccff'); window.status='Care2x Tooltip'; return true;\"
+        <a onmouseover=\"showBallon('".$test_request['name_first']." ".$test_request['name_last']."',0,150,'#99ccff'); window.status='Care2x Tooltip'; return true;\"
 	onmouseout=\"hideBallon(); return true;\" href=\"".$thisfile.URL_APPEND."&target=".$target."&subtarget=".$subtarget."&batch_nr=".$test_request['batch_nr']."&prescription_date=".$test_request['prescribe_date']."&pn=".$test_request['encounter_nr']."&user_origin=".$user_origin."&tracker=".$tracker."\">";
 	    
 			if($test_request['batch_nr']) 

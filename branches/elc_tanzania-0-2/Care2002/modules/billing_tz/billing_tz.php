@@ -12,7 +12,7 @@ require($root_path.'include/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 
-define('NO_2LEVEL_CHK',1);
+//define('NO_2LEVEL_CHK',1);
 require($root_path.'include/inc_front_chain_lang.php');
 
 

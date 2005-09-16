@@ -702,13 +702,15 @@ class Core {
 		{
 			while(list($x,$v)=each($forbidden_chars_array))
 			{
-				if($v==$string_v)
+				if((string)$v==(string)$string_v)
 				{
+					//echo $error." Fehler - ".$string_v." . ".$v."<br>";
 					$error++;
 					break;
 				}
 			}		
 		}
+		//echo $error." Fehler";
 		if(!$error)
 		{
 			$string= str_replace(',','.',$string);

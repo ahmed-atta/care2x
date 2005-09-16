@@ -66,7 +66,7 @@ A:visited:hover {color: #cc0033;}
 	      <table border=0 cellspacing=1 cellpadding=3>
             <tbody class="submenu">
               <tr> 
-                <td align=right width=103> Pediatric</td>
+                <td align=right width=103> Peadric</td>
                 <td align=right width=27 class="prompt">
                 <input type="checkbox" name="is_peadric" <?php if (isset($is_peadric)) echo "checked";?>></td>
                 <td align=right width=206 >Selian Item Number</td>
