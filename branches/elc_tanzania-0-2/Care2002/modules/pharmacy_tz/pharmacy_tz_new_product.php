@@ -39,7 +39,7 @@ if ($debug) {
 
   print_debug_info ("mode",$mode);
   
-  print_debug_info("Pediatric check box", $is_peadric);
+  print_debug_info("Peadric check box", $is_peadric);
   print_debug_info("Adult check box", $is_adult);
   print_debug_info("Other check box", $is_other);
   print_debug_info("Consumable check box", $is_consumable);

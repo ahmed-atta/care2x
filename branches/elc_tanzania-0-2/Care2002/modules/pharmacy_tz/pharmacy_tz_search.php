@@ -41,13 +41,11 @@ if (!empty($keyword)) {
   } else {
     $search_results = $product_obj->get_array_search_results($keyword);
   }
-  
   $number_of_search_results = $search_results->RecordCount();
   
   $bg_color_change = 1;
   
   while ($search_element = $search_results->FetchRow()) {
-    
     if ($bg_color_change) {
       $http_buffer.="<tr bgcolor=#ffffaa>";
       $bg_color_change = 0;
@@ -56,12 +54,14 @@ if (!empty($keyword)) {
       $bg_color_change = 1;
     }
     
-    $item_number = $search_element['item_number'];
+    $item_id = $search_element['item_id'];
     $item_plausibility = $search_element['plausibility'];
-    $item_description = $product_obj->get_description($item_number);
-    $item_classification = $product_obj->get_item_classification($item_number);
+    $item_description = $product_obj->get_description($item_id);
+    $item_number = $product_obj->get_itemnumber($item_id);
+    $item_classification = $product_obj->get_item_classification($item_id);
     $http_buffer.=" <td>".$item_number."</td>
-                    <td>".$item_description."</td>
+                    <td>".str_replace(strtolower(trim($keyword)),"<b>".trim($keyword)."</b>",strtolower($item_description))."</td>
+                    
                     <td>".$item_classification."</td>
                     <td>".$item_plausibility."</td>
                     <td><div align=\"center\"><a href=\"pharmacy_tz_new_product.php?mode=show&item_number=".$item_number."&keyword=".$keyword."\"><img src=\"".$root_path."gui/img/common/default/common_infoicon.gif\" width=\"16\" height=\"16\" border=\"0\"></a></td>

@@ -26,8 +26,6 @@ if (empty($back_path))
 else {
   if ($back_path=="billing")
     $RETURN_PATH= $root_path."modules/billing_tz/billing_tz.php";
-  if ($back_path=="laboratory")
-    $RETURN_PATH= $root_path."modules/laboratory/labor.php";    
 }
 
 if ($mode=="done" && isset($pn) && isset($prescription_date)) {

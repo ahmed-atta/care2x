@@ -1,4 +1,5 @@
 <?php
+
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
@@ -10,6 +11,7 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+
 $lang_tables[]='emr.php';
 $lang_tables[]='person.php';
 $lang_tables[]='date_time.php';
@@ -17,7 +19,6 @@ define('LANG_FILE','aufnahme.php');
 
 $local_user='aufnahme_user';
 require($root_path.'include/inc_front_chain_lang.php');
-
 //$db->debug=true;
 
 $thisfile=basename(__FILE__);
@@ -49,6 +50,7 @@ echo setCharSet();
 <?php
 require($root_path.'include/inc_js_gethelp.php');
 require($root_path.'include/inc_css_a_hilitebu.php');
+
 ?>
 
 </HEAD>

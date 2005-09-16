@@ -1,6 +1,6 @@
 <?php
 //require_once('./roots.php');
-$debug=FALSE;
+$debug=false;
   
 $_SESSION['item_array']=NULL;
 
@@ -35,7 +35,6 @@ if (!empty($show)) { // In case something goes wrong, then make nothing!
 <script language="javascript" src="<?php echo $root_path;?>js/check_prescription_form.js"></script>
 
 
-
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
   <? if ($debug) echo "this file is named: ".$thisfile."<br>"; ?>
   <? if ($debug) echo "activated tab: ".$activated_tab."<br>"; ?>
@@ -55,7 +54,7 @@ if (!empty($show)) { // In case something goes wrong, then make nothing!
   </tr>
   <tr>
     <br>
-    <td colspan="4" bgcolor="#CCCC00">
+    <td colspan="4" bgcolor="#330066">
       <table widht="100%" border="1" align="center" bordercolor="#330066" cellpadding="0" cellspacing="0">      
       <tr>
         <td colspan="4" height="10">
@@ -63,8 +62,8 @@ if (!empty($show)) { // In case something goes wrong, then make nothing!
         </td>
       </tr>
       <tr>
-        <td bgcolor="#ffffaa">
-          <font color="black">pediatric items: </font>
+        <td bgcolor="#2302A8">
+          <font color="white">peadric items: </font>
               <input type="radio" 
                   name="peadrics_button" 
                   value="<?PHP echo ($filter=='pediadric') ? '1' : '0';?>" 
@@ -72,8 +71,8 @@ if (!empty($show)) { // In case something goes wrong, then make nothing!
                   onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&filter=pediadric&show=<?php echo $show;?>&externalcall=<?php echo $externalcall;?>')"
               > <br>
         </td>
-        <td bgcolor="#ffffaa">
-          <font color="black">adult items: </font>
+        <td bgcolor="#2302A8">
+          <font color="white">adult items: </font>
               <input type="radio" 
                 name="adult_button" 
                 value="<?PHP echo ($filter=='adult') ? '1' : '0';?>" 
@@ -81,8 +80,8 @@ if (!empty($show)) { // In case something goes wrong, then make nothing!
                 onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&filter=adult&show=<?php echo $show;?>&externalcall=<?php echo $externalcall;?>')"
               > <br>
         </td>
-        <td bgcolor="#ffffaa">
-          <font color="black">others: </font>
+        <td bgcolor="#2302A8">
+          <font color="white">others: </font>
               <input type="radio" 
                 name="others_button" 
                 value="<?PHP echo ($filter=='others') ? '1' : '0';?>" 
@@ -90,8 +89,8 @@ if (!empty($show)) { // In case something goes wrong, then make nothing!
                 onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&filter=others&show=<?php echo $show;?>&externalcall=<?php echo $externalcall;?>')"
               > <br>
         </td>
-        <td bgcolor="#ffffaa">
-          <font color="black">consumable items: </font>
+        <td bgcolor="#2302A8">
+          <font color="white">consumable items: </font>
               <input type="radio" 
                 name="conusumable" 
                 value="<?PHP echo ($filter=='consumable') ? '1' : '0';?>" 
@@ -104,13 +103,12 @@ if (!empty($show)) { // In case something goes wrong, then make nothing!
     </td>
   </tr>
   <tr>
-    <td height="300" colspan="4" bgcolor="#ffffaa"> 
+    <td height="300" colspan="4" bgcolor="#330066"> 
     
-        <table width="100%" border="0" bgcolor="#CCCC00">
-          <tr valign="top"> 
-            <td width="37%" rowspan="5"> 
-              <div align="center">
-                <select name="itemlist[]" size="20" style="width:200px;" >
+        <table width="100%" border="0" bgcolor="green">
+          <tr>
+            <td width="37%" rowspan="5"><div align="center">
+                <select name="itemlist[]" size="10" style="width:200px;" >
   
                   <!-- dynamically managed content -->
   		            <?php	$pres_obj->DisplayDrugs($drug_list);	?>
@@ -119,9 +117,8 @@ if (!empty($show)) { // In case something goes wrong, then make nothing!
                 </select>
               </div></td>
             <td height="10">&nbsp;</td>
-            <td width="38%" rowspan="5"> 
-              <div align="center">
-                <select name="selected_item_list[]" size="20" style="width:200px;">
+            <td width="38%" rowspan="5"><div align="center">
+                <select name="selected_item_list[]" size="10" style="width:200px;">
   
                   <!-- dynamically managed content -->
                   <?php $pres_obj->DisplaySelectedItems($item_no); ?>
@@ -131,20 +128,17 @@ if (!empty($show)) { // In case something goes wrong, then make nothing!
               </div></td>
           </tr>
           <tr>
-            <td height="50"> 
-              <div align="center">&nbsp;
+            <td height="50"><div align="center">&nbsp;
                 <input type="button" name="Del" value="add >>" onClick="javascript:item_add();">
               </div></td>
           </tr>
           <tr>
-            <td width="25%" height="50"> 
-              <div align="center">
+            <td width="25%" height="50"> <div align="center">
                 <input type="button" name="Add" value="<< del" onClick="javascript:item_delete();">
               </div></td>
           </tr>
           <tr>
-            <td height="220"> 
-              <div align="center">&nbsp; </div></td>
+            <td height="10"> <div align="center">&nbsp; </div></td>
           </tr>
         </table>
         <?
