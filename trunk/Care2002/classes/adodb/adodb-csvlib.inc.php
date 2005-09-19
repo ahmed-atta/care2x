@@ -1,7 +1,9 @@
 <?php
+global $ADODB_INCLUDED_CSV;
+$ADODB_INCLUDED_CSV = 1;
 
 /* 
-V2.50 14 Nov 2002  (c) 2000-2002 John Lim (jlim@natsoft.com.my). All rights reserved.
+  V4.21 20 Mar 2004  (c) 2000-2004 John Lim (jlim@natsoft.com.my). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence. See License.txt. 
@@ -40,31 +42,30 @@ V2.50 14 Nov 2002  (c) 2000-2002 John Lim (jlim@natsoft.com.my). All rights rese
 			
 			$text = "====-1,0,$sql\n";
 			return $text;
-		} else {
-			$tt = ($rs->timeCreated) ? $rs->timeCreated : time();
-			$line = "====0,$tt,$sql\n";
 		}
-		// column definitions
-		for($i=0; $i < $max; $i++) {
-			$o = $rs->FetchField($i);
-			$line .= urlencode($o->name).':'.$rs->MetaType($o->type,$o->max_length).":$o->max_length,";
-		}
-		$text = substr($line,0,strlen($line)-1)."\n";
+		$tt = ($rs->timeCreated) ? $rs->timeCreated : time();
 		
+		## changed format from ====0 to ====1
+		$line = "====1,$tt,$sql\n";
 		
-		// get data
 		if ($rs->databaseType == 'array') {
-			$text .= serialize($rs->_array);
+			$rows =& $rs->_array;
 		} else {
 			$rows = array();
 			while (!$rs->EOF) {	
 				$rows[] = $rs->fields;
 				$rs->MoveNext();
 			} 
-			$text .= serialize($rows);
 		}
-		$rs->MoveFirst();
-		return $text;
+		
+		for($i=0; $i < $max; $i++) {
+			$o =& $rs->FetchField($i);
+			$flds[] = $o;
+		}
+		
+		$rs =& new ADORecordSet_array();
+		$rs->InitArrayFields($rows,$flds);
+		return $line.serialize($rs);
 	}
 
 	
@@ -81,19 +82,19 @@ V2.50 14 Nov 2002  (c) 2000-2002 John Lim (jlim@natsoft.com.my). All rights rese
 */
 	function &csv2rs($url,&$err,$timeout=0)
 	{
-		$fp = @fopen($url,'r');
 		$err = false;
+		$fp = @fopen($url,'r');
 		if (!$fp) {
-			$err = $url.'file/URL not found';
+			$err = $url.' file/URL not found';
 			return false;
 		}
 		flock($fp, LOCK_SH);
 		$arr = array();
 		$ttl = 0;
 		
-		if ($meta = fgetcsv ($fp, 32000, ",")) {
+		if ($meta = fgetcsv($fp, 32000, ",")) {
 			// check if error message
-			if (substr($meta[0],0,4) === '****') {
+			if (strncmp($meta[0],'****',4) === 0) {
 				$err = trim(substr($meta[0],4,1024));
 				fclose($fp);
 				return false;
@@ -102,7 +103,7 @@ V2.50 14 Nov 2002  (c) 2000-2002 John Lim (jlim@natsoft.com.my). All rights rese
 			// $meta[0] is -1 means return an empty recordset
 			// $meta[1] contains a time 
 	
-			if (substr($meta[0],0,4) ===  '====') {
+			if (strncmp($meta[0], '====',4) === 0) {
 			
 				if ($meta[0] == "====-1") {
 					if (sizeof($meta) < 5) {
@@ -118,14 +119,14 @@ V2.50 14 Nov 2002  (c) 2000-2002 John Lim (jlim@natsoft.com.my). All rights rese
 					}
 					$rs->fields = array();
 					$rs->timeCreated = $meta[1];
-					$rs = new ADORecordSet($val=true);
+					$rs =& new ADORecordSet($val=true);
 					$rs->EOF = true;
 					$rs->_numOfFields=0;
 					$rs->sql = urldecode($meta[2]);
 					$rs->affectedrows = (integer)$meta[3];
 					$rs->insertid = $meta[4];	
 					return $rs;
-				}
+				} 
 			# Under high volume loads, we want only 1 thread/process to _write_file
 			# so that we don't have 50 processes queueing to write the same data.
 			# Would require probabilistic blocking write 
@@ -162,8 +163,26 @@ V2.50 14 Nov 2002  (c) 2000-2002 John Lim (jlim@natsoft.com.my). All rights rese
 					}// (timeout>0)
 					$ttl = $meta[1];
 				}
+				//================================================
+				// new cache format - use serialize extensively...
+				if ($meta[0] === '====1') {
+					// slurp in the data
+					$MAXSIZE = 128000;
+					
+					$text = fread($fp,$MAXSIZE);
+					if (strlen($text) === $MAXSIZE) {
+						while ($txt = fread($fp,$MAXSIZE)) {
+							$text .= $txt;
+						}
+					}
+					fclose($fp);
+					@$rs = unserialize($text);
+					if (is_object($rs)) $rs->timeCreated = $ttl;
+					return $rs;
+				}
+				
 				$meta = false;
-				$meta = fgetcsv($fp, 16000, ",");
+				$meta = fgetcsv($fp, 32000, ",");
 				if (!$meta) {
 					fclose($fp);
 					$err = "Unexpected EOF 1";
@@ -180,7 +199,7 @@ V2.50 14 Nov 2002  (c) 2000-2002 John Lim (jlim@natsoft.com.my). All rights rese
 					$flds = false;
 					break;
 				}
-				$fld = new ADOFieldObject();
+				$fld =& new ADOFieldObject();
 				$fld->name = urldecode($o2[0]);
 				$fld->type = $o2[1];
 				$fld->max_length = $o2[2];
@@ -194,80 +213,23 @@ V2.50 14 Nov 2002  (c) 2000-2002 John Lim (jlim@natsoft.com.my). All rights rese
 		
 		// slurp in the data
 		$MAXSIZE = 128000;
-		$text = fread($fp,$MAXSIZE);
-		$cnt = 1;
-		while (strlen($text) == $MAXSIZE*$cnt) {
-			$text .= fread($fp,$MAXSIZE);
-			$cnt += 1;
+		
+		$text = '';
+		while ($txt = fread($fp,$MAXSIZE)) {
+			$text .= $txt;
 		}
 			
 		fclose($fp);
-		$arr = @unserialize($text);
-		
+		@$arr = unserialize($text);
 		//var_dump($arr);
 		if (!is_array($arr)) {
 			$err = "Recordset had unexpected EOF (in serialized recordset)";
 			if (get_magic_quotes_runtime()) $err .= ". Magic Quotes Runtime should be disabled!";
 			return false;
 		}
-		$rs = new ADORecordSet_array();
+		$rs =& new ADORecordSet_array();
 		$rs->timeCreated = $ttl;
 		$rs->InitArrayFields($arr,$flds);
 		return $rs;
 	}
-	
-	/*
-	# The following code was an alternative method of saving 
-	# recordsets and  is experimental and was never used.
-	# It is faster, but provides very little error checking.
-	
-	//High speed rs2csv 10% faster 
-	function & xrs2csv(&$rs)
-	{
-		return time()."\n".serialize($rs);
-	}
-	function & xcsv2rs($url,&$err,$timeout)
-	{
-		$t = filemtime($url);// this is cached - should we clearstatcache() ?
-		if ($t === false) {
-			$err = 'File not found 1';
-			return false;
-		}
-		
-		if (time() > $t + $timeout){
-			$err = " Timeout 1";
-			return false;
-		}
-		
-		$fp = @fopen($url,'r');
-		if (!$fp) {
-			$err = ' file not found ';
-			return false;
-		}
-		
-		flock($fp,LOCK_SH);
-		$t = fgets($fp,100);
-		if ($t === false){
-			fclose($fp);
-			$err =  " EOF 1 ";
-			return false;
-		}
-		/*
-		if (time() > ((integer)$t) + $timeout){
-			fclose($fp);
-			$err = " Timeout 2";
-			return false;
-		}*   /
-		
-		$txt = &fread($fp,1999999); // Increase if EOF 2 error returned
-		fclose($fp);
-		$o = @unserialize($txt);
-		if (!is_object($o)) {
-			$err = " EOF 2";
-			return false;
-		}
-		$o->timeCreated = $t;
-		return $o;
-	}
-	*/
 ?>

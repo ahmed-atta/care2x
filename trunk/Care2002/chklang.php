@@ -37,6 +37,7 @@ $lang_path = 'language/';
 $available_languages = array(
   'ar'         => array('ar|Arabic', '28596'),
   'bg'         => array('bg|bulgarian', 'bulgarian-win1251'),
+  'bs'         => array('bs|bosnian', 'bosnian-win1250'),
   'ca'         => array('ca|catalan', 'catala'),
   'cs-iso'     => array('cs|czech', 'czech-iso'),
   'cs-win1250' => array('cs|czech', 'czech-win1250'),
@@ -44,6 +45,7 @@ $available_languages = array(
   'de'         => array('de([-_][[:alpha:]]{2})?|german', 'german'),
   'en'         => array('en([-_][[:alpha:]]{2})?|english',  'english'),
   'es'         => array('es([-_][[:alpha:]]{2})?|spanish', 'spanish'),
+   'fa'         => array('fa|Farsi', 'farsi'),
   'fr'         => array('fr([-_][[:alpha:]]{2})?|french', 'french'),
   'id'         => array('id|indonesian', 'indonesian'),
   'it'         => array('it|italian', 'italian'),
@@ -57,6 +59,7 @@ $available_languages = array(
   'ru-koi8r'   => array('ru|russian', 'russian-koi8'),
   'ru-win1251' => array('ru|russian', 'russian-win1251'),
   'se'         => array('se|swedish', 'swedish'),
+  'sr'         => array('sr|serbian', 'serbian-win1250'),
   'th'         => array('th|thai', 'thai'),
   'zh-tw'      => array('zh[-_]tw|chinese traditional', 'chinese_big5'),
   'zh'         => array('zh|chinese simplified', 'chinese_gb')
@@ -158,7 +161,7 @@ $lang_file = $lang_path.$lang.'/lang_'.$lang.'_nursing.php';
 if((!file_exists($lang_file))&&(!file_exists('../'.$lang_file))){
 	$lang='en';
 }
-	
+
 // save language to cookie
 //setcookie("ck_lang".$sid,$lang);
 	

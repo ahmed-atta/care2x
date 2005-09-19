@@ -250,6 +250,22 @@ hr {
 	color: black;
 	margin-left: 5 px;
 }
+/*----- Registration search mask */
+.reg_searchmask{
+	background-color: #f3f3f3;
+}
+/*----- Registration search bordering block */
+.reg_searchmask_border{
+	background-image: url(../../../gui/img/skin/default/backbrushed.gif);
+}
+/*----- Admission search mask */
+.admit_searchmask{
+	background-color: #f3f3f3;
+}
+/*----- Admission search bordering block */
+.admit_searchmask_border{
+	background-color: #dfdfdf;
+}
 /* ---------- Links. Note: link colors are overridden by the user configuration ----*/
 a:link {text-decoration:none}
 a:visited {text-decoration:none}

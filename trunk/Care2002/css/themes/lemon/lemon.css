@@ -224,5 +224,13 @@ hr {
 	padding-left: 6px;
 	padding-right:6px;
 }
+/*----- Registration search mask */
+.reg_searchmask{
+	background-color: #f3f3f3;
+}
+/*----- Registration search bordering block */
+.reg_searchmask_border{
+	background-color: #99ffcc;
+}
 a:link {color:#546D8F; text-decoration:none}
 a:visited {color:#546D8F; text-decoration:none}
