@@ -1,4 +1,33 @@
-<?php html_rtl($lang); ?>
+<?php
+/**
+* Change log: 2004-07-29
+* Alternate menu tree selection system was integrated.
+*
+* Set the default menu tree directory name here.
+* Version >= 2.0.2 only "default" or "dtree". If empty or non-existing path, defaults to "default".
+*/
+$DefaultMenuTreeDir = 'default';
+
+//$cfg['mainmenu_tree'] = 'dtree';
+
+#
+# Load the menu tree. Make intelligent checks. Defaults to "default" directory if nothing works.
+#
+if(isset($cfg['mainmenu_tree']) && !empty($cfg['mainmenu_tree']) && file_exists('menu/'.$cfg['mainmenu_tree'] .'/mainmenu.inc.php')){
+	$LocMenuTreeDir = $cfg['mainmenu_tree'];
+}else{
+	$GlobMenuTreeDir = $gc->getConfig('theme_mainmenu_tree');
+	if(!empty($GlobMenuTreeDir) && file_exists('menu/'.$GlobMenuTreeDir .'/mainmenu.inc.php')){
+		$LocMenuTreeDir = $GlobMenuTreeDir;
+	}elseif(!empty($DefaultMenuTreeDir) && file_exists('menu/'.$DefaultMenuTreeDir .'/mainmenu.inc.php')){
+		$LocMenuTreeDir = $DefaultMenuTreeDir;
+	}else{
+		$LocMenuTreeDir = 'default';
+	}
+}
+?>
+
+<?php html_rtl($lang);  ?>
 <HEAD>
 <?php echo $charset; ?>
 <TITLE><?php echo $wintitle; ?></TITLE>
@@ -49,34 +78,18 @@ $TP_logo=createLogo($root_path,'care_logo_'.$dbtype.'.gif','0');
 
 $tp_body=&$TP_obj->load('tp_main_index_menu_body.htm');
 eval("echo $tp_body;");
+
+#
+# Generate the menu tree
+#
+require("menu/$LocMenuTreeDir/mainmenu.inc.php");
+
 ?>
 
 <TABLE CELLPADDING=0 CELLSPACING=0 border=0>
 
 <?php
 //echo $HTTP_COOKIE_VARS['ck_config']; // used only in debugging related to user config data
-if($result){
-	$gui='';
-	$TP_img1= '<img '.createComIcon($root_path,'blue_bullet.gif','0','middle').'>';
-	$TP_com_img_path=$root_path.'gui/img/common';
-	$buf='';
-	# Load the menu item template
-	$tp =&$TP_obj->load('tp_main_index_menu_item.htm');
-	while($menu=$result->FetchRow()){
-		if (eregi('LDLogin',$menu['LD_var'])){
-			if ($HTTP_COOKIE_VARS['ck_login_logged'.$sid]=='true'){
-				$menu['url']='main/logout_confirm.php';
-				$menu['LD_var']='LDLogout';
-			}	
-		}
-		$TP_menu_item='<a href="'.$root_path.$menu['url'].URL_APPEND.'" TARGET="CONTENTS" REL="child">';
-		if(isset($$menu['LD_var'])&&!empty($$menu['LD_var'])) $TP_menu_item.=$$menu['LD_var'];
-			else $TP_menu_item.=$menu['name'];
-		$TP_menu_item.='</A>';
-		eval("echo $tp;");
-	}
-	echo $gui;
-}
 
 if(!$GLOBALCONFIG['language_single']){
 ?>

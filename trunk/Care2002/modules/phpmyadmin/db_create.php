@@ -6,11 +6,13 @@
 /**
  * Gets some core libraries
  */
-require_once('./libraries/grab_globals.lib.php');
+require('./libraries/grab_globals.lib.php');
 $js_to_run = 'functions.js';
-require_once('./header.inc.php');
-require_once('./libraries/common.lib.php');
+require('./header.inc.php');
 
+if (!defined('PMA_COMMON_LIB_INCLUDED')) {
+    include('./libraries/common.lib.php');
+}
 
 PMA_checkParameters(array('db'));
 
@@ -18,6 +20,14 @@ PMA_checkParameters(array('db'));
  * Defines the url to return to in case of error in a sql statement
  */
 $err_url = 'main.php?' . PMA_generate_common_url();
+
+/**
+ * Ensures the db name is valid
+ */
+if (PMA_MYSQL_INT_VERSION < 32306) {
+    PMA_checkReservedWords($db, $err_url);
+}
+
 
 /**
  * Executes the db creation sql query
@@ -30,6 +40,6 @@ $result      = PMA_mysql_query('CREATE DATABASE ' . PMA_backquote($db)) or PMA_m
  * Displays the result and calls default page
  */
 $message = $strDatabase . ' ' . htmlspecialchars($db) . ' ' . $strHasBeenCreated;
-require_once('./' . $cfg['DefaultTabDatabase']);
+require('./' . $cfg['DefaultTabDatabase']);
 
 ?>

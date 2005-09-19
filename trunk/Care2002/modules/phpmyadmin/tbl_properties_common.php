@@ -6,9 +6,15 @@
 /**
  * Gets some core libraries
  */
-require_once('./libraries/grab_globals.lib.php');
-require_once('./libraries/common.lib.php');
-require_once('./libraries/bookmark.lib.php');
+if (!defined('PMA_GRAB_GLOBALS_INCLUDED')) {
+    include('./libraries/grab_globals.lib.php');
+}
+if (!defined('PMA_COMMON_LIB_INCLUDED')) {
+    include('./libraries/common.lib.php');
+}
+if (!defined('PMA_BOOKMARK_LIB_INCLUDED')) {
+    include('./libraries/bookmark.lib.php');
+}
 
 // Check parameters
 PMA_checkParameters(array('db','table'));
@@ -23,7 +29,7 @@ $err_url   = $cfg['DefaultTabTable'] . '?' . PMA_generate_common_url($db, $table
 /**
  * Ensures the database and the table exist (else move to the "parent" script)
  */
-require_once('./libraries/db_table_exists.lib.php');
+require('./libraries/db_table_exists.lib.php');
 
 
 /**
@@ -31,7 +37,7 @@ require_once('./libraries/db_table_exists.lib.php');
  */
 if (!isset($message)) {
     $js_to_run = 'functions.js';
-    require_once('./header.inc.php');
+    include('./header.inc.php');
 } else {
     PMA_showMessage($message);
     unset($message);

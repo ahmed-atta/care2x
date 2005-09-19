@@ -5,13 +5,22 @@
 /**
  * Gets some core libraries
  */
-require_once('./libraries/grab_globals.lib.php');
-require_once('./libraries/common.lib.php');
+if (!defined('PMA_GRAB_GLOBALS_INCLUDED')) {
+    include('./libraries/grab_globals.lib.php');
+}
+if (!defined('PMA_COMMON_LIB_INCLUDED')) {
+    include('./libraries/common.lib.php');
+}
 
 /**
  * Handles some variables that may have been sent by the calling script
  */
-unset($db, $table);
+if (isset($db)) {
+    unset($db);
+}
+if (isset($table)) {
+    unset($table);
+}
 
 /**
  * Set parameters for links
@@ -26,7 +35,7 @@ $err_url = 'main.php' . $url_query;
 /**
  * Displays the headers
  */
-require_once('./header.inc.php');
+require('./header.inc.php');
 
 /**
  * Checks for superuser privileges

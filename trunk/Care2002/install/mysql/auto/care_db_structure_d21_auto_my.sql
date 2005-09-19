@@ -3393,7 +3393,7 @@ CREATE TABLE care_users (
 );
 
 # --------------------------------------------------------
-
+INSERT INTO `care_users` VALUES ('admin', 'care', '88d923ba797e9cafdfa4176f02bc2537', 0, 0, 'System_Admin', 1, '2004-11-23', '09:32:40', '0000-00-00', '00:00:00', '', '', 'auto-installer', '00000000000000', 'auto-installer', '00000000000000');
 #
 # Tabellenstruktur für Tabelle care_version
 #

@@ -32,21 +32,28 @@ $bgc1='#fefefe';
 
 $abtname=get_meta_tags($root_path."global_conf/$lang/konsil_tag_dept.pid");
 
+/* Establish db connection */
+if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
+if($dblink_ok)
+{	
+	
+       include_once($root_path.'include/inc_date_format_functions.php');
 
-include_once($root_path.'include/inc_date_format_functions.php');
-
-$dbtable='care_encounter_diagnostics_report';
-
-$sql="SELECT * FROM $dbtable WHERE encounter_nr='$pn' ORDER BY  modify_time  DESC";
-//$sql="SELECT * FROM $dbtable WHERE patnum='$pn' ORDER BY  item_nr DESC";
-
-if($ergebnis=$db->Execute($sql)){
-	$rows=$ergebnis->RecordCount();
-	if($rows) $report=$ergebnis->FetchRow();
-	else $report['script_call']='diagnostics-report-none.php?pn='.$pn; // If no report is available, load the non-availability page
-}else{
-	echo "<p>$sql$LDDbNoRead";
-}
+		$dbtable='care_encounter_diagnostics_report';
+		
+		$sql="SELECT * FROM $dbtable WHERE encounter_nr='$pn' ORDER BY  modify_time  DESC";
+		//$sql="SELECT * FROM $dbtable WHERE patnum='$pn' ORDER BY  item_nr DESC";
+		
+		if($ergebnis=$db->Execute($sql))
+       		{
+				$rows=$ergebnis->RecordCount();
+				if($rows) $report=$ergebnis->FetchRow();
+				  else $report['script_call']='diagnostics-report-none.php?pn='.$pn; // If no report is available, load the non-availability page
+			}
+			else{echo "<p>$sql$LDDbNoRead";}
+	}
+	else 
+		{ echo "$LDDbNoLink<br>$sql<br>"; }
 
 ?>
 
@@ -67,7 +74,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <!-- Script Begin
 function showInitPage() {
 
-   window.parent.DIAGNOSTICS_REPORT_MAIN_<?php echo $sid.'_'.$pn ?>.location.replace('<?php echo $root_path.'modules/laboratory/'.$report['script_call']; ?>&sid=<?php echo $sid ?>&lang=<?php echo $lang ?>&edit=<?php echo $edit ?>&user_origin=<?php echo $user_origin ?>&show_print_button=1&no_autoprint=1');
+   window.parent.DIAGNOSTICS_REPORT_MAIN_<?php echo $sid.'_'.$pn ?>.location.replace('<?php echo $root_path.'modules/laboratory/'.$report['script_call']; ?>&sid=<?php echo $sid ?>&lang=<?php echo $lang ?>&edit=<?php echo $edit ?>&user_origin=<?php echo $user_origin ?>&show_print_button=1');
 
 }
 //  Script End -->
@@ -85,6 +92,8 @@ function showInitPage() {
 
 if($rows)
 { 
+
+   //mysql_data_seek($ergebnis,0);  //reset the array to the first element
 
   do{
   //echo $tracker."<br>";
@@ -104,11 +113,11 @@ if($rows)
         echo "&nbsp;<img src=\"../gui/img/common/default/pixel.gif\" border=0 width=4 height=7> ";
    }  
   
-   echo " <a href=\"".$root_path."modules/laboratory/".$report['script_call']."&sid=".$sid."&lang=".$lang."&user_origin=".$user_origin."&show_print_button=1&no_autoprint=1\" target=\"DIAGNOSTICS_REPORT_MAIN_".$sid."_".$pn."\">".$report['reporting_dept']."<br>".$report['report_nr']."</a><hr>";
+   echo " <a href=\"".$root_path."modules/laboratory/".$report['script_call']."&sid=".$sid."&lang=".$lang."&user_origin=".$user_origin."&show_print_button=1\" target=\"DIAGNOSTICS_REPORT_MAIN_".$sid."_".$pn."\">".$report['reporting_dept']."<br>".$report['report_nr']."</a><hr>";
 
 		
    
-/* Check for the barcode png image, if nonexistent create it in the cache */
+    /* Check for the barcode png image, if nonexistent create it in the cache */
 /*    if(!file_exists($root_path.'cache/barcodes/pn_'.$report['encounter_nr'].'.png'))
     {
 	   echo "<img src='".$root_path."classes/barcode/image.php?code=".$report['encounter_nr']."&style=68&type=I25&width=145&height=50&xres=2&font=5&label=2' border=0 width=0 height=0>";

@@ -6,15 +6,15 @@
 /**
  * Gets some core libraries
  */
-require_once('./libraries/grab_globals.lib.php');
-require_once('./libraries/common.lib.php');
-require_once('./db_details_common.php');
+require('./libraries/grab_globals.lib.php');
+require('./libraries/common.lib.php');
+require('./db_details_common.php');
 
 
 /**
  * Settings for relation stuff
  */
-require_once('./libraries/relation.lib.php');
+require('./libraries/relation.lib.php');
 $cfgRelation = PMA_getRelationsParam();
 
 
@@ -29,13 +29,13 @@ $cfgRelation = PMA_getRelationsParam();
 if (!$cfgRelation['relwork']) {
     echo sprintf($strNotSet, 'relation', 'config.inc.php') . '<br />' . "\n"
          . '<a href="./Documentation.html#relation" target="documentation">' . $strDocu . '</a>' . "\n";
-    require_once('./footer.inc.php');
+    exit();
 }
 
 if (!$cfgRelation['displaywork']) {
     echo sprintf($strNotSet, 'table_info', 'config.inc.php') . '<br />' . "\n"
          . '<a href="./Documentation.html#table_info" target="documentation">' . $strDocu . '</a>' . "\n";
-    require_once('./footer.inc.php');
+    exit();
 }
 
 if (!isset($cfgRelation['table_coords'])){
@@ -83,7 +83,7 @@ if ($cfgRelation['pdfwork']) {
                     // save the page number
                     $pdf_page_number = mysql_insert_id((isset($dbh)?$dbh:''));
 
-                    // get the tables that have relations, by descending
+                    // get the tables that have relations, by descending 
                     // number of links
                     $master_tables = 'SELECT COUNT(master_table), master_table'
                                 . ' FROM ' . PMA_backquote($cfgRelation['relation'])
@@ -105,31 +105,34 @@ if ($cfgRelation['pdfwork']) {
                         // one table, and might be a master itself)
 
                         $foreign_tables = array();
-                        foreach($all_tables AS $master_table) {
+                        while (list(,$master_table) = each($all_tables)) {
                             $foreigners = PMA_getForeigners($db, $master_table);
-                            foreach($foreigners AS $foreigner) {
+                            while (list(, $foreigner) = each($foreigners)) {
                                 if (!in_array($foreigner['foreign_table'], $foreign_tables)) {
                                     $foreign_tables[] = $foreigner['foreign_table'];
-                                }
-                            }
-                        }
+                                } 
+                            } 
+                        } 
 
                         // then merge the arrays
-                        foreach($foreign_tables AS $foreign_table) {
+
+                        while (list(,$foreign_table) = each($foreign_tables)) {
                             if (!in_array($foreign_table, $all_tables)) {
                                 $all_tables[] = $foreign_table;
-                            }
+                            } 
 
                         }
                         // now generate the coordinates for the schema,
                         // in a clockwise spiral
-
+                       
                         $pos_x = 300;
                         $pos_y = 300;
                         $delta = 50;
                         $delta_mult = 1.34;
                         $direction = "right";
-                        foreach($all_tables AS $current_table) {
+                        reset($all_tables);
+
+                        while (list(,$current_table) = each($all_tables)) {
 
                             // save current table's coordinates
                             $insert_query = 'INSERT INTO ' . PMA_backquote($cfgRelation['table_coords']) . ' '
@@ -208,7 +211,7 @@ if ($cfgRelation['pdfwork']) {
                 } // end for
                 break;
             case 'deleteCrap':
-                foreach($delrow AS $current_row) {
+                while (list(,$current_row) = each($delrow)) {
                     $d_query = 'DELETE FROM ' . PMA_backquote($cfgRelation['table_coords']) . ' ' . "\n"
                              .   ' WHERE db_name = \'' . PMA_sqlAddslashes($db) . '\'' . "\n"
                              .   ' AND   table_name = \'' . PMA_sqlAddslashes($current_row) . '\'' . "\n"
@@ -295,6 +298,7 @@ $i = 0;
 while ($temp_sh_page = @PMA_mysql_fetch_array($page_rs)) {
     $array_sh_page[] = $temp_sh_page;
 }
+reset($array_sh_page);
 
 // garvin: Display WYSIWYG-PDF parts?
 if ($cfg['WYSIWYG-PDF']) {
@@ -306,10 +310,10 @@ if ($cfg['WYSIWYG-PDF']) {
 </form>
 <div id="pdflayout" class="pdflayout" style="visibility: hidden;">
 <?php
-foreach($array_sh_page AS $key => $temp_sh_page) {
+while (list($key, $temp_sh_page) = each($array_sh_page)) {
     $drag_x = $temp_sh_page['x'];
     $drag_y = $temp_sh_page['y'];
-
+    
     $draginit       .= '    Drag.init(getElement("table_' . $i . '"), null, 0, parseInt(myid.style.width)-2, 0, parseInt(myid.style.height)-5);' . "\n";
     $draginit       .= '    getElement("table_' . $i . '").onDrag = function (x, y) { document.edcoord.elements["c_table_' . $i . '[x]"].value = parseInt(x); document.edcoord.elements["c_table_' . $i . '[y]"].value = parseInt(y) }' . "\n";
     $draginit       .= '    getElement("table_' . $i . '").style.left = "' . $drag_x . 'px";' . "\n";
@@ -319,21 +323,10 @@ foreach($array_sh_page AS $key => $temp_sh_page) {
     $reset_draginit .= '    document.edcoord.elements["c_table_' . $i . '[x]"].value = "2"' . "\n";
     $reset_draginit .= '    document.edcoord.elements["c_table_' . $i . '[y]"].value = "' . (15 * $i) . '"' . "\n";
 
-    $local_query = 'SHOW FIELDS FROM '
-                 .  PMA_backquote($temp_sh_page['table_name'] )
-                . ' FROM ' . PMA_backquote($db);
-    $fields_rs = PMA_mysql_query($local_query) or PMA_mysqlDie('', $local_query, '', $err_url_0);
-    $fields_cnt = mysql_num_rows($fields_rs);
-
-    echo '<div id="table_' . $i . '" class="pdflayout_table"><u>' . $temp_sh_page['table_name'] . '</u>';
-    while ($row = PMA_mysql_fetch_array($fields_rs)) {
-        echo "<br>".htmlspecialchars($row['Field'])."\n";
-    }
-    echo '</div>' . "\n";
-    mysql_free_result($fields_rs);
-
+    echo '<div id="table_' . $i . '" class="pdflayout_table">' . $temp_sh_page['table_name'] . '</div>' . "\n";
     $i++;
 }
+reset($array_sh_page);
 ?>
 </div>
 <script type="text/javascript">
@@ -371,7 +364,7 @@ function resetDrag() {
 
 
         $i = 0;
-        foreach($array_sh_page AS $dummy_sh_page => $sh_page) {
+        while (list($dummy_sh_page, $sh_page) = each($array_sh_page)) {
             $_mtab       = $sh_page['table_name'];
             $tabExist[$_mtab] = FALSE;
             echo "\n" . '    <tr ';
@@ -383,7 +376,8 @@ function resetDrag() {
             echo '>';
             echo "\n" . '        <td>'
                  . "\n" . '            <select name="c_table_' . $i . '[name]">';
-            foreach($selectboxall AS $key => $value) {
+            reset($selectboxall);
+            while (list($key, $value) = each($selectboxall)) {
                 echo "\n" . '                <option value="' . $value . '"';
                 if ($value == $sh_page['table_name']) {
                     echo ' selected="selected"';
@@ -415,7 +409,8 @@ function resetDrag() {
         echo '>';
         echo "\n" . '        <td>'
              . "\n" . '            <select name="c_table_' . $i . '[name]">';
-        foreach($selectboxall AS $key => $value) {
+        reset($selectboxall);
+        while (list($key, $value) = each($selectboxall)) {
             echo "\n" . '                <option value="' . $value . '">' . $value . '</option>';
         }
         echo "\n" . '            </select>'
@@ -444,7 +439,7 @@ function resetDrag() {
     $_strname   = '';
     $shoot      = FALSE;
     if (!empty($tabExist) && is_array($tabExist)) {
-        foreach($tabExist AS $key => $value) {
+        while (list($key, $value) = each($tabExist)) {
             if (!$value) {
                 $_strtrans  .= '<input type="hidden" name="delrow[]" value="' . $key . '">' . "\n";
                 $_strname   .= '<li>' . $key . '</li>' . "\n";
@@ -469,8 +464,8 @@ function resetDrag() {
     //    d i s p l a y   p d f    s c h e m a
     //    ------------------------------------
 
-    if (isset($do)
-    && ($do == 'edcoord'
+    if (isset($do) 
+    && ($do == 'edcoord' 
        || ($do == 'choosepage' && isset($chpage))
        || ($do == 'createpage' && isset($chpage)))) {
         ?>
@@ -496,7 +491,7 @@ function resetDrag() {
     <?php echo $strPaperSize; ?>
     <select name="paper" <?php echo ($cfg['WYSIWYG-PDF'] ? 'onchange="refreshDragOption(\'pdflayout\');"' : ''); ?>>
 <?php
-    foreach($cfg['PDFPageSizes'] AS $key => $val) {
+    while (list($key,$val) = each($cfg['PDFPageSizes'])) {
         echo '<option value="' . $val . '"';
         if ($val == $cfg['PDFDefaultPageSize']) {
             echo ' selected="selected"';
@@ -512,7 +507,7 @@ function resetDrag() {
         ?>
 <script type="text/javascript">
 <!--
-ToggleDragDrop('pdflayout');
+ToggleDragDrop('pdflayout');    
 // -->
 </script>
         <?php
@@ -525,5 +520,5 @@ ToggleDragDrop('pdflayout');
  * Displays the footer
  */
 echo "\n";
-require_once('./footer.inc.php');
+require('./footer.inc.php');
 ?>

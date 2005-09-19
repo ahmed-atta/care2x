@@ -189,7 +189,7 @@ div.fa2_ml3 {font-family: arial; font-size: 12; margin-left: 3; }
 
 </HEAD>
 
-<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> onLoad="if (window.focus) window.focus();<?php if(!$no_autoprint) echo 'window.print();'; ?>">
+<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> onLoad="if (window.focus) window.focus();window.print();"  >
 
 
 

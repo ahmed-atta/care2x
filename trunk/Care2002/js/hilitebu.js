@@ -7,4 +7,4 @@ function hilite(idx,mode)
 	if(mode==1) idx.filters.alpha.opacity=100
 	else idx.filters.alpha.opacity=70;
 	}	
- -->
+// -->

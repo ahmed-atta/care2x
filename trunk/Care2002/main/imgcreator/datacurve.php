@@ -6,7 +6,7 @@ require($root_path.'classes/datetimemanager/class.dateTimeManager.php');
 $dateshifter=new dateTimeManager();
 /*
 CARE2X Integrated Information System for Hospitals and Health Care Organizations and Services
-Copyright (C) 2002  Elpidio Latorilla & Intellin.org	
+Copyright (C) 2002,2003,2004,2005  Elpidio Latorilla & Intellin.org	
 GNU GPL. For details read file "copy_notice.txt".
 */
 
