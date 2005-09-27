@@ -187,7 +187,7 @@ ul {
 	padding-left: 6px;
 }
 .reg_list_titlebar{
-	background-color: #eeeeee;
+	background-color: #66ee66;
 	color: #000066;
 }
 /* -- Admission form item area -- */
@@ -250,6 +250,22 @@ hr {
 	padding: 2px;
 	color: black;
 	margin-left: 5 px;
+}
+/*----- Registration search mask */
+.reg_searchmask{
+	background-color: #f3f3f3;
+}
+/*----- Registration search bordering block */
+.reg_searchmask_border{
+	background-color: #66ee66;
+}
+/*----- Admission search mask */
+.admit_searchmask{
+	background-color: #f3f3f3;
+}
+/*----- Admission search bordering block */
+.admit_searchmask_border{
+	background-color: #6666ee;
 }
 /* ---------- Links. Note: link colors are overridden by the user configuration ----*/
 a:link {text-decoration:none}
