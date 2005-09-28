@@ -11,7 +11,7 @@
 
     <tr>
       <td>
-			<table cellspacing="0" cellpadding="0" width=800>
+			<table cellspacing="0" cellpadding="0" width="100%" border="0">
 			<tbody>
 				<tr valign="top">
 					<td>

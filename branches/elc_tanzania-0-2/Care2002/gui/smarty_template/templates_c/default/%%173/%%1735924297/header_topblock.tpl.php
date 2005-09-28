@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.0, created on 2004-07-03 16:05:34
+<?php /* Smarty version 2.6.0, created on 2005-09-26 10:10:29
          compiled from common/header_topblock.tpl */ ?>
  <table cellspacing="0"  class="titlebar" border=0>
  <tr valign=top  class="titlebar" >

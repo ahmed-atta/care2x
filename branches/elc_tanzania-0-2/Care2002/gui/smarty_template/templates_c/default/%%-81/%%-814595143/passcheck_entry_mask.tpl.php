@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.0, created on 2005-02-07 17:52:13
+<?php /* Smarty version 2.6.0, created on 2005-09-26 10:10:06
          compiled from main/passcheck_entry_mask.tpl */ ?>
 <!-- Begin Nedstat Basic code -->
 <!-- Title: Care2x -->

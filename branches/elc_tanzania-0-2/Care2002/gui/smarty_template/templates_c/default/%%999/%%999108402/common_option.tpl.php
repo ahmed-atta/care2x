@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.0, created on 2005-08-04 14:37:13
+<?php /* Smarty version 2.6.0, created on 2005-09-26 11:34:22
          compiled from registration_admission/common_option.tpl */ ?>
 
 <table width="100%" cellspacing="0" cellpadding="0">
@@ -14,7 +14,7 @@ unset($_smarty_tpl_vars);
 
     <tr>
       <td>
-			<table cellspacing="0" cellpadding="0" width=800>
+			<table cellspacing="0" cellpadding="0" width="100%" border="0">
 			<tbody>
 				<tr valign="top">
 					<td>

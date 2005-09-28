@@ -28,7 +28,7 @@
 						{{$img_source}}
 					</td>
 				</tr>
-
+				{{if $LDTitle}}
 				<tr>
 					<td {{$sClassItem}}>
 						{{$LDTitle}}:
@@ -37,7 +37,7 @@
 						{{$title}}
 					</td>
 				</tr>
-
+				{{/if}}
 				<tr>
 					<td {{$sClassItem}}>
 						{{$LDLastName}}:

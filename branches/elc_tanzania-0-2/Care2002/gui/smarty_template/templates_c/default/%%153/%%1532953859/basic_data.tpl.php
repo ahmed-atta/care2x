@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.0, created on 2004-07-06 22:59:01
+<?php /* Smarty version 2.6.0, created on 2005-09-26 11:34:22
          compiled from registration_admission/basic_data.tpl */ ?>
 
 		<table border="0" cellspacing=1 cellpadding=0 width="100%">
@@ -36,7 +36,7 @@
 
 					</td>
 				</tr>
-
+				<?php if ($this->_tpl_vars['LDTitle']): ?>
 				<tr>
 					<td <?php echo $this->_tpl_vars['sClassItem']; ?>
 >
@@ -49,7 +49,7 @@
 
 					</td>
 				</tr>
-
+				<?php endif; ?>
 				<tr>
 					<td <?php echo $this->_tpl_vars['sClassItem']; ?>
 >

@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.0, created on 2005-03-01 11:16:55
+<?php /* Smarty version 2.6.0, created on 2005-09-26 10:09:59
          compiled from common/header.tpl */ ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php echo $this->_tpl_vars['HTMLtag']; ?>
