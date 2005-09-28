@@ -69,7 +69,7 @@ A:visited:hover {color: #cc0033;}
 	      <table border=0 cellspacing=1 cellpadding=3>
             <tbody class="submenu">
               <tr> 
-                <td align=right width=103> Peadric</td>
+                <td align=right width=103> Pediatric</td>
                 <td align=right width=27 class="prompt">
                 <input type="checkbox" name="is_peadric" <?php if (!empty($is_peadric)) echo "checked";?> <?php echo $html_disabler;?>></td>
                 <td align=right width=206 >
@@ -141,8 +141,9 @@ A:visited:hover {color: #cc0033;}
                 <?php if ($GO_BACK_TO_SEARCH)
                           echo '<input type="hidden" name="GO_BACK_TO_SEARCH" value="TRUE">';
                           echo '<input type="hidden" name="keyword" value="'.$keyword.'">';
+                          echo '<input type="hidden" name="formular_sent" value="true">';
                           if (isset($selian_item_number))
-                            echo '<input type="hidden" name="selian_item_number" value="'.$selian_item_number.'">';
+                            echo '<input type="hidden" name="item_id" value="'.$item_id.'">';
                 ?>
                 
                 <?php if ($html_disabler) {

@@ -44,6 +44,26 @@ if($mode=='save'){
 	# Point to the data array
 	$saveparam = $HTTP_POST_VARS;
 	$saveparam['price'] = $lab_obj->CheckNumber($saveparam['price']);
+	if($saveparam['price'])
+	{
+		if($saveparam['nr']!=0 && $saveparam['nr'])
+		{
+			$action = $lab_obj->UpdateParams($saveparam);
+		}
+		else
+		{
+			$action = $lab_obj->InsertParams();
+		}
+	}
+	echo $action;
+	
+	/* ON ERROR TRY THIS ONE
+	
+	# Set to use the test params
+	$lab_obj->useTestParams();
+	# Point to the data array
+	$saveparam = $HTTP_POST_VARS;
+	$saveparam['price'] = $lab_obj->CheckNumber($saveparam['price']);
 	if($saveparam['nr']!=0 && $saveparam['nr'])
 	{
 		$action = $lab_obj->UpdateParams($saveparam);
@@ -53,6 +73,9 @@ if($mode=='save'){
 		$action = $lab_obj->InsertParams();
 	}
 	echo $action;
+	
+	*/
+	
 	if($action){
 ?>
 	

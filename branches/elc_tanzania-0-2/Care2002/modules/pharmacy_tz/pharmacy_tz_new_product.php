@@ -20,7 +20,7 @@ require($root_path.'include/care_api_classes/class_tz_pharmacy.php');
 * GNU General Public License
 * Copyright 2005 Robert Meggle based on the development of Elpidio Latorilla (2002,2003,2004,2005)
 * elpidio@care2x.org, meggle@merotech.de
-*
+* Updated by: Alexander Irro - alexander.irro@merotech.de
 * See the file "copy_notice.txt" for the licence notice
 */
 
@@ -94,16 +94,16 @@ if (!empty($mode)) {
   
   // if show or edit then preload the missing informations for editing
   if ($mode=="show" || $mode=="edit" || $mode=="erase" || $mode=="update") {
-    if (!empty($item_number)) {
-      $is_peadric                 = $product_obj->get_item_peadric($item_number);
-      $is_adult                   = $product_obj->get_item_adult($item_number);  
-      $is_other                   = $product_obj->get_item_other($item_number);  
-      $is_consumable              = $product_obj->get_item_consumable($item_number);  
-      $selian_item_number         = $item_number;
-      $selians_item_description   = $product_obj->get_selians_item_description($item_number);
-      $items_full_description     = $product_obj->get_items_full_description($item_number);
-      $item_classification        = $product_obj->get_item_classification($item_number);
-      $selians_item_price         = $product_obj->get_selians_item_price($item_number);
+    if (!empty($item_id) && empty($formular_sent)) {
+      $is_peadric                 = $product_obj->get_item_peadric($item_id);
+      $is_adult                   = $product_obj->get_item_adult($item_id);  
+      $is_other                   = $product_obj->get_item_other($item_id);  
+      $is_consumable              = $product_obj->get_item_consumable($item_id);  
+      $selian_item_number         = $product_obj->get_itemnumber($item_id);
+      $selians_item_description   = $product_obj->get_selians_item_description($item_id);
+      $items_full_description     = $product_obj->get_items_full_description($item_id);
+      $item_classification        = $product_obj->get_item_classification($item_id);
+      $selians_item_price         = $product_obj->get_selians_item_price($item_id);
     } 
   }
   
@@ -163,10 +163,10 @@ if ( !empty($mode) && !$ERROR ) {
     if ($debug) echo "current mode is insert!<br>";
     if ($product_obj -> item_number_exists ($selian_item_number)) {
       // The item still exists in the database!
-      $ERROR_MSG.="Sorry, this item with code \"".$selian_item_number."\" still exists in the database! <br>
-                   Please check the field Selians item number, you can just update or delete it!<br>";
-      $ERROR_SELIAN_ITEM_NUMBER = TRUE;
-      $ERROR=TRUE;
+      //$ERROR_MSG.="Sorry, this item with code \"".$selian_item_number."\" still exists in the database! <br>
+      //             Please check the field Selians item number, you can just update or delete it!<br>";
+      //$ERROR_SELIAN_ITEM_NUMBER = TRUE;
+      //$ERROR=TRUE;
     } else {
       // This is a new item, store it into the database
       $product_obj->setDataArray($db_buffer);
@@ -179,10 +179,10 @@ if ( !empty($mode) && !$ERROR ) {
   
   if ($mode=="update") {
     if ($debug) echo "current mode is update!<br>";
-    if ($product_obj -> item_number_exists ($selian_item_number)) {
+    if ($product_obj -> item_number_exists ($item_id)) {
       // The item still exists in the database!
       $product_obj->setDataArray($db_buffer);
-      $product_obj->updatePharmacyDataFromInternalArray($selian_item_number,FALSE);
+      $product_obj->updatePharmacyDataFromInternalArray($item_id,FALSE);
       $MSG.="Item with code \"".$selian_item_number."\" is now updated<br>";
     } else {
       // There is no item with such an item number in the database
@@ -198,9 +198,9 @@ if ( !empty($mode) && !$ERROR ) {
   //------------------------------------------------------------------------------
   
   if ($mode=="delete") {
-    if ($product_obj -> item_number_exists ($selian_item_number)) {
+    if ($product_obj -> item_number_exists ($item_id)) {
       // The item still exists in the database!
-      $product_obj->delete_item($selian_item_number);
+      $product_obj->delete_item($item_id);
       $MSG.="Item with code \"".$selian_item_number."\" is deleted now<br>";
     } else {
       // This is a new item

@@ -13,7 +13,7 @@ require($root_path.'include/inc_environment_global.php');
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 $enc_obj=new Encounter;
 
-$debug = FALSE;
+$debug = false;
 
 if ($debug) {
   echo $pn."<br>";
@@ -26,6 +26,8 @@ if (empty($back_path))
 else {
   if ($back_path=="billing")
     $RETURN_PATH= $root_path."modules/billing_tz/billing_tz.php";
+  if ($back_path=="laboratory")
+    $RETURN_PATH= $root_path."modules/laboratory/labor.php";    
 }
 
 if ($mode=="done" && isset($pn) && isset($prescription_date)) {
@@ -65,7 +67,7 @@ if ($mode=="done" && isset($pn) && isset($prescription_date)) {
 		            AND  care_encounter.pid = care_person.pid 
 		      group by pr.prescribe_date, encounter_nr
 		      ORDER BY pr.prescribe_date DESC";						         
-						       
+
 		if($requests=$db->Execute($sql)){
 		  
 		  if ($requests->RecordCount()>0) {

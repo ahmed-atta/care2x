@@ -75,17 +75,24 @@ A:visited:hover {color: #cc0033;}
 		<td bgcolor=#ffffff valign=top>
 		
 													
-<table border="0">
+<table border="0" width="100%" height="100%">
 	<tr valign="top">
 		<!-- Left block for the request list  -->
-		    <td> <br>
-              <br>
-<?php 
-  
+		    <td>
+<?php
+if($back_path=='billing')
+{
+		echo '<a href="'.URL_APPEND.'&target=search&task=newprescription&back_path=billing">Create new Prescription</a>';
+}
+else
+{
+		echo '<br><br>';
+}		    
+	
   require($root_path.'include/inc_pharmacy_pending_lister_fx.php'); 
   
 ?>
-		    <td> 
+		    <td width="100%"> 
 		          <?php
 		          if (!$NO_PENDING_PRESCRIPTIONS) {
 		            echo '
@@ -97,7 +104,15 @@ A:visited:hover {color: #cc0033;}
                   if ($NO_PENDING_PRESCRIPTIONS) {
                     echo '<br><br><br><br>&nbsp;&nbsp;&nbsp;&nbsp;no pending prescriptions...<br>';
                   } else {
-                    echo '<iframe name="prescription" src="'.$root_path.'/modules/registration_admission/show_prescription.php?externalcall=TRUE&pn='.$pn.'&sid='.$sid.'" width="900" height="400" align="left" marginheight="0" marginwidth="0" hspace="0" vspace="0" scrolling="auto" frameborder="0" noresize></iframe> ';
+                  	if($task=="newprescription")
+                  	{
+                  		echo '<iframe name="prescription" src="'.$root_path.'modules/registration_admission/aufnahme_daten_such.php'.URL_APPEND.'&target=search&task=newprescription" width="100%" height="90%" align="left" marginheight="0" marginwidth="0" hspace="0" vspace="0" scrolling="auto" frameborder="0" noresize></iframe> ';
+                  	}
+                  	else
+                  	{
+                    	echo '<iframe name="prescription" src="'.$root_path.'/modules/registration_admission/show_prescription.php?prescription_date='.$prescription_date.'&externalcall=TRUE&pn='.$pn.'&sid='.$sid.'" width="100%" height="90%" align="left" marginheight="0" marginwidth="0" hspace="0" vspace="0" scrolling="auto" frameborder="0" noresize></iframe> ';
+                  	}
+                    
                   }
                ?>
         </td>

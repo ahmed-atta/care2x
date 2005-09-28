@@ -64,9 +64,9 @@ if (!empty($keyword)) {
                     
                     <td>".$item_classification."</td>
                     <td>".$item_plausibility."</td>
-                    <td><div align=\"center\"><a href=\"pharmacy_tz_new_product.php?mode=show&item_number=".$item_number."&keyword=".$keyword."\"><img src=\"".$root_path."gui/img/common/default/common_infoicon.gif\" width=\"16\" height=\"16\" border=\"0\"></a></td>
-                    <td><div align=\"center\"><a href=\"pharmacy_tz_new_product.php?mode=edit&item_number=".$item_number."&keyword=".$keyword."\"><img src=\"".$root_path."gui/img/common/default/hammer.gif\" width=\"16\" height=\"16\" border=\"0\"></a></td>
-                    <td><div align=\"center\"><a href=\"pharmacy_tz_new_product.php?mode=erase&selian_item_number=".$item_number."&keyword=".$keyword."\"><img src=\"".$root_path."gui/img/common/default/delete.gif\" width=\"16\" height=\"16\" border=\"0\"></a></td>";
+                    <td><div align=\"center\"><a href=\"pharmacy_tz_new_product.php?mode=show&item_id=".$item_id."&keyword=".$keyword."\"><img src=\"".$root_path."gui/img/common/default/common_infoicon.gif\" width=\"16\" height=\"16\" border=\"0\"></a></td>
+                    <td><div align=\"center\"><a href=\"pharmacy_tz_new_product.php?mode=edit&item_id=".$item_id."&keyword=".$keyword."\"><img src=\"".$root_path."gui/img/common/default/hammer.gif\" width=\"16\" height=\"16\" border=\"0\"></a></td>
+                    <td><div align=\"center\"><a href=\"pharmacy_tz_new_product.php?mode=erase&item_id=".$item_id."&keyword=".$keyword."\"><img src=\"".$root_path."gui/img/common/default/delete.gif\" width=\"16\" height=\"16\" border=\"0\"></a></td>";
     $http_buffer.="</tr>";
     
   }
