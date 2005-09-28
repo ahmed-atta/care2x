@@ -23,7 +23,6 @@ require($root_path.'include/inc_front_chain_lang.php');
 
 $thisfile=basename(__FILE__);
 $default_filebreak=$root_path.'main/startframe.php'.URL_APPEND;
-
 if(empty($HTTP_SESSION_VARS['sess_path_referer']) || !file_exists($root_path.$HTTP_SESSION_VARS['sess_path_referer'])) {
     $breakfile=$default_filebreak;
 } else {

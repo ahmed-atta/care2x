@@ -7,9 +7,15 @@ $pres_types=$pres_obj->getPrescriptionTypes();
 
 ?>
 <script language="JavaScript">
-<!-- Script Begin
 function chkform(d) {
-  /*
+	
+	if(isNaN(d.value))
+	{
+		alert("Please enter a valid numeric value format like '1234', '2' or '2.5'");	
+		d.focus();
+	}
+/*
+	return false;
 	if(d.prescribe_date.value==""){
 		alert("<?php echo $LDPlsEnterDate; ?>");
 		d.prescribe_date.focus();
@@ -34,9 +40,7 @@ function chkform(d) {
 		return true;
 	}
 */
-return true;
 }
-//  Script End -->
 </script>
 <form method="POST" name="reportform<?PHP echo $i;?>" onSubmit="return chkform(this)">
 <?PHP
@@ -48,8 +52,8 @@ for ($i=0 ; $i<count($item_array) ; $i++) {
  <table border=0 cellpadding=2 width=100%>
   
    <tr bgcolor="#f6f6f6">
-     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDosage; ?></td>
-     <td><input type="text" name="arr_dosage[<?PHP echo $i; ?>]" size=50 maxlength=60></td>
+     <td><FONT SIZE=-1  FACE="Arial" color="#000066">Total dose</td>
+     <td><input type="text" name="arr_dosage[<?PHP echo $i; ?>]" size=50 maxlength=60  onBlur="chkform(this)"></td>
    </tr>
    <tr bgcolor="#f6f6f6">
      <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDApplication.' '.$LDNotes; ?></td>

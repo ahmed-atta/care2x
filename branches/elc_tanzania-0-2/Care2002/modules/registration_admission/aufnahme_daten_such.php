@@ -155,8 +155,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 			$dbtable='FROM care_encounter as enc,care_person as reg ';
 
 			$sql='SELECT enc.encounter_nr, enc.encounter_class_nr, enc.is_discharged,
-								reg.name_last, reg.name_first, reg.date_birth, reg.addr_zip,reg.sex '.$dbtable.$sql2;
-			//echo $sql;
+								reg.pid, reg.name_last, reg.name_first, reg.date_birth, reg.addr_zip,reg.sex '.$dbtable.$sql2;
 
 			if($ergebnis=$db->SelectLimit($sql,$pagen->MaxCount(),$pagen->BlockStartIndex()))
        		{
@@ -277,7 +276,8 @@ $smarty->assign('sHiddenInputs','<input type="image" '.createLDImgSrc($root_path
 		<input type="hidden" name="retpath" value="'.$retpath.'">
 		<input type="hidden" name="aux1" value="'.$aux1.'">
 		<input type="hidden" name="ipath" value="'.$ipath.'">
-		<input type="hidden" name="mode" value="search">');
+		<input type="hidden" name="mode" value="search">
+		<input type="hidden" name="task" value="'.$task.'"');
 
 $smarty->assign('sCancelButton','<a href="patient.php'.URL_APPEND.'&target=search"><img '.createLDImgSrc($root_path,'cancel.gif','0').'></a>');
 
@@ -338,8 +338,15 @@ if($mode=='search'||$mode=='paginate'){
 			$smarty->assign('sBday',formatDate2Local($zeile['date_birth'],$date_format));
 
 			$smarty->assign('sZipCode',$zeile['addr_zip']);
-
-			$sTarget = "<a href=\"aufnahme_daten_zeigen.php".URL_APPEND."&from=such&encounter_nr=$full_en&target=search\">";
+			if($task=='newprescription')
+			{
+				$sTarget = "<a href=\"show_prescription.php".URL_APPEND."&from=such&encounter_nr=$full_en&target=search&pn=$full_en&externalcall=true\">";
+			}
+			else
+			{
+				$sTarget = "<a href=\"aufnahme_daten_zeigen.php".URL_APPEND."&from=such&encounter_nr=$full_en&target=search\">";
+			}
+			
 			$sTarget=$sTarget.'<img '.$img_options.' title="'.$LDShowData.'"></a>';
 			$smarty->assign('sOptions',$sTarget);
 

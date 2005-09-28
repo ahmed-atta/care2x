@@ -17,7 +17,7 @@ require($root_path.'include/inc_environment_global.php');
   
 //$externalcall=true;
 //$db->debug=1;
-
+if(!$prescription_date) $prescription_date = date("Y-m-d");
 define('NO_2LEVEL_CHK',1);
 $thisfile=basename(__FILE__);
 if(!isset($mode)){
@@ -62,24 +62,21 @@ if($parent_admit){
 			AND p.pid=e.pid 
 			AND e.encounter_nr=".$HTTP_SESSION_VARS['sess_en']." 
 			AND e.encounter_nr=pr.encounter_nr 
+			AND pr.prescribe_date = '".$prescription_date."'
 		ORDER BY pr.modify_time DESC";
-		
 }else{
 	$sql="SELECT pr.*, e.encounter_class_nr FROM care_encounter AS e, care_person AS p, care_encounter_prescription AS pr
 		WHERE p.pid=".$HTTP_SESSION_VARS['sess_pid']." AND p.pid=e.pid AND e.encounter_nr=pr.encounter_nr 
 		ORDER BY pr.modify_time DESC";
 }
 
-
 if($result=$db->Execute($sql)){
 	$rows=$result->RecordCount();
 }else{
 echo $sql;
 }
-
 $subtitle=$LDPrescriptions;
 $notestype='prescription';
-
 $HTTP_SESSION_VARS['sess_file_return']=$thisfile;
 
 $buffer=str_replace('~tag~',$title.' '.$name_last,$LDNoRecordFor);

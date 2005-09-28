@@ -12,7 +12,7 @@ else
   else 
     $breakfile = $breakfile.URL_APPEND."&target=entry";
 
-$debug=FALSE;
+$debug=false;
 
 if ($debug) {
     if (!isset($externalcall))
@@ -132,10 +132,13 @@ else
 if($parent_admit) $smarty->assign('sEncNrPID',$HTTP_SESSION_VARS['sess_full_en']);
 	else $smarty->assign('sEncNrPID',$HTTP_SESSION_VARS['sess_full_pid']);
 
-$smarty->assign('img_source',"<img $img_source>");
+$smarty->assign('img_source',"<img height=\"100\" width=\"100\" $img_source>");
 
-$smarty->assign('LDTitle',$LDTitle);
-$smarty->assign('title',$title);
+if($mode != 'new')
+{
+	$smarty->assign('LDTitle',$LDTitle);
+	$smarty->assign('title',$title);
+}
 $smarty->assign('LDLastName',$LDLastName);
 $smarty->assign('name_last',$name_last);
 $smarty->assign('LDFirstName',$LDFirstName);
@@ -149,7 +152,14 @@ if($death_date && $death_date != DBF_NODATE){
 }
 
 	# Set a row span counter, initialize with 7
-	$iRowSpan = 7;
+	if($mode=='new')
+	{
+		$iRowSpan = 5;
+	}
+	else
+	{
+		$iRowSpan = 7;
+	}
 
 	if($GLOBAL_CONFIG['patient_name_2_show']&&$name_2){
 		$smarty->assign('LDName2',$LDName2);
@@ -178,10 +188,13 @@ $smarty->assign('LDSex',$LDSex);
 if($sex=='m') $smarty->assign('sSexType',$LDMale);
 	elseif($sex=='f') $smarty->assign('sSexType',$LDFemale);
 
-$smarty->assign('LDBloodGroup',$LDBloodGroup);
-if($blood_group){
-	$buf='LD'.$blood_group;
-	$smarty->assign('blood_group',$$buf);
+if($mode != 'new')
+{
+	$smarty->assign('LDBloodGroup',$LDBloodGroup);
+	if($blood_group){
+		$buf='LD'.$blood_group;
+		$smarty->assign('blood_group',$$buf);
+	}
 }
 
 /* Buffer and load the options table  */
@@ -200,18 +213,15 @@ $smarty->assign('sOptionsMenu',$sTemp);
 # If mode = show then display data
 
 if($mode=='show' /*&& !isset($externalcall) */){
-
 	if($parent_admit) $bgimg='tableHeaderbg3.gif';
 		else $bgimg='tableHeader_gr.gif';
 
 	$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
-
 	if($rows){
 		# Buffer the option block
 		ob_start();
 			include('./gui_bridge/default/gui_'.$thisfile);
 			$sTemp = ob_get_contents();
-
       
       $smarty->assign('bShowNoRecord',TRUE);
       if (!isset($printout)) 
@@ -239,7 +249,6 @@ if($mode=='show' /*&& !isset($externalcall) */){
 		
 		$smarty->assign('sMascotImg','<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'>');
 		$smarty->assign('norecordyet',$norecordyet);
-
 		if($parent_admit && !$is_discharged && $thisfile!='show_diagnostics_result.php'){
 			$smarty->assign('sPromptIcon','<img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle',TRUE).'>');
       if (isset($externalcall))      
@@ -250,17 +259,16 @@ if($mode=='show' /*&& !isset($externalcall) */){
 			if(file_exists('./gui_bridge/default/gui_person_createnew_'.$thisfile)) include('./gui_bridge/default/gui_person_createnew_'.$thisfile);
 		}
 	}
+	
 }else {
 	# Buffer the option input block
 	ob_start();
-
 
 	   
 	   // witch tab sould be activated at first:
 	   //set here "druglist", "Supplies", "supplies-lab", "special-others" if you want.
 	   $activated_tab = "druglist"; 
-	   // (by Merotech(RM): Here the main prescription-table-content will be loaded: 
-	  
+	   // (by Merotech(RM): Here the main prescription-table-content will be loaded: ;
 	  if ($debug) echo  './gui_bridge/default/gui_input_'.$thisfile;
 	  include('./gui_bridge/default/gui_input_'.$thisfile);
 
@@ -268,7 +276,6 @@ if($mode=='show' /*&& !isset($externalcall) */){
 	ob_end_clean();
 	$smarty->assign('sOptionBlock',$sTemp);
 }
-
 # Buffer the bottom controls
 
 ob_start();
