@@ -79,7 +79,6 @@ A:visited:hover {color: #cc0033;}
 	<tr>
 		<td bgcolor=#ffffff valign=top>
 		
-													
 <table border="0">
 	<tr valign="top">
 		<!-- Left block for the request list  -->
@@ -94,10 +93,11 @@ A:visited:hover {color: #cc0033;}
                   $bill_obj->EditBillElement($billing_item);
                 } else {
                 	$bill_obj->DisplayBills($batch_nr,$billnr,1);
+                	
                 }
                   	
                ?>
-        </td>
+        </td> 
 	</tr>
 </table>     
 

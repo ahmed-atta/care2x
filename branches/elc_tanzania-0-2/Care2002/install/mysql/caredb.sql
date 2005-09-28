@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Host: localhost
--- Erstellungszeit: 12. Juni 2005 um 00:54
+-- Erstellungszeit: 13. September 2005 um 14:05
 -- Server Version: 4.0.21
 -- PHP-Version: 5.0.2
 -- 
@@ -1193,7 +1193,7 @@ CREATE TABLE `care_encounter` (
   PRIMARY KEY  (`encounter_nr`),
   KEY `pid` (`pid`),
   KEY `encounter_date` (`encounter_date`)
-) TYPE=MyISAM AUTO_INCREMENT=2005500006 ;
+) TYPE=MyISAM AUTO_INCREMENT=2005500007 ;
 
 -- 
 -- Daten für Tabelle `care_encounter`
@@ -1205,12 +1205,13 @@ INSERT INTO `care_encounter` VALUES (2005000002, 10000013, '2005-02-18 14:39:48'
 INSERT INTO `care_encounter` VALUES (2005000003, 10000014, '2005-02-18 15:16:49', 1, '', '', '', NULL, '', '', '', '', 0, '0', '0', 0, '0', '0', 0, 0, '', 1, 0, 0, 9, 0, 0, 0, '', '', 0, NULL, NULL, '0000-00-00', NULL, '', '', 'Create: 2005-02-18 15:16:49 = admin', 'admin', '20050218151649', 'admin', '20050218151649');
 INSERT INTO `care_encounter` VALUES (2005500000, 10000004, '2005-02-18 15:20:34', 2, '', 'disallow_cancel', '', NULL, '', '', '', '', 0, '0', '0', 0, '0', '0', 0, 0, '', 0, 0, 0, 22, 1, 0, 0, '', '', 0, NULL, NULL, '0000-00-00', NULL, '', '', 'Create: 2005-02-18 15:20:34 = admin\nSet dept + in dept 2005-02- 15:21:00 admin\nView 2005-02-18 15:21:08 = admin\nView 2005-02-18 15:22:04 = admin\nView 2005-02-18 15:22:45 = admin\nReset current dept 2005-02- 15:23:49 admin\nSet dept 2005-02- 15:23:49 admin\nView 2005-02-18 15:24:55 = admin\nView 2005-02-18 15:44:28 = admin\nView 2005-02-18 15:45:30 = admin\nView 2005-02-18 15:46:24 = admin\nView 2005-02-18 15:54:24 = admin\nView 2005-02-28 17:25:13 = admin\nSet dept + in dept 2005-02- 17:25:23 admin\nView 2005-02-28 17:25:26 = admin\nView 2005-03-21 16:17:50 = admin\nView 2005-03-23 15:22:58 = admin\nView 2005-03-23 16:26:41 = admin\nView 2005-03-24 10:04:59 = admin\nView 2005-04-11 18:08:26 = admin\nView 2005-04-11 18:15:11 = admin\nView 2005-04-11 19:20:33 = admin\nView 2005-04-11 19:22:08 = admin\nView 2005-04-12 11:01:09 = admin\nView 2005-05-09 19:21:28 = admin', 'admin', '20050509192128', 'admin', '20050218152034');
 INSERT INTO `care_encounter` VALUES (2005000004, 10000005, '2005-02-21 16:24:33', 1, '', '', '', NULL, '', '', '', '', 0, '0', '0', 0, '0', '0', 0, 0, '', 1, 0, 0, 0, 0, 0, 0, '', '', 0, NULL, NULL, '0000-00-00', NULL, '', '', 'Create: 2005-02-21 16:24:33 = admin', 'admin', '20050221162433', 'admin', '20050221162433');
-INSERT INTO `care_encounter` VALUES (2005500001, 10000000, '2005-02-21 16:25:21', 2, '', 'disallow_cancel', '', NULL, '', '', '', '', 0, '0', '0', 0, '0', '0', 0, 0, '', 0, 0, 0, 41, 1, 0, 0, '', '', 0, NULL, NULL, '0000-00-00', NULL, '', '', 'Create: 2005-02-21 16:25:21 = admin\nView 2005-02-21 16:26:56 = admin\nView 2005-02-21 16:27:42 = admin\nView 2005-02-21 16:29:42 = admin\nView 2005-02-21 17:00:53 = admin\nView 2005-02-21 17:01:24 = admin\nView 2005-02-21 17:01:44 = admin\nView 2005-02-21 17:02:16 = admin\nView 2005-02-21 17:03:47 = admin\nView 2005-02-21 17:04:13 = admin\nView 2005-02-21 17:05:47 = admin\nView 2005-02-21 17:06:57 = admin\nView 2005-02-21 17:15:13 = admin\nView 2005-02-21 17:22:57 = admin\nView 2005-02-21 17:25:24 = admin\nView 2005-02-22 11:04:00 = admin\nView 2005-02-22 11:05:50 = admin\nView 2005-02-22 11:06:17 = admin\nView 2005-02-22 11:27:40 = admin\nView 2005-02-24 12:14:12 = admin\nView 2005-02-28 17:18:05 = admin\nView 2005-02-28 17:20:06 = admin\nView 2005-02-28 17:21:17 = admin\nView 2005-03-08 16:18:01 = admin\nSet dept + in dept 2005-03- 16:18:10 admin\nView 2005-03-21 13:44:21 = admin\nView 2005-03-21 14:54:51 = admin\nView 2005-03-21 15:16:09 = admin\nView 2005-03-21 15:16:20 = admin\nView 2005-03-21 15:33:59 = admin\nView 2005-03-23 11:33:32 = admin\nView 2005-04-14 15:02:57 = admin\nView 2005-04-14 15:07:09 = admin\nView 2005-05-09 15:15:24 = admin', 'admin', '20050509151524', 'admin', '20050221162521');
+INSERT INTO `care_encounter` VALUES (2005500001, 10000000, '2005-02-21 16:25:21', 2, '', 'disallow_cancel', '', NULL, '', '', '', '', 0, '0', '0', 0, '0', '0', 0, 0, '', 0, 0, 0, 41, 1, 0, 0, '', '', 0, NULL, NULL, '0000-00-00', NULL, '', '', 'Create: 2005-02-21 16:25:21 = admin\nView 2005-02-21 16:26:56 = admin\nView 2005-02-21 16:27:42 = admin\nView 2005-02-21 16:29:42 = admin\nView 2005-02-21 17:00:53 = admin\nView 2005-02-21 17:01:24 = admin\nView 2005-02-21 17:01:44 = admin\nView 2005-02-21 17:02:16 = admin\nView 2005-02-21 17:03:47 = admin\nView 2005-02-21 17:04:13 = admin\nView 2005-02-21 17:05:47 = admin\nView 2005-02-21 17:06:57 = admin\nView 2005-02-21 17:15:13 = admin\nView 2005-02-21 17:22:57 = admin\nView 2005-02-21 17:25:24 = admin\nView 2005-02-22 11:04:00 = admin\nView 2005-02-22 11:05:50 = admin\nView 2005-02-22 11:06:17 = admin\nView 2005-02-22 11:27:40 = admin\nView 2005-02-24 12:14:12 = admin\nView 2005-02-28 17:18:05 = admin\nView 2005-02-28 17:20:06 = admin\nView 2005-02-28 17:21:17 = admin\nView 2005-03-08 16:18:01 = admin\nSet dept + in dept 2005-03- 16:18:10 admin\nView 2005-03-21 13:44:21 = admin\nView 2005-03-21 14:54:51 = admin\nView 2005-03-21 15:16:09 = admin\nView 2005-03-21 15:16:20 = admin\nView 2005-03-21 15:33:59 = admin\nView 2005-03-23 11:33:32 = admin\nView 2005-04-14 15:02:57 = admin\nView 2005-04-14 15:07:09 = admin\nView 2005-05-09 15:15:24 = admin\nView 2005-08-18 11:22:40 = admin\nView 2005-08-18 11:22:48 = admin\nView 2005-08-23 15:57:56 = admin', 'admin', '20050823155756', 'admin', '20050221162521');
 INSERT INTO `care_encounter` VALUES (2005000005, 10000020, '2005-02-21 17:19:47', 1, '', '', '', NULL, '', '', '', '', 0, '0', '0', 0, '0', '0', 0, 0, '', 1, 0, 0, 41, 0, 0, 0, '', '', 0, NULL, NULL, '0000-00-00', NULL, '', '', 'Create: 2005-02-21 17:19:47 = admin\nView 2005-02-24 17:57:28 = admin\n Update: 2005-02-24 18:00:23 = admin\n Update: 2005-02-24 18:00:30 = admin\n Update: 2005-02-24 18:00:36 = admin\n Update: 2005-02-24 18:00:59 = admin\nView 2005-03-02 17:09:50 = admin\nView 2005-03-08 16:16:40 = admin\nView 2005-03-21 15:33:38 = admin\nView 2005-04-11 18:24:57 = admin\nView 2005-04-20 12:10:03 = admin\nView 2005-04-20 12:10:23 = admin', 'admin', '20050420121023', 'admin', '20050221171947');
 INSERT INTO `care_encounter` VALUES (2005500002, 10000021, '2005-02-21 17:20:45', 2, '', 'disallow_cancel', '', NULL, '', '', '', '', 0, '0', '0', 0, '0', '0', 0, 0, '', 1, 0, 0, 41, 0, 0, 0, '', '', 1, '2005-05-24', '14:57:00', '0000-00-00', NULL, '', '', 'Create: 2005-02-21 17:20:45 = admin\nView 2005-02-21 17:20:56 = admin\nView 2005-02-21 17:21:19 = admin\nSet dept + in dept 2005-02- 17:20:36 admin\nView 2005-02-28 17:20:52 = admin\nView 2005-02-28 17:22:59 = admin\nView 2005-03-02 16:49:32 = admin\nView 2005-03-21 13:44:13 = admin\nView 2005-03-21 14:54:14 = admin\nView 2005-03-21 14:54:45 = admin\nView 2005-03-21 15:16:03 = admin\nView 2005-03-21 15:33:53 = admin\nView 2005-03-23 11:33:25 = admin\nView 2005-03-23 11:52:38 = admin\nView 2005-03-23 14:34:04 = admin\nView 2005-03-23 14:34:19 = admin\nView 2005-03-23 15:27:45 = admin\nView 2005-04-06 11:43:07 = admin\nView 2005-04-06 11:44:18 = admin\nView 2005-04-06 12:07:14 = admin\nView 2005-04-06 13:31:19 = admin\nView 2005-04-06 14:07:28 = admin\nView 2005-04-06 14:56:45 = admin\nView 2005-04-06 14:59:43 = admin\nView 2005-04-06 15:00:06 = admin\nView 2005-04-06 16:01:33 = admin\nView 2005-04-06 17:05:11 = admin\nView 2005-04-07 10:32:49 = admin\nView 2005-04-07 10:59:23 = admin\nView 2005-04-07 11:05:09 = admin\nView 2005-04-07 12:21:05 = admin\nView 2005-04-07 13:32:07 = admin\nView 2005-04-07 13:52:23 = admin\nView 2005-04-07 15:20:28 = admin\nView 2005-04-07 15:53:15 = admin\nView 2005-04-07 16:13:19 = admin\nView 2005-04-08 10:44:21 = admin\nView 2005-04-08 11:35:52 = admin\nView 2005-04-08 12:39:43 = admin\nView 2005-04-08 15:17:36 = admin\nView 2005-04-08 16:33:16 = admin\nView 2005-04-08 17:29:26 = admin\nView 2005-04-11 10:07:30 = admin\nView 2005-04-11 10:09:55 = admin\nView 2005-04-11 10:10:23 = admin\nView 2005-04-11 10:42:25 = admin\nView 2005-04-11 10:44:22 = admin\nView 2005-04-11 11:22:19 = admin\nView 2005-04-11 11:23:12 = admin\nView 2005-04-11 11:34:23 = admin\nView 2005-04-11 11:34:24 = admin\nView 2005-04-11 11:34:29 = admin\nView 2005-04-11 11:38:18 = admin\nView 2005-04-11 12:41:01 = admin\nView 2005-04-11 12:41:25 = admin\nView 2005-04-11 12:47:51 = admin\nView 2005-04-11 14:05:48 = admin\nView 2005-04-11 15:16:00 = admin\nView 2005-04-11 16:07:50 = admin\nView 2005-04-11 17:17:37 = admin\nView 2005-04-11 18:25:09 = admin\nView 2005-04-11 18:42:26 = admin\nView 2005-04-11 18:56:58 = admin\nView 2005-04-11 19:05:31 = admin\nView 2005-04-12 10:55:43 = admin\nView 2005-04-12 11:53:41 = admin\nView 2005-04-12 12:44:35 = admin\nView 2005-04-12 13:12:56 = admin\nView 2005-04-12 13:13:49 = admin\nView 2005-04-12 13:20:49 = admin\nView 2005-04-12 14:42:54 = admin\nView 2005-04-12 14:59:44 = admin\nView 2005-04-12 15:01:37 = admin\nView 2005-04-12 15:03:23 = admin\nView 2005-04-12 17:08:43 = admin\nView 2005-04-12 17:29:42 = admin\nView 2005-04-12 17:44:02 = admin\nView 2005-04-12 17:44:10 = admin\nView 2005-04-12 18:20:02 = admin\nView 2005-04-12 18:20:11 = admin\nView 2005-04-12 18:20:16 = admin\nView 2005-04-12 18:20:38 = admin\nView 2005-04-12 18:20:49 = admin\nView 2005-04-12 18:21:37 = admin\nView 2005-04-12 18:31:43 = admin\nView 2005-04-12 18:31:50 = admin\nView 2005-04-12 18:34:30 = admin\nView 2005-04-12 18:34:35 = admin\nView 2005-04-12 18:34:39 = admin\nView 2005-04-13 10:01:53 = admin\nView 2005-04-13 10:02:07 = admin\nView 2005-04-13 10:02:55 = admin\nView 2005-04-13 10:03:56 = admin\nView 2005-04-13 10:04:05 = admin\nView 2005-04-13 10:04:08 = admin\nView 2005-04-13 10:04:25 = admin\nView 2005-04-13 10:05:52 = admin\nView 2005-04-13 10:34:40 = admin\nView 2005-04-13 11:00:49 = admin\nView 2005-04-13 11:03:10 = admin\nView 2005-04-13 11:08:29 = admin\nView 2005-04-13 11:12:19 = admin\nView 2005-04-13 11:25:31 = admin\nView 2005-04-13 11:25:41 = admin\nView 2005-04-13 15:04:28 = admin\nView 2005-04-13 15:32:53 = admin\nView 2005-04-13 15:37:34 = admin\nView 2005-04-13 15:38:09 = admin\nView 2005-04-13 15:39:33 = admin\nView 2005-04-13 15:39:41 = admin\nView 2005-04-13 16:17:48 = admin\nView 2005-04-13 17:03:15 = admin\nView 2005-04-14 10:19:49 = admin\nView 2005-04-14 11:33:51 = admin\nView 2005-04-14 16:18:45 = admin\nView 2005-04-14 16:18:54 = admin\nView 2005-04-14 16:19:25 = admin\nView 2005-04-20 12:03:31 = admin\nView 2005-04-20 12:10:37 = admin\nView 2005-04-20 12:12:04 = admin\nView 2005-04-20 12:12:39 = admin\nView 2005-04-20 12:12:45 = admin\nView 2005-04-20 13:35:48 = admin\nView 2005-04-28 15:13:41 = admin\nView 2005-05-09 14:09:41 = admin\nView 2005-05-09 14:10:59 = admin\nView 2005-05-09 15:13:14 = admin\nView 2005-05-09 17:16:04 = admin\nView 2005-05-09 19:15:32 = admin\nView 2005-05-21 15:44:45 = admin\nView 2005-05-21 19:54:32 = admin\nView 2005-05-24 12:05:43 = admin', 'admin', '20050524145742', 'admin', '20050221172045');
-INSERT INTO `care_encounter` VALUES (2005500003, 4, '2005-04-20 12:02:53', 2, '', 'disallow_cancel', '', NULL, '', '', '', '', 0, '0', '0', 0, '0', '0', 0, 0, '', 0, 0, 0, 41, 1, 0, 0, '', '', 0, NULL, NULL, '0000-00-00', NULL, '', '', 'Create: 2005-04-20 12:02:53 = admin\nSet dept + in dept 2005-04- 12:03:07 admin\nView 2005-04-20 14:58:13 = admin\nView 2005-05-09 15:12:10 = admin', 'admin', '20050509151210', 'admin', '20050420120253');
-INSERT INTO `care_encounter` VALUES (2005500004, 10000021, '2005-05-24 15:01:45', 2, '', 'disallow_cancel', '', NULL, '', '', '', '', 0, '0', '0', 0, '0', '0', 0, 0, '', 0, 0, 0, 41, 1, 0, 0, '', '', 0, NULL, NULL, '0000-00-00', NULL, '', '', 'Create: 2005-05-24 15:01:45 = admin\nSet dept + in dept 2005-05- 15:01:58 admin', 'admin', '20050524150158', 'admin', '20050524150145');
-INSERT INTO `care_encounter` VALUES (2005500005, 5, '2005-05-30 14:38:33', 2, '', 'disallow_cancel', '', NULL, '', '', '', '', 0, '0', '0', 1, '0', '0', 0, 0, '', 0, 0, 0, 41, 1, 0, 0, '', '', 0, NULL, NULL, '0000-00-00', NULL, '', '', 'Create: 2005-05-30 14:38:33 = admin\nSet dept + in dept 2005-05- 14:38:50 admin\nView 2005-05-30 18:10:49 = admin', 'admin', '20050530181049', 'admin', '20050530143833');
+INSERT INTO `care_encounter` VALUES (2005500003, 4, '2005-04-20 12:02:53', 2, '', 'disallow_cancel', '', NULL, '', '', '', '', 0, '0', '0', 0, '0', '0', 0, 0, '', 0, 0, 0, 41, 1, 0, 0, '', '', 0, NULL, NULL, '0000-00-00', NULL, '', '', 'Create: 2005-04-20 12:02:53 = admin\nSet dept + in dept 2005-04- 12:03:07 admin\nView 2005-04-20 14:58:13 = admin\nView 2005-05-09 15:12:10 = admin\nView 2005-08-23 15:58:02 = admin', 'admin', '20050823155802', 'admin', '20050420120253');
+INSERT INTO `care_encounter` VALUES (2005500004, 10000021, '2005-05-24 15:01:45', 2, '', 'disallow_cancel', '', NULL, '', '', '', '', 0, '0', '0', 0, '0', '0', 0, 0, '', 0, 0, 0, 41, 1, 0, 0, '', '', 0, NULL, NULL, '0000-00-00', NULL, '', '', 'Create: 2005-05-24 15:01:45 = admin\nSet dept + in dept 2005-05- 15:01:58 admin\nView 2005-06-13 15:39:18 = admin\nView 2005-06-13 15:44:30 = admin\nView 2005-07-29 16:54:58 = admin\nView 2005-08-17 16:17:43 = admin', 'admin', '20050817161743', 'admin', '20050524150145');
+INSERT INTO `care_encounter` VALUES (2005500005, 5, '2005-05-30 14:38:33', 2, '', 'disallow_cancel', '', NULL, '', '', '', '', 0, '0', '0', 1, '0', '0', 0, 0, '', 0, 0, 0, 41, 1, 0, 0, '', '', 0, NULL, NULL, '0000-00-00', NULL, '', '', 'Create: 2005-05-30 14:38:33 = admin\nSet dept + in dept 2005-05- 14:38:50 admin\nView 2005-05-30 18:10:49 = admin\nView 2005-08-17 16:13:57 = admin\nView 2005-08-17 16:14:52 = admin\nView 2005-08-18 11:22:29 = admin\nView 2005-08-18 11:22:36 = admin\nView 2005-08-23 16:04:21 = admin', 'admin', '20050823160421', 'admin', '20050530143833');
+INSERT INTO `care_encounter` VALUES (2005500006, 6, '2005-08-13 22:18:49', 2, '', 'disallow_cancel', 'cautsch', 'Fernsehgucken', 'Robert', '', '', '', 0, '0', '0', 2, '0', '0', 0, 0, '', 0, 0, 0, 41, 1, 0, 0, '', '', 0, NULL, NULL, '0000-00-00', NULL, '', '', 'Create: 2005-08-13 22:18:49 = admin\nSet dept + in dept 2005-08- 22:19:03 admin\nView 2005-08-15 14:42:34 = admin\nView 2005-08-17 15:46:22 = admin\nView 2005-08-17 15:46:33 = admin\nView 2005-08-23 15:58:07 = admin\nView 2005-08-23 16:08:21 = admin\nView 2005-08-23 16:10:02 = admin\nView 2005-08-26 16:01:00 = admin\nView 2005-08-26 16:01:10 = admin', 'admin', '20050826160110', 'admin', '20050813221849');
 
 -- --------------------------------------------------------
 
@@ -1498,7 +1499,7 @@ CREATE TABLE `care_encounter_location` (
   PRIMARY KEY  (`nr`,`location_nr`),
   KEY `type` (`type_nr`),
   KEY `location_id` (`location_nr`)
-) TYPE=MyISAM AUTO_INCREMENT=14 ;
+) TYPE=MyISAM AUTO_INCREMENT=15 ;
 
 -- 
 -- Daten für Tabelle `care_encounter_location`
@@ -1517,6 +1518,7 @@ INSERT INTO `care_encounter_location` VALUES (10, 2005500001, 1, 41, 41, '2005-0
 INSERT INTO `care_encounter_location` VALUES (11, 2005500003, 1, 41, 41, '2005-04-20', '0000-00-00', '12:03:07', NULL, 0, '', 'Create: 2005-04-20 12:03:07 admin\n', '', '20050420120307', 'admin', '20050420120307');
 INSERT INTO `care_encounter_location` VALUES (12, 2005500004, 1, 41, 41, '2005-05-24', '0000-00-00', '15:01:58', NULL, 0, '', 'Create: 2005-05-24 15:01:58 admin\n', '', '20050524150158', 'admin', '20050524150158');
 INSERT INTO `care_encounter_location` VALUES (13, 2005500005, 1, 41, 41, '2005-05-30', '0000-00-00', '14:38:50', NULL, 0, '', 'Create: 2005-05-30 14:38:50 admin\n', '', '20050530143850', 'admin', '20050530143850');
+INSERT INTO `care_encounter_location` VALUES (14, 2005500006, 1, 41, 41, '2005-08-13', '0000-00-00', '22:19:03', NULL, 0, '', 'Create: 2005-08-13 22:19:03 admin\n', '', '20050813221903', 'admin', '20050813221903');
 
 -- --------------------------------------------------------
 
@@ -1723,18 +1725,13 @@ CREATE TABLE `care_encounter_prescription` (
   `create_time` timestamp(14) NOT NULL default '00000000000000',
   PRIMARY KEY  (`nr`),
   KEY `encounter_nr` (`encounter_nr`)
-) TYPE=MyISAM AUTO_INCREMENT=7 ;
+) TYPE=MyISAM AUTO_INCREMENT=2 ;
 
 -- 
 -- Daten für Tabelle `care_encounter_prescription`
 -- 
 
-INSERT INTO `care_encounter_prescription` VALUES (1, 2005500005, 0, 'Acetazolamide Tablet', '4', '500', '', 0, '1', 0, 'Das soll sein: Acetazolamide Tablet 1', '2005-06-02', 'default', '', 0, 1, NULL, '', 'Created: 2005-06-02 17:46:31 : default', 1, 'archived', '', '20050611224606', '', '00000000000000');
-INSERT INTO `care_encounter_prescription` VALUES (2, 2005500005, 0, 'Acetic acid', '1', '500', '', 0, '2', 0, 'Das soll sein: Acetic acid 2', '2005-06-02', 'default', '', 0, 1, NULL, '', 'Created: 2005-06-02 17:46:31 : default', 1, 'archived', '', '20050611224606', '', '00000000000000');
-INSERT INTO `care_encounter_prescription` VALUES (3, 2005500005, 0, 'Acyclovir Tablet', '5', '500', '', 0, '3', 0, 'Das soll sein:Acyclovir Tablet 3', '2005-06-02', 'default', '', 0, 1, NULL, '', 'Created: 2005-06-02 17:46:31 : default', 1, 'archived', '', '20050611224606', '', '00000000000000');
-INSERT INTO `care_encounter_prescription` VALUES (4, 2005500005, 0, 'Acid Phosphatase,Test Kit,', '2', '500', '', 0, '1', 0, 'Das soll sein: Acid Phosphatase,Test Kit,', '2005-06-02', 'default', '', 0, 1, NULL, '', 'Created: 2005-06-02 17:48:45 : default', 1, 'archived', '', '20050611224606', '', '00000000000000');
-INSERT INTO `care_encounter_prescription` VALUES (5, 2005500005, 0, 'Acetic acid, glacial, GPR grade', '3', '500', '', 0, '2', 0, 'Das soll sein:Acetic acid, glacial, GPR grade', '2005-06-02', 'default', '', 0, 1, NULL, '', 'Created: 2005-06-02 17:48:45 : default', 1, 'archived', '', '20050611224606', '', '00000000000000');
-INSERT INTO `care_encounter_prescription` VALUES (6, 2005500005, 0, 'Acetic acid', '1', '500', '', 0, 'aa', 0, 'aa', '2005-06-03', 'default', '', 0, 1, NULL, '', 'Created: 2005-06-03 10:19:33 : default', 1, 'archived', '', '20050611224606', '', '00000000000000');
+INSERT INTO `care_encounter_prescription` VALUES (1, 2005500006, 0, 'Acetazolamide Tablet', '4', '500', '', 0, '10', 0, 'Acetazolamide Tablet', '2005-08-26', 'admin', '', 0, 1, NULL, '', 'Created: 2005-08-26 16:01:22 : admin<br>changed: 2005-08-26 16:02:54 previous dosage: >2x5< ;previous notes: >Acetazolamide Tablet', 1, 'pending', '', '20050826160254', '', '00000000000000');
 
 -- --------------------------------------------------------
 
@@ -2773,6 +2770,7 @@ INSERT INTO `care_person` VALUES (2, '2005-03-02 14:49:53', 'lk', 'lklklk', 'lk'
 INSERT INTO `care_person` VALUES (3, '2005-03-02 15:35:40', 'aaaaaaaaaaaaa', 'aaaaaaaaaaa', 'aaaaaaaaaaaaaa', 'aaaaaaaaaa', 'asdasdasd', 'AMERICAN', 'aaaaaaaaaaaaa', '2000-07-01', 'A', 'pos', '', '', '', 0, 0, NULL, '0', NULL, '0', NULL, NULL, NULL, NULL, NULL, 'single', 'm', 'aaaaaaaaaaa', NULL, '', NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, '0', '0000-00-00', 0, NULL, NULL, NULL, 'normal', 'Init.reg. 2005-03-02 15:35:40 admin\n\nView 2005-03-02 15:46:51 = admin\nView 2005-03-02 16:10:20 = admin', '', '20050302161020', 'admin', '20050302153540', 'Arusha', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 INSERT INTO `care_person` VALUES (4, '2005-04-20 12:01:53', 'Nanni', NULL, NULL, NULL, 'Hanni', 'MAASAI', '', '2005-04-20', '', '', '', '', '', 0, 0, NULL, '0', NULL, '0', NULL, NULL, NULL, NULL, NULL, '', 'm', 'male', NULL, '', NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, '0', '0000-00-00', 0, NULL, NULL, NULL, 'normal', 'Init.reg. 2005-04-20 12:01:53 admin\n\nView 2005-04-20 12:02:34 = admin\nView 2005-04-20 12:02:34 = admin\nView 2005-05-24 17:52:18 = admin\nView 2005-05-24 17:52:19 = admin', '', '20050524175219', 'admin', '20050420120153', 'ARUSHA', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 INSERT INTO `care_person` VALUES (5, '2005-05-30 14:38:11', 'Robert', 'Ludwig', NULL, 'Claudi', 'Meggle', 'GERMAN', 'no', '1970-07-27', 'A', '', '', '', '', 0, 0, NULL, '0', NULL, '0', NULL, NULL, NULL, NULL, NULL, 'single', 'm', 'no occupation', NULL, '', NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, '0', '0000-00-00', 0, NULL, NULL, NULL, 'normal', 'Init.reg. 2005-05-30 14:38:11 admin\n', '', '20050530143811', 'admin', '20050530143811', 'Arusha', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+INSERT INTO `care_person` VALUES (6, '2005-08-13 22:17:19', 'Claudia', 'Konrad Nick', '', '', 'Meggle', 'MKWAYA', '', '1975-07-01', 'A', '', '', '', '89079', 0, 0, '', '0', '', '0', '', '', '', '', '', 'married', 'f', 'med. Assistant', NULL, '6.jpg', 0, NULL, '', '', '', 0, 0, NULL, 0, '0', '0000-00-00', 0, NULL, NULL, '2005-08-13 22:18:01', 'normal', 'Init.reg. 2005-08-13 22:17:19 admin\nUpdate 2005-08-13 22:18:01 admin \n\nView 2005-08-15 14:42:25 = admin\nView 2005-08-15 14:42:27 = admin\nView 2005-08-17 15:46:13 = admin\nView 2005-08-17 15:46:13 = admin\nView 2005-08-26 16:00:51 = admin\nView 2005-08-26 16:00:52 = admin', 'admin', '20050826160052', 'admin', '20050813221719', 'Shinyanga', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -3256,7 +3254,8 @@ CREATE TABLE `care_sessions` (
 -- Daten für Tabelle `care_sessions`
 -- 
 
-INSERT INTO `care_sessions` VALUES ('cf91a14898677728b3ddabd44c1cd045', 1118540266, '', 'sess_tos%7Cs%3A6%3A%22003721%22%3Bsess_pid%7Cs%3A1%3A%225%22%3Bsess_en%7Cs%3A10%3A%222005500003%22%3Bsess_path_referer%7Cs%3A27%3A%22modules%2Fnews%2Fstart_page.php%22%3Bsess_full_pid%7Cs%3A1%3A%225%22%3Bsess_file_return%7Cs%3A27%3A%22modules%2Fnews%2Fstart_page.php%22%3Bsess_user_name%7Cs%3A5%3A%22admin%22%3Bsess_login_userid%7Cs%3A4%3A%22care%22%3Bsess_login_username%7Cs%3A5%3A%22admin%22%3Bsess_login_pw%7Cs%3A17%3A%22fnsAAA%3D%3D%23DgXocA%3D%3D%22%3Bsess_news_nr%7CN%3Bsess_file_editor%7Cs%3A28%3A%22headline-edit-select-art.php%22%3Bsess_file_reader%7Cs%3A17%3A%22headline-read.php%22%3Bsess_file_break%7Cs%3A27%3A%22modules%2Fnews%2Fstart_page.php%22%3Bsess_dept_nr%7Cs%3A1%3A%221%22%3Bsess_title%7Cs%3A21%3A%22Headline%3A%3ASubmit%20News%22%3Bsess_user_origin%7Cs%3A10%3A%22main_start%22%3Bsess_searchkey%7Cs%3A1%3A%22%25%22%3Bsess_full_en%7Ci%3A2006000003%3B');
+INSERT INTO `care_sessions` VALUES ('cf570c82cc01373eacf63aa8e67d47e4', 1125916801, '', 'sess_user_name%7Cs%3A5%3A%22admin%22%3Bsess_user_origin%7Cs%3A10%3A%22main_start%22%3Bsess_file_forward%7CN%3Bsess_file_return%7Cs%3A27%3A%22modules%2Fnews%2Fstart_page.php%22%3Bsess_file_break%7Cs%3A27%3A%22modules%2Fnews%2Fstart_page.php%22%3Bsess_path_referer%7Cs%3A27%3A%22modules%2Fnews%2Fstart_page.php%22%3Bsess_dept_nr%7Cs%3A1%3A%221%22%3Bsess_title%7Cs%3A21%3A%22Headline%3A%3ASubmit%20News%22%3Bsess_lang%7Cs%3A2%3A%22en%22%3Bsess_user_id%7Cs%3A41%3A%22CFG427f8b23585930.36188800%201115654947.cfg%22%3Bsess_cur_page%7CN%3Bsess_searchkey%7Cs%3A1%3A%22%25%22%3Bsess_tos%7Cs%3A6%3A%22094000%22%3Bsess_news_nr%7CN%3Bsess_file_editor%7Cs%3A28%3A%22headline-edit-select-art.php%22%3Bsess_file_reader%7Cs%3A17%3A%22headline-read.php%22%3Bsess_login_userid%7Cs%3A4%3A%22care%22%3Bsess_login_username%7Cs%3A5%3A%22admin%22%3Bsess_login_pw%7Cs%3A17%3A%22S2kAAA%3D%3D%23jERNZA%3D%3D%22%3Bsess_en%7Cs%3A10%3A%222005500000%22%3Bsess_full_en%7Ci%3A2006000000%3B');
+INSERT INTO `care_sessions` VALUES ('2ab8765102d4f32aca9da0e66eb17ea8', 1125942513, '', 'sess_user_name%7Cs%3A7%3A%22default%22%3Bsess_user_origin%7Cs%3A10%3A%22main_start%22%3Bsess_file_forward%7CN%3Bsess_file_return%7Cs%3A27%3A%22modules%2Fnews%2Fstart_page.php%22%3Bsess_file_break%7Cs%3A27%3A%22modules%2Fnews%2Fstart_page.php%22%3Bsess_path_referer%7Cs%3A27%3A%22modules%2Fnews%2Fstart_page.php%22%3Bsess_dept_nr%7Cs%3A1%3A%221%22%3Bsess_title%7Cs%3A21%3A%22Headline%3A%3ASubmit%20News%22%3Bsess_lang%7Cs%3A2%3A%22en%22%3Bsess_user_id%7Cs%3A41%3A%22CFG427f8b23585930.36188800%201115654947.cfg%22%3Bsess_cur_page%7CN%3Bsess_searchkey%7CN%3Bsess_tos%7Cs%3A6%3A%22164815%22%3Bsess_news_nr%7CN%3Bsess_file_editor%7Cs%3A28%3A%22headline-edit-select-art.php%22%3Bsess_file_reader%7Cs%3A17%3A%22headline-read.php%22%3Bsess_login_userid%7Cs%3A4%3A%22care%22%3Bsess_login_username%7Cs%3A5%3A%22admin%22%3Bsess_login_pw%7Cs%3A17%3A%22TAAAAA%3D%3D%23n25hVg%3D%3D%22%3B');
 
 -- --------------------------------------------------------
 
@@ -4118,22 +4117,13 @@ CREATE TABLE `care_test_request_chemlabor` (
   `create_time` timestamp(14) NOT NULL default '00000000000000',
   PRIMARY KEY  (`batch_nr`),
   KEY `encounter_nr` (`encounter_nr`)
-) TYPE=MyISAM AUTO_INCREMENT=10000010 ;
+) TYPE=MyISAM AUTO_INCREMENT=10000001 ;
 
 -- 
 -- Daten für Tabelle `care_test_request_chemlabor`
 -- 
 
-INSERT INTO `care_test_request_chemlabor` VALUES (10000000, 2005500004, '', 0, '_task9_=1&_task11_=1&_task13_=1&_task36_=1&_task14_=1&_task37_=1&_task59_=1&_task39_=1', '', 0, '', '2005-03-08 13:21:13', '13:15:00', 2, 'done', 'Create: 2005-03-08 13:21:13 = admin\nDone: 2005-06-11 22:21:11 = admin\n', 2, 'pending', 'admin', '20050611224553', 'admin', '20050308132113');
-INSERT INTO `care_test_request_chemlabor` VALUES (10000001, 2005500004, '', 0, '_task9_=1&_task11_=1', '', 0, '', '2005-03-08 16:17:24', '16:15:00', 2, 'done', 'Create: 2005-03-08 16:17:24 = admin\nDone: 2005-06-11 22:17:49 = admin\n', 2, 'pending', 'admin', '20050611224553', 'admin', '20050308161724');
-INSERT INTO `care_test_request_chemlabor` VALUES (10000002, 2005500004, '', 0, '_task9_=1', '', 0, '', '2005-03-10 17:08:42', '17:00:00', 4, 'done', 'Create: 2005-03-10 17:08:42 = admin\nDone: 2005-06-11 22:17:47 = admin\n', 2, 'pending', 'admin', '20050611224553', 'admin', '20050310170842');
-INSERT INTO `care_test_request_chemlabor` VALUES (10000003, 2005500004, '', 0, '_task9_=1&_task44_=1', '', 0, '', '2005-03-14 12:09:04', '12:00:00', 1, 'done', 'Create: 2005-03-14 12:09:04 = admin\nDone: 2005-06-11 22:17:42 = admin\n', 2, 'pending', 'admin', '20050611224553', 'admin', '20050314120904');
-INSERT INTO `care_test_request_chemlabor` VALUES (10000004, 2005500004, '', 0, '_task44_=1&_task32_=1&_task72_=1&_task63_=1&_task62_=1', '', 0, '', '2005-03-14 13:09:55', '13:00:00', 1, 'done', 'Create: 2005-03-14 13:09:55 = admin\nDone: 2005-06-11 22:17:30 = admin\n', 2, 'pending', 'admin', '20050611224553', 'admin', '20050314130955');
-INSERT INTO `care_test_request_chemlabor` VALUES (10000005, 2005500005, '', 0, '_task39_=1', '', 0, '', '2005-06-03 16:57:14', '16:45:00', 5, 'done', 'Create: 2005-06-03 16:57:14 = admin\nDone: 2005-06-03 16:59:28 = admin\n', 1, 'archived', 'admin', '20050611224606', 'admin', '20050603165714');
-INSERT INTO `care_test_request_chemlabor` VALUES (10000006, 2005500005, '', 0, '_task9_=1', '', 0, '', '2005-06-03 17:00:04', '16:45:00', 5, 'done', 'Create: 2005-06-03 17:00:04 = admin\nDone: 2005-06-03 17:00:38 = admin\n', 1, 'archived', 'admin', '20050611224606', 'admin', '20050603170004');
-INSERT INTO `care_test_request_chemlabor` VALUES (10000007, 2005500005, '', 0, '_task35_=1', '', 0, '', '2005-06-03 17:02:22', '17:00:00', 5, 'done', 'Create: 2005-06-03 17:02:22 = admin\nDone: 2005-06-11 22:17:36 = admin\n', 1, 'archived', 'admin', '20050611224606', 'admin', '20050603170222');
-INSERT INTO `care_test_request_chemlabor` VALUES (10000008, 2005500005, '', 0, '_task44_=1&_task80_=1', '', 0, '', '2005-06-11 22:21:30', '22:15:00', 6, 'done', 'Create: 2005-06-11 22:21:30 = admin\nDone: 2005-06-11 22:27:02 = admin\n', 1, 'archived', 'admin', '20050611224606', 'admin', '20050611222130');
-INSERT INTO `care_test_request_chemlabor` VALUES (10000009, 2005500003, '', 0, '_task32_=1', '', 0, '', '2005-06-11 22:28:37', '22:15:00', 6, 'done', 'Create: 2005-06-11 22:28:37 = admin\nDone: 2005-06-11 22:29:18 = admin\n', 3, 'archived', 'admin', '20050611234326', 'admin', '20050611222837');
+INSERT INTO `care_test_request_chemlabor` VALUES (10000000, 2005500000, '', 0, '_task28_=1', '', 0, '', '2005-09-05 09:39:53', '09:30:00', 1, 'pending', 'Create: 2005-09-05 09:39:53 = admin\n', 2, 'pending', 'admin', '20050905164744', 'admin', '20050905093953');
 
 -- --------------------------------------------------------
 
@@ -5068,13 +5058,14 @@ CREATE TABLE `care_tz_billing` (
   `first_date` bigint(20) NOT NULL default '0',
   `create_id` varchar(35) NOT NULL default '',
   PRIMARY KEY  (`nr`)
-) TYPE=MyISAM AUTO_INCREMENT=4 ;
+) TYPE=MyISAM AUTO_INCREMENT=3 ;
 
 -- 
 -- Daten für Tabelle `care_tz_billing`
 -- 
 
-INSERT INTO `care_tz_billing` VALUES (2, 2005500004, 1118522753, '');
+INSERT INTO `care_tz_billing` VALUES (1, 2005500006, 1125064915, '');
+INSERT INTO `care_tz_billing` VALUES (2, 2005500000, 1125931664, '');
 
 -- --------------------------------------------------------
 
@@ -5090,14 +5081,12 @@ CREATE TABLE `care_tz_billing_archive` (
   `create_id` varchar(35) NOT NULL default '',
   PRIMARY KEY  (`id`),
   KEY `nr` (`nr`)
-) TYPE=MyISAM AUTO_INCREMENT=3 ;
+) TYPE=MyISAM AUTO_INCREMENT=1 ;
 
 -- 
 -- Daten für Tabelle `care_tz_billing_archive`
 -- 
 
-INSERT INTO `care_tz_billing_archive` VALUES (1, 1, 2005500005, 1118522753, '');
-INSERT INTO `care_tz_billing_archive` VALUES (2, 3, 2005500003, 1118522753, '');
 
 -- --------------------------------------------------------
 
@@ -5119,24 +5108,12 @@ CREATE TABLE `care_tz_billing_archive_elem` (
   `item_number` bigint(20) NOT NULL default '0',
   PRIMARY KEY  (`ID`),
   KEY `nr` (`nr`)
-) TYPE=MyISAM AUTO_INCREMENT=13 ;
+) TYPE=MyISAM AUTO_INCREMENT=1 ;
 
 -- 
 -- Daten für Tabelle `care_tz_billing_archive_elem`
 -- 
 
-INSERT INTO `care_tz_billing_archive_elem` VALUES (1, 1, 1118522753, 0, 1, 0, 0, 1, '500', 'Acetazolamide Tablet(Das soll sein: Acetazolamide Tablet 1)', 0);
-INSERT INTO `care_tz_billing_archive_elem` VALUES (2, 1, 1118522753, 0, 1, 0, 0, 2, '500', 'Acetic acid(Das soll sein: Acetic acid 2)', 0);
-INSERT INTO `care_tz_billing_archive_elem` VALUES (3, 1, 1118522753, 0, 1, 0, 0, 3, '500', 'Acyclovir Tablet(Das soll sein:Acyclovir Tablet 3)', 0);
-INSERT INTO `care_tz_billing_archive_elem` VALUES (4, 1, 1118522753, 0, 1, 0, 0, 1, '500', 'Acid Phosphatase,Test Kit,(Das soll sein: Acid Phosphatase,Test Kit,)', 0);
-INSERT INTO `care_tz_billing_archive_elem` VALUES (5, 1, 1118522753, 0, 1, 0, 0, 2, '500', 'Acetic acid, glacial, GPR grade(Das soll sein:Acetic acid, glacial, GPR grade)', 0);
-INSERT INTO `care_tz_billing_archive_elem` VALUES (6, 1, 1118522753, 0, 1, 0, 0, 0, '500', 'Acetic acid(aa)', 0);
-INSERT INTO `care_tz_billing_archive_elem` VALUES (7, 1, 1118522753, 1, 0, 0, 0, 1, '', 'HIV', 0);
-INSERT INTO `care_tz_billing_archive_elem` VALUES (8, 1, 1118522753, 1, 0, 0, 0, 1, '12,00', 'Amylase', 0);
-INSERT INTO `care_tz_billing_archive_elem` VALUES (9, 1, 1118522753, 1, 0, 0, 0, 1, '', 'Differential WBC, body fluid', 0);
-INSERT INTO `care_tz_billing_archive_elem` VALUES (10, 1, 1118522753, 1, 0, 0, 0, 1, '21,00', 'AFB (tuberculosis) No. 1', 0);
-INSERT INTO `care_tz_billing_archive_elem` VALUES (11, 1, 1118522753, 1, 0, 0, 0, 1, '32,30', 'AFB (tuberculosis) No. 2', 0);
-INSERT INTO `care_tz_billing_archive_elem` VALUES (12, 3, 1118522753, 1, 0, 0, 0, 1, '', 'Malaria smear (B/S)', 0);
 
 -- --------------------------------------------------------
 
@@ -5158,30 +5135,14 @@ CREATE TABLE `care_tz_billing_elem` (
   `item_number` bigint(20) NOT NULL default '0',
   PRIMARY KEY  (`ID`),
   KEY `nr` (`nr`)
-) TYPE=MyISAM AUTO_INCREMENT=31 ;
+) TYPE=MyISAM AUTO_INCREMENT=3 ;
 
 -- 
 -- Daten für Tabelle `care_tz_billing_elem`
 -- 
 
-INSERT INTO `care_tz_billing_elem` VALUES (12, 2, 1118522753, 1, 0, 0, 0, 1, '12,00', 'Amylase', 0);
-INSERT INTO `care_tz_billing_elem` VALUES (13, 2, 1118522753, 1, 0, 0, 0, 1, '72,00', 'Bilirubin, total', 0);
-INSERT INTO `care_tz_billing_elem` VALUES (14, 2, 1118522753, 1, 0, 0, 0, 1, '55,00', 'Creatinine', 0);
-INSERT INTO `care_tz_billing_elem` VALUES (15, 2, 1118522753, 1, 0, 0, 0, 1, '', 'ASOT', 0);
-INSERT INTO `care_tz_billing_elem` VALUES (16, 2, 1118522753, 1, 0, 0, 0, 1, '52,00', 'Glucose, fasting (FBG)', 0);
-INSERT INTO `care_tz_billing_elem` VALUES (17, 2, 1118522753, 1, 0, 0, 0, 1, '', 'Brucella test', 0);
-INSERT INTO `care_tz_billing_elem` VALUES (18, 2, 1118522753, 1, 0, 0, 0, 1, '', 'Cortisol, A.M..', 0);
-INSERT INTO `care_tz_billing_elem` VALUES (19, 2, 1118522753, 1, 0, 0, 0, 1, '', 'HIV', 0);
-INSERT INTO `care_tz_billing_elem` VALUES (20, 2, 1118522753, 1, 0, 0, 0, 1, '12,00', 'Amylase', 0);
-INSERT INTO `care_tz_billing_elem` VALUES (21, 2, 1118522753, 1, 0, 0, 0, 1, '72,00', 'Bilirubin, total', 0);
-INSERT INTO `care_tz_billing_elem` VALUES (22, 2, 1118522753, 1, 0, 0, 0, 1, '12,00', 'Amylase', 0);
-INSERT INTO `care_tz_billing_elem` VALUES (23, 2, 1118522753, 1, 0, 0, 0, 1, '12,00', 'Amylase', 0);
-INSERT INTO `care_tz_billing_elem` VALUES (24, 2, 1118522753, 1, 0, 0, 0, 1, '21,00', 'AFB (tuberculosis) No. 1', 0);
-INSERT INTO `care_tz_billing_elem` VALUES (25, 2, 1118522753, 1, 0, 0, 0, 1, '21,00', 'AFB (tuberculosis) No. 1', 0);
-INSERT INTO `care_tz_billing_elem` VALUES (26, 2, 1118522753, 1, 0, 0, 0, 1, '', 'Malaria smear (B/S)', 0);
-INSERT INTO `care_tz_billing_elem` VALUES (27, 2, 1118522753, 1, 0, 0, 0, 1, '', 'Prothrombin time (PT)', 0);
-INSERT INTO `care_tz_billing_elem` VALUES (28, 2, 1118522753, 1, 0, 0, 0, 1, '', 'Triglycerides', 0);
-INSERT INTO `care_tz_billing_elem` VALUES (29, 2, 1118522753, 1, 0, 0, 0, 1, '', 'Cholesterol', 0);
+INSERT INTO `care_tz_billing_elem` VALUES (1, 1, 1125064915, 0, 1, 0, 0, 2, '500', 'Acetazolamide Tablet(Acetazolamide Tablet)', 0);
+INSERT INTO `care_tz_billing_elem` VALUES (2, 2, 1125931664, 1, 0, 0, 0, 1, '', 'Platelet count', 0);
 
 -- --------------------------------------------------------
 
@@ -5207,7 +5168,7 @@ CREATE TABLE `care_tz_druglist` (
   `unit_price` varchar(50) NOT NULL default '',
   `purchasing_class` varchar(50) NOT NULL default '',
   PRIMARY KEY  (`item_id`)
-) TYPE=MyISAM AUTO_INCREMENT=37 ;
+) TYPE=MyISAM AUTO_INCREMENT=42 ;
 
 -- 
 -- Daten für Tabelle `care_tz_druglist`
@@ -5216,8 +5177,12 @@ CREATE TABLE `care_tz_druglist` (
 INSERT INTO `care_tz_druglist` VALUES (1, '4711', 0, 0, 0, 0, '1', 'Acetic acid,  glacial, GPR grade, 100ml', '1', 1.344, '', 'Acetic acid', '', '', '500', 'mems_drug_list');
 INSERT INTO `care_tz_druglist` VALUES (2, '4712', 0, 0, 0, 0, '1', 'Acid Phosphatase,Test Kit,', '1', 42, '', 'Acid Phosphatase,Test Kit,', '', '', '500', 'mems_supplies');
 INSERT INTO `care_tz_druglist` VALUES (3, '4713', 0, 0, 0, 0, '1', 'Acetic acid,  glacial, GPR grade, 100ml', '', 1.344, '1', 'Acetic acid, glacial, GPR grade', '', '', '500', 'mems_supplies_laboratory');
-INSERT INTO `care_tz_druglist` VALUES (4, '4714', 0, 1, 0, 0, '1', 'Acetazolamide Tablet 250mg', '', 6, '', 'Acetazolamide Tablet', '', '', '500', 'mems_drug_list');
+INSERT INTO `care_tz_druglist` VALUES (4, '4714', 1, 1, 1, 1, '1', 'Acetazolamide Tablet 250mg', '', 6, '', 'Acetazolamide Tablet', '', '', '500', 'mems_drug_list');
 INSERT INTO `care_tz_druglist` VALUES (5, '4899', 0, 1, 0, 0, '2', 'Acyclovir Tablet 200mg Tab', '50', 1000, '', 'Acyclovir Tablet', '', '', '500', 'mems_drug_list');
+INSERT INTO `care_tz_druglist` VALUES (40, '9999', 1, 1, 0, 0, '', '', '', 0, '', 'as', '', '', '', 'mems_drug_list');
+INSERT INTO `care_tz_druglist` VALUES (39, '007', 1, 0, 0, 0, '', '', '', 0, '', '200', '', '', '200', 'mems_supplies');
+INSERT INTO `care_tz_druglist` VALUES (38, 't', 1, 1, 1, 1, '', '', '', 0, '', 't', 't', '', 't', 'mems_drug_list');
+INSERT INTO `care_tz_druglist` VALUES (41, '12', 0, 1, 0, 0, '', '', '', 0, '', '12', '12', '', '12', 'mems_supplies_laboratory');
 
 -- --------------------------------------------------------
 

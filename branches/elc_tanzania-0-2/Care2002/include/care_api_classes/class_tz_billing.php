@@ -811,16 +811,16 @@ class Bill extends Encounter {
   					<td rowspan="7">&nbsp;<td>
   				</tr>
   				<tr>
+  					<td class="adm_item">Encounter/Reg.Nr.:</td>
+  					<td bgcolor="#ffffee" class="vi_data"><b>'.$enc_number.'</b></td>
+  				</tr>
+  				<tr>
   					<td class="adm_item">Surname/Ukoo:</td>
   					<td bgcolor="#ffffee" class="vi_data"><b>'.$enc_obj->LastName($enc_number).'</b></td>
   				</tr>
   				<tr>
   					<td class="adm_item">First name:</td>
   					<td bgcolor="#ffffee" class="vi_data">'.$enc_obj->FirstName($enc_number).'</td>
-  				</tr>
-  				<tr>
-  					<td class="adm_item">Trade:</td>
-  					<td bgcolor="#ffffee" class="vi_data">'.$enc_obj->Trade($enc_number).'</td>
   				</tr>
   				<tr>
   					<td class="adm_item">Date of birth:</td>
@@ -1265,7 +1265,7 @@ class Bill extends Encounter {
 	//------------------------------------------------------------------------------  
 	
 	function DisplayPrescriptionBill($bill_nr, $edit_fields){
-	  global $root_path;
+	  global $root_path, $billnr, $batch_nr;
   	echo '
   	<table width="800" border="1">
 
@@ -1320,10 +1320,12 @@ class Bill extends Encounter {
         				if($bill_elems_row['is_paid']==1)
         				{ 
         					echo "Yes";
+        					$alloutstanding++;
         				}
         				else
         				{
         					echo "No";
+        					
         					$sum_to_pay += $part_sum;
         				}
         				echo "<td>&nbsp;</td>";
@@ -1338,9 +1340,14 @@ class Bill extends Encounter {
       			  <td>&nbsp;</td>
       			  <td>&nbsp;</td>
       				<td>----------</td>      			
-      				<td>&nbsp;</td>
+      				';
+      			if ($edit_fields) 
+      			{
+      				echo '<td colspan="3">';
+      				if(!$alloutstanding) echo $alloutstanding.'<a href="'.URL_APPEND.'&mode=allpaid&batch_nr='.$batch_nr.'&billnr='.$billnr.'">Pay all items at once now</a></td>';
+      			}
+      			else echo '<td>&nbsp;</td>
       				<td>&nbsp;</td>';
-      			if ($edit_fields) echo '<td>&nbsp;</td>';
       			echo "</tr>";
 
       			echo '
@@ -1559,6 +1566,21 @@ function update_bill_element($bill_elem_number, $is_paid, $amount, $price, $desc
   return TRUE;
 }
 
+function update_bill_element_allpaid($billnr, $is_paid) {
+  global $db;
+  	$debug=FALSE;
+  	($debug) ? $db->debug=TRUE : $db->debug=FALSE;
+
+  $this->sql="UPDATE care_tz_billing_elem SET 
+                `is_paid` = '".$is_paid."'
+             WHERE `nr` = ".$billnr;
+  $db->Execute($this->sql);
+  return TRUE;
+}
+
+//------------------------------------------------------------------------------  
+
+
 //------------------------------------------------------------------------------  
 
 function delete_bill_element($bill_elem_number) {
@@ -1684,76 +1706,80 @@ function delete_bill_element($bill_elem_number) {
   		{ 
   			$billnumbers=$this->GetBillNumbersFromPID($batch_nr);
   		}
-  		while($bills=$billnumbers->FetchRow()) { 
-
-        if ($printout==FALSE) {
-      		//Java script for print out the bill
-      		// We have to place it here, because here is one place where we have the bill number what is 
-      		// definetly displayed on the user-screen 
-      		echo '<script language="javascript" >
-                <!-- 
-                function printOut_'.$bills['nr'].'()
-                {
-                	urlholder="show_bill.php?bill_number='.$bills['nr'].'&batch_nr='.$batch_nr.'&printout=TRUE";
-                	testprintout=window.open(urlholder,"printout","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
-                  
-                }
-                // -->
-                </script> 
-                ';
-        }
-  		  
-				echo '
-					<tr>
-						<td>';
-						$this->DisplayBillHeadline($bills['nr'], $batch_nr);
-						echo '
-						</td>
-					</tr>';
-  			$sum_to_pay =0;
-  			$sum = 0;
-  			
-  			$billelems=$this->GetElemsOfBill($bills['nr'],"laboratory");
-				if($bill_elems_row=$billelems->FetchRow())
-				{			
-	  			echo '
-	  			<tr>
-	  				<td valign="top">';
-	  					$this->DisplayLaboratoryBill($bills['nr'],$edit_fields);
-	      	echo '
-	      		</td>
-	      	</tr>';
-      	}
-      	$billelems=$this->GetElemsOfBill($bills['nr'],"prescriptions");
-				if($bill_elems_row=$billelems->FetchRow())
-				{
-					echo '
-	  			<tr>
-	  				<td valign="top">';
-	  					$this->DisplayPrescriptionBill($bills['nr'],$edit_fields);
-	      		echo '
-	      		</td>
-	      	</tr>';
-      	}
-      	
-      	// is there the edit_fields flag set, then there should be finished the formular with the submit button. 
-      	// If not, then show the three kinds of the main folder.
-      	echo '
-			    <tr>
-			  		<td>';
-			 
-			 $show_printout_button = FALSE;
-			 $show_done_button=FALSE;
-			 $show_edit_button=FALSE;
-			 
-       if ($printout==FALSE) {
-  			 if (!$show_printout_button) echo '<a href="javascript:printOut_'.$bills['nr'].'()"><img src="../../gui/img/control/default/en/en_printout.gif" border=0 align="absmiddle" width="99" height="24" alt="Print this form"></a> ';
-  			 if ($edit_fields) echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../../gui/img/common/default/achtung.gif"> &nbsp;&nbsp;&nbsp; To transfere this pending bill into the archive: <a href="billing_tz_pending.php?&mode=done&bill_number='.$bills['nr'].'"><img src="../../gui/img/control/default/en/en_done.gif" border=0 align="absmiddle" width="75" height="24" alt="It´s done! Move the form to the archive"></a>&nbsp;&nbsp;&nbsp;<img src="../../gui/img/common/default/achtung.gif">';
-  			 if (!$edit_fields) echo '<a href="billing_tz_edit.php?batch_nr='.$batch_nr.'&billnr='.$bills['nr'].'"><img src="../../gui/img/control/default/en/en_auswahl2.gif" border=0 align="absmiddle" width="120" height="24"></a>';
-  		 }
-       echo '</td>
-			  	</tr>';
-  		}
+  		if ($billnumbers) {
+    		while($bills=$billnumbers->FetchRow()) { 
+  
+          if ($printout==FALSE) {
+        		//Java script for print out the bill
+        		// We have to place it here, because here is one place where we have the bill number what is 
+        		// definetly displayed on the user-screen 
+        		echo '<script language="javascript" >
+                  <!-- 
+                  function printOut_'.$bills['nr'].'()
+                  {
+                  	urlholder="show_bill.php?bill_number='.$bills['nr'].'&batch_nr='.$batch_nr.'&printout=TRUE";
+                  	testprintout=window.open(urlholder,"printout","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
+                    
+                  }
+                  // -->
+                  </script> 
+                  ';
+          }
+    		  
+  				echo '
+  					<tr>
+  						<td>';
+  						$this->DisplayBillHeadline($bills['nr'], $batch_nr);
+  						echo '
+  						</td>
+  					</tr>';
+    			$sum_to_pay =0;
+    			$sum = 0;
+    			
+    			$billelems=$this->GetElemsOfBill($bills['nr'],"laboratory");
+  				if($bill_elems_row=$billelems->FetchRow())
+  				{			
+  	  			echo '
+  	  			<tr>
+  	  				<td valign="top">';
+  	  					$this->DisplayLaboratoryBill($bills['nr'],$edit_fields);
+  	      	echo '
+  	      		</td>
+  	      	</tr>';
+        	}
+        	$billelems=$this->GetElemsOfBill($bills['nr'],"prescriptions");
+  				if($bill_elems_row=$billelems->FetchRow())
+  				{
+  					echo '
+  	  			<tr>
+  	  				<td valign="top">';
+  	  					$this->DisplayPrescriptionBill($bills['nr'],$edit_fields);
+  	      		echo '
+  	      		</td>
+  	      	</tr>';
+        	}
+        	
+        	// is there the edit_fields flag set, then there should be finished the formular with the submit button. 
+        	// If not, then show the three kinds of the main folder.
+        	echo '
+  			    <tr>
+  			  		<td>';
+  			 
+  			 $show_printout_button = FALSE;
+  			 $show_done_button=FALSE;
+  			 $show_edit_button=FALSE;
+  			 
+         if ($printout==FALSE) {
+    			 if (!$show_printout_button) echo '<a href="javascript:printOut_'.$bills['nr'].'()"><img src="../../gui/img/control/default/en/en_printout.gif" border=0 align="absmiddle" width="99" height="24" alt="Print this form"></a> ';
+    			 if ($edit_fields) echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../../gui/img/common/default/achtung.gif"> &nbsp;&nbsp;&nbsp; To transfere this pending bill into the archive: <a href="billing_tz_pending.php?&mode=done&bill_number='.$bills['nr'].'"><img src="../../gui/img/control/default/en/en_done.gif" border=0 align="absmiddle" width="75" height="24" alt="It´s done! Move the form to the archive"></a>&nbsp;&nbsp;&nbsp;<img src="../../gui/img/common/default/achtung.gif">';
+    			 if (!$edit_fields) echo '<a href="billing_tz_edit.php?batch_nr='.$batch_nr.'&billnr='.$bills['nr'].'"><img src="../../gui/img/control/default/en/en_auswahl2.gif" border=0 align="absmiddle" width="120" height="24"></a>';
+    		 }
+         echo '</td>
+  			  	</tr>';
+    		}
+    	} else {
+    	  echo '<br><br><tr><td><div align="center"><h1>No pending bills available</h1><div></td></tr>';
+      }
   	echo'
 
   	</table>';

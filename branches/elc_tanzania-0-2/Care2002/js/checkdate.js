@@ -89,10 +89,17 @@ function IsValidDate(objDate,sFormat)
 
 	if ((nSize == 5) || (nSize == 7) || (nSize == 9))
 	{
-		sDate = "0" + sDate;
+		if(sDate.substr(2,1)=="." || sDate.substr(2,1)=="/" || sDate.substr(2,1)=="-")
+		{
+			sDate = sDate.substr(0,2) + ".0" + sDate.substr(3,sDate.length-2);
+		}
+		else
+		{
+			sDate = "0" + sDate;
+		}
 		nSize = sDate.length;
 	}
-	 /* check DE ddmmyyyy or dd.mm.yy */
+	 /* check DE ddmmyyyy or dd.mm.yy or dd.m.yyyy*/
      
 	if ((nSize == 8) && ( sLang == "DE"))
 	{
@@ -246,8 +253,12 @@ function IsValidDate(objDate,sFormat)
        }
        break;
      }
-     case 9 : /* dd.MM.yy  8+1  */
+     case 9 : /* dd.MM.yy  8+1  OR dd.m.yyyy */
      {
+     		 //if(!isNAN(sDate.charAt(sDate.length-6))
+     		 //{
+     		 	
+     		 //}
          switch (sLang)
          {
            case "DE" :

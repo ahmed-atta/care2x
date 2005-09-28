@@ -3,13 +3,13 @@
 $dbname='caredb';
 
 # Database user name, default is root or httpd for mysql, or postgres for postgresql
-$dbusername='root';
+$dbusername='caredb';
 
 # Database user password, default is empty char
-$dbpassword='';
+$dbpassword='caredb';
 
 # Database host name, default = localhost
-$dbhost='localhost';
+$dbhost='172.16.124.249';
 
 # First key used for simple chaining protection of scripts
 $key='16713867682044';

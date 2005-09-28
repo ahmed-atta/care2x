@@ -52,12 +52,12 @@ class Product extends Core {
   
   //------------------------------------------------------------------------------
   
-  function item_number_exists($item_number) {
+  function item_number_exists($item_id) {
     /**
     * Returns TRUE if this item number still exists in the database
     */
     global $db;
-    $this->sql = "SELECT * FROM ".$this->tbl_product_items." WHERE item_number = '".$item_number."'";
+    $this->sql = "SELECT * FROM ".$this->tbl_product_items." WHERE item_id = '".$item_id."'";
     $this->result = $db->Execute($this->sql);
     return ($this->result->RecordCount()) ? TRUE : FALSE;
   }
@@ -83,7 +83,7 @@ class Product extends Core {
   	reset($array);
   	//echo strlen($elems)." leng<br>";
   	$elems=substr_replace($elems,'',(strlen($elems))-1);
-  	$this->where="item_number='$item_nr'";
+  	$this->where="item_id='$item_nr'";
         $this->sql="UPDATE $this->coretable SET $elems WHERE $this->where";
   	# Bug fix. Reset the condition variable to prevent affecting subsequent update calls. 
   	$this->where=''; 
@@ -99,14 +99,14 @@ class Product extends Core {
 	}
   
   //------------------------------------------------------------------------------
-  function delete_item($item_number){
+  function delete_item($item_id){
     /**
     * Delete item out of the table
     */
-    if(empty($item_number)) {
+    if(empty($item_id)) {
         return FALSE;
     } else {
-      $this->where="item_number='$item_number'";
+      $this->where="item_id='$item_id'";
       $this->sql="DELETE FROM $this->coretable WHERE $this->where";
       return $this->Transact();
     }
@@ -255,9 +255,9 @@ class Product extends Core {
   }
 
 
-  function get_item_peadric($item_number) {
+  function get_item_peadric($item_id) {
     global $db;
-    $this->sql="SELECT is_pediatric FROM care_tz_druglist WHERE item_number='".$item_number."'";
+    $this->sql="SELECT is_pediatric FROM care_tz_druglist WHERE item_id='".$item_id."'";
     $this->rs = $db->Execute($this->sql);
     if ($this->rs->RecordCount()) {
       $this->elem = $this->rs->FetchRow();
@@ -265,9 +265,9 @@ class Product extends Core {
     }
     return "N/A";
   }
-  function get_item_adult($item_number){
+  function get_item_adult($item_id){
     global $db;
-    $this->sql="SELECT is_adult FROM care_tz_druglist WHERE item_number='".$item_number."'";
+    $this->sql="SELECT is_adult FROM care_tz_druglist WHERE item_id='".$item_id."'";
     $this->rs = $db->Execute($this->sql);
     if ($this->rs->RecordCount()) {
       $this->elem = $this->rs->FetchRow();
@@ -276,9 +276,9 @@ class Product extends Core {
     return "N/A";
   }  
 
-  function get_item_other($item_number){
+  function get_item_other($item_id){
     global $db;
-    $this->sql="SELECT is_other FROM care_tz_druglist WHERE item_number='".$item_number."'";
+    $this->sql="SELECT is_other FROM care_tz_druglist WHERE item_id='".$item_id."'";
     $this->rs = $db->Execute($this->sql);
     if ($this->rs->RecordCount()) {
       $this->elem = $this->rs->FetchRow();
@@ -287,9 +287,9 @@ class Product extends Core {
     return "N/A";
   }
 
-  function get_item_consumable($item_number){
+  function get_item_consumable($item_id){
     global $db;
-    $this->sql="SELECT is_consumable FROM care_tz_druglist WHERE item_number='".$item_number."'";
+    $this->sql="SELECT is_consumable FROM care_tz_druglist WHERE item_id='".$item_id."'";
     $this->rs = $db->Execute($this->sql);
     if ($this->rs->RecordCount()) {
       $this->elem = $this->rs->FetchRow();
@@ -298,9 +298,9 @@ class Product extends Core {
     return "N/A";
   }
 
-  function get_selians_item_description($item_number){
+  function get_selians_item_description($item_id){
     global $db;
-    $this->sql="SELECT item_description FROM care_tz_druglist WHERE item_number='".$item_number."'";
+    $this->sql="SELECT item_description FROM care_tz_druglist WHERE item_id='".$item_id."'";
     $this->rs = $db->Execute($this->sql);
     if ($this->rs->RecordCount()) {
       $this->elem = $this->rs->FetchRow();
@@ -308,9 +308,9 @@ class Product extends Core {
     }
     return "N/A";
   }
-  function get_items_full_description($item_number){
+  function get_items_full_description($item_id){
     global $db;
-    $this->sql="SELECT item_full_description FROM care_tz_druglist WHERE item_number='".$item_number."'";
+    $this->sql="SELECT item_full_description FROM care_tz_druglist WHERE item_id='".$item_id."'";
     $this->rs = $db->Execute($this->sql);
     if ($this->rs->RecordCount()) {
       $this->elem = $this->rs->FetchRow();
@@ -338,9 +338,9 @@ class Product extends Core {
     return "N/A";
   }
 
-  function get_selians_item_price($item_number){
+  function get_selians_item_price($item_id){
     global $db;
-    $this->sql="SELECT unit_price FROM care_tz_druglist WHERE item_number='".$item_number."'";
+    $this->sql="SELECT unit_price FROM care_tz_druglist WHERE item_id='".$item_id."'";
     $this->rs = $db->Execute($this->sql);
     if ($this->rs->RecordCount()) {
       $this->elem = $this->rs->FetchRow();

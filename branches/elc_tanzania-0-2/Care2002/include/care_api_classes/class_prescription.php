@@ -252,7 +252,7 @@ class Prescription extends Core {
 
 	function DisplayBGColor($actual, $target) {
 	  //echo ($actual==$target) ?  'bgcolor="green"' : 'bgcolor="gray"';
-	  echo ($actual==$target) ?  'bgcolor="#330066"' : 'class="adm_input"';
+	  echo ($actual==$target) ?  'bgcolor="#CAD3EC"' : 'class="adm_input"';
 	  return TRUE;
 	}
 

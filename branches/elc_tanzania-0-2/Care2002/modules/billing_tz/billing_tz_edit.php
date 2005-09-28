@@ -47,7 +47,10 @@ if ($mode=="modfication") {
   if ($specific_mode=="delete")
     $bill_obj->delete_bill_element($bill_elem_number);  
 }
-
+if($mode=="allpaid")
+{
+	$bill_obj->update_bill_element_allpaid($billnr, 1);
+}
 
 require ("gui/gui_billing_tz_edit.php");
 

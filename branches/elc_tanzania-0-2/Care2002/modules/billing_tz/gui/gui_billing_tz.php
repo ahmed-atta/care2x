@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
@@ -97,16 +95,22 @@ function closewin()
                       <TR  height=1> 
                         <TD colSpan=3 class="vspace"><IMG height=1 src="../../gui/img/common/default/pixel.gif" width=5></TD>
                       </TR>
-
+                      <!--
+                      <TR> 
+                        <td height="26" align=center><img src="../../gui/img/common/default/prescription.gif" border=0 width="16" height="16"></td>
+                        <TD class="submenu_item"><nobr><a href="<?php echo $root_path;?>modules/radiology/radiolog.php?ntid=false&lang=en">Radiology</a></nobr></TD>
+                        <TD>Radiology Test Request</TD>
+                      </tr>
+                      -->
+                      <TR> 
+                        <td height="26" align=center><img src="../../gui/img/common/default/prescription.gif" border=0 width="16" height="16"></td>
+                        <TD class="submenu_item"><nobr><a href="<?php echo $root_path;?>modules/laboratory/labor.php?ntid=false&lang=en">Laboratory Test Request</a></nobr></TD>
+                        <TD>Labor Test Request</TD>
+                      </tr>
                       <TR> 
                         <td height="26" align=center><img src="../../gui/img/common/default/prescription.gif" border=0 width="16" height="16"></td>
                         <TD class="submenu_item"><nobr><a href="<?php echo $root_path;?>/modules/pharmacy_tz/pharmacy_tz_pending_prescriptions.php?back_path=billing">Drug prescription</a></nobr></TD>
                         <TD>Show prescriptions of patients</TD>
-                      </tr>
-                      <TR> 
-                        <td height="26" align=center><img src="../../gui/img/common/default/manfldr.gif" border=0 width="16" height="16"></td>
-                        <TD class="submenu_item"><nobr><a href="<?php echo $root_path;?>/modules/laboratory/labor_test_request_admin_chemlabor.php?sid=<?php echo session_id()?>&lang=en&target=admin&subtarget=chemlabor&noresize=1&&user_origin=lab&checkintern=1&user_origin=billing">Pending Request</a></nobr></TD>
-                        <TD>Receive & process requests, write results/findings/diagnoses</TD>
                       </tr>
                       <TR  height=1> 
                         <TD colSpan=3 class="vspace"><IMG height=1 src="../../gui/img/common/default/pixel.gif" width=5></TD>
