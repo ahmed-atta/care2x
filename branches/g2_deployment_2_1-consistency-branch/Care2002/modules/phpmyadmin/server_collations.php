@@ -28,14 +28,15 @@ echo '<h2>' . "\n"
  */
 if (PMA_MYSQL_INT_VERSION < 40100) {
     // TODO: Some nice Message :-)
-    require_once('./footer.inc.php');
+    include('./footer.inc.php');
+    exit;
 }
 
 
 /**
  * Includes the required charset library
  */
-require_once('./libraries/mysql_charsets.lib.php');
+require('./libraries/mysql_charsets.lib.php');
 
 
 /**
@@ -54,10 +55,12 @@ echo '<table border="0">' . "\n"
    . '                </th>' . "\n"
    . '            </tr>' . "\n";
 
+reset($mysql_charsets);
+reset($mysql_collations);
 $i = 0;
 $table_row_count = count($mysql_charsets) + $mysql_collations_count;
 
-foreach ($mysql_charsets as $current_charset) {
+while (list(, $current_charset) = each($mysql_charsets)) {
     if ($i > $table_row_count / 2) {
         $i = 0;
         echo '            </table>' . "\n"
@@ -81,7 +84,8 @@ foreach ($mysql_charsets as $current_charset) {
        . '                </td>' . "\n"
        . '            </tr>' . "\n";
     $useBgcolorOne = TRUE;
-    foreach ($mysql_collations[$current_charset] as $current_collation) {
+    reset($mysql_collations[$current_charset]);
+    while (list(, $current_collation) = each($mysql_collations[$current_charset])) {
         $i++;
         echo '            <tr>' . "\n"
            . '                <td bgcolor="' . ($mysql_default_collations[$current_charset] == $current_collation ? $cfg['BrowseMarkerColor'] : ($useBgcolorOne ? $cfg['BgcolorOne'] : $cfg['BgcolorTwo'])) . '">' . "\n"
@@ -100,6 +104,6 @@ echo '            </table>' . "\n"
    . '    </tr>' . "\n"
    . '</table>' . "\n";
 
-require_once('./footer.inc.php');
+require('./footer.inc.php');
 
 ?>

@@ -5,8 +5,8 @@
 /**
  * Gets a core script and starts output buffering work
  */
-require_once('./libraries/common.lib.php');
-require_once('./libraries/ob.lib.php');
+require('./libraries/common.lib.php');
+require('./libraries/ob.lib.php');
 if ($cfg['OBGzip']) {
     $ob_mode = PMA_outBufferModeGet();
     if ($ob_mode) {
@@ -23,7 +23,7 @@ PMA_checkParameters(array('db', 'full_sql_query'));
 // to a seperate file. It can now be included by header.inc.php,
 // queryframe.php, querywindow.php.
 
-require_once('./libraries/header_http.inc.php');
+include('./libraries/header_http.inc.php');
 
 /**
  * Sends the beginning of the html page then returns to the calling script
@@ -59,9 +59,6 @@ if ($text_dir == 'ltr') {
     <b><?php echo $strGenTime; ?>:</b> <?php echo PMA_localisedDate(); ?><br />
     <b><?php echo $strGenBy; ?>:</b> phpMyAdmin <?php echo PMA_VERSION; ?><br />
     <b><?php echo $strSQLQuery; ?>:</b> <?php echo htmlspecialchars($full_sql_query); ?>;
-    <?php if (isset($num_rows)) { ?><br />
-    <b><?php echo $strRows; ?>:</b> <?php echo $num_rows; ?>
-    <?php } ?>
 </p>
 
 
