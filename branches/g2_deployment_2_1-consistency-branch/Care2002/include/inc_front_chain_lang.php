@@ -157,6 +157,7 @@ require_once($root_path.'include/inc_img_fx.php'); # image functions
 
 # Resolve the template theme
 if(isset($cfg['template_theme'])&&!empty($cfg['template_theme'])) $template_theme=$cfg['template_theme'];
+	else $template_theme = 'default';
 
 # Load template class by default
 if(!defined('NO_TEMPLATE')||!NO_TEMPLATE){
