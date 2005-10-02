@@ -7,11 +7,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
-<title>Emeği Geçenler</title>
+<title>Yazarlar</title>
 </head>
 <body onLoad="if(window.focus) window.focus()">
-<font face="verdana,arial" size=6 color="#0000ff">Emeği Geçenler</fonts><br>
-<font face="verdana,arial" size=1 color="#000000">Ada göre abc sırası ile</fonts><br>
+<font face="verdana,arial" size=6 color="#0000ff">Yazarlar</fonts><br>
+<font face="verdana,arial" size=1 color="#000000">Ada göre alfabetik sıra ile</fonts><br>
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
