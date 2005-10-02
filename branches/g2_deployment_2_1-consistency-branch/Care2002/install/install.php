@@ -271,6 +271,10 @@ if(isset($HTTP_POST_VARS['mode'])&&($HTTP_POST_VARS['mode']=='save')){
 					@runSqlQuery('./sql/icd10_bg/insert-data-a2m.sql');
 					@runSqlQuery('./sql/icd10_bg/insert-data-n2z.sql');
 				}
+				if($HTTP_POST_VARS['icd10_tr']){
+					echo 'Loading ICD10 Turkish codes...<br>';
+					@runSqlQuery('./sql/icd10_tr/insert-data.sql');
+				}
 				if($HTTP_POST_VARS['ops_de']){
 					echo 'Loading OPS301 German codes...<br>';
 					@runSqlQuery('./sql/ops301_de/insert-data-1-5-499.sql');
@@ -604,6 +608,7 @@ Note: If Care2x is stored in a subdirectory e.g http://www.care2x.net/hospital/ 
 	<input type="checkbox" name="icd10_es" value="1" <?php if($HTTP_POST_VARS['icd10_es']=='1') echo 'checked';  ?>> ICD10 (Spanish language)<br>
 	<input type="checkbox" name="icd10_bs" value="1" <?php if($HTTP_POST_VARS['icd10_bs']=='1') echo 'checked';  ?>> ICD10 (Bosnian/Latin language)<br>
 	<input type="checkbox" name="icd10_bg" value="1" <?php if($HTTP_POST_VARS['icd10_bg']=='1') echo 'checked';  ?>> ICD10 (Bulgarian language)<br>
+	<input type="checkbox" name="icd10_tr" value="1" <?php if($HTTP_POST_VARS['icd10_tr']=='1') echo 'checked';  ?>> ICD10 (Turkish language)<br>
 	<input type="checkbox" name="ops_de" value="1" <?php if($HTTP_POST_VARS['ops_de']=='1') echo 'checked';  ?>> OPS301 (German language)<br>
 	<input type="checkbox" name="ops_es" value="1" <?php if($HTTP_POST_VARS['ops_es']=='1') echo 'checked';  ?>> OPS301 (Spanish language)<br></font>
 	<p>
