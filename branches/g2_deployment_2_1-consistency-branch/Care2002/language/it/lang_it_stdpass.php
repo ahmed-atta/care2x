@@ -99,21 +99,21 @@ $LDTestRequest='Richiesta test';
 $LDTestType=array('patho'=>'Anatomia Patologica', 
                              'chemlabor'=>'Laboratorio medico', 
 			'baclabor'=>'Laboratorio analisi batteriologiche',
-			 'blood'=>'Banca del Sangue',
+			 'blood'=>'Banca del sangue',
 			 'radio'=>'Radiologia',
 			 'sono'=>'Ecografia',
 			 'allamb'=>'Day Hospital',
 			 'unfamb'=>'Pronto Soccorso',
 			 'nuklear'=>'Radiodiagnostica',
-			 'inmed'=>'Day Hospital di Medicina Interna');
+			 'inmed'=>'Day Hospital di medicina interna');
 							 
 $LDBloodOrder='Richiesta scorta di sangue';
 /* 2002-09-22 EL */
-$LDPendingRequest='Richiesta in coda';
+$LDPendingRequest='Richiesta accodata';
 /* 2002-10-06 EL*/
-$LDLoggedOut='Non connesso';
+$LDLoggedOut='Non collegato';
 /* 2003-03-18 EL */
-$LDNursesList='Elenco Personale Infermieristico';
+$LDNursesList='Elenco personale infermieristico';
 $LDAppointments='Appuntamenti';
 /* 2003-04-27 */
 $LDInsuranceCoManager='Gestione Compagnie Assicurative';
@@ -125,7 +125,7 @@ $LDPlsContactEDP='Si prega di contattare il CED.';
 $LDPlsTryAgain='Si prega di riprovare.';
 /* 2003-07-11 EL */
 $LDAdministration='Direzione';
-$LDOutpatientClinic='Day clinic';
+$LDOutpatientClinic='Day hospital';
 $LDUploadDicom='Carica immagini DICOM';
 $LDViewDicom='Vedi immagini DICOM';
 # 2003-08-22 EL

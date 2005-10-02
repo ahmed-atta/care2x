@@ -68,18 +68,18 @@ $LDPID='PID';
 $LDImgNumber='Numero immagine';
 $LDSingleImage='singola immagine';
 $LDImageGroupNr='Numero gruppo immagine';
-$LDNewFileName='Nuovo filename';
+$LDNewFileName='Nuovo nome file';
 $LDUploadNew='Bisogna caricare';
 $LDNewImageFiles='Nuovo file immagini';
 # 2003-08-09 EL
 $LDSelectViewer='Seleziona visualizzatore';
 $LDSelectViewerTxt='Seleziona programma visualizzatore DICOM';
-$LDCurrentViewer='Attuale visualizzatore';
+$LDCurrentViewer='Visualizzatore attuale';
 $LDNagoyaTechInst='Nagoya Tech. Institute';
 $LDRAIMJAVA='RAIMJAVA©';
 $LDNoImageSaved='Nessuna immagine è stata salvata';
 $LDImageNotes='Note alla immagine';
 
 #2004-08-05 EL
-$LDMissingImageFile = 'Missing image file(s)!';
+$LDMissingImageFile = 'File di immagine mancante/i!';
 ?>
