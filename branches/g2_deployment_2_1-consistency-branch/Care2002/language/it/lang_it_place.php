@@ -1,14 +1,14 @@
 <?php
 # Translation: Gabriele Cicala
-$LDPlace='Posto/Luogo';
+$LDPlace='Luogo';
 $LDAddress='Indirizzo';
-$LDStreet='Via/Strada';
+$LDStreet='Via/Piazza';
 $LDStreetNr='Num. Civico';
 $LDZipCode='C.A.P.';
 $LDProvince='Provincia';
 $LDCity='Città';
-$LDTown='Town'; //In Italy is the same town and city
-$LDCityTown='City/Town';
+$LDTown='Città'; //In Italy is the same town and city
+$LDCityTown='Città';
 $LDRegion='Regione';
 $LDCountry='Paese';
 $LDData='Dati';
@@ -17,17 +17,17 @@ $LDNewDataTxt='Inserisca Nuovo Indirizzo';
 $LDUpdateData='Aggiornamento Dati';
 $LDListAll='Elenca tutti';
 $LDManager='Direttore';
-$LDNeedEmptyFormPls='Ho bisogno di una form vuoto, per favore.';
-$LDEnterAllFields='Per favore riempire tutti i campi marcati con il colore<font color="rosso"><b>*</b></font>';
-$LDPlsCheckData='Per Favore controlli i dati.';
-$LDPlsEnterInfo='Per Favore inserisca le informazioni';
+$LDNeedEmptyFormPls='Ho bisogno di un modulo vuoto.';
+$LDEnterAllFields='Riempire tutti i campi marcati con il colore<font color="rosso"><b>*</b></font>';
+$LDPlsCheckData='Controllare i dati.';
+$LDPlsEnterInfo='Inserire le informazioni';
 $LDListAllTxt='Elenca tutti gli indirizzi disponibili';
 $LDSearch='Ricerca';
 $LDSearchTxt='Ricerca un indirizzo';
-$LDNewCityTown='Nuova Città';
-$LDPlsEnterInfo='Per favore inserisca le informazioni';
+$LDNewCityTown='Nuova città';
+$LDPlsEnterInfo='Inserire le informazioni';
 $LDAlertNoCityTownName='Il nome della città è mancante.';
-$LDCityTownName='Nome della Città';
+$LDCityTownName='Nome della città';
 $LDISOCountryCode='Codice Paese ISO';
 $LDUNECELocalCode='Codice Luogo UNECE';
 $LDUNECELocalCodeType='Tipo codice luogo UNECE';
@@ -39,10 +39,10 @@ $LDDataNoSave='I dati inseriti non possono essere salvati.';
 $LDPlsChangeName='Per Favore inserisca un nome differente';
 $LDAddressNameExists='L\'indirizzo è già esistente.';
 $LDAddressInfoSaved='L\'indirizzo è stato salvato con successo.';
-$LDSearchPrompt='Per Favore inserisca un indirizzo o un codice';
+$LDSearchPrompt='Inserire un indirizzo o un codice';
 #2004-09-02
-$LDWrongUneceLocCode = 'UNECE location code type accepts only numbers between 0 and 99.';
-$LDEnterZero = 'If you do not know the value please enter 0';
-$LDEnterISOCountryCode = 'Please enter the ISO country code.';
-$LDEnterQMark ='If you do not know the code please enter a question mark (?)';
+$LDWrongUneceLocCode = 'Il codice UNECE deve essere un numero compreso tra 0 e 99.';
+$LDEnterZero = 'Se il valore non è noto, inserire 0';
+$LDEnterISOCountryCode = 'Inserire il codice ISO del Paese.';
+$LDEnterQMark ='Se il codice non è noto, inserire un punto di domanda (?)';
 ?>

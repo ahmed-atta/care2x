@@ -6,9 +6,9 @@ $LDDbNoUpdate='Impossibile aggiornare il database';
 $LDDbNoLastData='Gli ultimi dati non sono stati trovati!';
 $LDDbNoDelete='Cancellazione non riuscita!';
 #2003-11-01 EL
-$LDSessionTimeout='Session time out';
-$LDSessionTimeoutTxt='There has been a long time of inactivity. The module has timed out and locked itself for security reasons. 
-To activate this module again, you can try doing one of the following:<p>
-- Start the module again by selecting it on the main menu<br>
-- Refresh your browser by clicking the refresh button<p> Any unsaved previous data will be  lost unfortunately.'; 
+$LDSessionTimeout='Sessione scaduta';
+$LDSessionTimeoutTxt='Il tempo di inattività è durato troppo, quindi il modulo si è bloccato per ragioni di sicurezza.
+Per riattivare il modulo, si può provare a:<p>
+- Avviare di nuovo il modulo scegliendolo dal menu principale<br>
+- Premere il bottone <Aggiorna> del browser<p> (ma in questo caso tutti i dati inseriti saranno persi).'; 
 ?>

@@ -34,7 +34,7 @@ $LDDbNoSave='Impossibile scrivere nel database!';
 
 $LDDocsOnDuty='Medici/Chirurghi in servizio';
 
-$LDTabElements=array('Dipartimento',
+$LDTabElements=array('Reparto',
 								 'Medico/Chirurgo 1',
 								 'Cercapersone/Telefono',
 								 'Medico/Chirurgo 2',
@@ -84,39 +84,39 @@ $LDPerElements=array('Cognome',
 									'Cercapersone',
 									'Telefono'
 									);
-$LDChgDept='Modifica dipartimento: ';
+$LDChgDept='Modifica reparto: ';
 $LDChange='Modifica';
 $LDCreatePersonList='Creazione elenco del personale';
-$LDNoPersonList='Non esiste un elenco del personale: occorre crearne prima uno clickando su questo bottone.';
+$LDNoPersonList='Non esiste un elenco del personale: occorre crearne uno premendo questo bottone.';
 $LDShow='Visualizza';
 
 $LDDOCS='DOC Scheduler';
-$LDDOCSTxt='Doctor On Call Scheduler, plan, view, update, edit, etc.';
+$LDDOCSTxt='Appuntamenti medico di turno, pianifica, mostra, aggiorna, modifica, etc.';
 $LDDOCSR='DOCSR';
-$LDDOCSRTxt='Doctor On Call Schedule Requester';
+$LDDOCSRTxt='Richiesta di appuntamento con il medico di turno';
 /* 2002-09-15 EL */
-$LDTestRequest='Test request';
+$LDTestRequest='Richiesta di prova';
 /* 2003-03-16 EL */
-$LDContactInfo='Contact Info';
-$LDPersonalContactInfo='Personal Contact Info';
+$LDContactInfo='Informazioni';
+$LDPersonalContactInfo='Dati personali';
 $LDOnCallContactInfo='On-Call Contact Info';
-$LDPlsSelectDept='Please select a department';
-$LDCreateDoctorsList='Create doctors\' list';
-$LDPlsCreateList='Please create the list first.';
-$LDPlsClickButton='Click on the following button.';
-$LDFamilyName='Family name';
-$LDGivenName='Given name';
-$LDDateOfBirth='Date of birth';
-$LDEntryPrompt='Please enter a search keyword:<br>(e.g. family name, given name, personnel number, etc.)<br>';
-$LDPersonellNr='Personell Nr.';
-$LDFunction='Function';
-$LDOptions='Options';
-$LDSearchFound='Search found ~nr~ relevant data.';
-$LDAddDoctorToList='Add a doctor to list.';
-$LDAdd='Add';
-$LDDelete='Delete';
-$LDSureToDeleteEntry='Are you sure you want to delete this entry?';
+$LDPlsSelectDept='Scegliere un reparto';
+$LDCreateDoctorsList='Crea un elenco di medici';
+$LDPlsCreateList='Creare prima l\'elenco.';
+$LDPlsClickButton='Premere il bottone.';
+$LDFamilyName='Cognome';
+$LDGivenName='Nome';
+$LDDateOfBirth='Data di nascita';
+$LDEntryPrompt='Inserire una chiave di ricerca:<br>(es. cognome, nome, identificativo, etc.)<br>';
+$LDPersonellNr='Codice identificativo';
+$LDFunction='Funzione';
+$LDOptions='Opzioni';
+$LDSearchFound='Dati trovati: ~nr~.';
+$LDAddDoctorToList='Aggiungi un medico all\'elenco.';
+$LDAdd='Aggiungi';
+$LDDelete='Elimina';
+$LDSureToDeleteEntry='Si desidera veramente cancellare questo dato?';
 /* 2003-03-18 EL */
-$LDChangeOnlyDept='Change the department';
-$LDCreateNursesList='Create Nurses\' List';
+$LDChangeOnlyDept='Cambia reparto';
+$LDCreateNursesList='Crea un elenco di infermieri';
 ?>

@@ -1,35 +1,35 @@
 <?php
-$LDDiagnosticTest='Diagnostic Test Order';
+$LDDiagnosticTest='Richiesta di test diagnostico';
 $LDHospitalName='CARE';
-$LDCentralLab='Laboratorio zentrale';
-$LDLabel='Label';
-$LDRoomNr='Room-Nr.';
-$LDSamplingTime='Sampling Time';
+$LDCentralLab='Laboratorio centrale';
+$LDLabel='Etichetta';
+$LDRoomNr='Stanza.';
+$LDSamplingTime='Ora campione';
 $LDDay='Giorno';
-$LDMinutes='Minutes';
-$LDHours='Hours';
-$LDBatchNr='Batch Nr.';
-$LDCaseNr='Case number';
-$LDHouse='House';
-$LDHematology='Hematology';
-$LDCoagualtion='Coagulation';
+$LDMinutes='Minuti';
+$LDHours='Ore';
+$LDBatchNr='N. batch';
+$LDCaseNr='N. caso';
+$LDHouse='Casa';
+$LDHematology='Ematologia';
+$LDCoagualtion='Coagulazione';
 $LDUrine='Urine';
-$LDSerum='Serum';
-$LDGlucose='Glucose';
+$LDSerum='Siero';
+$LDGlucose='Glucosio';
 $LD9Hour='9.00';
 $LD15Hour='15.00';
-$LDSober='sober';
+$LDSober='sobrio';
 $LDBloodSugar='BLS'; /* BLS = Blood sugar */
 $LDBLoodSugar1='BLS1';
 $LDBloodPlasma='BLP';
-$LDDoctorSignature='Doctor\'s signature';
-$LDLifeRisk='Risk to life';
-$LDRarity='Rarity';
-$LDSpecTest='special Tests';
-$LDClinicalInfo='clinical info';
+$LDDoctorSignature='Firma medico';
+$LDLifeRisk='Rischio di vita';
+$LDRarity='Raro';
+$LDSpecTest='Test speciali';
+$LDClinicalInfo='Informazioni cliniche';
 
 $LDShortMonth=array('',
-                                   'Gen',
+                   'Gen',
 								   'Feb',
 								   'Mar',
 								   'Apr',
@@ -44,45 +44,45 @@ $LDShortMonth=array('',
 								   
 $LDShortDay=array('Do','Lu','Ma','Me','Gi','Ve','Sa','Do');
 				
-$LDBatchNumber='Batch nr.';
+$LDBatchNumber='N. batch';
 $LDMaterial='Material:';
-$LDEmergencyProgram='The violet shaded fields belong to emergency program';
-$LDPhoneOrder=' = only after acknowledgement by phone';
+$LDEmergencyProgram='Il campo in viola appartiene al programma di emergenza';
+$LDPhoneOrder=' = solo dopo conferma telefonica';
 /* 2002-09-03 EL */							  
 $LDSearchPatient='Ricerca paziente';
-$LDPlsSelectPatientFirst='Please search for the patient first.';
+$LDPlsSelectPatientFirst='Prima cercare un paziente.';
 /* 2002-09-11 EL */
-$LDPendingTestRequest='Richiesta Test in Coda';
+$LDPendingTestRequest='Richiesta test accodata';
 /* 2002-10-14 EL */
-$LDDone='It\'s done! Move the form to the archive';
+$LDDone='Fatto! Archivia il modulo';
 
 /* Note: the following array uses strict medical terminology.
 *  If you are not sure about a translation, please leave the 
 *  english word untranslated
 */
 $LD_Elements = array('tx_1'=>'Clinical Chem.',
-                                  'tx_2'=> 'Coagulation',
-								  'tx_3'=> 'Proteins',
-								  'tx_4'=>'Tumormarker',
+                     'tx_2'=> 'Coagulazione',
+								  'tx_3'=> 'Proteine',
+								  'tx_4'=>'Marcatori tumorali',
 								  'tx_5'=>'Infect.serology',
-								  'tx_6'=>'Medicine',
+								  'tx_6'=>'Medicina',
 								  'tx_7'=>'Urine/Spont.u.',
 								  
                                   '_iof__x__iof_2_' => 'IOF',
                                   '_marcumar_therapy_' => 'Marcumar-Ther.',
-								  '_emx_protein_total_' => 'total Protein',
+								  '_emx_protein_total_' => 'Proteine totali',
 								  '_afp_' => 'AFP',
 								  'tx_8' => 'Serum - Liquor',
 								  '_amiodaron_' => 'Amiodaron',
-								  '_emx_urin_status_' => 'Urine status',
+								  '_emx_urin_status_' => 'Stato urine',
 								  
 								  '_aof_'=>'AOF',
-								  '_heparin_therapy_'=>'Heparin ther.',
-								  '_albumin_'=>'Albumin',
+								  '_heparin_therapy_'=>'Terapia eeparina',
+								  '_albumin_'=>'Albumine',
 								  '_ca_15_3_'=>'CA 15-3',
 								  '_antisstaph_titer_'=>'Antistaph.Titer',
 								  '_barbiturates_i_s_'=>'Barbiturate i.S.',
-								  '_emx_urin_amilase_'=>'Urine amylase',
+								  '_emx_urin_amilase_'=>'Amilasi in urine',
 								  
 								  '_preop_'=>'preop',
 								  '_fibrinolysis_'=>'Fibrinolysis',
@@ -90,55 +90,55 @@ $LD_Elements = array('tx_1'=>'Clinical Chem.',
 								  '_ca_19_9_'=>'CA 19-9',
 								  '_adenovirus_antibody_'=>'Adenovirus-AB',
 								  '_benzodiazepam_i_s_'=>'Benzodiazep.i.S.',
-								  '_urin_sugar_'=>'Urine sugar',
+								  '_urin_sugar_'=>'Zuccheri urine',
 								  
 								  '_postop_'=>'postop',
 								  '_emx_quick_'=>'Quick',
 								  '_immune_fixation_'=>'Immune fixation',
 								  '_ca_125_'=>'CA 125',
-								  '_borrelias_antibody__x__borrelias_antibody_2_'=>'Borrelien-AB',
+								  '_borrelias_antibody__x__borrelias_antibody_2_'=>'Borrelia-AB',
 								  '_carbmazepin_'=>'Carbamazepin',
-								  '_proten_in_urine_'=>'Protein i.U.',
+								  '_proten_in_urine_'=>'Proteine in urine',
 								  
-								  '_emx_serum_sugar_'=>'Serumzucker',
+								  '_emx_serum_sugar_'=>'Zuccheri siero',
 								  '_emx_ptt_'=>'PTT',
-								  '_beta2_microglobulin_i_s_'=>'ß2-Mikroglob.i.S.',
+								  '_beta2_microglobulin_i_s_'=>'ß2-Microglob.i.S.',
 								  '_cea_'=>'CEA',
 								  '_borrelias_immunoblot__x__borrelias_immunoblot_2_'=>'Borr.Immunoblot',
 								  '_clonazepam_'=>'Clonazepam',
-								  '_albumin_in_urine_'=>'Albumin i.U.',
+								  '_albumin_in_urine_'=>'Albumina in urine',
 								  
-								  '_emx_bilirubin_total_'=>'Bili total',
+								  '_emx_bilirubin_total_'=>'Bile totale',
 								  '_emx_ptz_'=>'PTZ',
-								  '_immunglobulin_quantity_'=>'Immu.glob.quant.',
+								  '_immunglobulin_quantity_'=>'Qt. immuglobine',
 								  '_cyfra_21_1_'=>'Cyfra 21-1',
 								  '_brucellia_antibody_'=>'Brucellen-AB',
 								  '_emx_digitoxin_'=>'Digitoxin',
 								  '_emx_osmol_in_urine_'=>'Osmol i.U.',
 								  
-								  '_bilirubin_direct_'=>'Bili direct',
+								  '_bilirubin_direct_'=>'Bile diretta',
 								  '_emx_fibrinogen_'=>'Fibrinogen',
 								  '_ige_'=>'IgE',
 								  '_hcg_'=>'HCG',
 								  '_campylob_antibody_'=>'Campylob.-AB',
 								  '_emx_digoxin_'=>'Digoxin',
-								  '_emx_pregnancy_'=>'Pregnancy',
+								  '_emx_pregnancy_'=>'Gravidanza',
 								  
 								  '_emx_got_'=>'GOT',
 								  '_emx_soluble_fibrinogen_mon_'=>'Sol.Fibr.mon',
-								  '_haptoglobin_'=>'Haptoglobin',
+								  '_haptoglobin_'=>'Haptoglobina',
 								  '_nse_'=>'NSE',
 								  '_candida_antibody_'=>'Candida-AB',
 								  '_gentamycin_'=>'Gentamycin',
-								  '_cytomegaly_in_urine_'=>'Cytomeg.i.U.',
+								  '_cytomegaly_in_urine_'=>'Cytomeg in urine',
 								  
 								  '_emx_gpt_'=>'GPT',
 								  '_emx_fsp_dimer_'=>'FSP-dimer',
 								  '_transferrin_'=>'Transferrin',
 								  '_psa_'=>'PSA',
 								  '_cardiotr_virus_'=>'Cardiotr.Virus',
-								  '_lithium_'=>'Lithium',
-								  '_urine_cytology_'=>'Urine cytology',
+								  '_lithium_'=>'Litio',
+								  '_urine_cytology_'=>'Urine citologia',
 								  
 								  '_gamma_gt_'=>'gamma GT',
 								  '_emx_thrombos_coagulation_'=>'Thr.Coag.',
@@ -157,32 +157,32 @@ $LD_Elements = array('tx_1'=>'Clinical Chem.',
 								  '_urine_elpho_'=>'Urine-Elpho',
 								  
 								  '_ldh_'=>'LDH',
-								  '_factor_8_'=>'Faktor VIII',
+								  '_factor_8_'=>'Fattore VIII',
 								  '_alpha_1_antitrypsin_'=>'a-1 Antitrypsin',
 								  'tx_9'=>'Tissue-AB',
 								  '_c_psitacci_antibody_'=>'C.psitacci-AB',
 								  '_primidon_'=>'Primidon',
-								  '_beta_2_microglobulin_in_urine_'=>'ß2 Mikroglob.i.U.',
+								  '_beta_2_microglobulin_in_urine_'=>'Microglob. ß2 urine',
 								  
 								  '_hbdh_'=>'HBDH',
 								  '_apc_resistance_telx_'=>'APC-Resisten.',
 								  '_afp_gravida_'=>'AFP Grav.',
 								  '_ana_'=>'ANA',
 								  '_coxsacky_antibody_'=>'Coxsack.-AB',
-								  '_salicylic_acid_'=>'Salicilic acid',
+								  '_salicylic_acid_'=>'Acido salicilico',
 								  'tx_10'=>'Collect.Urine',
 								  
 								  'emx_cpk_'=>'CPK',
-								  '_protein_c_telx_'=>'Protein C',
-								  '_ssw_'=>'Pregnancy',
+								  '_protein_c_telx_'=>'Proteina C',
+								  '_ssw_'=>'Gravidanza',
 								  '_ama_'=>'AMA',
 								  '_q_fever_antibody_'=>'Q-Fieber-AB',
 								  '_theophyllin_'=>'Theophyllin',
 								  '_urine_collected_'=>'Sammel-',
 								  
 								  '_emx_ckmb_'=>'CKMB',
-								  '_protein_s_telx_'=>'Protein S',
-								  '_alpha_1_microglobulin_'=>'a-1 Mikroglobulin',
+								  '_protein_s_telx_'=>'Proteina S',
+								  '_alpha_1_microglobulin_'=>'Microglobulina a-1',
 								  '_dns_antibody_'=>'DNS-AB',
 								  '_cytomegaly_antibody_'=>'Cytomegalie-AB',
 								  '_tobramycin_'=>'Tobramycin',
@@ -190,27 +190,27 @@ $LD_Elements = array('tx_1'=>'Clinical Chem.',
 								  
 								  '_emx_myoglobin_'=>'Myoglobin',
 								  '_bleeding_time_telx_'=>'Bleed time',
-								  'tx_11'=>'Thyroid glands',
+								  'tx_11'=>'Ghiandole tiroidee',
 								  '_asma_'=>'ASMA',
 								  '_ebv_antibody__x__ebv_antibody_2_'=>'EBV-AB',
 								  '_valproin_acid_'=>'Valproin acid',
 								  '_addis_count_'=>'Addis-Count',
 								  
 								  '_emx_troponin_t_'=>'Troponin-T',
-								  'tx_12'=>'Hematology',
+								  'tx_12'=>'Ematologia',
 								  '_t3_'=>'T3',
 								  '_ena_'=>'ENA',
-								  '_echinococcus_antibody_'=>'Echinococcus-AB',
+								  '_echinococcus_antibody_'=>'Echinococco-AB',
 								  '_vancomycin_'=>'Vancomycin',
-								  '_sodium_in_urine_'=>'Na i.U.',
+								  '_sodium_in_urine_'=>'Sodio in urine',
 								  
-								  '_emx_cholinesterase_'=>'Cholinesterase',
+								  '_emx_cholinesterase_'=>'Colinesterasi',
 								  '_emx_minor_blood_test_'=>'Kl. BB',
 								  '_thyroxin_T4_'=>'Thyroxin/T4',
 								  '_anca_'=>'ANCA',
 								  '_echo_virus_antibody_'=>'Echo-Virus AB',
 								  '_empty_'=>'',
-								  '_kalium_in_urine_'=>'K i.U.',
+								  '_kalium_in_urine_'=>'Potassio in urine',
 								  
 								  '_gldh_'=>'GLDH',
 								  '_diff_minor_blood_test_'=>'Diff.+ kl.BB',
@@ -218,31 +218,31 @@ $LD_Elements = array('tx_1'=>'Clinical Chem.',
 								  'tx_13'=>'Rheuma factors',
 								  '_fsme_antibody__x__fsme_antibody_2_'=>'FSME-AB',
 								  '_emx_drugscreen_in_urine_'=>'Drugscreen i.U.',
-								  '_calcium_in_urine_'=>'Ca i.U.',
+								  '_calcium_in_urine_'=>'Calcio in urine',
 								  
 								  '_chol_'=>'Chol',
 								  '_reticulocytes_'=>'Retikulocytes',
 								  '_tsh_stimulation_'=>'TSH-stim.',
 								  '_anti_strepto_titer_'=>'Anti-Strepto-Titer',
 								  '_herpes_simplex_1_antibody_'=>'Herpes sim.1-AB',
-								  '_amphetamine_in_urine_'=>'Amphetam. i.U.',
-								  '_phospor_in_urine_'=>'Phospor i.U.',
+								  '_amphetamine_in_urine_'=>'Amfetamina in urine',
+								  '_phospor_in_urine_'=>'Fosforo in urine',
 								  
 								  '_tri_'=>'Tri',
 								  '_bone_marrow_diff_telx_'=>'Bmarrow+Diff.',
 								  '_tak_'=>'TAK',
 								  '_lat_rf_'=>'Lat.RF',
 								  '_herpes_simplex_2_antibody_'=>'Herpes sim.2-AB',
-								  '_antidepressant_in_urine_'=>'Antidepresiva i.U.',
-								  '_uric_acid_in_urine_'=>'Uric acid i.U.',
+								  '_antidepressant_in_urine_'=>'Antidepressivi in urine',
+								  '_uric_acid_in_urine_'=>'Acido urico in urine',
 								  
 								  '_hdl_chol_'=>'HDL-Chol',
 								  '_malaria_'=>'Malaria',
 								  '_mak_'=>'MAK',
 								  '_streptocyme_'=>'Streptozyme',
 								  '_hiv1_hiv2_antibody_'=>'HIV1/HIV2-AB',
-								  '_barbiturates_in_urine_'=>'Barbiturate i.U.',
-								  '_creatinin_in_urine_'=>'Kreatinin i.U.',
+								  '_barbiturates_in_urine_'=>'Barbiturici in urine',
+								  '_creatinin_in_urine_'=>'Creatinina in urine',
 								  
 								  '_ldl_chol_'=>'LDL-Chol',
 								  '_hb_elpho_'=>'Hb-Elpho',
@@ -250,41 +250,41 @@ $LD_Elements = array('tx_1'=>'Clinical Chem.',
 								  '_waaler_rose_'=>'Waaler Rose',
 								  '_influenza_a_antibody_'=>'Influenza A-AB',
 								  '_benzodiazepam_in_urine_'=>'Benzodiazep.i.U.',
-								  '_porphyrine_in_urine_'=>'Porphyrine i.U.',
+								  '_porphyrine_in_urine_'=>'Porphyrina in urine',
 								  
 								  '_lipid_elpho_'=>'Lipid-Elpho',
 								  '_hla_b_27_telx_'=>'HLA-B 27',
 								  '_thyreoglobulin_'=>'Thyreoglobulin',
 								  'tx_14'=>'Hepatitis',
 								  '_influenza_b_antibody_'=>'Influenza B-AB',
-								  '_cannabinol_in_urine_'=>'Cannabinol i.U.',
-								  '_cortisol_in_urine_'=>'Cortisol i.U.',
+								  '_cannabinol_in_urine_'=>'Cannabinol in urine',
+								  '_cortisol_in_urine_'=>'Cortisol in urine',
 								  
-								  '_lipase_'=>'Lipase',
+								  '_lipase_'=>'Lipasi',
 								  '_thrombo_antibody_telx_'=>'Thrombo-AB',
 								  '_thyroxinbinding_globulin_'=>'Thyroxinbind.Glob.',
 								  '_anti_hav_'=>'Anti-HAV',
 								  '_lcm_antibody_'=>'LCM-AB',
-								  '_cocain_in_urine_'=>'Cocain i.U.',
-								  '_vms_in_urine_'=>'VMS i.U.',
+								  '_cocain_in_urine_'=>'Cocaina in urine',
+								  '_vms_in_urine_'=>'VMS in urine',
 								  
-								  '_emx_amylase_'=>'Amylase',
+								  '_emx_amylase_'=>'Amilasi',
 								  '_leukocytes_phosphate_telx_'=>'Leuko-Phosp.',
-								 'tx_15'=>'Hormones',
+								 'tx_15'=>'Ormoni',
 								 '_anti_hav_igm_'=>'Anti-HAV-IgM',
 								 '_leg_pneum_antibody_'=>'Leg.pneum.-AB',
-								 '_methadon_in_urine_'=>'Methadon i.U.',
-								 '_5_hies_in_urine_'=>'5.-Hies i.U.',
+								 '_methadon_in_urine_'=>'Metadone in urine',
+								 '_5_hies_in_urine_'=>'5.-Hies in urine',
 								 
 								 '_uric_material_'=>'Harnstoff',
-								 'tx_16'=>'Bloodsugar',
+								 'tx_16'=>'Zuccheri sangue',
 								 '_acth_telx_'=>'ACTH',
 								 '_hbs_antigen_'=>'HBs-Antigen',
 								 '_leptospiria_antibody_'=>'Leptospiren-AB',
 								 '_opiates_in_urine_'=>'Opiates i.U.',
 								 '_hydroxyprolin_in_urine_'=>'Hydroxyprolin i.U.',
 								 
-								 '_uric_acid_'=>'Uric acid',
+								 '_uric_acid_'=>'Acido urico',
 								 '_emx_bloodsugar_sober_'=>'Bloodsu. sob.',
 								 '_aldosteron_'=>'Aldosteron',
 								 '_anti_hbs_titer_'=>'Anti-HBs-Titer',
@@ -300,23 +300,23 @@ $LD_Elements = array('tx_1'=>'Clinical Chem.',
 								 '_chlamydia_smear_pregnancy_'=>'Chlamy.smear.',
 								 '_pankreol_'=>'Pankreol.',
 								 
-								 '_emx_sodium_'=>'Natrium',
+								 '_emx_sodium_'=>'Sodio',
 								 '_emx_bloodsugar_pp_'=>'Bloodsu. p.p.',
 								 '_cortisol_'=>'Cortisol',
 								 '_anti_hbe_'=>'Anti-HBe',
-								 '_mononucleosis_'=>'Mononucleosis',
+								 '_mononucleosis_'=>'Mononucleosi',
 								 '_first_serology_'=>'1st serology',
-								 '_aminolevulin_in_urine_'=>'Aminolövulin i.U.',
+								 '_aminolevulin_in_urine_'=>'Aminolovulina in urine',
 								 
-								 '_emx_kalium_'=>'Kalium',
+								 '_emx_kalium_'=>'Potassio',
 								 '_emx_bloodsugar_15_00_'=>'Bloodsu. 15.00',
 								 '_cortisol_day_program_'=>'Cortisol Tagespr.',
 								 '_anti_hbc_'=>'Anti_HBc',
 								 '_mumps_antibody_'=>'Mumps-AB',
 								 '_pregnancy_'=>'SSW:',
-								 'tx_18'=>'Sonstiges',
+								 'tx_18'=>'Altro',
 								 
-								 '_emx_calcium_'=>'Calcium',
+								 '_emx_calcium_'=>'Calcio',
 								 '_emx_bloodsugar_notime_'=>'Bloodsu.noTime',
 								 '_fsh_'=>'FSH',
 								 '_anti_hbc_igm_'=>'Anti-HBc IgM',
@@ -324,7 +324,7 @@ $LD_Elements = array('tx_1'=>'Clinical Chem.',
 								 '_down_screening_'=>'Down screening',
 								 '_emx_blood_alcohol_'=>'Blood alcohol',
 								 
-								 '_chloride_'=>'Chlorid',
+								 '_chloride_'=>'Cloruro',
 								 '_emx_bloodsugar_notime_2_'=>'Bloodsu.noTime',
 								 '_gastrin_'=>'Gastrin',
 								 '_anti_hcv_'=>'Anti_HCV',
@@ -332,32 +332,32 @@ $LD_Elements = array('tx_1'=>'Clinical Chem.',
 								 '_strep_b_quicktest_'=>'Strep-B-quick.test',
 								 '_cdt_'=>'CDT',
 								 
-								 '_phospor_'=>'Phospor',
-								 '_glucose_proof_'=>'Glucose proof',
+								 '_phospor_'=>'Fosforo',
+								 '_glucose_proof_'=>'Test glucosio',
 								 '_hormone_hcg_'=>'HCG',
 								 '_hepatitis_d_delta_a_'=>'Hep.D delta A',
 								 '_parainfluenza_2_antibody_'=>'Par.influenz.2-AB',
 								 '_tpha_'=>'TPHA',
-								 '_vitamin_b12_'=>'Vitamin B12',
+								 '_vitamin_b12_'=>'Vitamina B12',
 								 
-								 '_magnesium_'=>'Magnesium',
-								 '_lactose_proof_'=>'Lactose proof',
-								 '_insulin_'=>'Insulin',
+								 '_magnesium_'=>'Magnesio',
+								 '_lactose_proof_'=>'Test lattosio',
+								 '_insulin_'=>'Insulina',
 								 '_anti_hev_'=>'Anti-HEV',
 								 '_parainfluenza_3_antibody_'=>'Par.influenz.3-AB',
 								 '_hbs_ag_'=>'HBs-Ag',
 								 '_folic_acid_'=>'Folic acid',
 								 
-								 '_iron_'=>'Iron',
+								 '_iron_'=>'Ferro',
 								 '_hba_1c_'=>'HBA 1c',
 								 '_cathecholamines_in_p_'=>'Katecholam.i.P.',
 								 'tx_19'=>'Punctate',
 								 '_picoma_virus_antibody_'=>'Picoma-Virus-AB',
 								 '_pregnancy_hiv1_hiv2_antibody_'=>'HIV1/HIV2-AB',
-								 '_insulin_antibody_'=>'Insulin-AB',
+								 '_insulin_antibody_'=>'Insulina-AB',
 								 
-								 '_copper_'=>'Copper',
-								 '_fructosamine_'=>'Fructosamine',
+								 '_copper_'=>'Rame',
+								 '_fructosamine_'=>'Fructosamina',
 								 '_lh_'=>'LH',
 								 '_punctat_cytology_'=>'Punctat cytolog.',
 								 '_rickettsia_antibody_'=>'Rickettsien-AB',
@@ -365,7 +365,7 @@ $LD_Elements = array('tx_1'=>'Clinical Chem.',
 								 '_intrinsic_antibody_'=>'Intrinsic-AB',
 								 
 								 '_emx_osmolal_'=>'Osmolal.',
-								 '_capillary_blood_sample_'=>'Capill.Blutentn.',
+								 '_capillary_blood_sample_'=>'Test capill. sangue',
 								 '_oestradiol_'=>'Oestradiol',
 								 '_protein_in_punctat_'=>'Protein i.Punct.',
 								 '_reoteln_antibody_'=>'Röteln-AB',
@@ -377,23 +377,23 @@ $LD_Elements = array('tx_1'=>'Clinical Chem.',
 								 '_oestriol_'=>'Oestriol',
 								 '_ldh_in_punctat_'=>'LDH i.Punctat',
 								 '_roeteln_immune_status_'=>'Röt-Immunstat.',
-								 '_blood_in_stool_'=>'Blood i.stool',
+								 '_blood_in_stool_'=>'Sangue nelle feci',
 								 '_ace_'=>'ACE',
 								 
-								 '_ammoniac_'=>'Ammoniac',
+								 '_ammoniac_'=>'Ammoniaca',
 								 'tx_21'=>'Infant',
 								 '_pregnancy_ssw_'=>'SSW:',
 								 '_chol_in_punctat_'=>'Chol. i. Punct.',
 								 '_rs_virus_antibody_'=>'RS virus-AB',
-								 '_blood_in_stool_2_'=>'Blood i.stool',
+								 '_blood_in_stool_2_'=>'Sangue nelle feci',
 								 '_g1_'=>'G1',
 								 
-								 '_emx_free_hb_'=>'freies Hb',
+								 '_emx_free_hb_'=>'Hb libero',
 								 '_emx_infant_bilirubin_'=>'Infant.bilirubin',
 								 '_parathormone_'=>'Parathormon',
 								 '_cea_in_punctat_'=>'CEA i.Punctat',
 								 '_shigella_salmonella_antibody_'=>'Shigell/Salm-AB',
-								 '_blood_in_stool_3_'=>'Blood i.stool',
+								 '_blood_in_stool_3_'=>'Sangue nelle feci',
 								 '_g2_'=>'G2',
 								 
 								 '_emx_crp_'=>'CRP',
@@ -401,7 +401,7 @@ $LD_Elements = array('tx_1'=>'Clinical Chem.',
 								 '_progesteron_'=>'Progesteron',
 								 '_afp_in_punctat_'=>'AFP i.Punctat',
 								 '_toxoplasma_antibody__x__toxoplasma_antibody_2_'=>'Toxoplasma-AB',
-								 'tx_22'=>'Rarity',
+								 'tx_22'=>'Raro',
 								 '_g3_'=>'G3',
 								 
 								 'tx_23'=>'Liquor',
@@ -423,14 +423,14 @@ $LD_Elements = array('tx_1'=>'Clinical Chem.',
 								 '_liquor_elpho_'=>'Liquorelpho',
 								 '_emx_infant_sugar_2_'=>'Infant sugar',
 								 '_renin_'=>'Renin',
-								 '_material_'=>'Material:',
+								 '_material_'=>'Materiale:',
 								 '_yersinia_antibody_'=>'Yersinia-AB',
 								 '_rarity_s_'=>'Rarity S',
 								 '_g6_'=>'G6',
 								 
 								 '_liquor_cytology_'=>'Liquor cytology',
 								 '_emx_infant_minor_blood_test_'=>'Kl. BB',
-								 '_serotonin_telx_'=>'Serotonin',
+								 '_serotonin_telx_'=>'Serotonina',
 								 'blankline'=>'',
 								 '_e1_'=>'E1',
 								 '_urine_rarity_'=>'Urine rarity',
@@ -446,7 +446,7 @@ $LD_Elements = array('tx_1'=>'Clinical Chem.',
 								 
 								 '_reiber_schema_'=>'Reiber-Schema',
 								 '_infant_reticulocytes_'=>'Retikulocytes',
-								 '_testosteron_'=>'Testosteron',
+								 '_testosteron_'=>'Testosterone',
 								 '_d1_'=>'D1',
 								 '_e3_'=>'E3',
 								 '_f2_'=>'F2',
@@ -460,12 +460,12 @@ $LD_Elements = array('tx_1'=>'Clinical Chem.',
 								 '_f3_'=>'F3',
 								 '_g10_'=>'G10',
 								
-								 'tx_24'=>'Doctor\'s sign',
-								 'tx_25'=>'High rish >>',
-								 'highrisk'=>'<< High risk',
-								 'tx_26'=>'Rarity:',
-								 'tx_27'=>'special Test',
+								 'tx_24'=>'Firma medico',
+								 'tx_25'=>'Alto rischio >>',
+								 'highrisk'=>'<< Alto rischio',
+								 'tx_26'=>'Raro:',
+								 'tx_27'=>'Test speciale',
 								 'tx_28'=>'',
-								 'tx_29'=>'clinical info',
+								 'tx_29'=>'informazioni cliniche',
 								  );
 ?>

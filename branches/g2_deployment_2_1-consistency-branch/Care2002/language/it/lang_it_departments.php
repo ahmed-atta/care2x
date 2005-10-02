@@ -1,12 +1,12 @@
 <?php
-$LDHeadlines='Headlines';			
+$LDHeadlines='Titoli';			
 $LDCafeNews='News dalla Mensa';		
 $LDManagement='Direzione';
 $LDHealthTips='Suggerimenti Medici';
 $LDEducation='Formazione';
-$LDStudies='Studii';
+$LDStudies='Studi';
 $LDExhibitions='Mostre';
-$LDHeadline='Headline';
+$LDHeadline='Titolo';
 $LDAdmission='Accettazione';
 $LDCafeteria='News dalla Mensa';
 $LDGeneralSurgery='Chirurgia generale';
@@ -26,31 +26,31 @@ $LDSonography='Ecografia';
 $LDNuclearDiagnostics='Radiodiagnostica';
 $LDRadiology='Radiologia';
 $LDOncology='Oncologia';
-$LDNeonatal='Neonatologia';
+$LDNeonatal='Ostetricia';
 $LDCentralLaboratory='Laboratorio clinico';
-$LDSerologicalLaboratory='Laboratorio serologico';
+$LDSerologicalLaboratory='Laboratorio immunologico';
 $LDChemicalLaboratory='Laboratorio medico';
 $LDBacteriologicalLaboratory='Laboratorio analisi batteriologiche';
 $LDTechnicalMaintenance='Manutenzione tecnica';
 $LDITDepartment='CED';
 $LDGeneralAmbulatory='Ambulatorio';
-$LDBloodBank='Banca del Sangue';
-$LDNursing='Infermiere';
+$LDBloodBank='Banca del sangue';
+$LDNursing='Infermeria';
 /* 2003-04-27 EL */
-$LDMedical='Medical';
-$LDSupport='Non-medical';
+$LDMedical='Medico';
+$LDSupport='Non medico';
 $LDNews='Novit&agrave;';
-$LDDepartment='Department';
-$LDPressRelations='Pubbliche relazioni';
+$LDDepartment='Reparto';
+$LDPressRelations='Relazioni con il pubblico';
 /* 2003-05-19 EL */
-$LDSelectDept='Scegli un dipartimento';
+$LDSelectDept='Scegli un reparto';
 /*2003-06-15 EL*/
-$LDPlsSelectDept='Per favore scegli un dipartimento';
-$LD_AllMedicalDept='____Tutti i dipartimenti medici_____';
+$LDPlsSelectDept='Per favore scegli un reparto';
+$LD_AllMedicalDept='____Tutti i reparti medici_____';
 $LDClinic='Clinica';
 
 #2003-10-23 EL
-$LDPlsNameFormal='Please enter the formal name';
-$LDPlsDeptID='Please enter the department\'s ID';
-$LDPlsSelectType='Please select the type';
+$LDPlsNameFormal='Inserire il nome formale';
+$LDPlsDeptID='Inserire il codice del reparto';
+$LDPlsSelectType='Inserire il tipo';
 ?>

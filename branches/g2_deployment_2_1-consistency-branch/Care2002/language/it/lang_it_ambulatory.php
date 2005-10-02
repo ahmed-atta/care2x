@@ -1,24 +1,24 @@
 <?php
 /* 2002-10-02 EL */
-$LDDepartments='Day Clinic';
+$LDDepartments='Day Hospital';
 $LDPendingRequest='Richieste in coda';
-$LDPendingRequestTxt='Reception, Elenco, Stampa, Inserire diagnosi conclusiva';
-$LDGeneralSurgery='Day Clinic General';
-$LDInternalMed='Day Clinic di Medicina Interna';
+$LDPendingRequestTxt='Accettazione, Elenco, Stampa, Inserire diagnosi conclusiva';
+$LDGeneralSurgery='Day Hospital Generale';
+$LDInternalMed='Day Hospital di Medicina Interna';
 $LDEmergency='Pronto Soccorso';
-$LDSonography='Sonograpico';
-$LDNuclearMed='Nuclear Diagnostics';
+$LDSonography='Sonografico';
+$LDNuclearMed='Diagnostica nucleare';
 $LDAdmission='Accetazione';
-$LDAdmissionTxt='Admission/discharge of ambulatory, search, archive';
+$LDAdmissionTxt='Accettazione/dimissione ambulatoriale, ricerca, archivio';
 $LDNews='News';
 $LDNewsTxt='News cliniche, memo, info, etc.';
 # 2003-08-01 EL
 $LDAppointments='Appuntamenti';
-$LDAppointmentsTxt='Patient appointments with this department';
-$LDPatientWaitingList='Patient waiting list';
-$LDPWListTxt='Today\'s admitted patients in the clinic';
-$LDOutpatientClinic='Day Clinic';
-$LDGeneralAmbulatory='Day Clinic General';
-$LDAmbulatory='Day Clinic';
+$LDAppointmentsTxt='Appuntamenti del paziente in questo reparto';
+$LDPatientWaitingList='Lista d\'attesa pazienti';
+$LDPWListTxt='Pazienti accettati oggi in clinica';
+$LDOutpatientClinic='Day Hospital';
+$LDGeneralAmbulatory='Day Hospital Generale';
+$LDAmbulatory='Day Hospital';
 ?>
 

@@ -4094,6 +4094,25 @@ CREATE TABLE "care_icd10_bg" (
 	"extra_subclass" text
 );
 
+-- ICD10 table for Turkish language
+-- Name: care_icd10_tr Type: TABLE Owner: postgres
+--
+
+CREATE TABLE "care_icd10_tr" (
+	"diagnosis_code" character varying(12),
+	"description" text,
+	"class_sub" character varying(5),
+	"type" character varying(10),
+	"inclusive" text,
+	"exclusive" text,
+	"notes" text,
+	"std_code" character(1),
+	"sub_level" smallint DEFAULT '0',
+	"remarks" text,
+	"extra_codes" text,
+	"extra_subclass" text
+);
+
 --
 -- TOC Entry ID 200 (OID 141829)
 --
@@ -6534,6 +6553,12 @@ CREATE INDEX ops301es_code ON care_ops301_es USING btree (code);
 --
 
 CREATE INDEX icd10bg_code ON care_icd10_bg USING btree (diagnosis_code);
+
+--
+-- Name: "icd10tr_code" Type: INDEX Owner: postgres
+--
+
+CREATE INDEX icd10tr_code ON care_icd10_tr USING btree (diagnosis_code);
 
 --
 -- TOC Entry ID 415 (OID 141836)
