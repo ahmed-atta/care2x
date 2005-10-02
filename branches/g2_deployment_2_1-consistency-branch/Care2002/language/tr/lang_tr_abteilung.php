@@ -1,15 +1,14 @@
 <?php
 $LDPageTitle='Bölümler';
 $LDDeptTxt='Bölüm';
-$LDOpenHrsTxt='Çalýþma saatleri';
-$LDChkHrsTxt='Týbbi  Muayene Saatleri';
+$LDOpenHrsTxt='Çalýþma Saatleri';
+$LDChkHrsTxt='Muayene Saatleri';
 $LDClk4Info='Daha fazla bilgi için týklayýnýz';
 $LDDayTxt='Gün';
 
 /**
-* A small dictionary:
-* ENT = Eye, Nose, Throath
-* OB-Gyne = Obstetrics-Gynecology
+* Çeviren Op. Dr. Bülent Potur
+* http://bpotur.tripod.com
 */
 $dept=array('Genel Cerrahi',
 					'Acil Cerrahi',
@@ -21,7 +20,7 @@ $dept=array('Genel Cerrahi',
 					'Fizik Tedavi',
 					'Dahiliye',
 					'Onkoloji',
-					'Teknisyenler',
+					'Ýdame',
 					'Orta Bakým Birimi',
 					'Yoðun Bakým Birimi',
 					'Biyokimya Laboratuvarý',

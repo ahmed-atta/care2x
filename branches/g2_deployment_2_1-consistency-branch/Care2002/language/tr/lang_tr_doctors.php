@@ -18,12 +18,12 @@ $Dez='Aralýk';
 $monat=array('',$Jan,$Feb,$Mae,$Apr,$Mai,$Jun,$Jul,$Aug,$Sep,$Okt,$Nov,$Dez);
 
 $LDDoctors='Doktorlar';
-$LDQView='Nöbetçiler Hýzlý bakýþ';  // DOC = doctor on call
+$LDQView='Nöbetçi Doktorlar Hýzlý bakýþ';  // DOC = doctor on call
 $LDQViewTxt='Bugünkü nöbetçi doktorlar listesine hýzlý bakýþ';
 $LDDutyPlan='Nöbet planý';
 $LDDutyPlanTxt='Nöbet planý, izle, güncelle, sil, yönet, vs.';
 $LDDocsList='Doktor listesi';
-$LDDocsListTxt='Doktor listesi yarat veya güncelle veri giriþi vs.';
+$LDDocsListTxt='Doktor listesi oluþtur veya güncelle veri gir vs.';
 $LDDocsForum='Forum';
 $LDDocsForumTxt='Doktorlar tartýþma listesi';
 $LDNews='Haberler';
@@ -34,13 +34,13 @@ $LDCloseAlt='Doktorlar/cerrahlar penceresini kapat';
 $LDDocsOnDuty='Nöbetçi doktorlar';
 
 $LDTabElements=array('Bölüm',
-								 'DOK 1',
+								 '1. Nöbetçi',
 								 'Cep/tel',
-								 'DOK 2',
+								 '2. Nöbetçi',
 								 'Cep/tel',
 								 'Nöbet planý'
 								 );
-$LDShowActualPlan='Son nöbet listesini göster';
+$LDShowActualPlan='Güncel nöbet listesini göster';
 $LDShortDay=array('Pa',
 								'Pt',
 								'Sa',
@@ -65,7 +65,7 @@ $LDBack='Geri';
 $LDHelp='Yardým';
 $LDMakeDutyPlan='Yeni nöbet listesi yap';
 $LDClk2Plan='Personel listesini açmak için týklayýn';
-$LDInfo4Duty='Enformasyon';
+$LDInfo4Duty='Bilgi';
 $LDStayIn='Hastane nöbeti';
 $LDOnCall='Nöbet';
 $LDPhone='Telefon';
@@ -86,22 +86,22 @@ $LDPerElements=array('Soyadý',
 $LDChgDept='Bölümü deðiþtir: ';
 $LDChange='Deðiþtir';
 $LDCreatePersonList='Personel için yeni bir liste yap';
-$LDNoPersonList='Personel listesi henüz yaratýlmadý. Önce listeyi yapýnýz.';
+$LDNoPersonList='Personel listesi henüz oluþturulmadý. Önce listeyi yapýnýz.';
 $LDShow='Göster';
 
 $LDDOCS='DOKTOR Nöbetleri';
 $LDDOCSTxt='Doktor Nöbetleri, planlama, izleme, güncelleme, düzeltme, vs.';
-$LDDOCSR='DOCSR';
-$LDDOCSRTxt='Nöbet listesi hazýrlama';
+$LDDOCSR='Nöbetçi doktor listesi istemcisi';
+$LDDOCSRTxt='Doktor Nöbet listesi hazýrlama yardýmcýsý';
 /* 2002-09-15 EL */
-$LDTestRequest='Listeyi deneme';
+$LDTestRequest='Listeyi dene';
 /* 2003-03-16 EL */
 $LDContactInfo='Ýletiþim Bilgisi';
 $LDPersonalContactInfo='Kiþisel Ýletiþim Bilgisi';
 $LDOnCallContactInfo='Telefonla Ýletiþim Bilgisi';
 $LDPlsSelectDept='Lutfen bir bölüm seçiniz';
-$LDCreateDoctorsList='Doktorlar listesi yap';
-$LDPlsCreateList='Lütfen önce ilk listeyi yapýnýz.';
+$LDCreateDoctorsList='Doktorlar listesi oluþtur';
+$LDPlsCreateList='Lütfen önce listeyi oluþturunuz.';
 $LDPlsClickButton='Ýzleyen düðmeyi týklayýnýz.';
 $LDFamilyName='Soyadý';
 $LDGivenName='Adý';
@@ -109,13 +109,14 @@ $LDDateOfBirth='Doðum tarihi';
 $LDEntryPrompt='Lütfen aranacak sözcüðü giriniz:<br>(mesela soyad, ad, sicil numarasý, vs.)<br>';
 $LDPersonellNr='Sicil  No.';
 $LDFunction='Ýþlev';
-$LDOptions='Opsiyonlar';
+$LDOptions='Seçenekler';
 $LDSearchFound='Araþtýrmada ilgili ~nr~ kayýt bulundu.';
 $LDAddDoctorToList='Listeye bir doktor ekle.';
 $LDAdd='Ekle';
-$LDDelete='Çýkar';
+$LDDelete='Sil';
 $LDSureToDeleteEntry='Bu kaydý silmek istediðinizden emin misiniz?';
 /* 2003-03-18 EL */
+/* çeviren Dr. Bülent Potur bpotur@yahoo.com */
 $LDChangeOnlyDept='Bölüm deðiþtir';
 $LDCreateNursesList='Hemþire listesi yap';
 ?>

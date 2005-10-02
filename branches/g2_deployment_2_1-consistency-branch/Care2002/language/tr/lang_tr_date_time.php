@@ -24,6 +24,6 @@ $LDNight='Gece';
 #2003-11-11 EL
 $LD_ddpMMpyyyy='gg.aa.yyyy';
 $LD_yyyyhMMhdd='yyyy-aa-gg';
-$LD_MMsddsyyyy='mm/gg/yyyy';
+$LD_MMsddsyyyy='aa/gg/yyyy';
 $LD_ddsMMsyyyy='gg/aa/yyyy';
 ?>

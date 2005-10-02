@@ -8,7 +8,7 @@ $LDInternalMed='Dahiliye poliklinik';
 $LDEmergency='Acil poliklinik';
 $LDSonography='Ultrason';
 $LDNuclearMed='Nükleer týp';
-$LDAdmission='Kabul';
+$LDAdmission='Hasta Kabul';
 $LDAdmissionTxt='Poliklinik kabul ve çýkýþ, arama, arþiv';
 $LDNews='Haberler';
 $LDNewsTxt='Kliniðe özgü haberler, not, bilgi, vs.';
@@ -19,5 +19,5 @@ $LDPatientWaitingList='Hasta bekleme listesi';
 $LDPWListTxt='Bugün kliniðe kabul edilmiþ hastalar';
 $LDOutpatientClinic='Poliklinik';
 $LDGeneralAmbulatory='Genel Poliklinik';
-$LDAmbulatory='Ayaktan';
+$LDAmbulatory='Poliklinik';
 ?>

@@ -13,7 +13,7 @@ $LDSex='Cinsiyet';
 $LDMale='erkek';
 $LDFemale='kadýn';
 $LDAddress='Adres';
-$LDAmbulant='Ayaktan';
+$LDAmbulant='POLIKLINIK HASTASI';
 $LDStationary='Yatan hasta';
 $LDSelfPay='Ücretli';
 $LDPrivate='Özel Sigorta';
@@ -26,28 +26,28 @@ $LDSpecials='Gönderenin notlarý';
 $LDPatientSearch='Hasta kaydý arama';
 $LDAdmit='Kabul';
 $LDSearch='Arama';
-$LDArchive='Arþivde arama';
+$LDArchive='Arþiv';
 $LDCatPls='BT yi görmek istiyorum lütfen!';
 $LDGoodMorning='Günaydýn!';
 $LDGoodDay='Merhaba! Sizi gördüðüme sevindim!';
 $LDGoodAfternoon='Ýyi günler!';
 $LDGoodEvening='Ýyi Akþamlar!';
 
-$LDNewForm='Bana boþ bir form verirmisiniz lütfen?';
+$LDNewForm='Bana boþ bir form verir misiniz lütfen?';
 
 $LDForceSave='Yine de kaydedilsin';
 $LDSaveData='Veriler kaydedilsin';
 $LDResetData='Deðiþiklikler iptal edilsin';
-$LDReset='Yenibaþtan';
+$LDReset='Yeni baþtan';
 $LDSave='Kaydet';
 $LDCancel='Ýptal';
 
 $LDCancelClose='Ýptal ve baþlangýç sayfasýna geri dön';
 $LDCloseWin='Kabul sayfasýný kapat';
-$LDError='<font color=red>Kýrmýzý <\font> iþaretli yerdeki bilgiler eksik !';
-$LDErrorS='<font color=red>Kýrmýzý <\font>iþaretli yerlerdeki bazý bilgiler eksik !';
+$LDError='<font color=red>Kýrmýzý iþaretli yerdeki bilgiler eksik !';
+$LDErrorS=' <font color=red> Kýrmýzý <\font> iþaretli yerlerdeki  bazý bilgiler eksik !';
 
-$fieldname=array('Hasta no.','Soyad','Ad','Doðum tarihi','Opsiyonlar');
+$fieldname=array('Hasta no.','Soyad','Ad','Doðum tarihi','Seçenekler');
 $LDEntryPrompt='Aramanýzýn anahtar sözcüðünü giriniz. Örneðin: soyad, veya ad, veya doðum tarihi, vs.';
 $LDSEARCH='ARA';
 $LDAdmWantEntry='Bir hastayý kabul etmem gerekiyor';
@@ -63,8 +63,8 @@ $LDBack2Admit='Hasta kabule geri';
 $LDBack2Search='Aramaya geri';
 $LDBack2Archive='Arþive geri';
 
-$LDFrom='kimden';
-$LDTo='kime';
+$LDFrom='den';
+$LDTo='ye';
 $LDUpdateData='Kaydý güncelle';
 $LDNewArchive='Arþivde yeni arama';
 $LDAdmArchive='Hastakabul - Arþiv';
@@ -83,36 +83,36 @@ $LDElements=array(
 								'Kabul tarihi'
 								);
 $LDSearchKeyword='Anahtar sözcük veya durum arama';
-$LDMEDOCS='Medikal Dokümantasyon Sistemi (Medok)';
-$LDMedocsSearchTitle='Medok - Doküman arama';
+$LDMEDOCS='Týbbi Belgeler Sistemi ';
+$LDMedocsSearchTitle='Týbbi belgeler - Belge arama';
 $LDHideCat='Catý gizlemek için týklayýnýz';
 $LDNewDocu='Ýzleyen hastayý belgelendiriniz';
 $LDExtraInfo='Ek bilgiler';
-$LDMedAdvice='Medikal Öneriler';
-$LDMedocs='Medoklar';
+$LDMedAdvice='Týbbi  Öneriler';
+$LDMedocs='Týbbi belgeler';
 
 $LDYes='Evet';
 $LDNo='Hayýr';
 
-$LDEditOn='Doküman çýkarýldýðý tarih';
-$LDEditBy='Dokümaný çýkaran';
+$LDEditOn='Belgenin çýkarýldýðý tarih';
+$LDEditBy='Belgeyi çýkaran';
 $LDKeyNr='Anahtar sayý';
-$LDDocSearch='Bir medok dokümanýný arama';
+$LDDocSearch='Bir týbbi belgeyi arama';
 
-$LDMedDocOf='Medok dokümaný hasta Soyadý adý:';
+$LDMedDocOf='Týbbi belge çýkarýlan:';
 $LDMedocsElements=array(
 								'',
 								'Soyad',
 								'Ad',
 								'Doðum tarihi',
 								'Hasta No.',
-								'Doküman No.',
+								'Belge No.',
 								'Bölüm',
 								'Tarih',
 								'Zaman'
 								);
-$LDStartNewDoc='Yeni bir medok belgesine baþla';
-$LDNoMedocsFound='Bu hastanýn hiçbir medok belgesi bulunamadý!';
+$LDStartNewDoc='Yeni bir týbbi belgeye baþla';
+$LDNoMedocsFound='Bu hastanýn hiçbir týbbi belgesi bulunamadý!';
 $LDAt='de';		
 		
 $LDDept='Bölüm';
@@ -122,23 +122,23 @@ $LDCivilStat='Medeni hali';
 $LDInsuranceNr='Sigorta no';
 $LDNameAddr='Ad ve Adresi';
 $LDBillInfo='Fatura bilgisi';
-$LDAdmitDiagnosis='Ön taný';
+$LDAdmitDiagnosis='Kabul tanýsý';
 $LDInfo2='Bilgi verilecek kiþi:';
-$LDPrintDate='Basým tarihi';
+$LDPrintDate='Yazdýrma tarihi';
 $LDReligion='Dini';
 $LDTherapyType='Tedavi tipi';
-$LDTherapyOpt='Tedavi opsiyonu';
+$LDTherapyOpt='Tedavi seçeneði';
 $LDServiceType='Servis tipi';
 
-$LDClick2Print='Basýlacak barkod etiketlerini týklayýnýz';
+$LDClick2Print='Yazdýrýlacak barkod etiketlerini týklayýnýz';
 
 $LDEnterDiagnosisNote='Teþhisle ilgili not ve yayýnlarýn baðlantýlarýný ekleyiniz:';
-$LDEnterTherapyNote='Tedavi ile ilgili not ve yayýnlarýn linklerini ekleyiniz:';
+$LDEnterTherapyNote='Tedavi ile ilgili not ve yayýnlarýn baðlantýlarýný ekleyiniz:';
 $LDSeeDiagnosisNote='Teþhisle ilgili not ve yayýnlar:';
 $LDSeeTherapyNote='Tedavi ile ilgili not ve yayýnlar:';
-$LDMakeBarcodeLabels='Barkod etiketlerini bas';
+$LDMakeBarcodeLabels='Barkod etiketleri oluþtur';
 
-$LDPlsEnterDept='<b>Lütfen bölümünüzü, kliniðinizi veya çalýþtýðýnýz yeri giriniz.</b><br>(örneðin 2 Dahiliye, veya M4A, vs.)';
+$LDPlsEnterDept='<b>Lütfen bölümünüzü, kliniðinizi veya çalýþtýðýnýz yeri giriniz.</b><br>(örneðin 2 Dahiliye, veya 1 Hariciye, vs.)';
 $LDOkSaveNow='Tamam þimdi kaydet';
 
 $LD_ddpMMpyyyy='gg.aa.yyyy';
@@ -150,9 +150,9 @@ $LDPlsSelectPatientFirst='Lütfen önce hastayý bulunuz.';
 $LDPatientRegister='Kiþi kaydý';
 $LDRegDate='Kayýt tarihi';
 $LDRegTime='Kayýt zamaný';
-$LDRegBy='Kaydeden';
-$LDName2='Soyad';
-$LDName3='Ad';
+$LDRegBy='Kayýt eden';
+$LDName2='2.Soyad';
+$LDName3='3.Soyad';
 $LDNameMid='Orta ad';
 $LDNameMaiden='Kýzlýk soyadý';
 $LDNameOthers='Diðer adlar';
@@ -195,8 +195,8 @@ $LDDiagXResults='Tetkik Sonuçlarý';
 $LDDiagXResultsTxt='Tetkik sonuçlarý veya raporlarýný arama, araþtýrma ve gösterme';
 $LDAppointments='Randevular';
 $LDAppointmentsTxt=$LDESE.', randevularý veya günlük programlarý  araþtýrma';
-$LDPatientDev='Geliþtirme';
-$LDPatientDevTxt=$LDESE.', hastanýn izlem raporlarý';
+$LDPatientDev='Geliþim';
+$LDPatientDevTxt=$LDESE.', hastanýn izlem raporlarýný görüntüle';
 $LDWtHt='Aðýrlýk ve Boy';
 $LDWtHtTxt=$LDESE.' aðýrlýk, boy ve baþ çevresi';
 $LDPregnancies='Gebelikler';
@@ -209,13 +209,14 @@ $LDInsuranceNr_2='Ekstra Sigorta No.';
 $LDInsuranceCo_2='Ekstra Sigorta Þirketi.';
 $LDBillType='Fatura Tipi';
 $LDWard='Servis/Koðuþ';
-$LDMakeWristBand='Kolbaðý basýmý';
-$LDClickImgToPrint='Basmak için resmi týklayýnýz.';
-$LDPrintPortraitFormat='Yazýcýnýzýn kaðýt ayarýný düþey olarak ayarlayýn.';
+$LDMakeWristBand='Kolbaðý oluþtur';
+$LDClickImgToPrint='Yazdýrmak için resmi týklayýnýz.';
+$LDPrintPortraitFormat='Yazýcýnýzýn kaðýt ayarýný düþey olarak ayarlayýnýz.';
 /* 2002-12-14 EL */
 $LDRegistryNr='PID No.';
-$LDRedirectToRegistry='Dikkat: Aramanýz kayýt modülüne yönlendirilecektir!';
+$LDRedirectToRegistry='Uyarý: Aramanýz kayýt modülüne yönlendirilecektir!';
 /* 2002-12-24 EL */
+/*Çeviren Op. Dr. Bülent Potur http://bpotur.tripod.com*/
 $LDSSSNr='SSS No.';
 $LDNatIdNr='TC kimlik No.';
 $LDEthnicOrigin='Etnik kökeni';
@@ -223,8 +224,8 @@ $LDOtherNr='Diðer no(lar)';
 /* 2002-12-25 EL */
 $LDSendBill='Fatura adresi';
 $LDContactPerson='Temas kurulacak kiþi';
-$LDOptsForPerson='Bu kiþi için opsiyonlar';
-$LDSickReport='Çalýþamazlýðýn teyidi';
+$LDOptsForPerson='Bu kiþi için seçenekler';
+$LDSickReport='Çalýþamazlýk onayý';
 $LDAnamnesisForm='Anamnez formu';
 $LDConsentDec='Rýza beyaný';
 $LDUpdate='Güncelleme';
@@ -237,15 +238,15 @@ $LDAdmitClass='Kabul sýnýfý';
 /* 2003-02-15 EL*/
 $LDEnterSearchKeyword='Aramak için lütfen anahtar kelimenizi giriniz';
 $LDSearchFoundData='Arama sonunda  <font color=red><b>~nr~</b></font> ilgili kayýt bulundu.';
-$LDQuickList='Kýsaliste';
-$LDSeveralInsurances='Hastanýn birkaç sigortasý var düzeltmek için týklayýnýz.';
+$LDQuickList='Çabukliste';
+$LDSeveralInsurances='Hastanýn birkaç sigortasý var. Düzeltmek için týklayýnýz.';
 $LDTop='Üst';
 $LDInsuranceClass='Sigorta sýnýfý';
-$LDRecordsHistory='DB Kaydý geçmiþi';
+$LDRecordsHistory='Veritabaný kayýt geçmiþi';
 /* 2003-02-16 EL*/
 $LDNotYetAdmitted='Henüz kabul edilmedi';
 $LDPatientCurrentlyAdmitted='Hasta halen kabul edilmiþ durumda!';
-$LDOptions='Opsiyonlar';
+$LDOptions='Seçenekler';
 /** note the ' ~nr~ ' must not be erased it will be replaced by the script with the number of search results ******/
 $LDSearchFoundAdmit='Ýlgili <font color=red><b>~nr~</b></font> kabul kaydý bulundu.';
 $LDPatientNr='Hasta No.';
@@ -275,7 +276,7 @@ $LDPrescription='Reçete';
 $LDDrugClass='Ýlaç Sýnýfý';
 $LDPrescribedBy='Reçete eden:';
 $LDPharmOrderNr='Eczane Sipariþ No:';
-$LDEncounterNr='Karþýlama No.';
+$LDEncounterNr='Vizit No.';
 $LDValue='Deðer';
 $LDUnit='Ünite';
 $LDWeight='Aðýrlýk';
@@ -304,14 +305,14 @@ $LDMail='Mektup';
 $LDPurpose='Amaç';
 $LDClinician='Klinisyen';
 $LDPhysician='Hekim';
-$LDBackToOptions='Opsiyonlara geri';
+$LDBackToOptions='Seçeneklere geri';
 $LDStatus='Durum';
 /* 2003-03-08 EL*/
 $LDUrgency='Acil';
 $LDNormal='Normal';
 $LDPriority='Öncelik';
-$LDUrgent='Urgent';
-$LDEmergency='Acil';
+$LDUrgent='Acil';
+$LDEmergency='Acil durum';
 /* 2003-03-09 EL*/
 $LDCancelReason='Ýptal sebebi';
 $LDSureCancelAppt='Bu randevuyu iptal etmek istediðinizden emin misiniz?';
@@ -321,36 +322,36 @@ $LDcancelled='iptal edildi';
 /* 2003-03-10 EL */
 $LDGotMedAdvice='Hastaya týbbi önerilerde bulunuldu mu?';
 /* 2003-03-15 EL */
-$LDShowDocList='Doküman listesini gösterme';
-$LDScheduleNewAppointment='Yeni randevu ayarlama';
+$LDShowDocList='Belge listesini göster';
+$LDScheduleNewAppointment='Yeni randevu belirle';
 /* 2003-04-04 EL */
 $LDNoPendingApptThisDay='Bu gün için bekleyen bir randevu yok.';
 $LDNoPendingApptToday='Bu gün için bekleyen bir randevu yok.';
 /* 2003-04-27 EL */
-$LDOptsForPatient='Bu hasta için opsiyonlar';
+$LDOptsForPatient='Bu hasta için seçenekler';
 /* 2003-05-06 EL */
-$LDRegisterNewPerson='Yeni bir kiþi kaydý';
+$LDRegisterNewPerson='Yeni bir kiþi kayýt et';
 /* 2003-05-17 EL */
-$LDEnterPersonSearchKey='Aradýðýnýz anahter kelimeyi giriniz:örneðin ad, soyad, veya doðum tarihi';
+$LDEnterPersonSearchKey='Aradýðýnýz anahtar sözcüðü giriniz: Örneðin protokol no, ad, soyad, veya doðum tarihi';
 $LDPersonData='Kiþisel bilgiler';
 /* 2003-05-26 EL*/
 $LDDiagnoses='Teþhisler';
-$LDCreateNewForm='Form yaratýlacak kiþi:';
+$LDCreateNewForm='Form oluþturulacak kiþi:';
 $LDOtherRecords='Diðer kayýtlar';
 /*2003-06-17 El*/
 $LDFullForm='Tam form';
 $LDAllContents='Tüm içerikler';
 $LDAllText='Yalnýzca dinamik içerikler';
-$LDDataOnly='Sadece ilgili veriler';
+$LDDataOnly='Sadece vizit ile ilgili veriler';
 /*2003-06-21 EL*/
 $LDChartsRecords='Çizelgeler klasörü';
 # 2003-07-26 EL
 $LDMode='Mod';
-$LDPatientIsDischarged='Bu hasta þimdiden çýkmýþ';
+$LDPatientIsDischarged='Bu hasta önceden çýkarýlmýþ';
 $LDShow='Göster';
 $LDPlannedEncType='Planlanan kabul tipi';
 # 2003-08-01 EL
-$LDListEncounters='Karþýlaþmalar listesi';
+$LDListEncounters='Vizitlerin listesi';
 $LDDischarged='Çýktý';
 $LDDischargeDate='Çýkýþ tarihi';
 # 2003-08-04 EL
@@ -403,4 +404,11 @@ $LDSimilarData2='Aþaðýda listelenmiþ kiþilerin benzer kiþisel bilgileri var.';
 $LDPlsCheckFirst='Lütfen sonraki sonraki adýma karar vermeden önce kontrol ediniz.';
 $LDPlsCheckFirst2='Lütfen sonraki sonraki adýma karar vermeden önce onlarý kontrol ediniz.';
 $LDShowDetails='Ayrýntýlarý göster';
+
+# 2004-05-22 KB
+$LDNr='No.';
+$LDOtherHospitalNr='Diðer Hastane No.';
+$LDSelectOtherHospital = 'Numarayý deðiþtirmek için diðer hastaneyi seçiniz';
+$LDNoNrNoDelete = 'numara yok = sil';
+
 ?>
