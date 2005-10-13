@@ -19,8 +19,8 @@ $LDNrWorkDay='N. di giorni lavorativi';
 $LDNrWeekHour='N. di ore per settimana';
 $LDNrVacationDay='N. di giornate di ferie';
 $LDMultipleEmployer='Svolge più di una funzione?';
-$LDPersonellNr='Matricoa';
-$LDPersonCurrentlyEmployed='La persona è un dipendente';
+$LDPersonellNr='Matricola';
+$LDPersonCurrentlyEmployed='E\' un dipendente';
 $LDRecordedBy='Inserito da';
 $LDNrDependent='N. di dipendenti';
 $LDPersonellData='Dati dipendente';
@@ -34,9 +34,9 @@ $LDAddPhoneInfo='Aggiungi numero telefono/cercapersone';
 $LDOptions4Employee='Opzioni per il dipendente';
 $LDPayrollOptions='Opzioni busta paga';
 $LDLegalDocuments='Documenti legali';
-$LDShowPersonalData='Show personal data';
+$LDShowPersonalData='Mostra dati personali';
 /* 2003-05-17 EL */
-$LDEnterEmployeeSearchKey='Enter search keyword: e.g. Employment-Nr., first name, or family name.';
+$LDEnterEmployeeSearchKey='Inserire i termini di ricerca: es. matricola, nome o cognome.';
 $LDPersonnelManagement='Gestione del personale';
-$LDNewEmployee='Nuova dipendente';
+$LDNewEmployee='Nuovo dipendente';
 ?>

@@ -71,7 +71,8 @@ class smarty_care extends Smarty {
 
 			# If the global config template is not available, use hard coded template theme
 			if(!isset($GLOBAL_CONFIG['template_smarty'])||empty($GLOBAL_CONFIG['template_smarty'])){
-				$this->templatedir=$template_theme; // use this theme if the global item is not available
+				if(isset($template_theme)) $this->templatedir=$template_theme; // use this theme if the global item is not available
+					else $this->templatedir = $this->$default_template;
 			}else{
 				$this->templatedir=$GLOBAL_CONFIG['template_smarty'];
 			}

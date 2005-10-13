@@ -43,7 +43,7 @@ suo ideatore e tutti i suoi collaboratori.
 			<P><img src="../../fotos/credits/giuseppe_scarpi.jpg"  width=135 height=170 border=0  align=right vspace=10>
 			<b>La versione italiana di CARE 2X è stata fatta da Giuseppe Scarpi:</b>
 			<p>
-			Giuseppe Scarpi è nato a Roma 35 anni fa.<p>
+			Giuseppe Scarpi è nato a Roma nel 1967.<p>
 E' laureato in ingegneria elettronica ed ha lavorato per molte aziende nel settore biomedico, dove ha compreso 
 le profonde relazioni tra il mondo biomedico e quello informatico.
 Utilizza ed apprezza sia Linux che Windows in quanto "<i>entrambi sono il risultato di un immenso lavoro umano, 
@@ -62,7 +62,7 @@ Ha deciso di unirsi attivamente alla causa dell'Open Source in quanto
 			<b>
 			Massimiliano Cuccia (IT)
 			</b><p>
-			Contributions to the development of DICOM viewer modules.
+			Ha collaborato a sviluppare i moduli di visualizzazione DICOM.
 			
 			<P><a href="mailto:mcuccia@users.sourceforge.net"><u>Si può contattare Massimiliano Cuccia qui.</u></a>
 </TD></TR></TBODY></TABLE>
@@ -75,7 +75,7 @@ Ha deciso di unirsi attivamente alla causa dell'Open Source in quanto
 			<b>
 			Daniele Ali (IT)
 			</b><p>
-			Contributions to the development of DICOM viewer modules.
+			Ha collaborato a sviluppare i moduli di visualizzazione DICOM.
 			
 			<P><a href="mailto:alidan@users.sourceforge.net"><u>Si può contattare Daniele Ali qui.</u></a>
 </TD></TR></TBODY></TABLE>

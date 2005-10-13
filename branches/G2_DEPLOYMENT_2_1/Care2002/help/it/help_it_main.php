@@ -10,7 +10,7 @@
 <blockquote><font face="Verdana, Arial" size=2>
 <img <?php echo createComIcon('../','butft2_d.gif') ?>><p>
 <b>Primi passi nell'uso di <br>CARE 2002</b><p>
-Con la potenza di CARE 2002 e di Internet (o Intranet), tutte le informazioni nella vostra struttura si trovano e modificano facilmente.
+Con la potenza di CARE2X e di Internet (o Intranet), tutte le informazioni nella vostra struttura si trovano e modificano facilmente.
 Basta clickare su una delle voci seguenti per iniziare. Le informazioni nella zona a sinistra (indice) mostreranno
 suggerimenti e spiegazioni aggiuntive che vi aiuteranno a lavorare meglio con CARE 2002.
 <p>

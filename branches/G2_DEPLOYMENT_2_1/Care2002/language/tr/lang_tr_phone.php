@@ -20,7 +20,7 @@ $LDSEARCH="ARAMA";
 /**************** note the " ~nr~ " must not be erased it will be replaced by the script with the number of search results ******/
 $LDPhoneFound="Arama sonucu ilgili <font color=red><b> ~nr~ </b></font> kayýt bulundu.";
 
-$LDKeywordPrompt="Aranacak anahtar sözcüðü giriniz. Örneðin: Bir isim, veya bir bölüm, veya kýsa birform, vs.";
+$LDKeywordPrompt="Aranacak anahtar sözcüðü giriniz. Örneðin: Bir isim, veya bir bölüm, veya kýsa bir form, vs.";
 $LDShowDir="Tüm rehberi göster";
 $LDNewEntry="Yeni telefon veya çaðrý kaydý gir";
 
@@ -91,9 +91,9 @@ $LDHowManage="Rehber nasýl yönetilir";
 $LDHow2OpenDir="Rehberin tamamý nasýl açýlýr";
 $LDHowEnter="Yeni telefon bilgisi nasýl girilir";
 $LDHow2SearchPhone="Bir telefon numarasý nasýl aranýr";
-$LDUpdate="Verileri güncelleme";
+$LDUpdate="Verileri güncelle";
 
-$LDDirData="Rehberdeki  <font color=\"red\">~nr~</font> numaralý kaydý düzeltme";
+$LDDirData="Rehberdeki  <font color=\"red\">~nr~</font> numaralý kaydý düzenle";
 $LDTelephone='Telefon';
 $LDBeeper='Çaðrý';
 ?>

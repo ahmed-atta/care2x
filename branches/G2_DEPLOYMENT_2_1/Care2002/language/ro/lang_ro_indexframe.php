@@ -12,37 +12,36 @@ $LDRadiology='Radiologie';
 $LDPharmacy='Farmacie';
 $LDMedDepot='Magazie Medicala';
 $LDDirectory='Agenda Telefonica';
-$LDTechSupport='Support Tehnic';
+$LDTechSupport='Suport Tehnic';
 $LDEDP='Administrator';
 $LDIntraEmail='Intranet Email';
 $LDInterEmail='Internet Email';
 $LDSpecials='Unelte Speciale';
-$LDLogin='Login';
-$LDLogout='Logout';
+$LDLogin='Access';
+$LDLogout='Iesire';
 $LDAppointments='Intilniri';
 
 $VersionChgTarget='_top';
-$LDLanguage='Language';
+$LDLanguage='Limba';
 $LDPlsWaitInit='Va rugam asteptati. Procesul de initializare porneste....';
 
 $LDChange='Schimba';
 /* 2003-04-27 EL */
-$LDBrazilian='Brazilian';
-$LDCzech='Czech';
-$LDEnglish='English';
-$LDFrench='French';
-$LDGerman='German';
-$LDIndonesian='Indonesian';
-$LDItalian='Italian';
-$LDNorwegian='Norwegian';
-$LDPolish='Polish';
-$LDPortuguese='Portuguese';
-$LDSpanish='Spanish';
+$LDBrazilian='Braziliana';
+$LDCzech='Ceha';
+$LDEnglish='Engleza';
+$LDFrench='Franceza';
+$LDGerman='Germana';
+$LDIndonesian='Indonesiana';
+$LDItalian='Italiana';
+$LDNorwegian='Norvegiana';
+$LDPolish='Poloneza';
+$LDPortuguese='Portugheza';
+$LDSpanish='Spaniola';
 /* 2003-04-28 El */
-$LDDutch='Dutch';
+$LDDutch='Olandeza';
 # 2003-08-04 EL
-$LDPerson='Person';
+$LDPerson='Persoana';
 # 2003-09-05 EL
-$LDUser='User';
-
+$LDUser='Utilizator';
 ?>

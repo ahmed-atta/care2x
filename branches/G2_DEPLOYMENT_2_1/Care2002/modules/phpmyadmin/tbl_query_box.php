@@ -4,12 +4,14 @@
 
 // Check parameters
 
-require_once('./libraries/common.lib.php');
-require_once('./libraries/bookmark.lib.php');
-
-if (!($cfg['QueryFrame'] && $cfg['QueryFrameJS'] && isset($is_inside_querywindow) && $is_inside_querywindow == TRUE && isset($querydisplay_tab) && ($querydisplay_tab == 'sql' || $querydisplay_tab == 'full'))) {
-    PMA_checkParameters(array('db','table','url_query'));
+if (!defined('PMA_COMMON_LIB_INCLUDED')) {
+    include('./libraries/common.lib.php');
 }
+if (!defined('PMA_BOOKMARK_LIB_INCLUDED')) {
+    include('./libraries/bookmark.lib.php');
+}
+
+PMA_checkParameters(array('db','table','url_query'));
 
 /**
  * Defines the query to be displayed in the query textarea
@@ -33,18 +35,18 @@ unset($sql_query);
  */
 $fields_cnt = 0;
 if (isset($db) && isset($table) && $table != '' && $db != '') {
-    $local_query = 'SHOW FIELDS FROM ' . PMA_backquote($table) . ' FROM ' . PMA_backquote($db);
-    $result      = @PMA_mysql_query($local_query);
-    if (!$result) {
-        PMA_mysqlDie('', $local_query, '', $err_url);
-    }
-    else {
-        $fields_cnt        = mysql_num_rows($result);
-        while ($row = PMA_mysql_fetch_array($result)) {
-            $fields_list[] = $row['Field'];
-        } // end while
-        mysql_free_result($result);
-    }
+$local_query = 'SHOW FIELDS FROM ' . PMA_backquote($table) . ' FROM ' . PMA_backquote($db);
+$result      = @PMA_mysql_query($local_query);
+if (!$result) {
+    PMA_mysqlDie('', $local_query, '', $err_url);
+}
+else {
+    $fields_cnt        = mysql_num_rows($result);
+    while ($row = PMA_mysql_fetch_array($result)) {
+        $fields_list[] = $row['Field'];
+    } // end while
+    mysql_free_result($result);
+}
 }
 
 /**
@@ -58,7 +60,7 @@ if ($cfg['QueryFrame'] && $cfg['QueryFrameJS'] && isset($is_inside_querywindow) 
 } else {
     $locking   = '';
 }
-
+            
 $auto_sel  = ($cfg['TextareaAutoSelect']
                // 2003-02-05 rabus: This causes big trouble with Opera 7 for
                // Windows, so let's disable it there...
@@ -138,15 +140,7 @@ if (isset($is_inside_querywindow) && $is_inside_querywindow == TRUE) {
                         <?php echo sprintf($strRunSQLQuery,  htmlspecialchars($db)) . $queryframe_db_list . (isset($is_inside_querywindow) ? '<br />' : ' ') . PMA_showMySQLDocu('Reference', 'SELECT'); ?>
                         <br />
                         <textarea name="sql_query" rows="<?php echo $cfg['TextareaRows']; ?>" cols="<?php echo (isset($is_inside_querywindow) && $is_inside_querywindow == TRUE ? ceil($cfg['TextareaCols'] * 1.25) : $cfg['TextareaCols'] * 2); ?>" wrap="virtual" dir="<?php echo $text_dir; ?>"<?php echo $auto_sel; ?>>
-<?php
-if (!empty($query_to_display)) {
-    echo htmlspecialchars($query_to_display);
-} elseif (isset($table)) {
-    echo htmlspecialchars(str_replace('%d', PMA_backquote($db), str_replace('%t', PMA_backquote($table), $cfg['DefaultQueryTable'])));
-} else {
-    echo htmlspecialchars(str_replace('%d', PMA_backquote($db), $cfg['DefaultQueryDatabase']));
-}
-?></textarea>
+<?php echo ((!empty($query_to_display)) ? htmlspecialchars($query_to_display) : 'SELECT * FROM ' . htmlspecialchars(PMA_backquote($table)) . ' WHERE 1'); ?></textarea>
                     </td>
                         <?php if (isset($table) && $fields_cnt > 0) { ?>
                     <td align="center" valign="top"><?php echo (isset($is_inside_querywindow) ? '<br />' : '') . $strFields; ?>:<br />
@@ -231,12 +225,9 @@ echo "\n";
 
 // web-server upload directory
 $is_upload_dir = false;
-if (!empty($cfg['UploadDir']) && !isset($is_inside_querywindow) ||
-    (!empty($cfg['UploadDir']) && isset($is_inside_querywindow) && $is_inside_querywindow == TRUE && isset($querydisplay_tab) && ($querydisplay_tab == 'files' || $querydisplay_tab == 'full'))) {
+if ($cfg['UploadDir'] != '' && !isset($is_inside_querywindow) ||
+    ($cfg['UploadDir'] != '' && isset($is_inside_querywindow) && $is_inside_querywindow == TRUE && isset($querydisplay_tab) && ($querydisplay_tab == 'files' || $querydisplay_tab == 'full'))) {
 
-    if (substr($cfg['UploadDir'], -1) != '/') {
-        $cfg['UploadDir'] .= '/';
-    }
     if ($handle = @opendir($cfg['UploadDir'])) {
         if (isset($is_inside_querywindow) && $is_inside_querywindow == TRUE) {
         ?>
@@ -246,7 +237,7 @@ if (!empty($cfg['UploadDir']) && !isset($is_inside_querywindow) ||
 
         $is_first = 0;
         while ($file = @readdir($handle)) {
-            if (is_file($cfg['UploadDir'] . $file) && PMA_checkFileExtensions($file, '.sql')) {
+            if (is_file($cfg['UploadDir'] . $file) && substr($file, -4) == '.sql') {
                 if ($is_first == 0) {
                     $is_upload_dir = true;
                     echo "\n";
@@ -281,12 +272,12 @@ if (function_exists('PMA_set_enc_form')) {
 }
 
 // Charset conversion options
-if (($is_upload || $is_upload_dir) &&
+if (($is_upload || $is_upload_dir) && 
         (!isset($is_inside_querywindow) ||
-         (isset($is_inside_querywindow) && $is_inside_querywindow == TRUE && isset($querydisplay_tab) && ($querydisplay_tab == 'files' || $querydisplay_tab == 'full')))
+         (isset($is_inside_querywindow) && $is_inside_querywindow == TRUE && isset($querydisplay_tab) && ($querydisplay_tab == 'files' || $querydisplay_tab == 'full'))) 
         && isset($db) && $db != ''){
     if ($cfg['AllowAnywhereRecoding'] && $allow_recoding) {
-        $form_items++;
+    	$form_items++;
         echo '    <div style="margin-bottom: 5px">' . "\n";
         $temp_charset = reset($cfg['AvailableCharsets']);
         echo $strCharsetOfFile . "\n"
@@ -314,7 +305,7 @@ if (!isset($is_inside_querywindow) ||
     (isset($is_inside_querywindow) && $is_inside_querywindow == TRUE && isset($querydisplay_tab) && ($querydisplay_tab == 'history' || $querydisplay_tab == 'full'))) {
     if ($cfg['Bookmark']['db'] && $cfg['Bookmark']['table']) {
         if (($bookmark_list = PMA_listBookmarks($db, $cfg['Bookmark'])) && count($bookmark_list) > 0) {
-            $form_items++;
+            $form_items++; 
             echo "            " . ((isset($is_inside_querywindow) && $is_inside_querywindow == TRUE && isset($querydisplay_tab) && $querydisplay_tab == 'full') || !isset($is_inside_querywindow) ? "<i>$strOr</i>" : '') . " $strBookmarkQuery&nbsp;:<br />\n";
 
             if (isset($is_inside_querywindow) && $is_inside_querywindow == TRUE) {
@@ -326,7 +317,7 @@ if (!isset($is_inside_querywindow) ||
             echo '            <div style="margin-bottom: 5px">' . "\n";
             echo '            <select name="id_bookmark" style="vertical-align: middle">' . "\n";
             echo '                <option value=""></option>' . "\n";
-            foreach($bookmark_list AS $key => $value) {
+            while (list($key, $value) = each($bookmark_list)) {
                 echo '                <option value="' . $value . '">' . htmlspecialchars($key) . '</option>' . "\n";
             }
             echo '            </select>' . "<br />\n";
@@ -342,39 +333,9 @@ if (!isset($is_inside_querywindow) ||
 }
 
 if (!isset($is_inside_querywindow) || (isset($is_inside_querywindow) && $is_inside_querywindow == TRUE && isset($querydisplay_tab) && (($querydisplay_tab == 'files') || $querydisplay_tab == 'sql' || $querydisplay_tab == 'full' || ($querydisplay_tab == 'history' && $bookmark_go)))) {
-    if ($form_items > 0) {
+	if ($form_items > 0) {
 ?>
-            <table border="0">
-                <tr>
-                    <td valign="top">
-                        <input type="submit" name="SQL" value="<?php echo $strGo; ?>" />
-                    </td>
-<?php
-        if ( $cfg['Bookmark']['db']
-          && $cfg['Bookmark']['table']
-          && (!isset($is_inside_querywindow)
-            || (  isset($is_inside_querywindow)
-               && $is_inside_querywindow == TRUE
-               && isset($querydisplay_tab)
-               //&& $querydisplay_tab != 'history'))) {
-               && $querydisplay_tab == 'sql'))) {
-?>
-                    <td valign="top">
-                        <input type="submit" name="SQLbookmark" value="<?php echo $strGo . ' &amp; ' . $strBookmarkThis; ?>" />
-                    </td>
-
-                    <td>
-                        <fieldset>
-                            <legend><?php echo $strBookmarkOptions; ?></legend>
-                                <?php echo $strBookmarkLabel; ?>: <input type="text" name="bkm_label" value="" /><br />
-                                <input type="checkbox" name="bkm_all_users" id="id_bkm_all_users" value="true" /><label for="id_bkm_all_users"><?php echo $strBookmarkAllUsers; ?></label>
-                        </fieldset>
-                    </td>
-<?php
-        }
-?>
-                </tr>
-            </table>
+            <input type="submit" name="SQL" value="<?php echo $strGo; ?>" />
 <?php
         } else {
             // TODO: Add a more complete warning that no items (like for file import) where found.
@@ -403,7 +364,7 @@ if (!isset($is_inside_querywindow) ||
             <script type="text/javascript">
                 document.writeln('<div style="margin-bottom: 10px"><a href="<?php echo (isset($is_inside_querywindow) && $is_inside_querywindow == TRUE ? '#' : $ldi_target); ?>" <?php echo (isset($is_inside_querywindow) && $is_inside_querywindow == TRUE ? 'onclick="opener.parent.frames.phpmain\' + opener.parent.frames.queryframe.document.hashform.hash.value + \'.location.href = \\\'' . $ldi_target . '\\\'; return false;"' : ''); ?>><?php echo addslashes($strInsertTextfiles); ?></a></div>');
             </script>
-
+            
             <?php
             } else {
             ?>

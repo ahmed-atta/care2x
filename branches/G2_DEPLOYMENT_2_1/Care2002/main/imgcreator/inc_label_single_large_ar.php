@@ -10,21 +10,20 @@
 #        Walid Fathalla                    
 #        fathalla_w@hotmail.com       
 	
-include_once($root_path.'include/inc_ttf_ar2uni.php');
-
-# Load the barcode img if it exists
-if(file_exists($root_path.'cache/barcodes/pn_'.$fen.'.png')){
-	$bc = ImageCreateFrompng($root_path.'cache/barcodes/pn_'.$fen.'.png');
-}elseif(file_exists($root_path.'cache/barcodes/en_'.$fen.'.png')){
-	$bc = ImageCreateFrompng($root_path.'cache/barcodes/en_'.$fen.'.png');
-}
+ 	include_once($root_path.'include/inc_ttf_ar2uni.php');
+	
+	/* Load the barcode img if it exists */
+    if(file_exists($root_path.'cache/barcodes/pn_'.$fen.'.png'))
+	{
+	   $bc = ImageCreateFrompng($root_path.'cache/barcodes/pn_'.$fen.'.png');
+	}elseif(file_exists($root_path.'cache/barcodes/en_'.$fen.'.png')){
+	   $bc = ImageCreateFrompng($root_path.'cache/barcodes/en_'.$fen.'.png');
+	}	 
+	 /* Dimensions of the patient's label */
+	 $label_w=282; 
+	 $label_h=178;
 	 
-# Dimensions of the patient`s label. Change the label´s size here.
-	 
-$label_w=282;
-$label_h=178;
-
-    // -- create label
+    // -- create label 
     $label=ImageCreate($label_w,$label_h);
     $ewhite = ImageColorAllocate ($label, 255,255,255); //white bkgrnd
     $elightgreen= ImageColorAllocate ($label, 205, 225, 236);
@@ -114,7 +113,7 @@ $label_h=178;
 	}
 
 	// place the barcode img
-    if($bc) ImageCopy($label,$bc,110,4,8,8,171,37);
+    if($bc) ImageCopy($label,$bc,110,4,9,9,170,37);
 
 	if(!$child_img)
 	{

@@ -5,7 +5,11 @@ $LDAdminOk='Sistem yöneticisi hesabý oluþturuldu. Lütfen root dizininden  create
 $LDDeleteWarning='Çok önemli! Baþarýyla yönetici eriþimini kurduktan sonra bu  create_admin.php dosyasýný mutlaka silmelisiniz!';
 $LDCreateAdminWarning=' "/create_admin.php" dosyasýný silmediniz! "/create_admin.php" dosyasýný silmelisiniz yoksa Care2x çalýþmaz!';
 $LDWarning='Uyarý!';
+$LDInitWarning=' "install/initialize.php" dosyasýný silmediniz!
+ "install/initialize.php" dosyasýný ÞÝMDÝ silmelisiniz yoksa bir  baþka kiþi veritabaný eriþim bilgilerinizi deðiþtirebilir!';
 $LDInstallWarning=' "install/initialize.php" dosyasýný silmediniz!
- "install/initialize.php" dosyasýný silmelisiniz yoksa bir baþka kiþi veritabaný eriþim bilgilerinizi deðiþtirebilir!';
+ "install/initialize.php" dosyasýný ÞÝMDÝ silmelisiniz yoksa bir  baþka kiþi veritabaný eriþim bilgilerinizi deðiþtirebilir!';
+
+
 $LDMD5Warning=' "install/encode_pw_md5.php" dosyasýný silmediniz  "install/encode_pw_md5.php" dosyasýný ÞÝMDÝ silmelisiniz yoksa bir baþka kiþi bu dosyayý tekrar çalýþtýrarak kullanýcýlarýnýzýn eriþim verilerini kullanýlmaz hale getirebilir !';
 ?>

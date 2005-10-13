@@ -29,7 +29,8 @@ if (!empty($innodbstatus)) {
        . htmlspecialchars($row[0]) . "\n"
        . '</pre>' . "\n";
     mysql_free_result($res);
-    require_once('./footer.inc.php');
+    include('./footer.inc.php');
+    exit;
 }
 
 /**
@@ -45,7 +46,8 @@ echo '<h2>' . "\n"
  */
 if (!$is_superuser && !$cfg['ShowMysqlInfo']) {
     echo $strNoPrivileges;
-    require_once('./footer.inc.php');
+    include('./footer.inc.php');
+    exit;
 }
 
 
@@ -74,7 +76,7 @@ unset($row);
 //Get query statistics
 $queryStats = array();
 $tmp_array = $serverStatus;
-foreach($tmp_array AS $name => $value) {
+while (list($name, $value) = each($tmp_array)) {
     if (substr($name, 0, 4) == 'Com_') {
         $queryStats[str_replace('_', ' ', substr($name, 4))] = $value;
         unset($serverStatus[$name]);
@@ -177,11 +179,11 @@ unset($tmp_array);
 
 $useBgcolorOne = TRUE;
 $countRows = 0;
-foreach ($queryStats as $name => $value) {
+while (list($name, $value) = each($queryStats)) {
 
 // For the percentage column, use Questions - Connections, because
 // the number of connections is not an item of the Query types
-// but is included in Questions. Then the total of the percentages is 100.
+// but is included in Questions. Then the total of the percentages is 100. 
 ?>
                         <tr>
                             <td bgcolor="<?php echo $useBgcolorOne ? $cfg['BgcolorOne'] : $cfg['BgcolorTwo']; ?>">&nbsp;<?php echo htmlspecialchars($name); ?>&nbsp;</td>
@@ -241,7 +243,7 @@ if (!empty($serverStatus)) {
 <?php
     $useBgcolorOne = TRUE;
     $countRows = 0;
-    foreach($serverStatus AS $name => $value) {
+    while (list($name, $value) = each($serverStatus)) {
 ?>
                         <tr>
                             <td bgcolor="<?php echo $useBgcolorOne ? $cfg['BgcolorOne'] : $cfg['BgcolorTwo']; ?>">&nbsp;<?php echo htmlspecialchars(str_replace('_', ' ', $name)); ?>&nbsp;</td>
@@ -299,6 +301,6 @@ if ($res) {
 /**
  * Sends the footer
  */
-require_once('./footer.inc.php');
+require('./footer.inc.php');
 
 ?>

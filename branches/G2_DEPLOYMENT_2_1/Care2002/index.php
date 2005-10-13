@@ -3,7 +3,7 @@
 CARE 2X Integrated Information System for Hospitals and Health Care Organizations and Services
 Care 2002, Care2x, Copyright (C) 2002,2003,2004,2005  Elpidio Latorilla
 
-Beta version 2.0.1   2004-07-04
+Deployment 2.1 - 2004-10-02
 								
 This script(s) is(are) free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public
@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 																		 
 Copy of GNU General Public License at: http://www.gnu.org/
 													 
-Source code home page: http://www.care2x.com
-Contact author at: elpidio@latorilla.com
+Source code home page: http://www.care2x.org
+Contact author at: elpidio@care2x.org
 
 This notice also applies to other scripts which are integral to the functioning of CARE 2X within this directory and its top level directory
 A copy of this notice is also available as file named copy_notice.txt under the top level directory.
@@ -89,12 +89,12 @@ function configNew(&$bn,&$bv,&$f,$i,&$uid)
 {
   global $HTTP_USER_AGENT;
   global $REMOTE_ADDR;
-  
+
   # We disable the error reporting, because Konqueror 3.0.3 causes a  runtime error output that stops the program.
   #  could be a bug in phpsniff .. hmmm?
   $old_err_rep= error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
   
- # Function rewritten by Thomas Wiedmann to use phpSniff class  
+  # Function rewritten by Thomas Wiedmann to use phpSniff class
   
   # initialize some vars
   if(!isset($UA)) $UA = '';
@@ -140,12 +140,12 @@ $ciphersid=$enc_hcemd5->encodeMimeSelfRand($sid);
 setcookie($ck_sid_buffer,$ciphersid);
 $HTTP_COOKIE_VARS[$ck_sid_buffer]=$ciphersid;
 
-
+#
 # Simple counter, counts all hits including revisits
 # Uncomment the following line  if you  like to count the hits, then make sure
 # that the path /counter/hits/ and the file /counter/hitcount.txt  are system writeable
-
-// include('./counter/count.php');	
+#
+// include('./counter/count.php');
 
 
 if((isset($boot)&&$boot)||!isset($HTTP_COOKIE_VARS['ck_config'])||empty($HTTP_COOKIE_VARS['ck_config'])) {
@@ -153,8 +153,10 @@ if((isset($boot)&&$boot)||!isset($HTTP_COOKIE_VARS['ck_config'])||empty($HTTP_CO
 } else {
     $user_id=$HTTP_COOKIE_VARS['ck_config'];
 }
-	
+
+#
 # Load user config API. Get the user config data from db
+#
 require_once('include/care_api_classes/class_userconfig.php');
 $cfg_obj=new UserConfig;
 
@@ -207,13 +209,17 @@ if(!$GLOBALCONFIG['language_single']) {
 	}
 }
 
+#
 # After having a language code check if the critical scripts exist and set warning
+#
 $createwarn=file_exists('create_admin.php');
 $initwarn=file_exists('./install/initialize.php');
 $md5warn=file_exists('./install/encode_pw_md5.php');
 $installwarn=file_exists('./install/install.php');
 if($createwarn||$installwarn||$md5warn){
+	#
 	# Load necessary language tables
+	#
 	$lang_tables[]='create_admin.php';
 	include_once('./include/inc_load_lang_tables.php');
 	include_once('include/inc_charset_fx.php');
@@ -229,20 +235,30 @@ if($createwarn||$installwarn||$md5warn){
 	if($installwarn){
 		include('./include/inc_install_warning.php');
 	}
-	exit;  # exit to avoid running the program
+	#
+	# exit to avoid running the program
+	#
+	exit;
 }
 
-	
+#
+# Prepare language file path
+#
 $lang_file='language/'.$lang.'/lang_'.$lang.'_startframe.php';
- 
+
+#
 # We check if language table exists, if not, english is used
+#
 if(file_exists($lang_file)) {
     include($lang_file);
 } else {
     include('language/en/lang_en_startframe.php');  # en = english is the default language table
 	$lang='en';
 }
+
+#
 # The language detection is finished, we save it to session
+#
 $HTTP_SESSION_VARS['sess_lang']=$lang;
 
 /*$ck_lang_buffer='ck_lang'.$sid;
@@ -251,65 +267,83 @@ setcookie($ck_lang_buffer,$lang);*/
 /*$HTTP_COOKIE_VARS[$ck_lang_buffer]=$lang;*/
 	 //echo $mask;
 if((isset($mask)&&$mask)||!$config_exists||$savelang) {
-		if(!$config_exists) {
+	if(!$config_exists) {
 
-			//$cfg_obj->getConfig('default');
-			//$USERCONFIG=&$cfg_obj->buffer;
+		//$cfg_obj->getConfig('default');
+		//$USERCONFIG=&$cfg_obj->buffer;
 
-			configNew($bname,$bversion,$user_id,$ip,$cfgid);
+		configNew($bname,$bversion,$user_id,$ip,$cfgid);
 
-			$USERCONFIG['bname']=$bname;
-			$USERCONFIG['bversion']=$bversion;
-			$USERCONFIG['cid']=$cfgid;
-		}
-		// *****************************
-		//save browser info to user config array
-		// *****************************
-		if(empty($ip)) $USERCONFIG['ip']=$REMOTE_ADDR;
-		$USERCONFIG['mask']=$mask;
-		$USERCONFIG['lang']=$lang;
-		if(((($bname=='msie') ||($bname=='opera')) &&($bversion>4)) ||(($bname=='netscape')&&($bversion>3.5)) ||($bname=='mozilla')) {
-		    $USERCONFIG['dhtml']=1;
-		}
-		// *****************************
-		// Save config to db
-		// *****************************
-		$mask=$USERCONFIG['mask']; # save mask before serializing
-        $cfg_obj->saveConfig($user_id,$USERCONFIG);
-		setcookie('ck_config',$user_id,time()+(3600*24*365)); # expires after 1 year
-}	
+		$USERCONFIG['bname']=$bname;
+		$USERCONFIG['bversion']=$bversion;
+		$USERCONFIG['cid']=$cfgid;
+	}
+	// *****************************
+	//save browser info to user config array
+	// *****************************
+	if(empty($ip)) $USERCONFIG['ip']=$REMOTE_ADDR;
+	$USERCONFIG['mask']=$mask;
+	$USERCONFIG['lang']=$lang;
+	if(((($bname=='msie') ||($bname=='opera')) &&($bversion>4)) ||(($bname=='netscape')&&($bversion>3.5)) ||($bname=='mozilla')) {
+		$USERCONFIG['dhtml']=1;
+	}
+	// *****************************
+	// Save config to db
+	// *****************************
+	$mask=$USERCONFIG['mask']; # save mask before serializing
+	$cfg_obj->saveConfig($user_id,$USERCONFIG);
+	setcookie('ck_config',$user_id,time()+(3600*24*365)); # expires after 1 year
+}
 
+#
 # save user_id to session
+#
 $HTTP_SESSION_VARS['sess_user_id']=$user_id;
 if(empty($HTTP_SESSION_VARS['sess_user_name'])) $HTTP_SESSION_VARS['sess_user_name']='default';
+
+#
 # set the initial session timeout start value
+#
 $HTTP_SESSION_VARS['sess_tos']=date('His');
 
+#
 # Load character set fx
+#
 include_once('include/inc_charset_fx.php');
 
+#
 # Load image fx
+#
 require_once('include/inc_img_fx.php');
 
+#
 # Start smarty templating
-
-# Wordaround for user config array to work inside the smarty class
+#
+# Workaround for user config array to work inside the smarty class
+#
 $cfg = $USERCONFIG;
 
 //while(list($x,$v)=each($cfg)) echo "$x => $v<br>";
- require_once($root_path.'gui/smarty_template/smarty_care.class.php');
- $smarty = new smarty_care('common');
+require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+$smarty = new smarty_care('common');
 
- # Window bar title
- $smarty->assign('sWindowTitle',$LDMainTitle);
+#
+# Window bar title
+#
+$smarty->assign('sWindowTitle',$LDMainTitle);
 
- #Assign the contents frame source
+#
+# Assign the contents frame source
+#
 $smarty->assign('sContentsFrameSource',"src = \"blank.php?lang=$lang&sid=$sid\"");
 
+#
 # Load the gui template
+#
 //require('gui/html_template/default/tp_index.php');
+#
 # If the floating menu window is selected
-
+#
 if($mask == 2){
 
 	if($lang=='ar'||$lang=='fa') $smarty->assign('sBaseFramesetTemplate','common/frameset_floatingmenu_rtl.tpl');
@@ -322,7 +356,9 @@ if($mask == 2){
 	
 	$smarty->assign('sStartFrameSource',"src = \"main/indexframe.php?boot=1&mask=$mask&lang=$lang&cookie=$cookie&sid=$sid\"");
 	
+	#
 	# Assign frame dimensions
+	#
 	$smarty->assign('gui_frame_left_nav_width',$GLOBALCONFIG['gui_frame_left_nav_width']);
 	$smarty->assign('gui_frame_left_nav_border',$GLOBALCONFIG['gui_frame_left_nav_border']);
 
@@ -330,13 +366,16 @@ if($mask == 2){
 		$smarty->assign('sBaseFramesetTemplate','common/frameset_rtl.tpl');
 		//require('gui/html_template/righttoliftdefault/tp_index.php');
 	} else{
+		#
 		# Else use normal frameset design
+		#
 		$smarty->assign('sBaseFramesetTemplate','common/frameset_ltr.tpl');
 	}
 }
 
+#
 # Display the frame page
-
+#
 $smarty->display('common/baseframe.tpl');
 
 ?>

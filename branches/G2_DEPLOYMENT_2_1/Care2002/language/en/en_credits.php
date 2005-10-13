@@ -52,6 +52,25 @@
 			<P><a href="mailto:arek@mail.amenta.no"><u>Are Kristensen can be contacted here.</u></a>
 </TD></TR></TBODY></TABLE>
 <hr>
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+            <P><img src="../../fotos/credits/bulent_potur.jpg"  border=0  align=right vspace=10>
+			<b>Bulent Potur MD Obgyn</b> 
+			<p>
+			 Turkish translation of Care 2X. He is an obstetrician &
+			 gynecologist. He is an amateur programmer in gwbasic, ms cobol and ms access and an amateur web site
+			 designer. He is also very interested in linux and he appreciates open source philosophy. 
+			 He is owner of several yahoogroup discussion groups in Turkish. His group in English is <a
+			 href="http://groups.yahoo.com/group/obgyn_int" target="_blank">
+			 obgyn_int@yahoogroups.com</a>. One of his personal web pages is at <a
+			 href="http://medpages.obgyn.net/bpotur" target="_blank"><u>http://medpages.obgyn.net/bpotur</u></a>  .  
+			
+			<P><a href="mailto:bpotur@yahoo.com"><u>Bulent Potur can be contacted here.</u></a>
+</TD></TR></TBODY></TABLE>
+
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
         <TR>

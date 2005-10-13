@@ -11,5 +11,5 @@ $LDSessionTimeout='Oturum zaman aþýmýna uðradý';
 $LDSessionTimeoutTxt='Uzun süre iþlem yapýlmadý. Modül zaman aþýmýna uðradý ve güvenlik nedeni ile kendisini kilitledi. 
 Modülü tekrar etkinleþtirmek için aþaðýdakilerden birini deneyebilirsiniz:<p>
 - Ana menüden seçerek modülü tekrar baþlatmak<br>
-- Tarayýcýnýzýn tekrar yükle düðmesini týklamak <p> Önceki verilerden kaydetmemiþ olduklarýnýz maalesef kaybolacaktýr.'; 
+- Tarayýcýnýzýn yenile düðmesini týklamak <p> Önceki verilerden kaydetmemiþ olduklarýnýz maalesef kaybolacaktýr.'; 
 ?>

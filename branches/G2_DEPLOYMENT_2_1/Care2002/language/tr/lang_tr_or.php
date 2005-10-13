@@ -1,7 +1,7 @@
 <?php
 $LDOr='Ameliyathane';
 $LDLOGBOOK='GÜNLÜK';
-$LDOrDocument='Ameliyathane Dokümantasyon';
+$LDOrDocument='Ameliyathane Evrak';
 $LDOrDocumentTxt='Ameliyat hizmetlerinin belgelendirilmesi';
 
 /**
@@ -28,7 +28,7 @@ $LDAnaLogBook='Anestezi günlüðü';
 $LDAnaLogBookTxt='Anestezi hizmetlerini belgelendirme, arþiv dosyalarý';
 $LDQviewTxtAna='Bugünkü anestezi teknisyen nöbetçilerine hýzlý bakýþ';
 $LDNewDocu='Yeni belge';
-$LDSearch='Arama';
+$LDSearch='Ara';
 $LDArchive='Arþiv';
 $LDSee='Bak';
 $LDUpdate='Güncelle';
@@ -41,7 +41,7 @@ $LDAna='Anestezi';
 $LDClose='Kapat';
 $LDSave='Kaydet';
 $LDCancel='Ýptal';
-$LDReset='Reset';
+$LDReset='Baþa al';
 $LDContinue='Devam...';
 
 $LDHideCat='cati gizle';
@@ -89,8 +89,8 @@ $LDScrubNurse='Ameliyat hemþiresi';
 $LDOpRoom='Ameliyathane';
 $LDResetAll='Tüm girilenleri sil';
 $LDUpdateData='Verileri güncelle';
-$LDStartNewDocu='Yeni bir belge oluþturma';
-$LDSearchKeyword='Anahtar sözcük ara: öereðin ad veya soyad';
+$LDStartNewDocu='Yeni bir belge oluþtur';
+$LDSearchKeyword='Anahtar sözcük ara: örneðin ad veya soyad';
 
 $LDSrcListElements=array(
 '',
@@ -103,7 +103,7 @@ $LDSrcListElements=array(
 'Amel. No.'
 );
 $LDClk2Show='Göstermek için týklayýnýz';
-$LDSrcCondition='Anhtar sözcük ve/veya koþul arama';
+$LDSrcCondition='Anhtar sözcük ve/veya koþul ara';
 $LDNewArchiveSearch='Yeni arþiv arama';
 $tage=array(
 				'Pazar',
@@ -147,7 +147,7 @@ $LDOpOut='Çýkýþ';
 $LDOpInFull='Giriþ';
 $LDOpOutFull='Çýkýþ';
 $LDEditPatientData='~tagword~  günlük verisini düzenleme';
-$LDOpenPatientFolder='~tagword~ hemþirelik klasörünü açma';
+$LDOpenPatientFolder='~tagword~ servis klasörünü açma';
 
 $tbuf=array('O','A','H','P');
 $cbuf=array('Operatör','Asistan','Hemþire','Personel');
@@ -169,7 +169,7 @@ $LDPlsEnoughData='Lütfen yeterli bilgi giriniz.';
 $LDOpNr='Amel. no.';
 $LDDate='Tarih';
 $LDClk2DropMenu='Menüyü açmak için týklayýnýz';
-$LDSaveLatest='Son girilenleri sakla';
+$LDSaveLatest='Son girilenleri kaydet';
 $LDHelp='Yardým penceresini aç';
 
 $LDSearchPatient='Hasta arama';
@@ -203,9 +203,9 @@ $LDAnaDoc='Anestezist';
 $LDAnaPrefix='AN';
 $LDEnterPerson='Yeni bir ~tagword~ giriniz';
 $LDExtraInfo='Ek bilgi';
-$LDFrom='Kimden';
-$LDTo='Kime';
-$LDFunction='Fonksiyon';
+$LDFrom='den';
+$LDTo='ye';
+$LDFunction='Ýþlev';
 $LDCurrentEntries='Þu an girilmiþ olanlar';
 $LDDeleteEntry='Girileni sil';
 $LDSearchNewPerson='Yeni bir ~tagword~ ara';
@@ -255,7 +255,7 @@ $LDSearchElements=array(
     								'Lisans.No.'
 									);
 $LDContainerElements=array(
-									'Kap no.',
+									'Ambalaj no.',
     								'Ýsmi/Tanýmý',
 									'&nbsp;',
     								'Endüstri no.',
@@ -264,7 +264,7 @@ $LDContainerElements=array(
     								'&nbsp;'
 									);
 $LDArticleNr='Malzeme no.';			
-$LDContainerNr='Kap no.';							
+$LDContainerNr='Ambalaj no.';							
 $LDArticleNotFound='Malzeme bulunamadý!';
 $LDNoArticleTxt='Malzeme ya veribankasýnda yok ya da numarasýný yanlýþ yazdýnýz.';
 $LDClk2ManualEntry='Malzemeyi el ile girmek için lütfen , <b>burayý týklayýnýz.</b>';
@@ -273,9 +273,9 @@ $LDSelectArticle='Bu malzemeyi seçmek için týklayýnýz';
 $LDDbInfo='Databanktan bilgiler';
 $LDRemoveArticle='Malzemeyi bu listeden çýkar';
 $LDArticleNoList='Malzeme veribankasýnda yer almýyor';
-$LDPromptSearch='Lütfen aranacak bir anahtar sözcük giriniz.<br>Ýsim, soyisim, doðum tarihi, vs, gibi	("Yardým"a da bakýnýz)';
+$LDPromptSearch='Lütfen aranacak bir anahtar sözcük giriniz.<br>Ad, soyad, doðum tarihi, vs, gibi	("Yardým"a da bakýnýz)';
 $LDKeyword='Anahtar sözcük';
-$LDOtherFunctions='Diðer fonksiyonlar';
+$LDOtherFunctions='Diðer iþlevler';
 $LDInfoNotFound='Ýstenilen bilgi bulunamadý!';
 $LDButFf='Fakat izleyen ';
 $LDSimilar=' veri';
@@ -285,14 +285,14 @@ $LDPatLogbook='Hasta izleyen günlükte belgelendirilmiþ.';
 $LDPatLogbookMany='Hasta izleyen kayýt kütüklerinde belgelendirilmiþ.';
 $LDDepartment='Bölüm';
 $LDRoom='Oda';
-$LDLastEntry='Ýzleyen günlüðün son kaydý';
-$LDLastEntryMany='Ýzleyenler günlüðün son kayýtlarý';
-$LDFrom='Þu tarihten itibaren';
-$LDFromMany='þu tarihten itibaren';
+$LDLastEntry='Ýzleyen kayýt günlüðün son kaydýdýr';
+$LDLastEntryMany='Ýzleyen kayýtlar günlükteki son kayýtlardýr';
+$LDFrom='den';
+$LDFromMany='den';
 $LDYesterday='dün';
 $LDVorYesterday='2 gün önce';
 $LDDays='gün önce';
-$LDChangeDept='Bölüm veya ameliyathaneyi deðiþtirme';
+$LDChangeDept='Bölüm veya ameliyathaneyi deðiþtir';
 
 $LDTabElements=array('Ameliyathane bölümü',
 								 'Ýcapçý',
@@ -326,8 +326,8 @@ $LD_ddpMMpyyyy='gg.aa.yyyy';
 $LD_yyyyhMMhdd='yyyy-aa-gg';
 $LD_MMsddsyyyy='aa/gg/yyyy';
 /* 2002-10-15 EL */
-$LDStandbyInit='B'; /* S = Standby */
-$LDOncallInit='Ý'; /* O = Oncall */
+$LDStandbyInit='Ý'; /* S = Ýcapçý */
+$LDOncallInit='N'; /* N = Nöbetçi */
 $LDDutyPlan='Nöbet planý';
 /* 2003-03-18 EL */
 $LDSearchInAllDepts='Tüm bölümlerde arama';

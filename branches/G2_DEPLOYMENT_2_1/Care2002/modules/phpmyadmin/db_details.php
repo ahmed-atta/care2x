@@ -35,7 +35,7 @@ $sub_part    = '';
 require('./db_details_db_info.php');
 if ($num_tables == 0 && empty($db_query_force)) {
     $is_info = TRUE;
-    require('./db_details_structure.php');
+    include('./db_details_structure.php');
     exit();
 }
 
@@ -62,13 +62,8 @@ $auto_sel  = ($cfg['TextareaAutoSelect']
     <?php echo sprintf($strRunSQLQuery, htmlspecialchars($db)) . ' ' . PMA_showMySQLDocu('Reference', 'SELECT'); ?>&nbsp;:<br />
     <div style="margin-bottom: 5px">
 <textarea name="sql_query" cols="<?php echo $cfg['TextareaCols'] * 2; ?>" rows="<?php echo $cfg['TextareaRows']; ?>" wrap="virtual" dir="<?php echo $text_dir; ?>"<?php echo $auto_sel; ?>>
-<?php
-if (!empty($query_to_display)) {
-    echo htmlspecialchars($query_to_display);
-} else {
-    echo htmlspecialchars(str_replace('%d', PMA_backquote($db), $cfg['DefaultQueryDatabase']));
-}
-?></textarea><br />
+<?php echo ((!empty($query_to_display)) ? htmlspecialchars($query_to_display) : ''); ?>
+</textarea><br />
         <input type="checkbox" name="show_query" value="1" id="checkbox_show_query" checked="checked" />&nbsp;
         <label for="checkbox_show_query"><?php echo $strShowThisQuery; ?></label><br />
     </div>
@@ -108,14 +103,11 @@ echo "\n";
 // web-server upload directory
 
 $is_upload_dir = false;
-if (!empty($cfg['UploadDir'])) {
-    if (substr($cfg['UploadDir'], -1) != '/') {
-        $cfg['UploadDir'] .= '/';
-    }
+if ($cfg['UploadDir'] != '') {
     if ($handle = @opendir($cfg['UploadDir'])) {
         $is_first = 0;
         while ($file = @readdir($handle)) {
-            if (is_file($cfg['UploadDir'] . $file) && PMA_checkFileExtensions($file, '.sql')) {
+            if (is_file($cfg['UploadDir'] . $file) && substr($file, -4) == '.sql') {
                 if ($is_first == 0) {
                     $is_upload_dir = true;
                     echo "\n";
@@ -173,7 +165,7 @@ if ($cfg['Bookmark']['db'] && $cfg['Bookmark']['table']) {
         echo '    <div style="margin-bottom: 5px">' . "\n";
         echo '        <select name="id_bookmark">' . "\n";
         echo '            <option value=""></option>' . "\n";
-        foreach($bookmark_list AS $key => $value) {
+        while (list($key, $value) = each($bookmark_list)) {
             echo '            <option value="' . htmlspecialchars($value) . '">' . htmlspecialchars($key) . '</option>' . "\n";
         }
         echo '        </select>' . "<br />\n";
@@ -200,5 +192,5 @@ if (function_exists('PMA_set_enc_form')) {
  * Displays the footer
  */
 echo "\n";
-require_once('./footer.inc.php');
+require('./footer.inc.php');
 ?>

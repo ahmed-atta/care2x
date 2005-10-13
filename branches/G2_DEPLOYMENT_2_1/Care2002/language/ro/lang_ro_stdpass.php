@@ -1,9 +1,10 @@
 <?php
-$LDUserPrompt='Username';
-$LDPwPrompt='Password';
-$LDSubmitBut='Continuua...';
+$LDUserPrompt='Utilizator';
+$LDPwPrompt='Parola';
+$LDSubmitBut='Continua...';
 $LDPwNeeded='Este nevoie de parola';
-$LDIntroTo='Introduction to editing news articles in';
+$LDIntroTo='Introducere in editarea de articole noi in';
+#'Introduction to editing news articles in';
 $LDWhatTo='Ce si Cum fac sa editez un nou articol';
 
 $LDWrongEntry='Intrare Gresita!';
@@ -30,7 +31,8 @@ $LDAdmHow2Archive='Cum sa caut in arhiva';
 $LDMedocs='Documente Medicale';
 $LDMedocsHow2Enter='Cum sa fac un nou document';
 $LDMedocsHow2Edit='Cum sa editez un document';
-$LDMedocsHow2Search='How to find a certain medocs document';
+$LDMedocsHow2Search='Cum gasesc un anumit document medical';
+#'How to find a certain medocs document';
 $LDMedocsHow2Archive='Cum sa caut in arhiva de documente medicale';
 
 $LDIntro2='Introducere in...';
@@ -41,9 +43,10 @@ $LDHowEnter='Cum sa introduc informatiile despre un nou numar de telefon ';
 $LDPhoneDir='Agenda Telefonica';
 $LDMakeDutyPlan='Creeaza o lista de prioritati';
 $LDDocsList='Lista doctorilor';
-$LDNursingManage='Ward management';
+$LDNursingManage='Management saloane';
 
-$LDNursingStation='Nursing ward';
+$LDNursingStation='Infirmiere saloane';
+#'Nursing ward';
 $LDOrDocu='Documentatie Sala de Operatii';
 $LDOrLogBook='Registrele asistentelor din sala de operatii';
 $LDOrNursing='Asistenti sala operatii';
@@ -53,83 +56,127 @@ $LDRepabotActivate='Activeaza Repabot';
 $LDQBotActivate='Activeaza Q-Bot';
 
 $LDMedLab='Laborator Medical';
-$LDCancel='Cancel';
+$LDCancel='Abandon';
+#'Cancel';
 
 $LDPharmacy='Farmacie';
 $LDOrderArchive='Arhiva';
 $LDPharmaOrder='Comanda';
 $LDOrderCat='Lista de comanda';
-$LDPharmaDb='Databank';
-$LDPharmaOrderBot='Activate OrderBot';
+$LDPharmaDb='Banca de date';
+#'Databank';
+
+$LDPharmaOrderBot='Activeaza OrderBot';
+#'Activeaza OrderBot';
 
 $LDMedDepot='Magazie Medicala';
-$LDMediBotActivate='Activate Medibot';
-$LDSqlDb='SQL Databank';
+$LDMediBotActivate='Activeaza Medibot';
+$LDSqlDb='SQL Banca date';
 $LDManageAccess='Managementul drepturilor de acces';
 $LDListAll='Listeaza tot';
-$LDSystemLogin='System Administrator Login';
-$LDSeeData='Display data';
-$LDNewData='Enter new data';
+$LDSystemLogin='Acces administrator sistem';
+$LDSeeData='Afisare date';
+#'Afisare date';
+$LDNewData='Introduceti data noua';
+#'Introduceti data noua';
 
-$LDWelcome='Welcome';
-$LDLogin='Login';
-$LDChangeSaved='The changes were saved.';
-$LDPcID='Current identity of this computer';
-$LDDept='Department';
-$LDWard='Ward';
-$LDWardOR='Ward room or OR number';
-$LDPhoneNr='Room\'s telephone number';
-$LDIntercomNr='Room\'s intercom number';
-$LDPcIP='IP address of this computer';
-$LDSave='Save changes';
-$LDNoChange='Do not change current settings';
-$LDClose='Close';
-$LDLogout='Log out';
-$LDNewLogin='New login';
-$LDLogoutConfirm='Do you really want to log out?';
+$LDWelcome='Bun venit';
+#'Welcome';
+$LDLogin='Acceseaza';
+#'Acceseaza';
+$LDChangeSaved='Modificarile sunt salvate';
+#'Modificarile sunt salvate.';
+$LDPcID='Identitatea curenta a acestui calculator';
+#'Identitatea curenta a acestui calculator';
+$LDDept='Departament';
+$LDWard='Salon';
+$LDWardOR='Numar salon sau sala operatii';
+$LDPhoneNr='Numarul de telefon al camerei';
+#'Numar de telefon al camerei';
+$LDIntercomNr='Numarul de interfon al camerei';
+#'Numarul de interfon al camerei';
+$LDPcIP='Adresa IP a acestui calculator';
+#'Adresa IP a acestui calculator';
+$LDSave='Modificari salvate';
+#'Modificari salvate';
+$LDNoChange='Nu schimbati setarile curente';
+#'Nu schimbati setarile curente';
+$LDClose='Inchide';
+#'Inchide';
+$LDLogout='Iesire';
+#'Iesire';
+$LDNewLogin='Acces nou';
+#'Acces nou';
+$LDLogoutConfirm='Doriti intradevar sa iesiti din program';
+#'Doriti intradevar sa iesiti din program';
 $LDOK='OK';
-$LDYes='Yes';
-$LDNotReally='No, not really.';
-$LDDOCScheduler='DOC Scheduler';
-$LDORNOCScheduler='ORNOC Scheduler';
-$LDFotolab='Photolab';
+$LDYes='Da';
+$LDNotReally='Nu chiar.';
+$LDDOCScheduler='Calendar DOC';
+$LDORNOCScheduler='Calendar ORNOC';
+$LDFotolab='Laborator foto';
 /* 2002-09-08 EL */
-$LDTestRequest='Diagnostic Test Request';
+$LDTestRequest='Cerere test diagnostic';
+#'Cerere test diagnostic';
+$LDTestType=array('patho'=>'Patologie',
+                             'chemlabor'=>'Laborator Medical',
+                                                         'baclabor'=>'Laborator Bacteriologie',
+                                                         'blood'=>'Banca de sange',
+                                                         'radio'=>'Radiologie',
+                                                         'sono'=>'Echografie',
+                                                         'allamb'=>'Ambulator General',
+                                                         'unfamb'=>'Ambulator Urgente',
+                                                         'nuklear'=>'Diagnostic nuclear',
+                                                         'inmed'=>'Medicina interna');
+/*
 $LDTestType=array('patho'=>'Pathology',
                              'chemlabor'=>'Medical Laboratory',
-                                                         'baclabor'=>'Bacteriological Laboratory',
-                                                         'blood'=>'Blood Bank',
-                                                         'radio'=>'Radiology',
-                                                         'sono'=>'Sonography',
-                                                         'allamb'=>'General Ambulatory',
-                                                         'unfamb'=>'Emergency Ambulatory',
-                                                         'nuklear'=>'Nuclear Diagnostics',
-                                                         'inmed'=>'Internal Medicine');
-$LDBloodOrder='Request for blood products';
+                                                         'baclabor'=>'Laborator bacteriologie',
+                                                         'blood'=>'Banca de sange',
+                                                         'radio'=>'Radiologie',
+                                                         'sono'=>'Echografie',
+                                                         'allamb'=>'Ambulator general',
+                                                         'unfamb'=>'Ambulator de urgente',
+                                                         'nuklear'=>'Diagnostic nuclear',
+                                                         'inmed'=>'Medicina interna');
+*/
+$LDBloodOrder='Cerere produse sange';
+#'Cerere pentru produse de sange';
 /* 2002-09-22 EL */
-$LDPendingRequest='Pending request';
+$LDPendingRequest='Cerere in asteptare';
+#'Cerere in asteptare';
 /* 2002-10-06 EL*/
-$LDLoggedOut='Logged out';
+$LDLoggedOut='Iesit';
+#'Iesit';
 /* 2003-03-18 EL */
-$LDNursesList='Nurses\' List';
-$LDAppointments='Appointments';
+$LDNursesList='Lista asistente medicale';
+#'Lista asistente medicale';
+$LDAppointments='Programari';
+#'Programari';
 /* 2003-04-27 */
-$LDInsuranceCoManager='Insurance Company Manager';
-$LDAddressMngr='Address Manager';
+$LDInsuranceCoManager='Manager Companie Asigurari';
+#'Manager companie de asigurari';
+$LDAddressMngr='Adresa Manager';
 /* 2003-04-30 EL*/
 $LDBilling='eComBill';
 /* 2003-05-18 EL */
-$LDPlsContactEDP='Please contact the EDP department.';
-$LDPlsTryAgain='Please try again';
+$LDPlsContactEDP='Contactati va rog departamentul EDP';
+#'Contactati va rog departamentul EDP.';
+$LDPlsTryAgain='Incercati din nou va rog';
+#'Incercati din nou va rog';
 /* 2003-07-11 EL */
-$LDAdministration='Administration';
-$LDOutpatientClinic='Outpatient clinic';
-$LDUploadDicom='Upload DICOM images';
-$LDViewDicom='View DICOM images';
+$LDAdministration='Administratie';
+$LDOutpatientClinic='Clinica pacienti';
+$LDUploadDicom='Incarcare imagini DICOM';
+#'Incarcare imagini DICOM';
+$LDViewDicom='Vizualizare imagini DICOM';
+#'Vizualizare imagini DICOM';
 # 2003-08-22 EL
-$LDYellowList='Yellow List';
-$LDRedList='Red List';
+$LDYellowList='Lista galbena';
+#'Lista galbena';
+$LDRedList='Lista Rosie';
 #2003-11-22 EL
-$LDAdvancedSearch='Advanced search';
-$LDNewPerson='Register new person';
+$LDAdvancedSearch='Cautare avansata';
+$LDNewPerson='Inregistrati persoana noua';
+#'Inregistrati persoana noua';
 ?>

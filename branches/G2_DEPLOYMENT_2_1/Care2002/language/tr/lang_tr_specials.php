@@ -8,7 +8,7 @@ $LDClose='Kapat';
 $LDCancel='Ýptal';
 $LDResetEntry='Girilenleri sil';
 $LDSave='Kaydet';
-$LDReset='Reset';
+$LDReset='Yeni baþtan';
 
 $LDNewSearch='Yeni arama';
 $LDSearch='Ara';
@@ -16,8 +16,8 @@ $LDSearch='Ara';
 $LDContinue='Devam';
 $LDBack='Geri';
 
-$LDOn='Tarih:';
-$LDAt='Saat';
+$LDOn='De:';
+$LDAt='De';
 
 $LDNew='Yeni';
 $LDEdit='Düzenle';
@@ -41,7 +41,7 @@ $LDPageTop='Baþa geri.';
 $LDPreview='Ön izleme';
 $LDUpdateData='Güncelle veya düzenle';
 
-$LDNoBack='Hayýr. Geri.';
+$LDNoBack='Hayýr. Geri git.';
 $LDOK='Tamam';
 $LDName='Ad';
 $LDPassword='Þifre';
@@ -59,7 +59,7 @@ $LDLogin='Giriþ';
 
 $LDFirstName='Ad';
 
-$LDOptions='Opsiyonlar';
+$LDOptions='Seçenekler';
 $LDHelp='Yardým';
 $LDSent='Gönderildi';
 $LDDrafts='Taslaklar';
@@ -76,13 +76,13 @@ $LDBack2='Geri';
 $LDReply2='Yanýt adresi';
 $LDPrint='Yazdýr';
 $LDMoreInfo='Daha çok bilgi';
-$LDTakeOver='Devir';
-$LDJustReset='Reset';
+$LDTakeOver='Devir al';
+$LDJustReset='Yeni baþtan';
 $LDMaximum='Maksimum';
 
 $LDSpexFunctions='Özel iþlevler';
-$LDDutyPlanOrg='Nöbet Planlayýcý';
-$LDDutyPlanOrgTxt='Nöbet planlayýcý Duty planner and düzenleyicisi';
+$LDDutyPlanOrg='Nöbet Planý Düzenleyici';
+$LDDutyPlanOrgTxt='Nöbet planlayýcý ve düzenleyicisi, Mesai izleyici';
 $LDStandbyDuty='Ýcap nöbeti';
 $LDStandbyDutyTxt='Ýcap nöbetinde iþ performansýný belgelendirme';
 $LDHandStat='El cerrahisi istatistikleri';
@@ -104,13 +104,13 @@ $LDColorOptExtTxt='Baðlantý, fare izi vs. renklerini ayarlamak';
 $LDMyIntranet='Ýntranetim';
 $LDMyIntranetTxt='Kiþisel planlayýcým, ajandam, günlüðüm, notlarým, takvimim, vs.';
 $LDAccessPw='Eriþim þifresi';
-$LDAccessPwTxt='Eriþim þifresini deðiþtirmek veya güncellemek';
+$LDAccessPwTxt='Eriþim þifresini deðiþtir veya güncelle';
 $LDWebCam='Video Güvenlik';
-$LDWebCamTxt='Intranet webkamera güvenlik izlemi';
-$LDPhotoLab='Fotolab';
+$LDWebCamTxt='Intranet web kamera güvenlik izlemi';
+$LDPhotoLab='Fotoðraflar';
 $LDPhotoLabTxt='Hasta fotoðraflarýnýn kaydedilmesi, belgelendirilmesi, fihristi';
 
-$LDBundyMachine='Bundy machine';
+$LDBundyMachine='Mesai izleyici';
 $LDDutyPlanner='Nöbet planlayýcý';
 $LDPrevMonth='Önceki ay';
 $LDNextMonth='Sonraki ay';
@@ -119,7 +119,7 @@ $LDEntry='Giriþ';
 $LDExit='Çýkýþ';
 $LDRemarks='Düþünceler';
 
-$tage=array('<font color=\'#ff0000\'>S</font>','P','S','Ç','P','C','C');
+$tage=array('<font color=\'#ff0000\'>P</font>','P','S','Ç','P','C','C');
 $tagename=array('Pazartesi','Salý','Çarþamba','Perþembe','Cuma','Cumartesi','Pazar');
 
 $LDTotal='Toplam';
@@ -129,7 +129,7 @@ $LDYear='Yýl';
 $LDGO='GÝT';
 $LDPlus1Year='Artý 1 yýl';
 $LDMinus1Year='Eksi 1 yýl';
-$LDDirectDial='Doðrudan seçim';
+$LDDirectDial='Doðrudan seç';
 $LDFor='için';
 
 $LDShowMyCalendar='Nöbetimi takvimde göster.';
@@ -159,16 +159,16 @@ $LDTopFrame='Üst çerçeve';
 $LDBottomFrame='Alt çerçeve';
 
 $LDPWChange='Þifre deðiþimi';
-$LDUserIdPWPrompt='Kullanýcý adýnýzý ve su andaki þifrenizi giriniz:';
+$LDUserIdPWPrompt='Kullanýcý adýnýzý ve güncel þifrenizi giriniz:';
 $LDNewPwPrompt='Þimdi, yeni þifrenizi giriniz:';
 $LDNewPw='Yeni þifre';
 $LDNewPw2='Yeni þifreyi tekrar yazýnýz';
 $LDChangePw='Þifreyi deðiþtir';
 $LDOops='Hops! Hayýr, deðiþtirme.';
 
-$LDWrongEntry='Yanlýþ giriþler!';
+/*$LDWrongEntry='Yanlýþ giriþler!';
 $LDNoAuth='Eriþim hakký yok';
-$LDAuthLocked='Eriþim hakký donduruldu.';
+$LDAuthLocked='Eriþim hakký donduruldu.';*/
 
 $LDAlertPwError='Yeni þifreler birbirinin ayný deðil. Lütfen yeni þifreleri tekrar giriniz.';
 $LDPWChanged='Yeni þifre kaydedildi.';
@@ -182,12 +182,12 @@ $LDHowManyPics='Veribankasýna kaç tane resim kaydetmek istiyorsunuz?';
 $LDNr='Sayý';
 $LDNewPics='yeni bir hastadan resimler';
 $LDMorePics='ayný hastadan resimler';
-$LDAdditional='Ýlave';
+$LDAdditional='Ek';
 $LDLinkBroken='Foto sunucusuna baðlantý kesik.';
 $LDPicsSaved='Aþaðýdaki resimler tekrar adlandýrýlarak veribankasýna kaydedildi:';
 $LDEditTitle='Baþlýk';
 
-$LDAlertPhotoInfo='Giriþ sahasýndaki bilgi';
+$LDAlertPhotoInfo='Giriþ alanýndaki bilgi';
 $LDAlertNoPhotoInfo=' tamam deðil. Lüfen bilgiyi tam giriniz.';
 $LDAlertNoPatientData='Hastanýn bilgisi tam deðil.';
 $LDAlertNumberOnly='Lütfen bir sayý ya da  "ana" sözcüðünü giriniz.';
@@ -211,7 +211,7 @@ $LDAddressMngr='Adres Yöneticisi';
 $LDAddressMngrTxt='Adres bilgisi gir, listele, düzenle, ve güncelle';
 /* 2003-05-18 EL */
 $LDUserConfigOpt='Düzenleme seçenekleri';
-$LDUserConfigOptTxt='Arkaplan, yazý rengi, maskotlar vs için kullanýcý seçenekleri.';
+$LDUserConfigOptTxt='Arkaplan, yazý rengi, maskotlar, simgeler vs için kullanýcý seçenekleri.';
 $LDMascotOpt='Maskot seçenekleri';
 $LDMascotOptTxt='Maskotlarý gizle, göster, seç.';
 $LDMascot='Maskot';
@@ -226,12 +226,42 @@ $LDLastName='Soyadý';
 $LDWantUpload='Yüklemek istiyorum';
 $LDImage='resim(ler)';
 # 2002-01-18 EL
-$LDTicketedSupport='Ücretli Destek';
+$LDTicketedSupport='Biletli Destek';
 $LDTicketedSupportTxt='Projenin online destek hizmetine biletli bir istem gönder';
 $LDNewsgroup='Haber grubu';
 $LDNewsgroupTxt='Geliþtiricilerin haberleþme listesinin yansýsý haber grubu.';
 # 2002-08-19 EL
 $LDPharmaIndex='Ýlaç Ýndeksi';
 $LDPharmaIndexTxt='Ýlaç indeksi, Kýrmýzý liste, IFAP, NIMS, vaya PIMS gibi';
-?>
 
+#2004-05-23 EL
+$LDPlugins='Eklentiler';
+$LDNoPluginsPrompt='Henüz kurulmuþ bir eklenti yok. . Eðer bir  Care2x eklenti modülü ister iseniz lütfen  http://www.care2x-plugins.org adresini ziyaret ediniz.';
+$LDPluginsTxt='Eklenti araç ve modülleri kolleksiyonu';
+
+#2004-06-13 EL
+$LDCssThemes = 'CSS Tema Stilleri';
+$LDCssThemesTxt= 'Kenar rengi, geniþlik, dekorasyon, yazý tipleri büyüklükleri, arka planlar vs için dizayn seçiniz.';
+$LDDescription = 'Taným';
+$LDScreenshot = 'Ekran görüntüsü';
+
+#2004-06-30
+$LDSmartyTemplate = 'Gösteriþli kalýp stilleri';
+$LDSmartyTemplateTxt = 'Gösteriþli temelli kullanýcý ara yüzü kalýp stili seç';
+
+#2004-07-08
+$LDControlButtons = 'Kontrol düðme stilleri';
+$LDControlButtonsTxt = 'Kontrol düðme stilini seçiniz';
+$LDComIcons = 'Yaygýn simge stilleri';
+$LDComIconsTxt = 'Dekoratif simge stilini seçiniz <br>(uyarý: bazý CSS temalarýnda, tema deðiþince simgeler de deðiþir)';
+$LDDevDesigner = 'Geliþtirici/Dizayncý';
+$LDNoIcon = 'Simge yok';
+$LDNoIconTxt = 'Alt menülerde simge görülmez. Simgelerin görünümü baskýlanýr';
+
+#2004-07-29
+$LDMainMenuTree = 'Ana Menü Stilleri';
+$LDMainMenuTreeTxt = 'Ana menü stilini seçiniz';
+$LDStyle = 'Stil';
+$LDRefreshBrowser = 'Deðiþiklikleri görmek için tarayýcýnýzýn yenile düðmesini týklayýnýz.';
+
+?>

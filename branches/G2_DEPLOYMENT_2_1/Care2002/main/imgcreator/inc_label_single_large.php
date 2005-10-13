@@ -99,13 +99,8 @@
 		}
 	}
 
-	#
-	# Place the barcode img to the label image
-	#
-
-	if($bc) ImageCopy($label,$bc,110,4,8,8,171,37);
-
-   // ImageCopy($im,$bc,110,28,9,9,170,37);
+	// place the barcode img
+    if($bc) ImageCopy($label,$bc,110,4,9,9,170,37);
 
 	if(!$child_img)
 	{

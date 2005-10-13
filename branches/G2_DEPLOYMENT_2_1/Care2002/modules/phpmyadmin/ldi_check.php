@@ -18,8 +18,8 @@
 /**
  * Gets some core scripts
  */
-require_once('./libraries/grab_globals.lib.php');
-require_once('./libraries/common.lib.php');
+require('./libraries/grab_globals.lib.php');
+require('./libraries/common.lib.php');
 
 // Check parameters
 
@@ -34,8 +34,14 @@ if (isset($btnLDI) && isset($local_textfile) && $local_textfile != '') {
         if (!empty($_SERVER) && isset($_SERVER['DOCUMENT_ROOT'])) {
             $DOCUMENT_ROOT = $_SERVER['DOCUMENT_ROOT'];
         }
+        else if (!empty($HTTP_SERVER_VARS) && isset($HTTP_SERVER_VARS['DOCUMENT_ROOT'])) {
+            $DOCUMENT_ROOT = $HTTP_SERVER_VARS['DOCUMENT_ROOT'];
+        }
         else if (!empty($_ENV) && isset($_ENV['DOCUMENT_ROOT'])) {
             $DOCUMENT_ROOT = $_ENV['DOCUMENT_ROOT'];
+        }
+        else if (!empty($HTTP_ENV_VARS) && isset($HTTP_ENV_VARS['DOCUMENT_ROOT'])) {
+            $DOCUMENT_ROOT = $HTTP_ENV_VARS['DOCUMENT_ROOT'];
         }
         else if (@getenv('DOCUMENT_ROOT')) {
             $DOCUMENT_ROOT = getenv('DOCUMENT_ROOT');
@@ -45,12 +51,15 @@ if (isset($btnLDI) && isset($local_textfile) && $local_textfile != '') {
         }
     } // end if
 
-    if (substr($cfg['UploadDir'], -1) != '/') {
-        $cfg['UploadDir'] .= '/';
-    }
-    $textfile = $DOCUMENT_ROOT . dirname($PHP_SELF) . '/' . preg_replace('@^./@s', '', $cfg['UploadDir']) . preg_replace('@\.\.*@', '.', $local_textfile);
+    $textfile = $DOCUMENT_ROOT . dirname($PHP_SELF) . '/' . eregi_replace('^./', '', $cfg['UploadDir']) . eregi_replace('\.\.*', '.', $local_textfile);
     if (file_exists($textfile)) {
-        $open_basedir = @ini_get('open_basedir');
+        $open_basedir     = '';
+        if (PMA_PHP_INT_VERSION >= 40000) {
+            $open_basedir = @ini_get('open_basedir');
+        }
+        if (empty($open_basedir)) {
+            $open_basedir = @get_cfg_var('open_basedir');
+        }
 
         // If we are on a server with open_basedir, we must move the file
         // before opening it. The doc explains how to create the "./tmp"
@@ -67,7 +76,11 @@ if (isset($btnLDI) && isset($local_textfile) && $local_textfile != '') {
                 exit();
             } else {
                 $textfile_new = $tmp_subdir . basename($textfile);
-                move_uploaded_file($textfile, $textfile_new);
+                if (PMA_PHP_INT_VERSION < 40003) {
+                    copy($textfile, $textfile_new);
+                } else {
+                    move_uploaded_file($textfile, $textfile_new);
+                }
                 $textfile = $textfile_new;
                 $unlink_local_textfile = true;
             }
@@ -80,9 +93,9 @@ if (isset($btnLDI) && isset($local_textfile) && $local_textfile != '') {
  */
 if (isset($btnLDI) && empty($textfile)) {
     $js_to_run = 'functions.js';
-    require_once('./header.inc.php');
+    include('./header.inc.php');
     $message = $strMustSelectFile;
-    require('./ldi_table.php');
+    include('./ldi_table.php');
 } elseif (isset($btnLDI) && ($textfile != 'none')) {
     if (!isset($replace)) {
         $replace = '';
@@ -91,7 +104,7 @@ if (isset($btnLDI) && empty($textfile)) {
     // the error message does not correspond exactly to the error...
     if (!@chmod($textfile, 0644)) {
        echo $strFileCouldNotBeRead . ' ' . $textfile . '<br />';
-       require_once('./footer.inc.php');
+       exit();
     }
 
     // Kanji encoding convert appended by Y.Kawada
@@ -142,16 +155,19 @@ if (isset($btnLDI) && empty($textfile)) {
         $sql_query .= ' LINES TERMINATED BY \'' . $line_terminator . '\'';
     }
     if (strlen($column_name) > 0) {
-        $sql_query .= ' (';
-        $tmp   = split(',( ?)', $column_name);
-        $cnt_tmp = count($tmp);
-        for ($i = 0; $i < $cnt_tmp; $i++) {
-            if ($i > 0) {
-                $sql_query .= ', ';
-            }
-            $sql_query     .= PMA_backquote(trim($tmp[$i]));
-        } // end for
-        $sql_query .= ')';
+        if (PMA_MYSQL_INT_VERSION >= 32306) {
+            $sql_query .= ' (';
+            $tmp   = split(',( ?)', $column_name);
+            for ($i = 0; $i < count($tmp); $i++) {
+                if ($i > 0) {
+                    $sql_query .= ', ';
+                }
+                $sql_query     .= PMA_backquote(trim($tmp[$i]));
+            } // end for
+            $sql_query .= ')';
+        } else {
+            $sql_query .= ' (' . $column_name . ')';
+        }
     }
 
     // We could rename the ldi* scripts to tbl_properties_ldi* to improve
@@ -159,7 +175,7 @@ if (isset($btnLDI) && empty($textfile)) {
     //
     // The $goto in ldi_table.php is set to tbl_properties.php but maybe
     // if would be better to Browse the latest inserted data.
-    require('./sql.php');
+    include('./sql.php');
     if ($unlink_local_textfile) {
         unlink($textfile);
     }
@@ -170,6 +186,6 @@ if (isset($btnLDI) && empty($textfile)) {
  * The form used to define the query hasn't been yet submitted -> loads it
  */
 else {
-    require('./ldi_table.php');
+    include('./ldi_table.php');
 }
 ?>

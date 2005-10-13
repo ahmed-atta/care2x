@@ -6,9 +6,9 @@
 /**
  * Gets some core libraries
  */
-require_once('./libraries/grab_globals.lib.php');
+require('./libraries/grab_globals.lib.php');
 $js_to_run = 'functions.js';
-require_once('./header.inc.php');
+include('./header.inc.php');
 
 // Check parameters
 PMA_checkParameters(array('db', 'table'));
@@ -26,6 +26,11 @@ $abort = false;
 if (isset($submit)) {
     $field_cnt = count($field_orig);
     for ($i = 0; $i < $field_cnt; $i++) {
+        if (PMA_MYSQL_INT_VERSION < 32306) {
+            PMA_checkReservedWords($field_name[$i], $err_url);
+        }
+
+        // Some fields have been urlencoded or double quotes have been translated
         // to "&quot;" in tbl_properties.php
         $field_orig[$i]     = urldecode($field_orig[$i]);
         if (strcmp(str_replace('"', '&quot;', $field_orig[$i]), $field_name[$i]) == 0) {
@@ -47,7 +52,7 @@ if (isset($submit)) {
         $query .= PMA_backquote($field_orig[$i]) . ' ' . PMA_backquote($field_name[$i]) . ' ' . $field_type[$i];
         // Some field types shouldn't have lengths
         if ($field_length[$i] != ''
-            && !preg_match('@^(DATE|DATETIME|TIME|TINYBLOB|TINYTEXT|BLOB|TEXT|MEDIUMBLOB|MEDIUMTEXT|LONGBLOB|LONGTEXT)$@i', $field_type[$i])) {
+            && !eregi('^(DATE|DATETIME|TIME|TINYBLOB|TINYTEXT|BLOB|TEXT|MEDIUMBLOB|MEDIUMTEXT|LONGBLOB|LONGTEXT)$', $field_type[$i])) {
             $query .= '(' . $field_length[$i] . ')';
         }
         if ($field_attribute[$i] != '') {
@@ -84,21 +89,23 @@ if (isset($submit)) {
         $btnDrop   = 'Fake';
 
         // garvin: If comments were sent, enable relation stuff
-        require_once('./libraries/relation.lib.php');
-        require_once('./libraries/transformations.lib.php');
+        require('./libraries/relation.lib.php');
+        require('./libraries/transformations.lib.php');
 
         $cfgRelation = PMA_getRelationsParam();
 
         // garvin: Update comment table, if a comment was set.
         if (isset($field_comments) && is_array($field_comments) && $cfgRelation['commwork']) {
-            foreach($field_comments AS $fieldindex => $fieldcomment) {
+            @reset($field_comments);
+            while(list($fieldindex, $fieldcomment) = each($field_comments)) {
                 PMA_setComment($db, $table, $field_name[$fieldindex], $fieldcomment, $field_orig[$fieldindex]);
             }
         }
 
         // garvin: Rename relations&display fields, if altered.
         if (($cfgRelation['displaywork'] || $cfgRelation['relwork']) && isset($field_orig) && is_array($field_orig)) {
-            foreach($field_orig AS $fieldindex => $fieldcontent) {
+            @reset($field_orig);
+            while(list($fieldindex, $fieldcontent) = each($field_orig)) {
                 if ($field_name[$fieldindex] != $fieldcontent) {
                     if ($cfgRelation['displaywork']) {
                         $table_query = 'UPDATE ' . PMA_backquote($cfgRelation['table_info'])
@@ -136,13 +143,15 @@ if (isset($submit)) {
 
         // garvin: Update comment table for mime types [MIME]
         if (isset($field_mimetype) && is_array($field_mimetype) && $cfgRelation['commwork'] && $cfgRelation['mimework'] && $cfg['BrowseMIME']) {
-            foreach($field_mimetype AS $fieldindex => $mimetype) {
+            @reset($field_mimetype);
+            while(list($fieldindex, $mimetype) = each($field_mimetype)) {
                 PMA_setMIME($db, $table, $field_name[$fieldindex], $mimetype, $field_transformation[$fieldindex], $field_transformation_options[$fieldindex]);
             }
         }
 
         $active_page = 'tbl_properties_structure.php';
-        require('./tbl_properties_structure.php');
+        include('./tbl_properties_structure.php');
+        exit();
     } else {
         PMA_mysqlDie('', '', '', $err_url, FALSE);
         // garvin: An error happened while inserting/updating a table definition.
@@ -183,12 +192,12 @@ if ($abort == FALSE) {
 
     $num_fields  = count($fields_meta);
     $action      = 'tbl_alter.php';
-    require('./tbl_properties.inc.php');
+    include('./tbl_properties.inc.php');
 }
 
 
 /**
  * Displays the footer
  */
-require_once('./footer.inc.php');
+require('./footer.inc.php');
 ?>

@@ -5,7 +5,7 @@ $LDCurrentFindings='Güncel bulgular';
 $LDFinalFindings='Son bulgu';
 
 $LDFillLabOnly='Sadece laboratuvarda kullanýlacak';
-$LDLEN='LGN';  /* LEN =  Lab giriþ no */
+$LDLEN='Lab.No';  /* LEN =  Lab giriþ no */
 
 $LDDate='Tarih';
 $LDEye='Göz';
@@ -285,10 +285,10 @@ $lab_TestResultId_1=array('Staph.aureus', 'E.coli', 'enterob.aerogenes',
 									 'Acinetobacter Baumannii', 'Serratia liquefaciens', 'Stenotrophomonas maltophilia');
 									 
 */									 
-$lab_TestResultId_2 = array('No growth after 48 hours', 'Aerobe like growth', 'Amöba in stool negative',
-                                           'No growth after 5 days', '', 'Lambia in stool negative',
-										   'No growth after 9 days', 'Gram.neg.Diplococci NoEvid.', 'Worm eggs.n.stool neg.',
-										   'No Bact. of TPE-Group', 'GO-culture negative', 'No growth of E.Coli',
+$lab_TestResultId_2 = array(' 48 saat sonrasý üreme yok', 'Aerobe benzeri üreme', 'Gaitada amip menfi',
+                                           '5 gün sonrasý üreme yok', '', 'Gaitada giardia negatif',
+										   '9 gün sonrasý üreme yok', 'Gram.neg.Diplococci görülmedi.', 'Gaitada parazit görülmedi.',
+										   'No Bact. of TPE-Group', 'GO-culture negative', 'E.Coli üremedi',
 										   'Campylobacter.culture neg.', '', 'Liquorantigen negative',
 										   'NoG. Campylobacter.pylori', 'NoEvid.microscp.acid.Cylind.', 'EHEC negative',
 										   'Dyspepsy.Coli serolg.NoEvid', 'No growth after 7 days', '',

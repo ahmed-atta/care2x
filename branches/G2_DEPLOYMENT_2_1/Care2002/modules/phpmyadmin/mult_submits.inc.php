@@ -8,18 +8,15 @@
  */
 if (!empty($submit_mult)
     && ($submit_mult != $strWithChecked)
-    && (  !empty($selected_db)
-       || !empty($selected_tbl)
-       || !empty($selected_fld)
-       || !empty($rows_to_delete)
-         )) {
+    && (!empty($selected_db) || !empty($selected_tbl) || !empty($selected_fld))) {
 
     if (!empty($selected_db)) {
         $selected     = $selected_db;
         $what         = 'drop_db';
     } else if (!empty($selected_tbl)) {
         if ($submit_mult == $strPrintView) {
-            require('./tbl_printview.php');
+            include('./tbl_printview.php');
+            exit();
         } else {
            $selected = $selected_tbl;
            switch ($submit_mult) {
@@ -54,16 +51,14 @@ if (!empty($submit_mult)
                    break;
            } // end switch
         }
-    } else if (!empty($selected_fld)) {
+    } else {
         $selected     = $selected_fld;
         if ($submit_mult == $strDrop) {
             $what     = 'drop_fld';
         } else {
-            require('./tbl_alter.php');
+            include('./tbl_alter.php');
+            exit();
         }
-    } else {
-        $what = 'row_delete';
-        $selected = $rows_to_delete;
     }
 } // end if
 
@@ -75,34 +70,28 @@ if (!empty($submit_mult) && !empty($what)) {
     $js_to_run = 'functions.js';
     unset($message);
     if (!empty($table)) {
-        require('./tbl_properties_common.php');
+        include('./tbl_properties_common.php');
         $url_query .= '&amp;goto=tbl_properties.php&amp;back=tbl_properties.php';
-        require('./tbl_properties_table_info.php');
+        include('./tbl_properties_table_info.php');
     }
     elseif (!empty($db)) {
-        require('./db_details_common.php');
-        require('./db_details_db_info.php');
+        include('./db_details_common.php');
+        include('./db_details_db_info.php');
     }
     // Builds the query
     $full_query     = '';
     $selected_cnt   = count($selected);
-    $i = 0;
-    foreach($selected AS $idx => $sval) {
-        $i++;
+    for ($i = 0; $i < $selected_cnt; $i++) {
         switch ($what) {
-            case 'row_delete':
-                $full_query .= htmlspecialchars(urldecode($sval))
-                            . ';<br />';
-                break;
             case 'drop_db':
                 $full_query .= 'DROP DATABASE '
-                            . PMA_backquote(htmlspecialchars(urldecode($sval)))
+                            . PMA_backquote(htmlspecialchars(urldecode($selected[$i])))
                             . ';<br />';
                 break;
 
             case 'drop_tbl':
                 $full_query .= (empty($full_query) ? 'DROP TABLE ' : ', ')
-                            . PMA_backquote(htmlspecialchars(urldecode($sval)))
+                            . PMA_backquote(htmlspecialchars(urldecode($selected[$i])))
                             . (($i == $selected_cnt - 1) ? ';<br />' : '');
                 break;
 
@@ -112,7 +101,7 @@ if (!empty($submit_mult) && !empty($what)) {
                 } else {
                     $full_query .= 'DELETE FROM ';
                 }
-                $full_query .= PMA_backquote(htmlspecialchars(urldecode($sval)))
+                $full_query .= PMA_backquote(htmlspecialchars(urldecode($selected[$i])))
                             . ';<br />';
                 break;
 
@@ -121,15 +110,15 @@ if (!empty($submit_mult) && !empty($what)) {
                     $full_query .= 'ALTER TABLE '
                                 . PMA_backquote(htmlspecialchars($table))
                                 . '<br />&nbsp;&nbsp;DROP '
-                                . PMA_backquote(htmlspecialchars(urldecode($sval)))
+                                . PMA_backquote(htmlspecialchars(urldecode($selected[$i])))
                                 . ',';
                 } else {
                     $full_query .= '<br />&nbsp;&nbsp;DROP '
-                                . PMA_backquote(htmlspecialchars(urldecode($sval)))
+                                . PMA_backquote(htmlspecialchars(urldecode($selected[$i])))
                                 . ',';
                 }
                 if ($i == $selected_cnt-1) {
-                    $full_query = preg_replace('@,$@', ';<br />', $full_query);
+                    $full_query = ereg_replace(',$', ';<br />', $full_query);
                 }
                 break;
         } // end switch
@@ -144,31 +133,24 @@ if (!empty($submit_mult) && !empty($what)) {
     echo "\n";
     if (strpos(' ' . $action, 'db_details') == 1) {
         echo PMA_generate_common_hidden_inputs($db);
-    } else if (strpos(' ' . $action, 'tbl_properties') == 1
-              || $what == 'row_delete') {
+    } else if (strpos(' ' . $action, 'tbl_properties') == 1) {
         echo PMA_generate_common_hidden_inputs($db,$table);
     } else  {
         echo PMA_generate_common_hidden_inputs();
     }
-    foreach($selected AS $idx => $sval) {
-        echo '    <input type="hidden" name="selected[]" value="' . htmlspecialchars($sval) . '" />' . "\n";
+    for ($i = 0; $i < $selected_cnt; $i++) {
+        echo '    <input type="hidden" name="selected[]" value="' . htmlspecialchars($selected[$i]) . '" />' . "\n";
     }
     ?>
     <input type="hidden" name="query_type" value="<?php echo $what; ?>" />
-    <?php
-    if ($what == 'row_delete') {
-        echo '<input type="hidden" name="original_sql_query" value="' . $original_sql_query . '" />' . "\n";
-        echo '<input type="hidden" name="original_pos" value="' . $original_pos . '" />' . "\n";
-        echo '<input type="hidden" name="original_url_query" value="' . $original_url_query . '" />' . "\n";
-    }
-    ?>
     <input type="submit" name="mult_btn" value="<?php echo $strYes; ?>" />
     <input type="submit" name="mult_btn" value="<?php echo $strNo; ?>" />
 </form>
     <?php
     echo"\n";
 
-    require_once('./footer.inc.php');
+    include('./footer.inc.php');
+    exit();
 } // end if
 
 
@@ -178,17 +160,13 @@ if (!empty($submit_mult) && !empty($what)) {
 else if ($mult_btn == $strYes) {
 
     if ($query_type == 'drop_db' || $query_type == 'drop_tbl' || $query_type == 'drop_fld') {
-        require_once('./libraries/relation_cleanup.lib.php');
+        include('./libraries/relation_cleanup.lib.php');
     }
 
     $sql_query      = '';
     $selected_cnt   = count($selected);
     for ($i = 0; $i < $selected_cnt; $i++) {
         switch ($query_type) {
-            case 'row_delete':
-                $a_query = urldecode($selected[$i]);
-                break;
-
             case 'drop_db':
                 PMA_relationsCleanupDatabase($selected[$i]);
                 $a_query   = 'DROP DATABASE '
@@ -267,7 +245,8 @@ else if ($mult_btn == $strYes) {
         || $query_type == 'analyze_tbl'
         || $query_type == 'check_tbl'
         || $query_type == 'optimize_tbl') {
-        require('./sql.php');
+        include('./sql.php');
+        exit();
     }
 
 }

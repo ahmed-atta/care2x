@@ -8,7 +8,7 @@ require_once($root_path.'include/inc_img_fx.php');
 <?php html_rtl($lang); ?>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
- <TITLE>Geçersiz Erişim Uyarısı</TITLE>
+ <TITLE>Geçersiz Erişim Uyarısı </TITLE>
 </HEAD>
 
 <BODY bgcolor="#ffffff">

@@ -3,12 +3,18 @@
 // vim: expandtab sw=4 ts=4 sts=4:
 
 // Check parameters
-require_once('./libraries/common.lib.php');
+
+if (!defined('PMA_COMMON_LIB_INCLUDED')) {
+    include('./libraries/common.lib.php');
+}
+
 PMA_checkParameters(array('db','table','action','num_fields'));
 
 
-// Get available character sets
-require_once('./libraries/mysql_charsets.lib.php');
+// Get available character sets (MySQL >= 4.1)
+if (PMA_MYSQL_INT_VERSION >= 40100 && !defined('PMA_MYSQL_CHARSETS_LIB_INCLUDED')) {
+    include('./libraries/mysql_charsets.lib.php');
+}
 
 ?>
 <?php if ($cfg['CtrlArrowsMoving']) { ?>
@@ -49,7 +55,8 @@ if (isset($after_field)) {
 }
 
 if (isset($selected) && is_array($selected)) {
-    foreach($selected AS $o_fld_nr => $o_fld_val) {
+    @reset($selected);
+    while(list($o_fld_nr, $o_fld_val) = each($selected)) {
     ?>
     <input type="hidden" name="selected[<?php echo $o_fld_nr; ?>]" value="<?php echo urlencode($o_fld_val); ?>" />
     <?php
@@ -62,7 +69,8 @@ if (isset($selected) && is_array($selected)) {
     }
 
     if (isset($true_selected) && is_array($true_selected)) {
-        foreach($true_selected AS $o_fld_nr => $o_fld_val) {
+        @reset($true_selected);
+        while(list($o_fld_nr, $o_fld_val) = each($true_selected)) {
         ?>
         <input type="hidden" name="true_selected[<?php echo $o_fld_nr; ?>]" value="<?php echo urlencode($o_fld_val); ?>" />
         <?php
@@ -92,8 +100,8 @@ $header_cells[] = $strNull;
 $header_cells[] = $strDefault . '**';
 $header_cells[] = $strExtra;
 
-require_once('./libraries/relation.lib.php');
-require_once('./libraries/transformations.lib.php');
+require('./libraries/relation.lib.php');
+require('./libraries/transformations.lib.php');
 $cfgRelation = PMA_getRelationsParam();
 
 $comments_map = array();
@@ -131,7 +139,8 @@ if (!$is_backup) {
 //         the index as a value, not a key. Inserted here for easier maintaineance
 //         and less code to change in existing files.
 if (isset($field_fulltext) && is_array($field_fulltext)) {
-    foreach($field_fulltext AS $fulltext_nr => $fulltext_indexkey) {
+    @reset($field_fulltext);
+    while(list($fulltext_nr, $fulltext_indexkey) = each($field_fulltext)) {
         $submit_fulltext[$fulltext_indexkey] = $fulltext_indexkey;
     }
 }
@@ -213,13 +222,13 @@ for ($i = 0 ; $i < $num_fields; $i++) {
         $type        = $row['Type'];
     }
     // set or enum types: slashes single quotes inside options
-    if (preg_match('@^(set|enum)\((.+)\)$@i', $type, $tmp)) {
+    if (eregi('^(set|enum)\((.+)\)$', $type, $tmp)) {
         $type   = $tmp[1];
-        $length = substr(preg_replace('@([^,])\'\'@', '\\1\\\'', ',' . $tmp[2]), 1);
+        $length = substr(ereg_replace('([^,])\'\'', '\\1\\\'', ',' . $tmp[2]), 1);
     } else {
-        $type   = preg_replace('@BINARY@i', '', $type);
-        $type   = preg_replace('@ZEROFILL@i', '', $type);
-        $type   = preg_replace('@UNSIGNED@i', '', $type);
+        $type   = eregi_replace('BINARY', '', $type);
+        $type   = eregi_replace('ZEROFILL', '', $type);
+        $type   = eregi_replace('UNSIGNED', '', $type);
 
         if (strpos($type, '(')) {
             $length = chop(substr($type, (strpos($type, '(') + 1), (strpos($type, ')') - strpos($type, '(') - 1)));
@@ -234,7 +243,7 @@ for ($i = 0 ; $i < $num_fields; $i++) {
     if (PMA_MYSQL_INT_VERSION >= 40100) {
         $tmp = strpos($type, 'character set');
         if ($tmp) {
-            $type = substr($type, 0, $tmp-1);
+            $type = substr($type,0,$tmp-1);
         }
     }
 
@@ -242,8 +251,7 @@ for ($i = 0 ; $i < $num_fields; $i++) {
         $length = $submit_length;
     }
 
-    $cnt_column_types = count($cfg['ColumnTypes']);
-    for ($j = 0; $j < $cnt_column_types; $j++) {
+    for ($j = 0; $j < count($cfg['ColumnTypes']); $j++) {
         $content_cells[$i][$ci] .= '                <option value="'. $cfg['ColumnTypes'][$j] . '"';
         if (strtoupper($type) == strtoupper($cfg['ColumnTypes'][$j])) {
             $content_cells[$i][$ci] .= ' selected="selected"';
@@ -263,14 +271,14 @@ for ($i = 0 ; $i < $num_fields; $i++) {
     $content_cells[$i][$ci] .= "\n" . '<input id="field_' . $i . '_' . ($ci - $ci_offset) . '" type="text" name="field_length[]" size="8" value="' . str_replace('"', '&quot;', $length) . '" class="textfield" />' . "\n";
     $ci++;
 
-    if (preg_match('@^(set|enum)$@i', $type)) {
+    if (eregi('^(set|enum)$', $type)) {
         $binary           = 0;
         $unsigned         = 0;
         $zerofill         = 0;
     } else {
-        $binary           = stristr($row['Type'], 'binary');
-        $unsigned         = stristr($row['Type'], 'unsigned');
-        $zerofill         = stristr($row['Type'], 'zerofill');
+        $binary           = eregi('BINARY', $row['Type'], $test_attribute1);
+        $unsigned         = eregi('UNSIGNED', $row['Type'], $test_attribute2);
+        $zerofill         = eregi('ZEROFILL', $row['Type'], $test_attribute3);
     }
 
     if (PMA_MYSQL_INT_VERSION >= 40100) {
@@ -316,8 +324,7 @@ for ($i = 0 ; $i < $num_fields; $i++) {
         $strAttribute = $submit_attribute;
     }
 
-    $cnt_attribute_types = count($cfg['AttributeTypes']);
-    for ($j = 0;$j < $cnt_attribute_types; $j++) {
+    for ($j = 0;$j < count($cfg['AttributeTypes']); $j++) {
         $content_cells[$i][$ci] .= '                <option value="'. $cfg['AttributeTypes'][$j] . '"';
         if (strtoupper($strAttribute) == strtoupper($cfg['AttributeTypes'][$j])) {
             $content_cells[$i][$ci] .= ' selected="selected"';
@@ -385,7 +392,8 @@ for ($i = 0 ; $i < $num_fields; $i++) {
         $content_cells[$i][$ci] .= '    <option value="auto">auto-detect</option>' . "\n";
 
         if (is_array($available_mime['mimetype'])) {
-            foreach($available_mime['mimetype'] AS $mimekey => $mimetype) {
+            @reset($available_mime['mimetype']);
+            while(list($mimekey, $mimetype) = each($available_mime['mimetype'])) {
                 $checked = (isset($row) && isset($row['Field']) && isset($mime_map[$row['Field']]['mimetype']) && ($mime_map[$row['Field']]['mimetype'] == str_replace('/', '_', $mimetype)) ? 'selected ' : '');
                 $content_cells[$i][$ci] .= '    <option value="' . str_replace('/', '_', $mimetype) . '" ' . $checked . '>' . htmlspecialchars($mimetype) . '</option>';
             }
@@ -397,11 +405,12 @@ for ($i = 0 ; $i < $num_fields; $i++) {
         $content_cells[$i][$ci] = '<select id="field_' . $i . '_' . ($ci - $ci_offset) . '" size="1" name="field_transformation[]">' . "\n";
         $content_cells[$i][$ci] .= '    <option value="" title="' . $strNone . '"></option>' . "\n";
         if (is_array($available_mime['transformation'])) {
-            foreach($available_mime['transformation'] AS $mimekey => $transform) {
-                $checked = (isset($row) && isset($row['Field']) && isset($mime_map[$row['Field']]['transformation']) && (preg_match('@' . preg_quote($available_mime['transformation_file'][$mimekey]) . '3?@i', $mime_map[$row['Field']]['transformation'])) ? 'selected ' : '');
-                $tooltip = 'strTransformation_' . strtolower(preg_replace('@(\.inc\.php3?)$@', '', $available_mime['transformation_file'][$mimekey]));
+            @reset($available_mime['transformation']);
+            while(list($mimekey, $transform) = each($available_mime['transformation'])) {
+                $checked = (isset($row) && isset($row['Field']) && isset($mime_map[$row['Field']]['transformation']) && ($mime_map[$row['Field']]['transformation'] == $available_mime['transformation_file'][$mimekey]) ? 'selected ' : '');
+                $tooltip = 'strTransformation_' . strtolower(str_replace('.inc.php', '', $available_mime['transformation_file'][$mimekey]));
                 $tooltip = isset($$tooltip) ? $$tooltip : sprintf(str_replace('<br />', ' ', $strMIME_nodescription), 'PMA_transformation_' . $tooltip . '()');
-                $content_cells[$i][$ci] .= '<option value="' . $available_mime['transformation_file'][$mimekey] . '" ' . $checked . ' title="' . htmlspecialchars($tooltip) . '">' . htmlspecialchars($transform) . '</option>' . "\n";
+                $content_cells[$i][$ci] .= '<option value="' . $available_mime['transformation_file'][$mimekey] . '" ' . $checked . ' title="' . $tooltip . '">' . htmlspecialchars($transform) . '</option>' . "\n";
             }
         }
 
@@ -437,7 +446,8 @@ for ($i = 0 ; $i < $num_fields; $i++) {
             $checked_none = '';
         }
 
-        if ((isset($row) && isset($row['Comment']) && $row['Comment'] == 'FULLTEXT')) {
+        if (PMA_MYSQL_INT_VERSION >= 32323
+            &&(isset($row) && isset($row['Comment']) && $row['Comment'] == 'FULLTEXT')) {
             $checked_fulltext = ' checked="checked"';
         } else {
             $checked_fulltext = '';
@@ -455,7 +465,9 @@ for ($i = 0 ; $i < $num_fields; $i++) {
         $content_cells[$i][$ci] = "\n" . '<input type="radio" name="field_key_' . $i . '" value="none_' . $i . '"' .  $checked_none . ' />';
         $ci++;
 
-        $content_cells[$i][$ci] = '<input type="checkbox" name="field_fulltext[]" value="' . $i . '"' . $checked_fulltext . ' />';
+        if (PMA_MYSQL_INT_VERSION >= 32323) {
+            $content_cells[$i][$ci] = '<input type="checkbox" name="field_fulltext[]" value="' . $i . '"' . $checked_fulltext . ' />';
+        } // end if (PMA_MYSQL_INT_VERSION >= 32323)
     } // end if ($action ==...)
 } // end for
 
@@ -464,35 +476,30 @@ if ($cfg['DefaultPropDisplay'] == 'horizontal') {
     <table border="<?php echo $cfg['Border']; ?>">
     <tr>
 <?php
-    if (is_array($header_cells)) {
-        foreach($header_cells AS $header_nr => $header_val) {
+@reset($header_cells);
+while(@list($header_nr, $header_val) = @each($header_cells)) {
 ?>
         <th><?php echo $header_val; ?></th>
 <?php
-        }
-    }
+}
 ?>
     </tr>
 <?php
-    if (is_array($content_cells)) {
-        $i = 0;
-        foreach($content_cells AS $content_nr => $content_row) {
-            $i++;
-            echo "\n" . '<tr>' . "\n";
+@reset($content_cells);
+$i = 0;
+while(@list($content_nr, $content_row) = @each($content_cells)) {
+    $i++;
+    echo "\n" . '<tr>' . "\n";
 
-            $bgcolor = ($i % 2) ? $cfg['BgcolorOne'] : $cfg['BgcolorTwo'];
+    $bgcolor = ($i % 2) ? $cfg['BgcolorOne'] : $cfg['BgcolorTwo'];
 
-            if (is_array($content_row)) {
-                foreach($content_row AS $content_row_nr => $content_row_val) {
+    while(list($content_row_nr, $content_row_val) = @each($content_row)) {
 ?>
         <td bgcolor="<?php echo $bgcolor; ?>"><?php echo $content_row_val; ?></td>
 <?php
-                }
-            }
-
-            echo "\n" . '</tr>' . "\n";
-        }
     }
+    echo "\n" . '</tr>' . "\n";
+}
 ?>
     </table>
     <br />
@@ -501,15 +508,14 @@ if ($cfg['DefaultPropDisplay'] == 'horizontal') {
 ?>
     <table border="<?php echo $cfg['Border']; ?>">
 <?php
-    if (is_array($header_cells)) {
-        $i = 0;
-        foreach($header_cells AS $header_nr => $header_val) {
-            echo "\n" . '<tr>' . "\n";
+@reset($header_cells);
+$i = 0;
+while(@list($header_nr, $header_val) = @each($header_cells)) {
+    echo "\n" . '<tr>' . "\n";
 ?>
         <th align="right"><?php echo $header_val; ?></th>
 <?php
-    $cnt_content_cells = count($content_cells);
-    for ($j = 0; $j < $cnt_content_cells; $j++) {
+    for ($j = 0; $j < count($content_cells); $j++) {
         if (isset($content_cells[$j][$i]) && $content_cells[$j][$i] != '') {
             $bgcolor = ($j % 2) ? $cfg['BgcolorOne'] : $cfg['BgcolorTwo'];
     ?>
@@ -520,15 +526,14 @@ if ($cfg['DefaultPropDisplay'] == 'horizontal') {
 
     echo "\n" . '</tr>' . "\n";
     $i++;
-        }
-    }
+}
 ?>
     </table>
     <br />
 <?php
 }
 
-if ($action == 'tbl_create.php') {
+if ($action == 'tbl_create.php' && PMA_MYSQL_INT_VERSION >= 32300) {
     echo "\n";
     ?>
     <table>

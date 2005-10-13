@@ -10,7 +10,7 @@ $LDMinutes='Dakika';
 $LDHours='Saat';
 $LDBatchNr='Küme No.';
 $LDCaseNr='Olgu numarasý';
-$LDHouse='House';
+$LDHouse='Ev';
 $LDHematology='Hematoloji';
 $LDCoagulation='Pýhtýlaþma';
 $LDUrine='Ýdrar';
@@ -41,7 +41,7 @@ $LDShortMonth=array('',
 								   'Kas',
 								   'Ara');
 								   
-$LDShortDay=array('Pz','Pt','Sa','Ça','Pe','Cu','Ct','So');
+$LDShortDay=array('Pz','Pt','Sa','Ça','Pe','Cu','Ct','Pz');
 				
 $LDBatchNumber='Küme no.';
 $LDMaterial='Materyel:';
@@ -468,11 +468,6 @@ $LD_Elements = array('tx_1'=>'Biyokimya',
 								 'tx_29'=>'klinik bilgi',
 								  );
 /* 2002-09-03 EL */							  
-$LDSearchPatient='Hasta arama';
-$LDPlsSelectPatientFirst='Lütfen önce hastayý arayýnýz.';
-/* 2002-09-11 EL */
-$LDPendingTestRequest='Bekleyen  Test Ýstemi';
-/* 2002-10-14 EL */
-$LDDone='Bitti! Formu arþive taþý';
+
 
 ?>

@@ -6,16 +6,16 @@
  * Gets the variables sent or posted to this script, then displays headers
  */
 if (!isset($selected_tbl)) {
-    require_once('./libraries/grab_globals.lib.php');
-    require_once('./header.inc.php');
+    include('./libraries/grab_globals.lib.php');
+    include('./header.inc.php');
 }
 
 
 /**
  * Gets the relations settings
  */
-require_once('./libraries/relation.lib.php');
-require_once('./libraries/transformations.lib.php');
+require('./libraries/relation.lib.php');
+require('./libraries/transformations.lib.php');
 
 $cfgRelation  = PMA_getRelationsParam();
 
@@ -61,7 +61,12 @@ if (!$rowset) {
 }
 $count  = 0;
 while ($row = mysql_fetch_array($rowset)) {
-    $myfieldname = 'Tables_in_' . htmlspecialchars($db);
+    if (PMA_MYSQL_INT_VERSION >= 32303) {
+        $myfieldname = 'Tables_in_' . htmlspecialchars($db);
+    }
+    else {
+        $myfieldname = 'Tables in ' . htmlspecialchars($db);
+    }
     $table        = $row[$myfieldname];
     if ($cfgRelation['commwork']) {
         $comments = PMA_getComments($db, $table);
@@ -76,11 +81,19 @@ while ($row = mysql_fetch_array($rowset)) {
      * Gets table informations
      */
     // The 'show table' statement works correct since 3.23.03
-    $local_query  = 'SHOW TABLE STATUS LIKE \'' . PMA_sqlAddslashes($table, TRUE) . '\'';
-    $result       = PMA_mysql_query($local_query) or PMA_mysqlDie('', $local_query, '', $err_url);
-    $showtable    = PMA_mysql_fetch_array($result);
-    $num_rows     = (isset($showtable['Rows']) ? $showtable['Rows'] : 0);
-    $show_comment = (isset($showtable['Comment']) ? $showtable['Comment'] : '');
+    if (PMA_MYSQL_INT_VERSION >= 32303) {
+         $local_query  = 'SHOW TABLE STATUS LIKE \'' . PMA_sqlAddslashes($table, TRUE) . '\'';
+         $result       = PMA_mysql_query($local_query) or PMA_mysqlDie('', $local_query, '', $err_url);
+         $showtable    = PMA_mysql_fetch_array($result);
+         $num_rows     = (isset($showtable['Rows']) ? $showtable['Rows'] : 0);
+         $show_comment = (isset($showtable['Comment']) ? $showtable['Comment'] : '');
+    } else {
+         $local_query  = 'SELECT COUNT(*) AS count FROM ' . PMA_backquote($table);
+         $result       = PMA_mysql_query($local_query) or PMA_mysqlDie('', $local_query, '', $err_url);
+         $showtable    = array();
+         $num_rows     = PMA_mysql_result($result, 0, 'count');
+         $show_comment = '';
+    } // end display comments
     if ($result) {
          mysql_free_result($result);
     }
@@ -117,7 +130,10 @@ while ($row = mysql_fetch_array($rowset)) {
         // I don't know what does following column mean....
         // $indexes_info[$row['Key_name']]['Packed']          = $row['Packed'];
 
-        $indexes_info[$row['Key_name']]['Comment']     = $row['Comment'];
+        if (PMA_MYSQL_INT_VERSION >= 32300) {
+            // rabus: The 'Comment' field was added in MySQL 3.23.0.
+            $indexes_info[$row['Key_name']]['Comment']     = $row['Comment'];
+        }
 
         $indexes_data[$row['Key_name']][$row['Seq_in_index']]['Column_name']  = $row['Column_name'];
         if (isset($row['Sub_part'])) {
@@ -198,8 +214,8 @@ while ($row = mysql_fetch_array($rowset)) {
         $type             = $row['Type'];
         // reformat mysql query output - staybyte - 9. June 2001
         // loic1: set or enum types: slashes single quotes inside options
-        if (preg_match('@^(set|enum)\((.+)\)$@i', $type, $tmp)) {
-            $tmp[2]       = substr(preg_replace('@([^,])\'\'@', '\\1\\\'', ',' . $tmp[2]), 1);
+        if (eregi('^(set|enum)\((.+)\)$', $type, $tmp)) {
+            $tmp[2]       = substr(ereg_replace('([^,])\'\'', '\\1\\\'', ',' . $tmp[2]), 1);
             $type         = $tmp[1] . '(' . str_replace(',', ', ', $tmp[2]) . ')';
             $type_nowrap  = '';
 
@@ -207,13 +223,13 @@ while ($row = mysql_fetch_array($rowset)) {
             $unsigned     = 0;
             $zerofill     = 0;
         } else {
-            $binary       = stristr($row['Type'], 'binary');
-            $unsigned     = stristr($row['Type'], 'unsigned');
-            $zerofill     = stristr($row['Type'], 'zerofill');
+            $binary       = eregi('BINARY', $row['Type'], $test);
+            $unsigned     = eregi('UNSIGNED', $row['Type'], $test);
+            $zerofill     = eregi('ZEROFILL', $row['Type'], $test);
             $type_nowrap  = ' nowrap="nowrap"';
-            $type         = preg_replace('@BINARY@i', '', $type);
-            $type         = preg_replace('@ZEROFILL@i', '', $type);
-            $type         = preg_replace('@UNSIGNED@i', '', $type);
+            $type         = eregi_replace('BINARY', '', $type);
+            $type         = eregi_replace('ZEROFILL', '', $type);
+            $type         = eregi_replace('UNSIGNED', '', $type);
             if (empty($type)) {
                 $type     = '&nbsp;';
             }
@@ -305,17 +321,17 @@ echo "\n";
 <!--
 function printPage()
 {
-    document.getElementById('print').style.visibility = 'hidden';
+    document.all.print.style.visibility = 'hidden';
     // Do print the page
     if (typeof(window.print) != 'undefined') {
         window.print();
     }
-    document.getElementById('print').style.visibility = '';
+    document.all.print.style.visibility = '';
 }
 //-->
 </script>
 <?php
-echo '<br /><br />&nbsp;<input type="button" style="visibility: ; width: 100px; height: 25px" id="print" value="' . $strPrint . '" onclick="printPage()">' . "\n";
+echo '<br /><br />&nbsp;<input type="button" style="visibility: ; width: 100px; height: 25px" name="print" value="' . $strPrint . '" onclick="printPage()">' . "\n";
 
-require_once('./footer.inc.php');
+require('./footer.inc.php');
 ?>

@@ -403,4 +403,10 @@ $LDSimilarData2='The following listed persons have similar personal data.';
 $LDPlsCheckFirst='Please check it out first before you decide the next step.';
 $LDPlsCheckFirst2='Please check them out first before you decide the next step.';
 $LDShowDetails='Show details';
+
+# 2004-05-22 KB
+$LDNr='Nr.';
+$LDOtherHospitalNr='Other Hospital Nr.';
+$LDSelectOtherHospital = 'Select other hospital to change the number';
+$LDNoNrNoDelete = 'no number = delete';
 ?>

@@ -1,20 +1,20 @@
 <?php
 $LDPerson='Persona';
 $LDPatient='Paziente';
-$LDBloodGroup='Blood group';
+$LDBloodGroup='Gruppo sanguigno';
 # these are blood groups
 $LDA='A';
 $LDB='B';
 $LDAB='AB';
 $LDO='O';
 # 2003-08-28 EL
-$LDPlsEnterLastName='Please enter the family name';
-$LDPlsEnterFirstName='Please enter the first name';
-$LDPlsEnterDateBirth='Please enter the date of birth';
-$LDPlsSelectSex='Please select the sex';
-$LDPlsEnterStreetName='Please enter the street name';
-$LDPlsEnterBldgNr='Please enter the house or building number';
+$LDPlsEnterLastName='Inserire il cognome';
+$LDPlsEnterFirstName='Inserire il nome';
+$LDPlsEnterDateBirth='Inserire la data di nascita';
+$LDPlsSelectSex='Inserire il sesso';
+$LDPlsEnterStreetName='Inserire l\'indirizzo';
+$LDPlsEnterBldgNr='Inserire il numero civico';
 #2003-10-03 EL
-$LDPlsEnterZip='Please enter the zip code';
-$LDPlsEnterFullName='Please enter your full name';
+$LDPlsEnterZip='Inserire il CAP';
+$LDPlsEnterFullName='Inserire il proprio nome e cognome';
 ?>

@@ -6,8 +6,8 @@
 /**
  * Gets some core libraries
  */
-require_once('./libraries/grab_globals.lib.php');
-require_once('./libraries/common.lib.php');
+require('./libraries/grab_globals.lib.php');
+require('./libraries/common.lib.php');
 
 /**
  * Displays an error message and exits if the user isn't allowed to use this
@@ -17,10 +17,11 @@ if (!$cfg['ShowChgPassword']) {
     $cfg['ShowChgPassword'] = @PMA_mysql_query('USE mysql', $userlink);
 }
 if ($cfg['Server']['auth_type'] == 'config' || !$cfg['ShowChgPassword']) {
-    require_once('./header.inc.php');
-    echo '<p><b>' . $strError . '</b></p>' . "\n"
-       . '<p>&nbsp;&nbsp;&nbsp;&nbsp;' .  $strNoRights . '</p>' . "\n";
-    require_once('./footer.inc.php');
+    include('./header.inc.php');
+    echo '<p><b>' . $strError . '</b></p>' . "\n";
+    echo '<p>&nbsp;&nbsp;&nbsp;&nbsp;' .  $strNoRights . '</p>' . "\n";
+    include('./footer.inc.php');
+    exit();
 } // end if
 
 
@@ -48,7 +49,7 @@ if (isset($nopass)) {
 
         $err_url          = 'user_password.php?' . $common_url_query;
 
-        $sql_query        = 'SET password = ' . (($pma_pw == '') ? '\'\'' : 'PASSWORD(\'' . preg_replace('@.@s', '*', $pma_pw) . '\')');
+        $sql_query        = 'SET password = ' . (($pma_pw == '') ? '\'\'' : 'PASSWORD(\'' . ereg_replace('.', '*', $pma_pw) . '\')');
         $local_query      = 'SET password = ' . (($pma_pw == '') ? '\'\'' : 'PASSWORD(\'' . PMA_sqlAddslashes($pma_pw) . '\')');
         $result           = @PMA_mysql_query($local_query) or PMA_mysqlDie('', '', FALSE, $err_url);
 
@@ -63,7 +64,7 @@ if (isset($nopass)) {
                      : '';
 
         // Displays the page
-        require_once('./header.inc.php');
+        include('./header.inc.php');
         echo '<h1>' . $strChangePassword . '</h1>' . "\n\n";
         $show_query = 'y';
         PMA_showMessage($strUpdateProfileMessage);
@@ -82,7 +83,7 @@ if (isset($nopass)) {
  */
 // Loads the headers
 $js_to_run = 'user_password.js';
-require_once('./header.inc.php');
+require('./header.inc.php');
 echo '<h1>' . $strChangePassword . '</h1>' . "\n\n";
 
 // Displays an error message if required
@@ -134,5 +135,6 @@ $chg_evt_handler = (PMA_USR_BROWSER_AGENT == 'IE' && PMA_USR_BROWSER_VER >= 5)
 /**
  * Displays the footer
  */
-require_once('./footer.inc.php');
+echo "\n";
+require('./footer.inc.php');
 ?>

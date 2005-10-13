@@ -168,7 +168,7 @@ ul {
 }
 /* registration list, search list, etc. title row showing column names */
 .reg_list_titlebar{
-	background-color: #eeeeee;
+	background-color: #66ee66;
 	color: #000066;
 }
 /* admission forms item column */
@@ -223,6 +223,14 @@ hr {
 	background-color: white;
 	padding-left: 6px;
 	padding-right:6px;
+}
+/*----- Registration search mask */
+.reg_searchmask{
+	background-color: #f3f3f3;
+}
+/*----- Registration search bordering block */
+.reg_searchmask_border{
+	background-color: #66ee66;
 }
 a:link {color:#546D8F; text-decoration:none}
 a:visited {color:#546D8F; text-decoration:none}

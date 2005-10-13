@@ -5,9 +5,15 @@
 /**
  * Gets some core libraries
  */
-require_once('./libraries/grab_globals.lib.php');
-require_once('./libraries/common.lib.php');
-require_once('./libraries/bookmark.lib.php');
+if (!defined('PMA_GRAB_GLOBALS_INCLUDED')) {
+    include('./libraries/grab_globals.lib.php');
+}
+if (!defined('PMA_COMMON_LIB_INCLUDED')) {
+    include('./libraries/common.lib.php');
+}
+if (!defined('PMA_BOOKMARK_LIB_INCLUDED')) {
+    include('./libraries/bookmark.lib.php');
+}
 
 PMA_checkParameters(array('db'));
 
@@ -29,13 +35,13 @@ if (!isset($is_db) || !$is_db) {
     }
     if (empty($db) || !$is_db) {
         header('Location: ' . $cfg['PmaAbsoluteUri'] . 'main.php?' . PMA_generate_common_url('', '', '&') . (isset($message) ? '&message=' . urlencode($message) : '') . '&reload=1');
-        exit;
+        exit();
     }
 } // end if (ensures db exists)
 // Displays headers
 if (!isset($message)) {
     $js_to_run = 'functions.js';
-    require_once('./header.inc.php');
+    include('./header.inc.php');
     // Reloads the navigation frame via JavaScript if required
     if (isset($reload) && $reload) {
         echo "\n";

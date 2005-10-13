@@ -1,6 +1,6 @@
 <?php
 /* 
-V2.50 14 Nov 2002  (c) 2000-2002 John Lim (jlim@natsoft.com.my). All rights reserved.
+V4.21 20 Mar 2004  (c) 2000-2004 John Lim (jlim@natsoft.com.my). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence. 
@@ -29,16 +29,23 @@ class ADODB_ado extends ADOConnection {
 	var $_cursor_location = 3; // 2=adUseServer, 3 = adUseClient;
 	var $_lock_type = -1;
 	var $_execute_option = -1;
-					  
-	
+	var $poorAffectedRows = true; 
+	var $charPage;
+		
 	function ADODB_ado() 
 	{ 	
+		$this->_affectedRows = new VARIANT;
 	}
 
+	function ServerInfo()
+	{
+		if (!empty($this->_connectionID)) $desc = $this->_connectionID->provider;
+		return array('description' => $desc, 'version' => '');
+	}
 	
 	function _affectedrows()
 	{
-			return $this->_affectedRows;
+			return $this->_affectedRows->value;
 	}
 	
 	// you can also pass a connection string like this:
@@ -49,7 +56,11 @@ class ADODB_ado extends ADOConnection {
 		$u = 'UID';
 		$p = 'PWD';
 	
-		$dbc = new COM('ADODB.Connection');
+		if (!empty($this->charPage))
+			$dbc = new COM('ADODB.Connection',null,$this->charPage);
+		else
+			$dbc = new COM('ADODB.Connection');
+			
 		if (! $dbc) return false;
 
 		/* special support if provider is mssql or access */
@@ -129,7 +140,7 @@ class ADODB_ado extends ADOConnection {
 
 */
 	
-	function MetaTables()
+	function &MetaTables()
 	{
 		$arr= array();
 		$dbc = $this->_connectionID;
@@ -151,7 +162,7 @@ class ADODB_ado extends ADOConnection {
 		return $arr;
 	}
 	
-	function MetaColumns($table)
+	function &MetaColumns($table)
 	{
 		$table = strtoupper($table);
 		$arr= array();
@@ -182,6 +193,9 @@ class ADODB_ado extends ADOConnection {
 		return $arr;
 	}
 	
+
+
+	
 	/* returns queryID or false */
 	function &_query($sql,$inputarr=false) 
 	{
@@ -190,7 +204,11 @@ class ADODB_ado extends ADOConnection {
 		
 	//	return rs	
 		if ($inputarr) {
-			$oCmd = new COM('ADODB.Command');
+			
+			if (!empty($this->charPage))
+				$oCmd = new COM('ADODB.Command',null,$this->charPage);
+			else
+				$oCmd = new COM('ADODB.Command');
 			$oCmd->ActiveConnection = $dbc;
 			$oCmd->CommandText = $sql;
 			$oCmd->CommandType = 1;
@@ -298,12 +316,14 @@ class ADORecordSet_ado extends ADORecordSet {
 	var $canSeek = true;
   	var $hideErrors = true;
 		  
-	function ADORecordSet_ado(&$id)
+	function ADORecordSet_ado($id,$mode=false)
 	{
-	global $ADODB_FETCH_MODE;
-	
-		$this->fetchMode = $ADODB_FETCH_MODE;
-		return $this->ADORecordSet($id);
+		if ($mode === false) { 
+			global $ADODB_FETCH_MODE;
+			$mode = $ADODB_FETCH_MODE;
+		}
+		$this->fetchMode = $mode;
+		return $this->ADORecordSet($id,$mode);
 	}
 
 
@@ -445,8 +465,14 @@ class ADORecordSet_ado extends ADORecordSet {
 	adPropVariant	= 138,
 	adVarNumeric	= 139
 */
-	function MetaType($t,$len=-1)
+	function MetaType($t,$len=-1,$fieldobj=false)
 	{
+		if (is_object($t)) {
+			$fieldobj = $t;
+			$t = $fieldobj->type;
+			$len = $fieldobj->max_length;
+		}
+		
 		if (!is_numeric($t)) return $t;
 		
 		switch ($t) {
@@ -494,7 +520,10 @@ class ADORecordSet_ado extends ADORecordSet {
 	function _fetch()
 	{	
 		$rs = $this->_queryID;
-		if (!$rs or $rs->EOF) return false;
+		if (!$rs or $rs->EOF) {
+			$this->fields = false;
+			return false;
+		}
 		$this->fields = array();
 	
 		if (!$this->_tarr) {
@@ -517,15 +546,18 @@ class ADORecordSet_ado extends ADORecordSet {
 
 			switch($t) {
 			case 135: // timestamp
-				$this->fields[] = date('Y-m-d H:i:s',(integer)$f->value);
-				break;
-				
+				if (!strlen((string)$f->value)) $this->fields[] = false;
+				else $this->fields[] = adodb_date('Y-m-d H:i:s',(float)$f->value);
+				break;			
 			case 133:// A date value (yyyymmdd) 
-				$val = $f->value;
-				$this->fields[] = substr($val,0,4).'-'.substr($val,4,2).'-'.substr($val,6,2);
+				if ($val = $f->value) {
+					$this->fields[] = substr($val,0,4).'-'.substr($val,4,2).'-'.substr($val,6,2);
+				} else
+					$this->fields[] = false;
 				break;
 			case 7: // adDate
-				$this->fields[] = date('Y-m-d',(integer)$f->value);
+				if (!strlen((string)$f->value)) $this->fields[] = false;
+				else $this->fields[] = adodb_date('Y-m-d',(float)$f->value);
 				break;
 			case 1: // null
 				$this->fields[] = false;
@@ -545,13 +577,31 @@ class ADORecordSet_ado extends ADORecordSet {
 		if ($this->hideErrors) error_reporting($olde);
 		@$rs->MoveNext(); // @ needed for some versions of PHP!
 		
-		if ($this->fetchMode == ADODB_FETCH_ASSOC) {
-			$this->fields = $this->GetRowAssoc(ADODB_ASSOC_CASE);
+		if ($this->fetchMode & ADODB_FETCH_ASSOC) {
+			$this->fields = &$this->GetRowAssoc(ADODB_ASSOC_CASE);
 		}
 		return true;
 	}
 	
-	
+		function NextRecordSet()
+		{
+			$rs = $this->_queryID;
+			$this->_queryID = $rs->NextRecordSet();
+			//$this->_queryID = $this->_QueryId->NextRecordSet();
+			if ($this->_queryID == null) return false;
+			
+			$this->_currentRow = -1;
+			$this->_currentPage = -1;
+			$this->bind = false;
+			$this->fields = false;
+			$this->_flds = false;
+			$this->_tarr = false;
+			
+			$this->_inited = false;
+			$this->Init();
+			return true;
+		}
+
 	function _close() {
 		$this->_flds = false;
 		@$this->_queryID->Close();// by Pete Dishman (peterd@telephonetics.co.uk)

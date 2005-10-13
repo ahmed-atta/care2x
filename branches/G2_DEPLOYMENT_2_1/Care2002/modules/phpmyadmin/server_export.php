@@ -6,7 +6,7 @@
 /**
  * Checks if the left frame has to be reloaded
  */
-require_once('./libraries/grab_globals.lib.php');
+require('./libraries/grab_globals.lib.php');
 
 
 /**
@@ -39,7 +39,8 @@ if ($server > 0 && empty($dblist)) {
 $multi_values = '<div align="center"><select name="db_select[]" size="6" multiple="multiple">';
 $multi_values .= "\n";
 
-foreach($dblist AS $current_db) {
+reset($dblist);
+while (list(, $current_db) = each($dblist)) {
     if (!empty($selectall) || (isset($tmp_select) && strpos(' ' . $tmp_select, '|' . $current_db . '|'))) {
         $is_selected = ' selected="selected"';
     } else {
@@ -51,7 +52,7 @@ foreach($dblist AS $current_db) {
 $multi_values .= "\n";
 $multi_values .= '</select></div>';
 
-$checkall_url = 'server_export.php?'
+$checkall_url = 'server_export.php?' 
               . PMA_generate_common_url()
               . '&amp;goto=db_details_export.php';
 
@@ -62,11 +63,12 @@ $multi_values .= '<br />
         <br /><br />';
 
 $export_type = 'server';
-require_once('./libraries/display_export.lib.php');
+require('./libraries/display_export.lib.php');
 
 
 /**
  * Displays the footer
  */
-require_once('./footer.inc.php');
+require('./footer.inc.php');
 ?>
+

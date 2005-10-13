@@ -28,7 +28,8 @@ echo '<h2>' . "\n"
  */
 if (!$is_superuser && !$cfg['ShowMysqlVars']) {
     echo $strNoPrivileges;
-    require_once('./footer.inc.php');
+    include('./footer.inc.php');
+    exit;
 }
 
 
@@ -77,7 +78,7 @@ echo '&nbsp;</th>' . "\n";
     </tr>
 <?php
 $useBgcolorOne = TRUE;
-foreach ($serverVars as $name => $value) {
+while (list($name, $value) = each($serverVars)) {
 ?>
     <tr>
         <td bgcolor="<?php echo $useBgcolorOne ? $cfg['BgcolorOne'] : $cfg['BgcolorTwo']; ?>">
@@ -107,6 +108,6 @@ foreach ($serverVars as $name => $value) {
 /**
  * Sends the footer
  */
-require_once('./footer.inc.php');
+require('./footer.inc.php');
 
 ?>

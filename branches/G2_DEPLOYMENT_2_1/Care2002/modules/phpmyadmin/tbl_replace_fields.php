@@ -7,7 +7,9 @@
 
 // Check parameters
 
-require_once('./libraries/common.lib.php');
+if (!defined('PMA_COMMON_LIB_INCLUDED')) {
+    include('./libraries/common.lib.php');
+}
 
 PMA_checkParameters(array('db','encoded_key'));
 
@@ -26,23 +28,18 @@ PMA_checkParameters(array('db','encoded_key'));
 // binary file is uploaded, thus bypassing further manipulation of $val.
 
 $check_stop = false;
-
-// Check if a multi-edit row was found
-${'me_fields_upload_' . $encoded_key}      = (isset($enc_primary_key) && isset(${'fields_upload_' . $encoded_key}['multi_edit'])      ? ${'fields_upload_' . $encoded_key}['multi_edit'][$enc_primary_key]      : (isset(${'fields_upload_' . $encoded_key})      ? ${'fields_upload_' . $encoded_key}      : null));
-${'me_fields_uploadlocal_' . $encoded_key} = (isset($enc_primary_key) && isset(${'fields_uploadlocal_' . $encoded_key}['multi_edit']) ? ${'fields_uploadlocal_' . $encoded_key}['multi_edit'][$enc_primary_key] : (isset(${'fields_uploadlocal_' . $encoded_key}) ? ${'fields_uploadlocal_' . $encoded_key} : null));
-
-if (isset(${'me_fields_upload_' . $encoded_key}) && ${'me_fields_upload_' . $encoded_key} != 'none'){
+if (isset(${"fields_upload_" . $encoded_key}) && ${"fields_upload_" . $encoded_key} != 'none'){
     // garvin: This fields content is a blob-file upload.
 
-    if (!empty(${'me_fields_upload_' . $encoded_key})) {
+    if (!empty(${"fields_upload_" . $encoded_key})) {
         // garvin: The blob-field is not empty. Check what we have there.
 
-        $data_file = ${'me_fields_upload_' . $encoded_key};
+        $data_file = ${"fields_upload_" . $encoded_key};
 
         if (is_uploaded_file($data_file)) {
             // garvin: A valid uploaded file is found. Look into the file...
 
-            $val = fread(fopen($data_file, 'rb'), filesize($data_file));
+            $val = fread(fopen($data_file, "rb"), filesize($data_file));
             // nijel: This is probably the best way how to put binary data
             // into MySQL and it also allow not to care about charset
             // conversion that would otherwise corrupt the data.
@@ -61,14 +58,17 @@ if (isset(${'me_fields_upload_' . $encoded_key}) && ${'me_fields_upload_' . $enc
             // void
         }
 
-    } elseif (!empty(${'me_fields_uploadlocal_' . $encoded_key})) {
-        if (substr($cfg['UploadDir'], -1) != '/') {
-            $cfg['UploadDir'] .= '/';
-        }
-        $file_to_upload = $cfg['UploadDir'] . preg_replace('@\.\.*@', '.', ${'me_fields_uploadlocal_' . $encoded_key});
+    } elseif (!empty(${'fields_uploadlocal_' . $encoded_key})) {
+        $file_to_upload = $cfg['UploadDir'] . eregi_replace('\.\.*', '.', ${'fields_uploadlocal_' . $encoded_key});
 
         // A local file will be uploaded.
-        $open_basedir = @ini_get('open_basedir');
+        $open_basedir     = '';
+        if (PMA_PHP_INT_VERSION >= 40000) {
+            $open_basedir = @ini_get('open_basedir');
+        }
+        if (empty($open_basedir)) {
+            $open_basedir = @get_cfg_var('open_basedir');
+        }
 
         // If we are on a server with open_basedir, we must move the file
         // before opening it. The doc explains how to create the "./tmp"
@@ -85,7 +85,11 @@ if (isset(${'me_fields_upload_' . $encoded_key}) && ${'me_fields_upload_' . $enc
                 $file_to_upload = '';
             } else {
                 $new_file_to_upload = $tmp_subdir . basename($file_to_upload);
-                move_uploaded_file($file_to_upload, $new_file_to_upload);
+                if (PMA_PHP_INT_VERSION < 40003) {
+                    copy($file_to_upload, $new_file_to_upload);
+                } else {
+                    move_uploaded_file($file_to_upload, $new_file_to_upload);
+                }
 
                 $file_to_upload = $new_file_to_upload;
                 $unlink = true;
@@ -93,8 +97,8 @@ if (isset(${'me_fields_upload_' . $encoded_key}) && ${'me_fields_upload_' . $enc
         }
 
         if ($file_to_upload != '') {
-
-            $val = fread(fopen($file_to_upload, 'rb'), filesize($file_to_upload));
+            
+            $val = fread(fopen($file_to_upload, "rb"), filesize($file_to_upload));
             if (!empty($val)) {
                 $val = '0x' . bin2hex($val);
                 $seen_binary = TRUE;
@@ -112,31 +116,19 @@ if (isset(${'me_fields_upload_' . $encoded_key}) && ${'me_fields_upload_' . $enc
 }
 
 if (!$check_stop) {
-
 // f i e l d    v a l u e    i n    t h e    f o r m
-
-    if (isset($me_fields_type[$encoded_key])) $type = $me_fields_type[$encoded_key];
+    if (isset($fields_type[$encoded_key])) $type = $fields_type[$encoded_key];
     else $type = '';
-    
-    $f = 'field_' . md5($key);
-    $t_fval = (isset($$f) ? $$f : null);
-    
-    if (isset($t_fval['multi_edit']) && isset($t_fval['multi_edit'][$enc_primary_key])) {
-        $fval = &$t_fval['multi_edit'][$enc_primary_key];
-    } else {
-        $fval = &$t_fval;
-    }
-    
     switch (strtolower($val)) {
-        // let users type NULL or null to input this string and not a NULL value
-        //case 'null':
-        //    break;
+        case 'null':
+            break;
         case '':
             switch ($type) {
                 case 'enum':
                     // if we have an enum, then construct the value
-                        if (!empty($fval)) {
-                            $val     = implode(',', $fval);
+                        $f = 'field_' . md5($key);
+                        if (!empty($$f)) {
+                            $val     = implode(',', $$f);
                             if ($val == 'null') {
                                 // void
                             } else {
@@ -150,8 +142,9 @@ if (!$check_stop) {
                         break;
                 case 'set':
                     // if we have a set, then construct the value
-                    if (!empty($fval)) {
-                        $val = implode(',', $fval);
+                    $f = 'field_' . md5($key);
+                    if (!empty($$f)) {
+                        $val = implode(',', $$f);
                         // the data here is not urlencoded!
                         //$val = "'" . PMA_sqlAddslashes(urldecode($val)) . "'";
                         $val = "'" . PMA_sqlAddslashes($val) . "'";
@@ -161,8 +154,9 @@ if (!$check_stop) {
                     break;
                 case 'foreign':
                     // if we have a foreign key, then construct the value
-                    if (!empty($fval)) {
-                        $val     = implode(',', $fval);
+                    $f = 'field_' . md5($key);
+                    if (!empty($$f)) {
+                        $val     = implode(',', $$f);
                         if ($val == 'null') {
                             // void
                         } else {
@@ -208,7 +202,7 @@ if (!$check_stop) {
     // Was the Null checkbox checked for this field?
     // (if there is a value, we ignore the Null checkbox: this could
     // be possible if Javascript is disabled in the browser)
-    if (isset($me_fields_null) && isset($me_fields_null[$encoded_key])
+    if (isset($fields_null) && isset($fields_null[$encoded_key])
         && $val=="''") {
         $val = 'NULL';
     }

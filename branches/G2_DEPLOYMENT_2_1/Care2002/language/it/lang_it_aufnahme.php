@@ -33,7 +33,7 @@ $LDGoodDay='Salve! Lieto di rivederla!';
 $LDGoodAfternoon='Salve!';
 $LDGoodEvening='Buonasera';
 
-$LDNewForm='E\' necessario un modulo vuoto.';
+$LDNewForm='Mi serve un nuovo modulo da riempire.';
 
 $LDForceSave='Salva comunque';
 $LDSaveData='Salva i dati';
@@ -133,20 +133,20 @@ $LDServiceType='Tipo di servizio';
 
 $LDClick2Print='Selezionare le etichette con codice a barre per stampare';
 
-$LDEnterDiagnosisNote='Attach links to diagnosis related notes & publications:';
-$LDEnterTherapyNote='Attach links to therapy related notes & publications:';
-$LDSeeDiagnosisNote='Diagnosis related notes & publications:';
-$LDSeeTherapyNote='Therapy related notes & publications:';
-$LDMakeBarcodeLabels='Make barcode labels';
+$LDEnterDiagnosisNote='collega note e pubblicazioni relative alla diagnosi:';
+$LDEnterTherapyNote='collega note e pubblicazioni relative alla terapia:';
+$LDSeeDiagnosisNote='Note e pubblicazioni relative alla diagnosi:';
+$LDSeeTherapyNote='Note e pubblicazioni relative alla terapia:';
+$LDMakeBarcodeLabels='Prepara etichette codice a barre';
 
-$LDPlsEnterDept='<b>Please enter your department, clinic, or work area.</b><br>(e.g. PLOP, Internal Med2, or M4A, etc.)';
-$LDOkSaveNow='OK save now';
+$LDPlsEnterDept='<b>Inserire il reparto, la clinica, o l\'area di lavoro.</b><br>(es. Day Hospital, CED, M4A, etc.)';
+$LDOkSaveNow='OK salva';
 
 $LD_ddpMMpyyyy='gg.mm.aaaa';
 $LD_yyyyhMMhdd='aaaa-mm-gg';
 $LD_MMsddsyyyy='mm/gg/aaaa';
 /* 2002-10-13 EL */
-$LDPlsSelectPatientFirst='Please find the person first.';
+$LDPlsSelectPatientFirst='Prima cerca la persona.';
 /* 2002-11-30 EL */
 $LDPatientRegister='Registrazione';
 $LDRegDate='Data di registrazione';
@@ -155,239 +155,239 @@ $LDRegBy='Registrato da';
 $LDName2='Secondo nome';
 $LDName3='Terzo nome';
 $LDNameMid='Middle name';
-$LDNameMaiden='Maiden name';
-$LDNameOthers='Other names';
-$LDStreet='Street';
+$LDNameMaiden='Cognome da nubile';
+$LDNameOthers='Altri cognomi';
+$LDStreet='Via';
 $LDStreetNr='Num.';
-$LDTownCity='Town/City';
-$LDProvState='Province/State';
-$LDRegion='Region';
-$LDCountry='Country';
+$LDTownCity='Città';
+$LDProvState='Provincia';
+$LDRegion='Regione';
+$LDCountry='Stato';
 $LDCitizenship='Cittadinanza';
-$LDCivilStatus='Stato civiles'; /* Civil status = married, single, divorced, widow */
+$LDCivilStatus='Stato civile'; /* Civil status = married, single, divorced, widow */
 $LDSingle='Celibe/Nubile';
-$LDMarried='Sposato';
-$LDDivorced='Divorziato';
-$LDWidowed='Vedovo';
-$LDSeparated='Separato';
-$LDCellPhone='Cellphone.';
+$LDMarried='Sposato/a';
+$LDDivorced='Divorziato/a';
+$LDWidowed='Vedovo/a';
+$LDSeparated='Separato/a';
+$LDCellPhone='Cell.';
 $LDFax='Fax';
 $LDEmail='Email';
-$LDZipCode='Zip';
-$LDPhoto='Photo';
+$LDZipCode='CAP';
+$LDPhoto='Foto';
 /* 2002-12-02 EL*/
-$LDPatientRegisterTxt='Register patient, search registrations, archive research';
+$LDPatientRegisterTxt='Accetta paziente, cerca accettazioni, ricerche in archivio';
 $LDAdmitNr='Codice di accettazione';
 $LDPatient='Paziente';
-$LDVisit='Visit';
-$LDVisitTxt='Ambulatory or outpatient admission';
-$LDAdmissionTxt='Inpatient admission, search, research';
-$LDImmunization='Immunizzazione';
-$LDESE='Enter, search, edit';
-$LDImmunizationTxt=$LDESE.' immunization report';
+$LDVisit='Visita';
+$LDVisitTxt='Accettazione da ambulatorio o esterna';
+$LDAdmissionTxt='Accettazione interna, cerca, ricerca';
+$LDImmunization='Immunologia';
+$LDESE='Inserisci, cerca, modifica';
+$LDImmunizationTxt=$LDESE.' Rapporto di immunologia';
 $LDDRG='DRG (composite)';
 $LDDRGTxt=$LDESE.' DRG (Diagnosis related groups)';
 $LDProcedures='Procedure';
-$LDProceduresTxt=$LDESE.' therapy procedures';
+$LDProceduresTxt=$LDESE.' procedure terapeutiche';
 $LDPrescriptions='Prescrizioni';
 $LDPrescriptionsTxt=$LDESE.' di prescrizione';
 /* 2002-12-03 EL*/
-$LDDiagXResults='Resultati diagnostici';
-$LDDiagXResultsTxt='Search, research, display diagnostic results or reports';
+$LDDiagXResults='Risultati diagnostici';
+$LDDiagXResultsTxt='Cerca, ricerca, mostra risultati o rapporti diagnostici';
 $LDAppointments='Appuntamenti';
-$LDAppointmentsTxt=$LDESE.', research appointments or schedules';
-$LDPatientDev='Sviluppi';
-$LDPatientDevTxt=$LDESE.', display reports on patient\'s development';
-$LDWtHt='Pesi & Altezze';
-$LDWtHtTxt=$LDESE.' weights & heights data';
+$LDAppointmentsTxt=$LDESE.', cerca appuntamenti';
+$LDPatientDev='decorso';
+$LDPatientDevTxt=$LDESE.', cerca rapporti sul decorso del paziente';
+$LDWtHt='Pesi & altezze';
+$LDWtHtTxt=$LDESE.' dati di peso e altezza';
 $LDPregnancies='Gravidanze';
-$LDPregnanciesTxt=$LDESE.' pregnancy information';
-$LDBirthDetails='Note di nascita';
-$LDBirthDetailsTxt=$LDESE.' birth details';
+$LDPregnanciesTxt=$LDESE.' informazioni sulla gravidanza';
+$LDBirthDetails='Nascite';
+$LDBirthDetailsTxt=$LDESE.' dettagli sulle nascite';
 /* 2002-12-07 EL*/
 $LDInsuranceCo='Compagnia di assicurazioni';
-$LDInsuranceNr_2='Extra Insurance Nr.';
-$LDInsuranceCo_2='Extra Insurance Co.';
-$LDBillType='Billing Type';
-$LDWard='Ward/Clinic';
-$LDMakeWristBand='Make wristbands';
-$LDClickImgToPrint='Click the image to print out.';
-$LDPrintPortraitFormat='Set your printer to landscape format.';
+$LDInsuranceNr_2='Polizza coassicurazione';
+$LDInsuranceCo_2='Compagnia coassicurazione';
+$LDBillType='Tipo di fattura';
+$LDWard='Reparto/clinica';
+$LDMakeWristBand='Prepara braccialetti identificativi';
+$LDClickImgToPrint='Selezionare l\'immagine per stamparla.';
+$LDPrintPortraitFormat='Scegliere il formato di stampa orizzontale (landscape).';
 /* 2002-12-14 EL */
-$LDRegistryNr='PID Nr.';
-$LDRedirectToRegistry='Note: Your search will be redirected to the registration module!';
+$LDRegistryNr='Numero PID';
+$LDRedirectToRegistry='Nota: la ricerca sarà indirizzata al modulo di accettazione!';
 /* 2002-12-24 EL */
-$LDSSSNr='SSS Nr.';
-$LDNatIdNr='National ID Nr.';
-$LDEthnicOrigin='Ethnia d\'origine';
-$LDOtherNr='Other number(s)';
+$LDSSSNr='Codice SSN';
+$LDNatIdNr='Codice SSN';
+$LDEthnicOrigin='Etnia di origine';
+$LDOtherNr='Altri codici';
 /* 2002-12-25 EL */
-$LDSendBill='Send bill to';
-$LDContactPerson='Contact person';
+$LDSendBill='Inviare fattura a';
+$LDContactPerson='Persona di contatto';
 $LDOptsForPerson='Opzioni per questa persona';
 $LDSickReport='Certificato di malattia';
-$LDAnamnesisForm='Anamnesis form';
-$LDConsentDec='Consent declaration';
+$LDAnamnesisForm='Modulo anamnestico';
+$LDConsentDec='Consenso informato';
 $LDUpdate='Aggiorna';
 /* 2002-12-29 EL */
 $LDGuarantor='Guarantor';
-$LDCareServiceClass='Care service class';
-$LDRoomServiceClass='Room service class';
-$LDAttDrServiceClass='Medical service class';
-$LDAdmitClass='Admission class';
+$LDCareServiceClass='Classe servizio sanitario';
+$LDRoomServiceClass='Classe servizio camera';
+$LDAttDrServiceClass='Classe servizio medico';
+$LDAdmitClass='Classe di accettazione';
 /* 2003-02-15 EL*/
-$LDEnterSearchKeyword='Please enter search keyword';
-$LDSearchFoundData='The search found <font color=red><b>~nr~</b></font> relevant data.';
+$LDEnterSearchKeyword='Inserire chiave di ricerca';
+$LDSearchFoundData='Dati rilevanti trovati: <font color=red><b>~nr~</b></font>.';
 $LDQuickList='Quicklist';
-$LDSeveralInsurances='Patient has several insurances. Click here to edit.';
-$LDTop='Top';
-$LDInsuranceClass='Insurance class';
-$LDRecordsHistory='Storico di database';
+$LDSeveralInsurances='Il paziente ha più di una assicurazione: selezionare qui per modificare.';
+$LDTop='Inizio';
+$LDInsuranceClass='Tipo di assicurazione';
+$LDRecordsHistory='Storico database';
 /* 2003-02-16 EL*/
-$LDNotYetAdmitted='Not yet admitted';
-$LDPatientCurrentlyAdmitted='Patient is currently admitted!';
+$LDNotYetAdmitted='Accettazione non ancora conclusa';
+$LDPatientCurrentlyAdmitted='Il paziente è stato accettato!';
 $LDOptions='Opzioni';
 /** note the ' ~nr~ ' must not be erased it will be replaced by the script with the number of search results ******/
-$LDSearchFoundAdmit='I found <font color=red><b>~nr~</b></font> relevant admission data.';
-$LDPatientNr='Patient Nr.';
-$LDNoRecordYet='~tag~ has no ~obj~ yet.';
-$LDNoRecordFor='Nessuna registrazione di ~obj~ per ~tag~ ancora.';
-$LDRegistrationNr='Registration Nr.';
-$LDDate='Date';
-$LDType='Type';
-$LDMedicine='Medicine';
-$LDTiter='Titer';
-$LDRefreshDate='Refresh date';
-$LDReportingDept='Reporting Dept';
-$LDReportNr='Report Nr.';
-$LDDelivery='Delivery';
-$LDTime='Time';
-$LDClass='Class';
+$LDSearchFoundAdmit='Dati rilevanti di accettazione trovati: <font color=red><b>~nr~</b></font>.';
+$LDPatientNr='Codice paziente';
+$LDNoRecordYet='~tag~ non ha ancora ~obj~.';
+$LDNoRecordFor='Non ci sono ancora registrazioni di ~obj~ per ~tag~.';
+$LDRegistrationNr='Codice registrazione';
+$LDDate='Data';
+$LDType='Tipo';
+$LDMedicine='Medicinale';
+$LDTiter='Titolo';
+$LDRefreshDate='Data aggiornamento';
+$LDReportingDept='Reparto scrivente';
+$LDReportNr='Rapporto n.';
+$LDDelivery='Consegna';
+$LDTime='Ora';
+$LDClass='Classe';
 $LDOutcome='Outcome';
-$LDNrOfFetus='Nr. of Fetuses';
+$LDNrOfFetus='N. di feti';
 $LDDetails='Dettagli';
 /* 2003-03-02 */
-$LDDosage='Dosage';
-$LDAppType='Application type';
-$LDAppBy='Application by';
+$LDDosage='Dosaggio';
+$LDAppType='Tipo di somministrazione';
+$LDAppBy='Somministrazione per';
 $LDNotes='Note';
 $LDEnterNewRecord='Inserisci una nuova registrazione';
 $LDPrescription='Prescrizioni';
-$LDDrugClass='Drug Class';
-$LDPrescribedBy='Prescribed by';
-$LDPharmOrderNr='Pharmacy Order Number';
-$LDEncounterNr='Encounter Nr.';
-$LDValue='Value';
-$LDUnit='Unit';
-$LDWeight='Weight';
-$LDHeight='Height';
-$LDMeasuredBy='Measured by';
+$LDDrugClass='Tipo di medicinale';
+$LDPrescribedBy='Prescritto da';
+$LDPharmOrderNr='Numero ordine farmaceutico';
+$LDEncounterNr='Codice visita';
+$LDValue='Valore';
+$LDUnit='Unità';
+$LDWeight='Peso';
+$LDHeight='Altezza';
+$LDMeasuredBy='Misurato da';
 $LDSickUntil='Unable to work until (inclusive)';
-$LDStartingFrom='Starting from';
-$LDConfirmedOn='Confirmed on';
-$LDInsurersCopy='Insurer\'s copy';
+$LDStartingFrom='Inizio da';
+$LDConfirmedOn='Confermato il';
+$LDInsurersCopy='Copia per l\'assicurazione';
 $LDDiagnosis2='Diagnosi';
 /* 2003-03-03*/
 $LDBy='By';
-$LDSendCopyTo='Send copy to';
+$LDSendCopyTo='Inviare copia a';
 /* 2003-03-05 EL*/
 $LDAndSym='&';
 $LDReports='Relazioni';
-$LDRefererDiagnosis='Referer Diagnosis';
-$LDRefererRecomTherapy='Referer recommended therapy';
-$LDShortNotes='Short Notes';
+$LDRefererDiagnosis='Diagnosi del referente';
+$LDRefererRecomTherapy='Terapia raccomandata dal referente';
+$LDShortNotes='Brevi note';
 /* 2003-03-08 EL */
-$LDCreateNewAppointment='Create new appointment';
-$LDDepartment='Department';
+$LDCreateNewAppointment='Crea nuovo appuntamento';
+$LDDepartment='Reparto';
 $LDRemindPatient='Remind patient';
 $LDRemindBy='Remind by';
 $LDMail='Mail';
 $LDPurpose='Purpose';
 $LDClinician='Clinician';
 $LDPhysician='Physician';
-$LDBackToOptions='Back to options';
+$LDBackToOptions='Torna alle opzioni';
 $LDStatus='Status';
 /* 2003-03-08 EL*/
-$LDUrgency='Urgency';
-$LDNormal='Normal';
-$LDPriority='Priority';
-$LDUrgent='Urgent';
-$LDEmergency='Emergency';
+$LDUrgency='Urgenza';
+$LDNormal='Normale';
+$LDPriority='Priorità';
+$LDUrgent='Urgente';
+$LDEmergency='Emergenza';
 /* 2003-03-09 EL*/
-$LDCancelReason='Reason for cancellation';
-$LDSureCancelAppt='Are you sure you want to cancel this appointment?';
-$LDEnterCancelReason='Enter the reason for cancellation';
-$LDpending='pending';
-$LDcancelled='cancelled';
+$LDCancelReason='Motivo della cancellazione';
+$LDSureCancelAppt='Conferma la cancellazione dell\'appuntamento?';
+$LDEnterCancelReason='Inserire il motivo della cancellazione';
+$LDpending='attivo';
+$LDcancelled='cancellato';
 /* 2003-03-10 EL */
-$LDGotMedAdvice='Did patient receive medical advice?';
+$LDGotMedAdvice='Il paziente ha ricevuto le informazioni mediche?';
 /* 2003-03-15 EL */
-$LDShowDocList='Show document list';
-$LDScheduleNewAppointment='Schedule New Appointment';
+$LDShowDocList='Mostra lista documenti';
+$LDScheduleNewAppointment='Inserisci nuovo appuntamento';
 /* 2003-04-04 EL */
-$LDNoPendingApptThisDay='There is no pending appointment for this day.';
-$LDNoPendingApptToday='There is no pending appointment today.';
+$LDNoPendingApptThisDay='Non ci sono appuntamenti per oggi.';
+$LDNoPendingApptToday='Nessun appuntamento per oggi.';
 /* 2003-04-27 EL */
-$LDOptsForPatient='Opzione per questo paziente';
+$LDOptsForPatient='Opzioni per questo paziente';
 /* 2003-05-06 EL */
 $LDRegisterNewPerson='Registra una nuova persona';
 /* 2003-05-17 EL */
-$LDEnterPersonSearchKey='Enter search keyword: e.g. PID, first name, or family name';
-$LDPersonData='Personal data';
+$LDEnterPersonSearchKey='Inserire la chiave di ricerca: es. codice, nome o cognome';
+$LDPersonData='Dati personali';
 /* 2003-05-26 EL*/
 $LDDiagnoses='Diagnosi';
-$LDCreateNewForm='Create a form for';
-$LDOtherRecords='Other records';
+$LDCreateNewForm='Crea un modulo per';
+$LDOtherRecords='Altri dati';
 /*2003-06-17 El*/
-$LDFullForm='Full form';
-$LDAllContents='All contents';
-$LDAllText='Dynamic contents only';
-$LDDataOnly='Encounter relevant data only';
+$LDFullForm='Modulo completo';
+$LDAllContents='Tutti i contenuti';
+$LDAllText='Solo contenuti dinamici';
+$LDDataOnly='Solo dati essenziali per la visita';
 /*2003-06-21 EL*/
 $LDChartsRecords='Cartella dati';
 # 2003-07-26 EL
 $LDMode='Modo';
 $LDPatientIsDischarged='IL paziente è stato dimesso';
 $LDShow='Visualizza';
-$LDPlannedEncType='Planned admission type';
+$LDPlannedEncType='Tipo di accettazione pianificato';
 # 2003-08-01 EL
-$LDListEncounters='Admissions\' list';
+$LDListEncounters='Lista di accettazione';
 $LDDischarged='Dimesso';
-$LDDischargeDate='Data di dimesso';
+$LDDischargeDate='Data di dimissione';
 # 2003-08-04 EL
 $LDCancelThisAdmission='Cancella questa accettazione';
 $LDInsShortID[1]='PRIV';  // privately paid insurance
 $LDInsShortID[2]='COM'; // Common state sponsored insurance
-$LDInsShortID[3]='SP';    // self pay, direct pay
+$LDInsShortID[3]='DIR';    // self pay, direct pay
 # 2003-08-26 EL
 $LDMeasurements='Misurazioni';
 #2003-08-28 eL
-$LDPlsEnterReferer='Per favore inserisci medico referente';
-$LDPlsEnterRefererDiagnosis='Per favore inserisci diagnosi';
-$LDPlsEnterRefererTherapy='Per favore inserisci terapia raccomandata';
-$LDPlsEnterRefererNotes='Per favore inserisci note di riferimento';
-$LDPlsSelectAdmissionType='Per favore seleziona tipo di accettazione.';
+$LDPlsEnterReferer='Inserire medico referente';
+$LDPlsEnterRefererDiagnosis='Inserire diagnosi';
+$LDPlsEnterRefererTherapy='Inserire terapia raccomandata';
+$LDPlsEnterRefererNotes='Inserire note di riferimento';
+$LDPlsSelectAdmissionType='Selezionare tipo di accettazione.';
 $LDForInpatient='Per ricoverati';
 $LDForOutpatient='Per pazienti esterni';
 #2003-09-18 EL
-$LDPersonSearch='Ricerca di una persona';
+$LDPersonSearch='Ricerca una persona';
 #2003-09-24 EL
-$LDShowing='Mostrare';
+$LDShowing='Mostra';
 $LDPrevious='Precedente';
 $LDNext='Successivo';
 $LDAdvancedSearch='Ricerca avanzata';
 
 #2003-10-28 EL
 $LDIncludeFirstName='Ricerca anche per nome.';
-$LDTipsTricks='Tips & tricks';
+$LDTipsTricks='Suggerimenti';
 #2003-12-06 EL
 $LDPrintPDFDoc='Genera documento in formato PDF';
-$LDDeathDate='Data del Decesso';
+$LDDeathDate='Data del decesso';
 
 # 2003-10-14 NDHC
-$LDITA='Anestesia Endotracheale';
+$LDITA='Anestesia endotracheale';
 $LDLA='Anestesia locale';
-$LDAS='Sedazione Analgesica';
+$LDAS='Sedazione analgesica';
 $LDOral='Orale';
 $LDAnticoagulant='Anticoagulante';
 $LDHemolytic='Emolitico';
@@ -396,7 +396,7 @@ $LDAntibiotic='Antibiotico';
 $LDMask='Maschera';
 $LDIntravenous='Endovenosa';
 $LDSubcutaneous='Sottocutaneo';
-$LDPreAdmission='Pre-ammissione';
+$LDPreAdmission='Pre-accettazione';
 #2004-01-01 EL
 $LDPersonDuplicate='Questa persona sembra essere già registrata.';
 $LDSimilarData='La seguente persona in elenco ha gli stessi dati personali.';
@@ -406,8 +406,8 @@ $LDPlsCheckFirst2='Per favore controlla i dati prima di decidere il prossimo pas
 $LDShowDetails='Mostra dettagli';
 
 # 2004-05-22 KB
-$LDNr='Nr.';
-$LDOtherHospitalNr='Other Hospital Nr.';
-$LDSelectOtherHospital = 'Select other hospital to change the number';
-$LDNoNrNoDelete = 'no number = delete';
+$LDNr='Num.';
+$LDOtherHospitalNr='Num. altro ospedale';
+$LDSelectOtherHospital = 'Selezionare l\'altro ospedale per cambiare il numero';
+$LDNoNrNoDelete = 'per cancellare, non inserire alcun numero';
 ?>

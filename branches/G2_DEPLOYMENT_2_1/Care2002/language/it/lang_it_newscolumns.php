@@ -22,11 +22,11 @@ $LDTitleTag=array
 					dept_ICU=>'Terapia intensiva',
 					dept_lab=>'Laboratorio clinico',
 					patient_admission=>'Accettazione',
-					allamb=>'Day Clinic General',
+					allamb=>'Day Hospital Generale',
 					unfamb=>'Pronto Soccorso',
-					sono=>'Sonography',
-					nuklear=>'Nuclear Diagnostics',
-					inmed=>'Day Clinic di Medicina Interna');
+					sono=>'Sonografia',
+					nuklear=>'Medicina nucleare',
+					inmed=>'Day Hospital di Medicina Interna');
 					
 					
 $LDSubTitle=array
@@ -53,7 +53,7 @@ $LDSubTitle=array
 					dept_lab=>'',
 					patient_admission=>'Informazioni sull\'accettazione',
 					SBDefault=>'Altre informazioni');
-$LDMore='more to article';
+$LDMore='Ulteriori dettagli';
 $LDBackTxt='Indietro';
 $LDClk2Read='Selezionare per leggere';
 
@@ -63,5 +63,5 @@ $LDWrittenBy='Scritto da';
 
 $LDNewsDummy=array(1=>'primo',2=>'secondo',3=>'terzo',4=>'quarto');
 $LDClk2Compose='Selezionare per comporre...';
-$LDClk2Write='Click here to start the editor';
+$LDClk2Write='Selezionare per avviare l\'editor';
 ?>

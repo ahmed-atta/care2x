@@ -6,7 +6,7 @@
 /**
  * Checks if the left frame has to be reloaded
  */
-require_once('./libraries/grab_globals.lib.php');
+require('./libraries/grab_globals.lib.php');
 
 
 /**
@@ -15,19 +15,6 @@ require_once('./libraries/grab_globals.lib.php');
 $js_to_run = 'functions.js';
 require('./server_common.inc.php');
 
-?>
-<script type="text/javascript" language="javascript1.2">
-<!--
-function reload_window(db) {
-    if (typeof(window.parent) != 'undefined'
-        && typeof(window.parent.frames['nav']) != 'undefined') {
-        window.parent.frames['nav'].location.replace('./left.php?<?php echo PMA_generate_common_url('','','&');?>&db=' + db + '&hash=' + <?php echo (($cfg['QueryFrame'] && $cfg['QueryFrameJS']) ? 'window.parent.frames[\'queryframe\'].document.hashform.hash.value' : "'" . md5($cfg['PmaAbsoluteUri']) . "'"); ?>);
-    }
-}
-//-->
-</script>
-
-<?php
 
 /**
  * Sorts the databases array according to the user's choice
@@ -74,7 +61,7 @@ if ((!empty($drop_selected_dbs) || isset($query_type)) && ($is_superuser || $cfg
         $action = 'server_databases.php';
         $submit_mult = 'drop_db' ;
         $err_url = 'server_databases.php?' . PMA_generate_common_url();
-        require('./mult_submits.inc.php');
+        include('./mult_submits.inc.php');
         $message = sprintf($strDatabasesDropped, count($selected));
         // we need to reload the database list now.
         PMA_availableDatabases();
@@ -100,9 +87,10 @@ echo '<h2>' . "\n"
 /**
  * Checks if the user is allowed to do what he tries to...
  */
-if (!empty($dbstats) && !$is_superuser) {
+if (!empty($dbstats) && (!$is_superuser || PMA_MYSQL_INT_VERSION < 32303)) {
     echo $strNoPrivileges . "\n";
-    require_once('./footer.inc.php');
+    include('./footer.inc.php');
+    exit;
 }
 
 
@@ -110,7 +98,7 @@ if (!empty($dbstats) && !$is_superuser) {
  * Prepares the statistics
  */
 $statistics = array();
-foreach($dblist AS $current_db) {
+while (list(, $current_db) = each($dblist)) {
     $tmp_array = array(
         'db_name' => $current_db,
         'tbl_cnt' => 0,
@@ -220,15 +208,15 @@ if (count($statistics) > 0) {
         'idx_sz' => 0,
         'tot_sz' => 0
     );
-    foreach ($statistics as $current) {
+    while (list(, $current) = each($statistics)) {
         list($data_size, $data_unit) = PMA_formatByteDown($current['data_sz'], 3, 1);
         list($idx_size, $idx_unit)   = PMA_formatByteDown($current['idx_sz'], 3, 1);
         list($tot_size, $tot_unit)   = PMA_formatByteDown($current['tot_sz'], 3, 1);
         $total_calc['db_cnt']++;
         $total_calc['tbl_cnt'] += $current['tbl_cnt'];
         $total_calc['data_sz'] += $current['data_sz'];
-        $total_calc['idx_sz']  += $current['idx_sz'];
-        $total_calc['tot_sz']  += $current['tot_sz'];
+        $total_calc['idx_sz'] += $current['idx_sz'];
+        $total_calc['tot_sz'] += $current['tot_sz'];
         echo '        <tr>' . "\n";
         if ($is_superuser || $cfg['AllowUserDropDatabase']) {
             echo '            <td bgcolor="' . ($useBgcolorOne ? $cfg['BgcolorOne'] : $cfg['BgcolorTwo']) . '">' . "\n"
@@ -236,7 +224,7 @@ if (count($statistics) > 0) {
                . '            </td>' . "\n";
         }
         echo '            <td bgcolor="' . ($useBgcolorOne ? $cfg['BgcolorOne'] : $cfg['BgcolorTwo']) . '">' . "\n"
-           . '                <a onclick="reload_window(\'' . urlencode($current['db_name']) . '\'); return true;" href="' . $cfg['DefaultTabDatabase'] . '?' . $url_query . '&amp;db=' . urlencode($current['db_name']) . '" title="' . sprintf($strJumpToDB, htmlspecialchars($current['db_name'])) . '">' . "\n"
+           . '                <a href="' . $cfg['DefaultTabDatabase'] . '?' . $url_query . '&amp;db=' . urlencode($current['db_name']) . '" title="' . sprintf($strJumpToDB, htmlspecialchars($current['db_name'])) . '">' . "\n"
            . '                    ' . htmlspecialchars($current['db_name']) . "\n"
            . '                </a>' . "\n"
            . '            </td>' . "\n";
@@ -269,7 +257,7 @@ if (count($statistics) > 0) {
         }
         if ($is_superuser) {
             echo '            <td bgcolor="' . ($useBgcolorOne ? $cfg['BgcolorOne'] : $cfg['BgcolorTwo']) . '">' . "\n"
-               . '                <a onclick="reload_window(\'' . urlencode($current['db_name']) . '\'); return true;" href="./server_privileges.php?' . $url_query . '&amp;checkprivs=' . urlencode($current['db_name']) . '" title="' . sprintf($strCheckPrivsLong, htmlspecialchars($current['db_name'])) . '">'. "\n"
+               . '                <a href="./server_privileges.php?' . $url_query . '&amp;checkprivs=' . urlencode($current['db_name']) . '" title="' . sprintf($strCheckPrivsLong, htmlspecialchars($current['db_name'])) . '">'. "\n"
                . '                    ' . $strCheckPrivs . "\n"
                . '                </a>' . "\n"
                . '            </td>' . "\n";
@@ -335,7 +323,7 @@ if (count($statistics) > 0) {
     if ($is_superuser || $cfg['AllowUserDropDatabase']) {
         echo '    <ul>' . "\n";
     }
-    if ($is_superuser && empty($dbstats)) {
+    if ($is_superuser && empty($dbstats) && PMA_MYSQL_INT_VERSION >= 32303) {
         echo '        <li>' . "\n"
            . '            <b>' . "\n"
            . '                <a href="./server_databases.php?' . $url_query . '&amp;dbstats=1" title="' . $strDatabasesStatsEnable . '">' . "\n"
@@ -372,6 +360,6 @@ if (count($statistics) > 0) {
 /**
  * Sends the footer
  */
-require_once('./footer.inc.php');
+require('./footer.inc.php');
 
 ?>

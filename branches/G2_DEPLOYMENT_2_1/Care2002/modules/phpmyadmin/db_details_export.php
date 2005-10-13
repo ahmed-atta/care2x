@@ -25,10 +25,10 @@ if ($num_tables > 1) {
 
     $multi_values = '<div align="center"><select name="table_select[]" size="6" multiple="multiple">';
     $multi_values .= "\n";
-
+    
     $i = 0;
     while ($i < $num_tables) {
-        $table   = $tables[$i]['Name'];
+        $table   = (PMA_MYSQL_INT_VERSION >= 32303) ? $tables[$i]['Name'] : $tables[$i];
         if (!empty($selectall) || (isset($tmp_select) && strpos(' ' . $tmp_select, '|' . $table . '|'))) {
             $is_selected = ' selected="selected"';
         } else {
@@ -41,10 +41,10 @@ if ($num_tables > 1) {
     $multi_values .= "\n";
     $multi_values .= '</select></div>';
 
-    $checkall_url = 'db_details_export.php?'
+    $checkall_url = 'db_details_export.php?' 
                   . PMA_generate_common_url($db)
                   . '&amp;goto=db_details_export.php';
-
+    
     $multi_values .= '<br />
             <a href="' . $checkall_url . '&amp;selectall=1" onclick="setSelectOptions(\'dump\', \'table_select[]\', true); return false;">' . $strSelectAll . '</a>
             &nbsp;/&nbsp;
@@ -52,14 +52,15 @@ if ($num_tables > 1) {
             <br /><br />';
 } elseif ($num_tables == 0) {
     echo $strDatabaseNoTable;
-    require_once('./footer.inc.php');
+    include('./footer.inc.php');
+    exit;
 } // end if
 
 $export_type = 'database';
-require_once('./libraries/display_export.lib.php');
+require('./libraries/display_export.lib.php');
 
 /**
  * Displays the footer
  */
-require_once('./footer.inc.php');
+require('./footer.inc.php');
 ?>

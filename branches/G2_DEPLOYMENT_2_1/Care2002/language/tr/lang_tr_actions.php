@@ -22,4 +22,12 @@ $LDListApptByDoc='Randevularý doktorlara göre listele';
 $LDdone='Bitti';
 $LDOk='Tamam';
 $LDSelect='Seç';
+
+$LDHelp="Yardým";
+$LDCloseHelpWin="Yardým penceresini kapat";
+
+$LDRefreshWindow = 'Görüntüyü yenile';
+
+$LDNext = 'Sonraki';
+$LDPrevious = 'Önceki';
 ?>

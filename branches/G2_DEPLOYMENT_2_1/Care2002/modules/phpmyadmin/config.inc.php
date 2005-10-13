@@ -53,11 +53,11 @@ $cfg['PmaAbsoluteUri_DisableWarning'] = FALSE;
 $cfg['PmaNoRelation_DisableWarning']  = FALSE;
 
 /**
- * The 'cookie' auth_type uses blowfish algorithm to encrypt the password. If
- * at least one server configuration uses 'cookie' auth_type, enter here a
- * passphrase that will be used by blowfish.
+ * The 'cookie' auth_type uses blowfish algorithm to encrypt the password.
+ * If at least one server configuration uses 'cookie' auth_type,
+ * enter here a passphrase that will be used by blowfish.
  */
-$cfg['blowfish_secret'] = '';
+$cfg['blowfish_secret'] = 'admin';
 
 /**
  * Server(s) configuration
@@ -75,45 +75,45 @@ $cfg['Servers'][$i]['compress']      = FALSE;       // Use compressed protocol f
 $cfg['Servers'][$i]['controluser']   = '';          // MySQL control user settings
                                                     // (this user must have read-only
 $cfg['Servers'][$i]['controlpass']   = '';          // access to the "mysql/user"
-                                                    // and "mysql/db" tables).
-                                                    // The controluser is also
-                                                    // used for all relational
-                                                    // features (pmadb)
-$cfg['Servers'][$i]['auth_type']     = 'config';    // Authentication method (config, http or cookie based)?
-$cfg['Servers'][$i]['user']          = 'root';      // MySQL user
+                                                    // and "mysql/db" tables)
+$cfg['Servers'][$i]['auth_type']     = 'cookie';    // Authentication method (config, http or cookie based)?
+$cfg['Servers'][$i]['user']          = '';      // MySQL user
 $cfg['Servers'][$i]['password']      = '';          // MySQL password (only needed
                                                     // with 'config' auth_type)
 $cfg['Servers'][$i]['only_db']       = '';          // If set to a db-name, only
-                                                    // this db is displayed in left frame
-                                                    // It may also be an array of db-names, where sorting order is relevant.
+                                                    // this db is displayed
+                                                    // at left frame
+                                                    // It may also be an array
+                                                    // of db-names
 $cfg['Servers'][$i]['verbose']       = '';          // Verbose name for this host - leave blank to show the hostname
 
+//$cfg['Servers'][$i]['pmadb']         = 'maho';          // Database used for Relation, Bookmark and PDF Features
 $cfg['Servers'][$i]['pmadb']         = '';          // Database used for Relation, Bookmark and PDF Features
                                                     // (see scripts/create_tables.sql)
                                                     //   - leave blank for no support
                                                     //     DEFAULT: 'phpmyadmin'
-$cfg['Servers'][$i]['bookmarktable'] = '';          // Bookmark table
+$cfg['Servers'][$i]['bookmarktable'] = 'PMA_bookmark';          // Bookmark table
                                                     //   - leave blank for no bookmark support
-                                                    //     DEFAULT: 'pma_bookmark'
-$cfg['Servers'][$i]['relation']      = '';          // table to describe the relation between links (see doc)
+                                                    //     DEFAULT: 'PMA_bookmark'
+$cfg['Servers'][$i]['relation']      = 'PMA_relation';          // table to describe the relation between links (see doc)
                                                     //   - leave blank for no relation-links support
-                                                    //     DEFAULT: 'pma_relation'
-$cfg['Servers'][$i]['table_info']    = '';          // table to describe the display fields
+                                                    //     DEFAULT: 'PMA_relation'
+$cfg['Servers'][$i]['table_info']    = 'PMA_table_info';          // table to describe the display fields
                                                     //   - leave blank for no display fields support
-                                                    //     DEFAULT: 'pma_table_info'
-$cfg['Servers'][$i]['table_coords']  = '';          // table to describe the tables position for the PDF schema
+                                                    //     DEFAULT: 'PMA_table_info'
+$cfg['Servers'][$i]['table_coords']  = 'PMA_table_coords';          // table to describe the tables position for the PDF schema
                                                     //   - leave blank for no PDF schema support
-                                                    //     DEFAULT: 'pma_table_coords'
-$cfg['Servers'][$i]['pdf_pages']     = '';          // table to describe pages of relationpdf
+                                                    //     DEFAULT: 'PMA_table_coords'
+$cfg['Servers'][$i]['pdf_pages']     = 'PMA_pdf_pages';          // table to describe pages of relationpdf
                                                     //   - leave blank if you don't want to use this
-                                                    //     DEFAULT: 'pma_pdf_pages'
-$cfg['Servers'][$i]['column_info']   = '';          // table to store column information
+                                                    //     DEFAULT: 'PMA_pdf_pages'
+$cfg['Servers'][$i]['column_info']   = 'PMA_column_info';          // table to store column information
                                                     //   - leave blank for no column comments/mime types
-                                                    //     DEFAULT: 'pma_column_info'
+                                                    //     DEFAULT: 'PMA_column_info'
 $cfg['Servers'][$i]['history']       = '';          // table to store SQL history
                                                     //   - leave blank for no SQL query history
-                                                    //     DEFAULT: 'pma_history'
-$cfg['Servers'][$i]['verbose_check'] = TRUE;        // set to FALSE if you know that your pma_* tables
+                                                    //     DEFAULT: 'PMA_history'
+$cfg['Servers'][$i]['verbose_check'] = TRUE;        // set to FALSE if you know that your PMA_* tables
                                                     // are up to date. This prevents compatibility
                                                     // checks and thereby increases performance.
 $cfg['Servers'][$i]['AllowDeny']['order']           // Host authentication order, leave blank to not use
@@ -136,13 +136,13 @@ $cfg['Servers'][$i]['password']        = '';
 $cfg['Servers'][$i]['only_db']         = '';
 $cfg['Servers'][$i]['verbose']         = '';
 $cfg['Servers'][$i]['pmadb']           = ''; // 'phpmyadmin' - see scripts/create_tables.sql
-$cfg['Servers'][$i]['bookmarktable']   = ''; // 'pma_bookmark'
-$cfg['Servers'][$i]['relation']        = ''; // 'pma_relation'
-$cfg['Servers'][$i]['table_info']      = ''; // 'pma_table_info'
-$cfg['Servers'][$i]['table_coords']    = ''; // 'pma_table_coords'
-$cfg['Servers'][$i]['pdf_pages']       = ''; // 'pma_pdf_pages'
-$cfg['Servers'][$i]['column_info']     = ''; // 'pma_column_info'
-$cfg['Servers'][$i]['history']         = ''; // 'pma_history'
+$cfg['Servers'][$i]['bookmarktable']   = ''; // 'PMA_bookmark'
+$cfg['Servers'][$i]['relation']        = ''; // 'PMA_relation'
+$cfg['Servers'][$i]['table_info']      = ''; // 'PMA_table_info'
+$cfg['Servers'][$i]['table_coords']    = ''; // 'PMA_table_coords'
+$cfg['Servers'][$i]['pdf_pages']       = ''; // 'PMA_pdf_pages'
+$cfg['Servers'][$i]['column_info']     = ''; // 'PMA_column_info'
+$cfg['Servers'][$i]['history']         = ''; // 'PMA_history'
 $cfg['Servers'][$i]['verbose_check']   = TRUE;
 $cfg['Servers'][$i]['AllowDeny']['order']
                                        = '';
@@ -163,13 +163,13 @@ $cfg['Servers'][$i]['password']        = '';
 $cfg['Servers'][$i]['only_db']         = '';
 $cfg['Servers'][$i]['verbose']         = '';
 $cfg['Servers'][$i]['pmadb']           = ''; // 'phpmyadmin' - see scripts/create_tables.sql
-$cfg['Servers'][$i]['bookmarktable']   = ''; // 'pma_bookmark'
-$cfg['Servers'][$i]['relation']        = ''; // 'pma_relation'
-$cfg['Servers'][$i]['table_info']      = ''; // 'pma_table_info'
-$cfg['Servers'][$i]['table_coords']    = ''; // 'pma_table_coords'
-$cfg['Servers'][$i]['pdf_pages']       = ''; // 'pma_pdf_pages'
-$cfg['Servers'][$i]['column_info']     = ''; // 'pma_column_info'
-$cfg['Servers'][$i]['history']         = ''; // 'pma_history'
+$cfg['Servers'][$i]['bookmarktable']   = ''; // 'PMA_bookmark'
+$cfg['Servers'][$i]['relation']        = ''; // 'PMA_relation'
+$cfg['Servers'][$i]['table_info']      = ''; // 'PMA_table_info'
+$cfg['Servers'][$i]['table_coords']    = ''; // 'PMA_table_coords'
+$cfg['Servers'][$i]['pdf_pages']       = ''; // 'PMA_pdf_pages'
+$cfg['Servers'][$i]['column_info']     = ''; // 'PMA_column_info'
+$cfg['Servers'][$i]['history']         = ''; // 'PMA_history'
 $cfg['Servers'][$i]['verbose_check']   = TRUE;
 $cfg['Servers'][$i]['AllowDeny']['order']
                                        = '';
@@ -205,7 +205,6 @@ $cfg['IgnoreMultiSubmitErrors'] = FALSE;  // if set to true, PMA continues compu
 $cfg['VerboseMultiSubmit']      = TRUE;   // if set to true, PMA will show the affected rows of EACH statement on
                                           // multiple-statement queries. See the read_dump.php file for hardcoded
                                           // defaults on how many queries a statement may contain!
-$cfg['AllowArbitraryServer']    = FALSE;  // allow login to any user entered server in cookie based auth
 
 // Left frame setup
 $cfg['LeftFrameLight']        = TRUE;   // use a select-based menu and display only the
@@ -259,11 +258,6 @@ $cfg['CharEditing']           = 'input';
 $cfg['ZipDump']               = TRUE;   // Allow the use of zip/gzip/bzip
 $cfg['GZipDump']              = TRUE;   // compression for
 $cfg['BZipDump']              = TRUE;   // dump files
-$cfg['CompressOnFly']         = TRUE;   // Will compress gzip/bzip2 exports on
-                                        // fly without need for much memory.
-                                        // If you encounter problems with
-                                        // created gzip/bzip2 files disable
-                                        // this feature.
 
 // Tabs display settings
 $cfg['LightTabs']             = FALSE;  // use graphically less intense menu tabs
@@ -312,7 +306,6 @@ $cfg['Export']['csv_escaped']               = '\\';
 $cfg['Export']['csv_terminated']            = 'AUTO';
 $cfg['Export']['excel_columns']             = FALSE;
 $cfg['Export']['excel_null']                = 'NULL';
-$cfg['Export']['excel_edition']             = 'win'; // win/mac
 
 $cfg['Export']['latex_structure']           = TRUE;
 $cfg['Export']['latex_data']                = TRUE;
@@ -321,9 +314,6 @@ $cfg['Export']['latex_relation']            = TRUE;
 $cfg['Export']['latex_comments']            = TRUE;
 $cfg['Export']['latex_mime']                = TRUE;
 $cfg['Export']['latex_null']                = '\textit{NULL}';
-$cfg['Export']['latex_caption']             = TRUE;
-$cfg['Export']['latex_data_label']          = 'tab:__TABLE__-data';
-$cfg['Export']['latex_structure_label']     = 'tab:__TABLE__-structure';
 
 $cfg['Export']['sql_structure']             = TRUE;
 $cfg['Export']['sql_data']                  = TRUE;
@@ -331,11 +321,8 @@ $cfg['Export']['sql_drop_database']         = FALSE;
 $cfg['Export']['sql_drop_table']            = FALSE;
 $cfg['Export']['sql_auto_increment']        = TRUE;
 $cfg['Export']['sql_backquotes']            = TRUE;
-$cfg['Export']['sql_dates']                 = FALSE;
 $cfg['Export']['sql_relation']              = FALSE;
 $cfg['Export']['sql_columns']               = FALSE;
-$cfg['Export']['sql_delayed']               = FALSE;
-$cfg['Export']['sql_type']                  = 'insert'; // insert/update/replace
 $cfg['Export']['sql_extended']              = FALSE;
 $cfg['Export']['sql_comments']              = FALSE;
 $cfg['Export']['sql_mime']                  = FALSE;
@@ -398,7 +385,7 @@ $cfg['RecodingEngine'] = 'auto';
 
 // Specify some parameters for iconv used in charset conversion. See iconv
 // documentation for details:
-// http://www.gnu.org/software/libiconv/documentation/libiconv/iconv_open.3.html
+// http://www.gnu.org/software/libiconv/documentation/libiconv/iconv_open.3.html 
 $cfg['IconvExtraParams'] = '';
 
 // Available charsets for MySQL conversion. currently contains all which could
@@ -436,6 +423,10 @@ $cfg['AvailableCharsets'] = array(
     'tis-620',
     'SHIFT_JIS'
 );
+
+// Loads language file
+require('./libraries/select_lang.lib.php');
+
 
 /**
  * Customization & design
@@ -502,14 +493,6 @@ $cfg['WYSIWYG-PDF']         = TRUE;         // Utilize DHTML/JS capabilities to 
                                             // the PDF page editor. Requires an IE6/Mozilla based browser.
 
 /**
- * Default queries.
- *  %d will be replaced by database name
- *  %t will be replaced by table name
- */
-$cfg['DefaultQueryTable']   = 'SELECT * FROM %t WHERE 1';
-$cfg['DefaultQueryDatabase']= '';
-
-/**
  * SQL Query box settings
  * These are the links display in all of the SQL Query boxes
  */
@@ -520,17 +503,14 @@ $cfg['SQLQuery']['Validate']  = FALSE;      // Validate a query (see $cfg['SQLVa
 
 
 /**
- * Webserver upload/save/import directories
+ * web-server upload directory
  */
-$cfg['UploadDir']             = '';         // Directory for uploaded files that can be executed by
-                                            // phpMyAdmin. For example './upload'. Leave empty for
-                                            // no upload directory support
-$cfg['SaveDir']               = '';         // Directory where phpMyAdmin can save exported data on
-                                            // server. For example './save'. Leave empty for no save
-                                            // directory support.
-$cfg['docSQLDir']             = '';         // Directory for docSQL imports, phpMyAdmin can import
-                                            // docSQL files from that directory. For example
-                                            // './docSQL'. Leave empty for no docSQL import support.
+$cfg['UploadDir']             = '';         // for example, './upload/'; you must end it with
+                                            // a slash, and you leave it empty for no upload
+                                            // directory
+$cfg['SaveDir']               = '';         // for example, './save/'; you must end it with
+                                            // a slash, and you leave it empty for no save
+                                            // directory
 
 
 /**
@@ -661,7 +641,7 @@ if ($cfg['ShowFunctionFields']) {
        'WEEKDAY',
        'CONCAT'
     );
-
+    
     // Which column types will be mapped to which Group?
     $cfg['RestrictColumnTypes'] = array(
        'VARCHAR'      => 'FUNC_CHAR',
@@ -732,16 +712,7 @@ if ($cfg['ShowFunctionFields']) {
             'SUM'
         )
     );
-
-    // Default functions for above defined groups
-    $cfg['DefaultFunctions'] = array(
-        'FUNC_CHAR'         => '',
-        'FUNC_DATE'         => '',
-        'FUNC_NUMBER'       => '',
-        'first_timestamp'   => 'NOW'
-    );
-
-
+    
 } // end if
 
 

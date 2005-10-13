@@ -7,9 +7,9 @@ if($src=="create")
 {
 	switch($x1)
 	{
-	case "": print "Iniziare un nuovo registro";
+	case "": print "Creare un nuovo registro";
 						break;
-	case "fresh": print "Iniziare un nuovo registro";
+	case "fresh": print "Creare un nuovo registro";
 						break;
 	case "get": print  "";
 						break;
@@ -20,7 +20,7 @@ if($src=="create")
 }
 if($src=="time")
 {
-	print "Registrazione di ";
+	print "Registrazione dei ";
 	switch($x1)
 	{
 	case "entry_out": print "tempi di ingresso ed uscita";
@@ -55,13 +55,13 @@ if($src=="search")
 {
 	switch($x1)
 	{
-	case "search": print "Selezione di una determinata registrazione";
+	case "search": print "Seleziona una registrazione";
 						break;
-	case "": print "Ricerca nella registrazione di un'operazione";
+	case "": print "Ricerca una certa operazione nella registrazione";
 						break;
 	case "get": print  "Registrazione delle operazioni ad un dato paziente";
 						break;
-	case "fresh": print "Ricerca nella registrazione di un'operazione";
+	case "fresh": print "Ricerca una certa operazione nella registrazione";
 	}
 }
 if($src=="arch")

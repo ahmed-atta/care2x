@@ -1,4 +1,4 @@
 <?php
 $root_path='../../';
-$top_dir='language/ro/';
+$top_dir='lang/ro/';
 ?>

@@ -1,6 +1,6 @@
 <?php
 /** 
- * @version V2.50 14 Nov 2002 (c) 2000-2002 John Lim (jlim@natsoft.com.my). All rights reserved.
+ * @version V4.21 20 Mar 2004 (c) 2000-2004 John Lim (jlim@natsoft.com.my). All rights reserved.
  * Released under both BSD license and Lesser GPL library license. 
  * Whenever there is any discrepancy between the two licenses, 
  * the BSD license will take precedence. 
@@ -71,7 +71,8 @@
 	
 	if ($showcount)
 		$sel .= "\n\tSUM(1) as Total";
-	
+	else
+		$sel = substr($sel,0,strlen($sel)-2);
 	
 	$sql = "SELECT $sel \nFROM $tables $where \nGROUP BY $rowfields";
 	return $sql;

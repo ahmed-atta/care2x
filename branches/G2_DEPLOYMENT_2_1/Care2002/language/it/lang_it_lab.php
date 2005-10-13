@@ -114,13 +114,13 @@ $LDLEN='LEN';  /* Lab entry number */
 /*2003-07-11 EL*/
 $LDAdministration='Direzione';
 $LDTestParameters='Parametri di test';
-$LDTestParametersTxt='Enter or edit units or measure, values,  range, limits, etc.';
-$LDMsrUnit='Msr. Unit';
-$LDMedian='Median';
-$LDUpperBound='Upper boundary';
-$LDLowerBound='Lower boundary';
-$LDUpperCritical='Upper critical';
-$LDLowerCritical='Lower critical';
-$LDUpperToxic='Upper toxic';
-$LDLowerToxic='Lower toxic';
+$LDTestParametersTxt='Inserire o modificare unità di misura, valori, limiti, etc.';
+$LDMsrUnit='Unità misura';
+$LDMedian='Media';
+$LDUpperBound='Limite sup.';
+$LDLowerBound='Limite inf.';
+$LDUpperCritical='Valore critico sup.';
+$LDLowerCritical='Valore critico inf.';
+$LDUpperToxic='Valore tossico sup.';
+$LDLowerToxic='Valore tossico inf.';
 ?>

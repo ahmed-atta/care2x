@@ -1,18 +1,18 @@
 <?php
 $LDHome='Baþlangýç';
 $LDPatient='Hasta';
-$LDAdmission='Kabul Ýþlemleri';
-$LDAmbulatory='Ayaktan';
-$LDMedocs='Týbbi Kayýtlar';
+$LDAdmission='Hasta Kabul ';
+$LDAmbulatory='Poliklinikler';
+$LDMedocs='Týbbi belgeler';
 $LDDoctors='Doktorlar';
-$LDNursing='Hemþirelik';
-$LDOR='Ameliyathan';
+$LDNursing='Servisler';
+$LDOR='Ameliyathane';
 $LDLabs='Laboratuvarlar';
 $LDRadiology='Radyoloji';
 $LDPharmacy='Eczane';
-$LDMedDepot='Týbbi Malzeme';
-$LDDirectory='Rehber';
-$LDTechSupport='Teknik Destek';
+$LDMedDepot='Ambar';
+$LDDirectory='Telefon Rehberi';
+$LDTechSupport='Bakým Onarým';
 $LDEDP='Sistem Yönetimi';
 $LDIntraEmail='Intranet Eposta';
 $LDInterEmail='Internet Eposta';
@@ -42,7 +42,7 @@ $LDTurkish='Türkçe';
 /* 2003-04-28 El */
 $LDDutch='Hollandaca';
 # 2003-08-04 EL
-$LDPerson='Hasta';
+$LDPerson='Kiþi';
 # 2003-09-05 EL
 $LDUser='Kullanýcý';
 ?>

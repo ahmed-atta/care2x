@@ -6,9 +6,9 @@
 /**
  * Gets some core libraries
  */
-require_once('./libraries/grab_globals.lib.php');
+require('./libraries/grab_globals.lib.php');
 $js_to_run = 'functions.js';
-require_once('./libraries/common.lib.php');
+require('./libraries/common.lib.php');
 
 PMA_checkParameters(array('db','table'));
 
@@ -21,7 +21,7 @@ $err_url = 'tbl_properties.php?' . PMA_generate_common_url($db, $table);
 /**
  * A new name has been submitted -> do the work
  */
-if (isset($new_name) && trim($new_name) != '' && strpos($new_name,'.') === FALSE) {
+if (isset($new_name) && trim($new_name) != '') {
     $old_name     = $table;
     $table        = $new_name;
 
@@ -29,8 +29,11 @@ if (isset($new_name) && trim($new_name) != '' && strpos($new_name,'.') === FALSE
     if (count($dblist) > 0 && PMA_isInto($db, $dblist) == -1) {
         exit();
     }
+    if (PMA_MYSQL_INT_VERSION < 32306) {
+        PMA_checkReservedWords($new_name, $err_url);
+    }
 
-    require_once('./header.inc.php');
+    include('./header.inc.php');
     PMA_mysql_select_db($db);
     $sql_query = 'ALTER TABLE ' . PMA_backquote($old_name) . ' RENAME ' . PMA_backquote($new_name);
     $result    = PMA_mysql_query($sql_query) or PMA_mysqlDie('', '', '', $err_url);
@@ -38,7 +41,7 @@ if (isset($new_name) && trim($new_name) != '' && strpos($new_name,'.') === FALSE
     $reload    = 1;
 
     // garvin: Move old entries from comments to new table
-    require_once('./libraries/relation.lib.php');
+    include('./libraries/relation.lib.php');
     $cfgRelation = PMA_getRelationsParam();
     if ($cfgRelation['commwork']) {
         $remove_query = 'UPDATE ' . PMA_backquote($cfgRelation['column_info'])
@@ -76,7 +79,7 @@ if (isset($new_name) && trim($new_name) != '' && strpos($new_name,'.') === FALSE
         unset($table_query);
         unset($tb_rs);
     }
-
+    
     if ($cfgRelation['pdfwork']) {
         $table_query = 'UPDATE ' . PMA_backquote($cfgRelation['table_coords'])
                         . ' SET     table_name = \'' . PMA_sqlAddslashes($table) . '\''
@@ -94,17 +97,13 @@ if (isset($new_name) && trim($new_name) != '' && strpos($new_name,'.') === FALSE
  * No new name for the table!
  */
 else {
-    require_once('./header.inc.php');
-    if (strpos($new_name,'.') === FALSE) {
-        PMA_mysqlDie($strTableEmpty, '', '', $err_url);
-    } else {
-        PMA_mysqlDie($strError . ': ' . $new_name, '', '', $err_url);
-    }
+    include('./header.inc.php');
+    PMA_mysqlDie($strTableEmpty, '', '', $err_url);
 }
 
 
 /**
  * Back to the calling script
  */
-require('./tbl_properties_operations.php');
+require('./tbl_properties.php');
 ?>

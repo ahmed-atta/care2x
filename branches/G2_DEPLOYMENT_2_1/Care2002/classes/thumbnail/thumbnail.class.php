@@ -22,8 +22,9 @@ $myThumb->setMaxSize( 200, 200 ); // Specify maximum size (width, height)
 $myThumb->getThumbData( 'width' ) // This will get you pixel width of thumbnail image. getImageData arguments are width|height|type
 */
 
-require_once($root_path.'include/care_api_classes/class_image.php');
+# This is required for the gd_version method needed in this class
 
+require_once($root_path.'include/care_api_classes/class_image.php');
 
 class Thumbnail extends Image {
 	

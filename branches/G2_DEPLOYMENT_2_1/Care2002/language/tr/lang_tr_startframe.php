@@ -3,13 +3,13 @@ $LDMainTitle='CARE 2X Entegre Hastane Biliþim Sistemi';
 
 /*$LDMainTitle='Marienhospital a virtual Integrated Hospital Information System in Internet';
 */
-$LDInviteAskMe='Sorgunuzu giriniz, örneðin M9d nin telefon numarasý nedir?"';
+$LDInviteAskMe='Sorgunuzu giriniz, örneðin "3 Nisaiye nin telefon numarasý nedir?"';
 $LDTipsLink='Ýp uçlarý:';
-$LDTipsAskMe='Benzerlerini deneyiniz, mesela "koðuþ" yerine "servis" yazýnýz.';
+$LDTipsAskMe='Benzerlerini deneyiniz, örneðin "koðuþ" yerine "servis" yazýnýz.';
 $LDTipsImgAlt='En iyi sonuçlarýn nasýl alýndýðý konusundaki ip uçlarý için burayý týklayýnýz.';
 $LDSubmitBut='Sorguyu gönder';
 
-$LDQuickInfo='Kýsa Bilgiler';
+$LDQuickInfo='Hýzlý Bilgiler';
 $LDPhonePolice='Polis';
 $LDPhoneFire='Ýtfaiye';
 $LDAmbulance='Acil';
@@ -27,7 +27,7 @@ $LDExhibition ='Sergiler';
 $LDEducation ='Eðitim';
 $LDAdvStudies ='Çalýþmalar';
 $LDPhyTherapy ='Fizik Tedavi';
-$LDHealthTips ='Faydalý bilgiler';
+$LDHealthTips ='Faydalý saðlýk bilgileri';
 $LDCalendar ='Takvim';
 $LDHelp='Yardým';
 $LDMore='yazýnýn devamý';
@@ -54,7 +54,7 @@ $LDOurPrivPolicy='Gizlilik Politikamýz';
 $LDSubmitNews='Haber Gönderiniz';
 $LDEditNews='Online editör ile haber gönderiniz ya da düzeltiniz';
 /* 2002-10-17 EL */
-$LDCredits='Katkýda Bulunanlar';
+$LDCredits='Programda emeði geçenler';
 /* 2003-05-24 EL */
 $LDPublicItems='Genel konular';
 # 2003-08-28 EL
