@@ -11,7 +11,7 @@ $LDFoundPatient='The search found <b>~nr~</b> patients';
 $LDWildCards='What are wildcards and how to use them';
 $LDNewSearch='New search';
 
-$LDCaseNr='Encounter nr.';
+$LDCaseNr='Admission-Nr.';
 $LDLastName='Family name';
 $LDName='Name';
 $LDBday='Birthdate';

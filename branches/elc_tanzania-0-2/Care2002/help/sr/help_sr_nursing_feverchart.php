@@ -251,7 +251,7 @@ I don't want to see the last occupancy list. How to create a new list?</b></font
 		<b>Step 2: </b>A pop-up window for searching the patient will appear.<br>
 		<b>Step 3: </b>Find first the patient by entering a search keyword into one of several entry fields.<br>
 		If you  want to find the patient...<ul type="disc">
-		<li>by its patient number, enter the number into the <br>"<span style="background-color:yellow" >Patient nr.:</span><input type="text" name="t" size=19 maxlength=10 value="22000109">" field.
+		<li>by its Admission-Nr., enter the number into the <br>"<span style="background-color:yellow" >Patient nr.:</span><input type="text" name="t" size=19 maxlength=10 value="22000109">" field.
 		<li>by its Family name, enter its Family name or the first few letters into the <br>"<span style="background-color:yellow" >Family name:</span><input type="text" name="t" size=19 maxlength=10 value="Schmitt">" field.
 		<li>by its Given name, enter its Given name or the first few letters into the <br>"<span style="background-color:yellow" >Given name:</span><input type="text" name="t" size=19 maxlength=10 value="Peter">" field.
 		<li>by its birthdate, enter its birthdate or the first few numbers into the <br>"<span style="background-color:yellow" >Birthdate:</span><input type="text" name="t" size=19 maxlength=10 value="10.10.1966">" field.
@@ -274,7 +274,7 @@ The last occupancy list is being displayed but I don't want to copy it. How to s
 How to assign a bed to a patient?</b></font>
 <ul> <b>Step 1: </b>Find first the patient by entering a search keyword into one of several entry fields.<br>
 		If you  want to find the patient...<ul type="disc">
-		<li>by its patient number, enter the number into the <br>"<span style="background-color:yellow" >Patient nr.:</span><input type="text" name="t" size=19 maxlength=10 value="22000109">" field.
+		<li>by its Admission-Nr., enter the number into the <br>"<span style="background-color:yellow" >Patient nr.:</span><input type="text" name="t" size=19 maxlength=10 value="22000109">" field.
 		<li>by its Family name, enter its Family name or the first few letters into the <br>"<span style="background-color:yellow" >Family name:</span><input type="text" name="t" size=19 maxlength=10 value="Schmitt">" field.
 		<li>by its Given name, enter its Given name or the first few letters into the <br>"<span style="background-color:yellow" >Given name:</span><input type="text" name="t" size=19 maxlength=10 value="Peter">" field.
 		<li>by its birthdate, enter its birthdate or the first few numbers into the <br>"<span style="background-color:yellow" >Birthdate:</span><input type="text" name="t" size=19 maxlength=10 value="10.10.1966">" field.

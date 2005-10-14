@@ -106,6 +106,7 @@ class Person extends Core {
 	*/
 	var  $elems_array=array(
 				'pid',
+				'selian_pid',
 				 'title',
 				 'date_reg',
 				 'name_last',
@@ -124,7 +125,6 @@ class Person extends Core {
 				 'addr_str_nr',
 				 'addr_zip',
 				 'addr_citytown_nr',
-				 'addr_citytown_name',
 				 'phone_1_code',
 				 'phone_1_nr',
 				 'phone_2_code',
@@ -238,7 +238,7 @@ class Person extends Core {
         if($this->ok) {
             $db->CommitTrans();
 			return true;
-        } else {
+        } else {echo 'DEBUG: '.$this->sql;
 	        $db->RollbackTrans();
 			return false;
 	    }
@@ -363,9 +363,10 @@ class Person extends Core {
 	    global $db;
 		 
 		if(!$this->internResolvePID($pid)) return false;
-	    $this->sql="SELECT p.*, addr_citytown_name,ethnic.name AS ethnic_orig_txt
+	    $this->sql="SELECT p.*, addr.name AS addr_citytown_name,ethnic.name AS ethnic_orig_txt, tribe.tribe_name 
 					FROM $this->tb_person AS p
 					LEFT JOIN  $this->tb_citytown AS addr ON p.addr_citytown_nr=addr.nr
+					LEFT JOIN  care_tz_tribes AS tribe ON p.name_maiden=tribe.tribe_id
 					LEFT JOIN  $this->tb_ethnic_orig AS ethnic ON p.ethnic_orig=ethnic.nr
 					WHERE p.pid='$this->pid' ";
         //echo $this->sql;
@@ -404,6 +405,8 @@ class Person extends Core {
 			} else { return false; }
 		} else { return false; }
 	}
+	
+	
 	/**
 	* Gets a particular registration item based on its PID number.
 	*
@@ -993,7 +996,7 @@ class Person extends Core {
 			if(empty($oitem)) $oitem='pid';
 			if(empty($odir)) $odir='DESC'; # default, latest pid at top
 
-			$sql2="	WHERE pid=$suchwort ";
+			$sql2="	WHERE pid=$suchwort OR selian_pid='$suchwort'";
 
 		} else {
 			# Try to detect if searchkey is composite of first name + last name
@@ -1068,8 +1071,8 @@ class Person extends Core {
 		# Set the sorting directive
 		if(isset($oitem)&&!empty($oitem)) $sql3 =" ORDER BY $oitem $odir";
 
-		$this->sql='SELECT pid, name_last, name_first, date_birth, addr_zip, sex, death_date, status FROM '.$this->buffer.$sql3;
-
+		$this->sql='SELECT pid, selian_pid, name_last, name_first, date_birth, addr_zip, sex, death_date, status FROM '.$this->buffer.$sql3;
+		//echo $this->sql;
 		if($this->res['ssl']=$db->SelectLimit($this->sql,$maxcount,$offset)){
 			if($this->rec_count=$this->res['ssl']->RecordCount()) {
 				return $this->res['ssl'];

@@ -59,12 +59,11 @@ A:visited:hover {color: #cc0033;}
 	<tr>
 
 		<td  valign="top" align="middle" height="35">
-			 <table cellspacing="0"  class="titlebar" border=0>
+			 <table cellspacing="0"  class="titlebar" border=0 cellpadding="0" cellspacing="0">
  <tr valign=top  class="titlebar" >
-            <td bgcolor="#99ccff" > &nbsp;&nbsp;<font color="#330066">Pending 
+            <td bgcolor="#99ccff" ><font color="#330066">Pending 
               Prescriptions (<?php echo $enc_obj->ShowPID($batch_nr); ?>)</font> </td>
   <td bgcolor="#99ccff" align=right><a
-   href="javascript:gethelp('pending_prescriptions_pharmacy.php')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a><a
    href="<?php echo $RETURN_PATH;?>" ><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>  </td>
  </tr>
 
@@ -94,7 +93,9 @@ else
 ?>
 		    <td width="100%"> 
 		          <?php
+		          
 		          if (!$NO_PENDING_PRESCRIPTIONS) {
+		          	
 		            echo '
                       <a href="javascript:printOut()"><img src="../../gui/img/control/default/en/en_printout.gif" border=0 align="absmiddle" width="99" height="24" alt="Print this form"></a> 
                       <a href="pharmacy_tz_pending_prescriptions.php?&mode=done&pn='.$pn.'&prescription_date='.$prescription_date.'>"><img src="../../gui/img/control/default/en/en_done.gif" border=0 align="absmiddle" width="75" height="24" alt="It´s done! Move the form to the archive"></a> 
@@ -102,7 +103,16 @@ else
                      ';}
                  
                   if ($NO_PENDING_PRESCRIPTIONS) {
-                    echo '<br><br><br><br>&nbsp;&nbsp;&nbsp;&nbsp;no pending prescriptions...<br>';
+
+                    
+                  	if($task=="newprescription")
+                  	{
+                  		echo '<iframe name="prescription" src="'.$root_path.'modules/registration_admission/aufnahme_daten_such.php'.URL_APPEND.'&target=search&task=newprescription" width="100%" height="90%" align="left" marginheight="0" marginwidth="0" hspace="0" vspace="0" scrolling="auto" frameborder="0" noresize></iframe> ';
+                  	}
+                  	else
+                  	{
+                  		echo '<br><br><br><br>&nbsp;&nbsp;&nbsp;&nbsp;no pending prescriptions...<br>';
+                  	}     
                   } else {
                   	if($task=="newprescription")
                   	{
@@ -110,7 +120,7 @@ else
                   	}
                   	else
                   	{
-                    	echo '<iframe name="prescription" src="'.$root_path.'/modules/registration_admission/show_prescription.php?prescription_date='.$prescription_date.'&externalcall=TRUE&pn='.$pn.'&sid='.$sid.'" width="100%" height="90%" align="left" marginheight="0" marginwidth="0" hspace="0" vspace="0" scrolling="auto" frameborder="0" noresize></iframe> ';
+                    	echo '<iframe name="prescription" src="'.$root_path.'/modules/registration_admission/show_prescription.php?prescription_date='.$prescription_date.'&externalcall=TRUE&disablebuttons=true&pn='.$pn.'&sid='.$sid.'" width="100%" height="88%" align="left" marginheight="0" marginwidth="0" hspace="0" vspace="0" scrolling="auto" frameborder="0" noresize></iframe> ';
                   	}
                     
                   }

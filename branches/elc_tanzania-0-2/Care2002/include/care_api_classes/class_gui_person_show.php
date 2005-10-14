@@ -271,6 +271,9 @@ class GuiPersonShow {
 		$this->smarty->assign('LDRegTime',$LDRegTime);
 		$this->smarty->assign('sRegTime',convertTimeToLocal(@formatDate2Local($date_reg,$date_format,0,1)));
 
+		$this->smarty->assign('sFileNr',$this->createTR($LDFileNr,$selian_pid,1,TRUE));
+
+
 		if (!$GLOBAL_CONFIG['person_title_hide']){
 			$this->smarty->assign('sPersonTitle',$this->createTR( $LDTitle, $title));
 			$iRowSpanCount++;

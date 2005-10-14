@@ -9,7 +9,7 @@ $dbusername='caredb';
 $dbpassword='caredb';
 
 # Database host name, default = localhost
-$dbhost='172.16.124.249';
+$dbhost='tux1';
 
 # First key used for simple chaining protection of scripts
 $key='16713867682044';

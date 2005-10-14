@@ -40,7 +40,7 @@ $TXT['alertEnterNumericValueforDiscount']='Enter the numeric value for discount'
 /* 2003-10-19 DHC Echoes from patientbill.php  */
 $TXT['PatientName']='Patient name';
 $TXT['eComBill']='eComBill';
-$TXT['PatientNumber']='Patient number';
+$TXT['PatientNumber']='Admission-Nr.';
 $TXT['SelectHospitalServices']='Select Hospital Services';
 $TXT['SelectLaboratoryTests']='Select Laboratory Tests';
 $TXT['ViewBill']='View Bill';
@@ -153,7 +153,7 @@ $LDBillDate='Bill date';
 $LDPatientType='Type of patient';
 $LDDateofBirth='Date of birth';
 $LDSex='Sex';
-$LDPatientNumber='Encounter number';
+$LDPatientNumber='Admission-Nr.';
 $LDDateofAdmission='Admission date';
 $LDPaymentInformation='Payment information';
 $LDModeofPayment='Mode of payment';

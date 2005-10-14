@@ -53,8 +53,8 @@ $LD['update_preg_details']='Update pregnancy details';
 # 2003-07-27 EL
 $LD['sibling']='Sibling';
 $LD['parent']='Parent';
-$LD['parent_encounter_nr']='Mother\'s encounter nr.';
-$LD['child_encounter_nr']='Neonate(s) encounter nr(s).';
+$LD['parent_encounter_nr']='Mother\'s Admission-Nr.';
+$LD['child_encounter_nr']='Neonate(s) Admission-Nr.(s).';
 $LD['sepspace']='Separate with space';
 
 $LDNormal='Normal';
@@ -117,7 +117,7 @@ $LD['time_to_spont_resp']='Time to spontan respiration';
 $LDMinutes='Minutes';
 
 # 2003-08-26 EL
-$LDParentEncNrMissing='Mother\'s encounter number of the delivery is missing.\\n Save anyway?';
+$LDParentEncNrMissing='Mother\'s Admission-Nr. of the delivery is missing.\\n Save anyway?';
 $LDPlsEnterDeliveryPlace='Please enter delivery place.';
 $LDPlsSelectDeliveryMode='Please select delivery mode.';
 $LDPlsEnterDeliveryDate='Please enter delivery date.';

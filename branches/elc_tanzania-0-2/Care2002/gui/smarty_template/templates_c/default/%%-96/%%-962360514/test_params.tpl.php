@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.0, created on 2005-05-16 13:00:42
+<?php /* Smarty version 2.6.0, created on 2005-09-29 10:37:57
          compiled from laboratory/test_params.tpl */ ?>
 
 <ul>

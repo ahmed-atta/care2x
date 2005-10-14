@@ -37,7 +37,7 @@ if($src=="arch")
 <ul> <b>Step 1: </b>Enter the keyword in the corresponding field. It can be a full word or phrase or a few letters of a word from the patient's personal data. <br>
 		<ul><font size=1 color="#000099" >
 		<b>Following fields can be filled with a keyword:</b>
-		<br> Patient nr.
+		<br> Admission-Nr.
 		<br> Family name
 		<br> Given name
 		<br> Birthdate

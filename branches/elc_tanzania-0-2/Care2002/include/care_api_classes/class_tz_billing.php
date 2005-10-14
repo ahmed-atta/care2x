@@ -951,7 +951,7 @@ class Bill extends Encounter {
       			  <td>&nbsp;</td>
       			  <td>&nbsp;</td>
       			  <td>&nbsp;</td>
-      				<td><b>open item accounting:</b></td>
+      				<td><b>open item accountinga:</b></td>
       				<td><b>'.number_format($sum_to_pay,2,',','.').'</b> </td>
       				<td><b>&nbsp;</b></td>   
       				<td>&nbsp;</td>';
@@ -984,7 +984,7 @@ class Bill extends Encounter {
 	//------------------------------------------------------------------------------  
 	
 	function DisplayLaboratoryBill($bill_nr,$edit_fields) {
-    global $root_path;
+		global $root_path, $billnr, $batch_nr;
     $sum_price=0;
 
   	echo '
@@ -1057,9 +1057,13 @@ class Bill extends Encounter {
       			  <td>&nbsp;</td>
       			  <td>&nbsp;</td>
       				<td>----------</td>      			
-      				<td>&nbsp;</td>
-      				<td>&nbsp;</td>';
-      			if ($edit_fields) echo '<td>&nbsp;</td>';
+      				';
+      			if ($edit_fields) 
+      			{
+      				echo '<td colspan="3">';
+      				echo '<a href="'.URL_APPEND.'&mode=allpaid&batch_nr='.$batch_nr.'&billnr='.$billnr.'">Pay all items at once now</a></td>';
+      			}
+      			else echo '<td>&nbsp;</td>';
       			echo "</tr>";
 
       			echo '
@@ -1091,7 +1095,7 @@ class Bill extends Encounter {
       			  <td>&nbsp;</td>
       			  <td>&nbsp;</td>
       			  <td>&nbsp;</td>
-      				<td><b>open item accounting:</b></td>
+      				<td><b>open item accountingb:</b></td>
       				<td><b>'.number_format($sum_to_pay,2,',','.').'</b> </td>
       				<td><b>&nbsp;</b></td>   
       				<td>&nbsp;</td>';
@@ -1231,7 +1235,7 @@ class Bill extends Encounter {
       			  <td>&nbsp;</td>
       			  <td>&nbsp;</td>
       			  <td>&nbsp;</td>
-      				<td><b>open item accounting:</b></td>
+      				<td><b>open item accountingc:</b></td>
       				<td><b>'.number_format($sum_to_pay,2,',','.').'</b> </td>
       				<td><b>&nbsp;</b></td>   
       				<td>&nbsp;</td>';
@@ -1320,7 +1324,6 @@ class Bill extends Encounter {
         				if($bill_elems_row['is_paid']==1)
         				{ 
         					echo "Yes";
-        					$alloutstanding++;
         				}
         				else
         				{
@@ -1344,7 +1347,7 @@ class Bill extends Encounter {
       			if ($edit_fields) 
       			{
       				echo '<td colspan="3">';
-      				if(!$alloutstanding) echo $alloutstanding.'<a href="'.URL_APPEND.'&mode=allpaid&batch_nr='.$batch_nr.'&billnr='.$billnr.'">Pay all items at once now</a></td>';
+      				echo '<a href="'.URL_APPEND.'&mode=allpaid&batch_nr='.$batch_nr.'&billnr='.$billnr.'">Pay all items at once now</a></td>';
       			}
       			else echo '<td>&nbsp;</td>
       				<td>&nbsp;</td>';
@@ -1379,7 +1382,7 @@ class Bill extends Encounter {
       			  <td>&nbsp;</td>
       			  <td>&nbsp;</td>
       			  <td>&nbsp;</td>
-      				<td><b>open item accounting:</b></td>
+      				<td><b>open item accountingd:</b></td>
       				<td><b>'.number_format($sum_to_pay,2,',','.').'</b> </td>
       				<td><b>&nbsp;</b></td>   
       				<td>&nbsp;</td>';

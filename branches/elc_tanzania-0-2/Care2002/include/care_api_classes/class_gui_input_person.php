@@ -151,7 +151,7 @@ class GuiInputPerson {
 
 		if (($mode=='save') || ($mode=='forcesave')) {
 		$search_obj = & new advanced_search();
-		if (is_array($result_array=$search_obj->get_equal_words("tribe_name", "care_tz_tribes", $name_maiden, 65)) && $name_maiden && !$no_tribe) 
+		if (is_array($result_array=$search_obj->get_equal_words("tribe_name", "care_tz_tribes", false, 65, 'tribe_id')) && $name_maiden && !$no_tribe) 
 		{
 			$tribe_array=$result_array;
 		}
@@ -159,7 +159,7 @@ class GuiInputPerson {
 		{
 			 $tribe_array=$result_array;
 		}
-		if (is_array($result_array=$search_obj->get_equal_words("NAME", "care_tz_regions", $addr_citytown_name, 65)) && $addr_citytown_name) 
+		if (is_array($result_array=$search_obj->get_equal_words("NAME", "care_address_citytown", false, 65, 'nr')) && $addr_citytown_nr) 
 		{
 			$town_array=$result_array;        
 		}
@@ -173,11 +173,12 @@ class GuiInputPerson {
 				# clean and check input data variables
 				if(trim($encoder)=='') $encoder=$aufnahme_user;
 				if (trim($name_last)=='') { $errornamelast=1; $error++;}
+				if (trim($selian_pid)=='' || !is_numeric($selian_pid)) { $errorfilenr=1; $error++;}
 				if(trim($name_first)=='') { $errornamefirst=1; $error++; }
 				if (trim($date_birth)=='') { $errordatebirth=1; $error++;}
-				if (is_array($tribe_array) && !$no_tribe) {$errormaiden=1; $error++;}
-				if (is_array($town_array)) {$errortown=1; $error++;}
-				//if ($addr_citytown_nr&&(trim($addr_citytown_name)=='')) { $errortown=1; $error++;}
+				//if (is_array($tribe_array) && !$no_tribe) {$errormaiden=1; $error++;}
+				//if (is_array($town_array)) {$errortown=1; $error++;}
+				if (!$addr_citytown_nr) { $errortown=1; $error++;}
 				if ($sex=='') { $errorsex=1; $error++;}
 			}
 			# If the validation produced no error, save the data
@@ -407,9 +408,9 @@ class GuiInputPerson {
 		if(!$update)
 		{
 			$tribe=$name_maiden;
-			$town=$addr_citytown_name;
+			$town=$addr_citytown_nr;
 		}
-		if (is_array($result_array=$search_obj->get_equal_words("tribe_name", "care_tz_tribes", $tribe, 65)) && $name_maiden &&!$no_tribe) 
+		if (is_array($result_array=$search_obj->get_equal_words("tribe_name", "care_tz_tribes", false, 65, 'tribe_id')) && $name_maiden &&!$no_tribe) 
 		{
 			$tribe_array=$result_array;        
 		}
@@ -417,7 +418,7 @@ class GuiInputPerson {
 		{
 			 $tribe_array=$result_array;
 		}
-		if (is_array($result_array=$search_obj->get_equal_words("NAME", "care_tz_regions", $town, 65)) && $addr_citytown_name) 
+		if (is_array($result_array=$search_obj->get_equal_words("NAME", "care_address_citytown", false, 65, 'nr')) && $addr_citytown_nr) 
 		{
 			$town_array=$result_array;       
 		}
@@ -449,7 +450,14 @@ class GuiInputPerson {
 			urlholder="./data_search.php<?php echo URL_REDIRECT_APPEND; ?>&target="+target+"&obj_val="+obj_val+"&obj_name="+obj_name;
 			DSWIN<?php echo $sid ?>=window.open(urlholder,"wblabel<?php echo $sid ?>","menubar=no,width=400,height=550,resizable=yes,scrollbars=yes");
 		}
-
+		function list_popup(d,chosentype)
+		{
+			if(d.value=="notinlist")
+			{
+				urlholder="<?php echo $root_path; ?>modules/registration_admission/notinlist.php<?php echo URL_APPEND.'&chosentype=" + chosentype + "'; ?>";
+				notinlist=window.open(urlholder,"notinlist","width=500,height=450,menubar=no,resizable=yes,scrollbars=yes");
+			}
+		}
 		function chkform(d) {
 			if(d.name_last.value==""){
 				alert("<?php echo $LDPlsEnterLastName; ?>");
@@ -642,7 +650,9 @@ class GuiInputPerson {
 				<FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo convertTimeToLocal(formatDate2Local($date_reg,$date_format,0,1)); ?>
 			</td>
 			</tr>
-
+<?php
+$this->createTR($errorfilenr, 'selian_pid', ' *'.$LDFileNr,$selian_pid,'','',FALSE);
+?>
 			<tr>
 			<td class="reg_item">
 				<FONT SIZE=-1  FACE="Arial"><?php echo $LDTitle ?>:
@@ -677,34 +687,22 @@ if(!$no_tribe)
 				<td  class="reg_input" colspan=1>
 				
 				<?php 
-				
-					if(is_array($tribe_array) && $name_maiden)
+
+					echo '<SELECT name="name_maiden" onChange="list_popup(this, \'tribe\');">';
+					foreach($tribe_array as $unit)
 					{
-						echo '<SELECT name="name_maiden">';
-						foreach($tribe_array as $unit)
+						if($update && (strtoupper($name_maiden) == strtoupper($unit[1])))
 						{
-							if($update && (strtoupper($name_maiden) == strtoupper($unit)))
-							{
-								$check = 'selected';
-							}
-							else
-							{
-								$check = '';	
-							}
-							echo '<OPTION value="'.$unit.'" '.$check.'>'.$unit.'</OPTION>';
+							$check = 'selected';
 						}
-					 echo '</SELECT>';
+						else
+						{
+							$check = '';	
+						}
+						echo '<OPTION value="'.$unit[1].'" '.$check.'>'.$unit[0].'</OPTION>';
 					}
-					else
-					if(strlen($name_maiden)>1)
-					{
-						echo '<SELECT name="name_maiden"><OPTION value="'.$tribe_array.'" '.$check.'>'.$tribe_array.'</OPTION></SELECT>';
-					}
-					else
-					{
-						echo '<input name="name_maiden" type="text">';
-					}
-				
+				 echo '<OPTION value="notinlist">NOT IN LIST</OPTION>';
+				 echo '</SELECT>';
 				?>	
 				
 				</td>
@@ -747,9 +745,7 @@ if(!$no_tribe)
 					echo $$dfbuffer;
 ?>
 				 ] </font><br>
-<input name="date_age" type="text" size="15" maxlength=10 value=""
- 				
-				onKeyUp="setDatebyAge(this,this.form.date_birth,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+<input name="date_age" type="text" size="15" maxlength=10 value="" onKeyUp="setDatebyAge(this,this.form.date_birth,'<?php echo $date_format ?>','<?php echo $lang ?>')">
 				<font size=1>
 <?php
 					echo $LDAge;
@@ -820,12 +816,10 @@ if(!$no_tribe)
 			</td>
 			<td class="reg_input">
 <?php 
-				if(is_array($town_array) && $addr_citytown_name)
-				{
-					echo '<SELECT name="addr_citytown_name">';
+					echo '<SELECT name="addr_citytown_nr" onChange="list_popup(this,\'city\');">';
 					foreach($town_array as $unit)
 					{
-						if($update && (strtoupper($addr_citytown_name) == strtoupper($unit)))
+						if($update && (strtoupper($addr_citytown_nr) == strtoupper($unit[1])))
 						{
 							$check = 'selected';
 						}
@@ -833,19 +827,10 @@ if(!$no_tribe)
 						{
 							$check = '';	
 						}
-						echo '<OPTION value="'.$unit.'" '.$check.'>'.$unit.'</OPTION>';
+						echo '<OPTION value="'.$unit[1].'" '.$check.'>'.$unit[0].'</OPTION>';
 					}
+				 echo '<OPTION value="notinlist">NOT IN LIST</OPTION>';
 				 echo '</SELECT>';
-				}
-				else
-				if(strlen($addr_citytown_name)>1)
-				{
-					echo '<SELECT name="addr_citytown_name"><OPTION value="'.$town_array.'" '.$check.'>'.$town_array.'</OPTION></SELECT>';
-				}
-				else
-				{
-					echo '<input name="addr_citytown_name" type="text" value="'.$addr_citytown_name.'"><a href="javascript:popSearchWin(\'citytown\',\'aufnahmeform.addr_citytown_nr\',\'aufnahmeform.addr_citytown_name\')"><img '.createComIcon($root_path,'b-write_addr.gif','0').'></a>';
-				}
 				?>	
 				
 			</td>
@@ -941,7 +926,7 @@ if(!$no_tribe)
 			<input type="hidden" name="lang" value="<?php echo $lang; ?>">
 			<input type="hidden" name="linecount" value="<?php echo $linecount; ?>">
 			<input type="hidden" name="mode" value="save">
-			<input type="hidden" name="addr_citytown_nr" value="<?php echo $addr_citytown_nr; ?>">
+			
 			<input type="hidden" name="insurance_item_nr" value="<?php echo $insurance_item_nr; ?>">
 			<input type="hidden" name="insurance_firm_id" value="<?php echo $insurance_firm_id; ?>">
 			<input type="hidden" name="insurance_show" value="<?php echo $insurance_show; ?>">

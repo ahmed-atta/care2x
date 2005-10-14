@@ -2,7 +2,8 @@
 $LDAdmission='Admission';
 $LDAdmitDate='Admission date';
 $LDAdmitTime='Admission time';
-$LDCaseNr='Admission number';
+$LDCaseNr='Admission-Nr.';
+$LDFileNr='Selian file nr';
 $LDTitle='Occupation';
 $LDLastName='Surname/Ukoo';
 $LDFirstName='First name';
@@ -48,7 +49,7 @@ $LDCloseWin='Close admission window';
 $LDError='Information is missing in the input field marked <font color=red>red</font>!';
 $LDErrorS='Some information are missing in the input fields marked with <font color=red>red</font>!';
 
-$fieldname=array('Patient nr.','Lastname','Firstname','Date of birth','Options');
+$fieldname=array('Admission-Nr.','Lastname','Firstname','Date of birth','Options');
 $LDEntryPrompt='Enter the search keyword. For example: lastname, or firstname, or date of birth, etc.';
 $LDSEARCH='SEARCH';
 $LDAdmWantEntry='I need to admit a patient';
@@ -80,7 +81,7 @@ $LDElements=array(
 								'Lastname',
 								'Firstname',
 								'Date of birth',
-								'Patient nr.',
+								'Admission-Nr.',
 								'Admission date'
 								);
 $LDSearchKeyword='Search keyword or condition';
@@ -106,7 +107,7 @@ $LDMedocsElements=array(
 								'Lastname',
 								'Firstname',
 								'Date of birth',
-								'Patient Nr.',
+								'Admission-Nr.',
 								'Document Nr.',
 								'Department',
 								'Date',
@@ -173,11 +174,11 @@ $LDSeparated='Separated';
 $LDCellPhone='Cellphone.';
 $LDFax='Fax';
 $LDEmail='Email';
-$LDZipCode='Zip';
+$LDZipCode='P.O. Box';
 $LDPhoto='Photo';
 /* 2002-12-02 EL*/
 $LDPatientRegisterTxt='Register patient, search registrations, archive research';
-$LDAdmitNr='Admission Nr.';
+$LDAdmitNr='Admission-Nr.';
 $LDPatient='Patient';
 $LDVisit='Visit';
 $LDVisitTxt='Ambulatory or outpatient admission';
@@ -249,10 +250,10 @@ $LDPatientCurrentlyAdmitted='Patient is currently admitted!';
 $LDOptions='Options';
 /** note the ' ~nr~ ' must not be erased it will be replaced by the script with the number of search results ******/
 $LDSearchFoundAdmit='I found <font color=red><b>~nr~</b></font> relevant admission data.';
-$LDPatientNr='Patient Nr.';
+$LDPatientNr='Admission-Nr.';
 $LDNoRecordYet='~tag~ has no ~obj~ yet.';
 $LDNoRecordFor='No ~obj~ record for ~tag~ yet.';
-$LDRegistrationNr='Registration Nr.';
+$LDRegistrationNr='Admission-Nr.';
 $LDDate='Date';
 $LDType='Type';
 $LDMedicine='Medicine';
@@ -277,7 +278,7 @@ $LDPrescription='Prescription';
 $LDDrugClass='Drug Class';
 $LDPrescribedBy='Prescribed by';
 $LDPharmOrderNr='Pharmacy Order Number';
-$LDEncounterNr='Encounter Nr.';
+$LDEncounterNr='Admission-Nr.';
 $LDValue='Value';
 $LDUnit='Unit';
 $LDWeight='Weight';
@@ -333,7 +334,7 @@ $LDOptsForPatient='Options for this patient';
 /* 2003-05-06 EL */
 $LDRegisterNewPerson='Register a new person';
 /* 2003-05-17 EL */
-$LDEnterPersonSearchKey='Enter search keyword: e.g. PID, first name, family name, or birth date';
+$LDEnterPersonSearchKey='Enter search keyword: e.g. PID, file number, first name, family name, or birth date';
 $LDPersonData='Personal data';
 /* 2003-05-26 EL*/
 $LDDiagnoses='Diagnoses';

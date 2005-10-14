@@ -338,7 +338,7 @@ How to display the main logbook back again?</b>
 How to start a log document for an operation?</b>
 </font>
 <ul>       	
- 	<b>Step 1: </b>Find the patient first. Type the patient's number in the "<span style="background-color:yellow" > Patient nr.: </span>" field.<p>
+ 	<b>Step 1: </b>Find the patient first. Type the patient's admission number in the "<span style="background-color:yellow" > Patient nr.: </span>" field.<p>
 	<b>Alternative ways: </b>
 	<ul type=disc>  	
 	<li>Enter a complete information or the first few letters of the patient's family name or given name in the "<span style="background-color:yellow" > Family name, Given name </span>" field.

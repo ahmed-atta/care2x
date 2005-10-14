@@ -82,10 +82,12 @@ if(($mode=='')||($mode=='fresh')){
 	
 	# set to edit mode
 	$edit=true;
-	
 		# Create the waiting outpatients´ list
+		
 		$dnr=(isset($w_waitlist)&&$w_waitlist) ? 0 : $dept_nr;
+		//echo '<p>'.$enc_obj->getLastQuery();
 		$waitlist=&$enc_obj->createWaitingOutpatientList($dnr);
+		
 		$waitlist_count=$enc_obj->LastRecordCount();
 		//echo $waitlist_count.'<p>'.$enc_obj->getLastQuery();
 		
@@ -554,7 +556,7 @@ $occ_list.='</table>';
 
 echo $occ_list;
 */
-
+/*
 # Declare template items
 $TP_DOC1_BLOCK='';
 $TP_DOC2_BLOCK='';
@@ -617,7 +619,7 @@ $tp=$TP_obj->load('ambulatory/tp_clinic_quickinfo.htm');
 	$smarty->assign('sSubMenuBlock',$sTemp);
 
 # Assign the submenu to the mainframe center block
-
+*/
  $smarty->assign('sMainBlockIncludeFile','ambulatory/outpatients.tpl');
 
  /**

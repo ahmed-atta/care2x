@@ -175,7 +175,7 @@ $LDPWChanged='The new password is saved.';
 
 $LDBday='Birthdate';
 $LDShotDate='Shotdate';
-$LDPatientNr='Encounter Nr';
+$LDPatientNr='Admission-Nr.';
 $LDSetShotDate='Set this date for all pictures.';
 $LDFotoLab='Photolab';
 $LDHowManyPics='How many pictures do you wish to save in the databank?';

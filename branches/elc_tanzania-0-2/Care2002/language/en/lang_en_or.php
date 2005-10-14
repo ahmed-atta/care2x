@@ -59,7 +59,7 @@ $LDOperation='Operation';
 $LDLastName='Family name';
 $LDName='Given name';
 $LDBday='Birthdate';
-$LDPatientNr='Patient nr.';
+$LDPatientNr='Admission-Nr.';
 $LDMatchCode='Matchcode Name';
 $LDOpDate='Operation date';
 $LDOperator='Surgeon';
@@ -97,7 +97,7 @@ $LDSrcListElements=array(
 'Family name',
 'Given name',
 'Birthdate',
-'Patient nr.',
+'Admission-Nr.',
 'OP Date',
 'OR Department',
 'OP Nr.'

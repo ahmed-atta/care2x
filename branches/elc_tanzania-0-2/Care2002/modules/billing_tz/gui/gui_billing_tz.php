@@ -12,7 +12,7 @@
 function gethelp(x,s,x1,x2,x3,x4)
 {
 	if (!x) x="";
-	urlholder="../../main/help-router.php?sid=6ac874bb63e983fd6ec8b9fdc544cab5&lang=$lang&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3+"&x4="+x4;
+	urlholder="../../main/help-router.php<?php echo URL_APPEND; ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3+"&x4="+x4;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }

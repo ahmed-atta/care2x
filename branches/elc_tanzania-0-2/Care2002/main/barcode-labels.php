@@ -18,7 +18,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 <?php html_rtl($lang); ?>
 <head>
 <?php echo setCharSet(); ?>
-<title>Barcode Labels Patient nr. <?php echo $HTTP_SESSION_VARS['sess_full_en'] ?></title>
+<title>Barcode Labels Admission-Nr. <?php echo $HTTP_SESSION_VARS['sess_full_en'] ?></title>
 </head>
 <body onLoad="if(window.focus) window.focus()">
 <?php  if(file_exists($root_path."cache/barcodes/en_".$HTTP_SESSION_VARS['sess_full_en'].".png")) : ?>

@@ -1,26 +1,5 @@
 <?php /* Smarty version 2.6.0, created on 2005-09-26 10:10:06
          compiled from main/passcheck_entry_mask.tpl */ ?>
-<!-- Begin Nedstat Basic code -->
-<!-- Title: Care2x -->
-<!-- URL: http://health.elct.org/care2x -->
-<script language="JavaScript" type="text/javascript"
-src="http://m1.nedstatbasic.net/basic.js">
-</script>
-<script language="JavaScript" type="text/javascript" >
-<!--
-  nedstatbasic("ACw1NwFtqur/nlJOPwNwBUxdOH+g", 0);
-// -->
-</script>
-<noscript>
-<a target="_blank"
-href="http://www.nedstatbasic.net/stats?ACw1NwFtqur/nlJOPwNwBUxdOH+g"><img
-src="http://m1.nedstatbasic.net/n?id=ACw1NwFtqur/nlJOPwNwBUxdOH+g"
-border="0" width="18" height="18"
-alt="Nedstat Basic - Free web site statistics
-Personal homepage website counter"></a><br>
-<a target="_blank" href="http://www.nedstatbasic.net/">Free counter</a>
-</noscript>
-<!-- End Nedstat Basic code -->
 
 
 <!--<table width=100% border=0 cellpadding="0" cellspacing="0">-->
@@ -71,11 +50,11 @@ Personal homepage website counter"></a><br>
 													<nobr><?php echo $this->_tpl_vars['LDUserPrompt']; ?>
 :</nobr>
 													<br>
-													<INPUT type="text" name="userid" size="14" maxlength="25"> <?php echo $this->_tpl_vars['sDemoLoginInfo']; ?>
+													<INPUT type="text" name="userid" size="14" maxlength="25">
 <p>
 													<nobr><?php echo $this->_tpl_vars['LDPwPrompt']; ?>
 :<br>
-													<INPUT type="password" name="keyword" size="14" maxlength="25"> <?php echo $this->_tpl_vars['sDemoPasswordInfo']; ?>
+													<INPUT type="password" name="keyword" size="14" maxlength="25">
 
 
 																										<?php echo $this->_tpl_vars['sPassHiddenInputs']; ?>

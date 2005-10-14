@@ -229,6 +229,7 @@ class Core {
 	function insertDataFromInternalArray() {
 		//$this->data_array=NULL;
 		$this->_prepSaveArray();
+		
 		# Check if  "create_time" key has a value, if no, create a new value
 		//if(!isset($this->buffer_array['create_time'])||empty($this->buffer_array['create_time'])) $this->buffer_array['create_time']=date('YmdHis');
 		return $this->insertDataFromArray($this->buffer_array);

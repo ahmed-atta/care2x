@@ -31,7 +31,7 @@
 						{{$sFileBrowserInput}}
 					</td>
 				</tr>
-
+				{{$sFileNr}}
 				<tr>
 					<td  class="reg_item">
 						{{$LDRegDate}}
@@ -54,6 +54,7 @@
 
 				{{* The following tags contain rows patterned after the  "registration_admission/reg_row.tpl" template *}}
 
+				
 				{{$sPersonTitle}}
 				{{$sNameLast}}
 				{{$sNameFirst}}

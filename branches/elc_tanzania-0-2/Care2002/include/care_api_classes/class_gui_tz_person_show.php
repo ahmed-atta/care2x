@@ -145,7 +145,6 @@ class GuiPersonShow extends Person{
 		$validdata = TRUE;
 
 		if(!empty($pid)) $this->pid=$pid;
-
 		# Load the language tables
 		$lang_tables =$this->langfile;
 		include($root_path.'include/inc_load_lang_tables.php');
@@ -173,6 +172,7 @@ class GuiPersonShow extends Person{
 
 			//if($data_obj=&$this->person_obj->getAllInfoObject()){
 			//	$this->data=$data_obj->FetchRow();
+			
 			if($this->is_loaded){
 				extract($this->data);
 
@@ -237,7 +237,7 @@ class GuiPersonShow extends Person{
 					echo $pid;
 				}
 			} ?><br>
-<?php
+<?php 
 if(file_exists($root_path.'cache/barcodes/pn_'.$pid.'.png')){
 	echo '<img src="'.$root_path.'cache/barcodes/pn_'.$pid.'.png" border=0 width=180 height=35>';
 }else{
@@ -251,7 +251,14 @@ if(file_exists($root_path.'cache/barcodes/pn_'.$pid.'.png')){
 			<FONT SIZE=-1  FACE="Arial"><img <?php echo $img_source; ?>>
 		</td>
 		</tr>
-
+		<tr>
+		<td  bgColor="#eeeeee">
+			<FONT SIZE=-1  FACE="Arial"><?php echo $LDFileNr ?>:
+		</td>
+		<td  bgcolor="#ffffee">
+			<FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo $selian_pid; ?>
+		</td>
+		</tr>
 		<tr>
 		<td  bgColor="#eeeeee">
 			<FONT SIZE=-1  FACE="Arial"><?php echo $LDRegTime ?>:
@@ -264,7 +271,7 @@ if(file_exists($root_path.'cache/barcodes/pn_'.$pid.'.png')){
 		<tr>
 		<td bgColor="#eeeeee">
 			<FONT SIZE=-1  FACE="Arial">
-			<?php echo $LDRegDate ?>:
+			<?php echo $LDRegDate; ?>:
 		</td>
 		<td bgcolor="#ffffee">
 			<FONT SIZE=-1  FACE="Arial" color="#800000">
@@ -320,7 +327,7 @@ if(file_exists($root_path.'cache/barcodes/pn_'.$pid.'.png')){
 			$this->createTR($LDNameMid,$name_middle);
 		}
 		if (!$GLOBAL_CONFIG['person_name_maiden_hide']&&$name_maiden){
-			$this->createTR($LDNameMaiden,$name_maiden);
+			$this->createTR($LDNameMaiden,$tribe_name);
 		}
 		if (!$GLOBAL_CONFIG['person_name_others_hide']&&$name_others){
 			$this->createTR($LDNameOthers,$name_others);

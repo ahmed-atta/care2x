@@ -74,7 +74,7 @@ if(($mode=='')||($mode=='fresh')){
 	if($enc_obj->assignInDept($pn,$dept_nr,$dept_nr)){
 		//@$enc_obj->setInDept($pn);
 		include($root_path.'js/reloadparent_closewin.js');
-		exit;
+		
 	}
 }
 

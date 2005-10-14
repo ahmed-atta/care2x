@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.0, created on 2005-02-18 15:16:01
+<?php /* Smarty version 2.6.0, created on 2005-10-12 14:38:42
          compiled from registration_admission/reg_form.tpl */ ?>
 				<?php echo $this->_tpl_vars['sRegFormJavaScript']; ?>
 
@@ -45,6 +45,7 @@ unset($_smarty_tpl_vars);
 
 					</td>
 				</tr>
+				<?php echo $this->_tpl_vars['sFileNr']; ?>
 
 				<tr>
 					<td  class="reg_item">
@@ -70,6 +71,7 @@ unset($_smarty_tpl_vars);
 					</td>
 				</tr>
 
+				
 				
 				<?php echo $this->_tpl_vars['sPersonTitle']; ?>
 

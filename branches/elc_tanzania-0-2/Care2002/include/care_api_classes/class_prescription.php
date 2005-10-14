@@ -211,23 +211,22 @@ class Prescription extends Core {
 	* Merotech customation methods
 	*/
 
-	function getDrugList($class, $is_pediatric, $is_adult, $is_other, $is_consumable ) {
+	function getDrugList($class, $is_enabled ) {
   	  global $db;
-  	  
+  	  if($is_enabled) $query = " AND ".$is_enabled." = 1";
+  	  else $query = "";
 	    $debug = FALSE;
 	    ($debug)?$db->debug=TRUE:$db->debug=FALSE;
-	    if ($is_pediatric || $is_adult || $is_other || $is_consumable ) {
+	    
   	    $this->sql="SELECT item_id as drug_id, item_description as description FROM $this->tb_drug_list WHERE
-  	                  	 purchasing_class = '$class' AND
-  	                  	 is_pediatric = $is_pediatric AND
-  	                  	 is_adult  = $is_adult AND
-  	                  	 is_other  = $is_other AND
-  	                  	 is_consumable = $is_consumable
+  	                  	 purchasing_class = '$class'
+  	                  	 $query
   	                  	 ORDER BY item_description";
-  	  } else {
+  	  
+  	  /* else {
   	    $this->sql="SELECT item_id as drug_id, item_description as description FROM $this->tb_drug_list WHERE
   	                  	 purchasing_class = '$class' ORDER BY item_description";
-  	  }
+  	  }*/
   	  
 	    if ($this->result=$db->Execute($this->sql)) {
 		    if ($this->result->RecordCount()) {

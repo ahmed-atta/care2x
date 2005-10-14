@@ -162,7 +162,7 @@ $LDPatListElements=array(
 										'Bed',
 										'Family name, Name',
 										'Birthdate',
-										'Patient nr.',
+										'Admission-Nr.',
 										'Insurance',
 										'Options'
 										);

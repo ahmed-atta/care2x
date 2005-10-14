@@ -26,27 +26,79 @@ class advanced_search extends Core {
   *     $SHOW_TRIBE_SELECTION=FALSE;        
   *   }
   */	
-
-  function get_equal_words($column, $table, $word_to_compare, $sharpeness) {
+	function insert_new_tribe($newtribe,$tribecode)
+	{
+		global $db;
+		$sql="INSERT INTO care_tz_tribes (tribe_code, tribe_name, is_additional)
+		VALUES ('".$tribecode."','".$newtribe."',1)";
+		$rs_ptr = $db->Execute($sql);
+		return $db->Insert_ID();
+	}
+	function insert_new_city($newcity,$code)
+	{
+		global $db;
+		$sql="INSERT INTO care_address_citytown (unece_locode, name, is_additional)
+		VALUES ('".$code."','".$newcity."',1)";
+		$rs_ptr = $db->Execute($sql);
+		return $db->Insert_ID();
+	}
+	function get_tribe_info($tribe_id)
+	{
+		global $db;
+		if(!$tribe_id) return false;
+		$this->sql="SELECT * FROM care_tz_tribes WHERE tribe_id=".$tribe_id;
+		
+    if($this->result=$db->Execute($this->sql)) 
+        if($this->result->RecordCount()) 
+					return $this->result->FetchRow();	 
+				else
+					return false;
+	}
+	function get_citytown_info($nr)
+	{
+		global $db;
+		if(!$nr) return false;
+		$this->sql="SELECT * FROM care_address_citytown WHERE nr=".$nr;
+    if($this->result=$db->Execute($this->sql)) 
+        if($this->result->RecordCount()) 
+					return $this->result->FetchRow();	 
+				else
+					return false;
+	}
+  function get_equal_words($column, $table, $word_to_compare, $sharpeness, $givekey) {
     
     global $db;
     $debug = FALSE;
     ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
   
-        $SQLStatement = "SELECT DISTINCT $column FROM $table ORDER BY $column";
+  			if(!$givekey)
+  			{
+  				$SQLStatement = "SELECT DISTINCT $column FROM $table ORDER BY $column";
+  			}
+  			else
+  			{
+        	$SQLStatement = "SELECT DISTINCT $column, $givekey FROM $table ORDER BY $column";
+        }
         $rs_ptr = $db->Execute($SQLStatement);
         $res_array = $rs_ptr->GetArray();
         $arr_index = 0;
         $hit_index = 0;
         $PERFECT_HIT=FALSE;
         while (list($u,$v)=each($res_array)){
-  
+  				if(!$word_to_compare)
+  				{
+						$all_record_array[$arr_index][0] = $v[$column];
+						$all_record_array[$arr_index][1] = $v[$givekey];
+  				}
+  				else
+  				{
             $s1 = rtrim(strtoupper($word_to_compare));
             $s2 = rtrim(strtoupper($v[$column]));
             
             $st = similar_text($s1,$s2,$percent);
             
-            $all_record_array[$arr_index] = $v[$column];
+            $all_record_array[$arr_index][0] = $v[$column];
+            $all_record_array[$arr_index][1] = $v[$givekey];
             if ($percent==100) {
             	
               // the spelling is okay
@@ -57,13 +109,20 @@ class advanced_search extends Core {
             } elseif ($percent>=$sharpeness) {
               // we have a selection:
               if ($debug) echo "<br>$s1 and $s2 are more than $percent equal<br>";
-              $hit_array[$hit_index]=$v[$column];
+              $hit_array[$hit_index][0]=$v[$column];
+              $hit_array[$hit_index][1]=$v[$givekey];
               $hit_index++;
             }
             if ($debug) echo "$all_record_array[$arr_index]--";
-            $arr_index ++;
+           }
+           $arr_index++;
         } // end of while
-
+				if(!$word_to_compare)
+				{
+					return $all_record_array;
+				}
+				else
+				{
         // anyway, what's set up before: Reset the global debug-variable
         $db->debug=FALSE;
         
@@ -84,6 +143,7 @@ class advanced_search extends Core {
             } else {
               return FALSE;
             }
+        }
 }
 }
 ?>

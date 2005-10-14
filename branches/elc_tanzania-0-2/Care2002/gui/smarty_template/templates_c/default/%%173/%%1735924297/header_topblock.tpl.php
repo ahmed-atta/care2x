@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.0, created on 2005-09-26 10:10:29
+<?php /* Smarty version 2.6.0, created on 2005-10-12 16:30:30
          compiled from common/header_topblock.tpl */ ?>
  <table cellspacing="0"  class="titlebar" border=0>
  <tr valign=top  class="titlebar" >
@@ -14,7 +14,7 @@
      <?php endif; ?>
   </td>
   <td bgcolor="<?php echo $this->_tpl_vars['top_bgcolor']; ?>
-" align=right><?php if ($this->_tpl_vars['pbAux2']): ?><a
+" align=right><?php if (! $this->_tpl_vars['disableButton']):  if ($this->_tpl_vars['pbAux2']): ?><a
    href="<?php echo $this->_tpl_vars['pbAux2']; ?>
 "><img <?php echo $this->_tpl_vars['gifAux2']; ?>
  alt="" <?php echo $this->_tpl_vars['dhtml']; ?>
@@ -36,7 +36,7 @@
 ><img <?php echo $this->_tpl_vars['gifClose2']; ?>
  alt="<?php echo $this->_tpl_vars['LDCloseAlt']; ?>
 " <?php echo $this->_tpl_vars['dhtml']; ?>
-></a><?php endif; ?>
+></a><?php endif;  endif; ?>
   </td>
  </tr>
  </table>

@@ -1609,9 +1609,9 @@ class Encounter extends Notes {
 		$this->sql="INSERT INTO $this->tb_location (encounter_nr,type_nr,location_nr,group_nr,date_from,time_from,history,create_id,create_time)
 						VALUES 
 						('$enr','$type_nr','$loc_nr','$group_nr','$date','$time','$history','$user','".date('YmdHis')."')";
-		//echo $this->sql;
-		//if($this->Transact($this->sql))	return true; else	echo $this->sql;
-		return $this->Transact($this->sql);
+	  //echo $this->sql;
+		if($this->Transact($this->sql))	return true; else	echo $this->sql;
+		return true; //$this->Transact($this->sql);
 	}
 	/**
 	* Saves the encounter's ward location. 
@@ -1667,7 +1667,9 @@ class Encounter extends Notes {
 	* @return boolean
 	*/
 	function assignInDept($enr,$loc_nr,$group_nr,$date,$time){
+		
 		if($this->_setLocation($enr,1,$loc_nr,$group_nr,$date,$time)){ # loc. type 1 = department
+			//echo 'TEST';
 			return $this->setCurrentDeptInDept($enr,$loc_nr);
 		}
 	}
@@ -1730,6 +1732,7 @@ class Encounter extends Notes {
 		$data.="	modify_id='".$HTTP_SESSION_VARS['sess_user_name']."',
 				modify_time='".date('YmdHis')."'";
 		$this->sql="UPDATE $this->tb_enc SET $data WHERE encounter_nr=$enr";
+		//echo $this->sql;
 		return $this->Transact($this->sql);
 	}
 	/**
