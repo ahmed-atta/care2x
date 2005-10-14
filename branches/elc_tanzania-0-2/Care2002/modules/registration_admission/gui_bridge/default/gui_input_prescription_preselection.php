@@ -18,19 +18,18 @@ if (!empty($show)) { // In case something goes wrong, then do nothing!
   if (empty($db_drug_filter))
     $db_drug_filter="mems_drug_list";
   
-  $drug_list = $pres_obj->getDrugList($db_drug_filter, 0,0,0,0);
+  $drug_list = $pres_obj->getDrugList($db_drug_filter, 0);
   if ($filter=='pediadric') 
-    $drug_list = $pres_obj->getDrugList($db_drug_filter, 1,0,0,0);
+    $drug_list = $pres_obj->getDrugList($db_drug_filter, "is_pediatric");
   elseif ($filter=='adult') 
-    $drug_list = $pres_obj->getDrugList($db_drug_filter, 0,1,0,0);
+    $drug_list = $pres_obj->getDrugList($db_drug_filter, "is_adult");
   elseif ($filter=='others') 
-    $drug_list = $pres_obj->getDrugList($db_drug_filter, 0,0,1,0);
+    $drug_list = $pres_obj->getDrugList($db_drug_filter, "is_other");
   elseif ($filter=='consumable') 
-    $drug_list = $pres_obj->getDrugList($db_drug_filter, 0,0,0,1);
+    $drug_list = $pres_obj->getDrugList($db_drug_filter, "is_consumable");
 } else {
-  $drug_list = $pres_obj->getDrugList("mems_drug_list", 0,0,0,0);
+  $drug_list = $pres_obj->getDrugList("mems_drug_list", 0);
 }
-
 ?>
 <script language="javascript" src="<?php echo $root_path;?>js/check_prescription_form.js"></script>
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -55,8 +54,8 @@ if (!empty($show)) { // In case something goes wrong, then do nothing!
     <td colspan="4" bgcolor="#CAD3EC">
       <table width="100%" border="0" align="center" bordercolor="#330066" cellpadding="0" cellspacing="0">      
       <tr>
-        <td height="10" width="240">
-          <font color="black">Show only items with attrubute of: </font>
+        <td height="10">
+          <font color="black">Common items of: </font>
         </td>
         <td bgcolor="#CAD3EC" width="130">
           <font color="black">Pediatric items: </font>
@@ -100,10 +99,10 @@ if (!empty($show)) { // In case something goes wrong, then do nothing!
   </tr>
   <tr>
     <td colspan="4" bgcolor="#CAD3EC"> 
-        <table width="100%" border="0" bgcolor="#CAD3EC">
+        <table width="100%" border="0" bgcolor="#CAD3EC" cellpadding="0" cellspacing="0">
           <tr>
             <td width="37%" rowspan="5">
-                <select name="itemlist[]" size="16" style="width:285px;" >
+                <select name="itemlist[]" size="10" style="width:235px;" >
   
                   <!-- dynamically managed content -->
   		            <?php	$pres_obj->DisplayDrugs($drug_list);	?>
@@ -113,7 +112,7 @@ if (!empty($show)) { // In case something goes wrong, then do nothing!
               </td>
             <td height="5">&nbsp;</td>
             <td width="38%" rowspan="5"><div align="center">
-                <select name="selected_item_list[]" size="16" style="width:285px;">
+                <select name="selected_item_list[]" size="10" style="width:235px;">
   
                   <!-- dynamically managed content -->
                   <?php $pres_obj->DisplaySelectedItems($item_no); ?>
@@ -133,18 +132,18 @@ if (!empty($show)) { // In case something goes wrong, then do nothing!
               </div></td>
           </tr>
           <tr>
-            <td height="20"> <div align="center">        
+            <td height="20" align="center">       
             <?
 			        if (isset($externalcall)) {      
 			        ?>
-			        <div align="right"><input type="button" name="show" value="PRESCRIBE THIS" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=insert&externalcall=<?php echo $externalcall;?>')">&nbsp;&nbsp;&nbsp;</div>
+			        <input type="button" name="show" value="Prescribe!" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=insert&externalcall=<?php echo $externalcall;?>&disablebuttons=<?php echo $disablebuttons; ?>')">
 			        <?
 			        } else {
 			        ?>
-			        <div align="right"><input type="button" name="show" value="PRESCRIBE THIS" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=insert')">&nbsp;&nbsp;&nbsp;</div>
+			        <input type="button" name="show" value="Prescribe!" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=insert&disablebuttons=<?php echo $disablebuttons; ?>')">
 			        <?
 			        }
-        ?></div></td>
+        ?></td>
           </tr>
         </table>
     </tr>

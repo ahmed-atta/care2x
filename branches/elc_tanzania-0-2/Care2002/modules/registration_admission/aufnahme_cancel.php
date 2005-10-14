@@ -37,11 +37,11 @@ if(isset($mode)&&($mode=='cancel')&&isset($encounter_nr)&&$encounter_nr){
 	}else{
 		$error_msg=$LDWrongLoginPW;
 	}
-}elseif(!isset($is_cancelled)||!$is_cancelled){
+}elseif((!isset($is_cancelled)||!$is_cancelled) && $submitted){
 	header("location:aufnahme_daten_zeigen.php".URL_REDIRECT_APPEND."&encounter_nr=$encounter_nr");
 	exit;
 }else{
-	$error_msg=$LDTellEdpIfPersist;
+	//$error_msg=$LDTellEdpIfPersist;
 }
 ?>
 
@@ -50,6 +50,12 @@ if(isset($mode)&&($mode=='cancel')&&isset($encounter_nr)&&$encounter_nr){
 <HEAD>
 <?php echo setCharSet(); ?>
  <TITLE></TITLE>
+ <style type="text/css" name="1">
+.va12_n{font-family:verdana,arial; font-size:12; color:#000099}
+.a10_b{font-family:arial; font-size:10; color:#000000}
+.a12_b{font-family:arial; font-size:12; color:#000000}
+.a10_n{font-family:arial; font-size:10; color:#000099}
+</style>
 </HEAD>
 
 <BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0   bgcolor=<?php echo $cfg['body_bgcolor']; 
@@ -80,19 +86,45 @@ if(isset($is_cancelled)&&$is_cancelled){
 ?>
 <table border=0 align=center>
   <tr>
-    <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0'); ?>></td>
-    <td><font size=4 face="verdana,arial" color="red"><?php echo "$LDCancelError<br>$error_msg"; ?></td>
+    <td colspan="2" align="center"><img <?php echo createMascot($root_path,'mascot1_r.gif','0'); ?>><font size=4 face="verdana,arial" color="green">Security Bridge</td>
   </tr>
   <tr>
-    <td></td>
-    <td align=center>
-	<form action="aufnahme_daten_zeigen.php" method="post">
-	 <input type="hidden" name="sid" value="<?php echo $sid ?>">
- 	<input type="hidden" name="lang" value="<?php echo $lang ?>">
- 	<input type="hidden" name="encounter_nr" value="<?php echo $encounter_nr ?>">
-	<input type="submit" value="<?php echo $LDOk ?>">
- 	</form>
-	</td>
+    <td class="a12_b" bgcolor="efefef">
+    	<form action="#" method="post">
+    	Username:
+    </td>
+    <td class="a12_b" bgcolor="#efefef">
+			<input type="hidden" name="submitted" value="true">
+			<input type="hidden" name="mode" value="cancel">
+			<input type="hidden" name="sid" value="<?php echo $sid ?>">
+			<input type="hidden" name="lang" value="<?php echo $lang ?>">
+			<input type="hidden" name="encounter_nr" value="<?php echo $encounter_nr ?>">
+			<input type="text" name="cby">
+ 		</td>
+ 	</tr>
+ 	<tr>
+	 	<td class="a12_b" bgcolor="#efefef">
+	 		Password:
+	 	</td>
+	 	<td class="a12_b" bgcolor="#efefef">
+	 		<input type="password" name="pw">
+	 	</td>
+ 	</tr>
+ 	<tr>
+	 	<td colspan="2" align="center">
+		 	<input type="submit" value="Confirm admission cancel">
+		 	</form>
+	 	</td>
+ 	</tr>
+ 	<tr>
+	 	<td colspan="2" align="center">
+		 	<form action="aufnahme_daten_zeigen.php" method="post">
+			<input type="hidden" name="sid" value="<?php echo $sid ?>">
+		 	<input type="hidden" name="lang" value="<?php echo $lang ?>">
+		 	<input type="hidden" name="encounter_nr" value="<?php echo $encounter_nr ?>">
+			<input type="submit" value="Back to admission form">
+		 	</form>
+		</td>
   </tr>
 </table>
 

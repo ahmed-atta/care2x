@@ -8,7 +8,6 @@ $pres_types=$pres_obj->getPrescriptionTypes();
 ?>
 <script language="JavaScript">
 function chkform(d) {
-	
 	if(isNaN(d.value))
 	{
 		alert("Please enter a valid numeric value format like '1234', '2' or '2.5'");	
@@ -42,7 +41,7 @@ function chkform(d) {
 */
 }
 </script>
-<form method="POST" name="reportform<?PHP echo $i;?>" onSubmit="return chkform(this)">
+<form method="POST" name="reportform<?PHP echo $i;?>">
 <?PHP
 $item_array=$_SESSION['item_array'];
 //echo "-->items in array: ".count($item_array)."<br>";#

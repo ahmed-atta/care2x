@@ -48,6 +48,5 @@ $current_encounter = $person->CurrentEncounter();
 $death_date = $person->DeathDate();
 
 # Load GUI page
-
 include('./gui_bridge/default/gui_tz_person_reg_show.php');
 ?>

@@ -45,6 +45,8 @@ if($parent_admit) $sTitleNr= ($HTTP_SESSION_VARS['sess_full_en']);
     $smarty->assign('sToolbarTitle',$sTitleNr);
  else 
   $smarty->assign('sToolbarTitle',"$page_title ($sTitleNr)");
+ 
+ if ($disablebuttons) $smarty->assign('disableButton',true);
 
  # href for help button
  
@@ -229,10 +231,10 @@ if($mode=='show' /*&& !isset($externalcall) */){
       
       if (isset($externalcall)) {     
         if (!isset($printout)) {
-          $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new&externalcall='.$externalcall.'">'.$LDEnterNewRecord.'</a>');
+          $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new&externalcall='.$externalcall.'">'.$LDEnterNewRecord.'</a>');
         }
       } else
-        $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new">'.$LDEnterNewRecord.'</a>');
+        $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new">'.$LDEnterNewRecord.'</a>');
       
 			
 		ob_end_clean();
@@ -241,9 +243,9 @@ if($mode=='show' /*&& !isset($externalcall) */){
 	}else{
       if (isset($externalcall))
         if (!isset($printout))      
-          $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new&externalcall='.$externalcall.'">'.$LDEnterNewRecord.'</a>');
+          $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new&externalcall='.$externalcall.'">'.$LDEnterNewRecord.'</a>');
       else
-        $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new">'.$LDEnterNewRecord.'</a>');
+        $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new">'.$LDEnterNewRecord.'</a>');
 	
 		$smarty->assign('bShowNoRecord',TRUE);
 		
@@ -252,9 +254,9 @@ if($mode=='show' /*&& !isset($externalcall) */){
 		if($parent_admit && !$is_discharged && $thisfile!='show_diagnostics_result.php'){
 			$smarty->assign('sPromptIcon','<img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle',TRUE).'>');
       if (isset($externalcall))      
-        $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new&externalcall='.$externalcall.'">'.$LDEnterNewRecord.'</a>');
+        $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new&externalcall='.$externalcall.'">'.$LDEnterNewRecord.'</a>');
       else
-        $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new">'.$LDEnterNewRecord.'</a>');
+        $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new">'.$LDEnterNewRecord.'</a>');
  		}else{
 			if(file_exists('./gui_bridge/default/gui_person_createnew_'.$thisfile)) include('./gui_bridge/default/gui_person_createnew_'.$thisfile);
 		}
@@ -269,6 +271,7 @@ if($mode=='show' /*&& !isset($externalcall) */){
 	   //set here "druglist", "Supplies", "supplies-lab", "special-others" if you want.
 	   $activated_tab = "druglist"; 
 	   // (by Merotech(RM): Here the main prescription-table-content will be loaded: ;
+	   
 	  if ($debug) echo  './gui_bridge/default/gui_input_'.$thisfile;
 	  include('./gui_bridge/default/gui_input_'.$thisfile);
 

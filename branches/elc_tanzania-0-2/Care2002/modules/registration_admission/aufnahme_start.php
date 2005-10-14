@@ -147,7 +147,7 @@ if($pid!='' || $encounter_nr!=''){
 	           */   }
  						
 
-
+						
 						
                  if(!$error) 
 	             {	
@@ -231,6 +231,7 @@ if($pid!='' || $encounter_nr!=''){
 								}else{
 									$encounter_nr=$encounter_obj->postgre_Insert_ID($dbtable,'encounter_nr',$db->Insert_ID());
 								}
+								$encounter_obj->assignInDept($encounter_nr,$current_dept_nr,$current_dept_nr);
 									    /* Save the service classes */									   
 								/*	    if(!$GLOBAL_CONFIG['patient_service_care_hide']){
 										    $encounter_obj->saveCareServiceClass($care_class);

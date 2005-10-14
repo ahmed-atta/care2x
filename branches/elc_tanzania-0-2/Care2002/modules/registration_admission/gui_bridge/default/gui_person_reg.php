@@ -220,7 +220,7 @@ require('./gui_bridge/default/gui_tabs_patreg.php');
 <tr>
 <td><FONT SIZE=-1  FACE="Arial"><?php if($pid) echo $LDRegistryNr ?> 
 </td>
-<td ><FONT SIZE=-1  FACE="Arial" color="#800000"><?php if($pid) echo $pid+$person_id_nr_adder ?>&nbsp;
+<td >a<FONT SIZE=-1  FACE="Arial" color="#800000"><?php if($pid) echo $pid+$person_id_nr_adder ?>&nbsp;
 </td>
 <td  rowspan=6 ><FONT SIZE=-1  FACE="Arial">
 <a href="#"  onClick="showpic(document.aufnahmeform.photo_filename)"><img <?php echo $img_source; ?> id="headpic" name="headpic"></a>

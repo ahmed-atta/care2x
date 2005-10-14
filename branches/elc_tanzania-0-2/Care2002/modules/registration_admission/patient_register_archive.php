@@ -76,7 +76,7 @@ if (isset($mode) && ($mode=='search'||$mode=='paginate')){
 		# convert * and ? to % and &
 		$searchkey=strtr($searchkey,'*?','%_');
 
-		$sql="SELECT pid, date_reg, name_last, name_first, date_birth, addr_zip, sex, death_date, status FROM $dbtable WHERE ";
+		$sql="SELECT pid, selian_pid, date_reg, name_last, name_first, date_birth, addr_zip, sex, death_date, status FROM $dbtable WHERE ";
 		$s2='';
 							
 							if(isset($pid)&&$pid)
@@ -91,6 +91,17 @@ if (isset($mode) && ($mode=='search'||$mode=='paginate')){
 								}
 							}
 						
+							if(isset($selian_pid)&&$selian_pid)
+							{
+						         if($selian_pid < $GLOBAL_CONFIG['person_id_nr_adder'])
+								 {
+								 		$s2.=" selian_pid $sql_LIKE '%$selian_pid'";
+								 }
+								 else
+								 {
+								       $s2.=" selian_pid = ".$selian_pid;
+								}
+							}
 							
 							if(isset($name_last)&&$name_last)
 							{

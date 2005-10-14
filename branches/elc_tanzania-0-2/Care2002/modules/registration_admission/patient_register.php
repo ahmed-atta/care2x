@@ -34,10 +34,8 @@ if(!isset($insurance_show)) $insurance_show=true;
 
 $newdata=1;
 $target='entry';
-
 # Start buffering the text above  the search block
 ob_start();
-
 require('./gui_bridge/default/gui_std_tags.php');
 
 echo StdHeader();
@@ -84,18 +82,14 @@ require('./gui_bridge/default/gui_tz_tabs_patreg.php');
 
  $sTemp = ob_get_contents();
  ob_end_clean();
-
 require_once($root_path.'include/care_api_classes/class_gui_input_person.php');
-
 $inperson = & new GuiInputPerson;
 
 $inperson->setPID($pid);
 
 $inperson->pretext = $sTemp;
 $inperson->setDisplayFile('tz_patient_register_show.php');
-
 $inperson->Display();
-
 ?>
 
 </ul>

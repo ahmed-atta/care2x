@@ -38,7 +38,6 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
 <FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php echo $LDPatientRegister ?></STRONG> <font size=+2>(<?php echo ($pid) ?>)</font></FONT>
 </td>
-
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
 <a href="javascript:gethelp('person_admit.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
 if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo "startframe.php?sid=".$sid."&lang=".$lang; 
@@ -64,7 +63,6 @@ require('./gui_bridge/default/gui_tz_tabs_patreg.php');
 		
 		# Display the data
 		$person->display();
-
 		?>
 		</td>
 		<td>

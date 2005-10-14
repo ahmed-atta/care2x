@@ -230,6 +230,7 @@ createTR( 'user_id', $LDRegBy,$user_id);
 <?php
 if(!isset($name_last)) $name_last='';
 if(!isset($name_first)) $name_first='';
+createTR('selian_pid', $LDFileNr,$selian_pid);
 createTR('name_last', $LDLastName,$name_last);
 createTR( 'name_first', $LDFirstName,$name_first);
 
