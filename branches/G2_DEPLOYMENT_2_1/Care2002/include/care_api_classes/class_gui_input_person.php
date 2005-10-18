@@ -798,7 +798,7 @@ class GuiInputPerson {
 			$this->smarty->assign('sEmail',$this->createTR($erroremail, 'email', $LDEmail,$email,2));
 		}
 		if (!$GLOBAL_CONFIG['person_citizenship_hide']){
-			$this->smarty->assign('sCitzenship',$this->createTR($errorcitizen, 'citizenship', $LDCitizenship,$citizenship,2));
+			$this->smarty->assign('sCitizenship',$this->createTR($errorcitizen, 'citizenship', $LDCitizenship,$citizenship,2));
 		}
 		if (!$GLOBAL_CONFIG['person_sss_nr_hide']){
 			$this->smarty->assign('sSSSNr',$this->createTR($errorsss, 'sss_nr', $LDSSSNr,$sss_nr,2));
