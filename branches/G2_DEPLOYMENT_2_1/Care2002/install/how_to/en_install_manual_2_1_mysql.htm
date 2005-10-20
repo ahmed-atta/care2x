@@ -43,8 +43,12 @@ bgColor=#ffffff topMargin=2>
 			TTF  = if available<br>
 			</blockquote><p>
 
-			<b>5.</b> Uncompress  the <a href="http://sourceforge.net/project/showfiles.php?group_id=53886" target="_blank">CARE2X 2nd Generation Deployment 2.1</a> scripts into the active directory of Apache web server.
+			<b>5.</b> Uncompress the content of the <a href="http://sourceforge.net/project/showfiles.php?group_id=53886">CARE2X 2G Deployment 2.1 FULL PACK</a> package into the active directory of your server.
+			<blockquote>
+			<b>5.1.</b> Uncompress the content of the <a href="http://sourceforge.net/project/showfiles.php?group_id=53886">CARE2X PATCHES D-2.1.0.1</a> package into the directory where you have already uncompressed the Full Pack.
 			<p>
+			<b>5.2.</b> Do the same with the <a href="http://sourceforge.net/project/showfiles.php?group_id=53886">CARE2X PATCHES D-2.1.0.2</a> package. 
+			</blockquote>
 			<b>6.</b> Make sure that the server can write in the following directories and files.
 			<b>NOTE:</b> In most servers, file access permission is highly restrictive. Make sure that the following directories and files are system writeable.
 The easiest way to do this is to CHMOD 777 the following:
@@ -108,7 +112,7 @@ For windows users, right click on the file, select  "properties" and remove any 
 			<P>
 			Like this: $dbtype='mysql';
 			<p>
-			<img src="img/my_db_init.png" border=0 width=510 height=595>
+			<img src="../../docs/img/my_db_init.png" border=0 width=510 height=595>
 			</BLOCKQUOTE>
 			</blockquote><p>
 			<b>8.</b> Open the file <b>"<font color=#ff0000>inc_remoteservers_conf.php</font>"</b> 
@@ -133,7 +137,7 @@ For windows users, right click on the file, select  "properties" and remove any 
 			<b>11.</b> Using the program phpmyAdmin (or any appropriate mySQL administration program), create a new database naming it with  
 			the name that you entered earlier in step #7.<p>
 			<ul>
-			<img src="dumpsave_img/pma_create_db.png" border=0 width=715 height=157>
+			<img src="../../docs/dumpsave_img/pma_create_db.png" border=0 width=715 height=157>
 			</ul>
 			<b>12.</b> Within the newly created database create the care2x database structure. To do this use phpmyAdmin to load  the following sql dump:
 				<font color=#ff0000>install/mysql/manual/care_db_structure_d21_manual_my.sql</font>
@@ -143,7 +147,7 @@ For windows users, right click on the file, select  "properties" and remove any 
 			<li>Click the "Browse" button and the file manager will pop-up. 
 			<li>Find and select the <font color=#ff0000>install/mysql/manual/care_db_structure_d21_manual_my.sql</font>.
 			<li> Click "Go".<br>
-			<img src="dumpsave_img/pma_selectdump.png" border=0 width=715 height=326>
+			<img src="../../docs/dumpsave_img/pma_selectdump.png" border=0 width=715 height=326>
 			</blockquote><p>
 						
 			<b>13.</b> Following the same procedure described at step #12, Load additional data dump according to your needs. 
@@ -183,6 +187,29 @@ For windows users, right click on the file, select  "properties" and remove any 
 <blockquote>
 			insert-data-a2o.sql<br>
 			insert-data-p2z.sql<br>
+</blockquote>							
+			<p>
+			<li>ICD10 coding system in <b>bosnian</b> language: Load the additional data dump  found at  the  /install/sql/icd10_bs directory.
+			 <p>
+<blockquote>
+			insert-data-a2l.sql<br>
+			insert-data-m2y.sql<br>
+</blockquote>							
+			<p>
+			<li>ICD10 coding system in <b>bulgarian</b> language: Load the additional data dump  found at  the  /install/sql/icd10_bg directory.
+			 <p>
+<blockquote>
+			insert-data-a2m.sql<br>
+			insert-data-n2z.sql<br>
+</blockquote>							
+			<p>
+			<FONT COLOR=#FF0000>Note: If you prefer to load the CSV formatted data, download the CSV file from here:
+			<A HREF="https://sourceforge.net/project/showfiles.php?group_id=53886&release_id=204455" TARGET="_blank">care_icd10_bg.csv</A></FONT>
+			<P>
+			<li>ICD10 coding system in <b>turkish</b> language: Load the additional data dump  found at  the  /install/sql/icd10_tr directory.
+			 <p>
+<blockquote>
+			insert-data-all.sql<br>
 </blockquote>				
 			<P>
 			<li>OPS301 coding system in <b>german</b> language:  Load the additional data dump  found at  the /install/sql/ops301_de directory.
@@ -229,8 +256,8 @@ For windows users, right click on the file, select  "properties" and remove any 
 			The first page of CARE 2X should appear. Congratulations!
 		<p>Now you can start  creating user access permissions. <p>
 			To do this:<p>
-	Select the EDP link on the left menu
-			and then select "Access rights". Enter your admin username and your admin password. When the 
+	Select the "System Admin" link on the left menu
+			and then select "Access Permissions". Enter your admin username and your admin password. When the 
 			interface appears, you can start creating user access rights and permissions.
 			<p>Note: You cannot create additional Admin permission
 			using this interface. You have to follow the step #14

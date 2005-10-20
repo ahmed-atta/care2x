@@ -7,7 +7,7 @@ bgColor=#ffffff topMargin=2>
 <TABLE cellSpacing=0 cellPadding=5 width="95%" border=0>
   <TBODY>
   <TR vAlign=top>
-    <TD ><font face="verdana,arial" size=2><A href="../../index.php?lang=de">
+    <TD ><font face="verdana,arial" size=2><A href="http://care2x.org/">
 	<img src="../../docs/img/care_logo.gif" border=0></A> </TD>
     <TD bgColor=#eeeeee><b>
       <font face="verdana,arial" size=5>Installation</b> <font size=3 color="red">(2nd Generation Deployment 2.1)</font><p>
@@ -26,8 +26,12 @@ bgColor=#ffffff topMargin=2>
 		<b>NOTE:</b> The following installation procedure is valid ONLY for the 2nd Generation Deployment <font color="red"><b>2.1</b></font>.
 		<p>
 		
-			<b>1.</b> Uncompress  the CARE2X deployment 2nd Generation Deployment 2.1 scripts into the active directory of your server.
+			<b>1.</b> Uncompress the content of the <a href="http://sourceforge.net/project/showfiles.php?group_id=53886">CARE2X 2G Deployment 2.1 FULL PACK</a> package into the active directory of your server.
+			<blockquote>
+			<b>1.1.</b> Uncompress the content of the <a href="http://sourceforge.net/project/showfiles.php?group_id=53886">CARE2X PATCHES D-2.1.0.1</a> package into the directory where you have already uncompressed the Full Pack.
 			<p>
+			<b>1.2.</b> Do the same with the <a href="http://sourceforge.net/project/showfiles.php?group_id=53886">CARE2X PATCHES D-2.1.0.2</a> package. 
+			</blockquote>
 			<b>2.</b> Make the following directories and files  system writeable.
 
 <blockquote>
@@ -102,8 +106,25 @@ bgColor=#ffffff topMargin=2>
 </blockquote>
 		<p>The following 2 dump files are for the <b>spanish</b> icd codes! Do not load them if you do not need the spanish codes.
 <blockquote>			
-			install/sql/icd10_es/insert-data-a20.sql<br>
+			install/sql/icd10_es/insert-data-a2o.sql<br>
 			install/sql/icd10_es/insert-data-p2z.sql<br>
+</blockquote>
+		<p>The following 2 dump files are for the <b>bosnian</b> icd codes! Do not load them if you do not need the bosnian codes.
+<blockquote>			
+			install/sql/icd10_bs/insert-data-a2l.sql<br>
+			install/sql/icd10_bs/insert-data-m2y.sql<br>
+</blockquote>
+		<p>The following 2 dump files are for the <b>bulgarian</b> icd codes! Do not load them if you do not need the bulgarian codes.
+<blockquote>			
+			install/sql/icd10_bg/insert-data-a2m.sql<br>
+			install/sql/icd10_bg/insert-data-n2z.sql<br>
+</blockquote>
+			<p>
+			<FONT COLOR=#FF0000>Note: If you prefer to load the CSV formatted data, download the CSV file from here:
+			<A HREF="https://sourceforge.net/project/showfiles.php?group_id=53886&release_id=204455" TARGET="_blank">care_icd10_bg.csv</A></FONT>
+		<p>The following dump file is for the <b>turkish</b> icd codes! Do not load it if you do not need the turkish codes.
+<blockquote>			
+			install/sql/icd10_tr/insert-data-all.sql<br>
 </blockquote>
 			<p>The following 3 dump files are for the <b>german ops</b> codes! Do not run them if you do not need the german ops codes.
 		<p>
@@ -145,8 +166,8 @@ bgColor=#ffffff topMargin=2>
 			The first page of CARE 2X should appear. Congratulations!
 		<p>Now you can start  creating user access permissions. <p>
 			To do this:<p>
-	Select the EDP link on the left menu
-			and then select "Access rights". Enter your admin username and your admin password. When the 
+	Select the "System Admin" link on the left menu
+			and then select "Access Permissions". Enter your admin username and your admin password. When the 
 			interface appears, you can start creating user access rights and permissions.
 			<p>Note: You cannot create additional Admin permission
 			using this interface. You have to follow the step #8
