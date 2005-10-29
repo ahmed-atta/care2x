@@ -5,7 +5,7 @@ $LDBack2Logbook='Kayýt kütüðüne geri';
 $LDIcd10Search='ICD-10 Arama';
 $LDSearch4ICD10='ICD-10 Kodlarýný Arama';
 $LDSearch4OPS301='OPS-301 Kodlarýný Arama';
-$LDDescription='Tanýmlama';
+$LDDescription='Taným';
 $LDMainAuxDiag='Ana/Ek';
 $LDMainAuxOp='Ana/Ek iþlem';
 $LDDiagBy='Teþhis koyan';
@@ -14,25 +14,26 @@ $LDInclusive='Ýçindekiler';
 $LDExclusive='Dýþýndakiler';
 $LDNotes='Notlar';
 $LDRemarks='Uyarýlar';
-$LDExtraCodes='Ýlave kodlar veya kodlama';
-$LDAddCodes='Ýlave notlar vaya kodlar';
+$LDExtraCodes='Ek kodlar veya kodlama';
+$LDAddCodes='Ek notlar veya kodlar';
 $LDApplySelection='Seçimleri uygula';
 $LDSGBV='SGB_V';  // !! Do not translate !!
 $LDLocalization='Yeri';
 $LDOpsIntern='Ýç kodu';
 $LDSearchCodes='Kod arama';
 $LDQuickList='Çabuk liste';
-$LDConvert2IcdOps='->ICD/OPS';  // !! Do not translate !!
+$LDConvert2IcdOps='->ICD/ICPM';  // !! Do not translate !!
+
 
 $LDSearch='Arama';
 $LDOperation='Ameliyat';
 $LDAlertSureDelete='Bu kaydý sileceðinizden emin misiniz?';
 
-$LDAux='E';   // E = Ek
-$LDMain='A'; // A = Ana
-$LDRight='G'; // G = Sað
-$LDLeft='L';   // L = Sol
-$LDBoth='Ý';  // Ý = Ýkisi (her iki taraf)
+$LDAux='Auxiliary';   // E = Ek
+$LDMain='Main'; // A = Ana
+$LDRight='Right'; // G = Sað
+$LDLeft='Left';   // L = Sol
+$LDBoth='Both';  // Ý = Ýkisi (her iki taraf)
 
 $LDDeleteEntry='Kaydý sil';
 $LDNoQuickList='Þu anda çabuk liste boþ.';
@@ -42,20 +43,20 @@ $LDPossibleCodes='Olasý ICD ve ICPM Kodlarý';
 $LDCategory='Kategori';
 $LDLoc='Yeri.';
 $LDBy='Yapan';
-$LDMostResponsible='En sorumlu';
-$LDAssociated='iLgili';
-$LDNosocomial='Hastane';
-$LDIatrogenic='Ýatrojenik';
-$LDOther='Diðer';
-$LDMostResp_s='E';
-$LDAssociated_s='L';
-$LDNosocomial_s='H';
-$LDIatrogenic_s='Ý';
-$LDOther_s='D';
+$LDMostResponsible='En sorumlu:M';
+$LDAssociated='ilgili:A';
+$LDNosocomial='Hastane:N';
+$LDIatrogenic='Ýatrojenik:I';
+$LDOther='Diðer:O';
+$LDMostResp_s='M';
+$LDAssociated_s='A';
+$LDNosocomial_s='N';
+$LDIatrogenic_s='I';
+$LDOther_s='O';
 
 $LDBothSides='Her iki taraf';
 $LDLeft_s='S';
-$LDRight_s='G';
+$LDRight_s='R';
 $LDBothSides_s='B';
 /* 2003-05-29 EL*/
 $LDQMarks='??????';
@@ -66,11 +67,11 @@ $LDSelect='Seçiniz';
 /*2003-06-01 EL*/
 $LDUseToGroupItems='Gruplanmamýþ kalemler için bu grubu kullanýnýz';
 $LDItemsDegrouped='Bu grubu siler iseniz buna baðlantýlý olanlarýn baðlantýsýz kalmasýna yol açýlýr.';
-$LDOptions='Opsiyonlar';
+$LDOptions='Seçenekler';
 /*2003-06-01 EL*/
-$LDCreateInternDRGGroup='Yeni dahili DRG grubu oluþturma';
+$LDCreateInternDRGGroup='Yeni dahili TÝG grubu oluþturma';
 $LDInternalCodeNr='Dahili kod No.';
-$LDSynonyms='Eþ anlamlýlar veya anahtar kelimeler';
+$LDSynonyms='Eþ anlamlýlar veya anahtar sözcükler';
 $LDSeparateCommas='Sözcükleri virgüllerle ayýrýnýz';
 $LDIsSubGroup='Alt grup mu?';
 $LDParentCodeNr='Ana grup kod No.';
@@ -80,15 +81,15 @@ $LDStdCodeNr='Standart Kod No.';
 $LDIfAvailable='Varsa';
 $LDYes='Evet';
 $LDNo='Hayýr';
-$LDExtraNotes='Ekstra notlar';
+$LDExtraNotes='Ek notlar';
 $LDAlertNoCode='Lütfen grubun kodunu giriniz.';
 $LDAlertNoDescription='Lütfen kodun tanýmýný giriniz.';
 /*2003-06-07 EL*/
 $LDCode='Kod';
 /*2003-06-13 EL*/
-$LDAddGroupEncounter='karþýlaþýlacak bir grup ekleme';
-$LDMain_s='A'; //ana
-$LDSupplemental='Ek';
-$LDSupp_s='E'; //ek
+$LDAddGroupEncounter='vizite grup ekle';
+$LDMain_s='M (Main:Ana)'; //ana
+$LDSupplemental='Supplemaental:Ek';
+$LDSupp_s='S'; //ek
 $LDCreateNew='Yeni oluþtur';
 ?>

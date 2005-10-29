@@ -96,5 +96,5 @@ $LDUpdate='Aggiornamento dati';
 $LDDirData='Modifica voce n. <font color=\'red\'>~nr~</font> dell\'elenco';
 
 $LDTelephone='Telephone';
-$LDBeeper='Beeper';
+$LDBeeper='Cercapersone';
 ?>

@@ -218,7 +218,7 @@ class DRG extends Encounter{
 	* Language codes that have corresponding ICD tables
 	* @var string
 	*/
-	var $tb_lang_icd='en,de,pt-br,es,bs';
+	var $tb_lang_icd='en,de,pt-br,es,bs,bg,tr';
 	/**
 	* Language codes that have corresponding OPS/ICPM tables
 	* @var string

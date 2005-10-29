@@ -33,7 +33,7 @@ $LDGoodDay='Salve';
 $LDGoodEvening='Buonasera';
 
 $LDDate='Data';
-$LDDept='Dipartimento';
+$LDDept='Reparto';
 $LDPrio='Priorità';
 
 $LDPageTop='Torna all\'inizio.';
@@ -208,54 +208,54 @@ $LDInsuranceCoMngrTxt='Inserire o modificare dati di una compagnia assicuratrice
 $LDAddressMngr='Gestione indirizzi';
 $LDAddressMngrTxt='Inserire, elencare o modificare gli indirizzi';
 /* 2003-05-18 EL */
-$LDUserConfigOpt='Configuration options';
-$LDUserConfigOptTxt='User options for background & text colors, mascots, avatar, etc.';
-$LDMascotOpt='Mascot options';
-$LDMascotOptTxt='Hide, show, or select prompt mascots';
-$LDMascot='Mascot';
-$LDSampleMascot='Sample mascots';
+$LDUserConfigOpt='Opzioni di configurazione';
+$LDUserConfigOptTxt='Opzioni utente per colori di sfondo e del testo, mascotte, avatar, etc.';
+$LDMascotOpt='Opzioni mascotte';
+$LDMascotOptTxt='Nascondi, mostra o scegli la mascotte che appare al prompt';
+$LDMascot='Mascotte';
+$LDSampleMascot='Mascotte di esempio';
 /* 2003-04-24 EL*/
-$LDGUITemplate='GUI Template option';
-$LDGUITemplateTxt='Select a GUI (graphic user interface) template';
-$LDGUITheme='GUI Theme';
-$LDTheme='Theme';
+$LDGUITemplate='Opzioni dell\'interfaccia grafica';
+$LDGUITemplateTxt='Scegliere uno schema per l\'interfaccia grafica';
+$LDGUITheme='Schemi interfaccia';
+$LDTheme='Schema';
 # 2002-01-18 EL
-$LDTicketedSupport='Ticketed Support';
-$LDTicketedSupportTxt='Send a ticketed request to the project\'s online support';
+$LDTicketedSupport='Supporto ticket';
+$LDTicketedSupportTxt='Invia un ticket al supporto tecnico online';
 $LDNewsgroup='Newsgroup';
-$LDNewsgroupTxt='Newsgroup mirroring the developers\' mailing list.';
+$LDNewsgroupTxt='La newsgroup riporta tutti i messaggi della mailing list sviluppatori.';
 # 2002-08-19 EL
 $LDPharmaIndex='Pharma Index';
-$LDPharmaIndexTxt='Pharmaceutical indexes like Redlist, Yellowlist, IFAP, NIMS, or PIMS';
+$LDPharmaIndexTxt='Indici farmaceutici, per esempio Redlist, Yellowlist, IFAP, NIMS, o PIMS';
 
 #2004-05-23 EL
-$LDPlugins='Plugins';
-$LDNoPluginsPrompt='There are no plugins installed yet. If you want to get a Care2x plugin module please go to http://www.care2x-plugins.org.';
-$LDPluginsTxt='Collection of plugin tools and modules';
+$LDPlugins='Plugin';
+$LDNoPluginsPrompt='Non ci sono ancora plugin installati: per scaricare dei moduli plugin di Care2X, visitare http://www.care2x-plugins.org.';
+$LDPluginsTxt='Plugin e moduli';
 
 #2004-06-13 EL
-$LDCssThemes = 'CSS Themes - Design';
-$LDCssThemesTxt= 'Design for border color, sizes, decoration, font types & sizes, backgrounds, etc.';
-$LDDescription = 'Description';
+$LDCssThemes = 'Stili CSS - Design';
+$LDCssThemesTxt= 'Per definire colore del bordo, dimensioni e stile dei font, sfondi, etc.';
+$LDDescription = 'Descrizione';
 $LDScreenshot = 'Screenshot';
 
 #2004-06-30
 $LDSmartyTemplate = 'Smarty Template - Design';
-$LDSmartyTemplateTxt = 'Select smarty based GUI template theme';
+$LDSmartyTemplateTxt = 'Seleziona uno schema Smarty per l\'interfaccia grafica';
 
 
 #2004-07-08
-$LDControlButtons = 'Control Buttons Styles';
-$LDControlButtonsTxt = 'Select control buttons style';
-$LDComIcons = 'Common Icons Styles';
-$LDComIconsTxt = 'Select decorative icons style <br>(note: in combination with some CSS themes, the icons are overridden by the CSS design)';
-$LDDevDesigner = 'Developer/Designer';
-$LDNoIcon = 'No icons';
-$LDNoIconTxt = 'Shows no icons in submenus. Display of icons is suppressed';
+$LDControlButtons = 'Stile dei pulsanti di controllo';
+$LDControlButtonsTxt = 'Scegli uno stile per i pulsanti di controllo';
+$LDComIcons = 'Stili con icone normali';
+$LDComIconsTxt = 'Scegli lo stile con icone <br>(note: le icone possono essere modificate se si usano alcuni stili CSS)';
+$LDDevDesigner = 'Sviluppatore/Grafico';
+$LDNoIcon = 'Non ci sono icone';
+$LDNoIconTxt = 'Mostra le icone nei sottomenu. Le icone non vengono mostrate';
 
 #2004-07-29
-$LDMainMenuTree = 'Main Menu Styles';
-$LDMainMenuTreeTxt = 'Select the main menu style';
-$LDStyle = 'Style';
-$LDRefreshBrowser = 'Refresh your browser to see the change(s)';
+$LDMainMenuTree = 'Stile del menu principale';
+$LDMainMenuTreeTxt = 'Scegli uno stile per il menu principale';
+$LDStyle = 'Stile';
+$LDRefreshBrowser = 'Ricaricare la pagina nel browser per vedere i cambiamenti';
 ?>

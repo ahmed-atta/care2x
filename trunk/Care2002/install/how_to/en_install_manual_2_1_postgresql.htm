@@ -8,8 +8,8 @@ bgColor=#ffffff topMargin=2>
   <TBODY>
   <TR vAlign=top>
     <TD ><font face="verdana,arial" size=2>
-	<img src="img/care_logo_postgres7.gif" border=0 width=135 height=39><p>
-	<img src="img/postgresql.jpg" border=0 width=106 height=68>
+	<img src="../../docs/img/care_logo.gif" border=0 width=135 height=39><p>
+	<img src="../../docs/img/postgresql.jpg" border=0 width=106 height=68>
 	
 	 </TD>
     <TD bgColor=#eeeeee><b>
@@ -48,9 +48,13 @@ bgColor=#ffffff topMargin=2>
 			TTF  = if available<br>
 			</blockquote>
 
-			</blockquote><p>
-			<b>4.</b> Uncompress  the <a href="http://sourceforge.net/project/showfiles.php?group_id=53886&package_id=48463" target="_blank">CARE2X 2nd Generation Deployment 2.1</a> scripts into the active directory of Apache web server.
+			</blockquote>
+			<b>4.</b> Uncompress the content of the <a href="http://sourceforge.net/project/showfiles.php?group_id=53886">CARE2X 2G Deployment 2.1 FULL PACK</a> package into the active directory of your server.
+			<blockquote>
+			<b>4.1.</b> Uncompress the content of the <a href="http://sourceforge.net/project/showfiles.php?group_id=53886">CARE2X PATCHES D-2.1.0.1</a> package into the directory where you have already uncompressed the Full Pack.
 			<p>
+			<b>4.2.</b> Do the same with the <a href="http://sourceforge.net/project/showfiles.php?group_id=53886">CARE2X PATCHES D-2.1.0.2</a> package. 
+			</blockquote>
 			<b>5.</b> Make sure that the server can write in the following directories and files.
 			<b>NOTE:</b> In most servers, file access permission is highly restrictive. Make sure that the following directories and files are system writeable.
 The easiest way to do this is to CHMOD 777 the following directories: ( A safer way to change the file permissions is to use the CHOWN command. )
@@ -110,7 +114,7 @@ The easiest way to do this is to CHMOD 777 the following directories: ( A safer 
 			<P>
 			Like this: $dbtype='postgres7';
 			<p>
-			<img src="img/pg_db_init.png" border=0 width=510 height=593>
+			<img src="../../docs/img/pg_db_init.png" border=0 width=510 height=593>
 			
 			</BLOCKQUOTE>
 			</blockquote><p>
@@ -173,6 +177,23 @@ The easiest way to do this is to CHMOD 777 the following directories: ( A safer 
 			psql carepg < ./insert-data-p2z.sql<br>
 </blockquote>			
 			<P>
+			<li> ICD10 coding system in bosnian language: Go to  /install/sql/icd10_bs directory and type: <p>
+<blockquote>
+			psql carepg < ./insert-data-a2l.sql<br>
+			psql carepg < ./insert-data-m2y.sql<br>
+</blockquote>			
+			<P>
+			<li> ICD10 coding system in bulgarian language: Go to  /install/sql/icd10_bg directory and type: <p>
+<blockquote>
+			psql carepg < ./insert-data-a2m.sql<br>
+			psql carepg < ./insert-data-n2z.sql<br>
+</blockquote>			
+			<P>
+			<li> ICD10 coding system in turkish language: Go to  /install/sql/icd10_tr directory and type: <p>
+<blockquote>
+			psql carepg < ./insert-data-all.sql<br>
+</blockquote>			
+			<P>
 			<li>OPS301 coding system in german language: Go to  /install/sql/ops301_de directory and type:<p>
 <blockquote>			
             psql carepg < ./insert-data-1-5-499.sql<br>
@@ -213,8 +234,8 @@ The easiest way to do this is to CHMOD 777 the following directories: ( A safer 
 			The first page of CARE 2X should appear. Congratulations!
 		<p>Now you can start  creating user access permissions. <p>
 			To do this:<p>
-	Select the EDP link on the left menu
-			and then select "Access rights". Enter your admin username and your admin password. When the 
+	Select the "System Admin" link on the left menu
+			and then select "Access Permissions". Enter your admin username and your admin password. When the 
 			interface appears, you can start creating user access rights and permissions.
 			<p>Note: You cannot create additional Admin permission
 			using this interface. You have to follow the step #12

@@ -1,4 +1,6 @@
--- Dumping data for table care_insurance_firm
+#
+# Dumping data for table care_insurance_firm
+#
 
 INSERT INTO care_insurance_firm VALUES ('1', 'A&M Aachener und Münchener', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 20021228202205, '', 20021228202205);
 INSERT INTO care_insurance_firm VALUES ('2', 'Adler', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 20021228202232, '', 20021228202232);
@@ -54,4 +56,4 @@ INSERT INTO care_insurance_firm VALUES ('51', 'Gerling Leben', '', '', 0, '', ''
 INSERT INTO care_insurance_firm VALUES ('52', 'Globale Kranken', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 20030216030438, '', 20021228210104);
 INSERT INTO care_insurance_firm VALUES ('53', 'Gothaer', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 20030216030438, '', 20021228210120);
 INSERT INTO care_insurance_firm VALUES ('54', 'Gutingia', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 20030216030438, '', 20021228210221);
-INSERT INTO care_insurance_firm VALUES ('55', 'Haftpflichtkasse Darmstadt', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 20030216030438, '', 20021228210335);
+INSERT INTO care_insurance_firm VALUES ('55', 'Haftpflichtkasse Darmstadt', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 20030216030438, '', 20021228210335);   

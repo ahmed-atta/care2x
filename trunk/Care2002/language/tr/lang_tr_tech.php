@@ -9,7 +9,7 @@ $LDTechMaint='Teknik bakým';
 $LDTechSupport='Teknik destek';
 $LDTechInfo='Teknik bilgi';
 
-$LDReRepair='Onarým istemi desteði';
+$LDReRepair='Onarým desteði istemi';
 $LDReRepairTxt='Arýza rapor etme, onarým hizmeti için istem yazma ve gönderme.';
 $LDRepabotActivate='Onarým Robotunu etkinleþtir';
 $LDRepabotActivateTxt='Onarým iþi istemlerinin otomatik alýnmasý için bir robot.';
@@ -19,26 +19,26 @@ $LDReportsArchive='Rapor arþivi';
 $LDReportsArchiveTxt='Teknik raporlar arþivinde arama';
 $LDQuestions='Araþtýrma, Sorular';
 $LDQuestionsTxt='Araþtýrma veya sorularý oluþturma, okuma ve gönderme';
-$LDQBotActivate='Sor-Bot u etkinleþtir';
-$LDQBotActivateTxt='Soro ve araþtýrmalarýn otomatik alýnmasý için bir robot.';
+$LDQBotActivate='Sorgu Robotunu etkinleþtir';
+$LDQBotActivateTxt='Soru ve araþtýrmalarýn otomatik alýnmasý için bir robot.';
 $LDInfo='Bilgiler';
-$LDInfoTxt='Teknik özellikli bilgiler içindekiler.';
+$LDInfoTxt='Teknik özellikli bilgileri araþtýr';
 
 $LDSendRequest='Ýstem gönder';
 $LDSendReport='Rapor gönder';
 $LDSendInquiry='Sorgu gönder';
-$LDReset='Reset';
+$LDReset='Baþtan baþla';
 $LDRepairArea='Arýzanýn yeri';
-$LDReporter='Ýsteyen';
-$LDPersonnelNr='Personel no.';
+$LDReporter='Ýsteyen kiþi:';
+$LDPersonnelNr='Sicil no.';
 $LDPhoneNr='Telefon no.  <font size=1>(sonraki haberleþmeler için)</font>';
-$LDPlsDescribe='Lütfen arýzayý betimleyiniz';
+$LDPlsDescribe='Lütfen arýzayý anlatýnýz';
 
 $LDAlertName='Lütfen isminizi giriniz.';
-$LDAlertDept='Lütfen bölümünüzü veya arýzanýn yerini giriniz.';
+$LDAlertDept='Lütfen bölümünüzü veya arýzanýn bulunduðu yeri giriniz.';
 $LDAlertDeptOnly='Lütfen bölümünüzü giriniz.';
 $LDAlertPNr='Lütfen sicil numaranýzý giriniz.';
-$LDAck='Kabul';
+$LDAck='Alýndý Makbuzu';
 $LDYour='Sizin';
 $LDReceived='alýndýðý tarih';
 $LDAt='saat';
@@ -46,33 +46,33 @@ $LDAtTech='. Teþekkürler. <i>Teknik destek ekibi.</i>';
 $LDRequest='istem';
 $LDReport='rapor';
 $LDThanksSir='Teþekkürler Efendim';
-$LDPlsTypeReport='Lütfen yaptýðýnýz onarým iþini betimleyiniz.';
+$LDPlsTypeReport='Lütfen yaptýðýnýz onarým iþini anlatýnýz.';
 $LDJobIdNr='Ýþ kimlik no.';
 $LDTechnician='Teknisyen';
 $LDPlsDoneOnly='(Lütfen sadece bitmiþ onarým iþlerini rapor ediniz.)';
 $LDName='Ýsim';
 $LDDept='Bölüm';
-$LDEnterQuestion='Lütfen isminizi yazýnýz';
+$LDEnterQuestion='Lütfen sorunuzu yazýnýz';
 $LDLogIn='Giriþ';
 $LDPlsNoRequest='(Buraya onarým istemi yazmayýnýz. Eðer bir arýza bildirmek istiyor iseniz ve onarýma gereksinim var ise lütfen bunu týklayýnýz.';
-$LDLastQuestions='Son ~tagword~ soru(larý) veya cevap(lar)ý question(s) ';
+$LDLastQuestions='Son ~tagword~ soru(larý) veya cevap(lar)ý ';
 $LDFrom='kimden';
 $LDTo='kime';
 $LDAlertQuestion='Hiçbir soru yazmadýnýz.';
-$LDOn='saat';
-$LDOClock='te';
+$LDOn='de';
+$LDOClock='saat';
 $LDInquiry='Sorgu';
 $LDReply='Yanýt';
 $LDSearch='Ara';
-$LDSearchReport='Rapor arama';
+$LDSearchReport='Rapor ara';
 $LDDate='Tarih';
 $LDReportListMany='Raporlar aþaðýdadýr';
-$LDNotReadMany=' Bunlar okumadýklarým veya yazdýrmadýklarýmdýr.'; 
+$LDNotReadMany=' okumamýþ veya yazdýrýlmamýþ olanlar.'; 
 $LDReportList='Rapor aþaðýdadýr';
 $LDNotRead=' Henüz okunmadý veya yazdýrýlmadý.';
 $LDClk2Read='Ýçeriðini okumak için ok düðmesini týklayýnýz.';
-$LDLikeSearch=' aranan anahtar sözcükle ilgilidirler.';
-$LDLikeSearchMany=' aranan anahtar sözcükle ilgilidir.';
+$LDLikeSearch=' aranan anahtar sözcükle ilgilidir.';
+$LDLikeSearchMany=' aranan anahtar sözcükle ilgilidirler.';
 
 $LDTelephoneNr='Telefon no.';
 
@@ -85,8 +85,8 @@ $queryindex=array('&nbsp;','&nbsp;',"$LDInquiry $LDFrom:",$LDDept,'Alýndý $LDOn:
 $LDMarkRead='\'Okundu\' olarak iþaretle.';
 $LDPrint='Yazdýr';
 $LDGoBack='Geri';
-$LDImRepabot='Ben onarým robotu onar-bot';
-$LDImQBot='Ben Sor-Bot';
+$LDImRepabot='Ben onarým robotu';
+$LDImQBot='Ben Sorru robotu';
 $LDNewReport='Yeni gelen onarým istemi aþaðýdadýr.';
 $LDNewReportMany='Yeni gelen onarým istemleri aþaðýdadýr.';
 $LDReportArrived='Bir onarým istemi geldi!';
@@ -113,7 +113,7 @@ $LDInfoCat=array(
 						'Arýza bildirimi',
 						'Isýtma',
 						'Atýk',
-						'EDP',
+						'Bilgi Ýþlem',
 						'Bilgisayar IP adresleri',
 						'Yazdýrma, Yazýcý',
 						'Çevre yönetimi, Bakým',

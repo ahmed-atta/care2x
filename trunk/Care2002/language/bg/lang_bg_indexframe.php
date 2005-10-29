@@ -6,24 +6,24 @@ $LDAmbulatory='Амбулатория';
 $LDMedocs='Документи';
 $LDDoctors='Лекари';
 $LDNursing='Сестри';
-$LDOR='OR';
-$LDLabs='Лаболатории';
-$LDRadiology='Радиология';
-$LDPharmacy='Фармация';
+$LDOR='Операционна';
+$LDLabs='Лаборатории';
+$LDRadiology='Образна диагностика';
+$LDPharmacy='Аптека';
 $LDMedDepot='Медицински склад';
-$LDDirectory='Директория';
+$LDDirectory='Указател';
 $LDTechSupport='Техн. поддръжка';
-$LDEDP='EDP';
-$LDIntraEmail='Intranet Email';
-$LDInterEmail='Internet Email';
+$LDEDP='Администратор';
+$LDIntraEmail='Вътрешна е-поща';
+$LDInterEmail='Външна е-поща';
 $LDSpecials='Спец. инструменти';
-$LDLogin='Login';
-$LDLogout='Logout';
-$LDAppointments='Свиждания';
+$LDLogin='Вход';
+$LDLogout='Изход';
+$LDAppointments='Визитации';
 
 $VersionChgTarget='_top';
 $LDLanguage='Език';
-$LDPlsWaitInit='Моля, изчакайте. Извършва се инициализация....';
+$LDPlsWaitInit='Моля, изчакайте. Извършва се инициалиране ...';
 
 $LDChange='Смяна';
 /* 2003-04-27 EL */

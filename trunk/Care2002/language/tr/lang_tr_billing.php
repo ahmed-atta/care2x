@@ -1,9 +1,9 @@
 <?php
 /* 2003-06-21 El */
-$TXT['CreateHospitalServiceItem']='Yeni hastane hizmet kalemi ekleme';
-$TXT['CreateLabTestItem']='Laboratuvar testi yeni kalem ekleme';
-$TXT['EditHospitalServiceItems']='Hastane hizmet kalemlerini düzenleme';
-$TXT['EditLabTestItems']='Laboratuvar hizmet kalemlerini düzenleme';
+$TXT['CreateHospitalServiceItem']='Yeni hastane hizmet kalemi ekle';
+$TXT['CreateLabTestItem']='Yeni laboratuvar testi kalemi ekle';
+$TXT['EditHospitalServiceItems']='Hastane hizmet kalemlerini düzenle';
+$TXT['EditLabTestItems']='Laboratuvar hizmet kalemlerini düzenle';
 $TXT['SearchPatient']='Hasta Arama';
 $TXT['Billing']='elektronik fatura';
 
@@ -98,13 +98,14 @@ $TXT['AmountDue']='Vadesi gelmiþ miktar';
 $TXT['CurrentPaidAmount']='Þu anda ödenen miktar';
 
 /* 2003-10-19 DHC Echoes from show_final_bill.php */
+/*tercüme eden Dr. Bülent Potur bpotur@yahoo.com */
 $TXT['Payments']='Ödemeler';
 $TXT['ReceiptNumber']='Makbuz numarasý';
 $TXT['ReceiptDateTime']='Makbuz tarih ve saati';
 $TXT['MakeaNewPayment']='Yeni bir ödeme yapma';
 
 /* 2003-10-25 DHC Echoes from patient_payment.php */
-$TXT['BillPayment']='Bill payment';
+$TXT['BillPayment']='Fatura ödemesi';
 $TXT['alertEnterNumericValueforCashAmount']='Nakit miktar rakamla giriniz';
 $TXT['alertEnterNumericValueforCreditCardNo']='Kredi kartý numarasýný giriniz';
 $TXT['alertEnterNumericValueforCreditCardAmount']='Kredi kartýndan çekilecek miktarý giriniz';
@@ -127,18 +128,18 @@ $TXT['ModeofPayment']='Ödeme þekli';
 $TXT['PaymentDate']='Ödeme tarihi';
 
 /* 2003-11-30 DHC Echoes from edit_hospital_services.php */
-$TXT['EditLaboratoryTests']='Laboratuvar tetkiklerini düzenleme';
-$TXT['EditHospitalServices']='Hastane hizmetlerini düzenleme';
-$TXT['EditLaboratoryTestItems']='Laboratuvar tetkik kalemlerini düzenleme';
-$TXT['EditHospitalServiceItems']='Hastane hizmet kalemlerini düzenleme';
+$TXT['EditLaboratoryTests']='Laboratuvar tetkiklerini düzenle';
+$TXT['EditHospitalServices']='Hastane hizmetlerini düzenle';
+$TXT['EditLaboratoryTestItems']='Laboratuvar tetkik kalemlerini düzenle';
+$TXT['EditHospitalServiceItems']='Hastane hizmet kalemlerini düzenle';
 
 # 2003-10-14 NDHC eComBill Search.php
 $LDPatientName='Hasta adý';
 $LDeComBill='elektronik fatura';
-$LDSearch='Arama';
+$LDSearch='Ara';
 
 # 2003-10-20 NDHC this line doesn't work because it's inside an "alt=".  eComBill Search.php
-$LDBillthisPatient='Bu hastanýn faturasýný kesme';
+$LDBillthisPatient='Bu hastanýn faturasýný kes';
 
 # 2003-10-25 NDHC eComBill confirmpayment.php
 $LDBillPayment='Ödeme';

@@ -12,7 +12,7 @@ $LDWildCards='Joker kartlarý nedir, nasýl kullanýlýr';
 $LDNewSearch='Yeni arama';
 $LDSearch='Ara';
 
-$LDOClock=' ';
+$LDOClock=' saat';
 $LDContinue='Devam';
 $LDBack='Geri';
 
@@ -82,7 +82,7 @@ $LDAlertDelete='<b>DIKKAT!</b> Silme geri <b>ALINAMAZ !</b> ';
 $LDNoDelete='Veri silinmesi baþarýsýz oldu!<br>Lütfen sistem yönetimi bölümüne haber veriniz.';
 $LDYesDelete='Evet, Kesinlikle eminim. Eriþim hakkýný sil.';
 $LDNoBack='Hayýr. Geri.';
-$LDClk2Ack='Sipariþ listesini deðerlendirmek ve/veya basmak için ok düðmesini týklayýnýz.';
+$LDClk2Ack='Sipariþ listesini kabul etmek ve/veya yazdýrmak için ok düðmesini týklayýnýz.';
 $LDOK='Tamam';
 $LDManageAccess='Eriþim Haklarý';
 $LDManageAccessTxt='Düzenle, oluþtur, kilitle, sil, güncelle, veya deðiþtir, vs.';
@@ -110,16 +110,16 @@ $LDAccessIndex=array(
 			 	'Ýzin verilen alanlar', 
 			 	'Tarih/Zaman', 
 			 	'Encoder', 
-			 	'Opsiyon'
+			 	'Seçenek'
 			 	);
-$LDChange='Deðiþtir';
-$LDInitChange='D';
-$LDLock='Kilitle';
-$LDInitLock='K';
-$LDUnlock='Aç';
-$LDInitUnlock='A';
-$LDDelete='Sil';
-$LDInitDelete='S';
+$LDChange='Deðiþtir:C';
+$LDInitChange='C';
+$LDLock='Kilitle:L';
+$LDInitLock='L';
+$LDUnlock='Aç:U';
+$LDInitUnlock='U';
+$LDDelete='Sil:D';
+$LDInitDelete='D';
 $LDUpdateRight='Eriþim hakkýný güncelle';
 $LDInputError='Girdiðiniz ya yanlýþ ya da bazý bilgiler eksik. Kýrmýzý iþaretli alanlarýn doldurulmasý gerekiyor yoksa girdiðiniz düzeltilecek.';
 $LDAccessRight='Eriþim hakký';
@@ -129,7 +129,7 @@ $LDSureDelete='Bu eriþim hakkýný SÝLMEK istediðinizden emin misiniz?';
 $LDYesSure='Evet, eminim.';
 $LDKeywordPrompt='Aranacak sözcüðü giriniz';
 $LDSystemAdmin='Sistem Yöneticisi';
-$LDMySQLManage='SQL veribankasýný PHP MySQLAdmin ile yönetmek';
+$LDMySQLManage='SQL veribankasýný PHP MySQLAdmin ile yönet';
 $LDSpexFunctions='Daha fazla konfigürasyon seçenekleri';
 $LDWelcome='Hoþ geldiniz';
 $LDForeWord='Þu anda en üst düzeyde eriþim ayrýcalýklarýna sahipsiniz.<br>Aþaðýdakileri iþlevlere hiçbir kýsýtlama olmadan eriþilebilir. <br><b>Lütfen ne yaptýðýnýza çok dikkat ediniz.</b>';
@@ -141,7 +141,7 @@ $LDSelectDateFormat='Lütfen istenilen tarih biçimini seçiniz:';
 # Add additional date formats as array element.
 # Do not forget to add the correspondign sample text in the $LDDateFormatsTxt array.
 # Do not translate $LDDateFormats 
-$LDDateFormats=array('gg.AA.yyyy','yyyy-AA-gg','AA/gg/yyyy','gg/AA/yyyy');
+$LDDateFormats=array('dd.MM.yyyy','yyyy-MM-dd','MM/dd/yyyy','dd/MM/yyyy');
 
 $LDDateFormatsTxt= array('Örneðin: 01.10.2004 (01 Ekim 2004)',
                                          'Örneðin: 2004-10-01 (2004 Ekim 01)',
@@ -192,11 +192,12 @@ $LDCurrencyAdmin='Para birimi';
 
 
 /* 2002-10-22 EL */
+/*Çeviren Op. Dr. Bülent Potur bpotur@yahoo.com */
 $LDUserInfoSaved='Kullanýcý eriþimi baþarýyla oluþturuldu';
 $LDUserInfoNoSave='Eriþim oluþturulmasý baþarýsýz. Lütfen girilen bilgiyi kontrol ediniz';
 $LDNoAreas='Hiçbir alaný seçmediniz!';
-$LDUserDouble='Eriþim oluþturma baþarýsýz. Lütfen bir farklý bir giriþ yapýnýz .';
-$LDEnterNewUser='Create a new user access';
+$LDUserDouble='Eriþim oluþturma baþarýsýz. Lütfen farklý bir giriþ kullanýnýz .';
+$LDEnterNewUser='Yeni bir kullanýcý eriþimi oluþturma';
 /* 2002-11-22 EL*/
 $LDDeleteCurrency='Emin misiniz? Bu para birimini gerçektem silmek mi istiyorsunuz?';
 $LDNoMainDelete='Ana para birimini silemezsiniz. \nLütfen önce farklý bir para birimini ana para birimi olarak belirleyiniz.';
@@ -228,17 +229,17 @@ $LDItem='Madde';
 $LDDeptAdmin='Bölüm Yönetimi';
 $LDNewDept='Yeni bölümler oluþturma ve düzenleme';
 $LDShowDeptInfo ='Bölüm Tanýmlarý';
-$LDShowDeptInfoTxt='Varolan etkin bölümlerin tanýmlama görüntüleme';
+$LDShowDeptInfoTxt='Varolan etkin bölümlerin bilgilerini görüntüleme';
 $LDConfigOptions='Biçimlendirme seçenekleri';
 $LDDeptConfigOptions='Bölümleri biçimlendirme, bilgilerini güncelleme, etkinleþtirme, etkisizleþtirme, gizleme, gösterme.';
-$LDDescription='Betimleme';
+$LDDescription='Taným';
 /* 2003-023-01 EL*/
 $LDFormalName='Resmi Ýsmi';
 $LDInternalID='Dahili Kimlik Kodu';
 $LDPlsSelect='Lütfen bir tanesini seçiniz';
 $LDTypeDept='Bölüm Tipi';
 $LDIsSubDept='Bu bir alt bölüm mü ?';
-$LDParentDept='Üst Bölüm';
+$LDParentDept='Üst Bölümü';
 $LDLangVariable='Dil deðiþkeni';
 $LDShortName='Kýsa adý';
 $LDAlternateName='Diðer Adý';

@@ -53,14 +53,14 @@ $LD['update_preg_details']='Aggiornamento dettagli sulla gravidanza';
 # 2003-07-27 EL
 $LD['sibling']='Sorella/Fratello';
 $LD['parent']='Genitore';
-$LD['parent_encounter_nr']='Madre/i incontro num.';
-$LD['child_encounter_nr']='Neonato/i incontro num.';
-$LD['sepspace']='Separare con dello spazio ';
+$LD['parent_encounter_nr']='Codice visita della madre';
+$LD['child_encounter_nr']='Codice visita del neonato/i';
+$LD['sepspace']='Separare con spazio ';
 
 $LDNormal='Normale';
 $LDBreech='Parto Podalico';
 $LDCaesarian='Cesareo';
-$LDForceps='Forceps';
+$LDForceps='Forcipe';
 $LDVacuum='Vuoto';
 $LDAlive='Vivo';
 $LDStillborn='Non ancora nato';
@@ -87,16 +87,16 @@ $LDNeonatalJaundice='Itterizia neonatale';
 $LDExchangeTransfusion='Trasfusione';
 $LDPhotoTherapy='Fototerapia';
 $LDH_I_Encephalopathy='Hypoxic ischaemic encephalopathy';
-$LDParenteralNutrition='Nutrizione dai genitori';
-$LDVentilatorySupport='Supporto ventilatore';
+$LDParenteralNutrition='Nutrizione dal genitore';
+$LDVentilatorySupport='Supporto ventilatorio';
 
-$LDOxygenTherapy='Terapia d\'ossigeno';
+$LDOxygenTherapy='Terapia ad ossigeno';
 $LDCPAP='CPAP';
-$LDCongenitalAbnormality='Anormalità congenita';
+$LDCongenitalAbnormality='Anomalia congenita';
 $LDCongenitalInfection='Infezione congenita';
 $LDAcquiredInfection='Infezione acquisita';
 $LDGBSInfection='Infezione GBS';
-$LDRespDistressSyndrome='Resp. distress syndrome';
+$LDRespDistressSyndrome='Sindrome da stress respiratorio';
 $LDBloodTransfusion='Trasfusione di sangue';
 $LDAntibioticTherapy='Terapia antibiotica';
 $LDNecrotisingEnterocolitis='Necrotising enterocolitis';
@@ -110,15 +110,15 @@ $LDSpinal='Spinale';
 $LDEpidural='Epidurale';
 $LDPudendal='Pudendal';
 
-$LDEpisiotomy='Episiotomy';
+$LDEpisiotomy='Episiotomia';
 $LDNotInduced='Non indotto';
 
-$LD['time_to_spont_resp']='Time to spontan respiration';
+$LD['time_to_spont_resp']='Inizio respirazione spontanea';
 $LDMinutes='Minuti';
 # 2003-08-26 EL
-$LDParentEncNrMissing='Mother\'s encounter number of the delivery is missing.\\n Save anyway?';
-$LDPlsEnterDeliveryPlace='Please enter delivery place.';
-$LDPlsSelectDeliveryMode='Please select delivery mode.';
-$LDPlsEnterDeliveryDate='Please enter delivery date.';
-$LDPlsEnterDeliveryTime='Please enter delivery time.';
+$LDParentEncNrMissing='Manca il codice visita della madre per il parto.\\n Salvare lo stesso?';
+$LDPlsEnterDeliveryPlace='Luogo del parto.';
+$LDPlsSelectDeliveryMode='Modalità del parto.';
+$LDPlsEnterDeliveryDate='Data del parto.';
+$LDPlsEnterDeliveryTime='Ora del parto.';
 ?>

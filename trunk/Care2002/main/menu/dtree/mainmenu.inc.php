@@ -1,10 +1,11 @@
 <?php
 /**
-* Copyright Joachim Mollin <mollin@hccgmbh.com> & Healthcare Consulting GmbH
+* Original Copyright Joachim Mollin <mollin@hccgmbh.com> & Healthcare Consulting GmbH
 *
 * This is the javascript drop down menu tree developed by J. Mollin. 
 * It uses the dtree.js script Copyright (c) 2002-2003 Geir Landrö
 * This script was slightly modified by Elpidio Latorilla to accomodate user selectable menu tree style system
+* This script was modified by Emir Prcic to add collapsible hierarchy tree to wards and depts (2004-12-08)
 * This file will not run alone. This file is included by /main/gui_bridge/gui_indexframe.php.
 */
 #
@@ -26,6 +27,7 @@ $result1=$db->Execute($sql);
 if($result1){
 
 ?>
+
 <link rel="stylesheet" href="menu/dtree/dtree.css" type="text/css" />
 <script language="javascript" src="menu/dtree/dtree.js" type="text/javascript"></script>
 
@@ -41,7 +43,7 @@ function runModul (ziel) {
 m = new dTree('m');
 m.config.useIcons=true;
 m.config.useLines=true;
-m.config.closeSameLevel=true;
+m.config.closeSameLevel=false;
 m.config.useSelection=false;
 m.config.useCookies=false;
 
@@ -113,20 +115,65 @@ m.config.useCookies=false;
     //echo "</script>\n";
 
    if ($menu['s_status']=='[station]') {   //Station anzeigen; display station
-       $i_stat=$j-1;
-       $sql="select nr, ward_id, name from care_ward where is_temp_closed=0";
-       $res_stat=$db->Execute($sql);
-	     while($stat=$res_stat->FetchRow()){
+       $i_stat=$j;
+	   $i2_stat=$j-1;
+	   
+	   //$db->debug=1;
+		
+	   #
+	   # 2004-12-08
+	   # Modified by Emir Prcic to add tree hierarchy to the wards and depts
+	   #
+	   //$sqldep="select (select care_department.id from care_department where care_department.nr=care_ward.dept_nr) as did, (select care_department.name_short from care_department where care_department.nr=care_ward.dept_nr) as dname,  (select care_department.LD_var from care_department where care_department.nr=care_ward.dept_nr) as \"LD_var\", dept_nr from care_ward where is_temp_closed=0 group by dept_nr order by dept_nr";
+
+	   #
+	  # 2004-12-09
+	  # Modified by Elpidio Latorilla to avoid cascaded select query
+	  #
+	  $sqldep="SELECT d.id  AS did,   d.name_short  AS  dname,   d.LD_var as \"LD_var\",   w.dept_nr AS dept_nr FROM care_ward AS w  LEFT   JOIN care_department AS d ON d.nr = w.dept_nr   WHERE w.is_temp_closed=0 GROUP BY w.dept_nr,d.id,d.name_short,d.LD_var ORDER by w.dept_nr ";
+
+	   $res_dept=$db->Execute($sqldep);
+	   // begin departmens and wards
+	   //begin department
+	   
+	   
+	   
+	   while($dept3=$res_dept->FetchRow()) {
+       $d_id=$dept3['dept_nr'];
+	   $d_name=$dept3['dname'];
+	   $d_var=$dept3['LD_var'];
+	   $d_did=$dept3['did'];
+       
+	 if(isset($$d_var) && $$d_var!='')  //text durch Inhalt LD_var ersetzen; get the language dependent text
+       $my_d_name=$$d_var;
+ 	     else
+       $my_d_name=$d_name;
+ 		 
+	   $erg2="m.add($j,$i2_stat,'$my_d_name','','','../main/img/folderopen.gif','../main/img/folder.gif');";
+  	   echo "\n$erg2\n"; 
+	       
+		  $j+=1;     
+			 
+		  //begin wards  
+		   $sql="select nr, dept_nr, ward_id, name from care_ward where is_temp_closed=0 and dept_nr=". $d_id . " order by dept_nr";
+		   $res_stat=$db->Execute($sql);
+	        
+			while($stat=$res_stat->FetchRow()){
             $st_name=$stat['name'];
             $st_nr=$stat['nr'];
             $st_ward_id=$stat['ward_id'];
-            //$erg="m.add($j,$i_stat,'$st_name','javascript:runModul(\'$my_menu_call&rt=pflege&edit=1&station=$st_ward_id&location_id=$st_ward_nr&ward_nr=$st_nr\')','','','../gui/img/common/default/blue_bullet.gif');";
-           $erg="m.add($j,$i_stat,'$st_name','javascript:runModul(\'../modules/nursing/nursing-station-pass.php".URL_APPEND."&rt=pflege&edit=1&station=$st_ward_id&location_id=$st_ward_nr&ward_nr=$st_nr\')','','','../gui/img/common/default/blue_bullet.gif');";
-            $j+=1;
-            //echo '<script type="javascript">';
+			$st_dept=$stat['dept_nr'];
+          
+              $erg="m.add($j,$i_stat,'$st_name','javascript:runModul(\'../modules/nursing/nursing-station-pass.php".URL_APPEND."&rt=pflege&edit=1&station=$st_ward_id&location_id=$st_ward_nr&ward_nr=$st_nr\')','','','../gui/img/common/default/blue_bullet.gif');";
+              $j+=1;
+			  
+			
             echo "\n$erg\n";
-            //$jsTemp = $jsTemp."</script>\n";
-            }
+
+}$i_stat=$j;
+
+}
+      
       } //Station anzeigen Ende; End of station display
 
 	}
@@ -144,4 +191,6 @@ m.config.useCookies=false;
 }else{
 	include('menu/default/mainmenu.inc.php');
 }
+
+//mysql_free_result($Recordset1); // <- This creates a warning message. Not needed because php releases resources at the end of script
 ?>

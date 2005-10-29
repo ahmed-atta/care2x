@@ -13,7 +13,7 @@ $LDNursingForum='Forum personale infermieristico';
 $LDNursingStations='Presidio infermieristico';
 
 $LDQuickViewTxt='Quadro di insieme dei turni di lavoro odierni per il presidio infermieristico.';
-$LDSearchPatientTxt='Ricerca un paziente accettato nelel corsie.';
+$LDSearchPatientTxt='Ricerca un paziente accettato in corsia.';
 $LDArchiveTxt='Ricerca nell\'archivio delle corsie.';
 $LDStationManTxt='Assegna una corsia, inizializza parametri quali numero 
 di letti, personale, etc.';
@@ -105,13 +105,13 @@ $LDBed1Prefix='Prefisso per il primo letto';
 $LDBed2Prefix='Prefisso per il secondo letto';
 $LDHeadNurse='Caposala';
 $LDHeadNurse2='Aiuto caposala';
-$LDNurses='Pers. infermieristico';
+$LDNurses='Infermieri';
 $LDCreateStation='Crea corsia';
 $LDEnterAllFields ='I campi identificati da <font color=#ff0000><b>*</b></font> vanno riempiti.';
-$LDPlsSelect='Scegliere un dipartimento';
+$LDPlsSelect='Scegliere un reparto';
 $LDStationExists='La corsia ~station~ esiste già!';
 $LDAlertIncomplete='Mancano alcuni dati: si prega di inserirli.';
-$LDAlertRoomNr='Il numero dell\'ultima stanza dev\'essere MAGGIORE than the number della prima stanza!';
+$LDAlertRoomNr='Il numero dell\'ultima stanza dev\'essere MAGGIORE del numero della prima stanza!';
 $LDExistStations='Corsie esistenti. Scegliere quella desiderata.';
 $LDOtherStations='Altre corsie';
 $LDEditProfilo='Modifica profilo della corsia';
@@ -190,8 +190,8 @@ $LDRegularRelease='Dimissione normale';
 $LDSelfRelease='Il paziente ha voluto lasciare l\'ospedale';
 $LDEmRelease='Dimissione per emergenza/urgenza';
 $LDAlertNoName='Inserire il proprio nome.';
-$LDAlertNoDate='Inserire la data nel ff: formato: dd.mm.YYYY.';
-$LDAlertNoTime='Enter the time in the ff: formato: HH.mm.';
+$LDAlertNoDate='Inserire la data nel formato: gg.mm.AAAA.';
+$LDAlertNoTime='Inserire l\'orario nel formato: OO.mm.';
 $LDPatDataFolder='Cartella dati paziente';
 
 $LDClose='Chiudi';
@@ -361,10 +361,10 @@ $LDNursesListTxt='Visualizza, crea e modifica elenco infermieri';
 /* 2003-04-18 */
 $LDInsurance='Generale';
 $LDPrivate='Privato';
-$LDSelfPay='A propio carico';
+$LDSelfPay='A proprio carico';
 /* 2003-04-21 EL */
-$LDRoom='Room';
-$LDAdm_Nr='Cod.Acc.';
+$LDRoom='Stanza';
+$LDAdm_Nr='N. accett.';
 $LDStatus='Stato';
 $LDInWard='nella corsia';
 /* 2003-04-23 EL */

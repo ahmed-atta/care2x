@@ -5,8 +5,8 @@ $LDResetEntry='Girilenleri sil';
 $LDSave='Kaydet';
 
 $LDSearchWordPrompt='Aranacak anahtar sözcüðü giriniz, örneðin: bir Soyad, bir Ad veya bir doðum tarihi, vs.';
-$LDEnterData='Veri girmek için týklayýnýz';
-$LDClk2See='Veri görmek için týklayýnýz';
+$LDEnterData='Verileri girmek için týklayýnýz';
+$LDClk2See='Verileri görmek için týklayýnýz';
 $LDFoundPatient='Arama sonucu <b>~nr~</b> hasta bulundu';
 $LDWildCards='Joker nedir nasýl kullanýlýr';
 $LDNewSearch='Yeni arama';
@@ -15,7 +15,7 @@ $LDCaseNr='Vizit no.';
 $LDLastName='Soyad';
 $LDName='Ad';
 $LDBday='Doðum tarihi';
-$LDOClock='';
+$LDOClock='saat';
 $LDBack='Geri';
 
 $LDOn='üzerinde';
@@ -40,8 +40,8 @@ $LDPast3Days='Son 3 gün';
 $LDPast3Months='Son 3 ay';
 $LDPastAll='Hepsi';
 $LDSelect='Seç';
-$LDShootDate='Çekilme tarihi';
-$LDFullScreen='Tam ekran izleme';
+$LDShootDate='Çekim tarihi';
+$LDFullScreen='Tam ekranda izle';
 $LDEditXrayDiag='Rapor düzenle';
 $LDReadDiag='Teþhisi oku';
 $LDWriteDiag='Teþhisi yaz';
@@ -55,9 +55,9 @@ $LDTestReceptionTxt='Tetkik istemlerini alma ve iþleme, sonuçlarý/teþhisleri yaz
 # 2003-08-08 EL
 $LDDicomImages='DICOM resimleri';
 $LDDicomImagesTxt='DICOM formatýndaki resimleri izleme';
-$LDUploadDate='Tarih yükleme';
-$LDViewImage='Burada izleme';
-$LDViewInWindow='Pencerede izleme';
+$LDUploadDate='Yükleme Tarihi';
+$LDViewImage='Burada izle';
+$LDViewInWindow='Pencerede izle';
 $LDNrImages='Kesit sayýsý';
 $LDDicomViewer='Dicom izleyici';
 $LDViewInFrame='Bu çerçevede izle';
@@ -78,4 +78,7 @@ $LDNagoyaTechInst='Nagoya Tech. Institute';
 $LDRAIMJAVA='RAIMJAVA©';
 $LDNoImageSaved='Hiçbir resim kaydedilmedi!';
 $LDImageNotes='Resim notlarý';
+#2004-08-05 EL
+$LDMissingImageFile = 'Resim dosyalarý eksik!';
+#Çeviren Op.Dr. Bülent Potur 4/12/2004
 ?>

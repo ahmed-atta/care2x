@@ -1,33 +1,33 @@
 <?php
-$LDSend='Send';
-$LDCancel='Anulla';
-$LDPrint='Print';
+$LDSend='Invia';
+$LDCancel='Annulla';
+$LDPrint='Stampa';
 $LDStop='Stop';
 $LDContinue='Continua';
 $LDSearch='Cerca';
 $LDBack='Indietro';
-$LDOpen='Open';
+$LDOpen='Apri';
 $LDClose='Chiudi';
 
-$LDRegister='Register';
-$LDRegistration='Registration';
+$LDRegister='Registra';
+$LDRegistration='Registrazione';
 $LDAdmission='Accettazione';
 $LDAdmit='Accetta';
 $LDArchive='Archivio';
-$LDStart='Start';
-$LDEnd='End';
+$LDStart='Inizio';
+$LDEnd='Fine';
 # 2003-07-29 EL
-$LDListApptByDept='List appointments by department';
-$LDListApptByDoc='List appointments by clinician';
-$LDdone='Done';
+$LDListApptByDept='Elenco appuntamenti per dipartimento';
+$LDListApptByDoc='Elenco appuntamenti per persona';
+$LDdone='Fatto';
 $LDOk='Ok';
-$LDSelect='Select';
+$LDSelect='Seleziona';
 
 $LDHelp="Help";
-$LDCloseHelpWin="Close help window";
+$LDCloseHelpWin="Chiudi finestra di help";
 
-$LDRefreshWindow = 'Refresh display';
+$LDRefreshWindow = 'Aggiorna schermo';
 
-$LDNext = 'Next';
-$LDPrevious = 'Previous';
+$LDNext = 'Prossimo';
+$LDPrevious = 'Precedente';
 ?>

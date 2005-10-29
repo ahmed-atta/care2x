@@ -39,4 +39,10 @@ $LDPlsChangeName='Lütfen bir baþka isim giriniz';
 $LDAddressNameExists='Adres önceden var.';
 $LDAddressInfoSaved='Adres bilgisi baþarýyla kaydedildi.';
 $LDSearchPrompt='Lütfen bir adres ismi veya posta kodu giriniz';
+#2004-09-02
+$LDWrongUneceLocCode = 'UNECE yer kodu için sadece 0 ile 99 arasý sayýlar girilebilir.';
+$LDEnterZero = 'Deðeri bilmiyor iseniz lütfen 0 giriniz';
+$LDEnterISOCountryCode = 'Lütfen  ISO ülke kodunu giriniz.';
+$LDEnterQMark ='Eðer kodu bilmiyor iseniz soru iþareti(?) giriniz';
+
 ?>

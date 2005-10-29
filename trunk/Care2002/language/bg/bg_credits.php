@@ -11,7 +11,8 @@
         <TR>
           <TD vAlign=top ><font face="verdana,arial" size=2>
 		
-			<b>Nikolay Minkov (BG)</b>
+			<b>Nikolay Minkov (BG)</b><br>
+			<b>Kaloyan Raev (BG)</b>
 			<p>
 			Bulgarian translations<br>
 		

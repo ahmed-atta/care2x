@@ -1,4 +1,4 @@
-<!--
+<!-- 
 /**
 *  Functions to set date and time according to a given format
 *  The date and time can be set semi-automatically by pressing the
@@ -136,14 +136,14 @@ function setTime(indexel, lang, sec_flag){
 
     var now = 'n';             //* n = now  , default
 	var now_2 = 'n'           //* n = now  , default (in case of multiple letters)
-	var separator = '.';       //* default separator
+	var separator = ':';       //* default separator
 	
 	//* Prepare the trigger input based on the current user language
     switch(lang)
 	{
 	   case 'de': now = 'j';         //*j = jetzt
 	              now_2 = 'j';       //*j = jetzt
-				  //separator = '.';
+				  separator = '.';
 				  break;
 	   case 'it': now = 'a';         //* a = adesso
 				  now_2 = 'a';       //* a = adesso
@@ -186,7 +186,7 @@ function setTime(indexel, lang, sec_flag){
 		}
 
 		indexel.value=zeit;  //* Set the time in the input element
-
+		
 		return true;
 	}
 	else

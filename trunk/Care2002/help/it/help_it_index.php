@@ -16,12 +16,12 @@
 <a href="#">Presentazioni</a></b></font>-->
  <p>
  <b>
-<font color=#ff0000><b>*</b></font><a href="http://207.44.195.231/~care2x/docswiki/index.php?UM - English" target="HELPINFOFRAME">Online Manual</a>
+<font color=#ff0000><b>*</b></font><a href="http://207.44.195.231/~care2x/docswiki/index.php?UM - English" target="HELPINFOFRAME">Manuali in linea (inglese)</a>
 <p>
-<font color=#ff0000><b>*</b></font><a href="http://207.44.195.231/~care2x/docswiki/index.php?Workflow%20Charts" target="HELPINFOFRAME">Workflow charts</a>
+<font color=#ff0000><b>*</b></font><a href="http://207.44.195.231/~care2x/docswiki/index.php?Workflow%20Charts" target="HELPINFOFRAME">Diagrammi dei flusso di lavoro</a>
 </b>
 <P>
- (<font size=1>needs Internet connection</font><font color=#ff0000><b>*</b></font>)
+ (<font size=1>Richiede connessione ad Internet</font><font color=#ff0000><b>*</b></font>)
 
 </font>
 </body>

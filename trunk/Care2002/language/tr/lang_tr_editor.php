@@ -27,7 +27,7 @@ $LDAuthor='Yazar';
 /**
 * Do not translate the '<font size=1>' and '</font>'
 */
-$LDPublishDate='Yayýn tarihi <font size=1>(\'B\' bugün için)</font>';
+$LDPublishDate='Yayýn tarihi <font size=1>(\'T\' bugün için)</font>';
 
 $LDAlertTitle='Lütfen bir baþlýk yazýnýz';
 $LDAlertNews='Lütfen makaleyi yazýnýz';
@@ -77,7 +77,7 @@ $LDNewsEdit='Haberleri veya makaleleri düzenleme';
 
 $dayname=array('Pt','Sa','Ça','Pe','Cu','Ct','Pa');
 $LDCafeMenu='Kafeterya Menüsü';
-$LDMenu='Menu';
+$LDMenu='Menü';
 $LDThisWeek='Bu hafta';
 $LDNextWeek='Gelecek hafta';
 $LD3rdWeek='Üçüncü hafta';
@@ -92,14 +92,14 @@ $LDSorry='Üzgünüz sonra tekrar deneyin.';
 $LDCafePrices='kafeterya fiyat listesi';
 
 $LDCreateGroup='Yeni bir ürün grubu oluþtur';
-$LDCreateGroupPrompt='Yeni bir ürüngrubu oluþturmanýz gerekiyor. Lütfen \'Devam...\' ý týklayýnýz.';
+$LDCreateGroupPrompt='Yeni bir ürün grubu oluþturmanýz gerekiyor. Lütfen \'Devam...\' ý týklayýnýz.';
 /**
 * Do not translate the '<font color=\'#000000\'>' and '</font>'
 */
 $LDMarkGroup='Düzeltmek için bir ürün grubu seçmelisiniz.<br> Sonra   \'<font color=\'#000000\'>Devam...</font>\'ý týklayýnýz';
-$LDEnterGroup='Yeni grubun iamini giriniz .<br>Sonra \'<font color=\'#000000\'>Devam...</font>\' ý týklayýnýz.';
+$LDEnterGroup='Yeni grubun ismini giriniz .<br>Sonra \'<font color=\'#000000\'>Devam...</font>\' ý týklayýnýz.';
 $LDProdGroup='Ürün grubu';
-$LDClk2End='Bitirmek için lütfen burayý týklayýn >> ';
+$LDClk2End='Bitirmek için lütfen burayý týklayýnýz >> ';
 $LDPriceSaved='Aþaðýdaki ürün ve fiyatlar kaydedildi.';
 
 $LDMarkWeek='Lütfen haftayý þeçiniz.';

@@ -805,7 +805,7 @@ class Ward extends Encounter {
 							r.location_nr AS room_nr, b.location_nr AS bed_nr
 				FROM $this->tb_enc AS e 
 					LEFT JOIN $this->tb_ward AS w ON e.encounter_class_nr=1 AND e.current_ward_nr=w.nr
-					LEFT JOIN $this->tb_dept AS d ON (e.encounter_class_nr=1 AND e.current_ward_nr=d.nr) 
+					LEFT JOIN $this->tb_dept AS d ON (e.encounter_class_nr=1 AND e.current_ward_nr=w.nr AND w.dept_nr = d.nr)
 																	OR	(e.encounter_class_nr=2 AND e.current_dept_nr=d.nr)
 					LEFT JOIN $this->tb_location AS r ON r.encounter_nr=$enc_nr AND r.group_nr=w.nr AND r.type_nr=4 AND r.status<>'discharged'
 					LEFT JOIN $this->tb_location AS b ON b.encounter_nr=$enc_nr AND  b.group_nr=w.nr AND b.type_nr=5 AND b.status<>'discharged'

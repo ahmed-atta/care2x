@@ -21,10 +21,10 @@ $dept=array('Medicina generale',
 					'Terapia intensiva',
 					'Laboratorio clinico',
 					'Pronto Soccorso',
-					'Day Clinic General',
-					'Sonography',
-					'Nuclear Diagnostics',
-					'Day Clinic di Medicina Interna');
+					'Day hospital generale',
+					'Sonografia',
+					'Diagnostica nucleare',
+					'Day hospital di medicina interna');
 					
 					
 $target=array('dept_generalsurgery',

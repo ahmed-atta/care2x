@@ -160,7 +160,7 @@ $LDConfirmDelete='Si vuole veramente <b>cancellare</b> o <b>rimuovere</b> questi
 $LDAlertDelete='<b>ATTENZIONE!</b> la cancellazione <b>NON</b> è annullabile!';
 $LDNoDelete='Cancellazione fallita!<br>Notificare il problema al CED.';
 $LDYesDelete='Sì: cancella i dati.';
-$LDNoBack='No, do not cancellare. Indietro.';
+$LDNoBack='No, non cancellare. Indietro.';
 $LDIm='Sono ';
 $LDClk2Ack='Selezionare la freccia per accettare e/o stampare l\'ordine.';
 $LDOrderArrived='E\' arrivato un nuovo ordine!';
@@ -193,20 +193,20 @@ $LDOrderNrExists='Il codice ordine esiste già! Usare un numero differente.';
 /* 2002-10-15 EL */
 $LDCreatedOn='Creato il';
 $LDTime='Ora';
-$LDPharmaOrderBot='OrdineBot';
+$LDPharmaOrderBot='Orderbot';
 $LDDepotOrderBot='Medibot';
 /* 2002-11-5 EL */
-$LDInvalidPassword='Invalid password!';
-$LDUnknownValidator='Validator unknown!';
-$LDPlsEnterInfo='Please enter the correct info.';
+$LDInvalidPassword='Password errata!';
+$LDUnknownValidator='Validatore sconosciuto!';
+$LDPlsEnterInfo='Inserire le informazioni corrette.';
 # 2003-08-17 EL
-$LDAlertInvalidMinorder='The minimum order has invalid character';
-$LDAlertInvalidMaxorder='The maximum order has invalid character';
-$LDAlertInvalidProorder='The nr.of pcs. per order has invalid character';
-$LDAlertMinHigherMax='Minimum greater than maximum is not allowed';
-$LDAlertNoNegativeOrder='Negative value is currently not allowed';
+$LDAlertInvalidMinorder='Ci sono caratteri non validi nell\'ordine minimo';
+$LDAlertInvalidMaxorder='Ci sono caratteri non validi nell\'ordine massimo';
+$LDAlertInvalidProorder='Ci sono caratteri non validi nel numero di pezzi';
+$LDAlertMinHigherMax='Non si può inserire un valore minimo superiore a quello massimo';
+$LDAlertNoNegativeOrder='Non si possono inserire valori negativi';
 # 2003-08-22 EL
-$LDYellowList='Yellow List';
+$LDYellowList='Lista gialla';
 $LDYellowListTxt='German pharmaceutical index (needs internet line)';
 $LDClickSelectDept='Please click this to select a department.';
 ?>

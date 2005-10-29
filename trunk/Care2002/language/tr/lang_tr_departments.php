@@ -37,7 +37,7 @@ $LDTechnicalMaintenance='Bakým onarým';
 $LDITDepartment='Bilgi iþlem Bölümü';
 $LDGeneralAmbulatory='Genel Poliklinik';
 $LDBloodBank='Kan Bankasý';
-$LDNursing='Hemþirelik';
+$LDNursing='Servisler';
 /* 2003-04-27 EL */
 $LDMedical='Týbbi';
 $LDSupport='Týbbi olmayan';
@@ -52,6 +52,6 @@ $LD_AllMedicalDept='____Tüm týbbi bölümler_____';
 $LDClinic='Klinik';
 #2003-10-23 EL
 $LDPlsNameFormal='Lütfen resmi adýný giriniz';
-$LDPlsDeptID='Bölümün kimliðini giriniz';
+$LDPlsDeptID='Lütfen bölümün kimliðini giriniz';
 $LDPlsSelectType='Lütfen tipini seçiniz';
 ?>

@@ -1,63 +1,60 @@
 <?php
-$LDMainTitle='CARE 2X Интегрирана болнична информационна система';
+$LDMainTitle='CARE 2X - Интегрирана болнична информационна система';
 
 /*$LDMainTitle='Marienhospital a virtual Integrated Hospital Information System in Internet';
 */
-$LDInviteAskMe='Enter your query, for example: "What is the phone number of M9d?"';
-$LDTipsLink='Tips:';
-$LDTipsAskMe='Try synonyms, for example type "station" in place of "ward".';
-$LDTipsImgAlt='Click here for tips on how to get the best results.';
-$LDSubmitBut='Send query';
+$LDInviteAskMe='Въведете заявка, например: "Кой е телефонният номер на M9d?"';
+$LDTipsLink='Съвети:';
+$LDTipsAskMe='Опитайте различни синоними например напишете "пункт" вместо "център".';
+$LDTipsImgAlt='Щракнете тук за съвети как да получите най-добри резултати. ';
+$LDSubmitBut='Изпрати заявката';
 
 $LDQuickInfo='Кратка информация';
 $LDPhonePolice='Полиция';
 $LDPhoneFire='Пожарна';
 $LDAmbulance='Спешна помощ';
-$LDPhone='Телефон (Hospital)';
+$LDPhone='Телефон (на болницата)';
 $LDFax='Факс';
 $LDAddress='Адрес';
-$LDEmail='Email';
+$LDEmail='е-поща';
 
 $LDOpenTimes ='Приемни часове';
-$LDManagement ='Мениджмънт';
-$LDDept ='Отдели';
-$LDCafenews ='Ресторант новини';
+$LDManagement ='Ръководство';
+$LDDept ='Отделения';
+$LDCafenews ='Бюфет';
 $LDAdmission ='Прием';
 $LDExhibition ='Изложения';
 $LDEducation ='Обучение';
 $LDAdvStudies ='Изследвания';
-$LDPhyTherapy ='Прсихотерапия';
+$LDPhyTherapy ='Психотерапия';
 $LDHealthTips ='Здравни съвети';
 $LDCalendar ='Календар';
 $LDHelp='Помощ';
 $LDMore='още статии';
 
-$LDEditTitle='Headline';
-$LDNewsDummy=array(1=>'first',2=>'second',3=>'third',4=>'fourth');
+$LDEditTitle='Новини';
+$LDNewsDummy=array(1=>'първа',2=>'втора',3=>'трета',4=>'четвърта');
 
-$LDNoFrame='This website uses frames for optimal functioning. Please install a proper browser.  Please activate the Javascript (JScript) and
-						turn on the automatic cookie reception';
+$LDNoFrame='Този уеб сайт използва технологията "frames" за оптимално функциониране. Моля, инсталирайте подходящ браузър. Активирайте JavaScript (JScript) и включете автоматичното приемане на "бисквитки". ';
 
-$LDClk2Write='Click me to submit news';
+$LDClk2Write='Добавяне на новина';
 
-$LDAlertOldBrowser='Your browser version is older than 5.0!<br> We recommend the version 5.0 or later. <br> Using older versions might lead to
-								functional unreliability of the program.';
-$LDAlertNoCookie='You or your  browser might have rejected the cookie(s).<br>This program is dependent on them. Otherwise the program will not
-							function properly.<br>Please set your browser to automatically accept cookies.<br>';
-$LDClkAfter='Afterwards click this.';
-$LDGoAheadEgal='Click here to start the program.';
-$LDGoAheadEgalCookie='I don\'t want to accept cookies. Go ahead and start the program anyway.';
-$LDCookieRef='If you want to know more about cookies you can read the following documents:<br>
+$LDAlertOldBrowser='Версията на Вашия браузър е по-стара от 5.0!<br>Препоръчва се използването на версия 5.0 или по-късна. <br>Използването на по-стара версия може да доведе до неправилно функциониране на системата. ';
+$LDAlertNoCookie='Вие или Вашият браузър отказва да приема "бисквитки". <br>Правилната работа на системата зависи от тази функционалност. <br>Моля, включете автоматичното приемане на "бисквитки". <br>';
+$LDClkAfter='След това щракнете тук.';
+$LDGoAheadEgal='Щракнете тук, за да стартирате системата.';
+$LDGoAheadEgalCookie='Не искам да приемам "бисквитки". Въпреки това стартирай системата.';
+$LDCookieRef='Ако искате да научите повече за технологията "бисквитки", може да прочетете следните документи (на английски):<br>
 						<a href=\'http://www.dtp-aus.com/cookies.htm\' target=\'pp\'>A few words about Cookies (Security and the lies)</a><br>
 						<a href=\'http://www.cookiecentral.com/content.phtml?area=4&id=10\' target=\'pp\'>Cookies and Privacy FAQ</a><br>';
-$LDPrivPolicy='If you want to read our privacy policy please <a href=\'language/en/en_privacy.htm\' target=\'pp\'>click this:</a>';
-$LDOurPrivPolicy='Our Privacy Policy';
+$LDPrivPolicy='Ако искате да прочетете политиката за защита на личната информация, моля <a href=\'language/bg/bg_privacy.htm\' target=\'pp\'>щракнете тук:</a>';
+$LDOurPrivPolicy='Политика за защита на личната информация';
 $LDSubmitNews='Публикуване на новини';
-$LDEditNews='Edit & submit news via online editor';
+$LDEditNews='Редактиране и публикуване на новини';
 /* 2002-10-17 EL */
 $LDCredits='Благодарности';
 /* 2003-05-24 EL */
 $LDPublicItems='Обществени новини';
 # 2003-08-28 EL
-$LDHeadline='Headline';
+$LDHeadline='Новини';
 ?>

@@ -1,34 +1,34 @@
 <?php
 //error_reporting(E_ALL);
-$LDInitFindings='Initial findings';
-$LDCurrentFindings='Current findings';
-$LDFinalFindings='Final find';
+$LDInitFindings='Risultato iniziale';
+$LDCurrentFindings='Risultato attuale';
+$LDFinalFindings='Risultato finale';
 
-$LDFillLabOnly='For lab use only';
+$LDFillLabOnly='Solo per uso di laboratorio';
 $LDLEN='LEN';  /* LEN =  Lab entry number */
 
-$LDDate='Date';
-$LDEye='Eye';
-$LDBac_1='Bact.1'; /* Note: Bact. means bacteria or pathogen */
-$LDBac_2='Bact.2';
-$LDBac_3='Bact.3';
-$LDBac_I='Patho.I';
-$LDBac_II='Patho.II';
-$LDBac_III='Patho.III';
+$LDDate='Data';
+$LDEye='Occhio';
+$LDBac_1='Batt.1'; /* Note: Bact. means bacteria or pathogen */
+$LDBac_2='Batt.2';
+$LDBac_3='Batt.3';
+$LDBac_I='Patog.I';
+$LDBac_II='Patog.II';
+$LDBac_III='Patog.III';
 $LDFungi='Fungi';
-$LDResistanceTestAnaerob='Resistance test Anaerobe';				
-$LDResistanceTestAerob='Resistance test Aerobe';
-$LDTestFindings='Test results / Findings';
-$LDMarkStreptocResistance='mark by streptococcus resistance';
-$LDBlockerNeg='Blocker negative';
-$LDBlockerPos='Blocker positive';
+$LDResistanceTestAnaerob='Test eesistenza anaerobi';				
+$LDResistanceTestAerob='Test eesistenza aerobi';
+$LDTestFindings='Risultati del test';
+$LDMarkStreptocResistance='Marcato da resistenza allo streptococco';
+$LDBlockerNeg='Blocker negativo';
+$LDBlockerPos='Blocker positivo';
 $LDBacNr_GT='Bac.ct.>10^5';
 $LDBacNr_LT='Bac.ct.<10^5';
 $LDBacNrNeg='Bac.ct.neg';
 $LDSMR=array('S','M','R');
 
 /* 2002-09-19 EL */
-$LDBAC=array('Patho. I', 'Patho. II', 'Patho. III');
+$LDBAC=array('Patog. I', 'Patog. II', 'Patog. III');
 
 /* Note: the following arrays use strict medical terminology.
 *  If you are not sure about their translation, please leave the 
@@ -285,17 +285,17 @@ $lab_TestResultId_1=array('Staph.aureus', 'E.coli', 'enterob.aerogenes',
 									 'Acinetobacter Baumannii', 'Serratia liquefaciens', 'Stenotrophomonas maltophilia');
 									 
 */									 
-$lab_TestResultId_2 = array('No growth after 48 hours', 'Aerobe like growth', 'Amöba in stool negative',
-                                           'No growth after 5 days', '', 'Lambia in stool negative',
-										   'No growth after 9 days', 'Gram.neg.Diplococci NoEvid.', 'Worm eggs.n.stool neg.',
-										   'No Bact. of TPE-Group', 'GO-culture negative', 'No growth of E.Coli',
-										   'Campylobacter.culture neg.', '', 'Liquorantigen negative',
+$lab_TestResultId_2 = array('Nessuna crescita in 48 ore', 'Crescita aerobi', 'Amoeba nelle feci negativo',
+                                           'Nessuna crescita in 5 giorni', '', 'Lambia nelle feci negativo',
+										   'Nessuna crescita in 9 giorni', 'Gram.neg.Diplococci NoEvid.', 'Uova vermi nelle feci neg.',
+										   'No Bact. of TPE-Group', 'GO-cultura negativo', 'Nessuna crescita di E.Coli',
+										   'Campylobacter.cultura neg.', '', 'Liquorantigen negativo',
 										   'NoG. Campylobacter.pylori', 'NoEvid.microscp.acid.Cylind.', 'EHEC negative',
-										   'Dyspepsy.Coli serolg.NoEvid', 'No growth after 7 days', '',
-										   'isolated Sporefungi evident', '' ,'',
-										   'Fungi culture negative', '', '',
+										   'Dyspepsy.Coli serolg.NoEvid', 'Nessuna crescita in 7 giorni', '',
+										   'Evidenza di Sporefungi isolate', '' ,'',
+										   'Fungicultura negativo', '', '',
 										   'Cocci mixflora', '', '',
 										   'Cocci.Cylinder.Mixflora','', '',
 										   'Bacteria microscop.NonEvid', '', '',
 										   'NoG.oxacil.resist.Staphyloc.', '', '');
-										   				  
+

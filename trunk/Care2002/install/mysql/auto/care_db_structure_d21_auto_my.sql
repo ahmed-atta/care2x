@@ -1385,6 +1385,52 @@ CREATE TABLE care_icd10_bs (
 );
 
 # --------------------------------------------------------
+
+#
+# Tabellenstruktur für Tabelle care_icd10_bg
+#
+
+CREATE TABLE care_icd10_bg (
+   diagnosis_code varchar(12) NOT NULL,
+   description text NOT NULL,
+   class_sub varchar(5) NOT NULL,
+   type varchar(10) NOT NULL,
+   inclusive text NOT NULL,
+   exclusive text NOT NULL,
+   notes text NOT NULL,
+   std_code char(1) NOT NULL,
+   sub_level tinyint(4) DEFAULT '0' NOT NULL,
+   remarks text NOT NULL,
+   extra_codes text NOT NULL,
+   extra_subclass text NOT NULL,
+   KEY diagnosis_code (diagnosis_code),
+   PRIMARY KEY (diagnosis_code)
+);
+
+# --------------------------------------------------------
+
+#
+# Tabellenstruktur für Tabelle care_icd10_tr
+#
+
+CREATE TABLE care_icd10_tr (
+   diagnosis_code varchar(12) NOT NULL,
+   description text NOT NULL,
+   class_sub varchar(5) NOT NULL,
+   type varchar(10) NOT NULL,
+   inclusive text NOT NULL,
+   exclusive text NOT NULL,
+   notes text NOT NULL,
+   std_code char(1) NOT NULL,
+   sub_level tinyint(4) DEFAULT '0' NOT NULL,
+   remarks text NOT NULL,
+   extra_codes text NOT NULL,
+   extra_subclass text NOT NULL,
+   KEY diagnosis_code (diagnosis_code),
+   PRIMARY KEY (diagnosis_code)
+);
+
+# --------------------------------------------------------
 #
 # Tabellenstruktur für Tabelle care_img_diagnostic
 #
@@ -3393,7 +3439,7 @@ CREATE TABLE care_users (
 );
 
 # --------------------------------------------------------
-INSERT INTO `care_users` VALUES ('admin', 'care', '88d923ba797e9cafdfa4176f02bc2537', 0, 0, 'System_Admin', 1, '2004-11-23', '09:32:40', '0000-00-00', '00:00:00', '', '', 'auto-installer', '00000000000000', 'auto-installer', '00000000000000');
+
 #
 # Tabellenstruktur für Tabelle care_version
 #

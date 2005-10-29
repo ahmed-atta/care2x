@@ -1,6 +1,6 @@
 <?php
-$LDEntryDate='Entry date';
-$LDJournalNumber='Journal number';
+$LDEntryDate='Data inserimento';
+$LDJournalNumber='Numero giornale';
 $LDBlockNumber='N. Blocchi';
 $LDDeepCuts='deep Blocks';
 $LDSpecialDye='Colorazioni speciali';
@@ -8,7 +8,7 @@ $LDImmuneHistoChem='Immunoistochimica';
 $LDHormoneReceptors='Recettori ormonali';
 $LDSpecials='Extra';
 $LDSend='Invia';
-$LDSendLater='Invia pi&ugrave; tardi';
+$LDSendLater='Invia più tardi';
 $LDReset='Reset';
 $LDClose='Chiudi';
 $LDSpeedTest='Esame urgente.';
@@ -28,12 +28,12 @@ $LDCytology='Citologia';
 $LDLocalization='Localizzazione';
 $LDClinicalQuestions='Diagnosi clinica, referti, richieste:';
 $LDExtraInfo='Informazioni di supporto';
-$LDExtraInfoSample='(e.g. important Lab results, after Radiation in excision area, after Chemotherapy)';
+$LDExtraInfoSample='(es. esami importanti di laboratorio, dopo chemioterapia)';
 $LDForGynTests='Per esami ginecologici:';
 $LDLastPeriod='Ultima mestruazione:';
 $LDPeriodType='Tipo mestruazioni:';
 $LDGravidity='Gravidanza:';
-$LDMenopauseSince='Menopausa da:';
+$LDMenopauseSince='In menopausa da:';
 $LDHormoneTherapy='Terapia ormonale:';
 $LDContraceptive='Contraccettivi:';
 $LDIUD='IUD:';
@@ -48,7 +48,7 @@ $LDReportingDoc='Medico refertante';
 $LDXrayNumber='N. radiografia:';
 $LD_r_cm2='r cm2 :';
 $LDXrayTechnician='Tecnico di radiologia';
-$LDYes='Si';
+$LDYes='Sì';
 $LDNo='No';
 $LDXrayTest='Radiografia';
 $LDMammograph='Mammografia';
@@ -57,63 +57,63 @@ $LDCT='TAC';
 $LDNuclear='Medicina nucleare';
 $LDMRT='RMN';
 
-$LDPatMobile='Patient mobile?';
-$LDAllergyKnown='Allergy known?';
-$LDHyperthyreosisKnown='Hyperthyreosis known?';
-$LDPregnantPossible='Pregnancy possible?';
+$LDPatMobile='Il paziente deambula?';
+$LDAllergyKnown='Allergie note?';
+$LDHyperthyreosisKnown='Ipertiroidismo?';
+$LDPregnantPossible='Possibile gravidanza in corso?';
 
-$LDDiagnosesInquiries='Diagnoses / Inquiries:';
-$LDDeptReport='Department\'s Report:';
-$LDRequestTo='Request to the';
-$LDDepartment='department';
-$LDVisitRequested='Visit requested';
+$LDDiagnosesInquiries='Diagnosi/richieste:';
+$LDDeptReport='Rapporto del reparto:';
+$LDRequestTo='Richiesta a';
+$LDDepartment='reparto';
+$LDVisitRequested='Visita richiesta';
 $LDPatCanBeOrdered='Patient can be ordered';
 									
 $LDShortMonth=array('',
-                                   'Ja',
-								   'Fe',
-								   'Ma',
-								   'Ap',
-								   'My',
-								   'Jn',
-								   'Jl',
-								   'Au',
-								   'Se',
-								   'Oc',
-								   'No',
-								   'De');
-$LDBatchNumber='Batchnumber';
-$LDMaterial='Material:';
-$LDDiagnosis='Diagnosis:';
-$LDImmuneSupp='Immune supp.';		
+                   'Gen',
+								   'Feb',
+								   'Mar',
+								   'Apr',
+								   'Mag',
+								   'Giu',
+								   'Lug',
+								   'Ago',
+								   'Set',
+								   'Ott',
+								   'Nov',
+								   'Dic');
+$LDBatchNumber='numero batch';
+$LDMaterial='Materiale:';
+$LDDiagnosis='Diagnosi:';
+$LDImmuneSupp='Supp. immune';		
 
-$LDRequestedTest='Requested Test';
-$LDLabel='Label';					
-$LDCentralLab='Central Laboratory';
+$LDRequestedTest='Test richiesto';
+$LDLabel='Etichetta';					
+$LDCentralLab='Laboratorio centrale';
 
-$LDRequestOf='Request for ';
-$LDTelephone='Telephone';
-$LDToBloodBank='To the blood bank';
+$LDRequestOf='Richiesto per ';
+$LDTelephone='Telefono';
+$LDToBloodBank='Alla banca del sangue';
 $LDWithMatchTest='with match test sample(s)';
-$LDByBloodBank='from the blood bank:';
+$LDByBloodBank='dalla banca del sangue:';
 
-$LDBloodGroup='Blood group:';
-$LDRhFactor='Rh-factor:';
+$LDBloodGroup='Gruppo sanguigno:';
+$LDRhFactor='Fattore RH:';
 $LDKell='Kell';
-$LDDateProtNumber='Date & protocol nr. of test by:';
-$LDBloodSpecimen='Specimen';
-$LDCount='Count';
-$LDPureBlood='Pure blood';
-$LDRedBloodCon='Red blood cell concentrate';
-$LDLeukoLessRedBlood='Leukocytedepleted red blood cell';
-$LDWashedRedBlood='Washed red blood cells';
-$LDPRP='Platelet rich plasma';
-$LDThromboCon='Platelet concentrate';
-$LDFFP='Fresh frozen plasma</font>';
-$LDTransfusionDevice='Transfusion devices';
-$LDTransfusionDate='Transfusion date:';
-$LDNotesRequests='Notes/special orders:';
-$LDDoctorNotice='<b>The ordering doctor is responsible for this order!</b><br>For security reasons, only sample tubes with full name & birthdate will be accepted.';
+$LDDateProtNumber='Data e protocollo del test da:';
+$LDBloodSpecimen='Campione';
+$LDCount='Conteggio';
+$LDPureBlood='Sangue intero';
+$LDRedBloodCon='Globuli rossi concentrati';
+$LDLeukoLessRedBlood='Globuli rossi senza leucociti';
+$LDWashedRedBlood='Globuli rossi lavati';
+$LDPRP='Plasma ad alto tasso di platelet';
+$LDThromboCon='Platelet concentrato';
+$LDFFP='Plasma fresco congelato</font>';
+$LDTransfusionDevice='Macchine trasfusionali';
+$LDTransfusionDate='Data trasfusione:';
+$LDNotesRequests='Note/prescrizioni speciali:';
+$LDDoctorNotice='<b>Il medico prescrivente è responsabile di questo ordine!</b><br>Per ragioni di sicurezza saranno accettate solo le fialette con il nome completo e la data di nascita.';
 
 $LDPB='PB'; /* Pure blood */
 $LD350='350';
@@ -123,7 +123,7 @@ $LDWRB='WRB'; /* washed red blood cells */
 $LDPRP_Initial='PRP'; /* Platelet rich plasma*/
 $LDTC='TC'; /* Platelet - Thrombocytes concentrate*/
 $LDFFP_Initial='FFP'; /* Fresh frozen plasma*/
-$LDLabServices='Computation of lab services';
+$LDLabServices='Conteggio dei servizi di laboratorio';
 $LDServiceCode='S-CODE';
 $LDBloodGroupCode='1360';
 $LDA_SubgroupCode='1342';
@@ -133,28 +133,28 @@ $LDAntibodyTestCode='1355';
 $LDCrossTestCode='1365';
 $LDAntibodyDiffCode='1355';
 $LDA_Subgroup='A-subgroup';
-$LDExtraBGFactors='other blood group factors';
+$LDExtraBGFactors='altri fattori del gruppo sanguigno';
 $LDCoombsTest='Dir. Coombstest';
-$LDAntibodyTest='Antibody search test';
-$LDCrossTest='Cross test';
-$LDAntibodyDiff='Antibody differentiation';
-$LDTotalAmount='Total amount';
-$LDPrice='Price';
-$LDConserveNrPaste='(Paste product number here immediately)';
-$LDLabTimeStamp='(Blood bank time stamp)';
-$LDReleaseVia='Release via';
-$LDReceiptAck='Receipt acknowledgement';
-$LDSignature='Signature';
-$LDLabLogBook='Journal-nr:';
-$LDLabNumber='Lab-Nr.';
-$LDBookedOn='booked on';
+$LDAntibodyTest='Test ricerca anticorpi';
+$LDCrossTest='Test incrociati';
+$LDAntibodyDiff='Differenziazione anticorpi';
+$LDTotalAmount='Quantità totale';
+$LDPrice='Prezzo';
+$LDConserveNrPaste='(Incollare subito qui il numero prodotto)';
+$LDLabTimeStamp='(Data e ora banca del sangue)';
+$LDReleaseVia='Invio tramite';
+$LDReceiptAck='Ricevuta di ritorno';
+$LDSignature='Firma';
+$LDLabLogBook='N. giornale:';
+$LDLabNumber='N. laboratorio';
+$LDBookedOn='prenotato su';
 
-$LDFillByLab='To be filled up by blood bank only!';
-$LDFillByWard='Must be filled up at the ward!';
+$LDFillByLab='Da riempire a cura della banca del sangue!';
+$LDFillByWard='Da riempire a cura della corsia!';
 
 /* 2002-09-03 EL */							  
-$LDSearchPatient='Search patient';
-$LDPlsSelectPatientFirst='Please search for the patient first.';
+$LDSearchPatient='Ricerca paziente';
+$LDPlsSelectPatientFirst='Cercare prima un paziente.';
 /* 2002-09-07 EL*/
 $LDAlertQuickCut='The quick cut is selected.';
 $LDAlertQuickDiagnosis='The quick diagnosis is selected.';
@@ -163,64 +163,64 @@ $LDPlsEnterOpDate='Please enter the op date.';
 $LDPlsEnterDoctorName='Please enter the doctor\\\'s name.';
 
 /* 2002-09-08 EL */
-$LDPlsEnterBloodGroup='Please enter the blood group.';
-$LDPlsEnterRhFactor='Please enter the Rh-factor.';
-$LDPlsEnterKell='Please enter the Kell value.';
-$LDPlsEnterBloodPcs='Please enter the blood product\'s number of pcs.';
-$LDPlsEnterDate='Please enter the date.';
+$LDPlsEnterBloodGroup='Inserire il gruppo sanguigno.';
+$LDPlsEnterRhFactor='Inserire il fattore RH.';
+$LDPlsEnterKell='Inserire il valore Kell.';
+$LDPlsEnterBloodPcs='Inserire il numero di pezzi del prodotto sanguigno.';
+$LDPlsEnterDate='Inserire la data.';
 /* 2002-09-09 EL */
-$LDPlsEnterDiagnosisQuiry='Please enter the diagnoses or inquiries.';
-$LDPlsSelectDept='Please select a department.';
-$LDPlsSelectDeptShort='pls. select department';
+$LDPlsEnterDiagnosisQuiry='Inserire le diagnosi o le domande.';
+$LDPlsSelectDept='Inserire un reparto.';
+$LDPlsSelectDeptShort='Scegliere un reparto';
 /* 2002-12-09 EL */
 $LDPendingTestRequest='Richiesta Test in Coda';
 /* 2002-09-13 EL */
-$LDPrevRequest='Previous request';
-$LDNextRequest='Next request';
-$LDEnterResult='Write findings/results for this test request';
-$LDPrintOut='Print this form';
-$LDSaveEntry='Save entries';
+$LDPrevRequest='Richiesta precedente';
+$LDNextRequest='Richiesta successiva';
+$LDEnterResult='Scrivi risultati per questa richiesta di test';
+$LDPrintOut='Stampa il modulo';
+$LDSaveEntry='Salva i dati';
 /* 2002-09-14 EL */
-$LDNoPendingRequest='There are no pending requests.';
+$LDNoPendingRequest='Non ci sono richieste in coda.';
 /* 2002-09-15 EL */
-$LDTestFindings='Test findings';
-$LDCaseNr='Case number';
-$LDFamilyName='Family name';
-$LDName='First name';
-$LDBDay='Birthdate';
+$LDTestFindings='Risultati test';
+$LDCaseNr='Caso nr.';
+$LDFamilyName='Cognome';
+$LDName='Nome';
+$LDBDay='Data di nascita';
 /* 2002-09-15 EL */
-$LDMACROFindings='Macro findings';
-$LDMicroFindings='Micro findings';
-$LDAddFindings='Additional notes';
-$LDXrayDate='Xray date';
-$LDPlsEnterTransfusionDate='Please enter the date of transfusion.';
+$LDMACROFindings='Risultati macro';
+$LDMicroFindings='Risultati micro';
+$LDAddFindings='Note aggiuntive';
+$LDXrayDate='Data lastra';
+$LDPlsEnterTransfusionDate='Inserire la data della trasfusione.';
 /* 2002-09-21 EL */
-$LDPlsEnterLEN='Please enter the Lab Entry Number (LEN)';
+$LDPlsEnterLEN='Inserire il codice di ingresso laboratorio (LEN)';
 /* 2002-09-28 EL */
 $LDHospitalName='Care';
 
 /* 2002-09-29 EL */
-$LDHematology='Hematology';
-$LDCoagulation='Coagulation';
+$LDHematology='Ematologia';
+$LDCoagulation='Coagulazione';
 $LDUrine='Urine';
-$LDSerum='Serum';
+$LDSerum='Siero';
 $LDNuechtern='sob';
-$LDGlucose='Glucose';
-$LDBLP='BLP'; /* BLP = Blood plasma */
-$LDBS='BLS'; /* BLS = Blood sugar */
-$LDBS1='BLS 1';
+$LDGlucose='Glucosio';
+$LDBLP='plasma'; /* BLP = Blood plasma */
+$LDBS='zuccheri'; /* BLS = Blood sugar */
+$LDBS1='zuccheri 1';
 $LD900='9.00';
 $LD1500='15.00';
 
 /* 2002-10-14 EL */
-$LDDone='It\'s done! Move the form to the archive';
+$LDDone='Fatto! Archivia il modulo';
 
 /* Note: the following arrays use strict medical terminology.
 *  If you are not sure about their translation, please leave the 
 *  english word untranslated
 */
 $LDBacLabMaterialType = array(_mx_k_urin_=>'C.Urin',                                              
-                                              _mx_sputum_=>'Sputum',
+												_mx_sputum_=>'Sputum',
 											  _mx_m_urin_=>'M.Urin',
 											  _mx_trachealsecrete_=>'Trac.scrt.',
 											  _mx_uricult_=>'Uricult',

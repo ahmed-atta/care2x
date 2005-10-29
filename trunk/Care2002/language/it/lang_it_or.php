@@ -290,21 +290,21 @@ $LDShowNextLog='Visualizza le successive voci del registro';
 $LDShowGuideCal='Visualizza il calendario';
 $LDPerformance='Performance';
 /* 2002-10-13 EL */
-$LDPlsSelectPatientFirst='Please find the patient first.';
+$LDPlsSelectPatientFirst='Prima cercare un paziente.';
 $LD_ddpMMpyyyy='gg.mm.aaaa';
 $LD_yyyyhMMhdd='aaaa-mm-gg';
 $LD_MMsddsyyyy='mm/dd/aaaa';
 /* 2002-10-15 EL */
 $LDStandbyInit='R'; /* S = Standby */
 $LDOncallInit='S'; /* O = Oncall */
-$LDDutyPlan='Duty plan';
+$LDDutyPlan='Piano attività';
 /* 2003-03-18 EL */
-$LDSearchInAllDepts='Search in all departments';
-$LDAddNurseToList='Add a nurse to list';
-$LDNursesList='Nurses\' List';
+$LDSearchInAllDepts='Cerca in tutti i reparti';
+$LDAddNurseToList='Aggiungere un infermiere alla lista';
+$LDNursesList='Elenco infermieri';
 /* 2003-03-19 EL */
-$LDPlsSelectDept='Please select a department.';
-$LDSelectORoomNr='...and an OR.';
+$LDPlsSelectDept='Scegliere un reparto.';
+$LDSelectORoomNr='...ed una sala operatoria';
 $LDAlertNoDeptSelected=$LDPlsSelectDept;
-$LDAlertNoORSelected='Please select an operating room!';
+$LDAlertNoORSelected='Scegliere una sala operatoria!';
 ?>
