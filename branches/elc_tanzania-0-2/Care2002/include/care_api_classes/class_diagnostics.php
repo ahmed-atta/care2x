@@ -98,4 +98,6 @@ class Diagnostics extends Core {
 	function setWhereCond($cond){
 		$this->where=$cond;
 	}
+	
+	
 }

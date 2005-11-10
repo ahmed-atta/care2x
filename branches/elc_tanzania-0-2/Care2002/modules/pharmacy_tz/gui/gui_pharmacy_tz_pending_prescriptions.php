@@ -87,7 +87,6 @@ else
 {
 		echo '<br><br>';
 }		    
-	
   require($root_path.'include/inc_pharmacy_pending_lister_fx.php'); 
   
 ?>
@@ -99,6 +98,7 @@ else
 		            echo '
                       <a href="javascript:printOut()"><img src="../../gui/img/control/default/en/en_printout.gif" border=0 align="absmiddle" width="99" height="24" alt="Print this form"></a> 
                       <a href="pharmacy_tz_pending_prescriptions.php?&mode=done&pn='.$pn.'&prescription_date='.$prescription_date.'>"><img src="../../gui/img/control/default/en/en_done.gif" border=0 align="absmiddle" width="75" height="24" alt="It´s done! Move the form to the archive"></a> 
+                      <a href="pharmacy_tz_pending_prescriptions.php?&mode=done&discharge=true&encounter='.$pn.'&pn='.$pn.'&prescription_date='.$prescription_date.'>"><img src="../../gui/img/control/default/en/en_done_and_discharge.gif" border=0 align="absmiddle" width="175" height="24" alt="It´s done! Move the form to the archive and discharge our patient"></a> 
                       <br>
                      ';}
                  

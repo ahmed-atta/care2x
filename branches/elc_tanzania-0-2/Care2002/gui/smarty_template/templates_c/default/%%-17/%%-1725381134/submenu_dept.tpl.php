@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.0, created on 2004-07-06 23:14:45
+<?php /* Smarty version 2.6.0, created on 2005-10-20 12:31:34
          compiled from ambulatory/submenu_dept.tpl */ ?>
 			<TABLE cellSpacing=0  width=100% class="submenu_frame" cellpadding="0">
 			<TBODY>
@@ -33,17 +33,11 @@
 </nobr></TD>
 						</tr>
 
-						<TR>
-							<TD width=25 align=center><?php echo $this->_tpl_vars['sNewsIcon']; ?>
-</TD>
-							<TD class="submenu_item"><nobr><?php echo $this->_tpl_vars['sNewsLink']; ?>
-</nobr></TD>
-						</tr>
-
 					</TBODY>
 					</TABLE>
 				</TD>
 			</TR>
 			</TBODY>
 			</TABLE>
+
 

@@ -192,7 +192,7 @@ $smarty->append('JavaScript',$sTemp);
 $smarty->assign('LDCaseNr',$LDCaseNr);
 $smarty->assign('LDLastName',$LDLastName);
 $smarty->assign('LDName',$LDName);
-$smarty->assign('LDBday',LDBday);
+$smarty->assign('LDBday',$LDBday);
 
 # Assign patient basic data
 $smarty->assign('encounter_nr',$encounter_nr);

@@ -55,7 +55,7 @@ m.config.useCookies=false;
     if (eregi('LDLogin',$menu['LD_var'])){
 			if ($HTTP_COOKIE_VARS['ck_login_logged'.$sid]=='true'){
 				$menu['url']='main/logout_confirm.php';
-				$menu['LD_var']='LDLogout';
+				$menu['LD_var']='LDLogin';
 			}	
 		}
     if ($menu['s_ebene']!=0) {

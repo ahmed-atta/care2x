@@ -91,7 +91,7 @@ A:visited:hover {color: #cc0033;}
               <!--<a href="labor_datainput.php?ntid=false&lang=$lang&encounter_nr=2005500001&job_id=10000004&mode=show&update=1&user_origin=lab_mgmt"><img src="../../gui/img/control/default/en/en_update_data.gif" border=0 align="absmiddle" width="130" height="24" alt="Write findings/results for this test request"></a> -->
               <a href="labor_test_request_admin_chemlabor.php?ntid=false&lang=$lang&edit=0&mode=done&target=admin&subtarget=chemlabor&batch_nr=10000004&pn=2005500001&formtitle=Chemical Laboratory&user_origin=lab&noresize=1"><img src="../../gui/img/control/default/en/en_done.gif" border=0 align="absmiddle" width="75" height="24" alt="It's done! Move the form to the archive"></a> 
               <br>
-              
+              aaa
               <iframe name="prescription" src="<?php echo $root_path;?>/modules/registration_admission/show_prescription.php?externalcall=TRUE&pn=<?php echo $pn;?>&sid=<?php echo $sid;?>" width="900" height="400" align="left" marginheight="0" marginwidth="0" hspace="0" vspace="0" scrolling="auto" frameborder="0" noresize></iframe> 
         </td>
 	</tr>

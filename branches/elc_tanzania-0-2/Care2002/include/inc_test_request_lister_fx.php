@@ -95,17 +95,17 @@ while($test_request=$requests->FetchRow())
   if($batch_nr!=$test_request['batch_nr'])
   {
         echo "<img src=\"".$root_path."gui/img/common/default/pixel.gif\" border=0 width=4 height=7> 
-        <a onmouseover=\"showBallon('".$test_request['name_first']." ".$test_request['name_last']."',0,150,'#99ccff'); window.status='Care2x Tooltip'; return true;\"
+        <a onmouseover=\"showBallon('".$test_request['name_first']." ".$test_request['name_last']." encounter: ".$test_request['encounter_nr']." Selian file nr: ".$test_request['selian_pid']."',0,150,'#99ccff'); window.status='Care2x Tooltip'; return true;\"
 	onmouseout=\"hideBallon(); return true;\" href=\"".$thisfile.URL_APPEND."&target=".$target."&subtarget=".$subtarget."&pn=".$test_request['encounter_nr']."&batch_nr=".$test_request['batch_nr']."&user_origin=".$user_origin."&tracker=".$tracker."\">";
 			if($test_request['batch_nr']) 
 			{
 				if(IS_TANZANIAN) 
 				{
-					echo $enc_obj->showPID($test_request['batch_nr']); 
+					echo $enc_obj->showPID($test_request['pid']); 
 				}
 				else 
 				{
-					echo $test_request['batch_nr'];
+					echo $test_request['pid'];
 				}
 			} 
 	echo " ".$test_request['room_nr']."</a><br>";
@@ -117,11 +117,11 @@ while($test_request=$requests->FetchRow())
 			{
 				if(IS_TANZANIAN) 
 				{
-					echo $enc_obj->showPID($test_request['batch_nr']); 
+					echo $enc_obj->showPID($test_request['pid']); 
 				}
 				else 
 				{
-					echo $test_request['batch_nr'];
+					echo $test_request['pid'];
 				}
 			} 
 	echo " ".$test_request['room_nr']."</font><br>";

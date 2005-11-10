@@ -43,7 +43,15 @@ function chkform(d) {
 </script>
 <form method="POST" name="reportform<?PHP echo $i;?>">
 <?PHP
-$item_array=$_SESSION['item_array'];
+if(!$nr)
+	$item_array=$_SESSION['item_array'];
+else
+{
+	$prescriptionitem = $pres_obj->GetPrescritptionItem($nr);
+	$item_array='';
+	$item_array[0]= $prescriptionitem['article_item_number'];
+	echo '<input type="hidden" value="'.$nr.'" name="nr">';
+}
 //echo "-->items in array: ".count($item_array)."<br>";#
 for ($i=0 ; $i<count($item_array) ; $i++) {
 ?>
@@ -52,11 +60,11 @@ for ($i=0 ; $i<count($item_array) ; $i++) {
   
    <tr bgcolor="#f6f6f6">
      <td><FONT SIZE=-1  FACE="Arial" color="#000066">Total dose</td>
-     <td><input type="text" name="arr_dosage[<?PHP echo $i; ?>]" size=50 maxlength=60  onBlur="chkform(this)"></td>
+     <td><input type="text" name="arr_dosage[<?PHP echo $i; ?>]" size=50 maxlength=60 value="<?php echo $prescriptionitem['dosage'];?>" onBlur="chkform(this)"></td>
    </tr>
    <tr bgcolor="#f6f6f6">
      <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDApplication.' '.$LDNotes; ?></td>
-     <td><textarea name="arr_notes[<?PHP echo $i; ?>]" cols=40 rows=3 wrap="physical"></textarea>
+     <td><textarea name="arr_notes[<?PHP echo $i; ?>]" cols=40 rows=3 wrap="physical"><?php echo $prescriptionitem['notes'];?></textarea>
          </td>
    </tr>
 
@@ -75,7 +83,12 @@ for ($i=0 ; $i<count($item_array) ; $i++) {
 ?>
 <input type="hidden" name="encounter_nr" value="<?php echo $HTTP_SESSION_VARS['sess_en']; ?>">
 <input type="hidden" name="pid" value="<?php echo $HTTP_SESSION_VARS['sess_pid']; ?>">
-<input type="hidden" name="mode" value="create">
+<?php
+if(!$nr)
+	echo '<input type="hidden" name="mode" value="create">';
+else
+	echo '<input type="hidden" name="mode" value="update">';
+?>
 <input type="hidden" name="history" value="Created: <?php echo date('Y-m-d H:i:s'); ?> : <?php echo $HTTP_SESSION_VARS['sess_user_name']."\n"; ?>">
 <input type="hidden" name="target" value="<?php echo $target; ?>">
 

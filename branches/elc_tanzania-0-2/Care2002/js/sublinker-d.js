@@ -43,6 +43,7 @@ function hsm(){
 }
 var brwsVer=parseInt(navigator.appVersion);var timer;var curSubMenu=''; var menuId='';var t; var x,y;
 
+/*
 function handlerMM(e){
 	x = (document.layers) ? e.pageX : document.body.scrollLeft+event.clientX
 	y = (document.layers) ? e.pageY : document.body.scrollTop+event.clientY
@@ -52,5 +53,5 @@ if (document.layers){
 	document.captureEvents(Event.MOUSEMOVE);
 }
 document.onmousemove=handlerMM;
-
+*/
 

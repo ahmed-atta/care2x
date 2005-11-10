@@ -93,6 +93,7 @@ function goDept(t) {
  # Prepare select options
 
 $TP_SELECT_BLOCK='<select name="dept_nr" size="1"><option value=""></option>';
+$later_depts = $medical_depts;
 while(list($x,$v)=each($medical_depts)){
 	$TP_SELECT_BLOCK.='
 	<option value="'.$v['nr'].'">';
@@ -131,114 +132,20 @@ $TP_HINPUTS='<input type="hidden" name="sid" value="'.$sid.'">
  $smarty->assign('TP_HREF_PWL1','<a href="javascript:goDept(\'amb_clinic_patients_pass.php\')">'.$LDOutpatientClinic.'</a>');
  $smarty->assign('TP_HREF_PREQ1','<a href="javascript:goDept(\''.$root_path.'modules/laboratory/labor_test_request_pass.php\')">'.$LDPendingRequest.'</a>');
  $smarty->assign('TP_HREF_NEWS1','<a href="javascript:goDept(\''.$root_path.'modules/news/newscolumns.php\')">'.$LDNews.'</a>');
-
-# Create the top left submenu block
- $smarty->assign('sBlockTitle',$LDEmergency);
- $smarty->assign('sApptLink',"<a href=\"".$root_path."modules/appointment_scheduler/appt_main_pass.php".URL_APPEND."&target=14&dept_nr=14&user_origin=amb&dept=".strtr($LDEmergency,' ','+')."\">$LDAppointments</a>");
- $smarty->assign('sOutPatientLink',"<a href=\"amb_clinic_patients_pass.php".URL_APPEND."&dept_nr=14&dept=".strtr($LDEmergency,' ','+')."\">$LDOutpatientClinic</a>");
- $smarty->assign('sPendReqLink',"<a href=\"".$root_path."modules/laboratory/labor_test_request_pass.php".URL_APPEND."&target=generic&subtarget=14&user_origin=amb\">$LDPendingRequest</a>");
- $smarty->assign('sNewsLink',"<a href=\"".$root_path."modules/news/newscolumns.php".URL_APPEND."&dept_nr=14&user_origin=amb\">$LDNews</a>");
-
- # Generate the block using a sub template
-
+while(list($x,$v)=each($later_depts)){
+ $smarty->assign('sBlockTitle',$v['name_formal']);
+ $smarty->assign('sApptLink',"<a href=\"".$root_path."modules/appointment_scheduler/appt_main_pass.php".URL_APPEND."&target=".$v['nr']."&dept_nr=".$v['nr']."&user_origin=amb&dept=".strtr($v['name_formal'],' ','+')."\">".$v['name_formal']."</a>");
+ $smarty->assign('sOutPatientLink',"<a href=\"amb_clinic_patients_pass.php".URL_APPEND."&dept_nr=".$v['nr']."&dept=".strtr($v['name_formal'],' ','+')."\">$LDOutpatientClinic</a>");
+ $smarty->assign('sPendReqLink',"<a href=\"".$root_path."modules/laboratory/labor_test_request_pass.php".URL_APPEND."&target=generic&subtarget=".$v['nr']."&user_origin=amb\">$LDPendingRequest</a>");
  $sTemp='';
  ob_start();
  		$smarty->display('ambulatory/submenu_dept.tpl');
  		$sTemp = ob_get_contents();
  ob_end_clean();
-
+	$rowcounter++;
  # Assign to main template object
-	$smarty->assign('sTopLeftSubMenu',$sTemp);
-
-# Create the top right submenu block
- $smarty->assign('sBlockTitle',$LDGeneralAmbulatory);
- $smarty->assign('sApptLink',"<a href=\"".$root_path."modules/appointment_scheduler/appt_main_pass.php".URL_APPEND."&target=15&dept_nr=15&user_origin=amb&dept=".strtr($LDGeneralAmbulatory,' ','+')."\">$LDAppointments</a>");
- $smarty->assign('sOutPatientLink',"<a href=\"amb_clinic_patients_pass.php".URL_APPEND."&dept_nr=15&dept=".strtr($LDGeneralAmbulatory,' ','+')."\">$LDOutpatientClinic</a>");
- $smarty->assign('sPendReqLink',"<a href=\"".$root_path."modules/laboratory/labor_test_request_pass.php".URL_APPEND."&target=generic&subtarget=15&user_origin=amb\">$LDPendingRequest</a>");
- $smarty->assign('sNewsLink',"<a href=\"".$root_path."modules/news/newscolumns.php".URL_APPEND."&dept_nr=15&user_origin=amb\">$LDNews</a>");
-
- # Generate the block using a sub template
-
- $sTemp='';
- ob_start();
- 		$smarty->display('ambulatory/submenu_dept.tpl');
- 		$sTemp = ob_get_contents();
- ob_end_clean();
-
- # Assign to main template object
-	$smarty->assign('sTopRightSubMenu',$sTemp);
-
-# Create the  mid left submenu block
- $smarty->assign('sBlockTitle',$LDSonography);
- $smarty->assign('sApptLink',"<a href=\"".$root_path."modules/appointment_scheduler/appt_main_pass.php".URL_APPEND."&target=17&dept_nr=17&user_origin=amb&dept=".strtr($LDSonography,' ','+')."\">$LDAppointments</a>");
- $smarty->assign('sOutPatientLink',"<a href=\"amb_clinic_patients_pass.php".URL_APPEND."&dept_nr=17&dept=".strtr($LDSonography,' ','+')."\">$LDOutpatientClinic</a>");
- $smarty->assign('sPendReqLink',"<a href=\"".$root_path."modules/laboratory/labor_test_request_pass.php".URL_APPEND."&target=generic&subtarget=17&user_origin=amb\">$LDPendingRequest</a>");
- $smarty->assign('sNewsLink',"<a href=\"".$root_path."modules/news/newscolumns.php".URL_APPEND."&dept_nr=17&user_origin=amb\">$LDNews</a>");
-
- # Generate the block using a sub template
-
- $sTemp='';
- ob_start();
- 		$smarty->display('ambulatory/submenu_dept.tpl');
- 		$sTemp = ob_get_contents();
- ob_end_clean();
-
- # Assign to main template object
-	$smarty->assign('sMidLeftSubMenu',$sTemp);
-
-# Create the  mid right submenu block
- $smarty->assign('sBlockTitle',$LDInternalMed);
- $smarty->assign('sApptLink',"<a href=\"".$root_path."modules/appointment_scheduler/appt_main_pass.php".URL_APPEND."&target=16&dept_nr=16&user_origin=amb&dept=".strtr($LDInternalMed,' ','+')."\">$LDAppointments</a>");
- $smarty->assign('sOutPatientLink',"<a href=\"amb_clinic_patients_pass.php".URL_APPEND."&dept_nr=16&dept=".strtr($LDInternalMed,' ','+')."\">$LDOutpatientClinic</a>");
- $smarty->assign('sPendReqLink',"<a href=\"".$root_path."modules/laboratory/labor_test_request_pass.php".URL_APPEND."&target=generic&subtarget=16&user_origin=amb\">$LDPendingRequest</a>");
- $smarty->assign('sNewsLink',"<a href=\"".$root_path."modules/news/newscolumns.php".URL_APPEND."&dept_nr=16&user_origin=amb\">$LDNews</a>");
-
- # Generate the block using a sub template
-
- $sTemp='';
- ob_start();
- 		$smarty->display('ambulatory/submenu_dept.tpl');
- 		$sTemp = ob_get_contents();
- ob_end_clean();
-
- # Assign to main template object
-	$smarty->assign('sMidRightSubMenu',$sTemp);
-	
-# Create the  bottom left submenu block
- $smarty->assign('sBlockTitle',$LDNuclearMed);
- $smarty->assign('sApptLink',"<a href=\"".$root_path."modules/appointment_scheduler/appt_main_pass.php".URL_APPEND."&target=18&dept_nr=18&user_origin=amb&dept=".strtr($LDNuclearMed,' ','+')."\">$LDAppointments</a>");
- $smarty->assign('sOutPatientLink',"<a href=\"amb_clinic_patients_pass.php".URL_APPEND."&dept_nr=18&dept=".strtr($LDNuclearMed,' ','+')."\">$LDOutpatientClinic</a>");
- $smarty->assign('sPendReqLink',"<a href=\"".$root_path."modules/laboratory/labor_test_request_pass.php".URL_APPEND."&target=generic&subtarget=18&user_origin=amb\">$LDPendingRequest</a>");
- $smarty->assign('sNewsLink',"<a href=\"".$root_path."modules/news/newscolumns.php".URL_APPEND."&dept_nr=18&user_origin=amb\">$LDNews</a>");
-
- # Generate the block using a sub template
-
- $sTemp='';
- ob_start();
- 		$smarty->display('ambulatory/submenu_dept.tpl');
- 		$sTemp = ob_get_contents();
- ob_end_clean();
-
- # Assign to main template object
-	$smarty->assign('sBottomLeftSubMenu',$sTemp);
-
-# Create the  bottom right submenu block
- $smarty->assign('sBlockTitle',$LDEarNoseThroath);
- $smarty->assign('sApptLink',"<a href=\"".$root_path."modules/appointment_scheduler/appt_main_pass.php".URL_APPEND."&target=6&dept_nr=6&user_origin=amb&dept=".strtr($LDEarNoseThroath,' ','+')."\">$LDAppointments</a>");
- $smarty->assign('sOutPatientLink',"<a href=\"amb_clinic_patients_pass.php".URL_APPEND."&dept_nr=6&dept=".strtr($LDEarNoseThroath,' ','+')."\">$LDOutpatientClinic</a>");
- $smarty->assign('sPendReqLink',"<a href=\"".$root_path."modules/laboratory/labor_test_request_pass.php".URL_APPEND."&target=generic&subtarget=6&user_origin=amb\">$LDPendingRequest</a>");
- $smarty->assign('sNewsLink',"<a href=\"".$root_path."modules/news/newscolumns.php".URL_APPEND."&dept_nr=6&user_origin=amb\">$LDNews</a>");
-
- # Generate the block using a sub template
-
- $sTemp='';
- ob_start();
- 		$smarty->display('ambulatory/submenu_dept.tpl');
- 		$sTemp = ob_get_contents();
- ob_end_clean();
-
- # Assign to main template object
-	$smarty->assign('sBottomRightSubMenu',$sTemp);
+	$smarty->assign('s'.$rowcounter.'SubMenu',$sTemp);
+}
 
 # Assign the submenu to the mainframe center block
 

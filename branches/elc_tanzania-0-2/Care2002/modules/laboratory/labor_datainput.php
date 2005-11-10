@@ -260,7 +260,7 @@ $smarty->append('JavaScript',$sTemp);
 $smarty->assign('LDCaseNr',$LDCaseNr);
 $smarty->assign('LDLastName',$LDLastName);
 $smarty->assign('LDName',$LDName);
-$smarty->assign('LDBday',LDBday);
+$smarty->assign('LDBday',$LDBday);
 $smarty->assign('LDJobIdNr',$LDJobIdNr);
 $smarty->assign('LDExamDate',$LDExamDate);
 

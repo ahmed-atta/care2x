@@ -5,7 +5,7 @@ if(!isset($pres_obj)) $pres_obj=new Prescription;
 $app_types=$pres_obj->getAppTypes();
 $pres_types=$pres_obj->getPrescriptionTypes();
 
-$debug = FALSE;
+$debug = false;
 
 if ($debug) echo "External_call:".$externalcall;
 

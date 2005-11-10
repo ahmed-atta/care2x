@@ -49,7 +49,7 @@ if ($mode=="modfication") {
 }
 if($mode=="allpaid")
 {
-	$bill_obj->update_bill_element_allpaid($billnr, 1);
+	$bill_obj->update_bill_element_allpaid($bill_nr, 1);
 }
 
 require ("gui/gui_billing_tz_edit.php");

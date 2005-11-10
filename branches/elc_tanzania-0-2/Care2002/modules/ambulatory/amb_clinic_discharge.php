@@ -14,10 +14,11 @@ $lang_tables[]='prompt.php';
 define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-
 if(!$encoder) $encoder=$HTTP_SESSION_VARS['sess_user_name'];
 
 $breakfile="amb_clinic_patients.php".URL_APPEND."&edit=$edit&dept_nr=$dept_nr";
+if($backpath) $breakfile=urldecode($backpath).URL_APPEND;
+
 $thisfile=basename(__FILE__);
 
 # Load date formatter 
@@ -66,7 +67,7 @@ if($enc_obj->loadEncounterData($pn)){
 				//echo $person->getLastQuery();
 			}
 
-			header("location:$thisfile?sid=$sid&lang=$lang&pn=$pn&bd=$bd&rm=$rm&pyear=$pyear&pmonth=$pmonth&pday=$pday&mode=$mode&released=1&lock=1&x_date=$x_date&x_time=$x_time&relart=$relart&encoder=".strtr($encoder," ","+")."&info=".strtr($info," ","+")."&station=$station&dept_nr=$dept_nr");
+			header("location:$thisfile?sid=$sid&lang=$lang&pn=$pn&backpath=$backpath&bd=$bd&rm=$rm&pyear=$pyear&pmonth=$pmonth&pday=$pday&mode=$mode&released=1&lock=1&x_date=$x_date&x_time=$x_time&relart=$relart&encoder=".strtr($encoder," ","+")."&info=".strtr($info," ","+")."&station=$station&dept_nr=$dept_nr");
 			exit;
 		}
 	}
@@ -238,7 +239,8 @@ $smarty->assign('LDDate',$LDDate);
 		$smarty->assign('LDYesSure',$LDYesSure);
 	}
 	
-	$sTemp = '<input type="hidden" name="mode" value="release">';
+	$sTemp = '<input type="hidden" name="mode" value="release">
+						';
 
 	if(($released)||($lock)) $sTemp = $sTemp.'<input type="hidden" name="lock" value="1">';
 
@@ -254,6 +256,7 @@ $smarty->assign('LDDate',$LDDate);
 		<input type="hidden" name="rm" value="'.$rm.'">
 		<input type="hidden" name="bd" value="'.$bd.'">
 		<input type="hidden" name="pn" value="'.$pn.'">
+		<input type="hidden" name="backpath" value="'.urlencode($backpath).'">
 		<input type="hidden" name="s_date" value="'."$pyear-$pmonth-$pday".'">';
 
 	$smarty->assign('sHiddenInputs',$sTemp);

@@ -41,6 +41,10 @@ if ($mode=="done" && isset($pn) && isset($prescription_date)) {
   ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
   $db -> Execute ($sql);
   
+  if($discharge)
+  	header ( 'Location: ../ambulatory/amb_clinic_discharge.php'.URL_REDIRECT_APPEND.'&pn='.$encounter.'&pyear='.date("Y").'&pmonth='.date("n").'&pday='.date(j).'&tb='.str_replace("#","",$cfg['top_bgcolor']).'&tt='.str_replace("#","",$cfg['top_txtcolor']).'&bb='.str_replace("#","",$cfg['body_bgcolor']).'&d='.$cfg['dhtml'].'&station='.$station.'&backpath='.urlencode('../pharmacy_tz/pharmacy_tz_pending_prescriptions.php').'&dept_nr='.$dept_nr);
+  
+  
   // Clear the status:
   $mode = "";
   $pn="";
@@ -56,6 +60,8 @@ if ($mode=="done" && isset($pn) && isset($prescription_date)) {
 	{
 
 		$sql="SELECT 
+									care_person.pid,
+									care_person.selian_pid,
 		              name_first, 
 		              name_last, 
 		              pr.encounter_nr,

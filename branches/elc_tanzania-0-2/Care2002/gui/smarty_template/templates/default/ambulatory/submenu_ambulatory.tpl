@@ -9,31 +9,54 @@
   
     <tr>
     <td width=50%>
-		{{$sTopLeftSubMenu}}
+		{{$s1SubMenu}}
 	</td>
     <td width=50%>
-		{{$sTopRightSubMenu}}
+		{{$s2SubMenu}}
 	</td>
   </tr>
 
 	<tr>
     <td width=50%>
-		{{$sMidLeftSubMenu}}
+		{{$s3SubMenu}}
 	</td>
     <td width=50%>
-		{{$sMidRightSubMenu}}
+		{{$s4SubMenu}}
 	</td>
   </tr>
 
 	<tr>
     <td width=50%>
-		{{$sBottomLeftSubMenu}}
+		{{$s5SubMenu}}
 	</td>
     <td width=50%>
-		{{$sBottomRightSubMenu}}
+		{{$s6SubMenu}}
 	</td>
   </tr>
-
+	<tr>
+    <td width=50%>
+		{{$s7SubMenu}}
+	</td>
+    <td width=50%>
+		{{$s8SubMenu}}
+	</td>
+  </tr>
+	<tr>
+    <td width=50%>
+		{{$s9SubMenu}}
+	</td>
+    <td width=50%>
+		{{$s10SubMenu}}
+	</td>
+  </tr>
+	<tr>
+    <td width=50%>
+		{{$s11SubMenu}}
+	</td>
+    <td width=50%>
+		{{$s12SubMenu}}
+	</td>
+  </tr>
 </table>
 <a href="{{$breakfile}}"><img {{$gifClose2}} alt="{{$LDCloseAlt}}" {{$dhtml}}></a>
 </blockquote>

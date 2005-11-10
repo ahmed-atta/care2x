@@ -140,7 +140,7 @@ $smarty->append('JavaScript',$sTemp);
 $smarty->assign('LDCaseNr',$LDCaseNr);
 $smarty->assign('LDLastName',$LDLastName);
 $smarty->assign('LDName',$LDName);
-$smarty->assign('LDBday',LDBday);
+$smarty->assign('LDBday',$LDBday);
 
 # Assign patient basic data
 $smarty->assign('encounter_nr',$encounter_nr);
@@ -190,27 +190,35 @@ echo'
 
 # Prepare the graph values
 $tparam=explode('~',$HTTP_POST_VARS['params']);
-	   
+/*
+while(list($x,$v) = each($tparam))
+{
+	echo $x.' - '.$v.'<br>';
+}	   
+while(list($x,$v) = each($paralistarray))
+{
+	echo $x.' - '.$v.'<br>';
+}*/
 # Display the values
 $tracker=0;
 
 while(list($group_id,$param_group)=each($paralistarray)){
 	
-	$grpflag=true;
+
 	
 	while(list($param,$pname)=each($param_group)){
-
 		$flag=false;
 
 		# Reset the array
 		reset($tdate);
 		# Reset the sessbuf
 		$sessbuf='';
+		$grpflag=true;
 		while(list($job_id,$xval)=each($tdate)){ 
-	
 			while(list($x,$v)=each($tparam))
 			{
 				if($v==$tracker) {
+
 					# Prepare the values for graph tracing
 					if($sessbuf==''){
 						if($records[$job_id][$group_id][$param]) $sessbuf.=$records[$job_id][$group_id][$param];
@@ -222,40 +230,41 @@ while(list($group_id,$param_group)=each($paralistarray)){
 					
 					$flag=true;
 					$toggle=!$toggle;
+
+					if($flag){
+						
+						# If parameters info not yet loaded, load now
+						if($grpflag){
+							$tparams=&$lab_obj->TestParamsDetails($v);
+							$grpflag=false;	
+						}
+						# Create the first colums boxes of a row
+						//$txt='<tr bgcolor=';
+				 		//if($toggle) { $txt.= '"#ffdddd"';}else { $txt.= '"#ffeeee"';}
+						$txt='<tr class=';
+				 		if($toggle) { $txt.= '"wardlistrow1"';}else { $txt.= '"wardlistrow2"';}
+						$txt.= '>
+			     		<td class="va12_n"> &nbsp;<nobr><a href="#">'.$tparams['name'].'</a></nobr> 
+						</td>
+						<td class="a10_b" >&nbsp;';
+						# The normal range limits
+						if($tparams['lo_bound']&&$tparams['hi_bound']) $txt.=$tparams['hi_bound'].'<p><br>&nbsp;'.$tparams['lo_bound'];
+						# The unit of measurement
+						$txt.='</td>
+			  			<td class="a10_b" >&nbsp;'.$tparams['msr_unit'].'</td>';
+			
+						//$txt.=$records[$job_id][$group_id][$param];
+							
+						# Print the row
+						 echo $txt.'<td colspan="'.$cols.'"><img  src="'.$root_path.'main/imgcreator/labor-datacurve.php?sid='.$sid.'&lang='.$lang.'&cols='.$cols.'&lo='.$tparams['lo_bound'].'&hi='.$tparams['hi_bound'].'&d='.$HTTP_POST_VARS['imgprep_'.$v].'" border=0>
+						</td></tr>';
+					}
 				}
 			}
 			reset($tparam);
+			$tracker++;
 		}
-		if($flag){
-			
-			# If parameters info not yet loaded, load now
-			if($grpflag){
-				$tparams=&$lab_obj->TestParamsDetails($tk);
-				$grpflag=false;
-				
-			}
-			# Create the first colums boxes of a row
-			//$txt='<tr bgcolor=';
-	 		//if($toggle) { $txt.= '"#ffdddd"';}else { $txt.= '"#ffeeee"';}
-			$txt='<tr class=';
-	 		if($toggle) { $txt.= '"wardlistrow1"';}else { $txt.= '"wardlistrow2"';}
-			$txt.= '>
-     		<td class="va12_n"> &nbsp;<nobr><a href="#">'.$tparams['name'].'</a></nobr> 
-			</td>
-			<td class="a10_b" >&nbsp;';
-			# The normal range limits
-			if($tparams['lo_bound']&&$tparams['hi_bound']) $txt.=$tparams['hi_bound'].'<p><br>&nbsp;'.$tparams['lo_bound'];
-			# The unit of measurement
-			$txt.='</td>
-  			<td class="a10_b" >&nbsp;'.$tparams['msr_unit'].'</td>';
 
-			//$txt.=$records[$job_id][$group_id][$param];
-				
-			# Print the row
-			 echo $txt.'<td colspan="'.$cols.'"><img  src="'.$root_path.'main/imgcreator/labor-datacurve.php?sid='.$sid.'&lang='.$lang.'&cols='.$cols.'&lo='.$tparams['lo_bound'].'&hi='.$tparams['hi_bound'].'&d='.$HTTP_POST_VARS['imgprep_'.$tk].'" border=0>
-			</td></tr>';
-		}
-		$tracker++;
 	}
 }
 

@@ -96,7 +96,6 @@ A:visited:hover {color: #cc0033;}
                   } else {
                                     	
                   	//Content-Frame. Here we go!
-                  	
                   	$bill_obj->DisplayBills($pid,0,0);
                   	if ($DISPLAY_MSG)
                   	  echo $DISPLAY_MSG;

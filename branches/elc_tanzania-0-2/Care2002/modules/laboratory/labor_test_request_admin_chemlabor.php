@@ -33,8 +33,12 @@ if($user_origin=='lab'){
 	$local_user='ck_lab_user';
 	$breakfile=$root_path."modules/billing_tz/billing_tz.php";
 }else{
+	$local_user='ck_lab_user';
+	$breakfile=$root_path."modules/laboratory/labor.php".URL_APPEND;
+	/*
 	$local_user='ck_pflege_user';
 	$breakfile=$root_path."modules/nursing/nursing-station-patientdaten.php".URL_APPEND."&edit=$edit&station=$station&pn=$pn";
+	*/
 }
 
 require_once($root_path.'include/inc_front_chain_lang.php'); ///* invoke the script lock*/
@@ -75,7 +79,10 @@ $enc_obj=new Encounter;
 									/* If the findings are saved, signal the availability of report
 									*/
 								     signalNewDiagnosticsReportEvent('', 'labor_test_request_printpop.php');
-									 header("location:".$thisfile.URL_REDIRECT_APPEND."&edit=$edit&pn=$pn&user_origin=$user_origin&status=$status&target=$target&subtarget=$subtarget&noresize=$noresize");
+									 if(!$discharge)
+									 	header("location:".$thisfile.URL_REDIRECT_APPEND."&edit=$edit&pn=$pn&user_origin=$user_origin&status=$status&target=$target&subtarget=$subtarget&noresize=$noresize");
+									 else
+									 	header ( 'Location: ../ambulatory/amb_clinic_discharge.php'.URL_REDIRECT_APPEND.'&pn='.$pn.'&pyear='.date("Y").'&pmonth='.date("n").'&pday='.date(j).'&tb='.str_replace("#","",$cfg['top_bgcolor']).'&tt='.str_replace("#","",$cfg['top_txtcolor']).'&bb='.str_replace("#","",$cfg['body_bgcolor']).'&d='.$cfg['dhtml'].'&station='.$station.'&backpath='.urlencode('../laboratory/labor_test_request_admin_chemlabor.php').'&dept_nr='.$dept_nr);
 									 exit;
 								  }else{
 								      echo "<p>$sql<p>$LDDbNoSave"; 
@@ -87,7 +94,7 @@ $enc_obj=new Encounter;
   
 	if(!$mode) /* Get the pending test requests */
 	{
-		$sql="SELECT name_first, name_last, batch_nr, tr.encounter_nr,tr.send_date,dept_nr,room_nr FROM care_test_request_".$subtarget." tr,
+		$sql="SELECT care_person.pid, care_person.selian_pid, name_first, name_last, batch_nr, tr.encounter_nr,tr.send_date,dept_nr,room_nr FROM care_test_request_".$subtarget." tr,
 					care_encounter, care_person 
 						         WHERE (tr.status='pending' OR tr.status='') AND
 						         tr.encounter_nr = care_encounter.encounter_nr AND
@@ -258,7 +265,7 @@ function sendLater()
 function printOut()
 {
 	urlholder="labor_test_request_printpop.php?sid=<?php echo $sid ?>&lang=<?php echo $lang ?>&user_origin=<?php echo $user_origin ?>&target=<?php echo $target ?>&subtarget=<?php echo $subtarget ?>&batch_nr=<?php echo $batch_nr ?>&pn=<?php echo $stored_request['encounter_nr'] ?>";
-	testprintout<?php echo $sid ?>=window.open(urlholder,"testprintout<?php echo $sid ?>","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
+	testprintout<?php echo $sid ?>=window.open(urlholder,"testprintout<?php echo $sid ?>","width=755,height=600,menubar=no,resizable=no,scrollbars=yes");
     //testprintout<?php echo $sid ?>.print();
 }
 
@@ -309,8 +316,18 @@ require($root_path.'include/inc_test_request_lister_fx.php');
      <a href="javascript:printOut()"><img <?php echo createLDImgSrc($root_path,'printout.gif','0','absmiddle') ?> alt="<?php echo $LDPrintOut ?>"></a>
      <a href="<?php echo 'labor_datainput.php'.URL_APPEND.'&encounter_nr='.$pn.'&job_id='.$batch_nr.'&mode='.$mode.'&update=1&user_origin=lab_mgmt'; ?>"><img <?php echo createLDImgSrc($root_path,'enterresults.gif','0','absmiddle') ?> alt="<?php echo $LDEnterResult ?>"></a>
      <a href="<?php echo $thisfile.URL_APPEND."&edit=".$edit."&mode=done&target=".$target."&subtarget=".$subtarget."&batch_nr=".$batch_nr."&pn=".$pn."&formtitle=".$formtitle."&user_origin=".$user_origin."&noresize=".$noresize; ?>"><img <?php echo createLDImgSrc($root_path,'done.gif','0','absmiddle') ?> alt="<?php echo $LDDone ?>"></a>
+     <a href="<?php echo $thisfile.URL_APPEND."&edit=".$edit."&mode=done&discharge=true&target=".$target."&subtarget=".$subtarget."&batch_nr=".$batch_nr."&pn=".$pn."&formtitle=".$formtitle."&user_origin=".$user_origin."&noresize=".$noresize; ?>"><img <?php echo createLDImgSrc($root_path,'done_and_discharge.gif','0','absmiddle') ?> alt="Move the form to the archive and discharge our patient"></a>
+     
 
 <?php
+require_once($root_path.'include/care_api_classes/class_tz_billing.php');
+$bill_obj = new Bill;
+$bill_number = $bill_obj->GetBillByBatchNr($batch_nr);
+if($bill_number['bill_number']>0)
+	echo '<br><br><font color="green">This laboratory request is already billed. Billnumber: '.$bill_number['bill_number'].'</font><br><br>';
+else
+	echo '<br><br><img src="../../gui/img/common/default/warn.gif" border=0 alt="" style="filter:alpha(opacity=70)"> <font color="red">This laboratory request is not yet billed!</font> <img src="../../gui/img/common/default/warn.gif" border=0 alt="" style="filter:alpha(opacity=70)"><br><br>';
+
 require_once($root_path.'include/inc_test_request_printout_chemlabor.php');
 ?>
 

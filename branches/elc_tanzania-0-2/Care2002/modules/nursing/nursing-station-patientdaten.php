@@ -493,10 +493,10 @@ function rx(){
 		';
 
 
-		//<input type="button" value="'.$LDRootData.'"><input 
-		//type="button" value="'.$LDNursingPlan.'">
-		echo '<input 
-		type="button" onClick="javascript:openDRGComposite()" value="'.$LDDRG.'">';
+    // RM: Original DRG-Button:
+		//echo '<input type="button" onClick="javascript:openDRGComposite()" value="'.$LDDRG.'">';
+		// RM: Customized Diagnostic button:
+		echo '<input type="button" onClick="window.location.href=\''.$root_path.'modules/diagnostics_tz/icd10_quicklist.php'.URL_REDIRECT_APPEND.'$sid='.$SID.'&encounter_nr='.$pn.'&lang=en&ntid=false&externalcall=true&target=search&1=1&ispopup=true&backpath_diag='.urlencode($_SERVER["PHP_SELF"].URL_APPEND.'&pn='.$pn).'\'" value="Diagnoses">';
 		
 		echo '
 		<input type="button" onClick="javascript:window.location.href=\''.$root_path.'modules/laboratory/labor_datalist_noedit.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&user_origin='.$user_origin.'&edit='.$edit.'\'" value="'.$LDLabReports.'">

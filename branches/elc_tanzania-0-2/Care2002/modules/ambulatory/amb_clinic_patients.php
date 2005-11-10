@@ -1,5 +1,4 @@
 <?php
-
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
@@ -42,14 +41,16 @@ $tnow=date('H:i:s');
 if(!isset($mode)) $mode='';
 
 $breakfile='ambulatory.php'.URL_APPEND; # Set default breakfile
+if($backpath) $breakfile=urldecode($backpath).URL_APPEND;
 $thisfile=basename(__FILE__);
-
 if(isset($retpath)){
 	switch($retpath)
 	{
 		case 'quick': $breakfile='nursing-schnellsicht.php'.URL_APPEND;
 							break;
 		case 'ward_mng': $breakfile='nursing-station-info.php'.URL_APPEND.'&ward_nr='.$ward_nr.'&mode=show';
+							break;
+		case 'billing' : $breakfile='../modules/billing_tz/billing_tz_pending.php'.URL_APPEND;
 	}
 }
 # Mark where we are

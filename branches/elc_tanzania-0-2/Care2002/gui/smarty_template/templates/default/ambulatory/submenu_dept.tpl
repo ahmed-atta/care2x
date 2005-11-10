@@ -24,11 +24,6 @@
 							<TD class="submenu_item"><nobr>{{$sPendReqLink}}</nobr></TD>
 						</tr>
 
-						<TR>
-							<TD width=25 align=center>{{$sNewsIcon}}</TD>
-							<TD class="submenu_item"><nobr>{{$sNewsLink}}</nobr></TD>
-						</tr>
-
 					</TBODY>
 					</TABLE>
 				</TD>

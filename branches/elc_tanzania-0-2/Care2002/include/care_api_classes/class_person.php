@@ -309,7 +309,7 @@ class Person extends Core {
 				$insert_pid = $pid_counter_min;
 		}
 		
-		$this->sql="INSERT INTO $this->tb_person (pid,".$index.$ins_index.") VALUES (".$insert_pid.','.$values.$ins_value.")";
+		$this->sql="INSERT INTO $this->tb_person (".$index.$ins_index.") VALUES (".$values.$ins_value.")";
 		return $this->Transact();
 	}
 	/**
@@ -1174,6 +1174,20 @@ class Person extends Core {
 		 $this->sql="UPDATE $this->tb_person SET photo_filename='$fn', 
 		 			history=".$this->ConcatHistory("\nPhoto set ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name'])." WHERE pid=$this->pid";
 		return $this->Transact($this->sql);
+	}
+	function showPID($pid)
+	{
+		if(strlen($pid)<8)
+		{
+			for($i=0;$i<(8-strlen($pid));$i++)
+			{
+				$pid_zero.='0';
+			}
+									
+		}
+		$altered_pid = chunk_split($pid_zero.$pid, 2, '/');
+		return substr($altered_pid,0,strlen($altered_pid)-1);
+					
 	}
 }
 ?>

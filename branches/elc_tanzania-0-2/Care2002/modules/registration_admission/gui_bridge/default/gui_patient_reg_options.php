@@ -120,7 +120,8 @@ function Spacer()
 				  </nobr> </FONT></TD>
                 </TR>
 			   
- -->           <?php Spacer(); ?>
+ -->           <?php Spacer(); 
+ ?>
 				  
               <TR><td align=center><img <?php echo createComIcon($root_path,'prescription.gif','0','',FALSE) ?>></td>
                 <TD vAlign=top ><FONT 

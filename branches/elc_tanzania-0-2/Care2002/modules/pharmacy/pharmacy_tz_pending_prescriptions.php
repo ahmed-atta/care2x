@@ -13,12 +13,13 @@ require($root_path.'include/inc_environment_global.php');
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 $enc_obj=new Encounter;
 
-$debug = FALSE;
-
+$debug = false;
 	if(!$mode) /* Get the pending test requests */
 	{
 
 		$sql="SELECT 
+									care_person.pid,
+									care_person.selian_pid,
 		              name_first, 
 		              name_last, 
 		              pr.encounter_nr,
@@ -30,7 +31,6 @@ $debug = FALSE;
 		            AND  care_encounter.pid = care_person.pid 
 		      group by pr.prescribe_date, encounter_nr
 		      ORDER BY pr.prescribe_date DESC";						         
-						       
 		if($requests=$db->Execute($sql)){
 			/* If request is available, load the date format functions */
 			

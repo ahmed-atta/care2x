@@ -15,13 +15,13 @@ require_once($root_path.'include/care_api_classes/class_tz_billing.php');
 $enc_obj=new Encounter;
 $bill_obj = new Bill;
 
-$debug = FALSE;
+$debug = false;
 ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
 
 if ($debug) {
   echo $pn."<br>";
   echo $prescription_date."<br>";
-  
+  echo 'Mode:'.$mode;
 }
 
 $DISPLAY_MSG="";
@@ -30,13 +30,19 @@ if ($mode=="archived")
 
 
 if ($mode=="done" && !empty($bill_number)) {
-  
   // Store the 'pending' bill to the 'archive'
   $bill_obj->ArchiveBill($bill_number);
-  header ( 'Location: billing_tz_pending.php?mode=archived&bill_number='.$bill_number );
+
+  if(!$discharge)
+  	header ( 'Location: billing_tz_pending.php?mode=archived&bill_number='.$bill_number );
+  else
+  	header ( 'Location: ../ambulatory/amb_clinic_discharge.php'.URL_REDIRECT_APPEND.'&pn='.$encounter.'&pyear='.date("Y").'&pmonth='.date("n").'&pday='.date(j).'&tb='.str_replace("#","",$cfg['top_bgcolor']).'&tt='.str_replace("#","",$cfg['top_txtcolor']).'&bb='.str_replace("#","",$cfg['body_bgcolor']).'&d='.$cfg['dhtml'].'&station='.$station.'&backpath='.urlencode('../billing_tz/billing_tz_pending.php').'&dept_nr='.$dept_nr);
+  	
   
-} else {
-  
+} 
+elseif (false)		//Modified for debugging reasons: original was else { }
+{
+  echo 'TEST';die();
    /* Get the pending test requests */
   
   // If this is the first call, get the first pn number out of the database... 
@@ -111,7 +117,16 @@ if ($mode=="done" && !empty($bill_number)) {
   
   		
   	}	
-  
+}
+else
+{
+  if(empty($pid) && empty($batch_nr))
+  {
+  	$pid=$bill_obj->GetFirstPid();
+  	$batch_nr = $pid;
+  }
+  elseif(empty($pid) && !empty($batch_nr))
+  	$pid = $batch_nr;
   require ("gui/gui_billing_tz_pending.php");
 }
 ?>

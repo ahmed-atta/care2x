@@ -86,7 +86,7 @@ while($test_request=$requests->FetchRow())
   if($batch_nr!=$test_request['batch_nr'] || $prescription_date != $test_request['prescribe_date'] )
   {     
         echo "<img src=\"".$root_path."gui/img/common/default/pixel.gif\" border=0 width=4 height=7> 
-        <a onmouseover=\"showBallon('".$test_request['name_first']." ".$test_request['name_last']."',0,150,'#99ccff'); window.status='Care2x Tooltip'; return true;\"
+        <a onmouseover=\"showBallon('".$test_request['name_first']." ".$test_request['name_last']." encounter: ".$test_request['encounter_nr']." Selian file nr: ".$test_request['selian_pid']."',0,150,'#99ccff'); window.status='Care2x Tooltip'; return true;\"
 	onmouseout=\"hideBallon(); return true;\" href=\"".$thisfile.URL_APPEND."&target=".$target."&subtarget=".$subtarget."&batch_nr=".$test_request['batch_nr']."&prescription_date=".$test_request['prescribe_date']."&pn=".$test_request['encounter_nr']."&user_origin=".$user_origin."&tracker=".$tracker."&back_path=".$back_path."\">";
 	    
 			if($test_request['batch_nr']) 

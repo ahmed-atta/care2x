@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.0, created on 2004-07-06 23:14:45
+<?php /* Smarty version 2.6.0, created on 2005-10-20 12:30:59
          compiled from ambulatory/submenu_ambulatory.tpl */ ?>
 <blockquote>
 <table border=0 cellpadding=5>
@@ -15,37 +15,66 @@ unset($_smarty_tpl_vars);
   
     <tr>
     <td width=50%>
-		<?php echo $this->_tpl_vars['sTopLeftSubMenu']; ?>
+		<?php echo $this->_tpl_vars['s1SubMenu']; ?>
 
 	</td>
     <td width=50%>
-		<?php echo $this->_tpl_vars['sTopRightSubMenu']; ?>
+		<?php echo $this->_tpl_vars['s2SubMenu']; ?>
 
 	</td>
   </tr>
 
 	<tr>
     <td width=50%>
-		<?php echo $this->_tpl_vars['sMidLeftSubMenu']; ?>
+		<?php echo $this->_tpl_vars['s3SubMenu']; ?>
 
 	</td>
     <td width=50%>
-		<?php echo $this->_tpl_vars['sMidRightSubMenu']; ?>
+		<?php echo $this->_tpl_vars['s4SubMenu']; ?>
 
 	</td>
   </tr>
 
 	<tr>
     <td width=50%>
-		<?php echo $this->_tpl_vars['sBottomLeftSubMenu']; ?>
+		<?php echo $this->_tpl_vars['s5SubMenu']; ?>
 
 	</td>
     <td width=50%>
-		<?php echo $this->_tpl_vars['sBottomRightSubMenu']; ?>
+		<?php echo $this->_tpl_vars['s6SubMenu']; ?>
 
 	</td>
   </tr>
+	<tr>
+    <td width=50%>
+		<?php echo $this->_tpl_vars['s7SubMenu']; ?>
 
+	</td>
+    <td width=50%>
+		<?php echo $this->_tpl_vars['s8SubMenu']; ?>
+
+	</td>
+  </tr>
+	<tr>
+    <td width=50%>
+		<?php echo $this->_tpl_vars['s9SubMenu']; ?>
+
+	</td>
+    <td width=50%>
+		<?php echo $this->_tpl_vars['s10SubMenu']; ?>
+
+	</td>
+  </tr>
+	<tr>
+    <td width=50%>
+		<?php echo $this->_tpl_vars['s11SubMenu']; ?>
+
+	</td>
+    <td width=50%>
+		<?php echo $this->_tpl_vars['s12SubMenu']; ?>
+
+	</td>
+  </tr>
 </table>
 <a href="<?php echo $this->_tpl_vars['breakfile']; ?>
 "><img <?php echo $this->_tpl_vars['gifClose2']; ?>

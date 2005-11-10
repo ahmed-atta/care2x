@@ -82,7 +82,12 @@ function closewin()
 					<TABLE cellSpacing=1 cellPadding=3 width=600>
                     <TBODY class="submenu">
                       <TR> 
-                        <td align=center><img src="../../gui/img/common/default/comments.gif" border=0 width="27" height="17"></td>
+                        <td align=center><img src="../../gui/img/common/default/showdata.gif" border=0></td>
+                        <TD class="submenu_item"><nobr><a href="billing_tz_quotation.php">Create quotation</a></nobr></TD>
+                        <TD>Show all pending quotations</TD>
+                      </tr>
+                      <TR> 
+                        <td align=center><img src="../../gui/img/common/default/comments.gif" border=0></td>
                         <TD class="submenu_item"><nobr><a href="billing_tz_pending.php">Pending bills</a></nobr></TD>
                         <TD>Shows all pending a new bills</TD>
                       </tr>

@@ -120,11 +120,19 @@ if($data_entry){
 	$TP_PROCEDURES="<font color='#333333'>$LDProcedures</font>";
 }
 
+/*
 if($data_entry){
 	$TP_DRG="<a href=\"javascript:openDRGComposite()\">$LDDRG</a>";
 }else{
 	$TP_DRG="<font color='#333333'>$LDDRG</font>";
 }
+*/
+if($data_entry) {
+  $TP_DRG="<a href=\"../diagnostics_tz/icd10_quicklist.php".URL_REDIRECT_APPEND."&sid=".$sid."&encounter=".$HTTP_SESSION_VARS['sess_en']."&lang=en&ntid=false&externalcall=true&target=search&1=1&ispopup=false&backpath_diag=".urlencode($_SERVER["PHP_SELF"].URL_APPEND.'&encounter_nr='.$encounter_nr)."\">Diagnoses</a>";
+}else{
+	$TP_DRG="<font color='#333333'>Diagnoses</font>";
+}
+
 
 if($data_entry){
 	$TP_PRESCRIPTIONS="<a href=\"show_prescription.php".URL_APPEND."&pid=$pid&target=$target\">$LDPrescriptions</a>";
@@ -175,12 +183,12 @@ $TP_PATREGSHOW="<a href=\"patient_register_show.php".URL_APPEND."&pid=".$HTTP_SE
 $TP_PATREGUPDATE="<a href=\"patient_register.php".URL_APPEND."&pid=$pid&update=1\">$LDUpdate $LDPatientRegister</a>";
 
 # Links to medocs module
-if($data_entry){
+/*if($data_entry){
 	$TP_MEDOCS="<a href=\"".$root_path."modules/medocs/show_medocs.php".URL_APPEND."&encounter_nr=".$HTTP_SESSION_VARS['sess_en']."&edit=$edit&from=$from&is_discharged=$is_discharged&target=$target\">$LDMedocs</a>";
 }else{
 	$TP_MEDOCS="<font color='#333333'>$LDMedocs</font>";
 }
-
+*/
 # Links to pdf doc generator
 if($data_entry){
 	$TP_PRINT_PDFDOC="<a href=\"".$root_path."modules/pdfmaker/admission/admitdata.php".URL_APPEND."&enc=".$HTTP_SESSION_VARS['sess_en']."\" target=_blank>$LDPrintPDFDoc</a>";

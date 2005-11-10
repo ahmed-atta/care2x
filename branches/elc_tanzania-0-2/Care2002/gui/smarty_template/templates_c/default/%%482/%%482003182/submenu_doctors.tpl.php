@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.0, created on 2005-02-02 11:21:01
+<?php /* Smarty version 2.6.0, created on 2005-11-08 16:31:55
          compiled from doctors/submenu_doctors.tpl */ ?>
 		 <blockquote>
 			<TABLE cellSpacing=0  width=600 class="submenu_frame" cellpadding="0">

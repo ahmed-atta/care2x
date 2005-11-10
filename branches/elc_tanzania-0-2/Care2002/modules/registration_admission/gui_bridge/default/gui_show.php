@@ -4,7 +4,7 @@ $returnfile=$HTTP_SESSION_VARS['sess_file_return'];
 
 $HTTP_SESSION_VARS['sess_file_return']=$thisfile;
 
-if (!isset($externalcall))
+if (empty($externalcall))
   $breakfile='javascript:window.close()';
 else
   if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) 
@@ -21,6 +21,10 @@ if ($debug) {
       echo "external call<br>";
     
     echo "mode=".$mode."<br>";
+    
+		echo "show=".$show."<br>";
+		
+    echo "nr=".$nr."<br>";
     
     echo "breakfile: ".$breakfile;
     
@@ -104,13 +108,13 @@ $smarty->append('JavaScript',$sTemp);
 
 if($parent_admit) {
 	$tab_bot_line='#66ee66';
-	if (!isset($externalcall)) include('./gui_bridge/default/gui_tabs_patadmit.php');
+	if (empty($externalcall)) include('./gui_bridge/default/gui_tabs_patadmit.php');
 	$smarty->assign('sTabsFile','registration_admission/admit_tabs.tpl');
 	$smarty->assign('sClassItem','class="adm_item"');
 	$smarty->assign('sClassInput','class="adm_input"');
 }else{
 	$tab_bot_line='#66ee66';
-  if (!isset($externalcall)) include('./gui_bridge/default/gui_tabs_patreg.php');
+  if (empty($externalcall)) include('./gui_bridge/default/gui_tabs_patreg.php');
 	$smarty->assign('sTabsFile','registration_admission/reg_tabs.tpl');
 	$smarty->assign('sClassItem','class="reg_item"');
 	$smarty->assign('sClassInput','class="reg_input"');
@@ -136,7 +140,7 @@ if($parent_admit) $smarty->assign('sEncNrPID',$HTTP_SESSION_VARS['sess_full_en']
 
 $smarty->assign('img_source',"<img height=\"100\" width=\"100\" $img_source>");
 
-if($mode != 'new')
+if($mode != 'new' && $mode != 'edit' && $mode != 'delete')
 {
 	$smarty->assign('LDTitle',$LDTitle);
 	$smarty->assign('title',$title);
@@ -154,7 +158,7 @@ if($death_date && $death_date != DBF_NODATE){
 }
 
 	# Set a row span counter, initialize with 7
-	if($mode=='new')
+	if($mode=='new' || $mode=='edit' || $mode=='delete')
 	{
 		$iRowSpan = 5;
 	}
@@ -190,7 +194,7 @@ $smarty->assign('LDSex',$LDSex);
 if($sex=='m') $smarty->assign('sSexType',$LDMale);
 	elseif($sex=='f') $smarty->assign('sSexType',$LDFemale);
 
-if($mode != 'new')
+if($mode != 'new' && $mode != 'edit' && $mode != 'delete')
 {
 	$smarty->assign('LDBloodGroup',$LDBloodGroup);
 	if($blood_group){
@@ -203,7 +207,7 @@ if($mode != 'new')
 
 ob_start();
 
-if (!isset($externalcall))
+if (empty($externalcall))
 	if($parent_admit)  include('./gui_bridge/default/gui_patient_encounter_showdata_options.php');
 		else include('./gui_bridge/default/gui_patient_reg_options.php');
 
@@ -229,7 +233,7 @@ if($mode=='show' /*&& !isset($externalcall) */){
       if (!isset($printout)) 
         $smarty->assign('sPromptIcon','<img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle',TRUE).'>');
       
-      if (isset($externalcall)) {     
+      if (!empty($externalcall)) {     
         if (!isset($printout)) {
           $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new&externalcall='.$externalcall.'">'.$LDEnterNewRecord.'</a>');
         }
@@ -241,7 +245,7 @@ if($mode=='show' /*&& !isset($externalcall) */){
 	  $smarty->assign('sOptionBlock',$sTemp);
 
 	}else{
-      if (isset($externalcall))
+      if (!empty($externalcall))
         if (!isset($printout))      
           $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new&externalcall='.$externalcall.'">'.$LDEnterNewRecord.'</a>');
       else
@@ -253,7 +257,7 @@ if($mode=='show' /*&& !isset($externalcall) */){
 		$smarty->assign('norecordyet',$norecordyet);
 		if($parent_admit && !$is_discharged && $thisfile!='show_diagnostics_result.php'){
 			$smarty->assign('sPromptIcon','<img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle',TRUE).'>');
-      if (isset($externalcall))      
+      if (!empty($externalcall))      
         $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new&externalcall='.$externalcall.'">'.$LDEnterNewRecord.'</a>');
       else
         $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new">'.$LDEnterNewRecord.'</a>');
@@ -271,7 +275,6 @@ if($mode=='show' /*&& !isset($externalcall) */){
 	   //set here "druglist", "Supplies", "supplies-lab", "special-others" if you want.
 	   $activated_tab = "druglist"; 
 	   // (by Merotech(RM): Here the main prescription-table-content will be loaded: ;
-	   
 	  if ($debug) echo  './gui_bridge/default/gui_input_'.$thisfile;
 	  include('./gui_bridge/default/gui_input_'.$thisfile);
 
@@ -283,7 +286,7 @@ if($mode=='show' /*&& !isset($externalcall) */){
 
 ob_start();
 
-if (!isset($externalcall))
+if (empty($externalcall))
 	if($parent_admit) {
 		include('./include/bottom_controls_admission_options.inc.php');
 	}else{
@@ -298,7 +301,7 @@ ob_end_clean();
 
 $smarty->assign('sBottomControls',$sTemp);
 
-if (!isset($externalcall)) {
+if (empty($externalcall)) {
   $smarty->assign('pbBottomClose','<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'close2.gif','0').'  title="'.$LDCancel.'"  align="absmiddle"></a>');
 }
 

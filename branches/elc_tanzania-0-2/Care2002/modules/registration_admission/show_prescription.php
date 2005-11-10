@@ -17,14 +17,17 @@ require($root_path.'include/inc_environment_global.php');
   
 //$externalcall=true;
 //$db->debug=1;
+
 if(!$prescription_date) $prescription_date = date("Y-m-d");
 define('NO_2LEVEL_CHK',1);
 $thisfile=basename(__FILE__);
 if(!isset($mode)){
 	$mode='show';
-} elseif($mode=='create'||$mode=='update') {
+} elseif($mode=='create'||$mode=='update' || $mode=='delete') {
+
 	include_once($root_path.'include/care_api_classes/class_prescription.php');
 	if(!isset($obj)) $obj=new Prescription;
+
 	include_once($root_path.'include/inc_date_format_functions.php');
 	
 	if($HTTP_POST_VARS['prescribe_date']) $HTTP_POST_VARS['prescribe_date']=@formatDate2STD($HTTP_POST_VARS['prescribe_date'],$date_format);

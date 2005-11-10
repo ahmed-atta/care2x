@@ -73,6 +73,8 @@ $send_date="";
 
 
 		$sql="SELECT 
+									care_person.selian_pid,
+									care_person.pid,
 		              name_first, 
 		              name_last, 
 		              bi.encounter_nr,
@@ -106,12 +108,12 @@ while($test_request=$pdng_req->FetchRow())
   if($batch_nr!=$test_request['batch_nr'] || $prescription_date != $test_request['prescribe_date'] )
   {     
         echo "<img src=\"".$root_path."gui/img/common/default/pixel.gif\" border=0 width=4 height=7> 
-        <a onmouseover=\"showBallon('".$test_request['name_first']." ".$test_request['name_last']." encounter:".$test_request['encounter_nr']."',0,150,'#99ccff'); window.status='Care2x Tooltip'; return true;\"
+        <a onmouseover=\"showBallon('".$test_request['name_first']." ".$test_request['name_last']." encounter: ".$test_request['encounter_nr']." Selian file nr: ".$test_request['selian_pid']."',0,150,'#99ccff'); window.status='Care2x Tooltip'; return true;\"
 	onmouseout=\"hideBallon(); return true;\" href=\"".$thisfile.URL_APPEND."&target=".$target."&subtarget=".$subtarget."&batch_nr=".$test_request['batch_nr']."&prescription_date=".$test_request['prescribe_date']."&pn=".$test_request['encounter_nr']."&user_origin=".$user_origin."&tracker=".$tracker."\">";
 	    
 			if($test_request['batch_nr']) 
 			{ 
-					echo $enc_obj->showPID($test_request['batch_nr']); 
+					echo $enc_obj->showPID($test_request['pid']);
 			} 
 	    echo " ".$test_request['room_nr']."</a><br>";
    }
@@ -120,7 +122,7 @@ while($test_request=$pdng_req->FetchRow())
         echo "<img ".createComIcon($root_path,'redpfeil.gif','0','',TRUE)."> <FONT size=1 color=\"red\">";
 			if($test_request['batch_nr']) 
 			{
-					echo $enc_obj->showPID($test_request['batch_nr']); 
+					echo $enc_obj->showPID($test_request['pid']); 
 			} 
 	echo " ".$test_request['room_nr']."</font><br>";
         $track_item=$tracker;

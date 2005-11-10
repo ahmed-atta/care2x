@@ -639,6 +639,7 @@ class Encounter extends Notes {
 	*
 	* - all keys as set in the <var>$tabfields</var> array
 	* - <b>pid</b> = the PID number of the patient
+	* - <b>selian_pid</b> = the selian file number			- By Merotech (AI)
 	* - <b>title</b> = the patient title
 	* - <b>name_last</b> = last or family name
 	* - <b>name_first</b> = first or given name
@@ -660,7 +661,7 @@ class Encounter extends Notes {
 	function loadEncounterData($enc_nr=''){
 	    global $db;
 		if(!$this->internResolveEncounterNr($enc_nr)) return FALSE;
-		$this->sql="SELECT e.*, p.pid, p.title,p.name_last, p.name_first, p.date_birth, p.sex,
+		$this->sql="SELECT e.*, p.pid, p.selian_pid, p.title,p.name_last, p.name_first, p.date_birth, p.sex,
 									p.addr_str,p.addr_str_nr,p.addr_zip, p.blood_group,p.name_maiden,
 									p.photo_filename, t.name AS citytown_name,p.death_date
 							FROM $this->tb_enc AS e, 

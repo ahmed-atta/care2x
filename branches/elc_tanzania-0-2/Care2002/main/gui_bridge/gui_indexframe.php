@@ -33,7 +33,8 @@ if(isset($cfg['mainmenu_tree']) && !empty($cfg['mainmenu_tree']) && file_exists(
 <TITLE><?php echo $wintitle; ?></TITLE>
 <?php
 //set the css style for a links
-require($root_path.'include/inc_css_a_sublinker_d.php');
+//require($root_path.'include/inc_css_a_sublinker_d.php');
+echo '<link href="'.$root_path.'/css/indexframe.css" rel="stylesheet" type="text/css">';
 ?>
 
 <script language="javascript">
@@ -82,7 +83,9 @@ eval("echo $tp_body;");
 #
 # Generate the menu tree
 #
-require("menu/$LocMenuTreeDir/mainmenu.inc.php");
+//require("menu/$LocMenuTreeDir/mainmenu.inc.php");
+require("./menu/dtree/mainmenu.inc.php");
+
 
 ?>
 
@@ -124,10 +127,6 @@ echo $langselect;
 
 <tr >
 <td colspan=3>
-<font SIZE=1 color="#6f6f6f" face="arial,verdana">
-Demo-loginname: demo<br>
-Demo-password: demo<br>
-<?php echo "We use a ".$dbtype." database"; ?>
 <br>
 <nobr><b><?php echo $LDUser ?>:</b></nobr>
 <?php echo  $HTTP_SESSION_VARS['sess_login_username']; ?><br>
@@ -139,7 +138,7 @@ Demo-password: demo<br>
 </form>
 </TABLE>
 <center>
-<a href="http://www.opensource.org/" target="_blank"><img src="<?php echo $root_path ?>gui/img/common/default/osilogo.gif" border=0></a>
+<!--<a href="http://www.opensource.org/" target="_blank"><img src="<?php echo $root_path ?>gui/img/common/default/osilogo.gif" border=0></a>-->
 </center>
 </BODY>
 </HTML>

@@ -242,7 +242,6 @@ else
 
 <BODY bgcolor="white" OnLoad="window.print();">
 
-
 <?php
 
 require_once($root_path.'include/inc_test_request_printout_fx.php');
@@ -253,7 +252,7 @@ if($show_print_button) echo '<a href="javascript:window.print()"><img '.createLD
 /* Load the form for printing out */
 if($subtarget=='chemlabor' || $subtarget=='baclabor'){
 
-    echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'&batch_nr='.$batch_nr.'&child_img=1&subtarget='.$subtarget.'" >';
+	require_once($root_path.'include/inc_test_request_printout_chemlabor.php');
 
 }elseif($subtarget=='patho'){
 
@@ -267,7 +266,7 @@ if($subtarget=='chemlabor' || $subtarget=='baclabor'){
 	$smarty->display('forms/pathology.tpl');
 
 }else{
-    include($root_path.'include/inc_test_request_printout_'.$formfile.'.php');
+  include($root_path.'include/inc_test_request_printout_'.$formfile.'.php');
 }
 ?>
      	

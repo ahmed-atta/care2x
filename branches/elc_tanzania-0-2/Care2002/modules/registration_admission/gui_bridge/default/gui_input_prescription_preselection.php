@@ -58,40 +58,40 @@ if (!empty($show)) { // In case something goes wrong, then do nothing!
           <font color="black">Common items of: </font>
         </td>
         <td bgcolor="#CAD3EC" width="130">
-          <font color="black">Pediatric items: </font>
+          
               <input type="radio" 
                   name="peadrics_button" 
                   value="<?PHP echo ($filter=='pediadric') ? '1' : '0';?>" 
                  <? if ($filter=='pediadric') echo 'checked';?>
                   onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&filter=pediadric&show=<?php echo $show;?>&externalcall=<?php echo $externalcall;?>')"
-              >
+              ><font color="black">Pediatric items</font>
         </td>
         <td bgcolor="#CAD3EC" width="100">
-          <font color="black">Adult items: </font>
+          
               <input type="radio" 
                 name="adult_button" 
                 value="<?PHP echo ($filter=='adult') ? '1' : '0';?>" 
                 <? if ($filter=='adult') echo 'checked';?> 
                 onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&filter=adult&show=<?php echo $show;?>&externalcall=<?php echo $externalcall;?>')"
-              >
+              ><font color="black">Adult items</font>
         </td>
         <td bgcolor="#CAD3EC" width="80">
-          <font color="black">Others: </font>
+          
               <input type="radio" 
                 name="others_button" 
                 value="<?PHP echo ($filter=='others') ? '1' : '0';?>" 
                 <? if ($filter=='others') echo 'checked';?> 
                 onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&filter=others&show=<?php echo $show;?>&externalcall=<?php echo $externalcall;?>')"
-              >
+              ><font color="black">Others</font>
         </td>
         <td bgcolor="#CAD3EC">
-          <font color="black">Consumable items: </font>
+          
               <input type="radio" 
                 name="conusumable" 
                 value="<?PHP echo ($filter=='consumable') ? '1' : '0';?>" 
                 <? if ($filter=='consumable') echo 'checked';?> 
                 onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&filter=consumable&mode=new&show=<?php echo $show;?>&externalcall=<?php echo $externalcall;?>')"
-              >
+              ><font color="black">Consumable items</font>
         </td>
       </tr>
       </table>
@@ -102,7 +102,7 @@ if (!empty($show)) { // In case something goes wrong, then do nothing!
         <table width="100%" border="0" bgcolor="#CAD3EC" cellpadding="0" cellspacing="0">
           <tr>
             <td width="37%" rowspan="5">
-                <select name="itemlist[]" size="10" style="width:235px;" >
+                <select name="itemlist[]" size="10" style="width:235px;" onDblClick="javascript:item_add();">
   
                   <!-- dynamically managed content -->
   		            <?php	$pres_obj->DisplayDrugs($drug_list);	?>
@@ -112,7 +112,7 @@ if (!empty($show)) { // In case something goes wrong, then do nothing!
               </td>
             <td height="5">&nbsp;</td>
             <td width="38%" rowspan="5"><div align="center">
-                <select name="selected_item_list[]" size="10" style="width:235px;">
+                <select name="selected_item_list[]" size="10" style="width:235px;" onDblClick="javascript:item_delete();">
   
                   <!-- dynamically managed content -->
                   <?php $pres_obj->DisplaySelectedItems($item_no); ?>

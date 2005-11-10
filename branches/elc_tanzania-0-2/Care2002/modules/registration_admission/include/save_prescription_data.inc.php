@@ -7,6 +7,7 @@ if (eregi('save_admission_data.inc.php',$PHP_SELF))
 $debug=FALSE;
 ($debug)?$db->debug=TRUE:$db->debug=FALSE;
 $i=0;
+if($mode=='delete') $arr_item_number[0] = $nr;
 foreach ($arr_item_number AS $item_number) {	
   
   $dosage               = $arr_dosage[$i];
@@ -59,21 +60,24 @@ foreach ($arr_item_number AS $item_number) {
  								  //exit;
   								break;
   		case 'update': 
-  								$obj->where=' nr='.$nr;
-  								if($obj->updateDataFromInternalArray($nr)) {
-  									if(!$no_redirect){
-  										header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&pid=".$HTTP_SESSION_VARS['sess_pid']);
-  										//echo "$obj->sql<br>$LDDbNoUpdate";
-  										exit;
-  									}
-  								} else{
-                                    echo "$obj->getLastQuery<br>$LDDbNoUpdate";
-                                    $error=TRUE;
-                                  }
+  		            $sql="UPDATE care_encounter_prescription SET
+  		                          `dosage`='$dosage',
+  		                          `notes`='$notes',
+  		                          `prescriber`='$prescriber',
+  		                          `history`='$history'
+  		                  WHERE nr=$nr";
+                  $db->Execute($sql);
+  								break;
+  		case 'delete': 
+  		            $sql="DELETE FROM care_encounter_prescription WHERE nr=$nr";
+                  $db->Execute($sql);
+  		                          
+								  //if (isset($externalcall))
+									//  header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&externalcall=".$externalcall."&pid=".$HTTP_SESSION_VARS['sess_pid']);
+ 								  //exit;
   								break;
   }// end of switch
 } // end of foreach  
-
 
 if (isset($externalcall))
   header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&externalcall=".$externalcall."&pid=".$HTTP_SESSION_VARS['sess_pid']);

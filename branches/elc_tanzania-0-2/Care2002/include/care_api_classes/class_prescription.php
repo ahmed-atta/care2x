@@ -337,6 +337,14 @@ class Prescription extends Core {
 			}
 		}
   } // end of function GetPriceOfItem($item_number) 
-
+  function GetPrescritptionItem($nr) {
+    global $db;
+    $debug=FALSE;
+    ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
+    $this->sql="SELECT * FROM $this->tb WHERE nr = '$nr' ";
+    if ($this->result=$db->Execute($this->sql)) {
+    	return $this->result->FetchRow();
+		}
+  } // end of function GetPriceOfItem($item_number) 
 }
 ?>

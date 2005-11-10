@@ -155,48 +155,24 @@ class Bill extends Encounter {
     $this->debug=FALSE;
     ($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
     
-      $this->sql = "CREATE TEMPORARY TABLE 
-                         tmp_care_tz_billing 
-                    (
-                   `encounter_nr` BIGINT ( 20 ) NOT NULL DEFAULT '0',
-                    PRIMARY KEY ( `encounter_nr` )
-                    ) TYPE = MyISAM;";
-      $this->results = $db->Execute($this->sql);
-
-    // ------> Section Chemlab <----------------
-    // insert all entries of care_test_request_chemlab into temporary billing table
-    $this->sql = "INSERT INTO tmp_care_tz_billing (encounter_nr)
-                      SELECT  
-                          	ctrc.encounter_nr as encounter_nr
-                          FROM $this->tbl_lab_requests ctrc  
-                            LEFT JOIN $this->tbl_bill ctb 
-                            ON ctrc.encounter_nr = ctb.encounter_nr 
-                            GROUP BY ctb.encounter_nr
-                      ";    
-    $this->results = $db->Execute($this->sql);
-    
-    // ------> Section Prescriptions <----------------
-    // insert all entries of care_encounter_prescription into temporary billing table
-    $this->sql = "INSERT INTO tmp_care_tz_billing (encounter_nr) 
-                  SELECT 
-                  	cep.encounter_nr as encounter_nr 
-                  FROM care_encounter_prescription cep 
-                  	LEFT JOIN care_tz_billing ctb 
-                  		ON cep.encounter_nr = ctb.encounter_nr
-                  GROUP BY ctb.encounter_nr
-                  ";
-    $this->results = $db->Execute($this->sql);
-    
-    // --------> final result <---------------
-    // get the first encounter_nr out of the temporary billing table, that
-    // is what we need!
-    $this->sql = "SELECT ce.pid AS PID FROM tmp_care_tz_billing 
-                	INNER JOIN care_encounter ce
-                		ON ce.encounter_nr = tmp_care_tz_billing.encounter_nr
-                  ORDER BY ce.encounter_nr DESC LIMIT 1";
+		$this->sql="SELECT 
+							care_person.selian_pid,
+							care_person.pid,
+              name_first, 
+              name_last, 
+              bi.encounter_nr,
+              bi.first_date,
+              care_person.pid as batch_nr
+      FROM care_encounter, care_person, care_tz_billing bi, care_tz_billing_elem biel 
+      WHERE care_encounter.pid = care_person.pid 
+            AND bi.encounter_nr = care_encounter.encounter_nr
+            AND biel.nr = bi.nr
+            
+      group by batch_nr
+      ORDER BY batch_nr ASC LIMIT 1";	
     $this->results = $db->Execute($this->sql);
 		if($this->first_pn=$this->results->FetchRow()) {
-    	return $this->first_pn['PID'];
+    	return $this->first_pn['pid'];
   	} else {
   	  return FALSE;
   	}
@@ -224,10 +200,10 @@ class Bill extends Encounter {
 	}
   //------------------------------------------------------------------------------  
   
-  function GetAllEncountersOfPendingBills() {
+  /* function GetAllEncountersOfPendingBills() {
     /**
     * This is e.g. for the left side navigation include
-    */
+    
     global $db, $root_path;
     $this->debug=FALSE;
     ($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
@@ -235,7 +211,7 @@ class Bill extends Encounter {
     * This function returns TRUE if there are some new items for that encounter number
     * that should be transfered into the billing table
     *
-    **/
+    *
     
     if ($this->debug) echo "<b>class_tz_billing::GetAllEncountersOfPendingBills($encounter_nr)</b><br>";
     
@@ -248,7 +224,7 @@ class Bill extends Encounter {
     return $this->results;
     
   }
-
+*/
   //------------------------------------------------------------------------------  
 
   function CheckForPendingBill($encounter_nr) {
@@ -280,7 +256,7 @@ class Bill extends Encounter {
     $this->sql = "select 
                   	article_item_number 
                   from $this->tbl_prescriptions
-                  where isnull(bill_number) AND encounter_nr=".$encounter_nr;
+                  where bill_number = 0 AND encounter_nr=".$encounter_nr;
     $this->result=$db->Execute($this->sql); 
     if ($this->result->RecordCount()>0) 
       return TRUE;
@@ -291,7 +267,8 @@ class Bill extends Encounter {
                         encounter_nr 
                 FROM 
                   $this->tbl_lab_requests
-                where isnull(bill_number) AND encounter_nr=".$encounter_nr;
+                where bill_number = 0 AND encounter_nr=".$encounter_nr;
+		// echo $this->sql;                
     $this->result=$db->Execute($this->sql); 
     if ($this->result->RecordCount()>0) 
       return TRUE;
@@ -384,7 +361,7 @@ class Bill extends Encounter {
   }
   
   //------------------------------------------------------------------------------  
-  
+/*  
   function GetPendingLaboratoryBills($encounter_nr) {
     global $db, $root_path;
     $this->debug=FALSE;
@@ -426,9 +403,9 @@ class Bill extends Encounter {
     
     return ($this->result) ? $this->result : FALSE;
   }
-
+*/
 	//------------------------------------------------------------------------------  
-	
+/*	
 	function GetPendingPrescriptionBills($encounter_nr) {
     global $db, $root_path;
     $this->debug=FALSE; // Note that in this method are two times this debugging should be set!
@@ -480,7 +457,7 @@ class Bill extends Encounter {
     return ($this->result) ? $this->result : FALSE;
 	}
 	//------------------------------------------------------------------------------  
-	
+*/	
 	function StoreToBill($encounter_nr, $bill_number){
 	  global $db;
 	  $this->debug=FALSE;
@@ -495,7 +472,7 @@ class Bill extends Encounter {
                     dosage,
                     price
                   from $this->tbl_prescriptions
-                  where isnull(bill_number) AND encounter_nr=".$encounter_nr;
+                  where bill_number = 0 AND encounter_nr=".$encounter_nr;
     $this->result=$db->Execute($this->sql); 
     while ($this->records=$this->result->FetchRow()) {        
         $this->item_number=$this->records['article_item_number'];
@@ -505,13 +482,13 @@ class Bill extends Encounter {
         $this->price              =$this->records['price'];
         // The amount of this medical item could be translated into the real amount...
         $this->medical_item_amount = $this->ConvertMedicalItemAmount($this->medical_item_amount);
-        $this->sql ="INSERT INTO $this->tbl_bill_elements (nr, date_change, is_labtest, is_medicine, amount, price, description)
-							 			VALUES (".$bill_number.",".time().",0,1,'".$this->medical_item_amount."','".$this->price."','".$this->medical_item_name."')";
+        $this->sql ="INSERT INTO $this->tbl_bill_elements (nr, date_change, is_labtest, is_medicine, amount, amount_doc, price, description)
+							 			VALUES (".$bill_number.",".time().",0,1,'".$this->medical_item_amount."','".$this->medical_item_amount."','".$this->price."','".$this->medical_item_name."')";
 			  $db->Execute($this->sql);          
   
         // Mark these lines in the table prescription as "still billed". We can do this
         // in that way: Insert the billing number where we can find this article again...
-        $this->sql="UPDATE $this->tbl_prescriptions SET bill_number='".$bill_number."', bill_status='pending' WHERE isnull(bill_number) AND encounter_nr=".$encounter_nr;
+        $this->sql="UPDATE $this->tbl_prescriptions SET bill_number='".$bill_number."', bill_status='pending' WHERE bill_number = 0 AND encounter_nr=".$encounter_nr;
         $db->Execute($this->sql);
     }
     
@@ -520,7 +497,7 @@ class Bill extends Encounter {
                           encounter_nr, 
                           parameters 
                   FROM $this->tbl_lab_requests
-                  WHERE encounter_nr=".$encounter_nr." AND isnull(bill_number)";
+                  WHERE encounter_nr=".$encounter_nr." AND bill_number = 0";
     $this->parameters = $db->Execute($this->sql);
     while ($this->records=$this->parameters->FetchRow()) {
       if ($this->debug) echo $this->records['parameters']."<br>";
@@ -540,21 +517,74 @@ class Bill extends Encounter {
     }
     // Mark these lines in the table prescription as "still billed". We can do this
     // in that way: Insert the billing number where we can find this article again...
-    $this->sql="UPDATE $this->tbl_lab_requests SET bill_number='".$bill_number."' , bill_status='pending' WHERE isnull(bill_number) AND encounter_nr=".$encounter_nr;
+    $this->sql="UPDATE $this->tbl_lab_requests SET bill_number='".$bill_number."' , bill_status='pending' WHERE bill_number = 0 AND encounter_nr=".$encounter_nr;
     $db->Execute($this->sql);
 
+	}
+	
+	function StorePrescriptionItemToBill($prescriptions_nr, $bill_number, $price, $dosage, $notes){
+	  global $db;
+	  $this->debug=FALSE;
+	  if ($this->debug) echo "<b>class_tz_billing::StorePrescriptionItemToBill(prescriptions_nr: $prescriptions_nr, bill_number: $bill_number)</b><br>";
+	  ($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
+    // do we have pending issues of prescriptions?
+    // read all items out of the prescription table
+    $this->sql = "
+    INSERT INTO $this->tbl_bill_elements (nr, date_change, is_labtest, is_medicine, amount, amount_doc, price, description, notes, prescriptions_nr)
+    SELECT '".$bill_number."', '".time()."' AS date_change, 0, 1, '".$dosage."', dosage, '".$price."', article, '".$notes."', '".$prescriptions_nr."'
+    FROM $this->tbl_prescriptions WHERE nr = $prescriptions_nr";
+    $this->result=$db->Execute($this->sql); 
+	
+	}
+	
+	
+	//------------------------------------------------------------------------------  
+
+	function StoreLaboratoryItemToBill($batch_nr, $bill_number){
+	  global $db;
+	  $this->debug=false;
+	  if ($this->debug) echo "<b>class_tz_billing::StorePrescriptionItemToBill(prescriptions_nr: $prescriptions_nr, bill_number: $bill_number)</b><br>";
+	  ($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
+    // do we have pending issues of prescriptions?
+    // read all items out of the prescription table
+    $this->sql = "select 
+                          encounter_nr, 
+                          parameters 
+                  FROM $this->tbl_lab_requests
+                  WHERE batch_nr=".$batch_nr;
+    $this->parameters = $db->Execute($this->sql);
+    while ($this->records=$this->parameters->FetchRow()) {
+      if ($this->debug) echo $this->records['parameters']."<br>";
+      parse_str($this->records['parameters'],$this->parameter_array);
+      while(list($this->index,$this->chemlab_amount) = each($this->parameter_array)) {
+  				//Strip the string baggage off to get the task id
+  				$this->chemlab_testindex = substr($this->index,5,strlen($this->index)-6);
+          $this->chemlab_testname = $this->GetNameOfLAboratoryFromID($this->chemlab_testindex);
+          $this->price = $this->GetPriceOfLAboratoryItemFromID($this->chemlab_testindex);
+          if ($this->debug) echo "the name of chemlab is:".$this->chemlab_testname." with a amount of ".$this->chemlab_amount." and a price of ".$this->price."<br>";
+          // we have it all... now we store it into the billing-elements-table
+          $this->sql ="INSERT INTO $this->tbl_bill_elements (nr, date_change, is_labtest, is_medicine, amount, price, description)
+								 			VALUES (".$bill_number.",".time().",1,0,".$this->chemlab_amount.",'".$this->price."','".$this->chemlab_testname."')";
+				  $db->Execute($this->sql);
+			  }          
+    }
+    // Mark these lines in the table prescription as "still billed". We can do this
+    // in that way: Insert the billing number where we can find this article again...
+    $this->sql="UPDATE $this->tbl_lab_requests SET bill_number='".$bill_number."' , bill_status='pending' WHERE batch_nr=".$batch_nr;
+    $db->Execute($this->sql);
 	}
 	
 	
 	//------------------------------------------------------------------------------  
 	
-	function StoreToPendingBills($requests,$bill_number,$kind_of){
+
+/*  function StoreToPendingBills($requests,$bill_number,$kind_of){
 	  
 	  /**
 	  * Class to store the pending items into the billing table.
 	  * Note that the $request should have following informations:
 	  * encounter_nr , parameters and price
-	  */
+	  
 	  global $db;
 	  $this->debug=FALSE;
 	  if ($this->debug) echo "<b>class_tz_billing::StoreToPendingBills($requests,$bill_number,$kind_of)</b><br>";
@@ -632,7 +662,7 @@ class Bill extends Encounter {
 		
 	  return TRUE;
 	}
-	
+*/	
 	//------------------------------------------------------------------------------
 	
 	function ConvertMedicalItemAmount ( $amount ) {
@@ -659,11 +689,6 @@ class Bill extends Encounter {
 			}
 		}
   } // end of function GetPriceOfItem($item_number) 
-  
-  //------------------------------------------------------------------------------
-  
-  function GetPrescriptionDetails() {
-  }
   
   //------------------------------------------------------------------------------
 
@@ -761,8 +786,35 @@ class Bill extends Encounter {
 					 ORDER BY date_change ASC";
 		return $db->Execute($this->sql);
 	}
+
+	//------------------------------------------------------------------------------
+	
+
+  function GetElemsOfBillByPrescriptionNr($nr) {
+  	global $db;
+  	$debug=FALSE;
+  	($debug) ? $db->debug=TRUE : $db->debug=FALSE;
+
+  
+  	$this->sql="SELECT * FROM ".$this->tbl_bill_elements."
+					 WHERE prescriptions_nr = ".$nr;
+		return $db->Execute($this->sql);
+	}
 	
 	//------------------------------------------------------------------------------
+	
+  function GetBillByBatchNr($nr) {
+  	global $db;
+  	$debug=FALSE;
+  	($debug) ? $db->debug=TRUE : $db->debug=FALSE;
+
+  
+  	$this->sql="SELECT bill_number FROM care_test_request_chemlabor WHERE batch_nr=$nr";
+		return $db->Execute($this->sql)->FetchRow();
+	}
+	
+	//------------------------------------------------------------------------------
+	
 	
 	function GetNameOfLAboratoryFromID($id)	{
 		global $db;
@@ -1061,7 +1113,7 @@ class Bill extends Encounter {
       			if ($edit_fields) 
       			{
       				echo '<td colspan="3">';
-      				echo '<a href="'.URL_APPEND.'&mode=allpaid&batch_nr='.$batch_nr.'&billnr='.$billnr.'">Pay all items at once now</a></td>';
+      				echo '<a href="'.URL_APPEND.'&mode=allpaid&batch_nr='.$batch_nr.'&bill_nr='.$bill_nr.'">Pay all items at once now</a></td>';
       			}
       			else echo '<td>&nbsp;</td>';
       			echo "</tr>";
@@ -1347,7 +1399,7 @@ class Bill extends Encounter {
       			if ($edit_fields) 
       			{
       				echo '<td colspan="3">';
-      				echo '<a href="'.URL_APPEND.'&mode=allpaid&batch_nr='.$batch_nr.'&billnr='.$billnr.'">Pay all items at once now</a></td>';
+      				echo '<a href="'.URL_APPEND.'&mode=allpaid&batch_nr='.$batch_nr.'&bill_nr='.$bill_nr.'">Pay all items at once now</a></td>';
       			}
       			else echo '<td>&nbsp;</td>
       				<td>&nbsp;</td>';
@@ -1425,6 +1477,7 @@ function EditBillElement($id) {
                       care_tz_billing_elem.description,
                       care_tz_billing_elem.price,
                       care_tz_billing_elem.amount,
+                      care_tz_billing_elem.amount_doc,
                       care_tz_billing_elem.is_paid
                 FROM 
                   care_tz_billing_elem 
@@ -1443,6 +1496,7 @@ function EditBillElement($id) {
     $this->description=$this->row['description'];
     $this->price=$this->row['price'];
     $this->amount=$this->row['amount'];
+    $this->amount_doc=$this->row['amount_doc'];
     
     $this->payed_status_checked = '';
     $this->outstanding_checked  = '';
@@ -1496,7 +1550,13 @@ A:visited:hover {color: #cc0033;}
               </tr>
               <tr> 
                 <td align=right> Amount</td>
-                <td><input type="text" name="amount" value="'.$this->amount.'"  size=10 maxlength=10> 
+                <td><input type="text" name="amount" value="'.$this->amount.'"  size=10 maxlength=10>
+                ';
+                
+                if($this->amount_doc!=$this->amount)
+                	echo '(Prescribed amount: '.$this->amount_doc.')';
+                
+                echo ' 
                 </td>
               </tr>
               <tr> 
@@ -1771,10 +1831,12 @@ function delete_bill_element($bill_elem_number) {
   			 $show_printout_button = FALSE;
   			 $show_done_button=FALSE;
   			 $show_edit_button=FALSE;
-  			 
+  			 $enc_obj = New Encounter;
+  			 $encounter_nr = $enc_obj->GetEncounterFromBatchNumber($batch_nr);
          if ($printout==FALSE) {
     			 if (!$show_printout_button) echo '<a href="javascript:printOut_'.$bills['nr'].'()"><img src="../../gui/img/control/default/en/en_printout.gif" border=0 align="absmiddle" width="99" height="24" alt="Print this form"></a> ';
-    			 if ($edit_fields) echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../../gui/img/common/default/achtung.gif"> &nbsp;&nbsp;&nbsp; To transfere this pending bill into the archive: <a href="billing_tz_pending.php?&mode=done&bill_number='.$bills['nr'].'"><img src="../../gui/img/control/default/en/en_done.gif" border=0 align="absmiddle" width="75" height="24" alt="It´s done! Move the form to the archive"></a>&nbsp;&nbsp;&nbsp;<img src="../../gui/img/common/default/achtung.gif">';
+    			 
+    			 if ($edit_fields) echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../../gui/img/common/default/achtung.gif"> &nbsp;&nbsp;&nbsp; To transfere this pending bill into the archive: <a href="billing_tz_pending.php?&mode=done&bill_number='.$bills['nr'].'"><img src="../../gui/img/control/default/en/en_done.gif" border=0 align="absmiddle" width="75" height="24" alt="It´s done! Move the form to the archive"></a> OR <a href="billing_tz_pending.php?&mode=done&discharge=true&encounter='.$encounter_nr.'&bill_number='.$bills['nr'].'"><img src="../../gui/img/control/default/en/en_done_and_discharge.gif" border=0 align="absmiddle" width="175" height="24" alt="It´s done! Move the form to the archive and discharge our patient"></a>&nbsp;&nbsp;&nbsp;<img src="../../gui/img/common/default/achtung.gif">';
     			 if (!$edit_fields) echo '<a href="billing_tz_edit.php?batch_nr='.$batch_nr.'&billnr='.$bills['nr'].'"><img src="../../gui/img/control/default/en/en_auswahl2.gif" border=0 align="absmiddle" width="120" height="24"></a>';
     		 }
          echo '</td>
@@ -1834,6 +1896,350 @@ function delete_bill_element($bill_elem_number) {
     $this->sql = "DELETE FROM care_tz_billing_elem WHERE `nr`=".$bill_number;
     $db->Execute($this->sql);
     return TRUE;
+  }
+
+  //------------------------------------------------------------------------------  
+  
+  function GetNewQuotation_Prescriptions($encounter_nr) {
+    global $db;
+    /**
+    * Returns all new prescriptions in a recordset. If no Encounter-Nr is given 
+    * the result-list is grouped by encounters
+    */
+    $this->debug=FALSE;
+    ($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
+    if ($this->debug) echo "<br><b>Method class_tz_billing::GetNewQuotation_Prescriptions()</b><br>";
+    if($encounter_nr>0) 
+    	$where_encounter='AND cep.encounter_nr = '.$encounter_nr;
+    else 
+    {
+    	$where_encounter='GROUP BY cep.encounter_nr, cp.pid, cp.selian_pid, cp.name_first, cp.name_last, cp.date_birth';
+    	$anzahl= 'count(*) AS anzahl,';
+    }
+    $this->sql = "SELECT $anzahl cep.*, cp.pid, cp.selian_pid, cp.name_first, cp.name_last, cp.date_birth
+									FROM `care_encounter_prescription` cep, care_encounter ce, care_person cp
+									WHERE cep.encounter_nr = ce.encounter_nr
+									AND ce.pid = cp.pid
+									AND cep.bill_number = 0
+									AND (isnull(cep.is_disabled) OR cep.is_disabled='')
+									$where_encounter
+									ORDER BY cep.prescribe_date DESC , cep.encounter_nr ASC";    
+    $this->request = $db->Execute($this->sql);
+    return $this->request;
+    
+  }
+  
+  //------------------------------------------------------------------------------  
+
+  function GetNewQuotation_Laboratory($encounter_nr) {
+    global $db;
+    /**
+    * Returns all new laboratory requests in a recordset. If no Encounter-Nr is given 
+    * the result-list is grouped by encounters
+    */
+    $this->debug=FALSE;
+    ($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
+    if ($this->debug) echo "<br><b>Method class_tz_billing::GetNewQuotation_Prescriptions()</b><br>";
+    if($encounter_nr>0) 
+    	$where_encounter='AND ctr.encounter_nr = '.$encounter_nr;
+    else 
+    {
+    	$where_encounter='GROUP BY ctr.encounter_nr, cp.pid, cp.selian_pid, cp.name_first, cp.name_last, cp.date_birth';
+    	$anzahl= 'count(*) AS anzahl,';
+    }
+    $this->sql = "SELECT $anzahl ctr.*, cp.pid, cp.selian_pid, cp.name_first, cp.name_last, cp.date_birth
+									FROM `care_test_request_chemlabor` ctr, care_encounter ce, care_person cp
+									WHERE ctr.encounter_nr = ce.encounter_nr
+									AND ce.pid = cp.pid
+									AND ctr.bill_number = 0
+									AND (isnull(ctr.is_disabled) OR ctr.is_disabled='')
+									$where_encounter
+									ORDER BY ctr.modify_time DESC , ctr.encounter_nr ASC";    
+    $this->request = $db->Execute($this->sql);
+    return $this->request;
+    
+  }
+  
+  //------------------------------------------------------------------------------  
+    
+    function GetLaboratoryCount($encounter_nr) {
+    global $db;
+    /**
+    * Returns all new laboratory requests in a recordset. If no Encounter-Nr is given 
+    * the result-list is grouped by encounters
+    */
+    $this->debug=FALSE;
+    ($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
+    if ($this->debug) echo "<br><b>Method class_tz_billing::GetNewQuotation_Prescriptions()</b><br>";
+  	$where_encounter='AND ctr.encounter_nr = '.$encounter_nr;
+  	$where_encounter='GROUP BY ctr.encounter_nr, cp.pid, cp.selian_pid, cp.name_first, cp.name_last, cp.date_birth';
+  	$anzahl= 'count(*) AS anzahl,';
+    $this->sql = "SELECT $anzahl ctr.*, cp.pid, cp.selian_pid, cp.name_first, cp.name_last, cp.date_birth
+									FROM `care_test_request_chemlabor` ctr, care_encounter ce, care_person cp
+									WHERE ctr.encounter_nr = ce.encounter_nr
+									AND ce.pid = cp.pid
+									AND ctr.bill_number = 0
+									AND (isnull(ctr.is_disabled) OR ctr.is_disabled='')
+									$where_encounter
+									ORDER BY ctr.modify_time DESC , ctr.encounter_nr ASC";    
+    $this->request = $db->Execute($this->sql);
+    return $this->request->FetchRow();
+    
+  }
+  
+  //------------------------------------------------------------------------------  
+   
+	function DeleteNewPrescription($nr,$reason) {
+	  global $db;
+	  $debug=FALSE;
+	  if ($debug) echo "<b>class_tz_billing::DeleteNewPrescription($nr)</b><br>";
+	  ($debug) ? $db->debug=TRUE : $db->debug=FALSE;	  
+	  if(!$nr) return false;
+    $this->sql = "UPDATE care_encounter_prescription SET
+    	is_disabled = '$reason'
+    	WHERE `nr`=".$nr;
+    $db->Execute($this->sql);
+    return TRUE;
+  }
+
+  //------------------------------------------------------------------------------  
+  
+	function DeleteNewLaboratory($nr,$reason) {
+	  global $db;
+	  $debug=FALSE;
+	  if ($debug) echo "<b>class_tz_billing::DeleteNewPrescription($nr)</b><br>";
+	  ($debug) ? $db->debug=TRUE : $db->debug=FALSE;	  
+	  if(!$nr) return false;
+    $this->sql = "UPDATE care_test_request_chemlabor SET
+    	is_disabled = '$reason'
+    	WHERE `nr`=".$nr;
+    $db->Execute($this->sql);
+    return TRUE;
+  }
+  
+
+  //------------------------------------------------------------------------------  
+  
+  
+	function UpdateBillNumberNewPrescription($nr,$bill_number) {
+	  global $db;
+	  $debug=FALSE;
+	  if ($debug) echo "<b>class_tz_billing::DeleteNewPrescription($nr)</b><br>";
+	  ($debug) ? $db->debug=TRUE : $db->debug=FALSE;	  
+	  if(!$nr) return false;
+    $this->sql = "UPDATE care_encounter_prescription SET
+    	bill_number = '$bill_number'
+    	WHERE `nr`=".$nr;
+    $db->Execute($this->sql);
+    return TRUE;
+  }
+
+  //------------------------------------------------------------------------------  
+  
+  
+  function ShowNewQuotations()
+  {
+  	global $db;
+  	$this->debug=FALSE;
+		($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
+    if ($this->debug) echo "<br><b>Method class_tz_billing::ShowNewQuotations()</b><br>";
+    $result = $this->GetNewQuotation_Prescriptions(0);
+    if($result)
+    {
+    	$color_change=FALSE;
+	    while ($row=$result->FetchRow())
+	    {
+    		$counter++;
+	      if ($color_change) {
+	        $BGCOLOR='bgcolor="#ffffdd"';
+	        $color_change=FALSE;
+	      } else {
+	        $BGCOLOR='bgcolor="#ffffaa"';
+	        $color_change=TRUE;
+	      }
+	      $labinfo = $this->GetLaboratoryCount($row['encounter_nr']);
+	      if(empty($labinfo['anzahl'])) $labinfo['anzahl'] = 0;
+					echo '
+          <tr>
+          	<form method="POST" action="billing_tz_quotation_create.php">
+					  <td '.$BGCOLOR.'><div align="center">'.$row['prescribe_date'].'</div></td>
+					  <td '.$BGCOLOR.'><div align="center">'.$row['encounter_nr'].'</div></td>
+					  <td '.$BGCOLOR.'><div align="center">'.$this->ShowPID($row['pid']).'</div></td>
+					  <td '.$BGCOLOR.'><div align="center">'.$row['selian_pid'].'</div></td>
+					  <td '.$BGCOLOR.'><div align="center">'.$row['name_last'].', '.$row['name_first'].'</div></td>
+					  <td '.$BGCOLOR.'><div align="center">'.$row['date_birth'].'</div></td>
+					  <td '.$BGCOLOR.'><div align="center">'.$row['anzahl'].' pres.<br>'.$labinfo['anzahl'].' req.</div></td>
+					  <td '.$BGCOLOR.'><div align="center"><input type="hidden" name="namelast" value="'.$row['name_last'].'"><input type="hidden" name="namefirst" value="'.$row['name_first'].'"><input type="hidden" name="countpres" value="'.$row['anzahl'].'"><input type="hidden" name="countlab" value="'.$labinfo['anzahl'].'"><input type="hidden" value="'.$row['encounter_nr'].'" name="encounter_nr"><input type="hidden" value="'.$row['pid'].'" name="pid"><input type="submit" value=">>"></div></td>
+					  </form>
+					</tr>';
+	    }
+	    if(!$counter)
+	    	{
+			    $result = $this->GetNewQuotation_Laboratory(0);
+			    if($result)
+			    {
+			    	$color_change=FALSE;
+				    while ($row=$result->FetchRow())
+				    {
+			    		$counter++;
+				      if ($color_change) {
+				        $BGCOLOR='bgcolor="#ffffdd"';
+				        $color_change=FALSE;
+				      } else {
+				        $BGCOLOR='bgcolor="#ffffaa"';
+				        $color_change=TRUE;
+				      }
+				      if(empty($labinfo['anzahl'])) $labinfo['anzahl'] = 0;
+								echo '
+			          <tr>
+			          	<form method="POST" action="billing_tz_quotation_create.php">
+								  <td '.$BGCOLOR.'><div align="center">'.substr($row['modify_time'],1,10).'</div></td>
+								  <td '.$BGCOLOR.'><div align="center">'.$row['encounter_nr'].'</div></td>
+								  <td '.$BGCOLOR.'><div align="center">'.$this->ShowPID($row['pid']).'</div></td>
+								  <td '.$BGCOLOR.'><div align="center">'.$row['selian_pid'].'</div></td>
+								  <td '.$BGCOLOR.'><div align="center">'.$row['name_last'].', '.$row['name_first'].'</div></td>
+								  <td '.$BGCOLOR.'><div align="center">'.$row['date_birth'].'</div></td>
+								  <td '.$BGCOLOR.'><div align="center">0 pres.<br>'.$row['anzahl'].' req.</div></td>
+								  <td '.$BGCOLOR.'><div align="center"><input type="hidden" name="namelast" value="'.$row['name_last'].'"><input type="hidden" name="namefirst" value="'.$row['name_first'].'"><input type="hidden" name="countpres" value="0"><input type="hidden" name="countlab" value="'.$row['anzahl'].'"><input type="hidden" value="'.$row['encounter_nr'].'" name="encounter_nr"><input type="hidden" value="'.$row['pid'].'" name="pid"><input type="submit" value=">>"></div></td>
+								  </form>
+								</tr>';
+				    }
+	    	}
+	    }
+	    if(!$counter)
+	    	echo '<tr><td colspan="8" align="center">Nothing to do :)</td></tr>';
+	 	}
+	  else
+	  	echo '<tr><td colspan="8" align="center">Huston we have a problem. Database error :(</td></tr>';
+  }
+  
+  //------------------------------------------------------------------------------  
+  
+  function ShowNewQuotation_Laboratory()
+  {
+  	global $db;
+  	$this->debug=FALSE;
+		($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
+    if ($this->debug) echo "<br><b>Method class_tz_billing::ShowNewQuotation_Laboratory()</b><br>";
+    $result = $this->GetNewQuotation_Laboratory(0);
+    if($result)
+    {
+    	$color_change=FALSE;
+	    while ($row=$result->FetchRow())
+	    {
+    		$counter++;
+	      if ($color_change) {
+	        $BGCOLOR='bgcolor="#ffffdd"';
+	        $color_change=FALSE;
+	      } else {
+	        $BGCOLOR='bgcolor="#ffffaa"';
+	        $color_change=TRUE;
+	      }
+					echo '
+          <tr>
+          	<form method="POST" action="billing_tz_quotation_create.php">
+					  <td '.$BGCOLOR.'><div align="center">'.substr($row['modify_time'],0,10).'</div></td>
+					  <td '.$BGCOLOR.'><div align="center">'.$row['encounter_nr'].'</div></td>
+					  <td '.$BGCOLOR.'><div align="center">'.$this->ShowPID($row['pid']).'</div></td>
+					  <td '.$BGCOLOR.'><div align="center">'.$row['selian_pid'].'</div></td>
+					  <td '.$BGCOLOR.'><div align="center">'.$row['name_last'].', '.$row['name_first'].'</div></td>
+					  <td '.$BGCOLOR.'><div align="center">'.$row['date_birth'].'</div></td>
+					  <td '.$BGCOLOR.'><div align="center">'.$row['anzahl'].' req.</div></td>
+					  <td '.$BGCOLOR.'><div align="center"><input type="hidden" name="createmode" value="laboratory"><input type="hidden" value="'.$row['encounter_nr'].'" name="encounter_nr"><input type="hidden" value="'.$row['pid'].'" name="pid"><input type="submit" value=">>"></div></td>
+					  </form>
+					</tr>';
+	    }
+	    if(!$counter)
+	    	echo '<tr><td colspan="8" align="center">Nothing to do :)</td></tr>';
+	 	}
+	  else
+	  	echo '<tr><td colspan="8" align="center">Huston we have a problem. Database error :(</td></tr>';
+  }
+  
+  //------------------------------------------------------------------------------  
+  
+	function ShowNewQuotationEncounter_Prescriptions($encounter_nr)
+  {
+  	global $db;
+  	$this->debug=FALSE;
+		($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
+    if ($this->debug) echo "<br><b>Method class_tz_billing::ShowNewQuotationEncounter_Prescriptions()</b><br>";
+    $result = $this->GetNewQuotation_Prescriptions($encounter_nr);
+    if($result)
+    {
+    	$color_change=FALSE;
+	    while ($row=$result->FetchRow())
+	    {
+    
+	      if ($color_change) {
+	        $BGCOLOR='bgcolor="#ffffdd"';
+	        $color_change=FALSE;
+	      } else {
+	        $BGCOLOR='bgcolor="#ffffaa"';
+	        $color_change=TRUE;
+	      }
+					echo '
+          <tr>
+					  <td '.$BGCOLOR.'><div align="center">'.$row['prescribe_date'].'</div></td>
+					  <td '.$BGCOLOR.'><div align="center">'.$row['article'].'</div></td>
+					  <td '.$BGCOLOR.'><div align="center"><input type="text" size="3" value="'.$row['price'].'" name="price_'.$row['nr'].'"></div></td>
+					  <td '.$BGCOLOR.'><div align="center"><input type="text" size="4" value="'.$row['dosage'].'" name="dosage_'.$row['nr'].'"></div></td>
+					  <td '.$BGCOLOR.'><div align="center"><textarea name="notes_'.$row['nr'].'">'.$row['notes'].'</textarea></div></td>
+					  <td '.$BGCOLOR.'><div align="center"><input type="radio" value="bill" name="modepres_'.$row['nr'].'"></div></td>
+					  <td '.$BGCOLOR.'><div align="center"><input checked type="radio" value="ignore" name="modepres_'.$row['nr'].'"></div></td>
+						<td '.$BGCOLOR.'><div align="center"><input type="radio" value="delete" name="modepres_'.$row['nr'].'"></div></td>
+					</tr>';
+	    }
+	 	}
+	  else
+	  	echo '<tr><td colspan="8">Nothing to do :)</td></tr>';
+  }
+  //------------------------------------------------------------------------------  
+  
+	function ShowNewQuotationEncounter_Laboratory($encounter_nr)
+  {
+  	global $db,$root_path;
+  	$this->debug=FALSE;
+		($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
+    if ($this->debug) echo "<br><b>Method class_tz_billing::ShowNewQuotationEncounter_Laboratory()</b><br>";
+    $result = $this->GetNewQuotation_Laboratory($encounter_nr);
+    if($result)
+    {
+    	$color_change=FALSE;
+	    while ($row=$result->FetchRow())
+	    {
+    
+	      if ($color_change) {
+	        $BGCOLOR='bgcolor="#ffffdd"';
+	        $color_change=FALSE;
+	      } else {
+	        $BGCOLOR='bgcolor="#ffffaa"';
+	        $color_change=TRUE;
+	      }
+    		parse_str($row['parameters'],$tests);
+				while(list($x,$v)=each($tests))
+				{
+					$tests_arr[strtok(substr($x,5),"_")] = $v;
+				}
+				require_once($root_path.'include/care_api_classes/class_lab.php');
+				if(!isset($lab_obj)) $lab_obj=new Lab($encounter_nr);
+				while(list($x,$v)=each($tests_arr))
+				{
+					$labrow = $lab_obj->TestParamsDetails($x);
+					$desc .=$labrow['name'].'<br>';
+				}
+					echo '
+          <tr>
+					  <td '.$BGCOLOR.'><div align="center">'.$row['modify_time'].'</div></td>
+					  <td '.$BGCOLOR.'><div align="center">'.$desc.'</div></td>
+					  <td '.$BGCOLOR.'><div align="center"><input type="radio" value="bill" name="modelab_'.$row['batch_nr'].'"></div></td>
+					  <td '.$BGCOLOR.'><div align="center"><input checked type="radio" value="ignore" name="modelab_'.$row['batch_nr'].'"></div></td>
+						<td '.$BGCOLOR.'><div align="center"><input type="radio" value="delete" name="modelab_'.$row['batch_nr'].'"></div></td>
+					</tr>';
+	    }
+	 	}
+	  else
+	  	echo '<tr><td colspan="5">Nothing to do :)</td></tr>';
   }
 
 }

@@ -176,6 +176,7 @@ class GuiInputPerson {
 				if (trim($selian_pid)=='' || !is_numeric($selian_pid)) { $errorfilenr=1; $error++;}
 				if(trim($name_first)=='') { $errornamefirst=1; $error++; }
 				if (trim($date_birth)=='') { $errordatebirth=1; $error++;}
+				if(mktime(0,0,0,substr($date_birth,3,2),substr($date_birth,0,2),substr($date_birth,6,4))>time()) { $errordatebirth=1; $error++;}
 				//if (is_array($tribe_array) && !$no_tribe) {$errormaiden=1; $error++;}
 				//if (is_array($town_array)) {$errortown=1; $error++;}
 				if (!$addr_citytown_nr) { $errortown=1; $error++;}
@@ -202,6 +203,7 @@ class GuiInputPerson {
 					//echo formatDate2STD($geburtsdatum,$date_format);
 					$sql="UPDATE $dbtable SET
 							 title='$title',
+							 selian_pid='$selian_pid',
 							 name_last='$name_last',
 							 name_first='$name_first',
 							 name_2='$name_2',
@@ -474,18 +476,6 @@ class GuiInputPerson {
 			}else if(d.sex[0]&&d.sex[1]&&!d.sex[0].checked&&!d.sex[1].checked){
 				alert("<?php echo $LDPlsSelectSex; ?>");
 				return false;
-			}else if(d.addr_str.value==""){
-				alert("<?php echo $LDPlsEnterStreetName; ?>");
-				d.addr_str.focus();
-				return false;
-			}else if(d.addr_str_nr.value==""){
-				alert("<?php echo $LDPlsEnterBldgNr; ?>");
-				d.addr_str_nr.focus();
-				return false;
-			}else if(d.addr_zip.value==""){
-				alert("<?php echo $LDPlsEnterZip; ?>");
-				d.addr_zip.focus();
-				return false;
 			}else if(d.user_id.value==""){
 				alert("<?php echo $LDPlsEnterFullName; ?>");
 				d.user_id.focus();
@@ -650,9 +640,20 @@ class GuiInputPerson {
 				<FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo convertTimeToLocal(formatDate2Local($date_reg,$date_format,0,1)); ?>
 			</td>
 			</tr>
-<?php
-$this->createTR($errorfilenr, 'selian_pid', ' *'.$LDFileNr,$selian_pid,'','',FALSE);
-?>
+			<tr>
+			<td class="reg_item">
+				<FONT SIZE=-1  FACE="Arial"><?php 
+				if($errorfilenr)
+					echo '<font color="#ff0000">'.$LDFileNr.'</font>';
+				else
+					echo $LDFileNr;
+				
+				?>
+			</td>
+			<td class="reg_input">
+				<input type="text" name="selian_pid" size=14 maxlength=6 value="<?php echo $selian_pid ?>" onFocus="this.select();">
+			</td>
+			</tr>
 			<tr>
 			<td class="reg_item">
 				<FONT SIZE=-1  FACE="Arial"><?php echo $LDTitle ?>:
