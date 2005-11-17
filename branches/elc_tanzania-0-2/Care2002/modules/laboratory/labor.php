@@ -91,11 +91,6 @@ require($root_path.'include/inc_2level_reset.php');
   $smarty->assign('LDTestParameters',"<a href=\"labor_test_param_edit_pass.php?sid=$sid&lang=$lang&user_origin=lab\">$LDTestParameters</a>");
   $smarty->assign('LDTestParametersTxt',$LDTestParametersTxt);
   
-  # Crosslink to the prescription module
-
-  $smarty->assign('LDPrescriptionLink',"<a href=\"http://localhost/care2002_tz_mero//modules/pharmacy_tz/pharmacy_tz_pending_prescriptions.php?back_path=laboratory\">$LDPrescriptionLink</a>");
-  $smarty->assign('LDPrescriptionLinkTxt',$LDPrescriptionLinkTxt);
-
 # Assign the submenu to the mainframe center block
 
  $smarty->assign('sMainBlockIncludeFile','laboratory/submenu_lab.tpl');

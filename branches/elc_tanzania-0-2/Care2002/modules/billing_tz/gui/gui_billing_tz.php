@@ -109,12 +109,13 @@ function closewin()
                       -->
                       <TR> 
                         <td height="26" align=center><img src="../../gui/img/common/default/prescription.gif" border=0 width="16" height="16"></td>
-                        <TD class="submenu_item"><nobr><a href="<?php echo $root_path;?>modules/laboratory/labor.php?ntid=false&lang=en">Laboratory Test Request</a></nobr></TD>
+                        <TD class="submenu_item"><nobr><a href="<?php echo $root_path;?>modules/laboratory/labor_test_request_pass.php?<?php echo URL_APPEND; ?>&target=chemlabor&user_origin=bill">Laboratory Test Request</a></nobr></TD>
+
                         <TD>Labor Test Request</TD>
                       </tr>
                       <TR> 
                         <td height="26" align=center><img src="../../gui/img/common/default/prescription.gif" border=0 width="16" height="16"></td>
-                        <TD class="submenu_item"><nobr><a href="<?php echo $root_path;?>/modules/pharmacy_tz/pharmacy_tz_pending_prescriptions.php?back_path=billing">Drug prescription</a></nobr></TD>
+                        <TD class="submenu_item"><nobr><a href="<?php echo $root_path;?>/modules/pharmacy_tz/pharmacy_tz_pending_prescriptions.php<?php echo URL_APPEND; ?>&target=search&task=newprescription&back_path=billing">Drug prescription</a></nobr></TD>
                         <TD>Show prescriptions of patients</TD>
                       </tr>
                       <TR  height=1> 

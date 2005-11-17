@@ -24,6 +24,12 @@ if($user_origin=='lab')
   if($target=='radio') $breakfile=$root_path.'modules/radiology/radiolog.php'.URL_APPEND;
    else $breakfile=$root_path.'modules/laboratory/labor.php'.URL_APPEND;
 }
+elseif($user_origin=='bill')
+{
+  $local_user='ck_bill_user';
+  $breakfile=$root_path.'modules/billing_tz/billing_tz.php'.URL_APPEND;
+
+}
 else
 {
   $local_user='ck_pflege_user';

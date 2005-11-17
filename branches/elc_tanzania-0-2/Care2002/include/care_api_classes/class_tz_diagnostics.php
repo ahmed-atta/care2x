@@ -438,7 +438,6 @@ class Diagnostics extends Encounter {
     global $db;
     $debug=false;
     ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
-    echo 'DEBUG ENABLED<br>';
     if($debug)
     	echo $pid.' - '.$encounter_nr.' - '.$ICD10_code.' - '.$ICD10_description.' - '.$comment.'<br>';
     if (empty($pid) || empty($encounter_nr) || empty( $ICD10_code) || empty( $ICD10_description))

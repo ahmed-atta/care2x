@@ -1,6 +1,5 @@
-<?php /* Smarty version 2.6.0, created on 2005-09-26 10:10:06
+<?php /* Smarty version 2.6.0, created on 2005-11-14 16:28:07
          compiled from main/passcheck_entry_mask.tpl */ ?>
-
 
 <!--<table width=100% border=0 cellpadding="0" cellspacing="0">-->
 
@@ -50,11 +49,11 @@
 													<nobr><?php echo $this->_tpl_vars['LDUserPrompt']; ?>
 :</nobr>
 													<br>
-													<INPUT type="text" name="userid" size="14" maxlength="25">
+													<INPUT type="text" name="userid" size="14" maxlength="25"> <?php echo $this->_tpl_vars['sDemoLoginInfo']; ?>
 <p>
 													<nobr><?php echo $this->_tpl_vars['LDPwPrompt']; ?>
 :<br>
-													<INPUT type="password" name="keyword" size="14" maxlength="25">
+													<INPUT type="password" name="keyword" size="14" maxlength="25"> <?php echo $this->_tpl_vars['sDemoPasswordInfo']; ?>
 
 
 																										<?php echo $this->_tpl_vars['sPassHiddenInputs']; ?>

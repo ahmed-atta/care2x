@@ -71,10 +71,12 @@ if($task=="insert")
 
 	}
 	if($deletecounter>0 || $billcounter>0)
-		$message = '<font color=red>'.$billcounter.' item(s) billed, '.$deletecounter.' item(s) deleted for '.$enc_obj->ShowPID($pid).'.</font>';
+		header("Location: billing_tz_edit.php".URL_APPEND."&batch_nr=".$pid."&billnr=".$new_bill_number."&user_origin=quotation");
 	else
+	{
 		$message = '<font color=red>Nothing todo for '.$enc_obj->ShowPID($pid).'.</font>';
-	header("Location: billing_tz_quotation.php".URL_APPEND."&message=".urlencode($message));
+		header("Location: billing_tz_quotation.php".URL_APPEND."&message=".urlencode($message));
+	}
 }
 require ("gui/gui_billing_tz_quotation_create.php");
 

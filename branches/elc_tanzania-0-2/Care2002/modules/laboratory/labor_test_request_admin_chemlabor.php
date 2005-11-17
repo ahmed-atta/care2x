@@ -316,7 +316,7 @@ require($root_path.'include/inc_test_request_lister_fx.php');
      <a href="javascript:printOut()"><img <?php echo createLDImgSrc($root_path,'printout.gif','0','absmiddle') ?> alt="<?php echo $LDPrintOut ?>"></a>
      <a href="<?php echo 'labor_datainput.php'.URL_APPEND.'&encounter_nr='.$pn.'&job_id='.$batch_nr.'&mode='.$mode.'&update=1&user_origin=lab_mgmt'; ?>"><img <?php echo createLDImgSrc($root_path,'enterresults.gif','0','absmiddle') ?> alt="<?php echo $LDEnterResult ?>"></a>
      <a href="<?php echo $thisfile.URL_APPEND."&edit=".$edit."&mode=done&target=".$target."&subtarget=".$subtarget."&batch_nr=".$batch_nr."&pn=".$pn."&formtitle=".$formtitle."&user_origin=".$user_origin."&noresize=".$noresize; ?>"><img <?php echo createLDImgSrc($root_path,'done.gif','0','absmiddle') ?> alt="<?php echo $LDDone ?>"></a>
-     <a href="<?php echo $thisfile.URL_APPEND."&edit=".$edit."&mode=done&discharge=true&target=".$target."&subtarget=".$subtarget."&batch_nr=".$batch_nr."&pn=".$pn."&formtitle=".$formtitle."&user_origin=".$user_origin."&noresize=".$noresize; ?>"><img <?php echo createLDImgSrc($root_path,'done_and_discharge.gif','0','absmiddle') ?> alt="Move the form to the archive and discharge our patient"></a>
+<!--     <a href="<?php echo $thisfile.URL_APPEND."&edit=".$edit."&mode=done&discharge=true&target=".$target."&subtarget=".$subtarget."&batch_nr=".$batch_nr."&pn=".$pn."&formtitle=".$formtitle."&user_origin=".$user_origin."&noresize=".$noresize; ?>"><img <?php echo createLDImgSrc($root_path,'done_and_discharge.gif','0','absmiddle') ?> alt="Move the form to the archive and discharge our patient"></a>-->
      
 
 <?php

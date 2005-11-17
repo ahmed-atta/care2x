@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.0, created on 2005-10-20 12:30:59
+<?php /* Smarty version 2.6.0, created on 2005-11-14 14:48:00
          compiled from ambulatory/submenu_ambulatory.tpl */ ?>
 <blockquote>
 <table border=0 cellpadding=5>
@@ -19,11 +19,11 @@ unset($_smarty_tpl_vars);
 
 	</td>
     <td width=50%>
-		<?php echo $this->_tpl_vars['s2SubMenu']; ?>
+		<?php echo $this->_tpl_vars['s11SubMenu']; ?>
 
 	</td>
   </tr>
-
+<!--
 	<tr>
     <td width=50%>
 		<?php echo $this->_tpl_vars['s3SubMenu']; ?>
@@ -34,7 +34,7 @@ unset($_smarty_tpl_vars);
 
 	</td>
   </tr>
-
+-->
 	<tr>
     <td width=50%>
 		<?php echo $this->_tpl_vars['s5SubMenu']; ?>
@@ -65,16 +65,17 @@ unset($_smarty_tpl_vars);
 
 	</td>
   </tr>
+  <!--
 	<tr>
     <td width=50%>
-		<?php echo $this->_tpl_vars['s11SubMenu']; ?>
+		<?php echo $this->_tpl_vars['s2SubMenu']; ?>
 
 	</td>
     <td width=50%>
 		<?php echo $this->_tpl_vars['s12SubMenu']; ?>
 
 	</td>
-  </tr>
+  </tr>-->
 </table>
 <a href="<?php echo $this->_tpl_vars['breakfile']; ?>
 "><img <?php echo $this->_tpl_vars['gifClose2']; ?>

@@ -34,9 +34,17 @@ if ($mode=="done" && !empty($bill_number)) {
   $bill_obj->ArchiveBill($bill_number);
 
   if(!$discharge)
-  	header ( 'Location: billing_tz_pending.php?mode=archived&bill_number='.$bill_number );
+  {
+  	if($user_origin=='quotation')
+  		header ( 'Location: billing_tz_quotation.php');
+  	else
+  		header ( 'Location: billing_tz_pending.php?mode=archived&bill_number='.$bill_number );
+  }
   else
-  	header ( 'Location: ../ambulatory/amb_clinic_discharge.php'.URL_REDIRECT_APPEND.'&pn='.$encounter.'&pyear='.date("Y").'&pmonth='.date("n").'&pday='.date(j).'&tb='.str_replace("#","",$cfg['top_bgcolor']).'&tt='.str_replace("#","",$cfg['top_txtcolor']).'&bb='.str_replace("#","",$cfg['body_bgcolor']).'&d='.$cfg['dhtml'].'&station='.$station.'&backpath='.urlencode('../billing_tz/billing_tz_pending.php').'&dept_nr='.$dept_nr);
+  	if($user_origin=='quotation')
+  		header ( 'Location: ../ambulatory/amb_clinic_discharge.php'.URL_REDIRECT_APPEND.'&user_origin='.$user_origin.'&pn='.$encounter.'&pyear='.date("Y").'&pmonth='.date("n").'&pday='.date(j).'&tb='.str_replace("#","",$cfg['top_bgcolor']).'&tt='.str_replace("#","",$cfg['top_txtcolor']).'&bb='.str_replace("#","",$cfg['body_bgcolor']).'&d='.$cfg['dhtml'].'&station='.$station.'&backpath='.urlencode('../billing_tz/billing_tz_quotation.php').'&dept_nr='.$dept_nr);
+  	else
+  		header ( 'Location: ../ambulatory/amb_clinic_discharge.php'.URL_REDIRECT_APPEND.'&user_origin='.$user_origin.'&pn='.$encounter.'&pyear='.date("Y").'&pmonth='.date("n").'&pday='.date(j).'&tb='.str_replace("#","",$cfg['top_bgcolor']).'&tt='.str_replace("#","",$cfg['top_txtcolor']).'&bb='.str_replace("#","",$cfg['body_bgcolor']).'&d='.$cfg['dhtml'].'&station='.$station.'&backpath='.urlencode('../billing_tz/billing_tz_pending.php').'&dept_nr='.$dept_nr);
   	
   
 } 

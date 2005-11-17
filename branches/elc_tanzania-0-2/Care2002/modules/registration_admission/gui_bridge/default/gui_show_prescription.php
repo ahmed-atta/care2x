@@ -19,6 +19,15 @@ while($row=$result->FetchRow()){
 			if($billrow['amount']!=$row['dosage'])
 				$amount=$billrow['amount'];
 		}
+		if(!$amount>0)
+		{
+				$billresult = $bill_obj->GetElemsOfBillByPrescriptionNrArchive($row['nr']);
+				if($billrow=$billresult->FetchRow())
+				{
+					if($billrow['amount']!=$row['dosage'])
+						$amount=$billrow['amount'];
+				}
+		}
 	}
 
 ?>

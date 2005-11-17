@@ -405,7 +405,7 @@ class GuiSearchPerson {
 			$this->smarty->assign('LDLastName',$pagen->makeSortLink($LDLastName,'name_last',$oitem,$odir,$this->targetappend));
 			$this->smarty->assign('LDFirstName',$pagen->makeSortLink($LDFirstName,'name_first',$oitem,$odir,$this->targetappend));
 			$this->smarty->assign('LDBday',$pagen->makeSortLink($LDBday,'date_birth',$oitem,$odir,$this->targetappend));
-			$this->smarty->assign('LDZipCode',$pagen->makeSortLink($LDZipCode,'addr_zip',$oitem,$odir,$this->targetappend));
+			$this->smarty->assign('LDZipCode',$pagen->makeSortLink($LDFileNr,'addr_zip',$oitem,$odir,$this->targetappend));
 			if(!empty($this->targetfile)){
 				$this->smarty->assign('LDOptions',$LDOptions);
 			}
@@ -439,7 +439,7 @@ class GuiSearchPerson {
 					
 					$this->smarty->assign('sBday',formatDate2Local($zeile['date_birth'],$date_format));
 
-					$this->smarty->assign('sZipCode',$zeile['addr_zip']);
+					$this->smarty->assign('sZipCode',$zeile['selian_pid']);
 
 					if($withtarget){
 

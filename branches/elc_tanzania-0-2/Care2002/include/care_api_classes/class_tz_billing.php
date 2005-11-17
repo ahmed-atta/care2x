@@ -1,6 +1,7 @@
 <?PHP
 
 require_once($root_path.'include/care_api_classes/class_core.php');
+require_once($root_path.'include/care_api_classes/class_encounter.php');
 
 /**
 *  Billing methods for tanzania (the product-module is completely rewritten by Robert Meggle. 
@@ -803,6 +804,20 @@ class Bill extends Encounter {
 	
 	//------------------------------------------------------------------------------
 	
+  function GetElemsOfBillByPrescriptionNrArchive($nr) {
+  	global $db;
+  	$debug=FALSE;
+  	($debug) ? $db->debug=TRUE : $db->debug=FALSE;
+
+  
+  	$this->sql="SELECT * FROM ".$this->tbl_bill_archive_elements."
+					 WHERE prescriptions_nr = ".$nr;
+					 //echo $this->sql;
+		return $db->Execute($this->sql);
+	}
+	
+	//------------------------------------------------------------------------------
+	
   function GetBillByBatchNr($nr) {
   	global $db;
   	$debug=FALSE;
@@ -810,7 +825,8 @@ class Bill extends Encounter {
 
   
   	$this->sql="SELECT bill_number FROM care_test_request_chemlabor WHERE batch_nr=$nr";
-		return $db->Execute($this->sql)->FetchRow();
+  	$this->result= $db->Execute($this->sql);
+		return $this->result->FetchRow();
 	}
 	
 	//------------------------------------------------------------------------------
@@ -1113,7 +1129,7 @@ class Bill extends Encounter {
       			if ($edit_fields) 
       			{
       				echo '<td colspan="3">';
-      				echo '<a href="'.URL_APPEND.'&mode=allpaid&batch_nr='.$batch_nr.'&bill_nr='.$bill_nr.'">Pay all items at once now</a></td>';
+      				echo '<a href="'.URL_APPEND.'&mode=allpaid&user_origin='.$user_origin.'&batch_nr='.$batch_nr.'&bill_nr='.$bill_nr.'">Pay all items at once now</a></td>';
       			}
       			else echo '<td>&nbsp;</td>';
       			echo "</tr>";
@@ -1399,7 +1415,7 @@ class Bill extends Encounter {
       			if ($edit_fields) 
       			{
       				echo '<td colspan="3">';
-      				echo '<a href="'.URL_APPEND.'&mode=allpaid&batch_nr='.$batch_nr.'&bill_nr='.$bill_nr.'">Pay all items at once now</a></td>';
+      				echo '<a href="'.URL_APPEND.'&mode=allpaid&user_origin='.$user_origin.'&batch_nr='.$batch_nr.'&bill_nr='.$bill_nr.'">Pay all items at once now</a></td>';
       			}
       			else echo '<td>&nbsp;</td>
       				<td>&nbsp;</td>';
@@ -1755,7 +1771,7 @@ function delete_bill_element($bill_elem_number) {
 			$edif_fields = 0 -> (default)
 			$edit_fields != 0 -> All values editable
 		*/
-		global $db;
+		global $db, $user_origin;
 		
   	echo '
   	<table width="800" border="1">
@@ -1836,7 +1852,7 @@ function delete_bill_element($bill_elem_number) {
          if ($printout==FALSE) {
     			 if (!$show_printout_button) echo '<a href="javascript:printOut_'.$bills['nr'].'()"><img src="../../gui/img/control/default/en/en_printout.gif" border=0 align="absmiddle" width="99" height="24" alt="Print this form"></a> ';
     			 
-    			 if ($edit_fields) echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../../gui/img/common/default/achtung.gif"> &nbsp;&nbsp;&nbsp; To transfere this pending bill into the archive: <a href="billing_tz_pending.php?&mode=done&bill_number='.$bills['nr'].'"><img src="../../gui/img/control/default/en/en_done.gif" border=0 align="absmiddle" width="75" height="24" alt="It큦 done! Move the form to the archive"></a> OR <a href="billing_tz_pending.php?&mode=done&discharge=true&encounter='.$encounter_nr.'&bill_number='.$bills['nr'].'"><img src="../../gui/img/control/default/en/en_done_and_discharge.gif" border=0 align="absmiddle" width="175" height="24" alt="It큦 done! Move the form to the archive and discharge our patient"></a>&nbsp;&nbsp;&nbsp;<img src="../../gui/img/common/default/achtung.gif">';
+    			 if ($edit_fields) echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../../gui/img/common/default/achtung.gif"> &nbsp;&nbsp;&nbsp; To transfere this pending bill into the archive: <a href="billing_tz_pending.php?&mode=done&user_origin='.$user_origin.'&bill_number='.$bills['nr'].'"><img src="../../gui/img/control/default/en/en_done.gif" border=0 align="absmiddle" width="75" height="24" alt="It큦 done! Move the form to the archive"></a> OR <a href="billing_tz_pending.php?&mode=done&discharge=true&encounter='.$encounter_nr.'&user_origin='.$user_origin.'&bill_number='.$bills['nr'].'"><img src="../../gui/img/control/default/en/en_done_and_discharge.gif" border=0 align="absmiddle" width="175" height="24" alt="It큦 done! Move the form to the archive and discharge our patient"></a>&nbsp;&nbsp;&nbsp;<img src="../../gui/img/common/default/achtung.gif">';
     			 if (!$edit_fields) echo '<a href="billing_tz_edit.php?batch_nr='.$batch_nr.'&billnr='.$bills['nr'].'"><img src="../../gui/img/control/default/en/en_auswahl2.gif" border=0 align="absmiddle" width="120" height="24"></a>';
     		 }
          echo '</td>
@@ -1868,8 +1884,8 @@ function delete_bill_element($bill_elem_number) {
       $CARE_TZ_BILLING_ARCHIVED=TRUE;
 
     $this->sql = "INSERT INTO care_tz_billing_archive_elem 
-                      (`nr`,`date_change`, `is_labtest`, `is_medicine`, `is_comment`, `is_paid`, `amount`, `price`, `description`, `item_number`)	  
-                  SELECT `nr`,`date_change`, `is_labtest`, `is_medicine`, `is_comment`, `is_paid`, `amount`, `price`, `description`, `item_number` FROM care_tz_billing_elem WHERE `nr`=".$bill_number;
+                      (`nr`,`date_change`, `is_labtest`, `is_medicine`, `is_comment`, `is_paid`, `amount`, `price`, `description`, `item_number`, `prescriptions_nr`)	  
+                  SELECT `nr`,`date_change`, `is_labtest`, `is_medicine`, `is_comment`, `is_paid`, `amount`, `price`, `description`, `item_number`, `prescriptions_nr` FROM care_tz_billing_elem WHERE `nr`=".$bill_number;
     $this->result=$db->Execute($this->sql);
 
     if ($db->Insert_ID())

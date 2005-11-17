@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.0, created on 2005-08-15 15:17:43
+<?php /* Smarty version 2.6.0, created on 2005-11-15 09:52:39
          compiled from laboratory/submenu_lab.tpl */ ?>
 			<blockquote>
 			<TABLE cellSpacing=0  width=600 class="submenu_frame" cellpadding="0">
@@ -185,17 +185,7 @@ unset($_smarty_tpl_vars);
 							<TD><?php echo $this->_tpl_vars['LDTestParametersTxt']; ?>
 </TD>
 						</tr>
-						<?php $_smarty_tpl_vars = $this->_tpl_vars;
-$this->_smarty_include(array('smarty_include_tpl_file' => "common/submenu_row_spacer.tpl", 'smarty_include_vars' => array()));
-$this->_tpl_vars = $_smarty_tpl_vars;
-unset($_smarty_tpl_vars);
- ?>
-						<TR>
-							<TD class="submenu_item" width=35% ><nobr><?php echo $this->_tpl_vars['LDPrescriptionLink']; ?>
-</nobr></TD>
-							<TD><?php echo $this->_tpl_vars['LDPrescriptionLinkTxt']; ?>
-</TD>
-						</tr>
+
 
 					</TBODY>
 					</TABLE>

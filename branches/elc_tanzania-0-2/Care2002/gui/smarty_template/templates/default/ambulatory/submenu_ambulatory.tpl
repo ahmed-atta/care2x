@@ -12,10 +12,10 @@
 		{{$s1SubMenu}}
 	</td>
     <td width=50%>
-		{{$s2SubMenu}}
+		{{$s11SubMenu}}
 	</td>
   </tr>
-
+<!--
 	<tr>
     <td width=50%>
 		{{$s3SubMenu}}
@@ -24,7 +24,7 @@
 		{{$s4SubMenu}}
 	</td>
   </tr>
-
+-->
 	<tr>
     <td width=50%>
 		{{$s5SubMenu}}
@@ -49,14 +49,15 @@
 		{{$s10SubMenu}}
 	</td>
   </tr>
+  <!--
 	<tr>
     <td width=50%>
-		{{$s11SubMenu}}
+		{{$s2SubMenu}}
 	</td>
     <td width=50%>
 		{{$s12SubMenu}}
 	</td>
-  </tr>
+  </tr>-->
 </table>
 <a href="{{$breakfile}}"><img {{$gifClose2}} alt="{{$LDCloseAlt}}" {{$dhtml}}></a>
 </blockquote>

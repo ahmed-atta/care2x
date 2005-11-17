@@ -488,17 +488,18 @@ function rx(){
 		echo '</td></nobr>
 		</tr>
 		<tr bgcolor="#696969" ><td colspan="3" ><nobr>
-		<input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-kurve.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDFeverCurve.'">
-		<input type="button" onClick="javascript:enlargewin();window.location.href=\''.$root_path.'main/diagnostics-report-start.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'&header='.$result['name_last'].',+'.$result['name_first'].'+'.formatDate2Local($result['date_birth'],$date_format).'\'" value="'.$LDReports.'"><br>
+		<!--<input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-kurve.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDFeverCurve.'">-->
+		<input type="button" onClick="javascript:enlargewin();window.location.href=\''.$root_path.'main/diagnostics-report-start.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'&header='.$result['name_last'].',+'.$result['name_first'].'+'.formatDate2Local($result['date_birth'],$date_format).'\'" value="'.$LDReports.'">
 		';
 
 
     // RM: Original DRG-Button:
 		//echo '<input type="button" onClick="javascript:openDRGComposite()" value="'.$LDDRG.'">';
 		// RM: Customized Diagnostic button:
-		echo '<input type="button" onClick="window.location.href=\''.$root_path.'modules/diagnostics_tz/icd10_quicklist.php'.URL_REDIRECT_APPEND.'$sid='.$SID.'&encounter_nr='.$pn.'&lang=en&ntid=false&externalcall=true&target=search&1=1&ispopup=true&backpath_diag='.urlencode($_SERVER["PHP_SELF"].URL_APPEND.'&pn='.$pn).'\'" value="Diagnoses">';
+		echo '<input type="button" onClick="window.location.href=\''.$root_path.'modules/diagnostics_tz/icd10_quicklist.php'.URL_REDIRECT_APPEND.'$sid='.$SID.'&encounter_nr='.$pn.'&lang=en&ntid=false&externalcall=true&target=search&1=1&ispopup=true&backpath_diag='.urlencode($_SERVER["PHP_SELF"].URL_APPEND.'&pn='.$pn).'\'" value="Diagnoses"><br>';
 		
 		echo '
+		<input type="button" onClick="javascript:window.location.href=\''.$root_path.'modules/nursing/nursing-station-patientdaten-doconsil-chemlabor.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&user_origin='.$user_origin.'&target=chemlabor&noresize=1&edit='.$edit.'\'" value="Lab requests">
 		<input type="button" onClick="javascript:window.location.href=\''.$root_path.'modules/laboratory/labor_datalist_noedit.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&user_origin='.$user_origin.'&edit='.$edit.'\'" value="'.$LDLabReports.'">
 		<input type="button" onClick="window.location.href=\''.$root_path.'modules/registration_admission/show_prescription.php'.URL_REDIRECT_APPEND.'$sid='.$SID.'&pn='.$pn.'&lang=en&ntid=false&externalcall=true&target=search&1=1\'" value="Prescriptions">';
 		
