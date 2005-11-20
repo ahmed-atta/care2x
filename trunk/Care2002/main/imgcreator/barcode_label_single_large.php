@@ -123,9 +123,11 @@ else
     $addr=explode("\r\n",$result['address']);
 
     if($lang=="de") $result['sex']=strtr($result['sex'],"mfMF","mwMW");
+    if($lang=="tr") $result['sex']=strtr($result['sex'],"mfMF","ekEK");
     
 	# Load the image generation script based on the language
 	if($lang=='ar'||$lang=='fa') include($root_path.'main/imgcreator/inc_label_single_large_ar.php');
+	if($lang=='tr') include($root_path.'main/imgcreator/inc_label_single_large_tr.php');
 		else include($root_path.'main/imgcreator/inc_label_single_large.php');
 /*
 }

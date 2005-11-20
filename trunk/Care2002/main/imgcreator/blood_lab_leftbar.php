@@ -42,6 +42,9 @@ if($ttf_render){
 	if($lang=='ar' || $lang=='fa'){// Modified on ( 22/01/2004) By Walid Fathalla
     	include_once($root_path.'include/inc_ttf_ar2uni.php');//To actvate function of show arabic
 		ImageTTFText($im,14,90,16,390,$black,$arial,ar2uni($str_print));
+	}else if($lang=='tr'){
+    	include_once($root_path.'include/inc_ttf_tr2uni.php');//To actvate function of show arabic
+		ImageTTFText($im,14,90,16,390,$black,$arial,tr2uni($str_print));
 	}else{
 		ImageTTFText($im,14,90,16,390,$black,$arial,$str_print);
 	}

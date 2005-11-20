@@ -76,8 +76,10 @@ header ('Content-type: image/png');
 	$full_en=$en;
 	
     if($lang=='de') $result['sex']=strtr($result['sex'],'mfMF','mwMW');
+    if($lang=='tr') $result['sex']=strtr($result['sex'],'mfMF','ekEK');
 
 	# Load the image generator according to the language version
 	if($lang=='ar'||$lang=='fa') include($root_path.'main/imgcreator/inc_wristband_ar.php');
+	if($lang=='tr') include($root_path.'main/imgcreator/inc_wristband_tr.php');
 		else include($root_path.'main/imgcreator/inc_wristband.php');
 ?>

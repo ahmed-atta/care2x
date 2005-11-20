@@ -92,9 +92,11 @@ else
 		                      $result['encounter_class']=$LDStationary;
 		}
 			
+    if($lang=='tr') $result['sex']=strtr($result['sex'],'mfMF','ekEK');
     if($lang=='de') $result['sex']=strtr($result['sex'],'mfMF','mwMW');
 	
 	# Load the image generation script based on the language
+	if($lang=='tr') include($root_path.'main/imgcreator/inc_etik_tr.php');
 	if($lang=='ar'||$lang=='fa') include($root_path.'main/imgcreator/inc_etik_ar.php');
 		else include($root_path.'main/imgcreator/inc_etik.php');
 ?>

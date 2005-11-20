@@ -9,7 +9,7 @@ $ttf_render=FALSE;
 //$ttf_render=TRUE;
 
 # If the language is arabic or farsi, force TTF font to true
-if($lang=='ar'||$lang=='fa') $ttf_render=TRUE;
+if($lang=='ar'||$lang=='fa'||$lang=='tr') $ttf_render=TRUE;
 
 
 # Set the font type here
