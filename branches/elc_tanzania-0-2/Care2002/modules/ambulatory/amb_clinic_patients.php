@@ -375,8 +375,10 @@ if($rows){
 
 			if($edit){
 
+				/* MEROTECH:
+				Commented out for selian town clinic by Alexander Irro
 				$smarty->assign('sAdmitDataIcon','<a href="'.$root_path.'modules/registration_admission/aufnahme_pass.php'.URL_APPEND.'&target=search&fwd_nr='.$patient['encounter_nr'].'" title="'.$LDAdmissionData.' : '.$LDClk2Show.'"><img '.createComIcon($root_path,'pdata.gif','0','',TRUE).' alt="'.$LDAdmissionData.' : '.$LDClk2Show.'"></a>');
-
+				*/
 				$smarty->assign('sChartFolderIcon','<a href="javascript:getinfo(\''.$patient['encounter_nr'].'\')"><img '.createComIcon($root_path,'open.gif','0','',TRUE).' alt="'.$LDShowPatData.'"></a>');
 
 				$sBuffer = '<a href="javascript:getrem(\''.$patient['encounter_nr'].'\')"><img ';
@@ -387,7 +389,11 @@ if($rows){
 				$smarty->assign('sNotesIcon',$sBuffer);
 
 				$smarty->assign('sTransferIcon','<a href="javascript:Transfer(\''.$patient['encounter_nr'].'\')"><img '.createComIcon($root_path,'xchange.gif','0','',TRUE).' alt="'.$LDTransferPatient.'"></a>');
+				
+				/* MEROTECH:
+				Commented out for selian town clinic by Alexander Irro
 				$smarty->assign('sDischargeIcon','<a href="javascript:release(\''.$patient['encounter_nr'].'\')" title="'.$LDReleasePatient.'"><img '.createComIcon($root_path,'bestell.gif','0','',TRUE).' alt="'.$LDReleasePatient.'"></a>');
+				*/
 			}
 
 			# Create the rows using ward_occupancy_list_row.tpl template

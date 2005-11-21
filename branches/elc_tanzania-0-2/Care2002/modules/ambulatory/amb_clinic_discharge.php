@@ -24,6 +24,7 @@ $thisfile=basename(__FILE__);
 # Load date formatter 
 require_once($root_path.'include/inc_date_format_functions.php');
 require_once($root_path.'include/care_api_classes/class_encounter.php');
+require_once($root_path.'include/care_api_classes/class_tz_diagnostics.php');
 $enc_obj=new Encounter;
 	
 if($enc_obj->loadEncounterData($pn)){		
@@ -223,9 +224,17 @@ $smarty->assign('LDDate',$LDDate);
 	}
 	$smarty->assign('sDischargeTypes',$sTemp);
 
-	$smarty->assign('LDNotes',$LDNotes);
-
-	if($released) $smarty->assign('info',nl2br($info));
+	$obj_diag = New Diagnostics;
+	$case_arr = $obj_diag->GetAllCasesFromPIDbyDate($enc_obj->PID());
+	$smarty->assign('LDNotes','Last Diagnosis');
+	while(list($x,$v) = each($case_arr))
+	{
+		$case_data = $obj_diag->GetCase($x);
+		$case_list = $case_list.'<b>'.date('Y-m-d',$case_data['timestamp']).':</b> '.$v.' - '.$obj_diag->get_icd10_description_from_code($v).'<br>';
+		if($casecount++>3) break;
+	}
+	if(!$case_list) $case_list = '--- NO DIAGNOSIS AVAILABLE ---';
+	$smarty->assign('diagnosis',nl2br($case_list));
 
 	$smarty->assign('LDNurse',$LDNurse);
 

@@ -56,7 +56,6 @@ require($root_path.'include/inc_2level_reset.php');
 
   $smarty->assign('LDNewData',"<a href=\"labor_datainput_pass.php?sid=$sid&lang=$lang\">$LDNewData</a>");
   $smarty->assign('LDEnterLabData',$LDEnterLabData);
-
   # Pathology lab submenu block
 
   $smarty->assign('LDPathLab',$LDPathLab);

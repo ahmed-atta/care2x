@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.0, created on 2004-07-06 02:04:08
+<?php /* Smarty version 2.6.0, created on 2005-11-21 14:27:48
          compiled from nursing/discharge_patient_form.tpl */ ?>
 
 <ul>
@@ -61,12 +61,8 @@
 			<td class="adm_item"><?php echo $this->_tpl_vars['LDNotes']; ?>
 :</td>
 			<td class="adm_input">
-				<?php if ($this->_tpl_vars['released']): ?>
-					<?php echo $this->_tpl_vars['info']; ?>
+				<?php echo $this->_tpl_vars['diagnosis']; ?>
 
-				<?php else: ?>
-					<textarea name="info" cols=40 rows=3></textarea>
-				<?php endif; ?>
 			</td>
 		</tr>
 		<tr>

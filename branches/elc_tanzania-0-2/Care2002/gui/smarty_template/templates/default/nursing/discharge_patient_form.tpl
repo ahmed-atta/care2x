@@ -45,11 +45,7 @@
 		<tr>
 			<td class="adm_item">{{$LDNotes}}:</td>
 			<td class="adm_input">
-				{{if $released}}
-					{{$info}}
-				{{else}}
-					<textarea name="info" cols=40 rows=3></textarea>
-				{{/if}}
+				{{$diagnosis}}
 			</td>
 		</tr>
 		<tr>

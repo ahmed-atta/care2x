@@ -38,7 +38,12 @@
 			</TBODY>
 			</TABLE>
 			<p>
-			<TABLE cellSpacing=0  width=600 class="submenu_frame" cellpadding="0">
+			<!--			
+			MEROTECH
+			Commented out for selian town clinic by Alexander Irro
+			
+			
+<TABLE cellSpacing=0  width=600 class="submenu_frame" cellpadding="0">
 			<TBODY>
 			<TR>
 				<TD>
@@ -117,7 +122,7 @@
 				</TD>
 			</TR>
 			</TBODY>
-			</TABLE>
+			</TABLE> -->
 			<p>
 			<TABLE cellSpacing=0  width=600 class="submenu_frame" cellpadding="0">
 			<TBODY>

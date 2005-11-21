@@ -80,6 +80,7 @@ A:visited:hover {color: #cc0033;}
 		<!-- Left block for the request list  -->
 		    <td> <br>
               <br>
+              <a href="billing_tz_quotation.php">Go to quotations</a>
 <?php 
   
   require($root_path.'include/inc_billing_pending_lister_fx.php'); 

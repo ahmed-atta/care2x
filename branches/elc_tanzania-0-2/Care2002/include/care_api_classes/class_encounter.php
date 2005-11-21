@@ -2278,6 +2278,10 @@ class Encounter extends Notes {
 			} else { return FALSE; }
 		} else { return FALSE; }	
 	}
+
+
+
+
 	/**
 	* createWaitingOutpatientList() creates a list of outpatients waiting to be admitted in the clinic
 	*
