@@ -13422,7 +13422,6 @@ INSERT INTO care_icd10_tr VALUES ('Z04.4 ',' MUAYENE/DEÐERLENDÝRME , TECAVÜZ VE 
 INSERT INTO care_icd10_tr VALUES ('Z04.5 ',' MUAYENE/DEÐERLENDÝRME , DAYAK SONRASINDA YAPILAN MUAYENE VE GÖZLEM ','','','','','','',' 4 ','','','');
 INSERT INTO care_icd10_tr VALUES ('Z04.6 ',' MUAYENE/DEÐERLENDÝRME , GENEL PSÝKÝYATRÝK MUAYENE, ÝDARECÝ TARAFINDAN ÝSTENÝLMÝÞ ','','','','','','',' 4 ','','','');
 INSERT INTO care_icd10_tr VALUES ('Z04.8 ',' MUAYENE/DEÐERLENDÝRME , DÝÐER TANIMLANMIÞ NEDENLER ÝÇÝN YAPILAN MUAYENE VE GÖZLEM ','','','','','','',' 4 ','','','');
-INSERT INTO care_icd10_tr VALUES ('Z04.8 ',' Kontrol ','','','','','','',' 4 ','','','');
 INSERT INTO care_icd10_tr VALUES ('Z04.9 ',' MUAYENE/DEÐERLENDÝRME , TANIMLANMAMIÞ NEDEN ÝÇÝN YAPILAN MUAYENE VE GÖZLEM ','','','','','','',' 4 ','','','');
 INSERT INTO care_icd10_tr VALUES ('Z08 ',' TAKÝP , HABÝS UR TEDAVÝSÝNDEN SONRA YAPILAN TAKÝP MUAYENESÝ ','','','','','','',' 3 ','','','');
 INSERT INTO care_icd10_tr VALUES ('Z08.0 ',' TAKÝP , HABÝS UR CERRAHÝSÝNDEN SONRA YAPILAN TAKÝP MUAYENESÝ ','','','','','','',' 4 ','','','');
