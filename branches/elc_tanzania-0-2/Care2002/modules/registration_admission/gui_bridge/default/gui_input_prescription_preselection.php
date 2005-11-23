@@ -19,6 +19,8 @@ if (!empty($show)) { // In case something goes wrong, then do nothing!
     $db_drug_filter="mems_drug_list";
   
   $drug_list = $pres_obj->getDrugList($db_drug_filter, 0);
+  
+  
   if ($filter=='pediadric') 
     $drug_list = $pres_obj->getDrugList($db_drug_filter, "is_pediatric");
   elseif ($filter=='adult') 
@@ -27,7 +29,8 @@ if (!empty($show)) { // In case something goes wrong, then do nothing!
     $drug_list = $pres_obj->getDrugList($db_drug_filter, "is_other");
   elseif ($filter=='consumable') 
     $drug_list = $pres_obj->getDrugList($db_drug_filter, "is_consumable");
-} else {
+} 
+else {
   $drug_list = $pres_obj->getDrugList("mems_drug_list", 0);
 }
 ?>
@@ -44,14 +47,27 @@ if (!empty($show)) { // In case something goes wrong, then do nothing!
       if (isset($externalcall))
         $EXTERNAL_CALL_PARAMETER="&externalcall=".$externalcall;
     ?>
-    <td <? $pres_obj->DisplayBGColor($activated_tab, 'druglist') ?>><div align="center"><input type="button" name="show" value="Drug List" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=Drug List<?php echo $EXTERNAL_CALL_PARAMETER;?>')"></div></td>
-    <td <? $pres_obj->DisplayBGColor($activated_tab, 'Supplies') ?>><div align="center"><input type="button" name="show" value="Supplies" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=Supplies<?php echo $EXTERNAL_CALL_PARAMETER;?>')"></div></td>
-    <td <? $pres_obj->DisplayBGColor($activated_tab, 'supplies-lab') ?>><div align="center"><input type="button" name="show" value="Special Supplies" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=Supplies-Lab<?php echo $EXTERNAL_CALL_PARAMETER;?>')"></div></td>
-    <td <? $pres_obj->DisplayBGColor($activated_tab, 'special-others') ?><div align="center"><input type="button" name="show" value="Special drugs" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=Special Others<?php echo $EXTERNAL_CALL_PARAMETER;?>')"></div></td>
+    <td colspan="4">
+    	<table border="0" width="100%" cellpadding="0" cellspacing="0">
+    		<tr>
+			    <td <? $pres_obj->DisplayBGColor($activated_tab, 'druglist') ?>><div align="center"><a href="#" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=Drug List<?php echo $EXTERNAL_CALL_PARAMETER;?>')"><img border="0" src="../../gui/img/common/default/prescription_drugs.gif" alt="Drug List"></a></div></td>
+			    <td <? $pres_obj->DisplayBGColor($activated_tab, 'Supplies') ?>><div align="center"><a href="#" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=Supplies<?php echo $EXTERNAL_CALL_PARAMETER;?>')"><img border="0" src="../../gui/img/common/default/prescription_supplies.gif" alt="Supplies"></a></div></td>
+			    <td <? $pres_obj->DisplayBGColor($activated_tab, 'supplies-lab') ?>><div align="center"><a href="#" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=Supplies-Lab<?php echo $EXTERNAL_CALL_PARAMETER;?>')"><img border="0" src="../../gui/img/common/default/prescription_specialsupplies.gif" alt="Special Supplies"></a></div></td>
+			    <td <? $pres_obj->DisplayBGColor($activated_tab, 'special-others') ?><div align="center"><a href="#" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=Special Others<?php echo $EXTERNAL_CALL_PARAMETER;?>')"><img border="0" src="../../gui/img/common/default/prescription_specialdrugs.gif" alt="Special Drugs"></a></div></td>
+			    <td <? $pres_obj->DisplayBGColor($activated_tab, 'xray') ?><div align="center"><a href="#" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=xray<?php echo $EXTERNAL_CALL_PARAMETER;?>')"><img border="0" src="../../gui/img/common/default/prescription_xray.gif" alt="X-Ray"></a></div></td>
+			    <td <? $pres_obj->DisplayBGColor($activated_tab, 'service') ?><div align="center"><a href="#" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=service<?php echo $EXTERNAL_CALL_PARAMETER;?>')"><img border="0" src="../../gui/img/common/default/prescription_service.gif" alt="Service/Registration"></a></div></td>
+			    <td <? $pres_obj->DisplayBGColor($activated_tab, 'smallop') ?><div align="center"><a href="#" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=smallop<?php echo $EXTERNAL_CALL_PARAMETER;?>')"><img border="0" src="../../gui/img/common/default/prescription_smallop.gif" alt="Small OP"></a></div></td>
+			    <td <? $pres_obj->DisplayBGColor($activated_tab, 'bigop') ?><div align="center"><a href="#" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=bigop<?php echo $EXTERNAL_CALL_PARAMETER;?>')"><img border="0" src="../../gui/img/common/default/prescription_bigop.gif" alt="Big OP"></a></div></td>
+    		</tr>
+    	</table>
+    </td>
   </tr>
   <tr>
     <br>
     <td colspan="4" bgcolor="#CAD3EC">
+    <?php if($activated_tab=='druglist' || $activated_tab == 'Supplies' || $activated_tab == 'supplies-lab' || $activated_tab == 'special-others')
+    {
+    	?>
       <table width="100%" border="0" align="center" bordercolor="#330066" cellpadding="0" cellspacing="0">      
       <tr>
         <td height="10">
@@ -95,6 +111,9 @@ if (!empty($show)) { // In case something goes wrong, then do nothing!
         </td>
       </tr>
       </table>
+      <?php
+    }
+      ?>
     </td>
   </tr>
   <tr>

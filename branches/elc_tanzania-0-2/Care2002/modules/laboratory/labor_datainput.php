@@ -35,75 +35,114 @@ $lab_obj=new Lab($encounter_nr);
 
 require($root_path.'include/inc_labor_param_group.php');
 						
-if(!isset($parameterselect)||$parameterselect=='') $parameterselect='1';
-$groups = $lab_obj->TestParams($parameterselect);
-if($groups)
+if(!isset($parameterselect)||$parameterselect=='') $parameterselect='all';
+if($parameterselect == 'all')
 {
-	while($g=$groups->FetchRow()){
-			$parameters[$g['id']] = $g['name'];
-
+	$result_tests = $lab_obj->GetTestsToDo($job_id);
+	if($row_tests = $result_tests->FetchRow())
+	{
+		parse_str($row_tests['parameters'], $arr_tasks);
+		while(list($x,$v) = each($arr_tasks))
+		{
+			$testdetails = $lab_obj->TestParamsDetails(substr($x,5,strlen($x)-6));
+			$parameters[substr($x,5,strlen($x)-6)] = $testdetails['name'];
+		}
 	}
+	$paramname='Requested tests';
 }
-$paramname=&$parametergruppe[$parameterselect];
-
+else
+{
+	$groups = $lab_obj->TestParams($parameterselect);
+	if($groups)
+	{
+		while($g=$groups->FetchRow()){
+				$parameters[$g['id']] = $g['name'];
+	
+		}
+	}
+	$paramname=&$parametergruppe[$parameterselect];
+}
 
 # Load the date formatter
 include_once($root_path.'include/inc_date_format_functions.php');
     
 if($mode=='save'){
-	$nbuf=array();
+	//$nbuf=array();
 	# Prepare parameter values and serialize
 	while(list($x,$v)=each($parameters))
 	{
 		if(isset($HTTP_POST_VARS['_task'.$x.'_'])&&!empty($HTTP_POST_VARS['_task'.$x.'_'])){
-		 $nbuf[$x]=$HTTP_POST_VARS['_task'.$x.'_'];
-		 $addbuf[$x]=$HTTP_POST_VARS['_add'.$x.'_'];
+			$whichgroup = $lab_obj->TestGroupByID($x);
+		 	$nbuf[$whichgroup['parent']][$x]=$HTTP_POST_VARS['_task'.$x.'_'];
+		 	$addbuf[$whichgroup['parent']][$x]=$HTTP_POST_VARS['_add'.$x.'_'];
 		}
 	}
-	$dbuf['group_id']=$parameterselect;
-	$dbuf['serial_value']=serialize($nbuf);
-	$dbuf['job_id']=$job_id;
-	$dbuf['encounter_nr']=$encounter_nr;
-	$dbuf['add_value']=serialize($addbuf);
-	//$dbuf['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-	if($allow_update){
-		$dbuf['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-		$dbuf['modify_time']=date('YmdHis');
+	while(list($x,$v) = each($nbuf))
+	{
 
-		# Recheck the date, ! bug pat	$dbuf['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];ch
-		if($HTTP_POST_VARS['std_date']==DBF_NODATE) $dbuf['test_date']=date('Y-m-d');
-	
-		$lab_obj->setDataArray($dbuf);
-		# set update pointer
-		$lab_obj->setWhereCondition("batch_nr='$batch_nr'");
-		if($lab_obj->updateDataFromInternalArray($batch_nr)){
-			$saved=true;
-		}else{echo "<p>".$lab_obj->getLastQuery()."$LDDbNoSave";}
-	
-	}else{
-		# Hide old job record if it exists
-		$lab_obj->hideResultIfExists($encounter_nr,$job_id,$parameterselect);
-		# Convert date to standard format
-		if(isset($std_date)){
-			if($HTTP_POST_VARS['std_date']==DBF_NODATE) $dbuf['test_date']=date('Y-m-d');
-				else 	$dbuf['test_date']=$HTTP_POST_VARS['std_date'];
-		}else{
-			$dbuf['test_date']=formatDate2STD($HTTP_POST_VARS['test_date'],$date_format);
+		$dbuf['group_id']=$x;
+		$dbuf['serial_value']=serialize($v);
+		$dbuf['job_id']=$job_id;
+		$dbuf['encounter_nr']=$encounter_nr;
+		$dbuf['add_value']=serialize($addbuf[$x]);
+		/*while(list($index,$value) = each($v))
+		{
+			echo $index.' - '.$value.' - '.$dbuf['serial_value'].'<br>';
 		}
-		$dbuf['test_time']=date('H:i:s');
+		die(); */
+		//$dbuf['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		if($result=&$lab_obj->getResult($job_id,$dbuf['group_id'])){
+			$row=$result->FetchRow();
+			$pdata=unserialize($row['serial_value']);
+			$adddata=unserialize($row['add_value']);
+			$batch_nr = $row['batch_nr'];
+			$update=1;
+			$allow_update=true;
+
+		}else{
+			# disallow update if group does not exist yet
+			$allow_update=false;
+		}
+		if($allow_update){
+			$dbuf['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+			$dbuf['modify_time']=date('YmdHis');
+	
+			# Recheck the date, ! bug pat	$dbuf['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];ch
+			if($HTTP_POST_VARS['std_date']==DBF_NODATE) $dbuf['test_date']=date('Y-m-d');
 		
-		$dbuf['history']="Create ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
-		$dbuf['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
-		$dbuf['create_time']=date('YmdHis');
-		# Insert new job record
-		$lab_obj->setDataArray($dbuf);
-		if($lab_obj->insertDataFromInternalArray()){
-			//$dbuf.$sql." new insert <br>";
-			$pk_nr=$db->Insert_ID();
-            $batch_nr=$lab_obj->LastInsertPK('batch_nr',$pk_nr);
-			$saved=true;
-		}else{echo "<p>".$lab_obj->getLastQuery()."$LDDbNoSave";}	
+			$lab_obj->setDataArray($dbuf);
+			# set update pointer
+			$lab_obj->setWhereCondition("batch_nr='$batch_nr'");
+			if($lab_obj->updateDataFromInternalArray($batch_nr)){
+				$saved=true;
+			}else{echo "<p>".$lab_obj->getLastQuery()."$LDDbNoSave";}
+		
+		}else{
+			# Hide old job record if it exists
+			$lab_obj->hideResultIfExists($encounter_nr,$job_id,$parameterselect);
+			# Convert date to standard format
+			if(isset($std_date)){
+				if($HTTP_POST_VARS['std_date']==DBF_NODATE) $dbuf['test_date']=date('Y-m-d');
+					else 	$dbuf['test_date']=$HTTP_POST_VARS['std_date'];
+			}else{
+				$dbuf['test_date']=formatDate2STD($HTTP_POST_VARS['test_date'],$date_format);
+			}
+			$dbuf['test_time']=date('H:i:s');
+			
+			$dbuf['history']="Create ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
+			$dbuf['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+			$dbuf['create_time']=date('YmdHis');
+			# Insert new job record
+			$lab_obj->setDataArray($dbuf);
+			if($lab_obj->insertDataFromInternalArray()){
+				//$dbuf.$sql." new insert <br>";
+				$pk_nr=$db->Insert_ID();
+	            $batch_nr=$lab_obj->LastInsertPK('batch_nr',$pk_nr);
+				$saved=true;
+			}else{echo "<p>".$lab_obj->getLastQuery()."$LDDbNoSave";}	
+		}
 	}
+
 	# If save successful, jump to display values
 	if($saved){
 		include_once($root_path.'include/inc_visual_signalling_fx.php');
@@ -130,33 +169,43 @@ if($mode=='save'){
 	$adddata=array();
 	$update=0;
 	if($saved){
-		if($result=&$lab_obj->getBatchResult($batch_nr)){
-			$row=$result->FetchRow();
-			$pdata=unserialize($row['serial_value']);
-			$adddata=unserialize($row['add_value']);
-			$update=1;
 			$allow_update=true;
 		}
-	}else{
-		if($result=&$lab_obj->getResult($job_id,$parameterselect)){
-			$row=$result->FetchRow();
-			$pdata=unserialize($row['serial_value']);
-			$adddata=unserialize($row['add_value']);
-			$update=1;
-			$allow_update=true;
-
-		}else{
+		$resultcounter=0;
+		$result=&$lab_obj->getResult($job_id,$parameterselect);
+		if($result)
+		{
+			while($row=$result->FetchRow()){
+				$temp_pdata[$resultcounter++]=unserialize($row['serial_value']);
+				$temp_adddata[$resultcounter++]=unserialize($row['add_value']);
+				$update=1;
+				$allow_update=true;
+			}
+			while(list($x,$v) = each($temp_pdata))
+			{
+				while(list($inner_x, $inner_v) = each($v))
+				{
+					$pdata[$inner_x] = $inner_v;
+				}
+			}
+			while(list($x,$v) = each($temp_adddata))
+			{
+				while(list($inner_x, $inner_v) = each($v))
+				{
+					$adddata[$inner_x] = $inner_v;
+				}
+			}
+		}
+		
+		if(!$resultcounter)
+		{
 			# disallow update if group does not exist yet
 			$allow_update=false;
 		}
-	}
 	
 	//echo $lab_obj->getLastQuery();
 			
-	# Get the test test groups
-	$tgroups=&$lab_obj->TestGroups();
-	# Get the test parameter values
-	$tparams=$lab_obj->TestParams($parameterselect);
+
 
 	# Set the return file
 	if(isset($job_id)&&$job_id){
@@ -170,6 +219,26 @@ if($mode=='save'){
 	}
 }
 
+
+	# Get the test test groups
+	$tgroups=&$lab_obj->TestGroups();
+	# Get the test parameter values
+	if($parameterselect != 'all')
+	{
+		$tparams=$lab_obj->TestParams($parameterselect);
+		while($tp=$tparams->FetchRow())
+		{
+			$testarray[$counter++] = $tp;
+		}
+	}
+	else
+	{
+		$counter=0;
+		while(list($x,$v) = each($parameters))
+		{
+			$testarray[$counter++] = $lab_obj->TestParamsGroupsDetails($x);
+		}
+	}
 // echo "from table ".$linecount;
 if($saved || $row['test_date']) $std_date=$row['test_date'];
 
@@ -337,7 +406,7 @@ echo '
 $rowlimit=0;
 //$count=$paramnum;
 
-if($tparams)
+if($testarray)
 {
 $teststodo=&$lab_obj->GetTestsToDo($job_id);
 if($t=$teststodo->FetchRow()){
@@ -348,7 +417,7 @@ if($t=$teststodo->FetchRow()){
 			$tests_arr[strtok(substr($x,5),"_")] = $v;
 		}
 }
-while($tp=$tparams->FetchRow()){
+while(list($x,$tp) = each($testarray)){
 if($tp['is_enabled']==1)
 {
 	echo '<tr><td';
@@ -449,7 +518,9 @@ ob_end_clean();
 $smarty->assign('sSaveParamHiddenInputs',$sTemp);
 
 # Assign parameter group selector box
-$sTemp = '<select name="parameterselect" size=1>';
+$sTemp = '<select onChange="javascript:this.form.submit();" name="parameterselect" size=1><option value="all"';
+if($parameterselect=='all') $sTemp.=' selected';
+$sTemp .='>Requested tests</option>';
 
 while($tg=$tgroups->FetchRow()){
 		$sTemp = $sTemp.'<option value="'.$tg['id'].'"';

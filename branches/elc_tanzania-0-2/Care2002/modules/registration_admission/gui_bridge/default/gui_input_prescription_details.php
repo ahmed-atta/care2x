@@ -44,7 +44,9 @@ function chkform(d) {
 <form method="POST" name="reportform<?PHP echo $i;?>">
 <?PHP
 if(!$nr)
+{
 	$item_array=$_SESSION['item_array'];
+}
 else
 {
 	$prescriptionitem = $pres_obj->GetPrescritptionItem($nr);
@@ -54,12 +56,28 @@ else
 }
 //echo "-->items in array: ".count($item_array)."<br>";#
 for ($i=0 ; $i<count($item_array) ; $i++) {
+$class = $pres_obj->GetClassOfItem($item_array[$i]);
+if($nexttime)
+{
+	$prescriptionitem['dosage']="";
+	$nexttime=false;
+}
+if($class=='mems_supplies' || $class=='mems_drug_list' || $class=='mems_special_others_list' || $class=='mems_supplies_laboratory')
+{
+	$caption_dosage = 'Total dose';
+}
+else
+{
+	$caption_dosage = 'Amount';
+	if(!$prescriptionitem['dosage']) $prescriptionitem['dosage']=1;
+	$nexttime=true;
+}
 ?>
 <font class="adm_div"><?php echo $pres_obj->GetNameOfItem($item_array[$i]); ?></font>
  <table border=0 cellpadding=2 width=100%>
   
    <tr bgcolor="#f6f6f6">
-     <td><FONT SIZE=-1  FACE="Arial" color="#000066">Total dose</td>
+     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $caption_dosage; ?></td>
      <td><input type="text" name="arr_dosage[<?PHP echo $i; ?>]" size=50 maxlength=60 value="<?php echo $prescriptionitem['dosage'];?>" onBlur="chkform(this)"></td>
    </tr>
    <tr bgcolor="#f6f6f6">

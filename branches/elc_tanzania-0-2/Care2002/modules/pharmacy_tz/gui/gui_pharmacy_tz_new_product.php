@@ -32,7 +32,7 @@ A:visited:hover {color: #cc0033;}
 </style>
 
 </HEAD>
-<BODY bgcolor=#ffffff link=#000066 alink=#cc0000 vlink=#000066 onLoad="document.inputform.bestellnum.focus()" >
+<BODY bgcolor=#ffffff link=#000066 alink=#cc0000 vlink=#000066>
 
 <table width=100% border=0 cellspacing=0 height=100%>
 <tbody class="main">
@@ -116,7 +116,7 @@ A:visited:hover {color: #cc0033;}
               <tr> 
                 <td align=right width=103>&nbsp;</td>
                 <td align=right width=27>&nbsp;</td>
-                <td align=right width=206>item classificatoion </td>
+                <td align=right width=206>item classification </td>
                 <td>
                 <?php 
                 
@@ -128,6 +128,10 @@ A:visited:hover {color: #cc0033;}
                     <option value="mems_supplies" <?PHP if ($item_classification=="supplies") echo "selected";?>>supplies</option>
                     <option value="mems_supplies_laboratory" <?PHP if ($item_classification=="supplies lab.") echo "selected";?>>supplies Laboratory</option>
                     <option value="mems_special_others_list" <?PHP if ($item_classification=="special others") echo "selected";?>>special others</option>
+                    <option value="mems_xray" <?PHP if ($item_classification=="x-ray") echo "selected";?>>x-ray</option>
+                    <option value="mems_service" <?PHP if ($item_classification=="service") echo "selected";?>>service</option>
+                    <option value="mems_smallop" <?PHP if ($item_classification=="small op") echo "selected";?>>small op</option>
+                    <option value="mems_bigop" <?PHP if ($item_classification=="big op") echo "selected";?>>big op</option>
                 </select>
                 <?php } ?>
                 </td>

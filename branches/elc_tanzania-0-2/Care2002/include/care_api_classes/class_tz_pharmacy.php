@@ -117,7 +117,7 @@ class Product extends Core {
   
   function get_array_search_results($keyword){
     global $db;
-    $debug=FALSE;
+    $debug=false;
     ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
     
     // hit´s of 100 per cent
@@ -127,11 +127,14 @@ class Product extends Core {
                       `item_id`,100 AS plausibility
                FROM ".$this->tbl_product_items." 
                WHERE 
-                      `item_id` = '".$keyword."'
-                     OR
-                      `item_description` = '".$keyword."'
-                     OR 
-                      `item_full_description` = '".$keyword."'";
+                      (`item_id` LIKE '".$keyword."' OR `item_description` LIKE '".$keyword."' OR `item_full_description` LIKE '".$keyword."')
+                      OR
+                      (`item_id` LIKE '%".$keyword."' OR `item_description` LIKE '%".$keyword."' OR `item_full_description` LIKE '%".$keyword."')
+                      OR
+                      (`item_id` LIKE '%".$keyword."%' OR `item_description` LIKE '%".$keyword."%' OR `item_full_description` LIKE '%".$keyword."%')
+                      OR
+											(`item_id` LIKE '".$keyword."%' OR `item_description` LIKE '".$keyword."%' OR `item_full_description` LIKE '".$keyword."%')
+                      ";
     $db->Execute($this->sql);
     
     if ($debug) {
@@ -332,6 +335,14 @@ class Product extends Core {
         return "supplies lab.";
       if ($this->elem[0]=="mems_special_others_list")
         return "special others";
+      if ($this->elem[0]=="mems_xray")
+        return "x-ray";
+      if ($this->elem[0]=="mems_service")
+        return "service";
+      if ($this->elem[0]=="mems_smallop")
+        return "small op";
+      if ($this->elem[0]=="mems_bigop")
+        return "big op";
       
       //return $this->elem[0];
     }

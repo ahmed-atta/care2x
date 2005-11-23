@@ -27,6 +27,22 @@ if (!empty($show)) {
       $activated_tab='special-others';
       $db_drug_filter='mems_special_others_list';
     }
+  if ($show=='xray') {
+      $activated_tab='xray';
+      $db_drug_filter='mems_xray';
+    }
+  if ($show=='service') {
+      $activated_tab='service';
+      $db_drug_filter='mems_service';
+    }
+  if ($show=='smallop') {
+      $activated_tab='smallop';
+      $db_drug_filter='mems_smallop';
+    }
+  if ($show=='bigop') {
+      $activated_tab='bigop';
+      $db_drug_filter='mems_bigop';
+    }
   
 
   if ($show=='insert') {

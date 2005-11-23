@@ -258,8 +258,10 @@ class Lab extends Encounter {
 	function getResult($job_id,$grp_id,$enc_nr=''){
 		global $db;
 		if(!$this->internResolveEncounterNr($enc_nr)) return FALSE;
-
-		$this->sql="SELECT * FROM $this->tb_find_chemlab WHERE encounter_nr='$this->enc_nr' AND job_id='$job_id' AND group_id='$grp_id' AND status<>'hidden'";
+		if($grp_id=='all')
+			$this->sql="SELECT * FROM $this->tb_find_chemlab WHERE encounter_nr='$this->enc_nr' AND job_id='$job_id' AND status<>'hidden'";
+		else
+			$this->sql="SELECT * FROM $this->tb_find_chemlab WHERE encounter_nr='$this->enc_nr' AND job_id='$job_id' AND group_id='$grp_id' AND status<>'hidden'";
 		if($this->result=$db->Execute($this->sql)){
 		    if($this->rec_count=$this->result->RecordCount()) {
 				return $this->result;
@@ -324,6 +326,19 @@ class Lab extends Encounter {
 		if(empty($id)) $cond='';
 			else $cond="WHERE id='$id'";
 		$this->sql="SELECT * FROM $this->tb_test_param $cond";
+		if($this->tparamsdetails=$db->Execute($this->sql)){
+		    if($this->rec_count=$this->tparamsdetails->RecordCount()) {
+				return $this->tparamsdetails->FetchRow();
+			} else {return FALSE;}
+		}else {return FALSE;}
+	}
+	
+	function TestParamsGroupsDetails($id=''){
+		global $db;
+		if(empty($id)) $cond='';
+			else $cond="AND p.id='$id'";
+		$this->sql="SELECT p.*, g.is_enabled FROM $this->tb_test_param p, $this->tb_test_group g WHERE
+		p.id = g.id	$cond";
 		if($this->tparamsdetails=$db->Execute($this->sql)){
 		    if($this->rec_count=$this->tparamsdetails->RecordCount()) {
 				return $this->tparamsdetails->FetchRow();

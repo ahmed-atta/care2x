@@ -20,7 +20,7 @@ define('NO_2LEVEL_CHK',1);
 require($root_path.'include/inc_front_chain_lang.php');
 
 require_once($root_path.'include/care_api_classes/class_tz_pharmacy.php');
-$debug=FALSE;
+$debug=false;
 
 if ($debug) {
   function print_debug_info($name, $value) {

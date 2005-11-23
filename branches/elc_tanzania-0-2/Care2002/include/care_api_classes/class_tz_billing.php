@@ -1346,7 +1346,7 @@ class Bill extends Encounter {
   			<tr>
   				<td valign="top" width="100">';
   					//echo 'Bill Nr. '.$bills['nr'].'</td><td>';
-  					echo '<p class="billing_topic"><br>Prescriptions</p> </td><td>';
+  					echo '<p class="billing_topic"><br>Prescriptions/Other</p> </td><td>';
       			
       			$billelems=$this->GetElemsOfBill($bill_nr,"prescriptions");
       			

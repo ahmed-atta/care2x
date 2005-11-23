@@ -222,7 +222,6 @@ class Prescription extends Core {
   	                  	 purchasing_class = '$class'
   	                  	 $query
   	                  	 ORDER BY item_description";
-  	  
   	  /* else {
   	    $this->sql="SELECT item_id as drug_id, item_description as description FROM $this->tb_drug_list WHERE
   	                  	 purchasing_class = '$class' ORDER BY item_description";
@@ -337,6 +336,27 @@ class Prescription extends Core {
 			}
 		}
   } // end of function GetPriceOfItem($item_number) 
+  
+  function GetClassOfItem($item_number) {
+    global $db;
+    $debug=FALSE;
+    ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
+    $this->sql="SELECT purchasing_class FROM $this->tb_drug_list WHERE item_id = '$item_number' ";
+    if ($this->result=$db->Execute($this->sql)) {
+		    if ($this->result->RecordCount()) {
+		        $this->item_array = $this->result->GetArray();
+		          while (list($x,$v)=each($this->item_array)) {
+                $db->debug=FALSE;
+		            return $v['purchasing_class'];
+		          }
+			} else {
+			  $db->debug=FALSE;
+				return false;
+			}
+		}
+  } // end of function GetPriceOfItem($item_number) 
+  
+  
   function GetPrescritptionItem($nr) {
     global $db;
     $debug=FALSE;
