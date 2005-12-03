@@ -36,6 +36,7 @@ CREATE TABLE care_address_citytown (
   PRIMARY KEY  (nr),
   KEY name (name)
 );
+
 # --------------------------------------------------------
 
 #
@@ -43,7 +44,7 @@ CREATE TABLE care_address_citytown (
 #
 
 CREATE TABLE care_appointment (
-   nr bigint(20) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr bigint(20) unsigned NOT NULL auto_increment,
    pid int(11) DEFAULT '0' NOT NULL,
    date date DEFAULT '0000-00-00' NOT NULL,
    time time DEFAULT '00:00:00' NOT NULL,
@@ -117,7 +118,7 @@ CREATE TABLE care_billing_bill (
 #
 
 CREATE TABLE care_billing_bill_item (
-   bill_item_id int(11) DEFAULT '0' NOT NULL auto_increment,
+   bill_item_id int(11) NOT NULL auto_increment,
    bill_item_encounter_nr int(10) unsigned DEFAULT '0' NOT NULL,
    bill_item_code varchar(5),
    bill_item_unit_cost float(10,2) DEFAULT '0.00',
@@ -138,7 +139,7 @@ CREATE TABLE care_billing_bill_item (
 #
 
 CREATE TABLE care_billing_final (
-   final_id tinyint(3) DEFAULT '0' NOT NULL auto_increment,
+   final_id tinyint(3) NOT NULL auto_increment,
    final_encounter_nr int(10) unsigned DEFAULT '0' NOT NULL,
    final_bill_no int(11),
    final_date date,
@@ -173,7 +174,7 @@ CREATE TABLE care_billing_item (
 #
 
 CREATE TABLE care_billing_payment (
-   payment_id tinyint(5) DEFAULT '0' NOT NULL auto_increment,
+   payment_id tinyint(5) NOT NULL auto_increment,
    payment_encounter_nr int(10) unsigned DEFAULT '0' NOT NULL,
    payment_receipt_no int(11) DEFAULT '0' NOT NULL,
    payment_date datetime DEFAULT '0000-00-00 00:00:00',
@@ -209,7 +210,7 @@ CREATE TABLE care_cache (
 #
 
 CREATE TABLE care_cafe_menu (
-   item int(11) DEFAULT '0' NOT NULL auto_increment,
+   item int(11) NOT NULL auto_increment,
    lang varchar(10) DEFAULT 'en' NOT NULL,
    cdate date DEFAULT '0000-00-00' NOT NULL,
    menu text NOT NULL,
@@ -229,7 +230,7 @@ CREATE TABLE care_cafe_menu (
 #
 
 CREATE TABLE care_cafe_prices (
-   item int(11) DEFAULT '0' NOT NULL auto_increment,
+   item int(11) NOT NULL auto_increment,
    lang varchar(10) DEFAULT 'en' NOT NULL,
    productgroup tinytext NOT NULL,
    article tinytext NOT NULL,
@@ -276,7 +277,7 @@ CREATE TABLE care_category_diagnosis (
 #
 
 CREATE TABLE care_category_disease (
-   nr tinyint(3) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr tinyint(3) unsigned NOT NULL auto_increment,
    group_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
    category varchar(35) NOT NULL,
    name varchar(35) NOT NULL,
@@ -342,7 +343,7 @@ CREATE TABLE care_class_encounter (
 #
 
 CREATE TABLE care_class_ethnic_orig (
-   nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr smallint(5) unsigned NOT NULL auto_increment,
    name varchar(35) NOT NULL,
    LD_var varchar(35) NOT NULL,
    status varchar(25) NOT NULL,
@@ -360,7 +361,7 @@ CREATE TABLE care_class_ethnic_orig (
 #
 
 CREATE TABLE care_class_financial (
-   class_nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
+   class_nr smallint(5) unsigned NOT NULL auto_increment,
    class_id varchar(15) DEFAULT '0' NOT NULL,
    type varchar(25) DEFAULT '0' NOT NULL,
    code varchar(5) NOT NULL,
@@ -385,7 +386,7 @@ CREATE TABLE care_class_financial (
 #
 
 CREATE TABLE care_class_insurance (
-   class_nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
+   class_nr smallint(5) unsigned NOT NULL auto_increment,
    class_id varchar(35) NOT NULL,
    name varchar(35) NOT NULL,
    LD_var varchar(25) NOT NULL,
@@ -406,7 +407,7 @@ CREATE TABLE care_class_insurance (
 #
 
 CREATE TABLE care_class_therapy (
-   nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr smallint(5) unsigned NOT NULL auto_increment,
    group_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
    class varchar(35) NOT NULL,
    name varchar(35) NOT NULL,
@@ -427,7 +428,7 @@ CREATE TABLE care_class_therapy (
 #
 
 CREATE TABLE care_classif_neonatal (
-   nr smallint(2) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr smallint(2) unsigned NOT NULL auto_increment,
    id varchar(35) NOT NULL,
    name varchar(35) NOT NULL,
    LD_var varchar(35) NOT NULL,
@@ -448,7 +449,7 @@ CREATE TABLE care_classif_neonatal (
 #
 
 CREATE TABLE care_complication (
-   nr int(10) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr int(10) unsigned NOT NULL auto_increment,
    group_nr int(11) unsigned DEFAULT '0' NOT NULL,
    name varchar(35) NOT NULL,
    LD_var varchar(35) NOT NULL,
@@ -507,7 +508,7 @@ CREATE TABLE care_config_user (
 #
 
 CREATE TABLE care_currency (
-   item_no smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
+   item_no smallint(5) unsigned NOT NULL auto_increment,
    short_name varchar(10) NOT NULL,
    long_name varchar(20) NOT NULL,
    info varchar(50) NOT NULL,
@@ -527,7 +528,7 @@ CREATE TABLE care_currency (
 #
 
 CREATE TABLE care_department (
-   nr mediumint(8) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr mediumint(8) unsigned NOT NULL auto_increment,
    id varchar(60) NOT NULL,
    type varchar(25) NOT NULL,
    name_formal varchar(60) NOT NULL,
@@ -599,7 +600,7 @@ CREATE TABLE care_diagnosis_localcode (
 #
 
 CREATE TABLE care_drg_intern (
-   nr int(11) DEFAULT '0' NOT NULL auto_increment,
+   nr int(11) NOT NULL auto_increment,
    code varchar(12) NOT NULL,
    description text NOT NULL,
    synonyms text NOT NULL,
@@ -625,7 +626,7 @@ CREATE TABLE care_drg_intern (
 #
 
 CREATE TABLE care_drg_quicklist (
-   nr int(11) DEFAULT '0' NOT NULL auto_increment,
+   nr int(11) NOT NULL auto_increment,
    code varchar(25) NOT NULL,
    code_parent varchar(25) NOT NULL,
    dept_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
@@ -647,7 +648,7 @@ CREATE TABLE care_drg_quicklist (
 #
 
 CREATE TABLE care_drg_related_codes (
-   nr int(11) DEFAULT '0' NOT NULL auto_increment,
+   nr int(11) NOT NULL auto_increment,
    group_nr int(11) unsigned DEFAULT '0' NOT NULL,
    code varchar(15) NOT NULL,
    code_parent varchar(15) NOT NULL,
@@ -669,7 +670,7 @@ CREATE TABLE care_drg_related_codes (
 #
 
 CREATE TABLE care_dutyplan_oncall (
-   nr bigint(20) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr bigint(20) unsigned NOT NULL auto_increment,
    dept_nr int(10) unsigned DEFAULT '0' NOT NULL,
    role_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
    year year(4) DEFAULT '0000' NOT NULL,
@@ -695,7 +696,7 @@ CREATE TABLE care_dutyplan_oncall (
 #
 
 CREATE TABLE care_effective_day (
-   eff_day_nr tinyint(4) DEFAULT '0' NOT NULL auto_increment,
+   eff_day_nr tinyint(4) NOT NULL auto_increment,
    name varchar(25) NOT NULL,
    description varchar(255) NOT NULL,
    status varchar(25) NOT NULL,
@@ -714,7 +715,7 @@ CREATE TABLE care_effective_day (
 #
 
 CREATE TABLE care_encounter (
-   encounter_nr bigint(11) unsigned DEFAULT '0' NOT NULL auto_increment,
+   encounter_nr bigint(11) unsigned NOT NULL auto_increment,
    pid int(11) DEFAULT '0' NOT NULL,
    encounter_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
    encounter_class_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
@@ -768,7 +769,7 @@ CREATE TABLE care_encounter (
 #
 
 CREATE TABLE care_encounter_diagnosis (
-   diagnosis_nr int(11) DEFAULT '0' NOT NULL auto_increment,
+   diagnosis_nr int(11) NOT NULL auto_increment,
    encounter_nr int(11) DEFAULT '0' NOT NULL,
    op_nr int(10) unsigned DEFAULT '0' NOT NULL,
    date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
@@ -799,7 +800,7 @@ CREATE TABLE care_encounter_diagnosis (
 #
 
 CREATE TABLE care_encounter_diagnostics_report (
-   item_nr int(11) DEFAULT '0' NOT NULL auto_increment,
+   item_nr int(11) NOT NULL auto_increment,
    report_nr int(11) DEFAULT '0' NOT NULL,
    reporting_dept_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
    reporting_dept varchar(100) NOT NULL,
@@ -824,7 +825,7 @@ CREATE TABLE care_encounter_diagnostics_report (
 #
 
 CREATE TABLE care_encounter_drg_intern (
-   nr int(11) DEFAULT '0' NOT NULL auto_increment,
+   nr int(11) NOT NULL auto_increment,
    encounter_nr int(11) DEFAULT '0' NOT NULL,
    date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
    group_nr mediumint(8) unsigned DEFAULT '0' NOT NULL,
@@ -901,7 +902,7 @@ CREATE TABLE care_encounter_event_signaller (
 #
 
 CREATE TABLE care_encounter_financial_class (
-   nr bigint(20) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr bigint(20) unsigned NOT NULL auto_increment,
    encounter_nr int(11) DEFAULT '0' NOT NULL,
    class_nr smallint(3) unsigned DEFAULT '0' NOT NULL,
    date_start date,
@@ -923,7 +924,7 @@ CREATE TABLE care_encounter_financial_class (
 #
 
 CREATE TABLE care_encounter_image (
-   nr bigint(20) DEFAULT '0' NOT NULL auto_increment,
+   nr bigint(20) NOT NULL auto_increment,
    encounter_nr int(11) DEFAULT '0' NOT NULL,
    shot_date date DEFAULT '0000-00-00' NOT NULL,
    shot_nr smallint(6) DEFAULT '0' NOT NULL,
@@ -948,7 +949,7 @@ CREATE TABLE care_encounter_image (
 #
 
 CREATE TABLE care_encounter_immunization (
-   nr int(10) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr int(10) unsigned NOT NULL auto_increment,
    encounter_nr int(11) DEFAULT '0' NOT NULL,
    date date DEFAULT '0000-00-00' NOT NULL,
    type varchar(60) NOT NULL,
@@ -975,7 +976,7 @@ CREATE TABLE care_encounter_immunization (
 #
 
 CREATE TABLE care_encounter_location (
-   nr int(11) DEFAULT '0' NOT NULL auto_increment,
+   nr int(11) NOT NULL auto_increment,
    encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
    type_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
    location_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
@@ -1003,7 +1004,7 @@ CREATE TABLE care_encounter_location (
 #
 
 CREATE TABLE care_encounter_measurement (
-   nr int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr int(11) unsigned NOT NULL auto_increment,
    msr_date date DEFAULT '0000-00-00' NOT NULL,
    msr_time float(4,2) DEFAULT '0.00' NOT NULL,
    encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
@@ -1031,7 +1032,7 @@ CREATE TABLE care_encounter_measurement (
 #
 
 CREATE TABLE care_encounter_notes (
-   nr int(10) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr int(10) unsigned NOT NULL auto_increment,
    encounter_nr int(10) unsigned DEFAULT '0' NOT NULL,
    type_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
    notes text NOT NULL,
@@ -1073,7 +1074,7 @@ CREATE TABLE care_encounter_notes (
 #
 
 CREATE TABLE care_encounter_obstetric (
-   encounter_nr int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
+   encounter_nr int(11) unsigned NOT NULL auto_increment,
    pregnancy_nr int(11) unsigned DEFAULT '0' NOT NULL,
    hospital_adm_nr int(11) unsigned DEFAULT '0' NOT NULL,
    patient_class varchar(60) NOT NULL,
@@ -1098,7 +1099,7 @@ CREATE TABLE care_encounter_obstetric (
 #
 
 CREATE TABLE care_encounter_op (
-   nr int(11) DEFAULT '0' NOT NULL auto_increment,
+   nr int(11) NOT NULL auto_increment,
    year varchar(4) DEFAULT '0' NOT NULL,
    dept_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
    op_room varchar(10) DEFAULT '0' NOT NULL,
@@ -1152,7 +1153,7 @@ CREATE TABLE care_encounter_op (
 #
 
 CREATE TABLE care_encounter_prescription (
-   nr int(11) DEFAULT '0' NOT NULL auto_increment,
+   nr int(11) NOT NULL auto_increment,
    encounter_nr int(10) unsigned DEFAULT '0' NOT NULL,
    prescription_type_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
    article varchar(100) NOT NULL,
@@ -1183,7 +1184,7 @@ CREATE TABLE care_encounter_prescription (
 #
 
 CREATE TABLE care_encounter_prescription_notes (
-   nr bigint(20) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr bigint(20) unsigned NOT NULL auto_increment,
    date date DEFAULT '0000-00-00' NOT NULL,
    prescription_nr int(10) unsigned DEFAULT '0' NOT NULL,
    notes varchar(35),
@@ -1204,7 +1205,7 @@ CREATE TABLE care_encounter_prescription_notes (
 #
 
 CREATE TABLE care_encounter_procedure (
-   procedure_nr int(11) DEFAULT '0' NOT NULL auto_increment,
+   procedure_nr int(11) NOT NULL auto_increment,
    encounter_nr int(11) DEFAULT '0' NOT NULL,
    op_nr int(11) DEFAULT '0' NOT NULL,
    date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
@@ -1234,7 +1235,7 @@ CREATE TABLE care_encounter_procedure (
 #
 
 CREATE TABLE care_encounter_sickconfirm (
-   nr int(11) DEFAULT '0' NOT NULL auto_increment,
+   nr int(11) NOT NULL auto_increment,
    encounter_nr int(11) DEFAULT '0' NOT NULL,
    date_confirm date DEFAULT '0000-00-00' NOT NULL,
    date_start date DEFAULT '0000-00-00' NOT NULL,
@@ -1259,7 +1260,7 @@ CREATE TABLE care_encounter_sickconfirm (
 #
 
 CREATE TABLE care_group (
-   nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr smallint(5) unsigned NOT NULL auto_increment,
    id varchar(35) NOT NULL,
    name varchar(35) NOT NULL,
    LD_var varchar(35) NOT NULL,
@@ -1339,8 +1340,8 @@ CREATE TABLE care_icd10_pt_br (
    PRIMARY KEY (diagnosis_code)
 );
 
-# --------------------------------------------------------
 
+# --------------------------------------------------------
 #
 # Tabellenstruktur für Tabelle care_icd10_es
 #
@@ -1429,14 +1430,13 @@ CREATE TABLE care_icd10_tr (
    PRIMARY KEY (diagnosis_code)
 );
 
-
 # --------------------------------------------------------
 #
 # Tabellenstruktur für Tabelle care_img_diagnostic
 #
 
 CREATE TABLE care_img_diagnostic (
-   nr bigint(20) DEFAULT '0' NOT NULL auto_increment,
+   nr bigint(20) NOT NULL auto_increment,
    pid int(11) DEFAULT '0' NOT NULL,
    encounter_nr int(11) DEFAULT '0' NOT NULL,
    doc_ref_ids varchar(255),
@@ -1555,7 +1555,7 @@ CREATE TABLE care_mail_private_users (
 #
 
 CREATE TABLE care_med_ordercatalog (
-   item_no int(11) DEFAULT '0' NOT NULL auto_increment,
+   item_no int(11) NOT NULL auto_increment,
    dept_nr int(3) DEFAULT '0' NOT NULL,
    hit int(11) DEFAULT '0' NOT NULL,
    artikelname tinytext NOT NULL,
@@ -1574,7 +1574,7 @@ CREATE TABLE care_med_ordercatalog (
 #
 
 CREATE TABLE care_med_orderlist (
-   order_nr int(11) DEFAULT '0' NOT NULL auto_increment,
+   order_nr int(11) NOT NULL auto_increment,
    dept_nr int(3) DEFAULT '0' NOT NULL,
    order_date date DEFAULT '0000-00-00' NOT NULL,
    order_time time DEFAULT '00:00:00' NOT NULL,
@@ -1638,7 +1638,7 @@ CREATE TABLE care_med_products_main (
 #
 
 CREATE TABLE care_med_report (
-   report_nr int(11) DEFAULT '0' NOT NULL auto_increment,
+   report_nr int(11) NOT NULL auto_increment,
    dept varchar(15) NOT NULL,
    report text NOT NULL,
    reporter varchar(25) NOT NULL,
@@ -1662,7 +1662,7 @@ CREATE TABLE care_med_report (
 #
 
 CREATE TABLE care_menu_main (
-   nr tinyint(3) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr tinyint(3) unsigned NOT NULL auto_increment,
    sort_nr tinyint(2) DEFAULT '0' NOT NULL,
    name varchar(35) NOT NULL,
    LD_var varchar(35) NOT NULL,
@@ -1697,8 +1697,6 @@ CREATE TABLE care_menu_sub (
   s_modify_time datetime NOT NULL default '0000-00-00 00:00:00'
 );
 
-
-
 # --------------------------------------------------------
 
 #
@@ -1706,7 +1704,7 @@ CREATE TABLE care_menu_sub (
 #
 
 CREATE TABLE care_method_induction (
-   nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr smallint(5) unsigned NOT NULL auto_increment,
    group_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
    method varchar(35) NOT NULL,
    name varchar(35) NOT NULL,
@@ -1727,7 +1725,7 @@ CREATE TABLE care_method_induction (
 #
 
 CREATE TABLE care_mode_delivery (
-   nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr smallint(5) unsigned NOT NULL auto_increment,
    group_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
    mode varchar(35) NOT NULL,
    name varchar(35) NOT NULL,
@@ -1748,7 +1746,7 @@ CREATE TABLE care_mode_delivery (
 #
 
 CREATE TABLE care_neonatal (
-   nr int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr int(11) unsigned NOT NULL auto_increment,
    pid int(11) unsigned DEFAULT '0' NOT NULL,
    delivery_date date DEFAULT '0000-00-00' NOT NULL,
    parent_encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
@@ -1765,7 +1763,7 @@ CREATE TABLE care_neonatal (
    apgar_5_min tinyint(4) DEFAULT '0' NOT NULL,
    apgar_10_min tinyint(4) DEFAULT '0' NOT NULL,
    time_to_spont_resp tinyint(2),
-   condition varchar(60) DEFAULT '0',
+   `condition` varchar(60) DEFAULT '0',
    weight float(8,2) unsigned,
    length float(8,2) unsigned,
    head_circumference float(8,2) unsigned,
@@ -1794,7 +1792,7 @@ CREATE TABLE care_neonatal (
 #
 
 CREATE TABLE care_news_article (
-   nr int(11) DEFAULT '0' NOT NULL auto_increment,
+   nr int(11) NOT NULL auto_increment,
    lang varchar(10) DEFAULT 'en' NOT NULL,
    dept_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
    category tinytext NOT NULL,
@@ -1827,7 +1825,7 @@ CREATE TABLE care_news_article (
 #
 
 CREATE TABLE care_op_med_doc (
-   nr bigint(20) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr bigint(20) unsigned NOT NULL auto_increment,
    op_date varchar(12) NOT NULL,
    operator tinytext NOT NULL,
    encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
@@ -1896,7 +1894,7 @@ CREATE TABLE care_ops301_es (
 #
 
 CREATE TABLE care_person (
-   pid int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
+   pid int(11) unsigned NOT NULL auto_increment,
    date_reg datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
    name_first varchar(60) NOT NULL,
    name_2 varchar(60),
@@ -1961,7 +1959,7 @@ CREATE TABLE care_person (
 #
 
 CREATE TABLE care_person_insurance (
-   item_nr int(10) unsigned DEFAULT '0' NOT NULL auto_increment,
+   item_nr int(10) unsigned NOT NULL auto_increment,
    pid int(10) unsigned DEFAULT '0' NOT NULL,
    type varchar(60) NOT NULL,
    insurance_nr varchar(50) DEFAULT '0' NOT NULL,
@@ -1984,7 +1982,7 @@ CREATE TABLE care_person_insurance (
 #
 
 CREATE TABLE care_person_other_number (
-   nr int(10) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr int(10) unsigned NOT NULL auto_increment,
    pid int(11) unsigned DEFAULT '0' NOT NULL,
    other_nr varchar(30) NOT NULL,
    org varchar(35) NOT NULL,
@@ -2006,7 +2004,7 @@ CREATE TABLE care_person_other_number (
 #
 
 CREATE TABLE care_personell (
-   nr int(11) DEFAULT '0' NOT NULL auto_increment,
+   nr int(11) NOT NULL auto_increment,
    short_id varchar(10),
    pid int(11) DEFAULT '0' NOT NULL,
    job_type_nr int(11) DEFAULT '0' NOT NULL,
@@ -2044,7 +2042,7 @@ CREATE TABLE care_personell (
 #
 
 CREATE TABLE care_personell_assignment (
-   nr int(10) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr int(10) unsigned NOT NULL auto_increment,
    personell_nr int(11) unsigned DEFAULT '0' NOT NULL,
    role_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
    location_type_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
@@ -2070,7 +2068,7 @@ CREATE TABLE care_personell_assignment (
 #
 
 CREATE TABLE care_pharma_ordercatalog (
-   item_no int(11) DEFAULT '0' NOT NULL auto_increment,
+   item_no int(11) NOT NULL auto_increment,
    dept_nr int(3) DEFAULT '0' NOT NULL,
    hit int(11) DEFAULT '0' NOT NULL,
    artikelname tinytext NOT NULL,
@@ -2088,7 +2086,7 @@ CREATE TABLE care_pharma_ordercatalog (
 #
 
 CREATE TABLE care_pharma_orderlist (
-   order_nr int(11) DEFAULT '0' NOT NULL auto_increment,
+   order_nr int(11) NOT NULL auto_increment,
    dept_nr int(3) DEFAULT '0' NOT NULL,
    order_date date DEFAULT '0000-00-00' NOT NULL,
    order_time time DEFAULT '00:00:00' NOT NULL,
@@ -2150,7 +2148,7 @@ CREATE TABLE care_pharma_products_main (
 #
 
 CREATE TABLE care_phone (
-   item_nr bigint(20) unsigned DEFAULT '0' NOT NULL auto_increment,
+   item_nr bigint(20) unsigned NOT NULL auto_increment,
    title varchar(25),
    name varchar(45) NOT NULL,
    vorname varchar(45) NOT NULL,
@@ -2188,7 +2186,7 @@ CREATE TABLE care_phone (
 #
 
 CREATE TABLE care_pregnancy (
-   nr int(10) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr int(10) unsigned NOT NULL auto_increment,
    encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
    this_pregnancy_nr int(11) unsigned DEFAULT '0' NOT NULL,
    delivery_date date DEFAULT '0000-00-00' NOT NULL,
@@ -2257,7 +2255,7 @@ CREATE TABLE care_registry (
 #
 
 CREATE TABLE care_role_person (
-   nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr smallint(5) unsigned NOT NULL auto_increment,
    group_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
    role varchar(35) NOT NULL,
    name varchar(35) NOT NULL,
@@ -2277,7 +2275,7 @@ CREATE TABLE care_role_person (
 #
 
 CREATE TABLE care_room (
-   nr int(8) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr int(8) unsigned NOT NULL auto_increment,
    type_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
    date_create date DEFAULT '0000-00-00' NOT NULL,
    date_close date DEFAULT '0000-00-00' NOT NULL,
@@ -2315,6 +2313,7 @@ CREATE TABLE care_sessions (
    KEY EXPIRY (EXPIRY)
 );
 
+
 # --------------------------------------------------------
 
 #
@@ -2322,7 +2321,7 @@ CREATE TABLE care_sessions (
 #
 
 CREATE TABLE care_standby_duty_report (
-   report_nr int(11) DEFAULT '0' NOT NULL auto_increment,
+   report_nr int(11) NOT NULL auto_increment,
    dept varchar(15) NOT NULL,
    date date DEFAULT '0000-00-00' NOT NULL,
    standby_name varchar(35) NOT NULL,
@@ -2376,7 +2375,7 @@ CREATE TABLE care_steri_products_main (
 #
 
 CREATE TABLE care_tech_questions (
-   batch_nr int(11) DEFAULT '0' NOT NULL auto_increment,
+   batch_nr int(11) NOT NULL auto_increment,
    dept varchar(60) NOT NULL,
    query text NOT NULL,
    inquirer varchar(25) NOT NULL,
@@ -2406,7 +2405,7 @@ CREATE TABLE care_tech_questions (
 #
 
 CREATE TABLE care_tech_repair_done (
-   batch_nr int(11) DEFAULT '0' NOT NULL auto_increment,
+   batch_nr int(11) NOT NULL auto_increment,
    dept varchar(15),
    dept_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
    job_id varchar(15) DEFAULT '0' NOT NULL,
@@ -2434,7 +2433,7 @@ CREATE TABLE care_tech_repair_done (
 #
 
 CREATE TABLE care_tech_repair_job (
-   batch_nr tinyint(4) DEFAULT '0' NOT NULL auto_increment,
+   batch_nr tinyint(4) NOT NULL auto_increment,
    dept varchar(15) NOT NULL,
    job text NOT NULL,
    reporter varchar(25) NOT NULL,
@@ -2503,7 +2502,7 @@ CREATE TABLE care_test_findings_baclabor (
 #
 
 CREATE TABLE care_test_findings_chemlab (
-   batch_nr int(11) DEFAULT '0' NOT NULL auto_increment,
+   batch_nr int(11) NOT NULL auto_increment,
    encounter_nr int(11) DEFAULT '0' NOT NULL,
    job_id varchar(25) NOT NULL,
    test_date date DEFAULT '0000-00-00' NOT NULL,
@@ -2585,7 +2584,7 @@ CREATE TABLE care_test_findings_radio (
 #
 
 CREATE TABLE care_test_group (
-   nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr smallint(5) unsigned NOT NULL auto_increment,
    group_id varchar(35) NOT NULL,
    name varchar(35) NOT NULL,
    sort_nr tinyint(4) DEFAULT '0' NOT NULL,
@@ -2605,7 +2604,7 @@ CREATE TABLE care_test_group (
 #
 
 CREATE TABLE care_test_param (
-   nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr smallint(5) unsigned NOT NULL auto_increment,
    group_id varchar(35) NOT NULL,
    name varchar(35) NOT NULL,
    id varchar(10) NOT NULL,
@@ -2633,7 +2632,7 @@ CREATE TABLE care_test_param (
 #
 
 CREATE TABLE care_test_request_baclabor (
-   batch_nr int(11) DEFAULT '0' NOT NULL auto_increment,
+   batch_nr int(11) NOT NULL auto_increment,
    encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
    dept_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
    material text NOT NULL,
@@ -2660,7 +2659,7 @@ CREATE TABLE care_test_request_baclabor (
 #
 
 CREATE TABLE care_test_request_blood (
-   batch_nr int(11) DEFAULT '0' NOT NULL auto_increment,
+   batch_nr int(11) NOT NULL auto_increment,
    encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
    dept_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
    blood_group varchar(10) NOT NULL,
@@ -2741,7 +2740,7 @@ CREATE TABLE care_test_request_blood (
 #
 
 CREATE TABLE care_test_request_chemlabor (
-   batch_nr int(11) DEFAULT '0' NOT NULL auto_increment,
+   batch_nr int(11) NOT NULL auto_increment,
    encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
    room_nr varchar(10) NOT NULL,
    dept_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
@@ -2798,7 +2797,7 @@ CREATE TABLE care_test_request_generic (
 #
 
 CREATE TABLE care_test_request_patho (
-   batch_nr int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
+   batch_nr int(11) unsigned NOT NULL auto_increment,
    encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
    dept_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
    quick_cut tinyint(4) DEFAULT '0' NOT NULL,
@@ -2896,7 +2895,7 @@ CREATE TABLE care_test_request_radio (
 #
 
 CREATE TABLE care_type_anaesthesia (
-   nr smallint(2) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr smallint(2) unsigned NOT NULL auto_increment,
    id varchar(35) NOT NULL,
    name varchar(35) NOT NULL,
    LD_var varchar(35) NOT NULL,
@@ -2917,7 +2916,7 @@ CREATE TABLE care_type_anaesthesia (
 #
 
 CREATE TABLE care_type_application (
-   nr int(11) DEFAULT '0' NOT NULL auto_increment,
+   nr int(11) NOT NULL auto_increment,
    group_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
    type varchar(35) NOT NULL,
    name varchar(35) NOT NULL,
@@ -2958,7 +2957,7 @@ CREATE TABLE care_type_assignment (
 #
 
 CREATE TABLE care_type_cause_opdelay (
-   type_nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
+   type_nr smallint(5) unsigned NOT NULL auto_increment,
    type varchar(35) NOT NULL,
    cause varchar(255) NOT NULL,
    LD_var varchar(35) NOT NULL,
@@ -2994,7 +2993,7 @@ CREATE TABLE care_type_color (
 #
 
 CREATE TABLE care_type_department (
-   nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr smallint(5) unsigned NOT NULL auto_increment,
    type varchar(35) NOT NULL,
    name varchar(35) NOT NULL,
    LD_var varchar(35) NOT NULL,
@@ -3015,7 +3014,7 @@ CREATE TABLE care_type_department (
 #
 
 CREATE TABLE care_type_discharge (
-   nr smallint(3) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr smallint(3) unsigned NOT NULL auto_increment,
    type varchar(35) NOT NULL,
    name varchar(100) NOT NULL,
    LD_var varchar(35) NOT NULL,
@@ -3034,7 +3033,7 @@ CREATE TABLE care_type_discharge (
 #
 
 CREATE TABLE care_type_duty (
-   type_nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
+   type_nr smallint(5) unsigned NOT NULL auto_increment,
    type varchar(35) NOT NULL,
    name varchar(35) NOT NULL,
    LD_var varchar(35) NOT NULL,
@@ -3055,7 +3054,7 @@ CREATE TABLE care_type_duty (
 #
 
 CREATE TABLE care_type_encounter (
-   type_nr int(10) unsigned DEFAULT '0' NOT NULL auto_increment,
+   type_nr int(10) unsigned NOT NULL auto_increment,
    type varchar(35) NOT NULL,
    name varchar(35) NOT NULL,
    LD_var varchar(25) DEFAULT '0' NOT NULL,
@@ -3077,7 +3076,7 @@ CREATE TABLE care_type_encounter (
 #
 
 CREATE TABLE care_type_ethnic_orig (
-   nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr smallint(5) unsigned NOT NULL auto_increment,
    class_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
    name varchar(35) NOT NULL,
    LD_var varchar(35) NOT NULL,
@@ -3097,7 +3096,7 @@ CREATE TABLE care_type_ethnic_orig (
 #
 
 CREATE TABLE care_type_feeding (
-   nr smallint(2) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr smallint(2) unsigned NOT NULL auto_increment,
    group_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
    type varchar(35) NOT NULL,
    name varchar(35) NOT NULL,
@@ -3145,7 +3144,7 @@ CREATE TABLE care_type_immunization (
 #
 
 CREATE TABLE care_type_insurance (
-   type_nr int(11) DEFAULT '0' NOT NULL auto_increment,
+   type_nr int(11) NOT NULL auto_increment,
    type varchar(35) NOT NULL,
    name varchar(60) NOT NULL,
    LD_var varchar(35) NOT NULL,
@@ -3167,7 +3166,7 @@ CREATE TABLE care_type_insurance (
 #
 
 CREATE TABLE care_type_localization (
-   nr tinyint(3) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr tinyint(3) unsigned NOT NULL auto_increment,
    category varchar(35) NOT NULL,
    name varchar(35) NOT NULL,
    LD_var varchar(35) NOT NULL,
@@ -3191,7 +3190,7 @@ CREATE TABLE care_type_localization (
 #
 
 CREATE TABLE care_type_location (
-   nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr smallint(5) unsigned NOT NULL auto_increment,
    type varchar(35) NOT NULL,
    name varchar(35) NOT NULL,
    LD_var varchar(35) NOT NULL,
@@ -3211,7 +3210,7 @@ CREATE TABLE care_type_location (
 #
 
 CREATE TABLE care_type_measurement (
-   nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr smallint(5) unsigned NOT NULL auto_increment,
    type varchar(35) NOT NULL,
    name varchar(35) NOT NULL,
    LD_var varchar(35) NOT NULL,
@@ -3230,7 +3229,7 @@ CREATE TABLE care_type_measurement (
 #
 
 CREATE TABLE care_type_notes (
-   nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr smallint(5) unsigned NOT NULL auto_increment,
    type varchar(35) NOT NULL,
    name varchar(35) NOT NULL,
    LD_var varchar(35) NOT NULL,
@@ -3251,7 +3250,7 @@ CREATE TABLE care_type_notes (
 #
 
 CREATE TABLE care_type_outcome (
-   nr smallint(2) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr smallint(2) unsigned NOT NULL auto_increment,
    group_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
    type varchar(35) NOT NULL,
    name varchar(35) NOT NULL,
@@ -3272,7 +3271,7 @@ CREATE TABLE care_type_outcome (
 #
 
 CREATE TABLE care_type_perineum (
-   nr smallint(2) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr smallint(2) unsigned NOT NULL auto_increment,
    id varchar(35) NOT NULL,
    name varchar(35) NOT NULL,
    LD_var varchar(35) NOT NULL,
@@ -3293,7 +3292,7 @@ CREATE TABLE care_type_perineum (
 #
 
 CREATE TABLE care_type_prescription (
-   nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr smallint(5) unsigned NOT NULL auto_increment,
    type varchar(35) NOT NULL,
    name varchar(35) NOT NULL,
    LD_var varchar(35) NOT NULL,
@@ -3312,7 +3311,7 @@ CREATE TABLE care_type_prescription (
 #
 
 CREATE TABLE care_type_room (
-   nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr smallint(5) unsigned NOT NULL auto_increment,
    type varchar(35) NOT NULL,
    name varchar(35) NOT NULL,
    LD_var varchar(35) NOT NULL,
@@ -3332,7 +3331,7 @@ CREATE TABLE care_type_room (
 #
 
 CREATE TABLE care_type_test (
-   type_nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
+   type_nr smallint(5) unsigned NOT NULL auto_increment,
    type varchar(35) NOT NULL,
    name varchar(35) NOT NULL,
    LD_var varchar(35) NOT NULL,
@@ -3353,7 +3352,7 @@ CREATE TABLE care_type_test (
 #
 
 CREATE TABLE care_type_time (
-   nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr smallint(5) unsigned NOT NULL auto_increment,
    type varchar(35) NOT NULL,
    name varchar(35) NOT NULL,
    LD_var varchar(35) NOT NULL,
@@ -3374,7 +3373,7 @@ CREATE TABLE care_type_time (
 #
 
 CREATE TABLE care_type_unit_measurement (
-   nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr smallint(5) unsigned NOT NULL auto_increment,
    type varchar(35) NOT NULL,
    name varchar(35) NOT NULL,
    LD_var varchar(35) NOT NULL,
@@ -3395,7 +3394,7 @@ CREATE TABLE care_type_unit_measurement (
 #
 
 CREATE TABLE care_unit_measurement (
-   nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr smallint(5) unsigned NOT NULL auto_increment,
    unit_type_nr smallint(2) unsigned DEFAULT '0' NOT NULL,
    id varchar(15) NOT NULL,
    name varchar(35) NOT NULL,
@@ -3462,7 +3461,7 @@ CREATE TABLE care_version (
 #
 
 CREATE TABLE care_ward (
-   nr smallint(5) unsigned DEFAULT '0' NOT NULL auto_increment,
+   nr smallint(5) unsigned NOT NULL auto_increment,
    ward_id varchar(35) NOT NULL,
    name varchar(35) NOT NULL,
    is_temp_closed tinyint(1) DEFAULT '0' NOT NULL,
@@ -3696,7 +3695,7 @@ INSERT INTO care_config_global VALUES ('person_title_hide', '0', NULL, 'normal',
 INSERT INTO care_config_global VALUES ('person_bloodgroup_hide', '0', NULL, 'normal', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('person_civilstatus_hide', '0', NULL, 'normal', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('person_insurance_hide', '0', NULL, 'normal', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_other_his_nr_hide', '0', NULL, 'normal', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('person_other_his_nr_hide', '0', NULL, 'normal', '', '', 00000000000000, '', 00000000000000);    
 
 #
 # Dumping data for table care_config_user
@@ -3786,6 +3785,7 @@ INSERT INTO care_group VALUES (6, 'prescription', 'Prescription', 'LDPrescriptio
 # Dumping data for table care_menu_main
 #
 
+
 INSERT INTO care_menu_main VALUES ('1', '1', 'Home', 'LDHome', 'main/startframe.php', '1', '', '', 20030922232015, 00000000000000);
 INSERT INTO care_menu_main VALUES ('2', '5', 'Patient', 'LDPatient', 'modules/registration_admission/patient_register_pass.php', '1', '', '', 20030922232015, 00000000000000);
 INSERT INTO care_menu_main VALUES ('3', '10', 'Admission', 'LDAdmission', 'modules/registration_admission/aufnahme_pass.php', '1', '', '', 20030922232015, 00000000000000);
@@ -3810,6 +3810,7 @@ INSERT INTO care_menu_main VALUES ('20', '7', 'Appointments', 'LDAppointments', 
 #
 # Dumping data for table `care_menu_sub`
 #
+
 
 INSERT INTO care_menu_sub  VALUES ('3', '0', '2', '0', '', '', '', '', '../gui/img/common/default/new_group.gif', '../gui/img/common/default/new_group.gif', '1', '', '', '', '0001-01-01 00:00:00');
 INSERT INTO care_menu_sub  VALUES ('70', '0', '7', '0', '', '', '', '', '../gui/img/common/default/nurse.gif', '../gui/img/common/default/nurse.gif', '', '', '', '', '0001-01-01 00:00:00');
