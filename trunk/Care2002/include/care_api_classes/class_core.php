@@ -334,14 +334,18 @@ class Core {
 	* @param array By reference. The array containing the data. Note: the array keys must correspond to the table field names.
 	* @return boolean
 	*/	
-    function insertDataFromArray(&$array) {
+   function insertDataFromArray(&$array) {
+		global $dbtype;
 		$x='';
 		$v='';
 		$index='';
 		$values='';
 		if(!is_array($array)){ return FALSE;}
 		while(list($x,$v)=each($array)) {
-		    $index.="$x,";
+			# use backquoting for mysql and no-quoting for other dbs 
+			if ($dbtype=='mysql') $index.="`$x`,";
+				else $index.="$x,";
+				
 			if(stristr($v,'null')) $values.='NULL,';
 				else $values.="'$v',";
 		}
@@ -375,8 +379,12 @@ class Core {
 		if(empty($item_nr)||($isnum&&!is_numeric($item_nr))) return FALSE;
 		while(list($x,$v)=each($array)) {
 
-		if(stristr($v,$concatfx)||stristr($v,'null')) $elems.="$x= $v,";
-		    else $elems.="$x='$v',";
+			# use backquoting for mysql and no-quoting for other dbs. 
+			if ($dbtype=='mysql') $elems.="`$x`=";
+				else $elems.="$x=";
+			
+			if(stristr($v,$concatfx)||stristr($v,'null')) $elems.=" $v,";
+				else $elems.="'$v',";
 		}
 		# Bug fix. Reset array.
 		reset($array);
