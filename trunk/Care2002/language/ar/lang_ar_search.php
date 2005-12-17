@@ -1,11 +1,11 @@
 <?php
 #2003-10-02 EL
-$LDSearchFound='זÌÏ ÇבÈÍË <font color=red><b>~nr~</b></font> ÈםÇהÇÊ דÊÚבÞÉ ÈÇבדזÖזÚ.';
+$LDSearchFound='הÊםÌÉ ÇבÈÍË  <font color=red><b>~nr~</b></font> ÈםÇהÇÊ דÓÌבÉ.';
 $LDShowing='ÚÑÖ';
 $LDTo='Åבל';
 $LDSex='ÇבÌהÓ';
-$LDSelect='ÅÎÊÇÑ';
-$LDZipCode='Zip code';
+$LDSelect='ÅÎÊםÇÑ';
+$LDZipCode='ÑדÒ ÇבÔÚÈםÉ/ÇבדÄÊדÑ';
 $LDPlsSearchDoctor='ÇÈÍË Úה ÇבØÈםÈ ÇזבÇ.';
 $LDPlsSearchNurse='ÇÈÍË Úה ÇבדדÑÖ ÇזבÇ.';
 ?>

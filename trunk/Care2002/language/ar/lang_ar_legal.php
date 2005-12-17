@@ -1,7 +1,6 @@
 <?php
-$LDSickConfirm='A copy of this confirmation of inability to work with the diagnoses and the estimated number of days of 
-inability will be transmitted immediately to the insurer given on the left.';
+$LDSickConfirm='äÓÎÉ ãä åÐÇ ÇáÊÃßíÏ áÚÏã ÇáÞÇÈáíÉ ááÚãá ãÚ ÇáÊÔÎíÕ æÚÏÏ ÇáÃíÇã ÇáãÊæÞÚÉ ááÑÇÍÉ , ÓÊÑÓá ÝæÑÇ Åáì ÇáãÄãøä ';
 
-$LDPharmaPrompt='A pharmaceutical index  like "Red list", or "IFAP" can be integrated here.';
-//<p> However, current german laws prohibit the integration of a demo version.';
+$LDPharmaPrompt='Ïáíá ÇáÕíÏáÉ "ÇáÞÇÆãÉ ÇáÍãÑÇÁ"¡ Ãæ "Âí ÅÝ Ãí Èí" íãßä Ãä íÊßÇãá åäÇ.';
+
 ?>

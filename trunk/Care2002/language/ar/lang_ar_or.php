@@ -1,7 +1,7 @@
 <?php
-$LDOr='ÛׁÝֹ ַבÚדבםַÊ';
+$LDOr='ֹּֽׁ ַבÚדבםַÊ';
 $LDLOGBOOK='ַב׃ּב';
-$LDOrDocument='ֻזÊםÞ ÛׁÝֹ ַבÚדבםַÊ';
+$LDOrDocument='ֻזÊםÞ ֹּֽׁ ַבÚדבםַÊ';
 $LDOrDocumentTxt='ֻזÊםÞ ־ֿדַÊ ַבÚדבםֹ';
 
 /**
@@ -10,66 +10,66 @@ $LDOrDocumentTxt='ֻזÊםÞ ־ֿדַÊ ַבÚדבםֹ';
 *  ORNOC = Operating room nurse on call duty
 *  OR = operating room (surgery room)
 */
-$LDDOC='״ָםָ Úבל ַבוַÊÝ';
-$LDORNOC='דדׁײ Úבל ַבוַÊÝ';
+$LDDOC='״ָםָ ÊֽÊ ַב״בָ';
+$LDORNOC='דדׁײ ÊֽÊֽ ַב״בָ';
 $LDScheduler='ּֿזבֹ';
 
 $LDQuickView='Úׁײ ׃ׁםÚ';
-$LDQviewTxtDocs='Úׁײ ׃ׁםÚ (״ָםָ Úבל ַבוַÊÝ)בבםזד';
-$LDOrLogBook='׃ּב ַבÊדׁםײ בÛׁÝֹ ַבÚדבםַÊ';
-$LDOrLogBookTxt='ÊזֻםÞ ־ֿדַÊ ַבÊדׁםײ Ýם ÛׁÝֹ ַבÚדבםַÊ, דבÝַÊ ַבַׁװםÝ';
-$LDOrProgram='ָׁהַדּ ÛׁÝֹ ַבÚדבםַÊ';
-$LDOrProgramTxt='ַײוַׁ, Êֽׁםׁ, ַהװֱַ, ַב.־ ָׁהַדּ ÛׁÝֹ ַבÚדבםַÊ';
+$LDQviewTxtDocs='Úׁײ ׃ׁםÚ (״ָםָ ÊֽÊ ַב״בָ)בבםזד';
+$LDOrLogBook='׃ּב ַבÊדׁםײ בֹּֽׁ ַבÚדבםַÊ';
+$LDOrLogBookTxt='ÊזֻםÞ ־ֿדַÊ ַבÊדׁםײ Ýם ֹּֽׁ ַבÚדבםַÊ, דבÝַÊ ַבַׁװםÝ';
+$LDOrProgram='ָׁהַדּ ֹּֽׁ ַבÚדבםַÊ';
+$LDOrProgramTxt='Úׁײ, Êֽׁםׁ, ַהװֱַ, ַב.־ ָׁהַדּ ֹּֽׁ ַבÚדבםַÊ';
 $LDQviewTxtNurse='Úׁײ ׃ׁםÚ בדדׁײ ַבדהַזָֹ ַבַֽÊםַ״םֹ בבםזד';
-$LDDutyPlanTxt='ַײוַׁ, Êֽׁםׁ, ַהװֱַ (דדׁײ Úבל ַבוַÊÝ)';
+$LDDutyPlanTxt='Úׁײ, Êֽׁםׁ, ַהװֱַ (דדׁײ ÊֽÊ ַב״בָ)';
 $LDOnCallDuty='ַבדהַזָֹ ַבַֽÊםַ״םֹ';
-$LDOnCallDutyTxt='ֻזÊםÞ ַבÚדב ־בַב דהַזָֹ Úבל-ַבוַÊÝ';
+$LDOnCallDutyTxt='ֻזÊםÞ ַבÚדב ־בַב דהַזָֹ ÊֽÊ ַב״בָ';
 $LDAnaLogBook='׃ּב ַ״ֱַָ ַבÊ־ֿםׁ';
 $LDAnaLogBookTxt='ֻזÊםÞ ־ֿדַÊ ַבÊ־ֿםׁ, ַׁװÝֹ ַבדבÝַÊ';
-$LDQviewTxtAna='Úׁײ ׃ׁםÚ (דדׁײ Úבל ַבוַÊÝ)בֹּֽׁ ַבÚדבםַÊ ז ־ַױ ַָבÊ־ֿםׁ בבםזד';
+$LDQviewTxtAna='Úׁײ ׃ׁםÚ (דדׁײ ÊֽÊ ַב״בָ)בֹּֽׁ ַבÚדבםַÊ ז ־ַױ ַָבÊ־ֿםׁ בבםזד';
 $LDNewDocu='ד׃Êהֿ ּֿםֿ';
 $LDSearch='ָֻֽ';
 $LDArchive='ַׁװםÝ';
 $LDSee='ַ״בַÚ';
 $LDUpdate='Êֽֿםֻ';
 $LDCreate='ַהװֱַ';
-$LDCreatePersonList='ַהװֱַ Þֶַדֹ ב״ַÞד ַבÊדׁםײ ָÛׁÝֹ ַבÚדבםַÊ';
+$LDCreatePersonList='ַהװֱַ Þֶַדֹ ב״ַÞד ַבÊדׁםײ ָֹּֽׁ ַבÚדבםַÊ';
 $LDDoctor='״ָםָ/ַּֽׁ';
 $LDNursing='ַבÊדׁםײ';
 $LDAna='ַבÊ־ֿםׁ';
 
 $LDClose='ַÛבַÞ';
 $LDSave='ֽÝÙ';
-$LDCancel='ַודַב';
-$LDReset='ÊױÝםׁ';
+$LDCancel='ֵבÛֱַ ַבֳדׁ';
+$LDReset='Êוםֶֹ';
 $LDContinue='ַ׃Êדַׁׁ...';
 
-$LDHideCat='ַ־Ýֱַ ַבּֽׁ';
-$LDPatientsFound='דזּזֿ Úֹֿ דׁײל!';
-$LDPlsClk1='ַײÛ״ Úבל ַבױֽםֽ.';
-$LDShowCat='ַׁםֿ ַה ַׁל ַבּֽׁ!';
+$LDHideCat='ֵ־Ýֱַ ַבÊױהםÝ';
+$LDPatientsFound='םזּֿ דׁײל';
+$LDPlsClk1='ַבֱַּׁ ַבײÛ״ Úבל זַֹֽֿ';
+$LDShowCat='ֵÙוַׁ ַבÊױהםÝ';
 $LDResearchArchive='ָֻֽ Ýם ַבַׁװםÝ';
 $LDSearchDocu='ָֻֽ Úה ד׃Êהֿ';
 
-$LDMinor='ַÞב';
-$LDMiddle='ז׃״';
-$LDMajor='ַßֻׁ';
-$LDOperation='Úדבםֹ';
+$LDMinor='ָ׃ם״';
+$LDMiddle='דÊז׃״ֹ';
+$LDMajor='ßָׁל';
+$LDOperation='Úדבםֹ ַּֽׁםֹ';
 
 $LDLastName='ַבבÞָ';
 $LDName='ַבַ׃ד';
 $LDBday='Êַׁם־ ַבדםבַֿ';
 $LDPatientNr='ׁÞד ַבדׁםײ';
-$LDMatchCode='Matchcode Name';
+$LDMatchCode='ֵ׃ד ַבד״ַָÞֹ';
 $LDOpDate='Êַׁם־ ַבÚדבםֹ';
 $LDOperator='ַבַּֽׁ';
 $LDStationary='דׁםײ ַםזֱַ';
 $LDAmbulant='דׁםײ Úםַֹֿ ־ַּׁםֹ';
 $LDInsurance='ַבÊֳדםה';
 $LDPrivate='Êַדםה ־ַױ';
-$LDSelfPay='Úבל ֽ׃ַָו';
+$LDSelfPay='ַבֽ׃ַָ ַבװ־ױם';
 
-$LDDiagnosis='ַבÊװ־םױ/ICD-10';
+$LDDiagnosis='ַבÊװ־םױ/ ׁÞד ַבÊױהםÝ ַבֿזבם בבדׁײICD-10';
 $LDLocalization='ַבדזײÚ';
 $LDTherapy='ַבÚבַּ';
 $LDSpecials='דבַֽÙַÊ ־ַױֹ';
@@ -80,17 +80,17 @@ $LDClassification='ַבÊױהםÝ';
 *  OP = operation (surgical operation)
 */
 $LDOpStart='ַָֿםֹ ַבÚדבםֹ';
-$LDOpEnd='הוַםֹ ַבודבםֹ';
+$LDOpEnd='הוַםֹ ַבÚדבםֹ';
 /**
 *  A tiny dictionary:
 *  Scrub nurse =  the nurse in sterile clothing assisting the surgeon, in charge of the sterile instruments and surgical materials
 */
-$LDScrubNurse='דדׁײ ַבÊהײםÝ';
-$LDOpRoom='ÛׁÝֹ ַבÚדבםַÊ';
-$LDResetAll='ֽ׀Ý ßב ַבדֿ־בַÊ';
+$LDScrubNurse='דדׁײ(ֹ) ַבÚדבםֹ';
+$LDOpRoom='ֹּֽׁ ַבÚדבםַÊ';
+$LDResetAll='ד׃ֽ ַבָםַהַÊ';
 $LDUpdateData='Êֽֿםֻ ַבÊַׁם־';
 $LDStartNewDocu='ַהװֱַ זֻםÞֹ ּֿםֹֿ';
-$LDSearchKeyword='דÝÊַֽ ßבדֹ ָֻֽ: ַב־. ַבַ׃ד ַז ַבבÞָ';
+$LDSearchKeyword='דÝַֿׁÊ ַבָֻֽ: ַב־. ַבַ׃ד ַז ַבבÞָ';
 
 $LDSrcListElements=array(
 '',
@@ -102,8 +102,8 @@ $LDSrcListElements=array(
 'ַבÞ׃ד',
 'ׁÞד ַבÚדבםֹ'
 );
-$LDClk2Show='ַײÛ״ בבַײוַׁ';
-$LDSrcCondition='דÝÊַֽ ßבדֹ ָֻֽ ז/ֳז ײׁÝ';
+$LDClk2Show='ַײÛ״ בבÚׁײ';
+$LDSrcCondition='דÝַֿׁÊ ֳז װׁ״ ַבָֻֽ';
 $LDNewArchiveSearch='ָֻֽ ּֿםֿ Ýם ַבַׁװםÝ';
 $tage=array(
 				'ַבַֽֿ',
@@ -142,15 +142,15 @@ $LDOpMainElements=array(
 										);
 $LDOpCut='Þ״Ú';
 $LDOpClose='־םַ״ֹ';
-$LDOpIn='ַֿ־ַב';
-$LDOpOut='ַ־ַּׁ';
-$LDOpInFull='ַֿ־ַב';
-$LDOpOutFull='ַ־ַּׁ';
-$LDEditPatientData='ֽׁׁ ׃ּב ָםַהַÊ ~tagword~';
-$LDOpenPatientFolder='ַÝÊֽ דבÝ דֽÝזÙַÊ ַבÊדׁםײ ַב־ַױ ָם ~tagword~';
+$LDOpIn='ֿ־זב';
+$LDOpOut='־ׁזּ';
+$LDOpInFull='ßַדב ַבֿ־זב';
+$LDOpOutFull='ßַדב ַב־ׁזּ';
+$LDEditPatientData='Êֽׁםׁ ׃ּב ָםַהַÊ ~tagword~';
+$LDOpenPatientFolder='ÝÊֽ דבÝ דֽÝזÙַÊ ַבÊדׁםײ ַב־ַױ ָם ~tagword~';
 
 $tbuf=array('O','A','S','R');
-$cbuf=array('ַבַּֽׁ','ַבד׃ַÚֿ','דדׁײ ַבÊהÙםÝ','ַבדדׁײ ַבדהַזָ');
+$cbuf=array('ַבַּֽׁ','ַבד׃ַÚֿ','דדׁײ ַבÚדבםֹ','ַבדדׁײ ַבדהַזָ');
 
 /**
 *  A tiny dictionary:
@@ -159,7 +159,7 @@ $cbuf=array('ַבַּֽׁ','ַבד׃ַÚֿ','דדׁײ ַבÊהÙםÝ','ַבדדׁײ ַבדהַזָ');
 $LDOpPersonElements=array(
 											operator=>'ַבַּֽׁ',
 											assist=>'ַבד׃ַÚֿ',
-											scrub=>'דדׁײ ַבÊהÙםÝ',
+											scrub=>'דדׁײ ַבÚדבםֹ',
 											rotating=>'ַבדדׁײ ַבדהַזָ',
 											ana=>'ַבÊ־ֿםׁ'
 											);
@@ -175,8 +175,8 @@ $LDHelp='ַÝÊֽ הַÝֹֿ ַבÊÚבםדַÊ';
 $LDSearchPatient='ָֻֽ Úה דׁםײ';
 $LDUsedMaterial='דזַֿ ַבÚדבםֹ ַבד׃Ê־ֿדֹ';
 $LDContainer='ַבַֽזםֹ ַבד׃Ê־ֿדֹ/ַבַֿזַÊ';
-$LDDRG='DRG';
-$LDShowLogbook='ַײוַׁ ַב׃ּב';
+$LDDRG='ַבֳֿזםֹ DRG';
+$LDShowLogbook='Úׁײ ַב׃ּב';
 
 /**
 *  A tiny dictionary:
@@ -201,7 +201,7 @@ $LDAnaTypes=array(
 
 $LDAnaDoc='״ָםָ ַבÊ־ֿםׁ';
 $LDAnaPrefix='AN';
-$LDEnterPerson='ַֿ־ב ~tagword~ ּֿםֿ ';
+$LDEnterPerson='ßÊַָֹ ~tagword~ ּֿםֿ ';
 $LDExtraInfo='דÚבזדַÊ ַײַÝםֹ';
 $LDFrom='דה';
 $LDTo='ַבל';
@@ -209,32 +209,32 @@ $LDFunction='זÙםÝֹ';
 $LDCurrentEntries='ַבדֿ־בַÊ ַבַֽבםֹ';
 $LDDeleteEntry='ֽ׀Ý ַבדֿ־ב';
 $LDSearchNewPerson='ָֻֽ Úה ~tagword~ ּֿםֿ';
-$LDSorryNotFound='ֳ׃Ý. בד ַּֿ װםַ. ָּׁ דÝÊַֽ ßבדֹ ד־ÊבÝ.';
+$LDSorryNotFound='בבֳ׃Ý בַ םזּֿ, ָּׁ דÝַֿׁÊ ָֻֽ ֳ־ׁל';
 $LDSearchPerson='ָֻֽ Úה ~tagword~';
-$LDJobId='ַֽÊַׁÝ';
+$LDJobId='ׁדׂ ַבÚדב';
 $LDSearchResult='הÊֶַּ ַבָֻֽ';
-$LDUseData='ַֿ־ב ו׀ַ ַבװ־ױ ָױÝÊו ~tagword~';
+$LDUseData='ßÊַָֹ ו׀ַ ַבװ־ױ ָױÝÊו ~tagword~';
 $LDJobIdTag=array(
 						nurse=>'דדׁײ',
 						doctor=>'״ָםָ/ַּֽׁ'
 						);
 $LDQuickSelectList='Þֶַדֹ ַ־Êםַׁ ׃ׁםÚ';
 $LDTimes='ַבזÞÊ';
-$LDPlasterCast='ַבÞױ״ֹׁ';
+$LDPlasterCast='ַבÊָּםׁ';
 /**
 *  Reposition = repositioning of bone dislocation or fracture
 */
 $LDReposition='ÊÛםםׁ ַבדזײÚ';
-$LDWaitTime='ַבזÞÊ ַבדÊַבם';
+$LDWaitTime='זÞÊ ַבֵהÊÙַׁ';
 $LDStart='ַבַָֿםֹ';
 $LDEnd='ַבהוַםֹ';
-$LDPatNoExist='בד םÊד ַֿ־ַב ַבדׁםײ Ýם ַב׃ּב ָÚֿ. ַÛבÞ ו׀ו ַבהַÝ׀ֹ ֻד ֱַַָֿ Ýם ַב׃ּב דה ַבַָֿםֹ. ַ׀ַ ַ׃ÊדׁÊ ַבדװßבֹ, ַÊױב ָÞ׃ד ַַֹֿׁ ַבהÙַד.';
+$LDPatNoExist='בד םÊד ַֿ־ַב ַבדׁםײ Ýם ַב׃ּב ָÚֿ. ַÛבÞ ו׀ו ַבהַÝ׀ֹ ֻד ֱַַָֿ Ýם ַב׃ּב דה ַבַָֿםֹ. ַ׀ַ ַ׃ÊדׁÊ ַבדװßבֹ, ַÊױב ָדװׁÝ ַבהÙַד.';
 $opts=array('-',
-				'זױב ַבדׁםײ דÊֳ־ׁ ַבל ÛׁÝֹ ַבÚדבםַÊ',
-       				'זױב ״ָםָ ַבÊ־ֿםׁ דÊֳ־ׁ ַבל ÛׁÝֹ ַבÚדבםַÊ',
-       				'זױב זױב דדׁײ ÛׁÝֹ ַבÚדבםַÊ דÊֳ־ׁ ַבל ÛׁÝֹ ַבÚדבםַÊ', 
-				'ÝׁםÞ ַבÊהÙםÝ ַהÊוַ דÊֳ־ׁ',
-       				'ֿזַÚם ַ׃ÊÊהֶַםֹ');
+				'זױזב ַבדׁםײ דÊֳ־ַׁנ ַבל ֹּֽׁ ַבÚדבםַÊ',
+       			'זױזב ״ָםָ ַבÊ־ֿםׁ דÊֳ־ַׁנ ַבל ֹּֽׁ ַבÚדבםַÊ',
+       			'זױזב זױב דדׁײ ֹּֽׁ ַבÚדבםַÊ דÊֳ־ַׁנ ַבל ֹּֽׁ ַבÚדבםַÊ', 
+				'זױזב ÝׁםÞ ַבÊהÙםÝ דÊֳ־ַׁנ',
+       			'ֿזַÚם ַ׃ÊÊהֶַםֹ');
 $LDReason='ֿזַÚם';
 $LDMaterialElements=array(
 								'Best.nr.',
@@ -266,46 +266,46 @@ $LDContainerElements=array(
 $LDArticleNr='ׁÞד ַבױהÝ';			
 $LDContainerNr='ׁÞד ַבַֽזםֹ.';							
 $LDArticleNotFound='ַבױהÝ Ûםׁ דזּזֿ!';
-$LDNoArticleTxt='ַדַ ַה םßזה ַבױהÝ Ûםׁ דזּזֿ Ýם ָהß ַבָםַהַÊ ַז ַהß ַֿ־בÊ ׁÞד ־״ֱַ.';
+$LDNoArticleTxt='ַדַ ַה םßזה ַבױהÝ Ûםׁ דזּזֿ Ýם ÞַÚֹֿ ַבָםַהַÊ ַז ַהß ַֿ־בÊ ׁÞד ־״ֳ';
 $LDClk2ManualEntry='בַֿ־ַב ַבױהÝ םֿזםַ, <b>ַײÛ״ והַ.</b>';
 $LDPlsClkArticle='ַ־Êַׁ ַבױהÝ ַבד״בזָ!';
 $LDSelectArticle='ַײÛ״ בַ־Êםַׁ ו׀ַ ַבױהÝ';
-$LDDbInfo='דÚבזדַÊ דה ָהß ַבָםַהַÊ';
+$LDDbInfo='דÚבזדַÊ דה ÞַÚֹֿ ַבדÚבזדַÊ';
 $LDRemoveArticle='ַבÛֱַ ַבױהÝ דה ַבÞֶַדֹ';
-$LDArticleNoList='ַבױהÝ Ûםׁ דזּזֿ Ýם ָהß ַבָםַהַÊ';
+$LDArticleNoList='ַבױהÝ Ûםׁ דזּזֿ Ýם ÞַÚֹֿ ַבָםַהַÊ';
 $LDPromptSearch='ַֿ־ב דÝÊַֽ ßבדֹ ָֻֽ.<br>Úבל ׃ָםב ַבדַֻב ַבַ׃ד, ַבבÞָ, ַז Êַׁם־ ַבדםבַֿ, ַב־.	(ַהײׁ ַםײַ "ַבÊÚבםדַÊ")';
-$LDKeyword='דÝÊַֽ ßבדֹ';
+$LDKeyword='דÝַֿׁÊ';
 $LDOtherFunctions='זÙֶַÝ ַ־ׁל';
 $LDInfoNotFound='ַבדÚבזדַÊ ַבד״בזָֹ Ûםׁ דזֹּֿ!';
 $LDButFf='ײÚ ַבÊַבם';
-$LDSimilar=' ַבדֿ־ב וז';
-$LDSimilarMany=' ַבדֿ־בַÊ ום';
-$LDNeededInfo=' דװַָו בדÝÊַֽ ßבדֹ ַבָֻֽ.';
+$LDSimilar=' ַבדֿ־ב דװַָו בÜ';
+$LDSimilarMany=' ַבדֿ־בַÊ דװַָוֹ בÜ';
+$LDNeededInfo='ַבדÚבזדַÊ ַבד״בזָֹ';
 $LDPatLogbook='Êד ÊזֻםÞ ַבדׁםײ Ýם ַב׃ּב ַבÊַבם.';
-$LDPatLogbookMany='Êד ÊזֻםÞ ַבדׁםײÝם ַב׃ּבַÊ ַבÊַבםֹ.';
+$LDPatLogbookMany='Êד ÊזֻםÞ ַבדׁםײ Ýם ַב׃ּבַÊ ַבÊַבםֹ.';
 $LDDepartment='ַבÞ׃ד';
-$LDRoom='ַבÛׁÝֹ';
-$LDLastEntry='ַ־ׁ דֿ־ב ַבל ַב׃ּב וז ַבÊַבם';
-$LDLastEntryMany='ַ־ׁ ד־בַÊ ַבל ַב׃ּב ום ַבÊַבםֹ';
+$LDRoom='ַבֹּֽׁ';
+$LDLastEntry='ַ־ׁ דֿ־ב ַבל ַב׃ּב וז';
+$LDLastEntryMany='ַ־ׁ דֿ־בַÊ ַבל ַב׃ּב וםֹ';
 $LDFrom='דה';
 $LDFromMany='דה';
 $LDYesterday='ַד׃';
 $LDVorYesterday='םזדַה דַײםַה';
 $LDDays='ַםַד דַײםֹ';
-$LDChangeDept='ÊÛםםׁ ַבÞ׃ד ַז ÛׁÝֹ ַבÚדבםַÊ';
+$LDChangeDept='ÊÛםםׁ ַבÞ׃ד ַז ֹּֽׁ ַבÚדבםַÊ';
 
-$LDTabElements=array('Þ׃ד ÛׁÝֹ ַבÚדבםַÊ',
+$LDTabElements=array('Þ׃ד ֹּֽׁ ַבÚדבםַÊ',
 								 'ַֽÊםַ״ם',
 								 'ּוַׂ ַבהֱַֿ/ַבוַÊÝ',
-								 'Úבל ַבוַÊÝ',
+								 'ÊֽÊ ַב״בָ',
 								 'ּוַׂ ַבהֱַֿ/ַבוַÊÝ',
 								 'ד־״״ ַבדהַזָֹ'
 								 );
 $LDStandbyPerson='ַֽÊםַ״';
-$LDOnCallPerson='Úבל ַבוַÊÝ';
+$LDOnCallPerson='ÊֽÊ ַב״בָ';
 $LDMonth='װוׁ';
 $LDYear='׃הֹ';
-$LDDutyElements = array('ַבÊַׁם־','&nbsp;','ַבבÞָ, ַבַ׃ד','דה','ַבל','ÛׁÝֹ ַבÚדבםַÊ','ַבÊװ־םױ ז ַבÚבַּ');
+$LDDutyElements = array('ַבÊַׁם־','&nbsp;','ַבבÞָ, ַבַ׃ד','דה','ַבל','ֹּֽׁ ַבÚדבםַÊ','ַבÊװ־םױ ז ַבÚבַּ');
 $LDPrint='״ַָÚֹ';
 $LDAlertNoPrinter='םָּ ַה Ê״ָÚ םֿזםַ. ַײÛ״ ַָבׁׂ ַבַםדה Úבל ַבהַÝ׀ֹ,  ֻד ַ־Êַׁ ״ַָÚֹ.';
 $LDAlertNotSavedYet='ַ־ׁ דֿ־בַÊ בד ÊֽÝÙ ָÚֿ. וב ÊׁÛָ Ýם ֽÝÙוַ ַזבַ?';
@@ -314,14 +314,14 @@ $LDBeeper='ּוַׂ ַבהֱַֿ';
 $LDOn='Úבל';
 $LDNoPersonList='בד Êהװֶ Þֶַדֹ דזÙÝםה ָÚֿ.';
 $LDNoEntryFound='בַ םזּֿ דֿ־ב Ýם ַבד־״״!';
-$LDShow='ַÙוַׁ';
-$LDShowPrevLog='ַײוׁ דֿ־בַÊ ַב׃ּב ַבםַָÞֹ';
-$LDShowNextLog='ַÙוׁ דֿ־בַÊ ַב׃ּב ַבÊַבםֹ';
-$LDShowGuideCal='ַÙוׁ ֿבםב ַבÊÞזםד';
+$LDShow='Úׁײ';
+$LDShowPrevLog='Úׁײ דֿ־בַÊ ַב׃ּב ַב׃ַָÝֹ';
+$LDShowNextLog='Úׁײ דֿ־בַÊ ַב׃ּב ַבÊַבםֹ';
+$LDShowGuideCal='Úׁײ ֿבםב ַבÊÞזםד';
 
-$LDPerformance='ַבßÝֶַֹ';
+$LDPerformance='ַבֱֳַֿ';
 /* 2002-10-13 EL */
-$LDPlsSelectPatientFirst='ַזּֿ ַבדׁםײ ַזבַ.';
+$LDPlsSelectPatientFirst='ֵָֻֽ Úה ַבדׁםײ ַזבַ.';
 $LD_ddpMMpyyyy='dd.mm.yyyy';
 $LD_yyyyhMMhdd='yyyy-mm-dd';
 $LD_MMsddsyyyy='mm/dd/yyyy';
@@ -335,7 +335,7 @@ $LDAddNurseToList='ַײÝ דדׁײ בבÞֶַדֹ';
 $LDNursesList='ַבÊדׁםײ\' Þֶַדֹ';
 /* 2003-03-19 EL */
 $LDPlsSelectDept='ַ־Êַׁ Þ׃ד.';
-$LDSelectORoomNr='...ז ÛׁÝֹ ÚדבםַÊ.';
+$LDSelectORoomNr='...ז ֹּֽׁ ÚדבםַÊ.';
 $LDAlertNoDeptSelected=$LDPlsSelectDept;
-$LDAlertNoORSelected='ַ־Êַׁ ÛׁÝֹ ÚדבםַÊ!';
+$LDAlertNoORSelected='ַ־Êַׁ ֹּֽׁ ÚדבםַÊ!';
 ?>

@@ -1,9 +1,9 @@
 <?php
 $LDWhereTo='Ãíä ÊÑíÏ Ãä ÊÖÚ ÇáãŞÇáÉ¿';
-$LDPlsSelect='ÃÎÊÇÑ ÇáÑŞã ÇáãŞÇÈá ááÑŞã ÇáãæÖÍ İí ÇáÕæÑÉ æ ãä Êã ÃÖÛØ\'ÃÓÊãÑÇÑ...\'.';
-$LDContinueBut='ÃÓÊãÑ...';
+$LDPlsSelect='ÅÎÊÇÑ ÑŞã íŞÇÈá ÃÍÏ ÇáÃÑŞÇã ÇáãæÖÍÉ İí ÇáÕæÑÉ, Ëã ÅÖÛØ Úáì\'ÅÓÊãÑÇÑ...\'';
+$LDContinueBut='ÅÓÊãÑÇÑ..';
 $LDCancelBut='ÅáÛÇÁ ÇáÇãÑ';
-$LDBackBut='ÊÑÇÌÚ';
+$LDBackBut='ÑÌæÚ';
 $LDSaveBut='ÍİÙ';
 $LDFinishBut='ÅäåÇÁ';
 $LDArticle1='Ãæá (1) ãŞÇáÉ';
@@ -16,65 +16,65 @@ $LDArticleTxt='ãŞÇáÉ';
 
 $LDTitleTag='ÚäæÇä ÇáãŞÇáÉ';
 $LDTitleMaxNote='ÃŞÕì ÍÏ 50 ÍÑİ';
-$LDHeader='ÇáÃİÊÊÇÍíÉ';
+$LDHeader='ÑÃÓ ÇáãŞÇáÉ';
 $LDHeaderMaxNote='ÃŞÕì ÍÏ 250 ÍÑİ';
 $LDNews='ãŞÇáÉ ÌÏíÏÉ';
 /**
 * Do not translate the '<font size=1>' and '</font>'
 */
 $LDPicFile='ÕæÑÉ <font size=1>(ÃŞÕì ÍÌã ááãáİ 1MB)</font>';
-$LDAuthor='ãÍÑÑ ÇáãŞÇáÉ';
+$LDAuthor='ÕÇÍÈ ÇáãŞÇáÉ';
 /**
 * Do not translate the '<font size=1>' and '</font>'
 */
 $LDPublishDate='ÊÇÑíÎ ÇáäÔÑ <font size=1>(\'T\' áÊÇÑíÎ Çáíæã)</font>';
 
-$LDAlertTitle='ÃßÊÈ ÇáÚäæÇä';
-$LDAlertNews='ÃßÊÈ ÇáãŞÇáÉ ÇáÇÎÈÇÑíÉ';
-$LDAlertAuthor='ÃßÊÈ ÇáãÍÑÑ';
+$LDAlertTitle = 'ÃßÊÈ ÇáÚäæÇä ÇáãŞÇáÉ';
+$LDAlertNews = 'ÃßÊÈÉ äÕ ÇáÎÈÑ Ãæ ÇáãŞÇáÉ';
+$LDAlertAuthor='ÃßÊÈ ÇáãÍÑÑ Ãæ ÇáßÇÊÈ';
 $LDAlertDate='ÃßÊÈ ÊÇÑíÎ ÇáäÔÑ';
 
-$LDWrittenOn='ÊãÊ ÇáßÊÇÈÉ Şí:';
+$LDWrittenOn='ßÊÈÊ İí';
 $LDWrittenFrom='ãä ØÑİ:';
 
 $LDArticleSaved='Êã ÍİÙ ÇáãŞÇáÉ. ÃäÊ ÊÑì ÇáÚÑÖ.';
-$LDBackTxt='ÊÑÇÌÚ';
+$LDBackTxt='ÑÌæÚ';
 
-$LDQuickInfo='ãÚáæãÇÊ ÎÇÕÉ';
-$LDPhonePolice='ÇáÔÑØÉ';
-$LDPhoneFire='ÇáÇØİÇÁ';
-$LDAmbulance='ÇáØæÇÑí';
-$LDPhone='ÇáåÇÊİ';
-$LDFax='ÇáİÇßÓ';
+$LDQuickInfo='ãÚáæãÇÊ ÓÑíÚÉ';
+$LDPhonePolice='ÑŞã ÇáÔÑØÉ';
+$LDPhoneFire='ÑŞã ÇáãØÇİÆ';
+$LDAmbulance='ÑŞã ÇáÅÓÚÇİ';
+$LDPhone='åÇÊİ';
+$LDFax='İÇßÓ';
 $LDAddress='ÇáÚäæÇä';
 $LDEmail='ÇáÈÑíÏ ÇáÅáßÊÑæäí';
 
 $LDOpenTimes ='ÓÇÚÇÊ ÇáÚãá';
 $LDManagement ='ÇáÅÏÇÑÉ';
 $LDDept ='ÇáÃŞÓÇã';
-$LDCafenews ='ÇáßİÊíÑíÇ';
-$LDAdmission ='ÇáŞÈæá';
-$LDExhibition ='ÇáãÄËãÑÇÊ';
+$LDCafenews ='ÇáßÇİíÊíÑíÇ';
+$LDAdmission ='ÇáÅíæÇÁ';
+$LDExhibition ='ÇáãäÇÓÈÇÊ';
 $LDEducation ='ÇáÊÚáíã';
-$LDAdvStudies ='ÇáÏÑÇÓÇÊ';
+$LDAdvStudies ='ÏÑÇÓÇÊ æÃÈÍÇË';
 $LDPhyTherapy ='ÇáÚáÇÌ ÇáØÈíÚí';
 $LDCalendar ='ÇáÊŞæíã';
 $LDHelp='ÊÚáíãÇÊ';
-$LDMore='ÅÖÇİÉ ááãŞÇáÉ';
+$LDMore='ÇáãÒíÏ..';
 
 $LDCafeNews='ÃÎÈÇÑ ÇáßÇİíÊíÑíÇ';
-$LDConfirmEdit='åá ÊÑÛÈ İí ÊÍÑíÑ ÇáÈíÇäÇÊ İí ÃÎÈÇÑ ÇáßÇİíÊíÑíÇ¿';
+$LDConfirmEdit='åá ÊÑÛÈ İí ÊÍÑíÑ ÈíÇäÇÊ ÃÎÈÇÑ ÇáßÇİíÊíÑíÇ¿';
 $LDNewsDummy=array(1=>'Ãæá',
 2=>'ËÇäí',
 3=>'ËÇáË',
 4=>'ÑÇÈÚ');
-$LDMenuToday='ŞÇÆãÉ Çáíæã';
-$LDMenuAll='ŞÇÆãÉ ÎÇÕÉ <br> &nbsp;ÈÃíÇã ÃÎÑì';
-$LDPrices='ÇáÇÓÚÇÑ';
-$LDNoMenu='ÇáŞÇÆãÉ ÛíÑ<br> ãÊæİÑÉ.';
+$LDMenuToday='áÇÆÍÉ Çáíæã';
+$LDMenuAll='ÇááÇÆÍÉ <br> &nbsp;ÇáÅÚÊíÇÏíÉ';
+$LDPrices='ÇáÃÓÚÇÑ';
+$LDNoMenu='áÇ ÊæÌÏ áÇÆÍÉ<br> ãÊæİÑÉ ÍÇáíÇğ.';
 $LDWhatToDo='ãÇĞÇ ÊÑíÏ Ãä ÊÍÑÑ¿';
-$LDPlsMarkSelection='ÃÎÊÇÑ ÎíÇÑ æÇÍÏ, Ëã ÃÖÛØ \'ÅÓÊãÑÇÑ...\'.';
-$LDMenuEdit='ÊÍÑíÑ ÇáŞÇÆãÉ';
+$LDPlsMarkSelection='ÅÎÊÇÑ ÃÍÏ ÇáÅÎÊíÇÑÇÊ, Ëã ÇÖÛØ \'ÅÓÊãÑÇÑ...\'.';
+$LDMenuEdit='ÊÍÑíÑ ÇááÇÆÍÉ';
 $LDPriceEdit='ÊÍÑíÑ ÇáÓÚÑ';
 $LDNewsEdit='ÊÍÑíÑ ÇáÃÎÈÇÑ Ãæ İŞÑÉ ãÚáæãÇÊ';
 
@@ -85,47 +85,47 @@ $dayname=array('ÃË',
 'Ìã',
 'ÓÈ',
 'ÃÍ');
-$LDCafeMenu='ŞÇÆãÉ ÇáßÇİíÊíÑíÇ';
-$LDMenu='ÇáŞÇÆãÉ';
+$LDCafeMenu='áÇÆÍÉ ÇáßÇİíÊíÑíÇ';
+$LDMenu='ÇááÇÆÍÉ';
 $LDThisWeek='åĞÇ ÇáÇÓÈæÚ';
 $LDNextWeek='ÇáÇÓÈæÚ ÇáŞÇÏã';
 $LD3rdWeek='ÇáÇÓÈæÚ ÇáËÇáË';
 $LDBack2CafeNews='ÑÌæÚ áÃÎÈÇÑ ÇáßÇİíÊíÑíÇ';
 
-$LDProdName='ÃÓã ÇáãäÊÌ';
-$LDPriceDM='ÇáÓÚÑ DM';
-$LDPriceEuro='ÇáÓÚÑ €';
+$LDProdName='ÅÓã ÇáãäÊÌ';
+$LDPriceDM='Ï.á.';
+$LDPriceEuro='íæÑæ';
 $LDPrice='ÇáÓÚÑ';
 $LDNoPrice='ŞÇÆãÉ ÇáÇÓÚÇÑ ÛíÑ ãÊæİÑÉ ÍÇáíÇ.';
-$LDSorry='äÍä ÃÓİæä. ÍÇæá ãÑÉ ÃÎÑì İíãÇ ÈÚÏ.';
+$LDSorry='ÚĞÑÇğ . ÍÇæá ãÑÉ ÃÎÑì İíãÇ ÈÚÏ.';
 $LDCafePrices='ŞÇÆãÉ ÃÓÚÇÑ ÇáßÇİíÊíÑíÇ';
 
-$LDCreateGroup='ÅäÔÇÁ ãÌãæÚÉ ÌÏíÏÉ ááãäÊÌÇÊ';
-$LDCreateGroupPrompt='íÌÈ Ãä ÊäÔÆ ãÌãæÚÉ ÌÏíÏÉ ááãäÊÌÇÊ. ÃÖÛÙ \'ÅÓÊãÑÇÑ...\'.';
+$LDCreateGroup='ÅäÔÇÁ ãÌãæÚÉ ãäÊÌÇÊ ÌÏíÏÉ';
+$LDCreateGroupPrompt='íÌÈ ÅäÔÇÁ ãÌãæÚÉ ÌÏíÏÉ ááãäÊÌÇÊ. ÅÖÛØ \'ÅÓÊãÑÇÑ...\'.';
 /**
 * Do not translate the '<font color=\'#000000\'>' and '</font>'
 */
-$LDMarkGroup='íÌÈ Ãä ÊÎÊÇÑ ãÌãæÚÉ ãäÊÌÇÊ áÊÍÑÑåÇ<br> Ëã ÃÖÛØ  \'<font color=\'#000000\'>ÅÓÊãÑÇÑ...</font>\'';
-$LDEnterGroup='ÃÏÎá ÃÓã ÇáãÌãæÚÉ ÇáÌÏíÏÉ<br>Ëã ÃÖÛØ \'<font color=\'#000000\'>ÅÓÊãÑÇÑ...</font>\'';
+$LDMarkGroup='íÌÈ Ãä ÊÎÊÇÑ ãÌãæÚÉ ãäÊÌÇÊ áÊÍÑíÑåÇÇ<br> Ëã ÅÖÛØ  \'<font color=\'#000000\'>ÅÓÊãÑÇÑ...</font>\'';
+$LDEnterGroup='ÃßÊÈ ÅÓã ÇáãÌãæÚÉ ÇáÌÏíÏÉ<br>Ëã ÅÖÛØ \'<font color=\'#000000\'>ÅÓÊãÑÇÑ...</font>\'';
 $LDProdGroup='ãÌãæÚÉ ÇáãäÊÌÇÊ';
-$LDClk2End='ááÅäåÇÁ ÃÖÛØ åĞå>> ';
-$LDPriceSaved='Êã ÍİÙ ÇáãäÊÌÇÊ æ ÇáÇÓÚÇÑ ÇáÊÇáíÉ';
+$LDClk2End='ááÅäåÇÁ ÅÖÛØ Úáì åĞå>> ';
+$LDPriceSaved='Êã ÍİÙ ÇáãäÊÌÇÊ æ ÇáÇÓÚÇÑ ';
 
-$LDMarkWeek='ÃÎÊÇÑ ÇáÇÓÈæÚ.';
-$LDClkContinue='Ëã ÃÖÛØ \'ÃÓÊãÑÇÑ...\'.';
-$LDPlsEnter='ÃØÈÚ ÇáŞÇÆãÉ åäÇ ...';
-$LDClk2Edit='ÃÖÛØäí áÊÍÑíÑ';
+$LDMarkWeek='ÅÎÊÇÑ ÇáÇÓÈæÚ.';
+$LDClkContinue='Ëã ÅÖÛØ \'ÅÓÊãÑÇÑ...\'.';
+$LDPlsEnter='ÅØÈÚ ÇáŞÇÆãÉ åäÇ ...';
+$LDClk2Edit='ÅÖÛØ ááÊÍÑíÑ';
 $LDPreviewPic='ÚÑÖ ÇáÕæÑÉ';
 $LDCafeEditorial='ãÍÑÑ ÃÎÈÇÑ ÇáßÇİíÊíÑíÇ';
 $LDHealthTips='ÊáãíÍÇÊ ÕÍíÉ';
-$LDClk2Write='ÃÖÛØ åäÇ áÊÔÛíá ãÍÑÑ ÇáäÕæÕ';
+$LDClk2Write='ÅÖÛØ åäÇ áÊÔÛíá ãÍÑÑ ÇáäÕæÕ';
 
 $LDOr='Ãæ';
 $LDSetCurrency='ÍÏÏ ÇáÚãáÉ';
-$LDNewCurrencySet='Êã ÃÎÊíÇÑ ÇáÚãáÉ ÇáÌÏíÏÉ';
-$LDPlsSelectCurrency='ÃÎÊÇÑ ÇáÚãáÉ';
-$LDmain='main';
-$LDClk2AddCurrency='áÅÏÎÇá ÚãáÉ äæÚ ÌÏíÏ, ÃÖÛØ åäÇ (ãáÇÍÙÉ: ÃäÊ Úáì æÔß ÇáÎÑæÌ ãä ÃÎÈÇÑ ÇáßÇİíÊíÑíÇ)';
+$LDNewCurrencySet='Êã ÊËÈíÊ ÇáÚãáÉ ÇáÌÏíÏÉ';
+$LDPlsSelectCurrency='íÑÌì ÅÎÊíÇÑ ÇáÚãáÉ';
+$LDmain='ÑÆíÓí';
+$LDClk2AddCurrency='áÅÏÎÇá äæÚ ÌÏíÏ ãä ÇáÚãáÉ, ÅÖÛØ åäÇ (ãáÇÍÙÉ: ÃäÊ Úáì æÔß ÇáÎÑæÌ ãä ÃÎÈÇÑ ÇáßÇİíÊíÑíÇ)';
 
 $LDMenuSaved='Êã ÍİÙ ÇáŞÇÆãÉ';
 /* 2002-10-13 EL */
@@ -135,7 +135,7 @@ $LD_MMsddsyyyy='mm/dd/yyyy';
 /* 2003-02-11*/
 $LDSubmitNews='ÊÍÑíÑ ÇáÇÎÈÇÑ';
 $LDDelete='ÍĞİ';
-$LDDeleteCurrency='åá ÃäÊ ãÊÇßÏ ãä ÑÛÈÊß İí ÍĞİ åĞå ÇáÚãáÉ¿';
-$LDNoMainDelete='áÇ íãßäß ÍĞİ ÇáÚãáÉ ÇáÑÆíÓíÉ. \nÍÏÏ ÚãáÉ ÑÆíÓíÉ ÃÎÑì ÃæáÇ.';
+$LDDeleteCurrency='åá ÃäÊ ãÊÇßÏ İÚáÇğ ãä ÍĞİ åĞå ÇáÚãáÉ¿';
+$LDNoMainDelete='áÇ íãßäß ÍĞİ ÇáÚãáÉ ÇáÑÆíÓíÉ. \nÍÏÏ ÚãáÉ ÑÆíÓíÉ ÃÎÑì ÃæáÇğ.';
 $LDCurrencyExisting='åĞå ÇáÚãáÉ ãæÌæÏÉ İÚáÇ!';
 ?>

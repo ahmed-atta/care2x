@@ -8,7 +8,7 @@ $LDFillLabOnly='áÇÓÊÎÏÇã ÇáãÚãá ÝÞØ';
 $LDLEN='ÑÞã ÏÎæá ÇáãÚãá';  /* LEN =  Lab entry number */
 
 $LDDate='ÇáÊÇÑíÎ';
-$LDEye='Eye';
+$LDEye='Úíä';
 $LDBac_1='Bact.1'; /* Note: Bact. means bacteria or pathogen */
 $LDBac_2='Bact.2';
 $LDBac_3='Bact.3';
@@ -16,12 +16,12 @@ $LDBac_I='Patho.I';
 $LDBac_II='Patho.II';
 $LDBac_III='Patho.III';
 $LDFungi='Fungi';
-$LDResistanceTestAnaerob='Resistance test Anaerobe';				
-$LDResistanceTestAerob='Resistance test Aerobe';
-$LDTestFindings='äÊÇÆÌ ÇáÊÍÇáíá / ÇáãæÌæÏÇÊ';
-$LDMarkStreptocResistance='mark by streptococcus resistance';
-$LDBlockerNeg='Blocker negative';
-$LDBlockerPos='Blocker positive';
+$LDResistanceTestAnaerob='ÅÎÊÈÇÑ ãÞÇæãÉ ÃäÇíÑæÈ';				
+$LDResistanceTestAerob='ÅÎÊÈÇÑ ãÞÇæãÉ ÃíÑæÈ';
+$LDTestFindings='äÊÇÆÌ ÇáÅÎÊÈÇÑ/ÇáãæÌæÏÇÊ';
+$LDMarkStreptocResistance='ãÓÌá Úáì ãÞÇæãÉ streptococcus ';
+$LDBlockerNeg='ÓáÈíÉ ÈáæßíÑ';
+$LDBlockerPos='ÓáÈíÉ ÈáæßíÑ';
 $LDBacNr_GT='Bac.ct.>10^5';
 $LDBacNr_LT='Bac.ct.<10^5';
 $LDBacNrNeg='Bac.ct.neg';

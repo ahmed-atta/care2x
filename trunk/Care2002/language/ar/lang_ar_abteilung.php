@@ -20,16 +20,16 @@ $dept=array('ÌÑÇÍÉ ÚÇãÉ',
 					'ÇáäÓÇÁ æ ÇáæáÇÏÉ',
 					'ÚáÇÌ ØÈíÚí',
 					'ÈÇØäÉ',
-					'Oncology',
+					'ÇáÃæÑÇã',
 					'ÇáÕíÇäÉ',
 					'ÇáÚäÇíÉ ÇáãÊæÓØÉ',
 					'ÇáÚäÇíÉ ÇáãÑßÒÉ',
-					'ÇáãÚãá ÇáØÈí',
-					'Emergency Ambulatory',
-					'General Ambulatory',
-					'Sonography',
-					'ÇáÊÔÎíÕ Çáäææí',
-					'Internal Medicine Ambulatory');
+					'ÇáãÎÊÈÑ ÇáØÈí',
+					'ÇáÅÓÚÇİ',
+					'ÇáÅÓÚÇİ ÇáÚÇã',
+					'ÇáÓæäæÌÑÇİí',
+					'ÇáØÈ Çáäææí',
+					'ÇáÅÓÚÇİ ÇáÈÇØäí');
 					
 /**
 * Do not translate the $target variable

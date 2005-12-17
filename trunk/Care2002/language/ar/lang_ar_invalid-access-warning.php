@@ -17,7 +17,7 @@ require_once($root_path.'include/inc_img_fx.php');
 
 <tr>
 <td bgcolor="navy" align=right >
-<FONT  COLOR="white"  SIZE=+3  FACE="arial"><STRONG>&nbsp;’ЁЌ… џн— г—ќ’ »«бж’жб ≈бне«</STRONG></FONT>
+<FONT  COLOR="white"  SIZE=+3  FACE="arial"><STRONG>&nbsp;’ЁЌ… џн— г—ќ’ »«бж’жб</STRONG></FONT>
 </td>
 </tr>
 
@@ -26,7 +26,7 @@ require_once($root_path.'include/inc_img_fx.php');
 <p><br>
 <center>
 <FONT    SIZE=3 color=red  FACE="Tahoma">
-<b>бн” б–ня «бЌё бЁ Ќ е–« «бг” дѕ</b></font>
+<b>бн” бѕня «бЌё бЁ Ќ е–« «бг” дѕ</b></font>
 <p>
 <FORM >
 <INPUT type="button"  value=" гж«Ёё "  onClick="<?php if ($mode=="close") print 'window.close()'; else print 'history.back()'; ?>"></FORM>
@@ -37,21 +37,21 @@ require_once($root_path.'include/inc_img_fx.php');
 
 <ul>
 <font size=3 face="Tahoma">
-√Ќ г«б«  √”»«» ЌѕжЋ е–е «бг‘яб…:
+≈Ќ г«б«  √”»«» ЌѕжЋ е–е «бг‘яб…:
 </FONT>
 
 <p>
 <font size=2 face="Tahoma">
 <img <?php echo createComIcon('../../','achtung.gif') ?>>
-гд «бггяд √дя √” ќѕг  «б«“—«— «бён«”н… «бќ«’… »жўЁ н «б ёѕг ж «б—ћжЏ Ён г” Џ—÷я «бќ«’, √»Ўб √” ќѕ«г е–е «б«“—«—.<br>
+гд «бггяд ≈де  г ≈” ќѕ«г √“—«— «б ёѕг ж «б—ћжЏ Ён г” Џ—÷я «бќ«’.<br>
 <img <?php echo createComIcon('../../','achtung.gif') ?>>
-гд «бггяд √дя —Ё÷  «бяжян, е–« «б»—д«гћ нЏ гѕ Џбм «бяжян бнЏгб »ѕё…, б–м √ё»б «бяжян.<br>
+гд «бггяд ≈дя —Ё÷  ќ«’н… «бяжян, е–« «б»—д«гћ нЏ гѕ Џбм «бяжян бнЏгб »ѕё…, б–м ≈ё»б ќ«’н… «бяжян ≈–« Ўб» гдя «б»—д«гћ \бя г—… √ќ—м.<br>
 <img <?php echo createComIcon('../../','achtung.gif') ?>>
-гд «бггяд √д г” Џ—÷я бг нё»б «бяжян, б–м ёг »«Џѕ«ѕ г” Џ—÷я бнё»б «бяжян ѕ«Ћн«.<br>
+гд «бггяд √д г” Џ—÷я б« нё»б «бяжян, б–м ёг »«Џѕ«ѕ г” Џ—÷я бнё»б «бяжян  бё«∆н«.<br>
 <img <?php echo createComIcon('../../','achtung.gif') ?>>
-гд «бггяд √д няжд г” Џ—÷я џн— ё«ѕ— Џбм  ‘џнб ћ«Ё«”я—» , √ж «д ћ«Ё«”я—»  ёѕ  г √»Ў«бе«, б–м ёг » гянд ћ«Ё«”я—» .<br>
+гд «бггяд √д няжд г” Џ—÷я џн— ё«ѕ— Џбм  ‘џнб «бћ«Ё«”я—» , √ж «д ћ«Ё«”я—»  ёѕ  г ≈»Ў«бе«, б–м ёг » гянд ћ«Ё«”я—» .<br>
 <img <?php echo createComIcon('../../','achtung.gif') ?>>
-Ён Ќ«б«  д«ѕ—… гд «бггяд √д няжд ед«я ќЎ«Ѕ Ён Џгбн… дёб «б»н«д« , б ’ЌнЌ е–« «бж÷Џ ёг »«б÷џЎ Џбм “— «б«дЏ«‘ Ён г” Џ—÷я.
+Ён Ќ«б«  д«ѕ—… гд «бггяд √д няжд ед«я ќЎ√ Ён Џгбн… дёб «б»н«д« , б ’ЌнЌ е–« «бж÷Џ ёг »«б÷џЎ Џбм “— «б«дЏ«‘ F5 Ён г” Џ—÷я.
 <p>
 </FONT>
 <p>

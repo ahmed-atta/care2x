@@ -1,33 +1,33 @@
 <?php
-$LDSend='ÃÑÓá';
+$LDSend='ÅÑÓÇá';
 $LDCancel='ÅáÛÇÁ ÇáÇãÑ';
-$LDPrint='ÃØÈÚ';
-$LDStop='ÞÝ';
-$LDContinue='ÃÓÊãÑ';
+$LDPrint='ØÈÇÚÉ';
+$LDStop='ÅíÞÇÝ';
+$LDContinue='ÅÓÊãÑÇÑ';
 $LDSearch='ÈÍË';
-$LDBack='ÊÑÇÌÚ';
+$LDBack='ÑÌæÚ';
 $LDOpen='ÝÊÍ';
-$LDClose='ÇÛáÇÞ';
+$LDClose='ÅÛáÇÞ';
 
 $LDRegister='ÓÌá';
 $LDRegistration='ÊÓÌíá';
-$LDAdmission='ÞÈæá';
-$LDAdmit='ÇÞÈá';
-$LDArchive='ÇÑÔíÝ';
-$LDStart='ÇÈÏÇÁ';
-$LDEnd='ÇäåÇÁ';
+$LDAdmission='ÅíæÇÁ';
+$LDAdmit='ÅíæÇÁ';
+$LDArchive='ÃÑÔíÝ';
+$LDStart='ÈÏÇíÉ';
+$LDEnd='äåÇíÉ';
 # 2003-07-29 EL
-$LDListApptByDept='ÇÚÑÖ ÇáãæÇÚíÏ ÈæÇÓØÉ ÇáÞÓã';
-$LDListApptByDoc='ÇÚÑÖ ÇáãæÇÚíÏ ÈæÇÓØÉ ÇáØÈíÈ';
+$LDListApptByDept='ÚÑÖ ÇáãæÇÚíÏ ÍÓÈ áÞÓã';
+$LDListApptByDoc='ÚÑÖ ÇáãæÇÚíÏ ÍÓÈ ÇáØÈíÈ';
 $LDdone='Êã';
 $LDOk='ãæÇÝÞ';
-$LDSelect='ÇÎÊíÇÑ';
+$LDSelect='ÅÎÊíÇÑ';
 
-$LDHelp="Help";
-$LDCloseHelpWin="Close help window";
+$LDHelp="ãÓÇÚÏÉ";
+$LDCloseHelpWin="ÅÛáÇÞ äÇÝÐÉ ÇáãÓÇÚÏÉ";
 
-$LDRefreshWindow = 'Refresh display';
+$LDRefreshWindow = 'ÊäÔíØ ÇáÚÑÖ';
 
-$LDNext = 'Next';
-$LDPrevious = 'Previous';
+$LDNext = 'ÇáÊÇáí';
+$LDPrevious = 'ÇáÓÇÈÞ';
 ?>

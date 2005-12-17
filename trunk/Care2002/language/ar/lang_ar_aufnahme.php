@@ -1,49 +1,49 @@
 <?php
-$LDAdmission='ŞÈæá';
-$LDAdmitDate='ÊÇÑíÎ ÇáŞÈæá';
-$LDAdmitTime='Òãä ÇáŞÈæá';
-$LDCaseNr='ÑŞã ÇáŞÈæá';
-$LDTitle='ßäíÉ';
+$LDAdmission='ÅíæÇÁ';
+$LDAdmitDate='ÊÇÑíÎ ÇáÅíæÇÁ';
+$LDAdmitTime='æŞÊ ÇáÅíæÇÁ';
+$LDCaseNr='ÑŞã ÇáÅíæÇÁ';
+$LDTitle='ÇáÕİÉ';
 $LDLastName='ÇááŞÈ';
 $LDFirstName='ÇáÇÓã';
 $LDBday='ÊÇÑíÎ ÇáãíáÇÏ';
 $LDPhone='ÇáåÇÊİ';
-$LDAdmitBy='ŞÈá ãä';
+$LDAdmitBy='ÅíæÇÁ ÈÃãÑ ãä';
 $LDSex='ÇáÌäÓ';
 $LDMale='ĞßÑ';
 $LDFemale='ÃäËì';
 $LDAddress='ÇáÚäæÇä';
-$LDAmbulant='ãÑíÖ ÈÇáÚíÇÏÉ ÇáÎÇÑÌíÉ';
-$LDStationary='ãÑíÖ ÈÇáÇíæÇÁ';
+$LDAmbulant='ÚíÇÏÉ ÎÇÑÌíÉ';
+$LDStationary='ŞÓã ÇáÅíæÇÁ';
 $LDSelfPay='Úáì ÍÓÇÈå';
 $LDPrivate='ËÇãíä ÎÇÕ';
-$LDInsurance='Úáì ÍÓÇÈ ÇáãÌÊãÚ';
+$LDInsurance='ÊÃãíä ØÈí';
 $LDDiagnosis='ÇáÊÔÎíÕ';
 $LDRecBy='ÃÑÌÚ ãä ØÑİ';
 $LDTherapy='ÇáÚáÇÌ';
 $LDSpecials='ãáÇÍÙÇÊ ÇáÇÑÌÇÚ';
 
-$LDPatientSearch='ÈÍË İí ÈíÇäÇÊ ÇáãÑíÖ';
-$LDAdmit='ÇáŞÈæá';
+$LDPatientSearch='ÈÍË Úä ãÑíÖ';
+$LDAdmit='ÇáÅíæÇÁ';
 $LDSearch='ÈÍË';
 $LDArchive='ÃÑÔíİ';
-$LDCatPls='ÇÑíÏ Çä ÃØáÚ Úáì ÇáİÆÇÊ ';
-$LDGoodMorning='ÕÈÇÍ ÇáÎíÑ!';
-$LDGoodDay='ÃåáÇ, ÊÓÚÏäí ÑÄíÊß';
-$LDGoodAfternoon='!ãÓÇÁ ÇáÎíÑ';
-$LDGoodEvening='ãÓÇÁ ÇáÎíÑ';
+$LDCatPls='ÚÑÖ ÇáİÆÇÊ';
+$LDGoodMorning='ÇáÓáÇã Úáíßã';
+$LDGoodDay='ÇáÓáÇã Úáíßãğ';
+$LDGoodAfternoon='ÇáÓáÇã Úáíßã';
+$LDGoodEvening='ÇáÓáÇã Úáíßã';
 
-$LDNewForm='ÃÍÊÇÌ áäãæÏÌ İÇÑÛ';
+$LDNewForm='äãæĞÌ ÌÏíÏ';
 
 $LDForceSave='ÍİÙ Úáì Ãí ÍÇá';
 $LDSaveData='ÍİÙ ÇáÈíÇäÇÊ';
-$LDResetData='ÊİÑíÛ ÇáÍŞæá';
-$LDReset='ÊİÑíÛ';
+$LDResetData='ãÓÍ ÇáÈíÇäÇÊ';
+$LDReset='ÊåíÆÉ';
 $LDSave='ÍİÙ';
 $LDCancel='ÅáÛÇÁ ÇáÇãÑ';
 
 $LDCancelClose='ÅáÛÇÁ ÇáÇãÑ æ ÚæÏÉ áÕİÍÉ ÇáÈÏÇíÉ';
-$LDCloseWin='ÅÛáÇŞ äÇİĞÉ ÇáŞÈæá';
+$LDCloseWin='ÅÛáÇŞ';
 $LDError='<font color=red>ÇáÇÍãÑ</font>ÇáãÚáæãÇÊ ãİŞæÏÉ İí ÍŞá ÇáÇÏÎÇá ÇáãÚáã ÈÇááæä';
 $LDErrorS='<font color=red>ÇáÇÍãÑ</font>ÈÚÖ ÇáãÚáæãÇÊ ãİŞæÏÉ İí ÍŞá ÇáÇÏÎÇá ÇáãÚáã ÈÇááæä';
 
@@ -52,31 +52,31 @@ $fieldname=array('ÑŞã ÇáãÑíÖ',
 'ÇáÃÓã',
 'ÊÇÑíÎ ÇáãíáÇÏ',
 'ÎíÇÑÇÊ');
-$LDEntryPrompt='ÃÏÎá ãİÇÊíÍ ßáãÇÊ ááÈÍË,ßãËÇá: ÇááŞÈ, Ãæ ÇáÇÓã, Ãæ ÊÇÑíÎ ÇáãíáÇÏ, ÅáÎ';
+$LDEntryPrompt='ãİÑÏÇÊ ÇáÈÍË: ÇááŞÈ, Ãæ ÇáÇÓã, Ãæ ÊÇÑíÎ ÇáãíáÇÏ, ÅáÎ';
 $LDSEARCH='ÈÍË';
-$LDAdmWantEntry='ÇÍÊÇÌ áŞÈæá ãÑíÖ';
-$LDAdmWantSearch='ÇäÇ ÃÈÍË Úä ãÑíÖ';
-$LDAdmWantArchive='ÇÍÊÇÌ áÇÚÇÏÉ ÇáÈÍË İí ÇáÇÑÔíİ';
+$LDAdmWantEntry='ÅíæÇÁ ãÑíÖ';
+$LDAdmWantSearch='ÈÍË Úä ãÑíÖ';
+$LDAdmWantArchive='ÈÍË İí ÇáÃÑÔíİ';
 
 /**************** note the ' ~nr~ ' must not be erased it will be replaced by the script with the number of search results ******/
-$LDSearchFound='ÇáÈÍË æÌÏ<font color=red><b>~nr~</b></font>ÈíÇäÇÊ ãÊÚáŞÉ ÈÇáãæÖæÚ';
+$LDSearchFound='äÊíÌÉ ÇáÈÍË: <font color=red><b>~nr~</b></font> ÈíÇäÇÊ ãÊÚáŞÉ ÈÇáãæÖæÚ';
 
-$LDShowData='ÇÙåÇÑ ÇáÈíÇäÇÊ';
-$LDPatientData='ÈíÇäÇÊ ÇáŞÈæá';
-$LDBack2Admit='ÇáÑÌæÚ ááŞÈæá';
-$LDBack2Search='ÇáÑÌæÚ ááÈÍË';
-$LDBack2Archive='ÇáÑÌæÚ ááÃÑÔíİ';
+$LDShowData='ÚÑÖ ÇáÈíÇäÇÊ';
+$LDPatientData='ÈíÇäÇÊ ÇáÅíæÇÁ';
+$LDBack2Admit='ÑÌæÚ ááÅíæÇÁ';
+$LDBack2Search='ÑÌæÚ ááÈÍË';
+$LDBack2Archive='ÑÌæÚ ááÃÑÔíİ';
 
 $LDFrom='ãä';
 $LDTo='Çáì';
 $LDUpdateData='ÊÍÏíË ÇáÈíÇäÇÊ';
 $LDNewArchive='ÈÍË ÌÏíÏ İí ÇáÇÑÔíİ';
-$LDAdmArchive='ÇáŞÈæá - ÇáÇÑÔíİ';
+$LDAdmArchive='ÃÑÔíİ ÇáÅíæÇÁ';
 
 /************** note: do not erase the ' ~nr~ ' it will be replaced by the script with a number **************/
-$LDFoundData=' ÃäÇ æ ÌÏÊ ~nr~ ÈíÇäÇÊ ÏÇÊ ÕáÉ ÈÇáãæÖæÚ <br>ÅÖÛØ Úáì ÇáãØáæÈ,';
+$LDFoundData='íæÌÏ:  ~nr~ ÈíÇäÇÊ ÏÇÊ ÕáÉ ÈÇáãæÖæÚ <br>ÅÖÛØ Úáì ÇáãØáæÈ,';
 
-$LDClk2Show='ÅÖÛØ áÅÙåÇÑ ÇáÈíÇäÇÊ';
+$LDClk2Show='ÅÖÛØ áÚÑÖ ÇáÈíÇäÇÊ';
 
 $LDElements=array(
 								'',
@@ -84,9 +84,9 @@ $LDElements=array(
 								'ÇáÇÓã',
 								'ÊÇÑíÎ ÇáãíáÇÏ',
 								'ÑŞã ÇáãÑíÖ',
-								'ÊÇÑíÎ ÇáŞÈæá'
+								'ÊÇÑíÎ ÇáÅíæÇÁ'
 								);
-$LDSearchKeyword='ãİÊÇÍ ßáãÉ ÈÍË Çæ ÖÑİ';
+$LDSearchKeyword='ãİÑÏÇÊ ÇáÈÍË';
 $LDMEDOCS='äÙÇã ÇáæËÇÆŞ ÇáØÈíÉ';
 $LDMedocsSearchTitle='ÇáÈÍË Úä æËíŞÉ ØÈíÉ';
 $LDHideCat='ÇÖÛØ áÇÎİÇÁ ÇáİÆÉ';
@@ -121,50 +121,50 @@ $LDAt='ÚäÏ';
 		
 $LDDept='ÇáŞÓã';
 $LDRoomNr='ÑŞã ÇáÍÌÑÉ';
-$LDAdmitType='äæÚ ÇáŞÈæá';		
-$LDCivilStat='ÇáæÖÚ ÇáÇÌÊãÇÚí';
+$LDAdmitType='äæÚ ÇáÅíæÇÁ';		
+$LDCivilStat='ÇáÍÇáÉ ÇáÅÌÊãÇÚíÉ';
 $LDInsuranceNr='ÑŞã ÇáÊÃãíä';
 $LDNameAddr='ÇáÇÓã æ ÇáÚäæÇä';
 $LDBillInfo='ãÚáæãÇÊ ÇáÏİÚ';
-$LDAdmitDiagnosis='ÊÔÎíÕ ÇáŞÈæá';
+$LDAdmitDiagnosis='ÊÔÎíÕ ÇáÅíæÇÁ';
 $LDInfo2='ãÚáæãÇÊ Çáì';
 $LDPrintDate='ÊÇÑíÎ ÇáØÈÚ';
-$LDReligion='ÇáÏíä';
+$LDReligion='ÇáÏíÇäÉ';
 $LDTherapyType='äæÚ ÇáÚáÇÌ';
 $LDTherapyOpt='ÎíÇÑÇÊ ÇáÚáÇÌ';
 $LDServiceType='äæÚ ÇáÎÏãÉ';
 
-$LDClick2Print='ÃÖÛØ Úáì ÇáãáÕŞ ááØÈÇÚÉ';
+$LDClick2Print='ÅÖÛØ Úáì ÇáãáÕŞ ááØÈÇÚÉ';
 
 $LDEnterDiagnosisNote='ÑæÇÈØ Çáì ãäÔæÑÇÊ æ ãáÇÍÙÇÊ ãÊÚáŞÉ ÈÇáÊÔÎíÕ:';
 $LDEnterTherapyNote='ÑæÇÈØ Çáì ãäÔæÑÇÊ æ ãáÇÍÙÇÊ ãÊÚáŞÉ ÈÇáÚáÇÌ:';
 $LDSeeDiagnosisNote='ãäÔæÑÇÊ æ ãáÇÍÙÇÊ ãÊÚáŞÉ ÈÇáÊÔÎíÕ:';
 $LDSeeTherapyNote='ãäÔæÑÇÊ æ ãáÇÍÙÇÊ ãÊÚáŞÉ ÈÇáÚáÇÌ:';
-$LDMakeBarcodeLabels='ßæä ãáÕŞ ÔÑíØ ãÔİÑ';
+$LDMakeBarcodeLabels='ÊÌåíÒ ãáÕŞÇÊ ÇáÈÇÑßæÏ';
 
-$LDPlsEnterDept='<b>ÇÏÎá ÇáŞÓã , Ãæ ÇáÚíÇÏÉ, Çæ ãÌÇá ÇáÚãá</b><br>';
-$LDOkSaveNow='ãæÇİŞ, ÃÍİÙ ÇáÇä';
+$LDPlsEnterDept='<b>íÑÌì ßÊÇÈÉ ÇáŞÓã Ãæ ÇáÚíÇÏÉ Çæ ãÌÇá ÇáÚãá</b><br>';
+$LDOkSaveNow='ãæÇİŞ, ÇÍİÙ ÇáÇä';
 
 $LD_ddpMMpyyyy='dd.mm.yyyy';
 $LD_yyyyhMMhdd='yyyy-mm-dd';
 $LD_MMsddsyyyy='mm/dd/yyyy';
 /* 2002-10-13 EL */
-$LDPlsSelectPatientFirst='ÇÎÊÇÑ ÇáãÑíÖ ÇæáÇ';
+$LDPlsSelectPatientFirst='íÑÌì ÅÎÊíÇÑ ÇáãÑíÖ ÇæáÇ';
 /* 2002-11-30 EL */
 $LDPatientRegister='ÊÓÌíá ÔÎÕ';
 $LDRegDate='ÊÇÑíÎ ÇáÊÓÌíá';
 $LDRegTime='æŞÊ ÇáÊÓÌíá';
-$LDRegBy='Êã ÇáÊÓÌíá ãä ØÑİ';
-$LDName2='ÃÓã ÇáÇÈ';
-$LDName3='ÃÓã ÇáÌÏ';
-$LDNameMid='Middle name';
-$LDNameMaiden='Maiden name';
-$LDNameOthers='Other names';
+$LDRegBy='ÓÌáÊ ãä ŞÈá';
+$LDName2='ÅÓã ÇáÇÈ';
+$LDName3='ÅÓã ÇáÌÏ';
+$LDNameMid='ÇáßäíÉ';
+$LDNameMaiden='ÇááŞÈ ŞÈá ÇáÒæÇÌ';
+$LDNameOthers='ÅÓã ÂÎÑ';
 $LDStreet='ÇáÔÇÑÚ';
 $LDStreetNr='ÇáÑŞã';
 $LDTownCity='ÇáãÏíäÉ';
-$LDProvState='ÇáãÍÇİÙÉ';
-$LDRegion='ÇáãäØŞÉ';
+$LDProvState='ÇáÔÚÈíÉ';
+$LDRegion='ÇáãÄÊãÑ';
 $LDCountry='ÇáÏæáÉ';
 $LDCitizenship='ÇáÌäÓíÉ';
 $LDCivilStatus='ÇáæÖÚ ÇáÇÌÊãÇÚí'; /* Civil status = married, single, divorced, widow */
@@ -173,22 +173,22 @@ $LDMarried='ãÊÒæÌ';
 $LDDivorced='ãØáŞ';
 $LDWidowed='ÃÑãá';
 $LDSeparated='ãäİÕá';
-$LDCellPhone='ÇáåÇÊİ';
+$LDCellPhone='äŞÇá';
 $LDFax='ÇáİÇßÓ';
 $LDEmail='ÇáÈÑíÏ ÇáÇáßÊÑæäí';
-$LDZipCode='Zip';
+$LDZipCode='Õ.È.';
 $LDPhoto='ÇáÕæÑÉ';
 /* 2002-12-02 EL*/
 $LDPatientRegisterTxt='ÊÓÌíá ÇáãÑÖì, ÈÍË İí ÇáÊÓÌíá, ÈÍË ÏŞíŞ İí ÇáÇÑÔíİ';
-$LDAdmitNr='ÑŞã ÇáŞÈæá';
+$LDAdmitNr='ÑŞã ÇáÅíæÇÁ';
 $LDPatient='ãÑíÖ';
 $LDVisit='ÒíÇÑÉ';
 $LDVisitTxt='ãÊÛíÑÇÊ Çæ ŞÈæá ãÑÖì ÇáÚíÇÏÉ ÇáÎÇÑÌíÉ';
-$LDAdmissionTxt='ŞÈæá ãÑÖì ÈÇáÇíæÇÁ, ÈÍË, ÈÍË ÏŞíŞ';
+$LDAdmissionTxt='ÅíæÇÁ ãÑÖì ÈÇáÇíæÇÁ, ÈÍË, ÈÍË ÏŞíŞ';
 $LDImmunization='ÇáÊØÚíã';
 $LDESE='ÇÏÎÇá, ÈÍË, ÊÍÑíÑ';
 $LDImmunizationTxt=$LDESE.' ÊŞÑíÑ ÇáÊØÚíã';
-$LDDRG='(ãÑßÈÉ) DRG';
+$LDDRG='(ÇáÃÏæíÉ) DRG';
 $LDDRGTxt=$LDESE.'(ãÌãæÚÉ ÊÔÎíÕÇÊ ãÊÑÇÈØÉ) DRG';
 $LDProcedures='ÇÌÑÇÁÇÊ';
 $LDProceduresTxt=$LDESE.' ÅÌÑÇÁÇÊ ÇáÚáÇÌ';
@@ -196,12 +196,12 @@ $LDPrescriptions='ÇáæÕİÇÊ ØÈíÉ';
 $LDPrescriptionsTxt=$LDESE.' ÇáæÕİÇÊ ÇáØÈíÉ';
 /* 2002-12-03 EL*/
 $LDDiagXResults='äÊÇÆÌ ÇáÊÔÎíÕ';
-$LDDiagXResultsTxt='ÈÍË, ÈÍË ÏŞíŞ, ÚÑÖ äÊÇÆÌ ÇáÊÔÎíÕæ ÇáÊŞÇÑíÑ';
+$LDDiagXResultsTxt='ÈÍË, ÈÍË ÏŞíŞ, ÚÑÖ äÊÇÆÌ ÇáÊÔÎíÕ ÇáÊŞÇÑíÑ';
 $LDAppointments='ÇáãæÇÚíÏ';
 $LDAppointmentsTxt=$LDESE.', ÈÍË ÏŞíŞ İí ÇáãæÇÚíÏ Çæ ÇáÌÏÇæá';
-$LDPatientDev='ÇáÊØæÑ';
+$LDPatientDev='ÊØæÑ ÇáÍÇáÉ';
 $LDPatientDevTxt=$LDESE.', ÚÑÖ ÊŞÇÑíÑ Úä ÊØæÑ ÍÇáÉ ÇáãÑíÖ';
-$LDWtHt='ÇáæÒä æ ÇáØæá';
+$LDWtHt='ÇáŞíÇÓÇÊ';
 $LDWtHtTxt=$LDESE.' ÇáæÒä æ ÇáØæá æ ãÍíØ ÇáÑÆÓ';
 $LDPregnancies='ÇáÍãá';
 $LDPregnanciesTxt=$LDESE.' ãÚáæãÇÊ ÇáÍãá';
@@ -211,47 +211,47 @@ $LDBirthDetailsTxt=$LDESE.' ÊİÇÕíá ÇáæáÇÏÉ';
 $LDInsuranceCo='ÔÑßÉ ÇáÊÃãíä';
 $LDInsuranceNr_2='ÑŞã ÇáÊÃãíä ÇáÇÖÇİí';
 $LDInsuranceCo_2='ÔÑßÉ ÇáÊÃãíä ÇáÇÖÇİíÉ';
-$LDBillType='ÃäæÇÚ ÇáÏİÚ';
-$LDWard='ÇáÌäÇÍ';
-$LDMakeWristBand='ßæä ÓæÇÑ ãÚÕã';
-$LDClickImgToPrint='ÃÖÛØ ÇáÕæÑÉ ááØÈÇÚÉ';
-$LDPrintPortraitFormat='ÌåÒ ÇáØÇÈÚÉ ááØÈÇÚÉ İí ÇáæÖÚ ÇáÇİŞí';
+$LDBillType='äæÚ ÇáÏİÚ';
+$LDWard='ŞÓã ÇáÅíæÇÁ';
+$LDMakeWristBand='ÊÌåíÒ ÓæÇÑ ãÚÕã';
+$LDClickImgToPrint='ÅÖÛØ Úáì ÇáÕæÑÉ ááØÈÇÚÉ';
+$LDPrintPortraitFormat='ÊÌåíÒ ÇáØÇÈÚÉ ááØÈÇÚÉ İí ÇáæÖÚ ÇáÇİŞí';
 /* 2002-12-14 EL */
 $LDRegistryNr='ÑŞã ÇáÔÎÕ';
 $LDRedirectToRegistry='ãáÇÍÙÉ: ÇáÈÍË ÇáÎÇÕ Èß Óæİ íæÌå áæÍÏÉ ÇáÊÓÌíá';
 /* 2002-12-24 EL */
-$LDSSSNr='SSS Nr.';
-$LDNatIdNr='ÑŞã ÇáÈØÇŞÉ ÇáÔÎÕíÉ';
+$LDSSSNr='ÇáÑŞã ÇáæØäí/ÇáÅÌÊãÇÚí';
+$LDNatIdNr='ÑŞã ÇáåæíÉ Ãæ ÇáÌæÇÒ';
 $LDEthnicOrigin='ÇáÇÕá ÇáÚÑŞí';
 $LDOtherNr='ÃÑŞÇã ÃÎÑì';
 /* 2002-12-25 EL */
-$LDSendBill='ÃÑÓá ÇáİÇÊæÑÉ Çáì';
-$LDContactPerson='ÇÊÕÇá ÈÔÎÕ';
+$LDSendBill='ÅÑÓÇá ÇáİÇÊæÑÉ Çáì';
+$LDContactPerson='ÇáÔÎÕ ÇáãÓÆæá';
 $LDOptsForPerson='ÎíÇÑÇÊ áåĞÇ ÇáÔÎÕ';
-$LDSickReport='ÊÃßíÏ ÚÌÒ Úä ÇáÚãá';
+$LDSickReport='ÊŞÑíÑ ÑÇÍÉ ãÑÖíÉ';
 $LDAnamnesisForm='äãæÏÌ ÓæÇÈŞ ÇáãÑíÖ';
 $LDConsentDec='ÈíÇä ŞÈæá';
 $LDUpdate='ÊÍÏíË';
 /* 2002-12-29 EL */
 $LDGuarantor='ÇáÖÇãä/Çáßİíá';
-$LDCareServiceClass='ØÈŞÉ ÎÏãÇÊ ÇáÚäÇíÉ';
-$LDRoomServiceClass='ØÈŞÉ ÎÏãÇÊ ÇáÛÑİ';
-$LDAttDrServiceClass='ØÈŞÉ ÇáÎÏãÇÊ ÇáØÈíÉ';
-$LDAdmitClass='ØÈŞÉ ÇáŞÈæá';
+$LDCareServiceClass='ÊÕäíİ ÎÏãÇÊ ÇáÚäÇíÉ';
+$LDRoomServiceClass='ÊÕäíİ ÎÏãÇÊ ÇáÛÑİ';
+$LDAttDrServiceClass='ÊÕäíİ ÇáÎÏãÇÊ ÇáØÈíÉ';
+$LDAdmitClass='äæÚ ÇáÅíæÇÁ';
 /* 2003-02-15 EL*/
-$LDEnterSearchKeyword='ÃÏÎá ãİÊÇÍ ßáãÉ ááÈÍË';
-$LDSearchFoundData='ÇáÈÍË æÌÏ <font color=red><b>~nr~</b></font> ÈíÇäÇÊ ãÊÚáŞÉ ÈÇáãæÖæÚ';
+$LDEnterSearchKeyword='ÃÏÎá ãİÑÏÇÊ ÇáÈÍË';
+$LDSearchFoundData='Êã ÇáÚËæÑ Úáì  <font color=red><b>~nr~</b></font> ÈíÇäÇÊ ãÊÚáŞÉ ÈÇáãæÖæÚ';
 $LDQuickList='ŞÇÆãÉ ãÎÊÕÑÉ';
-$LDSeveralInsurances='ÇáãÑíÖ áÏíå ÚÏÉ ÊÃãíäÇÊ ÃÖÛØ åäÇ áÊÍÑíÑ';
-$LDTop='Top';
-$LDInsuranceClass='ØÈŞÉ ÇáÊÃãíä';
-$LDRecordsHistory='ŞÇÚÏÉ ÈíÇäÇÊ ÓÌáÇÊ ÇáÊÇÑíÎ';
+$LDSeveralInsurances='ÇáãÑíÖ áÏíå ÚÏÉ ÊÃãíäÇÊ ÅÖÛØ åäÇ áÊÍÑíÑ';
+$LDTop='ÃÚáì';
+$LDInsuranceClass='Õäİ ÇáÊÃãíä';
+$LDRecordsHistory='ÇáÈíÇäÇÊ ÇáÊÇÑíÎíÉ';
 /* 2003-02-16 EL*/
 $LDNotYetAdmitted='áã íŞÈá ÈÚÏ';
-$LDPatientCurrentlyAdmitted='Êã ŞÈæá ÇáãÑíÖ';
+$LDPatientCurrentlyAdmitted='ÇáãÑíÖ ÈÍÇáÉ ÅíæÇÁ ÍÇáíÇğ';
 $LDOptions='ÎíÇÑÇÊ';
 /** note the ' ~nr~ ' must not be erased it will be replaced by the script with the number of search results ******/
-$LDSearchFoundAdmit='æÌÏÊ <font color=red><b>~nr~</b></font> ÍŞæá ãÊÚáŞÉ ÈÈíÇäÇÊ ÇáŞÈæá.';
+$LDSearchFoundAdmit='íæÌÏ: <font color=red><b>~nr~</b></font> ÓÌá ÅíæÇÁ.';
 $LDPatientNr='ÑŞã ÇáãÑíÖ';
 $LDNoRecordYet='~tag~ áíÓ áÏíå ~obj~ ÍÊì ÇáÃä';
 $LDNoRecordFor='áÇíæÌÏ ÓÌá ÎÇÕ ÈÈíÇäÇÊ ~obj~ ááÍÇáÉ ~tag~ ÍÊì ÇáÃä';
@@ -259,51 +259,51 @@ $LDRegistrationNr='ÑŞã ÇáÊÓÌíá';
 $LDDate='ÇáÊÇÑíÎ';
 $LDType='ÇáäæÚ';
 $LDMedicine='ØÈí';
-$LDTiter='Titer';
-$LDRefreshDate='ÇäÚÇÔ ÇáÈíÇäÇÊ';
-$LDReportingDept='Reporting Dept';
+$LDTiter='ÊíÊÑ';
+$LDRefreshDate='ÊÇÑíÎ ÇáÊäÔíØ';
+$LDReportingDept='ŞÓã ÇáÊŞÑíÑ';
 $LDReportNr='ÑŞã ÇáÊŞÑíÑ';
-$LDDelivery='ÇáÊÓáíã';
+$LDDelivery='ÇáæáÇÏÉ';
 $LDTime='ÇáæŞÊ';
-$LDClass='ØÈŞÉ';
-$LDOutcome='ÇáÕÇÏÑ';
+$LDClass='İÆÉ';
+$LDOutcome='ÇáäÊíÌÉ';
 $LDNrOfFetus='ÚÏÏ ÇáÃÌäÉ';
 $LDDetails='ÊİÇÕíá';
 /* 2003-03-02 */
-$LDDosage='Dosage';
+$LDDosage='ÇáÌÑÚÉ';
 $LDAppType='äæÚ ÇáØáÈ';
 $LDAppBy='ØáÈ ÈæÇÓØÉ';
 $LDNotes='ãáÇÍÙÇÊ';
-$LDEnterNewRecord='ÃÏÎá ÓÌá ÌÏíÏ';
+$LDEnterNewRecord='ÅÏÎÇá ÌÏíÏ';
 $LDPrescription='æÕİ ØÈíÉ';
-$LDDrugClass='ØÈŞÉ ÇáÇÏæíÉ';
+$LDDrugClass='İÆÉ ÇáÏæÇÁ';
 $LDPrescribedBy='æÕİÊ ãä ØÑİ';
 $LDPharmOrderNr='ÑŞã ØáÈíÉ ÇáÇÏæíÉ';
-$LDEncounterNr='ÑŞã ÇáãŞÇÈáÉ';
+$LDEncounterNr='ÑŞã ÇáÅíæÇÁ';
 $LDValue='ŞíãÉ';
 $LDUnit='æÍÏÉ';
 $LDWeight='ÇáæÒä';
 $LDHeight='ÇáØæá';
-$LDMeasuredBy='ÇÎÏÊ ÇáŞíÇÓÇÊ ÈæÇÓØÉ';
-$LDSickUntil='ÛíÑ ŞÇÏÑ Úáì ÇáÚãá ÍÊì';
+$LDMeasuredBy='ÃÎĞÊ ÇáŞíÇÓÇÊ ÈæÇÓØÉ';
+$LDSickUntil=' ÑÇÍÉ ãÑÖíÉ ÍÊì';
 $LDStartingFrom='ÈÏÁ ãä';
 $LDConfirmedOn='ãÄßÏ İí';
 $LDInsurersCopy='äÓÎÉ ááãÄãä';
 $LDDiagnosis2='ÇáÊÔÎíÕÇÊ';
 /* 2003-03-03*/
-$LDBy='By';
+$LDBy='ÈæÇÓØÉ';
 $LDSendCopyTo='ÇÑÓá äÓÎÉ Çáì';
 /* 2003-03-05 EL*/
-$LDAndSym='&';
+$LDAndSym='æ';
 $LDReports='ÇáÊŞÇÑíÑ';
-$LDRefererDiagnosis='ãÊÚáŞ ÈÇáÊÔÎíÕÇÊ';
-$LDRefererRecomTherapy='ÃÔÇÑÉ ááÚáÇÌ ÇáãæÕì Èå';
+$LDRefererDiagnosis='ÇáÊÔÎíÕ ÇáãÈÏÆí';
+$LDRefererRecomTherapy='ÅÔÇÑÉ ááÚáÇÌ ÇáãæÕì Èå';
 $LDShortNotes='ãáÇÍÙÇÊ ŞÕíÑÉ';
 /* 2003-03-08 EL */
-$LDCreateNewAppointment='ßæä ãæÚÏ ÌÏíÏ';
+$LDCreateNewAppointment='ãæÚÏ ÌÏíÏ';
 $LDDepartment='ŞÓã';
 $LDRemindPatient='ÊÏßíÑ ÇáãÑíÖ';
-$LDRemindBy='ÏßÑ ãä ØÑİ';
+$LDRemindBy='ÊĞßíÑ ÈæÇÓØÉ';
 $LDMail='ÇáÈÑíÏ';
 $LDPurpose='ÇáÛÇíÉ';
 $LDClinician='ÇáØÈíÈ ÇáÓÑíÑí';
@@ -313,77 +313,77 @@ $LDStatus='ÇáÍÇáÉ';
 /* 2003-03-08 EL*/
 $LDUrgency='ãÓÊÚÌá';
 $LDNormal='ÚÇÏí';
-$LDPriority='ÇáÇÓÈŞíÉ';
+$LDPriority='ÇÓÈŞíÉ';
 $LDUrgent='ÚÇÌá';
 $LDEmergency='ÇáØæÇÑÆ';
 /* 2003-03-09 EL*/
 $LDCancelReason='ÃÓÈÇÈ ÇáÇáÛÇÁ';
 $LDSureCancelAppt='åá ÇäÊ äÊÃßÏ ãä ÑÛÈÊß İí ÅáÛÇÁ ÇáãæÚÏ¿';
-$LDEnterCancelReason='ÃÏÎá ÇÓÈÇÈ ÇáÇáÛÇÁ';
-$LDpending='ãæŞæİ';
+$LDEnterCancelReason='ÃßÊÈ ÓÈÈ ÇáÇáÛÇÁ';
+$LDpending='ãÚáŞ';
 $LDcancelled='Êã ÇáÇáÛÇÁ';
 /* 2003-03-10 EL */
 $LDGotMedAdvice='åá ÇÓÊáã ÇáãÑíÖ ÇáäÕÇÆÍ ÇáØÈíÉ¿';
 /* 2003-03-15 EL */
-$LDShowDocList='ÇÖåÑ ŞÇÆãÉ ÇáæËÇÆŞ';
-$LDScheduleNewAppointment='ÌÏæá ãæÚÏ ÌÏíÏ';
+$LDShowDocList='ÚÑÖ ŞÇÆãÉ ÇáæËÇÆŞ';
+$LDScheduleNewAppointment='ÊÍÏíÏ ãæÚÏ ÌÏíÏ';
 /* 2003-04-04 EL */
-$LDNoPendingApptThisDay='áÇ ÊæÌÏ ãæÇÚíÏ ãæŞæİÉ áåĞÇ Çáíæã';
-$LDNoPendingApptToday='áÇ ÊæÌÏ ãæÇÚíÏ ãæŞæİÉ Çáíæã';
+$LDNoPendingApptThisDay='áÇ ÊæÌÏ ãæÇÚíÏ ãÚáŞÉ ááíæã ÇáãĞßæÑ';
+$LDNoPendingApptToday='áÇ ÊæÇÌÏ ãæÇÚíÏ ãÚáŞÉ Çáíæã';
 /* 2003-04-27 EL */
 $LDOptsForPatient='ÎíÇÑÇÊ áåĞÇ ÇáãÑíÖ';
 /* 2003-05-06 EL */
-$LDRegisterNewPerson='ÓÌá ãÑíÖ ÌÏíÏ';
+$LDRegisterNewPerson='ÊÓÌíá ãÑíÖ ÌÏíÏ';
 /* 2003-05-17 EL */
-$LDEnterPersonSearchKey='ÇÏÎá ãİÇÊíÍ ßáãÇÊ ááÈÍË, ãËá: ÑŞã ÇáÔÎÕ, ÇáÇÓã, ÇááŞÈ, ÇáÎ';
+$LDEnterPersonSearchKey='ãİÑÏÇÊ ÇáÈÍË: ÑŞã ÇáÔÎÕ, ÇáÇÓã, ÇááŞÈ, ÇáÎ';
 $LDPersonData='ÈíÇäÇÊ ÔÎÕíÉ';
 /* 2003-05-26 EL*/
 $LDDiagnoses='ÇáÊÔÎíÕÇÊ';
-$LDCreateNewForm='ßæä äãæÌ á';
+$LDCreateNewForm='äãæĞÌ ÌÏíÏ';
 $LDOtherRecords='ÓÌáÇÊ ÇÎÑì';
 /*2003-06-17 El*/
-$LDFullForm='äãæÏÌ ßÇãá';
+$LDFullForm='äãæĞÌ ßÇãá';
 $LDAllContents='ßá ÇáãÍÊæíÇÊ';
-$LDAllText='ãÍÊæíÇÊ ÏíäÇãßíÉ İŞØ';
-$LDDataOnly='ÈíÇäÇÊ ãÊÚáŞÉ ÈÇáãŞÇÈáÉ İŞØ';
+$LDAllText='ßá ÇáãÍÊæíÇÊ ÇáäÕíÉ';
+$LDDataOnly='ÇáÈíÇäÇÊ İŞØ';
 /*2003-06-21 EL*/
-$LDChartsRecords='ÍÇİÙÉ ÇáÑÓã ÇáÈíÇäí';
+$LDChartsRecords='ÓÌá ÇáãÎØØÇÊ';
 # 2003-07-26 EL
-$LDMode='Mode';
+$LDMode='ÇáæÖÚ';
 $LDPatientIsDischarged='åĞÇ ÇáãÑíÖ ÎÑÌ ÈÇáİÚá';
 $LDShow='ÚÑÖ';
-$LDPlannedEncType='ÎØØ äæÚ ŞÈæá';
+$LDPlannedEncType='ÎØÉ äæÚ ÇáãŞÇÈáÉ';
 # 2003-08-01 EL
-$LDListEncounters='ŞÇÆãÉ ÇáãŞÇÈáÇÊ';
+$LDListEncounters='ŞÇÆãÉ ÇáÒíÇÑÇÊ';
 $LDDischarged='ÇáÎÑæÌ';
 $LDDischargeDate='ÊÇÑíÎ ÇáÎÑæÌ';
 # 2003-08-04 EL
-$LDCancelThisAdmission='ÇáÛÇÁ åĞÇ ÇáŞÈæá';
+$LDCancelThisAdmission='ÇáÛÇÁ åĞÇ ÇáÅíæÇÁ';
 $LDInsShortID[1]='ÊÇãíä ÎÇÕ';  // privately paid insurance
-$LDInsShortID[2]='Úáì ÍÓÇÈ ÇáÕÍÉ'; // Common state sponsored insurance
-$LDInsShortID[3]='Úáì ÍÓÇÈÉ ÇáÔÎÕí';    // self pay, direct pay
+$LDInsShortID[2]='ÊÃãíä ØÈí'; // Common state sponsored insurance
+$LDInsShortID[3]='ÇáÍÓÇÈ ÇáÔÎÕí';    // self pay, direct pay
 # 2003-08-26 EL
 $LDMeasurements='ÇáŞíÇÓÇÊ';
 #2003-08-28 eL
-$LDPlsEnterReferer='ÃÏÎá ÇáØÈíÈ ÇáãÔÇÑ Çáíå';
-$LDPlsEnterRefererDiagnosis='ÇÏÎá ÇáÊÔÎíÕ ÇáãÔÇÑ Çáíå';
-$LDPlsEnterRefererTherapy='ÃÏÎá ÇáÚáÇÌ ÇáãæÕì Èå';
-$LDPlsEnterRefererNotes='ÃÏÎá ÇáãáÇÍÙÇÊ ÇáãÔÇÑ ÇáíåÇ';
-$LDPlsSelectAdmissionType='ÇÎÊÇÑ äæÚ ÇáŞÈæá';
+$LDPlsEnterReferer='íÑÌì ßÊÇÈÉ ÇáØÈíÈ';
+$LDPlsEnterRefererDiagnosis='íÑÌì ßÊÇÈÉ ÇáÊÔÎíÕ ÇáãÈÏÆí';
+$LDPlsEnterRefererTherapy='íÑÌì ßÊÇÈÉ ÇáÚáÇÌ ÇáãæÕì Èå';
+$LDPlsEnterRefererNotes='íÑÌì ßÊÇÈÉ ãáÇÍÙÇÊ ÇáØÈíÈ';
+$LDPlsSelectAdmissionType='äæÚ ÇáÅíæÇÁ';
 $LDForInpatient='ÎÇÕ  ÈãÑÖì ÇáÇíæÇÁ';
 $LDForOutpatient='ÎÇÕ ÈãÑÖì ÇáÚíÇÏÇÊ ÇáÎÇÑÌíÉ';
 #2003-09-18 EL
 $LDPersonSearch='ÈÍË Úä ÔÎÕ';
 #2003-09-24 EL
-$LDShowing='ÇÖåÇÑ';
+$LDShowing='ÚÑÖ';
 $LDPrevious='ÇáÓÇÈŞ';
 $LDNext='ÇáÊÇáí';
-$LDAdvancedSearch='ÈÍË ãÑßÒ';
+$LDAdvancedSearch='ÈÍË ãÊŞÏã';
 #2003-10-28 EL
 $LDIncludeFirstName='ÈÍË ÈæÇÓØÉ ÇáÇÓã ÃíÖÇ.';
 $LDTipsTricks='ÊáãíÍÇÊ æ ØÑŞ';
 #2003-12-06 EL
-$LDPrintPDFDoc='ßæä æËíŞÉ PDF';
+$LDPrintPDFDoc='ÅäÔÇÁ æËíŞÉ PDF';
 $LDDeathDate='ÊÇÑíÎ ÇáæİÇÉ';
 
 # 2003-10-14 NDHC
@@ -398,18 +398,18 @@ $LDAntibiotic='ãÖÇÏ Ííæí';
 $LDMask='ŞäÇÚ';
 $LDIntravenous='æÑíÏí';
 $LDSubcutaneous='ÊÍÊ ÌáÏí';
-$LDPreAdmission='ŞÈá ÇáŞÈæá';
+$LDPreAdmission='ŞÈá ÇáÅíæÇÁ';
 #2004-01-01 EL
-$LDPersonDuplicate='íÈÏæ Ãä åĞÇ ÇáÔÎÕ ŞÏ Êã ÊÓÌíáå ãÓÈŞÇ.';
+$LDPersonDuplicate='åĞÇ ÇáÔÎÕ Êã ÊÓÌíáå ãÓÈŞÇğ';
 $LDSimilarData='ÇáÔÎÕ İí ÇáŞÇÆãÉ ÇáÊÇáíÉ áå äİÓ ÇáÈíÇäÇÊ ÇáÔÎÕíÉ.';
-$LDSimilarData2='ÇáÇÔÎÇÕ İí ÇáŞÇÆãÉ ÇáÊÇáíÉ áĞíåã äİÓ ÇáÈíÇäÇÊ ÇáÔÎÕíÉ.';
+$LDSimilarData2='ÇáÇÔÎÇÕ İí ÇáŞÇÆãÉ ÇáÊÇáíÉ áÏíåã äİÓ ÇáÈíÇäÇÊ ÇáÔÎÕíÉ.';
 $LDPlsCheckFirst='ÊÃßÏ ãäå ÇæáÇ ŞÈá Çä ÊŞÑÑ ÇáÎØæÉ ÇáÊÇáíÉ';
 $LDPlsCheckFirst2='ÊÃßÏ ãäåã ÇæáÇ ŞÈá Çä ÊßÑÑ ÇáÎØæÉ ÇáÊÇáíÉ.';
-$LDShowDetails='ÇÖåÇÑ ÇáÊİÇÕíá';
+$LDShowDetails='ÚÑÖ ÇáÊİÇÕíá';
 
 # 2004-05-22 KB
-$LDNr='Nr.';
-$LDOtherHospitalNr='Other Hospital Nr.';
-$LDSelectOtherHospital = 'Select other hospital to change the number';
-$LDNoNrNoDelete = 'no number = delete';
+$LDNr='ÇáÑŞã';
+$LDOtherHospitalNr='ÈíÇäÇÊ áãÓÊÔİì ÂÎÑ';
+$LDSelectOtherHospital = 'ÅÎÊíÇÑ ÇáãÑßÒ Ãæ ÇáãÓÊÔİì ÇáÂÎÑ';
+$LDNoNrNoDelete = 'ÈÏæä ÑŞã = ãÓÍ';
 ?>

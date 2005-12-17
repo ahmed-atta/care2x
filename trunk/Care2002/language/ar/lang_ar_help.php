@@ -1,5 +1,5 @@
 <?php
-$LDHelp="ÊÚáíãÇÊ";
+$LDHelp="ÇáÊÚáíãÇÊ";
 $LDClose="ÅÛáÇÞ";
-$LDCloseHelpWin="ÃÛáÞ äÇÝÐÉ ÇáÊÚáíãÇÊ";
+$LDCloseHelpWin="ÅÛáÞ äÇÝÐÉ ÇáÊÚáíãÇÊ";
 ?>

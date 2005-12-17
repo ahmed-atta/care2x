@@ -1,13 +1,13 @@
 <?php
-$LDAdmitHistoPhysical='ÊÇÑíÎ ÇáÞÈæá æ ÇáÚáÇÌ';
+$LDAdmitHistoPhysical='ÇáãáÇÍÙÇÊ';
 $LDDoctorDailyNotes='ÇáãáÇÍÙÇÊ ÇáíæãíÉ ááÃØÈÇÁ';
-$LDDischargeSummary='ãæÌÒ ÈÍÇáÇÊ ÇáÎÑæÌ';
-$LDConsultNotes='ãáÇÍÙÇÊ ÇáÇÓÊÔÇÑÉ';
+$LDDischargeSummary='ãáÎÕ ÇáÍÇáÉ ÚäÏ ÇáÎÑæÌ';
+$LDConsultNotes='ãáÇÍÙÇÊ ÇáÅÓÊÔÇÑí';
 $LDOpNotes='ãáÇÍÙÇÊ ÇáÚãáíÉ';
 $LDDailyNurseNotes='ÇáãáÇÍÙÇÊ ÇáíæãíÉ ááÃÌäÍÉ';
 $LDOther='ãáÇÍÙÇÊ ÃÎÑì';
 $LDChartNotes='ãáÇÍÙÇÊ ÌÏæá ÈíÇäÇÊ ÇáÍÇáÉ';
-$LDPTATGetc='PT, ATG, etc. ãáÇÍÙÇÊ íæãíÉ';
+$LDPTATGetc='ãáÇÍÙÇÊ íæãíÉ';
 $LDIVDailyNotes='IV ãáÇÍÙÇÊ íæãíÉ';
 $LDAnticoagDailyNotes='ãáÇÍÙÇÊ ãÇäÚ ÇáÊÎÊÑ ÇáíæãíÉ';
 $LDMaterialLOTChargeNr='ÚÏÉ ãæÇÏ, ÑÞã ÇáÔÍäÉ';
@@ -23,5 +23,5 @@ $LDProblem='ÇáãÔÇßá';
 $LDDevelopment='ÊØæÑ ÇáÍÇáÉ';
 $LDAllergy='ÇáÍÓÇÓíÉ';
 $LDDietPlan='ãÎØØ ÇÇáÊÛÏíÉ';
-$LDPrintPDFDocAllReport='PDF document of all reports';
+$LDPrintPDFDocAllReport='ØÈÇÚÉ æËíÞÉ PDF áßá ÇáÊÞÇÑíÑ';
 ?>

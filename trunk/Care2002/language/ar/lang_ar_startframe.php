@@ -1,13 +1,13 @@
 <?php
-$LDMainTitle='⁄‰«Ì… 2002 ‰Ÿ«„ „⁄·Ê„«  „ ﬂ«„· ··„” ‘›Ì«  Ê «·„—«ﬂ“ «·’ÕÌ…';
+$LDMainTitle='⁄‰«Ì… 2002, ‰Ÿ«„ „⁄·Ê„«  «·„” ‘›Ì«  Ê „ƒ”””«  «·⁄‰«Ì… «·’ÕÌ…';
 
 /*$LDMainTitle='Marienhospital a virtual Integrated Hospital Information System in Internet';
 */
 $LDInviteAskMe='√œŒ· ≈” ⁄·«„';
 $LDTipsLink=': ·„ÌÕ« ';
 $LDTipsAskMe='Ã—» ﬂ·„… „—«œ›…';
-$LDTipsImgAlt='√÷€ÿ Â‰« ··Õ’Ê· ⁄·Ï  ·„ÌÕ«  ÕÊ· ﬂÌ›Ì… Õ’Ê·ﬂ ⁄·Ï «›÷· «·‰ «∆Ã';
-$LDSubmitBut='√—”· «·«” ⁄·«„';
+$LDTipsImgAlt='≈÷€ÿ Â‰« ··Õ’Ê· ⁄·Ï  ·„ÌÕ«  ÕÊ· ﬂÌ›Ì… Õ’Ê·ﬂ ⁄·Ï «›÷· «·‰ «∆Ã';
+$LDSubmitBut='≈—”«· «·«” ⁄·«„';
 
 $LDQuickInfo='„⁄·Ê„«  ”—Ì⁄…';
 $LDPhonePolice='«·‘—ÿ…';
@@ -21,9 +21,9 @@ $LDEmail='«·»—Ìœ «·≈·ﬂ —Ê‰Ì';
 $LDOpenTimes ='”«⁄«  «·⁄„·';
 $LDManagement ='«·«œ«—…';
 $LDDept ='«·«ﬁ”«„';
-$LDCafenews ='«·ﬂ› Ì—Ì«';
-$LDAdmission ='«·ﬁ»Ê·';
-$LDExhibition ='«·„Ê∆ „—« ';
+$LDCafenews ='«·ﬂ«› Ì—Ì«';
+$LDAdmission ='«·≈ÌÊ«¡';
+$LDExhibition ='«·„‰«”»« ';
 $LDEducation ='«· ⁄·Ì„';
 $LDAdvStudies ='«·œ—«”« ';
 $LDPhyTherapy ='«·⁄·«Ã «·ÿ»Ì⁄Ì';
@@ -38,21 +38,19 @@ $LDNewsDummy=array(1=>'√Ê·',
 3=>'À«·À',
 4=>'—«»⁄');
 
-$LDNoFrame='This website uses frames for optimal functioning. Please install a proper browser.  Please activate the Javascript (JScript) and	turn on the automatic cookie reception';
-						
-$LDClk2Write='√÷€ÿ Â‰« ·· Õ—Ì—';
+$LDNoFrame='Â–« «·»—‰«„Ã Ì” Œœ„ Œ«’Ì… «·≈ÿ«—«  Frames ··Õ’Ê· ⁄·Ï √›÷· √œ«¡ Ì—ÃÏ ≈” Œœ«„ „ ’›Õ Ìœ⁄„ Â–Â «·Œ«’Ì…í √Ì÷« ÌÃ»  „ﬂÌ‰ Œ«’Ì… „·ﬁ„ Ã«›« JScript, Ê Ì›÷·  „ﬂÌ‰ «·ﬂÊﬂÌ Cookie ';
+$LDClk2Write='≈÷€ÿ Â‰« ·· Õ—Ì—';
 
-$LDAlertOldBrowser='Your browser version is older than 5.0!<br> We recommend the version 5.0 or later. <br> Using older versions might lead to functional unreliability of the program.';
+$LDAlertOldBrowser='≈’œ«— «·„ ’›Õ «·–Ì  ” Œœ„Â √ﬁ· „‰ 5.0, ··Õ’Ê· ⁄·Ï √œ«¡ √›÷· ÌÃ» ≈” Œœ«„ „À· «·≈’œ«— 5.0 √Ê √ﬂÀ—';
 
-$LDAlertNoCookie='You or your  browser might have rejected the cookie(s).<br>This program is dependent on them. Otherwise the program will not function properly.<br>Please set your browser to automatically accept cookies.<br>';
-
+$LDAlertNoCookie='„ ’›Õﬂ ·« Ìœ⁄„ «·ﬂÊﬂÌ Cookie, Â–« «·»—‰«„Ã Ì⁄ „œ ⁄·Ï Â–Â «·Œ«’Ì… Ê ≈·« ›”Ê› ·‰ Ì⁄„· »«·’Ê—… «·„ÿ·Ê»…, ·–« ÌÃ»  „ﬂÌ‰ Œ«’Ì… «·ﬂÊﬂÌ  ';
 $LDClkAfter='Ê „‰  „ √÷€ÿ Â‰«';
 $LDGoAheadEgal='«÷€ÿ Â‰« ·»œ¡ «·»—‰«„Ã';
-$LDGoAheadEgalCookie='I don\'t want to accept cookies. Go ahead and start the program anyway.';
+$LDGoAheadEgalCookie='·« √—€» ›Ì  „ﬂÌ‰ «·ﬂÊﬂÌ Cookies, ‘€· «·»—‰«„Ã ⁄·Ï √Ì Õ«·';
 
-$LDCookieRef='If you want to know more about cookies you can read the following documents:<br><a href=\'http://www.dtp-aus.com/cookies.htm\' target=\'pp\'>A few words about Cookies (Security and the lies)</a><br><a href=\'http://www.cookiecentral.com/content.phtml?area=4&id=10\' target=\'pp\'>Cookies and Privacy FAQ</a><br>';
+$LDCookieRef='≈–« ﬂ‰   —€» ›Ì „⁄—›… «·„“Ìœ ⁄‰ «·ﬂÊﬂÌ ≈ »⁄ Â–« «·—«»ÿ:<br><a href=\'http://www.dtp-aus.com/cookies.htm\' target=\'pp\'>A few words about Cookies (Security and the lies)</a><br><a href=\'http://www.cookiecentral.com/content.phtml?area=4&id=10\' target=\'pp\'>Cookies and Privacy FAQ</a><br>';
 
-$LDPrivPolicy='≈–« —€»  ›Ì ﬁ—«¡«… ”Ì«” ‰« «·Œ«’… <a href=\'language/en/en_privacy.htm\' target=\'pp\'>:«÷€ÿ Â‰«</a>';
+$LDPrivPolicy='≈–« —€»  ›Ì ﬁ—«¡… ”Ì«” ‰« «·Œ«’… <a href=\'language/en/en_privacy.htm\' target=\'pp\'>:«÷€ÿ Â‰«</a>';
 
 $LDOurPrivPolicy='”Ì«” ‰« «·Œ«’…';
 $LDSubmitNews=' Õ—Ì—«·«Œ»«—';

@@ -29,29 +29,29 @@ $Nov,
 $Dez);
 
 $LDDoctors='ЧсУиШЧС';
-$LDQView='кбж гбэк сиШэШ ксь ЧсхЧЪн';  // DOC = doctor on call
-$LDQViewTxt='кбж гбэк сЬЯцс ЧсШцу сиШэШ ксь ЧсхЧЪн';
+$LDQView='кбж гбэк сиШэШ ЪЭЪ ЧсисШ';  // DOC = doctor on call
+$LDQViewTxt='кбж гбэк сЬЯцс ЧсШцу сиШэШ ЪЭЪ ЧсисШ';
 $LDDutyPlan='ЪЮиэи цбЯэЩ';
 $LDDutyPlanTxt='ЪЮиэи цбЯэЩ, кбж, ЪЭЯэЫ, Эан, ХЯЧбЩ, ХсЮ.';
 $LDDocsList='оЧЦуЩ ЧсУиШЧС';
 $LDDocsListTxt='ХфдЧС Уц ЪЭЯэЫ оЧЦуЩ УиШЧС, ХЯЮЧс ШэЧфЧЪ, ХсЮ..';
-$LDDocsForum='уфЪаь';
-$LDDocsForumTxt='уфЪаь ЭцЧб ссУиШЧС';
+$LDDocsForum='уфЪЯь';
+$LDDocsForumTxt='уфЪЯь ЭцЧб ссУиШЧС';
 $LDNews='ЧсЧЮШЧб';
 $LDNewsTxt='ХкЯЧЯ, ХисЧк, ЪЭбэб ЧсЧЮШЧб';
-$LDMemo='Memo';
-$LDMemoTxt='Compose, read, edit memo';
-$LDCloseAlt='Улсо фЧнаЩ ЧсЧиШЧС ц ЧсЬбЧЭэф';
-$LDDocsOnDuty='ЧиШЧС ксь ЧсхЧЪн';
+$LDMemo='уапбЩ';
+$LDMemoTxt='ХфдЧС, обЧСЩ, ЪЭбэб уапбЩ ЯЧЮсэЩ';
+$LDCloseAlt='ХлсЧо фЧнаЩ ЧсЧиШЧС ц ЧсЬбЧЭэф';
+$LDDocsOnDuty='УиШЧС ЪЭЪ ЧсисШ';
 
 $LDTabElements=array('Чсогу',
-'иШэШ ксь ЧсхЧЪн 1',
+'иШэШ ЪЭЪ ЧсисШ 1',
 'ЧсхЧЪн/ЬхЧв ЧсфЯЧС',
-'иШэШ ксь ЧсхЧЪн 2',
+'иШэШ ЪЭЪ ЧсисШ 2',
 'ЧсхЧЪн/ЬхЧв ЧсфЯЧС',
 'уЮии ЧсцбЯэЩ'
 								 );
-$LDShowActualPlan='Show actual duty plan';
+$LDShowActualPlan='кбж ЮиЩ ЧсуфЧцШЧЪ ЧсЭЧсэЩ';
 $LDShortDay=array('УЭ',
 								'УЫ',
 								'Ъс',
@@ -68,22 +68,22 @@ $LDFullDay=array('ЧсЧЭЯ',
 								'ЧсЬукЩ',
 								'ЧсгШЪ'
 								);
-$LDDoc1='иШэШ ксь ЧсхЧЪн 1';
-$LDDoc2='иШэШ ксь ЧсхЧЪн 2';
-$LDClosePlan='Улсо хаЧ ЧсуЮии';
+$LDDoc1='иШэШ ЪЭЪ ЧсисШ 1';
+$LDDoc2='иШэШ ЪЭЪ ЧсисШ 2';
+$LDClosePlan='Хлсо хаЧ ЧсуЮии';
 $LDNewPlan='ХфдЧС уЮии ЬЯэЯ';
 $LDBack='ЪбЧЬк';
 $LDHelp='ЪксэуЧЪ';
 $LDMakeDutyPlan='ХфдЧС уЮии цбЯэЩ';
-$LDClk2Plan='Ужли снЪЭ оЧЦуЩ Чсуцйнэф';
+$LDClk2Plan='Хжли снЪЭ оЧЦуЩ Чсуцйнэф';
 $LDInfo4Duty='уксцуЧЪ';
 $LDStayIn='уфЧцШ';
-$LDOnCall='уфЧцШЩ ксь ЧсхЧЪн';
+$LDOnCall='уфЧцШЩ ЪЭЪ ЧсисШ';
 $LDPhone='ЧсхЧЪн';
 $LDBeeper='ЬхЧв ЧсфЯЧС';
-$LDMoreInfo='уксцуЧЪ УжЧнэЩ';
+$LDMoreInfo='уксцуЧЪ ХжЧнэЩ';
 $LDOn='нэ';
-$LDCloseWindow='Улсо ЧсфЧнаЩ';
+$LDCloseWindow='Хлсо ЧсфЧнаЩ';
 $LDMonth='Чсдхб';
 $LDYear='ЧсгфЩ';
 $LDPerElements=array('ЧссоШ',
@@ -98,35 +98,35 @@ $LDChgDept='лэб Чсогу:';
 $LDChange='Ълээб';
 $LDCreatePersonList='ХфдЧС оЧЦуЩ ссуцйнэф';
 $LDNoPersonList='су эЪу Ъпцэф оЧЦуЩ ШЧсуцйнэф ШкЯ.';
-$LDShow='ХжхЧб';
+$LDShow='кбж';
 
-$LDDOCS='ЬЯцс иШэШ ксь ЧсхЧЪн';
-$LDDOCSTxt='ЬЯцсЩ иШэШ ксь ЧсхЧЪн, ЪЮиэи, кбж, ЪЭЯэЫ, ЪЭбэб, ЧсЮ.';
-$LDDOCSR='исШ ЬЯцсЩ иШэШ ксь ЧсхЧЪн';
-$LDDOCSRTxt='иЧсШ ЬЯцсЩ иШэШ ксь ЧсхЧЪн';
+$LDDOCS='ЬЯцс иШэШ ЪЭЪ ЧсисШ';
+$LDDOCSTxt='ЬЯцсЩ иШэШ ЪЭЪ ЧсисШ, ЪЮиэи, кбж, ЪЭЯэЫ, ЪЭбэб, ЧсЮ.';
+$LDDOCSR='исШ ЬЯцсЩ иШэШ ЪЭЪ ЧсисШ';
+$LDDOCSRTxt='иЧсШ ЬЯцсЩ иШэШ ЪЭЪ ЧсисШ';
 /* 2002-09-15 EL */
 $LDTestRequest='исШ ЪЭсэс';
 /* 2003-03-16 EL */
 $LDContactInfo='уксцуЧЪ ЧЪеЧс';
 $LDPersonalContactInfo='уксцуЧЪ ЧЪеЧс дЮеэЩ';
-$LDOnCallContactInfo='уксцуЧЪ ЧсЧЪеЧс ксь ЧсхЧЪн';
-$LDPlsSelectDept='УЮЪЧб Чсогу';
+$LDOnCallContactInfo='уксцуЧЪ ЧсЧЪеЧс ЪЭЪ ЧсисШ';
+$LDPlsSelectDept='эбЬь ХЮЪэЧб Чсогу';
 $LDCreateDoctorsList='ХфдЧС оЧЦуЩ ссУиШЧС';
 $LDPlsCreateList='пцф ЧсоЧЦуЩ УцсЧ';
 $LDPlsClickButton='Хжли ксь Чсвб ЧсЪЧсэ.';
 $LDFamilyName='ЧссоШ';
 $LDGivenName='ЧсЧгу';
 $LDDateOfBirth='ЪЧбэЮ ЧсуэсЧЯ';
-$LDEntryPrompt='УЯЮс унЪЧЭ псуЩ ссШЭЫ.<br>(уЫс, ЧссоШ, ЧсЧгу, боу Чсуцйн, ХсЮ...)';
+$LDEntryPrompt='унбЯЧЪ ЧсШЭЫ:<br>(уЫс, ЧссоШ, ЧсЧгу, боу Чсуцйн, ХсЮ...)';
 $LDPersonellNr='боу Чсуцйн';
 $LDFunction='ЧсцйэнЩ';
 $LDOptions='ЮэЧбЧЪ';
-$LDSearchFound='ЧсШЭЫ цЬЯ ~nr~ ШэЧфЧЪ уЪксоЩ ШЧсуцжцк.';
-$LDAddDoctorToList='Ужн иШэШ ссоЧЦуЩ.';
-$LDAdd='ЧжЧнЩ';
+$LDSearchFound='эцЬЯ ~nr~ ШэЧфЧЪ уЪксоЩ ШЧсуцжцк.';
+$LDAddDoctorToList='ХжЧнЩ иШэШ ссоЧЦуЩ.';
+$LDAdd='ХжЧнЩ';
 $LDDelete='Эан';
-$LDSureToDeleteEntry='хс УфЪ уЪУпЯ уф блШЪп нэ Эан хаЧ ЧсуЯЮсП';
+$LDSureToDeleteEntry='хс УфЪ уЪУпЯ нксЧ уф Эан хаЧ ЧсуЯЮсП';
 /* 2003-03-18 EL */
-$LDChangeOnlyDept='лэб Чсогу.';
+$LDChangeOnlyDept='Ълээб Чсогу нои';
 $LDCreateNursesList='ХфдЧб оЧЦуЩ уубжэф';
 ?>

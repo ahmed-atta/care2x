@@ -1,47 +1,47 @@
 <?php
 $LDHome='ÇáÑÆíÓíÉ';
-$LDPatient='ÇáãÑíÖ';
-$LDAdmission='ÇáÞÈæá';
-$LDAmbulatory='ÇáãÊÛíÑÇÊ';
+$LDPatient='ãáÝÇÊ ÇáãÑÖì';
+$LDAdmission='ÇáÅíæÇÁ';
+$LDAmbulatory='ÇáÅÓÚÇÝ æ ÇáÚíÇÏÇÊ ÇáÎÇÑÌíÉ';
 $LDMedocs='ÇáæËÇÆÞ ÇáØÈíÉ';
 $LDDoctors='ÇáÇØÈÇÁ';
-$LDNursing='ÇáÊãÑíÖ';
-$LDOR='ÛÑÝ ÇáÚãáíÇÊ';
-$LDLabs='ÇáãÚÇãá';
-$LDRadiology='ÇáÇÔÚÉ';
+$LDNursing='ÇáÊãÑíÖ æ ÃÌäÍÉ ÇáÅíæÇÁ';
+$LDOR='ÇáÚãáíÇÊ';
+$LDLabs='ÇáãÎÊÈÑÇÊ ÇáØÈíÉ';
+$LDRadiology='ÇáÇÔÚÉ ÇáÊÔÎíÕíÉ';
 $LDPharmacy='ÇáÕíÏáíÉ';
-$LDMedDepot='ÇáãÎÒä ÇáØÈí';
-$LDDirectory='Ïáíá ÇáåÇÊÝ';
-$LDTechSupport='ÇáÕíÇäÉ';
+$LDMedDepot='ÇáãÚÏÇÊ ÇáØÈíÉ';
+$LDDirectory='ÇáÏáíá';
+$LDTechSupport='ÇáÏÚã ÇáÝäí';
 $LDEDP='ÅÏÇÑÉ ÇáäÙÇã';
-$LDIntraEmail='ÇáÈÑíÏ ÇáÅáßÊÑæäí ÇáÏÇÎáí';
-$LDInterEmail='ÇáÈÑíÏ ÇáÅáßÊÑæäí ÇáÎÇÑÌí';
+$LDIntraEmail='ÇáÈÑíÏ ÇáÏÇÎáí';
+$LDInterEmail='ÈÑíÏ ÇáÃäÊÑäÊ';
 $LDSpecials='ÃÏæÇÊ ÎÇÕÉ';
 $LDLogin='ÏÎæá';
 $LDLogout='ÎÑæÌ';
 $LDAppointments='ÇáãæÇÚíÏ';
 
 $VersionChgTarget='_top';#_top
-$LDLanguage='ÇááÛÉ';
-$LDPlsWaitInit='ÃäÊÖÑ ãä ÝÖáß ÚãáíÉ ÇáÊÍãíá ÊÊã ÇáÇä...';
+$LDLanguage='áÛÉ ÇáäÙÇã ÇáÍÇáíÉ';
+$LDPlsWaitInit='íÑÌì ÇáÅäÊÙÇÑ ÑíËãÇ ÊÊã ÚãáíÉ ÊÍãíá ãßæäÇÊ ÇáäÙÇã...';
 
 $LDChange='ÊÛíÑ ÇááÛÉ';
 /* 2003-04-27 EL */
-$LDBrazilian='ÈÑÒíáí';
-$LDCzech='Czech';
+$LDBrazilian='ÈÑÇÒíáí';
+$LDCzech='ÓßíÒ';
 $LDEnglish='ÅäÌáíÒí';
 $LDFrench='ÝÑäÓí';
 $LDGerman='ÃáãÇäí';
 $LDIndonesian='ÇäÏæäíÓí';
 $LDItalian='ÇíØÇáí';
 $LDNorwegian='äÑæíÌí';
-$LDPolish='Polish';
+$LDPolish='ÈæáäÏí';
 $LDPortuguese='ÈÑÊÛÇáí';
 $LDSpanish='ÇÓÈÇäí';
 /* 2003-04-28 El */
-$LDDutch='Dutch';
+$LDDutch='ÃáãÇäí';
 # 2003-08-04 EL
-$LDPerson='ÇáÇÔÎÇÕ';
+$LDPerson='ÅÓã ÇáÔÎÕ';
 # 2003-09-05 EL
 $LDUser='ÇáãÓÊÎÏã';
 ?>

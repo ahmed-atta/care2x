@@ -1,19 +1,19 @@
 <?php
 $LDNews='ÇáÇÎÈÇÑ';
 $LDNewsTxt='ÃßÊÈ ÚäÇæíä ÇáİŞÑÇÊ ÇáÇÎÈÇÑíÉ';
-$LDMemo='Memo';
-$LDMemoTxt='Read or write a memo';
+$LDMemo='ãĞßÑÉ';
+$LDMemoTxt='ŞÑÇÁÉ Ãæ ßÊÇÈÉ ãĞßÑÉ ÏÇÎáíÉ';
 
 $LDClose='ÇÛáÇŞ';
 $LDCancel='ÇáÛÇÁ ÇáÇãÑ';
 $LDResetEntry='ÍĞİ ÇáãÏÎáÇÊ';
 $LDSave='ÍİÙ';
-$LDReset='ÊÕİíÑ';
+$LDReset='ÊåÆíÉ';
 
 $LDNewSearch='ÈÍË ÌÏíÏ';
 $LDSearch='ÈÍË';
 
-$LDContinue='ÃÓÊãÑ';
+$LDContinue='ÅÓÊãÑÇÑ';
 $LDBack='ÊÑÇÌÚ';
 
 $LDOn='İí';
@@ -24,45 +24,45 @@ $LDEdit='ÊÍÑíÑ';
 $LDCreate='ÇäÔÇÁ';
 
 $LDPastAll='Çáßá';
-$LDSelect='ÇÎÊÇÑ';
+$LDSelect='ÅÎÊíÇÑ';
 
-$LDOrderArchive='ÇÑÔíİ';
+$LDOrderArchive='ÃÑÔíİ ÇáØáÈÇÊ';
 
-$LDGoodMorning='ÕÈÇÍ ÇáÎíÑ';
-$LDGoodDay='ÇåáÇ, ÊÓÚÏäí ÑæíÊß';
-$LDGoodEvening='ãÓÇÁ ÇáÎíÑ';
+$LDGoodMorning='ÇáÓáÇã Úáíßã';
+$LDGoodDay='ÇáÓáÇã Úáíßã';
+$LDGoodEvening='ÇáÓáÇã Úáíßã';
 
 $LDDate='ÇáÊÇÑíÎ';
-$LDDept='ŞÓã';
+$LDDept='ÇáŞÓã';
 $LDPrio='ÇáÇÓÈŞíÉ';
 
 
-$LDPageTop='ÚæÏÉ ááÈÏÇíÉ';
+$LDPageTop='ÃÚáì ÇáÕİÍÉ';
 $LDPreview='ÚÑÖ';
-$LDUpdateData='ÊÍÏíË Çæ ÊÍÑíÑ';
+$LDUpdateData='ÊÚÏíá ÈíÇäÇÊ';
 
-$LDNoBack='áÇ, ÇÑÌÚ ááÎáİ';
+$LDNoBack='áÇ, ÑÌæÚ ááÎáİ';
 $LDOK='ãæÇİŞ';
 $LDName='ÇáÇÓã';
-$LDPassword='ßáãÉ ÇáÓÑ';
-$LDUserId='ÃÓã ÇáãÓÊÎÏã';
+$LDPassword='ßáãÉ ÇáãÑæÑ';
+$LDUserId='ÅÓã ÇáãÓÊÎÏã';
 $LDChange='ÊÛííÑ';
-$LDLock='ÛáŞ';
+$LDLock='Şİá';
 $LDUnlock='İÊÍ';
 $LDDelete='ÍĞİ';
 $LDYesSure='äÚã, ÇäÇ ãÊÃßÏ';
-$LDKeywordPrompt='ÇÏÎá ãİÊÇÍ ßáãÉ ááÈÍË';
-$LDWelcome='ãÑÍÈÇ';
+$LDKeywordPrompt='ßÊÇÈÉ ãİÑÏÇÊ ÇáÈÍË';
+$LDWelcome='ãÑÍÈÇğ';
 
 
 $LDLogin='ÏÎæá';
 
 $LDFirstName='ÇáÇÓã';
 
-$LDOptions='ÇÎÊíÇÑÇÊ';
+$LDOptions='ÎíÇÑÇÊ';
 $LDHelp='ãÓÇÚÏÉ';
-$LDSent='ÇÑÓá';
-$LDDrafts='ØáÈÇÊ';
+$LDSent='ãÑÓáÉ';
+$LDDrafts='ãÓæÏÇÊ';
 $LDDate='ÇáÊÇÑíÎ';
 $LDTime='ÇáÓÜÇÚÉ';
 $LDSize='ÇáÍÌã';
@@ -70,44 +70,44 @@ $LDFrom='ãä';
 $LDTo='Çáì';
 $LDSend='ÇÑÓÇá';
 $LDChange='ÊÛííÑ';
-$LDInsertAddr='ÇÏÎÇá';
-$LDRead='ÇŞÑÇÁ';
-$LDBack2='ÇÑÌÚ Çáì';
+$LDInsertAddr='ÅÏÎÇá ÚäæÇä';
+$LDRead='ŞÑÇÁÉ';
+$LDBack2='ÑÌæÚ Åáì';
 $LDReply2='ÌæÇÈ Çáì';
-$LDPrint='ÇØÈÚ';
+$LDPrint='ØÈÇÚÉ';
 $LDMoreInfo='ÇáãÒíÏ ãä ÇáãÚáæãÇÊ';
-$LDTakeOver='ÃÎÏ';
-$LDJustReset='ÊÕİíÑ';
+$LDTakeOver='ÃÎĞ';
+$LDJustReset='ÊåíÆÉ İŞØ';
 $LDMaximum='ÇáÇŞÕì';
 
 $LDSpexFunctions='æÙÇÆİ ÎÇÕÉ';
 $LDDutyPlanOrg='ãäÙã ÇáãäÇæÈÉ';
 $LDDutyPlanOrgTxt='ãÎØØ æ ãäÙã ÇáãäÇæÈÉ, ÇáÉ ÈÇæäÏí';
 $LDStandbyDuty='ÇáãäÇæÈÉ ÇáÇÍÊíÇØíÉ';
-$LDStandbyDutyTxt='ËæÊíŞ ßİÇÆÉ ÇáÚãá İí ÇáãäÇæÈÉ ÇáÇÍÊíÇØíÉ';
+$LDStandbyDutyTxt='ÊæËíŞ ßİÇÆÉ ÇáÚãá İí ÇáãäÇæÈÉ ÇáÇÍÊíÇØíÉ';
 $LDHandStat='ÅÍÕÇÆíÇÊ ÇáÚãáíÇÊ ÇáÌÑÇÍíÉ';
 $LDHandStatTxt='ËæÊíŞ ÇáÚãáíÇÊ ÇáÌÑÇÍíÉ';
 $LDCalendar='ÇáÊŞæíã';
 $LDCalendarTxt='ÇáÊŞæíã';
-$LDBlackBoard='ÕÈæÑÉ';
+$LDBlackBoard='ÓÈæÑÉ';
 $LDBlackBoardTxt='ÇÑÓÇá Çæ ÈÍË Úä Çí ãÚáæãÇÊ';
-$LDForum='ãäÊĞì';
+$LDForum='ãäÊÏì';
 $LDForumTxt='ÇÑÓÇá, ÈÍË, ŞÑÇÁÉ ãäÇŞÔÉ, ÇİßÇÑ, Çæ ÊÚáíŞÇÊ, ÇáÎ.';
-$LDCalc='ÃáÉ ÍÇÓÈÉ';
-$LDCalcTxt='ÃáÉ ÍÇÓÈÉ';
+$LDCalc='ÍÇÓÈÉ';
+$LDCalcTxt='ÍÇÓÈÉ';
 $LDClock='ÇáÓÇÚÉ';
 $LDDigitalClock='ÇáÓÇÚÉ';
 $LDColorOpt='ÎíÇÑÇÊ ÇáÇáæÇä';
-$LDColorOptTxt='ÍÏÏ áæä ÇáÎáİíÉ Ãæ ÇáäÕ';
+$LDColorOptTxt='ÊÍÏíÏ áæä ÇáÎáİíÉ Ãæ ÇáäÕ';
 $LDColorOptExt='ÎíÇÑÇÊ ÃáæÇä ÃÖÇİíÉ';
 $LDColorOptExtTxt='ÊÍÏíÏ áæä ÇáäÕ ÇáäÔØ, ÇáãÛØì ÈÇáãÇæÓ, ÅáÎ.';
-$LDMyIntranet='ÇáÔíßÉ ÇáãÍáíÉ';
-$LDMyIntranetTxt='My personal planner, organizer, diary, memo, calendar, etc.';
-$LDAccessPw='ßáãÇÊ ÇáÓÑ ÇáÎÇÕÉ ÈÇáÏÎæá';
-$LDAccessPwTxt='ÊÛííÑ Ãæ ÊÍÏíÊ ßáãÉ ÇáÓÑ ÇáÎÇÕÉ ÈÇáÏÎæá';
-$LDWebCam='ÇáßÇãíÑÇÊ ÇáÇãäíÉ';
-$LDWebCamTxt='ãÑÇŞÈÉ ÇáßÇãíÑÇÊ ÇáÇãäíÉ ááÔÈßÉ ÇáãÍáíÉ';
-$LDPhotoLab='ÇáÈæã ÇáÕæÑ';
+$LDMyIntranet='ÔÈßÉ ÇáÃäÊÑÇäÊ ÇáÏÇÎáíÉ';
+$LDMyIntranetTxt='ÇáÃÌäÏÉ, ÇáãİßÑÉ, ÇáÊŞæíã, ÇáãĞßÑÉ, ÅáÎ';
+$LDAccessPw='ßáãÇÊ ÇáãÑæÑ ÇáÎÇÕÉ ÈÇáÏÎæá';
+$LDAccessPwTxt='ÊÛííÑ ßáãÉ ÇáãÑæÑ ÇáÎÇÕÉ ÈÇáÏÎæá';
+$LDWebCam='ßÇãíÑÇÊ ÇáãÑÇŞÈÉ';
+$LDWebCamTxt='ßÇãíÑÇÊ ÇáãÑÇŞÈÉ Ãæ ÇáÊÕæíÑ ÇáØÈí ÇáãÑÆí';
+$LDPhotoLab='ÃÑÔíİ ÇáÕæÑ';
 $LDPhotoLabTxt='ÍİÙ, æËÇÆŞ, İåÑÓ ÕæÑ ÇáãÑíÖ';
 
 $LDBundyMachine='ÇáÉ ÈÇæäÏí';
@@ -129,7 +129,7 @@ $monat=array('',
 'ÏíÓãÈÑ');
 $LDEntry='ãÏÎá';
 $LDExit='ãÎÑÌ';
-$LDRemarks='ÚáÇãÉ';
+$LDRemarks='ÊÚáíŞÇÊ';
 
 $tage=array('<font color=\'#ff0000\'>Ã</font>','Å',
 'Ë',
@@ -149,11 +149,11 @@ $LDTotal='ÇáãÌãæÚ';
 $LDClk4Options='ÇÖÛØ ááÎíÇÑÇÊ';
 $LDMonth='ÇáÔåÑ';
 $LDYear='ÇáÓäÉ';
-$LDGO='ÃÏåÈ';
+$LDGO='ÅĞåÈ';
 $LDPlus1Year='ÅÖÇİÉ ÓäÉ';
 $LDMinus1Year='ÅäŞÇÕ ÓäÉ';
-$LDDirectDial='ÇÎÊíÇÑ ãÈÇÔÑ';
-$LDFor='áÇÌá';
+$LDDirectDial='ÅÎÊíÇÑ ãÈÇÔÑ';
+$LDFor='áÛÑÖ';
 
 $LDShowMyCalendar='ÇÚÑÖ æÑÏíÊí Úáì ÇáÊŞæíã';
 $LDShowMySched='ÇÚÑÖ ãæÚÏí';
@@ -181,33 +181,33 @@ $LDMainFrame='ÇáŞØÇÚ ÇáÇÓÇÓí';
 $LDTopFrame='ÇáŞØÇÚ ÇáÚáæí';
 $LDBottomFrame='ÇáŞØÇÚ ÇáÓİáí';
 
-$LDPWChange='ÊÛííÑ ßáãÉ ÇáÓÑ';
-$LDUserIdPWPrompt='ÃÏÎá ÃÓã ÇáãÓÊÎÏã æ ßáãÉ ÇáÓÑ ÇáÎÇÕÉ Èß:';
-$LDNewPwPrompt='ÇáÃä, ÃÏÎá ßáãÉ ÇáÓÑ ÇáÌÏíÏÉ ÇáËí ÃÎÊÑÊåÇ:';
-$LDNewPw='ßáãÉ ÓÑ ÌÏíÏÉ';
-$LDNewPw2='ÃÚÏ ßáãÉ ÇáÓÑ ÇáÌÏíÏÉ';
-$LDChangePw='ÛíÑ ßáãÉ ÇáÓÑ';
-$LDOops='áÇ, áÇÊÛíÑ ßáãÉ ÇáÓÑ';
+$LDPWChange='ÊÛííÑ ßáãÉ ÇáãÑæÑ';
+$LDUserIdPWPrompt='ÃßÊÈ ÃÓã ÇáãÓÊÎÏã æ ßáãÉ ÇáãÑæÑ ÇáÎÇÕÉ Èß:';
+$LDNewPwPrompt='ÇáÃä, ÃßÊÈ ßáãÉ ÇáãÑæÑ ÇáÌÏíÏÉ ÇáËí ÃÎÊÑÊåÇ:';
+$LDNewPw='ßáãÉ ãÑæÑ ÌÏíÏÉ';
+$LDNewPw2='ÃÚÏ ßÊÇÈÉ ßáãÉ ÇáãÑæÑ ÇáÌÏíÏÉ';
+$LDChangePw='ÛíÑ ßáãÉ ÇáãÑæÑ';
+$LDOops='áÇ, ÚÏã ÊÛííÑ ßáãÉ ÇáãÑæÑ';
 
-/*$LDWrongEntry='ÎØÇÁ İí ÇáÇÏÎÇá!';
-$LDNoAuth='áíÓ áĞíß ÇáÕáÇÍíÉ';
-$LDAuthLocked='ÕáÇÍíÇÊ ÇáÏÎæá ÇáÎÇÕÉ Èß ãÌãÏÉ';*/
+/*$LDWrongEntry='ÎØÃ İí ÇáÇÏÎÇá!';
+$LDNoAuth='ÛíÑ ãÎæá';
+$LDAuthLocked='ÕáÇÍíÉ ÇáÏÎæá ÛíÑ äÇİĞÉ';*/
 
-$LDAlertPwError='ßáãÇÊ ÇáÓÑ ÇáÌÏíÏÉ ÛíÑ ãÊØÇÈŞÉ.ÃÏÎá ßáãÇÊ ÇáÓÑ ãä ÌÏíÏ';
-$LDPWChanged='Êã ÍİÙ ßáãÉ ÇáÓÑ';
+$LDAlertPwError='ßáãÇÊ ÇáãÑæÑ ÇáÌÏíÏÉ ÛíÑ ãÊØÇÈŞÉ, ÃßÊÈ ßáãÇÊ ÇáãÑæÑ ÇáÕÍíÍÉ ãä ÌÏíÏ';
+$LDPWChanged='Êã ÍİÙ ßáãÉ ÇáãÑæÑ';
 
 $LDBday='ÊÇÑíÎ ÇáãíáÇÏ';
 $LDShotDate='ÊÇÑíÎ ÇáÕæÑÉ';
 $LDPatientNr='ÑŞã ÇáÒíÇÑÉ';
 $LDSetShotDate='ÍÏÏ åĞÇ ÇáÊÇÑíÎ áßá ÇáÕæÑ';
-$LDFotoLab='ÇáÈæã ÇáÕæÑ';
-$LDHowManyPics='ßã ÚÏÏ ÇáÕæÑ ÇáĞí ÊÑÛÈ ÈÍİÙåÇ İí Èäß ÇáÈíÇäÇÊ¿';
+$LDFotoLab='ãÚÑÖ ÇáÕæÑ';
+$LDHowManyPics=' ÚÏÏ ÇáÕæÑ ÇáĞí ÊÑÛÈ ÈÍİÙåÇ İí Èäß ÇáÈíÇäÇÊ¿';
 $LDNr='ÇáÑŞã';
-$LDNewPics='ÕæÑ ãä ãÑíÖ ÌÏíÏ';
-$LDMorePics='ÕæÑ ãä äİÓ ÇáãÑíÖ';
+$LDNewPics='ÕæÑ ÌÏíÏÉ';
+$LDMorePics='ãÒíÏ ãä ÇáÕæÑ';
 $LDAdditional='ÅÖÇİí';
-$LDLinkBroken='ÇáÑÇÈØ ãÚ ÎÇÏã ÇáÕæÑ ãŞØæÚ.';
-$LDPicsSaved='ãáİÇÊ ÇáÕæÑ ÇáËÇáíÉ ÃÚíÏ ÊÓãíÊåÇ æ ÍİÙåÇ İí Èäß ÇáÈíÇäÇÊ:';
+$LDLinkBroken='ÇáÅÊÕÇá ãÚ Èäß ÇáÕæÑ ãŞØæÚ.';
+$LDPicsSaved='Êã ÅÚÇÏÉ ÊÓãíÉ ãáİÇÊ ÇáÕæÑ æ ÍİÙåÇ İí Èäß ÇáÕæÑ:';
 $LDEditTitle='ÚäæÇä';
 
 $LDAlertPhotoInfo='ÇáãÚáæãÇÊ İí ÍŞá ÇáÇÏÎÇá';
@@ -216,20 +216,20 @@ $LDAlertNoPatientData='ÈíÇäÇÊ ÇáãÑíÖ ÛíÑ ßÇãáÉ.';
 $LDAlertNumberOnly='ÃÏÎá ÑŞã Ãæ ÇáßáãÉ"ÑÆíÓí".';
 
 $LDStatistics='ÅÍÕÇÆíÇÊ';
-$LDDisplay1='ÚÑÖ ãİÑÏ';
+$LDDisplay1='ÚÑÖ ãäİÑÏ';
 $LDDisplay1Txt='ÃÖÛØ áÚÑÖ ÇáŞÇÆãÉ ÇáÑÆíÓíÉ İí ÇáŞØÇÚ ÇáÇíãä';
 $LDDisplay2='ÚÑÖ ãÒÏæÌ';
 $LDDisplay2Txt='ÃÖÛØ áÚÑÖ ÇáŞÇÆãÉ ÇáÑÆíÓíÉ İí ŞØÇÚ ãÓÊŞá';
 
-$LDNewPwDiffer='ßáãÇÊ ÇáÓÑ ÇáÌÏíÏÉ ÊÎÊáİÇä Úä ÈÚÖåãÇ<br> ÃÏÎá ßáãÉ ÓÑ ÌÏíÏÉ ãÑÉ ÃÎÑì';
+$LDNewPwDiffer='ßáãÇÊ ÇáãÑæÑ ÇáÌÏíÏÉ ÛíÑ ãÊØÇÈŞÉ, ÃßÊÈ ßáãÇÊ ÇáãÑæÑ ÇáÕÍíÍÉ ãä ÌÏíÏ';
 /* 2003-03-22 EL*/
-$LDPersonellMngmnt='ÔæÄä ÇáãæÙİíä';
-$LDPersonellMngmntTxt='ÃÏæÇÊ æ æÙÇÆİ ÎÇÕÉ ÈÅÏÇÑÉ ÔæÄä ÇáãæÙİíä';
+$LDPersonellMngmnt='ÔÆæä ÇáãæÙİíä';
+$LDPersonellMngmntTxt='ÃÏæÇÊ æ æÙÇÆİ ÎÇÕÉ ÈÅÏÇÑÉ ÔÆæä ÇáãæÙİíä æ ÇáãæÇÑÏ ÇáÈÔÑíÉ';
 /* 2003-04-25 EL */
-$LDBilling='ÇáÎÒíäÉ';
+$LDBilling='ÇáİæÊÑÉ';
 $LDBillingTxt='İÇÊæÑÉ ÇáãÑíÖ, ÅäÔÇÁ ÈíÇäÇÊ İÇÊæÑÉ, Êßæíä ÊŞÑíÑ ÇáİæÇÊíÑ, ÅáÎ.';
-$LDInsuranceCoMngr='ÔÑßÇÊ ÇáÊÃãíä';
-$LDInsuranceCoMngrTxt='ÅÏÎÇá ÌÏíÏ, ÊÍÑíÑ ÈíÇäÇÊ ÔÑßÇÊ ÇáÊÃãíä';
+$LDInsuranceCoMngr='ãÄÓÓÇÊ ÇáÊÃãíä';
+$LDInsuranceCoMngrTxt='ÅÏÎÇá ÌÏíÏ, ÊÍÑíÑ ÈíÇäÇÊ ãÄÓÓÇÊ ÇáÊÃãíä ÇáØÈí';
 $LDAddressMngr='ÏİÊÑ ÇáÚäÇæíä';
 $LDAddressMngrTxt='ÅÏÎÇá, ŞÇÆãÉ, ÊÍÑíÑ, æ ÊÍÏíË ÈíÇäÇÊ ÇáÚäÇæíä.';
 /* 2003-05-18 EL */
@@ -250,40 +250,40 @@ $LDWantUpload='ÃÑíÏ ÇáÊÍãíá';
 $LDImage='ÕæÑÉ';
 # 2002-01-18 EL
 $LDTicketedSupport='ÏÚã ÇáÊĞÇßÑ';
-$LDTicketedSupportTxt='Send a ticketed request to the project\'s online support';
+$LDTicketedSupportTxt='ÅÑÓÇá ØáÈ ÈÊĞßÑÉ Åáì ÇáÏÚã Çáİäí ááãÔÑæÚ ãÈÇÔÑÉ';
 $LDNewsgroup='ãÌãæÚÉ ÇáÇÎÈÇÑ';
 $LDNewsgroupTxt='ãÑÇÁÉ ãÌãæÚÉ ÇáÇÎÈÇÑ ŞÇÆãÉ ÈÑíÏ ÇáãØæÑíä.';
 # 2002-08-19 EL
 $LDPharmaIndex='İåÑÓ ÇáÕíÏáíÉ';
-$LDPharmaIndexTxt='Pharmaceutical indexes like Redlist, IFAP, NIMS, or PIMS';
+$LDPharmaIndexTxt='ÇáİåÑÓ ÇáÕíÏáí ãËá Redlist, IFAP, NIMS, or PIMS';
 
 #2004-05-23 EL
-$LDPlugins='Plugins';
-$LDNoPluginsPrompt='There are no plugins installed yet. If you want to get a Care2x plugin module please go to http://www.care2x-plugins.org.';
-$LDPluginsTxt='Collection of plugin tools and modules';
+$LDPlugins='ÊØÈíŞÇÊ ãÊäæÚÉ';
+$LDNoPluginsPrompt='áÇ ÊæÌÏ Ãí ÊØÈíŞÇÊ ãÖÇİÉ ááÈÑäÇãÌ ÈÇáæŞÊ ÇáÍÇáí';
+$LDPluginsTxt='ÊÔßíáÉ ãä ÇáÃÏæÇÊ æ ÇáÈÑÇãÌ ÇáÊØÈíŞíÉ ÇáãÊäæÚÉ';
 
 #2004-06-13 EL
-$LDCssThemes = 'CSS Themes - Design';
-$LDCssThemesTxt= 'Design for border color, sizes, decoration, font types & sizes, backgrounds, etc.';
-$LDDescription = 'Description';
-$LDScreenshot = 'Screenshot';
+$LDCssThemes = 'ÊÕãíã ÊÔßíá CSS';
+$LDCssThemesTxt= 'ÊÕãíã ÇáÎØæØ æ ÇáÃáæÇä æ ÇáÎáİíÇÊ';
+$LDDescription = 'ÇáæÕİ';
+$LDScreenshot = 'ãËÇá';
 
 #2004-06-30
-$LDSmartyTemplate = 'Smarty Template - Design';
-$LDSmartyTemplateTxt = 'Select smarty based GUI template theme';
+$LDSmartyTemplate = 'ÊÕãíã ÇáŞÇáÈ ÇáĞßí';
+$LDSmartyTemplateTxt = 'ÅÎÊíÇÑ ÇáŞÇáÈ ÇáĞßí ááæÇÌåÉ ÇáÃãÇãíÉ';
 
 #2004-07-08
-$LDControlButtons = 'Control Buttons Styles';
-$LDControlButtonsTxt = 'Select control buttons style';
-$LDComIcons = 'Common Icons Styles';
-$LDComIconsTxt = 'Select decorative icons style <br>(note: in combination with some CSS themes, the icons are overridden by the CSS design)';
-$LDDevDesigner = 'Developer/Designer';
-$LDNoIcon = 'No icons';
-$LDNoIconTxt = 'Shows no icons. Display of icons is suppressed';
+$LDControlButtons = 'äãØ ÃÒÑÇÑ ÇáÊÍßã';
+$LDControlButtonsTxt = 'ÅÎÊíÇÑ äØã ÃÒÑÇÑ ÇáÊÍßã';
+$LDComIcons = 'ÃäãÇØ ÇáÑãæÒ ÇáãÔÊÑßÉ';
+$LDComIconsTxt = 'ÅÎÊíÇÑ ÃäãÇØ ÑãæÒ ÊÌãíáíÉ<br>(ãáÇÍÙÉ: ÈÇáÊÏÇÎá ãÚ ÊÔßíáÇÊ CSS, ÇáÑãæÒ ÓÊáÛì ÈæÇÓØÉ ÊÕãíã CSS)';
+$LDDevDesigner = 'ÇáãØæÑ/ÇáãÕãã';
+$LDNoIcon = 'áÇ ÊæÌÏ ÑãæÒ';
+$LDNoIconTxt = 'ÚÑÖ ÈáÇ ÑãæÒ.ÚÑÖ ÇáÑãæÒ ÛíÑ ããßä';
 
 #2004-07-29
-$LDMainMenuTree = 'Main Menu Styles';
-$LDMainMenuTreeTxt = 'Select the main menu style';
-$LDStyle = 'Style';
-$LDRefreshBrowser = 'Refresh your browser to see the change(s)';
+$LDMainMenuTree = 'ÃäãÇØ ÇáŞÇÆãÉ ÇáÑÆíÓíÉ';
+$LDMainMenuTreeTxt = 'ÅÎÊíÇÑ äãØ ÇáŞÇÆãÉ ÇáÑÆíÓíÉ';
+$LDStyle = 'äãØ';
+$LDRefreshBrowser = 'áãÚÇíäÉ ÇáÊÛííÑÇÊ íÑÌì ÊäÔíØ ÚÑÖ ÇáÕİÍÉ F5';
 ?>

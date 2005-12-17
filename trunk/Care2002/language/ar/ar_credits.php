@@ -11,6 +11,7 @@ require_once($root_path.'include/inc_environment_global.php');
 </head>
 <body onLoad="if(window.focus) window.focus()"><font face="verdana,arial" size=6 color="#0000ff"> 
 <div align="right">√’Õ«» «·›÷·</fonts> </div>
+
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
@@ -35,9 +36,32 @@ require_once($root_path.'include/inc_environment_global.php');
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
         <TR>
+          <TD vAlign=top align=right><font face="verdana,arial" size=2>
+			<img src="../../fotos/credits/tarek_alwerfally_2003.jpg"  border=0  align=left  vspace=10>
+			
+			<b>ÿ«—ﬁ «·Ê—›·Ì</b>
+			<b>„ Œ’’ „⁄ „œ „‰ ‘—ﬂ… „Ìﬂ—Ê”Ê› </b>
+			<b>«·Ã„«ÂÌ—Ì… «··Ì»Ì…</b>
+			<p>
+			„—«Ã⁄… «· —Ã„… «·⁄—»Ì… Ê  ’ÕÌÕÂ«<br>
+			 —Ã„… «·Õ«”»… «·ÕÌ« Ì…<br>
+			 —Ã„… Õ«”»… ⁄„— «·Õ„· „Ê⁄œ «·Ê·«œ… «·„ Êﬁ⁄<br>
+			Education and qualification<br>
+			Bachelor of computer science - AL Fateh university - 1992<br>
+			Microsoft Certified Professional (Infrastrusture) - 2002 <br>
+		
+
+			<P><a href="mailto:t.werfally@swissinterhealth.ch"><u>Tarek Alwerfally can be contacted here.</u></a>
+</TD></TR></TBODY></TABLE>
+
+
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P align="right"><img src="../../fotos/credits/elpidio_latorilla_3.jpg" border=0  align=left vspace=10> 
-          <b>√Ê· ‰”Œ…  Ã—Ì»Ì… „‰ ﬂÌ— 2X ﬁ«„ »€‰‘«∆Â« ≈·»ÌœÌÊ ·« Ê—Ì«·</b> 
+          <b>√Ê· ‰”Œ…  Ã—Ì»Ì… „‰ ﬂÌ— 2X ﬁ«„ » ÿÊÌ—Â« ≈·»ÌœÌÊ ·« Ê—Ì«·</b> 
         <p align="right">:«·„Â‰…<br>
           „»—„Ã, „„—÷ Ã—«Õ…,  ﬁ‰Ì «·ﬂ —Ê‰Ì«  Ê « ’«·«  
         <p align="right"> :„Ã«· «·«Â „«„ <br>

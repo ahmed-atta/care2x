@@ -1,30 +1,30 @@
 <?php
-$LDDiagnosticTest='ØáÈ  ÊÍáíá ÊÔÎíÕ';
+$LDDiagnosticTest='ØáÈ ÅÎÊÈÇÑ ÊÔÎíÕí';
 $LDHospitalName='ÚäÇíÉ';
 $LDCentralLab='ÇáãÚãá ÇáãÑßÒí';
 $LDLabel='ÑÞÚÉ ÇáæÕÝ';
 $LDRoomNr='ÑÞã ÇáÛÑÝÉ';
-$LDSamplingTime='Òãä ÇáÚíäÉ';
+$LDSamplingTime='æÞÊ ÃÎÐÇáÚíäÉ';
 $LDDay='íæã';
 $LDMinutes='ÏÞÇÆÞ';
 $LDHours='ÓÇÚÇÊ';
 $LDBatchNr='ÑÞã ÇáÏÝÚÉ';
 $LDCaseNr='ÑÞã ÇáÍÇáÉ';
-$LDHouse='House';
-$LDHematology='Hematology';
-$LDCoagulation='ÊÌáØ';
-$LDUrine='Urine';
-$LDSerum='Serum';
-$LDGlucose='Glucose';
+$LDHouse='ÇáÏÇÑ';
+$LDHematology='ÃÈÍÇË ÇáÏã/ÇáåíãÇÊæáæÌí';
+$LDCoagulation='ÇáÊÌáØ';
+$LDUrine='ÇáÈæá';
+$LDSerum='ÇáãÕá/ÇáÓíÑã';
+$LDGlucose='ÇáÌáæßæÒ';
 $LD9Hour='9.00';
 $LD15Hour='15.00';
-$LDSober='sober';
-$LDBloodSugar='BLS';
-$LDBLoodSugar1='BLS1';
-$LDBloodPlasma='BLP';
+$LDSober='ÕÇÍí';
+$LDBloodSugar='ÓßÑ ÇáÏã BLS';
+$LDBLoodSugar1='ÓßÑ ÇáÏã BLS1';
+$LDBloodPlasma='ÈáÇÒãÇ ÇáÏã BLP';
 $LDDoctorSignature='ÊæÞíÚ ÇáØÈíÈ';
 $LDLifeRisk='ÎØÑ Úáì ÇáÍíÇÉ';
-$LDRarity='Rarity';
+$LDRarity='ÇáäÏÑÉ';
 $LDSpecTest='ÊÍÇáíá ÎÇÕÉ';
 $LDClinicalInfo='ãÚáæãÇÊ ÇáÚíÇÏÉ';
 $LDShortMonth=array('',
@@ -58,9 +58,9 @@ $LDPhoneOrder=' = íÌÈ ÇáÊÃßíÏ ÈÇáåÇÊÝ';
 $LDSearchPatient='ÈÍË Úä ãÑíÖ';
 $LDPlsSelectPatientFirst='ÇÈÍË Úä ÇáãÑíÖ ÇæáÇ.';
 /* 2002-09-11 EL */
-$LDPendingTestRequest='ØáÈ ÊÍáíá Ýí ÇáÇäÊÙÇÑ';
+$LDPendingTestRequest='ØáÈ ÅÎÊÈÇÑ Ýí ÇáÇäÊÙÇÑ';
 /* 2002-10-14 EL */
-$LDDone='Êã ÇáÇäÌÇÒ! äÞá ÇáäãæÏÌ Çáì ÇáÇÑÔíÝ';
+$LDDone='Êã ÇáÇäÌÇÒ! äÞá ÇáäãæÐÌ Çáì ÇáÇÑÔíÝ';
 
 /* Note: the following array uses strict medical terminology.
 *  If you are not sure about their translation, please leave the 
@@ -466,12 +466,12 @@ $LD_Elements = array('tx_1'=>'Clinical Chem.',
 								 '_f3_'=>'F3',
 								 '_g10_'=>'G10',
 								
-								 'tx_24'=>'Doctor\'s sign',
-								 'tx_25'=>'High risk >>',
-								 '_highrisk_'=>'<< High risk',
-								 'tx_26'=>'Rarity:',
-								 'tx_27'=>'special Test',
+								 'tx_24'=>'ÊæÞíÚ ÇáØÈíÈ',
+								 'tx_25'=>'ÎØÑ ÚÇáí >>',
+								 '_highrisk_'=>'<< ÎØÑ ÚÇáí',
+								 'tx_26'=>'ÇáäÏÑÉ:',
+								 'tx_27'=>'ÅÎÊÈÇÑ ÎÇÕ',
 								 'tx_28'=>'',
-								 'tx_29'=>'clinical info',
+								 'tx_29'=>'ãÚáæãÇÊ ØÈíÉ/ÓÑíÑíÉ',
 								  );
 ?>

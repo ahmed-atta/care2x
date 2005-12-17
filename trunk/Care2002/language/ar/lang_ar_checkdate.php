@@ -1,11 +1,11 @@
 <?php
 
-$LDErrorDate="ÇáÊÇÑíÎ ÎØÇÁ, ÃÏÎá ÇáÊÇÑíÎ ÇáÕÍíÍ.";
-$LDErrorDateLen="Øæá ÇáÊÇÑíÎ ÎØÇÁ.";
-$LDErrorDateFormat="ÈäíÉ ÇáÊÇÑíÎ ÎØÇÁ.";
-$LDErrorNotNumeric="ÃÓÊÎÏÇã ÇáÍÑæÝ ÛíÑ ãÊÇÍ.";
-$LDErrorYear="ÇáÓäÉ ÎØÇÁ.";
-$LDErrorMonth="ÇáÔåÑ ÎØÇÁ.";
-$LDErrorDay="Çáíæã ÎØÇÁ.";
+$LDErrorDate="ÇáÊÇÑíÎ ÎÇØÆí,ÃßÊÈ ÇáÊÇÑíÎ ÇáÕÍíÍ.";
+$LDErrorDateLen="Øæá ÇáÊÇÑíÎ ÎØÃ.";
+$LDErrorDateFormat="ÎØÃ Ýí ÇáÊÇÑíÎ";
+$LDErrorNotNumeric="ÅÓÊÎÏÇã ÇáÍÑæÝ ÛíÑ ãÊÇÍ.";
+$LDErrorYear="ÇáÓäÉ ÎØÃ.";
+$LDErrorMonth="ÇáÔåÑ ÎØÃ.";
+$LDErrorDay="Çáíæã ÎØÃ.";
 
 ?>

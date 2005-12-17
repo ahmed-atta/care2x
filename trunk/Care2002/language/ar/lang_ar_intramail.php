@@ -1,16 +1,16 @@
 <?php
 $LDClose='≈џб«ё';
 $LDCancel='≈бџ«Ѕ «б«г—';
-$LDResetEntry='ќ–Ё «бгѕќб« ';
+$LDResetEntry='г”Ќ «бќ«д« ';
 $LDSave='ЌЁў';
-$LDReset=' ’Ён—';
+$LDReset=' ен∆…';
 
 
 $LDNewSearch='»ЌЋ ћѕнѕ';
 $LDSearch='»ЌЋ';
 
 $LDContinue='≈” г—«—';
-$LDBack=' —«ћЏ';
+$LDBack='—ћжЏ';
 
 $LDOn='Ён';
 $LDAt='Џдѕ';
@@ -24,47 +24,47 @@ $LDSelect='≈ќ н«—';
 
 $LDOrderArchive='√—‘нЁ';
 
-$LDGoodMorning='’»«Ќ «бќн—';
-$LDGoodDay='√еб«';
-$LDGoodEvening='г”«Ѕ «бќн—';
+$LDGoodMorning='«б”б«г Џбняг';
+$LDGoodDay='«б”б«г Џбняг';
+$LDGoodEvening='«б”б«г Џбняг';
 
 $LDDate='«б «—нќ';
 $LDDept='«бё”г';
 $LDPrio='«б«”»ён…';
 
 
-$LDPageTop='Џжѕ… бб»ѕ«н…';
+$LDPageTop='√Џбм «б’ЁЌ…';
 $LDPreview='Џ—÷';
 $LDUpdateData=' ЌѕнЋ √ж  Ќ—н—';
 
-$LDNoBack='б«.  —«ћЏ.';
+$LDNoBack='б«. —ћжЏ ббќбЁ.';
 $LDOK='гж«Ёё';
 $LDName='«б«”г';
-$LDPassword='ябг… «б”—';
-$LDUserId='√”г «бг” ќѕг';
+$LDPassword='ябг… «бг—ж—';
+$LDUserId='≈”г «бг” ќѕг';
 $LDChange=' џнн—';
 $LDLock='ёЁб';
 $LDUnlock='≈бџ«Ѕ «бёЁб';
 $LDDelete='Ќ–Ё';
-$LDYesSure='дЏг, √д« д √яѕ.';
-$LDKeywordPrompt='√ѕќб гЁ «Ќ ябг… »ЌЋ';
+$LDYesSure='дЏг, г √яѕ';
+$LDKeywordPrompt='гЁ—ѕ«  «б»ЌЋ';
 $LDWelcome='г—Ќ»«';
 
-$LDErrorLogin='ќЎ«Ѕ Ён √”г «бг” ќѕг √ж ябг… «б”—. √ѕќб «б»н«д«  «б’ЌнЌ….';
-$LDErrorForm='е–« «бдгжѕћ бг нягб  г«г«. «ягбе.';
-$LDErrorPassword='ябг«  «б”— «бгѕќб… џн— г Ў«»ё…! <br>’ЌЌе«. ябг«  «б”— нћ» «д  яжд г Ў«»ё….';
+$LDErrorLogin='ќЎ√ Ён ≈”г «бг” ќѕг √ж ябг… «бг—ж—. «я » «б»н«д«  «б’ЌнЌ….';
+$LDErrorForm='«бдгж–ћ џн— гя гб «б»н«д« , нћ» ≈яг«бе«';
+$LDErrorPassword='ябг«  «бг—ж— џн— г Ў«»ё…! <br>ябг«  «бг—ж— нћ» «д  яжд г Ў«»ё….';
 $LDErrorIncomplete='«б»н«д«  «бгѕќб… џн— я«гб…!  «ѕќб я«гб «бгЏбжг« .';
 
 $LDIntraEmail='«б»—нѕ «б«бя —ждн «бѕ«ќбн';
 $LDLogin='ѕќжб';
 $LDUrEmailAddr='»—нѕя «б«бя —ждн';
 
-$LDNotRegUser= '√д  бг  ”ћб »Џѕ. «гб« «бдгжѕћ «б «бн бб ”ћнб.';
+$LDNotRegUser= '√д  џн— г”ћб »Џѕ. ≈гб√ «бдгж–ћ «б «бн бб ”ћнб.';
 $LDFirstName='«б«”г';
-$LDChoiceAddr='«ќ «— »—нѕ «бя —ждн';
-$LDAlias='«”г г” Џ«—';
-$LDChoicePassword='«ќ «— ябг… «б”—';
-$LDPassword2x='«Џѕ «ѕќ«б ябг… «б”—';
+$LDChoiceAddr='≈ќ «— »—нѕ «бя —ждн';
+$LDAlias='≈”г г” Џ«—';
+$LDChoicePassword='≈ќ «— ябг… «бг—ж—';
+$LDPassword2x='«Џѕ «ѕќ«б ябг… «бг—ж—';
 $LDRegister=' ”ћнб';
 $LDNewReg='ед« нгяд  ”ћнб г” ќѕг ћѕнѕ.';
 
@@ -78,7 +78,7 @@ $LDDrafts='г”жѕ« ';
 $LDRecycle='«Џ«ѕ… «бѕж—…';
 $LDComposeMail='я «»… »—нѕ «бя —ждн ћѕнѕ';
 $LDReadEmail='ё—«Ѕ… «б»—нѕ «б«бя —ждн';
-$LDEmailCount='б–ня <font size=2 color="#000000"><b>~nr~ »—нѕ «бя —ждн бг нё—«Ѕ</b></font> Ён ’дѕжё «бж«—ѕ.';
+$LDEmailCount='нжћѕ <font size=2 color="#000000"><b>~nr~ »—нѕ «бя —ждн бг нё—√</b></font> Ён ’дѕжё «бж«—ѕ.';
 $LDSortDate='— » »ж«”Ў… «б «—нќ';
 $LDSubject='«бЏдж«д';
 $LDDate='«б «—нќ';
@@ -91,60 +91,60 @@ $LDSave2Draft='ЌЁў яг”жѕ…';
 $LDShowAll='Џ—÷ «бяб';
 $LDChange=' џнн—';
 $LDAskAck='Ўб» гЏ—Ё…';
-$LDCC='';
-$LDBCC='';
+$LDCC='д”ќ… я—»ждн…';
+$LDBCC='’ж—… ≈бм';
 $LDBCCTxt='Џд«жнд BCC ”жЁ бд н г Џ—÷ег Ён «бг бёнд «б—∆н”нд.';
 $LDRecipient='«бг бён';
 $LDQuickAddr='Џд«жнд ”—нЏ…';
-$LDInsertAddr='«ѕќ«б';
+$LDInsertAddr='≈ѕќ«б';
 $LDFolderEmpty='гбЁ «бЌЁжў«  ~tagword~ Ё«—џ Ён е–е «ббЌў….';
 $LDNoteIntra='б«Ќў «д «б»—нѕ «б«бя —ждн «бѕ«ќбн ”жЁ н—”б ж н” бг Ён «б‘»я… «бѕ«ќбн… ЁёЎ. <p>«÷џЎ ед« бЁ Ќ ’дѕжё «бж«—ѕ.';
 $LDEmailSent=' г «—”«б «б»—нѕ «б«бя —ждн »дћ«Ќ!';
-$LDConfirmDelete='еб √д  г ∆яѕ гд —џ» я Ён Ќ–Ё «б»—нѕ «б«я —ждн «бгЏбгњ';
-$LDAlertNoRecipient='«бг бён гЁёжѕ! «ѕќб «б»—нѕ «б«бя —ждн ббг бён.';
+$LDConfirmDelete='еб √д  г √яѕ гд —џ» я Ён Ќ–Ё «б»—нѕ «б«я —ждн «бг‘«— ≈бнењ';
+$LDAlertNoRecipient='Џдж«д «бг бён гЁёжѕ! «ѕќб «б»—нѕ «б«бя —ждн ббг бён.';
 $LDAlertNoSubject='«бЏдж«д бг ня »! «–« яд   —џ» Ён «—”«б «б»—нѕ «б«бя —ждн »ѕжд Џдж«д «÷џЎ гж«Ёё.';
-$LDAlertNoText='«д  бг  я » ‘н«. «я » —”«б я «жб«  г ёг »«б«—”«б.';
-$LDRead='ё—«∆…';
+$LDAlertNoText='б« нжћѕ √н д’ гя ж». «я » —”«б я «жб«  г ёг »«б«—”«б.';
+$LDRead='ё—«Ѕ…';
 $LDBack2='—ћжЏ «бм';
 $LDReply2='—ѕ «бм';
 $LDReply='—ѕ';
-$LDResend='«Џ«ѕ… «—”«б';
+$LDResend='≈Џ«ѕ… «—”«б';
 $LDReplyAgain='—ѕ г—… «ќ—м';
 $LDForward='«—”«б';
-$LDClk4Printer='«÷џЎ бЁ Ќ «’ѕ«— «бЎ»«Џ…';
-$LDPrinterVersion='«’ѕ«— «бЎ«»Џ…';
-$LDAskDeleteMail='еб «д  г ∆яѕ гд —џ» я Ён Ќ–Ё е–« «б»—нѕ «б«бя —ждн?';
+$LDClk4Printer='≈÷џЎ бЁ Ќ «’ѕ«— «бЎ»«Џ…';
+$LDPrinterVersion='≈’ѕ«— «бЎ«»Џ…';
+$LDAskDeleteMail='еб √д  г √яѕ гд —џ» я Ён Ќ–Ё е–« «б»—нѕ «б«бя —ждн?';
 $LDPrint='Ў»«Џ…';
-$LDAttach='«—Ё«ё';
-$LDEmailAddr='Џдж«д «б»——нѕ «б«бя —ждн';
+$LDAttach='≈—Ё«ё';
+$LDEmailAddr='Џдж«д «б»—нѕ «б«бя —ждн';
 $LDShortName='«бядн…';
-$LDSortName='— » »ж«”Ў… «б«”г';
+$LDSortName=' — н» Ќ”» «б«”г';
 $LDMoreInfo='гЏбжг«  «÷«Ён…';
-$LDTakeOver='Take over';
-$LDJustReset=' ’Ён—';
+$LDTakeOver='”нЎ—…';
+$LDJustReset=' ен∆…';
 $LDMaximum='«б«ё’м';
-$LDSaveNewAddr='ЌЁў е–« «б»—нѕ «б«бя —ждн «бћѕнѕ Ён ѕЁ — «бЏд«жнд.';
+$LDSaveNewAddr='ЌЁў е–« «бЏдж«д «бћѕнѕ Ён ѕЁ — «бЏд«жнд.';
 $LDWriteEmail=' Ќ—н— «б»—нѕ';
-$LDAddNewAddr='«÷Ё Џдж«д »—нѕ «бя —ждн ћѕнѕ';
-$LDConfirmDeleteAddr='еб √д  г ∆яѕ гд —џ» я Ён Ќ–Ё Џдж«д «б»—нѕ «б«я —ждн «бгЏбгњ';
+$LDAddNewAddr='≈÷«Ё… Џдж«д »—нѕ «бя —ждн ћѕнѕ';
+$LDConfirmDeleteAddr='еб √д  г √яѕ гд —џ» я Ён Ќ–Ё Џдж«д «б»—нѕ «б«я —ждн «бгЏбгњ';
 
 $LDUrInfo='гЏбжг« я «бќ«’…';
 $LDEmailProc='гЏ«бћ… «б»—нѕ «б«бя —ждн';
 $LDProfile='бгЌ… гќ ’—…';
 $LDProfileTxt='«”г, ядн…,  џнн—,  ЌѕнЋ';
-$LDPasswordChange=' џнн— ябг… «б”—';
-$LDSecretQ='”ƒ«б ”—н';
+$LDPasswordChange=' џнн— ябг… «бг—ж—';
+$LDSecretQ='«б”ƒ«б «б”—н';
 $LDSecretQChange=' џнн— «б”ƒ«б «б”—н';
-$LDMemberDir='«б«Џ÷«Ѕ\' ѕбнб';
+$LDMemberDir='ѕбнб «б√Џ÷«Ѕ';
 $LDMemberDirTxt=' ”ћнб Џд«жнд Ён «бѕбнб<br>&nbsp;«ж ћ–Ё гд «бѕбнб';
 $LDReply2Txt=' џнн— \'—ѕ «бм\' Џд«жнд';
 $LDEmailAddrChange=' Џнн— Џдж«д »—нѕ «бя —ждн';
 $LDSignature='«б жёнЏ';
 $LDSignatureTxt='«д‘«Ѕ  жёнЏ<br>&nbsp;н—Ёё ѕ« н«<br>&nbsp;гЏ яб »—нѕ «бя —ждн г—”б.';
-
-$LDEmail2Drafts='Email was saved as draft.';
-$LDNoEmailAddress='Џджбд «б»—нѕ «б«бя —ждн бг нЌѕѕ! «ѕќб Џдж«д »—нѕ «бя —ждн';
+$LDMemberDirTxt=' ”ћнб «бЏд«жнд Ён «бѕбнб<br>&nbsp;«ж Ќ–Ё гд «бѕбнб';
+$LDEmail2Drafts=' г ЌЁў «б»—нѕ яг”жѕ…';
+$LDNoEmailAddress='Џдж«д «б»—нѕ «б«бя —ждн бг нЌѕѕ! √я » Џдж«д »—нѕ «бя —ждн';
 $LDLogout='ќ—жћ';
-$LDNameIsUsed='Џдж«д «б»—нѕ «б«бя —ждн г” ќѕг гд Ў—Ё «Ќѕег. «ќ «— «”г г” ќѕг «ќ—.';
+$LDNameIsUsed='Џдж«д «б»—нѕ «б«бя —ждн г” ќѕг Ќ«бн«р гд ће«“ ¬ќ—, ≈ќ «— ≈”г г” ќѕг »ѕнб, √ж ёг » ”ћнб «бќ—жћ гд «бће«“ «б¬ќ—.';
 
 ?>

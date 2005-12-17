@@ -4,40 +4,40 @@
 */
 $LDClose='ЧлсЧо';
 $LDTech='Ъофэ';
-$LDTechRepair='Ъбуэу Ъофэ';
+$LDTechRepair='ЪесэЭ Ъофэ';
 $LDTechMaint='еэЧфЩ ЪофэЩ';
-$LDTechSupport='ЧсеэЧфЩ';
+$LDTechSupport='ЧсЯку Чснфэ';
 $LDTechInfo='уксцуЧЪ ЪофэЩ';
 
-$LDReRepair='исШ Яку еэЧфЩ';
+$LDReRepair='исШ еэЧфЩ Уц Яку нфэ';
 $LDReRepairTxt='Ъобэб ЧкиЧс, ЧкЯЧЯ ц ЧбгЧс исШ сЮЯуЧЪ ЧсеэЧфЩ.';
 $LDRepabotActivate='Ъфдэи бШцЪ ЧсеэЧфЩ';
-$LDRepabotActivateTxt='Ъфдэи ЧсЧгЪсЧу ЧсЯЧЪэ сисШЧЪ ЧсеэЧфЩ.';
+$LDRepabotActivateTxt='Ъфдэи ЧсЧгЪсЧу ЧсаЧЪэ сисШЧЪ ЧсеэЧфЩ.';
 $LDRepairReport='Ъобэб ЧсеэЧфЩ';
-$LDRepairReportTxt='Ъобэб ЧфЪхЧС ЧсеэЧфЩ.';
+$LDRepairReportTxt='Ъобэб ХфЬЧв кус еэЧфЩ';
 $LDReportsArchive='Чбдэн ЧсЪоЧбэб';
 $LDReportsArchiveTxt='ШЭЫ нэ Чбдэн ЪоЧбэб ЧсеэЧфЩ';
-$LDQuestions='ЧгЪксЧу, ЧгЦсЩ';
+$LDQuestions='ХгЪнгЧб';
 $LDQuestionsTxt='ЧкЯЧЯ, обЧСЩ, ц ЧбгЧс ЧгЦсЩ ц ЧгЪксЧуЧЪ';
 $LDQBotActivate='Ъфдэи бШцЪ ЧсЧгЪксЧу';
 $LDQBotActivateTxt='Ъфдэи ЧсЧгЪсЧу ЧсЯЧЪэ ссЧгЦсЩ ц ЧсЧгЪксЧуЧЪ.';
 $LDInfo='уксцуЧЪ';
-$LDInfoTxt='Ъен ЧсуксцуЧЪ аЧЪ ЧсиЧШк ЧсЪофэ.';
+$LDInfoTxt='цен ЧсуксцуЧЪ ЧснфэЩ';
 
 $LDSendRequest='ЧбгЧс исШ';
 $LDSendReport='ЧбгЧс Ъобэб';
 $LDSendInquiry='ЧбгЧс ЧгЪксЧу';
-$LDReset='Ъенэб';
-$LDRepairArea='упЧф Чскис';
+$LDReset='ЪхэЦЩ';
+$LDRepairArea='уцок Чскис';
 $LDReporter='исШ уф ибн';
 $LDPersonnelNr='Чсбоу Чсцйэнэ.';
 $LDPhoneNr='боу ЧсхЧЪн.  <font size=1>(ссХгЪксЧу ЧсфхЧЦэ)</font>';
-$LDPlsDescribe='ЧдбЭ иШэкЩ Чскис';
+$LDPlsDescribe='дбЭ иШэкЩ Чскис';
 
-$LDAlertName='ЧЯЮс Чгуп.';
-$LDAlertDept='ЧЯЮс огуп Чц уцок Чскйс.';
-$LDAlertDeptOnly='ЧЯЮс огуп.';
-$LDAlertPNr='ЧЯЮс боуп Чсцйэнэ.';
+$LDAlertName='Хгу ЧсуШсл';
+$LDAlertDept='огу Уц уцок Чскис';
+$LDAlertDeptOnly='Чсогу';
+$LDAlertPNr='Чсбоу Чсцйэнэ ссуШсл';
 $LDAck='ЧксЧу ШЧсЧгЪсЧу';
 $LDYour='';
 $LDReceived='ЧгЪсу нэ';
@@ -46,23 +46,23 @@ $LDAtTech='. дпбЧ. <i>огу ЧсеэЧфЩ.</i>';
 $LDRequest='исШ';
 $LDReport='Ъобэб';
 $LDThanksSir='дпбЧ сп';
-$LDPlsTypeReport='ЧдбЭ кус ЧсеэЧфЩ Чсаэ оуЪ Шх.';
+$LDPlsTypeReport='цен кус ЧсеэЧфЩ ЧсуфЬв';
 $LDJobIdNr='боу Ъкбэн Чскус.';
-$LDTechnician='Чснфэ';
-$LDPlsDoneOnly='(Ьхв Ъобэб Шкус ЧсеэЧфЩ ЧсуфЬв нои.)';
+$LDTechnician='ЧсЪофэ';
+$LDPlsDoneOnly='(ЪЬхэв Ъобэб Шкус ЧсеэЧфЩ ЧсуфЬв нои.)';
 $LDName='ЧсЧгу';
 $LDDept='Чсогу';
-$LDEnterQuestion='ЧпЪШ гФЧсп';
+$LDEnterQuestion='пЪЧШЩ ЧсХгЪнгЧб';
 $LDLogIn='ЯЮцс';
-$LDPlsNoRequest='(сЧ ЪпЪШ исШ еэЧфЩ хфЧ. ЧаЧ пЧф саэп кис ц ЪЭЪЧЬ сеэЧфЩ Чжли хфЧ.';
+$LDPlsNoRequest='(исШЧЪ ЧсеэЧфЩ сЧ ЪпЪШ хфЧ. ЧаЧ пЧф сЯэп кис ц ЪЭЪЧЬ сеэЧфЩ Чжли хфЧ.';
 $LDLastQuestions='ЧЮб ~tagword~ ЧгЦсЩ Чц ЧэЬЧШЧЪ';
 $LDFrom='уф';
 $LDTo='Чсь';
-$LDAlertQuestion='ЧфЪ су ЪпЪШ Чэ гФЧс.';
+$LDAlertQuestion='су эЪу пЪЧШЩ Уэ гФЧс';
 $LDOn='нэ';
-$LDOClock='o\'Clock';
-$LDInquiry='ЧгЪксЧу';
-$LDReply='ЧкЧЯЩ ЧбгЧс';
+$LDOClock='ЧсгЧкЩ';
+$LDInquiry='ХгЪксЧу';
+$LDReply='ХкЧЯЩ ХбгЧс';
 $LDSearch='ШЭЫ';
 $LDSearchReport='ШЭЫ кф Ъобэб';
 $LDDate='ЧсЪЧбэЮ';
@@ -82,47 +82,46 @@ $reportindex=array('&nbsp;','&nbsp;',"$LDRequest $LDFrom:",'ЧгЪсу кфЯ:',$LDAt,'&
 $requestindex=array("$LDRequest $LDFrom:",$LDAt,$LDOn,$LDDept,$LDTelephoneNr,$LDJobIdNr);
 $queryindex=array('&nbsp;','&nbsp;',"$LDInquiry $LDFrom:",$LDDept,'ЧгЪсу $LDOn:',$LDAt,'&nbsp;');
 
-$LDMarkRead='ЭЯЯ ШЧфх \'обэЦ\'.';
-$LDPrint='ЧиШк';
-$LDGoBack='ЪбЧЬк';
+$LDMarkRead='ЭЯЯ ШЧфх \'уобцС\'.';
+$LDPrint='иШЧкЩ';
+$LDGoBack='бЬцк';
 $LDImRepabot='ЧфЧ бШцЪ ЧсеэЧфЩ';
 $LDImQBot='ЧфЧ бШцЪ ЧсЧгЪксЧу';
-$LDNewReport='исШ ЧсеэЧфЩ ЧсЬЯэЯ ЧсугЪсу хц ЧсЪЧсэ.';
-$LDNewReportMany='исШЧЪ ЧсеэЧфЩ ЧсЬЯэЯЩ ЧсугЪсуЩ хэ ЧсЪЧсэЩ.';
+$LDNewReport='исШ ЧсеэЧфЩ ЧсЬЯэЯ ЧсугЪсу хц пЧсЪЧсэ.';
+$LDNewReportMany='исШЧЪ ЧсеэЧфЩ ЧсЬЯэЯЩ ЧсугЪсуЩ хэ пЧсЪЧсэ:';
 $LDReportArrived='Ъу ЧгЪсЧу исШ ЧсеэЧфЩ!';
-$LDShowRequest='ЧжхЧб ЧсисШ';
-$LDNoDataFound='сЧ ЪцЬЯ ШэЧфЧЪ. ЭаЫ ЮиЧС нэ упЧф уЧ. Чжли вб [ЧлсЧо] цЭЧцс нЪЭ оЧЦуЩ ЧсисШЧЪ убЩ ЧЮбь.
-ЧаЧ ЪпббЪ хах ЧсудпсЩ кЯЩ убЧЪ, ЧЪес Шогу ЪофэЩ ЧсуксцуЧЪ.';
+$LDShowRequest='кбж ЧсисШ';
+$LDNoDataFound='сЧ ЪцЬЯ ШэЧфЧЪ. ЭЯЫ ЮиУ . Чжли вб [ЧлсЧо] цЭЧцс нЪЭ оЧЦуЩ ЧсисШЧЪ убЩ ЧЮбь. ЧаЧ ЪпббЪ хах ЧсудпсЩ кЯЩ убЧЪ, ЧЪес Шудбн ЧсфйЧу.';
 $LDAckPrint='ЧксЧу ц иШЧкЩ ЧсисШ';
 $LDPrintRequest='иШЧкЩ ЧсисШ';
 $LDArchiveRequest='фос ЧсисШ Чсь ЧсЧбдэн';
 $LDAckBy='кбн ШцЧгиЩ';
 $LDAlertEnterName='ЧЯЮс Чгуп нэ ЧсЭос [кбн ШцЧгиЩ].';
-$LDYourReply='ЧкЧЯЩ ЧбгЧсп';
-$LDNewInquiry='ЧсЧгЪксЧу ЧсЬЯэЯ ЧсугЪсу хц ЧсЪЧсэ.';
-$LDNewInquiryMany='ЧсЧгЪксЧуЧЪ ЧсЬЯэЯЩ ЧсугЪсуЩ хэ ЧсЪЧсэЩ.';
+$LDYourReply='бЯп хц';
+$LDNewInquiry='ЧсЧгЪксЧу ЧсЬЯэЯ ЧсугЪсу хц ';
+$LDNewInquiryMany='ЧсЧгЪксЧуЧЪ ЧсЬЯэЯЩ ЧсугЪсуЩ хэ ';
 $LDClk2Reply='Чжли вб Чсгху ссобЧСЩ ц/Чц ЧкЧЯЩ ЧсЧбгЧс';
 $LDSendReply='Чбгс ЧкЧЯЩ ЧсЧбгЧс';
 $LDMove2Archive='фос Чсь ЧсЧбдэн';
-$LDShow='ЧжхЧб';
-$LDShowInquiry='ЧжхЧб ЧсЧгЪксЧу';
+$LDShow='кбж';
+$LDShowInquiry='кбж ЧсЧгЪксЧу';
 $LDInquiryArrived='цецс ЧгЪксЧу ЬЯэЯ!';
-$LDSearchWordPrompt='ЧЯЮс унЪЧЭ псуЩ ШЭЫ';
+$LDSearchWordPrompt='пфЧШЩ унбЯЧЪ ЧсШЭЫ';
 $LDInfoCat=array(
 						'исШ еэЧфЩ',
 						'Ъобэб ЧкиЧс',
-						'ЪгЮэф',
+						'Ъпээн',
 						'буэ',
 						'ЧЯЧбЩ ЧсфйЧу',
 						'кфцЧф IP ЧспуШэцЪб',
 						'ЧсиШЧкЩ, ЧсиЧШкЩ',
-						'ЧЯЧбЩ ЧсуЭэи, еэЧфЩ',
-						'Ъфжэн',
+						'ЧЯЧбЩ ЧсШэЦЩ, еэЧфЩ',
+						'Ъфйэн',
 						'ЧспхбШЧС',
 						'уфйцуЩ ЧсхцЧЪн',
-						'ЧсуЧС, уеЧЯб'
+						'ЧсуЧС, Чсебн'
 						);
-$LDNoFound='су ЧЬЯ Чэ дЦ сх ксЧоЩ ШунЪЧЭ псуЩ ЧсШЭЫ. <br>ЧЯЮс уксцуЧЪ ЧжЧнэЩ ц ЬбШ убЩ ЧЮбь.';
+$LDNoFound='сЧ ЪцЬЯ Уэ ШэЧфЧЪ ЪЭЪцэ ксь унбЯЧЪ ЧсШЭЫ ЧсуапцбЩ. <br>эбЬь пЪЧШЩ унбЯЧЪ УЮбь';
 /* 2003-02-11*/
 $LDCancel='ЧслЧС ЧсЧуб';
 ?>

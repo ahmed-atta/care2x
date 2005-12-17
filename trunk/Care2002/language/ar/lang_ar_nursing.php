@@ -1,7 +1,5 @@
 <?php
-/*
-*	IMPORTANT!	All words or characters inclosed with ~ ~ must not be changed.
-*/
+
 $LDNursing='ÇáÊãÑíÖ';
 $LDStation='ÌäÇÍ';
 
@@ -10,21 +8,21 @@ $LDSearchPatient='ÈÍË Úä ÔÎÕ';
 $LDArchive='ÇáÇÑÔíİ';
 $LDStationMan='ÅÏÇÑÉ ÇáÇÌäÍÉ';
 $LDNews='ÇáÇÎÈÇÑ';
-$LDMemo='Memo';
-$LDNursingForum='ãäÊĞì ÇáÊãÑíÖ';
-$LDNursingStations='ÃÌäÍÉ ÇáÊãÑíÖ';
+$LDMemo='ãĞßÑÉ';
+$LDNursingForum='ãäÊÏì ÇáÊãÑíÖ';
+$LDNursingStations='ãÍØÇÊ ÇáÊãÑíÖ';
 
-$LDQuickViewTxt='ÚÑÖ ÓÑíÚ áÃÌäÍÉ ÇáÊãÑíÖ ÇáãÔÛæáÉ Çáíæã';
+$LDQuickViewTxt='ÚÑÖ ÓÑíÚ áÃÌäÍÉ ÇáÃíæÇÁ ÇáãÔÛæáÉ Çáíæã';
 $LDSearchPatientTxt='ÈÍË Úä ãÑíÖ İí ÇáÇÌäÍÉ';
 $LDArchiveTxt='ÈÍË ÏŞíŞ İí ÃÑÔíİ ãáİÇÊ ÇáÇÌäÍÉ';
 $LDStationManTxt='ÅäÔÇÁ ÌäÇÍ, ÇáÈíÇäÇÊ ÇáÇÓÇÓíÉ ãËá, ÇáÇÓÑÉ, ÇáãæÙİíä, ÅáÎ.';
 $LDNewsTxt='ÅØáÇÚ, ÅÚÏÇÏ, Ãæ ÊÍÑíÑ İŞÑÉ ÃÎÈÇÑíÉ.';
-$LDMemoTxt='ÅØáÇÚ, ÅÚÏÇÏ, or edit a memo.';
-$LDNursingForumTxt='ãäÊĞì ÍæÇÑ Íæá ÇáÊãÑíÖ';
+$LDMemoTxt='ÅØáÇÚ, ÅÚÏÇÏ, ÊÍÑíÑ ãĞßÑÉ ÏÇÎáíÉ';
+$LDNursingForumTxt='ãäÊÏì ãäÇŞÔÉ æ ÍæÇÑ Íæá ÇáÊãÑíÖ';
 $LDNursingStationsTxt='ÇáãÔÛæá, ÇáãÑÖì, ÇáÕæÑ, ÅáÎ.';
 
-$LDCloseBack2Main='ÃÛáÇŞ æ ÚæÏÉ áÕİÍÉ ÇáÈÏÇíÉ';
-$LDOld='ÓÇÈŞÇ';
+$LDCloseBack2Main='ÅÛáÇŞ æ ÚæÏÉ áÕİÍÉ ÇáÈÏÇíÉ';
+$LDOld='ŞÏíã';
 $LDTodays='Çáíæã';
 $LDOccupancy='ãÔÛæá';
 $LDBedNr='ÚÏÏ ÇáÇÓÑÉ';
@@ -32,24 +30,24 @@ $LDOptions='ÇáÎíÇÑÇÊ';
 $LDFreeBed='ÔÇÛÑ';
 
 $LDNoOcc='ŞÇÆãÉ ÇáãÔÛæá ÛíÑ ãÊæİÑÉ!';
-$LDClk2Archive='ÃÖÛØ åäÇ áĞåÇÈ ááÃÑÔíİ';
+$LDClk2Archive='ÅÖÛØ åäÇ áĞåÇÈ ááÃÑÔíİ';
 $LDNrUnocc='ÚÏÏ ÇáÇÓÑÉ ÇáÔÇÛÑÉ';
 $LDEditStation='ÊÍÑíÑ ÇáÈíÇäÇÊ İí ÇáÇÌäÍÉ';
-$LDSearchKeyword='ãİÊÇÍ ßáãÉ ÇáÈÍË';
-$LDWasFound='ãæÌæÏ ~rows~ İí ŞæÇÆã ÇáãÔÛæá';
-$LDPlsClk='ÃÖÛØ Úáì ÇáãØáæÈ';
+$LDSearchKeyword='ãİÑÏÇÊ ÇáÈÍË';
+$LDWasFound='íæÌÏ ~rows~ İí ŞæÇÆã ÇáãÔÛæá';
+$LDPlsClk='ÅÖÛØ Úáì ÇáãØáæÈ';
 $LDMoreFunctions='æÙÇÆİ ÅÖÇİíÉ';
-$LDSrcKeyword='ãİÊÇÍ ßáãÉ ÈÍË';
-$LDSearchArchive='ÃÓÊÎÏÇã ÇáÇÑÔíİ Öãä ÇáÈÍË';
-$LDSearchPrompt='ÇÏÎá ãİÊÇÍ ßáãÉ ááÈÍË.<br>	ßãËÇá: ÇááŞÈ, ÇáÇÓã, Ãæ ÇáÇËäíä.';
+$LDSrcKeyword='ãİÑÏÇÊ ÇáÈÍË';
+$LDSearchArchive='ÅÓÊÎÏÇã ÇáÇÑÔíİ Öãä ÇáÈÍË';
+$LDSearchPrompt='ãİÑÏÇÊ ÇáÈÍË: ÇááŞÈ, ÇáÇÓã, Ãæ ÇáÇËäíä.';
 $LDSearch='ÈÍË';
 $LDCancel='ÅáÛÇÁ ÇáÇãÑ';
 $LDHow2Search='ãÓÇÚÏÉ! ßíİ íãßääí ÅíÌÇÏ ãÑíÖ¿';
-$LDClk2Show='ÇÖÛØ áÅÖåÇÑ ÇáÈíÇäÇÊ';
+$LDClk2Show='ÅÖÛØ áÚÑÖ ÇáÈíÇäÇÊ';
 $LDDate='ÇáÊÇÑíÎ';
 $LDClockTime='ÇáæŞÊ';
 
-$LDClkDate='ÃÖÛØ ÇáÊÇÑíÎ ÇáãØáæÈ.';
+$LDClkDate='ÅÖÛØ Úáì ÇáÊÇÑíÎ ÇáãØáæÈ.';
 
 $monat=array('íäÇíÑ',
 					'İÈÑÇíÑ',
@@ -65,52 +63,52 @@ $monat=array('íäÇíÑ',
 					'ÏíÓãÈÑ'
 					);
 $tage=array(
-					'Su',
-					'Mo',
-					'Tu',
-					'We',
-					'Th',
-					'Fr',
-					'Sa'
+					'ÃÍ',
+					'ÅË',
+					'Ëá',
+					'ÃÑ',
+					'Îã',
+					'Ìã',
+					'ÓÈ'
 					);
 					
 $LDDay='Çáíæã';					
 $LDMonth='ÇáÔåÑ';
 $LDYear='ÇáÓäÉ';
 
-$LDDirectSelect='ÃÎÊíÇÑ ãÈÇÔÑ';
-$LDPlusYear='ÃÖÇİÉ ÓäÉ';
-$LDMinusYear='ÃäŞÇÕ ÓäÉ';
-$LDGo='ÃĞåÈ';
+$LDDirectSelect='ÅÎÊíÇÑ ãÈÇÔÑ';
+$LDPlusYear='ÅÖÇİÉ ÓäÉ';
+$LDMinusYear='ÅäŞÇÕ ÓäÉ';
+$LDGo='ÅĞåÈ';
 $LDLastMonth='ÇáÔåÑ ÇáãÇÖí';
 $LDNextMonth='ÇáÔåÑ ÇáŞÇÏã';
-$LDNursingManage='ÛÏÇÑÉ ÇáÇÌäÍÉ';
-$LDShowStationDataTxt='&nbsp;ÅÖåÇÑ, ÊÍÑíÑ, ÅäÔÇÁ, <br> &nbsp;æÕİ, ÚÏÏ ÇáÇÓÑÉ<br>	&nbsp;ÅáÎ.';
-$LDLockBedTxt='&nbsp;Ãæ ÓÑíÑ ÔÇÛÑ';
-$LDAccessRightsTxt='&nbsp;ÅäÔÇÁ, ÛáŞ, ÊÛííÑ,<br>&nbsp;ÊäÔíØ, ÍĞİ, ÃÓÊÎÏÇã.';
-$LDShowStationData='áãÍÉ Úä ÈíÇäÇÊ ÇáÇÌäÍÉ';
-$LDLockBed='ÛáŞ ÓÑíÑ';
-$LDAccessRights='ÍŞæŞ ÇáÇÓÊÎÏÇã';
-$LDProfile='áãÍÉ';
+$LDNursingManage='ÅÏÇÑÉ ÇáÇÌäÍÉ';
+$LDShowStationDataTxt='&nbsp;ÚÑÖ, ÊÍÑíÑ, ÅäÔÇÁ, <br> &nbsp;æÕİ, ÚÏÏ ÇáÇÓÑÉ<br>	&nbsp;.';
+$LDLockBedTxt = '&nbsp;Ãæ ÓÑíÑ ÔÇÛÑ';
+$LDAccessRightsTxt = '&nbsp;ÅäÔÇÁ, Şİá, ÊÛííÑ,<br>&nbsp;ÊäÔíØ, ÍĞİ, ÅÓÊÎÏÇã.';
+$LDShowStationData = 'ÚÑÖ ÈíÇäÇÊ ÇáÇÌäÍÉ';
+$LDLockBed = 'Şİá ÓÑíÑ';
+$LDAccessRights = 'ÍŞæŞ ÇáæÕæá';
+$LDProfile = 'áãÍÉ';
 $LDCreate='ÅäÔÇÁ';
 $LDNewStation='ÌäÇÍ ÌÏíÏ';
 $LDDescription='æÕİ';
 $LDDept='ŞÓã';
 $LDRoom1Nr='ÑŞã Ãæá ÍÌÑÉ';
 $LDRoom2Nr='ÑŞã ÃÎÑ ÍÌÑÉ';
-$LDRoomPrefix='ÈÇÏÆÉ ÊÑŞíã ÇáÍÌÑÉ';
-$LDNrBeds='ÚÏÏ ÇáÇÓÑÉ İí ÇáÍÌÑÉ';
+$LDRoomPrefix='ÑãÒ ãÇŞÈá ÇáÊÑŞíã Prefix';
+$LDNrBeds='ÚÏÏ ÇáÇÓÑÉ';
 $LDMaxBeds='ÇáÚÏÏ ÇáÇÌãÇáí ááÃÓÑÉ ÇáãÊæİÑÉ';
-$LDBed1Prefix='ÈÇÏÆÉ ÇáÊÑŞíã áÃæá ÓÑíÑ';
-$LDBed2Prefix='ÈÇÏÆÉ ÇáÊÑŞíã áËÇäí ÓÑíÑ';
-$LDHeadNurse='ÑÆíÓ ØÇŞã ÇáÊãÑíÖ';
+$LDBed1Prefix='ÑãÒ ãÇŞÈá ÇáÊÑŞíã áÃæá ÓÑíÑ';
+$LDBed2Prefix='ÑãÒ ãÇŞÈá ÇáÊÑŞíã áËÇäí ÓÑíÑ';
+$LDHeadNurse='ÑÆíÓ ÇáÊãÑíÖ';
 $LDHeadNurse2='ãÓÇÚÏ ÑÆíÓ ØÇŞã ÇáÊãÑíÖ';
 $LDNurses='ØÇŞã ÇáÊãÑíÖ';
 $LDCreateStation='ÅäÔÇÁ ÌäÇÍ';
-$LDEnterAllFields ='ÇáÍŞæá ÏÇÊ ÇáÚáÇãÉ  <font color=#ff0000><b>*</b></font> íÌÈ Ãä ÊÚÈì.';
-$LDPlsSelect='ÃÎÊÇÑ ŞÓã';
-$LDStationExists='ÇáÌäÇÍ ~station~ ãæÌæÏ İÚáÇ! ÃÎÊÇÑ ÃÓã ÃÎÑ ááÌäÇÍ.';
-$LDAlertIncomplete='ÈÚÖ ÇáãÚáæãÇÊ ãİŞæÏÉ, ÃÏÎá ÇáãÚáæãÇÊ ÇáãåãÉ.';
+$LDEnterAllFields ='ÇáÍŞæá ĞÇÊ ÇáÚáÇãÉ  <font color=#ff0000><b>*</b></font> íÌÈ ãáÆì.';
+$LDPlsSelect='ÅÎÊíÇÑ ŞÓã';
+$LDStationExists='ÇáÌäÇÍ ~station~ ãæÌæÏ İÚáÇ! ÅÎÊÇÑ ÅÓã ÂÎÑ ááÌäÇÍ.';
+$LDAlertIncomplete='ÈÚÖ ÇáãÚáæãÇÊ ãİŞæÏÉ, ÇßÊÈ ÇáãÚáæãÇÊ ÇáãåãÉ.';
 $LDAlertRoomNr='ÑŞã ÃÎÑ ÍÌÑÉ íÌÈ Ãä íßæä ÃßÈÑ ãä ÑŞã Ãæá ÍÌÑÉ!';
 $LDExistStations='ÇáÇÌäÍÉ ÇáãæÌæÏÉ, ÃÖÛØ áÃÎÊíÇÑ ÇáãØáæÈ';
 $LDOtherStations='ÃÌäÍÉ ÃÎÑì';
@@ -119,22 +117,23 @@ $LDCreatedOn='ÃäÔÆÊ İí:';
 $LDCreatedBy='ÃäÔÆÊ ãä ØÑİ:';
 
 /**********do not change the ~station~ **************************/
-$LDTemplateMissing='ŞÇáÈ ÇáÌäÇÍ ~station~ ãİŞæÏ!';
+$LDTemplateMissing='ŞÇáÈ ÈíÇäÇÊ ÇáÌäÇÍ ~station~ ãİŞæÏ!';
 $LDNoOrigData='ÇáÈíÇäÇÊ ÇáÇÕáíÉ ÛíÑ ãæÌæÏÉ!';
 
-$LDShowLastList='ÃÙåÑ ÃÎÑ ŞÇÆãÉ ááãÔÛæá';
+
+$LDShowLastList='ÚÑÖ ÂÎÑ ŞÇÆãÉ ááãÔÛæá';
 $LDNoListYet='ŞÇÆãÉ Çáíæã áã ÊäÔÆ ÈÚÏ!';
-$LDLastList='ÃÎÑ ŞÇÆãÉ ááãÔÛæá.';
+$LDLastList='ÂÎÑ ŞÇÆãÉ ááãÔÛæá.';
 $LDNotToday='(áíÓ Çáíæã!!)';
 $LDFromYesterday='(ŞÇÆãÉ ÇáÇãÓ!!)';
 /**********do not change the ~nr~ **************************/
 $LDListFrom='åĞå ÇáŞÇÆãÉ ãæÌæÏÉ ãäĞ ~nr~ ÃíÇã ÓÇÈŞÉ.';
-$LDCopyAnyway='ÃäÓÎ åĞå ÇáŞÆãÉ ááíæã Úáì ßá ÍÇá.';
+$LDCopyAnyway='ÃäÓÎ åĞå ÇáŞÇÆãÉ ááíæã Úáì ßá ÍÇá.';
 $LDTakeoverList='ÃäÓÎ åĞå ÇáŞÇÆãÉ ááíæã';
-$LDDoNotCopy='áÇ ÊäÓÎ åĞå! ßæä æÇÍÏÉ ÌÏíÏÉ.';
+$LDDoNotCopy='áÇ ÊäÓÎ åĞå! ßæä ŞÇÆãÉ ÌÏíÏÉ.';
 $LDOldList='åĞå ŞÇÆãÉ ŞÏíãÉ!';
 $LDQuickInformer='ãÚáæãÇÊ ÓÑíÚÉ';
-$LDAttention='ÃäÊÈå!';
+$LDAttention='ÅäÊÈå!';
 $LDOccupied='ãÔÛæá';
 $LDFree='ÔÇÛÑ';
 $LDLocked='ãÛáŞ';
@@ -153,9 +152,9 @@ $LDFemale='ÃäËì';
 /**********do not change the ~station~ **************************/
 $LDNoInit='ÇáÌäÇÍ ~station~ áã ÊÌåÒ ÈíÇäÇÊå ÇáÇÓÇÓíÉ ÈÚÏ!';
 $LDIfInit='áÊÌåíÒ ÇáÌäÇÍ ÈÇáÈíÇäÇÊ ÇáÇÓÇÓíÉ, ÅÖÛØ åäÇ.';
-$LDShowPatData='ÃİÊÍ ÍÇİÙÉ ÌÏæá ÈíÇäÇÊ ÇáãÑíÖ';
+$LDShowPatData='İÊÍ ÍÇİÙÉ ÌÏæá ÈíÇäÇÊ ÇáãÑíÖ';
 $LDReleasePatient='ÎÑæÌ ãÑíÖ';
-$LDNoticeRW='ßÊÇÈÉ Ãæ ŞÑÇÆÉ ãáÇÍÙÇÊ';
+$LDNoticeRW='ßÊÇÈÉ Ãæ ŞÑÇÁÉ ãáÇÍÙÇÊ';
 $LDInfoUnlock='ŞÑÇÁÉ ÇáãÚáæãÇÊ Ãæ ÅáÛÇÁ ÇáŞİá';
 $LDPatListElements=array(
 										'ÇáÍÌÑÉ',
@@ -170,58 +169,59 @@ $LDPatListElements=array(
 $LDConfirmUnlock='åá ÊÑÛÈ ÍŞÇ İí ÅáÛÇÁ ÅÛáÇŞ ÇáÓÑíÑ ÑŞã \'+b+\' İí ÇáÍÌÑÉ ÑŞã \'+r+\' ¿';							
 /********** NOTE: !! do not change the \'+t+\' \'+n+\' and \'+r+b+\'  **************************/
 $LDConfirmDelete='åá ÊÑÛÈ ÍŞÇ İí ÍĞİ \'+t+\' \'+n+\' ãä ÇáÍÌÑÉ \'+r+b+\'¿';
-$LDConfirmLock='åá ÊÑÛÈ ÍŞÇ İí ÅÛáÇŞ åĞÇ ÇáÓÑíÑ¿';
+$LDConfirmLock='åá ÊÑÛÈ ÍŞÇ İí ÅíŞÇİ åĞÇ ÇáÓÑíÑ¿';
 $LDClk2Occupy='ÅÖÛØ áÔÛá åĞÇ ÇáÓÑíÑ';
 /*$LDInsurance=array(
-								'x'=>'Úáì ÍÓÇÈå',
+								'x'=>'ÇáÍÓÇÈ ÇáÔÎÕí',
 								'privat'=>'ÊÃãíä ÎÇÕ',
-								'kasse'=>'Úáì ÍÓÇÈ ÇáãÌÊãÚ'
+								'kasse'=>'ÊÃãíä ØÈí'
 								);
 */
+
 $LDSave='ÍİÙ';
 $LDNurse='ããÑÖ';
-$LDYesSure='äÚã, ÃäÇ ãÊÃßÏ. ÃÎÑÌ åĞÇ ÇáãÑíÖ.';
-$LDFtpAttempted='ãÍÇæáÉ ÇáÏÎæá Çáì ÎÇÏã FTP.<br>ÎÇÏã FTP íãßä Çä íßæä ãŞİá Çæ ãÔÛæá. ÇĞÇ ÇÓÊãÑÊ åĞå ÇáãÔßáÉ áæŞÊ Øæíá, ÇÊÕá ÈŞÓã ÇÏÇÑÉ ÇáäÙÇã.';
-$LDFtpNoLink='İÔá ÇáÏÎæá Çáì FTP';
+$LDYesSure='äÚã, ÃäÇ ãÊÃßÏ, ãä ÊÎÑíÌ åĞÇ ÇáãÑíÖ.';
+$LDFtpAttempted='ãÍÇæáÉ ÇáÏÎæá Çáì ãÒæÏ ÎÏãÉFTP.<br>ãÒæÏ FTP íãßä Çä íßæä ÎÇÑÌ ÇáÎÏãÉ Çæ ãÔÛæáÇğ. ÇĞÇ ÇÓÊãÑÊ åĞå ÇáãÔßáÉ áæŞÊ Øæíá, ÇÊÕá ÈãÔÑİ ÇáäÙÇã.';
+$LDFtpNoLink='İÔá ÇáÏÎæá Çáì FTP ãÒæÏ';
 $LDJustReleased='ÎÑÌ ÇáãÑíÖ. ÅÖÛØ \'ÅÛáÇŞ\' ááÚæÏÉ áŞÇÆãÉ ÇáÇÌäÍÉ ÇáãÔÛæáÉ';
 $LDReleaseType='äæÚ ÇáÎÑæÌ';
-$LDRegularRelease='ÎÑæÌ ÃÚÊíÇÏí';
-$LDSelfRelease='ÊÑß ÇáãÑíÖ ÇáãÓÊÔİì ÈÇÏÑÇÏÊå';
+$LDRegularRelease='ÎÑæÌ ÚÇÏí';
+$LDSelfRelease='ÍÓÈ ÑÛÈÉ ÇáãÑíÖ Ãæ Ãåáå';
 $LDEmRelease='ÎÑæÌ ØÇÑÆ';
-$LDAlertNoName='ÃÏÎá ÃÓãß.';
-$LDAlertNoDate='ÃÏÎá ÇáÊÇÑíÎ ÈåĞÇ ÇáÔßá:';
-$LDAlertNoTime='ÇÏÎá ÇáæŞÊ İí ÇáÔßá ÇáÊÇáí: HH.mm.';
-$LDPatDataFolder='ÍÇİÙÉ ÌÏæá ÈíÇäÇÊ ÇáãÑíÖ';
+$LDAlertNoName='ÃßÊÈ ÃÓãß.';
+$LDAlertNoDate='ÃßÊÈ ÇáÊÇÑíÎ ÈåĞÇ ÇáÔßá:';
+$LDAlertNoTime='ÃßÊÈ ÇáæŞÊ ÍÓÈ ÇáÔßá ÇáÊÇáí: HH.mm  (ãËÇá:  21.34)';
+$LDPatDataFolder='ãÌáÏ ÈíÇäÇÊ ÇáãÑíÖ';
 
 $LDClose='ÅÛáÇŞ';
 $LDHelp='ãÓÇÚÏÉ';
-$LDReset='ÊİÑíÛ';
+$LDReset='ÊåíÆÉ';
 
-$LDNoLabReport='áÇ íæÌÏ ÊŞÑíÑ ãÚãá!';
+$LDNoLabReport='áÇ íæÌÏ ÊŞÇÑíÑ ãÎÊÈÑ!';
 $LDFeverCurve='ÌÏæá ÈíÇäÇÊ ÇáÍÇáÉ';
 $LDNursingReport='ÊŞÑíÑ ÇáÊãÑíÖ';
-$LDDocsPrescription='ØáÈÇÊ ÇáÇØÈÇÁ';
-$LDNursingPlan='ãÎØÊ ÇáÊãÑíÖ';
-$LDRootData='ÍÌÑÉ ÇáÈíÇäÇÊ';
+$LDDocsPrescription='æÕİÇÊ ÇáÇØÈÇÁ';
+$LDNursingPlan='ãÎØØ ÇáÊãÑíÖ';
+$LDRootData='ÇáÈíÇäÇÊ ÇáÃæáíÉ';
 $LDReports='ÊŞÇÑíÑ ÇáÊÔÎíÕ';
-$LDLabReports='ÊŞÇÑíÑ ÇáãÚãá';
+$LDLabReports='ÊŞÇÑíÑ ÇáãÎÊÈÑ';
 $LDPhotos='ÇáÕæÑ';
-$LDChkUpRequests='ØáÈ ÊÍáíá';
-$LDPleaseSelect='ÃÎÊÇÑ ÇáÊÍáíá ÇáãØáæÈ';
-$LDSetColorRider='ÇÖÛØ áÊÍÑíÑ Çæ ÊÕİíÑ áæä ÇáÔÑíØ';
-$LDDiet='ãÎØØ ÇáÊÛÏíÉ';
-$LDBackDay='ÊÑÇÌÚ áíæã æÇÍÏ. (ÇÖÛØ ÈÇáÒÑ ÇáÇíãä áÇÏÎÇá Çí ÊÇÑíÎ)';
+$LDChkUpRequests='ØáÈÇÊ ÇáİÍÕ';
+$LDPleaseSelect='ÅÎÊÇÑ ÇáÊÍáíá ÇáãØáæÈ';
+$LDSetColorRider='ÅÖÛØ áÊÍÑíÑ Çæ ÊÕİíÑ áæä ÇáÔÑíØ';
+$LDDiet='ÈÑäÇãÌ ÇáÊÛĞíÉ';
+$LDBackDay='ÑÌæÚ áíæã æÇÍÏ. (ÇÖÛØ ÈÇáÒÑ ÇáÇíãä áÇÏÎÇá Çí ÊÇÑíÎ)';
 $LDFwdDay='ÊŞÏã áíæã æÇÍÏ. (ÇÖÛØ ÈÇáÒÑ ÇáÇíãä áÇÏÎÇá Çí ÊÇÑíÎ)';
-$LDClk2PlanDiet='ÇÖÛØ ÇÊÎØíØ ÊÛÏíÉ áåĞÇ Çáíæã';
+$LDClk2PlanDiet='ÇÖÛØ ÊÎØíØ ÊÛĞíÉ áåĞÇ Çáíæã';
 
 $LDAllergy='ÇáÍÓÇÓíÉ';
-$LDDiagnosisTherapy='ÇáÊÔÇÎíÕ / ÇáÚáÇÌ';
+$LDDiagnosisTherapy='ÇáÊÔÎíÕÇÊ/ÇáÚáÇÌ';
 $LDBpTemp='ÇáÍÑÇÑÉ/ÖÛØ ÇáÏã';
-$LDPtAtgEtc='PT,Atg,etc';
+$LDPtAtgEtc='PT, Atg, etc..';
 $LDAntiCoag='ãÇäÚÇÊ ÇáÊÎÊÑ';
 $LDExtraNotes='ãáÇÍÙÇÊ';
 $LDMedication='ÚáÇÌ';
-$LDIvPort='İÜí ÇáÜæÑíÜÏ';
+$LDIvPort='ÇáÊÛĞíÉ İÜí ÇáÜæÑíÜÏ';
 $LDPtAtgEtcTxt='ÇáÚáÇÌ ÇáØÈíÚí, ãÇäÚ ÇáÊÌáØ, ÇáÎ.';
 $LDExtraNotesTxt='ãáÇÍÙÇÊ, ÍÕÕ, ÑŞã ÇáÔÍäÉ, ÇáÎ.';
 
@@ -230,7 +230,7 @@ $LDTemp='ÇáÍÑÇÑÉ';
 
 $LDClk2Enter='ÅÖÛØ áÅÏÎÇá ~tagword~';
 $LDClk2EnterDaily='ÅÖÛØ áÅÏÎÇá ~tagword~ áåĞÇ Çáíæã';
-$LDSpecialsExtra='ãáÇÍÙÇÊ, ÊÔÇÎíÕ ÅÖÇİíÉ';
+$LDSpecialsExtra='ãáÇÍÙÇÊ, ÊÔÎíÕÇÊ ÅÖÇİíÉ';
 $LDClk2PlanDaily='ÇÖÛØ áÊÎØØ ~tagword~ áåĞÇ Çáíæã';
 $LDInputWin='äÇİĞÉ ÇáÇÏÎÇá';
 $LDFullDayName=array(
@@ -251,36 +251,36 @@ $LDFullDayName=array(
 									'ÇáÇÍÏ'
 									);
 $LDCurrentEntry='ÇáãÏÎáÇÊ ÇáÍÇáíÉ';
-$LDEntryPrompt='ÇÏÎá ÇáãÚáæãÇÊ ÇáÌÏíÏÉ åäÇ';
-$LDConfirmSetDate='åá ÊÑÛÈ İí ÑæÆíÉ "+dayID+" ?';
+$LDEntryPrompt='ÃßÊÈ ÇáãÚáæãÇÊ ÇáÌÏíÏÉ åäÇ';
+$LDConfirmSetDate='åá ÊÑÛÈ İí ÑÄíÉ "+dayID+" ?';
 $LDStartDate='ÊÇÑíÎ ÇáÈÏÇíÉ';
 $LDEndDate='ÊÇÑíÎ ÇáÇäÊåÇÁ';
-$LDShowCurveDate='ÇÖåÑ ÇáãäÍäì ãÚ ÇáÇÊí';
+$LDShowCurveDate='ÚÑÖ ÇáãäÍäì ';
 $LDDailyDiagTher='ÇáÚáÇÌ, ÊŞÑíÑ, ãÎØØ ÇáÊãÑíÖ, ÅáÎ.';
 $LDAntiCoagTxt='ãÇäÚÇÊ ÇáÊÎÊÑ - ÇáÊŞÑíÑ Çáíæãí';
-$LDSFormatPrompt='ÃÏÎá ãÚáæãÇÊ ÌÏíÏÉ åäÇ Ãæ ÍÑÍÑ ÇáãÏÎáÇÊ ÇáÍÇáíÉ:<br><font size=1 > ÇáÚÏÏ ÇáÇŞÕì 16 ÇáÍÑİ</font>';
+$LDSFormatPrompt='ÃßÊÈ ãÚáæãÇÊ ÌÏíÏÉ åäÇ Ãæ ÍÑÑ ÇáãÏÎáÇÊ ÇáÍÇáíÉ:<br><font size=1 > ÇáÚÏÏ ÇáÇŞÕì 16 ÇáÍÑİ</font>';
 $LDDosage='ÇáÌÑÚÉ';
 $LDColorMark='ãÍÏÏ ÈÇááæä';
 $LDNormal='ØÈíÚí';
 $LDAntibiotic='ãÖÇÏ Ííæí';
-$LDDialytic='Dialytic';
-$LDHemolytic='Hemolytic';
-$LDIntravenous='Intravenous';
+$LDDialytic='ÅÓÊİÒÇÒí';
+$LDHemolytic='ÅäÍáÇáí';
+$LDIntravenous='æÑíÏí';
 $LDTodaysReport='ÊŞÑíÑ Çáíæã';
 $LDNoMedicineYet='áÇ íæÌÏ ÊØÈíÈ ÈÚÏ!';
-$LDEffectReport='ÊŞÑíÑ ÇáÊÇÆÊíÑ';
+$LDEffectReport='ÊŞÑíÑ ÇáÊÃËíÑ';
 $LDFrom='ãä';
 $LDTo='Çáì';
 $LDPage='ÇáÕİÍÉ';
 $LDSignature='ÇáÊæŞíÚ';
 $LDInsertSymbol='ÖÚ åĞÇ ÇáÑãÒ İí ÇáÈÏÇíÉ';
-$LDInsertDate='ÃÏÎá ÊÇÑíÎ Çáíæã';
-$LDInsertTimeNow='ÃÏÎá ÇáæŞÊ ÇáÇä';
+$LDInsertDate='ÃßÊÈ ÊÇÑíÎ Çáíæã';
+$LDInsertTimeNow='ÃßÊÈ ÇáæŞÊ ÇáÇä';
 $LDSpecialNotice='ãáÇÍÙÇÊ ÎÇÕÉ';
 $LDAddendum='ãÚáæãÇÊ ÃÖÇİíÉ';
 $LDDiagnosticReport='ÊŞÑíÑ ÇáÊÔÎíÕ';
 $LDDoctor='ÇáØÈíÈ';
-$LDPassword='ßáãÉ ÇáÓÑ';
+$LDPassword='ßáãÉ ÇáãÑæÑ';
 $LDCallBackPhone='ááÇÓÊÚáÇã ÇÊÕá';
 
 $LDPicShots='ÕæÑ';
@@ -292,24 +292,24 @@ $LDShotNr='ÑŞã ÇáÕæÑÉ';
 $LDLastName='ÇááŞÈ';
 $LDName='ÇáÇÓã';
 $LDBirthDate='ÊÇÑíÎ ÇáãíáÇÏ';
-$LDLockThisBed='ÃÛáŞ åĞÇ ÇáÓÑíÑ';
-$LDClk2LockBed='ÅÖÛØ áÛáŞ åĞÇ ÇáÓÑíÑ';
+$LDLockThisBed='ÅíŞÇİ åĞÇ ÇáÓÑíÑ';
+$LDClk2LockBed='ÅÖÛØ áÅíŞÇİ åĞÇ ÇáÓÑíÑ';
 $LDAssignOcc='ÊÍÏíÏ ãÔÛæá';
-$LDSearchFound='ÇáÈÍË æÌÏ <font color=red><b>~nr~</b></font> ãÑÖì.';
-$LDAssign2Bed='ÍÏÏ åĞÇ ÇáãÑíÖ ßäæíá';
+$LDSearchFound='íæÌÏ: <font color=red><b>~nr~</b></font> ãÑÖì.';
+$LDAssign2Bed='ÊÎÕíÕ ÇáÓÑíÑ áå';
 $LDSend='ÃÑÓá';
 $LDSendLater='ÃÑÓá áÇÍŞÇ';
-$LDReqTest='ÊÍáíá ÇáÊÔÎíÕ ÇáãØáæÈ';
-$LDSpeedTest='ÊÍáíá ÚÇÌá.';
-$LDDiagnosticTest='ØáÈ ÊÍáíá';
+$LDReqTest='ÇáÅÎÊÈÇÑ ÇáãØáæÈ';
+$LDSpeedTest='ÅÎÊÈÇÑ ÚÇÌá.';
+$LDDiagnosticTest='ØáÈ ÊÔÎíÕ';
 $LDRelayResult='ÊÑÍíá ÇáÊÔÎíÕ Úáì ÇáåÇÊİ/ÌåÇÒ ÇáäÏÇÁ';
 $LDSpeedCut='ŞØÚ ÇáÇÊÕÇá.';
-$LDClk4Phone='ÃÖÛØ áÚÑÖ ÈíÇäÇÊ ÇáåÇÊí/ÌåÇÒ ÇáäÏÇÁ.';
+$LDClk4Phone='ÅÖÛØ áÚÑÖ ÈíÇäÇÊ ÇáåÇÊİ/ÌåÇÒ ÇáäÏÇÁ.';
 $LDHour='ÇáæŞÊ';
 
-$LDClkHere='ÃÖÛØ åäÇ.';
+$LDClkHere='ÅÖÛØ åäÇ.';
 
-$LDNoOccList='áÇ íæÌÏ ãÇÖí';
+$LDNoOccList='áÇ íæÌÏ ÓÇÈŞÉ';
 $LDFromWard='ŞÇÆãÉ ãä ÇáÌäÇÍ ';
 $LDWithinLast='ãÚ ÇÎÑ ';
 $LDDays=' ÇáÇíÇã.';
@@ -321,24 +321,24 @@ $LDChangeBed='ÊÛííÑ ÇáÓÑíÑ';
 $LDPatientDied='æİÇÉ ÇáãÑíÖ';
 
 $LDFollowing='ÇáÊÇáí';
-$LDErrorDuplicateBed='ÎØÇÁ: Duplicate bed occupancy record in table nursing_station_patients';
-$LDNoFound='ÇáÈÍË áã íÌÏ ãÑíÖ';
+$LDErrorDuplicateBed='ÎØÃ: Duplicate bed occupancy record in table nursing_station_patients';
+$LDNoFound='áÇíæÌÏ Ãí ãÑíÖ';
 
 $LDNoWardsYet='áÇ íæÌÏ ÃÌäÍÉ ÊãÑíÖ ÈÚÏ.';
-$LDClk2CreateWard='áÅäÔÇÁ ÌäÇÍ, ÃÖÛØ åäÇ.';
+$LDClk2CreateWard='áÅäÔÇÁ ÌäÇÍ, ÅÖÛØ åäÇ.';
 /* 2002-10-12 EL */
 $LDToCreateNewList='áÅäÔÇÁ ŞÇÆãÉ ÌÏíÏÉ';
 $LD_ddpMMpyyyy='dd.mm.yyyy';
 $LD_yyyyhMMhdd='yyyy-mm-dd';
 $LD_MMsddsyyyy='mm/dd/yyyy';
 /* 2002-10-23 EL*/
-$LDQueryDoctor='ÓÄÇá áØÈíÈ';
+$LDQueryDoctor='ÅÓÊÚáÇã áØÈíÈ';
 $LDDoctorInfo='ãÚáæãÇÊ ÇáÇØÈÇÁ, ÊæÌíåÇÊ';
-$LDDiagnosticsReport='æÕæá ÊŞÑíÑ ÇáÊÍÇáíá';
-$LDInfusionTherapy='IáÚáÇÌ ÈÇáÓæÇÆá/ÈÑäÇãÌ';
-$LDMonitorFluidDischarge='ÊİÑíÎ ÇáÓæÇÆá/ãÏÑÇÊ ÇáÈæá';
-$LDBloodProgram='íäÉ Ïã/äŞá';
-$LDVitalStatistics='ÇÍÕÇÆíÇÊ ÇÓÇÓíÉ';
+$LDDiagnosticsReport='æÕæá ÊŞÑíÑ ÇáÊÔÎíÕ';
+$LDInfusionTherapy='ÇáÚáÇÌ ÈÇáÓæÇÆá/ÈÑäÇãÌ';
+$LDMonitorFluidDischarge='ÊİÑíÛ ÇáÓæÇÆá/ãÏÑÇÊ ÇáÈæá';
+$LDBloodProgram='ÚíäÉ Ïã/äŞá';
+$LDVitalStatistics='ÅÍÕÇÆíÇÊ ÇÓÇÓíÉ';
 $LDAntibioticsProgram='ÚáÇÌ ÇáãÖÇÏ ÇáÍíæí/ÈÑäÇãÌ';
 $LDAnticoagProgram='ãÇäÚÇÊ ÇáÊÎËÑ';
 $LDSpecialCare='ÚäÇíÉ ÎÇÕÉ, ÇÍÕÇÆíÇÊ ÇÓÇÓíÉ';
@@ -352,37 +352,37 @@ $LDNoDiagReport='ÊŞÑíÑ ÇáÊÔÎíÕÇÊ ÛíÑ ãÊæİÑ';
 $LDNursesList='ŞÇÆãÉ ØÇŞã ÇáÊãÑíÖ';
 $LDNursesListTxt='ŞÇÆãÉ, ÚÑÖ, ÅäÔÇÁ, æ ÊÍÑíÑ ŞÇÆãÉ ØÇŞã ÇáÊãÑíÖ';
 /* 2003-04-18 */
-$LDInsurance='Úáì ÍÓÇÈ ÇáãÌÊãÚ';
+$LDInsurance='ÊÃãíä ØÈí';
 $LDPrivate='ÊÃãíä ÎÇÕ';
 $LDSelfPay='Úáì ÍÓÇÈå';
 /* 2003-04-21 EL */
 $LDRoom='ÇáÍÌÑÉ';
-$LDAdm_Nr='ÑŞã ÇáŞÈæá.';
+$LDAdm_Nr='ÑŞã ÇáÅíæÇÁ';
 $LDStatus='ÇáÍÇáÉ';
 $LDInWard='İí ÇáÌäÇÍ';
 /* 2003-04-23 EL */
-$LDWard_ID='ÊÚÑíİ ÇáÌäÇÍ';
-$LDNoSpecChars='áÇ íãßä ÃÓÊÎÏÇã ÍÑæİ ÎÇÕÉ';
+$LDWard_ID='ÑãÒ ÇáÌäÇÍ';
+$LDNoSpecChars='áÇ íãßä ÅÓÊÎÏÇã ÍÑæİ ÎÇÕÉ';
 /* 2003-04-24 EL*/
-$LDTemporaryCloseWard='ÅÛáÇŞ ãæÆŞÊ áåĞÇ ÇáÌäÇÍ';
+$LDTemporaryCloseWard='ÅÛáÇŞ ãÄŞÊ áåĞÇ ÇáÌäÇÍ';
 $LDIrreversiblyCloseWard='ÅÛáÇŞ äåÇÆí áåĞÇ ÇáÌäÇÍ';
 $LDSureTemporaryClose='åá ÃäÊ ãÊÃßÏ ãä ÑÛÈÊß ÈÅŞİÇá åĞÇ ÇáÌäÇÍ ãÄŞÊÇ¿';
 $LDSureIrreversibleClose='åá ÃäÊ ãÊÃßÏ ãä ÑÛÈÊß ÈÅŞİÇá åĞÇ ÇáÌäÇÍ äåÇÆíÇ¿';
 /* Do not translate the ~str~ , it will be replaced with the ward's name by the program */
-$LDWardNoClose='ÇáÌäÇÍ ~str~ áÇ íãßä ÇÛáÇŞå áÇÍÊæÇÆå Úáì ãÑíÖ.<br>íÌÈ Çä ÊÎÑÌ ÌãíÚ ÇáãÑÖì ãä ÇáÌäÇÍ ŞÈá Çä ÊÛáŞå.';
+$LDWardNoClose='ÇáÌäÇÍ ~str~ áÇ íãßä ÇÛáÇŞå áÇÍÊæÇÆå Úáì ãÑÖì.<br>íÌÈ ÅÎÑÇÌ Ãæ äŞá ÌãíÚ ÇáãÑÖì ãä ÇáÌäÇÍ ŞÈá ÅÛáÇŞå.';
 $LDBackToWardProfile='ÚæÏÉ áÈíÇäÇÊ ÇáÇÌäÍÉ.';
-$LDShowWardOccupancy='áÚÑÖ ŞÇÆãÉ ÇáÇÌäÍÉ ÇáãÔÛæáÉ.';
+$LDShowWardOccupancy='ÚÑÖ ŞÇÆãÉ ÇáÇÌäÍÉ ÇáãÔÛæáÉ.';
 $LDTemporaryClosed='ÅÛáÇŞ ãÄŞÊ';
 $LDReopenWard='ÅÚÇÏÉ İÊÍ åĞÇ ÇáÌäÇÍ';
 $LDSureReopenWard='åá ÃäÊ ãÊÃßÏ ãä ÑÛÈÊß İí ÅÚÇÏÉ İÊÍ åĞÇ ÇáÌäÇÍ¿';
 $LDShortDescription='ÔÑÍ ãÎÊÕÑ';
 $LDRoomShortDescription='ÔÑÍ ãÎÊÕÑ Úä ÇáÍÌÑÇÊ';
-$LDRoomNotCreated='áã ÊäÔÇÁ ÇáÍÌÑÉ ÈÚÏ';
+$LDRoomNotCreated='ÇáÍÌÑÉ áã ÊäÔÃ ÈÚÏ';
 /* 2003-05-10 EL */
 $LDChangeRoom='ÛíÑ ÇáÍÌÑÉ';
 /*2003-06-14 EL*/
 $LDNrOfBedsRoom='ÚÏÏ ÇáÇÓÑÉ İí ÇáÍÌÑÉ';
-$LDIsNotANumber='ÑŞã ÛíÑ ÕÇáÍ';
+$LDIsNotANumber='ÑŞã ÛíÑ ÕÍíÍ';
 $LDWaitingList='ŞÇÆãÉ ÇáÇäÊÙÇÑ';
 $LDShowAll='ÚÑÖ Çáßá';
 $LDShowWardOnly='ÚÑÖ ÇáÇÌäÍÉ İŞØ';
@@ -390,7 +390,7 @@ $LDTransferToBed='äŞá Çáì ÓÑíÑ ÃÎÑ İí äİÓ ÇáÌäÇÍ';
 $LDTransferToWard='äŞá áÌäÇÍ ÃÎÑ';
 $LDShowBeds='ÚÑÖ ÇáÇÓÑÉ';
 $LDTransferPatient='äŞá ÇáãÑíÖ';
-$LDDRG='DRG';
+$LDDRG='ÇáÊÏÇæí';
 $LDFinanceType='ÇáÊÃãíä';
 #2003-08-02 EL
 $LDOutToInpatient='ÛíÑ ÍÇáÉ ÇáŞÈæá Çáì ÅíæÇÁ';
@@ -399,8 +399,8 @@ $LDClinic='ÚíÇÏÉ';
 $LDOwnPatient='ãÑíÖ İí ÇáÇäÊÙÇÑ';
 $LDNonOwnPatient='ãÑíÖ áíÓ İí ÇáÇäÊÙÇÑ';
 # 2003-08-04 EL
-$LDShowClinicOnly='åĞå ÇáÚíÇÏÉ İŞØ';
+$LDShowClinicOnly='ÚÑÖ åĞå ÇáÚíÇÏÉ İŞØ';
 # 2003-09-16 EL
 $LDAdmissionData='ÈíÇäÇÊ ÇáŞÈæá';
-$LDShowPhoto='ÅÖåÇÑ ÇáÕæÑÉ';
+$LDShowPhoto='ÅÙåÇÑ ÇáÕæÑÉ';
 ?>

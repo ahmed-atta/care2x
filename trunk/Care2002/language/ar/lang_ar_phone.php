@@ -15,18 +15,18 @@ $LDPhoneDir="ѕбнб «бе« Ё";
 $LDSearch="»ЌЋ";
 $LDDir="«бѕбнб";
 $LDNewData="»н«д«  ћѕнѕ…";
-$LDSEARCH="SEARCH»ЌЋ";
+$LDSEARCH="»ЌЋ";
 
 /**************** note the " ~nr~ " must not be erased it will be replaced by the script with the number of search results ******/
-$LDPhoneFound="жћѕ «б»ЌЋ <font color=red><b> ~nr~ </b></font> »н«д«  г Џбё… »«бгж÷жЏ.";
+$LDPhoneFound="нжћѕ: <font color=red><b> ~nr~ </b></font> »н«д«  г Џбё… »«бгж÷жЏ.";
 
-$LDKeywordPrompt="√ѕќб гЁ «Ќ ябг… бб»ЌЋ. Џбм ”»нб «бгЋ«б: «б«”г, «бё”г, ≈бќ.";
-$LDShowDir="√Џ—÷ «бѕбнб »«бя«гб";
-$LDNewEntry="√ѕќб »н«д«  е« Ё √ж ће«“ дѕ«Ѕ ћѕнѕ";
+$LDKeywordPrompt="гЁ—ѕ«  «б»ЌЋ: «б«”г, «бё”г, ≈бќ.";
+$LDShowDir="Џ—÷ «бѕбнб »«бя«гб";
+$LDNewEntry="»н«д«  е« Ё √ж ће«“ дѕ«Ѕ ћѕнѕ";
 
 $LDExtFields=array(
 								"—ёг",
-								"«бядн…",
+								"«б’Ё…",
 								"«ббё»",
 								"«б«”г",
 								"«б ќ’’",
@@ -42,10 +42,10 @@ $LDExtFields=array(
 								"—ёг «бЌћ—…",
 								"«б «—нќ",
 								"«бжё ",
-								"Encoder");
+								"г—г“");
 $LDEditFields=array(
 								"—ёг",
-								"«бядн…",
+								"«б’Ё…",
 								"«ббё»",
 								"«б«”г",
 								"«б ќ’’",
@@ -67,24 +67,24 @@ $LDCancel="≈бџ«Ѕ «б«г—";
 $LDSave="ЌЁў";
 $LDEdit=" Ќ—н—";
 $LDDelete="Ќ–Ё";
-$LDReset=" ’Ён—";
-$LDNewPhoneEntry="√ѕќб гЏбжг«  е« Ё ћѕнѕ";
-$LDShow="≈÷е«—";
+$LDReset=" ен∆…";
+$LDNewPhoneEntry="гЏбжг«  е« Ё ћѕнѕ";
+$LDShow="Џ—÷";
 $LDActualDir="гЌ жн«  «бѕбнб «бЌ«бн";
-$LDMoreInfo="гЏбжг«  ѕбнб √÷«Ён…";
-$LDMaxItem="«бЏѕѕ «бябн бгЌ жн«  «бѕбнб";
+$LDMoreInfo="гЏбжг«  ѕбнб ≈÷«Ён…";
+$LDMaxItem="«бЏѕѕ «бябн б”ћб«  «бѕбнб";
 $LDUpdateOk=" г  ЌѕнЋ «б»н«д«  »дћ«Ќ";
 $LDRows="«б”Ўж—";
 
-$LDGoodMorning="’»«Ќ «бќн—!";
-$LDGoodDay="√еб«!";
-$LDGoodEvening="г”«Ѕ «бќн—!";
+$LDGoodMorning="«б”б«г Џбняг";
+$LDGoodDay="«б”б«г Џбняг";
+$LDGoodEvening="«б”б«г Џбняг";
 
-$LDShowActualDir="√÷е— гЌ жн«  «бѕбнб «бЌ«бн";
+$LDShowActualDir="Џ—÷ гЌ жн«  «бѕбнб «бЌ«бн";
 $LDYesDelete="дЏг, Ќ–Ё.";
 $LDNoCancel="б«! ≈бџ«Ѕ «б«г—.";
 $LDDeleteEntry="Ќ–Ё «бгѕќб« ";
-$LDNoData="√д  бг  ѕќб √н »н«д« . √ѕќб »н«д«  ёнб √д  ÷џЎ Џбм «б“— \"ЌЁў\".";
+$LDNoData="бг н г ≈ѕќ«б √н »н«д« . н—ћм ≈ѕќ«б «б»н«д«  ё»б «б÷џЎ Џбм «б“— \"ЌЁў\".";
 $LDReallyDelete="еб  —џ» Ќё« Ён Ќ–Ё «бгѕќб«  «б «бн…њ";
 
 $LDHowManage="янЁн… ≈ѕ«—… «бѕбнб";

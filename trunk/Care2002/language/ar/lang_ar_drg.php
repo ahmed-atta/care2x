@@ -1,6 +1,6 @@
 <?php
-$LDIcd10='ICD_10'; // ICD = International Codes of Diseases  !! 
-$LDOps301='OPS_301'; // OPS = Opertionenschlüssel - German code for surgical operations !!
+$LDIcd10='ÊÕäíÝ ÇáÃãÑÇÖ ÇáÏæáí ICD_10'; // ICD = International Codes of Diseases  !! 
+$LDOps301='ÇáÊÕäíÝ ÇáÃáãÇäí ááÚãáíÇÊOPS_301'; // OPS = Opertionenschlüssel - German code for surgical operations !!
 $LDBack2Logbook='ÚæÏÉ Çáì ÇáÓÌá';
 $LDIcd10Search='ICD-10 ÈÍË';
 $LDSearch4ICD10='ÈÍË Úä ÔÝÑÉ ICD-10';
@@ -9,12 +9,12 @@ $LDDescription='æÕÝ';
 $LDMainAuxDiag='ÑÆíÓí/ãÓÇÚÏ';
 $LDMainAuxOp='ÑÆíÓí/ãÓÇÚÏ ÅÌÑÇÁ';
 $LDDiagBy='ÔÎÕ ÈæÇÓØÉ';
-$LDDoneBy='ãäÌÒ ÈæÇÓØÉ';
+$LDDoneBy='ÃäÌÒ ÈæÇÓØÉ';
 $LDInclusive='ÊÖãíä';
-$LDExclusive='ÅÓÊËäÇÁ';
+$LDExclusive='ÎÇÕ';
 $LDNotes='ãáÇÍÙÇÊ';
 $LDRemarks='ÊÚáíÞÇÊ';
-$LDExtraCodes='ÔÝÑÇÊ ÃÖÇÝíÉ Ãæ ÊÔÝíÑ';
+$LDExtraCodes='ÔÝÑÇÊ ÅÖÇÝíÉ Ãæ ÊÔÝíÑ';
 $LDAddCodes='ãáÇÍÙÇÊ Ãæ ÔÝÑÇÊ ÃÖÇÝíÉ';
 $LDApplySelection='ÊØÈíÞ ÇáÇÎÊíÇÑÇÊ';
 $LDSGBV='SGB_V';  // !! Do not translate !!
@@ -26,7 +26,7 @@ $LDConvert2IcdOps='->ICD/ICPM';  // !! Do not translate !!
 
 $LDSearch='ÈÍË';
 $LDOperation='ÚãáíÉ';
-$LDAlertSureDelete='åá ÃäÊ ãÊÃßÏ ãä ÑÛÈÊß Ýí ÍÐÝ åÐÇ ÇáãÏÎá¿';
+$LDAlertSureDelete='åá ÃäÊ ãÊÃßÏ ÝÚáÇð ãä ÍÐÝ åÐÇ ÇáãÏÎá¿';
 
 $LDAux='ãÓÇÚÏ';   // A = Auxiliary
 $LDMain='ÑÆíÓí'; // M = Main
@@ -42,11 +42,11 @@ $LDPossibleCodes='ÔÝÑÇÊ ICD æ ICPM ÇáããßäÉ';
 $LDCategory='ÇáÝÆÉ';
 $LDLoc='Loc.';
 $LDBy='ÈæÇÓØÉ';
-$LDMostResponsible='Most responsible';
-$LDAssociated='Associated';
-$LDNosocomial='Nosocomial';
-$LDIatrogenic='Iatrogenic';
-$LDOther='Other';
+$LDMostResponsible='ÃßÈÑ ãÓÆæá';
+$LDAssociated='ãÑÊÈØ';
+$LDNosocomial='ÎÇÕ ÈÇáãÓÊÔÝíÇÊ';
+$LDIatrogenic='íÇÊÑæÌíäíß';
+$LDOther='ÃÎÑì';
 $LDMostResp_s='M';
 $LDAssociated_s='A';
 $LDNosocomial_s='N';
@@ -60,35 +60,35 @@ $LDBothSides_s='B';
 /* 2003-05-29 EL*/
 $LDQMarks='??????';
 $LDNonSpecifiedGroup='áã-íÚÑÝ-ÈÚÏ';
-$LDSpecifyGroup='ÊÚÑíÝ ãÌãæÚÉ';
-$LDCreateGroupName='ÅäÔÇÁ ÃÓã ãÌãæÚÉ ÌÏíÏÉ';
-$LDSelect='ÃÎÊÇÑ';
+$LDSpecifyGroup='ÊÍÏíÏ ãÌãæÚÉ';
+$LDCreateGroupName='ÅäÔÇÁ ÅÓã ãÌãæÚÉ ÌÏíÏÉ';
+$LDSelect='ÅÎÊíÇÑ';
 /*2003-06-01 EL*/
-$LDUseToGroupItems='ÃÓÊÎÏã åÐå áÊÌãíÚ ÈíÇäÇÊ áã-íÚÑÝ-ÈÚÏ';
+$LDUseToGroupItems='ÅÓÊÎÏã åÐå áÊÌãíÚ ÈíÇäÇÊ áã-íÚÑÝ-ÈÚÏ';
 $LDItemsDegrouped='ÈÍÏÝ åÐå ÇáãÌãæÚÉ áä íÊã ÇáæÕæá ááÚäÇÕÑ ÇáãÑÊÈØÉ ÈåÇ';
 $LDOptions='ÎíÇÑÇÊ';
 /*2003-06-01 EL*/
-$LDCreateInternDRGGroup='ÅäÔÇÑ ãÌãæÚÉ DRG ÌÏíÏÉ';
+$LDCreateInternDRGGroup='ÅäÔÇÁ ãÌãæÚÉ DRG ÌÏíÏÉ';
 $LDInternalCodeNr='ÑÞã ÇáÔÝÑÉ ÇáÏÇÎáíÉ';
 $LDSynonyms='ãÑÇÏÝÇÊ Çæ ãÝÇÊíÍ ßáãÇÊ';
-$LDSeparateCommas='ÃÝÕá ÇáßáãÇÊ ÈÝÇÕáÉ';
-$LDIsSubGroup='åá ÇáãÌãæÚÉ ÝÑÚíÉ¿';
+$LDSeparateCommas='ÊÝÕá ÇáßáãÇÊ ÈÝÇÕáÉ';
+$LDIsSubGroup='ãÌãæÚÉ ÝÑÚíÉ¿';
 $LDParentCodeNr='ÑÞã ÔÝÑÉ ÇáãÕÏÑ';
 $LDIfSubGroup='ÅÏÇ ßÇäÊ ÇáãÌãæÚÉ ãÌãæÚÉ ÝÑÚíÉ';
-$LDAuxillaryNotes='ãáÇÚÙÇÊ ãÓÇÚÏÉ';
+$LDAuxillaryNotes='ãáÇÍÙÇÊ ãÓÇÚÏÉ';
 $LDStdCodeNr='ÑÞã ÇáÔÝÑÉ ÇáÇÕáíÉ';
-$LDIfAvailable='ÅÐÇ ãæÌæÏ';
+$LDIfAvailable='ÅÐÇ ßÇä ãÊÇÍÇð';
 $LDYes='äÚã';
 $LDNo='áÇ';
 $LDExtraNotes='ãáÇÍÙÇÊ ÃÖÇÝíÉ';
-$LDAlertNoCode='ÃÏÎá ÔÝÑÉ ÇáãÌãæÚÉ';
-$LDAlertNoDescription='ÃÏÎá æÕÝ ÇáÔÝÑÉ';
+$LDAlertNoCode='ÇÏÎá ÔÝÑÉ ÇáãÌãæÚÉ';
+$LDAlertNoDescription='ÇÏÎá æÕÝ ÇáÔÝÑÉ';
 /*2003-06-07 EL*/
 $LDCode='ÔÝÑÉ';
 /*2003-06-13 EL*/
 $LDAddGroupEncounter='ÃÖÝ ÇáãÌãæÚÉ Çáì ÇáãÞÇÈáÉ';
 $LDMain_s='Ñ';
-$LDSupplemental='Êßãíáí';
+$LDSupplemental='ÅÖÇÝí';
 $LDSupp_s='Ý';
 $LDCreateNew='ÅäÔÇÁ ÌÏíÏ';
 ?>

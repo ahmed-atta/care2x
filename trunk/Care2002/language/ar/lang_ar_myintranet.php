@@ -1,16 +1,16 @@
 <?php
-$LDMyIntranet="myIntranet";
-$LDMyPersonalPlanner="myPersonal Planner";
-$LDMyOrganizer="myOrganizer";
-$LDMyOffRequester="myOff Requester";
-$LDMyDiary="myDiary";
-$LDMyCalendar="myCalendar";
-$LDMyMemo="myMemo";
+$LDMyIntranet="ÇáÃäÊÑÇäÊ ÇáÔÎÕíÉ";
+$LDMyPersonalPlanner="ÈÑäÇãÌ ÇáÊÎØíØ ÇáÔÎÕí";
+$LDMyOrganizer="ÈÑäÇãÌ ÇáÊäÙíã ÇáÔÎÕí";
+$LDMyOffRequester="ÇáØáÈÇÊ ÇáÔÎÕíÉ";
+$LDMyDiary="ÇáãÝßÑÉ ÇáÔÎÕíÉ";
+$LDMyCalendar="ÇáÊÞæíã ÇáÔÎÕí";
+$LDMyMemo="ÇáãÐßÑÉ ÇáÔÎÕíÉ";
 
-$LDMyPersonalPlannerTxt="Planner for personal appointments, to do's, etc.";
-$LDMyOrganizerTxt="Organizer for all the not so small little things in life";
-$LDMyOffRequesterTxt="Requester for vacation and off days";
-$LDMyDiaryTxt="Personal diary";
-$LDMyCalendarTxt="Personal calendar";
-$LDMyMemoTxt="Memo or sketchpad";
+$LDMyPersonalPlannerTxt="ãÎØøØ ááãæÇÚíÏ ÇáÔÎÕíÉ¡ ÞÇÆãÉ ÇáÃÚãÇá¡ ÇáÎ.";
+$LDMyOrganizerTxt="ÇáãäÙã áßáø ÔíÁ ÊÑÊíÈÇÊ ÇáÍíÇÉ ÇáíæãíÉ";
+$LDMyOffRequesterTxt="ØáÈÇÊ ÃíÇä ÇáÚØá æ ÇáÅÌÇÒÇÊ";
+$LDMyDiaryTxt="ÇáãÝßÑÉ ÇáÔÎÕíÉ";
+$LDMyCalendarTxt="ÇáÊÞæíã ÇáÔÎÕí";
+$LDMyMemoTxt="ãÐßÑÉ Ãæ ÏÝÊÑ ÑÓã";
 ?>
