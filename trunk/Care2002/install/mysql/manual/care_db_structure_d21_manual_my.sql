@@ -1670,7 +1670,7 @@ CREATE TABLE care_menu_main (
    is_visible tinyint(1) unsigned DEFAULT '1' NOT NULL,
    hide_by text,
    status varchar(25) NOT NULL,
-   modify_id timestamp(14),
+   modify_id varchar(60),
    modify_time timestamp(14),
    PRIMARY KEY (nr)
 );
