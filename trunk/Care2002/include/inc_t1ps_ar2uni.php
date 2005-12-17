@@ -72,12 +72,19 @@
 	
 	function ar2uni($sti){
 	global $ar2unimap,$ar2unimap2,$ar2unimap3,$ar2unimap4,$ar2unimap5,$ar2unimap6;
+
+	# START: (FIX) By Tarek Alwerfally on 16/12/2005
+	if( ($sti[0]>='A' && $sti[0]<='Z') || ($sti[0]>='a' && $sti[0]<='z') )	return( $sti );
+	# END: By Tarek Alwerfally on 16/12/2005
+	
+
 	$sti .= " ";
     $temp = $sti;
     $sti = strrev($temp);
     $sti .= " ";
 	$sto='';
 	$len=strlen($sti);
+	
 	
 	for ($i=1; $i < $len-1; $i++){
 	#=========================// for one bit character have 4 forms//================
