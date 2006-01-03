@@ -162,7 +162,7 @@ class Department extends Core {
 	* @return mixed boolean or adodb record object or assoc array
 	*/
 	function getAllActive() {
-		return $this->_getalldata("(is_inactive='' OR is_inactive='0')");
+		return $this->_getalldata("is_inactive='0'");
 	}
 	/**
 	* Gets all ACTIVE departments. The result is adodb record object sorted by departments formal name
@@ -170,7 +170,7 @@ class Department extends Core {
 	* @return mixed boolean or adodb record object or assoc array
 	*/
 	function getAllActiveObject() {
-		return $this->_getalldata("(is_inactive='' OR is_inactive='0')",'','_OBJECT');
+		return $this->_getalldata("is_inactive='0'",'','_OBJECT');
 	}
 	/**
 	* Gets all departments without condition
@@ -187,7 +187,7 @@ class Department extends Core {
 	* @return mixed boolean or adodb record object or assoc array
 	*/
 	function getAllActiveSort($sort='') {
-		return $this->_getalldata("(is_inactive='' OR is_inactive='0')",$sort);
+		return $this->_getalldata("is_inactive='0'",$sort);
 	}
 	/**
 	* Gets all ACTIVE medical departments. The result is assoc array sorted by departments formal name
@@ -195,7 +195,7 @@ class Department extends Core {
 	* @return  mixed assoc array (sorted by param $sort) or boolean or adodb record object 
 	*/
 	function getAllMedical() {
-		return $this->_getalldata("type=1 AND (is_inactive='' OR is_inactive='0')");
+		return $this->_getalldata("type=1 AND is_inactive='0'");
 	}
 	/**
 	* Gets all ACTIVE medical departments. The result is adodb record object sorted by departments formal name
@@ -204,7 +204,7 @@ class Department extends Core {
 	* @return mixed assoc array (sorted by department formal name) or boolean or adodb record object
 	*/
 	function getAllMedicalObject() {
-		return $this->_getalldata("type=1 AND (is_inactive='' OR is_inactive='0')",'','_OBJECT');
+		return $this->_getalldata("type=1 AND is_inactive='0'",'','_OBJECT');
 	}
 	/**
 	* Gets all ACTIVE medical departments with doctors-on-call  or nurse-on-call assigned. The result is assoc array sorted by departments formal name
@@ -212,7 +212,7 @@ class Department extends Core {
 	* @return  mixed assoc array (sorted by department formal name) or boolean or adodb record object
 	*/
 	function getAllMedicalWithOnCall() {
-		return $this->_getalldata("type=1 AND (is_inactive='' OR is_inactive='0') AND (has_oncall_doc=1 OR has_oncall_nurse=1)");
+		return $this->_getalldata("type=1 AND is_inactive='0' AND (has_oncall_doc=1 OR has_oncall_nurse=1)");
 	}
 	/**
 	* Gets all ACTIVE NON-MEDICAL departments. The result is assoc array sorted by departments formal name
@@ -220,7 +220,7 @@ class Department extends Core {
 	* @return  mixed assoc array (sorted by department formal name) or boolean or adodb record object
 	*/
 	function getAllSupporting() {
-		return $this->_getalldata("type=2 AND (is_inactive='' OR is_inactive='0')");
+		return $this->_getalldata("type=2 AND is_inactive='0'");
 	}
 	/**
 	* Gets all ACTIVE NEWS departments. The result is assoc array sorted by departments formal name
@@ -228,7 +228,7 @@ class Department extends Core {
 	* @return  mixed assoc array (sorted by department formal name) or boolean or adodb record object
 	*/
 	function getAllNewsGroup() {
-		return $this->_getalldata("type=3 AND (is_inactive='' OR is_inactive='0')");
+		return $this->_getalldata("type=3 AND is_inactive='0'");
 	}
 	/**
 	* Gets all ACTIVE medical departments with doctors-on-call  assigned. The result is assoc array sorted by departments formal name
@@ -236,7 +236,7 @@ class Department extends Core {
 	* @return  assoc array sorted by departments formal name
 	*/
 	function getAllActiveWithDOC(){
-		return $this->_getalldata("type=1 AND (is_inactive='' OR is_inactive='0') AND has_oncall_doc=1");
+		return $this->_getalldata("type=1 AND is_inactive='0' AND has_oncall_doc=1");
 	}
 	/**
 	* Gets all ACTIVE medical departments with nurse-on-call  assigned. The result is assoc array sorted by departments formal name
@@ -244,7 +244,7 @@ class Department extends Core {
 	* @return  mixed assoc array (sorted by department formal name) or boolean or adodb record object
 	*/
 	function getAllActiveWithNOC(){
-		return $this->_getalldata("type=1 AND (is_inactive='' OR is_inactive='0') AND has_oncall_nurse=1");
+		return $this->_getalldata("type=1 AND is_inactive='0' AND has_oncall_nurse=1");
 	}
 	/**
 	* Gets all ACTIVE medical departments that does surgery. The result is assoc array sorted by departments formal name
@@ -252,7 +252,7 @@ class Department extends Core {
 	* @return mixed assoc array (sorted by department formal name) or boolean or adodb record object
 	*/
 	function getAllActiveWithSurgery(){
-		return $this->_getalldata("type=1 AND (is_inactive='' OR is_inactive='0') AND does_surgery=1");
+		return $this->_getalldata("type=1 AND is_inactive='0' AND does_surgery=1");
 	}
 	
 	/**
