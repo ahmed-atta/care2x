@@ -29,47 +29,40 @@ $sql_dump_file ="care_db_structure_b201_auto_$dbid.sql";
 define('QUERY_MSG_SHOW', TRUE);
 
 # Function to parse the sql file and execute the query
-function runSqlQuery($file){
-   global $link, $comment,$HTTP_POST_VARS, $conn;
+function runSqlQuery($file) {
+    global $link, $comment,$HTTP_POST_VARS, $conn;
 
- //if(QUERY_MSG_SHOW) echo $file.'<br>';
+    //if (QUERY_MSG_SHOW) echo $file.'<br>';
 
- if($fp=fopen($file,'r')){
-   $sql='';
-   while(!feof($fp)){ 
-       $str = fgets($fp,8192);
-	    $str=chop($str);
-       if(eregi(';',$str)){
-		    $sql.=(str_replace(';','',$str));
-			//echo "$sql<br>";
-			/*
-			if($HTTP_POST_VARS['dbtype']=='mysql'){
-				$qresult= @ mysql_query($sql,$link);
-			}elseif($HTTP_POST_VARS['dbtype']=='postgres7'){
-				$qresult= @ pg_query($link,$sql);
-			}
-			*/
+    if ($fp = fopen($file,'r')) {
+
+        $sql = '';
+        while (!feof($fp)) { 
+            $str = fgets($fp,8192);
+            $str = chop($str);
+            if (eregi(';',$str)) {
+                $sql .= (str_replace(';','',$str));
+                
+                $qresult = $conn->Execute($sql);
 			
-			$qresult = $conn->Execute($sql);
-			
-		    if($qresult) {
-			  // if (QUERY_MSG_SHOW) echo 'ok '.$sql.'<p>';
-			}elseif(QUERY_MSG_SHOW){
-			  echo 'SQL query failed:<br> '.$sql.'<p>';
-			}
-           $sql = '';
-		}elseif(eregi($comment,$str)){
-		   $sql='';
-		}elseif($str !=''){
-           $sql.=$str;
-		 }
-    } 
-	 $result='done_tables';
-     fclose($fp);
-  }else{
-     $result='no_sqlfile_found';
-  }
-  return $result;
+                if ($qresult) {
+                   // if (QUERY_MSG_SHOW) echo 'ok '.$sql.'<p>';
+                } elseif (QUERY_MSG_SHOW){
+                    echo 'SQL query failed:<br> '.$sql.'<br>Reason: '.$conn->ErrorMsg().'<p>';
+	    		}
+                $sql = '';
+            } elseif (eregi($comment,$str)){
+                $sql = '';
+	    	} elseif ($str != '') {
+                $sql .= $str;
+            }
+        } 
+        $result='done_tables';
+        fclose($fp);
+    } else {
+        $result='no_sqlfile_found';
+    }
+    return $result;
 }
 
 # Function to rename the critical files
@@ -130,82 +123,64 @@ if(isset($HTTP_POST_VARS['mode'])&&($HTTP_POST_VARS['mode']=='save')){
 		$error_msg='You did not specify the database type!!! Please select a database type.';
 		$mode='new';
 	}else{
-		
-		# Load adodb object class
-		require('../classes/adodb/adodb.inc.php');
-		$conn=&ADONewConnection($HTTP_POST_VARS['dbtype']);
-		
 		# Start creating the database
 		echo 'Connecting to the database server...<br>';
+	
+		# This is needed to turn fatal errors to warnings when connecting.
+		# We use Connect for database checks, so this is really needed.
+		define('ADODB_ERROR_HANDLER_TYPE', E_USER_WARNING); 
 
-		if($HTTP_POST_VARS['dbtype']=='mysql'){
-			if ($link=mysql_connect($HTTP_POST_VARS['dbhost'],$HTTP_POST_VARS['dbusername'],$HTTP_POST_VARS['dbpassword'])){
-				$DBLink_OK=TRUE;
-				if(mysql_select_db($HTTP_POST_VARS['dbname'],$link)) {
-					$DBName_OK=TRUE;
-				}else{
-                    echo 'Creating the database '.$HTTP_POST_VARS['dbname'].'...<br>';
-                    $sql="CREATE DATABASE `".$HTTP_POST_VARS['dbname']."`";
-                    if(mysql_query($sql,$link)){
-						echo 'Selecting the database '.$HTTP_POST_VARS['dbname'].'...<br>';
-						if(mysql_select_db($HTTP_POST_VARS['dbname'],$link)) {
-							//$DBName_OK=TRUE;
-							# Make an adodb link
-							$adodb_ok = $conn->Connect($HTTP_POST_VARS['dbhost'],$HTTP_POST_VARS['dbusername'],$HTTP_POST_VARS['dbpassword'],$HTTP_POST_VARS['dbname']);
-							# Make a last check
-							if(!$adodb_ok){
-								$DBName_OK = FALSE;
-								$DBLink_OK = FALSE;
-							}else{
-								$DBName_OK=TRUE;
-							}
-						}else{
-							$DBName_OK=FALSE;
-						}
-					}
-				}
-			}
-		}elseif($HTTP_POST_VARS['dbtype']=='postgres7'){
-			//$connstring="host=".$HTTP_POST_VARS['dbhost']." port=5432 tty= options= user=".$HTTP_POST_VARS['dbusername']." password=".$HTTP_POST_VARS['dbpassword']." dbname=";
-			//die($connstring);
-			//if($link=pg_connect($connstring.$HTTP_POST_VARS['dbname'])){
-			//if($link=pg_connect($HTTP_POST_VARS['dbhost'],$HTTP_POST_VARS['dbname'])){
-			
-			if($adodb_ok  = $conn->Connect($HTTP_POST_VARS['dbhost'],$HTTP_POST_VARS['dbusername'],$HTTP_POST_VARS['dbpassword'],$HTTP_POST_VARS['dbname'])){
-			//if($link=pg_connect(NULL)){
-				$DBLink_OK=TRUE;
-				$DBName_OK=TRUE;
-				//die("connet ok");
-			//}elseif($link=pg_connect($connstring."template1")){
-			}elseif($adodb_ok  = $conn->Connect($HTTP_POST_VARS['dbhost'],$HTTP_POST_VARS['dbusername'],$HTTP_POST_VARS['dbpassword'],'template1')){
-				$DBLink_OK=TRUE;
-				echo 'Creating  the database '.$HTTP_POST_VARS['dbname'].'...<br>';
-				//if(pg_query($link,"CREATE DATABASE ".$HTTP_POST_VARS['dbname']."  WITH TEMPLATE=template0")){
-				if($conn->Execute("CREATE DATABASE ".$HTTP_POST_VARS['dbname']."  WITH TEMPLATE=template0")){
-					//if($link=pg_connect("host=".$HTTP_POST_VARS['dbhost']." password=".$HTTP_POST_VARS['dbpassword']." user=".$HTTP_POST_VARS['dbusername']." dbname=".$HTTP_POST_VARS['dbname'])){
-					if($adodb_ok  = $conn->Connect($HTTP_POST_VARS['dbhost'],$HTTP_POST_VARS['dbusername'],$HTTP_POST_VARS['dbpassword'],$HTTP_POST_VARS['dbname'])){
-						$DBName_OK=TRUE;
-						//die("create db connect ok");
-					}else{
-						$DBName_OK=FALSE;
-						//die("create db but no connect");
-					}
-				}else{
-					$DBName_OK=FALSE;
-					//die ("no db created");
-				}
-			}
-		}else{
-			$DBName_OK = FALSE;
-			$DBLink_OK = FALSE;
+		# include ADOdb class files:
+		require_once('../classes/adodb/adodb-errorhandler.inc.php'); 
+		require_once('../classes/adodb/adodb.inc.php');
+		
+		# create connection object:
+		$conn = ADONewConnection($HTTP_POST_VARS['dbtype']); 
+		$conn->debug = FALSE;
+		
+		# first try to connect to the exact database on server
+		$ok = $conn->Connect($HTTP_POST_VARS['dbhost'],
+      		             $HTTP_POST_VARS['dbusername'],
+      		             $HTTP_POST_VARS['dbpassword'],
+      		             $HTTP_POST_VARS['dbname']);
+      		             
+		# if failed to connect to database then create it:
+		if (!$ok)
+		{
+		    # failed db connection has to be constructed from start:
+		    $conn = ADONewConnection($HTTP_POST_VARS['dbtype']); 
+		    $conn->debug = FALSE;
+    
+		    # try connecting without database parameter:
+		    $ok = $conn->Connect($HTTP_POST_VARS['dbhost'],
+      		                 $HTTP_POST_VARS['dbusername'],
+      		                 $HTTP_POST_VARS['dbpassword']);
+    
+		    if ($ok) # if connected without database param:
+		    {
+                # get SQL to create database:
+		        $dict = NewDataDictionary($conn);
+		        $sql = $dict->CreateDatabase($HTTP_POST_VARS['dbname']);
+
+		        # try creating database:
+		        # "2" is status returned by ExecuteSQLArray()
+		        $ok = (2 == $dict->ExecuteSQLArray($sql));
+		        if ($ok)
+		        {
+                    # try to connect after creating:
+                    $ok = $conn->Connect($HTTP_POST_VARS['dbhost'],
+                    $HTTP_POST_VARS['dbusername'],
+                    $HTTP_POST_VARS['dbpassword'],
+                    $HTTP_POST_VARS['dbname']);
+		        }
+		    }
 		}
 
-		if($DBLink_OK){
-			# Proceed to create the db schema
-			if($DBName_OK){
-
-				echo "Creating the database structure... /".$HTTP_POST_VARS['dbtype']."/auto/care_db_structure_d21_auto_$dbid.sql<br>";
-				@runSqlQuery("./".$HTTP_POST_VARS['dbtype']."/auto/care_db_structure_d21_auto_$dbid.sql");
+		# Check status:
+		if ($ok) {
+            # Proceed to create the db schema
+            echo "Creating the database structure... /".$HTTP_POST_VARS['dbtype']."/auto/care_db_structure_d21_auto_$dbid.sql<br>";
+            $res = @runSqlQuery("./".$HTTP_POST_VARS['dbtype']."/auto/care_db_structure_d21_auto_$dbid.sql");
 
 				# Extra insert config user preload data
 				
@@ -285,20 +260,13 @@ if(isset($HTTP_POST_VARS['mode'])&&($HTTP_POST_VARS['mode']=='save')){
 					echo 'Loading OPS301 Spanish codes...<br>';
 					@runSqlQuery('./sql/ops301_es/insert-data-1.sql');
 				}
-			}else{
-				$DBName_OK=FALSE;
-				$mode='new';
-				$error_msg= 'Database '.$HTTP_POST_VARS['dbname'].' not available or could not be created. Possible solution: Create the database manually first.<p>';
-			}
-		}else{
-			$DBLink_OK=FALSE;
+		} else {
 			$mode='new';
-			$error_msg= 'Could not connect to the database. Possible causes: wrong access information or access not permitted<p>';
-		
+			$error_msg='Database error: '.$conn->ErrorMsg().'<p>';
 		}
 		
 	
-		if($DBLink_OK&&$DBName_OK){
+		if($ok){
 
 		# seed the random generator
 		srand ((double) microtime() * 1000000);
