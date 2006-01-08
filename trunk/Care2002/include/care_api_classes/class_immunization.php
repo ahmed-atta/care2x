@@ -147,7 +147,7 @@ class Immunization extends Core {
 	* @return mixed 2 dimensional array or boolean
 	*/			
 	function getAllActiveSort($sort='') {
-		return $this->_getalldata("is_inactive='' OR is_inactive=0",$sort);
+		return $this->_getalldata("is_inactive=0",$sort);
 	}
 	/**
 	* Gets all application types.
