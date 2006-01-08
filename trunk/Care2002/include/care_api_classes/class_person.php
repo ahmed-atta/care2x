@@ -806,7 +806,7 @@ class Person extends Core {
 	function CurrentEncounter($pid){
 	    global $db;
 		if(!$pid) return false;
-		$this->sql="SELECT encounter_nr FROM $this->tb_enc WHERE pid='$pid' AND (is_discharged='' OR is_discharged=0) AND encounter_status <> 'cancelled' AND status NOT IN ($this->dead_stat)";
+		$this->sql="SELECT encounter_nr FROM $this->tb_enc WHERE pid='$pid' AND is_discharged=0 AND encounter_status <> 'cancelled' AND status NOT IN ($this->dead_stat)";
 		if($buf=$db->Execute($this->sql)){
 		    if($buf->RecordCount()) {
 				$buf2=$buf->FetchRow();
