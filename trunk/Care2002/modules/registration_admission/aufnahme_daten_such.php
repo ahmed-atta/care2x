@@ -145,7 +145,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 
 			$sql2.=" AND enc.pid=reg.pid
 					  AND enc.encounter_status <> 'cancelled'
-					  AND (enc.is_discharged = '' OR enc.is_discharged=0)
+					  AND enc.is_discharged=0
 					  AND enc.status NOT IN ('void','hidden','inactive','deleted')  ORDER BY ";
 
 			# Filter if it is personnel nr
