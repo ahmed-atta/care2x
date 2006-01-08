@@ -1197,7 +1197,7 @@ class Encounter extends Notes {
 			elseif($type=='_PID') $cond='pid';
 			 	else return FALSE;
 		$this->sql="SELECT encounter_nr FROM $this->tb_enc 
-						WHERE $cond='$nr' AND encounter_status <> 'cancelled' AND (is_discharged='' OR is_discharged=0) AND status NOT IN ($this->dead_stat)";
+						WHERE $cond='$nr' AND encounter_status <> 'cancelled' AND is_discharged=0 AND status NOT IN ($this->dead_stat)";
 		if($buf=$db->Execute($this->sql)){
 		    if($buf->RecordCount()) {
 				$buf2=$buf->FetchRow();
@@ -1493,7 +1493,7 @@ class Encounter extends Notes {
 	*/
 	function _InLocation($type_nr){
 		global $db;
-		if($this->result=$db->Execute("SELECT nr FROM $this->tb_location WHERE encounter_nr=$this->enc_nr AND type_nr=$type_nr AND location_nr=$this->loc_nr AND (date_to='' OR date_to='0000-00-00')")){
+		if($this->result=$db->Execute("SELECT nr FROM $this->tb_location WHERE encounter_nr=$this->enc_nr AND type_nr=$type_nr AND location_nr=$this->loc_nr AND date_to='0000-00-00'")){
 			if($this->result->RecordCount()){
 				return $this->result['nr'];
 			}else{return FALSE;}
@@ -2231,8 +2231,8 @@ class Encounter extends Notes {
 									LEFT JOIN $this->tb_ic AS i ON e.insurance_class_nr=i.class_nr
 									LEFT JOIN $this->tb_notes as n ON (e.encounter_nr=n.encounter_nr AND n.type_nr=6)
 							WHERE $cond e.encounter_class_nr=2 AND
-									(e.is_discharged='' OR e.is_discharged=0)  AND
-									e.in_dept<>'' AND e.in_dept<>0 AND e.status NOT IN ($this->dead_stat)
+									e.is_discharged=0  AND
+									e.in_dept<>0 AND e.status NOT IN ($this->dead_stat)
 							ORDER BY e.encounter_nr";
 							/*							GROUP BY e.encounter_nr,e.pid,e.insurance_class_nr,p.title,p.name_last,p.name_first,p.date_birth,p.sex,
 							p.photo_filename,a.date, a.time,a.urgency,i.LD_var,i.name, n.nr*/
@@ -2276,8 +2276,8 @@ class Encounter extends Notes {
 				FROM $this->tb_enc AS e
 					LEFT JOIN $this->tb_person AS p ON e.pid=p.pid
 					LEFT JOIN $this->tb_dept AS d ON e.current_dept_nr=d.nr
-				WHERE e.encounter_class_nr='2' AND (e.is_discharged='' OR e.is_discharged=0) $cond
-							AND  (e.in_dept='' OR e.in_dept=0) AND e.encounter_status <> 'cancelled'
+				WHERE e.encounter_class_nr='2' AND e.is_discharged=0 $cond
+							AND  e.in_dept=0 AND e.encounter_status <> 'cancelled'
 							AND e.status NOT IN ($this->dead_stat)
 				ORDER BY p.name_last";
 		//echo $sql;
