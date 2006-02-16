@@ -1,9 +1,41 @@
  <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>Care 2X - What is in the 2nd Generation beta 2.1.4 package?</title>
+<title>Care 2X - What is in the 2nd Generation beta 2.1.5 package?</title>
 </head>
 <body onLoad="if (window.focus) window.focus()">
+<font face="verdana,arial" size=3>
+<b>2nd Generation beta <font color="red">2.1.5</font> version:
+</b>
+</font>
+<hr>
+<font  face="verdana,arial" size=2>
+<b>A. Improvements and Fixes</b>
+<blockquote>
+<li>Fix sql incompatibility with postgre in several classes. </li>
+<li>Fix sql incompatibility with postgre in the Turkish ICD10 script. </li>
+<li>The 'create db table' action in the installation script now has completely abstract adodb implementation.</li>
+</blockquote>
+<b>B. New (experimental) installer. </b>
+<blockquote>
+<li>The new installer can be accessed under alias <b>/installer</b>. The old one is still available under <b>/install</b>. </li>
+<li>For now works only with MySQL 4. </li>
+<li>The installer is cloned and extended with new features from the installer of the <a href="http://mirrormed.org/">MirrorMed</a> project. </li>
+<li>Main features: </li>
+      <ul>
+	<li>Based on Object Oriented Framework that allows the installer to be easily extended. </li>
+	<li>Logical flow of the installation process made in steps: Collect Data, Tests, Accept License, Actions. </li>
+	<li>Check the system if meets the requirement to run Care2x. This reduces the number of erroneous installations. </li>
+	<li>Full abstraction of the database operation using ADODB. </li>
+	<li>Better visual design. </li>
+      </ul>
+</blockquote>
+<b>Credits</b>
+<blockquote>
+<li>Dr. Bülent Potur (TR)</li>
+<li>Kaloyan Raev (BG)</li>
+<p>Kaloyan Raev (2006-02-16)</p>
+</blockquote>
 <font face="verdana,arial" size=3>
 <b>2nd Generation beta <font color="red">2.1.4</font> version:
 </b>
