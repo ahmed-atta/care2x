@@ -334,7 +334,7 @@
 "D77.-";"Outros transtornos do sangue e dos órgãos hematopoéticos em doenças classificadas em outra parte";;;;;;;"3";;;
 "D80.-";"Imunodeficiência com predominância de defeitos de anticorpos";;;;;;;"3";;;
 "D81.-";"Deficiências imunitárias combinadas";;;;;;;"3";;;
-"D82.-";"Imunodeficiência associada com outros defeitos "major"";;;;;;;"3";;;
+"D82.-";"Imunodeficiência associada com outros defeitos \"major\"";;;;;;;"3";;;
 "D83.-";"Imunodeficiência comum variável";;;;;;;"3";;;
 "D84.-";"Outras imunodeficiências";;;;;;;"3";;;
 "D86.-";"Sarcoidose";;;;;;;"3";;;
@@ -449,7 +449,7 @@
 "F40.-";"Transtornos fóbico-ansiosos";;;;;;;"3";;;
 "F41.-";"Outros transtornos ansiosos";;;;;;;"3";;;
 "F42.-";"Transtorno obsessivo-compulsivo";;;;;;;"3";;;
-"F43.-";"Reações ao "stress" grave e transtornos de adaptação";;;;;;;"3";;;
+"F43.-";"Reações ao \"stress\" grave e transtornos de adaptação";;;;;;;"3";;;
 "F44.-";"Transtornos dissociativos [de conversão]";;;;;;;"3";;;
 "F45.-";"Transtornos somatoformes";;;;;;;"3";;;
 "F48.-";"Outros transtornos neuróticos";;;;;;;"3";;;
@@ -668,7 +668,7 @@
 "I45.-";"Outros transtornos de condução";;;;;;;"3";;;
 "I46.-";"Parada cardíaca";;;;;;;"3";;;
 "I47.-";"Taquicardia paroxística";;;;;;;"3";;;
-"I48.-";""Flutter" e fibrilação atrial";;;;;;;"3";;;
+"I48.-";"\"Flutter\" e fibrilação atrial";;;;;;;"3";;;
 "I49.-";"Outras arritmias cardíacas";;;;;;;"3";;;
 "I50.-";"Insuficiência cardíaca";;;;;;;"3";;;
 "I51.-";"Complicações de cardiopatias e doenças cardíacas mal definidas";;;;;;;"3";;;
@@ -1095,7 +1095,7 @@
 "O24.-";"Diabetes mellitus na gravidez";;;;;;;"3";;;
 "O25.-";"Desnutrição na gravidez";;;;;;;"3";;;
 "O26.-";"Assistência materna por outras complicações ligadas predominantemente a gravidez";;;;;;;"3";;;
-"O28.-";"Achados anormais do rastreamento ["screening\"] antenatal da mãe";;;;;;;"3";;;
+"O28.-";"Achados anormais do rastreamento [\"screening\"] antenatal da mãe";;;;;;;"3";;;
 "O29.-";"Complicações de anestesia administrada durante a gravidez";;;;;;;"3";;;
 "O30.-";"Gestação múltipla";;;;;;;"3";;;
 "O31.-";"Complicações específicas de gestação múltipla";;;;;;;"3";;;
@@ -1580,7 +1580,7 @@
 "T98.-";"Seqüelas de outros efeitos de causas externas e dos não especificados";;;;;;;"3";;;
 "V01.-";"Pedestre traumatizado em colisão com um veículo a pedal";;;;;;;"3";;;
 "V02.-";"Pedestre traumatizado em colisão com um veículo a motor de duas ou três rodas";;;;;;;"3";;;
-"V03.-";"Pedestre traumatizado em colisão com um automóvel [carro], "pick up" ou caminhonete";;;;;;;"3";;;
+"V03.-";"Pedestre traumatizado em colisão com um automóvel [carro], \"pick up\" ou caminhonete";;;;;;;"3";;;
 "V04.-";"Pedestre traumatizado em colisão com um veículo de transporte pesado ou com um ônibus";;;;;;;"3";;;
 "V05.-";"Pedestre traumatizado em colisão com trem [comboio] ou um veículo ferroviário";;;;;;;"3";;;
 "V06.-";"Pedestre traumatizado em colisão com outro veículo não-motorizado";;;;;;;"3";;;
@@ -1588,7 +1588,7 @@
 "V10.-";"Ciclista traumatizado em colisão com um pedestre ou um animal";;;;;;;"3";;;
 "V11.-";"Ciclista traumatizado em colisão com outro veículo a pedal";;;;;;;"3";;;
 "V12.-";"Ciclista traumatizado em colisão com um veículo a motor de duas ou três rodas";;;;;;;"3";;;
-"V13.-";"Ciclista traumatizado em colisão com um automóvel, "pick up" ou caminhonete";;;;;;;"3";;;
+"V13.-";"Ciclista traumatizado em colisão com um automóvel, \"pick up\" ou caminhonete";;;;;;;"3";;;
 "V14.-";"Ciclista traumatizado em colisão com um veículo de transporte pesado ou um ônibus";;;;;;;"3";;;
 "V15.-";"Ciclista traumatizado em colisão com um trem ou um veículo ferroviário";;;;;;;"3";;;
 "V16.-";"Ciclista traumatizado em colisão com outro veículo não-motorizado";;;;;;;"3";;;
@@ -1598,7 +1598,7 @@
 "V20.-";"Motociclista traumatizado em colisão com um pedestre ou um animal";;;;;;;"3";;;
 "V21.-";"Motociclista traumatizado em colisão com um veículo a pedal";;;;;;;"3";;;
 "V22.-";"Motociclista traumatizado em colisão com um veículo a motor de duas ou três rodas";;;;;;;"3";;;
-"V23.-";"Motociclista traumatizado em colisão com um automóvel [carro], "pick up" ou caminhonete";;;;;;;"3";;;
+"V23.-";"Motociclista traumatizado em colisão com um automóvel [carro], \"pick up\" ou caminhonete";;;;;;;"3";;;
 "V24.-";"Motociclista traumatizado em colisão com um veículo de transporte pesado ou um ônibus";;;;;;;"3";;;
 "V25.-";"Motociclista traumatizado em colisão com um trem ou um veículo ferroviário";;;;;;;"3";;;
 "V26.-";"Motociclista traumatizado em colisão com outro veículo não-motorizado";;;;;;;"3";;;
@@ -1608,7 +1608,7 @@
 "V30.-";"Ocupante de um triciclo motorizado traumatizado em colisão com um pedestre ou um animal";;;;;;;"3";;;
 "V31.-";"Ocupante de um triciclo motorizado traumatizado em colisão com um veículo a pedal";;;;;;;"3";;;
 "V32.-";"Ocupante de um triciclo motorizado traumatizado em colisão com outro veículo a motor de duas ou três rodas";;;;;;;"3";;;
-"V33.-";"Ocupante de um triciclo motorizado traumatizado em colisão com um automóvel, "pick up" ou caminhonete";;;;;;;"3";;;
+"V33.-";"Ocupante de um triciclo motorizado traumatizado em colisão com um automóvel, \"pick up\" ou caminhonete";;;;;;;"3";;;
 "V34.-";"Ocupante de um triciclo motorizado traumatizado em colisão com um veículo de transporte pesado ou um ônibus";;;;;;;"3";;;
 "V35.-";"Ocupante de um triciclo motorizado traumatizado em colisão com um trem [comboio] ou um veículo ferroviário";;;;;;;"3";;;
 "V36.-";"Ocupante de um triciclo motorizado traumatizado em colisão com outro veículo não-motorizado";;;;;;;"3";;;
@@ -1618,7 +1618,7 @@
 "V40.-";"Ocupante de um automóvel [carro] traumatizado em colisão com um pedestre ou um animal";;;;;;;"3";;;
 "V41.-";"Ocupante de um automóvel [carro] traumatizado em colisão com um veículo a pedal";;;;;;;"3";;;
 "V42.-";"Ocupante de um automóvel [carro] traumatizado em colisão com outro veículo a motor de duas ou três rodas";;;;;;;"3";;;
-"V43.-";"Ocupante de um automóvel [carro] traumatizado em colisão com um automóvel [carro], "pick up" ou caminhonete";;;;;;;"3";;;
+"V43.-";"Ocupante de um automóvel [carro] traumatizado em colisão com um automóvel [carro], \"pick up\" ou caminhonete";;;;;;;"3";;;
 "V44.-";"Ocupante de um automóvel [carro] traumatizado em colisão com um veículo de transporte pesado ou um ônibus";;;;;;;"3";;;
 "V45.-";"Ocupante de um automóvel [carro] traumatizado em colisão com um trem [comboio] ou um veículo ferroviário";;;;;;;"3";;;
 "V46.-";"Ocupante de um automóvel [carro] traumatizado em colisão com outro veículo não-motorizado";;;;;;;"3";;;
@@ -1684,7 +1684,7 @@
 "W06.-";"Queda de um leito";;;;;;;"3";;;
 "W07.-";"Queda de uma cadeira";;;;;;;"3";;;
 "W08.-";"Queda de outro tipo de mobília";;;;;;;"3";;;
-"W09.-";"Queda envolvendo equipamento de "playground"";;;;;;;"3";;;
+"W09.-";"Queda envolvendo equipamento de \"playground\"";;;;;;;"3";;;
 "W10.-";"Queda em ou de escadas ou degraus";;;;;;;"3";;;
 "W11.-";"Queda em ou de escadas de mão";;;;;;;"3";;;
 "W12.-";"Queda em ou de um andaime";;;;;;;"3";;;
@@ -3622,8 +3622,8 @@
 "D82.2";"Imunodeficiência com encurtamento de membros";;;;;;;"4";;;
 "D82.3";"Imunodeficiência que se segue à resposta hereditária defeituosa ao vírus de Epstein-Barr (EB);";;;;;;;"4";;;
 "D82.4";"Síndrome da hiperimunoglobulina E [IgE]";;;;;;;"4";;;
-"D82.8";"Imunodeficiências associadas com outros defeitos "major" especificados";;;;;;;"4";;;
-"D82.9";"Imunodeficiência associada com defeitos "major" não especificados";;;;;;;"4";;;
+"D82.8";"Imunodeficiências associadas com outros defeitos \"major\" especificados";;;;;;;"4";;;
+"D82.9";"Imunodeficiência associada com defeitos \"major\" não especificados";;;;;;;"4";;;
 "D83.0";"Imunodeficiência comum variável com predominância de anormalidades do número e da função das células B";;;;;;;"4";;;
 "D83.1";"Imunodeficiência comum variável com predominância de transtornos imunorregulatórios de células T";;;;;;;"4";;;
 "D83.2";"Imunodeficiência comum variável com auto-anticorpos às células B ou T";;;;;;;"4";;;
@@ -3670,7 +3670,7 @@
 "E05.2";"Tireotoxicose com bócio tóxico multinodular";;;;;;;"4";;;
 "E05.3";"Tireotoxicose causada por tecido tireoidiano ectópico";;;;;;;"4";;;
 "E05.4";"Tireotoxicose factícia";;;;;;;"4";;;
-"E05.5";"Crise ou "tempestade" tireotóxica";;;;;;;"4";;;
+"E05.5";"Crise ou \"tempestade\" tireotóxica";;;;;;;"4";;;
 "E05.8";"Outras tireotoxicoses";;;;;;;"4";;;
 "E05.9";"Tireotoxicose não especificada";;;;;;;"4";;;
 "E06.0";"Tireoidite aguda";;;;;;;"4";;;
@@ -4190,11 +4190,11 @@
 "F42.2";"Forma mista, com idéias obsessivas e comportamentos compulsivos";;;;;;;"4";;;
 "F42.8";"Outros transtornos obsessivo-compulsivos";;;;;;;"4";;;
 "F42.9";"Transtorno obsessivo-compulsivo não especificado";;;;;;;"4";;;
-"F43.0";"Reação aguda ao "stress"";;;;;;;"4";;;
-"F43.1";"Estado de "stress" pós-traumático";;;;;;;"4";;;
+"F43.0";"Reação aguda ao \"stress\"";;;;;;;"4";;;
+"F43.1";"Estado de \"stress\" pós-traumático";;;;;;;"4";;;
 "F43.2";"Transtornos de adaptação";;;;;;;"4";;;
-"F43.8";"Outras reações ao "stress" grave";;;;;;;"4";;;
-"F43.9";"Reação não especificada a um "stress" grave";;;;;;;"4";;;
+"F43.8";"Outras reações ao \"stress\" grave";;;;;;;"4";;;
+"F43.9";"Reação não especificada a um \"stress\" grave";;;;;;;"4";;;
 "F44.0";"Amnésia dissociativa";;;;;;;"4";;;
 "F44.1";"Fuga dissociativa";;;;;;;"4";;;
 "F44.2";"Estupor dissociativo";;;;;;;"4";;;
@@ -4484,7 +4484,7 @@
 "G43.3";"Enxaqueca complicada";;;;;;;"4";;;
 "G43.8";"Outras formas de enxaqueca";;;;;;;"4";;;
 "G43.9";"Enxaqueca, sem especificação";;;;;;;"4";;;
-"G44.0";"Síndrome de "cluster-headache"";;;;;;;"4";;;
+"G44.0";"Síndrome de \"cluster-headache\"";;;;;;;"4";;;
 "G44.1";"Cefaléia vascular, não classificada em outra parte";;;;;;;"4";;;
 "G44.2";"Cefaléia tensional";;;;;;;"4";;;
 "G44.3";"Cefaléia crônica pós-traumática";;;;;;;"4";;;
@@ -6542,7 +6542,7 @@
 "M24.9";"Desarranjo articular não especificado";;;;;;;"4";;;
 "M25.0";"Hemartrose";;;;;;;"4";;;
 "M25.1";"Fístula articular";;;;;;;"4";;;
-"M25.2";""Flail joint"";;;;;;;"4";;;
+"M25.2";"\"Flail joint\"";;;;;;;"4";;;
 "M25.3";"Outras instabilidades articulares";;;;;;;"4";;;
 "M25.4";"Derrame articular";;;;;;;"4";;;
 "M25.5";"Dor articular";;;;;;;"4";;;
@@ -6634,7 +6634,7 @@
 "M47.9";"Espondilose não especificada";;;;;;;"4";;;
 "M48.0";"Estenose da coluna vertebral";;;;;;;"4";;;
 "M48.1";"Hiperostose ancilosante [Forestier]";;;;;;;"4";;;
-"M48.2";""Kissing spine"";;;;;;;"4";;;
+"M48.2";"\"Kissing spine\"";;;;;;;"4";;;
 "M48.3";"Espondilopatia traumática";;;;;;;"4";;;
 "M48.4";"Fratura de fadiga de vértebra";;;;;;;"4";;;
 "M48.5";"Vértebra colapsada não classificada em outra parte";;;;;;;"4";;;
