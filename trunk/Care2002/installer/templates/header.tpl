@@ -8,15 +8,14 @@
 </head>
 
 <body>
-<div id="toplinks">
-<ul>
-<li><a href="http://www.care2x.org/">Care2x</a></li>
-<li><a href="http://www.care2x.org/wiki/">Wiki</a></li>
-<li><a href="http://sourceforge.net/mailarchive/forum.php?forum_id=11772">Mailing List</a></li>
-<li><a href="http://sourceforge.net/projects/care2002/">SF Project</a></li>
-</ul>
+<table class="title">
+	<tr>
+		<td width="150"><img src="images/care_logo.gif"></td>
+		<td align="center">{$INSTALLER_PHASE}</td>
+		<td width="150">&nbsp;</td>
+	</tr>
+</table>
 </div>	
 <br />  
-<div id="content">
-<h1>{$APP_NAME} Installation - {$INSTALLER_PHASE}</h1>
+<div class="content">
 <table align=center>

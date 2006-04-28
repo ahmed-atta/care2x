@@ -8,8 +8,8 @@
 class AcceptText extends BaseAction {
 	var $file_name;
 	
-	function AcceptText($params){
-		parent::BaseAction($params);
+	function AcceptText($title, $params){
+		parent::BaseAction($title, $params);
 		
 		$this->interactive = true;
 		$this->grouping = false;

@@ -11,6 +11,8 @@ define('INSTALLER_ACTION_UNKNOWN', 8);
  * least the perform method overridden
  */
 class BaseAction {
+	var $title;
+
 	var $result = INSTALLER_ACTION_FAIL;
 	
 	var $result_message = 'Action not yet ran.';
@@ -21,7 +23,8 @@ class BaseAction {
 
 	var $grouping = true;
 	
-	function BaseAction($params){
+	function BaseAction($title, $params){
+		$this->title = $title;
 		$this->params = $params;
 	}
 	
@@ -80,6 +83,10 @@ class BaseAction {
 		if ($this->result === INSTALLER_ACTION_SUCCESS)
 			return true;
 		return false;
+	}
+	
+	function getTitle() {
+		return $this->title;
 	}
 }
 ?>

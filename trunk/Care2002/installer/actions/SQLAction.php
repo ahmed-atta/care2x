@@ -113,9 +113,12 @@ class SQLAction extends BaseAction {
                 return FALSE;
             }
             
-            # Get SQL to create database:
+            # LATIN1 encoding is required for PostgreSQL databases
+            $taboptarray = array('postgres' => 'ENCODING = \'LATIN1\'');
+            
+            # Get SQL to create database
             $dict = NewDataDictionary($db);
-            $sql = $dict->CreateDatabase($this->db_name);
+            $sql = $dict->CreateDatabase($this->db_name, $taboptarray);
             
             # Try creating database
             # "2" is status returned by ExecuteSQLArray()

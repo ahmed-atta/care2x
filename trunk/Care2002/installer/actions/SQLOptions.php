@@ -10,8 +10,8 @@ class SQLOptions extends SQLFile {
 	var $params_prepared = false;
 	var $file = "";	
 
-	function SQLOptions($params){
-		parent::BaseAction($params);
+	function SQLOptions($title, $params){
+		parent::BaseAction($title, $params);
 		
 		$this->interactive = true;
 		$this->grouping = true;
@@ -107,14 +107,14 @@ class SQLOptions extends SQLFile {
 		}else{
 
 			$this->file_list = array();
-                	foreach($this->params['files'] as $file){
-                        if(is_dir($file)) {
-                                $d = dir($file);
-                                while (false !== ($entry = $d->read())) {
-                                   if (preg_match("/^.*\.sql$/",$entry)) {
-					$pretty_name = ucwords(str_replace("_"," ",preg_replace("/^(.*)\.sql/","\$1",$entry)));
-                                        $this->file_list[$pretty_name] = $d->path . "/" . $entry;
-                                   }
+         foreach($this->params['files'] as $file){
+            if(is_dir($file)) {
+               $d = dir($file);
+               while (false !== ($entry = $d->read())) {
+                  if (preg_match("/^.*\.sql$/",$entry)) {
+			       		$pretty_name = ucwords(str_replace("_"," ",preg_replace("/^(.*)\.sql/","\$1",$entry)));
+                     $this->file_list[$pretty_name] = $d->path . "/" . $entry;
+                   }
                                 }
                                 $d->close();
                         }

@@ -8,8 +8,8 @@ class SQLSchema extends SQLFile {
 	
 	var $schema_file;
 	
-	function SQLSchema($params) {
-		parent::SQLFile($params);
+	function SQLSchema($title, $params) {
+		parent::SQLFile($title, $params);
 		
 		$this->interactive = true;
 		$this->grouping = false;

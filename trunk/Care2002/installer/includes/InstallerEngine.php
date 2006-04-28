@@ -11,6 +11,8 @@ class InstallerEngine {
 	
 	var $phase;
 	
+	var $action_title;
+	
 	var $old_version = FALSE;
 	
 	var $special_actions = FALSE;
@@ -36,6 +38,8 @@ class InstallerEngine {
 			$this->special_actions = $vc->getSpecialActions($this->old_version);
 			$smarty->assign('INSTALLED', $this->old_version !== FALSE);
 			$smarty->assign('OLD_VERSION', $this->old_version);
+			$smarty->assign('VERSION', $versions->getNewestVersion());
+			$smarty->assign('LONG_VERSION', $versions->getNewestLongVersion());
 			$output .= $smarty->fetch(Installer::getTemplatePath('version_check.tpl'));
 			$smarty->assign('CAN_CONTINUE', true);
 		}elseif($this->phase == 1){
@@ -161,8 +165,10 @@ class InstallerEngine {
 				}
 			}
 			if($action_count == 0){
-				$action_html = "You have completed the Actions phase of installation, click continue below to complete your installation.";
+				$this->phase++;
+				return $this->run();
 			}
+			$this->action_title = $action->getTitle();
 			$smarty->assign('ACTION_HTML', $action_html);
 			$output .= $smarty->fetch(Installer::getTemplatePath('actions.tpl'));
 			$smarty->clear_assign('ACTION_HTML');
@@ -230,19 +236,19 @@ class InstallerEngine {
 		$name = 'Unknown';
 		switch($this->phase){
 			case 0:
-				$name = 'Version Check';
+				$name = 'Introduction';
 				break;
 			case 1:
-				$name = 'Data Collection';
+				$name = 'Collect Information';
 				break;
 			case 2:
-				$name = 'Tests';
+				$name = 'System Checks';
 				break;
 			case 3:
 				$name = 'Special Actions';
 				break;
 			case 4:
-				$name = 'Actions';
+				$name = $this->action_title;
 				break;
 			case 5:
 				$name = 'Finished';

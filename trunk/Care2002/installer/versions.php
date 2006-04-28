@@ -6,10 +6,10 @@ $rmax=getrandmax();
 
 $versions = new VersionSet();
 
-$version = new Version('2.1.5');
+$version = new Version('2.1.6', '2nd Generation beta 2.1.6');
 
 $version->addSeparator('Database Information');
-$version->collectOption('db_type', 'Server Type', array('MySQL'/*, 'PostgreSQL'*/), array('mysql'/*, 'pgsql'*/), 'mysql');
+$version->collectOption('db_type', 'Server Type', array('MySQL', 'PostgreSQL'), array('mysql', 'pgsql'), 'mysql');
 $version->collectText('db_user', 'User Name', 'root');
 $version->collectPassword('db_password', 'Password', '');
 $version->collectText('db_server', 'Server Address', 'localhost');
@@ -25,7 +25,7 @@ $version->addSeparator('Encryption Keys');
 $version->collectText('1st_key', '1st Key', (rand(1,$rmax).rand(1,$rmax))*rand(1,$rmax));
 $version->collectText('2nd_key', '2nd Key', (rand(1,$rmax).rand(1,$rmax))*rand(1,$rmax));
 $version->collectText('3rd_key', '3rd Key', (rand(1,$rmax).rand(1,$rmax))*rand(1,$rmax));
-$version->addSeparator('');
+$version->addSeparator(' ');
 
 $version->addTest('PHPVersionOver', array('4.3.0'));
 $version->addTest('PHPVersionUnder', array('5.0.0'));
@@ -40,12 +40,6 @@ $version->addTest('DBVersionOver', array(
     'server_field' => 'db_server',
     'type_field' => 'db_type',
     'version' => array('mysql' => '3.23.0', 'postgres' => '7.4.0')));
-$version->addTest('DBVersionUnder', array(
-    'username_field' => 'db_user',
-    'password_field' => 'db_password',
-    'server_field' => 'db_server',
-    'type_field' => 'db_type',
-    'version' => array('mysql' => '5.0.0', 'postgres' => '8.0.0')));
 $version->addTest('AdminPasswordConfirmed', array(
     'password_field' => 'admin_password',
     'confirm_field' => 'admin_confirm'));
@@ -74,18 +68,28 @@ $version->addTest('WritableLocation', array(APP_PATH.'/gui/img/logos_dept'));
 $version->addTest('WritableLocation', array(APP_PATH.'/gui/smarty_template/templates_c'));
 $version->addTest('WritableLocation', array(APP_PATH.'/include'));
 $version->addTest('WritableLocation', array(APP_PATH.'/include/inc_init_main.php'));
+$version->addTest('WritableLocation', array(APP_PATH.'/installer'));
+$version->addTest('WritableLocation', array(APP_PATH.'/installer/install.php'));
 
-$version->addAction('AcceptText', array(dirname(__FILE__).'/LICENSE'));
+$version->addAction('AcceptText', 'License Agreement', array(dirname(__FILE__).'/LICENSE'));
 
-$version->addAction('SQLSchema', array(
+/*$version->addAction('SQLSchema', array(
 	'username_field' => 'db_user',
 	'password_field' => 'db_password',
 	'server_field' => 'db_server',
 	'type_field' => 'db_type',
 	'db_field' => 'db_database',
-	'schema' => dirname(__FILE__).'/db/schema.xml'));
+	'schema' => dirname(__FILE__).'/db/schema.xml'));*/
 
-$version->addAction('CreateAdmin', array(
+$version->addAction('SQLFile', 'Install Database Schema', array(
+    'username_field' => 'db_user',
+    'password_field' => 'db_password',
+    'server_field' => 'db_server',
+    'type_field' => 'db_type',
+    'db_field' => 'db_database',
+    'files' => array(dirname(__FILE__).'/db/sql/%type%_dump.sql')));
+
+$version->addAction('CreateAdmin', 'Create Administrator User', array(
     'username_field' => 'db_user',
     'password_field' => 'db_password',
     'server_field' => 'db_server',
@@ -94,7 +98,7 @@ $version->addAction('CreateAdmin', array(
     'adminuser_field' => 'admin_user',
     'adminpass_field' => 'admin_password'));
 
-$version->addAction('ReplaceString', array(
+$version->addAction('ReplaceString', 'Save System Configuration', array(
 	'message' => "Configuration information saved",
 	'files' => array(
 		dirname(__FILE__).'/inc_init_main.php.dist' => APP_PATH.'/include/inc_init_main.php'),
@@ -112,7 +116,7 @@ $version->addAction('ReplaceString', array(
 	));
 
 
-$version->addAction('CSVOptions', array(
+$version->addAction('CSVOptions', 'Install Optional DB Tables', array(
     'username_field' => 'db_user',
     'password_field' => 'db_password',
     'server_field' => 'db_server',
@@ -122,7 +126,7 @@ $version->addAction('CSVOptions', array(
         dirname(__FILE__).'/db/icd10',
         dirname(__FILE__).'/db/ops301')));
 
-$version->addFinalAction('RenameFile', array(
+$version->addFinalAction('RenameFile', 'Rename Critical Installation Files', array(
     'message' => "Critical installation files renamed",
     'files' => array(
         APP_PATH.'/install/install.php' => APP_PATH.'/install/install_'.rand(1,$rmax).'.php',

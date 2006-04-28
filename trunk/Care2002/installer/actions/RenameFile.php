@@ -10,8 +10,8 @@ class RenameFile extends BaseAction {
 	
 	var $message;
 		
-	function RenameFile($params){
-		parent::BaseAction($params);
+	function RenameFile($title, $params){
+		parent::BaseAction($title, $params);
 		
 		$this->interactive = false;
 		$this->grouping = true;

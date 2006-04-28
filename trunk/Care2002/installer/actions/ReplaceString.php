@@ -13,8 +13,8 @@ class ReplaceString extends BaseAction {
 	
 	var $message;
 		
-	function ReplaceString($params){
-		parent::BaseAction($params);
+	function ReplaceString($title, $params){
+		parent::BaseAction($title, $params);
 		
 		$this->interactive = false;
 		$this->grouping = true;

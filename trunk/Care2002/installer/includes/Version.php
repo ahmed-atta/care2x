@@ -12,6 +12,8 @@ class Version{
 
 	var $version;
 	
+	var $long_version;
+	
 	var $actions;
 
 	var $finalAction;
@@ -20,8 +22,9 @@ class Version{
 	
 	var $fields;
 	
-	function Version($version){
+	function Version($version, $long_version){
 		$this->version = $version;
+		$this->long_version = $long_version;
 		$this->actions = new ActionSet();
 		$this->tests = new TestSet();
 		$this->fields = new FieldSet();
@@ -32,18 +35,22 @@ class Version{
 		$this->tests->add(new $class_name($params));
 	}
 	
-	function addAction($class_name, $params) {
+	function addAction($class_name, $title, $params) {
 		require_once Installer::getActionPath($class_name);
-		$this->actions->add(new $class_name($params));		
+		$this->actions->add(new $class_name($title, $params));		
 	}
 
-	function addFinalAction($class_name, $params) {
+	function addFinalAction($class_name, $title, $params) {
 		require_once Installer::getActionPath($class_name);
-		$this->finalAction = new $class_name($params);
+		$this->finalAction = new $class_name($title, $params);
 	} 
 
 	function getVersion(){
 		return $this->version;
+	}
+	
+	function getLongVersion() {
+		return $this->long_version;
 	}
 
 	function collectText($name, $label, $default = ''){

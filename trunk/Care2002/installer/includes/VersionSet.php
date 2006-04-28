@@ -142,5 +142,31 @@ class VersionSet extends BaseSet{
 		
 		return FALSE;
 	}
+	
+	function getNewestVersion() {
+		$newest_version = FALSE;
+		
+		$this->reset();
+		while ($version =& $this->get()){
+			if (version_compare($version->getVersion(), $newest_version, '>')) {
+				$newest_version = $version->getVersion();
+			}
+		}
+		
+		return $newest_version;
+	}
+	
+	function getNewestLongVersion() {
+		$newest_version = FALSE;
+		
+		$this->reset();
+		while ($version =& $this->get()){
+			if (version_compare($version->getVersion(), $newest_version, '>')) {
+				$newest_version = $version->getLongVersion();
+			}
+		}
+		
+		return $newest_version;
+	}
 }
 ?>

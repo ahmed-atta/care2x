@@ -1,4 +1,3 @@
 <tr>
-    <td><hr></td>
-    <td align="left">{$field->label}</td>
+    <td id="field_separator" colspan=2>{$field->label}&nbsp;</td>
 </tr>

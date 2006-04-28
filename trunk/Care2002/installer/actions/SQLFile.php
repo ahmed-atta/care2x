@@ -11,8 +11,8 @@ class SQLFile extends SQLAction {
 	
 	var $loop;
 	
-	function SQLFile($params){
-		parent::SQLAction($params);
+	function SQLFile($title, $params){
+		parent::SQLAction($title, $params);
 		
 		$this->interactive = true;
 		$this->grouping = false;
@@ -34,7 +34,10 @@ class SQLFile extends SQLAction {
 			return $this->result;
 		}
 		$sql_commands = array();
-		foreach($this->file_list as $file){
+		foreach($this->file_list as $file) {
+            # Replace %type% in the file name with the database type
+            $file = str_replace("%type%", $this->type, $file);
+
 			if(!is_readable($file)){
 				$this->result = INSTALLER_ACTION_FAIL;
 				$this->result_message = "Could not read file sql $file.";

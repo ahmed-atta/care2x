@@ -7,8 +7,8 @@
  */
 class CSVOptions extends SQLOptions {
 
-	function CSVOptions($params){
-		parent::SQLOptions($params);
+	function CSVOptions($title, $params){
+		parent::SQLOptions($title, $params);
 
 	}
 	
@@ -24,7 +24,7 @@ class CSVOptions extends SQLOptions {
 		}
 		elseif ($this->loop == 5) {
 			$this->result = INSTALLER_ACTION_SUCCESS;
-			$this->result_message = "Completed optional database file installation.";
+			$this->result_message = "Completed optional database table installation.";
 			return $this->result;
 		}
 
@@ -43,7 +43,7 @@ class CSVOptions extends SQLOptions {
 		else if ($this->loop < 3) {
 			$this->loop = 3;
 			$this->result = INSTALLER_ACTION_WARNING;
-                        $this->result_message = "The database file you selected is being installed, this may take several minutes especially for larger code packs.";
+                        $this->result_message = "The database table you selected is being installed, this may take several minutes especially for larger code packs.";
 			return $this->result;
 		}
 		
@@ -102,7 +102,7 @@ class CSVOptions extends SQLOptions {
 		fclose($handle);
 
 		$this->result = INSTALLER_ACTION_WARNING;
-		$this->result_message = "Loaded database file with $query_count queries";
+		$this->result_message = "Loaded database table with $query_count queries";
 		$k = array_search($this->file,$this->file_list);
 		if (isset($this->file_list[$k]))
 			unset($this->file_list[$k]);
