@@ -1,15 +1,7 @@
 <?php
-$LDCreateAdmin='Sistem yöneticisi admin eriþimi oluþturmak';
-$LDLoginExists='Bu giriþ/kullanýcý adý önceden var. Lütfen bir baþka giriþ/kullanýcý adý kullanýnýz';
-$LDAdminOk='Sistem yöneticisi hesabý oluþturuldu. Lütfen root dizininden  create_admin.php script dosyasýný siliniz. Yoksa Care2x çalýþmaz.';
-$LDDeleteWarning='Çok önemli! Baþarýyla yönetici eriþimini kurduktan sonra bu  create_admin.php dosyasýný mutlaka silmelisiniz!';
-$LDCreateAdminWarning=' "/create_admin.php" dosyasýný silmediniz! "/create_admin.php" dosyasýný silmelisiniz yoksa Care2x çalýþmaz!';
-$LDWarning='Uyarý!';
-$LDInitWarning=' "install/initialize.php" dosyasýný silmediniz!
- "install/initialize.php" dosyasýný ÞÝMDÝ silmelisiniz yoksa bir  baþka kiþi veritabaný eriþim bilgilerinizi deðiþtirebilir!';
-$LDInstallWarning=' "install/initialize.php" dosyasýný silmediniz!
- "install/initialize.php" dosyasýný ÞÝMDÝ silmelisiniz yoksa bir  baþka kiþi veritabaný eriþim bilgilerinizi deðiþtirebilir!';
-
-
-$LDMD5Warning=' "install/encode_pw_md5.php" dosyasýný silmediniz  "install/encode_pw_md5.php" dosyasýný ÞÝMDÝ silmelisiniz yoksa bir baþka kiþi bu dosyayý tekrar çalýþtýrarak kullanýcýlarýnýzýn eriþim verilerini kullanýlmaz hale getirebilir !';
+$LDCreateAdmin='Sistem yï¿½neticisi admin eriï¿½imi oluï¿½turmak';
+$LDLoginExists='Bu giriï¿½/kullanï¿½cï¿½ adï¿½ ï¿½nceden var. Lï¿½tfen bir baï¿½ka giriï¿½/kullanï¿½cï¿½ adï¿½ kullanï¿½nï¿½z';
+$LDAdminOk='Sistem yï¿½neticisi hesabï¿½ oluï¿½turuldu. Lï¿½tfen root dizininden  create_admin.php script dosyasï¿½nï¿½ siliniz. Yoksa Care2x ï¿½alï¿½ï¿½maz.';
+$LDDeleteWarning='ï¿½ok ï¿½nemli! Baï¿½arï¿½yla yï¿½netici eriï¿½imini kurduktan sonra bu  create_admin.php dosyasï¿½nï¿½ mutlaka silmelisiniz!';
+$LDWarning='Uyarï¿½!';
 ?>
