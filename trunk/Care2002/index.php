@@ -212,33 +212,19 @@ if(!$GLOBALCONFIG['language_single']) {
 #
 # After having a language code check if the critical scripts exist and set warning
 #
-$createwarn=file_exists('create_admin.php');
-$initwarn=file_exists('./install/initialize.php');
-$md5warn=file_exists('./install/encode_pw_md5.php');
-$installwarn=file_exists('./install/install.php');
-if($createwarn||$installwarn||$md5warn){
+$installerwarn=file_exists('./installer/install.php');
+if($installerwarn){
 	#
 	# Load necessary language tables
 	#
 	$lang_tables[]='create_admin.php';
 	include_once('./include/inc_load_lang_tables.php');
 	include_once('include/inc_charset_fx.php');
-	if($createwarn){
-		include('./include/inc_create_admin_warning.php');
-	}
-	if($initwarn){
-		include('./include/inc_init_warning.php');
-	}
-	if($md5warn){
-		include('./include/inc_md5_warning.php');
-	}
-	if($installwarn){
-		include('./include/inc_install_warning.php');
-	}
+	include('./include/inc_installer_warning.php');
 	#
-	# exit to avoid running the program
+	# redirect to the installer page after timeout of 5 seconds 
 	#
-	exit;
+	die('<meta http-equiv="refresh" content="5; url=./installer/">');
 }
 
 #
