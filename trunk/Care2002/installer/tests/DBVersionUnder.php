@@ -67,7 +67,6 @@ class DBVersionUnder extends BaseTest {
             $this->result_message = "Could not determine datbase type, please provide a type_field or type parameter!";
             return FALSE;
         }
-        if ($this->type == 'pgsql') $this->type = 'postgres';
         
         if(isset($this->params['version'])) {
             $this->version = $this->params['version'];

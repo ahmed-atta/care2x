@@ -31,6 +31,7 @@ class PHPDBExtension extends BaseTest {
             $this->result_message = "Could not determine database type, please provide a type_field or type parameter!";
             return FALSE;
         }
+        if ($this->type == 'postgres7') $this->type = 'pgsql';
     }
 
     function perform(){

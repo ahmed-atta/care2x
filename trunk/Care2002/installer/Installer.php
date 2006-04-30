@@ -92,8 +92,8 @@ $GLOBALS['INSTALLER']['PHP_VERSION_MINOR'] = $version_components[1];
 $GLOBALS['INSTALLER']['PHP_VERSION_REMAINING'] = implode('.', array_splice($version_components, 2));
 
 // A basic version check we need at least PHP 4.2 to run
-if($GLOBALS['INSTALLER']['PHP_VERSION_MAJOR'] <= 3 || 
-	($GLOBALS['INSTALLER']['PHP_VERSION_MAJOR'] == 4 && $GLOBALS['INSTALLER']['PHP_VERSION_MINOR']) < 2){
+$ver = $GLOBALS['INSTALLER']['PHP_VERSION_MAJOR'].'.'.$GLOBALS['INSTALLER']['PHP_VERSION_MINOR'];
+if (version_compare($ver, '4.2', '<')) {
 	print("Installer Error: PHP version 4.2 or greater is required to run the installer!");
 	die();	
 }

@@ -1,15 +1,17 @@
 <?php
 
+require(INSTALLER_PATH.'/config.php');
+
 # seed the random generator
 srand ((double) microtime() * 1000000);
 $rmax=getrandmax();
 
 $versions = new VersionSet();
 
-$version = new Version('2.1.6', '2nd Generation beta 2.1.6');
+$version = new Version($short_version, $long_version);
 
 $version->addSeparator('Database Information');
-$version->collectOption('db_type', 'Server Type', array('MySQL', 'PostgreSQL'), array('mysql', 'pgsql'), 'mysql');
+$version->collectOption('db_type', 'Server Type', array('MySQL', 'PostgreSQL'), array('mysql', 'postgres7'), 'mysql');
 $version->collectText('db_user', 'User Name', 'root');
 $version->collectPassword('db_password', 'Password', '');
 $version->collectText('db_server', 'Server Address', 'localhost');
@@ -25,7 +27,7 @@ $version->addSeparator('Encryption Keys');
 $version->collectText('1st_key', '1st Key', (rand(1,$rmax).rand(1,$rmax))*rand(1,$rmax));
 $version->collectText('2nd_key', '2nd Key', (rand(1,$rmax).rand(1,$rmax))*rand(1,$rmax));
 $version->collectText('3rd_key', '3rd Key', (rand(1,$rmax).rand(1,$rmax))*rand(1,$rmax));
-$version->addSeparator(' ');
+$version->addSeparator('');
 
 $version->addTest('PHPVersionOver', array('4.3.0'));
 $version->addTest('PHPVersionUnder', array('5.0.0'));
@@ -39,7 +41,7 @@ $version->addTest('DBVersionOver', array(
     'password_field' => 'db_password',
     'server_field' => 'db_server',
     'type_field' => 'db_type',
-    'version' => array('mysql' => '3.23.0', 'postgres' => '7.4.0')));
+    'version' => array('mysql' => '3.23.0', 'postgres7' => '7.4.0')));
 $version->addTest('AdminPasswordConfirmed', array(
     'password_field' => 'admin_password',
     'confirm_field' => 'admin_confirm'));
