@@ -17,7 +17,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 <b>Achtung!</b>
 <ul><?php if($x1==1) : ?> Wenn die Suche ein einziges Ergebnis findet werden die Daten sofort gezeigt.<br>
 		Wenn die Suche allerdings mehrere Ergebnisse liefert wird eine Liste gezeigt.<br>
-		<?php endif ?>
+		<?php endif;?>
 		Um das Dokument zu sehen den nebenstehenden <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> , oder
 		den Namen, oder den Vornamen, oder die Dokumentnummer oder das Bearbeitungsdatum anklicken.
 </ul>
@@ -113,7 +113,7 @@ die Aufklärung erhalten haben, und deren Therapie ein Wort haben das mit "lipo" 
 		den Namen, oder den Vornamen, oder die Dokumentnummer, oder das Bearbeitungsdatum anklicken.
 </ul>
 
-<?php endif ?>
+<?php endif;?>
 <b>Achtung!</b>
 <ul> Falls Sie die Recherche abbrechen möchten, den  <img <?php echo createLDImgSrc('../','close2.gif','0') ?> > anklicken.
 </ul>

@@ -62,7 +62,7 @@ Ich have noch keine Adresse. Wie bekomme ich eine Adresse?</b>
 	Das Anmeldeformular blendet sich ein.<br>
  	<b>Schritt 2: </b>Wenn das Formular sichtbar ist können Sie weitere Hilfsanweisung durch den "Hilfe" Knopf sehen.<br>
 </ul>
-	<?php endif ?>		
+	<?php endif; ?>		
 	<?php if($x1=="1") : ?>
 		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie kann ich mich anmelden?</b>
@@ -81,8 +81,8 @@ Wie kann ich mich anmelden?</b>
  	<b>Schritt 3: </b>Klickt den <input type="button" value="Registrieren"> Knopf an zum anmelden.<br>
 </ul>
 
-	<?php endif ?>		
-<?php endif ?>	
+	<?php endif; ?>		
+<?php endif; ?>	
 
 <?php if($src=="mail") : ?>
 <?php if($x1=="listmail") : ?>
@@ -119,7 +119,7 @@ Wie schreibe ich einen Email?</b>
 <ul>       	
  	<b>Schritt 1: </b>Klickt die Option "<span style="background-color:yellow" > Neue Email </span>" an.<br>
 </ul>
-	<?php endif ?>		
+	<?php endif; ?>		
 	<?php if($x1=="compose") : ?>
 		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie schreibe ich einen Email?</b>
@@ -167,7 +167,7 @@ Was bringt die "Schnelladresse" Option?</b>
  	<b>Schritt 2: </b>Klicken Sie eine Adresse in der "Schnelladresse" Liste an. Diese Adresse wird sofort in das Feld das  Sie vorher anklickten übertragen.<br>
 </ul>
 
-	<?php endif ?>		
+	<?php endif; ?>		
 <?php if(($x1=="sendmail")&&($x3=="1")) : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie schreibe ich einen Email?</b>
@@ -175,8 +175,8 @@ Wie schreibe ich einen Email?</b>
 <ul>       	
  	<b>Schritt 1: </b>Klickt die Option "<span style="background-color:yellow" > Neue Email </span>" an.<br>
 </ul>
-	<?php endif ?>		
-<?php endif ?>	
+	<?php endif; ?>		
+<?php endif; ?>	
 
 
 <?php if($src=="read") : ?>
@@ -215,7 +215,7 @@ Wie lösche ich den Email?</b>
  	<b>Schritt 3: </b>Klickt den <input type="button" value="OK"> Knopf an um den Email zu löschen.<p>
 	<b>Achtung!</b> Die gelöschte Emails aus dem "Posteingang" werden vorübergehend in den "Recycle" gespeichert.
 </ul>
-	<?php endif ?>		
+	<?php endif; ?>		
 	
 <?php if($src=="address") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -242,7 +242,7 @@ Wie entferne ich eine Adresse aus meinem Adressenbuch?</b>
  	<b>Schritt 3: </b>Sie werden nach einer Bestätigung gefragt.<br>
  	<b>Schritt 4: </b>Klickt den <input type="button" value="OK"> Knopf an um die Adresse zu löschen.<p>
 </ul>
-	<?php endif ?>		
+	<?php endif; ?>		
 
 	<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
 Achtung!</b>

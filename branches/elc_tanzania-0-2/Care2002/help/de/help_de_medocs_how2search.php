@@ -25,16 +25,16 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 		Um das Dokument eines Patienten zu sehen, den nebenstehenden <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> , oder
 		den Namen, oder die Dokumentnummer, oder die Zeit anklicken.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($x1>1) : ?>
 		Um das Dokument eines Patienten zu sehen, den nebenstehenden <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> , oder
 		den Namen, oder die Dokumentnummer, oder die Zeit.
-<?php endif ?>
+<?php endif;?>
 <?php if(($src!="?")&&($x1=="1")) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Wie kann ich das Dokument aktualisieren bzw. ändern?</b></font>
 <ul> Den <input type="button" value="Daten aktualisieren"> anklicken.
 </ul>
-<?php endif ?><p>
+<?php endif;?><p>
 <b>Achtung!</b>
 <ul> Falls Sie abbrechen möchten den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> anklicken.
 </ul>

@@ -60,7 +60,7 @@ Ich kann den Patient nicht finden. Kann ich einfach seine Daten in die Eingabefe
 <ul>       	
  	<b>Nein. </b>Mit dieser Version des Programs können Sie die Fotos eines Patienten ohne Fallnummer nicht speichern.<br>
 </ul>
-<?php endif ?>	
+<?php endif; ?>	
 
 <?php if($src=="maindata") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -83,7 +83,7 @@ Ich kann den Patient nicht finden. Kann ich einfach seine Daten in die Eingabefe
  	<b>Nein. </b>Mit dieser Version des Programs können Sie die Fotos eines Patienten ohne Fallnummer nicht speichern.<br>
 </ul>
 
-	<?php endif ?>	
+	<?php endif; ?>	
 <?php if($src=="save") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie kann ich weitere Fotos von dem selben Patient speichern?</b>
@@ -101,7 +101,7 @@ Wie kann ich Fotos von einem anderen Patient speichern?</b>
  	<b>Schritt 2: </b>Klickt den <input type="button" value="GO"> Knopf an.<br>
 </ul>
 
-	<?php endif ?>	
+	<?php endif; ?>	
 	
 <?php if($src=="init") : ?>
 	<?php if($x1=="") : ?>
@@ -113,9 +113,9 @@ Wie speichere ich Fotos in die Datenbank?</b>
  	<b>Schritt 2: </b>Klickt den <input type="button" value="OK Weiter..."> Knopf an.<br>
  	<b>Schritt 3: </b>Die Eingabefelder für die Fotos werden eingeblendet. Klick die "Hilfe" Knopf um weitere Hilfsanweisung zu lesen.<br>
 </ul>
-	<?php endif ?>	
+	<?php endif; ?>	
 	
-<?php endif ?>	
+<?php endif; ?>	
 
 	</form>
 

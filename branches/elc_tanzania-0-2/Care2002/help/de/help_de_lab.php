@@ -55,12 +55,12 @@ Wie wähle ich einen Patient aus dessen Labortestwerte ich <?php if($x1=="edit") 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie suche ich weiter?</b>
 </font>
-	<?php endif ?>
+	<?php endif; ?>
 	<?php if(($x2=="")||($x2=="0")) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie finde ich einen Patient?</b>
 </font>
-	<?php endif ?>
+	<?php endif; ?>
 	
 	<ul>       	
  	<b>Schritt 1: </b>Gibt entweder eine vollständige Information oder deren ersten Zeichen von dem Namen vom Patient, oder Vorname, oder 
@@ -71,14 +71,14 @@ Wie finde ich einen Patient?</b>
 	</ul>
 	<?php if(($x2=="")||($x2=="0")) : ?>
  	<b>Schritt 3: </b>Klickt den &nbsp;<button><img <?php echo createComIcon('../','update2.gif','0') ?>> <font size=1>Laborbefund</font></button> Knopf des Patienten den Sie <?php if($x1=="edit") print "bearbeiten"; else print "sehen"; ?> möchten.<p> 
-	<?php endif ?>
+	<?php endif; ?>
 </ul>
 
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Achtung!</b></font> 
 <ul>       	
 Wenn Sie abbrechen möchten klickt den <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> Knopf an.
 </ul>
-<?php endif ?>
+<?php endif; ?>
 
 
 <?php if($src=="input") : ?>
@@ -103,7 +103,7 @@ Wie gebe ich Labortestwerte ein?</b>
 		?>: </b>Klickt den <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> Knopf an um die Werte zu speichern.<p> 
  	<b>Achtung! </b>Wenn Sie die Werte gespeichert haben und die Eingabe beenden möchten,<br> klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.<br> 
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <?php if($x1=="few") : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -114,7 +114,7 @@ Ich muss nur ein Paar Werte eingeben. Wie soll ich das tun?</b>
  	<b>Schritt 2: </b>Klickt den <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> Knopf an um die Werte zu speichern.<p> 
  	<b>Achtung! </b>Wenn Sie die Werte gespeichert haben und die Eingabe beenden möchten,<br> klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.<br> 
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="param") : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -125,7 +125,7 @@ Der Parameter den ich brauche ist nicht angezeigt! Wie kann ich die richtige Par
      <option value="Sample parameter"> Beispiel Parameter</option> </select> </span>"</nobr> aus.<p> 
  	<b>Schritt 2: </b>Klickt den <img <?php echo createLDImgSrc('../','auswahl2.gif','0') ?>> Knopf an um die richtige Parametergruppe zu zeigen.<p> 
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="save") : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -135,7 +135,7 @@ Wie soll ich die Werte speichern?</b>
  	<b>Schritt 1: </b>Klickt den <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> Knopf an um die Werte zu speichern.<p> 
  	<b>Achtung! </b>Wenn Sie die Werte gespeichert haben und die Eingabe beenden möchten,<br> klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.<br> 
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="correct") : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -146,7 +146,7 @@ Ich habe einen falschen Wert eingegeben. Wie korrigiere ich das?</b>
  	<b>Schritt 2: </b>Klickt den <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> Knopf an um die Werte zu speichern.<p> 
  	<b>Achtung! </b>Wenn Sie die Werte gespeichert haben und die Eingabe beenden möchten,<br> klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.<br> 
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="note") : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -157,7 +157,7 @@ Ich muss einen Vermerk anstatt einen Wert eingeben. Wie geht das?</b>
  	<b>Schritt 2: </b>Klickt den <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> Knopf an um die Information zu speichern.<p> 
  	<b>Achtung! </b>Wenn Sie die Werte gespeichert haben und die Eingabe beenden möchten,<br> klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.<br> 
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="done") : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -167,13 +167,13 @@ Ich bin fertig. Was nun?</b>
  	<b>Schritt 2: </b>Klickt den <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> Knopf an um die Werte zu speichern.<p> 
  	<b>Achtung! </b>Klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.<br> 
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	
 
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Achtung!</b></font> 
 <ul>       	
 Wenn Sie abbrechen möchten klickt den <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> Knopf an.
 </ul>
-<?php endif ?>
+<?php endif;?>
 </form>
 

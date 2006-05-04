@@ -38,7 +38,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 <b>Schritt 3</b>
 <ul> Wenn die Suche ein einziges Ergebnis findet werden die Daten sofort gezeigt.<br>
 		Wenn die Suche allerdings mehrere Ergebnisse liefert wird eine Liste gezeigt.<br>
-<?php endif ?>
+<?php endif;?>
 
 <?php if(($src=="?")||($x1>1)) : ?>
 
@@ -47,15 +47,15 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 		den Namen, oder den Vornamen, oder die Fallnummer oder das Aufnahmedatum anklicken.
 
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="?") : ?>
 <b>Schritt 4</b>
-<?php endif ?>
+<?php endif;?>
 
 <?php if(($src!="?")&&($x1==1)) : ?>
 <b>Schritt 1</b>
-<?php endif ?>
+<?php endif;?>
 <?php if(($x1=="1")||($src=="?")) : ?>
 <ul> Wenn die Patientendaten eingeblendet sind können Sie folgendes tun: 
 		<Ul type="disc">		
@@ -76,7 +76,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 <b>Schritt <?php if($src!="?") print "2"; else print "5"; ?></b>
 <ul> Den <input type="button" value="Speichern"> anklicken um das Dokument zu speichern.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <b>Achtung!</b>
 <ul> Falls Sie abbrechen möchten, den  <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> > anklicken.
 		
