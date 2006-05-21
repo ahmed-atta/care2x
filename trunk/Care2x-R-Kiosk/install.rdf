@@ -5,11 +5,11 @@ xmlns:em="http://www.mozilla.org/2004/em-rdf#">
 
 	<Description about="urn:mozilla:install-manifest">
 
-		<em:id>{4D498D0A-05AD-4fdb-97B5-8A0AABC1FC5B}</em:id>
+		<em:id>{00505FBA-DEBC-11DA-A8EA-D2E2FC5AF602}</em:id>
 		<em:name>R-kiosk</em:name>
 		<em:version>0.3</em:version>
-		<em:description>RKiosk (Real Kiosk), fullscreen kiosk mode: all menus, keys etc. disabled</em:description>
-		<em:creator>Kimmo Heinaaro</em:creator>
+		<em:description>RKiosk (Real Kiosk) kiosk mode: all menus, keys etc. disabled</em:description>
+		<em:creator>Kimmo Heinaaro, modified by Daniele Palmas</em:creator>
 		<em:file>
 			<Description about="urn:mozilla:extension:file:rkiosk.jar">
 				<em:package>content/rkiosk/</em:package>

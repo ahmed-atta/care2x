@@ -258,5 +258,4 @@ function RKioskdelayedStartup()
   }
 
   FeedHandler.init();
-  BrowserFullScreen();	
 }

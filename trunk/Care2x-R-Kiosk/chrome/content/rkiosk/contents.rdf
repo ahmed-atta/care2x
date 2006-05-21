@@ -16,10 +16,10 @@ xmlns:chrome="http://www.mozilla.org/rdf/chrome#">
 
 	<RDF:Description RDF:about="urn:mozilla:package:rkiosk"
             chrome:displayName="R-kiosk (Real Kiosk)"
-            chrome:author="Kimmo Heinaaro, Finland"
+            chrome:author="Kimmo Heinaaro, Finland, modified by Daniele Palmas"
             chrome:name="rkiosk"
 		chrome:extension="true"
-            chrome:description="RKiosk (Real Kiosk), fullscreen kiosk mode: all menus, keys etc. disabled">
+            chrome:description="RKiosk (Real Kiosk) kiosk mode: all menus, keys etc. disabled; modified for using with Care2x">
 	</RDF:Description>
 
 </RDF:RDF>
