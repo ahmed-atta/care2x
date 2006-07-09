@@ -207,6 +207,6 @@ $LDAlertMinHigherMax='Non si può inserire un valore minimo superiore a quello ma
 $LDAlertNoNegativeOrder='Non si possono inserire valori negativi';
 # 2003-08-22 EL
 $LDYellowList='Lista gialla';
-$LDYellowListTxt='German pharmaceutical index (needs internet line)';
-$LDClickSelectDept='Please click this to select a department.';
+$LDYellowListTxt='Indice farmaceutico (con connessione ad internet)';
+$LDClickSelectDept='Seleziona un dipartimento.';
 ?>

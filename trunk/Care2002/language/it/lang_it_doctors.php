@@ -14,31 +14,31 @@ $monat=array('',
 						'Dicembre'
 						);
 
-$LDDoctors='Medici/Chirurghi';
+$LDDoctors='Medici';
 $LDQView='Quickview';
-$LDQViewTxt='Vista compatta del piano turni per i medici/chirurghi in servizio';
+$LDQViewTxt='Vista compatta del piano turni per i medici in servizio';
 $LDDutyPlan='Turnistica';
 $LDDutyPlanTxt='Piano turni (visualizzazione, modifica, cancellazione, etc.)';
-$LDDocsList='Elenco Medici/Chirurghi';
-$LDDocsListTxt='Crea o modifica un elenco di Medici/Chirurghi';
+$LDDocsList='Elenco Medici';
+$LDDocsListTxt='Crea o modifica un elenco di Medici';
 $LDDocsForum='Forum';
-$LDDocsForumTxt='Forum di discussione per Medici/Chirurghi';
+$LDDocsForumTxt='Forum di discussione per Medici';
 $LDNews='News';
 $LDNewsTxt='Scrittura, lettura e modifica delle news';
 $LDMemo='Memo';
 $LDMemoTxt='Scrittura, lettura e modifica di memo';
-$LDCloseAlt='Chiudere la finestra Medici/Chirurghi';
+$LDCloseAlt='Chiudere la finestra Medici';
 $LDDbNoLink='Impossibile connettersi al database!';
 $LDDbNoRead='Impossibile leggere dal database!';
 $LDDbNoSave='Impossibile scrivere nel database!';
 
-$LDDocsOnDuty='Medici/Chirurghi in servizio';
+$LDDocsOnDuty='Medico in servizio';
 
 $LDTabElements=array('Reparto',
-								 'Medico/Chirurgo 1',
-								 'Cercapersone/Telefono',
-								 'Medico/Chirurgo 2',
-								 'Cercapersone/Telefono',
+								 'Medico',
+								 'Telefono',
+								 'Medico',
+								 'Telefono',
 								 'Piano turni'
 								 );
 $LDShowActualPlan='Mostra il piano turni';
@@ -58,8 +58,8 @@ $LDFullDay=array('Domenica',
 								'Venerdì',
 								'Sabato'
 								);
-$LDDoc1='Medico/Chirurgo 1';
-$LDDoc2='Medico/Chirurgo 2';
+$LDDoc1='Medico';
+$LDDoc2='Medico';
 $LDClosePlan='Chiudere questo piano';
 $LDNewPlan='Creare un nuovo piano';
 $LDBack='Indietro';
@@ -70,7 +70,7 @@ $LDInfo4Duty='Informazioni';
 $LDStayIn='Servizio attivo';
 $LDOnCall='Reperibilità';
 $LDPhone='Telefono';
-$LDBeeper='Cercapersone';
+$LDBeeper='Interno';
 $LDMoreInfo='Ulteriori informazioni';
 $LDOn='su';
 $LDCloseWindow='Chiudere finestra';
@@ -79,9 +79,9 @@ $LDYear='Anno';
 $LDPerElements=array('Cognome',
 									'Nome',
 									'Data di nascita',
-									'Cercapersone',
+									'Interno',
 									'Telefono',
-									'Cercapersone',
+									'Interno',
 									'Telefono'
 									);
 $LDChgDept='Modifica reparto: ';
@@ -99,7 +99,7 @@ $LDTestRequest='Richiesta di prova';
 /* 2003-03-16 EL */
 $LDContactInfo='Informazioni';
 $LDPersonalContactInfo='Dati personali';
-$LDOnCallContactInfo='On-Call Contact Info';
+$LDOnCallContactInfo='Contatto';
 $LDPlsSelectDept='Scegliere un reparto';
 $LDCreateDoctorsList='Crea un elenco di medici';
 $LDPlsCreateList='Creare prima l\'elenco.';

@@ -1,17 +1,17 @@
 <?php
 $fieldname=array(
-							'Cognome',
-							'Nome',
-							'Telefono 1',
-							'Telefono 2',
-							'Telefono 3',
-							'Cercapersone 1',
-							'Cercapersone 2',
-							'Privato 1',
-							'Privato 2'
-							);
-							
-$LDPhoneDir='Elenco del telefono';
+                                                        'Cognome',
+                                                        'Nome',
+                                                        'Telefono 1',
+                                                        'Telefono 2',
+                                                        'Telefono 3',
+                                                        'Interno 1',
+                                                        'Interno 2',
+                                                        'Privato 1',
+                                                        'Privato 2'
+                                                        );
+
+$LDPhoneDir='Elenco Telefonico';
 $LDSearch='Cerca';
 $LDDir='Elenco';
 $LDNewData='Nuovi dati';
@@ -22,46 +22,46 @@ $LDPhoneFound='Elementi identificati dalla ricerca: <font color=red><b> ~nr~ </b
 
 $LDKeywordPrompt='Inserire una parola chiave, ad esempio un nome, un dipartimento o un\'abbreviazione';
 $LDShowDir='Elenco completo';
-$LDNewEntry='Inserire un nuovo n. di telefono o cercapersone';
+$LDNewEntry='Inserire un nuovo n. di telefono o interno';
 
 $LDExtFields=array(
-								'N.',
-								'Titolo',
-								'Cognome',
-								'Nome',
-								'Professione',
-								'Dip.1',
-								'Dip.2',
-				 				'Tel.1',
-								'Tel.2',
-								'Tel.3',
-								'Privato 1',
-								'Privato 2',
-								'Cercapersone 1',
-								'Cercapersone 2',
-								'N. stanza',
-								'Data',
-								'Ora',
-								'Inserito da');
+                                                                'N.',
+                                                                'Titolo',
+                                                                'Cognome',
+                                                                'Nome',
+                                                                'Professione',
+                                                                'Dip.1',
+                                                                'Dip.2',
+                                                                 'Tel.1',
+                                                                'Tel.2',
+                                                                'Tel.3',
+                                                                'Privato 1',
+                                                                'Privato 2',
+                                                                'Interno 1',
+                                                                'Interno 2',
+                                                                'Stanza',
+                                                                'Data',
+                                                                'Ora',
+                                                                'Inserito da');
 $LDEditFields=array(
-								'N.',
-								'Titolo',
-								'Cognome',
-								'Nome',
-								'Professione',
-								'Dipartimento 1',
-								'Dipartimento 2',
-				 				'Telefono (interno) 1',
-								'Telefono (interno) 2',
-								'Telefono (interno) 3',
-								'Privato (esterno) 1',
-								'Privato (esterno) 2',
-								'Cercapersone 1',
-								'Cercapersone 2',
-								'N. stanza',
-								'Data',
-								'Ora',
-								'Inserito da');
+                                                                'N.',
+                                                                'Titolo',
+                                                                'Cognome',
+                                                                'Nome',
+                                                                'Professione',
+                                                                'Dipartimento 1',
+                                                                'Dipartimento 2',
+                                                                 'Telefono (interno) 1',
+                                                                'Telefono (interno) 2',
+                                                                'Telefono (interno) 3',
+                                                                'Privato (esterno) 1',
+                                                                'Privato (esterno) 2',
+                                                                'Interno 1',
+                                                                'Interno 2',
+                                                                'Stanza',
+                                                                'Data',
+                                                                'Ora',
+                                                                'Inserito da');
 $LDOK=' OK ';
 $LDCancel='Annulla';
 $LDSave='Salva';
@@ -95,6 +95,6 @@ $LDUpdate='Aggiornamento dati';
 
 $LDDirData='Modifica voce n. <font color=\'red\'>~nr~</font> dell\'elenco';
 
-$LDTelephone='Telephone';
-$LDBeeper='Cercapersone';
+$LDTelephone='Telefono';
+$LDBeeper='Interno';
 ?>

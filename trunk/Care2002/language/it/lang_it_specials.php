@@ -33,7 +33,7 @@ $LDGoodDay='Salve';
 $LDGoodEvening='Buonasera';
 
 $LDDate='Data';
-$LDDept='Reparto';
+$LDDept='Dipartimento';
 $LDPrio='Priorità';
 
 $LDPageTop='Torna all\'inizio.';
@@ -208,54 +208,28 @@ $LDInsuranceCoMngrTxt='Inserire o modificare dati di una compagnia assicuratrice
 $LDAddressMngr='Gestione indirizzi';
 $LDAddressMngrTxt='Inserire, elencare o modificare gli indirizzi';
 /* 2003-05-18 EL */
-$LDUserConfigOpt='Opzioni di configurazione';
-$LDUserConfigOptTxt='Opzioni utente per colori di sfondo e del testo, mascotte, avatar, etc.';
-$LDMascotOpt='Opzioni mascotte';
-$LDMascotOptTxt='Nascondi, mostra o scegli la mascotte che appare al prompt';
+$LDUserConfigOpt='Configurazione';
+$LDUserConfigOptTxt='Opzioni per sfondo, colori testo, mascotte, avatar, etc.';
+$LDMascotOpt='Mascotte';
+$LDMascotOptTxt='Seleziona o nascondi Mascotte';
 $LDMascot='Mascotte';
 $LDSampleMascot='Mascotte di esempio';
 /* 2003-04-24 EL*/
-$LDGUITemplate='Opzioni dell\'interfaccia grafica';
-$LDGUITemplateTxt='Scegliere uno schema per l\'interfaccia grafica';
-$LDGUITheme='Schemi interfaccia';
-$LDTheme='Schema';
+$LDGUITemplate='Opzioni interfaccia';
+$LDGUITemplateTxt='Seleziona interfaccia';
+$LDGUITheme='Interfaccia';
+$LDTheme='Tema';
 # 2002-01-18 EL
 $LDTicketedSupport='Supporto ticket';
-$LDTicketedSupportTxt='Invia un ticket al supporto tecnico online';
+$LDTicketedSupportTxt='Invia una richiesta di supporto';
 $LDNewsgroup='Newsgroup';
-$LDNewsgroupTxt='La newsgroup riporta tutti i messaggi della mailing list sviluppatori.';
+$LDNewsgroupTxt='Newsgroup mirroring la mailing list sviluppatori.';
 # 2002-08-19 EL
-$LDPharmaIndex='Pharma Index';
-$LDPharmaIndexTxt='Indici farmaceutici, per esempio Redlist, Yellowlist, IFAP, NIMS, o PIMS';
+$LDPharmaIndex='Farmaprontuario';
+$LDPharmaIndexTxt='Indice farmaceutico';
 
 #2004-05-23 EL
 $LDPlugins='Plugin';
-$LDNoPluginsPrompt='Non ci sono ancora plugin installati: per scaricare dei moduli plugin di Care2X, visitare http://www.care2x-plugins.org.';
-$LDPluginsTxt='Plugin e moduli';
-
-#2004-06-13 EL
-$LDCssThemes = 'Stili CSS - Design';
-$LDCssThemesTxt= 'Per definire colore del bordo, dimensioni e stile dei font, sfondi, etc.';
-$LDDescription = 'Descrizione';
-$LDScreenshot = 'Screenshot';
-
-#2004-06-30
-$LDSmartyTemplate = 'Smarty Template - Design';
-$LDSmartyTemplateTxt = 'Seleziona uno schema Smarty per l\'interfaccia grafica';
-
-
-#2004-07-08
-$LDControlButtons = 'Stile dei pulsanti di controllo';
-$LDControlButtonsTxt = 'Scegli uno stile per i pulsanti di controllo';
-$LDComIcons = 'Stili con icone normali';
-$LDComIconsTxt = 'Scegli lo stile con icone <br>(note: le icone possono essere modificate se si usano alcuni stili CSS)';
-$LDDevDesigner = 'Sviluppatore/Grafico';
-$LDNoIcon = 'Non ci sono icone';
-$LDNoIconTxt = 'Mostra le icone nei sottomenu. Le icone non vengono mostrate';
-
-#2004-07-29
-$LDMainMenuTree = 'Stile del menu principale';
-$LDMainMenuTreeTxt = 'Scegli uno stile per il menu principale';
-$LDStyle = 'Stile';
-$LDRefreshBrowser = 'Ricaricare la pagina nel browser per vedere i cambiamenti';
+$LDNoPluginsPrompt='Non ci sono plugin installati.';
+$LDPluginsTxt='Colleczione di plugin e moduli installati';
 ?>

@@ -96,20 +96,20 @@
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/bulent_aydin.jpg"  border=0  align=right vspace=10>
-			<b>Bülent Aydin (TR/DE)</b>
+			<b>Bï¿½lent Aydin (TR/DE)</b>
 			<p>
 			 Turkish translation of Care2X website. 
-			 <p>Bülent Aydin was born in Turkey and  graduated from Istanbul Technical University ,
-Turkey   with degrees in mathematics and engineering. He also got an MBA degree from Istanbul Yeditepe University , Turkey.
+			 <p>Bï¿½lent Aydin was born in Turkey and ï¿½graduated from Istanbul Technical University ,
+Turkey ï¿½ with degrees in mathematics and engineering. He also got an MBA degree from Istanbul Yeditepe University , Turkey.
 Currently, he is  working in Germany as analyst programmer.
 <p></p>
-Skills : Database design and analysis,  IBM iSeries ( AS400 ) , DB2, ILERPG, JAVA
-, PHP,  MySQL,  VB 6. 0 and MSSQL.
+Skills : Database design and analysis, ï¿½IBM iSeries ( AS400 ) , DB2, ILERPG, JAVA
+, PHP, ï¿½MySQL, ï¿½VB 6. 0 and MSSQL.
 <p>
-"Long  live OSS "
+"Long ï¿½live OSS "
 </p>
 
-			<P><a href="mailto:bullaydin@gmx.de"><u>Bülent Aydin can be contacted here.</u></a>
+			<P><a href="mailto:bullaydin@gmx.de"><u>Bï¿½lent Aydin can be contacted here.</u></a>
 </TD></TR></TBODY></TABLE>
 
 <hr>
@@ -118,7 +118,7 @@ Skills : Database design and analysis,  IBM iSeries ( AS400 ) , DB2, ILERPG, JAV
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/bulent_potur.jpg"  border=0  align=right vspace=10>
-			<b>Bülent Potur Dr. Med. Obgyn (TR)</b>
+			<b>Bï¿½lent Potur Dr. Med. Obgyn (TR)</b>
 			<p>
 			 Turkish translation of Care 2X. He is an obstetrician &
 			 gynecologist. He is an amateur programmer in gwbasic, ms cobol and ms access and web site
@@ -128,7 +128,7 @@ Skills : Database design and analysis,  IBM iSeries ( AS400 ) , DB2, ILERPG, JAV
 			 obgyn_int@yahoogroups.com</a>. One of his personal web pages is at <a
 			 href="http://medpages.obgyn.net/bpotur" target="_blank"><u>http://medpages.obgyn.net/bpotur</u></a>  .  
 			
-			<P><a href="mailto:bpotur@yahoo.com"><u>Bülent Potur can be contacted here.</u></a>
+			<P><a href="mailto:bpotur@yahoo.com"><u>Bï¿½lent Potur can be contacted here.</u></a>
 </TD></TR></TBODY></TABLE>
 
 <hr>
@@ -148,6 +148,25 @@ involved which is not affordable by most of the hospitals in Africa."
 			
 			<P><a href="mailto:ctpalapala@hq.bot-tz.org"><u>Charles Palapala can be contacted here.</u></a>
 </TD></TR></TBODY></TABLE>
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+            <P><img src="../../fotos/credits/claudio_torbinio.jpg"  border=0  align=right vspace=10>
+			<b>Claudio Giulio Torbinio (IT)</b> 
+			<p>
+			Translation of Care2x to Italian<br>
+			
+			<p>Claudio is an IT analyst with Bachelor degree, and a nurse with Phd degree. 
+			He is 41 years old and has worked over care2x since 2004. 
+			He has improved the Italian translation of Care2x. 
+			Claudio is creating a module for the Nursing process (like a DRG). 
+			He works together with an Italian commitee for Italian translation of ICD10 and OPS-301. 
+			
+			
+			<P><a href="mailto:claudiogiulio@email.it"><u>Claudio Giulio Torbinio can be contacted here.</u></a>
+</TD></TR></TBODY></TABLE>
 
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
@@ -159,10 +178,10 @@ involved which is not affordable by most of the hospitals in Africa."
 			Spanish translations
 			<p><font size=1>
 			Author and coauthor of numerous medical textbooks<br>
-5 years as Director of the Grünenthal Medical Informatics Center, Quito
+5 years as Director of the Grï¿½nenthal Medical Informatics Center, Quito
 - Ecuador <br>
 Initial studies in Medical Informatics at Stanford University<br>
-2 years as Multimedia Project Leader of Grünenthal GmbH, Aachen, Germany</font><p>
+2 years as Multimedia Project Leader of Grï¿½nenthal GmbH, Aachen, Germany</font><p>
 Official translator for phpMyAdmin (Spanish)<br>
 Webmaster of the largest Ecuadorian medical website initiative
 (www.cmpichincha.med.ec) and the Ecuadorian Society of Dermatology
@@ -506,12 +525,12 @@ work in this kind of community.
 			<b>Michael Pike (US)</b>
 			<p>Mac OSX version<p></p>
 Mike was born in 1973 and began programming at the early age of five on the
-Apple II computer system.  Throughout the years he advanced rapidly in the
+Apple II computer system. ï¿½Throughout the years he advanced rapidly in the
 information technology field where his work utilizing Linux has been
 profiled by national media outlets including CNN, Newsweek, ADT Magazine and
 others.
 <p></p>
-Mike has always had a passion for open source and healthcare.  He will open
+Mike has always had a passion for open source and healthcare. ï¿½He will open
 the door for healthcare applications under the Mac OS X operating system, a
 task previously unrealized in the open source community.
 <o>
@@ -621,12 +640,12 @@ More information on Mike's work can be viewed at <a href="http://www.michaelpike
           <TD vAlign=top><font face="verdana,arial" size=2>
 		  <hr>
 		  <P><img src="developers/fotos/sven_koechel.jpg" border=0  align=right vspace=10 >
-			<P><b>Sven Köchel (AT)</b>
+			<P><b>Sven Kï¿½chel (AT)</b>
 			<p>
 			Installation and admin of <a href="http://www.care2x.at" target="_blank">"Team Austria"</a> website for Care2x.<br>
 			Development of CARE-CAM module for hospital's video monitoring system
 			<p>
-			<a href="mailto:sid61@users.sourceforge.net"><u>Sven Köchel can be contacted here.</u></a>
+			<a href="mailto:sid61@users.sourceforge.net"><u>Sven Kï¿½chel can be contacted here.</u></a>
 			</font>
 </TD></TR>	 -->
 
@@ -661,15 +680,15 @@ More information on Mike's work can be viewed at <a href="http://www.michaelpike
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><IMG SRC="../../fotos/credits/kesztyus2.jpg" BORDER=0 ALIGN="right" hspace=10 width=135>
-			<b>Tibor Kesztyüs, Prof. Dr. (DE)</b> 
+			<b>Tibor Kesztyï¿½s, Prof. Dr. (DE)</b> 
 			<p>
-			Prof. Kesztyüs introduced the Care2x application as a material for masteral thesis of his students
+			Prof. Kesztyï¿½s introduced the Care2x application as a material for masteral thesis of his students
 			at the University of Applied Science in Ulm, Germany. His students are also actively developing
 			specialized modules for local medical applications. 
 			<p>
 			He is the vice-dean of the medical informatics division of the university.
 			
-			<P><a href="mailto:kesztyus@fh-ulm.de"><u>Prof. Kesztyüs can be contacted here.</u></a>
+			<P><a href="mailto:kesztyus@fh-ulm.de"><u>Prof. Kesztyï¿½s can be contacted here.</u></a>
 </TD></TR></TBODY></TABLE>
 
 <hr>
@@ -699,13 +718,13 @@ More information on Mike's work can be viewed at <a href="http://www.michaelpike
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/walter_nunez.gif"  border=0  align=right vspace=10 hspace="10">
-			<b>Walter Nuñez Dr. Med. (PE) </b>
+			<b>Walter Nuï¿½ez Dr. Med. (PE) </b>
 
 <p>
-Dr. Walter Nuñez did a presentation of
+Dr. Walter Nuï¿½ez did a presentation of
 Care2x  to the Argentinian professionals via a <a href="http://www.sis.org.ar/sis2004/videoconferencia/index.html"  target="_blank">video teleconference during the SIS conference</a>.
 
-<P><a href="mailto:admin@ciberneticamedica.com"><u>Dr. Walter Nuñez can be contacted here</u></a>
+<P><a href="mailto:admin@ciberneticamedica.com"><u>Dr. Walter Nuï¿½ez can be contacted here</u></a>
 </TD></TR></TBODY></TABLE>
 
 <hr>
@@ -732,7 +751,7 @@ Despite the fact that he is neither working in medical nor in health sector, he 
 <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 		  <P><img src="../../fotos/credits/wilfried_goedert.jpg" border=0  align=right vspace=10 >
-			<P><b>Wilfried Gödert (physician) (DE)</b><br>
+			<P><b>Wilfried Gï¿½dert (physician) (DE)</b><br>
 			contributed the following:
 			<p><font size=1>
 
@@ -742,7 +761,7 @@ Despite the fact that he is neither working in medical nor in health sector, he 
 			<p>
 			</font>
 			Profession: Physician, with additional Medical Informatics degree
-			<p><a href="mailto:goedert@users.sourceforge.net"><u>Wilfried Gödert can be contacted here</u></a>
+			<p><a href="mailto:goedert@users.sourceforge.net"><u>Wilfried Gï¿½dert can be contacted here</u></a>
 </TD></TR>	
 </TBODY></TABLE>
 

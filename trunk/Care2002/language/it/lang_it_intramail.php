@@ -150,8 +150,8 @@ $LDSignature="Firma";
 $LDSignatureTxt="Crea una firma<br>&nbsp;che viene aggiunta automaticamente<br>&nbsp;a tutte le mail in uscita.";
 $LDEmail2Drafts="Email salvata come bozza.";
 
-$LDNoEmailAddress='Email address missing! Please enter an email address';
+$LDNoEmailAddress='Inserisci un indirizzo corretto';
 $LDLogout='Logout';
-$LDNameIsUsed='The email address is already being used by somebody. Please choose another username.';
+$LDNameIsUsed='Casella in uso.';
 
 ?>

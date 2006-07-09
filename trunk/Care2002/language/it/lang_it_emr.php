@@ -1,29 +1,29 @@
 <?php
 # Translation: Gabriele Cicala
-$LDAdmit='Storico sulle Visite Mediche e Accettazioni';
-$LDAdmitHistoPhysical='Storico sulle Visite Mediche e Accettazioni';
+$LDAdmit='Storico';
+$LDAdmitHistoPhysical='Storico Visite e Accettazioni';
 $LDDoctorDailyNotes='Appunti Medici giornalieri';
 $LDDischargeSummary='Sommario Dimissioni';
-$LDConsultNotes='Appunti di Consultazione';
+$LDConsultNotes='Appunti Psicologo';
 $LDOpNotes='Note Operative';
-$LDDailyNurseNotes='Note Giornaliere di Reparto/Corsia';
+$LDDailyNurseNotes='Note Giornaliere';
 $LDOther='Altre Note';
-$LDChartNotes='Note su Grafico';
-$LDPTATGetc='Note Giornaliere PT, ATG, ecc.';
-$LDIVDailyNotes='Note Giornaliere IV';
+$LDChartNotes='Glicemia e terapia insulinica';
+$LDPTATGetc='Diuresi ed alvo giornalieri';
+$LDIVDailyNotes='Note Grenaggi';
 $LDAnticoagDailyNotes='Note Giornaliere Anticoagulanti';
-$LDMaterialLOTChargeNr='Materiale LOT, Carico num.';
+$LDMaterialLOTChargeNr='Annotazioni.';
 $LDDiagnosis='Diagnosi';
 $LDTherapy='Terapia';
-$LDExtraNotes='Ulteriori note';
-$LDNursingReport='Rapporto Infermeria';
-$LDNursingProblemReport='Rapporto Problemi Infermeria';
-$LDNursingEffectivityReport='Rapporto Efficienza Infermeria';
-$LDInquiryToDoctor='Domande per il Medico';
-$LDDoctorDirective='Ordini Medici';
+$LDExtraNotes='Ulteriori note - diagnosi';
+$LDNursingReport='Rapporto Infermeristico';
+$LDNursingProblemReport='Problemi Infermeristici';
+$LDNursingEffectivityReport='Efficiacia Infermeristica';
+$LDInquiryToDoctor='Quesiti Clinici';
+$LDDoctorDirective='Prescrizioni Mediche';
 $LDProblem='Problemi';
 $LDDevelopment='Sviluppo';
-$LDAllergy='Allergia';
-$LDDietPlan='Pianificazione Dieta';
-$LDPrintPDFDocAllReport='Stampa PDF di tutti i rapporti';
+$LDAllergy='Allergie';
+$LDDietPlan='Dieta';
+$LDPrintPDFDocAllReport='Stampa il rapporto generale';
 ?>

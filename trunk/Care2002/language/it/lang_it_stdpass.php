@@ -41,16 +41,16 @@ $LDHowEnter='Come inserire nuovi dati nell\'elenco';
 $LDPhoneDir='Elenco telefonico';
 $LDMakeDutyPlan='Crea tabulato dei turni';
 $LDDocsList='Elenco dei medici';
-$LDNursingManage='Gestione corsie';	// ward management
+$LDNursingManage='Gestione corsie';        // ward management
 
 $LDNursingStation='Turni infermieristici';
-$LDOrDocu='Documentazione di sala operatoria';	// OR ???
+$LDOrDocu='Documentazione di sala operatoria';        // OR ???
 $LDOrLogBook='Registro infermieristico di sala operatoria';
 $LDOrNursing='Assistenza infermieristica sala operatoria';
 $LDCreate='Crea nuovo';
 $LDPersonList='Elenco del personale';
-$LDRepabotActivate='Attivare Repabot';
-$LDQBotActivate='Attivare Q-Bot';
+$LDRepabotActivate='Attiva Repabot';
+$LDQBotActivate='Attiva Q-Bot';
 
 $LDMedLab='Laboratorio medico';
 $LDCancel='Annulla';
@@ -60,10 +60,10 @@ $LDOrderArchive='Archivio';
 $LDPharmaOrder='Ordini';
 $LDOrderCat='Catalogo prodotti personale';
 $LDPharmaDb='Banca dati';
-$LDPharmaOrderBot='Attivare OrderBot';
+$LDPharmaOrderBot='Attiva OrderBot';
 
 $LDMedDepot='Magazzino medicinali';
-$LDMediBotActivate='Attivare Medibot';
+$LDMediBotActivate='Attiva Medibot';
 $LDSqlDb='Banca dati SQL';
 $LDManageAccess='Gestione privilegi d\'accesso';
 $LDListAll='Elenco completo';
@@ -77,36 +77,36 @@ $LDChangeSaved='Modifiche salvate.';
 $LDPcID='Identificativo corrente di questo computer';
 $LDDept='Dipartimento';
 $LDWard='Corsia';
-$LDWardOR='Stanza corsia  o caposala';
-$LDPhoneNr='Telefono della camera';
-$LDIntercomNr='Numero dell\'intercomunicante';
+$LDWardOR='Stanza Corsia  o Studio';
+$LDPhoneNr='Telefono';
+$LDIntercomNr='Numero dell\'inteno';
 $LDPcIP='indirizzo IP di questo computer';
 $LDSave='Salva modifiche';
-$LDNoChange='Non modificare le impostazioni correnti';
+$LDNoChange='Non modificare le impostazioni';
 $LDClose='Chiudi';
 $LDLogout='Logout';
 $LDNewLogin='Nuovo login';
 $LDLogoutConfirm='Si desidera veramente uscire?';
 $LDOK='OK';
 $LDYes='Sì';
-$LDNotReally='Ci ho ripensato';
+$LDNotReally='No';
 
 $LDDOCScheduler='DOC Scheduler';
 $LDORNOCScheduler='ORNOC Scheduler';
 $LDFotolab='Photolab';
 /* 2002-09-08 EL */
 $LDTestRequest='Richiesta test';
-$LDTestType=array('patho'=>'Anatomia Patologica', 
-                             'chemlabor'=>'Laboratorio medico', 
-			'baclabor'=>'Laboratorio analisi batteriologiche',
-			 'blood'=>'Banca del sangue',
-			 'radio'=>'Radiologia',
-			 'sono'=>'Ecografia',
-			 'allamb'=>'Day Hospital',
-			 'unfamb'=>'Pronto Soccorso',
-			 'nuklear'=>'Radiodiagnostica',
-			 'inmed'=>'Day Hospital di medicina interna');
-							 
+$LDTestType=array('patho'=>'Anatomia Patologica',
+                             'chemlabor'=>'Laboratorio medico',
+                        'baclabor'=>'Laboratorio analisi batteriologiche',
+                         'blood'=>'Banca del sangue',
+                         'radio'=>'Radiologia',
+                         'sono'=>'Ecografia',
+                         'allamb'=>'Day Hospital',
+                         'unfamb'=>'Pronto Soccorso',
+                         'nuklear'=>'Radiodiagnostica',
+                         'inmed'=>'Day Hospital di medicina interna');
+
 $LDBloodOrder='Richiesta scorta di sangue';
 /* 2002-09-22 EL */
 $LDPendingRequest='Richiesta accodata';

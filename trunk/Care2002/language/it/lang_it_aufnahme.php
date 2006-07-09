@@ -33,7 +33,7 @@ $LDGoodDay='Salve! Lieto di rivederla!';
 $LDGoodAfternoon='Salve!';
 $LDGoodEvening='Buonasera';
 
-$LDNewForm='Mi serve un nuovo modulo da riempire.';
+$LDNewForm='Nuovo modulo';
 
 $LDForceSave='Salva comunque';
 $LDSaveData='Salva i dati';
@@ -49,7 +49,7 @@ $LDErrorS='E\' necessario compilare i campi segnati in  <font color=red>rosso</f
 
 $fieldname=array('Codice paziente','Cognome','Nome','Data di nascita','Opzioni');
 $LDEntryPrompt='Inserire i criteri di ricerca, per esempio cognome, nome, data di nascita etc.';
-$LDSEARCH='SEARCH';
+$LDSEARCH='Ricerca';
 $LDAdmWantEntry='Devo accettare un paziente';
 $LDAdmWantSearch='Sto cercando un paziente';
 $LDAdmWantArchive='Devo cercare in archivio';
@@ -76,13 +76,13 @@ $LDFoundData='La ricerca ha trovato ~nr~ dati!<br>Selezionare quelli desiderati.
 $LDClk2Show='Selezionare per visualizzare i dati';
 
 $LDElements=array(
-								'',
-								'Cognome',
-								'Nome',
-								'Data di nascita',
-								'Codice paziente',
-								'Data di accettazione'
-								);
+                                                                '',
+                                                                'Cognome',
+                                                                'Nome',
+                                                                'Data di nascita',
+                                                                'Codice paziente',
+                                                                'Data di accettazione'
+                                                                );
 $LDSearchKeyword='Ricerca chiave o condizione';
 $LDMEDOCS='Medical Documentation System (Medocs)';
 $LDMedocsSearchTitle='Medocs - Ricerca documenti';
@@ -102,25 +102,25 @@ $LDDocSearch='Ricerca un Medoc';
 
 $LDMedDocOf='Medoc di';
 $LDMedocsElements=array(
-								'',
-								'Cognome',
-								'Nome',
-								'Data di nascita',
-								'Codice paziente',
-								'Codice documento',
-								'Reparto',
-								'Data',
-								'Ora'
-								);
+                                                                '',
+                                                                'Cognome',
+                                                                'Nome',
+                                                                'Data di nascita',
+                                                                'Codice paziente',
+                                                                'Codice documento',
+                                                                'Reparto',
+                                                                'Data',
+                                                                'Ora'
+                                                                );
 $LDStartNewDoc='Inizia un nuovo Medoc';
 $LDNoMedocsFound='Non ci sono Medoc per questo paziente!';
-$LDAt='alle';		
-		
+$LDAt='alle';
+
 $LDDept='Rep.';
 $LDRoomNr='Stanza';
-$LDAdmitType='Tipo di accettazione';		
+$LDAdmitType='Tipo di accettazione';
 $LDCivilStat='Stato civile';
-$LDInsuranceNr='Numero polizza';
+$LDInsuranceNr='Parere della Psicologa';
 $LDNameAddr='Nome e indirizzo';
 $LDBillInfo='Informazioni per la fatturazione';
 $LDAdmitDiagnosis='Diagnosi all\'accettazione';
@@ -185,7 +185,7 @@ $LDAdmissionTxt='Accettazione interna, cerca, ricerca';
 $LDImmunization='Immunologia';
 $LDESE='Inserisci, cerca, modifica';
 $LDImmunizationTxt=$LDESE.' Rapporto di immunologia';
-$LDDRG='DRG (composite)';
+$LDDRG='DRG (Diagnosi)';
 $LDDRGTxt=$LDESE.' DRG (Diagnosis related groups)';
 $LDProcedures='Procedure';
 $LDProceduresTxt=$LDESE.' procedure terapeutiche';
@@ -205,10 +205,10 @@ $LDPregnanciesTxt=$LDESE.' informazioni sulla gravidanza';
 $LDBirthDetails='Nascite';
 $LDBirthDetailsTxt=$LDESE.' dettagli sulle nascite';
 /* 2002-12-07 EL*/
-$LDInsuranceCo='Compagnia di assicurazioni';
+$LDInsuranceCo='';
 $LDInsuranceNr_2='Polizza coassicurazione';
 $LDInsuranceCo_2='Compagnia coassicurazione';
-$LDBillType='Tipo di fattura';
+$LDBillType='';
 $LDWard='Reparto/clinica';
 $LDMakeWristBand='Prepara braccialetti identificativi';
 $LDClickImgToPrint='Selezionare l\'immagine per stamparla.';
@@ -407,7 +407,7 @@ $LDShowDetails='Mostra dettagli';
 
 # 2004-05-22 KB
 $LDNr='Num.';
-$LDOtherHospitalNr='Num. altro ospedale';
-$LDSelectOtherHospital = 'Selezionare l\'altro ospedale per cambiare il numero';
+$LDOtherHospitalNr='Proveniente da';
+$LDSelectOtherHospital = 'Selezionare altra provenienza per cambiare il numero';
 $LDNoNrNoDelete = 'per cancellare, non inserire alcun numero';
 ?>

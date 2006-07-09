@@ -21,15 +21,15 @@ require_once($root_path.'include/inc_environment_global.php');
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/gabriele_cicala.jpg"  border=0  align=right vspace=10>
-			<b>La traduzione italiana di sito web (www.care2x.com) è sviluppata e gestita da Gabriele Cicala.</b>
+			<b>La traduzione italiana di sito web (www.care2x.com) ï¿½ sviluppata e gestita da Gabriele Cicala.</b>
 			<p>
-			Gabriele Cicala è nato a Rossano in provincia di Cosenza nel 1970.
+			Gabriele Cicala ï¿½ nato a Rossano in provincia di Cosenza nel 1970.
   Ha conseguito la laurea in ingegneria delle telecomunicazioni al Politecnico di Torino.
-  Attualmente lavora in una società informatica in qualità di consulente. <p>Fin dal primo momento in cui ha conosciuto l'ambiente Linux 
+  Attualmente lavora in una societï¿½ informatica in qualitï¿½ di consulente. <p>Fin dal primo momento in cui ha conosciuto l'ambiente Linux 
 e open-source ha sempre avuto interesse per ogni tipo di progetto. Nonostante non appartenga propriamente all'ambiente medico ha deciso di
 unirsi al progetto in quanto crede nelle stesse cose in cui credono il
 suo ideatore e tutti i suoi collaboratori.
-			<P><a href="mailto:gabcicala@tiscali.it"><u>Si può contattare Gabriele Cicala qui.</u></a>
+			<P><a href="mailto:gabcicala@tiscali.it"><u>Si puï¿½ contattare Gabriele Cicala qui.</u></a>
 </TD></TR></TBODY></TABLE>
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
@@ -41,19 +41,39 @@ suo ideatore e tutti i suoi collaboratori.
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/giuseppe_scarpi.jpg"  width=135 height=170 border=0  align=right vspace=10>
-			<b>La versione italiana di CARE 2X è stata fatta da Giuseppe Scarpi:</b>
+			<b>La versione italiana di CARE 2X ï¿½ stata fatta da Giuseppe Scarpi:</b>
 			<p>
-			Giuseppe Scarpi è nato a Roma nel 1967.<p>
+			Giuseppe Scarpi ï¿½ nato a Roma nel 1967.<p>
 E' laureato in ingegneria elettronica ed ha lavorato per molte aziende nel settore biomedico, dove ha compreso 
 le profonde relazioni tra il mondo biomedico e quello informatico.
 Utilizza ed apprezza sia Linux che Windows in quanto "<i>entrambi sono il risultato di un immenso lavoro umano, 
 ed entrambi meritano rispetto</i>".<p>
 Ha deciso di unirsi attivamente alla causa dell'Open Source in quanto 
-"<i>...questo è un mondo ideale che sopravviverà fintanto che sarà perfettamente in equilibrio: se si prende, bisogna anche dare in proporzione</i>".
+"<i>...questo ï¿½ un mondo ideale che sopravviverï¿½ fintanto che sarï¿½ perfettamente in equilibrio: se si prende, bisogna anche dare in proporzione</i>".
 
-			<P><a href="mailto:kalbun@inwind.it"><u>Si può contattare Giuseppe Scarpi qui.</u></a>
+			<P><a href="mailto:kalbun@inwind.it"><u>Si puï¿½ contattare Giuseppe Scarpi qui.</u></a>
 </TD></TR></TBODY></TABLE>
-
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD><IMG height=15
+             src="../../gui/img/common/default/pixel.gif"
+             width=5 border=0></TD></TR>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+			<P><img src="../../fotos/credits/claudio_torbinio.jpg" border=0  align=right vspace=10>
+			<b>Claudio Giulio Torbinio (IT)</b>
+			<p>
+			Translation of Care2x to Italian<br>
+			
+			<p>Claudio is an IT analyst with Bachelor degree, and a nurse with Phd degree.
+			He is 41 years old and has worked over care2x since 2004.
+			He has improved the Italian translation of Care2x.
+			Claudio is creating a module for the Nursing process (like a DRG).
+			He works together with an Italian commitee for Italian translation of ICD10 and OPS-301.
+			<P><a href="mailto:claudiogiulio@email.it"><u>Si puï¿½ contattare Claudio Giulio Torbinio qui.</u></a>
+</TD></TR></TBODY></TABLE>
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
@@ -64,7 +84,7 @@ Ha deciso di unirsi attivamente alla causa dell'Open Source in quanto
 			</b><p>
 			Ha collaborato a sviluppare i moduli di visualizzazione DICOM.
 			
-			<P><a href="mailto:mcuccia@users.sourceforge.net"><u>Si può contattare Massimiliano Cuccia qui.</u></a>
+			<P><a href="mailto:mcuccia@users.sourceforge.net"><u>Si puï¿½ contattare Massimiliano Cuccia qui.</u></a>
 </TD></TR></TBODY></TABLE>
 
 <hr>
@@ -77,7 +97,7 @@ Ha deciso di unirsi attivamente alla causa dell'Open Source in quanto
 			</b><p>
 			Ha collaborato a sviluppare i moduli di visualizzazione DICOM.
 			
-			<P><a href="mailto:alidan@users.sourceforge.net"><u>Si può contattare Daniele Ali qui.</u></a>
+			<P><a href="mailto:alidan@users.sourceforge.net"><u>Si puï¿½ contattare Daniele Ali qui.</u></a>
 </TD></TR></TBODY></TABLE>
 
 <!-- <hr>
@@ -91,10 +111,10 @@ Ha deciso di unirsi attivamente alla causa dell'Open Source in quanto
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/daniel_zilli.jpg"  border=0  align=right vspace=10>
 			<b>
-			La traduzione braziliana-portugesa di CARE 2X e sito web (www.care2x.com) è stata fatta da Daniel Zilli.
+			La traduzione braziliana-portugesa di CARE 2X e sito web (www.care2x.com) ï¿½ stata fatta da Daniel Zilli.
 			</b>
 			
-			<P><a href="mailto:danielz@cco.matrix.com.br"><u>Si può contattare Daniel Zilli qui.</u></a>
+			<P><a href="mailto:danielz@cco.matrix.com.br"><u>Si puï¿½ contattare Daniel Zilli qui.</u></a>
 </TD></TR></TBODY></TABLE>
  -->
 
@@ -116,7 +136,7 @@ Ha deciso di unirsi attivamente alla causa dell'Open Source in quanto
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Miglioramenti del livello di sicurezza</font></td>
   </tr>
   <tr>
-    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Matêj Hausenblas (FR)</font></nobr>&nbsp;</td>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Matï¿½j Hausenblas (FR)</font></nobr>&nbsp;</td>
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Traduzione in  francese</font></td>
   </tr>
   <tr>
@@ -128,7 +148,7 @@ Ha deciso di unirsi attivamente alla causa dell'Open Source in quanto
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Traduzione in tedesco di www.care2x.com</font></td>
   </tr>
   <tr>
-    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Patxi Gomaríz (ES)</font></nobr>&nbsp;</td>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Patxi Gomarï¿½z (ES)</font></nobr>&nbsp;</td>
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Traduzione in spagnolo</font></td>
   </tr>
   <tr>
@@ -153,6 +173,6 @@ Ha deciso di unirsi attivamente alla causa dell'Open Source in quanto
   </tr>
 </table>
 
-<font face="verdana,arial" size=1>Nota: questa è solo una lista parziale. Presto ci saranno ulteriori ringraziamenti.</font>
+<font face="verdana,arial" size=1>Nota: questa ï¿½ solo una lista parziale. Presto ci saranno ulteriori ringraziamenti.</font>
 </body>
 </html>

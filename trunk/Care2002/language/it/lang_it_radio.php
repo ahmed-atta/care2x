@@ -27,9 +27,9 @@ $LDEdit='Modifica';
 $LDCreate='Crea';
 $LDValue='Valore';
 
-$LDRadio='Radiologia - X-ray';
+$LDRadio='Radiologia';
 $LDXrayFilms='Radiografie';
-$LDXrayFilmsTxt='Mostra pellicole radiografiche, leggi e scrivi relazioni diagnostiche, etc.';
+$LDXrayFilmsTxt='Mostra radiografie, leggi e scrivi relazioni diagnostiche, etc.';
 $LDNews='News';
 $LDNewsTxt='Leggi o scrivi news relative alla Radiologia';
 $LDMemo='Memo';

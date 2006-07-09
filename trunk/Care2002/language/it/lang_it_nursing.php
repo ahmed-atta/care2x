@@ -1,5 +1,5 @@
 <?php
-#	IMPORTANT!	All words or characters inclosed with ~ ~ must not be changed.
+#        IMPORTANT!        All words or characters inclosed with ~ ~ must not be changed.
 $LDNursing='Infermieri';
 $LDStation='Corsia';
 
@@ -15,7 +15,7 @@ $LDNursingStations='Presidio infermieristico';
 $LDQuickViewTxt='Quadro di insieme dei turni di lavoro odierni per il presidio infermieristico.';
 $LDSearchPatientTxt='Ricerca un paziente accettato in corsia.';
 $LDArchiveTxt='Ricerca nell\'archivio delle corsie.';
-$LDStationManTxt='Assegna una corsia, inizializza parametri quali numero 
+$LDStationManTxt='Assegna una corsia, inizializza parametri quali numero
 di letti, personale, etc.';
 $LDNewsTxt='Leggi, crea o modifica una news.';
 $LDMemoTxt='Leggi, crea o modifica un memo.';
@@ -40,7 +40,7 @@ $LDPlsClk='Selezionare quelli desiderati.';
 $LDMoreFunctions='Altre funzioni';
 $LDSrcKeyword='Chiave di ricerca';
 $LDSearchArchive='Includi l\'archivio nella ricerca.';
-$LDSearchPrompt='Inserire un criterio di ricerca.<br>	Per esempio un nome, un cognome, etc.';
+$LDSearchPrompt='Inserire un criterio di ricerca.<br>        Per esempio un nome, un cognome, etc.';
 $LDSearch='Ricerca';
 $LDCancel='Annulla';
 $LDHow2Search='Help! Come faccio a trovare un paziente?';
@@ -51,29 +51,29 @@ $LDClockTime='Ora';
 $LDClkDate='Selezionare la data richiesta.';
 
 $monat=array('Gennaio',
-					'Febbraio',
-					'Marzo',
-					'Aprile',
-					'Maggio',
-					'Giugno',
-					'Luglio',
-					'Agosto',
-					'Settembre',
-					'Ottobre',
-					'Novembre',
-					'Dicembre'
-					);
+                                        'Febbraio',
+                                        'Marzo',
+                                        'Aprile',
+                                        'Maggio',
+                                        'Giugno',
+                                        'Luglio',
+                                        'Agosto',
+                                        'Settembre',
+                                        'Ottobre',
+                                        'Novembre',
+                                        'Dicembre'
+                                        );
 $tage=array(
-					'Dom',
-					'Lun',
-					'Mar',
-					'Mer',
-					'Gio',
-					'Ven',
-					'Sab'
-					);
-					
-$LDDay='Giorno';					
+                                        'Dom',
+                                        'Lun',
+                                        'Mar',
+                                        'Mer',
+                                        'Gio',
+                                        'Ven',
+                                        'Sab'
+                                        );
+
+$LDDay='Giorno';
 $LDMonth='Mese';
 $LDYear='Anno';
 
@@ -84,7 +84,7 @@ $LDGo='VAI';
 $LDLastMonth='Mese scorso';
 $LDNextMonth='Prossimo mese';
 $LDNursingManage='Gestione corsie';
-$LDShowStationDataTxt='&nbsp;Visualizza, modifica, crea, <br> &nbsp;descrizione, numero di letti<br>	&nbsp;etc.';
+$LDShowStationDataTxt='&nbsp;Visualizza, modifica, crea, <br> &nbsp;descrizione, numero di letti<br>        &nbsp;etc.';
 $LDLockBedTxt='&nbsp;oppure libera un letto';
 $LDAccessRightsTxt='&nbsp;Crea, blocca, modifica,<br>&nbsp;attiva, cancella, etc.';
 $LDShowStationData='Profilo corsia';
@@ -103,8 +103,8 @@ $LDMaxBeds='Numero massimo di letti';
 $LDMaxBeds='Quantità di letti disponibili';
 $LDBed1Prefix='Prefisso per il primo letto';
 $LDBed2Prefix='Prefisso per il secondo letto';
-$LDHeadNurse='Caposala';
-$LDHeadNurse2='Aiuto caposala';
+$LDHeadNurse='Coordinatore';
+$LDHeadNurse2='Aiuto';
 $LDNurses='Infermieri';
 $LDCreateStation='Crea corsia';
 $LDEnterAllFields ='I campi identificati da <font color=#ff0000><b>*</b></font> vanno riempiti.';
@@ -158,31 +158,31 @@ $LDReleasePatient='Dimetti paziente';
 $LDNoticeRW='Leggi o scrivi note';
 $LDInfoUnlock='Leggi info o sblocca';
 $LDPatListElements=array(
-										'Stanza',
-										'Letto',
-										'Cognome, Nome',
-										'Data di nascita',
-										'Codice paziente',
-										'Assicurazione',
-										'Opzioni'
-										);
+                                                                                'Stanza',
+                                                                                'Letto',
+                                                                                'Cognome, Nome',
+                                                                                'Data di nascita',
+                                                                                'Codice paziente',
+                                                                                'Assicurazione',
+                                                                                'Opzioni'
+                                                                                );
 /**********do not change the \'+b+\' e \'+r+\' **************************/
-$LDConfirmUnlock='Si vuole veramente liberare il letto \'+b+\' della stanza \'+r+\' ?';							
+$LDConfirmUnlock='Si vuole veramente liberare il letto \'+b+\' della stanza \'+r+\' ?';
 /**********do not change the \'+t+\' \'+n+\' e \'+r+b+\' **************************/
 $LDConfirmDelete='Si vuole veramente cancellare \'+t+\' \'+n+\' dalla stanza \'+r+b+\'?';
 $LDConfirmLock='Si vuole veramente bloccare questo letto?';
 $LDClk2Occupy='Selezionare per occupare il letto';
 /*$LDInsurance=array(
-								x=>'A proprio carico',
-								privat=>'Privato',
-								kasse=>'Generale'
-								);
+                                                                x=>'A proprio carico',
+                                                                privat=>'Privato',
+                                                                kasse=>'Generale'
+                                                                );
 */
 $LDSave='Salva';
 $LDNurse='Infermiere';
 $LDYesSure='Sì, dimetti il paziente.';
-$LDFtpAttempted='Il tentativo di connessione al server FTP è fallito:<br>potrebbe essere occupato o non disponibile. 
-							Se il problema persiste per parecchio tempo, contattare il CED.';
+$LDFtpAttempted='Il tentativo di connessione al server FTP è fallito:<br>potrebbe essere occupato o non disponibile.
+                                                        Se il problema persiste per parecchio tempo, contattare il CED.';
 $LDFtpNoLink='Login FTP fallito';
 $LDJustReleased='IL paziente è stato dimesso. Selezionare \'Chiudi\' per proseguire.';
 $LDReleaseType='Tipo di dimissione';
@@ -199,38 +199,38 @@ $LDHelp='Aiuto';
 $LDReset='Reset';
 
 $LDNoLabReport='Nessun referto di laboratorio disponibile!';
-$LDFeverCurve='Grafico andamento febbre';
+$LDFeverCurve='Grafiche e terapie';
 //$LDNursingReport='Referto infermieristico';
-$LDNursingReport='Referto inferm.';
-$LDDocsPrescription='Direttive mediche';
+$LDNursingReport='Diario infermieristico';
+$LDDocsPrescription='Indicazioni mediche';
 //$LDNursingPlan='Piano pers. infermieristico';
 $LDNursingPlan='Piano pers. inferm.';
 $LDRootData='Dati fondamentali';
-$LDReports='Referti di test';
+$LDReports='Referti';
 //$LDReports='Referti di laboratorio';
 $LDLabReports='Referti di labor.';
 //$LDLabReports='Referti di laboratorio';
-$LDPhotos='Foto';
-$LDChkUpRequests='Richiesta di check-up';
+$LDPhotos='Immagini diagnostiche';
+$LDChkUpRequests='Richiesta esami';
 $LDPleaseSelect='Scegliere il tipo di test diagnostico richiesto';
 $LDSetColorRider='Selezionare per assegnare o annullare il codice colore';
-$LDDiet='Pianificazione dieta';
+$LDDiet='Dieta';
 $LDBackDay='Indietro di un giorno. (tasto destro per inserire una data)';
 $LDFwdDay='Avanti di un giorno. (tasto destro per inserire una data)';
-$LDClk2PlanDiet='Selezionare la pianificazione dieta per questo giorno';
+$LDClk2PlanDiet='Selezionare la dieta per questo giorno';
 
 $LDAllergy='Allergia';
 $LDDiagnosisTherapy='Diagnosi / Terapia';
-$LDBpTemp='Temperatura/Pressione sanguigna';
-$LDPtAtgEtc='PT,Atg,etc';
-$LDAntiCoag='Anticoagulante/i';
+$LDBpTemp='Temperatura/Pressione arteriosa';
+$LDPtAtgEtc='Diuresi ed Alvo';
+$LDAntiCoag='Anticoagulanti';
 $LDExtraNotes='Annotazioni';
-$LDMedication='Medicazione';
-$LDIvPort='Endovena';
-$LDPtAtgEtcTxt='Terapia fisica, antitrombosi, etc.';
+$LDMedication='Terapia';
+$LDIvPort='Drenaggi';
+$LDPtAtgEtcTxt='Diuresi ed Alvo';
 $LDExtraNotesTxt='Annotazioni, LOT, etc.';
 
-$LDBp='Pressione sanguigna';
+$LDBp='Pressione arteriosa';
 $LDTemp='Temperatura';
 
 $LDClk2Enter='Selezionare per inserire ~tagword~';
@@ -239,38 +239,38 @@ $LDSpecialsExtra='Annotazioni, diagnosi aggiuntive';
 $LDClk2PlanDaily='Selezionare per inserire ~tagword~ per questo giorno';
 $LDInputWin='Finestra di input';
 $LDFullDayName=array(
-									'Domenica',
-									'Lunedì',
-									'Martedì',
-									'Mercoledì',
-									'Giovedì',
-									'Venerdì',
-									'Sabato',
-									'Domenica',
-									'Lunedì',
-									'Martedì',
-									'Mercoledì',
-									'Giovedì',
-									'Venerdì',
-									'Sabato',
-									'Domenica'
-									);
-$LDCurrentEntry='Voci correnti';
+                                                                        'Domenica',
+                                                                        'Lunedì',
+                                                                        'Martedì',
+                                                                        'Mercoledì',
+                                                                        'Giovedì',
+                                                                        'Venerdì',
+                                                                        'Sabato',
+                                                                        'Domenica',
+                                                                        'Lunedì',
+                                                                        'Martedì',
+                                                                        'Mercoledì',
+                                                                        'Giovedì',
+                                                                        'Venerdì',
+                                                                        'Sabato',
+                                                                        'Domenica'
+                                                                        );
+$LDCurrentEntry='FARMACO E DOSAGGIO';
 $LDEntryPrompt='Inserire qui le nuove informazioni';
 $LDConfirmSetDate='Si desidera impostare \'+dayID+\' ?';
 $LDStartDate='la data iniziale';
 $LDEndDate='la data finale';
-$LDShowCurveDate='Visualizza la curca con il seguente';
-$LDDailyDiagTher='Terapia, referti, piani di lavoro, etc.';
+$LDShowCurveDate='Visualizza la cura con il seguente';
+$LDDailyDiagTher='Glicemia - Insulina U.I.';
 $LDAntiCoagTxt='Anticoagulanti - rapporto giornaliero';
 $LDSFormatPrompt='Inserire qui le nuove informazioni o modificare quelle correnti:<br><font size=1 > massimo 16 caratteri.</font>';
-$LDDosage='Dosaggio';
+$LDDosage='ORARI SOMMINISTRAZIONE';
 $LDColorMark='Marcare con';
-$LDNormal='Normale';
-$LDAntibiotic='Antibiotico';
-$LDDialytic='Dialitico';
-$LDHemolytic='Emolitico';
-$LDIntravenous='Endovena';
+$LDNormal='Varia';
+$LDAntibiotic='Orale';
+$LDDialytic='Intramuscolo';
+$LDHemolytic='Sottocute';
+$LDIntravenous='Endovenosa';
 $LDTodaysReport='Rapporto di oggi';
 $LDNoMedicineYet='Non ci sono ancora medicinali!';
 $LDEffectReport='Rapporto sull\'efficacia';
@@ -339,8 +339,8 @@ $LD_ddpMMpyyyy='gg.mm.aaaa';
 $LD_yyyyhMMhdd='aaaa-mm-gg';
 $LD_MMsddsyyyy='mm/gg/aaaa';
 /* 2002-10-23 EL*/
-$LDQueryDoctor='Richieste per il medico';
-$LDDoctorInfo='Informazioni o istruzioni per il medico';
+$LDQueryDoctor='Richieste al medico';
+$LDDoctorInfo='Richieste dal medico';
 $LDDiagnosticsReport='Diagnosi pervenute';
 $LDInfusionTherapy='Programma/terapia di infusione';
 $LDMonitorFluidDischarge='Controllo dello scarico fluidi';
@@ -359,8 +359,8 @@ $LDNoDiagReport='Nessuna diagnosi disponibile.';
 $LDNursesList='Elenco personale infermieristico';
 $LDNursesListTxt='Visualizza, crea e modifica elenco infermieri';
 /* 2003-04-18 */
-$LDInsurance='Generale';
-$LDPrivate='Privato';
+$LDInsurance='A parziale carico SSN';
+$LDPrivate='A totale carico SSN';
 $LDSelfPay='A proprio carico';
 /* 2003-04-21 EL */
 $LDRoom='Stanza';
@@ -392,7 +392,7 @@ $LDNrOfBedsRoom='Il num. di letti della stanza';
 $LDIsNotANumber='non è un numero valido';
 $LDWaitingList='Lista d\'attesa';
 $LDShowAll='Mostra tutto'; # <= Pls. keep translation very short
-$LDShowWardOnly='Mostra corsia soltanto'; # <= Pls. keep translation very short
+$LDShowWardOnly='Mostra corsia'; # <= Pls. keep translation very short
 $LDTransferToBed='Trasferisci in un altro letto in questa corsia';
 $LDTransferToWard='Trasferisci in un altro reparto';
 $LDShowBeds='Mostra letti';
