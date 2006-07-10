@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
+* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
 * GNU General Public License
-* Copyright 2002,2003,2004,2005 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -271,7 +271,7 @@ if($bpcount||$tempcount){
  						 <tr>
    						 <td><input type="text" name="ttime'.$i.'" size=6 maxlength=5 value="'.$bb['msr_time'].'" onKeyUp="isvalidtime(this,\''.$lang.'\')">
         				</td>
-   						 <td class="v12"><input type="text" name="tdata'.$i.'" size=8 maxlength=7 value="'.$bb['value'].'">°C'.$GLOBAL_CONFIG['measure_temp_unit_id'].'</td>
+   						 <td class="v12"><input type="text" name="tdata'.$i.'" size=8 maxlength=7 value="'.$bb['value'].'">ï¿½C'.$GLOBAL_CONFIG['measure_temp_unit_id'].'</td>
   						</tr>
   						';
 			}

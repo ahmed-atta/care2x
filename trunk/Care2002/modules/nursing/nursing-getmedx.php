@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
+* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
 * GNU General Public License
-* Copyright 2002,2003,2004,2005 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -150,7 +150,7 @@ if($count){
   <tr bgcolor="#f6f6f6">
     <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDCurrentEntry; ?></td>
     <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDosage; ?></td>
-	<td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDNurse; ?></td>
+	<td <?php echo $tbg; ?>><FONT SIZE=-1 ï¿½FACE="Arial" color="#000066"><?php echo $LDNurse; ?></td>
   </tr>
 <?php
 	$toggle=0;
@@ -173,7 +173,7 @@ if($count){
   <tr  bgcolor="<?php echo $bgc; ?>"  valign="top">
     <td><FONT SIZE=-1  FACE="Arial"><?php if($row['article']) echo $row['article']; ?></td>
     <td><FONT SIZE=-1  FACE="Arial"><?php if($row['dosage']) echo $row['dosage']; ?></td>
-	<td><FONT SIZE=-1  FACE="Arial"><?php if($row['prescriber']) echo $row['prescriber']; ?></td>
+	<td><FONT SIZE=-1 ï¿½FACE="Arial"><?php if($row['prescriber']) echo $row['prescriber']; ?></td>
   </tr>
 
 <?php

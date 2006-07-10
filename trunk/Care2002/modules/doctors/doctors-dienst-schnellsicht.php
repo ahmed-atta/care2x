@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
+* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
 * GNU General Public License
-* Copyright 2002,2003,2004,2005 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -216,7 +216,7 @@ if(!$force_no_cache&&$is_cached){
 	
 	//if ($aelems[l]!="") echo $aelems[l].', ';
 	//echo $aelems[f].'</b></a></td>';
-	if(in_array($v['nr'],$quicklist)&&$DOC_1['name_last']){$temp_out.='<a href="javascript:popinfo(\''.$ha['ha'.(date('d')-1)].'\',\''.$v['nr'].'\')" title="Click für mehr Info."><b>'.$DOC_1['name_last'].', '.$DOC_1['name_first'].'</b></a>'; }
+	if(in_array($v['nr'],$quicklist)&&$DOC_1['name_last']){$temp_out.='<a href="javascript:popinfo(\''.$ha['ha'.(date('d')-1)].'\',\''.$v['nr'].'\')" title="Click fï¿½r mehr Info."><b>'.$DOC_1['name_last'].', '.$DOC_1['name_first'].'</b></a>'; }
 	$temp_out.='</td>
 	<td>';
 	if ($a['a'.(date('d')-1)]!='') 
@@ -227,7 +227,7 @@ if(!$force_no_cache&&$is_cached){
 	$temp_out.='&nbsp;</td><td >
 	<img '.createComIcon($root_path,'mans-red.gif','0','',TRUE).'>&nbsp;';
 
-	if(in_array($v['nr'],$quicklist)&&$DOC_2['name_last']){$temp_out.='<a href="javascript:popinfo(\''.$hr['hr'.(date('d')-1)].'\',\''.$v['nr'].'\')" title="Click für mehr Info."><b>'.$DOC_2['name_last'].', '.$DOC_2['name_first'].'</b></a>';}
+	if(in_array($v['nr'],$quicklist)&&$DOC_2['name_last']){$temp_out.='<a href="javascript:popinfo(\''.$hr['hr'.(date('d')-1)].'\',\''.$v['nr'].'\')" title="Click fï¿½r mehr Info."><b>'.$DOC_2['name_last'].', '.$DOC_2['name_first'].'</b></a>';}
 	$temp_out.='</td>
 	<td>';
 	if ($r['r'.(date('d')-1)]!='') 

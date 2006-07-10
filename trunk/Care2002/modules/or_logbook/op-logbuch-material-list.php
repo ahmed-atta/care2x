@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
+* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
 * GNU General Public License
-* Copyright 2002,2003,2004,2005 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -22,7 +22,7 @@ $core = & new Core;
 $parsedstr=array();
 $globdata="sid=$sid&lang=$lang&op_nr=$op_nr&dept_nr=$dept_nr&saal=$saal&enc_nr=$enc_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear";
 // clean the input data
-$material_nr=strtr($material_nr,"§%&?/\+*~#';:,!$","                ");// convert chars to (15) spaces
+$material_nr=strtr($material_nr,"ï¿½%&?/\+*~#';:,!$","                ");// convert chars to (15) spaces
 $material_nr=trim($material_nr);
 //$material_nr=str_replace(" ","",$material_nr);
 

@@ -3,9 +3,9 @@
  require('./roots.php');
  require($root_path.'include/inc_environment_global.php');
  /**
- * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
+ * CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
  * GNU General Public License
- * Copyright 2002,2003,2004,2005 Elpidio Latorilla
+ * Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
  * elpidio@care2x.org, 
  *
  * See the file "copy_notice.txt" for the licence notice
@@ -52,7 +52,7 @@
   /* Load date formatter */
   include_once($root_path.'include/inc_date_format_functions.php');
 	
-	# Get the wards´ info
+	# Get the wardsï¿½ info
     $sql="SELECT nr,ward_id,name,room_nr_start,room_nr_end	
 				FROM $dbtable
 				WHERE is_temp_closed IN ('',0) 
@@ -65,7 +65,7 @@
 	}else{echo "$sql<br>$LDDbNoRead";}
 
 
-	# Get the rooms´ info
+	# Get the roomsï¿½ info
   $sql="SELECT SUM(r.nr_of_beds) AS maxbed
 			FROM $dbtable AS w LEFT JOIN care_room AS r   ON r.ward_nr=w.nr
 			WHERE w.is_temp_closed IN ('',0)
@@ -78,7 +78,7 @@
 		$roomcount=$rooms->RecordCount();
 	}else{echo "$sql<br>$LDDbNoRead";}
 
-	# Get the today´s occupancy
+	# Get the todayï¿½s occupancy
   $sql="SELECT  COUNT(l.location_nr) AS maxoccbed, w.nr AS ward_nr
           FROM $dbtable AS w
      LEFT JOIN care_encounter_location AS l ON l.group_nr=w.nr AND l.type_nr=5 ";

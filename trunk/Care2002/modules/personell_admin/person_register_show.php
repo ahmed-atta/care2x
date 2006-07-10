@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
+* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
 * GNU General Public License
-* Copyright 2002,2003,2004,2005 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -74,7 +74,7 @@ require('./gui_bridge/default/gui_tabs_personell_reg.php');
 
 <?php
 
-	# Display the person´s demographic data using the object class class_gui_person_show.php
+	# Display the personï¿½s demographic data using the object class class_gui_person_show.php
 
 	require_once($root_path.'include/care_api_classes/class_gui_person_show.php');
 	$person = & new GuiPersonShow;

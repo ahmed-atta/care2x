@@ -5,7 +5,7 @@ require($root_path.'include/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
-* Copyright 2002,2003,2004,2005 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
 * , elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -79,13 +79,13 @@ if(($mode=='')||($mode=='fresh')){
 	# set to edit mode
 	$edit=true;
 	
-		# Create the waiting outpatients´ list
+		# Create the waiting outpatientsï¿½ list
 		$dnr=(isset($w_waitlist)&&$w_waitlist) ? 0 : $dept_nr;
 		$waitlist=&$enc_obj->createWaitingOutpatientList($dnr);
 		$waitlist_count=$enc_obj->LastRecordCount();
 		//echo $waitlist_count.'<p>'.$enc_obj->getLastQuery();
 		
-		# Get the doctor´s on duty information
+		# Get the doctorï¿½s on duty information
 		#### Start of routine to fetch doctors on duty
 		$elem='duty_1_pnr';
 		if(SHOW_DOC_2) $elem.=',duty_2_pnr';
@@ -533,7 +533,7 @@ while ($patient=$opat_obj->FetchRow()){
 		$occ_list.=' alt="'.$LDNoticeRW.'"></a>';
 		$occ_list.='&nbsp;<a href="javascript:Transfer(\''.$patient['encounter_nr'].'\')" title="'.$LDTransferPatient.'"><img '.createComIcon($root_path,'xchange.gif','0').' alt="'.$LDTransferPatient.'"></a>
 		 <a href="javascript:release(\''.$patient['encounter_nr'].'\')" title="'.$LDReleasePatient.'"><img '.createComIcon($root_path,'bestell.gif','0').' alt="'.$LDReleasePatient.'"></a>';
-		 //<a href="javascript:deletePatient(\''.$helper[r].'\',\''.$helper[b].'\',\''.$helper[t].'\',\''.$helper[ln].'\')"><img src="../img/delete.gif" border=0 width=19 height=19 alt="Löschen (Passwort erforderlich)"></a>';
+		 //<a href="javascript:deletePatient(\''.$helper[r].'\',\''.$helper[b].'\',\''.$helper[t].'\',\''.$helper[ln].'\')"><img src="../img/delete.gif" border=0 width=19 height=19 alt="Lï¿½schen (Passwort erforderlich)"></a>';
 
 		 $occ_list.='</nobr>
 	 	</td>

@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
+* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
 * GNU General Public License
-* Copyright 2002,2003,2004,2005 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -567,7 +567,7 @@ echo '
     </tr>';
  /*   <tr>
       <td bgcolor="#f3f3f3" align=right><FONT face="Verdana,Helvetica,Arial" size=2 color="#000080">Anhang:</td>
-      <td  bgcolor="#f3f3f3"><input type="button" name="attach"  value="Einfügen/Aktualisieren" ></td>
+      <td  bgcolor="#f3f3f3"><input type="button" name="attach"  value="Einfï¿½gen/Aktualisieren" ></td>
     </tr>
 */
  		echo'

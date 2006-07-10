@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
+* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
 * GNU General Public License
-* Copyright 2002,2003,2004,2005 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -116,7 +116,7 @@ while (false!==($theme = readdir($handle))) {
 ?>
   
 	<tr class="submenu">
-		<td>&nbsp;<input type="radio" name="control_buttons" value="<?php echo $theme; ?>" <?php if($cfg['control_buttons'] == $theme) echo 'checked'; ?>></td>
+		<td>&nbsp;<input type="radio" name="control_buttons" value="<?php echo $theme; ?>" <?php if($cfg['control_buttons'] == $theme) echo 'checked';ï¿½?>></td>
 		<td>&nbsp;<b><?php echo $sControlButtonsThemeName; ?></b></td>
 		<td>&nbsp;
 		<img src="<?php echo $root_path."gui/img/control/$theme/$lang/$lang"."_back2.gif"; ?>">

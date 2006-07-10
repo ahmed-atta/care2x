@@ -5,13 +5,13 @@ require($root_path.'include/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
-* Copyright 2002,2003,2004,2005 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
 */
 
-$logo_ht_limit=50; # Maximum deparment logo´s height in pixels
+$logo_ht_limit=50; # Maximum deparment logoï¿½s height in pixels
 
 # Load the encounter class
 require_once($root_path.'include/care_api_classes/class_encounter.php');

@@ -11,7 +11,7 @@ require($root_path.'include/inc_environment_global.php');
 /**
 * CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
-* Copyright 2002,2003,2004,2005 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
 * , elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -32,7 +32,7 @@ include_once($root_path.'include/inc_t1ps_ar2uni.php');
 
 $insurance_obj=new PersonInsurance;
 $person_obj=& new Person($pid);
-# Get the person´s data
+# Get the personï¿½s data
 if($person_obj->preloadPersonInfo($pid)){
 	$person=$person_obj->person;
 	# copy to encounter variable 
@@ -64,7 +64,7 @@ if (isset($$insurance_class['LD_var'])&&!empty($$insurance_class['LD_var'])) $in
     else $insclass=$insurance_class['name']; 
 
 
-# Get the global config for person´s registration form*/
+# Get the global config for personï¿½s registration form*/
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 $GLOBAL_CONFIG=array();
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);

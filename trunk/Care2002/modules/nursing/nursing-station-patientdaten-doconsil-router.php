@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
+* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
 * GNU General Public License
-* Copyright 2002,2003,2004,2005 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -17,7 +17,7 @@ if($edit&&!$HTTP_COOKIE_VARS[$local_user.$sid]) {header('Location:'.$root_path.'
 require_once($root_path.'include/inc_config_color.php'); // load color preferences
 $target='';
 
-# The mapping of department id´s with the forms´ id´s must be done here
+# The mapping of department idï¿½s with the formsï¿½ idï¿½s must be done here
 # The department id is forwarded to this script in   the format  "nr~string" or e.g "12~pediatrics"
 
 $nrbuf=explode('~',$dept_id);

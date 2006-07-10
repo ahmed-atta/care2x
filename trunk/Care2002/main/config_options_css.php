@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
+* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
 * GNU General Public License
-* Copyright 2002,2003,2004,2005 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -114,7 +114,7 @@ while (false!==($theme = readdir($handle))) {
 ?>
   
 	<tr class="submenu">
-		<td>&nbsp;<input type="radio" name="css" value="<?php echo $sCssFileLocation; ?>" <?php if($cfg['css'] == $sCssFileLocation) echo 'checked'; ?>></td>
+		<td>&nbsp;<input type="radio" name="css" value="<?php echo $sCssFileLocation; ?>" <?php if($cfg['css'] == $sCssFileLocation) echo 'checked';ï¿½?>></td>
 		<td>&nbsp;<b><?php echo $sCssThemeName; ?></b></td>
 		<td>&nbsp;<?php echo $sCssDescription; ?></td>
 		<td>&nbsp;<?php if(!empty($sCssScreenShot)) echo '<a href="'.$root_path.'css/themes/'.$sCssScreenShot.'" target="_blank">'.$sCssScreenShot.'</a>'; ?></td>
