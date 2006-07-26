@@ -3,47 +3,18 @@ Care2X - News
 
 
 
-Patch B-2.1.7.1 for 2nd Generation beta version 2.1.7
---------------------------------------------------------
-
-A. Translations
-
-  * Updated Italian translation
-
-Credits
-
-  * Claudio Giulio Torbinio (IT)
-
-Kaloyan Raev (2006-07-09)
-    
-    
-2nd Generation beta 2.1.7 version
-------------------------------------
+2nd Generation Deployment 2.2 version
+----------------------------------------
 
 A. Improvements and Fixes
 
-  * Main menu visibility according to the user's permissions. 
-
-Credits
-
-  * Daniele Palmas (IT)
-
-    Kaloyan Raev (2006-07-08)
-
-
-2nd Generation beta 2.1.6 version
-------------------------------------
-
-A. Improvements and Fixes
-
+  * Better Turkish language support of ttf fonts and phppdf.
+  * Incompatibilies with MySQL 5.0 fixed in the sql queries. 
+  * Fix the type of the modify_id field in the care_menu_main DB table.
+  * Fixes in the text layout of the Arabian languages.
+  * Fix sql incompatibility with postgre in several classes.
+  * Fix sql incompatibility with postgre in the Turkish ICD10 script.
   * Add missing files of the nocc module. 
-  * Updated version of the Turkish ICD10. 
-  * Small syntax bugs corrected in the icd10 csv files. 
-  * Update the new graphical installer. The installer now works ok on MySQL 4+ 
-and PostgreSQL 7.4+. Look & feel is updated to look more like Care2x. 
-  * Delete old installer. The new graphical installer replace it completely. 
-  * Rename INSTALL_ file to INSTALL. This is now possible because the install/ 
-directory is already removed. 
   * Implement check in the index.php if Care2x needs to be installed. If Care2x 
 is not yet installed, the user is redirected automatically to the installer 
 page. 
@@ -51,34 +22,30 @@ page.
 Corresponding language variables also deleted from lang_xx_create_admin.php 
 files. 
   * Add all empty write-access directories under version control. 
+  * Main menu visibility according to the user's permissions. 
 
-Credits
+B. Coding System
 
-  * Dr. Bülent Potur (TR)
-  * Kaloyan Raev (BG)
+  * Turkish ICD10
 
-    Kaloyan Raev (2006-04-30)
+      * Updated version with more records. 
+      * Duplicated key removed in the installation sql script, which prevented 
+the proper installation of the Turkish ICD10 table.
+      * Some improvements in the translation.
+      
+C. Language and Help files
 
+  * Improved Arabian translation
+  * Updated Italian translation
+  
+D. New graphical installer.
 
-2nd Generation beta 2.1.5 version
-------------------------------------
-
-A. Improvements and Fixes
-
-  * Fix sql incompatibility with postgre in several classes.
-  * Fix sql incompatibility with postgre in the Turkish ICD10 script.
-  * The 'create db table' action in the installation script now has completely 
-abstract adodb implementation.
-
-B. New (experimental) installer.
-
-  * The new installer can be accessed under alias /installer. The old one is 
-still available under /install.
-  * For now works only with MySQL 4.
+  * The new installer can be accessed under alias /installer. The old one under /install is removed.
+  * Works with both MySQL 4+ and PostgreSQL 7.4+.
   * The installer is cloned and extended with new features from the installer 
 of the MirrorMed project.
   * Main features:
-
+  
         * Based on Object Oriented Framework that allows the installer to be 
 easily extended.
         * Logical flow of the installation process made in steps: Collect Data, 
@@ -91,65 +58,12 @@ the number of erroneous installations.
 Credits
 
   * Dr. Bülent Potur (TR)
+  * Claudio Giulio Torbinio (IT)
+  * Daniele Palmas (IT)
   * Kaloyan Raev (BG)
-
-    Kaloyan Raev (2006-02-16)
-
-
-2nd Generation beta 2.1.4 version
-------------------------------------
-
-A. Improvements and Fixes
-
-  * Fix the type of the modify_id field in the care_menu_main DB table.
-  * Fixes in the text layout of the Arabian languages.
-
-B. Language and Help files
-
-  * Improved Arabian translation
-
-Credits
-
   * Tarek Alwerfally (LY)
 
-    Kaloyan Raev (2005-12-18)
-
-
-2nd Generation beta 2.1.3 version 
-------------------------------------
-
-A. Improvements
-
-  * Incompatibilies with MySQL 5.0 fixed in the sql queries.
-
-B. Coding System
-
-  * Turkish ICD10
-
-      * Duplicated key removed in the installation sql script, which prevented 
-the proper installation of the Turkish ICD10 table.
-      * Some improvements in the translation.
-
-Credits
-
-  * Dr. Bülent Potur (TR)
-  * Kaloyan Raev (BG)
-
-    Kaloyan Raev (2005-12-09)
-
-
-2nd Generation beta 2.1.2 version
-------------------------------------
-
-A. Improvements
-
-  * Better Turkish language support of ttf fonts and phppdf.
-
-Credits
-
-  * Dr. Bülent Potur (TR)
-
-    Kaloyan Raev (2005-11-20)
+    Kaloyan Raev (2006-07-26)
     
 
 Patch D-2.1.0.2 for Care2x Deployment version 2.1 
