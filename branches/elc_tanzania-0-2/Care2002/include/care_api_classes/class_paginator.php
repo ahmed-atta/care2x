@@ -246,7 +246,7 @@ class Paginator {
 	* Sets the sort order field name.
 	* @param string Field name to sort
 	*/
-	function setSortItem($item){
+	function setSortItem($item){ 
 		$this->sort_item=$item;
 	}
 	/**

@@ -73,7 +73,9 @@ class Diagnostics extends Encounter {
                       OR
                       `".$this->tbl_col_content."` like '".$keyword."%'
                       OR
-                      `".$this->tbl_col_content."` like '%".$keyword."%'";
+                      `".$this->tbl_col_content."` like '%".$keyword."%'
+                      OR `diagnosis_code` like '%".$keyword."%'
+                ORDER BY `".$this->tbl_col_content."`";
 		}
     return $db->Execute($this->sql);
     
@@ -86,7 +88,7 @@ class Diagnostics extends Encounter {
     
 
     global $db;
-    $debug=false;
+    $debug=FALSE;
     ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
     
     if ($debug) echo "class_tz_diagnostics::get_array_select_results starts here<br>";
@@ -102,18 +104,17 @@ class Diagnostics extends Encounter {
 
     // Create the temporary table:
     $this->sql="CREATE TEMPORARY TABLE ".$this->tbl_temp." (
-                `ID` BIGINT NOT NULL AUTO_INCREMENT ,
                 `code` VARCHAR( 10 ) ,
-                `content` VARCHAR(255) ,
                 `nice` INT UNSIGNED,
-                PRIMARY KEY ( `ID` ) ,
+                `content` VARCHAR(255) ,                
                 INDEX ( `code` )
                 ) TYPE = HEAP ";
     // Get at first a list of all item_numbers
     $db->Execute($this->sql);
     
     if ($debug) 
-      $this->sql="SELECT `".$this->tbl_col_code."`, `".$this->tbl_col_content."` FROM ".$this->tbl ." LIMIT 1,100";
+      //$this->sql="SELECT `".$this->tbl_col_code."`, `".$this->tbl_col_content."` FROM ".$this->tbl ." where diagnosis_code LIKE \"B5%\" LIMIT 1,100";
+      $this->sql="SELECT `".$this->tbl_col_code."`, `".$this->tbl_col_content."` FROM ".$this->tbl;
     else
         $this->sql="SELECT `".$this->tbl_col_code."`, `".$this->tbl_col_content."` FROM ".$this->tbl;
     $this->rs_tbl=$db->Execute($this->sql);
@@ -124,7 +125,7 @@ class Diagnostics extends Encounter {
     
     if ($debug) echo "class_tz_diagnostics::get_array_select_results -> keyword >".$keyword."< is slpitted into ".count($this->arr_keywords)." words<br>";
 
-    
+    $this->EXACT_MATCH=FALSE;
 
     while ($this->row_elem = $this->rs_tbl->FetchRow()) {
       if ($debug) echo "class_tz_diagnostics::get_array_select_results -> reading to the description >>".$this->row_elem[$this->tbl_col_content]."<<<br>";
@@ -146,6 +147,7 @@ class Diagnostics extends Encounter {
             if ($debug) echo "compare:".$keyword_value."<->".$content_value.":";
             if (strcmp($content_value,$keyword_value)==0) {
               $this->nice_factor=100;
+              $this->EXACT_MATCH=TRUE;
               array_push($this->arr_nice_factor,"100");
               if ($debug) echo "<b>WOUW</b>:".$keyword_value." with ".$content_value." gives a nice factor of:".$this->nice_factor."<br>";
               continue 2;
@@ -154,9 +156,23 @@ class Diagnostics extends Encounter {
               $m2=metaphone(strtolower($content_value));
               //echo "<br>".$m1."::".$m2."<br>";
               //$nix=similar_text($m1,$m2,$this->nice_factor);
-              $levenshtein=levenshtein($keyword_value,$content_value);
+              $levenshtein=levenshtein(strtolower($keyword_value),strtolower($content_value));
+              
               if ($debug) echo $levenshtein."<br>";
-              $this->nice_factor = ($levenshtein/strlen($keyword_value));
+              
+              // Step 1: Function value of levensthein comparison:
+              $this->nice = - 1/2 * $levenshtein + strlen($keyword_value);
+              
+              // Step 2: Percent value of levensthein comparison:
+              $this->nice_factor = 100/strlen($keyword_value)*$this->nice;
+              
+              // By more exact hits increase the nice value more higher than the exact percent match
+              if ($this->nice_factor > 90) $this->nice_factor=500;
+              if ($this->nice_factor >= 75) $this->nice_factor=200;
+              
+              
+              //$this->nice_factor = ($levenshtein/strlen($keyword_value));
+              
               if ($this->nice_factor) {
                 array_push($this->arr_nice_factor,$this->nice_factor);
                 if ($debug) echo "<u>".$keyword_value."</u> with <u>".$content_value."</u> gives a nice factor of:".$this->nice_factor."<br>";
@@ -167,20 +183,30 @@ class Diagnostics extends Encounter {
         } // end of while (list($content_index,$content_value) = each ( $this->arr_tbl_col_content ) 
       } // (list($keyword_index,$keyword_value) = each ($this->arr_keywords))
       
-      // average of levensthein values:
-      
-      $this->nice_factor=0;
-      for ($i=0; $i < count($this->arr_nice_factor); $i++) 
-        $this->nice_factor = $this->nice_factor + ( 1 / $this->arr_nice_factor[$i]);
-      $this->nice_factor = 1 / count($this->arr_nice_factor) * ( $this->nice_factor );
-      $this->nice_factor = 1/ $this->nice_factor;
+      // If there is an exact match:
+      if (!$this->EXACT_MATCH) {
+        // average of levensthein values:
+        $this->nice_factor=0;
+        /*
+        for ($i=0; $i < count($this->arr_nice_factor); $i++) 
+          $this->nice_factor = $this->nice_factor + ( 1 / $this->arr_nice_factor[$i]);
+        $this->nice_factor = 1 / count($this->arr_nice_factor) * ( $this->nice_factor );
+        $this->nice_factor = 1/ $this->nice_factor;
+        */
+        for ($i=0; $i < count($this->arr_nice_factor); $i++) 
+          $this->nice_factor = $this->nice_factor + $this->arr_nice_factor[$i];
+        $this->nice_factor = $this->nice_factor / count($this->arr_nice_factor)  ;
+      } else {
+        $this->nice_factor=1000;
+      }
       
       if ($debug) echo "=".$this->nice_factor."<br>";      
       
       if ($this->nice_factor) {
-        $this->sql="INSERT INTO ".$this->tbl_temp." (`code`,`nice`, `content`) VALUES ('".$this->row_elem[$this->tbl_col_code]."','".round($this->nice_factor,0)."','".$this->row_elem[$this->tbl_col_content]."')";
+        $this->sql="INSERT INTO ".$this->tbl_temp." (`code`,`nice`, `content`) VALUES ('".$this->row_elem[$this->tbl_col_code]."',".round($this->nice_factor,0).",'".$this->row_elem[$this->tbl_col_content]."')";
         if ($debug) echo $this->sql."<br>";
         $db->Execute($this->sql);
+        $this->EXACT_MATCH=FALSE; // Reset the exact match flag
       }
       $this->arr_nice_factor=array();
       
@@ -189,7 +215,7 @@ class Diagnostics extends Encounter {
 
       
     } // end of while ($this->row_elem = $this->rs_tbl->FetchRow())
-      $this->sql="SELECT code,nice,content FROM ".$this->tbl_temp." ORDER BY nice DESC LIMIT 0,20";
+      $this->sql="SELECT code,nice,content FROM ".$this->tbl_temp." ORDER BY nice DESC LIMIT 0,40";
       return $db->Execute($this->sql);
   }
   }
@@ -262,7 +288,7 @@ class Diagnostics extends Encounter {
     $debug=FALSE;
     ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
 
-    $this->sql = "SELECT $this->tbl_groups_id,$this->tbl_groups_description FROM $this->tbl_groups WHERE $this->tbl_groups_parent = '-1'";
+    $this->sql = "SELECT $this->tbl_groups_id,$this->tbl_groups_description FROM $this->tbl_groups WHERE $this->tbl_groups_parent = '-1' ORDER BY $this->tbl_groups_description";
     $this->rs = $db->Execute($this->sql);
     return $this->rs;
   }
@@ -279,12 +305,12 @@ class Diagnostics extends Encounter {
   //------------------------------------------------------------------------------
   function GetDiagnosisGroupItems ($grupID) {
     global $db;
-    $debug=FALSE;
+    $debug=TRUE;
     ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
     if ($debug) echo "calling: GetDiagnosisGroupItems<br>";
     if (empty($grupID))
       return FALSE;
-    $this->sql = "SELECT $this->tbl_groups_code FROM $this->tbl_groups WHERE $this->tbl_groups_parent = '".$grupID."' ORDER BY $this->tbl_groups_description ASC, $this->tbl_groups_code ASC";
+    $this->sql = "SELECT $this->tbl_groups_code FROM $this->tbl_groups WHERE $this->tbl_groups_parent = '".$grupID."' ORDER BY $this->tbl_groups_description ASC";
     echo $this->sql;
     $this->rs = $db->Execute($this->sql);
     if($this->rs!=-1) {

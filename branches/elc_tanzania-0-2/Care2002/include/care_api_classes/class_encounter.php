@@ -81,6 +81,11 @@ class Encounter extends Notes {
 	*/
 	var $tb_appt='care_appointment';
 	/**
+	* Table name for laboratory data
+	* @var string
+	*/
+	var $tb_chemlabor='care_test_request_chemlabor';
+	/**
 	* Current encounter number
 	* @var int
 	*/
@@ -1348,7 +1353,7 @@ class Encounter extends Notes {
 	*
 	*
 	* @param string Search keyword
-	* @param int Encounter class number. default = 0
+	* @param int Encounter class number. default = 0 (2=just for laboratory issues)
 	* @param string Optional addtion to WHERE clause like e.g. for sorting
 	* @param boolean  Flag whether the select query is limited or not, default FALSE = unlimited
 	* @param int Maximum number or rows returned in case of limited select, default = 30 rows
@@ -1357,32 +1362,52 @@ class Encounter extends Notes {
 	*/
 	function _searchAdmissionBasicInfo($key,$enc_class=0,$add_opt='',$limit=FALSE,$len=30,$so=0){
 		global $db,$sql_LIKE;
-		
-
-		//if(empty($key)) return FALSE;
-		$this->sql="SELECT e.encounter_nr, e.encounter_class_nr, p.pid, p.name_last, p.name_first, p.date_birth, p.addr_zip, p.sex,p.blood_group
-				FROM $this->tb_enc AS e LEFT JOIN $this->tb_person AS p ON e.pid=p.pid";
-
+		$db->debug=FALSE;
+		if ($db->debug) echo "_searchAdmissionBasicInfo is called with enc_class=".$enc_class."<br>";
+		if ($enc_class==2) {
+			$this->sql="SELECT DISTINCT p.selian_pid, rc.batch_nr, e.encounter_nr, e.encounter_class_nr, p.pid, p.name_last, p.name_first, p.date_birth, p.selian_pid, p.sex,p.blood_group
+					FROM $this->tb_enc AS e LEFT JOIN $this->tb_person AS p ON e.pid=p.pid " .
+							"				INNER JOIN $this->tb_chemlabor as rc ON e.encounter_nr=rc.encounter_nr";
+		} else {
+			$this->sql="SELECT e.encounter_nr, e.encounter_class_nr, p.pid, p.name_last, p.name_first, p.date_birth, p.selian_pid, p.sex,p.blood_group
+					FROM $this->tb_enc AS e LEFT JOIN $this->tb_person AS p ON e.pid=p.pid";
+		}
 		if(is_numeric($key)){
+			if ($db->debug) echo " -> the key is nummeric<br>";
 			$key=(int)$key;
-			$this->sql.=" WHERE e.encounter_nr = $key AND  e.is_discharged IN ('',0)".$add_opt;
+			if ($enc_class==2) {
+				$this->sql.=" WHERE (e.encounter_nr = $key OR p.pid = $key OR p.selian_pid = $key OR rc.batch_nr $sql_LIKE '$key%' ) ".$add_opt;
+			} else {
+				$this->sql.=" WHERE (e.encounter_nr = $key OR p.pid = $key OR p.selian_pid = $key) AND  e.is_discharged IN ('',0)".$add_opt;
+			}
 		}elseif($key=='%'||$key=='*'){
-			$this->sql.=" WHERE e.is_discharged IN ('',0) AND e.status NOT IN ($this->dead_stat) ".$add_opt;
+			if ($db->debug) echo " -> the joker is given as search key<br>";
+			if ($enc_class==2) {	
+				$this->sql.=" WHERE e.status NOT IN ($this->dead_stat) ".$add_opt;
+			} else {
+				$this->sql.=" WHERE e.is_discharged IN ('',0) AND e.status NOT IN ($this->dead_stat) ".$add_opt;
+			}
 		}else{
+			if ($db->debug) echo " -> we have to search in a text comparision<br>";	
 			$this->sql.=" WHERE (e.encounter_nr $sql_LIKE '$key%'
 						OR p.pid $sql_LIKE '$key%'
 						OR p.name_last $sql_LIKE '$key%'
 						OR p.name_first $sql_LIKE '$key%'
-						OR p.date_birth $sql_LIKE '$key%')";
-			if($enc_class) $this->sql.="	AND e.encounter_class_nr=$enc_class";
-			$this->sql.="  AND  e.is_discharged IN ('',0) AND e.status NOT IN ($this->dead_stat) ".$add_opt;
+						OR p.date_birth $sql_LIKE '$key%'
+						)";
+			if($enc_class==1) $this->sql.="	AND e.encounter_class_nr=$enc_class";
+			if ($enc_class==2) {
+				$this->sql.="  AND e.status NOT IN ($this->dead_stat) ".$add_opt;
+			} else {
+				$this->sql.="  AND  e.is_discharged IN ('',0) AND e.status NOT IN ($this->dead_stat) ".$add_opt;
+			}
 		}
-
-		if($limit){
+		if($limit){ 
 	    	$this->res['sabi']=$db->SelectLimit($this->sql,$len,$so);
 		}else{
 	    	$this->res['sabi']=$db->Execute($this->sql);
 		}
+		
 	    if ($this->res['sabi']){
 		   	if ($this->record_count=$this->res['sabi']->RecordCount()) {
 				$this->rec_count=$this->record_count; # workaround
@@ -1465,6 +1490,32 @@ class Encounter extends Notes {
 		return $this->_searchAdmissionBasicInfo($key,0,$option); // 0 = all kinds of admission
 	}
 	/**
+	* Search returning the laboratory admission information as outlined at <var>_searchAdmissionBasicInfo()</var>.
+	*
+	* This method gives the possibility to sort the results based on an item and sorting direction.
+	* @access public
+	* @param string Search keyword
+	* @param string Item as sort basis
+	* @param string Sorting direction. ASC = ascending, DESC  = descending, empty = ascending
+	* @return mixed adodb record object or boolean
+	*/
+	function searchEncounterLaboratoryInfo($key,$sortitem='',$order=''){
+		if(!empty($sortitem)){
+			$option=' ORDER BY ';
+			switch($sortitem){
+				case 'LASTNAME': $option.=' p.name_last '; break;
+				case 'FIRSTNAME': $option.=' p.name_first '; break;
+				case 'ENCNR': $option.=' e.encounter_nr '; break;
+				case 'BDAY': $option.=' p.date_birth '; break;
+				default: $option.='';
+			}
+			$option.=$order;
+		}
+		return $this->_searchAdmissionBasicInfo($key,2,$option); // 0 = all kinds of admission
+	}
+
+
+	/**
 	* Limited results search returning basic information as outlined at <var>_searchAdmissionBasicInfo()</var>.
 	*
 	* This method gives the possibility to sort the results based on an item and sorting direction.
@@ -1482,6 +1533,14 @@ class Encounter extends Notes {
 		}
 		return $this->_searchAdmissionBasicInfo($key,0,$option,TRUE,$len,$so); // 0 = all kinds of admission
 	}
+	
+	function searchPatientWithPendingLabResults($key,$len,$so,$sortitem='',$order='ASC'){
+		if(!empty($sortitem)){
+			$option=" ORDER BY $sortitem $order";
+		} 
+		return $this->_searchAdmissionBasicInfo($key,2,$option,TRUE,$len,$so); // 2 = just a list for discharged pat. having pend. Lab Req.
+	}
+	
 	/**
 	* Search for inpatients who are not yet finally admittd in ward, returning basic information as outlined at <var>_searchAdmissionBasicInfo()</var>.
 	*
@@ -1721,6 +1780,7 @@ class Encounter extends Notes {
 	*/
 	function _setCurrentAssignment($enr,$data='',$act='Modified'){
 		global $HTTP_SESSION_VARS, $dbtype;
+		//echo $data; 
 		if(!$enr||empty($data)) return FALSE;
 		/*
 		if($dbtype=='mysql'){
@@ -1731,9 +1791,9 @@ class Encounter extends Notes {
 		*/
 		$data.=",history=".$this->ConcatHistory("\n$act ".date('Y-m- H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']).", ";
 		$data.="	modify_id='".$HTTP_SESSION_VARS['sess_user_name']."',
-				modify_time='".date('YmdHis')."'";
+				modify_time='".date('YmdHis')."', in_dept=1 ";
 		$this->sql="UPDATE $this->tb_enc SET $data WHERE encounter_nr=$enr";
-		//echo $this->sql;
+		//echo "<br>_setCurrentAssignment :".$this->sql."<br>";
 		return $this->Transact($this->sql);
 	}
 	/**
@@ -1774,6 +1834,7 @@ class Encounter extends Notes {
 	* @return boolean
 	*/
 	function setCurrentDept($enr,$assign_nr){
+	  //echo "<br>setCurrentDept::current_dept_nr=$assign_nr<br>";
 		return $this->_setCurrentAssignment($enr,"current_dept_nr=$assign_nr",'Set dept');
 	}
 	/**
@@ -1822,6 +1883,7 @@ class Encounter extends Notes {
 	* @return boolean
 	*/
 	function resetCurrentDept($enr){
+	  //echo "<br>resetCurrentDept($enr)";
 		return $this->_setCurrentAssignment($enr,"current_dept_nr=0,in_dept=0",'Reset current dept');
 	}
 	/**
@@ -1982,10 +2044,11 @@ class Encounter extends Notes {
             $this->sql.= "history =".$this->ConcatHistory("Update (discharged): ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n").",";
             $this->sql.=" modify_id='".$HTTP_SESSION_VARS['sess_user_name']."'
 							WHERE encounter_nr=$enr AND type_nr IN ($loc_types) AND date_to ='$dbf_nodate'";
+							//echo $this->sql;
 		if($this->Transact($this->sql)){
            return true;
         }else{
-              //echo $this->sql;
+              
               return FALSE;
          }
 		//return $this->Transact($this->sql);
@@ -2018,8 +2081,9 @@ class Encounter extends Notes {
 	*/
 	function DischargeFromDept($enr,$d_type_nr,$date='',$time='',$rst_enc=1){
 		if($this->_discharge($enr,"'1','2','3','4','5','6'",$d_type_nr,$date,$time)){
+		  //echo "<br>patient dischared now<br>";
 			return $this->resetCurrentDept($enr);
-		}
+		} 
 	}
 	/**
 	* Complete discharge of patient from the ward but patient remains admitted.
@@ -2257,7 +2321,7 @@ class Encounter extends Notes {
 		if($dept_nr) $cond="e.current_dept_nr=$dept_nr AND";
 			else $cond='';
 			//$cond='';
-		$this->sql="SELECT e.encounter_nr,e.pid,e.insurance_class_nr,p.title,p.name_last,p.name_first,p.date_birth,p.sex, p.photo_filename,
+		$this->sql="SELECT e.encounter_nr, e.encounter_date, e.pid,e.insurance_class_nr,p.title,p.name_last,p.name_first,p.date_birth,p.sex, p.photo_filename,
 									a.date, a.time,a.urgency, i.LD_var AS \"LD_var\",i.name AS insurance_name,
 									n.nr AS notes
 							FROM $this->tb_enc AS e  
@@ -2268,7 +2332,7 @@ class Encounter extends Notes {
 							WHERE $cond e.encounter_class_nr=2 AND
 									(e.is_discharged='' OR e.is_discharged=0)  AND
 									e.in_dept<>'' AND e.in_dept<>0 AND e.status NOT IN ($this->dead_stat)
-							ORDER BY e.encounter_nr";
+							ORDER BY name_last,p.name_first ASC";
 							/*							GROUP BY e.encounter_nr,e.pid,e.insurance_class_nr,p.title,p.name_last,p.name_first,p.date_birth,p.sex,
 							p.photo_filename,a.date, a.time,a.urgency,i.LD_var,i.name, n.nr*/
 							

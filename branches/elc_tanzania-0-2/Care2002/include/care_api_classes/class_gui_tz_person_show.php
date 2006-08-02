@@ -175,7 +175,7 @@ class GuiPersonShow extends Person{
 			
 			if($this->is_loaded){
 				extract($this->data);
-
+				
 				# Get related insurance data
 				$p_insurance=&$pinsure_obj->getPersonInsuranceObject($this->pid);
 
@@ -404,7 +404,10 @@ if(file_exists($root_path.'cache/barcodes/pn_'.$pid.'.png')){
 		</td>
 		<td bgcolor="#ffffee">
 			<FONT SIZE=-1  FACE="Arial">
-			<?php echo $addr_citytown_name; ?>
+
+			<?php echo $citizenship; ?> <?php //echo $addr_citytown_name; ?><?php //echo $addr_citytown_nr; ?>
+
+			
 		</td>
 		<td bgcolor="#ffffee">
 			<FONT SIZE=-1  FACE="Arial">
@@ -449,9 +452,9 @@ if(file_exists($root_path.'cache/barcodes/pn_'.$pid.'.png')){
 <?php
 		}
 
-		if (!$GLOBAL_CONFIG['person_citizenship_hide']&&$citizenship){
-			$this->createTR($LDCitizenship,$citizenship,2);
-		}
+		//if (!$GLOBAL_CONFIG['person_citizenship_hide']&&$citizenship){
+			//$this->createTR($LDCitizenship,$citizenship,2);
+		//}
 		if (!$GLOBAL_CONFIG['person_sss_nr_hide']&&$sss_nr){
 			$this->createTR($LDSSSNr,$sss_nr,2);
 		}

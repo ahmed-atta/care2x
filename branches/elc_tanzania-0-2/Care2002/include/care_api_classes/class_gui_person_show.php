@@ -156,7 +156,7 @@ class GuiPersonShow {
 	*/
 	function display($pid=0){
 		global $HTTP_SESSION_VARS, $root_path, $dbf_nodate, $newdata, $kb_other_his_array, $lang;
-
+		
 		$validdata = TRUE;
 
 		if(!empty($pid)) $this->pid=$pid;
@@ -182,7 +182,7 @@ class GuiPersonShow {
 		$glob_obj->getConfig('person_%');
 
 		//extract($GLOBAL_CONFIG);
-
+		
 		if(empty($this->pid)) {
 			
 			$validdata = FALSE;
@@ -193,7 +193,6 @@ class GuiPersonShow {
 			//	$this->data=$data_obj->FetchRow();
 			if($this->is_loaded){
 				extract($this->data);
-
 				# Get related insurance data
 				$p_insurance=&$pinsure_obj->getPersonInsuranceObject($this->pid);
 
@@ -359,6 +358,10 @@ class GuiPersonShow {
 
 		$this->smarty->assign('LDZipCode',"$LDZipCode :");
 		$this->smarty->assign('sZipCodeInput',$addr_zip);
+
+		$this->smarty->assign('LDTribe',"$LDTribe :");
+		$this->smarty->assign('sTribe',$tribe_name);
+
 
 		if (!$GLOBAL_CONFIG['person_insurance_hide']) {
 			if (!$GLOBAL_CONFIG['person_insurance_1_nr_hide']&&$insurance_show&&$insurance_nr){

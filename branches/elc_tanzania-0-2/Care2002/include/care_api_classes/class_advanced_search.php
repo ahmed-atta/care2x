@@ -29,25 +29,68 @@ class advanced_search extends Core {
 	function insert_new_tribe($newtribe,$tribecode)
 	{
 		global $db;
-		$sql="INSERT INTO care_tz_tribes (tribe_code, tribe_name, is_additional)
-		VALUES ('".$tribecode."','".$newtribe."',1)";
-		$rs_ptr = $db->Execute($sql);
-		return $db->Insert_ID();
+		$this->sql="SELECT name FROM care_tz_tribes WHERE tribe_name LIKE '".$newtribe."' OR tribe_code LIKE'".$tribecode."'";
+		
+    if($this->result=$db->Execute($this->sql)) 
+        if($this->result->RecordCount()) 
+					return false;	 
+				else
+				{
+					$sql="INSERT INTO care_tz_tribes (tribe_code, tribe_name, is_additional)
+					VALUES ('".$tribecode."','".$newtribe."',1)";
+					$rs_ptr = $db->Execute($sql);
+					return $db->Insert_ID();
+				}
 	}
 	function insert_new_city($newcity,$code)
 	{
 		global $db;
-		$sql="INSERT INTO care_address_citytown (unece_locode, name, is_additional)
-		VALUES ('".$code."','".$newcity."',1)";
-		$rs_ptr = $db->Execute($sql);
-		return $db->Insert_ID();
+		$this->sql="SELECT name FROM care_address_citytown WHERE name LIKE '".$newcity."'";
+		
+    if($this->result=$db->Execute($this->sql)) 
+        if($this->result->RecordCount()) 
+					return false;	 
+				else
+				{
+					$sql="INSERT INTO care_address_citytown (unece_locode, name, is_additional)
+					VALUES ('".$code."','".$newcity."',1)";
+					$rs_ptr = $db->Execute($sql);
+					return $db->Insert_ID();
+				}
 	}
+	function insert_new_religion($newreligion,$religioncode)
+	{
+		global $db;
+		$this->sql="SELECT name FROM care_tz_religion WHERE name LIKE '".$newreligion."' OR code LIKE'".$religioncode."'";
+		
+    if($this->result=$db->Execute($this->sql)) 
+        if($this->result->RecordCount()) 
+					return false;	 
+				else
+				{
+					$sql="INSERT INTO care_tz_religion (code, name, is_additional)
+					VALUES ('".$religioncode."','".$newreligion."',1)";
+					$rs_ptr = $db->Execute($sql);
+					return $db->Insert_ID();
+				}
+	}	
 	function get_tribe_info($tribe_id)
 	{
 		global $db;
 		if(!$tribe_id) return false;
 		$this->sql="SELECT * FROM care_tz_tribes WHERE tribe_id=".$tribe_id;
 		
+    if($this->result=$db->Execute($this->sql)) 
+        if($this->result->RecordCount()) 
+					return $this->result->FetchRow();	 
+				else
+					return false;
+	}
+	function get_religion_info($religion_id)
+	{
+		global $db;
+		if(!$religion_id) return false;
+		$this->sql="SELECT * FROM care_tz_religion WHERE nr=".$religion_id;
     if($this->result=$db->Execute($this->sql)) 
         if($this->result->RecordCount()) 
 					return $this->result->FetchRow();	 

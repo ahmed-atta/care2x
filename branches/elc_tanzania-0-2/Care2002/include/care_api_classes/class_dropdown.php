@@ -23,7 +23,7 @@ class Language extends Core {
     global $db;
     $this->sql = "select $field AS _res from $table GROUP BY $filter";
     ($debug) ? $db->debug=TRUE : $db->debug=FALSE; 
-		( $this->res['_res']=$db->Execute($this->sql) ) ? return $this->res['_res'] : return FALSE;
+		return ( $this->res['_res']=$db->Execute($this->sql) ) ? $this->res['_res'] : FALSE;
   }
   
   function createSelectForm(){

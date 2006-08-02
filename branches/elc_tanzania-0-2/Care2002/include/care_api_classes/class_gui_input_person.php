@@ -24,7 +24,7 @@
 $thisfile = basename($HTTP_SERVER_VARS['PHP_SELF']);
 
 class GuiInputPerson {
-	
+
 	# Language tables
 	var $langfiles= array('emr.php', 'person.php', 'date_time.php', 'aufnahme.php');
 
@@ -36,7 +36,7 @@ class GuiInputPerson {
 
 	# PID number
 	var $pid=0;
-	
+
 	# Toggler var
 	var $toggle=0;
 
@@ -47,7 +47,7 @@ class GuiInputPerson {
 	var $pretext='';
 	# Text block below the form
 	var $posttext='';
-	
+
 	# filename for displaying the data after saving
 	var $displayfile='';
 	/**
@@ -62,7 +62,7 @@ class GuiInputPerson {
 	* Sets the PID number
 	*/
 	function setPID($pid=0){
-		if(!empty($pid)) 
+		if(!empty($pid))
 		{
 			$this->pid = $pid;
 		}
@@ -96,11 +96,11 @@ class GuiInputPerson {
 			{
 				$pid_zero.='0';
 			}
-									
+
 		}
 		$altered_pid = chunk_split($pid_zero.$pid, 2, '/');
 		return substr($altered_pid,0,strlen($altered_pid)-1);
-					
+
 	}
 
 	/**
@@ -112,7 +112,7 @@ class GuiInputPerson {
 
 		extract($HTTP_POST_VARS);
 		require_once($root_path.'include/care_api_classes/class_advanced_search.php');
-		
+
 		# Load the language tables
 		$lang_tables =$this->langfiles;
 		include($root_path.'include/inc_load_lang_tables.php');
@@ -120,7 +120,7 @@ class GuiInputPerson {
 		include_once($root_path.'include/inc_date_format_functions.php');
 		include_once($root_path.'include/care_api_classes/class_insurance.php');
 		include_once($root_path.'include/care_api_classes/class_person.php');
-		//$db->debug=true;
+		$db->debug=FALSE;
 
 		# Create the new person object
 		$person_obj=& new Person($pid);
@@ -143,7 +143,7 @@ class GuiInputPerson {
 		include_once($root_path.'include/care_api_classes/class_globalconfig.php');
 		$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 		$glob_obj->getConfig('person_%');
-		
+
 		extract($GLOBAL_CONFIG);
 
 		# Check whether config foto path exists, else use default path
@@ -151,35 +151,36 @@ class GuiInputPerson {
 
 		if (($mode=='save') || ($mode=='forcesave')) {
 		$search_obj = & new advanced_search();
-		if (is_array($result_array=$search_obj->get_equal_words("tribe_name", "care_tz_tribes", false, 65, 'tribe_id')) && $name_maiden && !$no_tribe) 
+		if (is_array($result_array=$search_obj->get_equal_words("tribe_name", "care_tz_tribes", false, 65, 'tribe_id')) && $name_maiden && !$no_tribe)
 		{
 			$tribe_array=$result_array;
 		}
-		else 
+		else
 		{
 			 $tribe_array=$result_array;
 		}
-		if (is_array($result_array=$search_obj->get_equal_words("NAME", "care_address_citytown", false, 65, 'nr')) && $addr_citytown_nr) 
+		if (is_array($result_array=$search_obj->get_equal_words("NAME", "care_address_citytown", false, 65, 'nr')) && $addr_citytown_nr)
 		{
-			$town_array=$result_array;        
+			$town_array=$result_array;
 		}
-		else 
+		else
 		{
-			 $town_array=$result_array;    
+			 $town_array=$result_array;
 		}
 
 			# If saving is not forced, validate important elements
+			
 			if($mode!='forcesave') {
 				# clean and check input data variables
 				if(trim($encoder)=='') $encoder=$aufnahme_user;
 				if (trim($name_last)=='') { $errornamelast=1; $error++;}
-				if (trim($selian_pid)=='' || !is_numeric($selian_pid)) { $errorfilenr=1; $error++;}
+				if (trim($selian_pid)=='' || !is_numeric($selian_pid) || (!$update && $person_obj->SelianFileExists($selian_pid))) { $errorfilenr=1; $error++;}
 				if(trim($name_first)=='') { $errornamefirst=1; $error++; }
 				if (trim($date_birth)=='') { $errordatebirth=1; $error++;}
 				if(mktime(0,0,0,substr($date_birth,3,2),substr($date_birth,0,2),substr($date_birth,6,4))>time()) { $errordatebirth=1; $error++;}
 				//if (is_array($tribe_array) && !$no_tribe) {$errormaiden=1; $error++;}
 				//if (is_array($town_array)) {$errortown=1; $error++;}
-				if (!$addr_citytown_nr) { $errortown=1; $error++;}
+				if (!$citizenship) { $errortown=1; $error++;}
 				if ($sex=='') { $errorsex=1; $error++;}
 			}
 			# If the validation produced no error, save the data
@@ -197,9 +198,9 @@ class GuiInputPerson {
 					# Get the file extension
 					$picext=$img_obj->UploadedImageMimeType();
 				}
-
+//addr_citytown_nr='$addr_citytown_nr',
 				if(($update)) {
-					
+
 					//echo formatDate2STD($geburtsdatum,$date_format);
 					$sql="UPDATE $dbtable SET
 							 title='$title',
@@ -218,7 +219,7 @@ class GuiInputPerson {
 							 addr_str='$addr_str',
 							 addr_str_nr='$addr_str_nr',
 							 addr_zip='$addr_zip',
-							 addr_citytown_nr='$addr_citytown_nr',
+							addr_citytown_nr='$addr_citytown_nr',
 							 addr_citytown_name='$addr_citytown_name',
 							 phone_1_nr='$phone_1_nr',
 							 phone_2_nr='$phone_2_nr',
@@ -226,7 +227,7 @@ class GuiInputPerson {
 							 cellphone_2_nr='$cellphone_2_nr',
 							 fax='$fax',
 							 email='$email',
-							 citizenship='$citizenship',
+							 citizenship ='$citizenship',
 							 civil_status='$civil_status',
 							 sss_nr='$sss_nr',
 							 nat_id_nr='$nat_id_nr',
@@ -343,6 +344,7 @@ class GuiInputPerson {
 								}
 							}
 							//echo $pid;
+							//echo $citizenship;
 							# Update the insurance data
 							# Lets detect if the data is already existing
 							if($insurance_show) {
@@ -358,7 +360,7 @@ class GuiInputPerson {
 													'firm_id'=>$insurance_firm_id,
 													'pid'=>$pid,
 													'class_nr'=>$insurance_class_nr);
-								
+
 									$pinsure_obj->insertDataFromArray($insure_data);
 								}
 							}
@@ -381,7 +383,7 @@ class GuiInputPerson {
 
 				$zeile=$data_obj->FetchRow();
 				extract($zeile);
-
+				//print_r($zeile);
 				# Get the related insurance data
 				$p_insurance=&$pinsure_obj->getPersonInsuranceObject($pid);
 				if($p_insurance==FALSE) {
@@ -410,31 +412,38 @@ class GuiInputPerson {
 		if(!$update)
 		{
 			$tribe=$name_maiden;
-			$town=$addr_citytown_nr;
+			$town=$citizenship;
 		}
-		if (is_array($result_array=$search_obj->get_equal_words("tribe_name", "care_tz_tribes", false, 65, 'tribe_id')) && $name_maiden &&!$no_tribe) 
+		if (is_array($result_array=$search_obj->get_equal_words("tribe_name", "care_tz_tribes", false, 65, 'tribe_id')) && $name_maiden &&!$no_tribe)
 		{
-			$tribe_array=$result_array;        
+			$tribe_array=$result_array;
 		}
-		else 
+		else
 		{
 			 $tribe_array=$result_array;
-		}
-		if (is_array($result_array=$search_obj->get_equal_words("NAME", "care_address_citytown", false, 65, 'nr')) && $addr_citytown_nr) 
+		}/*
+		if (is_array($result_array=$search_obj->get_equal_words("NAME", "care_address_citytown", false, 65, 'nr')) && $addr_citytown_nr)
 		{
-			$town_array=$result_array;       
+			$town_array=$result_array;
 		}
-		else 
+		else
 		{
 			 $town_array=$result_array;
+		}*/
+		if (is_array($result_array=$search_obj->get_equal_words("NAME", "care_tz_religion", false, 65, 'nr')) && $religion)
+		{
+			$religion_array=$result_array;
 		}
-
+		else
+		{
+			 $religion_array=$result_array;
+		}
 		########  Here starts the GUI output #######################################################
-		
+
 		$img_male=createComIcon($root_path,'spm.gif','0');
 		$img_female=createComIcon($root_path,'spf.gif','0');
 		$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/tableHeader_gr.gif"';
-		
+
 		if(!empty($this->pretext)) echo $this->pretext;
 ?>
 		<script  language="javascript">
@@ -480,13 +489,22 @@ class GuiInputPerson {
 				alert("<?php echo $LDPlsEnterFullName; ?>");
 				d.user_id.focus();
 				return false;
+			}else if(d.name_maiden.value=="-1"){
+				alert ("Select tribe!");
+				return false;
+			}else if(d.religion.value=="-1"){
+				alert ("Select religion!");
+				return false;
+			} else if (d.addr_citytown_nr.value=="-1"){
+				alert ("Select location!");
+				return false;
 			}else{
 				return true;
 			}
 		}
 
-<?php 
-		require($root_path.'include/inc_checkdate_lang.php'); 
+<?php
+		require($root_path.'include/inc_checkdate_lang.php');
 ?>
 		-->
 		</script>
@@ -508,9 +526,9 @@ class GuiInputPerson {
 			<center>
 				<font face=arial color=#7700ff size=4>
 				<img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle">
-<?php 
-		if ($error>1) echo $LDErrorS; 
-			else echo $LDError; 
+<?php
+		if ($error>1) echo $LDErrorS;
+			else echo $LDError;
 ?>
 			</center>
 			</td>
@@ -536,11 +554,11 @@ class GuiInputPerson {
 			</center>
 			</td>
 			</tr>
-			
+
 			<tr>
 			<td colspan=3>
 
-				<table border=0 cellspacing=0 cellpadding=1 bgcolor="#000000" width=100%>	
+				<table border=0 cellspacing=0 cellpadding=1 bgcolor="#000000" width=100%>
 				<tr>
 				<td>
 					<table border=0 cellspacing=0 width=100% bgcolor="#ffffff">';
@@ -598,14 +616,14 @@ class GuiInputPerson {
 			</td>
 			<td >
 				<FONT SIZE=-1  FACE="Arial" color="#800000">
-				<?php 
-			if($pid) 
+				<?php
+			if($pid)
 			{
-				if(IS_TANZANIAN) 
+				if(IS_TANZANIAN)
 				{
-					echo $this->showPID($pid); 
+					echo $this->showPID($pid);
 				}
-				else 
+				else
 				{
 					echo $pid;
 				}
@@ -642,12 +660,13 @@ class GuiInputPerson {
 			</tr>
 			<tr>
 			<td class="reg_item">
-				<FONT SIZE=-1  FACE="Arial"><?php 
+				<FONT SIZE=-1  FACE="Arial"><?php
 				if($errorfilenr)
-					echo '<font color="#ff0000">'.$LDFileNr.'</font>';
+					echo '<font color="#ff0000">*'.$LDFileNr.'</font><br>
+					Try this one: '.$person_obj->GetNewSelianFileNumber();
 				else
-					echo $LDFileNr;
-				
+					echo '*'.$LDFileNr;
+
 				?>
 			</td>
 			<td class="reg_input">
@@ -686,10 +705,11 @@ if(!$no_tribe)
 				<td class="reg_item"><FONT SIZE=-1  FACE="Arial,verdana,sans serif">
 				<?php if($errormaiden) { echo '<font color="FF0000">'; } echo '* '.$LDNameMaiden; ?></td>
 				<td  class="reg_input" colspan=1>
-				
-				<?php 
+
+				<?php
 
 					echo '<SELECT name="name_maiden" onChange="list_popup(this, \'tribe\');">';
+					echo '<OPTION value="-1" >-- select tribe --</OPTION>';
 					foreach($tribe_array as $unit)
 					{
 						if($update && (strtoupper($name_maiden) == strtoupper($unit[1])))
@@ -698,14 +718,14 @@ if(!$no_tribe)
 						}
 						else
 						{
-							$check = '';	
+							$check = '';
 						}
 						echo '<OPTION value="'.$unit[1].'" '.$check.'>'.$unit[0].'</OPTION>';
 					}
-				 echo '<OPTION value="notinlist">NOT IN LIST</OPTION>';
+				// echo '<OPTION value="notinlist">NOT IN LIST</OPTION>';
 				 echo '</SELECT>';
-				?>	
-				
+				?>
+
 				</td>
 			</tr>
 
@@ -733,14 +753,14 @@ if(!$no_tribe)
 			echo formatDate2Local(date('Y-m-d'),$date_format);
 		}*/
  ?>"
- 				onFocus="this.select();"  
-				onBlur="IsValidDate(this,'<?php echo $date_format ?>')" 
+ 				onFocus="this.select();"
+				onBlur="IsValidDate(this,'<?php echo $date_format ?>')"
 				onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>');">
 				<a href="javascript:show_calendar('aufnahmeform.date_birth','<?php echo $date_format ?>')">
 				<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
-				
-				
-				<font size=1>[ 
+
+
+				<font size=1>[
 <?php
 					$dfbuffer="LD_".strtr($date_format,".-/","phs");
 					echo $$dfbuffer;
@@ -757,13 +777,13 @@ if(!$no_tribe)
 <?php
 		if ($errorsex) echo "<font color=#ff0000>";
 		echo '* '.$LDSex.'</font>';
-?>: 
+?>:
 			<input name="sex" type="radio" value="m"  <?php if($sex=="m") echo "checked"; ?>><?php echo $LDMale ?>&nbsp;&nbsp;
 			<input name="sex" type="radio" value="f"  <?php if($sex=="f") echo "checked"; ?>>
 <?php
 		echo $LDFemale;
 		if ($errorsex) echo "</font>";
-		
+
 		# But patch 2004-03-10
 		# Clean blood group
 		$blood_group = trim($blood_group);
@@ -784,9 +804,9 @@ if(!$no_tribe)
 				<input name="blood_group" type="radio" value="O"  <?php if($blood_group=='O') echo 'checked'; ?>><?php echo $LDO ?>
 			</td>
 			<td>
-							<?php echo $LDRHfactor; ?><input name="rh" type="radio" value="pos" 
+							<?php echo $LDRHfactor; ?><input name="rh" type="radio" value="pos"
 			<?php if($rh=='pos') echo 'checked'; ?>><?php echo $LDRHpos; ?>
-				<input name="rh" type="radio" value="neg" 
+				<input name="rh" type="radio" value="neg"
 			<?php if($rh=='neg') echo 'checked'; ?>><?php echo $LDRHneg; ?>
 			</td>
 			</tr>
@@ -815,9 +835,11 @@ if(!$no_tribe)
 			<td class="reg_item">
 				<FONT SIZE=-1  FACE="Arial"><?php if ($errortown) echo "<font color=red>"; ?>* <?php echo $LDTownCity ?>:
 			</td>
-			<td class="reg_input">
+			<td class="reg_input"><input name="citizenship" type="text" value="<?php echo $citizenship;?>" ></td>
+			<!--<td class="reg_input">
 <?php 
 					echo '<SELECT name="addr_citytown_nr" onChange="list_popup(this,\'city\');">';
+					echo '<OPTION value="-1" >-- select location --</OPTION>';
 					foreach($town_array as $unit)
 					{
 						if($update && (strtoupper($addr_citytown_nr) == strtoupper($unit[1])))
@@ -826,7 +848,7 @@ if(!$no_tribe)
 						}
 						else
 						{
-							$check = '';	
+							$check = '';
 						}
 						echo '<OPTION value="'.$unit[1].'" '.$check.'>'.$unit[0].'</OPTION>';
 					}
@@ -834,18 +856,18 @@ if(!$no_tribe)
 				 echo '</SELECT>';
 				?>	
 				
-			</td>
+			</td>-->
 			<td class="reg_input">
-				&nbsp;&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if ($errorzip) echo "<font color=red>"; ?><?php echo $LDZipCode ?>:<input name="addr_zip" type="text" size="10" value="<?php echo $addr_zip; ?>" >
+				&nbsp;&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if ($errorzip) echo "<font color=red>"; ?>P.O. Box:<input name="addr_zip" type="text" size="10" value="<?php echo $addr_zip; ?>" >
 			</td>
 			</tr>
 
 <?php
 		if($insurance_show) {
 			if (!$person_insurance_1_nr_hide) {
-				
+
 ?>
-			<tr>
+			<!--<tr>
 			<td class="reg_item">
 				<FONT SIZE=-1  FACE="Arial"><?php if ($errorinsurancecoid) echo '<font color="'.$error_fontcolor.'">'; ?><?php echo $LDInsuranceCo ?>:
 			</td>
@@ -855,9 +877,9 @@ if(!$no_tribe)
 					<input name="insurance_category" type="radio"  value="gold"  <?php if($insurance_category=="gold") echo 'checked'; ?>> <?php echo $LDInsuranceGold;?>
 					<input name="insurance_category" type="radio"  value="friedkin"  <?php if($insurance_category=="friedkin") echo 'checked'; ?>> <?php echo $LDInsuranceFriedkin;?>
 					<input name="insurance_category" type="radio"  value="selian"  <?php if($insurance_category=="selian") echo 'checked'; ?>> <?php echo $LDInsuranceSelianstuff;?>
-					
+
 			</td>
-			</tr>
+			</tr>-->
 <?php
 			}
 		} else {
@@ -880,34 +902,66 @@ if(!$no_tribe)
 			$this->createTR($errorcell2, 'cellphone_2_nr', $LDCellPhone.' 2',$cellphone_2_nr,2);
 		}
 		if (!$person_religion_hide){
-			$this->createTR($errorreligion, 'religion', $LDReligion,$religion,2);
+			?>
+
+			<tr>
+			<td class="reg_item">
+				<FONT SIZE=-1  FACE="Arial"><?php if ($errorreligion) echo "<font color=red>"; ?>* <?php echo $LDReligion ?>:
+			</td>
+			<td class="reg_input">
+<?php
+					echo '<SELECT name="religion" onChange="list_popup(this,\'religion\');">';
+					echo '<OPTION value="-1" >-- select religion --</OPTION>';
+					foreach($religion_array as $unit)
+					{
+						if($update && (strtoupper($religion) == strtoupper($unit[0])))
+						{
+							$check = 'selected';
+						}
+						else
+						{
+							$check = '';
+						}
+						echo '<OPTION value="'.$unit[1].'" '.$check.'>'.$unit[0].'</OPTION>';
+					}
+				// echo '<OPTION value="notinlist">NOT IN LIST</OPTION>';
+				 echo '</SELECT>';
+				?>
+
+			</td>
+			</tr>
+
+
+			<?php
 		}
 
 ?>
-				<tr>
+				<!--<tr>
 				<td class="reg_item" valign=top class="reg_input">
 					<?php echo $LDOtherHospitalNr; ?>
 				</td>
 				<td colspan=2 class="reg_input">
-				<?php 
+				<?php
+				/*
 				$other_hosp_list = $person_obj->OtherHospNrList();
 				$sOtherNrBuffer='';
 				foreach( $other_hosp_list as $k=>$v ){
 					echo "<b>".$kb_other_his_array[$k].":</b> ".$v."<br />\n";
 				}
-	
-				
+
+
 				echo '<SELECT name="other_his_org">
 					<OPTION value="">--</OPTION>';
 				foreach( $kb_other_his_array as $k=>$v ){
 					echo '<OPTION value="$k" $check>$v</OPTION>';
 				}
 				 echo '</SELECT>&nbsp;&nbsp;'.$LDNr.':<INPUT name="other_his_no" size=20><br>';
-	
+
 				echo '('.$LDSelectOtherHospital.' - '.$LDNoNrNoDelete.')<br></TD></TR>';
+				*/
 ?>
 				</td>
-				</tr>
+				</tr>-->
 			<tr>
 			<td class="reg_item">
 				<FONT SIZE=-1  FACE="Arial" ><FONT  SIZE=2  FACE="Arial"><font color=#ff0000><?php echo $LDRegBy ?></font>
@@ -927,7 +981,7 @@ if(!$no_tribe)
 			<input type="hidden" name="lang" value="<?php echo $lang; ?>">
 			<input type="hidden" name="linecount" value="<?php echo $linecount; ?>">
 			<input type="hidden" name="mode" value="save">
-			
+
 			<input type="hidden" name="insurance_item_nr" value="<?php echo $insurance_item_nr; ?>">
 			<input type="hidden" name="insurance_firm_id" value="<?php echo $insurance_firm_id; ?>">
 			<input type="hidden" name="insurance_show" value="<?php echo $insurance_show; ?>">
@@ -941,7 +995,7 @@ if(!$no_tribe)
 			<input  type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?>  alt="<?php echo $LDSaveData ?>" align="absmiddle">
 				<a href="javascript:document.aufnahmeform.reset()"><img <?php echo createLDImgSrc($root_path,'reset.gif','0') ?> alt="<?php echo $LDResetData ?>"   align="absmiddle"></a>
 <?php
-		if($error||$error_person_exists) echo '<input  type="button" value="'.$LDForceSave.'" onClick="forceSave()">'; 
+		if($error||$error_person_exists) echo '<input  type="button" value="'.$LDForceSave.'" onClick="forceSave()">';
 ?>
 		</form>
 <?php

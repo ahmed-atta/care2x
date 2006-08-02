@@ -191,6 +191,7 @@ class Lab extends Encounter {
 	* @param int Test group id
 	* @return mixed integer or boolean
 	*/
+
 	function BatchNr($enc_nr,$job_id,$grp_id){
 	    global $db;
 		$this->sql="SELECT batch_nr FROM $this->tb_find_chemlab WHERE encounter_nr='$enc_nr' AND job_id='$job_id' AND group_id='$grp_id'";
@@ -302,6 +303,7 @@ class Lab extends Encounter {
 			else $cond="AND p.group_id='$id'";
 		$this->sql="SELECT p.*, g.is_enabled FROM $this->tb_test_param p, $this->tb_test_group g WHERE
 		p.id = g.id	$cond ORDER BY name";
+		
 		if($this->tparams=$db->Execute($this->sql)){
 		    if($this->rec_count=$this->tparams->RecordCount()) {
 				return $this->tparams;
@@ -410,7 +412,6 @@ class Lab extends Encounter {
 	*/
 	function ResultExists($enc_nr=''){
 		global $db;
-		$buf;
 		if(!$this->internResolveEncounterNr($enc_nr)) return FALSE;
 		$this->sql="SELECT nr FROM $this->tb_find_chemlab WHERE encounter_nr='$this->enc_nr' AND status NOT IN ($this->dead_stat)";
 		if($buf=$db->Execute($this->sql)){
@@ -470,6 +471,8 @@ class Lab extends Encounter {
 	*/
 	function searchEncounterLabResults($key='',$add_opt='',$limit=FALSE,$len=30,$so=0){
 		global $db, $sql_LIKE;
+		$debug=FALSE;
+		($debug) ? $db->debug=TRUE : $db->debug=FALSE;
 		if(empty($key)) return FALSE;
 		$this->sql="SELECT f.encounter_nr, e.encounter_class_nr, p.pid, p.name_last, p.name_first, p.date_birth, p.sex
 				FROM $this->tb_find_chemlab AS f 
@@ -525,6 +528,59 @@ class Lab extends Encounter {
 			$option='';
 		}
 		return $this->searchEncounterLabResults($key,$option,TRUE,$len,$so); 
+	}
+	/**
+	 * Searches for one encounter having results in the database:
+	 * @param int encounter_number
+	 * return: 
+	 * 	TRUE: All tests requests having at least one entry in the database
+	 *    -1: not all, but several of them having an test result in the database
+	 *    -2: not even one test result is given to the pending list
+	 */
+	function IsMissingLabResult($batch_nr) {
+		global $db;
+		$debug=FALSE;
+		$param_array=array();
+		($debug)?$db->debug=TRUE: $db->debug=FALSE;
+		$this->sql="SELECT DISTINCT parameters FROM care_test_request_chemlabor where batch_nr=".$batch_nr;
+		$db_obj=$db->Execute($this->sql);
+		$row=$db_obj->GetArray();
+		while (list($u,$v)=each($row)){
+			$arr_test_requests =  explode("&",$v['parameters']);
+		}
+		while (list($u,$v)=each($arr_test_requests)) {
+			$param = substr($v,5);
+			$param = substr($param,0,strpos($param,'_'));
+			array_push($param_array, $param);
+		}
+		$num_of_pending_requests = sizeof($param_array);
+		//now we have all test id's what should have results...
+
+		$this->sql="SELECT DISTINCT serial_value FROM care_test_findings_chemlab where job_id=".$batch_nr;
+		$db_obj=$db->Execute($this->sql);
+		$row=$db_obj->GetArray();
+		$num_of_records=$db_obj->RecordCount();
+		if ($debug) echo "<br>Records for $batch_nr found in table care_test_request_chemlabor: $num_of_pending_requests<br>";
+		$RET_CODE=1; // Return code is switched to "all results are given"
+		
+		if ($num_of_records>0) {
+			while (list($u,$v)=each($row)) {
+				$a =  unserialize($v['serial_value']); // Here we can find the value given to each test-id
+				$num_of_lab_results=sizeof($a);
+			}			
+		}
+		
+		if ($num_of_pending_requests==$num_of_lab_results) {
+			if ($debug) echo "all results are given! return code is true";
+			return 1;
+		} else if (($num_of_pending_requests<$num_of_lab_results) && $num_of_lab_results!=0) {
+			if ($debug) echo "there is at least one result pending, but one or more given: return is -1";
+			return -1;
+		} else {
+			if ($debug) echo "there is not even one result given: return is -2";
+			return -2;
+		}
+
 	}
 	/**
 	* Gets the latest modify_time information of an encounter's laboratory result.

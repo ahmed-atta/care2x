@@ -236,7 +236,7 @@ class GuiSearchPerson {
 
 			if($mode=='paginate'){
 				$fromwhere=$HTTP_SESSION_VARS['sess_searchkey'];
-				$sql='SELECT pid, name_last, name_first, date_birth, addr_zip, sex, death_date, status FROM '.$fromwhere.$sql3;
+				$sql='SELECT pid, name_last, name_first, date_birth, selian_pid, sex, death_date, status FROM '.$fromwhere.$sql3;
 				$ergebnis=$db->SelectLimit($sql,$pagen->MaxCount(),$pagen->BlockStartIndex());
 				$linecount=$ergebnis->RecordCount();
 			}else{
@@ -405,7 +405,7 @@ class GuiSearchPerson {
 			$this->smarty->assign('LDLastName',$pagen->makeSortLink($LDLastName,'name_last',$oitem,$odir,$this->targetappend));
 			$this->smarty->assign('LDFirstName',$pagen->makeSortLink($LDFirstName,'name_first',$oitem,$odir,$this->targetappend));
 			$this->smarty->assign('LDBday',$pagen->makeSortLink($LDBday,'date_birth',$oitem,$odir,$this->targetappend));
-			$this->smarty->assign('LDZipCode',$pagen->makeSortLink($LDFileNr,'addr_zip',$oitem,$odir,$this->targetappend));
+			$this->smarty->assign('LDZipCode',$pagen->makeSortLink($LDFileNr,'selian_pid',$oitem,$odir,$this->targetappend));
 			if(!empty($this->targetfile)){
 				$this->smarty->assign('LDOptions',$LDOptions);
 			}

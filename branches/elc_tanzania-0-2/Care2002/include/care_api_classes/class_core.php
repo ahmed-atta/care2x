@@ -206,7 +206,7 @@ class Core {
 	function _prepSaveArray(){
 		$x='';
 		$v='';
-
+		//print_r($this->ref_array);
 		while(list($x,$v)=each($this->ref_array)) {
 
 			if(isset($this->data_array[$v])&&($this->data_array[$v]!='')) {
@@ -232,6 +232,7 @@ class Core {
 		
 		# Check if  "create_time" key has a value, if no, create a new value
 		//if(!isset($this->buffer_array['create_time'])||empty($this->buffer_array['create_time'])) $this->buffer_array['create_time']=date('YmdHis');
+		//print_r($this->buffer_array);
 		return $this->insertDataFromArray($this->buffer_array);
 	}
 	/**
@@ -756,6 +757,13 @@ class Core {
 	    }
 	  }
 	  return FALSE;
+	}
+	function ShowRedIfError($text,$error)
+	{
+		if($error)
+			echo '<font color=red>'.$text.'</font>';
+		else
+			echo $text;
 	}
 }
 ?>

@@ -99,7 +99,7 @@ class Person extends Core {
 	* @var array
 	*/
 	var $basic_list='pid,title,name_first,name_last,name_2,name_3,name_middle,name_maiden,name_others,date_birth,
-				           sex,addr_str,addr_str_nr,addr_zip,addr_citytown_nr,photo_filename';
+				           sex,addr_str,addr_str_nr,addr_zip,addr_citytown_nr,citizenship,photo_filename';
 	/**
 	* Field names of table care_person
 	* @var array
@@ -125,6 +125,7 @@ class Person extends Core {
 				 'addr_str_nr',
 				 'addr_zip',
 				 'addr_citytown_nr',
+				 'citizenship',
 				 'phone_1_code',
 				 'phone_1_nr',
 				 'phone_2_code',
@@ -204,6 +205,35 @@ class Person extends Core {
 		if($this->result=$db->Execute($this->sql)){
 			if($this->result->RecordCount()){
 				return true;
+			} else { return false; }
+		} else { return false; }
+	}
+	/**
+	* Checks if PID number exists in the database.
+	* @access public
+	* @param int PID number
+	* @return boolean
+	*/
+	function SelianFileExists($selian_pid){
+		global $db;
+		// Patch for db where the pid does not start with the predefined init
+		//$this->sql="SELECT pid FROM $this->tb_person WHERE pid=$init_nr";
+		$this->sql="SELECT selian_pid FROM $this->tb_person WHERE selian_pid=$selian_pid";
+		if($this->result=$db->Execute($this->sql)){
+			if($this->result->RecordCount()){
+				return true;
+			} else { return false; }
+		} else { return false; }
+	}
+	
+	function GetNewSelianFileNumber(){
+		global $db;
+		// Patch for db where the pid does not start with the predefined init
+		//$this->sql="SELECT pid FROM $this->tb_person WHERE pid=$init_nr";
+		$this->sql="SELECT max(selian_pid) as maximum FROM $this->tb_person";
+		if($this->result=$db->Execute($this->sql)){
+			if($this->row=$this->result->FetchRow()){
+				return ($this->row['maximum']+1);
 			} else { return false; }
 		} else { return false; }
 	}
@@ -361,17 +391,18 @@ class Person extends Core {
 	*/
 	function getAllInfoObject($pid='') {
 	    global $db;
-		 
+	    $db->debug=FALSE;
 		if(!$this->internResolvePID($pid)) return false;
-	    $this->sql="SELECT p.*, addr.name AS addr_citytown_name,ethnic.name AS ethnic_orig_txt, tribe.tribe_name 
+	    $this->sql="SELECT p.*, citizenship AS addr_citytown_name,ethnic.name AS ethnic_orig_txt, tribe.tribe_name, religion.name as religion 
 					FROM $this->tb_person AS p
-					LEFT JOIN  $this->tb_citytown AS addr ON p.addr_citytown_nr=addr.nr
-					LEFT JOIN  care_tz_tribes AS tribe ON p.name_maiden=tribe.tribe_id
+					
+					LEFT JOIN care_tz_tribes AS tribe ON p.name_maiden=tribe.tribe_id
+					LEFT JOIN care_tz_religion AS religion ON p.religion=religion.nr
 					LEFT JOIN  $this->tb_ethnic_orig AS ethnic ON p.ethnic_orig=ethnic.nr
 					WHERE p.pid='$this->pid' ";
-        //echo $this->sql;
-        
-        if($this->result=$db->Execute($this->sql)) {
+        $this->result=$db->Execute($this->sql);
+        if($this->result->RecordCount()) {
+        	//echo "Hallo Welt";
             if($this->result->RecordCount()) {
 				 return $this->result;	 
 			} else { return false; }
@@ -971,10 +1002,15 @@ class Person extends Core {
 	* @param string Sort direction, default = ASC (ascending)
 	* @return mixed integer or boolean
 	*/
+	function SearchCount()
+	{
+		return $this->rec_count;
+	}
 	function SearchSelect($searchkey='',$maxcount=100,$offset=0,$oitem='name_last',$odir='ASC',$fname=FALSE){
 		global $db, $sql_LIKE, $root_path;
-		//$db->debug=true;
+		$db->debug=false;
 		if(empty($maxcount)) $maxcount=100;
+		if($searchkey=='*') $maxcount=100000000;
 		if(empty($offset)) $offset=0;
 
 		include_once($root_path.'include/inc_date_format_functions.php');
@@ -1027,6 +1063,7 @@ class Person extends Core {
 			}
 			# Check the size of the comp
 			if(sizeof($comp)>1){
+			
 				$sql2=" WHERE (name_last $sql_LIKE '".strtr($ln,'+',' ')."%' AND name_first $sql_LIKE '".strtr($fn,'+',' ')."%')";
 				if(!empty($bd)){
 					$DOB=@formatDate2STD($bd,$date_format);
