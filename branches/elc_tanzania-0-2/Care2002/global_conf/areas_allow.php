@@ -10,6 +10,8 @@ $allow_area=array(
 
 'admit'=>array('_a_1_admissionwrite','_a_1_medocswrite'),
 
+'bill'=>array('_a_1_billallwrite', '_a_2_billallread','_a_2_billpharmawrite','_a_3_billpharmaread','_a_2_billserviceswrite','_a_3_billservicesread','_a_2_billlabwrite','_a_3_billlabread'),
+
 'cafe'=>array('_a_1_newsallwrite', '_a_1_newscafewrite'),
 
 'medocs'=>array('_a_1_medocswrite'),
