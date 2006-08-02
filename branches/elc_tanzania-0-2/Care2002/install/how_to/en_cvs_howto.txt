@@ -1,2 +1,0 @@
-download the current cvs-branch from source-forge.net:
-cvs -z3 -d:ext:username@cvs.sourceforge.net:/cvsroot/care2002 co -r elc_tanzania-0-2 -P Care2002
