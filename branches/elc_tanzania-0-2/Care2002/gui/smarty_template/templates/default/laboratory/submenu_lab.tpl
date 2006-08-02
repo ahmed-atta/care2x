@@ -26,10 +26,18 @@
 						</tr>
 						{{include file="common/submenu_row_spacer.tpl"}}
 
+<!--
 						<TR>
 							<TD class="submenu_item" width=35%><nobr>{{$LDNewData}}</nobr></TD>
 							<TD>{{$LDEnterLabData}}</TD>
 						</tr>
+-->						
+
+						<TR>
+							<TD class="submenu_item" width=35%><nobr>{{$LDEditData}}</nobr></TD>
+							<TD>{{$LDEditLabData}}</TD>
+						</tr>
+
 
 					</TBODY>
 					</TABLE>

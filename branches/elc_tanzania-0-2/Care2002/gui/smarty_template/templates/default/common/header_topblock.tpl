@@ -13,6 +13,8 @@
    href="{{$pbBack}}"><img {{$gifBack2}} alt="" {{$dhtml}} ></a>{{/if}}{{if $pbHelp}}<a
    href="{{$pbHelp}}"><img {{$gifHilfeR}} alt="" {{$dhtml}}></a>{{/if}}{{if $breakfile}}<a
    href="{{$breakfile}}" {{$sCloseTarget}}><img {{$gifClose2}} alt="{{$LDCloseAlt}}" {{$dhtml}}></a>{{/if}}{{/if}}
+   {{if $disableButton}}<a
+   href="{{$pbHelp}}"><img {{$gifHilfeR}} alt="" {{$dhtml}}></a>{{/if}}
   </td>
  </tr>
  </table>

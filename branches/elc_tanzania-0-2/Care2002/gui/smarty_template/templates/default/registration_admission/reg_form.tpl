@@ -135,8 +135,8 @@
 				</tr>
 
 				<tr>
-					<td class="reg_item" class="reg_input">
-						{{$LDStreet}}
+					<td>
+						&nbsp;
 					</td>
 					<td class="reg_input">
 						{{$sStreetInput}}
@@ -154,8 +154,23 @@
 						{{$sTownCityInput}} {{$sTownCityMiniCalendar}}
 					</td>
 					<td class="reg_input">
-						{{$LDZipCode}} &nbsp;&nbsp; {{$sZipCodeInput}}
+						&nbsp;&nbsp;
 					</td>
+				</tr>
+
+				<tr>
+					<td class="reg_item">
+						{{$LDTribe}}
+					</td>
+					<td class="reg_input">
+						{{$sTribe}} &nbsp;
+					</td>
+					<td class="reg_input">
+						&nbsp;&nbsp;
+					</td>
+				</tr>
+
+				<tr>
 				</tr>
 
 			{{if $bShowInsurance}}

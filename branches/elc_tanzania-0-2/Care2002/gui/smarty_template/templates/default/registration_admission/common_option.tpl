@@ -16,7 +16,7 @@
 				<tr valign="top">
 					<td>
 						{{include file="registration_admission/basic_data.tpl"}}
-						
+						aaaaaaa
 						{{if $bShowNoRecord}}
 							{{include file="registration_admission/common_norecord.tpl"}}
 						{{/if}}

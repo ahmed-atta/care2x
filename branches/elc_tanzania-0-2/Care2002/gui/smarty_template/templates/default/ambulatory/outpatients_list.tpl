@@ -10,6 +10,7 @@
 		<td class="adm_item">{{$LDFamilyName}}, {{$LDName}}</td>
 		<td class="adm_item">{{$LDBirthDate}}</td>
 		<td class="adm_item">{{$LDPatNr}}</td>
+		<td class="adm_item">{{$LDAdmissionDate}}</td>
 		<td class="adm_item">{{$LDInsuranceType}}</td>
 		<td class="adm_item">{{$LDOptions}}</td>
 	</tr>
