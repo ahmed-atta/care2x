@@ -21,10 +21,10 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 <title>Barcode Labels Admission-Nr. <?php echo $HTTP_SESSION_VARS['sess_full_en'] ?></title>
 </head>
 <body onLoad="if(window.focus) window.focus()">
-<?php  if(file_exists($root_path."cache/barcodes/en_".$HTTP_SESSION_VARS['sess_full_en'].".png")) : ?>
+<?php  if (file_exists($root_path."cache/barcodes/en_".$HTTP_SESSION_VARS['sess_full_en'].".png")) { ?>
 <a href="javascript:window.print()"><img src="./imgcreator/barcode-etik.php<?php echo URL_REDIRECT_APPEND ?>&en=<?php echo $HTTP_SESSION_VARS['sess_en'] ?>" border=0 alt="<?php echo $LDClick2echo ?>"></a>
-<?php else : ?>
+<?php  } else { ?>
 <a href="javascript:window.print()"><img src="<?php echo $root_path; ?>classes/barcode/image.php<?php echo URL_REDIRECT_APPEND."&code=".$HTTP_SESSION_VARS['sess_full_en']."&style=68&type=I25&width=180&height=50&xres=2&font=5&pn=".$HTTP_SESSION_VARS['sess_full_en']."&label=1&form_file=en"; ?>" border=0 alt="<?php echo $LDClick2echo ?>"></a>
-<?php endif ?>
+<?php } ?>
 </body>
 </html>
