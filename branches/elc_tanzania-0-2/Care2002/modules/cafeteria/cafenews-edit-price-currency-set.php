@@ -31,7 +31,7 @@ require($root_path.'include/inc_currency_set.php');
 <?php if($rows) : ?>
 <script language="javascript" src="<?php echo $root_path ?>js/check_currency_same_item.js">
 </script>
-<?php endif ?>
+<?php endif; ?>
 
 <?php if($cfg['dhtml']) include($root_path.'include/inc_css_a_hilitebu.php'); ?>
 

@@ -70,7 +70,7 @@ function chkForm(d)
 	}
 }
 </script>
-<?php endif ?>
+<?php endif; ?>
 
 <?php if($cfg['dhtml']) include("/include/inc_css_a_hilitebu.php"); ?>
 
@@ -96,7 +96,7 @@ function chkRadioButton(e){
 			<?php echo $LDMarkGroup ?>
 <?php else : ?>
 			<?php echo $LDCreateGroupPrompt ?>
-<?php endif ?>
+<?php endif; ?>
 	</td>
   </tr>
 <?php if($rows)
