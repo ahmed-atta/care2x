@@ -34,20 +34,18 @@ if(isset($mode)&&$mode=='transferdept'){
 	$date=date('Y-m-d');
 	$time=date('H:i:s');
 	# first discharge from current dept
+	//echo "discharing patient $pn<br>";
 	if($enc_obj->DischargeFromDept($pn,8,$date,$time)) {# discharge type nr 8 = change of department
 		# Now we set new dept
+		//echo "Patient dischared!<br> Now  $pn going to $tgt_nr  ";
 		if($enc_obj->setCurrentDept($pn,$tgt_nr)){
    			header($forwardfile);
    			exit;
 		}
-/*		# Now we assign to new location
-		if($enc_obj->assignInDept($pn,$tgt_nr,$tgt_nr,$date,$time)){
-   			header($forwardfile);
-   			exit;
-		}
-*/
-	}
+    //echo "setCurrentDept person failed<br>";exit();
+	} 
 }else{
+  
 	header($forwardfile);
 	exit;
 }

@@ -133,6 +133,11 @@ if(($mode=='')||($mode=='fresh')){
  require_once($root_path.'gui/smarty_template/smarty_care.class.php');
  $smarty = new smarty_care('nursing');
 
+# Reload the page after 60 seconds
+	$smarty->assign('sReloadPage',TRUE);
+	$smarty->assign('sReloadTarget',$REQUEST_URI);
+	$smarty->assign('sReloadDelay',60);
+
 # Title in toolbar
  $smarty->assign('sToolbarTitle', $dept." :: $LDOutpatientClinic (".formatDate2Local($s_date,$date_format,'','',$null='').")");
 

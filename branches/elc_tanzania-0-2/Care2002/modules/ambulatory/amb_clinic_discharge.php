@@ -16,9 +16,9 @@ $local_user='ck_pflege_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 if(!$encoder) $encoder=$HTTP_SESSION_VARS['sess_user_name'];
 
-$breakfile="amb_clinic_patients.php".URL_APPEND."&edit=$edit&dept_nr=$dept_nr";
-if($backpath) $breakfile=urldecode($backpath).URL_APPEND;
-
+//$breakfile="amb_clinic_patients.php".URL_APPEND."&edit=$edit&dept_nr=$dept_nr";
+$breakfile="javascript:window.close();";
+//if($backpath) $breakfile=urldecode($backpath).URL_APPEND;
 $thisfile=basename(__FILE__);
 
 # Load date formatter 
@@ -172,6 +172,14 @@ function pruf(d)
 } // End of if !$released
 
 if(($mode=="release")&&($released)){
+
+	echo '
+	<html><head>
+	<script  language="javascript">
+	window.opener.location.replace(\''.$backpath.'\');
+	window.close();	
+	</script></head></html>';
+	die();
 	$smarty->assign('sPrompt',$LDJustReleased);
 }
 

@@ -19,6 +19,8 @@ $lang_tables[]='prompt.php';
 $lang_tables[]='departments.php';
 define('LANG_FILE','nursing.php');
 //define('NO_2LEVEL_CHK',1);
+
+
 $local_user='ck_pflege_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
@@ -40,7 +42,7 @@ $tnow=date('H:i:s');
 	
 if(!isset($mode)) $mode='';
 
-$breakfile='ambulatory.php'.URL_APPEND; # Set default breakfile
+$breakfile='amb_clinic_patients_discharge.php'.URL_APPEND; # Set default breakfile
 if($backpath) $breakfile=urldecode($backpath).URL_APPEND;
 $thisfile=basename(__FILE__);
 if(isset($retpath)){
@@ -178,9 +180,9 @@ function getrem(pn){
 	}
 function release(nr)
 {
-	urlholder="amb_clinic_discharge.php<?php echo URL_REDIRECT_APPEND; ?>&pn="+nr+"<?php echo "&pyear=".$pyear."&pmonth=".$pmonth."&pday=".$pday."&tb=".str_replace("#","",$cfg['top_bgcolor'])."&tt=".str_replace("#","",$cfg['top_txtcolor'])."&bb=".str_replace("#","",$cfg['body_bgcolor'])."&d=".$cfg['dhtml']; ?>&station=<?php echo $station; ?>&dept_nr=<?php echo $dept_nr; ?>";
-	//indatawin=window.open(urlholder,"bedroom","width=700,height=450,menubar=no,resizable=yes,scrollbars=yes"
-	window.location.href=urlholder;
+	urlholder="amb_clinic_discharge.php<?php echo URL_REDIRECT_APPEND; ?>&pn="+nr+"<?php echo "&pyear=".$pyear."&pmonth=".$pmonth."&pday=".$pday."&tb=".str_replace("#","",$cfg['top_bgcolor'])."&tt=".str_replace("#","",$cfg['top_txtcolor'])."&bb=".str_replace("#","",$cfg['body_bgcolor'])."&d=".$cfg['dhtml']; ?>&station=<?php echo $station; ?>&dept_nr=<?php echo $dept_nr; ?>&backpath=<?php echo $breakfile; ?>";
+	indatawin=window.open(urlholder,"bedroom","width=500,height=530,menubar=no,resizable=yes,scrollbars=yes");
+	//window.location.href=urlholder;
 }
 
 function popinfo(l,d)
@@ -245,6 +247,7 @@ if($rows){
 	$smarty->assign('LDName',$LDName);
 	$smarty->assign('LDBirthDate',$LDBirthDate);
 	$smarty->assign('LDPatNr',$LDPatListElements[4]);
+	$smarty->assign('LDAdmissionDate',$LDAdmissionDate);
 	$smarty->assign('LDInsuranceType',$LDPatListElements[5]);
 	$smarty->assign('LDOptions',$LDPatListElements[6]);
 
@@ -277,6 +280,7 @@ if($rows){
 			$smarty->assign('sTitle','');
 			$smarty->assign('sBirthDate','');
 			$smarty->assign('sPatNr','');
+			$smarty->assign('sAdmissionDate','');
 			$smarty->assign('sAdmitDataIcon','');
 			$smarty->assign('sChartFolderIcon','');
 			$smarty->assign('sNotesIcon','');
@@ -363,7 +367,11 @@ if($rows){
 					else $smarty->assign('sBirthDate',formatDate2Local($patient['date_birth'],$date_format));
 			}
 
-			if ($patient['encounter_nr']) $smarty->assign('sPatNr',$patient['encounter_nr']);
+			if ($patient['encounter_nr'])
+			{
+				$smarty->assign('sPatNr',$patient['encounter_nr']);
+				$smarty->assign('sAdmissionDate',formatDate2Local($patient['encounter_date'],$date_format,'','',$null=''));
+			}
 
 			$sBuffer = '';
 			if($patient['insurance_class_nr']!=2) $sBuffer = $sBuffer.'<font color="#ff0000">';
