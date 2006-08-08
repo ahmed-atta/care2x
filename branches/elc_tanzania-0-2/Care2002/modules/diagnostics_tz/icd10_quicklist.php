@@ -3,6 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 
 require($root_path.'include/inc_environment_global.php');
+
+if(!empty($encounter)) $HTTP_SESSION_VARS['sess_en']=$encounter;
+
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -16,6 +19,7 @@ require($root_path.'include/inc_environment_global.php');
 //require($root_path.'include/inc_front_chain_lang.php');
 
 //Load the diagnstics-class:
+
 require_once($root_path.'include/care_api_classes/class_tz_diagnostics.php');
 
 $diagnostic_obj = new Diagnostics;

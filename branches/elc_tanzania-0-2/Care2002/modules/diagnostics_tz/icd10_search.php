@@ -17,21 +17,27 @@ require($root_path.'include/inc_environment_global.php');
 
 //Load the diagnstics-class:
 require_once($root_path.'include/care_api_classes/class_tz_diagnostics.php');
-
+$debug=FALSE;
 $diagnostic_obj = new Diagnostics;
 
+if ($debug) echo $mode."<br>";
+if ($debug) echo $keyword."<br>";
+if ($debug) echo $show."<br>";
+if ($debug) echo $search_mode."<br>";
 
-
-if ($mode=="search") {
+//if ($mode=="search") {
   if (!empty($keyword)) {
-    $diagnostic_obj->get_array_search_results($keyword);
+    if ($search_mode=="fuzzy")
+      $diagnostic_obj->get_array_fuzzysearch_results($keyword);
+    else
+      $diagnostic_obj->get_array_search_results($keyword);
     /*
     if ($number_of_search_results=count($rs=$diagnostic_obj->get_array_search_results($keyword))) {
       echo $diagnostic_obj->get_icd10_description_from_array($rs);
     }
     */
   }
-}
+//}
 
 
 require ("gui/gui_icd10_search.php");

@@ -54,7 +54,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 <?php $diagnostic_obj->Display_Quicklist_Elements($quicklist); ?>
                   </select>
                   <br>
-              <select name="itemlist[]" size="10" style="width:435px;" onDblClick="javascript:item_add();">
+              <select name="itemlist[]" size="20" style="width:600px;" onDblClick="javascript:item_add();">
   
                   <!-- dynamically managed content -->
 				<?php $diagnostic_obj->Display_Quicklist_Elements_Items($quicklist); ?>
@@ -65,7 +65,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
           </tr>
           <tr>
             <td align="center">
-            	<table border="0" cellpadding="0" cellspacing="0" align="center" width="435">
+            	<table border="0" cellpadding="0" cellspacing="0" align="center" width="500">
             		<tr>
             			<td width="33%"><a href="#" onClick="javascript:item_add();"><img  src="../../gui/img/control/default/en/en_add_item.gif" border=0 width="110" height="24" alt="" style="filter:alpha(opacity=70)"></a></td>
 									<td width="34%" align="center"><a href="#" onClick="javascript:submit_form(this,'icd10_diagnose.php','<?php echo $sid ?>','done')"><img  src="../../gui/img/control/default/en/en_im_finished.gif" border=0 width="110" height="24" alt="" style="filter:alpha(opacity=70)"></a></td>
@@ -77,7 +77,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
           <tr>
             <td>
 <div align="center">
-                <select name="selected_item_list[]" size="10" style="width:435px;" onDblClick="javascript:item_delete();">
+                <select name="selected_item_list[]" size="5" style="width:600px;" onDblClick="javascript:item_delete();">
                   <!-- dynamically managed content -->
                   <?php $diagnostic_obj->Display_Selected_Elements($item_no); ?>
                   <!-- dynamically managed content -->

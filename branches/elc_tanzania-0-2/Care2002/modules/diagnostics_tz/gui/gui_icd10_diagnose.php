@@ -29,8 +29,9 @@ function openpopup(URL, target,content,id)
 	  		$closelink='javascript:window.close();';
 	  	else
 	  		$closelink='../../main/startframe.php?ntid=false&lang=$lang';
-	  	?><a href="<?php echo $closelink; ?>"><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)"></a>
-	  	</td>
+	  	?><!--<a href=" <?php echo $closelink; ?>"><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)"></a>-->
+	  <a href=" javascript:alert('You have not saved the diagnosis Please press Submit diagnose button')"><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)"></a>	
+		</td>
 	  </tr>
   </table>
     </td>
@@ -46,7 +47,7 @@ function openpopup(URL, target,content,id)
                 <td><?php echo $diagnostic_obj->ShowPid($encounter_arr['pid']); ?></td>
               </tr>
               <tr>
-                <td>Selian file nr</td>
+                <td>Hospital file nr</td>
                 <td><?php echo $encounter_arr['selian_pid']; ?></td>
               </tr>
               <tr>

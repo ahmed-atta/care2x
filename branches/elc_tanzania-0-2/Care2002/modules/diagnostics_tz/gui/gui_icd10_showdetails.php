@@ -35,7 +35,7 @@ function openpopup(URL,target,content,id)
                 <td><?php echo $diagnostic_obj->ShowPid($encounter_arr['pid']); ?></td>
               </tr>
               <tr>
-                <td>Selian file nr</td>
+                <td>Hospital file nr</td>
                 <td><?php echo $encounter_arr['selian_pid']; ?></td>
               </tr>
               <tr>

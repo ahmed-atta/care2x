@@ -31,7 +31,7 @@ function openpopup(URL,target,content,id)
                 <td>12/34/56/78</td>
               </tr>
               <tr>
-                <td>Selian file nr</td>
+                <td>Hospital file nr</td>
                 <td>123456</td>
               </tr>
               <tr>

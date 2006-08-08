@@ -70,7 +70,7 @@
                   	<tr>
                   		<td colspan="2">
                   			Search for:<br>
-                  			<input type="text" <?php if(!$quicklist) echo 'disabled'; ?> size="24" name="keyword" value="<?php echo $keyword; ?>">
+                  			<input type="text" <?php if(!$quicklist) echo 'disabled'; ?> size="40" name="keyword" value="<?php echo $keyword; ?>">
                   			<input type="button" value="search" <?php if(!$quicklist) echo 'disabled'; ?> onClick="javascript:submit_form(this,'icd10_manage.php','<?php echo $sid ?>','manage')";>
                   		</td>
                   	</tr>
@@ -83,7 +83,7 @@
                   	</tr>
                   </table>
                   <br>
-              <select <?php if(!$quicklist) echo 'disabled'; ?> name="itemlist[]" size="10" style="width:435px;" onDblClick="javascript:item_add();">
+              <select <?php if(!$quicklist) echo 'disabled'; ?> name="itemlist[]" size="10" style="width:600px;" onDblClick="javascript:item_add();">
   
                   <!-- dynamically managed content -->
 				<?php $diagnostic_obj->Display_Search_Results($keyword,$search_mode); ?>
@@ -94,11 +94,11 @@
           </tr>
           <tr>
             <td align="center">
-            	<table border="0" cellpadding="0" cellspacing="0" align="center" width="435">
+            	<table border="0" cellpadding="0" cellspacing="0" align="center" width="500">
             		<tr>
             			<td width="33%"><a href="#" <?php if($quicklist) echo 'onClick="javascript:item_add();"'; ?>><img  src="../../gui/img/control/default/en/en_add_item.gif" border=0 width="110" height="24" alt="" style="filter:alpha(opacity=70)"></a></td>
 									<td width="34%" align="center">&nbsp;</td>
-                	<td width="33%" align="right"><a href="#" <?php if($quicklist) echo 'onClick="javascript:item_add();"'; ?>><img  src="../../gui/img/control/default/en/en_delete_item.gif" border=0 width="110" height="24" alt="" style="filter:alpha(opacity=70)"></a></td>
+                	<td width="33%" align="right"><a href="#" <?php if($quicklist) echo 'onClick="javascript:item_delete();"'; ?>><img  src="../../gui/img/control/default/en/en_delete_item.gif" border=0 width="110" height="24" alt="" style="filter:alpha(opacity=70)"></a></td>
                 </tr>
                </table>
 			       </td>
@@ -106,7 +106,7 @@
           <tr>
             <td>
 <div align="center">
-                <select <?php if(!$quicklist) echo 'disabled'; ?> name="selected_item_list[]" size="10" style="width:435px;" onDblClick="javascript:item_delete();">
+                <select <?php if(!$quicklist) echo 'disabled'; ?> name="selected_item_list[]" size="10" style="width:600px;" onDblClick="javascript:item_delete();">
                   <!-- dynamically managed content -->
                   <?php 
                   if($reference!="search")
