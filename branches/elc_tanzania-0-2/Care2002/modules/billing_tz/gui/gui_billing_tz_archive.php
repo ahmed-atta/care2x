@@ -56,7 +56,7 @@ A:visited:hover {color: #cc0033;}
     <td bgcolor="#99ccff" > &nbsp;&nbsp;<font color="#330066">Billing Archive 
       </font><font color="#330066"> (<?php echo $encoded_batch_number=$enc_obj->ShowPID($batch_nr); ?>)</font> 
     </td>
-    <td bgcolor="#99ccff" align=left> <a href="javascript:gethelp('pending_prescriptions_pharmacy.php')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a> 
+    <td bgcolor="#99ccff" align=left> <a href="javascript:gethelp('billing.php','billing','archive')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a> 
       <a href="billing_tz.php" ><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a> 
     </td>
   </tr>

@@ -17,8 +17,6 @@ $bill_obj = new Bill;
 
 $debug = FALSE;
 ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
-  		
-  		
 if($task=="insert")
 {
 	$billcounter=0;
@@ -37,7 +35,7 @@ if($task=="insert")
 				{
 					$new_bill_number = $bill_obj->CreateNewBill($encounter_nr);
 				}
-				$bill_obj->StorePrescriptionItemToBill($prescriptions_nr,$new_bill_number, $HTTP_POST_VARS['price_'.$prescriptions_nr], $HTTP_POST_VARS['dosage_'.$prescriptions_nr], $HTTP_POST_VARS['notes_'.$prescriptions_nr]);
+				$bill_obj->StorePrescriptionItemToBill($pid,$prescriptions_nr,$new_bill_number, $HTTP_POST_VARS['price_'.$prescriptions_nr], $HTTP_POST_VARS['dosage_'.$prescriptions_nr], $HTTP_POST_VARS['notes_'.$prescriptions_nr], $HTTP_POST_VARS['insurance_'.$prescriptions_nr]);
 				$bill_obj->UpdateBillNumberNewPrescription($prescriptions_nr,$new_bill_number);
 			}
 			elseif($HTTP_POST_VARS['modepres_'.$prescriptions_nr]=='delete')
@@ -59,7 +57,7 @@ if($task=="insert")
 				{
 					$new_bill_number = $bill_obj->CreateNewBill($encounter_nr);
 				}
-				$bill_obj->StoreLaboratoryItemToBill($labtest_nr,$new_bill_number);
+				$bill_obj->StoreLaboratoryItemToBill($pid,$labtest_nr,$new_bill_number, $HTTP_POST_VARS['insurance_'.$labtest_nr]);
 			}
 			elseif($HTTP_POST_VARS['modelab_'.$labtest_nr]=='delete')
 			{
@@ -70,14 +68,21 @@ if($task=="insert")
 		}
 
 	}
-	if($deletecounter>0 || $billcounter>0)
+	if($billcounter>0)
 		header("Location: billing_tz_edit.php".URL_APPEND."&batch_nr=".$pid."&billnr=".$new_bill_number."&user_origin=quotation");
 	else
 	{
-		$message = '<font color=red>Nothing todo for '.$enc_obj->ShowPID($pid).'.</font>';
+		if($deletecounter>0)
+				$message = '<font color=red>'.$deletecounter.' items deleted for '.$enc_obj->ShowPID($pid).'.</font>';
+		else
+				$message = '<font color=red>Nothing todo for '.$enc_obj->ShowPID($pid).'.</font>';
 		header("Location: billing_tz_quotation.php".URL_APPEND."&message=".urlencode($message));
 	}
 }
+
+require_once($root_path.'include/care_api_classes/class_tz_insurance.php');
+$insurance_tz = New Insurance_tz();
+$insurancebudget = $insurance_tz->GetInsuranceBudgetOfPerson($pid);
 require ("gui/gui_billing_tz_quotation_create.php");
 
 ?>

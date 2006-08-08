@@ -46,6 +46,33 @@ A:visited:hover {color: #cc0033;}
 <script language="JavaScript" src="<?php echo $root_path;?>js/tooltips.js"></script>
 <div id="BallonTip" style="POSITION:absolute; VISIBILITY:hidden; LEFT:-200px; Z-INDEX: 100"></div>
 
+<script language="JavaScript">
+function toggle_tr(myelem,show,id) {
+ if(show){
+   document.getElementById(myelem).style.display = '';
+   if(show)
+   calc_article(id);
+ }else{
+   document.getElementById(myelem).style.display = 'none';
+ }
+}
+function calc_article(id)
+{
+	
+	if(isNaN(document.forms[0].elements['showprice_' + String(id)].value) || isNaN(document.forms[0].elements['dosage_' + id].value) || isNaN(document.forms[0].elements['insurance_' + id].value))
+	{
+		document.getElementById('div_' + id).innerHTML='n/a';
+	}
+	else
+	{
+		sum = document.forms[0].elements['showprice_' + id].value * document.forms[0].elements['dosage_' + id].value;
+		sum_total = sum - document.forms[0].elements['insurance_' + id].value;
+		if (sum_total<0) sum_total=0;
+		document.getElementById('div_' + id).innerHTML='<table width="100%" border="0"><tr><td>' + document.forms[0].elements['showprice_' + id].value + ' x ' + document.forms[0].elements['dosage_' + id].value + ' = </td><td align="right">' + sum + ' TSH</td></tr><tr><td>Insurance:</td><td align="right">- ' + document.forms[0].elements['insurance_' + id].value + ' TSH</td></tr><tr><td><b>Sum:</b></td><td align="right"><b>' + sum_total + ' TSH</b></td></tr></table><input type="hidden" name="pressum_' + id + '" value="'+ sum_total + '">';
+		
+	}
+}
+</script>
 
  
 </HEAD>
@@ -56,7 +83,7 @@ A:visited:hover {color: #cc0033;}
     <td bgcolor="#99ccff" > &nbsp;&nbsp;<font color="#330066">Create quotation for
       </font><font color="#330066"> <?php echo $encoded_batch_number=$enc_obj->ShowPID($pid); ?></font> 
     </td>
-    <td bgcolor="#99ccff" align=left> <a href="javascript:gethelp('pending_prescriptions_pharmacy.php')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a> 
+    <td bgcolor="#99ccff" align=left> <a href="javascript:gethelp('billing.php','quotation','details')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a> 
       <a href="billing_tz.php" ><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a> 
     </td>
   </tr>
@@ -68,7 +95,7 @@ A:visited:hover {color: #cc0033;}
 			<tr>
 			  <td>
 			  <form method="POST" action="">
-			  <table width="80%" border="0" align="center" bgcolor="#FFFF88">
+			  <table width="600" border="0" align="center" bgcolor="#FFFF88">
 			  	<tr>
 			  		<td>
 			  			<font class="submenu_item">Current quotation:</font>
@@ -82,17 +109,12 @@ A:visited:hover {color: #cc0033;}
 			  {
 			  ?>
 			  <center><font class="submenu_item">Laboratory requests</font></center>
-			  <table width="80%" border="0" align="center">
-              <tr>
-					  <td bgcolor=#ffffdd width="80"><div align="center">Date</div></td>
-					  <td bgcolor=#ffffdd><div align="center">Requestet laboratory tests</div></td>
-					  <td bgcolor=#ffffdd width="23"><div align="center"><img src="../../gui/img/common/default/check2.gif" border=0 alt="Bill this item now!" style="filter:alpha(opacity=70)"></div></td>
-					  <td bgcolor=#ffffdd width="23"><div align="center"><img src="../../gui/img/common/default/clock.gif" width="20" height="20" border=0 alt="Ignore this item now!" style="filter:alpha(opacity=70)"></div></td>
-						<td bgcolor=#ffffdd width="23"><div align="center"><img src="../../gui/img/common/default/delete2.gif" border=0 alt="Delete this item now!" style="filter:alpha(opacity=70)"></div></td>
-					  
-					</tr>
+			  <table width="600" border="0" align="center">
+
           	
-					<?php $bill_obj->ShowNewQuotationEncounter_Laboratory($encounter_nr); ?>
+					<?php
+					 $id_array = array();
+					 $bill_obj->ShowNewQuotationEncounter_Laboratory($encounter_nr, $id_array); ?>
 				</table>
 					  <input type="hidden" value="insert" name="task">
 					  <input type="hidden" value="<?php echo $encounter_nr; ?>" name="encounter_nr">
@@ -104,23 +126,12 @@ A:visited:hover {color: #cc0033;}
 			  {
 			  ?><br>
 			  <center><font class="submenu_item">Prescriptions</font></center>
-				<table width="80%" border="0" align="center">
-              <tr>
-					  <td bgcolor=#ffffdd width="80"><div align="center">Date</div></td>
-					  <td bgcolor=#ffffdd><div align="center">Article</div></td>
-					  <td bgcolor=#ffffdd><div align="center">Price</div></td>
-					  <td bgcolor=#ffffdd><div align="center">Dosage</div></td>
-					  <td bgcolor=#ffffdd><div align="center">Notes</div></td>
-					  <td bgcolor=#ffffdd><div align="center"><img src="../../gui/img/common/default/check2.gif" border=0 alt="Bill this item now!" style="filter:alpha(opacity=70)"></div></td>
-					  <td bgcolor=#ffffdd><div align="center"><img src="../../gui/img/common/default/clock.gif" width="20" height="20" border=0 alt="Ignore this item now!" style="filter:alpha(opacity=70)"></div></td>
-						<td bgcolor=#ffffdd><div align="center"><img src="../../gui/img/common/default/delete2.gif" border=0 alt="Delete this item now!" style="filter:alpha(opacity=70)"></div></td>
-					  
-					</tr>
+				<table width="600" border="0" align="center">
           	<form method="POST" action="">
-					<?php $bill_obj->ShowNewQuotationEncounter_Prescriptions($encounter_nr); ?>
+					<?php $bill_obj->ShowNewQuotationEncounter_Prescriptions($encounter_nr,$id_array); ?>
               <tr>
 					  <td bgcolor=#ffffdd width="80" colspan="4">
-					  
+
 					  <input type="hidden" value="insert" name="task">
 					  <input type="hidden" value="<?php echo $encounter_nr; ?>" name="encounter_nr">
 					  <input type="hidden" value="<?php echo $pid; ?>" name="pid">
@@ -132,7 +143,123 @@ A:visited:hover {color: #cc0033;}
 				<?php 
 				}
 				?>
-				<table width="80%" border="0" align="center">
+					  <script language="JavaScript">
+					  var objectarray = new Array();
+					  	function sum_all()
+					  	{
+					  		var totalsum=0;
+					  		var insurancebalance=0;
+					  		
+					  		
+					  		<?php
+					  		$arraycount=0;
+					  		while(list($x,$v) = each($id_array))
+					  		{
+					  			$objectarray[$arraycount++] = substr(strstr($x,'_'),1);
+					  			echo 'if(document.forms[0].elements[\''.$x.'\']) 
+					  							if(!isNaN(document.forms[0].elements[\''.$x.'\'].value))
+					  							{
+					  								if(document.forms[0].elements[\'modepres_'.substr(strstr($x,'_'),1).'\'])
+					  								{
+					  									
+					  									if(document.forms[0].elements[\'modepres_'.substr(strstr($x,'_'),1).'\'][0].checked)
+					  									{
+						  									totalsum = totalsum + parseInt(document.forms[0].elements[\''.$x.'\'].value);
+						  									if(parseInt(document.forms[0].elements[\'insurance_'.substr(strstr($x,'_'),1).'\'].value) <= (parseInt(document.forms[0].elements[\'showprice_'.substr(strstr($x,'_'),1).'\'].value) * parseInt(document.forms[0].elements[\'dosage_'.substr(strstr($x,'_'),1).'\'].value)))
+						  									{		
+						  								    	insurancebalance=insurancebalance + parseInt(document.forms[0].elements[\'insurance_'.substr(strstr($x,'_'),1).'\'].value);
+						  								    }else 
+						  								    {
+						  								    	insurancebalance=insurancebalance + (parseInt(document.forms[0].elements[\'showprice_'.substr(strstr($x,'_'),1).'\'].value) * parseInt(document.forms[0].elements[\'dosage_'.substr(strstr($x,'_'),1).'\'].value));
+						  								    }
+						  								}
+					  								}
+					  								else
+					  								{
+														if(document.forms[0].elements[\'modelab_'.substr(strstr($x,'_'),1).'\'])
+														{
+															
+						  									if(document.forms[0].elements[\'modelab_'.substr(strstr($x,'_'),1).'\'][0].checked)
+						  									{
+							  									totalsum = totalsum + parseInt(document.forms[0].elements[\''.$x.'\'].value);
+							  									if(parseInt(document.forms[0].elements[\'insurance_'.substr(strstr($x,'_'),1).'\'].value) <=parseInt(document.forms[0].elements[\'showprice_'.substr(strstr($x,'_'),1).'\'].value))
+							  								    	insurancebalance=insurancebalance + parseInt(document.forms[0].elements[\'insurance_'.substr(strstr($x,'_'),1).'\'].value);
+							  								    else
+							  								    {
+							  								    	insurancebalance=insurancebalance + (parseInt(document.forms[0].elements[\'showprice_'.substr(strstr($x,'_'),1).'\'].value) * parseInt(document.forms[0].elements[\'dosage_'.substr(strstr($x,'_'),1).'\'].value));
+							  								    }
+							  								}
+						  								}
+													}
+						  						}
+					  			';
+									$y = $x;
+					  		}
+					  		$x = $y;
+/*					  			echo '
+					  			
+					  			if(document.getElementById(\'modepres_'.substr(strstr($x,'_'),1).'\'))
+					  			{
+					  				
+					  				
+					  			}
+					  			if(document.getElementById(\'modelab_'.substr(strstr($x,'_'),1).'\'))
+					  				alert(document.getElementById(\'modelab_'.substr(strstr($x,'_'),1).'\').value);';
+	*/				  		
+							echo 'balance='.$insurancebudget.'-insurancebalance;';	
+							echo 'if(balance<0) balance = \'<font color="#FF0000">\' + balance + \'</font>\';';
+					  		echo 'document.getElementById(\'totalsum\').innerHTML=\'The total sum is: <b>\' + totalsum + \' TSH</b>';
+					  		if($insurancebudget>0) echo '<br>Your insurance balance is: <b>'.$insurancebudget.' - \' + insurancebalance + \' = \' + balance + \' TSH</b>';
+					  		echo '\';';
+					  		?>
+					  	}
+					  	function TriggerAllItems(trigger)
+					  	{
+					  	var showtr;
+					  	if(trigger==0)
+					  		showtr = true;
+					  	else
+					  		showtr = false;
+						<?php
+						while(list($x,$v) = each($objectarray))
+						{
+							echo "
+							if(document.forms[0].elements['modepres_".$v."'])
+							{
+								document.forms[0].elements['modepres_".$v."'][trigger].checked = true;
+								toggle_tr('tr_".$v."',showtr,'".$v."');
+							}
+							if(document.forms[0].elements['modelab_".$v."'])
+							{
+								document.forms[0].elements['modelab_".$v."'][trigger].checked = true;
+								toggle_tr('tr_".$v."',showtr,'".$v."');
+							}
+							";
+							
+						}
+						?>
+					  	}
+					  </script>
+
+				<table width="600" border="0" align="center">
+					<tr>
+						<td>
+							Mark all items at once:
+						</td>
+						<td align="right">
+							<input type="button" value="Select" onClick="javascript:TriggerAllItems(0);">
+							<input type="button" value="Todo" onClick="javascript:TriggerAllItems(1);">
+							<input type="button" value="Delete" onClick="javascript:TriggerAllItems(2);">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="button" value="Calculate total sum" onClick="javascript:sum_all();">
+						</td>
+						<td>
+							<div id="totalsum" width="400">Total sum has not been calculated yet.<?php if($insurancebudget>0) echo '<br>The remaining insurance budget is: <b>'.$insurancebudget.' TSH</b>'; else echo '<br>There is <b>no valid insurance</b> for this person.';?></div>
+						</td>
+					</tr>
 					<tr>
 						<td>
 							<input type="reset" value="Reset fields">

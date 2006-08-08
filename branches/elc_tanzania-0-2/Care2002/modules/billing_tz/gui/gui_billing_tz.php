@@ -40,10 +40,26 @@ function popPic(pid,nm){
 </script>
 
   	<script language="javascript">
+	
+	
 <!--
 function closewin()
 {
 	location.href='startframe.php?sid=6ac874bb63e983fd6ec8b9fdc544cab5&lang=$lang';
+}
+
+
+function open_drug_services() {
+	urlholder="<?php echo $root_path;?>/modules/pharmacy_tz/pharmacy_tz_pending_prescriptions.php<?php echo URL_APPEND; ?>&target=search&task=newprescription&back_path=billing";
+	patientwin=window.open(urlholder,"Ziel","width=750,height=550,status=yes,menubar=no,resizable=yes,scrollbars=yes");
+	//patientwin.moveTo(0,0);
+	//patientwin.resizeTo(screen.availWidth,screen.availHeight);
+}
+function open_lab_request(){
+	urlholder="<?php echo $root_path;?>modules/laboratory/labor_test_request_pass.php?<?php echo URL_APPEND; ?>&target=chemlabor&user_origin=bill";
+	patientwin=window.open(urlholder,"Ziel","width=750,height=550,status=yes,menubar=no,resizable=yes,scrollbars=yes");
+	//patientwin.moveTo(0,0);
+	//patientwin.resizeTo(screen.availWidth,screen.availHeight);
 }
 // -->
 </script>
@@ -65,7 +81,7 @@ function closewin()
   <td bgcolor="#99ccff" align=right><a
    href="javascript:window.history.back()"><img src="../../gui/img/control/default/en/en_back2.gif" border=0 width="110" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)" ></a><a
    href="javascript:gethelp('submenu1.php','Pharmacy')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a><a
-   href="../../main/startframe.php?ntid=false&lang=$lang" ><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>  </td>
+   href="billing_tz.php" ><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>  </td>
  </tr>
  </table>		</td>
 	</tr>
@@ -109,14 +125,24 @@ function closewin()
                       -->
                       <TR> 
                         <td height="26" align=center><img src="../../gui/img/common/default/prescription.gif" border=0 width="16" height="16"></td>
-                        <TD class="submenu_item"><nobr><a href="<?php echo $root_path;?>modules/laboratory/labor_test_request_pass.php?<?php echo URL_APPEND; ?>&target=chemlabor&user_origin=bill">Laboratory Test Request</a></nobr></TD>
-
+                        <!--<TD class="submenu_item"><nobr><a href="<?php echo $root_path;?>modules/laboratory/labor_test_request_pass.php?<?php echo URL_APPEND; ?>&target=chemlabor&user_origin=bill">Laboratory Test Request</a></nobr></TD> -->
+						<TD class="submenu_item"><nobr><a href="javascript:open_lab_request()">Laboratory Test Request</a></nobr></TD>
                         <TD>Labor Test Request</TD>
                       </tr>
                       <TR> 
                         <td height="26" align=center><img src="../../gui/img/common/default/prescription.gif" border=0 width="16" height="16"></td>
-                        <TD class="submenu_item"><nobr><a href="<?php echo $root_path;?>/modules/pharmacy_tz/pharmacy_tz_pending_prescriptions.php<?php echo URL_APPEND; ?>&target=search&task=newprescription&back_path=billing">Drug prescription</a></nobr></TD>
-                        <TD>Show prescriptions of patients</TD>
+                      <!-- <TD class="submenu_item"><nobr><a href="<?php echo $root_path;?>/modules/pharmacy_tz/pharmacy_tz_pending_prescriptions.php<?php echo URL_APPEND; ?>&target=search&task=newprescription&back_path=billing">Drug and other services request</a></nobr></TD> -->
+                       <TD class="submenu_item"><nobr><a href="javascript:open_drug_services()" >Drug and other services request</a></nobr></TD>
+						
+						<TD>Show prescriptions and services of patients</TD>
+                      </tr>
+                      <TR  height=1> 
+                        <TD colSpan=3 class="vspace"><IMG height=1 src="../../gui/img/common/default/pixel.gif" width=5></TD>
+                      </TR>
+                      <TR> 
+                        <td height="26" align=center><img src="../../gui/img/common/default/pdata.gif" border=0></td>
+                        <TD class="submenu_item"><nobr><a href="insurance_tz.php">Insurance Management</a></nobr></TD>
+                        <TD>Add, edit and remove insurances and their members</TD>
                       </tr>
                       <TR  height=1> 
                         <TD colSpan=3 class="vspace"><IMG height=1 src="../../gui/img/common/default/pixel.gif" width=5></TD>

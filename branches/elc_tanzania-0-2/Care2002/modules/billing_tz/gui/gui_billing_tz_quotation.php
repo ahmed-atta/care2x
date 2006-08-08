@@ -56,7 +56,7 @@ A:visited:hover {color: #cc0033;}
     <td bgcolor="#99ccff" > &nbsp;&nbsp;<font color="#330066">Create new quotations
       </font>
     </td>
-    <td bgcolor="#99ccff" align=left> <a href="javascript:gethelp('pending_prescriptions_pharmacy.php')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a> 
+    <td bgcolor="#99ccff" align=left> <a href="javascript:gethelp('billing.php','quotation','overview')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a> 
       <a href="billing_tz.php" ><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a> 
     </td>
   </tr>
@@ -73,7 +73,7 @@ A:visited:hover {color: #cc0033;}
 					  <td bgcolor=#ffffdd><div align="center">Date</div></td>
 					  <td bgcolor=#ffffdd><div align="center">Admission-Nr</div></td>
 					  <td bgcolor=#ffffdd><div align="center">PID</div></td>
-					  <td bgcolor=#ffffdd><div align="center">Selian file nr</div></td>
+					  <td bgcolor=#ffffdd><div align="center">Hospital file nr</div></td>
 					  <td bgcolor=#ffffdd><div align="center">Patient Name</div></td>
 					  <td bgcolor=#ffffdd><div align="center">Birth</div></td>
 						<td bgcolor=#ffffdd><div align="center">Count</div></td>
