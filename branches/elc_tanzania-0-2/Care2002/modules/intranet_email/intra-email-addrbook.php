@@ -248,7 +248,7 @@ ob_start();
 </form>
 </ul>
 <hr color=#000080>
-<?php endif ?>
+<?php endif; ?>
 
  <?php
 // ******************************** show address book***************************************

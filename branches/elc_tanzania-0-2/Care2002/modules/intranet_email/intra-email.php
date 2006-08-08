@@ -449,7 +449,7 @@ function chgQuickAddr()
 	url="intra-email-chgQaddr.php?sid=<?php echo "$sid&lang=$lang&eadd=".$HTTP_COOKIE_VARS[$local_user.$sid] ?>";
 	addrwin=window.open(url,"addrwin","width=600,height=500,menubar=no,resizable=yes,scrollbars=yes");
 }
-<?php endif ?>
+<?php endif; ?>
 // -->
 </script> 
 

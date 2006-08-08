@@ -134,7 +134,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <script language=javascript>
 
 </script>
-<?php endif?>
+<?php endif; ?>
 
 <?php //foreach($argv as $v) echo "$v "; ?>
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
