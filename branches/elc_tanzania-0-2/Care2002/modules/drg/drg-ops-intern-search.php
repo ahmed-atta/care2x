@@ -111,7 +111,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <BODY   onLoad="if(window.focus) window.focus();
 <?php if(!$showonly) : ?>
 document.searchdata.keyword.select();document.searchdata.keyword.focus();
-<?php endif ?>
+<?php endif; ?>
 " bgcolor=<?php echo $cfg['body_bgcolor']; ?>
 <?php if (!$cfg['dhtml']){ echo ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 
@@ -128,7 +128,7 @@ document.searchdata.keyword.select();document.searchdata.keyword.focus();
 <INPUT type="submit" name="versand" value="<?php echo $LDSearch ?>">
 <?php else : ?>
 <input type="hidden" name="keyword" value="">
-<?php endif ?>
+<?php endif; ?>
 <input type="hidden" name="sid" value="<?php echo $sid; ?>">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
 <input type="hidden" name="pn" value="<?php echo $pn; ?>">
@@ -152,7 +152,7 @@ document.searchdata.keyword.select();document.searchdata.keyword.focus();
 <td width="20">
 <?php if(!$showonly) : ?>
 <img <?php echo $img['delete'] ?> alt="<?php echo $LDReset ?>" onClick="javascript:document.ops301.reset()">
-<?php endif ?>
+<?php endif; ?>
 </td>
 <td><font face=arial size=2 color=#ffffff>&nbsp;<b><nobr><?php echo $LDOpsIntern ?></nobr></b>&nbsp;</td>
 

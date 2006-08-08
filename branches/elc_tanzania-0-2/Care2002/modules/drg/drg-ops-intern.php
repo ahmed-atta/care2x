@@ -159,7 +159,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
  //window.opener.location.href='drg-composite-start.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&opnr=$opnr&edit=$edit&is_discharged=$is_discharged&ln=$ln&fn=$fn&bd=$bd&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=composite&newsave=1" ?>';
 //window.parent.opener.location.href='<?php echo "oploginput.php?sid=$sid&lang=$lang&mode=saveok&enc_nr=$pn&op_nr=$opnr&edit=$edit&is_discharged=$is_discharged&dept_nr=$dept_nr&saal=$oprm&pyear=$y&pmonth=$m&pday=$d" ?>';
 </script>
-<?php endif ?>
+<?php endif; ?>
 </HEAD>
 
 <BODY 
@@ -193,7 +193,7 @@ if($opnr) echo" - OP# $opnr - $dept_nr OP $oprm";
  <input type="button" value="<?php echo $LDSearch4OPS301 ?>" onClick="javascript:openOPSsearch()">&nbsp;
  <input type="button" value="<?php echo $LDQuickList ?>" onClick="javascript:openICDsearch()">
 <p>
-<?php endif ?>
+<?php endif; ?>
 
 <table border=0 width=100%>
   <tr>

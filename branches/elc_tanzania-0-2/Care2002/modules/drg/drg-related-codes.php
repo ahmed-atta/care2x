@@ -281,7 +281,7 @@ $hidselector='ops_px';
 <img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="bottom"><?php echo $LDNoQuickList ?> 
 <p>
 <a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>></a>
-<?php endif ?>
+<?php endif; ?>
 
 </ul>
 &nbsp;
