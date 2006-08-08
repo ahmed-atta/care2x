@@ -1,6 +1,6 @@
 <?php
 if($parent_admit) $bgimg='tableHeaderbg3.gif';
-	else $bgimg='tableHeaderbg_gr.gif'
+	else $bgimg='tableHeaderbg_gr.gif';
 $tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
 ?>
 <table border=0 cellpadding=4 cellspacing=1 width=100%>

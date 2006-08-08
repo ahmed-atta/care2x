@@ -58,7 +58,6 @@ $thisfile=basename(__FILE__);
  $smarty->assign('pbHelp',"javascript:gethelp('person_how2search.php')");
 
  $smarty->assign('pbBack',FALSE);
- 
  #
  # Create the search object
  #

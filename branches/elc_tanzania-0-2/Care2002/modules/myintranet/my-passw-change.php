@@ -91,7 +91,7 @@ ob_start();
 <?php if($n_error) : ?><font class="warnprompt">
 <img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"> <?php echo $LDNewPwDiffer ?>
 </font>
-<?php endif ?>
+<?php endif; ?>
 <ul>
 
 <?php if($mode=='pwchg') : ?>
@@ -165,7 +165,7 @@ echo '</FONT><p>';
 </tr>
 </table>
 </form>
-<?php endif ?>   
+<?php endif; ?>   
 
 <p>
 

@@ -5,7 +5,7 @@ if(!isset($pres_obj)) $pres_obj=new Prescription;
 $app_types=$pres_obj->getAppTypes();
 $pres_types=$pres_obj->getPrescriptionTypes();
 
-$debug = false;
+$debug = FALSE;
 
 if ($debug) echo "External_call:".$externalcall;
 
@@ -35,6 +35,10 @@ if (!empty($show)) {
       $activated_tab='service';
       $db_drug_filter='mems_service';
     }
+  if ($show=='dental') {
+      $activated_tab='dental';
+      $db_drug_filter='mems_dental';
+    }
   if ($show=='smallop') {
       $activated_tab='smallop';
       $db_drug_filter='mems_smallop';
@@ -53,6 +57,7 @@ if (!empty($show)) {
     
     // The prescription list is complete, so we can go to ask about the details
     // of each item
+    
     include('./gui_bridge/default/gui_input_prescription_details.php');
   } else {
 

@@ -1,7 +1,9 @@
 <?php
+
 //error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
+
 /*
 CARE2X Integrated Information System beta 2.0.1 - 2004-07-04 for Hospitals and Health Care Organizations and Services
 Copyright (C) 2002,2003,2004,2005  Elpidio Latorilla & Intellin.org	
@@ -21,6 +23,7 @@ require_once($root_path.'include/care_api_classes/class_ward.php');
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 
 if(!session_is_registered('sess_parent_mod')) session_register('sess_parent_mod');
+
 # Create objects
 $encounter_obj=new Encounter($encounter_nr);
 $person_obj=new Person();

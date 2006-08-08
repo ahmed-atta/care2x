@@ -271,17 +271,20 @@ ob_start();
 
 function initwindow(){
 	if (window.focus) window.focus();
-	window.resizeTo(800,600);
+	//window.resizeTo(800,600);
 }
 
 function getinfo(patientID){
 	urlholder="nursing-station.php?route=validroute&patient=" + patientID + "&user=<?php echo $aufnahme_user.'"' ?>;
-	patientwin=window.open(urlholder,patientID,"width=700,height=600,menubar=no,resizable=yes,scrollbars=yes");
+	patientwin=window.open(urlholder,patientID,"menubar=no,resizable=yes,scrollbars=yes");
+	patientwin.moveTo(0,0); 
+	patientwin.resizeTo(screen.availWidth,screen.availHeight); 
 }
 
 function enlargewin(){
 	window.moveTo(0,0);
-	 window.resizeTo(1000,740);
+	 //window.resizeTo(1000,740);
+	window.resizeTo(screen.availWidth,screen.availHeight); 
 }
 
 function xmakekonsil(v)
@@ -496,12 +499,12 @@ function rx(){
     // RM: Original DRG-Button:
 		//echo '<input type="button" onClick="javascript:openDRGComposite()" value="'.$LDDRG.'">';
 		// RM: Customized Diagnostic button:
-		echo '<input type="button" onClick="window.location.href=\''.$root_path.'modules/diagnostics_tz/icd10_quicklist.php'.URL_REDIRECT_APPEND.'$sid='.$SID.'&encounter_nr='.$pn.'&lang=en&ntid=false&externalcall=true&target=search&1=1&ispopup=true&backpath_diag='.urlencode($_SERVER["PHP_SELF"].URL_APPEND.'&pn='.$pn).'\'" value="Diagnoses"><br>';
+		echo '<input type="button" onClick="window.location.href=\''.$root_path.'modules/diagnostics_tz/icd10_quicklist.php?sid='.$sid.'&encounter='.$pn.'&lang=en&ntid=false&externalcall=true&target=search&1=1&ispopup=true&backpath_diag='.urlencode($_SERVER["PHP_SELF"].URL_APPEND.'&pn='.$pn).'\'" value="Diagnoses"><br>';
 		
 		echo '
 		<input type="button" onClick="javascript:window.location.href=\''.$root_path.'modules/nursing/nursing-station-patientdaten-doconsil-chemlabor.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&user_origin='.$user_origin.'&target=chemlabor&noresize=1&edit='.$edit.'\'" value="Lab requests">
 		<input type="button" onClick="javascript:window.location.href=\''.$root_path.'modules/laboratory/labor_datalist_noedit.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&user_origin='.$user_origin.'&edit='.$edit.'\'" value="'.$LDLabReports.'">
-		<input type="button" onClick="window.location.href=\''.$root_path.'modules/registration_admission/show_prescription.php'.URL_REDIRECT_APPEND.'$sid='.$SID.'&pn='.$pn.'&lang=en&ntid=false&externalcall=true&target=search&1=1\'" value="Prescriptions">';
+		<input type="button" onClick="window.location.href=\''.$root_path.'modules/registration_admission/show_prescription.php'.URL_REDIRECT_APPEND.'$sid='.$SID.'&pn='.$pn.'&lang=en&ntid=false&externalcall=true&target=search&1=1&backpath='.urlencode($_SERVER["PHP_SELF"].URL_APPEND.'&pn='.$pn).'\'" value="Prescriptions">';
 		
 		
 		/* Create the select  menu in edit mode */

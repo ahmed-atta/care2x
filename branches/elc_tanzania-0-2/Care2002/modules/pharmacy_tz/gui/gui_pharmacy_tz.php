@@ -35,17 +35,17 @@ A:visited:hover {color: #cc0033;}
 <!--
 function popPic(pid,nm){
 
- if(pid!="") regpicwindow = window.open("../../main/pop_reg_pic.php?sid=6ac874bb63e983fd6ec8b9fdc544cab5&lang=$lang&pid="+pid+"&nm="+nm,"regpicwin","toolbar=no,scrollbars,width=180,height=250");
+ if(pid!="") regpicwindow = window.open("../../main/pop_reg_pic.php?sid=<?php echo $HTTP_SESSION_VARS['sess_pid'];?>&lang=en&pid="+pid+"&nm="+nm,"regpicwin","toolbar=no,scrollbars,width=180,height=250");
 
 }
-// -->
-</script>
-
-  	<script language="javascript">
-<!--
 function closewin()
 {
 	location.href='startframe.php?sid=6ac874bb63e983fd6ec8b9fdc544cab5&lang=$lang';
+}
+
+function open_pending_prescriptions() {
+	urlholder="<?php echo $root_path;?>modules/pharmacy_tz/pharmacy_tz_pending_prescriptions.php?sid=<?php echo $HTTP_SESSION_VARS['sess_pid'];?>&comming_from=pharmacy";
+	patientwin=window.open(urlholder,"Ziel","width=1000,height=800,status=yes,menubar=no,resizable=yes,scrollbars=yes,statusbar=yes,top=0,left=0");
 }
 // -->
 </script>
@@ -85,7 +85,7 @@ function closewin()
                     <TBODY class="submenu">
                       <TR> 
                         <td align=center><img src="../../gui/img/common/default/prescription.gif" border=0 width="27" height="17"></td>
-                        <TD class="submenu_item"><nobr><a href="pharmacy_tz_pending_prescriptions.php">Drug 
+                        <TD class="submenu_item"><nobr><a href="javascript:open_pending_prescriptions()" >Drug 
                           prescription</a></nobr></TD>
                         <TD>Show prescriptions of patients</TD>
                       </tr>

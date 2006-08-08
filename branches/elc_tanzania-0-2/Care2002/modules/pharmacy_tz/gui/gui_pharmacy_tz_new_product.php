@@ -130,8 +130,9 @@ A:visited:hover {color: #cc0033;}
                     <option value="mems_special_others_list" <?PHP if ($item_classification=="special others") echo "selected";?>>special others</option>
                     <option value="mems_xray" <?PHP if ($item_classification=="x-ray") echo "selected";?>>x-ray</option>
                     <option value="mems_service" <?PHP if ($item_classification=="service") echo "selected";?>>service</option>
+                    <option value="mems_dental" <?PHP if ($item_classification=="dental services") echo "selected";?>>dental services</option>
                     <option value="mems_smallop" <?PHP if ($item_classification=="small op") echo "selected";?>>small op</option>
-                    <option value="mems_bigop" <?PHP if ($item_classification=="big op") echo "selected";?>>big op</option>
+                    <option value="mems_bigop" <?PHP if ($item_classification=="big op") echo "selected";?>>major op</option>
                 </select>
                 <?php } ?>
                 </td>

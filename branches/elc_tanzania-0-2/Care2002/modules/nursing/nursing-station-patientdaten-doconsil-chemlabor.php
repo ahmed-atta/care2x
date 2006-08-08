@@ -94,13 +94,18 @@ define('LANG_FILE','konsil_chemlabor.php');
 *  $user_origin == lab ;  from the laboratory
 *  and set the user cookie name and break or return filename
 */
-
+$debug=FALSE;
 if($user_origin=='lab'){
   $local_user='ck_lab_user';
   $breakfile=$root_path."modules/laboratory/labor.php".URL_APPEND;
+  if ($debug) echo "User Origin is $user_origin and Breakfile is ".$breakfile."<br>";
 }else{
   $local_user='ck_pflege_user';
-  $breakfile=$root_path."modules/nursing/nursing-station-patientdaten.php".URL_APPEND."&edit=$edit&station=$station&pn=$pn";
+  if ($user_origin=='bill')
+  	$breakfile=$root_path."modules/billing_tz/billing_tz_quotation.php";
+  else
+  	$breakfile=$root_path."modules/nursing/nursing-station-patientdaten.php".URL_APPEND."&edit=$edit&station=$station&pn=$pn";
+  if ($debug) echo "User Origin is $user_origin and Breakfile is ".$breakfile."<br>";
 }
 
 require_once($root_path.'include/inc_front_chain_lang.php'); ///* invoke the script lock*/
@@ -111,7 +116,7 @@ $bgc1='#fff3f3'; /* The main background color of the form */
 $abtname=get_meta_tags($root_path."global_conf/$lang/konsil_tag_dept.pid");
 $edit_form=0;
 $read_form=0;
-$db_request_table=$target;
+$db_request_table=$target; 
 $paramlist='';
 $sday='';
 $sample_time='';
@@ -187,12 +192,15 @@ if(isset($pn)&&$pn) {
 								  	// Load the visual signalling functions
 									include_once($root_path.'include/inc_visual_signalling_fx.php');
 									// Set the visual signal 
-									setEventSignalColor($pn,SIGNAL_COLOR_DIAGNOSTICS_REQUEST);									
-									//echo $sql;
-									 header("location:".$root_path."modules/laboratory/labor_test_request_aftersave.php".URL_REDIRECT_APPEND."&edit=$edit&saved=insert&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=chemlabor&noresize=$noresize&batch_nr=$batch_nr");
+									setEventSignalColor($pn,SIGNAL_COLOR_DIAGNOSTICS_REQUEST);
+									//print_r($data);
+									//echo "The breakfile is :".$breakfile;
+									 header("location: ".$breakfile);
+									 //header("location:".$root_path."modules/laboratory/labor_test_request_aftersave.php".URL_REDIRECT_APPEND."&edit=$edit&saved=insert&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=chemlabor&noresize=$noresize&batch_nr=$batch_nr");
+									 //header("location:".$root_path."modules/nursing/nursing-station-patientdaten-doconsil-chemlabor.php?sid=".$sid."&noresize=1&user_origin=bill&target=chemlabor&checkintern=1");
 									 exit;
 								}else{
-								     echo "<p>$sql<p>$LDDbNoSave"; 
+								     echo "wooops: <p>$sql<p>$LDDbNoSave"; 
 									 $mode='';
 								 }
 		                    } //end of prepareTestElements()
@@ -225,7 +233,7 @@ if(isset($pn)&&$pn) {
 								  }
 								  else
 								   {
-								      echo "<p>$sql<p>$LDDbNoSave"; 
+								      echo "Woops: <p>$sql<p>$LDDbNoSave"; 
 								      $mode="";
 								   }
 								  
@@ -269,6 +277,7 @@ if(isset($pn)&&$pn) {
   
           if(!$mode) /* Get a new batch number */
 		  {
+		  				
 		                $sql="SELECT batch_nr FROM care_test_request_".$db_request_table."  ORDER BY batch_nr DESC";
 		                if($ergebnis=$db->SelectLimit($sql,1))
        		            {
@@ -451,7 +460,7 @@ require($root_path.'include/inc_test_request_controls.php');
 <?php
 }
 ?>
-   
+<br>   
 
 <!-- outermost table for the form -->
 <table border=0 cellpadding=1 cellspacing=0 bgcolor="#606060">
@@ -471,11 +480,13 @@ require($root_path.'include/inc_test_request_controls.php');
       <td bgcolor="<?php echo $bgc1 ?>">
 	  <div class="lmargin">
 	  <font size=3 color="#990000" face="arial">
-       <?php echo $LDHospitalName ?><br>
-       <?php echo $LDCentralLab ?><p><font size=2>
-	   <?php echo $LDRoomNr ?>
+		
+
+
+
 	   <?php if($edit)
 	   {
+	   	/*
 	   ?>
 	    <input type="text" name="room_nr" size=10 maxlength=10 
 	    value="<?php 
@@ -483,6 +494,7 @@ require($root_path.'include/inc_test_request_controls.php');
 						 else   echo $HTTP_COOKIE_VARS['ck_thispc_room'] 
 				   ?>">
 		<?php
+		*/
 		}
 		else
 		{
@@ -491,268 +503,30 @@ require($root_path.'include/inc_test_request_controls.php');
 		?>
 	   <p>
 	    <!--  Table for the day and month code -->
-   <table border=0 cellspacing=0 cellpadding=0>
-   <!-- Sampling time, day, minutes row -->
+   <table border=0 cellspacing=0 cellpadding=0 width="1">
    <tr align="center">
-   <td colspan=4><font size=1 face="arial" color= "purple"><?php echo $LDSamplingTime ?></td>
-   <td colspan=3><font size=1 face="arial" color= "purple"><?php echo $LDDay ?></td>
-   <td bgcolor= "#990000"><img src="p.gif" width=1 height=1></td>
-   <td colspan=3><font size=1 face="arial" color= "purple"><?php echo $LDMinutes ?></td>
 
    </tr>
-   <!-- Day row  -->
    <tr align="center">
-   <?php
-	for($i=1;$i<8;$i++)
-	   echo 	 "<td><font size=1 face=\"verdana,arial\" color= \"#990000\">".$LDShortDay[$i]."</td>";
-	?>
-   <td bgcolor= "#990000"><img src="p.gif" width=1 height=1></td>
-   <td><font size=1 face="verdana,arial" color= "#990000">15</td>
-   <td><font size=1 face="verdana,arial" color= "#990000">30</td>
-   <td><font size=1 face="verdana,arial" color= "#990000">45</td>
 
    </tr>
 
    <tr align="center">
-   <?php
- 
-    if(($edit_form||$read_form))  $day_names=(int)$stored_request['sample_weekday'];
-      else   $day_names=(int)date('w');
-	  
-    if(!$day_names) $day_names=7;
-	
-	for($i=1;$i<8;$i++)
-	{
-	   echo 	'
-	   <td>';
-	   if($edit) echo '<a href="javascript:setThis(\'day_\',\''.$i.'\',1,8,1)">';
-	   if($day_names==$i)
-	   {
-	     echo '<img src="f.gif"';
-		 $v="1";
-	   }
-	     else
-	   {
-	  	  echo  '<img src="b.gif"';
-		  $v="0";
-	    }
-	   echo ' border=0 width=18 height=6 id="day_'.$i.'">';
-	   if($edit) echo '</a><input type="hidden" name="day_'.$i.'" value="'.$v.'">';
-	   echo '</td>';
-	}
-	/* Divide line */
-	echo  ' <td bgcolor= "#990000"><img src="p.gif" width=1 height=1></td>';
-	
-   if(($edit_form||$read_form)&&$stored_request['sample_time'])
-   {
-      list($hour,$quarter_mins)=explode(":",$stored_request['sample_time']);
-    }
-
-	/* Get the quarter minutes*/
-    if(!$edit_form&&!$read_form)
-	{
-	  $quarter_mins=(int)date('i');
-	}
-	 
-   if($quarter_mins>44)
-   {
-     $quarter_mins=45;
-   }
-   elseif($quarter_mins>29)
-   {
-     $quarter_mins=30;
-   }
-   elseif($quarter_mins>14)
-   {
-     $quarter_mins=15;
-   }
-   else $quarter_mins=0;
-
-	/* For the 10's */
-	
-      echo 	'<td>';
-      if($edit) echo '<a href="javascript:setThis(\'min_\',\'15\',15,46,15)">';
-	  if($quarter_mins==15)
-	   {
-	     echo '<img src="f.gif"';
-		 $v="1";
-	   }
-	     else
-	   {
-	  	  echo  '<img src="b.gif"';
-		  $v="0";
-	    }
-	   echo ' border=0 width=18 height=6 id="min_15">';
-	   if($edit) echo '</a><input type="hidden" name="min_15" value="'.$v.'">';
-	   echo '</td>';
-
-	   
-	/* For the 30's */
-
-	   echo 	'<td>';
-	   if($edit) echo '<a href="javascript:setThis(\'min_\',\'30\',15,46,15)">';
-	   if($quarter_mins==30)
-      {
-	     echo '<img src="f.gif"';
-		 $v="1";
-	   }
-	     else
-	   {
-	  	  echo  '<img src="b.gif"';
-		  $v="0";
-	    }
-
-	   echo ' border=0 width=18 height=6 id="min_30">';
-	   if($edit) echo '</a><input type="hidden" name="min_30" value="'.$v.'">';
-	   echo '</td>';
-	   
-	/* For the 45's */
-
-	   echo 	'<td>';
-	   if($edit) echo '<a href="javascript:setThis(\'min_\',\'45\',15,46,15)">';
-	   if($quarter_mins==45) 
-	   {
-	     echo '<img src="f.gif"';
-		 $v="1";
-	   }
-	     else
-	   {
-	  	  echo  '<img src="b.gif"';
-		  $v="0";
-	    }
-	   echo ' border=0 width=18 height=6 id="min_45">';
-	   if($edit) echo '</a><input type="hidden" name="min_45" value="'.$v.'">';
-	   echo '</td>';
-	?>
    </tr>
-   <!-- 10, 20 Time row -->
       <tr align="center">
-   <td ><font size=1 face="arial" >&nbsp;</td>
-   <td ><font size=1 face="verdana,arial" color= "#990000">10</td>
-   <td><font size=1 face="verdana,arial" color= "#990000">20</td>
-   <td colspan=8><font size=1 face="arial" color= "purple">&nbsp;</td>
    </tr>
    <!-- Input blocks for 10, 20 Time row -->
       <tr align="center">
    <td ><font size=1 face="arial" color= "purple"></td>
-   <?php
-   
-   $hour_tens=0;
-   $hour_ones=0;
-
-    if(!$edit_form&&!$read_form)
-	{
-       $hour=(int)date('H');
-	}
-	
-   if($hour>19)
-   {
-     $hour_tens=20;
-	 $hour_ones=$hour-$hour_tens;
-   }
-   elseif($hour>9)
-   {
-     $hour_tens=10;
-	 $hour_ones=$hour-$hour_tens;
-   }
-   else
-   {
-    $hour_ones=$hour;
-   }	  
-	   echo '
-	   <td>';
-	   if($edit) echo '<a href="javascript:setThis(\'hrs_\',\'10\',10,21,10)">';
-	   if($hour_tens==10)
-	   {
-	     echo '<img src="f.gif"';
-		 $v="1";
-	   }
-	     else
-	   {
-	  	  echo  '<img src="b.gif"';
-		  $v="0";
-	    }
-	   echo ' border=0 width=18 height=6 id="hrs_10">';
-	   if($edit) echo '</a><input type="hidden" name="hrs_10" value="'.$v.'">';
-	   echo '</td>';
-
-	   echo '
-	   <td>';
-	   if($edit) echo '<a href="javascript:setThis(\'hrs_\',\'20\',10,21,10)">';
-	   if($hour_tens==20)
-	   {
-	     echo '<img src="f.gif"';
-		 $v="1";
-	   }
-	     else
-	   {
-	  	  echo  '<img src="b.gif"';
-		  $v="0";
-	    }
-	   echo ' border=0 width=18 height=6 id="hrs_20">';
-	   if($edit) echo '</a><input type="hidden" name="hrs_20" value="'.$v.'">';
-	   echo '</td>';
-   ?>
    <td colspan=8><font size=1 face="arial" color= "purple"></td>
 
    </tr>
    
    <tr align="center">
-   <?php
-	for($i=0;$i<7;$i++)
-	   echo 	 "<td><font size=1 face=\"verdana,arial\" color= \"#990000\">".$i."</td>";
-	?>
    <td></td>
-   <?php
-	for($i=7;$i<10;$i++)
-	   echo 	 "<td><font size=1 face=\"verdana,arial\" color= \"#990000\">".$i."</td>";
-	?>
    </tr>
    <tr>
-	<?php
-   
-	for($i=0;$i<7;$i++)
-	{
-	   echo 	'
-	   <td>';
-	   if($edit) echo '<a href="javascript:setThis(\'hrs_\',\''.$i.'\',0,10,1)">';
-	   if($hour_ones==$i)
-	   {
-	     echo '<img src="f.gif"';
-		 $v="1";
-	   }
-	     else
-	   {
-	  	  echo  '<img src="b.gif"';
-		  $v="0";
-	    }
-	   echo ' border=0 width=18 height=6  id="hrs_'.$i.'">';
-	   if($edit) echo '</a><input type="hidden" name="hrs_'.$i.'" value="'.$v.'">';
-	   echo '</td>';
-	}
-	?>
    <td></td>
-	<?php
-	for($i=7;$i<10;$i++)
-	{
-	   echo 	'
-	   <td>';
-	   if($edit) echo '<a href="javascript:setThis(\'hrs_\',\''.$i.'\',0,10,1)">';
-	   if($hour_ones==$i)
-	   {
-	     echo '<img src="f.gif"';
-		 $v="1";
-	   }
-	     else
-	   {
-	  	  echo  '<img src="b.gif"';
-		  $v="0";
-	    }
-	   echo ' border=0 width=18 height=6 id="hrs_'.$i.'">';
-	   if($edit) echo '</a><input type="hidden" name="hrs_'.$i.'" value="'.$v.'">';
-	   echo '</td>';
-	}
-	?>
    </tr>
  </table>
  </div>
@@ -760,7 +534,7 @@ require($root_path.'include/inc_test_request_controls.php');
 
 <!-- Middle block of first row -->
       <td bgcolor="<?php echo $bgc1 ?>">
-		 <table border=0 cellpadding=10 bgcolor="#ee6666">
+		 <table border=1 cellpadding=0 bgcolor="">
      <tr>
        <td>
    
@@ -768,13 +542,69 @@ require($root_path.'include/inc_test_request_controls.php');
 
       if($edit)
         {
-		    echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
+		$sql_headline="SELECT     care_person.pid,
+								  care_person.selian_pid,
+								  name_first,
+								  name_last,
+								  sex,
+								  care_encounter.encounter_nr,
+								  date_birth
+ 					   FROM care_person, care_encounter  
+					   WHERE care_encounter.pid = care_person.pid AND care_encounter.encounter_nr ='".$pn."'";
+						 
+		if($h_requests=$db->Execute($sql_headline)){
+			if ($test_request_headline = $h_requests->FetchRow()) {
+				$h_pid=$test_request_headline['pid'];
+				$h_batch_nr=$test_request_headline['batch_nr'];
+				$h_encounter_nr=$test_request_headline['encounter_nr'];
+				$h_selian_file_number=$test_request_headline['selian_pid'];
+				$h_name_first=$test_request_headline['name_first'];
+				$h_name_last=$test_request_headline['name_last'];
+				$h_birthdate=$test_request_headline['date_birth'];
+		        $h_sex=$test_request_headline['sex'];
+		        if ($_sex=="f")
+		        	$h_sex_img="spf.gif";
+		        else
+		        	$h_sex_img="spm.gif";
+			} // end of if ($test_request_headline = $h_requests->FetchRow())
+		} // end of if($h_requests=$db->Execute($sql_headline))
+echo '
+		
+			
+					<td width="25%">
+					<font color="purple">Hospital File Nr.:
+						<font color="#ffffee" class="vi_data"><b>'.$h_selian_file_number.'
+					</td>
+					<td width="25%">
+
+					<font color="purple">Adm. no.:
+						<font color="#ffffee" class="vi_data"><b>'.$pn.'				
+					</td>
+					<td width="25%">	
+						<font color="purple">	Surname/Ukoo:
+					 	<font color="#ffffee" class="vi_data"><b>
+						'.$h_name_last.'</b>
+					</td>	
+										
+					<td width="25%">
+					<font color="purple"> First Name:
+					<font color="#ffffee" class="vi_data"><b>
+						'.$h_name_first.' </b>
+
+					</font>
+					</td>		
+					
+
+
+';		        	        	
+		    //echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
 		}
         elseif(empty($pn))
 		{
 		    $searchmask_bgcolor='white';
             include($root_path.'include/inc_test_request_searchmask.php');
         }
+ 
 ?>
 </td>
      </tr>
@@ -785,40 +615,12 @@ require($root_path.'include/inc_test_request_controls.php');
          <td  bgcolor="<?php echo $bgc1 ?>"  align="right">
 <!--  Block for the casenumber codes -->  
  <table border=0 cellspacing=0 cellpadding=0>
-<?php
-
-for($n=0;$n<8;$n++)
-{
-
-	if($n==2)
-	{
-	   echo '<tr><td colspan=10><img src="p.gif" width=1 height=2></td></tr>
-	           <tr><td bgcolor="#ffcccc" colspan=10><img src="p.gif" width=1 height=1></td></tr>';
-	 }
-?>
    <tr align="center">
-   <?php
-	for($i=0;$i<10;$i++)
-	   echo 	 "<td><font size=1 face=\"verdana,arial\" color= \"#990000\">".$i."</td>";
-	?>
    </tr>
 
    
    <tr>
-	<?php
-	
-	for($i=0;$i<10;$i++)
-	{
-	   echo 	'<td>';
-	   if(substr($full_en,$n,1)==$i) echo '<img src="f.gif"';
-	     else echo  '<img src="b.gif"';
-	   echo ' border=0 width=18 height=6 align="absmiddle"></td>';
-	}
-	?>
    </tr>
-<?php
-}
-?>
 
   <tr>
     <td colspan=10 align="right">
@@ -826,7 +628,7 @@ for($n=0;$n<8;$n++)
     
 	/* Barcode for the batch nr */
 	
-		    echo '<font size=1 color="#990000" face="verdana,arial">'.$batch_nr.'</font>&nbsp;&nbsp;<br>';
+		    //echo '<font size=1 color="#990000" face="verdana,arial">'.$batch_nr.'</font>&nbsp;&nbsp;<br>';
     /**
 	*  The barcode image is first searched in the cache. If present, it will be displayed.
 	*  Otherwise an image will be generated, stored in the cache and displayed.
@@ -863,14 +665,6 @@ for($n=0;$n<8;$n++)
 	<tr bgcolor="<?php echo $bgc1 ?>">	    
 	<td align="right"  colspan=3>
 	<font size=1 color="purple" face="verdana,arial"><?php echo $LDBatchNumber ?><font color="#000000" size=2> <?php echo $batch_nr ?>
-	<?php
-	for($i=0;$i<30;$i++)
-	{
-	   if(substr($result['patnum'],$n,1)==$i) echo '<img src="f.gif"';
-	     else echo  '<img src="b.gif"';
-	   echo ' border=0 width=18 height=6 align="absmiddle">';
-	}
-	?>
     </td>
 
 	</tr>	
@@ -915,7 +709,12 @@ for($i=0;$i<=$max_row;$i++)
 					{
 						echo '</a>';
 					}
-					echo '</td><td width='.(intval(745/$column)-18).'>'.$LD_Elements[$j][$i]['value'].'</td>';
+					echo '</td><td width='.(intval(745/$column)-18).'>';
+					if($edit)
+						echo '<a href="javascript:setM(\'_task'.$LD_Elements[$j][$i]['id'].'_\')">'.$LD_Elements[$j][$i]['value'].'</a>';
+					else
+						echo $LD_Elements[$j][$i]['value'];
+					echo '</td>';
 				}
 				else
 				{
@@ -943,11 +742,17 @@ ob_end_flush();
 </table>
 <table border=0 cellpadding=0 cellspacing=0 width=745 bgcolor="<?php echo $bgc1 ?>">
   <tr>
-    <td colspan=9><input type="text" name="doctor_sign" size=40 maxlength=40 value="<?php if($edit_form||$read_form) echo stripslashes($stored_request['doctor_sign']); ?>"></td>
-    <td colspan=11><input type="text" name="notes" size=65 maxlength=60 value="<?php if($edit_form||$read_form) echo stripslashes($stored_request['notes']); ?>"></td>
+    <td colspan=9>
+    	<!-- deleted 4th of july 2006 -->
+    	&nbsp;
+    </td>
+    <td colspan=11>
+    	<!-- deleted 4th of july 2006 -->
+    	&nbsp;
+    </td>
   </tr>
   <tr>
-    <td colspan=20><font size=2 face="verdana,arial" color="purple">&nbsp;<?php echo $LDEmergencyProgram.' &nbsp;&nbsp;&nbsp;<img '.createComIcon($root_path,'violet_phone.gif','0','absmiddle',TRUE).'> '.$LDPhoneOrder ?></td>
+    <!--<td colspan=20><font size=2 face="verdana,arial" color="purple">&nbsp;<?php echo $LDEmergencyProgram.' &nbsp;&nbsp;&nbsp;<img '.createComIcon($root_path,'violet_phone.gif','0','absmiddle',TRUE).'> '.$LDPhoneOrder ?></td>-->
   </tr>
 
 </table><!-- End of the main table holding the form -->

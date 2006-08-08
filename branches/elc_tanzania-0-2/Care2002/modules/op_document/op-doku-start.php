@@ -936,7 +936,7 @@ echo createElement('op_room',$op_room);
 <input  type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?>  alt="<?php echo $LDSave ?>">
 <a href="javascript:document.opdoc.reset()"><img <?php echo createLDImgSrc($root_path,'reset.gif','0') ?> alt="<?php echo $LDResetAll ?>" ></a>
 
-<?php endif ?>
+<?php endif;?>
 
 <input type="hidden" name="mode" value="<?php if($mode=='saveok') echo 'update'; else echo 'save' ?>">
 <input type="hidden" name="dept_nr" value="<?php echo $dept_nr ?>">

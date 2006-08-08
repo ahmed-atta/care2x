@@ -86,7 +86,9 @@ if (!empty($mode)) {
       if ($product_obj->check_form_variable($selians_item_description)) {
         $ERROR=TRUE;
         $ERROR_SELIANS_ITEM_DESCRIPTION = TRUE;
+
       }
+
     }
     if ($ERROR)
     $ERROR_MSG.="THERE ARE SOME IMPORTANT FIELDS MISSING! MISSING FIELDS ARE MARKED<br>";
@@ -163,10 +165,10 @@ if ( !empty($mode) && !$ERROR ) {
     if ($debug) echo "current mode is insert!<br>";
     if ($product_obj -> item_number_exists ($selian_item_number)) {
       // The item still exists in the database!
-      //$ERROR_MSG.="Sorry, this item with code \"".$selian_item_number."\" still exists in the database! <br>
-      //             Please check the field Selians item number, you can just update or delete it!<br>";
-      //$ERROR_SELIAN_ITEM_NUMBER = TRUE;
-      //$ERROR=TRUE;
+      $ERROR_MSG.="Sorry, this item with code \"".$selian_item_number."\" still exists in the database! <br>
+                   Please check the field Selians item number, you can just update or delete it!<br>";
+      $ERROR_SELIAN_ITEM_NUMBER = TRUE;
+      $ERROR=TRUE;
     } else {
       // This is a new item, store it into the database
       $product_obj->setDataArray($db_buffer);
@@ -198,7 +200,7 @@ if ( !empty($mode) && !$ERROR ) {
   //------------------------------------------------------------------------------
   
   if ($mode=="delete") {
-    if ($product_obj -> item_number_exists ($item_id)) {
+    if ($product_obj -> item_id_exists ($item_id)) {
       // The item still exists in the database!
       $product_obj->delete_item($item_id);
       $MSG.="Item with code \"".$selian_item_number."\" is deleted now<br>";

@@ -2,6 +2,24 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
+$debug=FALSE;
+if ($debug) {
+    if (!isset($externalcall))
+      echo "internal call<br>";
+    else
+      echo "external call<br>";
+    
+    echo "mode=".$mode."<br>";
+    
+		echo "show=".$show."<br>";
+		
+    echo "nr=".$nr."<br>";
+    
+    echo "breakfile: ".$breakfile."<br>";
+    echo "Back path: ".$back_path."<br>";
+    
+    echo "pid:".$pid;
+}
 /**
 * CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
@@ -86,7 +104,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 			if(empty($oitem)) $oitem='encounter_nr';			
 			if(empty($odir)) $odir='DESC'; # default, latest pid at top
 			
-			$sql2=" WHERE ( enc.encounter_nr='$suchwort'  OR enc.encounter_nr $sql_LIKE '%.$suchwort' )";
+			$sql2=" WHERE ( enc.encounter_nr='$suchwort'  OR enc.encounter_nr $sql_LIKE '%.$suchwort' OR reg.selian_pid='$suchwort' )";
 	    } else {
 			# Try to detect if searchkey is composite of first name + last name
 			if(stristr($searchkey,',')){
@@ -155,17 +173,28 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 			$dbtable='FROM care_encounter as enc,care_person as reg ';
 
 			$sql='SELECT enc.encounter_nr, enc.encounter_class_nr, enc.is_discharged,
-								reg.pid, reg.name_last, reg.name_first, reg.date_birth, reg.addr_zip,reg.sex '.$dbtable.$sql2;
+								reg.pid, reg.name_last, reg.name_first, reg.date_birth, reg.selian_pid,reg.sex, reg.selian_pid '.$dbtable.$sql2;
 
 			if($ergebnis=$db->SelectLimit($sql,$pagen->MaxCount(),$pagen->BlockStartIndex()))
        		{
 				if ($linecount=$ergebnis->RecordCount()) 
 				{
+					// $pharmacy is delivered searching patients from pharmacy-module (cross link)
+					// This is empty when it is not defined. 
+					
 					if(($linecount==1)&&$numeric&&$mode=='search')
 					{
 						$zeile=$ergebnis->FetchRow();
-						header('Location:aufnahme_daten_zeigen.php'.URL_REDIRECT_APPEND.'&from=such&encounter_nr='.$zeile['encounter_nr'].'&target=search');
-						exit;
+						if (!empty($pharmacy)) {
+							$HTTP_SESSION_VARS['sess_pid']=$zeile['pid'];
+							//echo 'Location:../registration_admission/show_prescription.php'.URL_REDIRECT_APPEND.'&pid='.$zeile['pid'].'&back_path='.$back_path.'&externalcall=true';
+							header('Location:../registration_admission/show_prescription.php'.URL_REDIRECT_APPEND.'&pid='.$zeile['pid'].'&back_path='.$back_path.'&externalcall=true');
+							exit;
+						} else {
+							//echo 'Location:aufnahme_daten_zeigen.php'.URL_REDIRECT_APPEND.'&from=such&encounter_nr='.$zeile['encounter_nr'].'&target=search';
+							header('Location:aufnahme_daten_zeigen.php'.URL_REDIRECT_APPEND.'&from=such&encounter_nr='.$zeile['encounter_nr'].'&target=search');
+							exit;
+						}
 					}
 					
 					$pagen->setTotalBlockCount($linecount);
@@ -180,7 +209,6 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 						}else{
 							$sql='SELECT * '.$dbtable.$sql2;
 						}
-
 						if($result=$db->Execute($sql)){
 							if ($totalcount=$result->RecordCount()) {
 								if($dbtype=='mysql'){
@@ -337,10 +365,10 @@ if($mode=='search'||$mode=='paginate'){
 
 			$smarty->assign('sBday',formatDate2Local($zeile['date_birth'],$date_format));
 
-			$smarty->assign('sZipCode',$zeile['addr_zip']);
+			$smarty->assign('sZipCode',$zeile['selian_pid']);
 			if($task=='newprescription')
 			{
-				$sTarget = "<a href=\"show_prescription.php".URL_APPEND."&from=such&encounter_nr=$full_en&target=search&pn=$full_en&externalcall=true\">";
+				$sTarget = "<a href=\"show_prescription.php".URL_APPEND."&from=such&encounter_nr=$full_en&target=search&pn=$full_en&externalcall=true&back_path=$back_path\">";
 			}
 			else
 			{

@@ -13,11 +13,13 @@ require($root_path.'include/inc_environment_global.php');
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 $enc_obj=new Encounter;
 
-$debug = false;
+$debug = FALSE;
 
 if ($debug) {
   echo $pn."<br>";
   echo $prescription_date."<br>";
+  echo "comming from ".$comming_from."<br>";
+  echo "back path:".$back_path."<br>";
   
 }
 
@@ -113,7 +115,6 @@ if ($mode=="done" && isset($pn) && isset($prescription_date)) {
 		}
 		$mode="show";   
 	}	
-
 require ("gui/gui_pharmacy_tz_pending_prescriptions.php");
 
 ?>

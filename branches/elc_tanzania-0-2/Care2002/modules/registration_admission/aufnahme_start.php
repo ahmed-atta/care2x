@@ -220,7 +220,7 @@ if($pid!='' || $encounter_nr!=''){
 									$HTTP_POST_VARS['create_time']=date('YmdHis');
 									$HTTP_POST_VARS['history']='Create: '.date('Y-m-d H:i:s').' = '.$encoder;
 									//if(isset($HTTP_POST_VARS['encounter_nr'])) unset($HTTP_POST_VARS['encounter_nr']);					
-									
+									//print_r($HTTP_POST_VARS);
 									$encounter_obj->setDataArray($HTTP_POST_VARS);
 									
 									if($encounter_obj->insertDataFromInternalArray())

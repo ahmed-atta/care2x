@@ -40,8 +40,6 @@ else {
   <? if ($debug) echo "activated tab: ".$activated_tab."<br>"; ?>
   <? if ($debug) echo URL_APPEND; ?>
   <form name="prescription" method="POST" action="<?php echo $thisfile.URL_APPEND;?>&mode=new">
-
-
   <tr>
     <?php
       if (isset($externalcall))
@@ -50,14 +48,15 @@ else {
     <td colspan="4">
     	<table border="0" width="100%" cellpadding="0" cellspacing="0">
     		<tr>
-			    <td <? $pres_obj->DisplayBGColor($activated_tab, 'druglist') ?>><div align="center"><a href="#" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=Drug List<?php echo $EXTERNAL_CALL_PARAMETER;?>')"><img border="0" src="../../gui/img/common/default/prescription_drugs.gif" alt="Drug List"></a></div></td>
-			    <td <? $pres_obj->DisplayBGColor($activated_tab, 'Supplies') ?>><div align="center"><a href="#" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=Supplies<?php echo $EXTERNAL_CALL_PARAMETER;?>')"><img border="0" src="../../gui/img/common/default/prescription_supplies.gif" alt="Supplies"></a></div></td>
-			    <td <? $pres_obj->DisplayBGColor($activated_tab, 'supplies-lab') ?>><div align="center"><a href="#" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=Supplies-Lab<?php echo $EXTERNAL_CALL_PARAMETER;?>')"><img border="0" src="../../gui/img/common/default/prescription_specialsupplies.gif" alt="Special Supplies"></a></div></td>
-			    <td <? $pres_obj->DisplayBGColor($activated_tab, 'special-others') ?><div align="center"><a href="#" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=Special Others<?php echo $EXTERNAL_CALL_PARAMETER;?>')"><img border="0" src="../../gui/img/common/default/prescription_specialdrugs.gif" alt="Special Drugs"></a></div></td>
-			    <td <? $pres_obj->DisplayBGColor($activated_tab, 'xray') ?><div align="center"><a href="#" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=xray<?php echo $EXTERNAL_CALL_PARAMETER;?>')"><img border="0" src="../../gui/img/common/default/prescription_xray.gif" alt="X-Ray"></a></div></td>
-			    <td <? $pres_obj->DisplayBGColor($activated_tab, 'service') ?><div align="center"><a href="#" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=service<?php echo $EXTERNAL_CALL_PARAMETER;?>')"><img border="0" src="../../gui/img/common/default/prescription_service.gif" alt="Service/Registration"></a></div></td>
-			    <td <? $pres_obj->DisplayBGColor($activated_tab, 'smallop') ?><div align="center"><a href="#" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=smallop<?php echo $EXTERNAL_CALL_PARAMETER;?>')"><img border="0" src="../../gui/img/common/default/prescription_smallop.gif" alt="Small OP"></a></div></td>
-			    <td <? $pres_obj->DisplayBGColor($activated_tab, 'bigop') ?><div align="center"><a href="#" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=bigop<?php echo $EXTERNAL_CALL_PARAMETER;?>')"><img border="0" src="../../gui/img/common/default/prescription_bigop.gif" alt="Big OP"></a></div></td>
+			    <td <? $pres_obj->DisplayBGColor($activated_tab, 'druglist') ?>><div align="center"><a href="#" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=Drug List&disablebuttons=<?php echo $disablebuttons;?><?php echo $EXTERNAL_CALL_PARAMETER;?>&backpath=<?php echo urlencode($backpath); ?>')"><img border="0" src="../../gui/img/common/default/prescription_drugs.gif" alt="Drug List"></a></div></td>
+			    <td <? $pres_obj->DisplayBGColor($activated_tab, 'Supplies') ?>><div align="center"><a href="#" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=Supplies&disablebuttons=<?php echo $disablebuttons;?><?php echo $EXTERNAL_CALL_PARAMETER;?>&backpath=<?php echo urlencode($backpath); ?>')"><img border="0" src="../../gui/img/common/default/prescription_supplies.gif" alt="Supplies"></a></div></td>
+			    <td <? $pres_obj->DisplayBGColor($activated_tab, 'supplies-lab') ?>><div align="center"><a href="#" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=Supplies-Lab&disablebuttons=<?php echo $disablebuttons;?><?php echo $EXTERNAL_CALL_PARAMETER;?>&backpath=<?php echo urlencode($backpath); ?>')"><img border="0" src="../../gui/img/common/default/prescription_specialsupplies.gif" alt="Special Supplies"></a></div></td>
+			    <td <? $pres_obj->DisplayBGColor($activated_tab, 'special-others') ?><div align="center"><a href="#" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=Special Others&disablebuttons=<?php echo $disablebuttons;?><?php echo $EXTERNAL_CALL_PARAMETER;?>&backpath=<?php echo urlencode($backpath); ?>')"><img border="0" src="../../gui/img/common/default/prescription_specialdrugs.gif" alt="Special Drugs"></a></div></td>
+			    <td <? $pres_obj->DisplayBGColor($activated_tab, 'xray') ?><div align="center"><a href="#" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=xray&disablebuttons=<?php echo $disablebuttons;?><?php echo $EXTERNAL_CALL_PARAMETER;?>&backpath=<?php echo urlencode($backpath); ?>')"><img border="0" src="../../gui/img/common/default/prescription_xray.gif" alt="X-Ray"></a></div></td>
+			    <td <? $pres_obj->DisplayBGColor($activated_tab, 'service') ?><div align="center"><a href="#" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=service&disablebuttons=<?php echo $disablebuttons;?><?php echo $EXTERNAL_CALL_PARAMETER;?>&backpath=<?php echo urlencode($backpath); ?>')"><img border="0" src="../../gui/img/common/default/prescription_service.gif" alt="Service/Registration"></a></div></td>
+			    <td <? $pres_obj->DisplayBGColor($activated_tab, 'dental') ?><div align="center"><a href="#" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=dental&disablebuttons=<?php echo $disablebuttons;?><?php echo $EXTERNAL_CALL_PARAMETER;?>&backpath=<?php echo urlencode($backpath); ?>')"><img border="0" src="../../gui/img/common/default/prescription_dental.gif" alt="Dental Services"></a></div></td>
+			    <td <? $pres_obj->DisplayBGColor($activated_tab, 'smallop') ?><div align="center"><a href="#" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=smallop&disablebuttons=<?php echo $disablebuttons;?><?php echo $EXTERNAL_CALL_PARAMETER;?>&backpath=<?php echo urlencode($backpath); ?>')"><img border="0" src="../../gui/img/common/default/prescription_smallop.gif" alt="Minor OP"></a></div></td>
+			    <td <? $pres_obj->DisplayBGColor($activated_tab, 'bigop') ?><div align="center"><a href="#" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=bigop&disablebuttons=<?php echo $disablebuttons;?><?php echo $EXTERNAL_CALL_PARAMETER;?>&backpath=<?php echo urlencode($backpath); ?>')"><img border="0" src="../../gui/img/common/default/prescription_bigop.gif" alt="Major OP"></a></div></td>
     		</tr>
     	</table>
     </td>
@@ -79,7 +78,7 @@ else {
                   name="peadrics_button" 
                   value="<?PHP echo ($filter=='pediadric') ? '1' : '0';?>" 
                  <? if ($filter=='pediadric') echo 'checked';?>
-                  onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&filter=pediadric&show=<?php echo $show;?>&externalcall=<?php echo $externalcall;?>')"
+                  onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&filter=pediadric&show=<?php echo $show;?>&externalcall=<?php echo $externalcall;?>&disablebuttons=<?php echo $disablebuttons;?>&backpath=<?php echo urlencode($backpath); ?>')"
               ><font color="black">Pediatric items</font>
         </td>
         <td bgcolor="#CAD3EC" width="100">
@@ -88,7 +87,7 @@ else {
                 name="adult_button" 
                 value="<?PHP echo ($filter=='adult') ? '1' : '0';?>" 
                 <? if ($filter=='adult') echo 'checked';?> 
-                onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&filter=adult&show=<?php echo $show;?>&externalcall=<?php echo $externalcall;?>')"
+                onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&filter=adult&show=<?php echo $show;?>&externalcall=<?php echo $externalcall;?>&disablebuttons=<?php echo $disablebuttons;?>&backpath=<?php echo urlencode($backpath); ?>')"
               ><font color="black">Adult items</font>
         </td>
         <td bgcolor="#CAD3EC" width="80">
@@ -97,7 +96,7 @@ else {
                 name="others_button" 
                 value="<?PHP echo ($filter=='others') ? '1' : '0';?>" 
                 <? if ($filter=='others') echo 'checked';?> 
-                onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&filter=others&show=<?php echo $show;?>&externalcall=<?php echo $externalcall;?>')"
+                onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&filter=others&show=<?php echo $show;?>&externalcall=<?php echo $externalcall;?>&disablebuttons=<?php echo $disablebuttons;?>&backpath=<?php echo urlencode($backpath); ?>')"
               ><font color="black">Others</font>
         </td>
         <td bgcolor="#CAD3EC">
@@ -106,9 +105,9 @@ else {
                 name="conusumable" 
                 value="<?PHP echo ($filter=='consumable') ? '1' : '0';?>" 
                 <? if ($filter=='consumable') echo 'checked';?> 
-                onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&filter=consumable&mode=new&show=<?php echo $show;?>&externalcall=<?php echo $externalcall;?>')"
-              ><font color="black">Consumable items</font>
-        </td>
+                onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&filter=consumable&mode=new&show=<?php echo $show;?>&externalcall=<?php echo $externalcall;?>&disablebuttons=<?php echo $disablebuttons;?>&backpath=<?php echo urlencode($backpath); ?>')"
+              >
+              <font color="black">ARV Drugs</font></td>
       </tr>
       </table>
       <?php
@@ -121,7 +120,7 @@ else {
         <table width="100%" border="0" bgcolor="#CAD3EC" cellpadding="0" cellspacing="0">
           <tr>
             <td width="37%" rowspan="5">
-                <select name="itemlist[]" size="10" style="width:235px;" onDblClick="javascript:item_add();">
+                <select name="itemlist[]" size="22" style="width:315px;" onDblClick="javascript:item_add();">
   
                   <!-- dynamically managed content -->
   		            <?php	$pres_obj->DisplayDrugs($drug_list);	?>
@@ -131,7 +130,7 @@ else {
               </td>
             <td height="5">&nbsp;</td>
             <td width="38%" rowspan="5"><div align="center">
-                <select name="selected_item_list[]" size="10" style="width:235px;" onDblClick="javascript:item_delete();">
+                <select name="selected_item_list[]" size="22" style="width:315px;" onDblClick="javascript:item_delete();">
   
                   <!-- dynamically managed content -->
                   <?php $pres_obj->DisplaySelectedItems($item_no); ?>
@@ -155,11 +154,11 @@ else {
             <?
 			        if (isset($externalcall)) {      
 			        ?>
-			        <input type="button" name="show" value="Prescribe!" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=insert&externalcall=<?php echo $externalcall;?>&disablebuttons=<?php echo $disablebuttons; ?>')">
+			        <input type="button" name="show" value="Prescribe!" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=insert&externalcall=<?php echo $externalcall;?>&disablebuttons=<?php echo $disablebuttons; ?>&backpath=<?php echo urlencode($backpath); ?>')">
 			        <?
 			        } else {
 			        ?>
-			        <input type="button" name="show" value="Prescribe!" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=insert&disablebuttons=<?php echo $disablebuttons; ?>')">
+			        <input type="button" name="show" value="Prescribe!" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=insert&disablebuttons=<?php echo $disablebuttons; ?>&backpath=<?php echo urlencode($backpath); ?>')">
 			        <?
 			        }
         ?></td>

@@ -16,9 +16,15 @@ require_once('include/inc_timeframe.php');
 
 $month=array_search(1,$ARR_SELECT_MONTH);
 $year=array_search(1,$ARR_SELECT_YEAR);
-
-$start = mktime (0,0,0,$month, 1, $year);
-$end = mktime (0,0,0,$month+1, 1, $year);
+$PRINTOUT=FALSE;
+if ($_GET['printout']) {
+	$start = $_GET['start'];
+	$end = $_GET['end'];
+	$PRINTOUT=TRUE;
+} else {
+	$start = mktime (0,0,0,$month, 1, $year);
+	$end = mktime (0,0,0,$month+1, 1, $year);
+}
 
 require_once('gui/gui_OPD_diagnostic.php');
 ?>

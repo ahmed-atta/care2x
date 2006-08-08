@@ -34,13 +34,21 @@ if($chosentype=='tribe')
 		true;
 	}
 }
-else
+elseif($chosentype=='city')
 {
 	if (is_array($result_array=$search_obj->get_equal_words("name", "care_address_citytown", false, 65, 'nr'))) 
 	{
 		true;
 	}
 }
+else
+{
+	if (is_array($result_array=$search_obj->get_equal_words("name", "care_tz_religion", false, 65, 'nr'))) 
+	{
+		true;
+	}
+}
+
 
 if($todo=="updatedata")
 {
@@ -53,9 +61,13 @@ if($todo=="updatedata")
 			{
 				$dropdownvalue=$search_obj->insert_new_tribe($newitem, $code);
 			}
-			else
+			elseif($chosentype=='city')
 			{
 				$dropdownvalue=$search_obj->insert_new_city($newitem, $code);
+			}
+			else
+			{
+				$dropdownvalue=$search_obj->insert_new_religion($newitem, $code);
 			}
 		}
 		else $error++;
@@ -69,10 +81,16 @@ if($todo=="updatedata")
 		$tribe_info = $search_obj->get_tribe_info($dropdownvalue);
 		$dropdowntext = $tribe_info['tribe_name'];
 	}
-	else
+	elseif($chosentype=='city')
 	{
 		$region_info = $search_obj->get_citytown_info($dropdownvalue);
 		$dropdowntext = $region_info['name'];
+	}
+	else
+	{
+		$religion_info = $search_obj->get_religion_info($dropdownvalue);
+		$dropdowntext = $religion_info['name'];
+		echo $dropdownvalue.'ttttttt';
 	}
 }
 ?>
@@ -86,8 +104,10 @@ if($dropdowntext)
 {
 	if($chosentype=='tribe')
 		$element = 'name_maiden';
-	else
+	elseif($chosentype=='city')
 		$element = 'addr_citytown_nr';
+	else
+		$element = 'religion';
 	echo '
 	var l = window.opener.document.forms["aufnahmeform"].elements["'.$element.'"].options.length;
 	

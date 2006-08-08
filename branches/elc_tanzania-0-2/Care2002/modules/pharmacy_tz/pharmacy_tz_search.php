@@ -59,11 +59,12 @@ if (!empty($keyword)) {
     $item_description = $product_obj->get_description($item_id);
     $item_number = $product_obj->get_itemnumber($item_id);
     $item_classification = $product_obj->get_item_classification($item_id);
+    $item_unit_price = $product_obj->get_selians_item_price($item_id);
     $http_buffer.=" <td>".$item_number."</td>
                     <td>".str_replace(strtolower(trim($keyword)),"<b>".trim($keyword)."</b>",strtolower($item_description))."</td>
-                    
                     <td>".$item_classification."</td>
-                    <td>".$item_plausibility."</td>
+					<td align=\"right\">".number_format($item_unit_price,0,'.',',')."</td>                    		
+                    <td align=\"right\">".$item_plausibility."</td>
                     <td><div align=\"center\"><a href=\"pharmacy_tz_new_product.php?mode=show&item_id=".$item_id."&keyword=".$keyword."\"><img src=\"".$root_path."gui/img/common/default/common_infoicon.gif\" width=\"16\" height=\"16\" border=\"0\"></a></td>
                     <td><div align=\"center\"><a href=\"pharmacy_tz_new_product.php?mode=edit&item_id=".$item_id."&keyword=".$keyword."\"><img src=\"".$root_path."gui/img/common/default/hammer.gif\" width=\"16\" height=\"16\" border=\"0\"></a></td>
                     <td><div align=\"center\"><a href=\"pharmacy_tz_new_product.php?mode=erase&item_id=".$item_id."&keyword=".$keyword."\"><img src=\"".$root_path."gui/img/common/default/delete.gif\" width=\"16\" height=\"16\" border=\"0\"></a></td>";

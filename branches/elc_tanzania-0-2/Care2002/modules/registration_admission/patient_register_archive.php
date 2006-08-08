@@ -14,7 +14,7 @@ require($root_path.'include/inc_environment_global.php');
 # Default value for the maximum nr of rows per block displayed, define this to the value you wish
 # In normal cases this value is derived from the db table "care_config_global" using the "pagin_insurance_list_max_block_rows" element.
 define('MAX_BLOCK_ROWS',30); 
-define('SHOW_SEARCH_QUERY',1); # Set to 1 if you want to display the query conditions, 0 to hide
+define('SHOW_SEARCH_QUERY',0); # Set to 1 if you want to display the query conditions, 0 to hide
 
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
@@ -27,6 +27,12 @@ $breakfile='patient.php'.URL_APPEND;
 $newdata=1;
 
 $dbtable='care_person';
+$dbtable_tribes='care_tz_tribes';
+$dbtable_trbies_joinfield='tribe_id';
+$dbtable_religions='care_tz_religion';
+$dbtable_religions_joinfield='nr';
+$dbtable_town='care_address_citytown';
+$dbtable_town_joinfield='nr';
 
 $target='archiv';
 
@@ -76,7 +82,14 @@ if (isset($mode) && ($mode=='search'||$mode=='paginate')){
 		# convert * and ? to % and &
 		$searchkey=strtr($searchkey,'*?','%_');
 
-		$sql="SELECT pid, selian_pid, date_reg, name_last, name_first, date_birth, addr_zip, sex, death_date, status FROM $dbtable WHERE ";
+		$sql="SELECT
+				 pid, selian_pid, date_reg, name_last, name_first, date_birth, addr_zip, sex, death_date, $dbtable.status, $dbtable_town.name
+		      FROM 
+		      	$dbtable 
+		      LEFT JOIN $dbtable_tribes ON $dbtable_tribes.$dbtable_trbies_joinfield=$dbtable.name_maiden
+		      LEFT JOIN $dbtable_religions ON $dbtable_religions.$dbtable_religions_joinfield=$dbtable.religion
+		      LEFT JOIN $dbtable_town ON $dbtable_town.$dbtable_town_joinfield=$dbtable.addr_citytown_nr
+		      WHERE ";
 		$s2='';
 							
 							if(isset($pid)&&$pid)
@@ -152,7 +165,7 @@ if (isset($mode) && ($mode=='search'||$mode=='paginate')){
 							if(isset($name_middle)&&$name_middle)
 								if($s2) $s2.=" AND name_middle $sql_LIKE '$name_middle%'"; else $s2.=" name_middle $sql_LIKE '$name_middle%'";
 							if(isset($name_maiden)&&$name_maiden)
-								if($s2) $s2.=" AND name_maiden $sql_LIKE '$name_maiden%'"; else $s2.=" name_maiden $sql_LIKE '$name_maiden%'";
+								if($s2) $s2.=" AND tribe_name $sql_LIKE '$name_maiden%'"; else $s2.=" tribe_name $sql_LIKE '$name_maiden%'";
 							if(isset($name_others)&&$name_others)
 								if($s2) $s2.=" AND name_others $sql_LIKE '$name_others%'"; else $s2.=" name_others $sql_LIKE '$name_others%'";
 
@@ -168,8 +181,8 @@ if (isset($mode) && ($mode=='search'||$mode=='paginate')){
 
 							if(isset($addr_str_nr)&&$addr_str_nr)
 								if($s2) $s2.=" AND addr_str_nr $sql_LIKE '%$addr_str_nr%'"; else $s2.=" addr_str_nr $sql_LIKE '%$addr_str_nr%'";
-							if(isset($addr_citytown_nr)&&$addr_citytown_nr)
-								if($s2) $s2.=" AND addr_citytown_nr $sql_LIKE '$addr_citytown_nr'"; else $s2.=" addr_citytown_nr $sql_LIKE '$addr_citytown_nr'";
+							if(isset($addr_citytown_name)&&$addr_citytown_name)
+								if($s2) $s2.=" AND $dbtable_town.name $sql_LIKE '$addr_citytown_name'"; else $s2.=" $dbtable_town.name $sql_LIKE '$addr_citytown_name'";
 							if(isset($addr_zip)&&$addr_zip)
 								if($s2) $s2.=" AND addr_zip $sql_LIKE '%$addr_zip%'"; else $s2.=" addr_zip $sql_LIKE '%$addr_zip%'";
 								
@@ -195,7 +208,7 @@ if (isset($mode) && ($mode=='search'||$mode=='paginate')){
 							if(isset($nat_id_nr)&&$nat_id_nr)
 								if($s2) $s2.=" AND nat_id_nr $sql_LIKE '$nat_id_nr%'"; else $s2.=" nat_id_nr $sql_LIKE '$nat_id_nr%'";
 							if(isset($religion)&&$religion)
-								if($s2) $s2.=" AND religion $sql_LIKE '$religion%'"; else $s2.=" religion $sql_LIKE '$religion%'";
+								if($s2) $s2.=" AND $dbtable_religions.name $sql_LIKE '$religion%'"; else $s2.=" $dbtable_religions.name $sql_LIKE '$religion%'";
 							if(isset($ethnic_orig)&&$ethnic_orig)
 								if($s2) $s2.=" AND ethnic_orig $sql_LIKE '$ethnic_orig%'"; else $s2.=" ethnic_orig $sql_LIKE '$ethnic_orig%'";
 								
@@ -207,7 +220,7 @@ if (isset($mode) && ($mode=='search'||$mode=='paginate')){
 		//echo $sql;
 	}
 							
-	if($s2!=''){
+	if($s2!=''){ 
 		//echo $sql;
 			//if($ergebnis=$db->Execute($sql)) 
 		if($ergebnis=$db->SelectLimit($sql,$pagen->MaxCount(),$pagen->BlockStartIndex())){			
@@ -220,14 +233,18 @@ if (isset($mode) && ($mode=='search'||$mode=='paginate')){
 				header("Location:patient_register_show.php".URL_REDIRECT_APPEND."&target=archiv&origin=archiv&pid=".$result['pid']);
 				exit;
 			}else{
-
+				
 				$pagen->setTotalBlockCount($rows);
 					
 				# If more than one count all available
 				if(isset($totalcount)&&$totalcount){
 					$pagen->setTotalDataCount($totalcount);
 				}else{
-					$sql="SELECT COUNT(pid) AS maxnr FROM $dbtable WHERE ".$s2;
+					$sql="SELECT COUNT(pid) AS maxnr FROM $dbtable 
+						      LEFT JOIN $dbtable_tribes ON $dbtable_tribes.$dbtable_trbies_joinfield=$dbtable.name_maiden
+						      LEFT JOIN $dbtable_religions ON $dbtable_religions.$dbtable_religions_joinfield=$dbtable.religion
+						      LEFT JOIN $dbtable_town ON $dbtable_town.$dbtable_town_joinfield=$dbtable.addr_citytown_nr WHERE ".$s2;
+					
 			 		if($result=$db->Execute($sql)){
 						@$maxres=$result->FetchRow();
 						$totalcount=$maxres['maxnr'];

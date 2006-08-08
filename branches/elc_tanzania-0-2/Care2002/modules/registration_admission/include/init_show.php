@@ -58,7 +58,7 @@ $photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_
 require_once($root_path.'include/inc_photo_filename_resolve.php');
 
 # set to safe defaults
-if(!isset($is_discharged)) $is_discharged=true;
+//if(!isset($is_discharged)) $is_discharged=true;
 if(!isset($edit)) $edit=false;
 # Check if person is currently admitted
 $current_encounter=$person_obj->CurrentEncounter($pid);

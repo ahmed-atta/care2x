@@ -29,7 +29,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 <?php else : ?>
   <frame name="OPMINPUTFRAME" src="op-logbuch-material-input.php?sid=<?php  echo "$sid&lang=$lang&op_nr=$op_nr&enc_nr=$enc_nr&dept_nr=$dept_nr&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>">
   <frame name="OPMLISTFRAME" src="op-logbuch-material-list.php?sid=<?php  echo "$sid&lang=$lang&op_nr=$op_nr&enc_nr=$enc_nr&dept_nr=$dept_nr&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>">
-<?php endif ?>
+<?php endif;?>
 <noframes>
 <body>
 

@@ -98,23 +98,25 @@ if(isset($rows)&&$rows) {
       <td><b>
 	  <?php 
 	  	if($oitem=='date_birth') $flag=TRUE;
-			else $flag=FALSE; 
-		echo $pagen->SortLink($LDBday,'date_birth',$odir,$flag); 
-			 ?></b></td>
-      <td align='center'><b>
-	  <?php 
-	  	if($oitem=='addr_zip') $flag=TRUE;
 			else $flag=FALSE;
-		 echo $pagen->SortLink($LDZipCode,'addr_zip',$odir,$flag); 
+		 echo $pagen->SortLink($LDBday,'date_birth',$odir,$flag); 
 		 	
 		?></b></td>
-      <td><b>
+	  <td align=right><b>
+	  <?php 
+	  	if($oitem=='selian_pid') $flag=TRUE;
+			else $flag=FALSE; 
+		echo $pagen->SortLink($LDSelianPID,'selian_pid',$odir,$flag);
+			 ?></b></td>
+      
+
+	  <td align=right><b>
 	  <?php 
 	  	if($oitem=='pid') $flag=TRUE;
 			else $flag=FALSE; 
 		echo $pagen->SortLink($LDRegistryNr,'pid',$odir,$flag); 
 			 ?></b></td>
-      <td><b>
+      <td align=right><b>
 	  <?php 
 	  	if($oitem=='date_reg') $flag=TRUE;
 			else $flag=FALSE; 
@@ -161,7 +163,7 @@ $img_female=createComIcon($root_path,'spf.gif','0');
 	
 	echo '</td>
     <td>&nbsp; &nbsp;'.@formatDate2Local($result['date_birth'],$date_format).'</td>
-    <td align=right>&nbsp; &nbsp;'.$result['addr_zip'].'</td>
+    <td align=right>&nbsp; &nbsp;'.$result['selian_pid'].'</td>
     <td align=right>&nbsp; &nbsp;'.$result['pid'].'</td>
     <td align=right>&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.@formatDate2Local($result['date_reg'],$date_format).'</a></td>
   </tr>

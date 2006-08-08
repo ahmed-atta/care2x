@@ -314,7 +314,7 @@ if($mode=='search'||$mode=='paginate'){
 	  <?php 
 	  	if($oitem=='addr_zip') $flag=TRUE;
 			else $flag=FALSE;
-		 echo $pagen->SortLink($LDZipCode,'addr_zip',$odir,$flag); 
+		 echo $pagen->SortLink($LDZipCode,'selian_pid',$odir,$flag); 
 		 	
 		?></b></td>
 		

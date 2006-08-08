@@ -62,51 +62,72 @@ function popPic(pid,nm){
   					 </tr>
  </table>	
  
-<!-- END HEAD OF HTML CONTENT --->
+<!-- END HEAD OF HTML CONTENT -->
 
 <br><br><br>
 <TABLE cellSpacing=0 cellPadding=0 border=0 class="submenu_frame">
 	<TBODY>
 	<TR>
 		<TD><table cellpadding=3 cellspacing=1>
-          <tbody class="submenu">
-            <tr>
-              <td width="17" align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
-              <td width="149" class="submenu_item"><a href="OPD_diagnostic.php">OPD - Diagnostic</a> </td>
-              <td width="460">All diagnostics group by ICD-10 code </td>
-            </tr>
+              <tbody class="submenu">
+                <tr> 
+                  <td width="17" align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
+                  <td width="172" class="submenu_item"><a href="OPD_diagnostic.php">OPD 
+                    - Diagnostic</a> </td>
+                  <td width="437">All diagnostics group by ICD-10 code </td>
+                </tr>
+                <tr> 
+                  <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
+                  <td class="submenu_item"><a href="OPD_summary.php">OPD - Summany</a> 
+                  </td>
+                  <td>All visits (with diagnostic) to this clinic </td>
+                </tr>
+				
+                <tr>
+                  <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
+                  <td class="submenu_item"><a href="OPD_Admissions.php">OPD Admissions - Summary </a></td>
+                  <td>OPD Admissions Report</td>
+                </tr>
+                                
+                <tr  height=1> 
+                  <td colspan=3 class="vspace"><img height=1 src="../../gui/img/common/default/pixel.gif" width=5></td>
+                </tr>
+                <tr> 
+                  <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
+                  <td class="submenu_item"><a href="OPD_total_summary.php">Clinic 
+                    - Summany</a> </td>
+                  <td>All visits (generally) to this clinic </td>
+                </tr>
+                <tr  height=1> 
+                  <td colspan=3 class="vspace"><img height=1 src="../../gui/img/common/default/pixel.gif" width=5></td>
+                </tr>
+                <tr> 
+                  <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
+                  <td class="submenu_item"><a href="laboratory.php">Laboratory 
+                    - Summary </a></td>
+                  <td>Monthly Laboratory Report </td>
+                </tr>
+                <tr  height=1> 
+                  <td colspan=3 class="vspace"><img height=1 src="../../gui/img/common/default/pixel.gif" width=5></td>
+                </tr>
+                <tr> 
+                  <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
+                  <td class="submenu_item"><a href="billing_summary.php">Financial 
+                    Report </a></td>
+                  <td>Daily Financial Record listened of a specific month</td>
+                </tr>
+                <tr  height=1> 
+                  <td colspan=3 class="vspace"><img height=1 src="../../gui/img/common/default/pixel.gif" width=5></td>
+                </tr>
+                <tr> 
+                  <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
+                  <td class="submenu_item"><a href="reporting_pharmacy.php">Pharmacy 
+                    Report</a></td>
+                  <td>Generally Pharmacy Report (without stock informations)</td>
+                </tr>
 
-            <tr>
-              <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
-              <td class="submenu_item"><a href="OPD_summary.php">OPD - Summany</a> </td>
-              <td>All visits (with diagnostic) to this clinic </td>
-            </tr>
-            <tr  height=1>
-              <td colspan=3 class="vspace"><img height=1 src="../../gui/img/common/default/pixel.gif" width=5></td>
-            </tr>
-            <tr>
-              <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
-              <td class="submenu_item"><a href="OPD_total_summary.php">Clinic - Summany</a> </td>
-              <td>All visits (generally) to this clinic </td>
-            </tr>
-            <tr  height=1>
-              <td colspan=3 class="vspace"><img height=1 src="../../gui/img/common/default/pixel.gif" width=5></td>
-            </tr>			
-            <tr>
-              <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
-              <td class="submenu_item"><a href="#">Form 3(B)</a> </td>
-              <td>Form 3(B) ISDR ( modified) for Health Facility Monthly Data for In/Out Patient </td>
-            </tr>
-            <tr  height=1>
-              <td colspan=3 class="vspace"><img height=1 src="../../gui/img/common/default/pixel.gif" width=5></td>
-            </tr>				
-            <tr>
-              <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
-              <td class="submenu_item"><a href="laboratory.php">Laboratory - Summary </a></td>
-              <td>Monthly Laboratory Report </td>
-            </tr>			
-          </tbody>
-        </table></TD>
+              </tbody>
+            </table></TD>
 	</TR>
 	</TBODY>
 </TABLE>

@@ -75,14 +75,19 @@ require('./gui_bridge/default/gui_tz_tabs_patreg.php');
 ?>
 
   <tr>
-    <td colspan=3   bgcolor="<?php echo $cfg['body_bgcolor']; ?>">
+    <td colspan=3   bgcolor="<?php echo $cfg['body_bgcolor'];?>">
     <ul>
 
 <?php
 
  $sTemp = ob_get_contents();
  ob_end_clean();
-require_once($root_path.'include/care_api_classes/class_gui_input_person.php');
+ 
+
+//require_once($root_path.'include/care_api_classes/class_gui_input_person.php');
+require('../../include/care_api_classes/class_gui_input_person.php');
+
+
 $inperson = & new GuiInputPerson;
 
 $inperson->setPID($pid);
@@ -90,6 +95,7 @@ $inperson->setPID($pid);
 $inperson->pretext = $sTemp;
 $inperson->setDisplayFile('tz_patient_register_show.php');
 $inperson->Display();
+
 ?>
 
 </ul>

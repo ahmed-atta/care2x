@@ -63,8 +63,14 @@ A:visited:hover {color: #cc0033;}
  <tr valign=top  class="titlebar" >
             <td bgcolor="#99ccff" ><font color="#330066">Pending 
               Prescriptions (<?php echo $enc_obj->ShowPID($batch_nr); ?>)</font> </td>
-  <td bgcolor="#99ccff" align=right><a
-   href="<?php echo $RETURN_PATH;?>" ><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>  </td>
+  <td bgcolor="#99ccff" align=right>
+  <?php
+  if ($comming_from=="pharmacy")
+  	echo '<a href="javascript:window.close();" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>';
+  else
+  	echo '<a href='.$RETURN_PATH.' ><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>';
+  ?>
+  </td>
  </tr>
 
  </table>		</td>
@@ -78,49 +84,52 @@ A:visited:hover {color: #cc0033;}
 	<tr valign="top">
 		<!-- Left block for the request list  -->
 		    <td>
-<?php
-		echo '<a href="'.URL_APPEND.'&target=search&task=newprescription&back_path=billing">Create new Prescription</a>';
-  require($root_path.'include/inc_pharmacy_pending_lister_fx.php'); 
+<?php	
+
+if ($back_path!='billing' || $comming_from=='pharmacy') {
+	echo '<a href="'.URL_APPEND.'&target=search&task=newprescription&back_path='.$back_path.'&pharmacy=yes">Create new Prescription</a>';
+  	require($root_path.'include/inc_pharmacy_pending_lister_fx.php');
+} 
   
 ?>
 		    <td width="100%"> 
 		          <?php
 		          
 		          if (!$NO_PENDING_PRESCRIPTIONS) {
-		          	
 		            echo '
                       <a href="javascript:printOut()"><img src="../../gui/img/control/default/en/en_printout.gif" border=0 align="absmiddle" width="99" height="24" alt="Print this form"></a> 
                       <a href="pharmacy_tz_pending_prescriptions.php?&mode=done&pn='.$pn.'&prescription_date='.$prescription_date.'>"><img src="../../gui/img/control/default/en/en_done.gif" border=0 align="absmiddle" width="75" height="24" alt="It´s done! Move the form to the archive"></a> 
 <!--                      <a href="pharmacy_tz_pending_prescriptions.php?&mode=done&discharge=true&encounter='.$pn.'&pn='.$pn.'&prescription_date='.$prescription_date.'>"><img src="../../gui/img/control/default/en/en_done_and_discharge.gif" border=0 align="absmiddle" width="175" height="24" alt="It´s done! Move the form to the archive and discharge our patient"></a> -->
                       <br>
-                     ';}
+                     ';
+		          }
                  
                   if ($NO_PENDING_PRESCRIPTIONS) {
-
                     
                   	if($task=="newprescription")
                   	{
-                  		echo '<iframe name="prescription" src="'.$root_path.'modules/registration_admission/aufnahme_daten_such.php'.URL_APPEND.'&target=search&task=newprescription" width="100%" height="90%" align="left" marginheight="0" marginwidth="0" hspace="0" vspace="0" scrolling="auto" frameborder="0" noresize></iframe> ';
+                  		echo '<iframe name="prescription" src="'.$root_path.'modules/registration_admission/aufnahme_daten_such.php'.URL_APPEND.'&target=search&task=newprescription&back_path='.$back_path.'&pharmacy=yes" width="100%" height="90%" align="left" marginheight="0" marginwidth="0" hspace="0" vspace="0" scrolling="auto" frameborder="0" noresize></iframe> ';
                   	}
                   	else
                   	{
                   		echo '<br><br><br><br>&nbsp;&nbsp;&nbsp;&nbsp;no pending prescriptions...<br>';
                   	}     
                   } else {
+
                   	if($task=="newprescription")
                   	{
-                  		echo '<iframe name="prescription" src="'.$root_path.'modules/registration_admission/aufnahme_daten_such.php'.URL_APPEND.'&target=search&task=newprescription" width="100%" height="90%" align="left" marginheight="0" marginwidth="0" hspace="0" vspace="0" scrolling="auto" frameborder="0" noresize></iframe> ';
+                  		echo '<iframe name="prescription" src="'.$root_path.'modules/registration_admission/aufnahme_daten_such.php'.URL_APPEND.'&target=search&task=newprescription&back_path='.$back_path.'&pharmacy=yes" width="100%" height="90%" align="left" marginheight="0" marginwidth="0" hspace="0" vspace="0" scrolling="auto" frameborder="0" noresize></iframe> ';
                   	}
                   	else
                   	{
-                    	echo '<iframe name="prescription" src="'.$root_path.'/modules/registration_admission/show_prescription.php?prescription_date='.$prescription_date.'&externalcall=TRUE&disablebuttons=true&pn='.$pn.'&sid='.$sid.'" width="100%" height="88%" align="left" marginheight="0" marginwidth="0" hspace="0" vspace="0" scrolling="auto" frameborder="0" noresize></iframe> ';
+                    	echo '<iframe name="prescription" src="'.$root_path.'/modules/registration_admission/show_prescription.php?prescription_date='.$prescription_date.'&externalcall=TRUE&disablebuttons=true&target=search&pn='.$pn.'&back_path='.$back_path.'&sid='.$sid.'" width="100%" height="94%" align="left" marginheight="0" marginwidth="0" hspace="0" vspace="0" scrolling="auto" frameborder="0" noresize></iframe> ';
                   	}
                     
                   }
                ?>
         </td>
 	</tr>
-</table>     
+<!--</table>     
 
 
 						
@@ -147,7 +156,7 @@ A:visited:hover {color: #cc0033;}
 
 	</tr>
 	
-	</tbody>
+	</tbody> -->
  </table>
 
 

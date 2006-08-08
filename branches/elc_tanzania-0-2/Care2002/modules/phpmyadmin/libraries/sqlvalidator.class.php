@@ -18,7 +18,7 @@
 * If you got this file from somewhere other than phpMyAdmin
 * please be aware that the latest copy will always be in the 
 * phpMyAdmin CVS tree as 
-* $Source$
+* $Source: /usr/share/cvs/care2002_tz_mero_vps/modules/phpmyadmin/libraries/sqlvalidator.class.php,v $
 *
 * This code that also used to depend on the PHP overload module, but that has been
 * removed now.

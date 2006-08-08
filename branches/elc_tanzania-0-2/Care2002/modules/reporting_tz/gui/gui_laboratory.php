@@ -1,4 +1,20 @@
-
+<?php
+if ($PRINTOUT) {
+echo '<head>
+<script language="javascript"> this.window.print(); </script>
+<title>Pharmacy Report</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>';
+echo '<html><body>';
+echo '<table width="500" border="1" cellspacing="0" cellpadding="0" align="center" ';
+DisplayLaboratoryTableHead($group_id);
+DisplayLaboratoryTestSummary($group_id,$start_timeframe, $end_timeframe);
+DisplayResultRow($group_id,$start_timeframe, $end_timeframe);
+echo '</table>';
+echo '</html></body>';
+exit();
+}
+?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
@@ -17,7 +33,13 @@ function gethelp(x,s,x1,x2,x3,x4)
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
-// -->
+    function printOut(start_timeframe, end_timeframe, group_id)
+    {
+    	urlholder="./laboratory.php?printout=TRUE&start_timeframe="+start_timeframe+"&end_timeframe="+end_timeframe+"&group_id="+group_id;
+    	testprintout=window.open(urlholder,"printout","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
+      	window.testprintout.moveTo(0,0);
+    }
+-->
 
 </script> 
 <link rel="stylesheet" href="../../css/themes/default/default.css" type="text/css">
@@ -69,16 +91,18 @@ function popPic(pid,nm){
  
 <!-- END HEAD OF HTML CONTENT -->
 
-
+						<form name="form1" method="post" action="">				
                           </p>
-							<?php require_once($root_path.$top_dir.'include/inc_gui_timeframe.php'); ?>			
+							<?php require_once($root_path.$top_dir.'include/inc_gui_laboratory_timeframe.php'); ?>			
 						  <br><br><br>
-                          <table width="100%" border="1" cellspacing="0" cellpadding="0" align="center" bgcolor=#ffffdd>
-                          <?php DisplayLaboratoryTableHead(4);?>
+                          <table width="80%" border="1" cellspacing="0" cellpadding="0" align="center" bgcolor="#ffffdd">
+                          <?php DisplayLaboratoryTableHead($group_id);?>
 
-						  <?php DisplayLaboratoryTestSummary(4,time());?>
+						  <?php DisplayLaboratoryTestSummary($group_id,$start_timeframe, $end_timeframe);?>
+						  <?php DisplayResultRow($group_id,$start_timeframe, $end_timeframe);?>
                           </table>
-				</form>			  
+				</form>			
+<a href="javascript:printOut(<?php echo $start_timeframe.",".$end_timeframe.",".$group_id;?>)"><img border=0 src=<?php echo $root_path;?>/gui/img/common/default/billing_print_out.gif></a><br>				  
 						  <br><br><br>						  
 
 

@@ -198,7 +198,7 @@ if($count){
 <?php else : ?>
 <a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> border="0" alt="<?php echo $LDClose ?>">
 </a>
-<?php endif ?>
+<?php endif;?>
 </form>
 
 </BODY>

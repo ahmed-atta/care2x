@@ -565,7 +565,7 @@ if($mode=="select") {
 <input name="status" type="radio" value="2" <?php if (($row[status]==2)||($status==2))echo "checked" ?> ><?php echo $LDAmbulant ?>  <input name="status" type="radio" value="1"  <?php if(($row[status]==1)||($status==1)) echo "checked" ?> ><?php echo $LDStationary ?><br>
 </font>
 <FONT SIZE=-1  FACE="Arial" <?php if($err_kasse) echo 'color=#cc0000'; ?>><input name="kasse" type="radio" value="kasse" <?php if (($row[kasse]=="kasse")||($row[kasse]=="kasse")||($kasse=="kasse")) echo "checked" ?> ><?php echo $LDInsurance ?>  <input name="kasse" type="radio" value="privat"  <?php if (($row[kasse]=="privat")||($row[kasse]=="privat")||($kasse=="privat")) echo "checked" ?> ><?php echo $LDPrivate ?> <input name="kasse" type="radio" value="x"  <?php if (($row[kasse]=="x")||($row[kasse]=="x")||($kasse=="x")) echo "checked" ?> ><?php echo $LDSelfPay ?>
-<?php endif ?>
+<?php endif; ?>
 </td>
 </tr>
 <tr <?php if($mode=="select") echo "bgcolor=#ffffff"; ?>>
@@ -655,7 +655,7 @@ if($row[class_s]) echo "$row[class_s] $LDMinor  &nbsp; ";
 </select>
 <?php echo "$LDMajor $LDOperation" ?>
 
-<?php endif ?>
+<?php endif;?>
 </td>
 </tr>
 </table>
@@ -688,7 +688,7 @@ if($row[class_s]) echo "$row[class_s] $LDMinor  &nbsp; ";
 <input  type="image" <?php echo createLDImgSrc($root_path,'searchlamp.gif','0') ?> border=0  alt="<?php echo $LDSearch ?>">
 <input type="hidden" name="mode" value="search">
 <a href="javascript:document.opdoc.reset()"><img <?php echo createLDImgSrc($root_path,'reset.gif','0') ?> alt="<?php echo $LDResetAll ?>" ></a>
-<?php endif ?>
+<?php endif;?>
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
 <input type="hidden" name="lang" value="<?php echo $lang ?>">
 <input type="hidden" name="dept_nr" value="<?php echo $dept_nr ?>">

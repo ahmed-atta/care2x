@@ -1,6 +1,6 @@
 <?php
 /*
- * $Header$ 
+ * $Header: /usr/share/cvs/care2002_tz_mero_vps/modules/nocc/lang/sl.php,v 1.1 2006/01/13 13:39:10 irroal Exp $ 
  *
  * Copyright 2000 Nicolas Chalanset <nicocha@free.fr>
  * Copyright 2000 Olivier Cahagne <cahagn_o@epita.fr>

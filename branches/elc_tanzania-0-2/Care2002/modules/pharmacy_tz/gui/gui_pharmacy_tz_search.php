@@ -107,15 +107,17 @@ function pruf(d)
             fit, here the top 10 Search Results:</p>
           <table width="70%" border="0" bgcolor=#ffffdd align="center">
             <tr> 
-              <td width="13%">item number</td>
-              <td width="38%">item description</td>
-              <td width="20%">item classification</td>
-              <td width="16%">hit match (%)</td>
-              <td width="6%">show</td>
-              <td width="7%">edit</td>
-              <td width="7%">delete</td>
+              <td width="10%">item number</td>
+              <td width="30%">item description</td>
+              <td width="10%">item classification</td>
+              <td width="8%">unit price (TSH)</td>
+              <td width="5%">hit match (%)</td>
+              <td width="5%">show</td>
+              <td width="5%">edit</td>
+              <td width="5%">delete</td>
             </tr>
             <tr> 
+              <td>&nbsp;</td>
               <td>&nbsp;</td>
               <td>&nbsp;</td>
               <td>&nbsp;</td>

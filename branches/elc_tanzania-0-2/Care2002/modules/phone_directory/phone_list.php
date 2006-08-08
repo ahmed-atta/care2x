@@ -52,7 +52,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 
 <?php if(!$edit) : ?>
 <img <?php echo createComIcon($root_path,'phone.gif','0','absmiddle') ?>>
-<?php endif ?>
+<?php endif; ?>
 <FONT  COLOR="<?php echo $cfg[top_txtcolor] ?>"  SIZE=6  FACE="verdana"> <b><?php echo $LDPhoneDir ?></b></font>
 
 <table  border=0 cellpadding=0 cellspacing=0 width="100%">

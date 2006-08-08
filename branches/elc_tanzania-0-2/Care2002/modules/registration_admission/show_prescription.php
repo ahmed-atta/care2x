@@ -1,4 +1,5 @@
 <?php
+
 //error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
@@ -15,8 +16,27 @@ require($root_path.'include/inc_environment_global.php');
 // If this side is called by an external cross link, this will be stored into a session variable:
 //echo $externalcall."....".$target;exit();
   
-//$externalcall=true;
-//$db->debug=1;
+$debug=FALSE;
+($debug)?$db->debug=TRUE:$db->debug=FALSE;
+if ($debug) {
+	echo "file: show_prescription<br>";
+    if (!isset($externalcall))
+      echo "internal call<br>";
+    else
+      echo "external call<br>";
+    
+    echo "mode=".$mode."<br>";
+    
+		echo "show=".$show."<br>";
+		
+    echo "nr=".$nr."<br>";
+    
+    echo "breakfile: ".$breakfile."<br>";
+    
+    echo "backpath: ".$backpath."<br>";
+    
+    echo "pid:".$pid;
+}
 
 if(!$prescription_date) $prescription_date = date("Y-m-d");
 define('NO_2LEVEL_CHK',1);
@@ -39,6 +59,7 @@ if(!isset($mode)){
 	// Insert the prescription without other checks into the database. This should be dony be the doctor and
 	// there was the requirement that there should be no restrictions given...
 	//include('./include/save_admission_data.inc.php');
+	
 	include('./include/save_prescription_data.inc.php');
 	
 }

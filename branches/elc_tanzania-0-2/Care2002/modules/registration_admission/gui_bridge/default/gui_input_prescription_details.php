@@ -1,7 +1,23 @@
 <?php
 require_once($root_path.'include/care_api_classes/class_prescription.php');
 if(!isset($pres_obj)) $pres_obj=new Prescription;
-
+$debug=FALSE;
+if ($debug) {
+    if (!isset($externalcall))
+      echo "internal call<br>";
+    else
+      echo "external call<br>";
+    
+    echo "mode=".$mode."<br>";
+    
+		echo "show=".$show."<br>";
+		
+    echo "nr=".$nr."<br>";
+    
+    echo "breakfile: ".$breakfile."<br>";
+    
+    echo "pid:".$pid;
+}
 $pres_types=$pres_obj->getPrescriptionTypes();
 
 
@@ -42,7 +58,11 @@ function chkform(d) {
 }
 </script>
 <form method="POST" name="reportform<?PHP echo $i;?>">
+<input type="hidden" name="backpath" value="<?php echo $backpath; ?>">
 <?PHP
+
+ 
+
 if(!$nr)
 {
 	$item_array=$_SESSION['item_array'];
@@ -82,7 +102,9 @@ else
    </tr>
    <tr bgcolor="#f6f6f6">
      <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDApplication.' '.$LDNotes; ?></td>
-     <td><textarea name="arr_notes[<?PHP echo $i; ?>]" cols=40 rows=3 wrap="physical"><?php echo $prescriptionitem['notes'];?></textarea>
+     <!--<td><textarea name="arr_notes[<?PHP echo $i; ?>]" cols=40 rows=3 wrap="physical"><?php echo $prescriptionitem['notes'];?></textarea>
+         </td>-->
+		 <td><input type="text" name="arr_notes[<?PHP echo $i; ?>]" size="120"><?php echo $prescriptionitem['notes'];?>
          </td>
    </tr>
 
@@ -92,6 +114,7 @@ else
      <td><input type="text" name="prescriber" size=50 maxlength=60 value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>" readonly></td>
    </tr>
  </table>
+
 <input type="hidden" name="arr_item_number[<?PHP echo $i; ?>]" value="<?PHP echo $i; ?>">
 <input type="hidden" name="arr_article_item_number[<?PHP echo $i; ?>]" value="<?php echo $item_array[$i];?>">
 <input type="hidden" name="arr_price[<?PHP echo $i; ?>]" value="<?php echo $pres_obj->GetPriceOfItem($item_no[$i]);?>">
@@ -119,7 +142,6 @@ else
 
 <input type="hidden" name="is_outpatient_prescription" value="1">
 <input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0'); ?>>
-
 </form>
 
 

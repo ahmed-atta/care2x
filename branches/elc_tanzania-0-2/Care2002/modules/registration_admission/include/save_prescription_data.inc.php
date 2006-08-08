@@ -6,6 +6,24 @@ if (eregi('save_admission_data.inc.php',$PHP_SELF))
 
 $debug=FALSE;
 ($debug)?$db->debug=TRUE:$db->debug=FALSE;
+if ($debug) {
+    if (!isset($externalcall))
+      echo "internal call<br>";
+    else
+      echo "external call<br>";
+    
+    echo "mode=".$mode."<br>";
+    
+		echo "show=".$show."<br>";
+		
+    echo "nr=".$nr."<br>";
+    
+    echo "breakfile: ".$breakfile."<br>";
+    
+    echo "backpath: ".$backpath."<br>";
+    
+    echo "pid:".$pid;
+}
 $i=0;
 if($mode=='delete') $arr_item_number[0] = $nr;
 foreach ($arr_item_number AS $item_number) {	
@@ -79,10 +97,13 @@ foreach ($arr_item_number AS $item_number) {
   }// end of switch
 } // end of foreach  
 
-if (isset($externalcall))
-  header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&externalcall=".$externalcall."&pid=".$HTTP_SESSION_VARS['sess_pid']);
-else
-  header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&pid=".$HTTP_SESSION_VARS['sess_pid']);
+if (isset($externalcall)){
+	if ($backpath=='billing' || $backpath=='billing')	
+  		header("location: $root_path/modules/billing_tz/billing_tz_quotation.php");
+  	else
+  		header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&externalcall=".$externalcall."&backpath=".urlencode($backpath)."&pid=".$HTTP_SESSION_VARS['sess_pid']);
+} else
+  header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&backpath=".urlencode($backpath)."&pid=".$HTTP_SESSION_VARS['sess_pid']);
 
 exit();
 ?>

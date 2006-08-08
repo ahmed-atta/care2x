@@ -3,7 +3,7 @@ phpMyAdmin - Changelog
 ----------------------
 
 $Id$
-$Source$
+$Source: /usr/share/cvs/care2002_tz_mero_vps/modules/phpmyadmin/ChangeLog,v $
 
 2003-09-07 Marc Delisle  <lem9@users.sourceforge.net>
     * lang/chinese_big5: removed control/M's 

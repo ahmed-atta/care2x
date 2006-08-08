@@ -1,5 +1,5 @@
 <?php
-$curr_month = date("n", time())-1;
+$curr_month = date("n", time());
 $curr_year = date("Y", time());
  
 for ($y=$curr_year; $y>=$curr_year-3; $y--) {

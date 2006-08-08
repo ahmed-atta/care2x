@@ -34,7 +34,7 @@ if (!$internok&&!$HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]) {header("Lo
     <frame name= "OPLOGINPUT"  SRC = "blank.htm">
     <frame name="OPLOGIMGBAR" src="blank.htm">
   </frameset>
- <?php endif ?>
+ <?php endif; ?>
 <noframes>
 <BODY BACKGROUND="#ffffff" onLoad="if (window.focus) window.focus()">
 

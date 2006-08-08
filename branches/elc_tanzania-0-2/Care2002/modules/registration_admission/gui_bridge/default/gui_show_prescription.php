@@ -1,6 +1,7 @@
 <table border=0 cellpadding=4 cellspacing=1 width=100% class="frame">
 <?php
 $toggle=0;
+
 while($row=$result->FetchRow()){
 	if($toggle) $bgc='#f3f3f3';
 		else $bgc='#fefefe';
@@ -9,6 +10,7 @@ while($row=$result->FetchRow()){
 	if($row['encounter_class_nr']==1) $full_en=$row['encounter_nr']+$GLOBAL_CONFIG['patient_inpatient_nr_adder']; // inpatient admission
 		else $full_en=$row['encounter_nr']+$GLOBAL_CONFIG['patient_outpatient_nr_adder']; // outpatient admission
 	$amount = 0;
+	$notbilledyet=false;
 	if($row['bill_number']>0)
 	{
 		include_once($root_path.'include/care_api_classes/class_tz_billing.php');
@@ -28,6 +30,9 @@ while($row=$result->FetchRow()){
 						$amount=$billrow['amount'];
 				}
 		}
+	}
+	{
+		$notbilledyet=true;
 	}
 
 ?>
@@ -52,15 +57,20 @@ while($row=$result->FetchRow()){
     <td><FONT SIZE=-1  FACE="Arial"><?php echo $full_en; ?></td>
     <td rowspan=2><FONT SIZE=-1  FACE="Arial"><?php echo $row['notes']; ?>
     
-<?php 
+<?php
+ 
     if($row['is_disabled'])
     {
     	echo '<br><br><img src="../../gui/img/common/default/warn.gif" border=0 height="15" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"> <font color=red>'.$row['is_disabled'].'</font>';
   	}
   	elseif($row['bill_number']>0)
   	{
-  		echo '<br><br><img src="../../gui/img/common/default/warn.gif" border=0 height="15" alt="" style="filter:alpha(opacity=70)"> <font color=red>Already billed! See bill number '.$row['bill_number'].'</font>';
+  		echo '<br><br><img src="../../gui/img/common/default/warn.gif" border=0 height="15" alt="" style="filter:alpha(opacity=70)"> <font color=green>Already billed! See bill number '.$row['bill_number'].'</font>';
   		if($amount>0) echo '<br><img src="../../gui/img/common/default/warn.gif" border=0 height="15" alt="" style="filter:alpha(opacity=70)"> <font color="red">The dosage has been changed by the billing officer.</font>';
+  	}
+  	elseif($notbilledyet)
+  	{
+  		echo '<br><br><img src="../../gui/img/common/default/warn.gif" border=0 height="15" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"> <font color=red>This prescription item is not yet billed!</font>';
   	}
   	?>    
     </td>
@@ -70,7 +80,7 @@ while($row=$result->FetchRow()){
   		echo '<font color="#D4D4D4">edit</font>';
   	}
   	else
-    echo '<a href="'.$thisfile.URL_APPEND.'&mode=edit&nr='.$row['nr'].'&show=insert&externalcall='.$externalcall.'&disablebuttons='.$disablebuttons.'">edit</a>'
+    echo '<a href="'.$thisfile.URL_APPEND.'&mode=edit&nr='.$row['nr'].'&show=insert&backpath='.urlencode($backpath).'&externalcall='.$externalcall.'&disablebuttons='.$disablebuttons.'">edit</a>'
     
     ?>
     </td><td><FONT SIZE=-1  FACE="Arial"><?php echo $row['order_nr']; ?></td>
@@ -84,7 +94,7 @@ while($row=$result->FetchRow()){
   		echo '<font color="#D4D4D4">delete</font>';
   	}
   	else
-      echo '<a href="'.$thisfile.URL_APPEND.'&mode=delete&nr='.$row['nr'].'&show=insert&externalcall='.$externalcall.'&disablebuttons='.$disablebuttons.'">delete</a>' ?>
+      echo '<a href="'.$thisfile.URL_APPEND.'&mode=delete&nr='.$row['nr'].'&show=insert&backpath='.urlencode($backpath).'&externalcall='.$externalcall.'&disablebuttons='.$disablebuttons.'">delete</a>' ?>
     </td>
     <td><FONT SIZE=-1  FACE="Arial"><?php echo $row['prescriber']; ?></td>
   </tr>

@@ -1,3 +1,48 @@
+<?php
+// PRINTOUT - SECTION :: See below for common GUI
+if ($PRINTOUT) {
+echo '<head>
+<script language="javascript"> this.window.print(); </script>
+<title>OPD Summary</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>';
+echo '<html><body>';
+?>
+<DIV align="center">
+	<h1>OPD Diagnostic Report for <?php echo date('F Y',$start);?></h1>
+	<p>Creation time: <?php echo date("F j, Y, g:i a");?></p>
+</DIV>
+  <br><br>
+			<form name="form1" method="post" action="">
+
+                          <table width="600" border="1" cellspacing="0" cellpadding="0" align="center">
+                            <tr>
+                              <td width="80" scope="col">Diagnostic Code </td>
+                              <td width="300" scope="col">Diagnostic Full Name </td>
+                              <td colspan="2" scope="col">Age</td>
+                              <td colspan="2" scope="col">Sex (male/female) </td>
+                              <td width="100" scope="col">Total</td>
+                            </tr>
+                            <tr>
+                              <td>&nbsp;</td>
+                              <td>&nbsp;</td>
+                              <td width="50">&lt; 5 </td>
+                              <td width="50">&gt; 5 </td>
+                              <td>male</td>
+                              <td>female</td>
+                              <td>&nbsp;</td>
+                            </tr>                   
+<?php
+$rep_obj->Display_OPD_Diagnostic($start, $end);
+?>                            
+                          </table>
+		</form>			
+<?php 
+exit();
+} 
+
+?>
+
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
@@ -17,6 +62,12 @@ function gethelp(x,s,x1,x2,x3,x4)
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
+    function printOut()
+    {
+    	urlholder="./OPD_diagnostic.php?printout=TRUE&start=<?php echo $start;?>&end=<?php echo $end;?>" ;
+    	testprintout=window.open(urlholder,"printout","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
+      	window.testprintout.moveTo(0,0);
+    }
 // -->
 
 </script> 
@@ -82,7 +133,7 @@ function popPic(pid,nm){
 						  <br>
                           <table width="600" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor=#ffffdd>
                             <tr>
-                              <td width="80" bgcolor="#ffffdd" scope="col">Diagnostic Code </td>
+                              <td width="80" bgcolor="#ffffdd" scope="col">ICD-10 Code </td>
                               <td width="300" bgcolor="#ffffdd" scope="col">Diagnostic Full Name </td>
                               <td colspan="2" bgcolor="#ffffdd" scope="col">Age</td>
                               <td colspan="2" bgcolor="#ffffdd" scope="col">Sex (male/female) </td>
@@ -101,7 +152,8 @@ function popPic(pid,nm){
 $rep_obj->Display_OPD_Diagnostic($start, $end);
 ?>                            
                           </table>
-		</form>						  
+		</form>			
+<a href="javascript:printOut()"><img border=0 src=<?php echo $root_path;?>/gui/img/common/default/billing_print_out.gif></a><br>					  
 						  <br><br><br>						  
                           <table width="100%" border="0" cellspacing="0" cellpadding="1" bgcolor="#cfcfcf">
 <tr>

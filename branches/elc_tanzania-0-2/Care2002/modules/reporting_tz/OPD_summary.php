@@ -8,7 +8,7 @@ require($root_path.'include/inc_environment_global.php');
 require_once($root_path.'include/care_api_classes/class_tz_selianreporting.php');
 /**
  * getting summary of OPD...
- */
+ 
 $rep_obj = new selianreport();
 
 
@@ -16,10 +16,15 @@ require_once('include/inc_timeframe.php');
 $month=array_search(1,$ARR_SELECT_MONTH);
 $year=array_search(1,$ARR_SELECT_YEAR);
 
-$start = mktime (0,0,0,$month, 1, $year);
-$end = mktime (0,0,0,$month+1, 1, $year);
+if ($printout) {
+	$start = $_GET['start'];
+	$end = $_GET['end'];
+} else {
+	$start = mktime (0,0,0,$month, 1, $year);
+	$end = mktime (0,0,0,$month+1, 1, $year);
+}
+
 $arr_ret = $rep_obj->Display_OPD_Summary($start,$end);
-
-
+*/
 require_once('gui/gui_OPD_summary.php');
 ?>

@@ -200,7 +200,7 @@ echo '</font>
 
 </FONT>
 <p>
-<?php endif ?>
+<?php endif; ?>
 
 <p>
 <p>
