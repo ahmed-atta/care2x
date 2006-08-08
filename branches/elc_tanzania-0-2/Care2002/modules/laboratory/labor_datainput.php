@@ -1,6 +1,5 @@
 <?php
 define('ROW_MAX',15); # define here the maximum number of rows for displaying the parameters
-
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
@@ -16,7 +15,10 @@ $lang_tables=array('chemlab_groups.php','chemlab_params.php');
 define('LANG_FILE','lab.php');
 $local_user='ck_lab_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-//$db->debug=true;
+
+$debug=FALSE;
+($debug)? $db->debug=true: $db->debug=FALSE;
+
 if(!$encounter_nr) {header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 
 
 if(!isset($user_origin)||empty($user_origin)) $user_origin='lab';
@@ -25,7 +27,13 @@ if(!isset($user_origin)||empty($user_origin)) $user_origin='lab';
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 $encounter=new Encounter($encounter_nr);
 
-//$db->debug=1;
+if ($debug) {
+	echo "Parameterselect is set to:".$parameterselect."<br>";
+	echo "mode is set to:".$mode."<br>";
+	echo "allow update is set to:".$allow_update."<br>";
+	echo "job id is set to:".$job_id."<br>";
+	echo "encounter number is: ".$encounter_nr."<br>";
+}
 
 $thisfile='labor_datainput.php';
 
@@ -33,24 +41,23 @@ $thisfile='labor_datainput.php';
 require_once($root_path.'include/care_api_classes/class_lab.php');
 $lab_obj=new Lab($encounter_nr);
 
-require($root_path.'include/inc_labor_param_group.php');
-						
+require($root_path.'include/inc_labor_param_group.php');			
 if(!isset($parameterselect)||$parameterselect=='') $parameterselect='all';
 if($parameterselect == 'all')
-{
-	$result_tests = $lab_obj->GetTestsToDo($job_id);
-	if($row_tests = $result_tests->FetchRow())
-	{
-		parse_str($row_tests['parameters'], $arr_tasks);
-		while(list($x,$v) = each($arr_tasks))
+{ 
+	if($result_tests = $lab_obj->GetTestsToDo($job_id))
+		if($row_tests = $result_tests->FetchRow())
 		{
-			$testdetails = $lab_obj->TestParamsDetails(substr($x,5,strlen($x)-6));
-			$parameters[substr($x,5,strlen($x)-6)] = $testdetails['name'];
+			parse_str($row_tests['parameters'], $arr_tasks);
+			while(list($x,$v) = each($arr_tasks))
+			{
+				$testdetails = $lab_obj->TestParamsDetails(substr($x,5,strlen($x)-6));
+				$parameters[substr($x,5,strlen($x)-6)] = $testdetails['name'];
+			}
 		}
-	}
 	$paramname='Requested tests';
-}
-else
+    if ($debug) echo "parameterselect is set to all ->$paramname<-<br>";
+} else
 {
 	$groups = $lab_obj->TestParams($parameterselect);
 	if($groups)
@@ -61,6 +68,7 @@ else
 		}
 	}
 	$paramname=&$parametergruppe[$parameterselect];
+	if ($debug) echo "parameterselect is not set ->$paramname<-<br>";
 }
 
 # Load the date formatter
@@ -75,10 +83,18 @@ if($mode=='save'){
 			$whichgroup = $lab_obj->TestGroupByID($x);
 		 	$nbuf[$whichgroup['parent']][$x]=$HTTP_POST_VARS['_task'.$x.'_'];
 		 	$addbuf[$whichgroup['parent']][$x]=$HTTP_POST_VARS['_add'.$x.'_'];
+		 	
+		}
+		else
+		{
+			if(isset($HTTP_POST_VARS['_add'.$x.'_'])&& !empty($HTTP_POST_VARS['_add'.$x.'_'])){
+				$nbuf = false;
+				$tickerror++;
+			}
 		}
 	}
-	while(list($x,$v) = each($nbuf))
-	{
+	if ($debug) echo "starting reading the array nbuf<br>";
+	while(list($x,$v) = each($nbuf)) { 
 
 		$dbuf['group_id']=$x;
 		$dbuf['serial_value']=serialize($v);
@@ -98,11 +114,11 @@ if($mode=='save'){
 			$batch_nr = $row['batch_nr'];
 			$update=1;
 			$allow_update=true;
-
 		}else{
 			# disallow update if group does not exist yet
 			$allow_update=false;
 		}
+		if ($debug) echo "allow update is set to:".$allow_update."<br>";
 		if($allow_update){
 			$dbuf['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
 			$dbuf['modify_time']=date('YmdHis');
@@ -141,18 +157,20 @@ if($mode=='save'){
 				$saved=true;
 			}else{echo "<p>".$lab_obj->getLastQuery()."$LDDbNoSave";}	
 		}
-	}
+	} 
 
 	# If save successful, jump to display values
 	if($saved){
 		include_once($root_path.'include/inc_visual_signalling_fx.php');
 		# Set the visual signal 
 		setEventSignalColor($encounter_nr,SIGNAL_COLOR_DIAGNOSTICS_REPORT);							
-		header("location:$thisfile?sid=$sid&lang=$lang&saved=1&batch_nr=$batch_nr&encounter_nr=$encounter_nr&job_id=$job_id&parameterselect=$parameterselect&allow_update=1&user_origin=$user_origin");
+		header("location:$thisfile?sid=$sid&lang=$lang&saved=1&batch_nr=$batch_nr&encounter_nr=$encounter_nr&job_id=$job_id&parameterselect=$parameterselect&allow_update=1&user_origin=$user_origin&tickerror=$tickerror");
 	}
+
 # end of if(mode==save)
 } else { #If mode is not "save" then get the basic personal data 
 
+if ($debug) echo "mode is not save then get the basic personal data<br>";
 	# If parameter group has changed do not allow update
 //	 if(isset($changegroup) && $changegroup){
 //	 	$allow_update=FALSE;
@@ -164,46 +182,41 @@ if($mode=='save'){
 	if($encounter=&$enc_obj->getBasic4Data($encounter_nr)){
 		$patient=$encounter->FetchRow();
 	}
+	
 	# If previously saved, get the values
 	$pdata=array();
 	$adddata=array();
 	$update=0;
 	if($saved){
 			$allow_update=true;
+	}
+	$resultcounter=0;
+	$result=&$lab_obj->getResult($job_id,$parameterselect);
+	if($result) {
+		while($row=$result->FetchRow()){
+			$temp_pdata[$resultcounter++]=unserialize($row['serial_value']);
+			$temp_adddata[$resultcounter++]=unserialize($row['add_value']);
+			$update=1;
+			$allow_update=true;
 		}
-		$resultcounter=0;
-		$result=&$lab_obj->getResult($job_id,$parameterselect);
-		if($result)
-		{
-			while($row=$result->FetchRow()){
-				$temp_pdata[$resultcounter++]=unserialize($row['serial_value']);
-				$temp_adddata[$resultcounter++]=unserialize($row['add_value']);
-				$update=1;
-				$allow_update=true;
-			}
-			while(list($x,$v) = each($temp_pdata))
-			{
-				while(list($inner_x, $inner_v) = each($v))
-				{
-					$pdata[$inner_x] = $inner_v;
-				}
-			}
-			while(list($x,$v) = each($temp_adddata))
-			{
-				while(list($inner_x, $inner_v) = each($v))
-				{
-					$adddata[$inner_x] = $inner_v;
-				}
+		while(list($x,$v) = each($temp_pdata)) {
+			while(list($inner_x, $inner_v) = each($v)) {
+				$pdata[$inner_x] = $inner_v;
 			}
 		}
-		
-		if(!$resultcounter)
-		{
-			# disallow update if group does not exist yet
-			$allow_update=false;
+		while(list($x,$v) = each($temp_adddata)) {
+			while(list($inner_x, $inner_v) = each($v)) {
+				$adddata[$inner_x] = $inner_v;
+			}
 		}
+	}
 	
-	//echo $lab_obj->getLastQuery();
+	if(!$resultcounter) { 
+		# disallow update if group does not exist yet
+		$allow_update=false;
+	}
+
+//echo $lab_obj->getLastQuery();
 			
 
 
@@ -212,7 +225,9 @@ if($mode=='save'){
 		switch($user_origin){
 			case 'lab_mgmt':  $breakfile="labor_test_request_admin_chemlabor.php".URL_APPEND."&pn=$encounter_nr&batch_nr=$job_id&user_origin=lab"; 
 					break;
-			default: $breakfile="labor_data_check_arch.php".URL_APPEND."&versand=1&encounter_nr=$encounter_nr";
+			default: 
+				//$breakfile="labor_data_check_arch.php".URL_APPEND."&versand=1&encounter_nr=$encounter_nr";
+				$breakfile="labor.php";
 		}
 	}else{
 		$breakfile="labor_data_patient_such.php".URL_APPEND."&mode=edit";
@@ -223,19 +238,14 @@ if($mode=='save'){
 	# Get the test test groups
 	$tgroups=&$lab_obj->TestGroups();
 	# Get the test parameter values
-	if($parameterselect != 'all')
-	{
+	if($parameterselect != 'all') { 
 		$tparams=$lab_obj->TestParams($parameterselect);
-		while($tp=$tparams->FetchRow())
-		{
+		while($tp=$tparams->FetchRow()) {
 			$testarray[$counter++] = $tp;
 		}
-	}
-	else
-	{
+	} else {
 		$counter=0;
-		while(list($x,$v) = each($parameters))
-		{
+		while(list($x,$v) = each($parameters)) {
 			$testarray[$counter++] = $lab_obj->TestParamsGroupsDetails($x);
 		}
 	}
@@ -339,28 +349,23 @@ $smarty->assign('sLastName',$patient['name_last']);
 $smarty->assign('sName',$patient['name_first']);
 $smarty->assign('sBday',formatDate2Local($patient['date_birth'],$date_format));
 
-if($saved||$job_id) $smarty->assign('sJobIdNr',$job_id.'<input type=hidden name=job_id value="'.$job_id.'">');
-	else $smarty->assign('sJobIdNr','<input name="job_id" type="text" size="14">');
 
-$smarty->assign('sExamDate',$LDExamDate);
-
-if($saved||$row['test_date']||$std_date){
-   $smarty->assign('sExamDate',formatDate2Local($std_date,$date_format).'<input type=hidden name="std_date" value="'.$std_date.'">');
-}else{
+   $smarty->assign('sJobIdNr',$job_id.'<input type=hidden name=job_id value="'.$job_id.'">');
    $smarty->assign('sExamDate','<input name="test_date" type="text" size="14" value="'.formatDate2Local(date('Y-m-d'),$date_format).'" onBlur="IsValidDate(this,\''.$date_format.'\')")  onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\')">');
    $smarty->assign('sMiniCalendar',"<a href=\"javascript:show_calendar('datain.test_date','$date_format')\"><img ".createComIcon($root_path,'show-calendar.gif','0','absmiddle')."></a>");
-}
+
 
 # Assign parameter elements
 
 $smarty->assign('sParamGroup',strtr($parametergruppe[$parameterselect],"_","-"));
 
-$smarty->assign('pbSave','<input  type="image" '.createLDImgSrc($root_path,'savedisc.gif','0').'>');
+$smarty->assign('pbSave','<input  type="image" '.createLDImgSrc($root_path,'update.gif','0').'>');
 $smarty->assign('pbShowReport','<a href="labor_datalist_noedit.php'.URL_APPEND.'&encounter_nr='.$encounter_nr.'&noexpand=1&from=input&job_id='.$job_id.'&parameterselect='.$parameterselect.'&allow_update='.$allow_update.'&nostat=1&user_origin='.$user_origin.'"><img '.createLDImgSrc($root_path,'showreport.gif','0','absmiddle').' alt="'.$LDClk2See.'"></a>');
 
-if($saved) $sCancelBut='<img '.createLDImgSrc($root_path,'close2.gif','0','absmiddle').'>';
+if($saved || $update) $sCancelBut='<img '.createLDImgSrc($root_path,'close2.gif','0','absmiddle').'>';
 	else $sCancelBut='<img  '.createLDImgSrc($root_path,'cancel.gif','0','absmiddle').'>';
 
+//$smarty->assign('pbCancel',"<a href=\"$breakfile\">$sCancelBut</a>");
 $smarty->assign('pbCancel',"<a href=\"$breakfile\">$sCancelBut</a>");
 
 $smarty->assign('sAskIcon',"<img ".createComIcon($root_path,'small_help.gif','0').">");
@@ -372,14 +377,13 @@ $smarty->assign('sFormAction',$thisfile);
 ob_start();
 ?>
 
-<?php if($error) : ?>
+<?php 
+
+if($tickerror>0) : ?>
 <tr bgcolor=#ffffee>
 <td colspan=4><center>
 <font face=arial color=#7700ff size=4>
-In <font color=red>rot</font> gekennzeichnet<?php if ($errornum>1) echo "en"; else echo "em"; ?>&nbsp;
-Feld<?php if ($errornum>1) echo "ern"; ?>&nbsp;
-fehl<?php if ($errornum>1) echo "en"; else echo "t eine"; ?>&nbsp;
-Information<?php if ($errornum>1) echo "en"; ?>!
+An error occured! Please be sure to insert valid values and also fill out the text boxes right beside the checkboxes!
 </center>
 </td>
 </tr>
@@ -405,7 +409,6 @@ echo '
 ';
 $rowlimit=0;
 //$count=$paramnum;
-
 if($testarray)
 {
 $teststodo=&$lab_obj->GetTestsToDo($job_id);
@@ -461,6 +464,8 @@ if($tp['is_enabled']==1)
 	{
 		if($tp['add_label']) echo $tp['add_label'].':';
 		echo '<input type="'.$tp['add_type'].'" name="_add'.$tp['id'].'_" ';
+		// is still given, but not longer possible that this can occure. If you want it
+		// back, then please go to the file labor_test_param_edit.php
 		if($tp['add_type']=="checkbox")
 		{
 			echo 'value="check"';			
@@ -533,7 +538,7 @@ while($tg=$tgroups->FetchRow()){
 }
 
 $smarty->assign('sParamGroupSelect',$sTemp.'</select>');
-
+$smarty->assign('sFormAction','action="'.$thisfile.'?sid='.$sid.'&lang='.$lang.'&saved=1&batch_nr='.$batch_nr.'&encounter_nr='.$encounter_nr.'&job_id='.$job_id.'&parameterselect='.$parameterselect.'&allow_update=1&user_origin='.$user_origin.'"');
 $smarty->assign('LDSelectParamGroup',$LDSelectParamGroup);
 $smarty->assign('LDParamGroup',$LDParamGroup);
 
@@ -577,5 +582,4 @@ $smarty->assign('LDImDone',"<a href=\"Javascript:gethelp('lab.php','input','done
  * show Template
  */
  $smarty->display('common/mainframe.tpl');
-
 ?>
