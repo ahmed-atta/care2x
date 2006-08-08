@@ -71,6 +71,7 @@ $send_date="";
 
 /* Display the list of pending requests */
 $requests->MoveFirst();
+if ($debug) echo "back path is:".$back_path."<br>";
 while($test_request=$requests->FetchRow())
 {
   if ($debug) echo $tracker."<br>";

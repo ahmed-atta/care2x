@@ -48,19 +48,20 @@ function setEventSignalColor($pn, $color, $status = SIGNAL_COLOR_LEVEL_FULL )
 	//$event_table='care_nursing_station_patients_event_signaller'; 
 	$event_table='care_encounter_event_signaller'; 
 	
-	$sql="SELECT encounter_nr FROM $event_table WHERE encounter_nr=$pn";
-   	if($ergebnis=$db->Execute($sql))
-   	{
-   		if($ergebnis->RecordCount()){
-   			$sql="UPDATE $event_table SET $color ='$status' WHERE encounter_nr=$pn";
-			$db->Execute($sql);
-			if(!$db->Affected_Rows()){
-   				//echo $sql;
+	$sql="SELECT encounter_nr, $color FROM $event_table WHERE encounter_nr=$pn";
+   	if($ergebnis=$db->Execute($sql)) {
+   		$row=$ergebnis->FetchRow();
+   		if ($row[1]!=$status)
+	   		if($ergebnis->RecordCount()){
+	   			$sql="UPDATE $event_table SET $color ='$status' WHERE encounter_nr=$pn";
+				$db->Execute($sql);
+				echo $db->Affected_Rows();
+				if(!$db->Affected_Rows()){
+					$nogo=true;
+				}
+			}else{
 				$nogo=true;
 			}
-		}else{
-			$nogo=true;
-		}
    	}else{
    		$nogo=true;
 	}	   
