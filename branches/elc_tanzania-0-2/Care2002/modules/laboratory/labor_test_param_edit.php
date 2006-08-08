@@ -196,9 +196,11 @@ if($tp){
 				echo '<input type="radio" name="add_type" value="text"';
 				if($tp[$pitems[$i]]=="text") echo ' checked ';
 				echo '>Text <input type="radio" name="add_type" value="checkbox"';
+				/*
 				if($tp[$pitems[$i]]=="checkbox") echo ' checked ';
 				echo '>Checkbox';
 				echo '<input type="radio" name="add_type" value=""';
+				*/
 				if(!trim($tp[$pitems[$i]]) || !$tp[$pitems[$i]]=="text" || !$tp[$pitems[$i]]=="checkbox") echo ' checked ';
 				echo '>Hide';
 			}

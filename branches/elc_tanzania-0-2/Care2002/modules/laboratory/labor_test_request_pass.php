@@ -20,8 +20,8 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'global_conf/areas_allow.php');
 
 /* Set the allowed area basing on the target */
-if($target=='admin') $allowedarea=&$allow_area['test_receive'];
- else $allowedarea=&$allow_area['test_order'];
+if($target=='admin') $allowedarea=&$allow_area['lab_r'];
+ else $allowedarea=&$allow_area['lab_r'];
 
 if(!isset($target)||!$target) $target='chemlabor';
 

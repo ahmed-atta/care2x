@@ -100,7 +100,7 @@ if($linecount>1) echo "<br> $LDIfWantEditMany<p>";
 						
 						if($toggle) { echo "wardlistrow2>"; $toggle=0;} else {echo "wardlistrow1>"; $toggle=1;};
 	
-	                    $fwd_url = 'labor_datainput.php'.URL_APPEND.'&encounter_nr='.$encounter_nr.'&job_id='.$zeile['job_id'].'&parameterselect='.$zeile['group_id'].'&mode='.$mode.'&update=1';
+	                    $fwd_url = 'labor_datainput.php'.URL_APPEND.'&encounter_nr='.$encounter_nr.'&job_id='.$zeile['job_id'].'&parameterselect=all&mode='.$mode.'&update=1';
 	                     
 						     /* Print the job id or batch nr., test date and time */
 							echo'
@@ -124,17 +124,6 @@ if($linecount>1) echo "<br> $LDIfWantEditMany<p>";
 					echo "</table>";
 
 ?><p>
-<form action="labor_datainput.php" method="get"><font size=4>
-<b><?php echo $LDNewJob ?></b></font><br>
-<?php echo "$LDNew $LDJobIdNr" ?>:<br>
-<input type="text" name="job_id" size=15 maxlength=15>
-<input type="hidden" name="encounter_nr" value="<?php echo $encounter_nr ?>">
-<input type="hidden" name="newid" value="1">
-<input type="hidden" name="sid" value="<?php echo $sid ?>">
-<input type="hidden" name="lang" value="<?php echo $lang ?>">
-<input type="submit" value="<?php echo $LDCreate ?>">
-</form>
-
 <p>
 <p>
 <hr width=80% align=left>

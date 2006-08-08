@@ -92,15 +92,13 @@ $enc_obj=new Encounter;
 						   
 	}// end of switch($mode)
   
-	if(!$mode) /* Get the pending test requests */
-	{
+	if(!$mode) /* Get the pending test requests */ 	{
 		$sql="SELECT care_person.pid, care_person.selian_pid, name_first, name_last, batch_nr, tr.encounter_nr,tr.send_date,dept_nr,room_nr FROM care_test_request_".$subtarget." tr,
 					care_encounter, care_person 
 						         WHERE (tr.status='pending' OR tr.status='') AND
 						         tr.encounter_nr = care_encounter.encounter_nr AND
 						         care_encounter.pid = care_person.pid
 						         ORDER BY  tr.send_date DESC";
-						       
 		if($requests=$db->Execute($sql)){
 			/* If request is available, load the date format functions */
 			require_once($root_path.'include/inc_date_format_functions.php');
@@ -111,19 +109,52 @@ $enc_obj=new Encounter;
 				 /* Check for the patietn number = $pn. If available get the patients data */
 				$pn=$test_request['encounter_nr'];
 				$batch_nr=$test_request['batch_nr'];
+				$name_first=$test_request['name_first'];
+				$selian_pid=$test_request['selian_pid'];
 			}
 		}else{
 			echo "<p>$sql<p>$LDDbNoRead"; 
 			exit;
 		}
 		$mode="show";   
+		
+		if (!empty($_GET['tracker'])) 
+			$h_batch_nr=$_GET['batch_nr'];
+		else
+			$h_batch_nr=$batch_nr;
+
+
+		/* prepare selection to show the headline... */
+		$sql_headline="SELECT care_person.pid, care_person.selian_pid, name_first, name_last, sex, batch_nr, date_birth, tr.encounter_nr,tr.send_date,dept_nr,room_nr FROM care_test_request_".$subtarget." tr, care_encounter, care_person 
+						         WHERE (tr.status='pending' OR tr.status='') AND
+						         tr.encounter_nr = care_encounter.encounter_nr AND
+						         care_encounter.pid = care_person.pid
+						         AND tr.batch_nr = ".$h_batch_nr." 		
+						         ORDER BY  tr.send_date DESC";
+		if($h_requests=$db->Execute($sql_headline)){
+			if ($test_request_headline = $h_requests->FetchRow()) {
+				$h_pid=$test_request_headline['pid'];
+				$h_batch_nr=$test_request_headline['batch_nr'];
+				$h_encounter_nr=$test_request_headline['encounter_nr'];
+				$h_selian_file_number=$test_request_headline['selian_pid'];
+				$h_name_first=$test_request_headline['name_first'];
+				$h_name_last=$test_request_headline['name_last'];
+				$h_birthdate=$test_request_headline['date_birth'];
+		        $h_sex=$test_request_headline['sex'];
+		        if ($_sex=="f")
+		        	$h_sex_img="spf.gif";
+		        else
+		        	$h_sex_img="spm.gif";
+		        //echo "sex:".$_sex;
+			} // end of if ($test_request_headline = $h_requests->FetchRow())
+		} // end of if($h_requests=$db->Execute($sql_headline))
 	}	
 		          
      /* Check for the patietn number = $pn. If available get the patients data */
      if($batchrows && $pn){		
 
 	    if( $enc_obj->loadEncounterData($pn)) {
-		
+		    //echo "lade Patientendaten...";
 			include_once($root_path.'include/care_api_classes/class_globalconfig.php');
 			$GLOBAL_CONFIG=array();
 			$glob_obj=new GlobalConfig($GLOBAL_CONFIG);

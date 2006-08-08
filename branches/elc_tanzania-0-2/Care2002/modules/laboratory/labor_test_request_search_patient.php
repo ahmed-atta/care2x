@@ -209,7 +209,7 @@ if ($enc_obj->record_count) {
       <td <?php echo $tbg; ?>><b>
 	  <?php echo $pagen->makeSortLink($LDBday,'date_birth',$oitem,$odir,$append);  ?></b></td>
       <td <?php echo $tbg; ?> align='center'><b>
-	  <?php echo $pagen->makeSortLink($LDZipCode,'addr_zip',$oitem,$odir,$append); ?></b></td>
+	  <?php echo $pagen->makeSortLink($LDZipCode,'selian_pid',$oitem,$odir,$append); ?></b></td>
     <td background="<?php echo createBgSkin($root_path,'tableHeaderbg.gif'); ?>" align=center><font color="#ffffff"><b><?php echo $LDSelect; ?></td>
 					</tr>
 <?php
@@ -240,7 +240,7 @@ if ($enc_obj->record_count) {
 						echo "&nbsp;".formatDate2Local($row['date_birth'],$date_format);
                         echo "</td>";	
 						echo"<td>";
-						echo "&nbsp;".$row['addr_zip'];
+						echo "&nbsp;".$row['selian_pid'];
                         echo "</td>";	
 
 					    if($HTTP_COOKIE_VARS[$local_user.$sid]) echo '

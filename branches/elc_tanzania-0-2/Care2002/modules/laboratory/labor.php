@@ -44,18 +44,38 @@ require($root_path.'include/inc_2level_reset.php');
  # Medical lab submenu block
 
  $smarty->assign('LDMedLab',$LDMedLab);
+?>
+<html>
+<head>
+<script language="JavaScript">
+function open_request()
+{
+ 	urlholder=("\labor_test_request_pass.php?sid=$sid&lang=$lang&target=admin&subtarget=chemlabor&user_origin=lab\"");
+	helpwin=window.open(urlholder,"helpwin","menubar=no,resizable=yes,scrollbars=yes,status=yes");
+	helpwin.moveTo(0,0);
+	helpwin.resizeTo(screen.availWidth,screen.availHeight);
+}
 
+</script>
+</head>
+<body>
+<?php
  $smarty->assign('LDMedLabTestRequest',"<a href=\"labor_test_request_pass.php?sid=$sid&lang=$lang&target=chemlabor&user_origin=lab\">$LDTestRequest</a>");
  $smarty->assign('LDTestRequestChemLabTxt',$LDTestRequestChemLabTxt);
 
-  $smarty->assign('LDMedLabTestReception',"<a href=\"labor_test_request_pass.php?sid=$sid&lang=$lang&target=admin&subtarget=chemlabor&user_origin=lab\">$LDTestReception</a>");
+ // $smarty->assign('LDMedLabTestReception',"<a href=\"labor_test_request_pass.php?sid=$sid&lang=$lang&target=admin&subtarget=chemlabor&user_origin=lab\">$LDTestReception</a>");
+ $smarty->assign('LDMedLabTestReception',"<a href=javascript:open_request()>$LDTestReception</a>");
   $smarty->assign('LDTestReceptionTxt',$LDTestReceptionTxt);
 
   $smarty->assign('LDSeeData',"<a href=\"labor_datasearch_pass.php?sid=$sid&lang=$lang&route=validroute\">$LDSeeData </a>");
   $smarty->assign('LDSeeLabData',$LDSeeLabData);
-
+/*
   $smarty->assign('LDNewData',"<a href=\"labor_datainput_pass.php?sid=$sid&lang=$lang\">$LDNewData</a>");
   $smarty->assign('LDEnterLabData',$LDEnterLabData);
+*/
+  $smarty->assign('LDEditData',"<a href=\"labor_datainput_pass.php?sid=$sid&lang=$lang\">$LDEditData</a>");
+  $smarty->assign('LDEditLabData',$LDEditLabData);
+
   # Pathology lab submenu block
 
   $smarty->assign('LDPathLab',$LDPathLab);
@@ -101,3 +121,5 @@ require($root_path.'include/inc_2level_reset.php');
  $smarty->display('common/mainframe.tpl');
 
 ?>
+</body>
+</html>

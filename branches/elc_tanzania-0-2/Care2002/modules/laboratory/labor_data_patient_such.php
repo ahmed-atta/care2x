@@ -42,8 +42,8 @@ if($mode=='paginate'){
 	# Reset paginator variables
 	$pgx=0;
 	$totalcount=0;
-	$odir='ASC';
-	$oitem='name_last';
+	$odir='DESC';
+	$oitem='send_date';
 
 	# Workaround: Resolve the search key variables
 	if(empty($keyword)&&!empty($searchkey)) $keyword=$searchkey;
@@ -77,13 +77,8 @@ if($search&&!empty($keyword)){
 	if(empty($GLOBAL_CONFIG['pagin_patient_search_max_block_rows'])) $pagen->setMaxCount(MAX_BLOCK_ROWS); # Last resort, use the default defined at the start of this page
 		else $pagen->setMaxCount($GLOBAL_CONFIG['pagin_patient_search_max_block_rows']);
 
-	if($editmode){
-		# Search
-		$encounter=&$lab_obj->searchLimitEncounterBasicInfo($keyword,$pagen->MaxCount(),$pgx,$oitem,$odir);  
-	}else{
-		$encounter=&$lab_obj->searchLimitEncounterLabResults($keyword,$pagen->MaxCount(),$pgx,$oitem,$odir);
-		# Get the number of results found
-	}  
+	$encounter=&$lab_obj->searchPatientWithPendingLabResults($keyword,$pagen->MaxCount(),$pgx,$oitem,$odir);  
+
 	//echo $lab_obj->getLastQuery()."<p>";
 	# Get the resulting record count
 	if($linecount=$lab_obj->LastRecordCount()){
@@ -96,11 +91,11 @@ if($search&&!empty($keyword)){
 			$pagen->setTotalDataCount($totalcount);
 		}else{
 			if($editmode){
-				@$lab_obj->searchEncounterBasicInfo($keyword);
+				@$lab_obj->searchEncounterLaboratoryInfo($keyword);
 			}else{
 				@$lab_obj->searchEncounterLabResults($keyword);
 			}
-			$totalcount=$lab_obj->LastRecordCount();
+			$totalcount=$lab_obj->LastRecordCount(); 
 			$pagen->setTotalDataCount($totalcount);
 		}
 		$pagen->setSortItem($oitem);
@@ -152,6 +147,8 @@ function checkForm(v) {
 
 <!-- This is the search entry mask -->
 
+
+
 <FORM action="<?php echo $thisfile; ?>" method="post" name="sform" onSubmit="return checkForm(sform.keyword)">
 
 <B><?php echo $LDSearchWordPrompt ?></B></font><p>
@@ -193,6 +190,11 @@ if($linecount){
 
      <td><b>
 	  <?php echo $pagen->makeSortLink($LDCaseNr,'encounter_nr',$oitem,$odir,$append);  ?></b></td>
+     <td><b>
+	  <?php echo $pagen->makeSortLink('Batch number','batch_nr',$oitem,$odir,$append);  ?></b></td>
+     <td><b>
+	  <?php echo $pagen->makeSortLink('Selian File no.','selian_pid',$oitem,$odir,$append);  ?></b></td>
+	  
       <td ><b>
 	  <?php echo $pagen->makeSortLink($LDSex,'sex',$oitem,$odir,$append);  ?></b></td>
       <td><b>
@@ -212,12 +214,13 @@ if($linecount){
 
            
 	# List all the stored lab result documents of the patient 
+	
 	while($zeile=$encounter->FetchRow()){
 
-		if($zeile['encounter_nr']!=$prev_nr){
+		//if($zeile['encounter_nr']!=$prev_nr){
 
-			$prev_nr=$zeile['encounter_nr'];
-			$dcount++;
+			//$prev_nr=$zeile['encounter_nr'];
+			//$dcount++;
 
 			echo '
 			<tr class=';
@@ -226,6 +229,22 @@ if($linecount){
 			echo '<td>';
 			echo '&nbsp;'.$zeile['encounter_nr'];
 			if($zeile['encounter_class_nr']==2) echo ' <img '.createComIcon($root_path,'redflag.gif','0','',TRUE).'> <font size=1 color="red">'.$LDAmbulant.'</font>';
+			
+			if ($lab_obj->IsMissingLabResult($zeile['batch_nr'])==1)
+		     echo ' <img '.createComIcon($root_path,'check2.gif','0','',TRUE).'></img>'; # all results are in the list
+			elseif ($lab_obj->IsMissingLabResult($zeile['batch_nr'])==-1)
+			 echo ' <img '.createComIcon($root_path,'check-r.gif','0','',TRUE).'></img>'; # not all results are written to the file
+		    else 
+		     echo ' <img '.createComIcon($root_path,'exclama.gif','0','',TRUE).'></img>'; # not even one results are written down to file
+        	
+        	echo '</td>';
+
+        	echo '<td>';
+        	echo '&nbsp;'.$zeile['batch_nr'];
+        	echo '</td>';
+        	
+        	echo '<td>';
+        	echo '&nbsp;'.$zeile['selian_pid'];
         	echo '</td>';
 			
 						echo '<td>';
@@ -252,9 +271,14 @@ if($linecount){
 			echo'
 				<td>&nbsp';
 						
-			if($editmode){ 
+			if($editmode){
+				
+				echo'<a href="labor_datainput.php'.URL_APPEND.'&mode=edit&job_id='.$zeile['batch_nr'].'&encounter_nr='.$zeile['encounter_nr'].'&update=1"  title="'.$LDEnterData.'">
+					<button onClick="javascript:window.location.href=\'labor_data_check_arch.php'.URL_REDIRECT_APPEND.'&mode=edit&encounter_nr='.$zeile['encounter_nr'].'&update=1\'"><img '.createComIcon($root_path,'play_one.gif','0','absmiddle',FALSE).' <font size=1> ';
+/*
 				echo'<a href="labor_data_check_arch.php'.URL_APPEND.'&mode=edit&encounter_nr='.$zeile['encounter_nr'].'&update=1"  title="'.$LDEnterData.'">
 					<button onClick="javascript:window.location.href=\'labor_data_check_arch.php'.URL_REDIRECT_APPEND.'&mode=edit&encounter_nr='.$zeile['encounter_nr'].'&update=1\'"><img '.createComIcon($root_path,'update2.gif','0','absmiddle',FALSE).' alt="'.$LDEnterData.'"><font size=1> '.$LDNewData;
+*/
 			}else{
 				echo'
 					<a href="labor_datalist_noedit.php'.URL_APPEND.'&encounter_nr='.$zeile['encounter_nr'].'&noexpand=1&nostat=1&user_origin=lab"  title="'.$LDClk2See.'">
@@ -264,7 +288,7 @@ if($linecount){
 			echo '</font></button></a>&nbsp;
 				</td></tr>';
 
-		}
+		//}
 	}
 	if($totalcount>$pagen->MaxCount()){
 		echo '
