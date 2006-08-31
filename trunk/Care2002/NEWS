@@ -3,6 +3,29 @@ Care2X - News
 
 
 
+Patch D-2.2.0.1 for Care2x Deployment version 2.2 
+----------------------------------------------------
+
+A. Fixes
+
+  * Fix corrupted chars in the footer. Affects several languages with non-latin chars:
+  
+      * ar - Arabic
+      * bg - Bulgarian
+      * es - Spanish
+      * fr - French
+      * gr - Greek
+      * no - Norwegian
+      * pl - Polish
+      * pt - Portuguese
+      * pt-br - Brazil-Pt.
+      * sr - Serbian
+      * tr - Turkish
+      * zh - Chinese-Simplified
+
+    Kaloyan Raev (2006-09-01)
+
+
 2nd Generation Deployment 2.2 version
 ----------------------------------------
 
