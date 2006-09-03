@@ -13,12 +13,18 @@ $app_name = "Care2x";
 /*
  * Version number
  */
-$short_version = "2.2";
+$short_version = "2.2.1";
+
+/*
+ * Deployment | beta
+ */
+$version_status = "beta";
 
 /*
  * Long version description
  */
-$long_version = "2nd Generation Deployment 2.2";
+$long_version = "2nd Generation $version_status $short_version";
+
 
  /*
   * Directories that will be looked in for Test classes.
