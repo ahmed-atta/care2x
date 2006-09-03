@@ -15,26 +15,29 @@ require($root_path.'include/inc_environment_global.php');
 * @param string The directory path to the files with a trailing slash
 * @param string A filter string for filenames
 */
-function containFiles($sDirPath='',$sDiscString=''){
-	$iFileCount=0;
-	if(empty($sDirPath)){
+function getFiles($sDirPath = '', $sDiscString = '') {
+	$files = array();
+	
+	if (empty($sDirPath)) {
 		return FALSE;
-	}elseif(file_exists($sDirPath.'.')){
-		$handle=opendir($sDirPath.'.');
-		while (FALSE!==($filename = readdir($handle))) {
+	} elseif (file_exists($sDirPath.'.')) {
+		$handle = opendir($sDirPath.'.');
+		while (FALSE !== ($filename = readdir($handle))) {
 			if ($filename != '.' && $filename != '..') {
-				if(empty($sDiscString)){
-					$iFileCount++;
-				}else{
-					if(stristr($filename,$sDiscString)) $iFileCount++;
+				if (empty($sDiscString)){
+					$files[] = $filename;
+				} else {
+					if (stristr($filename, $sDiscString)) 
+						$files[] = $filename;
 				}
 			}
 		}
 		closedir($sDirPath.'.');
-		return $iFileCount;
-	}else{
-		return FALSE;
-	}
+		if (count($files) > 0)
+			return $files;
+	} 
+		
+	return FALSE;
 }
 
 define('LANG_FILE','radio.php');
@@ -143,6 +146,24 @@ dicomwin<?php echo $sid ?>=window.open("dicom_launch.php<?php echo URL_REDIRECT_
 	window.dicomwin'.$sid.'.moveTo(0,0);'; ?>
 }
 
+function popDicomSingle(pid, nr, fn){
+<?php
+	if($cfg['dhtml'])
+	{
+	echo 'w=window.parent.screen.width;
+			h=window.parent.screen.height;
+			';
+	}
+	else echo 'w=800;
+					h=600;
+					';
+?>
+dicomwin<?php echo $sid ?>=window.open("dicom_launch_single.php<?php echo URL_REDIRECT_APPEND ?>&pop_only=1&saved=1&pid=" + pid + "&img_nr=" + nr + "&fn=" + fn,"dicomwin<?php echo $sid ?>","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=" + (h-60) );
+<?php if($cfg['dhtml']) echo '
+	window.dicomwin'.$sid.'.moveTo(0,0);'; ?>
+	
+}
+
 function chkform(d){
 	if(d.searchkey.value=='') return false;
 		else return true;
@@ -193,7 +214,9 @@ ob_start();
     <td class="v12"><b>&nbsp;<?php echo $LDBday ?></b></td>
     <td class="v12">&nbsp;</td>
     <td class="v12"><b>&nbsp;<?php echo $LDUploadDate ?></b></td>
-     <td class="v12" align=center><b>&nbsp;<?php echo $LDNrImages ?></b></td>
+    <td class="v12" align=center><b>&nbsp;<?php echo $LDNrImages ?></b></td>
+    <td class="v12"><b>&nbsp;<?php echo $LDFileName ?></b></td>
+    <td class="v12" align=center><b>&nbsp;<?php echo $LDDownload ?></b></td>
 <?php
 if(!$pop_only){
 ?>
@@ -204,10 +227,10 @@ if(!$pop_only){
     <td class="v12" align=center><b>&nbsp;<?php echo $LDViewInWindow ?></b></td>
  </tr>
   <tr>
-    <td colspan=9 bgcolor="#0000ff"><img <?php echo $img_pix ?> width=1 height=1></td>
+    <td colspan=11 bgcolor="#0000ff"><img <?php echo $img_pix ?> width=1 height=1></td>
   </tr>
    <tr>
-    <td colspan=9 bgcolor="#0000ff"></td>
+    <td colspan=11 bgcolor="#0000ff"></td>
   </tr>
 <?php 
 if($mode=='search'&&$rows){
@@ -216,6 +239,7 @@ if($mode=='search'&&$rows){
 	#
 	$i=1;
 	$img_arrow=createComIcon($root_path,'bul_arrowblusm.gif','0','absmiddle'); // Load the torse icon image
+	$img_download=createComIcon($root_path,'dwnarrowgrnlrg.gif','0'); // Load the download icon image
 	$img_torso=createComIcon($root_path,'torso.gif','0'); // Load the torse icon image
 	$img_torsowin=createComIcon($root_path,'torso_win.gif','0'); // Load the torso icon image
 	$img_pix=createComIcon($root_path,'pixel.gif','0'); // Load the torso icon image
@@ -224,7 +248,9 @@ if($mode=='search'&&$rows){
 	$img_x=createComIcon($root_path,'x_bl.gif','0'); // Load the right T
 	$img_s=createComIcon($root_path,'s_bl.gif','0'); // Load straight
 	$img_t=createComIcon($root_path,'t_bl.gif','0'); // Load T
+	$img_i=createComIcon($root_path,'i_bl.gif','0'); // Load |
 	$img_info=createComIcon($root_path,'info2.gif','0','absmiddle'); // Load the info
+	$img_empty=createComIcon($root_path,'p.gif','0'); // Load the empty image
 	
 	#
 	# Load the data in array
@@ -240,7 +266,9 @@ if($mode=='search'&&$rows){
 		if($pdata[$i]['pid']!=$pdata[($i-1)]['pid']){
 			echo'
 				<tr>
-				<td class="v12">&nbsp;</td>
+				<td class="v12">&nbsp;';
+				if($pdata[$i]['encounter_nr']) echo $pdata[$i]['encounter_nr'];
+				echo '&nbsp;</td>
 				<td class="v12">&nbsp;'.$pdata[$i]['name_last'].'&nbsp;</td>
 				<td class="v12">&nbsp;'.$pdata[$i]['name_first'].'&nbsp;</td>
 				<td class="v12">&nbsp;'.formatDate2Local($pdata[$i]['date_birth'],$date_format).'&nbsp;</td>
@@ -263,24 +291,61 @@ if($mode=='search'&&$rows){
 			#
 			$sImagePath = $root_path.'radiology/dicom_img/'.$pdata[$i]['pid'].'/'.$pdata[$i]['nr'].'/';
 
-			if(containFiles($sImagePath,'.dcm')){
+			$files = getFiles($sImagePath,'.dcm');
+			if($files !== FALSE){
 			//if(file_exists($root_path.'radiology/dicom_img/'.$pdata[$i]['pid'].'/'.$pdata[$i]['nr'].'.dcm')){
 				echo '
-					<td class="v12" align=center>&nbsp;'.$pdata[$i]['max_nr'].'&nbsp;</td>';
+					<td class="v12" align=center>&nbsp;'.$pdata[$i]['max_nr'].'&nbsp;</td>
+					<td class="v12">&nbsp;</td>
+					<td class="v12">&nbsp;</td>';
 				if(!$pop_only) echo '
 					<td class="v12" align=center><a href="dicom_launch.php'.URL_APPEND.'&img_nr='.$pdata[$i]['nr'].'&searchkey='.strtr($searchkey,' ','+').'" title="'.$LDViewInFrame.'"><img '.$img_torso.'></a></td>';
 				echo '
 					<td class="v12" align=center><a href="javascript:popDicom('.$pdata[$i]['nr'].')" title="'.$LDFullScreen.'"><img '.$img_torsowin.'></a></td>
 				</tr>';
-			}else{
+			} else {
 				echo '<td colspan="3"><a href="javascript:gethelp(\'missing_file.php\',\''.$LDDicomImages.'\',\''.$sImagePath.'\')"><font color="red">'.$LDMissingImageFile.'</font></a></td>';
 			}
 			echo '
 				<tr>
-					<td colspan=9 bgcolor="#0000ff"><img '.$img_pix.' width=1 height=1></td>
+					<td colspan=11 bgcolor="#0000ff"><img '.$img_pix.' width=1 height=1></td>
 				</tr>';
+			
+			if ($files) {
+				foreach ($files as $file) {
+					echo '
+					<tr>
+						<td class="v12">&nbsp;</td>
+						<td class="v12">&nbsp;</td>
+						<td class="v12">&nbsp;</td>
+						<td class="v12">&nbsp;</td>
+						<td class="v12"><img ';
+					
+					if($rows==1){
+						echo $img_empty;
+					}else{
+						if($pdata[($i+1)]&&($pdata[$i]['pid']==$pdata[($i+1)]['pid'])) echo $img_i;
+							else echo $img_empty;
+					}
+					
+					echo '></td>
+						<td class="v12">&nbsp;</td>
+						<td class="v12">&nbsp;</td>
+						<td class="v12">&nbsp;'.$file.'&nbsp;</td>
+						<td class="v12" align=center><a href="'.$root_path.'radiology/dicom_img/'.$pdata[$i]['pid'].'/'.$pdata[$i]['nr'].'/'.$file.'" title="'.$LDDownload.'"><img '.$img_download.'></a></td>';
+					if(!$pop_only) echo '
+						<td class="v12" align=center><a href="dicom_launch_single.php'.URL_APPEND.'&pid='.$pdata[$i]['pid'].'&img_nr='.$pdata[$i]['nr'].'&fn='.$file.'" title="'.$LDViewInFrame.'"><img '.$img_torso.'></a></td>';
+					echo '
+						<td class="v12" align=center><a href="javascript:popDicomSingle(\''.$pdata[$i]['pid'].'\', \''.$pdata[$i]['nr'].'\', \''.$file.'\')" title="'.$LDFullScreen.'"><img '.$img_torsowin.'></a></td>
+					</tr>';
+					echo '
+					<tr>
+						<td colspan=11 bgcolor="#0000ff"><img '.$img_pix.' width=1 height=1></td>
+					</tr>';
+				}
+			}
+			
 			continue;
-		
 		}
 		echo '
 		<tr>
@@ -307,10 +372,13 @@ if($mode=='search'&&$rows){
 		#
 		$sImagePath = $root_path.'radiology/dicom_img/'.$pdata[$i]['pid'].'/'.$pdata[$i]['nr'].'/';
 
-		if(containFiles($sImagePath,'.dcm')){
+		$files = getFiles($sImagePath,'.dcm');
+		if($files !== FALSE){
 		//if(file_exists($root_path.'radiology/dicom_img/'.$pdata[$i]['pid'].'/'.$pdata[$i]['nr'].'.dcm')){
 			echo '
-				<td class="v12" align=center>&nbsp;'.$pdata[$i]['max_nr'].'&nbsp;</td>';
+				<td class="v12" align=center>&nbsp;'.$pdata[$i]['max_nr'].'&nbsp;</td>
+				<td class="v12">&nbsp;</td>
+				<td class="v12">&nbsp;</td>';
 			if(!$pop_only) echo '
 				<td class="v12" align=center><a href="dicom_launch.php'.URL_APPEND.'&img_nr='.$pdata[$i]['nr'].'&searchkey='.strtr($searchkey,' ','+').'" title="'.$LDViewInFrame.'"><img '.$img_torso.'></a></td>';
 			echo '
@@ -321,8 +389,42 @@ if($mode=='search'&&$rows){
 		}
 		echo '
 			<tr>
-				<td colspan=9 bgcolor="#0000ff"><img '.$img_pix.' width=1 height=1></td>
+				<td colspan=11 bgcolor="#0000ff"><img '.$img_pix.' width=1 height=1></td>
 			</tr>';
+		
+		if ($files) {
+			foreach ($files as $file) {
+				echo '
+				<tr>
+					<td class="v12">&nbsp;</td>
+					<td class="v12">&nbsp;</td>
+					<td class="v12">&nbsp;</td>
+					<td class="v12">&nbsp;</td>
+					<td class="v12"><img ';
+					
+					if($rows==1){
+						echo $img_empty;
+					}else{
+						if($pdata[($i+1)]&&($pdata[$i]['pid']==$pdata[($i+1)]['pid'])) echo $img_i;
+							else echo $img_empty;
+					}
+					
+					echo '></td>
+					<td class="v12">&nbsp;</td>
+					<td class="v12">&nbsp;</td>
+					<td class="v12">&nbsp;'.$file.'&nbsp;</td>
+					<td class="v12" align=center><a href="'.$root_path.'radiology/dicom_img/'.$pdata[$i]['pid'].'/'.$pdata[$i]['nr'].'/'.$file.'" title="'.$LDDownload.'"><img '.$img_download.'></a></td>';
+				if(!$pop_only) echo '
+					<td class="v12" align=center><a href="dicom_launch_single.php'.URL_APPEND.'&pid='.$pdata[$i]['pid'].'&img_nr='.$pdata[$i]['nr'].'&fn='.$file.'" title="'.$LDViewInFrame.'"><img '.$img_torso.'></a></td>';
+				echo '
+					<td class="v12" align=center><a href="javascript:popDicomSingle(\''.$pdata[$i]['pid'].'\', \''.$pdata[$i]['nr'].'\', \''.$file.'\')" title="'.$LDFullScreen.'"><img '.$img_torsowin.'></a></td>
+				</tr>';
+				echo '
+				<tr>
+					<td colspan=11 bgcolor="#0000ff"><img '.$img_pix.' width=1 height=1></td>
+				</tr>';
+			}
+		}
 	}
 }
 ?>

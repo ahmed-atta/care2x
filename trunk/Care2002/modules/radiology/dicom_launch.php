@@ -73,11 +73,11 @@ if(isset($pop_only)&&$pop_only){
 }else{
 	if(isset($saved)&&$saved){
 ?>
-<a href="upload.php<?php echo URL_APPEND."&saved=1&mode=show&pid=$pid&nr=$img_nr"; ?>"><font size=1>&nbsp;<< <?php echo $LDBack ?></font></a>
+<a href="javascript:history.back()"><font size=1>&nbsp;<< <?php echo $LDBack ?></font></a>
 <?php
 	}else{
 ?>
-<a href="view_person_search.php<?php echo URL_APPEND."&mode=search&searchkey=$searchkey"; ?>"><font size=1>&nbsp;<< <?php echo $LDBack ?></font></a>
+<a href="javascript:history.back()"><font size=1>&nbsp;<< <?php echo $LDBack ?></font></a>
 <?php
 	}
 }

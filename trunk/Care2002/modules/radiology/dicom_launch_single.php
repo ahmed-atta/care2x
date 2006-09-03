@@ -64,7 +64,7 @@ if(isset($pop_only)&&$pop_only){
 <?php
 }else{
 ?>
-<a href="upload.php<?php echo URL_APPEND."&saved=1&mode=show&pid=$pid&nr=$img_nr"; ?>"><font size=1>&nbsp;<< <?php echo $LDBack ?></font></a>
+<a href="javascript:history.back()"><font size=1>&nbsp;<< <?php echo $LDBack ?></font></a>
 <?php
 }
 ?></font>

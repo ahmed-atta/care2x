@@ -304,7 +304,8 @@ class Image extends Core{
 		}else{
 			$this->sql.=' WHERE';
 		}
-		$this->sql.="  i.pid=p.pid AND i.img_type='dicom' AND i.status NOT IN ('cancelled',$this->dead_stat) ORDER BY p.name_last";
+		$this->sql.="  i.pid=p.pid AND i.img_type='dicom' AND i.status NOT IN ('cancelled',$this->dead_stat) 
+					ORDER BY p.name_last, p.name_first, i.pid";
 		//echo $this->sql;
 	    if ($this->res['pdi']=$db->Execute($this->sql)) {
 		   	if ($this->rec_count=$this->res['pdi']->RecordCount()) {

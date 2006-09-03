@@ -258,6 +258,7 @@ if($mode=='show'){
 		//$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
 		$tbg='class="adm_list_titlebar"';
 		$img_arrow=createComIcon($root_path,'bul_arrowblusm.gif','0','absmiddle'); // Load the torse icon image
+		$img_download=createComIcon($root_path,'dwnarrowgrnlrg.gif','0'); // Load the download icon image
 		if(!$pop_only) $img_torso=createComIcon($root_path,'torso.gif','0'); // Load the torse icon image
 		$img_torsowin=createComIcon($root_path,'torso_win.gif','0'); // Load the torse icon image
 		$img_pix=createComIcon($root_path,'pixel.gif','0'); // Load the torse icon image
@@ -265,7 +266,7 @@ if($mode=='show'){
 
 <table border=0 cellpadding=4 cellspacing=1 width=100%>
   <tr bgcolor="#f6f6f6">
-    <td  colspan=4><FONT class="prompt"><nobr><?php echo $LDImageGroupNr; ?><?php echo $nr ?>&nbsp;
+    <td  colspan=5><FONT class="prompt"><nobr><?php echo $LDImageGroupNr; ?><?php echo $nr ?>&nbsp;
 <?php 
 		if(!$pop_only){
 ?>
@@ -278,6 +279,7 @@ if($mode=='show'){
   <tr bgcolor="#f6f6f6">
     <td <?php echo $tbg; ?>><nobr><?php echo $LDImgNumber; ?></nobr></td>
     <td <?php echo $tbg; ?>><nobr><?php echo $LDNewFileName; ?></nobr></td>
+    <td <?php echo $tbg; ?>><nobr><?php echo $LDDownload ?></nobr></td>
 <?php 
 		if(!$pop_only){
 ?>
@@ -296,7 +298,8 @@ if($mode=='show'){
 			echo'
 		 		<tr>
     			<td class="v12" align=center>&nbsp;'.$i.'&nbsp;</td>
-    			<td class="v12">&nbsp;'.$v.'&nbsp;</td>';
+    			<td class="v12">&nbsp;'.$v.'&nbsp;</td>
+				<td class="v12" align=center><a href="'.$root_path.'radiology/dicom_img/'.$pid.'/'.$nr.'/'.$v.'" title="'.$LDDownload.'"><img '.$img_download.'></a></td>';
 			if(!$pop_only) echo '
     			<td class="v12" align=center><a href="dicom_launch_single.php'.URL_APPEND.'&pid='.$pid.'&img_nr='.$nr.'&fn='.$v.'" title="'.$LDViewInFrame.'"><img '.$img_torso.'></a></td>';
 			echo '
