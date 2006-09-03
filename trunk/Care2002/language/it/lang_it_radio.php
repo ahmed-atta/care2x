@@ -82,4 +82,8 @@ $LDImageNotes='Note alla immagine';
 
 #2004-08-05 EL
 $LDMissingImageFile = 'File di immagine mancante/i!';
+
+#2006-09-03 CGT
+$LDDownload='Scarica';
+$LDFileName='Nome File';
 ?>
