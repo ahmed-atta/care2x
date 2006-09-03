@@ -3,12 +3,31 @@ Care2X - News
 
 
 
+2nd Generation beta 2.2.1 version
+------------------------------------
+
+A. Improvements
+
+  * Update Nogoya's dicom viewer from version 0.5.4 to version 1.0.0.
+  * Radiology case studies list now shows the dicom images included in the 
+study. 
+  * Download button available for the dicom images in case the user chooses to 
+use an external dicom viewer. 
+      
+Credits
+
+  * Kaloyan Raev (BG) 
+
+    Kaloyan Raev (2006-09-03)
+
+
 Patch D-2.2.0.1 for Care2x Deployment version 2.2 
 ----------------------------------------------------
 
 A. Fixes
 
-  * Fix corrupted chars in the footer. Affects several languages with non-latin chars:
+  * Fix corrupted chars in the footer. Affects several languages with non-latin 
+chars:
   
       * ar - Arabic
       * bg - Bulgarian
@@ -67,7 +86,8 @@ C. Language and Help files
   
 D. New graphical installer.
 
-  * The new installer can be accessed under alias /installer. The old one under /install is removed.
+  * The new installer can be accessed under alias /installer. The old one under 
+/install is removed.
   * Works with both MySQL 4+ and PostgreSQL 7.4+.
   * The installer is cloned and extended with new features from the installer 
 of the MirrorMed project.
