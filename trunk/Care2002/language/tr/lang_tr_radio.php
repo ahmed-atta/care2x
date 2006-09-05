@@ -11,7 +11,7 @@ $LDFoundPatient='Arama sonucu <b>~nr~</b> hasta bulundu';
 $LDWildCards='Joker nedir nasýl kullanýlýr';
 $LDNewSearch='Yeni arama';
 
-$LDCaseNr='Vizit no.';
+$LDCaseNr='Protokol no.';
 $LDLastName='Soyad';
 $LDName='Ad';
 $LDBday='Doðum tarihi';
@@ -81,4 +81,7 @@ $LDImageNotes='Resim notlarý';
 #2004-08-05 EL
 $LDMissingImageFile = 'Resim dosyalarý eksik!';
 #Çeviren Op.Dr. Bülent Potur 4/12/2004
+#For Kaloyan Raev's new Dicom module 5/9/2006  Op.Dr. Bülent Potur
+$LDDownload='Ýndir'; 
+$LDFileName='Dosya adý';
 ?>
