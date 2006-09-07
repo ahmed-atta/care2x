@@ -36,8 +36,8 @@ $_a_2_opnursedutyplanread = 'Ameliyathane hemþireleri nöbet planý salt okunur';
 						   
 // Group start
 $title6 = 'Radyoloji';
-$_a_1_radiowrite = 'Radyoloji görüntü, teþhis oku ve yaz';
-$_a_2_radioread = 'Radyoloji yalnýz görüntü, teþhis salt okunur';
+$_a_1_radiowrite = 'Radyoloji görüntü, taný oku ve yaz';
+$_a_2_radioread = 'Radyoloji yalnýz görüntü, taný salt okunur';
 
 // Group start
 $title7 = 'Týbbi Belgeler';
@@ -47,15 +47,15 @@ $_a_2_medocsread = 'Týbbi belgeler salt okunur';
 // Group start
 $title8 = 'Eczane';
 $_a_1_pharmadbadmin = 'Eczane veritabaný yönetimi';
-$_a_2_pharmareception = 'Ecsane Sipariþ(order) Robotu etkinleþtirme, sipariþleri alma ve iþleme';
+$_a_2_pharmareception = 'Ecsane Ýstem(order) Robotu etkinleþtirme, istemleri alma ve iþleme';
 $_a_3_pharmaorder = 'Eczane order gönder ve salt okunur';
 $_a_4_pharmaread = 'Eczane order salt okunur, göndermesiz.';
 
 // Group start
 $title9 = 'Týbbi Malzeme Deposu';
 $_a_1_meddepotdbadmin = 'Týbbi Malzeme Deposu veritabaný yönetimi';
-$_a_2_meddepotreception = 'Týbbi depo sipariþ robotu Medi robot etkinleþtirme, sipariþleri alma ve iþleme';
-$_a_3_meddepotorder = 'Týbbi Depo sipariþ gönder, salt okunur';
+$_a_2_meddepotreception = 'Týbbi depo istem robotu Medi robot etkinleþtirme, istemleri alma ve iþleme';
+$_a_3_meddepotorder = 'Týbbi Depo istem gönder, salt okunur';
 $_a_4_meddepotread = 'Týbbi depo salt okunur, göndermesiz';
 						  
 // Group start

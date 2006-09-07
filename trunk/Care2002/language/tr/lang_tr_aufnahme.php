@@ -18,9 +18,9 @@ $LDStationary='Yatan hasta';
 $LDSelfPay='Ücretli';
 $LDPrivate='Özel Sigorta';
 $LDInsurance='Genel Saðlýk Sigortasý';
-$LDDiagnosis='Teþhis';
+$LDDiagnosis='Taný';
 $LDRecBy='Gönderen Doktor';
-$LDTherapy='Önerdiði tedavi';
+$LDTherapy='Önerilen tedavi';
 $LDSpecials='Gönderenin notlarý';
 
 $LDPatientSearch='Hasta kaydý arama';
@@ -132,9 +132,9 @@ $LDServiceType='Servis tipi';
 
 $LDClick2Print='Yazdýrýlacak barkod etiketlerini týklayýnýz';
 
-$LDEnterDiagnosisNote='Teþhisle ilgili not ve yayýnlarýn baðlantýlarýný ekleyiniz:';
+$LDEnterDiagnosisNote='Taný ile ilgili not ve yayýnlarýn baðlantýlarýný ekleyiniz:';
 $LDEnterTherapyNote='Tedavi ile ilgili not ve yayýnlarýn baðlantýlarýný ekleyiniz:';
-$LDSeeDiagnosisNote='Teþhisle ilgili not ve yayýnlar:';
+$LDSeeDiagnosisNote='Taný ile ilgili not ve yayýnlar:';
 $LDSeeTherapyNote='Tedavi ile ilgili not ve yayýnlar:';
 $LDMakeBarcodeLabels='Barkod etiketleri oluþtur';
 
@@ -208,7 +208,7 @@ $LDInsuranceCo='Sigorta Þirketi';
 $LDInsuranceNr_2='Ekstra Sigorta No.';
 $LDInsuranceCo_2='Ekstra Sigorta Þirketi.';
 $LDBillType='Fatura Tipi';
-$LDWard='Servis/Koðuþ';
+$LDWard='Servis';
 $LDMakeWristBand='Kolbaðý oluþtur';
 $LDClickImgToPrint='Yazdýrmak için resmi týklayýnýz.';
 $LDPrintPortraitFormat='Yazýcýnýzýn kaðýt ayarýný düþey olarak ayarlayýnýz.';
@@ -286,7 +286,7 @@ $LDSickUntil='Þu tarihe kadar(tarih dahil) çalýþamaz';
 $LDStartingFrom='Þu tarihten itibaren';
 $LDConfirmedOn='Onay tarihi';
 $LDInsurersCopy='Sigortaya gidecek kopya';
-$LDDiagnosis2='Teþhis';
+$LDDiagnosis2='Taný';
 /* 2003-03-03*/
 $LDBy='Kimce';
 $LDSendCopyTo='Kopya gönderilecek:';
@@ -335,7 +335,7 @@ $LDRegisterNewPerson='Yeni bir kiþi kayýt et';
 $LDEnterPersonSearchKey='Aradýðýnýz anahtar sözcüðü giriniz: Örneðin protokol no, ad, soyad, veya doðum tarihi';
 $LDPersonData='Kiþisel bilgiler';
 /* 2003-05-26 EL*/
-$LDDiagnoses='Teþhisler';
+$LDDiagnoses='Tanýlar';
 $LDCreateNewForm='Form oluþturulacak kiþi:';
 $LDOtherRecords='Diðer kayýtlar';
 /*2003-06-17 El*/
@@ -344,7 +344,7 @@ $LDAllContents='Tüm içerikler';
 $LDAllText='Yalnýzca dinamik içerikler';
 $LDDataOnly='Sadece vizit ile ilgili veriler';
 /*2003-06-21 EL*/
-$LDChartsRecords='Çizelgeler klasörü';
+$LDChartsRecords='Çizelge kayýtlarý';
 # 2003-07-26 EL
 $LDMode='Mod';
 $LDPatientIsDischarged='Bu hasta önceden çýkarýlmýþ';

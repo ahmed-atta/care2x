@@ -67,7 +67,7 @@ $LDDeathDateIs='Girilen ölüm tarihi:';
 $LDIsCorrect='Bu doðru mu?';
 $LDProceedSave='Kaydetme iþlemine devam etmek istiyor musunuz?';
 #2003-08-28 EL
-$LDPlsSelectWard='Lütfen bir servis veya koðuþ seçiniz';
+$LDPlsSelectWard='Lütfen bir servis seçiniz';
 # 2003-09-20 EL
 $LDPlsEnterTherapy='Lütfen tedaviyi giriniz.';
 $LDPlsMedicalAdvice='Lütfen hastaya týbbi önerilerde bulunulup bulunulmadýðýný belirtiniz.';

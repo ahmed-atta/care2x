@@ -58,5 +58,5 @@ $LDCredits='Programda emeði geçenler';
 /* 2003-05-24 EL */
 $LDPublicItems='Genel konular';
 # 2003-08-28 EL
-$LDHeadline='Baþlýk';
+$LDHeadline='Umut Hastanesi';
 ?>

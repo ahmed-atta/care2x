@@ -53,7 +53,7 @@ $LDNew='Yeni';
 $LDEdit='Düzenle';
 $LDCreate='Oluþtur';
 $LDParamGroup='Parametre grubu';
-$LDSelectParamGroup='Paramere grubunu seçiniz';
+$LDSelectParamGroup='Parametre grubunu seçiniz';
 $LDValue='Deðer';
 
 $LDParamNoSee='Ýstediðim parametre görülmüyor!';
@@ -99,7 +99,7 @@ $LDTestType=array('biyokim'=>'biyokimya tetkiki',
 								 'rönt'=>'radyoloji');
 /* 2002-09-10 EL */
 $LDTestReception='Bekleyen Ýstem';
-$LDTestReceptionTxt='Ýstemleri kabul et ve iþle, sonuç/bulgu/teþhisleri yaz';
+$LDTestReceptionTxt='Ýstemleri kabul et ve iþle, sonuç/bulgu/tanýlarý yaz';
 /* 2002-09-15 EL */
 $LDPrintForm='Ýstem formunu yazdýr';
 

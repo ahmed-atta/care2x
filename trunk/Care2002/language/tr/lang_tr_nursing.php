@@ -3,7 +3,7 @@
 *	IMPORTANT!	All words or characters inclosed with ~ ~ must not be changed.
 */
 $LDNursing='Servisler';
-$LDStation='Koðuþ';
+$LDStation='Servis';
 
 $LDQuickView='Hýzlý bakýþ';
 $LDSearchPatient='Hasta arama';
@@ -153,7 +153,7 @@ $LDFemale='Kadýn';
 /**********do not change the ~station~ **************************/
 $LDNoInit=' ~station~ servisinin ilk kaydý henüz yapýlmadý!';
 $LDIfInit='Servisin ilk kaydýný yapmak için lütfen buraya týklayýnýz.';
-$LDShowPatData='Hastanýn çizelgeleri klasörünü aç';
+$LDShowPatData='Hasta dosyasýný';
 $LDReleasePatient='Hastayý çýkar';
 $LDNoticeRW='Oku veya yaz uyarýsý';
 $LDInfoUnlock='Bilgiyi oku veya kilidi çöz';
@@ -191,7 +191,7 @@ $LDEmRelease='Acil çýkýþ';
 $LDAlertNoName='Lütfen isminizi giriniz.';
 $LDAlertNoDate='Tarihi bu tarzda giriniz:';
 $LDAlertNoTime='Zamaný þu tarzda giriniz: SS.dd.';
-$LDPatDataFolder='Hastanýn çizelgeleri klasörü';
+$LDPatDataFolder='Hasta dosyasý';
 
 $LDClose='Kapat';
 $LDHelp='Yardým';
@@ -199,7 +199,7 @@ $LDReset='Baþtan baþla';
 
 $LDNoLabReport='Laboratuvar raporu yok!';
 $LDFeverCurve='Ateþ çizelgesi';
-$LDNursingReport='Hemþirelik raporu';
+$LDNursingReport='Hemþire gözlemi';
 $LDDocsPrescription='Hekim orderlarý';
 $LDNursingPlan='Hemþirelik planý';
 $LDRootData='Kök verileri';
@@ -215,14 +215,14 @@ $LDFwdDay='Bir gün ileri. (sað tuþu týklayýp serbest tarih girebilirsiniz)';
 $LDClk2PlanDiet='Bugünkü diyeti planlamak için týklayýnýz';
 
 $LDAllergy='Allerji';
-$LDDiagnosisTherapy='Teþhis / Tedavi';
+$LDDiagnosisTherapy='Taný / Tedavi';
 $LDBpTemp='Ateþ/Kan basýncý';
-$LDPtAtgEtc='PT,Atg,vs';
+$LDPtAtgEtc='FTR,Atj,vs';
 $LDAntiCoag='Antikooagülanlar';
 $LDExtraNotes='Notlar';
 $LDMedication='Ýlaçlar';
 $LDIvPort='Ýntravenöz';
-$LDPtAtgEtcTxt='Fizik tedavi, Anti thromboz, vs.';
+$LDPtAtgEtcTxt='Fizik tedavi, Anti tromboz jimnastiði, vs.';
 $LDExtraNotesTxt='Notlar, Parti, Yük no., vs.';
 
 $LDBp='Kan basýncý';
@@ -230,7 +230,7 @@ $LDTemp='Ateþ';
 
 $LDClk2Enter='~tagword~ yi girmek için týklayýnýz';
 $LDClk2EnterDaily='Bugünkü ~tagword~ yi girmek için týklayýnýz';
-$LDSpecialsExtra='Notlar, ekstra teþhisler';
+$LDSpecialsExtra='Notlar, ekstra tanýlar';
 $LDClk2PlanDaily='Bugünkü ~tagword~ ü planlamak için týklayýnýz';
 $LDInputWin='Giriþ penceresi';
 $LDFullDayName=array(
@@ -266,7 +266,7 @@ $LDAntibiotic='Antibiyotik';
 $LDDialytic='Dialitik';
 $LDHemolytic='Hemolitik';
 $LDIntravenous='Intravenöz';
-$LDTodaysReport='Bugünün raporu';
+$LDTodaysReport='Bugünün gözlemi';
 $LDNoMedicineYet='Henüz ilaç baþlanmadý!';
 $LDEffectReport='Etkinlik raporu';
 $LDFrom='den';
@@ -302,7 +302,7 @@ $LDSendLater='Sonra gönder';
 $LDReqTest='Ýstenen tetkik';
 $LDSpeedTest='Acil tetkik.';
 $LDDiagnosticTest='Tetkik iste';
-$LDRelayResult='Teþhisi Telefona /cebe yönlendir';
+$LDRelayResult='Tanýyý Telefona /cebe yönlendir';
 $LDSpeedCut='Acele kesim.';
 $LDClk4Phone='Telefon /Cep bilgisi için týkla';
 $LDHour='Saat';
@@ -343,7 +343,7 @@ $LDAntibioticsProgram='Antibiyotik tedavi programý';
 $LDAnticoagProgram='Antikoagülanlar';
 $LDSpecialCare='Özel bakým, vital bulgular';
 $LDTestConsultRequested='Ýstenen Test/Konsultasyonlar';
-$LDNurseReport='Yeni hemþire raporu';
+$LDNurseReport='Yeni hemþire gözlemi';
 $LDDaily='Günlük';
 $LDSaveChanges='Deðiþiklikleri kaydet';
 /* 2002-12-07*/

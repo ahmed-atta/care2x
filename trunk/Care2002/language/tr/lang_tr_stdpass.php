@@ -57,10 +57,10 @@ $LDCancel='Ýptal';
 
 $LDPharmacy='Eczane';
 $LDOrderArchive='Arþiv';
-$LDPharmaOrder='Sipariþ';
+$LDPharmaOrder='Ýstem';
 $LDOrderCat='Ürünü katalogum';
 $LDPharmaDb='Veritabaný';
-$LDPharmaOrderBot='Sipariþ robotunu etkinleþtir';
+$LDPharmaOrderBot='Ýstem robotunu etkinleþtir';
 
 $LDMedDepot='Týbbi Ambar';
 $LDMediBotActivate='Ambar istem robotunu etkinleþtir';

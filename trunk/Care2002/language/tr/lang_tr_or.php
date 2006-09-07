@@ -1,7 +1,7 @@
 <?php
 $LDOr='Ameliyathane';
 $LDLOGBOOK='GÜNLÜK';
-$LDOrDocument='Ameliyathane Evrak';
+$LDOrDocument='Ameliyathane Kayýtlarý';
 $LDOrDocumentTxt='Ameliyat hizmetlerinin belgelendirilmesi';
 
 /**
@@ -69,7 +69,7 @@ $LDInsurance='Sigorta';
 $LDPrivate='Özel sigorta';
 $LDSelfPay='Ücretli';
 
-$LDDiagnosis='Teþhis/ICD-10';
+$LDDiagnosis='Taný/ICD-10';
 $LDLocalization='Yeri';
 $LDTherapy='Tedavi';
 $LDSpecials='Özel not';
@@ -132,7 +132,7 @@ $LDChange='Deðiþtir';
 $LDOpMainElements=array(
 										nr_date=>'No/Tarih',
 										patient=>'Hasta',
-										diagnosis=>'Teþhis',
+										diagnosis=>'Taný',
 										operator=>'Cerrah/Asistan',
 										ana=>'Anestezi',
 										cutclose=>'Kesi/Sütür',
@@ -147,7 +147,7 @@ $LDOpOut='Çýkýþ';
 $LDOpInFull='Giriþ';
 $LDOpOutFull='Çýkýþ';
 $LDEditPatientData='~tagword~  günlük verisini düzenleme';
-$LDOpenPatientFolder='~tagword~ servis klasörünü açma';
+$LDOpenPatientFolder='~tagword~ hasta dosyasýný açma';
 
 $tbuf=array('O','A','H','P');
 $cbuf=array('Operatör','Asistan','Hemþire','Personel');
@@ -305,7 +305,7 @@ $LDStandbyPerson='Ýcapçý';
 $LDOnCallPerson='Nöbetçi';
 $LDMonth='Ay';
 $LDYear='Yýl';
-$LDDutyElements = array('Tarih','&nbsp;','Soyad', 'Ad','den','ya','Ameliyathane','Teþhis ve tedavi');
+$LDDutyElements = array('Tarih','&nbsp;','Soyad', 'Ad','den','ya','Ameliyathane','Taný ve tedavi');
 $LDPrint='Yazdýr';
 $LDAlertNoPrinter='El ile yazdýrmalýsýnýz. Pencereyi sað tuþla týklayýn, sonra yazdýr ý seçiniz.';
 $LDAlertNotSavedYet='Son yazdýklarýnýz henüz kaydedilmedi. Önce kaydetmek ister misiniz?';

@@ -13,7 +13,7 @@ $LDReset='Tekrar başla';
 $LDClose='Kapat';
 $LDSpeedTest='Acil tetkik.';
 $LDDiagnosticTest='Tetkik iste';
-$LDRelayResult='Teşhisi telefona/çağrıya yönlendir';
+$LDRelayResult='Tanıyı telefona/çağrıya yönlendir';
 $LDSpeedCut='Acil kesim.';
 $LDDate='Tarih';
 $LDOpDate='Ameliyat tarihi';
@@ -26,7 +26,7 @@ $LDSpecimen='Ameliyat spesimeni';
 $LDShave='Küretaj';
 $LDCytology='Sitoloji';
 $LDLocalization='Yeri';
-$LDClinicalQuestions='Klinik Teşhisler, Raporlar,Sorgular:';
+$LDClinicalQuestions='Klinik Tanılar, Raporlar,Sorgular:';
 $LDExtraInfo='Destekleyici bilgiler';
 $LDExtraInfoSample='(örneğin önemli laboratuvar sonuçları, eksizyon bölgesine daha önce radyasyon veya kemoterapi uygulanmış olması gibi)';
 $LDForGynTests='Jinekolojik tetkikler için:';
@@ -62,7 +62,7 @@ $LDAllergyKnown='Bilinen allerjisi?';
 $LDHyperthyreosisKnown='Bilinen hipertiroidisi?';
 $LDPregnantPossible='Gebelik ihtimali';
 
-$LDDiagnosesInquiries='Teşhisler / Sorgular:';
+$LDDiagnosesInquiries='Tanılar / Sorgular:';
 $LDDeptReport='Bölümün Raporu:';
 $LDRequestTo='İstem yapılan';
 $LDDepartment='bölümü';
@@ -82,10 +82,10 @@ $LDShortMonth=array('',
 								   'Ek',
 								   'Ka',
 								   'Ar');
-$LDBatchNumber='Kümeno';
+$LDBatchNumber='Küme no';
 $LDMaterial='Materyel:';
-$LDDiagnosis='Teşhis:';
-$LDImmuneSupp='Immün supp.';		
+$LDDiagnosis='Tanı:';
+$LDImmuneSupp='Immün supresif.';		
 
 $LDRequestedTest='İstenen tetkik';
 $LDLabel='Etiket';					
@@ -157,7 +157,7 @@ $LDSearchPatient='Hasta arama';
 $LDPlsSelectPatientFirst='Lütfen önce hastayı arayınız.';
 /* 2002-09-07 EL*/
 $LDAlertQuickCut='Acil kesim seçildi.';
-$LDAlertQuickDiagnosis='Acil teşhis seçildi.';
+$LDAlertQuickDiagnosis='Acil tanı seçildi.';
 $LDPlsEnterPhone='Lütfen telefon veya çağrı numarasını giriniz.';
 $LDPlsEnterOpDate='Lütfen ameliyat tarihini giriniz.';
 $LDPlsEnterDoctorName='Lütfen doktorun ismini giriniz';
@@ -169,7 +169,7 @@ $LDPlsEnterKell='Lütfen Kell değerini giriniz.';
 $LDPlsEnterBloodPcs='Lütfen kan ürün numarasını  giriniz.';
 $LDPlsEnterDate='Lütfen tarihi giriniz.';
 /* 2002-09-09 EL */
-$LDPlsEnterDiagnosisQuiry='Lütfen teşhisler veya sorguları giriniz.';
+$LDPlsEnterDiagnosisQuiry='Lütfen tanılar veya sorguları giriniz.';
 $LDPlsSelectDept='Lütfen bir bölüm sçiniz.';
 $LDPlsSelectDeptShort='lütf. bölüm seçiniz';
 /* 2002-12-09 EL */
@@ -225,45 +225,45 @@ $LDBacLabMaterialType = array(_mx_k_urin_=>'T.İdrar',
 											  _mx_trachealsecrete_=>'Trak.salg.',
 											  _mx_uricult_=>'İdrarkült',
 											  _mx_bronchiallavage_=>'B.lavajı',
-											  _mx_wundabstrich_=>'W.smr',
+											  _mx_wundabstrich_=>'W.yayma',
 											  _mx_magensaft_=>'Mide sıvı',
-											  _mx_augen_abstrich_right_=>'Ey.s.r.',
+											  _mx_augen_abstrich_right_=>'göz ak-r',
 											  _mx_secrete_=>'Salgı',
-											  _mx_augen_abstrich_left_=>'Ey.s.l.',
+											  _mx_augen_abstrich_left_=>'göz.ak-l',
 											  _mx_exsudat_=>'Eksüda',
-											  _mx_ear_abstrich_right_=>'E.s.r.',
+											  _mx_ear_abstrich_right_=>'kul-ak-R',
 											  _mx_punction_=>'Ponksiyon',
-											  _mx_ear_abstrich_left_=>'E.s.l.',
+											  _mx_ear_abstrich_left_=>'kul-ak-L.',
 											  _mx_pleura_=>'Plevra',
-											  _mx_rachen_abstrich_=>'Th.smr',
+											  _mx_rachen_abstrich_=>'Th.yaym.',
 											  _mx_ascites_=>'Asit',
-											  _mx_tonsillen_abstrich_=>'Tons.s.',
+											  _mx_tonsillen_abstrich_=>'Tons.y.',
 											  _mx_douglas_=>'Douglas',
-											  _mx_nose_abstrich_=>'N.smr',
-											  _mx_liquor_=>'Liquor',
+											  _mx_nose_abstrich_=>'Br.yay',
+											  _mx_liquor_=>'BOS',
 											  _mx_vaginal_abstrich_=>'Vag.s.',
 											  _mx_blood_culture_=>'Kan.Kült.');
 										  
-$LDBacLabTestType=array(_tx_special_body_material_=>'S.body.m.',
+$LDBacLabTestType=array(_tx_special_body_material_=>'Öz.vüc.m.',
                                         _tx_culture_aerob_=>'Aerob.Kült.',
 										_tx_op_material_=>'Amel.Mat.',
 										_tx_culture_anaerob_=>'Anae.Kül.',
 										_tx_k_point_=>'Cat.tip',
 										_tx_fungus_culture_=>'Mantar.Kül.',
-										_tx_tubus_point_=>'Tube.tip',
+										_tx_tubus_point_=>'Tüp.tip',
 										_tx_stool_parasite_=>'Gaita.paraz.',
 										_tx_go_culture_=>'GO-Kult.',
 										_tx_stool_pathogen_=>'St.f.patho.',
-										_tx_hygiene_material_=>'Hygien.Mat.',
-										_tx_stool_dyspepsy_=>'St.f.Dysp.',
+										_tx_hygiene_material_=>'Hijyen.Mat.',
+										_tx_stool_dyspepsy_=>'Gaita.Dysp.',
 										_tx_biopsy_material_=>'Biops.Mat.',
-										_tx_stool_clost_toxin_=>'St.f.C.Tox.',
+										_tx_stool_clost_toxin_=>'Gaita klost.Tox.',
 										_tx_stool_=>'Gaita',
 										_tx_tbc_dye_=>'TBC.Boyası',
-										_tx_stool_yersinia_=>'St.f.Yers.',
+										_tx_stool_yersinia_=>'Gaitada Yers.',
 										_tx_tbc_culture_=>'TBC.kült.',
-										_tx_stool_ehec_=>'St.f.EHEC',
-										_tx_liquor_antigen_=>'Liq.antigen',
+										_tx_stool_ehec_=>'Gaitada.EHEC',
+										_tx_liquor_antigen_=>'BOS.antigen',
 										_tx_own_blood_=>'Kendi kanı',
 										_tx_gram_dye_=>'Gram.boyama',
 										_tx_pharma_material_=>'Pharm.mat.',
