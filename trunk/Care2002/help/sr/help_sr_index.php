@@ -24,9 +24,9 @@ require_once($root_path.'include/inc_charset_fx.php') // load the charset functi
  --><p>
  <p>
  <b>
-<font color=#ff0000><b>*</b></font><a href="http://care2x.net/docswiki/index.php?UM - English" target="HELPINFOFRAME">Online Manual</a>
+<font color=#ff0000><b>*</b></font><a href="http://care2x.org/wiki/index.php/UM_-_English" target="HELPINFOFRAME">Online Manual</a>
 <p>
-<font color=#ff0000><b>*</b></font><a href="http://care2x.net/docswiki/index.php?Workflow%20Charts" target="HELPINFOFRAME">Workflow charts</a>
+<font color=#ff0000><b>*</b></font><a href="http://care2x.org/wiki/index.php/Workflow_Charts" target="HELPINFOFRAME">Workflow charts</a>
 </b>
 <P>
  (<font size=1>needs Internet connection</font><font color=#ff0000><b>*</b></font>)

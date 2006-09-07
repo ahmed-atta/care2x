@@ -8,16 +8,16 @@
 <p> <font face="Verdana, Arial" size=2><b> <a href="../main/help-info.php?lang=es" target="HELPINFOFRAME">Primeros 
   pasos</a><br>
 <!--  <a href="#">Contenido</a><br>
-  <a href="#">ï¿½ndice</a><br>
+  <a href="#">Índice</a><br>
 <a href="#">Buscar</a><br>
 <a href="#">Tips y Trucos</a><br>
-<a href="#">Introducciï¿½n</a></b></font>
+<a href="#">Introducción</a></b></font>
 -->
  <p>
  <b>
-<font color=#ff0000><b>*</b></font><a href="http://care2x.org/wiki/index.php?UM - English" target="HELPINFOFRAME">Online Manual</a>
+<font color=#ff0000><b>*</b></font><a href="http://care2x.org/wiki/index.php/UM_-_English" target="HELPINFOFRAME">Online Manual</a>
 <p>
-<font color=#ff0000><b>*</b></font><a href="http://care2x.org/wiki/index.php?Workflow%20Charts" target="HELPINFOFRAME">Workflow charts</a>
+<font color=#ff0000><b>*</b></font><a href="http://care2x.org/wiki/index.php/Workflow_Charts" target="HELPINFOFRAME">Workflow charts</a>
 </b>
 <P>
  (<font size=1>needs Internet connection</font><font color=#ff0000><b>*</b></font>)
