@@ -116,7 +116,7 @@ Hangi bilgilerin girilmesi zorunludur?</b>
  	<b>Uyarý: </b>Tüm kýrmýzý alanlar zorunludur.<br> 
 	</ul>
 	
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Uyarý:</b></font> 
 <ul>       	
  Kapatmaya karar verir iseniz  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düðmesini týklayýnýz.
 </ul>
@@ -187,7 +187,7 @@ Aramaya nasýl devam edilir?</b>
  	<b>Adým 1: </b> "<span style="background-color:yellow" > Aranan anahtar sözcük: ad veya soyad <input type="text" name="m" size=20 maxlength=20> </span>" alanýna hastanýn ad veya soyadýnýn ya tamamýýný veya ilk birkaç harfini giriniz. <br>
  	<b>Adým 2: </b>Hastanýn belgesini aramaya baþlamak için <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> düðmesini týklayýnýz.<p> 
 </ul>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Uyarý: </b></font> 
 <ul>       	
  Kapatmaya karar verir iseniz  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düðmesini týklayýnýz.
 </ul>
@@ -291,7 +291,7 @@ Aramaya nasýl devam edilir?</b>
 		</ul><b>Adým 2: </b>Tüm diðer alanlarý boþ býrakýnýz.<br>
 		<b>Adým 3: </b>Aramayý baþlatmak için <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  düðmesini týklayýnýz.<br>
 </ul>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>><b><font color="#990000"> Note:</font></b>
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>><b><font color="#990000"> Uyarý: </font></b>
 <ul> Birkaç arama þartýný birleþtirebilirsiniz. Örnek: Cerrah "Gürlek" tarafýndan ameliyat edilmiþ ve tedavisinde "lipo" ile baþlayan bir sözcük içeren tüm yatan hastalarý listelemek ister iseniz:<p>
 		<b>Adým 1: </b> "<span style="background-color:yellow" > Cerrah: <input type="text" name="s" size=15 maxlength=4 value="Gürlek"> </span>" alanýna "Gürlek" giriniz.<br>
 		<b>Adým 2: </b> "<span style="background-color:yellow" > <input type="radio" name="r" value="1" checked>Yatan hasta </span>" seçim kutusunu týklayýnýz.<br>

@@ -38,9 +38,9 @@ Bir yatak bir hastaya nasýl verilir?</b> (Eski yöntem)</font>
 <p><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000">Bir hastanýn çizelgeleri nasýl açýlýr?</font></b><p>
 <font face="Verdana, Arial" size=2>
 <ul>
-<b>Adým:</b> Çizelgeler klasörünü açmak için renkli çubuklarý týklayýnýz...<p>
+<b>Adým:</b> Hasta dosyasýný açmak için renkli çubuklarý týklayýnýz...<p>
 <img src="../help/tr/img/tr_ambulatory_sbars.png" border=0 width=434 height=84><p>
-<b>Veya:</b> Çizelgeler klasörünü açmak için  <img <?php echo createComIcon($root_path,'open.gif','0'); ?>> simgesini týklayýnýz...<p>
+<b>Veya:</b> Hasta dosyasýný açmak için  <img <?php echo createComIcon($root_path,'open.gif','0'); ?>> simgesini týklayýnýz...<p>
 <img src="../help/tr/img/tr_admission_folder.png" border=0 width=456 height=92>
 </ul>
 <a name="adata"></a>

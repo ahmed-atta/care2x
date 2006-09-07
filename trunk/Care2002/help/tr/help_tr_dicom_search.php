@@ -17,7 +17,7 @@ Bir hastanýn dicom resmi nasýl aranýr?</b>
  	<b>Adým 2: </b>Hastanýn dicom resimlerini aramaya baþlamak için <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> düðmesini týklayýnýz.<p> 
 <ul>       	
  	<b>Uyarý: </b>Joker harf olarak % veya * kullanabilirsiniz. <p>
- 	<b>Uyarý: </b>Eðer arama bir sonuuç verir ise, bir resim listesi görünür. <p>
+ 	<b>Uyarý: </b>Eðer arama bir sonuç verir ise, bir resim listesi görünür. <p>
 	</ul>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>

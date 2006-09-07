@@ -3,7 +3,7 @@
 <?php
 switch($x1)
 {
- 	case "search": print 'bir telefon numarasýný aranýr?'; break;
+ 	case "search": print 'bir telefon numarasý aranýr?'; break;
 	case "dir": print 'tüm telefon rehberi açýlýr?';break;
 	case "newphone": print 'yeni telefon bilgisi girilir?';break;
  }

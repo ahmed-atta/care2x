@@ -10,7 +10,7 @@
 <b>Nasýl...</b><p>
 <ul>
 	<a href="#admit">bir hasta kliniðe kabul edilir?</a><br>
-	<a href="#open">hastanýn çizelgeleri açýlýr?</a><br>
+	<a href="#open">bir hastanýn hasta dosyasý açýlýr?</a><br>
 	<a href="#adata">bir hastanýn kabul bilgileri görüntülenir?</a><br>
 	<a href="#transfer">bir hasta nakledilir?</a><br>
 	<a href="#discharge">bir hasta çýkarýlýr?</a><br>
@@ -39,12 +39,12 @@ Renk ile ilgili olay/olaylara iþaret ederler. Örnek olarak, kahverengi çubuk bir
 <font face="Verdana, Arial" size=2>
 <a name="open"></a>
 <b>
-<p><font color="#990000">Hastanýn çizelgeleri nasýl açýlýr?</font></b><p>
+<p><font color="#990000">Hastanýn dosyasý nasýl açýlýr?</font></b><p>
 <font face="Verdana, Arial" size=2>
 <ul>
-<b>Adým:</b> Çizelgeler klasörünü açmak için renkli çubuklarý týklayýnýz...<p>
+<b>Adým:</b> Dosyayý açmak için renkli çubuklarý týklayýnýz...<p>
 <img src="../help/tr/img/tr_ambulatory_sbars.png" border=0 width=434 height=84><p>
-<b>Veya:</b> çizelgeler klasörünü açmak için <img <?php echo createComIcon($root_path,'open.gif','0'); ?>> simgesini týklayýnýz...<p>
+<b>Veya:</b> dosyayý açmak için <img <?php echo createComIcon($root_path,'open.gif','0'); ?>> simgesini týklayýnýz...<p>
 <img src="../help/tr/img/tr_admission_folder.png" border=0 width=456 height=92>
 </ul>
 <a name="adata"></a>
@@ -53,7 +53,7 @@ Renk ile ilgili olay/olaylara iþaret ederler. Örnek olarak, kahverengi çubuk bir
 <p><font color="#990000">Bir hastanýn kabul bilgileri nasýl görüntülenir?</font></b><p>
 <font face="Verdana, Arial" size=2>
 <ul>
-<b>Step:</b> Kabul bilgilerini görüntülemek için <img <?php echo createComIcon($root_path,'pdata.gif','0'); ?>> simgesini týklayýnýz...<p>
+<b>Adým:</b> Kabul bilgilerini görüntülemek için <img <?php echo createComIcon($root_path,'pdata.gif','0'); ?>> simgesini týklayýnýz...<p>
 <img src="../help/tr/img/tr_admission_listlink.png" border=0 width=456 height=92><p>
 <b>Veya:</b> kabul bilgilerini görüntülemek için hastanýn soyadýný týklayýnýz.<p>
 <img src="../help/tr/img/tr_ambulatory_name.png" border=0 width=434 height=84>

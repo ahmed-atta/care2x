@@ -19,7 +19,7 @@ Saðlýk hizmetlerindeki yüksek güvenlik gereksinimleri nedeniyle, kendi kendinize
 Kurumunuzun resmi kanallarý yolu ile, kurumunuzun kural ve düzenlemelerinde belirtildiði þekilde eriþim hakký izni için baþ vurun.
 Þu baþvuru adresini deneyebilirsiniz:<p>
 <blockquote>
-Ýlgili kiþinin asý:<br>
+Ýlgili kiþinin adý:<br>
 Bölüm adresi:<br>
 Telefon no:<br>
 Fax no:<br>

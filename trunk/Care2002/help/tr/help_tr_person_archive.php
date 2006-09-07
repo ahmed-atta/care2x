@@ -1,13 +1,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Arşiv kullanılarak nasıl bilgi aranır</b></font>
+<b>Arşiv kullanılarak nasıl bilgi aranır?</b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
 <b>Adım 1</b>
 <ul> Bir kişinin ad, soyad, TC kimlik no gibi bilgisini ya tam veya birkaç harfini giriniz.
 		<p>Örnek 1: "21000012" veya "12" giriniz.
 		<br>Örnek 2: "Potur" veya "pot" giriniz.
-		<br>Örnek 3: "Bülent" veya "Bül" giriniz.
+		<br>Örnek 3: "Ayşe" veya "Ayş" giriniz.
 		<br>Örnek 4: "10.1" veya "10.12.1956" giriniz.
 		
 <p>

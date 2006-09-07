@@ -24,7 +24,7 @@ Nöbet listesine hekim/cerrah ismini el ile girmek istiyorum</b></font>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Nöbet listesinden bir ismi silmek istiyorum</b></font>
-<ul> <b>Adým 1: </b>Silinecek ismin metin giriþ alanýna "<input type="text" name="t" size=11 maxlength=4 value="Name">" týklayýnýz.<br>
+<ul> <b>Adým 1: </b>Silinecek ismin metin giriþ alanýna "<input type="text" name="t" size=11 maxlength=4 value="Ýsim">" týklayýnýz.<br>
 		<b>Adým 2: </b>Ýsmi klavyedeki delete veya geri silme tuþlarýný kullanarak siliniz.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Nöbet planýný kaydetmek istiyorum</b></font>

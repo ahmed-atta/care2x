@@ -8,7 +8,7 @@
 <?php if($src=="bp_temp") : ?>
 <a name="cbp"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Derece veya kan basýncý nasýl girilir?</b></font>
-<ul> <b>Step 1: </b>Veriyi ve zamaný giriniz.<br>
+<ul> <b>Adým 1: </b>Veriyi ve zamaný giriniz.<br>
 		<ul type="disc">
 		<li>Zaman ve kan basýncýný soldaki "<font color="#cc0000">Kan basýncý</font>" sütununa giriniz.<br>
 		Örnek: <input type="text" name="v" size=5 maxlength=5 value="10.05">&nbsp;&nbsp;<input type="text" name="w" size=8 maxlength=8 value="128/85">
@@ -52,9 +52,9 @@ Allerji bilgisi nasýl girilir?</b></font>
 <?php endif ?>
 <?php if($src=="diag_ther") : ?>
 <a name="diag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Ana teþhis ve/veya tedavi nasýl girilir?</b></font>
+Ana taný ve/veya tedavi nasýl girilir?</b></font>
 <ul> 
-	<b>Adým 1: </b>Teþhis veya tedavi bilgisini <br> "<span style="background-color:yellow" > Lütfen yeni bilgiyi buraya giriniz: </span>" alanýna giriniz.<br>
+	<b>Adým 1: </b>Taný veya tedavi bilgisini <br> "<span style="background-color:yellow" > Lütfen yeni bilgiyi buraya giriniz: </span>" alanýna giriniz.<br>
   		<b>Uyarý: </b>Güncel bilgileri<br>gerekir ise "<span style="background-color:yellow" > Güncel bilgiler: </span>" alanýnda düzenleyebilirsiniz.<br>
   		<b>Uyarý: </b>Ýptal etmek ister iseniz, <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle"> düðmesini týklayýnýz.<br>
 		<b>Adým 2: </b>Bilgiyi kaydetmek için <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düðmesini týklayýnýz.<br>
@@ -65,9 +65,9 @@ Ana teþhis ve/veya tedavi nasýl girilir?</b></font>
 <?php endif ?>
 <?php if($src=="diag_ther_dailyreport") : ?>
 <a name="daydiag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Günlük teþhis veya tedavi planý nasýl girilir?</b></font>
+Günlük taný veya tedavi planý nasýl girilir?</b></font>
 <ul> 
-	<b>Adým 1: </b>Teþhis veya tedavi bilgisini <br> "<span style="background-color:yellow" > Lütfen yeni bilgiyi buraya giriniz: </span>" alanýna yazýnýz.<br>
+	<b>Adým 1: </b>Taný veya tedavi bilgisini <br> "<span style="background-color:yellow" > Lütfen yeni bilgiyi buraya giriniz: </span>" alanýna yazýnýz.<br>
   		<b>Uyarý: </b>Güncel bilgileri <br>gerekir ise "<span style="background-color:yellow" > Güncel bilgiler: </span>" alanýndan düzenleyebilirsiniz.<br>
   		<b>Uyarý: </b>Eðer iptal etmek ister iseniz,<img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle"> düðmesini týklayýnýz.<br>
 		<b>Adým 2: </b>Bilgiyi kaydetmek için <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düðmesini týklayýnýz.<br>

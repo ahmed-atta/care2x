@@ -77,8 +77,7 @@ Daha önceki sorularýmý ve teknik bölümün yanýtlarýný nasýl görebilirim?</b></fon
 <ul> <b>Adým 1: </b>Önce giriþ yapmalýsýnýz. Ýsminizi üst sað köþedeki <nobr>"<span style="background-color:yellow" > kimden: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> alanýna giriniz.<br>
  <b>Adým 2: </b><input type="button" value="Giriþ"> düðmesini týklayýnýz. <br>
  <b>Adým 3: </b>Daha önce soru göndermiþ iseniz kýsa formda listelenir.  <br>
- <b>Adým 4: </b>Sorunuz teknik bölümce yanýtlanmýþ ise, en sonda  <img src="../img/warn.gif" border=0 width=16 height=16 align="absmiddle"> will
- simgesi görüntülenir. <br>
+ <b>Adým 4: </b>Sorunuz teknik bölümce yanýtlanmýþ ise, en sonda <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> simgesi görüntülenir. <br>
  <b>Adým 5: </b>Sorunuzu ve teknik bölümün yanýtýný okumak için üzerine týklayýnýz. <br>
 </ul>
 <b>Uyarý</b>

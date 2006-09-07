@@ -1,17 +1,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Arşiv kullanılarak bilgi nasıl araştırılır</b></font>
+<b>Arşiv kullanılarak bilgi nasıl araştırılır?</b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
 <b>Adım 1</b>
 
 <ul> Kabul edilmiş bir hastanın adı, veya soyadı, veya hasta kabul numarasının ya tam ya da birkaç harflik kısmını giriniz.
 		<p>Örnek 1: "21000012" veya "12" giriniz.
-		<br>Örnek 2:  "Taner" veya "tan" giriniz.
+		<br>Örnek 2:  "Ceren" veya "cer" giriniz.
 		<br>Örnek 3:  "Aydemir" veya "Ayd" giriniz.
 		
 <p>
-	Uyarı: Aramanızı daraltmak için birkaç bilgiyi kombine edebilirsiniz. 
+	Uyarı: Aramanızı daraltmak için birkaç bilgiyi birlikte kullanabilirsiniz. 
 	<p>
 	Örnek olarak: Cinsiyet ve oda sınıfını seçiniz.
 	<br>

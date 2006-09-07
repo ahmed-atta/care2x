@@ -12,7 +12,7 @@ Muhasebe<br>
 Hasta kabul<br>
 Hasta Çizelgeleri<br>
 Bölüm Yönetimi<br>
-Tanýlar, Ýþlemler ve & DRG (Tanýyla Ýlgili Gruplar)<br>
+Tanýlar, Ýþlemler ve & TÝG (Tanýyla Ýlgili Gruplar)<br>
 Dicom Resimleri<br>
 Nöbet Planý Yönetimi - Doktorlar<br>
 Nöbet Planý Yönetimi - Hemþireler<br>

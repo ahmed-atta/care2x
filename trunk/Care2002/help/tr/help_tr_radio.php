@@ -27,13 +27,13 @@ Bir hasta nasýl aranýr?</b>
 	</ul>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir hastanýn röntgen filmi ve teþhisi nasýl izlenir?</b>
+Bir hastanýn röntgen filmi ve tanýsý nasýl izlenir?</b>
 </font>
 	
 	<ul>       	
- 	<b>Adým 1: </b>"<span style="background-color:yellow" > <font color="#0000cc">Ön izleme/Teþhis</font> <input type="radio" name="d" value="a"> </span>" baðlantý ya da düðmesini týklayýnýz.<br>
+ 	<b>Adým 1: </b>"<span style="background-color:yellow" > <font color="#0000cc">Ön izleme/Taný</font> <input type="radio" name="d" value="a"> </span>" baðlantý ya da düðmesini týklayýnýz.<br>
 	Röntgen filminin minik bir kopyasý alt sol pencerede görüntülenir.<br> 
-	Röntgen filminin teþhisi alt sað pencerede görüntülenir.<br> 
+	Röntgen filminin tanýsý alt sað pencerede görüntülenir.<br> 
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Bir hastanýn röntgen filmi tam büyüklükte nasýl izlenir?</b>

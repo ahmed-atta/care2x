@@ -1,5 +1,5 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>DRG - Ýþlem - Kategori</b></font>
+<b>TÝG - Ýþlem - Kategori</b></font>
 <p>
 <font size=2 face="verdana,arial" >
 

@@ -1,5 +1,5 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>How to register a person</b></font>
+<b>Yeni bir kiþi nasýl kayýt edilir?</b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
 <b>Adým 1</b>
@@ -35,7 +35,7 @@
 <b>Uyarý</b>
 <ul> Eðer tam olmayan bir bilgiyi kaydetmek ister iseniz <input type="button" value="Yine de kaydet"> düðmesini týklayýnýz.
 </ul>
-<b>Uyaru</b>
+<b>Uyarý</b>
 <ul> Kaydý iptal etmeye karar verir iseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düðmesini týklayýnýz.
 		
 </ul>

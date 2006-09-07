@@ -40,7 +40,7 @@ if(!$src&&!$x1){
 
 <b>Uyarý</b>
 
-<ul> Eðer bir bilgi eksik ise, bilgiler tekrar görüntülenir ve kýrmýzý ile iþaretli alan(lar) daki bilgileri girmaniz istenir. Daha sonra tam bilgiyi kaydetmek için <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düðmesini týklayýnýz.<p>
+<ul> Eðer bir bilgi eksik ise, bilgiler tekrar görüntülenir ve kýrmýzý ile iþaretli alan(lar) daki bilgileri girmeniz istenir. Daha sonra tam bilgiyi kaydetmek için <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düðmesini týklayýnýz.<p>
 </ul>
 
 <b>Uyarý</b>

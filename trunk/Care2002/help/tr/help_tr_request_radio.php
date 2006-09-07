@@ -27,7 +27,7 @@ Radyolojik tetkik istemi nasýl oluþturulur?</b></font>
 <ul> 
 	<b>Adým 1: </b>Ýstediðiniz kategorinin kutusunu iþaretleyiniz.<p>
 	<b>Adým 2: </b>Hastanýn durumu ile ilgili kutularý iþaretleyiniz.<p>
-	<b>Adým 3: </b> "Klinik bilgi" alanýna teþhisler, öykü, ve ek bilgileri yazýnýz.<p>
+	<b>Adým 3: </b> "Klinik bilgi" alanýna tanýlar, öykü, ve ek bilgileri yazýnýz.<p>
 	<b>Step 4: </b>"Ýstenen tetkik" alanýna istenen tetkiki tetkiki ayrýntýlarý ile yazýnýz.<p>
 </ul>
 

@@ -229,7 +229,7 @@ Bilgi nasýl kayýt edilir?</b>
  	<b>Adým 3: </b>Deðiþiklikleri kayýt etmek için <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düðmesini týklayýnýz.<br>
  
 </ul>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Uyarý:</b></font> 
 <ul>       	
  Ýptal etmeye karar verir iseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düðmesini týklayýnýz.
 </ul>
@@ -543,7 +543,7 @@ Bir hasta nasýl aranýr?</b>
 	<?php endif ?>
 </ul>
 
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Uyarý: </b></font> 
 <ul>       	
  Ýptal etmeye karar verir iseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düðmesini týklayýnýz.
 </ul>

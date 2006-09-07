@@ -11,7 +11,7 @@ Yeni bir týbbi belge nasýl oluþturulur?</b></font>
 	<b>Adým 3: </b>Yeni bir form oluþturmak için  "Yeni kayýt gir" yazýsýný týklayýnýz.<p>
 	<b>Adým 4: </b>Varsa "Ek bilgiler" i giriniz.<p>
 	<b>Adým 5: </b>Hastanýn aldýðý týbbi danýþmanlýkla ilgili seçim kutusunu iþaretleyiniz.<p>
-	<b>Adým 6: </b>Metin halinde teþhisleri yazýnýz.<p>
+	<b>Adým 6: </b>Metin halinde tanýlarý yazýnýz.<p>
 	<b>Adým 7: </b>Metin halinde tedavileri yazýnýz.<p>
 </ul>
 

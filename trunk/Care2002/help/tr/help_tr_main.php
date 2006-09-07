@@ -13,7 +13,7 @@
 <img <?php echo createComIcon('../','butft2_d.gif') ?>><p>
 <b>Care 2X'i <br>
 Kullanýr iken ilk adýmlar</b><p>
-Care 2X in internet veya intranetin gücü gücü ile saðlýk örgütünüzdeki her çeþit bilgiyi bulabilir ve iþleyebilirsiniz. Basitçe sol taraftaki  "Online Manual" ý týklayýnýz sisteminiz ve Care2X ile kolayca çalýþmanýzý saðlayacak bilgilere ulaþacaksýnýz.
+Care 2X in, internet veya intranetin gücü ile saðlýk örgütünüzdeki her çeþit bilgiyi bulabilir ve iþleyebilirsiniz. Basitçe sol taraftaki  "Online Manual" ý týklayýnýz sisteminiz ve Care2X ile kolayca çalýþmanýzý saðlayacak bilgilere ulaþacaksýnýz.(Bu site Ýngilizcedir)
 <p>
 <a href="../help/tr/help_tr_basic_usage.php"><u>Temel kullaným</u></a><br>
 <p>

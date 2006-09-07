@@ -1,6 +1,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b><?php echo "Hastanın Verileri - $x3" ?></b></font>
+<b><?php echo "Hasta Dosyası" ?></b></font>
 <form action="#" >
 <p><font size=2 face="verdana,arial" >
 
@@ -15,13 +15,13 @@
 İzleyen bu düğmeler nelerdir?</b></font>
 <ul> <input type="button" value="Ateş çizelgesi">
 	<ul>
-		Bu hastanın günlük ateş çizelgesini açar. Çizelgeye ateş ve kan basıncı değerlerini girer, düzenler veya silebilirsiniz.<br>
+		Bu hastanın günlük derece kâğıdı formunu açar. Forma ateş ve kan basıncı değerlerini girer, düzenler veya silebilirsiniz.<br>
 		Düzenlenebilen ek veri alanları şunlardır:
 	<ul type="disc">
 	<li>Allerji<br>
 	<li>Günlük diyet planı<br>
-	<li>Ana teşhis/tedavi<br>
-	<li>günlük teşhis/tedavi<br>
+	<li>Ana tanı/tedavi<br>
+	<li>günlük tanı/tedavi<br>
 	<li>Notlar, ek tanılar<br>
 	<li>Pt (Fizik tedavi), Atg (anti-tromboz jimnastiği), vs.<br>
 	<li>Antikoagülanlar<br>
@@ -33,9 +33,9 @@
 	<li>İlaç ve dozlarınıın günlük kaydı<br>
 	</ul>		
 	</ul>
-<input type="button" value="Hemşire raporu">
+<input type="button" value="Hemşire gözlemi">
 	<ul>
-		Bu hemşire raporu formunu açar. Hemşirelik çalışmanızı, etkinliğini, gözlemlerinizi, soruları veya önerileri vs belgelendirebilirsiniz.
+		Bu hemşire gözlem formunu açar. Hemşirelik çalışmanızı, etkinliğini, gözlemlerinizi, soruları veya önerileri vs belgelendirebilirsiniz.
 	</ul>
 	<input type="button" value="Doktor orderları">
 	<ul>
@@ -54,9 +54,9 @@
 	Bu özel hemşirelik planıdır. Planı oluşurabilir, düzenleyebilir ya da silebilirsiniz.
 	</ul>	
  -->	
- <input type="button" value="DRG">
+ <input type="button" value="TİG">
 	<ul>
-	Bu DRG (Teşhis ile ilgili grup) birleşik penceresini açar.
+	Bu TİG (Tanı ile ilgili grup) birleşik penceresini açar.
 	</ul>	
  <input type="button" value="Laboratuvar Sonuçları">
 	<ul>
@@ -82,10 +82,9 @@ Bu seçim kutusunun işlevi nedir </b>	<select name="d"><option value="">Tetkik is
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>Şu anda tetkik sonucu yok. </b></font>
 <ul> Hastanın veri klasörüne dönmek için  <input type="button" value="Tamam"> düğmesini tıklayınız.</ul>
 <?php else  : ?>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Hastanın veri klasörü nasıl kapatılır? </b></font>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Hastanın dosyası nasıl kapatılır? </b></font>
 <ul> <b>Uyarı: </b>Eğer kapatmak ister iseniz,  <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle"> düğmesini tıklayınız.</ul>
 
 <?php endif ?>
 
 </form>
-

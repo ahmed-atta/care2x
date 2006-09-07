@@ -1,6 +1,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Bir hasta nasıl aranır</b></font>
+<b>Bir hasta nasıl aranır?</b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
 <b>Adım 1</b>

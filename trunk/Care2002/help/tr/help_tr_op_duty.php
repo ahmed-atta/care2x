@@ -148,7 +148,7 @@ Nöbet saatlerinde yapýlan bir iþ nasýl belgelendirilir?</b></font>
 	<ul> <b>Ýpucu: </b>Þu andaki saati otomatik olarak girmek için "n" veya "N" (NOW=þimdi anlamýnda) giriniz.<p>
 		</ul>
  <b>Adým 5: </b>Ameliyathane numarasýný  "<span style="background-color:yellow" > Ameliyathane No <input type="text" name="d" size=5 maxlength=5> </span>" alanýna giriniz.<br>
- <b>Adým 6: </b>Teþhis, tedavi veya ameliyatý  <nobr>"<span style="background-color:yellow" > Teþhis/Tedavi <input type="text" name="d" size=5 maxlength=5> </span>"</nobr> alanýna giriniz.<br>
+ <b>Adým 6: </b>Taný, tedavi veya ameliyatý  <nobr>"<span style="background-color:yellow" > Taný/Tedavi <input type="text" name="d" size=5 maxlength=5> </span>"</nobr> alanýna giriniz.<br>
  <b>Adým 7: </b>Ýcap hemþiresinin ismini <nobr>"<span style="background-color:yellow" > Ýcap: <input type="text" name="d" size=5 maxlength=5> </span>"</nobr> alanýna giriniz.<br>
  <b>Adým 8: </b>Nöbetçi hemþirenin adýný <nobr>"<span style="background-color:yellow" > Nöbetçi: <input type="text" name="d" size=5 maxlength=5> </span>"</nobr> alanýna giriniz.<br>
  <b>Adým 1: </b>Belgeyi kayýt etmek için <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düðmesini týklayýnýz. <br>

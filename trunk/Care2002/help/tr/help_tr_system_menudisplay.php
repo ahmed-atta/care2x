@@ -20,6 +20,6 @@ Menü çerçevesi yeniden boyutlandýrýlabilsin mi?</b></font>
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Çoklu dil seçmeye izin verilsin mi?</b></font>
 <ul> 
-	<b>Note: </b>"hayýr" iþaretlendiðinde ana menüden dil seçme özelliði kaldýrýlýr ve dil ön tanýmlý dile sabitlenir.<p>
+	<b>Uyarý: </b>"hayýr" iþaretlendiðinde ana menüden dil seçme özelliði kaldýrýlýr ve dil ön tanýmlý dile sabitlenir.<p>
 </ul>
 

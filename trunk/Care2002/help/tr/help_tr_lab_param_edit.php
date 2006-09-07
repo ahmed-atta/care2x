@@ -28,9 +28,9 @@ Aþaðýdakilerin anlamý nedir?</b>
  	<b>Alt toksik: </b> Toksik/ölümcül sýnýrýn baþladýðý alt deðer.<p> 
 </ul>
 
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Uyarý:</b></font> 
 <ul>       	
- Eðer iptal etmeye karar verirseniz veya deðerleri düzenlemeyi bitirdi iseniz,  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düðmesini týklayýnýz.
+ Eðer iptal etmeye karar verirseniz veya deðerleri düzenlemeyi bitirdiyseniz,  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düðmesini týklayýnýz.
 </ul>
 
 </form>

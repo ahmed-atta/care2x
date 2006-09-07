@@ -9,7 +9,7 @@ Yeni bir týbbi belge nasýl oluþturulur?</b></font>
 	<b>Adým 1: </b>Yeni bir form oluþturmak için "<font color=#000080>Yeni kayýt gir</font>" i týklayýnýz.<p>
 	<b>Adým 2: </b>Varsa ek bilgileri giriniz.<p>
 	<b>Adým 3: </b>Hastanýn aldýðý týbbi danýþmanlýk açýsýndan ilgili kutuyu seçiniz.<p>
-	<b>Adým 4: </b>Metin olarak teþhisleri yazýnýz.<p>
+	<b>Adým 4: </b>Metin olarak tanýlarý yazýnýz.<p>
 	<b>Adým 5: </b>Metin olarak tedavileri yazýnýz.<p>
 </ul>
 

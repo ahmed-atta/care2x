@@ -12,7 +12,7 @@ Görüldüðü gibi ana pencere üç büyük bloða bölünmüþtür:
 <blockquote>
 <li>Blok A = Ana menü. Her iþ burada baþlar.
 <li>Blok B = Çalýþma alaný.
-<li>Blok C = Moduülün veya iþlevin ismi ve iþlevsel düðmeler.
+<li>Blok C = Modülün veya iþlevin ismi ve iþlevsel düðmeler.
 <p>
 <img src="img/tr_mainframe.png">
 </blockquote>

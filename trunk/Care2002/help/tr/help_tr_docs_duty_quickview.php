@@ -15,7 +15,7 @@ Nöbetçi Hekim/Cerrah - Hýzlý bakýþ</font>
 <img <?php echo createComIcon('../','update.gif','0','absmiddle') ?>><b> Nöbetçi hekim/cerrah hakkýnda (eðer var ise) ek bilgi alýnabilir..</b>
 <ul>Ek bilgiyi görmek için , listedeki kiþinin <span style="background-color:yellow" >ismi üzerine</span> týklayýnýz. Küçük bir pencere açýlýr ilgili bilgiler görünür.</ul><p>
 <img <?php echo createComIcon('../','update.gif','0','absmiddle') ?>><b> Tüm ayý görmek için nöbet listesine bakýnýz.</b>
-<ul>Tüm ayýn nöbet listesini görmek için ilgili simgeyi týklayýnýz &nbsp;<button><img <?php echo createComIcon('../','new_address.gif','0','absmiddle') ?>> <font size=1>Show</font></button>.<br>
+<ul>Tüm ayýn nöbet listesini görmek için ilgili simgeyi týklayýnýz &nbsp;<button><img <?php echo createComIcon('../','new_address.gif','0','absmiddle') ?>> <font size=1>Göster</font></button>.<br>
 			Nöbet listesi görünür.</ul><p>
 <font face="Verdana, Arial" size=3 color="#990000">
 <p><b>Hýzlý bakýþ neyi göstermek istiyor?</b></font></b><p>
@@ -25,7 +25,7 @@ Nöbetçi Hekim/Cerrah - Hýzlý bakýþ</font>
 <li><b>Çaðrý/Telefon</b> :<ul>Hekim/cerrahýn çaðrý ve telefon bilgisi.</ul>
 <li><b>Hekim/Cerrah 2</b> :<ul>Ýcap nöbetçisi hekim/cerrah.</ul><p>
 <li><b>Çaðrý/Telefon</b> :<ul>Hekim/Cerrahýn çaðrý ve telefon bilgisi.</ul><p>
-<li><b>Nöbet planý</b> :<ul>Týklanabilir simge. Bölümün bütün ay için nöbet planýna baðlantý. Eðer bütüm ayýn nöbet planýný görmek, nöbet planý düzenlemek ya da oluþturmak ister iseniz &nbsp;<button><img <?php echo createComIcon('../','new_address.gif','0','absmiddle') ?>> <font size=1>Show</font></button> düðmesine týklayýnýz.</ul>
+<li><b>Nöbet planý</b> :<ul>Týklanabilir simge. Bölümün bütün ay için nöbet planýna baðlantý. Eðer bütün ayýn nöbet planýný görmek, nöbet planý düzenlemek ya da oluþturmak ister iseniz &nbsp;<button><img <?php echo createComIcon('../','new_address.gif','0','absmiddle') ?>> <font size=1>Göster</font></button> düðmesine týklayýnýz.</ul>
 
 
 

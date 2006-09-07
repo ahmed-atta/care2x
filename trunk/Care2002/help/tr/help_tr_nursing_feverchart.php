@@ -1,20 +1,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
 <a name="howto">
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b><?php echo "$x3" ?></b></font>
+<b>Derece kâğıdı formu</b></font>
 <form action="#" >
 <p><font size=2 face="verdana,arial" >
 
 <?php if($src=="main") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Nasıl...?</b></font>
-<ul type="disc"> 
-		<li><a href="#cbp">derece veya kan basıncı girilir.</a>
+<ul type="disc"><li><a href="#cbp">derece veya kan basıncı girilir.</a>
 		<li><a href="#movedate">çizelgenin tarihi ilerletilir veya değiştirilir.</a>
 		<li><a href="#diet">diyet planı girilir.</a>
 		<li><a href="#allergy">allerji bilgisi girilir.</a>
-		<li><a href="#diag">ana teşhis veya tedavi girilir.</a>
-		<li><a href="#daydiag">günlük teşhis veya tedavi planı bilgisi girilir.</a>
+		<li><a href="#diag">ana tanı veya tedavi girilir.</a>
+		<li><a href="#daydiag">günlük tanı veya tedavi planı bilgisi girilir.</a>
 		<li><a href="#extra">ek tanılar, notlar vs. girilir.</a>
 		<li><a href="#pt">günlük fizik tedavi bilgisi, anti tromboz cimnastiği, vs. girilir.</a>
 		<li><a href="#coag">antikoagülanlar girilir.</a>
@@ -96,11 +95,11 @@ Allerji bilgisi nasıl girilir?</b></font>
 </ul>
 
 <a name="diag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Ana teşhis ve/veya tedavi nasıl girilir?</b></font>
+Ana tanı ve/veya tedavi nasıl girilir?</b></font>
 <ul> 
-	<b>Adım 1: </b> "<span style="background-color:yellow" > Teşhis/Tedavi <img <?php echo createComIcon('../','clip.gif','0') ?>> </span>" üzerindeki <img <?php echo createComIcon('../','clip.gif','0') ?>> simgesini tıklayınız .<br>
-	<b>Adım 2: </b>Teşhis/tedavi bilgisi giriş alanını gösteren bir pencere açılır.<br>
-	<b>Adım 3: </b>Teşhis veya tedavi bilgisini <br> "<span style="background-color:yellow" > Lütfen yeni bilgiyi buraya giriniz: </span>" alanına giriniz.<br>
+	<b>Adım 1: </b> "<span style="background-color:yellow" > Tanı/Tedavi <img <?php echo createComIcon('../','clip.gif','0') ?>> </span>" üzerindeki <img <?php echo createComIcon('../','clip.gif','0') ?>> simgesini tıklayınız .<br>
+	<b>Adım 2: </b>Tanı/tedavi bilgisi giriş alanını gösteren bir pencere açılır.<br>
+	<b>Adım 3: </b>Tanı veya tedavi bilgisini <br> "<span style="background-color:yellow" > Lütfen yeni bilgiyi buraya giriniz: </span>" alanına giriniz.<br>
   		<b>Uyarı: </b>Güncel bilgileri<br>gerekir ise "<span style="background-color:yellow" > Güncel bilgiler: </span>" alanında düzenleyebilirsiniz.<br>
   		<b>Uyarı: </b>İptal etmek ister iseniz, <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle"> düğmesini tıklayınız.<br>
 		<b>Adım 4: </b>Bilgiyi kaydetmek için <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.<br>
@@ -109,11 +108,11 @@ Ana teşhis ve/veya tedavi nasıl girilir?</b></font>
 		<font color="#000099" size=1><a href="#howto"><img <?php echo createComIcon('../','arrow-t.gif','0') ?>>  "Nasıl...?" a geri </a></font>
 </ul>
 <a name="daydiag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Günlük teşhis veya tedavi planı nasıl girilir?</b></font>
+Günlük tanı veya tedavi planı nasıl girilir?</b></font>
 <ul> 
-	<b>Adım 1: </b>Seçilen tarih ile ilgili ya mevcut günlük teşhis/tedavi sütununu veya boş sütunu tıklayınız.<br>
-	<b>Adım 2: </b>Seçilen tarih için teşhis/tedavi giriş alanını gösteren bir pencere açılır.<br>
-	<b>Adım 3: </b>Teşhis veya tedavi bilgisini <br> "<span style="background-color:yellow" > Lütfen yeni bilgiyi buraya giriniz: </span>" alanına yazınız.<br>
+	<b>Adım 1: </b>Seçilen tarih ile ilgili ya mevcut günlük tanı/tedavi sütununu veya boş sütunu tıklayınız.<br>
+	<b>Adım 2: </b>Seçilen tarih için tanı/tedavi giriş alanını gösteren bir pencere açılır.<br>
+	<b>Adım 3: </b>Tanı veya tedavi bilgisini <br> "<span style="background-color:yellow" > Lütfen yeni bilgiyi buraya giriniz: </span>" alanına yazınız.<br>
   		<b>Uyarı: </b>Güncel bilgileri <br>gerekir ise "<span style="background-color:yellow" > Güncel bilgiler: </span>" alanından düzenleyebilirsiniz.<br>
   		<b>Uyarı: </b>Eğer iptal etmek ister iseniz,<img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle"> düğmesini tıklayınız.<br>
 		<b>Adım 4: </b>Bilgiyi kaydetmek için <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.<br>

@@ -1,15 +1,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
 <a name="howto">
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b><?php if($x1=="docs") print "Doktor orderları"; else print "Hemşire raporu"; ?></b></font>
+<b><?php if($x1=="docs") print "Doktor orderları"; else print "Hemşire gözlemi"; ?></b></font>
 <form action="#" >
 <p><font size=2 face="verdana,arial" >
 
 <?php if($src=="") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-<?php if($x1=="docs") print "Doktor orderları"; else print "Hemşire raporu"; ?> nasıl girilir?</b></font>
+<?php if($x1=="docs") print "Doktor orderları"; else print "Hemşire gözlemi"; ?> nasıl girilir?</b></font>
 <ul> 
-	<b>Adım 1: </b>"<?php if($x1=="docs") print "Doktor orderları"; else print "Hemşire raporu"; ?>" sütunundaki "<span style="background-color:yellow" > Tarih: <input type="text" name="d" size=10 maxlength=10 value="10.10.2002"> </span>" alanına tarihi giriniz.<br>
+	<b>Adım 1: </b>"<?php if($x1=="docs") print "Doktor orderları"; else print "Hemşire gözlemi"; ?>" sütunundaki "<span style="background-color:yellow" > Tarih: <input type="text" name="d" size=10 maxlength=10 value="10.10.2002"> </span>" alanına tarihi giriniz.<br>
 		<font color="#000099" size=1><b>İp uçları:</b>
 		<ul type=disc>
 		<li>Günün tarihini girmek için "t" veya "T" (today=bugün anlamında) giriniz. Günün tarihi otomatik olarak tarih alanında görünür
@@ -17,15 +17,15 @@
 		<li>Dünkü tarihi girmek için tarih alanına "y" veya "Y"  (Dün=yesterday) anlamında giriniz. Dünkü tarih otomatik olarak tarih alanında görüntülenir.
 		</font>
 		</ul>
-	<b>Adım 2:  </b>"<?php if($x1=="docs") print "Doktor orderları"; else print "Hemşire raporu"; ?>" sütunundaki "<span style="background-color:yellow" > Zaman: <input type="text" name="d" size=10 maxlength=10 value="10.35"> </span>" alanına zamanı giriniz.<br>
+	<b>Adım 2:  </b>"<?php if($x1=="docs") print "Doktor orderları"; else print "Hemşire gözlemi"; ?>" sütunundaki "<span style="background-color:yellow" > Zaman: <input type="text" name="d" size=10 maxlength=10 value="10.35"> </span>" alanına zamanı giriniz.<br>
 		<font color="#000099" size=1><b>İpucu:</b>
 		<ul type=disc>
 		<li>Zaman alanına güncel zamanı girmek için "n" neya "N" (Now=şimdi anlamında) giriniz. Güncel zaman otomatik olarak zaman alanında görüntülenir.
 		<li>Veya zaman alanının altındaki  <img <?php echo createComIcon('../','arrow-t.gif','0') ?>> simgesini tıklayınız. Güncel zaman zaman alanında görüntülenir.
 		</font>
 		</ul>
-	<b>Adım 3: </b><?php if($x1=="docs") print "Doktor orderları"; else print "hemşire raporu"; ?> in the "<span style="background-color:yellow" > <?php if($x1=="docs") print "Doktor orderları"; else print "Hemşire raporu"; ?>: <input type="text" name="d" size=10 maxlength=10 value="Tetkik raporu"> </span>" alanına yazınız.<br>
-		<font color="#000099" size=1><b>Tips:</b>
+	<b>Adım 3: </b><?php if($x1=="docs") print "Doktor orderlarını"; else print "Hemşire gözlemini"; ?>  "<span style="background-color:yellow" > <?php if($x1=="docs") print "Doktor orderları"; else print "Hemşire gözlemi"; ?>: <input type="text" name="d" size=10 maxlength=10 value="Tetkik raporu"> </span>" alanına yazınız.<br>
+		<font color="#000099" size=1><b>İpucu:</b>
 		<ul type=disc>
 		<li>  Eğer <img <?php echo createComIcon('../','warn.gif','0') ?>>  sembolünün  <?php if($x1=="docs") print "doktor orderları"; else print "hemşire gözlem kağıdı"; ?> başında görünmesini ister iseniz "<span style="background-color:yellow" > <input type="checkbox" name="c" value="c"> <img <?php echo createComIcon('../','warn.gif','0') ?>>Bu sembolü başlangıca yerleştiriniz. </span>" kutusunu işaretleyiniz,.
 		<li> <?php if($x1=="docs") print "order veya"; ?> raporu belirgin yazmak ister iseniz, sözcük veya cümleyi yazmadan önce  <img <?php echo createComIcon('../','hilite-s.gif','0') ?>> simgesini tıklayınız. Belirgin yazıya son vermek için belirgin yazının son harfini yazdıktan sonra  <img <?php echo createComIcon('../','hilite-e.gif','0') ?>> simgesini tıklayınız.
@@ -37,9 +37,9 @@
 		<b>Adım 6: </b>İşiniz bitti ise, pencereyi kapatıp hastanın veri klasörüne geri gitmek için <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> simgesini tıklayınız.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-<?php if($x1=="docs") print "Doktora bir soru"; else print "Bir verimlilik raporu"; ?> nasıl girilir?</b></font>
+<?php if($x1=="docs") print "Doktora bir soru"; else print "Bir etkinlik raporu"; ?> nasıl girilir?</b></font>
 <ul> 
-	<b>Adım 1: </b>Tarihi "<?php if($x1=="docs") print "Doktora sorular"; else print "Verimlilik raporu"; ?>" sütunundaki "<span style="background-color:yellow" > Tarih: <input type="text" name="d" size=10 maxlength=10 value="10.10.2002"> </span>" alanına giriniz.<br>
+	<b>Adım 1: </b>Tarihi "<?php if($x1=="docs") print "Doktora sorular"; else print "Etkinlik raporu"; ?>" sütunundaki "<span style="background-color:yellow" > Tarih: <input type="text" name="d" size=10 maxlength=10 value="10.10.2002"> </span>" alanına giriniz.<br>
 		<font color="#000099" size=1><b>İpuçları:</b>
 		<ul type=disc>
 		<li>Güncel tarihi girmek için tarih alanına "t" veya "T" (Today=Bugün anlamında) yazınız. Güncel tarih otomatik olarak tarih alanında görüntülenir.
@@ -47,10 +47,10 @@
 		<li>Dünün tarihini girmek için tarih alanına "y" veya "Y" (Yesterday=dün anlamında) yazınız. Dünkü tarih otomatik olarak tarih alanında görüntülenir.
 		</font>
 		</ul>
-	<b>Adım 2: </b><?php if($x1=="docs") print "Soruyu "; else print "Verimlilik raporunu "; ?>  "<span style="background-color:yellow" > <?php if($x1=="docs") print "doktora sorular"; else print "verimlilik raporu"; ?>: <input type="text" name="d" size=10 maxlength=10 value="test report"> </span>" alanına yazınız.<br>
+	<b>Adım 2: </b><?php if($x1=="docs") print "Soruyu "; else print "Etkinlik raporunu "; ?>  "<span style="background-color:yellow" > <?php if($x1=="docs") print "doktora sorular"; else print "etkinlik raporu"; ?>: <input type="text" name="d" size=10 maxlength=10 value="test report"> </span>" alanına yazınız.<br>
 		<font color="#000099" size=1><b>Tips:</b>
 		<ul type=disc>
-		<li> <img <?php echo createComIcon('../','warn.gif','0') ?>> sembolünün  <?php if($x1=="docs") print "soru"; else print "verimlilik raporu"; ?> yazısının başlangıcında görünmesini ister iseniz  "<span style="background-color:yellow" > <input type="checkbox" name="c" value="c"> <img <?php echo createComIcon('../','warn.gif','0') ?>>Bu sembolü başlangıca yerleştir. </span>" seçim kutusunu işaretleyiniz.
+		<li> <img <?php echo createComIcon('../','warn.gif','0') ?>> sembolünün  <?php if($x1=="docs") print "soru"; else print "etkinlik raporu"; ?> yazısının başlangıcında görünmesini ister iseniz  "<span style="background-color:yellow" > <input type="checkbox" name="c" value="c"> <img <?php echo createComIcon('../','warn.gif','0') ?>>Bu sembolü başlangıca yerleştir. </span>" seçim kutusunu işaretleyiniz.
 		<li> <?php if($x1=="docs") print "order veya"; ?> raporun bir kısmını belirgin yazmak ister iseniz, cümle veya sözcüğü yazmadan önce  <img <?php echo createComIcon('../','hilite-s.gif','0') ?>> simgesini tıklayınız. Belirgin yazmaya son vermek için belirgin yazılan kısmın son harfini yazdıktan sonra  <img <?php echo createComIcon('../','hilite-e.gif','0') ?>> simgesini tıklayınız.
 		</font>
 		</ul>
@@ -62,16 +62,16 @@
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 UYARI:</b></font>
 <ul> 
-	Aynı zamanda  <?php if($x1=="docs") print "doktor orderları ve doktora soruları"; else print "hemşire gözlemi ve verimlilik raporunu"; ?> girebilirsiniz.</ul>
+	Aynı zamanda  <?php if($x1=="docs") print "doktor orderları ve doktora soruları"; else print "hemşire gözlemi ve etkinlik raporunu"; ?> girebilirsiniz.</ul>
 
 <?php endif ?>
 <?php if($src=="diagnosis") : ?>
 <a name="extra"><a name="diag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a></a>
-Teşhis raporu nasıl görüntülenir?</b></font>
+Tanısal rapor nasıl görüntülenir?</b></font>
 <ul> 
-  		<b>Uyarı: </b>Eğer bir teşhis raporu var ise, sol sütunda oluşturulduğu tarih, oluşturan diagnostik klinik veya bölüm  kısa bir not halinde görüntülenir..<p>
+  		<b>Uyarı: </b>Eğer bir tanısal rapor var ise, sol sütunda oluşturulduğu tarih, oluşturan diagnostik klinik veya bölüm  kısa bir not halinde görüntülenir..<p>
   		<b>Uyarı: </b>Listedeki ilk rapor derhal görüntülenir.<p>
-	<b>Adım 1: </b>Görüntülemek istediğiniz teşhis raporunun kısa notunu tıklayınız.<br>	
+	<b>Adım 1: </b>Görüntülemek istediğiniz tanısal raporun kısa notunu tıklayınız.<br>	
 </ul>
 <?php endif ?>
 <?php if($src=="kg_atg_etc") : ?>

@@ -56,7 +56,7 @@
     	<li>sigorta þirketi veya sosyal güvenlik durumu hakkýndaki bilgileri "Ek bilgiler:" alanýna girebilirsiniz;<br>
 		<li>Eðer hastaya zorunlu olan danýþmanlýk hizmeti verildi ise "Týbbi danýþmanlýk" düðmelerinden  "<span style="background-color:yellow" ><input type="radio" name="n" value="a">Evet</span>" i týklayýnýz;<br>
 		<li>Eðer hastaya zorunlu danýþmanlýk hizmeti verilmedi ise "Týbbi danýþmanlýk" düðmelerinden  "<span style="background-color:yellow" ><input type="radio" name="n" value="a">Hayýr</span>" ý týklayýnýz;<br>
-		<li>taný raporunu "Teþhis:" alanýna yazýnýz;<br>
+		<li>taný raporunu "Taný:" alanýna yazýnýz;<br>
 		<li>saðaltým raporunu "Tedavi:" alanýna yazýnýz,<br>
 		<li>gerekir ise, "Belgenin yazýldýðý tarih:" alanýný düzenleyiniz;<br>
 		<li>gerekir ise, "Belgeyi yazan:" alanýný düzenleyiniz;<br>

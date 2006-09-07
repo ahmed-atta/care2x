@@ -13,7 +13,7 @@ Yeni adres bilgisi nasýl girilir?</b></font>
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Tüm adresler nasýl görüntülenir?</b></font>
 <ul> 
-	<b>Step: </b> "<font color=#000080><b>Hepsini listele</b></font>" yazýsýný týklayýnýz.<p>
+	<b>Adým: </b> "<font color=#000080><b>Hepsini listele</b></font>" yazýsýný týklayýnýz.<p>
 </ul>
 
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>

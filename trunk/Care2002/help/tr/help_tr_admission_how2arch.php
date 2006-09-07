@@ -78,7 +78,7 @@
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Belirli bir anahtar sözcüklü tüm hastalarý aramak istiyorum.</b></font>
 <ul> <b>Adým 1: </b>Ýlgili alana anahtar sözcüðü giriniz. Tüm bir sözcük veya bitkaç harf olabilir. <br>
 		<ul><font size=1 color="#000099" >
-		<b>Örnek:</b> Teþhis anahtar sözcüðü için "Teþhis" alanýna giriniz.<br>
+		<b>Örnek:</b> Taný anahtar sözcüðü için "Taný" alanýna giriniz.<br>
 		<b>Örnek:</b> Gönderen anahtar sözcüðü için "Gönderen" alanýna giriniz.<br>
 		<b>Örnek:</b> Tedavi anahtar sözcüðü için "Önerilen tedavi" alanýna giriniz.<br>
 		<b>Örnek:</b> Özel notlar anahtar sözcüðü için "Özel notlar" alanýna giriniz.<br>

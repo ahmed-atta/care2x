@@ -352,10 +352,10 @@ Bir ameliyatýn kütük belgesine nasýl baþlanýr?</b>
 
 	<?php else : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Ameliyat için teþhis nasýl girilir?</b>
+Ameliyat için taný nasýl girilir?</b>
 </font>
 <ul>       	
- 	<b>Adým 1: </b>Teþhisi "<span style="background-color:yellow" > Teþhis: </span>" alanýna yazýnýz.<br>
+ 	<b>Adým 1: </b>Tanýyý "<span style="background-color:yellow" > Taný: </span>" alanýna yazýnýz.<br>
 	</ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Cerrah bilgisi nasýl girilir?</b>

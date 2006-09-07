@@ -97,9 +97,9 @@ if($src=="arch")
 		</ul><b>Adým 2: </b>Tüm diðer alanlarý boþ býrakýnýz.<br>
 		<b>Adým 3: </b>Aramayý baþlatmak için <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  düðmesini týklayýnýz.<br>
 </ul>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>><b><font color="#990000"> Note:</font></b>
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>><b><font color="#990000"> Uyarý:</font></b>
 <ul> Birkaç arama koþulunu birleþtirebilirsiniz. Örneðin cerrah "Gürlek" tarafýndan ameliyat edilmiþ ve tedavisi "lipo" ile baþlayan bir sözcük içeren tüm yatan hastalarý listelemek isterseniz:<p>
-		<b>Adým 1: </b> "<span style="background-color:yellow" > Cerrah: <input type="text" name="s" size=15 maxlength=4 value="Smith"> </span>" alanýna "Gürlek" giriniz.<br>
+		<b>Adým 1: </b> "<span style="background-color:yellow" > Cerrah: <input type="text" name="s" size=15 maxlength=4 value="Gürlek"> </span>" alanýna "Gürlek" giriniz.<br>
 		<b>Adým 2: </b>"<span style="background-color:yellow" > <input type="radio" name="r" value="1" checked>Yatan hasta </span>" seçim kutusunu týklayýnýz.<br>
 		<b>Adým 3: </b>"<span style="background-color:yellow" > Tedavi: <input type="text" name="s" size=20 maxlength=4 value="lipo"> </span>" alanýna "lipo" giriniz. <br>
 		<b>Adým 4: </b>Aramayý baþlatmak için <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  düðmesini týklayýnýz.<p>

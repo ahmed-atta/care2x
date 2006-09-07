@@ -11,16 +11,16 @@ Form oluþturmak veya izlemek.<p>
 </ul>
 
 <font color="#990000"><b>
-Çizelgeler klasörü</b></font>
+Hasta dosyasý</b></font>
 <ul> 
-Þu klasörleri açar:
-<li> ateþ çizelgesi
-<li> hemþire raporu
-<li> doktor orderleri
-<li> diagnostik raporlar
-<li> DRG Kompoze modülü
+Þu kayýtlarý açar:
+<li> derece kâðýdý
+<li> hemþire gözlemi
+<li> doktor orderlari
+<li> tetkik sonuçlarý
+<li> TÝG birleþik modülü
 <li> laboratuvar sonuçlarý
-<li> vizit resim ve fotoðreflarý
+<li> vizit resim ve fotoðraflarý
 <li> tetkik istemi oluþturucusu
 </ul>
 
@@ -37,9 +37,9 @@ Bu vizit için týbbi belgeler modülünü baþlatýr.
 </ul>
 
 <font color="#990000"><b>
-DRG (kompoze)</b></font>
+TÝG (birleþik)</b></font>
 <ul> 
-Bu vizit için  DRG modülünü baþlatýr.
+Bu vizit için  TÝG modülünü baþlatýr.
 </ul>
 
 <font color="#990000"><b>Reçeteler</b></font>
@@ -92,4 +92,3 @@ Veri bankasýndaki kabul kaydýnýn öyküsünün izlendiði açýlýr pencere.
 <ul> 
 Kabulü iptal eder. Ancak sadece hasta bir poliklinik ya da servise kabul edilmemiþse mümkündür.
 </ul>
-
