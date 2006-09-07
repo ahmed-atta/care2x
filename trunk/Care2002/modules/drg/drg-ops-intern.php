@@ -144,7 +144,7 @@ function createNewGroupName()
 	window.newgrp_<?php echo $sid ?>.moveTo(100,100);
 }
 function checkCreateNew(){
-	if(confirm("Are you sure you want to create a new group code?")){
+	if(confirm("<?php echo "$LDSureToCreateNewGr" ?>")){
 		createNewGroupName();
 	}
 }

@@ -1,6 +1,6 @@
 <?php
 $LDIcd10='ICD_10'; // ICD = International Codes of Diseases  !! 
-$LDOps301='OPS_301'; // OPS = Opertionenschlüssel - German code for surgical operations !!
+$LDOps301='OPS_301'; // OPS = Opertionenschlï¿½ssel - German code for surgical operations !!
 $LDBack2Logbook='Go back to logbook';
 $LDIcd10Search='ICD-10 Search';
 $LDSearch4ICD10='Search for ICD-10 Codes';
@@ -68,6 +68,7 @@ $LDUseToGroupItems='Use this to group the not-yet-grouped items';
 $LDItemsDegrouped='Deleting this group will unlink the items linked to it.';
 $LDOptions='Options';
 /*2003-06-01 EL*/
+
 $LDCreateInternDRGGroup='Create new internal DRG group';
 $LDInternalCodeNr='Internal code Nr.';
 $LDSynonyms='Synonyms or keywords';
@@ -91,4 +92,6 @@ $LDMain_s='M';
 $LDSupplemental='Supplemental';
 $LDSupp_s='S';
 $LDCreateNew='Create new';
+/*2006-09-03 Potur*/
+$LDSureToCreateNewGr='Are you sure you want to create a new group code?';
 ?>
