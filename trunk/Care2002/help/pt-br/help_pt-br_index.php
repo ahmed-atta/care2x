@@ -9,17 +9,17 @@
 <font face="Arial" color="#cc0000" size=3><b>Ajuda</b></font><p>
 <font face="Verdana, Arial" size=2><b>
 <a href="../main/help-info.php" target="HELPINFOFRAME">Passos iniciais</a><br>
-<!--<a href="../help/en/help_en_contents.php" target="HELPINFOFRAME">Conteúdo</a><br>
- <a href="#" target="HELPINFOFRAME">Índice</a><br>
+<!--<a href="../help/en/help_en_contents.php" target="HELPINFOFRAME">Conteï¿½do</a><br>
+ <a href="#" target="HELPINFOFRAME">ï¿½ndice</a><br>
 <a href="#" target="HELPINFOFRAME">Pesquisa</a><br>
 <a href="#" target="HELPINFOFRAME">Dicas e Truques</a><br>
-<a href="#" target="HELPINFOFRAME">Introduções</a></b>
+<a href="#" target="HELPINFOFRAME">Introduï¿½ï¿½es</a></b>
  --><p>
  <p>
  <b>
-<font color=#ff0000><b>*</b></font><a href="http://207.44.195.231/~care2x/docswiki/index.php?UM - English" target="HELPINFOFRAME">Online Manual</a>
+<font color=#ff0000><b>*</b></font><a href="http://care2x.org/wiki/index.php?UM - English" target="HELPINFOFRAME">Online Manual</a>
 <p>
-<font color=#ff0000><b>*</b></font><a href="http://207.44.195.231/~care2x/docswiki/index.php?Workflow%20Charts" target="HELPINFOFRAME">Workflow charts</a>
+<font color=#ff0000><b>*</b></font><a href="http://care2x.org/wiki/index.php?Workflow%20Charts" target="HELPINFOFRAME">Workflow charts</a>
 </b>
 <P>
  (<font size=1>needs Internet connection</font><font color=#ff0000><b>*</b></font>)
